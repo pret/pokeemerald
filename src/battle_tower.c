@@ -28,11 +28,11 @@
 #include "constants/moves.h"
 #include "constants/species.h"
 
+extern u16 gUnknown_03006298[];
+
 extern void sub_81A3ACC(void);
 extern void CreateFrontierBrainPokemon(void);
 extern void sub_81A6CD0(void);
-extern u8 GetFrontierEnemyMonLevel(u8);
-extern u8 SetFacilityPtrsGetLevel(void);
 extern u16 sub_81A39C4(void);
 extern void SetFrontierBrainTrainerGfxId(void);
 extern u8 GetFrontierBrainTrainerPicIndex(void);
@@ -41,31 +41,153 @@ extern u8 IsFrontierBrainFemale(void);
 extern void CopyFrontierBrainTrainerName(u8 *dst);
 extern void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 move, u8 moveSlot);
 
-extern const u32 gUnknown_085DF9AC[][2];
-extern const u32 gUnknown_085DF9CC[][2];
-extern void (* const gUnknown_085DF96C[])(void);
-extern const u8 gUnknown_085DF9F6[];
-extern const u8 gUnknown_085DF9EC[];
+extern const u8 *const *const gUnknown_085DD690[];
 extern const u16 gBattleFrontierHeldItems[];
+extern const u8 sRubyFacilityClassToEmerald[82][2];
+extern const u16 gUnknown_085DFA46[];
+extern const struct FacilityMon gBattleFrontierMons[];
+extern const struct FacilityMon gSlateportBattleTentMons[];
+extern const struct FacilityMon gVerdanturfBattleTentMons[];
+extern const struct FacilityMon gFallarborBattleTentMons[];
+extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
+extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
+extern const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[];
+extern const struct BattleFrontierTrainer gFallarborBattleTentTrainers[];
+
+struct
+{
+    u32 facilityClass;
+    const u8 *const *strings;
+} extern const gUnknown_085DD500[50];
+
+extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224157[];
+extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224166[];
 
 // This file's functions.
-void ValidateBattleTowerRecordChecksums(void);
-void SaveCurrentWinStreak(void);
-void ValidateApprenticesChecksums(void);
-void sub_8165E18(void);
-void CopyEReaderTrainerFarewellMessage(void);
-void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record);
-u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode);
-u16 sub_8162548(u8, u8);
+static void sub_8161F94(void);
+static void sub_8162054(void);
+static void sub_81620F4(void);
+static void ChooseNextBattleTowerTrainer(void);
+static void sub_81621C0(void);
+static void AwardBattleTowerRibbons(void);
+static void SaveBattleTowerProgress(void);
+static void sub_8163914(void);
+static void nullsub_61(void);
+static void nullsub_116(void);
+static void sub_81642A0(void);
+static void sub_8164828(void);
+static void sub_8164B74(void);
+static void sub_8164DCC(void);
+static void sub_8164DE4(void);
+static void sub_8164E04(void);
+static void ValidateBattleTowerRecordChecksums(void);
+static void SaveCurrentWinStreak(void);
+static void ValidateApprenticesChecksums(void);
+static void sub_8165E18(void);
+static void CopyEReaderTrainerFarewellMessage(void);
+static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record);
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
-void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
-void sub_81635D4(u16 trainerId, u8 firstMonId);
-void sub_816379C(u16 trainerId, u8 firstMonId);
-u8 GetFrontierTrainerFixedIvs(u16 trainerId);
-void FillPartnerParty(u16 trainerId);
-void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
-void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
-void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer);
+static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
+static void sub_81635D4(u16 trainerId, u8 firstMonId);
+static void sub_816379C(u16 trainerId, u8 firstMonId);
+static u8 GetFrontierTrainerFixedIvs(u16 trainerId);
+static void FillPartnerParty(u16 trainerId);
+static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
+static u8 SetTentPtrsGetLevel(void);
+
+// Const rom data.
+static void (* const gUnknown_085DF96C[])(void) =
+{
+    sub_8161F94,
+    sub_8162054,
+    sub_81620F4,
+    ChooseNextBattleTowerTrainer,
+    sub_81621C0,
+    AwardBattleTowerRibbons,
+    SaveBattleTowerProgress,
+    sub_8163914,
+    nullsub_61,
+    nullsub_116,
+    sub_81642A0,
+    sub_8164828,
+    sub_8164B74,
+    sub_8164DCC,
+    sub_8164DE4,
+    sub_8164E04,
+};
+
+static const u32 gUnknown_085DF9AC[][2] =
+{
+    {0x00000001, 0x00000002},
+    {0x00004000, 0x00008000},
+    {0x00010000, 0x00020000},
+    {0x00040000, 0x00080000},
+};
+
+static const u32 gUnknown_085DF9CC[][2] =
+{
+    {0xfffffffe, 0xfffffffd},
+    {0xffffbfff, 0xffff7fff},
+    {0xfffeffff, 0xfffdffff},
+    {0xfffbffff, 0xfff7ffff},
+};
+
+static const u8 gUnknown_085DF9EC[] =
+{
+    0x01, 0x02, 0x03, 0x04, 0x05, 0x08, 0x09, 0x0a, 0x0b, 0x0c
+};
+
+static const u8 gUnknown_085DF9F6[] =
+{
+    [FRONTIER_MODE_SINGLES] = 3,
+    [FRONTIER_MODE_DOUBLES] = 4,
+    [FRONTIER_MODE_MULTIS] = 2,
+    [FRONTIER_MODE_LINK_MULTIS] = 2,
+};
+
+static const u16 gUnknown_085DF9FA[][2] =
+{
+    {0x0000, 0x0063},
+    {0x0050, 0x0077},
+    {0x0064, 0x008b},
+    {0x0078, 0x009f},
+    {0x008c, 0x00b3},
+    {0x00a0, 0x00c7},
+    {0x00b4, 0x00db},
+    {0x00c8, 0x012b},
+};
+
+static const u16 gUnknown_085DFA1A[][2] =
+{
+    {0x0064, 0x0077},
+    {0x0078, 0x008b},
+    {0x008c, 0x009f},
+    {0x00a0, 0x00b3},
+    {0x00b4, 0x00c7},
+    {0x00c8, 0x00db},
+    {0x00dc, 0x00ef},
+    {0x00c8, 0x012b},
+    {0x00b3, 0x008d},
+    {0x00c8, 0x00b7},
+};
+
+static const u8 gUnknown_085DFA42[4] =
+{
+    [FRONTIER_MODE_SINGLES] = 3,
+    [FRONTIER_MODE_DOUBLES] = 4,
+    [FRONTIER_MODE_MULTIS] = 2,
+    [FRONTIER_MODE_LINK_MULTIS] = 2,
+};
+
+static const u16 gUnknown_085DFA46[] =
+{
+    0x0c3a, 0x0c3a, 0x0c01, 0x0a2a, 0x0607, 0x0c01
+};
+
+static const u16 gUnknown_085DFA52[] =
+{
+    0x1039, 0x122e, 0x0c04, 0x0a3d, 0x0630, 0x0c04
+};
 
 // code
 void sub_8161F74(void)
@@ -73,7 +195,7 @@ void sub_8161F74(void)
     gUnknown_085DF96C[gSpecialVar_0x8004]();
 }
 
-void sub_8161F94(void)
+static void sub_8161F94(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -91,7 +213,7 @@ void sub_8161F94(void)
     gTrainerBattleOpponent_A = 0;
 }
 
-void sub_8162054(void)
+static void sub_8162054(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -112,7 +234,7 @@ void sub_8162054(void)
     }
 }
 
-void sub_81620F4(void)
+static void sub_81620F4(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -136,7 +258,7 @@ void sub_81620F4(void)
     }
 }
 
-void sub_81621C0(void)
+static void sub_81621C0(void)
 {
     if (gTrainerBattleOpponent_A == BATTLE_TOWER_EREADER_TRAINER_ID)
         ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
@@ -149,7 +271,7 @@ void sub_81621C0(void)
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 }
 
-bool8 ChooseSpecialBattleTowerTrainer(void)
+static bool8 ChooseSpecialBattleTowerTrainer(void)
 {
     s32 i, j, validMons;
     s32 trainerIds[9];
@@ -217,7 +339,7 @@ bool8 ChooseSpecialBattleTowerTrainer(void)
     }
 }
 
-void ChooseNextBattleTowerTrainer(void)
+static void ChooseNextBattleTowerTrainer(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     if (lvlMode == FRONTIER_LVL_TENT)
@@ -269,9 +391,6 @@ void ChooseNextBattleTowerTrainer(void)
     }
 }
 
-extern const u16 gUnknown_085DFA1A[][2];
-extern const u16 gUnknown_085DF9FA[][2];
-
 u16 sub_8162548(u8 challengeNum, u8 battleNum)
 {
     u16 trainerId;
@@ -299,7 +418,7 @@ u16 sub_8162548(u8 challengeNum, u8 battleNum)
 }
 
 #ifdef NONMATCHING
-u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3) // Unused
+static u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3) // Unused
 {
     register u16 trainerId, count;
 
@@ -327,7 +446,7 @@ u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3) // U
 }
 #else
 NAKED
-u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3)
+static u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3)
 {
     asm_unified("	push {r4,lr}\n\
 	adds r4, r2, 0\n\
@@ -619,7 +738,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
 
 u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
 {
-    SetFacilityPtrsGetLevel(); // Pointless function call
+    SetFacilityPtrsGetLevel();
 
     if (trainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
     {
@@ -698,7 +817,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     return trainerClass;
 }
 
-u8 GetFrontierTrainerFacilityClass(u16 trainerId)
+static u8 GetFrontierTrainerFacilityClass(u16 trainerId)
 {
     u8 facilityClass;
     SetFacilityPtrsGetLevel();
@@ -790,7 +909,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     dst[i] = EOS;
 }
 
-bool8 IsFrontierTrainerFemale(u16 trainerId)
+static bool8 IsFrontierTrainerFemale(u16 trainerId)
 {
     u32 i;
     u8 facilityClass;
@@ -842,7 +961,7 @@ void FillFrontierTrainersParties(u8 monsCount)
     FillTrainerParty(gTrainerBattleOpponent_B, 3, monsCount);
 }
 
-void FillTentTrainerParty(u8 monsCount)
+static void FillTentTrainerParty(u8 monsCount)
 {
     ZeroEnemyPartyMons();
     FillTentTrainerParty_(gTrainerBattleOpponent_A, 0, monsCount);
@@ -970,7 +1089,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 }
 
 // Probably an early draft before the 'CreateApprenticeMon' was written.
-void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
+static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
 {
     s32 i, j;
     u8 friendship = 0xFF;
@@ -1025,7 +1144,7 @@ u16 RandomizeFacilityTrainerMonId(u16 trainerId)
     return monPoolId;
 }
 
-void sub_8163590(void)
+static void sub_8163590(void)
 {
     ZeroEnemyPartyMons();
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
@@ -1034,9 +1153,7 @@ void sub_8163590(void)
         sub_816379C(gTrainerBattleOpponent_A, 0);
 }
 
-extern u16 gUnknown_03006298[];
-
-void sub_81635D4(u16 trainerId, u8 firstMonId)
+static void sub_81635D4(u16 trainerId, u8 firstMonId)
 {
     u8 i, j;
     u8 friendship;
@@ -1093,7 +1210,7 @@ void sub_81635D4(u16 trainerId, u8 firstMonId)
     }
 }
 
-void sub_816379C(u16 trainerId, u8 firstMonId)
+static void sub_816379C(u16 trainerId, u8 firstMonId)
 {
     u8 i, j;
     u8 friendship;
@@ -1142,7 +1259,7 @@ void FrontierSpeechToString(const u16 *words)
     }
 }
 
-void sub_8163914(void)
+static void sub_8163914(void)
 {
     u16 trainerId;
     SetFacilityPtrsGetLevel();
@@ -1212,9 +1329,6 @@ static void Task_StartBattleAfterTransition(u8 taskId)
         DestroyTask(taskId);
     }
 }
-
-extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224157[];
-extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224166[];
 
 void DoSpecialTrainerBattle(void)
 {
@@ -1346,7 +1460,7 @@ void DoSpecialTrainerBattle(void)
     }
 }
 
-void SaveCurrentWinStreak(void)
+static void SaveCurrentWinStreak(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1356,7 +1470,7 @@ void SaveCurrentWinStreak(void)
         gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] = winStreak;
 }
 
-void sub_8163EE4(void)
+static void sub_8163EE4(void)
 {
     s32 i;
     u8 lvlMode, battleMode, class;
@@ -1403,7 +1517,7 @@ void sub_8163EE4(void)
     SaveCurrentWinStreak();
 }
 
-void SaveBattleTowerProgress(void)
+static void SaveBattleTowerProgress(void)
 {
     u16 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1418,17 +1532,17 @@ void SaveBattleTowerProgress(void)
     sub_81A4C30();
 }
 
-void nullsub_61(void)
+static void nullsub_61(void)
 {
 
 }
 
-void nullsub_116(void)
+static void nullsub_116(void)
 {
 
 }
 
-void sub_81640E0(u16 trainerId)
+static void sub_81640E0(u16 trainerId)
 {
     s32 i, count;
     u32 validSpecies[3];
@@ -1453,7 +1567,7 @@ void sub_81640E0(u16 trainerId)
     } while (gUnknown_03006298[0] == gUnknown_03006298[1]);
 }
 
-void sub_8164188(u16 trainerId)
+static void sub_8164188(u16 trainerId)
 {
     s32 i, count;
     u32 validSpecies[3];
@@ -1481,7 +1595,7 @@ void sub_8164188(u16 trainerId)
     } while (gUnknown_03006298[2] == gUnknown_03006298[3]);
 }
 
-void sub_81642A0(void)
+static void sub_81642A0(void)
 {
     s32 i, j, k;
     u32 spArray[5];
@@ -1627,7 +1741,7 @@ void sub_81642A0(void)
     }
 }
 
-void sub_81646BC(u16 trainerId, u16 monPoolId)
+static void sub_81646BC(u16 trainerId, u16 monPoolId)
 {
     u16 move = 0;
     u16 species = 0;
@@ -1662,16 +1776,7 @@ void sub_81646BC(u16 trainerId, u16 monPoolId)
     StringCopy(gStringVar2, gSpeciesNames[species]);
 }
 
-struct
-{
-    u32 facilityClass;
-    const u8 *const *strings;
-} extern const gUnknown_085DD500[50];
-
-extern const u8 *const *const gUnknown_085DD690[];
-extern const u8 gUnknown_085DFA42[4];
-
-void sub_8164828(void)
+static void sub_8164828(void)
 {
     s32 i, j, arrId;
     s32 monPoolId;
@@ -1777,7 +1882,7 @@ void sub_8164828(void)
     }
 }
 
-void sub_8164B74(void)
+static void sub_8164B74(void)
 {
     s32 challengeNum;
     s32 i, j;
@@ -1866,18 +1971,18 @@ void sub_8164B74(void)
     }
 }
 
-void sub_8164DCC(void)
+static void sub_8164DCC(void)
 {
     if (gWirelessCommType != 0)
         sub_800AC34();
 }
 
-void sub_8164DE4(void)
+static void sub_8164DE4(void)
 {
     SetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.field_CB4[17], 0xF);
 }
 
-void sub_8164E04(void)
+static void sub_8164E04(void)
 {
     s32 i;
     u8 text[32];
@@ -1896,7 +2001,7 @@ void sub_8164E04(void)
     gSaveBlock2Ptr->frontier.field_D06 = gBattleOutcome;
 }
 
-void ValidateBattleTowerRecordChecksums(void)
+static void ValidateBattleTowerRecordChecksums(void)
 {
     s32 i, j;
     u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerPlayer);
@@ -1940,7 +2045,7 @@ void CalcRubyBattleTowerChecksum(struct RSBattleTowerRecord *record)
         record->checksum += ((u32 *)record)[i];
 }
 
-void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record)
+static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record)
 {
     u32 i;
 
@@ -1958,7 +2063,7 @@ u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
         return winStreak;
 }
 
-u8 GetMonCountForBattleMode(u8 battleMode)
+static u8 GetMonCountForBattleMode(u8 battleMode)
 {
     u8 sp[ARRAY_COUNT(gUnknown_085DFA42)];
     memcpy(sp, gUnknown_085DFA42, sizeof(gUnknown_085DFA42));
@@ -1975,7 +2080,7 @@ struct RibbonCounter
     u8 count;
 };
 
-void AwardBattleTowerRibbons(void)
+static void AwardBattleTowerRibbons(void)
 {
     s32 i;
     u32 partyIndex;
@@ -2029,7 +2134,7 @@ void AwardBattleTowerRibbons(void)
 
 // This is a leftover debugging function that is used to populate the E-Reader
 // trainer with the player's current data.
-void FillEReaderTrainerWithPlayerData(void)
+static void FillEReaderTrainerWithPlayerData(void)
 {
     struct BattleTowerEReaderTrainer *ereaderTrainer = &gSaveBlock2Ptr->frontier.ereaderTrainer;
     s32 i, j;
@@ -2075,14 +2180,14 @@ u8 GetEreaderTrainerClassId(void)
     return gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];
 }
 
-void GetEreaderTrainerName(u8 *trainerName)
+void GetEreaderTrainerName(u8 *dst)
 {
     s32 i;
 
     for (i = 0; i < 5; i++)
-        trainerName[i] = gSaveBlock2Ptr->frontier.ereaderTrainer.name[i];
+        dst[i] = gSaveBlock2Ptr->frontier.ereaderTrainer.name[i];
 
-    trainerName[i] = EOS;
+    dst[i] = EOS;
 }
 
 // Checks if the saved E-Reader trainer is valid.
@@ -2116,7 +2221,7 @@ void ValidateEReaderTrainer(void)
     }
 }
 
-void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer)
+static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer)
 {
     s32 i;
 
@@ -2138,7 +2243,7 @@ void CopyEReaderTrainerGreeting(void)
     FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
 }
 
-void CopyEReaderTrainerFarewellMessage(void)
+static void CopyEReaderTrainerFarewellMessage(void)
 {
     if (gBattleOutcome == B_OUTCOME_DREW)
         gStringVar4[0] = EOS;
@@ -2173,7 +2278,7 @@ extern const struct StevenMon sStevenMons[3];
 
 #define STEVEN_OTID 61226
 
-void FillPartnerParty(u16 trainerId)
+static void FillPartnerParty(u16 trainerId)
 {
     s32 i, j;
     u32 ivs, level;
@@ -2282,10 +2387,6 @@ void FillPartnerParty(u16 trainerId)
     }
 }
 
-extern const u8 sRubyFacilityClassToEmerald[82][2];
-extern const u16 gUnknown_085DFA46[];
-extern const u16 gUnknown_085DFA52[];
-
 bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst)
 {
     s32 i, validMons = 0;
@@ -2386,7 +2487,7 @@ void CalcApprenticeChecksum(struct Apprentice *apprentice)
         apprentice->checksum += ((u32 *)apprentice)[i];
 }
 
-void ClearApprentice(struct Apprentice *apprentice)
+static void ClearApprentice(struct Apprentice *apprentice)
 {
     s32 i;
 
@@ -2395,7 +2496,7 @@ void ClearApprentice(struct Apprentice *apprentice)
     ResetApprenticeStruct(apprentice);
 }
 
-void ValidateApprenticesChecksums(void)
+static void ValidateApprenticesChecksums(void)
 {
     s32 i, j;
 
@@ -2435,19 +2536,6 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
             *dst = gSaveBlock2Ptr->apprentices[trainerId - BATTLE_TOWER_RECORD_APPRENTICE_BASE_ID].language;
     }
 }
-
-extern const struct FacilityMon gBattleFrontierMons[];
-extern const struct FacilityMon gSlateportBattleTentMons[];
-extern const struct FacilityMon gVerdanturfBattleTentMons[];
-extern const struct FacilityMon gFallarborBattleTentMons[];
-
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
-extern const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[];
-extern const struct BattleFrontierTrainer gFallarborBattleTentTrainers[];
-
-u8 SetTentPtrsGetLevel(void);
-s32 GetHighestLevelInPlayerParty(void);
 
 u8 SetFacilityPtrsGetLevel(void)
 {
@@ -2502,7 +2590,7 @@ s32 GetHighestLevelInPlayerParty(void)
     return highestLevel;
 }
 
-u8 GetFrontierTrainerFixedIvs(u16 trainerId)
+static u8 GetFrontierTrainerFixedIvs(u16 trainerId)
 {
     u8 fixedIV = 0;
 
@@ -2526,7 +2614,7 @@ u8 GetFrontierTrainerFixedIvs(u16 trainerId)
     return fixedIV;
 }
 
-u16 sub_8165D40(void)
+static u16 sub_8165D40(void)
 {
     u32 facility = VarGet(VAR_FRONTIER_FACILITY);
 
@@ -2542,7 +2630,7 @@ u16 sub_8165D40(void)
         return 0;
 }
 
-u8 SetTentPtrsGetLevel(void)
+static u8 SetTentPtrsGetLevel(void)
 {
     u8 level = 30;
     u32 tentFacility = VarGet(VAR_FRONTIER_FACILITY);
@@ -2575,7 +2663,7 @@ u8 SetTentPtrsGetLevel(void)
     return level;
 }
 
-void sub_8165E18(void)
+static void sub_8165E18(void)
 {
     s32 i;
     u16 trainerId;
@@ -2596,7 +2684,7 @@ void sub_8165E18(void)
        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
 }
 
-void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
+static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 {
     s32 i, j;
     u16 chosenMonIndices[4];
@@ -2681,5 +2769,85 @@ void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
         // The pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
         i++;
+    }
+}
+
+u8 sub_81660B8(u8 facilityClass)
+{
+    u8 trainerObjectGfxId;
+    u8 i;
+
+    // Search male classes.
+    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses); i++)
+    {
+        if (gTowerMaleFacilityClasses[i] == facilityClass)
+            break;
+    }
+    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
+    {
+        trainerObjectGfxId = gTowerMaleTrainerGfxIds[i];
+        return trainerObjectGfxId;
+    }
+
+    // Search female classes.
+    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses); i++)
+    {
+        if (gTowerFemaleFacilityClasses[i] == facilityClass)
+            break;
+    }
+    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
+    {
+        trainerObjectGfxId = gTowerFemaleTrainerGfxIds[i];
+        return trainerObjectGfxId;
+    }
+    else
+    {
+        return EVENT_OBJ_GFX_BOY_1;
+    }
+}
+
+bool32 ValidateBattleTowerRecord(u8 recordId) // unused
+{
+    s32 i;
+    u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
+    u32 checksum = 0;
+    u32 hasData = 0;
+    for (i = 0; i < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; i++) // - 4, because of the last fjeld bejng the checksum jtself.
+    {
+        checksum += record[i];
+        hasData |= record[i];
+    }
+
+    if (checksum == 0 && hasData == 0)
+    {
+        return FALSE;
+    }
+    else if (gSaveBlock2Ptr->frontier.towerRecords[recordId].checksum != checksum)
+    {
+        ClearBattleTowerRecord(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+void sub_8166188(void)
+{
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    {
+        s32 i;
+        u8 enemyLevel = SetFacilityPtrsGetLevel();
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
+            if (species)
+            {
+                SetMonData(&gEnemyParty[i], MON_DATA_EXP, &gExperienceTables[gBaseStats[species].growthRate][enemyLevel]);
+                CalculateMonStats(&gEnemyParty[i]);
+            }
+        }
     }
 }

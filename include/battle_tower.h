@@ -17,12 +17,6 @@ struct RSBattleTowerRecord
     /*0xA0*/ u32 checksum;
 };
 
-union BattleTowerRecord
-{
-    struct RSBattleTowerRecord ruby_sapphire;
-    struct EmeraldBattleTowerRecord emerald;
-};
-
 struct BattleFrontierTrainer
 {
     u8 facilityClass;
@@ -51,16 +45,39 @@ extern const u8 gTowerFemaleTrainerGfxIds[20];
 extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
-u16 GetCurrentBattleTowerWinStreak(u8, u8);
-bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, struct RSBattleTowerRecord *dst);
-bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst);
-void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *);
-void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);
+void sub_8161F74(void);
+u16 sub_8162548(u8 challengeNum, u8 battleNum);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
-void FrontierSpeechToString(const u16 *words);
-void GetFrontierTrainerName(u8 *dest, u16 trainerIdx);
-void GetEreaderTrainerName(u8 *dest);
+void SetEReaderTrainerGfxId(void);
+u8 GetBattleFacilityTrainerGfxId(u16 trainerId);
+void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);
+u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
+u8 GetFrontierOpponentClass(u16 trainerId);
+void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 void FillFrontierTrainerParty(u8 monsCount);
 void FillFrontierTrainersParties(u8 monsCount);
+u16 RandomizeFacilityTrainerMonId(u16 trainerId);
+void FrontierSpeechToString(const u16 *words);
+void DoSpecialTrainerBattle(void);
+void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *record);
+void CalcRubyBattleTowerChecksum(struct RSBattleTowerRecord *record);
+u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode);
+u8 GetEreaderTrainerFrontSpriteId(void);
+u8 GetEreaderTrainerClassId(void);
+void GetEreaderTrainerName(u8 *dst);
+void ValidateEReaderTrainer(void);
+void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer);
+void CopyEReaderTrainerGreeting(void);
+void sub_81653CC(void);
+bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct EmeraldBattleTowerRecord *dst);
+bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, struct RSBattleTowerRecord *dst);
+void CalcApprenticeChecksum(struct Apprentice *apprentice);
+void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
+u8 SetFacilityPtrsGetLevel(void);
+u8 GetFrontierEnemyMonLevel(u8 lvlMode);
+s32 GetHighestLevelInPlayerParty(void);
+u8 sub_81660B8(u8 facilityClass);
+bool32 ValidateBattleTowerRecord(u8 recordId); // unused
+void sub_8166188(void);
 
 #endif //GUARD_BATTLE_TOWER_H
