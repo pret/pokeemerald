@@ -2,8 +2,9 @@
 #include "battle_anim.h"
 #include "constants/rgb.h"
 
-//asm(".align 2");
-//const u16 gUnknown_08597418 = _RGB(31, 31, 31);
+const u16 gUnknown_08597418 = RGB(31, 31, 31);
 
-//gUnknown_08597418:: @ 8597418
-//    .2byte 0x7fff
+// no clue what these are...
+// possibly some register offsets
+const u8 gUnknown_0859741A[] = {0x08, 0x0a, 0x0c, 0x0e};
+const u8 gUnknown_0859741E[] = {0x08, 0x0a, 0x0c, 0x0e};

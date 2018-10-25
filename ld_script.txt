@@ -495,7 +495,6 @@ SECTIONS {
         src/ground.o(.rodata);
         src/normal.o(.rodata);
         src/battle_anim_utility_funcs.o(.rodata);
-        data/battle_anim_80FE840.o(.rodata);
         src/battle_intro.o(.rodata);
         src/bike.o(.rodata);
         data/easy_chat.o(.rodata);
