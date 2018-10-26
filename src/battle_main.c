@@ -52,6 +52,7 @@
 #include "international_string_util.h"
 #include "pokeball.h"
 #include "party_menu.h"
+#include "battle_tower.h"
 
 struct UnknownPokemonStruct4
 {
@@ -106,9 +107,6 @@ extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
 // functions
-extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
-extern void sub_8166188(void); // battle tower, sets link battle mons level but why?
-extern void GetBattleTowerTrainerLanguage(u8* dst, u16 trainerId); // battle tower, gets language
 extern void sub_81B9150(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
 extern void sub_81A56B4(void); // battle frontier 2

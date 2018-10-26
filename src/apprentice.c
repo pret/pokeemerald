@@ -344,8 +344,6 @@ extern struct Unk030062ECStruct *gUnknown_030062EC;
 extern struct Unk030062F0Struct *gUnknown_030062F0;
 extern void (*gUnknown_030062F4)(void);
 
-extern void CalcApprenticeChecksum(struct Apprentice *);
-
 // This file's functions.
 static u16 sub_819FF98(u8 arg0);
 static bool8 sub_81A0194(u8 arg0, u16 moveId);

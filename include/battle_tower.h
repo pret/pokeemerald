@@ -1,10 +1,6 @@
 #ifndef GUARD_BATTLE_TOWER_H
 #define GUARD_BATTLE_TOWER_H
 
-#define BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID 300
-#define BATTLE_TOWER_RECORD_APPRENTICE_BASE_ID 400
-#define BATTLE_TOWER_EREADER_TRAINER_ID 500
-
 struct RSBattleTowerRecord
 {
     /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100

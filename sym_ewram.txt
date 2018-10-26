@@ -470,13 +470,7 @@ gUnknown_0203ABB5: @ 203ABB5
 	.include "src/learn_move.o"
 	.include "src/decoration_inventory.o"
 	.include "src/roamer.o"
-
-gFacilityTrainers: @ 203BC88
-	.space 0x4
-
-gFacilityTrainerMons: @ 203BC8C
-	.space 0x4
-
+	.include "src/battle_tower.o"
 	.include "src/use_pokeblock.o"
 	.include "src/player_pc.o"
 	.include "src/intro.o"

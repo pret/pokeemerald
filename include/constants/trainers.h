@@ -4,12 +4,15 @@
 #include "constants/opponents.h"
 
 // Special Trainer Ids.
-#define TRAINER_FRONTIER_BRAIN      1022
-#define TRAINER_PLAYER              1023
-#define TRAINER_SECRET_BASE         1024
-#define TRAINER_LINK_OPPONENT       2048
-#define TRAINER_OPPONENT_C00        3072
-#define TRAINER_STEVEN_PARTNER      3075
+#define TRAINER_RECORD_MIXING_FRIEND        300
+#define TRAINER_RECORD_MIXING_APPRENTICE    400
+#define TRAINER_EREADER                     500
+#define TRAINER_FRONTIER_BRAIN              1022
+#define TRAINER_PLAYER                      1023
+#define TRAINER_SECRET_BASE                 1024
+#define TRAINER_LINK_OPPONENT               2048
+#define TRAINER_OPPONENT_C00                3072
+#define TRAINER_STEVEN_PARTNER              3075
 
 #define TRAINER_PIC_HIKER                  0
 #define TRAINER_PIC_AQUA_GRUNT_M           1
