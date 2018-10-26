@@ -60,10 +60,10 @@ static void SpriteCB_PMIndicator(struct Sprite *sprite);
 static const u32 sUnknown_085B1F58[] = INCBIN_U32("graphics/wallclock/graphics_85b1f58.4bpp.lz");
 static const u16 sUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
 
-static const struct WindowTemplate gUnknown_085B21DC[] = 
+static const struct WindowTemplate gUnknown_085B21DC[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 17,
         .width = 24,
@@ -72,7 +72,7 @@ static const struct WindowTemplate gUnknown_085B21DC[] =
         .baseBlock = 512
     },
     {
-        .priority = 2,
+        .bg = 2,
         .tilemapLeft = 24,
         .tilemapTop = 16,
         .width = 6,
@@ -84,7 +84,7 @@ static const struct WindowTemplate gUnknown_085B21DC[] =
 };
 static const struct WindowTemplate gUnknown_085B21F4 =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 24,
     .tilemapTop = 9,
     .width = 5,

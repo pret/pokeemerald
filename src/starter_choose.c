@@ -73,10 +73,10 @@ const u32 gUnknown_085B18AC[] = INCBIN_U32("graphics/misc/birch_ballarrow.4bpp.l
 
 const u32 gUnknown_085B1BCC[] = INCBIN_U32("graphics/misc/birch_circle.4bpp.lz");
 
-static const struct WindowTemplate gUnknown_085B1DCC[] = 
+static const struct WindowTemplate gUnknown_085B1DCC[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 15,
         .width = 24,
@@ -87,9 +87,9 @@ static const struct WindowTemplate gUnknown_085B1DCC[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const struct WindowTemplate gUnknown_085B1DDC = 
+static const struct WindowTemplate gUnknown_085B1DDC =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 24,
     .tilemapTop = 9,
     .width = 5,
@@ -98,9 +98,9 @@ static const struct WindowTemplate gUnknown_085B1DDC =
     .baseBlock = 0x0260
 };
 
-static const struct WindowTemplate gUnknown_085B1DE4 = 
+static const struct WindowTemplate gUnknown_085B1DE4 =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 0,
     .tilemapTop = 0,
     .width = 13,

@@ -58,7 +58,7 @@ static const struct BgTemplate gUnknown_085E5068[] = {
 static const struct WindowTemplate gUnknown_085E5070[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 17,
         .width = 12,
@@ -67,7 +67,7 @@ static const struct WindowTemplate gUnknown_085E5070[] =
         .baseBlock = 1
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 1,
         .width = 7,

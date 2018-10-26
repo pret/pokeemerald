@@ -11,19 +11,14 @@
 #include "window.h"
 #include "string_util.h"
 #include "text.h"
+#include "overworld.h"
+#include "menu.h"
 
-extern void reset_temp_tile_data_buffers(void);
-extern int decompress_and_copy_tile_data_to_vram(u8 bg_id, void *src, int size, u16 offset, u8 mode);
-extern bool8 free_temp_tile_data_buffers_if_possible(void);
-extern void sub_80861E8(void); // rom4
 extern bool16 sub_80C0944(void);
-extern void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 *color, s8 speed, u8 *str);
 
-extern u16 gUnknown_0860F074[];
-
-extern u8 gText_DexNational[];
-extern u8 gText_DexHoenn[];
-extern u8 gText_PokedexDiploma[];
+extern const u8 gText_DexNational[];
+extern const u8 gText_DexHoenn[];
+extern const u8 gText_PokedexDiploma[];
 
 static void MainCB2(void);
 static void Task_DiplomaFadeIn(u8);
@@ -34,7 +29,7 @@ static void InitDiplomaBg(void);
 static void InitDiplomaWindow(void);
 static void PrintDiplomaText(u8 *, u8, u8);
 
-EWRAM_DATA static void **sDiplomaTilemapPtr = {NULL};
+EWRAM_DATA static u8 *sDiplomaTilemapPtr = NULL;
 
 static void VBlankCB(void)
 {
@@ -186,7 +181,7 @@ static void InitDiplomaBg(void)
 static const struct WindowTemplate sDiplomaWinTemplates[2] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 2,
         .width = 20,

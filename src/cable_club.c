@@ -34,7 +34,7 @@ extern u8 gUnknown_02032298[2];
 extern u8 gUnknown_0203CEF8[];
 
 static const struct WindowTemplate gUnknown_08550594 = {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 16,
     .tilemapTop = 11,
     .width = 11,
@@ -421,7 +421,7 @@ bool32 sub_80B2AF4(u16 *arg0, u16 *arg1)
 
     gStringVar1[0] = EOS;
     gStringVar2[0] = EOS;
-    
+
     for (i = 0; i < 2; i++)
     {
         for (j = 0; j < 2; j++)
@@ -1151,7 +1151,7 @@ static void sub_80B3950(void)
 
 void nullsub_37(void)
 {
-    
+
 }
 
 void sub_80B3968(void)

@@ -103,7 +103,7 @@ static const struct BgTemplate gUnknown_0858BE00[] =
 static const struct WindowTemplate gUnknown_0858BE10[] =
 {
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 3,
         .tilemapTop = 10,
         .width = 19,
@@ -112,7 +112,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x030
     },
     {
-        .priority = 2,
+        .bg = 2,
         .tilemapLeft = 3,
         .tilemapTop = 10,
         .width = 19,
@@ -121,7 +121,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x0C8
     },
     {
-        .priority = 3,
+        .bg = 3,
         .tilemapLeft = 8,
         .tilemapTop = 6,
         .width = 17,
@@ -130,7 +130,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x030
     },
     {
-        .priority = 3,
+        .bg = 3,
         .tilemapLeft = 8,
         .tilemapTop = 4,
         .width = 17,
@@ -139,7 +139,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x052
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,

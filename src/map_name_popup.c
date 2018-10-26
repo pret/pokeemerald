@@ -541,7 +541,7 @@ static void LoadMapNamePopUpWindowBg(void)
     }
     popUpThemeId = gRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
-    LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_PRIORITY), &(gMapPopUp_Outline_Table[popUpThemeId][0]), 0x400, 0x21D);
+    LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), &(gMapPopUp_Outline_Table[popUpThemeId][0]), 0x400, 0x21D);
     CallWindowFunction(popupWindowId, sub_80D4A78);
     PutWindowTilemap(popupWindowId);
     if(gMapHeader.weather == WEATHER_BUBBLES)

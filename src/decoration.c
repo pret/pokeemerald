@@ -217,7 +217,7 @@ void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
 const struct WindowTemplate gUnknown_085A6B90[4] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 18,
@@ -226,7 +226,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0001
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 13,
@@ -235,7 +235,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0091
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 1,
         .width = 12,
@@ -244,7 +244,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x017b
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 13,
         .width = 13,
