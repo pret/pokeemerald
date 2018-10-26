@@ -57,18 +57,12 @@ struct UnkStruct_860DD10
 
 extern void sub_81B8558(void);
 extern u32 sub_81A39C4(void);
-extern u16 sub_8162548(u8, u8);
-extern u16 RandomizeFacilityTrainerMonId(u16);
-extern u8 SetFacilityPtrsGetLevel(void);
 extern u16 sub_81A5060(u8 monId, u8 moveSlotId);
 extern u8 sub_81A50F0(u8, u8);
 extern u8 sub_81A50B0(u8);
-extern void SetBattleFacilityTrainerGfxId(u16, u8);
 extern void sub_81A4C30(void);
 extern bool8 sub_81A3610(void);
 extern u16 sub_81A4FF0(u8);
-extern u8 GetFrontierTrainerFrontSpriteId(u16);
-extern u8 GetFrontierOpponentClass(u16);
 extern void ReducePlayerPartyToThree(void);
 
 extern u8 gUnknown_0203CEF8[];
@@ -5561,7 +5555,7 @@ static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roun
     u16 bestScore = 0;
     u16 bestId = 0;
     s32 movePower = 0;
-    SetFacilityPtrsGetLevel(); // Unused return variable.
+    SetFacilityPtrsGetLevel();
 
     // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
     for (i = 0; i < 3; i++)
@@ -6425,7 +6419,7 @@ static void DecideRoundWinners(u8 roundId)
 static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
 {
     s32 i = 0;
-    SetFacilityPtrsGetLevel(); // Unused return value.
+    SetFacilityPtrsGetLevel();
 
     if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
