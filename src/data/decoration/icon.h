@@ -5,7 +5,7 @@
 #ifndef GUARD_ICON_H
 #define GUARD_ICON_H
 
-const u8 *const gUnknown_085A6BE8[][2] = {
+const u32 *const gUnknown_085A6BE8[][2] = {
     {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     {NULL, NULL},
     {NULL, NULL},

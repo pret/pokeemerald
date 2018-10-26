@@ -137,7 +137,7 @@ extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const u8 gUnknown_085B18AC[];
+extern const u32 gUnknown_085B18AC[];
 
 extern void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 move, u8 moveSlot);
 extern u8 sub_81A6F70(u8 battleMode, u8 lvlMode);

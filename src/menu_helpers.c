@@ -7,6 +7,7 @@
 #include "bg.h"
 #include "main.h"
 #include "text.h"
+#include "graphics.h"
 #include "link.h"
 #include "string_util.h"
 #include "sound.h"
@@ -18,9 +19,6 @@
 #include "constants/maps.h"
 
 extern bool32 sub_800B504(void);
-
-extern const u8 gBagSwapLineGfx[];
-extern const u8 gBagSwapLinePal[];
 
 // this file's functions
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);

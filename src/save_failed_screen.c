@@ -2,6 +2,7 @@
 #include "text.h"
 #include "main.h"
 #include "palette.h"
+#include "graphics.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "decompress.h"
@@ -9,17 +10,12 @@
 #include "window.h"
 #include "menu.h"
 #include "save.h"
+#include "starter_choose.h"
 #include "gba/flash_internal.h"
 #include "text_window.h"
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
-
-extern const u8 gBirchHelpGfx[];
-extern const u8 gBirchBagTilemap[];
-extern const u8 gBirchGrassTilemap[];
-extern const u16 gBirchBagGrassPal[];
-extern const u16 gUnknown_0860F074[];
 
 extern u8 gText_SaveFailedCheckingBackup[];
 extern u8 gText_BackupMemoryDamaged[];
@@ -148,7 +144,7 @@ static const u8 sClockFrames[8][3] =
 };
 
 static const u8 sSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
-static const u8 sSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
+static const u32 sSaveFailedClockGfx[] = INCBIN_U32("graphics/misc/clock_small.4bpp.lz");
 
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);

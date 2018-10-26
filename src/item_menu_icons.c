@@ -15,8 +15,8 @@
 
 struct CompressedTilesPal
 {
-    const u8 *tiles;
-    const u8 *pal;
+    const u32 *tiles;
+    const u32 *pal;
 };
 
 extern void DoHorizontalLunge(struct Sprite *sprite);

@@ -2,8 +2,8 @@
 #include "graphics.h"
 
 const struct {
-    const u8 *gfx;
-    const u8 *tileMap;
+    const u32 *gfx;
+    const u32 *tileMap;
     const u16 *pltt;
 } gUnknown_08617128[] = {
     {
