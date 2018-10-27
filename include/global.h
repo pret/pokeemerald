@@ -401,10 +401,7 @@ struct BattleFrontier
     /*0xCB4*/ u16 field_CB4[20];
     /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 winStreaks[4][2];
-    /*0xCF0*/ u16 field_CF0[2];
-    /*0xCF4*/ u16 field_CF4[2];
-    /*0xCF8*/ u16 field_CF8[2];
-    /*0xCFC*/ u16 field_CFC[2];
+    /*0xCF0*/ u16 field_CF0[4][2];
     /*0xD06*/ u16 field_D00;
     /*0xD06*/ u16 field_D02;
     /*0xD06*/ u16 field_D04;
