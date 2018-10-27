@@ -85,7 +85,7 @@ gUnknown_08611C18:: @ 8611C18
 	.4byte sub_81A1B1C
 	.4byte sub_81A1B28
 	.4byte sub_81A1B38
-	.4byte sub_81A1B98
+	.4byte sub_81A1B98 @ x7
 	.4byte sub_81A31FC
 	.4byte sub_81A35EC
 	.4byte sub_81A3B00

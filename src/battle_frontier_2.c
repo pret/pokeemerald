@@ -19,9 +19,13 @@
 #include "link.h"
 #include "tv.h"
 #include "apprentice.h"
+#include "pokedex.h"
 #include "recorded_battle.h"
+#include "data2.h"
 #include "constants/battle_frontier.h"
 #include "constants/trainers.h"
+#include "constants/species.h"
+#include "constants/game_stat.h"
 
 extern u8 gUnknown_0203CEF8[];
 
@@ -1122,5 +1126,371 @@ u32 GetCurrentFacilityWinStreak(void)
         return gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
     default:
         return 0;
+    }
+}
+
+void sub_81A3ACC(void)
+{
+    s32 i;
+
+    for (i = 0; i < 20; i++)
+        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+}
+
+void sub_81A3B00(void)
+{
+    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
+        gSpecialVar_Result = TRUE;
+    else
+        gSpecialVar_Result = FALSE;
+}
+
+u8 sub_81A3B30(u8 facility)
+{
+    return FlagGet(FLAG_SYS_TOWER_SILVER + facility * 2)
+         + FlagGet(FLAG_SYS_TOWER_GOLD + facility * 2);
+}
+
+extern const u8 gUnknown_086118B4[29][7][4];
+
+void sub_81A3B64(void)
+{
+    s32 challengeNum = 0;
+    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    s32 points;
+
+    switch (facility)
+    {
+    case FRONTIER_FACILITY_TOWER:
+        challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
+        break;
+    case FRONTIER_FACILITY_DOME:
+        challengeNum = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
+        break;
+    case FRONTIER_FACILITY_PALACE:
+        challengeNum = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] / 7;
+        break;
+    case FRONTIER_FACILITY_ARENA:
+        challengeNum = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] / 7;
+        break;
+    case FRONTIER_FACILITY_FACTORY:
+        challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+        break;
+    case FRONTIER_FACILITY_PIKE:
+        challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
+        break;
+    case FRONTIER_FACILITY_PYRAMID:
+        challengeNum = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / 7;
+        break;
+    }
+
+    if (challengeNum != 0)
+        challengeNum--;
+    if (challengeNum > ARRAY_COUNT(gUnknown_086118B4))
+        challengeNum = ARRAY_COUNT(gUnknown_086118B4);
+
+    points = gUnknown_086118B4[challengeNum][facility][battleMode];
+    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
+        points += 10;
+    gSaveBlock2Ptr->frontier.battlePoints += points;
+    ConvertIntToDecimalStringN(gStringVar1, points, STR_CONV_MODE_LEFT_ALIGN, 2);
+    if (gSaveBlock2Ptr->frontier.battlePoints > 9999)
+        gSaveBlock2Ptr->frontier.battlePoints = 9999;
+
+    points = gSaveBlock2Ptr->frontier.field_EBA;
+    points += gUnknown_086118B4[challengeNum][facility][battleMode];
+    sub_80EED60(gUnknown_086118B4[challengeNum][facility][battleMode]);
+    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
+    {
+        points += 10;
+        sub_80EED60(10);
+    }
+    if (points > 0xFFFF)
+        points = 0xFFFF;
+    gSaveBlock2Ptr->frontier.field_EBA = points;
+}
+
+void sub_81A3D30(void)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    gSpecialVar_Result = sub_81A3B30(facility);
+}
+
+void sub_81A3D58(void)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    if (sub_81A3B30(facility) == 0)
+        FlagSet(FLAG_SYS_TOWER_SILVER + facility * 2);
+    else
+        FlagSet(FLAG_SYS_TOWER_GOLD + facility * 2);
+}
+
+void sub_81A3DA0(void)
+{
+    if (gBattleTypeFlags & gSpecialVar_0x8005)
+        gSpecialVar_Result = TRUE;
+    else
+        gSpecialVar_Result = FALSE;
+}
+
+extern const u8 gText_SpaceAndSpace[];
+extern const u8 gText_CommaSpace[];
+extern const u8 gText_NewLine[];
+extern const u8 gText_ScrollTextUp[];
+extern const u8 gText_Space2[];
+extern const u8 gText_Are[];
+extern const u8 gText_Are2[];
+
+u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
+{
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+    {
+        arg1++;
+        switch (arg1)
+        {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 9:
+        case 11:
+            if (arg2 == arg1)
+                StringAppend(gStringVar1, gText_SpaceAndSpace);
+            else if (arg2 > arg1)
+                StringAppend(gStringVar1, gText_CommaSpace);
+            break;
+        case 2:
+            if (arg1 == arg2)
+                StringAppend(gStringVar1, gText_SpaceAndSpace);
+            else
+                StringAppend(gStringVar1, gText_CommaSpace);
+            StringAppend(gStringVar1, gText_NewLine);
+            break;
+        default:
+            if (arg1 == arg2)
+                StringAppend(gStringVar1, gText_SpaceAndSpace);
+            else
+                StringAppend(gStringVar1, gText_CommaSpace);
+            StringAppend(gStringVar1, gText_ScrollTextUp);
+            break;
+        }
+        StringAppend(gStringVar1, gSpeciesNames[species]);
+    }
+
+    return arg1;
+}
+
+extern const u16 gUnknown_08611C9A[];
+
+void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
+{
+    s32 i = 0;
+
+    if (species == SPECIES_EGG || species == SPECIES_NONE)
+        return;
+
+    for (i = 0; gUnknown_08611C9A[i] != 0xFFFF && gUnknown_08611C9A[i] != species; i++)
+        ;
+
+    if (gUnknown_08611C9A[i] != 0xFFFF)
+        return;
+    if (lvlMode == FRONTIER_LVL_50 && monLevel > 50)
+        return;
+
+    for (i = 0; i < *count && speciesArray[i] != species; i++)
+        ;
+    if (i != *count)
+        return;
+
+    if (heldItem != 0)
+    {
+        for (i = 0; i < *count && itemsArray[i] != heldItem; i++)
+            ;
+        if (i != *count)
+            return;
+    }
+
+    speciesArray[*count] = species;
+    itemsArray[*count] = heldItem;
+    (*count)++;
+}
+
+void sub_81A3FD4(void)
+{
+    u16 speciesArray[6];
+    u16 itemArray[6];
+    s32 monId = 0;
+    s32 toChoose = 0;
+    u8 count = 0;
+    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    s32 monIdLooper;
+
+    switch (battleMode)
+    {
+    case FRONTIER_MODE_SINGLES:
+        toChoose = 3;
+        break;
+    case FRONTIER_MODE_MULTIS:
+    case FRONTIER_MODE_LINK_MULTIS:
+        toChoose = 2;
+        break;
+    case FRONTIER_MODE_DOUBLES:
+        if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_TOWER)
+            toChoose = 4;
+        else
+            toChoose = 3;
+        break;
+    }
+
+    monIdLooper = 0;
+    do
+    {
+        monId = monIdLooper;
+        count = 0;
+        do
+        {
+            u16 species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
+            u16 heldItem = GetMonData(&gPlayerParty[monId], MON_DATA_HELD_ITEM);
+            u8 level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
+            u16 hp = GetMonData(&gPlayerParty[monId], MON_DATA_HP);
+            if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_PYRAMID)
+            {
+                if (heldItem == 0)
+                    AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &count);
+            }
+            else
+            {
+                AppendIfValid(species, heldItem, hp, gSpecialVar_Result, level, speciesArray, itemArray, &count);
+            }
+            monId++;
+            if (monId >= PARTY_SIZE)
+                monId = 0;
+        } while (monId != monIdLooper);
+
+        monIdLooper++;
+    } while (monIdLooper < PARTY_SIZE && count < toChoose);
+
+    if (count < toChoose)
+    {
+        s32 i;
+        s32 caughtBannedMons = 0;
+        s32 species = gUnknown_08611C9A[0];
+        for (i = 0; species != 0xFFFF; i++, species = gUnknown_08611C9A[i])
+        {
+            if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+                caughtBannedMons++;
+        }
+        gStringVar1[0] = EOS;
+        gSpecialVar_0x8004 = 1;
+        count = 0;
+        for (i = 0; gUnknown_08611C9A[i] != 0xFFFF; i++)
+            count = sub_81A3DD0(gUnknown_08611C9A[i], count, caughtBannedMons);
+
+        if (count == 0)
+        {
+            StringAppend(gStringVar1, gText_Space2);
+            StringAppend(gStringVar1, gText_Are);
+        }
+        else
+        {
+            if (count & 1)
+                StringAppend(gStringVar1, gText_ScrollTextUp);
+            else
+                StringAppend(gStringVar1, gText_Space2);
+            StringAppend(gStringVar1, gText_Are2);
+        }
+    }
+    else
+    {
+        gSpecialVar_0x8004 = 0;
+        gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_Result;
+    }
+}
+
+void sub_81A4224(void)
+{
+    ValidateEReaderTrainer();
+}
+
+void sub_81A4230(void)
+{
+    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+
+    switch (facility)
+    {
+    case FRONTIER_FACILITY_TOWER:
+        if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < 9999)
+        {
+            gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode]++;
+            if (battleMode == FRONTIER_MODE_SINGLES)
+            {
+                SetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK, gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode]);
+                gSaveBlock2Ptr->frontier.field_D02 = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
+            }
+        }
+        break;
+    case FRONTIER_FACILITY_DOME:
+        if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode]++;
+        if (gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][lvlMode]++;
+        break;
+    case FRONTIER_FACILITY_PALACE:
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode]++;
+        break;
+    case FRONTIER_FACILITY_ARENA:
+        if (gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode]++;
+        break;
+    case FRONTIER_FACILITY_FACTORY:
+        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode]++;
+        break;
+    case FRONTIER_FACILITY_PIKE:
+        if (gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode]++;
+        break;
+    case FRONTIER_FACILITY_PYRAMID:
+        if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] < 9999)
+            gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode]++;
+        break;
+    }
+}
+
+void sub_81A43A8(void)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gSaveBlock2Ptr->frontier.selectedPartyMons[i] != 0)
+        {
+            u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HELD_ITEM, NULL);
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
+        }
+    }
+}
+
+void sub_81A4410(void)
+{
+    gSpecialVar_Result = MoveRecordedBattleToSaveData();
+    gSaveBlock2Ptr->frontier.field_CA9_b = 1;
+}
+
+void sub_81A443C(void)
+{
+    switch (gSpecialVar_0x8005)
+    {
+    case 0:
+        GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);
+        break;
+    case 1:
+        GetFrontierTrainerName(gStringVar2, gTrainerBattleOpponent_A);
+        break;
     }
 }
