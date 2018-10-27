@@ -33,7 +33,6 @@ extern u16 gUnknown_03006298[];
 extern void sub_81A3ACC(void);
 extern void CreateFrontierBrainPokemon(void);
 extern void sub_81A6CD0(void);
-extern u16 sub_81A39C4(void);
 extern void SetFrontierBrainTrainerGfxId(void);
 extern u8 GetFrontierBrainTrainerPicIndex(void);
 extern u8 GetFrontierBrainTrainerClass(void);
@@ -364,7 +363,8 @@ static void ChooseNextBattleTowerTrainer(void)
     {
         u16 id;
         u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u32 r5 = sub_81A39C4() / 7;
+        u16 winStreak = GetCurrentFacilityWinStreak();
+        u32 challengeNum = winStreak / 7;
         SetFacilityPtrsGetLevel();
 
         if (battleMode == FRONTIER_MODE_MULTIS || battleMode == FRONTIER_MODE_LINK_MULTIS)
@@ -385,7 +385,7 @@ static void ChooseNextBattleTowerTrainer(void)
             s32 i;
             while (1)
             {
-                id = sub_8162548(r5, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
+                id = sub_8162548(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
                 // Ensure trainer wasn't previously fought in this challenge.
                 for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
@@ -1516,8 +1516,8 @@ static void sub_8163EE4(void)
     for (i = 0; i < 6; i++)
     {
         playerRecord->greeting[i] = gSaveBlock1Ptr->unk2BBC[i];
-        playerRecord->unk1C[i] = gSaveBlock1Ptr->unk2BC8[i];
-        playerRecord->unk28[i] = gSaveBlock1Ptr->unk2BD4[i];
+        playerRecord->speechWon[i] = gSaveBlock1Ptr->unk2BC8[i];
+        playerRecord->speechLost[i] = gSaveBlock1Ptr->unk2BD4[i];
     }
 
     for (i = 0; i < 4; i++)
@@ -1795,7 +1795,8 @@ static void sub_8164828(void)
     s32 i, j, arrId;
     s32 monPoolId;
     s32 level = SetFacilityPtrsGetLevel();
-    s32 challengeNum = sub_81A39C4() / 7;
+    u16 winStreak = GetCurrentFacilityWinStreak();
+    s32 challengeNum = winStreak / 7;
     s32 k = gSpecialVar_LastTalked - 2;
     s32 trainerId = gSaveBlock2Ptr->frontier.field_CB4[k];
 
@@ -2425,9 +2426,9 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
         for (i = 0; i < 6; i++)
             dst->greeting[i] = src->greeting[i];
         for (i = 0; i < 6; i++)
-            dst->unk1C[i] = gUnknown_085DFA46[i];
+            dst->speechWon[i] = gUnknown_085DFA46[i];
         for (i = 0; i < 6; i++)
-            dst->unk28[i] = gUnknown_085DFA52[i];
+            dst->speechLost[i] = gUnknown_085DFA52[i];
         for (i = 0; i < 3; i++)
             dst->party[i] = src->party[i];
 
