@@ -220,7 +220,7 @@ static void sub_8161F94(void)
     gSaveBlock2Ptr->frontier.field_CA9_b = 0;
     sub_81A3ACC();
     if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_085DF9AC[battleMode][lvlMode]))
-        gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] = 0;
+        gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
 
     ValidateBattleTowerRecordChecksums();
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
@@ -258,7 +258,7 @@ static void sub_81620F4(void)
     case 0:
         break;
     case 1:
-        gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
         break;
     case 2:
         if (gSpecialVar_0x8006)
@@ -1179,7 +1179,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     {
         u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode; // Unused variable.
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.winStreaks[battleMode][0] / 7;
+        u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][0] / 7;
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 6)
             fixedIV = sub_81A6CA8(challengeNum, 0);
         else
@@ -1480,8 +1480,8 @@ static void SaveCurrentWinStreak(void)
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
-    if (gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] < winStreak)
-        gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] = winStreak;
+    if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < winStreak)
+        gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = winStreak;
 }
 
 static void sub_8163EE4(void)
@@ -1535,7 +1535,7 @@ static void SaveBattleTowerProgress(void)
 {
     u16 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 challengeNum = (signed)(gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] / 7);
+    s32 challengeNum = (signed)(gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7);
 
     if (gSpecialVar_0x8005 == 0 && (challengeNum > 1 || gSaveBlock2Ptr->frontier.curChallengeBattleNum != 0))
         sub_8163EE4();
@@ -1625,7 +1625,7 @@ static void sub_81642A0(void)
     eventObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    challengeNum = gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] / 7;
+    challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
     species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
     species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
     level = SetFacilityPtrsGetLevel();
@@ -1911,7 +1911,7 @@ static void sub_8164B74(void)
     case 0:
         if (battleMode == FRONTIER_MODE_LINK_MULTIS)
         {
-            challengeNum = gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode] / 7;
+            challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] / 7;
             if (sub_800A520())
             {
                 SendBlock(bitmask_all_link_players_but_self(), &challengeNum, sizeof(challengeNum));
@@ -2069,7 +2069,7 @@ static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record)
 
 u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
 {
-    u16 winStreak = gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode];
+    u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
 
     if (winStreak > 9999)
         return 9999;
