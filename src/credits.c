@@ -949,7 +949,7 @@ static const struct BgTemplate gUnknown_085E6F68[] =
 static const struct WindowTemplate gUnknown_085E6F6C[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 9,
         .width = 30,
@@ -1142,7 +1142,7 @@ static void sub_81754DC(void)
 {
     RunTasks();
     AnimateSprites();
-    
+
     if ((gMain.heldKeys & B_BUTTON)
      && gHasHallOfFameRecords != 0
      && gTasks[gUnknown_0203BCE2].func == sub_8175774)
@@ -1182,9 +1182,9 @@ static void sub_81755BC(const u8 *string, u8 y, u8 a2)
 {
     u8 x;
     u8 color[3];
-    
+
     color[0] = 0;
-    
+
     if (a2 == 1)
     {
         color[1] = 3;
@@ -1195,7 +1195,7 @@ static void sub_81755BC(const u8 *string, u8 y, u8 a2)
         color[1] = 1;
         color[2] = 2;
     }
-    
+
     x = GetStringCenterAlignXOffsetWithLetterSpacing(1, string, 0xF0, 1);
     AddTextPrinterParameterized4(0, 1, x, y, 1, 0, color, -1, string);
 }
@@ -1230,7 +1230,7 @@ void sub_8175620(void)
     gTasks[taskIdC].data[TDC_0] = 40;
 
     SetGpuReg(REG_OFFSET_BG0VOFS, 0xFFFC);
-    
+
     taskIdB = CreateTask(sub_8175DA0, 0);
 
     gTasks[taskIdB].data[TDB_TASK_A_ID] = taskIdA;
@@ -1546,9 +1546,9 @@ static void sub_8175DA0(u8 taskIdB)
             {
                 for (i = 0; i < 5; i++)
                     sub_81755BC(gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text, 5 + i * 16, gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->var_1);
-                
+
                 CopyWindowToVram(0, 2);
-                
+
                 gTasks[taskIdB].data[TDB_CURRENT_PAGE] += 1;
                 gTasks[taskIdB].data[TDB_0] += 1;
 

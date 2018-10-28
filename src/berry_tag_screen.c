@@ -102,7 +102,7 @@ static const u8 sTextColors[2][3] =
 static const struct WindowTemplate sWindowTemplates[] =
 {
     { // WIN_BERRY_NAME
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 4,
         .width = 8,
@@ -111,7 +111,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .baseBlock = 69,
     },
     { // WIN_SIZE_FIRM
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 7,
         .width = 18,
@@ -120,7 +120,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .baseBlock = 85,
     },
     { // WIN_DESC
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 4,
         .tilemapTop = 14,
         .width = 25,
@@ -129,7 +129,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .baseBlock = 157,
     },
     { // WIN_BERRY_TAG
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 0,
         .width = 8,

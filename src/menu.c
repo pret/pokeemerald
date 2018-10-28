@@ -66,7 +66,7 @@ static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
 static const struct WindowTemplate gUnknown_0860F098[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -79,7 +79,7 @@ static const struct WindowTemplate gUnknown_0860F098[] =
 
 static const struct WindowTemplate gUnknown_0860F0A8 =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 5,
@@ -782,9 +782,9 @@ u8 sub_81980F0(u8 bg, u8 xPos, u8 yPos, u8 palette, u16 baseTile)
     memset(&window, 0, sizeof(window));
 
     if (bg > 3)
-        window.priority = 0;
+        window.bg = 0;
     else
-        window.priority = bg;
+        window.bg = bg;
 
     window.tilemapTop = yPos;
     window.height = 2;
@@ -1147,7 +1147,7 @@ void sub_81989B8(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const stru
 
 void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
 {
-    template->priority = bg;
+    template->bg = bg;
     template->tilemapLeft = left;
     template->tilemapTop = top;
     template->width = width;

@@ -295,7 +295,7 @@ static const struct Pokeblock sFavoritePokeblocksTable[] =
 static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 1,
         .width = 9,
@@ -304,7 +304,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x1E
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 1,
         .width = 14,
@@ -313,7 +313,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x30
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 13,
         .width = 5,
@@ -322,7 +322,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x12C
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 5,
@@ -331,7 +331,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x136
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 17,
         .width = 5,
@@ -340,7 +340,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x140
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 13,
         .width = 5,
@@ -349,7 +349,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x14A
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 15,
         .width = 5,
@@ -358,7 +358,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x154
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 17,
         .width = 2,
@@ -367,7 +367,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x15E
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 7,
         .tilemapTop = 5,
         .width = 6,
@@ -376,7 +376,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x162
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 7,
         .tilemapTop = 7,
         .width = 6,
@@ -385,7 +385,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x186
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -398,7 +398,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
 
 static const struct WindowTemplate sTossPkblockWindowTemplate =
 {
-    .priority = 1,
+    .bg = 1,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 5,

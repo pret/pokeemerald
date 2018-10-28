@@ -92,7 +92,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 1,
         .width = 26,
@@ -101,7 +101,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .baseBlock = 2
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 5,
         .width = 26,

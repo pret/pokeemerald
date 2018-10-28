@@ -1680,7 +1680,7 @@ void sub_8139980(void)
 }
 
 const struct WindowTemplate gUnknown_085B2BAC = {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 1,
     .width = 8,
@@ -3069,7 +3069,7 @@ void sub_813A8FC(void)
 void sub_813A958(void)
 {
     static const struct WindowTemplate gUnknown_085B311C = {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 6,
@@ -3122,7 +3122,7 @@ u16 sub_813AA04(void)
 void sub_813AA18(void)
 {
     static const struct WindowTemplate gUnknown_085B3124 = {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 9,
         .width = 4,
@@ -3284,7 +3284,7 @@ void sub_813AC7C(void)
 static void sub_813ACE8(u8 a0, u16 a1)
 {
     static const struct WindowTemplate gUnknown_085B3220 = {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 7,
         .width = 12,
