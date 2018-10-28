@@ -137,6 +137,7 @@ enum LanguageId
 #define BAG_BERRIES_COUNT   46
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
+#define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
 
 // string lengths
 #define ITEM_NAME_LENGTH    14
@@ -402,9 +403,9 @@ struct BattleFrontier
     /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 towerWinStreaks[4][2];
     /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
-    /*0xD06*/ u16 field_D00;
-    /*0xD06*/ u16 field_D02;
-    /*0xD06*/ u16 field_D04;
+    /*0xD00*/ u16 field_D00;
+    /*0xD02*/ u16 field_D02;
+    /*0xD04*/ u16 field_D04;
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 field_D08_0:1;
@@ -482,6 +483,24 @@ struct PlayersApprentice
     /*0xB8*/ struct Sav2_B8 field_B8[9];
 };
 
+struct RankingHall1P
+{
+    u8 id[4];
+    u16 winStreak;
+    u8 name[PLAYER_NAME_LENGTH + 1];
+    u8 language;
+};
+
+struct RankingHall2P
+{
+    u8 id1[4];
+    u8 id2[4];
+    u16 winStreak;
+    u8 name1[PLAYER_NAME_LENGTH + 1];
+    u8 name2[PLAYER_NAME_LENGTH + 1];
+    u8 language;
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -506,11 +525,12 @@ struct SaveBlock2
     /*0xA8*/ u32 field_A8;
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
-    /*0xDC*/ struct Apprentice apprentices[4];
+    /*0xDC*/ struct Apprentice apprentices[4]; // From record mixing.
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
-    /*0x21C*/ u8 field_21C[1032];
+    /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][3]; // From record mixing.
+    /*0x57C*/ struct RankingHall2P hallRecords2P[2][3]; // From record mixing.
     /*0x624*/ u16 contestLinkResults[5][4]; // 4 positions for 5 categories.
     /*0x64C*/ struct BattleFrontier frontier;
 }; // sizeof=0xF2C

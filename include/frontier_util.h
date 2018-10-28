@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_FRONTIER_2_H
-#define GUARD_BATTLE_FRONTIER_2_H
+#ifndef GUARD_FRONTIER_UTIL_H
+#define GUARD_FRONTIER_UTIL_H
 
 #define FRONTIER_BEFORE_TEXT 0
 #define FRONTIER_PLAYER_LOST_TEXT 1
@@ -18,4 +18,4 @@ u8 sub_81A6CA8(u8, u8);
 void sub_81A3908(void);
 u32 GetCurrentFacilityWinStreak(void);
 
-#endif // GUARD_BATTLE_FRONTIER_2_H
+#endif // GUARD_FRONTIER_UTIL_H

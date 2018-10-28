@@ -33,31 +33,17 @@
 #include "new_game.h"
 #include "daycare.h"
 #include "international_string_util.h"
+#include "constants/battle_frontier.h"
 
 extern void ReceiveSecretBasesData(struct SecretBaseRecord *, size_t, u8);
 extern void ReceiveEasyChatPairsData(struct EasyChatPair *, size_t, u8);
 
 // Static type declarations
 
-struct UnknownRecMixingStruct
+struct RecordMixingHallRecords
 {
-    u32 field_0;
-    u16 field_4;
-    u8 field_6[9];
-};
-
-struct UnknownRecMixingStruct2
-{
-    u32 field_0;
-    u16 field_4;
-    u16 field_6;
-    u16 field_8;
-    u8 field_A[16];
-};
-
-struct UnknownRecMixingStruct3
-{
-    u8 field_0[0x810];
+    struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][6];
+    struct RankingHall2P hallRecords2P[2][6];
 };
 
 struct PlayerRecordsRS
@@ -85,7 +71,7 @@ struct PlayerRecordsEmerald
     /* 0x1210 */ u16 giftItem;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentice[2];
-    /* 0x12dc */ struct UnkRecordMixingStruct2 unk_12dc;
+    /* 0x12dc */ struct PlayerHallRecords hallRecords;
     /* 0x1434 */ u8 field_1434[0x10];
 }; // 0x1444
 
@@ -106,7 +92,7 @@ static IWRAM_DATA struct EasyChatPair *sEasyChatPairsSave;
 static IWRAM_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
 static IWRAM_DATA void *sBattleTowerSave;
 static IWRAM_DATA LilycoveLady *sLilycoveLadySave;
-static IWRAM_DATA void *gUnknown_03001154; // gSaveBlock2Ptr->field_0DC;
+static IWRAM_DATA void *sApprenticesSave;
 static IWRAM_DATA void *sBattleTowerSave_Duplicate;
 static IWRAM_DATA u32 sRecordStructSize;
 static IWRAM_DATA u8 gUnknown_03001160;
@@ -137,7 +123,7 @@ static void ReceiveGiftItem(u16 *item, u8 which);
 static void sub_80E7FF8(u8 taskId);
 static void sub_80E8110(struct Apprentice *arg0, struct Apprentice *arg1);
 static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2);
-static void sub_80E89AC(struct UnkRecordMixingStruct2 *arg0, size_t arg1, u32 arg2);
+static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t arg1, u32 arg2);
 static void sub_80E89F8(struct RecordMixingDayCareMail *dst);
 static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src);
 static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *arg0);
@@ -200,7 +186,7 @@ static void SetSrcLookupPointers(void)
     gUnknown_03001148 = &gUnknown_02039F9C;
     sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
     sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
-    gUnknown_03001154 = gSaveBlock2Ptr->apprentices;
+    sApprenticesSave = gSaveBlock2Ptr->apprentices;
     sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.towerPlayer;
 }
 
@@ -266,8 +252,8 @@ static void PrepareExchangePacket(void)
         if (GetMultiplayerId() == 0)
             sSentRecord->emerald.giftItem = GetRecordMixingGift();
 
-        sub_80E8110(sSentRecord->emerald.apprentice, gUnknown_03001154);
-        sub_80E8260(&sSentRecord->emerald.unk_12dc);
+        sub_80E8110(sSentRecord->emerald.apprentice, sApprenticesSave);
+        GetPlayerHallRecords(&sSentRecord->emerald.hallRecords);
     }
 }
 
@@ -300,7 +286,7 @@ static void ReceiveExchangePacket(u32 which)
         ReceiveGiftItem(&sReceivedRecords->emerald.giftItem, which);
         ReceiveLilycoveLadyData(&sReceivedRecords->emerald.lilycoveLady, sizeof(struct PlayerRecordsEmerald), which);
         ReceiveApprenticeData(sReceivedRecords->emerald.apprentice, sizeof(struct PlayerRecordsEmerald), (u8) which);
-        sub_80E89AC(&sReceivedRecords->emerald.unk_12dc, sizeof(struct PlayerRecordsEmerald), (u8) which);
+        ReceiveRankingHallRecords(&sReceivedRecords->emerald.hallRecords, sizeof(struct PlayerRecordsEmerald), (u8) which);
     }
 }
 
@@ -1608,42 +1594,42 @@ static void sub_80E8110(struct Apprentice *dst, struct Apprentice *src)
     }
 }
 
-void sub_80E8260(struct UnkRecordMixingStruct2 *dst)
+void GetPlayerHallRecords(struct PlayerHallRecords *dst)
 {
     s32 i, j;
 
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
         for (j = 0; j < 2; j++)
         {
-            CopyUnalignedWord(dst->field_0[i][j].playerId, gSaveBlock2Ptr->playerTrainerId);
-            dst->field_0[i][j].language = GAME_LANGUAGE;
-            StringCopy(dst->field_0[i][j].playerName, gSaveBlock2Ptr->playerName);
+            CopyUnalignedWord(dst->onePlayer[i][j].id, gSaveBlock2Ptr->playerTrainerId);
+            dst->onePlayer[i][j].language = GAME_LANGUAGE;
+            StringCopy(dst->onePlayer[i][j].name, gSaveBlock2Ptr->playerName);
         }
     }
 
     for (j = 0; j < 2; j++)
     {
-        dst->field_120[j].language = GAME_LANGUAGE;
-        CopyUnalignedWord(dst->field_120[j].playerId1, gSaveBlock2Ptr->playerTrainerId);
-        CopyUnalignedWord(dst->field_120[j].playerId2, gSaveBlock2Ptr->frontier.field_EF1[j]);
-        StringCopy(dst->field_120[j].playerName1, gSaveBlock2Ptr->playerName);
-        StringCopy(dst->field_120[j].playerName2, gSaveBlock2Ptr->frontier.field_EE1[j]);
+        dst->twoPlayers[j].language = GAME_LANGUAGE;
+        CopyUnalignedWord(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
+        CopyUnalignedWord(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.field_EF1[j]);
+        StringCopy(dst->twoPlayers[j].name1, gSaveBlock2Ptr->playerName);
+        StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.field_EE1[j]);
     }
 
     for (i = 0; i < 2; i++)
     {
-        dst->field_0[0][i].field_4 = gSaveBlock2Ptr->frontier.field_CF0[i];
-        dst->field_0[1][i].field_4 = gSaveBlock2Ptr->frontier.field_CF4[i];
-        dst->field_0[2][i].field_4 = gSaveBlock2Ptr->frontier.field_CF8[i];
-        dst->field_0[3][i].field_4 = gSaveBlock2Ptr->frontier.field_D14[0][i];
-        dst->field_0[4][i].field_4 = gSaveBlock2Ptr->frontier.field_DD0[0][i];
-        dst->field_0[5][i].field_4 = gSaveBlock2Ptr->frontier.field_DDE[i];
-        dst->field_0[6][i].field_4 = gSaveBlock2Ptr->frontier.field_DEA[i];
-        dst->field_0[7][i].field_4 = gSaveBlock2Ptr->frontier.field_E08[i];
-        dst->field_0[8][i].field_4 = gSaveBlock2Ptr->frontier.field_E1E[i];
+        dst->onePlayer[0][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[1][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_DOUBLES][i];
+        dst->onePlayer[2][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_MULTIS][i];
+        dst->onePlayer[3][i].winStreak = gSaveBlock2Ptr->frontier.domeRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[4][i].winStreak = gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[5][i].winStreak = gSaveBlock2Ptr->frontier.arenaRecordStreaks[i];
+        dst->onePlayer[6][i].winStreak = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[7][i].winStreak = gSaveBlock2Ptr->frontier.pikeRecordStreaks[i];
+        dst->onePlayer[8][i].winStreak = gSaveBlock2Ptr->frontier.pyramidRecordStreaks[i];
 
-        dst->field_120[i].field_8 = gSaveBlock2Ptr->frontier.field_CFC[i];
+        dst->twoPlayers[i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_LINK_MULTIS][i];
     }
 }
 
@@ -1702,7 +1688,7 @@ static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2
 }
 
 NAKED
-static void sub_80E8578(struct UnknownRecMixingStruct3 *arg0, struct UnkRecordMixingStruct2 *arg1, size_t arg2, u32 arg3, u32 arg4)
+static void sub_80E8578(struct RecordMixingHallRecords *arg0, struct PlayerHallRecords *arg1, size_t arg2, u32 arg3, u32 arg4)
 {
     asm_unified("	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2106,133 +2092,75 @@ _080E8864:\n\
     ");
 }
 
-static void sub_80E8880(struct UnknownRecMixingStruct *arg0, struct UnknownRecMixingStruct *arg1)
+static void sub_80E8880(struct RankingHall1P *arg0, struct RankingHall1P *arg1)
 {
     s32 i, j;
 
     for (i = 0; i < 3; i++)
     {
-        s32 r2 = 0;
-        s32 r4 = -1;
+        s32 highestWinStreak = 0;
+        s32 highestId = -1;
         for (j = 0; j < 6; j++)
         {
-            if (arg1[j].field_4 > r2)
+            if (arg1[j].winStreak > highestWinStreak)
             {
-                r4 = j;
-                r2 = arg1[j].field_4;
+                highestId = j;
+                highestWinStreak = arg1[j].winStreak;
             }
         }
 
-        if (r4 >= 0)
+        if (highestId >= 0)
         {
-            arg0[i] = arg1[r4];
-            arg1[r4].field_4 = 0;
+            arg0[i] = arg1[highestId];
+            arg1[highestId].winStreak = 0;
         }
     }
 }
 
-static void sub_80E88CC(struct UnknownRecMixingStruct2 *arg0, struct UnknownRecMixingStruct2 *arg1)
+static void sub_80E88CC(struct RankingHall2P *arg0, struct RankingHall2P *arg1)
 {
     s32 i, j;
 
     for (i = 0; i < 3; i++)
     {
-        s32 r2 = 0;
-        s32 r4 = -1;
+        s32 highestWinStreak = 0;
+        s32 highestId = -1;
         for (j = 0; j < 6; j++)
         {
-            if (arg1[j].field_8 > r2)
+            if (arg1[j].winStreak > highestWinStreak)
             {
-                r4 = j;
-                r2 = arg1[j].field_8;
+                highestId = j;
+                highestWinStreak = arg1[j].winStreak;
             }
         }
 
-        if (r4 >= 0)
+        if (highestId >= 0)
         {
-            arg0[i] = arg1[r4];
-            arg1[r4].field_8 = 0;
+            arg0[i] = arg1[highestId];
+            arg1[highestId].winStreak = 0;
         }
     }
 }
 
-NAKED
-static void sub_80E8924(struct UnknownRecMixingStruct3 *arg0)
+static void sub_80E8924(struct RecordMixingHallRecords *arg0)
 {
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	mov r9, r0\n\
-	movs r0, 0\n\
-	ldr r1, =gSaveBlock2Ptr\n\
-	mov r10, r1\n\
-_080E8936:\n\
-	lsls r1, r0, 1\n\
-	adds r2, r0, 0x1\n\
-	mov r8, r2\n\
-	adds r1, r0\n\
-	lsls r0, r1, 5\n\
-	movs r2, 0x87\n\
-	lsls r2, 2\n\
-	adds r7, r0, r2\n\
-	lsls r1, 6\n\
-	mov r0, r9\n\
-	adds r4, r0, r1\n\
-	movs r6, 0\n\
-	movs r5, 0x1\n\
-_080E8950:\n\
-	mov r1, r10\n\
-	ldr r0, [r1]\n\
-	adds r0, r7\n\
-	adds r0, r6\n\
-	adds r1, r4, 0\n\
-	bl sub_80E8880\n\
-	adds r4, 0x60\n\
-	adds r6, 0x30\n\
-	subs r5, 0x1\n\
-	cmp r5, 0\n\
-	bge _080E8950\n\
-	mov r0, r8\n\
-	cmp r0, 0x8\n\
-	ble _080E8936\n\
-	movs r5, 0\n\
-	ldr r4, =gSaveBlock2Ptr\n\
-_080E8972:\n\
-	movs r0, 0x54\n\
-	adds r1, r5, 0\n\
-	muls r1, r0\n\
-	ldr r2, =0x0000057c\n\
-	adds r1, r2\n\
-	ldr r0, [r4]\n\
-	adds r0, r1\n\
-	movs r1, 0xA8\n\
-	muls r1, r5\n\
-	movs r2, 0xD8\n\
-	lsls r2, 3\n\
-	adds r1, r2\n\
-	add r1, r9\n\
-	bl sub_80E88CC\n\
-	adds r5, 0x1\n\
-	cmp r5, 0x1\n\
-	ble _080E8972\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
+    s32 i, j;
+
+    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
+    {
+        for (j = 0; j < 2; j++)
+            sub_80E8880(gSaveBlock2Ptr->hallRecords1P[i][j], arg0->hallRecords1P[i][j]);
+    }
+    for (j = 0; j < 2; j++)
+        sub_80E88CC(gSaveBlock2Ptr->hallRecords2P[j], arg0->hallRecords2P[j]);
 }
 
-static void sub_80E89AC(struct UnkRecordMixingStruct2 *arg0, size_t arg1, u32 arg2)
+static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t arg1, u32 arg2)
 {
     u8 linkPlayerCount = GetLinkPlayerCount();
-    struct UnknownRecMixingStruct3 *largeStructPtr = AllocZeroed(sizeof(struct UnknownRecMixingStruct3));
+    struct RecordMixingHallRecords *largeStructPtr = AllocZeroed(sizeof(struct RecordMixingHallRecords));
 
-    sub_80E8578(largeStructPtr, arg0, arg1, arg2, linkPlayerCount);
+    sub_80E8578(largeStructPtr, hallRecords, arg1, arg2, linkPlayerCount);
     sub_80E8924(largeStructPtr);
 
     Free(largeStructPtr);

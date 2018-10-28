@@ -1,5 +1,5 @@
 #include "global.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "event_data.h"
 #include "battle_setup.h"
 #include "overworld.h"
@@ -22,10 +22,14 @@
 #include "pokedex.h"
 #include "recorded_battle.h"
 #include "data2.h"
+#include "record_mixing.h"
+#include "strings.h"
+#include "malloc.h"
 #include "constants/battle_frontier.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
 #include "constants/game_stat.h"
+#include "constants/moves.h"
 
 extern u8 gUnknown_0203CEF8[];
 
@@ -34,22 +38,42 @@ extern const u16 gUnknown_08611BFC[][2];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const struct WindowTemplate gUnknown_08611C74;
 extern const struct WindowTemplate gUnknown_08611C7C;
+extern const struct WindowTemplate gUnknown_08611C84;
+extern const u8 gUnknown_086118B4[29][7][4];
+extern const u16 gUnknown_08611C9A[];
+extern const u8 *const gUnknown_08611D08[];
+extern const u8 *const gUnknown_08611CB0[][2];
+extern const u8 *const gUnknown_08611D00[];
 
 extern void sub_81B8558(void);
 
 // This file's functions.
 u8 sub_81A3B30(u8 facility);
-void ShowTowerResultsWindow(u8);
-void ShowDomeResultsWindow(u8);
-void ShowPalaceResultsWindow(u8);
-void ShowPikeResultsWindow(void);
-void ShowFactoryResultsWindow(u8);
-void ShowArenaResultsWindow(void);
-void ShowPyramidResultsWindow(void);
-void ShowLinkContestResultsWindow(void);
+static void ShowTowerResultsWindow(u8);
+static void ShowDomeResultsWindow(u8);
+static void ShowPalaceResultsWindow(u8);
+static void ShowPikeResultsWindow(void);
+static void ShowFactoryResultsWindow(u8);
+static void ShowArenaResultsWindow(void);
+static void ShowPyramidResultsWindow(void);
+static void ShowLinkContestResultsWindow(void);
 u8 sub_81A3610(void);
 void sub_81A51A8(u8);
+void sub_81A5030(u8);
 
+// const rom data
+const u8 gUnknown_08611550[][4] =
+{
+    [FRONTIER_FACILITY_TOWER]   = {0x23, 0x46, 0x23, 0x01},
+	[FRONTIER_FACILITY_DOME]    = {0x04, 0x09, 0x05, 0x00},
+	[FRONTIER_FACILITY_PALACE]  = {0x15, 0x2a, 0x15, 0x01},
+	[FRONTIER_FACILITY_ARENA]   = {0x1c, 0x38, 0x1c, 0x01},
+	[FRONTIER_FACILITY_FACTORY] = {0x15, 0x2a, 0x15, 0x01},
+	[FRONTIER_FACILITY_PIKE]    = {0x1c, 0x8c, 0x38, 0x01},
+	[FRONTIER_FACILITY_PYRAMID] = {0x15, 0x46, 0x23, 0x00},
+};
+
+// code
 void sub_81A1780(void)
 {
     gUnknown_08611C18[gSpecialVar_0x8004]();
@@ -214,7 +238,7 @@ void sub_81A1B98(void)
     }
 }
 
-bool8 sub_81A1C24(u32 flags)
+static bool8 sub_81A1C24(u32 flags)
 {
     if (gSaveBlock2Ptr->frontier.field_CDC & flags)
         return TRUE;
@@ -222,14 +246,14 @@ bool8 sub_81A1C24(u32 flags)
         return FALSE;
 }
 
-void sub_81A1C4C(const u8 *str, s32 y)
+static void sub_81A1C4C(const u8 *str, s32 y)
 {
     s32 x = GetStringCenterAlignXOffset(1, str, 0xE0);
     y = (y * 8) + 1;
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x, y, TEXT_SPEED_FF, NULL);
 }
 
-void PrintHyphens(s32 y)
+static void PrintHyphens(s32 y)
 {
     s32 i;
     u8 text[37];
@@ -242,47 +266,8 @@ void PrintHyphens(s32 y)
     AddTextPrinterParameterized(gRecordsWindowId, 1, text, 4, y, TEXT_SPEED_FF, NULL);
 }
 
-extern const u8 gText_WinStreak[];
-extern const u8 gText_Record[];
-extern const u8 gText_Current[];
-extern const u8 gText_RoomsCleared[];
-extern const u8 gText_Prev[];
-extern const u8 gText_SingleBattleRoomResults[];
-extern const u8 gText_DoubleBattleRoomResults[];
-extern const u8 gText_MultiBattleRoomResults[];
-extern const u8 gText_LinkMultiBattleRoomResults[];
-extern const u8 gText_Lv502[];
-extern const u8 gText_OpenLv[];
-extern const u8 gText_RentalSwap[];
-extern const u8 gText_ClearStreak[];
-extern const u8 gText_Total[];
-extern const u8 gText_Championships[];
-extern const u8 gText_SingleBattleTourneyResults[];
-extern const u8 gText_DoubleBattleTourneyResults[];
-extern const u8 gText_SingleBattleHallResults[];
-extern const u8 gText_DoubleBattleHallResults[];
-extern const u8 gText_BattleChoiceResults[];
-extern const u8 gText_TimesCleared[];
-extern const u8 gText_KOsInARow[];
-extern const u8 gText_SetKOTourneyResults[];
-extern const u8 gText_TimesVar1[];
-extern const u8 gText_BattleSwapSingleResults[];
-extern const u8 gText_BattleSwapDoubleResults[];
-extern const u8 gText_FloorsCleared[];
-extern const u8 gText_BattleQuestResults[];
-extern const u8 gText_LinkContestResults[];
-extern const u8 gText_4th[];
-extern const u8 gText_3rd[];
-extern const u8 gText_2nd[];
-extern const u8 gText_1st[];
-extern const u8 gText_Cool[];
-extern const u8 gText_Beauty[];
-extern const u8 gText_Cute[];
-extern const u8 gText_Smart[];
-extern const u8 gText_Tough[];
-
-// Battle Tower.
-void TowerPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
+// Battle Tower records.
+static void TowerPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
     if (num > 9999)
@@ -292,13 +277,13 @@ void TowerPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
 }
 
-void TowerPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void TowerPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     u16 num = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[battleMode][lvlMode];
     TowerPrintStreak(gText_Record, num, x1, x2, y);
 }
 
-u16 TowerGetWinStreak(u8 battleMode, u8 lvlMode)
+static u16 TowerGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
     if (winStreak > 9999)
@@ -307,7 +292,7 @@ u16 TowerGetWinStreak(u8 battleMode, u8 lvlMode)
         return winStreak;
 }
 
-void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = TowerGetWinStreak(battleMode, lvlMode);
@@ -346,7 +331,7 @@ void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y
         TowerPrintStreak(gText_Prev, winStreak, x1, x2, y);
 }
 
-void ShowTowerResultsWindow(u8 battleMode)
+static void ShowTowerResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -372,8 +357,8 @@ void ShowTowerResultsWindow(u8 battleMode)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Battle Dome.
-u16 DomeGetWinStreak(u8 battleMode, u8 lvlMode)
+// Battle Dome records.
+static u16 DomeGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
     if (winStreak > 9999)
@@ -382,7 +367,7 @@ u16 DomeGetWinStreak(u8 battleMode, u8 lvlMode)
         return winStreak;
 }
 
-void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
+static void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str1, x1, y, TEXT_SPEED_FF, NULL);
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -390,7 +375,7 @@ void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
 }
 
-void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = DomeGetWinStreak(battleMode, lvlMode);
@@ -417,7 +402,7 @@ void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
         PrintTwoStrings(gText_Prev, gText_ClearStreak, winStreak, x1, x2, y);
 }
 
-void ShowDomeResultsWindow(u8 battleMode)
+static void ShowDomeResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -441,8 +426,8 @@ void ShowDomeResultsWindow(u8 battleMode)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Battle Palace.
-void PalacePrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
+// Battle Palace records.
+static void PalacePrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
     if (num > 9999)
@@ -452,13 +437,13 @@ void PalacePrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
 }
 
-void PalacePrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void PalacePrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     u16 num = gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[battleMode][lvlMode];
     PalacePrintStreak(gText_Record, num, x1, x2, y);
 }
 
-u16 PalaceGetWinStreak(u8 battleMode, u8 lvlMode)
+static u16 PalaceGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode];
     if (winStreak > 9999)
@@ -467,7 +452,7 @@ u16 PalaceGetWinStreak(u8 battleMode, u8 lvlMode)
         return winStreak;
 }
 
-void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = PalaceGetWinStreak(battleMode, lvlMode);
@@ -493,7 +478,7 @@ void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 
         PalacePrintStreak(gText_Prev, winStreak, x1, x2, y);
 }
 
-void ShowPalaceResultsWindow(u8 battleMode)
+static void ShowPalaceResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -515,8 +500,8 @@ void ShowPalaceResultsWindow(u8 battleMode)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Battle Pike.
-u16 PikeGetWinStreak(u8 lvlMode)
+// Battle Pike records.
+static u16 PikeGetWinStreak(u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
     if (winStreak > 9999)
@@ -525,7 +510,7 @@ u16 PikeGetWinStreak(u8 lvlMode)
         return winStreak;
 }
 
-void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
+static void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str1, x1, y, TEXT_SPEED_FF, NULL);
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -533,7 +518,7 @@ void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
 }
 
-void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = PikeGetWinStreak(lvlMode);
@@ -549,7 +534,7 @@ void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
         PrintTwoStrings(gText_Prev, gText_RoomsCleared, winStreak, x1, x2, y);
 }
 
-void ShowPikeResultsWindow(void)
+static void ShowPikeResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -569,8 +554,8 @@ void ShowPikeResultsWindow(void)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Battle Arena.
-void ArenaPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
+// Battle Arena records.
+static void ArenaPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
     if (num > 9999)
@@ -580,13 +565,13 @@ void ArenaPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
 }
 
-void ArenaPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void ArenaPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     u16 num = gSaveBlock2Ptr->frontier.arenaRecordStreaks[lvlMode];
     ArenaPrintStreak(gText_Record, num, x1, x2, y);
 }
 
-u16 ArenaGetWinStreak(u8 lvlMode)
+static u16 ArenaGetWinStreak(u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode];
     if (winStreak > 9999)
@@ -595,7 +580,7 @@ u16 ArenaGetWinStreak(u8 lvlMode)
         return winStreak;
 }
 
-void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = ArenaGetWinStreak(lvlMode);
@@ -611,7 +596,7 @@ void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
         ArenaPrintStreak(gText_Prev, winStreak, x1, x2, y);
 }
 
-void ShowArenaResultsWindow(void)
+static void ShowArenaResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -629,8 +614,8 @@ void ShowArenaResultsWindow(void)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Battle Factory.
-void FactoryPrintStreak(const u8 *str, u16 num1, u16 num2, u8 x1, u8 x2, u8 x3, u8 y)
+// Battle Factory records.
+static void FactoryPrintStreak(const u8 *str, u16 num1, u16 num2, u8 x1, u8 x2, u8 x3, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
     if (num1 > 9999)
@@ -644,14 +629,14 @@ void FactoryPrintStreak(const u8 *str, u16 num1, u16 num2, u8 x1, u8 x2, u8 x3, 
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x3, y, TEXT_SPEED_FF, NULL);
 }
 
-void FactoryPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
+static void FactoryPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
 {
     u16 num1 = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[battleMode][lvlMode];
     u16 num2 = gSaveBlock2Ptr->frontier.factoryRecordRentsCount[battleMode][lvlMode];
     FactoryPrintStreak(gText_Record, num1, num2, x1, x2, x3, y);
 }
 
-u16 FactoryGetWinStreak(u8 battleMode, u8 lvlMode)
+static u16 FactoryGetWinStreak(u8 battleMode, u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
     if (winStreak > 9999)
@@ -660,7 +645,7 @@ u16 FactoryGetWinStreak(u8 battleMode, u8 lvlMode)
         return winStreak;
 }
 
-u16 FactoryGetRentsCount(u8 battleMode, u8 lvlMode)
+static u16 FactoryGetRentsCount(u8 battleMode, u8 lvlMode)
 {
     u16 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
     if (rents > 9999)
@@ -669,7 +654,7 @@ u16 FactoryGetRentsCount(u8 battleMode, u8 lvlMode)
         return rents;
 }
 
-void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
+static void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = FactoryGetWinStreak(battleMode, lvlMode);
@@ -697,7 +682,7 @@ void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8
         FactoryPrintStreak(gText_Prev, winStreak, rents, x1, x2, x3, y);
 }
 
-void ShowFactoryResultsWindow(u8 battleMode)
+static void ShowFactoryResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -720,8 +705,8 @@ void ShowFactoryResultsWindow(u8 battleMode)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Battle Pyramid.
-void PyramidPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
+// Battle Pyramid records.
+static void PyramidPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x1, y, TEXT_SPEED_FF, NULL);
     if (num > 9999)
@@ -731,13 +716,13 @@ void PyramidPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x2, y, TEXT_SPEED_FF, NULL);
 }
 
-void PyramidPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void PyramidPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     u16 num = gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode];
     PyramidPrintStreak(gText_Record, num, x1, x2, y);
 }
 
-u16 PyramidGetWinStreak(u8 lvlMode)
+static u16 PyramidGetWinStreak(u8 lvlMode)
 {
     u16 winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
     if (winStreak > 9999)
@@ -746,7 +731,7 @@ u16 PyramidGetWinStreak(u8 lvlMode)
         return winStreak;
 }
 
-void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
+static void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
     u16 winStreak = PyramidGetWinStreak(lvlMode);
@@ -762,7 +747,7 @@ void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
         PyramidPrintStreak(gText_Prev, winStreak, x1, x2, y);
 }
 
-void ShowPyramidResultsWindow(void)
+static void ShowPyramidResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -780,8 +765,8 @@ void ShowPyramidResultsWindow(void)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-// Link contest. Why is it in this file?
-void ShowLinkContestResultsWindow(void)
+// Link contest records. Why is it in this file?
+static void ShowLinkContestResultsWindow(void)
 {
     const u8 *str;
     s32 i, j;
@@ -956,8 +941,6 @@ void sub_81A35EC(void)
     VarGet(VAR_FRONTIER_FACILITY); // Unused return value.
     gSpecialVar_Result = sub_81A3610();
 }
-
-extern const u8 gUnknown_08611550[][4];
 
 u8 sub_81A3610(void)
 {
@@ -1151,8 +1134,6 @@ u8 sub_81A3B30(u8 facility)
          + FlagGet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
-extern const u8 gUnknown_086118B4[29][7][4];
-
 void sub_81A3B64(void)
 {
     s32 challengeNum = 0;
@@ -1235,15 +1216,7 @@ void sub_81A3DA0(void)
         gSpecialVar_Result = FALSE;
 }
 
-extern const u8 gText_SpaceAndSpace[];
-extern const u8 gText_CommaSpace[];
-extern const u8 gText_NewLine[];
-extern const u8 gText_ScrollTextUp[];
-extern const u8 gText_Space2[];
-extern const u8 gText_Are[];
-extern const u8 gText_Are2[];
-
-u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
+static u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
@@ -1282,9 +1255,7 @@ u8 sub_81A3DD0(u16 species, u8 arg1, s32 arg2)
     return arg1;
 }
 
-extern const u16 gUnknown_08611C9A[];
-
-void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
+static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
 {
     s32 i = 0;
 
@@ -1493,4 +1464,195 @@ void sub_81A443C(void)
         GetFrontierTrainerName(gStringVar2, gTrainerBattleOpponent_A);
         break;
     }
+}
+
+void sub_81A447C(void)
+{
+    u8 i, j, k;
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
+        if (monId < PARTY_SIZE)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                for (k = 0; k < 4; k++)
+                {
+                    if (GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + k, NULL)
+                        == GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, NULL))
+                        break;
+                }
+                if (k == 4)
+                    SetMonMoveSlot(&gPlayerParty[i], MOVE_SKETCH, j);
+            }
+            gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1] = gPlayerParty[i];
+        }
+    }
+}
+
+void sub_81A457C(void)
+{
+    sub_81A5030(VarGet(VAR_FRONTIER_FACILITY));
+}
+
+// Battle Frontier Ranking Hall records.
+static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hallRecord, s32 hallFacilityId)
+{
+    u8 text[32];
+    u16 winStreak;
+
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gText_123Dot[position], x * 8, (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+    hallRecord->name[PLAYER_NAME_LENGTH] = EOS;
+    if (hallRecord->winStreak)
+    {
+        TVShowConvertInternationalString(text, hallRecord->name, hallRecord->language);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, text, (x + 2) * 8, (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        winStreak = hallRecord->winStreak;
+        if (winStreak > 9999)
+            winStreak = 9999;
+        ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
+        StringExpandPlaceholders(gStringVar4, gUnknown_08611D08[hallFacilityId]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gUnknown_08611D08[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+    }
+}
+
+static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hallRecord)
+{
+    u8 text[32];
+    u16 winStreak;
+
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gText_123Dot[position], x * 8, (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+    if (hallRecord->winStreak)
+    {
+        hallRecord->name1[PLAYER_NAME_LENGTH] = EOS;
+        hallRecord->name2[PLAYER_NAME_LENGTH] = EOS;
+        TVShowConvertInternationalString(text, hallRecord->name1, hallRecord->language);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, text, (x + 2) * 8, (8 * (y + 5 * position - 1)) + 1, TEXT_SPEED_FF, NULL);
+        if (IsStringJapanese(hallRecord->name2))
+            TVShowConvertInternationalString(text, hallRecord->name2, LANGUAGE_JAPANESE);
+        else
+            StringCopy(text, hallRecord->name2);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, text, (x + 4) * 8, (8 * (y + 5 * position + 1)) + 1, TEXT_SPEED_FF, NULL);
+
+        winStreak = hallRecord->winStreak;
+        if (winStreak > 9999)
+            winStreak = 9999;
+        ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
+        StringExpandPlaceholders(gStringVar4, gUnknown_08611D08[9]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gUnknown_08611D08[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+    }
+}
+
+static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvlMode)
+{
+    s32 i, j;
+    struct RankingHall1P record1P[4];
+    struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
+    GetPlayerHallRecords(playerHallRecords);
+
+    for (i = 0; i < 3; i++)
+        record1P[i] = gSaveBlock2Ptr->hallRecords1P[hallFacilityId][lvlMode][i];
+
+    record1P[3] = playerHallRecords->onePlayer[hallFacilityId][lvlMode];
+
+    for (i = 0; i < 3; i++)
+    {
+        s32 highestWinStreak = 0;
+        s32 highestId = 0;
+        for (j = 0; j < 4; j++)
+        {
+            if (record1P[j].winStreak > highestWinStreak)
+            {
+                highestId = j;
+                highestWinStreak = record1P[j].winStreak;
+            }
+        }
+        if (record1P[3].winStreak >= highestWinStreak)
+            highestId = 3;
+
+        dst[i] = record1P[highestId];
+        record1P[highestId].winStreak = 0;
+    }
+
+    free(playerHallRecords);
+}
+
+static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
+{
+    s32 i, j;
+    struct RankingHall2P record2P[4];
+    struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
+    GetPlayerHallRecords(playerHallRecords);
+
+    for (i = 0; i < 3; i++)
+        record2P[i] = gSaveBlock2Ptr->hallRecords2P[lvlMode][i];
+
+    record2P[3] = playerHallRecords->twoPlayers[lvlMode];
+
+    for (i = 0; i < 3; i++)
+    {
+        s32 highestWinStreak = 0;
+        s32 highestId = 0;
+        for (j = 0; j < 3; j++)
+        {
+            if (record2P[j].winStreak > highestWinStreak)
+            {
+                highestId = j;
+                highestWinStreak = record2P[j].winStreak;
+            }
+        }
+        if (record2P[3].winStreak >= highestWinStreak)
+            highestId = 3;
+
+        dst[i] = record2P[highestId];
+        record2P[highestId].winStreak = 0;
+    }
+
+    free(playerHallRecords);
+}
+
+static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
+{
+    s32 i;
+    s32 x;
+    struct RankingHall1P records1P[3];
+    struct RankingHall2P records2P[3];
+
+    StringCopy(gStringVar1, gUnknown_08611CB0[hallFacilityId][0]);
+    StringExpandPlaceholders(gStringVar4, gUnknown_08611CB0[hallFacilityId][1]);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+    x = GetStringRightAlignXOffset(1, gUnknown_08611D00[lvlMode], 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gUnknown_08611D00[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
+    if (hallFacilityId == HALL_FACILITIES_COUNT)
+    {
+        gSaveBlock2Ptr->frontier.field_EE1[0][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.field_EE1[1][PLAYER_NAME_LENGTH] = EOS;
+        Fill2PRecords(records2P, lvlMode);
+        for (i = 0; i < 3; i++)
+            Print2PRecord(i, 1, 4, &records2P[i]);
+    }
+    else
+    {
+        Fill1PRecords(records1P, hallFacilityId, lvlMode);
+        for (i = 0; i < 3; i++)
+            Print1PRecord(i, 1, 4, &records1P[i], hallFacilityId);
+    }
+}
+
+void ShowRankingHallRecordsWindow(void)
+{
+    gRecordsWindowId = AddWindow(&gUnknown_08611C84);
+    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_50);
+    PutWindowTilemap(gRecordsWindowId);
+    CopyWindowToVram(gRecordsWindowId, 3);
+}
+
+void ScrollRankingHallRecordsWindow(void)
+{
+    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_OPEN);
+    CopyWindowToVram(gRecordsWindowId, 2);
 }

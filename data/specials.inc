@@ -448,8 +448,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F90DC
 	def_special sub_80F910C
 	def_special sub_80F9160
-	def_special sub_81A4AA0
-	def_special sub_81A4AE8
+	def_special ShowRankingHallRecordsWindow
+	def_special ScrollRankingHallRecordsWindow
 	def_special sub_8139F20
 	def_special sub_80F9134
 	def_special sub_80F9154
