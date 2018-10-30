@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_ANIM_H
 #define GUARD_BATTLE_ANIM_H
 
+#include "battle.h"
 #include "constants/battle_anim.h"
 
 enum
@@ -127,5 +128,50 @@ u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
+
+extern const struct OamData gUnknown_08524944;
+extern const struct OamData gUnknown_08524A8C;
+extern const struct OamData gUnknown_08524904;
+extern const struct OamData gUnknown_085249C4;
+extern const struct OamData gUnknown_0852490C;
+extern const struct OamData gUnknown_08524934;
+extern const struct OamData gUnknown_08524974;
+extern const struct OamData gUnknown_0852499C;
+extern const struct OamData gUnknown_085249CC;
+extern const struct OamData gUnknown_08524914;
+extern const struct OamData gUnknown_0852496C;
+extern const struct OamData gUnknown_08524A34;
+extern const struct OamData gUnknown_08524A3C;
+extern const struct OamData gUnknown_08524A94;
+extern const struct OamData gUnknown_08524954;
+extern const struct OamData gUnknown_08524AE4;
+extern const struct OamData gUnknown_085249D4;
+extern const struct OamData gUnknown_08524A9C;
+extern const struct OamData gUnknown_08524ADC;
+extern const struct OamData gUnknown_08524B14;
+extern const struct OamData gUnknown_08524A54;
+extern const struct OamData gUnknown_08524A14;
+extern const struct OamData gUnknown_08524A1C;
+extern const struct OamData gUnknown_085249BC;
+extern const struct OamData gUnknown_08524AF4;
+extern const struct OamData gUnknown_085249DC;
+extern const struct OamData gUnknown_08524AFC;
+extern const struct OamData gUnknown_08524B1C;
+extern const struct OamData gUnknown_08524A04;
+extern const struct OamData gUnknown_08524A2C;
+extern const struct OamData gUnknown_08524AEC;
+extern const struct OamData gUnknown_08524964;
+extern const struct OamData gUnknown_08524B24;
+extern const struct OamData gUnknown_08524A24;
+extern const struct OamData gUnknown_08524AC4;
+extern const struct OamData gUnknown_08524A84;
+extern const struct OamData gUnknown_08524A64;
+extern const struct OamData gUnknown_0852491C;
+extern const struct OamData gUnknown_0852495C;
+extern const struct OamData gUnknown_0852497C;
+extern const struct OamData gUnknown_085249F4;
+extern const struct OamData gUnknown_0852493C;
+extern const struct OamData gUnknown_08524A5C;
+extern const struct OamData gUnknown_08524A74;
 
 #endif // GUARD_BATTLE_ANIM_H
