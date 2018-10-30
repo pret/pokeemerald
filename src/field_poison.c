@@ -6,7 +6,7 @@
 #include "field_message_box.h"
 #include "strings.h"
 #include "rom_818CFC8.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "pokenav.h"
 #include "event_data.h"
 #include "script.h"

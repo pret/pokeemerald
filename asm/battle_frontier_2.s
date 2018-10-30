@@ -6,6 +6,238 @@
 	.text
 	
 
+thumb_func_start CreateFrontierBrainPokemon
+CreateFrontierBrainPokemon: @ 81A4E04
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x44
+	ldr r0, =0x000040cf
+	bl VarGet
+	lsls r0, 16
+	lsrs r0, 16
+	str r0, [sp, 0x20]
+	bl sub_81A513C
+	str r0, [sp, 0x24]
+	ldr r0, [sp, 0x20]
+	cmp r0, 0x1
+	bne _081A4E44
+	ldr r0, =0x000003fe
+	bl TrainerIdToDomeTournamentId
+	lsls r0, 16
+	lsrs r0, 16
+	bl GetTrainerMonCountInBits
+	adds r4, r0, 0
+	b _081A4E46
+	.pool
+_081A4E44:
+	movs r4, 0x7
+_081A4E46:
+	bl ZeroEnemyPartyMons
+	movs r1, 0
+	str r1, [sp, 0x18]
+	bl SetFacilityPtrsGetLevel
+	lsls r0, 24
+	lsrs r0, 24
+	str r0, [sp, 0x1C]
+	movs r2, 0
+	str r2, [sp, 0x14]
+_081A4E5C:
+	movs r0, 0x1
+	ands r0, r4
+	asrs r4, 1
+	str r4, [sp, 0x30]
+	ldr r3, [sp, 0x14]
+	adds r3, 0x1
+	str r3, [sp, 0x28]
+	cmp r0, 0
+	bne _081A4E70
+	b _081A4FC4
+_081A4E70:
+	ldr r4, [sp, 0x14]
+	lsls r4, 2
+	mov r9, r4
+	ldr r0, [sp, 0x24]
+	lsls r0, 4
+	str r0, [sp, 0x38]
+	ldr r1, [sp, 0x20]
+	lsls r1, 4
+	str r1, [sp, 0x34]
+	ldr r2, [sp, 0x1C]
+	lsls r2, 24
+	str r2, [sp, 0x3C]
+	ldr r3, [sp, 0x18]
+	adds r3, 0x1
+	str r3, [sp, 0x2C]
+	ldr r0, [sp, 0x14]
+	add r0, r9
+	lsls r0, 2
+	mov r8, r0
+_081A4E96:
+	bl Random
+	adds r4, r0, 0
+	bl Random
+	lsls r4, 16
+	lsrs r7, r4, 16
+	lsls r0, 16
+	orrs r7, r0
+	ldr r0, =0x0000ef2a
+	adds r1, r7, 0
+	bl IsShinyOtIdPersonality
+	lsls r0, 24
+	cmp r0, 0
+	bne _081A4E96
+	ldr r4, [sp, 0x38]
+	ldr r1, [sp, 0x24]
+	subs r0, r4, r1
+	lsls r5, r0, 2
+	mov r2, r8
+	adds r4, r2, r5
+	ldr r3, [sp, 0x34]
+	ldr r1, [sp, 0x20]
+	subs r0, r3, r1
+	lsls r6, r0, 3
+	adds r4, r6
+	ldr r2, =sFrontierBrainsMons
+	adds r4, r2
+	adds r0, r7, 0
+	bl GetNatureFromPersonality
+	ldrb r1, [r4, 0x5]
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r1, r0
+	bne _081A4E96
+	ldr r4, [sp, 0x18]
+	movs r0, 0x64
+	adds r3, r4, 0
+	muls r3, r0
+	mov r8, r3
+	ldr r1, =gEnemyParty
+	add r1, r8
+	mov r10, r1
+	ldr r4, [sp, 0x14]
+	add r4, r9
+	lsls r4, 2
+	adds r0, r4, r5
+	adds r0, r6
+	ldr r2, =sFrontierBrainsMons
+	adds r0, r2
+	ldrh r1, [r0]
+	ldr r3, [sp, 0x3C]
+	lsrs r2, r3, 24
+	ldrb r3, [r0, 0x4]
+	movs r0, 0x1
+	str r0, [sp]
+	str r7, [sp, 0x4]
+	str r0, [sp, 0x8]
+	ldr r0, =0x0000ef2a
+	str r0, [sp, 0xC]
+	mov r0, r10
+	bl CreateMon
+	ldr r0, =sFrontierBrainsMons
+	adds r5, r0
+	adds r5, r6, r5
+	adds r4, r5, r4
+	adds r4, 0x2
+	mov r0, r10
+	movs r1, 0xC
+	adds r2, r4, 0
+	bl SetMonData
+	movs r7, 0
+	mov r6, r8
+	ldr r3, =gEnemyParty
+_081A4F32:
+	adds r1, r7, 0
+	adds r1, 0x1A
+	ldr r0, [sp, 0x14]
+	add r0, r9
+	lsls r4, r0, 2
+	adds r2, r5, r4
+	adds r0, r7, 0x6
+	adds r2, r0
+	adds r0, r6, r3
+	str r3, [sp, 0x40]
+	bl SetMonData
+	adds r7, 0x1
+	ldr r3, [sp, 0x40]
+	cmp r7, 0x5
+	ble _081A4F32
+	movs r1, 0xFF
+	add r0, sp, 0x10
+	strb r1, [r0]
+	movs r7, 0
+	ldr r1, [sp, 0x18]
+	movs r2, 0x64
+	adds r6, r1, 0
+	muls r6, r2
+	ldr r3, =gUnknown_08611578
+	mov r8, r3
+	ldr r3, =gEnemyParty
+	adds r5, r4, 0
+_081A4F6A:
+	ldr r4, [sp, 0x38]
+	ldr r0, [sp, 0x24]
+	subs r1, r4, r0
+	lsls r1, 2
+	adds r1, r5, r1
+	ldr r2, [sp, 0x34]
+	ldr r4, [sp, 0x20]
+	subs r0, r2, r4
+	lsls r0, 3
+	adds r1, r0
+	add r1, r8
+	ldrh r4, [r1]
+	lsls r2, r7, 24
+	lsrs r2, 24
+	adds r0, r6, r3
+	adds r1, r4, 0
+	str r3, [sp, 0x40]
+	bl SetMonMoveSlot
+	ldr r3, [sp, 0x40]
+	cmp r4, 0xDA
+	bne _081A4F9C
+	movs r1, 0
+	add r0, sp, 0x10
+	strb r1, [r0]
+_081A4F9C:
+	adds r5, 0x2
+	adds r7, 0x1
+	cmp r7, 0x3
+	ble _081A4F6A
+	ldr r0, [sp, 0x18]
+	movs r1, 0x64
+	adds r4, r0, 0
+	muls r4, r1
+	ldr r0, =gEnemyParty
+	adds r4, r0
+	adds r0, r4, 0
+	movs r1, 0x20
+	add r2, sp, 0x10
+	bl SetMonData
+	adds r0, r4, 0
+	bl CalculateMonStats
+	ldr r2, [sp, 0x2C]
+	str r2, [sp, 0x18]
+_081A4FC4:
+	ldr r4, [sp, 0x30]
+	ldr r3, [sp, 0x28]
+	str r3, [sp, 0x14]
+	cmp r3, 0x2
+	bgt _081A4FD0
+	b _081A4E5C
+_081A4FD0:
+	add sp, 0x44
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.pool
+thumb_func_end CreateFrontierBrainPokemon
 
 	thumb_func_start sub_81A4FF0
 sub_81A4FF0: @ 81A4FF0

@@ -2,7 +2,7 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_message.h"
 #include "battle_tent.h"
 #include "bg.h"

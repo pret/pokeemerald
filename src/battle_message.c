@@ -17,7 +17,7 @@
 #include "menu.h"
 #include "recorded_battle.h"
 #include "international_string_util.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_tower.h"
 #include "data2.h"
 

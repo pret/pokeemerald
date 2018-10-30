@@ -9,8 +9,7 @@ struct ApprenticeTrainer
     u16 otId;
     u8 facilityClass;
     u16 species[APPRENTICE_SPECIES_COUNT];
-    u8 unk;
-    u8 unk_;
+    u8 id;
     u16 easyChatWords[6];
 };
 

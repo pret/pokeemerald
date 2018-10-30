@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_message.h"
 #include "event_data.h"
 #include "overworld.h"

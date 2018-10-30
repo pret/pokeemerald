@@ -1,7 +1,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "bg.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "constants/rgb.h"
 #include "fieldmap.h"
 #include "fldeff_80F9BCC.h"

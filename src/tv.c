@@ -1972,7 +1972,7 @@ void sub_80EDB44(void)
                 show->rivalTrainer.nGoldSymbols ++;
             }
         }
-        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.frontierBattlePoints;
+        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.battlePoints;
         StringCopy(show->rivalTrainer.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->rivalTrainer.language = gGameLanguage;

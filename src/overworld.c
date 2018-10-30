@@ -52,7 +52,7 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "constants/abilities.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"

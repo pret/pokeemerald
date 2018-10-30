@@ -12,7 +12,7 @@
 #include "task.h"
 #include "overworld.h"
 #include "link.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "rom_818CFC8.h"
 #include "field_specials.h"
 #include "event_object_movement.h"

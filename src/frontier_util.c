@@ -1782,6 +1782,7 @@ struct FrontierBrainMon
 
 extern const struct FrontierBrainMon sFrontierBrainsMons[][2][3];
 
+/*
 void CreateFrontierBrainPokemon(void)
 {
     s32 i, j;
@@ -1830,3 +1831,4 @@ void CreateFrontierBrainPokemon(void)
         monPartyId++;
     }
 }
+*/

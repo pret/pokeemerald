@@ -9,7 +9,7 @@
 #include "random.h"
 #include "item.h"
 #include "battle_factory.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 

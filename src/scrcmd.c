@@ -1,5 +1,5 @@
 #include "global.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "clock.h"
