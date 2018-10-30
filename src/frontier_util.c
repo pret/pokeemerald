@@ -25,6 +25,9 @@
 #include "record_mixing.h"
 #include "strings.h"
 #include "malloc.h"
+#include "save.h"
+#include "load_save.h"
+#include "battle_dome.h"
 #include "constants/battle_frontier.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
@@ -1655,4 +1658,175 @@ void ScrollRankingHallRecordsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_OPEN);
     CopyWindowToVram(gRecordsWindowId, 2);
+}
+
+void ClearnRankingHallRecords(void)
+{
+    s32 i, j, k;
+
+    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            for (k = 0; k < 3; k++)
+            {
+                CopyUnalignedWord(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+                gSaveBlock2Ptr->hallRecords1P[i][j][k].name[0] = EOS;
+                gSaveBlock2Ptr->hallRecords1P[i][j][k].winStreak = 0;
+            }
+        }
+    }
+
+    for (j = 0; j < 2; j++)
+    {
+        for (k = 0; k < 3; k++)
+        {
+            CopyUnalignedWord(gSaveBlock2Ptr->hallRecords2P[j][k].id1, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+            CopyUnalignedWord(gSaveBlock2Ptr->hallRecords2P[j][k].id2, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+            gSaveBlock2Ptr->hallRecords2P[j][k].name1[0] = EOS;
+            gSaveBlock2Ptr->hallRecords2P[j][k].name2[0] = EOS;
+            gSaveBlock2Ptr->hallRecords2P[j][k].winStreak = 0;
+        }
+    }
+}
+
+void sub_81A4C30(void)
+{
+    s32 i;
+    struct Pokemon *monsParty = calloc(PARTY_SIZE, sizeof(struct Pokemon));
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        monsParty[i] = gPlayerParty[i];
+
+    i = gPlayerPartyCount;
+    LoadPlayerParty();
+    sub_8076D5C();
+    TrySavingData(SAVE_LINK);
+    sav2_gender2_inplace_and_xFE();
+    gPlayerPartyCount = i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        gPlayerParty[i] = monsParty[i];
+
+    free(monsParty);
+}
+
+extern const u16 gFacilityToBrainTrainerId[];
+extern const u8 gUnknown_08611C8C[][2];
+
+u8 GetFrontierBrainTrainerPicIndex(void)
+{
+    s32 facility;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+        facility = GetRecordedBattleFrontierFacility();
+    else
+        facility = VarGet(VAR_FRONTIER_FACILITY);
+
+    return gTrainers[gFacilityToBrainTrainerId[facility]].trainerPic;
+}
+
+u8 GetFrontierBrainTrainerClass(void)
+{
+    s32 facility;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+        facility = GetRecordedBattleFrontierFacility();
+    else
+        facility = VarGet(VAR_FRONTIER_FACILITY);
+
+    return gTrainers[gFacilityToBrainTrainerId[facility]].trainerClass;
+}
+
+void CopyFrontierBrainTrainerName(u8 *dst)
+{
+    s32 i;
+    s32 facility;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+        facility = GetRecordedBattleFrontierFacility();
+    else
+        facility = VarGet(VAR_FRONTIER_FACILITY);
+
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+        dst[i] = gTrainers[gFacilityToBrainTrainerId[facility]].trainerName[i];
+
+    dst[i] = EOS;
+}
+
+bool8 IsFrontierBrainFemale(void)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    return gUnknown_08611C8C[facility][1];
+}
+
+void SetFrontierBrainTrainerGfxId(void)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    VarSet(VAR_OBJ_GFX_ID_0, gUnknown_08611C8C[facility][0]);
+}
+
+s32 sub_81A513C(void);
+
+#define FRONTIER_BRAIN_OTID 61226
+
+struct FrontierBrainMon
+{
+    u16 species;
+    u16 heldItem;
+    u8 fixedIV;
+    u8 nature;
+    u8 evs[6];
+    u16 moves[4];
+};
+
+extern const struct FrontierBrainMon sFrontierBrainsMons[][2][3];
+
+void CreateFrontierBrainPokemon(void)
+{
+    s32 i, j;
+    s32 monCountInBits;
+    s32 monPartyId;
+    s32 monLevel;
+    u8 friendship;
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 symbol = sub_81A513C();
+
+    if (facility == FRONTIER_FACILITY_DOME)
+        monCountInBits = GetTrainerMonCountInBits(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
+    else
+        monCountInBits = 7;
+
+    ZeroEnemyPartyMons();
+    monPartyId = 0;
+    monLevel = SetFacilityPtrsGetLevel();
+    for (i = 0; i < 3; monCountInBits >>= 1, i++)
+    {
+        if (!(monCountInBits & 1))
+            continue;
+
+        do
+        {
+            j = Random32();
+        } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j) || sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
+        CreateMon(&gEnemyParty[monPartyId],
+                  sFrontierBrainsMons[facility][symbol][i].species,
+                  monLevel,
+                  sFrontierBrainsMons[facility][symbol][i].fixedIV,
+                  TRUE, j,
+                  TRUE, FRONTIER_BRAIN_OTID);
+        SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
+        for (j = 0; j < 6; j++)
+            SetMonData(&gEnemyParty[monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
+        friendship = 0xFF;
+        for (j = 0; j < 4; j++)
+        {
+            SetMonMoveSlot(&gEnemyParty[monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
+            if (sFrontierBrainsMons[facility][symbol][i].moves[j] == MOVE_FRUSTRATION)
+                friendship = 0;
+        }
+        SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
+        CalculateMonStats(&gEnemyParty[monPartyId]);
+        monPartyId++;
+    }
 }

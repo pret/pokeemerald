@@ -26,6 +26,7 @@
 #include "item.h"
 #include "pokedex.h"
 #include "apprentice.h"
+#include "frontier_util.h"
 
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
@@ -45,7 +46,6 @@ extern void NewGameInitPCItems(void);
 extern void ClearDecorationInventories(void);
 extern void ResetFanClub(void);
 extern void copy_strings_to_sav1(void);
-extern void sub_81A4B14(void);
 extern void sub_8195E10(void);
 extern void sub_801AFD8(void);
 extern void sub_800E5AC(void);
@@ -204,7 +204,7 @@ void NewGameInitData(void)
     copy_strings_to_sav1();
 	SetLilycoveLady();
 	ResetAllApprenticeData();
-	sub_81A4B14();
+	ClearnRankingHallRecords();
 	sub_8195E10();
 	sub_801AFD8();
 	sub_800E5AC();
