@@ -4,7 +4,7 @@ SootopolisCity_MysteryEventsHouse_B1F_MapScripts:: @ 8227E4F
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_B1F_MapScript1_227E5A: @ 8227E5A
-	special sub_8162794
+	special SetEReaderTrainerGfxId
 	end
 
 SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E: @ 8227E5E
@@ -15,12 +15,12 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	lockall
 	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3
 	waitmovement 0
-	special sub_8165360
-	msgbox 0x2021fc4, 4
+	special CopyEReaderTrainerGreeting
+	msgbox gStringVar4, 4
 	closemessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, SPECIAL_BATTLE_EREADER
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
 	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF

@@ -48,7 +48,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	waitmovement 0
 	setvar VAR_0x8004, 4
 	special sub_81B99B4
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7
 	switch VAR_RESULT

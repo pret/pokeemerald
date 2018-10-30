@@ -3600,7 +3600,7 @@ _081A370C:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A3738:
@@ -3652,7 +3652,7 @@ _081A3794:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x18
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A37B8:
@@ -3720,7 +3720,7 @@ _081A3844:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x24
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A3868:
@@ -3736,7 +3736,7 @@ _081A3868:
 	beq _081A3890
 _081A387C:
 	bl sub_81864E0
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A3890:
@@ -3764,7 +3764,7 @@ _081A38A8:
 	ldr r1, =gApprentices+0x4A
 _081A38C4:
 	adds r0, r1
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A38F8
 	.pool
 _081A38D4:
@@ -3784,7 +3784,7 @@ _081A38D4:
 	muls r0, r3
 	ldr r1, =gApprentices+0x4A
 	adds r0, r1
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 _081A38F8:
 	pop {r0}
 	bx r0
@@ -6195,8 +6195,8 @@ _081A4D90:
 	.pool
 	thumb_func_end CopyFrontierBrainTrainerName
 
-	thumb_func_start sub_81A4DB8
-sub_81A4DB8: @ 81A4DB8
+	thumb_func_start IsFrontierBrainFemale
+IsFrontierBrainFemale: @ 81A4DB8
 	push {lr}
 	ldr r0, =0x000040cf
 	bl VarGet
@@ -6209,10 +6209,10 @@ sub_81A4DB8: @ 81A4DB8
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A4DB8
+	thumb_func_end IsFrontierBrainFemale
 
-	thumb_func_start sub_81A4DD8
-sub_81A4DD8: @ 81A4DD8
+	thumb_func_start SetFrontierBrainTrainerGfxId
+SetFrontierBrainTrainerGfxId: @ 81A4DD8
 	push {lr}
 	ldr r0, =0x000040cf
 	bl VarGet
@@ -6227,10 +6227,10 @@ sub_81A4DD8: @ 81A4DD8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A4DD8
+	thumb_func_end SetFrontierBrainTrainerGfxId
 
-	thumb_func_start sub_81A4E04
-sub_81A4E04: @ 81A4E04
+	thumb_func_start CreateFrontierBrainPokemon
+CreateFrontierBrainPokemon: @ 81A4E04
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6261,7 +6261,7 @@ _081A4E46:
 	bl ZeroEnemyPartyMons
 	movs r1, 0
 	str r1, [sp, 0x18]
-	bl GetFacilityEnemyMonLevel
+	bl SetFacilityPtrsGetLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x1C]
@@ -6460,7 +6460,7 @@ _081A4FD0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A4E04
+	thumb_func_end CreateFrontierBrainPokemon
 
 	thumb_func_start sub_81A4FF0
 sub_81A4FF0: @ 81A4FF0
@@ -8755,7 +8755,7 @@ sub_81A63B8: @ 81A63B8
 	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	pop {r0}
 	bx r0
 	.pool
@@ -9904,7 +9904,7 @@ sub_81A6CD0: @ 81A6CD0
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x24]
-	bl GetFacilityEnemyMonLevel
+	bl SetFacilityPtrsGetLevel
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -10896,7 +10896,7 @@ _081A7560:
 	lsls r0, 2
 	ldr r1, =gUnknown_086123E4
 	adds r0, r1
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -11734,7 +11734,7 @@ TryGenerateBattlePikeWildMon: @ 81A7B90
 	ands r0, r1
 	cmp r0, 0
 	beq _081A7C1C
-	bl sub_8165CB4
+	bl GetHighestLevelInPlayerParty
 	adds r7, r0, 0
 	cmp r7, 0x3B
 	ble _081A7C08
@@ -12662,7 +12662,7 @@ _081A831A:
 	str r0, [r1]
 	ldrh r0, [r5]
 	movs r1, 0
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000cb2
@@ -12747,7 +12747,7 @@ _081A83EE:
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	ldr r3, =gSaveBlock2Ptr
 	ldr r1, [r3]
 	ldr r0, =0x00000cb2
@@ -12808,7 +12808,7 @@ _081A8466:
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl sub_8162614
+	bl SetBattleFacilityTrainerGfxId
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000cb2
@@ -12875,7 +12875,7 @@ sub_81A84EC: @ 81A84EC
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081A8542
 	.pool
 _081A8524:
@@ -12892,7 +12892,7 @@ _081A8524:
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 _081A8542:
 	pop {r0}
 	bx r0
@@ -15719,7 +15719,7 @@ _081A9C56:
 	bl SetMonData
 	cmp r5, 0
 	beq _081A9CD4
-	bl GetFacilityEnemyMonLevel
+	bl SetFacilityPtrsGetLevel
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, [sp, 0x10]
@@ -16003,7 +16003,7 @@ sub_81A9EDC: @ 81A9EDC
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -16020,7 +16020,7 @@ sub_81A9EFC: @ 81A9EFC
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x18
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -16037,7 +16037,7 @@ sub_81A9F1C: @ 81A9F1C
 	ldr r0, [r2]
 	adds r0, r1
 	adds r0, 0x24
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	pop {r0}
 	bx r0
 	.pool
@@ -17319,7 +17319,7 @@ _081AA8DC:
 	lsrs r7, r0, 16
 	adds r4, r7, 0
 	adds r0, r4, 0
-	bl sub_81627A4
+	bl GetBattleFacilityTrainerGfxId
 	strb r0, [r5, 0x1]
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]

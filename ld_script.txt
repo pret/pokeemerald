@@ -211,7 +211,6 @@ SECTIONS {
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         src/battle_tower.o(.text);
-        asm/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
@@ -500,6 +499,7 @@ SECTIONS {
         src/learn_move.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
+        src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
         data/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);

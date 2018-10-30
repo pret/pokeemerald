@@ -10934,7 +10934,7 @@ sub_801B1E8: @ 801B1E8
 	ldr r0, [r0]
 	ldr r1, =0x00000bec
 	adds r0, r1
-	bl sub_816534C
+	bl ClearEReaderTrainer
 	pop {r0}
 	bx r0
 	.pool

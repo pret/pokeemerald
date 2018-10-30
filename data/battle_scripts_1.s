@@ -1601,12 +1601,12 @@ BattleScript_EffectPerishSong::
 	waitanimation
 	printstring STRINGID_FAINTINTHREE
 	waitmessage 0x40
-	setbyte sBANK, 0x0
+	setbyte sBATTLER, 0x0
 BattleScript_PerishSongLoop::
 	jumpifability BS_SCRIPTING, ABILITY_SOUNDPROOF, BattleScript_PerishSongNotAffected
 BattleScript_PerishSongLoopIncrement::
-	addbyte sBANK, 0x1
-	jumpifbytenotequal sBANK, gBattlersCount, BattleScript_PerishSongLoop
+	addbyte sBATTLER, 0x1
+	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_PerishSongLoop
 	goto BattleScript_MoveEnd
 
 BattleScript_PerishSongNotAffected::
@@ -2493,7 +2493,7 @@ BattleScript_EffectYawn::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 BattleScript_PrintBankAbilityMadeIneffective::
-	copybyte sBANK, sBANK_WITH_ABILITY
+	copybyte sBATTLER, sBATTLER_WITH_ABILITY
 BattleScript_PrintAbilityMadeIneffective::
 	pause 0x20
 	printstring STRINGID_PKMNSXMADEITINEFFECTIVE
@@ -3523,7 +3523,7 @@ BattleScript_RapidSpinAway::
 BattleScript_WrapFree::
 	printstring STRINGID_PKMNGOTFREE
 	waitmessage 0x40
-	copybyte gBattlerTarget, sBANK
+	copybyte gBattlerTarget, sBATTLER
 	return
 
 BattleScript_LeechSeedFree::
@@ -4030,11 +4030,11 @@ BattleScript_ShedSkinActivates::
 	end3
 
 BattleScript_WeatherFormChanges::
-	setbyte sBANK, 0x0
+	setbyte sBATTLER, 0x0
 BattleScript_WeatherFormChangesLoop::
 	trycastformdatachange
-	addbyte sBANK, 0x1
-	jumpifbytenotequal sBANK, gBattlersCount, BattleScript_WeatherFormChangesLoop
+	addbyte sBATTLER, 0x1
+	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_WeatherFormChangesLoop
 	return
 
 BattleScript_CastformChange::

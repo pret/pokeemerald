@@ -264,9 +264,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, SPECIAL_BATTLE_STEVEN
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_0x8004, 6
 	special sub_81A1780

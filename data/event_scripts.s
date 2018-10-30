@@ -7,6 +7,7 @@
 #include "constants/vars.h"
 #include "constants/heal_locations.h"
 #include "constants/trainers.h"
+#include "constants/battle_frontier.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -5126,9 +5127,9 @@ SecretBase_RedCave1_EventScript_27627C:: @ 827627C
 
 SecretBase_RedCave1_EventScript_276286:: @ 8276286
 	special sub_80EA2E4
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
 	call_if 1, SecretBase_RedCave1_EventScript_2762BD

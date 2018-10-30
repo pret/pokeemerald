@@ -102,7 +102,7 @@ void sub_81B99B4(void)
 static void sub_81B99D4(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
-    gSaveBlock2Ptr->frontier.field_CB2 = 0;
+    gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
@@ -120,13 +120,13 @@ static void sub_81B9A44(void)
 static void sub_81B9A60(void)
 {
     gTrainerBattleOpponent_A = (u32)((Random() % 255) * 5) / 64;
-    sub_8162614(gTrainerBattleOpponent_A, 0);
+    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
 }
 
 static void sub_81B9A90(void)
 {
     if (gTrainerBattleOpponent_A < 300)
-        ConvertBattleFrontierTrainerSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
+        FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
 }
 
 static void sub_81B9ABC(void)
@@ -164,7 +164,7 @@ void sub_81B9B80(void)
 static void sub_81B9BA0(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
-    gSaveBlock2Ptr->frontier.field_CB2 = 0;
+    gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
@@ -219,7 +219,7 @@ void sub_81B9D08(void)
 static void sub_81B9D28(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = 0;
-    gSaveBlock2Ptr->frontier.field_CB2 = 0;
+    gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.field_CA9_a = FALSE;
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
@@ -551,25 +551,25 @@ static void sub_81BA040(void)
         do
         {
             trainerId = Random() % 30;
-            for (i = 0; i < gSaveBlock2Ptr->frontier.field_CB2; i++)
+            for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
             {
                 if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
                     break;
             }
-        } while (i != gSaveBlock2Ptr->frontier.field_CB2);
+        } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
         gTrainerBattleOpponent_A = trainerId;
-        while (gFacilityTrainers[gTrainerBattleOpponent_A].btMonPool[monPoolCount] != 0xFFFF)
+        while (gFacilityTrainers[gTrainerBattleOpponent_A].bfMonPool[monPoolCount] != 0xFFFF)
             monPoolCount++;
         if (monPoolCount > 8)
             break;
         monPoolCount = 0;
     }
 
-    if (gSaveBlock2Ptr->frontier.field_CB2 < 2)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.field_CB2] = gTrainerBattleOpponent_A;
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 2)
+        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
 
-    monSetsPool = gFacilityTrainers[gTrainerBattleOpponent_A].btMonPool;
+    monSetsPool = gFacilityTrainers[gTrainerBattleOpponent_A].bfMonPool;
     i = 0;
     while (i != 3)
     {

@@ -51,13 +51,13 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	setvar VAR_0x8004, 4
 	special sub_81B99B4
 	lockall
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	special HealPlayerParty
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_209A39

@@ -228,9 +228,9 @@ BattleFrontier_BattlePyramidTop_EventScript_2553B3:: @ 82553B3
 
 BattleFrontier_BattlePyramidTop_EventScript_2553ED:: @ 82553ED
 	closemessage
-	setvar VAR_0x8004, 10
+	setvar VAR_0x8004, SPECIAL_BATTLE_PYRAMID
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	return
 

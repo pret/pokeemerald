@@ -275,26 +275,6 @@ struct BerryCrush
     u32 unk;
 };
 
-struct UnknownSaveBlock2Struct
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2[2];
-    u8 field_4[8];
-    u8 field_C[16];
-    u16 field_1C[6];
-    u16 field_28[6];
-    u8 field_34[176];
-    u8 field_E4;
-    u8 field_E5;
-    u8 field_E6;
-    u8 field_E7;
-    u8 field_E8;
-    u8 field_E9;
-    u8 field_EA;
-    u8 field_EB;
-}; // sizeof = 0xEC
-
 struct ApprenticeMon
 {
     u16 species;
@@ -308,12 +288,12 @@ struct Apprentice
     u8 lvlMode:2; // + 1
     u8 field_1;
     u8 number;
-    struct ApprenticeMon monData[3];
+    struct ApprenticeMon party[3];
     u16 easyChatWords[6];
     u8 playerId[4];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
-    u32 unk40;
+    u32 checksum;
 };
 
 struct UnknownPokemonStruct
@@ -345,18 +325,31 @@ struct UnknownPokemonStruct
 
 struct EmeraldBattleTowerRecord
 {
-    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/ u8 trainerClass;
+    /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
-    /*0x10*/ struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/ u8 filler_1c[0x18];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 unk1C[6];
+    /*0x28*/ u16 unk28[6];
     /*0x34*/ struct UnknownPokemonStruct party[4];
     /*0xE4*/ u8 language;
     /*0xE8*/ u32 checksum;
+};
+
+struct BattleTowerEReaderTrainer
+{
+    /*0x00*/ u8 unk0;
+    /*0x01*/ u8 facilityClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 farewellPlayerLost[6];
+    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0xB8*/ u32 checksum;
 };
 
 struct FrontierMonData
@@ -386,18 +379,14 @@ struct BattleDomeTrainer
 
 struct BattleFrontier
 {
-    /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
-    /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
+    /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
+    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[5]; // From record mixing.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
-    /*0xBD8*/ u8 field_BD8[11];
-    /*0xBE3*/ u8 field_BE3[8];
+    /*0xBD8*/ u8 field_BD8[PLAYER_NAME_LENGTH + 1];
+    /*0xBE3*/ u8 field_BE0[POKEMON_NAME_LENGTH + 1];
     /*0xBEB*/ u8 field_BEB;
-    /*0xBEC*/ u8 filler_BEC[16];
-    /*0xBFC*/ u16 ecwords_BFC[6];
-    /*0xC08*/ u16 ecwords_C08[6];
-    /*0xC14*/ u16 ecwords_C14[6];
-    /*0xC20*/ u8 filler_C20[0x88];
+    /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 lvlMode:2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
@@ -406,16 +395,19 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[3];
+    /*0xCAA*/ u16 selectedPartyMons[3];
     /*0xCB0*/ u16 field_CB0;
-    /*0xCB2*/ u16 field_CB2;
+    /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
     /*0xCB4*/ u16 field_CB4[20];
     /*0xCDC*/ u32 field_CDC;
-    /*0xCE0*/ u16 field_CE0[4][2];
+    /*0xCE0*/ u16 winStreaks[4][2];
     /*0xCF0*/ u16 field_CF0[2];
     /*0xCF4*/ u16 field_CF4[2];
     /*0xCF8*/ u16 field_CF8[2];
-    /*0xCFC*/ u16 field_CFC[5];
+    /*0xCFC*/ u16 field_CFC[2];
+    /*0xD06*/ u16 field_D00;
+    /*0xD06*/ u16 field_D02;
+    /*0xD06*/ u16 field_D04;
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 field_D08_0:1;
@@ -466,10 +458,7 @@ struct BattleFrontier
     /*0xEB8*/ u16 frontierBattlePoints;
     /*0xEBA*/ u8 field_EBA;
     /*0xEBB*/ u8 field_EBB;
-    /*0xEBC*/ u8 field_EBC;
-    /*0xEBD*/ u8 field_EBD;
-    /*0xEBE*/ u8 field_EBE;
-    /*0xEBF*/ u8 field_EBF;
+    /*0xEBC*/ u32 battlesCount;
     /*0xEC0*/ u16 field_EC0[16];
     /*0xEE0*/ u8 field_EE0;
     /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH + 1];

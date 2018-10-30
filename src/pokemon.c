@@ -2879,10 +2879,10 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
     u8 language;
     u32 otId = gApprentices[src->id].otId;
     u32 personality = ((gApprentices[src->id].otId >> 8) | ((gApprentices[src->id].otId & 0xFF) << 8))
-                    + src->monData[monId].species + src->number;
+                    + src->party[monId].species + src->number;
 
     CreateMon(mon,
-              src->monData[monId].species,
+              src->party[monId].species,
               GetFrontierEnemyMonLevel(src->lvlMode - 1),
               0x1F,
               TRUE,
@@ -2890,9 +2890,9 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
               TRUE,
               otId);
 
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->monData[monId].item);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
     for (i = 0; i < 4; i++)
-        SetMonMoveSlot(mon, src->monData[monId].moves[i], i);
+        SetMonMoveSlot(mon, src->party[monId].moves[i], i);
 
     evAmount = MAX_TOTAL_EVS / NUM_STATS;
     for (i = 0; i < NUM_STATS; i++)

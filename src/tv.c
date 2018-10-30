@@ -1544,7 +1544,7 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.field_BD8);
     show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.field_BD4;
     show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.field_BD6;
-    show->bravoTrainerTower.numFights = sub_8164FCC(gSaveBlock2Ptr->frontier.field_D07, 0);
+    show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.field_D07, 0);
     show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.field_D06;
     if (gSaveBlock2Ptr->frontier.field_D07 == 0)
     {
@@ -2540,8 +2540,8 @@ void sub_80EE8C8(u16 winStreak, u8 facility)
                 show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
                 break;
             case 4:
-                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.field_CAA[0] - 1], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.field_CAA[1] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[0] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[1] - 1], MON_DATA_SPECIES, NULL);
                 break;
         }
         tv_store_id_3x(show);
