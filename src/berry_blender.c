@@ -323,7 +323,7 @@ static const struct BgTemplate sBerryBlenderBgTemplates[3] =
 static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 6,
         .width = 7,
@@ -332,7 +332,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x28,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 6,
         .width = 7,
@@ -341,7 +341,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x36,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 12,
         .width = 7,
@@ -350,7 +350,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x44,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 12,
         .width = 7,
@@ -359,7 +359,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x52,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -368,7 +368,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x60,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 3,
         .width = 21,
@@ -381,7 +381,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
 
 static const struct WindowTemplate sBlender_YesNoWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 5,
@@ -846,7 +846,7 @@ static const u8 sUnknown_08339CD2[] =
 
 static const struct WindowTemplate sBlenderRecordWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 6,
     .tilemapTop = 4,
     .width = 18,

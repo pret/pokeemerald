@@ -188,7 +188,7 @@ static const u8 sColorTable[][3] =
 static const struct WindowTemplate gUnknown_0861F328[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 14,
         .tilemapTop = 2,
         .width = 15,
@@ -197,7 +197,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
         .baseBlock = 30
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 14,
@@ -206,7 +206,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
         .baseBlock = 270
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -215,7 +215,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
         .baseBlock = 354
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 24,
         .tilemapTop = 17,
         .width = 5,
@@ -229,7 +229,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
 static const struct WindowTemplate gUnknown_0861F350[] =
 {
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 22,
         .tilemapTop = 17,
         .width = 7,
@@ -238,7 +238,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 22,
         .tilemapTop = 15,
         .width = 7,
@@ -247,7 +247,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 15,
         .tilemapTop = 15,
         .width = 14,
@@ -256,7 +256,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 15,
         .tilemapTop = 13,
         .width = 14,
@@ -265,7 +265,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 24,
         .tilemapTop = 15,
         .width = 5,

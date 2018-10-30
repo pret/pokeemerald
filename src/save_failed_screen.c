@@ -95,7 +95,7 @@ static const struct BgTemplate gUnknown_085EFD88[3] =
 static const struct WindowTemplate gUnknown_085EFD94[] =
 {
     {
-        .priority = 255,
+        .bg = 255,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 0,
@@ -108,7 +108,7 @@ static const struct WindowTemplate gUnknown_085EFD94[] =
 static const struct WindowTemplate gUnknown_085EFD9C[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 13,
         .width = 28,
@@ -121,7 +121,7 @@ static const struct WindowTemplate gUnknown_085EFD9C[] =
 static const struct WindowTemplate gUnknown_085EFDA4[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 14,
         .tilemapTop = 9,
         .width = 2,
