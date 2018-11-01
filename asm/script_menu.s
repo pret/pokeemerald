@@ -5,224 +5,6 @@
 
 	.text
 
-	thumb_func_start ScriptMenu_Multichoice
-@ bool8 ScriptMenu_Multichoice(u8 x, u8 y, u8 menuId, bool8 noCancelling)
-ScriptMenu_Multichoice: @ 80E1E08
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r1, 24
-	lsrs r6, r1, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	lsls r3, 24
-	lsrs r4, r3, 24
-	ldr r0, =sub_80E2058
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080E1E4C
-	ldr r0, =gSpecialVar_Result
-	movs r1, 0xFF
-	strh r1, [r0]
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r7, 0
-	adds r1, r6, 0
-	adds r2, r5, 0
-	adds r3, r4, 0
-	bl DoMultichoice
-	movs r0, 0x1
-	b _080E1E4E
-	.pool
-_080E1E4C:
-	movs r0, 0
-_080E1E4E:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end ScriptMenu_Multichoice
-
-	thumb_func_start ScriptMenu_MultichoiceWithDefault
-ScriptMenu_MultichoiceWithDefault: @ 80E1E58
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	ldr r4, [sp, 0x1C]
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r1, 24
-	lsrs r7, r1, 24
-	lsls r2, 24
-	lsrs r6, r2, 24
-	lsls r3, 24
-	lsrs r5, r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =sub_80E2058
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080E1EA8
-	ldr r1, =gSpecialVar_Result
-	movs r0, 0xFF
-	strh r0, [r1]
-	str r4, [sp]
-	mov r0, r8
-	adds r1, r7, 0
-	adds r2, r6, 0
-	adds r3, r5, 0
-	bl DoMultichoice
-	movs r0, 0x1
-	b _080E1EAA
-	.pool
-_080E1EA8:
-	movs r0, 0
-_080E1EAA:
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end ScriptMenu_MultichoiceWithDefault
-
-	thumb_func_start sub_80E1EB8
-sub_80E1EB8: @ 80E1EB8
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r5, 0
-	b _080E1EEC
-_080E1EC0:
-	cmp r1, 0xFD
-	bne _080E1EE4
-	adds r4, 0x1
-	ldrb r0, [r4]
-	cmp r0, 0x1
-	bne _080E1EEC
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	bl StringLength
-	adds r0, r5, r0
-	lsls r0, 16
-	lsrs r5, r0, 16
-	adds r4, 0x1
-	b _080E1EEC
-	.pool
-_080E1EE4:
-	adds r4, 0x1
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-_080E1EEC:
-	ldrb r1, [r4]
-	adds r0, r1, 0
-	cmp r0, 0xFF
-	bne _080E1EC0
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80E1EB8
-
-	thumb_func_start DoMultichoice
-@ void DoMultichoice(u8 x, u8 y, u8 menuId, bool8 noCancelling)
-DoMultichoice: @ 80E1EFC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	ldr r4, [sp, 0x28]
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	mov r9, r1
-	lsls r2, 24
-	lsrs r2, 24
-	mov r10, r2
-	lsls r3, 24
-	lsrs r3, 24
-	str r3, [sp]
-	lsls r4, 24
-	lsrs r4, 24
-	str r4, [sp, 0x4]
-	ldr r1, =gUnknown_0858B760
-	lsls r0, r2, 3
-	adds r0, r1
-	ldrb r6, [r0, 0x4]
-	ldr r0, [r0]
-	mov r8, r0
-	movs r1, 0
-	cmp r1, r6
-	bge _080E1F4C
-	mov r5, r8
-	adds r4, r6, 0
-_080E1F3C:
-	ldr r0, [r5]
-	bl display_text_and_get_width
-	adds r1, r0, 0
-	adds r5, 0x8
-	subs r4, 0x1
-	cmp r4, 0
-	bne _080E1F3C
-_080E1F4C:
-	adds r0, r1, 0
-	bl convert_pixel_width_to_tile_width
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r7, 0
-	adds r1, r4, 0
-	bl sub_80E2D5C
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r3, r6, 25
-	lsrs r3, 24
-	adds r0, r7, 0
-	mov r1, r9
-	adds r2, r4, 0
-	bl CreateWindowFromRect
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	movs r1, 0
-	bl SetStandardWindowBorderStyle
-	adds r0, r4, 0
-	adds r1, r6, 0
-	mov r2, r8
-	bl PrintMenuTable
-	adds r0, r4, 0
-	adds r1, r6, 0
-	ldr r2, [sp, 0x4]
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	ldr r0, [sp]
-	adds r1, r6, 0
-	adds r2, r4, 0
-	mov r3, r10
-	bl sub_80E1FBC
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end DoMultichoice
-
 	thumb_func_start sub_80E1FBC
 sub_80E1FBC: @ 80E1FBC
 	push {r4-r7,lr}
@@ -243,7 +25,7 @@ sub_80E1FBC: @ 80E1FBC
 	movs r0, 0x2
 	strb r0, [r1]
 	movs r2, 0
-	ldr r6, =sub_80E2058
+	ldr r6, =Task_HandleMultichoiceInput
 	ldr r5, =gUnknown_0858BB68
 	movs r3, 0xC
 _080E1FE6:
@@ -298,8 +80,8 @@ _080E202E:
 	.pool
 	thumb_func_end sub_80E1FBC
 
-	thumb_func_start sub_80E2058
-sub_80E2058: @ 80E2058
+	thumb_func_start Task_HandleMultichoiceInput
+Task_HandleMultichoiceInput: @ 80E2058
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -377,7 +159,7 @@ _080E20FC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80E2058
+	thumb_func_end Task_HandleMultichoiceInput
 
 	thumb_func_start ScriptMenu_YesNo
 ScriptMenu_YesNo: @ 80E2108
@@ -680,7 +462,7 @@ _080E2360:
 @ bool ScrSpecial_CreatePCMenu()
 ScrSpecial_CreatePCMenu: @ 80E236C
 	push {lr}
-	ldr r0, =sub_80E2058
+	ldr r0, =Task_HandleMultichoiceInput
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
@@ -887,7 +669,7 @@ ScriptMenu_DisplayPCStartupPrompt: @ 80E2514
 	thumb_func_start sub_80E2548
 sub_80E2548: @ 80E2548
 	push {lr}
-	ldr r0, =sub_80E2058
+	ldr r0, =Task_HandleMultichoiceInput
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
@@ -1642,7 +1424,7 @@ _080E2B70:
 	thumb_func_start sp106_CreateStartMenu
 sp106_CreateStartMenu: @ 80E2B7C
 	push {lr}
-	ldr r0, =sub_80E2058
+	ldr r0, =Task_HandleMultichoiceInput
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
@@ -1792,7 +1574,7 @@ sub_80E2CC4: @ 80E2CC4
 	ldr r1, =gUnknown_02039F90
 	movs r0, 0x2
 	strb r0, [r1]
-	ldr r0, =sub_80E2058
+	ldr r0, =Task_HandleMultichoiceInput
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
