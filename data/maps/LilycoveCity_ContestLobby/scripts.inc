@@ -562,7 +562,7 @@ LilycoveCity_ContestLobby_EventScript_21A784:: @ 821A784
 	lockall
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall

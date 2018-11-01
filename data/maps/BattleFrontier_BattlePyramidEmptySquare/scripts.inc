@@ -41,14 +41,14 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8004, 15
 	special sub_81A8E7C
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
 	case 1, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B66
 	case 2, BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
 	compare VAR_RESULT, 5
@@ -63,7 +63,7 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_D, 1
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39:: @ 8252B39
@@ -76,7 +76,7 @@ BattleFrontier_BattlePyramidTop_EventScript_252B42:: @ 8252B42
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	setvar VAR_0x8006, 255
@@ -103,12 +103,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D:: @ 8252B8D
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 9
 	special sub_81A8E7C
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_F, 1
 	end
 
@@ -128,12 +128,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_241EBA
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 7
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
 	setvar VAR_0x8004, 6
@@ -141,7 +141,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_RESULT, 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
 	waitstate

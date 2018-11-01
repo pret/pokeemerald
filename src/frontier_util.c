@@ -33,25 +33,55 @@
 #include "constants/species.h"
 #include "constants/game_stat.h"
 #include "constants/moves.h"
+#include "constants/items.h"
+#include "constants/event_objects.h"
 
 extern u8 gUnknown_0203CEF8[];
 
-extern void (* const gUnknown_08611C18[])(void);
-extern const u16 gUnknown_08611BFC[][2];
+struct FrontierBrainMon
+{
+    u16 species;
+    u16 heldItem;
+    u8 fixedIV;
+    u8 nature;
+    u8 evs[6];
+    u16 moves[4];
+};
+
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const struct WindowTemplate gUnknown_08611C74;
-extern const struct WindowTemplate gUnknown_08611C7C;
-extern const struct WindowTemplate gUnknown_08611C84;
-extern const u8 gUnknown_086118B4[29][7][4];
-extern const u16 gUnknown_08611C9A[];
 extern const u8 *const gUnknown_08611D08[];
 extern const u8 *const gUnknown_08611CB0[][2];
 extern const u8 *const gUnknown_08611D00[];
+extern const u8 *const *const gUnknown_08611DB0[];
+extern const u8 *const *const gUnknown_08611DB8[];
+extern const u16 gFacilityToBrainTrainerId[];
 
 extern void sub_81B8558(void);
 
 // This file's functions.
-u8 sub_81A3B30(u8 facility);
+static void sub_81A17A0(void);
+static void sub_81A1830(void);
+static void sub_81A1968(void);
+static void sub_81A1AD4(void);
+static void DoSoftReset_(void);
+static void sub_81A1B28(void);
+static void sub_81A1B38(void);
+static void ShowFacilityResultsWindow(void);
+static void sub_81A31FC(void);
+static void sub_81A35EC(void);
+static void sub_81A3B00(void);
+static void sub_81A3B64(void);
+static void sub_81A3D30(void);
+static void sub_81A3D58(void);
+static void sub_81A3DA0(void);
+static void sub_81A3FD4(void);
+static void sub_81A4224(void);
+static void sub_81A4230(void);
+static void sub_81A43A8(void);
+static void sub_81A4410(void);
+static void sub_81A443C(void);
+static void sub_81A447C(void);
+static void sub_81A457C(void);
 static void ShowTowerResultsWindow(u8);
 static void ShowDomeResultsWindow(u8);
 static void ShowPalaceResultsWindow(u8);
@@ -60,12 +90,10 @@ static void ShowFactoryResultsWindow(u8);
 static void ShowArenaResultsWindow(void);
 static void ShowPyramidResultsWindow(void);
 static void ShowLinkContestResultsWindow(void);
-u8 sub_81A3610(void);
 static void CopyFrontierBrainText(bool8 playerWonText);
-void sub_81A5030(u8);
 
 // const rom data
-const u8 gUnknown_08611550[][4] =
+static const u8 gUnknown_08611550[][4] =
 {
     [FRONTIER_FACILITY_TOWER]   = {0x23, 0x46, 0x23, 0x01},
 	[FRONTIER_FACILITY_DOME]    = {0x04, 0x09, 0x05, 0x00},
@@ -76,13 +104,599 @@ const u8 gUnknown_08611550[][4] =
 	[FRONTIER_FACILITY_PYRAMID] = {0x15, 0x46, 0x23, 0x00},
 };
 
-// code
-void sub_81A1780(void)
+static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
 {
-    gUnknown_08611C18[gSpecialVar_0x8004]();
+    [FRONTIER_FACILITY_TOWER] =
+    {
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_ALAKAZAM,
+				.heldItem = ITEM_BRIGHT_POWDER,
+				.fixedIV = 24,
+				.nature = 15,
+				.evs = {106, 0, 152, 152, 100, 0},
+				.moves = {MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH, MOVE_DISABLE},
+            },
+            {
+				.species = SPECIES_ENTEI,
+				.heldItem = ITEM_LUM_BERRY,
+				.fixedIV = 24,
+				.nature = 1,
+				.evs = {100, 152, 152, 0, 100, 6},
+				.moves = {MOVE_FIRE_BLAST, MOVE_CALM_MIND, MOVE_RETURN, MOVE_ROAR},
+            },
+            {
+				.species = SPECIES_SNORLAX,
+				.heldItem = ITEM_QUICK_CLAW,
+				.fixedIV = 24,
+				.nature = 3,
+				.evs = {152, 152, 0, 0, 106, 100},
+				.moves = {MOVE_BODY_SLAM, MOVE_BELLY_DRUM, MOVE_YAWN, MOVE_SHADOW_BALL},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_RAIKOU,
+				.heldItem = ITEM_LUM_BERRY,
+				.fixedIV = 31,
+				.nature = 15,
+				.evs = {158, 0, 252, 100, 0, 0},
+				.moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_REFLECT, MOVE_REST},
+            },
+            {
+				.species = SPECIES_LATIOS,
+				.heldItem = ITEM_BRIGHT_POWDER,
+				.fixedIV = 31,
+				.nature = 15,
+				.evs = {252, 0, 252, 6, 0, 0},
+				.moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_DRAGON_CLAW},
+            },
+            {
+				.species = SPECIES_SNORLAX,
+				.heldItem = ITEM_CHESTO_BERRY,
+				.fixedIV = 31,
+				.nature = 3,
+				.evs = {252, 252, 0, 0, 6, 0},
+				.moves = {MOVE_CURSE, MOVE_RETURN, MOVE_REST, MOVE_SHADOW_BALL},
+            },
+        },
+    },
+	[FRONTIER_FACILITY_DOME] =
+	{
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_SWAMPERT,
+				.heldItem = ITEM_FOCUS_BAND,
+				.fixedIV = 20,
+				.nature = 2,
+				.evs = {152, 152, 106, 0, 100, 0},
+				.moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_COUNTER},
+            },
+            {
+				.species = SPECIES_SALAMENCE,
+				.heldItem = ITEM_LUM_BERRY,
+				.fixedIV = 20,
+				.nature = 3,
+				.evs = {152, 152, 106, 100, 0, 0},
+				.moves = {MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE},
+            },
+            {
+				.species = SPECIES_CHARIZARD,
+				.heldItem = ITEM_WHITE_HERB,
+				.fixedIV = 20,
+				.nature = 17,
+				.evs = {100, 152, 106, 152, 0, 0},
+				.moves = {MOVE_OVERHEAT, MOVE_ROCK_SLIDE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_SWAMPERT,
+				.heldItem = ITEM_LEFTOVERS,
+				.fixedIV = 31,
+				.nature = 2,
+				.evs = {252, 252, 6, 0, 0, 0},
+				.moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_MIRROR_COAT},
+            },
+            {
+				.species = SPECIES_METAGROSS,
+				.heldItem = ITEM_QUICK_CLAW,
+				.fixedIV = 31,
+				.nature = 2,
+				.evs = {252, 252, 6, 0, 0, 0},
+				.moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            },
+            {
+				.species = SPECIES_LATIAS,
+				.heldItem = ITEM_CHESTO_BERRY,
+				.fixedIV = 31,
+				.nature = 15,
+				.evs = {252, 0, 252, 6, 0, 0},
+				.moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_REST},
+            },
+        },
+    },
+	[FRONTIER_FACILITY_PALACE] =
+	{
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_CROBAT,
+				.heldItem = ITEM_BRIGHT_POWDER,
+				.fixedIV = 16,
+				.nature = 3,
+				.evs = {152, 0, 0, 152, 100, 106},
+				.moves = {MOVE_CONFUSE_RAY, MOVE_DOUBLE_TEAM, MOVE_TOXIC, MOVE_FLY},
+            },
+            {
+				.species = SPECIES_SLAKING,
+				.heldItem = ITEM_SCOPE_LENS,
+				.fixedIV = 16,
+				.nature = 0,
+				.evs = {152, 152, 0, 106, 100, 0},
+				.moves = {MOVE_EARTHQUAKE, MOVE_SWAGGER, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK},
+            },
+            {
+				.species = SPECIES_LAPRAS,
+				.heldItem = ITEM_QUICK_CLAW,
+				.fixedIV = 16,
+				.nature = 17,
+				.evs = {0, 0, 252, 0, 106, 152},
+				.moves = {MOVE_ICE_BEAM, MOVE_HORN_DRILL, MOVE_CONFUSE_RAY, MOVE_PROTECT},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_ARCANINE,
+				.heldItem = ITEM_WHITE_HERB,
+				.fixedIV = 31,
+				.nature = 11,
+				.evs = {6, 252, 252, 0, 0, 0},
+				.moves = {MOVE_OVERHEAT, MOVE_EXTREME_SPEED, MOVE_ROAR, MOVE_PROTECT},
+            },
+            {
+				.species = SPECIES_SLAKING,
+				.heldItem = ITEM_SCOPE_LENS,
+				.fixedIV = 31,
+				.nature = 0,
+				.evs = {6, 252, 0, 252, 0, 0},
+				.moves = {MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN},
+            },
+            {
+				.species = SPECIES_SUICUNE,
+				.heldItem = ITEM_KINGS_ROCK,
+				.fixedIV = 31,
+				.nature = 11,
+				.evs = {252, 0, 252, 6, 0, 0},
+				.moves = {MOVE_BLIZZARD, MOVE_SURF, MOVE_BITE, MOVE_CALM_MIND},
+            },
+        },
+    },
+	[FRONTIER_FACILITY_ARENA] =
+	{
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_HERACROSS,
+				.heldItem = ITEM_SALAC_BERRY,
+				.fixedIV = 20,
+				.nature = 13,
+				.evs = {106, 152, 0, 152, 0, 100},
+				.moves = {MOVE_MEGAHORN, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL},
+            },
+            {
+				.species = SPECIES_UMBREON,
+				.heldItem = ITEM_LEFTOVERS,
+				.fixedIV = 20,
+				.nature = 20,
+				.evs = {152, 0, 100, 0, 152, 106},
+				.moves = {MOVE_BODY_SLAM, MOVE_CONFUSE_RAY, MOVE_PSYCHIC, MOVE_FAINT_ATTACK},
+            },
+            {
+				.species = SPECIES_SHEDINJA,
+				.heldItem = ITEM_BRIGHT_POWDER,
+				.fixedIV = 20,
+				.nature = 3,
+				.evs = {0, 252, 6, 252, 0, 0},
+				.moves = {MOVE_SHADOW_BALL, MOVE_RETURN, MOVE_CONFUSE_RAY, MOVE_AERIAL_ACE},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_UMBREON,
+				.heldItem = ITEM_CHESTO_BERRY,
+				.fixedIV = 31,
+				.nature = 20,
+				.evs = {252, 0, 0, 0, 252, 6},
+				.moves = {MOVE_DOUBLE_EDGE, MOVE_CONFUSE_RAY, MOVE_REST, MOVE_PSYCHIC},
+            },
+            {
+				.species = SPECIES_GENGAR,
+				.heldItem = ITEM_LEFTOVERS,
+				.fixedIV = 31,
+				.nature = 15,
+				.evs = {252, 0, 252, 0, 6, 0},
+				.moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_DESTINY_BOND},
+            },
+            {
+				.species = SPECIES_BRELOOM,
+				.heldItem = ITEM_LUM_BERRY,
+				.fixedIV = 31,
+				.nature = 13,
+				.evs = {6, 252, 0, 252, 0, 0},
+				.moves = {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_GIGA_DRAIN, MOVE_HEADBUTT},
+            },
+        },
+    },
+	[FRONTIER_FACILITY_FACTORY] =
+	{
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_METANG,
+				.heldItem = ITEM_SITRUS_BERRY,
+				.fixedIV = 31,
+				.nature = 2,
+				.evs = {0, 252, 252, 0, 6, 0},
+				.moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
+            },
+            {
+				.species = SPECIES_SKARMORY,
+				.heldItem = ITEM_SITRUS_BERRY,
+				.fixedIV = 31,
+				.nature = 8,
+				.evs = {252, 0, 0, 0, 6, 252},
+				.moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
+            },
+            {
+				.species = SPECIES_AGGRON,
+				.heldItem = ITEM_SITRUS_BERRY,
+				.fixedIV = 31,
+				.nature = 3,
+				.evs = {0, 252, 0, 0, 252, 6},
+				.moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_METANG,
+				.heldItem = ITEM_SITRUS_BERRY,
+				.fixedIV = 31,
+				.nature = 2,
+				.evs = {0, 252, 252, 0, 6, 0},
+				.moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
+            },
+            {
+				.species = SPECIES_SKARMORY,
+				.heldItem = ITEM_SITRUS_BERRY,
+				.fixedIV = 31,
+				.nature = 8,
+				.evs = {252, 0, 0, 0, 6, 252},
+				.moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
+            },
+            {
+				.species = SPECIES_AGGRON,
+				.heldItem = ITEM_SITRUS_BERRY,
+				.fixedIV = 31,
+				.nature = 3,
+				.evs = {0, 252, 0, 0, 252, 6},
+				.moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
+            },
+        },
+    },
+	[FRONTIER_FACILITY_PIKE] =
+	{
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_SEVIPER,
+				.heldItem = ITEM_QUICK_CLAW,
+				.fixedIV = 16,
+				.nature = 2,
+				.evs = {252, 0, 252, 0, 6, 0},
+				.moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_POISON_FANG, MOVE_GIGA_DRAIN},
+            },
+            {
+				.species = SPECIES_SHUCKLE,
+				.heldItem = ITEM_CHESTO_BERRY,
+				.fixedIV = 16,
+				.nature = 5,
+				.evs = {252, 0, 0, 0, 106, 252},
+				.moves = {MOVE_TOXIC, MOVE_SANDSTORM, MOVE_PROTECT, MOVE_REST},
+            },
+            {
+				.species = SPECIES_MILOTIC,
+				.heldItem = ITEM_LEFTOVERS,
+				.fixedIV = 16,
+				.nature = 15,
+				.evs = {152, 0, 100, 0, 152, 106},
+				.moves = {MOVE_ICE_BEAM, MOVE_MIRROR_COAT, MOVE_SURF, MOVE_RECOVER},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_SEVIPER,
+				.heldItem = ITEM_FOCUS_BAND,
+				.fixedIV = 31,
+				.nature = 5,
+				.evs = {252, 0, 0, 0, 252, 6},
+				.moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
+            },
+            {
+				.species = SPECIES_STEELIX,
+				.heldItem = ITEM_BRIGHT_POWDER,
+				.fixedIV = 31,
+				.nature = 2,
+				.evs = {252, 0, 0, 0, 6, 252},
+				.moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_EXPLOSION, MOVE_SCREECH},
+            },
+            {
+				.species = SPECIES_GYARADOS,
+				.heldItem = ITEM_CHESTO_BERRY,
+				.fixedIV = 31,
+				.nature = 3,
+				.evs = {252, 6, 0, 0, 0, 252},
+				.moves = {MOVE_DRAGON_DANCE, MOVE_RETURN, MOVE_ROAR, MOVE_REST},
+            },
+        },
+    },
+	[FRONTIER_FACILITY_PYRAMID] =
+	{
+        // Silver Symbol.
+        {
+            {
+				.species = SPECIES_REGIROCK,
+				.heldItem = ITEM_QUICK_CLAW,
+				.fixedIV = 16,
+				.nature = 3,
+				.evs = {152, 152, 0, 0, 106, 100},
+				.moves = {MOVE_EXPLOSION, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER},
+            },
+            {
+				.species = SPECIES_REGISTEEL,
+				.heldItem = ITEM_LEFTOVERS,
+				.fixedIV = 16,
+				.nature = 3,
+				.evs = {152, 152, 0, 0, 6, 200},
+				.moves = {MOVE_EARTHQUAKE, MOVE_METAL_CLAW, MOVE_TOXIC, MOVE_IRON_DEFENSE},
+            },
+            {
+				.species = SPECIES_REGICE,
+				.heldItem = ITEM_CHESTO_BERRY,
+				.fixedIV = 16,
+				.nature = 15,
+				.evs = {106, 0, 152, 0, 100, 152},
+				.moves = {MOVE_ICE_BEAM, MOVE_AMNESIA, MOVE_THUNDER, MOVE_REST},
+            },
+        },
+        // Gold Symbol.
+        {
+            {
+				.species = SPECIES_ARTICUNO,
+				.heldItem = ITEM_SCOPE_LENS,
+				.fixedIV = 31,
+				.nature = 16,
+				.evs = {6, 0, 252, 252, 0, 0},
+				.moves = {MOVE_BLIZZARD, MOVE_WATER_PULSE, MOVE_AERIAL_ACE, MOVE_REFLECT},
+            },
+            {
+				.species = SPECIES_ZAPDOS,
+				.heldItem = ITEM_LUM_BERRY,
+				.fixedIV = 31,
+				.nature = 16,
+				.evs = {6, 0, 252, 252, 0, 0},
+				.moves = {MOVE_THUNDER, MOVE_DETECT, MOVE_DRILL_PECK, MOVE_LIGHT_SCREEN},
+            },
+            {
+				.species = SPECIES_MOLTRES,
+				.heldItem = ITEM_BRIGHT_POWDER,
+				.fixedIV = 31,
+				.nature = 16,
+				.evs = {6, 0, 252, 252, 0, 0},
+				.moves = {MOVE_FIRE_BLAST, MOVE_HYPER_BEAM, MOVE_AERIAL_ACE, MOVE_SAFEGUARD},
+            },
+        },
+    },
+};
+
+static const u8 gUnknown_086118B4[][7][4] =
+{
+    {
+        {1, 2, 3, 3}, {1, 1, 0, 0}, {4, 5, 0, 0}, {1, 0, 0, 0}, {3, 4, 0, 0}, {1, 0, 0, 0}, {5, 0, 0, 0}
+    },
+    {
+        {2, 3, 4, 4}, {1, 1, 0, 0}, {4, 5, 0, 0}, {1, 0, 0, 0}, {3, 4, 0, 0}, {1, 0, 0, 0}, {5, 0, 0, 0}
+    },
+    {
+        {3, 4, 5, 5}, {2, 2, 0, 0}, {5, 6, 0, 0}, {1, 0, 0, 0}, {4, 5, 0, 0}, {2, 0, 0, 0}, {6, 0, 0, 0}
+    },
+    {
+        {4, 5, 6, 6}, {2, 2, 0, 0}, {5, 6, 0, 0}, {2, 0, 0, 0}, {4, 5, 0, 0}, {2, 0, 0, 0}, {6, 0, 0, 0}
+    },
+    {
+        {5, 6, 7, 7}, {3, 3, 0, 0}, {6, 7, 0, 0}, {2, 0, 0, 0}, {5, 6, 0, 0}, {2, 0, 0, 0}, {7, 0, 0, 0}
+    },
+    {
+        {6, 7, 8, 8}, {3, 3, 0, 0}, {6, 7, 0, 0}, {2, 0, 0, 0}, {5, 6, 0, 0}, {4, 0, 0, 0}, {7, 0, 0, 0}
+    },
+    {
+        {7, 8, 9, 9}, {4, 4, 0, 0}, {7, 8, 0, 0}, {3, 0, 0, 0}, {6, 7, 0, 0}, {4, 0, 0, 0}, {8, 0, 0, 0}
+    },
+    {
+        {8, 9, 10, 10}, {4, 4, 0, 0}, {7, 8, 0, 0}, {3, 0, 0, 0},{6, 7, 0, 0}, {4, 0, 0, 0}, {8, 0, 0, 0}
+    },
+    {
+        {9, 10, 11, 11}, {5, 5, 0, 0}, {8, 9, 0, 0}, {4, 0, 0, 0}, {7, 8, 0, 0}, {8, 0, 0, 0}, {9, 0, 0, 0}
+    },
+    {
+        {10, 11, 12, 12}, {5, 5, 0, 0}, {8, 9, 0, 0}, {4, 0, 0, 0}, {7, 8, 0, 0}, {8, 0, 0, 0}, {9, 0, 0, 0}
+    },
+    {
+        {11, 12, 13, 13}, {6, 6, 0, 0}, {9, 10, 0, 0}, {5, 0, 0,0}, {8, 9, 0, 0}, {8, 0, 0, 0}, {10, 0, 0, 0}
+    },
+    {
+        {12, 13, 14, 14}, {6, 6, 0, 0}, {9, 10, 0, 0}, {6, 0, 0,0}, {8, 9, 0, 0}, {8, 0, 0, 0}, {10, 0, 0, 0}
+    },
+    {
+        {13, 14, 15, 15}, {7, 7, 0, 0}, {10, 11, 0, 0}, {7, 0, 0, 0}, {9, 10, 0, 0}, {10, 0, 0, 0}, {11, 0, 0, 0}
+    },
+    {
+        {14, 15, 15, 15}, {7, 7, 0, 0}, {10, 11, 0, 0}, {8, 0, 0, 0}, {9, 10, 0, 0}, {10, 0, 0, 0}, {11, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {8, 8, 0, 0}, {11, 12, 0, 0}, {9, 0, 0, 0}, {10, 11, 0, 0}, {10, 0, 0, 0}, {12, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {8, 8, 0, 0}, {11, 12, 0, 0}, {10, 0, 0, 0}, {10, 11, 0, 0}, {10, 0, 0, 0}, {12, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {9, 9, 0, 0}, {12, 13, 0, 0}, {11, 0, 0, 0}, {11, 12, 0, 0}, {12, 0, 0, 0}, {13, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {9, 9, 0, 0}, {12, 13, 0, 0}, {12, 0, 0, 0}, {11, 12, 0, 0}, {12, 0, 0, 0}, {13, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {10, 10, 0, 0}, {13, 14, 0, 0}, {13, 0, 0, 0}, {12, 13, 0, 0}, {12, 0, 0, 0}, {14, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {10, 10, 0, 0}, {13, 14, 0, 0}, {14, 0, 0, 0}, {12, 13, 0, 0}, {12, 0, 0, 0}, {14, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {11, 11, 0, 0}, {14, 15, 0, 0}, {15, 0, 0, 0}, {13, 14, 0, 0}, {12, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {11, 11, 0, 0}, {14, 15, 0, 0}, {15, 0, 0, 0}, {13, 14, 0, 0}, {14, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {12, 12, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {14, 15, 0, 0}, {14, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {12, 12, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {14, 15, 0, 0}, {14, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {13, 13, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 15, 0, 0}, {14, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {13, 13, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {14, 14, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {14, 14, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {15, 15, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 0, 0, 0}
+    },
+    {
+        {15, 15, 15, 15}, {15, 15, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 15, 0, 0}, {15, 0, 0, 0}, {15, 0, 0, 0}
+    },
+};
+
+static const u16 gUnknown_08611BFC[][2] =
+{
+    [FRONTIER_FACILITY_TOWER]   = {0x0001, 0x0002},
+	[FRONTIER_FACILITY_DOME]    = {0x0004, 0x0008},
+	[FRONTIER_FACILITY_PALACE]  = {0x0010, 0x0020},
+	[FRONTIER_FACILITY_ARENA]   = {0x0040, 0x0080},
+	[FRONTIER_FACILITY_FACTORY] = {0x0100, 0x0200},
+	[FRONTIER_FACILITY_PIKE]    = {0x0400, 0x0800},
+	[FRONTIER_FACILITY_PYRAMID] = {0x1000, 0x2000},
+};
+
+static void (* const sFrontierUtilFuncs[])(void) =
+{
+	sub_81A17A0,
+	sub_81A1830,
+	sub_81A1968,
+	sub_81A1AD4,
+	DoSoftReset_,
+	sub_81A1B28,
+	sub_81A1B38,
+	ShowFacilityResultsWindow,
+	sub_81A31FC,
+	sub_81A35EC,
+	sub_81A3B00,
+	sub_81A3B64,
+	sub_81A3D30,
+	sub_81A3D58,
+	sub_81A3DA0,
+	sub_81A3FD4,
+	sub_81A4224,
+	sub_81A4230,
+	sub_81A43A8,
+	sub_81A4410,
+	sub_81A443C,
+	sub_81A447C,
+	sub_81A457C,
+};
+
+static const struct WindowTemplate gUnknown_08611C74 =
+{
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 0x1c,
+    .height = 0x12,
+    .paletteNum = 15,
+    .baseBlock = 1
+};
+
+static const struct WindowTemplate gUnknown_08611C7C =
+{
+    .bg = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 2,
+    .width = 0x1a,
+    .height = 15,
+    .paletteNum = 15,
+    .baseBlock = 1
+};
+
+static const struct WindowTemplate gUnknown_08611C84 =
+{
+    .bg = 0,
+    .tilemapLeft = 2,
+    .tilemapTop = 1,
+    .width = 0x1a,
+    .height = 17,
+    .paletteNum = 15,
+    .baseBlock = 1
+};
+
+// Second field - whether the character is female.
+static const u8 sFacilityToBrainEventObjGfx[][2] =
+{
+    [FRONTIER_FACILITY_TOWER]   = {EVENT_OBJ_GFX_ANABEL,  TRUE},
+	[FRONTIER_FACILITY_DOME]    = {EVENT_OBJ_GFX_TUCKER,  FALSE},
+	[FRONTIER_FACILITY_PALACE]  = {EVENT_OBJ_GFX_SPENSER, FALSE},
+	[FRONTIER_FACILITY_ARENA]   = {EVENT_OBJ_GFX_GRETA,   TRUE},
+	[FRONTIER_FACILITY_FACTORY] = {EVENT_OBJ_GFX_NOLAND,  FALSE},
+	[FRONTIER_FACILITY_PIKE]    = {EVENT_OBJ_GFX_LUCY,    TRUE},
+	[FRONTIER_FACILITY_PYRAMID] = {EVENT_OBJ_GFX_BRANDON, FALSE},
+};
+
+const u16 gFrontierBannedSpecies[] =
+{
+    SPECIES_MEW, SPECIES_MEWTWO, SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
+    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
+};
+
+// code
+void CallFrontierUtilFunc(void)
+{
+    sFrontierUtilFuncs[gSpecialVar_0x8004]();
 }
 
-void sub_81A17A0(void)
+static void sub_81A17A0(void)
 {
     VarSet(VAR_TEMP_0, 0xFF);
     switch (gSaveBlock2Ptr->frontier.field_CA8)
@@ -107,10 +721,10 @@ void sub_81A17A0(void)
     }
 }
 
-void sub_81A1830(void)
+static void sub_81A1830(void)
 {
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
-    u8 currSymbol = sub_81A3B30(facility);
+    u8 currSymbol = GetPlayerSymbolCountForFacility(facility);
     if (currSymbol == 2)
         currSymbol = 1;
 
@@ -141,11 +755,11 @@ void sub_81A1830(void)
     }
 }
 
-void sub_81A1968(void)
+static void sub_81A1968(void)
 {
     s32 i;
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
-    u8 currSymbol = sub_81A3B30(facility);
+    u8 currSymbol = GetPlayerSymbolCountForFacility(facility);
     if (currSymbol == 2)
         currSymbol = 1;
 
@@ -176,7 +790,7 @@ void sub_81A1968(void)
     }
 }
 
-void sub_81A1AD4(void)
+static void sub_81A1AD4(void)
 {
     s32 i;
 
@@ -186,17 +800,17 @@ void sub_81A1AD4(void)
     ReducePlayerPartyToThree();
 }
 
-void sub_81A1B1C(void)
+static void DoSoftReset_(void)
 {
     DoSoftReset();
 }
 
-void sub_81A1B28(void)
+static void sub_81A1B28(void)
 {
     gFacilityTrainers = gBattleFrontierTrainers;
 }
 
-void sub_81A1B38(void)
+static void sub_81A1B38(void)
 {
     u8 i;
 
@@ -208,7 +822,7 @@ void sub_81A1B38(void)
     }
 }
 
-void sub_81A1B98(void)
+static void ShowFacilityResultsWindow(void)
 {
     if (gSpecialVar_0x8006 > 3)
         gSpecialVar_0x8006 = 0;
@@ -249,7 +863,7 @@ static bool8 sub_81A1C24(u32 flags)
         return FALSE;
 }
 
-static void sub_81A1C4C(const u8 *str, s32 y)
+static void PrintAligned(const u8 *str, s32 y)
 {
     s32 x = GetStringCenterAlignXOffset(1, str, 0xE0);
     y = (y * 8) + 1;
@@ -348,7 +962,7 @@ static void ShowTowerResultsWindow(u8 battleMode)
     else
         StringExpandPlaceholders(gStringVar4, gText_LinkMultiBattleRoomResults);
 
-    sub_81A1C4C(gStringVar4, 2);
+    PrintAligned(gStringVar4, 2);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 16, 49, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 16, 97, TEXT_SPEED_FF, NULL);
     PrintHyphens(10);
@@ -415,7 +1029,7 @@ static void ShowDomeResultsWindow(u8 battleMode)
     else
         StringExpandPlaceholders(gStringVar4, gText_DoubleBattleTourneyResults);
 
-    sub_81A1C4C(gStringVar4, 0);
+    PrintAligned(gStringVar4, 0);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 33, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 8, 97, TEXT_SPEED_FF, NULL);
     PrintHyphens(10);
@@ -491,7 +1105,7 @@ static void ShowPalaceResultsWindow(u8 battleMode)
     else
         StringExpandPlaceholders(gStringVar4, gText_DoubleBattleHallResults);
 
-    sub_81A1C4C(gStringVar4, 2);
+    PrintAligned(gStringVar4, 2);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 16, 49, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 16, 97, TEXT_SPEED_FF, NULL);
     PrintHyphens(10);
@@ -543,7 +1157,7 @@ static void ShowPikeResultsWindow(void)
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
-    sub_81A1C4C(gStringVar4, 0);
+    PrintAligned(gStringVar4, 0);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 33, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 8, 97, TEXT_SPEED_FF, NULL);
     PrintHyphens(10);
@@ -606,7 +1220,7 @@ static void ShowArenaResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
     PrintHyphens(10);
     StringExpandPlaceholders(gStringVar4, gText_SetKOTourneyResults);
-    sub_81A1C4C(gStringVar4, 2);
+    PrintAligned(gStringVar4, 2);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 16, 49, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 16, 97, TEXT_SPEED_FF, NULL);
     ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 72, 126, 49);
@@ -695,7 +1309,7 @@ static void ShowFactoryResultsWindow(u8 battleMode)
     else
         StringExpandPlaceholders(gStringVar4, gText_BattleSwapDoubleResults);
 
-    sub_81A1C4C(gStringVar4, 0);
+    PrintAligned(gStringVar4, 0);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 33, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_RentalSwap, 152, 33, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 8, 97, TEXT_SPEED_FF, NULL);
@@ -756,7 +1370,7 @@ static void ShowPyramidResultsWindow(void)
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
-    sub_81A1C4C(gStringVar4, 2);
+    PrintAligned(gStringVar4, 2);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 49, TEXT_SPEED_FF, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_OpenLv, 8, 97, TEXT_SPEED_FF, NULL);
     PrintHyphens(10);
@@ -819,7 +1433,7 @@ static void ShowLinkContestResultsWindow(void)
     CopyWindowToVram(gRecordsWindowId, 3);
 }
 
-void sub_81A31FC(void)
+static void sub_81A31FC(void)
 {
     u8 text[32];
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -837,7 +1451,7 @@ void sub_81A31FC(void)
                 StringCopy(text, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
                 StripExtCtrlCodes(text);
                 StringCopy(gSaveBlock2Ptr->frontier.field_EE1[lvlMode], text);
-                WriteUnalignedWord(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.field_EF1[lvlMode]);
+                SetTrainerId(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.field_EF1[lvlMode]);
             }
             if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] > 1
                 && sub_80EE818())
@@ -939,7 +1553,7 @@ void sub_81A31FC(void)
     }
 }
 
-void sub_81A35EC(void)
+static void sub_81A35EC(void)
 {
     VarGet(VAR_FRONTIER_FACILITY); // Unused return value.
     gSpecialVar_Result = sub_81A3610();
@@ -957,7 +1571,7 @@ u8 sub_81A3610(void)
     if (battleMode != FRONTIER_MODE_SINGLES)
         return 0;
 
-    symbolsCount = sub_81A3B30(facility);
+    symbolsCount = GetPlayerSymbolCountForFacility(facility);
     switch (symbolsCount)
     {
     case 0:
@@ -1123,7 +1737,7 @@ void sub_81A3ACC(void)
         gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
 }
 
-void sub_81A3B00(void)
+static void sub_81A3B00(void)
 {
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
         gSpecialVar_Result = TRUE;
@@ -1131,13 +1745,13 @@ void sub_81A3B00(void)
         gSpecialVar_Result = FALSE;
 }
 
-u8 sub_81A3B30(u8 facility)
+u8 GetPlayerSymbolCountForFacility(u8 facility)
 {
     return FlagGet(FLAG_SYS_TOWER_SILVER + facility * 2)
          + FlagGet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
-void sub_81A3B64(void)
+static void sub_81A3B64(void)
 {
     s32 challengeNum = 0;
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -1172,8 +1786,8 @@ void sub_81A3B64(void)
 
     if (challengeNum != 0)
         challengeNum--;
-    if (challengeNum > ARRAY_COUNT(gUnknown_086118B4))
-        challengeNum = ARRAY_COUNT(gUnknown_086118B4);
+    if (challengeNum >= ARRAY_COUNT(gUnknown_086118B4))
+        challengeNum = ARRAY_COUNT(gUnknown_086118B4) - 1;
 
     points = gUnknown_086118B4[challengeNum][facility][battleMode];
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
@@ -1196,22 +1810,22 @@ void sub_81A3B64(void)
     gSaveBlock2Ptr->frontier.field_EBA = points;
 }
 
-void sub_81A3D30(void)
+static void sub_81A3D30(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    gSpecialVar_Result = sub_81A3B30(facility);
+    gSpecialVar_Result = GetPlayerSymbolCountForFacility(facility);
 }
 
-void sub_81A3D58(void)
+static void sub_81A3D58(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    if (sub_81A3B30(facility) == 0)
+    if (GetPlayerSymbolCountForFacility(facility) == 0)
         FlagSet(FLAG_SYS_TOWER_SILVER + facility * 2);
     else
         FlagSet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
-void sub_81A3DA0(void)
+static void sub_81A3DA0(void)
 {
     if (gBattleTypeFlags & gSpecialVar_0x8005)
         gSpecialVar_Result = TRUE;
@@ -1265,10 +1879,10 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    for (i = 0; gUnknown_08611C9A[i] != 0xFFFF && gUnknown_08611C9A[i] != species; i++)
+    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != species; i++)
         ;
 
-    if (gUnknown_08611C9A[i] != 0xFFFF)
+    if (gFrontierBannedSpecies[i] != 0xFFFF)
         return;
     if (lvlMode == FRONTIER_LVL_50 && monLevel > 50)
         return;
@@ -1291,7 +1905,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     (*count)++;
 }
 
-void sub_81A3FD4(void)
+static void sub_81A3FD4(void)
 {
     u16 speciesArray[6];
     u16 itemArray[6];
@@ -1350,8 +1964,8 @@ void sub_81A3FD4(void)
     {
         s32 i;
         s32 caughtBannedMons = 0;
-        s32 species = gUnknown_08611C9A[0];
-        for (i = 0; species != 0xFFFF; i++, species = gUnknown_08611C9A[i])
+        s32 species = gFrontierBannedSpecies[0];
+        for (i = 0; species != 0xFFFF; i++, species = gFrontierBannedSpecies[i])
         {
             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
                 caughtBannedMons++;
@@ -1359,8 +1973,8 @@ void sub_81A3FD4(void)
         gStringVar1[0] = EOS;
         gSpecialVar_0x8004 = 1;
         count = 0;
-        for (i = 0; gUnknown_08611C9A[i] != 0xFFFF; i++)
-            count = sub_81A3DD0(gUnknown_08611C9A[i], count, caughtBannedMons);
+        for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+            count = sub_81A3DD0(gFrontierBannedSpecies[i], count, caughtBannedMons);
 
         if (count == 0)
         {
@@ -1383,12 +1997,12 @@ void sub_81A3FD4(void)
     }
 }
 
-void sub_81A4224(void)
+static void sub_81A4224(void)
 {
     ValidateEReaderTrainer();
 }
 
-void sub_81A4230(void)
+static void sub_81A4230(void)
 {
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1436,7 +2050,7 @@ void sub_81A4230(void)
     }
 }
 
-void sub_81A43A8(void)
+static void sub_81A43A8(void)
 {
     u8 i;
 
@@ -1450,13 +2064,13 @@ void sub_81A43A8(void)
     }
 }
 
-void sub_81A4410(void)
+static void sub_81A4410(void)
 {
     gSpecialVar_Result = MoveRecordedBattleToSaveData();
     gSaveBlock2Ptr->frontier.field_CA9_b = 1;
 }
 
-void sub_81A443C(void)
+static void sub_81A443C(void)
 {
     switch (gSpecialVar_0x8005)
     {
@@ -1469,7 +2083,7 @@ void sub_81A443C(void)
     }
 }
 
-void sub_81A447C(void)
+static void sub_81A447C(void)
 {
     u8 i, j, k;
 
@@ -1494,9 +2108,9 @@ void sub_81A447C(void)
     }
 }
 
-void sub_81A457C(void)
+static void sub_81A457C(void)
 {
-    sub_81A5030(VarGet(VAR_FRONTIER_FACILITY));
+    SetFrontierBrainEventObjGfx(VarGet(VAR_FRONTIER_FACILITY));
 }
 
 // Battle Frontier Ranking Hall records.
@@ -1670,7 +2284,7 @@ void ClearnRankingHallRecords(void)
         {
             for (k = 0; k < 3; k++)
             {
-                CopyUnalignedWord(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+                CopyTrainerId(gSaveBlock2Ptr->hallRecords1P[i][j][k].id, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
                 gSaveBlock2Ptr->hallRecords1P[i][j][k].name[0] = EOS;
                 gSaveBlock2Ptr->hallRecords1P[i][j][k].winStreak = 0;
             }
@@ -1681,8 +2295,8 @@ void ClearnRankingHallRecords(void)
     {
         for (k = 0; k < 3; k++)
         {
-            CopyUnalignedWord(gSaveBlock2Ptr->hallRecords2P[j][k].id1, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
-            CopyUnalignedWord(gSaveBlock2Ptr->hallRecords2P[j][k].id2, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id1, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
+            CopyTrainerId(gSaveBlock2Ptr->hallRecords2P[j][k].id2, 0); // BUG: Passing 0 as a pointer instead of a pointer holding a value of 0.
             gSaveBlock2Ptr->hallRecords2P[j][k].name1[0] = EOS;
             gSaveBlock2Ptr->hallRecords2P[j][k].name2[0] = EOS;
             gSaveBlock2Ptr->hallRecords2P[j][k].winStreak = 0;
@@ -1711,9 +2325,7 @@ void sub_81A4C30(void)
     free(monsParty);
 }
 
-extern const u16 gFacilityToBrainTrainerId[];
-extern const u8 gUnknown_08611C8C[][2];
-
+// Frontier Brain functions.
 u8 GetFrontierBrainTrainerPicIndex(void)
 {
     s32 facility;
@@ -1757,28 +2369,16 @@ void CopyFrontierBrainTrainerName(u8 *dst)
 bool8 IsFrontierBrainFemale(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    return gUnknown_08611C8C[facility][1];
+    return sFacilityToBrainEventObjGfx[facility][1];
 }
 
-void SetFrontierBrainTrainerGfxId(void)
+void SetFrontierBrainEventObjGfx_2(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    VarSet(VAR_OBJ_GFX_ID_0, gUnknown_08611C8C[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
 }
 
 #define FRONTIER_BRAIN_OTID 61226
-
-struct FrontierBrainMon
-{
-    u16 species;
-    u16 heldItem;
-    u8 fixedIV;
-    u8 nature;
-    u8 evs[6];
-    u16 moves[4];
-};
-
-extern const struct FrontierBrainMon sFrontierBrainsMons[][2][3];
 
 #ifdef NONMATCHING
 void CreateFrontierBrainPokemon(void)
@@ -1792,7 +2392,7 @@ void CreateFrontierBrainPokemon(void)
     s32 symbol = GetFronterBrainSymbol();
 
     if (facility == FRONTIER_FACILITY_DOME)
-        monCountInBits = GetTrainerMonCountInBits(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
+        monCountInBits = GetDomeTrainerMonCountInBits(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
     else
         monCountInBits = 7;
 
@@ -1854,7 +2454,7 @@ void CreateFrontierBrainPokemon(void)
 	bl TrainerIdToDomeTournamentId\n\
 	lsls r0, 16\n\
 	lsrs r0, 16\n\
-	bl GetTrainerMonCountInBits\n\
+	bl GetDomeTrainerMonCountInBits\n\
 	adds r4, r0, 0\n\
 	b _081A4E46\n\
 	.pool\n\
@@ -1998,7 +2598,7 @@ _081A4F32:\n\
 	movs r2, 0x64\n\
 	adds r6, r1, 0\n\
 	muls r6, r2\n\
-	ldr r3, =gUnknown_08611578\n\
+	ldr r3, =sFrontierBrainsMons + 0xC\n\
 	mov r8, r3\n\
 	ldr r3, =gEnemyParty\n\
 	adds r5, r4, 0\n\
@@ -2067,21 +2667,21 @@ _081A4FD0:\n\
 }
 #endif
 
-u16 sub_81A4FF0(u8 monPartyId)
+u16 GetFrontierBrainMonSpecies(u8 monId)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
 
-    return sFrontierBrainsMons[facility][symbol][monPartyId].species;
+    return sFrontierBrainsMons[facility][symbol][monId].species;
 }
 
-void sub_81A5030(u8 facility)
+void SetFrontierBrainEventObjGfx(u8 facility)
 {
     gTrainerBattleOpponent_A = TRAINER_FRONTIER_BRAIN;
-    VarSet(VAR_OBJ_GFX_ID_0, gUnknown_08611C8C[facility][0]);
+    VarSet(VAR_OBJ_GFX_ID_0, sFacilityToBrainEventObjGfx[facility][0]);
 }
 
-u16 sub_81A5060(u8 monId, u8 moveSlotId)
+u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
@@ -2089,15 +2689,15 @@ u16 sub_81A5060(u8 monId, u8 moveSlotId)
     return sFrontierBrainsMons[facility][symbol][monId].moves[moveSlotId];
 }
 
-u8 sub_81A50B0(u8 monPartyId)
+u8 GetFrontierBrainMonNature(u8 monId)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
 
-    return sFrontierBrainsMons[facility][symbol][monPartyId].nature;
+    return sFrontierBrainsMons[facility][symbol][monId].nature;
 }
 
-u8 sub_81A50F0(u8 monId, u8 evStatId)
+u8 GetFrontierBrainMonEvs(u8 monId, u8 evStatId)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
@@ -2108,7 +2708,7 @@ u8 sub_81A50F0(u8 monId, u8 evStatId)
 s32 GetFronterBrainSymbol(void)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = sub_81A3B30(facility);
+    s32 symbol = GetPlayerSymbolCountForFacility(facility);
 
     if (symbol == 2)
     {
@@ -2123,9 +2723,6 @@ s32 GetFronterBrainSymbol(void)
     }
     return symbol;
 }
-
-extern const u8 *const *const gUnknown_08611DB0[];
-extern const u8 *const *const gUnknown_08611DB8[];
 
 static void CopyFrontierBrainText(bool8 playerWonText)
 {

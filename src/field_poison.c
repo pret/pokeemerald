@@ -14,6 +14,8 @@
 #include "fldeff_80F9BCC.h"
 #include "field_poison.h"
 
+extern bool8 InBattlePike(void);
+
 static bool32 sub_80F9568(struct Pokemon *pokemon)
 {
     u16 species = GetMonData(pokemon, MON_DATA_SPECIES2);

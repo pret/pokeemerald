@@ -9,7 +9,6 @@
 #include "main.h"
 #include "international_string_util.h"
 #include "battle.h"
-#include "battle_frontier_1.h"
 #include "frontier_util.h"
 #include "recorded_battle.h"
 #include "easy_chat.h"
@@ -30,14 +29,9 @@
 
 extern u16 gUnknown_03006298[];
 
-extern void sub_81A3ACC(void);
-extern void CreateFrontierBrainPokemon(void);
 extern void sub_81A6CD0(void);
-extern void SetFrontierBrainTrainerGfxId(void);
-extern u8 GetFrontierBrainTrainerPicIndex(void);
-extern u8 GetFrontierBrainTrainerClass(void);
-extern u8 IsFrontierBrainFemale(void);
-extern void CopyFrontierBrainTrainerName(u8 *dst);
+extern void sub_81A4C30(void);
+extern u8 sub_81A6CA8(u8, u8);
 extern void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 move, u8 moveSlot);
 
 extern const u8 *const *const gUnknown_085DD690[];
@@ -525,7 +519,7 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        SetFrontierBrainTrainerGfxId();
+        SetFrontierBrainEventObjGfx_2();
         return;
     }
     else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
@@ -1509,7 +1503,7 @@ static void sub_8163EE4(void)
     }
     playerRecord->lvlMode = lvlMode;
     playerRecord->facilityClass = class;
-    CopyUnalignedWord(playerRecord->trainerId, gSaveBlock2Ptr->playerTrainerId);
+    CopyTrainerId(playerRecord->trainerId, gSaveBlock2Ptr->playerTrainerId);
     StringCopy7(playerRecord->name, gSaveBlock2Ptr->playerName);
     playerRecord->winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
 
@@ -2165,7 +2159,7 @@ static void FillEReaderTrainerWithPlayerData(void)
                                                         + gSaveBlock2Ptr->playerTrainerId[2] + gSaveBlock2Ptr->playerTrainerId[3]) % ARRAY_COUNT(gTowerMaleFacilityClasses)];
     }
 
-    CopyUnalignedWord(ereaderTrainer->trainerId, gSaveBlock2Ptr->playerTrainerId);
+    CopyTrainerId(ereaderTrainer->trainerId, gSaveBlock2Ptr->playerTrainerId);
     StringCopy7(ereaderTrainer->name, gSaveBlock2Ptr->playerName);
 
     ereaderTrainer->winStreak = 1;

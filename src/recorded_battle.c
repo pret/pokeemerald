@@ -19,13 +19,10 @@
 
 #define BATTLER_RECORD_SIZE 664
 #define ILLEGAL_BATTLE_TYPES ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
-                              | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER   \
-                              | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI           \
-                              | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE           \
+                              | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER    \
+                              | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI            \
+                              | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE        \
                               | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
-
-extern u8 gUnknown_03001278;
-extern u8 gUnknown_03001279;
 
 struct PlayerInfo
 {
@@ -100,6 +97,9 @@ EWRAM_DATA static u8 sRecordMixFriendClass = 0;
 EWRAM_DATA static u8 sApprenticeId = 0;
 EWRAM_DATA static u16 sEasyChatSpeech[6] = {0};
 EWRAM_DATA static u8 sBattleOutcome = 0;
+
+IWRAM_DATA static u8 sRecordMixFriendLanguage;
+IWRAM_DATA static u8 sApprenticeLanguage;
 
 // this file's functions
 static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2);
@@ -586,8 +586,8 @@ static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 
     sRecordMixFriendClass = src->recordMixFriendClass;
     sApprenticeId = src->apprenticeId;
-    gUnknown_03001278 = src->recordMixFriendLanguage;
-    gUnknown_03001279 = src->apprenticeLanguage;
+    sRecordMixFriendLanguage = src->recordMixFriendLanguage;
+    sApprenticeLanguage = src->apprenticeLanguage;
 
     for (i = 0; i < 6; i++)
     {
@@ -852,7 +852,7 @@ void sub_8186468(u8 *dst)
         dst[i] = sRecordMixFriendName[i];
 
     dst[7] = EOS;
-    ConvertInternationalString(dst, gUnknown_03001278);
+    ConvertInternationalString(dst, sRecordMixFriendLanguage);
 }
 
 u8 GetRecordedBattleRecordMixFriendClass(void)
@@ -867,12 +867,12 @@ u8 GetRecordedBattleApprenticeId(void)
 
 u8 GetRecordedBattleRecordMixFriendLanguage(void)
 {
-    return gUnknown_03001278;
+    return sRecordMixFriendLanguage;
 }
 
 u8 GetRecordedBattleApprenticeLanguage(void)
 {
-    return gUnknown_03001279;
+    return sApprenticeLanguage;
 }
 
 void RecordedBattle_SaveBattleOutcome(void)

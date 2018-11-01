@@ -14,6 +14,8 @@
 #include "secret_base.h"
 #include "tv.h"
 
+extern void sub_81AA078(u16*, u8);
+
 struct ConnectionFlags
 {
     u8 south:1;

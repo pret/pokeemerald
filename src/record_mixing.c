@@ -1557,12 +1557,12 @@ static void sub_80E8110(struct Apprentice *dst, struct Apprentice *src)
         id = ((i + gSaveBlock2Ptr->playerApprentice.field_B2_1) % 3) + 1;
         if (src[id].playerName[0] != EOS)
         {
-            if (ReadUnalignedWord(src[id].playerId) != ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
+            if (GetTrainerId(src[id].playerId) != GetTrainerId(gSaveBlock2Ptr->playerTrainerId))
             {
                 r8++;
                 var_2C = id;
             }
-            if (ReadUnalignedWord(src[id].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId))
+            if (GetTrainerId(src[id].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId))
             {
                 var_24++;
                 var_28 = id;
@@ -1602,7 +1602,7 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
     {
         for (j = 0; j < 2; j++)
         {
-            CopyUnalignedWord(dst->onePlayer[i][j].id, gSaveBlock2Ptr->playerTrainerId);
+            CopyTrainerId(dst->onePlayer[i][j].id, gSaveBlock2Ptr->playerTrainerId);
             dst->onePlayer[i][j].language = GAME_LANGUAGE;
             StringCopy(dst->onePlayer[i][j].name, gSaveBlock2Ptr->playerName);
         }
@@ -1611,8 +1611,8 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
     for (j = 0; j < 2; j++)
     {
         dst->twoPlayers[j].language = GAME_LANGUAGE;
-        CopyUnalignedWord(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
-        CopyUnalignedWord(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.field_EF1[j]);
+        CopyTrainerId(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
+        CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.field_EF1[j]);
         StringCopy(dst->twoPlayers[j].name1, gSaveBlock2Ptr->playerName);
         StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.field_EE1[j]);
     }
@@ -1639,7 +1639,7 @@ static bool32 sub_80E841C(struct Apprentice *arg0, struct Apprentice *arg1)
 
     for (i = 0; i < 4; i++)
     {
-        if (ReadUnalignedWord(arg0->playerId) == ReadUnalignedWord(arg1[i].playerId)
+        if (GetTrainerId(arg0->playerId) == GetTrainerId(arg1[i].playerId)
             && arg0->number == arg1[i].number)
         {
             return TRUE;
@@ -1821,13 +1821,13 @@ _080E8666:\n\
 	ldr r6, [sp, 0x1C]\n\
 	adds r0, r6, r0\n\
 	str r3, [sp, 0x4C]\n\
-	bl ReadUnalignedWord\n\
+	bl GetTrainerId\n\
 	adds r4, r0, 0\n\
 	ldr r1, [sp, 0x50]\n\
 	ldr r0, [r1]\n\
 	add r0, r9\n\
 	adds r0, r7\n\
-	bl ReadUnalignedWord\n\
+	bl GetTrainerId\n\
 	ldr r3, [sp, 0x4C]\n\
 	cmp r4, r0\n\
 	bne _080E86A8\n\
@@ -1983,7 +1983,7 @@ _080E878E:\n\
 	adds r5, r0, r6\n\
 	adds r0, r5, 0\n\
 	str r3, [sp, 0x4C]\n\
-	bl ReadUnalignedWord\n\
+	bl GetTrainerId\n\
 	adds r4, r0, 0\n\
 	movs r6, 0x90\n\
 	lsls r6, 1\n\
@@ -1991,18 +1991,18 @@ _080E878E:\n\
 	mov r1, r9\n\
 	ldr r0, [r1]\n\
 	adds r0, r6\n\
-	bl ReadUnalignedWord\n\
+	bl GetTrainerId\n\
 	ldr r3, [sp, 0x4C]\n\
 	cmp r4, r0\n\
 	bne _080E8808\n\
 	adds r0, r5, 0x4\n\
-	bl ReadUnalignedWord\n\
+	bl GetTrainerId\n\
 	adds r4, r0, 0\n\
 	mov r2, r9\n\
 	ldr r0, [r2]\n\
 	adds r0, r6\n\
 	adds r0, 0x4\n\
-	bl ReadUnalignedWord\n\
+	bl GetTrainerId\n\
 	ldr r3, [sp, 0x4C]\n\
 	cmp r4, r0\n\
 	bne _080E8808\n\

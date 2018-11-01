@@ -35,6 +35,8 @@
 #include "field_player_avatar.h"
 #include "battle_pyramid_bag.h"
 
+extern bool8 InBattlePike(void);
+
 // Menu actions
 enum
 {

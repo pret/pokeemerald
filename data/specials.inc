@@ -242,7 +242,7 @@ gSpecials:: @ 81DBA64
 	def_special FinishCyclingRoadChallenge
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
-	def_special sub_81A1780
+	def_special CallFrontierUtilFunc
 	def_special sub_8161F74
 	def_special CallBattleDomeFunction
 	def_special sub_8195960

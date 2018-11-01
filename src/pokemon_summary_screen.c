@@ -45,6 +45,8 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
+extern bool8 sub_81A6BF4(void);
+
 static EWRAM_DATA struct UnkSummaryStruct
 {
     /*0x00*/ union {

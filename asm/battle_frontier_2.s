@@ -3664,7 +3664,7 @@ _081A7108:
 	b _081A70D6
 _081A710E:
 	movs r0, 0x5
-	bl sub_81A5030
+	bl SetFrontierBrainEventObjGfx
 _081A7114:
 	movs r7, 0x1C
 	movs r4, 0
@@ -6227,7 +6227,7 @@ sub_81A8590: @ 81A8590
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x5
-	bl sub_81A3B30
+	bl GetPlayerSymbolCountForFacility
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0

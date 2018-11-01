@@ -2238,7 +2238,7 @@ static void sub_81A1370(void)
     r9 = -1;
     for (i = 1; i < 4; i++)
     {
-        if (ReadUnalignedWord(gSaveBlock2Ptr->apprentices[i].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId)
+        if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)
             && gSaveBlock2Ptr->apprentices[i].number < r10)
         {
             r10 = gSaveBlock2Ptr->apprentices[i].number;

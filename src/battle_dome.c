@@ -57,12 +57,12 @@ struct UnkStruct_860DD10
 };
 
 extern void sub_81B8558(void);
-extern u16 sub_81A5060(u8 monId, u8 moveSlotId);
-extern u8 sub_81A50F0(u8, u8);
-extern u8 sub_81A50B0(u8);
+extern u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
+extern u8 GetFrontierBrainMonEvs(u8, u8);
+extern u8 GetFrontierBrainMonNature(u8);
 extern void sub_81A4C30(void);
 extern u8 sub_81A3610(void);
-extern u16 sub_81A4FF0(u8);
+extern u16 GetFrontierBrainMonSpecies(u8);
 extern void ReducePlayerPartyToThree(void);
 
 extern u8 gUnknown_0203CEF8[];
@@ -2737,7 +2737,7 @@ static void InitDomeTrainers(void)
         }
 
         for (i = 0; i < 3; i++)
-            gSaveBlock2Ptr->frontier.domeMonIds[j][i] = sub_81A4FF0(i);
+            gSaveBlock2Ptr->frontier.domeMonIds[j][i] = GetFrontierBrainMonSpecies(i);
     }
 
     Free(statSums);
@@ -2856,7 +2856,7 @@ static void CreateDomeTrainerMons(u16 tournamentTrainerId)
     s32 i, bits;
 
     ZeroEnemyPartyMons();
-    bits = GetTrainerMonCountInBits(tournamentTrainerId);
+    bits = GetDomeTrainerMonCountInBits(tournamentTrainerId);
     otId = Random32();
     if (Random() % 10 > 5)
     {
@@ -2884,7 +2884,7 @@ static void CreateDomeTrainerMons(u16 tournamentTrainerId)
     }
 }
 
-s32 GetTrainerMonCountInBits(u16 tournamentTrainerId)
+s32 GetDomeTrainerMonCountInBits(u16 tournamentTrainerId)
 {
     s32 bits;
     if (Random() & 1)
@@ -2917,7 +2917,7 @@ static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
             {
                 if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
-                    array[i] += GetTypeEffectivenessPoints(sub_81A5060(i, moveId),
+                    array[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveId),
                                             GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 0);
                 }
                 else
@@ -2945,7 +2945,7 @@ static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
             {
                 if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
-                    array[i] += GetTypeEffectivenessPoints(sub_81A5060(i, moveId),
+                    array[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveId),
                                             GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), 1);
                 }
                 else
@@ -4875,7 +4875,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             for (k = 0; k < DOME_TOURNAMENT_TRAINERS_COUNT; k++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    allocatedArray[k] += sMovePointsForDomeTrainers[sub_81A5060(i, j)][k];
+                    allocatedArray[k] += sMovePointsForDomeTrainers[GetFrontierBrainMonMove(i, j)][k];
                 else if (trainerId == TRAINER_PLAYER)
                     allocatedArray[k] += sMovePointsForDomeTrainers[gSaveBlock2Ptr->frontier.field_EFC[i].moves[j]][k];
                 else
@@ -4916,7 +4916,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             for (j = 0; j < 6; j++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    allocatedArray[j] = sub_81A50F0(i, j);
+                    allocatedArray[j] = GetFrontierBrainMonEvs(i, j);
                 else
                     allocatedArray[j] = gSaveBlock2Ptr->frontier.field_EFC[i].evs[j];
             }
@@ -4924,7 +4924,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             for (j = 0; j < 5; j++)
             {
                 if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    nature = sub_81A50B0(i);
+                    nature = GetFrontierBrainMonNature(i);
                 else
                     nature = gSaveBlock2Ptr->frontier.field_EFC[i].nature;
 
@@ -5564,7 +5564,7 @@ static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roun
         {
             moveScores[i * 4 + j] = 0;
             if (gSaveBlock2Ptr->frontier.domeTrainers[winnerTournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                moveIds[i * 4 + j] = sub_81A5060(i, j);
+                moveIds[i * 4 + j] = GetFrontierBrainMonMove(i, j);
             else
                 moveIds[i * 4 + j] = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[winnerTournamentId][i]].moves[j];
 
