@@ -769,14 +769,14 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            return gFacilityClassToPicIndex[sub_818649C()];
+            return gFacilityClassToPicIndex[GetRecordedBattleRecordMixFriendClass()];
         else
             return gFacilityClassToPicIndex[gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].facilityClass];
     }
     else
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            return gFacilityClassToPicIndex[gApprentices[sub_81864A8()].facilityClass];
+            return gFacilityClassToPicIndex[gApprentices[GetRecordedBattleApprenticeId()].facilityClass];
         else
             return gFacilityClassToPicIndex[gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass];
     }
@@ -807,7 +807,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            trainerClass = gFacilityClassToTrainerClass[sub_818649C()];
+            trainerClass = gFacilityClassToTrainerClass[GetRecordedBattleRecordMixFriendClass()];
         }
         else
         {
@@ -819,7 +819,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            trainerClass = gFacilityClassToTrainerClass[gApprentices[sub_81864A8()].facilityClass];
+            trainerClass = gFacilityClassToTrainerClass[gApprentices[GetRecordedBattleApprenticeId()].facilityClass];
         }
         else
         {
@@ -847,14 +847,14 @@ static u8 GetFrontierTrainerFacilityClass(u16 trainerId)
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            facilityClass = sub_818649C();
+            facilityClass = GetRecordedBattleRecordMixFriendClass();
         else
             facilityClass = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].facilityClass;
     }
     else
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            facilityClass = gApprentices[sub_81864A8()].facilityClass;
+            facilityClass = gApprentices[GetRecordedBattleApprenticeId()].facilityClass;
         else
             facilityClass = gApprentices[gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].id].facilityClass;
     }
@@ -907,8 +907,8 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            id = sub_81864A8();
-            language = sub_81864C0();
+            id = GetRecordedBattleApprenticeId();
+            language = GetRecordedBattleApprenticeLanguage();
         }
         else
         {
@@ -1297,7 +1297,7 @@ static void HandleSpecialTrainerBattleEnd(void)
 {
     s32 i;
 
-    sub_81864CC();
+    RecordedBattle_SaveBattleOutcome();
     switch (gBattleScripting.specialTrainerBattleType)
     {
     case SPECIAL_BATTLE_TOWER:
@@ -2527,14 +2527,14 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
     else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            *dst = sub_81864B4();
+            *dst = GetRecordedBattleRecordMixFriendLanguage();
         else
             *dst = gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].language;
     }
     else
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            *dst = sub_81864C0();
+            *dst = GetRecordedBattleApprenticeLanguage();
         else
             *dst = gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }

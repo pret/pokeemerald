@@ -18,5 +18,6 @@ u8 sub_81A6CA8(u8, u8);
 void sub_81A3908(void);
 u32 GetCurrentFacilityWinStreak(void);
 void ClearnRankingHallRecords(void);
+s32 GetFronterBrainSymbol(void);
 
 #endif // GUARD_FRONTIER_UTIL_H

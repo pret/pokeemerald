@@ -61,7 +61,7 @@ static void ShowArenaResultsWindow(void);
 static void ShowPyramidResultsWindow(void);
 static void ShowLinkContestResultsWindow(void);
 u8 sub_81A3610(void);
-void sub_81A51A8(u8);
+static void CopyFrontierBrainText(bool8 playerWonText);
 void sub_81A5030(u8);
 
 // const rom data
@@ -987,7 +987,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         if (trainerId == TRAINER_EREADER)
             FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            sub_81A51A8(0);
+            CopyFrontierBrainText(FALSE);
         else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
             FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
@@ -1002,7 +1002,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
-            sub_81A51A8(0);
+            CopyFrontierBrainText(FALSE);
         }
         else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
         {
@@ -1011,14 +1011,14 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-                FrontierSpeechToString(sub_81864E0());
+                FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
             else
                 FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].speechWon);
         }
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-                FrontierSpeechToString(sub_81864E0());
+                FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
             else
                 FrontierSpeechToString(gSaveBlock2Ptr->apprentices[trainerId - TRAINER_RECORD_MIXING_APPRENTICE].easyChatWords);
         }
@@ -1030,7 +1030,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
-            sub_81A51A8(1);
+            CopyFrontierBrainText(TRUE);
         }
         else if (trainerId < TRAINER_RECORD_MIXING_FRIEND)
         {
@@ -1039,7 +1039,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         else if (trainerId < TRAINER_RECORD_MIXING_APPRENTICE)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-                FrontierSpeechToString(sub_81864E0());
+                FrontierSpeechToString(GetRecordedBattleEasyChatSpeech());
             else
                 FrontierSpeechToString(gSaveBlock2Ptr->frontier.towerRecords[trainerId - TRAINER_RECORD_MIXING_FRIEND].speechLost);
         }
@@ -1047,7 +1047,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             {
-                trainerId = sub_81864A8();
+                trainerId = GetRecordedBattleApprenticeId();
                 FrontierSpeechToString(gApprentices[trainerId].easyChatWords);
             }
             else
@@ -1766,8 +1766,6 @@ void SetFrontierBrainTrainerGfxId(void)
     VarSet(VAR_OBJ_GFX_ID_0, gUnknown_08611C8C[facility][0]);
 }
 
-s32 sub_81A513C(void);
-
 #define FRONTIER_BRAIN_OTID 61226
 
 struct FrontierBrainMon
@@ -1782,16 +1780,16 @@ struct FrontierBrainMon
 
 extern const struct FrontierBrainMon sFrontierBrainsMons[][2][3];
 
-/*
+#ifdef NONMATCHING
 void CreateFrontierBrainPokemon(void)
 {
     s32 i, j;
     s32 monCountInBits;
     s32 monPartyId;
-    s32 monLevel;
+    s32 monLevel = 0;
     u8 friendship;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = sub_81A513C();
+    s32 symbol = GetFronterBrainSymbol();
 
     if (facility == FRONTIER_FACILITY_DOME)
         monCountInBits = GetTrainerMonCountInBits(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
@@ -1831,4 +1829,327 @@ void CreateFrontierBrainPokemon(void)
         monPartyId++;
     }
 }
-*/
+#else
+NAKED
+void CreateFrontierBrainPokemon(void)
+{
+    asm_unified("\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x44\n\
+	ldr r0, =0x000040cf\n\
+	bl VarGet\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	str r0, [sp, 0x20]\n\
+	bl GetFronterBrainSymbol\n\
+	str r0, [sp, 0x24]\n\
+	ldr r0, [sp, 0x20]\n\
+	cmp r0, 0x1\n\
+	bne _081A4E44\n\
+	ldr r0, =0x000003fe\n\
+	bl TrainerIdToDomeTournamentId\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	bl GetTrainerMonCountInBits\n\
+	adds r4, r0, 0\n\
+	b _081A4E46\n\
+	.pool\n\
+_081A4E44:\n\
+	movs r4, 0x7\n\
+_081A4E46:\n\
+	bl ZeroEnemyPartyMons\n\
+	movs r1, 0\n\
+	str r1, [sp, 0x18]\n\
+	bl SetFacilityPtrsGetLevel\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp, 0x1C]\n\
+	movs r2, 0\n\
+	str r2, [sp, 0x14]\n\
+_081A4E5C:\n\
+	movs r0, 0x1\n\
+	ands r0, r4\n\
+	asrs r4, 1\n\
+	str r4, [sp, 0x30]\n\
+	ldr r3, [sp, 0x14]\n\
+	adds r3, 0x1\n\
+	str r3, [sp, 0x28]\n\
+	cmp r0, 0\n\
+	bne _081A4E70\n\
+	b _081A4FC4\n\
+_081A4E70:\n\
+	ldr r4, [sp, 0x14]\n\
+	lsls r4, 2\n\
+	mov r9, r4\n\
+	ldr r0, [sp, 0x24]\n\
+	lsls r0, 4\n\
+	str r0, [sp, 0x38]\n\
+	ldr r1, [sp, 0x20]\n\
+	lsls r1, 4\n\
+	str r1, [sp, 0x34]\n\
+	ldr r2, [sp, 0x1C]\n\
+	lsls r2, 24\n\
+	str r2, [sp, 0x3C]\n\
+	ldr r3, [sp, 0x18]\n\
+	adds r3, 0x1\n\
+	str r3, [sp, 0x2C]\n\
+	ldr r0, [sp, 0x14]\n\
+	add r0, r9\n\
+	lsls r0, 2\n\
+	mov r8, r0\n\
+_081A4E96:\n\
+	bl Random\n\
+	adds r4, r0, 0\n\
+	bl Random\n\
+	lsls r4, 16\n\
+	lsrs r7, r4, 16\n\
+	lsls r0, 16\n\
+	orrs r7, r0\n\
+	ldr r0, =0x0000ef2a\n\
+	adds r1, r7, 0\n\
+	bl IsShinyOtIdPersonality\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _081A4E96\n\
+	ldr r4, [sp, 0x38]\n\
+	ldr r1, [sp, 0x24]\n\
+	subs r0, r4, r1\n\
+	lsls r5, r0, 2\n\
+	mov r2, r8\n\
+	adds r4, r2, r5\n\
+	ldr r3, [sp, 0x34]\n\
+	ldr r1, [sp, 0x20]\n\
+	subs r0, r3, r1\n\
+	lsls r6, r0, 3\n\
+	adds r4, r6\n\
+	ldr r2, =sFrontierBrainsMons\n\
+	adds r4, r2\n\
+	adds r0, r7, 0\n\
+	bl GetNatureFromPersonality\n\
+	ldrb r1, [r4, 0x5]\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r1, r0\n\
+	bne _081A4E96\n\
+	ldr r4, [sp, 0x18]\n\
+	movs r0, 0x64\n\
+	adds r3, r4, 0\n\
+	muls r3, r0\n\
+	mov r8, r3\n\
+	ldr r1, =gEnemyParty\n\
+	add r1, r8\n\
+	mov r10, r1\n\
+	ldr r4, [sp, 0x14]\n\
+	add r4, r9\n\
+	lsls r4, 2\n\
+	adds r0, r4, r5\n\
+	adds r0, r6\n\
+	ldr r2, =sFrontierBrainsMons\n\
+	adds r0, r2\n\
+	ldrh r1, [r0]\n\
+	ldr r3, [sp, 0x3C]\n\
+	lsrs r2, r3, 24\n\
+	ldrb r3, [r0, 0x4]\n\
+	movs r0, 0x1\n\
+	str r0, [sp]\n\
+	str r7, [sp, 0x4]\n\
+	str r0, [sp, 0x8]\n\
+	ldr r0, =0x0000ef2a\n\
+	str r0, [sp, 0xC]\n\
+	mov r0, r10\n\
+	bl CreateMon\n\
+	ldr r0, =sFrontierBrainsMons\n\
+	adds r5, r0\n\
+	adds r5, r6, r5\n\
+	adds r4, r5, r4\n\
+	adds r4, 0x2\n\
+	mov r0, r10\n\
+	movs r1, 0xC\n\
+	adds r2, r4, 0\n\
+	bl SetMonData\n\
+	movs r7, 0\n\
+	mov r6, r8\n\
+	ldr r3, =gEnemyParty\n\
+_081A4F32:\n\
+	adds r1, r7, 0\n\
+	adds r1, 0x1A\n\
+	ldr r0, [sp, 0x14]\n\
+	add r0, r9\n\
+	lsls r4, r0, 2\n\
+	adds r2, r5, r4\n\
+	adds r0, r7, 0x6\n\
+	adds r2, r0\n\
+	adds r0, r6, r3\n\
+	str r3, [sp, 0x40]\n\
+	bl SetMonData\n\
+	adds r7, 0x1\n\
+	ldr r3, [sp, 0x40]\n\
+	cmp r7, 0x5\n\
+	ble _081A4F32\n\
+	movs r1, 0xFF\n\
+	add r0, sp, 0x10\n\
+	strb r1, [r0]\n\
+	movs r7, 0\n\
+	ldr r1, [sp, 0x18]\n\
+	movs r2, 0x64\n\
+	adds r6, r1, 0\n\
+	muls r6, r2\n\
+	ldr r3, =gUnknown_08611578\n\
+	mov r8, r3\n\
+	ldr r3, =gEnemyParty\n\
+	adds r5, r4, 0\n\
+_081A4F6A:\n\
+	ldr r4, [sp, 0x38]\n\
+	ldr r0, [sp, 0x24]\n\
+	subs r1, r4, r0\n\
+	lsls r1, 2\n\
+	adds r1, r5, r1\n\
+	ldr r2, [sp, 0x34]\n\
+	ldr r4, [sp, 0x20]\n\
+	subs r0, r2, r4\n\
+	lsls r0, 3\n\
+	adds r1, r0\n\
+	add r1, r8\n\
+	ldrh r4, [r1]\n\
+	lsls r2, r7, 24\n\
+	lsrs r2, 24\n\
+	adds r0, r6, r3\n\
+	adds r1, r4, 0\n\
+	str r3, [sp, 0x40]\n\
+	bl SetMonMoveSlot\n\
+	ldr r3, [sp, 0x40]\n\
+	cmp r4, 0xDA\n\
+	bne _081A4F9C\n\
+	movs r1, 0\n\
+	add r0, sp, 0x10\n\
+	strb r1, [r0]\n\
+_081A4F9C:\n\
+	adds r5, 0x2\n\
+	adds r7, 0x1\n\
+	cmp r7, 0x3\n\
+	ble _081A4F6A\n\
+	ldr r0, [sp, 0x18]\n\
+	movs r1, 0x64\n\
+	adds r4, r0, 0\n\
+	muls r4, r1\n\
+	ldr r0, =gEnemyParty\n\
+	adds r4, r0\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x20\n\
+	add r2, sp, 0x10\n\
+	bl SetMonData\n\
+	adds r0, r4, 0\n\
+	bl CalculateMonStats\n\
+	ldr r2, [sp, 0x2C]\n\
+	str r2, [sp, 0x18]\n\
+_081A4FC4:\n\
+	ldr r4, [sp, 0x30]\n\
+	ldr r3, [sp, 0x28]\n\
+	str r3, [sp, 0x14]\n\
+	cmp r3, 0x2\n\
+	bgt _081A4FD0\n\
+	b _081A4E5C\n\
+_081A4FD0:\n\
+	add sp, 0x44\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+");
+}
+#endif
+
+u16 sub_81A4FF0(u8 monPartyId)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 symbol = GetFronterBrainSymbol();
+
+    return sFrontierBrainsMons[facility][symbol][monPartyId].species;
+}
+
+void sub_81A5030(u8 facility)
+{
+    gTrainerBattleOpponent_A = TRAINER_FRONTIER_BRAIN;
+    VarSet(VAR_OBJ_GFX_ID_0, gUnknown_08611C8C[facility][0]);
+}
+
+u16 sub_81A5060(u8 monId, u8 moveSlotId)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 symbol = GetFronterBrainSymbol();
+
+    return sFrontierBrainsMons[facility][symbol][monId].moves[moveSlotId];
+}
+
+u8 sub_81A50B0(u8 monPartyId)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 symbol = GetFronterBrainSymbol();
+
+    return sFrontierBrainsMons[facility][symbol][monPartyId].nature;
+}
+
+u8 sub_81A50F0(u8 monId, u8 evStatId)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 symbol = GetFronterBrainSymbol();
+
+    return sFrontierBrainsMons[facility][symbol][monId].evs[evStatId];
+}
+
+s32 GetFronterBrainSymbol(void)
+{
+    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    s32 symbol = sub_81A3B30(facility);
+
+    if (symbol == 2)
+    {
+        u16 winStreak = GetCurrentFacilityWinStreak();
+        if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][0])
+            symbol = 0;
+        else if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][1])
+            symbol = 1;
+        else if (winStreak + gUnknown_08611550[facility][3] > gUnknown_08611550[facility][1]
+                 && (winStreak + gUnknown_08611550[facility][3] - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
+            symbol = 1;
+    }
+    return symbol;
+}
+
+extern const u8 *const *const gUnknown_08611DB0[];
+extern const u8 *const *const gUnknown_08611DB8[];
+
+static void CopyFrontierBrainText(bool8 playerWonText)
+{
+    s32 facility;
+    s32 symbol;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+    {
+        facility = GetRecordedBattleFrontierFacility();
+        symbol = GetRecordedBattleFronterBrainSymbol();
+    }
+    else
+    {
+        facility = VarGet(VAR_FRONTIER_FACILITY);
+        symbol = GetFronterBrainSymbol();
+    }
+
+    switch (playerWonText)
+    {
+    case FALSE:
+        StringCopy(gStringVar4, gUnknown_08611DB0[symbol][facility]);
+        break;
+    case TRUE:
+        StringCopy(gStringVar4, gUnknown_08611DB8[symbol][facility]);
+        break;
+    }
+}
