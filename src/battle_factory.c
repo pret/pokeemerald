@@ -137,7 +137,7 @@ extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const u8 gUnknown_085B18AC[];
+extern const u32 gUnknown_085B18AC[];
 
 extern void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 move, u8 moveSlot);
 extern u8 sub_81A6F70(u8 battleMode, u8 lvlMode);
@@ -323,7 +323,7 @@ static const struct BgTemplate sSelect_BgTemplates[] =
 static const struct WindowTemplate sSelect_WindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 2,
         .width = 12,
@@ -332,7 +332,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .baseBlock = 0x0001,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 2,
         .width = 11,
@@ -341,7 +341,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .baseBlock = 0x0019,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 15,
         .width = 20,
@@ -350,7 +350,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .baseBlock = 0x002f,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 14,
         .width = 8,
@@ -359,7 +359,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .baseBlock = 0x006b,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 14,
         .width = 8,
@@ -368,7 +368,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .baseBlock = 0x009b,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 0,
         .width = 15,
@@ -907,7 +907,7 @@ static const struct BgTemplate sSwap_BgTemplates[4] =
 static const struct WindowTemplate sSwap_WindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 2,
         .width = 12,
@@ -916,7 +916,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x0001,
     },
     {
-        .priority = 2,
+        .bg = 2,
         .tilemapLeft = 19,
         .tilemapTop = 2,
         .width = 11,
@@ -925,7 +925,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x0019,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 15,
         .width = 20,
@@ -934,7 +934,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x002f,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 14,
         .width = 9,
@@ -943,7 +943,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x006b,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 14,
         .width = 8,
@@ -952,7 +952,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x00a1,
     },
     {
-        .priority = 2,
+        .bg = 2,
         .tilemapLeft = 21,
         .tilemapTop = 15,
         .width = 9,
@@ -961,7 +961,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x006b,
     },
     {
-        .priority = 2,
+        .bg = 2,
         .tilemapLeft = 10,
         .tilemapTop = 2,
         .width = 4,
@@ -970,7 +970,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x00c1,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 2,
         .width = 11,
@@ -979,7 +979,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .baseBlock = 0x00c9,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 0,
         .width = 15,

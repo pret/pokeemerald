@@ -12,7 +12,7 @@ EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F
 EverGrandeCity_PokemonCenter_1F_EventScript_229A4C:: @ 8229A4C
 	checkflag FLAG_BADGE06_GET
 	goto_if 0, EverGrandeCity_PokemonCenter_1F_EventScript_27374E
-	clearflag FLAG_0x319
+	clearflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	return
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A59:: @ 8229A59

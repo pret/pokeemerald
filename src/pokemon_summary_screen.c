@@ -386,7 +386,7 @@ static const s8 gUnknown_0861CC1C[] = {0, 2, 3, 1, 4, 5};
 static const struct WindowTemplate gUnknown_0861CC24[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 11,
@@ -395,7 +395,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 1,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 11,
@@ -404,7 +404,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 23,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 11,
@@ -413,7 +413,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 45,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 11,
@@ -422,7 +422,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 67,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 0,
         .width = 8,
@@ -431,7 +431,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 89,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 0,
         .width = 8,
@@ -440,7 +440,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 105,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 0,
         .width = 8,
@@ -449,7 +449,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 121,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 4,
         .width = 0,
@@ -458,7 +458,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 137,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 4,
         .width = 18,
@@ -467,7 +467,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 137,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 6,
         .width = 18,
@@ -476,7 +476,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 173,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 7,
         .width = 6,
@@ -485,7 +485,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 209,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 7,
         .width = 5,
@@ -494,7 +494,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 245,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 14,
         .width = 11,
@@ -503,7 +503,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 275,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 18,
         .width = 6,
@@ -512,7 +512,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 319,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
         .width = 9,
@@ -521,7 +521,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 331,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
         .width = 5,
@@ -530,7 +530,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 367,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 4,
         .width = 0,
@@ -539,7 +539,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 387,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 2,
         .width = 4,
@@ -548,7 +548,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 387,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 12,
         .width = 9,
@@ -557,7 +557,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .baseBlock = 395,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 14,
         .width = 9,
@@ -570,7 +570,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
 static const struct WindowTemplate gUnknown_0861CCCC[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 4,
         .width = 11,
@@ -579,7 +579,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .baseBlock = 449,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 4,
         .width = 7,
@@ -588,7 +588,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .baseBlock = 471,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 9,
         .width = 18,
@@ -597,7 +597,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .baseBlock = 485,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 14,
         .width = 18,
@@ -609,7 +609,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
 static const struct WindowTemplate gUnknown_0861CCEC[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 4,
         .width = 10,
@@ -618,7 +618,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .baseBlock = 449,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 20,
         .tilemapTop = 4,
         .width = 10,
@@ -627,7 +627,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .baseBlock = 469,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 7,
         .width = 6,
@@ -636,7 +636,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .baseBlock = 489,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 27,
         .tilemapTop = 7,
         .width = 3,
@@ -645,7 +645,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .baseBlock = 525,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 14,
         .width = 6,
@@ -657,7 +657,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
 static const struct WindowTemplate gUnknown_0861CD14[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 4,
         .width = 9,
@@ -666,7 +666,7 @@ static const struct WindowTemplate gUnknown_0861CD14[] =
         .baseBlock = 449,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 4,
         .width = 6,
@@ -675,7 +675,7 @@ static const struct WindowTemplate gUnknown_0861CD14[] =
         .baseBlock = 539,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 15,
         .width = 20,
@@ -2636,7 +2636,7 @@ static void DrawExperienceProgressBar(struct Pokemon *unused)
     u16 *r9;
     u8 i;
 
-    if (summary->level < MAX_MON_LEVEL)
+    if (summary->level < MAX_LEVEL)
     {
         u32 expBetweenLevels = gExperienceTables[gBaseStats[summary->species].growthRate][summary->level + 1] - gExperienceTables[gBaseStats[summary->species].growthRate][summary->level];
         u32 expSinceLastLevel = summary->exp - gExperienceTables[gBaseStats[summary->species].growthRate][summary->level];
@@ -3452,7 +3452,7 @@ static void PrintExpPointsNextLevel(void)
     offset = GetStringRightAlignXOffset(1, gStringVar1, 42) + 2;
     SummaryScreen_PrintTextOnWindow(windowId, gStringVar1, offset, 1, 0, 0);
 
-    if (sum->level < MAX_MON_LEVEL)
+    if (sum->level < MAX_LEVEL)
         expToNextLevel = gExperienceTables[gBaseStats[sum->species].growthRate][sum->level + 1] - sum->exp;
     else
         expToNextLevel = 0;

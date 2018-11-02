@@ -11,9 +11,9 @@
 #define sB_ANIM_ARG2 gBattleScripting + 0x11
 #define sTRIPLE_KICK_POWER gBattleScripting + 0x12
 #define sMOVEEND_STATE gBattleScripting + 0x14
-#define sBANK_WITH_ABILITY gBattleScripting + 0x15
+#define sBATTLER_WITH_ABILITY gBattleScripting + 0x15
 #define sMULTIHIT_EFFECT gBattleScripting + 0x16
-#define sBANK gBattleScripting + 0x17
+#define sBATTLER gBattleScripting + 0x17
 #define sB_ANIM_TURN gBattleScripting + 0x18
 #define sB_ANIM_TARGETS_HIT gBattleScripting + 0x19
 #define sSTATCHANGER gBattleScripting + 0x1A
@@ -26,9 +26,10 @@
 #define sRESHOW_MAIN_STATE gBattleScripting + 0x21
 #define sRESHOW_HELPER_STATE gBattleScripting + 0x22
 #define sFIELD_23 gBattleScripting + 0x23
-#define sFIELD_24 gBattleScripting + 0x24
+#define sWINDOWS_TYPE gBattleScripting + 0x24
 #define sMULTIPLAYER_ID gBattleScripting + 0x25
-#define sMON_CAUGHT gBattleScripting + 0x26
+#define sSPECIAL_TRAINER_BATTLE_TYPE gBattleScripting + 0x26
+#define sMON_CAUGHT gBattleScripting + 0x27
 #define sSAVED_DMG gBattleScripting + 0x28
 #define sSAVED_MOVE_EFFECT gBattleScripting + 0x2C
 

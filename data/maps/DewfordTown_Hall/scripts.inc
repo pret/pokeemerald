@@ -252,13 +252,13 @@ DewfordTown_Hall_EventScript_1FD7DA:: @ 81FD7DA
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	checkflag FLAG_0x0E6
+	checkflag FLAG_RECEIVED_TM_36
 	goto_eq DewfordTown_Hall_EventScript_1FD80E
 	msgbox DewfordTown_Hall_Text_1FE142, 4
 	giveitem_std ITEM_TM36
 	compare VAR_RESULT, 0
 	goto_eq DewfordTown_Hall_EventScript_272054
-	setflag FLAG_0x0E6
+	setflag FLAG_RECEIVED_TM_36
 	release
 	end
 

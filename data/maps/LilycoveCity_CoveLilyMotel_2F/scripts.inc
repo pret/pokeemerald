@@ -4,9 +4,9 @@ LilycoveCity_CoveLilyMotel_2F_MapScripts:: @ 82186D2
 LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
 	specialvar VAR_RESULT, sub_80C08E4
 	compare VAR_RESULT, 1
@@ -19,7 +19,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9:: @ 82186F9
 	return
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218702:: @ 8218702
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	playfanfare MUS_FANFA4
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_21870F

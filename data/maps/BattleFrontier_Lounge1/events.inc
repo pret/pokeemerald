@@ -1,5 +1,5 @@
 BattleFrontier_Lounge1_EventObjects: @ 853CFB4
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_2, 0, 0, 6, 0, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, BattleFrontier_Lounge1_EventScript_25E775, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN, 0, 0, 6, 0, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, BattleFrontier_Lounge1_EventScript_25E775, 0
 	object_event 2, EVENT_OBJ_GFX_BOY_3, 0, 7, 6, 0, MOVEMENT_TYPE_WANDER_AROUND, 1, 2, 0, 0, BattleFrontier_Lounge1_EventScript_25E94D, 0
 	object_event 3, EVENT_OBJ_GFX_BOY_2, 0, 5, 4, 0, MOVEMENT_TYPE_WANDER_AROUND, 2, 1, 0, 0, BattleFrontier_Lounge1_EventScript_25E956, 0
 

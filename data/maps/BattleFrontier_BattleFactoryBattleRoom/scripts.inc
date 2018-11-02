@@ -82,7 +82,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	setvar VAR_0x8004, 5
 	special sub_8195960
 	lockall
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	closemessage
 	setvar VAR_0x8004, 2
@@ -90,9 +90,9 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	special HealPlayerParty
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF0F
@@ -226,9 +226,9 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	special HealPlayerParty
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	return
 

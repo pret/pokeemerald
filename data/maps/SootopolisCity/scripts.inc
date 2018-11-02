@@ -927,7 +927,7 @@ SootopolisCity_EventScript_1E6154:: @ 81E6154
 	msgbox SootopolisCity_Text_1E65C8, 3
 	end
 
-SootopolisCity_EventScript_1E615D:: @ 81E615D
+EventScript_ClosedSootopolisDoor:: @ 81E615D
 	msgbox SootopolisCity_Text_1E6604, 3
 	end
 
@@ -1442,11 +1442,11 @@ SootopolisCity_EventScript_1E6536:: @ 81E6536
 	end
 
 SootopolisCity_EventScript_1E654C:: @ 81E654C
-	setflag FLAG_0x33B
-	setflag FLAG_0x33A
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
 	setflag FLAG_0x09E
-	clearflag FLAG_0x358
-	clearflag FLAG_0x394
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setvar VAR_0x40B9, 2
 	warpsilent MAP_SOOTOPOLIS_CITY, 255, 31, 34
 	waitstate

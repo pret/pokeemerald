@@ -1,7 +1,7 @@
 RustboroCity_DevonCorp_1F_EventObjects: @ 853037C
-	object_event 1, EVENT_OBJ_GFX_MAN_7, 0, 2, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, RustboroCity_DevonCorp_1F_EventScript_211261, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_7, 0, 15, 5, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 1, 0, 0, RustboroCity_DevonCorp_1F_EventScript_211293, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_4, 0, 5, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, RustboroCity_DevonCorp_1F_EventScript_2112CE, 0
+	object_event 1, EVENT_OBJ_GFX_DEVON_EMPLOYEE, 0, 2, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, RustboroCity_DevonCorp_1F_EventScript_211261, 0
+	object_event 2, EVENT_OBJ_GFX_DEVON_EMPLOYEE, 0, 15, 5, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 1, 0, 0, RustboroCity_DevonCorp_1F_EventScript_211293, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_3, 0, 5, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, RustboroCity_DevonCorp_1F_EventScript_2112CE, 0
 
 RustboroCity_DevonCorp_1F_MapWarps: @ 85303C4
 	warp_def 5, 8, 0, 5, MAP_RUSTBORO_CITY

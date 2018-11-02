@@ -5,10 +5,10 @@ FallarborTown_House2_EventScript_201383:: @ 8201383
 	lockall
 	applymovement 1, FallarborTown_House2_Movement_27259E
 	waitmovement 0
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq FallarborTown_House2_EventScript_2013A8
 	msgbox FallarborTown_House2_Text_20145C, 4
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	goto FallarborTown_House2_EventScript_2013A8
 	end
 

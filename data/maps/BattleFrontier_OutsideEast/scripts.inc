@@ -17,13 +17,13 @@ BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 
 BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
 	setvar VAR_0x40BC, 0
-	setflag FLAG_0x396
+	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	checkflag FLAG_0x1C6
 	call_if 0, BattleFrontier_OutsideEast_EventScript_242C3F
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C3F:: @ 8242C3F
-	clearflag FLAG_0x34A
+	clearflag FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO
 	return
 
 BattleFrontier_OutsideEast_EventScript_242C43:: @ 8242C43

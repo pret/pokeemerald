@@ -36,9 +36,9 @@ static bool8 sub_81DB328(struct Task *task);
 
 // const rom data
 // TODO: move those from .s file to .c
-extern const u8 gUnknown_0862AD54[];
-extern const u8 gUnknown_0862AF30[];
-extern const u8 gUnknown_0862B0DC[];
+extern const u32 gUnknown_0862AD54[];
+extern const u32 gUnknown_0862AF30[];
+extern const u32 gUnknown_0862B0DC[];
 extern const u16 gUnknown_0862B53C[];
 
 static const struct OamData sOamData_862B71C =

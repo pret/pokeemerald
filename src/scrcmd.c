@@ -52,7 +52,7 @@
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
-extern u32 gUnknown_020375C0;
+extern const u8 *gUnknown_020375C0;
 
 static EWRAM_DATA u32 gUnknown_020375C4 = 0;
 static EWRAM_DATA u16 sPauseCounter = 0;
@@ -284,7 +284,7 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
 {
-    ScriptJump(ctx, (const u8 *)gUnknown_020375C0);
+    ScriptJump(ctx, gUnknown_020375C0);
     return FALSE;
 }
 
@@ -2223,7 +2223,7 @@ bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
 
     if (v1)
     {
-        ((u8*)gUnknown_020375C0) = ctx->scriptPtr;
+        gUnknown_020375C0 = ctx->scriptPtr;
         ScriptJump(ctx, v1);
     }
     return FALSE;

@@ -1328,7 +1328,7 @@ u16 GetSlotMachineId(void)
 bool8 FoundAbandonedShipRoom1Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_1F;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1340,7 +1340,7 @@ bool8 FoundAbandonedShipRoom1Key(void)
 bool8 FoundAbandonedShipRoom2Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_20;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1352,7 +1352,7 @@ bool8 FoundAbandonedShipRoom2Key(void)
 bool8 FoundAbandonedShipRoom4Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_21;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1364,7 +1364,7 @@ bool8 FoundAbandonedShipRoom4Key(void)
 bool8 FoundAbandonedShipRoom6Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_22;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
     {
@@ -1508,7 +1508,7 @@ static void sub_8139620(u8 taskId)
 
 bool8 FoundBlackGlasses(void)
 {
-    return FlagGet(FLAG_HIDDEN_ITEM_BLACK_GLASSES);
+    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES);
 }
 
 void SetRoute119Weather(void)
@@ -1680,7 +1680,7 @@ void sub_8139980(void)
 }
 
 const struct WindowTemplate gUnknown_085B2BAC = {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 1,
     .width = 8,
@@ -2158,13 +2158,13 @@ void sub_8139F20(void)
         case 1:
         case 2:
         case 3:
-            if (gSaveBlock2Ptr->frontier.field_CE0[var][0] >= gSaveBlock2Ptr->frontier.field_CE0[var][1])
+            if (gSaveBlock2Ptr->frontier.winStreaks[var][0] >= gSaveBlock2Ptr->frontier.winStreaks[var][1])
             {
-                unk = gSaveBlock2Ptr->frontier.field_CE0[var][0];
+                unk = gSaveBlock2Ptr->frontier.winStreaks[var][0];
             }
             else
             {
-                unk = gSaveBlock2Ptr->frontier.field_CE0[var][1];
+                unk = gSaveBlock2Ptr->frontier.winStreaks[var][1];
             }
             break;
         case 4:
@@ -2244,7 +2244,7 @@ void sub_813A080(void)
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    if (battleMode == 2 && !FlagGet(FLAG_0x152))
+    if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_0x152))
     {
         gSpecialVar_0x8005 = 5;
         gSpecialVar_0x8006 = 4;
@@ -2253,7 +2253,7 @@ void sub_813A080(void)
 
     for (i = 0; i < 9; i++)
     {
-        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.field_CE0[battleMode][lvlMode])
+        if (gUnknown_085B2CDC[i] > gSaveBlock2Ptr->frontier.winStreaks[battleMode][lvlMode])
         {
             gSpecialVar_0x8005 = 4;
             gSpecialVar_0x8006 = i + 5;
@@ -2733,8 +2733,6 @@ static void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     }
 }
 
-// stupid r5<->r6 swap
-#ifdef NONMATCHING
 static void sub_813A4EC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -2752,7 +2750,11 @@ static void sub_813A4EC(u8 taskId)
     default:
         gSpecialVar_Result = itemId;
         PlaySE(SE_SELECT);
-        if (!task->data[6] || itemId == task->data[1] - 1)
+        if (!task->data[6])
+        {
+            sub_813A570(taskId);
+        }
+        else if (itemId == task->data[1] - 1)
         {
             sub_813A570(taskId);
         }
@@ -2765,72 +2767,6 @@ static void sub_813A4EC(u8 taskId)
         break;
     }
 }
-#else
-NAKED
-static void sub_813A4EC(u8 taskId)
-{
-    asm_unified("push {r4-r6,lr}\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	lsls r0, r5, 2\n\
-	adds r0, r5\n\
-	lsls r0, 3\n\
-	ldr r1, =gTasks\n\
-	adds r6, r0, r1\n\
-	ldrh r0, [r6, 0x24]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl ListMenuHandleInputGetItemId\n\
-	adds r4, r0, 0\n\
-	movs r0, 0x2\n\
-	negs r0, r0\n\
-	cmp r4, r0\n\
-	beq _0813A51C\n\
-	adds r0, 0x1\n\
-	cmp r4, r0\n\
-	bne _0813A530\n\
-	b _0813A566\n\
-	.pool\n\
-_0813A51C:\n\
-	ldr r1, =gSpecialVar_Result\n\
-	movs r0, 0x7F\n\
-	strh r0, [r1]\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	b _0813A54C\n\
-	.pool\n\
-_0813A530:\n\
-	ldr r0, =gSpecialVar_Result\n\
-	strh r4, [r0]\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	movs r1, 0x14\n\
-	ldrsh r0, [r6, r1]\n\
-	cmp r0, 0\n\
-	beq _0813A54C\n\
-	movs r1, 0xA\n\
-	ldrsh r0, [r6, r1]\n\
-	subs r0, 0x1\n\
-	cmp r4, r0\n\
-	bne _0813A558\n\
-_0813A54C:\n\
-	adds r0, r5, 0\n\
-	bl sub_813A570\n\
-	b _0813A566\n\
-	.pool\n\
-_0813A558:\n\
-	adds r0, r5, 0\n\
-	bl sub_813A738\n\
-	ldr r0, =sub_813A600\n\
-	str r0, [r6]\n\
-	bl EnableBothScriptContexts\n\
-_0813A566:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
-}
-#endif // NONMATCHING
 
 static void sub_813A570(u8 taskId)
 {
@@ -3069,7 +3005,7 @@ void sub_813A8FC(void)
 void sub_813A958(void)
 {
     static const struct WindowTemplate gUnknown_085B311C = {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 6,
@@ -3122,7 +3058,7 @@ u16 sub_813AA04(void)
 void sub_813AA18(void)
 {
     static const struct WindowTemplate gUnknown_085B3124 = {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 9,
         .width = 4,
@@ -3284,7 +3220,7 @@ void sub_813AC7C(void)
 static void sub_813ACE8(u8 a0, u16 a1)
 {
     static const struct WindowTemplate gUnknown_085B3220 = {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 7,
         .width = 12,
@@ -3668,7 +3604,7 @@ bool32 sub_813B374(void)
     }
 }
 
-bool32 sub_813B3B0(void)
+bool8 sub_813B3B0(void)
 {
     static const u8 gUnknown_085B3410[] = { 0x1d, 0x1d, 0x1e, 0x1e, 0x1f, 0x1f, 0x21, 0x21, 0x14, 0x14, 0x28, 0x28, 0x2a, 0x2a, 0x2c, 0x2c };
 
@@ -4081,7 +4017,7 @@ void sub_813BA60(void)
         FlagClear(FLAG_HIDE_FANCLUB_BOY);
         FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
         FlagClear(FLAG_HIDE_FANCLUB_LADY);
-        FlagClear(FLAG_0x2DA);
+        FlagClear(FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER);
         VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
     }
 }

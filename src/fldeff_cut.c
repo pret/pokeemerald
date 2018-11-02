@@ -1,26 +1,25 @@
 #include "global.h"
-#include "fldeff_cut.h"
+#include "event_obj_lock.h"
+#include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_effect.h"
-#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "event_obj_lock.h"
+#include "fldeff_cut.h"
+#include "malloc.h"
 #include "metatile_behavior.h"
-#include "party_menu.h"
 #include "overworld.h"
+#include "party_menu.h"
+#include "rom6.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-#include "malloc.h"
+#include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
-#include "constants/abilities.h"
 
-extern bool8 CheckObjectGraphicsInFrontOfPlayer(u8);
-extern u8 oei_task_add(void);
 extern void ScriptUnfreezeEventObjects(void);
 extern bool8 IsMewPlayingHideAndSeek(void);
 

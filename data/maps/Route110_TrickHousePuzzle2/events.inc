@@ -2,8 +2,8 @@ Route110_TrickHousePuzzle2_EventObjects: @ 853E128
 	object_event 1, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 13, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 1, Route110_TrickHousePuzzle2_EventScript_26BC75, 0
 	object_event 2, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 10, 17, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 4, Route110_TrickHousePuzzle2_EventScript_26BC8C, 0
 	object_event 3, EVENT_OBJ_GFX_GIRL_3, 0, 11, 9, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 2, Route110_TrickHousePuzzle2_EventScript_26BCA3, 0
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 17, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle2_EventScript_291428, 1062
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 13, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle2_EventScript_29141B, 1061
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 17, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle2_EventScript_291428, FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_WAVE_MAIL
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 13, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route110_TrickHousePuzzle2_EventScript_29141B, FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_HARBOR_MAIL
 
 Route110_TrickHousePuzzle2_MapWarps: @ 853E1A0
 	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE

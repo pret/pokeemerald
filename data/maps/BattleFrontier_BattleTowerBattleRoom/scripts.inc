@@ -45,7 +45,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241BC3:: @ 8241BC3
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	special sub_8161F74
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	call BattleFrontier_BattleTowerBattleRoom_EventScript_24210E
 	switch VAR_RESULT
@@ -362,9 +362,9 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_24210E:: @ 824210E
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	special HealPlayerParty
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, SPECIAL_BATTLE_TOWER
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	copyvar VAR_0x8004, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_0x8004, 3

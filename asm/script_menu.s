@@ -718,7 +718,7 @@ _080E23AC:
 	adds r4, 0x1
 	cmp r4, 0x3
 	bls _080E23AC
-	ldr r6, =0x00000864
+	ldr r6, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	adds r0, r6, 0
 	bl FlagGet
 	lsls r0, 24

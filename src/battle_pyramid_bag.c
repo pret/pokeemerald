@@ -37,13 +37,6 @@
 EWRAM_DATA struct PyramidBagResources *gPyramidBagResources = NULL;
 EWRAM_DATA struct PyramidBagCursorData gPyramidBagCursorData = {0};
 
-// gfx
-extern const u8 gUnknown_08D9ADD0[];
-extern const u8 gUnknown_08D9AE04[];
-extern const u8 gUnknown_08D9AF44[];
-extern const u16 gUnknown_0860F074[];
-extern const u8 gBattleFrontierGfx_PyramidBag[];
-
 // This file's functions.
 static void Task_HandlePyramidBagInput(u8 taskId);
 static void sub_81C4F44(u8 taskId);
@@ -195,7 +188,7 @@ static const u8 sColorTable[][3] =
 static const struct WindowTemplate gUnknown_0861F328[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 14,
         .tilemapTop = 2,
         .width = 15,
@@ -204,7 +197,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
         .baseBlock = 30
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 14,
@@ -213,7 +206,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
         .baseBlock = 270
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -222,7 +215,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
         .baseBlock = 354
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 24,
         .tilemapTop = 17,
         .width = 5,
@@ -236,7 +229,7 @@ static const struct WindowTemplate gUnknown_0861F328[] =
 static const struct WindowTemplate gUnknown_0861F350[] =
 {
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 22,
         .tilemapTop = 17,
         .width = 7,
@@ -245,7 +238,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 22,
         .tilemapTop = 15,
         .width = 7,
@@ -254,7 +247,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 15,
         .tilemapTop = 15,
         .width = 14,
@@ -263,7 +256,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 15,
         .tilemapTop = 13,
         .width = 14,
@@ -272,7 +265,7 @@ static const struct WindowTemplate gUnknown_0861F350[] =
         .baseBlock = 472
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 24,
         .tilemapTop = 15,
         .width = 5,
@@ -396,7 +389,7 @@ void sub_81C4F98(u8 a0, void (*callback)(void))
 
     gPyramidBagResources->callback2 = NULL;
     gPyramidBagResources->unk814 = 0xFF;
-    gPyramidBagResources->scrollArrowSpriteId = 0xFF;
+    gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
 
     memset(gPyramidBagResources->itemsSpriteIds, 0xFF, sizeof(gPyramidBagResources->itemsSpriteIds));
     memset(gPyramidBagResources->windowIds, 0xFF, sizeof(gPyramidBagResources->windowIds));
@@ -664,16 +657,16 @@ static void PrintItemDescription(s32 listMenuId)
 
 static void AddScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollArrowSpriteId == 0xFF)
-        gPyramidBagResources->scrollArrowSpriteId = AddScrollIndicatorArrowPairParameterized(2, 172, 12, 148, gPyramidBagResources->listMenuCount - gPyramidBagResources->listMenuMaxShown, 0xB5E, 0xB5E, &gPyramidBagCursorData.scrollPosition);
+    if (gPyramidBagResources->scrollIndicatorsTaskId == 0xFF)
+        gPyramidBagResources->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(2, 172, 12, 148, gPyramidBagResources->listMenuCount - gPyramidBagResources->listMenuMaxShown, 0xB5E, 0xB5E, &gPyramidBagCursorData.scrollPosition);
 }
 
 static void RemoveScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollArrowSpriteId != 0xFF)
+    if (gPyramidBagResources->scrollIndicatorsTaskId != 0xFF)
     {
-        RemoveScrollIndicatorArrowPair(gPyramidBagResources->scrollArrowSpriteId);
-        gPyramidBagResources->scrollArrowSpriteId = 0xFF;
+        RemoveScrollIndicatorArrowPair(gPyramidBagResources->scrollIndicatorsTaskId);
+        gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
     }
 }
 

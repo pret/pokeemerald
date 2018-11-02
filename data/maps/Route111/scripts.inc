@@ -89,10 +89,10 @@ Route111_EventScript_1F0E25:: @ 81F0E25
 	return
 
 Route111_EventScript_1F0E26:: @ 81F0E26
-	clearflag FLAG_0x300
-	setflag FLAG_0x301
-	setflag FLAG_0x302
-	setflag FLAG_0x303
+	clearflag FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE
+	setflag FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
+	setflag FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE
+	setflag FLAG_HIDE_ROUTE_111_VICKY_WINSTRATE
 	cleartrainerflag TRAINER_VICTOR
 	cleartrainerflag TRAINER_VICTORIA
 	cleartrainerflag TRAINER_VIVI
@@ -137,7 +137,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	special sub_81BEB7C
 	waitstate
 	setvar VAR_0x40CB, 2
-	clearflag FLAG_0x36A
+	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	checkflag FLAG_0x150
 	goto_eq Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, 4

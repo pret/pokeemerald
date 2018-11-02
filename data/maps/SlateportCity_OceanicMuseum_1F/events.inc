@@ -1,18 +1,18 @@
 SlateportCity_OceanicMuseum_1F_EventObjects: @ 852F670
 	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 7, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0
-	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 18, 5, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE5F, 883
-	object_event 3, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 12, 2, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE68, 883
-	object_event 4, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 2, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE56, 883
-	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 3, 4, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE4D, 883
-	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 14, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE71, 883
+	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 18, 5, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE5F, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	object_event 3, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 12, 2, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE68, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	object_event 4, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 2, 8, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE56, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	object_event 5, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 3, 4, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE4D, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	object_event 6, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 14, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE71, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
 	object_event 7, EVENT_OBJ_GFX_BEAUTY, 0, 12, 7, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0
-	object_event 8, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 8, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE7A, 883
-	object_event 9, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AED4, 961
-	object_event 10, EVENT_OBJ_GFX_MANIAC, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEDD, 961
-	object_event 11, EVENT_OBJ_GFX_MAN_3, 0, 17, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEE6, 961
-	object_event 12, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 18, 8, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEEF, 961
-	object_event 13, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 9, 4, 3, MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEF8, 965
-	object_event 14, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_28C883, 961
+	object_event 8, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 8, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE7A, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	object_event 9, EVENT_OBJ_GFX_WOMAN_5, 0, 4, 2, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AED4, FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
+	object_event 10, EVENT_OBJ_GFX_MANIAC, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEDD, FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
+	object_event 11, EVENT_OBJ_GFX_POKEFAN_M, 0, 17, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEE6, FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
+	object_event 12, EVENT_OBJ_GFX_LITTLE_GIRL, 0, 18, 8, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEEF, FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
+	object_event 13, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 9, 4, 3, MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEF8, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT
+	object_event 14, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_28C883, FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
 
 SlateportCity_OceanicMuseum_1F_MapWarps: @ 852F7C0
 	warp_def 9, 8, 0, 5, MAP_SLATEPORT_CITY

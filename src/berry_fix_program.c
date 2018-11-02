@@ -3,6 +3,7 @@
 #include "multiboot.h"
 #include "malloc.h"
 #include "bg.h"
+#include "graphics.h"
 #include "main.h"
 #include "sprite.h"
 #include "task.h"
@@ -81,26 +82,7 @@ static const u8 *const gUnknown_08618160[] = {
     Unknown_08617EA3
 };
 
-extern const u8 gBerryFixGameboy_Gfx[];
-extern const u8 gBerryFixGameboy_Tilemap[];
-extern const u8 gBerryFixGameboy_Pal[];
-extern const u8 gBerryFixGameboyLogo_Gfx[];
-extern const u8 gBerryFixGameboyLogo_Tilemap[];
-extern const u8 gBerryFixGameboyLogo_Pal[];
-extern const u8 gBerryFixGbaTransfer_Gfx[];
-extern const u8 gBerryFixGbaTransfer_Tilemap[];
-extern const u8 gBerryFixGbaTransfer_Pal[];
-extern const u8 gBerryFixGbaTransferHighlight_Gfx[];
-extern const u8 gBerryFixGbaTransferHighlight_Tilemap[];
-extern const u8 gBerryFixGbaTransferHighlight_Pal[];
-extern const u8 gBerryFixGbaTransferError_Gfx[];
-extern const u8 gBerryFixGbaTransferError_Tilemap[];
-extern const u8 gBerryFixGbaTransferError_Pal[];
-extern const u8 gBerryFixWindow_Gfx[];
-extern const u8 gBerryFixWindow_Tilemap[];
-extern const u8 gBerryFixWindow_Pal[];
-
-static const u8 *const gUnknown_08618178[][3] = {
+static const void *const gUnknown_08618178[][3] = {
     {
         gBerryFixGameboy_Gfx,
         gBerryFixGameboy_Tilemap,

@@ -94,6 +94,8 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MAX_LEVEL 100
+
 #define OT_ID_RANDOM_NO_SHINY 2
 #define OT_ID_PRESET 1
 #define OT_ID_PLAYER_ID 0
@@ -110,10 +112,47 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
+#define TYPE_NORMAL   0x00
+#define TYPE_FIGHTING 0x01
+#define TYPE_FLYING   0x02
+#define TYPE_POISON   0x03
+#define TYPE_GROUND   0x04
+#define TYPE_ROCK     0x05
+#define TYPE_BUG      0x06
+#define TYPE_GHOST    0x07
+#define TYPE_STEEL    0x08
+#define TYPE_MYSTERY  0x09
+#define TYPE_FIRE     0x0a
+#define TYPE_WATER    0x0b
+#define TYPE_GRASS    0x0c
+#define TYPE_ELECTRIC 0x0d
+#define TYPE_PSYCHIC  0x0e
+#define TYPE_ICE      0x0f
+#define TYPE_DRAGON   0x10
+#define TYPE_DARK     0x11
+
+#define FRIENDSHIP_EVENT_GROW_LEVEL           0x0
+#define FRIENDSHIP_EVENT_VITAMIN              0x1 // unused
+#define FRIENDSHIP_EVENT_BATTLE_ITEM          0x2 // unused
+#define FRIENDSHIP_EVENT_LEAGUE_BATTLE        0x3
+#define FRIENDSHIP_EVENT_LEARN_TMHM           0x4
+#define FRIENDSHIP_EVENT_WALKING              0x5
+#define FRIENDSHIP_EVENT_FAINT_SMALL          0x6
+#define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 0x7
+#define FRIENDSHIP_EVENT_FAINT_LARGE          0x8
+
+#define STATUS_PRIMARY_NONE      0x0
+#define STATUS_PRIMARY_POISON    0x1
+#define STATUS_PRIMARY_PARALYSIS 0x2
+#define STATUS_PRIMARY_SLEEP     0x3
+#define STATUS_PRIMARY_FREEZE    0x4
+#define STATUS_PRIMARY_BURN      0x5
+#define STATUS_PRIMARY_POKERUS   0x6
+#define STATUS_PRIMARY_FAINTED   0x7
+
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
-#define MAX_MON_LEVEL 100
 
 struct PokemonSubstruct0
 {
@@ -420,7 +459,7 @@ extern const u8 gFacilityClassToTrainerClass[];
 extern const struct BaseStats gBaseStats[];
 extern const u8 *const gItemEffectTable[];
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
-extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
+extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const struct LevelUpMove *const gLevelUpLearnsets[];
 extern const u8 gUnknown_08329D22[];
 extern const u8 gUnknown_08329D26[];
@@ -555,8 +594,8 @@ u16 GetBattleBGM(void);
 void PlayBattleBGM(void);
 void PlayMapChosenOrBattleBGM(u16 songId);
 void sub_806E694(u16 songId);
-const u8 *GetMonFrontSpritePal(struct Pokemon *mon);
-const u8 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
+const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
+const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);

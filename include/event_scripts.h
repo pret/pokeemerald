@@ -19,8 +19,8 @@ extern const u8 EventScript_TryDoDoubleTrainerBattle[];
 extern const u8 EventScript_271362[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_2713D1[];
-extern const u8 EventScript_2766A2[];
-extern const u8 EventScript_2766A6[];
+extern const u8 EventScript_SecretPower1[];
+extern const u8 EventScript_SecretPower2[];
 
 
 extern const u8 gTVBravoTrainerText00[];

@@ -14,6 +14,6 @@ enum {
 };
 
 void sub_80F972C(void);
-unsigned int overworld_poison(void);
+int DoPoisonFieldEffect(void);
 
 #endif //GUARD_FIELD_POISON_H

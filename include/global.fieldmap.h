@@ -63,17 +63,16 @@ struct EventObjectTemplate
 struct WarpEvent
 {
     s16 x, y;
-    s8 warpId;
-    u8 mapGroup;
+    u8 elevation;
+    u8 warpId;
     u8 mapNum;
-    u8 unk7;
+    u8 mapGroup;
 };
 
 struct CoordEvent
 {
     s16 x, y;
-    u8 unk4;
-    u8 filler_5;
+    u8 elevation;
     u16 trigger;
     u16 index;
     u8 filler_A[0x2];
@@ -83,16 +82,15 @@ struct CoordEvent
 struct BgEvent
 {
     u16 x, y;
-    u8 unk4;
+    u8 elevation;
     u8 kind;
-    // 0x2 padding for the union beginning.
     union { // carried over from diego's FR/LG work, seems to be the same struct
         // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
         u8 *script;
 
-        // hidden item type probably
+        // hidden item type
         struct {
-            u8 filler6[0x2];
+            u16 item;
             u16 hiddenItemId; // flag offset to determine flag lookup
         } hiddenItem;
 
@@ -234,7 +232,7 @@ struct EventObjectGraphicsInfo
 #define PLAYER_AVATAR_FLAG_MACH_BIKE (1 << 1)
 #define PLAYER_AVATAR_FLAG_ACRO_BIKE (1 << 2)
 #define PLAYER_AVATAR_FLAG_SURFING   (1 << 3)
-#define PLAYER_AVATAR_FLAG_4         (1 << 4)
+#define PLAYER_AVATAR_FLAG_UNDERWATER (1 << 4)
 #define PLAYER_AVATAR_FLAG_5         (1 << 5)
 #define PLAYER_AVATAR_FLAG_6         (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH      (1 << 7)

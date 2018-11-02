@@ -16,6 +16,7 @@
 #include "constants/vars.h"
 #include "constants/songs.h"
 #include "pokemon_storage_system.h"
+#include "graphics.h"
 #include "sound.h"
 #include "trig.h"
 #include "field_effect.h"
@@ -29,20 +30,6 @@
 
 EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
-
-// extern graphics
-extern const u16 gNamingScreenMenu_Pal[];
-extern const u8 gNamingScreenMenu_Gfx[];
-extern const u8 gUnknown_08DD4544[];
-extern const u8 gUnknown_08DD4620[];
-extern const u8 gUnknown_08DD46E0[];
-extern const u8 gUnknown_08DD47A0[];
-extern const u8 gNamingScreenRWindow_Gfx[];
-extern const u8 gNamingScreenKeyboardButton_Gfx[];
-extern const u8 gNamingScreenROptions_Gfx[];
-extern const u8 gNamingScreenCursor_Gfx[];
-extern const u8 gNamingScreenRightPointingTriangleTiles[];
-extern const u8 gNamingScreenUnderscoreTiles[];
 
 // extern text
 extern const u8 gExpandedPlaceholder_Empty[];
@@ -116,7 +103,7 @@ static const struct BgTemplate gUnknown_0858BE00[] =
 static const struct WindowTemplate gUnknown_0858BE10[] =
 {
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 3,
         .tilemapTop = 10,
         .width = 19,
@@ -125,7 +112,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x030
     },
     {
-        .priority = 2,
+        .bg = 2,
         .tilemapLeft = 3,
         .tilemapTop = 10,
         .width = 19,
@@ -134,7 +121,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x0C8
     },
     {
-        .priority = 3,
+        .bg = 3,
         .tilemapLeft = 8,
         .tilemapTop = 6,
         .width = 17,
@@ -143,7 +130,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x030
     },
     {
-        .priority = 3,
+        .bg = 3,
         .tilemapLeft = 8,
         .tilemapTop = 4,
         .width = 17,
@@ -152,7 +139,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
         .baseBlock = 0x052
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,

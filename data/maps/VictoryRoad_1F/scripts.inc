@@ -43,7 +43,7 @@ VictoryRoad_1F_EventScript_235DE1:: @ 8235DE1
 	msgbox VictoryRoad_1F_Text_235EE6, 4
 	trainerbattle 3, TRAINER_WALLY_1, 0, VictoryRoad_1F_Text_235FFC
 	msgbox VictoryRoad_1F_Text_236020, 4
-	clearflag FLAG_0x35A
+	clearflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	moveobjectoffscreen 4
 	setflag FLAG_0x07E
 	copyvar VAR_0x40C3, VAR_0x8008

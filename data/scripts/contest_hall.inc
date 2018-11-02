@@ -1086,7 +1086,7 @@ LinkContestRoom1_EventScript_27AB36:: @ 827AB36
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27ABD8
 	call LinkContestRoom1_EventScript_27AB9E
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	goto_eq LinkContestRoom1_EventScript_27AB82
 	lockall
 	msgbox LinkContestRoom1_Text_27BBA8, 4
@@ -1127,7 +1127,7 @@ LinkContestRoom1_EventScript_27ABAF:: @ 827ABAF
 LinkContestRoom1_EventScript_27ABBE:: @ 827ABBE
 	compare VAR_CONTEST_RANK, 3
 	goto_eq LinkContestRoom1_EventScript_27ABCD
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	return
 
 LinkContestRoom1_EventScript_27ABCD:: @ 827ABCD

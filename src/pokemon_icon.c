@@ -23,7 +23,7 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
 
 // .rodata
 
-const u8 * const gMonIconTable[] =
+const u8 *const gMonIconTable[] =
 {
     gMonIcon_Bulbasaur,
     gMonIcon_Bulbasaur,

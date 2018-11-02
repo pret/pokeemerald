@@ -1,5 +1,5 @@
 OldaleTown_House2_EventObjects: @ 852D7F0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, OldaleTown_House2_EventScript_1FBF5B, 0
+	object_event 1, EVENT_OBJ_GFX_POKEFAN_F, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, OldaleTown_House2_EventScript_1FBF5B, 0
 	object_event 2, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 7, 4, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, OldaleTown_House2_EventScript_1FBF64, 0
 
 OldaleTown_House2_MapWarps: @ 852D820

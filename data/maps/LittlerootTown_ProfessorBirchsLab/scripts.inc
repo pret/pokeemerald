@@ -121,7 +121,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17:: @ 81F9E17
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E36:: @ 81F9E36
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA9D5, 4
-	clearflag FLAG_0x3DF
+	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_0x4084, 3
 	releaseall
 	end
@@ -192,8 +192,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	special EnableNationalPokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB466, 4
 	closemessage
-	setflag FLAG_0x31B
-	setflag FLAG_0x31A
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	setvar VAR_0x40D3, 2
 	setvar VAR_0x40F5, 0
 	setflag FLAG_0x072
@@ -500,7 +500,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA294:: @ 81FA294
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E:: @ 81FA29E
-	checkflag FLAG_0x380
+	checkflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_272141
 	compare VAR_0x40D3, 3
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_272141

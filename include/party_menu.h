@@ -70,6 +70,5 @@ extern void sub_81B67C8(u8, u16, TaskFunc);
 extern void sub_81B79E8(u8, u16, TaskFunc);
 extern void sub_81B6DC4(u8, u16, TaskFunc);
 extern void sub_81B7C74(u8, u16, TaskFunc);
-extern u16 ItemIdToBattleMoveId(u16);
 
 #endif // GUARD_PARTY_MENU_H

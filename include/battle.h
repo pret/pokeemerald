@@ -643,6 +643,7 @@ struct BattleScripting
     u8 field_23;
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
+    u8 specialTrainerBattleType;
     bool8 monCaught;
     s32 savedDmg;
     u8 savedMoveEffect; // For moves hitting multiple targets.

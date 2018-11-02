@@ -1,7 +1,7 @@
 BattleFrontier_BattleArenaLobby_EventObjects: @ 853C814
 	object_event 1, EVENT_OBJ_GFX_BLACK_BELT, 0, 7, 7, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_255DF4, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 2, 10, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560C1, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_6, 0, 14, 11, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560AF, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 2, 10, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560C1, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_5, 0, 14, 11, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560AF, 0
 	object_event 4, EVENT_OBJ_GFX_CAMPER, 0, 14, 12, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560B8, 0
 	object_event 5, EVENT_OBJ_GFX_YOUNGSTER, 0, 14, 10, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, BattleFrontier_BattleArenaLobby_EventScript_2560A6, 0
 

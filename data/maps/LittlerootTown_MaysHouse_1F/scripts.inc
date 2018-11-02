@@ -209,9 +209,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B8E
 	playse SE_KAIDAN
 	removeobject 7
-	setflag FLAG_0x2EA
-	setflag FLAG_0x332
-	clearflag FLAG_0x2D2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_0x408D, 3
 	setvar VAR_0x4050, 1

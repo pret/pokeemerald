@@ -40,6 +40,7 @@
 #include "tv.h"
 #include "secret_base.h"
 #include "constants/map_types.h"
+#include "constants/trainers.h"
 
 extern void mapldr_default(void);
 
@@ -596,13 +597,13 @@ void sub_80E95D4(void)
     VarSet(VAR_OBJ_GFX_ID_F, gUnknown_0858D060[sub_80EA20C(VarGet(VAR_0x4054))]);
 }
 
-void sub_80E9608(struct Coords16 *coords, struct MapEvents *events)
+void sub_80E9608(const struct MapPosition *position, const struct MapEvents *events)
 {
     s16 bgEventIdx;
 
     for (bgEventIdx = 0; bgEventIdx < events->bgEventCount; bgEventIdx ++)
     {
-        if (events->bgEvents[bgEventIdx].kind == BG_EVENT_SECRET_BASE && coords->x == events->bgEvents[bgEventIdx].x + 7 && coords->y == events->bgEvents[bgEventIdx].y + 7)
+        if (events->bgEvents[bgEventIdx].kind == BG_EVENT_SECRET_BASE && position->x == events->bgEvents[bgEventIdx].x + 7 && position->y == events->bgEvents[bgEventIdx].y + 7)
         {
             sCurSecretBaseId = events->bgEvents[bgEventIdx].bgUnion.secretBaseId;
             break;
@@ -610,9 +611,9 @@ void sub_80E9608(struct Coords16 *coords, struct MapEvents *events)
     }
 }
 
-void sub_80E9668(struct Coords16 *coords, struct MapEvents *events)
+void sub_80E9668(const struct MapPosition *position, const struct MapEvents *events)
 {
-    sub_80E9608(coords, events);
+    sub_80E9608(position, events);
     sub_80E8B6C();
     ScriptContext1_SetupScript(EventScript_275BB7);
 }
@@ -1143,7 +1144,7 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 void sub_80EA2E4(void)
 {
     sub_813BADC(TRUE);
-    gTrainerBattleOpponent_A = 0x400;
+    gTrainerBattleOpponent_A = TRAINER_SECRET_BASE;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_SECRET_BASE;
 }
 

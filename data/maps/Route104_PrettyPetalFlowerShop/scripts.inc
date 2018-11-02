@@ -8,7 +8,7 @@ Route104_PrettyPetalFlowerShop_MapScript1_22A352: @ 822A352
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_22A36B
 	checkflag FLAG_BADGE03_GET
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_22A36B
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A36B:: @ 822A36B
@@ -18,7 +18,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A36B:: @ 822A36B
 Route104_PrettyPetalFlowerShop_EventScript_22A373:: @ 822A373
 	lock
 	faceplayer
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_22A3E4
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7686, 4
 	checkflag FLAG_0x07F

@@ -1,13 +1,13 @@
 LavaridgeTown_EventObjects: @ 8527A54
-	object_event 1, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 8, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA73B, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 5, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA70E, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_MAN_2, 0, 5, 8, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA717, 0
-	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 10, 13, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 2, 0, 0, LavaridgeTown_EventScript_1EA720, 0
+	object_event 1, EVENT_OBJ_GFX_EXPERT_F, 0, 8, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA73B, 0
+	object_event 2, EVENT_OBJ_GFX_EXPERT_M, 0, 5, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA70E, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_MAN, 0, 5, 8, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA717, 0
+	object_event 4, EVENT_OBJ_GFX_TWIN, 0, 10, 13, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 2, 0, 0, LavaridgeTown_EventScript_1EA720, 0
 	object_event 5, EVENT_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA729, 0
 	object_event 6, EVENT_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 5, 4, 3, MOVEMENT_TYPE_FACE_DOWN_AND_LEFT, 0, 0, 0, 0, LavaridgeTown_EventScript_1EA732, 0
-	object_event 7, EVENT_OBJ_GFX_GIDDY, 0, 6, 16, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, 0x0, 930
-	object_event 8, EVENT_OBJ_GFX_HIPSTER, 0, 12, 15, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 929
-	object_event 9, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 4, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LavaridgeTown_EventScript_1EA744, 0
+	object_event 7, EVENT_OBJ_GFX_GIDDY, 0, 6, 16, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, 0x0, FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_2
+	object_event 8, EVENT_OBJ_GFX_HIPSTER, 0, 12, 15, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
+	object_event 9, EVENT_OBJ_GFX_EXPERT_F, 0, 4, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LavaridgeTown_EventScript_1EA744, 0
 
 LavaridgeTown_MapWarps: @ 8527B2C
 	warp_def 12, 15, 0, 0, MAP_LAVARIDGE_TOWN_HERB_SHOP
@@ -28,7 +28,7 @@ LavaridgeTown_MapBGEvents: @ 8527B6C
 	bg_event 10, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E73
 	bg_event 16, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E6A
 	bg_event 11, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_271E73
-	bg_hidden_item_event 4, 5, 3, ITEM_ICE_HEAL, 0
+	bg_hidden_item_event 4, 5, 3, ITEM_ICE_HEAL, FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL
 
 LavaridgeTown_MapEvents:: @ 8527BCC
 	map_events LavaridgeTown_EventObjects, LavaridgeTown_MapWarps, LavaridgeTown_MapCoordEvents, LavaridgeTown_MapBGEvents

@@ -143,7 +143,7 @@ SSTidalCorridor_EventScript_23C15A:: @ 823C15A
 	end
 
 SSTidalCorridor_EventScript_23C179:: @ 823C179
-	setflag FLAG_0x3B7
+	setflag FLAG_HIDE_SS_TIDAL_ROOMS_SNATCH_GIVER
 	return
 
 SSTidalCorridor_EventScript_23C17D:: @ 823C17D

@@ -1,5 +1,5 @@
 LilycoveCity_House1_EventObjects: @ 8531EF4
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 4, 5, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, LilycoveCity_House1_EventScript_21ECCE, 0
+	object_event 1, EVENT_OBJ_GFX_EXPERT_M, 0, 4, 5, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, LilycoveCity_House1_EventScript_21ECCE, 0
 	object_event 2, EVENT_OBJ_GFX_KECLEON_1, 0, 4, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_House1_EventScript_21ECD7, 0
 
 LilycoveCity_House1_MapWarps: @ 8531F24

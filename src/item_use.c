@@ -260,7 +260,7 @@ bool32 CanFish(void)
     if (MetatileBehavior_IsWaterfall(tileBehavior))
         return FALSE;
 
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
         return FALSE;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))

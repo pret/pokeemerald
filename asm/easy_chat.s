@@ -7951,7 +7951,7 @@ sub_811EA28: @ 811EA28
 	bgt _0811EA48
 	cmp r0, 0x11
 	blt _0811EA66
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	b _0811EA60
 	.pool
@@ -9131,7 +9131,7 @@ _0811F2FE:
 	adds r3, 0x1
 	cmp r3, 0x10
 	ble _0811F2FE
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0

@@ -460,7 +460,7 @@ static const struct ListMenuTemplate sSecondaryListTemplate =
 
 static const struct WindowTemplate sMainListWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 3,
     .width = 9,
@@ -471,7 +471,7 @@ static const struct WindowTemplate sMainListWindowTemplate =
 
 static const struct WindowTemplate sSecondaryListWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 12,
     .tilemapTop = 3,
     .width = 10,
@@ -482,7 +482,7 @@ static const struct WindowTemplate sSecondaryListWindowTemplate =
 
 static const struct WindowTemplate sModifyWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 25,
     .tilemapTop = 2,
     .width = 4,
@@ -493,7 +493,7 @@ static const struct WindowTemplate sModifyWindowTemplate =
 
 static const struct WindowTemplate sBattlerWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 10,
     .tilemapTop = 0,
     .width = 14,

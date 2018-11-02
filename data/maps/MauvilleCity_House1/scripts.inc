@@ -9,7 +9,7 @@ MauvilleCity_House1_EventScript_20F976:: @ 820F976
 	msgbox MauvilleCity_House1_Text_20F9AF, 4
 	giveitem_std ITEM_HM06
 	setflag FLAG_0x06B
-	setflag FLAG_0x34B
+	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
 	msgbox MauvilleCity_House1_Text_20FAA9, 4
 	release
 	end

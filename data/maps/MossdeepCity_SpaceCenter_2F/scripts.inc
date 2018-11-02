@@ -264,9 +264,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special sub_81A1780
-	setvar VAR_0x8004, 8
+	setvar VAR_0x8004, SPECIAL_BATTLE_STEVEN
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_0x8004, 6
 	special sub_81A1780
@@ -295,9 +295,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	fadedefaultbgm
 	fadescreen 1
 	setvar VAR_0x409F, 3
-	setflag FLAG_0x2F4
-	setflag FLAG_0x35E
-	setflag FLAG_0x337
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
+	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
 	removeobject 5
 	removeobject 7
 	removeobject 6
@@ -315,12 +315,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	closemessage
 	fadescreen 1
 	setflag FLAG_0x075
-	setflag FLAG_0x3C7
+	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
 	removeobject 4
-	setflag FLAG_0x2E1
-	clearflag FLAG_0x3C7
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_INVISIBLE_NINJA_BOY
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
 	setvar VAR_0x40C6, 1
-	setflag FLAG_0x314
+	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	removeobject 3
 	setobjectxyperm 3, 5, 6
 	setobjectmovementtype 3, 2

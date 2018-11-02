@@ -18,6 +18,8 @@
 #include "recorded_battle.h"
 #include "international_string_util.h"
 #include "battle_frontier_2.h"
+#include "battle_tower.h"
+#include "data2.h"
 
 struct BattleWindowText
 {
@@ -35,7 +37,6 @@ struct BattleWindowText
 
 extern u8 gUnknown_0203C7B4;
 
-extern const u8 gMoveNames[MOVES_COUNT][13];
 extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
 
@@ -46,14 +47,10 @@ extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 
 extern u8 GetFrontierBrainTrainerClass(void); // battle_frontier_2
-extern u8 GetFrontierOpponentClass(u16 trainerId); // battle_tower
 extern u8 GetTrainerHillOpponentClass(u16 trainerId); // pokenav
-extern u8 GetEreaderTrainerClassId(void); // battle_tower
 extern void CopyFrontierBrainTrainerName(u8 *txtPtr); // battle_frontier_2
 extern void GetTrainerHillTrainerName(u8 *txtPtr, u16 trainerId); // pokenav
-extern void GetEreaderTrainerName(u8 *txtPtr);
 extern void CopyTrainerHillTrainerText(u8 arg0, u16 trainerId); // pokenav
-extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 
 // this file’s functions
 static void ChooseMoveUsedParticle(u8 *textPtr);

@@ -93,4 +93,3 @@ If you've only changed `.c` or `.s` files, you can turn off the dependency scann
 
 `make NODEP=1`
 
-

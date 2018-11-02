@@ -9,11 +9,11 @@
 #include "window.h"
 #include "text.h"
 #include "blit.h"
+#include "dynamic_placeholder_text_util.h"
 
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern u8* DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 a1);
 extern int sub_8197964();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
@@ -23,8 +23,6 @@ static u16 gFontHalfRowLookupTable[0x51];
 static u16 gLastTextBgColor;
 static u16 gLastTextFgColor;
 static u16 gLastTextShadowColor;
-
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 const struct FontInfo *gFonts;
 u8 gUnknown_03002F84;
@@ -3170,7 +3168,7 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
             return gGlyphWidthFuncs[i].func;
     }
 
-    return 0;
+    return NULL;
 }
 
 u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
@@ -3181,7 +3179,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     s32 result;
     int localLetterSpacing;
     u32 lineWidth;
-    u8 *bufferPointer;
+    const u8 *bufferPointer;
     int glyphWidth;
     u32 width;
 

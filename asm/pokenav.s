@@ -28369,7 +28369,7 @@ _081D5764:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x10
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081D580E
 	.pool
 _081D5790:
@@ -28390,7 +28390,7 @@ _081D5790:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x1C
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081D580E
 	.pool
 _081D57BC:
@@ -28411,7 +28411,7 @@ _081D57BC:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x28
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 	b _081D580E
 	.pool
 _081D57E8:
@@ -28432,7 +28432,7 @@ _081D57E8:
 	adds r1, 0x4
 	adds r0, r1
 	adds r0, 0x34
-	bl ConvertBattleFrontierTrainerSpeechToString
+	bl FrontierSpeechToString
 _081D580E:
 	bl sub_81D5710
 	pop {r4-r6}
@@ -29729,7 +29729,7 @@ sub_81D62CC: @ 81D62CC
 	lsls r0, r1, 24
 	lsrs r6, r0, 24
 	bl sub_81D56B0
-	bl sub_8165CB4
+	bl GetHighestLevelInPlayerParty
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -30182,7 +30182,7 @@ _081D6670:
 	asrs r0, 1
 	lsls r0, 1
 	subs r4, r0
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0

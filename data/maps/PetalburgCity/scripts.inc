@@ -67,7 +67,7 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 	applymovement 5, PetalburgCity_Movement_1DC42D
 	applymovement 255, PetalburgCity_Movement_1DC418
 	waitmovement 0
-	setflag FLAG_0x33E
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim

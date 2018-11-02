@@ -94,7 +94,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	call MauvilleCity_Gym_EventScript_27207E
 	msgbox MauvilleCity_Gym_Text_20E7AA, 4
 	setvar VAR_0x40D2, 3
-	clearflag FLAG_0x2FE
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_0x4F2
 	setflag FLAG_BADGE03_GET
 	addvar VAR_0x4085, 1
