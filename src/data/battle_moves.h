@@ -7106,7 +7106,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_DIAMOND_STORM
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_DEFENSE_UP2_HIT,
 		.power = 100,
 		.type = TYPE_ROCK,
 		.accuracy = 95,
@@ -7383,7 +7383,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.argument = 75, // restores 75% HP instead of 50% HP
 	},
 	{ // MOVE_THOUSAND_ARROWS
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_SMACK_DOWN,
 		.power = 90,
 		.type = TYPE_GROUND,
 		.accuracy = 100,
@@ -7455,7 +7455,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_DRAGON_ASCENT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_CLOSE_COMBAT,
 		.power = 120,
 		.type = TYPE_FLYING,
 		.accuracy = 100,
@@ -7803,7 +7803,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_REVELATION_DANCE
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_REVELATION_DANCE,
 		.power = 90,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
@@ -7812,7 +7812,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
-		.split = SPLIT_STATUS,
+		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_CORE_ENFORCER
 		.effect = EFFECT_PLACEHOLDER,
@@ -7899,7 +7899,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_AURORA_VEIL
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_AURORA_VEIL,
 		.power = 0,
 		.type = TYPE_ICE,
 		.accuracy = 0,

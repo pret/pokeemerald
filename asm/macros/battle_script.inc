@@ -1566,6 +1566,10 @@
 	.macro trytrainerslidelastonmsg battler
 	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON
 	.endm
+	
+	.macro setauroraveil battler
+	various \battler, VARIOUS_SET_AURORA_VEIL
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat, stages, down
