@@ -97,7 +97,7 @@ static IWRAM_DATA void *sBattleTowerSave_Duplicate;
 static IWRAM_DATA u32 sRecordStructSize;
 static IWRAM_DATA u8 gUnknown_03001160;
 static IWRAM_DATA u32 filler_03001164;
-static IWRAM_DATA u32 gUnknown_03001168[3];
+static IWRAM_DATA struct PlayerHallRecords *gUnknown_03001168[3];
 
 static EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {0};
 static EWRAM_DATA union PlayerRecords *sReceivedRecords = NULL;
@@ -1687,409 +1687,73 @@ static void ReceiveApprenticeData(struct Apprentice *arg0, size_t arg1, u32 arg2
     }
 }
 
-NAKED
-static void sub_80E8578(struct RecordMixingHallRecords *arg0, struct PlayerHallRecords *arg1, size_t arg2, u32 arg3, u32 arg4)
+static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, size_t recordSize, u32 arg3, s32 linkPlayerCount)
 {
-    asm_unified("	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x54\n\
-	str r0, [sp]\n\
-	ldr r0, [sp, 0x74]\n\
-	movs r4, 0\n\
-	mov r8, r4\n\
-	movs r5, 0\n\
-	str r5, [sp, 0x4]\n\
-	ldr r4, =gUnknown_03001168\n\
-	b _080E85A0\n\
-	.pool\n\
-_080E8598:\n\
-	adds r1, r2\n\
-	ldr r6, [sp, 0x4]\n\
-	adds r6, 0x1\n\
-	str r6, [sp, 0x4]\n\
-_080E85A0:\n\
-	ldr r5, [sp, 0x4]\n\
-	cmp r5, r0\n\
-	bge _080E85B6\n\
-	cmp r5, r3\n\
-	beq _080E85B0\n\
-	stm r4!, {r1}\n\
-	movs r6, 0x1\n\
-	add r8, r6\n\
-_080E85B0:\n\
-	mov r5, r8\n\
-	cmp r5, 0x3\n\
-	bne _080E8598\n\
-_080E85B6:\n\
-	movs r6, 0\n\
-	str r6, [sp, 0x4]\n\
-	subs r0, 0x1\n\
-	str r0, [sp, 0x24]\n\
-_080E85BE:\n\
-	movs r0, 0\n\
-	str r0, [sp, 0x8]\n\
-	ldr r1, [sp, 0x4]\n\
-	adds r1, 0x1\n\
-	str r1, [sp, 0x28]\n\
-	ldr r2, [sp, 0x4]\n\
-	lsls r2, 1\n\
-	str r2, [sp, 0x34]\n\
-	ldr r3, [sp, 0x4]\n\
-	adds r3, r2, r3\n\
-	str r3, [sp, 0x10]\n\
-	movs r4, 0\n\
-	str r4, [sp, 0x44]\n\
-	movs r5, 0\n\
-	str r5, [sp, 0x48]\n\
-_080E85DC:\n\
-	movs r6, 0\n\
-	mov r8, r6\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r1, [r0]\n\
-	ldr r2, [sp, 0x10]\n\
-	lsls r0, r2, 5\n\
-	ldr r3, [sp, 0x48]\n\
-	adds r0, r3, r0\n\
-	adds r3, r0, r1\n\
-	lsls r0, r2, 6\n\
-	ldr r4, [sp, 0x44]\n\
-	adds r0, r4, r0\n\
-	ldr r5, [sp]\n\
-	adds r2, r0, r5\n\
-_080E85F8:\n\
-	adds r0, r2, 0\n\
-	movs r6, 0x87\n\
-	lsls r6, 2\n\
-	adds r1, r3, r6\n\
-	ldm r1!, {r4-r6}\n\
-	stm r0!, {r4-r6}\n\
-	ldr r1, [r1]\n\
-	str r1, [r0]\n\
-	adds r3, 0x10\n\
-	adds r2, 0x10\n\
-	movs r0, 0x1\n\
-	add r8, r0\n\
-	mov r1, r8\n\
-	cmp r1, 0x2\n\
-	ble _080E85F8\n\
-	movs r2, 0\n\
-	mov r8, r2\n\
-	ldr r3, [sp, 0x24]\n\
-	cmp r8, r3\n\
-	bge _080E86DC\n\
-	ldr r4, [sp, 0x4]\n\
-	lsls r4, 5\n\
-	mov r9, r4\n\
-	ldr r5, [sp, 0x8]\n\
-	lsls r7, r5, 4\n\
-	ldr r6, [sp, 0x34]\n\
-	ldr r1, [sp, 0x4]\n\
-	adds r0, r6, r1\n\
-	lsls r0, 6\n\
-	str r0, [sp, 0x14]\n\
-	ldr r2, [sp]\n\
-	adds r0, r2, r0\n\
-	ldr r3, [sp, 0x44]\n\
-	str r3, [sp, 0x18]\n\
-	adds r0, r3\n\
-	str r0, [sp, 0x1C]\n\
-	ldr r4, [sp, 0x14]\n\
-	adds r0, r3, r4\n\
-	adds r0, r2\n\
-	adds r0, 0x30\n\
-	mov r10, r0\n\
-_080E864A:\n\
-	movs r5, 0\n\
-	str r5, [sp, 0xC]\n\
-	movs r3, 0\n\
-	mov r6, r8\n\
-	lsls r6, 2\n\
-	str r6, [sp, 0x38]\n\
-	ldr r1, [sp, 0x18]\n\
-	ldr r2, [sp, 0x14]\n\
-	adds r0, r1, r2\n\
-	ldr r4, [sp]\n\
-	adds r5, r0, r4\n\
-	ldr r0, =gUnknown_03001168\n\
-	adds r0, r6, r0\n\
-	str r0, [sp, 0x50]\n\
-_080E8666:\n\
-	lsls r0, r3, 4\n\
-	ldr r6, [sp, 0x1C]\n\
-	adds r0, r6, r0\n\
-	str r3, [sp, 0x4C]\n\
-	bl GetTrainerId\n\
-	adds r4, r0, 0\n\
-	ldr r1, [sp, 0x50]\n\
-	ldr r0, [r1]\n\
-	add r0, r9\n\
-	adds r0, r7\n\
-	bl GetTrainerId\n\
-	ldr r3, [sp, 0x4C]\n\
-	cmp r4, r0\n\
-	bne _080E86A8\n\
-	ldr r2, [sp, 0xC]\n\
-	adds r2, 0x1\n\
-	str r2, [sp, 0xC]\n\
-	ldr r4, [sp, 0x50]\n\
-	ldr r0, [r4]\n\
-	mov r6, r9\n\
-	adds r1, r7, r6\n\
-	adds r1, r0, r1\n\
-	ldrh r0, [r5, 0x4]\n\
-	ldrh r2, [r1, 0x4]\n\
-	cmp r0, r2\n\
-	bcs _080E86A8\n\
-	adds r0, r5, 0\n\
-	ldm r1!, {r2,r4,r6}\n\
-	stm r0!, {r2,r4,r6}\n\
-	ldr r1, [r1]\n\
-	str r1, [r0]\n\
-_080E86A8:\n\
-	adds r5, 0x10\n\
-	adds r3, 0x1\n\
-	cmp r3, 0x2\n\
-	ble _080E8666\n\
-	ldr r3, [sp, 0xC]\n\
-	cmp r3, 0\n\
-	bne _080E86CE\n\
-	ldr r0, =gUnknown_03001168\n\
-	ldr r4, [sp, 0x38]\n\
-	adds r0, r4, r0\n\
-	ldr r0, [r0]\n\
-	mov r5, r9\n\
-	adds r2, r7, r5\n\
-	mov r1, r10\n\
-	adds r0, r2\n\
-	ldm r0!, {r2,r3,r6}\n\
-	stm r1!, {r2,r3,r6}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-_080E86CE:\n\
-	movs r4, 0x10\n\
-	add r10, r4\n\
-	movs r5, 0x1\n\
-	add r8, r5\n\
-	ldr r6, [sp, 0x24]\n\
-	cmp r8, r6\n\
-	blt _080E864A\n\
-_080E86DC:\n\
-	ldr r0, [sp, 0x44]\n\
-	adds r0, 0x60\n\
-	str r0, [sp, 0x44]\n\
-	ldr r1, [sp, 0x48]\n\
-	adds r1, 0x30\n\
-	str r1, [sp, 0x48]\n\
-	ldr r2, [sp, 0x8]\n\
-	adds r2, 0x1\n\
-	str r2, [sp, 0x8]\n\
-	cmp r2, 0x1\n\
-	bgt _080E86F4\n\
-	b _080E85DC\n\
-_080E86F4:\n\
-	ldr r3, [sp, 0x28]\n\
-	str r3, [sp, 0x4]\n\
-	cmp r3, 0x8\n\
-	bgt _080E86FE\n\
-	b _080E85BE\n\
-_080E86FE:\n\
-	movs r4, 0\n\
-	str r4, [sp, 0x8]\n\
-_080E8702:\n\
-	ldr r5, [sp, 0x8]\n\
-	adds r5, 0x1\n\
-	str r5, [sp, 0x2C]\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r1, [r0]\n\
-	movs r0, 0x54\n\
-	ldr r6, [sp, 0x8]\n\
-	muls r0, r6\n\
-	adds r3, r0, r1\n\
-	movs r0, 0xA8\n\
-	muls r0, r6\n\
-	ldr r1, [sp]\n\
-	adds r2, r0, r1\n\
-	movs r4, 0x2\n\
-	mov r8, r4\n\
-_080E8720:\n\
-	movs r5, 0xD8\n\
-	lsls r5, 3\n\
-	adds r0, r2, r5\n\
-	ldr r6, =0x0000057c\n\
-	adds r1, r3, r6\n\
-	ldm r1!, {r4-r6}\n\
-	stm r0!, {r4-r6}\n\
-	ldm r1!, {r4-r6}\n\
-	stm r0!, {r4-r6}\n\
-	ldr r1, [r1]\n\
-	str r1, [r0]\n\
-	adds r3, 0x1C\n\
-	adds r2, 0x1C\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	add r8, r0\n\
-	mov r1, r8\n\
-	cmp r1, 0\n\
-	bge _080E8720\n\
-	movs r2, 0\n\
-	mov r8, r2\n\
-	ldr r3, [sp, 0x24]\n\
-	cmp r8, r3\n\
-	blt _080E8752\n\
-	b _080E885A\n\
-_080E8752:\n\
-	ldr r4, [sp, 0x8]\n\
-	lsls r1, r4, 3\n\
-	movs r0, 0xA8\n\
-	adds r5, r4, 0\n\
-	muls r5, r0\n\
-	str r5, [sp, 0x20]\n\
-	str r5, [sp, 0x3C]\n\
-	subs r1, r4\n\
-	lsls r1, 2\n\
-	mov r10, r1\n\
-_080E8766:\n\
-	movs r6, 0\n\
-	str r6, [sp, 0xC]\n\
-	mov r0, r8\n\
-	lsls r0, 2\n\
-	str r0, [sp, 0x38]\n\
-	mov r1, r8\n\
-	adds r1, 0x1\n\
-	str r1, [sp, 0x30]\n\
-	ldr r0, =gUnknown_03001168\n\
-	ldr r2, [sp, 0x38]\n\
-	adds r2, r0\n\
-	mov r9, r2\n\
-	ldr r3, [sp]\n\
-	movs r4, 0xD8\n\
-	lsls r4, 3\n\
-	adds r0, r3, r4\n\
-	ldr r5, [sp, 0x3C]\n\
-	adds r7, r5, r0\n\
-	str r6, [sp, 0x40]\n\
-	movs r3, 0x2\n\
-_080E878E:\n\
-	ldr r1, [sp, 0x20]\n\
-	movs r2, 0xD8\n\
-	lsls r2, 3\n\
-	adds r0, r1, r2\n\
-	ldr r4, [sp]\n\
-	adds r0, r4, r0\n\
-	ldr r6, [sp, 0x40]\n\
-	adds r5, r0, r6\n\
-	adds r0, r5, 0\n\
-	str r3, [sp, 0x4C]\n\
-	bl GetTrainerId\n\
-	adds r4, r0, 0\n\
-	movs r6, 0x90\n\
-	lsls r6, 1\n\
-	add r6, r10\n\
-	mov r1, r9\n\
-	ldr r0, [r1]\n\
-	adds r0, r6\n\
-	bl GetTrainerId\n\
-	ldr r3, [sp, 0x4C]\n\
-	cmp r4, r0\n\
-	bne _080E8808\n\
-	adds r0, r5, 0x4\n\
-	bl GetTrainerId\n\
-	adds r4, r0, 0\n\
-	mov r2, r9\n\
-	ldr r0, [r2]\n\
-	adds r0, r6\n\
-	adds r0, 0x4\n\
-	bl GetTrainerId\n\
-	ldr r3, [sp, 0x4C]\n\
-	cmp r4, r0\n\
-	bne _080E8808\n\
-	ldr r4, [sp, 0xC]\n\
-	adds r4, 0x1\n\
-	str r4, [sp, 0xC]\n\
-	mov r5, r9\n\
-	ldr r0, [r5]\n\
-	mov r6, r10\n\
-	adds r2, r0, r6\n\
-	movs r0, 0x94\n\
-	lsls r0, 1\n\
-	adds r1, r2, r0\n\
-	ldrh r0, [r7, 0x8]\n\
-	ldrh r1, [r1]\n\
-	cmp r0, r1\n\
-	bcs _080E8808\n\
-	adds r0, r7, 0\n\
-	movs r4, 0x90\n\
-	lsls r4, 1\n\
-	adds r1, r2, r4\n\
-	ldm r1!, {r2,r5,r6}\n\
-	stm r0!, {r2,r5,r6}\n\
-	ldm r1!, {r4-r6}\n\
-	stm r0!, {r4-r6}\n\
-	ldr r1, [r1]\n\
-	str r1, [r0]\n\
-_080E8808:\n\
-	adds r7, 0x1C\n\
-	ldr r0, [sp, 0x40]\n\
-	adds r0, 0x1C\n\
-	str r0, [sp, 0x40]\n\
-	subs r3, 0x1\n\
-	cmp r3, 0\n\
-	bge _080E878E\n\
-	ldr r1, [sp, 0xC]\n\
-	cmp r1, 0\n\
-	bne _080E8850\n\
-	mov r0, r8\n\
-	adds r0, 0x3\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 2\n\
-	ldr r2, [sp, 0x20]\n\
-	adds r1, r2\n\
-	ldr r3, [sp]\n\
-	adds r1, r3, r1\n\
-	ldr r0, =gUnknown_03001168\n\
-	ldr r4, [sp, 0x38]\n\
-	adds r0, r4, r0\n\
-	ldr r0, [r0]\n\
-	add r0, r10\n\
-	movs r5, 0xD8\n\
-	lsls r5, 3\n\
-	adds r1, r5\n\
-	movs r6, 0x90\n\
-	lsls r6, 1\n\
-	adds r0, r6\n\
-	ldm r0!, {r2-r4}\n\
-	stm r1!, {r2-r4}\n\
-	ldm r0!, {r2,r5,r6}\n\
-	stm r1!, {r2,r5,r6}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-_080E8850:\n\
-	ldr r3, [sp, 0x30]\n\
-	mov r8, r3\n\
-	ldr r4, [sp, 0x24]\n\
-	cmp r8, r4\n\
-	blt _080E8766\n\
-_080E885A:\n\
-	ldr r5, [sp, 0x2C]\n\
-	str r5, [sp, 0x8]\n\
-	cmp r5, 0x1\n\
-	bgt _080E8864\n\
-	b _080E8702\n\
-_080E8864:\n\
-	add sp, 0x54\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-    ");
+    s32 i, j, k, l;
+    s32 var_68;
+
+    k = 0;
+    i = 0;
+    while (1)
+    {
+        if (i >= linkPlayerCount)
+            break;
+        if (i != arg3)
+            gUnknown_03001168[k++] = hallRecords;
+
+        if (k == 3)
+            break;
+        hallRecords += recordSize;
+        i++;
+    }
+
+    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            for (k = 0; k < 3; k++)
+                dst->hallRecords1P[i][j][k] = gSaveBlock2Ptr->hallRecords1P[i][j][k];
+
+            for (k = 0; k < linkPlayerCount - 1; k++)
+            {
+                var_68 = 0;
+                for (l = 0; l < 3; l++)
+                {
+                    if (GetTrainerId(dst->hallRecords1P[i][j][l].id) == GetTrainerId(gUnknown_03001168[k]->onePlayer[i][j].id))
+                    {
+                        var_68++;
+                        if (dst->hallRecords1P[i][j][l].winStreak < gUnknown_03001168[k]->onePlayer[i][j].winStreak)
+                            dst->hallRecords1P[i][j][l] = gUnknown_03001168[k]->onePlayer[i][j];
+                    }
+                }
+                if (var_68 == 0)
+                    dst->hallRecords1P[i][j][k + 3] = gUnknown_03001168[k]->onePlayer[i][j];
+            }
+        }
+    }
+
+    for (j = 0; j < 2; j++)
+    {
+        for (k = 0; k < 3; k++)
+            dst->hallRecords2P[j][k] = gSaveBlock2Ptr->hallRecords2P[j][k];
+
+        for (k = 0; k < linkPlayerCount - 1; k++)
+        {
+            var_68 = 0;
+            for (l = 0; l < 3; l++)
+            {
+                if (GetTrainerId(dst->hallRecords2P[j][l].id1) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id1)
+                    && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id2))
+                {
+                    var_68++;
+                    if (dst->hallRecords2P[j][l].winStreak < gUnknown_03001168[k]->twoPlayers[j].winStreak)
+                        dst->hallRecords2P[j][l] = gUnknown_03001168[k]->twoPlayers[j];
+                }
+            }
+            if (var_68 == 0)
+                dst->hallRecords2P[j][k + 3] = gUnknown_03001168[k]->twoPlayers[j];
+        }
+    }
 }
 
 static void sub_80E8880(struct RankingHall1P *arg0, struct RankingHall1P *arg1)
@@ -2155,12 +1819,12 @@ static void sub_80E8924(struct RecordMixingHallRecords *arg0)
         sub_80E88CC(gSaveBlock2Ptr->hallRecords2P[j], arg0->hallRecords2P[j]);
 }
 
-static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t arg1, u32 arg2)
+static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t recordSize, u32 arg2)
 {
     u8 linkPlayerCount = GetLinkPlayerCount();
     struct RecordMixingHallRecords *largeStructPtr = AllocZeroed(sizeof(struct RecordMixingHallRecords));
 
-    sub_80E8578(largeStructPtr, hallRecords, arg1, arg2, linkPlayerCount);
+    sub_80E8578(largeStructPtr, hallRecords, recordSize, arg2, linkPlayerCount);
     sub_80E8924(largeStructPtr);
 
     Free(largeStructPtr);
