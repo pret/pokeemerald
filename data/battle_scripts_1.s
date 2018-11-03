@@ -4213,6 +4213,7 @@ BattleScript_FaintAttacker::
 	dofaintanimation BS_ATTACKER
 	cleareffectsonfaint BS_ATTACKER
 	printstring STRINGID_ATTACKERFAINTED
+	trytrainerslidefirstdownmsg BS_ATTACKER
 	return
 
 BattleScript_FaintTarget::
@@ -4223,6 +4224,7 @@ BattleScript_FaintTarget::
 	printstring STRINGID_TARGETFAINTED
 	tryactivatemoxie BS_ATTACKER
 	tryactivatefellstinger BS_ATTACKER
+	trytrainerslidefirstdownmsg BS_TARGET
 	return
 
 BattleScript_GiveExp::
@@ -4288,6 +4290,7 @@ BattleScript_FaintedMonChooseAnother::
 	switchinanim BS_FAINTED, FALSE
 	waitstate
 	various7 BS_ATTACKER
+	trytrainerslidelastonmsg BS_FAINTED
 	switchineffects BS_FAINTED
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
 	cancelallactions

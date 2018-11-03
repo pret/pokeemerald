@@ -583,6 +583,8 @@ struct BattleStruct
     u8 activeAbilityPopUps; // as bits for each battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
+    const u8 *trainerSlideMsg;
+    bool8 trainerSlideLowHpMsgDone;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

@@ -214,12 +214,20 @@ struct BattleMsgData
     u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
+enum
+{
+    TRAINER_SLIDE_LAST_SWITCHIN,
+    TRAINER_SLIDE_LAST_LOW_HP,
+    TRAINER_SLIDE_FIRST_DOWN,
+};
+
 void BufferStringBattle(u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
 void BattlePutTextOnWindow(const u8* text, u8 arg1);
 void SetPpNumbersPaletteInMoveSelection(void);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
+bool32 ShouldDoTrainerSlide(u32 battlerId, u32 trainerId, u32 which);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 

@@ -280,5 +280,7 @@ extern const u8 BattleScript_ForceRandomSwitch[];
 extern const u8 BattleScript_SideStatusWoreOffReturn[];
 extern const u8 BattleScript_MoveEffectSmackDown[];
 extern const u8 BattleScript_MoveEffectFlameBurst[];
+extern const u8 BattleScript_TrainerSlideMsgRet[];
+extern const u8 BattleScript_TrainerSlideMsgEnd2[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
