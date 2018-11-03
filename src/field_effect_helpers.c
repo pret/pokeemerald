@@ -25,9 +25,9 @@ static void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *);
 static void UpdateAshFieldEffect_Step0(struct Sprite *);
 static void UpdateAshFieldEffect_Step1(struct Sprite *);
 static void UpdateAshFieldEffect_Step2(struct Sprite *);
-static void sub_81556B0(struct EventObject *, struct Sprite *);
+static void SynchroniseSurfAnim(struct EventObject *, struct Sprite *);
 static void sub_81556E8(struct EventObject *, struct Sprite *);
-static void sub_815577C(struct EventObject *, struct Sprite *, struct Sprite *);
+static void CreateBobbingEffect(struct EventObject *, struct Sprite *, struct Sprite *);
 static void sub_8155850(struct Sprite *);
 static u32 ShowDisguiseFieldEffect(u8, u8, u8);
 
@@ -997,13 +997,13 @@ void UpdateSurfBlobFieldEffect(struct Sprite *sprite)
 
     eventObject = &gEventObjects[sprite->data[2]];
     linkedSprite = &gSprites[eventObject->spriteId];
-    sub_81556B0(eventObject, sprite);
+    SynchroniseSurfAnim(eventObject, sprite);
     sub_81556E8(eventObject, sprite);
-    sub_815577C(eventObject, linkedSprite, sprite);
+    CreateBobbingEffect(eventObject, linkedSprite, sprite);
     sprite->oam.priority = linkedSprite->oam.priority;
 }
 
-static void sub_81556B0(struct EventObject *eventObject, struct Sprite *sprite)
+static void SynchroniseSurfAnim(struct EventObject *eventObject, struct Sprite *sprite)
 {
     u8 surfBlobDirectionAnims[] = {
         0, // DIR_NONE
@@ -1126,7 +1126,7 @@ _08155770:\n\
 }
 #endif
 
-static void sub_815577C(struct EventObject *eventObject, struct Sprite *linkedSprite, struct Sprite *sprite)
+static void CreateBobbingEffect(struct EventObject *eventObject, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
     u16 unk_085CDC6A[] = {3, 7};
     u8 v0 = sub_8155638(sprite);

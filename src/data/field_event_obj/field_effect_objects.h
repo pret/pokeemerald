@@ -124,25 +124,25 @@ const struct SpriteFrameImage gFieldEffectObjectPicTable_SurfBlob[] = {
     overworld_frame(gFieldEffectObjectPic_SurfBlob, 4, 4, 2),
 };
 
-const union AnimCmd gFieldEffectObjectImageAnim_850CB94[] =
+const union AnimCmd gSurfBlobAnim_FaceSouth[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldEffectObjectImageAnim_850CB9C[] =
+const union AnimCmd gSurfBlobAnim_FaceNorth[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldEffectObjectImageAnim_850CBA4[] =
+const union AnimCmd gSurfBlobAnim_FaceWest[] =
 {
     ANIMCMD_FRAME(2, 1),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gFieldEffectObjectImageAnim_850CBAC[] =
+const union AnimCmd gSurfBlobAnim_FaceEast[] =
 {
     ANIMCMD_FRAME(2, 1, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
@@ -150,10 +150,10 @@ const union AnimCmd gFieldEffectObjectImageAnim_850CBAC[] =
 
 const union AnimCmd *const gFieldEffectObjectImageAnimTable_SurfBlob[] =
 {
-    gFieldEffectObjectImageAnim_850CB94,
-    gFieldEffectObjectImageAnim_850CB9C,
-    gFieldEffectObjectImageAnim_850CBA4,
-    gFieldEffectObjectImageAnim_850CBAC,
+    gSurfBlobAnim_FaceSouth,
+    gSurfBlobAnim_FaceNorth,
+    gSurfBlobAnim_FaceWest,
+    gSurfBlobAnim_FaceEast,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob = {0xFFFF, 0xFFFF, &gEventObjectBaseOam_32x32, gFieldEffectObjectImageAnimTable_SurfBlob, gFieldEffectObjectPicTable_SurfBlob, gDummySpriteAffineAnimTable, UpdateSurfBlobFieldEffect};

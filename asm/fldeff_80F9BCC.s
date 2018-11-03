@@ -2200,8 +2200,8 @@ _080FAE2A:
 	.pool
 	thumb_func_end sub_80FADE4
 
-	thumb_func_start task50_FldeffPoison_Start
-task50_FldeffPoison_Start: @ 80FAE38
+	thumb_func_start task50_overworld_poison_effect
+task50_overworld_poison_effect: @ 80FAE38
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2260,14 +2260,14 @@ _080FAE92:
 _080FAEA2:
 	pop {r0}
 	bx r0
-	thumb_func_end task50_FldeffPoison_Start
+	thumb_func_end task50_overworld_poison_effect
 
 	thumb_func_start FldeffPoison_Start
 FldeffPoison_Start: @ 80FAEA8
 	push {lr}
 	movs r0, 0x4F
 	bl PlaySE
-	ldr r0, =task50_FldeffPoison_Start
+	ldr r0, =task50_overworld_poison_effect
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
@@ -2278,7 +2278,7 @@ FldeffPoison_Start: @ 80FAEA8
 	thumb_func_start FieldPoisonEffectIsRunning
 FieldPoisonEffectIsRunning: @ 80FAEC0
 	push {lr}
-	ldr r0, =task50_FldeffPoison_Start
+	ldr r0, =task50_overworld_poison_effect
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
