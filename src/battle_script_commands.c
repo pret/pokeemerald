@@ -7139,7 +7139,7 @@ static void atk77_setprotectlike(void) // protect and endure
 {
     bool32 notLastTurn = TRUE;
 
-    if (gBattleMoves[gLastResultingMoves[gBattlerAttacker]].flags & FLAG_PROTECTION_MOVE)
+    if (!(gBattleMoves[gLastResultingMoves[gBattlerAttacker]].flags & FLAG_PROTECTION_MOVE))
         gDisableStructs[gBattlerAttacker].protectUses = 0;
 
     if (gCurrentTurnActionNumber == (gBattlersCount - 1))

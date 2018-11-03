@@ -2918,8 +2918,10 @@ AI_TryToFaint_DoubleSuperEffective:
 
 AI_TryToFaint_TryToEncourageQuickAttack:
 	if_effect EFFECT_EXPLOSION, AI_TryToFaint_End
+	if_user_faster AI_TryToFaint_ScoreUp4
 	if_move_flag FLAG_HIGH_CRIT AI_TryToFaint_ScoreUp4
 	score +2
+	end
 
 AI_TryToFaint_ScoreUp4:
 	score +4
