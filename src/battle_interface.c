@@ -26,6 +26,7 @@
 #include "data2.h"
 #include "battle_debug.h"
 #include "malloc.h"
+#include "constants/battle_config.h"
 
 struct TestingBar
 {
@@ -3109,6 +3110,9 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 {
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
+
+    if (B_ABILITY_POP_UP < GEN_5)
+        return;
 
     if (!gBattleStruct->activeAbilityPopUps)
     {

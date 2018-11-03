@@ -13,5 +13,6 @@
 #define B_GALE_WINGS                GEN_6 // Gen7 requires full hp.
 #define B_SOUND_SUBSTITUTE          GEN_6 // Starting from gen6 sound moves bypass Substitute.
 #define B_EXP_CATCH                 GEN_6 // Starting from gen6, pokemon get experience from catching.
+#define B_ABILITY_POP_UP            GEN_6 // Starting from gen5, the pokemon abilities are displayed in a pop-up, when they activate in battle.
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H
