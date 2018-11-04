@@ -11,6 +11,16 @@
 #include "blit.h"
 #include "dynamic_placeholder_text_util.h"
 
+struct UnkStruct
+{
+    u8 unk0[0x20];
+    u8 unk20[0x20];
+    u8 unk40[0x20];
+    u8 unk60[0x20];
+    u8 unk80;
+    u8 unk81;
+};
+
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
@@ -1784,10 +1794,10 @@ u16 Font0Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 0;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 0;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1796,10 +1806,10 @@ u16 Font1Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 1;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 1;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1808,10 +1818,10 @@ u16 Font2Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 2;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 2;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1820,10 +1830,10 @@ u16 Font3Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 3;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 3;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1832,10 +1842,10 @@ u16 Font4Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 4;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 4;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1844,10 +1854,10 @@ u16 Font5Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 5;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 5;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1856,10 +1866,10 @@ u16 Font7Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 7;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 7;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1868,10 +1878,10 @@ u16 Font8Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->sub.field_1_top == 0)
     {
-        textPrinter->sub_union.sub.font_type = 8;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.sub.font_type = 8;
+        subStruct->sub.field_1_top = 1;
     }
     return RenderText(textPrinter);
 }
@@ -1881,11 +1891,11 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
     if (gTextFlags.flag_2 == 1)
-        subStruct->frames_visible_counter = 0;
+        subStruct->sub.frames_visible_counter = 0;
     else
     {
-        subStruct->field_1_upmid = 0;
-        subStruct->field_1 = 0;
+        subStruct->sub.field_1_upmid = 0;
+        subStruct->sub.field_1 = 0;
     }
 }
 
@@ -1896,9 +1906,9 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 
     if (gTextFlags.flag_2 == 0)
     {
-        if (subStruct->field_1 != 0)
+        if (subStruct->sub.field_1 != 0)
         {
-            subStruct->field_1 = ((*(u32*)&textPrinter->sub_union.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
+            subStruct->sub.field_1 = ((*(u32*)&textPrinter->sub_union.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
         }
         else
         {
@@ -1934,8 +1944,8 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 0x10);
             CopyWindowToVram(textPrinter->subPrinter.windowId, 0x2);
 
-            subStruct->field_1 = 0x8;
-            subStruct->field_1_upmid = (*(u32*)subStruct << 17 >> 30) + 1;
+            subStruct->sub.field_1 = 0x8;
+            subStruct->sub.field_1_upmid = (*(u32*)subStruct << 17 >> 30) + 1;
         }
     }
 }
@@ -1956,13 +1966,13 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->frames_visible_counter == 49)
+    if (subStruct->sub.frames_visible_counter == 49)
     {
         return TRUE;
     }
     else
     {
-        ++subStruct->frames_visible_counter;
+        ++subStruct->sub.frames_visible_counter;
         return FALSE;
     }
 }
@@ -2045,17 +2055,18 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
         }
     }
 }
-#ifdef NONMATCHING
+
 u16 RenderText(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *r4 = &textPrinter->sub_union.sub;
+    struct TextPrinterSubSubStruct *subStruct = &textPrinter->sub_union.sub.sub;
     u16 currChar;
     s32 width;
+    s32 widthHelper;
 
-    switch (textPrinter->state) // _080057C4
+    switch (textPrinter->state)
     {
     case 0: // _080057F0
-        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && r4->font_type_upper)
+        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && subStruct->font_type_upper)
             textPrinter->delayCounter = 0;
 
         if (textPrinter->delayCounter && textPrinter->text_speed) //_0800580A
@@ -2063,7 +2074,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->delayCounter--;
             if (gTextFlags.flag_0 && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
             {
-                r4->font_type_upper = 1;
+                subStruct->font_type_upper = 1;
                 textPrinter->delayCounter = 0;
             }
             return 3;
@@ -2077,49 +2088,49 @@ u16 RenderText(struct TextPrinter *textPrinter)
         currChar = *textPrinter->subPrinter.current_text_offset;
         textPrinter->subPrinter.current_text_offset++;
 
-        switch (currChar) //_0800588A
+        switch (currChar)
         {
-        case 0xF8+6: //_080058B8
+        case CHAR_NEWLINE:
             textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
             textPrinter->subPrinter.currentY += (gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing);
             return 2;
-        case 0xF8+5: //_080058DC
+        case PLACEHOLDER_BEGIN:
             textPrinter->subPrinter.current_text_offset++;
             return 2;
-        case 0xF8+4: //_080058E0
+        case EXT_CTRL_CODE_BEGIN:
             currChar = *textPrinter->subPrinter.current_text_offset;
             textPrinter->subPrinter.current_text_offset++;
-            switch (currChar) // _080058F0
+            switch (currChar)
             {
             case 1: // _08005960
-                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.fgColor = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                 return 2;
             case 2: // _08005982
                 textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                 return 2;
             case 3: // _080059A6
                 textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                 return 2;
             case 4: // _080059C0
-                textPrinter->subPrinter.fontColor_h = *textPrinter->subPrinter.current_text_offset;
+                textPrinter->subPrinter.fgColor = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
                 textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
                 textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fontColor_h, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
                 return 2;
             case 5: // _08005A0E
                 textPrinter->subPrinter.current_text_offset++;
                 return 2;
             case 6: //_08005A12
-                r4->font_type = *textPrinter->subPrinter.current_text_offset;
+                subStruct->font_type = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
                 return 2;
             case 7: // _08005A0A
@@ -2132,7 +2143,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case 9: // _08005A3A
                 textPrinter->state = 1;
                 if (gTextFlags.flag_2)
-                    r4->frames_visible_counter = 0;
+                    subStruct->frames_visible_counter = 0;
                 return 3;
             case 10: // _08005A58
                 textPrinter->state = 5;
@@ -2144,6 +2155,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->subPrinter.current_text_offset++;
                 PlayBGM(currChar);
                 return 2;
+            case 12: // _08005B5A
+                currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
+                textPrinter->subPrinter.current_text_offset++;
+                break;
             case 16: // _08005A76
                 currChar = *textPrinter->subPrinter.current_text_offset;
                 textPrinter->subPrinter.current_text_offset++;
@@ -2186,7 +2201,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 return 2;
             case 19: // _08005B02
                 {
-                    s32 widthHelper = *textPrinter->subPrinter.current_text_offset;
+                    widthHelper = *textPrinter->subPrinter.current_text_offset;
                     widthHelper += textPrinter->subPrinter.x;
                     textPrinter->subPrinter.current_text_offset++;
                     width = widthHelper - textPrinter->subPrinter.currentX;
@@ -2207,36 +2222,30 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case 22: // _08005B3E
                 textPrinter->japanese = 0;
                 return 2;
-            case 12: // _08005B5A
-                currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
-                textPrinter->subPrinter.current_text_offset++;
-                break;
             }
             break;
-
-        case 0xF8+3: // _08005B48
+        case CHAR_PROMPT_CLEAR:
             textPrinter->state = 2;
             TextPrinterInitDownArrowCounters(textPrinter);
             return 3;
-        case 0xF8+2: // _08005B4C
+        case CHAR_PROMPT_SCROLL:
             textPrinter->state = 3;
             TextPrinterInitDownArrowCounters(textPrinter);
             return 3;
-        case 0xF8+1: // _08005B5A
+        case CHAR_SPECIAL_F9:
             currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
             textPrinter->subPrinter.current_text_offset++;
             break;
-        case 0xF8+0: // _08005B6C
-            currChar = *textPrinter->subPrinter.current_text_offset;
-            textPrinter->subPrinter.current_text_offset++;
+        case CHAR_SPECIAL_F8:
+            currChar = *textPrinter->subPrinter.current_text_offset++;
             gUnknown_03002F90[0x80] = DrawKeypadIcon(textPrinter->subPrinter.windowId, currChar, textPrinter->subPrinter.currentX, textPrinter->subPrinter.currentY);
             textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing;
             return 0;
-        case 0xF8+7: // _08005D6C
+        case EOS:
             return 1;
         }
 
-        switch (r4->font_type) // _08005B90
+        switch (subStruct->font_type)
         {
         case 0: // _08005BCC
             DecompressGlyphFont0(currChar, textPrinter->japanese);
@@ -2260,7 +2269,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             break;
         }
 
-        CopyGlyphToWindow(textPrinter); // _08005C10
+        CopyGlyphToWindow(textPrinter);
 
         if (textPrinter->minLetterSpacing)
         {
@@ -2272,7 +2281,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->subPrinter.currentX += width;
             }
         }
-        else // _08005C48
+        else
         {
             if (textPrinter->japanese)
                 textPrinter->subPrinter.currentX += (gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing);
@@ -2280,11 +2289,11 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80];
         }
         return 0;
-    case 1: // _08005C78
+    case 1:
         if (TextPrinterWait(textPrinter))
             textPrinter->state = 0;
         return 3;
-    case 2: // _08005C8C
+    case 2:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
             FillWindowPixelBuffer(textPrinter->subPrinter.windowId, (textPrinter->subPrinter.bgColor << 4) | textPrinter->subPrinter.bgColor);
@@ -2293,7 +2302,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->state = 0;
         }
         return 3;
-    case 3: // _08005CB8
+    case 3:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
             TextPrinterClearDownArrow(textPrinter);
@@ -2302,7 +2311,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->state = 4;
         }
         return 3;
-    case 4: // _08005CF0
+    case 4:
         if (textPrinter->scrollDistance)
         {
             int scrollSpeed = sub_8197964();
@@ -2324,7 +2333,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             textPrinter->state = 0;
         }
         return 3;
-    case 5: // _08005D48
+    case 5:
         if (!IsSEPlaying())
             textPrinter->state = 0;
         return 3;
@@ -2338,734 +2347,6 @@ u16 RenderText(struct TextPrinter *textPrinter)
 
     return 1;
 }
-#else
-NAKED
-u16 RenderText(struct TextPrinter *textPrinter)
-{
-    asm("push {r4-r6,lr}\n\
-    add r6, r0, #0\n\
-    add r4, r6, #0\n\
-    add r4, #0x14\n\
-    ldrb r0, [r6, #0x1C]\n\
-    cmp r0, #0x6\n\
-    bls _080057C4\n\
-    b _08005D6C\n\
-_080057C4:\n\
-    lsl r0, #2\n\
-    ldr r1, =_080057D4\n\
-    add r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_080057D4:\n\
-    .4byte _080057F0\n\
-    .4byte _08005C78\n\
-    .4byte _08005C8C\n\
-    .4byte _08005CB8\n\
-    .4byte _08005CF0\n\
-    .4byte _08005D48\n\
-    .4byte _08005D5A\n\
-_080057F0:\n\
-    ldr r2, =gMain\n\
-    ldrh r1, [r2, #0x2C]\n\
-    mov r0, #0x3\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    beq _0800580A\n\
-    ldrb r1, [r4]\n\
-    mov r0, #0x10\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    beq _0800580A\n\
-    mov r0, #0\n\
-    strb r0, [r6, #0x1E]\n\
-_0800580A:\n\
-    ldrb r1, [r6, #0x1E]\n\
-    cmp r1, #0\n\
-    beq _0800584C\n\
-    ldrb r0, [r6, #0x1D]\n\
-    cmp r0, #0\n\
-    beq _0800584C\n\
-    sub r0, r1, #0x1\n\
-    strb r0, [r6, #0x1E]\n\
-    ldr r0, =gTextFlags\n\
-    ldrb r1, [r0]\n\
-    mov r0, #0x1\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    bne _08005828\n\
-    b _08005B56\n\
-_08005828:\n\
-    ldrh r1, [r2, #0x2E]\n\
-    mov r0, #0x3\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    bne _08005834\n\
-    b _08005B56\n\
-_08005834:\n\
-    ldrb r0, [r4]\n\
-    mov r1, #0x10\n\
-    orr r0, r1\n\
-    strb r0, [r4]\n\
-    mov r0, #0\n\
-    strb r0, [r6, #0x1E]\n\
-    b _08005B56\n\
-    .pool\n\
-_0800584C:\n\
-    ldr r0, =gBattleTypeFlags\n\
-    ldr r0, [r0]\n\
-    mov r1, #0x80\n\
-    lsl r1, #17\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    bne _08005874\n\
-    ldr r0, =gTextFlags\n\
-    ldrb r1, [r0]\n\
-    mov r0, #0x4\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    beq _08005874\n\
-    mov r0, #0x3\n\
-    b _08005876\n\
-    .pool\n\
-_08005874:\n\
-    ldrb r0, [r6, #0x1D]\n\
-_08005876:\n\
-    strb r0, [r6, #0x1E]\n\
-    ldr r0, [r6]\n\
-    ldrb r3, [r0]\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    add r0, r3, #0\n\
-    sub r0, #0xF8\n\
-    cmp r0, #0x7\n\
-    bls _0800588A\n\
-    b _08005B90\n\
-_0800588A:\n\
-    lsl r0, #2\n\
-    ldr r1, =_08005898\n\
-    add r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_08005898:\n\
-    .4byte _08005B6C\n\
-    .4byte _08005B5A\n\
-    .4byte _08005B4C\n\
-    .4byte _08005B48\n\
-    .4byte _080058E0\n\
-    .4byte _080058DC\n\
-    .4byte _080058B8\n\
-    .4byte _08005D6C\n\
-_080058B8:\n\
-    ldrb r0, [r6, #0x6]\n\
-    strb r0, [r6, #0x8]\n\
-    ldrb r1, [r6, #0x5]\n\
-    ldr r0, =gFonts\n\
-    ldr r2, [r0]\n\
-    lsl r0, r1, #1\n\
-    add r0, r1\n\
-    lsl r0, #2\n\
-    add r0, r2\n\
-    ldrb r1, [r6, #0xB]\n\
-    ldrb r0, [r0, #0x5]\n\
-    add r1, r0\n\
-    ldrb r0, [r6, #0x9]\n\
-    add r0, r1\n\
-    b _08005ABA\n\
-    .pool\n\
-_080058DC:\n\
-    ldr r0, [r6]\n\
-    b _08005B30\n\
-_080058E0:\n\
-    ldr r0, [r6]\n\
-    ldrb r3, [r0]\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    sub r0, r3, #0x1\n\
-    cmp r0, #0x17\n\
-    bls _080058F0\n\
-    b _08005B90\n\
-_080058F0:\n\
-    lsl r0, #2\n\
-    ldr r1, =_08005900\n\
-    add r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_08005900:\n\
-    .4byte _08005960 @0\n\
-    .4byte _08005982 @1\n\
-    .4byte _080059A6 @2\n\
-    .4byte _080059C0 @3\n\
-    .4byte _08005A0E @4\n\
-    .4byte _08005A12 @5\n\
-    .4byte _08005A0A @6\n\
-    .4byte _08005A2A @7\n\
-    .4byte _08005A3A @8\n\
-    .4byte _08005A58 @9\n\
-    .4byte _08005A5C @10\n\
-    .4byte _08005B5A @11\n\
-    .4byte _08005A90 @12\n\
-    .4byte _08005A98 @13\n\
-    .4byte _08005AA4 @14\n\
-    .4byte _08005A76 @15\n\
-    .4byte _08005AD8 @16\n\
-    .4byte _08005AF2 @17\n\
-    .4byte _08005B02 @18\n\
-    .4byte _08005B26 @19\n\
-    .4byte _08005B36 @20\n\
-    .4byte _08005B3E @21\n\
-    .4byte _08005ABE @22\n\
-    .4byte _08005ACC @23\n\
-_08005960:\n\
-    ldr r2, [r6]\n\
-    ldrb r1, [r2]\n\
-    lsl r1, #4\n\
-    ldrb r3, [r6, #0xC]\n\
-    mov r0, #0xF\n\
-    and r0, r3\n\
-    orr r0, r1\n\
-    strb r0, [r6, #0xC]\n\
-    add r2, #0x1\n\
-    str r2, [r6]\n\
-    lsl r0, #24\n\
-    lsr r0, #28\n\
-    ldrb r2, [r6, #0xD]\n\
-    lsl r1, r2, #28\n\
-    lsr r1, #28\n\
-    lsr r2, #4\n\
-    b _08005A06\n\
-_08005982:\n\
-    ldr r1, [r6]\n\
-    ldrb r2, [r1]\n\
-    mov r0, #0xF\n\
-    and r0, r2\n\
-    ldrb r3, [r6, #0xD]\n\
-    mov r2, #0x10\n\
-    neg r2, r2\n\
-    and r2, r3\n\
-    orr r2, r0\n\
-    strb r2, [r6, #0xD]\n\
-    add r1, #0x1\n\
-    str r1, [r6]\n\
-    ldrb r0, [r6, #0xC]\n\
-    lsr r0, #4\n\
-    lsl r1, r2, #28\n\
-    lsr r1, #28\n\
-    lsr r2, #4\n\
-    b _08005A06\n\
-_080059A6:\n\
-    ldr r1, [r6]\n\
-    ldrb r0, [r1]\n\
-    lsl r0, #4\n\
-    ldrb r3, [r6, #0xD]\n\
-    mov r2, #0xF\n\
-    and r2, r3\n\
-    orr r2, r0\n\
-    strb r2, [r6, #0xD]\n\
-    add r1, #0x1\n\
-    str r1, [r6]\n\
-    ldrb r0, [r6, #0xC]\n\
-    lsr r0, #4\n\
-    b _080059FE\n\
-_080059C0:\n\
-    ldr r3, [r6]\n\
-    ldrb r1, [r3]\n\
-    lsl r1, #4\n\
-    ldrb r4, [r6, #0xC]\n\
-    mov r2, #0xF\n\
-    add r0, r2, #0\n\
-    and r0, r4\n\
-    orr r0, r1\n\
-    strb r0, [r6, #0xC]\n\
-    add r5, r3, #0x1\n\
-    str r5, [r6]\n\
-    ldrb r3, [r3, #0x1]\n\
-    add r1, r2, #0\n\
-    and r1, r3\n\
-    ldrb r4, [r6, #0xD]\n\
-    mov r3, #0x10\n\
-    neg r3, r3\n\
-    and r3, r4\n\
-    orr r3, r1\n\
-    strb r3, [r6, #0xD]\n\
-    add r4, r5, #0x1\n\
-    str r4, [r6]\n\
-    ldrb r1, [r5, #0x1]\n\
-    lsl r1, #4\n\
-    and r2, r3\n\
-    orr r2, r1\n\
-    strb r2, [r6, #0xD]\n\
-    add r4, #0x1\n\
-    str r4, [r6]\n\
-    lsl r0, #24\n\
-    lsr r0, #28\n\
-_080059FE:\n\
-    lsl r1, r2, #28\n\
-    lsr r1, #28\n\
-    lsl r2, #24\n\
-    lsr r2, #28\n\
-_08005A06:\n\
-    bl GenerateFontHalfRowLookupTable\n\
-_08005A0A:\n\
-    mov r0, #0x2\n\
-    b _08005D6E\n\
-_08005A0E:\n\
-    ldr r0, [r6]\n\
-    b _08005B30\n\
-_08005A12:\n\
-    ldr r0, [r6]\n\
-    ldrb r0, [r0]\n\
-    mov r1, #0xF\n\
-    and r1, r0\n\
-    ldrb r2, [r4]\n\
-    mov r0, #0x10\n\
-    neg r0, r0\n\
-    and r0, r2\n\
-    orr r0, r1\n\
-    strb r0, [r4]\n\
-    ldr r0, [r6]\n\
-    b _08005B30\n\
-_08005A2A:\n\
-    ldr r0, [r6]\n\
-    ldrb r1, [r0]\n\
-    strb r1, [r6, #0x1E]\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    mov r0, #0x6\n\
-    strb r0, [r6, #0x1C]\n\
-    b _08005A0A\n\
-_08005A3A:\n\
-    mov r0, #0x1\n\
-    strb r0, [r6, #0x1C]\n\
-    ldr r0, =gTextFlags\n\
-    ldrb r1, [r0]\n\
-    mov r0, #0x4\n\
-    and r0, r1\n\
-    cmp r0, #0\n\
-    bne _08005A4C\n\
-    b _08005B56\n\
-_08005A4C:\n\
-    mov r0, #0\n\
-    strb r0, [r4, #0x2]\n\
-    b _08005B56\n\
-    .pool\n\
-_08005A58:\n\
-    mov r0, #0x5\n\
-    b _08005D56\n\
-_08005A5C:\n\
-    ldr r0, [r6]\n\
-    ldrb r3, [r0]\n\
-    add r1, r0, #0x1\n\
-    str r1, [r6]\n\
-    ldrb r0, [r0, #0x1]\n\
-    lsl r0, #8\n\
-    orr r3, r0\n\
-    add r1, #0x1\n\
-    str r1, [r6]\n\
-    add r0, r3, #0\n\
-    bl PlayBGM\n\
-    b _08005A0A\n\
-_08005A76:\n\
-    ldr r0, [r6]\n\
-    ldrb r3, [r0]\n\
-    add r1, r0, #0x1\n\
-    str r1, [r6]\n\
-    ldrb r0, [r0, #0x1]\n\
-    lsl r0, #8\n\
-    orr r3, r0\n\
-    add r1, #0x1\n\
-    str r1, [r6]\n\
-    add r0, r3, #0\n\
-    bl PlaySE\n\
-    b _08005A0A\n\
-_08005A90:\n\
-    ldr r1, [r6]\n\
-    ldrb r0, [r1]\n\
-    ldrb r3, [r6, #0x6]\n\
-    b _08005AF8\n\
-_08005A98:\n\
-    ldr r1, [r6]\n\
-    ldrb r0, [r1]\n\
-    ldrb r2, [r6, #0x7]\n\
-    add r0, r2\n\
-    strb r0, [r6, #0x9]\n\
-    b _08005AFC\n\
-_08005AA4:\n\
-    ldrb r0, [r6, #0x4]\n\
-    ldrb r2, [r6, #0xD]\n\
-    lsl r2, #28\n\
-    lsr r1, r2, #4\n\
-    orr r1, r2\n\
-    lsr r1, #24\n\
-    bl FillWindowPixelBuffer\n\
-    ldrb r0, [r6, #0x6]\n\
-    strb r0, [r6, #0x8]\n\
-    ldrb r0, [r6, #0x7]\n\
-_08005ABA:\n\
-    strb r0, [r6, #0x9]\n\
-    b _08005A0A\n\
-_08005ABE:\n\
-    ldr r0, =gMPlayInfo_BGM\n\
-    bl m4aMPlayStop\n\
-    b _08005A0A\n\
-    .pool\n\
-_08005ACC:\n\
-    ldr r0, =gMPlayInfo_BGM\n\
-    bl m4aMPlayContinue\n\
-    b _08005A0A\n\
-    .pool\n\
-_08005AD8:\n\
-    ldr r0, [r6]\n\
-    ldrb r4, [r0]\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    cmp r4, #0\n\
-    ble _08005A0A\n\
-    add r0, r6, #0\n\
-    add r1, r4, #0\n\
-    bl ClearTextSpan\n\
-    ldrb r0, [r6, #0x8]\n\
-    add r0, r4\n\
-    b _08005C6E\n\
-_08005AF2:\n\
-    ldr r1, [r6]\n\
-    ldrb r0, [r6, #0x6]\n\
-    ldrb r3, [r1]\n\
-_08005AF8:\n\
-    add r0, r3\n\
-    strb r0, [r6, #0x8]\n\
-_08005AFC:\n\
-    add r1, #0x1\n\
-    str r1, [r6]\n\
-    b _08005A0A\n\
-_08005B02:\n\
-    ldr r0, [r6]\n\
-    ldrb r2, [r0]\n\
-    ldrb r1, [r6, #0x6]\n\
-    add r2, r1\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    ldrb r0, [r6, #0x8]\n\
-    sub r4, r2, r0\n\
-    cmp r4, #0\n\
-    bgt _08005B18\n\
-    b _08005A0A\n\
-_08005B18:\n\
-    add r0, r6, #0\n\
-    add r1, r4, #0\n\
-    bl ClearTextSpan\n\
-    ldrb r0, [r6, #0x8]\n\
-    add r0, r4\n\
-    b _08005C6E\n\
-_08005B26:\n\
-    ldr r0, [r6]\n\
-    ldrb r2, [r0]\n\
-    add r1, r6, #0\n\
-    add r1, #0x20\n\
-    strb r2, [r1]\n\
-_08005B30:\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    b _08005A0A\n\
-_08005B36:\n\
-    add r1, r6, #0\n\
-    add r1, #0x21\n\
-    mov r0, #0x1\n\
-    b _08005B44\n\
-_08005B3E:\n\
-    add r1, r6, #0\n\
-    add r1, #0x21\n\
-    mov r0, #0\n\
-_08005B44:\n\
-    strb r0, [r1]\n\
-    b _08005A0A\n\
-_08005B48:\n\
-    mov r0, #0x2\n\
-    b _08005B4E\n\
-_08005B4C:\n\
-    mov r0, #0x3\n\
-_08005B4E:\n\
-    strb r0, [r6, #0x1C]\n\
-    add r0, r6, #0\n\
-    bl TextPrinterInitDownArrowCounters\n\
-_08005B56:\n\
-    mov r0, #0x3\n\
-    b _08005D6E\n\
-_08005B5A:\n\
-    ldr r0, [r6]\n\
-    ldrb r3, [r0]\n\
-    mov r2, #0x80\n\
-    lsl r2, #1\n\
-    add r1, r2, #0\n\
-    orr r3, r1\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    b _08005B90\n\
-_08005B6C:\n\
-    ldr r0, [r6]\n\
-    ldrb r3, [r0]\n\
-    add r0, #0x1\n\
-    str r0, [r6]\n\
-    ldrb r0, [r6, #0x4]\n\
-    add r1, r3, #0\n\
-    ldrb r2, [r6, #0x8]\n\
-    ldrb r3, [r6, #0x9]\n\
-    bl DrawKeypadIcon\n\
-    ldr r1, =gUnknown_03002F90\n\
-    add r1, #0x80\n\
-    strb r0, [r1]\n\
-    ldrb r3, [r6, #0xA]\n\
-    add r0, r3\n\
-    b _08005C6A\n\
-    .pool\n\
-_08005B90:\n\
-    ldr r0, [r4]\n\
-    lsl r0, #28\n\
-    lsr r0, #28\n\
-    cmp r0, #0x8\n\
-    bhi _08005C10\n\
-    lsl r0, #2\n\
-    ldr r1, =_08005BA8\n\
-    add r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_08005BA8:\n\
-    .4byte _08005BCC\n\
-    .4byte _08005BDA\n\
-    .4byte _08005BE8\n\
-    .4byte _08005BE8\n\
-    .4byte _08005BE8\n\
-    .4byte _08005BE8\n\
-    .4byte _08005C10\n\
-    .4byte _08005BF6\n\
-    .4byte _08005C04\n\
-_08005BCC:\n\
-    add r0, r6, #0\n\
-    add r0, #0x21\n\
-    ldrb r1, [r0]\n\
-    add r0, r3, #0\n\
-    bl DecompressGlyphFont0\n\
-    b _08005C10\n\
-_08005BDA:\n\
-    add r0, r6, #0\n\
-    add r0, #0x21\n\
-    ldrb r1, [r0]\n\
-    add r0, r3, #0\n\
-    bl DecompressGlyphFont1\n\
-    b _08005C10\n\
-_08005BE8:\n\
-    add r0, r6, #0\n\
-    add r0, #0x21\n\
-    ldrb r1, [r0]\n\
-    add r0, r3, #0\n\
-    bl DecompressGlyphFont2\n\
-    b _08005C10\n\
-_08005BF6:\n\
-    add r0, r6, #0\n\
-    add r0, #0x21\n\
-    ldrb r1, [r0]\n\
-    add r0, r3, #0\n\
-    bl DecompressGlyphFont7\n\
-    b _08005C10\n\
-_08005C04:\n\
-    add r0, r6, #0\n\
-    add r0, #0x21\n\
-    ldrb r1, [r0]\n\
-    add r0, r3, #0\n\
-    bl DecompressGlyphFont8\n\
-_08005C10:\n\
-    add r0, r6, #0\n\
-    bl CopyGlyphToWindow\n\
-    add r2, r6, #0\n\
-    add r2, #0x20\n\
-    ldrb r0, [r2]\n\
-    cmp r0, #0\n\
-    beq _08005C48\n\
-    ldr r1, =gUnknown_03002F90\n\
-    add r1, #0x80\n\
-    ldrb r0, [r1]\n\
-    ldrb r3, [r6, #0x8]\n\
-    add r0, r3\n\
-    strb r0, [r6, #0x8]\n\
-    ldrb r2, [r2]\n\
-    ldrb r0, [r1]\n\
-    sub r4, r2, r0\n\
-    cmp r4, #0\n\
-    ble _08005C70\n\
-    add r0, r6, #0\n\
-    add r1, r4, #0\n\
-    bl ClearTextSpan\n\
-    ldrb r0, [r6, #0x8]\n\
-    add r0, r4\n\
-    b _08005C6E\n\
-    .pool\n\
-_08005C48:\n\
-    add r0, r6, #0\n\
-    add r0, #0x21\n\
-    ldrb r0, [r0]\n\
-    cmp r0, #0\n\
-    beq _08005C64\n\
-    ldr r0, =gUnknown_03002F90\n\
-    add r0, #0x80\n\
-    ldrb r1, [r6, #0xA]\n\
-    ldrb r0, [r0]\n\
-    add r1, r0\n\
-    ldrb r0, [r6, #0x8]\n\
-    b _08005C6C\n\
-    .pool\n\
-_08005C64:\n\
-    ldr r0, =gUnknown_03002F90\n\
-    add r0, #0x80\n\
-    ldrb r0, [r0]\n\
-_08005C6A:\n\
-    ldrb r1, [r6, #0x8]\n\
-_08005C6C:\n\
-    add r0, r1\n\
-_08005C6E:\n\
-    strb r0, [r6, #0x8]\n\
-_08005C70:\n\
-    mov r0, #0\n\
-    b _08005D6E\n\
-    .pool\n\
-_08005C78:\n\
-    add r0, r6, #0\n\
-    bl TextPrinterWait\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    bne _08005C86\n\
-    b _08005B56\n\
-_08005C86:\n\
-    mov r0, #0\n\
-    strb r0, [r6, #0x1C]\n\
-    b _08005B56\n\
-_08005C8C:\n\
-    add r0, r6, #0\n\
-    bl TextPrinterWaitWithDownArrow\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    bne _08005C9A\n\
-    b _08005B56\n\
-_08005C9A:\n\
-    ldrb r0, [r6, #0x4]\n\
-    ldrb r2, [r6, #0xD]\n\
-    lsl r2, #28\n\
-    lsr r1, r2, #4\n\
-    orr r1, r2\n\
-    lsr r1, #24\n\
-    bl FillWindowPixelBuffer\n\
-    ldrb r0, [r6, #0x6]\n\
-    mov r1, #0\n\
-    strb r0, [r6, #0x8]\n\
-    ldrb r0, [r6, #0x7]\n\
-    strb r0, [r6, #0x9]\n\
-    strb r1, [r6, #0x1C]\n\
-    b _08005B56\n\
-_08005CB8:\n\
-    add r0, r6, #0\n\
-    bl TextPrinterWaitWithDownArrow\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    bne _08005CC6\n\
-    b _08005B56\n\
-_08005CC6:\n\
-    add r0, r6, #0\n\
-    bl TextPrinterClearDownArrow\n\
-    ldrb r1, [r6, #0x5]\n\
-    ldr r0, =gFonts\n\
-    ldr r2, [r0]\n\
-    lsl r0, r1, #1\n\
-    add r0, r1\n\
-    lsl r0, #2\n\
-    add r0, r2\n\
-    ldrb r1, [r6, #0xB]\n\
-    ldrb r0, [r0, #0x5]\n\
-    add r1, r0\n\
-    strb r1, [r6, #0x1F]\n\
-    ldrb r0, [r6, #0x6]\n\
-    strb r0, [r6, #0x8]\n\
-    mov r0, #0x4\n\
-    strb r0, [r6, #0x1C]\n\
-    b _08005B56\n\
-    .pool\n\
-_08005CF0:\n\
-    ldrb r0, [r6, #0x1F]\n\
-    cmp r0, #0\n\
-    beq _08005D44\n\
-    bl sub_8197964\n\
-    ldr r1, =gWindowVerticalScrollSpeeds\n\
-    add r0, r1\n\
-    ldrb r4, [r0]\n\
-    ldrb r2, [r6, #0x1F]\n\
-    cmp r2, r4\n\
-    bge _08005D20\n\
-    ldrb r0, [r6, #0x4]\n\
-    ldrb r1, [r6, #0xD]\n\
-    lsl r1, #28\n\
-    lsr r3, r1, #4\n\
-    orr r3, r1\n\
-    lsr r3, #24\n\
-    mov r1, #0\n\
-    bl ScrollWindow\n\
-    mov r0, #0\n\
-    b _08005D38\n\
-    .pool\n\
-_08005D20:\n\
-    ldrb r0, [r6, #0x4]\n\
-    ldrb r1, [r6, #0xD]\n\
-    lsl r1, #28\n\
-    lsr r3, r1, #4\n\
-    orr r3, r1\n\
-    lsr r3, #24\n\
-    mov r1, #0\n\
-    add r2, r4, #0\n\
-    bl ScrollWindow\n\
-    ldrb r0, [r6, #0x1F]\n\
-    sub r0, r4\n\
-_08005D38:\n\
-    strb r0, [r6, #0x1F]\n\
-    ldrb r0, [r6, #0x4]\n\
-    mov r1, #0x2\n\
-    bl CopyWindowToVram\n\
-    b _08005B56\n\
-_08005D44:\n\
-    strb r0, [r6, #0x1C]\n\
-    b _08005B56\n\
-_08005D48:\n\
-    bl IsSEPlaying\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    cmp r0, #0\n\
-    beq _08005D56\n\
-    b _08005B56\n\
-_08005D56:\n\
-    strb r0, [r6, #0x1C]\n\
-    b _08005B56\n\
-_08005D5A:\n\
-    ldrb r0, [r6, #0x1E]\n\
-    add r1, r0, #0\n\
-    cmp r1, #0\n\
-    beq _08005D68\n\
-    sub r0, #0x1\n\
-    strb r0, [r6, #0x1E]\n\
-    b _08005B56\n\
-_08005D68:\n\
-    strb r1, [r6, #0x1C]\n\
-    b _08005B56\n\
-_08005D6C:\n\
-    mov r0, #0x1\n\
-_08005D6E:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n");
-}
-#endif
 
 u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {

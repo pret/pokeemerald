@@ -120,7 +120,7 @@ enum {
     FONTATTR_COLOR_SHADOW
 };
 
-struct TextPrinterSubStruct
+struct TextPrinterSubSubStruct
 {
     u8 font_type:4;  // 0x14
     u8 font_type_upper:1;
@@ -130,6 +130,11 @@ struct TextPrinterSubStruct
     u8 field_1_top:1;
     u8 frames_visible_counter;
     u8 field_3;
+};
+
+struct TextPrinterSubStruct
+{
+    struct TextPrinterSubSubStruct sub;
     u8 field_4; // 0x18
     u8 field_5;
     u8 field_6;
@@ -216,7 +221,7 @@ extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
 u8 gUnknown_03002F84;
-u8 gUnknown_03002F90[0x20];
+u8 gUnknown_03002F90[];
 u8 gUnknown_03002FB0[0x20];
 u8 gUnknown_03002FD0[0x20];
 u8 gUnknown_03002FF0[0x20];
