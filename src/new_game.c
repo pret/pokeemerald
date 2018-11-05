@@ -204,7 +204,7 @@ void NewGameInitData(void)
     copy_strings_to_sav1();
 	SetLilycoveLady();
 	ResetAllApprenticeData();
-	ClearnRankingHallRecords();
+	ClearRankingHallRecords();
 	sub_8195E10();
 	sub_801AFD8();
 	sub_800E5AC();

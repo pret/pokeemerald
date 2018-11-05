@@ -96,12 +96,12 @@ static void CopyFrontierBrainText(bool8 playerWonText);
 static const u8 gUnknown_08611550[][4] =
 {
     [FRONTIER_FACILITY_TOWER]   = {0x23, 0x46, 0x23, 0x01},
-	[FRONTIER_FACILITY_DOME]    = {0x04, 0x09, 0x05, 0x00},
-	[FRONTIER_FACILITY_PALACE]  = {0x15, 0x2a, 0x15, 0x01},
-	[FRONTIER_FACILITY_ARENA]   = {0x1c, 0x38, 0x1c, 0x01},
-	[FRONTIER_FACILITY_FACTORY] = {0x15, 0x2a, 0x15, 0x01},
-	[FRONTIER_FACILITY_PIKE]    = {0x1c, 0x8c, 0x38, 0x01},
-	[FRONTIER_FACILITY_PYRAMID] = {0x15, 0x46, 0x23, 0x00},
+    [FRONTIER_FACILITY_DOME]    = {0x04, 0x09, 0x05, 0x00},
+    [FRONTIER_FACILITY_PALACE]  = {0x15, 0x2a, 0x15, 0x01},
+    [FRONTIER_FACILITY_ARENA]   = {0x1c, 0x38, 0x1c, 0x01},
+    [FRONTIER_FACILITY_FACTORY] = {0x15, 0x2a, 0x15, 0x01},
+    [FRONTIER_FACILITY_PIKE]    = {0x1c, 0x8c, 0x38, 0x01},
+    [FRONTIER_FACILITY_PYRAMID] = {0x15, 0x46, 0x23, 0x00},
 };
 
 static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
@@ -604,12 +604,12 @@ static const u8 gUnknown_086118B4[][7][4] =
 static const u16 gUnknown_08611BFC[][2] =
 {
     [FRONTIER_FACILITY_TOWER]   = {0x0001, 0x0002},
-	[FRONTIER_FACILITY_DOME]    = {0x0004, 0x0008},
-	[FRONTIER_FACILITY_PALACE]  = {0x0010, 0x0020},
-	[FRONTIER_FACILITY_ARENA]   = {0x0040, 0x0080},
-	[FRONTIER_FACILITY_FACTORY] = {0x0100, 0x0200},
-	[FRONTIER_FACILITY_PIKE]    = {0x0400, 0x0800},
-	[FRONTIER_FACILITY_PYRAMID] = {0x1000, 0x2000},
+    [FRONTIER_FACILITY_DOME]    = {0x0004, 0x0008},
+    [FRONTIER_FACILITY_PALACE]  = {0x0010, 0x0020},
+    [FRONTIER_FACILITY_ARENA]   = {0x0040, 0x0080},
+    [FRONTIER_FACILITY_FACTORY] = {0x0100, 0x0200},
+    [FRONTIER_FACILITY_PIKE]    = {0x0400, 0x0800},
+    [FRONTIER_FACILITY_PYRAMID] = {0x1000, 0x2000},
 };
 
 static void (* const sFrontierUtilFuncs[])(void) =
@@ -849,7 +849,7 @@ static void ShowFacilityResultsWindow(void)
     case FRONTIER_FACILITY_PYRAMID:
         ShowPyramidResultsWindow();
         break;
-    case 7:
+    case RESULTS_LINK_CONTEST:
         ShowLinkContestResultsWindow();
         break;
     }
@@ -865,7 +865,7 @@ static bool8 sub_81A1C24(u32 flags)
 
 static void PrintAligned(const u8 *str, s32 y)
 {
-    s32 x = GetStringCenterAlignXOffset(1, str, 0xE0);
+    s32 x = GetStringCenterAlignXOffset(1, str, 224);
     y = (y * 8) + 1;
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x, y, TEXT_SPEED_FF, NULL);
 }
@@ -1394,23 +1394,23 @@ static void ShowLinkContestResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, 0x11);
 
     StringExpandPlaceholders(gStringVar4, gText_LinkContestResults);
-    x = GetStringCenterAlignXOffset(1, gStringVar4, 0xD0);
+    x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, x, 1, TEXT_SPEED_FF, NULL);
 
     str = gText_1st;
-    x = GetStringRightAlignXOffset(1, str, 0x26) + 50;
+    x = GetStringRightAlignXOffset(1, str, 38) + 50;
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x, 25, TEXT_SPEED_FF, NULL);
 
     str = gText_2nd;
-    x = GetStringRightAlignXOffset(1, str, 0x26) + 88;
+    x = GetStringRightAlignXOffset(1, str, 38) + 88;
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x, 25, TEXT_SPEED_FF, NULL);
 
     str = gText_3rd;
-    x = GetStringRightAlignXOffset(1, str, 0x26) + 126;
+    x = GetStringRightAlignXOffset(1, str, 38) + 126;
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x, 25, TEXT_SPEED_FF, NULL);
 
     str = gText_4th;
-    x = GetStringRightAlignXOffset(1, str, 0x26) + 164;
+    x = GetStringRightAlignXOffset(1, str, 38) + 164;
     AddTextPrinterParameterized(gRecordsWindowId, 1, str, x, 25, TEXT_SPEED_FF, NULL);
 
     x = 6;
@@ -2274,7 +2274,7 @@ void ScrollRankingHallRecordsWindow(void)
     CopyWindowToVram(gRecordsWindowId, 2);
 }
 
-void ClearnRankingHallRecords(void)
+void ClearRankingHallRecords(void)
 {
     s32 i, j, k;
 

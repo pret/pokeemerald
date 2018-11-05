@@ -14,7 +14,7 @@ void sub_81A3ACC(void);
 u8 GetPlayerSymbolCountForFacility(u8 facility);
 void ShowRankingHallRecordsWindow(void);
 void ScrollRankingHallRecordsWindow(void);
-void ClearnRankingHallRecords(void);
+void ClearRankingHallRecords(void);
 u8 GetFrontierBrainTrainerPicIndex(void);
 u8 GetFrontierBrainTrainerClass(void);
 void CopyFrontierBrainTrainerName(u8 *dst);
