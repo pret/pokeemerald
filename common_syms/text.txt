@@ -1,8 +1,4 @@
 gFonts
 gUnknown_03002F84
 gUnknown_03002F90
-gUnknown_03002FB0
-gUnknown_03002FD0
-gUnknown_03002FF0
-gGlyphDimensions
 gTextFlags

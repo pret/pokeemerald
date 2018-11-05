@@ -23,7 +23,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             {
                 textPrinter->delayCounter = 0;
             }
-            if (textPrinter->delayCounter && textPrinter->text_speed)
+            if (textPrinter->delayCounter && textPrinter->textSpeed)
             {
                 textPrinter->delayCounter --;
                 if (gTextFlags.flag_0 && gMain.newKeys & (A_BUTTON | B_BUTTON))
@@ -39,7 +39,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             }
             else
             {
-                textPrinter->delayCounter = textPrinter->text_speed;
+                textPrinter->delayCounter = textPrinter->textSpeed;
             }
             char_ = *textPrinter->subPrinter.current_text_offset ++;
             switch (char_)
@@ -135,7 +135,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             }
             DecompressGlyphFont6(char_);
             CopyGlyphToWindow(textPrinter);
-            textPrinter->subPrinter.currentX += gUnknown_03002F90[0x80] + textPrinter->subPrinter.letterSpacing;
+            textPrinter->subPrinter.currentX += gUnknown_03002F90.unk80 + textPrinter->subPrinter.letterSpacing;
             return 0;
         case 1:
             if (TextPrinterWait(textPrinter))
@@ -206,12 +206,12 @@ static void DecompressGlyphFont6(u16 glyph)
     const u16 *glyphs;
 
     glyphs = sFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
-    DecompressGlyphTile(glyphs, (u16 *)gUnknown_03002F90);
-    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gUnknown_03002F90 + 0x20));
-    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gUnknown_03002F90 + 0x40));
-    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gUnknown_03002F90 + 0x60));
-    gUnknown_03002F90[0x80] = 0x10;
-    gUnknown_03002F90[0x81] = 0x10;
+    DecompressGlyphTile(glyphs, (u16 *)gUnknown_03002F90.unk0);
+    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gUnknown_03002F90.unk20));
+    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gUnknown_03002F90.unk40));
+    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gUnknown_03002F90.unk60));
+    gUnknown_03002F90.unk80 = 0x10;
+    gUnknown_03002F90.unk81 = 0x10;
 }
 
 u8 GetGlyphWidthFont6(void)

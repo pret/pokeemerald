@@ -120,7 +120,7 @@ enum {
     FONTATTR_COLOR_SHADOW
 };
 
-struct TextPrinterSubSubStruct
+struct TextPrinterSubStruct
 {
     u8 font_type:4;  // 0x14
     u8 font_type_upper:1;
@@ -129,16 +129,6 @@ struct TextPrinterSubSubStruct
     u8 field_1_upmid:2;
     u8 field_1_top:1;
     u8 frames_visible_counter;
-    u8 field_3;
-};
-
-struct TextPrinterSubStruct
-{
-    struct TextPrinterSubSubStruct sub;
-    u8 field_4; // 0x18
-    u8 field_5;
-    u8 field_6;
-    u8 active;
 };
 
 struct TextSubPrinter // TODO: Better name
@@ -164,14 +154,14 @@ struct TextPrinter
 
     void (*callback)(struct TextSubPrinter *, u16); // 0x10
 
-    union {
+    union __attribute__((packed)) {
         struct TextPrinterSubStruct sub;
-
-        u8 sub_fields[8];
+        u8 sub_fields[7];
     } sub_union;
 
+    u8 active;
     u8 state;       // 0x1C
-    u8 text_speed;
+    u8 textSpeed;
     u8 delayCounter;
     u8 scrollDistance;
     u8 minLetterSpacing;  // 0x20
@@ -213,6 +203,16 @@ typedef struct {
     u8 flag_3:1;
 } TextFlags;
 
+struct Struct_03002F90
+{
+    u8 unk0[0x20];
+    u8 unk20[0x20];
+    u8 unk40[0x20];
+    u8 unk60[0x20];
+    u8 unk80;
+    u8 unk81;
+};
+
 extern TextFlags gTextFlags;
 
 extern u8 gStringVar1[];
@@ -220,12 +220,8 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
-u8 gUnknown_03002F84;
-u8 gUnknown_03002F90[];
-u8 gUnknown_03002FB0[0x20];
-u8 gUnknown_03002FD0[0x20];
-u8 gUnknown_03002FF0[0x20];
-u8 gGlyphDimensions[0x2];
+extern u8 gUnknown_03002F84;
+extern struct Struct_03002F90 gUnknown_03002F90;
 
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
