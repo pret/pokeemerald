@@ -1570,9 +1570,9 @@ static void Task_ChooseAnswer(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     if (!tWrapAround)
-        input = Menu_ProcessInputNoWrapAround();
+        input = Menu_ProcessInputNoWrap();
     else
-        input = ProcessMenuInput();
+        input = Menu_ProcessInput();
 
     switch (input)
     {

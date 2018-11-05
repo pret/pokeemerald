@@ -458,7 +458,7 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
     CopyWindowToVram(0, 3);
 }
 
-void sub_8197930(void)
+void DisplayYesNoMenu(void)
 {
     CreateYesNoMenu(&gUnknown_0860F0A8, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
 }
@@ -972,7 +972,7 @@ u8 GetMenuCursorPos(void)
     return gUnknown_0203CD90.cursorPos;
 }
 
-s8 ProcessMenuInput(void)
+s8 Menu_ProcessInput(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
@@ -1000,7 +1000,7 @@ s8 ProcessMenuInput(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 Menu_ProcessInputNoWrapAround(void)
+s8 Menu_ProcessInputNoWrap(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
 
@@ -1201,9 +1201,9 @@ void sub_8198C34(const struct WindowTemplate *window, u8 fontId, u16 baseTileNum
     sub_8198AF8(window, fontId, 0, 1, baseTileNum, paletteNum, 0);
 }
 
-s8 Menu_ProcessInputNoWrap_(void)
+s8 Menu_ProcessInputNoWrapClearOnChoose(void)
 {
-    s8 result = Menu_ProcessInputNoWrapAround();
+    s8 result = Menu_ProcessInputNoWrap();
     if (result != MENU_NOTHING_CHOSEN)
         sub_8198C78();
     return result;
@@ -1447,7 +1447,7 @@ s8 sub_8199284(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-s8 sub_8199334(void)
+s8 Menu_ProcessInputGridLayout(void)
 {
     u8 oldPos = gUnknown_0203CD90.cursorPos;
 

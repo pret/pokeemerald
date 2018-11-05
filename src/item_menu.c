@@ -1543,7 +1543,7 @@ void Task_HandleInBattleItemMenuInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE)
     {
-        s8 r4 = Menu_ProcessInputNoWrapAround();
+        s8 r4 = Menu_ProcessInputNoWrap();
         switch (r4)
         {
             case -2:

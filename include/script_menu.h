@@ -13,6 +13,6 @@ s32 convert_pixel_width_to_tile_width(s32);
 u8 CreateWindowFromRect(u8, u8, u8, u8);
 void sub_80E2A78(u8);
 u32 display_text_and_get_width(const u8*, u32);
-u32 sub_80E2D5C(u8 arg0, u8 tileWidth);
+u32 sub_80E2D5C(u8 arg0, u32 tileWidth);
 
 #endif //GUARD_SCRIPT_MENU_H

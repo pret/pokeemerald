@@ -325,7 +325,7 @@ static void SetShopItemsForSale(const u16 *items)
 
 static void Task_ShopMenu(u8 taskId)
 {
-    s8 inputCode = Menu_ProcessInputNoWrapAround();
+    s8 inputCode = Menu_ProcessInputNoWrap();
     switch (inputCode)
     {
     case LIST_B_PRESSED:

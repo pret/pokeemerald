@@ -1501,7 +1501,7 @@ static void Task_NewGameBirchSpeech_CreateNameYesNo(u8 taskId)
 
 static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
             PlaySE(SE_SELECT);
@@ -1976,7 +1976,7 @@ static void NewGameBirchSpeech_ShowGenderMenu(void)
 
 static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
 {
-    return Menu_ProcessInputNoWrapAround();
+    return Menu_ProcessInputNoWrap();
 }
 
 static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)

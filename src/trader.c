@@ -109,7 +109,7 @@ void sub_8133BE4(u8 taskId, u8 decorationId)
 void Task_HandleGetDecorationMenuInput(u8 taskId)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
-    s8 input = ProcessMenuInput();
+    s8 input = Menu_ProcessInput();
 
     switch (input)
     {

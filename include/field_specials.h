@@ -15,5 +15,6 @@ bool32 sub_8138168(void);
 bool32 sub_81381B0(void);
 bool32 sub_81381F8(void);
 bool32 CountSSTidalStep(u16 delta);
+void sub_813A128(void);
 
 #endif // GUARD_FIELD_SPECIALS_H
