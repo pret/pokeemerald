@@ -4720,7 +4720,7 @@ static u8 sub_819221C(u8 taskId)
 
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
 {
-    struct TextSubPrinter textPrinter;
+    struct TextPrinterTemplate textPrinter;
     s32 i, j, k;
     s32 trainerId = 0;
     u8 nature = 0;
@@ -4792,7 +4792,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 2;
     textPrinter.lineSpacing = 0;
-    textPrinter.fontColor_l = 0;
+    textPrinter.unk = 0;
     textPrinter.fgColor = 14;
     textPrinter.bgColor = 0;
     textPrinter.shadowColor = 13;
@@ -4826,7 +4826,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     }
 
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, gStringVar1, 0xD0, textPrinter.letterSpacing);
-    textPrinter.current_text_offset = gStringVar1;
+    textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId;
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, 3);
@@ -4837,11 +4837,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     {
         textPrinter.currentY = gUnknown_0860D346[i];
         if (trainerId == TRAINER_PLAYER)
-            textPrinter.current_text_offset = gSpeciesNames[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]];
+            textPrinter.currentChar = gSpeciesNames[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]];
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            textPrinter.current_text_offset = gSpeciesNames[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]];
+            textPrinter.currentChar = gSpeciesNames[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]];
         else
-            textPrinter.current_text_offset = gSpeciesNames[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].species];
+            textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].species];
 
         textPrinter.windowId = 1 + i + windowId;
         if (i == 1)
@@ -4857,9 +4857,9 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     PutWindowTilemap(windowId + 4);
     CopyWindowToVram(windowId + 4, 3);
     if (trainerId == TRAINER_FRONTIER_BRAIN)
-        textPrinter.current_text_offset = gBattleDomePotentialPointers[16];
+        textPrinter.currentChar = gBattleDomePotentialPointers[16];
     else
-        textPrinter.current_text_offset = gBattleDomePotentialPointers[trainerTournamentId];
+        textPrinter.currentChar = gBattleDomePotentialPointers[trainerTournamentId];
 
     textPrinter.fontId = 1;
     textPrinter.windowId = windowId + 4;
@@ -4901,7 +4901,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             break;
     }
 
-    textPrinter.current_text_offset = gBattleDomeOpponentStylePointers[i];
+    textPrinter.currentChar = gBattleDomeOpponentStylePointers[i];
     textPrinter.y = 20;
     textPrinter.currentY = 20;
     AddTextPrinter(&textPrinter, 0, NULL);
@@ -5073,7 +5073,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     else
         i = 42;
 
-    textPrinter.current_text_offset = gBattleDomeOpponentStatsPointers[i];
+    textPrinter.currentChar = gBattleDomeOpponentStatsPointers[i];
     textPrinter.y = 36;
     textPrinter.currentY = 36;
     AddTextPrinter(&textPrinter, 0, NULL);
@@ -5144,7 +5144,7 @@ static s32 sub_8192F08(u8 arg0, u8 *arg1)
 
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 {
-    struct TextSubPrinter textPrinter;
+    struct TextPrinterTemplate textPrinter;
     s32 tournamentIds[2];
     s32 trainerIds[2];
     bool32 lost[2];
@@ -5292,12 +5292,12 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
-    textPrinter.fontColor_l = 0;
+    textPrinter.unk = 0;
     textPrinter.fgColor = 14;
     textPrinter.bgColor = 0;
     textPrinter.shadowColor = 13;
     StringExpandPlaceholders(gStringVar4, gBattleDomeWinStringsPointers[winStringId]);
-    textPrinter.current_text_offset = gStringVar4;
+    textPrinter.currentChar = gStringVar4;
     textPrinter.windowId = windowId + 8;
     textPrinter.fontId = 1;
     PutWindowTilemap(windowId + 8);
@@ -5316,9 +5316,9 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     textPrinter.fontId = 2;
     textPrinter.letterSpacing = 2;
-    textPrinter.current_text_offset = gStringVar1;
+    textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId + 6;
-    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.current_text_offset, 0x40, textPrinter.letterSpacing);
+    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
     PutWindowTilemap(windowId + 6);
     CopyWindowToVram(windowId + 6, 3);
@@ -5332,9 +5332,9 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     else
         CopyDomeTrainerName(gStringVar1, trainerIds[1]);
 
-    textPrinter.current_text_offset = gStringVar1;
+    textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId + 7;
-    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.current_text_offset, 0x40, textPrinter.letterSpacing);
+    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
     PutWindowTilemap(windowId + 7);
     CopyWindowToVram(windowId + 7, 3);
@@ -5342,9 +5342,9 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Print match number.
     textPrinter.letterSpacing = 0;
-    textPrinter.current_text_offset = gBattleDomeMatchNumberPointers[matchNo];
+    textPrinter.currentChar = gBattleDomeMatchNumberPointers[matchNo];
     textPrinter.windowId = windowId + 5;
-    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.current_text_offset, 0xA0, textPrinter.letterSpacing);
+    textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0xA0, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
     PutWindowTilemap(windowId + 5);
     CopyWindowToVram(windowId + 5, 3);
@@ -5663,7 +5663,7 @@ static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roun
 static void sub_8194220(u8 taskId)
 {
     s32 i;
-    struct TextSubPrinter textPrinter;
+    struct TextPrinterTemplate textPrinter;
     s32 r10 = gTasks[taskId].data[1];
     s32 r4 = gTasks[taskId].data[2];
 
@@ -5740,15 +5740,15 @@ static void sub_8194220(u8 taskId)
         break;
     case 4:
         textPrinter.fontId = 2;
-        textPrinter.current_text_offset = gText_BattleTourney;
+        textPrinter.currentChar = gText_BattleTourney;
         textPrinter.windowId = 2;
         textPrinter.x = 0;
         textPrinter.y = 0;
         textPrinter.letterSpacing = 2;
         textPrinter.lineSpacing = 0;
-        textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.current_text_offset, 0x70, textPrinter.letterSpacing);
+        textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x70, textPrinter.letterSpacing);
         textPrinter.currentY = 1;
-        textPrinter.fontColor_l = 0;
+        textPrinter.unk = 0;
         textPrinter.fgColor = 14;
         textPrinter.bgColor = 0;
         textPrinter.shadowColor = 13;
@@ -5831,7 +5831,7 @@ static void sub_8194220(u8 taskId)
                 textPrinter.currentX = GetStringWidthDifference(textPrinter.fontId, gDisplayedStringBattle, 0x3D, textPrinter.letterSpacing);
             else
                 textPrinter.currentX = 3;
-            textPrinter.current_text_offset = gDisplayedStringBattle;
+            textPrinter.currentChar = gDisplayedStringBattle;
             textPrinter.windowId = gUnknown_0860D3F1[i][0];
             textPrinter.currentY = gUnknown_0860D3F1[i][1];
             AddTextPrinter(&textPrinter, 0, NULL);
@@ -5899,7 +5899,7 @@ static void sub_81948EC(u8 tournamentId, u8 arg1)
 static void sub_8194950(u8 taskId)
 {
     s32 i;
-    struct TextSubPrinter textPrinter;
+    struct TextPrinterTemplate textPrinter;
 
     switch (gTasks[taskId].data[0])
     {
@@ -5917,7 +5917,7 @@ static void sub_8194950(u8 taskId)
             textPrinter.y = 0;
             textPrinter.letterSpacing = 2;
             textPrinter.lineSpacing = 0;
-            textPrinter.fontColor_l = 0;
+            textPrinter.unk = 0;
             textPrinter.fgColor = 11;
             textPrinter.bgColor = 0;
             textPrinter.shadowColor = 13;
@@ -5932,7 +5932,7 @@ static void sub_8194950(u8 taskId)
                     else
                         textPrinter.currentX = 3;
 
-                    textPrinter.current_text_offset = gDisplayedStringBattle;
+                    textPrinter.currentChar = gDisplayedStringBattle;
                     textPrinter.windowId = gUnknown_0860D3F1[i][0];
                     textPrinter.currentY = gUnknown_0860D3F1[i][1];
                     AddTextPrinter(&textPrinter, 0, NULL);

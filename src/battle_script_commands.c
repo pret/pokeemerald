@@ -6380,7 +6380,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
 {
     u16 monLevel;
     u8 monGender;
-    struct TextSubPrinter subPrinter;
+    struct TextPrinterTemplate printerTemplate;
     u8 *txtPtr;
     u32 var;
 
@@ -6388,21 +6388,21 @@ static void PutLevelAndGenderOnLvlUpBox(void)
     monGender = GetMonGender(&gPlayerParty[gBattleStruct->expGetterMonId]);
     GetMonNickname(&gPlayerParty[gBattleStruct->expGetterMonId], gStringVar4);
 
-    subPrinter.current_text_offset = gStringVar4;
-    subPrinter.windowId = 14;
-    subPrinter.fontId = 0;
-    subPrinter.x = 32;
-    subPrinter.y = 0;
-    subPrinter.currentX = 32;
-    subPrinter.currentY = 0;
-    subPrinter.letterSpacing = 0;
-    subPrinter.lineSpacing = 0;
-    subPrinter.fontColor_l = TEXT_COLOR_TRANSPARENT;
-    subPrinter.fgColor = TEXT_COLOR_WHITE;
-    subPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-    subPrinter.shadowColor = TEXT_COLOR_DARK_GREY;
+    printerTemplate.currentChar = gStringVar4;
+    printerTemplate.windowId = 14;
+    printerTemplate.fontId = 0;
+    printerTemplate.x = 32;
+    printerTemplate.y = 0;
+    printerTemplate.currentX = 32;
+    printerTemplate.currentY = 0;
+    printerTemplate.letterSpacing = 0;
+    printerTemplate.lineSpacing = 0;
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = TEXT_COLOR_WHITE;
+    printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
+    printerTemplate.shadowColor = TEXT_COLOR_DARK_GREY;
 
-    AddTextPrinter(&subPrinter, 0xFF, NULL);
+    AddTextPrinter(&printerTemplate, 0xFF, NULL);
 
     txtPtr = gStringVar4;
     gStringVar4[0] = CHAR_SPECIAL_F9;
@@ -6432,9 +6432,9 @@ static void PutLevelAndGenderOnLvlUpBox(void)
         *(txtPtr++) = EOS;
     }
 
-    subPrinter.y = 10;
-    subPrinter.currentY = 10;
-    AddTextPrinter(&subPrinter, 0xFF, NULL);
+    printerTemplate.y = 10;
+    printerTemplate.currentY = 10;
+    AddTextPrinter(&printerTemplate, 0xFF, NULL);
 
     CopyWindowToVram(14, 2);
 }

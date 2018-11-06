@@ -134,7 +134,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8
     if (string != gStringVar4)
         StringExpandPlaceholders(gStringVar4, string);
 
-    gTextFlags.flag_0 = 1;
+    gTextFlags.canABSpeedUpPrint = 1;
     AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
     gUnknown_0300117C = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;

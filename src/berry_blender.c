@@ -1031,7 +1031,7 @@ static void sub_807FAC8(void)
             sBerryBlenderData->mainState++;
         break;
     case 4:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sText_BerryBlenderStart, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sText_BerryBlenderStart, GetPlayerTextSpeedDelay()))
             sBerryBlenderData->mainState++;
         break;
     case 5:
@@ -2490,7 +2490,7 @@ static void CB2_HandleBlenderEndGame(void)
         }
         break;
     case 7:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sText_WouldLikeToBlendAnotherBerry, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sText_WouldLikeToBlendAnotherBerry, GetPlayerTextSpeedDelay()))
             sBerryBlenderData->gameEndState++;
         break;
     case 9:
@@ -2572,7 +2572,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 13:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sText_CommunicationStandby, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sText_CommunicationStandby, GetPlayerTextSpeedDelay()))
         {
             SetMainCallback2(CB2_HandlePlayerLinkPlayAgainChoice);
             sBerryBlenderData->gameEndState = 0;
@@ -2680,7 +2680,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         StringAppend(gStringVar4, sText_HasNoBerriesToPut);
         break;
     case 3:
-        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeedDelay()))
         {
             sBerryBlenderData->framesToWait = 0;
             sBerryBlenderData->gameEndState++;
@@ -2787,7 +2787,7 @@ static void CB2_HandlePlayerPlayAgainChoice(void)
         StringCopy(gStringVar4, sText_RunOutOfBerriesForBlending);
         break;
     case 3:
-        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeedDelay()))
             sBerryBlenderData->gameEndState = 9;
         break;
     case 9:
@@ -3363,7 +3363,7 @@ static bool8 Blender_PrintBlendingResults(void)
         sBerryBlenderData->mainState++;
         break;
     case 6:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sBerryBlenderData->stringVar, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sBerryBlenderData->stringVar, GetPlayerTextSpeedDelay()))
         {
             TryUpdateBerryBlenderRecord();
             return TRUE;

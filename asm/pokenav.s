@@ -10440,7 +10440,7 @@ sub_81CC158: @ 81CC158
 	adds r1, 0xF
 	bl sub_81CAF78
 	adds r5, r0, 0
-	bl GetPlayerTextSpeed
+	bl GetPlayerTextSpeedDelay
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r2, [r4, 0x14]
@@ -22957,7 +22957,7 @@ sub_81D2BF4: @ 81D2BF4
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl GetPlayerTextSpeed
+	bl GetPlayerTextSpeedDelay
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
