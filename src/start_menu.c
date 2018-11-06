@@ -12,7 +12,7 @@
 #include "task.h"
 #include "overworld.h"
 #include "link.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "rom_818CFC8.h"
 #include "field_specials.h"
 #include "event_object_movement.h"
@@ -34,6 +34,8 @@
 #include "constants/songs.h"
 #include "field_player_avatar.h"
 #include "battle_pyramid_bag.h"
+
+extern bool8 InBattlePike(void);
 
 // Menu actions
 enum

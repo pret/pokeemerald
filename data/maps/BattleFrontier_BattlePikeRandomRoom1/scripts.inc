@@ -45,7 +45,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A:: @ 825D20A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
@@ -144,13 +144,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	case 4, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, 4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, 4
@@ -161,7 +161,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, 4
@@ -171,7 +171,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E003, 4
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
@@ -179,13 +179,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, 4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, 4
@@ -196,7 +196,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, 4
@@ -206,7 +206,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E140, 4
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D

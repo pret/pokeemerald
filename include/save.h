@@ -94,7 +94,7 @@ u16 CalculateChecksum(void *data, u16 size);
 void UpdateSaveAddresses(void);
 u8 HandleSavingData(u8 saveType);
 u8 TrySavingData(u8 saveType);
-u8 sub_8153380(void);
+bool8 sub_8153380(void);
 bool8 sub_81533AC(void);
 u8 sub_81533E0(void);
 u8 sub_8153408(void);

@@ -1972,7 +1972,7 @@ void sub_80EDB44(void)
                 show->rivalTrainer.nGoldSymbols ++;
             }
         }
-        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.frontierBattlePoints;
+        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.battlePoints;
         StringCopy(show->rivalTrainer.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->rivalTrainer.language = gGameLanguage;
@@ -2500,7 +2500,7 @@ bool8 sub_80EE818(void)
     return TRUE;
 }
 
-void sub_80EE8C8(u16 winStreak, u8 facility)
+void sub_80EE8C8(u16 winStreak, u8 facilityAndMode)
 {
     TVShow *show;
 
@@ -2512,8 +2512,8 @@ void sub_80EE8C8(u16 winStreak, u8 facility)
         show->frontier.active = FALSE;
         StringCopy(show->frontier.playerName, gSaveBlock2Ptr->playerName);
         show->frontier.winStreak = winStreak;
-        show->frontier.facility = facility;
-        switch (facility)
+        show->frontier.facility = facilityAndMode;
+        switch (facilityAndMode)
         {
             case  1:
             case  5:

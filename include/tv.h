@@ -51,5 +51,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 move);
 void UpdateTVScreensOnMap(int, int);
 void TV_PrintIntToStringVar(u8 varIdx, int value);
 void SaveRecordedItemPurchasesForTVShow(void);
+bool8 sub_80EE818(void);
+void sub_80EE8C8(u16 winStreak, u8 facilityAndMode);
 
 #endif //GUARD_TV_H

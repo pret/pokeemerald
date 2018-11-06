@@ -22,7 +22,7 @@ BattleFrontier_BattleArenaLobby_MapScript2_255C55: @ 8255C55
 
 BattleFrontier_BattleArenaLobby_EventScript_255C7F:: @ 8255C7F
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
@@ -40,7 +40,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	releaseall
 	end
@@ -48,7 +48,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
 BattleFrontier_BattleArenaLobby_EventScript_255CCF:: @ 8255CCF
 	lockall
 	setvar VAR_0x8004, 10
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255CF0
 	msgbox BattleFrontier_BattleArenaLobby_Text_2568E7, 4
@@ -60,7 +60,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255CF0:: @ 8255CF0
 BattleFrontier_BattleArenaLobby_EventScript_255CF8:: @ 8255CF8
 	msgbox BattleFrontier_BattleArenaLobby_Text_257353, 4
 	setvar VAR_0x8004, 11
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleArenaLobby_Text_241520, 9
 	message BattleFrontier_BattleArenaLobby_Text_256931
 	waitmessage
@@ -88,7 +88,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D2B:: @ 8255D2B
 
 BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
 	setvar VAR_0x8004, 8
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 3
@@ -125,7 +125,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255DC0:: @ 8255DC0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	goto BattleFrontier_BattleArenaLobby_EventScript_255F54
 
@@ -155,13 +155,13 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_255FFB
 	case 127, BattleFrontier_BattleArenaLobby_EventScript_255FFB
 	setvar VAR_0x8004, 15
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FAC
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleArenaLobby_Text_256573, 4
 	fadescreen 1
 	call BattleFrontier_BattleArenaLobby_EventScript_23F2B7
@@ -181,7 +181,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
 	special sub_81A5238
 	setvar VAR_0x8004, 2
@@ -191,11 +191,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -208,12 +208,12 @@ BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleArenaLobby_Text_2567E6, 4
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256005
 	compare VAR_RESULT, 1
@@ -244,7 +244,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255FE1:: @ 8255FE1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleArenaLobby_EventScript_255FFB
 
 BattleFrontier_BattleArenaLobby_EventScript_255FF8:: @ 8255FF8
@@ -346,7 +346,7 @@ BattleFrontier_BattleArenaLobby_EventScript_256092:: @ 8256092
 	lockall
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
