@@ -33,7 +33,7 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void sub_8197434(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 a0, u8 a1);
 void sub_8197930(void);
-u8 GetPlayerTextSpeed(void);
+u8 GetPlayerTextSpeedDelay(void);
 void sub_81978B0(u16 arg0);
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16));
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);

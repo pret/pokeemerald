@@ -6178,7 +6178,7 @@ sub_81B3300: @ 81B3300
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl GetPlayerTextSpeed
+	bl GetPlayerTextSpeedDelay
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

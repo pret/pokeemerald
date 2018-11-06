@@ -14,7 +14,7 @@
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern int sub_8197964();
+extern int GetPlayerTextSpeed();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -153,7 +153,7 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
     printerTemplate.currentY = y;
     printerTemplate.letterSpacing = gFonts[fontId].letterSpacing;
     printerTemplate.lineSpacing = gFonts[fontId].lineSpacing;
-    printerTemplate.fontColor_l = gFonts[fontId].fontColor_l;
+    printerTemplate.unk = gFonts[fontId].unk;
     printerTemplate.fgColor = gFonts[fontId].fgColor;
     printerTemplate.bgColor = gFonts[fontId].bgColor;
     printerTemplate.shadowColor = gFonts[fontId].shadowColor;
@@ -177,7 +177,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 
     for (i = 0; i < 7; i++)
     {
-        gTempTextPrinter.sub_union.sub_fields[i] = 0;
+        gTempTextPrinter.subUnion.fields[i] = 0;
     }
 
     gTempTextPrinter.printerTemplate = *printerTemplate;
@@ -1779,11 +1779,11 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 
 u16 Font0Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 0;
+        textPrinter->subUnion.sub.glyphId = 0;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1791,11 +1791,11 @@ u16 Font0Func(struct TextPrinter *textPrinter)
 
 u16 Font1Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 1;
+        textPrinter->subUnion.sub.glyphId = 1;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1803,11 +1803,11 @@ u16 Font1Func(struct TextPrinter *textPrinter)
 
 u16 Font2Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 2;
+        textPrinter->subUnion.sub.glyphId = 2;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1815,11 +1815,11 @@ u16 Font2Func(struct TextPrinter *textPrinter)
 
 u16 Font3Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 3;
+        textPrinter->subUnion.sub.glyphId = 3;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1827,11 +1827,11 @@ u16 Font3Func(struct TextPrinter *textPrinter)
 
 u16 Font4Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 4;
+        textPrinter->subUnion.sub.glyphId = 4;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1839,11 +1839,11 @@ u16 Font4Func(struct TextPrinter *textPrinter)
 
 u16 Font5Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 5;
+        textPrinter->subUnion.sub.glyphId = 5;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1851,11 +1851,11 @@ u16 Font5Func(struct TextPrinter *textPrinter)
 
 u16 Font7Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 7;
+        textPrinter->subUnion.sub.glyphId = 7;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1863,11 +1863,11 @@ u16 Font7Func(struct TextPrinter *textPrinter)
 
 u16 Font8Func(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
     if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.glyphId = 8;
+        textPrinter->subUnion.sub.glyphId = 8;
         subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1875,10 +1875,10 @@ u16 Font8Func(struct TextPrinter *textPrinter)
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
-    if (gTextFlags.flag_2 == 1)
-        subStruct->frames_visible_counter = 0;
+    if (gTextFlags.autoScroll == 1)
+        subStruct->autoScrollDelay = 0;
     else
     {
         subStruct->downArrowYPosIdx = 0;
@@ -1888,14 +1888,14 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
 
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
     const u8 *arrowTiles;
 
-    if (gTextFlags.flag_2 == 0)
+    if (gTextFlags.autoScroll == 0)
     {
         if (subStruct->downArrowDelay != 0)
         {
-            subStruct->downArrowDelay = ((*(u32*)&textPrinter->sub_union.sub) << 19 >> 27) - 1;    // convoluted way of getting downArrowDelay, necessary to match
+            subStruct->downArrowDelay = ((*(u32*)&textPrinter->subUnion.sub) << 19 >> 27) - 1;    // convoluted way of getting downArrowDelay, necessary to match
         }
         else
         {
@@ -1907,7 +1907,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 0x8,
                 0x10);
 
-            switch (gTextFlags.flag_1)
+            switch (gTextFlags.useAlternateDownArrow)
             {
                 case 0:
                 default:
@@ -1951,15 +1951,15 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
 
 bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
-    if (subStruct->frames_visible_counter == 49)
+    if (subStruct->autoScrollDelay == 49)
     {
         return TRUE;
     }
     else
     {
-        ++subStruct->frames_visible_counter;
+        ++subStruct->autoScrollDelay;
         return FALSE;
     }
 }
@@ -1967,7 +1967,7 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
-    if (gTextFlags.flag_2 != 0)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -1986,7 +1986,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
     bool16 result = FALSE;
-    if (gTextFlags.flag_2 != 0)
+    if (gTextFlags.autoScroll != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
     }
@@ -2014,7 +2014,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
         FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 0x8, 0x10);
         if (drawArrow == 0)
         {
-            switch (gTextFlags.flag_1)
+            switch (gTextFlags.useAlternateDownArrow)
             {
                 case 0:
                 default:
@@ -2045,7 +2045,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
 
 u16 RenderText(struct TextPrinter *textPrinter)
 {
-    struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
     u16 currChar;
     s32 width;
     s32 widthHelper;
@@ -2067,7 +2067,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             return 3;
         }
 
-        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.flag_2)
+        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.autoScroll)
             textPrinter->delayCounter = 3;
         else
             textPrinter->delayCounter = textPrinter->textSpeed;
@@ -2129,8 +2129,8 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 return 2;
             case 9:
                 textPrinter->state = 1;
-                if (gTextFlags.flag_2)
-                    subStruct->frames_visible_counter = 0;
+                if (gTextFlags.autoScroll)
+                    subStruct->autoScrollDelay = 0;
                 return 3;
             case 10:
                 textPrinter->state = 5;
@@ -2301,7 +2301,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
     case 4:
         if (textPrinter->scrollDistance)
         {
-            int scrollSpeed = sub_8197964();
+            int scrollSpeed = GetPlayerTextSpeed();
             int speed = gWindowVerticalScrollSpeeds[scrollSpeed];
             if (textPrinter->scrollDistance < speed)
             {
@@ -2432,7 +2432,7 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
 
     for (i = 0; i < 9; ++i)
     {
-        if (glyphId == gGlyphWidthFuncs[i].font_id)
+        if (glyphId == gGlyphWidthFuncs[i].fontId)
             return gGlyphWidthFuncs[i].func;
     }
 
@@ -2725,7 +2725,7 @@ u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(
         windowId,
-        gKeypadIconTiles + (gKeypadIcons[keypadIconId].tile_offset * 0x20),
+        gKeypadIconTiles + (gKeypadIcons[keypadIconId].tileOffset * 0x20),
         0,
         0,
         0x80,
@@ -2739,7 +2739,7 @@ u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
 
 u8 GetKeypadIconTileOffset(u8 keypadIconId)
 {
-    return gKeypadIcons[keypadIconId].tile_offset;
+    return gKeypadIcons[keypadIconId].tileOffset;
 }
 
 u8 GetKeypadIconWidth(u8 keypadIconId)
@@ -2774,8 +2774,8 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
         case FONTATTR_LINE_SPACING:
             result = gFontInfos[fontId].lineSpacing;
             break;
-        case FONTATTR_COLOR_LOWNIBBLE:
-            result = gFontInfos[fontId].fontColor_l;
+        case FONTATTR_UNKNOWN:
+            result = gFontInfos[fontId].unk;
             break;
         case FONTATTR_COLOR_FOREGROUND:
             result = gFontInfos[fontId].fgColor;

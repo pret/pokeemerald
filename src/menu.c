@@ -176,12 +176,12 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     printer.currentY = 1;
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
-    printer.fontColor_l = 0;
+    printer.unk = 0;
     printer.fgColor = fgColor;
     printer.bgColor = bgColor;
     printer.shadowColor = shadowColor;
 
-    gTextFlags.flag_1 = 0;
+    gTextFlags.useAlternateDownArrow = 0;
     return AddTextPrinter(&printer, speed, callback);
 }
 
@@ -189,13 +189,13 @@ void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
     void (*callback)(struct TextPrinterTemplate *, u16) = NULL;
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), callback, 2, 1, 3);
 }
 
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress)
 {
     gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
@@ -454,7 +454,7 @@ u16 sub_81978D0(u8 colorNum)
 void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
 {
     sub_81973A4();
-    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, 1, GetPlayerTextSpeed(), string, callback);
+    DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, 1, GetPlayerTextSpeedDelay(), string, callback);
     CopyWindowToVram(0, 3);
 }
 
@@ -468,19 +468,19 @@ void sub_8197948(u8 initialCursorPos)
     CreateYesNoMenu(&gUnknown_0860F0A8, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, initialCursorPos);
 }
 
-u32 sub_8197964(void)
+u32 GetPlayerTextSpeed(void)
 {
-    if (gTextFlags.flag_3)
-        return 1;
+    if (gTextFlags.forceMidTextSpeed)
+        return OPTIONS_TEXT_SPEED_MID;
     return gSaveBlock2Ptr->optionsTextSpeed;
 }
 
-u8 GetPlayerTextSpeed(void)
+u8 GetPlayerTextSpeedDelay(void)
 {
     u32 speed;
-    if (gSaveBlock2Ptr->optionsTextSpeed > 2)
-        gSaveBlock2Ptr->optionsTextSpeed = 1;
-    speed = sub_8197964();
+    if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+    speed = GetPlayerTextSpeed();
     return gUnknown_0860F094[speed];
 }
 
@@ -539,7 +539,7 @@ void RemoveMapNamePopUpWindow(void)
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     gTextFlags.canABSpeedUpPrint = a1;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), callback, 2, 1, 3);
 }
 
 void sub_8197AE8(bool8 copyToVram)
@@ -1123,7 +1123,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
     printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
-    printer.fontColor_l = GetFontAttribute(fontId, FONTATTR_COLOR_LOWNIBBLE);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     printer.x = left;
@@ -1187,7 +1187,7 @@ void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top
     printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
-    printer.fontColor_l = GetFontAttribute(fontId, FONTATTR_COLOR_LOWNIBBLE);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
     printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
@@ -1242,12 +1242,12 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
 
     printer.windowId = windowId;
     printer.fontId = fontId;
-    printer.fgColor = GetFontAttribute(fontId, 5);
-    printer.bgColor = GetFontAttribute(fontId, 6);
-    printer.shadowColor = GetFontAttribute(fontId, 7);
-    printer.fontColor_l = GetFontAttribute(fontId, 4);
-    printer.letterSpacing = GetFontAttribute(fontId, 2);
-    printer.lineSpacing = GetFontAttribute(fontId, 3);
+    printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
+    printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
     for (i = 0; i < itemCount2; i++)
     {
@@ -1615,10 +1615,10 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
 
     printer.windowId = windowId;
     printer.fontId = 1;
-    printer.fgColor = GetFontAttribute(1, 5);
-    printer.bgColor = GetFontAttribute(1, 6);
-    printer.shadowColor = GetFontAttribute(1, 7);
-    printer.fontColor_l = GetFontAttribute(1, 4);
+    printer.fgColor = GetFontAttribute(1, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(1, FONTATTR_COLOR_SHADOW);
+    printer.unk = GetFontAttribute(1, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
     printer.x = 8;
@@ -1649,10 +1649,10 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.y = 1;
     printer.currentX = printer.x;
     printer.currentY = printer.y;
-    printer.fgColor = GetFontAttribute(1, 5);
-    printer.bgColor = GetFontAttribute(1, 6);
-    printer.shadowColor = GetFontAttribute(1, 7);
-    printer.fontColor_l = GetFontAttribute(1, 4);
+    printer.fgColor = GetFontAttribute(1, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(1, FONTATTR_COLOR_SHADOW);
+    printer.unk = GetFontAttribute(1, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
@@ -1682,10 +1682,10 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
 
     printer.windowId = windowId;
     printer.fontId = 1;
-    printer.fgColor = GetFontAttribute(1, 5);
-    printer.bgColor = GetFontAttribute(1, 6);
-    printer.shadowColor = GetFontAttribute(1, 7);
-    printer.fontColor_l = GetFontAttribute(1, 4);
+    printer.fgColor = GetFontAttribute(1, FONTATTR_COLOR_FOREGROUND);
+    printer.bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
+    printer.shadowColor = GetFontAttribute(1, FONTATTR_COLOR_SHADOW);
+    printer.unk = GetFontAttribute(1, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
@@ -1952,7 +1952,7 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const
     printer.currentY = printer.y;
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
-    printer.fontColor_l = 0;
+    printer.unk = 0;
     printer.fgColor = color[1];
     printer.bgColor = color[0];
     printer.shadowColor = color[2];
@@ -1973,7 +1973,7 @@ void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
     printer.currentY = printer.y;
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
-    printer.fontColor_l = 0;
+    printer.unk = 0;
     printer.fgColor = color[1];
     printer.bgColor = color[0];
     printer.shadowColor = color[2];
@@ -1994,7 +1994,7 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left
     printer.currentY = top;
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
-    printer.fontColor_l = 0;
+    printer.unk = 0;
 
     printer.fgColor = GetFontAttribute(fontId, 5);
     printer.bgColor = GetFontAttribute(fontId, 6);

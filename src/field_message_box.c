@@ -17,9 +17,9 @@ void sub_8098128(void)
 {
     gUnknown_020375BC = 0;
     gTextFlags.canABSpeedUpPrint = 0;
-    gTextFlags.flag_1 = 0;
-    gTextFlags.flag_2 = 0;
-    gTextFlags.flag_3 = 0;
+    gTextFlags.useAlternateDownArrow = 0;
+    gTextFlags.autoScroll = 0;
+    gTextFlags.forceMidTextSpeed = 0;
 }
 
 void sub_8098154(u8 taskId)

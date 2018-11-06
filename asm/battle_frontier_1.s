@@ -1180,7 +1180,7 @@ sub_81965D8: @ 81965D8
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl GetPlayerTextSpeed
+	bl GetPlayerTextSpeedDelay
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

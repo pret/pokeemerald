@@ -15,7 +15,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
     u16 char_;
     struct TextPrinterSubStruct *sub;
 
-    sub = &textPrinter->sub_union.sub;
+    sub = &textPrinter->subUnion.sub;
     switch (textPrinter->state)
     {
         case 0:
@@ -33,7 +33,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                 }
                 return 3;
             }
-            if (gTextFlags.flag_2)
+            if (gTextFlags.autoScroll)
             {
                 textPrinter->delayCounter = 3;
             }
@@ -92,9 +92,9 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                             return 2;
                         case 9:
                             textPrinter->state = 1;
-                            if (gTextFlags.flag_2)
+                            if (gTextFlags.autoScroll)
                             {
-                                sub->frames_visible_counter = 0;
+                                sub->autoScrollDelay = 0;
                             }
                             return 3;
                         case 10:

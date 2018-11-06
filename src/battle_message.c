@@ -2961,7 +2961,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
     printerTemplate.currentY = printerTemplate.y;
     printerTemplate.letterSpacing = textInfo[windowId].letterSpacing;
     printerTemplate.lineSpacing = textInfo[windowId].lineSpacing;
-    printerTemplate.fontColor_l = 0;
+    printerTemplate.unk = 0;
     printerTemplate.fgColor = textInfo[windowId].fgColor;
     printerTemplate.bgColor = textInfo[windowId].bgColor;
     printerTemplate.shadowColor = textInfo[windowId].shadowColor;
@@ -2974,14 +2974,14 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
     }
 
     if (windowId == 0x16)
-        gTextFlags.flag_1 = 0;
+        gTextFlags.useAlternateDownArrow = 0;
     else
-        gTextFlags.flag_1 = 1;
+        gTextFlags.useAlternateDownArrow = 1;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED))
-        gTextFlags.flag_2 = 1;
+        gTextFlags.autoScroll = 1;
     else
-        gTextFlags.flag_2 = 0;
+        gTextFlags.autoScroll = 0;
 
     if (windowId == 0 || windowId == 0x16)
     {
@@ -2990,7 +2990,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
-            speed = GetPlayerTextSpeed();
+            speed = GetPlayerTextSpeedDelay();
 
         gTextFlags.canABSpeedUpPrint = 1;
     }
