@@ -74,7 +74,7 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8, u8);
 static void NewGameBirchSpeech_ClearWindow(u8);
 static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8);
 static void Task_NewGameBirchSpeech_MainSpeech(u8);
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextSubPrinter *printer, u16 a);
+static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a);
 static void Task_NewGameBirchSpeech_AndYouAre(u8);
 static void Task_NewGameBirchSpeechSub_WaitForLotad(u8);
 static void Task_NewGameBirchSpeech_StartBirchLotadPlatformFade(u8);
@@ -2126,9 +2126,9 @@ static void NewGameBirchSpeech_ClearWindow(u8 windowId)
     CopyWindowToVram(windowId, 2);
 }
 
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextSubPrinter *printer, u16 a)
+static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a)
 {
-    if (*(printer->current_text_offset - 2) == 8 && gUnknown_02022D04 == 0)
+    if (*(printer->currentChar - 2) == 8 && gUnknown_02022D04 == 0)
     {
         gUnknown_02022D04 = 1;
         CreateTask(Task_NewGameBirchSpeechSub_InitPokeBall, 0);

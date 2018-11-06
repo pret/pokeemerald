@@ -140,27 +140,27 @@ void DeactivateAllTextPrinters(void)
         gTextPrinters[printer].active = 0;
 }
 
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16))
+u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    struct TextSubPrinter subPrinter;
+    struct TextPrinterTemplate printerTemplate;
 
-    subPrinter.current_text_offset = str;
-    subPrinter.windowId = windowId;
-    subPrinter.fontId = fontId;
-    subPrinter.x = x;
-    subPrinter.y = y;
-    subPrinter.currentX = x;
-    subPrinter.currentY = y;
-    subPrinter.letterSpacing = gFonts[fontId].letterSpacing;
-    subPrinter.lineSpacing = gFonts[fontId].lineSpacing;
-    subPrinter.fontColor_l = gFonts[fontId].fontColor_l;
-    subPrinter.fgColor = gFonts[fontId].fgColor;
-    subPrinter.bgColor = gFonts[fontId].bgColor;
-    subPrinter.shadowColor = gFonts[fontId].shadowColor;
-    return AddTextPrinter(&subPrinter, speed, callback);
+    printerTemplate.currentChar = str;
+    printerTemplate.windowId = windowId;
+    printerTemplate.fontId = fontId;
+    printerTemplate.x = x;
+    printerTemplate.y = y;
+    printerTemplate.currentX = x;
+    printerTemplate.currentY = y;
+    printerTemplate.letterSpacing = gFonts[fontId].letterSpacing;
+    printerTemplate.lineSpacing = gFonts[fontId].lineSpacing;
+    printerTemplate.fontColor_l = gFonts[fontId].fontColor_l;
+    printerTemplate.fgColor = gFonts[fontId].fgColor;
+    printerTemplate.bgColor = gFonts[fontId].bgColor;
+    printerTemplate.shadowColor = gFonts[fontId].shadowColor;
+    return AddTextPrinter(&printerTemplate, speed, callback);
 }
 
-bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16))
+bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     int i;
     u16 j;
@@ -180,16 +180,16 @@ bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*ca
         gTempTextPrinter.sub_union.sub_fields[i] = 0;
     }
 
-    gTempTextPrinter.subPrinter = *textSubPrinter;
+    gTempTextPrinter.printerTemplate = *printerTemplate;
     gTempTextPrinter.callback = callback;
     gTempTextPrinter.minLetterSpacing = 0;
     gTempTextPrinter.japanese = 0;
 
-    GenerateFontHalfRowLookupTable(textSubPrinter->fgColor, textSubPrinter->bgColor, textSubPrinter->shadowColor);
+    GenerateFontHalfRowLookupTable(printerTemplate->fgColor, printerTemplate->bgColor, printerTemplate->shadowColor);
     if (speed != TEXT_SPEED_FF && speed != 0x0)
     {
         --gTempTextPrinter.textSpeed;
-        gTextPrinters[textSubPrinter->windowId] = gTempTextPrinter;
+        gTextPrinters[printerTemplate->windowId] = gTempTextPrinter;
     }
     else
     {
@@ -201,8 +201,8 @@ bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*ca
         }
 
         if (speed != TEXT_SPEED_FF)
-          CopyWindowToVram(gTempTextPrinter.subPrinter.windowId, 2);
-        gTextPrinters[textSubPrinter->windowId].active = 0;
+          CopyWindowToVram(gTempTextPrinter.printerTemplate.windowId, 2);
+        gTextPrinters[printerTemplate->windowId].active = 0;
     }
     gUnknown_03002F84 = 0;
     return TRUE;
@@ -222,10 +222,10 @@ void RunTextPrinters(void)
                 temp = RenderFont(&gTextPrinters[i]);
                 switch (temp) {
                     case 0:
-                        CopyWindowToVram(gTextPrinters[i].subPrinter.windowId, 2);
+                        CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
                     case 3:
                         if (gTextPrinters[i].callback != 0)
-                            gTextPrinters[i].callback(&gTextPrinters[i].subPrinter, temp);
+                            gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
                         break;
                     case 1:
                         gTextPrinters[i].active = 0;
@@ -246,7 +246,7 @@ u32 RenderFont(struct TextPrinter *textPrinter)
     u32 ret;
     while (TRUE)
     {
-        ret = gFonts[textPrinter->subPrinter.fontId].fontFunction(textPrinter);
+        ret = gFonts[textPrinter->printerTemplate.fontId].fontFunction(textPrinter);
         if (ret != 2)
             return ret;
     }
@@ -1759,7 +1759,7 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 
     if (gLastTextBgColor != 0)
     {
-        window = &gWindows[textPrinter->subPrinter.windowId];
+        window = &gWindows[textPrinter->printerTemplate.windowId];
         pixels_data.pixels = window->tileData;
         pixels_data.width = window->window.width << 3;
         pixels_data.height = window->window.height << 3;
@@ -1769,8 +1769,8 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 
         FillBitmapRect4Bit(
             &pixels_data,
-            textPrinter->subPrinter.currentX,
-            textPrinter->subPrinter.currentY,
+            textPrinter->printerTemplate.currentX,
+            textPrinter->printerTemplate.currentY,
             width,
             *glyphHeight,
             gLastTextBgColor);
@@ -1781,10 +1781,10 @@ u16 Font0Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 0;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 0;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1793,10 +1793,10 @@ u16 Font1Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 1;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 1;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1805,10 +1805,10 @@ u16 Font2Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 2;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 2;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1817,10 +1817,10 @@ u16 Font3Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 3;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 3;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1829,10 +1829,10 @@ u16 Font4Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 4;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 4;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1841,10 +1841,10 @@ u16 Font5Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 5;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 5;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1853,10 +1853,10 @@ u16 Font7Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 7;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 7;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1865,10 +1865,10 @@ u16 Font8Func(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->sub_union.sub;
 
-    if (subStruct->field_1_top == 0)
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
     {
-        textPrinter->sub_union.sub.font_type = 8;
-        subStruct->field_1_top = 1;
+        textPrinter->sub_union.sub.glyphId = 8;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -1881,8 +1881,8 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
         subStruct->frames_visible_counter = 0;
     else
     {
-        subStruct->field_1_upmid = 0;
-        subStruct->field_1 = 0;
+        subStruct->downArrowYPosIdx = 0;
+        subStruct->downArrowDelay = 0;
     }
 }
 
@@ -1893,17 +1893,17 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 
     if (gTextFlags.flag_2 == 0)
     {
-        if (subStruct->field_1 != 0)
+        if (subStruct->downArrowDelay != 0)
         {
-            subStruct->field_1 = ((*(u32*)&textPrinter->sub_union.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
+            subStruct->downArrowDelay = ((*(u32*)&textPrinter->sub_union.sub) << 19 >> 27) - 1;    // convoluted way of getting downArrowDelay, necessary to match
         }
         else
         {
             FillWindowPixelRect(
-                textPrinter->subPrinter.windowId,
-                textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor,
-                textPrinter->subPrinter.currentX,
-                textPrinter->subPrinter.currentY,
+                textPrinter->printerTemplate.windowId,
+                textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor,
+                textPrinter->printerTemplate.currentX,
+                textPrinter->printerTemplate.currentY,
                 0x8,
                 0x10);
 
@@ -1919,20 +1919,20 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
             }
 
             BlitBitmapRectToWindow(
-                textPrinter->subPrinter.windowId,
+                textPrinter->printerTemplate.windowId,
                 arrowTiles,
                 0,
-                gDownArrowYCoords[*(u32*)subStruct << 17 >> 30], // subStruct->field_1_upmid but again, stupidly retrieved
+                gDownArrowYCoords[*(u32*)subStruct << 17 >> 30], // subStruct->downArrowYPosIdx but again, stupidly retrieved
                 0x8,
                 0x10,
-                textPrinter->subPrinter.currentX,
-                textPrinter->subPrinter.currentY,
+                textPrinter->printerTemplate.currentX,
+                textPrinter->printerTemplate.currentY,
                 0x8,
                 0x10);
-            CopyWindowToVram(textPrinter->subPrinter.windowId, 0x2);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
 
-            subStruct->field_1 = 0x8;
-            subStruct->field_1_upmid = (*(u32*)subStruct << 17 >> 30) + 1;
+            subStruct->downArrowDelay = 0x8;
+            subStruct->downArrowYPosIdx = (*(u32*)subStruct << 17 >> 30) + 1;
         }
     }
 }
@@ -1940,13 +1940,13 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
 {
     FillWindowPixelRect(
-        textPrinter->subPrinter.windowId,
-        textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor,
-        textPrinter->subPrinter.currentX,
-        textPrinter->subPrinter.currentY,
+        textPrinter->printerTemplate.windowId,
+        textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor,
+        textPrinter->printerTemplate.currentX,
+        textPrinter->printerTemplate.currentY,
         0x8,
         0x10);
-    CopyWindowToVram(textPrinter->subPrinter.windowId, 0x2);
+    CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
 }
 
 bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
@@ -2053,15 +2053,15 @@ u16 RenderText(struct TextPrinter *textPrinter)
     switch (textPrinter->state)
     {
     case 0:
-        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && subStruct->font_type_upper)
+        if ((gMain.heldKeys & (A_BUTTON | B_BUTTON)) && subStruct->hasPrintBeenSpedUp)
             textPrinter->delayCounter = 0;
 
         if (textPrinter->delayCounter && textPrinter->textSpeed)
         {
             textPrinter->delayCounter--;
-            if (gTextFlags.flag_0 && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
+            if (gTextFlags.canABSpeedUpPrint && (gMain.newKeys & (A_BUTTON | B_BUTTON)))
             {
-                subStruct->font_type_upper = 1;
+                subStruct->hasPrintBeenSpedUp = TRUE;
                 textPrinter->delayCounter = 0;
             }
             return 3;
@@ -2072,141 +2072,141 @@ u16 RenderText(struct TextPrinter *textPrinter)
         else
             textPrinter->delayCounter = textPrinter->textSpeed;
 
-        currChar = *textPrinter->subPrinter.current_text_offset;
-        textPrinter->subPrinter.current_text_offset++;
+        currChar = *textPrinter->printerTemplate.currentChar;
+        textPrinter->printerTemplate.currentChar++;
 
         switch (currChar)
         {
         case CHAR_NEWLINE:
-            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
-            textPrinter->subPrinter.currentY += (gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing);
+            textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+            textPrinter->printerTemplate.currentY += (gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing);
             return 2;
         case PLACEHOLDER_BEGIN:
-            textPrinter->subPrinter.current_text_offset++;
+            textPrinter->printerTemplate.currentChar++;
             return 2;
         case EXT_CTRL_CODE_BEGIN:
-            currChar = *textPrinter->subPrinter.current_text_offset;
-            textPrinter->subPrinter.current_text_offset++;
+            currChar = *textPrinter->printerTemplate.currentChar;
+            textPrinter->printerTemplate.currentChar++;
             switch (currChar)
             {
-            case 1: // _08005960
-                textPrinter->subPrinter.fgColor = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+            case 1:
+                textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 2: // _08005982
-                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+            case 2:
+                textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 3: // _080059A6
-                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+            case 3:
+                textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 4: // _080059C0
-                textPrinter->subPrinter.fgColor = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                textPrinter->subPrinter.bgColor = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                textPrinter->subPrinter.shadowColor = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                GenerateFontHalfRowLookupTable(textPrinter->subPrinter.fgColor, textPrinter->subPrinter.bgColor, textPrinter->subPrinter.shadowColor);
+            case 4:
+                textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
                 return 2;
-            case 5: // _08005A0E
-                textPrinter->subPrinter.current_text_offset++;
+            case 5:
+                textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 6: //_08005A12
-                subStruct->font_type = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
+            case 6:
+                subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 7: // _08005A0A
+            case 7:
                 return 2;
-            case 8: // _08005A2A
-                textPrinter->delayCounter = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
+            case 8:
+                textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
                 textPrinter->state = 6;
                 return 2;
-            case 9: // _08005A3A
+            case 9:
                 textPrinter->state = 1;
                 if (gTextFlags.flag_2)
                     subStruct->frames_visible_counter = 0;
                 return 3;
-            case 10: // _08005A58
+            case 10:
                 textPrinter->state = 5;
                 return 3;
-            case 11: // _08005A5C
-                currChar = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                currChar |= *textPrinter->subPrinter.current_text_offset << 8;
-                textPrinter->subPrinter.current_text_offset++;
+            case 11:
+                currChar = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                currChar |= *textPrinter->printerTemplate.currentChar << 8;
+                textPrinter->printerTemplate.currentChar++;
                 PlayBGM(currChar);
                 return 2;
-            case 12: // _08005B5A
-                currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
-                textPrinter->subPrinter.current_text_offset++;
+            case 12:
+                currChar = *textPrinter->printerTemplate.currentChar | 0x100;
+                textPrinter->printerTemplate.currentChar++;
                 break;
-            case 16: // _08005A76
-                currChar = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
-                currChar |= (*textPrinter->subPrinter.current_text_offset << 8);
-                textPrinter->subPrinter.current_text_offset++;
+            case 16:
+                currChar = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
+                currChar |= (*textPrinter->printerTemplate.currentChar << 8);
+                textPrinter->printerTemplate.currentChar++;
                 PlaySE(currChar);
                 return 2;
-            case 13: // _08005A90
-                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x + *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
+            case 13:
+                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 14: // _08005A98
-                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y + *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
+            case 14:
+                textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 15: // _08005AA4
-                FillWindowPixelBuffer(textPrinter->subPrinter.windowId, textPrinter->subPrinter.bgColor | textPrinter->subPrinter.bgColor << 4);
-                textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
-                textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
+            case 15:
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | textPrinter->printerTemplate.bgColor << 4);
+                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+                textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 return 2;
-            case 23: // _08005ABE
+            case 23:
                 m4aMPlayStop(&gMPlayInfo_BGM);
                 return 2;
-            case 24: // _08005ACC
+            case 24:
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 return 2;
-            case 17: // _08005AD8
-                width = *textPrinter->subPrinter.current_text_offset;
-                textPrinter->subPrinter.current_text_offset++;
+            case 17:
+                width = *textPrinter->printerTemplate.currentChar;
+                textPrinter->printerTemplate.currentChar++;
                 if (width > 0)
                 {
                     ClearTextSpan(textPrinter, width);
-                    textPrinter->subPrinter.currentX += width;
+                    textPrinter->printerTemplate.currentX += width;
                     return 0;
                 }
                 return 2;
-            case 18: // _08005AF2
-                textPrinter->subPrinter.currentX = *textPrinter->subPrinter.current_text_offset + textPrinter->subPrinter.x;
-                textPrinter->subPrinter.current_text_offset++;
+            case 18:
+                textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
+                textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 19: // _08005B02
+            case 19:
                 {
-                    widthHelper = *textPrinter->subPrinter.current_text_offset;
-                    widthHelper += textPrinter->subPrinter.x;
-                    textPrinter->subPrinter.current_text_offset++;
-                    width = widthHelper - textPrinter->subPrinter.currentX;
+                    widthHelper = *textPrinter->printerTemplate.currentChar;
+                    widthHelper += textPrinter->printerTemplate.x;
+                    textPrinter->printerTemplate.currentChar++;
+                    width = widthHelper - textPrinter->printerTemplate.currentX;
                     if (width > 0)
                     {
                         ClearTextSpan(textPrinter, width);
-                        textPrinter->subPrinter.currentX += width;
+                        textPrinter->printerTemplate.currentX += width;
                         return 0;
                     }
                 }
                 return 2;
-            case 20: // _08005B26
-                textPrinter->minLetterSpacing = *textPrinter->subPrinter.current_text_offset++;
+            case 20:
+                textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 21: // _08005B36
+            case 21:
                 textPrinter->japanese = 1;
                 return 2;
-            case 22: // _08005B3E
+            case 22:
                 textPrinter->japanese = 0;
                 return 2;
             }
@@ -2220,39 +2220,39 @@ u16 RenderText(struct TextPrinter *textPrinter)
             TextPrinterInitDownArrowCounters(textPrinter);
             return 3;
         case CHAR_SPECIAL_F9:
-            currChar = *textPrinter->subPrinter.current_text_offset | 0x100;
-            textPrinter->subPrinter.current_text_offset++;
+            currChar = *textPrinter->printerTemplate.currentChar | 0x100;
+            textPrinter->printerTemplate.currentChar++;
             break;
         case CHAR_SPECIAL_F8:
-            currChar = *textPrinter->subPrinter.current_text_offset++;
-            gUnknown_03002F90.unk80 = DrawKeypadIcon(textPrinter->subPrinter.windowId, currChar, textPrinter->subPrinter.currentX, textPrinter->subPrinter.currentY);
-            textPrinter->subPrinter.currentX += gUnknown_03002F90.unk80 + textPrinter->subPrinter.letterSpacing;
+            currChar = *textPrinter->printerTemplate.currentChar++;
+            gUnknown_03002F90.unk80 = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
+            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing;
             return 0;
         case EOS:
             return 1;
         }
 
-        switch (subStruct->font_type)
+        switch (subStruct->glyphId)
         {
-        case 0: // _08005BCC
+        case 0:
             DecompressGlyphFont0(currChar, textPrinter->japanese);
             break;
-        case 1: // _08005BDA
+        case 1:
             DecompressGlyphFont1(currChar, textPrinter->japanese);
             break;
         case 2:
         case 3:
         case 4:
-        case 5: // _08005BE8
+        case 5:
             DecompressGlyphFont2(currChar, textPrinter->japanese);
             break;
-        case 7: // _08005BF6
+        case 7:
             DecompressGlyphFont7(currChar, textPrinter->japanese);
             break;
-        case 8: // _08005C04
+        case 8:
             DecompressGlyphFont8(currChar, textPrinter->japanese);
             break;
-        case 6: // _08005C10
+        case 6:
             break;
         }
 
@@ -2260,20 +2260,20 @@ u16 RenderText(struct TextPrinter *textPrinter)
 
         if (textPrinter->minLetterSpacing)
         {
-            textPrinter->subPrinter.currentX += gUnknown_03002F90.unk80;
+            textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
             width = textPrinter->minLetterSpacing - gUnknown_03002F90.unk80;
             if (width > 0)
             {
                 ClearTextSpan(textPrinter, width);
-                textPrinter->subPrinter.currentX += width;
+                textPrinter->printerTemplate.currentX += width;
             }
         }
         else
         {
             if (textPrinter->japanese)
-                textPrinter->subPrinter.currentX += (gUnknown_03002F90.unk80 + textPrinter->subPrinter.letterSpacing);
+                textPrinter->printerTemplate.currentX += (gUnknown_03002F90.unk80 + textPrinter->printerTemplate.letterSpacing);
             else
-                textPrinter->subPrinter.currentX += gUnknown_03002F90.unk80;
+                textPrinter->printerTemplate.currentX += gUnknown_03002F90.unk80;
         }
         return 0;
     case 1:
@@ -2283,9 +2283,9 @@ u16 RenderText(struct TextPrinter *textPrinter)
     case 2:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
-            FillWindowPixelBuffer(textPrinter->subPrinter.windowId, (textPrinter->subPrinter.bgColor << 4) | textPrinter->subPrinter.bgColor);
-            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
-            textPrinter->subPrinter.currentY = textPrinter->subPrinter.y;
+            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, (textPrinter->printerTemplate.bgColor << 4) | textPrinter->printerTemplate.bgColor);
+            textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+            textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
             textPrinter->state = 0;
         }
         return 3;
@@ -2293,8 +2293,8 @@ u16 RenderText(struct TextPrinter *textPrinter)
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
             TextPrinterClearDownArrow(textPrinter);
-            textPrinter->scrollDistance = gFonts[textPrinter->subPrinter.fontId].maxLetterHeight + textPrinter->subPrinter.lineSpacing;
-            textPrinter->subPrinter.currentX = textPrinter->subPrinter.x;
+            textPrinter->scrollDistance = gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing;
+            textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
             textPrinter->state = 4;
         }
         return 3;
@@ -2305,15 +2305,15 @@ u16 RenderText(struct TextPrinter *textPrinter)
             int speed = gWindowVerticalScrollSpeeds[scrollSpeed];
             if (textPrinter->scrollDistance < speed)
             {
-                ScrollWindow(textPrinter->subPrinter.windowId, 0, textPrinter->scrollDistance, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor);
                 textPrinter->scrollDistance = 0;
             }
             else
             {
-                ScrollWindow(textPrinter->subPrinter.windowId, 0, speed, textPrinter->subPrinter.bgColor << 4 | textPrinter->subPrinter.bgColor);
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor);
                 textPrinter->scrollDistance -= speed;
             }
-            CopyWindowToVram(textPrinter->subPrinter.windowId, 2);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);
         }
         else
         {
@@ -2324,7 +2324,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
         if (!IsSEPlaying())
             textPrinter->state = 0;
         return 3;
-    case 6: // _08005D5A
+    case 6:
         if (textPrinter->delayCounter != 0)
             textPrinter->delayCounter--;
         else

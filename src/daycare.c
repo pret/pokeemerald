@@ -1206,9 +1206,9 @@ static void GetDaycareLevelMenuLevelText(struct DayCare *daycare, u8 *dest)
 
 static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = text;
+    printer.currentChar = text;
     printer.windowId = windowId;
     printer.fontId = 1;
     printer.x = x;

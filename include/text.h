@@ -122,18 +122,18 @@ enum {
 
 struct TextPrinterSubStruct
 {
-    u8 font_type:4;  // 0x14
-    u8 font_type_upper:1;
+    u8 glyphId:4;  // 0x14
+    bool8 hasPrintBeenSpedUp:1;
     u8 font_type_5:3;
-    u8 field_1:5;
-    u8 field_1_upmid:2;
-    u8 field_1_top:1;
+    u8 downArrowDelay:5;
+    u8 downArrowYPosIdx:2;
+    bool8 hasGlyphIdBeenSet:1;
     u8 frames_visible_counter;
 };
 
-struct TextSubPrinter // TODO: Better name
+struct TextPrinterTemplate
 {
-    const u8* current_text_offset;
+    const u8* currentChar;
     u8 windowId;
     u8 fontId;
     u8 x;
@@ -150,9 +150,9 @@ struct TextSubPrinter // TODO: Better name
 
 struct TextPrinter
 {
-    struct TextSubPrinter subPrinter;
+    struct TextPrinterTemplate printerTemplate;
 
-    void (*callback)(struct TextSubPrinter *, u16); // 0x10
+    void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
 
     union __attribute__((packed)) {
         struct TextPrinterSubStruct sub;
@@ -197,7 +197,7 @@ struct KeypadIcon
 };
 
 typedef struct {
-    u8 flag_0:1;
+    u8 canABSpeedUpPrint:1;
     u8 flag_1:1;
     u8 flag_2:1;
     u8 flag_3:1;
@@ -225,8 +225,8 @@ extern struct Struct_03002F90 gUnknown_03002F90;
 
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
-u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
-bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
+u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+bool16 AddTextPrinter(struct TextPrinterTemplate *template, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);
 u32 RenderFont(struct TextPrinter *textPrinter);

@@ -16,7 +16,7 @@ void textbox_auto_and_task_add(void);
 void sub_8098128(void)
 {
     gUnknown_020375BC = 0;
-    gTextFlags.flag_0 = 0;
+    gTextFlags.canABSpeedUpPrint = 0;
     gTextFlags.flag_1 = 0;
     gTextFlags.flag_2 = 0;
     gTextFlags.flag_3 = 0;

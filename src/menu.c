@@ -163,11 +163,11 @@ u16 RunTextPrintersAndIsPrinter0Active(void)
     return IsTextPrinterActive(0);
 }
 
-u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
+u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = 0;
@@ -187,20 +187,20 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
 
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress)
 {
-    void (*callback)(struct TextSubPrinter *, u16) = NULL;
-    gTextFlags.flag_0 = allowSkippingDelayWithButtonPress;
+    void (*callback)(struct TextPrinterTemplate *, u16) = NULL;
+    gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
     AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
 }
 
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress)
 {
-    gTextFlags.flag_0 = allowSkippingDelayWithButtonPress;
+    gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
     AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
 }
 
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed)
 {
-    gTextFlags.flag_0 = allowSkippingDelayWithButtonPress;
+    gTextFlags.canABSpeedUpPrint = allowSkippingDelayWithButtonPress;
     AddTextPrinterParameterized2(0, 1, gStringVar4, speed, NULL, 2, 1, 3);
 }
 
@@ -536,9 +536,9 @@ void RemoveMapNamePopUpWindow(void)
     }
 }
 
-void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextSubPrinter *, u16))
+void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    gTextFlags.flag_0 = a1;
+    gTextFlags.canABSpeedUpPrint = a1;
     AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), callback, 2, 1, 3);
 }
 
@@ -1116,7 +1116,7 @@ void sub_8198854(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const stru
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8)
 {
     u8 i;
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
     printer.windowId = windowId;
     printer.fontId = fontId;
@@ -1131,7 +1131,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
 
     for (i = 0; i < itemCount; i++)
     {
-        printer.current_text_offset = strs[a8[i]].text;
+        printer.currentChar = strs[a8[i]].text;
         printer.y = (lineHeight * i) + top;
         printer.currentY = printer.y;
         AddTextPrinter(&printer, 0xFF, NULL);
@@ -1172,12 +1172,12 @@ u16 sub_8198AA4(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 
 
 void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
     gUnknown_0203CD9F = AddWindow(window);
     SetWindowBorderStyle(gUnknown_0203CD9F, TRUE, baseTileNum, paletteNum);
 
-    printer.current_text_offset = gText_YesNo;
+    printer.currentChar = gText_YesNo;
     printer.windowId = gUnknown_0203CD9F;
     printer.fontId = fontId;
     printer.x = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + left;
@@ -1238,7 +1238,7 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
 {
     u8 i;
     u8 j;
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
     printer.windowId = windowId;
     printer.fontId = fontId;
@@ -1253,7 +1253,7 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     {
         for (j = 0; j < itemCount; j++)
         {
-            printer.current_text_offset = strs[a8[(itemCount * i) + j]].text;
+            printer.currentChar = strs[a8[(itemCount * i) + j]].text;
             printer.x = (a4 * j) + left;
             printer.y = (GetFontAttribute(fontId, 1) * i) + top;
             printer.currentX = printer.x;
@@ -1611,7 +1611,7 @@ void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs)
 void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const u8 *a8)
 {
     u8 i;
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
     printer.windowId = windowId;
     printer.fontId = 1;
@@ -1626,7 +1626,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
 
     for (i = 0; i < itemCount; i++)
     {
-        printer.current_text_offset = strs[a8[i]].text;
+        printer.currentChar = strs[a8[i]].text;
         printer.y = (i * 16) + 1;
         printer.currentY = (i * 16) + 1;
         AddTextPrinter(&printer, 0xFF, NULL);
@@ -1637,12 +1637,12 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
 
 void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
     gUnknown_0203CD9F = AddWindow(window);
     SetWindowBorderStyle(gUnknown_0203CD9F, TRUE, baseTileNum, paletteNum);
 
-    printer.current_text_offset = gText_YesNo;
+    printer.currentChar = gText_YesNo;
     printer.windowId = gUnknown_0203CD9F;
     printer.fontId = 1;
     printer.x = 8;
@@ -1678,7 +1678,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
 {
     u8 i;
     u8 j;
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
     printer.windowId = windowId;
     printer.fontId = 1;
@@ -1693,7 +1693,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     {
         for (j = 0; j < itemCount; j++)
         {
-            printer.current_text_offset = strs[a8[(itemCount * i) + j]].text;
+            printer.currentChar = strs[a8[(itemCount * i) + j]].text;
             printer.x = (a4 * j) + 8;
             printer.y = (16 * i) + 1;
             printer.currentX = printer.x;
@@ -1941,9 +1941,9 @@ void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
 
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = left;
@@ -1962,9 +1962,9 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const
 
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = left;
@@ -1981,11 +1981,11 @@ void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
     AddTextPrinter(&printer, speed, NULL);
 }
 
-void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextSubPrinter *, u16), u8 letterSpacing, u8 lineSpacing)
+void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 letterSpacing, u8 lineSpacing)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = str;
+    printer.currentChar = str;
     printer.windowId = windowId;
     printer.fontId = fontId;
     printer.x = left;
