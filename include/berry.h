@@ -2,11 +2,6 @@
 #define GUARD_BERRY_H
 
 #define BERRY_NONE 0
-#define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY  ITEM_ENIGMA_BERRY
-
-#define GETBERRYID(berry) ((berry - FIRST_BERRY) + 1)
-#define GETITEMID(berry) ((berry + FIRST_BERRY) - 1)
 
 enum
 {
