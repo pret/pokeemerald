@@ -15615,7 +15615,7 @@ _081B8618:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r3, =gUnknown_08611C9A
+	ldr r3, =gFrontierBannedSpecies
 	lsls r1, r6, 1
 	adds r0, r1, r3
 	ldrh r0, [r0]

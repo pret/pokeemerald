@@ -22,7 +22,7 @@ SlateportCity_BattleTentLobby_MapScript2_20874F: @ 820874F
 
 SlateportCity_BattleTentLobby_EventScript_208779:: @ 8208779
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 SlateportCity_BattleTentLobby_EventScript_208782:: @ 8208782
@@ -32,12 +32,12 @@ SlateportCity_BattleTentLobby_EventScript_208782:: @ 8208782
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	releaseall
 	end
 
@@ -50,7 +50,7 @@ SlateportCity_BattleTentLobby_EventScript_2087B7:: @ 82087B7
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	special sub_81B9D08
@@ -66,7 +66,7 @@ SlateportCity_BattleTentLobby_EventScript_2087E9:: @ 82087E9
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	message SlateportCity_BattleTentLobby_Text_23F68C
 	waitmessage
 	playfanfare MUS_FANFA4
@@ -84,7 +84,7 @@ SlateportCity_BattleTentLobby_EventScript_208837:: @ 8208837
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	special sub_81B9D08
@@ -110,7 +110,7 @@ SlateportCity_BattleTentLobby_EventScript_208871:: @ 8208871
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8006, 2
 	goto SlateportCity_BattleTentLobby_EventScript_2089AC
@@ -141,7 +141,7 @@ SlateportCity_BattleTentLobby_EventScript_208906:: @ 8208906
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox SlateportCity_BattleTentLobby_Text_2C5B06, 5
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_208A2B
@@ -152,17 +152,17 @@ SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
 	special sub_81B9D08
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	closemessage
 	delay 2
 	call SlateportCity_BattleTentLobby_EventScript_27134F
@@ -224,7 +224,7 @@ SlateportCity_BattleTentLobby_EventScript_208A14:: @ 8208A14
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto SlateportCity_BattleTentLobby_EventScript_208A2E
 
 SlateportCity_BattleTentLobby_EventScript_208A2B:: @ 8208A2B

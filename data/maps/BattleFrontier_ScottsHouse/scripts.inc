@@ -114,7 +114,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
@@ -123,7 +123,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
@@ -157,7 +157,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
@@ -166,7 +166,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74

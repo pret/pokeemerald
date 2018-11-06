@@ -70,7 +70,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_BattleTentCorridor_EventScript_209014
 	compare VAR_RESULT, 2
@@ -136,7 +136,7 @@ SlateportCity_BattleTentCorridor_EventScript_209022:: @ 8209022
 	waitse
 	fadescreen 1
 	setvar VAR_0x8004, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 SlateportCity_BattleTentCorridor_EventScript_209044:: @ 8209044

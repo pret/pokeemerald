@@ -49,7 +49,7 @@ BattleFrontier_BattleTowerLobby_MapScript2_23E6DD: @ 823E6DD
 
 BattleFrontier_BattleTowerLobby_EventScript_23E707:: @ 823E707
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23E710:: @ 823E710
@@ -68,7 +68,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E710:: @ 823E710
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	release
 	end
@@ -77,7 +77,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E758:: @ 823E758
 	lock
 	faceplayer
 	setvar VAR_0x8004, 10
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E778
 	message BattleFrontier_BattleTowerLobby_Text_23F60D
@@ -101,7 +101,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E780:: @ 823E780
 BattleFrontier_BattleTowerLobby_EventScript_23E7A5:: @ 823E7A5
 	msgbox BattleFrontier_BattleTowerLobby_Text_2414D4, 4
 	setvar VAR_0x8004, 11
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleTowerLobby_Text_241520, 9
 	call BattleFrontier_BattleTowerLobby_EventScript_23E84D
 	setvar VAR_0x8004, 1
@@ -151,7 +151,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E84D:: @ 823E84D
 	message BattleFrontier_BattleTowerLobby_Text_23F70F
 	waitmessage
 	setvar VAR_0x8004, 8
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 6
@@ -182,7 +182,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8B4:: @ 823E8B4
 BattleFrontier_BattleTowerBattleRoom_EventScript_23E8B4:: @ 823E8B4
 BattleFrontier_BattleTowerLobby_EventScript_23E8B4:: @ 823E8B4
 	setvar VAR_0x8004, 19
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E8D7
 	playse SE_SAVE
@@ -208,7 +208,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_23E8E0:: @ 823E8E0
 BattleFrontier_BattleTowerLobby_EventScript_23E8E0:: @ 823E8E0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 6
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
@@ -228,7 +228,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0F3
 	end
 
@@ -262,13 +262,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleTowerLobby_Text_2407A6, 4
 	fadescreen 1
 	call BattleFrontier_BattleTowerLobby_EventScript_23F2B7
@@ -287,7 +287,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
@@ -298,7 +298,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -342,13 +342,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleTowerLobby_Text_240A50, 4
 	fadescreen 1
 	call BattleFrontier_BattleTowerLobby_EventScript_23F2B7
@@ -367,7 +367,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
@@ -378,7 +378,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -423,13 +423,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleTowerLobby_Text_240DDB, 4
 	fadescreen 1
 	call BattleFrontier_BattleTowerLobby_EventScript_23F2B7
@@ -448,7 +448,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
@@ -459,7 +459,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -503,13 +503,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 	case 2, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleTowerLobby_Text_24115E, 4
 	fadescreen 1
 	call BattleFrontier_BattleTowerLobby_EventScript_23F2B7
@@ -528,7 +528,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 0
 	special sub_8161F74
@@ -539,7 +539,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -634,7 +634,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFC7:: @ 823EFC7
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -645,7 +645,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFE0:: @ 823EFE0
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -656,7 +656,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EFF9:: @ 823EFF9
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -667,7 +667,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F012:: @ 823F012
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -717,7 +717,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F0C2:: @ 823F0C2
 BattleFrontier_BattleTowerLobby_EventScript_23F0D0:: @ 823F0D0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	end
 
@@ -736,7 +736,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F0F3:: @ 823F0F3
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	call BattleFrontier_BattleTowerLobby_EventScript_23F272
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_RESULT, 0
 
 BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
@@ -924,7 +924,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_23F2B7:: @ 823F2B7
 BattleFrontier_BattleTowerLobby_EventScript_23F2B7:: @ 823F2B7
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5

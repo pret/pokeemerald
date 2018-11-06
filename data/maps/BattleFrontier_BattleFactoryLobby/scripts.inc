@@ -22,7 +22,7 @@ BattleFrontier_BattleFactoryLobby_MapScript2_258407: @ 8258407
 
 BattleFrontier_BattleFactoryLobby_EventScript_258431:: @ 8258431
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
@@ -46,7 +46,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	releaseall
 	end
@@ -54,7 +54,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
 BattleFrontier_BattleFactoryLobby_EventScript_25849B:: @ 825849B
 	lockall
 	setvar VAR_0x8004, 10
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_2584BD
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, 4
@@ -68,12 +68,12 @@ BattleFrontier_BattleFactoryLobby_EventScript_2584BD:: @ 82584BD
 BattleFrontier_BattleFactoryLobby_EventScript_2584C6:: @ 82584C6
 	msgbox BattleFrontier_BattleFactoryLobby_Text_2592BD, 4
 	setvar VAR_0x8004, 11
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryLobby_Text_241520, 9
 	message BattleFrontier_BattleFactoryLobby_Text_259323
 	waitmessage
 	setvar VAR_0x8004, 8
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
@@ -88,7 +88,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258506:: @ 8258506
 	message BattleFrontier_BattleFactoryLobby_Text_258CC7
 	waitmessage
 	setvar VAR_0x8004, 8
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
@@ -134,7 +134,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258592:: @ 8258592
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8006, 2
 	goto BattleFrontier_BattleFactoryLobby_EventScript_25871A
@@ -183,7 +183,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258653:: @ 8258653
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258C27, 5
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_25879A
@@ -197,7 +197,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
@@ -205,7 +205,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	closemessage
 	delay 2
 	call BattleFrontier_BattleFactoryLobby_EventScript_27134F
@@ -249,7 +249,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258783:: @ 8258783
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleFactoryLobby_EventScript_25879D
 
 BattleFrontier_BattleFactoryLobby_EventScript_25879A:: @ 825879A
@@ -303,7 +303,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587E1:: @ 82587E1
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall
@@ -314,7 +314,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587FA:: @ 82587FA
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall

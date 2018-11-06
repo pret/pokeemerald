@@ -29,7 +29,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2550F3:: @ 82550F3
 
 BattleFrontier_BattlePyramidTop_MapScript1_2550F4: @ 82550F4
 	setvar VAR_0x8004, 9
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_25510C
 	call BattleFrontier_BattlePyramidTop_EventScript_242170
@@ -37,14 +37,14 @@ BattleFrontier_BattlePyramidTop_MapScript1_2550F4: @ 82550F4
 BattleFrontier_BattlePyramidTop_EventScript_25510C:: @ 825510C
 	copyvar VAR_TEMP_C, VAR_RESULT
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_TEMP_0
 	case 0, BattleFrontier_BattlePyramidTop_EventScript_255193
 	case 1, BattleFrontier_BattlePyramidTop_EventScript_252B66
 	case 2, BattleFrontier_BattlePyramidTop_EventScript_255193
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	compare VAR_RESULT, 3
@@ -76,12 +76,12 @@ BattleFrontier_BattlePyramidTop_EventScript_255193:: @ 8255193
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 9
 	special sub_81A8E7C
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_F, 1
 	end
 
@@ -110,7 +110,7 @@ BattleFrontier_BattlePyramidTop_EventScript_25521A:: @ 825521A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
 	end
@@ -135,7 +135,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	case 4, BattleFrontier_BattlePyramidTop_EventScript_255388
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_2552D0
 	special SpawnScriptEventObject
@@ -145,7 +145,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePyramidTop_Movement_25540A
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_25573E, 4
@@ -166,7 +166,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2552DA:: @ 82552DA
 
 BattleFrontier_BattlePyramidTop_EventScript_2552FB:: @ 82552FB
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_25521A
 	msgbox BattleFrontier_BattlePyramidTop_Text_255873, 4
@@ -175,14 +175,14 @@ BattleFrontier_BattlePyramidTop_EventScript_2552FB:: @ 82552FB
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePyramidTop_Text_25591D, 4
 	goto BattleFrontier_BattlePyramidTop_EventScript_25521A
 
 BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255388
 	special SpawnScriptEventObject
@@ -192,7 +192,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	applymovement 2, BattleFrontier_BattlePyramidTop_Movement_25540A
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidTop_Text_255A6D, 4
@@ -213,7 +213,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255392:: @ 8255392
 
 BattleFrontier_BattlePyramidTop_EventScript_2553B3:: @ 82553B3
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_25521A
 	msgbox BattleFrontier_BattlePyramidTop_Text_255ACD, 4
@@ -222,7 +222,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2553B3:: @ 82553B3
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePyramidTop_Text_255B82, 4
 	goto BattleFrontier_BattlePyramidTop_EventScript_25521A
 

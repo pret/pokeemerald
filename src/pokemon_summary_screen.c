@@ -2,7 +2,7 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_message.h"
 #include "battle_tent.h"
 #include "bg.h"
@@ -44,6 +44,8 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+
+extern bool8 sub_81A6BF4(void);
 
 static EWRAM_DATA struct UnkSummaryStruct
 {

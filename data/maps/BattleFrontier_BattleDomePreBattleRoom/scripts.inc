@@ -22,7 +22,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 1
 	applymovement 255, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
 	waitmovement 0
@@ -100,7 +100,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3BB:: @ 824B3BB
 	waitse
 	fadescreen 1
 	setvar VAR_0x8004, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD:: @ 824B3DD
@@ -122,7 +122,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3F5:: @ 824B3F5
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B40A:: @ 824B40A
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B449
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B452
@@ -157,7 +157,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	special sub_80F9490
 	waitstate
 	setvar VAR_0x8004, 21
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	setvar VAR_0x8004, 2
@@ -187,7 +187,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B4FB:: @ 824B4FB
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B53A
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B540
@@ -209,7 +209,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B546:: @ 824B546
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B54C:: @ 824B54C
 	setvar VAR_0x8004, 9
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B
 	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0
@@ -246,7 +246,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	special LoadPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -260,7 +260,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600:: @ 824B600
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B634
 	case 2, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B63D

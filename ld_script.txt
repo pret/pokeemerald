@@ -264,6 +264,7 @@ SECTIONS {
         src/menu.o(.text);
         src/battle_factory.o(.text);
         src/apprentice.o(.text);
+        src/frontier_util.o(.text);
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
@@ -567,6 +568,7 @@ SECTIONS {
         src/menu.o(.rodata);
         src/battle_factory.o(.rodata);
         src/apprentice.o(.rodata);
+        src/frontier_util.o(.rodata);
         data/battle_frontier_2.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);

@@ -2,7 +2,7 @@
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "berry_tag_screen.h"
 #include "bg.h"
 #include "constants/items.h"
@@ -47,6 +47,8 @@
 #include "menu_helpers.h"
 #include "window.h"
 #include "apprentice.h"
+
+extern bool8 InBattlePike(void);
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void CB2_Bag(void);

@@ -26,6 +26,7 @@
 #include "item.h"
 #include "pokedex.h"
 #include "apprentice.h"
+#include "frontier_util.h"
 
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
@@ -45,7 +46,6 @@ extern void NewGameInitPCItems(void);
 extern void ClearDecorationInventories(void);
 extern void ResetFanClub(void);
 extern void copy_strings_to_sav1(void);
-extern void sub_81A4B14(void);
 extern void sub_8195E10(void);
 extern void sub_801AFD8(void);
 extern void sub_800E5AC(void);
@@ -69,30 +69,30 @@ static const struct ContestWinner sContestWinnerPicDummy =
 };
 
 // code
-void WriteUnalignedWord(u32 var, u8 *dataPtr)
+void SetTrainerId(u32 trainerId, u8 *dst)
 {
-    dataPtr[0] = var;
-    dataPtr[1] = var >> 8;
-    dataPtr[2] = var >> 16;
-    dataPtr[3] = var >> 24;
+    dst[0] = trainerId;
+    dst[1] = trainerId >> 8;
+    dst[2] = trainerId >> 16;
+    dst[3] = trainerId >> 24;
 }
 
-u32 ReadUnalignedWord(u8* dataPtr)
+u32 GetTrainerId(u8 *trainerId)
 {
-    return (dataPtr[3] << 24) | (dataPtr[2] << 16) | (dataPtr[1] << 8) | (dataPtr[0]);
+    return (trainerId[3] << 24) | (trainerId[2] << 16) | (trainerId[1] << 8) | (trainerId[0]);
 }
 
-void CopyUnalignedWord(u8 *copyTo, u8 *copyFrom)
+void CopyTrainerId(u8 *dst, u8 *src)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        copyTo[i] = copyFrom[i];
+        dst[i] = src[i];
 }
 
 static void InitPlayerTrainerId(void)
 {
     u32 trainerId = (Random() << 0x10) | GetGeneratedTrainerIdLower();
-    WriteUnalignedWord(trainerId, gSaveBlock2Ptr->playerTrainerId);
+    SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
 }
 
 // L=A isnt set here for some reason.
@@ -204,7 +204,7 @@ void NewGameInitData(void)
     copy_strings_to_sav1();
 	SetLilycoveLady();
 	ResetAllApprenticeData();
-	sub_81A4B14();
+	ClearRankingHallRecords();
 	sub_8195E10();
 	sub_801AFD8();
 	sub_800E5AC();

@@ -9,7 +9,7 @@
 #include "random.h"
 #include "item.h"
 #include "battle_factory.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
@@ -18,6 +18,8 @@ extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const u16 gBattleFrontierHeldItems[];
 
 extern u16 gUnknown_03006298[];
+
+extern void sub_81A4C30(void);
 
 // This file's functions.
 static void sub_81B99D4(void);

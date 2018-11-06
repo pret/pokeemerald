@@ -23,7 +23,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891:: @ 825C891
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C89A:: @ 825C89A
@@ -43,27 +43,27 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CDDA, 4
 	closemessage
 	releaseall
 	setvar VAR_0x8004, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 99
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908:: @ 825C908
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C968
 	case 3, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C978
@@ -133,7 +133,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8:: @ 825C9D8
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	setvar VAR_0x8004, 6
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	message BattleFrontier_BattlePikeThreePathRoom_Text_25CE08
 	waitmessage
 	special LoadPlayerParty
@@ -144,7 +144,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	waitse
 	fadescreen 1
 	setvar VAR_0x8004, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A:: @ 825CA2A

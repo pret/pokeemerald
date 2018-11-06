@@ -27,7 +27,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F553
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5BD

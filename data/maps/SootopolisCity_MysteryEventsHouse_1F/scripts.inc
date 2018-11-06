@@ -5,7 +5,7 @@ SootopolisCity_MysteryEventsHouse_1F_MapScripts:: @ 8227953
 
 SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E
 	setvar VAR_0x8004, 16
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D
 	compare VAR_0x40C0, 0
@@ -75,7 +75,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24:: @ 8227A24
 	lock
 	faceplayer
 	setvar VAR_0x8004, 16
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
 	compare VAR_TEMP_1, 1

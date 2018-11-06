@@ -2163,7 +2163,7 @@ sub_8196D74: @ 8196D74
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA
-	bl ReadUnalignedWord
+	bl GetTrainerId
 	adds r6, r0, 0
 	ldr r0, =0x0000ffff
 	ands r6, r0
