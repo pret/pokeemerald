@@ -144,7 +144,7 @@ void ClearSecretBase2Field_9(void)
     gSaveBlock2Ptr->specialSaveWarp &= ~1;
 }
 
-void sub_8076D48(void)
+void SetSecretBase2Field_9(void)
 {
     gSaveBlock2Ptr->specialSaveWarp |= 1;
 }
