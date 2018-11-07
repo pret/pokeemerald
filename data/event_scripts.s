@@ -1772,7 +1772,7 @@ EventScript_PC:: @ 8271D92
 	end
 
 EventScript_271DAC:: @ 8271DAC
-	message gUnknown_0827266F
+	message gText_WhichPCShouldBeAccessed
 	waitmessage
 	special ScrSpecial_CreatePCMenu
 	waitstate
@@ -3113,7 +3113,7 @@ Text_272640: @ 8272640
 Text_27265A: @ 827265A
 	.string "{PLAYER} booted up the PC.$"
 
-gUnknown_0827266F:: @ 827266F
+gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
 gUnknown_0827268C:: @ 827268C

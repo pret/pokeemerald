@@ -139,7 +139,7 @@ SECTIONS {
         src/shop.o(.text);
         src/fldeff_escalator.o(.text);
         src/berry.o(.text);
-        asm/script_menu.o(.text);
+        src/script_menu.o(.text);
         src/naming_screen.o(.text);
         src/money.o(.text);
         src/contest_effect.o(.text);
@@ -462,7 +462,7 @@ SECTIONS {
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
         src/berry.o(.rodata);
-        data/script_menu.o(.rodata);
+        src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         src/money.o(.rodata);
         src/contest_effect.o(.rodata);

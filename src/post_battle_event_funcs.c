@@ -18,7 +18,6 @@ int GameClear(void)
         u8 partyIndex;
         u8 count;
     } ribbonCounts[6];
-    s8 val;
 
     HealPlayerParty();
 

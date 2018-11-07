@@ -3144,7 +3144,7 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
             eventObj->spriteId = AddPseudoEventObject(GetRSAvatarGraphicsIdByGender(eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_EMERALD:
-            eventObj->spriteId = AddPseudoEventObject(GetRivalAvatarGraphicsIdByStateIdAndGender(0, eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
+            eventObj->spriteId = AddPseudoEventObject(GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, eventObj->singleMovementActive), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         }
 

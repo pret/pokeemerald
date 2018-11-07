@@ -1179,7 +1179,7 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
             task->data[0]++;
             break;
         case 1:
-            selection = ProcessMenuInput();
+            selection = Menu_ProcessInput();
             if (selection == -2)
                 break;
             if (selection == -1 || selection == GetFreeStorySlot())

@@ -942,7 +942,7 @@ static void HandleFewMenuActionsInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE)
     {
-        s32 id = Menu_ProcessInputNoWrapAround();
+        s32 id = Menu_ProcessInputNoWrap();
         switch (id)
         {
         case -2:

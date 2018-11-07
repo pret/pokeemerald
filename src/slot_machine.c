@@ -1269,7 +1269,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_8102344(struct Task *task)
 {
-    s8 input = Menu_ProcessInputNoWrap_();
+    s8 input = Menu_ProcessInputNoWrapClearOnChoose();
     if (input == 0)
     {
         sub_8197434(0, TRUE);
