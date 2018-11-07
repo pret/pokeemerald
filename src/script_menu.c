@@ -1088,26 +1088,15 @@ static u16 sub_80E1EB8(const u8 *str)
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos)
 {
     int i;
-    u8 right;
-    u8 bottom;
     u8 windowId;
     u8 count = gMultichoiceLists[multichoiceId].count;
     const struct MenuAction *actions = gMultichoiceLists[multichoiceId].list;
-    const struct MenuAction *action;
     int width = 0;
     u8 newWidth;
 
-    // Must be a fakematch because come on, seriously
-    if (width < count)
+    for (i = 0; i < count; i++)
     {
-        action = &actions[0];
-        i = count;
-        do
-        {
-            width = display_text_and_get_width(action->text, width);
-            action++;
-            i--;
-        } while (i != 0);
+        width = display_text_and_get_width(actions[i].text, width);
     }
 
     newWidth = convert_pixel_width_to_tile_width(width);
