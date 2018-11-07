@@ -553,18 +553,18 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 }
 
 #ifdef NONMATCHING
-u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
-        return 0x40;
+        return MAX_SPRITES;
 
     return spriteId;
 }
 #else
 NAKED
-u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y)
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     asm_unified("push {r4,r5,lr}\n\
 	sub sp, 0x10\n\
