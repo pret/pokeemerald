@@ -145,7 +145,7 @@ void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
-const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
+const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
@@ -217,7 +217,7 @@ void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
 const struct WindowTemplate gUnknown_085A6B90[4] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 18,
@@ -226,7 +226,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0001
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 13,
@@ -235,7 +235,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0091
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 1,
         .width = 12,
@@ -244,7 +244,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x017b
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 13,
         .width = 13,
@@ -2076,7 +2076,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     return spriteId;
 }
 
-const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
+const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
 {
     if (decor > 120)
     {

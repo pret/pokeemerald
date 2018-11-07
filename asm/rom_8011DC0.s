@@ -10934,7 +10934,7 @@ sub_801B1E8: @ 801B1E8
 	ldr r0, [r0]
 	ldr r1, =0x00000bec
 	adds r0, r1
-	bl sub_816534C
+	bl ClearEReaderTrainer
 	pop {r0}
 	bx r0
 	.pool
@@ -11490,7 +11490,7 @@ _0801B628:
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
-	bl CopyUnalignedWord
+	bl CopyTrainerId
 	mov r2, r8
 	ldr r1, [r2]
 	adds r0, r6, 0

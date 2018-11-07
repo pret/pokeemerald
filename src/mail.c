@@ -146,7 +146,7 @@ static const struct BgTemplate sUnknown_0859F290[] = {
 
 static const struct WindowTemplate sUnknown_0859F29C[] = {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 3,
         .width = 26,

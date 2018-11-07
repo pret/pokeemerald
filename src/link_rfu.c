@@ -84,7 +84,7 @@ void sub_801227C(void);
 // .rodata
 
 const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
-const u8 gWirelessLinkIconPic[] = INCBIN_U8("graphics/interface/wireless_link_icon.4bpp.lz");
+const u32 gWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
 const u8 sWireless_ASCIItoRSETable[] = {
     0xff, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
     0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,

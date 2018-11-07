@@ -10,16 +10,19 @@ const struct MonCoords gTrainerBackPicCoords[] =
     {8, 4},
 };
 
+// this table goes functionally unused, since none of these pics are compressed
+// and the place they would get extracted to gets overwritten later anyway
+// the casts are so they'll play nice with the strict struct definition
 const struct CompressedSpriteSheet gTrainerBackPicTable[] =
 {
-    gTrainerBackPic_Brendan, 0x2000, 0,
-    gTrainerBackPic_May, 0x2000, 1,
-    gTrainerBackPic_Red, 0x2800, 2,
-    gTrainerBackPic_Leaf, 0x2800, 3,
-    gTrainerBackPic_RubySapphireBrendan, 0x2000, 4,
-    gTrainerBackPic_RubySapphireMay, 0x2000, 5,
-    gTrainerBackPic_Wally, 0x2000, 6,
-    gTrainerBackPic_Steven, 0x2000, 7,
+    (const u32 *)gTrainerBackPic_Brendan, 0x2000, 0,
+    (const u32 *)gTrainerBackPic_May, 0x2000, 1,
+    (const u32 *)gTrainerBackPic_Red, 0x2800, 2,
+    (const u32 *)gTrainerBackPic_Leaf, 0x2800, 3,
+    (const u32 *)gTrainerBackPic_RubySapphireBrendan, 0x2000, 4,
+    (const u32 *)gTrainerBackPic_RubySapphireMay, 0x2000, 5,
+    (const u32 *)gTrainerBackPic_Wally, 0x2000, 6,
+    (const u32 *)gTrainerBackPic_Steven, 0x2000, 7,
 };
 
 const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] = 

@@ -430,7 +430,7 @@ static void sub_81206F0(void)
     gUnknown_03002F84 = FALSE;
 }
 
-static void BardSong_TextSubPrinter(struct TextSubPrinter * printer, u16 a1)
+static void BardSong_TextSubPrinter(struct TextPrinterTemplate * printer, u16 a1)
 {
     gUnknown_03002F84 = TRUE;
 }

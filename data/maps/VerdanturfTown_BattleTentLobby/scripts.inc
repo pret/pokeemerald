@@ -22,7 +22,7 @@ VerdanturfTown_BattleTentLobby_MapScript2_2016EF: @ 82016EF
 
 VerdanturfTown_BattleTentLobby_EventScript_201719:: @ 8201719
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_201722:: @ 8201722
@@ -32,12 +32,12 @@ VerdanturfTown_BattleTentLobby_EventScript_201722:: @ 8201722
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	releaseall
 	end
 
@@ -51,7 +51,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201757:: @ 8201757
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 0
 	special sub_81B99B4
@@ -67,7 +67,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201791:: @ 8201791
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	message VerdanturfTown_BattleTentLobby_Text_24A554
 	waitmessage
 	playfanfare MUS_FANFA4
@@ -99,7 +99,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2017FD:: @ 82017FD
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 0
 	special sub_81B99B4
@@ -124,7 +124,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201837:: @ 8201837
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	goto VerdanturfTown_BattleTentLobby_EventScript_2019AE
 
@@ -153,13 +153,13 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	setvar VAR_RESULT, 2
 	setvar VAR_0x8004, 15
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_2019E8
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5633, 4
 	fadescreen 1
 	setvar VAR_0x8004, 1
@@ -178,17 +178,17 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	setvar VAR_TEMP_0, 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
 	special sub_81B99B4
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	closemessage
 	delay 2
@@ -201,7 +201,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2019AE:: @ 82019AE
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C56A2, 4
 	closemessage
 	call VerdanturfTown_BattleTentLobby_EventScript_201A41
@@ -231,7 +231,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201A1D:: @ 8201A1D
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto VerdanturfTown_BattleTentLobby_EventScript_201A37
 
 VerdanturfTown_BattleTentLobby_EventScript_201A34:: @ 8201A34

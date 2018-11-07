@@ -316,11 +316,11 @@ void sub_80D77E4(void)
     DeactivateAllTextPrinters();
     if (gIsLinkContest & 1)
     {
-        gTextFlags.flag_0 = FALSE;
+        gTextFlags.canABSpeedUpPrint = FALSE;
     }
     else
     {
-        gTextFlags.flag_0 = TRUE;
+        gTextFlags.canABSpeedUpPrint = TRUE;
     }
 }
 

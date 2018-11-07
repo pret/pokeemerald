@@ -7,6 +7,7 @@
 #include "bg.h"
 #include "main.h"
 #include "text.h"
+#include "graphics.h"
 #include "link.h"
 #include "string_util.h"
 #include "sound.h"
@@ -18,9 +19,6 @@
 #include "constants/maps.h"
 
 extern bool32 sub_800B504(void);
-
-extern const u8 gBagSwapLineGfx[];
-extern const u8 gBagSwapLinePal[];
 
 // this file's functions
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
@@ -136,7 +134,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 arg2, u8 arg3, u8
     if (string != gStringVar4)
         StringExpandPlaceholders(gStringVar4, string);
 
-    gTextFlags.flag_0 = 1;
+    gTextFlags.canABSpeedUpPrint = 1;
     AddTextPrinterParameterized2(windowId, fontId, gStringVar4, textSpeed, NULL, 2, 1, 3);
     gUnknown_0300117C = taskFunc;
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;

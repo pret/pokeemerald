@@ -65,7 +65,7 @@ static const struct BgTemplate sTrainerHillRecordsBgTemplates[] =
 static const struct WindowTemplate sTrainerHillRecordsWindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 1,
         .width = 26,
@@ -78,7 +78,7 @@ static const struct WindowTemplate sTrainerHillRecordsWindowTemplates[] =
 
 static const struct WindowTemplate sLinkBattleRecordsWindow =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 2,
     .tilemapTop = 1,
     .width = 26,

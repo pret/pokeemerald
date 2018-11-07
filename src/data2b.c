@@ -4,8 +4,8 @@
 #include "malloc.h"
 
 const u16 gUnknown_082FF1D8[] = INCBIN_U16("graphics/link/minigame_digits.gbapal");
-const u8 gUnknown_082FF1F8[] = INCBIN_U8("graphics/link/minigame_digits.4bpp.lz");
-const u8 gUnknown_082FF2B8[] = INCBIN_U8("graphics/link/minigame_digits2.4bpp.lz");
+const u32 gUnknown_082FF1F8[] = INCBIN_U32("graphics/link/minigame_digits.4bpp.lz");
+const u32 gUnknown_082FF2B8[] = INCBIN_U32("graphics/link/minigame_digits2.4bpp.lz");
 
 const struct SpriteFrameImage gUnknown_082FF3A8[] =
 {

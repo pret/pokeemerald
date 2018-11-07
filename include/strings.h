@@ -1138,4 +1138,47 @@ extern const u8 OldaleTown_PokemonCenter_2F_Text_27879F[];
 extern const u8 OldaleTown_PokemonCenter_2F_Text_2787D5[];
 extern const u8 OldaleTown_PokemonCenter_2F_Text_27889C[];
 
+// Frontier records.
+extern const u8 gText_WinStreak[];
+extern const u8 gText_Record[];
+extern const u8 gText_Current[];
+extern const u8 gText_RoomsCleared[];
+extern const u8 gText_Prev[];
+extern const u8 gText_SingleBattleRoomResults[];
+extern const u8 gText_DoubleBattleRoomResults[];
+extern const u8 gText_MultiBattleRoomResults[];
+extern const u8 gText_LinkMultiBattleRoomResults[];
+extern const u8 gText_Lv502[];
+extern const u8 gText_OpenLv[];
+extern const u8 gText_RentalSwap[];
+extern const u8 gText_ClearStreak[];
+extern const u8 gText_Total[];
+extern const u8 gText_Championships[];
+extern const u8 gText_SingleBattleTourneyResults[];
+extern const u8 gText_DoubleBattleTourneyResults[];
+extern const u8 gText_SingleBattleHallResults[];
+extern const u8 gText_DoubleBattleHallResults[];
+extern const u8 gText_BattleChoiceResults[];
+extern const u8 gText_TimesCleared[];
+extern const u8 gText_KOsInARow[];
+extern const u8 gText_SetKOTourneyResults[];
+extern const u8 gText_TimesVar1[];
+extern const u8 gText_BattleSwapSingleResults[];
+extern const u8 gText_BattleSwapDoubleResults[];
+extern const u8 gText_FloorsCleared[];
+extern const u8 gText_BattleQuestResults[];
+extern const u8 gText_LinkContestResults[];
+extern const u8 gText_4th[];
+extern const u8 gText_3rd[];
+extern const u8 gText_2nd[];
+extern const u8 gText_1st[];
+extern const u8 gText_SpaceAndSpace[];
+extern const u8 gText_CommaSpace[];
+extern const u8 gText_NewLine[];
+extern const u8 gText_ScrollTextUp[];
+extern const u8 gText_Space2[];
+extern const u8 gText_Are[];
+extern const u8 gText_Are2[];
+extern const u8 gText_123Dot[][3];
+
 #endif //GUARD_STRINGS_H

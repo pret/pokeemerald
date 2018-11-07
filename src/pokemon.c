@@ -2879,10 +2879,10 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
     u8 language;
     u32 otId = gApprentices[src->id].otId;
     u32 personality = ((gApprentices[src->id].otId >> 8) | ((gApprentices[src->id].otId & 0xFF) << 8))
-                    + src->monData[monId].species + src->number;
+                    + src->party[monId].species + src->number;
 
     CreateMon(mon,
-              src->monData[monId].species,
+              src->party[monId].species,
               GetFrontierEnemyMonLevel(src->lvlMode - 1),
               0x1F,
               TRUE,
@@ -2890,9 +2890,9 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
               TRUE,
               otId);
 
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->monData[monId].item);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
     for (i = 0; i < 4; i++)
-        SetMonMoveSlot(mon, src->monData[monId].moves[i], i);
+        SetMonMoveSlot(mon, src->party[monId].moves[i], i);
 
     evAmount = MAX_TOTAL_EVS / NUM_STATS;
     for (i = 0; i < NUM_STATS; i++)
@@ -6700,7 +6700,7 @@ static void sub_806E6CC(u8 taskId)
     DestroyTask(taskId);
 }
 
-const u8 *GetMonFrontSpritePal(struct Pokemon *mon)
+const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -6714,7 +6714,7 @@ const u8 *GetMonFrontSpritePal(struct Pokemon *mon)
 // Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
-const u8 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 

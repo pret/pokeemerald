@@ -1,7 +1,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "bg.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "constants/rgb.h"
 #include "fieldmap.h"
 #include "fldeff_80F9BCC.h"
@@ -13,6 +13,8 @@
 #include "script.h"
 #include "secret_base.h"
 #include "tv.h"
+
+extern void sub_81AA078(u16*, u8);
 
 struct ConnectionFlags
 {

@@ -712,30 +712,34 @@ u8 HandleSavingData(u8 saveType)
 
 u8 TrySavingData(u8 saveType) // TrySave
 {
-    if(gFlashMemoryPresent == TRUE)
+    if (gFlashMemoryPresent != TRUE)
     {
-        HandleSavingData(saveType);
-        if(gDamagedSaveSectors)
-            DoSaveFailedScreen(saveType);
-        else
-            goto OK; // really?
+        gUnknown_03006294 = 0xFF;
+        return 0xFF;
     }
-    gUnknown_03006294 = 0xFF;
-    return 0xFF;
 
-OK:
-    gUnknown_03006294 = 1;
-    return 1;
+    HandleSavingData(saveType);
+    if (!gDamagedSaveSectors)
+    {
+        gUnknown_03006294 = 1;
+        return 1;
+    }
+    else
+    {
+        DoSaveFailedScreen(saveType);
+        gUnknown_03006294 = 0xFF;
+        return 0xFF;
+    }
 }
 
-u8 sub_8153380(void) // trade.s save
+bool8 sub_8153380(void) // trade.s save
 {
     if (gFlashMemoryPresent != TRUE)
-        return 1;
+        return TRUE;
     UpdateSaveAddresses();
     SaveSerializedGame();
     RestoreSaveBackupVarsAndIncrement(gRamSaveSectionLocations);
-    return 0;
+    return FALSE;
 }
 
 bool8 sub_81533AC(void) // trade.s save
@@ -744,9 +748,9 @@ bool8 sub_81533AC(void) // trade.s save
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(0);
     if (retVal == 0xFF)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 u8 sub_81533E0(void) // trade.s save

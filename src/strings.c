@@ -1569,9 +1569,7 @@ asm(".align 2");
 const u8 gUnknown_085EE410[] = _("Floors cleared: {STR_VAR_2}");
 
 asm(".align 2");
-const u8 gText_1Dot[] = _("1.");
-const u8 gUnknown_085EE427[] = _("2.");
-const u8 gUnknown_085EE42A[] = _("3.");
+const u8 gText_123Dot[][3] = {_("1."), _("2."), _("3.")};
 const u8 gText_SavingDontTurnOff2[] = _("SAVING…\nDON’T TURN OFF THE POWER.");
 const u8 gText_BlenderMaxSpeedRecord[] = _("BERRY BLENDER\nMAXIMUM SPEED RECORD!");
 const u8 gText_234Players[] = _("2 PLAYERS\n3 PLAYERS\n4 PLAYERS");

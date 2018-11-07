@@ -1180,7 +1180,7 @@ sub_81965D8: @ 81965D8
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl GetPlayerTextSpeed
+	bl GetPlayerTextSpeedDelay
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2163,7 +2163,7 @@ sub_8196D74: @ 8196D74
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA
-	bl ReadUnalignedWord
+	bl GetTrainerId
 	adds r6, r0, 0
 	ldr r0, =0x0000ffff
 	ands r6, r0

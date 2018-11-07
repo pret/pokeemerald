@@ -1,6 +1,0 @@
-#ifndef GUARD_BATTLE_FRONTIER_1_H
-#define GUARD_BATTLE_FRONTIER_1_H
-
-bool32 sub_8196034(void);
-
-#endif // GUARD_BATTLE_FRONTIER_1_H

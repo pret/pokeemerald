@@ -1,5 +1,5 @@
 #include "global.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "clock.h"
@@ -48,6 +48,11 @@
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
+
+extern u16 sub_81A89A0(u8);
+extern void sub_81A8AF8(void);
+extern void sub_81A895C(void);
+extern void sub_81A8934(u8);
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -1290,8 +1295,8 @@ bool8 ScrCmd_messageautoscroll(struct ScriptContext *ctx)
 
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
-    gTextFlags.flag_2 = TRUE;
-    gTextFlags.flag_3 = TRUE;
+    gTextFlags.autoScroll = TRUE;
+    gTextFlags.forceMidTextSpeed = TRUE;
     ShowFieldAutoScrollMessage(msg);
     return FALSE;
 }

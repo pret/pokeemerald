@@ -6,13 +6,15 @@
 #include "field_message_box.h"
 #include "strings.h"
 #include "rom_818CFC8.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "pokenav.h"
 #include "event_data.h"
 #include "script.h"
 #include "battle.h"
 #include "fldeff_80F9BCC.h"
 #include "field_poison.h"
+
+extern bool8 InBattlePike(void);
 
 static bool32 sub_80F9568(struct Pokemon *pokemon)
 {

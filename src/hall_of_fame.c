@@ -8,6 +8,7 @@
 #include "text_window.h"
 #include "malloc.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "main.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -76,10 +77,6 @@ extern const u8 gText_Level[];
 extern const u8 gText_IDNumber[];
 extern const u8 gText_Name[];
 extern const u8 gText_MainMenuTime[];
-
-// graphics
-extern const u8 gContestConfetti_Gfx[];
-extern const u8 gContestConfetti_Pal[];
 
 extern void sub_8175620(void);
 extern bool8 sub_80F9C30(void);
@@ -339,7 +336,7 @@ static const struct SpriteTemplate sSpriteTemplate_85E54D0 =
 
 static const u16 sHallOfFame_Pal[] = INCBIN_U16("graphics/misc/japanese_hof.gbapal");
 
-static const u8 sHallOfFame_Gfx[] = INCBIN_U8("graphics/misc/japanese_hof.4bpp.lz");
+static const u32 sHallOfFame_Gfx[] = INCBIN_U32("graphics/misc/japanese_hof.4bpp.lz");
 
 static const struct HallofFameMon sDummyFameMon =
 {

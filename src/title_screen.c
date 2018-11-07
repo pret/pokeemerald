@@ -18,6 +18,7 @@
 #include "scanline_effect.h"
 #include "gpu_regs.h"
 #include "trig.h"
+#include "graphics.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -39,15 +40,6 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 
-extern const u8 gTitleScreenEmeraldVersionGfx[];
-extern const u8 gTitleScreenPressStartGfx[];
-extern const u8 gTitleScreenPokemonLogoGfx[];
-extern const u8 gUnknown_08DE0644[];
-extern const u8 gUnknown_08DDE458[];
-extern const u16 gTitleScreenBgPalettes[];
-extern const u16 gTitleScreenPressStartPal[];
-extern const u16 gTitleScreenEmeraldVersionPal[];
-
 // this file's functions
 static void MainCB2(void);
 static void Task_TitleScreenPhase1(u8);
@@ -68,10 +60,10 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite);
 // const rom data
 static const u16 sUnusedUnknownPal[] = INCBIN_U16("graphics/title_screen/unk_853EF78.gbapal");
 
-static const u8 sTitleScreenRayquazaGfx[] = INCBIN_U8("graphics/title_screen/rayquaza.4bpp.lz");
-static const u8 sTitleScreenRayquazaTilemap[] = INCBIN_U8("graphics/title_screen/rayquaza.bin.lz");
-static const u8 sTitleScreenLogoShineGfx[] = INCBIN_U8("graphics/title_screen/logo_shine.4bpp.lz");
-static const u8 sTitleScreenCloudsGfx[] = INCBIN_U8("graphics/title_screen/clouds.4bpp.lz");
+static const u32 sTitleScreenRayquazaGfx[] = INCBIN_U32("graphics/title_screen/rayquaza.4bpp.lz");
+static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_screen/rayquaza.bin.lz");
+static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
+static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
 const u16 gUnknown_0853FF70[] =
 {

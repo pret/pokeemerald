@@ -2,6 +2,8 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
+	
+.align 4
 
 gUnknown_085DFA60:: @ 85DFA60
 	.incbin "graphics/interface/85DFA60.bin"

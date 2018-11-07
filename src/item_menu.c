@@ -2,7 +2,7 @@
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "berry_tag_screen.h"
 #include "bg.h"
 #include "constants/items.h"
@@ -47,6 +47,8 @@
 #include "menu_helpers.h"
 #include "window.h"
 #include "apprentice.h"
+
+extern bool8 InBattlePike(void);
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void CB2_Bag(void);
@@ -268,7 +270,7 @@ const u8 gUnknown_08614164[][3] = {
 const struct WindowTemplate gUnknown_08614174[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 14,
         .tilemapTop = 2,
         .width = 15,
@@ -277,7 +279,7 @@ const struct WindowTemplate gUnknown_08614174[] =
         .baseBlock = 0x27,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 14,
@@ -286,7 +288,7 @@ const struct WindowTemplate gUnknown_08614174[] =
         .baseBlock = 0x117,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 4,
         .tilemapTop = 1,
         .width = 8,
@@ -295,7 +297,7 @@ const struct WindowTemplate gUnknown_08614174[] =
         .baseBlock = 0x1A1,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 13,
         .width = 5,
@@ -304,7 +306,7 @@ const struct WindowTemplate gUnknown_08614174[] =
         .baseBlock = 0x16B,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 7,
         .tilemapTop = 13,
         .width = 4,
@@ -313,7 +315,7 @@ const struct WindowTemplate gUnknown_08614174[] =
         .baseBlock = 0x189,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -327,7 +329,7 @@ const struct WindowTemplate gUnknown_08614174[] =
 const struct WindowTemplate gUnknown_086141AC[] =
 {
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 22,
         .tilemapTop = 17,
         .width = 7,
@@ -336,7 +338,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 22,
         .tilemapTop = 15,
         .width = 7,
@@ -345,7 +347,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 15,
         .tilemapTop = 15,
         .width = 14,
@@ -354,7 +356,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 15,
         .tilemapTop = 13,
         .width = 14,
@@ -363,7 +365,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -372,7 +374,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x1B1,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 24,
         .tilemapTop = 15,
         .width = 5,
@@ -381,7 +383,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 21,
         .tilemapTop = 9,
         .width = 5,
@@ -390,7 +392,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 24,
         .tilemapTop = 17,
         .width = 5,
@@ -399,7 +401,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x21D,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 18,
         .tilemapTop = 11,
         .width = 10,
@@ -408,7 +410,7 @@ const struct WindowTemplate gUnknown_086141AC[] =
         .baseBlock = 0x245,
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 10,
@@ -1029,7 +1031,7 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u
 
     data[10] = AddItemMessageWindow(4);
     FillWindowPixelBuffer(data[10], 17);
-    DisplayMessageAndContinueTask(taskId, data[10], 10, 13, fontId, GetPlayerTextSpeed(), str, callback);
+    DisplayMessageAndContinueTask(taskId, data[10], 10, 13, fontId, GetPlayerTextSpeedDelay(), str, callback);
     schedule_bg_copy_tilemap_to_vram(1);
 }
 

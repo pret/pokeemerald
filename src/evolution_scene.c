@@ -531,7 +531,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     gBattle_BG3_X = 256;
     gBattle_BG3_Y = 0;
 
-    gTextFlags.flag_1 = 1;
+    gTextFlags.useAlternateDownArrow = 1;
 
     SetVBlankCallback(VBlankCB_TradeEvolutionScene);
     SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
@@ -1135,7 +1135,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             DestroyTask(taskID);
             Free(sEvoStructPtr);
             sEvoStructPtr = NULL;
-            gTextFlags.flag_1 = 0;
+            gTextFlags.useAlternateDownArrow = 0;
             SetMainCallback2(gCB2_AfterEvolution);
         }
         break;

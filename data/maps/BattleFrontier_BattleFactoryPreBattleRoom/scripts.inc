@@ -74,7 +74,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	waitfanfare
 	special HealPlayerParty
 	setvar VAR_0x8004, 9
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26
 	playse 263
@@ -95,14 +95,14 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13:: @ 8259C13
 	setvar VAR_0x8004, 9
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E1D
 	compare VAR_RESULT, 2
@@ -232,7 +232,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47:: @ 8259E47
 	waitse
 	fadescreen 1
 	setvar VAR_0x8004, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
@@ -243,7 +243,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special CalculatePlayerPartyCount
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 

@@ -561,6 +561,7 @@ struct BattleScripting
     u8 field_23;
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
+    u8 specialTrainerBattleType;
 };
 
 // rom_80A5C6C
