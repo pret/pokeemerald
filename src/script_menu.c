@@ -1088,26 +1088,15 @@ static u16 sub_80E1EB8(const u8 *str)
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos)
 {
     int i;
-    u8 right;
-    u8 bottom;
     u8 windowId;
     u8 count = gMultichoiceLists[multichoiceId].count;
     const struct MenuAction *actions = gMultichoiceLists[multichoiceId].list;
-    const struct MenuAction *action;
     int width = 0;
     u8 newWidth;
-    
-    // Must be a fakematch because come on, seriously
-    if (width < count)
+
+    for (i = 0; i < count; i++)
     {
-        action = &actions[0];
-        i = count;
-        do
-        {
-            width = display_text_and_get_width(action->text, width);
-            action++;
-            i--;
-        } while (i != 0);
+        width = display_text_and_get_width(actions[i].text, width);
     }
 
     newWidth = convert_pixel_width_to_tile_width(width);
@@ -1151,7 +1140,7 @@ static void sub_80E1FBC(u8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId
         gTasks[taskId].tDoWrap = TRUE;
     else
         gTasks[taskId].tDoWrap = FALSE;
-    
+
     gTasks[taskId].tWindowId = windowId;
     gTasks[taskId].tMultichoiceId = multichoiceId;
 
@@ -1680,7 +1669,7 @@ static void sub_80E2578(void)
         width = convert_pixel_width_to_tile_width(pixelWidth);
         windowId = CreateWindowFromRect(28 - width, (6 - count) * 2, width, count * 2);
         SetStandardWindowBorderStyle(windowId, 0);
-        
+
         for (temp = 0, i = 0; i < ARRAY_COUNT(gUnknown_0858BB80); i++)
         {
             if (gUnknown_03001124[i] != 0xFF)
@@ -1756,7 +1745,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
         schedule_bg_copy_tilemap_to_vram(0);
         return TRUE;
     }
-}  
+}
 
 bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 {
