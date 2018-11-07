@@ -32,6 +32,7 @@
 #include "tv.h"
 #include "item_menu.h"
 #include "battle_records.h"
+#include "graphics.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -133,18 +134,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gInGameOpponentsNo;
 extern u8 gUnknown_020322D5;
-
-// graphics
-extern const u8 gBerryBlenderArrowTiles[];
-extern const u8 gBerryBlenderStartTiles[];
-extern const u8 gBerryBlenderMarubatsuTiles[];
-extern const u8 gBerryBlenderParticlesTiles[];
-extern const u8 gBerryBlenderCountdownNumbersTiles[];
-extern const u16 gBerryBlenderMiscPalette[];
-extern const u16 gBerryBlenderArrowPalette[];
-extern const u8 sBlenderCenterGfx[];
-extern const u8 gUnknown_08D91DB8[];
-extern const u8 gUnknown_08D927EC[];
 
 // text
 extern const u8 gText_SavingDontTurnOff2[];

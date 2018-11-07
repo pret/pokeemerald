@@ -27,9 +27,9 @@ struct UnknownAnimStruct2
 
 struct BattleAnimBackground
 {
-    void *image;
-    void *palette;
-    void *tilemap;
+    const u32 *image;
+    const u32 *palette;
+    const u32 *tilemap;
 };
 
 #define ANIM_ARGS_COUNT 8

@@ -206,11 +206,6 @@ extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN1V;
 
-extern const u8 gContestMiscGfx[];
-extern const u8 gContestAudienceGfx[];
-extern const u8 gUnknown_08C16FA8[];
-extern const u8 gUnknown_08C16E90[];
-extern const u8 gUnknown_08C17170[];
 extern const u16 gUnknown_08587C30[];
 extern const struct BgTemplate gUnknown_08587F34[4];
 extern const struct WindowTemplate gUnknown_08587F44[];
