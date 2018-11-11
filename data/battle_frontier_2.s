@@ -102,37 +102,3 @@ gUnknown_08611DB0:: @ 8611DB0
 gUnknown_08611DB8:: @ 8611DB8
 	.4byte gUnknown_08611D5C
 	.4byte gUnknown_08611D94
-
-@ 8611DC0
-	.include "data/battle_frontier/battle_arena_move_mind_ratings.inc"
-
-	.align 2
-gUnknown_08611F24:: @ 8611F24
-	.byte 0x00, 0x00, 0x00, 0x40, 0x00, 0xf0, 0x00, 0x00
-
-	.align 2
-gUnknown_08611F2C:: @ 8611F2C
-	.2byte 0x0000, 0x0001, 0xffff, 0x0000
-
-	.align 2
-gUnknown_08611F34:: @ 8611F34
-	.2byte 0x0004, 0x0001, 0xffff, 0x0000
-
-	.align 2
-gUnknown_08611F3C:: @ 8611F3C
-	.2byte 0x0008, 0x0001, 0xffff, 0x0000
-
-	.align 2
-gUnknown_08611F44:: @ 8611F44
-	.2byte 0x000c, 0x0001, 0xffff, 0x0000
-
-	.align 2
-gUnknown_08611F4C:: @ 8611F4C
-	.4byte gUnknown_08611F2C
-	.4byte gUnknown_08611F34
-	.4byte gUnknown_08611F3C
-	.4byte gUnknown_08611F44
-
-	.align 2
-gUnknown_08611F5C:: @ 8611F5C
-	spr_template 0x03e8, 0xffff, gUnknown_08611F24, gUnknown_08611F4C, NULL, gDummySpriteAffineAnimTable, sub_81A5698
