@@ -35,6 +35,7 @@ bool8 sub_8088BF0(u16*, u16, u8);
 struct MapConnection *sub_8088950(u8 direction, int x, int y);
 bool8 sub_80889A8(u8 direction, int x, int y, struct MapConnection *connection);
 bool8 sub_8088A0C(int x, int src_width, int dest_width, int offset);
+void save_serialize_map(void);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);

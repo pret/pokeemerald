@@ -13,13 +13,15 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
-extern u8 gUnknown_03001288;
 extern u16 gUnknown_03006298[];
 
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const u16 gBattleFrontierHeldItems[];
+
+// IWRAM bss
+static IWRAM_DATA bool8 gUnknown_03001288;
 
 // This file's functions.
 static void sub_81A5E94(void);
@@ -200,7 +202,7 @@ static void sub_81A5E94(void)
         gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode] = 0;
     }
 
-    gUnknown_03001288 = 0;
+    gUnknown_03001288 = FALSE;
     for (i = 0; i < 6; i++)
         gSaveBlock2Ptr->frontier.field_E70[i].monId |= 0xFFFF;
     for (i = 0; i < 3; i++)
@@ -246,10 +248,10 @@ static void sub_81A6054(void)
             gSaveBlock2Ptr->frontier.field_CDC &= gUnknown_08612174[battleMode][lvlMode];
         break;
     case 3:
-        if (gUnknown_03001288 == 1)
+        if (gUnknown_03001288 == TRUE)
         {
             gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode] = gSpecialVar_0x8006;
-            gUnknown_03001288 = 0;
+            gUnknown_03001288 = FALSE;
         }
         break;
     }
@@ -286,7 +288,7 @@ static void sub_81A6198(void)
 
 static void sub_81A61A4(void)
 {
-    gUnknown_03001288 = 1;
+    gUnknown_03001288 = TRUE;
 }
 
 static void sub_81A61B0(void)

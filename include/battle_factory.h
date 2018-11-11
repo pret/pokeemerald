@@ -9,4 +9,4 @@ u8 sub_81A6F70(u8 battleMode, u8 lvlMode);
 u32 GetAiScriptsInBattleFactory(void);
 void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 moveArg, u8 moveSlot);
 
-#endif //GUARD_BATTLE_FACTORY_H
+#endif // GUARD_BATTLE_FACTORY_H
