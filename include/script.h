@@ -1,6 +1,8 @@
 #ifndef GUARD_SCRIPT_H
 #define GUARD_SCRIPT_H
 
+#include "global.h"
+
 struct ScriptContext;
 
 typedef bool8 (*ScrCmdFunc)(struct ScriptContext *);

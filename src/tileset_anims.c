@@ -30,6 +30,57 @@ static void (*sSecondaryTilesetCB)(u16);
 static void cur_mapheader_run_tileset1_func(void);
 static void cur_mapheader_run_tileset2_func(void);
 
+static void sub_80A0B70(u16);
+static void sub_80A0BB4(u16);
+static void gTilesetAnims_Flower(u16);
+static void gTilesetAnims_Water(u16);
+static void gTilesetAnims_SandWaterEdge(u16);
+static void gTilesetAnims_Waterfall(u16);
+static void gTilesetAnims_LandWaterEdge (u16);
+static void sub_80A1688(u16);
+static void sub_80A103C(u16);
+static void sub_80A10B8(u16);
+static void sub_80A10D0(u16);
+static void sub_80A10E8(u16);
+static void sub_80A115C(u16);
+static void sub_80A1188(u16);
+static void sub_80A11FC(u16);
+static void sub_80A122C(u16);
+static void sub_80A127C(u16);
+static void sub_80A1294(u16);
+static void sub_80A1244(u16);
+static void sub_80A15D8(u16);
+static void sub_80A1260(u16);
+static void sub_80A15F0(u16);
+static void sub_80A15C0(u16);
+static void sub_80A161C(u16);
+static void sub_80A1634(u16);
+static void sub_80A1658(u16);
+static void sub_80A1434(u16, u8);
+static void sub_80A1470(u16);
+static void sub_80A1520(u16);
+static void sub_80A1598(u16);
+static void sub_80A1394(u16, u8);
+static void sub_80A12D4(u8);
+static void sub_80A1498(u16);
+static void sub_80A14C0(u16, u8);
+static void sub_80A131C(u8);
+static void sub_80A136C(u8);
+static void sub_80A1798(u16);
+static void sub_80A1344(u8);
+static void sub_80A14F8(u16);
+static void sub_80A1548(u16);
+static void sub_80A1570(u16);
+static void sub_80A1748(u16);
+static void sub_80A16B0(u16);
+static void sub_80A1720(u16);
+static void sub_80A16F8(u16);
+static void sub_80A1770(u16);
+static void sub_80A17C0(u16);
+static void sub_80A17EC(u16);
+static void sub_80A1818(u16);
+static void sub_80A1884(u16);
+
 // .rodata
 
 
@@ -701,8 +752,6 @@ static void cur_mapheader_run_tileset2_func(void)
 
 void TilesetCb_General(void)
 {
-    static void sub_80A0B70(u16);
-
     sPrimaryTilesetCBCounter = 0;
     sPrimaryTilesetCBBufferSize = 0x100;
     sPrimaryTilesetCB = sub_80A0B70;
@@ -710,8 +759,6 @@ void TilesetCb_General(void)
 
 void TilesetCb_InsideBuilding(void)
 {
-    static void sub_80A0BB4(u16);
-
     sPrimaryTilesetCBCounter = 0;
     sPrimaryTilesetCBBufferSize = 0x100;
     sPrimaryTilesetCB = sub_80A0BB4;
@@ -719,12 +766,6 @@ void TilesetCb_InsideBuilding(void)
 
 static void sub_80A0B70(u16 timer)
 {
-    static void gTilesetAnims_Flower(u16);
-    static void gTilesetAnims_Water(u16);
-    static void gTilesetAnims_SandWaterEdge(u16);
-    static void gTilesetAnims_Waterfall(u16);
-    static void gTilesetAnims_LandWaterEdge (u16);
-
     if ((timer & 0x0F) == 0)
         gTilesetAnims_Flower(timer >> 4);
     if ((timer & 0x0F) == 1)
@@ -739,8 +780,6 @@ static void sub_80A0B70(u16 timer)
 
 static void sub_80A0BB4(u16 timer)
 {
-    static void sub_80A1688(u16);
-
     if ((timer & 0x7) == 0)
         sub_80A1688(timer >> 3);
 }
@@ -786,8 +825,6 @@ void TilesetCb_Petalburg(void)
 
 void TilesetCb_Rustboro(void)
 {
-    static void sub_80A103C(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A103C;
@@ -795,8 +832,6 @@ void TilesetCb_Rustboro(void)
 
 void TilesetCb_Dewford(void)
 {
-    static void sub_80A10B8(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A10B8;
@@ -804,8 +839,6 @@ void TilesetCb_Dewford(void)
 
 void TilesetCb_Slateport(void)
 {
-    static void sub_80A10D0(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A10D0;
@@ -813,8 +846,6 @@ void TilesetCb_Slateport(void)
 
 void TilesetCb_Mauville(void)
 {
-    static void sub_80A10E8(u16);
-
     sSecondaryTilesetCBCounter = sPrimaryTilesetCBCounter;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A10E8;
@@ -822,8 +853,6 @@ void TilesetCb_Mauville(void)
 
 void TilesetCb_Lavaridge(void)
 {
-    static void sub_80A115C(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A115C;
@@ -859,8 +888,6 @@ void TilesetCb_Mossdeep(void)
 
 void TilesetCb_EverGrande(void)
 {
-    static void sub_80A1188(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A1188;
@@ -868,8 +895,6 @@ void TilesetCb_EverGrande(void)
 
 void TilesetCb_Pacifidlog(void)
 {
-    static void sub_80A11FC(u16);
-
     sSecondaryTilesetCBCounter = sPrimaryTilesetCBCounter;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A11FC;
@@ -877,8 +902,6 @@ void TilesetCb_Pacifidlog(void)
 
 void TilesetCb_Sootopolis(void)
 {
-    static void sub_80A122C(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A122C;
@@ -886,8 +909,6 @@ void TilesetCb_Sootopolis(void)
 
 void TilesetCb_BattleFrontierOutsideWest(void)
 {
-    static void sub_80A127C(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A127C;
@@ -895,8 +916,6 @@ void TilesetCb_BattleFrontierOutsideWest(void)
 
 void TilesetCb_BattleFrontierOutsideEast(void)
 {
-    static void sub_80A1294(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A1294;
@@ -904,8 +923,6 @@ void TilesetCb_BattleFrontierOutsideEast(void)
 
 void TilesetCb_Underwater(void)
 {
-    static void sub_80A1244(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 128;
     sSecondaryTilesetCB = sub_80A1244;
@@ -913,8 +930,6 @@ void TilesetCb_Underwater(void)
 
 void TilesetCb_SootopolisGym(void)
 {
-    static void sub_80A15D8(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 240;
     sSecondaryTilesetCB = sub_80A15D8;
@@ -922,8 +937,6 @@ void TilesetCb_SootopolisGym(void)
 
 void TilesetCb_Cave(void)
 {
-    static void sub_80A1260(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A1260;
@@ -931,8 +944,6 @@ void TilesetCb_Cave(void)
 
 void TilesetCb_EliteFour(void)
 {
-    static void sub_80A15F0(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 128;
     sSecondaryTilesetCB = sub_80A15F0;
@@ -940,8 +951,6 @@ void TilesetCb_EliteFour(void)
 
 void TilesetCb_MauvilleGym(void)
 {
-    static void sub_80A15C0(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A15C0;
@@ -949,8 +958,6 @@ void TilesetCb_MauvilleGym(void)
 
 void TilesetCb_BikeShop(void)
 {
-    static void sub_80A161C(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A161C;
@@ -958,8 +965,6 @@ void TilesetCb_BikeShop(void)
 
 void TilesetCb_BattlePyramid(void)
 {
-    static void sub_80A1634(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A1634;
@@ -967,8 +972,6 @@ void TilesetCb_BattlePyramid(void)
 
 void TilesetCb_BattleDome(void)
 {
-    static void sub_80A1658(u16);
-
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A1658;
@@ -976,9 +979,6 @@ void TilesetCb_BattleDome(void)
 
 static void sub_80A103C(u16 timer)
 {
-    static void sub_80A1434(u16, u8);
-    static void sub_80A1470(u16);
-
     if ((timer & 0x07) == 0)
     {
         sub_80A1434(timer >> 3, 0);
@@ -1002,24 +1002,18 @@ static void sub_80A103C(u16 timer)
 
 static void sub_80A10B8(u16 timer)
 {
-    static void sub_80A1520(u16);
-
     if ((timer & 7) == 0)
         sub_80A1520(timer >> 3);
 }
 
 static void sub_80A10D0(u16 timer)
 {
-    static void sub_80A1598(u16);
-
     if ((timer & 15) == 0)
         sub_80A1598(timer >> 4);
 }
 
 static void sub_80A10E8(u16 timer)
 {
-    static void sub_80A1394(u16, u8);
-
     if ((timer & 0x07) == 0)
         sub_80A1394(timer >> 3, 0);
     if ((timer & 0x07) == 1)
@@ -1040,9 +1034,6 @@ static void sub_80A10E8(u16 timer)
 
 static void sub_80A115C(u16 timer)
 {
-    static void sub_80A12D4(u8);
-    static void sub_80A1498(u16);
-
     if ((timer & 0x0F) == 0)
         sub_80A12D4(timer >> 4);
     if ((timer & 0x0F) == 1)
@@ -1051,8 +1042,6 @@ static void sub_80A115C(u16 timer)
 
 static void sub_80A1188(u16 timer)
 {
-    static void sub_80A14C0(u16, u8);
-
     if ((timer & 0x07) == 0)
         sub_80A14C0(timer >> 3, 0);
     if ((timer & 0x07) == 1)
@@ -1073,9 +1062,6 @@ static void sub_80A1188(u16 timer)
 
 static void sub_80A11FC(u16 timer)
 {
-    static void sub_80A131C(u8);
-    static void sub_80A136C(u8);
-
     if ((timer & 0x0F) == 0)
         sub_80A131C(timer >> 4);
     if ((timer & 0x0F) == 1)
@@ -1084,40 +1070,30 @@ static void sub_80A11FC(u16 timer)
 
 static void sub_80A122C(u16 timer)
 {
-    static void sub_80A1798(u16);
-
     if ((timer & 0x0F) == 0)
         sub_80A1798(timer >> 4);
 }
 
 static void sub_80A1244(u16 timer)
 {
-    static void sub_80A1344(u8);
-
     if ((timer & 0x0F) == 0)
         sub_80A1344(timer >> 4);
 }
 
 static void sub_80A1260(u16 timer)
 {
-    static void sub_80A14F8(u16);
-
     if ((timer & 0x0F) == 1)
         sub_80A14F8(timer >> 4);
 }
 
 static void sub_80A127C(u16 timer)
 {
-    static void sub_80A1548(u16);
-
     if ((timer & 0x07) == 0)
         sub_80A1548(timer >> 3);
 }
 
 static void sub_80A1294(u16 timer)
 {
-    static void sub_80A1570(u16);
-
     if ((timer & 0x07) == 0)
         sub_80A1570(timer >> 3);
 }
@@ -1256,25 +1232,18 @@ static void sub_80A1598(u16 timer)
 
 static void sub_80A15C0(u16 timer)
 {
-    static void sub_80A1748(u16);
-
     if ((timer & 1) == 0)
         sub_80A1748(timer >> 1);
 }
 
 static void sub_80A15D8(u16 timer)
 {
-    static void sub_80A16B0(u16);
-
     if ((timer & 7) == 0)
         sub_80A16B0(timer >> 3);
 }
 
 static void sub_80A15F0(u16 timer)
 {
-    static void sub_80A1720(u16);
-    static void sub_80A16F8(u16);
-
     if ((timer & 0x3f) == 1)
         sub_80A1720(timer >> 6);
     if ((timer & 0x07) == 1)
@@ -1282,17 +1251,12 @@ static void sub_80A15F0(u16 timer)
 }
 static void sub_80A161C(u16 timer)
 {
-    static void sub_80A1770(u16);
-
     if ((timer & 3) == 0)
         sub_80A1770(timer >> 2);
 }
 
 static void sub_80A1634(u16 timer)
 {
-    static void sub_80A17C0(u16);
-    static void sub_80A17EC(u16);
-
     if ((timer & 7) == 0)
     {
         sub_80A17C0(timer >> 3);
@@ -1302,16 +1266,12 @@ static void sub_80A1634(u16 timer)
 
 static void sub_80A1658(u16 timer)
 {
-    static void sub_80A1818(u16);
-
     if ((timer & 3) == 0)
         sub_80A1818(timer >> 2);
 }
 
 static void sub_80A1670(u16 timer)
 {
-    static void sub_80A1884(u16);
-
     if ((timer & 3) == 0)
         sub_80A1884(timer >> 2);
 }

@@ -1,6 +1,8 @@
 #ifndef GUARD_ROTATING_GATE_H
 #define GUARD_ROTATING_GATE_H
 
+#include "global.h"
+
 void RotatingGatePuzzleCameraUpdate(s16, s16);
 void RotatingGate_InitPuzzleAndGraphics(void);
 u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);

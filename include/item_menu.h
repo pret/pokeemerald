@@ -1,6 +1,8 @@
 #ifndef GUARD_item_menu_H
 #define GUARD_item_menu_H
 
+#include "global.h"
+
 // Exported type declarations
 struct BagStruct
 {

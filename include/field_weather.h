@@ -1,6 +1,8 @@
 #ifndef GUARD_WEATHER_H
 #define GUARD_WEATHER_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 // Controls how the weather should be changing the screen palettes.

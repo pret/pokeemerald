@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
+#include "global.h"
+
 #include "task.h"
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[2];

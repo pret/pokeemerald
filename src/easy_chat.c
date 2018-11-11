@@ -25,7 +25,7 @@
 
 // Static RAM declarations
 
-EWRAM_DATA struct
+struct UnkStruct_203A118
 {
     u8 kind;
     u8 unk_01;
@@ -48,7 +48,11 @@ EWRAM_DATA struct
     const u8 *src;
     const u16 *words;
     u16 ecWordBuffer[9];
-} *gUnknown_0203A118 = NULL;
+};
+
+EWRAM_DATA struct UnkStruct_203A118 *gUnknown_0203A118 = NULL;
+EWRAM_DATA u32 gUnknown_0203A11C = 0;
+EWRAM_DATA u32 gUnknown_0203A120 = 0;
 
 // Static ROM declarations
 

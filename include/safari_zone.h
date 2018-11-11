@@ -1,6 +1,8 @@
 #ifndef GUARD_SAFARI_ZONE_H
 #define GUARD_SAFARI_ZONE_H
 
+#include "global.h"
+
 extern u8 gNumSafariBalls;
 
 bool32 GetSafariZoneFlag(void);

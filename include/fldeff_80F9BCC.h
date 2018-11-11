@@ -1,6 +1,8 @@
 #ifndef GUARD_FLDEFF_80F9BCC_H
 #define GUARD_FLDEFF_80F9BCC_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

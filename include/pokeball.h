@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEBALL_H
 #define GUARD_POKEBALL_H
 
+#include "global.h"
+
 enum
 {
     BALL_POKE,

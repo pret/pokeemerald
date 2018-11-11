@@ -2,6 +2,8 @@
 #ifndef GUARD_MAUVILLE_OLD_MAN_H
 #define GUARD_MAUVILLE_OLD_MAN_H
 
+#include "global.h"
+
 enum MauvilleOldManType
 {
     MAUVILLE_MAN_BARD,

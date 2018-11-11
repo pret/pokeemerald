@@ -1,6 +1,8 @@
 #ifndef GUARD_METATILE_BEHAVIOR
 #define GUARD_METATILE_BEHAVIOR
 
+#include "global.h"
+
 bool8 MetatileBehavior_IsATile(u8);
 bool8 MetatileBehavior_IsEncounterTile(u8);
 bool8 MetatileBehavior_IsJumpEast(u8);

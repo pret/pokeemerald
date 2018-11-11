@@ -1,6 +1,8 @@
 #ifndef GUARD_LIBGCMMULTIBOOT_H
 #define GUARD_LIBGCNMULTIBOOT_H
 
+#include "global.h"
+
 struct GcmbStruct
 {
     u16 gcmb_field_0;

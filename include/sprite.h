@@ -1,6 +1,8 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#include "global.h"
+
 #define MAX_SPRITES 64
 #define SPRITE_INVALID_TAG 0xFFFF
 

@@ -1,6 +1,8 @@
 #ifndef GUARD_HEAL_LOCATION_H
 #define GUARD_HEAL_LOCATION_H
 
+#include "global.h"
+
 struct HealLocation
 {
     s8 group;

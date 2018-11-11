@@ -46,9 +46,9 @@ static bool32 SharesPalWithAnyActive(u32 id);
 static void sub_8035648(void);
 
 // iwram
-static IWRAM_DATA s32 gUnknown_03000DD4;
-static IWRAM_DATA s32 gUnknown_03000DD8;
-static IWRAM_DATA s32 gUnknown_03000DDC;
+static BSS_DATA s32 gUnknown_03000DD4;
+static BSS_DATA s32 gUnknown_03000DD8;
+static BSS_DATA s32 gUnknown_03000DDC;
 
 // const rom data
 static const u8 gUnknown_082FF1C8[][4] =

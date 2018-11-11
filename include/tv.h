@@ -1,6 +1,8 @@
 #ifndef GUARD_TV_H
 #define GUARD_TV_H
 
+#include "global.h"
+
 extern u8 *const gTVStringVarPtrs[3];
 
 void ClearTVShowData(void);

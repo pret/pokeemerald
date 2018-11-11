@@ -1,6 +1,8 @@
 #ifndef GUARD_EVOLUTION_GRAPHICS_H
 #define GUARD_EVOLUTION_GRAPHICS_H
 
+#include "global.h"
+
 void LoadEvoSparkleSpriteAndPal(void);
 
 u8 LaunchTask_PreEvoSparklesSet1(u16 arg0);

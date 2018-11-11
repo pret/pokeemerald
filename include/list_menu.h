@@ -1,6 +1,8 @@
 #ifndef GUARD_LIST_MENU_H
 #define GUARD_LIST_MENU_H
 
+#include "global.h"
+
 #include "window.h"
 
 #define LIST_NOTHING_CHOSEN -1

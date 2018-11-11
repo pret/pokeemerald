@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDDOOR_H
 #define GUARD_FIELDDOOR_H
 
+#include "global.h"
+
 struct DoorGraphics
 {
     u16 metatileNum;

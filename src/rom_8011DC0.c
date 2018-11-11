@@ -195,11 +195,11 @@ extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_03005DB4;
 
 // IWRAM vars
-IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
-IWRAM_DATA struct UnkStruct_Group *gUnknown_03000DA4;
-IWRAM_DATA struct UnkStruct_URoom *gUnknown_03000DA8;
-IWRAM_DATA void *gUnknown_03000DAC;
-IWRAM_DATA bool32 gUnknown_03000DB0;
+BSS_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
+BSS_DATA struct UnkStruct_Group *gUnknown_03000DA4;
+BSS_DATA struct UnkStruct_URoom *gUnknown_03000DA8;
+BSS_DATA void *gUnknown_03000DAC;
+BSS_DATA bool32 gUnknown_03000DB0;
 
 // this file's functions
 void sub_80173E0(u8 windowId, u8 arg1, const u8 *str, u8 arg3, u8 arg4, u8 arg5);

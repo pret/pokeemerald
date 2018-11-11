@@ -51,22 +51,22 @@ struct LinkTestBGInfo
 
 // Static RAM declarations
 
-IWRAM_DATA struct BlockTransfer sBlockSend;
-IWRAM_DATA u32 link_c_unused_03000d1c;
-IWRAM_DATA struct BlockTransfer sBlockRecv[MAX_LINK_PLAYERS];
-IWRAM_DATA u32 sBlockSendDelayCounter;
-IWRAM_DATA u32 gUnknown_03000D54;
-IWRAM_DATA u8 gUnknown_03000D58;
-IWRAM_DATA u32 sPlayerDataExchangeStatus;
-IWRAM_DATA u32 gUnknown_03000D60;
-IWRAM_DATA u8 sLinkTestLastBlockSendPos;
-ALIGNED() IWRAM_DATA u8 sLinkTestLastBlockRecvPos[MAX_LINK_PLAYERS];
-IWRAM_DATA u8 sNumVBlanksWithoutSerialIntr;
-IWRAM_DATA bool8 sSendBufferEmpty;
-IWRAM_DATA u16 sSendNonzeroCheck;
-IWRAM_DATA u16 sRecvNonzeroCheck;
-IWRAM_DATA u8 sChecksumAvailable;
-IWRAM_DATA u8 sHandshakePlayerCount;
+BSS_DATA struct BlockTransfer sBlockSend;
+BSS_DATA u32 link_c_unused_03000d1c;
+BSS_DATA struct BlockTransfer sBlockRecv[MAX_LINK_PLAYERS];
+BSS_DATA u32 sBlockSendDelayCounter;
+BSS_DATA u32 gUnknown_03000D54;
+BSS_DATA u8 gUnknown_03000D58;
+BSS_DATA u32 sPlayerDataExchangeStatus;
+BSS_DATA u32 gUnknown_03000D60;
+BSS_DATA u8 sLinkTestLastBlockSendPos;
+ALIGNED() BSS_DATA u8 sLinkTestLastBlockRecvPos[MAX_LINK_PLAYERS];
+BSS_DATA u8 sNumVBlanksWithoutSerialIntr;
+BSS_DATA bool8 sSendBufferEmpty;
+BSS_DATA u16 sSendNonzeroCheck;
+BSS_DATA u16 sRecvNonzeroCheck;
+BSS_DATA u8 sChecksumAvailable;
+BSS_DATA u8 sHandshakePlayerCount;
 
 u16 gLinkPartnersHeldKeys[6];
 u32 gLinkDebugSeed;

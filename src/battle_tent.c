@@ -49,7 +49,7 @@ static void sub_81BA040(void);
 static void sub_81B9EC0(void);
 
 // IWRAM bss
-static IWRAM_DATA u16 sRandMonSetId;
+static BSS_DATA u16 sRandMonSetId;
 
 // const rom data
 void static (*const gUnknown_086160B4[])(void) =

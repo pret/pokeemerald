@@ -1,6 +1,8 @@
 #ifndef GUARD_LILYCOVE_LADY_H
 #define GUARD_LILYCOVE_LADY_H
 
+#include "global.h"
+
 u8 GetLilycoveLadyId(void);
 void SetLilycoveLady(void);
 void sub_818DA78(void);

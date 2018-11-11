@@ -42,7 +42,7 @@ CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -und
 
 LDFLAGS = -Map ../../$(MAP)
 
-LIB := -L ../../tools/agbcc/lib -lgcc -lc
+LIB := -L ../../tools/agbcc/lib -lgcc -lc -nostdlib
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx$(EXE)

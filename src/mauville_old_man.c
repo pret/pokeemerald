@@ -33,7 +33,7 @@ static void Task_BardSong(u8 taskId);
 static void StorytellerSetup(void);
 static void Storyteller_ResetFlag(void);
 
-IWRAM_DATA u8 sSelectedStory;
+static u8 sSelectedStory;
 
 struct BardSong gBardSong;
 

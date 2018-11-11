@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM_8034C54_H
 #define GUARD_ROM_8034C54_H
 
+#include "global.h"
+
 struct UnkStruct3
 {
     u8 field_0_0:2;

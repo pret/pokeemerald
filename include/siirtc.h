@@ -1,6 +1,8 @@
 #ifndef GUARD_RTC_H
 #define GUARD_RTC_H
 
+#include "global.h"
+
 #include "gba/gba.h"
 
 #define SIIRTCINFO_INTFE  0x01 // frequency interrupt enable

@@ -1,6 +1,8 @@
 #ifndef GUARD_REGION_MAP_H
 #define GUARD_REGION_MAP_H
 
+#include "global.h"
+
 #include "bg.h"
 
 // Exported type declarations

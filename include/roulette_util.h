@@ -1,6 +1,8 @@
 #ifndef GUARD_ROULETTE_UTIL_H
 #define GUARD_ROULETTE_UTIL_H
 
+#include "global.h"
+
 // structures
 struct InnerStruct203CF18
 {

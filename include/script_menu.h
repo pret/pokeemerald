@@ -1,6 +1,8 @@
 #ifndef GUARD_SCRIPT_MENU_H
 #define GUARD_SCRIPT_MENU_H
 
+#include "global.h"
+
 extern const u8 *const gUnknown_0858BAF0[];
 
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 var3, u8 var4);

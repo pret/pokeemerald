@@ -1,6 +1,8 @@
 #ifndef GUARD_INTERNATIONAL_STRING_UTIL_H
 #define GUARD_INTERNATIONAL_STRING_UTIL_H
 
+#include "global.h"
+
 #include "menu.h"
 
 void sub_81DB52C(const u8 *src);

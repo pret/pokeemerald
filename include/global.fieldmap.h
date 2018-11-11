@@ -1,6 +1,8 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
+#include "global.h"
+
 #define NUM_EVENT_OBJECTS 16
 
 enum

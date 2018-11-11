@@ -1,7 +1,3 @@
-//
-// Created by scott on 10/21/2017.
-//
-
 #ifndef GUARD_ICON_H
 #define GUARD_ICON_H
 

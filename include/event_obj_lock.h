@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENT_OBJ_LOCK_H
 #define GUARD_EVENT_OBJ_LOCK_H
 
+#include "global.h"
+
 bool8 sub_80983C4(void);
 void ScriptFreezeEventObjects(void);
 bool8 sub_809847C(void);

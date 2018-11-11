@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEM_H
 #define GUARD_ITEM_H
 
+#include "global.h"
+
 // These constants are used in gItems
 enum
 {

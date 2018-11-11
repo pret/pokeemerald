@@ -1,6 +1,8 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
+#include "global.h"
+
 enum
 {
     BERRY_FIRMNESS_UNKNOWN,

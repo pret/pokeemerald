@@ -1,6 +1,8 @@
 #ifndef GUARD_STRINGS_H
 #define GUARD_STRINGS_H
 
+#include "global.h"
+
 extern const u8 gText_FromSpace[];
 
 extern const u8 gText_Lv50[];

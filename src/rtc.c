@@ -4,10 +4,10 @@
 #include "text.h"
 
 // iwram bss
-IWRAM_DATA static u16 sErrorStatus;
-IWRAM_DATA static struct SiiRtcInfo sRtc;
-IWRAM_DATA static u8 sProbeResult;
-IWRAM_DATA static u16 sSavedIme;
+BSS_DATA static u16 sErrorStatus;
+BSS_DATA static struct SiiRtcInfo sRtc;
+BSS_DATA static u8 sProbeResult;
+BSS_DATA static u16 sSavedIme;
 
 // iwram common
 struct Time gLocalTime;

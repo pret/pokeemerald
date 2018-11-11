@@ -1,6 +1,8 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+#include "global.h"
+
 // overworld
 extern const u32 gMessageBox_Gfx[];
 extern const u16 gMessageBox_Pal[];
@@ -3997,9 +3999,6 @@ extern const u32 gBerryPic_Starf[];
 extern const u32 gBerryPalette_Starf[];
 extern const u32 gBerryPic_Enigma[];
 extern const u32 gBerryPalette_Enigma[];
-
-//credits
-extern const u32 gCreditsCopyrightEnd_Gfx[];
 
 //pokenav condition marker
 extern const u8 gPokenavConditionMarker_Gfx[];

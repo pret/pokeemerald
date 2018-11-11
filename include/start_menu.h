@@ -1,6 +1,8 @@
 #ifndef GUARD_START_MENU_H
 #define GUARD_START_MENU_H
 
+#include "global.h"
+
 extern bool8 (*gMenuCallback)(void);   // Defined in sym_common.txt
 
 void sub_809FA18(void);

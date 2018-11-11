@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
+#include "global.h"
+
 #define GFX_TAG_POKEBLOCK       14818
 #define GFX_TAG_POKEBLOCK_CASE  14800
 

@@ -1,6 +1,8 @@
 #ifndef GUARD_APPRENTICE_H
 #define GUARD_APPRENTICE_H
 
+#include "global.h"
+
 #define APPRENTICE_SPECIES_COUNT 10
 
 struct ApprenticeTrainer

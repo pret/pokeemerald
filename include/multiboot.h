@@ -1,6 +1,8 @@
 #ifndef GUARD_MULTIBOOT_H
 #define GUARD_MULTIBOOT_H
 
+#include "global.h"
+
 #define MULTIBOOT_MASTER_INFO            0x62
 #define MULTIBOOT_CLIENT_INFO            0x72
 #define MULTIBOOT_MASTER_START_PROBE     0x61

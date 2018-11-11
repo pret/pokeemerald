@@ -1,6 +1,8 @@
 #ifndef GUARD_CONTEST_EFFECT_H
 #define GUARD_CONTEST_EFFECT_H
 
+#include "global.h"
+
 struct ContestMove
 {
     u8 effect;

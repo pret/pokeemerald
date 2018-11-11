@@ -1,6 +1,8 @@
 #ifndef GUARD_tilesets_H
 #define GUARD_tilesets_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

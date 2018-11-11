@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_TOWER_H
 #define GUARD_BATTLE_TOWER_H
 
+#include "global.h"
+
 struct RSBattleTowerRecord
 {
     /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100

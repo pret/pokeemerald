@@ -1,6 +1,8 @@
 #ifndef GUARD_TRADE_H
 #define GUARD_TRADE_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

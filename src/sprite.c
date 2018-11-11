@@ -285,10 +285,10 @@ static const struct OamDimensions sOamDimensions[3][4] =
 };
 
 // iwram bss
-IWRAM_DATA static u16 sSpriteTileRangeTags[MAX_SPRITES];
-IWRAM_DATA static u16 sSpriteTileRanges[MAX_SPRITES * 2];
-IWRAM_DATA static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
-IWRAM_DATA static u16 sSpritePaletteTags[16];
+BSS_DATA static u16 sSpriteTileRangeTags[MAX_SPRITES];
+BSS_DATA static u16 sSpriteTileRanges[MAX_SPRITES * 2];
+BSS_DATA static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
+BSS_DATA static u16 sSpritePaletteTags[16];
 
 // iwram common
 u32 gOamMatrixAllocBitmap;

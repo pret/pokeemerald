@@ -1,6 +1,8 @@
 #ifndef GUARD_UTIL_H
 #define GUARD_UTIL_H
 
+#include "global.h"
+
 #include "sprite.h"
 
 extern const u8 gMiscBlank_Gfx[]; // unused in Emerald

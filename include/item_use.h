@@ -1,6 +1,8 @@
 #ifndef GUARD_ITEM_USE_H
 #define GUARD_ITEM_USE_H
 
+#include "global.h"
+
 void ItemUseOutOfBattle_Mail(u8);
 void ItemUseOutOfBattle_Bike(u8);
 void ItemUseOnFieldCB_Bike(u8);

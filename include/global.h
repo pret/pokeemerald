@@ -17,12 +17,13 @@
 #if defined (__APPLE__) || defined (__CYGWIN__) || defined (_MSC_VER)
 #define _(x) x
 #define __(x) x
-#define INCBIN_U8 {0}
-#define INCBIN_U16 {0}
-#define INCBIN_U32 {0}
-#define INCBIN_S8 {0}
-#define INCBIN_S16 {0}
-#define INCBIN_S32 {0}
+#define INCBIN(x) {0}
+#define INCBIN_U8 INCBIN
+#define INCBIN_U16 INCBIN
+#define INCBIN_U32 INCBIN
+#define INCBIN_S8 INCBIN
+#define INCBIN_S16 INCBIN
+#define INCBIN_S32 INCBIN
 #endif // IDE support
 
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))

@@ -178,9 +178,9 @@ static void SpriteCB_SetDummyOnAnimEnd(struct Sprite *sprite);
 #define STRUCT_COUNT 4
 
 // IWRAM bss
-static IWRAM_DATA struct UnkAnimStruct sUnknown_03001240[STRUCT_COUNT];
-static IWRAM_DATA u8 sUnknown_03001270;
-static IWRAM_DATA bool32 sUnknown_03001274;
+static BSS_DATA struct UnkAnimStruct sUnknown_03001240[STRUCT_COUNT];
+static BSS_DATA u8 sUnknown_03001270;
+static BSS_DATA bool32 sUnknown_03001274;
 
 // const rom data
 static const u8 sSpeciesToBackAnimSet[] =

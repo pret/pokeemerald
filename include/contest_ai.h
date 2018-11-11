@@ -1,6 +1,8 @@
 #ifndef GUARD_CONTESTAI_H
 #define GUARD_CONTESTAI_H
 
+#include "global.h"
+
 // AI states
 enum
 {

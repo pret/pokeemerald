@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINER_REMATCH_H
 #define GUARD_TRAINER_REMATCH_H
 
+#include "global.h"
+
 enum {
     REMATCH_ROSE,
     REMATCH_ANDRES,

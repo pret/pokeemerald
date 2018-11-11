@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_SPECIAL_SCENE_H
 #define GUARD_FIELD_SPECIAL_SCENE_H
 
+#include "global.h"
+
 s16 GetTruckCameraBobbingY(int a1);
 s16 GetTruckBoxMovement(int a1);
 void Task_Truck1(u8 taskId);

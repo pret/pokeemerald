@@ -143,7 +143,7 @@ EWRAM_DATA struct Struct203CF10 *gUnknown_0203CF10 = NULL;
 EWRAM_DATA u16 *gUnknown_0203CF14 = NULL;
 
 // iwram
-IWRAM_DATA u16 gUnknown_030012A8[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+BSS_DATA u16 gUnknown_030012A8[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 
 // text
 void sub_81BEB24(void)

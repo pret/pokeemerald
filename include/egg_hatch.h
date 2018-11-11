@@ -1,6 +1,8 @@
 #ifndef GUARD_EGG_HATCH_H
 #define GUARD_EGG_HATCH_H
 
+#include "global.h"
+
 void ScriptHatchMon(void);
 bool8 sub_8071614(void);
 void EggHatch(void);

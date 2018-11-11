@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_PYRAMID_BAG_H
 #define GUARD_BATTLE_PYRAMID_BAG_H
 
+#include "global.h"
+
 #include "list_menu.h"
 
 struct PyramidBagResources

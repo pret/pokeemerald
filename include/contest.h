@@ -1,6 +1,8 @@
 #ifndef GUARD_CONTEST_H
 #define GUARD_CONTEST_H
 
+#include "global.h"
+
 enum
 {
     CONTEST_CATEGORY_COOL,

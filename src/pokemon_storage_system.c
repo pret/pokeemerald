@@ -21,7 +21,7 @@
 #include "gpu_regs.h"
 #include "constants/songs.h"
 
-IWRAM_DATA u8 gUnknown_03000F78[0x188];
+BSS_DATA u8 gUnknown_03000F78[0x188];
 
 extern const u8 gText_PartyFull[];
 extern const u8 gText_Box[];

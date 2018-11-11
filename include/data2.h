@@ -1,6 +1,8 @@
 #ifndef GUARD_DATA2_H
 #define GUARD_DATA2_H
 
+#include "global.h"
+
 #define MOVE_NAME_LENGTH 12
 
 struct MonCoords

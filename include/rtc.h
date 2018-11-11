@@ -1,6 +1,8 @@
 #ifndef GUARD_RTC_UTIL_H
 #define GUARD_RTC_UTIL_H
 
+#include "global.h"
+
 #include "siirtc.h"
 
 #define RTC_INIT_ERROR         0x0001

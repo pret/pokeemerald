@@ -1,6 +1,8 @@
 #ifndef GUARD_FRONTIER_UTIL_H
 #define GUARD_FRONTIER_UTIL_H
 
+#include "global.h"
+
 #define FRONTIER_BEFORE_TEXT 0
 #define FRONTIER_PLAYER_LOST_TEXT 1
 #define FRONTIER_PLAYER_WON_TEXT 2

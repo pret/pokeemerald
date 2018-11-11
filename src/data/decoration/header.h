@@ -1,7 +1,3 @@
-//
-// Created by scott on 10/21/2017.
-//
-
 #ifndef GUARD_DATA_DECORATION_HEADER_H
 #define GUARD_DATA_DECORATION_HEADER_H
 

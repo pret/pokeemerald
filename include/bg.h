@@ -1,6 +1,8 @@
 #ifndef GUARD_BG_H
 #define GUARD_BG_H
 
+#include "global.h"
+
 struct BGCntrlBitfield // for the I/O registers
 {
     volatile u16 priority:2;

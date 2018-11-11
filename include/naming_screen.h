@@ -1,6 +1,8 @@
 #ifndef GUARD_NAMING_SCREEN_H
 #define GUARD_NAMING_SCREEN_H
 
+#include "global.h"
+
 #include "main.h"
 
 #define KBEVENT_NONE 0

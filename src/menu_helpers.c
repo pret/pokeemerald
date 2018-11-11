@@ -29,7 +29,7 @@ EWRAM_DATA static struct YesNoFuncTable gUnknown_0203A138 = {0};
 EWRAM_DATA static u8 gUnknown_0203A140 = 0;
 
 // IWRAM bss vars
-IWRAM_DATA static TaskFunc gUnknown_0300117C;
+BSS_DATA static TaskFunc gUnknown_0300117C;
 
 // const rom data
 static const struct OamData sOamData_859F4E8 =

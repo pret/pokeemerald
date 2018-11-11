@@ -249,12 +249,12 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
 static u16 GetCenterScreenMetatileBehavior(void);
 
 // IWRAM bss vars
-IWRAM_DATA static void *sUnknown_03000E0C;
-IWRAM_DATA static u8 sUnknown_03000E10[4];
-IWRAM_DATA static u16 (*sUnknown_03000E14)(u32);
-IWRAM_DATA static u8 sUnknown_03000E18;
-IWRAM_DATA static u8 sUnknown_03000E19;
-IWRAM_DATA static u32 sUnusedVar;
+BSS_DATA static void *sUnknown_03000E0C;
+BSS_DATA static u8 sUnknown_03000E10[4];
+BSS_DATA static u16 (*sUnknown_03000E14)(u32);
+BSS_DATA static u8 sUnknown_03000E18;
+BSS_DATA static u8 sUnknown_03000E19;
+BSS_DATA static u32 sUnusedVar;
 
 // EWRAM vars
 EWRAM_DATA static u8 sUnknown_020322D8 = 0;

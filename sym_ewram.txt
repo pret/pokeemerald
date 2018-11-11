@@ -387,14 +387,7 @@ gUnknown_0203A110: @ 203A110
 gUnknown_0203A114: @ 203A114
 	.space 0x4
 
-gUnknown_0203A118: @ 203A118
-	.space 0x4
-
-gUnknown_0203A11C: @ 203A11C
-	.space 0x4
-
-gUnknown_0203A120: @ 203A120
-	.space 0x4
+	.include "src/easy_chat.o"
 	.include "src/mon_markings.o"
 	.include "src/mauville_old_man.o"
     .include "src/mail.o"

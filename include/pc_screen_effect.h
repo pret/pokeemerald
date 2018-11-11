@@ -1,6 +1,8 @@
 #ifndef GUARD_PC_SCREEN_EFFECT_H
 #define GUARD_PC_SCREEN_EFFECT_H
 
+#include "global.h"
+
 struct PCScreenEffectStruct
 {
     /*0x00*/ u16 tileTag;

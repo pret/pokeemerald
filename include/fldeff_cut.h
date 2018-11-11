@@ -1,6 +1,8 @@
 #ifndef GUARD_FLDEFF_CUT_H
 #define GUARD_FLDEFF_CUT_H
 
+#include "global.h"
+
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo6;
 
 bool8 SetUpFieldMove_Cut(void);

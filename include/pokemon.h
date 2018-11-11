@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
+#include "global.h"
+
 #include "constants/pokemon.h"
 #include "sprite.h"
 

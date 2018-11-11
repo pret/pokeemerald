@@ -1,6 +1,8 @@
 #ifndef GUARD_LINK_RFU_H
 #define GUARD_LINK_RFU_H
 
+#include "global.h"
+
 // Exported type declarations
 
 struct UnkLinkRfuStruct_02022B2C

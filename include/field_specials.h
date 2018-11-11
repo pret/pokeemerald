@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELD_SPECIALS_H
 #define GUARD_FIELD_SPECIALS_H
 
+#include "global.h"
+
 u8 GetLeadMonIndex(void);
 u8 sub_813B260(void);
 u16 get_unknown_box_id(void);

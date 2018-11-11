@@ -1,6 +1,8 @@
 #ifndef GUARD_DECORATION_H
 #define GUARD_DECORATION_H
 
+#include "global.h"
+
 enum DecorPerm {
     /*
      * The nomenclature here describes collision and placement permissions, in that order.

@@ -2,6 +2,8 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
+#include "global.h"
+
 #include "task.h"
 #include "text.h"
 #include "window.h"

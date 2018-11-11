@@ -1,6 +1,8 @@
 #ifndef GUARD_STRING_UTIL_H
 #define GUARD_STRING_UTIL_H
 
+#include "global.h"
+
 enum StringConvertMode
 {
     STR_CONV_MODE_LEFT_ALIGN,

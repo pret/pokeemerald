@@ -37,7 +37,6 @@ extern void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 move, u8 moveSlot);
 extern const u8 *const *const gUnknown_085DD690[];
 extern const u16 gBattleFrontierHeldItems[];
 extern const u8 sRubyFacilityClassToEmerald[82][2];
-extern const u16 gUnknown_085DFA46[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const struct FacilityMon gVerdanturfBattleTentMons[];

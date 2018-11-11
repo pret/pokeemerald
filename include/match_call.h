@@ -1,6 +1,8 @@
 #ifndef GUARD_MATCH_CALL_H
 #define GUARD_MATCH_CALL_H
 
+#include "global.h"
+
 enum {
     MATCH_CALL_TYPE_NON_TRAINER,
     MATCH_CALL_TYPE_TRAINER,

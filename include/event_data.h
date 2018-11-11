@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENT_DATA_H
 #define GUARD_EVENT_DATA_H
 
+#include "global.h"
+
 #include "constants/flags.h"
 #include "constants/vars.h"
 

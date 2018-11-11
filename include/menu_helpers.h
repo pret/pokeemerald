@@ -1,6 +1,8 @@
 #ifndef GUARD_MENU_HELPERS_H
 #define GUARD_MENU_HELPERS_H
 
+#include "global.h"
+
 #include "task.h"
 #include "window.h"
 

@@ -1,6 +1,8 @@
 #ifndef GUARD_WINDOW_H
 #define GUARD_WINDOW_H
 
+#include "global.h"
+
 enum
 {
     WINDOW_BG,

@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM_81520A8_H
 #define GUARD_ROM_81520A8_H
 
+#include "global.h"
+
 struct UnkStruct_81520A8
 {
     struct OamData oam;

@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_BATTLE_SCRIPT_COMMANDS_H
 
+#include "global.h"
+
 #define WINDOW_CLEAR            0x1
 #define WINDOW_x80              0x80
 

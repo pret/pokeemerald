@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
+#include "global.h"
+
 struct SaveSectionLocation
 {
     void *data;

@@ -35,7 +35,7 @@ EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
 // Static RAM declarations
 
-static IWRAM_DATA u8 sActiveList[32];
+static BSS_DATA u8 sActiveList[32];
 
 // Static ROM declarations
 

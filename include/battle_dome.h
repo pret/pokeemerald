@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_DOME_H
 #define GUARD_BATTLE_DOME_H
 
+#include "global.h"
+
 extern u32 gUnknown_0203CD70;
 
 s32 GetDomeTrainerMonCountInBits(u16 tournamentTrainerId);

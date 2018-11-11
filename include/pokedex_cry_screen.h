@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEDEX_CRY_SCREEN_H
 #define GUARD_POKEDEX_CRY_SCREEN_H
 
+#include "global.h"
+
 struct CryRelatedStruct
 {
     u16 unk0;

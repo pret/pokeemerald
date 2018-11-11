@@ -1,6 +1,8 @@
 #ifndef GUARD_MAIL_H
 #define GUARD_MAIL_H
 
+#include "global.h"
+
 #define IS_ITEM_MAIL(itemId)((itemId == ITEM_ORANGE_MAIL            \
                               || itemId == ITEM_HARBOR_MAIL         \
                               || itemId == ITEM_GLITTER_MAIL        \

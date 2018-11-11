@@ -68,7 +68,7 @@ static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 extern u16 gSpecialVar_ContestCategory;
 
-IWRAM_DATA u8 gUnknown_03000F30;
+static u8 gUnknown_03000F30;
 
 extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];

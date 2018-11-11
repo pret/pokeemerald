@@ -83,21 +83,21 @@ union PlayerRecords
 
 // Static RAM declarations
 
-static IWRAM_DATA bool8 gUnknown_03001130;
-static IWRAM_DATA struct SecretBaseRecord *sSecretBasesSave;
-static IWRAM_DATA TVShow *sTvShowsSave;
-static IWRAM_DATA PokeNews *sPokeNewsSave;
-static IWRAM_DATA OldMan *sOldManSave;
-static IWRAM_DATA struct EasyChatPair *sEasyChatPairsSave;
-static IWRAM_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
-static IWRAM_DATA void *sBattleTowerSave;
-static IWRAM_DATA LilycoveLady *sLilycoveLadySave;
-static IWRAM_DATA void *sApprenticesSave;
-static IWRAM_DATA void *sBattleTowerSave_Duplicate;
-static IWRAM_DATA u32 sRecordStructSize;
-static IWRAM_DATA u8 gUnknown_03001160;
-static IWRAM_DATA u32 filler_03001164;
-static IWRAM_DATA struct PlayerHallRecords *gUnknown_03001168[3];
+static BSS_DATA bool8 gUnknown_03001130;
+static BSS_DATA struct SecretBaseRecord *sSecretBasesSave;
+static BSS_DATA TVShow *sTvShowsSave;
+static BSS_DATA PokeNews *sPokeNewsSave;
+static BSS_DATA OldMan *sOldManSave;
+static BSS_DATA struct EasyChatPair *sEasyChatPairsSave;
+static BSS_DATA struct RecordMixingDayCareMail *gUnknown_03001148;
+static BSS_DATA void *sBattleTowerSave;
+static BSS_DATA LilycoveLady *sLilycoveLadySave;
+static BSS_DATA void *sApprenticesSave;
+static BSS_DATA void *sBattleTowerSave_Duplicate;
+static BSS_DATA u32 sRecordStructSize;
+static BSS_DATA u8 gUnknown_03001160;
+static BSS_DATA u32 filler_03001164;
+static BSS_DATA struct PlayerHallRecords *gUnknown_03001168[3];
 
 static EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02039F9C = {0};
 static EWRAM_DATA union PlayerRecords *sReceivedRecords = NULL;
@@ -786,11 +786,11 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
         _src = (void *)src + i * recordSize; // r7
         language = gLinkPlayers[i].language; // r9
         version = (u8)gLinkPlayers[i].version; // sp+40
-        for (j = 0; j < _src->unk_70; j ++)
+        for (j = 0; j < _src->numDaycareMons; j ++)
         {
             // r10 = ~0x10
-            recordMixingMail = &_src->unk_00[j];
-            if (recordMixingMail->mail.itemId != ITEM_NONE)
+            recordMixingMail = &_src->mail[j];
+            if (recordMixingMail->message.itemId != ITEM_NONE)
             {
                 if (anyRS)
                 {
@@ -814,27 +814,27 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
                     }
                     if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
                     {
-                        recordMixingMail->language_maybe = otNameLanguage;
-                        recordMixingMail->unknown = nicknameLanguage;
+                        recordMixingMail->gameLanguage = otNameLanguage;
+                        recordMixingMail->monLanguage = nicknameLanguage;
                     }
                 }
                 else if (language == LANGUAGE_JAPANESE)
                 {
                     if (IsStringJapanese(recordMixingMail->OT_name))
                     {
-                        recordMixingMail->language_maybe = LANGUAGE_JAPANESE;
+                        recordMixingMail->gameLanguage = LANGUAGE_JAPANESE;
                     }
                     else
                     {
-                        recordMixingMail->language_maybe = GAME_LANGUAGE;
+                        recordMixingMail->gameLanguage = GAME_LANGUAGE;
                     }
                     if (IsStringJapanese(recordMixingMail->monName))
                     {
-                        recordMixingMail->unknown = LANGUAGE_JAPANESE;
+                        recordMixingMail->monLanguage = LANGUAGE_JAPANESE;
                     }
                     else
                     {
-                        recordMixingMail->unknown = GAME_LANGUAGE;
+                        recordMixingMail->monLanguage = GAME_LANGUAGE;
                     }
                 }
             }
@@ -844,11 +844,11 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
     for (i = 0; i < linkPlayerCount; i ++)
     {
         _src = (void *)src + i * recordSize; // r7
-        if (_src->unk_70 != 0)
+        if (_src->numDaycareMons != 0)
         {
-            for (j = 0; j < _src->unk_70; j ++)
+            for (j = 0; j < _src->numDaycareMons; j ++)
             {
-                if (_src->unk_74[j] == 0)
+                if (_src->holdsItem[j] == 0)
                 {
                     sp1c[i][j] = 1;
                 }
@@ -878,8 +878,8 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
         else if (sp1c[j][0] == TRUE && sp1c[j][1] == TRUE)
         {
             sp24[i][0] = j;
-            dcMail1 = sub_80E7A9C(&_src->unk_00[0]);
-            dcMail2 = sub_80E7A9C(&_src->unk_00[1]);
+            dcMail1 = sub_80E7A9C(&_src->mail[0]);
+            dcMail2 = sub_80E7A9C(&_src->mail[1]);
             if (!dcMail1 && dcMail2)
             {
                 sp24[i][1] = 1;
@@ -915,8 +915,8 @@ static void ReceiveDaycareMailData(struct RecordMixingDayCareMail *src, size_t r
             break;
     }
     _src = (void *)src + which * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].misc.mail, &_src->unk_00[0], sizeof(struct DayCareMail));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].misc.mail, &_src->unk_00[1], sizeof(struct DayCareMail));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &_src->mail[0], sizeof(struct DayCareMail));
+    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &_src->mail[1], sizeof(struct DayCareMail));
     SeedRng(oldSeed);
 }
 #else

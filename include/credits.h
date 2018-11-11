@@ -1,6 +1,8 @@
 #ifndef GUARD_CREDITS_H
 #define GUARD_CREDITS_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

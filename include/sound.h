@@ -1,6 +1,8 @@
 #ifndef GUARD_SOUND_H
 #define GUARD_SOUND_H
 
+#include "global.h"
+
 void InitMapMusic(void);
 void MapMusicMain(void);
 void ResetMapMusic(void);

@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_GFX_SFX_UTIL
 #define GUARD_BATTLE_GFX_SFX_UTIL
 
+#include "global.h"
+
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
 u16 ChooseMoveAndTargetInBattlePalace(void);

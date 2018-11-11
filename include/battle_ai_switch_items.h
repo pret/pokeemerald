@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_AI_SWITCH_ITEMS_H
 #define GUARD_BATTLE_AI_SWITCH_ITEMS_H
 
+#include "global.h"
+
 enum
 {
     AI_ITEM_FULL_RESTORE = 1,

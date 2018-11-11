@@ -1,6 +1,8 @@
 #ifndef GUARD_RESET_SAVE_HEAP_H
 #define GUARD_RESET_SAVE_HEAP_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

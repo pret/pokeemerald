@@ -1,6 +1,8 @@
 #ifndef GUARD_TEXT_WINDOW_H
 #define GUARD_TEXT_WINDOW_H
 
+#include "global.h"
+
 #define WINDOW_FRAMES_COUNT 20
 
 struct TilesPal

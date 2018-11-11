@@ -36,11 +36,11 @@ static void DrawMetatile(s32 a, u16 *b, u16 c);
 static void CameraPanningCB_PanAhead(void);
 
 // IWRAM bss vars
-static IWRAM_DATA struct FieldCameraUnknownStruct gUnknown_03000E20;
-static IWRAM_DATA s16 gUnknown_03000E28;
-static IWRAM_DATA s16 gUnknown_03000E2A;
-static IWRAM_DATA u8 gUnknown_03000E2C;
-static IWRAM_DATA void (*gUnknown_03000E30)(void);
+static BSS_DATA struct FieldCameraUnknownStruct gUnknown_03000E20;
+static BSS_DATA s16 gUnknown_03000E28;
+static BSS_DATA s16 gUnknown_03000E2A;
+static BSS_DATA u8 gUnknown_03000E2C;
+static BSS_DATA void (*gUnknown_03000E30)(void);
 
 struct CameraObject gUnknown_03005DD0;
 u16 gUnknown_03005DE8;

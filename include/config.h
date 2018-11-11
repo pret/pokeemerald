@@ -1,6 +1,8 @@
 #ifndef GUARD_CONFIG_H
 #define GUARD_CONFIG_H
 
+#include "global.h"
+
 // In the Generation 3 games, Asserts were used in various debug builds.
 // Ruby/Sapphire and Emerald do not have these asserts while Fire Red
 // still has them in the ROM. This is because the developers forgot

@@ -1,6 +1,8 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
+#include "global.h"
+
 #define NUM_TILES_IN_PRIMARY 512
 #define NUM_TILES_TOTAL 1024
 #define NUM_METATILES_IN_PRIMARY 512

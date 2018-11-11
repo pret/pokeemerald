@@ -98,8 +98,8 @@ EWRAM_DATA static u8 sApprenticeId = 0;
 EWRAM_DATA static u16 sEasyChatSpeech[6] = {0};
 EWRAM_DATA static u8 sBattleOutcome = 0;
 
-IWRAM_DATA static u8 sRecordMixFriendLanguage;
-IWRAM_DATA static u8 sApprenticeLanguage;
+BSS_DATA static u8 sRecordMixFriendLanguage;
+BSS_DATA static u8 sApprenticeLanguage;
 
 // this file's functions
 static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2);

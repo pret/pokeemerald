@@ -1,6 +1,8 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
+#include "global.h"
+
 #define LAND_WILD_COUNT     12
 #define WATER_WILD_COUNT    5
 #define ROCK_WILD_COUNT     5

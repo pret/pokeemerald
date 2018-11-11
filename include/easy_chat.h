@@ -1,6 +1,8 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
+#include "global.h"
+
 void InitEasyChatPhrases(void);
 void easy_chat_input_maybe(void);
 u8 * CopyEasyChatWord(u8 *dest, u16 word);

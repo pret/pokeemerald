@@ -57,12 +57,7 @@ struct UnkStruct_860DD10
 };
 
 extern void sub_81B8558(void);
-extern u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
-extern u8 GetFrontierBrainMonEvs(u8, u8);
-extern u8 GetFrontierBrainMonNature(u8);
 extern void sub_81A4C30(void);
-extern u8 sub_81A3610(void);
-extern u16 GetFrontierBrainMonSpecies(u8);
 extern void ReducePlayerPartyToThree(void);
 
 extern u8 gUnknown_0203CEF8[];
@@ -78,7 +73,6 @@ extern u16 gBattle_BG3_Y;
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const struct SpriteTemplate gUnknown_0860CFA8;
 
 // text
 extern const u8 gTrainerClassNames[][0xD];

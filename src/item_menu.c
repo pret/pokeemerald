@@ -447,7 +447,6 @@ EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
 
 extern u8 *gPocketNamesStringsTable[];
-extern struct ListMenuTemplate gUnknown_08613F9C;
 extern const u8 gMoveNames[][0xD];
 extern u8* gReturnToXStringsTable[];
 extern u32 gUnknown_0203CE5E[];

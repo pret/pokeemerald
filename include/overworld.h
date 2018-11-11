@@ -1,6 +1,8 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
+#include "global.h"
+
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;

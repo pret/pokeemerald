@@ -391,11 +391,14 @@ SECTIONS {
         data/io_reg.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/link.o(.rodata.str1.4);
         src/link_rfu.o(.rodata);
+        src/link_rfu.o(.rodata.str1.4);
         src/rom_8011DC0.o(.rodata);
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
+        src/battle_controllers.o(.rodata);
         src/rom_8034C54.o(.rodata);
         src/data2b.o(.rodata);
         src/battle_data.o(.rodata);
@@ -407,6 +410,7 @@ SECTIONS {
         src/battle_controller_player.o(.rodata);
         data/smokescreen.o(.rodata);
         src/battle_controller_opponent.o(.rodata);
+        src/battle_ai_switch_items.o(.rodata);
         src/battle_controller_link_opponent.o(.rodata);
         src/pokemon.o(.rodata);
         src/trig.o(.rodata);
@@ -429,16 +433,19 @@ SECTIONS {
         src/event_object_movement.o(.rodata);
         src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
+        src/field_control_avatar.o(.rodata);
         src/coord_event_weather.o(.rodata);
         src/field_tasks.o(.rodata);
         src/reset_rtc_screen.o(.rodata);
         src/start_menu.o(.rodata);
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
+        src/sound.o(.rodata);
         data/fanfares.o(.rodata);
         src/battle_anim.o(.rodata);
         src/battle_anim_80A5C6C.o(.rodata);
         data/map_events.o(.rodata);
+        src/reshow_battle_screen.o(.rodata);
         data/battle_anim_80A9C70.o(.rodata);
         src/battle_anim_80A9C70.o(.rodata);
         src/title_screen.o(.rodata);
@@ -448,6 +455,7 @@ SECTIONS {
         src/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         src/field_effect.o(.rodata);
+        src/scanline_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
         data/pokedex.o(.rodata);
@@ -458,6 +466,7 @@ SECTIONS {
         src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
+        src/contest.o(.rodata);
         data/contest.o(.rodata);
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
@@ -496,6 +505,7 @@ SECTIONS {
         src/battle_anim_utility_funcs.o(.rodata);
         src/battle_intro.o(.rodata);
         src/bike.o(.rodata);
+        src/easy_chat.o(.rodata);
         data/easy_chat.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_old_man.o(.rodata);
@@ -530,6 +540,7 @@ SECTIONS {
         src/field_effect_helpers.o(.rodata);
         data/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
+        src/battle_anim_sound_tasks.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         data/battle_anim_815A0D4.o(.rodata);
         src/learn_move.o(.rodata);
@@ -577,6 +588,7 @@ SECTIONS {
         data/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
+        src/multiboot.o(.rodata);
         src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
         src/fossil_specials.o(.rodata);

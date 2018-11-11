@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_STORAGE_SYSTEM_H
 #define GUARD_POKEMON_STORAGE_SYSTEM_H
 
+#include "global.h"
+
 #define TOTAL_BOXES_COUNT       14
 #define IN_BOX_COUNT            30
 

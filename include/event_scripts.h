@@ -1,9 +1,7 @@
-//
-// Created by scott on 9/12/2017.
-//
-
 #ifndef GUARD_EVENT_SCRIPTS_H
 #define GUARD_EVENT_SCRIPTS_H
+
+#include "global.h"
 
 extern const u8 gUnknown_0823B4E8[];
 extern const u8 gUnknown_0823B5E9[];

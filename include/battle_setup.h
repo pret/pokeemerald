@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
+#include "global.h"
+
 enum
 {
     TRAINER_BATTLE_NORMAL,

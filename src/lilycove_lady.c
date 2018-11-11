@@ -1,7 +1,3 @@
-//
-// Created by Scott Norton on 9/19/17.
-//
-
 #include "global.h"
 #include "main.h"
 #include "overworld.h"

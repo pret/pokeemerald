@@ -1,6 +1,8 @@
 #ifndef GUARD_AGB_FLASH_H
 #define GUARD_AGB_FLASH_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations

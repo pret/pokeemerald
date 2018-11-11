@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINER_SEE_H
 #define GUARD_TRAINER_SEE_H
 
+#include "global.h"
+
 struct ApproachingTrainer
 {
     u8 eventObjectId;

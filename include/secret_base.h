@@ -1,6 +1,8 @@
 #ifndef GUARD_SECRET_BASE_H
 #define GUARD_SECRET_BASE_H
 
+#include "global.h"
+
 // Exported type declarations
 
 // Exported RAM declarations
