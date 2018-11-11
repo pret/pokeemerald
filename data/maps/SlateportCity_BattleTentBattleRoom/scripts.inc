@@ -42,7 +42,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	applymovement 3, SlateportCity_BattleTentBattleRoom_Movement_209A99
 	waitmovement 0
 	setvar VAR_0x8004, 11
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setobjectxyperm 2, 5, 1
 	removeobject 2
 	addobject 2

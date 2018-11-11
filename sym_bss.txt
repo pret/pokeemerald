@@ -70,7 +70,7 @@ gUnknown_03001204: @ 3001204
 	.include "src/battle_transition.o"
 	.include "src/pokemon_animation.o"
 	.include "src/recorded_battle.o"
-	.include "src/battle_factory.o"
+	.include "src/battle_factory_screen.o"
 
 gUnknown_03001288: @ 3001288
 	.space 0x4

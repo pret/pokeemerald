@@ -21,7 +21,7 @@ struct BattleFrontierTrainer
     u16 speechBefore[6];
     u16 speechWin[6];
     u16 speechLose[6];
-    const u16 *bfMonPool;
+    const u16 *monSets;
 };
 
 struct FacilityMon
@@ -52,7 +52,7 @@ u8 GetFrontierOpponentClass(u16 trainerId);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 void FillFrontierTrainerParty(u8 monsCount);
 void FillFrontierTrainersParties(u8 monsCount);
-u16 RandomizeFacilityTrainerMonId(u16 trainerId);
+u16 RandomizeFacilityTrainerMonSet(u16 trainerId);
 void FrontierSpeechToString(const u16 *words);
 void DoSpecialTrainerBattle(void);
 void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *record);

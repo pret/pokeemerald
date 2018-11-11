@@ -498,7 +498,9 @@ struct BattleStruct
     struct BattleTv tv;
     u8 notSureWhatFieldLol[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    u8 field_298[8];
+    s8 field_298[2];
+    s8 field_29A[2];
+    u16 field_29C[2];
     u8 field_2A0;
     u8 field_2A1;
     u8 field_2A2;

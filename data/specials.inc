@@ -248,8 +248,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_8195960
 	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
-	def_special sub_81A5238
-	def_special sub_81A5E74
+	def_special CallBattleArenaFunction
+	def_special CallBattleFactoryFunction
 	def_special sub_81A703C
 	def_special sub_81A8E7C
 	def_special StopMapMusic

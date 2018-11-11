@@ -73,7 +73,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_25752E:: @ 825752E
 	waitse
 	waitmovement 0
 	setvar VAR_0x8004, 6
-	special sub_81A5238
+	special CallBattleArenaFunction
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257C68, 4
 	closemessage
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
@@ -105,7 +105,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB:: @ 82575DB
 	waitse
 	waitmovement 0
 	setvar VAR_0x8004, 6
-	special sub_81A5238
+	special CallBattleArenaFunction
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CCE, 4
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257615:: @ 8257615
@@ -266,7 +266,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_25789A:: @ 825789A
 	waitmessage
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
-	special sub_81A5238
+	special CallBattleArenaFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1

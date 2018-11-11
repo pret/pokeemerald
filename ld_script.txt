@@ -262,9 +262,11 @@ SECTIONS {
         src/battle_frontier_1.o(.text);
         asm/battle_frontier_1.o(.text);
         src/menu.o(.text);
-        src/battle_factory.o(.text);
+        src/battle_factory_screen.o(.text);
         src/apprentice.o(.text);
         src/frontier_util.o(.text);
+        src/battle_arena.o(.text);
+        src/battle_factory.o(.text);
         asm/battle_frontier_2.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
@@ -566,10 +568,13 @@ SECTIONS {
         src/battle_dome.o(.rodata);
         data/battle_frontier_1.o(.rodata);
         src/menu.o(.rodata);
-        src/battle_factory.o(.rodata);
+        src/battle_factory_screen.o(.rodata);
         src/apprentice.o(.rodata);
         src/frontier_util.o(.rodata);
         data/battle_frontier_2.o(.rodata);
+        src/battle_arena.o(.rodata);
+        src/battle_factory.o(.rodata);
+        data/battle_frontier_3.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);
         src/save_location.o(.rodata);

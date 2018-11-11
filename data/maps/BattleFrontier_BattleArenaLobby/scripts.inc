@@ -32,11 +32,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A5238
+	special CallBattleArenaFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
-	special sub_81A5238
+	special CallBattleArenaFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
@@ -78,7 +78,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D2B:: @ 8255D2B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
-	special sub_81A5238
+	special CallBattleArenaFunction
 	call BattleFrontier_BattleArenaLobby_EventScript_255D59
 	msgbox BattleFrontier_BattleArenaLobby_Text_256A74, 4
 	closemessage
@@ -93,7 +93,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
 	special HealPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
-	special sub_81A5238
+	special CallBattleArenaFunction
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattleArenaLobby_EventScript_23E8E0
@@ -119,7 +119,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255DC0:: @ 8255DC0
 	waitmessage
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 1
-	special sub_81A5238
+	special CallBattleArenaFunction
 	playse SE_SAVE
 	waitse
 	setvar VAR_0x8004, 2
@@ -183,11 +183,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
-	special sub_81A5238
+	special CallBattleArenaFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
-	special sub_81A5238
+	special CallBattleArenaFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
