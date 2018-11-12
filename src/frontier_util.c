@@ -336,7 +336,8 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
     },
 	[FRONTIER_FACILITY_FACTORY] =
 	{
-        // Silver Symbol.
+        // Because Factory's pokemon are random, this facility's Brain also uses random pokemon.
+        // What is interesting, this team is actually the one Steven uses in the multi tag battle alongside the player.
         {
             {
 				.species = SPECIES_METANG,
@@ -363,7 +364,6 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
 				.moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
         },
-        // Gold Symbol.
         {
             {
 				.species = SPECIES_METANG,

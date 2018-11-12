@@ -27,18 +27,18 @@ BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
 BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
 	special HealPlayerParty
 	setvar VAR_0x8004, 27
-	special sub_81A703C
+	special CallBattlePikeFunction
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, 4
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
@@ -70,21 +70,21 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 3
-	special sub_81A703C
+	special CallBattlePikeFunction
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A703C
+	special CallBattlePikeFunction
 	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 27
-	special sub_81A703C
+	special CallBattlePikeFunction
 	message BattleFrontier_BattlePikeLobby_Text_25C1DF
 	waitmessage
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
@@ -106,14 +106,14 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	special LoadPlayerParty
 	special HealPlayerParty
 	setvar VAR_0x8004, 27
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
 	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
@@ -177,7 +177,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 28
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1
@@ -185,9 +185,9 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	setvar VAR_0x8006, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 26
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
@@ -198,7 +198,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	call BattleFrontier_BattlePikeLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	setvar VAR_0x8004, 26
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
 	special SavePlayerParty

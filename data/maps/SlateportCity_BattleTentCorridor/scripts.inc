@@ -59,9 +59,9 @@ SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 
 SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	setvar VAR_0x8004, 9
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 16
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, 4
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -143,7 +143,7 @@ SlateportCity_BattleTentCorridor_EventScript_209044:: @ 8209044
 	special SavePlayerParty
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	goto SlateportCity_BattleTentCorridor_EventScript_208F0D
 
 SlateportCity_BattleTentCorridor_Movement_209059: @ 8209059

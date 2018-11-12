@@ -486,7 +486,7 @@ gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
     .include "src/menu.o"
-    .include "src/battle_factory.o"
+    .include "src/battle_factory_screen.o"
 
 gUnknown_0203CE50: @ 203CE50
 	.space 0x4

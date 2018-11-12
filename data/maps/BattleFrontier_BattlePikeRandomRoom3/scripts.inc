@@ -12,7 +12,7 @@ BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E42A: @ 825E42A
 BattleFrontier_BattlePikeRandomRoom3_EventScript_25E43C:: @ 825E43C
 	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 6
-	special sub_81A703C
+	special CallBattlePikeFunction
 	end
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_25E44A:: @ 825E44A

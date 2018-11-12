@@ -32,11 +32,11 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D7D0:: @ 824D7D0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 0
-	special sub_8195960
+	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
-	special sub_8195960
+	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
@@ -78,7 +78,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D873:: @ 824D873
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 0
-	special sub_8195960
+	special CallBattlePalaceFunction
 	call BattleFrontier_BattlePalaceLobby_EventScript_24D8A1
 	msgbox BattleFrontier_BattlePalaceLobby_Text_24E0D8, 4
 	closemessage
@@ -93,7 +93,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D8A1:: @ 824D8A1
 	special HealPlayerParty
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
-	special sub_8195960
+	special CallBattlePalaceFunction
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattlePalaceLobby_EventScript_23E8E0
@@ -120,7 +120,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D908:: @ 824D908
 	waitmessage
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 1
-	special sub_8195960
+	special CallBattlePalaceFunction
 	playse SE_SAVE
 	waitse
 	setvar VAR_0x8004, 2
@@ -149,7 +149,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24D956:: @ 824D956
 BattleFrontier_BattlePalaceLobby_EventScript_24D968:: @ 824D968
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
-	special sub_8195960
+	special CallBattlePalaceFunction
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceLobby_EventScript_24D817
 	special SavePlayerParty
@@ -207,11 +207,11 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DA87:: @ 824DA87
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
-	special sub_8195960
+	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
-	special sub_8195960
+	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 1

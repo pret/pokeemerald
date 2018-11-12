@@ -53,6 +53,7 @@
 #include "pokeball.h"
 #include "party_menu.h"
 #include "battle_tower.h"
+#include "battle_arena.h"
 
 struct UnknownPokemonStruct4
 {
@@ -109,9 +110,7 @@ extern const u8 gText_Love[];
 // functions
 extern void sub_81B9150(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern void sub_81A56B4(void); // battle frontier 2
 extern u8 sub_81A9E28(void); // battle frontier 2
-extern void sub_81A56E8(u8 battlerId); // battle frontier 2
 extern void sub_81B8FB0(u8, u8); // party menu
 extern u8 pokemon_order_func(u8); // party menu
 extern bool8 InBattlePyramid(void);
@@ -3085,8 +3084,8 @@ static void BattleStartClearSetData(void)
 
     gBattleResults.shinyWildMon = IsMonShiny(&gEnemyParty[0]);
 
-    gBattleStruct->field_2A0 = 0;
-    gBattleStruct->field_2A1 = 0;
+    gBattleStruct->arenaLostPlayerMons = 0;
+    gBattleStruct->arenaLostOpponentMons = 0;
 }
 
 void SwitchInClearSetData(void)
@@ -3423,7 +3422,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-            sub_81A56B4();
+            BattleArena_InitPoints();
     }
     gBattleMainFunc = BattleIntroDrawPartySummaryScreens;
 }
@@ -5479,7 +5478,7 @@ static void HandleAction_UseMove(void)
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        sub_81A56E8(gBattlerAttacker);
+        BattleArena_AddMindPoints(gBattlerAttacker);
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }

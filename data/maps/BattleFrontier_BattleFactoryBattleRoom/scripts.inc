@@ -69,7 +69,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
 	setvar VAR_0x8004, 11
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	removeobject 2
 	setobjectxyperm 2, 7, 1
 	addobject 2
@@ -80,7 +80,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C
 	setvar VAR_0x8004, 5
-	special sub_8195960
+	special CallBattlePalaceFunction
 	lockall
 	msgbox gStringVar4, 4
 	waitmessage
@@ -109,14 +109,14 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25AEF8:: @ 825AEF8
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF0F:: @ 825AF0F
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	compare VAR_RESULT, 9999
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E
 	addvar VAR_RESULT, 1
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E:: @ 825AF3E
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_241EBA
@@ -235,24 +235,24 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105:: @ 825B105
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	compare VAR_RESULT, 9999
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E
 	addvar VAR_RESULT, 1
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	compare VAR_RESULT, 9999
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc

@@ -2549,7 +2549,7 @@ static void InitDomeTrainers(void)
     s32 species[3];
     s32 monTypesBits, monTypesCount;
     s32 trainerId;
-    s32 monTournamentId;
+    s32 monSetId;
     u16 *statSums;
     s32 *statValues;
     u8 ivs = 0;
@@ -2612,20 +2612,20 @@ static void InitDomeTrainers(void)
             // Make sure the mon is valid.
             do
             {
-                monTournamentId = RandomizeFacilityTrainerMonId(trainerId);
+                monSetId = RandomizeFacilityTrainerMonSet(trainerId);
                 for (k = 0; k < j; k++)
                 {
-                    s32 checkingMonId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
-                    if (checkingMonId == monTournamentId
-                        || species[0] == gFacilityTrainerMons[monTournamentId].species
-                        || species[1] == gFacilityTrainerMons[monTournamentId].species
-                        || gFacilityTrainerMons[checkingMonId].itemTableId == gFacilityTrainerMons[monTournamentId].itemTableId)
+                    s32 checkingMonSetId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
+                    if (checkingMonSetId == monSetId
+                        || species[0] == gFacilityTrainerMons[monSetId].species
+                        || species[1] == gFacilityTrainerMons[monSetId].species
+                        || gFacilityTrainerMons[checkingMonSetId].itemTableId == gFacilityTrainerMons[monSetId].itemTableId)
                         break;
                 }
             } while (k != j);
 
-            gSaveBlock2Ptr->frontier.domeMonIds[i][j] = monTournamentId;
-            species[j] = gFacilityTrainerMons[monTournamentId].species;
+            gSaveBlock2Ptr->frontier.domeMonIds[i][j] = monSetId;
+            species[j] = gFacilityTrainerMons[monSetId].species;
         }
 
         gSaveBlock2Ptr->frontier.domeTrainers[i].isEliminated = 0;
@@ -2822,7 +2822,7 @@ static void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentM
     u8 happiness = 0xFF;
     u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
     u8 level = SetFacilityPtrsGetLevel();
-    CreateMonWithEVSpreadPersonalityOTID(&gEnemyParty[monPartyId],
+    CreateMonWithEVSpreadNatureOTID(&gEnemyParty[monPartyId],
                                          gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[tournamentTrainerId][tournamentMonId]].species,
                                          level,
                                          gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[tournamentTrainerId][tournamentMonId]].nature,
@@ -6137,7 +6137,7 @@ static void sub_8194F58(void)
     s32 species[3];
     s32 monTypesBits;
     s32 trainerId;
-    s32 monTournamentId;
+    s32 monSetId;
     u8 lvlMode;
     u16 *statSums;
     s32 *statValues;
@@ -6184,20 +6184,20 @@ static void sub_8194F58(void)
             // Make sure the mon is valid.
             do
             {
-                monTournamentId = RandomizeFacilityTrainerMonId(trainerId);
+                monSetId = RandomizeFacilityTrainerMonSet(trainerId);
                 for (k = 0; k < j; k++)
                 {
                     s32 checkingMonId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
-                    if (checkingMonId == monTournamentId
-                        || species[0] == gFacilityTrainerMons[monTournamentId].species
-                        || species[1] == gFacilityTrainerMons[monTournamentId].species
-                        || gFacilityTrainerMons[checkingMonId].itemTableId == gFacilityTrainerMons[monTournamentId].itemTableId)
+                    if (checkingMonId == monSetId
+                        || species[0] == gFacilityTrainerMons[monSetId].species
+                        || species[1] == gFacilityTrainerMons[monSetId].species
+                        || gFacilityTrainerMons[checkingMonId].itemTableId == gFacilityTrainerMons[monSetId].itemTableId)
                         break;
                 }
             } while (k != j);
 
-            gSaveBlock2Ptr->frontier.domeMonIds[i][j] = monTournamentId;
-            species[j] = gFacilityTrainerMons[monTournamentId].species;
+            gSaveBlock2Ptr->frontier.domeMonIds[i][j] = monSetId;
+            species[j] = gFacilityTrainerMons[monSetId].species;
         }
         gSaveBlock2Ptr->frontier.domeTrainers[i].isEliminated = 0;
         gSaveBlock2Ptr->frontier.domeTrainers[i].eliminatedAt = 0;

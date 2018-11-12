@@ -12,9 +12,8 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "battle_pike.h"
 #include "constants/species.h"
-
-extern bool8 InBattlePike(void);
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
 {

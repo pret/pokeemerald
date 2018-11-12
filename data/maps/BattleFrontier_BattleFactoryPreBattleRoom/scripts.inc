@@ -32,23 +32,23 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	compare VAR_0x8006, 2
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69
 	setvar VAR_0x8004, 13
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 12
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 14
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setorcopyvar VAR_0x8005, VAR_RESULT
 	setvar VAR_0x8004, 15
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A1C8, 4
 	fadescreen 1
 	setvar VAR_0x8004, 8
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 6
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	waitstate
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
@@ -66,9 +66,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	setvar VAR_0x8004, 9
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 16
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D, 4
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -165,12 +165,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D66:: @ 8259D66
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D98:: @ 8259D98
 	setvar VAR_0x8004, 12
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 14
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setorcopyvar VAR_0x8005, VAR_RESULT
 	setvar VAR_0x8004, 15
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004
@@ -183,12 +183,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D98:: @ 8259D98
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2:: @ 8259DF2
 	fadescreen 1
 	setvar VAR_0x8004, 7
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	waitstate
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 	setvar VAR_0x8004, 8
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB6C, 4
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 
@@ -227,7 +227,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47:: @ 8259E47
 	waitmessage
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -239,7 +239,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	special SavePlayerParty
 	setvar VAR_0x8004, 10
 	setvar VAR_0x8005, 0
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
@@ -381,39 +381,39 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004:: @ 825A004
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068:: @ 825A068
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AAE6, 4
+	msgbox Text_StyleUnrestrained, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A071:: @ 825A071
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A9CE, 4
+	msgbox Text_StyleTotalPreparation, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A07A:: @ 825A07A
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A8D9, 4
+	msgbox Text_StyleSlowAndSteady, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A083:: @ 825A083
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A912, 4
+	msgbox Text_StyleEndurance, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A08C:: @ 825A08C
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A94C, 4
+	msgbox Text_StyleHighRisk, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A095:: @ 825A095
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AA16, 4
+	msgbox Text_StyleWeakenFoe, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A09E:: @ 825A09E
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AAA7, 4
+	msgbox Text_StyleImpossibleToPredict, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0A7:: @ 825A0A7
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A98C, 4
+	msgbox Text_StyleDependsOnFlow, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B0:: @ 825A0B0
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AA5A, 4
+	msgbox Text_StyleFlexible, 4
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9:: @ 825A0B9
@@ -642,39 +642,39 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_25A893: @ 825A893
 	.string "The TRAINER appears to have no clear\n"
 	.string "favorites when it comes to type.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A8D9: @ 825A8D9
+Text_StyleSlowAndSteady: @ 825A8D9
 	.string "The favorite battle style appears to\n"
 	.string "be slow and steady.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A912: @ 825A912
+Text_StyleEndurance: @ 825A912
 	.string "The favorite battle style appears to\n"
 	.string "be one of endurance.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A94C: @ 825A94C
+Text_StyleHighRisk: @ 825A94C
 	.string "The favorite battle style appears to\n"
 	.string "be high risk, high return.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A98C: @ 825A98C
+Text_StyleDependsOnFlow: @ 825A98C
 	.string "The favorite battle style appears to\n"
 	.string "depend on the battle’s flow.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A9CE: @ 825A9CE
+Text_StyleTotalPreparation: @ 825A9CE
 	.string "The favorite battle style appears to\n"
 	.string "be one based on total preparation.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AA16: @ 825AA16
+Text_StyleWeakenFoe: @ 825AA16
 	.string "The favorite battle style appears\n"
 	.string "to be weakening the foe to start.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AA5A: @ 825AA5A
+Text_StyleFlexible: @ 825AA5A
 	.string "The favorite battle style appears to\n"
 	.string "be flexibly adaptable to the situation.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AAA7: @ 825AAA7
+Text_StyleImpossibleToPredict: @ 825AAA7
 	.string "The favorite battle style appears to\n"
 	.string "be impossible to predict.$"
 
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AAE6: @ 825AAE6
+Text_StyleUnrestrained: @ 825AAE6
 	.string "The favorite battle style appears to\n"
 	.string "be free-spirited and unrestrained.$"
 

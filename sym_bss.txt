@@ -72,27 +72,9 @@ gUnknown_03001204: @ 3001204
 	.include "src/battle_transition.o"
 	.include "src/pokemon_animation.o"
 	.include "src/recorded_battle.o"
+	.include "src/battle_factory_screen.o"
 	.include "src/battle_factory.o"
-
-	@ battle_frontier_2
-gUnknown_03001288: @ 3001288
-	.space 0x4
-
-gUnknown_0300128C: @ 300128C
-	.space 0x1
-
-gUnknown_0300128D: @ 300128D
-	.space 0x1
-
-gUnknown_0300128E: @ 300128E
-	.space 0x2
-
-gUnknown_03001290: @ 3001290
-	.space 0x4
-
-gUnknown_03001294: @ 3001294
-	.space 0x4
-
+	.include "src/battle_pike.o"
 	.include "src/battle_tent.o"
 	.include "src/multiboot.o"
 

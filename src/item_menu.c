@@ -47,8 +47,7 @@
 #include "menu_helpers.h"
 #include "window.h"
 #include "apprentice.h"
-
-extern bool8 InBattlePike(void);
+#include "battle_pike.h"
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void CB2_Bag(void);

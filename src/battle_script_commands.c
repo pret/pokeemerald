@@ -43,6 +43,8 @@
 #include "battle_setup.h"
 #include "overworld.h"
 #include "party_menu.h"
+#include "battle_arena.h"
+#include "battle_pike.h"
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -54,20 +56,15 @@ extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern const u8* const gBattleScriptsForMoveEffects[];
 
 // functions
-extern void sub_81A5718(u8 battlerId); // battle frontier 2
-extern void sub_81A56B4(void); // battle frontier 2
 extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon* party, u8 monPartyId, u8 monCount, void (*callback)(void), u16 move); // pokemon summary screen
 extern u8 sub_81C1B94(void); // pokemon summary screen
 extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
 extern void sub_81D3640(u8 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
 extern void sub_81D3784(u8 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
 extern u8* GetMonNickname(struct Pokemon* mon, u8* dst); // party_menu
-extern u8 sub_81A5258(u8* arg0); // battle frontier 2
-extern void sub_81A5BF8(void); // battle frontier 2
-extern void sub_81A5D44(void); // battle frontier 2
+extern u8 BattleArena_ShowJudgmentWindow(u8* arg0); // battle frontier 2
 extern void sub_81B8E80(u8 battlerId, u8, u8); // party menu
 extern bool8 sub_81B1250(void); // ?
-extern bool8 InBattlePike(void);
 extern bool8 InBattlePyramid(void);
 extern u16 GetBattlePyramidPickupItemId(void);
 extern u8 sub_813B21C(void);
@@ -3549,7 +3546,7 @@ static void atk24(void)
         for (i = 0; i < 6; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
-             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->field_2A0 & gBitTable[i])))
+             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
             {
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
             }
@@ -3562,7 +3559,7 @@ static void atk24(void)
     for (HP_count = 0, i = 0; i < 6; i++)
     {
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
-            && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->field_2A1 & gBitTable[i])))
+            && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
         {
             HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
         }
@@ -4243,7 +4240,7 @@ static void atk3C_return(void)
 static void atk3D_end(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        sub_81A5718(gBattlerAttacker);
+        BattleArena_AddSkillPoints(gBattlerAttacker);
 
     gMoveResultFlags = 0;
     gActiveBattler = 0;
@@ -5000,7 +4997,7 @@ static void atk4E_switchinanim(void)
     gBattlescriptCurrInstr += 3;
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        sub_81A56B4();
+        BattleArena_InitPoints();
 }
 
 static void atk4F_jumpifcantswitch(void)
@@ -6697,34 +6694,34 @@ static void atk76_various(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = sUnknown_0831C4F8[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)];
         }
         break;
-    case 9:
-        i = sub_81A5258(gBattleCommunication);
+    case VARIOUS_ARENA_JUDGMENT_WINDOW:
+        i = BattleArena_ShowJudgmentWindow(&gBattleCommunication[0]);
         if (i == 0)
             return;
 
         gBattleCommunication[1] = i;
         break;
-    case 10:
+    case VARIOUS_ARENA_OPPONENT_MON_LOST:
         gBattleMons[1].hp = 0;
         gHitMarker |= HITMARKER_FAINTED(1);
-        gBattleStruct->field_2A1 |= gBitTable[gBattlerPartyIndexes[1]];
+        gBattleStruct->arenaLostOpponentMons |= gBitTable[gBattlerPartyIndexes[1]];
         gDisableStructs[1].truantUnknownBit = 1;
         break;
-    case 11:
+    case VARIOUS_ARENA_PLAYER_MON_LOST:
         gBattleMons[0].hp = 0;
         gHitMarker |= HITMARKER_FAINTED(0);
         gHitMarker |= HITMARKER_x400000;
-        gBattleStruct->field_2A0 |= gBitTable[gBattlerPartyIndexes[0]];
+        gBattleStruct->arenaLostPlayerMons |= gBitTable[gBattlerPartyIndexes[0]];
         gDisableStructs[0].truantUnknownBit = 1;
         break;
-    case 12:
+    case VARIOUS_ARENA_BOTH_MONS_LOST:
         gBattleMons[0].hp = 0;
         gBattleMons[1].hp = 0;
         gHitMarker |= HITMARKER_FAINTED(0);
         gHitMarker |= HITMARKER_FAINTED(1);
         gHitMarker |= HITMARKER_x400000;
-        gBattleStruct->field_2A0 |= gBitTable[gBattlerPartyIndexes[0]];
-        gBattleStruct->field_2A1 |= gBitTable[gBattlerPartyIndexes[1]];
+        gBattleStruct->arenaLostPlayerMons |= gBitTable[gBattlerPartyIndexes[0]];
+        gBattleStruct->arenaLostOpponentMons |= gBitTable[gBattlerPartyIndexes[1]];
         gDisableStructs[0].truantUnknownBit = 1;
         gDisableStructs[1].truantUnknownBit = 1;
         break;
@@ -6738,11 +6735,11 @@ static void atk76_various(void)
     case 15:
         sub_81A5D44();
         break;
-    case 16:
+    case VARIOUS_ARENA_JUDGMENT_STRING:
         BattleStringExpandPlaceholdersToDisplayedString(gRefereeStringsTable[gBattlescriptCurrInstr[1]]);
         BattlePutTextOnWindow(gDisplayedStringBattle, 0x16);
         break;
-    case 17:
+    case VARIOUS_ARENA_WAIT_STRING:
         if (IsTextPrinterActive(0x16))
             return;
         break;
@@ -6775,8 +6772,8 @@ static void atk76_various(void)
     case VARIOUS_VOLUME_UP:
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         break;
-    case 23:
-        gBattleStruct->field_2A2 |= gBitTable[gActiveBattler];
+    case VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT:
+        gBattleStruct->alreadyStatusedMoveAttempt |= gBitTable[gActiveBattler];
         break;
     case 24:
         if (sub_805725C(gActiveBattler))

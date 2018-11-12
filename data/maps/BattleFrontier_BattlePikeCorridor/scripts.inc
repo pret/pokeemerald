@@ -14,10 +14,10 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 20
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 24
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	applymovement 255, BattleFrontier_BattlePikeCorridor_Movement_25C80B
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0

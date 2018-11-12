@@ -34,8 +34,7 @@
 #include "constants/songs.h"
 #include "field_player_avatar.h"
 #include "battle_pyramid_bag.h"
-
-extern bool8 InBattlePike(void);
+#include "battle_pike.h"
 
 // Menu actions
 enum
