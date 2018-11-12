@@ -179,7 +179,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_EAST;
 }
 
-int sub_809C014(struct FieldInput *input)
+int ProcessPlayerFieldInput(struct FieldInput *input)
 {
     struct MapPosition position;
     u8 playerDirection;

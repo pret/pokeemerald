@@ -77,14 +77,14 @@ struct PairedPalettes
 
 struct LockedAnimEventObjects
 {
-    u8 eventObjectIds[NUM_EVENT_OBJECTS];
+    u8 eventObjectIds[EVENT_OBJECTS_COUNT];
     u8 count;
 };
 
 extern const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[];
 extern const u8 gReflectionEffectPaletteMap[];
 
-void sub_808D438(void);
+void ResetEventObjects(void);
 u8 GetMoveDirectionAnimNum(u8);
 u8 GetEventObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetEventObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
@@ -182,9 +182,7 @@ u8 ZCoordToPriority(u8);
 void EventObjectUpdateZCoord(struct EventObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 bool8 IsZCoordMismatchAt(u8, s16, s16);
-void UpdateEventObjectSpriteSubpriorityAndVisibility(struct Sprite *);
 void UnfreezeEventObject(struct EventObject *);
-void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
 u8 FindLockedEventObjectIndex(struct EventObject *);
 bool8 obj_npc_ministep(struct Sprite *sprite);
 bool8 sub_80976EC(struct Sprite *sprite);

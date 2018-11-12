@@ -1,8 +1,6 @@
 #ifndef GUARD_GLOBAL_BERRY_H
 #define GUARD_GLOBAL_BERRY_H
 
-#include "global.h"
-
 #define BERRY_NAME_LENGTH 6
 #define BERRY_ITEM_EFFECT_COUNT 18
 

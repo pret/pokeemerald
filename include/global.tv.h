@@ -1,8 +1,6 @@
 #ifndef GUARD_GLOBAL_TV_H
 #define GUARD_GLOBAL_TV_H
 
-#include "global.h"
-
 enum
 {
     TVSHOW_OFF_AIR,

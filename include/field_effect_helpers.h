@@ -20,7 +20,7 @@ u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s
 void sub_8155F80(struct Sprite*);
 void UpdateShadowFieldEffect(struct Sprite*);
 void UpdateTallGrassFieldEffect(struct Sprite*);
-void sub_81561D0(struct Sprite*);
+void WaitFieldEffectSpriteAnim(struct Sprite*);
 void UpdateAshFieldEffect(struct Sprite*);
 void UpdateSurfBlobFieldEffect(struct Sprite*);
 void sub_8156194(struct Sprite*);

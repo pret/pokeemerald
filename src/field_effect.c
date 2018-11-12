@@ -1,10 +1,9 @@
 #include "global.h"
-#include "field_effect.h"
-#include "trainer_pokemon_sprites.h"
 #include "decompress.h"
-#include "field_camera.h"
-#include "field_effect_helpers.h"
 #include "event_object_movement.h"
+#include "field_camera.h"
+#include "field_effect.h"
+#include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
@@ -22,8 +21,10 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -322,9 +323,9 @@ bool8 (*const gUnknown_0855C460[])(struct Task *, struct EventObject *, struct S
     sub_80B7BF4,
 };
 
-void (*const gUnknown_0855C474[])(struct Task *) = {
-    sub_80B7D14,
-    sub_80B7D34,
+void (*const gEscapeRopeFieldEffectFuncs[])(struct Task *) = {
+    EscapeRopeFieldEffect_Step0,
+    EscapeRopeFieldEffect_Step1,
 };
 
 // .text
@@ -1686,7 +1687,7 @@ bool8 sub_80B7478(struct Task *task, struct EventObject *eventObject)
     return FALSE;
 }
 
-void Task_Dive(u8);
+static void Task_Dive(u8);
 extern int dive_warp(struct MapPosition *, u16);
 
 bool8 FldEff_UseDive(void)
@@ -1999,7 +2000,7 @@ bool8 sub_80B7BCC(struct Task *task, struct EventObject *eventObject, struct Spr
     return FALSE;
 }
 
-void sub_80B7CE4(u8);
+static void DoEscapeRopeFieldEffect(u8);
 void mapldr_080859D4(void);
 
 bool8 sub_80B7BF4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
@@ -2032,29 +2033,29 @@ void sub_80B7CAC(struct Sprite *sprite)
     }
 }
 
-void sub_80B7CC8(void)
+void StartEscapeRopeFieldEffect(void)
 {
     ScriptContext2_Enable();
     FreezeEventObjects();
-    CreateTask(sub_80B7CE4, 0x50);
+    CreateTask(DoEscapeRopeFieldEffect, 0x50);
 }
 
-void sub_80B7CE4(u8 taskId)
+static void DoEscapeRopeFieldEffect(u8 taskId)
 {
-    gUnknown_0855C474[gTasks[taskId].data[0]](&gTasks[taskId]);
+    gEscapeRopeFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void sub_80B7D14(struct Task *task)
+static void EscapeRopeFieldEffect_Step0(struct Task *task)
 {
     task->data[0]++;
     task->data[14] = 64;
     task->data[15] = GetPlayerFacingDirection();
 }
 
-void sub_80B7D34(struct Task *task)
+static void EscapeRopeFieldEffect_Step1(struct Task *task)
 {
     struct EventObject *eventObject;
-    u8 spinDirections[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] =  {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
         music_something();
@@ -2070,7 +2071,7 @@ void sub_80B7D34(struct Task *task)
             WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
-            DestroyTask(FindTaskIdByFunc(sub_80B7CE4));
+            DestroyTask(FindTaskIdByFunc(DoEscapeRopeFieldEffect));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
             EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(spinDirections[eventObject->facingDirection]));
@@ -2905,7 +2906,7 @@ void sub_80B8E14(struct Task *task)
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         sub_808C114();
-        EventObjectSetHeldMovement(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
@@ -3210,7 +3211,7 @@ void sub_80B9204(struct Task *task)
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
         sub_808C114();
-        EventObjectSetHeldMovement(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
@@ -3250,7 +3251,7 @@ void sub_80B92F8(struct Task *task)
         task->data[0]++;
         task->data[2] = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], 0x02);
+        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], MOVEMENT_ACTION_FACE_LEFT);
     }
 }
 
@@ -3275,7 +3276,7 @@ void sub_80B9390(struct Task *task)
         EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(0x03));
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
         eventObject->inanimate = 1;
-        EventObjectSetHeldMovement(eventObject, 0x48);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
         if (task->data[15] & 0x08)
         {
             DestroySprite(&gSprites[eventObject->fieldEffectSpriteId]);
@@ -3585,7 +3586,7 @@ void sub_80B9978(struct Task *task)
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;
         sub_808C114();
-        EventObjectSetHeldMovement(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
@@ -3791,8 +3792,8 @@ const struct SpriteTemplate gUnknown_0855C5EC = {
 void sub_80B9D24(struct Sprite* sprite)
 {
     int i;
-    int xPos = (s16)gUnknown_03005DEC + sprite->pos1.x + sprite->pos2.x;
-    int yPos = (s16)gUnknown_03005DE8 + sprite->pos1.y + sprite->pos2.y - 4;
+    int xPos = (s16)gTotalCameraPixelOffsetX + sprite->pos1.x + sprite->pos2.x;
+    int yPos = (s16)gTotalCameraPixelOffsetY + sprite->pos1.y + sprite->pos2.y - 4;
 
     for (i = 0; i < 4; i++)
     {
