@@ -84,7 +84,7 @@ static void UpdateEventObjectVisibility(struct EventObject *, struct Sprite *);
 static void MakeObjectTemplateFromEventObjectTemplate(struct EventObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 static void GetEventObjectMovingCameraOffset(s16 *, s16 *);
 static struct EventObjectTemplate *GetEventObjectTemplateByLocalIdAndMap(u8, u8, u8);
-static void sub_808E894(u16);
+static void LoadEventObjectPalette(u16);
 static void RemoveEventObjectIfOutsideView(struct EventObject *);
 static void sub_808E1B8(u8, s16, s16);
 static void SetPlayerAvatarEventObjectIdAndObjectId(u8, u8);
@@ -1644,7 +1644,7 @@ u8 AddPseudoEventObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
     MakeObjectTemplateFromEventObjectGraphicsInfo(graphicsId, callback, spriteTemplate, &subspriteTables);
     if (spriteTemplate->paletteTag != 0xFFFF)
     {
-        sub_808E894(spriteTemplate->paletteTag);
+        LoadEventObjectPalette(spriteTemplate->paletteTag);
     }
     spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
     free(spriteTemplate);
@@ -2100,23 +2100,23 @@ void FreeAndReserveObjectSpritePalettes(void)
     gReservedSpritePaletteCount = 12;
 }
 
-static void sub_808E894(u16 paletteTag)
+static void LoadEventObjectPalette(u16 paletteTag)
 {
-    u16 paletteSlot = FindEventObjectPaletteIndexByTag(paletteTag);
+    u16 i = FindEventObjectPaletteIndexByTag(paletteTag);
 
-    if (paletteSlot != EVENT_OBJ_PAL_TAG_NONE) // always true
+    if (i != EVENT_OBJ_PAL_TAG_NONE) // always true
     {
-        sub_808E8F4(&sEventObjectSpritePalettes[paletteSlot]);
+        sub_808E8F4(&sEventObjectSpritePalettes[i]);
     }
 }
 
-void sub_808E8C0(u16 *paletteTags)
+void Unused_LoadEventObjectPaletteSet(u16 *paletteTags)
 {
     u8 i;
 
     for (i = 0; paletteTags[i] != EVENT_OBJ_PAL_TAG_NONE; i++)
     {
-        sub_808E894(paletteTags[i]);
+        LoadEventObjectPalette(paletteTags[i]);
     }
 }
 
