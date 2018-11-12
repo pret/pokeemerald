@@ -102,7 +102,7 @@ static bool8 sub_80F0580(TVShow *tv1, TVShow *tv2, u8 idx);
 static bool8 sub_80F05E8(TVShow *tv1, TVShow *tv2, u8 idx);
 static bool8 sub_80F0668(TVShow *tv1, TVShow *tv2, u8 idx);
 void SetTvShowInactive(u8 showIdx);
-static void sub_80F0B24(u16 species, u8 showIdx);
+void sub_80F0B24(u16 species, u8 showIdx);
 static void sub_80F0D60(PokeNews *player1, PokeNews *player2, PokeNews *player3, PokeNews *player4);
 static void sub_80F0EEC(void);
 static void sub_80F0F24(void);
@@ -4371,7 +4371,7 @@ void SetTvShowInactive(u8 showIdx)
     gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
 }
 
-static void sub_80F0B24(u16 species, u8 showIdx)
+void sub_80F0B24(u16 species, u8 showIdx)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0)
     {

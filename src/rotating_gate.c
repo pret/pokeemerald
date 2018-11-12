@@ -519,11 +519,11 @@ static const u8 sRotatingGate_RotationInfoEast[4 * 4] =
 
 // These tables describe the relative coordinate positions the arms
 // must move through in order to be rotated.
-static const struct Coords8 sRotatingGate_ArmPositionsClockwiseRotation[] = {
+const struct Coords8 sRotatingGate_ArmPositionsClockwiseRotation[] = {
     { 0, -1 }, { 1, -2 }, { 0, 0 }, { 1, 0 }, { -1, 0 }, { -1, 1 }, { -1, -1 }, { -2, -1 },
 };
 
-static const struct Coords8 sRotatingGate_ArmPositionsAntiClockwiseRotation[] = {
+const struct Coords8 sRotatingGate_ArmPositionsAntiClockwiseRotation[] = {
     { -1, -1 }, { -1, -2 }, { 0, -1 }, { 1, -1 }, { 0, 0 }, { 0, 1 }, { -1, 0 }, { -2, 0 },
 };
 
@@ -648,7 +648,7 @@ static void RotatingGate_ResetAllGateOrientations(void)
     }
 }
 
-static s32 RotatingGate_GetGateOrientation(u8 gateId)
+s32 RotatingGate_GetGateOrientation(u8 gateId)
 {
     return ((u8 *)GetVarPointer(VAR_TEMP_0))[gateId];
 }

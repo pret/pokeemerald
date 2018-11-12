@@ -76,8 +76,8 @@ static bool8 MovementType_Hidden_Callback(struct EventObject *, struct Sprite *)
 static void CreateReflectionEffectSprites(void);
 static u8 GetEventObjectIdByLocalId(u8);
 static u8 GetEventObjectIdByLocalIdAndMapInternal(u8, u8, u8);
-static bool8 GetAvailableEventObjectId(u16, u8, u8, u8 *);
-static void SetEventObjectDynamicGraphicsId(struct EventObject *);
+bool8 GetAvailableEventObjectId(u16, u8, u8, u8 *);
+void SetEventObjectDynamicGraphicsId(struct EventObject *);
 static void RemoveEventObjectInternal(struct EventObject *);
 static u16 GetEventObjectFlagIdByEventObjectId(u8);
 static void UpdateEventObjectVisibility(struct EventObject *, struct Sprite *);
@@ -1066,7 +1066,7 @@ const u8 gUnknown_0850DC3F[][4] = {
 
 // Code
 
-static void ClearEventObject(struct EventObject *eventObject)
+void ClearEventObject(struct EventObject *eventObject)
 {
     *eventObject = (struct EventObject){};
     eventObject->localId = 0xFF;
@@ -1417,7 +1417,7 @@ u8 Unref_TryInitLocalEventObject(u8 localId)
     return EVENT_OBJECTS_COUNT;
 }
 
-static bool8 GetAvailableEventObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *eventObjectId)
+bool8 GetAvailableEventObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *eventObjectId)
 // Looks for an empty slot.
 // Returns FALSE and the location of the available slot
 // in *eventObjectId.
@@ -2015,7 +2015,7 @@ const struct EventObjectGraphicsInfo *GetEventObjectGraphicsInfo(u8 graphicsId)
     return gEventObjectGraphicsInfoPointers[graphicsId];
 }
 
-static void SetEventObjectDynamicGraphicsId(struct EventObject *eventObject)
+void SetEventObjectDynamicGraphicsId(struct EventObject *eventObject)
 {
     if (eventObject->graphicsId >= SPRITE_VAR)
     {

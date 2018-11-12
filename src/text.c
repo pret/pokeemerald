@@ -19,10 +19,10 @@ extern int GetPlayerTextSpeed();
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
 
-static u16 gFontHalfRowLookupTable[0x51];
-static u16 gLastTextBgColor;
-static u16 gLastTextFgColor;
-static u16 gLastTextShadowColor;
+BSS_DATA u16 gFontHalfRowLookupTable[0x51];
+BSS_DATA u16 gLastTextBgColor;
+BSS_DATA u16 gLastTextFgColor;
+BSS_DATA u16 gLastTextShadowColor;
 
 const struct FontInfo *gFonts;
 u8 gUnknown_03002F84;
@@ -252,6 +252,8 @@ u32 RenderFont(struct TextPrinter *textPrinter)
     }
 }
 
+#define ADD_COLOR(dest, a, b, c, d) *(dest)++ = ((a) << 12) | ((b) << 8) | ((c) << 4) | ((d) << 0)
+
 #ifdef NONMATCHING
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
 {
@@ -261,113 +263,135 @@ void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
     gLastTextFgColor = fgColor;
     gLastTextShadowColor = shadowColor;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (bgColor << 4) | bgColor;
+    // r0: u8 fgColor
+    // r1: u8 bgColor
+    // r2: u8 shadowColor
+    // r3: u16 * current
+    // r5: int (bgColor << 12)
+    // r6: int (fgColor << 12)
+    // r8: int (shadowColor << 12)
+    // sp+0: int (bgColor << 8)
+    // r9: int (bgColor << 4)
+    // sp+4: int ((bgColor << 8) | (bgColor << 4))
+    // r10: int (fgColor << 8)
+    // sp+8: int ((fgColor << 8) | (bgColor << 4))
+    // r12: int (shadowColor << 8)
+    // sp+C: int ((shadowColor << 8) | (bgColor << 4))
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (bgColor << 4) | bgColor;
+    ADD_COLOR(current, bgColor, bgColor, bgColor, bgColor);
+    ADD_COLOR(current, fgColor, bgColor, bgColor, bgColor);
+    ADD_COLOR(current, shadowColor, bgColor, bgColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (bgColor << 4) | bgColor;
+    ADD_COLOR(current, bgColor, fgColor, bgColor, bgColor);
+    ADD_COLOR(current, fgColor, fgColor, bgColor, bgColor);
+    ADD_COLOR(current, shadowColor, fgColor, bgColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (fgColor << 4) | bgColor;
+    ADD_COLOR(current, bgColor, shadowColor, bgColor, bgColor);
+    ADD_COLOR(current, fgColor, shadowColor, bgColor, bgColor);
+    ADD_COLOR(current, shadowColor, shadowColor, bgColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (fgColor << 4) | bgColor;
+    // r9: int (fgColor << 4) overwrite
+    // sp+10: int ((bgColor << 8) | (fgColor << 4))
+    ADD_COLOR(current, bgColor, bgColor, fgColor, bgColor);
+    ADD_COLOR(current, fgColor, bgColor, fgColor, bgColor);
+    ADD_COLOR(current, shadowColor, bgColor, fgColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (fgColor << 4) | bgColor;
+    // sp+14: int ((fgColor << 8) | (fgColor << 4))
+    ADD_COLOR(current, bgColor, fgColor, fgColor, bgColor);
+    ADD_COLOR(current, fgColor, fgColor, fgColor, bgColor);
+    ADD_COLOR(current, shadowColor, fgColor, fgColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (shadowColor << 4) | bgColor;
+    // sp+18: int ((shadowColor << 8) | (fgColor << 4))
+    ADD_COLOR(current, bgColor, shadowColor, fgColor, bgColor);
+    ADD_COLOR(current, fgColor, shadowColor, fgColor, bgColor);
+    ADD_COLOR(current, shadowColor, shadowColor, fgColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (shadowColor << 4) | bgColor;
+    // r9: int (shadowColor << 4) overwrite
+    // sp+1C: int ((bgColor << 8) | (shadowColor << 4))
+    ADD_COLOR(current, bgColor, bgColor, shadowColor, bgColor);
+    ADD_COLOR(current, fgColor, bgColor, shadowColor, bgColor);
+    ADD_COLOR(current, shadowColor, bgColor, shadowColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (shadowColor << 4) | bgColor;
+    // sp+20: int ((fgColor << 8) | (shadowColor << 4))
+    ADD_COLOR(current, bgColor, fgColor, shadowColor, bgColor);
+    ADD_COLOR(current, fgColor, fgColor, shadowColor, bgColor);
+    ADD_COLOR(current, shadowColor, fgColor, shadowColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (bgColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, shadowColor, shadowColor, bgColor);
+    ADD_COLOR(current, fgColor, shadowColor, shadowColor, bgColor);
+    ADD_COLOR(current, shadowColor, shadowColor, shadowColor, bgColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (bgColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, bgColor, bgColor, fgColor);
+    ADD_COLOR(current, fgColor, bgColor, bgColor, fgColor);
+    ADD_COLOR(current, shadowColor, bgColor, bgColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (bgColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, fgColor, bgColor, fgColor);
+    ADD_COLOR(current, fgColor, fgColor, bgColor, fgColor);
+    ADD_COLOR(current, shadowColor, fgColor, bgColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (fgColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, shadowColor, bgColor, fgColor);
+    ADD_COLOR(current, fgColor, shadowColor, bgColor, fgColor);
+    ADD_COLOR(current, shadowColor, shadowColor, bgColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (fgColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, bgColor, fgColor, fgColor);
+    ADD_COLOR(current, fgColor, bgColor, fgColor, fgColor);
+    ADD_COLOR(current, shadowColor, bgColor, fgColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (fgColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, fgColor, fgColor, fgColor);
+    ADD_COLOR(current, fgColor, fgColor, fgColor, fgColor);
+    ADD_COLOR(current, shadowColor, fgColor, fgColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (shadowColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, shadowColor, fgColor, fgColor);
+    ADD_COLOR(current, fgColor, shadowColor, fgColor, fgColor);
+    ADD_COLOR(current, shadowColor, shadowColor, fgColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (shadowColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, bgColor, shadowColor, fgColor);
+    ADD_COLOR(current, fgColor, bgColor, shadowColor, fgColor);
+    ADD_COLOR(current, shadowColor, bgColor, shadowColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (shadowColor << 4) | fgColor;
+    ADD_COLOR(current, bgColor, fgColor, shadowColor, fgColor);
+    ADD_COLOR(current, fgColor, fgColor, shadowColor, fgColor);
+    ADD_COLOR(current, shadowColor, fgColor, shadowColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (bgColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, shadowColor, shadowColor, fgColor);
+    ADD_COLOR(current, fgColor, shadowColor, shadowColor, fgColor);
+    ADD_COLOR(current, shadowColor, shadowColor, shadowColor, fgColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (bgColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, bgColor, bgColor, shadowColor);
+    ADD_COLOR(current, fgColor, bgColor, bgColor, shadowColor);
+    ADD_COLOR(current, shadowColor, bgColor, bgColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (bgColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, fgColor, bgColor, shadowColor);
+    ADD_COLOR(current, fgColor, fgColor, bgColor, shadowColor);
+    ADD_COLOR(current, shadowColor, fgColor, bgColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (fgColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, shadowColor, bgColor, shadowColor);
+    ADD_COLOR(current, fgColor, shadowColor, bgColor, shadowColor);
+    ADD_COLOR(current, shadowColor, shadowColor, bgColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (fgColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, bgColor, fgColor, shadowColor);
+    ADD_COLOR(current, fgColor, bgColor, fgColor, shadowColor);
+    ADD_COLOR(current, shadowColor, bgColor, fgColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (fgColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, fgColor, fgColor, shadowColor);
+    ADD_COLOR(current, fgColor, fgColor, fgColor, shadowColor);
+    ADD_COLOR(current, shadowColor, fgColor, fgColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (shadowColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, shadowColor, fgColor, shadowColor);
+    ADD_COLOR(current, fgColor, shadowColor, fgColor, shadowColor);
+    ADD_COLOR(current, shadowColor, shadowColor, fgColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (shadowColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, bgColor, shadowColor, shadowColor);
+    ADD_COLOR(current, fgColor, bgColor, shadowColor, shadowColor);
+    ADD_COLOR(current, shadowColor, bgColor, shadowColor, shadowColor);
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (shadowColor << 4) | shadowColor;
+    ADD_COLOR(current, bgColor, fgColor, shadowColor, shadowColor);
+    ADD_COLOR(current, fgColor, fgColor, shadowColor, shadowColor);
+    ADD_COLOR(current, shadowColor, fgColor, shadowColor, shadowColor);
+
+    ADD_COLOR(current, bgColor, shadowColor, shadowColor, shadowColor);
+    ADD_COLOR(current, fgColor, shadowColor, shadowColor, shadowColor);
+    ADD_COLOR(current, shadowColor, shadowColor, shadowColor, shadowColor);
 }
 #else
 NAKED
