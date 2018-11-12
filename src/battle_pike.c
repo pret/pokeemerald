@@ -11,10 +11,13 @@
 #include "malloc.h"
 #include "palette.h"
 #include "script.h"
+#include "battle_setup.h"
 #include "constants/event_objects.h"
 #include "constants/battle_frontier.h"
 #include "constants/abilities.h"
 #include "constants/rgb.h"
+#include "constants/trainers.h"
+#include "constants/species.h"
 
 #define PIKE_ROOM_SINGLE_BATTLE 0
 #define PIKE_ROOM_HEAL_FULL 1
@@ -53,6 +56,10 @@ extern const struct PikeWildMon *const *const gUnknown_08612314[2];
 extern const u16 gUnknown_086123E4[][6];
 extern const u8 gUnknown_0861266C[];
 extern bool8 (* const gUnknown_08612688[])(struct Task *);
+extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
+extern const u8 gUnknown_086125DC[][4];
+extern const u8 gUnknown_08612675[][3];
+extern const u32 gUnknown_08612690[];
 
 // IWRAM bss
 IWRAM_DATA u8 sRoomType;
@@ -63,16 +70,17 @@ IWRAM_DATA u8 gUnknown_03001294;
 
 // This file's functions.
 u8 GetNextRoomType(void);
-void sub_81A82A4(u8);
+void PrepareOneTrainer(bool8 difficult);
 u16 sub_81A7B58(void);
-void sub_81A8374(void);
+void PrepareTwoTrainers(void);
 void sub_81A5030(u8);
 void TryHealMons(u8 healCount);
 void sub_81A7EE4(u8 taskId);
-bool8 sub_81A8554(void);
+bool8 AtLeastTwoAliveMons(void);
 bool8 sub_81A7974(void);
 u8 sub_81A890C(u16 species);
-bool8 sub_81A88B0(u8 monLevel);
+bool8 CanEncounterWildMon(u8 monLevel);
+u8 sub_81A8590(u8);
 
 u8 GetBattlePikeWildMonHeaderId(void);
 bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate);
@@ -106,7 +114,7 @@ void sub_81A7070(void)
     switch (sRoomType)
     {
     case PIKE_ROOM_SINGLE_BATTLE:
-        sub_81A82A4(0);
+        PrepareOneTrainer(FALSE);
         setPerson1 = FALSE;
         break;
     case PIKE_ROOM_HEAL_FULL:
@@ -130,13 +138,13 @@ void sub_81A7070(void)
         setPerson1 = FALSE;
         break;
     case PIKE_ROOM_HARD_BATTLE:
-        sub_81A82A4(1);
+        PrepareOneTrainer(TRUE);
         person2 = EVENT_OBJ_GFX_LINK_RECEPTIONIST;
         setPerson1 = FALSE;
         setPerson2 = TRUE;
         break;
     case PIKE_ROOM_DOUBLE_BATTLE:
-        sub_81A8374();
+        PrepareTwoTrainers();
         setPerson1 = FALSE;
         break;
     case PIKE_ROOM_BRAIN:
@@ -559,13 +567,13 @@ u8 GetNextRoomType(void)
     u8 var;
     u8 count;
     u8 *allocated;
-    u8 r3;
+    u8 id;
 
-    if (gSaveBlock2Ptr->frontier.field_E10_2 == 8)
+    if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_BRAIN)
         return gSaveBlock2Ptr->frontier.field_E10_2;
     if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.field_E10_1)
     {
-        if (gSaveBlock2Ptr->frontier.field_E10_2 == 3)
+        if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_STATUS)
             TryInflictRandomStatus();
         return gSaveBlock2Ptr->frontier.field_E10_2;
     }
@@ -584,7 +592,7 @@ u8 GetNextRoomType(void)
         }
     }
 
-    if (sp[7] != 1 && !sub_81A8554())
+    if (sp[7] != 1 && !AtLeastTwoAliveMons())
     {
         sp[7] = 1;
         count--;
@@ -609,11 +617,11 @@ u8 GetNextRoomType(void)
     }
 
     allocated = AllocZeroed(count);
-    r3 = 0;
+    id = 0;
     for (i = 0; i < 8; i++)
     {
         if (sp[i] == 0)
-            allocated[r3++] = i;
+            allocated[id++] = i;
     }
 
     ret = allocated[Random() % count];
@@ -665,7 +673,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
         monLevel = 50 - wildMons[headerId][pikeMonId].unk2;
     }
 
-    if (checkKeenEyeIntimidate == TRUE && !sub_81A88B0(monLevel))
+    if (checkKeenEyeIntimidate == TRUE && !CanEncounterWildMon(monLevel))
         return FALSE;
 
     SetMonData(&gEnemyParty[0],
@@ -818,25 +826,22 @@ void TryHealMons(u8 healCount)
         {
             canBeHealed = TRUE;
         }
+        else if (pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) != 0)
+        {
+            canBeHealed = TRUE;
+        }
         else
         {
-            if (pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) != 0)
+            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            for (j = 0; j < 4; j++)
             {
-                canBeHealed = TRUE;
-            }
-            else
-            {
-                u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-                for (j = 0; j < 4; j++)
+                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                max = CalculatePPWithBonus(move, ppBonuses, j);
+                curr = GetMonData(mon, MON_DATA_PP1 + j);
+                if (curr < max)
                 {
-                    u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
-                    max = CalculatePPWithBonus(move, ppBonuses, j);
-                    curr = GetMonData(mon, MON_DATA_PP1 + j);
-                    if (curr < max)
-                    {
-                        canBeHealed = TRUE;
-                        break;
-                    }
+                    canBeHealed = TRUE;
+                    break;
                 }
             }
         }
@@ -853,4 +858,331 @@ void TryHealMons(u8 healCount)
 void sub_81A8090(void)
 {
     gSpecialVar_Result = InBattlePike();
+}
+
+bool8 InBattlePike(void)
+{
+    return (gMapHeader.mapLayoutId == 351 || gMapHeader.mapLayoutId == 352
+            || gMapHeader.mapLayoutId == 358 || gMapHeader.mapLayoutId == 359);
+}
+
+void sub_81A80DC(void)
+{
+    u8 i, count, id;
+    u8 *allocated;
+
+    gSpecialVar_Result = 0;
+    if (sub_81A8590(1))
+    {
+        gSpecialVar_Result = 1;
+        gSaveBlock2Ptr->frontier.field_E10_1 = Random() % 6;
+        gSaveBlock2Ptr->frontier.field_E10_2 = PIKE_ROOM_BRAIN;
+    }
+    else
+    {
+        gSaveBlock2Ptr->frontier.field_E10_1 = Random() % 3;
+        if (gSaveBlock2Ptr->frontier.field_E10_3)
+            count = 6;
+        else
+            count = 8;
+
+        allocated = AllocZeroed(count);
+        for (i = 0, id = 0; i < count; i++)
+        {
+            if (gSaveBlock2Ptr->frontier.field_E10_3)
+            {
+                if (i != PIKE_ROOM_HEAL_FULL && i != PIKE_ROOM_HEAL_PART)
+                    allocated[id++] = i;
+            }
+            else
+            {
+                allocated[i] = i;
+            }
+        }
+        gSaveBlock2Ptr->frontier.field_E10_2 = allocated[Random() % count];
+        free(allocated);
+        if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_STATUS && !AtLeastOneHealthyMon())
+            gSaveBlock2Ptr->frontier.field_E10_2 = PIKE_ROOM_NPC;
+        if (gSaveBlock2Ptr->frontier.field_E10_2 == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
+            gSaveBlock2Ptr->frontier.field_E10_2 = PIKE_ROOM_NPC;
+    }
+}
+
+void sub_81A825C(void)
+{
+    gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E10_1;
+}
+
+void sub_81A827C(void)
+{
+    gSpecialVar_Result = gUnknown_0861266C[gSaveBlock2Ptr->frontier.field_E10_2];
+}
+
+void PrepareOneTrainer(bool8 difficult)
+{
+    s32 i;
+    u8 lvlMode;
+    u8 battleNum;
+    u16 challengeNum;
+    u16 trainerId;
+
+    if (!difficult)
+        battleNum = 1;
+    else
+        battleNum = 6;
+
+    lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
+    do
+    {
+        trainerId = sub_8162548(challengeNum, battleNum);
+        for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
+        {
+            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+                break;
+        }
+    } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
+
+    gTrainerBattleOpponent_A = trainerId;
+    gFacilityTrainers = gBattleFrontierTrainers;
+    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
+        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
+}
+
+void PrepareTwoTrainers(void)
+{
+    s32 i;
+    u16 trainerId;
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / 14;
+
+    gFacilityTrainers = gBattleFrontierTrainers;
+    do
+    {
+        trainerId = sub_8162548(challengeNum, 1);
+        for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
+        {
+            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+                break;
+        }
+    } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
+
+    gTrainerBattleOpponent_A = trainerId;
+    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 14)
+        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
+
+    do
+    {
+        trainerId = sub_8162548(challengeNum, 1);
+        for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
+        {
+            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+                break;
+        }
+    } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
+
+    gTrainerBattleOpponent_B = trainerId;
+    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
+        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
+}
+
+void sub_81A84B4(void)
+{
+    u8 i;
+
+    for (i = 0; i < 14; i++)
+        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+}
+
+void sub_81A84EC(void)
+{
+    if (gSpecialVar_0x8005 == 0)
+    {
+        if (gTrainerBattleOpponent_A < TRAINER_RECORD_MIXING_FRIEND)
+            FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
+    }
+    else if (gSpecialVar_0x8005 == 1)
+    {
+        if (gTrainerBattleOpponent_B < TRAINER_RECORD_MIXING_FRIEND)
+            FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_B].speechBefore);
+    }
+}
+
+bool8 AtLeastTwoAliveMons(void)
+{
+    struct Pokemon *mon;
+    u8 i, countDead;
+
+    mon = &gPlayerParty[0];
+    countDead = 0;
+    for (i = 0; i < 3; i++, mon++)
+    {
+        if (GetMonData(mon, MON_DATA_HP) == 0)
+            countDead++;
+    }
+
+    if (countDead >= 2)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+u8 sub_81A8590(u8 arg0)
+{
+    u8 symbolsCount;
+
+    u8 var = 5;
+    u8 ret = 0;
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u16 wins = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
+    wins += arg0;
+    symbolsCount = GetPlayerSymbolCountForFacility(FRONTIER_FACILITY_PIKE);
+
+    switch (symbolsCount)
+    {
+    case 0:
+    case 1:
+        if (wins == gUnknown_086125DC[var][symbolsCount] - gUnknown_086125DC[var][3])
+            ret = symbolsCount + 1;
+        break;
+    case 2:
+    default:
+        if (wins == gUnknown_086125DC[var][0] - gUnknown_086125DC[var][3])
+            ret = 3;
+        else if (wins == gUnknown_086125DC[var][1] - gUnknown_086125DC[var][3]
+                 || (wins > gUnknown_086125DC[var][1]
+                     && (wins - gUnknown_086125DC[var][1] + gUnknown_086125DC[var][3]) % gUnknown_086125DC[var][2] == 0))
+            ret = 4;
+        break;
+    }
+
+    return ret;
+}
+
+void sub_81A863C(void)
+{
+    gSpecialVar_Result = sub_81A8590(0);
+}
+
+void sub_81A8658(void)
+{
+    u8 toHealCount = gUnknown_08612675[gSaveBlock2Ptr->frontier.field_E10_1][gSpecialVar_0x8007];
+
+    TryHealMons(toHealCount);
+    gSpecialVar_Result = toHealCount;
+}
+
+void sub_81A869C(void)
+{
+    gSaveBlock2Ptr->frontier.field_E10_3 = gSpecialVar_0x8005;
+}
+
+void sub_81A86C0(void)
+{
+    u8 i, j;
+
+    gSpecialVar_Result = TRUE;
+    for (i = 0; i < 3; i++)
+    {
+        bool32 canBeHealed = FALSE;
+        struct Pokemon *mon = &gPlayerParty[i];
+        u16 curr = GetMonData(mon, MON_DATA_HP);
+        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
+        if (curr >= max && pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) == 0)
+        {
+            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            for (j = 0; j < 4; j++)
+            {
+                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                max = CalculatePPWithBonus(move, ppBonuses, j);
+                curr = GetMonData(mon, MON_DATA_PP1 + j);
+                if (curr < max)
+                {
+                    canBeHealed = TRUE;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            canBeHealed = TRUE;
+        }
+
+        if (canBeHealed == TRUE)
+        {
+            gSpecialVar_Result = FALSE;
+            break;
+        }
+    }
+}
+
+void sub_81A8794(void)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        s32 heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
+                                  MON_DATA_HELD_ITEM);
+        gSaveBlock2Ptr->frontier.field_E12[i] = heldItem;
+    }
+}
+
+void sub_81A87E8(void)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        SetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
+                   MON_DATA_HELD_ITEM,
+                   &gSaveBlock2Ptr->frontier.field_E12[i]);
+    }
+}
+
+void sub_81A8830(void)
+{
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+
+    gSaveBlock2Ptr->frontier.field_CA8 = 0;
+    gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
+    gSaveBlock2Ptr->frontier.field_CA9_a = 0;
+    if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_08612690[lvlMode]))
+        gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] = 0;
+
+    gTrainerBattleOpponent_A = 0;
+    gBattleOutcome = 0;
+}
+
+bool8 CanEncounterWildMon(u8 enemyMonLevel)
+{
+    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+    {
+        u8 monAbility = GetMonAbility(&gPlayerParty[0]);
+        if (monAbility == ABILITY_KEEN_EYE || monAbility == ABILITY_INTIMIDATE)
+        {
+            u8 playerMonLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
+            if (playerMonLevel > 5 && enemyMonLevel <= playerMonLevel - 5 && Random() % 2 == 0)
+                return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+u8 sub_81A890C(u16 species)
+{
+    u8 ret;
+
+    if (species == SPECIES_SEVIPER)
+        ret = 0;
+    else if (species == SPECIES_MILOTIC)
+        ret = 1;
+    else
+        ret = 2;
+
+    return ret;
 }
