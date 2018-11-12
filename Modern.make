@@ -38,7 +38,7 @@ ASFLAGS := -mcpu=arm7tdmi
 CC1             := $(PREFIX)gcc -S -xc -
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -mthumb -mabi=apcs-gnu
 
-CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef -DNONMATCHING=1
+CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef -DMODERN=1
 
 LDFLAGS = -Map ../../$(MAP)
 

@@ -18,13 +18,13 @@ extern const struct Item gItems[];
 
 // this file's functions
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
-static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
+bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
 // EWRAM variables
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 
 // code
-static u16 GetBagItemQuantity(u16 *quantity)
+u16 GetBagItemQuantity(u16 *quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;
 }
@@ -864,7 +864,7 @@ static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
-static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
+bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
 {
     u8 i;
     u16 *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];

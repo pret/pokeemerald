@@ -152,14 +152,14 @@ static const u8 gUnknown_0858CF94[][4] =
     {3, 2, 1, 0},
 };
 
-static const u8 gUnknown_0858CFB8[3][2] =
+const u8 gUnknown_0858CFB8[3][2] =
 {
     {0, 1},
     {1, 2},
     {2, 0},
 };
 
-static const u8 gUnknown_0858CFBE[3][4] =
+const u8 gUnknown_0858CFBE[3][4] =
 {
     {0, 1, 2, 3},
     {0, 2, 1, 3},
@@ -706,12 +706,12 @@ static void ReceiveLilycoveLadyData(LilycoveLady *lilycoveLady, size_t recordSiz
     }
 }
 
-static u8 sub_80E7A9C(struct DayCareMail *rmMail)
+u8 sub_80E7A9C(struct DayCareMail *rmMail)
 {
     return rmMail->message.itemId;
 }
 
-static void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
+void sub_80E7AA4(struct RecordMixingDayCareMail *src, size_t recordSize, u8 (*idxs)[2], u8 which0, u8 which1)
 {
     struct DayCareMail buffer;
     struct RecordMixingDayCareMail *mail1;
@@ -736,7 +736,7 @@ static void sub_80E7B2C(const u8 *src)
     gUnknown_03001160 = sum;
 }
 
-static u8 sub_80E7B54(void)
+u8 sub_80E7B54(void)
 {
     return gUnknown_03001160;
 }
