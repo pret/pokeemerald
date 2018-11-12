@@ -63,20 +63,20 @@ const u16 gBirchBallarrow_Pal[] = INCBIN_U16("graphics/misc/birch_ballarrow.gbap
 
 const u16 gBirchCircle_Pal[] = INCBIN_U16("graphics/misc/birch_circle.gbapal");
 
-const u8 gBirchBagTilemap[] = INCBIN_U8("graphics/misc/birch_bag_map.bin.lz");
+const u32 gBirchBagTilemap[] = INCBIN_U32("graphics/misc/birch_bag_map.bin.lz");
 
-const u8 gBirchGrassTilemap[] = INCBIN_U8("graphics/misc/birch_grass_map.bin.lz");
+const u32 gBirchGrassTilemap[] = INCBIN_U32("graphics/misc/birch_grass_map.bin.lz");
 
-const u8 gBirchHelpGfx[] = INCBIN_U8("graphics/misc/birch_help.4bpp.lz");
+const u32 gBirchHelpGfx[] = INCBIN_U32("graphics/misc/birch_help.4bpp.lz");
 
-const u8 gUnknown_085B18AC[] = INCBIN_U8("graphics/misc/birch_ballarrow.4bpp.lz");
+const u32 gUnknown_085B18AC[] = INCBIN_U32("graphics/misc/birch_ballarrow.4bpp.lz");
 
-const u8 gUnknown_085B1BCC[] = INCBIN_U8("graphics/misc/birch_circle.4bpp.lz");
+const u32 gUnknown_085B1BCC[] = INCBIN_U32("graphics/misc/birch_circle.4bpp.lz");
 
-static const struct WindowTemplate gUnknown_085B1DCC[] = 
+static const struct WindowTemplate gUnknown_085B1DCC[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 15,
         .width = 24,
@@ -87,9 +87,9 @@ static const struct WindowTemplate gUnknown_085B1DCC[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const struct WindowTemplate gUnknown_085B1DDC = 
+static const struct WindowTemplate gUnknown_085B1DDC =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 24,
     .tilemapTop = 9,
     .width = 5,
@@ -98,9 +98,9 @@ static const struct WindowTemplate gUnknown_085B1DDC =
     .baseBlock = 0x0260
 };
 
-static const struct WindowTemplate gUnknown_085B1DE4 = 
+static const struct WindowTemplate gUnknown_085B1DE4 =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 0,
     .tilemapTop = 0,
     .width = 13,
@@ -392,9 +392,9 @@ void CB2_ChooseStarter(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
 
-    LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
-    LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
-    LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+    LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
+    LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x3000));
+    LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x3800));
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_085B1E00, ARRAY_COUNT(gUnknown_085B1E00));
@@ -534,7 +534,7 @@ static void Task_StarterChoose5(u8 taskId)
 {
     u8 spriteId;
 
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:  // YES
         // Return the starter choice and exit.

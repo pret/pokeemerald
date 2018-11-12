@@ -145,7 +145,7 @@ void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
-const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
+const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
@@ -217,7 +217,7 @@ void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
 const struct WindowTemplate gUnknown_085A6B90[4] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 18,
@@ -226,7 +226,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0001
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 13,
@@ -235,7 +235,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0091
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 1,
         .width = 12,
@@ -244,7 +244,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x017b
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 13,
         .width = 13,
@@ -520,7 +520,7 @@ void sub_8126B80(u8 taskId)
     if (!gPaletteFade.active)
     {
         menuPos = GetMenuCursorPos();
-        switch (ProcessMenuInput())
+        switch (Menu_ProcessInput())
         {
             default:
                 PlaySE(SE_SELECT);
@@ -710,7 +710,7 @@ void sub_8127088(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        input = ProcessMenuInput();
+        input = Menu_ProcessInput();
         switch (input)
         {
             case -1:
@@ -1628,7 +1628,7 @@ void sub_8128950(u8 taskId)
 
 void sub_81289D0(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A72C4);
 }
 
@@ -1693,7 +1693,7 @@ void sub_8128AAC(u8 taskId)
 
 void sub_8128B80(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A72CC);
 }
 
@@ -2076,7 +2076,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     return spriteId;
 }
 
-const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
+const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
 {
     if (decor > 120)
     {
@@ -2588,7 +2588,7 @@ void sub_812A0E8(u8 taskId)
 
 void sub_812A1A0(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A7348);
 }
 
@@ -2601,7 +2601,7 @@ void sub_812A1C0(u8 taskId)
 
 void sub_812A1F0(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A7350);
 }
 
@@ -2725,7 +2725,7 @@ void sub_812A3D4(u8 taskId)
 
 void sub_812A458(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A741C);
 }
 

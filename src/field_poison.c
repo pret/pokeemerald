@@ -1,10 +1,10 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_frontier_2.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_poison.h"
 #include "fldeff_80F9BCC.h"
+#include "frontier_util.h"
 #include "party_menu.h"
 #include "pokenav.h"
 #include "rom_818CFC8.h"
@@ -13,6 +13,8 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/species.h"
+
+extern bool8 InBattlePike(void);
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
 {

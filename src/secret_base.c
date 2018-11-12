@@ -40,6 +40,7 @@
 #include "tv.h"
 #include "secret_base.h"
 #include "constants/map_types.h"
+#include "constants/trainers.h"
 
 extern void mapldr_default(void);
 
@@ -997,7 +998,7 @@ void sub_80E9FB0(u8 taskId)
 {
     s8 input;
 
-    input = Menu_ProcessInputNoWrapAround();
+    input = Menu_ProcessInputNoWrap();
     switch (input)
     {
         case -1:
@@ -1031,7 +1032,7 @@ void sub_80E9FFC(u8 taskId)
 
 void sub_80EA06C(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_0858D058);
 }
 
@@ -1143,7 +1144,7 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 void sub_80EA2E4(void)
 {
     sub_813BADC(TRUE);
-    gTrainerBattleOpponent_A = 0x400;
+    gTrainerBattleOpponent_A = TRAINER_SECRET_BASE;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_SECRET_BASE;
 }
 

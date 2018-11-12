@@ -21,36 +21,36 @@ struct IntroCreditsSpriteMetadata
 static const u16 gUnknown_085F06E0[] = INCBIN_U16("graphics/intro/intro2_grass.gbapal");
 static const u16 gUnknown_085F0700[] = INCBIN_U16("graphics/intro/intro2_grass_afternoon.gbapal");
 static const u16 gUnknown_085F0720[] = INCBIN_U16("graphics/intro/intro2_grass_night.gbapal");
-static const u8 gUnknown_085F0740[] = INCBIN_U8("graphics/intro/intro2_grass.4bpp.lz");
-static const u8 gUnknown_085F0BC0[] = INCBIN_U8("graphics/intro/intro2_grass_map.bin.lz");
+static const u32 gUnknown_085F0740[] = INCBIN_U32("graphics/intro/intro2_grass.4bpp.lz");
+static const u32 gUnknown_085F0BC0[] = INCBIN_U32("graphics/intro/intro2_grass_map.bin.lz");
 static const u16 gUnknown_085F0CFC[] = INCBIN_U16("graphics/intro/85F0CFC.gbapal");
 static const u16 gUnknown_085F0D5C[] = INCBIN_U16("graphics/intro/85F0D5C.gbapal");
-static const u8 gUnknown_085F0DBC[] = INCBIN_U8("graphics/intro/intro2_bgclouds.4bpp.lz");
-static const u8 gUnknown_085F1398[] = INCBIN_U8("graphics/intro/intro2_bgclouds_map.bin.lz");
+static const u32 gUnknown_085F0DBC[] = INCBIN_U32("graphics/intro/intro2_bgclouds.4bpp.lz");
+static const u32 gUnknown_085F1398[] = INCBIN_U32("graphics/intro/intro2_bgclouds_map.bin.lz");
 static const u16 gUnknown_085F1668[] = INCBIN_U16("graphics/intro/intro2_bgclouds.gbapal");
 static const u16 gUnknown_085F1688[] = INCBIN_U16("graphics/intro/intro2_bgclouds_afternoon.gbapal");
-static const u8 gUnknown_085F16A8[] = INCBIN_U8("graphics/intro/intro2_bgclouds2.4bpp.lz");
+static const u32 gUnknown_085F16A8[] = INCBIN_U32("graphics/intro/intro2_bgclouds2.4bpp.lz");
 static const u16 gUnknown_085F17E4[] = INCBIN_U16("graphics/intro/intro2_bgtrees2.gbapal");
 static const u16 gUnknown_085F1804[] = INCBIN_U16("graphics/intro/intro2_bgtrees2_afternoon.gbapal");
-static const u8 gUnknown_085F1824[] = INCBIN_U8("graphics/intro/intro2_bgtrees.4bpp.lz");
-static const u8 gUnknown_085F1EAC[] = INCBIN_U8("graphics/intro/intro2_bgtrees_map.bin.lz");
+static const u32 gUnknown_085F1824[] = INCBIN_U32("graphics/intro/intro2_bgtrees.4bpp.lz");
+static const u32 gUnknown_085F1EAC[] = INCBIN_U32("graphics/intro/intro2_bgtrees_map.bin.lz");
 static const u16 gUnknown_085F21B0[] = INCBIN_U16("graphics/intro/intro2_bgtrees.gbapal");
-static const u8 gIntro2TreeTiles[] = INCBIN_U8("graphics/intro/intro2_bgtreessmall.4bpp.lz");
+static const u32 gIntro2TreeTiles[] = INCBIN_U32("graphics/intro/intro2_bgtreessmall.4bpp.lz");
 static const u16 gUnknown_085F231C[] = INCBIN_U16("graphics/intro/85F231C.gbapal");
-static const u8 gUnknown_085F235C[] = INCBIN_U8("graphics/intro/intro2_bgnight.4bpp.lz");
+static const u32 gUnknown_085F235C[] = INCBIN_U32("graphics/intro/intro2_bgnight.4bpp.lz");
 static const u16 gUnknown_085F2548[] = INCBIN_U16("graphics/intro/intro2_bgnight.gbapal");
-static const u8 gUnknown_085F2568[] = INCBIN_U8("graphics/intro/intro2_bgnight_map.bin.lz");
-static const u8 gIntro2NightTiles[] = INCBIN_U8("graphics/intro/intro2_night.4bpp.lz");
+static const u32 gUnknown_085F2568[] = INCBIN_U32("graphics/intro/intro2_bgnight_map.bin.lz");
+static const u32 gIntro2NightTiles[] = INCBIN_U32("graphics/intro/intro2_night.4bpp.lz");
 static const u16 gIntro2BrendanPalette[] = INCBIN_U16("graphics/intro/intro2_brendan.gbapal");
-static const u8 gIntro2BrendanTiles[] = INCBIN_U8("graphics/intro/intro2_brendan.4bpp.lz");
+static const u32 gIntro2BrendanTiles[] = INCBIN_U32("graphics/intro/intro2_brendan.4bpp.lz");
 static const u16 gIntro2MayPalette[] = INCBIN_U16("graphics/intro/intro2_may.gbapal");
 static const u16 gUnknown_085F3490[0xF0] = {0};
-static const u8 gIntro2MayTiles[] = INCBIN_U8("graphics/intro/intro2_may.4bpp.lz");
-static const u8 gIntro2BicycleTiles[] = INCBIN_U8("graphics/intro/intro2_bicycle.4bpp.lz");
+static const u32 gIntro2MayTiles[] = INCBIN_U32("graphics/intro/intro2_may.4bpp.lz");
+static const u32 gIntro2BicycleTiles[] = INCBIN_U32("graphics/intro/intro2_bicycle.4bpp.lz");
 static const u16 gIntro2LatiosPalette[] = INCBIN_U16("graphics/intro/intro2_latios.gbapal");
-static const u8 gIntro2LatiosTiles[] = INCBIN_U8("graphics/intro/intro2_latios.4bpp.lz");
+static const u32 gIntro2LatiosTiles[] = INCBIN_U32("graphics/intro/intro2_latios.4bpp.lz");
 static const u16 gIntro2LatiasPalette[] = INCBIN_U16("graphics/intro/intro2_latias.gbapal");
-static const u8 gIntro2LatiasTiles[] = INCBIN_U8("graphics/intro/intro2_latias.4bpp.lz");
+static const u32 gIntro2LatiasTiles[] = INCBIN_U32("graphics/intro/intro2_latias.4bpp.lz");
 
 static void sub_817B62C(struct Sprite *sprite);
 static void nullsub_65(struct Sprite *sprite);
@@ -331,23 +331,23 @@ static void sub_817B458(u8);
 
 void load_intro_part2_graphics(u8 a)
 {
-    LZ77UnCompVram(&gUnknown_085F0740, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(&gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
+    LZ77UnCompVram(gUnknown_085F0740, (void *)(VRAM + 0x4000));
+    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
     LoadPalette(&gUnknown_085F06E0, 240, 32);
     switch (a)
     {
     case 0:
     default:
-        LZ77UnCompVram(&gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(&gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_085F0CFC, 0, 96);
         LoadCompressedObjectPic(gUnknown_085F5064);
         LoadPalette(&gUnknown_085F1668, 256, 32);
         sub_817B76C();
         break;
     case 1:
-        LZ77UnCompVram(&gUnknown_085F1824, (void *)(VRAM));
-        LZ77UnCompVram(&gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1824, (void *)(VRAM));
+        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_085F17E4, 0, 32);
         LoadCompressedObjectPic(gUnknown_085F50EC);
         LoadPalette(&gUnknown_085F21B0, 256, 32);
@@ -437,36 +437,36 @@ void sub_817B150(u8 a)
 
 void sub_817B1C8(u8 a)
 {
-    LZ77UnCompVram(&gUnknown_085F0740, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(&gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
+    LZ77UnCompVram(gUnknown_085F0740, (void *)(VRAM + 0x4000));
+    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
     switch (a)
     {
     case 0:
     default:
         LoadPalette(&gUnknown_085F06E0, 240, 32);
-        LZ77UnCompVram(&gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(&gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_085F0CFC, 0, 96);
         LoadCompressedObjectPic(gUnknown_085F5064);
-        LZ77UnCompVram(&gUnknown_085F16A8, (void *)(VRAM + 0x10000));
+        LZ77UnCompVram(gUnknown_085F16A8, (void *)(VRAM + 0x10000));
         LoadPalette(&gUnknown_085F1668, 256, 32);
         sub_817B76C();
         break;
     case 1:
         LoadPalette(&gUnknown_085F0700, 240, 32);
-        LZ77UnCompVram(&gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(&gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_085F0D5C, 0, 96);
         LoadCompressedObjectPic(gUnknown_085F5064);
-        LZ77UnCompVram(&gUnknown_085F16A8, (void *)(VRAM + 0x10000));
+        LZ77UnCompVram(gUnknown_085F16A8, (void *)(VRAM + 0x10000));
         LoadPalette(&gUnknown_085F1688, 256, 32);
         sub_817B76C();
         break;
     case 2:
     case 3:
         LoadPalette(&gUnknown_085F0700, 240, 32);
-        LZ77UnCompVram(&gUnknown_085F1824, (void *)(VRAM));
-        LZ77UnCompVram(&gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1824, (void *)(VRAM));
+        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_085F1804, 0, 32);
         LoadCompressedObjectPic(gUnknown_085F50EC);
         LoadPalette(&gUnknown_085F1804, 256, 32);
@@ -474,8 +474,8 @@ void sub_817B1C8(u8 a)
         break;
     case 4:
         LoadPalette(&gUnknown_085F0720, 240, 32);
-        LZ77UnCompVram(&gUnknown_085F235C, (void *)(VRAM));
-        LZ77UnCompVram(&gUnknown_085F2568, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F235C, (void *)(VRAM));
+        LZ77UnCompVram(gUnknown_085F2568, (void *)(VRAM + 0x3000));
         LoadPalette(&gUnknown_085F231C, 0, 64);
         LoadCompressedObjectPic(gUnknown_085F5180);
         LoadPalette(&gUnknown_085F2548, 256, 32);

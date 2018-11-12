@@ -7,6 +7,7 @@
 #include "constants/vars.h"
 #include "constants/heal_locations.h"
 #include "constants/trainers.h"
+#include "constants/battle_frontier.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1771,7 +1772,7 @@ EventScript_PC:: @ 8271D92
 	end
 
 EventScript_271DAC:: @ 8271DAC
-	message gUnknown_0827266F
+	message gText_WhichPCShouldBeAccessed
 	waitmessage
 	special ScrSpecial_CreatePCMenu
 	waitstate
@@ -3112,7 +3113,7 @@ Text_272640: @ 8272640
 Text_27265A: @ 827265A
 	.string "{PLAYER} booted up the PC.$"
 
-gUnknown_0827266F:: @ 827266F
+gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
 gUnknown_0827268C:: @ 827268C
@@ -5126,9 +5127,9 @@ SecretBase_RedCave1_EventScript_27627C:: @ 827627C
 
 SecretBase_RedCave1_EventScript_276286:: @ 8276286
 	special sub_80EA2E4
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
 	call_if 1, SecretBase_RedCave1_EventScript_2762BD
@@ -10301,12 +10302,12 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F6F:: @ 82C3F6F
 	special sub_81A703C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
 	special sub_81A703C
 	setvar VAR_0x8004, 5
@@ -10382,12 +10383,12 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	special sub_81A703C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 3
 	special sub_81A703C
 	compare VAR_RESULT, 1
@@ -10446,12 +10447,12 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	special sub_81A703C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 3
 	special sub_81A703C
 	compare VAR_RESULT, 1
@@ -10478,7 +10479,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222:: @ 82C4222
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
@@ -10488,7 +10489,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E: @ 82C423E
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
 	compare VAR_RESULT, 1
@@ -10502,7 +10503,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B:: @ 82C426B
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4271:: @ 82C4271
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4271:: @ 82C4271
 	setvar VAR_0x8004, 21
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A: @ 82C427A
@@ -11664,7 +11665,7 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	special sp194_trainer_tower
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq TrainerHill_1F_EventScript_2C83C9
 	compare VAR_RESULT, 3

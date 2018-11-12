@@ -1,5 +1,6 @@
 #include "global.h"
 #include "money.h"
+#include "graphics.h"
 #include "event_data.h"
 #include "string_util.h"
 #include "text.h"
@@ -8,9 +9,6 @@
 #include "sprite.h"
 #include "strings.h"
 #include "decompress.h"
-
-extern const u8 gMenuMoneyGfx[];
-extern const u8 gMenuMoneyPal[];
 
 #define MAX_MONEY 999999
 

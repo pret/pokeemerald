@@ -11,8 +11,8 @@
 #include "text_window.h"
 #include "constants/songs.h"
 
-extern u8 gText_ClearAllSaveData[];
-extern u8 gText_ClearingData[];
+extern const u8 gText_ClearAllSaveData[];
+extern const u8 gText_ClearingData[];
 
 static void Task_DoClearSaveDataScreenYesNo(u8);
 static void Task_ClearSaveDataScreenYesNoChoice(u8);
@@ -46,7 +46,7 @@ static const struct BgTemplate sClearSaveBgTemplates[2] =
 static const struct WindowTemplate sClearSaveTextWindow[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 15,
         .width = 26,
@@ -60,7 +60,7 @@ static const struct WindowTemplate sClearSaveTextWindow[] =
 static const struct WindowTemplate sClearSaveYesNo[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 2,
         .width = 5,
@@ -86,7 +86,7 @@ static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
 
 static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
 {
-    switch(Menu_ProcessInputNoWrap_())
+    switch(Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
             FillWindowPixelBuffer(0, 17);

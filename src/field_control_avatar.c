@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle_setup.h"
-#include "battle_frontier_1.h"
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
@@ -30,6 +29,8 @@
 #include "constants/bg_event_constants.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
+
+extern bool32 sub_8196034(void);
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;

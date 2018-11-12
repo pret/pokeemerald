@@ -36,7 +36,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
@@ -48,7 +48,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	waitmovement 0
 	setvar VAR_0x8004, 4
 	special sub_81B99B4
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, 4
 	waitmessage
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7
 	switch VAR_RESULT
@@ -58,7 +58,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA:: @ 82023AA
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
@@ -66,12 +66,12 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023AA:: @ 82023AA
 VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 3, VerdanturfTown_BattleTentBattleRoom_EventScript_202501
 	applymovement 2, VerdanturfTown_BattleTentBattleRoom_Movement_202581
@@ -85,7 +85,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -93,7 +93,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_202565
 	compare VAR_RESULT, 2
@@ -131,7 +131,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202501:: @ 8202501
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
@@ -146,7 +146,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20251F:: @ 820251F
 	waitse
 	fadescreen 1
 	setvar VAR_0x8004, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 VerdanturfTown_BattleTentBattleRoom_MapScript2_202541: @ 8202541

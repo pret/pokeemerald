@@ -430,7 +430,7 @@ static void sub_81206F0(void)
     gUnknown_03002F84 = FALSE;
 }
 
-static void BardSong_TextSubPrinter(struct TextSubPrinter * printer, u16 a1)
+static void BardSong_TextSubPrinter(struct TextPrinterTemplate * printer, u16 a1)
 {
     gUnknown_03002F84 = TRUE;
 }
@@ -1179,7 +1179,7 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
             task->data[0]++;
             break;
         case 1:
-            selection = ProcessMenuInput();
+            selection = Menu_ProcessInput();
             if (selection == -2)
                 break;
             if (selection == -1 || selection == GetFreeStorySlot())

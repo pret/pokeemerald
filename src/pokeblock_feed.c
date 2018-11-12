@@ -52,9 +52,6 @@ struct PokeblockFeedStruct
 extern u16 gSpecialVar_ItemId;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const u8 gBattleTerrainPalette_Frontier[];
-extern const u8 gBattleTerrainTiles_Building[];
-extern const u8 gUnknown_08D9BA44[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
@@ -387,7 +384,7 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8* const sPokeblocksPals[] =
+static const u32* const sPokeblocksPals[] =
 {
     gPokeblockRed_Pal,
     gPokeblockBlue_Pal,
@@ -788,8 +785,8 @@ static void Task_HandleMonAtePokeblock(u8 taskId)
     else
         StringExpandPlaceholders(gStringVar4, gText_Var1DisdainfullyAteVar2);
 
-    gTextFlags.flag_0 = 1;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
+    gTextFlags.canABSpeedUpPrint = 1;
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
     gTasks[taskId].func = Task_WaitForAtePokeblockText;
 }
 

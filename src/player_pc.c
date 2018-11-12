@@ -185,7 +185,7 @@ const struct MenuAction gMailboxMailOptions[] =
 static const struct WindowTemplate gUnknown_085DFF24[3] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 9,
@@ -194,7 +194,7 @@ static const struct WindowTemplate gUnknown_085DFF24[3] =
         .baseBlock = 1
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 9,
@@ -203,7 +203,7 @@ static const struct WindowTemplate gUnknown_085DFF24[3] =
         .baseBlock = 1
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 10,
@@ -243,7 +243,7 @@ static const struct ListMenuTemplate gUnknown_085DFF44 =
 static const struct WindowTemplate gUnknown_085DFF5C[5] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 1,
         .width = 13,
@@ -252,7 +252,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .baseBlock = 0x0001
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 13,
         .width = 13,
@@ -261,7 +261,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .baseBlock = 0x00EB
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
         .width = 3,
@@ -270,7 +270,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .baseBlock = 0x0153
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 13,
@@ -279,7 +279,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
         .baseBlock = 0x0139
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 9,
         .width = 6,
@@ -291,7 +291,7 @@ static const struct WindowTemplate gUnknown_085DFF5C[5] =
 
 static const struct WindowTemplate gUnknown_085DFF84 =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 9,
     .tilemapTop = 7,
     .width = 5,
@@ -352,9 +352,9 @@ static void PlayerPCProcessMenuInput(u8 taskId)
 
     data = gTasks[taskId].data;
     if(gPcItemMenuOptionsNum > 3)
-        inputOptionId = ProcessMenuInput();
+        inputOptionId = Menu_ProcessInput();
     else
-        inputOptionId = Menu_ProcessInputNoWrapAround();
+        inputOptionId = Menu_ProcessInputNoWrap();
 
     switch(inputOptionId)
     {
@@ -463,7 +463,7 @@ static void ItemStorageMenuProcessInput(u8 taskId)
     s8 inputOptionId;
 
     r5 = GetMenuCursorPos();
-    inputOptionId = ProcessMenuInput();
+    inputOptionId = Menu_ProcessInput();
     r2 = GetMenuCursorPos();
     switch(inputOptionId)
     {
@@ -762,13 +762,13 @@ static void Mailbox_MoveToBag(u8 taskId)
 
 static void Mailbox_DrawYesNoBeforeMove(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     gTasks[taskId].func = Mailbox_MoveToBagYesNoPrompt;
 }
 
 static void Mailbox_MoveToBagYesNoPrompt(u8 taskId)
 {
-    switch(Menu_ProcessInputNoWrap_())
+    switch(Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
             Mailbox_DoMailMoveToBag(taskId);

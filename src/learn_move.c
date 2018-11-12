@@ -377,7 +377,7 @@ static void LearnMoveMain(void)
         break;
     case 9:
         {
-            s8 selection = Menu_ProcessInputNoWrap_();
+            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (selection == 0)
             {
@@ -414,7 +414,7 @@ static void LearnMoveMain(void)
         break;
     case 13:
         {
-            s8 selection = Menu_ProcessInputNoWrap_();
+            s8 selection = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (selection == 0)
             {
@@ -447,7 +447,7 @@ static void LearnMoveMain(void)
         break;
     case 18:
         {
-            s8 var = Menu_ProcessInputNoWrap_();
+            s8 var = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (var == 0)
             {
@@ -474,7 +474,7 @@ static void LearnMoveMain(void)
         break;
     case 26:
         {
-            s8 var = Menu_ProcessInputNoWrap_();
+            s8 var = Menu_ProcessInputNoWrapClearOnChoose();
 
             if (var == 0)
             {

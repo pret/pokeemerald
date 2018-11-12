@@ -95,14 +95,14 @@ static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
     BuyMenuReturnToItemList
 };
 
-static const struct MenuAction sShopMenuActions_BuySellQuit[] = 
+static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
     { gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
     { gText_ShopSell, {.void_u8=Task_HandleShopMenuSell} },
     { gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
 };
 
-static const struct MenuAction sShopMenuActions_BuyQuit[] = 
+static const struct MenuAction sShopMenuActions_BuyQuit[] =
 {
     { gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
     { gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
@@ -111,7 +111,7 @@ static const struct MenuAction sShopMenuActions_BuyQuit[] =
 static const struct WindowTemplate sShopMenuWindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 1,
         .width = 9,
@@ -120,7 +120,7 @@ static const struct WindowTemplate sShopMenuWindowTemplates[] =
         .baseBlock = 0x0008,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 1,
         .width = 9,
@@ -195,7 +195,7 @@ static const struct BgTemplate sShopBuyMenuBgTemplates[] =
 static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 10,
@@ -204,7 +204,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .baseBlock = 0x001E,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 14,
         .tilemapTop = 2,
         .width = 15,
@@ -213,7 +213,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .baseBlock = 0x0032,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 13,
         .width = 14,
@@ -222,7 +222,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .baseBlock = 0x0122,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 11,
         .width = 12,
@@ -231,7 +231,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .baseBlock = 0x0176,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 18,
         .tilemapTop = 11,
         .width = 10,
@@ -240,7 +240,7 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
         .baseBlock = 0x018E,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -251,9 +251,9 @@ static const struct WindowTemplate sShopBuyMenuWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate sShopBuyMenuYesNoWindowTemplates = 
+static const struct WindowTemplate sShopBuyMenuYesNoWindowTemplates =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 5,
@@ -325,7 +325,7 @@ static void SetShopItemsForSale(const u16 *items)
 
 static void Task_ShopMenu(u8 taskId)
 {
-    s8 inputCode = Menu_ProcessInputNoWrapAround();
+    s8 inputCode = Menu_ProcessInputNoWrap();
     switch (inputCode)
     {
     case LIST_B_PRESSED:
@@ -694,7 +694,7 @@ static void BuyMenuPrint(u8 windowId, const u8 *text, u8 x, u8 y, s8 speed, u8 c
 
 static void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)
 {
-    DisplayMessageAndContinueTask(taskId, 5, 10, 14, 1, GetPlayerTextSpeed(), text, callback);
+    DisplayMessageAndContinueTask(taskId, 5, 10, 14, 1, GetPlayerTextSpeedDelay(), text, callback);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -808,7 +808,7 @@ static void BuyMenuCollectEventObjectData(void)
                 gShopDataPtr->viewportObjects[r8][X_COORD] = x;
                 gShopDataPtr->viewportObjects[r8][Y_COORD] = y;
                 gShopDataPtr->viewportObjects[r8][LAYER_TYPE] = MapGridGetMetatileLayerTypeAt(facingX - 4 + x, facingY - 2 + y);
-                
+
                 switch (gEventObjects[eventObjId].facingDirection)
                 {
                     case DIR_SOUTH:
@@ -850,7 +850,7 @@ static void BuyMenuDrawEventObjects(void)
             (u16)gShopDataPtr->viewportObjects[i][X_COORD] * 16 + 8,
             (u16)gShopDataPtr->viewportObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
             2);
-        
+
         if (BuyMenuCheckIfEventObjectOverlapsMenuBg(gShopDataPtr->viewportObjects[i]) == TRUE)
         {
             gSprites[spriteId].subspriteTableNum = 4;
@@ -867,7 +867,7 @@ static bool8 BuyMenuCheckIfEventObjectOverlapsMenuBg(s16 *object)
     {
         return TRUE;
     }
-    else 
+    else
     {
         return FALSE;
     }
@@ -1000,7 +1000,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     {
         gShopDataPtr->maxQuantity = maxQuantity;
     }
-    
+
     gTasks[taskId].func = Task_BuyHowManyDialogueHandleInput;
 }
 

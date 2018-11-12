@@ -900,7 +900,7 @@ sub_8166D44: @ 8166D44
 	thumb_func_start sub_8166DE4
 sub_8166DE4: @ 8166DE4
 	push {r4,lr}
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	lsrs r4, r0, 24
 	asrs r1, r0, 24

@@ -32,7 +32,7 @@ static void PreEvoInvisible_PostEvoVisible_KillTask(u8 taskID);
 static void sub_817C560(u8 taskID);
 
 static const u16 sEvoSparklePalette[] = INCBIN_U16("graphics/misc/evo_sparkle.gbapal");
-static const u8 sEvoSparkleTiles[] = INCBIN_U8("graphics/misc/evo_sparkle.4bpp.lz");
+static const u32 sEvoSparkleTiles[] = INCBIN_U32("graphics/misc/evo_sparkle.4bpp.lz");
 
 static const struct CompressedSpriteSheet sEvoSparkleSpriteSheets[] =
 {

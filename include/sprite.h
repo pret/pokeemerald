@@ -6,21 +6,21 @@
 
 struct SpriteSheet
 {
-    const u8 *data;  // Raw uncompressed pixel data
+    const void *data;  // Raw uncompressed pixel data
     u16 size;
     u16 tag;
 };
 
 struct CompressedSpriteSheet
 {
-    const u8 *data;  // LZ77 compressed pixel data
+    const u32 *data;  // LZ77 compressed pixel data
     u16 size;        // Uncompressed size of pixel data
     u16 tag;
 };
 
 struct SpriteFrameImage
 {
-    const u8 *data;
+    const void *data;
     u16 size;
 };
 
@@ -36,7 +36,7 @@ struct SpritePalette
 
 struct CompressedSpritePalette
 {
-    const u8 *data;  // LZ77 compressed palette data
+    const u32 *data;  // LZ77 compressed palette data
     u16 tag;
 };
 
@@ -103,12 +103,19 @@ struct AffineAnimJumpCmd
     u16 target;
 };
 
+struct AffineAnimEndCmdAlt
+{
+    s16 type;
+    u16 val;
+};
+
 union AffineAnimCmd
 {
     s16 type;
     struct AffineAnimFrameCmd frame;
     struct AffineAnimLoopCmd loop;
     struct AffineAnimJumpCmd jump;
+    struct AffineAnimEndCmdAlt end; // unused in code
 };
 
 #define AFFINEANIMCMDTYPE_LOOP 0x7FFD
@@ -123,6 +130,8 @@ union AffineAnimCmd
     {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 #define AFFINEANIMCMD_END \
     {.type = AFFINEANIMCMDTYPE_END}
+#define AFFINEANIMCMD_END_ALT(_val) \
+    {.end = {.type = AFFINEANIMCMDTYPE_END, .val = _val}}
 
 struct AffineAnimState
 {

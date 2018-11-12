@@ -32,9 +32,6 @@ extern const u8 gText_YouveGot9999Coins[];
 extern const u8 gText_YouveRunOutOfCoins[];
 extern const u8 gText_ReelTimeHelp[];
 
-// gfx
-extern const u8 gSlotMachineReelTime_Gfx[];
-
 enum
 {
     SLOT_MACHINE_TAG_7_RED,
@@ -380,7 +377,7 @@ extern const u16 sSlotMatchFlags[];
 extern const u16 sSlotPayouts[];
 extern const u8 *const gUnknown_083EDCE4;
 extern const u8 *const gUnknown_083EDCDC;
-extern const u8 sReelTimeGfx[];
+extern const u32 sReelTimeGfx[];
 extern const struct SpriteSheet sSlotMachineSpriteSheets[];
 extern const struct SpritePalette gSlotMachineSpritePalettes[];
 extern const u16 *const gUnknown_083EDE20;
@@ -1269,7 +1266,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_8102344(struct Task *task)
 {
-    s8 input = Menu_ProcessInputNoWrap_();
+    s8 input = Menu_ProcessInputNoWrapClearOnChoose();
     if (input == 0)
     {
         sub_8197434(0, TRUE);
@@ -4105,9 +4102,9 @@ s16 sub_8102D5C(s16 a0)
     LoadSpriteSheet(gUnknown_0203AB2C);
 }
 
-extern const u8 gSlotMachineMenu_Gfx[];
-extern const u8 gSlotMachineMenu_Tilemap[];
-extern const u8 gUnknown_08DCEC70[];
+extern const u32 gSlotMachineMenu_Gfx[];
+extern const u16 gSlotMachineMenu_Tilemap[];
+extern const u16 gUnknown_08DCEC70[];
 extern const u16 gSlotMachineMenu_Pal[];
 
 /*static */void sub_8106448(void)

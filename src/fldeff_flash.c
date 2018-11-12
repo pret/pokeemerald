@@ -69,8 +69,8 @@ static const u16 gCaveTransitionPalette_Black[] = INCBIN_U16("graphics/misc/cave
 
 static const u16 gUnknown_085B2890[] = INCBIN_U16("graphics/misc/85B2890.gbapal");
 static const u16 gUnknown_085B28A0[] = INCBIN_U16("graphics/misc/85B28A0.gbapal");
-static const u16 gCaveTransitionTilemap[] = INCBIN_U16("graphics/misc/cave_transition_map.bin.lz");
-static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transition.4bpp.lz");
+static const u32 gCaveTransitionTilemap[] = INCBIN_U32("graphics/misc/cave_transition_map.bin.lz");
+static const u32 gCaveTransitionTiles[] = INCBIN_U32("graphics/misc/cave_transition.4bpp.lz");
 
 // text
 bool8 SetUpFieldMove_Flash(void)
