@@ -424,7 +424,8 @@ struct BattleFrontier
     /*0xD1C*/ u16 domeTotalChampionships[2][2];
     /*0xD24*/ struct BattleDomeTrainer domeTrainers[DOME_TOURNAMENT_TRAINERS_COUNT];
     /*0xD64*/ u16 domeMonIds[DOME_TOURNAMENT_TRAINERS_COUNT][3];
-    /*0xD64*/ u16 field_DC4[2];
+    /*0xDC4*/ u16 field_DC4;
+    /*0xDC6*/ u16 field_DC6;
     /*0xDC8*/ u16 palaceWinStreaks[2][2];
     /*0xDD0*/ u16 palaceRecordWinStreaks[2][2];
     /*0xDD8*/ u16 field_DD8;

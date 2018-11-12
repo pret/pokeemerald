@@ -117,7 +117,7 @@ static const u8 gUnknown_086125DC[][4] =
     {0x15, 0x46, 0x23, 0x00},
 };
 
-static void (* const gUnknown_086125F8[])(void) =
+static void (* const sBattlePikeFunctions[])(void) =
 {
     sub_81A705C,
     sub_81A7140,
@@ -172,7 +172,7 @@ static const u32 gUnknown_08612690[] = {0x400, 0x800};
 // code
 void CallBattlePikeFunction(void)
 {
-    gUnknown_086125F8[gSpecialVar_0x8004]();
+    sBattlePikeFunctions[gSpecialVar_0x8004]();
 }
 
 static void sub_81A705C(void)

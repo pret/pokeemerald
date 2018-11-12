@@ -88,7 +88,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_25752E:: @ 825752E
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
 	waitmovement 0
 	setvar VAR_0x8004, 5
-	special sub_8195960
+	special CallBattlePalaceFunction
 	msgbox gStringVar4, 4
 	waitmessage
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C

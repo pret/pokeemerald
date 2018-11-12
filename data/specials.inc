@@ -245,7 +245,7 @@ gSpecials:: @ 81DBA64
 	def_special CallFrontierUtilFunc
 	def_special sub_8161F74
 	def_special CallBattleDomeFunction
-	def_special sub_8195960
+	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
 	def_special CallBattleArenaFunction

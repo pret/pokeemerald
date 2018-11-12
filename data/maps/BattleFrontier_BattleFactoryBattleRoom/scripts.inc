@@ -80,7 +80,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C
 	setvar VAR_0x8004, 5
-	special sub_8195960
+	special CallBattlePalaceFunction
 	lockall
 	msgbox gStringVar4, 4
 	waitmessage
