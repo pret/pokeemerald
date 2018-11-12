@@ -13,7 +13,7 @@ enum {
     FLDPSN_FNT
 };
 
-void sub_80F972C(void);
-int DoPoisonFieldEffect(void);
+void ExecuteWhiteOut(void);
+s32 DoPoisonFieldEffect(void);
 
 #endif //GUARD_FIELD_POISON_H
