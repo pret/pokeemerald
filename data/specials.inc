@@ -245,12 +245,12 @@ gSpecials:: @ 81DBA64
 	def_special CallFrontierUtilFunc
 	def_special sub_8161F74
 	def_special CallBattleDomeFunction
-	def_special sub_8195960
+	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
-	def_special sub_81A5238
-	def_special sub_81A5E74
-	def_special sub_81A703C
+	def_special CallBattleArenaFunction
+	def_special CallBattleFactoryFunction
+	def_special CallBattlePikeFunction
 	def_special sub_81A8E7C
 	def_special StopMapMusic
 	def_special sub_81B99B4

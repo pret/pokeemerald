@@ -162,14 +162,14 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	waitstate
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A5238
+	special CallBattleArenaFunction
 	compare VAR_RESULT, 9999
 	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2009B3
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A5238
+	special CallBattleArenaFunction
 
 FallarborTown_BattleTentBattleRoom_EventScript_200B43:: @ 8200B43
 	message FallarborTown_BattleTentBattleRoom_Text_257D17

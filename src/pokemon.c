@@ -36,6 +36,8 @@
 #include "pokemon_storage_system.h"
 #include "recorded_battle.h"
 #include "apprentice.h"
+#include "battle_pike.h"
+#include "battle_tower.h"
 
 struct SpeciesItem
 {
@@ -80,14 +82,10 @@ extern u8 StorageGetCurrentBox(void);
 extern void set_unknown_box_id(u8);
 extern void sub_803FA70(u8 battlerId);
 extern u8 sav1_map_get_name(void);
-extern u8 GetFrontierEnemyMonLevel(u8);
 extern bool8 InBattlePyramid(void);
-extern bool8 InBattlePike(void);
 extern bool8 sub_806F104(void);
 extern u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerOpponentId);
 extern u8 sub_81D63C8(u16 trainerOpponentId);
-extern u8 GetFrontierOpponentClass(u16 trainerId);
-extern void GetFrontierTrainerName(u8* dest, u16 trainerId);
 extern void SummaryScreen_SetUnknownTaskId(u8);
 
 // this file's functions
@@ -2904,7 +2902,7 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
     CalculateMonStats(mon);
 }
 
-void CreateMonWithEVSpreadPersonalityOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId)
+void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId)
 {
     s32 i;
     s32 statCount = 0;

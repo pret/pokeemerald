@@ -29,6 +29,9 @@
 #include "pokeball.h"
 #include "data2.h"
 #include "battle_setup.h"
+#include "battle_arena.h"
+#include "battle_tower.h"
+#include "frontier_util.h"
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -38,11 +41,7 @@ extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void sub_81A57E4(u8 battlerId, u16 stringId);
-extern u8 GetFrontierBrainTrainerPicIndex(void);
 extern u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId);
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
-extern u8 GetEreaderTrainerFrontSpriteId(void);
 
 // this file's functions
 static void OpponentHandleGetMonData(void);
@@ -1513,7 +1512,7 @@ static void OpponentHandlePrintString(void)
     BufferStringBattle(*stringId);
     BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
-    sub_81A57E4(gActiveBattler, *stringId);
+    BattleArena_DeductMindPoints(gActiveBattler, *stringId);
 }
 
 static void OpponentHandlePrintSelectionString(void)

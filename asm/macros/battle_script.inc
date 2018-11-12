@@ -1251,20 +1251,20 @@
 	various \battler, 8
 	.endm
 	
-	.macro various9 battler
-	various \battler, 9
+	.macro arenajudgmentwindow
+	various BS_ATTACKER, VARIOUS_ARENA_JUDGMENT_WINDOW
 	.endm
 	
-	.macro various10 battler
-	various \battler, 10
+	.macro arenaopponentmonlost
+	various BS_ATTACKER, VARIOUS_ARENA_OPPONENT_MON_LOST
 	.endm
 	
-	.macro various11 battler
-	various \battler, 11
+	.macro arenaplayermonlost
+	various BS_ATTACKER, VARIOUS_ARENA_PLAYER_MON_LOST
 	.endm
 	
-	.macro various12 battler
-	various \battler, 12
+	.macro arenabothmonlost
+	various BS_ATTACKER, VARIOUS_ARENA_BOTH_MONS_LOST
 	.endm
 	
 	.macro forfeityesnobox battler
@@ -1279,12 +1279,12 @@
 	various \battler, 15
 	.endm
 	
-	.macro various16 battler
-	various \battler, 16
+	.macro arenajudmengtstring id
+	various \id, VARIOUS_ARENA_JUDGMENT_STRING
 	.endm
 	
-	.macro various17 battler
-	various \battler, 17
+	.macro arenawaitmessage id
+	various \id, VARIOUS_ARENA_WAIT_STRING
 	.endm
 	
 	.macro waitcry battler
@@ -1307,7 +1307,7 @@
 	various BS_ATTACKER, VARIOUS_VOLUME_UP
 	.endm
 	
-	.macro various23 battler
+	.macro setalreadystatusedmoveattempt battler
 	various \battler, 23
 	.endm
 	

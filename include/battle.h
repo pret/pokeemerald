@@ -498,10 +498,12 @@ struct BattleStruct
     struct BattleTv tv;
     u8 notSureWhatFieldLol[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    u8 field_298[8];
-    u8 field_2A0;
-    u8 field_2A1;
-    u8 field_2A2;
+    s8 arenaMindPoints[2];
+    s8 arenaSkillPoints[2];
+    u16 arenaStartHp[2];
+    u8 arenaLostPlayerMons; // Bits for party member, lost as in referee's decision, not by fainting.
+    u8 arenaLostOpponentMons;
+    u8 alreadyStatusedMoveAttempt; // As bits for battlers; For example when using Thunder Wave on an already paralyzed pokemon.
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

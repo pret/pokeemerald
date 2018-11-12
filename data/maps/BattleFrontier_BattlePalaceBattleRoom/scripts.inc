@@ -60,7 +60,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF:: @ 824F8BF
 	applymovement 2, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEA1
 	waitmovement 0
 	setvar VAR_0x8004, 5
-	special sub_8195960
+	special CallBattlePalaceFunction
 	msgbox gStringVar4, 4
 	waitmessage
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
@@ -189,7 +189,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
 	waitmessage
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 2
-	special sub_8195960
+	special CallBattlePalaceFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1
@@ -263,7 +263,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA:: @ 824FCAA
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	setvar VAR_0x8004, 6
-	special sub_8195960
+	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 12
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
@@ -306,7 +306,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67:: @ 824FD67
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	setvar VAR_0x8004, 6
-	special sub_8195960
+	special CallBattlePalaceFunction
 	setvar VAR_0x8004, 12
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2

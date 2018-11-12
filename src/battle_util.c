@@ -1200,8 +1200,8 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
             for (i = 0; i < 2; i++)
                 CancelMultiTurnMoves(i);
 
-            gBattlescriptCurrInstr = BattleScript_82DB8F3;
-            BattleScriptExecute(BattleScript_82DB8F3);
+            gBattlescriptCurrInstr = BattleScript_ArenaDoJudgment;
+            BattleScriptExecute(BattleScript_ArenaDoJudgment);
             gBattleStruct->wishPerishSongState++;
             return TRUE;
         }

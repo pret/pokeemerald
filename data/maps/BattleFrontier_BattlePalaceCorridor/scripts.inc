@@ -13,7 +13,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	waitmovement 0
 	lockall
 	setvar VAR_0x8004, 3
-	special sub_8195960
+	special CallBattlePalaceFunction
 	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F58B
 	compare VAR_RESULT, 1

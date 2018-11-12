@@ -4,13 +4,14 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "recorded_battle.h"
-#include "constants/species.h"
-#include "constants/abilities.h"
 #include "random.h"
 #include "item.h"
+#include "util.h"
+#include "battle_factory.h"
+#include "constants/species.h"
+#include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
-#include "util.h"
 #include "constants/battle_ai.h"
 
 #define AI_ACTION_DONE          0x0001
@@ -43,8 +44,6 @@ AI scripts.
 */
 
 extern const u8 *const gBattleAI_ScriptsTable[];
-
-extern u32 GetAiScriptsInBattleFactory();
 
 static u8 ChooseMoveOrAction_Singles(void);
 static u8 ChooseMoveOrAction_Doubles(void);
