@@ -3,13 +3,13 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "constants/flags.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
-#include "constants/songs.h"
 #include "sound.h"
+#include "constants/flags.h"
 #include "constants/map_types.h"
+#include "constants/songs.h"
 
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;

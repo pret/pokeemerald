@@ -7851,7 +7851,7 @@ palette_bg_faded_fill_black: @ 80AF020
 	thumb_func_start pal_fill_for_maplights
 pal_fill_for_maplights: @ 80AF040
 	push {r4,lr}
-	bl get_map_light_from_warp0
+	bl GetLastUsedWarpMapType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

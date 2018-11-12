@@ -2262,8 +2262,8 @@ _080FAEA2:
 	bx r0
 	thumb_func_end task50_overworld_poison_effect
 
-	thumb_func_start overworld_poison_effect
-overworld_poison_effect: @ 80FAEA8
+	thumb_func_start FldeffPoison_Start
+FldeffPoison_Start: @ 80FAEA8
 	push {lr}
 	movs r0, 0x4F
 	bl PlaySE
@@ -2273,7 +2273,7 @@ overworld_poison_effect: @ 80FAEA8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end overworld_poison_effect
+	thumb_func_end FldeffPoison_Start
 
 	thumb_func_start FieldPoisonEffectIsRunning
 FieldPoisonEffectIsRunning: @ 80FAEC0

@@ -3325,7 +3325,7 @@ EventScript_2736B3:: @ 82736B3
 
 EventScript_Poison:: @ 82736BC
 	lockall
-	special sub_80F972C
+	special ExecuteWhiteOut
 	waitstate
 	compare VAR_RESULT, 1
 	goto_eq EventScript_2736D9

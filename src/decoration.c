@@ -1347,12 +1347,12 @@ void sub_8128060(u8 taskId)
 
 void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.spriteId].data[0];
-    gUnknown_03005DD0.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
-    gSprites[gUnknown_03005DD0.spriteId].oam.priority = 1;
-    gSprites[gUnknown_03005DD0.spriteId].callback = sub_81292D0;
-    gSprites[gUnknown_03005DD0.spriteId].pos1.x = gUnknown_085A7250[data->decoration->shape].x;
-    gSprites[gUnknown_03005DD0.spriteId].pos1.y = gUnknown_085A7250[data->decoration->shape].y;
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
+    gFieldCamera.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
+    gSprites[gFieldCamera.spriteId].oam.priority = 1;
+    gSprites[gFieldCamera.spriteId].callback = sub_81292D0;
+    gSprites[gFieldCamera.spriteId].pos1.x = gUnknown_085A7250[data->decoration->shape].x;
+    gSprites[gFieldCamera.spriteId].pos1.y = gUnknown_085A7250[data->decoration->shape].y;
 }
 
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data)
@@ -1374,7 +1374,7 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphic
     }
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
-    sDecor_CameraSpriteObjectIdx1 = gUnknown_03005DD0.spriteId;
+    sDecor_CameraSpriteObjectIdx1 = gFieldCamera.spriteId;
 }
 
 void sub_812826C(u8 taskId)
@@ -2293,9 +2293,9 @@ bool8 sub_81299AC(u8 taskId)
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
     GetPlayerFacingDirection();
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.spriteId].data[0];
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
     sub_812A39C();
-    gUnknown_03005DD0.spriteId = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
+    gFieldCamera.spriteId = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
     if (gSaveBlock2Ptr->playerGender == MALE)
     {
         sDecor_CameraSpriteObjectIdx2 = AddPseudoEventObject(0xC1, SpriteCallbackDummy, 0x88, 0x48, 0);
@@ -2306,7 +2306,7 @@ void SetUpPuttingAwayDecorationPlayerAvatar(void)
     }
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
-    sDecor_CameraSpriteObjectIdx1 = gUnknown_03005DD0.spriteId;
+    sDecor_CameraSpriteObjectIdx1 = gFieldCamera.spriteId;
     gSprites[sDecor_CameraSpriteObjectIdx1].oam.priority = 1;
 }
 

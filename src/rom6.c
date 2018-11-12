@@ -1,21 +1,22 @@
 #include "global.h"
-#include "constants/event_objects.h"
-#include "constants/songs.h"
-#include "rom6.h"
 #include "braille_puzzles.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_effect.h"
-#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "item_use.h"
-#include "party_menu.h"
 #include "overworld.h"
+#include "party_menu.h"
+#include "rom6.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/event_object_movement_constants.h"
+#include "constants/event_objects.h"
 #include "constants/map_types.h"
+#include "constants/songs.h"
 
 // static functions
 static void task08_080C9820(u8 taskId);
@@ -31,14 +32,14 @@ static void sub_8135780(void);
 extern struct MapPosition gPlayerFacingPosition;
 
 // text
-bool8 CheckObjectGraphicsInFrontOfPlayer(u8 a)
+bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
 {
     u8 eventObjId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     gPlayerFacingPosition.height = PlayerGetZCoord();
     eventObjId = GetEventObjectIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
-    if (gEventObjects[eventObjId].graphicsId != a)
+    if (gEventObjects[eventObjId].graphicsId != graphicsId)
     {
         return FALSE;
     }
@@ -73,7 +74,7 @@ static void task08_080C9820(u8 taskId)
         else
         {
             sub_808C114();
-            EventObjectSetHeldMovement(&gEventObjects[eventObjId], 0x39);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
             gTasks[taskId].func = sub_813552C;
         }
     }
@@ -90,7 +91,7 @@ static void sub_813552C(u8 taskId)
 
 static void sub_8135578(u8 taskId)
 {
-    if (!FieldEffectActiveListContains(6))
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         gFieldEffectArguments[1] = GetPlayerFacingDirection();
         if (gFieldEffectArguments[1] == 1)
@@ -189,7 +190,7 @@ bool8 FldEff_UseDig(void)
     gTasks[taskId].data[8] = (u32)sub_8135780 >> 16;
     gTasks[taskId].data[9] = (u32)sub_8135780;
     if (!ShouldDoBrailleDigEffect())
-        SetPlayerAvatarTransitionFlags(1);
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return FALSE;
 }
 
