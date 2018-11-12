@@ -33,6 +33,7 @@
 #include "field_weather.h"
 #include "battle_tower.h"
 #include "gym_leader_rematch.h"
+#include "battle_pike.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
 
@@ -54,7 +55,6 @@ struct TrainerBattleParameter
 };
 
 extern bool8 InBattlePyramid(void);
-extern bool8 InBattlePike(void);
 extern bool32 InTrainerHill(void);
 extern bool32 FieldPoisonEffectIsRunning(void);
 extern void RestartWildEncounterImmunitySteps(void);

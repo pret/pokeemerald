@@ -13,8 +13,7 @@
 #include "battle.h"
 #include "fldeff_80F9BCC.h"
 #include "field_poison.h"
-
-extern bool8 InBattlePike(void);
+#include "battle_pike.h"
 
 static bool32 sub_80F9568(struct Pokemon *pokemon)
 {

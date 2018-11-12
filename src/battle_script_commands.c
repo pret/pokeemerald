@@ -44,6 +44,7 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "battle_arena.h"
+#include "battle_pike.h"
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -64,7 +65,6 @@ extern u8* GetMonNickname(struct Pokemon* mon, u8* dst); // party_menu
 extern u8 BattleArena_ShowJudgmentWindow(u8* arg0); // battle frontier 2
 extern void sub_81B8E80(u8 battlerId, u8, u8); // party menu
 extern bool8 sub_81B1250(void); // ?
-extern bool8 InBattlePike(void);
 extern bool8 InBattlePyramid(void);
 extern u16 GetBattlePyramidPickupItemId(void);
 extern u8 sub_813B21C(void);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_pike.h"
 #include "event_data.h"
 #include "frontier_util.h"
 #include "fieldmap.h"
@@ -45,60 +46,142 @@ struct Unk0861231C
 struct PikeWildMon
 {
     u16 species;
-    u8 unk2;
+    u8 levelDelta;
     u16 moves[4];
 };
-
-extern void (* const gUnknown_086125F8[])(void);
 
 extern const struct Unk0861231C gUnknown_0861231C[];
 extern const struct PikeWildMon *const *const gUnknown_08612314[2];
 extern const u16 gUnknown_086123E4[][6];
-extern const u8 gUnknown_0861266C[];
-extern bool8 (* const gUnknown_08612688[])(struct Task *);
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const u8 gUnknown_086125DC[][4];
-extern const u8 gUnknown_08612675[][3];
-extern const u32 gUnknown_08612690[];
 
 // IWRAM bss
-IWRAM_DATA u8 sRoomType;
-IWRAM_DATA u8 sStatusMon;
-IWRAM_DATA bool8 gUnknown_0300128E;
-IWRAM_DATA u32 sStatusFlags;
-IWRAM_DATA u8 gUnknown_03001294;
+static IWRAM_DATA u8 sRoomType;
+static IWRAM_DATA u8 sStatusMon;
+static IWRAM_DATA bool8 sUnknown_0300128E;
+static IWRAM_DATA u32 sStatusFlags;
+static IWRAM_DATA u8 sUnknown_03001294;
 
 // This file's functions.
-u8 GetNextRoomType(void);
-void PrepareOneTrainer(bool8 difficult);
-u16 sub_81A7B58(void);
-void PrepareTwoTrainers(void);
-void sub_81A5030(u8);
-void TryHealMons(u8 healCount);
-void sub_81A7EE4(u8 taskId);
-bool8 AtLeastTwoAliveMons(void);
-bool8 sub_81A7974(void);
-u8 sub_81A890C(u16 species);
-bool8 CanEncounterWildMon(u8 monLevel);
-u8 sub_81A8590(u8);
+static void sub_81A705C(void);
+static void sub_81A7140(void);
+static void sub_81A7248(void);
+static void sub_81A73B8(void);
+static void sub_81A7070(void);
+static void sub_81A73EC(void);
+static void sub_81A7400(void);
+static void sub_81A740C(void);
+static void sub_81A7418(void);
+static void nullsub_76(void);
+static void nullsub_124(void);
+static void sub_81A7468(void);
+static void sub_81A74CC(void);
+static void sub_81A74E0(void);
+static void sub_81A7508(void);
+static void sub_81A7580(void);
+static void sub_81A8090(void);
+static void sub_81A80DC(void);
+static void sub_81A825C(void);
+static void sub_81A827C(void);
+static void sub_81A84B4(void);
+static void sub_81A84EC(void);
+static void sub_81A863C(void);
+static void sub_81A8658(void);
+static void sub_81A869C(void);
+static void sub_81A86C0(void);
+static void sub_81A8794(void);
+static void sub_81A87E8(void);
+static void sub_81A8830(void);
+static u8 GetNextRoomType(void);
+static void PrepareOneTrainer(bool8 difficult);
+static u16 sub_81A7B58(void);
+static void PrepareTwoTrainers(void);
+static void TryHealMons(u8 healCount);
+static void sub_81A7EE4(u8 taskId);
+static bool8 AtLeastTwoAliveMons(void);
+static u8 SpeciesToPikeMonId(u16 species);
+static bool8 CanEncounterWildMon(u8 monLevel);
+static u8 sub_81A8590(u8);
+static bool8 sub_81A7D8C(struct Task *task);
+static bool8 sub_81A7DE8(struct Task *task);
 
-u8 GetBattlePikeWildMonHeaderId(void);
-bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate);
-bool8 InBattlePike(void);
+// Const rom data.
+static const u8 gUnknown_086125DC[][4] =
+{
+    {0x23, 0x46, 0x23, 0x01},
+    {0x04, 0x09, 0x05, 0x00},
+    {0x15, 0x2a, 0x15, 0x01},
+    {0x1c, 0x38, 0x1c, 0x01},
+    {0x15, 0x2a, 0x15, 0x01},
+    {0x1c, 0x8c, 0x38, 0x01},
+    {0x15, 0x46, 0x23, 0x00},
+};
+
+static void (* const gUnknown_086125F8[])(void) =
+{
+    sub_81A705C,
+    sub_81A7140,
+    sub_81A7248,
+    sub_81A73B8,
+    sub_81A7070,
+    sub_81A73EC,
+    sub_81A7400,
+    sub_81A740C,
+    sub_81A7418,
+    nullsub_76,
+    nullsub_124,
+    sub_81A7468,
+    sub_81A74CC,
+    sub_81A74E0,
+    sub_81A7508,
+    sub_81A7580,
+    sub_81A8090,
+    sub_81A80DC,
+    sub_81A825C,
+    sub_81A827C,
+    sub_81A84B4,
+    sub_81A84EC,
+    sub_81A863C,
+    sub_81A8658,
+    sub_81A869C,
+    sub_81A86C0,
+    sub_81A8794,
+    sub_81A87E8,
+    sub_81A8830
+};
+
+static const u8 gUnknown_0861266C[] = {3, 3, 1, 0, 0, 2, 2, 1, 4};
+
+static const u8 gUnknown_08612675[][3] =
+{
+    {2, 1, 0},
+    {2, 0, 1},
+    {1, 2, 0},
+    {1, 0, 2},
+    {0, 2, 1},
+    {0, 1, 2},
+};
+
+static bool8 (* const gUnknown_08612688[])(struct Task *) =
+{
+    sub_81A7D8C, sub_81A7DE8
+};
+
+static const u32 gUnknown_08612690[] = {0x400, 0x800};
 
 // code
-void sub_81A703C(void)
+void CallBattlePikeFunction(void)
 {
     gUnknown_086125F8[gSpecialVar_0x8004]();
 }
 
-void sub_81A705C(void)
+static void sub_81A705C(void)
 {
     u8 roomType = GetNextRoomType();
     sRoomType = roomType;
 }
 
-void sub_81A7070(void)
+static void sub_81A7070(void)
 {
     bool32 setPerson1, setPerson2;
     u32 person1;
@@ -163,7 +246,7 @@ void sub_81A7070(void)
         VarSet(VAR_OBJ_GFX_ID_1, person2);
 }
 
-void sub_81A7140(void)
+static void sub_81A7140(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -190,7 +273,7 @@ void sub_81A7140(void)
     }
 }
 
-void sub_81A7248(void)
+static void sub_81A7248(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -230,7 +313,7 @@ void sub_81A7248(void)
     }
 }
 
-void sub_81A73B8(void)
+static void sub_81A73B8(void)
 {
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum >= 15)
         gSpecialVar_Result = TRUE;
@@ -238,22 +321,22 @@ void sub_81A73B8(void)
         gSpecialVar_Result = FALSE;
 }
 
-void sub_81A73EC(void)
+static void sub_81A73EC(void)
 {
     gSpecialVar_Result = sRoomType;
 }
 
-void sub_81A7400(void)
+static void sub_81A7400(void)
 {
-    gUnknown_0300128E = TRUE;
+    sUnknown_0300128E = TRUE;
 }
 
-void sub_81A740C(void)
+static void sub_81A740C(void)
 {
-    gUnknown_0300128E = FALSE;
+    sUnknown_0300128E = FALSE;
 }
 
-void sub_81A7418(void)
+static void sub_81A7418(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -262,17 +345,17 @@ void sub_81A7418(void)
     TrySavingData(SAVE_LINK);
 }
 
-void nullsub_76(void)
+static void nullsub_76(void)
 {
 
 }
 
-void nullsub_124(void)
+static void nullsub_124(void)
 {
 
 }
 
-void sub_81A7468(void)
+static void sub_81A7468(void)
 {
     switch (sStatusFlags)
     {
@@ -294,38 +377,38 @@ void sub_81A7468(void)
     }
 }
 
-void sub_81A74CC(void)
+static void sub_81A74CC(void)
 {
     gSpecialVar_Result = sStatusMon;
 }
 
-void sub_81A74E0(void)
+static void sub_81A74E0(void)
 {
     u16 toHeal = (Random() % 2) + 1;
     TryHealMons(toHeal);
     gSpecialVar_Result = toHeal;
 }
 
-void sub_81A7508(void)
+static void sub_81A7508(void)
 {
     s32 id;
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
-        id = gUnknown_0861231C[gUnknown_03001294].unk2;
+        id = gUnknown_0861231C[sUnknown_03001294].unk2;
     else if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 10)
-        id = gUnknown_0861231C[gUnknown_03001294].unk3;
+        id = gUnknown_0861231C[sUnknown_03001294].unk3;
     else
-        id = gUnknown_0861231C[gUnknown_03001294].unk4;
+        id = gUnknown_0861231C[sUnknown_03001294].unk4;
 
     FrontierSpeechToString(gUnknown_086123E4[id]);
 }
 
-void sub_81A7580(void)
+static void sub_81A7580(void)
 {
     CreateTask(sub_81A7EE4, 2);
 }
 
-void HealMon(struct Pokemon *mon)
+static void HealMon(struct Pokemon *mon)
 {
     u8 i;
     u16 hp;
@@ -355,7 +438,7 @@ void HealMon(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_STATUS, data);
 }
 
-bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
+static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
 {
     u8 ability = GetMonAbility(mon);
     bool8 ret = FALSE;
@@ -386,7 +469,7 @@ bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
     return ret;
 }
 
-bool8 DoesTypePreventStatus(u16 species, u32 status)
+static bool8 DoesTypePreventStatus(u16 species, u32 status)
 {
     bool8 ret = FALSE;
 
@@ -416,7 +499,7 @@ bool8 DoesTypePreventStatus(u16 species, u32 status)
     return ret;
 }
 
-bool8 TryInflictRandomStatus(void)
+static bool8 TryInflictRandomStatus(void)
 {
     u8 j, i;
     u8 count;
@@ -527,7 +610,7 @@ bool8 TryInflictRandomStatus(void)
     return TRUE;
 }
 
-bool8 AtLeastOneHealthyMon(void)
+static bool8 AtLeastOneHealthyMon(void)
 {
     u8 i;
     u8 healthyMonsCount;
@@ -559,7 +642,7 @@ bool8 AtLeastOneHealthyMon(void)
         return TRUE;
 }
 
-u8 GetNextRoomType(void)
+static u8 GetNextRoomType(void)
 {
     u8 sp[8];
     u8 i;
@@ -632,15 +715,15 @@ u8 GetNextRoomType(void)
     return ret;
 }
 
-u16 sub_81A7B58(void)
+static u16 sub_81A7B58(void)
 {
-    gUnknown_03001294 = Random() % 25;
-    return gUnknown_0861231C[gUnknown_03001294].unk0;
+    sUnknown_03001294 = Random() % 25;
+    return gUnknown_0861231C[sUnknown_03001294].unk0;
 }
 
-u8 sub_81A7B84(void)
+static u8 sub_81A7B84(void)
 {
-    return gUnknown_0300128E;
+    return sUnknown_0300128E;
 }
 
 bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
@@ -652,7 +735,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
     const struct PikeWildMon *const *const wildMons = gUnknown_08612314[lvlMode];
     u32 abilityBit;
     s32 pikeMonId = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
-    pikeMonId = sub_81A890C(pikeMonId);
+    pikeMonId = SpeciesToPikeMonId(pikeMonId);
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
     {
@@ -663,14 +746,14 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
         }
         else
         {
-            monLevel -= wildMons[headerId][pikeMonId].unk2;
+            monLevel -= wildMons[headerId][pikeMonId].levelDelta;
             if (monLevel < 60)
                 monLevel = 60;
         }
     }
     else
     {
-        monLevel = 50 - wildMons[headerId][pikeMonId].unk2;
+        monLevel = 50 - wildMons[headerId][pikeMonId].levelDelta;
     }
 
     if (checkKeenEyeIntimidate == TRUE && !CanEncounterWildMon(monLevel))
@@ -710,12 +793,12 @@ u8 GetBattlePikeWildMonHeaderId(void)
     return headerId;
 }
 
-void sub_81A7D54(u8 taskId)
+static void sub_81A7D54(u8 taskId)
 {
     while (gUnknown_08612688[gTasks[taskId].data[0]](&gTasks[taskId]));
 }
 
-bool8 sub_81A7D8C(struct Task *task)
+static bool8 sub_81A7D8C(struct Task *task)
 {
     if (task->data[6] == 0 || --task->data[6] == 0)
     {
@@ -734,7 +817,7 @@ bool8 sub_81A7D8C(struct Task *task)
     return FALSE;
 }
 
-bool8 sub_81A7DE8(struct Task *task)
+static bool8 sub_81A7DE8(struct Task *task)
 {
     if (task->data[6] == 0 || --task->data[6] == 0)
     {
@@ -760,7 +843,7 @@ bool8 sub_81A7DE8(struct Task *task)
     return FALSE;
 }
 
-void sub_81A7E60(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
+static void sub_81A7E60(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 {
     u8 taskId = CreateTask(sub_81A7D54, 3);
 
@@ -772,7 +855,7 @@ void sub_81A7E60(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
     gTasks[taskId].data[6] = a0;
 }
 
-bool8 sub_81A7EC4(void)
+static bool8 sub_81A7EC4(void)
 {
     if (FindTaskIdByFunc(sub_81A7D54) == 0xFF)
         return TRUE;
@@ -780,7 +863,7 @@ bool8 sub_81A7EC4(void)
         return FALSE;
 }
 
-void sub_81A7EE4(u8 taskId)
+static void sub_81A7EE4(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -797,7 +880,7 @@ void sub_81A7EE4(u8 taskId)
     }
 }
 
-void TryHealMons(u8 healCount)
+static void TryHealMons(u8 healCount)
 {
     u8 j, i, k;
     u8 indices[3];
@@ -855,7 +938,7 @@ void TryHealMons(u8 healCount)
     }
 }
 
-void sub_81A8090(void)
+static void sub_81A8090(void)
 {
     gSpecialVar_Result = InBattlePike();
 }
@@ -866,7 +949,7 @@ bool8 InBattlePike(void)
             || gMapHeader.mapLayoutId == 358 || gMapHeader.mapLayoutId == 359);
 }
 
-void sub_81A80DC(void)
+static void sub_81A80DC(void)
 {
     u8 i, count, id;
     u8 *allocated;
@@ -908,17 +991,17 @@ void sub_81A80DC(void)
     }
 }
 
-void sub_81A825C(void)
+static void sub_81A825C(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_E10_1;
 }
 
-void sub_81A827C(void)
+static void sub_81A827C(void)
 {
     gSpecialVar_Result = gUnknown_0861266C[gSaveBlock2Ptr->frontier.field_E10_2];
 }
 
-void PrepareOneTrainer(bool8 difficult)
+static void PrepareOneTrainer(bool8 difficult)
 {
     s32 i;
     u8 lvlMode;
@@ -950,7 +1033,7 @@ void PrepareOneTrainer(bool8 difficult)
         gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 }
 
-void PrepareTwoTrainers(void)
+static void PrepareTwoTrainers(void)
 {
     s32 i;
     u16 trainerId;
@@ -989,7 +1072,7 @@ void PrepareTwoTrainers(void)
         gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
 }
 
-void sub_81A84B4(void)
+static void sub_81A84B4(void)
 {
     u8 i;
 
@@ -997,7 +1080,7 @@ void sub_81A84B4(void)
         gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
 }
 
-void sub_81A84EC(void)
+static void sub_81A84EC(void)
 {
     if (gSpecialVar_0x8005 == 0)
     {
@@ -1011,7 +1094,7 @@ void sub_81A84EC(void)
     }
 }
 
-bool8 AtLeastTwoAliveMons(void)
+static bool8 AtLeastTwoAliveMons(void)
 {
     struct Pokemon *mon;
     u8 i, countDead;
@@ -1030,7 +1113,7 @@ bool8 AtLeastTwoAliveMons(void)
         return TRUE;
 }
 
-u8 sub_81A8590(u8 arg0)
+static u8 sub_81A8590(u8 arg0)
 {
     u8 symbolsCount;
 
@@ -1062,12 +1145,12 @@ u8 sub_81A8590(u8 arg0)
     return ret;
 }
 
-void sub_81A863C(void)
+static void sub_81A863C(void)
 {
     gSpecialVar_Result = sub_81A8590(0);
 }
 
-void sub_81A8658(void)
+static void sub_81A8658(void)
 {
     u8 toHealCount = gUnknown_08612675[gSaveBlock2Ptr->frontier.field_E10_1][gSpecialVar_0x8007];
 
@@ -1075,12 +1158,12 @@ void sub_81A8658(void)
     gSpecialVar_Result = toHealCount;
 }
 
-void sub_81A869C(void)
+static void sub_81A869C(void)
 {
     gSaveBlock2Ptr->frontier.field_E10_3 = gSpecialVar_0x8005;
 }
 
-void sub_81A86C0(void)
+static void sub_81A86C0(void)
 {
     u8 i, j;
 
@@ -1119,7 +1202,7 @@ void sub_81A86C0(void)
     }
 }
 
-void sub_81A8794(void)
+static void sub_81A8794(void)
 {
     u8 i;
 
@@ -1131,7 +1214,7 @@ void sub_81A8794(void)
     }
 }
 
-void sub_81A87E8(void)
+static void sub_81A87E8(void)
 {
     u8 i;
 
@@ -1143,7 +1226,7 @@ void sub_81A87E8(void)
     }
 }
 
-void sub_81A8830(void)
+static void sub_81A8830(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -1157,7 +1240,7 @@ void sub_81A8830(void)
     gBattleOutcome = 0;
 }
 
-bool8 CanEncounterWildMon(u8 enemyMonLevel)
+static bool8 CanEncounterWildMon(u8 enemyMonLevel)
 {
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
     {
@@ -1173,7 +1256,7 @@ bool8 CanEncounterWildMon(u8 enemyMonLevel)
     return TRUE;
 }
 
-u8 sub_81A890C(u16 species)
+static u8 SpeciesToPikeMonId(u16 species)
 {
     u8 ret;
 
