@@ -27,9 +27,15 @@
 
 void HandleCommonInclude(std::string filename, std::string sourcePath, std::string symOrderPath, std::string lang)
 {
-    auto commonSymbols = GetCommonSymbols(sourcePath + "/" + filename);
+    auto commonSymbols = GetCommonSymbols(sourcePath, filename);
+    std::size_t dotIndex;
 
-    std::size_t dotIndex = filename.find_last_of('.');
+    if (filename[0] == '*') {
+        dotIndex = filename.find_last_of(':');
+        filename = filename.substr(dotIndex + 1);
+    }
+
+    dotIndex = filename.find_last_of('.');
 
     if (dotIndex == std::string::npos)
         FATAL_ERROR("error: \"%s\" doesn't have a file extension\n", filename.c_str());

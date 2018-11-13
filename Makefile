@@ -8,6 +8,9 @@ else
 EXE :=
 endif
 
+# Remove this line to build with printing capabilities
+NDEBUG := 1
+
 TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
@@ -42,7 +45,10 @@ CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -und
 
 LDFLAGS = -Map ../../$(MAP)
 
-LIB := -L ../../tools/agbcc/lib -lgcnmultiboot -lm4a -lagb_flash -lsiirtc -lrfu_1026 -lagbsyscall -lgcc -lc -lisagbprn
+LIB := -L ../../tools/agbcc/lib -lgcnmultiboot -lm4a -lagb_flash -lsiirtc -lrfu_1026 -lagbsyscall -lgcc -lc
+ifeq ($(NDEBUG),)
+LIB += -lisagbprn
+endif
 
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 GFX := tools/gbagfx/gbagfx$(EXE)
