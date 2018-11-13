@@ -1,6 +1,6 @@
 #include "constants/battle_frontier.h"
-#include "constants/flags.h"
 #include "constants/field_effects.h"
+#include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/maps.h"
