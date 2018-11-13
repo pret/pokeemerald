@@ -558,8 +558,7 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
 
 static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 {
-    s16 x;
-    s16 y;
+    s16 x, y;
 
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {

@@ -5,6 +5,7 @@
 #include "script.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
