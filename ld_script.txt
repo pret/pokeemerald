@@ -315,21 +315,20 @@ SECTIONS {
     lib_text :
     ALIGN(4)
     {
-        asm/libgcnmultiboot.o(.text);
-        asm/m4a_1.o(.text);
-        src/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/m4a_4.o(.text);
-        src/agb_flash.o(.text);
-        src/agb_flash_1m.o(.text);
-        src/agb_flash_mx.o(.text);
-        src/siirtc.o(.text);
-        src/librfu_stwi.o(.text);
-        src/librfu_intr.o(.text);
-        asm/librfu_intr.o(.text);
-        src/librfu_rfu.o(.text);
-        asm/librfu.o(.text);
-        asm/libagbsyscall.o(.text);
+        *libgcnmultiboot.a:libgcnmultiboot.o(.text);
+        *libm4a.a:m4a_1.o(.text);
+        *libm4a.a:m4a_2.o(.text);
+        *libm4a.a:m4a_3.o(.text);
+        *libm4a.a:m4a_4.o(.text);
+        *libagb_flash.a:agb_flash.o(.text);
+        *libagb_flash.a:agb_flash_1m.o(.text);
+        *libagb_flash.a:agb_flash_mx.o(.text);
+        *libsiirtc.a:siirtc.o(.text);
+        *librfu_1026.a:librfu_stwi.o(.text);
+        *librfu_1026.a:librfu_intr.o(.text);
+        *librfu_1026.a:librfu_rfu.o(.text);
+        *librfu_1026.a:librfu.o(.text);
+        *libagbsyscall.a:libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         *libgcc.a:_divdi3.o(.text);
         *libgcc.a:_divsi3.o(.text);
@@ -380,7 +379,7 @@ SECTIONS {
         *libc.a:libcfunc.o(.text);
         *libc.a:syscalls.o(.text);
         *libc.a:errno.o(.text);
-        src/libisagbprn.o(.text);
+        *libisagbprn.a:libisagbprn.o(.text);
     } =0
 
     .rodata :
@@ -618,7 +617,7 @@ SECTIONS {
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
-        src/m4a_tables.o(.rodata);
+        *libm4a.a:m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
 
@@ -1165,13 +1164,13 @@ SECTIONS {
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
         src/siirtc.o(.rodata);
-        data/librfu_rodata.o(.rodata);
+        *librfu_1026.a/librfu.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);
         *libc.a(.rodata);
         *libc.a(.data);
         *libc.a:syscalls.o(.rodata);
-        src/libisagbprn.o(.rodata);
+        *libisagbprn.a:libisagbprn.o(.rodata);
     } =0
 
     other_data :

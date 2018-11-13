@@ -142,8 +142,7 @@ gUnknown_030012FC: @ 30012FC
 	@ libraries
 
 	@ m4a_1
-gUnknown_03001300: @ 3001300
-	.space 0x40
+	.include "*libm4a.a:m4a_1.o"
 
 	@ sound/music_player_table.inc
 gMPlayTrack_BGM: @ 3001340
@@ -158,8 +157,8 @@ gMPlayTrack_SE2: @ 3001750
 gMPlayTrack_SE3: @ 3001A20
 	.space 0x50
 
-	.include "src/agb_flash.o"
-	.include "src/siirtc.o"
+	.include "*libagb_flash.a:agb_flash.o"
+	.include "*libsiirtc.a:siirtc.o"
 	.include "*libgcc.a:dp-bit.o"
 	.include "*libgcc.a:fp-bit.o"
 	.include "*libc.a:syscalls.o"
