@@ -27,10 +27,14 @@ SECTIONS {
 <BSS>
 
         /* .bss.code starts at 0x3001AA8 */
-        src/m4a_2.o(.bss.code);
+        *libm4a.a:m4a_2.o(.bss.code);
 
         /* COMMON starts at 0x30022A8 */
 <COMMON>
+        *libm4a.a:m4a_2.o(COMMON);
+        *libagb_flash.a:agb_flash.o(COMMON);
+        *libsiirtc.a:siirtc.o(COMMON);
+        *librfu_1026.a:librfu.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
         end = .;
         . = 0x8000;
@@ -1159,11 +1163,11 @@ SECTIONS {
     lib_rodata :
     SUBALIGN(4)
     {
-        src/agb_flash.o(.rodata);
-        src/agb_flash_1m.o(.rodata);
-        src/agb_flash_mx.o(.rodata);
-        src/agb_flash_le.o(.rodata);
-        src/siirtc.o(.rodata);
+        *libagb_flash.a:agb_flash.o(.rodata);
+        *libagb_flash.a:agb_flash_1m.o(.rodata);
+        *libagb_flash.a:agb_flash_mx.o(.rodata);
+        *libagb_flash.a:agb_flash_le.o(.rodata);
+        *libsiirtc.a:siirtc.o(.rodata);
         *librfu_1026.a/librfu.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);

@@ -130,28 +130,3 @@ gUnknown_03006328: @ 3006328
 
 gUnknown_03006370: @ 3006370
 	.space 0x10
-
-	.include "m4a_2.o"
-
-	.include "agb_flash.o"
-
-gRfuState: @ 3007868
-	.space 0x8
-
-gUnknown_03007870: @ 3007870
-	.space 0x10
-
-gUnknown_03007880: @ 3007880
-	.space 0x10
-
-gUnknown_03007890: @ 3007890
-	.space 0x4
-
-gUnknown_03007894: @ 3007894
-	.space 0x4
-
-gUnknown_03007898: @ 3007898
-	.space 0x8
-
-gUnknown_030078A0: @ 30078A0
-	.space 0xC
