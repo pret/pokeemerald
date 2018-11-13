@@ -1862,7 +1862,7 @@ static void ScriptCmd_monbg(void)
     sBattleAnimScriptPtr++;
 
     animBattler = sBattleAnimScriptPtr[0];
-    if (animBattler & ANIM_BATTLER_TARGET)
+    if (animBattler & ANIM_TARGET)
         battlerId = gBattleAnimTarget;
     else
         battlerId = gBattleAnimAttacker;
@@ -2119,12 +2119,12 @@ static void ScriptCmd_clearmonbg(void)
     sBattleAnimScriptPtr++;
     animBattlerId = sBattleAnimScriptPtr[0];
 
-    if (animBattlerId == ANIM_BATTLER_ATTACKER)
-        animBattlerId = ANIM_BATTLER_ATK_PARTNER;
-    else if (animBattlerId == ANIM_BATTLER_TARGET)
-        animBattlerId = ANIM_BATTLER_DEF_PARTNER;
+    if (animBattlerId == ANIM_ATTACKER)
+        animBattlerId = ANIM_ATK_PARTNER;
+    else if (animBattlerId == ANIM_TARGET)
+        animBattlerId = ANIM_DEF_PARTNER;
 
-    if (animBattlerId == ANIM_BATTLER_ATTACKER || animBattlerId == ANIM_BATTLER_ATK_PARTNER)
+    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
@@ -2181,12 +2181,12 @@ static void ScriptCmd_monbg_22(void)
 
     animBattlerId = sBattleAnimScriptPtr[0];
 
-    if (animBattlerId == ANIM_BATTLER_ATTACKER)
-        animBattlerId = ANIM_BATTLER_ATK_PARTNER;
-    else if (animBattlerId == ANIM_BATTLER_TARGET)
-        animBattlerId = ANIM_BATTLER_DEF_PARTNER;
+    if (animBattlerId == ANIM_ATTACKER)
+        animBattlerId = ANIM_ATK_PARTNER;
+    else if (animBattlerId == ANIM_TARGET)
+        animBattlerId = ANIM_DEF_PARTNER;
 
-    if (animBattlerId == ANIM_BATTLER_ATTACKER || animBattlerId == ANIM_BATTLER_ATK_PARTNER)
+    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
@@ -2226,12 +2226,12 @@ static void ScriptCmd_clearmonbg_23(void)
     sBattleAnimScriptPtr++;
     animBattlerId = sBattleAnimScriptPtr[0];
 
-    if (animBattlerId == ANIM_BATTLER_ATTACKER)
-        animBattlerId = ANIM_BATTLER_ATK_PARTNER;
-    else if (animBattlerId == ANIM_BATTLER_TARGET)
-        animBattlerId = ANIM_BATTLER_DEF_PARTNER;
+    if (animBattlerId == ANIM_ATTACKER)
+        animBattlerId = ANIM_ATK_PARTNER;
+    else if (animBattlerId == ANIM_TARGET)
+        animBattlerId = ANIM_DEF_PARTNER;
 
-    if (animBattlerId == ANIM_BATTLER_ATTACKER || animBattlerId == ANIM_BATTLER_ATK_PARTNER)
+    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
@@ -2956,7 +2956,7 @@ static void ScriptCmd_monbgprio_28(void)
     wantedBattler = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
 
-    if (wantedBattler != ANIM_BATTLER_ATTACKER)
+    if (wantedBattler != ANIM_ATTACKER)
         battlerId = gBattleAnimTarget;
     else
         battlerId = gBattleAnimAttacker;
@@ -2989,7 +2989,7 @@ static void ScriptCmd_monbgprio_2A(void)
     sBattleAnimScriptPtr += 2;
     if (GetBattlerSide(gBattleAnimAttacker) != GetBattlerSide(gBattleAnimTarget))
     {
-        if (wantedBattler != ANIM_BATTLER_ATTACKER)
+        if (wantedBattler != ANIM_ATTACKER)
             battlerId = gBattleAnimTarget;
         else
             battlerId = gBattleAnimAttacker;
@@ -3036,15 +3036,15 @@ static void ScriptCmd_doublebattle_2D(void)
     if (!IsContest() && IsDoubleBattle()
      && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
-        if (wantedBattler == ANIM_BATTLER_ATTACKER)
+        if (wantedBattler == ANIM_ATTACKER)
         {
             r4 = sub_80A8364(gBattleAnimAttacker);
-            spriteId = GetAnimBattlerSpriteId(ANIM_BATTLER_ATTACKER);
+            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
             r4 = sub_80A8364(gBattleAnimTarget);
-            spriteId = GetAnimBattlerSpriteId(ANIM_BATTLER_TARGET);
+            spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
         {
@@ -3071,15 +3071,15 @@ static void ScriptCmd_doublebattle_2E(void)
     if (!IsContest() && IsDoubleBattle()
      && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
-        if (wantedBattler == ANIM_BATTLER_ATTACKER)
+        if (wantedBattler == ANIM_ATTACKER)
         {
             r4 = sub_80A8364(gBattleAnimAttacker);
-            spriteId = GetAnimBattlerSpriteId(ANIM_BATTLER_ATTACKER);
+            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
             r4 = sub_80A8364(gBattleAnimTarget);
-            spriteId = GetAnimBattlerSpriteId(ANIM_BATTLER_TARGET);
+            spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
 
         if (spriteId != 0xFF && r4 == 2)

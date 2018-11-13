@@ -130,7 +130,7 @@ void sub_8158D8C(u8 taskId)
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
-        if (gBattleAnimArgs[0] == ANIM_BATTLER_ATTACKER)
+        if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->field_18->unk0;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
@@ -140,17 +140,17 @@ void sub_8158D8C(u8 taskId)
         u8 battlerId;
 
         // Get wanted battler.
-        if (gBattleAnimArgs[0] == ANIM_BATTLER_ATTACKER)
+        if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             battlerId = gBattleAnimAttacker;
-        else if (gBattleAnimArgs[0] == ANIM_BATTLER_TARGET)
+        else if (gBattleAnimArgs[0] == ANIM_TARGET)
             battlerId = gBattleAnimTarget;
-        else if (gBattleAnimArgs[0] == ANIM_BATTLER_ATK_PARTNER)
+        else if (gBattleAnimArgs[0] == ANIM_ATK_PARTNER)
             battlerId = BATTLE_PARTNER(gBattleAnimAttacker);
         else
             battlerId = BATTLE_PARTNER(gBattleAnimTarget);
 
         // Check if battler is visible.
-        if ((gBattleAnimArgs[0] == ANIM_BATTLER_TARGET || gBattleAnimArgs[0] == ANIM_BATTLER_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
+        if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
         {
             DestroyAnimVisualTask(taskId);
             return;
@@ -176,7 +176,7 @@ void sub_8158E9C(u8 taskId)
     s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
-        if (gBattleAnimArgs[0] == ANIM_BATTLER_ATTACKER)
+        if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             species = gContestResources->field_18->unk0;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
@@ -186,17 +186,17 @@ void sub_8158E9C(u8 taskId)
         u8 battlerId;
 
         // Get wanted battler.
-        if (gBattleAnimArgs[0] == ANIM_BATTLER_ATTACKER)
+        if (gBattleAnimArgs[0] == ANIM_ATTACKER)
             battlerId = gBattleAnimAttacker;
-        else if (gBattleAnimArgs[0] == ANIM_BATTLER_TARGET)
+        else if (gBattleAnimArgs[0] == ANIM_TARGET)
             battlerId = gBattleAnimTarget;
-        else if (gBattleAnimArgs[0] == ANIM_BATTLER_ATK_PARTNER)
+        else if (gBattleAnimArgs[0] == ANIM_ATK_PARTNER)
             battlerId = BATTLE_PARTNER(gBattleAnimAttacker);
         else
             battlerId = BATTLE_PARTNER(gBattleAnimTarget);
 
         // Check if battler is visible.
-        if ((gBattleAnimArgs[0] == ANIM_BATTLER_TARGET || gBattleAnimArgs[0] == ANIM_BATTLER_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
+        if ((gBattleAnimArgs[0] == ANIM_TARGET || gBattleAnimArgs[0] == ANIM_DEF_PARTNER) && !IsBattlerSpriteVisible(battlerId))
         {
             DestroyAnimVisualTask(taskId);
             return;

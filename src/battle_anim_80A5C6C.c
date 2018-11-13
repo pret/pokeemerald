@@ -395,7 +395,7 @@ u8 GetAnimBattlerSpriteId(u8 which)
 {
     u8 *sprites;
 
-    if (which == ANIM_BATTLER_ATTACKER)
+    if (which == ANIM_ATTACKER)
     {
         if (IsBattlerSpritePresent(gBattleAnimAttacker))
         {
@@ -407,7 +407,7 @@ u8 GetAnimBattlerSpriteId(u8 which)
             return 0xff;
         }
     }
-    else if (which == ANIM_BATTLER_TARGET)
+    else if (which == ANIM_TARGET)
     {
         if (IsBattlerSpritePresent(gBattleAnimTarget))
         {
@@ -419,7 +419,7 @@ u8 GetAnimBattlerSpriteId(u8 which)
             return 0xff;
         }
     }
-    else if (which == ANIM_BATTLER_ATK_PARTNER)
+    else if (which == ANIM_ATK_PARTNER)
     {
         if (!IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
             return 0xff;
@@ -1236,7 +1236,7 @@ bool8 sub_80A7238(void)
 {
     if (IsContest())
     {
-        if (gSprites[GetAnimBattlerSpriteId(ANIM_BATTLER_ATTACKER)].data[2] == SPECIES_UNOWN)
+        if (gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].data[2] == SPECIES_UNOWN)
             return FALSE;
         else
             return TRUE;
@@ -2334,7 +2334,7 @@ void sub_80A8BC4(u8 taskId)
     u16 dest;
     struct Task *task = &gTasks[taskId];
 
-    task->data[0] = GetAnimBattlerSpriteId(ANIM_BATTLER_ATTACKER);
+    task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[1] = ((GetBattlerSide(gBattleAnimAttacker)) != B_SIDE_PLAYER) ? -8 : 8;
     task->data[2] = 0;
     task->data[3] = 0;
