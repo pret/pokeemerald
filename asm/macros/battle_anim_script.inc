@@ -20,6 +20,20 @@
 .Lsprite_\@_2:
 	.endm
 
+.macro createsprite2 template, anim_battler, subpriority_offset, argv:vararg
+	.byte 0x02
+	.4byte \template
+	.if \anim_battler == ANIM_BATTLER_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
+	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
+.Lsprite_\@_1:
+	.2byte \argv
+.Lsprite_\@_2:
+	.endm
+
 	.macro createvisualtask addr, priority, argv:vararg
 	.byte 0x03
 	.4byte \addr
