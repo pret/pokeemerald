@@ -10,9 +10,9 @@
 #include "battle_tower.h"
 #include "berry.h"
 #include "bg.h"
-#include "dma3.h"
 #include "data2.h"
 #include "decompress.h"
+#include "dma3.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "gpu_regs.h"
@@ -50,9 +50,9 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
-#include "constants/trainers.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/trainers.h"
 
 struct UnknownPokemonStruct4
 {

@@ -1,11 +1,11 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
+#include "contest.h"
+#include "sound.h"
+#include "task.h"
 #include "constants/battle_anim.h"
 #include "constants/species.h"
-#include "battle_anim.h"
-#include "task.h"
-#include "sound.h"
-#include "contest.h"
 
 // this file's functions
 static void sub_8158B98(u8 taskId);

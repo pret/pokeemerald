@@ -1,20 +1,19 @@
 #include "global.h"
-#include "constants/songs.h"
 #include "braille_puzzles.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_effect.h"
 #include "gpu_regs.h"
-#include "gba/io_reg.h"
 #include "main.h"
+#include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "overworld.h"
 #include "rom6.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/songs.h"
 
 // structures
 struct FlashStruct
