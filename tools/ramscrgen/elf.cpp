@@ -144,11 +144,10 @@ static void FindArObj()
             FATAL_ERROR("error: corrupted archive header in \"%s\" at \"%s\"\n", s_archiveFilePath.c_str(), file_ident);
 
         char * ptr = std::strchr(file_ident, '/');
-        if (ptr == nullptr)
-            ptr = file_ident + 16;
-        *ptr = 0;
+        if (ptr != nullptr)
+            *ptr = 0;
         filesize = std::strtoul(filesize_s, nullptr, 10);
-        if (std::strcmp(s_archiveObjectPath.c_str(), file_ident) == 0) {
+        if (std::strncmp(s_archiveObjectPath.c_str(), file_ident, 16) == 0) {
             s_elfFileOffset = std::ftell(s_file);
             return;
         }
