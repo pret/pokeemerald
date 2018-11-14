@@ -12,7 +12,7 @@
 #include "task.h"
 #include "overworld.h"
 #include "link.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "rom_818CFC8.h"
 #include "field_specials.h"
 #include "event_object_movement.h"
@@ -34,6 +34,7 @@
 #include "constants/songs.h"
 #include "field_player_avatar.h"
 #include "battle_pyramid_bag.h"
+#include "battle_pike.h"
 
 // Menu actions
 enum
@@ -977,14 +978,14 @@ static u8 SaveConfirmSaveCallback(void)
 
 static u8 SaveYesNoCallback(void)
 {
-    sub_8197930(); // Show Yes/No menu
+    DisplayYesNoMenu(); // Show Yes/No menu
     sSaveDialogCallback = SaveConfirmInputCallback;
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveConfirmInputCallback(void)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes
         switch (gSaveFileStatus)
@@ -1037,14 +1038,14 @@ static u8 SaveConfirmOverwriteNoCallback(void)
 
 static u8 SaveConfirmOverwriteCallback(void)
 {
-    sub_8197930(); // Show Yes/No menu
+    DisplayYesNoMenu(); // Show Yes/No menu
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveOverwriteInputCallback(void)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes
         sSaveDialogCallback = SaveSavingMessageCallback;
@@ -1168,7 +1169,7 @@ static u8 BattlePyramidRetireYesNoCallback(void)
 
 static u8 BattlePyramidRetireInputCallback(void)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes
         return SAVE_CANCELED;

@@ -2905,7 +2905,7 @@ _080170CA:
 	negs r0, r0
 	b _08017110
 _080170D4:
-	bl sub_8197930
+	bl DisplayYesNoMenu
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -2920,7 +2920,7 @@ _080170E0:
 	negs r0, r0
 	b _08017110
 _080170F2:
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r2, 0x80
@@ -6278,7 +6278,7 @@ _08018BD6:
 	b _08018C3E
 	.pool
 _08018BE4:
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r6, r0, 24
 	movs r1, 0x80
@@ -11490,7 +11490,7 @@ _0801B628:
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
-	bl CopyUnalignedWord
+	bl CopyTrainerId
 	mov r2, r8
 	ldr r1, [r2]
 	adds r0, r6, 0
@@ -16904,7 +16904,7 @@ _0801E16A:
 	b _0801E23A
 	.pool
 _0801E17C:
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 8
 	lsrs r6, r0, 16
@@ -20614,7 +20614,7 @@ _0801FEFE:
 	thumb_func_start sub_801FF08
 sub_801FF08: @ 801FF08
 	push {lr}
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
@@ -28887,10 +28887,10 @@ _08024246:
 	strb r0, [r5, 0xC]
 	b _080242D8
 _0802426A:
-	bl sub_8197930
+	bl DisplayYesNoMenu
 	b _080242D0
 _08024270:
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x2
@@ -47811,7 +47811,7 @@ _0802DA84:
 	thumb_func_start sub_802DA8C
 sub_802DA8C: @ 802DA8C
 	push {lr}
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}

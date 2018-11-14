@@ -33,6 +33,7 @@
 #include "field_weather.h"
 #include "battle_tower.h"
 #include "gym_leader_rematch.h"
+#include "battle_pike.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
 
@@ -54,7 +55,6 @@ struct TrainerBattleParameter
 };
 
 extern bool8 InBattlePyramid(void);
-extern bool8 InBattlePike(void);
 extern bool32 InTrainerHill(void);
 extern bool32 FieldPoisonEffectIsRunning(void);
 extern void RestartWildEncounterImmunitySteps(void);
@@ -671,7 +671,7 @@ u8 BattleSetup_GetTerrainId(void)
         return BATTLE_TERRAIN_MOUNTAIN;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        if (MetatileBehavior_GetBridgeSth(tileBehavior))
+        if (MetatileBehavior_GetBridgeType(tileBehavior))
             return BATTLE_TERRAIN_POND;
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
             return BATTLE_TERRAIN_WATER;

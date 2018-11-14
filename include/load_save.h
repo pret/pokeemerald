@@ -17,7 +17,7 @@ void SetSaveBlocksPointers(u16 offset);
 void MoveSaveBlocks_ResetHeap(void);
 u32 GetSecretBase2Field_9(void);
 void ClearSecretBase2Field_9(void);
-void sub_8076D48(void);
+void SetSecretBase2Field_9(void);
 void sub_8076D5C(void);
 void sav2_gender2_inplace_and_xFE(void);
 void SavePlayerParty(void);

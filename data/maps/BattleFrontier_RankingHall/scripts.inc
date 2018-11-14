@@ -62,9 +62,9 @@ BattleFrontier_RankingHall_EventScript_25E516:: @ 825E516
 	end
 
 BattleFrontier_RankingHall_EventScript_25E522:: @ 825E522
-	special sub_81A4AA0
+	special ShowRankingHallRecordsWindow
 	waitbuttonpress
-	special sub_81A4AE8
+	special ScrollRankingHallRecordsWindow
 	waitbuttonpress
 	special RemoveRecordsWindow
 	releaseall

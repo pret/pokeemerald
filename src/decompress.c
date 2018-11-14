@@ -12,12 +12,12 @@ extern const struct CompressedSpriteSheet gMonBackPicTable[];
 
 static void DuplicateDeoxysTiles(void *pointer, s32 species);
 
-void LZDecompressWram(const void *src, void *dest)
+void LZDecompressWram(const u32 *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
 }
 
-void LZDecompressVram(const void *src, void *dest)
+void LZDecompressVram(const u32 *src, void *dest)
 {
     LZ77UnCompVram(src, dest);
 }
@@ -459,9 +459,10 @@ _08034964:\n\
         .syntax divided");
 }
 
-u32 GetDecompressedDataSize(const u8 *ptr)
+u32 GetDecompressedDataSize(const u32 *ptr)
 {
-    return (ptr[3] << 16) | (ptr[2] << 8) | (ptr[1]);
+	const u8 *ptr8 = (const u8 *)ptr;
+    return (ptr8[3] << 16) | (ptr8[2] << 8) | (ptr8[1]);
 }
 
 bool8 LoadCompressedObjectPicUsingHeap(const struct CompressedSpriteSheet* src)

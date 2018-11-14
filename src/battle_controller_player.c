@@ -32,6 +32,7 @@
 #include "recorded_battle.h"
 #include "party_menu.h"
 #include "battle_dome.h"
+#include "battle_arena.h"
 
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
@@ -46,7 +47,6 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_81AABB0(void);
-extern void sub_81A57E4(u8 battlerId, u16 stringId);
 extern void sub_81851A8(u8 *);
 
 // this file's functions
@@ -2563,7 +2563,7 @@ static void PlayerHandlePrintString(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
     BattleTv_SetDataBasedOnString(*stringId);
-    sub_81A57E4(gActiveBattler, *stringId);
+    BattleArena_DeductMindPoints(gActiveBattler, *stringId);
 }
 
 static void PlayerHandlePrintSelectionString(void)
@@ -2626,9 +2626,11 @@ static void HandleChooseMoveAfterDma3(void)
     }
 }
 
+// arenaMindPoints is used here as a placeholder for a timer.
+
 static void PlayerChooseMoveInBattlePalace(void)
 {
-    if (--*(gBattleStruct->field_298 + gActiveBattler) == 0)
+    if (--*(gBattleStruct->arenaMindPoints + gActiveBattler) == 0)
     {
         gBattlePalaceMoveSelectionRngValue = gRngValue;
         BtlController_EmitTwoReturnValues(1, 10, ChooseMoveAndTargetInBattlePalace());
@@ -2640,7 +2642,7 @@ static void PlayerHandleChooseMove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
-        *(gBattleStruct->field_298 + gActiveBattler) = 8;
+        *(gBattleStruct->arenaMindPoints + gActiveBattler) = 8;
         gBattlerControllerFuncs[gActiveBattler] = PlayerChooseMoveInBattlePalace;
     }
     else

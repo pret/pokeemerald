@@ -270,7 +270,7 @@ void Task_PokemonStorageSystem(u8 taskId)
         }
         break;
     case 2:
-        task->data[2] = ProcessMenuInput();
+        task->data[2] = Menu_ProcessInput();
         switch(task->data[2])
         {
         case -2:

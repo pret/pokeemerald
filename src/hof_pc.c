@@ -7,8 +7,6 @@
 #include "script_menu.h"
 #include "task.h"
 
-extern void (*gUnknown_0300485C)(void);
-
 extern void Overworld_PlaySpecialMapMusic(void);
 extern bool16 ScrSpecial_CreatePCMenu(void);
 extern void ScriptMenu_DisplayPCStartupPrompt(void);

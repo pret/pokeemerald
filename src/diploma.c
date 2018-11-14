@@ -80,7 +80,7 @@ void CB2_ShowDiploma(void)
     decompress_and_copy_tile_data_to_vram(1, &sDiplomaTiles, 0, 0, 0);
     while (free_temp_tile_data_buffers_if_possible())
         ;
-    LZDecompressWram(&sDiplomaTilemap, sDiplomaTilemapPtr);
+    LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
     BlendPalettes(-1, 16, 0);

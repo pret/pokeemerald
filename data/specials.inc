@@ -210,7 +210,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special sub_80F972C
+	def_special ExecuteWhiteOut
 	def_special sp0C8_whiteout_maybe
 	def_special RotatingGate_InitPuzzle
 	def_special RotatingGate_InitPuzzleAndGraphics
@@ -242,15 +242,15 @@ gSpecials:: @ 81DBA64
 	def_special FinishCyclingRoadChallenge
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
-	def_special sub_81A1780
+	def_special CallFrontierUtilFunc
 	def_special sub_8161F74
 	def_special CallBattleDomeFunction
-	def_special sub_8195960
+	def_special CallBattlePalaceFunction
 	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
-	def_special sub_81A5238
-	def_special sub_81A5E74
-	def_special sub_81A703C
+	def_special CallBattleArenaFunction
+	def_special CallBattleFactoryFunction
+	def_special CallBattlePikeFunction
 	def_special sub_81A8E7C
 	def_special StopMapMusic
 	def_special sub_81B99B4
@@ -448,8 +448,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F90DC
 	def_special sub_80F910C
 	def_special sub_80F9160
-	def_special sub_81A4AA0
-	def_special sub_81A4AE8
+	def_special ShowRankingHallRecordsWindow
+	def_special ScrollRankingHallRecordsWindow
 	def_special sub_8139F20
 	def_special sub_80F9134
 	def_special sub_80F9154

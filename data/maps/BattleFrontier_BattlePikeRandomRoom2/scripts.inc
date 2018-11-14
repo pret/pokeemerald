@@ -14,7 +14,7 @@ BattleFrontier_BattlePikeRandomRoom2_EventScript_25E3A7:: @ 825E3A7
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	lockall
 	msgbox BattleFrontier_BattlePikeRandomRoom2_Text_25E3F2, 4
 	closemessage

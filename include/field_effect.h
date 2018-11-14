@@ -179,8 +179,8 @@ bool8 sub_80B7B94(struct Task *, struct EventObject *, struct Sprite *);
 bool8 sub_80B7BCC(struct Task *, struct EventObject *, struct Sprite *);
 bool8 sub_80B7BF4(struct Task *, struct EventObject *, struct Sprite *);
 
-void sub_80B7D14(struct Task *);
-void sub_80B7D34(struct Task *);
+static void EscapeRopeFieldEffect_Step0(struct Task *);
+static void EscapeRopeFieldEffect_Step1(struct Task *);
 
 void sub_80B7EC4(struct Task *);
 void sub_80B7EE8(struct Task *);
@@ -237,5 +237,7 @@ void sub_80B7CAC(struct Sprite*);
 void sub_80B7A58(struct Sprite*);
 
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
+void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority);
 
 #endif //GUARD_FIELD_EFFECTS_H

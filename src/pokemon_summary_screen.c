@@ -2,7 +2,7 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_message.h"
 #include "battle_tent.h"
 #include "bg.h"
@@ -44,6 +44,8 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+
+extern bool8 sub_81A6BF4(void);
 
 static EWRAM_DATA struct UnkSummaryStruct
 {
@@ -1328,28 +1330,28 @@ static bool8 SummaryScreen_DecompressGraphics(void)
     case 1:
         if (free_temp_tile_data_buffers_if_possible() != 1)
         {
-            LZDecompressWram(&gUnknown_08D9862C, pssData->bgTilemapBuffers[PSS_PAGE_INFO][0]);
+            LZDecompressWram(gUnknown_08D9862C, pssData->bgTilemapBuffers[PSS_PAGE_INFO][0]);
             pssData->unk40F0++;
         }
         break;
     case 2:
-        LZDecompressWram(&gUnknown_08D98CC8, pssData->bgTilemapBuffers[PSS_PAGE_INFO][1]);
+        LZDecompressWram(gUnknown_08D98CC8, pssData->bgTilemapBuffers[PSS_PAGE_INFO][1]);
         pssData->unk40F0++;
         break;
     case 3:
-        LZDecompressWram(&gUnknown_08D987FC, pssData->bgTilemapBuffers[PSS_PAGE_SKILLS][1]);
+        LZDecompressWram(gUnknown_08D987FC, pssData->bgTilemapBuffers[PSS_PAGE_SKILLS][1]);
         pssData->unk40F0++;
         break;
     case 4:
-        LZDecompressWram(&gUnknown_08D9898C, pssData->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][1]);
+        LZDecompressWram(gUnknown_08D9898C, pssData->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][1]);
         pssData->unk40F0++;
         break;
     case 5:
-        LZDecompressWram(&gUnknown_08D98B28, pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][1]);
+        LZDecompressWram(gUnknown_08D98B28, pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][1]);
         pssData->unk40F0++;
         break;
     case 6:
-        LoadCompressedPalette(&gUnknown_08D9853C, 0, 0x100);
+        LoadCompressedPalette(gUnknown_08D9853C, 0, 0x100);
         LoadPalette(&gUnknown_08D85620, 0x81, 0x1E);
         pssData->unk40F0++;
         break;

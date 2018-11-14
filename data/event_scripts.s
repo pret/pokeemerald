@@ -1772,7 +1772,7 @@ EventScript_PC:: @ 8271D92
 	end
 
 EventScript_271DAC:: @ 8271DAC
-	message gUnknown_0827266F
+	message gText_WhichPCShouldBeAccessed
 	waitmessage
 	special ScrSpecial_CreatePCMenu
 	waitstate
@@ -3113,7 +3113,7 @@ Text_272640: @ 8272640
 Text_27265A: @ 827265A
 	.string "{PLAYER} booted up the PC.$"
 
-gUnknown_0827266F:: @ 827266F
+gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
 gUnknown_0827268C:: @ 827268C
@@ -3325,7 +3325,7 @@ EventScript_2736B3:: @ 82736B3
 
 EventScript_Poison:: @ 82736BC
 	lockall
-	special sub_80F972C
+	special ExecuteWhiteOut
 	waitstate
 	compare VAR_RESULT, 1
 	goto_eq EventScript_2736D9
@@ -3356,7 +3356,7 @@ EventScript_2736F8:: @ 82736F8
 	waitmessage
 	waitbuttonpress
 	setvar VAR_0x8004, 16
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
 	setvar VAR_0x8004, 12
@@ -10204,9 +10204,9 @@ BattleFrontier_BattlePikeRandomRoom1_MapScripts_2C3E1B: @ 82C3E1B
 
 BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25: @ 82C3E25
 	setvar VAR_0x8004, 4
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 5
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EB1
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EB1
@@ -10251,7 +10251,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
 	setvar VAR_OBJ_GFX_ID_1, 28
 	setvar VAR_OBJ_GFX_ID_0, 28
 	setvar VAR_0x8004, 5
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
 	compare VAR_RESULT, 6
@@ -10294,24 +10294,24 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F64:: @ 82C3F64
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F6F:: @ 82C3F6F
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 5
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030
@@ -10368,29 +10368,29 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C408D:: @ 82C408D
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8004, 25
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128
 	compare VAR_RESULT, 1
 	call_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 3
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
 	compare VAR_RESULT, 0
@@ -10402,14 +10402,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128:: @ 82C4128
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128:: @ 82C4128
 	setvar VAR_0x8004, 24
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136:: @ 82C4136
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136:: @ 82C4136
 	setvar VAR_0x8004, 24
 	setvar VAR_0x8005, 0
-	special sub_81A703C
+	special CallBattlePikeFunction
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144:: @ 82C4144
@@ -10430,31 +10430,31 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C:: @ 82C415C
 
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	setvar VAR_0x8004, 7
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 25
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128
 	compare VAR_RESULT, 1
 	call_if 5, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 3
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144
 	compare VAR_RESULT, 0
@@ -10479,7 +10479,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222:: @ 82C4222
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
@@ -10489,7 +10489,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E: @ 82C423E
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
 	compare VAR_RESULT, 1
@@ -10503,7 +10503,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B:: @ 82C426B
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4271:: @ 82C4271
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4271:: @ 82C4271
 	setvar VAR_0x8004, 21
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A: @ 82C427A
@@ -11665,7 +11665,7 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	special sp194_trainer_tower
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq TrainerHill_1F_EventScript_2C83C9
 	compare VAR_RESULT, 3

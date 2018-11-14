@@ -42,7 +42,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	applymovement 3, SlateportCity_BattleTentBattleRoom_Movement_209A99
 	waitmovement 0
 	setvar VAR_0x8004, 11
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setobjectxyperm 2, 5, 1
 	removeobject 2
 	addobject 2
@@ -66,7 +66,7 @@ SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate
@@ -74,12 +74,12 @@ SlateportCity_BattleTentCorridor_EventScript_209A1B:: @ 8209A1B
 SlateportCity_BattleTentBattleRoom_EventScript_209A39:: @ 8209A39
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 3, SlateportCity_BattleTentBattleRoom_EventScript_209A7B
 @ 	case 3, SlateportCity_BattleTentCorridor_EventScript_209A7B
@@ -92,7 +92,7 @@ SlateportCity_BattleTentCorridor_EventScript_209A7B:: @ 8209A7B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special LoadPlayerParty
 	warp MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY, 255, 6, 6
 	waitstate

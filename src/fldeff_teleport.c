@@ -1,5 +1,4 @@
 #include "global.h"
-#include "fldeff_teleport.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "party_menu.h"
@@ -7,18 +6,21 @@
 #include "rom6.h"
 #include "task.h"
 
+static void FieldCallback_Teleport(void);
+static void StartTeleportFieldEffect(void);
+
 bool8 SetUpFieldMove_Teleport(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = hm_teleport_run_dp02scr;
+        gPostMenuFieldCallback = FieldCallback_Teleport;
         return TRUE;
     }
     return FALSE;
 }
 
-void hm_teleport_run_dp02scr(void)
+static void FieldCallback_Teleport(void)
 {
     Overworld_ResetStateAfterTeleport();
     FieldEffectStart(FLDEFF_USE_TELEPORT);
@@ -28,16 +30,14 @@ void hm_teleport_run_dp02scr(void)
 bool8 FldEff_UseTeleport(void)
 {
     u8 taskId = oei_task_add();
-    gTasks[taskId].data[8] = (u32)sub_817C94C >> 16;
-    gTasks[taskId].data[9] = (u32)sub_817C94C;
-    SetPlayerAvatarTransitionFlags(1);
+    gTasks[taskId].data[8] = (u32)StartTeleportFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartTeleportFieldEffect;
+    SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return FALSE;
 }
 
-void sub_817C94C(void)
+static void StartTeleportFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_TELEPORT);
     CreateTeleportFieldEffectTask();
 }
-
-

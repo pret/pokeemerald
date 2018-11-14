@@ -2,7 +2,7 @@
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "berry_tag_screen.h"
 #include "bg.h"
 #include "constants/items.h"
@@ -47,6 +47,7 @@
 #include "menu_helpers.h"
 #include "window.h"
 #include "apprentice.h"
+#include "battle_pike.h"
 
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void CB2_Bag(void);
@@ -445,7 +446,6 @@ EWRAM_DATA u16 gSpecialVar_ItemId = 0;
 EWRAM_DATA struct TempWallyStruct *gUnknown_0203CE80 = 0;
 
 extern u8 *gPocketNamesStringsTable[];
-extern u8 gUnknown_08D9A88C[];
 extern struct ListMenuTemplate gUnknown_08613F9C;
 extern const u8 gMoveNames[][0xD];
 extern u8* gReturnToXStringsTable[];
@@ -1029,7 +1029,7 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u
 
     data[10] = AddItemMessageWindow(4);
     FillWindowPixelBuffer(data[10], 17);
-    DisplayMessageAndContinueTask(taskId, data[10], 10, 13, fontId, GetPlayerTextSpeed(), str, callback);
+    DisplayMessageAndContinueTask(taskId, data[10], 10, 13, fontId, GetPlayerTextSpeedDelay(), str, callback);
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
@@ -1543,7 +1543,7 @@ void Task_HandleInBattleItemMenuInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE)
     {
-        s8 r4 = Menu_ProcessInputNoWrapAround();
+        s8 r4 = Menu_ProcessInputNoWrap();
         switch (r4)
         {
             case -2:

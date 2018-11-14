@@ -1795,7 +1795,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 3;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_2A0 & gBitTable[j]) // hmm...?
+                else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaLostPlayerMons & gBitTable[j])
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 3;
                 }
@@ -1844,7 +1844,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
                 {
                     gSprites[ballIconSpritesIds[5 - var]].oam.tileNum += 3;
                 }
-                else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_2A1 & gBitTable[j]) // hmm...?
+                else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaLostOpponentMons & gBitTable[j]) // hmm...?
                 {
                     gSprites[ballIconSpritesIds[5 - var]].oam.tileNum += 3;
                 }

@@ -18,7 +18,7 @@
 #include "menu.h"
 #include "recorded_battle.h"
 #include "international_string_util.h"
-#include "battle_frontier_2.h"
+#include "frontier_util.h"
 #include "battle_tower.h"
 #include "data2.h"
 
@@ -2974,7 +2974,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_LOSE_TEXT: // trainerA lose text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_A);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_WON_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -2990,7 +2990,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_WIN_TEXT: // trainerA win text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_A);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -3053,7 +3053,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_LOSE_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_B);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_WON_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -3069,7 +3069,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_WIN_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_B);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -3344,7 +3344,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 {
     const struct BattleWindowText *textInfo = sBattleTextOnWindowsInfo[gBattleScripting.windowsType];
     bool32 copyToVram;
-    struct TextSubPrinter textSubPrinter;
+    struct TextPrinterTemplate printerTemplate;
     u8 speed;
 
     if (windowId & 0x80)
@@ -3358,36 +3358,36 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         copyToVram = TRUE;
     }
 
-    textSubPrinter.current_text_offset = text;
-    textSubPrinter.windowId = windowId;
-    textSubPrinter.fontId = textInfo[windowId].fontId;
-    textSubPrinter.x = textInfo[windowId].x;
-    textSubPrinter.y = textInfo[windowId].y;
-    textSubPrinter.currentX = textSubPrinter.x;
-    textSubPrinter.currentY = textSubPrinter.y;
-    textSubPrinter.letterSpacing = textInfo[windowId].letterSpacing;
-    textSubPrinter.lineSpacing = textInfo[windowId].lineSpacing;
-    textSubPrinter.fontColor_l = 0;
-    textSubPrinter.fgColor = textInfo[windowId].fgColor;
-    textSubPrinter.bgColor = textInfo[windowId].bgColor;
-    textSubPrinter.shadowColor = textInfo[windowId].shadowColor;
+    printerTemplate.currentChar = text;
+    printerTemplate.windowId = windowId;
+    printerTemplate.fontId = textInfo[windowId].fontId;
+    printerTemplate.x = textInfo[windowId].x;
+    printerTemplate.y = textInfo[windowId].y;
+    printerTemplate.currentX = printerTemplate.x;
+    printerTemplate.currentY = printerTemplate.y;
+    printerTemplate.letterSpacing = textInfo[windowId].letterSpacing;
+    printerTemplate.lineSpacing = textInfo[windowId].lineSpacing;
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = textInfo[windowId].fgColor;
+    printerTemplate.bgColor = textInfo[windowId].bgColor;
+    printerTemplate.shadowColor = textInfo[windowId].shadowColor;
 
-    if (textSubPrinter.x == 0xFF)
+    if (printerTemplate.x == 0xFF)
     {
         u32 width = sub_80397C4(gBattleScripting.windowsType, windowId);
-        s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(textSubPrinter.fontId, textSubPrinter.current_text_offset, width, textSubPrinter.letterSpacing);
-        textSubPrinter.x = textSubPrinter.currentX = alignX;
+        s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(printerTemplate.fontId, printerTemplate.currentChar, width, printerTemplate.letterSpacing);
+        printerTemplate.x = printerTemplate.currentX = alignX;
     }
 
     if (windowId == 0x16)
-        gTextFlags.flag_1 = 0;
+        gTextFlags.useAlternateDownArrow = 0;
     else
-        gTextFlags.flag_1 = 1;
+        gTextFlags.useAlternateDownArrow = 1;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED))
-        gTextFlags.flag_2 = 1;
+        gTextFlags.autoScroll = 1;
     else
-        gTextFlags.flag_2 = 0;
+        gTextFlags.autoScroll = 0;
 
     if (windowId == 0 || windowId == 0x16)
     {
@@ -3396,17 +3396,17 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
-            speed = GetPlayerTextSpeed();
+            speed = GetPlayerTextSpeedDelay();
 
-        gTextFlags.flag_0 = 1;
+        gTextFlags.canABSpeedUpPrint = 1;
     }
     else
     {
         speed = textInfo[windowId].speed;
-        gTextFlags.flag_0 = 0;
+        gTextFlags.canABSpeedUpPrint = 0;
     }
 
-    AddTextPrinter(&textSubPrinter, speed, NULL);
+    AddTextPrinter(&printerTemplate, speed, NULL);
 
     if (copyToVram)
     {
