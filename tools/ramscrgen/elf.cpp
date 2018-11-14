@@ -133,12 +133,12 @@ static void FindArObj()
 
     Seek(8);
     while (!std::feof(s_file)) {
-        if (std::fread(file_ident, 16, 1, s_file) != -1)
+        if (std::fread(file_ident, 16, 1, s_file) != -1lu)
             FATAL_ERROR("error: failed to read file ident in \"%s\"\n", s_archiveFilePath.c_str());
         Skip(32);
-        if (std::fread(filesize_s, 10, 1, s_file) != -1)
+        if (std::fread(filesize_s, 10, 1, s_file) != -1lu)
             FATAL_ERROR("error: failed to read filesize in \"%s\"\n", s_archiveFilePath.c_str());
-        if (std::fread(end_magic, 2, 1, s_file) != -1)
+        if (std::fread(end_magic, 2, 1, s_file) != -1lu)
             FATAL_ERROR("error: failed to read end sentinel in \"%s\"\n", s_archiveFilePath.c_str());
         if (std::memcmp(end_magic, expectedEndMagic, 2) != 0)
             FATAL_ERROR("error: corrupted archive header in \"%s\" at \"%s\"\n", s_archiveFilePath.c_str(), file_ident);
