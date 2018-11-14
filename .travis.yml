@@ -16,7 +16,7 @@ install:
   - pushd $HOME
   - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r49/devkitARM_r49-linux.tar.xz
   - tar xJf devkitARM*.tar.xz
-  - travis_retry git clone https://github.com/pret/agbcc.git
+  - travis_retry git clone https://github.com/pikalaxalt/agbsdk.git -b add_libs
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
   - popd
 matrix:
