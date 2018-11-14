@@ -115,21 +115,6 @@ include songs.mk
 sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
 
-$(C_BUILDDIR)/siirtc.o: CC1 := tools/agbcc/bin/agbcc$(EXE)
-$(C_BUILDDIR)/siirtc.o: CFLAGS := -mthumb-interwork
-
-$(C_BUILDDIR)/agb_flash.o: CC1 := tools/agbcc/bin/agbcc$(EXE)
-$(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
-$(C_BUILDDIR)/agb_flash_1m.o: CC1 := tools/agbcc/bin/agbcc$(EXE)
-$(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-$(C_BUILDDIR)/agb_flash_mx.o: CC1 := tools/agbcc/bin/agbcc$(EXE)
-$(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
-
-$(C_BUILDDIR)/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-$(C_BUILDDIR)/m4a_2.o: CFLAGS := -O2 -mthumb-interwork -Wimplicit -Wparentheses -Werror
-$(C_BUILDDIR)/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-$(C_BUILDDIR)/m4a_4.o: CFLAGS := -O2 -mthumb-interwork -Wimplicit -Wparentheses -Werror
-
 $(C_BUILDDIR)/record_mixing.o: CFLAGS += -ffreestanding
 
 ifeq ($(NODEP),)
