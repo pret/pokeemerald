@@ -1,12 +1,12 @@
 #include "global.h"
 #include "pokemon.h"
-#include "sprite.h"
 #include "pokemon_animation.h"
-#include "trig.h"
+#include "sprite.h"
 #include "task.h"
+#include "trig.h"
 #include "util.h"
-#include "constants/rgb.h"
 #include "constants/battle_anim.h"
+#include "constants/rgb.h"
 #include "constants/species.h"
 
 struct UnkAnimStruct

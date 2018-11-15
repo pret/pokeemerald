@@ -1,8 +1,8 @@
 #include "global.h"
-#include "task.h"
-#include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
+#include "fieldmap.h"
+#include "task.h"
 
 static EWRAM_DATA u8 sEscalatorAnim_TaskId = 0;
 

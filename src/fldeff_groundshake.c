@@ -1,10 +1,7 @@
 #include "global.h"
-#include "global.fieldmap.h"
-#include "constants/flags.h"
-#include "constants/songs.h"
 #include "event_data.h"
-#include "field_camera.h"
 #include "event_object_movement.h"
+#include "field_camera.h"
 #include "malloc.h"
 #include "random.h"
 #include "roulette_util.h"
@@ -12,6 +9,8 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/flags.h"
+#include "constants/songs.h"
 
 // structures
 struct Struct203CF18 {

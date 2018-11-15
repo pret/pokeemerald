@@ -2,7 +2,6 @@
 #define GUARD_BATTLE_CONTROLLERS_H
 
 #include "global.h"
-
 #include "battle.h"
 
 enum

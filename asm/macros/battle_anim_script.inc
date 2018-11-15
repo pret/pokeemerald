@@ -10,10 +10,14 @@
 	.2byte \param0
 	.endm
 
-	.macro createsprite template, priority, argv:vararg
+.macro createsprite template, anim_battler, subpriority_offset, argv:vararg
 	.byte 0x02
 	.4byte \template
-	.byte \priority
+	.if \anim_battler == ANIM_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
 	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
 .Lsprite_\@_1:
 	.2byte \argv

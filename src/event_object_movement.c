@@ -18,10 +18,12 @@
 #include "random.h"
 #include "rom_818CFC8.h"
 #include "sprite.h"
+#include "task.h"
 #include "trainer_see.h"
 #include "util.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
+#include "constants/field_effects.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 

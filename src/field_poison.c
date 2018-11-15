@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_pike.h"
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_poison.h"
@@ -12,7 +13,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "battle_pike.h"
 #include "constants/species.h"
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)

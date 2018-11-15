@@ -1,15 +1,15 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "constants/battle_anim.h"
-#include "constants/rgb.h"
-#include "util.h"
 #include "decompress.h"
+#include "gpu_regs.h"
 #include "palette.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-#include "gpu_regs.h"
+#include "util.h"
+#include "constants/battle_anim.h"
+#include "constants/rgb.h"
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
