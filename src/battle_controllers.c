@@ -1,17 +1,17 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_controllers.h"
-#include "cable_club.h"
-#include "link.h"
-#include "task.h"
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
+#include "battle_controllers.h"
+#include "battle_message.h"
+#include "cable_club.h"
+#include "link.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "recorded_battle.h"
+#include "task.h"
 #include "util.h"
 #include "constants/abilities.h"
-#include "battle_message.h"
+#include "constants/species.h"
 
 extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;

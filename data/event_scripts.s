@@ -1,13 +1,14 @@
+#include "constants/battle_frontier.h"
+#include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/heal_locations.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/vars.h"
-#include "constants/heal_locations.h"
 #include "constants/trainers.h"
-#include "constants/battle_frontier.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -434,13 +435,13 @@ gStdScripts_End:: @ 81DC2CC
 
 EventScript_SecretBasePC:: @ 823B4BB
 	lockall
-	playse 2
+	playse SE_PC_LOGIN
 	message Text_276805
-	dofieldeffect 61
+	dofieldeffect FLDEFF_PCTURN_ON
 	waitstate
 	waitmessage
 	waitbuttonpress
-	playse 5
+	playse SE_SELECT
 	goto EventScript_23B4D3
 	end
 
@@ -496,12 +497,12 @@ EventScript_23B585:: @ 823B585
 EventScript_RecordMixingSecretBasePC:: @ 823B589
 	lockall
 	message Text_276805
-	playse 2
-	dofieldeffect 61
+	playse SE_PC_LOGIN
+	dofieldeffect FLDEFF_PCTURN_ON
 	waitstate
 	waitmessage
 	waitbuttonpress
-	playse 5
+	playse SE_SELECT
 	goto EventScript_23B5A1
 	end
 
@@ -584,7 +585,7 @@ EventScript_23B680:: @ 823B680
 
 EventScript_SecretBaseSandOrnament:: @ 823B684
 	special sub_80EBE7C
-	dofieldeffect 52
+	dofieldeffect FLDEFF_SAND_PILLAR
 	waitstate
 	end
 
@@ -1435,8 +1436,8 @@ OldaleTown_PokemonCenter_1F_EventScript_27198D:: @ 827198D
 OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_2725A4
 	waitmovement 0
-	dofieldeffect 25
-	waitfieldeffect 25
+	dofieldeffect FLDEFF_POKECENTER_HEAL
+	waitfieldeffect FLDEFF_POKECENTER_HEAL
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_2725AA
 	waitmovement 0
 	special HealPlayerParty
@@ -1914,7 +1915,7 @@ EventScript_UseSurf:: @ 8271EA0
 	compare VAR_RESULT, 0
 	goto_eq EventScript_271ED5
 	msgbox gUnknown_0827300D, 4
-	dofieldeffect 9
+	dofieldeffect FLDEFF_USE_SURF
 
 EventScript_271ED5:: @ 8271ED5
 	releaseall
@@ -4447,14 +4448,14 @@ EventScript_275A50:: @ 8275A50
 	goto_eq EventScript_275CDE
 	msgbox Route103_Text_290771, 4
 	closemessage
-	dofieldeffect 11
+	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
 	goto EventScript_275A9B
 	end
 
 EventScript_275A86:: @ 8275A86
 	lockall
-	dofieldeffect 11
+	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
 	goto EventScript_275A9B
 	end
@@ -4479,14 +4480,14 @@ EventScript_275AA9:: @ 8275AA9
 	goto_eq EventScript_275CDE
 	msgbox Route103_Text_290771, 4
 	closemessage
-	dofieldeffect 26
+	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
 	goto EventScript_275AF4
 	end
 
 EventScript_275ADF:: @ 8275ADF
 	lockall
-	dofieldeffect 26
+	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
 	goto EventScript_275AF4
 	end
@@ -4511,14 +4512,14 @@ EventScript_275B02:: @ 8275B02
 	goto_eq EventScript_275CDE
 	msgbox Route103_Text_290771, 4
 	closemessage
-	dofieldeffect 27
+	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
 	goto EventScript_275B4D
 	end
 
 EventScript_275B38:: @ 8275B38
 	lockall
-	dofieldeffect 27
+	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
 	goto EventScript_275B4D
 	end

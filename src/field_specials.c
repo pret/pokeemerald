@@ -1,5 +1,4 @@
 #include "global.h"
-#include "main.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
@@ -13,7 +12,6 @@
 #include "field_effect.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "field_region_map.h"
 #include "field_screen.h"
 #include "field_specials.h"
 #include "field_weather.h"
@@ -21,6 +19,7 @@
 #include "item_icon.h"
 #include "link.h"
 #include "list_menu.h"
+#include "main.h"
 #include "malloc.h"
 #include "match_call.h"
 #include "menu.h"
@@ -46,6 +45,7 @@
 #include "wallclock.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "constants/field_effects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
@@ -80,6 +80,7 @@ extern const u16 gEventObjectPalette34[];
 
 extern void LoadPalette(const void *src, u32 offset, u16 size); // incorrect signature, needed to match
 extern void BlendPalettes(u32, u8, u16);
+extern void FieldInitRegionMap(MainCallback callback);
 
 void UpdateMovedLilycoveFanClubMembers(void);
 void sub_813BF60(void);
