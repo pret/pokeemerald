@@ -1,7 +1,7 @@
 #ifndef GUARD_MALLOC_H
 #define GUARD_MALLOC_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define HEAP_SIZE 0x1C000
 #define malloc Alloc

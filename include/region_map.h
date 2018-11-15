@@ -1,7 +1,7 @@
 #ifndef GUARD_REGION_MAP_H
 #define GUARD_REGION_MAP_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "bg.h"
 

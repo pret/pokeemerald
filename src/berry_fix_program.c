@@ -11,7 +11,7 @@
 #include "window.h"
 #include "text.h"
 #include "menu.h"
-#include "m4a.h"
+#include <m4a.h>
 
 // Static type declarations
 

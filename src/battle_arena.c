@@ -10,7 +10,7 @@
 #include "frontier_util.h"
 #include "gpu_regs.h"
 #include "item.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"

@@ -21,7 +21,7 @@
 #include "dma3.h"
 #include "gpu_regs.h"
 #include "bg.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "window.h"
 #include "constants/abilities.h"
 #include "daycare.h"

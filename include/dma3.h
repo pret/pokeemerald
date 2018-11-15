@@ -1,7 +1,7 @@
 #ifndef GUARD_DMA3_H
 #define GUARD_DMA3_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void ClearDma3Requests(void);
 void ProcessDma3Requests(void);

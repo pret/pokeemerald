@@ -1,7 +1,7 @@
 #ifndef GUARD_RECORDED_BATTLE_H
 #define GUARD_RECORDED_BATTLE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern u32 gRecordedBattleRngSeed;
 extern u32 gBattlePalaceMoveSelectionRngValue;

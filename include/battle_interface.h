@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_INTERFACE_H
 #define GUARD_BATTLE_INTERFACE_H
 
-#include "global.h"
+#include <gba/gba.h>
 #include "battle_controllers.h"
 
 enum

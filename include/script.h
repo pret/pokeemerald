@@ -1,7 +1,7 @@
 #ifndef GUARD_SCRIPT_H
 #define GUARD_SCRIPT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct ScriptContext;
 

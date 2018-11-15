@@ -1,7 +1,7 @@
 #ifndef GUARD_EVOLUTION_GRAPHICS_H
 #define GUARD_EVOLUTION_GRAPHICS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void LoadEvoSparkleSpriteAndPal(void);
 

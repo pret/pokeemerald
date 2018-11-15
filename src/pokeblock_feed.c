@@ -10,7 +10,7 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "palette.h"
 #include "party_menu.h"
 #include "pokeblock.h"

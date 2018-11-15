@@ -1,7 +1,7 @@
 #ifndef GUARD_SHOP_H
 #define GUARD_SHOP_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern EWRAM_DATA struct ItemSlot gMartPurchaseHistory[3];
 

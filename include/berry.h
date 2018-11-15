@@ -1,7 +1,7 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
-#include "global.h"
+#include <gba/gba.h>
 #define BERRY_NONE 0
 
 enum

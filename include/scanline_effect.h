@@ -1,7 +1,7 @@
 #ifndef GUARD_SCANLINE_EFFECT_H
 #define GUARD_SCANLINE_EFFECT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // DMA control value to transfer a single 16-bit value at HBlank
 #define SCANLINE_EFFECT_DMACNT_16BIT (((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_INC | DMA_16BIT | DMA_DEST_RELOAD) << 16) | 1)

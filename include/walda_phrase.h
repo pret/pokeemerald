@@ -1,7 +1,7 @@
 #ifndef GUARD_WALDA_PHRASE_H
 #define GUARD_WALDA_PHRASE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 u16 TryBufferWaldaPhrase(void);
 void DoWaldaNamingScreen(void);

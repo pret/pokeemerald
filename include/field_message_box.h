@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_MESSAGE_BOX_H
 #define GUARD_FIELD_MESSAGE_BOX_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 enum
 {

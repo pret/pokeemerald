@@ -1,7 +1,7 @@
 #ifndef GUARD_FLDEFF_80F9BCC_H
 #define GUARD_FLDEFF_80F9BCC_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEMON_ICON_H
 #define GUARD_POKEMON_ICON_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 const u8 *GetMonIconTiles(u16 species, bool32);
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);

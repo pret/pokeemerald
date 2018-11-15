@@ -1,7 +1,7 @@
 #ifndef GUARD_ITEM_MENU_ICONS
 #define GUARD_ITEM_MENU_ICONS
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern const struct CompressedSpriteSheet gUnknown_0857FB34;
 extern const struct CompressedSpriteSheet gUnknown_0857FB3C;

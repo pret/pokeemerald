@@ -1,7 +1,7 @@
 #ifndef GUARD_LINK_RFU_H
 #define GUARD_LINK_RFU_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

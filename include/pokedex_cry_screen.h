@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEDEX_CRY_SCREEN_H
 #define GUARD_POKEDEX_CRY_SCREEN_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct CryRelatedStruct
 {

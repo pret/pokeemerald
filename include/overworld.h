@@ -1,7 +1,7 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct InitialPlayerAvatarState
 {

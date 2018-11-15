@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void ResetPokedex(void);
 void CopyMonCategoryText(u32 species, u8 *dst);

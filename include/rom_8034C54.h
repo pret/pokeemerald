@@ -1,7 +1,7 @@
 #ifndef GUARD_ROM_8034C54_H
 #define GUARD_ROM_8034C54_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct UnkStruct3
 {

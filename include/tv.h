@@ -1,7 +1,7 @@
 #ifndef GUARD_TV_H
 #define GUARD_TV_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern u8 *const gTVStringVarPtrs[3];
 

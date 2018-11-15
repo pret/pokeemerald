@@ -1,7 +1,7 @@
 #ifndef GUARD_NEW_GAME_H
 #define GUARD_NEW_GAME_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void SetTrainerId(u32 trainerId, u8 *dst);
 u32 GetTrainerId(u8 *trainerId);

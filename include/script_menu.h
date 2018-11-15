@@ -1,7 +1,7 @@
 #ifndef GUARD_SCRIPT_MENU_H
 #define GUARD_SCRIPT_MENU_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern const u8 *const gUnknown_0858BAF0[];
 

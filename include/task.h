@@ -1,7 +1,7 @@
 #ifndef GUARD_TASK_H
 #define GUARD_TASK_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define NUM_TASKS 16
 

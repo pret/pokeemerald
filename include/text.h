@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define CHAR_SPACE          0x00
 #define CHAR_PLUS           0x2E

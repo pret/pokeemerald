@@ -1,7 +1,7 @@
 #ifndef GUARD_ROTATING_GATE_H
 #define GUARD_ROTATING_GATE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void RotatingGatePuzzleCameraUpdate(s16, s16);
 void RotatingGate_InitPuzzleAndGraphics(void);

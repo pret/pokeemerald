@@ -1,7 +1,7 @@
 #ifndef GUARD_GPU_REGS_H
 #define GUARD_GPU_REGS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

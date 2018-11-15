@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 enum {
     PLAYER_AVATAR_STATE_NORMAL,

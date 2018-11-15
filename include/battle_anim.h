@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_ANIM_H
 #define GUARD_BATTLE_ANIM_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "battle.h"
 #include "constants/battle_anim.h"

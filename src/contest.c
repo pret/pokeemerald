@@ -15,7 +15,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "link.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"

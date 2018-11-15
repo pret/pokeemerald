@@ -4,7 +4,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "main.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "pokeball.h"
 #include "pokemon.h"
 #include "sound.h"

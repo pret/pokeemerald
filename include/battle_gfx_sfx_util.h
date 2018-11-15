@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_GFX_SFX_UTIL
 #define GUARD_BATTLE_GFX_SFX_UTIL
 
-#include "global.h"
+#include <gba/gba.h>
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);

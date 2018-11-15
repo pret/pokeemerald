@@ -1,7 +1,7 @@
 #ifndef GUARD_ROM_81520A8_H
 #define GUARD_ROM_81520A8_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct UnkStruct_81520A8
 {

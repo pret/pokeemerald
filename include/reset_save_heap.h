@@ -1,7 +1,7 @@
 #ifndef GUARD_RESET_SAVE_HEAP_H
 #define GUARD_RESET_SAVE_HEAP_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

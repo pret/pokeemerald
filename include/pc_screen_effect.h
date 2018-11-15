@@ -1,7 +1,7 @@
 #ifndef GUARD_PC_SCREEN_EFFECT_H
 #define GUARD_PC_SCREEN_EFFECT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct PCScreenEffectStruct
 {

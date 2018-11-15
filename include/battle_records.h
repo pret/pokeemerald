@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_RECORDS_H
 #define GUARD_BATTLE_RECORDS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern u8 gRecordsWindowId;
 

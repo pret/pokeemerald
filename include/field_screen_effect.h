@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_SCREEN_EFFECT_H
 #define GUARD_FIELD_SCREEN_EFFECT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void sub_80AF79C(void);
 void sub_80B009C(u8);

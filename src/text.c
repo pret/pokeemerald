@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "main.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "palette.h"
 #include "sound.h"
 #include "constants/songs.h"

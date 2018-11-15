@@ -1,7 +1,7 @@
 #ifndef GUARD_CABLE_CLUB_H
 #define GUARD_CABLE_CLUB_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "task.h"
 

@@ -4,7 +4,7 @@
 #include "scanline_effect.h"
 #include "task.h"
 #include "title_screen.h"
-#include "libgcnmultiboot.h"
+#include <libgcnmultiboot.h>
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "link.h"
@@ -12,7 +12,7 @@
 #include "load_save.h"
 #include "save.h"
 #include "new_game.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "random.h"
 #include "decompress.h"
 #include "constants/songs.h"

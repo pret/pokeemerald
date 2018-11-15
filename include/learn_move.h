@@ -1,7 +1,7 @@
 #ifndef GUARD_LEARN_MOVE_H
 #define GUARD_LEARN_MOVE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void TeachMoveTutorMove(void);
 void ShowHideHearts(s32);

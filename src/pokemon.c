@@ -12,7 +12,7 @@
 #include "link.h"
 #include "main.h"
 #include "malloc.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "pokedex.h"
 #include "pokeblock.h"
 #include "pokemon.h"

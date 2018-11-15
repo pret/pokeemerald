@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void TestBattleTransition(u8 transitionId);
 void BattleTransition_StartOnField(u8 transitionId);

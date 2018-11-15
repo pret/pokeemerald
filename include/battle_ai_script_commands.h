@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
 #define GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // return values for BattleAI_ChooseMoveOrAction
 // 0 - 3 are move idx

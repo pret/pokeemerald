@@ -6,7 +6,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "intro.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "main_menu.h"
 #include "palette.h"

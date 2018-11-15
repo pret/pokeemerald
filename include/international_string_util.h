@@ -1,7 +1,7 @@
 #ifndef GUARD_INTERNATIONAL_STRING_UTIL_H
 #define GUARD_INTERNATIONAL_STRING_UTIL_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "menu.h"
 

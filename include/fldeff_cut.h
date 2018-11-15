@@ -1,7 +1,7 @@
 #ifndef GUARD_FLDEFF_CUT_H
 #define GUARD_FLDEFF_CUT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo6;
 

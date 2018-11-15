@@ -1,7 +1,7 @@
 #ifndef GUARD_COINS_H
 #define GUARD_COINS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void PrintCoinsString(u32 coinAmount);
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y);

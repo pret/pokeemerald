@@ -8,7 +8,7 @@
 #include "sprite.h"
 #include "sound.h"
 #include "constants/songs.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "bg.h"
 #include "palette.h"
 #include "decompress.h"

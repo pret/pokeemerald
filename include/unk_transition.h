@@ -1,7 +1,7 @@
 #ifndef GUARD_UNK_TRANSITION_H
 #define GUARD_UNK_TRANSITION_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void Phase2Task_34(u8 taskId);
 void Phase2Task_35(u8 taskId);

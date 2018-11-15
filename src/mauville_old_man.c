@@ -14,7 +14,7 @@
 #include "event_scripts.h"
 #include "task.h"
 #include "menu.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "bard_music.h"
 #include "sound.h"
 #include "strings.h"

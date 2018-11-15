@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_SCREEN_H
 #define GUARD_FIELD_SCREEN_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

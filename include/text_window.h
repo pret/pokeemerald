@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT_WINDOW_H
 #define GUARD_TEXT_WINDOW_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define WINDOW_FRAMES_COUNT 20
 

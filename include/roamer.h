@@ -1,7 +1,7 @@
 #ifndef GUARD_ROAMER_H
 #define GUARD_ROAMER_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void ClearRoamerData(void);
 void ClearRoamerLocationData(void);

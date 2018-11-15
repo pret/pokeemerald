@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define TEXT_BUFF_ARRAY_COUNT   16
 

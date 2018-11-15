@@ -1,7 +1,7 @@
 #ifndef GUARD_MULTIBOOT_H
 #define GUARD_MULTIBOOT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define MULTIBOOT_MASTER_INFO            0x62
 #define MULTIBOOT_CLIENT_INFO            0x72

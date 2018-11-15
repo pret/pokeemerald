@@ -1,7 +1,7 @@
 #ifndef GUARD_LOTTERY_CORNER_H
 #define GUARD_LOTTERY_CORNER_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void ResetLotteryCorner(void);
 void SetRandomLotteryNumber(u16 i);

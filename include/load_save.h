@@ -1,7 +1,7 @@
 #ifndef GUARD_LOAD_SAVE_H
 #define GUARD_LOAD_SAVE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern struct SaveBlock1 gSaveblock1;
 extern struct SaveBlock2 gSaveblock2;

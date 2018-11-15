@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_BG_H
 #define GUARD_BATTLE_BG_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void BattleInitBgsAndWindows(void);
 void sub_80356D0(void);

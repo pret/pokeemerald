@@ -1,7 +1,7 @@
 #ifndef GUARD_TRAINER_REMATCH_H
 #define GUARD_TRAINER_REMATCH_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 enum {
     REMATCH_ROSE,

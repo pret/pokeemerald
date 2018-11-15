@@ -1,7 +1,7 @@
 #ifndef GUARD_TRAINER_CARD_H
 #define GUARD_TRAINER_CARD_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct TrainerCard
 {

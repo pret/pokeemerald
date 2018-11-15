@@ -1,7 +1,7 @@
 #ifndef GUARD_tilesets_H
 #define GUARD_tilesets_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

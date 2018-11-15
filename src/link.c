@@ -1,13 +1,14 @@
 
 // Includes
 #include "global.h"
-#include "m4a.h"
+#include "main.h"
+#include <m4a.h>
 #include "malloc.h"
 #include "reset_save_heap.h"
 #include "save.h"
 #include "bg.h"
 #include "window.h"
-#include "librfu.h"
+#include <librfu.h>
 #include "random.h"
 #include "decompress.h"
 #include "string_util.h"

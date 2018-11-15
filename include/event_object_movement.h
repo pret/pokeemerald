@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_EVENT_OBJ_H
 #define GUARD_FIELD_EVENT_OBJ_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240

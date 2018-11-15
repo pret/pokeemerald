@@ -1,7 +1,7 @@
 #ifndef GUARD_SOUND_H
 #define GUARD_SOUND_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void InitMapMusic(void);
 void MapMusicMain(void);

@@ -1,7 +1,7 @@
 #ifndef GUARD_BARD_MUSIC_H
 #define GUARD_BARD_MUSIC_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

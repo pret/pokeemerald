@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_FACTORY_H
 #define GUARD_BATTLE_FACTORY_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void DoBattleFactorySelectScreen(void);
 void DoBattleFactorySwapScreen(void);

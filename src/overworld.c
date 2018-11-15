@@ -27,7 +27,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"

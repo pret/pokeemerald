@@ -1,7 +1,7 @@
 #ifndef GUARD_LINK_H
 #define GUARD_LINK_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define MAX_LINK_PLAYERS 4
 #define MAX_RFU_PLAYERS 5

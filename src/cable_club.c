@@ -13,7 +13,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"

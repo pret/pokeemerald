@@ -1,7 +1,7 @@
 #ifndef GUARD_METATILE_BEHAVIOR
 #define GUARD_METATILE_BEHAVIOR
 
-#include "global.h"
+#include <gba/gba.h>
 
 bool8 MetatileBehavior_IsATile(u8);
 bool8 MetatileBehavior_IsEncounterTile(u8);

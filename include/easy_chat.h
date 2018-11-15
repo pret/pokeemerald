@@ -1,7 +1,7 @@
 #ifndef GUARD_EASYCHAT_H
 #define GUARD_EASYCHAT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void InitEasyChatPhrases(void);
 void easy_chat_input_maybe(void);

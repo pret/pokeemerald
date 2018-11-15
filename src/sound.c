@@ -2,7 +2,7 @@
 #include "gba/m4a_internal.h"
 #include "sound.h"
 #include "battle.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "main.h"
 #include "pokemon.h"
 #include "constants/songs.h"

@@ -1,7 +1,7 @@
 #ifndef GUARD_RECORD_MIXING_H
 #define GUARD_RECORD_MIXING_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct PlayerHallRecords
 {

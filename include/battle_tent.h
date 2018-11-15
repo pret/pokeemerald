@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_TENT_H
 #define GUARD_BATTLE_TENT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 bool8 sub_81B9E94(void);
 

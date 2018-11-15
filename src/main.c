@@ -3,8 +3,8 @@
 #include "malloc.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "librfu.h"
-#include "m4a.h"
+#include <librfu.h>
+#include <m4a.h>
 #include "bg.h"
 #include "rtc.h"
 #include "scanline_effect.h"
@@ -15,7 +15,7 @@
 #include "gba/flash_internal.h"
 #include "load_save.h"
 #include "gpu_regs.h"
-#include "agb_flash.h"
+#include <agb_flash.h>
 #include "sound.h"
 #include "battle.h"
 #include "battle_controllers.h"

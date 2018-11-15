@@ -1,7 +1,7 @@
 #ifndef GUARD_CONTEST_EFFECT_H
 #define GUARD_CONTEST_EFFECT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct ContestMove
 {

@@ -9,7 +9,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "overworld.h"
 #include "palette.h"
 #include "pokedex.h"

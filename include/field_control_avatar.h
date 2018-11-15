@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELDCONTROLAVATAR_H
 #define GUARD_FIELDCONTROLAVATAR_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct FieldInput
 {

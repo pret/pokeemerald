@@ -1,7 +1,7 @@
 #ifndef GUARD_ITEM_ICON_H
 #define GUARD_ITEM_ICON_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern void *gItemIconDecompressionBuffer;
 extern void *gItemIcon4x4Buffer;

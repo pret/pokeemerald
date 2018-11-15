@@ -1,7 +1,7 @@
 #ifndef GUARD_ROM6_H
 #define GUARD_ROM6_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void OpenPokeblockCase(u8, void(void));
 u8 GetLeadMonIndex(void);

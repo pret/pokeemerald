@@ -1,7 +1,7 @@
 #ifndef GUARD_DIPLOMA_H
 #define GUARD_DIPLOMA_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void CB2_ShowDiploma(void);
 

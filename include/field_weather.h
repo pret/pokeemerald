@@ -1,7 +1,7 @@
 #ifndef GUARD_WEATHER_H
 #define GUARD_WEATHER_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "sprite.h"
 

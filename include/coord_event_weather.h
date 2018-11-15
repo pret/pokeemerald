@@ -1,7 +1,7 @@
 #ifndef GUARD_COORD_EVENT_WEATHER_H
 #define GUARD_COORD_EVENT_WEATHER_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void DoCoordEventWeather(u8);
 

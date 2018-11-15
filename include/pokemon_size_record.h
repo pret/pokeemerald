@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEMON_SIZE_RECORD_H
 #define GUARD_POKEMON_SIZE_RECORD_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void InitSeedotSizeRecord(void);
 void GetSeedotSizeRecordInfo(void);

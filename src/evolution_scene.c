@@ -13,7 +13,7 @@
 #include "battle.h"
 #include "scanline_effect.h"
 #include "decompress.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "menu.h"
 #include "pokedex.h"
 #include "constants/species.h"

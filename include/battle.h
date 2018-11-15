@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // should they be included here or included individually by every file?
 #include "constants/battle.h"

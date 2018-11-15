@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELDDOOR_H
 #define GUARD_FIELDDOOR_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct DoorGraphics
 {

@@ -1,7 +1,7 @@
 #ifndef GUARD_SCRIPTPOKE80F8_H
 #define GUARD_SCRIPTPOKE80F8_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void ShowContestWinner(void);
 u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);

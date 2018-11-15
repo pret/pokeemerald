@@ -1,7 +1,7 @@
 #ifndef GUARD_DECORATION_INVENTORY_H
 #define GUARD_DECORATION_INVENTORY_H
 
-#include "global.h"
+#include <gba/gba.h>
 struct DecorationInventory {
     u8 *items;
     u8 size;

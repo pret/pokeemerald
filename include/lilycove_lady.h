@@ -1,7 +1,7 @@
 #ifndef GUARD_LILYCOVE_LADY_H
 #define GUARD_LILYCOVE_LADY_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 u8 GetLilycoveLadyId(void);
 void SetLilycoveLady(void);

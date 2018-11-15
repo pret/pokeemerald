@@ -1,7 +1,7 @@
 #ifndef GUARD_TRADE_H
 #define GUARD_TRADE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

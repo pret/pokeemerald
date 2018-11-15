@@ -1,7 +1,7 @@
 #ifndef GUARD_BLIT_H
 #define GUARD_BLIT_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct Bitmap
 {

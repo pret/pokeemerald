@@ -1,7 +1,7 @@
 #ifndef GUARD_BERRY_FIX_PROGRAM_H
 #define GUARD_BERRY_FIX_PROGRAM_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void CB2_InitBerryFixProgram(void);
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_HEAL_LOCATION_H
 #define GUARD_HEAL_LOCATION_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct HealLocation
 {

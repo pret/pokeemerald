@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_TOWER_H
 #define GUARD_BATTLE_TOWER_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct RSBattleTowerRecord
 {

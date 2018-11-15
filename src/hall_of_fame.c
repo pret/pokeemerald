@@ -20,7 +20,7 @@
 #include "constants/game_stat.h"
 #include "util.h"
 #include "string_util.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "international_string_util.h"
 #include "scanline_effect.h"
 #include "trig.h"

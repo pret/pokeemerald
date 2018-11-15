@@ -1,7 +1,7 @@
 #ifndef GUARD_SECRET_BASE_H
 #define GUARD_SECRET_BASE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

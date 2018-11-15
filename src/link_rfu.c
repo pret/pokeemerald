@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "main.h"
 #include "malloc.h"
 #include "battle.h"
 #include "berry_blender.h"
@@ -12,7 +13,7 @@
 #include "event_data.h"
 #include "overworld.h"
 #include "link.h"
-#include "librfu.h"
+#include <librfu.h>
 #include "rom_8011DC0.h"
 #include "link_rfu.h"
 

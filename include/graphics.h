@@ -1,7 +1,7 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // overworld
 extern const u32 gMessageBox_Gfx[];

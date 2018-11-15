@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_SPECIAL_SCENE_H
 #define GUARD_FIELD_SPECIAL_SCENE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 s16 GetTruckCameraBobbingY(int a1);
 s16 GetTruckBoxMovement(int a1);

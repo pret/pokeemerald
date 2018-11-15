@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_CAMERA_H
 #define GUARD_FIELD_CAMERA_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_BG_H
 #define GUARD_BG_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct BGCntrlBitfield // for the I/O registers
 {

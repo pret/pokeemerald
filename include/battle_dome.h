@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_DOME_H
 #define GUARD_BATTLE_DOME_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern u32 gUnknown_0203CD70;
 

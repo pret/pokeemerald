@@ -1,7 +1,7 @@
 #ifndef GUARD_LIST_MENU_H
 #define GUARD_LIST_MENU_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "window.h"
 

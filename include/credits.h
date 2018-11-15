@@ -1,7 +1,7 @@
 #ifndef GUARD_CREDITS_H
 #define GUARD_CREDITS_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

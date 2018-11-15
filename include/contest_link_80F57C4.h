@@ -1,7 +1,7 @@
 #ifndef GUARD_CONTEST_LINK_80F57C4_H
 #define GUARD_CONTEST_LINK_80F57C4_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void sub_80F840C(void);
 void sub_80F8484(void);

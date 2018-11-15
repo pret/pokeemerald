@@ -15,7 +15,7 @@
 #include "task.h"
 #include "sprite.h"
 #include "sound.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "constants/species.h"
 #include "decompress.h"
 #include "data2.h"

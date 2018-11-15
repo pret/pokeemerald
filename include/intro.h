@@ -1,7 +1,7 @@
 #ifndef GUARD_INTRO_H
 #define GUARD_INTRO_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "main.h"
 #include "window.h"
 #include "bg.h"
 #include "string_util.h"
@@ -6,7 +7,7 @@
 #include "event_data.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "librfu.h"
+#include <librfu.h>
 #include "malloc.h"
 #include "menu.h"
 #include "list_menu.h"

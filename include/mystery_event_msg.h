@@ -1,7 +1,7 @@
 #ifndef GUARD_MYSTERY_EVENT_MSG_H
 #define GUARD_MYSTERY_EVENT_MSG_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 extern const u8 gText_MysteryGiftBerry[];
 extern const u8 gText_MysteryGiftBerryTransform[];

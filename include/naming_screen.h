@@ -1,7 +1,7 @@
 #ifndef GUARD_NAMING_SCREEN_H
 #define GUARD_NAMING_SCREEN_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "main.h"
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_DAYCARE_H
 #define GUARD_DAYCARE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define EGG_HATCH_LEVEL 5
 

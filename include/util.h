@@ -1,7 +1,7 @@
 #ifndef GUARD_UTIL_H
 #define GUARD_UTIL_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #include "sprite.h"
 

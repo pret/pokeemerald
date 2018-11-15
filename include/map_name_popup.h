@@ -1,7 +1,7 @@
 #ifndef GUARD_MAP_NAME_POPUP_H
 #define GUARD_MAP_NAME_POPUP_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

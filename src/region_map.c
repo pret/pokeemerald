@@ -18,7 +18,7 @@
 #include "strings.h"
 #include "text_window.h"
 #include "constants/songs.h"
-#include "m4a.h"
+#include <m4a.h>
 #include "field_effect.h"
 #include "region_map.h"
 #include "constants/region_map_sections.h"

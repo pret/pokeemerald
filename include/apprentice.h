@@ -1,7 +1,7 @@
 #ifndef GUARD_APPRENTICE_H
 #define GUARD_APPRENTICE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 #define APPRENTICE_SPECIES_COUNT 10
 

@@ -1,7 +1,7 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 struct SaveSectionLocation
 {

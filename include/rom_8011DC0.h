@@ -1,7 +1,7 @@
 #ifndef GUARD_rom_8011DC0_H
 #define GUARD_rom_8011DC0_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

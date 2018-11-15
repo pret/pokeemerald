@@ -1,7 +1,7 @@
 #ifndef GUARD_CRT0_H
 #define GUARD_CRT0_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 // Exported type declarations
 

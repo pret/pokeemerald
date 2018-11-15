@@ -1,7 +1,7 @@
 #ifndef GUARD_DYNAMIC_PLACEHOLDER_TEXT_UTIL_H
 #define GUARD_DYNAMIC_PLACEHOLDER_TEXT_UTIL_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 void DynamicPlaceholderTextUtil_Reset(void);
 void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr);

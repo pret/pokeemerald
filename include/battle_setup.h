@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
-#include "global.h"
+#include <gba/gba.h>
 
 enum
 {
