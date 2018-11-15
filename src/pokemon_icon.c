@@ -1,10 +1,10 @@
 #include "global.h"
-#include "sprite.h"
-#include "mail.h"
 #include "graphics.h"
-#include "constants/species.h"
+#include "mail.h"
 #include "palette.h"
 #include "pokemon_icon.h"
+#include "sprite.h"
+#include "constants/species.h"
 
 #define POKE_ICON_BASE_PAL_TAG 56000
 

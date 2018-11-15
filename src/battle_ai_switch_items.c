@@ -2,13 +2,13 @@
 #include "battle.h"
 #include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
-#include "constants/abilities.h"
-#include "constants/moves.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "random.h"
 #include "util.h"
+#include "constants/abilities.h"
 #include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);

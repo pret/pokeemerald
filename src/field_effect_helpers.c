@@ -10,6 +10,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "trig.h"
+#include "constants/field_effects.h"
 #include "constants/songs.h"
 
 #define EVENT_OBJ_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c

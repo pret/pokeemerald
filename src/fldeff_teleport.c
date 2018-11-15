@@ -5,6 +5,7 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "task.h"
+#include "constants/field_effects.h"
 
 static void FieldCallback_Teleport(void);
 static void StartTeleportFieldEffect(void);
