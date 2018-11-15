@@ -18,11 +18,20 @@ REVISION    := 0
 
 SHELL := /bin/bash -o pipefail
 
+CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef
+
+ifeq ($(MODERN),)
 ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
-
-modern: ROM := pokeemerald-modern.gba
-modern: OBJ_DIR := build/emerald-modern
+CC1             := tools/agbcc/bin/agbcc$(EXE)
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+else
+ROM := pokeemerald-modern.gba
+OBJ_DIR := build/emerald-modern
+CC1 := $(PREFIX)gcc -S -xc -
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -mthumb -mabi=apcs-gnu
+CPPFLAGS += -DMODERN=1
+endif
 
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
@@ -40,14 +49,6 @@ SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
 ASFLAGS := -mcpu=arm7tdmi
-
-CC1             := tools/agbcc/bin/agbcc$(EXE)
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
-
-modern: CC1 := $(PREFIX)gcc -S -xc -
-modern: CFLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -mthumb
-
-CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -100,6 +101,9 @@ SUBDIRS  := $(sort $(dir $(OBJS)))
 $(shell mkdir -p $(SUBDIRS))
 
 rom: $(ROM)
+
+modern:
+	@$(MAKE) MODERN=1
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: $(ROM)
