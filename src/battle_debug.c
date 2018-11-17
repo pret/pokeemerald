@@ -854,7 +854,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = 1;
         break;
     case LIST_ITEM_TYPES:
-        itemsCount = 2;
+        itemsCount = 3;
         break;
     case LIST_ITEM_MOVES:
     case LIST_ITEM_PP:
@@ -972,7 +972,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         AddTextPrinter(&printer, 0, NULL);
         break;
     case LIST_ITEM_TYPES:
-        for (i = 0; i < 2; i++)
+        for (i = 0; i < 3; i++)
         {
             u8 *types = &gBattleMons[data->battlerId].type1;
 

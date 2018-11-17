@@ -6817,7 +6817,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_TRICK_OR_TREAT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_THIRD_TYPE,
 		.power = 0,
 		.type = TYPE_GHOST,
 		.accuracy = 100,
@@ -6827,6 +6827,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
 		.split = SPLIT_STATUS,
+		.argument = TYPE_GHOST,
 	},
 	{ // MOVE_NOBLE_ROAR
 		.effect = EFFECT_NOBLE_ROAR,
@@ -6865,7 +6866,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_FOREST_S_CURSE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_THIRD_TYPE,
 		.power = 0,
 		.type = TYPE_GRASS,
 		.accuracy = 100,
@@ -6875,6 +6876,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
 		.split = SPLIT_STATUS,
+		.argument = TYPE_GRASS,
 	},
 	{ // MOVE_PETAL_BLIZZARD
 		.effect = EFFECT_HIT,

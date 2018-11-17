@@ -1570,6 +1570,11 @@
 	.macro setauroraveil battler
 	various \battler, VARIOUS_SET_AURORA_VEIL
 	.endm
+	
+	.macro trysetthirdtype battler, ptr
+	various \battler, VARIOUS_TRY_THIRD_TYPE
+	.4byte \ptr
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat, stages, down

@@ -334,6 +334,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectDefenseUp2Hit
 	.4byte BattleScript_EffectRevelationDance
 	.4byte BattleScript_EffectAuroraVeil
+	.4byte BattleScript_EffectThirdType
+	
+BattleScript_EffectThirdType:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	trysetthirdtype BS_TARGET, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_THIRDTYPEADDED
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectDefenseUp2Hit:
 	setmoveeffect MOVE_EFFECT_DEF_PLUS_2 | MOVE_EFFECT_AFFECTS_USER

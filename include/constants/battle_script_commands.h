@@ -131,6 +131,7 @@
 #define VARIOUS_TRY_TRAINER_SLIDE_MSG_FIRST_OFF 69
 #define VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON 	70
 #define VARIOUS_SET_AURORA_VEIL 				71
+#define VARIOUS_TRY_THIRD_TYPE 					72
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0
