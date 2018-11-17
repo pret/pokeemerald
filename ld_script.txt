@@ -269,6 +269,8 @@ SECTIONS {
         src/battle_factory.o(.text);
         src/battle_pike.o(.text);
         asm/battle_frontier_2.o(.text);
+        src/battle_pyramid.o(.text);
+        asm/battle_pyramid.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
         src/dynamic_placeholder_text_util.o(.text);

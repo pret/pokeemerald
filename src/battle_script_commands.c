@@ -9860,71 +9860,72 @@ static void atkE4_getsecretpowereffect(void)
 
 static void atkE5_pickup(void)
 {
-    if (!InBattlePike())
+    s32 i;
+    u16 species, heldItem;
+    u8 ability;
+
+    if (InBattlePike())
     {
-        s32 i;
-        u16 species, heldItem;
-        u8 ability;
 
-        if (InBattlePyramid())
+    }
+    else if (InBattlePyramid())
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            for (i = 0; i < 6; i++)
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+
+            if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
+                ability = gBaseStats[species].ability2;
+            else
+                ability = gBaseStats[species].ability1;
+
+            if (ability == ABILITY_PICKUP
+                && species != 0
+                && species != SPECIES_EGG
+                && heldItem == ITEM_NONE
+                && (Random() % 10) == 0)
             {
-                species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-                heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-
-                if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
-                    ability = gBaseStats[species].ability2;
-                else
-                    ability = gBaseStats[species].ability1;
-
-                if (ability == ABILITY_PICKUP
-                    && species != 0
-                    && species != SPECIES_EGG
-                    && heldItem == ITEM_NONE
-                    && (Random() % 10) == 0)
-                {
-                    heldItem = GetBattlePyramidPickupItemId();
-                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-                }
+                heldItem = GetBattlePyramidPickupItemId();
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
             }
         }
-        else
+    }
+    else
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            for (i = 0; i < 6; i++)
+            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+
+            if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
+                ability = gBaseStats[species].ability2;
+            else
+                ability = gBaseStats[species].ability1;
+
+            if (ability == ABILITY_PICKUP
+                && species != 0
+                && species != SPECIES_EGG
+                && heldItem == ITEM_NONE
+                && (Random() % 10) == 0)
             {
-                species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-                heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                s32 j;
+                s32 rand = Random() % 100;
+                u8 lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
+                if (lvlDivBy10 > 9)
+                    lvlDivBy10 = 9;
 
-                if (GetMonData(&gPlayerParty[i], MON_DATA_ALT_ABILITY))
-                    ability = gBaseStats[species].ability2;
-                else
-                    ability = gBaseStats[species].ability1;
-
-                if (ability == ABILITY_PICKUP
-                    && species != 0
-                    && species != SPECIES_EGG
-                    && heldItem == ITEM_NONE
-                    && (Random() % 10) == 0)
+                for (j = 0; j < 9; j++)
                 {
-                    s32 j;
-                    s32 rand = Random() % 100;
-                    u8 lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
-                    if (lvlDivBy10 > 9)
-                        lvlDivBy10 = 9;
-
-                    for (j = 0; j < 9; j++)
+                    if (sPickupProbabilities[j] > rand)
                     {
-                        if (sPickupProbabilities[j] > rand)
-                        {
-                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[lvlDivBy10 + j]);
-                            break;
-                        }
-                        else if (rand == 99 || rand == 98)
-                        {
-                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sRarePickupItems[lvlDivBy10 + (99 - rand)]);
-                            break;
-                        }
+                        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[lvlDivBy10 + j]);
+                        break;
+                    }
+                    else if (rand == 99 || rand == 98)
+                    {
+                        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sRarePickupItems[lvlDivBy10 + (99 - rand)]);
+                        break;
                     }
                 }
             }
