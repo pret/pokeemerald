@@ -2091,3 +2091,14 @@ const struct SpriteTemplate gUnknown_0859324C =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_8103390,
 };
+
+const struct SpriteTemplate gPowerOrbs_Float =
+{
+	.tileTag = ANIM_TAG_RED_ORB,
+	.paletteTag = ANIM_TAG_RED_ORB,
+	.oam = &gUnknown_0852490C,
+	.anims = gUnknown_085922E4,
+	.images = NULL,
+	.affineAnims = gDummySpriteAffineAnimTable,
+	.callback = sub_80FED28,
+};
