@@ -946,20 +946,20 @@ Move_U_TURN:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
-	playsewithpan SE_W019, -64
+	playsewithpan SE_W019, SOUND_PAN_ATTACKER
 	createsprite gUnknown_08596340, ANIM_ATTACKER, 2, 0, 0, 13, 336
-	waitforvisualfinish
-	playsewithpan SE_W104, -64
+	playsewithpan SE_W104, SOUND_PAN_ATTACKER
 	createsprite gUnknown_08596358, ANIM_ATTACKER, 2, 20
 	delay 20
-	createsprite gBasicHitSplatSpriteTemplate, 2, 0, 0, 1, 0
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 0
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 6, 0, 8, 1
-	playsewithpan SE_W013, +63
+	playsewithpan SE_W013, SOUND_PAN_TARGET
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
+	waitforvisualfinish
 	end
-	
+
 Move_CLOSE_COMBAT:
 	loadspritegfx ANIM_TAG_IMPACT	
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
