@@ -2282,7 +2282,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
-		.split = SPLIT_PHYSICAL,
+		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_OCTAZOOKA
 		.effect = EFFECT_ACCURACY_DOWN_HIT,
