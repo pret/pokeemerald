@@ -5016,7 +5016,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     return ApplyModifier(modifier, basePower);
 }
 
-static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, bool32 isCrit)
+u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, bool32 isCrit)
 {
     u8 atkStage;
     u32 atkStat;
@@ -5025,20 +5025,28 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
     if (gBattleMoves[move].effect == EFFECT_FOUL_PLAY)
     {
         if (IS_MOVE_PHYSICAL(move))
+        {
             atkStat = gBattleMons[battlerDef].attack;
+            atkStage = gBattleMons[battlerDef].statStages[STAT_ATK];
+        }
         else
+        {
             atkStat = gBattleMons[battlerDef].spAttack;
-
-        atkStage = gBattleMons[battlerDef].statStages[STAT_ATK];
+            atkStage = gBattleMons[battlerDef].statStages[STAT_SPATK];
+        }
     }
     else
     {
         if (IS_MOVE_PHYSICAL(move))
+        {
             atkStat = gBattleMons[battlerAtk].attack;
+            atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
+        }
         else
+        {
             atkStat = gBattleMons[battlerAtk].spAttack;
-
-        atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
+            atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
+        }
     }
 
     // critical hits ignore attack stat's stage drops

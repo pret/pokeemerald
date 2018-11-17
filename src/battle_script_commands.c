@@ -4475,6 +4475,7 @@ static void atk4D_switchindataupdate(void)
 
     gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
     gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
+    gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
     gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].altAbility);
 
     // check knocked off item
@@ -8059,7 +8060,8 @@ static void atk90_tryconversiontypechange(void) // randomly changes user's type 
                 moveType = TYPE_NORMAL;
         }
         if (moveType != gBattleMons[gBattlerAttacker].type1
-            && moveType != gBattleMons[gBattlerAttacker].type2)
+            && moveType != gBattleMons[gBattlerAttacker].type2
+            && moveType != gBattleMons[gBattlerAttacker].type3)
         {
             break;
         }
@@ -8086,7 +8088,7 @@ static void atk90_tryconversiontypechange(void) // randomly changes user's type 
                     moveType = TYPE_NORMAL;
             }
         }
-        while (moveType == gBattleMons[gBattlerAttacker].type1 || moveType == gBattleMons[gBattlerAttacker].type2);
+        while (moveType == gBattleMons[gBattlerAttacker].type1 || moveType == gBattleMons[gBattlerAttacker].type2 || moveType == gBattleMons[gBattlerAttacker].type3);
 
         SET_BATTLER_TYPE(gBattlerAttacker, moveType);
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
