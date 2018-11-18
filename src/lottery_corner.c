@@ -60,7 +60,6 @@ void PickLotteryCornerTicket(void)
     {
         struct Pokemon *mon = &gPlayerParty[i];
 
-        // UB: Too few arguments for function GetMonData
         if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
         {
             // do not calculate ticket values for eggs.
