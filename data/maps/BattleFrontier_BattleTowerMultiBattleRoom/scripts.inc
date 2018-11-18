@@ -7,7 +7,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScripts:: @ 8243D92
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
 	setvar VAR_0x8004, 17
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0

@@ -45,6 +45,7 @@
 #include "party_menu.h"
 #include "battle_arena.h"
 #include "battle_pike.h"
+#include "battle_pyramid.h"
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -62,11 +63,8 @@ extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokena
 extern void sub_81D3640(u8 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
 extern void sub_81D3784(u8 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
 extern u8* GetMonNickname(struct Pokemon* mon, u8* dst); // party_menu
-extern u8 BattleArena_ShowJudgmentWindow(u8* arg0); // battle frontier 2
 extern void sub_81B8E80(u8 battlerId, u8, u8); // party menu
 extern bool8 sub_81B1250(void); // ?
-extern bool8 InBattlePyramid(void);
-extern u16 GetBattlePyramidPickupItemId(void);
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 

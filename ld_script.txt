@@ -270,7 +270,6 @@ SECTIONS {
         src/battle_pike.o(.text);
         asm/battle_frontier_2.o(.text);
         src/battle_pyramid.o(.text);
-        asm/battle_pyramid.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
         src/dynamic_placeholder_text_util.o(.text);
@@ -581,6 +580,7 @@ SECTIONS {
         data/battle_pike.o(.rodata);
         src/battle_pike.o(.rodata);
         data/battle_frontier_3.o(.rodata);
+        src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);
         src/save_location.o(.rodata);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "event_data.h"
 #include "battle.h"
@@ -19,9 +20,12 @@
 #include "load_save.h"
 #include "script.h"
 #include "malloc.h"
+#include "overworld.h"
 #include "constants/battle_frontier.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
+#include "constants/items.h"
+#include "constants/maps.h"
 #include "constants/moves.h"
 
 extern u8 gUnknown_0203CEF8[3];
@@ -30,6 +34,7 @@ extern void door_upload_tiles(void);
 extern const struct MapLayout *const gMapLayouts[];
 
 #define TOTAL_ROUNDS 20
+#define PICKUP_ITEMS_PER_ROUND 10
 
 struct Struct_08613650
 {
@@ -38,47 +43,134 @@ struct Struct_08613650
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5;
-    u8 unk6[10];
+    u8 unk5[11];
+};
+
+struct PyramidWildMon
+{
+    u16 species;
+    u8 lvl;
+    u8 abilityBit;
+    u16 moves[4];
+};
+
+struct ClassMusic
+{
+    u8 class;
+    u8 music;
 };
 
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
+extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
+extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F[];
+extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A[];
+
 // This file's functions.
-void sub_81AAA7C(u8 lvlMode);
-u8 sub_81AA9E4(void);
-u16 sub_81A9AA8(u8);
-u8 sub_81A9998(s32 *, u8, u8);
-u8 sub_81AAA40(void);
-u8 InBattlePyramid(void);
-void sub_81A97DC(u8 taskId);
-void sub_81A9B44(u16 trainerId);
-void sub_81AA96C(u8 *);
-void sub_81AA33C(u8 *, u8 *);
+static void sub_81A8E9C(void);
+static void sub_81A8F38(void);
+static void sub_81A9048(void);
+static void sub_81A9134(void);
+static void sub_81A917C(void);
+static void sub_81A91FC(void);
+static void sub_81A9254(void);
+static void sub_81A9290(void);
+static void sub_81A93C8(void);
+static void sub_81A9414(void);
+static void sub_81A9424(void);
+static void sub_81A9618(void);
+static void sub_81A966C(void);
+static void sub_81A9684(void);
+static void sub_81A975C(void);
+static void sub_81A97C8(void);
+static void sub_81A9828(void);
+static void sub_81A9834(void);
+static void InitBagItems(u8 lvlMode);
+static u8 sub_81AA9E4(void);
+static u8 sub_81A9998(s32 *, u8, u8);
+static void sub_81A97DC(u8 taskId);
+static void sub_81A9B44(u16 trainerId);
+static void sub_81AA96C(u8 *mapNums);
+static void sub_81AA33C(u8 *, u8 *);
+static void sub_81AA398(u8);
+static bool8 sub_81AA4D8(u8, u8);
+static bool8 sub_81AA648(u8, u8);
+static bool8 sub_81AA760(u8 arg0, u8 *mapNums, u8 whichMap, u8 id);
+static bool8 sub_81AA810(u8 arg0, u8 x, u8 y, u8 *mapNums, u8 whichMap, u8 id);
 
 // Const rom data.
-extern void (* const gUnknown_08613EE0[])(void);
 extern const struct Struct_08613650 gUnknown_08613650[];
-extern const u16 sPickupItemsLvl50[TOTAL_ROUNDS][10];
-extern const u16 sPickupItemsLvlOpen[TOTAL_ROUNDS][10];
+extern const u16 sPickupItemsLvl50[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND];
+extern const u16 sPickupItemsLvlOpen[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND];
 extern const u8 gUnknown_08613ABC[63][2];
 extern const u8 gUnknown_08613B3A[];
-extern const u16 gUnknown_08613F34[9];
-extern const u16 gUnknown_08613F28[6];
 extern const u16 gUnknown_08D856C8[][16];
 extern const u8 gUnknown_08613C1C[50][2];
-extern const u8 gUnknown_08613ED8[];
 extern const u8 *const *const *const gUnknown_08613EC0[];
+extern const struct ClassMusic gUnknown_08613B44[54];
+extern const struct PyramidWildMon *const gBattlePyramidOpenLevelWildMonPointers[];
+extern const struct PyramidWildMon *const gBattlePyramidLevel50WildMonPointers[];
+extern const u8 gUnknown_08613794[];
+extern const u8 gUnknown_08613750[34][2];
+
+static const u8 gUnknown_08613ED8[] = {3, 4, 5, 6, 7, 8, 3, 4};
+
+static void (* const sBattlePyramidFunctions[])(void) =
+{
+    sub_81A8E9C,
+    sub_81A8F38,
+    sub_81A9048,
+    sub_81A9134,
+    sub_81A917C,
+    sub_81A91FC,
+    sub_81A9254,
+    sub_81A9290,
+    sub_81A93C8,
+    sub_81A9414,
+    sub_81A9424,
+    sub_81A9618,
+    sub_81A966C,
+    sub_81A9684,
+    sub_81A975C,
+    sub_81A97C8,
+    sub_81A9828,
+    sub_81A9834,
+};
+
+static const u16 gUnknown_08613F28[] = {ITEM_HP_UP, ITEM_PROTEIN, ITEM_IRON, ITEM_CALCIUM, ITEM_CARBOS, ITEM_ZINC};
+static const u16 gUnknown_08613F34[] = {ITEM_BRIGHT_POWDER, ITEM_WHITE_HERB, ITEM_QUICK_CLAW, ITEM_LEFTOVERS, ITEM_MENTAL_HERB, ITEM_KINGS_ROCK, ITEM_FOCUS_BAND, ITEM_SCOPE_LENS, ITEM_CHOICE_BAND};
+
+static const u8 gUnknown_08613F46[][4] =
+{
+    {0x01, 0x04, 0xff, 0xff},
+    {0x00, 0x02, 0x05, 0xff},
+    {0x01, 0x03, 0x06, 0xff},
+    {0x02, 0x07, 0xff, 0xff},
+    {0x00, 0x05, 0x08, 0xff},
+    {0x01, 0x04, 0x06, 0x09},
+    {0x02, 0x05, 0x07, 0x0a},
+    {0x03, 0x06, 0x0b, 0xff},
+    {0x04, 0x09, 0x0c, 0xff},
+    {0x05, 0x08, 0x0a, 0x0d},
+    {0x06, 0x09, 0x0b, 0x0e},
+    {0x07, 0x0a, 0x0f, 0xff},
+    {0x08, 0x0d, 0xff, 0xff},
+    {0x09, 0x0c, 0x0e, 0xff},
+    {0x0a, 0x0d, 0x0f, 0xff},
+    {0x0b, 0x0e, 0xff, 0xff},
+};
+
+static const u8 sPickupPercentages[PICKUP_ITEMS_PER_ROUND] = {30, 40, 50, 60, 70, 80, 85, 90, 95, 100};
 
 // code
-void sub_81A8E7C(void)
+void CallBattlePyramidFunction(void)
 {
-    gUnknown_08613EE0[gSpecialVar_0x8004]();
+    sBattlePyramidFunctions[gSpecialVar_0x8004]();
 }
 
-void sub_81A8E9C(void)
+static void sub_81A8E9C(void)
 {
     bool32 isCurrent;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
@@ -94,7 +186,7 @@ void sub_81A8E9C(void)
     if (!isCurrent)
     {
         gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] = 0;
-        sub_81AAA7C(lvlMode);
+        InitBagItems(lvlMode);
     }
 
     sub_81C4EEC();
@@ -102,7 +194,7 @@ void sub_81A8E9C(void)
     gBattleOutcome = 0;
 }
 
-void sub_81A8F38(void)
+static void sub_81A8F38(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -135,7 +227,7 @@ void sub_81A8F38(void)
     }
 }
 
-void sub_81A9048(void)
+static void sub_81A9048(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -169,7 +261,7 @@ void sub_81A9048(void)
     }
 }
 
-void sub_81A9134(void)
+static void sub_81A9134(void)
 {
     gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
@@ -178,7 +270,7 @@ void sub_81A9134(void)
     TrySavingData(SAVE_LINK);
 }
 
-void sub_81A917C(void)
+static void sub_81A917C(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -188,7 +280,7 @@ void sub_81A917C(void)
         gSaveBlock2Ptr->frontier.field_E18 = gUnknown_08613F28[Random() % ARRAY_COUNT(gUnknown_08613F28)];
 }
 
-void sub_81A91FC(void)
+static void sub_81A91FC(void)
 {
     if (AddBagItem(gSaveBlock2Ptr->frontier.field_E18, 1) == TRUE)
     {
@@ -202,7 +294,7 @@ void sub_81A91FC(void)
     }
 }
 
-void sub_81A9254(void)
+static void sub_81A9254(void)
 {
     s32 i;
 
@@ -212,7 +304,7 @@ void sub_81A9254(void)
     gSaveBlock2Ptr->frontier.field_E2A = 0;
 }
 
-void sub_81A9290(void)
+static void sub_81A9290(void)
 {
     s32 i;
     s32 r7;
@@ -247,7 +339,7 @@ void sub_81A9290(void)
     gSpecialVar_0x8001 = 1;
 }
 
-void sub_81A93C8(void)
+static void sub_81A93C8(void)
 {
     struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
     s32 i = 0;
@@ -266,12 +358,12 @@ void sub_81A93C8(void)
     }
 }
 
-void sub_81A9414(void)
+static void sub_81A9414(void)
 {
     gFacilityTrainers = gBattleFrontierTrainers;
 }
 
-void sub_81A9424(void)
+static void sub_81A9424(void)
 {
     s32 i;
     s32 var_24;
@@ -279,7 +371,7 @@ void sub_81A9424(void)
     s32 class = 0;
     s32 r7 = 0;
     struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
-    u16 trainerId = sub_81A9AA8(gEventObjects[gSelectedEventObject].localId);
+    u16 trainerId = LocalIdToPyramidTrainerId(gEventObjects[gSelectedEventObject].localId);
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_08613C1C); i++)
     {
@@ -341,7 +433,7 @@ void sub_81A9424(void)
     ShowFieldMessage(gUnknown_08613EC0[class][var_24][r7]);
 }
 
-void sub_81A9618(void)
+static void sub_81A9618(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
@@ -351,12 +443,12 @@ void sub_81A9618(void)
         gSaveBlock2Ptr->frontier.pyramidRecordStreaks[lvlMode] = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
 }
 
-void sub_81A966C(void)
+static void sub_81A966C(void)
 {
     gSpecialVar_Result = InBattlePyramid();
 }
 
-void sub_81A9684(void)
+static void sub_81A9684(void)
 {
     switch (gSpecialVar_0x8006)
     {
@@ -401,7 +493,7 @@ void sub_81A9684(void)
     }
 }
 
-void sub_81A975C(void)
+static void sub_81A975C(void)
 {
     s32 i, j;
     u16 item = 0;
@@ -416,12 +508,12 @@ void sub_81A975C(void)
     }
 }
 
-void sub_81A97C8(void)
+static void sub_81A97C8(void)
 {
     CreateTask(sub_81A97DC, 0);
 }
 
-void sub_81A97DC(u8 taskId)
+static void sub_81A97DC(u8 taskId)
 {
     if (gPaletteFade.active)
     {
@@ -430,12 +522,12 @@ void sub_81A97DC(u8 taskId)
     }
 }
 
-void sub_81A9828(void)
+static void sub_81A9828(void)
 {
     sub_809FDD4();
 }
 
-void sub_81A9834(void)
+static void sub_81A9834(void)
 {
     s32 i, j, k, l;
 
@@ -467,7 +559,7 @@ void sub_81A9834(void)
         gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gUnknown_0203CEF8[i];
 }
 
-u8 sub_81A9998(s32 *arg0, u8 arg1, u8 arg2)
+static u8 sub_81A9998(s32 *arg0, u8 arg1, u8 arg2)
 {
     s32 i, j;
     u8 ret = 0;
@@ -537,9 +629,9 @@ u8 sub_81A9998(s32 *arg0, u8 arg1, u8 arg2)
     return ret;
 }
 
-u16 sub_81A9AA8(u8 arg0)
+u16 LocalIdToPyramidTrainerId(u8 localId)
 {
-    return gSaveBlock2Ptr->frontier.field_CB4[arg0 - 1];
+    return gSaveBlock2Ptr->frontier.field_CB4[localId - 1];
 }
 
 bool8 GetBattlePyramidTrainerFlag(u8 eventId)
@@ -557,18 +649,7 @@ void sub_81A9B04(void)
     }
 }
 
-struct PyramidWildMon
-{
-    u16 species;
-    u8 lvl;
-    u8 abilityBit;
-    u16 moves[4];
-};
-
-extern const struct PyramidWildMon *const gBattlePyramidOpenLevelWildMonPointers[];
-extern const struct PyramidWildMon *const gBattlePyramidLevel50WildMonPointers[];
-
-void sub_81A9B44(u16 trainerId)
+static void sub_81A9B44(u16 trainerId)
 {
     s32 i;
 
@@ -652,7 +733,7 @@ void GenerateBattlePyramidWildMon(void)
     CalculateMonStats(&gEnemyParty[0]);
 }
 
-u8 sub_81A9E28(void)
+u8 GetPyramidRunMultiplier(void)
 {
     u8 id = sub_81AA9E4();
     return gUnknown_08613650[id].unk4;
@@ -690,29 +771,20 @@ void sub_81A9EC8(void)
         DoSoftReset();
 }
 
-void sub_81A9EDC(u16 trainerId)
+void CopyPyramidTrainerSpeechBefore(u16 trainerId)
 {
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
 }
 
-void sub_81A9EFC(u16 trainerId)
+void CopyPyramidTrainerWinSpeech(u16 trainerId)
 {
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechWin);
 }
 
-void sub_81A9F1C(u16 trainerId)
+void CopyPyramidTrainerLoseSpeech(u16 trainerId)
 {
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
 }
-
-struct ClassMusic
-{
-    u8 class;
-    u8 music;
-};
-
-extern const struct ClassMusic gUnknown_08613B44[54];
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
 
 u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerId)
 {
@@ -726,12 +798,12 @@ u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerId)
     return 0;
 }
 
-void sub_81A9F80(void)
+static void sub_81A9F80(void)
 {
     ScriptContext1_SetupScript(BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88);
 }
 
-u16 sub_81A9F90(u8 count)
+static u16 sub_81A9F90(u8 count)
 {
     s32 i;
     u16 trainerId;
@@ -817,4 +889,409 @@ void sub_81AA078(u16 *mapArg, u8 arg1)
     }
     mapheader_run_script_with_tag_x1();
     free(allocated);
+}
+
+void sub_81AA1D8(void)
+{
+    s32 i;
+    u8 id;
+    u8 var0, var1;
+
+    for (i = 0; i < 8; i++)
+        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+
+    id = sub_81AA9E4();
+    sub_81AA33C(&var0, &var1);
+    CpuFill32(0, gSaveBlock1Ptr->eventObjectTemplates, sizeof(gSaveBlock1Ptr->eventObjectTemplates));
+    for (i = 0; i < 2; i++)
+    {
+        u8 value;
+
+        if (i == 0)
+            value = gUnknown_08613650[id].unk3;
+        else
+            value = gUnknown_08613650[id].unk2;
+
+        switch (value)
+        {
+        case 0:
+            sub_81AA398(i);
+            break;
+        case 1:
+            if (sub_81AA4D8(i, var0))
+                sub_81AA398(i);
+            break;
+        case 2:
+            if (sub_81AA4D8(i, var1))
+                sub_81AA398(i);
+            break;
+        case 3:
+            if (sub_81AA648(i, var0))
+                sub_81AA398(i);
+            break;
+        case 4:
+            if (sub_81AA648(i, var1))
+                sub_81AA398(i);
+            break;
+        }
+    }
+}
+
+void sub_81AA2F8(void)
+{
+    s32 i;
+    struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
+
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
+    {
+        if (events[i].graphicsId != EVENT_OBJ_GFX_ITEM_BALL)
+            events[i].script = BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F;
+        else
+            events[i].script = BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A;
+    }
+}
+
+static void sub_81AA33C(u8 *var0, u8 *var1)
+{
+    *var0 = gSaveBlock2Ptr->frontier.field_E22[3] % 16;
+    *var1 = gSaveBlock2Ptr->frontier.field_E22[0] % 16;
+
+    if (*var0 == *var1)
+    {
+        *var0 = (gSaveBlock2Ptr->frontier.field_E22[3] + 1 ) % 16;
+        *var1 = (gSaveBlock2Ptr->frontier.field_E22[0] + 15) % 16;
+    }
+}
+
+static void sub_81AA398(u8 arg0)
+{
+    s32 i;
+    s32 count;
+    s32 var_28;
+    s32 r4;
+    u32 bits = 0;
+    u8 id = sub_81AA9E4();
+    u8 *allocated = AllocZeroed(0x10);
+
+    sub_81AA96C(allocated);
+    r4 = gSaveBlock2Ptr->frontier.field_E22[2] % 16;
+    if (arg0 == 0)
+    {
+        count = gUnknown_08613650[id].unk1;
+        var_28 = 0;
+    }
+    else
+    {
+        count = gUnknown_08613650[id].unk0;
+        var_28 = gUnknown_08613650[id].unk1;
+    }
+
+    for (i = 0; i < count; i++)
+    {
+        do
+        {
+            do
+            {
+                if (bits & 1)
+                {
+                    if (!(gBitTable[r4] & gSaveBlock2Ptr->frontier.field_E22[3]))
+                        bits |= 2;
+                }
+                else
+                {
+                    if (gBitTable[r4] & gSaveBlock2Ptr->frontier.field_E22[3])
+                        bits |= 2;
+                }
+                if (++r4 >= 16)
+                    r4 = 0;
+
+                if (r4 == gSaveBlock2Ptr->frontier.field_E22[2] % 16)
+                {
+                    if (bits & 1)
+                        bits |= 6;
+                    else
+                        bits |= 1;
+                }
+            } while (!(bits & 2));
+
+        } while (!(bits & 4) && sub_81AA760(arg0, allocated, r4, var_28 + i));
+        bits &= 1;
+    }
+    free(allocated);
+}
+
+static bool8 sub_81AA4D8(u8 arg0, u8 arg1)
+{
+    s32 i;
+    s32 var_28;
+    s32 r6 = 0;
+    s32 r7 = 0;
+    s32 var_34 = 0;
+    s32 count;
+    u8 id = sub_81AA9E4();
+    u8 *allocated = AllocZeroed(0x10);
+
+    sub_81AA96C(allocated);
+    if (arg0 == 0)
+    {
+        count = gUnknown_08613650[id].unk1;
+        var_28 = 0;
+    }
+    else
+    {
+        count = gUnknown_08613650[id].unk0;
+        var_28 = gUnknown_08613650[id].unk1;
+    }
+
+    for (i = 0; i < count; i++)
+    {
+        if (r7 == 0)
+        {
+            if (sub_81AA760(arg0, allocated, arg1, var_28 + i))
+                r7 = 1;
+            else
+                var_34++;
+        }
+        if (r7 & 1)
+        {
+            if (sub_81AA760(arg0, allocated, gUnknown_08613F46[arg1][r6], var_28 + i))
+            {
+                do
+                {
+                    r6++;
+                    if (gUnknown_08613F46[arg1][r6] == 0xFF || r6 >= 4)
+                        r6 = 0;
+                    r7 += 2;
+                } while (r7 >> 1 != 4 && sub_81AA760(arg0, allocated, gUnknown_08613F46[arg1][r6], var_28 + i));
+                var_34++;
+            }
+            else
+            {
+                r6++;
+                if (gUnknown_08613F46[arg1][r6] == 0xFF || r6 >= 4)
+                    r6 = 0;
+                var_34++;
+            }
+        }
+
+        if (r7 >> 1 == 4)
+            break;
+
+        r7 &= 1;
+    }
+    // free(allocated); BUG: allocated memory not freed
+
+    return (count / 2 > var_34);
+}
+
+static bool8 sub_81AA648(u8 arg0, u8 arg1)
+{
+    s32 i;
+    s32 var_28;
+    s32 r4 = 0;
+    s32 r7 = 0;
+    s32 r8 = 0;
+    s32 count;
+    u8 id = sub_81AA9E4();
+    u8 *allocated = AllocZeroed(0x10);
+
+    sub_81AA96C(allocated);
+    if (arg0 == 0)
+    {
+        count = gUnknown_08613650[id].unk1;
+        var_28 = 0;
+    }
+    else
+    {
+        count = gUnknown_08613650[id].unk0;
+        var_28 = gUnknown_08613650[id].unk1;
+    }
+
+    for (i = 0; i < count; i++)
+    {
+        if (sub_81AA760(arg0, allocated, gUnknown_08613F46[arg1][r4], var_28 + i))
+        {
+            do
+            {
+                r4++;
+                if (gUnknown_08613F46[arg1][r4] == 0xFF || r4 >= 4)
+                    r4 = 0;
+                r8++;
+            } while (r8 != 4 && sub_81AA760(arg0, allocated, gUnknown_08613F46[arg1][r4], var_28 + i));
+            r7++;
+        }
+        else
+        {
+            r4++;
+            if (gUnknown_08613F46[arg1][r4] == 0xFF || r4 >= 4)
+                r4 = 0;
+            r7++;
+        }
+
+        if (r8 == 4)
+            break;
+    }
+    // free(allocated); BUG: allocated memory not freed
+
+    return (count / 2 > r7);
+}
+
+static bool8 sub_81AA760(u8 arg0, u8 *mapNums, u8 whichMap, u8 id)
+{
+    s32 i, j;
+
+    if (gSaveBlock2Ptr->frontier.field_E22[0] & 1)
+    {
+        s32 minus1 = -1;
+        for (i = 7; i > minus1; i--)
+        {
+            for (j = 7; j >= 0; j--)
+            {
+                if (!sub_81AA810(arg0, j, i, mapNums, whichMap, id))
+                    return FALSE;
+            }
+        }
+    }
+    else
+    {
+        for (i = 0; i < 8; i++)
+        {
+            for (j = 0; j < 8; j++)
+            {
+                if (!sub_81AA810(arg0, j, i, mapNums, whichMap, id))
+                    return FALSE;
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_81AA810(u8 arg0, u8 x, u8 y, u8 *mapNums, u8 whichMap, u8 id)
+{
+    s32 i, j;
+    const struct MapHeader *mapHeader;
+    struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
+
+    mapHeader = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(BATTLE_PYRAMID_SQUARE01), mapNums[whichMap] + MAP_NUM(BATTLE_PYRAMID_SQUARE01));
+    for (i = 0; i < mapHeader->events->eventObjectCount; i++)
+    {
+        if (mapHeader->events->eventObjects[i].x != x || mapHeader->events->eventObjects[i].y != y)
+            continue;
+
+        if (arg0 != 0 || mapHeader->events->eventObjects[i].graphicsId == EVENT_OBJ_GFX_ITEM_BALL)
+        {
+            if (arg0 != 1 || mapHeader->events->eventObjects[i].graphicsId != EVENT_OBJ_GFX_ITEM_BALL)
+                continue;
+        }
+
+        for (j = 0; j < id; j++)
+        {
+            if (events[j].x == x + ((whichMap % 4) * 8) && events[j].y == y + ((whichMap / 4) * 8))
+                break;
+        }
+        if (j != id)
+            continue;
+
+        events[id] = mapHeader->events->eventObjects[i];
+        events[id].x += ((whichMap % 4) * 8);
+        events[id].y += ((whichMap / 4) * 8);
+        events[id].localId = id + 1;
+        if (events[id].graphicsId != EVENT_OBJ_GFX_ITEM_BALL)
+        {
+            i = sub_81A9F90(id);
+            events[id].graphicsId = GetBattleFacilityTrainerGfxId(i);
+            gSaveBlock2Ptr->frontier.field_CB4[id] = i;
+        }
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void sub_81AA96C(u8 *mapNums)
+{
+    s32 i;
+    s32 bits = (gSaveBlock2Ptr->frontier.field_E22[0]) | (gSaveBlock2Ptr->frontier.field_E22[1] << 16);
+    u8 id = sub_81AA9E4();
+
+    for (i = 0; i < 16; i++)
+    {
+        mapNums[i] = gUnknown_08613650[id].unk5[bits & 7];
+        bits >>= 3;
+        if (i == 7)
+        {
+            bits = (gSaveBlock2Ptr->frontier.field_E22[2]) | (gSaveBlock2Ptr->frontier.field_E22[3] << 16);
+            bits >>= 8;
+        }
+    }
+}
+
+static u8 sub_81AA9E4(void)
+{
+    s32 i;
+    s32 var = gSaveBlock2Ptr->frontier.field_E22[3] % 100;
+    s32 battleNum = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+
+    for (i = gUnknown_08613794[battleNum]; i < ARRAY_COUNT(gUnknown_08613750); i++)
+    {
+        if (var < gUnknown_08613750[i][0])
+            return gUnknown_08613750[i][1];
+    }
+    return 0;
+}
+
+u8 sub_81AAA40(void)
+{
+    u8 i;
+    struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
+
+    for (i = 0; i < 16; i++)
+    {
+        if (events[i].localId == 0)
+            break;
+    }
+
+    return i;
+}
+
+static void InitBagItems(u8 lvlMode)
+{
+    s32 i;
+
+    for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
+    {
+        gSaveBlock2Ptr->frontier.pyramidBag.itemId[lvlMode][i] = 0;
+        gSaveBlock2Ptr->frontier.pyramidBag.quantity[lvlMode][i] = 0;
+    }
+
+    AddPyramidBagItem(ITEM_HYPER_POTION, 1);
+    AddPyramidBagItem(ITEM_ETHER, 1);
+}
+
+u16 GetBattlePyramidPickupItemId(void)
+{
+    s32 rand;
+    u32 i;
+    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    s32 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode] / 7);
+
+    if (round >= TOTAL_ROUNDS)
+        round = TOTAL_ROUNDS - 1;
+
+    rand = Random() % 100;
+
+    for (i = 0; i < ARRAY_COUNT(sPickupPercentages); i++)
+    {
+        if (sPickupPercentages[i] > rand)
+            break;
+    }
+
+    if (i >= PICKUP_ITEMS_PER_ROUND)
+        i = PICKUP_ITEMS_PER_ROUND - 1;
+
+    if (lvlMode != FRONTIER_LVL_50)
+        return sPickupItemsLvlOpen[round][i];
+    else
+        return sPickupItemsLvl50[round][i];
 }

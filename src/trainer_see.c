@@ -12,11 +12,10 @@
 #include "task.h"
 #include "trainer_see.h"
 #include "util.h"
+#include "battle_pyramid.h"
 #include "constants/field_effects.h"
 
-extern bool8 InBattlePyramid(void);
 extern bool32 InTrainerHill(void);
-extern bool8 GetBattlePyramidTrainerFlag(u8 eventObjectId);
 extern bool8 GetTrainerHillTrainerFlag(u8 eventObjectId);
 extern void sub_809BE48(u16 npcId);
 
