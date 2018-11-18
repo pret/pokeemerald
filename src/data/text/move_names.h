@@ -657,6 +657,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_CLANGING_SCALES] = _("Clanging Sca"),
     [MOVE_DRAGON_HAMMER] = _("DragonHammer"),
     [MOVE_BRUTAL_SWING] = _("Brutal Swing"),
+    [MOVE_AURORA_VEIL] = _("Aurora Veil"),
     [MOVE_SHELL_TRAP] = _("Shell Trap"),
     [MOVE_FLEUR_CANNON] = _("Fleur Cannon"),
     [MOVE_PSYCHIC_FANGS] = _("PsychicFangs"),
