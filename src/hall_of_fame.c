@@ -438,7 +438,7 @@ static void Task_Hof_InitMonData(u8 taskId)
 
     gTasks[taskId].tMonNumber = 0; // valid pokes
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u8 nick[POKEMON_NAME_LENGTH + 2];
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
@@ -468,7 +468,7 @@ static void Task_Hof_InitMonData(u8 taskId)
     gTasks[taskId].tDisplayedMonId = 0;
     gTasks[taskId].tPlayerSpriteID = 0xFF;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         gTasks[taskId].tMonSpriteId(i) = 0xFF;
     }
@@ -642,7 +642,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
     u16 i;
 
     BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, 0);
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
             gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 0;
@@ -665,7 +665,7 @@ static void sub_8173DC0(u8 taskId)
     else
     {
         u16 i;
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
                 gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 1;
@@ -748,7 +748,7 @@ static void Task_Hof_HandleExit(u8 taskId)
     {
         s32 i;
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             u8 spriteId = gTasks[taskId].tMonSpriteId(i);
             if (spriteId != 0xFF)
@@ -844,7 +844,7 @@ void CB2_DoHallOfFamePC(void)
             SetGpuReg(REG_OFFSET_BLDY, 0);
             taskId = CreateTask(Task_HofPC_CopySaveData, 0);
 
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < PARTY_SIZE; i++)
             {
                 gTasks[taskId].tMonSpriteId(i) = 0xFF;
             }
@@ -901,7 +901,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
     gTasks[taskId].tCurrMonId = 0;
     gTasks[taskId].tMonNo = 0;
 
-    for (i = 0; i < 6; i++, currMon++)
+    for (i = 0; i < PARTY_SIZE; i++, currMon++)
     {
         if (currMon->species != 0)
             gTasks[taskId].tMonNo++;
@@ -909,7 +909,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
 
     currMon = &savedTeams->mon[0];
 
-    for (i = 0; i < 6; i++, currMon++)
+    for (i = 0; i < PARTY_SIZE; i++, currMon++)
     {
         if (currMon->species != 0)
         {
@@ -963,7 +963,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
     for (i = 0; i < gTasks[taskId].tCurrTeamNo; i++)
         savedTeams++;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 spriteId = gTasks[taskId].tMonSpriteId(i);
         if (spriteId != 0xFF)
@@ -1056,7 +1056,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
     {
         u8 i;
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 spriteId = gTasks[taskId].tMonSpriteId(i);
             if (spriteId != 0xFF)

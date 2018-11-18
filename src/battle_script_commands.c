@@ -3285,7 +3285,7 @@ static void atk23_getexp(void)
             u16 calculatedExp;
             s32 viaSentIn;
 
-            for (viaSentIn = 0, i = 0; i < 6; i++)
+            for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                     continue;
@@ -3543,7 +3543,7 @@ static void atk24(void)
     }
     else
     {
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
              && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
@@ -3556,7 +3556,7 @@ static void atk24(void)
     if (HP_count == 0)
         gBattleOutcome |= B_OUTCOME_LOST;
 
-    for (HP_count = 0, i = 0; i < 6; i++)
+    for (HP_count = 0, i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
             && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
@@ -4952,7 +4952,7 @@ static void atk4D_switchindataupdate(void)
 
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
-        for (i = 0; i < BATTLE_STATS_NO; i++)
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
         {
             gBattleMons[gActiveBattler].statStages[i] = oldData.statStages[i];
         }
@@ -7406,7 +7406,7 @@ static void atk8A_normalisebuffs(void) // haze
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        for (j = 0; j < BATTLE_STATS_NO; j++)
+        for (j = 0; j < NUM_BATTLE_STATS; j++)
             gBattleMons[i].statStages[j] = 6;
     }
 
@@ -9034,7 +9034,7 @@ static void atkBD_copyfoestats(void) // psych up
 {
     s32 i;
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
         gBattleMons[gBattlerAttacker].statStages[i] = gBattleMons[gBattlerTarget].statStages[i];
     }
@@ -9868,7 +9868,7 @@ static void atkE5_pickup(void)
 
         if (InBattlePyramid())
         {
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < PARTY_SIZE; i++)
             {
                 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
                 heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
@@ -9891,7 +9891,7 @@ static void atkE5_pickup(void)
         }
         else
         {
-            for (i = 0; i < 6; i++)
+            for (i = 0; i < PARTY_SIZE; i++)
             {
                 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
                 heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);

@@ -151,7 +151,6 @@
 #define STATUS_PRIMARY_FAINTED   0x7
 
 #define MAX_TOTAL_EVS 510
-#define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
 
 struct PokemonSubstruct0
@@ -293,8 +292,6 @@ struct Unknown_806F160_Struct
     struct SpriteFrameImage *frameImages;
 };
 
-#define BATTLE_STATS_NO 8
-
 struct BattlePokemon
 {
     /*0x00*/ u16 species;
@@ -312,7 +309,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 altAbility:1;
-    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
+    /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;

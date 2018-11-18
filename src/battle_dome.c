@@ -2756,17 +2756,17 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
     s32 i, count;
     u8 bits;
     u16 resultingEvs;
-    s32 evs[6];
+    s32 evs[NUM_STATS];
 
     count = 0, bits = evBits;
-    for (i = 0; i < 6; bits >>= 1, i++)
+    for (i = 0; i < NUM_STATS; bits >>= 1, i++)
     {
         if (bits & 1)
             count++;
     }
 
     resultingEvs = MAX_TOTAL_EVS / count;
-    for (i = 0; i < 6; bits <<= 1, i++)
+    for (i = 0; i < NUM_STATS; bits <<= 1, i++)
     {
         evs[i] = 0;
         if (evBits & bits)
@@ -4953,7 +4953,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         for (i = 0; i < 3; i++)
         {
             s32 evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].evSpread;
-            for (k = 0, j = 0; j < 6; j++)
+            for (k = 0, j = 0; j < NUM_STATS; j++)
             {
                 allocatedArray[j] = 0;
                 if (evBits & 1)
@@ -4962,7 +4962,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             }
             k = MAX_TOTAL_EVS / k;
             evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].evSpread;
-            for (j = 0; j < 6; j++)
+            for (j = 0; j < NUM_STATS; j++)
             {
                 if (evBits & 1)
                     allocatedArray[j] = k;
