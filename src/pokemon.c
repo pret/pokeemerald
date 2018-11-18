@@ -4,6 +4,7 @@
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "event_data.h"
@@ -81,9 +82,7 @@ extern u8 StorageGetCurrentBox(void);
 extern void set_unknown_box_id(u8);
 extern void sub_803FA70(u8 battlerId);
 extern u8 sav1_map_get_name(void);
-extern bool8 InBattlePyramid(void);
 extern bool8 sub_806F104(void);
-extern u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerOpponentId);
 extern u8 sub_81D63C8(u16 trainerOpponentId);
 extern void SummaryScreen_SetUnknownTaskId(u8);
 
@@ -4695,7 +4694,7 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     StringCopy10(dst->nickname, nickname);
     GetMonData(src, MON_DATA_OT_NAME, dst->otName);
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
         dst->statStages[i] = 6;
 
     dst->status2 = 0;

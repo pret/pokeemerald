@@ -73,7 +73,7 @@ void SetFixedHoleWarpAsDestination(s16 x, s16 y);
 void warp1_set_to_sav1w(void);
 void sub_8084F2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084F6C(u8 a1);
-void sub_8084FAC(void);
+void sub_8084FAC(int unused);
 const struct MapConnection *GetMapConnection(u8 dir);
 static bool8 SetDiveWarp(u8 dir, u16 x, u16 y);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);

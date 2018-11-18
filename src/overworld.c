@@ -1,5 +1,6 @@
 #include "global.h"
 #include "overworld.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "bg.h"
@@ -113,7 +114,6 @@ extern void ShowMapNamePopup(void);
 extern bool32 InTrainerHill(void);
 extern bool32 sub_808651C(void);
 extern bool8 sub_80AF6A4(void);
-extern bool8 sub_81A9E6C(void);
 extern bool8 sub_80E909C(void);
 extern void sub_81AA1D8(void);
 extern void c2_change_map(void);
@@ -517,7 +517,7 @@ void LoadSaveblockEventObjScripts(void)
     struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
     s32 i;
 
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
         savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
 }
 
@@ -526,7 +526,7 @@ void Overworld_SetEventObjTemplateCoords(u8 localId, s16 x, s16 y)
     s32 i;
     struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
 
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
     {
         struct EventObjectTemplate *eventObjectTemplate = &savObjTemplates[i];
         if (eventObjectTemplate->localId == localId)
@@ -543,7 +543,7 @@ void Overworld_SetEventObjTemplateMovementType(u8 localId, u8 movementType)
     s32 i;
 
     struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
     {
         struct EventObjectTemplate *eventObjectTemplate = &savObjTemplates[i];
         if (eventObjectTemplate->localId == localId)
@@ -764,7 +764,7 @@ void sub_8084F6C(u8 a1)
         SetWarpData(&gSaveBlock1Ptr->warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_8084FAC(void)
+void sub_8084FAC(int unused)
 {
     gSaveBlock1Ptr->warp1 = gSaveBlock1Ptr->warp2;
 }
@@ -1808,7 +1808,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 {
     u8 flashLevel;
 
-    if (sub_81A9E6C())
+    if (InBattlePyramid_())
     {
         door_upload_tiles();
         ScanlineEffect_SetParams(sFlashEffectParams);

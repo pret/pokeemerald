@@ -460,18 +460,18 @@ static bool32 InitStartMenuStep(void)
         sUnknown_02037619[0]++;
         break;
     case 3:
-        if (GetSafariZoneFlag() != FALSE)
+        if (GetSafariZoneFlag())
         {
             ShowSafariBallsWindow();
         }
-        if (InBattlePyramid() != FALSE)
+        if (InBattlePyramid())
         {
             ShowPyramidFloorWindow();
         }
         sUnknown_02037619[0]++;
         break;
     case 4:
-        if (PrintStartMenuActions(&sUnknown_02037619[1], 2) == FALSE)
+        if (!PrintStartMenuActions(&sUnknown_02037619[1], 2))
         {
             break;
         }

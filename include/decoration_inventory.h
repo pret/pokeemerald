@@ -1,12 +1,15 @@
 #ifndef GUARD_DECORATION_INVENTORY_H
 #define GUARD_DECORATION_INVENTORY_H
-struct DecorationInventory {
+
+struct DecorationInventory
+{
     u8 *items;
     u8 size;
 };
 
 extern struct DecorationInventory gDecorationInventories[];
 
+void SetDecorationInventoriesPointers(void);
 void ClearDecorationInventories(void);
 s8 GetFirstEmptyDecorSlot(u8 idx);
 u8 CheckHasDecoration(u8);

@@ -3538,7 +3538,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gBattleStruct->moneyMultiplier = 2;
             break;
         case HOLD_EFFECT_RESTORE_STATS:
-            for (i = 0; i < BATTLE_STATS_NO; i++)
+            for (i = 0; i < NUM_BATTLE_STATS; i++)
             {
                 if (gBattleMons[battlerId].statStages[i] < 6)
                 {
@@ -3609,7 +3609,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RESTORE_STATS:
-                for (i = 0; i < BATTLE_STATS_NO; i++)
+                for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
                     if (gBattleMons[battlerId].statStages[i] < 6)
                     {
@@ -4077,7 +4077,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RESTORE_STATS:
-                for (i = 0; i < BATTLE_STATS_NO; i++)
+                for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
                     if (gBattleMons[battlerId].statStages[i] < 6)
                     {
@@ -4519,7 +4519,7 @@ u32 CountBattlerStatIncreases(u8 battlerId, bool32 countEvasionAcc)
     u32 i;
     u32 count = 0;
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
         if ((i == STAT_ACC || i == STAT_EVASION) && !countEvasionAcc)
             continue;

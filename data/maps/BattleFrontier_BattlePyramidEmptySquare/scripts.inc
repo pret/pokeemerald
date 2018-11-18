@@ -19,7 +19,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A5D:: @ 8252A5D
 	setvar VAR_RESULT, 0
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77:: @ 8252A77
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	delay 2
 	compare VAR_RESULT, 2
 	goto_if 5, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77
@@ -39,7 +39,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98:: @ 8252A98
 
 BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8004, 15
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	setvar VAR_0x8004, 0
 	special CallFrontierUtilFunc
 	switch VAR_TEMP_0
@@ -68,7 +68,7 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39:: @ 8252B39
 	setvar VAR_0x8004, 17
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42:: @ 8252B42
@@ -80,16 +80,16 @@ BattleFrontier_BattlePyramidTop_EventScript_252B42:: @ 8252B42
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	setvar VAR_0x8006, 255
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B66:: @ 8252B66
 BattleFrontier_BattlePyramidTop_EventScript_252B66:: @ 8252B66
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	setvar VAR_0x8004, 14
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	special HealPlayerParty
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
@@ -98,14 +98,14 @@ BattleFrontier_BattlePyramidTop_EventScript_252B66:: @ 8252B66
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252B8D:: @ 8252B8D
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 1
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	special SavePlayerParty
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 9
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special CallFrontierUtilFunc
@@ -121,7 +121,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5:: @ 8252BD5
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 32
 	setvar VAR_0x8006, 0
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	return
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
@@ -137,7 +137,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	compare VAR_RESULT, 7
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
 	setvar VAR_0x8004, 6
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
@@ -155,7 +155,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
 	trainerbattle 9, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
 	setvar VAR_0x8004, 10
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	waitmessage
 	waitbuttonpress
 	closemessage
@@ -164,12 +164,12 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A:: @ 8252C6A
 	setvar VAR_0x8004, 7
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	callstd 1
 	compare VAR_0x8007, 0
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
 	setvar VAR_0x8004, 8
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87:: @ 8252C87
 	end
