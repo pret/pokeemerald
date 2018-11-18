@@ -185,7 +185,7 @@ static void CB2_FadeAndDoReset(void)
     {
     case 0:
     default:
-        BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, RGB_WHITEALPHA);
         gMain.state = 1;
         break;
     case 1:
