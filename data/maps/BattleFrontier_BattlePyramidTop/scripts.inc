@@ -9,7 +9,7 @@ BattleFrontier_BattlePyramidTop_MapScript1_2550B6: @ 82550B6
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 200
 	setvar VAR_0x8006, 0
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	setvar VAR_TEMP_F, 1
 	end
 
@@ -71,14 +71,14 @@ BattleFrontier_BattlePyramidTop_EventScript_25518A:: @ 825518A
 BattleFrontier_BattlePyramidTop_EventScript_255193:: @ 8255193
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 1
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	special SavePlayerParty
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 0
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 9
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special CallFrontierUtilFunc
