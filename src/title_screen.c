@@ -1,7 +1,7 @@
 #include "global.h"
 #include "title_screen.h"
 #include "sprite.h"
-#include "gba/m4a_internal.h"
+#include <gba/m4a_internal.h>
 #include "clear_save_data_menu.h"
 #include "decompress.h"
 #include "event_data.h"

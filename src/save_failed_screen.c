@@ -11,7 +11,7 @@
 #include "menu.h"
 #include "save.h"
 #include "starter_choose.h"
-#include "gba/flash_internal.h"
+#include <gba/flash_internal.h>
 #include "text_window.h"
 
 #define MSG_WIN_TOP 12

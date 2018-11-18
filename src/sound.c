@@ -1,5 +1,5 @@
 #include "global.h"
-#include "gba/m4a_internal.h"
+#include <gba/m4a_internal.h>
 #include "sound.h"
 #include "battle.h"
 #include <m4a.h>

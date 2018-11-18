@@ -1,4 +1,4 @@
-#include "gba/gba.h"
+#include <gba/gba.h>
 #include "multiboot.h"
 
 static u16 MultiBoot_required_data[MULTIBOOT_NCHILD];

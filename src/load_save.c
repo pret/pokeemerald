@@ -1,5 +1,5 @@
 #include "global.h"
-#include "gba/flash_internal.h"
+#include <gba/flash_internal.h>
 #include "load_save.h"
 #include "main.h"
 #include "pokemon.h"
