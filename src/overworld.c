@@ -764,7 +764,7 @@ void sub_8084F6C(u8 a1)
         SetWarpData(&gSaveBlock1Ptr->warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_8084FAC(void)
+void sub_8084FAC(int unused)
 {
     gSaveBlock1Ptr->warp1 = gSaveBlock1Ptr->warp2;
 }
