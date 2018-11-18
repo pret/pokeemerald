@@ -42,8 +42,8 @@ struct Struct_08613650
     u8 unk1;
     u8 unk2;
     u8 unk3;
-    u8 unk4;
-    u8 unk5[11];
+    u8 runMultiplier;
+    u8 unk5[8];
 };
 
 struct PyramidWildMon
@@ -736,7 +736,7 @@ void GenerateBattlePyramidWildMon(void)
 u8 GetPyramidRunMultiplier(void)
 {
     u8 id = sub_81AA9E4();
-    return gUnknown_08613650[id].unk4;
+    return gUnknown_08613650[id].runMultiplier;
 }
 
 u8 InBattlePyramid(void)
