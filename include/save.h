@@ -54,7 +54,12 @@ enum
     SAVE_HALL_OF_FAME_ERASE_BEFORE // unused
 };
 
-#define SECTION_ID_RECORDED_BATTLE  31
+#define SECTOR_SAVE_SLOT_LENGTH 14
+#define SECTOR_ID_HOF_1 28
+#define SECTOR_ID_HOF_2 29
+#define SECTOR_ID_TRAINER_HILL 30
+#define SECTOR_ID_RECORDED_BATTLE  31
+#define SECTORS_COUNT 32
 
 extern u16 gLastWrittenSector;
 extern u32 gLastSaveCounter;
@@ -72,26 +77,6 @@ extern struct SaveSection gSaveDataBuffer;
 
 void ClearSaveData(void);
 void Save_ResetSaveCounters(void);
-bool32 SetDamagedSectorBits(u8 op, u8 bit);
-u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location);
-u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
-u8 HandleWriteSectorNBytes(u8 sector, u8 *data, u16 size);
-u8 TryWriteSector(u8 sector, u8 *data);
-u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location);
-u32 RestoreSaveBackupVars(const struct SaveSectionLocation *location);
-u8 sub_81529D4(u16 a1, const struct SaveSectionLocation *location);
-u8 sub_8152A34(u16 a1, const struct SaveSectionLocation *location);
-u8 ClearSaveData_2(u16 a1, const struct SaveSectionLocation *location);
-u8 sav12_xor_get(u16 a1, const struct SaveSectionLocation *location);
-u8 sub_8152CAC(u16 a1, const struct SaveSectionLocation *location);
-u8 sub_8152D44(u16 a1, const struct SaveSectionLocation *location);
-u8 sub_8152DD0(u16 a1, const struct SaveSectionLocation *location);
-u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location);
-u8 GetSaveValidStatus(const struct SaveSectionLocation *location);
-u8 sub_81530DC(u8 a1, u8 *data, u16 size);
-u8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section);
-u16 CalculateChecksum(void *data, u16 size);
-void UpdateSaveAddresses(void);
 u8 HandleSavingData(u8 saveType);
 u8 TrySavingData(u8 saveType);
 bool8 sub_8153380(void);
