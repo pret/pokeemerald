@@ -74,7 +74,10 @@
 #define STAT_SPEED 3
 #define STAT_SPATK 4
 #define STAT_SPDEF 5
-#define STAT_ACC 6 // only in battles
-#define STAT_EVASION 7 // only in battles
+#define STAT_ACC 6 // Only in battles.
+#define STAT_EVASION 7 // Only in battles.
+
+#define NUM_STATS 6
+#define NUM_BATTLE_STATS 8
 
 #endif // GUARD_CONSTANTS_POKEMON_H

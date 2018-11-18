@@ -43,7 +43,7 @@ int GameClear(void)
 
     ribbonGet = FALSE;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon *mon = &gPlayerParty[i];
 

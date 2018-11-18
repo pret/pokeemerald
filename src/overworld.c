@@ -517,7 +517,7 @@ void LoadSaveblockEventObjScripts(void)
     struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
     s32 i;
 
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
         savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
 }
 
@@ -526,7 +526,7 @@ void Overworld_SetEventObjTemplateCoords(u8 localId, s16 x, s16 y)
     s32 i;
     struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
 
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
     {
         struct EventObjectTemplate *eventObjectTemplate = &savObjTemplates[i];
         if (eventObjectTemplate->localId == localId)
@@ -543,7 +543,7 @@ void Overworld_SetEventObjTemplateMovementType(u8 localId, u8 movementType)
     s32 i;
 
     struct EventObjectTemplate *savObjTemplates = gSaveBlock1Ptr->eventObjectTemplates;
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
     {
         struct EventObjectTemplate *eventObjectTemplate = &savObjTemplates[i];
         if (eventObjectTemplate->localId == localId)

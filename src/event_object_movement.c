@@ -2559,7 +2559,7 @@ struct EventObjectTemplate *GetBaseTemplateForEventObject(const struct EventObje
     {
         return NULL;
     }
-    for (i = 0; i < 64; i++) // Using ARRAY_COUNT here results in the wrong conditional branch instruction (bls instead of ble)
+    for (i = 0; i < EVENT_OBJECT_TEMPLATES_COUNT; i++)
     {
         if (eventObject->localId == gSaveBlock1Ptr->eventObjectTemplates[i].localId)
         {

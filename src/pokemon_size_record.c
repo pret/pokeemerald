@@ -206,13 +206,13 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
     if (index < 11 && ribbonId < 65)
     {
         gSaveBlock1Ptr->giftRibbons[index] = ribbonId;
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            struct Pokemon *pkmn = &gPlayerParty[i];
+            struct Pokemon *mon = &gPlayerParty[i];
 
-            if (GetMonData(pkmn, MON_DATA_SPECIES) != 0 && GetMonData(pkmn, MON_DATA_SANITY_BIT3) == 0)
+            if (GetMonData(mon, MON_DATA_SPECIES) != 0 && GetMonData(mon, MON_DATA_SANITY_BIT3) == 0)
             {
-                SetMonData(pkmn, array[index], &data);
+                SetMonData(mon, array[index], &data);
                 gotRibbon = TRUE;
             }
         }
