@@ -135,6 +135,7 @@ enum LanguageId
 #define BAG_POKEBALLS_COUNT  16
 #define BAG_TMHM_COUNT       64
 #define BAG_BERRIES_COUNT    46
+#define EVENT_OBJECT_TEMPLATES_COUNT 64
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
@@ -442,12 +443,14 @@ struct BattleFrontier
     /*0xE10*/ u8 field_E10_1:3;
     /*0xE10*/ u8 field_E10_2:4;
     /*0xE10*/ u8 field_E10_3:1;
-    /*0xE12*/ u16 field_E12[4];
+    /*0xE12*/ u16 field_E12[3];
+    /*0xE18*/ u16 field_E18;
     /*0xE1A*/ u16 pyramidWinStreaks[2];
     /*0xE1E*/ u16 pyramidRecordStreaks[2];
-    /*0xE1E*/ u16 field_E1F[5];
+    /*0xE22*/ u16 field_E22[4];
+    /*0xE2A*/ u8 field_E2A;
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0xE58*/ u16 field_E58;
+    /*0xE68*/ u8 field_E68;
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
@@ -905,7 +908,7 @@ struct SaveBlock1
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[100];
     /*0xA30*/ struct EventObject eventObjects[EVENT_OBJECTS_COUNT];
-    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[64];
+    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[EVENT_OBJECT_TEMPLATES_COUNT];
     /*0x1270*/ u8 flags[FLAGS_COUNT];
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];

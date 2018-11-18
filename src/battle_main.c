@@ -5,6 +5,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle_pyramid.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -109,10 +110,8 @@ extern const u8 gText_Love[];
 // functions
 extern void sub_81B9150(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern u8 sub_81A9E28(void); // battle frontier 2
 extern void sub_81B8FB0(u8, u8); // party menu
 extern u8 pokemon_order_func(u8); // party menu
-extern bool8 InBattlePyramid(void);
 
 // this file's functions
 static void CB2_InitBattleInternal(void);
@@ -5604,7 +5603,7 @@ bool8 TryRunFromBattle(u8 battler)
         if (InBattlePyramid())
         {
             gBattleStruct->runTries++;
-            pyramidMultiplier = sub_81A9E28();
+            pyramidMultiplier = GetPyramidRunMultiplier();
             speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
             if (speedVar > (Random() & 0xFF))
             {
@@ -5630,7 +5629,7 @@ bool8 TryRunFromBattle(u8 battler)
         {
             if (InBattlePyramid())
             {
-                pyramidMultiplier = sub_81A9E28();
+                pyramidMultiplier = GetPyramidRunMultiplier();
                 speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
                 if (speedVar > (Random() & 0xFF))
                     effect++;

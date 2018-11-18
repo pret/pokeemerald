@@ -251,7 +251,7 @@ gSpecials:: @ 81DBA64
 	def_special CallBattleArenaFunction
 	def_special CallBattleFactoryFunction
 	def_special CallBattlePikeFunction
-	def_special sub_81A8E7C
+	def_special CallBattlePyramidFunction
 	def_special StopMapMusic
 	def_special sub_81B99B4
 	def_special sub_81B9B80

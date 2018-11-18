@@ -1,5 +1,6 @@
 #include "global.h"
 #include "overworld.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "bg.h"
@@ -113,7 +114,6 @@ extern void ShowMapNamePopup(void);
 extern bool32 InTrainerHill(void);
 extern bool32 sub_808651C(void);
 extern bool8 sub_80AF6A4(void);
-extern bool8 sub_81A9E6C(void);
 extern bool8 sub_80E909C(void);
 extern void sub_81AA1D8(void);
 extern void c2_change_map(void);
@@ -1808,7 +1808,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 {
     u8 flashLevel;
 
-    if (sub_81A9E6C())
+    if (InBattlePyramid_())
     {
         door_upload_tiles();
         ScanlineEffect_SetParams(sFlashEffectParams);
