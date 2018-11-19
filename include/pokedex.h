@@ -1,6 +1,9 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
+extern u8 gUnknown_030060B0;
+extern void (*gUnknown_030060B4)(void);
+
 void ResetPokedex(void);
 void CopyMonCategoryText(u32 species, u8 *dst);
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data);

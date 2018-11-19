@@ -32,22 +32,7 @@
 	.include "src/menu_helpers.o"
 	.include "src/region_map.o"
 	.include "src/slot_machine.o"
-
-gUnknown_030011F0: @ 30011F0
-	.space 0x2
-
-gUnknown_030011F2: @ 30011F2
-	.space 0x2
-
-gUnknown_030011F4: @ 30011F4
-	.space 0x2
-
-gUnknown_030011F6: @ 30011F6
-	.space 0x1
-
-gUnknown_030011F7: @ 30011F7
-	.space 0x1
-
+	.include "src/contest_painting.o"
 	.include "src/starter_choose.o"
 
 	.align 0x2
@@ -75,13 +60,7 @@ gUnknown_03001204: @ 3001204
 	.include "src/battle_pike.o"
 	.include "src/battle_tent.o"
 	.include "src/multiboot.o"
-
-	.space 0x4 @ XXX: why is this needed?
-
-	.align 2
-gUnknown_030012A8: @ 30012A8
-	.space 0x10
-
+	.include "src/fossil_specials.o"
 	.include "src/berry_fix_program.o"
 
 gUnknown_030012BC: @ 30012BC

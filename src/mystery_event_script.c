@@ -18,7 +18,6 @@
 #include "pokemon_storage_system.h"
 
 extern void sub_811EFC0(u8);
-extern void ValidateEReaderTrainer(void);
 
 extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];

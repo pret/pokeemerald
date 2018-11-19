@@ -29,14 +29,17 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
+extern u8 gUnknown_030061EC;
+
+// EWRAM
 static EWRAM_DATA struct PokedexView *gUnknown_02039B4C = NULL;
 static EWRAM_DATA u16 gUnknown_02039B50 = 0;
 static EWRAM_DATA u8 gUnknown_02039B52 = 0;
 static EWRAM_DATA struct PokedexListItem *gUnknown_02039B54 = NULL;
 
+// IWRAM common
 u8 gUnknown_030060B0;
-MainCallback gUnknown_030060B4;
-u8 gUnknown_030061EC;
+void (*gUnknown_030060B4)(void);
 
 struct PokedexEntry
 {

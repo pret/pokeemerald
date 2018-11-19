@@ -173,6 +173,18 @@ static void HandleAction_NothingIsFainted(void);
 static void HandleAction_ActionFinished(void);
 
 // EWRAM vars
+EWRAM_DATA u16 gBattle_BG0_X = 0;
+EWRAM_DATA u16 gBattle_BG0_Y = 0;
+EWRAM_DATA u16 gBattle_BG1_X = 0;
+EWRAM_DATA u16 gBattle_BG1_Y = 0;
+EWRAM_DATA u16 gBattle_BG2_X = 0;
+EWRAM_DATA u16 gBattle_BG2_Y = 0;
+EWRAM_DATA u16 gBattle_BG3_X = 0;
+EWRAM_DATA u16 gBattle_BG3_Y = 0;
+EWRAM_DATA u16 gBattle_WIN0H = 0;
+EWRAM_DATA u16 gBattle_WIN0V = 0;
+EWRAM_DATA u16 gBattle_WIN1H = 0;
+EWRAM_DATA u16 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[300] = {0};
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};

@@ -188,6 +188,7 @@ SECTIONS {
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
+        src/contest_painting.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/trader.o(.text);
@@ -268,7 +269,7 @@ SECTIONS {
         src/battle_arena.o(.text);
         src/battle_factory.o(.text);
         src/battle_pike.o(.text);
-        asm/mossdeep_gym.o(.text);
+        src/mossdeep_gym.o(.text);
         src/battle_pyramid.o(.text);
         src/item_menu.o(.text);
         src/list_menu.o(.text);
@@ -283,7 +284,6 @@ SECTIONS {
         src/battle_controller_player_partner.o(.text);
         src/fldeff_groundshake.o(.text);
         src/fossil_specials.o(.text);
-        asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
