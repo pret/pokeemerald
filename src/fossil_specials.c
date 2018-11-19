@@ -423,12 +423,10 @@ static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
     u8 r5, r4, r0, r2;
     u16 var;
 
-    r5 = b / d;
-    r4 = r5;
+    r4 = r5 = b / d;
     gUnknown_030012A8[0] = r4;
 
-    r2 = b % d;
-    r0 = r2;
+    r0 = r2 = b % d;
     gUnknown_030012A8[1] = r2;
 
     r4 &= 7;
