@@ -1320,7 +1320,7 @@ Move_AURA_SPHERE:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
-	createvisualtask AnimTask_IsAttackerOpponentSide, 2
+	createvisualtask AnimTask_GetAttackerSide, 2
 	fadetobg BG_HIGHSPEED_OPPONENT
 	waitbgfadeout
 	createvisualtask sub_8117660, 5, -2304, 0, 1, -1
@@ -1409,7 +1409,7 @@ Move_FOCUS_BLAST:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 12, 8
-	createvisualtask AnimTask_IsAttackerOpponentSide, 2
+	createvisualtask AnimTask_GetAttackerSide, 2
 	fadetobg BG_HIGHSPEED_OPPONENT
 	waitbgfadeout
 	createvisualtask sub_8117660, 5, -2304, 0, 1, -1
