@@ -13,6 +13,7 @@
 #include "palette.h"
 #include "event_data.h"
 #include "easy_chat.h"
+#include "string_util.h"
 
 // Static type declarations
 

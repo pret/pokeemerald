@@ -6,6 +6,7 @@
 #include "battle_tower.h"
 #include "frontier_util.h"
 #include "item.h"
+#include "string_util.h"
 #include "constants/items.h"
 
 // This file's functions.
