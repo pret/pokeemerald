@@ -31,11 +31,6 @@ struct BattleBackground
     const void *palette;
 };
 
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-
 extern u8 GetCurrentMapBattleScene(void);
 
 // .rodata
