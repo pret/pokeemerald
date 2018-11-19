@@ -122,42 +122,6 @@ gUnknown_02022D0C: @ 2022D0C
 gUnknown_02022E10: @ 2022E10
 	.space 0x4
 
-gBattle_BG0_X: @ 2022E14
-	.space 0x2
-
-gBattle_BG0_Y: @ 2022E16
-	.space 0x2
-
-gBattle_BG1_X: @ 2022E18
-	.space 0x2
-
-gBattle_BG1_Y: @ 2022E1A
-	.space 0x2
-
-gBattle_BG2_X: @ 2022E1C
-	.space 0x2
-
-gBattle_BG2_Y: @ 2022E1E
-	.space 0x2
-
-gBattle_BG3_X: @ 2022E20
-	.space 0x2
-
-gBattle_BG3_Y: @ 2022E22
-	.space 0x2
-
-gBattle_WIN0H: @ 2022E24
-	.space 0x2
-
-gBattle_WIN0V: @ 2022E26
-	.space 0x2
-
-gBattle_WIN1H: @ 2022E28
-	.space 0x2
-
-gBattle_WIN1V: @ 2022E2A
-	.space 0x2
-
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
 	.include "src/random.o"

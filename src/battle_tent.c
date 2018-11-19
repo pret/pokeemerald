@@ -10,6 +10,7 @@
 #include "item.h"
 #include "battle_factory_screen.h"
 #include "frontier_util.h"
+#include "string_util.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
