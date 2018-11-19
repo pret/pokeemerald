@@ -87,18 +87,11 @@ gUnknown_030062E0: @ 30062E0
 gUnknown_030062E4: @ 30062E4
 	.space 0x4
 
-gUnknown_030062E8: @ 30062E8
-	.space 0x4
-
-gUnknown_030062EC: @ 30062EC
-	.space 0x4
-
-gUnknown_030062F0: @ 30062F0
-	.space 0x4
-
-gUnknown_030062F4: @ 30062F4
-	.space 0xC
-
+	.include "battle_factory_screen.o"
+	.include "apprentice.o"
+	
+	.space 0x8
+	
 	.include "list_menu.o"
 
 gUnknown_03006328: @ 3006328
