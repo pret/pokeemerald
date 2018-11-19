@@ -22,9 +22,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/moves.h"
 
-extern u16 gBattle_WIN0H;
-extern u16 gBattle_WIN0V;
-
 extern const u32 gUnknown_08D854E8[];
 extern const u16 gUnknown_08D855E8[];
 

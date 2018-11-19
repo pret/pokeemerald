@@ -381,8 +381,7 @@ gUnknown_0203A0F8: @ 203A0F8
 gUnknown_0203A100: @ 203A100
 	.space 0x10
 
-gUnknown_0203A110: @ 203A110
-	.space 0x4
+	.include "src/battle_anim_utility_funcs.o"
 
 gUnknown_0203A114: @ 203A114
 	.space 0x4

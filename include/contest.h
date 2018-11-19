@@ -239,7 +239,7 @@ struct Shared18000
 
 struct ContestStruct_field_18
 {
-    u16 unk0;
+    u16 species;
     u16 unk2;
     u8 unk4_0:1;
     u8 unk5;
