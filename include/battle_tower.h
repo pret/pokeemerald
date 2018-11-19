@@ -38,6 +38,8 @@ extern const u8 gTowerMaleTrainerGfxIds[30];
 extern const u8 gTowerFemaleFacilityClasses[20];
 extern const u8 gTowerFemaleTrainerGfxIds[20];
 
+extern u16 gUnknown_03006298[];
+
 extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 

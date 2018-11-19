@@ -4697,6 +4697,20 @@ extern const u32 gBattleAnimBackgroundTilemap_17[];
 extern const u32 gBattleAnimBackgroundTilemap_20[];
 extern const u32 gBattleAnimBackgroundTilemap_21[];
 
+extern const u32 gUnknown_08C20668[];
+extern const u32 gUnknown_08C20684[];
+extern const u32 gBattleStatMask_Gfx[];
+extern const u32 gBattleStatMask1_Tilemap[];
+extern const u32 gBattleStatMask2_Tilemap[];
+extern const u32 gBattleStatMask1_Pal[];
+extern const u32 gBattleStatMask2_Pal[];
+extern const u32 gBattleStatMask3_Pal[];
+extern const u32 gBattleStatMask4_Pal[];
+extern const u32 gBattleStatMask5_Pal[];
+extern const u32 gBattleStatMask6_Pal[];
+extern const u32 gBattleStatMask7_Pal[];
+extern const u32 gBattleStatMask8_Pal[];
+
 extern const u32 gUnknown_08D9A88C[];
 extern const u32 gContestMiscGfx[];
 extern const u32 gContestAudienceGfx[];

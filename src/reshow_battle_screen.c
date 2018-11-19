@@ -16,15 +16,6 @@
 #include "battle_anim.h"
 #include "data2.h"
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
-
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 
 extern void SetMultiuseSpriteTemplateToTrainerBack(u16 backPicId, u8 battlerPosition);

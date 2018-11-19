@@ -159,7 +159,7 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId)
             if (shared19348.unk4_0)
                 species = shared19348.unk2;
             else
-                species = shared19348.unk0;
+                species = shared19348.species;
         }
         else
         {
@@ -324,7 +324,7 @@ u8 GetBattlerSpriteCoord2(u8 battlerId, u8 attributeId)
             if (shared19348.unk4_0)
                 species = shared19348.unk2;
             else
-                species = shared19348.unk0;
+                species = shared19348.species;
         }
         else
         {
@@ -940,18 +940,18 @@ void sub_80A6BFC(struct UnknownAnimStruct2 *unk)
     }
 }
 
-void sub_80A6C68(u32 arg0)
+void sub_80A6C68(u32 bgId)
 {
     struct UnknownAnimStruct2 unkStruct;
 
-    sub_80A6B90(&unkStruct, arg0);
+    sub_80A6B90(&unkStruct, bgId);
     CpuFill32(0, unkStruct.bgTiles, 0x2000);
     LoadBgTiles(unkStruct.bgId, unkStruct.bgTiles, 0x2000, unkStruct.tilesOffset);
     FillBgTilemapBufferRect(unkStruct.bgId, 0, 0, 0, 0x20, 0x40, 0x11);
     CopyBgTilemapBufferToVram(unkStruct.bgId);
 }
 
-void sub_80A6CC0(u32 bgId, void *src, u32 tilesOffset)
+void sub_80A6CC0(u32 bgId, const void *src, u32 tilesOffset)
 {
     CpuFill32(0, gUnknown_0202305C, 0x2000);
     LZDecompressWram(src, gUnknown_0202305C);
@@ -1854,7 +1854,7 @@ u16 sub_80A7F18(u8 spriteId)
         {
             if (IsContest())
             {
-                species = shared19348.unk0;
+                species = shared19348.species;
                 return gMonBackPicCoords[species].y_offset;
             }
             else
@@ -2112,7 +2112,7 @@ s16 sub_80A861C(u8 battlerId, u8 a2)
         }
         else
         {
-            species = shared19348.unk0;
+            species = shared19348.species;
             personality = shared19348.unk8;
         }
         if (species == SPECIES_UNOWN)

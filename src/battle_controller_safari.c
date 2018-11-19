@@ -23,9 +23,6 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_81358F4(void);

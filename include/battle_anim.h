@@ -9,7 +9,7 @@ enum
     BG_ANIM_SCREEN_SIZE,
     BG_ANIM_AREA_OVERFLOW_MODE,
     BG_ANIM2,
-    BG_ANIM3,
+    BG_ANIM_CHAR_BASE_BLOCK,
     BG_ANIM_PRIORITY,
     BG_ANIM_5,
     BG_ANIM_6
@@ -64,6 +64,7 @@ s8 BattleAnimAdjustPanning2(s8 pan);
 s16 KeepPanInRange(s16 a);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
+void sub_80A477C(bool8);
 
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
@@ -87,6 +88,15 @@ void obj_id_set_rotscale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 void sub_80A6E14(struct Sprite *sprite);
 void sub_80A7270(u8 spriteId, u8 objMode);
 void sub_80A73A0(u8 spriteId);
+u32 sub_80A75AC(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7);
+u32 sub_80A76C4(u8 a1, u8 a2, u8 a3, u8 a4);
+u8 sub_80A77AC(u8 a1);
+s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8);
+void obj_delete_but_dont_free_vram(struct Sprite*);
+u8 sub_80A89C8(int, u8, int);
+void sub_80A6D60(struct UnknownAnimStruct2*, const void*, u32);
+void sub_80A6CC0(u32, const void*, u32);
+void sub_80A6DAC(bool8);
 
 enum
 {
@@ -126,6 +136,11 @@ void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
+
+// battle_anim_utility_funcs.s
+void sub_8116EB4(u8);
+
+u32 sub_811583C(s16);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 

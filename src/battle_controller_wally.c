@@ -31,8 +31,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
 extern s32 gUnknown_0203CD70;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 

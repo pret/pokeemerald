@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_transition.h"
 #include "bg.h"
 #include "decompress.h"
@@ -55,9 +56,6 @@ struct StructRectangularSpiral
 
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
-
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
 
 extern const struct OamData gEventObjectBaseOam_32x32;
 

@@ -3,20 +3,6 @@
     .include "src/window.o"
     .include "src/text.o"
     .include "src/sprite.o"
-    .align 2
-
-gStringVar1: @ 2021CC4
-	.space 0x100
-
-gStringVar2: @ 2021DC4
-	.space 0x100
-
-gStringVar3: @ 2021EC4
-	.space 0x100
-
-gStringVar4: @ 2021FC4
-	.space 0x3E8
-
 	.include "src/string_util.o"
 	.include "src/link.o"
 	.include "src/link_rfu.o"
@@ -117,8 +103,6 @@ gUnknown_02022CFC: @ 2022CFC
 gUnknown_02022D00: @ 2022D00
 	.space 0x4
 
-@ src/main_menu.c
-gUnknown_02022D04: @ 2022D04
 	.include "src/main_menu.o"
 
 gUnknown_02022D08: @ 2022D08
@@ -137,42 +121,6 @@ gUnknown_02022D0C: @ 2022D0C
 
 gUnknown_02022E10: @ 2022E10
 	.space 0x4
-
-gBattle_BG0_X: @ 2022E14
-	.space 0x2
-
-gBattle_BG0_Y: @ 2022E16
-	.space 0x2
-
-gBattle_BG1_X: @ 2022E18
-	.space 0x2
-
-gBattle_BG1_Y: @ 2022E1A
-	.space 0x2
-
-gBattle_BG2_X: @ 2022E1C
-	.space 0x2
-
-gBattle_BG2_Y: @ 2022E1E
-	.space 0x2
-
-gBattle_BG3_X: @ 2022E20
-	.space 0x2
-
-gBattle_BG3_Y: @ 2022E22
-	.space 0x2
-
-gBattle_WIN0H: @ 2022E24
-	.space 0x2
-
-gBattle_WIN0V: @ 2022E26
-	.space 0x2
-
-gBattle_WIN1H: @ 2022E28
-	.space 0x2
-
-gBattle_WIN1V: @ 2022E2A
-	.space 0x2
 
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
@@ -199,13 +147,7 @@ gUnknown_020322A0: @ 20322A0
 	.space 0x4
     
     .include "src/berry_blender.o"
-
-gDifferentSaveFile: @ 20322D4
-	.space 0x1
-
-gUnknown_020322D5: @ 20322D5
-	.space 0x3
-
+    .include "src/new_game.o"
 	.include "src/overworld.o"
 	.include "src/fieldmap.o"
 	.include "src/field_camera.o"
@@ -381,8 +323,7 @@ gUnknown_0203A0F8: @ 203A0F8
 gUnknown_0203A100: @ 203A100
 	.space 0x10
 
-gUnknown_0203A110: @ 203A110
-	.space 0x4
+	.include "src/battle_anim_utility_funcs.o"
 
 gUnknown_0203A114: @ 203A114
 	.space 0x4
@@ -395,6 +336,7 @@ gUnknown_0203A11C: @ 203A11C
 
 gUnknown_0203A120: @ 203A120
 	.space 0x4
+	
 	.include "src/mon_markings.o"
 	.include "src/mauville_old_man.o"
     .include "src/mail.o"
@@ -459,9 +401,6 @@ gUnknown_0203ABB5: @ 203ABB5
 
     .include "src/rom_81520A8.o"
     .include "src/save.o"
-
-.space 0x4 /*unused var?*/
-
 	.include "src/mystery_event_script.o"
 	.include "src/learn_move.o"
 	.include "src/decoration_inventory.o"
@@ -494,13 +433,7 @@ gUnknown_0203CD88: @ 203CD88
 
     .include "src/menu.o"
     .include "src/battle_factory_screen.o"
-
-gUnknown_0203CE50: @ 203CE50
-	.space 0x4
-
-gUnknown_0203CE54: @ 203CE54
-	.align 2
-    
+    .include "src/mossdeep_gym.o"
     .include "src/item_menu.o"
     .include "src/list_menu.o"
     .include "src/dynamic_placeholder_text_util.o"

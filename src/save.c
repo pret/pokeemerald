@@ -94,6 +94,7 @@ u16 gSaveUnusedVar2;
 u16 gUnknown_03006294;
 
 EWRAM_DATA struct SaveSection gSaveDataBuffer = {0};
+EWRAM_DATA static u8 sUnusedVar = 0;
 
 void ClearSaveData(void)
 {

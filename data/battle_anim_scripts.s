@@ -4560,7 +4560,7 @@ SkyAttackEnd:
 SkyAttackSetUp:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 11
-	createvisualtask AnimTask_IsTargetPartner, 5, ARG_RET_ID
+	createvisualtask AnimTask_GetTargetIsAttackerPartner, 5, ARG_RET_ID
 	jumpretfalse SkyAttackSetUpAgainstOpponent
 	goto SkyAttackSetUpAgainstPartner
 SkyAttackSetUpAgainstOpponent:
@@ -4764,7 +4764,7 @@ Move_MACH_PUNCH:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
 	monbg ANIM_ATK_PARTNER
-	createvisualtask AnimTask_IsAttackerOpponentSide, 2
+	createvisualtask AnimTask_GetAttackerSide, 2
 	jumprettrue MachPunchAgainstPlayer
 	fadetobg BG_HIGHSPEED_OPPONENT
 MachPunchContinue:
@@ -5024,7 +5024,7 @@ Move_MOONLIGHT:
 Move_EXTREME_SPEED:
 	loadspritegfx ANIM_TAG_SPEED_DUST
 	loadspritegfx ANIM_TAG_IMPACT
-	createvisualtask AnimTask_IsAttackerOpponentSide, 2
+	createvisualtask AnimTask_GetAttackerSide, 2
 	jumprettrue ExtremeSpeedAgainstPlayer
 	fadetobg BG_HIGHSPEED_OPPONENT
 ExtremeSpeedContinue:
@@ -5510,13 +5510,13 @@ Move_CAMOUFLAGE:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 16, 0
-	createvisualtask sub_811675C, 5, 2, 3, 0, 14
+	createvisualtask AnimTask_SetCamouflageBlend, 5, 2, 3, 0, 14
 	delay 16
 	createvisualtask sub_81136E8, 2, 4
 	playsewithpan SE_W185, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	delay 8
-	createvisualtask sub_811675C, 5, 2, 0, 0, 0
+	createvisualtask AnimTask_SetCamouflageBlend, 5, 2, 0, 0, 0
 	waitforvisualfinish
 	createvisualtask sub_81137E4, 2, 1
 	waitforvisualfinish
@@ -7157,7 +7157,7 @@ SolarBeamUnleash1:
 Move_BLIZZARD:
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	monbg ANIM_DEF_PARTNER
-	createvisualtask AnimTask_IsAttackerOpponentSide, 2
+	createvisualtask AnimTask_GetAttackerSide, 2
 	jumprettrue BlizzardAgainstPlayer
 	fadetobg BG_HIGHSPEED_OPPONENT
 BlizzardContinue:
@@ -10797,7 +10797,7 @@ Move_SILVER_WIND:
 	monbgprio_29
 	delay 0
 	createvisualtask sub_8116664, 10, 1, 0, 0, 4, RGB_BLACK
-	createvisualtask AnimTask_IsTargetOpponentSide, 2
+	createvisualtask AnimTask_GetTargetSide, 2
 	jumprettrue SilverWindOnPlayer
 	fadetobg BG_BUG_OPPONENT
 	waitbgfadeout

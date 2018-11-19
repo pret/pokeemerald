@@ -22,9 +22,9 @@ extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
 extern u16 *gBGTilemapBuffers3;
-
+extern u16 gUnknown_03005DA8;
 extern void (*gFieldCallback)(void);
-
+extern bool8 (*gFieldCallback2)(void);
 extern u8 gUnknown_03005DB4;
 extern u8 gFieldLinkPlayerCount;
 

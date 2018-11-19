@@ -340,9 +340,10 @@ extern const u8 gText_082B7185[];
 extern const u8 gText_082B71C1[];
 extern const u8 gText_082B71F9[];
 
-extern struct Unk030062ECStruct *gUnknown_030062EC;
-extern struct Unk030062F0Struct *gUnknown_030062F0;
-extern void (*gUnknown_030062F4)(void);
+// IWRAM common
+struct Unk030062ECStruct *gUnknown_030062EC;
+struct Unk030062F0Struct *gUnknown_030062F0;
+void (*gUnknown_030062F4)(void);
 
 // This file's functions.
 static u16 sub_819FF98(u8 arg0);
