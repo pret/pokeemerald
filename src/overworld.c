@@ -88,12 +88,6 @@ extern const struct MapHeader *const *const gMapGroups[];
 extern const s32 gMaxFlashLevel;
 extern const u16 gUnknown_82EC7C4[];
 
-u16 gUnknown_03005DA8;
-MainCallback gFieldCallback;
-bool8 (*gFieldCallback2)(void);
-u8 gUnknown_03005DB4;
-u8 gFieldLinkPlayerCount;
-
 // functions
 extern void HealPlayerParty(void);
 extern void move_tilemap_camera_to_upper_left_corner(void);
@@ -255,6 +249,16 @@ IWRAM_DATA static u16 (*sUnknown_03000E14)(u32);
 IWRAM_DATA static u8 sUnknown_03000E18;
 IWRAM_DATA static u8 sUnknown_03000E19;
 IWRAM_DATA static u32 sUnusedVar;
+
+// IWRAM common
+u16 *gBGTilemapBuffers1;
+u16 *gBGTilemapBuffers2;
+u16 *gBGTilemapBuffers3;
+u16 gUnknown_03005DA8;
+void (*gFieldCallback)(void);
+bool8 (*gFieldCallback2)(void);
+u8 gUnknown_03005DB4;
+u8 gFieldLinkPlayerCount;
 
 // EWRAM vars
 EWRAM_DATA static u8 sUnknown_020322D8 = 0;

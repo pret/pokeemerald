@@ -13,8 +13,6 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
-extern u16 gUnknown_03006298[];
-
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
