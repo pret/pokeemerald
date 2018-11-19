@@ -2152,13 +2152,13 @@ bool8 ScrCmd_mossdeepgym1(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
 
-    sMovingNpcId = sub_81A89A0(v1);
+    sMovingNpcId = MossdeepGym_MoveEvents(v1);
     return FALSE;
 }
 
 bool8 ScrCmd_mossdeepgym2(struct ScriptContext *ctx)
 {
-    sub_81A8AF8();
+    MossdeepGym_TurnEvents();
     return FALSE;
 }
 
@@ -2166,13 +2166,13 @@ bool8 ScrCmd_mossdeepgym3(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
 
-    sub_81A8934(v1);
+    InitMossdeepGymTiles(v1);
     return FALSE;
 }
 
 bool8 ScrCmd_mossdeepgym4(struct ScriptContext *ctx)
 {
-    sub_81A895C();
+    FinishMossdeepGymTiles();
     return FALSE;
 }
 

@@ -24,20 +24,20 @@ struct MossdeepSubStruct
 
 struct MossdeepStruct
 {
-    struct MossdeepSubStruct unk0[0x10];
+    struct MossdeepSubStruct objects[EVENT_OBJECTS_COUNT];
     u8 count;
-    u8 unk41;
+    bool8 unk41;
 };
 
 // This file's functions.
-static void sub_81A8D60(u8 eventTemplateId, u8 arg1);
+static void AddEventObject(u8 eventTemplateId, u8 arg1);
 static void sub_81A8D94(u8 eventTemplateId, u8 arg1);
 
 // EWRAM vars
 EWRAM_DATA static struct MossdeepStruct *gUnknown_0203CE50 = NULL;
 
 // code
-void sub_81A8934(u8 arg0)
+void InitMossdeepGymTiles(bool8 arg0)
 {
     if (gUnknown_0203CE50 == NULL)
         gUnknown_0203CE50 = AllocZeroed(sizeof(*gUnknown_0203CE50));
@@ -45,7 +45,7 @@ void sub_81A8934(u8 arg0)
     gUnknown_0203CE50->unk41 = arg0;
 }
 
-void sub_81A895C(void)
+void FinishMossdeepGymTiles(void)
 {
     u8 id;
 
@@ -57,7 +57,7 @@ void sub_81A895C(void)
     sub_80D338C();
 }
 
-u16 sub_81A89A0(u8 arg0)
+u16 MossdeepGym_MoveEvents(u8 arg0)
 {
     u8 i;
     struct EventObjectTemplate *events = gSaveBlock1Ptr->eventObjectTemplates;
@@ -71,7 +71,7 @@ u16 sub_81A89A0(u8 arg0)
         s16 y = events[i].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-        if (gUnknown_0203CE50->unk41 == 0)
+        if (!gUnknown_0203CE50->unk41)
             var = 0x250;
         else
             var = 0x298;
@@ -117,7 +117,7 @@ u16 sub_81A89A0(u8 arg0)
             events[i].y += y;
             if (GetEventObjectIdByLocalIdAndMap(events[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) != EVENT_OBJECTS_COUNT)
             {
-                sub_81A8D60(i, r5);
+                AddEventObject(i, r5);
                 localId = events[i].localId;
                 ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, movementScript);
             }
@@ -131,7 +131,7 @@ u16 sub_81A89A0(u8 arg0)
     return localId;
 }
 
-void sub_81A8AF8(void)
+void MossdeepGym_TurnEvents(void)
 {
     u8 i;
     s32 var;
@@ -140,7 +140,7 @@ void sub_81A8AF8(void)
     if (gUnknown_0203CE50 == NULL)
         return;
 
-    if (gUnknown_0203CE50->unk41 == 0)
+    if (!gUnknown_0203CE50->unk41)
         var = 0x250;
     else
         var = 0x298;
@@ -151,12 +151,12 @@ void sub_81A8AF8(void)
         s32 r6;
         s8 r0;
         u8 eventObjectId;
-        s16 x = events[gUnknown_0203CE50->unk0[i].eventTemplateId].x + 7;
-        s16 y = events[gUnknown_0203CE50->unk0[i].eventTemplateId].y + 7;
+        s16 x = events[gUnknown_0203CE50->objects[i].eventTemplateId].x + 7;
+        s16 y = events[gUnknown_0203CE50->objects[i].eventTemplateId].y + 7;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         r0 = (u8)((metatile - var) % 8);
-        r0 -= (gUnknown_0203CE50->unk0[i].unk0);
+        r0 -= (gUnknown_0203CE50->objects[i].unk0);
         if (r0 < 0 || r0 == 3)
         {
             if (r0 == -3)
@@ -172,7 +172,7 @@ void sub_81A8AF8(void)
                 r6 = 2;
         }
 
-        eventObjectId = GetEventObjectIdByLocalIdAndMap(events[gUnknown_0203CE50->unk0[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        eventObjectId = GetEventObjectIdByLocalIdAndMap(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
         if (eventObjectId != EVENT_OBJECTS_COUNT)
         {
             const u8 *movementScript;
@@ -183,24 +183,24 @@ void sub_81A8AF8(void)
                 {
                 case DIR_EAST:
                     movementScript = gUnknown_086126AE;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_SOUTH:
                     movementScript = gUnknown_086126A8;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 case DIR_WEST:
                     movementScript = gUnknown_086126AA;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_NORTH:
                     movementScript = gUnknown_086126AC;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->unk0[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -211,24 +211,24 @@ void sub_81A8AF8(void)
                 {
                 case DIR_EAST:
                     movementScript = gUnknown_086126AA;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_DOWN;
                     break;
                 case DIR_SOUTH:
                     movementScript = gUnknown_086126AC;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_LEFT;
                     break;
                 case DIR_WEST:
                     movementScript = gUnknown_086126AE;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_UP;
                     break;
                 case DIR_NORTH:
                     movementScript = gUnknown_086126A8;
-                    events[gUnknown_0203CE50->unk0[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
+                    events[gUnknown_0203CE50->objects[i].eventTemplateId].movementType = MOVEMENT_TYPE_FACE_RIGHT;
                     break;
                 default:
                     continue;
                 }
-                ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->unk0[i].eventTemplateId].localId,
+                ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId,
                                                          gSaveBlock1Ptr->location.mapNum,
                                                          gSaveBlock1Ptr->location.mapGroup,
                                                          movementScript);
@@ -237,10 +237,10 @@ void sub_81A8AF8(void)
     }
 }
 
-static void sub_81A8D60(u8 eventTemplateId, u8 arg1)
+static void AddEventObject(u8 eventTemplateId, u8 arg1)
 {
-    gUnknown_0203CE50->unk0[gUnknown_0203CE50->count].eventTemplateId = eventTemplateId;
-    gUnknown_0203CE50->unk0[gUnknown_0203CE50->count].unk0 = arg1;
+    gUnknown_0203CE50->objects[gUnknown_0203CE50->count].eventTemplateId = eventTemplateId;
+    gUnknown_0203CE50->objects[gUnknown_0203CE50->count].unk0 = arg1;
     gUnknown_0203CE50->count++;
 }
 
@@ -255,7 +255,7 @@ static void sub_81A8D94(u8 eventTemplateId, u8 arg1)
     s16 y = events[eventTemplateId].y + 7;
     u16 metatile = MapGridGetMetatileIdAt(x, y);
 
-    if (gUnknown_0203CE50->unk41 == 0)
+    if (!gUnknown_0203CE50->unk41)
         var = 0x250;
     else
         var = 0x298;
