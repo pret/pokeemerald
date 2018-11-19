@@ -4,6 +4,7 @@
 #include "berry.h"
 #include "clock.h"
 #include "coins.h"
+#include "contest.h"
 #include "contest_link_80F57C4.h"
 #include "contest_painting.h"
 #include "data2.h"
@@ -27,6 +28,7 @@
 #include "event_obj_lock.h"
 #include "menu.h"
 #include "money.h"
+#include "mossdeep_gym.h"
 #include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -49,11 +51,6 @@
 #include "tv.h"
 #include "window.h"
 
-extern u16 sub_81A89A0(u8);
-extern void sub_81A8AF8(void);
-extern void sub_81A895C(void);
-extern void sub_81A8934(u8);
-
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
@@ -65,8 +62,6 @@ static EWRAM_DATA u16 sMovingNpcId = 0;
 static EWRAM_DATA u16 sMovingNpcMapBank = 0;
 static EWRAM_DATA u16 sMovingNpcMapId = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
-
-extern u16 gSpecialVar_ContestCategory;
 
 IWRAM_DATA u8 gUnknown_03000F30;
 
@@ -2204,7 +2199,7 @@ bool8 ScrCmd_cmdD9(struct ScriptContext *ctx)
     }
 }
 
-// This command will force the Pokémon to be obedient, you don't get to make it disobedient
+// This command will force the Pokémon to be obedient, you don't get to make it disobedient.
 bool8 ScrCmd_setmonobedient(struct ScriptContext *ctx)
 {
     bool8 obedient = TRUE;

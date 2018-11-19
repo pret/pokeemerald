@@ -10,37 +10,16 @@
     .include "battle_main.o"
     .include "random.o"
     .include "load_save.o"
-
-gInGameOpponentsNo: @ 3005D98
-	.space 0x4
-
-gBGTilemapBuffers1: @ 3005D9C
-	.space 0x4
-
-gBGTilemapBuffers2: @ 3005DA0
-	.space 0x4
-
-gBGTilemapBuffers3: @ 3005DA4
-	.space 0x4
-
+    .include "berry_blender.o"
     .include "overworld.o"
     .include "fieldmap.o"
     .include "field_camera.o"
     .include "field_control_avatar.o"
-
-gMenuCallback: @ 3005DF4
-	.space 0x4
-
+    .include "start_menu.o"
     .include "sound.o"
 	.include "task.o"
 	.include "trainer_see.o"
-
-gUnknown_030060B0: @ 30060B0
-	.space 0x4
-
-gUnknown_030060B4: @ 30060B4
-	.space 0x4
-
+	.include "pokedex.o"
 	.include "contest.o"
     .include "tv.o"
     .include "mauville_old_man.o"
@@ -96,10 +75,7 @@ gUnknown_030061EC: @ 30061EC
 	.space 0x4
 
     .include "save.o"
-
-gUnknown_03006298: @ 3006298
-	.space 0x8
-
+    .include "battle_tower.o"
     .include "intro.o"
 
 gUnknown_030062DC: @ 30062DC
@@ -132,7 +108,6 @@ gUnknown_03006370: @ 3006370
 	.space 0x10
 
 	.include "m4a_2.o"
-
 	.include "agb_flash.o"
 
 gRfuState: @ 3007868
