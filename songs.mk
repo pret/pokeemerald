@@ -1029,5 +1029,8 @@ $(MID_SUBDIR)/se_rg_deomov.s: %.s: %.mid
 $(MID_SUBDIR)/se_rg_excellent.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P5
 
+$(MID_SUBDIR)/se_rg_getting.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V100 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5

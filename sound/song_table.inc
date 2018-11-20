@@ -255,7 +255,7 @@ gSongTable:: @ 86B49F0
 	song se_rg_card3, 1, 1          @ Trainer Card 3 (FRLG)
 	song se_rg_bag1, 1, 1           @ Bag Scroll (FRLG)
 	song se_rg_bag2, 1, 1           @ Bag Pocket Change (FRLG)
-	song se_rg_getting, 1, 1        
+	song se_rg_getting, 1, 1
 	song se_rg_shop, 1, 1           @ Cash Register (FRLG)
 	song se_rg_kiteki, 1, 1         @ S.S. Anne Horn (FRLG)
 	song se_rg_help_op, 1, 1        @ Help Menu Open (FRLG)
