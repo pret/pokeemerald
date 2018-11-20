@@ -1098,5 +1098,8 @@ $(MID_SUBDIR)/se_t_koame_e.s: %.s: %.mid
 $(MID_SUBDIR)/se_t_ooame.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P2
 
+$(MID_SUBDIR)/se_t_ooame_e.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P2
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
