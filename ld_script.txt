@@ -655,7 +655,7 @@ SECTIONS {
         sound/songs/midi/se_fu_zaku.o(.rodata);
         sound/songs/midi/se_fu_zaku2.o(.rodata);
         sound/songs/midi/se_fu_zuzuzu.o(.rodata);
-        sound/songs/se_ru_gashin.o(.rodata);
+        sound/songs/midi/se_ru_gashin.o(.rodata);
         sound/songs/se_ru_gasyan.o(.rodata);
         sound/songs/midi/se_ru_bari.o(.rodata);
         sound/songs/se_ru_hyuu.o(.rodata);
