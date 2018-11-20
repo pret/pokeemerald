@@ -620,7 +620,7 @@ SECTIONS {
         sound/songs/midi/se_pc_login.o(.rodata);
         sound/songs/midi/se_pc_off.o(.rodata);
         sound/songs/midi/se_pc_on.o(.rodata);
-        sound/songs/se_select.o(.rodata);
+        sound/songs/midi/se_select.o(.rodata);
         sound/songs/se_win_open.o(.rodata);
         sound/songs/se_wall_hit.o(.rodata);
         sound/songs/midi/se_door.o(.rodata);
