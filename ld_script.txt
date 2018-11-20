@@ -872,7 +872,7 @@ SECTIONS {
         sound/songs/midi/se_rg_getting.o(.rodata);
         sound/songs/se_rg_shop.o(.rodata);
         sound/songs/se_rg_kiteki.o(.rodata);
-        sound/songs/se_rg_help_op.o(.rodata);
+        sound/songs/midi/se_rg_help_op.o(.rodata);
         sound/songs/midi/se_rg_help_cl.o(.rodata);
         sound/songs/midi/se_rg_help_ng.o(.rodata);
         sound/songs/midi/se_rg_deomov.o(.rodata);
