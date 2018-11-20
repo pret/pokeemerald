@@ -3,7 +3,7 @@
 gSongTable:: @ 86B49F0
 	song mus_dummy, 0, 0
 	song se_kaifuku, 1, 1           @ Healing Item
-	song se_pc_login, 1, 1          @ PC Logon
+	song se_pc_login, 1, 1          @ PC Login
 	song se_pc_off, 1, 1            @ PC Shutdown
 	song se_pc_on, 1, 1             @ PC Startup
 	song se_select, 2, 2            @ Cursor Selection
