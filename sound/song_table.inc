@@ -36,7 +36,7 @@ gSongTable:: @ 86B49F0
 	song se_hazure, 1, 1            @ Failure
 	song se_exp, 1, 1               @ Exp. Bar
 	song se_jite_pyoko, 1, 1        @ Bunny Hop
-	song se_mu_pachi, 1, 1
+	song se_mu_pachi, 1, 1          @ Toggle Switch
 	song se_tk_kasya, 1, 1          @ Mossdeep Gym/Trick House Switch
 	song se_fu_zaku, 1, 1
 	song se_fu_zaku2, 1, 1

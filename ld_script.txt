@@ -650,7 +650,7 @@ SECTIONS {
         sound/songs/midi/se_hazure.o(.rodata);
         sound/songs/midi/se_exp.o(.rodata);
         sound/songs/midi/se_jite_pyoko.o(.rodata);
-        sound/songs/se_mu_pachi.o(.rodata);
+        sound/songs/midi/se_mu_pachi.o(.rodata);
         sound/songs/se_tk_kasya.o(.rodata);
         sound/songs/midi/se_fu_zaku.o(.rodata);
         sound/songs/midi/se_fu_zaku2.o(.rodata);
