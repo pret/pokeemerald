@@ -1083,6 +1083,9 @@ $(MID_SUBDIR)/se_t_ame.s: %.s: %.mid
 $(MID_SUBDIR)/se_t_ame_e.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
 
+$(MID_SUBDIR)/se_t_kami.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P3
+
 $(MID_SUBDIR)/se_t_koame.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
 
