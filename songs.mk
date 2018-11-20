@@ -1035,5 +1035,8 @@ $(MID_SUBDIR)/se_rg_getting.s: %.s: %.mid
 $(MID_SUBDIR)/se_rg_help_cl.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V095 -P5
 
+$(MID_SUBDIR)/se_rg_help_ng.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V125 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
