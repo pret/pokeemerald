@@ -262,7 +262,7 @@ gSongTable:: @ 86B49F0
 	song se_rg_help_cl, 1, 1        @ Help Menu Close (FRLG)
 	song se_rg_help_ng, 1, 1        @ Help Menu Error (FRLG)
 	song se_rg_deomov, 1, 1         @ Deoxys Moves
-	song se_rg_excellent, 1, 1
+	song se_rg_excellent, 1, 1      @ HP Restored (FRLG)
 	song se_rg_nawamiss, 1, 1
 	song se_toreeye, 1, 1           @ Trainer's Eye Call
 	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up
