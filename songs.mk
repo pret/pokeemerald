@@ -952,10 +952,10 @@ $(MID_SUBDIR)/se_kouka_m.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P5
 
 $(MID_SUBDIR)/se_mizu.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V20 -P4
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V020 -P4
 
 $(MID_SUBDIR)/se_moter.s: %.s: %.mid
-	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V90 -P4
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V090 -P4
 
 $(MID_SUBDIR)/se_mu_pachi.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
@@ -965,6 +965,9 @@ $(MID_SUBDIR)/se_n.s: %.s: %.mid
 
 $(MID_SUBDIR)/se_nageru.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V120 -P5
+
+$(MID_SUBDIR)/se_naminori.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V075 -P4
 
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
