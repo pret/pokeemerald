@@ -5,114 +5,15 @@
 
 	.text
 
-	thumb_func_start sub_80F9BCC
-sub_80F9BCC: @ 80F9BCC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r3, r2, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 16
-	lsrs r5, 16
-	lsls r3, 24
-	lsrs r3, 24
-	ldr r0, =sub_80F9C90
-	adds r1, r4, 0
-	adds r2, r5, 0
-	bl sub_80F9C44
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80F9BCC
 
-	thumb_func_start sub_80F9BF4
-sub_80F9BF4: @ 80F9BF4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r3, r2, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 16
-	lsrs r5, 16
-	lsls r3, 24
-	lsrs r3, 24
-	ldr r0, =sub_80F9DFC
-	adds r1, r4, 0
-	adds r2, r5, 0
-	bl sub_80F9C44
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80F9BF4
 
-	thumb_func_start sub_80F9C1C
-sub_80F9C1C: @ 80F9C1C
-	push {lr}
-	ldr r0, =sub_80F9C90
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80F9C1C
 
-	thumb_func_start sub_80F9C30
-sub_80F9C30: @ 80F9C30
-	push {lr}
-	ldr r0, =sub_80F9DFC
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80F9C30
 
-	thumb_func_start sub_80F9C44
-sub_80F9C44: @ 80F9C44
-	push {r4,r5,lr}
-	lsls r1, 16
-	lsrs r4, r1, 16
-	adds r5, r4, 0
-	lsls r3, 24
-	lsrs r3, 24
-	adds r1, r3, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	adds r2, r0, 0
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r1, r0, r1
-	movs r0, 0
-	strh r0, [r1, 0x8]
-	movs r0, 0x10
-	cmp r4, 0
-	beq _080F9C72
-	adds r0, r4, 0
-_080F9C72:
-	strh r0, [r1, 0xA]
-	movs r0, 0x14
-	cmp r5, 0
-	beq _080F9C7C
-	adds r0, r5, 0
-_080F9C7C:
-	strh r0, [r1, 0xC]
-	ldr r1, [r1]
-	adds r0, r2, 0
-	bl _call_via_r1
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80F9C44
+
+
+
+
+
 
 	thumb_func_start sub_80F9C90
 sub_80F9C90: @ 80F9C90

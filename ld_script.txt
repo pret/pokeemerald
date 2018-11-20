@@ -150,6 +150,7 @@ SECTIONS {
         asm/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
+        src/fldeff_80F9BCC.o(.text);
         asm/fldeff_80F9BCC.o(.text);
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
