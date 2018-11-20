@@ -632,7 +632,7 @@ SECTIONS {
         sound/songs/midi/se_kouka_h.o(.rodata);
         sound/songs/midi/se_bowa2.o(.rodata);
         sound/songs/se_poke_dead.o(.rodata);
-        sound/songs/se_nigeru.o(.rodata);
+        sound/songs/midi/se_nigeru.o(.rodata);
         sound/songs/midi/se_jido_doa.o(.rodata);
         sound/songs/midi/se_naminori.o(.rodata);
         sound/songs/midi/se_ban.o(.rodata);

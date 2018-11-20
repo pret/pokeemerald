@@ -969,5 +969,8 @@ $(MID_SUBDIR)/se_nageru.s: %.s: %.mid
 $(MID_SUBDIR)/se_naminori.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V075 -P4
 
+$(MID_SUBDIR)/se_nigeru.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V090 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
