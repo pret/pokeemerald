@@ -1059,5 +1059,8 @@ $(MID_SUBDIR)/se_ru_bari.s: %.s: %.mid
 $(MID_SUBDIR)/se_ru_gashin.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V090 -P4
 
+$(MID_SUBDIR)/se_ru_gasyan.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
