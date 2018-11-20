@@ -863,7 +863,7 @@ SECTIONS {
         sound/songs/se_w287b.o(.rodata);
         sound/songs/se_w114.o(.rodata);
         sound/songs/se_w063b.o(.rodata);
-        sound/songs/se_rg_w_door.o(.rodata);
+        sound/songs/midi/se_rg_w_door.o(.rodata);
         sound/songs/midi/se_rg_card1.o(.rodata);
         sound/songs/midi/se_rg_card2.o(.rodata);
         sound/songs/midi/se_rg_card3.o(.rodata);
