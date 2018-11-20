@@ -44,7 +44,7 @@ gSongTable:: @ 86B49F0
 	song se_ru_gashin, 1, 1         @ Sootopolis Gym - Stairs Appear
 	song se_ru_gasyan, 1, 1         @ Sootopolis Gym - Ice Breaking
 	song se_ru_bari, 1, 1           @ Sootopolis Gym - Walking on Ice
-	song se_ru_hyuu, 1, 1           @ Falling Down
+	song se_ru_hyuu, 1, 1           @ Falling Down a Hole
 	song se_ki_gasyan, 2, 2
 	song se_tk_warpin, 1, 1         @ Warp In
 	song se_tk_warpout, 1, 1        @ Warp Out
