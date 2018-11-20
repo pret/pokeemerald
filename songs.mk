@@ -1053,5 +1053,8 @@ $(MID_SUBDIR)/se_rg_shop.s: %.s: %.mid
 $(MID_SUBDIR)/se_rg_w_door.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V100 -P5
 
+$(MID_SUBDIR)/se_ru_bari.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
