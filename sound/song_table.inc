@@ -74,7 +74,7 @@ gSongTable:: @ 86B49F0
 	song se_mizu, 2, 2              @ Puddle
 	song se_hashi, 2, 2             @ Fortree Walkways
 	song se_daugi, 1, 1             @ Slots - Credits
-	song se_pinpon, 1, 1            @ Ding-dong!
+	song se_pinpon, 1, 1            @ Elevator - Reached Destination
 	song se_fuusen1, 2, 2           @ Red Balloon
 	song se_fuusen2, 2, 2           @ Blue Balloon
 	song se_fuusen3, 2, 2           @ Yellow Balloon
