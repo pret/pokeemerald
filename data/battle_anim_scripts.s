@@ -12301,11 +12301,33 @@ General_WishHeal:
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 10, 0, RGB_BLACK
 	end
-	
+
 General_MegaEvolution:
-	createvisualtask sub_815B7D0, 0x2, 0
-	waitforvisualfinish
-	end
+        loadspritegfx ANIM_TAG_ORBS
+        loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
+        loadspritegfx ANIM_TAG_METEOR
+        loadspritegfx ANIM_TAG_FLAT_ROCK
+        monbg ANIM_ATK_PARTNER
+        setalpha 12, 8
+        createvisualtask sub_8115A04, 2, 2, 1, 4, 0, 11, RGB(31, 31, 11)
+        playsewithpan SE_W025, -64
+        call SolarBeamSetUp1
+        waitforvisualfinish
+        createsprite gUnknown_08595FEC, 130, 0
+        playsewithpan SE_W025, -64
+        delay 15
+        createsprite gBattleAnimSpriteTemplate_85972D8, 2, 4, 1, 180, 1
+        createvisualtask sub_8159244, 5, 234, 0
+        delay 20
+        createvisualtask sub_815B7D0, 2, 0
+        delay 4
+        createvisualtask sub_8117494, 50
+        waitforvisualfinish
+        createvisualtask sub_8117494, 2
+        playsewithpan SE_W043, -64
+        blendoff
+        clearmonbg ANIM_ATTACKER
+        end
 
 AnimScript_82D85A3:
 	createvisualtask sub_8172E9C, 2
