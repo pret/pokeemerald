@@ -1020,5 +1020,8 @@ $(MID_SUBDIR)/se_rg_card1.s: %.s: %.mid
 $(MID_SUBDIR)/se_rg_card2.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
 
+$(MID_SUBDIR)/se_rg_card3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V112 -P5
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5

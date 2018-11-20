@@ -866,7 +866,7 @@ SECTIONS {
         sound/songs/se_rg_w_door.o(.rodata);
         sound/songs/midi/se_rg_card1.o(.rodata);
         sound/songs/midi/se_rg_card2.o(.rodata);
-        sound/songs/se_rg_card3.o(.rodata);
+        sound/songs/midi/se_rg_card3.o(.rodata);
         sound/songs/midi/se_rg_bag1.o(.rodata);
         sound/songs/midi/se_rg_bag2.o(.rodata);
         sound/songs/se_rg_getting.o(.rodata);
