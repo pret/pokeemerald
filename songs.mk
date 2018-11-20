@@ -951,5 +951,8 @@ $(MID_SUBDIR)/se_kouka_l.s: %.s: %.mid
 $(MID_SUBDIR)/se_kouka_m.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P5
 
+$(MID_SUBDIR)/se_mizu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V20 -P4
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
