@@ -1077,5 +1077,8 @@ $(MID_SUBDIR)/se_select.s: %.s: %.mid
 $(MID_SUBDIR)/se_suikomu.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
 
+$(MID_SUBDIR)/se_t_ame.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
