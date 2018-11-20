@@ -710,7 +710,7 @@ SECTIONS {
         sound/songs/se_tamakoro.o(.rodata);
         sound/songs/se_tamakoro_e.o(.rodata);
         sound/songs/midi/se_basabasa.o(.rodata);
-        sound/songs/se_regi.o(.rodata);
+        sound/songs/midi/se_regi.o(.rodata);
         sound/songs/midi/se_c_gaji.o(.rodata);
         sound/songs/midi/se_c_maku_u.o(.rodata);
         sound/songs/midi/se_c_maku_d.o(.rodata);
