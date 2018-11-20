@@ -701,7 +701,7 @@ SECTIONS {
         sound/songs/se_t_ooame.o(.rodata);
         sound/songs/se_t_ooame_e.o(.rodata);
         sound/songs/midi/se_t_koame.o(.rodata);
-        sound/songs/se_t_koame_e.o(.rodata);
+        sound/songs/midi/se_t_koame_e.o(.rodata);
         sound/songs/midi/se_t_kami.o(.rodata);
         sound/songs/midi/se_t_kami2.o(.rodata);
         sound/songs/midi/se_elebeta.o(.rodata);
