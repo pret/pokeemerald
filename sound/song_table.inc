@@ -104,7 +104,7 @@ gSongTable:: @ 86B49F0
 	song se_c_syu, 1, 1             @ Contest - Pokémon Switches Out
 	song se_c_pikon, 1, 1           @ Contest - Pokémon Switches In
 	song se_reapoke, 1, 1           @ Shiny Pokémon
-	song se_op_basyu, 1, 1          @ Opening Movie -> Title Screen whoosh
+	song se_op_basyu, 1, 1          @ Opening Movie -> Title Screen Transition
 	song se_bt_start, 1, 1          @ Battle Mugshot whoosh
 	song se_dendou, 1, 1            @ Audience Cheering
 	song se_jihanki, 1, 1           @ Vending Machine
