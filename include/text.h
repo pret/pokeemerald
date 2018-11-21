@@ -109,7 +109,8 @@
 
 #define TEXT_SPEED_FF 0xFF
 
-enum {
+enum
+{
     FONTATTR_MAX_LETTER_WIDTH,
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
@@ -205,20 +206,15 @@ typedef struct {
 
 struct Struct_03002F90
 {
-    u8 unk0[0x20];
-    u8 unk20[0x20];
-    u8 unk40[0x20];
-    u8 unk60[0x20];
+    u32 unk0[8];
+    u32 unk20[8];
+    u32 unk40[8];
+    u32 unk60[8];
     u8 unk80;
     u8 unk81;
 };
 
 extern TextFlags gTextFlags;
-
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
 
 extern u8 gUnknown_03002F84;
 extern struct Struct_03002F90 gUnknown_03002F90;
@@ -233,7 +229,7 @@ u32 RenderFont(struct TextPrinter *textPrinter);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
-void DecompressGlyphTile(const u16 *src, u16 *dest);
+void DecompressGlyphTile(const u16 *src, void *dest_);
 u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);

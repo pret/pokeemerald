@@ -1,10 +1,13 @@
 #include "global.h"
 #include "berry.h"
 #include "event_data.h"
+#include "field_control_avatar.h"
 #include "fieldmap.h"
 #include "item.h"
+#include "item_menu.h"
 #include "main.h"
 #include "random.h"
+#include "string_util.h"
 #include "text.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/items.h"
@@ -12,10 +15,7 @@
 extern u8 EventObjectGetBerryTreeId(u8 eventObjectId);
 extern void sub_8092EF0(u8 mapId, u8 mapNumber, u8 mapGroup);
 extern void CB2_ChooseBerry(void);
-extern const u8* GetEventObjectScriptPointerPlayerFacing(void);
 extern bool8 IsBerryTreeSparkling(u8, u8, u8);
-
-extern u16 gSpecialVar_ItemId;
 
 extern const u8 BerryTreeScript[];
 
