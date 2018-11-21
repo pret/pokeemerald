@@ -94,7 +94,7 @@ MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
 OBJS     := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
-OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
+# OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 SUBDIRS  := $(sort $(dir $(OBJS)))
 
@@ -184,7 +184,7 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
