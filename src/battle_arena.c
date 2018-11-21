@@ -15,6 +15,7 @@
 #include "palette.h"
 #include "random.h"
 #include "sound.h"
+#include "string_util.h"
 #include "text.h"
 #include "util.h"
 #include "constants/songs.h"
