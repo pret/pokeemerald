@@ -848,7 +848,7 @@ void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor)
     GenerateFontHalfRowLookupTable(*fgColor, *bgColor, *shadowColor);
 }
 
-void DecompressGlyphTile(const u16 *src_, void *dest_)
+void DecompressGlyphTile(const void *src_, void *dest_)
 {
     u32 temp;
     const u16 *src = src_;
