@@ -157,9 +157,9 @@ const struct BgTemplate gBattleBgTemplates[] =
     },
 };
 
-static const struct WindowTemplate gUnknown_0831AA18[] =
+static const struct WindowTemplate gStandardBattleWindowTemplates[] =
 {
-    {
+    { // 0 Standard battle message
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -168,7 +168,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
         .paletteNum = 0,
         .baseBlock = 0x0090,
     },
-    {
+    { // 1 "What will (pokemon) do?"
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 35,
@@ -177,7 +177,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
         .paletteNum = 0,
         .baseBlock = 0x01c0,
     },
-    {
+    { // 2 "Fight/Pokemon/Bag/Run"
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 35,
@@ -186,7 +186,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
         .paletteNum = 5,
         .baseBlock = 0x0190,
     },
-    {
+    { // 3 Top left move
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 55,
@@ -195,7 +195,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
         .paletteNum = 5,
         .baseBlock = 0x0300,
     },
-    {
+    { // 4 Top right move
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 55,
@@ -204,7 +204,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
         .paletteNum = 5,
         .baseBlock = 0x0310,
     },
-    {
+    { // 5 Bottom left move
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 57,
@@ -213,7 +213,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
         .paletteNum = 5,
         .baseBlock = 0x0320,
     },
-    {
+    { // 6 Bottom right move
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 57,
@@ -378,7 +378,7 @@ static const struct WindowTemplate gUnknown_0831AA18[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_0831AAE0[] =
+static const struct WindowTemplate gBattleArenaWindowTemplates[] =
 {
     {
         .bg = 0,
@@ -592,8 +592,8 @@ static const struct WindowTemplate gUnknown_0831AAE0[] =
 
 const struct WindowTemplate * const gBattleWindowTemplates[] =
 {
-    gUnknown_0831AA18,
-    gUnknown_0831AAE0,
+    gStandardBattleWindowTemplates,
+    gBattleArenaWindowTemplates,
 };
 
 static const struct BattleBackground gBattleTerrainTable[] =
