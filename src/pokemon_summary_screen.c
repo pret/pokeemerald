@@ -1082,6 +1082,8 @@ static u8 ShowSplitIcon(u8 split)
         LoadSpriteSheet(&sSpriteSheet_SplitIcons);
     if (pssData->splitIconSpriteId == 0xFF)
         pssData->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 48, 129, 0);
+    else if (gSprites[pssData->splitIconSpriteId].invisible)
+        gSprites[pssData->splitIconSpriteId].invisible = FALSE;
 
     StartSpriteAnim(&gSprites[pssData->splitIconSpriteId], split);
     return pssData->splitIconSpriteId;
@@ -2260,6 +2262,7 @@ static void sub_81C18F4(u8 taskId)
 {
     ClearWindowTilemap(14);
     ClearWindowTilemap(15);
+    gSprites[pssData->splitIconSpriteId].invisible = TRUE;
     schedule_bg_copy_tilemap_to_vram(0);
     sub_81C1DA4(0, 3);
     sub_81C1EFC(0, 3, 0);
