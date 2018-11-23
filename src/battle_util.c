@@ -2512,7 +2512,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     speciesDef = gBattleMons[gBattlerTarget].species;
     pidDef = gBattleMons[gBattlerTarget].personality;
 
-    gLastUsedAbility = GetBattlerAbility(battler);
+    if (special)
+        gLastUsedAbility = special;
+    else
+        gLastUsedAbility = GetBattlerAbility(battler);
 
     if (moveArg)
         move = moveArg;
