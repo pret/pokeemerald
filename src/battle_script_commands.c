@@ -6456,10 +6456,25 @@ static void atk76_various(void)
             return;
         break;
     case VARIOUS_SET_TELEPORT_OUTCOME:
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+        // Don't end the battle if one of the wild mons teleported from the wild double battle
+        // and its partner is still alive.
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT && IsBattlerAlive(BATTLE_PARTNER(gActiveBattler)))
+        {
+            gAbsentBattlerFlags |= gBitTable[gActiveBattler];
+            gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
+            gBattleMons[gActiveBattler].hp = 0;
+            SetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP, &gBattleMons[gActiveBattler].hp);
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
+            FaintClearSetData();
+        }
+        else if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+        {
             gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED;
+        }
         else
+        {
             gBattleOutcome = B_OUTCOME_MON_TELEPORTED;
+        }
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
         BtlController_EmitPlayFanfareOrBGM(0, MUS_KACHI1, TRUE);
