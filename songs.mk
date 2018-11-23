@@ -951,5 +951,155 @@ $(MID_SUBDIR)/se_kouka_l.s: %.s: %.mid
 $(MID_SUBDIR)/se_kouka_m.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P5
 
+$(MID_SUBDIR)/se_mizu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V020 -P4
+
+$(MID_SUBDIR)/se_moter.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V090 -P4
+
+$(MID_SUBDIR)/se_mu_pachi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
+
+$(MID_SUBDIR)/se_n.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -P4
+
+$(MID_SUBDIR)/se_nageru.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V120 -P5
+
+$(MID_SUBDIR)/se_naminori.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V075 -P4
+
+$(MID_SUBDIR)/se_nigeru.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V090 -P5
+
+$(MID_SUBDIR)/se_o.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V120 -P4
+
+$(MID_SUBDIR)/se_op_basyu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_pc_login.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_pc_off.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_pc_on.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_pin.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V060 -P4
+
+$(MID_SUBDIR)/se_pinpon.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V090 -P5
+
+$(MID_SUBDIR)/se_pn_off.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_pn_on.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_poke_dead.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V110 -P5
+
+$(MID_SUBDIR)/se_reapoke.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V095 -P5
+
+$(MID_SUBDIR)/se_regi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V090 -P5
+
+$(MID_SUBDIR)/se_rg_bag1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
+
+$(MID_SUBDIR)/se_rg_bag2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
+
+$(MID_SUBDIR)/se_rg_card1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
+
+$(MID_SUBDIR)/se_rg_card2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -P5
+
+$(MID_SUBDIR)/se_rg_card3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V112 -P5
+
+$(MID_SUBDIR)/se_rg_deomov.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V080 -P5
+
+$(MID_SUBDIR)/se_rg_excellent.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P5
+
+$(MID_SUBDIR)/se_rg_getting.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V100 -P5
+
+$(MID_SUBDIR)/se_rg_help_cl.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V095 -P5
+
+$(MID_SUBDIR)/se_rg_help_ng.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V125 -P5
+
+$(MID_SUBDIR)/se_rg_help_op.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V096 -P5
+
+$(MID_SUBDIR)/se_rg_kiteki.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V096 -P5
+
+$(MID_SUBDIR)/se_rg_nawamiss.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
+
+$(MID_SUBDIR)/se_rg_shop.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V080 -P5
+
+$(MID_SUBDIR)/se_rg_w_door.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G129 -V100 -P5
+
+$(MID_SUBDIR)/se_ru_bari.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P4
+
+$(MID_SUBDIR)/se_ru_gashin.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V090 -P4
+
+$(MID_SUBDIR)/se_ru_gasyan.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P4
+
+$(MID_SUBDIR)/se_ru_hyuu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P4
+
+$(MID_SUBDIR)/se_save.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P5
+
+$(MID_SUBDIR)/se_seikai.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V080 -P4
+
+$(MID_SUBDIR)/se_select.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V080 -P5
+
+$(MID_SUBDIR)/se_suikomu.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -V100 -P5
+
+$(MID_SUBDIR)/se_t_ame.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
+
+$(MID_SUBDIR)/se_t_ame_e.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
+
+$(MID_SUBDIR)/se_t_kami.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P3
+
+$(MID_SUBDIR)/se_t_kami2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V110 -P3
+
+$(MID_SUBDIR)/se_t_koame.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
+
+$(MID_SUBDIR)/se_t_koame_e.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V080 -P2
+
+$(MID_SUBDIR)/se_t_ooame.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P2
+
+$(MID_SUBDIR)/se_t_ooame_e.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P2
+
 $(MID_SUBDIR)/se_z_search.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G127 -P5
