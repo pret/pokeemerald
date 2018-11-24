@@ -47,6 +47,8 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
+	trainerbattle 10, 406, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF, NULL
+	trainerbattle 11, 402, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF, NULL
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8006, 404
 	setvar VAR_0x8007, 3

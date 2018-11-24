@@ -2524,5 +2524,5 @@ static void BattleAICmd_if_doesnt_hold_berry(void)
     if (ItemId_GetPocket(item) == POCKET_BERRIES)
         gAIScriptPtr += 6;
     else
-        T1_READ_PTR(gAIScriptPtr + 2);
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
 }
