@@ -49,13 +49,13 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	special SavePlayerParty
 		
-	trainerbattle 10, 264, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
-	trainerbattle 11, 263, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
+	trainerbattle 10, TRAINER_DRAKE, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
+	trainerbattle 11, TRAINER_GLACIA, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
 	
-	setvar VAR_0x8004, 11
+	setvar VAR_0x8004, SPECIAL_BATTLE_MULTI
 	setvar VAR_0x8005, 0
-	setvar VAR_0x8006, 404
-	setvar VAR_0x8007, 3
+	setvar VAR_0x8006, TRAINER_EDWARDO
+	setvar VAR_0x8007, TRAINER_BACK_PIC_LEAF
 	special DoSpecialTrainerBattle
 	
 	waitstate

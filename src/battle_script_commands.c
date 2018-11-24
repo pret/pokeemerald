@@ -926,6 +926,8 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
 {
     if (!(gBattleMoves[move].flags & FLAG_PROTECT_AFFECTED))
         return FALSE;
+    else if (gBattleMoves[move].effect == MOVE_EFFECT_FEINT)
+        return FALSE;
     else if (gProtectStructs[battlerId].protected)
         return TRUE;
     else if ((gProtectStructs[battlerId].wideGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].wideGuarded)
@@ -2731,6 +2733,24 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         gBattleMoveDamage = 1;
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_MoveEffectFlameBurst;
+                }
+                break;
+            case MOVE_EFFECT_FEINT:
+                if (gProtectStructs[gBattlerTarget].protected
+                    || gProtectStructs[gBattlerTarget].wideGuarded
+                    || gProtectStructs[gBattlerTarget].quickGuarded
+                    || gProtectStructs[gBattlerTarget].spikyShielded
+                    || gProtectStructs[gBattlerTarget].kingsShielded
+                    || gProtectStructs[gBattlerTarget].banefulBunkered)
+                {
+                    gProtectStructs[gBattlerTarget].protected = 0;
+                    gProtectStructs[gBattlerTarget].wideGuarded = 0;
+                    gProtectStructs[gBattlerTarget].quickGuarded = 0;
+                    gProtectStructs[gBattlerTarget].spikyShielded = 0;
+                    gProtectStructs[gBattlerTarget].kingsShielded = 0;
+                    gProtectStructs[gBattlerTarget].banefulBunkered = 0;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
                 }
                 break;
             }

@@ -649,6 +649,7 @@ static const u8 sText_NoEffectOnTarget[] = _("It had no effect\non {B_DEF_NAME_W
 static const u8 sText_BurstingFlames[] = _("The bursting flames\nhit {B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
 static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX} received {B_LAST_ITEM}\nfrom {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_ThirdTypeAdded[] = _("{B_BUFF1} type was added to\n{B_DEF_NAME_WITH_PREFIX}!");
+static const u8 sText_FellForFeint[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe feint!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1152,6 +1153,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_BurstingFlames,
     sText_BestowItemGiving,
     sText_ThirdTypeAdded,
+    sText_FellForFeint,
 };
 
 const u16 gTerrainStringIds[] =

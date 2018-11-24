@@ -335,6 +335,16 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectRevelationDance
 	.4byte BattleScript_EffectAuroraVeil
 	.4byte BattleScript_EffectThirdType
+	.4byte BattleScript_EffectFeint
+	
+BattleScript_MoveEffectFeint::
+	printstring STRINGID_FELLFORFEINT
+	waitmessage 0x40
+	return
+	
+BattleScript_EffectFeint:
+	setmoveeffect MOVE_EFFECT_FEINT
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectThirdType:
 	attackcanceler

@@ -4374,12 +4374,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_FEINT
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FEINT,
 		.power = 30,
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
 		.pp = 10,
-		.secondaryEffectChance = 0,
+		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 2,
 		.flags = FLAG_MIRROR_MOVE_AFFECTED,

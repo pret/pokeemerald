@@ -319,7 +319,7 @@
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
 #define MOVE_EFFECT_SMACK_DOWN          0x3C
 #define MOVE_EFFECT_FLAME_BURST         0x3D
-#define MOVE_EFFECT_NOTHING_3E          0x3E
+#define MOVE_EFFECT_FEINT               0x3E
 #define MOVE_EFFECT_NOTHING_3F          0x3F
 #define MOVE_EFFECT_AFFECTS_USER        0x40
 #define MOVE_EFFECT_CERTAIN             0x80
