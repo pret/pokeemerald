@@ -228,6 +228,9 @@ HandleIntroSlide: @ 81181D4
 	ldr r0, =0x00000c03
 	cmp r1, r0
 	beq _08118208
+	adds r0, r0, #1
+	cmp r1, r0
+	bhi _08118208
 	ldr r0, =sub_8118D68
 	b _08118258
 	.pool

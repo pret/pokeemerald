@@ -79,7 +79,6 @@ static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
 static void CB2_EndScriptedWildBattle(void);
 static u8 GetWildBattleTransition(void);
-static u8 GetTrainerBattleTransition(void);
 static void sub_80B1218(void);
 static void sub_80B1234(void);
 static void CB2_GiveStarter(void);
@@ -795,7 +794,7 @@ static u8 GetWildBattleTransition(void)
     }
 }
 
-static u8 GetTrainerBattleTransition(void)
+u8 GetTrainerBattleTransition(void)
 {
     u8 minPartyCount;
     u8 transitionType;

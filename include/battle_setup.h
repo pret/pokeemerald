@@ -47,6 +47,7 @@ void BattleSetup_StartLegendaryBattle(void);
 void StartGroudonKyogreBattle(void);
 void StartRegiBattle(void);
 u8 BattleSetup_GetTerrainId(void);
+u8 GetTrainerBattleTransition(void);
 u8 sub_80B100C(s32 arg0);
 void ChooseStarter(void);
 void ResetTrainerOpponentIds(void);

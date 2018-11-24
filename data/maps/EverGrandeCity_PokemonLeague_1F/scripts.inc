@@ -47,6 +47,11 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
+	setvar VAR_0x8004, 11
+	setvar VAR_0x8006, 404
+	setvar VAR_0x8007, 3
+	special DoSpecialTrainerBattle
+	waitstate
 	lockall
 	checkflag FLAG_0x107
 	goto_eq EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
