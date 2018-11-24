@@ -1575,6 +1575,11 @@
 	various \battler, VARIOUS_TRY_THIRD_TYPE
 	.4byte \ptr
 	.endm
+	
+	.macro tryaccupressure battler, ptr
+	various \battler, VARIOUS_ACUPRESSURE
+	.4byte \ptr
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat, stages, down

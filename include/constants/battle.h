@@ -293,7 +293,7 @@
 #define MOVE_EFFECT_NIGHTMARE           0x21
 #define MOVE_EFFECT_ALL_STATS_UP        0x22
 #define MOVE_EFFECT_RAPIDSPIN           0x23
-#define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
+#define MOVE_EFFECT_REMOVE_STATUS       0x24
 #define MOVE_EFFECT_ATK_DEF_DOWN        0x25
 #define MOVE_EFFECT_RECOIL_33           0x26
 #define MOVE_EFFECT_ATK_PLUS_2          0x27

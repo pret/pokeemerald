@@ -336,6 +336,23 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAuroraVeil
 	.4byte BattleScript_EffectThirdType
 	.4byte BattleScript_EffectFeint
+	.4byte BattleScript_EffectSparklingAria
+	.4byte BattleScript_EffectAcupressure
+	
+BattleScript_EffectAcupressure:
+	attackcanceler
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_EffectAcupressureTry
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_PrintMoveMissed
+BattleScript_EffectAcupressureTry:
+	attackstring
+	ppreduce
+	tryaccupressure BS_TARGET, BattleScript_ButItFailed
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	statbuffchange MOVE_EFFECT_CERTAIN, BattleScript_MoveEnd
+	printstring STRINGID_PKMNSSTATCHANGED2
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_MoveEffectFeint::
 	printstring STRINGID_FELLFORFEINT
@@ -1583,7 +1600,6 @@ BattleScript_EffectEruption:
 BattleScript_EffectPledge:
 BattleScript_EffectFling:
 BattleScript_EffectNaturalGift:
-BattleScript_EffectWakeUpSlap:
 BattleScript_EffectWringOut:
 BattleScript_EffectHex:
 BattleScript_EffectAssurance:
@@ -3511,7 +3527,7 @@ BattleScript_AlreadyAtFullHp::
 BattleScript_EffectFakeOut::
 	attackcanceler
 	jumpifnotfirstturn BattleScript_ButItFailedAtkStringPpReduce
-	setmoveeffect MOVE_EFFECT_FLINCH | MOVE_EFFECT_CERTAIN
+	setmoveeffect MOVE_EFFECT_FLINCH
 	goto BattleScript_EffectHit
 
 BattleScript_ButItFailedAtkStringPpReduce::
@@ -3716,9 +3732,11 @@ BattleScript_EffectFocusPunch::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSmellingsalt::
+BattleScript_EffectSmellingsalt:
+BattleScript_EffectWakeUpSlap:
+BattleScript_EffectSparklingAria:
 	jumpifsubstituteblocks BattleScript_EffectHit
-	setmoveeffect MOVE_EFFECT_REMOVE_PARALYSIS | MOVE_EFFECT_CERTAIN
+	setmoveeffect MOVE_EFFECT_REMOVE_STATUS | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
 BattleScript_EffectFollowMe::

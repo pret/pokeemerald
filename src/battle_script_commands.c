@@ -722,7 +722,7 @@ static const u8* const sMoveEffectBS_Ptrs[] =
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_NIGHTMARE
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ALL_STATS_UP
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RAPIDSPIN
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_REMOVE_PARALYSIS
+    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_REMOVE_STATUS
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_DEF_DOWN
     BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_33
 };
@@ -2602,14 +2602,14 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = BattleScript_RapidSpinAway;
                 break;
-            case MOVE_EFFECT_REMOVE_PARALYSIS: // Smelling salts
-                if (!(gBattleMons[gBattlerTarget].status1 & STATUS1_PARALYSIS))
+            case MOVE_EFFECT_REMOVE_STATUS: // Smelling salts
+                if (!(gBattleMons[gBattlerTarget].status1 & gBattleMoves[gCurrentMove].argument))
                 {
                     gBattlescriptCurrInstr++;
                 }
                 else
                 {
-                    gBattleMons[gBattlerTarget].status1 &= ~(STATUS1_PARALYSIS);
+                    gBattleMons[gBattlerTarget].status1 &= ~(gBattleMoves[gCurrentMove].argument);
 
                     gActiveBattler = gBattlerTarget;
                     BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
@@ -6311,6 +6311,7 @@ static void atk76_various(void)
     u8 side;
     s32 i, j;
     u8 data[10];
+    u32 bits;
 
     if (gBattleControllerExecFlags)
         return;
@@ -6319,6 +6320,33 @@ static void atk76_various(void)
 
     switch (gBattlescriptCurrInstr[2])
     {
+    case VARIOUS_ACUPRESSURE:
+        bits = 0;
+        for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)
+        {
+            if (gBattleMons[gActiveBattler].statStages[i] != 12)
+                bits |= gBitTable[i];
+        }
+        if (bits)
+        {
+            u32 statId;
+            do
+            {
+                statId = (Random() % NUM_BATTLE_STATS) + 1;
+            } while (!(bits & gBitTable[statId]));
+
+            if (gBattleMons[gActiveBattler].statStages[statId] >= 11)
+                SET_STATCHANGER(statId, 1, FALSE);
+            else
+                SET_STATCHANGER(statId, 2, FALSE);
+
+            gBattlescriptCurrInstr += 7;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        }
+        return;
     case VARIOUS_CANCEL_MULTI_TURN_MOVES:
         CancelMultiTurnMoves(gActiveBattler);
         break;

@@ -3034,7 +3034,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.type = TYPE_NORMAL,
 		.accuracy = 100,
 		.pp = 10,
-		.secondaryEffectChance = 0,
+		.secondaryEffectChance = 100,
 		.target = MOVE_TARGET_SELECTED,
 		.priority = 1,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
@@ -3195,6 +3195,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_PARALYSIS,
 	},
 	{ // MOVE_FOLLOW_ME
 		.effect = EFFECT_FOLLOW_ME,
@@ -4312,6 +4313,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED,
 		.split = SPLIT_PHYSICAL,
+		.argument = STATUS1_SLEEP,
 	},
 	{ // MOVE_HAMMER_ARM
 		.effect = EFFECT_SPEED_DOWN,
@@ -4410,13 +4412,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_ACUPRESSURE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_ACUPRESSURE,
 		.power = 0,
 		.type = TYPE_NORMAL,
 		.accuracy = 0,
 		.pp = 30,
 		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_USER,
+		.target = MOVE_TARGET_USER | MOVE_TARGET_ALLY,
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_STATUS,
@@ -7493,7 +7495,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_FIRST_IMPRESSION
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_FAKE_OUT,
 		.power = 90,
 		.type = TYPE_BUG,
 		.accuracy = 100,
@@ -7541,7 +7543,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_PHYSICAL,
 	},
 	{ // MOVE_SPARKLING_ARIA
-		.effect = EFFECT_PLACEHOLDER,
+		.effect = EFFECT_SPARKLING_ARIA,
 		.power = 90,
 		.type = TYPE_WATER,
 		.accuracy = 100,
@@ -7551,6 +7553,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.priority = 0,
 		.flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGSROCK_AFFECTED | FLAG_SOUND,
 		.split = SPLIT_SPECIAL,
+		.argument = STATUS1_BURN,
 	},
 	{ // MOVE_ICE_HAMMER
 		.effect = EFFECT_SPEED_DOWN_HIT,
