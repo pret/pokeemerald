@@ -3442,7 +3442,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
-             || GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT)
+             || (GetBattlerPosition(gActiveBattler) == B_POSITION_OPPONENT_RIGHT && gBattleTypeFlags & BATTLE_TYPE_TRAINER))
             {
                 BtlController_EmitDrawTrainerPic(0);
                 MarkBattlerForControllerExec(gActiveBattler);

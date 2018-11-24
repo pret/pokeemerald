@@ -49,8 +49,8 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	special SavePlayerParty
 		
-	trainerbattle 10, 406, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
-	trainerbattle 11, 402, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
+	trainerbattle 10, 264, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
+	trainerbattle 11, 263, 0, NULL, EverGrandeCity_PokemonLeague_1F_Text_2297EF
 	
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 0

@@ -2180,9 +2180,9 @@ sub_81B1250: @ 81B1250
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
-	movs r1, 0x49
+	movs r1, 0x41
 	ands r0, r1
-	cmp r0, 0x49
+	cmp r0, 0x41
 	bne _081B1280
 	ldr r0, =gMain
 	ldr r1, =0x00000439
