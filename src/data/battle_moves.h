@@ -7134,7 +7134,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_SPECIAL,
 	},
 	{ // MOVE_HYPERSPACE_HOLE
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_FEINT,
 		.power = 80,
 		.type = TYPE_PSYCHIC,
 		.accuracy = 0,
@@ -7182,13 +7182,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_AROMATIC_MIST
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_AROMATIC_MIST,
 		.power = 0,
 		.type = TYPE_FAIRY,
 		.accuracy = 0,
 		.pp = 20,
 		.secondaryEffectChance = 0,
-		.target = MOVE_TARGET_USER,
+		.target = MOVE_TARGET_ALLY,
 		.priority = 0,
 		.flags = 0,
 		.split = SPLIT_STATUS,

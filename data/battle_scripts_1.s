@@ -338,6 +338,32 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectFeint
 	.4byte BattleScript_EffectSparklingAria
 	.4byte BattleScript_EffectAcupressure
+	.4byte BattleScript_EffectAromaticMist
+	
+BattleScript_EffectAromaticMist:
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_ButItFailed
+	jumpiftargetally BattleScript_EffectAromaticMistWorks
+	goto BattleScript_ButItFailed
+BattleScript_EffectAromaticMistWorks:
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange 0x1, BattleScript_EffectAromaticMistEnd
+	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_AromaticMistAnim
+	pause 0x10
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	waitmessage 0x40
+	goto BattleScript_EffectAromaticMistEnd
+BattleScript_AromaticMistAnim:
+	attackanimation
+	waitanimation
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage 0x40
+BattleScript_EffectAromaticMistEnd:
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectAcupressure:
 	attackcanceler

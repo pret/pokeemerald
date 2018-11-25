@@ -4246,7 +4246,14 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
         break;
     case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_USER:
+    default:
         targetBattler = gBattlerAttacker;
+        break;
+    case MOVE_TARGET_ALLY:
+        if (IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)))
+            targetBattler = BATTLE_PARTNER(gBattlerAttacker);
+        else
+            targetBattler = gBattlerAttacker;
         break;
     }
 
