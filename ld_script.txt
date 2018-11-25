@@ -167,7 +167,7 @@ SECTIONS {
         asm/flying.o(.text);
         asm/psychic.o(.text);
         asm/bug.o(.text);
-        asm/rock.o(.text);
+        src/rock.o(.text);
         asm/ghost.o(.text);
         asm/dragon.o(.text);
         asm/dark.o(.text);

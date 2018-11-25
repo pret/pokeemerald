@@ -10,7 +10,7 @@ sub_811160C: @ 811160C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
@@ -2441,7 +2441,7 @@ sub_81129F0: @ 81129F0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
 	bl GetBattlerSide

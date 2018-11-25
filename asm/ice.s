@@ -370,7 +370,7 @@ sub_810B8EC: @ 810B8EC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	movs r1, 0x2
@@ -413,7 +413,7 @@ _0810B936:
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
@@ -513,7 +513,7 @@ sub_810BA24: @ 810BA24
 	sub sp, 0x10
 	adds r5, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r6, =gBattleAnimArgs
 	ldrh r0, [r6, 0x8]
 	strh r0, [r5, 0x2E]
@@ -814,7 +814,7 @@ sub_810BC94: @ 810BC94
 	sub sp, 0x10
 	adds r5, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x8]
 	strh r0, [r5, 0x2E]
@@ -1103,7 +1103,7 @@ sub_810BED0: @ 810BED0
 	bne _0810BEF4
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _0810BF32
 	.pool
 _0810BEF4:
@@ -2762,7 +2762,7 @@ _0810CCA6:
 	bl StartSpriteAffineAnim
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r6, =gBattleAnimArgs
 	ldrh r0, [r6, 0x8]
 	strh r0, [r5, 0x2E]
@@ -2796,7 +2796,7 @@ _0810CCCE:
 	ldrh r0, [r6, 0xA]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_810CD1C
 	str r0, [r5, 0x1C]
 	pop {r4-r6}

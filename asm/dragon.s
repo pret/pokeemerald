@@ -144,7 +144,7 @@ _0811318E:
 	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0, 0x8]
 	strh r0, [r5, 0x2E]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0

@@ -73,9 +73,17 @@ void HandleIntroSlide(u8 terrainId);
 u32 GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
-void sub_80A6EEC(struct Sprite *sprite);
-void sub_80A68D4(struct Sprite *sprite);
+void sub_80A6450(struct Sprite *sprite);
+void SetAverageBattlerPositions(u8 battlerId, bool8 a2, s16 *x, s16 *y);
+void move_anim_8074EE0(struct Sprite *sprite);
+void sub_80A656C(struct Sprite *sprite);
+void InitAnimSpritePos(struct Sprite *sprite, u8 a2);
+void sub_80A6980(struct Sprite *sprite, bool8 a2);
+void StartAnimLinearTranslation(struct Sprite *sprite);
+void InitAnimArcTranslation(struct Sprite *sprite);
 bool8 TranslateAnimLinear(struct Sprite *sprite);
+void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
+void sub_80A8EE4(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
@@ -85,7 +93,7 @@ void sub_80A6630(struct Sprite *sprite);
 void sub_80A6680(struct Sprite *sprite);
 void sub_80A7344(u8 spriteId);
 void obj_id_set_rotscale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
-void sub_80A6E14(struct Sprite *sprite);
+void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void sub_80A7270(u8 spriteId, u8 objMode);
 void sub_80A73A0(u8 spriteId);
 u32 sub_80A75AC(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7);
