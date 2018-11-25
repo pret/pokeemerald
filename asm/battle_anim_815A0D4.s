@@ -259,7 +259,7 @@ _0815A2B2:
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x32]
 	strh r6, [r5, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0
@@ -767,7 +767,7 @@ sub_815A6C4: @ 815A6C4
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	mov r5, sp
@@ -802,7 +802,7 @@ _0815A6F8:
 	ldr r0, =0x0000ffce
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_815A73C
 	str r0, [r4, 0x1C]
 	add sp, 0x4
@@ -2216,7 +2216,7 @@ sub_815B27C: @ 815B27C
 	bne _0815B290
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 _0815B290:
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
@@ -2291,7 +2291,7 @@ _0815B2D8:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 _0815B324:
 	pop {r4,r5}
@@ -2810,7 +2810,7 @@ sub_815B70C: @ 815B70C
 _0815B71E:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	movs r0, 0x90
 	lsls r0, 4
 	strh r0, [r4, 0x30]
@@ -4309,7 +4309,7 @@ sub_815C400: @ 815C400
 	bne _0815C41E
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -8448,7 +8448,7 @@ _0815E4EE:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	mov r1, r10
 	ldrb r0, [r1]
 	bl GetBattlerSide
@@ -9605,7 +9605,7 @@ sub_815EE84: @ 815EE84
 	bne _0815EEA8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimAttacker
 	b _0815EEAA
 	.pool

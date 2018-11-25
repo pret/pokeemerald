@@ -1584,7 +1584,7 @@ sub_8116388: @ 8116388
 	bne _081163AC
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _081163B4
 	.pool
 _081163AC:
@@ -1616,7 +1616,7 @@ sub_81163D0: @ 81163D0
 	bne _081163F4
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _081163FC
 	.pool
 _081163F4:
@@ -1690,7 +1690,7 @@ _08116474:
 	bne _08116494
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _0811649C
 	.pool
 _08116494:
@@ -1789,7 +1789,7 @@ sub_8116560: @ 8116560
 	bne _0811657C
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _08116584
 	.pool
 _0811657C:
@@ -1824,7 +1824,7 @@ sub_81165A8: @ 81165A8
 	bne _081165CC
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _081165D4
 	.pool
 _081165CC:

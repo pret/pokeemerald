@@ -4732,4 +4732,7 @@ extern const u32 gUnknown_08D927EC[];
 
 extern const u32 gSlotMachineReelTime_Gfx[];
 
+extern const u32 gUnknown_08D8D410[];
+extern const u32 gUnknown_08D8D58C[];
+
 #endif //GUARD_GRAPHICS_H

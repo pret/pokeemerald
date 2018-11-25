@@ -20,7 +20,7 @@ sub_810DBAC: @ 810DBAC
 _0810DBC2:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldrh r0, [r4, 0x4]
 	strh r0, [r5, 0x2E]
 	ldr r4, =gBattleAnimTarget
@@ -39,7 +39,7 @@ _0810DBC2:
 	ldr r0, =0x0000ffe2
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_810DC10
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -80,7 +80,7 @@ sub_810DC2C: @ 810DC2C
 _0810DC44:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
 	mov r6, sp
@@ -113,7 +113,7 @@ _0810DC72:
 	ldr r0, =0x0000ffe2
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_810DCB4
 	str r0, [r4, 0x1C]
 	add sp, 0x4
@@ -157,7 +157,7 @@ sub_810DCD0: @ 810DCD0
 	adds r0, r1
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl sub_80A6E14
+	bl InitSpriteDataForLinearTranslation
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r2, 0x4
@@ -242,7 +242,7 @@ _0810DD7C:
 	strh r2, [r4, 0x32]
 	adds r1, r3
 	strh r1, [r4, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0

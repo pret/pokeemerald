@@ -104,7 +104,7 @@ sub_810CEE0: @ 810CEE0
 	bne _0810CF04
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _0810CF0C
 	.pool
 _0810CF04:
@@ -378,7 +378,7 @@ _0810D142:
 	ldrh r0, [r4, 0x22]
 	subs r0, 0x14
 	strh r0, [r4, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_810D164
 	adds r0, r4, 0
@@ -417,7 +417,7 @@ sub_810D164: @ 810D164
 	strh r1, [r5, 0x22]
 	strh r6, [r5, 0x26]
 	strh r6, [r5, 0x24]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0
@@ -618,7 +618,7 @@ sub_810D308: @ 810D308
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_810D360
 	adds r0, r5, 0
@@ -1460,7 +1460,7 @@ sub_810DA10: @ 810DA10
 	bne _0810DA2C
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _0810DA34
 	.pool
 _0810DA2C:

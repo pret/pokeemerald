@@ -345,7 +345,7 @@ sub_810A46C: @ 810A46C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r5, =gBattleAnimArgs
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]

@@ -40,7 +40,7 @@ sub_8114994: @ 8114994
 	ldr r0, =0x0000ffd8
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_81149FC
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -86,7 +86,7 @@ sub_81149FC: @ 81149FC
 	movs r0, 0x28
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_8114A60
 	str r0, [r5, 0x1C]
 _08114A50:
@@ -149,7 +149,7 @@ _08114A9C:
 	ldrh r4, [r4, 0x6]
 	adds r0, r4
 	strh r0, [r6, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r6, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r6, 0
@@ -167,7 +167,7 @@ sub_8114AF0: @ 8114AF0
 	push {r7}
 	adds r6, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r4, =gBattleAnimTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -211,7 +211,7 @@ _08114B48:
 	strh r0, [r6, 0x32]
 	adds r0, r7, r4
 	strh r0, [r6, 0x36]
-	ldr r0, =sub_80A6EEC
+	ldr r0, =StartAnimLinearTranslation
 	str r0, [r6, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r6, 0
@@ -1034,7 +1034,7 @@ _081151DA:
 	ldrh r0, [r7, 0x8]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_8115228
 	str r0, [r5, 0x1C]
 	pop {r4-r7}
