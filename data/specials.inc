@@ -94,7 +94,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8390
 	def_special sub_80F8850
 	def_special sub_80F82B4
-	def_special sub_80F87D8
+	def_special SetContestTrainerGfxIds
 	def_special sub_80F7F30
 	def_special sub_80F8970
 	def_special sub_80F8AFC
@@ -102,7 +102,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F7F7C
 	def_special sub_80F7FFC
 	def_special sub_80F8D24
-	def_special sub_80F8C7C
+	def_special GiveMonArtistRibbon
 	def_special sub_80B3000
 	def_special SaveGame
 	def_special sub_80FAFF8
@@ -259,7 +259,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9490
 	def_special ValidateEReaderTrainer
 	def_special GetBestBattleTowerStreak
-	def_special ReducePlayerPartyToThree
+	def_special ReducePlayerPartyToSelectedMons
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special FieldShowRegionMap
@@ -330,13 +330,13 @@ gSpecials:: @ 81DBA64
 	def_special sub_80AC81C
 	def_special sp13E_warp_to_last_warp
 	def_special sp13F_fall_to_last_warp
-	def_special sub_80F8D28
+	def_special ShowContestEntryMonPic
 	def_special sub_80F8EB8
 	def_special SetEReaderTrainerGfxId
 	def_special BattleSetup_StartLatiBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather
-	def_special sub_80F8FA0
+	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special sub_81B98DC
 	def_special nullsub_54
@@ -350,7 +350,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
 	def_special sub_80F9370
-	def_special sub_80F8FE8
+	def_special ScriptRandom
 	def_special sub_81AFDD0
 	def_special sub_80EDCE8
 	def_special sub_80EE2CC

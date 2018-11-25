@@ -1784,7 +1784,7 @@ void sub_801440C(u8 taskId)
         ScriptContext2_Disable();
 }
 
-extern u8 gUnknown_0203CEF8[];
+extern u8 gSelectedOrderFromParty[];
 
 void sub_8014790(u8 taskId)
 {
@@ -1802,8 +1802,8 @@ void sub_8014790(u8 taskId)
             gLinkPlayers[0].linkType = 0x2211;
             gLinkPlayers[0].id = 0;
             gLinkPlayers[1].id = 2;
-            sendBuff[0] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[0] - 1], MON_DATA_SPECIES);
-            sendBuff[1] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[1] - 1], MON_DATA_SPECIES, NULL);
+            sendBuff[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
+            sendBuff[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
             gMain.savedCallback = NULL;
             data[0] = 4;
             sub_800E3A8();
