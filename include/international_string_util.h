@@ -16,7 +16,7 @@ s32 sub_81DB3D8(const struct MenuAction *str, const u8* arg1, s32 arg2);
 // sub_81DB494
 void PadNameString(u8 *dst, u8 padWith);
 void sub_81DB554(u8 *, u8);
-// sub_81DB5AC
+void sub_81DB5AC(u8 *);
 u32 sub_81DB604(const u8 *);
 // sub_81DB620
 

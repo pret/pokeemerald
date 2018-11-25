@@ -4,8 +4,6 @@
 #include "contest_ai.h"
 #include "contest_effect.h"
 
-extern u16 gContestMonConditions[];
-
 extern const u8 *gAIScriptPtr;
 extern const u8 *gContestAIs[];
 
