@@ -36,7 +36,7 @@
 #include "constants/items.h"
 #include "constants/event_objects.h"
 
-extern u8 gUnknown_0203CEF8[];
+extern u8 gSelectedOrderFromParty[];
 
 struct FrontierBrainMon
 {
@@ -779,7 +779,7 @@ static void sub_81A1968(void)
         break;
     case 4:
         for (i = 0; i < 4; i++)
-            gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gUnknown_0203CEF8[i];
+            gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         break;
     case 6:
         gSaveBlock2Ptr->frontier.field_CA9_b = gSpecialVar_0x8006;
@@ -796,8 +796,8 @@ static void sub_81A1AD4(void)
 
     sub_81B8558();
     for (i = 0; i < gSpecialVar_0x8005; i++)
-        gUnknown_0203CEF8[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
-    ReducePlayerPartyToThree();
+        gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
+    ReducePlayerPartyToSelectedMons();
 }
 
 static void DoSoftReset_(void)

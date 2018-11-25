@@ -34,18 +34,18 @@ extern const u16 gEventObjectPalette8[];
 extern const u16 gEventObjectPalette17[];
 extern const u16 gEventObjectPalette33[];
 extern const u16 gEventObjectPalette34[];
-extern const u8 gUnknown_0858D8EC[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-extern u8 gUnknown_0203CEF8[];
+extern u8 gSelectedOrderFromParty[];
+
+const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
 static void sub_80F8EE8(u8 taskId);
 static void sub_80F9088(u8 taskId);
 static void sub_80F9460(void);
 static void sub_80F94B8(void);
 
-
-void sub_80F87D8(void)
+void SetContestTrainerGfxIds(void)
 {
     gSaveBlock1Ptr->vars[VAR_OBJ_GFX_ID_0 - VARS_START] = gContestMons[0].trainerGfxId;
     gSaveBlock1Ptr->vars[VAR_OBJ_GFX_ID_1 - VARS_START] = gContestMons[1].trainerGfxId;
@@ -393,7 +393,7 @@ _080F8AB6:\n\
 }
 #endif // NONMATCHING
 
-void sub_80F8ACC(void)
+static void ShowContestWinnerCleanup(void)
 {
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
@@ -401,7 +401,7 @@ void sub_80F8ACC(void)
 void ShowContestWinner(void)
 {
     SetMainCallback2(sub_812FDEC);
-    gMain.savedCallback = sub_80F8ACC;
+    gMain.savedCallback = ShowContestWinnerCleanup;
 }
 
 void sub_80F8AFC(void)
@@ -463,7 +463,7 @@ void sub_80F8B94(void)
     }
 }
 
-u8 sub_80F8C7C(void)
+u8 GiveMonArtistRibbon(void)
 {
     u8 hasArtistRibbon;
 
@@ -489,7 +489,7 @@ u8 sub_80F8D24(void)
     return 0;
 }
 
-void sub_80F8D28(void)
+void ShowContestEntryMonPic(void)
 {
     const struct CompressedSpritePalette *palette;
     u32 personality, otId;
@@ -510,13 +510,9 @@ void sub_80F8D28(void)
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         if (gSpecialVar_0x8006 == gContestPlayerMonIndex)
-        {
             HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
-        }
         else
-        {
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
-        }
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedObjectPalette(palette);
@@ -586,7 +582,7 @@ static void sub_80F8EE8(u8 taskId)
     }
 }
 
-void sub_80F8FA0(void)
+void ScriptGetMultiplayerId(void)
 {
     if ((gIsLinkContest & 1) && gUnknown_02039F30 == 4 && !(gIsLinkContest & 2))
         gSpecialVar_Result = GetMultiplayerId();
@@ -594,7 +590,7 @@ void sub_80F8FA0(void)
         gSpecialVar_Result = 4;
 }
 
-void sub_80F8FE8(void)
+void ScriptRandom(void)
 {
     u16 random;
     u16 *scriptPtr;
@@ -782,7 +778,7 @@ void HasEnoughMonsForDoubleBattle(void)
     }
 }
 
-bool8 CheckPartyMonHasHeldItem(u16 item)
+static bool8 CheckPartyMonHasHeldItem(u16 item)
 {
     int i;
 
@@ -835,7 +831,7 @@ void sub_80F9438(void)
 
 static void sub_80F9460(void)
 {
-    switch (gUnknown_0203CEF8[0])
+    switch (gSelectedOrderFromParty[0])
     {
     case 0:
         gSpecialVar_Result = 0;
@@ -856,7 +852,7 @@ void sub_80F9490(void)
 
 static void sub_80F94B8(void)
 {
-    switch (gUnknown_0203CEF8[0])
+    switch (gSelectedOrderFromParty[0])
     {
     case 0:
         gSpecialVar_Result = 0;
@@ -869,7 +865,7 @@ static void sub_80F94B8(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void ReducePlayerPartyToThree(void)
+void ReducePlayerPartyToSelectedMons(void)
 {
     struct Pokemon party[4];
     int i;
@@ -878,8 +874,8 @@ void ReducePlayerPartyToThree(void)
 
     // copy the selected pokemon according to the order.
     for (i = 0; i < 4; i++)
-        if (gUnknown_0203CEF8[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
-            party[i] = gPlayerParty[gUnknown_0203CEF8[i] - 1]; // index is 0 based, not literal
+        if (gSelectedOrderFromParty[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
+            party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
 
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);
 
