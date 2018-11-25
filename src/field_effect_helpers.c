@@ -142,7 +142,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         reflectionSprite->pos2.x = mainSprite->pos2.x;
         reflectionSprite->pos2.y = -mainSprite->pos2.y;
         reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
-        
+
         if (eventObject->unk3_3 == TRUE)
             reflectionSprite->invisible = TRUE;
 
@@ -1022,19 +1022,19 @@ static void SynchroniseSurfAnim(struct EventObject *eventObject, struct Sprite *
         StartSpriteAnimIfDifferent(sprite, surfBlobDirectionAnims[eventObject->movementDirection]);
 }
 
-#ifdef NONMATCHING
 void sub_81556E8(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    s16 x;
-    s16 y;
     u8 i;
+    s16 x = eventObject->currentCoords.x;
+    s16 y = eventObject->currentCoords.y;
+    s32 spriteY = sprite->pos2.y;
 
-    x = eventObject->currentCoords.x;
-    y = eventObject->currentCoords.y;
-    if (sprite->pos2.y == 0 && (x != sprite->data[6] || y != sprite->data[7]))
+    if (spriteY == 0 && (x != sprite->data[6] || y != sprite->data[7]))
     {
-        sprite->data[5] = sprite->pos2.y;
-        for (sprite->data[6] = x, sprite->data[7] = y, i = DIR_SOUTH; i <= DIR_EAST; i ++, x = sprite->data[6], y = sprite->data[7])
+        sprite->data[5] = spriteY;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
+        for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
         {
             MoveCoords(i, &x, &y);
             if (MapGridGetZCoordAt(x, y) == 3)
@@ -1045,87 +1045,6 @@ void sub_81556E8(struct EventObject *eventObject, struct Sprite *sprite)
         }
     }
 }
-#else
-NAKED void sub_81556E8(struct EventObject *eventObject, struct Sprite *sprite)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0x4\n\
-	adds r4, r1, 0\n\
-	ldrh r2, [r0, 0x10]\n\
-	mov r1, sp\n\
-	strh r2, [r1]\n\
-	ldrh r1, [r0, 0x12]\n\
-	mov r0, sp\n\
-	adds r0, 0x2\n\
-	strh r1, [r0]\n\
-	movs r2, 0x26\n\
-	ldrsh r3, [r4, r2]\n\
-	mov r8, r0\n\
-	cmp r3, 0\n\
-	bne _08155770\n\
-	mov r0, sp\n\
-	movs r5, 0\n\
-	ldrsh r2, [r0, r5]\n\
-	movs r5, 0x3A\n\
-	ldrsh r0, [r4, r5]\n\
-	cmp r2, r0\n\
-	bne _08155724\n\
-	lsls r0, r1, 16\n\
-	asrs r0, 16\n\
-	movs r5, 0x3C\n\
-	ldrsh r1, [r4, r5]\n\
-	cmp r0, r1\n\
-	beq _08155770\n\
-_08155724:\n\
-	strh r3, [r4, 0x38]\n\
-	strh r2, [r4, 0x3A]\n\
-	mov r1, r8\n\
-	movs r2, 0\n\
-	ldrsh r0, [r1, r2]\n\
-	strh r0, [r4, 0x3C]\n\
-	movs r5, 0x1\n\
-	mov r7, r8\n\
-	mov r6, sp\n\
-_08155736:\n\
-	adds r0, r5, 0\n\
-	mov r1, sp\n\
-	adds r2, r7, 0\n\
-	bl MoveCoords\n\
-	movs r1, 0\n\
-	ldrsh r0, [r6, r1]\n\
-	movs r2, 0\n\
-	ldrsh r1, [r7, r2]\n\
-	bl MapGridGetZCoordAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x3\n\
-	bne _0815575C\n\
-	ldrh r0, [r4, 0x38]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x38]\n\
-	b _08155770\n\
-_0815575C:\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	ldrh r0, [r4, 0x3A]\n\
-	strh r0, [r6]\n\
-	ldrh r0, [r4, 0x3C]\n\
-	mov r1, r8\n\
-	strh r0, [r1]\n\
-	cmp r5, 0x4\n\
-	bls _08155736\n\
-_08155770:\n\
-	add sp, 0x4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0");
-}
-#endif
 
 static void CreateBobbingEffect(struct EventObject *eventObject, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
@@ -1450,7 +1369,7 @@ void sub_8155EA0(struct Sprite *sprite)
 bool8 sub_8155EA8(struct Sprite *sprite)
 {
     bool8 returnBool = FALSE;
-    
+
     switch (sprite->data[7])
     {
         case 0:
@@ -1470,7 +1389,7 @@ bool8 sub_8155EA8(struct Sprite *sprite)
             sprite->pos2.y += sub_8097728(0x47 - sprite->data[6]);
             break;
     }
-    
+
     SetGpuReg(REG_OFFSET_BG0HOFS, -sprite->pos2.x);
     if (++sprite->data[6] == 72)
     {
@@ -1483,14 +1402,14 @@ bool8 sub_8155EA8(struct Sprite *sprite)
         sprite->pos2.x = 0;
         returnBool = TRUE;
     }
-    
+
     return returnBool;
 }
 
 void sub_8155F80(struct Sprite *sprite)
 {
     u8 i, j;
-    
+
     switch (sprite->data[2])
     {
         case 0:
@@ -1594,7 +1513,7 @@ void sub_8155F80(struct Sprite *sprite)
             FieldEffectStop(sprite, FLDEFF_64);
             break;
     }
-    
+
     if (sprite->data[2] == 1)
     {
         if ((sprite->data[1] & 7) == 0)
@@ -1603,7 +1522,7 @@ void sub_8155F80(struct Sprite *sprite)
             sprite->data[3] = -sprite->data[3];
         sprite->data[1]++;
     }
-    
+
     sprite->data[0]++;
 }
 

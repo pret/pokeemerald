@@ -32,6 +32,8 @@
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
+extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
+
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
 // Static type declarations
@@ -755,67 +757,15 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
     return CreateSprite(&gNewGameBirchObjectTemplate, x, y, subpriority);
 }
 
-#ifdef NONMATCHING
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
+    s32 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-
-    return spriteId;
+    else
+        return spriteId;
 }
-#else
-NAKED
-u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
-{
-    asm_unified("push {r4,r5,lr}\n\
-	sub sp, 0x10\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r3, 0x80\n\
-	lsls r3, 8\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	str r1, [sp]\n\
-	lsls r2, 16\n\
-	asrs r2, 16\n\
-	str r2, [sp, 0x4]\n\
-	movs r1, 0\n\
-	str r1, [sp, 0x8]\n\
-	ldr r1, =gMonPaletteTable\n\
-	lsls r4, r0, 3\n\
-	adds r4, r1\n\
-	ldrh r1, [r4, 0x4]\n\
-	str r1, [sp, 0xC]\n\
-	movs r1, 0\n\
-	adds r2, r3, 0\n\
-	movs r3, 0x1\n\
-	bl CreateMonPicSprite_HandleDeoxys\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldrh r0, [r4, 0x4]\n\
-	bl IndexOfSpritePaletteTag\n\
-	adds r0, 0x10\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	bl PreservePaletteInWeather\n\
-	ldr r0, =0x0000ffff\n\
-	cmp r5, r0\n\
-	beq _080B5FDC\n\
-	lsls r0, r5, 24\n\
-	lsrs r0, 24\n\
-	b _080B5FDE\n\
-	.pool\n\
-_080B5FDC:\n\
-	movs r0, 0x40\n\
-_080B5FDE:\n\
-	add sp, 0x10\n\
-	pop {r4,r5}\n\
-	pop {r1}\n\
-	bx r1");
-}
-#endif //NONMATCHING
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
 {
@@ -824,8 +774,8 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return 0x40;
-
-    return spriteId;
+    else
+        return spriteId;
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
