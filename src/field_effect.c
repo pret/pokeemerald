@@ -3073,134 +3073,134 @@ NAKED
 u8 sub_80B8F98(void)
 {
     asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldr r0, =gFieldEffectObjectTemplatePointers\n\
-	adds r0, 0x90\n\
-	ldr r0, [r0]\n\
-	movs r2, 0x18\n\
-	negs r2, r2\n\
-	movs r1, 0x78\n\
-	movs r3, 0x1\n\
-	bl CreateSprite\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	lsls r1, r0, 4\n\
-	add r1, r8\n\
-	lsls r1, 2\n\
-	ldr r0, =gSprites\n\
-	adds r1, r0\n\
-	ldrb r2, [r1, 0x5]\n\
-	movs r0, 0xD\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	movs r2, 0x4\n\
-	orrs r0, r2\n\
-	movs r2, 0xF\n\
-	ands r0, r2\n\
-	movs r2, 0x40\n\
-	orrs r0, r2\n\
-	strb r0, [r1, 0x5]\n\
-	movs r2, 0\n\
-	strh r2, [r1, 0x2E]\n\
-	strh r2, [r1, 0x30]\n\
-	strh r2, [r1, 0x32]\n\
-	ldr r0, =0x0000ffff\n\
-	strh r0, [r1, 0x34]\n\
-	ldrh r0, [r1, 0x22]\n\
-	strh r0, [r1, 0x36]\n\
-	strh r2, [r1, 0x38]\n\
-	ldr r1, =0x00003e41\n\
-	movs r0, 0x50\n\
-	bl SetGpuReg\n\
-	ldr r1, =0x00000e0e\n\
-	movs r0, 0x52\n\
-	bl SetGpuReg\n\
-	ldr r1, =0x00003f3f\n\
-	movs r0, 0x48\n\
-	bl SetGpuReg\n\
-	ldr r0, =gUnknown_0855B610\n\
-	movs r1, 0xC0\n\
-	movs r2, 0x20\n\
-	bl LoadPalette\n\
-	movs r0, 0x12\n\
-	movs r1, 0x78\n\
-	bl SetGpuReg\n\
-	movs r4, 0x3\n\
-	ldr r7, =0x0600f800\n\
-	ldr r0, =0x0000bff4\n\
-	adds r6, r0, 0\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    ldr r0, =gFieldEffectObjectTemplatePointers\n\
+    adds r0, 0x90\n\
+    ldr r0, [r0]\n\
+    movs r2, 0x18\n\
+    negs r2, r2\n\
+    movs r1, 0x78\n\
+    movs r3, 0x1\n\
+    bl CreateSprite\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    lsls r1, r0, 4\n\
+    add r1, r8\n\
+    lsls r1, 2\n\
+    ldr r0, =gSprites\n\
+    adds r1, r0\n\
+    ldrb r2, [r1, 0x5]\n\
+    movs r0, 0xD\n\
+    negs r0, r0\n\
+    ands r0, r2\n\
+    movs r2, 0x4\n\
+    orrs r0, r2\n\
+    movs r2, 0xF\n\
+    ands r0, r2\n\
+    movs r2, 0x40\n\
+    orrs r0, r2\n\
+    strb r0, [r1, 0x5]\n\
+    movs r2, 0\n\
+    strh r2, [r1, 0x2E]\n\
+    strh r2, [r1, 0x30]\n\
+    strh r2, [r1, 0x32]\n\
+    ldr r0, =0x0000ffff\n\
+    strh r0, [r1, 0x34]\n\
+    ldrh r0, [r1, 0x22]\n\
+    strh r0, [r1, 0x36]\n\
+    strh r2, [r1, 0x38]\n\
+    ldr r1, =0x00003e41\n\
+    movs r0, 0x50\n\
+    bl SetGpuReg\n\
+    ldr r1, =0x00000e0e\n\
+    movs r0, 0x52\n\
+    bl SetGpuReg\n\
+    ldr r1, =0x00003f3f\n\
+    movs r0, 0x48\n\
+    bl SetGpuReg\n\
+    ldr r0, =gUnknown_0855B610\n\
+    movs r1, 0xC0\n\
+    movs r2, 0x20\n\
+    bl LoadPalette\n\
+    movs r0, 0x12\n\
+    movs r1, 0x78\n\
+    bl SetGpuReg\n\
+    movs r4, 0x3\n\
+    ldr r7, =0x0600f800\n\
+    ldr r0, =0x0000bff4\n\
+    adds r6, r0, 0\n\
 _080B901A:\n\
-	movs r2, 0xC\n\
-	lsls r0, r4, 1\n\
-	lsls r5, r4, 5\n\
-	adds r0, r4\n\
-	lsls r3, r0, 1\n\
+    movs r2, 0xC\n\
+    lsls r0, r4, 1\n\
+    lsls r5, r4, 5\n\
+    adds r0, r4\n\
+    lsls r3, r0, 1\n\
 _080B9024:\n\
-	adds r0, r5, r2\n\
-	lsls r0, 1\n\
-	adds r0, r7\n\
-	adds r1, r2, r6\n\
-	adds r1, r3, r1\n\
-	adds r1, 0x1\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0x11\n\
-	bls _080B9024\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0xE\n\
-	bls _080B901A\n\
-	movs r0, 0\n\
-	ldr r5, =gUnknown_0855B630\n\
+    adds r0, r5, r2\n\
+    lsls r0, 1\n\
+    adds r0, r7\n\
+    adds r1, r2, r6\n\
+    adds r1, r3, r1\n\
+    adds r1, 0x1\n\
+    strh r1, [r0]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0x11\n\
+    bls _080B9024\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0xE\n\
+    bls _080B901A\n\
+    movs r0, 0\n\
+    ldr r5, =gUnknown_0855B630\n\
 _080B904A:\n\
-	movs r4, 0\n\
-	adds r7, r0, 0x1\n\
-	lsls r6, r0, 5\n\
+    movs r4, 0\n\
+    adds r7, r0, 0x1\n\
+    lsls r6, r0, 5\n\
 _080B9050:\n\
-	lsls r1, r4, 2\n\
-	adds r1, r6, r1\n\
-	ldr r0, =0x06008020\n\
-	adds r3, r1, r0\n\
-	adds r0, r1, 0x1\n\
-	adds r0, r5\n\
-	ldrb r2, [r0]\n\
-	lsls r2, 8\n\
-	adds r0, r1, r5\n\
-	ldrb r0, [r0]\n\
-	adds r0, r2\n\
-	strh r0, [r3]\n\
-	ldr r0, =0x06008022\n\
-	adds r3, r1, r0\n\
-	adds r0, r1, 0x3\n\
-	adds r0, r5\n\
-	ldrb r2, [r0]\n\
-	lsls r2, 8\n\
-	adds r1, 0x2\n\
-	adds r1, r5\n\
-	ldrb r0, [r1]\n\
-	adds r0, r2\n\
-	strh r0, [r3]\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x7\n\
-	bls _080B9050\n\
-	lsls r0, r7, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x59\n\
-	bls _080B904A\n\
-	mov r0, r8\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.pool");
+    lsls r1, r4, 2\n\
+    adds r1, r6, r1\n\
+    ldr r0, =0x06008020\n\
+    adds r3, r1, r0\n\
+    adds r0, r1, 0x1\n\
+    adds r0, r5\n\
+    ldrb r2, [r0]\n\
+    lsls r2, 8\n\
+    adds r0, r1, r5\n\
+    ldrb r0, [r0]\n\
+    adds r0, r2\n\
+    strh r0, [r3]\n\
+    ldr r0, =0x06008022\n\
+    adds r3, r1, r0\n\
+    adds r0, r1, 0x3\n\
+    adds r0, r5\n\
+    ldrb r2, [r0]\n\
+    lsls r2, 8\n\
+    adds r1, 0x2\n\
+    adds r1, r5\n\
+    ldrb r0, [r1]\n\
+    adds r0, r2\n\
+    strh r0, [r3]\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0x7\n\
+    bls _080B9050\n\
+    lsls r0, r7, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x59\n\
+    bls _080B904A\n\
+    mov r0, r8\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .pool");
 }
 #endif // NONMATCHING
 

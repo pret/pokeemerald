@@ -479,27 +479,27 @@ void SetBgAttribute(u8 bg, u8 attributeId, u8 value)
 {
     switch (attributeId)
     {
-	case 1:
-		SetBgControlAttributes(bg, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
-		break;
-	case 2:
-		SetBgControlAttributes(bg, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
-		break;
-	case 3:
-		SetBgControlAttributes(bg, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF);
-		break;
-	case 4:
-		SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF);
-		break;
-	case 7:
-		SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF);
-		break;
-	case 5:
-		SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF);
-		break;
-	case 6:
-		SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value);
-		break;
+    case 1:
+        SetBgControlAttributes(bg, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
+        break;
+    case 2:
+        SetBgControlAttributes(bg, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
+        break;
+    case 3:
+        SetBgControlAttributes(bg, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF);
+        break;
+    case 4:
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF);
+        break;
+    case 7:
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF);
+        break;
+    case 5:
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF);
+        break;
+    case 6:
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value);
+        break;
     }
 }
 
@@ -507,36 +507,36 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
 {
     switch (attributeId)
     {
-	case 1:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX);
-	case 2:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_MAPBASEINDEX);
-	case 3:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
-	case 4:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE);
-	case 7:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_PRIORITY);
-	case 5:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
-	case 6:
-		return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
-	case 8:
-		switch (GetBgType(bg))
-		{
-			case 0:
-				return GetBgMetricTextMode(bg, 0) * 0x800;
-			case 1:
-				return GetBgMetricAffineMode(bg, 0) * 0x100;
-			default:
-				return 0;
-		}
-	case 9:
-		return GetBgType(bg);
-	case 10:
-		return sGpuBgConfigs2[bg].baseTile;
-	default:
-		return -1;
+    case 1:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX);
+    case 2:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_MAPBASEINDEX);
+    case 3:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
+    case 4:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE);
+    case 7:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_PRIORITY);
+    case 5:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
+    case 6:
+        return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
+    case 8:
+        switch (GetBgType(bg))
+        {
+            case 0:
+                return GetBgMetricTextMode(bg, 0) * 0x800;
+            case 1:
+                return GetBgMetricAffineMode(bg, 0) * 0x100;
+            default:
+                return 0;
+        }
+    case 9:
+        return GetBgType(bg);
+    case 10:
+        return sGpuBgConfigs2[bg].baseTile;
+    default:
+        return -1;
     }
 }
 
@@ -553,58 +553,58 @@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
 
     switch (op)
     {
-	case 0:
-	default:
-		sGpuBgConfigs2[bg].bg_x = value;
-		break;
-	case 1:
-		sGpuBgConfigs2[bg].bg_x += value;
-		break;
-	case 2:
-		sGpuBgConfigs2[bg].bg_x -= value;
-		break;
+    case 0:
+    default:
+        sGpuBgConfigs2[bg].bg_x = value;
+        break;
+    case 1:
+        sGpuBgConfigs2[bg].bg_x += value;
+        break;
+    case 2:
+        sGpuBgConfigs2[bg].bg_x -= value;
+        break;
     }
 
     mode = GetBgMode();
 
     switch (bg)
     {
-	case 0:
-		temp1 = sGpuBgConfigs2[0].bg_x >> 0x8;
-		SetGpuReg(REG_OFFSET_BG0HOFS, temp1);
-		break;
-	case 1:
-		temp1 = sGpuBgConfigs2[1].bg_x >> 0x8;
-		SetGpuReg(REG_OFFSET_BG1HOFS, temp1);
-		break;
-	case 2:
-		if (mode == 0)
-		{
-			temp1 = sGpuBgConfigs2[2].bg_x >> 0x8;
-			SetGpuReg(REG_OFFSET_BG2HOFS, temp1);
-		}
-		else
-		{
-			temp1 = sGpuBgConfigs2[2].bg_x >> 0x10;
-			temp2 = sGpuBgConfigs2[2].bg_x & 0xFFFF;
-			SetGpuReg(REG_OFFSET_BG2X_H, temp1);
-			SetGpuReg(REG_OFFSET_BG2X_L, temp2);
-		}
-		break;
-	case 3:
-		if (mode == 0)
-		{
-			temp1 = sGpuBgConfigs2[3].bg_x >> 0x8;
-			SetGpuReg(REG_OFFSET_BG3HOFS, temp1);
-		}
-		else if (mode == 2)
-		{
-			temp1 = sGpuBgConfigs2[3].bg_x >> 0x10;
-			temp2 = sGpuBgConfigs2[3].bg_x & 0xFFFF;
-			SetGpuReg(REG_OFFSET_BG3X_H, temp1);
-			SetGpuReg(REG_OFFSET_BG3X_L, temp2);
-		}
-		break;
+    case 0:
+        temp1 = sGpuBgConfigs2[0].bg_x >> 0x8;
+        SetGpuReg(REG_OFFSET_BG0HOFS, temp1);
+        break;
+    case 1:
+        temp1 = sGpuBgConfigs2[1].bg_x >> 0x8;
+        SetGpuReg(REG_OFFSET_BG1HOFS, temp1);
+        break;
+    case 2:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[2].bg_x >> 0x8;
+            SetGpuReg(REG_OFFSET_BG2HOFS, temp1);
+        }
+        else
+        {
+            temp1 = sGpuBgConfigs2[2].bg_x >> 0x10;
+            temp2 = sGpuBgConfigs2[2].bg_x & 0xFFFF;
+            SetGpuReg(REG_OFFSET_BG2X_H, temp1);
+            SetGpuReg(REG_OFFSET_BG2X_L, temp2);
+        }
+        break;
+    case 3:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_x >> 0x8;
+            SetGpuReg(REG_OFFSET_BG3HOFS, temp1);
+        }
+        else if (mode == 2)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_x >> 0x10;
+            temp2 = sGpuBgConfigs2[3].bg_x & 0xFFFF;
+            SetGpuReg(REG_OFFSET_BG3X_H, temp1);
+            SetGpuReg(REG_OFFSET_BG3X_L, temp2);
+        }
+        break;
     }
 
     return sGpuBgConfigs2[bg].bg_x;
@@ -617,7 +617,7 @@ u32 GetBgX(u8 bg)
     else if (GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
         return -1;
     else
-		return sGpuBgConfigs2[bg].bg_x;
+        return sGpuBgConfigs2[bg].bg_x;
 }
 
 u32 ChangeBgY(u8 bg, u32 value, u8 op)
@@ -633,58 +633,58 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
 
     switch (op)
     {
-	case 0:
-	default:
-		sGpuBgConfigs2[bg].bg_y = value;
-		break;
-	case 1:
-		sGpuBgConfigs2[bg].bg_y += value;
-		break;
-	case 2:
-		sGpuBgConfigs2[bg].bg_y -= value;
-		break;
+    case 0:
+    default:
+        sGpuBgConfigs2[bg].bg_y = value;
+        break;
+    case 1:
+        sGpuBgConfigs2[bg].bg_y += value;
+        break;
+    case 2:
+        sGpuBgConfigs2[bg].bg_y -= value;
+        break;
     }
 
     mode = GetBgMode();
 
     switch (bg)
     {
-	case 0:
-		temp1 = sGpuBgConfigs2[0].bg_y >> 0x8;
-		SetGpuReg(REG_OFFSET_BG0VOFS, temp1);
-		break;
-	case 1:
-		temp1 = sGpuBgConfigs2[1].bg_y >> 0x8;
-		SetGpuReg(REG_OFFSET_BG1VOFS, temp1);
-		break;
-	case 2:
-		if (mode == 0)
-		{
-			temp1 = sGpuBgConfigs2[2].bg_y >> 0x8;
-			SetGpuReg(REG_OFFSET_BG2VOFS, temp1);
-		}
-		else
-		{
-			temp1 = sGpuBgConfigs2[2].bg_y >> 0x10;
-			temp2 = sGpuBgConfigs2[2].bg_y & 0xFFFF;
-			SetGpuReg(REG_OFFSET_BG2Y_H, temp1);
-			SetGpuReg(REG_OFFSET_BG2Y_L, temp2);
-		}
-		break;
-	case 3:
-		if (mode == 0)
-		{
-			temp1 = sGpuBgConfigs2[3].bg_y >> 0x8;
-			SetGpuReg(REG_OFFSET_BG3VOFS, temp1);
-		}
-		else if (mode == 2)
-		{
-			temp1 = sGpuBgConfigs2[3].bg_y >> 0x10;
-			temp2 = sGpuBgConfigs2[3].bg_y & 0xFFFF;
-			SetGpuReg(REG_OFFSET_BG3Y_H, temp1);
-			SetGpuReg(REG_OFFSET_BG3Y_L, temp2);
-		}
-		break;
+    case 0:
+        temp1 = sGpuBgConfigs2[0].bg_y >> 0x8;
+        SetGpuReg(REG_OFFSET_BG0VOFS, temp1);
+        break;
+    case 1:
+        temp1 = sGpuBgConfigs2[1].bg_y >> 0x8;
+        SetGpuReg(REG_OFFSET_BG1VOFS, temp1);
+        break;
+    case 2:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[2].bg_y >> 0x8;
+            SetGpuReg(REG_OFFSET_BG2VOFS, temp1);
+        }
+        else
+        {
+            temp1 = sGpuBgConfigs2[2].bg_y >> 0x10;
+            temp2 = sGpuBgConfigs2[2].bg_y & 0xFFFF;
+            SetGpuReg(REG_OFFSET_BG2Y_H, temp1);
+            SetGpuReg(REG_OFFSET_BG2Y_L, temp2);
+        }
+        break;
+    case 3:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_y >> 0x8;
+            SetGpuReg(REG_OFFSET_BG3VOFS, temp1);
+        }
+        else if (mode == 2)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_y >> 0x10;
+            temp2 = sGpuBgConfigs2[3].bg_y & 0xFFFF;
+            SetGpuReg(REG_OFFSET_BG3Y_H, temp1);
+            SetGpuReg(REG_OFFSET_BG3Y_L, temp2);
+        }
+        break;
     }
 
     return sGpuBgConfigs2[bg].bg_y;
@@ -703,59 +703,59 @@ u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
 
     switch (op)
     {
-	case 0:
-	default:
-		sGpuBgConfigs2[bg].bg_y = value;
-		break;
-	case 1:
-		sGpuBgConfigs2[bg].bg_y += value;
-		break;
-	case 2:
-		sGpuBgConfigs2[bg].bg_y -= value;
-		break;
+    case 0:
+    default:
+        sGpuBgConfigs2[bg].bg_y = value;
+        break;
+    case 1:
+        sGpuBgConfigs2[bg].bg_y += value;
+        break;
+    case 2:
+        sGpuBgConfigs2[bg].bg_y -= value;
+        break;
     }
 
     mode = GetBgMode();
 
     switch (bg)
     {
-	case 0:
-		temp1 = sGpuBgConfigs2[0].bg_y >> 0x8;
-		SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, temp1);
-		break;
-	case 1:
-		temp1 = sGpuBgConfigs2[1].bg_y >> 0x8;
-		SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, temp1);
-		break;
-	case 2:
-		if (mode == 0)
-		{
-			temp1 = sGpuBgConfigs2[2].bg_y >> 0x8;
-			SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, temp1);
+    case 0:
+        temp1 = sGpuBgConfigs2[0].bg_y >> 0x8;
+        SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, temp1);
+        break;
+    case 1:
+        temp1 = sGpuBgConfigs2[1].bg_y >> 0x8;
+        SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, temp1);
+        break;
+    case 2:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[2].bg_y >> 0x8;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, temp1);
 
-		}
-		else
-		{
-			temp1 = sGpuBgConfigs2[2].bg_y >> 0x10;
-			temp2 = sGpuBgConfigs2[2].bg_y & 0xFFFF;
-			SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, temp1);
-			SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, temp2);
-		}
-		break;
-	case 3:
-		if (mode == 0)
-		{
-			temp1 = sGpuBgConfigs2[3].bg_y >> 0x8;
-			SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, temp1);
-		}
-		else if (mode == 2)
-		{
-			temp1 = sGpuBgConfigs2[3].bg_y >> 0x10;
-			temp2 = sGpuBgConfigs2[3].bg_y & 0xFFFF;
-			SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, temp1);
-			SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, temp2);
-		}
-		break;
+        }
+        else
+        {
+            temp1 = sGpuBgConfigs2[2].bg_y >> 0x10;
+            temp2 = sGpuBgConfigs2[2].bg_y & 0xFFFF;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, temp1);
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, temp2);
+        }
+        break;
+    case 3:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_y >> 0x8;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, temp1);
+        }
+        else if (mode == 2)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_y >> 0x10;
+            temp2 = sGpuBgConfigs2[3].bg_y & 0xFFFF;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, temp1);
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, temp2);
+        }
+        break;
     }
 
     return sGpuBgConfigs2[bg].bg_y;
@@ -768,7 +768,7 @@ u32 GetBgY(u8 bg)
     else if (GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
         return -1;
     else
-		return sGpuBgConfigs2[bg].bg_y;
+        return sGpuBgConfigs2[bg].bg_y;
 }
 
 void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
@@ -790,57 +790,57 @@ u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
 
     switch (a2)
     {
-	case 0:
-	default:
-		test1 = a1 & 0xF;
-		test2 = a1 >> 0x4;
-		break;
-	case 1:
-		test1 = a1 & 0xF;
-		break;
-	case 2:
-		if ((test1 + a1) > 0xF)
-		{
-			test1 = 0xF;
-		}
-		else
-		{
-			test1 += a1;
-		}
-		break;
-	case 3:
-		if ((test1 - a1) < 0)
-		{
-			test1 = 0x0;
-		}
-		else
-		{
-			test1 -= a1;
-		}
-		break;
-	case 4:
-		test2 = a1 & 0xF;
-		break;
-	case 5:
-		if ((test2 + a1) > 0xF)
-		{
-			test2 = 0xF;
-		}
-		else
-		{
-			test2 += a1;
-		}
-		break;
-	case 6:
-		if ((test2 - a1) < 0)
-		{
-			test2 = 0x0;
-		}
-		else
-		{
-			test2 -= a1;
-		}
-		break;
+    case 0:
+    default:
+        test1 = a1 & 0xF;
+        test2 = a1 >> 0x4;
+        break;
+    case 1:
+        test1 = a1 & 0xF;
+        break;
+    case 2:
+        if ((test1 + a1) > 0xF)
+        {
+            test1 = 0xF;
+        }
+        else
+        {
+            test1 += a1;
+        }
+        break;
+    case 3:
+        if ((test1 - a1) < 0)
+        {
+            test1 = 0x0;
+        }
+        else
+        {
+            test1 -= a1;
+        }
+        break;
+    case 4:
+        test2 = a1 & 0xF;
+        break;
+    case 5:
+        if ((test2 + a1) > 0xF)
+        {
+            test2 = 0xF;
+        }
+        else
+        {
+            test2 += a1;
+        }
+        break;
+    case 6:
+        if ((test2 - a1) < 0)
+        {
+            test2 = 0x0;
+        }
+        else
+        {
+            test2 -= a1;
+        }
+        break;
     }
 
     result |= ((test2 << 0x4) & 0xF0);
@@ -874,7 +874,7 @@ void* GetBgTilemapBuffer(u8 bg)
     else if (GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
         return NULL;
     else
-		return sGpuBgConfigs2[bg].tilemap;
+        return sGpuBgConfigs2[bg].tilemap;
 }
 
 void CopyToBgTilemapBuffer(u8 bg, const void *src, u16 mode, u16 destOffset)
@@ -896,15 +896,15 @@ void CopyBgTilemapBufferToVram(u8 bg)
     {
         switch (GetBgType(bg))
         {
-		case 0:
-			sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
-			break;
-		case 1:
-			sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
-			break;
-		default:
-			sizeToLoad = 0;
-			break;
+        case 0:
+            sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
+            break;
+        case 1:
+            sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
+            break;
+        default:
+            sizeToLoad = 0;
+            break;
         }
         LoadBgVram(bg, sGpuBgConfigs2[bg].tilemap, sizeToLoad, 0, 2);
     }
@@ -921,27 +921,27 @@ void CopyToBgTilemapBufferRect(u8 bg, const void* src, u8 destX, u8 destY, u8 wi
     {
         switch (GetBgType(bg))
         {
-		case 0:
-			srcCopy = src;
-			for (destY16 = destY; destY16 < (destY + height); destY16++)
-			{
-				for (destX16 = destX; destX16 < (destX + width); destX16++)
-				{
-					((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
-				}
-			}
-			break;
-		case 1:
-			srcCopy = src;
-			mode = GetBgMetricAffineMode(bg, 0x1);
-			for (destY16 = destY; destY16 < (destY + height); destY16++)
-			{
-				for (destX16 = destX; destX16 < (destX + width); destX16++)
-				{
-					((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
-				}
-			}
-			break;
+        case 0:
+            srcCopy = src;
+            for (destY16 = destY; destY16 < (destY + height); destY16++)
+            {
+                for (destX16 = destX; destX16 < (destX + width); destX16++)
+                {
+                    ((u16*)sGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
+                }
+            }
+            break;
+        case 1:
+            srcCopy = src;
+            mode = GetBgMetricAffineMode(bg, 0x1);
+            for (destY16 = destY; destY16 < (destY + height); destY16++)
+            {
+                for (destX16 = destX; destX16 < (destX + width); destX16++)
+                {
+                    ((u8*)sGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
+                }
+            }
+            break;
         }
     }
 }

@@ -1595,102 +1595,102 @@ static void sub_81561FC(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
 NAKED void sub_81561FC(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
 {
     asm_unified("push {r4-r7,lr}\n\
-	adds r6, r0, 0\n\
-	adds r0, r1, 0\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	adds r1, r6, 0\n\
-	bl SetObjectSubpriorityByZCoord\n\
-	movs r7, 0\n\
+    adds r6, r0, 0\n\
+    adds r0, r1, 0\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    adds r1, r6, 0\n\
+    bl SetObjectSubpriorityByZCoord\n\
+    movs r7, 0\n\
 _08156212:\n\
-	lsls r0, r7, 3\n\
-	adds r0, r7\n\
-	lsls r0, 2\n\
-	ldr r1, =gEventObjects\n\
-	adds r4, r0, r1\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _081562B4\n\
-	ldrb r0, [r4, 0x5]\n\
-	bl GetEventObjectGraphicsInfo\n\
-	ldrb r1, [r4, 0x4]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	ldr r1, =gSprites\n\
-	adds r5, r0, r1\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x28\n\
-	movs r2, 0\n\
-	ldrsb r2, [r0, r2]\n\
-	ldrh r0, [r6, 0x20]\n\
-	adds r1, r0, r2\n\
-	subs r0, r2\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	movs r0, 0x20\n\
-	ldrsh r2, [r5, r0]\n\
-	cmp r1, r2\n\
-	bge _081562B4\n\
-	lsls r0, r4, 16\n\
-	asrs r0, 16\n\
-	cmp r0, r2\n\
-	ble _081562B4\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x29\n\
-	movs r3, 0\n\
-	ldrsb r3, [r0, r3]\n\
-	ldrh r2, [r5, 0x22]\n\
-	adds r2, r3\n\
-	ldrh r4, [r5, 0x22]\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x29\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	ldrh r0, [r6, 0x22]\n\
-	subs r0, r1\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	adds r3, r0, r3\n\
-	lsls r2, 16\n\
-	asrs r2, 16\n\
-	lsls r3, 16\n\
-	asrs r3, 16\n\
-	cmp r2, r3\n\
-	blt _0815628C\n\
-	cmp r2, r0\n\
-	bge _081562B4\n\
+    lsls r0, r7, 3\n\
+    adds r0, r7\n\
+    lsls r0, 2\n\
+    ldr r1, =gEventObjects\n\
+    adds r4, r0, r1\n\
+    ldrb r0, [r4]\n\
+    lsls r0, 31\n\
+    cmp r0, 0\n\
+    beq _081562B4\n\
+    ldrb r0, [r4, 0x5]\n\
+    bl GetEventObjectGraphicsInfo\n\
+    ldrb r1, [r4, 0x4]\n\
+    lsls r0, r1, 4\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    ldr r1, =gSprites\n\
+    adds r5, r0, r1\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x28\n\
+    movs r2, 0\n\
+    ldrsb r2, [r0, r2]\n\
+    ldrh r0, [r6, 0x20]\n\
+    adds r1, r0, r2\n\
+    subs r0, r2\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    lsls r1, 16\n\
+    asrs r1, 16\n\
+    movs r0, 0x20\n\
+    ldrsh r2, [r5, r0]\n\
+    cmp r1, r2\n\
+    bge _081562B4\n\
+    lsls r0, r4, 16\n\
+    asrs r0, 16\n\
+    cmp r0, r2\n\
+    ble _081562B4\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x29\n\
+    movs r3, 0\n\
+    ldrsb r3, [r0, r3]\n\
+    ldrh r2, [r5, 0x22]\n\
+    adds r2, r3\n\
+    ldrh r4, [r5, 0x22]\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x29\n\
+    movs r1, 0\n\
+    ldrsb r1, [r0, r1]\n\
+    ldrh r0, [r6, 0x22]\n\
+    subs r0, r1\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    adds r3, r0, r3\n\
+    lsls r2, 16\n\
+    asrs r2, 16\n\
+    lsls r3, 16\n\
+    asrs r3, 16\n\
+    cmp r2, r3\n\
+    blt _0815628C\n\
+    cmp r2, r0\n\
+    bge _081562B4\n\
 _0815628C:\n\
-	lsls r0, r4, 16\n\
-	asrs r0, 16\n\
-	cmp r0, r3\n\
-	ble _081562B4\n\
-	adds r2, r6, 0\n\
-	adds r2, 0x43\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x43\n\
-	ldrb r1, [r0]\n\
-	ldrb r0, [r2]\n\
-	cmp r0, r1\n\
-	bhi _081562B4\n\
-	adds r0, r1, 0x2\n\
-	strb r0, [r2]\n\
-	b _081562BE\n\
-	.pool\n\
+    lsls r0, r4, 16\n\
+    asrs r0, 16\n\
+    cmp r0, r3\n\
+    ble _081562B4\n\
+    adds r2, r6, 0\n\
+    adds r2, 0x43\n\
+    adds r0, r5, 0\n\
+    adds r0, 0x43\n\
+    ldrb r1, [r0]\n\
+    ldrb r0, [r2]\n\
+    cmp r0, r1\n\
+    bhi _081562B4\n\
+    adds r0, r1, 0x2\n\
+    strb r0, [r2]\n\
+    b _081562BE\n\
+    .pool\n\
 _081562B4:\n\
-	adds r0, r7, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	cmp r7, 0xF\n\
-	bls _08156212\n\
+    adds r0, r7, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r7, r0, 24\n\
+    cmp r7, 0xF\n\
+    bls _08156212\n\
 _081562BE:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0");
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0");
 }
 #endif

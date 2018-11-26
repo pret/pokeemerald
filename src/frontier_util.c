@@ -111,397 +111,397 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][3] =
         // Silver Symbol.
         {
             {
-				.species = SPECIES_ALAKAZAM,
-				.heldItem = ITEM_BRIGHT_POWDER,
-				.fixedIV = 24,
-				.nature = 15,
-				.evs = {106, 0, 152, 152, 100, 0},
-				.moves = {MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH, MOVE_DISABLE},
+                .species = SPECIES_ALAKAZAM,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .fixedIV = 24,
+                .nature = 15,
+                .evs = {106, 0, 152, 152, 100, 0},
+                .moves = {MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH, MOVE_DISABLE},
             },
             {
-				.species = SPECIES_ENTEI,
-				.heldItem = ITEM_LUM_BERRY,
-				.fixedIV = 24,
-				.nature = 1,
-				.evs = {100, 152, 152, 0, 100, 6},
-				.moves = {MOVE_FIRE_BLAST, MOVE_CALM_MIND, MOVE_RETURN, MOVE_ROAR},
+                .species = SPECIES_ENTEI,
+                .heldItem = ITEM_LUM_BERRY,
+                .fixedIV = 24,
+                .nature = 1,
+                .evs = {100, 152, 152, 0, 100, 6},
+                .moves = {MOVE_FIRE_BLAST, MOVE_CALM_MIND, MOVE_RETURN, MOVE_ROAR},
             },
             {
-				.species = SPECIES_SNORLAX,
-				.heldItem = ITEM_QUICK_CLAW,
-				.fixedIV = 24,
-				.nature = 3,
-				.evs = {152, 152, 0, 0, 106, 100},
-				.moves = {MOVE_BODY_SLAM, MOVE_BELLY_DRUM, MOVE_YAWN, MOVE_SHADOW_BALL},
+                .species = SPECIES_SNORLAX,
+                .heldItem = ITEM_QUICK_CLAW,
+                .fixedIV = 24,
+                .nature = 3,
+                .evs = {152, 152, 0, 0, 106, 100},
+                .moves = {MOVE_BODY_SLAM, MOVE_BELLY_DRUM, MOVE_YAWN, MOVE_SHADOW_BALL},
             },
         },
         // Gold Symbol.
         {
             {
-				.species = SPECIES_RAIKOU,
-				.heldItem = ITEM_LUM_BERRY,
-				.fixedIV = 31,
-				.nature = 15,
-				.evs = {158, 0, 252, 100, 0, 0},
-				.moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_REFLECT, MOVE_REST},
+                .species = SPECIES_RAIKOU,
+                .heldItem = ITEM_LUM_BERRY,
+                .fixedIV = 31,
+                .nature = 15,
+                .evs = {158, 0, 252, 100, 0, 0},
+                .moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_REFLECT, MOVE_REST},
             },
             {
-				.species = SPECIES_LATIOS,
-				.heldItem = ITEM_BRIGHT_POWDER,
-				.fixedIV = 31,
-				.nature = 15,
-				.evs = {252, 0, 252, 6, 0, 0},
-				.moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_DRAGON_CLAW},
+                .species = SPECIES_LATIOS,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .fixedIV = 31,
+                .nature = 15,
+                .evs = {252, 0, 252, 6, 0, 0},
+                .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_DRAGON_CLAW},
             },
             {
-				.species = SPECIES_SNORLAX,
-				.heldItem = ITEM_CHESTO_BERRY,
-				.fixedIV = 31,
-				.nature = 3,
-				.evs = {252, 252, 0, 0, 6, 0},
-				.moves = {MOVE_CURSE, MOVE_RETURN, MOVE_REST, MOVE_SHADOW_BALL},
+                .species = SPECIES_SNORLAX,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .fixedIV = 31,
+                .nature = 3,
+                .evs = {252, 252, 0, 0, 6, 0},
+                .moves = {MOVE_CURSE, MOVE_RETURN, MOVE_REST, MOVE_SHADOW_BALL},
             },
         },
     },
-	[FRONTIER_FACILITY_DOME] =
-	{
+    [FRONTIER_FACILITY_DOME] =
+    {
         // Silver Symbol.
         {
             {
-				.species = SPECIES_SWAMPERT,
-				.heldItem = ITEM_FOCUS_BAND,
-				.fixedIV = 20,
-				.nature = 2,
-				.evs = {152, 152, 106, 0, 100, 0},
-				.moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_COUNTER},
+                .species = SPECIES_SWAMPERT,
+                .heldItem = ITEM_FOCUS_BAND,
+                .fixedIV = 20,
+                .nature = 2,
+                .evs = {152, 152, 106, 0, 100, 0},
+                .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_COUNTER},
             },
             {
-				.species = SPECIES_SALAMENCE,
-				.heldItem = ITEM_LUM_BERRY,
-				.fixedIV = 20,
-				.nature = 3,
-				.evs = {152, 152, 106, 100, 0, 0},
-				.moves = {MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE},
+                .species = SPECIES_SALAMENCE,
+                .heldItem = ITEM_LUM_BERRY,
+                .fixedIV = 20,
+                .nature = 3,
+                .evs = {152, 152, 106, 100, 0, 0},
+                .moves = {MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE},
             },
             {
-				.species = SPECIES_CHARIZARD,
-				.heldItem = ITEM_WHITE_HERB,
-				.fixedIV = 20,
-				.nature = 17,
-				.evs = {100, 152, 106, 152, 0, 0},
-				.moves = {MOVE_OVERHEAT, MOVE_ROCK_SLIDE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE},
+                .species = SPECIES_CHARIZARD,
+                .heldItem = ITEM_WHITE_HERB,
+                .fixedIV = 20,
+                .nature = 17,
+                .evs = {100, 152, 106, 152, 0, 0},
+                .moves = {MOVE_OVERHEAT, MOVE_ROCK_SLIDE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE},
             },
         },
         // Gold Symbol.
         {
             {
-				.species = SPECIES_SWAMPERT,
-				.heldItem = ITEM_LEFTOVERS,
-				.fixedIV = 31,
-				.nature = 2,
-				.evs = {252, 252, 6, 0, 0, 0},
-				.moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_MIRROR_COAT},
+                .species = SPECIES_SWAMPERT,
+                .heldItem = ITEM_LEFTOVERS,
+                .fixedIV = 31,
+                .nature = 2,
+                .evs = {252, 252, 6, 0, 0, 0},
+                .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_MIRROR_COAT},
             },
             {
-				.species = SPECIES_METAGROSS,
-				.heldItem = ITEM_QUICK_CLAW,
-				.fixedIV = 31,
-				.nature = 2,
-				.evs = {252, 252, 6, 0, 0, 0},
-				.moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
+                .species = SPECIES_METAGROSS,
+                .heldItem = ITEM_QUICK_CLAW,
+                .fixedIV = 31,
+                .nature = 2,
+                .evs = {252, 252, 6, 0, 0, 0},
+                .moves = {MOVE_PSYCHIC, MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
             },
             {
-				.species = SPECIES_LATIAS,
-				.heldItem = ITEM_CHESTO_BERRY,
-				.fixedIV = 31,
-				.nature = 15,
-				.evs = {252, 0, 252, 6, 0, 0},
-				.moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_REST},
+                .species = SPECIES_LATIAS,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .fixedIV = 31,
+                .nature = 15,
+                .evs = {252, 0, 252, 6, 0, 0},
+                .moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_REST},
             },
         },
     },
-	[FRONTIER_FACILITY_PALACE] =
-	{
+    [FRONTIER_FACILITY_PALACE] =
+    {
         // Silver Symbol.
         {
             {
-				.species = SPECIES_CROBAT,
-				.heldItem = ITEM_BRIGHT_POWDER,
-				.fixedIV = 16,
-				.nature = 3,
-				.evs = {152, 0, 0, 152, 100, 106},
-				.moves = {MOVE_CONFUSE_RAY, MOVE_DOUBLE_TEAM, MOVE_TOXIC, MOVE_FLY},
+                .species = SPECIES_CROBAT,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .fixedIV = 16,
+                .nature = 3,
+                .evs = {152, 0, 0, 152, 100, 106},
+                .moves = {MOVE_CONFUSE_RAY, MOVE_DOUBLE_TEAM, MOVE_TOXIC, MOVE_FLY},
             },
             {
-				.species = SPECIES_SLAKING,
-				.heldItem = ITEM_SCOPE_LENS,
-				.fixedIV = 16,
-				.nature = 0,
-				.evs = {152, 152, 0, 106, 100, 0},
-				.moves = {MOVE_EARTHQUAKE, MOVE_SWAGGER, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK},
+                .species = SPECIES_SLAKING,
+                .heldItem = ITEM_SCOPE_LENS,
+                .fixedIV = 16,
+                .nature = 0,
+                .evs = {152, 152, 0, 106, 100, 0},
+                .moves = {MOVE_EARTHQUAKE, MOVE_SWAGGER, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK},
             },
             {
-				.species = SPECIES_LAPRAS,
-				.heldItem = ITEM_QUICK_CLAW,
-				.fixedIV = 16,
-				.nature = 17,
-				.evs = {0, 0, 252, 0, 106, 152},
-				.moves = {MOVE_ICE_BEAM, MOVE_HORN_DRILL, MOVE_CONFUSE_RAY, MOVE_PROTECT},
+                .species = SPECIES_LAPRAS,
+                .heldItem = ITEM_QUICK_CLAW,
+                .fixedIV = 16,
+                .nature = 17,
+                .evs = {0, 0, 252, 0, 106, 152},
+                .moves = {MOVE_ICE_BEAM, MOVE_HORN_DRILL, MOVE_CONFUSE_RAY, MOVE_PROTECT},
             },
         },
         // Gold Symbol.
         {
             {
-				.species = SPECIES_ARCANINE,
-				.heldItem = ITEM_WHITE_HERB,
-				.fixedIV = 31,
-				.nature = 11,
-				.evs = {6, 252, 252, 0, 0, 0},
-				.moves = {MOVE_OVERHEAT, MOVE_EXTREME_SPEED, MOVE_ROAR, MOVE_PROTECT},
+                .species = SPECIES_ARCANINE,
+                .heldItem = ITEM_WHITE_HERB,
+                .fixedIV = 31,
+                .nature = 11,
+                .evs = {6, 252, 252, 0, 0, 0},
+                .moves = {MOVE_OVERHEAT, MOVE_EXTREME_SPEED, MOVE_ROAR, MOVE_PROTECT},
             },
             {
-				.species = SPECIES_SLAKING,
-				.heldItem = ITEM_SCOPE_LENS,
-				.fixedIV = 31,
-				.nature = 0,
-				.evs = {6, 252, 0, 252, 0, 0},
-				.moves = {MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN},
+                .species = SPECIES_SLAKING,
+                .heldItem = ITEM_SCOPE_LENS,
+                .fixedIV = 31,
+                .nature = 0,
+                .evs = {6, 252, 0, 252, 0, 0},
+                .moves = {MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_YAWN},
             },
             {
-				.species = SPECIES_SUICUNE,
-				.heldItem = ITEM_KINGS_ROCK,
-				.fixedIV = 31,
-				.nature = 11,
-				.evs = {252, 0, 252, 6, 0, 0},
-				.moves = {MOVE_BLIZZARD, MOVE_SURF, MOVE_BITE, MOVE_CALM_MIND},
+                .species = SPECIES_SUICUNE,
+                .heldItem = ITEM_KINGS_ROCK,
+                .fixedIV = 31,
+                .nature = 11,
+                .evs = {252, 0, 252, 6, 0, 0},
+                .moves = {MOVE_BLIZZARD, MOVE_SURF, MOVE_BITE, MOVE_CALM_MIND},
             },
         },
     },
-	[FRONTIER_FACILITY_ARENA] =
-	{
+    [FRONTIER_FACILITY_ARENA] =
+    {
         // Silver Symbol.
         {
             {
-				.species = SPECIES_HERACROSS,
-				.heldItem = ITEM_SALAC_BERRY,
-				.fixedIV = 20,
-				.nature = 13,
-				.evs = {106, 152, 0, 152, 0, 100},
-				.moves = {MOVE_MEGAHORN, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL},
+                .species = SPECIES_HERACROSS,
+                .heldItem = ITEM_SALAC_BERRY,
+                .fixedIV = 20,
+                .nature = 13,
+                .evs = {106, 152, 0, 152, 0, 100},
+                .moves = {MOVE_MEGAHORN, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL},
             },
             {
-				.species = SPECIES_UMBREON,
-				.heldItem = ITEM_LEFTOVERS,
-				.fixedIV = 20,
-				.nature = 20,
-				.evs = {152, 0, 100, 0, 152, 106},
-				.moves = {MOVE_BODY_SLAM, MOVE_CONFUSE_RAY, MOVE_PSYCHIC, MOVE_FAINT_ATTACK},
+                .species = SPECIES_UMBREON,
+                .heldItem = ITEM_LEFTOVERS,
+                .fixedIV = 20,
+                .nature = 20,
+                .evs = {152, 0, 100, 0, 152, 106},
+                .moves = {MOVE_BODY_SLAM, MOVE_CONFUSE_RAY, MOVE_PSYCHIC, MOVE_FAINT_ATTACK},
             },
             {
-				.species = SPECIES_SHEDINJA,
-				.heldItem = ITEM_BRIGHT_POWDER,
-				.fixedIV = 20,
-				.nature = 3,
-				.evs = {0, 252, 6, 252, 0, 0},
-				.moves = {MOVE_SHADOW_BALL, MOVE_RETURN, MOVE_CONFUSE_RAY, MOVE_AERIAL_ACE},
+                .species = SPECIES_SHEDINJA,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .fixedIV = 20,
+                .nature = 3,
+                .evs = {0, 252, 6, 252, 0, 0},
+                .moves = {MOVE_SHADOW_BALL, MOVE_RETURN, MOVE_CONFUSE_RAY, MOVE_AERIAL_ACE},
             },
         },
         // Gold Symbol.
         {
             {
-				.species = SPECIES_UMBREON,
-				.heldItem = ITEM_CHESTO_BERRY,
-				.fixedIV = 31,
-				.nature = 20,
-				.evs = {252, 0, 0, 0, 252, 6},
-				.moves = {MOVE_DOUBLE_EDGE, MOVE_CONFUSE_RAY, MOVE_REST, MOVE_PSYCHIC},
+                .species = SPECIES_UMBREON,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .fixedIV = 31,
+                .nature = 20,
+                .evs = {252, 0, 0, 0, 252, 6},
+                .moves = {MOVE_DOUBLE_EDGE, MOVE_CONFUSE_RAY, MOVE_REST, MOVE_PSYCHIC},
             },
             {
-				.species = SPECIES_GENGAR,
-				.heldItem = ITEM_LEFTOVERS,
-				.fixedIV = 31,
-				.nature = 15,
-				.evs = {252, 0, 252, 0, 6, 0},
-				.moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_DESTINY_BOND},
+                .species = SPECIES_GENGAR,
+                .heldItem = ITEM_LEFTOVERS,
+                .fixedIV = 31,
+                .nature = 15,
+                .evs = {252, 0, 252, 0, 6, 0},
+                .moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_DESTINY_BOND},
             },
             {
-				.species = SPECIES_BRELOOM,
-				.heldItem = ITEM_LUM_BERRY,
-				.fixedIV = 31,
-				.nature = 13,
-				.evs = {6, 252, 0, 252, 0, 0},
-				.moves = {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_GIGA_DRAIN, MOVE_HEADBUTT},
+                .species = SPECIES_BRELOOM,
+                .heldItem = ITEM_LUM_BERRY,
+                .fixedIV = 31,
+                .nature = 13,
+                .evs = {6, 252, 0, 252, 0, 0},
+                .moves = {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_GIGA_DRAIN, MOVE_HEADBUTT},
             },
         },
     },
-	[FRONTIER_FACILITY_FACTORY] =
-	{
+    [FRONTIER_FACILITY_FACTORY] =
+    {
         // Because Factory's pokemon are random, this facility's Brain also uses random pokemon.
         // What is interesting, this team is actually the one Steven uses in the multi tag battle alongside the player.
         {
             {
-				.species = SPECIES_METANG,
-				.heldItem = ITEM_SITRUS_BERRY,
-				.fixedIV = 31,
-				.nature = 2,
-				.evs = {0, 252, 252, 0, 6, 0},
-				.moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
+                .species = SPECIES_METANG,
+                .heldItem = ITEM_SITRUS_BERRY,
+                .fixedIV = 31,
+                .nature = 2,
+                .evs = {0, 252, 252, 0, 6, 0},
+                .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
             },
             {
-				.species = SPECIES_SKARMORY,
-				.heldItem = ITEM_SITRUS_BERRY,
-				.fixedIV = 31,
-				.nature = 8,
-				.evs = {252, 0, 0, 0, 6, 252},
-				.moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
+                .species = SPECIES_SKARMORY,
+                .heldItem = ITEM_SITRUS_BERRY,
+                .fixedIV = 31,
+                .nature = 8,
+                .evs = {252, 0, 0, 0, 6, 252},
+                .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
             },
             {
-				.species = SPECIES_AGGRON,
-				.heldItem = ITEM_SITRUS_BERRY,
-				.fixedIV = 31,
-				.nature = 3,
-				.evs = {0, 252, 0, 0, 252, 6},
-				.moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
+                .species = SPECIES_AGGRON,
+                .heldItem = ITEM_SITRUS_BERRY,
+                .fixedIV = 31,
+                .nature = 3,
+                .evs = {0, 252, 0, 0, 252, 6},
+                .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
         },
         {
             {
-				.species = SPECIES_METANG,
-				.heldItem = ITEM_SITRUS_BERRY,
-				.fixedIV = 31,
-				.nature = 2,
-				.evs = {0, 252, 252, 0, 6, 0},
-				.moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
+                .species = SPECIES_METANG,
+                .heldItem = ITEM_SITRUS_BERRY,
+                .fixedIV = 31,
+                .nature = 2,
+                .evs = {0, 252, 252, 0, 6, 0},
+                .moves = {MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_METAL_CLAW},
             },
             {
-				.species = SPECIES_SKARMORY,
-				.heldItem = ITEM_SITRUS_BERRY,
-				.fixedIV = 31,
-				.nature = 8,
-				.evs = {252, 0, 0, 0, 6, 252},
-				.moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
+                .species = SPECIES_SKARMORY,
+                .heldItem = ITEM_SITRUS_BERRY,
+                .fixedIV = 31,
+                .nature = 8,
+                .evs = {252, 0, 0, 0, 6, 252},
+                .moves = {MOVE_TOXIC, MOVE_AERIAL_ACE, MOVE_PROTECT, MOVE_STEEL_WING},
             },
             {
-				.species = SPECIES_AGGRON,
-				.heldItem = ITEM_SITRUS_BERRY,
-				.fixedIV = 31,
-				.nature = 3,
-				.evs = {0, 252, 0, 0, 252, 6},
-				.moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
+                .species = SPECIES_AGGRON,
+                .heldItem = ITEM_SITRUS_BERRY,
+                .fixedIV = 31,
+                .nature = 3,
+                .evs = {0, 252, 0, 0, 252, 6},
+                .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_SOLAR_BEAM, MOVE_DRAGON_CLAW},
             },
         },
     },
-	[FRONTIER_FACILITY_PIKE] =
-	{
+    [FRONTIER_FACILITY_PIKE] =
+    {
         // Silver Symbol.
         {
             {
-				.species = SPECIES_SEVIPER,
-				.heldItem = ITEM_QUICK_CLAW,
-				.fixedIV = 16,
-				.nature = 2,
-				.evs = {252, 0, 252, 0, 6, 0},
-				.moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_POISON_FANG, MOVE_GIGA_DRAIN},
+                .species = SPECIES_SEVIPER,
+                .heldItem = ITEM_QUICK_CLAW,
+                .fixedIV = 16,
+                .nature = 2,
+                .evs = {252, 0, 252, 0, 6, 0},
+                .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_POISON_FANG, MOVE_GIGA_DRAIN},
             },
             {
-				.species = SPECIES_SHUCKLE,
-				.heldItem = ITEM_CHESTO_BERRY,
-				.fixedIV = 16,
-				.nature = 5,
-				.evs = {252, 0, 0, 0, 106, 252},
-				.moves = {MOVE_TOXIC, MOVE_SANDSTORM, MOVE_PROTECT, MOVE_REST},
+                .species = SPECIES_SHUCKLE,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .fixedIV = 16,
+                .nature = 5,
+                .evs = {252, 0, 0, 0, 106, 252},
+                .moves = {MOVE_TOXIC, MOVE_SANDSTORM, MOVE_PROTECT, MOVE_REST},
             },
             {
-				.species = SPECIES_MILOTIC,
-				.heldItem = ITEM_LEFTOVERS,
-				.fixedIV = 16,
-				.nature = 15,
-				.evs = {152, 0, 100, 0, 152, 106},
-				.moves = {MOVE_ICE_BEAM, MOVE_MIRROR_COAT, MOVE_SURF, MOVE_RECOVER},
+                .species = SPECIES_MILOTIC,
+                .heldItem = ITEM_LEFTOVERS,
+                .fixedIV = 16,
+                .nature = 15,
+                .evs = {152, 0, 100, 0, 152, 106},
+                .moves = {MOVE_ICE_BEAM, MOVE_MIRROR_COAT, MOVE_SURF, MOVE_RECOVER},
             },
         },
         // Gold Symbol.
         {
             {
-				.species = SPECIES_SEVIPER,
-				.heldItem = ITEM_FOCUS_BAND,
-				.fixedIV = 31,
-				.nature = 5,
-				.evs = {252, 0, 0, 0, 252, 6},
-				.moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
+                .species = SPECIES_SEVIPER,
+                .heldItem = ITEM_FOCUS_BAND,
+                .fixedIV = 31,
+                .nature = 5,
+                .evs = {252, 0, 0, 0, 252, 6},
+                .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
             },
             {
-				.species = SPECIES_STEELIX,
-				.heldItem = ITEM_BRIGHT_POWDER,
-				.fixedIV = 31,
-				.nature = 2,
-				.evs = {252, 0, 0, 0, 6, 252},
-				.moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_EXPLOSION, MOVE_SCREECH},
+                .species = SPECIES_STEELIX,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .fixedIV = 31,
+                .nature = 2,
+                .evs = {252, 0, 0, 0, 6, 252},
+                .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_EXPLOSION, MOVE_SCREECH},
             },
             {
-				.species = SPECIES_GYARADOS,
-				.heldItem = ITEM_CHESTO_BERRY,
-				.fixedIV = 31,
-				.nature = 3,
-				.evs = {252, 6, 0, 0, 0, 252},
-				.moves = {MOVE_DRAGON_DANCE, MOVE_RETURN, MOVE_ROAR, MOVE_REST},
+                .species = SPECIES_GYARADOS,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .fixedIV = 31,
+                .nature = 3,
+                .evs = {252, 6, 0, 0, 0, 252},
+                .moves = {MOVE_DRAGON_DANCE, MOVE_RETURN, MOVE_ROAR, MOVE_REST},
             },
         },
     },
-	[FRONTIER_FACILITY_PYRAMID] =
-	{
+    [FRONTIER_FACILITY_PYRAMID] =
+    {
         // Silver Symbol.
         {
             {
-				.species = SPECIES_REGIROCK,
-				.heldItem = ITEM_QUICK_CLAW,
-				.fixedIV = 16,
-				.nature = 3,
-				.evs = {152, 152, 0, 0, 106, 100},
-				.moves = {MOVE_EXPLOSION, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER},
+                .species = SPECIES_REGIROCK,
+                .heldItem = ITEM_QUICK_CLAW,
+                .fixedIV = 16,
+                .nature = 3,
+                .evs = {152, 152, 0, 0, 106, 100},
+                .moves = {MOVE_EXPLOSION, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER},
             },
             {
-				.species = SPECIES_REGISTEEL,
-				.heldItem = ITEM_LEFTOVERS,
-				.fixedIV = 16,
-				.nature = 3,
-				.evs = {152, 152, 0, 0, 6, 200},
-				.moves = {MOVE_EARTHQUAKE, MOVE_METAL_CLAW, MOVE_TOXIC, MOVE_IRON_DEFENSE},
+                .species = SPECIES_REGISTEEL,
+                .heldItem = ITEM_LEFTOVERS,
+                .fixedIV = 16,
+                .nature = 3,
+                .evs = {152, 152, 0, 0, 6, 200},
+                .moves = {MOVE_EARTHQUAKE, MOVE_METAL_CLAW, MOVE_TOXIC, MOVE_IRON_DEFENSE},
             },
             {
-				.species = SPECIES_REGICE,
-				.heldItem = ITEM_CHESTO_BERRY,
-				.fixedIV = 16,
-				.nature = 15,
-				.evs = {106, 0, 152, 0, 100, 152},
-				.moves = {MOVE_ICE_BEAM, MOVE_AMNESIA, MOVE_THUNDER, MOVE_REST},
+                .species = SPECIES_REGICE,
+                .heldItem = ITEM_CHESTO_BERRY,
+                .fixedIV = 16,
+                .nature = 15,
+                .evs = {106, 0, 152, 0, 100, 152},
+                .moves = {MOVE_ICE_BEAM, MOVE_AMNESIA, MOVE_THUNDER, MOVE_REST},
             },
         },
         // Gold Symbol.
         {
             {
-				.species = SPECIES_ARTICUNO,
-				.heldItem = ITEM_SCOPE_LENS,
-				.fixedIV = 31,
-				.nature = 16,
-				.evs = {6, 0, 252, 252, 0, 0},
-				.moves = {MOVE_BLIZZARD, MOVE_WATER_PULSE, MOVE_AERIAL_ACE, MOVE_REFLECT},
+                .species = SPECIES_ARTICUNO,
+                .heldItem = ITEM_SCOPE_LENS,
+                .fixedIV = 31,
+                .nature = 16,
+                .evs = {6, 0, 252, 252, 0, 0},
+                .moves = {MOVE_BLIZZARD, MOVE_WATER_PULSE, MOVE_AERIAL_ACE, MOVE_REFLECT},
             },
             {
-				.species = SPECIES_ZAPDOS,
-				.heldItem = ITEM_LUM_BERRY,
-				.fixedIV = 31,
-				.nature = 16,
-				.evs = {6, 0, 252, 252, 0, 0},
-				.moves = {MOVE_THUNDER, MOVE_DETECT, MOVE_DRILL_PECK, MOVE_LIGHT_SCREEN},
+                .species = SPECIES_ZAPDOS,
+                .heldItem = ITEM_LUM_BERRY,
+                .fixedIV = 31,
+                .nature = 16,
+                .evs = {6, 0, 252, 252, 0, 0},
+                .moves = {MOVE_THUNDER, MOVE_DETECT, MOVE_DRILL_PECK, MOVE_LIGHT_SCREEN},
             },
             {
-				.species = SPECIES_MOLTRES,
-				.heldItem = ITEM_BRIGHT_POWDER,
-				.fixedIV = 31,
-				.nature = 16,
-				.evs = {6, 0, 252, 252, 0, 0},
-				.moves = {MOVE_FIRE_BLAST, MOVE_HYPER_BEAM, MOVE_AERIAL_ACE, MOVE_SAFEGUARD},
+                .species = SPECIES_MOLTRES,
+                .heldItem = ITEM_BRIGHT_POWDER,
+                .fixedIV = 31,
+                .nature = 16,
+                .evs = {6, 0, 252, 252, 0, 0},
+                .moves = {MOVE_FIRE_BLAST, MOVE_HYPER_BEAM, MOVE_AERIAL_ACE, MOVE_SAFEGUARD},
             },
         },
     },
@@ -614,29 +614,29 @@ static const u16 gUnknown_08611BFC[][2] =
 
 static void (* const sFrontierUtilFuncs[])(void) =
 {
-	sub_81A17A0,
-	sub_81A1830,
-	sub_81A1968,
-	sub_81A1AD4,
-	DoSoftReset_,
-	sub_81A1B28,
-	sub_81A1B38,
-	ShowFacilityResultsWindow,
-	sub_81A31FC,
-	sub_81A35EC,
-	sub_81A3B00,
-	sub_81A3B64,
-	sub_81A3D30,
-	sub_81A3D58,
-	sub_81A3DA0,
-	sub_81A3FD4,
-	sub_81A4224,
-	sub_81A4230,
-	sub_81A43A8,
-	sub_81A4410,
-	sub_81A443C,
-	sub_81A447C,
-	sub_81A457C,
+    sub_81A17A0,
+    sub_81A1830,
+    sub_81A1968,
+    sub_81A1AD4,
+    DoSoftReset_,
+    sub_81A1B28,
+    sub_81A1B38,
+    ShowFacilityResultsWindow,
+    sub_81A31FC,
+    sub_81A35EC,
+    sub_81A3B00,
+    sub_81A3B64,
+    sub_81A3D30,
+    sub_81A3D58,
+    sub_81A3DA0,
+    sub_81A3FD4,
+    sub_81A4224,
+    sub_81A4230,
+    sub_81A43A8,
+    sub_81A4410,
+    sub_81A443C,
+    sub_81A447C,
+    sub_81A457C,
 };
 
 static const struct WindowTemplate gUnknown_08611C74 =
@@ -676,12 +676,12 @@ static const struct WindowTemplate gUnknown_08611C84 =
 static const u8 sFacilityToBrainEventObjGfx[][2] =
 {
     [FRONTIER_FACILITY_TOWER]   = {EVENT_OBJ_GFX_ANABEL,  TRUE},
-	[FRONTIER_FACILITY_DOME]    = {EVENT_OBJ_GFX_TUCKER,  FALSE},
-	[FRONTIER_FACILITY_PALACE]  = {EVENT_OBJ_GFX_SPENSER, FALSE},
-	[FRONTIER_FACILITY_ARENA]   = {EVENT_OBJ_GFX_GRETA,   TRUE},
-	[FRONTIER_FACILITY_FACTORY] = {EVENT_OBJ_GFX_NOLAND,  FALSE},
-	[FRONTIER_FACILITY_PIKE]    = {EVENT_OBJ_GFX_LUCY,    TRUE},
-	[FRONTIER_FACILITY_PYRAMID] = {EVENT_OBJ_GFX_BRANDON, FALSE},
+    [FRONTIER_FACILITY_DOME]    = {EVENT_OBJ_GFX_TUCKER,  FALSE},
+    [FRONTIER_FACILITY_PALACE]  = {EVENT_OBJ_GFX_SPENSER, FALSE},
+    [FRONTIER_FACILITY_ARENA]   = {EVENT_OBJ_GFX_GRETA,   TRUE},
+    [FRONTIER_FACILITY_FACTORY] = {EVENT_OBJ_GFX_NOLAND,  FALSE},
+    [FRONTIER_FACILITY_PIKE]    = {EVENT_OBJ_GFX_LUCY,    TRUE},
+    [FRONTIER_FACILITY_PYRAMID] = {EVENT_OBJ_GFX_BRANDON, FALSE},
 };
 
 const u16 gFrontierBannedSpecies[] =
@@ -765,7 +765,7 @@ static void sub_81A1968(void)
 
     switch (gSpecialVar_0x8005)
     {
-	case 0:
+    case 0:
         gSaveBlock2Ptr->frontier.field_CA8 = gSpecialVar_0x8006;
         break;
     case 1:
@@ -2434,235 +2434,235 @@ NAKED
 void CreateFrontierBrainPokemon(void)
 {
     asm_unified("\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x44\n\
-	ldr r0, =0x000040cf\n\
-	bl VarGet\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	str r0, [sp, 0x20]\n\
-	bl GetFronterBrainSymbol\n\
-	str r0, [sp, 0x24]\n\
-	ldr r0, [sp, 0x20]\n\
-	cmp r0, 0x1\n\
-	bne _081A4E44\n\
-	ldr r0, =0x000003fe\n\
-	bl TrainerIdToDomeTournamentId\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	bl GetDomeTrainerMonCountInBits\n\
-	adds r4, r0, 0\n\
-	b _081A4E46\n\
-	.pool\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x44\n\
+    ldr r0, =0x000040cf\n\
+    bl VarGet\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    str r0, [sp, 0x20]\n\
+    bl GetFronterBrainSymbol\n\
+    str r0, [sp, 0x24]\n\
+    ldr r0, [sp, 0x20]\n\
+    cmp r0, 0x1\n\
+    bne _081A4E44\n\
+    ldr r0, =0x000003fe\n\
+    bl TrainerIdToDomeTournamentId\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    bl GetDomeTrainerMonCountInBits\n\
+    adds r4, r0, 0\n\
+    b _081A4E46\n\
+    .pool\n\
 _081A4E44:\n\
-	movs r4, 0x7\n\
+    movs r4, 0x7\n\
 _081A4E46:\n\
-	bl ZeroEnemyPartyMons\n\
-	movs r1, 0\n\
-	str r1, [sp, 0x18]\n\
-	bl SetFacilityPtrsGetLevel\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp, 0x1C]\n\
-	movs r2, 0\n\
-	str r2, [sp, 0x14]\n\
+    bl ZeroEnemyPartyMons\n\
+    movs r1, 0\n\
+    str r1, [sp, 0x18]\n\
+    bl SetFacilityPtrsGetLevel\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    str r0, [sp, 0x1C]\n\
+    movs r2, 0\n\
+    str r2, [sp, 0x14]\n\
 _081A4E5C:\n\
-	movs r0, 0x1\n\
-	ands r0, r4\n\
-	asrs r4, 1\n\
-	str r4, [sp, 0x30]\n\
-	ldr r3, [sp, 0x14]\n\
-	adds r3, 0x1\n\
-	str r3, [sp, 0x28]\n\
-	cmp r0, 0\n\
-	bne _081A4E70\n\
-	b _081A4FC4\n\
+    movs r0, 0x1\n\
+    ands r0, r4\n\
+    asrs r4, 1\n\
+    str r4, [sp, 0x30]\n\
+    ldr r3, [sp, 0x14]\n\
+    adds r3, 0x1\n\
+    str r3, [sp, 0x28]\n\
+    cmp r0, 0\n\
+    bne _081A4E70\n\
+    b _081A4FC4\n\
 _081A4E70:\n\
-	ldr r4, [sp, 0x14]\n\
-	lsls r4, 2\n\
-	mov r9, r4\n\
-	ldr r0, [sp, 0x24]\n\
-	lsls r0, 4\n\
-	str r0, [sp, 0x38]\n\
-	ldr r1, [sp, 0x20]\n\
-	lsls r1, 4\n\
-	str r1, [sp, 0x34]\n\
-	ldr r2, [sp, 0x1C]\n\
-	lsls r2, 24\n\
-	str r2, [sp, 0x3C]\n\
-	ldr r3, [sp, 0x18]\n\
-	adds r3, 0x1\n\
-	str r3, [sp, 0x2C]\n\
-	ldr r0, [sp, 0x14]\n\
-	add r0, r9\n\
-	lsls r0, 2\n\
-	mov r8, r0\n\
+    ldr r4, [sp, 0x14]\n\
+    lsls r4, 2\n\
+    mov r9, r4\n\
+    ldr r0, [sp, 0x24]\n\
+    lsls r0, 4\n\
+    str r0, [sp, 0x38]\n\
+    ldr r1, [sp, 0x20]\n\
+    lsls r1, 4\n\
+    str r1, [sp, 0x34]\n\
+    ldr r2, [sp, 0x1C]\n\
+    lsls r2, 24\n\
+    str r2, [sp, 0x3C]\n\
+    ldr r3, [sp, 0x18]\n\
+    adds r3, 0x1\n\
+    str r3, [sp, 0x2C]\n\
+    ldr r0, [sp, 0x14]\n\
+    add r0, r9\n\
+    lsls r0, 2\n\
+    mov r8, r0\n\
 _081A4E96:\n\
-	bl Random\n\
-	adds r4, r0, 0\n\
-	bl Random\n\
-	lsls r4, 16\n\
-	lsrs r7, r4, 16\n\
-	lsls r0, 16\n\
-	orrs r7, r0\n\
-	ldr r0, =0x0000ef2a\n\
-	adds r1, r7, 0\n\
-	bl IsShinyOtIdPersonality\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _081A4E96\n\
-	ldr r4, [sp, 0x38]\n\
-	ldr r1, [sp, 0x24]\n\
-	subs r0, r4, r1\n\
-	lsls r5, r0, 2\n\
-	mov r2, r8\n\
-	adds r4, r2, r5\n\
-	ldr r3, [sp, 0x34]\n\
-	ldr r1, [sp, 0x20]\n\
-	subs r0, r3, r1\n\
-	lsls r6, r0, 3\n\
-	adds r4, r6\n\
-	ldr r2, =sFrontierBrainsMons\n\
-	adds r4, r2\n\
-	adds r0, r7, 0\n\
-	bl GetNatureFromPersonality\n\
-	ldrb r1, [r4, 0x5]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r1, r0\n\
-	bne _081A4E96\n\
-	ldr r4, [sp, 0x18]\n\
-	movs r0, 0x64\n\
-	adds r3, r4, 0\n\
-	muls r3, r0\n\
-	mov r8, r3\n\
-	ldr r1, =gEnemyParty\n\
-	add r1, r8\n\
-	mov r10, r1\n\
-	ldr r4, [sp, 0x14]\n\
-	add r4, r9\n\
-	lsls r4, 2\n\
-	adds r0, r4, r5\n\
-	adds r0, r6\n\
-	ldr r2, =sFrontierBrainsMons\n\
-	adds r0, r2\n\
-	ldrh r1, [r0]\n\
-	ldr r3, [sp, 0x3C]\n\
-	lsrs r2, r3, 24\n\
-	ldrb r3, [r0, 0x4]\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	str r7, [sp, 0x4]\n\
-	str r0, [sp, 0x8]\n\
-	ldr r0, =0x0000ef2a\n\
-	str r0, [sp, 0xC]\n\
-	mov r0, r10\n\
-	bl CreateMon\n\
-	ldr r0, =sFrontierBrainsMons\n\
-	adds r5, r0\n\
-	adds r5, r6, r5\n\
-	adds r4, r5, r4\n\
-	adds r4, 0x2\n\
-	mov r0, r10\n\
-	movs r1, 0xC\n\
-	adds r2, r4, 0\n\
-	bl SetMonData\n\
-	movs r7, 0\n\
-	mov r6, r8\n\
-	ldr r3, =gEnemyParty\n\
+    bl Random\n\
+    adds r4, r0, 0\n\
+    bl Random\n\
+    lsls r4, 16\n\
+    lsrs r7, r4, 16\n\
+    lsls r0, 16\n\
+    orrs r7, r0\n\
+    ldr r0, =0x0000ef2a\n\
+    adds r1, r7, 0\n\
+    bl IsShinyOtIdPersonality\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _081A4E96\n\
+    ldr r4, [sp, 0x38]\n\
+    ldr r1, [sp, 0x24]\n\
+    subs r0, r4, r1\n\
+    lsls r5, r0, 2\n\
+    mov r2, r8\n\
+    adds r4, r2, r5\n\
+    ldr r3, [sp, 0x34]\n\
+    ldr r1, [sp, 0x20]\n\
+    subs r0, r3, r1\n\
+    lsls r6, r0, 3\n\
+    adds r4, r6\n\
+    ldr r2, =sFrontierBrainsMons\n\
+    adds r4, r2\n\
+    adds r0, r7, 0\n\
+    bl GetNatureFromPersonality\n\
+    ldrb r1, [r4, 0x5]\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r1, r0\n\
+    bne _081A4E96\n\
+    ldr r4, [sp, 0x18]\n\
+    movs r0, 0x64\n\
+    adds r3, r4, 0\n\
+    muls r3, r0\n\
+    mov r8, r3\n\
+    ldr r1, =gEnemyParty\n\
+    add r1, r8\n\
+    mov r10, r1\n\
+    ldr r4, [sp, 0x14]\n\
+    add r4, r9\n\
+    lsls r4, 2\n\
+    adds r0, r4, r5\n\
+    adds r0, r6\n\
+    ldr r2, =sFrontierBrainsMons\n\
+    adds r0, r2\n\
+    ldrh r1, [r0]\n\
+    ldr r3, [sp, 0x3C]\n\
+    lsrs r2, r3, 24\n\
+    ldrb r3, [r0, 0x4]\n\
+    movs r0, 0x1\n\
+    str r0, [sp]\n\
+    str r7, [sp, 0x4]\n\
+    str r0, [sp, 0x8]\n\
+    ldr r0, =0x0000ef2a\n\
+    str r0, [sp, 0xC]\n\
+    mov r0, r10\n\
+    bl CreateMon\n\
+    ldr r0, =sFrontierBrainsMons\n\
+    adds r5, r0\n\
+    adds r5, r6, r5\n\
+    adds r4, r5, r4\n\
+    adds r4, 0x2\n\
+    mov r0, r10\n\
+    movs r1, 0xC\n\
+    adds r2, r4, 0\n\
+    bl SetMonData\n\
+    movs r7, 0\n\
+    mov r6, r8\n\
+    ldr r3, =gEnemyParty\n\
 _081A4F32:\n\
-	adds r1, r7, 0\n\
-	adds r1, 0x1A\n\
-	ldr r0, [sp, 0x14]\n\
-	add r0, r9\n\
-	lsls r4, r0, 2\n\
-	adds r2, r5, r4\n\
-	adds r0, r7, 0x6\n\
-	adds r2, r0\n\
-	adds r0, r6, r3\n\
-	str r3, [sp, 0x40]\n\
-	bl SetMonData\n\
-	adds r7, 0x1\n\
-	ldr r3, [sp, 0x40]\n\
-	cmp r7, 0x5\n\
-	ble _081A4F32\n\
-	movs r1, 0xFF\n\
-	add r0, sp, 0x10\n\
-	strb r1, [r0]\n\
-	movs r7, 0\n\
-	ldr r1, [sp, 0x18]\n\
-	movs r2, 0x64\n\
-	adds r6, r1, 0\n\
-	muls r6, r2\n\
-	ldr r3, =sFrontierBrainsMons + 0xC\n\
-	mov r8, r3\n\
-	ldr r3, =gEnemyParty\n\
-	adds r5, r4, 0\n\
+    adds r1, r7, 0\n\
+    adds r1, 0x1A\n\
+    ldr r0, [sp, 0x14]\n\
+    add r0, r9\n\
+    lsls r4, r0, 2\n\
+    adds r2, r5, r4\n\
+    adds r0, r7, 0x6\n\
+    adds r2, r0\n\
+    adds r0, r6, r3\n\
+    str r3, [sp, 0x40]\n\
+    bl SetMonData\n\
+    adds r7, 0x1\n\
+    ldr r3, [sp, 0x40]\n\
+    cmp r7, 0x5\n\
+    ble _081A4F32\n\
+    movs r1, 0xFF\n\
+    add r0, sp, 0x10\n\
+    strb r1, [r0]\n\
+    movs r7, 0\n\
+    ldr r1, [sp, 0x18]\n\
+    movs r2, 0x64\n\
+    adds r6, r1, 0\n\
+    muls r6, r2\n\
+    ldr r3, =sFrontierBrainsMons + 0xC\n\
+    mov r8, r3\n\
+    ldr r3, =gEnemyParty\n\
+    adds r5, r4, 0\n\
 _081A4F6A:\n\
-	ldr r4, [sp, 0x38]\n\
-	ldr r0, [sp, 0x24]\n\
-	subs r1, r4, r0\n\
-	lsls r1, 2\n\
-	adds r1, r5, r1\n\
-	ldr r2, [sp, 0x34]\n\
-	ldr r4, [sp, 0x20]\n\
-	subs r0, r2, r4\n\
-	lsls r0, 3\n\
-	adds r1, r0\n\
-	add r1, r8\n\
-	ldrh r4, [r1]\n\
-	lsls r2, r7, 24\n\
-	lsrs r2, 24\n\
-	adds r0, r6, r3\n\
-	adds r1, r4, 0\n\
-	str r3, [sp, 0x40]\n\
-	bl SetMonMoveSlot\n\
-	ldr r3, [sp, 0x40]\n\
-	cmp r4, 0xDA\n\
-	bne _081A4F9C\n\
-	movs r1, 0\n\
-	add r0, sp, 0x10\n\
-	strb r1, [r0]\n\
+    ldr r4, [sp, 0x38]\n\
+    ldr r0, [sp, 0x24]\n\
+    subs r1, r4, r0\n\
+    lsls r1, 2\n\
+    adds r1, r5, r1\n\
+    ldr r2, [sp, 0x34]\n\
+    ldr r4, [sp, 0x20]\n\
+    subs r0, r2, r4\n\
+    lsls r0, 3\n\
+    adds r1, r0\n\
+    add r1, r8\n\
+    ldrh r4, [r1]\n\
+    lsls r2, r7, 24\n\
+    lsrs r2, 24\n\
+    adds r0, r6, r3\n\
+    adds r1, r4, 0\n\
+    str r3, [sp, 0x40]\n\
+    bl SetMonMoveSlot\n\
+    ldr r3, [sp, 0x40]\n\
+    cmp r4, 0xDA\n\
+    bne _081A4F9C\n\
+    movs r1, 0\n\
+    add r0, sp, 0x10\n\
+    strb r1, [r0]\n\
 _081A4F9C:\n\
-	adds r5, 0x2\n\
-	adds r7, 0x1\n\
-	cmp r7, 0x3\n\
-	ble _081A4F6A\n\
-	ldr r0, [sp, 0x18]\n\
-	movs r1, 0x64\n\
-	adds r4, r0, 0\n\
-	muls r4, r1\n\
-	ldr r0, =gEnemyParty\n\
-	adds r4, r0\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x20\n\
-	add r2, sp, 0x10\n\
-	bl SetMonData\n\
-	adds r0, r4, 0\n\
-	bl CalculateMonStats\n\
-	ldr r2, [sp, 0x2C]\n\
-	str r2, [sp, 0x18]\n\
+    adds r5, 0x2\n\
+    adds r7, 0x1\n\
+    cmp r7, 0x3\n\
+    ble _081A4F6A\n\
+    ldr r0, [sp, 0x18]\n\
+    movs r1, 0x64\n\
+    adds r4, r0, 0\n\
+    muls r4, r1\n\
+    ldr r0, =gEnemyParty\n\
+    adds r4, r0\n\
+    adds r0, r4, 0\n\
+    movs r1, 0x20\n\
+    add r2, sp, 0x10\n\
+    bl SetMonData\n\
+    adds r0, r4, 0\n\
+    bl CalculateMonStats\n\
+    ldr r2, [sp, 0x2C]\n\
+    str r2, [sp, 0x18]\n\
 _081A4FC4:\n\
-	ldr r4, [sp, 0x30]\n\
-	ldr r3, [sp, 0x28]\n\
-	str r3, [sp, 0x14]\n\
-	cmp r3, 0x2\n\
-	bgt _081A4FD0\n\
-	b _081A4E5C\n\
+    ldr r4, [sp, 0x30]\n\
+    ldr r3, [sp, 0x28]\n\
+    str r3, [sp, 0x14]\n\
+    cmp r3, 0x2\n\
+    bgt _081A4FD0\n\
+    b _081A4E5C\n\
 _081A4FD0:\n\
-	add sp, 0x44\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    add sp, 0x44\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
 ");
 }
 #endif
