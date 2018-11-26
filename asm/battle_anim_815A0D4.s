@@ -125,7 +125,7 @@ sub_815A1B0: @ 815A1B0
 	adds r4, r0, 0
 	movs r0, 0x5A
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	movs r0, 0x7
 	strh r0, [r4, 0x30]
@@ -824,7 +824,7 @@ sub_815A73C: @ 815A73C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	strh r1, [r4, 0x30]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_815A76C
 	adds r0, r4, 0

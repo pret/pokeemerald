@@ -95,6 +95,7 @@ void sub_80A67D8(struct Sprite *sprite);
 void sub_80A6864(struct Sprite *sprite, s16 a2);
 s16 sub_80A861C(u8 battlerId, u8 a2);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
+void WaitAnimForDuration(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);

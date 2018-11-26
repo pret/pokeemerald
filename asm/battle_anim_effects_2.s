@@ -248,7 +248,7 @@ sub_8103620: @ 8103620
 	strh r0, [r4, 0x30]
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x38]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_8103658
 	adds r0, r4, 0
@@ -5667,7 +5667,7 @@ sub_810624C: @ 810624C
 	strh r1, [r0, 0x2E]
 	ldrh r1, [r2, 0x2]
 	strh r1, [r0, 0x30]
-	ldr r1, =sub_80A64B0
+	ldr r1, =WaitAnimForDuration
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_810627C
 	bl StoreSpriteCallbackInData6

@@ -553,7 +553,7 @@ sub_80FECB8: @ 80FECB8
 	strb r0, [r2]
 	movs r0, 0xA
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_80FECF0
 	adds r0, r4, 0
@@ -581,7 +581,7 @@ sub_80FECF0: @ 80FECF0
 	bl StartSpriteAnim
 	movs r0, 0x3C
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
@@ -4624,7 +4624,7 @@ _08100CF2:
 	bl StoreSpriteCallbackInData6
 	movs r0, 0x3
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 _08100D28:
 	pop {r4}
@@ -5704,7 +5704,7 @@ sub_81015AC: @ 81015AC
 	strh r1, [r0, 0x22]
 	movs r1, 0x14
 	strh r1, [r0, 0x2E]
-	ldr r1, =sub_80A64B0
+	ldr r1, =WaitAnimForDuration
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_81015D4
 	bl StoreSpriteCallbackInData6
@@ -5728,7 +5728,7 @@ sub_81015D4: @ 81015D4
 	b _0810166A
 _081015EA:
 	strh r1, [r5, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_81015D4
 	adds r0, r5, 0
@@ -5806,7 +5806,7 @@ sub_8101684: @ 8101684
 	bne _081016AC
 	movs r0, 0xA
 	strh r0, [r2, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r2, 0x1C]
 	ldr r1, =sub_81016B8
 	adds r0, r2, 0
@@ -5833,7 +5833,7 @@ sub_81016B8: @ 81016B8
 	strh r0, [r5, 0x2E]
 	strh r1, [r5, 0x30]
 	strh r1, [r5, 0x32]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_8101774
 	adds r0, r5, 0
@@ -9019,7 +9019,7 @@ _08102FDE:
 	strh r0, [r5, 0x22]
 	movs r0, 0x8
 	strh r0, [r5, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0

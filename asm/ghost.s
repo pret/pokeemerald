@@ -2525,7 +2525,7 @@ _08112A5E:
 	bne _08112AC0
 	movs r0, 0x1E
 	strh r0, [r3, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r3, 0x1C]
 	ldr r1, =sub_8112ACC
 	adds r0, r3, 0

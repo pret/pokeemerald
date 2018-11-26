@@ -1803,7 +1803,7 @@ _08116584:
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}

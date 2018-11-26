@@ -20,7 +20,7 @@ unc_080B08A0: @ 810CE2C
 	strh r0, [r4, 0x22]
 	movs r0, 0xF
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
@@ -115,7 +115,7 @@ _0810CF0C:
 	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r5, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0
@@ -537,7 +537,7 @@ sub_810D278: @ 810D278
 	bl StartSpriteAnim
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_810D2B0
 	adds r0, r4, 0
@@ -562,7 +562,7 @@ sub_810D2B0: @ 810D2B0
 	strb r0, [r2]
 	movs r0, 0x14
 	strh r0, [r4, 0x2E]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
@@ -635,7 +635,7 @@ sub_810D360: @ 810D360
 	push {lr}
 	movs r1, 0xF
 	strh r1, [r0, 0x2E]
-	ldr r1, =sub_80A64B0
+	ldr r1, =WaitAnimForDuration
 	str r1, [r0, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6

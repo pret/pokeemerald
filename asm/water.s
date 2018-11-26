@@ -329,7 +329,7 @@ sub_8107430: @ 8107430
 	push {lr}
 	movs r1, 0xA
 	strh r1, [r0, 0x2E]
-	ldr r1, =sub_80A64B0
+	ldr r1, =WaitAnimForDuration
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	bl StoreSpriteCallbackInData6

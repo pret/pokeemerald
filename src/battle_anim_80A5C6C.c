@@ -532,7 +532,7 @@ void sub_80A6450(struct Sprite *sprite)
 // Simply waits until the sprite's data[0] hits zero.
 // This is used to let sprite anims or affine anims to run for a designated
 // duration.
-void sub_80A64B0(struct Sprite *sprite)
+void WaitAnimForDuration(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
         sprite->data[0]--;

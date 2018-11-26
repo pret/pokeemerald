@@ -625,7 +625,7 @@ sub_81093A4: @ 81093A4
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_81093E4
 	adds r0, r4, 0
