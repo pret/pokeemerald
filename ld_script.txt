@@ -162,7 +162,7 @@ SECTIONS {
         asm/fire.o(.text);
         asm/electric.o(.text);
         asm/ice.o(.text);
-        asm/fight.o(.text);
+        src/fight.o(.text);
         src/poison.o(.text);
         asm/flying.o(.text);
         asm/psychic.o(.text);

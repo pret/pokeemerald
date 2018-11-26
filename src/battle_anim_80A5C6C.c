@@ -36,9 +36,7 @@ extern const union AffineAnimCmd *gUnknown_082FF6C0[];
 // This file's functions.
 void sub_80A64EC(struct Sprite *sprite);
 void sub_80A653C(struct Sprite *sprite);
-void InitAnimLinearTranslation(struct Sprite *sprite);
 void sub_80A6FB4(struct Sprite *sprite);
-void sub_80A6F98(struct Sprite *sprite);
 void sub_80A7144(struct Sprite *sprite);
 void sub_80A791C(struct Sprite *sprite);
 void sub_80A8DFC(struct Sprite *sprite);
@@ -50,8 +48,6 @@ void sub_80A7AFC(u8 taskId);
 void sub_80A8CAC(u8 taskId);
 void AnimTask_BlendMonInAndOutStep(u8 taskId);
 bool8 sub_80A7238(void);
-void sub_80A8048(s16 *bottom, s16 *top, const void *ptr);
-void *sub_80A8050(s16 bottom, s16 top);
 u8 sub_80A82E4(u8 battlerId);
 void sub_80A8D78(struct Task *task, u8 taskId);
 
