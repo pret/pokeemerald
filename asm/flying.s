@@ -5,42 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_810DE2C
-sub_810DE2C: @ 810DE2C
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x2E]
-	adds r0, 0xB
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x2E]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r1, 0x4
-	bl Sin
-	strh r0, [r4, 0x24]
-	ldrh r0, [r4, 0x30]
-	adds r0, 0x30
-	strh r0, [r4, 0x30]
-	lsls r0, 16
-	asrs r0, 24
-	negs r0, r0
-	strh r0, [r4, 0x26]
-	adds r0, r4, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0810DE68
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_0810DE68:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_810DE2C
-
 	thumb_func_start sub_810DE70
 sub_810DE70: @ 810DE70
 	push {r4,lr}
