@@ -431,7 +431,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
 }
 
 static void sub_8110CB0(u8 taskId)
-{    
+{
     struct UnknownAnimStruct2 unknownStruct;
 
     if (gTasks[taskId].data[0] == 0)
@@ -718,7 +718,7 @@ static void sub_8111214(struct Task *task)
     x += (task->data[12] * 4);
 
     spriteId = CreateSprite(spriteTemplate, x, y, 35);
-    if (spriteId != 64)
+    if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[0] = 18;
         gSprites[spriteId].data[2] = ((task->data[12] * 20) + x) + (task->data[1] * 3);

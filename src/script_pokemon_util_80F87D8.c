@@ -38,7 +38,7 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 extern u8 gSelectedOrderFromParty[];
 
-const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
+static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
 static void sub_80F8EE8(u8 taskId);
 static void sub_80F9088(u8 taskId);
@@ -144,20 +144,18 @@ u8 sub_80F8940(void)
     return var0;
 }
 
-#ifdef NONMATCHING
 void sub_80F8970(void)
 {
     s16 sp[4];
     int i, j;
     s16 condition;
-    u8 var2;
-    u8 var1;
     s8 var0;
+    u8 var2;
+    u8 r8;
     u8 r7;
 
     for (i = 0; i < 4; i++)
         sp[i] = gContestMonConditions[i];
-
 
     for (i = 0; i < 3; i++)
     {
@@ -174,14 +172,14 @@ void sub_80F8970(void)
 
     condition = sp[gSpecialVar_0x8006];
     var0 = 0;
-    var1 = 0;
+    r8 = 0;
     for (i = 0; i < 4; i++)
     {
         if (sp[i] == condition)
         {
             var0++;
             if (i == gSpecialVar_0x8006)
-                var1 = var0;
+                r8 = var0;
         }
     }
 
@@ -192,7 +190,7 @@ void sub_80F8970(void)
     }
 
     r7 = i;
-    var2 = var1;
+    var2 = r8;
     for (i = 0; i < 4; i++)
     {
         if (condition == gContestMonConditions[i])
@@ -207,191 +205,13 @@ void sub_80F8970(void)
     StringCopy(gStringVar2, gContestMons[i].trainerName);
     sub_81DB5AC(gStringVar2);
 
-    if (var0 == 1 || var1 == var0)
+    if (var0 == 1)
+        gSpecialVar_0x8006 = r7;
+    else if (r8 == var0)
         gSpecialVar_0x8006 = r7;
     else
         gSpecialVar_0x8006 = r7 + 4;
 }
-#else
-NAKED
-void sub_80F8970(void)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    ldr r0, =gContestMonConditions\n\
-    mov r12, r0\n\
-    ldr r1, =gSpecialVar_0x8006\n\
-    mov r9, r1\n\
-    ldr r2, =gContestMons + 2\n\
-    mov r10, r2\n\
-    mov r2, r12\n\
-    mov r1, sp\n\
-    movs r6, 0x3\n\
-_080F898E:\n\
-    ldrh r0, [r2]\n\
-    strh r0, [r1]\n\
-    adds r2, 0x2\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080F898E\n\
-    movs r6, 0\n\
-_080F899E:\n\
-    movs r1, 0x3\n\
-    cmp r1, r6\n\
-    ble _080F89C8\n\
-_080F89A4:\n\
-    subs r5, r1, 0x1\n\
-    lsls r0, r5, 1\n\
-    mov r4, sp\n\
-    adds r3, r4, r0\n\
-    lsls r0, r1, 1\n\
-    adds r2, r4, r0\n\
-    ldrh r4, [r3]\n\
-    movs r7, 0\n\
-    ldrsh r1, [r3, r7]\n\
-    movs r7, 0\n\
-    ldrsh r0, [r2, r7]\n\
-    cmp r1, r0\n\
-    bge _080F89C2\n\
-    strh r4, [r2]\n\
-    strh r0, [r3]\n\
-_080F89C2:\n\
-    adds r1, r5, 0\n\
-    cmp r1, r6\n\
-    bgt _080F89A4\n\
-_080F89C8:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x2\n\
-    ble _080F899E\n\
-    mov r2, r9\n\
-    ldrh r0, [r2]\n\
-    lsls r0, 1\n\
-    add r0, sp\n\
-    ldrh r0, [r0]\n\
-    movs r2, 0\n\
-    mov r8, r2\n\
-    movs r6, 0\n\
-    lsls r0, 16\n\
-    asrs r4, r0, 16\n\
-    adds r3, r0, 0\n\
-    mov r1, sp\n\
-    mov r5, r9\n\
-_080F89E8:\n\
-    movs r7, 0\n\
-    ldrsh r0, [r1, r7]\n\
-    cmp r0, r4\n\
-    bne _080F8A02\n\
-    lsls r0, r2, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r2\n\
-    lsrs r2, r0, 24\n\
-    ldrh r7, [r5]\n\
-    cmp r6, r7\n\
-    bne _080F8A02\n\
-    mov r8, r2\n\
-_080F8A02:\n\
-    adds r1, 0x2\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    ble _080F89E8\n\
-    movs r6, 0\n\
-    mov r0, sp\n\
-    movs r1, 0\n\
-    ldrsh r0, [r0, r1]\n\
-    asrs r1, r3, 16\n\
-    lsls r2, 24\n\
-    mov r9, r2\n\
-    cmp r0, r1\n\
-    beq _080F8A30\n\
-    adds r2, r1, 0\n\
-    mov r1, sp\n\
-_080F8A20:\n\
-    adds r1, 0x2\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    bgt _080F8A30\n\
-    movs r4, 0\n\
-    ldrsh r0, [r1, r4]\n\
-    cmp r0, r2\n\
-    bne _080F8A20\n\
-_080F8A30:\n\
-    lsls r0, r6, 24\n\
-    lsrs r7, r0, 24\n\
-    mov r2, r8\n\
-    movs r6, 0\n\
-    asrs r1, r3, 16\n\
-    mov r5, r12\n\
-    movs r4, 0\n\
-    ldrsh r0, [r5, r4]\n\
-    b _080F8A66\n\
-    .pool\n\
-_080F8A50:\n\
-    subs r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-_080F8A56:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    bgt _080F8A6E\n\
-    lsls r0, r6, 1\n\
-    add r0, r12\n\
-    asrs r1, r3, 16\n\
-    movs r5, 0\n\
-    ldrsh r0, [r0, r5]\n\
-_080F8A66:\n\
-    cmp r1, r0\n\
-    bne _080F8A56\n\
-    cmp r2, 0x1\n\
-    bne _080F8A50\n\
-_080F8A6E:\n\
-    lsls r4, r6, 6\n\
-    mov r0, r10\n\
-    adds r1, r4, r0\n\
-    ldr r0, =gStringVar1\n\
-    bl StringCopy\n\
-    ldr r5, =gStringVar2\n\
-    mov r0, r10\n\
-    adds r0, 0xB\n\
-    adds r4, r0\n\
-    adds r0, r5, 0\n\
-    adds r1, r4, 0\n\
-    bl StringCopy\n\
-    adds r0, r5, 0\n\
-    bl sub_81DB5AC\n\
-    mov r1, r9\n\
-    asrs r0, r1, 24\n\
-    cmp r0, 0x1\n\
-    beq _080F8A9C\n\
-    cmp r8, r0\n\
-    bne _080F8AB0\n\
-_080F8A9C:\n\
-    ldr r0, =gSpecialVar_0x8006\n\
-    strh r7, [r0]\n\
-    b _080F8AB6\n\
-    .pool\n\
-_080F8AB0:\n\
-    ldr r1, =gSpecialVar_0x8006\n\
-    adds r0, r7, 0x4\n\
-    strh r0, [r1]\n\
-_080F8AB6:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 static void ShowContestWinnerCleanup(void)
 {
@@ -475,7 +295,7 @@ u8 GiveMonArtistRibbon(void)
         SetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
         if (GetRibbonCount(&gPlayerParty[gUnknown_02039F24]) > 4)
             sub_80EE4DC(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON);
-        
+
         return 1;
     }
     else
