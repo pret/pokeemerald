@@ -44,7 +44,7 @@ struct FrontierBrainMon
     u16 heldItem;
     u8 fixedIV;
     u8 nature;
-    u8 evs[6];
+    u8 evs[NUM_STATS];
     u16 moves[4];
 };
 
@@ -684,7 +684,7 @@ const u16 gFrontierBannedSpecies[] =
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
 };
 
-const u8 *const gUnknown_08611CB0[][2] = 
+static const u8 *const gUnknown_08611CB0[][2] =
 {
     {gText_BattleTower2,  gUnknown_085ED164},
     {gText_BattleTower2,  gUnknown_085ED170},
@@ -698,13 +698,13 @@ const u8 *const gUnknown_08611CB0[][2] =
     {gText_BattleTower2,  gUnknown_085ED188},
 };
 
-const u8 *const gLevelModeText[] = 
+static const u8 *const gLevelModeText[] =
 {
     gText_RecordsLv50,
     gText_RecordsOpenLevel,
 };
 
-const u8 *const gFacilityToRecordsText[] = 
+static const u8 *const gHallFacilityToRecordsText[] =
 {
     gText_FrontierFacilityWinStreak,
     gText_FrontierFacilityWinStreak,
@@ -718,7 +718,7 @@ const u8 *const gFacilityToRecordsText[] =
     gText_FrontierFacilityWinStreak,
 };
 
-const u16 gFacilityToBrainTrainerId[] = 
+static const u16 gFacilityToBrainTrainerId[] =
 {
     [FRONTIER_FACILITY_TOWER]   = TRAINER_ANABEL,
     [FRONTIER_FACILITY_DOME]    = TRAINER_TUCKER,
@@ -729,7 +729,7 @@ const u16 gFacilityToBrainTrainerId[] =
     [FRONTIER_FACILITY_PYRAMID] = TRAINER_BRANDON,
 };
 
-const u8 *const gUnknown_08611D40[] =
+static const u8 *const gUnknown_08611D40[] =
 {
     gText_082C843F,
     gText_082C848B,
@@ -740,7 +740,7 @@ const u8 *const gUnknown_08611D40[] =
     gText_082C86C3,
 };
 
-const u8 *const gUnknown_08611D5C[] =
+static const u8 *const gUnknown_08611D5C[] =
 {
     gText_082C8458,
     gText_082C84C1,
@@ -751,7 +751,7 @@ const u8 *const gUnknown_08611D5C[] =
     gText_082C86FE,
 };
 
-const u8 *const gUnknown_08611D78[] =
+static const u8 *const gUnknown_08611D78[] =
 {
     gText_082C846C,
     gText_082C84D0,
@@ -762,7 +762,7 @@ const u8 *const gUnknown_08611D78[] =
     gText_082C8739,
 };
 
-const u8 *const gUnknown_08611D94[] =
+static const u8 *const gUnknown_08611D94[] =
 {
     gText_082C8480,
     gText_082C84F7,
@@ -773,13 +773,13 @@ const u8 *const gUnknown_08611D94[] =
     gText_082C877B,
 };
 
-const u8 *const *const gUnknown_08611DB0[] =
+static const u8 *const *const gUnknown_08611DB0[] =
 {
     gUnknown_08611D40,
     gUnknown_08611D78,
 };
 
-const u8 *const *const gUnknown_08611DB8[] =
+static const u8 *const *const gUnknown_08611DB8[] =
 {
     gUnknown_08611D5C,
     gUnknown_08611D94,
@@ -2224,8 +2224,8 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gFacilityToRecordsText[hallFacilityId]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[hallFacilityId]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2251,8 +2251,8 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gFacilityToRecordsText[9]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gFacilityToRecordsText[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, gHallFacilityToRecordsText[9]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gHallFacilityToRecordsText[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2510,7 +2510,7 @@ void CreateFrontierBrainPokemon(void)
                   TRUE, j,
                   TRUE, FRONTIER_BRAIN_OTID);
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
-        for (j = 0; j < 6; j++)
+        for (j = 0; j < NUM_STATS; j++)
             SetMonData(&gEnemyParty[monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
         friendship = 0xFF;
         for (j = 0; j < 4; j++)

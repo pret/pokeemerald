@@ -1,7 +1,3 @@
-//
-// Created by scott on 9/12/2017.
-//
-
 #ifndef GUARD_EVENT_SCRIPTS_H
 #define GUARD_EVENT_SCRIPTS_H
 
@@ -578,4 +574,9 @@ extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224175[];
 extern const u8 SSTidalCorridor_EventScript_23C050[];
 extern const u8 gUnknown_082A8350[];
 
-#endif //GUARD_EVENT_SCRIPTS_H
+// Battle Pyramid.
+extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
+extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F[];
+extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A[];
+
+#endif // GUARD_EVENT_SCRIPTS_H

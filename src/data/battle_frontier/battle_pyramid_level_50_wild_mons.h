@@ -1,5 +1,5 @@
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round1[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round1[] =
 {
     {
         .species = SPECIES_PLUSLE,
@@ -51,7 +51,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round1[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round2[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round2[] =
 {
     {
         .species = SPECIES_GULPIN,
@@ -103,7 +103,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round2[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round3[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round3[] =
 {
     {
         .species = SPECIES_GROWLITHE,
@@ -155,7 +155,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round3[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round4[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round4[] =
 {
     {
         .species = SPECIES_DUNSPARCE,
@@ -207,7 +207,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round4[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round5[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round5[] =
 {
     {
         .species = SPECIES_HAUNTER,
@@ -259,7 +259,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round5[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round6[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round6[] =
 {
     {
         .species = SPECIES_DIGLETT,
@@ -311,7 +311,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round6[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round7[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round7[] =
 {
     {
         .species = SPECIES_GLALIE,
@@ -363,7 +363,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round7[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round8[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round8[] =
 {
     {
         .species = SPECIES_WEEZING,
@@ -415,7 +415,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round8[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round9[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round9[] =
 {
     {
         .species = SPECIES_WOBBUFFET,
@@ -467,7 +467,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round9[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round10[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round10[] =
 {
     {
         .species = SPECIES_GOLEM,
@@ -519,7 +519,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round10[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round11[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round11[] =
 {
     {
         .species = SPECIES_POLIWRATH,
@@ -571,7 +571,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round11[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round12[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round12[] =
 {
     {
         .species = SPECIES_QUAGSIRE,
@@ -623,7 +623,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round12[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round13[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round13[] =
 {
     {
         .species = SPECIES_PINECO,
@@ -675,7 +675,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round13[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round14[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round14[] =
 {
     {
         .species = SPECIES_SABLEYE,
@@ -727,7 +727,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round14[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round15[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round15[] =
 {
     {
         .species = SPECIES_OCTILLERY,
@@ -779,7 +779,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round15[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round16[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round16[] =
 {
     {
         .species = SPECIES_DUSKULL,
@@ -831,7 +831,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round16[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round17[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round17[] =
 {
     {
         .species = SPECIES_MAWILE,
@@ -883,7 +883,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round17[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round18[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round18[] =
 {
     {
         .species = SPECIES_DRAGONAIR,
@@ -935,7 +935,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round18[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round19[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round19[] =
 {
     {
         .species = SPECIES_ARCANINE,
@@ -987,7 +987,7 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round19[] =
     }
 };
 
-const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round20[] = 
+static const struct PyramidWildMon sLevel50WildMons_Round20[] =
 {
     {
         .species = SPECIES_KANGASKHAN,
@@ -1039,26 +1039,26 @@ const struct PyramidWildMon gBattlePyramidLevel50WildMons_Round20[] =
     }
 };
 
-const struct PyramidWildMon *const gBattlePyramidLevel50WildMonPointers[] = 
+static const struct PyramidWildMon *const sLevel50WildMonPointers[] =
 {
-    gBattlePyramidLevel50WildMons_Round1,
-    gBattlePyramidLevel50WildMons_Round2,
-    gBattlePyramidLevel50WildMons_Round3,
-    gBattlePyramidLevel50WildMons_Round4,
-    gBattlePyramidLevel50WildMons_Round5,
-    gBattlePyramidLevel50WildMons_Round6,
-    gBattlePyramidLevel50WildMons_Round7,
-    gBattlePyramidLevel50WildMons_Round8,
-    gBattlePyramidLevel50WildMons_Round9,
-    gBattlePyramidLevel50WildMons_Round10,
-    gBattlePyramidLevel50WildMons_Round11,
-    gBattlePyramidLevel50WildMons_Round12,
-    gBattlePyramidLevel50WildMons_Round13,
-    gBattlePyramidLevel50WildMons_Round14,
-    gBattlePyramidLevel50WildMons_Round15,
-    gBattlePyramidLevel50WildMons_Round16,
-    gBattlePyramidLevel50WildMons_Round17,
-    gBattlePyramidLevel50WildMons_Round18,
-    gBattlePyramidLevel50WildMons_Round19,
-    gBattlePyramidLevel50WildMons_Round20
+    sLevel50WildMons_Round1,
+    sLevel50WildMons_Round2,
+    sLevel50WildMons_Round3,
+    sLevel50WildMons_Round4,
+    sLevel50WildMons_Round5,
+    sLevel50WildMons_Round6,
+    sLevel50WildMons_Round7,
+    sLevel50WildMons_Round8,
+    sLevel50WildMons_Round9,
+    sLevel50WildMons_Round10,
+    sLevel50WildMons_Round11,
+    sLevel50WildMons_Round12,
+    sLevel50WildMons_Round13,
+    sLevel50WildMons_Round14,
+    sLevel50WildMons_Round15,
+    sLevel50WildMons_Round16,
+    sLevel50WildMons_Round17,
+    sLevel50WildMons_Round18,
+    sLevel50WildMons_Round19,
+    sLevel50WildMons_Round20
 };
