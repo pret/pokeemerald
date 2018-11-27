@@ -514,7 +514,7 @@ _0810F5EE:
 	bne _0810F608
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	b _0810F610
 	.pool
 _0810F608:
@@ -1449,7 +1449,7 @@ _0810FD60:
 	ldrh r0, [r5, 0x1C]
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldrb r0, [r5, 0xC]
 	movs r1, 0x3
 	ands r1, r0

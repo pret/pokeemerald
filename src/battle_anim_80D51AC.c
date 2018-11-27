@@ -442,7 +442,7 @@ void SlideMonToOriginalPos(struct Sprite *sprite)
     sprite->data[2] = gSprites[monSpriteId].pos1.x;
     sprite->data[3] = gSprites[monSpriteId].pos1.y + gSprites[monSpriteId].pos2.y;
     sprite->data[4] = gSprites[monSpriteId].pos1.y;
-    sub_80A6E14(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
     sprite->data[5] = gSprites[monSpriteId].pos2.x;
@@ -520,7 +520,7 @@ void SlideMonToOffset(struct Sprite *sprite)
     sprite->data[2] = gSprites[monSpriteId].pos1.x + gBattleAnimArgs[1];
     sprite->data[3] = gSprites[monSpriteId].pos1.y;
     sprite->data[4] = gSprites[monSpriteId].pos1.y + gBattleAnimArgs[2];
-    sub_80A6E14(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
     sprite->data[5] = monSpriteId;
@@ -556,7 +556,7 @@ void sub_80D5B48(struct Sprite *sprite)
     sprite->data[2] = sprite->data[1] + gBattleAnimArgs[1];
     sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
     sprite->data[4] = sprite->data[3] + gBattleAnimArgs[2];
-    sub_80A6E14(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = gSprites[spriteId].pos2.x << 8;
     sprite->data[4] = gSprites[spriteId].pos2.y << 8;
     sprite->data[5] = spriteId;

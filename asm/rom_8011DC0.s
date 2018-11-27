@@ -10149,7 +10149,7 @@ sub_801AAD4: @ 801AAD4
 	ldr r6, =gPlayerParty
 	ldr r5, =gEnemyParty
 _0801AAE4:
-	ldr r0, =gUnknown_0203CEF8
+	ldr r0, =gSelectedOrderFromParty
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -10504,7 +10504,7 @@ _0801AE54:
 	movs r1, 0
 	movs r2, 0x20
 	bl memset
-	ldr r0, =gUnknown_0203CEF8
+	ldr r0, =gSelectedOrderFromParty
 	ldrb r1, [r0]
 	ldrb r0, [r0, 0x1]
 	cmn r1, r0

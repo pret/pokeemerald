@@ -1237,7 +1237,7 @@ extern const u32 gMonBackPic_Pichu[];
 extern const u32 gMonShinyPalette_Pichu[];
 extern const u32 gMonStillFrontPic_Pichu[];
 extern const u8 gMonIcon_Pichu[];
-extern const u32 gMonFootprint_Pichu[];
+extern const u8 gMonFootprint_Pichu[];
 extern const u32 gMonFrontPic_Cleffa[];
 extern const u32 gMonPalette_Cleffa[];
 extern const u32 gMonBackPic_Cleffa[];
@@ -2860,6 +2860,7 @@ extern const u32 gMonPalette_CircledQuestionMark[];
 extern const u32 gMonShinyPalette_CircledQuestionMark[];
 extern const u32 gMonStillFrontPic_CircledQuestionMark[];
 extern const u8 gMonIcon_QuestionMark[];
+extern const u8 gMonFootprint_QuestionMark[];
 extern const u32 gMonFrontPic_DoubleQuestionMark[];
 extern const u32 gMonBackPic_DoubleQuestionMark[];
 extern const u32 gMonPalette_DoubleQuestionMark[];
@@ -4731,5 +4732,8 @@ extern const u32 gUnknown_08D91DB8[];
 extern const u32 gUnknown_08D927EC[];
 
 extern const u32 gSlotMachineReelTime_Gfx[];
+
+extern const u32 gUnknown_08D8D410[];
+extern const u32 gUnknown_08D8D58C[];
 
 #endif //GUARD_GRAPHICS_H

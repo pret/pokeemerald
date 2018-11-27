@@ -29,7 +29,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 
-extern u8 gUnknown_0203CEF8[3];
+extern u8 gSelectedOrderFromParty[3];
 extern void door_upload_tiles(void);
 
 extern const struct MapLayout *const gMapLayouts[];
@@ -508,14 +508,14 @@ static void sub_81A9834(void)
                         SetMonMoveSlot(&gPlayerParty[j], MOVE_SKETCH, k);
                 }
                 gSaveBlock1Ptr->playerParty[id] = gPlayerParty[j];
-                gUnknown_0203CEF8[j] = id + 1;
+                gSelectedOrderFromParty[j] = id + 1;
                 break;
             }
         }
     }
 
     for (i = 0; i < 3; i++)
-        gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gUnknown_0203CEF8[i];
+        gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
 }
 
 static u8 sub_81A9998(s32 *arg0, u8 arg1, u8 arg2)

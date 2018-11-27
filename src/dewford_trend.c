@@ -1,13 +1,14 @@
 #include "global.h"
 #include "dewford_trend.h"
 #include "easy_chat.h"
-#include "constants/easy_chat.h"
 #include "event_data.h"
 #include "link.h"
 #include "malloc.h"
 #include "random.h"
 #include "text.h"
 #include "tv.h"
+#include "string_util.h"
+#include "constants/easy_chat.h"
 
 // static functions
 static void sub_8122804(struct EasyChatPair *s, u16 b, u8 c);

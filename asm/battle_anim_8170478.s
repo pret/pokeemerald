@@ -1473,7 +1473,7 @@ sub_8171104: @ 8171104
 	ldr r0, =0x0000ffd8
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_8171134
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -2631,7 +2631,7 @@ _08171A26:
 	ldrsb r0, [r1, r0]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	add r4, r10
 	ldr r0, =sub_8171AAC
 	str r0, [r4]
@@ -5571,7 +5571,7 @@ sub_817330C: @ 817330C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
@@ -5600,7 +5600,7 @@ sub_817330C: @ 817330C
 	ldr r0, =0x0000ffe0
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r2, =gSprites
 	ldr r1, =gBattlerSpriteIds
 	ldr r0, =gBattleAnimAttacker

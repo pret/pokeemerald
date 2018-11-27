@@ -472,7 +472,7 @@ gUnknown_0203CEF0: @ 203CEF0
 gUnknown_0203CEF4: @ 203CEF4
 	.space 0x4
 
-gUnknown_0203CEF8: @ 203CEF8
+gSelectedOrderFromParty: @ 203CEF8
 	.space 0x4
 
 gUnknown_0203CEFC: @ 203CEFC
