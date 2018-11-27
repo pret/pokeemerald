@@ -3,7 +3,7 @@
 gSongTable:: @ 86B49F0
 	song mus_dummy, 0, 0
 	song se_kaifuku, 1, 1           @ Healing Item
-	song se_pc_login, 1, 1          @ PC Logon
+	song se_pc_login, 1, 1          @ PC Login
 	song se_pc_off, 1, 1            @ PC Shutdown
 	song se_pc_on, 1, 1             @ PC Startup
 	song se_select, 2, 2            @ Cursor Selection
@@ -36,7 +36,7 @@ gSongTable:: @ 86B49F0
 	song se_hazure, 1, 1            @ Failure
 	song se_exp, 1, 1               @ Exp. Bar
 	song se_jite_pyoko, 1, 1        @ Bunny Hop
-	song se_mu_pachi, 1, 1
+	song se_mu_pachi, 1, 1          @ Toggle Switch
 	song se_tk_kasya, 1, 1          @ Mossdeep Gym/Trick House Switch
 	song se_fu_zaku, 1, 1
 	song se_fu_zaku2, 1, 1
@@ -44,7 +44,7 @@ gSongTable:: @ 86B49F0
 	song se_ru_gashin, 1, 1         @ Sootopolis Gym - Stairs Appear
 	song se_ru_gasyan, 1, 1         @ Sootopolis Gym - Ice Breaking
 	song se_ru_bari, 1, 1           @ Sootopolis Gym - Walking on Ice
-	song se_ru_hyuu, 1, 1           @ Falling Down
+	song se_ru_hyuu, 1, 1           @ Falling Down a Hole
 	song se_ki_gasyan, 2, 2
 	song se_tk_warpin, 1, 1         @ Warp In
 	song se_tk_warpout, 1, 1        @ Warp Out
@@ -74,7 +74,7 @@ gSongTable:: @ 86B49F0
 	song se_mizu, 2, 2              @ Puddle
 	song se_hashi, 2, 2             @ Fortree Walkways
 	song se_daugi, 1, 1             @ Slots - Credits
-	song se_pinpon, 1, 1            @ Ding-dong!
+	song se_pinpon, 1, 1            @ Elevator - Reached Destination
 	song se_fuusen1, 2, 2           @ Red Balloon
 	song se_fuusen2, 2, 2           @ Blue Balloon
 	song se_fuusen3, 2, 2           @ Yellow Balloon
@@ -104,7 +104,7 @@ gSongTable:: @ 86B49F0
 	song se_c_syu, 1, 1             @ Contest - Pokémon Switches Out
 	song se_c_pikon, 1, 1           @ Contest - Pokémon Switches In
 	song se_reapoke, 1, 1           @ Shiny Pokémon
-	song se_op_basyu, 1, 1          @ Opening Movie -> Title Screen whoosh
+	song se_op_basyu, 1, 1          @ Opening Movie -> Title Screen Transition
 	song se_bt_start, 1, 1          @ Battle Mugshot whoosh
 	song se_dendou, 1, 1            @ Audience Cheering
 	song se_jihanki, 1, 1           @ Vending Machine
@@ -255,14 +255,14 @@ gSongTable:: @ 86B49F0
 	song se_rg_card3, 1, 1          @ Trainer Card 3 (FRLG)
 	song se_rg_bag1, 1, 1           @ Bag Scroll (FRLG)
 	song se_rg_bag2, 1, 1           @ Bag Pocket Change (FRLG)
-	song se_rg_getting, 1, 1        
+	song se_rg_getting, 1, 1
 	song se_rg_shop, 1, 1           @ Cash Register (FRLG)
 	song se_rg_kiteki, 1, 1         @ S.S. Anne Horn (FRLG)
 	song se_rg_help_op, 1, 1        @ Help Menu Open (FRLG)
 	song se_rg_help_cl, 1, 1        @ Help Menu Close (FRLG)
 	song se_rg_help_ng, 1, 1        @ Help Menu Error (FRLG)
 	song se_rg_deomov, 1, 1         @ Deoxys Moves
-	song se_rg_excellent, 1, 1
+	song se_rg_excellent, 1, 1      @ HP Restored (FRLG)
 	song se_rg_nawamiss, 1, 1
 	song se_toreeye, 1, 1           @ Trainer's Eye Call
 	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up

@@ -13,7 +13,7 @@ extern void sub_80FED28(struct Sprite *);
 extern void sub_80FEE78(struct Sprite *);
 extern void sub_80FEF44(struct Sprite *);
 extern void sub_80FEFFC(struct Sprite *);
-extern void sub_80FF268(struct Sprite *);
+extern void AnimMoveTwisterParticle(struct Sprite *);
 extern void sub_80FF0F4(struct Sprite *);
 extern void sub_80FF374(struct Sprite *);
 extern void sub_80FF698(struct Sprite *);
@@ -437,7 +437,7 @@ const struct SpriteTemplate gUnknown_085923A8 =
     .anims = gUnknown_08592388,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80FF268,
+    .callback = AnimMoveTwisterParticle,
 };
 
 const union AnimCmd gUnknown_085923C0[] =

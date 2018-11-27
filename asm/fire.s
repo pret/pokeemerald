@@ -347,7 +347,7 @@ sub_810916C: @ 810916C
 	strh r1, [r0, 0x32]
 	movs r1, 0x50
 	strh r1, [r0, 0x36]
-	ldr r1, =sub_80A6EEC
+	ldr r1, =StartAnimLinearTranslation
 	str r1, [r0, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
@@ -421,7 +421,7 @@ sub_810921C: @ 810921C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	movs r1, 0
@@ -613,7 +613,7 @@ sub_81093A4: @ 81093A4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x4]
 	strh r0, [r4, 0x30]
@@ -625,7 +625,7 @@ sub_81093A4: @ 81093A4
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =sub_80A64B0
+	ldr r0, =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_81093E4
 	adds r0, r4, 0
@@ -1564,7 +1564,7 @@ _08109B12:
 _08109B18:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80A69CC
+	bl InitAnimSpritePos
 	ldr r4, =gBattleAnimArgs
 	ldrb r1, [r4, 0x4]
 	adds r0, r5, 0

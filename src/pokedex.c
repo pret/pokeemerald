@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_main.h"
 #include "bg.h"
 #include "data2.h"
 #include "decompress.h"
@@ -29,14 +30,17 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
+extern u8 gUnknown_030061EC;
+
+// EWRAM
 static EWRAM_DATA struct PokedexView *gUnknown_02039B4C = NULL;
 static EWRAM_DATA u16 gUnknown_02039B50 = 0;
 static EWRAM_DATA u8 gUnknown_02039B52 = 0;
 static EWRAM_DATA struct PokedexListItem *gUnknown_02039B54 = NULL;
 
+// IWRAM common
 u8 gUnknown_030060B0;
-MainCallback gUnknown_030060B4;
-u8 gUnknown_030061EC;
+void (*gUnknown_030060B4)(void);
 
 struct PokedexEntry
 {
@@ -83,35 +87,6 @@ struct UnknownStruct4
     u8 unk8;
     u8 unk9;
 };
-
-//TO BE CONVERTED TO C
-
-extern const u8 gUnknown_0855D30C[];
-extern struct BgTemplate gUnknown_0856E630[];
-extern struct WindowTemplate gUnknown_0856E640[];
-extern const u16 gUnknown_0856E610[16];
-extern const struct PokedexEntry gPokedexEntries[];
-extern struct BgTemplate gUnknown_0856E668[];
-extern struct WindowTemplate gUnknown_0856E670[];
-extern const u8 *gMonFootprintTable[];
-extern u8 gUnknown_0856ED08[][4];
-extern struct BgTemplate gUnknown_0856EFF8[];
-extern struct WindowTemplate gUnknown_0856F008[];
-extern const u8 gUnknown_0856ED9C[][4];
-extern const u8 gUnknown_0856EDB8[][4];
-extern const u8 gUnknown_0856EDD4[][4];
-extern const u8 gUnknown_0856EDF0[][4];
-extern const struct UnknownStruct1 gUnknown_0856EFC8[];
-extern const struct UnknownStruct3 gUnknown_0856ED30[];
-extern const struct UnknownStruct4 gUnknown_0856ED48[];
-extern const struct UnknownStruct2 gUnknown_0856EE0C[];
-extern const struct UnknownStruct2 gUnknown_0856EE5C[];
-extern const struct UnknownStruct2 gUnknown_0856EEB4[];
-extern const struct UnknownStruct2 gUnknown_0856EF14[];
-extern const struct UnknownStruct2 gUnknown_0856EE24[];
-extern const u8 gUnknown_0856EFAC[];
-extern const u8 gUnknown_0856EFAE[];
-extern const u8 gUnknown_0856EFB4[];
 
 #define HOENN_DEX_COUNT 202
 #define NATIONAL_DEX_COUNT 386
@@ -651,7 +626,7 @@ static const union AnimCmd *const sSpriteAnimTable_855D190[] =
     sSpriteAnim_855D10C
 };
 
-const struct SpriteTemplate gUnknown_0855D194 =
+static const struct SpriteTemplate gUnknown_0855D194 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -662,7 +637,7 @@ const struct SpriteTemplate gUnknown_0855D194 =
     .callback = sub_80BE604,
 };
 
-const struct SpriteTemplate gUnknown_0855D1AC =
+static const struct SpriteTemplate gUnknown_0855D1AC =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -673,7 +648,7 @@ const struct SpriteTemplate gUnknown_0855D1AC =
     .callback = sub_80BE658,
 };
 
-const struct SpriteTemplate gUnknown_0855D1C4 =
+static const struct SpriteTemplate gUnknown_0855D1C4 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -684,7 +659,7 @@ const struct SpriteTemplate gUnknown_0855D1C4 =
     .callback = sub_80BE758,
 };
 
-const struct SpriteTemplate gUnknown_0855D1DC =
+static const struct SpriteTemplate gUnknown_0855D1DC =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -695,7 +670,7 @@ const struct SpriteTemplate gUnknown_0855D1DC =
     .callback = sub_80BE780,
 };
 
-const struct SpriteTemplate gUnknown_0855D1F4 =
+static const struct SpriteTemplate gUnknown_0855D1F4 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -706,7 +681,7 @@ const struct SpriteTemplate gUnknown_0855D1F4 =
     .callback = sub_80BE44C,
 };
 
-const struct SpriteTemplate gUnknown_0855D20C =
+static const struct SpriteTemplate gUnknown_0855D20C =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -717,7 +692,7 @@ const struct SpriteTemplate gUnknown_0855D20C =
     .callback = sub_80BE44C,
 };
 
-const struct SpriteTemplate gUnknown_0855D224 =
+static const struct SpriteTemplate gUnknown_0855D224 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -728,7 +703,7 @@ const struct SpriteTemplate gUnknown_0855D224 =
     .callback = sub_80BE44C,
 };
 
-const struct SpriteTemplate gUnknown_0855D23C =
+static const struct SpriteTemplate gUnknown_0855D23C =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -739,7 +714,7 @@ const struct SpriteTemplate gUnknown_0855D23C =
     .callback = sub_80BE44C,
 };
 
-const struct SpriteTemplate gUnknown_0855D254 =
+static const struct SpriteTemplate gUnknown_0855D254 =
 {
     .tileTag = 4096,
     .paletteTag = 4096,
@@ -750,22 +725,22 @@ const struct SpriteTemplate gUnknown_0855D254 =
     .callback = sub_80BE834,
 };
 
-const struct CompressedSpriteSheet gSpriteSheets_0855D26C[] =
+static const struct CompressedSpriteSheet gSpriteSheets_0855D26C[] =
 {
     {gPokedexMenu2_Gfx, 0x2000, 4096},
     {0}
 };
 
-const struct SpritePalette gSpritePalettes_0855D26C[] =
+static const struct SpritePalette gSpritePalettes_0855D26C[] =
 {
     {gPokedexText_Pal, 4096},
     {0}
 };
 
-const u8 gUnknown_0855D28C[] = {0x4, 0x8, 0x10, 0x20, 0x20};
-const u8 gUnknown_0855D291[] = {0x8, 0x4, 0x2, 0x1, 0x1};
+static const u8 gUnknown_0855D28C[] = {0x4, 0x8, 0x10, 0x20, 0x20};
+static const u8 gUnknown_0855D291[] = {0x8, 0x4, 0x2, 0x1, 0x1};
 
-const struct BgTemplate gBgTemplates_0855D298[] =
+static const struct BgTemplate gBgTemplates_0855D298[] =
 {
     {
         .bg = 0,
@@ -805,15 +780,447 @@ const struct BgTemplate gBgTemplates_0855D298[] =
     }
 };
 
-const struct WindowTemplate sWindowTemplates_0855D2A8[] =
+static const struct WindowTemplate sWindowTemplates_0855D2A8[] =
 {
-    {2, 0, 0, 0x20, 0x20, 0, 1},
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 32,
+        .height = 32,
+        .paletteNum = 0,
+        .baseBlock = 1,
+    },
     DUMMY_WIN_TEMPLATE
 };
 
-const u8 gUnknown_0855D2B8[] = _("{NO}000");
-const u8 gUnknown_0855D2BE[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
-const u8 sText_TenDashes[] = _("----------");
+static const u8 gUnknown_0855D2B8[] = _("{NO}000");
+static const u8 gUnknown_0855D2BE[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
+static const u8 sText_TenDashes[] = _("----------");
+
+ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
+
+#include "data/pokemon/pokedex_text.h"
+#include "data/pokemon/pokedex_entries.h"
+
+static const u16 gUnknown_0856E610[] = INCBIN_U16("graphics/pokedex/black.gbapal");
+
+static const struct BgTemplate gUnknown_0856E630[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 12,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 13,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 14,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    }
+};
+
+static const struct WindowTemplate gUnknown_0856E640[] = 
+{
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 32,
+        .height = 20,
+        .paletteNum = 0,
+        .baseBlock = 0x0001,
+    },
+    {
+        .bg = 2,
+        .tilemapLeft = 25,
+        .tilemapTop = 8,
+        .width = 2,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x0281,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 12,
+        .width = 32,
+        .height = 7,
+        .paletteNum = 8,
+        .baseBlock = 0x0285,
+    },
+    {
+        .bg = 2,
+        .tilemapLeft = 18,
+        .tilemapTop = 3,
+        .width = 10,
+        .height = 8,
+        .paletteNum = 9,
+        .baseBlock = 0x0365,
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct BgTemplate gUnknown_0856E668[] =
+{
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 14,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+};
+
+static const struct WindowTemplate gUnknown_0856E670[] = 
+{
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 32,
+        .height = 20,
+        .paletteNum = 0,
+        .baseBlock = 0x0001,
+    },
+    {
+        .bg = 2,
+        .tilemapLeft = 25,
+        .tilemapTop = 8,
+        .width = 2,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 0x0281,
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const u8 sText_TenDashes2[] = _("----------");
+
+#include "data/pokemon_graphics/footprint_table.h"
+
+static const u8 gUnknown_0856ED08[][4] =
+{
+    {0x00, 0x00, 0x00, 0x00},
+    {0xbb, 0x03, 0xd5, 0x03},
+    {0xbe, 0x03, 0xd8, 0x03},
+    {0xc1, 0x03, 0xdb, 0x03},
+    {0xc4, 0x03, 0xde, 0x03},
+    {0xc7, 0x03, 0xe1, 0x03},
+    {0xca, 0x03, 0xe4, 0x03},
+    {0xcd, 0x03, 0xe7, 0x03},
+    {0xd0, 0x03, 0xea, 0x03},
+    {0xd3, 0x02, 0xed, 0x02},
+};
+
+static const struct UnknownStruct3 gUnknown_0856ED30[] =
+{
+    {
+        .text = gUnknown_085E87A5,
+        .unk4 = 0,
+        .unk5 = 0,
+        .unk6 = 5,
+    },
+    {
+        .text = gUnknown_085E87D6,
+        .unk4 = 6,
+        .unk5 = 0,
+        .unk6 = 5,
+    },
+    {
+        .text = gUnknown_085E87EF,
+        .unk4 = 12,
+        .unk5 = 0,
+        .unk6 = 5,
+    },
+};
+
+static const struct UnknownStruct4 gUnknown_0856ED48[] =
+{
+    {
+        .text = gUnknown_085E8840,
+        .unk4 = 0,
+        .unk5 = 2,
+        .unk6 = 5,
+        .unk7 = 5,
+        .unk8 = 2,
+        .unk9 = 12,
+    },
+    {
+        .text = gUnknown_085E887C,
+        .unk4 = 0,
+        .unk5 = 4,
+        .unk6 = 5,
+        .unk7 = 5,
+        .unk8 = 4,
+        .unk9 = 12,
+    },
+    {
+        .text = gUnknown_085E88A6,
+        .unk4 = 0,
+        .unk5 = 6,
+        .unk6 = 5,
+        .unk7 = 5,
+        .unk8 = 6,
+        .unk9 = 6,
+    },
+    {
+        .text = gUnknown_085E88A6,
+        .unk4 = 0,
+        .unk5 = 6,
+        .unk6 = 5,
+        .unk7 = 11,
+        .unk8 = 6,
+        .unk9 = 6,
+    },
+    {
+        .text = gUnknown_085E881F,
+        .unk4 = 0,
+        .unk5 = 8,
+        .unk6 = 5,
+        .unk7 = 5,
+        .unk8 = 8,
+        .unk9 = 12,
+    },
+    {
+        .text = gUnknown_085E8806,
+        .unk4 = 0,
+        .unk5 = 10,
+        .unk6 = 5,
+        .unk7 = 5,
+        .unk8 = 10,
+        .unk9 = 12,
+    },
+    {
+        .text = gUnknown_085E88C8,
+        .unk4 = 0,
+        .unk5 = 12,
+        .unk6 = 5,
+        .unk7 = 0,
+        .unk8 = 0,
+        .unk9 = 0,
+    },
+};
+
+static const u8 gUnknown_0856ED9C[][4] =
+{
+    {0xFF, 0xFF, 0xFF,    1},
+    {0xFF, 0xFF,    0,    2},
+    {0xFF,    3,    1,    4},
+    {   2, 0xFF,    1,    4},
+    {0xFF, 0xFF,    2,    5},
+    {0xFF, 0xFF,    4,    6},
+    {0xFF, 0xFF,    5, 0xFF},
+};
+
+static const u8 gUnknown_0856EDB8[][4] =
+{
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF,    5},
+    {0xFF, 0xFF,    4,    6},
+    {0xFF, 0xFF,    5, 0xFF},
+};
+
+static const u8 gUnknown_0856EDD4[][4] =
+{
+    {0xFF, 0xFF, 0xFF,    1},
+    {0xFF, 0xFF,    0,    2},
+    {0xFF,    3,    1,    4},
+    {   2, 0xFF,    1,    4},
+    {0xFF, 0xFF,    2,    6},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF,    4, 0xFF},
+};
+
+static const u8 gUnknown_0856EDF0[][4] =
+{
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF,    6},
+    {0xFF, 0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF,    4, 0xFF},
+};
+
+static const struct UnknownStruct2 gUnknown_0856EE0C[] =
+{
+    {gUnknown_085E89A4, gUnknown_085E88DF},
+    {gUnknown_085E89BB, gUnknown_085E88E9},
+    {NULL, NULL},
+};
+
+static const struct UnknownStruct2 gUnknown_0856EE24[] =
+{
+    {gUnknown_085E89D4, gUnknown_085E88F6},
+    {gUnknown_085E8A02, gUnknown_085E8905},
+    {gUnknown_085E8A37, gUnknown_085E8911},
+    {gUnknown_085E8A73, gUnknown_085E891F},
+    {gUnknown_085E8AAF, gUnknown_085E892D},
+    {gUnknown_085E8AEA, gUnknown_085E893A},
+    {NULL, NULL},
+};
+
+static const struct UnknownStruct2 gUnknown_0856EE5C[] =
+{
+    {gUnknown_085E8B25, gUnknown_085E8B26},
+    {gUnknown_085E8B25, gUnknown_085E8948},
+    {gUnknown_085E8B25, gUnknown_085E894C},
+    {gUnknown_085E8B25, gUnknown_085E8950},
+    {gUnknown_085E8B25, gUnknown_085E8954},
+    {gUnknown_085E8B25, gUnknown_085E8958},
+    {gUnknown_085E8B25, gUnknown_085E895C},
+    {gUnknown_085E8B25, gUnknown_085E8960},
+    {gUnknown_085E8B25, gUnknown_085E8964},
+    {gUnknown_085E8B25, gUnknown_085E8968},
+    {NULL, NULL},
+};
+
+static const struct UnknownStruct2 gUnknown_0856EEB4[] =
+{
+    {gUnknown_085E8B25, gUnknown_085E8B26},
+    {gUnknown_085E8B25, gUnknown_085E896B},
+    {gUnknown_085E8B25, gUnknown_085E896F},
+    {gUnknown_085E8B25, gUnknown_085E8974},
+    {gUnknown_085E8B25, gUnknown_085E897B},
+    {gUnknown_085E8B25, gUnknown_085E8981},
+    {gUnknown_085E8B25, gUnknown_085E8987},
+    {gUnknown_085E8B25, gUnknown_085E898D},
+    {gUnknown_085E8B25, gUnknown_085E8994},
+    {gUnknown_085E8B25, gUnknown_085E8999},
+    {gUnknown_085E8B25, gUnknown_085E899F},
+    {NULL, NULL},
+};
+
+static const struct UnknownStruct2 gUnknown_0856EF14[] =
+{
+    {gUnknown_085E8B25, gUnknown_085E8B35},
+    {gUnknown_085E8B25, gTypeNames[TYPE_NORMAL]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_FIGHTING]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_FLYING]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_POISON]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_GROUND]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_ROCK]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_BUG]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_GHOST]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_STEEL]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_FIRE]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_WATER]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_GRASS]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_ELECTRIC]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_PSYCHIC]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_ICE]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_DRAGON]},
+    {gUnknown_085E8B25, gTypeNames[TYPE_DARK]},
+    {NULL, NULL},
+};
+
+static const u8 gUnknown_0856EFAC[] = {0x00, 0x01};
+static const u8 gUnknown_0856EFAE[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05};
+static const u8 gUnknown_0856EFB4[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
+
+static const struct UnknownStruct1 gUnknown_0856EFC8[] =
+{
+    {gUnknown_0856EE5C, 6, 7, 10},
+    {gUnknown_0856EEB4, 8, 9, 11},
+    {gUnknown_0856EF14, 10,11, 18},
+    {gUnknown_0856EF14, 12, 13, 18},
+    {gUnknown_0856EE24, 4, 5, 6},
+    {gUnknown_0856EE0C, 2, 3, 2},
+};
+
+static const struct BgTemplate gUnknown_0856EFF8[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 12,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 13,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 14,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    }
+};
+
+static const struct WindowTemplate gUnknown_0856F008[] = 
+{
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 32,
+        .height = 20,
+        .paletteNum = 0,
+        .baseBlock = 0x0001,
+    },
+    DUMMY_WIN_TEMPLATE
+};
 
 // .text
 
@@ -3511,7 +3918,7 @@ void sub_80C020C(u32 num, u32 value, u32 c, u32 d)
     if (c)
         text3 = gPokedexEntries[num].description;
     else
-        text3 = gUnknown_0855D30C;
+        text3 = gExpandedPlaceholder_PokedexDescription;
     sub_80BE8DC(text3, GetStringCenterAlignXOffset(1, text3, 0xF0), 0x5F);
 }
 

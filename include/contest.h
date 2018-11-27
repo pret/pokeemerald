@@ -226,6 +226,11 @@ extern u8 gUnknown_02039F24;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 extern u8 gUnknown_02039F30;
+extern u8 gContestFinalStandings[4];
+extern u8 gContestPlayerMonIndex;
+extern s16 gUnknown_02039F08[4];
+extern s16 gContestMonConditions[4];
+extern u8 gIsLinkContest;
 
 struct Shared18000
 {
@@ -239,7 +244,7 @@ struct Shared18000
 
 struct ContestStruct_field_18
 {
-    u16 unk0;
+    u16 species;
     u16 unk2;
     u8 unk4_0:1;
     u8 unk5;
@@ -427,5 +432,6 @@ bool8 Contest_IsMonsTurnDisabled(u8 a);
 bool8 sub_80DE1E8(u8 a);
 void SetStartledString(u8 a, u8 b);
 s8 Contest_GetMoveExcitement(u16);
+void sub_80DEDA8(u8);
 
 #endif //GUARD_CONTEST_H

@@ -10,9 +10,9 @@
 #include "item_menu.h"
 #include "strings.h"
 #include "load_save.h"
+#include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 
-extern bool8 InBattlePyramid(void);
 extern u16 gUnknown_0203CF30[];
 extern const struct Item gItems[];
 

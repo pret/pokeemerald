@@ -63,17 +63,9 @@ extern u8 GetFrontierBrainMonNature(u8);
 extern void sub_81A4C30(void);
 extern u8 sub_81A3610(void);
 extern u16 GetFrontierBrainMonSpecies(u8);
-extern void ReducePlayerPartyToThree(void);
+extern void ReducePlayerPartyToSelectedMons(void);
 
-extern u8 gUnknown_0203CEF8[];
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
+extern u8 gSelectedOrderFromParty[];
 
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
@@ -2473,8 +2465,8 @@ static void sub_818EA84(void)
         break;
     case 8:
         sub_81B8558();
-        gUnknown_0203CEF8[0] = gSaveBlock2Ptr->frontier.field_CB0;
-        gUnknown_0203CEF8[1] = gSaveBlock2Ptr->frontier.field_CB0 >> 8;
+        gSelectedOrderFromParty[0] = gSaveBlock2Ptr->frontier.field_CB0;
+        gSelectedOrderFromParty[1] = gSaveBlock2Ptr->frontier.field_CB0 >> 8;
         break;
     case 9:
         gSpecialVar_Result = (gSaveBlock2Ptr->frontier.field_D0A * 2) - 3 + gSaveBlock2Ptr->frontier.field_D0B;
@@ -2543,7 +2535,7 @@ static void sub_818ED28(void)
         }
         break;
     case 8:
-        gSaveBlock2Ptr->frontier.field_CB0 = T1_READ_16(gUnknown_0203CEF8);
+        gSaveBlock2Ptr->frontier.field_CB0 = T1_READ_16(gSelectedOrderFromParty);
         break;
     }
 }
@@ -2756,17 +2748,17 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
     s32 i, count;
     u8 bits;
     u16 resultingEvs;
-    s32 evs[6];
+    s32 evs[NUM_STATS];
 
     count = 0, bits = evBits;
-    for (i = 0; i < 6; bits >>= 1, i++)
+    for (i = 0; i < NUM_STATS; bits >>= 1, i++)
     {
         if (bits & 1)
             count++;
     }
 
     resultingEvs = MAX_TOTAL_EVS / count;
-    for (i = 0; i < 6; bits <<= 1, i++)
+    for (i = 0; i < NUM_STATS; bits <<= 1, i++)
     {
         evs[i] = 0;
         if (evBits & bits)
@@ -4953,7 +4945,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
         for (i = 0; i < 3; i++)
         {
             s32 evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].evSpread;
-            for (k = 0, j = 0; j < 6; j++)
+            for (k = 0, j = 0; j < NUM_STATS; j++)
             {
                 allocatedArray[j] = 0;
                 if (evBits & 1)
@@ -4962,7 +4954,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             }
             k = MAX_TOTAL_EVS / k;
             evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].evSpread;
-            for (j = 0; j < 6; j++)
+            for (j = 0; j < NUM_STATS; j++)
             {
                 if (evBits & 1)
                     allocatedArray[j] = k;
@@ -6078,7 +6070,7 @@ static void sub_8194D68(void)
 
     for (i = 0; i < 2; i++)
     {
-        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gUnknown_0203CEF8[i] - 1] - 1;
+        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
         s32 count;
 
         for (moveSlot = 0; moveSlot < 4; moveSlot++)
@@ -6104,7 +6096,7 @@ static void sub_8194E44(void)
 
     for (i = 0; i < 2; i++)
     {
-        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gUnknown_0203CEF8[i] - 1] - 1;
+        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
         u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
     }
@@ -6112,7 +6104,7 @@ static void sub_8194E44(void)
 
 static void sub_8194EB4(void)
 {
-    ReducePlayerPartyToThree();
+    ReducePlayerPartyToSelectedMons();
 }
 
 static void sub_8194EC0(void)

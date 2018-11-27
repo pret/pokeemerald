@@ -5,6 +5,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle_pyramid.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -68,18 +69,6 @@ struct UnknownPokemonStruct4
     /*0x1D*/ u8 language;
 };
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
-extern u16 gBattle_WIN0H;
-extern u16 gBattle_WIN0V;
-extern u16 gBattle_WIN1H;
-extern u16 gBattle_WIN1V;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gUnknown_0203CF00[];
@@ -109,10 +98,8 @@ extern const u8 gText_Love[];
 // functions
 extern void sub_81B9150(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern u8 sub_81A9E28(void); // battle frontier 2
 extern void sub_81B8FB0(u8, u8); // party menu
 extern u8 pokemon_order_func(u8); // party menu
-extern bool8 InBattlePyramid(void);
 
 // this file's functions
 static void CB2_InitBattleInternal(void);
@@ -179,13 +166,25 @@ static void HandleAction_WatchesCarefully(void);
 static void HandleAction_SafariZoneBallThrow(void);
 static void HandleAction_ThrowPokeblock(void);
 static void HandleAction_GoNear(void);
-static void HandleAction_SafriZoneRun(void);
+static void HandleAction_SafariZoneRun(void);
 static void HandleAction_WallyBallThrow(void);
 static void HandleAction_Action11(void);
 static void HandleAction_NothingIsFainted(void);
 static void HandleAction_ActionFinished(void);
 
 // EWRAM vars
+EWRAM_DATA u16 gBattle_BG0_X = 0;
+EWRAM_DATA u16 gBattle_BG0_Y = 0;
+EWRAM_DATA u16 gBattle_BG1_X = 0;
+EWRAM_DATA u16 gBattle_BG1_Y = 0;
+EWRAM_DATA u16 gBattle_BG2_X = 0;
+EWRAM_DATA u16 gBattle_BG2_Y = 0;
+EWRAM_DATA u16 gBattle_BG3_X = 0;
+EWRAM_DATA u16 gBattle_BG3_Y = 0;
+EWRAM_DATA u16 gBattle_WIN0H = 0;
+EWRAM_DATA u16 gBattle_WIN0V = 0;
+EWRAM_DATA u16 gBattle_WIN1H = 0;
+EWRAM_DATA u16 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[300] = {0};
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
@@ -516,7 +515,7 @@ static void (* const sTurnActionsFuncsTable[])(void) =
     HandleAction_SafariZoneBallThrow,   // B_ACTION_SAFARI_BALL
     HandleAction_ThrowPokeblock,        // B_ACTION_SAFARI_POKEBLOCK
     HandleAction_GoNear,                // B_ACTION_SAFARI_GO_NEAR
-    HandleAction_SafriZoneRun,          // B_ACTION_SAFARI_RUN
+    HandleAction_SafariZoneRun,         // B_ACTION_SAFARI_RUN
     HandleAction_WallyBallThrow,        // B_ACTION_WALLY_THROW
     HandleAction_RunBattleScript,       // B_ACTION_EXEC_SCRIPT
     HandleAction_Action11,              // not sure about this one
@@ -3095,7 +3094,7 @@ void SwitchInClearSetData(void)
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
-        for (i = 0; i < BATTLE_STATS_NO; i++)
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
             gBattleMons[gActiveBattler].statStages[i] = 6;
         for (i = 0; i < gBattlersCount; i++)
         {
@@ -3204,7 +3203,7 @@ void FaintClearSetData(void)
     s32 i;
     u8 *ptr;
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
         gBattleMons[gActiveBattler].statStages[i] = 6;
 
     gBattleMons[gActiveBattler].status2 = 0;
@@ -3358,7 +3357,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].altAbility);
             hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(gActiveBattler)];
             *hpOnSwitchout = gBattleMons[gActiveBattler].hp;
-            for (i = 0; i < BATTLE_STATS_NO; i++)
+            for (i = 0; i < NUM_BATTLE_STATS; i++)
                 gBattleMons[gActiveBattler].statStages[i] = 6;
             gBattleMons[gActiveBattler].status2 = 0;
         }
@@ -5604,7 +5603,7 @@ bool8 TryRunFromBattle(u8 battler)
         if (InBattlePyramid())
         {
             gBattleStruct->runTries++;
-            pyramidMultiplier = sub_81A9E28();
+            pyramidMultiplier = GetPyramidRunMultiplier();
             speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
             if (speedVar > (Random() & 0xFF))
             {
@@ -5630,7 +5629,7 @@ bool8 TryRunFromBattle(u8 battler)
         {
             if (InBattlePyramid())
             {
-                pyramidMultiplier = sub_81A9E28();
+                pyramidMultiplier = GetPyramidRunMultiplier();
                 speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
                 if (speedVar > (Random() & 0xFF))
                     effect++;
@@ -5784,7 +5783,7 @@ static void HandleAction_GoNear(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_SafriZoneRun(void)
+static void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);

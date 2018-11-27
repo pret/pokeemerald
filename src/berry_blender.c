@@ -33,6 +33,7 @@
 #include "item_menu.h"
 #include "battle_records.h"
 #include "graphics.h"
+#include "new_game.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -132,8 +133,6 @@ struct BerryBlenderData
 
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern u8 gInGameOpponentsNo;
-extern u8 gUnknown_020322D5;
 
 // text
 extern const u8 gText_SavingDontTurnOff2[];
@@ -195,17 +194,20 @@ static void sub_8083170(u16 a0, u16 a1);
 static void Blender_PrintMadePokeblockString(struct Pokeblock *pokeblock, u8 *dst);
 static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlenderStruct *a1);
 
-// ewram
+// EWRAM
 EWRAM_DATA static struct BerryBlenderData *sBerryBlenderData = NULL;
 EWRAM_DATA static s32 sUnknown_020322A8[5] = {0};
 EWRAM_DATA static s32 sUnknown_020322BC[5] = {0};
 EWRAM_DATA static u32 sUnknown_020322D0 = 0;
 
-// iwram
+// IWRAM bss
 IWRAM_DATA static s16 sUnknown_03000DE8[8];
 IWRAM_DATA static s16 sUnknown_03000DF8[6];
 IWRAM_DATA static s16 sUnknown_03000E04;
 IWRAM_DATA static s16 sUnknown_03000E06;
+
+// IWRAM common
+u8 gInGameOpponentsNo;
 
 // rom
 

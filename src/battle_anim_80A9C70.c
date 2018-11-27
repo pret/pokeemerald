@@ -17,8 +17,6 @@ extern const u8 *const gBattleAnims_StatusConditions[];
 extern const struct OamData gUnknown_08524904;
 extern const struct OamData gUnknown_08524A3C;
 
-extern void sub_8116EB4(u8 taskId);
-
 // This file's functions.
 static void sub_80A9DB4(u8 taskId);
 static void sub_80A9FD0(u8 taskId);

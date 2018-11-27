@@ -35,6 +35,7 @@
 #include "field_player_avatar.h"
 #include "battle_pyramid_bag.h"
 #include "battle_pike.h"
+#include "new_game.h"
 
 // Menu actions
 enum
@@ -63,6 +64,10 @@ enum
     SAVE_ERROR
 };
 
+// IWRAM common
+bool8 (*gMenuCallback)(void);
+
+// EWRAM
 EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
@@ -76,7 +81,6 @@ EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
 // Extern variables.
-extern u8 gDifferentSaveFile;
 extern u8 gUnknown_03005DB4;
 
 // Extern functions in not decompiled files.
@@ -460,18 +464,18 @@ static bool32 InitStartMenuStep(void)
         sUnknown_02037619[0]++;
         break;
     case 3:
-        if (GetSafariZoneFlag() != FALSE)
+        if (GetSafariZoneFlag())
         {
             ShowSafariBallsWindow();
         }
-        if (InBattlePyramid() != FALSE)
+        if (InBattlePyramid())
         {
             ShowPyramidFloorWindow();
         }
         sUnknown_02037619[0]++;
         break;
     case 4:
-        if (PrintStartMenuActions(&sUnknown_02037619[1], 2) == FALSE)
+        if (!PrintStartMenuActions(&sUnknown_02037619[1], 2))
         {
             break;
         }
