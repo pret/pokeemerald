@@ -798,8 +798,7 @@ static const u8 gUnknown_0855D2B8[] = _("{NO}000");
 static const u8 gUnknown_0855D2BE[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 
-asm(".align 2");
-static const u8 gUnknown_0855D30C[] = _("");
+ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 
 #include "data/pokemon/pokedex_text.h"
 #include "data/pokemon/pokedex_entries.h"
@@ -3919,7 +3918,7 @@ void sub_80C020C(u32 num, u32 value, u32 c, u32 d)
     if (c)
         text3 = gPokedexEntries[num].description;
     else
-        text3 = gUnknown_0855D30C;
+        text3 = gExpandedPlaceholder_PokedexDescription;
     sub_80BE8DC(text3, GetStringCenterAlignXOffset(1, text3, 0xF0), 0x5F);
 }
 
