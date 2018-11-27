@@ -49,12 +49,6 @@ struct FrontierBrainMon
 };
 
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const u8 *const gUnknown_08611D08[];
-extern const u8 *const gUnknown_08611CB0[][2];
-extern const u8 *const gUnknown_08611D00[];
-extern const u8 *const *const gUnknown_08611DB0[];
-extern const u8 *const *const gUnknown_08611DB8[];
-extern const u16 gFacilityToBrainTrainerId[];
 
 extern void sub_81B8558(void);
 
@@ -688,6 +682,107 @@ const u16 gFrontierBannedSpecies[] =
 {
     SPECIES_MEW, SPECIES_MEWTWO, SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
+};
+
+const u8 *const gUnknown_08611CB0[][2] = 
+{
+    {gText_BattleTower2,  gUnknown_085ED164},
+    {gText_BattleTower2,  gUnknown_085ED170},
+    {gText_BattleTower2,  gUnknown_085ED17C},
+    {gText_BattleDome,    gUnknown_085ED164},
+    {gText_BattlePalace,  gUnknown_085ED164},
+    {gText_BattleArena,   gUnknown_085ED190},
+    {gText_BattleFactory, gUnknown_085ED164},
+    {gText_BattlePike,    gUnknown_085ED190},
+    {gText_BattlePyramid, gUnknown_085ED190},
+    {gText_BattleTower2,  gUnknown_085ED188},
+};
+
+const u8 *const gLevelModeText[] = 
+{
+    gText_RecordsLv50,
+    gText_RecordsOpenLevel,
+};
+
+const u8 *const gFacilityToRecordsText[] = 
+{
+    gText_FrontierFacilityWinStreak,
+    gText_FrontierFacilityWinStreak,
+    gText_FrontierFacilityWinStreak,
+    gText_FrontierFacilityClearStreak,
+    gText_FrontierFacilityWinStreak,
+    gText_FrontierFacilityKOsStreak,
+    gText_FrontierFacilityWinStreak,
+    gText_FrontierFacilityRoomsCleared,
+    gText_FrontierFacilityFloorsCleared,
+    gText_FrontierFacilityWinStreak,
+};
+
+const u16 gFacilityToBrainTrainerId[] = 
+{
+    [FRONTIER_FACILITY_TOWER]   = TRAINER_ANABEL,
+    [FRONTIER_FACILITY_DOME]    = TRAINER_TUCKER,
+    [FRONTIER_FACILITY_PALACE]  = TRAINER_SPENSER,
+    [FRONTIER_FACILITY_ARENA]   = TRAINER_GRETA,
+    [FRONTIER_FACILITY_FACTORY] = TRAINER_NOLAND,
+    [FRONTIER_FACILITY_PIKE]    = TRAINER_LUCY,
+    [FRONTIER_FACILITY_PYRAMID] = TRAINER_BRANDON,
+};
+
+const u8 *const gUnknown_08611D40[] =
+{
+    gText_082C843F,
+    gText_082C848B,
+    gText_082C8628,
+    gText_082C85B4,
+    gText_082C8512,
+    gText_082C859D,
+    gText_082C86C3,
+};
+
+const u8 *const gUnknown_08611D5C[] =
+{
+    gText_082C8458,
+    gText_082C84C1,
+    gText_082C8662,
+    gText_082C85E3,
+    gText_082C853B,
+    gText_082C85A4,
+    gText_082C86FE,
+};
+
+const u8 *const gUnknown_08611D78[] =
+{
+    gText_082C846C,
+    gText_082C84D0,
+    gText_082C8682,
+    gText_082C85F5,
+    gText_082C8561,
+    gText_082C85A9,
+    gText_082C8739,
+};
+
+const u8 *const gUnknown_08611D94[] =
+{
+    gText_082C8480,
+    gText_082C84F7,
+    gText_082C86B3,
+    gText_082C8611,
+    gText_082C8589,
+    gText_082C85AE,
+    gText_082C877B,
+};
+
+const u8 *const *const gUnknown_08611DB0[] =
+{
+    gUnknown_08611D40,
+    gUnknown_08611D78,
+};
+
+const u8 *const *const gUnknown_08611DB8[] =
+{
+    gUnknown_08611D5C,
+    gUnknown_08611D94,
 };
 
 // code
@@ -2129,8 +2224,8 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gUnknown_08611D08[hallFacilityId]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gUnknown_08611D08[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, gFacilityToRecordsText[hallFacilityId]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2156,8 +2251,8 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
         if (winStreak > 9999)
             winStreak = 9999;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar4, gUnknown_08611D08[9]);
-        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gUnknown_08611D08[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
+        StringExpandPlaceholders(gStringVar4, gFacilityToRecordsText[9]);
+        AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gFacilityToRecordsText[9], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SPEED_FF, NULL);
     }
 }
 
@@ -2239,8 +2334,8 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     StringCopy(gStringVar1, gUnknown_08611CB0[hallFacilityId][0]);
     StringExpandPlaceholders(gStringVar4, gUnknown_08611CB0[hallFacilityId][1]);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-    x = GetStringRightAlignXOffset(1, gUnknown_08611D00[lvlMode], 0xD0);
-    AddTextPrinterParameterized(gRecordsWindowId, 1, gUnknown_08611D00[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
+    x = GetStringRightAlignXOffset(1, gLevelModeText[lvlMode], 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, 1, gLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
     if (hallFacilityId == HALL_FACILITIES_COUNT)
     {
         gSaveBlock2Ptr->frontier.field_EE1[0][PLAYER_NAME_LENGTH] = EOS;

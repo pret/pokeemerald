@@ -1220,11 +1220,13 @@ const u8 gText_BattleFactory[] = _("BATTLE FACTORY");
 const u8 gText_BattleArena[] = _("BATTLE ARENA");
 const u8 gText_BattlePike[] = _("BATTLE PIKE");
 const u8 gText_BattlePyramid[] = _("BATTLE PYRAMID");
+
 ALIGNED(4) const u8 gUnknown_085ED164[] = _("{STR_VAR_1} SINGLE");
 ALIGNED(4) const u8 gUnknown_085ED170[] = _("{STR_VAR_1} DOUBLE");
 ALIGNED(4) const u8 gUnknown_085ED17C[] = _("{STR_VAR_1} MULTI");
 ALIGNED(4) const u8 gUnknown_085ED188[] = _("{STR_VAR_1} LINK");
 ALIGNED(4) const u8 gUnknown_085ED190[] = _("{STR_VAR_1}");
+
 const u8 gText_Give[] = _("Give");
 const u8 gText_NoNeed[] = _("No need");
 const u8 gText_ColorLightShadowDarkGrey[] = _("{COLOR LIGHT_GREY}{SHADOW DARK_GREY}");
@@ -1448,14 +1450,16 @@ const u8 gText_TimesCleared[] = _("Times cleared:{CLEAR 0x05}{STR_VAR_1}");
 const u8 gText_KOsInARow[] = _("KOs in a row: {STR_VAR_1}");
 const u8 gText_TimesVar1[] = _("Times: {STR_VAR_1}");
 const u8 gText_FloorsCleared[] = _("Floors cleared: {STR_VAR_1}");
-ALIGNED(4) const u8 gUnknown_085EE3B0[] = _("LV. 50");
-ALIGNED(4) const u8 gUnknown_085EE3B8[] = _("OPEN LEVEL");
-ALIGNED(4) const u8 gUnknown_085EE3C4[] = _("Win streak: {STR_VAR_2}");
-ALIGNED(4) const u8 gUnknown_085EE3D4[] = _("Clear streak: {STR_VAR_2}");
-ALIGNED(4) const u8 gUnknown_085EE3E8[] = _("Rooms cleared: {STR_VAR_2}");
-ALIGNED(4) const u8 gUnknown_085EE3FC[] = _("KOs in a row: {STR_VAR_2}");
-ALIGNED(4) const u8 gUnknown_085EE410[] = _("Floors cleared: {STR_VAR_2}");
+
+ALIGNED(4) const u8 gText_RecordsLv50[] = _("LV. 50");
+ALIGNED(4) const u8 gText_RecordsOpenLevel[] = _("OPEN LEVEL");
+ALIGNED(4) const u8 gText_FrontierFacilityWinStreak[] = _("Win streak: {STR_VAR_2}");
+ALIGNED(4) const u8 gText_FrontierFacilityClearStreak[] = _("Clear streak: {STR_VAR_2}");
+ALIGNED(4) const u8 gText_FrontierFacilityRoomsCleared[] = _("Rooms cleared: {STR_VAR_2}");
+ALIGNED(4) const u8 gText_FrontierFacilityKOsStreak[] = _("KOs in a row: {STR_VAR_2}");
+ALIGNED(4) const u8 gText_FrontierFacilityFloorsCleared[] = _("Floors cleared: {STR_VAR_2}");
 ALIGNED(4) const u8 gText_123Dot[][3] = {_("1."), _("2."), _("3.")};
+
 const u8 gText_SavingDontTurnOff2[] = _("SAVING…\nDON’T TURN OFF THE POWER.");
 const u8 gText_BlenderMaxSpeedRecord[] = _("BERRY BLENDER\nMAXIMUM SPEED RECORD!");
 const u8 gText_234Players[] = _("2 PLAYERS\n3 PLAYERS\n4 PLAYERS");

@@ -34,33 +34,6 @@ extern void door_upload_tiles(void);
 
 extern const struct MapLayout *const gMapLayouts[];
 
-#define TOTAL_ROUNDS 20
-#define PICKUP_ITEMS_PER_ROUND 10
-
-struct Struct_08613650
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 runMultiplier;
-    u8 unk5[8];
-};
-
-struct PyramidWildMon
-{
-    u16 species;
-    u8 lvl;
-    u8 abilityBit;
-    u16 moves[4];
-};
-
-struct ClassMusic
-{
-    u8 class;
-    u8 music;
-};
-
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
@@ -100,21 +73,6 @@ static bool8 sub_81AA4D8(u8, u8);
 static bool8 sub_81AA648(u8, u8);
 static bool8 sub_81AA760(u8 arg0, u8 *mapNums, u8 whichMap, u8 id);
 static bool8 sub_81AA810(u8 arg0, u8 x, u8 y, u8 *mapNums, u8 whichMap, u8 id);
-
-// Const rom data.
-extern const struct Struct_08613650 gUnknown_08613650[];
-extern const u16 sPickupItemsLvl50[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND];
-extern const u16 sPickupItemsLvlOpen[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND];
-extern const u8 gUnknown_08613ABC[63][2];
-extern const u8 gUnknown_08613B3A[];
-extern const u16 gUnknown_08D856C8[][16];
-extern const u8 gUnknown_08613C1C[50][2];
-extern const u8 *const *const *const gUnknown_08613EC0[];
-extern const struct ClassMusic gUnknown_08613B44[54];
-extern const struct PyramidWildMon *const gBattlePyramidOpenLevelWildMonPointers[];
-extern const struct PyramidWildMon *const gBattlePyramidLevel50WildMonPointers[];
-extern const u8 gUnknown_08613794[];
-extern const u8 gUnknown_08613750[34][2];
 
 static const u8 gUnknown_08613ED8[] = {3, 4, 5, 6, 7, 8, 3, 4};
 
