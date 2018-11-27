@@ -42,19 +42,6 @@ static EWRAM_DATA struct PokedexListItem *gUnknown_02039B54 = NULL;
 u8 gUnknown_030060B0;
 void (*gUnknown_030060B4)(void);
 
-struct PokedexEntry
-{
-    /*0x00*/ u8 categoryName[12];
-    /*0x0C*/ u16 height; //in decimeters
-    /*0x0E*/ u16 weight; //in hectograms
-    /*0x10*/ const u8 *description;
-    /*0x14*/ u16 unused;
-    /*0x16*/ u16 pokemonScale;
-    /*0x18*/ u16 pokemonOffset;
-    /*0x1A*/ u16 trainerScale;
-    /*0x1C*/ u16 trainerOffset;
-};  /*size = 0x20*/
-
 struct UnknownStruct2
 {
     const u8 *text1;

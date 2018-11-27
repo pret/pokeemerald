@@ -1848,7 +1848,7 @@ static void SanitizeDayCareMailForRuby(struct RecordMixingDayCareMail *src)
         if (mail->message.itemId != 0)
         {
             if (mail->gameLanguage != LANGUAGE_JAPANESE)
-                PadNameString(mail->OT_name, 0xFC);
+                PadNameString(mail->OT_name, EXT_CTRL_CODE_BEGIN);
 
             ConvertInternationalString(mail->monName, mail->monLanguage);
         }

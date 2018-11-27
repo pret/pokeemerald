@@ -297,7 +297,6 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/unk_transition.o(.text);
         src/international_string_util.o(.text);
-        asm/international_string_util.o(.text);
     } =0
 
     script_data :
