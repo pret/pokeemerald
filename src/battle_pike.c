@@ -19,6 +19,7 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
+#include "constants/moves.h"
 
 #define PIKE_ROOM_SINGLE_BATTLE 0
 #define PIKE_ROOM_HEAL_FULL 1
@@ -40,7 +41,7 @@ struct Unk0861231C
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5;
+    u8 unk5;//? unused ?
 };
 
 struct PikeWildMon
@@ -50,9 +51,6 @@ struct PikeWildMon
     u16 moves[4];
 };
 
-extern const struct Unk0861231C gUnknown_0861231C[];
-extern const struct PikeWildMon *const *const gUnknown_08612314[2];
-extern const u16 gUnknown_086123E4[][6];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
 // IWRAM bss
@@ -106,6 +104,383 @@ static bool8 sub_81A7D8C(struct Task *task);
 static bool8 sub_81A7DE8(struct Task *task);
 
 // Const rom data.
+
+// extern const struct PikeWildMon *const *const gUnknown_08612314[2];
+
+const struct PikeWildMon gUnknown_086121D4[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
+    },
+    {
+        .species = SPECIES_DUSCLOPS,
+        .levelDelta = 5,
+        .moves = {MOVE_WILL_O_WISP, MOVE_MEAN_LOOK, MOVE_TOXIC, MOVE_SHADOW_PUNCH}
+    }
+};
+
+const struct PikeWildMon gUnknown_086121F8[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
+    },
+    {
+        .species = SPECIES_ELECTRODE,
+        .levelDelta = 5,
+        .moves = {MOVE_EXPLOSION, MOVE_SELF_DESTRUCT, MOVE_THUNDER, MOVE_TOXIC}
+    }
+};
+
+const struct PikeWildMon gUnknown_0861221C[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
+    },
+    {
+        .species = SPECIES_BRELOOM,
+        .levelDelta = 5,
+        .moves = {MOVE_SPORE, MOVE_STUN_SPORE, MOVE_POISON_POWDER, MOVE_HIDDEN_POWER}
+    }
+};
+
+const struct PikeWildMon gUnknown_08612240[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
+    },
+    {
+        .species = SPECIES_WOBBUFFET,
+        .levelDelta = 5,
+        .moves = {MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_DESTINY_BOND}
+    }
+};
+
+const struct PikeWildMon *const gUnknown_08612264[] = 
+{
+    gUnknown_086121D4,
+    gUnknown_086121F8,
+    gUnknown_0861221C,
+    gUnknown_08612240
+};
+
+const struct PikeWildMon gUnknown_08612274[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
+    },
+    {
+        .species = SPECIES_DUSCLOPS,
+        .levelDelta = 5,
+        .moves = {MOVE_WILL_O_WISP, MOVE_MEAN_LOOK, MOVE_TOXIC, MOVE_ICE_BEAM}
+    }
+};
+
+const struct PikeWildMon gUnknown_08612298[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
+    },
+    {
+        .species = SPECIES_ELECTRODE,
+        .levelDelta = 5,
+        .moves = {MOVE_EXPLOSION, MOVE_SELF_DESTRUCT, MOVE_THUNDER, MOVE_TOXIC}
+    }
+};
+
+const struct PikeWildMon gUnknown_086122BC[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
+    },
+    {
+        .species = SPECIES_BRELOOM,
+        .levelDelta = 5,
+        .moves = {MOVE_SPORE, MOVE_STUN_SPORE, MOVE_POISON_POWDER, MOVE_HIDDEN_POWER}
+    }
+};
+
+const struct PikeWildMon gUnknown_086122E0[] = 
+{
+    {
+        .species = SPECIES_SEVIPER,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
+    },
+    {
+        .species = SPECIES_MILOTIC,
+        .levelDelta = 4,
+        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
+    },
+    {
+        .species = SPECIES_WOBBUFFET,
+        .levelDelta = 5,
+        .moves = {MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_ENCORE}
+    }
+};
+
+const struct PikeWildMon *const gUnknown_08612304[] = 
+{
+    gUnknown_08612274,
+    gUnknown_08612298,
+    gUnknown_086122BC,
+    gUnknown_086122E0
+};
+
+const struct PikeWildMon *const *const gUnknown_08612314[2] = 
+{
+    gUnknown_08612264,
+    gUnknown_08612304
+};
+
+const struct Unk0861231C gUnknown_0861231C[] = 
+{
+    {
+        .unk0 = 0x0012,
+        .unk2 = 0x03,
+        .unk3 = 0x05,
+        .unk4 = 0x06
+    },
+    {
+        .unk0 = 0x0005,
+        .unk2 = 0x0d,
+        .unk3 = 0x20,
+        .unk4 = 0x25
+    },
+    {
+        .unk0 = 0x0011,
+        .unk2 = 0x08,
+        .unk3 = 0x0b,
+        .unk4 = 0x0c
+    },
+    {
+        .unk0 = 0x0024,
+        .unk2 = 0x22,
+        .unk3 = 0x1e,
+        .unk4 = 0x21
+    },
+    {
+        .unk0 = 0x0015,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .unk4 = 0x00
+    },
+    {
+        .unk0 = 0x001e,
+        .unk2 = 0x01,
+        .unk3 = 0x01,
+        .unk4 = 0x01
+    },
+    {
+        .unk0 = 0x002c,
+        .unk2 = 0x16,
+        .unk3 = 0x17,
+        .unk4 = 0x1b
+    },
+    {
+        .unk0 = 0x0037,
+        .unk2 = 0x08,
+        .unk3 = 0x16,
+        .unk4 = 0x1f
+    },
+    {
+        .unk0 = 0x000e,
+        .unk2 = 0x0d,
+        .unk3 = 0x27,
+        .unk4 = 0x15
+    },
+    {
+        .unk0 = 0x0014,
+        .unk2 = 0x02,
+        .unk3 = 0x04,
+        .unk4 = 0x11
+    },
+    {
+        .unk0 = 0x0038,
+        .unk2 = 0x1e,
+        .unk3 = 0x14,
+        .unk4 = 0x24
+    },
+    {
+        .unk0 = 0x0042,
+        .unk2 = 0x1c,
+        .unk3 = 0x22,
+        .unk4 = 0x19
+    },
+    {
+        .unk0 = 0x0026,
+        .unk2 = 0x17,
+        .unk3 = 0x26,
+        .unk4 = 0x1a
+    },
+    {
+        .unk0 = 0x0032,
+        .unk2 = 0x17,
+        .unk3 = 0x1e,
+        .unk4 = 0x0b
+    },
+    {
+        .unk0 = 0x002f,
+        .unk2 = 0x0f,
+        .unk3 = 0x13,
+        .unk4 = 0x0e
+    },
+    {
+        .unk0 = 0x0027,
+        .unk2 = 0x02,
+        .unk3 = 0x1d,
+        .unk4 = 0x1a
+    },
+    {
+        .unk0 = 0x0033,
+        .unk2 = 0x25,
+        .unk3 = 0x0c,
+        .unk4 = 0x20
+    },
+    {
+        .unk0 = 0x0021,
+        .unk2 = 0x18,
+        .unk3 = 0x17,
+        .unk4 = 0x26
+    },
+    {
+        .unk0 = 0x0018,
+        .unk2 = 0x05,
+        .unk3 = 0x16,
+        .unk4 = 0x04
+    },
+    {
+        .unk0 = 0x000b,
+        .unk2 = 0x29,
+        .unk3 = 0x25,
+        .unk4 = 0x23
+    },
+    {
+        .unk0 = 0x0035,
+        .unk2 = 0x27,
+        .unk3 = 0x0e,
+        .unk4 = 0x0d
+    },
+    {
+        .unk0 = 0x0030,
+        .unk2 = 0x0a,
+        .unk3 = 0x07,
+        .unk4 = 0x09
+    },
+    {
+        .unk0 = 0x000c,
+        .unk2 = 0x28,
+        .unk3 = 0x14,
+        .unk4 = 0x10
+    },
+    {
+        .unk0 = 0x0034,
+        .unk2 = 0x12,
+        .unk3 = 0x0d,
+        .unk4 = 0x15
+    },
+    {
+        .unk0 = 0x0013,
+        .unk2 = 0x16,
+        .unk3 = 0x1f,
+        .unk4 = 0x1b
+    }
+};
+
+const u16 gUnknown_086123E4[][6] = 
+{
+    {0x0a29, 0x0630, 0x0a01, 0x140f, 0x1020, 0x270e},
+    {0x0a2a, 0x081d, 0x061b, 0x1034, 0x1e20, 0x0a29},
+    {0x1e22, 0x1231, 0x0a01, 0x1018, 0x1c1a, 0x0c03},
+    {0x1e0f, 0x100b, 0x1039, 0x200f, 0x102b, 0x0a14},
+    {0x103b, 0x0a02, 0x161e, 0x1020, 0x143e, 0x0c03},
+    {0x0a31, 0x0e02, 0x0e15, 0x1436, 0x1037, 0x1e0a},
+    {0x0a29, 0x1025, 0x142a, 0x1034, 0x1e0f, 0x0a1b},
+    {0x0a01, 0x0e07, 0x122a, 0x1e0f, 0x061f, 0xffff},
+    {0x1a35, 0x1036, 0x0e0f, 0x0a01, 0x2621, 0x1e0f},
+    {0x0e25, 0x102f, 0x062d, 0x201e, 0x0c03, 0xffff},
+    {0x0c1d, 0x081d, 0x0a2b, 0x100f, 0x0a02, 0x0c03},
+    {0x0a2a, 0x0a3e, 0x2000, 0x1027, 0x1c08, 0x0c04},
+    {0x0a01, 0x1212, 0x0a01, 0x1000, 0x062d, 0xffff},
+    {0x1e22, 0x1231, 0x0a01, 0x1018, 0x1c1c, 0x0c03},
+    {0x0a01, 0x060b, 0x1030, 0x0a28, 0x2549, 0x0624},
+    {0x1014, 0x0a2c, 0x0415, 0x1642, 0x1e1b, 0x0c03},
+    {0x0628, 0x1a0f, 0x100b, 0x2017, 0x0c00, 0xffff},
+    {0x0a01, 0x1015, 0x1647, 0x1e0f, 0x0e39, 0x0e36},
+    {0x0a01, 0x1017, 0x1620, 0x0e19, 0x0a31, 0x0c38},
+    {0x0c1d, 0x081d, 0x0c00, 0x1022, 0x1c12, 0x020b},
+    {0x1029, 0x1404, 0x102f, 0x1006, 0x1e28, 0x1c1c},
+    {0x1029, 0x0e20, 0x1028, 0x1c16, 0x1e29, 0x0c03},
+    {0x1e0f, 0x100b, 0x0e2f, 0x0638, 0x100c, 0xffff},
+    {0x0a29, 0x1408, 0x102f, 0x061e, 0x102c, 0xffff},
+    {0x1023, 0x100b, 0x081d, 0x062d, 0x1037, 0x0a14},
+    {0x0a29, 0x1022, 0x1408, 0x102f, 0x161e, 0x1029},
+    {0x0601, 0x102c, 0x0a01, 0x1015, 0x0e39, 0x0e36},
+    {0x1020, 0x020b, 0x103f, 0x1c12, 0x0c04, 0xffff},
+    {0x1018, 0x0a02, 0x103a, 0x0446, 0x020e, 0x0c03},
+    {0x1e10, 0x020b, 0x1e0a, 0x100b, 0x063a, 0xffff},
+    {0x0a02, 0x1212, 0x1e0f, 0x100b, 0x0638, 0x0c03},
+    {0x1e22, 0x1000, 0x161b, 0x103f, 0x1e0f, 0x0c03},
+    {0x0a29, 0x0e1e, 0x1025, 0x1e26, 0x0c00, 0xffff},
+    {0x0a01, 0x0e1e, 0x1236, 0x102f, 0x120b, 0x0c04},
+    {0x2805, 0x1e0f, 0x0a1b, 0x100b, 0x1020, 0x063b},
+    {0x0a01, 0x101f, 0x0a3e, 0x1037, 0x1020, 0x0628},
+    {0x1026, 0x0a31, 0x1e29, 0x1c1c, 0x0a01, 0x1212},
+    {0x0c0a, 0x0c00, 0x1029, 0x101c, 0x1e0f, 0x0c23},
+    {0x0a28, 0x020e, 0x100f, 0x1039, 0x142a, 0x0c04},
+    {0x0a28, 0x020e, 0x100f, 0x0620, 0x102f, 0x043c},
+    {0x0c39, 0x0c39, 0x0c00, 0x0a29, 0x2017, 0x0c39},
+    {0x265c, 0x100b, 0x1020, 0x1230, 0x1e05, 0x100c},
+};
+
 static const u8 gUnknown_086125DC[][4] =
 {
     {0x23, 0x46, 0x23, 0x01},

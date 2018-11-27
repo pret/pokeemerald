@@ -574,11 +574,11 @@ SECTIONS {
         src/battle_factory_screen.o(.rodata);
         src/apprentice.o(.rodata);
         src/frontier_util.o(.rodata);
-        data/battle_frontier_2.o(.rodata);
         src/battle_arena.o(.rodata);
         src/battle_factory.o(.rodata);
-        data/battle_pike.o(.rodata);
         src/battle_pike.o(.rodata);
+        data/mossdeep_gym.o(.rodata);
+        src/frontier_data.o(.rodata);
         data/battle_frontier_3.o(.rodata);
         src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);

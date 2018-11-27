@@ -1265,6 +1265,7 @@ const u8 gUnknown_085ED188[] = _("{STR_VAR_1} LINK");
 
 asm(".align 2");
 const u8 gUnknown_085ED190[] = _("{STR_VAR_1}");
+
 const u8 gText_Give[] = _("Give");
 const u8 gText_NoNeed[] = _("No need");
 const u8 gText_ColorLightShadowDarkGrey[] = _("{COLOR LIGHT_GREY}{SHADOW DARK_GREY}");
@@ -1548,25 +1549,25 @@ const u8 gText_TimesVar1[] = _("Times: {STR_VAR_1}");
 const u8 gText_FloorsCleared[] = _("Floors cleared: {STR_VAR_1}");
 
 asm(".align 2");
-const u8 gUnknown_085EE3B0[] = _("LV. 50");
+const u8 gText_RecordsLv50[] = _("LV. 50");
 
 asm(".align 2");
-const u8 gUnknown_085EE3B8[] = _("OPEN LEVEL");
+const u8 gText_RecordsOpenLevel[] = _("OPEN LEVEL");
 
 asm(".align 2");
-const u8 gUnknown_085EE3C4[] = _("Win streak: {STR_VAR_2}");
+const u8 gText_FrontierFacilityWinStreak[] = _("Win streak: {STR_VAR_2}");
 
 asm(".align 2");
-const u8 gUnknown_085EE3D4[] = _("Clear streak: {STR_VAR_2}");
+const u8 gText_FrontierFacilityClearStreak[] = _("Clear streak: {STR_VAR_2}");
 
 asm(".align 2");
-const u8 gUnknown_085EE3E8[] = _("Rooms cleared: {STR_VAR_2}");
+const u8 gText_FrontierFacilityRoomsCleared[] = _("Rooms cleared: {STR_VAR_2}");
 
 asm(".align 2");
-const u8 gUnknown_085EE3FC[] = _("KOs in a row: {STR_VAR_2}");
+const u8 gText_FrontierFacilityKOsStreak[] = _("KOs in a row: {STR_VAR_2}");
 
 asm(".align 2");
-const u8 gUnknown_085EE410[] = _("Floors cleared: {STR_VAR_2}");
+const u8 gText_FrontierFacilityFloorsCleared[] = _("Floors cleared: {STR_VAR_2}");
 
 asm(".align 2");
 const u8 gText_123Dot[][3] = {_("1."), _("2."), _("3.")};

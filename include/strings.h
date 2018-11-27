@@ -1181,4 +1181,48 @@ extern const u8 gText_Are[];
 extern const u8 gText_Are2[];
 extern const u8 gText_123Dot[][3];
 
+// Frontier util.
+extern const u8 gUnknown_085ED164[];
+extern const u8 gUnknown_085ED170[];
+extern const u8 gUnknown_085ED17C[];
+extern const u8 gUnknown_085ED188[];
+extern const u8 gUnknown_085ED190[];
+
+extern const u8 gText_RecordsLv50[];
+extern const u8 gText_RecordsOpenLevel[];
+extern const u8 gText_FrontierFacilityWinStreak[];
+extern const u8 gText_FrontierFacilityClearStreak[];
+extern const u8 gText_FrontierFacilityRoomsCleared[];
+extern const u8 gText_FrontierFacilityKOsStreak[];
+extern const u8 gText_FrontierFacilityFloorsCleared[];
+
+extern const u8 gText_082C843F[];
+extern const u8 gText_082C848B[];
+extern const u8 gText_082C8628[];
+extern const u8 gText_082C85B4[];
+extern const u8 gText_082C8512[];
+extern const u8 gText_082C859D[];
+extern const u8 gText_082C86C3[];
+extern const u8 gText_082C8458[];
+extern const u8 gText_082C84C1[];
+extern const u8 gText_082C8662[];
+extern const u8 gText_082C85E3[];
+extern const u8 gText_082C853B[];
+extern const u8 gText_082C85A4[];
+extern const u8 gText_082C86FE[];
+extern const u8 gText_082C846C[];
+extern const u8 gText_082C84D0[];
+extern const u8 gText_082C8682[];
+extern const u8 gText_082C85F5[];
+extern const u8 gText_082C8561[];
+extern const u8 gText_082C85A9[];
+extern const u8 gText_082C8739[];
+extern const u8 gText_082C8480[];
+extern const u8 gText_082C84F7[];
+extern const u8 gText_082C86B3[];
+extern const u8 gText_082C8611[];
+extern const u8 gText_082C8589[];
+extern const u8 gText_082C85AE[];
+extern const u8 gText_082C877B[];
+
 #endif //GUARD_STRINGS_H
