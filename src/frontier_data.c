@@ -6,12 +6,8 @@
 #include "constants/species.h"
 #include "constants/items.h"
 
-
-
 #include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
 #include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
-
-
 
 const struct Struct_08613650 gUnknown_08613650[] = 
 {

@@ -49,8 +49,6 @@ struct FrontierBrainMon
 };
 
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-//extern const u8 *const *const gUnknown_08611DB0[];
-//extern const u8 *const *const gUnknown_08611DB8[];
 
 extern void sub_81B8558(void);
 
@@ -786,31 +784,6 @@ const u8 *const *const gUnknown_08611DB8[] =
     gUnknown_08611D5C,
     gUnknown_08611D94,
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // code
 void CallFrontierUtilFunc(void)

@@ -104,9 +104,6 @@ static bool8 sub_81A7D8C(struct Task *task);
 static bool8 sub_81A7DE8(struct Task *task);
 
 // Const rom data.
-
-// extern const struct PikeWildMon *const *const gUnknown_08612314[2];
-
 const struct PikeWildMon gUnknown_086121D4[] = 
 {
     {
