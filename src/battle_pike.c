@@ -41,7 +41,6 @@ struct Unk0861231C
     u8 unk2;
     u8 unk3;
     u8 unk4;
-    u8 unk5;//? unused ?
 };
 
 struct PikeWildMon
@@ -104,7 +103,7 @@ static bool8 sub_81A7D8C(struct Task *task);
 static bool8 sub_81A7DE8(struct Task *task);
 
 // Const rom data.
-const struct PikeWildMon gUnknown_086121D4[] = 
+static const struct PikeWildMon sLvl50_Mons1[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -123,7 +122,7 @@ const struct PikeWildMon gUnknown_086121D4[] =
     }
 };
 
-const struct PikeWildMon gUnknown_086121F8[] = 
+static const struct PikeWildMon sLvl50_Mons2[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -142,7 +141,7 @@ const struct PikeWildMon gUnknown_086121F8[] =
     }
 };
 
-const struct PikeWildMon gUnknown_0861221C[] = 
+static const struct PikeWildMon sLvl50_Mons3[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -161,7 +160,7 @@ const struct PikeWildMon gUnknown_0861221C[] =
     }
 };
 
-const struct PikeWildMon gUnknown_08612240[] = 
+static const struct PikeWildMon sLvl50_Mons4[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -180,15 +179,15 @@ const struct PikeWildMon gUnknown_08612240[] =
     }
 };
 
-const struct PikeWildMon *const gUnknown_08612264[] = 
+static const struct PikeWildMon *const sLvl50Mons[] =
 {
-    gUnknown_086121D4,
-    gUnknown_086121F8,
-    gUnknown_0861221C,
-    gUnknown_08612240
+    sLvl50_Mons1,
+    sLvl50_Mons2,
+    sLvl50_Mons3,
+    sLvl50_Mons4
 };
 
-const struct PikeWildMon gUnknown_08612274[] = 
+static const struct PikeWildMon sLvlOpen_Mons1[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -207,7 +206,7 @@ const struct PikeWildMon gUnknown_08612274[] =
     }
 };
 
-const struct PikeWildMon gUnknown_08612298[] = 
+static const struct PikeWildMon sLvlOpen_Mons2[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -226,7 +225,7 @@ const struct PikeWildMon gUnknown_08612298[] =
     }
 };
 
-const struct PikeWildMon gUnknown_086122BC[] = 
+static const struct PikeWildMon sLvlOpen_Mons3[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -245,7 +244,7 @@ const struct PikeWildMon gUnknown_086122BC[] =
     }
 };
 
-const struct PikeWildMon gUnknown_086122E0[] = 
+static const struct PikeWildMon sLvlOpen_Mons4[] =
 {
     {
         .species = SPECIES_SEVIPER,
@@ -264,21 +263,21 @@ const struct PikeWildMon gUnknown_086122E0[] =
     }
 };
 
-const struct PikeWildMon *const gUnknown_08612304[] = 
+static const struct PikeWildMon *const sLvlOpenMons[] =
 {
-    gUnknown_08612274,
-    gUnknown_08612298,
-    gUnknown_086122BC,
-    gUnknown_086122E0
+    sLvlOpen_Mons1,
+    sLvlOpen_Mons2,
+    sLvlOpen_Mons3,
+    sLvlOpen_Mons4
 };
 
-const struct PikeWildMon *const *const gUnknown_08612314[2] = 
+static const struct PikeWildMon *const *const sWildMons[2] =
 {
-    gUnknown_08612264,
-    gUnknown_08612304
+    [FRONTIER_LVL_50]   = sLvl50Mons,
+    [FRONTIER_LVL_OPEN] = sLvlOpenMons
 };
 
-const struct Unk0861231C gUnknown_0861231C[] = 
+static const struct Unk0861231C gUnknown_0861231C[] =
 {
     {
         .unk0 = 0x0012,
@@ -432,7 +431,7 @@ const struct Unk0861231C gUnknown_0861231C[] =
     }
 };
 
-const u16 gUnknown_086123E4[][6] = 
+static const u16 gUnknown_086123E4[][6] =
 {
     {0x0a29, 0x0630, 0x0a01, 0x140f, 0x1020, 0x270e},
     {0x0a2a, 0x081d, 0x061b, 0x1034, 0x1e20, 0x0a29},
@@ -1104,7 +1103,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
     s32 monLevel;
     u8 headerId = GetBattlePikeWildMonHeaderId();
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    const struct PikeWildMon *const *const wildMons = gUnknown_08612314[lvlMode];
+    const struct PikeWildMon *const *const wildMons = sWildMons[lvlMode];
     u32 abilityBit;
     s32 pikeMonId = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
     pikeMonId = SpeciesToPikeMonId(pikeMonId);

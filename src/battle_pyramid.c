@@ -6,6 +6,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "save.h"
+#include "strings.h"
 #include "fieldmap.h"
 #include "palette.h"
 #include "field_message_box.h"
@@ -22,25 +23,50 @@
 #include "script.h"
 #include "malloc.h"
 #include "overworld.h"
+#include "event_scripts.h"
 #include "constants/battle_frontier.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
+#include "constants/species.h"
 
 extern u8 gSelectedOrderFromParty[3];
 extern void door_upload_tiles(void);
 
 extern const struct MapLayout *const gMapLayouts[];
-
+extern const u16 gUnknown_08D856C8[][16];
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F[];
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A[];
+#define TOTAL_ROUNDS 20
+#define PICKUP_ITEMS_PER_ROUND 10
+
+struct PyramidWildMon
+{
+    u16 species;
+    u8 lvl;
+    u8 abilityBit;
+    u16 moves[4];
+};
+
+struct Struct_08613650
+{
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u8 runMultiplier;
+    u8 unk5[8];
+};
+
+struct ClassMusic
+{
+    u8 class;
+    u8 music;
+};
 
 // This file's functions.
 static void sub_81A8E9C(void);
@@ -73,6 +99,664 @@ static bool8 sub_81AA4D8(u8, u8);
 static bool8 sub_81AA648(u8, u8);
 static bool8 sub_81AA760(u8 arg0, u8 *mapNums, u8 whichMap, u8 id);
 static bool8 sub_81AA810(u8 arg0, u8 x, u8 y, u8 *mapNums, u8 whichMap, u8 id);
+
+// Const rom data.
+#include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
+#include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
+
+static const struct Struct_08613650 gUnknown_08613650[] =
+{
+    {
+        .unk0 = 0x07,
+        .unk1 = 0x03,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x80,
+        .unk5 = {0x00, 0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03}
+    },
+    {
+        .unk0 = 0x06,
+        .unk1 = 0x03,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x80,
+        .unk5 = {0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04}
+    },
+    {
+        .unk0 = 0x05,
+        .unk1 = 0x03,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x78,
+        .unk5 = {0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05}
+    },
+    {
+        .unk0 = 0x04,
+        .unk1 = 0x04,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x78,
+        .unk5 = {0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06}
+    },
+    {
+        .unk0 = 0x04,
+        .unk1 = 0x04,
+        .unk2 = 0x00,
+        .unk3 = 0x01,
+        .runMultiplier = 0x70,
+        .unk5 = {0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07}
+    },
+    {
+        .unk0 = 0x03,
+        .unk1 = 0x05,
+        .unk2 = 0x00,
+        .unk3 = 0x02,
+        .runMultiplier = 0x70,
+        .unk5 = {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c}
+    },
+    {
+        .unk0 = 0x03,
+        .unk1 = 0x05,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x68,
+        .unk5 = {0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d}
+    },
+    {
+        .unk0 = 0x02,
+        .unk1 = 0x04,
+        .unk2 = 0x00,
+        .unk3 = 0x01,
+        .runMultiplier = 0x68,
+        .unk5 = {0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e}
+    },
+    {
+        .unk0 = 0x04,
+        .unk1 = 0x05,
+        .unk2 = 0x00,
+        .unk3 = 0x02,
+        .runMultiplier = 0x60,
+        .unk5 = {0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f}
+    },
+    {
+        .unk0 = 0x03,
+        .unk1 = 0x06,
+        .unk2 = 0x00,
+        .unk3 = 0x04,
+        .runMultiplier = 0x60,
+        .unk5 = {0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f}
+    },
+    {
+        .unk0 = 0x02,
+        .unk1 = 0x03,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x58,
+        .unk5 = {0x0c, 0x0d, 0x0e, 0x0c, 0x0d, 0x0e, 0x0c, 0x0d}
+    },
+    {
+        .unk0 = 0x04,
+        .unk1 = 0x05,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x58,
+        .unk5 = {0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b}
+    },
+    {
+        .unk0 = 0x03,
+        .unk1 = 0x07,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x50,
+        .unk5 = {0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c}
+    },
+    {
+        .unk0 = 0x02,
+        .unk1 = 0x04,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x50,
+        .unk5 = {0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d, 0x0d}
+    },
+    {
+        .unk0 = 0x03,
+        .unk1 = 0x06,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x50,
+        .unk5 = {0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e, 0x0e}
+    },
+    {
+        .unk0 = 0x03,
+        .unk1 = 0x08,
+        .unk2 = 0x00,
+        .unk3 = 0x00,
+        .runMultiplier = 0x50,
+        .unk5 = {0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f}
+    }
+};
+
+static const u8 gUnknown_08613750[34][2] =
+{
+    {0x28, 0x00},
+    {0x46, 0x01},
+    {0x5a, 0x02},
+    {0x64, 0x03},
+    {0x23, 0x01},
+    {0x37, 0x02},
+    {0x4b, 0x03},
+    {0x5a, 0x04},
+    {0x64, 0x0a},
+    {0x23, 0x02},
+    {0x37, 0x03},
+    {0x4b, 0x04},
+    {0x5a, 0x05},
+    {0x64, 0x0b},
+    {0x23, 0x03},
+    {0x37, 0x04},
+    {0x4b, 0x05},
+    {0x5a, 0x06},
+    {0x64, 0x0c},
+    {0x23, 0x04},
+    {0x37, 0x05},
+    {0x4b, 0x06},
+    {0x5a, 0x07},
+    {0x64, 0x0d},
+    {0x23, 0x05},
+    {0x37, 0x06},
+    {0x4b, 0x07},
+    {0x5a, 0x08},
+    {0x64, 0x0e},
+    {0x23, 0x06},
+    {0x37, 0x07},
+    {0x4b, 0x08},
+    {0x5a, 0x09},
+    {0x64, 0x0f}
+};
+
+static const u8 gUnknown_08613794[] =
+{
+    0x00, 0x04, 0x09, 0x0e, 0x13, 0x18, 0x1d, 0x00
+};
+
+static const u16 sPickupItemsLvl50[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND] =
+{
+    {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_CHERI_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_DIRE_HIT, ITEM_PECHA_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_ATTACK, ITEM_RAWST_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_DEFEND, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPEED, ITEM_CHESTO_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_ACCURACY, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPECIAL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_GUARD_SPEC, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_DIRE_HIT, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_ATTACK, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_DEFEND, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPEED, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_ACCURACY, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPECIAL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_GUARD_SPEC, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_DIRE_HIT, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_ATTACK, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_DEFEND, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+};
+
+static const u16 sPickupItemsLvlOpen[TOTAL_ROUNDS][PICKUP_ITEMS_PER_ROUND] =
+{
+    {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_CHERI_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_DIRE_HIT, ITEM_PECHA_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_ATTACK, ITEM_RAWST_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_DEFEND, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPEED, ITEM_CHESTO_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_ACCURACY, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPECIAL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_GUARD_SPEC, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_DIRE_HIT, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_ATTACK, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_DEFEND, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPEED, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_ACCURACY, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_SPECIAL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_GUARD_SPEC, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_DIRE_HIT, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_LEFTOVERS, ITEM_CHOICE_BAND, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+    {ITEM_HYPER_POTION, ITEM_X_ATTACK, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_SCOPE_LENS, ITEM_FOCUS_BAND, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
+    {ITEM_HYPER_POTION, ITEM_X_DEFEND, ITEM_LUM_BERRY, ITEM_ETHER, ITEM_LEPPA_BERRY, ITEM_REVIVE, ITEM_QUICK_CLAW, ITEM_KINGS_ROCK, ITEM_FULL_RESTORE, ITEM_MAX_ELIXIR},
+};
+
+static const u8 gUnknown_08613ABC[63][2] =
+{
+    {0x1f, 0x00},
+    {0x2e, 0x01},
+    {0x3d, 0x02},
+    {0x47, 0x03},
+    {0x51, 0x04},
+    {0x5b, 0x05},
+    {0x5e, 0x06},
+    {0x61, 0x07},
+    {0x64, 0x08},
+    {0x0f, 0x00},
+    {0x2e, 0x01},
+    {0x3d, 0x02},
+    {0x47, 0x03},
+    {0x51, 0x04},
+    {0x5b, 0x05},
+    {0x5e, 0x06},
+    {0x61, 0x08},
+    {0x64, 0x09},
+    {0x0f, 0x00},
+    {0x1e, 0x01},
+    {0x3d, 0x02},
+    {0x47, 0x03},
+    {0x51, 0x04},
+    {0x5b, 0x05},
+    {0x5e, 0x06},
+    {0x61, 0x07},
+    {0x64, 0x08},
+    {0x1c, 0x00},
+    {0x2b, 0x01},
+    {0x3a, 0x02},
+    {0x44, 0x03},
+    {0x4e, 0x04},
+    {0x58, 0x05},
+    {0x5c, 0x07},
+    {0x60, 0x08},
+    {0x64, 0x09},
+    {0x0f, 0x00},
+    {0x2b, 0x01},
+    {0x3a, 0x02},
+    {0x44, 0x03},
+    {0x4e, 0x04},
+    {0x58, 0x05},
+    {0x5c, 0x06},
+    {0x60, 0x07},
+    {0x64, 0x09},
+    {0x0f, 0x00},
+    {0x1e, 0x01},
+    {0x3a, 0x02},
+    {0x44, 0x03},
+    {0x4e, 0x04},
+    {0x58, 0x05},
+    {0x5c, 0x06},
+    {0x60, 0x07},
+    {0x64, 0x08},
+    {0x1c, 0x00},
+    {0x2b, 0x01},
+    {0x3a, 0x02},
+    {0x44, 0x03},
+    {0x4e, 0x04},
+    {0x58, 0x05},
+    {0x5c, 0x06},
+    {0x60, 0x08},
+    {0x64, 0x09},
+};
+
+static const u8 gUnknown_08613B3A[] = {0x00, 0x09, 0x12, 0x1b, 0x24, 0x2d, 0x36};
+
+static const struct ClassMusic gUnknown_08613B44[54] =
+{
+    {0x03, 0x06},
+    {0x0b, 0x06},
+    {0x0d, 0x06},
+    {0x0f, 0x01},
+    {0x2b, 0x04},
+    {0x2d, 0x01},
+    {0x24, 0x09},
+    {0x29, 0x04},
+    {0x05, 0x05},
+    {0x18, 0x04},
+    {0x2f, 0x00},
+    {0x2e, 0x09},
+    {0x11, 0x0c},
+    {0x10, 0x0b},
+    {0x1e, 0x0d},
+    {0x08, 0x01},
+    {0x17, 0x03},
+    {0x0c, 0x04},
+    {0x38, 0x04},
+    {0x1c, 0x03},
+    {0x1a, 0x00},
+    {0x19, 0x0b},
+    {0x09, 0x07},
+    {0x31, 0x07},
+    {0x35, 0x07},
+    {0x36, 0x01},
+    {0x33, 0x00},
+    {0x2a, 0x03},
+    {0x16, 0x0d},
+    {0x0e, 0x03},
+    {0x15, 0x01},
+    {0x14, 0x01},
+    {0x2c, 0x01},
+    {0x1b, 0x02},
+    {0x04, 0x01},
+    {0x07, 0x03},
+    {0x34, 0x05},
+    {0x32, 0x00},
+    {0x37, 0x02},
+    {0x1d, 0x04},
+    {0x22, 0x09},
+    {0x1f, 0x01},
+    {0x25, 0x00},
+    {0x0a, 0x04},
+    {0x28, 0x00},
+    {0x06, 0x05},
+    {0x27, 0x0b},
+    {0x26, 0x00},
+    {0x13, 0x00},
+    {0x12, 0x02},
+    {0x39, 0x08},
+    {0x02, 0x0b},
+    {0x20, 0x01},
+    {0x21, 0x00},
+};
+
+static const u8 gUnknown_08613C1C[50][2] =
+{
+    {0x0d, 0x03},
+    {0x0e, 0x04},
+    {0x10, 0x01},
+    {0x11, 0x00},
+    {0x03, 0x02},
+    {0x12, 0x03},
+    {0x0c, 0x03},
+    {0x13, 0x03},
+    {0x14, 0x03},
+    {0x15, 0x02},
+    {0x17, 0x02},
+    {0x07, 0x02},
+    {0x0a, 0x04},
+    {0x19, 0x02},
+    {0x1a, 0x02},
+    {0x1b, 0x00},
+    {0x1d, 0x02},
+    {0x1e, 0x02},
+    {0x1f, 0x03},
+    {0x20, 0x04},
+    {0x26, 0x00},
+    {0x27, 0x01},
+    {0x29, 0x04},
+    {0x2a, 0x05},
+    {0x09, 0x04},
+    {0x16, 0x05},
+    {0x2b, 0x00},
+    {0x2d, 0x04},
+    {0x2e, 0x02},
+    {0x30, 0x02},
+    {0x32, 0x02},
+    {0x31, 0x03},
+    {0x2f, 0x03},
+    {0x33, 0x03},
+    {0x34, 0x02},
+    {0x04, 0x02},
+    {0x35, 0x00},
+    {0x36, 0x03},
+    {0x37, 0x03},
+    {0x38, 0x03},
+    {0x1c, 0x01},
+    {0x3a, 0x02},
+    {0x05, 0x02},
+    {0x42, 0x02},
+    {0x02, 0x03},
+    {0x44, 0x02},
+    {0x45, 0x03},
+    {0x47, 0x03},
+    {0x43, 0x00},
+    {0x00, 0x04},
+};
+
+static const u8 *const gUnknown_08613C80[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_252D2D,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252D57,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252D81,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252DAB,
+};
+
+static const u8 *const gUnknown_08613C90[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_25330B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2532CC,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25328B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253248,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253206,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2531C4,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253183,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253140,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2530FD,
+};
+
+static const u8 *const gUnknown_08613CB4[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_2544A6,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25445A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25440B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2543BA,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25436A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25431A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2542CB,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25427A,
+};
+
+static const u8 *const gUnknown_08613CD4[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_252DD5,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252E03,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252E31,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252E5F,
+};
+
+static const u8 *const gUnknown_08613CE4[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_25362E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2535D4,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253578,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25351A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2534BD,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253460,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253404,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2533A6,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25334D,
+};
+
+static const u8 *const gUnknown_08613D08[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_25471E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2546CC,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25467C,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25462A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2545D9,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254588,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254538,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2544E6,
+};
+
+static const u8 *const gUnknown_08613D28[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_252E8D,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252EAA,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252EC7,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252EE4,
+};
+
+static const u8 *const gUnknown_08613D38[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_2539EC,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253980,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253915,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2538A8,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25383C,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2537D0,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253765,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2536F8,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25368B,
+};
+
+static const u8 *const gUnknown_08613D5C[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_254A0B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2549AE,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25494D,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2548EB,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25488A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254829,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2547C9,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254767,
+};
+
+static const u8 *const gUnknown_08613D7C[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_252F01,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252F3A,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252F73,
+    BattleFrontier_BattlePyramidEmptySquare_Text_252FAC,
+};
+
+static const u8 *const gUnknown_08613D8C[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_253D3E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253CE0,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253C87,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253C2C,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253BD2,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253B78,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253B1F,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253AC4,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253A69,
+};
+
+static const u8 *const gUnknown_08613DB0[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_254C3E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254BF1,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254BAE,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254B69,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254B25,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254AE1,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254A9E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254A59,
+};
+
+static const u8 *const gUnknown_08613DD0[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_252FE5,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253000,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25301B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253036,
+};
+
+static const u8 *const gUnknown_08613DE0[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_253F6C,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253F34,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253EFA,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253EBE,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253E83,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253E48,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253E0E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253DD2,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253D96,
+};
+
+static const u8 *const gUnknown_08613E04[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_254E6E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254E27,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254DE0,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254D97,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254D4F,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254D07,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254CC0,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254C77,
+};
+
+static const u8 *const gUnknown_08613E24[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_253051,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25307C,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2530A7,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2530D2,
+};
+
+static const u8 *const gUnknown_08613E34[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_25422B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2541DD,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25418D,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25413B,
+    BattleFrontier_BattlePyramidEmptySquare_Text_2540EA,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254099,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254049,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253FF7,
+    BattleFrontier_BattlePyramidEmptySquare_Text_253FA5,
+};
+
+static const u8 *const gUnknown_08613E58[] =
+{
+    BattleFrontier_BattlePyramidEmptySquare_Text_255068,
+    BattleFrontier_BattlePyramidEmptySquare_Text_25502F,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254FF6,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254FBB,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254F81,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254F47,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254F0E,
+    BattleFrontier_BattlePyramidEmptySquare_Text_254ED3,
+};
+
+static const u8 *const *const gUnknown_08613E78[] =
+{
+    gUnknown_08613C80,
+    gUnknown_08613C90,
+    gUnknown_08613CB4,
+};
+
+static const u8 *const *const gUnknown_08613E84[] =
+{
+    gUnknown_08613CD4,
+    gUnknown_08613CE4,
+    gUnknown_08613D08,
+};
+
+static const u8 *const *const gUnknown_08613E90[] =
+{
+    gUnknown_08613D28,
+    gUnknown_08613D38,
+    gUnknown_08613D5C,
+};
+
+static const u8 *const *const gUnknown_08613E9C[] =
+{
+    gUnknown_08613D7C,
+    gUnknown_08613D8C,
+    gUnknown_08613DB0,
+};
+
+static const u8 *const *const gUnknown_08613EA8[] =
+{
+    gUnknown_08613DD0,
+    gUnknown_08613DE0,
+    gUnknown_08613E04,
+};
+
+static const u8 *const *const gUnknown_08613EB4[] =
+{
+    gUnknown_08613E24,
+    gUnknown_08613E34,
+    gUnknown_08613E58,
+};
+
+static const u8 *const *const *const gUnknown_08613EC0[] =
+{
+    gUnknown_08613E78,
+    gUnknown_08613E84,
+    gUnknown_08613E90,
+    gUnknown_08613E9C,
+    gUnknown_08613EA8,
+    gUnknown_08613EB4,
+};
 
 static const u8 gUnknown_08613ED8[] = {3, 4, 5, 6, 7, 8, 3, 4};
 
@@ -637,9 +1321,9 @@ void GenerateBattlePyramidWildMon(void)
         round = TOTAL_ROUNDS - 1;
 
     if (lvl != FRONTIER_LVL_50)
-        wildMons = gBattlePyramidOpenLevelWildMonPointers[round];
+        wildMons = sOpenLevelWildMonPointers[round];
     else
-        wildMons = gBattlePyramidLevel50WildMonPointers[round];
+        wildMons = sLevel50WildMonPointers[round];
 
     id = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) - 1;
     SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &wildMons[id].species);
