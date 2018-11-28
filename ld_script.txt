@@ -599,6 +599,7 @@ SECTIONS {
         src/battle_arena.o(.rodata);
         src/battle_factory.o(.rodata);
         src/battle_pike.o(.rodata);
+        src/mossdeep_gym.o(.rodata);
         data/mossdeep_gym.o(.rodata);
         src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);

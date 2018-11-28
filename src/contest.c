@@ -625,7 +625,7 @@ void sub_80D8108(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 1:
-            (s16)gBattle_BG1_Y += 7;
+            *(s16 *)&gBattle_BG1_Y += 7;
             if ((s16)gBattle_BG1_Y <= 160)
                 break;
             gTasks[taskId].data[0]++;
