@@ -773,7 +773,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
-        return 0x40;
+        return MAX_SPRITES;
     else
         return spriteId;
 }
@@ -3469,13 +3469,12 @@ static void sub_80B957C(struct Sprite *sprite)
 
 static void sub_80B963C(struct Sprite *sprite)
 {
-    struct Sprite *sprite1;
     sprite->pos2.x = Cos(sprite->data[2], 0x8c);
     sprite->pos2.y = Sin(sprite->data[2], 0x48);
     sprite->data[2] = (sprite->data[2] + 4) & 0xff;
-    if (sprite->data[6] != 0x40)
+    if (sprite->data[6] != MAX_SPRITES)
     {
-        sprite1 = &gSprites[sprite->data[6]];
+        struct Sprite *sprite1 = &gSprites[sprite->data[6]];
         sprite1->coordOffsetEnabled = 0;
         sprite1->pos1.x = sprite->pos1.x + sprite->pos2.x;
         sprite1->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
@@ -3855,7 +3854,7 @@ void sub_80B9D24(struct Sprite* sprite)
     for (i = 0; i < 4; i++)
     {
         u8 spriteId = CreateSprite(&gUnknown_0855C5EC, xPos, yPos, 0);
-        if (spriteId != 0x40)
+        if (spriteId != MAX_SPRITES)
         {
             StartSpriteAnim(&gSprites[spriteId], i);
             gSprites[spriteId].data[0] = i;
@@ -3868,22 +3867,22 @@ static void sub_80B9DB8(struct Sprite* sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->pos1.x -= 16;
-            sprite->pos1.y -= 12;
-            break;
-        case 1:
-            sprite->pos1.x += 16;
-            sprite->pos1.y -= 12;
-            break;
-        case 2:
-            sprite->pos1.x -= 16;
-            sprite->pos1.y += 12;
-            break;
-        case 3:
-            sprite->pos1.x += 16;
-            sprite->pos1.y += 12;
-            break;
+    case 0:
+        sprite->pos1.x -= 16;
+        sprite->pos1.y -= 12;
+        break;
+    case 1:
+        sprite->pos1.x += 16;
+        sprite->pos1.y -= 12;
+        break;
+    case 2:
+        sprite->pos1.x -= 16;
+        sprite->pos1.y += 12;
+        break;
+    case 3:
+        sprite->pos1.x += 16;
+        sprite->pos1.y += 12;
+        break;
     }
     if ((u16)(sprite->pos1.x + 4) > 0xF8 || sprite->pos1.y < -4 || sprite->pos1.y > 0xA4)
         DestroySprite(sprite);
