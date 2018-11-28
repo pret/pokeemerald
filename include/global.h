@@ -920,7 +920,6 @@ struct SaveBlock1
     /*0x????*/ u8 decorPoster[10];
     /*0x????*/ u8 decorDoll[40];
     /*0x????*/ u8 decorCushion[10];
-    /*0x27CA*/ u8 padding_27CA[2];
     /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
     /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];
     /*0x2B90*/ u16 outbreakPokemonSpecies;
