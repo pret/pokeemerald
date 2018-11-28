@@ -13,16 +13,17 @@
 #include "starter_choose.h"
 #include <gba/flash_internal.h>
 #include "text_window.h"
+#include "constants/rgb.h"
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
-extern u8 gText_SaveFailedCheckingBackup[];
-extern u8 gText_BackupMemoryDamaged[];
-extern u8 gText_CheckCompleted[];
-extern u8 gText_SaveCompleteGameCannotContinue[];
-extern u8 gText_SaveCompletePressA[];
-extern u8 gText_GamePlayCannotBeContinued[];
+extern const u8 gText_SaveFailedCheckingBackup[];
+extern const u8 gText_BackupMemoryDamaged[];
+extern const u8 gText_CheckCompleted[];
+extern const u8 gText_SaveCompleteGameCannotContinue[];
+extern const u8 gText_SaveCompletePressA[];
+extern const u8 gText_GamePlayCannotBeContinued[];
 
 // gSaveFailedClockInfo enum
 enum
@@ -155,8 +156,8 @@ static void VBlankCB_UpdateClockGraphics(void);
 static bool8 VerifySectorWipe(u16 sector);
 static bool8 WipeSectors(u32);
 
-// although this is a general text printer, it's only used in this file.
-static void SaveFailedScreenTextPrint(u8 *text, u8 var1, u8 var2)
+// Although this is a general text printer, it's only used in this file.
+static void SaveFailedScreenTextPrint(const u8 *text, u8 var1, u8 var2)
 {
     u8 color[3];
 
@@ -187,72 +188,70 @@ static void CB2_SaveFailedScreen(void)
 {
     switch (gMain.state)
     {
-        case 0:
-        default:
-            SetVBlankCallback(NULL);
-            SetGpuReg(REG_OFFSET_DISPCNT, 0);
-            SetGpuReg(REG_OFFSET_BG3CNT, 0);
-            SetGpuReg(REG_OFFSET_BG2CNT, 0);
-            SetGpuReg(REG_OFFSET_BG1CNT, 0);
-            SetGpuReg(REG_OFFSET_BG0CNT, 0);
-            SetGpuReg(REG_OFFSET_BG3HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG3VOFS, 0);
-            SetGpuReg(REG_OFFSET_BG2HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG2VOFS, 0);
-            SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG1VOFS, 0);
-            SetGpuReg(REG_OFFSET_BG0HOFS, 0);
-            SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-            // how come this doesnt use the Dma manager?
-            DmaFill16(3, 0, VRAM, VRAM_SIZE);
-            DmaFill32(3, 0, OAM, OAM_SIZE);
-            DmaFill16(3, 0, PLTT, PLTT_SIZE);
-            LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
-            LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x7000));
-            LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x7800));
-            LZ77UnCompVram(sSaveFailedClockGfx, (void *)(VRAM + 0x10020));
-            ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
-            SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
-            CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
-            LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
-            InitWindows(gUnknown_085EFD94);
-            // AddWindowWithoutTileMap returns a u16/integer, but the info is clobbered into a u8 here resulting in lost info. Bug?
-            gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFD9C);
-            SetWindowAttribute(gSaveFailedWindowIds[TEXT_WIN_ID], 7, (u32)&gDecompressionBuffer[0x2800]);
-            gSaveFailedWindowIds[CLOCK_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFDA4);
-            SetWindowAttribute(gSaveFailedWindowIds[CLOCK_WIN_ID], 7, (u32)&gDecompressionBuffer[0x3D00]);
-            DeactivateAllTextPrinters();
-            ResetSpriteData();
-            ResetTasks();
-            ResetPaletteFade();
-            LoadPalette(gBirchBagGrassPal, 0, 0x40);
-            LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
-            LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
-            LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-            SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
-            SetWindowBorderStyle(gSaveFailedWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
-            FillWindowPixelBuffer(gSaveFailedWindowIds[CLOCK_WIN_ID], 0x11); // backwards?
-            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
-            CopyWindowToVram(gSaveFailedWindowIds[CLOCK_WIN_ID], 2); // again?
-            CopyWindowToVram(gSaveFailedWindowIds[TEXT_WIN_ID], 1);
-            SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-            EnableInterrupts(1);
-            SetVBlankCallback(VBlankCB);
-            SetGpuReg(0, 0x1040);
-            ShowBg(0);
-            ShowBg(2);
-            ShowBg(3);
-            gMain.state++;
-            break;
-        case 1:
-            if (!UpdatePaletteFade())
-            {
-                SetMainCallback2(CB2_WipeSave);
-                SetVBlankCallback(VBlankCB_UpdateClockGraphics);
-            }
-            break;
+    case 0:
+    default:
+        SetVBlankCallback(NULL);
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        SetGpuReg(REG_OFFSET_BG3CNT, 0);
+        SetGpuReg(REG_OFFSET_BG2CNT, 0);
+        SetGpuReg(REG_OFFSET_BG1CNT, 0);
+        SetGpuReg(REG_OFFSET_BG0CNT, 0);
+        SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        DmaFill16(3, 0, VRAM, VRAM_SIZE);
+        DmaFill32(3, 0, OAM, OAM_SIZE);
+        DmaFill16(3, 0, PLTT, PLTT_SIZE);
+        LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
+        LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x7000));
+        LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x7800));
+        LZ77UnCompVram(sSaveFailedClockGfx, (void *)(VRAM + 0x10020));
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
+        SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
+        CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
+        LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
+        InitWindows(gUnknown_085EFD94);
+        gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFD9C);
+        SetWindowAttribute(gSaveFailedWindowIds[TEXT_WIN_ID], 7, (u32)&gDecompressionBuffer[0x2800]);
+        gSaveFailedWindowIds[CLOCK_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFDA4);
+        SetWindowAttribute(gSaveFailedWindowIds[CLOCK_WIN_ID], 7, (u32)&gDecompressionBuffer[0x3D00]);
+        DeactivateAllTextPrinters();
+        ResetSpriteData();
+        ResetTasks();
+        ResetPaletteFade();
+        LoadPalette(gBirchBagGrassPal, 0, 0x40);
+        LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
+        LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
+        LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+        SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
+        SetWindowBorderStyle(gSaveFailedWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[CLOCK_WIN_ID], 0x11); // backwards?
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
+        CopyWindowToVram(gSaveFailedWindowIds[CLOCK_WIN_ID], 2); // again?
+        CopyWindowToVram(gSaveFailedWindowIds[TEXT_WIN_ID], 1);
+        SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        EnableInterrupts(1);
+        SetVBlankCallback(VBlankCB);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+        ShowBg(0);
+        ShowBg(2);
+        ShowBg(3);
+        gMain.state++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+        {
+            SetMainCallback2(CB2_WipeSave);
+            SetVBlankCallback(VBlankCB_UpdateClockGraphics);
+        }
+        break;
     }
 }
 
@@ -346,7 +345,7 @@ static void CB2_ReturnToTitleScreen(void)
 
 static void VBlankCB_UpdateClockGraphics(void)
 {
-    unsigned int n = (gMain.vblankCounter2 >> 3) & 7;
+    u32 n = (gMain.vblankCounter2 >> 3) & 7;
 
     gMain.oamBuffer[0] = sClockOamData;
     gMain.oamBuffer[0].x = 112;

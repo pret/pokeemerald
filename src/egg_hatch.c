@@ -305,7 +305,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u32 personality, pokerus;
     u8 i, friendship, language, gameMet, markings, obedience;
     u16 moves[4];
-    u32 ivs[6];
+    u32 ivs[NUM_STATS];
 
 
     species = GetMonData(egg, MON_DATA_SPECIES);
@@ -317,7 +317,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
     personality = GetMonData(egg, MON_DATA_PERSONALITY);
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < NUM_STATS; i++)
     {
         ivs[i] = GetMonData(egg, MON_DATA_HP_IV + i);
     }
@@ -335,7 +335,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
         SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
     }
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < NUM_STATS; i++)
     {
         SetMonData(temp, MON_DATA_HP_IV + i,  &ivs[i]);
     }

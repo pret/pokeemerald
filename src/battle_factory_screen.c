@@ -131,7 +131,6 @@ struct FactorySwapMonsStruct
     bool8 unk30;
 };
 
-extern u8 (*gUnknown_030062E8)(void);
 extern u8 gUnknown_0203CF20;
 
 extern const u16 gBattleFrontierHeldItems[];
@@ -236,6 +235,9 @@ static EWRAM_DATA u8 *sSwapMonCardBgTilemapBuffer = NULL;
 static BSS_DATA struct FactorySelectMonsStruct *sFactorySelectScreen;
 static BSS_DATA void (*sSwap_CurrentTableFunc)(u8 taskId);
 static BSS_DATA struct FactorySwapMonsStruct *sFactorySwapScreen;
+
+// IWRAM common
+u8 (*gUnknown_030062E8)(void);
 
 // Const rom data.
 static const u16 gUnknown_0860F13C[] = INCBIN_U16("graphics/unknown/unknown_60F13C.gbapal");

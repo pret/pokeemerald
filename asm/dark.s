@@ -264,7 +264,7 @@ sub_81138D4: @ 81138D4
 	movs r0, 0x7E
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_80A6E14
+	bl InitSpriteDataForLinearTranslation
 	ldrh r0, [r4, 0x30]
 	negs r0, r0
 	strh r0, [r4, 0x34]
@@ -563,7 +563,7 @@ _08113B60:
 	ldr r0, =0x0000fff4
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80A68D4
+	bl InitAnimArcTranslation
 	ldr r0, =sub_8113B90
 	str r0, [r4, 0x1C]
 	pop {r4-r7}

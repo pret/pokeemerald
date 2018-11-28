@@ -388,7 +388,7 @@ LinkContestRoom1_EventScript_27A1D2:: @ 827A1D2
 	releaseall
 	addvar VAR_0x8006, 65535
 	playse SE_BOWA2
-	special sub_80F8D28
+	special ShowContestEntryMonPic
 	call LinkContestRoom1_EventScript_27A217
 	return
 
@@ -517,7 +517,7 @@ LinkContestRoom1_EventScript_27A34F:: @ 827A34F
 
 LinkContestRoom1_EventScript_27A3E5:: @ 827A3E5
 	setvar VAR_RESULT, 8
-	special sub_80F8FE8
+	special ScriptRandom
 	compare VAR_RESULT, 0
 	call_if 1, LinkContestRoom1_EventScript_27A65A
 	compare VAR_RESULT, 1

@@ -1,8 +1,8 @@
 #include "global.h"
 
-const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/interface/menu.4bpp.lz");
-const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/interface/menu.gbapal.lz");
-const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/interface/menu_map.bin.lz");
+const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
+const u32 gBattleTextboxPalette[] = INCBIN_U32("graphics/battle_interface/textbox.gbapal.lz");
+const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox_map.bin.lz");
 
 const u32 gMonStillFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/front_pics/circled_question_mark_still_front_pic.4bpp.lz");
 const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/back_pics/circled_question_mark_back_pic.4bpp.lz");
@@ -884,18 +884,18 @@ const u32 gBattleAnimSpritePalette_242[] = INCBIN_U32("graphics/battle_anims/spr
 const u32 gBattleAnimSpriteSheet_243[] = INCBIN_U32("graphics/battle_anims/sprites/243.4bpp.lz");
 const u32 gBattleAnimSpritePalette_243[] = INCBIN_U32("graphics/battle_anims/sprites/243.gbapal.lz");
 
-const u32 gUnknown_08C2D720[] = INCBIN_U32("graphics/battle_anims/masks/stat.4bpp.lz");
-const u32 gUnknown_08C2D930[] = INCBIN_U32("graphics/battle_anims/masks/stat_tilemap_1.bin.lz");
-const u32 gUnknown_08C2DA4C[] = INCBIN_U32("graphics/battle_anims/masks/stat_tilemap_2.bin.lz");
+const u32 gBattleStatMask_Gfx[] = INCBIN_U32("graphics/battle_anims/masks/stat.4bpp.lz");
+const u32 gBattleStatMask1_Tilemap[] = INCBIN_U32("graphics/battle_anims/masks/stat_tilemap_1.bin.lz");
+const u32 gBattleStatMask2_Tilemap[] = INCBIN_U32("graphics/battle_anims/masks/stat_tilemap_2.bin.lz");
 
-const u32 gUnknown_08C2DB68[] = INCBIN_U32("graphics/battle_anims/masks/stat1.gbapal.lz");
-const u32 gUnknown_08C2DB88[] = INCBIN_U32("graphics/battle_anims/masks/stat2.gbapal.lz");
-const u32 gUnknown_08C2DBA8[] = INCBIN_U32("graphics/battle_anims/masks/stat3.gbapal.lz");
-const u32 gUnknown_08C2DBC8[] = INCBIN_U32("graphics/battle_anims/masks/stat4.gbapal.lz");
-const u32 gUnknown_08C2DBE8[] = INCBIN_U32("graphics/battle_anims/masks/stat5.gbapal.lz");
-const u32 gUnknown_08C2DC08[] = INCBIN_U32("graphics/battle_anims/masks/stat6.gbapal.lz");
-const u32 gUnknown_08C2DC28[] = INCBIN_U32("graphics/battle_anims/masks/stat7.gbapal.lz");
-const u32 gUnknown_08C2DC48[] = INCBIN_U32("graphics/battle_anims/masks/stat8.gbapal.lz");
+const u32 gBattleStatMask1_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat1.gbapal.lz");
+const u32 gBattleStatMask2_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat2.gbapal.lz");
+const u32 gBattleStatMask3_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat3.gbapal.lz");
+const u32 gBattleStatMask4_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat4.gbapal.lz");
+const u32 gBattleStatMask5_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat5.gbapal.lz");
+const u32 gBattleStatMask6_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat6.gbapal.lz");
+const u32 gBattleStatMask7_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat7.gbapal.lz");
+const u32 gBattleStatMask8_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat8.gbapal.lz");
 
 const u32 gUnknown_08C2DC68[] = INCBIN_U32("graphics/battle_anims/masks/cure_bubbles.4bpp.lz");
 const u32 gUnknown_08C2DDA4[] = INCBIN_U32("graphics/battle_anims/masks/cure_bubbles.gbapal.lz");
@@ -1485,7 +1485,7 @@ const u32 gUnknown_08DD4C4C[] = INCBIN_U32("graphics/link/link_winedge.bin.lz");
 
 const u32 gUnknown_08DD4CF8[] = INCBIN_U32("graphics/interface/unk_change_case.4bpp.lz");
 
-const u16 gTilesetPalettes_General[][16] = 
+const u16 gTilesetPalettes_General[][16] =
 {
     INCBIN_U16("data/tilesets/primary/general/palettes/00.gbapal"),
     INCBIN_U16("data/tilesets/primary/general/palettes/01.gbapal"),

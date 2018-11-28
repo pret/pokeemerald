@@ -1662,7 +1662,7 @@ EventScript_271C3A:: @ 8271C3A
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, 32773
 	setvar VAR_0x8004, 12
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_eq EventScript_271C86
 	msgbox gUnknown_08272A9A, 4
@@ -3361,7 +3361,7 @@ EventScript_2736F8:: @ 82736F8
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
 	setvar VAR_0x8004, 12
-	special sub_81A8E7C
+	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	compare VAR_RESULT, 2

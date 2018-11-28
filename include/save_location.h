@@ -3,7 +3,6 @@
 
 #include <gba/gba.h>
 
-bool32 sub_81AFCEC(void);
 void TrySetMapSaveWarpStatus(void);
 void sub_81AFDA0(void);
 void sub_81AFDD0(void);

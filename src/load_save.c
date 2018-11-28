@@ -6,14 +6,15 @@
 #include "random.h"
 #include "malloc.h"
 #include "item.h"
+#include "overworld.h"
+#include "decoration_inventory.h"
+
+static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 extern void* gUnknown_0203CF5C;
 
 extern bool16 IdentifyFlash(void);
-extern void SetDecorationInventoriesPointers(void);
-extern void ApplyNewEncryptionKeyToGameStats(u32 key);
 extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);
-extern void sub_8084FAC(int unused);
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
@@ -286,7 +287,7 @@ void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey)
     *word ^= newKey;
 }
 
-void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
+static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
 {
     ApplyNewEncryptionKeyToGameStats(encryptionKey);
     ApplyNewEncryptionKeyToBagItems_(encryptionKey);

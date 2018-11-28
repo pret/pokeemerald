@@ -18,7 +18,7 @@ LinkContestRoom1_MapScript1_23B79F: @ 823B79F
 
 LinkContestRoom1_EventScript_23B7AF:: @ 823B7AF
 	call LinkContestRoom1_EventScript_27A133
-	special sub_80F8FA0
+	special ScriptGetMultiplayerId
 	compare VAR_RESULT, 0
 	call_if 1, LinkContestRoom1_EventScript_23B7EF
 	compare VAR_RESULT, 1
@@ -134,7 +134,7 @@ LinkContestRoom1_EventScript_23B8ED:: @ 823B8ED
 
 LinkContestRoom1_EventScript_23B8F8:: @ 823B8F8
 	setvar VAR_RESULT, 32
-	special sub_80F8FE8
+	special ScriptRandom
 	addvar VAR_RESULT, 1
 	switch VAR_RESULT
 	case 1, LinkContestRoom1_EventScript_23BA6B

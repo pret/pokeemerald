@@ -1239,7 +1239,7 @@ extern const u32 gMonBackPic_Pichu[];
 extern const u32 gMonShinyPalette_Pichu[];
 extern const u32 gMonStillFrontPic_Pichu[];
 extern const u8 gMonIcon_Pichu[];
-extern const u32 gMonFootprint_Pichu[];
+extern const u8 gMonFootprint_Pichu[];
 extern const u32 gMonFrontPic_Cleffa[];
 extern const u32 gMonPalette_Cleffa[];
 extern const u32 gMonBackPic_Cleffa[];
@@ -2862,6 +2862,7 @@ extern const u32 gMonPalette_CircledQuestionMark[];
 extern const u32 gMonShinyPalette_CircledQuestionMark[];
 extern const u32 gMonStillFrontPic_CircledQuestionMark[];
 extern const u8 gMonIcon_QuestionMark[];
+extern const u8 gMonFootprint_QuestionMark[];
 extern const u32 gMonFrontPic_DoubleQuestionMark[];
 extern const u32 gMonBackPic_DoubleQuestionMark[];
 extern const u32 gMonPalette_DoubleQuestionMark[];
@@ -4696,6 +4697,20 @@ extern const u32 gBattleAnimBackgroundTilemap_17[];
 extern const u32 gBattleAnimBackgroundTilemap_20[];
 extern const u32 gBattleAnimBackgroundTilemap_21[];
 
+extern const u32 gUnknown_08C20668[];
+extern const u32 gUnknown_08C20684[];
+extern const u32 gBattleStatMask_Gfx[];
+extern const u32 gBattleStatMask1_Tilemap[];
+extern const u32 gBattleStatMask2_Tilemap[];
+extern const u32 gBattleStatMask1_Pal[];
+extern const u32 gBattleStatMask2_Pal[];
+extern const u32 gBattleStatMask3_Pal[];
+extern const u32 gBattleStatMask4_Pal[];
+extern const u32 gBattleStatMask5_Pal[];
+extern const u32 gBattleStatMask6_Pal[];
+extern const u32 gBattleStatMask7_Pal[];
+extern const u32 gBattleStatMask8_Pal[];
+
 extern const u32 gUnknown_08D9A88C[];
 extern const u32 gContestMiscGfx[];
 extern const u32 gContestAudienceGfx[];
@@ -4716,5 +4731,8 @@ extern const u32 gUnknown_08D91DB8[];
 extern const u32 gUnknown_08D927EC[];
 
 extern const u32 gSlotMachineReelTime_Gfx[];
+
+extern const u32 gUnknown_08D8D410[];
+extern const u32 gUnknown_08D8D58C[];
 
 #endif //GUARD_GRAPHICS_H

@@ -310,7 +310,7 @@ static bool8 AreStatsRaised(void)
     u8 buffedStatsValue = 0;
     s32 i;
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
         if (gBattleMons[gActiveBattler].statStages[i] > 6)
             buffedStatsValue += gBattleMons[gActiveBattler].statStages[i] - 6;

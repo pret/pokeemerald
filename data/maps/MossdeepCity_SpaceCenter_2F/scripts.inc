@@ -260,7 +260,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_22400C:: @ 822400C
 	goto MossdeepCity_SpaceCenter_2F_EventScript_223FDA
 
 MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
-	special ReducePlayerPartyToThree
+	special ReducePlayerPartyToSelectedMons
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 4
 	special CallFrontierUtilFunc

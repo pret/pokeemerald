@@ -4,5 +4,6 @@
 #include <gba/gba.h>
 
 void sub_812FDA8(u32);
+void sub_812FDEC(void);
 
 #endif

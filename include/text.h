@@ -91,6 +91,13 @@
 #define EXT_CTRL_CODE_COLOR     0x1
 #define EXT_CTRL_CODE_HIGHLIGHT 0x2
 #define EXT_CTRL_CODE_SHADOW    0x3
+//
+#define EXT_CTRL_CODE_UNKNOWN_7 0x7
+//
+#define EXT_CTRL_CODE_CLEAR     0x11
+//
+#define EXT_CTRL_CODE_JPN       0x15
+#define EXT_CTRL_CODE_ENG       0x16
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -104,14 +111,12 @@
 
 // battle placeholders are located in battle_message.h
 
-#define EXT_CTRL_CODE_JPN   0x15
-#define EXT_CTRL_CODE_ENG   0x16
-
 #define NUM_TEXT_PRINTERS 32
 
 #define TEXT_SPEED_FF 0xFF
 
-enum {
+enum
+{
     FONTATTR_MAX_LETTER_WIDTH,
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
@@ -207,20 +212,15 @@ typedef struct {
 
 struct Struct_03002F90
 {
-    u8 unk0[0x20];
-    u8 unk20[0x20];
-    u8 unk40[0x20];
-    u8 unk60[0x20];
+    u32 unk0[8];
+    u32 unk20[8];
+    u32 unk40[8];
+    u32 unk60[8];
     u8 unk80;
     u8 unk81;
 };
 
 extern TextFlags gTextFlags;
-
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
 
 extern u8 gUnknown_03002F84;
 extern struct Struct_03002F90 gUnknown_03002F90;
@@ -235,7 +235,7 @@ u32 RenderFont(struct TextPrinter *textPrinter);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
-void DecompressGlyphTile(const u16 *src, u16 *dest);
+void DecompressGlyphTile(const void *src_, void *dest_);
 u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);

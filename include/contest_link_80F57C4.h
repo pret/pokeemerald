@@ -3,7 +3,10 @@
 
 #include <gba/gba.h>
 
+void sub_80F8264(void);
+void sub_80F8290(void);
 void sub_80F840C(void);
+void sub_80F8438(void);
 void sub_80F8484(void);
 void sub_80F84C4(u8);
 void sub_80FC998(u8 taskId);

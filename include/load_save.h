@@ -32,6 +32,5 @@ void LoadPlayerBag(void);
 void SavePlayerBag(void);
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey);
 void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
-void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 #endif // GUARD_LOAD_SAVE_H

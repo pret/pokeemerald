@@ -3,7 +3,7 @@
 
 #include <gba/gba.h>
 
-extern bool8 (*gMenuCallback)(void);   // Defined in sym_common.txt
+extern bool8 (*gMenuCallback)(void);
 
 void sub_809FA18(void);
 void sub_809FA34(u8 taskId);

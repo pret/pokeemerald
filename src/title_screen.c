@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "title_screen.h"
 #include "sprite.h"
 #include <gba/m4a_internal.h>
@@ -37,8 +38,6 @@
 #define A_B_START_SELECT (A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
 
 // this file's functions
 static void MainCB2(void);

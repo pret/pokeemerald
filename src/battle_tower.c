@@ -28,8 +28,6 @@
 #include "constants/moves.h"
 #include "constants/species.h"
 
-extern u16 gUnknown_03006298[];
-
 extern void sub_81A4C30(void);
 
 extern const u8 *const *const gUnknown_085DD690[];
@@ -66,6 +64,9 @@ extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224166[];
 // EWRAM vars.
 EWRAM_DATA const struct BattleFrontierTrainer *gFacilityTrainers = NULL;
 EWRAM_DATA const struct FacilityMon *gFacilityTrainerMons = NULL;
+
+// IWRAM common
+u16 gUnknown_03006298[4];
 
 // This file's functions.
 static void sub_8161F94(void);

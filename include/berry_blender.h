@@ -3,6 +3,7 @@
 
 #include <gba/gba.h>
 
+extern u8 gInGameOpponentsNo;
 void DoBerryBlending(void);
 u16 GetBlenderArrowPosition(void);
 void ShowBerryBlenderRecordWindow(void);
