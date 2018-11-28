@@ -71,7 +71,7 @@ gUnknown_030061C4: @ 30061C4
 gCB2_AfterEvolution: @ 30061E8
     .space 0x4
 
-gUnknown_030061EC: @ 30061EC
+gDexCryScreenState: @ 30061EC
     .space 0x4
 
     .include "save.o"
