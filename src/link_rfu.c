@@ -2020,20 +2020,17 @@ void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 u8 sub_800DD1C(u8 maxFlags)
 {
     u8 flagCount = 0;
-    u8 flags = gUnknown_03007890->unk_02;
+    u32 flags = gUnknown_03007890->unk_02;
     u8 i;
 
     if (gUnknown_03007890->unk_00 == 1)
     {
-        i = 0;
         for (i = 0; i < 4; flags >>= 1, i++)
         {
             if (flags & 1)
             {
                 if (maxFlags == flagCount + 1)
-                {
                     return gUnknown_03007890->unk_0a[i];
-                }
                 flagCount++;
             }
         }
@@ -2043,9 +2040,7 @@ u8 sub_800DD1C(u8 maxFlags)
         for (i = 0; i < 4; flags >>= 1, i++)
         {
             if (flags & 1)
-            {
                 return gUnknown_03007890->unk_0a[i];
-            }
         }
     }
     return 0;
@@ -3203,13 +3198,11 @@ bool32 sub_800F4F0(void)
     return sub_800F0B8();
 }
 
-#ifdef NONMATCHING
 void sub_800F638(u8 unused, u32 flags)
 {
-    int i;
-    int j;
+    int i, j;
 
-    u8 *r10 = gUnknown_03005000.unk_6c.unk_04;
+    const u8 *r10 = gUnknown_03005000.unk_6c.unk_04;
     for (i = 0; i < gUnknown_03005000.unk_6c.unk_02; i++)
     {
         if (!(flags & 1))
@@ -3220,11 +3213,11 @@ void sub_800F638(u8 unused, u32 flags)
                 gUnknown_03000D90[j + 1] = (r10[12 * i + (j << 1) + 1] << 8) | r10[12 * i + (j << 1) + 0];
             }
             for (j = 0; j < 7; j++)
-            // This should be an ascending loop.
-            // GCC compiles this as descending.
             {
                 gUnknown_03000D80[2 * j + 1] = gUnknown_03000D90[j] >> 8;
                 gUnknown_03000D80[2 * j + 0] = gUnknown_03000D90[j];
+
+                j++;j--; // Needed to match;
             }
             sub_800D888(&gUnknown_03005000.unk_9e8, gUnknown_03000D80);
             gUnknown_03005000.unk_6c.unk_0c |= (1 << i);
@@ -3232,101 +3225,6 @@ void sub_800F638(u8 unused, u32 flags)
         flags >>= 1;
     }
 }
-#else
-NAKED void sub_800F638(u8 unused, u32 flags)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tldr r2, [r0, 0x70]\n"
-                    "\tmov r10, r2\n"
-                    "\tmovs r5, 0\n"
-                    "\tadds r2, r0, 0\n"
-                    "\tadds r2, 0x6E\n"
-                    "\tldrh r3, [r2]\n"
-                    "\tcmp r5, r3\n"
-                    "\tbge _0800F6D4\n"
-                    "\tmov r9, r0\n"
-                    "\tldr r0, =gUnknown_03000D90\n"
-                    "\tmov r8, r0\n"
-                    "_0800F65A:\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tands r0, r1\n"
-                    "\tlsrs r7, r1, 1\n"
-                    "\tadds r6, r5, 0x1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _0800F6C8\n"
-                    "\tldr r1, =0xffff8900\n"
-                    "\tadds r0, r1, 0\n"
-                    "\tadds r1, r5, 0\n"
-                    "\torrs r1, r0\n"
-                    "\tmov r2, r8\n"
-                    "\tstrh r1, [r2]\n"
-                    "\tmovs r4, 0\n"
-                    "\tlsls r0, r5, 1\n"
-                    "\tldr r3, =gUnknown_03000D80\n"
-                    "\tmov r12, r3\n"
-                    "\tadds r0, r5\n"
-                    "\tlsls r0, 2\n"
-                    "\tmov r1, r10\n"
-                    "\tadds r2, r0, r1\n"
-                    "\tmov r3, r8\n"
-                    "\tadds r3, 0x2\n"
-                    "_0800F686:\n"
-                    "\tldrb r1, [r2, 0x1]\n"
-                    "\tlsls r1, 8\n"
-                    "\tldrb r0, [r2]\n"
-                    "\torrs r0, r1\n"
-                    "\tstrh r0, [r3]\n"
-                    "\tadds r2, 0x2\n"
-                    "\tadds r3, 0x2\n"
-                    "\tadds r4, 0x1\n"
-                    "\tcmp r4, 0x6\n"
-                    "\tble _0800F686\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r2, =gUnknown_03000D90\n"
-                    "\tldr r1, =gUnknown_03000D80\n"
-                    "_0800F6A0:\n"
-                    "\tldrh r0, [r2]\n"
-                    "\tlsrs r0, 8\n"
-                    "\tstrb r0, [r1, 0x1]\n"
-                    "\tldrh r0, [r2]\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tadds r2, 0x2\n"
-                    "\tadds r1, 0x2\n"
-                    "\tadds r4, 0x1\n"
-                    "\tcmp r4, 0x6\n"
-                    "\tble _0800F6A0\n"
-                    "\tldr r0, =gUnknown_03005000+0x9E8\n"
-                    "\tmov r1, r12\n"
-                    "\tbl sub_800D888\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tlsls r1, r5\n"
-                    "\tmov r2, r9\n"
-                    "\tldr r0, [r2, 0x78]\n"
-                    "\torrs r0, r1\n"
-                    "\tstr r0, [r2, 0x78]\n"
-                    "_0800F6C8:\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tadds r5, r6, 0\n"
-                    "\tldr r3, =gUnknown_03005000+0x6E\n"
-                    "\tldrh r3, [r3]\n"
-                    "\tcmp r5, r3\n"
-                    "\tblt _0800F65A\n"
-                    "_0800F6D4:\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_800F6FC(u8 a0)
 {
@@ -3408,89 +3306,89 @@ static void sub_800F86C(u8 unused)
     {
         switch (gRecvCmds[i][0] & 0xff00)
         {
-            case 0x7800:
-                if (gUnknown_03005000.unk_0c == 0 && gReceivedRemoteLinkPlayers != 0)
-                    return;
-                // fallthrough
-            case 0x7700:
-                if (gUnknown_03007890->unk_00 == 0)
+        case 0x7800:
+            if (gUnknown_03005000.unk_0c == 0 && gReceivedRemoteLinkPlayers != 0)
+                return;
+            // fallthrough
+        case 0x7700:
+            if (gUnknown_03007890->unk_00 == 0)
+            {
+                gUnknown_03005000.playerCount = gRecvCmds[i][1];
+                gUnknown_03005000.unk_cce = sub_800F74C((u8 *)(gRecvCmds[i] + 2));
+            }
+            break;
+        case 0x8800:
+            if (gUnknown_03005000.unk_80[i].unk_12 == 0)
+            {
+                gUnknown_03005000.unk_80[i].unk_00 = 0;
+                gUnknown_03005000.unk_80[i].unk_02 = gRecvCmds[i][1];
+                gUnknown_03005000.unk_80[i].unk_11 = gRecvCmds[i][2];
+                gUnknown_03005000.unk_80[i].unk_08 = 0;
+                gUnknown_03005000.unk_80[i].unk_12 = 1;
+                gUnknown_03005000.unk_5c[i] = 0;
+            }
+            break;
+        case 0x8900:
+            if (gUnknown_03005000.unk_80[i].unk_12 == 1)
+            {
+                gUnknown_03005000.unk_80[i].unk_00 = gRecvCmds[i][0] & 0xff;
+                gUnknown_03005000.unk_80[i].unk_08 |= (1 << gUnknown_03005000.unk_80[i].unk_00);
+                for (j = 0; j < 6; j++)
+                    gBlockRecvBuffer[i][gUnknown_03005000.unk_80[i].unk_00 * 6 + j] = gRecvCmds[i][j + 1];
+                if (gUnknown_03005000.unk_80[i].unk_08 == gUnknown_082ED628[gUnknown_03005000.unk_80[i].unk_02])
                 {
-                    gUnknown_03005000.playerCount = gRecvCmds[i][1];
-                    gUnknown_03005000.unk_cce = sub_800F74C((u8 *)(gRecvCmds[i] + 2));
+                    gUnknown_03005000.unk_80[i].unk_12 = 2;
+                    sub_800F6FC(i);
+                    if (sub_800F7DC()->unk_0a_0 == 0x45 && gReceivedRemoteLinkPlayers != 0 && gUnknown_03005000.unk_0c == 0)
+                        sub_8010A70(gBlockRecvBuffer);
                 }
-                break;
-            case 0x8800:
-                if (gUnknown_03005000.unk_80[i].unk_12 == 0)
+            }
+            break;
+        case 0xa100:
+            sub_800FE84(gUnknown_082ED6B8[gRecvCmds[i][1]].buffer, (u16)gUnknown_082ED6B8[gRecvCmds[i][1]].size);
+            break;
+        case 0x5f00:
+            gUnknown_03005000.unk_e4[i] = 1;
+            break;
+        case 0x6600:
+            if (gUnknown_03005000.unk_100 == gRecvCmds[i][1])
+                gUnknown_03005000.unk_e9[i] = 1;
+            break;
+        case 0xed00:
+            if (gUnknown_03005000.unk_0c == 0)
+            {
+                if (gReceivedRemoteLinkPlayers != 0)
                 {
-                    gUnknown_03005000.unk_80[i].unk_00 = 0;
-                    gUnknown_03005000.unk_80[i].unk_02 = gRecvCmds[i][1];
-                    gUnknown_03005000.unk_80[i].unk_11 = gRecvCmds[i][2];
-                    gUnknown_03005000.unk_80[i].unk_08 = 0;
-                    gUnknown_03005000.unk_80[i].unk_12 = 1;
-                    gUnknown_03005000.unk_5c[i] = 0;
-                }
-                break;
-            case 0x8900:
-                if (gUnknown_03005000.unk_80[i].unk_12 == 1)
-                {
-                    gUnknown_03005000.unk_80[i].unk_00 = gRecvCmds[i][0] & 0xff;
-                    gUnknown_03005000.unk_80[i].unk_08 |= (1 << gUnknown_03005000.unk_80[i].unk_00);
-                    for (j = 0; j < 6; j++)
-                        gBlockRecvBuffer[i][gUnknown_03005000.unk_80[i].unk_00 * 6 + j] = gRecvCmds[i][j + 1];
-                    if (gUnknown_03005000.unk_80[i].unk_08 == gUnknown_082ED628[gUnknown_03005000.unk_80[i].unk_02])
+                    if (gRecvCmds[i][1] & gUnknown_03007890->unk_02)
                     {
-                        gUnknown_03005000.unk_80[i].unk_12 = 2;
-                        sub_800F6FC(i);
-                        if (sub_800F7DC()->unk_0a_0 == 0x45 && gReceivedRemoteLinkPlayers != 0 && gUnknown_03005000.unk_0c == 0)
-                            sub_8010A70(gBlockRecvBuffer);
+                        gReceivedRemoteLinkPlayers = 0;
+                        sub_800D630();
+                        gUnknown_03005000.unk_ce4 = gRecvCmds[i][2];
                     }
-                }
-                break;
-            case 0xa100:
-                sub_800FE84(gUnknown_082ED6B8[gRecvCmds[i][1]].buffer, (u16)gUnknown_082ED6B8[gRecvCmds[i][1]].size);
-                break;
-            case 0x5f00:
-                gUnknown_03005000.unk_e4[i] = 1;
-                break;
-            case 0x6600:
-                if (gUnknown_03005000.unk_100 == gRecvCmds[i][1])
-                    gUnknown_03005000.unk_e9[i] = 1;
-                break;
-            case 0xed00:
-                if (gUnknown_03005000.unk_0c == 0)
-                {
-                    if (gReceivedRemoteLinkPlayers != 0)
-                    {
-                        if (gRecvCmds[i][1] & gUnknown_03007890->unk_02)
-                        {
-                            gReceivedRemoteLinkPlayers = 0;
-                            sub_800D630();
-                            gUnknown_03005000.unk_ce4 = gRecvCmds[i][2];
-                        }
-                        gUnknown_03005000.playerCount = gRecvCmds[i][3];
-                        sub_80109E8(gRecvCmds[i][1]);
-                    }
-                }
-                else
-                {
-                    sub_800FD14(0xee00);
-                    gSendCmd[1] = gRecvCmds[i][1];
-                    gSendCmd[2] = gRecvCmds[i][2];
-                    gSendCmd[3] = gRecvCmds[i][3];
-                }
-                break;
-            case 0xee00:
-                if (gUnknown_03005000.unk_0c == 1)
-                {
-                    gUnknown_03005000.unk_ce3 |= gRecvCmds[i][1];
-                    gUnknown_03005000.unk_ce4 = gRecvCmds[i][2];
+                    gUnknown_03005000.playerCount = gRecvCmds[i][3];
                     sub_80109E8(gRecvCmds[i][1]);
                 }
-                break;
-            case 0x4400:
-            case 0xbe00:
-                gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
-                break;
+            }
+            else
+            {
+                sub_800FD14(0xee00);
+                gSendCmd[1] = gRecvCmds[i][1];
+                gSendCmd[2] = gRecvCmds[i][2];
+                gSendCmd[3] = gRecvCmds[i][3];
+            }
+            break;
+        case 0xee00:
+            if (gUnknown_03005000.unk_0c == 1)
+            {
+                gUnknown_03005000.unk_ce3 |= gRecvCmds[i][1];
+                gUnknown_03005000.unk_ce4 = gRecvCmds[i][2];
+                sub_80109E8(gRecvCmds[i][1]);
+            }
+            break;
+        case 0x4400:
+        case 0xbe00:
+            gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
+            break;
         }
         if (gUnknown_03005000.unk_0c == 1 && gUnknown_03005000.unk_61[i])
         {
@@ -3555,8 +3453,6 @@ u8 sub_800FCD8(void)
     return flags;
 }
 
-#ifdef NONMATCHING
-// The switch tree is incorrect
 void sub_800FD14(u16 command)
 {
     u8 i;
@@ -3566,195 +3462,44 @@ void sub_800FD14(u16 command)
     gSendCmd[0] = command;
     switch (command)
     {
-        case 0x8800:
-            gSendCmd[1] = gUnknown_03005000.unk_6c.unk_02;
-            gSendCmd[2] = gUnknown_03005000.unk_6c.unk_11 + 0x80;
-            break;
-        case 0xa100:
-            if (sub_800FC60())
-                gSendCmd[1] = gUnknown_03005000.unk_5a;
-            break;
-        case 0x7800:
-        case 0x7700:
-            tmp = gUnknown_03005000.unk_ce2 ^ gUnknown_03005000.unk_ce3;
-            gUnknown_03005000.playerCount = gUnknown_082ED695[tmp] + 1;
-            gSendCmd[1] = gUnknown_03005000.playerCount;
-            buff = (u8 *)(gSendCmd + 2);
-            for (i = 0; i < 4; i++)
-                buff[i] = gUnknown_03005000.unk_cde[i];
-            break;
-        case 0x6600:
-        case 0x5f00:
-            gSendCmd[1] = gUnknown_03005000.unk_100;
-            break;
-        case 0x4400:
-            gSendCmd[0] = 0x4400;
-            gSendCmd[1] = gMain.heldKeys;
-            break;
-        case 0x2f00:
-            for (i = 0; i < 6; i++)
-                gSendCmd[1 + i] = gUnknown_03005000.unk_f2[i];
-            break;
-        case 0xbe00:
-            gSendCmd[1] = gUnknown_03005DA8;
-            break;
+    case 0x8800:
+        gSendCmd[1] = gUnknown_03005000.unk_6c.unk_02;
+        gSendCmd[2] = gUnknown_03005000.unk_6c.unk_11 + 0x80;
+        break;
+    case 0xa100:
+        if (sub_800FC60())
+            gSendCmd[1] = gUnknown_03005000.unk_5a;
+        break;
+    case 0x7700:
+    case 0x7800:
+        tmp = gUnknown_03005000.unk_ce2 ^ gUnknown_03005000.unk_ce3;
+        gUnknown_03005000.playerCount = gUnknown_082ED695[tmp] + 1;
+        gSendCmd[1] = gUnknown_03005000.playerCount;
+        buff = (u8 *)(gSendCmd + 2);
+        for (i = 0; i < 4; i++)
+            buff[i] = gUnknown_03005000.unk_cde[i];
+        break;
+    case 0x6600:
+    case 0x5f00:
+        gSendCmd[1] = gUnknown_03005000.unk_100;
+        break;
+    case 0x4400:
+        gSendCmd[0] = command;
+        gSendCmd[1] = gMain.heldKeys;
+        break;
+    case 0x2f00:
+        for (i = 0; i < 6; i++)
+            gSendCmd[1 + i] = gUnknown_03005000.unk_f2[i];
+        break;
+    case 0xbe00:
+        gSendCmd[1] = gUnknown_03005DA8;
+        break;
+    case 0xee00:
+        break;
+    case 0xed00:
+        break;
     }
 }
-#else
-NAKED void sub_800FD14(u16 command)
-{
-    asm_unified("\tpush {r4,r5,lr}\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r1, r0, 16\n"
-                    "\tldr r5, =gSendCmd\n"
-                    "\tstrh r1, [r5]\n"
-                    "\tmovs r0, 0xF0\n"
-                    "\tlsls r0, 7\n"
-                    "\tadds r4, r5, 0\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FDB0_case_7700_case_7800\n"
-                    "\tcmp r1, r0\n"
-                    "\tbgt _0800FD62\n"
-                    "\tmovs r0, 0xBE\n"
-                    "\tlsls r0, 7\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FE00_case_5f00_case_6600\n"
-                    "\tcmp r1, r0\n"
-                    "\tbgt _0800FD50\n"
-                    "\tmovs r0, 0xBC\n"
-                    "\tlsls r0, 6\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FE20_case_2f00\n"
-                    "\tmovs r0, 0x88\n"
-                    "\tlsls r0, 7\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FE14_case_4400\n"
-                    "\tb _0800FE46_break\n"
-                    "\t.pool\n"
-                    "_0800FD50:\n"
-                    "\tmovs r0, 0xCC\n"
-                    "\tlsls r0, 7\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FE00_case_5f00_case_6600\n"
-                    "\tmovs r0, 0xEE\n"
-                    "\tlsls r0, 7\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FDB0_case_7700_case_7800\n"
-                    "\tb _0800FE46_break\n"
-                    "_0800FD62:\n"
-                    "\tmovs r0, 0xBE\n"
-                    "\tlsls r0, 8\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FE40_case_be00\n"
-                    "\tcmp r1, r0\n"
-                    "\tbgt _0800FE46_break\n"
-                    "\tmovs r0, 0x88\n"
-                    "\tlsls r0, 8\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FD80_case_8800\n"
-                    "\tmovs r0, 0xA1\n"
-                    "\tlsls r0, 8\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _0800FD98_case_a100\n"
-                    "\tb _0800FE46_break\n"
-                    "_0800FD80_case_8800:\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tadds r1, 0x6E\n"
-                    "\tldrh r1, [r1]\n"
-                    "\tstrh r1, [r5, 0x2]\n"
-                    "\tadds r0, 0x7D\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tadds r0, 0x80\n"
-                    "\tstrh r0, [r5, 0x4]\n"
-                    "\tb _0800FE46_break\n"
-                    "\t.pool\n"
-                    "_0800FD98_case_a100:\n"
-                    "\tbl sub_800FC60\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0800FE46_break\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tadds r0, 0x5A\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tb _0800FE44_str_break\n"
-                    "\t.pool\n"
-                    "_0800FDB0_case_7700_case_7800:\n"
-                    "\tldr r3, =gUnknown_03005000\n"
-                    "\tldr r1, =0x00000ce2\n"
-                    "\tadds r0, r3, r1\n"
-                    "\tldr r2, =0x00000ce3\n"
-                    "\tadds r1, r3, r2\n"
-                    "\tldrb r2, [r0]\n"
-                    "\tldrb r0, [r1]\n"
-                    "\teors r0, r2\n"
-                    "\tldr r1, =gUnknown_082ED695\n"
-                    "\tadds r0, r1\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrb r0, [r3, 0xD]\n"
-                    "\tldrb r0, [r3, 0xD]\n"
-                    "\tstrh r0, [r4, 0x2]\n"
-                    "\tadds r2, r4, 0x4\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r0, =0x00000cde\n"
-                    "\tadds r3, r0\n"
-                    "_0800FDD6:\n"
-                    "\tadds r1, r2, r4\n"
-                    "\tadds r0, r4, r3\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tcmp r4, 0x3\n"
-                    "\tbls _0800FDD6\n"
-                    "\tb _0800FE46_break\n"
-                    "\t.pool\n"
-                    "_0800FE00_case_5f00_case_6600:\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tmovs r1, 0x80\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r0, r1\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r4, 0x2]\n"
-                    "\tb _0800FE46_break\n"
-                    "\t.pool\n"
-                    "_0800FE14_case_4400:\n"
-                    "\tstrh r1, [r5]\n"
-                    "\tldr r0, =gMain\n"
-                    "\tldrh r0, [r0, 0x2C]\n"
-                    "\tb _0800FE44_str_break\n"
-                    "\t.pool\n"
-                    "_0800FE20_case_2f00:\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r3, =gUnknown_03005000+0xF2\n"
-                    "_0800FE24:\n"
-                    "\tadds r2, r4, 0x1\n"
-                    "\tlsls r1, r2, 1\n"
-                    "\tadds r1, r5\n"
-                    "\tlsls r0, r4, 1\n"
-                    "\tadds r0, r3\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r4, r2, 24\n"
-                    "\tcmp r4, 0x5\n"
-                    "\tbls _0800FE24\n"
-                    "\tb _0800FE46_break\n"
-                    "\t.pool\n"
-                    "_0800FE40_case_be00:\n"
-                    "\tldr r0, =gUnknown_03005DA8\n"
-                    "\tldrh r0, [r0]\n"
-                    "_0800FE44_str_break:\n"
-                    "\tstrh r0, [r5, 0x2]\n"
-                    "_0800FE46_break:\n"
-                    "\tpop {r4,r5}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
 
 void sub_800FE50(u16 *a0)
 {
@@ -4614,329 +4359,87 @@ void sub_80111FC(void)
     gUnknown_03005000.unk_00 = sub_80111DC;
 }
 
-#ifdef NONMATCHING
 void sub_801120C(u8 a0)
 {
     u8 i;
     u8 r6 = 0;
-    struct RfuUnk5Sub *unk5Sub;
     switch (a0)
     {
-        case 0x00:
-            gUnknown_03005000.unk_04 = 2;
-            break;
-        case 0x10:
-            break;
-        case 0x11:
-            sub_80115EC(gUnknown_03004140.unk_14);
-            for (i = 0; i < 4; i++)
+    case 0x00:
+        gUnknown_03005000.unk_04 = 2;
+        break;
+    case 0x10:
+        break;
+    case 0x11:
+        sub_80115EC(gUnknown_03004140.unk_14);
+        for (i = 0; i < 4; i++)
+        {
+            if ((gUnknown_03004140.unk_14 >> i) & 1)
             {
-                if ((gUnknown_03004140.unk_14 >> i) & 1)
+                struct UnkLinkRfuStruct_02022B14 *structPtr = &gUnknown_03007890->unk_14[i].unk_06;
+                if (structPtr->unk_0a_0 == sub_800F7DC()->unk_0a_0)
                 {
-                    unk5Sub = &gUnknown_03007890->unk_14[i];
-                    if (unk5Sub->unk_06.unk_0a_0 == sub_800F7DC()->unk_0a_0)
-                    {
-                        gUnknown_03005000.unk_cd1[i] = 0;
-                        gUnknown_03005000.unk_cd5[i] = 0;
-                        rfu_setRecvBuffer(0x20, i, gUnknown_03005000.unk_cd5 + i, 1);
-                    }
-                    else
-                    {
-                        r6 |= (1 << i);
-                    }
+                    gUnknown_03005000.unk_cd1[i] = 0;
+                    gUnknown_03005000.unk_cd5[i] = 0;
+                    rfu_setRecvBuffer(0x20, i, gUnknown_03005000.unk_cd5 + i, 1);
+                }
+                else
+                {
+                    r6 |= (1 << i);
                 }
             }
-            if (r6)
-            {
-                rfu_REQ_disconnect(r6);
-                rfu_waitREQComplete();
-            }
-            break;
-        case 0x12:
-            break;
-        case 0x13:
-            break;
-        case 0x14:
-            if (gUnknown_03005000.unk_ce7 != gUnknown_03004140.unk_00)
-            {
-                rfu_REQ_disconnect(gUnknown_03005000.unk_ce7 ^ gUnknown_03004140.unk_00);
-                rfu_waitREQComplete();
-            }
-            gUnknown_03005000.unk_04 = 0x11;
-            break;
-        case 0x31:
-            gUnknown_03005000.unk_f0 = 1;
-            break;
-        case 0x32:
-            gUnknown_03005000.unk_f0 = 3;
-            break;
-        case 0x30:
-        case 0x33:
-            gUnknown_03005000.unk_f0 = 4;
-            gUnknown_03005000.unk_ce2 &= ~gUnknown_03004140.unk_14;
-            if (gReceivedRemoteLinkPlayers == 1)
-            {
-                if (gUnknown_03005000.unk_ce2 == 0)
-                    sub_8011170(a0);
-                else
-                    sub_80111FC();
-            }
-            sub_8011A64(2, a0);
-            break;
-        case 0x42 ... 0x44:
-            break;
-        case 0xf3:
-            sub_8011A64(1, a0);
-            sub_8011170(a0);
-            gUnknown_03005000.unk_ef = 1;
-            break;
-        case 0xf0 ... 0xf2:
-        case 0xff:
-            sub_8011170(a0);
-            sub_8011A64(1, a0);
-            gUnknown_03005000.unk_cdb = 1;
-            break;
+        }
+        if (r6)
+        {
+            rfu_REQ_disconnect(r6);
+            rfu_waitREQComplete();
+        }
+        break;
+    case 0x12:
+        break;
+    case 0x13:
+        break;
+    case 0x14:
+        if (gUnknown_03005000.unk_ce7 != gUnknown_03004140.unk_00)
+        {
+            rfu_REQ_disconnect(gUnknown_03005000.unk_ce7 ^ gUnknown_03004140.unk_00);
+            rfu_waitREQComplete();
+        }
+        gUnknown_03005000.unk_04 = 0x11;
+        break;
+    case 0x31:
+        gUnknown_03005000.unk_f0 = 1;
+        break;
+    case 0x32:
+        gUnknown_03005000.unk_f0 = 3;
+        break;
+    case 0x30:
+    case 0x33:
+        gUnknown_03005000.unk_f0 = 4;
+        gUnknown_03005000.unk_ce2 &= ~gUnknown_03004140.unk_14;
+        if (gReceivedRemoteLinkPlayers == 1)
+        {
+            if (gUnknown_03005000.unk_ce2 == 0)
+                sub_8011170(a0);
+            else
+                sub_80111FC();
+        }
+        sub_8011A64(2, a0);
+        break;
+    case 0x34:
+        break;
+    case 0x42 ... 0x44:
+        break;
+    case 0xf3:
+        sub_8011A64(1, a0);
+        sub_8011170(a0);
+        gUnknown_03005000.unk_ef = 1;
+        break;
+    case 0xf0 ... 0xf2:
+    case 0xff:
+        sub_8011170(a0);
+        sub_8011A64(1, a0);
+        gUnknown_03005000.unk_cdb = 1;
+        break;
     }
 }
-#else
-NAKED void sub_801120C(u8 a0)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tmovs r6, 0\n"
-                    "\tcmp r4, 0x32\n"
-                    "\tbne _08011222\n"
-                    "\tb _08011360_case_32\n"
-                    "_08011222:\n"
-                    "\tcmp r4, 0x32\n"
-                    "\tbgt _08011252\n"
-                    "\tcmp r4, 0x13\n"
-                    "\tbgt _08011240\n"
-                    "\tcmp r4, 0x12\n"
-                    "\tblt _08011230\n"
-                    "\tb _080113EE_break\n"
-                    "_08011230:\n"
-                    "\tcmp r4, 0x10\n"
-                    "\tbne _08011236\n"
-                    "\tb _080113EE_break\n"
-                    "_08011236:\n"
-                    "\tcmp r4, 0x10\n"
-                    "\tbgt _0801128C_case_11\n"
-                    "\tcmp r4, 0\n"
-                    "\tbeq _0801127E_case_00\n"
-                    "\tb _080113EE_break\n"
-                    "_08011240:\n"
-                    "\tcmp r4, 0x30\n"
-                    "\tbne _08011246\n"
-                    "\tb _0801136C_case_30_case_33\n"
-                    "_08011246:\n"
-                    "\tcmp r4, 0x30\n"
-                    "\tble _0801124C\n"
-                    "\tb _08011354_case_31\n"
-                    "_0801124C:\n"
-                    "\tcmp r4, 0x14\n"
-                    "\tbeq _08011328_case_14\n"
-                    "\tb _080113EE_break\n"
-                    "_08011252:\n"
-                    "\tcmp r4, 0x44\n"
-                    "\tbgt _08011264\n"
-                    "\tcmp r4, 0x42\n"
-                    "\tblt _0801125C\n"
-                    "\tb _080113EE_break\n"
-                    "_0801125C:\n"
-                    "\tcmp r4, 0x33\n"
-                    "\tbne _08011262\n"
-                    "\tb _0801136C_case_30_case_33\n"
-                    "_08011262:\n"
-                    "\tb _080113EE_break\n"
-                    "_08011264:\n"
-                    "\tcmp r4, 0xF3\n"
-                    "\tbne _0801126A\n"
-                    "\tb _080113BA_case_f3\n"
-                    "_0801126A:\n"
-                    "\tcmp r4, 0xF3\n"
-                    "\tbgt _08011276\n"
-                    "\tcmp r4, 0xF0\n"
-                    "\tbge _08011274\n"
-                    "\tb _080113EE_break\n"
-                    "_08011274:\n"
-                    "\tb _080113D4_case_f0_f1_f2_ff\n"
-                    "_08011276:\n"
-                    "\tcmp r4, 0xFF\n"
-                    "\tbne _0801127C\n"
-                    "\tb _080113D4_case_f0_f1_f2_ff\n"
-                    "_0801127C:\n"
-                    "\tb _080113EE_break\n"
-                    "_0801127E_case_00:\n"
-                    "\tldr r1, =gUnknown_03005000\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tstrh r0, [r1, 0x4]\n"
-                    "\tb _080113EE_break\n"
-                    "\t.pool\n"
-                    "_0801128C_case_11:\n"
-                    "\tldr r0, =gUnknown_03004140\n"
-                    "\tldrh r0, [r0, 0x14]\n"
-                    "\tbl sub_80115EC\n"
-                    "\tmovs r5, 0\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmov r8, r0\n"
-                    "\tldr r1, =gUnknown_03005000\n"
-                    "\tmov r9, r1\n"
-                    "\tldr r3, =0x00000cd5\n"
-                    "\tadd r3, r9\n"
-                    "\tmov r10, r3\n"
-                    "\tmovs r7, 0x7F\n"
-                    "_080112A6:\n"
-                    "\tldr r0, =gUnknown_03004140\n"
-                    "\tldrh r0, [r0, 0x14]\n"
-                    "\tasrs r0, r5\n"
-                    "\tmov r1, r8\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0801130E\n"
-                    "\tldr r0, =gUnknown_03007890\n"
-                    "\tlsls r1, r5, 5\n"
-                    "\tadds r1, 0x14\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, r1\n"
-                    "\tldrb r0, [r0, 0x10]\n"
-                    "\tadds r4, r7, 0\n"
-                    "\tands r4, r0\n"
-                    "\tbl sub_800F7DC\n"
-                    "\tldrb r1, [r0, 0xA]\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tands r0, r1\n"
-                    "\tcmp r4, r0\n"
-                    "\tbne _08011304\n"
-                    "\tldr r0, =0x00000cd1\n"
-                    "\tadd r0, r9\n"
-                    "\tadds r0, r5, r0\n"
-                    "\tmovs r1, 0\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tmov r3, r10\n"
-                    "\tadds r2, r5, r3\n"
-                    "\tstrb r1, [r2]\n"
-                    "\tmovs r0, 0x20\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tmovs r3, 0x1\n"
-                    "\tbl rfu_setRecvBuffer\n"
-                    "\tb _0801130E\n"
-                    "\t.pool\n"
-                    "_08011304:\n"
-                    "\tmov r0, r8\n"
-                    "\tlsls r0, r5\n"
-                    "\torrs r6, r0\n"
-                    "\tlsls r0, r6, 24\n"
-                    "\tlsrs r6, r0, 24\n"
-                    "_0801130E:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tcmp r5, 0x3\n"
-                    "\tbls _080112A6\n"
-                    "\tcmp r6, 0\n"
-                    "\tbeq _080113EE_break\n"
-                    "\tadds r0, r6, 0\n"
-                    "\tbl rfu_REQ_disconnect\n"
-                    "\tbl rfu_waitREQComplete\n"
-                    "\tb _080113EE_break\n"
-                    "_08011328_case_14:\n"
-                    "\tldr r4, =gUnknown_03005000\n"
-                    "\tldr r1, =0x00000ce7\n"
-                    "\tadds r0, r4, r1\n"
-                    "\tldr r1, =gUnknown_03004140\n"
-                    "\tldrb r2, [r0]\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tcmp r2, r0\n"
-                    "\tbeq _08011342\n"
-                    "\teors r0, r2\n"
-                    "\tbl rfu_REQ_disconnect\n"
-                    "\tbl rfu_waitREQComplete\n"
-                    "_08011342:\n"
-                    "\tmovs r0, 0x11\n"
-                    "\tstrh r0, [r4, 0x4]\n"
-                    "\tb _080113EE_break\n"
-                    "\t.pool\n"
-                    "_08011354_case_31:\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tadds r0, 0xF0\n"
-                    "\tb _080113EA\n"
-                    "\t.pool\n"
-                    "_08011360_case_32:\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tadds r0, 0xF0\n"
-                    "\tmovs r1, 0x3\n"
-                    "\tb _080113EC\n"
-                    "\t.pool\n"
-                    "_0801136C_case_30_case_33:\n"
-                    "\tldr r1, =gUnknown_03005000\n"
-                    "\tadds r2, r1, 0\n"
-                    "\tadds r2, 0xF0\n"
-                    "\tmovs r0, 0x4\n"
-                    "\tstrb r0, [r2]\n"
-                    "\tldr r3, =0x00000ce2\n"
-                    "\tadds r1, r3\n"
-                    "\tldr r0, =gUnknown_03004140\n"
-                    "\tldrb r2, [r0, 0x14]\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r3, r0, 0\n"
-                    "\tbics r3, r2\n"
-                    "\tadds r2, r3, 0\n"
-                    "\tstrb r2, [r1]\n"
-                    "\tldr r0, =gReceivedRemoteLinkPlayers\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbne _080113B0\n"
-                    "\tcmp r2, 0\n"
-                    "\tbne _080113AC\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl sub_8011170\n"
-                    "\tb _080113B0\n"
-                    "\t.pool\n"
-                    "_080113AC:\n"
-                    "\tbl sub_80111FC\n"
-                    "_080113B0:\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tbl sub_8011A64\n"
-                    "\tb _080113EE_break\n"
-                    "_080113BA_case_f3:\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tmovs r1, 0xF3\n"
-                    "\tbl sub_8011A64\n"
-                    "\tmovs r0, 0xF3\n"
-                    "\tbl sub_8011170\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tadds r0, 0xEF\n"
-                    "\tb _080113EA\n"
-                    "\t.pool\n"
-                    "_080113D4_case_f0_f1_f2_ff:\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tbl sub_8011170\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tadds r1, r4, 0\n"
-                    "\tbl sub_8011A64\n"
-                    "\tldr r0, =gUnknown_03005000\n"
-                    "\tldr r1, =0x00000cdb\n"
-                    "\tadds r0, r1\n"
-                    "\tldrb r1, [r0]\n"
-                    "_080113EA:\n"
-                    "\tmovs r1, 0x1\n"
-                    "_080113EC:\n"
-                    "\tstrb r1, [r0]\n"
-                    "_080113EE_break:\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.pool");
-}
-#endif
