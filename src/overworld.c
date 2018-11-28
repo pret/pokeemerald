@@ -2955,7 +2955,7 @@ static void sub_808780C(u8 linkPlayerId)
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
     u8 eventObjId = linkPlayerEventObj->eventObjId;
     struct EventObject *eventObj = &gEventObjects[eventObjId];
-    if (eventObj->spriteId != 64 )
+    if (eventObj->spriteId != MAX_SPRITES)
         DestroySprite(&gSprites[eventObj->spriteId]);
     linkPlayerEventObj->active = 0;
     eventObj->active = 0;
