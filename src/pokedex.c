@@ -30,7 +30,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-extern u8 gUnknown_030061EC;
+extern u8 gDexCryScreenState;
 
 // EWRAM
 static EWRAM_DATA struct PokedexView *gUnknown_02039B4C = NULL;
@@ -3232,7 +3232,7 @@ void sub_80BF250(u8 taskId)
         case 5:
             gTasks[taskId].data[4] = sub_80C0E9C(gUnknown_02039B54->dexNum, 48, 56, 0);
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
-            gUnknown_030061EC = 0;
+            gDexCryScreenState = 0;
             gMain.state++;
             break;
         case 6:
@@ -3247,7 +3247,7 @@ void sub_80BF250(u8 taskId)
                 if (sub_8145354(&sp4, 2) != 0)
                 {
                     gMain.state++;
-                    gUnknown_030061EC = 0;
+                    gDexCryScreenState = 0;
                 }
             }
             break;
