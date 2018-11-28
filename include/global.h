@@ -954,7 +954,7 @@ struct SaveBlock1
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B98*/ struct UnkSaveSubstruct_3b98 unk_3B98[20];
-    /*0x3C88*/ u8 filler_3C88[0xE8];
+    /*0x3C88*/ u8 unk3C88[11][21];
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };
