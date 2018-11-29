@@ -250,7 +250,7 @@ void ScrSpecial_HipsterTeachWord(void)
 {
     u16 var = sub_811F01C();
 
-    if (var == 0xFFFF)
+    if (var == INVALID_U16)
     {
         gSpecialVar_Result = FALSE;
     }
@@ -283,7 +283,7 @@ void ScrSpecial_GenerateGiddyLine(void)
     if (giddy->taleCounter == 0)
         InitGiddyTaleList();
 
-    if (giddy->randomWords[giddy->taleCounter] != 0xFFFF) // is not the last element of the array?
+    if (giddy->randomWords[giddy->taleCounter] != INVALID_U16) // is not the last element of the array?
     {
         u8 *stringPtr;
         u32 adjective = Random();
@@ -348,7 +348,7 @@ static void InitGiddyTaleList(void)
         r1 = Random() % 10;
         if (r1 < 3 && r7 < 8)
         {
-            giddy->randomWords[i] = 0xFFFF;
+            giddy->randomWords[i] = INVALID_U16;
             r7++;
         }
         else

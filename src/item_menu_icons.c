@@ -309,7 +309,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_857FC74[] =
 
 static const struct SpriteTemplate gUnknown_0857FC7C =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = INVALID_U16,
     .paletteTag = 0x7544,
     .oam = &sOamData_857FBD0,
     .anims = sSpriteAnimTable_857FBE0,
@@ -476,13 +476,13 @@ const struct SpriteTemplate gUnknown_0857FE88 =
 void RemoveBagSprite(u8 id)
 {
     u8 *spriteId = &gUnknown_0203CE54->unk804[id];
-    if (*spriteId != 0xFF)
+    if (*spriteId != INVALID_U8)
     {
         FreeSpriteTilesByTag(id + 100);
         FreeSpritePaletteByTag(id + 100);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
-        *spriteId = 0xFF;
+        *spriteId = INVALID_U8;
     }
 }
 
@@ -582,7 +582,7 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite)
 void AddBagItemIconSprite(u16 itemId, u8 id)
 {
     u8 *spriteId = &gUnknown_0203CE54->unk804[id + 2];
-    if (*spriteId == 0xFF)
+    if (*spriteId == INVALID_U8)
     {
         u8 iconSpriteId;
 

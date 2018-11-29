@@ -266,7 +266,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
     else
         eventObjectId = GetEventObjectIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
 
-    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
+    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == INVALID_U8)
         return NULL;
 
     for (i = 0; i < 4; i++)
@@ -287,14 +287,14 @@ static const u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8
     const u8 *script;
 
     eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
-    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
+    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == INVALID_U8)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
             return NULL;
 
         // Look for an event object on the other side of the counter.
         eventObjectId = GetEventObjectIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
-        if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
+        if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == INVALID_U8)
             return NULL;
     }
 

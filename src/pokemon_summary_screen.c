@@ -19,7 +19,7 @@
 #include "item.h"
 #include "link.h"
 #include "m4a.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "mon_markings.h"
@@ -1152,7 +1152,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         break;
     case 17:
         pssData->spriteIds[0] = sub_81C45F4(&pssData->currentMon, &pssData->unk40F0);
-        if (pssData->spriteIds[0] != 0xFF)
+        if (pssData->spriteIds[0] != INVALID_U8)
         {
             pssData->unk40F0 = 0;
             gMain.state++;
@@ -1509,7 +1509,7 @@ static void sub_81C0604(u8 taskId, s8 a)
             r4_2 = sub_81C08F8(a);
         }
 
-        if (r4_2 != -1)
+        if (r4_2 != INVALID_S8)
         {
             PlaySE(SE_SELECT);
             if (pssData->summary.unk7 != 0)
@@ -1564,7 +1564,7 @@ static void sub_81C0704(u8 taskId)
         break;
     case 8:
         pssData->spriteIds[0] = sub_81C45F4(&pssData->currentMon, &data[1]);
-        if (pssData->spriteIds[0] == 0xFF)
+        if (pssData->spriteIds[0] == INVALID_U8)
             return;
         gSprites[pssData->spriteIds[0]].data[2] = 1;
         sub_81C0E24();
@@ -1601,9 +1601,9 @@ static s8 sub_81C08F8(s8 a)
     if (pssData->currPageIndex == PSS_PAGE_INFO)
     {
         if (a == -1 && pssData->curMonIndex == 0)
-            return -1;
+            return INVALID_S8;
         else if (a == 1 && pssData->curMonIndex >= pssData->maxMonIndex)
-            return -1;
+            return INVALID_S8;
         else
             return pssData->curMonIndex + a;
     }
@@ -1615,7 +1615,7 @@ static s8 sub_81C08F8(s8 a)
         {
             index += a;
             if (index < 0 || index > pssData->maxMonIndex)
-                return -1;
+                return INVALID_S8;
         } while (GetMonData(&mon[index], MON_DATA_IS_EGG) != 0);
         return index;
     }
@@ -1643,7 +1643,7 @@ static s8 sub_81C09B4(s8 a)
 
         r5 += a;
         if (r5 < 0 || r5 >= 6)
-            return -1;
+            return INVALID_S8;
         b = c[r5];
         if (sub_81C0A50(&mon[b]) == TRUE)
             return b;
@@ -2341,7 +2341,7 @@ static void sub_81C1DA4(u16 a, s16 b)
     else
     {
         u8 taskId = FindTaskIdByFunc(sub_81C1E20);
-        if (taskId == 0xFF)
+        if (taskId == INVALID_U8)
         {
             taskId = CreateTask(sub_81C1E20, 8);
         }
@@ -2392,7 +2392,7 @@ static void sub_81C1EFC(u16 a, s16 b, u16 move)
     else
     {
         u8 taskId = FindTaskIdByFunc(sub_81C1F80);
-        if (taskId == 0xFF)
+        if (taskId == INVALID_U8)
             taskId = CreateTask(sub_81C1F80, 8);
         gTasks[taskId].data[0] = b;
         gTasks[taskId].data[1] = a;
@@ -2580,12 +2580,12 @@ static void sub_81C240C(u16 move)
     {
         effectValue = gContestEffects[gContestMoves[move].effect].appeal;
 
-        if (effectValue != 0xFF)
+        if (effectValue != INVALID_U8)
             effectValue /= 10;
 
         for (i = 0; i < 8; i++)
         {
-            if (effectValue != 0xFF && i < effectValue)
+            if (effectValue != INVALID_U8 && i < effectValue)
             {
                 tilemap[(i / 4 * 32) + (i & 3) + 0x1E6] = 0x103A;
             }
@@ -2597,12 +2597,12 @@ static void sub_81C240C(u16 move)
 
         effectValue = gContestEffects[gContestMoves[move].effect].jam;
 
-        if (effectValue != 0xFF)
+        if (effectValue != INVALID_U8)
             effectValue /= 10;
 
         for (i = 0; i < 8; i++)
         {
-            if (effectValue != 0xFF && i < effectValue)
+            if (effectValue != INVALID_U8 && i < effectValue)
             {
                 tilemap[(i / 4 * 32) + (i & 3) + 0x226] = 0x103C;
             }
@@ -2634,7 +2634,7 @@ static void sub_81C2554(void)
     }
     for (i = 0; i < 8; i++)
     {
-        pssData->windowIds[i] = 0xFF;
+        pssData->windowIds[i] = INVALID_U8;
     }
 }
 
@@ -2661,7 +2661,7 @@ static void sub_81C2628(void)
     struct Pokemon *mon = &pssData->currentMon;
     struct PokeSummary *summary = &pssData->summary;
     u16 dexNum = SpeciesToPokedexNum(summary->species);
-    if (dexNum != 0xFFFF)
+    if (dexNum != INVALID_U16)
     {
         StringCopy(gStringVar1, &gText_UnkCtrlF908Clear01[0]);
         ConvertIntToDecimalStringN(gStringVar2, dexNum, 2, 3);
@@ -2895,7 +2895,7 @@ static void sub_81C2C38(u8 a)
 static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 templateId)
 {
     u8 *windowIdPtr = &(pssData->windowIds[templateId]);
-    if (*windowIdPtr == 0xFF)
+    if (*windowIdPtr == INVALID_U8)
     {
         *windowIdPtr = AddWindow(&template[templateId]);
         FillWindowPixelBuffer(*windowIdPtr, 0);
@@ -2906,11 +2906,11 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
 static void SummaryScreen_RemoveWindowByIndex(u8 windowIndex)
 {
     u8 *windowIdPtr = &(pssData->windowIds[windowIndex]);
-    if (*windowIdPtr != 0xFF)
+    if (*windowIdPtr != INVALID_U8)
     {
         ClearWindowTilemap(*windowIdPtr);
         RemoveWindow(*windowIdPtr);
-        *windowIdPtr = 0xFF;
+        *windowIdPtr = INVALID_U8;
     }
 }
 
@@ -2919,7 +2919,7 @@ static void sub_81C2D9C(u8 pageIndex)
     u16 i;
     for (i = 0; i < 8; i++)
     {
-        if (pssData->windowIds[i] != 0xFF)
+        if (pssData->windowIds[i] != INVALID_U8)
             FillWindowPixelBuffer(pssData->windowIds[i], 0);
     }
     gUnknown_0861CE54[pageIndex]();
@@ -3651,16 +3651,16 @@ static void sub_81C4190(void)
 
     for (i = 0; i < 28; i++)
     {
-        pssData->spriteIds[i] = 0xFF;
+        pssData->spriteIds[i] = INVALID_U8;
     }
 }
 
 static void DestroySpriteInArray(u8 spriteArrayId)
 {
-    if (pssData->spriteIds[spriteArrayId] != 0xFF)
+    if (pssData->spriteIds[spriteArrayId] != INVALID_U8)
     {
         DestroySprite(&gSprites[pssData->spriteIds[spriteArrayId]]);
-        pssData->spriteIds[spriteArrayId] = 0xFF;
+        pssData->spriteIds[spriteArrayId] = INVALID_U8;
     }
 }
 
@@ -3675,7 +3675,7 @@ static void sub_81C424C(void)
 
     for (i = 3; i < 28; i++)
     {
-        if (pssData->spriteIds[i] != 0xFF)
+        if (pssData->spriteIds[i] != INVALID_U8)
             sub_81C4204(i, TRUE);
     }
 }
@@ -3704,7 +3704,7 @@ static void sub_81C42C8(void)
 
     for (i = 3; i < 8; i++)
     {
-        if (pssData->spriteIds[i] == 0xFF)
+        if (pssData->spriteIds[i] == INVALID_U8)
             pssData->spriteIds[i] = CreateSprite(&sSpriteTemplate_MoveTypes, 0, 0, 2);
 
         sub_81C4204(i, TRUE);
@@ -3851,13 +3851,13 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
                 }
             }
             (*a1)++;
-            return -1;
+            return INVALID_S8;
         case 1:
             pal = GetMonSpritePalStructFromOtIdPersonality(summary->species2, summary->OTID, summary->pid);
             LoadCompressedObjectPalette(pal);
             SetMultiuseSpriteTemplateToPokemon(pal->tag, 1);
             (*a1)++;
-            return -1;
+            return INVALID_S8;
     }
 }
 
@@ -3921,10 +3921,10 @@ void SummaryScreen_SetUnknownTaskId(u8 a0)
 
 void SummaryScreen_DestroyUnknownTask(void)
 {
-    if (sUnknownTaskId != 0xFF)
+    if (sUnknownTaskId != INVALID_U8)
     {
         DestroyTask(sUnknownTaskId);
-        sUnknownTaskId = 0xFF;
+        sUnknownTaskId = INVALID_U8;
     }
 }
 
@@ -3994,7 +3994,7 @@ static void CreateSetStatusSprite(void)
     u8 *spriteId = &pssData->spriteIds[2];
     u8 anim;
 
-    if (*spriteId == 0xFF)
+    if (*spriteId == INVALID_U8)
     {
         *spriteId = CreateSprite(&sSpriteTemplate_StatusCondition, 64, 152, 0);
     }

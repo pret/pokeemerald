@@ -6,7 +6,7 @@
 #include "pokemon.h"
 #include "text.h"
 #include "text_window.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"
@@ -467,11 +467,11 @@ static void Task_Hof_InitMonData(u8 taskId)
 
     sUnknown_0203BCD4 = 0;
     gTasks[taskId].tDisplayedMonId = 0;
-    gTasks[taskId].tPlayerSpriteID = 0xFF;
+    gTasks[taskId].tPlayerSpriteID = INVALID_U8;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        gTasks[taskId].tMonSpriteId(i) = 0xFF;
+        gTasks[taskId].tMonSpriteId(i) = INVALID_U8;
     }
 
     if (gTasks[taskId].tDontSaveData)
@@ -522,7 +522,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
 static void Task_Hof_TrySaveData(u8 taskId)
 {
     gGameContinueCallback = CB2_DoHallOfFameScreenDontSaveData;
-    if (TrySavingData(SAVE_HALL_OF_FAME) == 0xFF && gDamagedSaveSectors != 0)
+    if (TrySavingData(SAVE_HALL_OF_FAME) == INVALID_U8 && gDamagedSaveSectors != 0)
     {
         UnsetBgTilemapBuffer(1);
         UnsetBgTilemapBuffer(3);
@@ -645,7 +645,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
     BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, RGB_BLACK);
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
+        if (gTasks[taskId].tMonSpriteId(i) != INVALID_U8)
             gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 0;
     }
 
@@ -668,7 +668,7 @@ static void sub_8173DC0(u8 taskId)
         u16 i;
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (gTasks[taskId].tMonSpriteId(i) != 0xFF)
+            if (gTasks[taskId].tMonSpriteId(i) != INVALID_U8)
                 gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 1;
         }
         BeginNormalPaletteFade(sUnknown_0203BCD4, 0, 12, 12, RGB(16, 29, 24));
@@ -752,7 +752,7 @@ static void Task_Hof_HandleExit(u8 taskId)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             u8 spriteId = gTasks[taskId].tMonSpriteId(i);
-            if (spriteId != 0xFF)
+            if (spriteId != INVALID_U8)
             {
                 FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
                 FreeAndDestroyMonPicSprite(spriteId);
@@ -847,7 +847,7 @@ void CB2_DoHallOfFamePC(void)
 
             for (i = 0; i < PARTY_SIZE; i++)
             {
-                gTasks[taskId].tMonSpriteId(i) = 0xFF;
+                gTasks[taskId].tMonSpriteId(i) = INVALID_U8;
             }
 
             sHofMonPtr = AllocZeroed(0x2000);
@@ -937,7 +937,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
         }
         else
         {
-            gTasks[taskId].tMonSpriteId(i) = 0xFF;
+            gTasks[taskId].tMonSpriteId(i) = INVALID_U8;
         }
     }
 
@@ -967,7 +967,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 spriteId = gTasks[taskId].tMonSpriteId(i);
-        if (spriteId != 0xFF)
+        if (spriteId != INVALID_U8)
             gSprites[spriteId].oam.priority = 1;
     }
 
@@ -999,10 +999,10 @@ static void Task_HofPC_HandleInput(u8 taskId)
             for (i = 0; i < 6; i++)
             {
                 u8 spriteId = gTasks[taskId].tMonSpriteId(i);
-                if (spriteId != 0xFF)
+                if (spriteId != INVALID_U8)
                 {
                     FreeAndDestroyMonPicSprite(spriteId);
-                    gTasks[taskId].tMonSpriteId(i) = 0xFF;
+                    gTasks[taskId].tMonSpriteId(i) = INVALID_U8;
                 }
             }
             if (gTasks[taskId].tCurrPageNo != 0)
@@ -1060,10 +1060,10 @@ static void Task_HofPC_HandleExit(u8 taskId)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             u16 spriteId = gTasks[taskId].tMonSpriteId(i);
-            if (spriteId != 0xFF)
+            if (spriteId != INVALID_U8)
             {
                 FreeAndDestroyMonPicSprite(spriteId);
-                gTasks[taskId].tMonSpriteId(i) = 0xFF;
+                gTasks[taskId].tMonSpriteId(i) = INVALID_U8;
             }
         }
 
@@ -1130,7 +1130,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     {
         stringPtr = StringCopy(text, gText_Number);
         dexNumber = SpeciesToPokedexNum(currMon->species);
-        if (dexNumber != 0xFFFF)
+        if (dexNumber != INVALID_U16)
         {
             stringPtr[0] = (dexNumber / 100) + CHAR_0;
             stringPtr++;
@@ -1417,7 +1417,7 @@ void sub_8175280(void)
 
     gSpecialVar_0x8004 = 180;
     taskId = CreateTask(sub_8175364, 0);
-    if (taskId != 0xFF)
+    if (taskId != INVALID_U8)
     {
         gTasks[taskId].data[1] = gSpecialVar_0x8004;
         gSpecialVar_0x8005 = taskId;
@@ -1428,7 +1428,7 @@ static void sub_81752C0(void)
 {
     u8 taskId;
 
-    if ((taskId = FindTaskIdByFunc(sub_8175364)) != 0xFF)
+    if ((taskId = FindTaskIdByFunc(sub_8175364)) != INVALID_U8)
         DestroyTask(taskId);
 
     sub_8152254();
@@ -1473,7 +1473,7 @@ static void sub_8175364(u8 taskId)
         {
             DestroyTask(taskId);
             gSpecialVar_0x8004 = var;
-            gSpecialVar_0x8005 = 0xFFFF;
+            gSpecialVar_0x8005 = INVALID_U16;
         }
         LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
         LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
@@ -1483,7 +1483,7 @@ static void sub_8175364(u8 taskId)
         if (data[1] != 0 && data[1] % 3 == 0)
         {
             var = sub_81524C4(&sOamData_85E53FC, 0x3E9, 0x3E9, Random() % 240, -(Random() % 8), Random() % 0x11, var);
-            if (var != 0xFF)
+            if (var != INVALID_U8)
             {
                 sub_8152438(var, sub_81752F4);
                 if ((Random() & 3) == 0)
@@ -1496,12 +1496,12 @@ static void sub_8175364(u8 taskId)
         if (data[1] != 0)
             data[1]--;
         else if (data[15] == 0)
-            data[0] = 0xFF;
+            data[0] = INVALID_U8;
         break;
-    case 0xFF:
+    case INVALID_U8:
         sub_81752C0();
         gSpecialVar_0x8004 = var;
-        gSpecialVar_0x8005 = 0xFFFF;
+        gSpecialVar_0x8005 = INVALID_U16;
         break;
     }
 }

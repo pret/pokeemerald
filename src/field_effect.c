@@ -305,7 +305,7 @@ const union AnimCmd *const gNewGameBirchImageAnimTable[] = {
 };
 
 const struct SpriteTemplate gNewGameBirchObjectTemplate = {
-    .tileTag = 0xffff,
+    .tileTag = INVALID_U16,
     .paletteTag = 4102,
     .oam = &gNewGameBirchOamAttributes,
     .anims = gNewGameBirchImageAnimTable,
@@ -383,7 +383,7 @@ const union AnimCmd *const gSpriteAnimTable_855C300[] = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C304 = {
-    .tileTag = 0xffff,
+    .tileTag = INVALID_U16,
     .paletteTag = 4103,
     .oam = &gOamData_855C218,
     .anims = gSpriteAnimTable_855C2F8,
@@ -393,7 +393,7 @@ const struct SpriteTemplate gSpriteTemplate_855C304 = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C31C = {
-    .tileTag = 0xffff,
+    .tileTag = INVALID_U16,
     .paletteTag = 4100,
     .oam = &gOamData_855C220,
     .anims = gSpriteAnimTable_855C2F8,
@@ -403,7 +403,7 @@ const struct SpriteTemplate gSpriteTemplate_855C31C = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C334 = {
-    .tileTag = 0xffff,
+    .tileTag = INVALID_U16,
     .paletteTag = 4112,
     .oam = &gOamData_855C220,
     .anims = gSpriteAnimTable_855C300,
@@ -413,7 +413,7 @@ const struct SpriteTemplate gSpriteTemplate_855C334 = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C34C = {
-    .tileTag = 0xffff,
+    .tileTag = INVALID_U16,
     .paletteTag = 4112,
     .oam = &gOamData_855C26C,
     .anims = gSpriteAnimTable_855C300,
@@ -618,7 +618,7 @@ u32 FieldEffectScript_ReadWord(u8 **script)
 void FieldEffectScript_LoadTiles(u8 **script)
 {
     struct SpriteSheet *sheet = (struct SpriteSheet *)FieldEffectScript_ReadWord(script);
-    if (GetSpriteTileStartByTag(sheet->tag) == 0xFFFF)
+    if (GetSpriteTileStartByTag(sheet->tag) == INVALID_U16)
         LoadSpriteSheet(sheet);
     (*script) += 4;
 }
@@ -665,7 +665,7 @@ void FieldEffectFreeTilesIfUnused(u16 tileStart)
     u8 i;
     u16 tag = GetSpriteTileTagByTileStart(tileStart);
 
-    if (tag != 0xFFFF)
+    if (tag != INVALID_U16)
     {
         for (i = 0; i < MAX_SPRITES; i++)
             if (gSprites[i].inUse && gSprites[i].usingSheet && tileStart == gSprites[i].sheetTileStart)
@@ -679,7 +679,7 @@ void FieldEffectFreePaletteIfUnused(u8 paletteNum)
     u8 i;
     u16 tag = GetSpritePaletteTagByPaletteNum(paletteNum);
 
-    if (tag != 0xFFFF)
+    if (tag != INVALID_U16)
     {
         for (i = 0; i < MAX_SPRITES; i++)
             if (gSprites[i].inUse && gSprites[i].oam.paletteNum == paletteNum)
@@ -761,7 +761,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
-    if (spriteId == 0xFFFF)
+    if (spriteId == INVALID_U16)
         return MAX_SPRITES;
     else
         return spriteId;
@@ -772,7 +772,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
     u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
-    if (spriteId == 0xFFFF)
+    if (spriteId == INVALID_U16)
         return MAX_SPRITES;
     else
         return spriteId;
@@ -3836,7 +3836,7 @@ const union AnimCmd *const gSpriteAnimTable_855C5DC[] = {
 };
 
 const struct SpriteTemplate gUnknown_0855C5EC = {
-    .tileTag = 0xffff,
+    .tileTag = INVALID_U16,
     .paletteTag = 4378,
     .oam = &gOamData_855C218,
     .anims = gSpriteAnimTable_855C5DC,

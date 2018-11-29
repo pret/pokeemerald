@@ -1,7 +1,7 @@
 #include "global.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "mossdeep_gym.h"
 #include "script_movement.h"
 #include "constants/event_object_movement_constants.h"

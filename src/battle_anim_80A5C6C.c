@@ -7,7 +7,7 @@
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
@@ -1590,7 +1590,7 @@ s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8 whichBattler)
             }
         }
     }
-    return -1;
+    return INVALID_S16;
 }
 
 void obj_delete_but_dont_free_vram(struct Sprite *sprite)

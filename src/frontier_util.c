@@ -24,7 +24,7 @@
 #include "data2.h"
 #include "record_mixing.h"
 #include "strings.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "save.h"
 #include "load_save.h"
 #include "battle_dome.h"
@@ -681,7 +681,7 @@ static const u8 sFacilityToBrainEventObjGfx[][2] =
 const u16 gFrontierBannedSpecies[] =
 {
     SPECIES_MEW, SPECIES_MEWTWO, SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
-    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
+    SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, INVALID_U16
 };
 
 static const u8 *const gUnknown_08611CB0[][2] =
@@ -1829,7 +1829,7 @@ void sub_81A3ACC(void)
     s32 i;
 
     for (i = 0; i < 20; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+        gSaveBlock2Ptr->frontier.field_CB4[i] |= INVALID_U16;
 }
 
 static void sub_81A3B00(void)
@@ -1974,10 +1974,10 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != species; i++)
+    for (i = 0; gFrontierBannedSpecies[i] != INVALID_U16 && gFrontierBannedSpecies[i] != species; i++)
         ;
 
-    if (gFrontierBannedSpecies[i] != 0xFFFF)
+    if (gFrontierBannedSpecies[i] != INVALID_U16)
         return;
     if (lvlMode == FRONTIER_LVL_50 && monLevel > 50)
         return;
@@ -2060,7 +2060,7 @@ static void sub_81A3FD4(void)
         s32 i;
         s32 caughtBannedMons = 0;
         s32 species = gFrontierBannedSpecies[0];
-        for (i = 0; species != 0xFFFF; i++, species = gFrontierBannedSpecies[i])
+        for (i = 0; species != INVALID_U16; i++, species = gFrontierBannedSpecies[i])
         {
             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
                 caughtBannedMons++;
@@ -2068,7 +2068,7 @@ static void sub_81A3FD4(void)
         gStringVar1[0] = EOS;
         gSpecialVar_0x8004 = 1;
         count = 0;
-        for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+        for (i = 0; gFrontierBannedSpecies[i] != INVALID_U16; i++)
             count = sub_81A3DD0(gFrontierBannedSpecies[i], count, caughtBannedMons);
 
         if (count == 0)

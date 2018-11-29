@@ -3,7 +3,7 @@
 #include "contest.h"
 #include "gpu_regs.h"
 #include "graphics.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"
@@ -61,7 +61,7 @@ void sub_8116664(u8 taskId)
     u32 selectedPalettes;
     u8 animBattlers[2];
 
-    animBattlers[1] = 0xFF;
+    animBattlers[1] = INVALID_U8;
     selectedPalettes = sub_811583C(1);
     switch (gBattleAnimArgs[0])
     {
@@ -82,7 +82,7 @@ void sub_8116664(u8 taskId)
         animBattlers[1] = gBattleAnimTarget;
         break;
     case 5:
-        animBattlers[0] = 0xFF;
+        animBattlers[0] = INVALID_U8;
         break;
     case 6:
         selectedPalettes = 0;

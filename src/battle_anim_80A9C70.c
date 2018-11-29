@@ -183,7 +183,7 @@ void sub_80A9EF4(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&gUnknown_0853EF48, x, y, 4);
-    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
+    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == INVALID_U16)
         gSprites[spriteId].invisible = TRUE;
     SetSubspriteTables(&gSprites[spriteId], gUnknown_0853EF40);
     gTasks[taskId].data[15] = spriteId;
@@ -315,10 +315,10 @@ void AnimTask_StatsChange(u8 taskId)
     CASE(MINUS2, STAT_ACC):     goesDown = TRUE;   animStatId = 2;     sharply = TRUE;   break;
     CASE(MINUS2, STAT_EVASION): goesDown = TRUE;   animStatId = 4;     sharply = TRUE;   break;
 
-    case STAT_ANIM_MULTIPLE_PLUS1:  goesDown = FALSE;  animStatId = 0xFF;  sharply = FALSE;  break;
-    case STAT_ANIM_MULTIPLE_PLUS2:  goesDown = FALSE;  animStatId = 0xFF;  sharply = TRUE;   break;
-    case STAT_ANIM_MULTIPLE_MINUS1: goesDown = TRUE;   animStatId = 0xFF;  sharply = FALSE;  break;
-    case STAT_ANIM_MULTIPLE_MINUS2: goesDown = TRUE;   animStatId = 0xFF;  sharply = TRUE;   break;
+    case STAT_ANIM_MULTIPLE_PLUS1:  goesDown = FALSE;  animStatId = INVALID_U8;  sharply = FALSE;  break;
+    case STAT_ANIM_MULTIPLE_PLUS2:  goesDown = FALSE;  animStatId = INVALID_U8;  sharply = TRUE;   break;
+    case STAT_ANIM_MULTIPLE_MINUS1: goesDown = TRUE;   animStatId = INVALID_U8;  sharply = FALSE;  break;
+    case STAT_ANIM_MULTIPLE_MINUS2: goesDown = TRUE;   animStatId = INVALID_U8;  sharply = TRUE;   break;
 
     default:
         DestroyAnimVisualTask(taskId);

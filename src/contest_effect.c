@@ -144,7 +144,7 @@ static void ContestEffect_StartleFrontMon(void)
                 break;
         }
         shared192D0.jamQueue[0] = i;
-        shared192D0.jamQueue[1] = 0xFF;
+        shared192D0.jamQueue[1] = INVALID_U8;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -168,7 +168,7 @@ static void ContestEffect_StartlePrevMons(void)
                 shared192D0.jamQueue[j++] = i;
         }
 
-        shared192D0.jamQueue[j] = 0xFF;
+        shared192D0.jamQueue[j] = INVALID_U8;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -211,7 +211,7 @@ static void ContestEffect_StartlePrevMons2(void)
                 u8 rval, jam;
 
                 shared192D0.jamQueue[0] = i;
-                shared192D0.jamQueue[1] = 0xFF;
+                shared192D0.jamQueue[1] = INVALID_U8;
                 rval = Random() % 10;
 
                 if (rval == 0)
@@ -288,7 +288,7 @@ static void ContestEffect_StartleMonWithJudgesAttention(void)
                 else
                     shared192D0.jam = 10;
                 shared192D0.jamQueue[0] = i;
-                shared192D0.jamQueue[1] = 0xFF;
+                shared192D0.jamQueue[1] = INVALID_U8;
                 if (WasAtLeastOneOpponentJammed())
                     numStartled++;
             }
@@ -393,7 +393,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     s16 oddsMod[4];
     s16 odds[4];
 
-    memset(contestantIds, 0xFF, ARRAY_COUNT(contestantIds));
+    memset(contestantIds, INVALID_U8, ARRAY_COUNT(contestantIds));
     for (i = 0, numAfter = 0; i < 4; i++)
     {
         if (shared192D0.turnOrder[shared192D0.contestant] < shared192D0.turnOrder[i] &&
@@ -431,7 +431,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     }
     if (odds[0] != 0)
     {
-        for (i = 0; contestantIds[i] != 0xFF; i++)
+        for (i = 0; contestantIds[i] != INVALID_U8; i++)
         {
             if (Random() % 100 < odds[i] + oddsMod[contestantIds[i]])
             {
@@ -504,7 +504,7 @@ static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
             else
                 shared192D0.jam = 10;
             shared192D0.jamQueue[0] = i;
-            shared192D0.jamQueue[1] = 0xFF;
+            shared192D0.jamQueue[1] = INVALID_U8;
             if (WasAtLeastOneOpponentJammed())
                 numHit++;
         }
@@ -755,7 +755,7 @@ static void ContestEffect_NextAppealEarlier(void)
         for (i = 0; i < 4; i++)
             turnOrder[i] = sContestantStatus[i].nextTurnOrder;
 
-        turnOrder[shared192D0.contestant] = 0xFF;
+        turnOrder[shared192D0.contestant] = INVALID_U8;
 
         for (i = 0; i < 4; i++)
         {
@@ -797,7 +797,7 @@ static void ContestEffect_NextAppealLater(void)
         for (i = 0; i < 4; i++)
             turnOrder[i] = sContestantStatus[i].nextTurnOrder;
 
-        turnOrder[shared192D0.contestant] = 0xFF;
+        turnOrder[shared192D0.contestant] = INVALID_U8;
 
         for (i = 3; i > -1; i--)
         {
@@ -855,12 +855,12 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 
             for (j = 0; j < 4; j++)
             {
-                if (unselectedContestants[j] != 0xFF)
+                if (unselectedContestants[j] != INVALID_U8)
                 {
                     if (rval == 0)
                     {
                         turnOrder[j] = i;
-                        unselectedContestants[j] = 0xFF;
+                        unselectedContestants[j] = INVALID_U8;
                         break;
                     }
                     else
@@ -906,7 +906,7 @@ static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
             else
                 shared192D0.jam = 10;
             shared192D0.jamQueue[0] = i;
-            shared192D0.jamQueue[1] = 0xFF;
+            shared192D0.jamQueue[1] = INVALID_U8;
             if (WasAtLeastOneOpponentJammed())
                 numJammed++;
         }
@@ -974,7 +974,7 @@ static void JamByMoveCategory(u8 category)
             else
                 shared192D0.jam = 10;
             shared192D0.jamQueue[0] = i;
-            shared192D0.jamQueue[1] = 0xFF;
+            shared192D0.jamQueue[1] = INVALID_U8;
             if (WasAtLeastOneOpponentJammed())
                 numJammed++;
         }
@@ -1013,7 +1013,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
     s16 jamBuffer[4] = {0};
     int i;
 
-    for (i = 0; shared192D0.jamQueue[i] != 0xFF; i++)
+    for (i = 0; shared192D0.jamQueue[i] != INVALID_U8; i++)
     {
         u8 contestant = shared192D0.jamQueue[i];
         if (CanUnnerveContestant(contestant))

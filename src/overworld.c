@@ -27,7 +27,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -1110,7 +1110,7 @@ static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
 u16 GetLocationMusic(struct WarpData *warp)
 {
     if (NoMusicInSotopolisWithLegendaries(warp) == TRUE)
-        return 0xFFFF;
+        return INVALID_U16;
     else if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
         return MUS_OOAME;
     else if (IsInflitratedSpaceCenter(warp) == TRUE)
@@ -1171,7 +1171,7 @@ void Overworld_PlaySpecialMapMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
 
-    if (music != MUS_OOAME && music != 0xFFFF)
+    if (music != MUS_OOAME && music != INVALID_U16)
     {
         if (gSaveBlock1Ptr->savedMusic)
             music = gSaveBlock1Ptr->savedMusic;
@@ -1201,7 +1201,7 @@ static void sub_8085810(void)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
-        if (newMusic != MUS_OOAME && newMusic != 0xFFFF)
+        if (newMusic != MUS_OOAME && newMusic != INVALID_U16)
         {
             if (currentMusic == MUS_DEEPDEEP || currentMusic == MUS_NAMINORI)
                 return;

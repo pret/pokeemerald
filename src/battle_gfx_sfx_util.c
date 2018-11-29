@@ -6,7 +6,7 @@
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "graphics.h"
 #include "random.h"
 #include "util.h"
@@ -122,7 +122,7 @@ void FreeBattleSpritesData(void)
 u16 ChooseMoveAndTargetInBattlePalace(void)
 {
     s32 i, var1, var2;
-    s32 chosenMoveId = -1;
+    s32 chosenMoveId = INVALID_S32;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
     u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
     s32 percent = Random() % 100;

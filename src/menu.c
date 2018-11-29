@@ -7,7 +7,7 @@
 #include "main.h"
 #include "sound.h"
 #include "menu_helpers.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "task.h"
 #include "dma3.h"
 #include "string_util.h"
@@ -140,8 +140,8 @@ extern void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 void sub_81971D0(void)
 {
     InitWindows(gUnknown_0860F098);
-    gStartMenuWindowId = 0xFF;
-    gUnknown_0203CD8D = 0xFF;
+    gStartMenuWindowId = INVALID_U8;
+    gUnknown_0203CD8D = INVALID_U8;
 }
 
 void sub_81971F4(void)
@@ -486,7 +486,7 @@ u8 GetPlayerTextSpeedDelay(void)
 
 u8 sub_81979C4(u8 a1)
 {
-    if (gStartMenuWindowId == 0xFF)
+    if (gStartMenuWindowId == INVALID_U8)
         gStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
     return gStartMenuWindowId;
 }
@@ -498,10 +498,10 @@ u8 GetStartMenuWindowId(void)
 
 void RemoveStartMenuWindow(void)
 {
-    if (gStartMenuWindowId != 0xFF)
+    if (gStartMenuWindowId != INVALID_U8)
     {
         RemoveWindow(gStartMenuWindowId);
-        gStartMenuWindowId = 0xFF;
+        gStartMenuWindowId = INVALID_U8;
     }
 }
 
@@ -517,7 +517,7 @@ u16 sub_8197A38(void)
 
 u8 AddMapNamePopUpWindow(void)
 {
-    if (gUnknown_0203CD8D == 0xFF)
+    if (gUnknown_0203CD8D == INVALID_U8)
         gUnknown_0203CD8D = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
     return gUnknown_0203CD8D;
 }
@@ -529,10 +529,10 @@ u8 GetMapNamePopUpWindowId(void)
 
 void RemoveMapNamePopUpWindow(void)
 {
-    if (gUnknown_0203CD8D != 0xFF)
+    if (gUnknown_0203CD8D != INVALID_U8)
     {
         RemoveWindow(gUnknown_0203CD8D);
-        gUnknown_0203CD8D = 0xFF;
+        gUnknown_0203CD8D = INVALID_U8;
     }
 }
 
@@ -808,7 +808,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
 {
     u16 width = 0;
 
-    if (gUnknown_0203CDA0 != 0xFF)
+    if (gUnknown_0203CDA0 != INVALID_U8)
     {
         PutWindowTilemap(gUnknown_0203CDA0);
         FillWindowPixelBuffer(gUnknown_0203CDA0, 0xFF);
@@ -830,7 +830,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
     u8 color[3];
     u16 width = 0;
 
-    if (gUnknown_0203CDA0 != 0xFF)
+    if (gUnknown_0203CDA0 != INVALID_U8)
     {
         if (a3 != 0)
         {
@@ -865,13 +865,13 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 
 void sub_81982D8(void)
 {
-    if (gUnknown_0203CDA0 != 0xFF)
+    if (gUnknown_0203CDA0 != INVALID_U8)
         CopyWindowToVram(gUnknown_0203CDA0, 3);
 }
 
 void sub_81982F0(void)
 {
-    if (gUnknown_0203CDA0 != 0xFF)
+    if (gUnknown_0203CDA0 != INVALID_U8)
     {
         FillWindowPixelBuffer(gUnknown_0203CDA0, 0xFF);
         CopyWindowToVram(gUnknown_0203CDA0, 3);
@@ -880,13 +880,13 @@ void sub_81982F0(void)
 
 void sub_8198314(void)
 {
-    if (gUnknown_0203CDA0 != 0xFF)
+    if (gUnknown_0203CDA0 != INVALID_U8)
     {
         FillWindowPixelBuffer(gUnknown_0203CDA0, 0);
         ClearWindowTilemap(gUnknown_0203CDA0);
         CopyWindowToVram(gUnknown_0203CDA0, 3);
         RemoveWindow(gUnknown_0203CDA0);
-        gUnknown_0203CDA0 = 0xFF;
+        gUnknown_0203CDA0 = INVALID_U8;
     }
 }
 

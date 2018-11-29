@@ -8,7 +8,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "m4a.h"
 #include "overworld.h"
@@ -1254,7 +1254,7 @@ void sub_80BB384(struct PokedexView *pokedexView)
 
     for (i = 0; i < NATIONAL_DEX_COUNT; i++)
     {
-        pokedexView->unk0[i].dexNum |= 0xFFFF;
+        pokedexView->unk0[i].dexNum |= INVALID_U16;
         pokedexView->unk0[i].seen = 0;
         pokedexView->unk0[i].owned = 0;
     }
@@ -1271,7 +1271,7 @@ void sub_80BB384(struct PokedexView *pokedexView)
     pokedexView->unk61A = 0;
     pokedexView->unk61C = 0;
     for (i = 0; i <= 3; i++)
-        pokedexView->unk61E[i] |= 0xFFFF;
+        pokedexView->unk61E[i] |= INVALID_U16;
     pokedexView->unk628 = 0;
     pokedexView->unk62A = 0;
     pokedexView->unk62C = 0;
@@ -1354,7 +1354,7 @@ void sub_80BB534(void)
             SetVBlankCallback(sub_80BB370);
             SetMainCallback2(sub_80BB774);
             sub_80BC8D4(gUnknown_02039B4C->dexMode, gUnknown_02039B4C->dexOrder);
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, INVALID_U16, 0x80);
             break;
     }
 }
@@ -2017,7 +2017,7 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
 
     for (i = gUnknown_02039B4C->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
     {
-        gUnknown_02039B4C->unk0[i].dexNum |= 0xFFFF;
+        gUnknown_02039B4C->unk0[i].dexNum |= INVALID_U16;
         gUnknown_02039B4C->unk0[i].seen = 0;
         gUnknown_02039B4C->unk0[i].owned = 0;
     }
@@ -2046,7 +2046,7 @@ void sub_80BCE84(u8 a, u16 b, u16 c)
             _b = b - 5;
             for (i = 0; i <= 10; i++)
             {
-                if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[_b].dexNum == 0xFFFF)
+                if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[_b].dexNum == INVALID_U16)
                 {
                     sub_80BD28C(0x11, i * 2, c);
                 }
@@ -2071,7 +2071,7 @@ void sub_80BCE84(u8 a, u16 b, u16 c)
             break;
         case 1:
             _b = b - 5;
-            if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[_b].dexNum == 0xFFFF)
+            if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[_b].dexNum == INVALID_U16)
             {
                 sub_80BD28C(0x11, gUnknown_02039B4C->unk630 * 2, c);
             }
@@ -2097,7 +2097,7 @@ void sub_80BCE84(u8 a, u16 b, u16 c)
             r2 = gUnknown_02039B4C->unk630 + 10;
             if (r2 > 15)
                 r2 -= 16;
-            if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[_b].dexNum == 0xFFFF)
+            if (_b < 0 || _b >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[_b].dexNum == INVALID_U16)
                 sub_80BD28C(0x11, r2 * 2, c);
             else
             {
@@ -2170,11 +2170,11 @@ void sub_80BD2B4(u16 a, u16 b)
     gPaletteFade.bufferTransferDisabled = TRUE;
 
     for (i = 0; i < 4; i++)
-        gUnknown_02039B4C->unk61E[i] = 0xFFFF;
-    gUnknown_02039B4C->selectedMonSpriteId = 0xFFFF;
+        gUnknown_02039B4C->unk61E[i] = INVALID_U16;
+    gUnknown_02039B4C->selectedMonSpriteId = INVALID_U16;
 
     unk = sub_80BDA8C(a - 1);
-    if (unk != 0xFFFF)
+    if (unk != INVALID_U16)
     {
         spriteId = sub_80BDACC(unk, 0x60, 0x50);
         gSprites[spriteId].callback = sub_80BE4E0;
@@ -2182,7 +2182,7 @@ void sub_80BD2B4(u16 a, u16 b)
     }
 
     unk = sub_80BDA8C(a);
-    if (unk != 0xFFFF)
+    if (unk != INVALID_U16)
     {
         spriteId = sub_80BDACC(unk, 0x60, 0x50);
         gSprites[spriteId].callback = sub_80BE4E0;
@@ -2190,7 +2190,7 @@ void sub_80BD2B4(u16 a, u16 b)
     }
 
     unk = sub_80BDA8C(a + 1);
-    if (unk != 0xFFFF)
+    if (unk != INVALID_U16)
     {
         spriteId = sub_80BDACC(unk, 0x60, 0x50);
         gSprites[spriteId].callback = sub_80BE4E0;
@@ -2219,7 +2219,7 @@ bool8 sub_80BD404(u8 a, u8 b, u8 c)
             case 1:
                 for (i = 0; i < 4; i++)
                 {
-                    if (gUnknown_02039B4C->unk61E[i] != 0xFFFF)
+                    if (gUnknown_02039B4C->unk61E[i] != INVALID_U16)
                         gSprites[gUnknown_02039B4C->unk61E[i]].data[5] += b;
                 }
                 foo = 16 * (c - gUnknown_02039B4C->unk62E) / c;
@@ -2229,7 +2229,7 @@ bool8 sub_80BD404(u8 a, u8 b, u8 c)
             case 2:
                 for (i = 0; i < 4; i++)
                 {
-                    if (gUnknown_02039B4C->unk61E[i] != 0xFFFF)
+                    if (gUnknown_02039B4C->unk61E[i] != INVALID_U16)
                         gSprites[gUnknown_02039B4C->unk61E[i]].data[5] -= b;
                 }
                 foo = 16 * (c - gUnknown_02039B4C->unk62E) / c;
@@ -2256,7 +2256,7 @@ void sub_80BD5A8(u8 a, u16 b)
     {
         case 1:
             unk = sub_80BDA8C(b - 1);
-            if (unk != 0xFFFF)
+            if (unk != INVALID_U16)
             {
                 spriteId = sub_80BDACC(unk, 0x60, 0x50);
                 gSprites[spriteId].callback = sub_80BE4E0;
@@ -2269,7 +2269,7 @@ void sub_80BD5A8(u8 a, u16 b)
             break;
         case 2:
             unk = sub_80BDA8C(b + 1);
-            if (unk != 0xFFFF)
+            if (unk != INVALID_U16)
             {
                 spriteId = sub_80BDACC(unk, 0x60, 0x50);
                 gSprites[spriteId].callback = sub_80BE4E0;
@@ -2356,7 +2356,7 @@ void sub_80BD8D0(void)
     {
         u16 spriteId = gUnknown_02039B4C->unk61E[i];
 
-        if (gSprites[spriteId].pos2.x == 0 && gSprites[spriteId].pos2.y == 0 && spriteId != 0xFFFF)
+        if (gSprites[spriteId].pos2.x == 0 && gSprites[spriteId].pos2.y == 0 && spriteId != INVALID_U16)
             gUnknown_02039B4C->selectedMonSpriteId = spriteId;
     }
 }
@@ -2421,10 +2421,10 @@ u8 sub_80BDA40(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (gUnknown_02039B4C->unk61E[i] != 0xFFFF)
+        if (gUnknown_02039B4C->unk61E[i] != INVALID_U16)
         {
             FreeAndDestroyMonPicSprite(gUnknown_02039B4C->unk61E[i]);
-            gUnknown_02039B4C->unk61E[i] |= 0xFFFF;
+            gUnknown_02039B4C->unk61E[i] |= INVALID_U16;
         }
     }
     return FALSE;
@@ -2432,8 +2432,8 @@ u8 sub_80BDA40(void)
 
 u16 sub_80BDA8C(u16 a1)
 {
-    if (a1 >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[a1].dexNum == 0xFFFF)
-        return 0xFFFF;
+    if (a1 >= NATIONAL_DEX_COUNT || gUnknown_02039B4C->unk0[a1].dexNum == INVALID_U16)
+        return INVALID_U16;
     else if (gUnknown_02039B4C->unk0[a1].seen)
         return gUnknown_02039B4C->unk0[a1].dexNum;
     else
@@ -2446,7 +2446,7 @@ u32 sub_80BDACC(u16 num, s16 x, s16 y)
 
     for (i = 0; i < 4; i++)
     {
-        if (gUnknown_02039B4C->unk61E[i] == 0xFFFF)
+        if (gUnknown_02039B4C->unk61E[i] == INVALID_U16)
         {
             u8 spriteId = sub_80C0E9C(num, x, y, i);
 
@@ -2459,7 +2459,7 @@ u32 sub_80BDACC(u16 num, s16 x, s16 y)
             return spriteId;
         }
     }
-    return 0xFFFF;
+    return INVALID_U16;
 }
 
 void sub_80BDB7C(u8 a)
@@ -2707,7 +2707,7 @@ void sub_80BE4E0(struct Sprite *sprite)
     if (gUnknown_02039B4C->unk64A != 0 && gUnknown_02039B4C->unk64A != 3)
     {
         FreeAndDestroyMonPicSprite(gUnknown_02039B4C->unk61E[data1]);
-        gUnknown_02039B4C->unk61E[data1] = 0xFFFF;
+        gUnknown_02039B4C->unk61E[data1] = INVALID_U16;
     }
     else
     {
@@ -2715,8 +2715,8 @@ void sub_80BE4E0(struct Sprite *sprite)
 
         sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
         var = 0x10000 / gSineTable[sprite->data[5] + 0x40];
-        if (var > 0xFFFF)
-            var = 0xFFFF;
+        if (var > INVALID_U16)
+            var = INVALID_U16;
         SetOamMatrix(sprite->data[1] + 1, 0x100, 0, 0, var);
         sprite->oam.matrixNum = data1 + 1;
 
@@ -2733,7 +2733,7 @@ void sub_80BE4E0(struct Sprite *sprite)
         if ((sprite->data[5] <= -64 || sprite->data[5] >= 64) && sprite->data[0] != 0)
         {
             FreeAndDestroyMonPicSprite(gUnknown_02039B4C->unk61E[data1]);
-            gUnknown_02039B4C->unk61E[data1] = 0xFFFF;
+            gUnknown_02039B4C->unk61E[data1] = INVALID_U16;
         }
     }
 }
@@ -4625,12 +4625,12 @@ u32 sub_80C0E68(u16 a)
 u16 sub_80C0E9C(u16 num, s16 x, s16 y, u16 paletteSlot)
 {
     num = NationalPokedexNumToSpecies(num);
-    return CreateMonPicSprite_HandleDeoxys(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, 0xFFFF);
+    return CreateMonPicSprite_HandleDeoxys(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, INVALID_U16);
 }
 
 u16 sub_80C0EF8(u16 species, s16 x, s16 y, s8 paletteSlot)
 {
-    return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, 0xFFFF);
+    return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, INVALID_U16);
 }
 
 int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
@@ -4653,7 +4653,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     gUnknown_02039B4C->pokemonListCount = resultsCount;
 
     // Search by name
-    if (abcGroup != 0xFF)
+    if (abcGroup != INVALID_U8)
     {
         for (i = 0, resultsCount = 0; i < gUnknown_02039B4C->pokemonListCount; i++)
         {
@@ -4672,7 +4672,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by body color
-    if (bodyColor != 0xFF)
+    if (bodyColor != INVALID_U8)
     {
         for (i = 0, resultsCount = 0; i < gUnknown_02039B4C->pokemonListCount; i++)
         {
@@ -4688,15 +4688,15 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by type
-    if (type1 != 0xFF || type2 != 0xFF)
+    if (type1 != INVALID_U8 || type2 != INVALID_U8)
     {
-        if (type1 == 0xFF)
+        if (type1 == INVALID_U8)
         {
             type1 = type2;
-            type2 = 0xFF;
+            type2 = INVALID_U8;
         }
 
-        if (type2 == 0xFF)
+        if (type2 == INVALID_U8)
         {
             for (i = 0, resultsCount = 0; i < gUnknown_02039B4C->pokemonListCount; i++)
             {
@@ -4739,7 +4739,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     {
         for (i = gUnknown_02039B4C->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
         {
-            gUnknown_02039B4C->unk0[i].dexNum = 0xFFFF;
+            gUnknown_02039B4C->unk0[i].dexNum = INVALID_U16;
             gUnknown_02039B4C->unk0[i].seen = FALSE;
             gUnknown_02039B4C->unk0[i].owned = FALSE;
 
@@ -4985,7 +4985,7 @@ void sub_80C170C(u8 taskId)
         return;
     }
 
-    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
+    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
@@ -4993,7 +4993,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
+    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
@@ -5001,7 +5001,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
+    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
@@ -5009,7 +5009,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
+    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
@@ -5473,12 +5473,12 @@ u8 sub_80C2318(u8 taskId, u8 b)
             return gUnknown_0856EFAE[r2];
         case 0:
             if (r2 == 0)
-                return 0xFF;
+                return INVALID_U8;
             else
                 return r2;
         case 1:
             if (r2 == 0)
-                return 0xFF;
+                return INVALID_U8;
             else
                 return r2 - 1;
         case 2:

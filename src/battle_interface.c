@@ -589,17 +589,17 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 
     for (; i > -1; i--)
     {
-        array[i] = 0xFF;
+        array[i] = INVALID_U8;
     }
 
-    if (arrayPtr[3] == 0xFF)
+    if (arrayPtr[3] == INVALID_U8)
         arrayPtr[3] = 0;
 
     if (arg2 == 0)
     {
         for (i = 0, j = 0; i < 4; i++)
         {
-            if (array[j] == 0xFF)
+            if (array[j] == INVALID_U8)
             {
                 arg1[j] &= 0xFC00;
                 arg1[j] |= 0x1E;
@@ -622,7 +622,7 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
     {
         for (i = 0; i < 4; i++)
         {
-            if (array[i] == 0xFF)
+            if (array[i] == INVALID_U8)
             {
                 arg1[i] &= 0xFC00;
                 arg1[i] |= 0x1E;
@@ -1580,7 +1580,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (i = 0; i < PARTY_SIZE; i++)
             {
-                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
+                if (partyInfo[i].hp == INVALID_U16) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
@@ -1599,7 +1599,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (i = 0, var = 5, j = 0; j < PARTY_SIZE; j++)
             {
-                if (partyInfo[j].hp == 0xFFFF) // empty slot or an egg
+                if (partyInfo[j].hp == INVALID_U16) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[var]].data[7] = 1;
@@ -1628,7 +1628,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (var = 5, i = 0; i < PARTY_SIZE; i++)
             {
-                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
+                if (partyInfo[i].hp == INVALID_U16) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[var]].data[7] = 1;
@@ -1648,7 +1648,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (var = 0, i = 0, j = 0; j < PARTY_SIZE; j++)
             {
-                if (partyInfo[j].hp == 0xFFFF) // empty slot or an egg
+                if (partyInfo[j].hp == INVALID_U16) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
@@ -1765,7 +1765,7 @@ static void sub_8073E64(u8 taskId)
     s32 i;
 
     u8 battlerId = gTasks[taskId].tBattler;
-    if (--gTasks[taskId].tData15 == -1)
+    if (--gTasks[taskId].tData15 == INVALID_S16)
     {
         u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
 
@@ -1808,7 +1808,7 @@ static void sub_8073F98(u8 taskId)
     {
         SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].tData15) | ((16 - gTasks[taskId].tData15) << 8));
     }
-    else if (gTasks[taskId].tData15 == -1)
+    else if (gTasks[taskId].tData15 == INVALID_S16)
     {
         u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
 
@@ -2289,7 +2289,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
     if (whichBar == EXP_BAR || (whichBar == HEALTH_BAR && !gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars))
         MoveBattleBarGraphically(battlerId, whichBar);
 
-    if (currentBarValue == -1)
+    if (currentBarValue == INVALID_S32)
         gBattleSpritesDataPtr->battleBars[battlerId].currValue = 0;
 
     return currentBarValue;
@@ -2376,12 +2376,12 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     if (maxValue < scale)
     {
         if (newValue == Q_24_8_TO_INT(*currValue) && (*currValue & 0xFF) == 0)
-            return -1;
+            return INVALID_S32;
     }
     else
     {
         if (newValue == *currValue) // we're done, the bar's value has been updated
-            return -1;
+            return INVALID_S32;
     }
 
     if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
@@ -2403,7 +2403,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
             *currValue -= toAdd;
             ret = Q_24_8_TO_INT(*currValue);
             // try round up
-            if ((*currValue & 0xFF) > 0)
+            if ((*currValue & INVALID_U8) > 0)
                 ret++;
             if (ret <= newValue)
             {

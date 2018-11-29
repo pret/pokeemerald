@@ -1,6 +1,6 @@
 #include "global.h"
 #include "rom_8034C54.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "decompress.h"
 #include "main.h"
 
@@ -254,7 +254,7 @@ static void sub_8035164(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
     u32 r5 = arg0->field_14;
     gUnknown_03000DD4 = arg0->firstOamId;
     gUnknown_03000DD8 = 0;
-    gUnknown_03000DDC = -1;
+    gUnknown_03000DDC = INVALID_S32;
 
     while (r5 != 0)
     {
@@ -262,12 +262,12 @@ static void sub_8035164(struct UnkStruct2 *arg0, s32 arg1, bool32 arg2)
         arg1 -= (r4 * r5);
         r5 /= 10;
 
-        if (r4 != 0 || gUnknown_03000DDC != -1 || r5 == 0)
+        if (r4 != 0 || gUnknown_03000DDC != INVALID_S32 || r5 == 0)
         {
             gMain.oamBuffer[gUnknown_03000DD4].tileNum = (r4 * arg0->field_9) + arg0->tileStart;
             gMain.oamBuffer[gUnknown_03000DD4].affineMode = 0;
 
-            if (gUnknown_03000DDC == -1)
+            if (gUnknown_03000DDC == INVALID_S32)
                 gUnknown_03000DDC = gUnknown_03000DD8;
         }
         else

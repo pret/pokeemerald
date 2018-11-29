@@ -1027,7 +1027,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
     // successfully chosen. The trainer's party may not have duplicate pokemon species
     // or duplicate held items.
-    for (bfMonCount = 0; monSets[bfMonCount] != 0xFFFF; bfMonCount++)
+    for (bfMonCount = 0; monSets[bfMonCount] != INVALID_U16; bfMonCount++)
         ;
     i = 0;
     otID = Random32();
@@ -1135,11 +1135,11 @@ u16 RandomizeFacilityTrainerMonSet(u16 trainerId)
     u8 bfMonCount = 0;
     u32 monSetId = monSets[bfMonCount];
 
-    while (monSetId != 0xFFFF)
+    while (monSetId != INVALID_U16)
     {
         bfMonCount++;
         monSetId = monSets[bfMonCount];
-        if (monSetId == 0xFFFF)
+        if (monSetId == INVALID_U16)
             break;
     }
 
@@ -2695,11 +2695,11 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
     bfMonCount = 0;
     monSetId = monSets[bfMonCount];
-    while (monSetId != 0xFFFF)
+    while (monSetId != INVALID_U16)
     {
         bfMonCount++;
         monSetId = monSets[bfMonCount];
-        if (monSetId == 0xFFFF)
+        if (monSetId == INVALID_U16)
             break;
     }
 

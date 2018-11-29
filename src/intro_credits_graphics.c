@@ -58,7 +58,7 @@ static void sub_817B7C4(struct Sprite *sprite);
 static void nullsub_66(struct Sprite *sprite);
 
 static const struct SpriteTemplate gUnknown_085F504C = {
-    2000, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817B62C
+    2000, INVALID_U16, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817B62C
 };
 
 static const struct CompressedSpriteSheet gUnknown_085F5064[] = {

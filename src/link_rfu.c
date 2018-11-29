@@ -1,7 +1,7 @@
 
 // Includes
 #include "global.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "battle.h"
 #include "berry_blender.h"
 #include "task.h"
@@ -276,7 +276,7 @@ const struct {
     { gBlockSendBuffer,  40 }
 };
 const u16 gUnknown_082ED6E0[] = {
-    0x0002, 0x7f7d, 0x0000, 0xffff
+    0x0002, 0x7f7d, 0x0000, INVALID_U16
 };
 
 const char sUnref_082ED6E8[][15] = {
@@ -431,7 +431,7 @@ u8 sub_800C054(u8 r5, u16 r7, u16 r8, const u16 *r6)
     }
     for (i = 0, buffer = r6; i < 16; i++)
     {
-        if (*buffer++ == 0xFFFF)
+        if (*buffer++ == INVALID_U16)
         {
             break;
         }
@@ -750,7 +750,7 @@ void sub_800C54C(u32 a0)
                 switch (gUnknown_03004140.unk_04)
                 {
                     case 23:
-                        r2 = sub_800BEC0() == 0x8001 ? 0x44 : 0xFF;
+                        r2 = sub_800BEC0() == 0x8001 ? 0x44 : INVALID_U8;
                         gUnknown_03004140.unk_04 = gUnknown_03004140.unk_05 = 0;
                         sub_800D30C(r2, 0);
                         break;
@@ -1164,7 +1164,7 @@ static void sub_800C7B4(u16 r8, u16 r6)
                 gUnknown_03004140.unk_00 &= ~gUnknown_03004140.unk_14;
                 if (gUnknown_03004140.unk_07)
                 {
-                    if (gUnknown_03007890->unk_00 == 0xFF)
+                    if (gUnknown_03007890->unk_00 == INVALID_U8)
                     {
                         if (gUnknown_03004140.unk_07 == 8)
                         {
@@ -1179,7 +1179,7 @@ static void sub_800C7B4(u16 r8, u16 r6)
                         }
                     }
                 }
-                if (gUnknown_03007890->unk_00 == 0xFF)
+                if (gUnknown_03007890->unk_00 == INVALID_U8)
                 {
                     if (gUnknown_03004140.unk_04 == 0)
                     {
@@ -1194,7 +1194,7 @@ static void sub_800C7B4(u16 r8, u16 r6)
             break;
         case 38:
             sub_800D20C();
-            if (gUnknown_03007890->unk_00 != 0xFF)
+            if (gUnknown_03007890->unk_00 != INVALID_U8)
             {
                 sub_800D30C(0x50, 0x00);
             }
@@ -1237,7 +1237,7 @@ static void sub_800C7B4(u16 r8, u16 r6)
             sub_800D610();
         }
     }
-    if (r8 == 0xFF)
+    if (r8 == INVALID_U8)
     {
         sub_800D30C(0xf2, 0x00);
         sub_800D610();
@@ -1318,7 +1318,7 @@ static void sub_800CF34(void)
                     if (gUnknown_03007880[i]->unk_61 == 1)
                     {
                         r5 = 0x02;
-                        for (ptr = gUnknown_03004140.unk_20; *ptr != 0xFFFF; ptr++)
+                        for (ptr = gUnknown_03004140.unk_20; *ptr != INVALID_U16; ptr++)
                         {
                             if (gUnknown_03007890->unk_14[i].unk_04 == *ptr)
                             {
@@ -1465,7 +1465,7 @@ static u8 sub_800D294(void)
 
     for (i = 0; i < gUnknown_03007890->unk_08; i++)
     {
-        for (ptr = gUnknown_03004140.unk_20; *ptr != 0xffff; ptr++)
+        for (ptr = gUnknown_03004140.unk_20; *ptr != INVALID_U16; ptr++)
         {
             if (gUnknown_03007890->unk_14[i].unk_04 == *ptr)
             {
@@ -2238,12 +2238,12 @@ void sub_800E084(void)
 
 void sub_800E0E8(void)
 {
-    if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == 0xFFFF)
+    if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == INVALID_U16)
     {
         LoadCompressedObjectPic(&sWirelessStatusIndicatorSpriteSheet);
     }
     LoadSpritePalette(&sWirelessStatusIndicatorSpritePalette);
-    gWirelessStatusIndicatorSpriteId = 0xFF;
+    gWirelessStatusIndicatorSpriteId = INVALID_U8;
 }
 
 u8 sub_800E124(void)
@@ -2273,7 +2273,7 @@ void sub_800E15C(struct Sprite *sprite, int signalStrengthAnimNum)
 
 void sub_800E174(void)
 {
-    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
+    if (gWirelessStatusIndicatorSpriteId != INVALID_U8 && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = 255;
@@ -2457,7 +2457,7 @@ void sub_800E604(void)
     u8 unk_ee_bak = gUnknown_03005000.unk_ee;
     CpuFill16(0, &gUnknown_03005000, sizeof gUnknown_03005000);
     gUnknown_03005000.unk_ee = unk_ee_bak;
-    gUnknown_03005000.unk_0c = 0xFF;
+    gUnknown_03005000.unk_0c = INVALID_U8;
     if (gUnknown_03005000.unk_ee != 4)
     {
         gUnknown_03005000.unk_ee = 0;
@@ -3073,7 +3073,7 @@ bool32 sub_800F1E0(void)
                 {
                     if (gUnknown_03005000.unk_14[i][1])
                     {
-                        if (gUnknown_03005000.unk_cee[i] != 0xff && (gUnknown_03005000.unk_14[i][0] >> 5) != ((gUnknown_03005000.unk_cee[i] + 1) & 7))
+                        if (gUnknown_03005000.unk_cee[i] != INVALID_U8 && (gUnknown_03005000.unk_14[i][0] >> 5) != ((gUnknown_03005000.unk_cee[i] + 1) & 7))
                         {
                             if (++gUnknown_03005000.unk_cea[i] > 4)
                                 sub_8011170(0x8100);
@@ -3774,7 +3774,7 @@ bool32 sub_8010454(u32 a0)
     int i;
     for (i = 0; gUnknown_082ED6E0[i] != a0; i++)
     {
-        if (gUnknown_082ED6E0[i] == 0xffff)
+        if (gUnknown_082ED6E0[i] == INVALID_U16)
             return FALSE;
     }
     return TRUE;
@@ -3877,7 +3877,7 @@ bool32 sub_80105EC(void)
 bool32 sub_801064C(u16 a0, const u8 *a1)
 {
     u8 r1 = sub_8011CE4(a1, a0);
-    if (r1 == 0xFF)
+    if (r1 == INVALID_U8)
         return TRUE;
     if (gUnknown_03005000.unk_cd1[r1] == 9)
         return TRUE;
@@ -3902,7 +3902,7 @@ void sub_80106D4(void)
 u32 sub_8010714(u16 a0, const u8 *a1)
 {
     u8 r0 = sub_8011CE4(a1, a0);
-    if (r0 == 0xff)
+    if (r0 == INVALID_U8)
         return 2;
     if (gUnknown_03007880[r0]->unk_0 == 0)
         return 1;

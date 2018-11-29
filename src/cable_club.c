@@ -70,7 +70,7 @@ static void sub_80B3220(u8 taskId);
 
 static void sub_80B236C(u8 arg0, u8 arg1)
 {
-    if (FindTaskIdByFunc(sub_80B2634) == 0xFF)
+    if (FindTaskIdByFunc(sub_80B2634) == INVALID_U8)
     {
         u8 taskId1;
 
@@ -604,7 +604,7 @@ void sub_80B2EA8(void)
 {
     u32 taskId = FindTaskIdByFunc(sub_80B2EE4);
 
-    if (taskId == 0xFF)
+    if (taskId == INVALID_U8)
     {
         taskId = CreateTask(sub_80B2EE4, 80);
         gTasks[taskId].data[0] = 0;
@@ -702,7 +702,7 @@ void sub_80B3028(void)
 u8 sub_80B3050(void)
 {
     if (FuncIsActiveTask(sub_80B3144) != FALSE)
-        return 0xFF;
+        return INVALID_U8;
 
     switch (gSpecialVar_0x8004)
     {

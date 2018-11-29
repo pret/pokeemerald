@@ -195,7 +195,7 @@ struct Pokeblock *SafariZoneGetPokeblockInFront(void)
 {
     GetPokeblockFeederInFront();
 
-    if (gSpecialVar_Result == 0xFFFF)
+    if (gSpecialVar_Result == INVALID_U16)
         return NULL;
     else
         return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
@@ -205,7 +205,7 @@ struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
     GetPokeblockFeederWithinRange();
 
-    if (gSpecialVar_Result == 0xFFFF)
+    if (gSpecialVar_Result == INVALID_U16)
         return NULL;
     else
         return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
@@ -255,7 +255,7 @@ bool8 GetInFrontFeederPokeblockAndSteps(void)
 {
     GetPokeblockFeederInFront();
 
-    if (gSpecialVar_Result == 0xFFFF)
+    if (gSpecialVar_Result == INVALID_U16)
     {
         return FALSE;
     }

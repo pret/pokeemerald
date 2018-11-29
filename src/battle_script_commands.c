@@ -763,8 +763,8 @@ static const struct SpriteTemplate sSpriteTemplate_MonIconOnLvlUpBox =
 static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX / 4, USHRT_MAX / 8};
 
 #define MIMIC_FORBIDDEN_END             0xFFFE
-#define METRONOME_FORBIDDEN_END         0xFFFF
-#define ASSIST_FORBIDDEN_END            0xFFFF
+#define METRONOME_FORBIDDEN_END         INVALID_U16
+#define ASSIST_FORBIDDEN_END            INVALID_U16
 
 static const u16 sMovesForbiddenToCopy[] =
 {
@@ -822,7 +822,7 @@ static const u16 sWeightToDamageTable[] =
     500, 60,
     1000, 80,
     2000, 100,
-    0xFFFF, 0xFFFF
+    INVALID_U16, INVALID_U16
 };
 
 static const u16 sPickupItems[] =
@@ -1976,7 +1976,7 @@ static void atk0C_datahpupdate(void)
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
         if (gSpecialStatuses[gActiveBattler].dmg == 0)
-            gSpecialStatuses[gActiveBattler].dmg = 0xFFFF;
+            gSpecialStatuses[gActiveBattler].dmg = INVALID_U16;
     }
     gBattlescriptCurrInstr += 2;
 }
@@ -2579,7 +2579,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     u16 PayDay = gPaydayMoney;
                     gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
                     if (PayDay > gPaydayMoney)
-                        gPaydayMoney = 0xFFFF;
+                        gPaydayMoney = INVALID_U16;
                 }
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -4520,7 +4520,7 @@ static void atk49_moveend(void)
     u8 arg1, arg2;
     u16 originallyUsedMove;
 
-    if (gChosenMove == 0xFFFF)
+    if (gChosenMove == INVALID_U16)
         originallyUsedMove = 0;
     else
         originallyUsedMove = gChosenMove;
@@ -4593,7 +4593,7 @@ static void atk49_moveend(void)
             break;
         case ATK49_CHOICE_MOVE: // update choice band move
             if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
-                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
+                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != INVALID_U16))
                     goto LOOP;
             if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
             {
@@ -4708,8 +4708,8 @@ static void atk49_moveend(void)
                 }
                 else
                 {
-                    gLastMoves[gBattlerAttacker] = 0xFFFF;
-                    gLastResultingMoves[gBattlerAttacker] = 0xFFFF;
+                    gLastMoves[gBattlerAttacker] = INVALID_U16;
+                    gLastResultingMoves[gBattlerAttacker] = INVALID_U16;
                 }
 
                 if (!(gHitMarker & HITMARKER_FAINTED(gBattlerTarget)))
@@ -4717,7 +4717,7 @@ static void atk49_moveend(void)
 
                 if (gHitMarker & HITMARKER_OBEYS && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
                 {
-                    if (gChosenMove == 0xFFFF)
+                    if (gChosenMove == INVALID_U16)
                     {
                         gLastLandedMoves[gBattlerTarget] = gChosenMove;
                     }
@@ -4729,7 +4729,7 @@ static void atk49_moveend(void)
                 }
                 else
                 {
-                    gLastLandedMoves[gBattlerTarget] = 0xFFFF;
+                    gLastLandedMoves[gBattlerTarget] = INVALID_U16;
                 }
             }
             gBattleScripting.atk49_state++;
@@ -5662,7 +5662,7 @@ static void atk59_handlelearnnewmove(void)
     {
         gBattlescriptCurrInstr = jumpPtr2;
     }
-    else if (ret == 0xFFFF)
+    else if (ret == INVALID_U16)
     {
         gBattlescriptCurrInstr += 10;
     }
@@ -6015,7 +6015,7 @@ static void atk61_drawpartystatussummary(void)
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_NONE
             || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
         {
-            hpStatuses[i].hp = 0xFFFF;
+            hpStatuses[i].hp = INVALID_U16;
             hpStatuses[i].status = 0;
         }
         else
@@ -6930,7 +6930,7 @@ static void atk7C_trymirrormove(void)
             move = *(i * 2 + gBattlerAttacker * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0)
                 | (*(i * 2 + gBattlerAttacker * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) << 8);
 
-            if (move != 0 && move != 0xFFFF)
+            if (move != 0 && move != INVALID_U16)
             {
                 movesArray[validMovesCount] = move;
                 validMovesCount++;
@@ -6941,7 +6941,7 @@ static void atk7C_trymirrormove(void)
     move = *(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 0)
         | (*(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 1) << 8);
 
-    if (move != 0 && move != 0xFFFF)
+    if (move != 0 && move != INVALID_U16)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gCurrentMove = move;
@@ -7094,7 +7094,7 @@ bool8 UproarWakeUpCheck(u8 battlerId)
 
         gBattleScripting.battler = i;
 
-        if (gBattlerTarget == 0xFF)
+        if (gBattlerTarget == INVALID_U8)
             gBattlerTarget = i;
         else if (gBattlerTarget == i)
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -8008,7 +8008,7 @@ static void atk9A_setfocusenergy(void)
 
 static void atk9B_transformdataexecution(void)
 {
-    gChosenMove = 0xFFFF;
+    gChosenMove = INVALID_U16;
     gBattlescriptCurrInstr++;
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_TRANSFORMED
         || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
@@ -8088,12 +8088,12 @@ static bool8 IsMoveUncopyableByMimic(u16 move)
 
 static void atk9D_mimicattackcopy(void)
 {
-    gChosenMove = 0xFFFF;
+    gChosenMove = INVALID_U16;
 
     if (IsMoveUncopyableByMimic(gLastMoves[gBattlerTarget])
         || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED
         || gLastMoves[gBattlerTarget] == 0
-        || gLastMoves[gBattlerTarget] == 0xFFFF)
+        || gLastMoves[gBattlerTarget] == INVALID_U16)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -8296,7 +8296,7 @@ static void atkA5_painsplitdmgcalc(void)
         storeLoc[3] = (painSplitHp & 0xFF000000) >> 24;
 
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp - hpDiff;
-        gSpecialStatuses[gBattlerTarget].dmg = 0xFFFF;
+        gSpecialStatuses[gBattlerTarget].dmg = INVALID_U16;
 
         gBattlescriptCurrInstr += 5;
     }
@@ -8309,7 +8309,7 @@ static void atkA5_painsplitdmgcalc(void)
 static void atkA6_settypetorandomresistance(void) // conversion 2
 {
     if (gLastLandedMoves[gBattlerAttacker] == 0
-        || gLastLandedMoves[gBattlerAttacker] == 0xFFFF)
+        || gLastLandedMoves[gBattlerAttacker] == INVALID_U16)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -8376,12 +8376,12 @@ static void atkA7_setalwayshitflag(void)
 
 static void atkA8_copymovepermanently(void) // sketch
 {
-    gChosenMove = 0xFFFF;
+    gChosenMove = INVALID_U16;
 
     if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
         && gLastPrintedMoves[gBattlerTarget] != MOVE_STRUGGLE
         && gLastPrintedMoves[gBattlerTarget] != 0
-        && gLastPrintedMoves[gBattlerTarget] != 0xFFFF
+        && gLastPrintedMoves[gBattlerTarget] != INVALID_U16
         && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH)
     {
         s32 i;
@@ -8550,7 +8550,7 @@ static void atkAC_remaininghptopower(void)
 static void atkAD_tryspiteppreduce(void)
 {
     if (gLastMoves[gBattlerTarget] != 0
-        && gLastMoves[gBattlerTarget] != 0xFFFF)
+        && gLastMoves[gBattlerTarget] != INVALID_U16)
     {
         s32 i;
 
@@ -9671,13 +9671,13 @@ static void atkDC_trysetgrudge(void)
 static void atkDD_weightdamagecalculation(void)
 {
     s32 i;
-    for (i = 0; sWeightToDamageTable[i] != 0xFFFF; i += 2)
+    for (i = 0; sWeightToDamageTable[i] != INVALID_U16; i += 2)
     {
         if (sWeightToDamageTable[i] > GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1))
             break;
     }
 
-    if (sWeightToDamageTable[i] != 0xFFFF)
+    if (sWeightToDamageTable[i] != INVALID_U16)
         gDynamicBasePower = sWeightToDamageTable[i + 1];
     else
         gDynamicBasePower = 120;

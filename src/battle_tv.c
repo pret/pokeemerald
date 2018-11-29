@@ -26,9 +26,9 @@ static const u16 sVariableDmgMoves[] =
     MOVE_WATER_SPOUT, MOVE_DREAM_EATER, MOVE_WEATHER_BALL,
     MOVE_SNORE, MOVE_PAIN_SPLIT, MOVE_GUILLOTINE,
     MOVE_FRUSTRATION, MOVE_RETURN, MOVE_ENDEAVOR,
-    MOVE_PRESENT, MOVE_REVENGE, 0xFFFF,
+    MOVE_PRESENT, MOVE_REVENGE, INVALID_U16,
     // those are handled by the function itself
-    MOVE_MAGNITUDE, MOVE_PSYWAVE, 0xFFFF
+    MOVE_MAGNITUDE, MOVE_PSYWAVE, INVALID_U16
 };
 
 static const u16 sUnknown_0860A4E0[] =
@@ -199,7 +199,7 @@ static const u16 sUnknown_0860A8A4[] =
     STRINGID_PKMNAFFLICTEDBYCURSE, STRINGID_PKMNSAPPEDBYLEECHSEED, STRINGID_PKMNLOCKEDINNIGHTMARE,
     STRINGID_PKMNHURTBY, STRINGID_PKMNHURTBYBURN, STRINGID_PKMNHURTBYPOISON,
     STRINGID_PKMNHURTBYSPIKES, STRINGID_ATTACKERFAINTED, STRINGID_TARGETFAINTED,
-    STRINGID_PKMNHITWITHRECOIL, STRINGID_PKMNCRASHED, 0xFFFF
+    STRINGID_PKMNHITWITHRECOIL, STRINGID_PKMNCRASHED, INVALID_U16
 };
 
 // code
@@ -625,9 +625,9 @@ static bool8 sub_817E0B8(u16 stringId)
         if (sUnknown_0860A8A4[i] == stringId)
             break;
         i++;
-    } while (sUnknown_0860A8A4[i] != 0xFFFF);
+    } while (sUnknown_0860A8A4[i] != INVALID_U16);
 
-    if (sUnknown_0860A8A4[i] == 0xFFFF)
+    if (sUnknown_0860A8A4[i] == INVALID_U16)
         return TRUE;
     else
         return FALSE;
@@ -1164,7 +1164,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
                 break;
             }
             i += 2;
-        } while (ptr[i] != 0xFFFF);
+        } while (ptr[i] != INVALID_U16);
         break;
     case 19:
         tvPtr->side[arg2 ^ 1].faintCause = 0;
@@ -1415,9 +1415,9 @@ static void TrySetBattleSeminarShow(void)
         if (currMoveSaved == sVariableDmgMoves[i])
             break;
         i++;
-    } while (sVariableDmgMoves[i] != 0xFFFF);
+    } while (sVariableDmgMoves[i] != INVALID_U16);
 
-    if (sVariableDmgMoves[i] != 0xFFFF)
+    if (sVariableDmgMoves[i] != INVALID_U16)
         return;
 
     dmgByMove[gMoveSelectionCursor[gBattlerAttacker]] = gBattleMoveDamage;
@@ -1490,9 +1490,9 @@ static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
             if (moveId == sVariableDmgMoves[i])
                 break;
             i++;
-        } while (sVariableDmgMoves[i] != 0xFFFF);
+        } while (sVariableDmgMoves[i] != INVALID_U16);
 
-        if (sVariableDmgMoves[i] != 0xFFFF)
+        if (sVariableDmgMoves[i] != INVALID_U16)
         {
             *dmg = 0;
             return FALSE;

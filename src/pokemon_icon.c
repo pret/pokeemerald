@@ -1153,14 +1153,14 @@ void SafeLoadMonIconPalette(u16 species)
     if (species > SPECIES_EGG)
         species = 260;
     palIndex = gMonIconPaletteIndices[species];
-    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
+    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == INVALID_U8)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
 void LoadMonIconPalette(u16 species)
 {
     u8 palIndex = gMonIconPaletteIndices[species];
-    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
+    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == INVALID_U8)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
@@ -1287,7 +1287,7 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
 
     struct SpriteTemplate spriteTemplate =
     {
-        .tileTag = 0xFFFF,
+        .tileTag = INVALID_U16,
         .paletteTag = iconTemplate->paletteTag,
         .oam = iconTemplate->oam,
         .anims = iconTemplate->anims,

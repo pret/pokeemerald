@@ -790,7 +790,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == 0xFF && mapNum == 0xFF)
+    if (mapGroup == INVALID_U8 && mapNum == INVALID_U8)
         SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
@@ -1491,7 +1491,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     if (width > 0x1C)
         width = 0x1C;
 
-    for (i = 0, height = 4; gStringVar4[i] != 0xFF;)
+    for (i = 0, height = 4; gStringVar4[i] != INVALID_U8;)
     {
         if (gStringVar4[i++] == 0xFE)
             height += 3;

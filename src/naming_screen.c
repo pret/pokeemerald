@@ -1,6 +1,6 @@
 #include "global.h"
 #include "naming_screen.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "task.h"
 #include "sprite.h"
@@ -2141,7 +2141,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
 
 static const struct SpriteTemplate gUnknown_0858C180 =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = INVALID_U16,
     .paletteTag = 0x0000,
     .oam = &gOamData_858BFEC,
     .anims = gSpriteAnimTable_858C0BC,

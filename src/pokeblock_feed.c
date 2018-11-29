@@ -7,7 +7,7 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "m4a.h"

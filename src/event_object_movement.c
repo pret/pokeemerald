@@ -9,7 +9,7 @@
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -107,7 +107,7 @@ static void UpdateEventObjectSpriteSubpriorityAndVisibility(struct Sprite *);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
-const struct SpriteTemplate gCameraSpriteTemplate = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
+const struct SpriteTemplate gCameraSpriteTemplate = {0, INVALID_U16, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
 
 void (*const gCameraObjectFuncs[])(struct Sprite *) = {
     CameraObject_0,
@@ -1071,10 +1071,10 @@ const u8 gUnknown_0850DC3F[][4] = {
 static void ClearEventObject(struct EventObject *eventObject)
 {
     *eventObject = (struct EventObject){};
-    eventObject->localId = 0xFF;
-    eventObject->mapNum = 0xFF;
-    eventObject->mapGroup = 0xFF;
-    eventObject->movementActionId = 0xFF;
+    eventObject->localId = INVALID_U8;
+    eventObject->mapNum = INVALID_U8;
+    eventObject->mapGroup = INVALID_U8;
+    eventObject->movementActionId = INVALID_U8;
 }
 
 static void ClearAllEventObjects(void)
@@ -1515,7 +1515,7 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjectTempl
     {
         eventObject->invisible = TRUE;
     }
-    *(u16 *)&spriteTemplate->paletteTag = 0xFFFF;
+    *(u16 *)&spriteTemplate->paletteTag = INVALID_U16;
     spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
     if (spriteId == MAX_SPRITES)
     {
@@ -1644,7 +1644,7 @@ u8 AddPseudoEventObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
 
     spriteTemplate = malloc(sizeof(struct SpriteTemplate));
     MakeObjectTemplateFromEventObjectGraphicsInfo(graphicsId, callback, spriteTemplate, &subspriteTables);
-    if (spriteTemplate->paletteTag != 0xFFFF)
+    if (spriteTemplate->paletteTag != INVALID_U16)
     {
         LoadEventObjectPalette(spriteTemplate->paletteTag);
     }
@@ -1670,7 +1670,7 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
 
     graphicsInfo = GetEventObjectGraphicsInfo(graphicsId);
     MakeObjectTemplateFromEventObjectGraphicsInfo(graphicsId, UpdateEventObjectSpriteSubpriorityAndVisibility, &spriteTemplate, &subspriteTables);
-    *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
+    *(u16 *)&spriteTemplate.paletteTag = INVALID_U16;
     x += 7;
     y += 7;
     sub_80930E0(&x, &y, 8, 16);
@@ -1827,7 +1827,7 @@ static void sub_808E1B8(u8 eventObjectId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     MakeObjectTemplateFromEventObjectGraphicsInfoWithCallbackIndex(eventObject->graphicsId, eventObject->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
-    *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
+    *(u16 *)&spriteTemplate.paletteTag = INVALID_U16;
     paletteSlot = graphicsInfo->paletteSlot;
     if (paletteSlot == 0)
     {
@@ -1842,7 +1842,7 @@ static void sub_808E1B8(u8 eventObjectId, s16 x, s16 y)
         paletteSlot -= 16;
         sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
     }
-    *(u16 *)&spriteTemplate.paletteTag = 0xFFFF;
+    *(u16 *)&spriteTemplate.paletteTag = INVALID_U16;
     spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -2124,9 +2124,9 @@ void Unused_LoadEventObjectPaletteSet(u16 *paletteTags)
 
 static u8 sub_808E8F4(const struct SpritePalette *spritePalette)
 {
-    if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xFF)
+    if (IndexOfSpritePaletteTag(spritePalette->tag) != INVALID_U8)
     {
-        return 0xFF;
+        return INVALID_U8;
     }
     return LoadSpritePalette(spritePalette);
 }
@@ -2159,7 +2159,7 @@ static u8 FindEventObjectPaletteIndexByTag(u16 tag)
             return i;
         }
     }
-    return 0xFF;
+    return INVALID_U8;
 }
 
 void LoadPlayerObjectReflectionPalette(u16 tag, u8 slot)
@@ -2491,7 +2491,7 @@ u8 sub_808F080(u8 localId, u8 mapNum, u8 mapGroup)
 
     if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjectId))
     {
-        return 0xFF;
+        return INVALID_U8;
     }
     return gEventObjects[eventObjectId].trainerType;
 }
@@ -2507,7 +2507,7 @@ u8 sub_808F0D4(u8 localId, u8 mapNum, u8 mapGroup)
 
     if (TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjectId))
     {
-        return 0xFF;
+        return INVALID_U8;
     }
     return gEventObjects[eventObjectId].trainerRange_berryTreeId;
 }
@@ -4352,7 +4352,7 @@ bool8 MovementType_CopyPlayer_Step0(struct EventObject *eventObject, struct Spri
 
 bool8 MovementType_CopyPlayer_Step1(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (gEventObjects[gPlayerAvatar.eventObjectId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
+    if (gEventObjects[gPlayerAvatar.eventObjectId].movementActionId == INVALID_U8 || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
     {
         return FALSE;
     }
@@ -4531,7 +4531,7 @@ movement_type_def(MovementType_CopyPlayerInGrass, gMovementTypeFuncs_CopyPlayerI
 
 bool8 MovementType_CopyPlayerInGrass_Step1(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (gEventObjects[gPlayerAvatar.eventObjectId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
+    if (gEventObjects[gPlayerAvatar.eventObjectId].movementActionId == INVALID_U8 || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
     {
         return FALSE;
     }
@@ -4677,7 +4677,7 @@ static void ClearEventObjectMovement(struct EventObject *eventObject, struct Spr
     eventObject->singleMovementActive = 0;
     eventObject->heldMovementActive = FALSE;
     eventObject->heldMovementFinished = FALSE;
-    eventObject->movementActionId = 0xFF;
+    eventObject->movementActionId = INVALID_U8;
     sprite->data[1] = 0;
 }
 
@@ -5083,7 +5083,7 @@ bool8 EventObjectIsMovementOverridden(struct EventObject *eventObject)
 
 bool8 EventObjectIsHeldMovementActive(struct EventObject *eventObject)
 {
-    if (eventObject->heldMovementActive && eventObject->movementActionId != 0xFF)
+    if (eventObject->heldMovementActive && eventObject->movementActionId != INVALID_U8)
         return TRUE;
 
     return FALSE;
@@ -5116,7 +5116,7 @@ void EventObjectClearHeldMovementIfActive(struct EventObject *eventObject)
 
 void EventObjectClearHeldMovement(struct EventObject *eventObject)
 {
-    eventObject->movementActionId = 0xFF;
+    eventObject->movementActionId = INVALID_U8;
     eventObject->heldMovementActive = FALSE;
     eventObject->heldMovementFinished = FALSE;
     gSprites[eventObject->spriteId].data[1] = 0;
@@ -5145,7 +5145,7 @@ u8 EventObjectGetHeldMovementActionId(struct EventObject *eventObject)
     if (eventObject->heldMovementActive)
         return eventObject->movementActionId;
 
-    return 0xFF;
+    return INVALID_U8;
 }
 
 void UpdateEventObjectCurrentMovement(struct EventObject *eventObject, struct Sprite *sprite, bool8 (*callback)(struct EventObject *, struct Sprite *))
@@ -5257,7 +5257,7 @@ static bool8 EventObjectExecSingleMovementAction(struct EventObject *eventObject
 {
     if (gMovementActionFuncs[eventObject->movementActionId][sprite->data[2]](eventObject, sprite))
     {
-        eventObject->movementActionId = 0xFF;
+        eventObject->movementActionId = INVALID_U8;
         sprite->data[2] = 0;
         return TRUE;
     }
@@ -5684,7 +5684,7 @@ u8 sub_80940C4(struct EventObject *eventObject, struct Sprite *sprite, u8 callba
         eventObject->triggerGroundEffectsOnMove = TRUE;
         eventObject->disableCoveringGroundEffects = TRUE;
     }
-    else if (result == 0xFF)
+    else if (result == INVALID_U8)
     {
         ShiftStillEventObjectCoords(eventObject);
         eventObject->triggerGroundEffectsOnStop = TRUE;
@@ -5706,7 +5706,7 @@ u8 sub_809419C(struct EventObject *eventObject, struct Sprite *sprite)
 
 bool8 sub_80941B0(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (sub_8094188(eventObject, sprite) == 0xFF)
+    if (sub_8094188(eventObject, sprite) == INVALID_U8)
     {
         return TRUE;
     }
@@ -5715,7 +5715,7 @@ bool8 sub_80941B0(struct EventObject *eventObject, struct Sprite *sprite)
 
 bool8 sub_80941C8(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (sub_809419C(eventObject, sprite) == 0xFF)
+    if (sub_809419C(eventObject, sprite) == INVALID_U8)
     {
         return TRUE;
     }
@@ -9100,7 +9100,7 @@ void CreateLevitateMovementTask(struct EventObject *eventObject)
 
     StoreWordInTwoHalfwords(&task->data[0], (u32)eventObject);
     eventObject->warpArrowSpriteId = taskId;
-    task->data[3] = 0xFFFF;
+    task->data[3] = INVALID_U16;
 }
 
 static void ApplyLevitateMovement(u8 taskId)

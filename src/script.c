@@ -391,11 +391,11 @@ bool32 sub_80991F8(void)
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return FALSE;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != INVALID_U8)
         return FALSE;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != INVALID_U8)
         return FALSE;
-    if (scriptData->objectId != 0xFF)
+    if (scriptData->objectId != INVALID_U8)
         return FALSE;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
         return FALSE;
@@ -409,11 +409,11 @@ u8 *sub_8099244(void)
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;
-    if (scriptData->mapGroup != 0xFF)
+    if (scriptData->mapGroup != INVALID_U8)
         return NULL;
-    if (scriptData->mapNum != 0xFF)
+    if (scriptData->mapNum != INVALID_U8)
         return NULL;
-    if (scriptData->objectId != 0xFF)
+    if (scriptData->objectId != INVALID_U8)
         return NULL;
     if (CalculateRamScriptChecksum() != gSaveBlock1Ptr->ramScript.checksum)
     {

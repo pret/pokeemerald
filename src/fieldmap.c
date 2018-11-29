@@ -496,7 +496,7 @@ u16 GetBehaviorByMetatileId(u16 metatile)
     }
     else
     {
-        return 0xff;
+        return INVALID_U8;
     }
 }
 
@@ -922,7 +922,7 @@ void sub_8088B94(int x, int y, int a2)
 
 bool8 sub_8088BF0(u16* a0, u16 a1, u8 a2)
 {
-    if (a2 == 0xFF)
+    if (a2 == INVALID_U8)
         return FALSE;
 
     if (a2 == 0)

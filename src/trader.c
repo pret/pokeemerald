@@ -155,7 +155,7 @@ void ScrSpecial_IsDecorationFull(void)
 {
     gSpecialVar_Result = FALSE;
     if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
-        && GetFirstEmptyDecorSlot(gDecorations[gSpecialVar_0x8004].category) == -1)
+        && GetFirstEmptyDecorSlot(gDecorations[gSpecialVar_0x8004].category) == INVALID_S8)
     {
         sub_8127250(gStringVar2, gDecorations[gSpecialVar_0x8004].category);
         gSpecialVar_Result = TRUE;

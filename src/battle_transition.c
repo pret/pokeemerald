@@ -7,7 +7,7 @@
 #include "field_effect.h"
 #include "gpu_regs.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
@@ -749,7 +749,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_85C8E60[] =
 
 static const struct SpriteTemplate gUnknown_085C8E68 =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = INVALID_U16,
     .paletteTag = 4105,
     .oam = &gEventObjectBaseOam_32x32,
     .anims = sSpriteAnimTable_85C8E3C,
@@ -798,7 +798,7 @@ static const union AnimCmd *const sSpriteAnimTable_85C8EA0[] =
 
 static const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = INVALID_U16,
     .paletteTag = 4106,
     .oam = &gOamData_85C8E80,
     .anims = sSpriteAnimTable_85C8EA0,
@@ -809,7 +809,7 @@ static const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
 
 static const struct SpriteTemplate sSpriteTemplate_85C8EBC =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = INVALID_U16,
     .paletteTag = 4106,
     .oam = &gOamData_85C8E80,
     .anims = sSpriteAnimTable_85C8EA0,
@@ -998,7 +998,7 @@ static bool8 Transition_Phase1(struct Task *task)
 
 static bool8 Transition_WaitForPhase1(struct Task *task)
 {
-    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == INVALID_U8)
     {
         task->tState++;
         return TRUE;
@@ -1019,7 +1019,7 @@ static bool8 Transition_Phase2(struct Task *task)
 static bool8 Transition_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == INVALID_U8)
         task->tTransitionDone = TRUE;
     return FALSE;
 }
@@ -3605,7 +3605,7 @@ static void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 
 static bool8 IsPhase1Done(void)
 {
-    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == 0xFF)
+    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == INVALID_U8)
         return TRUE;
     else
         return FALSE;

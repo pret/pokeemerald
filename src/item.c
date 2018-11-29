@@ -5,7 +5,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "event_data.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "secret_base.h"
 #include "item_menu.h"
 #include "strings.h"

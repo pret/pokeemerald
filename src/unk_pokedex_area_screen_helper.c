@@ -2,7 +2,7 @@
 #include "main.h"
 #include "menu.h"
 #include "bg.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 
 EWRAM_DATA u8 *gUnknown_0203CF28 = NULL;

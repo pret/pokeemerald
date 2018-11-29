@@ -116,7 +116,7 @@ u16 STWI_read_status(u8 index)
     case 3:
         return gRfuState->activeCommand;
     default:
-        return 0xFFFF;
+        return INVALID_U16;
     }
 }
 
