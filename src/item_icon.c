@@ -2,7 +2,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "item_icon.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "sprite.h"
 #include "constants/items.h"
 
@@ -161,7 +161,7 @@ u8 AddCustomItemIconSprite(struct SpriteTemplate *customSpriteTemplate, u16 tile
 
 const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
 {
-    if (itemId == 0xFFFF)
+    if (itemId == INVALID_U16)
         itemId = ITEM_FIELD_ARROW;
     else if (itemId >= ITEMS_COUNT)
         itemId = 0;

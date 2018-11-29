@@ -214,7 +214,7 @@ void sub_8158E9C(u8 taskId)
 
     if (species != SPECIES_NONE)
     {
-        if (gBattleAnimArgs[1] == 0xFF)
+        if (gBattleAnimArgs[1] == INVALID_U8)
             PlayCry3(species, pan, 9);
         else
             PlayCry3(species, pan, 7);
@@ -238,7 +238,7 @@ static void sub_8158FF4(u8 taskId)
     }
     else
     {
-        if (gTasks[taskId].data[0] == 0xFF)
+        if (gTasks[taskId].data[0] == INVALID_U8)
         {
             if (!IsCryPlaying())
             {

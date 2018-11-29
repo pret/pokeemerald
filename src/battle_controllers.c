@@ -51,7 +51,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         gBattlerControllerFuncs[i] = nullsub_21;
-        gBattlerPositions[i] = 0xFF;
+        gBattlerPositions[i] = INVALID_U8;
         gActionSelectionCursor[i] = 0;
         gMoveSelectionCursor[i] = 0;
     }

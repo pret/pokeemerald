@@ -9,7 +9,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "new_game.h"
 #include "party_menu.h"
@@ -1079,7 +1079,7 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
     u8 i;
 
     for (i = 0; i < 6; i++)
-        apprentice->easyChatWords[i] |= 0xFFFF;
+        apprentice->easyChatWords[i] |= INVALID_U16;
 
     apprentice->playerName[0] = EOS;
     apprentice->id = 16;
@@ -1093,7 +1093,7 @@ void ResetAllApprenticeData(void)
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] |= 0xFFFF;
+            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] |= INVALID_U16;
         gSaveBlock2Ptr->apprentices[i].id = 16;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
@@ -1290,7 +1290,7 @@ static u16 sub_819FF98(u8 arg0)
     else
         level = 60;
 
-    for (j = 0; learnset[j] != 0xFFFF; j++)
+    for (j = 0; learnset[j] != INVALID_U16; j++)
     {
         if ((learnset[j] & 0xFE00) > (level << 9))
             break;
@@ -1393,7 +1393,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != 0xFFFF; i++)
+    for (i = 0; learnset[i] != INVALID_U16; i++)
     {
         if ((learnset[i] & 0xFE00) > (level << 9))
             break;
@@ -2236,7 +2236,7 @@ static void sub_81A1370(void)
     }
 
     r10 = 0xFFFF;
-    r9 = -1;
+    r9 = INVALID_S32;
     for (i = 1; i < 4; i++)
     {
         if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)

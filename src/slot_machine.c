@@ -14,7 +14,7 @@
 #include "util.h"
 #include "text.h"
 #include "menu.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "bg.h"
 #include "gpu_regs.h"
 #include "coins.h"
@@ -1637,7 +1637,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_8102A44(void)
 {
-    if (FindTaskIdByFunc(sub_8102A64) == 0xff)
+    if (FindTaskIdByFunc(sub_8102A64) == INVALID_U8)
         return TRUE;
     else
         return FALSE;
@@ -2672,7 +2672,7 @@ s16 sub_8102D5C(s16 a0)
 
 /*static */bool8 sub_810432C(void)
 {
-    if (FindTaskIdByFunc(sub_810434C) == 0xFF)
+    if (FindTaskIdByFunc(sub_810434C) == INVALID_U8)
         return TRUE;
     return FALSE;
 }
@@ -3007,7 +3007,7 @@ s16 sub_8102D5C(s16 a0)
 
 /*static */bool8 sub_8104AEC(void)
 {
-    if (FindTaskIdByFunc(sub_8104B0C) == 0xFF)
+    if (FindTaskIdByFunc(sub_8104B0C) == INVALID_U8)
         return TRUE;
     else
         return FALSE;
@@ -3108,7 +3108,7 @@ s16 sub_8102D5C(s16 a0)
     task = gTasks + sSlotMachine->unk3D;
     task->data[1] = arg0;
 
-    for (i = 0; gUnknown_083ED048[arg0][i].unk00 != 0xFF; i++)
+    for (i = 0; gUnknown_083ED048[arg0][i].unk00 != INVALID_U8; i++)
     {
         u8 spriteId;
         spriteId = sub_8105BB4(
@@ -3138,7 +3138,7 @@ s16 sub_8102D5C(s16 a0)
 {
     u8 i;
     struct Task *task = gTasks + sSlotMachine->unk3D;
-    if ((u16)task->data[1] != 0xFFFF)
+    if ((u16)task->data[1] != INVALID_U16)
         gUnknown_083ED064[task->data[1]]();
     for (i = 4; i < 16; i++)
     {

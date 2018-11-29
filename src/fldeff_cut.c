@@ -6,7 +6,7 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "fldeff_cut.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -164,7 +164,7 @@ const struct SpritePalette gFieldEffectObjectPaletteInfo6 = {gFieldEffectObjectP
 
 static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = INVALID_U16,
     .paletteTag = 0x1000,
     .oam = &sOamData_CutGrass,
     .anims = sSpriteAnimTable_CutGrass,

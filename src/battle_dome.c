@@ -8,7 +8,7 @@
 #include "event_data.h"
 #include "overworld.h"
 #include "util.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "string_util.h"
 #include "random.h"
 #include "task.h"
@@ -3032,7 +3032,7 @@ static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
     s32 i = 0;
     s32 typePower = TYPE_x1;
 
-    if (move == MOVE_NONE || move == 0xFFFF || gBattleMoves[move].power == 0)
+    if (move == MOVE_NONE || move == INVALID_U16 || gBattleMoves[move].power == 0)
         return 0;
 
     defType1 = gBaseStats[targetSpecies].type1;
@@ -3434,14 +3434,14 @@ static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
         if (j != val)
             return gUnknown_0860D14C[j];
         else
-            return 0xFF;
+            return INVALID_U8;
     }
     else
     {
         if (!gSaveBlock2Ptr->frontier.domeTrainers[sIdToOpponentId[i][roundId]].isEliminated)
             return sIdToOpponentId[i][roundId];
         else
-            return 0xFF;
+            return INVALID_U8;
     }
 }
 
@@ -3562,7 +3562,7 @@ static void sub_8190400(u8 taskId)
         SetVBlankCallback(VblankCb0_BattleDome);
         sBattleDomeStruct = AllocZeroed(sizeof(*sBattleDomeStruct));
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
-            sBattleDomeStruct->arr[i] |= 0xFF;
+            sBattleDomeStruct->arr[i] |= INVALID_U8;
         LoadMonIconPalettes();
         i = CreateTask(sub_8190CD4, 0);
         gTasks[i].data[0] = 0;
@@ -3624,7 +3624,7 @@ static void SpriteCb_TrainerIconCardScrollUp(struct Sprite *sprite)
     {
         if (sprite->pos1.y >= 192)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -3644,7 +3644,7 @@ static void SpriteCb_TrainerIconCardScrollDown(struct Sprite *sprite)
     {
         if (sprite->pos1.y <= -32)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -3664,7 +3664,7 @@ static void SpriteCb_TrainerIconCardScrollLeft(struct Sprite *sprite)
     {
         if (sprite->pos1.x >= 272)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -3684,7 +3684,7 @@ static void SpriteCb_TrainerIconCardScrollRight(struct Sprite *sprite)
     {
         if (sprite->pos1.x <= -32)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             FreeAndDestroyTrainerPicSprite(sprite->data[3]);
         }
     }
@@ -3714,7 +3714,7 @@ static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
     {
         if (sprite->pos1.y >= 176)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             sub_80D2EF8(sprite);
         }
     }
@@ -3736,7 +3736,7 @@ static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
     {
         if (sprite->pos1.y <= -16)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             sub_80D2EF8(sprite);
         }
     }
@@ -3758,7 +3758,7 @@ static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
     {
         if (sprite->pos1.x >= 256)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             sub_80D2EF8(sprite);
         }
     }
@@ -3780,7 +3780,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
     {
         if (sprite->pos1.x <= -16)
         {
-            sBattleDomeStruct->arr[sprite->data[2]] = 0xFF;
+            sBattleDomeStruct->arr[sprite->data[2]] = INVALID_U8;
             sub_80D2EF8(sprite);
         }
     }
@@ -4005,7 +4005,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollUp;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4016,7 +4016,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollUp;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4029,7 +4029,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollUp;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4040,7 +4040,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollUp;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4121,7 +4121,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollDown;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4132,7 +4132,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollDown;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4145,7 +4145,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollDown;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4156,7 +4156,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollDown;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4204,7 +4204,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4215,7 +4215,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4228,7 +4228,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4239,7 +4239,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4287,7 +4287,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4298,7 +4298,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4311,7 +4311,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4322,7 +4322,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollLeft;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4368,7 +4368,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4379,7 +4379,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4392,7 +4392,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4403,7 +4403,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4451,7 +4451,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4462,7 +4462,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2] ^ 1;
@@ -4475,7 +4475,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_TrainerIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4486,7 +4486,7 @@ static void sub_8190CD4(u8 taskId)
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                     {
                         gSprites[sBattleDomeStruct->arr[i]].callback = SpriteCb_MonIconCardScrollRight;
                         gSprites[sBattleDomeStruct->arr[i]].data[0] = gTasks[taskId].data[2];
@@ -4556,12 +4556,12 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 2)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                         FreeAndDestroyTrainerPicSprite(sBattleDomeStruct->arr[i]);
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                         sub_80D2EF8(&gSprites[sBattleDomeStruct->arr[i]]);
                 }
             }
@@ -4569,12 +4569,12 @@ static void sub_8190CD4(u8 taskId)
             {
                 if (i < 10)
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                         FreeAndDestroyTrainerPicSprite(sBattleDomeStruct->arr[i]);
                 }
                 else
                 {
-                    if (sBattleDomeStruct->arr[i] != 0xFF)
+                    if (sBattleDomeStruct->arr[i] != INVALID_U8)
                         sub_80D2EF8(&gSprites[sBattleDomeStruct->arr[i]]);
                 }
             }
@@ -5483,13 +5483,13 @@ static u8 sub_8193BDC(u8 taskId)
     }
     else
     {
-        if (gMain.newKeys == DPAD_UP && gUnknown_0860CBF1[spriteId][roundId][0] != 0xFF)
+        if (gMain.newKeys == DPAD_UP && gUnknown_0860CBF1[spriteId][roundId][0] != INVALID_U8)
             arrId = 0;
-        else if (gMain.newKeys == DPAD_DOWN && gUnknown_0860CBF1[spriteId][roundId][1] != 0xFF)
+        else if (gMain.newKeys == DPAD_DOWN && gUnknown_0860CBF1[spriteId][roundId][1] != INVALID_U8)
             arrId = 1;
-        else if (gMain.newKeys == DPAD_LEFT && gUnknown_0860CBF1[spriteId][roundId][2] != 0xFF)
+        else if (gMain.newKeys == DPAD_LEFT && gUnknown_0860CBF1[spriteId][roundId][2] != INVALID_U8)
             arrId = 2;
-        else if (gMain.newKeys == DPAD_RIGHT && gUnknown_0860CBF1[spriteId][roundId][3] != 0xFF)
+        else if (gMain.newKeys == DPAD_RIGHT && gUnknown_0860CBF1[spriteId][roundId][3] != INVALID_U8)
             arrId = 3;
     }
 
@@ -6314,21 +6314,21 @@ static void DecideRoundWinners(u8 roundId)
         tournamentId1 = i;
         tournamentId2 = TournamentIdOfOpponent(roundId, gSaveBlock2Ptr->frontier.domeTrainers[tournamentId1].trainerId);
         // Frontier Brain always wins, check tournamentId1.
-        if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentId1].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId2 != 0xFF)
+        if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentId1].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId2 != INVALID_U8)
         {
             gSaveBlock2Ptr->frontier.domeTrainers[tournamentId2].isEliminated = 1;
             gSaveBlock2Ptr->frontier.domeTrainers[tournamentId2].eliminatedAt = roundId;
             gSaveBlock2Ptr->frontier.field_EC0[tournamentId2] = GetWinningMove(tournamentId1, tournamentId2, roundId);
         }
         // Frontier Brain always wins, check tournamentId2.
-        else if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != 0xFF)
+        else if (gSaveBlock2Ptr->frontier.domeTrainers[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != INVALID_U8)
         {
             gSaveBlock2Ptr->frontier.domeTrainers[tournamentId1].isEliminated = 1;
             gSaveBlock2Ptr->frontier.domeTrainers[tournamentId1].eliminatedAt = roundId;
             gSaveBlock2Ptr->frontier.field_EC0[tournamentId1] = GetWinningMove(tournamentId2, tournamentId1, roundId);
         }
         // Decide which one of two trainers wins!
-        else if (tournamentId2 != 0xFF)
+        else if (tournamentId2 != INVALID_U8)
         {
             // BUG: points1 and points2 are not cleared at the beginning of the loop resulting in not fair results.
 

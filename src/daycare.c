@@ -251,7 +251,7 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
             while ((learnedMove = MonTryLearningNewMove(mon, firstMove)) != 0)
             {
                 firstMove = FALSE;
-                if (learnedMove == 0xFFFF)
+                if (learnedMove == INVALID_U16)
                 {
                     // Mon already knows 4 moves.
                     DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
@@ -535,7 +535,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     s32 i, j;
     u8 temp[NUM_STATS];
 
-    ivs[selectedIv] = 0xff;
+    ivs[selectedIv] = INVALID_U8;
     for (i = 0; i < NUM_STATS; i++)
     {
         temp[i] = ivs[i];
@@ -544,7 +544,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     j = 0;
     for (i = 0; i < NUM_STATS; i++)
     {
-        if (temp[i] != 0xff)
+        if (temp[i] != INVALID_U8)
             ivs[j++] = temp[i];
     }
 }
@@ -684,7 +684,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == sHatchedEggEggMoves[j])
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == INVALID_U16)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                     break;
                 }
@@ -703,7 +703,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == INVALID_U16)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                 }
             }
@@ -728,7 +728,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             if (sHatchedEggLevelUpMoves[j] != MOVE_NONE && sHatchedEggFinalMoves[i] == sHatchedEggLevelUpMoves[j])
             {
-                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == 0xffff)
+                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == INVALID_U16)
                     DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFinalMoves[i]);
                 break;
             }
@@ -773,7 +773,7 @@ static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *dayca
 
     if (motherItem == ITEM_LIGHT_BALL || fatherItem == ITEM_LIGHT_BALL)
     {
-        if (GiveMoveToMon(mon, MOVE_VOLT_TACKLE) == 0xFFFF)
+        if (GiveMoveToMon(mon, MOVE_VOLT_TACKLE) == INVALID_U16)
             DeleteFirstMoveAndGiveMoveToMon(mon, MOVE_VOLT_TACKLE);
     }
 }
@@ -909,7 +909,7 @@ static bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
     }
 
     // try to trigger poke sex
-    if (daycare->offspringPersonality == 0 && validEggs == 2 && (daycare->mons[1].steps & 0xFF) == 0xFF)
+    if (daycare->offspringPersonality == 0 && validEggs == 2 && (daycare->mons[1].steps & 0xFF) == INVALID_U8)
     {
         u8 loveScore = GetDaycareCompatibilityScore(daycare);
         if (loveScore > (Random() * 100u) / USHRT_MAX)

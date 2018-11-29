@@ -8,7 +8,7 @@
 #include "trig.h"
 #include "decompress.h"
 #include "palette.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "strings.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -392,7 +392,7 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
     s32 i;
 
     u8 taskId = ListMenuInitInternal(listMenuTemplate, scrollOffset, selectedRow);
-    for (i = 0; rect[i].palNum != 0xFF; i++)
+    for (i = 0; rect[i].palNum != INVALID_U8; i++)
     {
         PutWindowRectTilemapOverridePalette(listMenuTemplate->windowId,
                                             rect[i].x,
@@ -465,7 +465,7 @@ s32 ListMenuHandleInputGetItemId(u8 listTaskId)
     }
 }
 
-#define TASK_NONE 0xFF
+#define TASK_NONE INVALID_U8
 
 void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 {
@@ -1143,7 +1143,7 @@ static void Task_ScrollIndicatorArrowPair(u8 taskId)
     struct ScrollIndicatorPair *data = (void*) gTasks[taskId].data;
     u16 currItem = (*data->scrollOffset);
 
-    if (currItem == data->fullyUpThreshold && currItem != 0xFFFF)
+    if (currItem == data->fullyUpThreshold && currItem != INVALID_U16)
         gSprites[data->topSpriteId].invisible = TRUE;
     else
         gSprites[data->topSpriteId].invisible = FALSE;

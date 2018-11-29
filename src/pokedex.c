@@ -8,7 +8,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "m4a.h"
 #include "overworld.h"
@@ -1271,7 +1271,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->seenCount = 0;
     pokedexView->ownCount = 0;
     for (i = 0; i <= 3; i++)
-        pokedexView->unk61E[i] |= 0xFFFF;
+        pokedexView->unk61E[i] |= INVALID_U16;
     pokedexView->unk628 = 0;
     pokedexView->unk62A = 0;
     pokedexView->unk62C = 0;
@@ -2459,7 +2459,7 @@ u32 sub_80BDACC(u16 num, s16 x, s16 y)
             return spriteId;
         }
     }
-    return 0xFFFF;
+    return INVALID_U16;
 }
 
 static void CreateInterfaceSprites(u8 a)
@@ -2717,8 +2717,8 @@ void sub_80BE4E0(struct Sprite *sprite)
 
         sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
         var = 0x10000 / gSineTable[sprite->data[5] + 0x40];
-        if (var > 0xFFFF)
-            var = 0xFFFF;
+        if (var > INVALID_U16)
+            var = INVALID_U16;
         SetOamMatrix(sprite->data[1] + 1, 0x100, 0, 0, var);
         sprite->oam.matrixNum = data1 + 1;
 
@@ -4627,12 +4627,12 @@ u32 sub_80C0E68(u16 a)
 u16 sub_80C0E9C(u16 num, s16 x, s16 y, u16 paletteSlot)
 {
     num = NationalPokedexNumToSpecies(num);
-    return CreateMonPicSprite_HandleDeoxys(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, 0xFFFF);
+    return CreateMonPicSprite_HandleDeoxys(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, INVALID_U16);
 }
 
 u16 sub_80C0EF8(u16 species, s16 x, s16 y, s8 paletteSlot)
 {
-    return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, 0xFFFF);
+    return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, INVALID_U16);
 }
 
 int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
@@ -4655,7 +4655,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     sPokedexView->pokemonListCount = resultsCount;
 
     // Search by name
-    if (abcGroup != 0xFF)
+    if (abcGroup != INVALID_U8)
     {
         for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
         {
@@ -4674,7 +4674,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by body color
-    if (bodyColor != 0xFF)
+    if (bodyColor != INVALID_U8)
     {
         for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
         {
@@ -4690,15 +4690,15 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by type
-    if (type1 != 0xFF || type2 != 0xFF)
+    if (type1 != INVALID_U8 || type2 != INVALID_U8)
     {
-        if (type1 == 0xFF)
+        if (type1 == INVALID_U8)
         {
             type1 = type2;
-            type2 = 0xFF;
+            type2 = INVALID_U8;
         }
 
-        if (type2 == 0xFF)
+        if (type2 == INVALID_U8)
         {
             for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
             {
@@ -4987,7 +4987,7 @@ void sub_80C170C(u8 taskId)
         return;
     }
 
-    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
+    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
@@ -4995,7 +4995,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
+    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
@@ -5003,7 +5003,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
+    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
@@ -5011,7 +5011,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
+    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != INVALID_U8)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
@@ -5475,12 +5475,12 @@ u8 sub_80C2318(u8 taskId, u8 b)
             return gUnknown_0856EFAE[r2];
         case 0:
             if (r2 == 0)
-                return 0xFF;
+                return INVALID_U8;
             else
                 return r2;
         case 1:
             if (r2 == 0)
-                return 0xFF;
+                return INVALID_U8;
             else
                 return r2 - 1;
         case 2:

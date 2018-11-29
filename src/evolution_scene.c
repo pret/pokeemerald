@@ -2,7 +2,7 @@
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
 #include "sprite.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "task.h"
 #include "palette.h"
 #include "main.h"
@@ -748,7 +748,7 @@ static void Task_EvolutionScene(u8 taskID)
                 GetMonData(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
 
-                if (var == 0xFFFF) // no place to learn it
+                if (var == INVALID_U16) // no place to learn it
                     gTasks[taskID].tState = 22;
                 else if (var == 0xFFFE) // it already knows that move
                     break;
@@ -1105,7 +1105,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 GetMonData(mon, MON_DATA_NICKNAME, text);
                 StringCopy10(gBattleTextBuff1, text);
 
-                if (var == 0xFFFF)
+                if (var == INVALID_U16)
                     gTasks[taskID].tState = 20;
                 else if (var == 0xFFFE)
                     break;

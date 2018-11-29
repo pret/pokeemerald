@@ -2,7 +2,7 @@
 #include "decompress.h"
 #include "constants/species.h"
 #include "text.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "pokemon.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};

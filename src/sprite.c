@@ -108,7 +108,7 @@ typedef void (*AffineAnimCmdFunc)(u8 matrixNum, struct Sprite *);
     0                         \
 }
 
-#define ANIM_END        0xFFFF
+#define ANIM_END        INVALID_U16
 #define AFFINE_ANIM_END 0x7FFF
 
 // forward declarations
@@ -204,7 +204,7 @@ const union AffineAnimCmd * const gDummySpriteAffineAnimTable[] = { &sDummyAffin
 const struct SpriteTemplate gDummySpriteTemplate =
 {
     .tileTag = 0,
-    .paletteTag = 0xFFFF,
+    .paletteTag = INVALID_U16,
     .oam = &gDummyOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -572,12 +572,12 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
 
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 
-    if (template->tileTag == 0xFFFF)
+    if (template->tileTag == INVALID_U16)
     {
         s16 tileNum;
         sprite->images = template->images;
         tileNum = AllocSpriteTiles((u8)(sprite->images->size / TILE_SIZE_4BPP));
-        if (tileNum == -1)
+        if (tileNum == INVALID_S16)
         {
             ResetSprite(sprite);
             return MAX_SPRITES;
@@ -595,7 +595,7 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
     if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
         InitSpriteAffineAnim(sprite);
 
-    if (template->paletteTag != 0xFFFF)
+    if (template->paletteTag != INVALID_U16)
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(template->paletteTag);
 
     return index;
@@ -740,7 +740,7 @@ s16 AllocSpriteTiles(u16 tileCount)
             i++;
 
             if (i == TOTAL_OBJ_TILE_COUNT)
-                return -1;
+                return INVALID_S16;
         }
 
         start = i;
@@ -751,7 +751,7 @@ s16 AllocSpriteTiles(u16 tileCount)
             i++;
 
             if (i == TOTAL_OBJ_TILE_COUNT)
-                return -1;
+                return INVALID_S16;
 
             if (!SPRITE_TILE_IS_ALLOCATED(i))
                 numTilesFound++;
@@ -877,7 +877,7 @@ void ResetAllSprites(void)
 
 void FreeSpriteTiles(struct Sprite *sprite)
 {
-    if (sprite->template->tileTag != 0xFFFF)
+    if (sprite->template->tileTag != INVALID_U16)
         FreeSpriteTilesByTag(sprite->template->tileTag);
 }
 
@@ -923,7 +923,7 @@ void BeginAnim(struct Sprite *sprite)
     sprite->animLoopCounter = 0;
     imageValue = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.imageValue;
 
-    if (imageValue != -1)
+    if (imageValue != INVALID_S16)
     {
         sprite->animBeginning = FALSE;
         duration = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;
@@ -1441,7 +1441,7 @@ u8 AllocOamMatrix(void)
         bit <<= 1;
     }
 
-    return 0xFF;
+    return INVALID_U8;
 }
 
 void FreeOamMatrix(u8 matrixNum)
@@ -1462,7 +1462,7 @@ void FreeOamMatrix(u8 matrixNum)
 void InitSpriteAffineAnim(struct Sprite *sprite)
 {
     u8 matrixNum = AllocOamMatrix();
-    if (matrixNum != 0xFF)
+    if (matrixNum != INVALID_U8)
     {
         CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
         sprite->oam.matrixNum = matrixNum;
@@ -1508,7 +1508,7 @@ void LoadSpriteSheets(const struct SpriteSheet *sheets)
 void FreeSpriteTilesByTag(u16 tag)
 {
     u8 index = IndexOfSpriteTileTag(tag);
-    if (index != 0xFF)
+    if (index != INVALID_U8)
     {
         u16 i;
         u16 *rangeStarts;
@@ -1523,7 +1523,7 @@ void FreeSpriteTilesByTag(u16 tag)
         for (i = start; i < start + count; i++)
             FREE_SPRITE_TILE(i);
 
-        sSpriteTileRangeTags[index] = 0xFFFF;
+        sSpriteTileRangeTags[index] = INVALID_U16;
     }
 }
 
@@ -1533,7 +1533,7 @@ void FreeSpriteTileRanges(void)
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
-        sSpriteTileRangeTags[i] = 0xFFFF;
+        sSpriteTileRangeTags[i] = INVALID_U16;
         SET_SPRITE_TILE_RANGE(i, 0, 0);
     }
 }
@@ -1541,8 +1541,8 @@ void FreeSpriteTileRanges(void)
 u16 GetSpriteTileStartByTag(u16 tag)
 {
     u8 index = IndexOfSpriteTileTag(tag);
-    if (index == 0xFF)
-        return 0xFFFF;
+    if (index == INVALID_U8)
+        return INVALID_U16;
     return sSpriteTileRanges[index * 2];
 }
 
@@ -1554,7 +1554,7 @@ u8 IndexOfSpriteTileTag(u16 tag)
         if (sSpriteTileRangeTags[i] == tag)
             return i;
 
-    return 0xFF;
+    return INVALID_U8;
 }
 
 u16 GetSpriteTileTagByTileStart(u16 start)
@@ -1563,16 +1563,16 @@ u16 GetSpriteTileTagByTileStart(u16 start)
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
-        if (sSpriteTileRangeTags[i] != 0xFFFF && sSpriteTileRanges[i * 2] == start)
+        if (sSpriteTileRangeTags[i] != INVALID_U16 && sSpriteTileRanges[i * 2] == start)
             return sSpriteTileRangeTags[i];
     }
 
-    return 0xFFFF;
+    return INVALID_U16;
 }
 
 void AllocSpriteTileRange(u16 tag, u16 start, u16 count)
 {
-    u8 freeIndex = IndexOfSpriteTileTag(0xFFFF);
+    u8 freeIndex = IndexOfSpriteTileTag(INVALID_U16);
     sSpriteTileRangeTags[freeIndex] = tag;
     SET_SPRITE_TILE_RANGE(freeIndex, start, count);
 }
@@ -1582,21 +1582,21 @@ void FreeAllSpritePalettes(void)
     u8 i;
     gReservedSpritePaletteCount = 0;
     for (i = 0; i < 16; i++)
-        sSpritePaletteTags[i] = 0xFFFF;
+        sSpritePaletteTags[i] = INVALID_U16;
 }
 
 u8 LoadSpritePalette(const struct SpritePalette *palette)
 {
     u8 index = IndexOfSpritePaletteTag(palette->tag);
 
-    if (index != 0xFF)
+    if (index != INVALID_U8)
         return index;
 
-    index = IndexOfSpritePaletteTag(0xFFFF);
+    index = IndexOfSpritePaletteTag(INVALID_U16);
 
-    if (index == 0xFF)
+    if (index == INVALID_U8)
     {
-        return 0xFF;
+        return INVALID_U8;
     }
     else
     {
@@ -1610,7 +1610,7 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
 {
     u8 i;
     for (i = 0; palettes[i].data != NULL; i++)
-        if (LoadSpritePalette(&palettes[i]) == 0xFF)
+        if (LoadSpritePalette(&palettes[i]) == INVALID_U8)
             break;
 }
 
@@ -1621,10 +1621,10 @@ void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
 
 u8 AllocSpritePalette(u16 tag)
 {
-    u8 index = IndexOfSpritePaletteTag(0xFFFF);
-    if (index == 0xFF)
+    u8 index = IndexOfSpritePaletteTag(INVALID_U16);
+    if (index == INVALID_U8)
     {
-        return 0xFF;
+        return INVALID_U8;
     }
     else
     {
@@ -1640,7 +1640,7 @@ u8 IndexOfSpritePaletteTag(u16 tag)
         if (sSpritePaletteTags[i] == tag)
             return i;
 
-    return 0xFF;
+    return INVALID_U8;
 }
 
 u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum)
@@ -1651,8 +1651,8 @@ u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum)
 void FreeSpritePaletteByTag(u16 tag)
 {
     u8 index = IndexOfSpritePaletteTag(tag);
-    if (index != 0xFF)
-        sSpritePaletteTags[index] = 0xFFFF;
+    if (index != INVALID_U8)
+        sSpritePaletteTags[index] = INVALID_U16;
 }
 
 void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables)

@@ -588,7 +588,7 @@ static const u8 sUnknown_0860AA64[][2] =
     {0, 2},
     {1, 2},
     {0, 2},
-    {0, 0xFF}
+    {0, INVALID_U8}
 };
 
 static const u8 sUnknown_0860AA80[][2] =
@@ -1666,7 +1666,7 @@ static void sub_818031C(struct Sprite *sprite)
     else
         amplitude = 0;
 
-    if (var5 == 0xFF)
+    if (var5 == INVALID_U8)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
         sprite->pos2.y = 0;
@@ -2570,7 +2570,7 @@ static void pokemonanimfunc_2C(struct Sprite *sprite)
         sprite->data[4] = 0;
     }
 
-    if (sUnknown_0860AA64[sprite->data[6]][1] == 0xFF)
+    if (sUnknown_0860AA64[sprite->data[6]][1] == INVALID_U8)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
@@ -4157,17 +4157,17 @@ static void sub_8183574(struct Sprite *sprite)
     u8 var9 = sprite->data[6];
     u8 var5 = sUnknown_0860AA80[sprite->data[5]][0];
     u8 var2 = var5;
-    if (var5 != 0xFF)
+    if (var5 != INVALID_U8)
         var5 = sprite->data[7];
     else
-        var5 = 0xFF; // needed to match
+        var5 = INVALID_U8; // needed to match
 
     var6 = sUnknown_0860AA80[sprite->data[5]][1];
     var7 = 0;
     if (var2 != 0xFE)
         var7 = (var6 - var9) * var5 / var6;
 
-    if (var5 == 0xFF)
+    if (var5 == INVALID_U8)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
         sprite->pos2.y = 0;
@@ -5278,7 +5278,7 @@ static const struct YellowBlendStruct sUnknown_0860ADCC[] =
     {0, 1},
     {1, 1},
     {0, 1},
-    {0, 0xFF}
+    {0, INVALID_U8}
 };
 
 static const struct YellowBlendStruct sUnknown_0860AE1C[] =
@@ -5296,7 +5296,7 @@ static const struct YellowBlendStruct sUnknown_0860AE1C[] =
     {0, 2},
     {1, 2},
     {0, 2},
-    {0, 0xFF}
+    {0, INVALID_U8}
 };
 
 static const struct YellowBlendStruct sUnknown_0860AE54[] =
@@ -5310,7 +5310,7 @@ static const struct YellowBlendStruct sUnknown_0860AE54[] =
     {0, 20},
     {1, 1},
     {0, 1},
-    {0, 0xFF}
+    {0, INVALID_U8}
 };
 
 static const struct YellowBlendStruct *const sUnknown_0860AE7C[] =
@@ -5324,7 +5324,7 @@ static void BackAnimBlendYellow(struct Sprite *sprite)
 {
     const struct YellowBlendStruct *array = sUnknown_0860AE7C[sprite->data[3]];
     sub_8184770(sprite);
-    if (array[sprite->data[6]].field_1 == 0xFF)
+    if (array[sprite->data[6]].field_1 == INVALID_U8)
     {
         sprite->pos2.x = 0;
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;

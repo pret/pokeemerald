@@ -1,6 +1,6 @@
 #include "global.h"
 #include "window.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "bg.h"
 #include "blit.h"
 
@@ -52,12 +52,12 @@ bool16 InitWindows(const struct WindowTemplate *templates)
         gWindows[i].tileData = NULL;
     }
 
-    for (i = 0, allocatedBaseBlock = 0, bgLayer = templates[i].bg; bgLayer != 0xFF && i < 0x20; ++i, bgLayer = templates[i].bg)
+    for (i = 0, allocatedBaseBlock = 0, bgLayer = templates[i].bg; bgLayer != INVALID_U8 && i < 0x20; ++i, bgLayer = templates[i].bg)
     {
         if (gUnneededFireRedVariable == 1)
         {
             allocatedBaseBlock = DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, 0, templates[i].width * templates[i].height, 0);
-            if (allocatedBaseBlock == -1)
+            if (allocatedBaseBlock == INVALID_S32)
                 return FALSE;
         }
 
@@ -65,7 +65,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
         {
             attrib = GetBgAttribute(bgLayer, 0x8);
 
-            if (attrib != 0xFFFF)
+            if (attrib != INVALID_U16)
             {
                 allocatedTilemapBuffer = AllocZeroed(attrib);
 
@@ -121,12 +121,12 @@ u16 AddWindow(const struct WindowTemplate *template)
 
     for (win = 0; win < WINDOWS_MAX; ++win)
     {
-        if ((bgLayer = gWindows[win].window.bg) == 0xFF)
+        if ((bgLayer = gWindows[win].window.bg) == INVALID_U8)
             break;
     }
 
     if (win == WINDOWS_MAX)
-        return 0xFF;
+        return INVALID_U8;
 
     bgLayer = template->bg;
     allocatedBaseBlock = 0;
@@ -135,20 +135,20 @@ u16 AddWindow(const struct WindowTemplate *template)
     {
         allocatedBaseBlock = DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, 0, template->width * template->height, 0);
 
-        if (allocatedBaseBlock == -1)
-            return 0xFF;
+        if (allocatedBaseBlock == INVALID_S32)
+            return INVALID_U8;
     }
 
     if (gUnknown_03002F70[bgLayer] == NULL)
     {
         attrib = GetBgAttribute(bgLayer, 0x8);
 
-        if (attrib != 0xFFFF)
+        if (attrib != INVALID_U16)
         {
             allocatedTilemapBuffer = AllocZeroed(attrib);
 
             if (allocatedTilemapBuffer == NULL)
-                return 0xFF;
+                return INVALID_U8;
 
             for (i = 0; i < attrib; ++i)
                 allocatedTilemapBuffer[i] = 0;
@@ -167,7 +167,7 @@ u16 AddWindow(const struct WindowTemplate *template)
             Free(gUnknown_03002F70[bgLayer]);
             gUnknown_03002F70[bgLayer] = allocatedTilemapBuffer;
         }
-        return 0xFF;
+        return INVALID_U8;
     }
 
     gWindows[win].tileData = allocatedTilemapBuffer;
@@ -190,12 +190,12 @@ int AddWindowWithoutTileMap(const struct WindowTemplate *template)
 
     for (win = 0; win < WINDOWS_MAX; ++win)
     {
-        if (gWindows[win].window.bg == 0xFF)
+        if (gWindows[win].window.bg == INVALID_U8)
             break;
     }
 
     if (win == WINDOWS_MAX)
-        return 0xFF;
+        return INVALID_U8;
 
     bgLayer = template->bg;
     allocatedBaseBlock = 0;
@@ -204,8 +204,8 @@ int AddWindowWithoutTileMap(const struct WindowTemplate *template)
     {
         allocatedBaseBlock = DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, 0, template->width * template->height, 0);
 
-        if (allocatedBaseBlock == -1)
-            return 0xFF;
+        if (allocatedBaseBlock == INVALID_S32)
+            return INVALID_U8;
     }
 
     gWindows[win].window = *template;
@@ -609,21 +609,21 @@ u16 AddWindow8Bit(struct WindowTemplate *template)
 
     for (windowId = 0; windowId < 32; windowId++)
     {
-        if (gWindows[windowId].window.bg == 0xFF)
+        if (gWindows[windowId].window.bg == INVALID_U8)
             break;
     }
     if (windowId == WINDOWS_MAX)
-        return 0xFF;
+        return INVALID_U8;
     bgLayer = template->bg;
     if (gUnknown_03002F70[bgLayer] == 0)
     {
         u16 attribute = GetBgAttribute(bgLayer, 8);
-        if (attribute != 0xFFFF)
+        if (attribute != INVALID_U16)
         {
             s32 i;
             memAddress = Alloc(attribute);
             if (memAddress == NULL)
-                return 0xFF;
+                return INVALID_U8;
             for (i = 0; i < attribute; i++) // if we're going to zero out the memory anyway, why not call AllocZeroed?
                 memAddress[i] = 0;
             gUnknown_03002F70[bgLayer] = memAddress;
@@ -638,7 +638,7 @@ u16 AddWindow8Bit(struct WindowTemplate *template)
             Free(gUnknown_03002F70[bgLayer]);
             gUnknown_03002F70[bgLayer] = NULL;
         }
-        return 0xFF;
+        return INVALID_U8;
     }
     else
     {

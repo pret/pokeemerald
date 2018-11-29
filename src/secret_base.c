@@ -3,7 +3,7 @@
 #include "global.h"
 #include "constants/bg_event_constants.h"
 #include "constants/decorations.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "main.h"
 #include "task.h"
 #include "palette.h"
@@ -1385,7 +1385,7 @@ s16 sub_80EA990(u8 secretBaseRecordId)
             return i;
         }
     }
-    return -1;
+    return INVALID_S16;
 }
 
 u8 sub_80EA9D8(void)
@@ -1427,7 +1427,7 @@ u8 sub_80EAA64(struct SecretBaseRecord *base, u32 version, u32 language)
     secretBaseRecordId = sub_80EA990(base->secretBaseId);
     if (secretBaseRecordId != 0)
     {
-        if (secretBaseRecordId != -1)
+        if (secretBaseRecordId != INVALID_S16)
         {
             if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_0 == 1)
             {
@@ -1757,7 +1757,7 @@ void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
                 gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 = 0;
             }
         }
-        if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0 && gSaveBlock1Ptr->secretBases[0].sbr_field_e != 0xFFFF)
+        if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0 && gSaveBlock1Ptr->secretBases[0].sbr_field_e != INVALID_U16)
         {
             gSaveBlock1Ptr->secretBases[0].sbr_field_e ++;
         }

@@ -176,7 +176,7 @@ static void sub_81D9C90(u8 *array, s32 arg1, s32 arg2)
     s32 i, j;
     u8 var1, var2;
 
-    for (i = arg2 - 1; i != -1; i--)
+    for (i = arg2 - 1; i != INVALID_S32; i--)
     {
         var1 = (array[0] & 0x80) >> 7;
 

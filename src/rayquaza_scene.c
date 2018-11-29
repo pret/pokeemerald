@@ -5,7 +5,7 @@
 #include "graphics.h"
 #include "bg.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "scanline_effect.h"
 #include "menu.h"

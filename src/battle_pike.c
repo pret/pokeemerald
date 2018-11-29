@@ -9,7 +9,7 @@
 #include "task.h"
 #include "battle_tower.h"
 #include "party_menu.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "script.h"
 #include "battle_setup.h"
@@ -1228,7 +1228,7 @@ static void sub_81A7E60(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 
 static bool8 sub_81A7EC4(void)
 {
-    if (FindTaskIdByFunc(sub_81A7D54) == 0xFF)
+    if (FindTaskIdByFunc(sub_81A7D54) == INVALID_U8)
         return TRUE;
     else
         return FALSE;
@@ -1448,7 +1448,7 @@ static void sub_81A84B4(void)
     u8 i;
 
     for (i = 0; i < 14; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+        gSaveBlock2Ptr->frontier.field_CB4[i] |= INVALID_U16;
 }
 
 static void sub_81A84EC(void)

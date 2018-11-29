@@ -1,5 +1,5 @@
 	.include "src/main.o"
-	.include "src/malloc.o"
+	.include "src/alloc.o"
 	.include "src/dma3_manager.o"
 	.include "src/gpu_regs.o"
 	.include "src/bg.o"

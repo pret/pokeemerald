@@ -218,7 +218,7 @@ static void sub_81BAE98(void)
 
 static void sub_81BAF00(void)
 {
-    if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 == 0xFF)
+    if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 == INVALID_U8)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 = 0;
         PlayerPartnerBufferExecCompleted();
@@ -294,7 +294,7 @@ static void CompleteOnHealthbarDone(void)
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
-    if (hpValue != -1)
+    if (hpValue != INVALID_S16)
     {
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
     }
@@ -397,7 +397,7 @@ static void sub_81BB4E4(u8 taskId)
 
         r4 = MoveBattleBar(battlerId, gHealthboxSpriteIds[battlerId], EXP_BAR, 0);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[battlerId]);
-        if (r4 == -1)
+        if (r4 == INVALID_S16)
         {
             u8 level;
             s32 currExp;

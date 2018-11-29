@@ -695,7 +695,7 @@ static void DrawClosedDoorTiles(const struct DoorGraphics *gfx, u32 x, u32 y)
 
 static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame *frame, u32 x, u32 y)
 {
-    if (frame->offset == 0xFFFF)
+    if (frame->offset == INVALID_U16)
     {
         DrawClosedDoorTiles(gfx, x, y);
         if (sub_808A964())

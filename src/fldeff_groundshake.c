@@ -2,7 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "random.h"
 #include "roulette_util.h"
 #include "script.h"
@@ -236,7 +236,7 @@ static void sub_81BE968(void)
     u8 taskId;
 
     taskId = FindTaskIdByFunc(sub_81BE9C0);
-    if(taskId != 0xFF)
+    if(taskId != INVALID_U8)
         gTasks[taskId].data[0]++;
 }
 

@@ -738,7 +738,7 @@ void sub_811131C(struct Sprite *sprite)
     if (TranslateAnimArc(sprite))
     {
         u8 taskId = FindTaskIdByFunc(sub_81110A4);
-        if (taskId != 0xFF)
+        if (taskId != INVALID_U8)
             gTasks[taskId].data[11]--;
 
         DestroySprite(sprite);

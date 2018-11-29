@@ -13,7 +13,7 @@
 #include "lilycove_lady.h"
 #include "list_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -435,7 +435,7 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void))
     sPokeblockMenu = Alloc(sizeof(*sPokeblockMenu));
     sPokeblockMenu->caseId = caseId;
     sPokeblockMenu->callbackOnUse = NULL;
-    sPokeblockMenu->unkTaskId = 0xFF;
+    sPokeblockMenu->unkTaskId = INVALID_U8;
     sPokeblockMenu->isSwapping = FALSE;
     sSavedPokeblockData.callback = callback;
 
@@ -901,7 +901,7 @@ static void sub_8136344(void)
 
 static void sub_81363BC(void)
 {
-    if (sPokeblockMenu->unkTaskId == 0xFF)
+    if (sPokeblockMenu->unkTaskId == INVALID_U8)
     {
         sPokeblockMenu->unkTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xB0, 8, 0x98, sPokeblockMenu->itemsNo - sPokeblockMenu->maxShowed,
                                                                             0x456, 0x456, &sSavedPokeblockData.lastItemPage);
@@ -910,10 +910,10 @@ static void sub_81363BC(void)
 
 static void sub_8136418(void)
 {
-    if (sPokeblockMenu->unkTaskId != 0xFF)
+    if (sPokeblockMenu->unkTaskId != INVALID_U8)
     {
         RemoveScrollIndicatorArrowPair(sPokeblockMenu->unkTaskId);
-        sPokeblockMenu->unkTaskId = 0xFF;
+        sPokeblockMenu->unkTaskId = INVALID_U8;
     }
 }
 
@@ -1016,7 +1016,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
                 break;
             case LIST_B_PRESSED:
                 PlaySE(SE_SELECT);
-                gSpecialVar_Result = 0xFFFF;
+                gSpecialVar_Result = INVALID_U16;
                 gSpecialVar_ItemId = 0;
                 FadePaletteAndSetTaskToClosePokeblockCase(taskId);
                 break;

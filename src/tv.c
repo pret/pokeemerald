@@ -30,7 +30,7 @@
 #include "text.h"
 #include "script_menu.h"
 #include "naming_screen.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "region_map.h"
 #include "constants/region_map_sections.h"
 #include "decoration.h"
@@ -799,7 +799,7 @@ u8 special_0x44(void)
             j --;
         }
     } while (j != selIdx);
-    return 0xFF;
+    return INVALID_U8;
 }
 
 u8 FindAnyTVShowOnTheAir(void)
@@ -807,9 +807,9 @@ u8 FindAnyTVShowOnTheAir(void)
     u8 response;
 
     response = special_0x44();
-    if (response == 0xFF)
+    if (response == INVALID_U8)
     {
-        return 0xFF;
+        return INVALID_U8;
     }
     if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE && gSaveBlock1Ptr->tvShows[response].common.kind == TVSHOW_MASS_OUTBREAK)
     {
@@ -833,7 +833,7 @@ void UpdateTVScreensOnMap(int width, int height)
             {
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
-            else if (FlagGet(FLAG_SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+            else if (FlagGet(FLAG_SYS_TV_START) && (FindAnyTVShowOnTheAir() != INVALID_U8 || FindAnyTVNewsOnTheAir() != INVALID_U8 || IsTVShowInSearchOfTrainersAiring()))
             {
                 FlagClear(FLAG_SYS_TV_WATCH);
                 SetTVMetatilesOnMap(width, height, 0x3);
@@ -887,7 +887,7 @@ u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
             return i;
         }
     }
-    return 0xFF;
+    return INVALID_U8;
 }
 
 u8 special_0x4a(void)
@@ -932,7 +932,7 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.playerMon1Species;
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMovePlayer;
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != 0xFF)
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != INVALID_U8)
     {
         gSaveBlock1Ptr->gabbyAndTyData.battleNum ++;
     }
@@ -1007,7 +1007,7 @@ bool8 IsTVShowInSearchOfTrainersAiring(void)
 
 bool8 GabbyAndTyGetLastQuote(void)
 {
-    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == 0xFFFF)
+    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == INVALID_U16)
     {
         return FALSE;
     }
@@ -1125,7 +1125,7 @@ void PutPokemonTodayCaughtOnAir(void)
         if (!rbernoulli(1, 1) && StringCompare(gSpeciesNames[gBattleResults.caughtMonSpecies], gBattleResults.caughtMonNick))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-            if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
+            if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
             {
                 for (i = 0; i < 11; i ++)
                 {
@@ -1206,7 +1206,7 @@ void PutPokemonTodayFailedOnTheAir(void)
         if (ct > 2 && (gBattleOutcome == B_OUTCOME_MON_FLED || gBattleOutcome == B_OUTCOME_WON))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-            if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_POKEMON_TODAY_FAILED, FALSE) != TRUE)
+            if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_POKEMON_TODAY_FAILED, FALSE) != TRUE)
             {
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                 show->pokemonTodayFailed.kind = TVSHOW_POKEMON_TODAY_FAILED;
@@ -1282,7 +1282,7 @@ void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlaye
     u8 name[32];
 
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_BATTLE_UPDATE);
         if (gSpecialVar_Result != 1)
@@ -1329,7 +1329,7 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 unus
     u8 name[32];
 
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot == -1)
+    if (sCurTVShowSlot == INVALID_S8)
     {
         return FALSE;
     }
@@ -1396,7 +1396,7 @@ void ContestLiveUpdates_BeforeInterview_1(u8 a0)
 
     DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show = &gSaveBlock1Ptr->tvShows[24];
         show->contestLiveUpdates.round1Rank = a0;
@@ -1410,7 +1410,7 @@ void ContestLiveUpdates_BeforeInterview_2(u8 a0)
 
     show = &gSaveBlock1Ptr->tvShows[24];
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show->contestLiveUpdates.round2Rank = a0;
     }
@@ -1422,7 +1422,7 @@ void ContestLiveUpdates_BeforeInterview_3(u8 a0)
 
     show = &gSaveBlock1Ptr->tvShows[24];
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show->contestLiveUpdates.appealFlags1 = a0;
     }
@@ -1434,7 +1434,7 @@ void ContestLiveUpdates_BeforeInterview_4(u16 a0)
 
     show = &gSaveBlock1Ptr->tvShows[24];
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show->contestLiveUpdates.move = a0;
     }
@@ -1446,7 +1446,7 @@ void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
 
     show = &gSaveBlock1Ptr->tvShows[24];
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show->contestLiveUpdates.winningSpecies = gContestMons[a1].species;
         StringCopy(show->contestLiveUpdates.winningTrainerName, gContestMons[a1].trainerName);
@@ -1507,7 +1507,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
     show = &gSaveBlock1Ptr->tvShows[24];
     InterviewBefore_BravoTrainerPkmnProfile();
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
         show->bravoTrainer.move = a0;
@@ -1521,7 +1521,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
 
     show = &gSaveBlock1Ptr->tvShows[24];
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show->bravoTrainer.contestResult = a0;
         show->bravoTrainer.contestCategory = gSpecialVar_ContestCategory;
@@ -1577,7 +1577,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
      && !rbernoulli(1, 3))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
+        if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
         {
             TV_SortPurchasesByQuantity();
             if (gMartPurchaseHistory[0].quantity >= 20)
@@ -1742,7 +1742,7 @@ static void sub_80ED718(void)
         if (!rbernoulli(1, 200))
         {
             sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-            if (sCurTVShowSlot != -1)
+            if (sCurTVShowSlot != INVALID_S8)
             {
                 outbreakIdx = Random() % ARRAY_COUNT(sPokeOutbreakSpeciesList);
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
@@ -1843,7 +1843,7 @@ void sub_80ED950(bool8 flag)
             PutFishingAdviceShowOnTheAir();
         }
         sPokemonAnglerAttemptCounters &= 0xFF;
-        if (sPokemonAnglerAttemptCounters != 0xFF)
+        if (sPokemonAnglerAttemptCounters != INVALID_U8)
         {
             sPokemonAnglerAttemptCounters += 0x01;
         }
@@ -1855,7 +1855,7 @@ void sub_80ED950(bool8 flag)
             PutFishingAdviceShowOnTheAir();
         }
         sPokemonAnglerAttemptCounters &= 0xFF00;
-        if (sPokemonAnglerAttemptCounters >> 8 != 0xFF)
+        if (sPokemonAnglerAttemptCounters >> 8 != INVALID_U8)
         {
             sPokemonAnglerAttemptCounters += 0x0100;
         }
@@ -1867,7 +1867,7 @@ void PutFishingAdviceShowOnTheAir(void)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_FISHING_ADVICE, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_FISHING_ADVICE, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->pokemonAngler.kind = TVSHOW_FISHING_ADVICE;
@@ -1910,7 +1910,7 @@ void sub_80EDA80(void)
     if (!rbernoulli(1, 1))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_WORLD_OF_MASTERS, FALSE) != TRUE)
+        if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_WORLD_OF_MASTERS, FALSE) != TRUE)
         {
             show2 = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
             show2->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
@@ -1936,7 +1936,7 @@ void sub_80EDB44(void)
 
     HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TODAYS_RIVAL_TRAINER, TRUE);
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->rivalTrainer.kind = TVSHOW_TODAYS_RIVAL_TRAINER;
@@ -1984,7 +1984,7 @@ void sub_80EDC60(const u16 *words)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TREND_WATCHER, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TREND_WATCHER, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->trendWatcher.kind = TVSHOW_TREND_WATCHER;
@@ -2003,7 +2003,7 @@ void sub_80EDCE8(void)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TREASURE_INVESTIGATORS, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TREASURE_INVESTIGATORS, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->treasureInvestigators.kind = TVSHOW_TREASURE_INVESTIGATORS;
@@ -2024,7 +2024,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
     u16 nCoinsWon;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_FIND_THAT_GAMER, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_FIND_THAT_GAMER, FALSE) != TRUE)
     {
         flag = FALSE;
         switch (sFindThatGamerWhichGame)
@@ -2207,7 +2207,7 @@ void TV_PutSecretBaseVisitOnTheAir(void)
 
     HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SECRET_BASE_VISIT, TRUE);
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->secretBaseVisit.kind = TVSHOW_SECRET_BASE_VISIT;
@@ -2227,7 +2227,7 @@ void sub_80EE184(void)
     u16 balls;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_BREAKING_NEWS, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_BREAKING_NEWS, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->breakingNews.kind = TVSHOW_BREAKING_NEWS;
@@ -2298,7 +2298,7 @@ void sub_80EE2CC(void)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_LOTTO_WINNER, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_LOTTO_WINNER, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->lottoWinner.kind = TVSHOW_LOTTO_WINNER;
@@ -2318,7 +2318,7 @@ void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u1
     u8 j;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_BATTLE_SEMINAR, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_BATTLE_SEMINAR, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->battleSeminar.kind = TVSHOW_BATTLE_SEMINAR;
@@ -2347,7 +2347,7 @@ void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SAFARI_FAN_CLUB, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SAFARI_FAN_CLUB, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->safariFanClub.kind = TVSHOW_SAFARI_FAN_CLUB;
@@ -2365,7 +2365,7 @@ void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_CUTIES, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_CUTIES, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->cuties.kind = TVSHOW_CUTIES;
@@ -2440,7 +2440,7 @@ void sub_80EE72C(void)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TRAINER_FAN_CLUB, FALSE) != TRUE)
+    if (sCurTVShowSlot != INVALID_S8 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_TRAINER_FAN_CLUB, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->trainerFanClub.kind = TVSHOW_TRAINER_FAN_CLUB;
@@ -2456,7 +2456,7 @@ void sub_80EE72C(void)
 bool8 sub_80EE7C0(void)
 {
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot == -1)
+    if (sCurTVShowSlot == INVALID_S8)
     {
         return TRUE;
     }
@@ -2493,7 +2493,7 @@ bool8 sub_80EE818(void)
         }
     }
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot == -1)
+    if (sCurTVShowSlot == INVALID_S8)
     {
         return FALSE;
     }
@@ -2557,7 +2557,7 @@ void sub_80EEA70(void)
     if (HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SECRET_BASE_SECRETS, FALSE) != TRUE)
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1)
+        if (sCurTVShowSlot != INVALID_S8)
         {
             show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
             show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
@@ -2608,7 +2608,7 @@ static void sub_80EEBF4(u8 actionIdx)
 
     HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_NUMBER_ONE, TRUE);
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1)
+    if (sCurTVShowSlot != INVALID_S8)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->numberOne.kind = TVSHOW_NUMBER_ONE;
@@ -2665,7 +2665,7 @@ static void sub_80EED88(void)
     if (FlagGet(FLAG_SYS_GAME_CLEAR))
     {
         sCurTVShowSlot = sub_80EEE30(gSaveBlock1Ptr->pokeNews);
-        if (sCurTVShowSlot != -1 && rbernoulli(1, 100) != TRUE)
+        if (sCurTVShowSlot != INVALID_S8 && rbernoulli(1, 100) != TRUE)
         {
             newsKind = (Random() % 4) + POKENEWS_SLATEPORT;
             if (sub_80EF0E4(newsKind) != TRUE)
@@ -2689,7 +2689,7 @@ s8 sub_80EEE30(PokeNews *pokeNews)
             return i;
         }
     }
-    return -1;
+    return INVALID_S8;
 }
 
 void ClearPokemonNews(void)
@@ -2742,7 +2742,7 @@ u8 FindAnyTVNewsOnTheAir(void)
             return i;
         }
     }
-    return -1;
+    return INVALID_U8;
 }
 
 void DoPokeNews(void)
@@ -2751,7 +2751,7 @@ void DoPokeNews(void)
     u16 n;
 
     i = FindAnyTVNewsOnTheAir();
-    if (i == 0xFF)
+    if (i == INVALID_U8)
     {
         gSpecialVar_Result = FALSE;
     }
@@ -3252,7 +3252,7 @@ static void sub_80EFA88(void)
 {
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     gSpecialVar_0x8006 = sCurTVShowSlot;
-    if (sCurTVShowSlot == -1)
+    if (sCurTVShowSlot == INVALID_S8)
     {
         gSpecialVar_Result = TRUE;
     }
@@ -3273,7 +3273,7 @@ s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *shows)
             return i;
         }
     }
-    return -1;
+    return INVALID_S8;
 }
 
 s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *shows)
@@ -3287,7 +3287,7 @@ s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *shows)
             return i;
         }
     }
-    return -1;
+    return INVALID_S8;
 }
 
 bool8 TV_BernoulliTrial(u16 ratio)
@@ -3310,7 +3310,7 @@ void TV_FanClubLetter_RandomWordToStringVar3(TVShow *show)
         {
             i = 0;
         }
-        if (show->fanclubLetter.words[i] != 0xFFFF)
+        if (show->fanclubLetter.words[i] != INVALID_U16)
         {
             break;
         }
@@ -3677,7 +3677,7 @@ static void sub_80F0358(TVShow player1[25], TVShow player2[25], TVShow player3[2
                 sRecordMixingPartnersWithoutShowsToShare = i;
             }
             sTVShowMixingCurSlot = sub_80F06D0(argslist[i][0]);
-            if (sTVShowMixingCurSlot == -1)
+            if (sTVShowMixingCurSlot == INVALID_S8)
             {
                 sRecordMixingPartnersWithoutShowsToShare ++;
                 if (sRecordMixingPartnersWithoutShowsToShare == sTVShowMixingNumPlayers)
@@ -3690,7 +3690,7 @@ static void sub_80F0358(TVShow player1[25], TVShow player2[25], TVShow player3[2
                 for (j = 0; j < sTVShowMixingNumPlayers - 1; j ++)
                 {
                     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(argslist[(i + j + 1) % sTVShowMixingNumPlayers][0]);
-                    if (sCurTVShowSlot != -1
+                    if (sCurTVShowSlot != INVALID_S8
                         && sub_80F049C(&argslist[(i + j + 1) % sTVShowMixingNumPlayers][0], &argslist[i][0], (i + j + 1) % sTVShowMixingNumPlayers) == 1)
                     {
                         break;
@@ -3801,7 +3801,7 @@ static s8 sub_80F06D0(TVShow *tvShows)
             return i;
         }
     }
-    return -1;
+    return INVALID_S8;
 }
 
 #ifdef NONMATCHING
@@ -4486,12 +4486,12 @@ static void sub_80F0D60(PokeNews player1[16], PokeNews player2[16], PokeNews pla
         for (j = 0; j < sTVShowNewsMixingNumPlayers; j ++)
         {
             sTVShowMixingCurSlot = sub_80F0ECC(*argslist[j], i);
-            if (sTVShowMixingCurSlot != -1)
+            if (sTVShowMixingCurSlot != INVALID_S8)
             {
                 for (k = 0; k < sTVShowNewsMixingNumPlayers - 1; k++)
                 {
                     sCurTVShowSlot = sub_80EEE30(*argslist[(j + k + 1) % sTVShowNewsMixingNumPlayers]);
-                    if (sCurTVShowSlot != -1)
+                    if (sCurTVShowSlot != INVALID_S8)
                     {
                         sub_80F0E58(argslist[(j + k + 1) % sTVShowNewsMixingNumPlayers], argslist[j]);
                     }
@@ -4538,7 +4538,7 @@ static s8 sub_80F0ECC(PokeNews *pokeNews, u8 idx)
 {
     if (pokeNews[idx].kind == POKENEWS_NONE)
     {
-        return -1;
+        return INVALID_S8;
     }
     return idx;
 }
@@ -7425,7 +7425,7 @@ static void DoTVShowSecretBaseSecrets(void)
                     }
                     break;
                 default:
-                    for (i = 0; i < 0xFFFF; i ++)
+                    for (i = 0; i < INVALID_U16; i ++)
                     {
                         sTVSecretBaseSecretsRandomValues[1] = Random() % bitCount;
                         if (sTVSecretBaseSecretsRandomValues[1] != sTVSecretBaseSecretsRandomValues[0])
@@ -7447,7 +7447,7 @@ static void DoTVShowSecretBaseSecrets(void)
             }
             else
             {
-                for (i = 0; i < 0xFFFF; i ++)
+                for (i = 0; i < INVALID_U16; i ++)
                 {
                     sTVSecretBaseSecretsRandomValues[2] = Random() % bitCount;
                     if (sTVSecretBaseSecretsRandomValues[2] != sTVSecretBaseSecretsRandomValues[0] && sTVSecretBaseSecretsRandomValues[2] != sTVSecretBaseSecretsRandomValues[1])

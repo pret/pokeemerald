@@ -2,7 +2,7 @@
 // Includes
 #include "global.h"
 #include "m4a.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "reset_save_heap.h"
 #include "save.h"
 #include "bg.h"
@@ -2250,7 +2250,7 @@ static bool8 DoHandshake(void)
     u16 minRecv;
 
     playerCount = 0;
-    minRecv = 0xFFFF;
+    minRecv = INVALID_U16;
     if (gLink.handshakeAsMaster == TRUE)
     {
         REG_SIOMLT_SEND = MASTER_HANDSHAKE;
@@ -2274,7 +2274,7 @@ static bool8 DoHandshake(void)
         }
         else
         {
-            if (gLink.tempRecvBuffer[i] != 0xFFFF)
+            if (gLink.tempRecvBuffer[i] != INVALID_U16)
             {
                 playerCount = 0;
             }

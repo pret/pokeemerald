@@ -8,7 +8,7 @@
 #include "fieldmap.h"
 #include "global.fieldmap.h"
 #include "gpu_regs.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "random.h"
 #include "script.h"
@@ -302,7 +302,7 @@ static void sub_81BED50(u8 taskId)
     case 4:
         UnsetBgTilemapBuffer(0);
         anotherTaskId = FindTaskIdByFunc(sub_81BEBB4);
-        if (anotherTaskId != 0xFF)
+        if (anotherTaskId != INVALID_U8)
             DestroyTask(anotherTaskId);
         sUnknown_0203CF14[1] = sUnknown_0203CF14[0] = 0;
         sub_81BEB90();

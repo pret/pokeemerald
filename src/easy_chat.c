@@ -1,7 +1,7 @@
 
 // Includes
 #include "global.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "overworld.h"

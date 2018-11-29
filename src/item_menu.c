@@ -23,7 +23,7 @@
 #include "link.h"
 #include "mail.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "money.h"
@@ -532,11 +532,11 @@ void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)
         if (temp <= 1)
             gUnknown_0203CE54->unk81B = 1;
         gUnknown_0203CE54->unk0 = 0;
-        gUnknown_0203CE54->unk81A = 0xFF;
+        gUnknown_0203CE54->unk81A = INVALID_U8;
         gUnknown_0203CE54->unk81E = -1;
         gUnknown_0203CE54->unk81F = -1;
-        memset(gUnknown_0203CE54->unk804, 0xFF, sizeof(gUnknown_0203CE54->unk804));
-        memset(gUnknown_0203CE54->unk810, 0xFF, 10);
+        memset(gUnknown_0203CE54->unk804, INVALID_U8, sizeof(gUnknown_0203CE54->unk804));
+        memset(gUnknown_0203CE54->unk810, INVALID_U8, 10);
         SetMainCallback2(CB2_Bag);
     }
 }
@@ -819,7 +819,7 @@ void bag_menu_change_item_callback(s32 a, bool8 b, struct ListMenu *unused)
         PlaySE(SE_SELECT);
         ShakeBagVisual();
     }
-    if (gUnknown_0203CE54->unk81A == 0xFF)
+    if (gUnknown_0203CE54->unk81A == INVALID_U8)
     {
         RemoveBagItemIconSprite(1 ^ gUnknown_0203CE54->unk81B_1);
         if (a != -2)
@@ -840,7 +840,7 @@ void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a)
     int offset;
     if (item_index_in_pocket != -2)
     {
-        if (gUnknown_0203CE54->unk81A != 0xFF)
+        if (gUnknown_0203CE54->unk81A != INVALID_U8)
         {
             if (gUnknown_0203CE54->unk81A == (u8)item_index_in_pocket)
                 bag_menu_print_cursor(a, 2);
@@ -897,7 +897,7 @@ void bag_menu_print_cursor_(u8 a, u8 b)
 
 void bag_menu_print_cursor(u8 a, u8 b)
 {
-    if (b == 0xFF)
+    if (b == INVALID_U8)
         FillWindowPixelRect(0, 0, 0, a, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
         bag_menu_print(0, 1, gText_SelectorArrow2, 0, a, 0, 0, 0, b);
@@ -906,32 +906,32 @@ void bag_menu_print_cursor(u8 a, u8 b)
 
 void bag_menu_add_pocket_scroll_arrow_indicators_maybe(void)
 {
-    if (gUnknown_0203CE54->unk81E == 0xFF)
+    if (gUnknown_0203CE54->unk81E == INVALID_U8)
         gUnknown_0203CE54->unk81E = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0xAC, 12, 0x94, gUnknown_0203CE54->unk829[gUnknown_0203CE58.pocket] - gUnknown_0203CE54->unk82E[gUnknown_0203CE58.pocket], 0x6E, 0x6E, &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket]);
 }
 
 void sub_81AB824(void)
 {
-    if (gUnknown_0203CE54->unk81E != 0xFF)
+    if (gUnknown_0203CE54->unk81E != INVALID_U8)
     {
         RemoveScrollIndicatorArrowPair(gUnknown_0203CE54->unk81E);
-        gUnknown_0203CE54->unk81E = 0xFF;
+        gUnknown_0203CE54->unk81E = INVALID_U8;
     }
     sub_81AB89C();
 }
 
 void bag_menu_add_list_scroll_arrow_indicators_maybe(void)
 {
-    if (gUnknown_0203CE54->unk81B != 1 && gUnknown_0203CE54->unk81F == 0xFF)
+    if (gUnknown_0203CE54->unk81B != 1 && gUnknown_0203CE54->unk81F == INVALID_U8)
         gUnknown_0203CE54->unk81F = AddScrollIndicatorArrowPair(&gUnknown_08614094, &gUnknown_0203CE58.unk6);
 }
 
 void sub_81AB89C(void)
 {
-    if (gUnknown_0203CE54->unk81F != 0xFF)
+    if (gUnknown_0203CE54->unk81F != INVALID_U8)
     {
         RemoveScrollIndicatorArrowPair(gUnknown_0203CE54->unk81F);
-        gUnknown_0203CE54->unk81F = 0xFF;
+        gUnknown_0203CE54->unk81F = INVALID_U8;
     }
 }
 
@@ -2303,7 +2303,7 @@ u8 sub_81AE124(u8 a)
 u8 bag_menu_add_window(u8 a)
 {
     u8 *ptr = &gUnknown_0203CE54->unk810[a];
-    if (*ptr == 0xFF)
+    if (*ptr == INVALID_U8)
     {
         *ptr = AddWindow(&gUnknown_086141AC[a]);
         SetWindowBorderStyle(*ptr, 0, 1, 14);
@@ -2315,20 +2315,20 @@ u8 bag_menu_add_window(u8 a)
 void bag_menu_remove_window(u8 a)
 {
     u8 *ptr = &gUnknown_0203CE54->unk810[a];
-    if (*ptr != 0xFF)
+    if (*ptr != INVALID_U8)
     {
         sub_8198070(*ptr, 0);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         schedule_bg_copy_tilemap_to_vram(1);
-        *ptr = 0xFF;
+        *ptr = INVALID_U8;
     }
 }
 
 u8 AddItemMessageWindow(u8 a)
 {
     u8 *ptr = &gUnknown_0203CE54->unk810[a];
-    if (*ptr == 0xFF)
+    if (*ptr == INVALID_U8)
         *ptr = AddWindow(&gUnknown_086141AC[a]);
     return *ptr;
 }
@@ -2336,13 +2336,13 @@ u8 AddItemMessageWindow(u8 a)
 void bag_menu_RemoveBagItem_message_window(u8 a)
 {
     u8 *ptr = &gUnknown_0203CE54->unk810[a];
-    if (*ptr != 0xFF)
+    if (*ptr != INVALID_U8)
     {
         sub_8197DF8(*ptr, 0);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         schedule_bg_copy_tilemap_to_vram(1);
-        *ptr = 0xFF;
+        *ptr = INVALID_U8;
     }
 }
 

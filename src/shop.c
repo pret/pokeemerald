@@ -17,7 +17,7 @@
 #include "item_menu.h"
 #include "list_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "money.h"
@@ -446,9 +446,9 @@ static void CB2_InitBuyMenu(void)
         ResetTasks();
         clear_scheduled_bg_copies_to_vram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
-        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
-        gShopDataPtr->itemSpriteIds[0] = -1;
-        gShopDataPtr->itemSpriteIds[1] = -1;
+        gShopDataPtr->scrollIndicatorsTaskId = INVALID_U8;
+        gShopDataPtr->itemSpriteIds[0] = INVALID_U8;
+        gShopDataPtr->itemSpriteIds[1] = INVALID_U8;
         BuyMenuBuildListMenuTemplate();
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
@@ -580,7 +580,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, int item, u8 y)
 
 static void BuyMenuAddScrollIndicatorArrows(void)
 {
-    if (gShopDataPtr->scrollIndicatorsTaskId == 0xFF && gMartInfo.itemCount + 1 > 8)
+    if (gShopDataPtr->scrollIndicatorsTaskId == INVALID_U8 && gMartInfo.itemCount + 1 > 8)
     {
         gShopDataPtr->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(
             SCROLL_ARROW_UP,
@@ -596,10 +596,10 @@ static void BuyMenuAddScrollIndicatorArrows(void)
 
 static void BuyMenuRemoveScrollIndicatorArrows(void)
 {
-    if (gShopDataPtr->scrollIndicatorsTaskId != 0xFF)
+    if (gShopDataPtr->scrollIndicatorsTaskId != INVALID_U8)
     {
         RemoveScrollIndicatorArrowPair(gShopDataPtr->scrollIndicatorsTaskId);
-        gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
+        gShopDataPtr->scrollIndicatorsTaskId = INVALID_U8;
     }
 }
 
@@ -613,10 +613,10 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 {
     u8 spriteId;
     u8 *spriteIdPtr = &gShopDataPtr->itemSpriteIds[iconSlot];
-    if (*spriteIdPtr != 0xFF)
+    if (*spriteIdPtr != INVALID_U8)
         return;
 
-    if (gMartInfo.martType == MART_TYPE_0 || item == 0xFFFF)
+    if (gMartInfo.martType == MART_TYPE_0 || item == INVALID_U16)
     {
         spriteId = AddItemIconSprite(iconSlot + 2110, iconSlot + 2110, item);
         if (spriteId != MAX_SPRITES)
@@ -637,13 +637,13 @@ static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
 static void BuyMenuRemoveItemIcon(u16 item, u8 iconSlot)
 {
     u8 *spriteIdPtr = &gShopDataPtr->itemSpriteIds[iconSlot];
-    if (*spriteIdPtr == 0xFF)
+    if (*spriteIdPtr == INVALID_U8)
         return;
 
     FreeSpriteTilesByTag(iconSlot + 2110);
     FreeSpritePaletteByTag(iconSlot + 2110);
     DestroySprite(&gSprites[*spriteIdPtr]);
-    *spriteIdPtr = 0xFF;
+    *spriteIdPtr = INVALID_U8;
 }
 
 static void BuyMenuInitBgs(void)

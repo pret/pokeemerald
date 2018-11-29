@@ -23,7 +23,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "m4a.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -500,7 +500,7 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {TRAINER_CLASS_HIKER, 10},
     {TRAINER_CLASS_YOUNG_COUPLE, 8},
     {TRAINER_CLASS_WINSTRATE, 10},
-    {0xFF, 5},
+    {INVALID_U8, 5},
 };
 
 #include "data/text/abilities.h"
@@ -2251,7 +2251,7 @@ static void sub_8038F34(void)
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
-        gBattleCommunication[1] = 0xFF;
+        gBattleCommunication[1] = INVALID_U8;
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 1:
@@ -2993,7 +2993,7 @@ static void BattleStartClearSetData(void)
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
         gLastResultingMoves[i] = 0;
-        gLastHitBy[i] = 0xFF;
+        gLastHitBy[i] = INVALID_U8;
         gLockedMoves[i] = 0;
         gLastPrintedMoves[i] = 0;
         gBattleResources->flags->flags[i] = 0;
@@ -3161,7 +3161,7 @@ void SwitchInClearSetData(void)
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
-    gLastHitBy[gActiveBattler] = 0xFF;
+    gLastHitBy[gActiveBattler] = INVALID_U8;
 
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 0) = 0;
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 1) = 0;
@@ -3192,7 +3192,7 @@ void SwitchInClearSetData(void)
 
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = 0;
-    gBattleStruct->field_DA = 0xFF;
+    gBattleStruct->field_DA = INVALID_U8;
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
@@ -3253,7 +3253,7 @@ void FaintClearSetData(void)
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
-    gLastHitBy[gActiveBattler] = 0xFF;
+    gLastHitBy[gActiveBattler] = INVALID_U8;
 
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBattler]) + 0) = 0;
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBattler]) + 1) = 0;
@@ -3440,7 +3440,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = 0xFFFF;
+                hpStatus[i].hp = INVALID_U16;
                 hpStatus[i].status = 0;
             }
             else
@@ -3458,7 +3458,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = 0xFFFF;
+                hpStatus[i].hp = INVALID_U16;
                 hpStatus[i].status = 0;
             }
             else
@@ -3484,7 +3484,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = 0xFFFF;
+                hpStatus[i].hp = INVALID_U16;
                 hpStatus[i].status = 0;
             }
             else
@@ -3991,7 +3991,7 @@ void BattleTurnPassed(void)
         return;
     }
 
-    if (gBattleResults.battleTurnCounter < 0xFF)
+    if (gBattleResults.battleTurnCounter < INVALID_U8)
     {
         gBattleResults.battleTurnCounter++;
         gBattleStruct->field_DA++;
@@ -4375,7 +4375,7 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     default:
                         sub_818603C(2);
-                        if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == 0xFFFF)
+                        if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == INVALID_U16)
                         {
                             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                             RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
@@ -5740,7 +5740,7 @@ static void HandleAction_ThrowPokeblock(void)
     gBattleCommunication[MULTISTRING_CHOOSER] = gBattleBufferB[gBattlerAttacker][1] - 1;
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][2];
 
-    if (gBattleResults.pokeblockThrows < 0xFF)
+    if (gBattleResults.pokeblockThrows < INVALID_U8)
         gBattleResults.pokeblockThrows++;
     if (gBattleStruct->safariPkblThrowCounter < 3)
         gBattleStruct->safariPkblThrowCounter++;
