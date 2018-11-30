@@ -2846,6 +2846,17 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             gBattlescriptCurrInstr = BattleScript_SoundproofProtected;
             effect = 1;
         }
+        else if ((gLastUsedAbility == ABILITY_DAZZLING
+                   || (IsBattlerAlive(battler ^= BIT_FLANK) && GetBattlerAbility(battler) == ABILITY_DAZZLING)
+                   )
+                 && gBattleStruct->movePriorities[gBattlerAttacker] > 0
+                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
+        {
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+                gHitMarker |= HITMARKER_NO_PPDEDUCT;
+            gBattlescriptCurrInstr = BattleScript_DazzlingProtected;
+            effect = 1;
+        }
         break;
     case ABILITYEFFECT_ABSORBING: // 3
         if (move != MOVE_NONE)

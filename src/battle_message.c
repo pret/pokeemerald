@@ -650,6 +650,7 @@ static const u8 sText_BurstingFlames[] = _("The bursting flames\nhit {B_SCR_ACTI
 static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX} received {B_LAST_ITEM}\nfrom {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_ThirdTypeAdded[] = _("{B_BUFF1} type was added to\n{B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_FellForFeint[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe feint!");
+static const u8 sText_PokemonCannotUseMove[] = _("{B_ATK_NAME_WITH_PREFIX} cannot\nuse {B_CURRENT_MOVE}!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1154,6 +1155,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_BestowItemGiving,
     sText_ThirdTypeAdded,
     sText_FellForFeint,
+    sText_PokemonCannotUseMove,
 };
 
 const u16 gTerrainStringIds[] =

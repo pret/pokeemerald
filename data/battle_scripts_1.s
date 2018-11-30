@@ -5975,6 +5975,15 @@ BattleScript_SoundproofProtected::
 	printstring STRINGID_PKMNSXBLOCKSY
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
+	
+BattleScript_DazzlingProtected::
+	attackstring
+	ppreduce
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_POKEMONCANNOTUSEMOVE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 
 BattleScript_AbilityNoSpecificStatLoss::
 	pause 0x20

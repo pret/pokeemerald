@@ -940,7 +940,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     else if (gProtectStructs[battlerId].kingsShielded && gBattleMoves[move].power != 0)
         return TRUE;
     else if ((gProtectStructs[battlerId].quickGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].quickGuarded)
-             && gBattleMoves[move].priority > 0)
+             && gBattleStruct->movePriorities[battlerId] > 0)
         return TRUE;
     else
         return FALSE;

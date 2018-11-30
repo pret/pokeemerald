@@ -4726,7 +4726,6 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
 
 static s8 GetMovePriority(u8 battlerId)
 {
-    s8 priority;
     u16 move;
 
     if (gProtectStructs[battlerId].noValidMoves)
@@ -4734,17 +4733,17 @@ static s8 GetMovePriority(u8 battlerId)
     else
         move = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
 
-    priority = gBattleMoves[move].priority;
+    gBattleStruct->movePriorities[battlerId] = gBattleMoves[move].priority;
     if (GetBattlerAbility(battlerId) == ABILITY_GALE_WINGS
         && gBattleMoves[move].type == TYPE_FLYING
         && (B_GALE_WINGS == GEN_6 || BATTLER_MAX_HP(battlerId)))
     {
-        priority++;
+        gBattleStruct->movePriorities[battlerId]++;
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_PRANKSTER
         && gBattleMoves[move].split == SPLIT_STATUS)
     {
-        priority++;
+        gBattleStruct->movePriorities[battlerId]++;
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_TRIAGE)
     {
@@ -4762,12 +4761,12 @@ static s8 GetMovePriority(u8 battlerId)
         case EFFECT_SOFTBOILED:
         case EFFECT_ABSORB:
         case EFFECT_ROOST:
-            priority += 3;
+            gBattleStruct->movePriorities[battlerId] += 3;
             break;
         }
     }
 
-    return priority;
+    return gBattleStruct->movePriorities[battlerId];
 }
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
@@ -4848,7 +4847,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         strikesFirst = 0; // battler1's move has greater priority
     }
-
 
     return strikesFirst;
 }

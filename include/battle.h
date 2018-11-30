@@ -588,6 +588,7 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
+    s8 movePriorities[MAX_BATTLERS_COUNT];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
