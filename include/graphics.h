@@ -4736,4 +4736,8 @@ extern const u32 gSlotMachineReelTime_Gfx[];
 extern const u32 gUnknown_08D8D410[];
 extern const u32 gUnknown_08D8D58C[];
 
+// Pokedex Area Screen
+extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
+extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
+
 #endif //GUARD_GRAPHICS_H

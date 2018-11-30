@@ -3156,7 +3156,7 @@ void sub_80BF0AC(u8 taskId)
             gMain.state++;
             break;
         case 2:
-            sub_813D3D8(NationalPokedexNumToSpecies(gUnknown_02039B54->dexNum), &gUnknown_02039B4C->unk64E);
+            ShowPokedexAreaScreen(NationalPokedexNumToSpecies(gUnknown_02039B54->dexNum), &gUnknown_02039B4C->unk64E);
             SetVBlankCallback(gUnknown_030060B4);
             gUnknown_02039B4C->unk64E = 0;
             gMain.state = 0;

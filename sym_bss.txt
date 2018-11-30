@@ -34,24 +34,7 @@
 	.include "src/slot_machine.o"
 	.include "src/contest_painting.o"
 	.include "src/starter_choose.o"
-
-	.align 0x2
-
-gUnknown_030011FC: @ 30011FC
-	.space 0x2
-
-gUnknown_030011FE: @ 30011FE
-	.space 0x2
-
-gUnknown_03001200: @ 3001200
-	.space 0x2
-
-gUnknown_03001202: @ 3001202
-	.space 0x2
-
-gUnknown_03001204: @ 3001204
-	.space 0x4
-
+	.include "src/pokedex_area_screen.o"
 	.include "src/battle_transition.o"
 	.include "src/pokemon_animation.o"
 	.include "src/recorded_battle.o"
