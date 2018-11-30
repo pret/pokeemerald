@@ -168,7 +168,7 @@ static void HandleAction_WatchesCarefully(void);
 static void HandleAction_SafariZoneBallThrow(void);
 static void HandleAction_ThrowPokeblock(void);
 static void HandleAction_GoNear(void);
-static void HandleAction_SafriZoneRun(void);
+static void HandleAction_SafariZoneRun(void);
 static void HandleAction_WallyBallThrow(void);
 static void HandleAction_Action11(void);
 static void HandleAction_NothingIsFainted(void);
@@ -521,7 +521,7 @@ static void (* const sTurnActionsFuncsTable[])(void) =
     HandleAction_SafariZoneBallThrow,   // B_ACTION_SAFARI_BALL
     HandleAction_ThrowPokeblock,        // B_ACTION_SAFARI_POKEBLOCK
     HandleAction_GoNear,                // B_ACTION_SAFARI_GO_NEAR
-    HandleAction_SafriZoneRun,          // B_ACTION_SAFARI_RUN
+    HandleAction_SafariZoneRun,         // B_ACTION_SAFARI_RUN
     HandleAction_WallyBallThrow,        // B_ACTION_WALLY_THROW
     HandleAction_RunBattleScript,       // B_ACTION_EXEC_SCRIPT
     HandleAction_Action11,              // not sure about this one
@@ -6001,7 +6001,7 @@ static void HandleAction_GoNear(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_SafriZoneRun(void)
+static void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);

@@ -57,7 +57,7 @@ LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
 	closemessage
 	special sub_80F88DC
 	setvar VAR_0x4099, 0
-	specialvar VAR_RESULT, sub_80F8C7C
+	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21A314
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A40F
@@ -230,7 +230,7 @@ LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
 	closemessage
 	special sub_80F88DC
 	setvar VAR_0x4099, 0
-	specialvar VAR_RESULT, sub_80F8C7C
+	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21A4E4
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A53C
@@ -324,7 +324,7 @@ LilycoveCity_ContestLobby_EventScript_21A554:: @ 821A554
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A5CF
 	call LilycoveCity_ContestLobby_EventScript_279CC5
 	call LilycoveCity_ContestLobby_EventScript_21A670
-	special sub_80F87D8
+	special SetContestTrainerGfxIds
 	call LilycoveCity_ContestLobby_EventScript_23BEB6
 	call LilycoveCity_ContestLobby_EventScript_21A585
 	call LilycoveCity_ContestLobby_EventScript_21A5EF

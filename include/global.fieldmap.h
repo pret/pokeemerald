@@ -192,8 +192,8 @@ struct EventObject
         struct __attribute__((packed)) {
             u8 x:4;
             u8 y:4;
-        } __attribute__((aligned (1))) as_nybbles;
-    } __attribute__((aligned (1))) range;
+        } ALIGNED(1) as_nybbles;
+    } ALIGNED(1) range;
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
     /*0x1C*/ u8 movementActionId;

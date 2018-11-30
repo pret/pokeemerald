@@ -1219,7 +1219,7 @@ sub_81B0A9C: @ 81B0A9C
 	muls r0, r5
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r6, =gUnknown_0203CEF8
+	ldr r6, =gSelectedOrderFromParty
 	bl sub_81B85AC
 	lsls r0, 24
 	cmp r0, 0
@@ -9304,7 +9304,7 @@ sub_81B4E8C: @ 81B4E8C
 	adds r0, r1
 	mov r8, r0
 _081B4EC6:
-	ldr r0, =gUnknown_0203CEF8
+	ldr r0, =gSelectedOrderFromParty
 	adds r4, r5, r0
 	ldrb r0, [r4]
 	cmp r0, 0
@@ -9418,7 +9418,7 @@ sub_81B4FA8: @ 81B4FA8
 	movs r4, 0
 	cmp r4, r5
 	bcs _081B502A
-	ldr r6, =gUnknown_0203CEF8
+	ldr r6, =gSelectedOrderFromParty
 	subs r2, r5, 0x1
 	adds r7, r6, 0
 	ldr r3, =gUnknown_0203CEC8
@@ -9476,7 +9476,7 @@ _081B502A:
 	cmp r4, r5
 	bge _081B5078
 _081B504E:
-	ldr r0, =gUnknown_0203CEF8
+	ldr r0, =gSelectedOrderFromParty
 	adds r1, r4, r0
 	ldrb r0, [r1]
 	cmp r0, 0
@@ -15518,7 +15518,7 @@ sub_81B8518: @ 81B8518
 	thumb_func_start sub_81B8558
 sub_81B8558: @ 81B8558
 	push {lr}
-	ldr r0, =gUnknown_0203CEF8
+	ldr r0, =gSelectedOrderFromParty
 	movs r1, 0
 	movs r2, 0x4
 	bl memset
@@ -15655,7 +15655,7 @@ sub_81B865C: @ 81B865C
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r1, r2, 0
-	ldr r3, =gUnknown_0203CEF8
+	ldr r3, =gSelectedOrderFromParty
 	adds r0, r2, r3
 	subs r0, 0x1
 	ldrb r0, [r0]
@@ -15700,7 +15700,7 @@ _081B86C0:
 	movs r5, 0
 	b _081B8750
 _081B86CE:
-	ldr r3, =gUnknown_0203CEF8
+	ldr r3, =gSelectedOrderFromParty
 	adds r4, r3, r5
 	ldrb r0, [r4]
 	movs r1, 0x64
@@ -15731,7 +15731,7 @@ _081B86CE:
 	bcs _081B8748
 	movs r7, 0x64
 _081B870E:
-	ldr r0, =gUnknown_0203CEF8
+	ldr r0, =gSelectedOrderFromParty
 	adds r5, r0, r4
 	ldrb r0, [r5]
 	muls r0, r7
@@ -15787,7 +15787,7 @@ sub_81B8770: @ 81B8770
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, =gUnknown_0203CEF8
+	ldr r3, =gSelectedOrderFromParty
 _081B877A:
 	adds r0, r1, r3
 	ldrb r0, [r0]

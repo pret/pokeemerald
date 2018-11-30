@@ -257,584 +257,156 @@ u32 RenderFont(struct TextPrinter *textPrinter)
     }
 }
 
-#ifdef NONMATCHING
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
 {
-    u16* current = gFontHalfRowLookupTable;
+    u32 fg12, bg12, shadow12;
+    u32 temp;
+
+    u16 *current = gFontHalfRowLookupTable;
 
     gLastTextBgColor = bgColor;
     gLastTextFgColor = fgColor;
     gLastTextShadowColor = shadowColor;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (bgColor << 4) | bgColor;
+    bg12 = bgColor << 12;
+    fg12 = fgColor << 12;
+    shadow12 = shadowColor << 12;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (bgColor << 4) | bgColor;
+    temp = (bgColor << 8) | (bgColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (bgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (bgColor << 4) | bgColor;
+    temp = (fgColor << 8) | (bgColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (fgColor << 4) | bgColor;
+    temp = (shadowColor << 8) | (bgColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (fgColor << 4) | bgColor;
+    temp = (bgColor << 8) | (fgColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (fgColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (fgColor << 4) | bgColor;
+    temp = (fgColor << 8) | (fgColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (shadowColor << 4) | bgColor;
+    temp = (shadowColor << 8) | (fgColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (shadowColor << 4) | bgColor;
+    temp = (bgColor << 8) | (shadowColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | bgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (shadowColor << 4) | bgColor;
+    temp = (fgColor << 8) | (shadowColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (bgColor << 4) | fgColor;
+    temp = (shadowColor << 8) | (shadowColor << 4) | bgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (bgColor << 4) | fgColor;
+    temp = (bgColor << 8) | (bgColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (bgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (bgColor << 4) | fgColor;
+    temp = (fgColor << 8) | (bgColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (fgColor << 4) | fgColor;
+    temp = (shadowColor << 8) | (bgColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (fgColor << 4) | fgColor;
+    temp = (bgColor << 8) | (fgColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (fgColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (fgColor << 4) | fgColor;
+    temp = (fgColor << 8) | (fgColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (shadowColor << 4) | fgColor;
+    temp = (shadowColor << 8) | (fgColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (shadowColor << 4) | fgColor;
+    temp = (bgColor << 8) | (shadowColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | fgColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (shadowColor << 4) | fgColor;
+    temp = (fgColor << 8) | (shadowColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (bgColor << 4) | shadowColor;
+    temp = (shadowColor << 8) | (shadowColor << 4) | fgColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (bgColor << 4) | shadowColor;
+    temp = (bgColor << 8) | (bgColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (bgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (bgColor << 4) | shadowColor;
+    temp = (fgColor << 8) | (bgColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (fgColor << 4) | shadowColor;
+    temp = (shadowColor << 8) | (bgColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (fgColor << 4) | shadowColor;
+    temp = (bgColor << 8) | (fgColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (fgColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (fgColor << 4) | shadowColor;
+    temp = (fgColor << 8) | (fgColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (bgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (bgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (bgColor << 8) | (shadowColor << 4) | shadowColor;
+    temp = (shadowColor << 8) | (fgColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (fgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (fgColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (fgColor << 8) | (shadowColor << 4) | shadowColor;
+    temp = (bgColor << 8) | (shadowColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 
-    *(current++) = (bgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (fgColor << 12) | (shadowColor << 8) | (shadowColor << 4) | shadowColor;
-    *(current++) = (shadowColor << 12) | (shadowColor << 8) | (shadowColor << 4) | shadowColor;
+    temp = (fgColor << 8) | (shadowColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
+
+    temp = (shadowColor << 8) | (shadowColor << 4) | shadowColor;
+    *(current++) = (bg12) | temp;
+    *(current++) = (fg12) | temp;
+    *(current++) = (shadow12) | temp;
 }
-#else
-NAKED
-void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
-{
-    asm("push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, #0x24\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    lsl r1, #24\n\
-    lsr r1, #24\n\
-    lsl r2, #24\n\
-    lsr r2, #24\n\
-    ldr r3, =gFontHalfRowLookupTable\n\
-    ldr r4, =gLastTextBgColor\n\
-    strh r1, [r4]\n\
-    ldr r4, =gLastTextFgColor\n\
-    strh r0, [r4]\n\
-    ldr r4, =gLastTextShadowColor\n\
-    strh r2, [r4]\n\
-    lsl r5, r1, #12\n\
-    lsl r6, r0, #12\n\
-    lsl r4, r2, #12\n\
-    mov r8, r4\n\
-    lsl r7, r1, #8\n\
-    str r7, [sp]\n\
-    lsl r4, r1, #4\n\
-    mov r9, r4\n\
-    orr r7, r4\n\
-    str r7, [sp, #0x4]\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    lsl r7, r0, #8\n\
-    mov r10, r7\n\
-    mov r4, r10\n\
-    mov r7, r9\n\
-    orr r4, r7\n\
-    str r4, [sp, #0x8]\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    lsl r7, r2, #8\n\
-    mov r12, r7\n\
-    mov r4, r12\n\
-    mov r7, r9\n\
-    orr r4, r7\n\
-    str r4, [sp, #0xC]\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    lsl r7, r0, #4\n\
-    mov r9, r7\n\
-    ldr r4, [sp]\n\
-    orr r4, r7\n\
-    str r4, [sp, #0x10]\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    mov r7, r10\n\
-    add r4, r7, #0\n\
-    mov r7, r9\n\
-    orr r4, r7\n\
-    str r4, [sp, #0x14]\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    mov r7, r12\n\
-    add r4, r7, #0\n\
-    mov r7, r9\n\
-    orr r4, r7\n\
-    str r4, [sp, #0x18]\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    lsl r7, r2, #4\n\
-    mov r9, r7\n\
-    mov r4, r9\n\
-    ldr r7, [sp]\n\
-    orr r7, r4\n\
-    str r7, [sp, #0x1C]\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    mov r7, r9\n\
-    mov r4, r10\n\
-    orr r4, r7\n\
-    str r4, [sp, #0x20]\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r4, r5, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    add r4, r6, #0\n\
-    orr r4, r7\n\
-    strh r4, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r8\n\
-    orr r7, r4\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    mov r4, r12\n\
-    mov r7, r9\n\
-    orr r4, r7\n\
-    add r7, r4, #0\n\
-    orr r7, r1\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x4]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x8]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0xC]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x10]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x14]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x18]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x1C]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    ldr r7, [sp, #0x20]\n\
-    orr r7, r0\n\
-    add r1, r5, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    add r1, r6, #0\n\
-    orr r1, r7\n\
-    strh r1, [r3]\n\
-    add r3, #0x2\n\
-    mov r1, r8\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r4, #0\n\
-    orr r7, r0\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r0, [sp, #0x4]\n\
-    orr r7, r0\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    orr r7, r1\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0x8]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0xC]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0x10]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0x14]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0x18]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0x1C]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    ldr r1, [sp, #0x20]\n\
-    orr r7, r1\n\
-    add r0, r5, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    add r0, r6, #0\n\
-    orr r0, r7\n\
-    strh r0, [r3]\n\
-    add r3, #0x2\n\
-    mov r0, r8\n\
-    orr r7, r0\n\
-    strh r7, [r3]\n\
-    add r3, #0x2\n\
-    add r7, r2, #0\n\
-    orr r7, r4\n\
-    orr r5, r7\n\
-    strh r5, [r3]\n\
-    add r3, #0x2\n\
-    orr r6, r7\n\
-    strh r6, [r3]\n\
-    orr r0, r7\n\
-    strh r0, [r3, #0x2]\n\
-    add sp, #0x24\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif
 
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor)
 {
@@ -1967,7 +1539,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
                 return 2;
             case 8:
                 textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
@@ -2019,7 +1591,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case 24:
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 return 2;
-            case 17:
+            case EXT_CTRL_CODE_CLEAR:
                 width = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 if (width > 0)
@@ -2050,10 +1622,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case 20:
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 21:
+            case EXT_CTRL_CODE_JPN:
                 textPrinter->japanese = 1;
                 return 2;
-            case 22:
+            case EXT_CTRL_CODE_ENG:
                 textPrinter->japanese = 0;
                 return 2;
             }
@@ -2238,12 +1810,12 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
             case 0x14:
                 ++strPos;
                 break;
-            case 0x7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
             case 0x9:
             case 0xA:
             case 0xF:
-            case 0x15:
-            case 0x16:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
             default:
                 break;
             }
@@ -2398,13 +1970,13 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case 0x14:
                 minGlyphWidth = *++str;
                 break;
-            case 0x15:
+            case EXT_CTRL_CODE_JPN:
                 isJapanese = 1;
                 break;
-            case 0x16:
+            case EXT_CTRL_CODE_ENG:
                 isJapanese = 0;
                 break;
-            case 0x7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
             case 0x9:
             case 0xA:
             case 0xF:
@@ -2524,12 +2096,12 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
             case 0x14:
                 ++strPos;
                 break;
-            case 0x7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
             case 0x9:
             case 0xA:
             case 0xF:
-            case 0x15:
-            case 0x16:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
             default:
                 continue;
             }

@@ -36,9 +36,7 @@ extern const union AffineAnimCmd *gUnknown_082FF6C0[];
 // This file's functions.
 void sub_80A64EC(struct Sprite *sprite);
 void sub_80A653C(struct Sprite *sprite);
-void InitAnimLinearTranslation(struct Sprite *sprite);
 void sub_80A6FB4(struct Sprite *sprite);
-void sub_80A6F98(struct Sprite *sprite);
 void sub_80A7144(struct Sprite *sprite);
 void sub_80A791C(struct Sprite *sprite);
 void sub_80A8DFC(struct Sprite *sprite);
@@ -50,8 +48,6 @@ void sub_80A7AFC(u8 taskId);
 void sub_80A8CAC(u8 taskId);
 void AnimTask_BlendMonInAndOutStep(u8 taskId);
 bool8 sub_80A7238(void);
-void sub_80A8048(s16 *bottom, s16 *top, const void *ptr);
-void *sub_80A8050(s16 bottom, s16 top);
 u8 sub_80A82E4(u8 battlerId);
 void sub_80A8D78(struct Task *task, u8 taskId);
 
@@ -532,7 +528,7 @@ void sub_80A6450(struct Sprite *sprite)
 // Simply waits until the sprite's data[0] hits zero.
 // This is used to let sprite anims or affine anims to run for a designated
 // duration.
-void sub_80A64B0(struct Sprite *sprite)
+void WaitAnimForDuration(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
         sprite->data[0]--;
@@ -745,7 +741,7 @@ void sub_80A6864(struct Sprite *sprite, s16 a2)
     }
 }
 
-void sub_80A68D4(struct Sprite *sprite)
+void InitAnimArcTranslation(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -791,7 +787,7 @@ void sub_80A6980(struct Sprite *sprite, bool8 a2)
     sprite->pos1.y += gBattleAnimArgs[1];
 }
 
-void sub_80A69CC(struct Sprite *sprite, u8 a2)
+void InitAnimSpritePos(struct Sprite *sprite, u8 a2)
 {
     if (!a2)
     {
@@ -1004,12 +1000,12 @@ void sub_80A6DEC(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sub_80A6E14(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->callback = sub_80A65A8;
     sprite->callback(sprite);
 }
 
-void sub_80A6E14(struct Sprite *sprite)
+void InitSpriteDataForLinearTranslation(struct Sprite *sprite)
 {
     s16 x = (sprite->data[2] - sprite->data[1]) << 8;
     s16 y = (sprite->data[4] - sprite->data[3]) << 8;
@@ -1047,7 +1043,7 @@ void InitAnimLinearTranslation(struct Sprite *sprite)
     sprite->data[3] = 0;
 }
 
-void sub_80A6EEC(struct Sprite *sprite)
+void StartAnimLinearTranslation(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1476,7 +1472,7 @@ void sub_80A77C8(struct Sprite *sprite)
         else
             var = FALSE;
         if (!gBattleAnimArgs[2])
-            sub_80A69CC(sprite, var);
+            InitAnimSpritePos(sprite, var);
         else
             sub_80A6980(sprite, var);
         sprite->data[0]++;
@@ -1511,27 +1507,27 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
     else
         attributeId = BATTLER_COORD_Y;
 
-    sub_80A69CC(sprite, v1);
+    InitAnimSpritePos(sprite, v1);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, attributeId) + gBattleAnimArgs[3];
-    sprite->callback = sub_80A6EEC;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
 void sub_80A78AC(struct Sprite *sprite)
 {
-    sub_80A69CC(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
-    sub_80A68D4(sprite);
+    InitAnimArcTranslation(sprite);
     sprite->callback = sub_80A791C;
 }
 
@@ -1558,7 +1554,7 @@ void sub_80A7938(struct Sprite *sprite)
     }
     if (!gBattleAnimArgs[5])
     {
-        sub_80A69CC(sprite, r4);
+        InitAnimSpritePos(sprite, r4);
         battlerId = gBattleAnimAttacker;
     }
     else
@@ -1572,7 +1568,7 @@ void sub_80A7938(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(battlerId, attributeId) + gBattleAnimArgs[3];
-    sprite->callback = sub_80A6EEC;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -2454,6 +2450,6 @@ void sub_80A8EE4(struct Sprite *sprite)
         sprite->pos1.x += x;
         sprite->pos1.y = gBattleAnimArgs[5] - 80;
     }
-    sprite->callback = sub_80A6EEC;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }

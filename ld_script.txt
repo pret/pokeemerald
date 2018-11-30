@@ -147,7 +147,7 @@ SECTIONS {
         src/secret_base.o(.text);
         src/tv.o(.text);
         asm/contest_link_80F57C4.o(.text);
-        asm/script_pokemon_util_80F87D8.o(.text);
+        src/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         asm/fldeff_80F9BCC.o(.text);
@@ -162,16 +162,16 @@ SECTIONS {
         asm/fire.o(.text);
         asm/electric.o(.text);
         asm/ice.o(.text);
-        asm/fight.o(.text);
-        asm/poison.o(.text);
+        src/fight.o(.text);
+        src/poison.o(.text);
         asm/flying.o(.text);
         asm/psychic.o(.text);
-        asm/bug.o(.text);
-        asm/rock.o(.text);
+        src/bug.o(.text);
+        src/rock.o(.text);
         asm/ghost.o(.text);
-        asm/dragon.o(.text);
+        src/dragon.o(.text);
         asm/dark.o(.text);
-        asm/ground.o(.text);
+        src/ground.o(.text);
         asm/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
         asm/battle_intro.o(.text);
@@ -203,10 +203,10 @@ SECTIONS {
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/battle_records.o(.text);
-        asm/pokedex_area_screen.o(.text);
+        src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         asm/roulette.o(.text);
-        asm/pokedex_cry_screen.o(.text);
+        src/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);
         src/fldeff_strength.o(.text);
@@ -297,7 +297,6 @@ SECTIONS {
         src/gym_leader_rematch.o(.text);
         src/unk_transition.o(.text);
         src/international_string_util.o(.text);
-        asm/international_string_util.o(.text);
         src/battle_debug.o(.text);
     } =0
 
@@ -455,7 +454,6 @@ SECTIONS {
         src/field_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
-        data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
         src/pokemon_storage_system.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
@@ -475,7 +473,7 @@ SECTIONS {
         src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         data/contest_link_80F57C4.o(.rodata);
-        data/script_pokemon_util_80F87D8.o(.rodata);
+        src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         data/field_effect_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
@@ -522,10 +520,10 @@ SECTIONS {
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
-        data/pokedex_area_screen.o(.rodata);
+        src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
-        data/pokedex_cry_screen.o(.rodata);
+        src/pokedex_cry_screen.o(.rodata);
         src/landmark.o(.rodata);
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
@@ -575,12 +573,10 @@ SECTIONS {
         src/battle_factory_screen.o(.rodata);
         src/apprentice.o(.rodata);
         src/frontier_util.o(.rodata);
-        data/battle_frontier_2.o(.rodata);
         src/battle_arena.o(.rodata);
         src/battle_factory.o(.rodata);
-        data/battle_pike.o(.rodata);
         src/battle_pike.o(.rodata);
-        data/battle_frontier_3.o(.rodata);
+        data/mossdeep_gym.o(.rodata);
         src/battle_pyramid.o(.rodata);
         src/item_menu.o(.rodata);
         src/list_menu.o(.rodata);

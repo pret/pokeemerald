@@ -106,7 +106,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special SavePlayerParty
-	special ReducePlayerPartyToThree
+	special ReducePlayerPartyToSelectedMons
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227D21, 4
 	closemessage
 	compare VAR_FACING, 2

@@ -1,26 +1,26 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_message.h"
-#include "constants/battle_string_ids.h"
-#include "constants/moves.h"
-#include "constants/species.h"
-#include "text.h"
-#include "string_util.h"
-#include "constants/items.h"
-#include "constants/trainers.h"
-#include "event_data.h"
-#include "link.h"
-#include "item.h"
-#include "window.h"
-#include "palette.h"
 #include "battle_controllers.h"
+#include "battle_message.h"
 #include "battle_setup.h"
-#include "menu.h"
-#include "recorded_battle.h"
-#include "international_string_util.h"
-#include "frontier_util.h"
 #include "battle_tower.h"
 #include "data2.h"
+#include "event_data.h"
+#include "frontier_util.h"
+#include "international_string_util.h"
+#include "item.h"
+#include "link.h"
+#include "menu.h"
+#include "palette.h"
+#include "recorded_battle.h"
+#include "string_util.h"
+#include "text.h"
+#include "window.h"
+#include "constants/battle_string_ids.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/trainers.h"
 
 struct BattleWindowText
 {
@@ -1673,7 +1673,8 @@ static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, 
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 {
-	{ // 0
+// The corresponding WindowTemplate is gStandardBattleWindowTemplates[] within src/battle_bg.c
+	{ // 0 Standard battle message
 		.fillValue = 0xFF,
 		.fontId = 1,
 		.x = 0,
@@ -1685,7 +1686,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 15,
 		.shadowColor = 6,
 	},
-	{ // 1
+	{ // 1 "What will (pokemon) do?"
 		.fillValue = 0xFF,
 		.fontId = 1,
 		.x = 1,
@@ -1697,7 +1698,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 15,
 		.shadowColor = 6,
 	},
-	{ // 2
+	{ // 2 "Fight/Pokemon/Bag/Run"
 		.fillValue = 0xEE,
 		.fontId = 1,
 		.x = 0,
@@ -1709,7 +1710,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 3
+	{ // 3 Top left move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1721,7 +1722,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 4
+	{ // 4 Top right move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1733,7 +1734,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 5
+	{ // 5 Bottom left move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1745,7 +1746,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 6
+	{ // 6 Bottom right move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1757,7 +1758,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 7
+	{ // 7 "PP"
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1781,7 +1782,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 9
+	{ // 9 PP remaining
 		.fillValue = 0xEE,
 		.fontId = 1,
 		.x = 2,
@@ -1793,7 +1794,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 11,
 	},
-	{ // 10
+	{ // 10 "type"
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1805,7 +1806,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 11
+	{ // 11 "switch which?"
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1817,7 +1818,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 12
+	{ // 12 "gText_BattleYesNoChoice"
 		.fillValue = 0xEE,
 		.fontId = 1,
 		.x = 0,
