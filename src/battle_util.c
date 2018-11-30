@@ -4726,7 +4726,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower = 200;
         break;
     case EFFECT_STORED_POWER:
-        basePower = 60 + (CountBattlerStatIncreases(battlerAtk, TRUE) * 20);
+        basePower += (CountBattlerStatIncreases(battlerAtk, TRUE) * 20);
         break;
     case EFFECT_ELECTRO_BALL:
         speed = GetBattlerTotalSpeedStat(battlerAtk) / GetBattlerTotalSpeedStat(battlerDef);
