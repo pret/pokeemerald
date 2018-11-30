@@ -4746,6 +4746,26 @@ static s8 GetMovePriority(u8 battlerId)
     {
         priority++;
     }
+    else if (GetBattlerAbility(battlerId) == ABILITY_TRIAGE)
+    {
+        switch (gBattleMoves[move].effect)
+        {
+        case EFFECT_RESTORE_HP:
+        case EFFECT_REST:
+        case EFFECT_MORNING_SUN:
+        case EFFECT_MOONLIGHT:
+        case EFFECT_SYNTHESIS:
+        case EFFECT_HEAL_PULSE:
+        case EFFECT_HEALING_WISH:
+        case EFFECT_SWALLOW:
+        case EFFECT_WISH:
+        case EFFECT_SOFTBOILED:
+        case EFFECT_ABSORB:
+        case EFFECT_ROOST:
+            priority += 3;
+            break;
+        }
+    }
 
     return priority;
 }
