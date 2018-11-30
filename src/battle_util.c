@@ -597,6 +597,7 @@ static bool32 IsHealBlockPreventingMove(u8 battler, u32 move)
     case EFFECT_ROOST:
     case EFFECT_HEALING_WISH:
     case EFFECT_WISH:
+    case EFFECT_DREAM_EATER:
         return TRUE;
     default:
         return FALSE;
