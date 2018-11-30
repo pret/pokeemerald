@@ -5467,8 +5467,7 @@ static void HandleAction_UseMove(void)
 {
     u8 side;
     u8 var = 4;
-    u32 attackerAbility;
-    u32 ateType, moveType;
+    u32 moveType;
 
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
 
@@ -5535,6 +5534,10 @@ static void HandleAction_UseMove(void)
             gBattleResults.lastUsedMoveOpponent = gCurrentMove;
     }
 
+    // Set dynamic move type.
+    SetTypeBeforeUsingMove(gChosenMove, gBattlerAttacker);
+    GET_MOVE_TYPE(gChosenMove, moveType);
+
     // choose target
     side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
     if (gSideTimers[side].followmeTimer != 0
@@ -5547,8 +5550,8 @@ static void HandleAction_UseMove(void)
     else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
              && gSideTimers[side].followmeTimer == 0
              && (gBattleMoves[gCurrentMove].power != 0 || gBattleMoves[gCurrentMove].target != MOVE_TARGET_USER)
-             && ((gBattleMons[*(gBattleStruct->moveTarget + gBattlerAttacker)].ability != ABILITY_LIGHTNING_ROD && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
-                 || (gBattleMons[*(gBattleStruct->moveTarget + gBattlerAttacker)].ability != ABILITY_STORM_DRAIN && gBattleMoves[gCurrentMove].type == TYPE_WATER)
+             && ((gBattleMons[*(gBattleStruct->moveTarget + gBattlerAttacker)].ability != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
+                 || (gBattleMons[*(gBattleStruct->moveTarget + gBattlerAttacker)].ability != ABILITY_STORM_DRAIN && moveType == TYPE_WATER)
                 )
              )
     {
@@ -5557,8 +5560,8 @@ static void HandleAction_UseMove(void)
         {
             if (side != GetBattlerSide(gActiveBattler)
                 && *(gBattleStruct->moveTarget + gBattlerAttacker) != gActiveBattler
-                && ((gBattleMons[gActiveBattler].ability == ABILITY_LIGHTNING_ROD && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
-                    || (gBattleMons[gActiveBattler].ability == ABILITY_STORM_DRAIN && gBattleMoves[gCurrentMove].type == TYPE_WATER)
+                && ((gBattleMons[gActiveBattler].ability == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
+                    || (gBattleMons[gActiveBattler].ability == ABILITY_STORM_DRAIN && moveType == TYPE_WATER)
                    )
                 && GetBattlerTurnOrderNum(gActiveBattler) < var)
             {
@@ -5691,9 +5694,6 @@ static void HandleAction_UseMove(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         BattleArena_AddMindPoints(gBattlerAttacker);
-
-    // Set dynamic move type.
-    SetTypeBeforeUsingMove(gChosenMove, gBattlerAttacker);
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }

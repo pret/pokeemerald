@@ -283,5 +283,6 @@ extern const u8 BattleScript_MoveEffectFlameBurst[];
 extern const u8 BattleScript_TrainerSlideMsgRet[];
 extern const u8 BattleScript_TrainerSlideMsgEnd2[];
 extern const u8 BattleScript_MoveEffectFeint[];
+extern const u8 BattleScript_ProteanActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

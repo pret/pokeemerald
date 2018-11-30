@@ -949,6 +949,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
 static void atk00_attackcanceler(void)
 {
     s32 i;
+    u32 moveType;
 
     if (gBattleOutcome != 0)
     {
@@ -963,6 +964,21 @@ static void atk00_attackcanceler(void)
     }
     if (AtkCanceller_UnableToUseMove())
         return;
+
+    // Check Protean activation.
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_PROTEAN
+        && (gBattleMons[gBattlerAttacker].type1 != moveType || gBattleMons[gBattlerAttacker].type2 != moveType ||
+            (gBattleMons[gBattlerAttacker].type3 != moveType && gBattleMons[gBattlerAttacker].type3 != TYPE_MYSTERY))
+        && gCurrentMove != MOVE_STRUGGLE)
+    {
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
+        SET_BATTLER_TYPE(gBattlerAttacker, moveType);
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_ProteanActivates;
+        return;
+    }
+
     if (AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBattlerTarget, 0, 0, 0))
         return;
     if (!gBattleMons[gBattlerAttacker].pp[gCurrMovePos] && gCurrentMove != MOVE_STRUGGLE && !(gHitMarker & 0x800200)

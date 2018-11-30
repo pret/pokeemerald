@@ -5997,6 +5997,12 @@ BattleScript_ColorChangeActivates::
 	waitmessage 0x40
 	return
 	
+BattleScript_ProteanActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNCHANGEDTYPE
+	waitmessage 0x40
+	return
+	
 BattleScript_CursedBodyActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_CUSEDBODYDISABLED
