@@ -34,15 +34,6 @@
 
 // Static type declarations
 
-struct RegionMapLocation
-{
-    u8 x;
-    u8 y;
-    u8 width;
-    u8 height;
-    const u8 *name;
-};
-
 // Static RAM declarations
 
 static EWRAM_DATA struct RegionMap *gRegionMap = NULL;

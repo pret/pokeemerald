@@ -78,6 +78,15 @@ struct RegionMap {
     /*0x284*/ u8 cursorLargeImage[0x600];
 }; // size = 0x884
 
+struct RegionMapLocation
+{
+    u8 x;
+    u8 y;
+    u8 width;
+    u8 height;
+    const u8 *name;
+};
+
 // Exported RAM declarations
 
 // Exported ROM declarations
@@ -95,5 +104,10 @@ u8 *GetMapName(u8 *, u16, u16);
 bool32 sub_8124668(u8 mapSecId);
 u8 *sub_81245DC(u8 *dest, u16 mapSecId);
 u8 *sub_8124610(u8 *dest, u16 mapSecId);
+u16 CorrectSpecialMapSecId(u16 mapSecId);
+void sub_8122D88(struct RegionMap *regionMap);
+void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
+
+extern const struct RegionMapLocation gRegionMapEntries[];
 
 #endif //GUARD_REGION_MAP_H
