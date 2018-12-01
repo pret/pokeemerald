@@ -1986,6 +1986,8 @@ enum
 	CANCELLER_BIDE,
 	CANCELLER_THAW,
 	CANCELLER_END,
+	CANCELLER_PSYCHIC_TERRAIN,
+	CANCELLER_END2,
 };
 
 u8 AtkCanceller_UnableToUseMove(void)
@@ -2285,6 +2287,38 @@ u8 AtkCanceller_UnableToUseMove(void)
         BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
         MarkBattlerForControllerExec(gActiveBattler);
     }
+    return effect;
+}
+
+// After Protean Activation.
+u8 AtkCanceller_UnableToUseMove2(void)
+{
+    u8 effect = 0;
+    do
+    {
+        switch (gBattleStruct->atkCancellerTracker)
+        {
+        case CANCELLER_END:
+            gBattleStruct->atkCancellerTracker++;
+        case CANCELLER_PSYCHIC_TERRAIN:
+            if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN
+                && IsBattlerGrounded(gBattlerAttacker)
+                && gBattleStruct->movePriorities[gBattlerAttacker] > 0
+                && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget))
+            {
+                CancelMultiTurnMoves(gBattlerAttacker);
+                gBattlescriptCurrInstr = BattleScript_MoveUsedPsychicTerrainPrevents;
+                gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+                effect = 1;
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_END2:
+            break;
+        }
+
+    } while (gBattleStruct->atkCancellerTracker != CANCELLER_END2 && effect == 0);
+
     return effect;
 }
 

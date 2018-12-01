@@ -285,5 +285,6 @@ extern const u8 BattleScript_TrainerSlideMsgEnd2[];
 extern const u8 BattleScript_MoveEffectFeint[];
 extern const u8 BattleScript_ProteanActivates[];
 extern const u8 BattleScript_DazzlingProtected[];
+extern const u8 BattleScript_MoveUsedPsychicTerrainPrevents[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

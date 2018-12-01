@@ -5984,6 +5984,11 @@ BattleScript_DazzlingProtected::
 	printstring STRINGID_POKEMONCANNOTUSEMOVE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
+	
+BattleScript_MoveUsedPsychicTerrainPrevents::
+	printstring STRINGID_POKEMONCANNOTUSEMOVE
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 
 BattleScript_AbilityNoSpecificStatLoss::
 	pause 0x20
