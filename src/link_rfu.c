@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "malloc.h"
 #include "battle.h"
@@ -15,12 +13,12 @@
 #include "librfu.h"
 #include "rom_8011DC0.h"
 #include "link_rfu.h"
+#include "palette.h"
+#include "gpu_regs.h"
+#include "constants/species.h"
 
 extern u16 gUnknown_03005DA8;
-
-// Static type declarations
-
-// Static RAM declarations
+extern void nullsub_89(u8 taskId);
 
 struct UnkRfuStruct_1 gUnknown_03004140;
 struct UnkRfuStruct_2 gUnknown_03005000;
@@ -32,12 +30,11 @@ IWRAM_DATA u16 gUnknown_03000D90[8];
 
 EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 EWRAM_DATA ALIGNED(4) struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
-EWRAM_DATA ALIGNED(2) u8 gUnknown_02022B22[8] = {};
+EWRAM_DATA ALIGNED(2) u8 gUnknown_02022B22[PLAYER_NAME_LENGTH + 1] = {};
 EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
 EWRAM_DATA struct UnkLinkRfuStruct_02022B44 gUnknown_02022B44 = {};
 
 // Static ROM declarations
-
 static void sub_800C000(void);
 static void sub_800C7B4(u16 r8, u16 r6);
 static void sub_800C744(u32 a0);
@@ -74,12 +71,15 @@ void sub_80109E8(u16 a0);
 void sub_8010A70(void *a0);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
-void sub_80115EC(u16 a0);
+void sub_80115EC(s32 a0);
 u8 sub_8011CE4(const u8 *a0, u16 a1);
-void sub_8011D6C(u8 a0);
-void sub_8011E94(u8 a0, u8 a1);
+void sub_8011D6C(u32 a0);
+void sub_8011E94(u32 a0, u32 a1);
 u8 sub_8012224(void);
 void sub_801227C(void);
+void sub_801209C(u8 taskId);
+void sub_8011BF8(void);
+void sub_8011BA4(void);
 
 // .rodata
 
@@ -474,7 +474,6 @@ u8 sub_800C054(u8 r5, u16 r7, u16 r8, const u16 *r6)
 u8 sub_800C12C(u16 r6, u16 r8)
 {
     u8 i;
-    struct RfuUnk5 *tmp;
 
     if (gUnknown_03004140.unk_04 != 0 && (gUnknown_03004140.unk_04 < 9 || gUnknown_03004140.unk_04 > 11))
     {
@@ -2151,12 +2150,12 @@ bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
         if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04) && ((gUnknown_03007890->unk_07 >> idx) & 1))
         {
             memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, 0xD);
-            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
+            memcpy(buff2, gUnknown_03007890->unk_14[idx].playerName, PLAYER_NAME_LENGTH + 1);
         }
         else
         {
             memset(buff1, 0, 0xD);
-            memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
+            memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].playerName));
         }
     }
     else
@@ -2165,12 +2164,12 @@ bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
         if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04))
         {
             memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, 0xD);
-            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
+            memcpy(buff2, gUnknown_03007890->unk_14[idx].playerName, PLAYER_NAME_LENGTH + 1);
         }
         else
         {
             memset(buff1, 0, 0xD);
-            memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
+            memset(buff2, 0, PLAYER_NAME_LENGTH + 1);
         }
     }
     return retVal;
@@ -2181,13 +2180,13 @@ bool8 sub_800DF34(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
     bool8 retVal = FALSE;
     if (gUnknown_03007890->unk_14[idx].unk_04 == 0x7F7D)
     {
-        *buff1 = gUnknown_03007890->unk_14[idx].unk_06;
-        memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
+        memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, 0xD);
+        memcpy(buff2, gUnknown_03007890->unk_14[idx].playerName, 8);
         retVal = TRUE;
     }
     else
     {
-        *buff1 = (struct UnkLinkRfuStruct_02022B14){};
+        memset(buff1, 0, 0xD);
         memset(buff2, 0, 8);
     }
     return retVal;
@@ -2195,7 +2194,7 @@ bool8 sub_800DF34(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
 
 void sub_800DF90(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2)
 {
-    *buff1 = gUnknown_02022B14;
+    memcpy(buff1, &gUnknown_02022B14, 0xD);
     memcpy(buff2, gUnknown_02022B22, 8);
 }
 
@@ -2441,7 +2440,7 @@ void sub_800E5AC(void)
     }
 }
 
-void nullsub_5(void *unused_0, u8 unused_1, u8 unused_2)
+void nullsub_5(const char *unused_0, u8 unused_1, u8 unused_2)
 {
     // debug?
 }
@@ -2537,7 +2536,7 @@ void sub_800E748(u8 taskId)
     }
 }
 
-u8 sub_800E87C(u8 idx)
+s32 sub_800E87C(u8 idx)
 {
     return gUnknown_082ED6A5[idx];
 }
@@ -2815,7 +2814,7 @@ bool8 sub_800EE94(void)
     return FALSE;
 }
 
-bool8 sub_800EEBC(void)
+bool32 sub_800EEBC(void)
 {
     if (gUnknown_03005000.unk_04 == 7 && !sub_800C12C(gUnknown_03007890->unk_14[gUnknown_03005000.unk_c3d].unk_00, 240))
     {
@@ -3503,7 +3502,7 @@ void sub_800FD14(u16 command)
 
 void sub_800FE50(u16 *a0)
 {
-    if (gSendCmd[0] == 0 && sub_8011A80() == 0)
+    if (gSendCmd[0] == 0 && !sub_8011A80())
     {
         memcpy(gUnknown_03005000.unk_f2, a0, sizeof(gUnknown_03005000.unk_f2));
         sub_800FD14(0x2f00);
@@ -4246,7 +4245,7 @@ void sub_8010F48(void)
 
 void sub_8010F60(void)
 {
-    gUnknown_02022B14 = (struct UnkLinkRfuStruct_02022B14){};
+    memset(&gUnknown_02022B14, 0, 0xD);
     sub_800DD94(&gUnknown_02022B14, 0, 0, 0);
 }
 
@@ -4359,7 +4358,7 @@ void sub_80111FC(void)
     gUnknown_03005000.unk_00 = sub_80111DC;
 }
 
-void sub_801120C(u8 a0)
+void sub_801120C(u8 a0, u8 unused1)
 {
     u8 i;
     u8 r6 = 0;
@@ -4442,4 +4441,555 @@ void sub_801120C(u8 a0)
         gUnknown_03005000.unk_cdb = 1;
         break;
     }
+}
+
+void sub_8011404(u8 a0, u8 unused1)
+{
+    switch (a0)
+    {
+    case 0x00:
+        gUnknown_03005000.unk_04 = 6;
+        break;
+    case 0x20:
+        gUnknown_03005000.unk_ccd = gUnknown_03004140.unk_14;
+        break;
+    case 0x21:
+        break;
+    case 0x22:
+        gUnknown_03005000.unk_c3e = gUnknown_03004140.unk_14;
+        break;
+    case 0x23:
+        sub_8011A64(2, a0);
+        break;
+    case 0x24:
+        gUnknown_03005000.unk_04 = 11;
+        gUnknown_03005000.unk_c85 = 0;
+        gUnknown_03005000.unk_c86 = 0;
+        rfu_setRecvBuffer(0x20, gUnknown_03005000.unk_c3e, &gUnknown_03005000.unk_c86, 1);
+        rfu_setRecvBuffer(0x10, gUnknown_03005000.unk_c3e, gUnknown_03005000.unk_c3f, 70);
+        break;
+    case 0x25:
+        sub_8011A64(2, 0x25);
+        break;
+    case 0x30:
+        gUnknown_03005000.unk_f0 = 2;
+        if (gUnknown_03005000.unk_c86 == 6)
+            break;
+    case 0x33:
+        if (gUnknown_03005000.unk_f0 != 2)
+            gUnknown_03005000.unk_f0 = 4;
+        if (gUnknown_03005000.unk_c86 != 9)
+            sub_8011A64(2, a0);
+        nullsub_5(gUnknown_082ED7FC, 5, 5);
+        if (gReceivedRemoteLinkPlayers == 1)
+            sub_8011170(a0);
+        break;
+    case 0x31:
+        gUnknown_03005000.unk_f0 = 1;
+        nullsub_5(gUnknown_082ED814, 5, 5);
+        break;
+    case 0x32:
+        gUnknown_03005000.unk_f0 = 3;
+        gUnknown_03005000.unk_c3c = 1;
+        break;
+    case 0x34:
+        break;
+    case 0x42 ... 0x44:
+        break;
+    case 0xF3:
+        sub_8011A64(1, a0);
+        sub_8011170(a0);
+        gUnknown_03005000.unk_ef = 1;
+        break;
+    case 0xF0 ... 0xF2:
+    case 0xFF:
+        sub_8011A64(1, a0);
+        sub_8011170(a0);
+        gUnknown_03005000.unk_cdb = 1;
+        break;
+    }
+}
+
+void sub_80115EC(s32 a0)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if ((a0 >> i) & 1)
+        {
+            gUnknown_03005000.unk_cea[i] = 0;
+            gUnknown_03005000.unk_cee[i] |= 0xFF;
+        }
+    }
+}
+
+u8 sub_8011628(s32 a0)
+{
+    u8 ret = 0;
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if ((a0 >> i) & 1)
+        {
+            struct UnkLinkRfuStruct_02022B14 *structPtr = &gUnknown_03007890->unk_14[i].unk_06;
+            if (structPtr->unk_0a_0 == 0x45)
+                ret |= (1 << i);
+        }
+    }
+
+    return ret;
+}
+
+void sub_8011674(u8 a0, u8 unused1)
+{
+    u8 r1;
+
+    switch (a0)
+    {
+    case 0x00:
+        gUnknown_03005000.unk_04 = 0x11;
+        break;
+    case 0x10:
+        sub_8011A64(4, 0);
+        break;
+    case 0x11:
+        if (sub_800F7DC()->unk_0a_0 == 0x45 && gUnknown_03005000.unk_cd9 == 0)
+        {
+            u8 idx = sub_8011628(gUnknown_03004140.unk_14);
+            if (idx != 0)
+            {
+                r1 = 1 << sub_800E87C(idx);
+                if (gUnknown_03005000.unk_ce6 == 0 && gUnknown_03005000.unk_ce8 == 0)
+                {
+                    gUnknown_03005000.unk_ce5 = r1;
+                    gUnknown_03005000.unk_ce6 |= (r1 ^ idx);
+                    gUnknown_03005000.unk_ce8 = 1;
+                }
+                else
+                {
+                    gUnknown_03005000.unk_ce6 |= idx;
+                }
+            }
+            if (idx != gUnknown_03004140.unk_14)
+            {
+                gUnknown_03005000.unk_ce3 |= (idx ^ gUnknown_03004140.unk_14);
+                gUnknown_03005000.unk_ce4 = 2;
+            }
+        }
+        else if (sub_800F7DC()->unk_0a_0 == 0x54)
+        {
+            rfu_REQ_disconnect(gUnknown_03004140.unk_00);
+            rfu_waitREQComplete();
+        }
+        sub_80115EC(gUnknown_03004140.unk_14);
+        break;
+    case 0x12:
+        break;
+    case 0x13:
+        break;
+    case 0x14:
+        if (sub_800F7DC()->unk_0a_0 != 0x45 && gUnknown_03004140.unk_01 > 1)
+        {
+            r1 = 1 << sub_800E87C(gUnknown_03004140.unk_14);
+            rfu_REQ_disconnect(gUnknown_03004140.unk_00 ^ r1);
+            rfu_waitREQComplete();
+        }
+        if (gUnknown_03005000.unk_04 == 0xF)
+            gUnknown_03005000.unk_04 = 0x10;
+        break;
+        break;
+    case 0x20:
+        gUnknown_03005000.unk_ccd = gUnknown_03004140.unk_14;
+        break;
+    case 0x21:
+        break;
+    case 0x22:
+        gUnknown_03005000.unk_c3e = gUnknown_03004140.unk_14;
+        break;
+    case 0x23:
+        gUnknown_03005000.unk_04 = 0x12;
+        if (gUnknown_03005000.unk_ccf < 2)
+        {
+            gUnknown_03005000.unk_ccf++;
+            CreateTask(sub_801209C, 2);
+        }
+        else
+        {
+            sub_8011A64(2, a0);
+        }
+        break;
+    case 0x24:
+        gUnknown_03005000.unk_04 = 0xD;
+        sub_8011A64(3, 0);
+        rfu_setRecvBuffer(0x10, gUnknown_03005000.unk_c3e, gUnknown_03005000.unk_c3f, 70);
+        break;
+    case 0x25:
+        sub_8011A64(2, a0);
+        break;
+    case 0x31:
+        if (gUnknown_03004140.unk_00 & gUnknown_03004140.unk_14)
+            gUnknown_03005000.unk_f0 = 1;
+        break;
+    case 0x32:
+        gUnknown_03005000.unk_f0 = 3;
+        if (gUnknown_03007890->unk_00 == 0)
+            gUnknown_03005000.unk_c3c = 1;
+        break;
+    case 0x30:
+        gUnknown_03005000.unk_f0 = 2;
+    case 0x33:
+        if (gUnknown_03005000.unk_f0 != 2)
+            gUnknown_03005000.unk_f0 = 4;
+        if (gUnknown_03005000.unk_0c == 1)
+        {
+            if (gReceivedRemoteLinkPlayers == 1)
+            {
+                gUnknown_03005000.unk_ce2 &= ~(gUnknown_03004140.unk_14);
+                if (gUnknown_03005000.unk_ce2 == 0)
+                    sub_8011170(a0);
+                else
+                    sub_80111FC();
+            }
+        }
+        else if (gUnknown_03005000.unk_ce4 != 2 && gReceivedRemoteLinkPlayers == 1)
+        {
+            sub_8011170(a0);
+            sub_800C27C(0);
+        }
+
+        if (gUnknown_03007890->unk_00 == 0xFF && gUnknown_03004140.unk_07 == 0 && FuncIsActiveTask(sub_800EB44) == TRUE)
+            gUnknown_03005000.unk_04 = 0x11;
+
+        sub_8011A64(2, a0);
+        break;
+    case 0x40:
+        gUnknown_03005000.unk_ce3 = 0;
+        break;
+    case 0x42 ... 0x44:
+        break;
+    case 0xF3:
+        sub_8011A64(1, a0);
+        sub_8011170(a0);
+        gUnknown_03005000.unk_ef = 1;
+        break;
+    case 0xF0 ... 0xF2:
+    case 0xFF:
+        sub_8011170(a0);
+        sub_8011A64(1, a0);
+        gUnknown_03005000.unk_cdb = 0;
+        break;
+    }
+}
+
+void sub_8011A50(void)
+{
+    gUnknown_03005000.unk_ce4 = 2;
+}
+
+void sub_8011A64(u8 a0, u16 a1)
+{
+    gUnknown_03005000.unk_f1 = a0;
+    gUnknown_03005000.unk_0a = a1;
+}
+
+u8 sub_8011A74(void)
+{
+    return gUnknown_03005000.unk_f1;
+}
+
+bool32 sub_8011A80(void)
+{
+    u32 var = sub_8011A74() - 1;
+    if (var < 2)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u8 sub_8011A9C(void)
+{
+    return gUnknown_03005000.unk_ce8;
+}
+
+bool8 Rfu_IsMaster(void)
+{
+    return gUnknown_03005000.unk_0c;
+}
+
+void RfuVSync(void)
+{
+    rfu_syncVBlank_();
+}
+
+void sub_8011AC8(void)
+{
+    CpuFill32(0, gRecvCmds, sizeof(gRecvCmds));
+}
+
+void sub_8011AE8(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_8011AFC(void)
+{
+    s32 i;
+
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetTasks();
+    ResetPaletteFade();
+    SetVBlankCallback(sub_8011AE8);
+    if (IsWirelessAdapterConnected())
+    {
+        gLinkType = 0x1111;
+        sub_800B488();
+        OpenLink();
+        SeedRng(gMain.vblankCounter2);
+        for (i = 0; i < 4; i++)
+            gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
+
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP);
+        RunTasks();
+        AnimateSprites();
+        BuildOamBuffer();
+        UpdatePaletteFade();
+        sub_8011BA4();
+        SetMainCallback2(sub_8011BF8);
+    }
+}
+
+bool32 sub_8011B90(void)
+{
+    return FuncIsActiveTask(sub_800EB44);
+}
+
+void sub_8011BA4(void)
+{
+    if (!FuncIsActiveTask(nullsub_89))
+        gUnknown_03005000.unk_66 = CreateTask(nullsub_89, 0);
+}
+
+void sub_8011BD0(void)
+{
+     if (FuncIsActiveTask(nullsub_89) == TRUE)
+        DestroyTask(gUnknown_03005000.unk_66);
+}
+
+void sub_8011BF8(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_8011C10(u32 a0)
+{
+    gUnknown_03005000.unk_0c = 1;
+    sub_8010F48();
+    sub_800BF4C(sub_801120C, NULL);
+    gUnknown_02022B2C = gUnknown_082ED608;
+    gUnknown_02022B2C.unk_02 = gUnknown_082ED620[a0 - 1];
+    sub_800EE78();
+}
+
+void sub_8011C5C(void)
+{
+    gUnknown_03005000.unk_0c = 0;
+    sub_8010F48();
+    sub_800BF4C(sub_8011404, sub_800ED34);
+    sub_800EF00();
+}
+
+void sub_8011C84(void)
+{
+    gUnknown_03005000.unk_0c = 2;
+    sub_8010F48();
+    sub_800BF4C(sub_8011674, NULL);
+    gUnknown_02022B2C = gUnknown_082ED608;
+    gUnknown_02022B2C.unk_11 = 0;
+    gUnknown_02022B2C.unk_12 = 0x258;
+    gUnknown_03005000.unk_67 = CreateTask(sub_800EB44, 1);
+}
+
+u16 ReadU16(const void *ptr)
+{
+    const u8 *ptr_ = ptr;
+    return (ptr_[1] << 8) | (ptr_[0]);
+}
+
+u8 sub_8011CE4(const u8 *a0, u16 a1)
+{
+    u8 i;
+    u8 ret = 0xFF;
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 trainerId = ReadU16(gUnknown_03007890->unk_14[i].unk_06.unk_00.playerTrainerId);
+        if (sub_8010454(gUnknown_03007890->unk_14[i].unk_04)
+            && !StringCompare(a0, gUnknown_03007890->unk_14[i].playerName)
+            && a1 == trainerId)
+        {
+            ret = i;
+            if (gUnknown_03007890->unk_14[i].unk_02 != 0xFF)
+                break;
+        }
+    }
+
+    return ret;
+}
+
+void sub_8011D6C(u32 a0)
+{
+    rfu_REQ_disconnect(a0);
+    rfu_waitREQComplete();
+    gUnknown_03005000.unk_ce2 &= ~(a0);
+    rfu_clearSlot(1, gUnknown_03005000.unk_cda);
+    rfu_UNI_setSendData(gUnknown_03005000.unk_ce2, gUnknown_03005000.unk_c87, 70);
+    gUnknown_03005000.unk_cda = sub_800E87C(gUnknown_03005000.unk_ce2);
+}
+
+void sub_8011DC0(const u8 *ptr, u16 a1)
+{
+    u8 var = sub_8011CE4(ptr, a1);
+    if (var != 0xFF)
+        sub_8011D6C(1 << var);
+}
+
+void sub_8011DE0(u32 a0)
+{
+    if (a0 != 0)
+    {
+        s32 i;
+        u8 var = 0;
+
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_03005000.unk_cde[i] == a0 && (gUnknown_03005000.unk_ce2 >> i) & 1)
+                var |= 1 << i;
+        }
+        if (var)
+            sub_8011E94(var, 2);
+    }
+}
+
+void sub_8011E2C(u8 taskId)
+{
+    if (gSendCmd[0] == 0 && gUnknown_03005000.unk_ce8 == 0)
+    {
+        sub_800FD14(0xED00);
+        gSendCmd[1] = gTasks[taskId].data[0];
+        gSendCmd[2] = gTasks[taskId].data[1];
+        gUnknown_03005000.playerCount -= gUnknown_082ED695[gTasks[taskId].data[0]];
+        gSendCmd[3] = gUnknown_03005000.playerCount;
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8011E94(u32 a0, u32 a1)
+{
+    u8 taskId = FindTaskIdByFunc(sub_8011E2C);
+    if (taskId == 0xFF)
+    {
+        taskId = CreateTask(sub_8011E2C, 5);
+        gTasks[taskId].data[0] = a0;
+    }
+    else
+    {
+        gTasks[taskId].data[0] |= a0;
+    }
+
+    gTasks[taskId].data[1] = a1;
+}
+
+void sub_8011EF4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (sub_800EE94())
+    {
+        u8 id = sub_8011CE4((u8*)data, ReadU16(&data[8]));
+        if (id != 0xFF)
+        {
+            if (gUnknown_03007890->unk_14[id].unk_02 != 0xFF)
+            {
+                gUnknown_03005000.unk_c3d = id;
+                if (sub_800EEBC())
+                    DestroyTask(taskId);
+            }
+            else if (sub_800F7DC()->unk_0a_0 == 0x15 || sub_800F7DC()->unk_0a_0 == 0x16)
+            {
+                data[15]++;
+            }
+            else
+            {
+                sub_8011A64(2, 0x7000);
+                DestroyTask(taskId);
+            }
+        }
+        else
+        {
+            data[15]++;
+            gUnknown_03005000.unk_c3d = id;
+        }
+    }
+    else
+    {
+        data[15]++;
+    }
+
+    if (data[15] > 240)
+    {
+        sub_8011A64(2, 0x7000);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8011FC8(const u8 *src, u16 trainerId)
+{
+    u8 taskId;
+    s16 *data;
+
+    gUnknown_03005000.unk_f1 = 0;
+    taskId = CreateTask(sub_8011EF4, 3);
+    data = gTasks[taskId].data;
+    StringCopy((u8*)(data), src);
+    data[8] = trainerId;
+}
+
+bool32 sub_801200C(u16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
+{
+    if (sub_800F7DC()->unk_0a_0 == 0x45)
+    {
+        if (structPtr->unk_0a_0 != 0x45)
+            return TRUE;
+    }
+    else if (structPtr->unk_0a_0 != 0x40)
+    {
+        return TRUE;
+    }
+    else if (a1 == 0x44)
+    {
+        struct UnkLinkRfuStruct_02022B14 *structPtr2 = &gUnknown_03005000.unk_10A;
+        if (structPtr2->species == SPECIES_EGG)
+        {
+            if (structPtr->species == structPtr2->species)
+                return FALSE;
+            else
+                return TRUE;
+        }
+        else if (structPtr->species != structPtr2->species
+                 || structPtr->unk_0b_1 != structPtr2->unk_0b_1
+                 || structPtr->type != structPtr2->type)
+        {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }

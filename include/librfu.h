@@ -81,7 +81,7 @@ struct UnkLinkRfuStruct_02022B14Substruct
     u8 playerTrainerId[2];
 };
 
-struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
+struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
 {
     struct UnkLinkRfuStruct_02022B14Substruct unk_00;
     u8 unk_04[4];
@@ -169,13 +169,14 @@ struct RfuUnk3
     u32 unk_dc;
 };
 
-struct RfuUnk5Sub {
+struct RfuUnk5Sub
+{
     u16 unk_00;
     u8 unk_02;
     u16 unk_04;
     struct UnkLinkRfuStruct_02022B14 unk_06;
-    u8 fill_13[2];
-    u8 unk_15[8];
+    u8 fill_13[1];
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct RfuUnk5

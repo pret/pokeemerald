@@ -32,7 +32,8 @@ struct UnkLinkRfuStruct_02022B44
     u8 fill_84[0x58];
 };
 
-struct UnkRfuStruct_1 {
+struct UnkRfuStruct_1
+{
     /* 0x000 */ u8 unk_00;
     /* 0x001 */ u8 unk_01;
     /* 0x002 */ vu8 unk_02;
@@ -75,7 +76,8 @@ struct UnkRfuStruct_1 {
     /* 0xeb4 */ u8 filler_e64[12];
 };
 
-struct UnkRfuStruct_2_Sub_6c {
+struct UnkRfuStruct_2_Sub_6c
+{
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ const u8 *unk_04;
@@ -86,7 +88,8 @@ struct UnkRfuStruct_2_Sub_6c {
     /* 0x12 */ u8 unk_12;
 };
 
-struct UnkRfuStruct_2_Sub_124 {
+struct UnkRfuStruct_2_Sub_124
+{
     /* 0x000 */ u8 unk_00[32][70];
     /* 0x8c0 */ vu8 unk_8c0;
     /* 0x8c1 */ vu8 unk_8c1;
@@ -94,7 +97,8 @@ struct UnkRfuStruct_2_Sub_124 {
     /* 0x8c3 */ vu8 unk_8c3;
 };
 
-struct UnkRfuStruct_2_Sub_9e8 {
+struct UnkRfuStruct_2_Sub_9e8
+{
     /* 0x000 */ u8 unk_00[40][14];
     /* 0x230 */ vu8 unk_230;
     /* 0x231 */ vu8 unk_231;
@@ -102,14 +106,16 @@ struct UnkRfuStruct_2_Sub_9e8 {
     /* 0x233 */ vu8 unk_233;
 };
 
-struct UnkRfuStruct_2_Sub_c1c {
+struct UnkRfuStruct_2_Sub_c1c
+{
     /* 0x00 */ u8 unk_00[2][14];
     /* 0x1c */ vu8 unk_1c;
     /* 0x1d */ vu8 unk_1d;
     /* 0x1e */ vu8 unk_1e;
 };
 
-struct UnkRfuStruct_Sub_Unused {
+struct UnkRfuStruct_Sub_Unused
+{
     /* 0x000 */ u8 unk_00[2][256];
     /* 0x200 */ vu8 unk_200;
     /* 0x201 */ vu8 unk_201;
@@ -117,7 +123,8 @@ struct UnkRfuStruct_Sub_Unused {
     /* 0x203 */ vu8 unk_203;
 };
 
-struct UnkRfuStruct_2 {
+struct UnkRfuStruct_2
+{
     /* 0x000 */ void (*unk_00)(void);
     /* 0x004 */ u16 unk_04;
     /* 0x006 */ u8 filler_06[4];
@@ -149,7 +156,9 @@ struct UnkRfuStruct_2 {
     /* 0x0fe */ u16 unk_fe;
     /* 0x100 */ u16 unk_100;
     /* 0x102 */ u8 unk_102;
-    /* 0x103 */ u8 filler_103[0x21];
+    /* 0x103 */ u8 filler_103[0x10A - 0x103];
+    /* 0x10A */ struct UnkLinkRfuStruct_02022B14 unk_10A;
+    u8 filler_120[12];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
@@ -252,7 +261,7 @@ void sub_800E3A8(void);
 void sub_800ED10(void);
 void sub_800ED28(void);
 void sub_8011090(u8 a0, u32 a1, u32 a2);
-void sub_8011FC8(u8 *a0, u16 a1);
+void sub_8011FC8(const u8 *src, u16 trainerId);
 void sub_8010FA0(bool32 a0, bool32 a1);
 void sub_8010F60(void);
 void sub_8010FCC(u32 a0, u32 a1, u32 a2);
