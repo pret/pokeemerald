@@ -172,7 +172,7 @@ SECTIONS {
         src/dragon.o(.text);
         asm/dark.o(.text);
         src/ground.o(.text);
-        asm/normal.o(.text);
+        src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
         asm/battle_intro.o(.text);
         src/bike.o(.text);

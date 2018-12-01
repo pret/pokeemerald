@@ -47,7 +47,7 @@ const u8 gUnknown_0859741E[] = {0x08, 0x0a, 0x0c, 0x0e};
 
 void sub_8116620(u8 taskId)
 {
-    u32 selectedPalettes = sub_811583C(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     selectedPalettes |= sub_80A76C4((gBattleAnimArgs[0] >>  7) & 1,
                                     (gBattleAnimArgs[0] >>  8) & 1,
                                     (gBattleAnimArgs[0] >>  9) & 1,
@@ -62,7 +62,7 @@ void sub_8116664(u8 taskId)
     u8 animBattlers[2];
 
     animBattlers[1] = 0xFF;
-    selectedPalettes = sub_811583C(1);
+    selectedPalettes = UnpackSelectedBattleAnimPalettes(1);
     switch (gBattleAnimArgs[0])
     {
     case 2:
@@ -105,7 +105,7 @@ void sub_8116664(u8 taskId)
 
 void AnimTask_SetCamouflageBlend(u8 taskId)
 {
-    u32 selectedPalettes = sub_811583C(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     switch (gBattleTerrain)
     {
     case BATTLE_TERRAIN_GRASS:
