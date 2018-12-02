@@ -54,7 +54,6 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/link_rfu.o(.text);
-        asm/link_rfu.o(.text);
         src/rom_8011DC0.o(.text);
         asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
