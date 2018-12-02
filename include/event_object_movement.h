@@ -19,7 +19,8 @@ enum SpinnerRunnerFollowPatterns
     RUNFOLLOW_SOUTH_EAST_WEST
 };
 
-struct UnkStruct_085094AC {
+struct UnkStruct_085094AC
+{
     const union AnimCmd *const *anims;
     u8 animPos[4];
 };
@@ -44,28 +45,6 @@ struct UnkStruct_085094AC {
 #define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
-
-#define movement_type_def(setup, table) \
-static u8 setup##_callback(struct EventObject *, struct Sprite *);\
-void setup(struct Sprite *sprite)\
-{\
-    UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, setup##_callback);\
-}\
-static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprite)\
-{\
-    return table[sprite->data[1]](eventObject, sprite);\
-}
-
-#define movement_type_empty_callback(setup) \
-static u8 setup##_callback(struct EventObject *, struct Sprite *);\
-void setup(struct Sprite *sprite)\
-{\
-    UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, setup##_callback);\
-}\
-static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprite)\
-{\
-    return 0;\
-}
 
 struct PairedPalettes
 {
