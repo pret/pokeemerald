@@ -2,7 +2,7 @@ MeteorFalls_1F_2R_MapScripts:: @ 822C4DD
 	.byte 0
 
 MeteorFalls_1F_2R_EventScript_22C4DE:: @ 822C4DE
-	trainerbattle_normal TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_22C608, MeteorFalls_1F_2R_Text_22C678, MeteorFalls_1F_2R_EventScript_22C50A
+	trainerbattle_single TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_22C608, MeteorFalls_1F_2R_Text_22C678, MeteorFalls_1F_2R_EventScript_22C50A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MeteorFalls_1F_2R_EventScript_22C529

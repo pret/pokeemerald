@@ -12,17 +12,17 @@ Route124_EventScript_1F657C:: @ 81F657C
 	end
 
 Route124_EventScript_1F6585:: @ 81F6585
-	trainerbattle_normal TRAINER_SPENCER, Route124_Text_2A09B1, Route124_Text_2A0A02
+	trainerbattle_single TRAINER_SPENCER, Route124_Text_2A09B1, Route124_Text_2A0A02
 	msgbox Route124_Text_2A0A20, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_1F659C:: @ 81F659C
-	trainerbattle_normal TRAINER_ROLAND, Route124_Text_2A0A84, Route124_Text_2A0ACC
+	trainerbattle_single TRAINER_ROLAND, Route124_Text_2A0A84, Route124_Text_2A0ACC
 	msgbox Route124_Text_2A0AD9, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_1F65B3:: @ 81F65B3
-	trainerbattle_normal TRAINER_JENNY_1, Route124_Text_2A0B37, Route124_Text_2A0B7C, Route124_EventScript_1F65DF
+	trainerbattle_single TRAINER_JENNY_1, Route124_Text_2A0B37, Route124_Text_2A0B7C, Route124_EventScript_1F65DF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route124_EventScript_1F65FE
@@ -44,12 +44,12 @@ Route124_EventScript_1F65FE:: @ 81F65FE
 	end
 
 Route124_EventScript_1F6615:: @ 81F6615
-	trainerbattle_normal TRAINER_GRACE, Route124_Text_2A0D0A, Route124_Text_2A0D3D
+	trainerbattle_single TRAINER_GRACE, Route124_Text_2A0D0A, Route124_Text_2A0D3D
 	msgbox Route124_Text_2A0D66, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_1F662C:: @ 81F662C
-	trainerbattle_normal TRAINER_CHAD, Route124_Text_2A0DA0, Route124_Text_2A0DFF
+	trainerbattle_single TRAINER_CHAD, Route124_Text_2A0DA0, Route124_Text_2A0DFF
 	msgbox Route124_Text_2A0E1E, MSGBOX_AUTOCLOSE
 	end
 
@@ -94,12 +94,12 @@ Route124_EventScript_1F66F0:: @ 81F66F0
 	end
 
 Route124_EventScript_1F670B:: @ 81F670B
-	trainerbattle_normal TRAINER_DECLAN, Route124_Text_2A13BD, Route124_Text_2A142C
+	trainerbattle_single TRAINER_DECLAN, Route124_Text_2A13BD, Route124_Text_2A142C
 	msgbox Route124_Text_2A144F, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_1F6722:: @ 81F6722
-	trainerbattle_normal TRAINER_ISABELLA, Route124_Text_2A148E, Route124_Text_2A14BC
+	trainerbattle_single TRAINER_ISABELLA, Route124_Text_2A148E, Route124_Text_2A14BC
 	msgbox Route124_Text_2A14ED, MSGBOX_AUTOCLOSE
 	end
 

@@ -46,22 +46,22 @@ Route123_EventScript_1F61BC:: @ 81F61BC
 	end
 
 Route123_EventScript_1F61C5:: @ 81F61C5
-	trainerbattle_normal TRAINER_WENDY, Route123_Text_29FBEB, Route123_Text_29FC23
+	trainerbattle_single TRAINER_WENDY, Route123_Text_29FBEB, Route123_Text_29FC23
 	msgbox Route123_Text_29FC42, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F61DC:: @ 81F61DC
-	trainerbattle_normal TRAINER_BRAXTON, Route123_Text_29FC6F, Route123_Text_29FCD6
+	trainerbattle_single TRAINER_BRAXTON, Route123_Text_29FC6F, Route123_Text_29FCD6
 	msgbox Route123_Text_29FCF4, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F61F3:: @ 81F61F3
-	trainerbattle_normal TRAINER_VIOLET, Route123_Text_29FD1D, Route123_Text_29FD53
+	trainerbattle_single TRAINER_VIOLET, Route123_Text_29FD1D, Route123_Text_29FD53
 	msgbox Route123_Text_29FD7B, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F620A:: @ 81F620A
-	trainerbattle_normal TRAINER_CAMERON_1, Route123_Text_29FDBA, Route123_Text_29FE1E, Route123_EventScript_1F6236
+	trainerbattle_single TRAINER_CAMERON_1, Route123_Text_29FDBA, Route123_Text_29FE1E, Route123_EventScript_1F6236
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route123_EventScript_1F6255
@@ -83,7 +83,7 @@ Route123_EventScript_1F6255:: @ 81F6255
 	end
 
 Route123_EventScript_1F626C:: @ 81F626C
-	trainerbattle_normal TRAINER_JACKI_1, Route123_Text_29FF61, Route123_Text_29FFD8, Route123_EventScript_1F6298
+	trainerbattle_single TRAINER_JACKI_1, Route123_Text_29FF61, Route123_Text_29FFD8, Route123_EventScript_1F6298
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route123_EventScript_1F62B7
@@ -115,47 +115,47 @@ Route123_EventScript_1F62E9:: @ 81F62E9
 	end
 
 Route123_EventScript_1F6304:: @ 81F6304
-	trainerbattle_normal TRAINER_KINDRA, Route123_Text_2A025F, Route123_Text_2A02A6
+	trainerbattle_single TRAINER_KINDRA, Route123_Text_2A025F, Route123_Text_2A02A6
 	msgbox Route123_Text_2A02C1, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F631B:: @ 81F631B
-	trainerbattle_normal TRAINER_FREDRICK, Route123_Text_2A060A, Route123_Text_2A0631
+	trainerbattle_single TRAINER_FREDRICK, Route123_Text_2A060A, Route123_Text_2A0631
 	msgbox Route123_Text_2A0672, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F6332:: @ 81F6332
-	trainerbattle_normal TRAINER_ALBERTO, Route123_Text_2A06AF, Route123_Text_2A0704
+	trainerbattle_single TRAINER_ALBERTO, Route123_Text_2A06AF, Route123_Text_2A0704
 	msgbox Route123_Text_2A072B, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F6349:: @ 81F6349
-	trainerbattle_normal TRAINER_ED, Route123_Text_2A079B, Route123_Text_2A07F0
+	trainerbattle_single TRAINER_ED, Route123_Text_2A079B, Route123_Text_2A07F0
 	msgbox Route123_Text_2A080D, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F6360:: @ 81F6360
-	trainerbattle_normal TRAINER_KAYLEY, Route123_Text_2A0902, Route123_Text_2A0943
+	trainerbattle_single TRAINER_KAYLEY, Route123_Text_2A0902, Route123_Text_2A0943
 	msgbox Route123_Text_2A096E, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F6377:: @ 81F6377
-	trainerbattle_normal TRAINER_JONAS, Route123_Text_2A0854, Route123_Text_2A088A
+	trainerbattle_single TRAINER_JONAS, Route123_Text_2A0854, Route123_Text_2A088A
 	msgbox Route123_Text_2A08CA, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F638E:: @ 81F638E
-	trainerbattle_normal TRAINER_JAZMYN, Route123_Text_2A054E, Route123_Text_2A0592
+	trainerbattle_single TRAINER_JAZMYN, Route123_Text_2A054E, Route123_Text_2A0592
 	msgbox Route123_Text_2A05AC, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F63A5:: @ 81F63A5
-	trainerbattle_normal TRAINER_DAVIS, Route123_Text_2A04C0, Route123_Text_2A04FE
+	trainerbattle_single TRAINER_DAVIS, Route123_Text_2A04C0, Route123_Text_2A04FE
 	msgbox Route123_Text_2A0512, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_1F63BC:: @ 81F63BC
-	trainerbattle_normal TRAINER_FERNANDO_1, Route123_Text_2A0323, Route123_Text_2A035C, Route123_EventScript_1F63E8
+	trainerbattle_single TRAINER_FERNANDO_1, Route123_Text_2A0323, Route123_Text_2A035C, Route123_EventScript_1F63E8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route123_EventScript_1F6407

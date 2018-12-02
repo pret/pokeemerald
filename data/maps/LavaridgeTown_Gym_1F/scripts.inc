@@ -59,7 +59,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE78B:: @ 81FE78B
 	return
 
 LavaridgeTown_Gym_1F_EventScript_1FE78C:: @ 81FE78C
-	trainerbattle_normal TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_1FF0DC, LavaridgeTown_Gym_1F_Text_1FF233, LavaridgeTown_Gym_1F_EventScript_1FE7C1, NO_MUSIC
+	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_1FF0DC, LavaridgeTown_Gym_1F_Text_1FF233, LavaridgeTown_Gym_1F_EventScript_1FE7C1, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq LavaridgeTown_Gym_1F_EventScript_1FE864

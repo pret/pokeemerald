@@ -634,7 +634,7 @@
 	.byte \type
 	.2byte \trainer
 	.2byte \local_id
-	.if \type == TRAINER_BATTLE_NORMAL
+	.if \type == TRAINER_BATTLE_SINGLE
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 	.elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
@@ -645,7 +645,7 @@
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ event script
-	.elseif \type == TRAINER_BATTLE_NORMAL_NO_INTRO_TEXT
+	.elseif \type == TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT
 		.4byte \pointer1 @ text
 	.elseif \type == TRAINER_BATTLE_DOUBLE
 		.4byte \pointer1 @ text
@@ -685,10 +685,11 @@
 
 	NO_MUSIC = FALSE
 
-	@ Starts a normal trainer battle
-	.macro trainerbattle_normal trainer, intro_text, lose_text, event_script=FALSE, music=TRUE
+	@ Starts a single trainer battle, takes a trainer, intro text, loss text, and an optional event script
+	@ when used with an event script, you can also pass in an optional flag to disable music
+	.macro trainerbattle_single trainer, intro_text, lose_text, event_script=FALSE, music=TRUE
 	.if \event_script == FALSE
-	trainerbattle TRAINER_BATTLE_NORMAL, \trainer, 0, \intro_text, \lose_text
+	trainerbattle TRAINER_BATTLE_SINGLE, \trainer, 0, \intro_text, \lose_text
 	.elseif \event_script != FALSE && \music == TRUE
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, \trainer, 0, \intro_text, \lose_text, \event_script
 	.else
@@ -696,7 +697,8 @@
 	.endif
 	.endm
 
-	@ Starts a double trainer battle
+	@ Starts a double trainer battle, takes a trainer, intro text, loss text, text for when you have too few pokemon
+	@ and an optional event script, when used with an event script you can pass in an optional flag to disable music
 	.macro trainerbattle_double trainer, intro_text, lose_text, not_enough_pkmn_text, event_script=FALSE, music=TRUE
 	.if \event_script == FALSE
 	trainerbattle TRAINER_BATTLE_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
@@ -707,17 +709,21 @@
 	.endif
 	.endm
 
+	@ Starts a rematch battle, takes a trainer, intro text and loss text
 	.macro trainerbattle_rematch trainer, intro_text, lose_text
 	trainerbattle TRAINER_BATTLE_REMATCH, \trainer, 0, \intro_text, \lose_text
 	.endm
 
+	@ Starts a rematch double battle, takes a trainer, intro text, loss text, and text for when you have too few pokemon
 	.macro trainerbattle_rematch_double trainer, intro_text, lose_text, not_enough_pkmn_text
 	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
 	.endm
 
+	@ Starts a trainer battle, skipping intro text, takes a trainer and loss text
 	.macro trainerbattle_no_intro trainer, lose_text
-	trainerbattle TRAINER_BATTLE_NORMAL_NO_INTRO_TEXT, \trainer, 0, \lose_text
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, 0, \lose_text
 	.endm
+
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this command behind-the-scenes), and blocks script execution until the battle finishes.
 	.macro trainerbattlebegin

@@ -6,12 +6,12 @@ AbandonedShip_Rooms_1F_EventScript_237A93:: @ 8237A93
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237A9C:: @ 8237A9C
-	trainerbattle_normal TRAINER_DEMETRIUS, AbandonedShip_Rooms_1F_Text_237D0C, AbandonedShip_Rooms_1F_Text_237D2A
+	trainerbattle_single TRAINER_DEMETRIUS, AbandonedShip_Rooms_1F_Text_237D0C, AbandonedShip_Rooms_1F_Text_237D2A
 	msgbox AbandonedShip_Rooms_1F_Text_237D41, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237AB3:: @ 8237AB3
-	trainerbattle_normal TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_237B76, AbandonedShip_Rooms_1F_Text_237BB8, AbandonedShip_Rooms_1F_EventScript_237ADF
+	trainerbattle_single TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_237B76, AbandonedShip_Rooms_1F_Text_237BB8, AbandonedShip_Rooms_1F_EventScript_237ADF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms_1F_EventScript_237AFE

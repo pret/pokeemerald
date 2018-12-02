@@ -89,27 +89,27 @@ Route114_EventScript_1F2637:: @ 81F2637
 	end
 
 Route114_EventScript_1F2640:: @ 81F2640
-	trainerbattle_normal TRAINER_LENNY, Route114_Text_29A6B1, Route114_Text_29A707
+	trainerbattle_single TRAINER_LENNY, Route114_Text_29A6B1, Route114_Text_29A707
 	msgbox Route114_Text_29A715, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2657:: @ 81F2657
-	trainerbattle_normal TRAINER_LUCAS_1, Route114_Text_29A777, Route114_Text_29A7B5
+	trainerbattle_single TRAINER_LUCAS_1, Route114_Text_29A777, Route114_Text_29A7B5
 	msgbox Route114_Text_29A7D4, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F266E:: @ 81F266E
-	trainerbattle_normal TRAINER_SHANE, Route114_Text_29A818, Route114_Text_29A88F
+	trainerbattle_single TRAINER_SHANE, Route114_Text_29A818, Route114_Text_29A88F
 	msgbox Route114_Text_29A89F, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2685:: @ 81F2685
-	trainerbattle_normal TRAINER_NANCY, Route114_Text_29A8D9, Route114_Text_29A90E
+	trainerbattle_single TRAINER_NANCY, Route114_Text_29A8D9, Route114_Text_29A90E
 	msgbox Route114_Text_29A916, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F269C:: @ 81F269C
-	trainerbattle_normal TRAINER_STEVE_1, Route114_Text_29A943, Route114_Text_29A973, Route114_EventScript_1F26C8
+	trainerbattle_single TRAINER_STEVE_1, Route114_Text_29A943, Route114_Text_29A973, Route114_EventScript_1F26C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route114_EventScript_1F26E7
@@ -131,7 +131,7 @@ Route114_EventScript_1F26E7:: @ 81F26E7
 	end
 
 Route114_EventScript_1F26FE:: @ 81F26FE
-	trainerbattle_normal TRAINER_BERNIE_1, Route114_Text_29AADB, Route114_Text_29AB1A, Route114_EventScript_1F272A
+	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_29AADB, Route114_Text_29AB1A, Route114_EventScript_1F272A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route114_EventScript_1F2749
@@ -153,12 +153,12 @@ Route114_EventScript_1F2749:: @ 81F2749
 	end
 
 Route114_EventScript_1F2760:: @ 81F2760
-	trainerbattle_normal TRAINER_CLAUDE, Route114_Text_29ACB3, Route114_Text_29AD0A
+	trainerbattle_single TRAINER_CLAUDE, Route114_Text_29ACB3, Route114_Text_29AD0A
 	msgbox Route114_Text_29AD2E, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2777:: @ 81F2777
-	trainerbattle_normal TRAINER_NOLAN, Route114_Text_29ADA1, Route114_Text_29AE05
+	trainerbattle_single TRAINER_NOLAN, Route114_Text_29ADA1, Route114_Text_29AE05
 	msgbox Route114_Text_29AE3D, MSGBOX_AUTOCLOSE
 	end
 
@@ -173,17 +173,17 @@ Route114_EventScript_1F27A9:: @ 81F27A9
 	end
 
 Route114_EventScript_1F27C4:: @ 81F27C4
-	trainerbattle_normal TRAINER_ANGELINA, Route114_Text_29B16F, Route114_Text_29B19C
+	trainerbattle_single TRAINER_ANGELINA, Route114_Text_29B16F, Route114_Text_29B19C
 	msgbox Route114_Text_29B1BC, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F27DB:: @ 81F27DB
-	trainerbattle_normal TRAINER_CHARLOTTE, Route114_Text_29B0DB, Route114_Text_29B0FB
+	trainerbattle_single TRAINER_CHARLOTTE, Route114_Text_29B0DB, Route114_Text_29B0FB
 	msgbox Route114_Text_29B11A, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F27F2:: @ 81F27F2
-	trainerbattle_normal TRAINER_KAI, Route114_Text_29B05D, Route114_Text_29B089
+	trainerbattle_single TRAINER_KAI, Route114_Text_29B05D, Route114_Text_29B089
 	msgbox Route114_Text_29B0B5, MSGBOX_AUTOCLOSE
 	end
 

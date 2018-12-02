@@ -30,17 +30,17 @@ SSTidalRooms_EventScript_23CA33:: @ 823CA33
 	end
 
 SSTidalRooms_EventScript_23CA49:: @ 823CA49
-	trainerbattle_normal TRAINER_COLTON, SSTidalRooms_Text_23CB14, SSTidalRooms_Text_23CB58
+	trainerbattle_single TRAINER_COLTON, SSTidalRooms_Text_23CB14, SSTidalRooms_Text_23CB58
 	msgbox SSTidalRooms_Text_23CB75, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA60:: @ 823CA60
-	trainerbattle_normal TRAINER_MICAH, SSTidalRooms_Text_23CBEB, SSTidalRooms_Text_23CC04
+	trainerbattle_single TRAINER_MICAH, SSTidalRooms_Text_23CBEB, SSTidalRooms_Text_23CC04
 	msgbox SSTidalRooms_Text_23CC26, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA77:: @ 823CA77
-	trainerbattle_normal TRAINER_THOMAS, SSTidalRooms_Text_23CC68, SSTidalRooms_Text_23CC8A
+	trainerbattle_single TRAINER_THOMAS, SSTidalRooms_Text_23CC68, SSTidalRooms_Text_23CC8A
 	msgbox SSTidalRooms_Text_23CCBB, MSGBOX_AUTOCLOSE
 	end
 
@@ -55,12 +55,12 @@ SSTidalRooms_EventScript_23CAA9:: @ 823CAA9
 	end
 
 SSTidalRooms_EventScript_23CAC4:: @ 823CAC4
-	trainerbattle_normal TRAINER_GARRET, SSTidalRooms_Text_23CEEE, SSTidalRooms_Text_23CF36
+	trainerbattle_single TRAINER_GARRET, SSTidalRooms_Text_23CEEE, SSTidalRooms_Text_23CF36
 	msgbox SSTidalRooms_Text_23CF45, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CADB:: @ 823CADB
-	trainerbattle_normal TRAINER_NAOMI, SSTidalRooms_Text_23CF97, SSTidalRooms_Text_23CFF4
+	trainerbattle_single TRAINER_NAOMI, SSTidalRooms_Text_23CF97, SSTidalRooms_Text_23CFF4
 	msgbox SSTidalRooms_Text_23D013, MSGBOX_AUTOCLOSE
 	end
 

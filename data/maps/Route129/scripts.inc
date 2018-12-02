@@ -32,27 +32,27 @@ Route129_MapScript2_1F72E2: @ 81F72E2
 	.2byte 0
 
 Route129_EventScript_1F72EC:: @ 81F72EC
-	trainerbattle_normal TRAINER_CHASE, Route129_Text_2A2F66, Route129_Text_2A2F9D
+	trainerbattle_single TRAINER_CHASE, Route129_Text_2A2F66, Route129_Text_2A2F9D
 	msgbox Route129_Text_2A2FB9, MSGBOX_AUTOCLOSE
 	end
 
 Route129_EventScript_1F7303:: @ 81F7303
-	trainerbattle_normal TRAINER_ALLISON, Route129_Text_2A2FF2, Route129_Text_2A3034
+	trainerbattle_single TRAINER_ALLISON, Route129_Text_2A2FF2, Route129_Text_2A3034
 	msgbox Route129_Text_2A3048, MSGBOX_AUTOCLOSE
 	end
 
 Route129_EventScript_1F731A:: @ 81F731A
-	trainerbattle_normal TRAINER_REED, Route129_Text_2A30CD, Route129_Text_2A30F1
+	trainerbattle_single TRAINER_REED, Route129_Text_2A30CD, Route129_Text_2A30F1
 	msgbox Route129_Text_2A3114, MSGBOX_AUTOCLOSE
 	end
 
 Route129_EventScript_1F7331:: @ 81F7331
-	trainerbattle_normal TRAINER_TISHA, Route129_Text_2A314E, Route129_Text_2A317D
+	trainerbattle_single TRAINER_TISHA, Route129_Text_2A314E, Route129_Text_2A317D
 	msgbox Route129_Text_2A31A6, MSGBOX_AUTOCLOSE
 	end
 
 Route129_EventScript_1F7348:: @ 81F7348
-	trainerbattle_normal TRAINER_CLARENCE, Route129_Text_2A3204, Route129_Text_2A3239
+	trainerbattle_single TRAINER_CLARENCE, Route129_Text_2A3204, Route129_Text_2A3239
 	msgbox Route129_Text_2A3252, MSGBOX_AUTOCLOSE
 	end
 

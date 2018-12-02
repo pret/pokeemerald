@@ -2,7 +2,7 @@ MagmaHideout_3F_2R_MapScripts:: @ 823A3D4
 	.byte 0
 
 MagmaHideout_3F_2R_EventScript_23A3D5:: @ 823A3D5
-	trainerbattle_normal TRAINER_GRUNT_47, MagmaHideout_3F_2R_Text_23A3EC, MagmaHideout_3F_2R_Text_23A4BB
+	trainerbattle_single TRAINER_GRUNT_47, MagmaHideout_3F_2R_Text_23A3EC, MagmaHideout_3F_2R_Text_23A4BB
 	msgbox MagmaHideout_3F_2R_Text_23A4EF, MSGBOX_AUTOCLOSE
 	end
 

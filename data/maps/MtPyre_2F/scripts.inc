@@ -18,7 +18,7 @@ MtPyre_2F_EventScript_23111F:: @ 823111F
 	end
 
 MtPyre_2F_EventScript_231128:: @ 8231128
-	trainerbattle_normal TRAINER_MARK, MtPyre_2F_Text_231258, MtPyre_2F_Text_2312A2
+	trainerbattle_single TRAINER_MARK, MtPyre_2F_Text_231258, MtPyre_2F_Text_2312A2
 	msgbox MtPyre_2F_Text_2312CB, MSGBOX_AUTOCLOSE
 	end
 
@@ -33,12 +33,12 @@ MtPyre_2F_EventScript_23115A:: @ 823115A
 	end
 
 MtPyre_2F_EventScript_231175:: @ 8231175
-	trainerbattle_normal TRAINER_LEAH, MtPyre_2F_Text_231604, MtPyre_2F_Text_231645
+	trainerbattle_single TRAINER_LEAH, MtPyre_2F_Text_231604, MtPyre_2F_Text_231645
 	msgbox MtPyre_2F_Text_23165A, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_23118C:: @ 823118C
-	trainerbattle_normal TRAINER_ZANDER, MtPyre_2F_Text_2316C7, MtPyre_2F_Text_2316E1
+	trainerbattle_single TRAINER_ZANDER, MtPyre_2F_Text_2316C7, MtPyre_2F_Text_2316E1
 	msgbox MtPyre_2F_Text_2316FB, MSGBOX_AUTOCLOSE
 	end
 

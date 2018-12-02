@@ -2,17 +2,17 @@ MtPyre_3F_MapScripts:: @ 8231752
 	.byte 0
 
 MtPyre_3F_EventScript_231753:: @ 8231753
-	trainerbattle_normal TRAINER_WILLIAM, MtPyre_3F_Text_2317E3, MtPyre_3F_Text_231853
+	trainerbattle_single TRAINER_WILLIAM, MtPyre_3F_Text_2317E3, MtPyre_3F_Text_231853
 	msgbox MtPyre_3F_Text_231869, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_EventScript_23176A:: @ 823176A
-	trainerbattle_normal TRAINER_KAYLA, MtPyre_3F_Text_2318A1, MtPyre_3F_Text_2318DD
+	trainerbattle_single TRAINER_KAYLA, MtPyre_3F_Text_2318A1, MtPyre_3F_Text_2318DD
 	msgbox MtPyre_3F_Text_2318F2, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_EventScript_231781:: @ 8231781
-	trainerbattle_normal TRAINER_GABRIELLE_1, MtPyre_3F_Text_231952, MtPyre_3F_Text_23196A, MtPyre_3F_EventScript_2317AD
+	trainerbattle_single TRAINER_GABRIELLE_1, MtPyre_3F_Text_231952, MtPyre_3F_Text_23196A, MtPyre_3F_EventScript_2317AD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtPyre_3F_EventScript_2317CC

@@ -32,37 +32,37 @@ Route105_MapScript2_1EE240: @ 81EE240
 	.2byte 0
 
 Route105_EventScript_1EE24A:: @ 81EE24A
-	trainerbattle_normal TRAINER_FOSTER, Route105_Text_295D0F, Route105_Text_295D62
+	trainerbattle_single TRAINER_FOSTER, Route105_Text_295D0F, Route105_Text_295D62
 	msgbox Route105_Text_295DAB, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_1EE261:: @ 81EE261
-	trainerbattle_normal TRAINER_LUIS, Route105_Text_295DF5, Route105_Text_295E66
+	trainerbattle_single TRAINER_LUIS, Route105_Text_295DF5, Route105_Text_295E66
 	msgbox Route105_Text_295E72, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_1EE278:: @ 81EE278
-	trainerbattle_normal TRAINER_DOMINIK, Route105_Text_295EB7, Route105_Text_295EEA
+	trainerbattle_single TRAINER_DOMINIK, Route105_Text_295EB7, Route105_Text_295EEA
 	msgbox Route105_Text_295F08, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_1EE28F:: @ 81EE28F
-	trainerbattle_normal TRAINER_BEVERLY, Route105_Text_295F5C, Route105_Text_295FA0
+	trainerbattle_single TRAINER_BEVERLY, Route105_Text_295F5C, Route105_Text_295FA0
 	msgbox Route105_Text_295FAE, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_1EE2A6:: @ 81EE2A6
-	trainerbattle_normal TRAINER_IMANI, Route105_Text_296025, Route105_Text_296059
+	trainerbattle_single TRAINER_IMANI, Route105_Text_296025, Route105_Text_296059
 	msgbox Route105_Text_296076, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_1EE2BD:: @ 81EE2BD
-	trainerbattle_normal TRAINER_JOSUE, Route105_Text_29626F, Route105_Text_2962CB
+	trainerbattle_single TRAINER_JOSUE, Route105_Text_29626F, Route105_Text_2962CB
 	msgbox Route105_Text_2962EC, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_1EE2D4:: @ 81EE2D4
-	trainerbattle_normal TRAINER_ANDRES_1, Route105_Text_2960A9, Route105_Text_2960DB, Route105_EventScript_1EE300
+	trainerbattle_single TRAINER_ANDRES_1, Route105_Text_2960A9, Route105_Text_2960DB, Route105_EventScript_1EE300
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route105_EventScript_1EE31F

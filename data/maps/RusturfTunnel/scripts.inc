@@ -426,7 +426,7 @@ RusturfTunnel_Movement_22D1A7: @ 822D1A7
 	step_end
 
 RusturfTunnel_EventScript_22D1B1:: @ 822D1B1
-	trainerbattle_normal TRAINER_MIKE_2, RusturfTunnel_Text_22D84D, RusturfTunnel_Text_22D8DB
+	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_22D84D, RusturfTunnel_Text_22D8DB
 	msgbox RusturfTunnel_Text_22D8F9, MSGBOX_AUTOCLOSE
 	end
 

@@ -18,22 +18,22 @@ Route131_EventScript_1F741F:: @ 81F741F
 	return
 
 Route131_EventScript_1F7429:: @ 81F7429
-	trainerbattle_normal TRAINER_RICHARD, Route131_Text_2A34C8, Route131_Text_2A350D
+	trainerbattle_single TRAINER_RICHARD, Route131_Text_2A34C8, Route131_Text_2A350D
 	msgbox Route131_Text_2A353D, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_1F7440:: @ 81F7440
-	trainerbattle_normal TRAINER_HERMAN, Route131_Text_2A35C6, Route131_Text_2A3626
+	trainerbattle_single TRAINER_HERMAN, Route131_Text_2A35C6, Route131_Text_2A3626
 	msgbox Route131_Text_2A362D, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_1F7457:: @ 81F7457
-	trainerbattle_normal TRAINER_SUSIE, Route131_Text_2A367B, Route131_Text_2A36AB
+	trainerbattle_single TRAINER_SUSIE, Route131_Text_2A367B, Route131_Text_2A36AB
 	msgbox Route131_Text_2A36D6, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_1F746E:: @ 81F746E
-	trainerbattle_normal TRAINER_KARA, Route131_Text_2A3751, Route131_Text_2A378A
+	trainerbattle_single TRAINER_KARA, Route131_Text_2A3751, Route131_Text_2A378A
 	msgbox Route131_Text_2A379F, MSGBOX_AUTOCLOSE
 	end
 
@@ -48,12 +48,12 @@ Route131_EventScript_1F74A0:: @ 81F74A0
 	end
 
 Route131_EventScript_1F74BB:: @ 81F74BB
-	trainerbattle_normal TRAINER_TALIA, Route131_Text_2A39FE, Route131_Text_2A3A38
+	trainerbattle_single TRAINER_TALIA, Route131_Text_2A39FE, Route131_Text_2A3A38
 	msgbox Route131_Text_2A3A48, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_1F74D2:: @ 81F74D2
-	trainerbattle_normal TRAINER_KEVIN, Route131_Text_2A3AA0, Route131_Text_2A3AFC
+	trainerbattle_single TRAINER_KEVIN, Route131_Text_2A3AA0, Route131_Text_2A3AFC
 	msgbox Route131_Text_2A3B02, MSGBOX_AUTOCLOSE
 	end
 

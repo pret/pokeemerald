@@ -273,12 +273,12 @@ PetalburgWoods_EventScript_22E264:: @ 822E264
 	end
 
 PetalburgWoods_EventScript_22E26D:: @ 822E26D
-	trainerbattle_normal TRAINER_LYLE, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
+	trainerbattle_single TRAINER_LYLE, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
 	msgbox PetalburgWoods_Text_22E7EF, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_EventScript_22E284:: @ 822E284
-	trainerbattle_normal TRAINER_JAMES_1, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
+	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq PetalburgWoods_EventScript_22E31B

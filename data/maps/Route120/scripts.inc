@@ -291,12 +291,12 @@ Route120_EventScript_1F57CE:: @ 81F57CE
 	end
 
 Route120_EventScript_1F57D7:: @ 81F57D7
-	trainerbattle_normal TRAINER_COLIN, Route120_Text_29E62D, Route120_Text_29E665
+	trainerbattle_single TRAINER_COLIN, Route120_Text_29E62D, Route120_Text_29E665
 	msgbox Route120_Text_29E67A, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F57EE:: @ 81F57EE
-	trainerbattle_normal TRAINER_ROBERT_1, Route120_Text_29E6E3, Route120_Text_29E70A, Route120_EventScript_1F581A
+	trainerbattle_single TRAINER_ROBERT_1, Route120_Text_29E6E3, Route120_Text_29E70A, Route120_EventScript_1F581A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F5839
@@ -318,17 +318,17 @@ Route120_EventScript_1F5839:: @ 81F5839
 	end
 
 Route120_EventScript_1F5850:: @ 81F5850
-	trainerbattle_normal TRAINER_LORENZO, Route120_Text_29E843, Route120_Text_29E884
+	trainerbattle_single TRAINER_LORENZO, Route120_Text_29E843, Route120_Text_29E884
 	msgbox Route120_Text_29E8C5, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F5867:: @ 81F5867
-	trainerbattle_normal TRAINER_JENNA, Route120_Text_29E91C, Route120_Text_29E980
+	trainerbattle_single TRAINER_JENNA, Route120_Text_29E91C, Route120_Text_29E980
 	msgbox Route120_Text_29E996, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F587E:: @ 81F587E
-	trainerbattle_normal TRAINER_JEFFREY_1, Route120_Text_29E9D7, Route120_Text_29E9FF, Route120_EventScript_1F58AA
+	trainerbattle_single TRAINER_JEFFREY_1, Route120_Text_29E9D7, Route120_Text_29E9FF, Route120_EventScript_1F58AA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F58C9
@@ -350,42 +350,42 @@ Route120_EventScript_1F58C9:: @ 81F58C9
 	end
 
 Route120_EventScript_1F58E0:: @ 81F58E0
-	trainerbattle_normal TRAINER_JENNIFER, Route120_Text_29EAEF, Route120_Text_29EB53
+	trainerbattle_single TRAINER_JENNIFER, Route120_Text_29EAEF, Route120_Text_29EB53
 	msgbox Route120_Text_29EB6E, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F58F7:: @ 81F58F7
-	trainerbattle_normal TRAINER_CHIP, Route120_Text_29EBAF, Route120_Text_29EC25
+	trainerbattle_single TRAINER_CHIP, Route120_Text_29EBAF, Route120_Text_29EC25
 	msgbox Route120_Text_29EC41, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F590E:: @ 81F590E
-	trainerbattle_normal TRAINER_CLARISSA, Route120_Text_29ECA6, Route120_Text_29ECEF
+	trainerbattle_single TRAINER_CLARISSA, Route120_Text_29ECA6, Route120_Text_29ECEF
 	msgbox Route120_Text_29ED19, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F5925:: @ 81F5925
-	trainerbattle_normal TRAINER_ANGELICA, Route120_Text_29ED71, Route120_Text_29EDD3
+	trainerbattle_single TRAINER_ANGELICA, Route120_Text_29ED71, Route120_Text_29EDD3
 	msgbox Route120_Text_29EDF7, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F593C:: @ 81F593C
-	trainerbattle_normal TRAINER_KEIGO, Route120_Text_29EE50, Route120_Text_29EE97
+	trainerbattle_single TRAINER_KEIGO, Route120_Text_29EE50, Route120_Text_29EE97
 	msgbox Route120_Text_29EED4, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F5953:: @ 81F5953
-	trainerbattle_normal TRAINER_RILEY, Route120_Text_29EF08, Route120_Text_29EF63
+	trainerbattle_single TRAINER_RILEY, Route120_Text_29EF08, Route120_Text_29EF63
 	msgbox Route120_Text_29EF89, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F596A:: @ 81F596A
-	trainerbattle_normal TRAINER_LEONEL, Route120_Text_29F04F, Route120_Text_29F080
+	trainerbattle_single TRAINER_LEONEL, Route120_Text_29F04F, Route120_Text_29F080
 	msgbox Route120_Text_29F0A1, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_1F5981:: @ 81F5981
-	trainerbattle_normal TRAINER_CALLIE, Route120_Text_29EFB1, Route120_Text_29EFE1
+	trainerbattle_single TRAINER_CALLIE, Route120_Text_29EFB1, Route120_Text_29EFE1
 	msgbox Route120_Text_29F002, MSGBOX_AUTOCLOSE
 	end
 

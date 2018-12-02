@@ -44,7 +44,7 @@ AquaHideout_1F_EventScript_2334EE:: @ 82334EE
 	end
 
 AquaHideout_1F_EventScript_2334F8:: @ 82334F8
-	trainerbattle_normal TRAINER_GRUNT_1, AquaHideout_1F_Text_23393D, AquaHideout_1F_Text_233964, AquaHideout_1F_EventScript_233513
+	trainerbattle_single TRAINER_GRUNT_1, AquaHideout_1F_Text_23393D, AquaHideout_1F_Text_233964, AquaHideout_1F_EventScript_233513
 	msgbox AquaHideout_1F_Text_233977, MSGBOX_AUTOCLOSE
 	end
 

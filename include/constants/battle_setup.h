@@ -1,10 +1,10 @@
 #ifndef GUARD_CONSTANTS_BATTLE_SETUP_H
 #define GUARD_CONSTANTS_BATTLE_SETUP_H
 
-#define TRAINER_BATTLE_NORMAL                           0
+#define TRAINER_BATTLE_SINGLE                           0
 #define TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC         1
 #define TRAINER_BATTLE_CONTINUE_SCRIPT                  2
-#define TRAINER_BATTLE_NORMAL_NO_INTRO_TEXT             3
+#define TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT             3
 #define TRAINER_BATTLE_DOUBLE                           4
 #define TRAINER_BATTLE_REMATCH                          5
 #define TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE           6

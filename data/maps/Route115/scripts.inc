@@ -37,7 +37,7 @@ Route115_EventScript_1F2985:: @ 81F2985
 	end
 
 Route115_EventScript_1F298E:: @ 81F298E
-	trainerbattle_normal TRAINER_TIMOTHY_1, Route115_Text_29B1FA, Route115_Text_29B230, Route115_EventScript_1F29BA
+	trainerbattle_single TRAINER_TIMOTHY_1, Route115_Text_29B1FA, Route115_Text_29B230, Route115_EventScript_1F29BA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F29D9
@@ -59,12 +59,12 @@ Route115_EventScript_1F29D9:: @ 81F29D9
 	end
 
 Route115_EventScript_1F29F0:: @ 81F29F0
-	trainerbattle_normal TRAINER_KOICHI, Route115_Text_29B3CC, Route115_Text_29B3ED
+	trainerbattle_single TRAINER_KOICHI, Route115_Text_29B3CC, Route115_Text_29B3ED
 	msgbox Route115_Text_29B3FF, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2A07:: @ 81F2A07
-	trainerbattle_normal TRAINER_NOB_1, Route115_Text_29B449, Route115_Text_29B480, Route115_EventScript_1F2A33
+	trainerbattle_single TRAINER_NOB_1, Route115_Text_29B449, Route115_Text_29B480, Route115_EventScript_1F2A33
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F2A52
@@ -86,7 +86,7 @@ Route115_EventScript_1F2A52:: @ 81F2A52
 	end
 
 Route115_EventScript_1F2A69:: @ 81F2A69
-	trainerbattle_normal TRAINER_CYNDY_1, Route115_Text_29B5EF, Route115_Text_29B62D, Route115_EventScript_1F2A95
+	trainerbattle_single TRAINER_CYNDY_1, Route115_Text_29B5EF, Route115_Text_29B62D, Route115_EventScript_1F2A95
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F2AB4
@@ -108,32 +108,32 @@ Route115_EventScript_1F2AB4:: @ 81F2AB4
 	end
 
 Route115_EventScript_1F2ACB:: @ 81F2ACB
-	trainerbattle_normal TRAINER_HECTOR, Route115_Text_29B78F, Route115_Text_29B7C5
+	trainerbattle_single TRAINER_HECTOR, Route115_Text_29B78F, Route115_Text_29B7C5
 	msgbox Route115_Text_29B7EA, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2AE2:: @ 81F2AE2
-	trainerbattle_normal TRAINER_KYRA, Route115_Text_29B826, Route115_Text_29B85D
+	trainerbattle_single TRAINER_KYRA, Route115_Text_29B826, Route115_Text_29B85D
 	msgbox Route115_Text_29B869, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2AF9:: @ 81F2AF9
-	trainerbattle_normal TRAINER_JAIDEN, Route115_Text_29B8C1, Route115_Text_29B8E8
+	trainerbattle_single TRAINER_JAIDEN, Route115_Text_29B8C1, Route115_Text_29B8E8
 	msgbox Route115_Text_29B904, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2B10:: @ 81F2B10
-	trainerbattle_normal TRAINER_ALIX, Route115_Text_29B9CB, Route115_Text_29B9F6
+	trainerbattle_single TRAINER_ALIX, Route115_Text_29B9CB, Route115_Text_29B9F6
 	msgbox Route115_Text_29BA04, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2B27:: @ 81F2B27
-	trainerbattle_normal TRAINER_HELENE, Route115_Text_29B92D, Route115_Text_29B958
+	trainerbattle_single TRAINER_HELENE, Route115_Text_29B92D, Route115_Text_29B958
 	msgbox Route115_Text_29B971, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2B3E:: @ 81F2B3E
-	trainerbattle_normal TRAINER_MARLENE, Route115_Text_29BA2C, Route115_Text_29BA67
+	trainerbattle_single TRAINER_MARLENE, Route115_Text_29BA2C, Route115_Text_29BA67
 	msgbox Route115_Text_29BA87, MSGBOX_AUTOCLOSE
 	end
 

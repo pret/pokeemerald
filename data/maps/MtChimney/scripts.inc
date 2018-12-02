@@ -411,12 +411,12 @@ MtChimney_EventScript_22F065:: @ 822F065
 	end
 
 MtChimney_EventScript_22F06E:: @ 822F06E
-	trainerbattle_normal TRAINER_TABITHA_2, MtChimney_Text_22F6AA, MtChimney_Text_22F72C
+	trainerbattle_single TRAINER_TABITHA_2, MtChimney_Text_22F6AA, MtChimney_Text_22F72C
 	msgbox MtChimney_Text_22F76D, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F085:: @ 822F085
-	trainerbattle_normal TRAINER_GRUNT_31, MtChimney_Text_22F7A2, MtChimney_Text_22F83A
+	trainerbattle_single TRAINER_GRUNT_31, MtChimney_Text_22F7A2, MtChimney_Text_22F83A
 	msgbox MtChimney_Text_22F859, MSGBOX_AUTOCLOSE
 	end
 
@@ -487,7 +487,7 @@ MtChimney_EventScript_22F141:: @ 822F141
 	end
 
 MtChimney_EventScript_22F14A:: @ 822F14A
-	trainerbattle_normal TRAINER_SHELBY_1, MtChimney_Text_23001D, MtChimney_Text_230076, MtChimney_EventScript_22F176
+	trainerbattle_single TRAINER_SHELBY_1, MtChimney_Text_23001D, MtChimney_Text_230076, MtChimney_EventScript_22F176
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F195
@@ -509,27 +509,27 @@ MtChimney_EventScript_22F195:: @ 822F195
 	end
 
 MtChimney_EventScript_22F1AC:: @ 822F1AC
-	trainerbattle_normal TRAINER_MELISSA, MtChimney_Text_23022A, MtChimney_Text_23026D
+	trainerbattle_single TRAINER_MELISSA, MtChimney_Text_23022A, MtChimney_Text_23026D
 	msgbox MtChimney_Text_230292, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1C3:: @ 822F1C3
-	trainerbattle_normal TRAINER_SHEILA, MtChimney_Text_2302BD, MtChimney_Text_230304
+	trainerbattle_single TRAINER_SHEILA, MtChimney_Text_2302BD, MtChimney_Text_230304
 	msgbox MtChimney_Text_23033A, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1DA:: @ 822F1DA
-	trainerbattle_normal TRAINER_SHIRLEY, MtChimney_Text_2303DF, MtChimney_Text_230436
+	trainerbattle_single TRAINER_SHIRLEY, MtChimney_Text_2303DF, MtChimney_Text_230436
 	msgbox MtChimney_Text_230463, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1F1:: @ 822F1F1
-	trainerbattle_normal TRAINER_GRUNT_24, MtChimney_Text_22F8B6, MtChimney_Text_22F921
+	trainerbattle_single TRAINER_GRUNT_24, MtChimney_Text_22F8B6, MtChimney_Text_22F921
 	msgbox MtChimney_Text_22F93A, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F208:: @ 822F208
-	trainerbattle_normal TRAINER_SAWYER_1, MtChimney_Text_2304B3, MtChimney_Text_2304F7, MtChimney_EventScript_22F234
+	trainerbattle_single TRAINER_SAWYER_1, MtChimney_Text_2304B3, MtChimney_Text_2304F7, MtChimney_EventScript_22F234
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F253

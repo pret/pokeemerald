@@ -61,12 +61,12 @@ Route112_EventScript_1F1E61:: @ 81F1E61
 	end
 
 Route112_EventScript_1F1E6A:: @ 81F1E6A
-	trainerbattle_normal TRAINER_BRICE, Route112_Text_29978E, Route112_Text_2997CA
+	trainerbattle_single TRAINER_BRICE, Route112_Text_29978E, Route112_Text_2997CA
 	msgbox Route112_Text_2997DC, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_1F1E81:: @ 81F1E81
-	trainerbattle_normal TRAINER_TRENT_1, Route112_Text_299815, Route112_Text_29987C, Route112_EventScript_1F1EAD
+	trainerbattle_single TRAINER_TRENT_1, Route112_Text_299815, Route112_Text_29987C, Route112_EventScript_1F1EAD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route112_EventScript_1F1ECC
@@ -88,22 +88,22 @@ Route112_EventScript_1F1ECC:: @ 81F1ECC
 	end
 
 Route112_EventScript_1F1EE3:: @ 81F1EE3
-	trainerbattle_normal TRAINER_LARRY, Route112_Text_299A89, Route112_Text_299AAC
+	trainerbattle_single TRAINER_LARRY, Route112_Text_299A89, Route112_Text_299AAC
 	msgbox Route112_Text_299AB4, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_1F1EFA:: @ 81F1EFA
-	trainerbattle_normal TRAINER_CAROL, Route112_Text_299AE4, Route112_Text_299B36
+	trainerbattle_single TRAINER_CAROL, Route112_Text_299AE4, Route112_Text_299B36
 	msgbox Route112_Text_299B4C, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_1F1F11:: @ 81F1F11
-	trainerbattle_normal TRAINER_BRYANT, Route112_Text_299BAE, Route112_Text_299BDF
+	trainerbattle_single TRAINER_BRYANT, Route112_Text_299BAE, Route112_Text_299BDF
 	msgbox Route112_Text_299BFB, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_1F1F28:: @ 81F1F28
-	trainerbattle_normal TRAINER_SHAYLA, Route112_Text_299C34, Route112_Text_299C8F
+	trainerbattle_single TRAINER_SHAYLA, Route112_Text_299C34, Route112_Text_299C8F
 	msgbox Route112_Text_299CC6, MSGBOX_AUTOCLOSE
 	end
 

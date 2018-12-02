@@ -109,22 +109,22 @@ MagmaHideout_4F_Movement_23A680: @ 823A680
 	step_end
 
 MagmaHideout_4F_EventScript_23A68C:: @ 823A68C
-	trainerbattle_normal TRAINER_GRUNT_48, MagmaHideout_4F_Text_23A6E8, MagmaHideout_4F_Text_23A775
+	trainerbattle_single TRAINER_GRUNT_48, MagmaHideout_4F_Text_23A6E8, MagmaHideout_4F_Text_23A775
 	msgbox MagmaHideout_4F_Text_23A7B5, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_23A6A3:: @ 823A6A3
-	trainerbattle_normal TRAINER_GRUNT_49, MagmaHideout_4F_Text_23A7DA, MagmaHideout_4F_Text_23A81B
+	trainerbattle_single TRAINER_GRUNT_49, MagmaHideout_4F_Text_23A7DA, MagmaHideout_4F_Text_23A81B
 	msgbox MagmaHideout_4F_Text_23A841, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_23A6BA:: @ 823A6BA
-	trainerbattle_normal TRAINER_GRUNT_50, MagmaHideout_4F_Text_23A86D, MagmaHideout_4F_Text_23A8A7
+	trainerbattle_single TRAINER_GRUNT_50, MagmaHideout_4F_Text_23A86D, MagmaHideout_4F_Text_23A8A7
 	msgbox MagmaHideout_4F_Text_23A8C6, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_23A6D1:: @ 823A6D1
-	trainerbattle_normal TRAINER_TABITHA_3, MagmaHideout_4F_Text_23A8E1, MagmaHideout_4F_Text_23A994
+	trainerbattle_single TRAINER_TABITHA_3, MagmaHideout_4F_Text_23A8E1, MagmaHideout_4F_Text_23A994
 	msgbox MagmaHideout_4F_Text_23A9AC, MSGBOX_AUTOCLOSE
 	end
 

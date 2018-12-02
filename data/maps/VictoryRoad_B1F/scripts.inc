@@ -2,27 +2,27 @@ VictoryRoad_B1F_MapScripts:: @ 82364E4
 	.byte 0
 
 VictoryRoad_B1F_EventScript_2364E5:: @ 82364E5
-	trainerbattle_normal TRAINER_SAMUEL, VictoryRoad_B1F_Text_236558, VictoryRoad_B1F_Text_2365AD
+	trainerbattle_single TRAINER_SAMUEL, VictoryRoad_B1F_Text_236558, VictoryRoad_B1F_Text_2365AD
 	msgbox VictoryRoad_B1F_Text_2365C4, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B1F_EventScript_2364FC:: @ 82364FC
-	trainerbattle_normal TRAINER_SHANNON, VictoryRoad_B1F_Text_2365FD, VictoryRoad_B1F_Text_23664D
+	trainerbattle_single TRAINER_SHANNON, VictoryRoad_B1F_Text_2365FD, VictoryRoad_B1F_Text_23664D
 	msgbox VictoryRoad_B1F_Text_236678, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B1F_EventScript_236513:: @ 8236513
-	trainerbattle_normal TRAINER_MICHELLE, VictoryRoad_B1F_Text_2366C2, VictoryRoad_B1F_Text_23670B
+	trainerbattle_single TRAINER_MICHELLE, VictoryRoad_B1F_Text_2366C2, VictoryRoad_B1F_Text_23670B
 	msgbox VictoryRoad_B1F_Text_23671B, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B1F_EventScript_23652A:: @ 823652A
-	trainerbattle_normal TRAINER_MITCHELL, VictoryRoad_B1F_Text_236757, VictoryRoad_B1F_Text_236780
+	trainerbattle_single TRAINER_MITCHELL, VictoryRoad_B1F_Text_236757, VictoryRoad_B1F_Text_236780
 	msgbox VictoryRoad_B1F_Text_2367A7, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B1F_EventScript_236541:: @ 8236541
-	trainerbattle_normal TRAINER_HALLE, VictoryRoad_B1F_Text_2367FD, VictoryRoad_B1F_Text_23683B
+	trainerbattle_single TRAINER_HALLE, VictoryRoad_B1F_Text_2367FD, VictoryRoad_B1F_Text_23683B
 	msgbox VictoryRoad_B1F_Text_23684C, MSGBOX_AUTOCLOSE
 	end
 

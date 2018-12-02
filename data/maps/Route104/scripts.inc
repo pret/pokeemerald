@@ -871,17 +871,17 @@ Route104_Movement_1ED35C: @ 81ED35C
 	step_end
 
 Route104_EventScript_1ED35F:: @ 81ED35F
-	trainerbattle_normal TRAINER_IVAN, Route104_Text_2954BD, Route104_Text_295509
+	trainerbattle_single TRAINER_IVAN, Route104_Text_2954BD, Route104_Text_295509
 	msgbox Route104_Text_29554E, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_1ED376:: @ 81ED376
-	trainerbattle_normal TRAINER_BILLY, Route104_Text_29558A, Route104_Text_2955B4
+	trainerbattle_single TRAINER_BILLY, Route104_Text_29558A, Route104_Text_2955B4
 	msgbox Route104_Text_2955E8, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_1ED38D:: @ 81ED38D
-	trainerbattle_normal TRAINER_HALEY_1, Route104_Text_29563A, Route104_Text_29566F, Route104_EventScript_1ED3CE
+	trainerbattle_single TRAINER_HALEY_1, Route104_Text_29563A, Route104_Text_29566F, Route104_EventScript_1ED3CE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED424
@@ -926,7 +926,7 @@ Route104_EventScript_1ED424:: @ 81ED424
 	end
 
 Route104_EventScript_1ED43B:: @ 81ED43B
-	trainerbattle_normal TRAINER_WINSTON_1, Route104_Text_295870, Route104_Text_2958AD, Route104_EventScript_1ED47C
+	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_295870, Route104_Text_2958AD, Route104_EventScript_1ED47C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED4D2
@@ -971,7 +971,7 @@ Route104_EventScript_1ED4D2:: @ 81ED4D2
 	end
 
 Route104_EventScript_1ED4E9:: @ 81ED4E9
-	trainerbattle_normal TRAINER_CINDY_1, Route104_Text_295A7E, Route104_Text_295ABB, Route104_EventScript_1ED52A
+	trainerbattle_single TRAINER_CINDY_1, Route104_Text_295A7E, Route104_Text_295ABB, Route104_EventScript_1ED52A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED580
@@ -1030,7 +1030,7 @@ Route104_EventScript_1ED5B6:: @ 81ED5B6
 	end
 
 Route104_EventScript_1ED5D5:: @ 81ED5D5
-	trainerbattle_normal TRAINER_DARIAN, Route104_Text_295C5D, Route104_Text_295CC9
+	trainerbattle_single TRAINER_DARIAN, Route104_Text_295C5D, Route104_Text_295CC9
 	msgbox Route104_Text_295CD3, MSGBOX_AUTOCLOSE
 	end
 

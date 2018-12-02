@@ -2,12 +2,12 @@ Route107_MapScripts:: @ 81EE594
 	.byte 0
 
 Route107_EventScript_1EE595:: @ 81EE595
-	trainerbattle_normal TRAINER_DARRIN, Route107_Text_2966E5, Route107_Text_29672F
+	trainerbattle_single TRAINER_DARRIN, Route107_Text_2966E5, Route107_Text_29672F
 	msgbox Route107_Text_29675B, MSGBOX_AUTOCLOSE
 	end
 
 Route107_EventScript_1EE5AC:: @ 81EE5AC
-	trainerbattle_normal TRAINER_TONY_1, Route107_Text_2967AD, Route107_Text_2967D8, Route107_EventScript_1EE5D8
+	trainerbattle_single TRAINER_TONY_1, Route107_Text_2967AD, Route107_Text_2967D8, Route107_EventScript_1EE5D8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route107_EventScript_1EE5F7
@@ -29,12 +29,12 @@ Route107_EventScript_1EE5F7:: @ 81EE5F7
 	end
 
 Route107_EventScript_1EE60E:: @ 81EE60E
-	trainerbattle_normal TRAINER_DENISE, Route107_Text_296974, Route107_Text_29699E
+	trainerbattle_single TRAINER_DENISE, Route107_Text_296974, Route107_Text_29699E
 	msgbox Route107_Text_2969AB, MSGBOX_AUTOCLOSE
 	end
 
 Route107_EventScript_1EE625:: @ 81EE625
-	trainerbattle_normal TRAINER_BETH, Route107_Text_2969E4, Route107_Text_296A17
+	trainerbattle_single TRAINER_BETH, Route107_Text_2969E4, Route107_Text_296A17
 	msgbox Route107_Text_296A35, MSGBOX_AUTOCLOSE
 	end
 
@@ -49,7 +49,7 @@ Route107_EventScript_1EE657:: @ 81EE657
 	end
 
 Route107_EventScript_1EE672:: @ 81EE672
-	trainerbattle_normal TRAINER_CAMRON, Route107_Text_296C6F, Route107_Text_296CAD
+	trainerbattle_single TRAINER_CAMRON, Route107_Text_296C6F, Route107_Text_296CAD
 	msgbox Route107_Text_296CC0, MSGBOX_AUTOCLOSE
 	end
 

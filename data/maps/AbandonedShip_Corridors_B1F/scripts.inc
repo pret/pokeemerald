@@ -53,7 +53,7 @@ AbandonedShip_Corridors_B1F_EventScript_237E09:: @ 8237E09
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_237E13:: @ 8237E13
-	trainerbattle_normal TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_237E2A, AbandonedShip_Corridors_B1F_Text_237E80
+	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_237E2A, AbandonedShip_Corridors_B1F_Text_237E80
 	msgbox AbandonedShip_Corridors_B1F_Text_237E92, MSGBOX_AUTOCLOSE
 	end
 

@@ -2,12 +2,12 @@ SeafloorCavern_Room1_MapScripts:: @ 82347EB
 	.byte 0
 
 SeafloorCavern_Room1_EventScript_2347EC:: @ 82347EC
-	trainerbattle_normal TRAINER_GRUNT_5, SeafloorCavern_Room1_Text_23481A, SeafloorCavern_Room1_Text_23484A
+	trainerbattle_single TRAINER_GRUNT_5, SeafloorCavern_Room1_Text_23481A, SeafloorCavern_Room1_Text_23484A
 	msgbox SeafloorCavern_Room1_Text_23485D, MSGBOX_AUTOCLOSE
 	end
 
 SeafloorCavern_Room1_EventScript_234803:: @ 8234803
-	trainerbattle_normal TRAINER_GRUNT_6, SeafloorCavern_Room1_Text_234898, SeafloorCavern_Room1_Text_2348CD
+	trainerbattle_single TRAINER_GRUNT_6, SeafloorCavern_Room1_Text_234898, SeafloorCavern_Room1_Text_2348CD
 	msgbox SeafloorCavern_Room1_Text_2348E3, MSGBOX_AUTOCLOSE
 	end
 

@@ -49,17 +49,17 @@ Route113_EventScript_1F21B7:: @ 81F21B7
 	end
 
 Route113_EventScript_1F21C0:: @ 81F21C0
-	trainerbattle_normal TRAINER_JAYLEN, Route113_Text_299D3C, Route113_Text_299D68
+	trainerbattle_single TRAINER_JAYLEN, Route113_Text_299D3C, Route113_Text_299D68
 	msgbox Route113_Text_299D7D, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_1F21D7:: @ 81F21D7
-	trainerbattle_normal TRAINER_DILLON, Route113_Text_299DE3, Route113_Text_299E1C
+	trainerbattle_single TRAINER_DILLON, Route113_Text_299DE3, Route113_Text_299E1C
 	msgbox Route113_Text_299E38, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_1F21EE:: @ 81F21EE
-	trainerbattle_normal TRAINER_MADELINE_1, Route113_Text_299EA6, Route113_Text_299EF9, Route113_EventScript_1F221A
+	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_299EA6, Route113_Text_299EF9, Route113_EventScript_1F221A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route113_EventScript_1F2239
@@ -81,7 +81,7 @@ Route113_EventScript_1F2239:: @ 81F2239
 	end
 
 Route113_EventScript_1F2250:: @ 81F2250
-	trainerbattle_normal TRAINER_LAO_1, Route113_Text_29A015, Route113_Text_29A04C, Route113_EventScript_1F227C
+	trainerbattle_single TRAINER_LAO_1, Route113_Text_29A015, Route113_Text_29A04C, Route113_EventScript_1F227C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route113_EventScript_1F229B
@@ -103,7 +103,7 @@ Route113_EventScript_1F229B:: @ 81F229B
 	end
 
 Route113_EventScript_1F22B2:: @ 81F22B2
-	trainerbattle_normal TRAINER_LUNG, Route113_Text_29A192, Route113_Text_29A1C6
+	trainerbattle_single TRAINER_LUNG, Route113_Text_29A192, Route113_Text_29A1C6
 	msgbox Route113_Text_29A219, MSGBOX_AUTOCLOSE
 	end
 
@@ -118,22 +118,22 @@ Route113_EventScript_1F22E4:: @ 81F22E4
 	end
 
 Route113_EventScript_1F22FF:: @ 81F22FF
-	trainerbattle_normal TRAINER_SOPHIE, Route113_Text_29A4BF, Route113_Text_29A508
+	trainerbattle_single TRAINER_SOPHIE, Route113_Text_29A4BF, Route113_Text_29A508
 	msgbox Route113_Text_29A529, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_1F2316:: @ 81F2316
-	trainerbattle_normal TRAINER_COBY, Route113_Text_29A453, Route113_Text_29A480
+	trainerbattle_single TRAINER_COBY, Route113_Text_29A453, Route113_Text_29A480
 	msgbox Route113_Text_29A489, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_1F232D:: @ 81F232D
-	trainerbattle_normal TRAINER_LAWRENCE, Route113_Text_29A566, Route113_Text_29A5A0
+	trainerbattle_single TRAINER_LAWRENCE, Route113_Text_29A566, Route113_Text_29A5A0
 	msgbox Route113_Text_29A5BE, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_1F2344:: @ 81F2344
-	trainerbattle_normal TRAINER_WYATT, Route113_Text_29A5E4, Route113_Text_29A628
+	trainerbattle_single TRAINER_WYATT, Route113_Text_29A5E4, Route113_Text_29A628
 	msgbox Route113_Text_29A65D, MSGBOX_AUTOCLOSE
 	end
 
