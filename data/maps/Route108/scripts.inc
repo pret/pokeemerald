@@ -39,10 +39,7 @@ Route108_EventScript_1EE729:: @ 81EE729
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route108_Text_296FD8, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 740
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 740
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CORY_1
 	release
 	end
 

@@ -217,10 +217,7 @@ Route103_EventScript_1EC60B:: @ 81EC60B
 
 Route103_EventScript_1EC63A:: @ 81EC63A
 	msgbox Route103_Text_294B8A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 481
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 481
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_AMY_AND_LIV_1
 	release
 	end
 
@@ -239,10 +236,7 @@ Route103_EventScript_1EC66E:: @ 81EC66E
 
 Route103_EventScript_1EC69D:: @ 81EC69D
 	msgbox Route103_Text_294B8A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 481
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 481
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_AMY_AND_LIV_1
 	release
 	end
 
@@ -269,10 +263,7 @@ Route103_EventScript_1EC714:: @ 81EC714
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route103_Text_294F7E, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 293
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 293
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_MIGUEL_1
 	release
 	end
 

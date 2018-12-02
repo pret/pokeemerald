@@ -74,10 +74,7 @@ Route105_EventScript_1EE300:: @ 81EE300
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route105_Text_296159, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 737
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 737
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ANDRES_1
 	release
 	end
 

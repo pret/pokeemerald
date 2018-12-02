@@ -499,10 +499,7 @@ MtChimney_EventScript_22F176:: @ 822F176
 	special sub_80B4808
 	waitmovement 0
 	msgbox MtChimney_Text_2300E3, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 313
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 313
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_SHELBY_1
 	release
 	end
 
@@ -544,10 +541,7 @@ MtChimney_EventScript_22F234:: @ 822F234
 	special sub_80B4808
 	waitmovement 0
 	msgbox MtChimney_Text_230557, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 1
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 1
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_SAWYER_1
 	release
 	end
 

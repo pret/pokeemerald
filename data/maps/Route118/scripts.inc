@@ -199,10 +199,7 @@ Route118_EventScript_1F3FB3:: @ 81F3FB3
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route118_Text_29D343, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 37
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 37
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ROSE_1
 	release
 	end
 
@@ -234,10 +231,7 @@ Route118_EventScript_1F4043:: @ 81F4043
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route118_Text_29D74A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 196
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 196
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_DALTON_1
 	release
 	end
 

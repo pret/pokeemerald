@@ -78,10 +78,7 @@ Route112_EventScript_1F1EAD:: @ 81F1EAD
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route112_Text_29993C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 627
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 627
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_TRENT_1
 	release
 	end
 

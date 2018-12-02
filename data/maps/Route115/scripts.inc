@@ -49,10 +49,7 @@ Route115_EventScript_1F29BA:: @ 81F29BA
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route115_Text_29B2B3, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 307
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 307
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_TIMOTHY_1
 	release
 	end
 
@@ -79,10 +76,7 @@ Route115_EventScript_1F2A33:: @ 81F2A33
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route115_Text_29B50B, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 183
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 183
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_NOB_1
 	release
 	end
 
@@ -104,10 +98,7 @@ Route115_EventScript_1F2A95:: @ 81F2A95
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route115_Text_29B6AB, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 427
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 427
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CYNDY_1
 	release
 	end
 

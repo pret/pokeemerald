@@ -19,10 +19,7 @@ Route107_EventScript_1EE5D8:: @ 81EE5D8
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route107_Text_29685A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 155
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 155
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_TONY_1
 	release
 	end
 

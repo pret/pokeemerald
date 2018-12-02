@@ -28,10 +28,7 @@ Route106_EventScript_1EE4ED:: @ 81EE4ED
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route106_Text_2963E3, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 339
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 339
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ELLIOT_1
 	release
 	end
 

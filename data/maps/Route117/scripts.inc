@@ -51,10 +51,7 @@ Route117_EventScript_1F39FC:: @ 81F39FC
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route117_Text_29C508, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 538
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 538
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ISAAC_1
 	release
 	end
 
@@ -76,10 +73,7 @@ Route117_EventScript_1F3A5E:: @ 81F3A5E
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route117_Text_29C6BC, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 545
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 545
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_LYDIA_1
 	release
 	end
 
@@ -101,10 +95,7 @@ Route117_EventScript_1F3AC0:: @ 81F3AC0
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route117_Text_29C846, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 364
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 364
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_DYLAN_1
 	release
 	end
 
@@ -126,10 +117,7 @@ Route117_EventScript_1F3B22:: @ 81F3B22
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route117_Text_29CA32, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 369
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 369
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_MARIA_1
 	release
 	end
 
@@ -154,10 +142,7 @@ Route117_EventScript_1F3B6F:: @ 81F3B6F
 
 Route117_EventScript_1F3B9F:: @ 81F3B9F
 	msgbox Route117_Text_29CD1D, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 287
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 287
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ANNA_AND_MEG_1
 	release
 	end
 
@@ -177,10 +162,7 @@ Route117_EventScript_1F3BD3:: @ 81F3BD3
 
 Route117_EventScript_1F3C03:: @ 81F3C03
 	msgbox Route117_Text_29CD1D, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 287
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 287
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ANNA_AND_MEG_1
 	release
 	end
 

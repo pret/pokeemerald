@@ -408,10 +408,7 @@ Route109_EventScript_1EEAC5:: @ 81EEAC5
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route109_Text_2973C1, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 64
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 64
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_RICKY_1
 	release
 	end
 
@@ -433,10 +430,7 @@ Route109_EventScript_1EEB27:: @ 81EEB27
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route109_Text_297520, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 57
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 57
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_LOLA_1
 	release
 	end
 

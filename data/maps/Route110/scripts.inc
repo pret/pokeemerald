@@ -187,10 +187,7 @@ Route110_EventScript_1EF44C:: @ 81EF44C
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route110_Text_298201, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 512
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 512
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_EDWIN_1
 	release
 	end
 
@@ -227,10 +224,7 @@ Route110_EventScript_1EF4F3:: @ 81EF4F3
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route110_Text_297CFE, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 353
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 353
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_BENJAMIN_1
 	release
 	end
 
@@ -257,10 +251,7 @@ Route110_EventScript_1EF56C:: @ 81EF56C
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route110_Text_297ECD, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 358
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 358
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ABIGAIL_1
 	release
 	end
 
@@ -282,10 +273,7 @@ Route110_EventScript_1EF5CE:: @ 81EF5CE
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route110_Text_2983EE, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 302
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 302
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ISABEL_1
 	release
 	end
 

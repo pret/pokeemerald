@@ -188,10 +188,7 @@ Route128_EventScript_1F6CEA:: @ 81F6CEA
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route128_Text_2A2916, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 376
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 376
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ISAIAH_1
 	release
 	end
 
@@ -213,10 +210,7 @@ Route128_EventScript_1F6D4C:: @ 81F6D4C
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route128_Text_2A2AF9, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 386
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 386
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_KATELYN_1
 	release
 	end
 

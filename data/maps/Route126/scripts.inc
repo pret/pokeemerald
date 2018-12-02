@@ -55,10 +55,7 @@ Route126_EventScript_1F69A3:: @ 81F69A3
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route126_Text_2A1F5A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 377
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 377
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_PABLO_1
 	release
 	end
 

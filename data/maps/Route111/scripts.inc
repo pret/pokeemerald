@@ -484,10 +484,7 @@ Route111_EventScript_1F128C:: @ 81F128C
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route111_Text_298C00, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 44
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 44
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_DUSTY_1
 	release
 	end
 
@@ -524,10 +521,7 @@ Route111_EventScript_1F1333:: @ 81F1333
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route111_Text_29903D, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 78
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 78
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_WILTON_1
 	release
 	end
 
@@ -549,10 +543,7 @@ Route111_EventScript_1F1395:: @ 81F1395
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route111_Text_29921D, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 94
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 94
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_BROOKE_1
 	release
 	end
 

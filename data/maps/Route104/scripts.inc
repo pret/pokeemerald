@@ -903,10 +903,7 @@ Route104_EventScript_1ED3CE:: @ 81ED3CE
 
 Route104_EventScript_1ED3DF:: @ 81ED3DF
 	msgbox Route104_Text_29576B, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 604
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 604
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_HALEY_1
 	release
 	end
 
@@ -919,10 +916,7 @@ Route104_EventScript_1ED3F8:: @ 81ED3F8
 
 Route104_EventScript_1ED40B:: @ 81ED40B
 	msgbox Route104_Text_2956FF, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 604
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 604
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_HALEY_1
 	release
 	end
 
@@ -954,10 +948,7 @@ Route104_EventScript_1ED47C:: @ 81ED47C
 
 Route104_EventScript_1ED48D:: @ 81ED48D
 	msgbox Route104_Text_29595A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 136
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 136
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_WINSTON_1
 	release
 	end
 
@@ -970,10 +961,7 @@ Route104_EventScript_1ED4A6:: @ 81ED4A6
 
 Route104_EventScript_1ED4B9:: @ 81ED4B9
 	msgbox Route104_Text_2958F8, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 136
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 136
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_WINSTON_1
 	release
 	end
 
@@ -1005,10 +993,7 @@ Route104_EventScript_1ED52A:: @ 81ED52A
 
 Route104_EventScript_1ED53B:: @ 81ED53B
 	msgbox Route104_Text_295B60, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 114
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 114
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CINDY_1
 	release
 	end
 
@@ -1021,10 +1006,7 @@ Route104_EventScript_1ED554:: @ 81ED554
 
 Route104_EventScript_1ED567:: @ 81ED567
 	msgbox Route104_Text_295B01, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 114
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 114
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CINDY_1
 	release
 	end
 

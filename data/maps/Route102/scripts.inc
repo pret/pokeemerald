@@ -40,10 +40,7 @@ Route102_EventScript_1EC146:: @ 81EC146
 
 Route102_EventScript_1EC157:: @ 81EC157
 	msgbox Route102_Text_294668, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 318
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 318
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CALVIN_1
 	release
 	end
 
@@ -56,10 +53,7 @@ Route102_EventScript_1EC170:: @ 81EC170
 
 Route102_EventScript_1EC183:: @ 81EC183
 	msgbox Route102_Text_2945EB, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 318
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 318
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CALVIN_1
 	release
 	end
 

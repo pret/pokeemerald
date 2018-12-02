@@ -59,10 +59,7 @@ Route125_EventScript_1F682C:: @ 81F682C
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route125_Text_2A17CF, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 492
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 492
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ERNEST_1
 	release
 	end
 

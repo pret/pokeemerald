@@ -12,10 +12,7 @@ AbandonedShip_Rooms2_1F_EventScript_2380A7:: @ 82380A7
 
 AbandonedShip_Rooms2_1F_EventScript_2380D7:: @ 82380D7
 	msgbox AbandonedShip_Rooms2_1F_Text_2383BB, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 642
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 642
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_KIRA_AND_DAN_1
 	release
 	end
 
@@ -35,10 +32,7 @@ AbandonedShip_Rooms2_1F_EventScript_23810B:: @ 823810B
 
 AbandonedShip_Rooms2_1F_EventScript_23813B:: @ 823813B
 	msgbox AbandonedShip_Rooms2_1F_Text_2383BB, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 642
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 642
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_KIRA_AND_DAN_1
 	release
 	end
 

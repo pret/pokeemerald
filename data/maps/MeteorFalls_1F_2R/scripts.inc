@@ -14,10 +14,7 @@ MeteorFalls_1F_2R_EventScript_22C50A:: @ 822C50A
 	special sub_80B4808
 	waitmovement 0
 	msgbox MeteorFalls_1F_2R_Text_22C6F6, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 392
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 392
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_NICOLAS_1
 	release
 	end
 
@@ -37,10 +34,7 @@ MeteorFalls_1F_2R_EventScript_22C540:: @ 822C540
 
 MeteorFalls_1F_2R_EventScript_22C570:: @ 822C570
 	msgbox MeteorFalls_1F_2R_Text_22C99C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 681
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 681
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_JOHN_AND_JAY_1
 	release
 	end
 
@@ -60,10 +54,7 @@ MeteorFalls_1F_2R_EventScript_22C5A4:: @ 822C5A4
 
 MeteorFalls_1F_2R_EventScript_22C5D4:: @ 822C5D4
 	msgbox MeteorFalls_1F_2R_Text_22C99C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 681
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 681
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_JOHN_AND_JAY_1
 	release
 	end
 

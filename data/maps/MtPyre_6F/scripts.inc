@@ -14,10 +14,7 @@ MtPyre_6F_EventScript_231D67:: @ 8231D67
 	special sub_80B4808
 	waitmovement 0
 	msgbox MtPyre_6F_Text_231E43, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 108
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 108
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_VALERIE_1
 	release
 	end
 

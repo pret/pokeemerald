@@ -114,10 +114,7 @@ JaggedPass_EventScript_23079C:: @ 823079C
 JaggedPass_EventScript_2307C8:: @ 82307C8
 	special sub_80B4808
 	msgbox JaggedPass_Text_230A2C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 474
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 474
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_DIANA_1
 	release
 	end
 
@@ -138,10 +135,7 @@ JaggedPass_EventScript_2307FB:: @ 82307FB
 JaggedPass_EventScript_230827:: @ 8230827
 	special sub_80B4808
 	msgbox JaggedPass_Text_230BC6, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 216
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 216
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_ETHAN_1
 	release
 	end
 

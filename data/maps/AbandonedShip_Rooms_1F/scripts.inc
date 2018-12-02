@@ -23,10 +23,7 @@ AbandonedShip_Rooms_1F_EventScript_237ADF:: @ 8237ADF
 	special sub_80B4808
 	waitmovement 0
 	msgbox AbandonedShip_Rooms_1F_Text_237C2A, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 144
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 144
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_THALIA_1
 	release
 	end
 

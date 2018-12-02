@@ -1554,3 +1554,10 @@
 	setorcopyvar 0x8000, \decoration
 	callstd STD_OBTAIN_DECORATION
 	.endm
+
+	.macro register_matchcall trainer
+	setvar VAR_0x8004, \trainer
+	special SetMatchCallRegisteredFlag
+	setorcopyvar VAR_0x8000, \trainer
+	callstd STD_REGISTER_MATCH_CALL
+	.endm

@@ -74,10 +74,7 @@ Route127_EventScript_1F6B02:: @ 81F6B02
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route127_Text_2A26EE, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 672
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 672
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_KOJI_1
 	release
 	end
 

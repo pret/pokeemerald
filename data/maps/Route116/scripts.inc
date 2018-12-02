@@ -280,10 +280,7 @@ Route116_EventScript_1F2F03:: @ 81F2F03
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route116_Text_29BE71, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 273
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 273
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_JERRY_1
 	release
 	end
 
@@ -296,10 +293,7 @@ Route116_EventScript_1F2F22:: @ 81F2F22
 
 Route116_EventScript_1F2F35:: @ 81F2F35
 	msgbox Route116_Text_29BDEF, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 273
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 273
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_JERRY_1
 	release
 	end
 
@@ -341,10 +335,7 @@ Route116_EventScript_1F2FDF:: @ 81F2FDF
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route116_Text_29C096, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 280
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 280
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_KAREN_1
 	release
 	end
 
@@ -357,10 +348,7 @@ Route116_EventScript_1F2FFE:: @ 81F2FFE
 
 Route116_EventScript_1F3011:: @ 81F3011
 	msgbox Route116_Text_29C052, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 280
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 280
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_KAREN_1
 	release
 	end
 

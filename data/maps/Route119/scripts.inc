@@ -379,10 +379,7 @@ Route119_EventScript_1F483C:: @ 81F483C
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route119_Text_29DD1C, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 552
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 552
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_JACKSON_1
 	release
 	end
 
@@ -404,10 +401,7 @@ Route119_EventScript_1F489E:: @ 81F489E
 	special sub_80B4808
 	waitmovement 0
 	msgbox Route119_Text_29DEF7, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 559
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 559
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_CATHERINE_1
 	release
 	end
 

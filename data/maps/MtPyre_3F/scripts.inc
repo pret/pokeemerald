@@ -24,10 +24,7 @@ MtPyre_3F_EventScript_2317AD:: @ 82317AD
 	special sub_80B4808
 	waitmovement 0
 	msgbox MtPyre_3F_Text_231A49, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 9
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 9
-	callstd STD_REGISTER_MATCH_CALL
+	register_matchcall TRAINER_GABRIELLE_1
 	release
 	end
 
