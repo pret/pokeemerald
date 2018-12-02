@@ -17,29 +17,29 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	delay 20
 	applymovement 4, Route128_Movement_1F6C89
 	waitmovement 0
-	msgbox Route128_Text_1F6DF5, 4
+	msgbox Route128_Text_1F6DF5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route128_Movement_1F6C91
 	waitmovement 0
-	msgbox Route128_Text_1F6E48, 4
+	msgbox Route128_Text_1F6E48, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Route128_Movement_1F6CAD
 	waitmovement 0
 	applymovement 4, Route128_Movement_2725A6
 	waitmovement 0
-	msgbox Route128_Text_1F6E5A, 4
+	msgbox Route128_Text_1F6E5A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, Route128_Movement_1F6CBB
 	waitmovement 0
 	applymovement 255, Route128_Movement_2725A6
 	waitmovement 0
-	msgbox Route128_Text_1F6F1E, 4
+	msgbox Route128_Text_1F6F1E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route128_Movement_1F6C96
 	applymovement 255, Route128_Movement_2725A4
 	applymovement 5, Route128_Movement_1F6CA8
 	waitmovement 0
-	msgbox Route128_Text_1F704F, 4
+	msgbox Route128_Text_1F704F, MSGBOX_DEFAULT
 	closemessage
 	delay 40
 	applymovement 5, Route128_Movement_1F6CB0
@@ -56,15 +56,15 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	waitmovement 0
 	applymovement 255, Route128_Movement_2725A8
 	waitmovement 0
-	msgbox Route128_Text_1F70C9, 4
+	msgbox Route128_Text_1F70C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_1F6C85
 	applymovement 255, Route128_Movement_2725A6
 	waitmovement 0
-	msgbox Route128_Text_1F70EA, 4
+	msgbox Route128_Text_1F70EA, MSGBOX_DEFAULT
 	applymovement 3, Route128_Movement_2725AA
 	waitmovement 0
-	msgbox Route128_Text_1F721B, 4
+	msgbox Route128_Text_1F721B, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_2725AA
 	waitmovement 0
@@ -180,24 +180,24 @@ Route128_EventScript_1F6CBE:: @ 81F6CBE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route128_EventScript_1F6D09
-	msgbox Route128_Text_2A28D7, 4
+	msgbox Route128_Text_2A28D7, MSGBOX_DEFAULT
 	release
 	end
 
 Route128_EventScript_1F6CEA:: @ 81F6CEA
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route128_Text_2A2916, 4
+	msgbox Route128_Text_2A2916, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 376
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 376
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 Route128_EventScript_1F6D09:: @ 81F6D09
 	trainerbattle 5, TRAINER_ISAIAH_1, 0, Route128_Text_2A2975, Route128_Text_2A29B8
-	msgbox Route128_Text_2A29DC, 6
+	msgbox Route128_Text_2A29DC, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6D20:: @ 81F6D20
@@ -205,49 +205,49 @@ Route128_EventScript_1F6D20:: @ 81F6D20
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route128_EventScript_1F6D6B
-	msgbox Route128_Text_2A2AB7, 4
+	msgbox Route128_Text_2A2AB7, MSGBOX_DEFAULT
 	release
 	end
 
 Route128_EventScript_1F6D4C:: @ 81F6D4C
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route128_Text_2A2AF9, 4
+	msgbox Route128_Text_2A2AF9, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 386
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 386
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 Route128_EventScript_1F6D6B:: @ 81F6D6B
 	trainerbattle 5, TRAINER_KATELYN_1, 0, Route128_Text_2A2B41, Route128_Text_2A2BAB
-	msgbox Route128_Text_2A2BDD, 6
+	msgbox Route128_Text_2A2BDD, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6D82:: @ 81F6D82
 	trainerbattle 0, TRAINER_ALEXA, 0, Route128_Text_2A2C1C, Route128_Text_2A2C79
-	msgbox Route128_Text_2A2C95, 6
+	msgbox Route128_Text_2A2C95, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6D99:: @ 81F6D99
 	trainerbattle 0, TRAINER_RUBEN, 0, Route128_Text_2A2CD9, Route128_Text_2A2CFE
-	msgbox Route128_Text_2A2D0D, 6
+	msgbox Route128_Text_2A2D0D, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6DB0:: @ 81F6DB0
 	trainerbattle 0, TRAINER_WAYNE, 0, Route128_Text_2A2D3D, Route128_Text_2A2DA9
-	msgbox Route128_Text_2A2DBA, 6
+	msgbox Route128_Text_2A2DBA, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6DC7:: @ 81F6DC7
 	trainerbattle 0, TRAINER_HARRISON, 0, Route128_Text_2A2E0F, Route128_Text_2A2E44
-	msgbox Route128_Text_2A2E6C, 6
+	msgbox Route128_Text_2A2E6C, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6DDE:: @ 81F6DDE
 	trainerbattle 0, TRAINER_CARLEE, 0, Route128_Text_2A2EC8, Route128_Text_2A2EFA
-	msgbox Route128_Text_2A2F2F, 6
+	msgbox Route128_Text_2A2F2F, MSGBOX_AUTOCLOSE
 	end
 
 Route128_Text_1F6DF5: @ 81F6DF5

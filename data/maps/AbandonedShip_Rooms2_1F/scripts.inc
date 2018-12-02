@@ -6,22 +6,22 @@ AbandonedShip_Rooms2_1F_EventScript_2380A7:: @ 82380A7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms2_1F_EventScript_2380F0
-	msgbox AbandonedShip_Rooms2_1F_Text_23820F, 4
+	msgbox AbandonedShip_Rooms2_1F_Text_23820F, MSGBOX_DEFAULT
 	release
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_2380D7:: @ 82380D7
-	msgbox AbandonedShip_Rooms2_1F_Text_2383BB, 4
+	msgbox AbandonedShip_Rooms2_1F_Text_2383BB, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 642
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 642
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_2380F0:: @ 82380F0
 	trainerbattle 7, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_2383FF, AbandonedShip_Rooms2_1F_Text_238473, AbandonedShip_Rooms2_1F_Text_238509
-	msgbox AbandonedShip_Rooms2_1F_Text_238491, 6
+	msgbox AbandonedShip_Rooms2_1F_Text_238491, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_23810B:: @ 823810B
@@ -29,32 +29,32 @@ AbandonedShip_Rooms2_1F_EventScript_23810B:: @ 823810B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms2_1F_EventScript_238154
-	msgbox AbandonedShip_Rooms2_1F_Text_23830A, 4
+	msgbox AbandonedShip_Rooms2_1F_Text_23830A, MSGBOX_DEFAULT
 	release
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_23813B:: @ 823813B
-	msgbox AbandonedShip_Rooms2_1F_Text_2383BB, 4
+	msgbox AbandonedShip_Rooms2_1F_Text_2383BB, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 642
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 642
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_238154:: @ 8238154
 	trainerbattle 7, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_238556, AbandonedShip_Rooms2_1F_Text_2385F2, AbandonedShip_Rooms2_1F_Text_238668
-	msgbox AbandonedShip_Rooms2_1F_Text_23860B, 6
+	msgbox AbandonedShip_Rooms2_1F_Text_23860B, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_23816F:: @ 823816F
 	trainerbattle 0, TRAINER_JANI, 0, AbandonedShip_Rooms2_1F_Text_2386B4, AbandonedShip_Rooms2_1F_Text_2386E8
-	msgbox AbandonedShip_Rooms2_1F_Text_238708, 6
+	msgbox AbandonedShip_Rooms2_1F_Text_238708, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_238186:: @ 8238186
 	trainerbattle 0, TRAINER_GARRISON, 0, AbandonedShip_Rooms2_1F_Text_23873F, AbandonedShip_Rooms2_1F_Text_238779
-	msgbox AbandonedShip_Rooms2_1F_Text_2387A9, 6
+	msgbox AbandonedShip_Rooms2_1F_Text_2387A9, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_Text_23819D: @ 823819D

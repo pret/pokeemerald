@@ -9,7 +9,7 @@ FallarborTown_House1_EventScript_200F13:: @ 8200F13
 	checkitem ITEM_METEORITE, 1
 	compare VAR_RESULT, 1
 	goto_eq FallarborTown_House1_EventScript_200F38
-	msgbox FallarborTown_House1_Text_200FEE, 4
+	msgbox FallarborTown_House1_Text_200FEE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -20,34 +20,34 @@ FallarborTown_House1_EventScript_200F38:: @ 8200F38
 	call_if 1, FallarborTown_House1_EventScript_200F9C
 	compare VAR_RESULT, 0
 	goto_eq FallarborTown_House1_EventScript_200FA5
-	msgbox FallarborTown_House1_Text_201159, 4
+	msgbox FallarborTown_House1_Text_201159, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM27
 	compare VAR_RESULT, 0
 	goto_eq FallarborTown_House1_EventScript_272054
 	setvar VAR_0x8004, 280
 	call FallarborTown_House1_EventScript_2723E4
 	setflag FLAG_0x0E5
-	msgbox FallarborTown_House1_Text_2011A5, 4
+	msgbox FallarborTown_House1_Text_2011A5, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_House1_EventScript_200F8B:: @ 8200F8B
-	msgbox FallarborTown_House1_Text_200FEE, 4
-	msgbox FallarborTown_House1_Text_2010A2, 5
+	msgbox FallarborTown_House1_Text_200FEE, MSGBOX_DEFAULT
+	msgbox FallarborTown_House1_Text_2010A2, MSGBOX_YESNO
 	return
 
 FallarborTown_House1_EventScript_200F9C:: @ 8200F9C
-	msgbox FallarborTown_House1_Text_201249, 5
+	msgbox FallarborTown_House1_Text_201249, MSGBOX_YESNO
 	return
 
 FallarborTown_House1_EventScript_200FA5:: @ 8200FA5
 	setflag FLAG_TEMP_2
-	msgbox FallarborTown_House1_Text_201212, 4
+	msgbox FallarborTown_House1_Text_201212, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_House1_EventScript_200FB2:: @ 8200FB2
-	msgbox FallarborTown_House1_Text_2011A5, 4
+	msgbox FallarborTown_House1_Text_2011A5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -58,17 +58,17 @@ FallarborTown_House1_EventScript_200FBC:: @ 8200FBC
 	goto_eq FallarborTown_House1_EventScript_200FE4
 	checkflag FLAG_0x08B
 	goto_eq FallarborTown_House1_EventScript_200FDA
-	msgbox FallarborTown_House1_Text_2012BC, 4
+	msgbox FallarborTown_House1_Text_2012BC, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_House1_EventScript_200FDA:: @ 8200FDA
-	msgbox FallarborTown_House1_Text_201310, 4
+	msgbox FallarborTown_House1_Text_201310, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_House1_EventScript_200FE4:: @ 8200FE4
-	msgbox FallarborTown_House1_Text_20134B, 4
+	msgbox FallarborTown_House1_Text_20134B, MSGBOX_DEFAULT
 	release
 	end
 

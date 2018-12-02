@@ -4,7 +4,7 @@ Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 826EA77
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_26EA78:: @ 826EA78
 	lock
 	faceplayer
-	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_26EAC1, 4
+	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_26EAC1, MSGBOX_DEFAULT
 	release
 	end
 
@@ -19,7 +19,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_26EA84:: @ 826EA84
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_26EA9F:: @ 826EA9F
-	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_26EB48, 4
+	msgbox Route110_SeasideCyclingRoadNorthEntrance_Text_26EB48, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route110_SeasideCyclingRoadNorthEntrance_Movement_26EAB4
 	waitmovement 0

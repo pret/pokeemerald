@@ -48,7 +48,7 @@ JaggedPass_EventScript_2306BB:: @ 82306BB
 	setvar VAR_0x8007, 5
 	special sub_8139560
 	waitstate
-	msgbox JaggedPass_Text_230DBA, 4
+	msgbox JaggedPass_Text_230DBA, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
@@ -78,7 +78,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 	waitmovement 0
 	applymovement 5, JaggedPass_Movement_27259E
 	waitmovement 0
-	msgbox JaggedPass_Text_230CCB, 4
+	msgbox JaggedPass_Text_230CCB, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle 3, TRAINER_GRUNT_30, 0, JaggedPass_Text_230D2D
 	setflag FLAG_0x139
@@ -90,7 +90,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 JaggedPass_EventScript_230766:: @ 8230766
 	applymovement 5, JaggedPass_Movement_27259E
 	waitmovement 0
-	msgbox JaggedPass_Text_230D65, 4
+	msgbox JaggedPass_Text_230D65, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, JaggedPass_Movement_2725A2
 	waitmovement 0
@@ -99,7 +99,7 @@ JaggedPass_EventScript_230766:: @ 8230766
 
 JaggedPass_EventScript_230785:: @ 8230785
 	trainerbattle 0, TRAINER_ERIC, 0, JaggedPass_Text_230888, JaggedPass_Text_2308FF
-	msgbox JaggedPass_Text_230916, 6
+	msgbox JaggedPass_Text_230916, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_23079C:: @ 823079C
@@ -107,23 +107,23 @@ JaggedPass_EventScript_23079C:: @ 823079C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq JaggedPass_EventScript_2307E4
-	msgbox JaggedPass_Text_2309D8, 4
+	msgbox JaggedPass_Text_2309D8, MSGBOX_DEFAULT
 	release
 	end
 
 JaggedPass_EventScript_2307C8:: @ 82307C8
 	special sub_80B4808
-	msgbox JaggedPass_Text_230A2C, 4
+	msgbox JaggedPass_Text_230A2C, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 474
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 474
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 JaggedPass_EventScript_2307E4:: @ 82307E4
 	trainerbattle 5, TRAINER_DIANA_1, 0, JaggedPass_Text_230A76, JaggedPass_Text_230AAA
-	msgbox JaggedPass_Text_230AD7, 6
+	msgbox JaggedPass_Text_230AD7, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_2307FB:: @ 82307FB
@@ -131,33 +131,33 @@ JaggedPass_EventScript_2307FB:: @ 82307FB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq JaggedPass_EventScript_230843
-	msgbox JaggedPass_Text_230B93, 4
+	msgbox JaggedPass_Text_230B93, MSGBOX_DEFAULT
 	release
 	end
 
 JaggedPass_EventScript_230827:: @ 8230827
 	special sub_80B4808
-	msgbox JaggedPass_Text_230BC6, 4
+	msgbox JaggedPass_Text_230BC6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 216
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 216
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 JaggedPass_EventScript_230843:: @ 8230843
 	trainerbattle 5, TRAINER_ETHAN_1, 0, JaggedPass_Text_230C28, JaggedPass_Text_230C60
-	msgbox JaggedPass_Text_230C94, 6
+	msgbox JaggedPass_Text_230C94, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_23085A:: @ 823085A
 	trainerbattle 0, TRAINER_JULIO, 0, JaggedPass_Text_230DF7, JaggedPass_Text_230E38
-	msgbox JaggedPass_Text_230E57, 6
+	msgbox JaggedPass_Text_230E57, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_230871:: @ 8230871
 	trainerbattle 0, TRAINER_AUTUMN, 0, JaggedPass_Text_230E8E, JaggedPass_Text_230ECD
-	msgbox JaggedPass_Text_230EE3, 6
+	msgbox JaggedPass_Text_230EE3, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_Text_230888: @ 8230888

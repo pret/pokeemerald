@@ -2,7 +2,7 @@ Route119_House_MapScripts:: @ 8270965
 	.byte 0
 
 Route119_House_EventScript_270966:: @ 8270966
-	msgbox Route119_House_Text_270982, 2
+	msgbox Route119_House_Text_270982, MSGBOX_NPC
 	end
 
 Route119_House_EventScript_27096F:: @ 827096F
@@ -10,7 +10,7 @@ Route119_House_EventScript_27096F:: @ 827096F
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox Route119_House_Text_270A17, 4
+	msgbox Route119_House_Text_270A17, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

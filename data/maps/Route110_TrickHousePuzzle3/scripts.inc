@@ -303,17 +303,17 @@ Route110_TrickHousePuzzle3_EventScript_26C5B9:: @ 826C5B9
 
 Route110_TrickHousePuzzle3_EventScript_26C5C4:: @ 826C5C4
 	trainerbattle 0, TRAINER_JUSTIN, 0, Route110_TrickHousePuzzle3_Text_26C676, Route110_TrickHousePuzzle3_Text_26C69D
-	msgbox Route110_TrickHousePuzzle3_Text_26C6E6, 6
+	msgbox Route110_TrickHousePuzzle3_Text_26C6E6, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C5DB:: @ 826C5DB
 	trainerbattle 0, TRAINER_MARTHA, 0, Route110_TrickHousePuzzle3_Text_26C726, Route110_TrickHousePuzzle3_Text_26C763
-	msgbox Route110_TrickHousePuzzle3_Text_26C776, 6
+	msgbox Route110_TrickHousePuzzle3_Text_26C776, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C5F2:: @ 826C5F2
 	trainerbattle 0, TRAINER_ALAN, 0, Route110_TrickHousePuzzle3_Text_26C7AA, Route110_TrickHousePuzzle3_Text_26C7EC
-	msgbox Route110_TrickHousePuzzle3_Text_26C80C, 6
+	msgbox Route110_TrickHousePuzzle3_Text_26C80C, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle3_Text_26C609: @ 826C609

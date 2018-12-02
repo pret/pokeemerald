@@ -27,44 +27,44 @@ BattleFrontier_OutsideEast_EventScript_242C3F:: @ 8242C3F
 	return
 
 BattleFrontier_OutsideEast_EventScript_242C43:: @ 8242C43
-	msgbox BattleFrontier_OutsideEast_Text_242E11, 3
+	msgbox BattleFrontier_OutsideEast_Text_242E11, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C4C:: @ 8242C4C
-	msgbox BattleFrontier_OutsideEast_Text_242E58, 3
+	msgbox BattleFrontier_OutsideEast_Text_242E58, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C55:: @ 8242C55
-	msgbox BattleFrontier_OutsideEast_Text_242E96, 3
+	msgbox BattleFrontier_OutsideEast_Text_242E96, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C5E:: @ 8242C5E
-	msgbox BattleFrontier_OutsideEast_Text_242ECF, 3
+	msgbox BattleFrontier_OutsideEast_Text_242ECF, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C67:: @ 8242C67
-	msgbox BattleFrontier_OutsideEast_Text_242F8C, 2
+	msgbox BattleFrontier_OutsideEast_Text_242F8C, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C70:: @ 8242C70
-	msgbox BattleFrontier_OutsideEast_Text_242FDC, 2
+	msgbox BattleFrontier_OutsideEast_Text_242FDC, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C79:: @ 8242C79
-	msgbox BattleFrontier_OutsideEast_Text_24308C, 2
+	msgbox BattleFrontier_OutsideEast_Text_24308C, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C82:: @ 8242C82
-	msgbox BattleFrontier_OutsideEast_Text_243106, 2
+	msgbox BattleFrontier_OutsideEast_Text_243106, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C8B:: @ 8242C8B
-	msgbox BattleFrontier_OutsideEast_Text_2431A5, 2
+	msgbox BattleFrontier_OutsideEast_Text_2431A5, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C94:: @ 8242C94
 	lock
-	msgbox BattleFrontier_OutsideEast_Text_2432DD, 4
+	msgbox BattleFrontier_OutsideEast_Text_2432DD, MSGBOX_DEFAULT
 	release
 	end
 
@@ -73,35 +73,35 @@ BattleFrontier_OutsideEast_EventScript_242C9F:: @ 8242C9F
 	faceplayer
 	waitse
 	playmoncry SPECIES_ZIGZAGOON, 0
-	msgbox BattleFrontier_OutsideEast_Text_24334B, 4
+	msgbox BattleFrontier_OutsideEast_Text_24334B, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CB2:: @ 8242CB2
-	msgbox BattleFrontier_OutsideEast_Text_243363, 2
+	msgbox BattleFrontier_OutsideEast_Text_243363, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CBB:: @ 8242CBB
-	msgbox BattleFrontier_OutsideEast_Text_243425, 2
+	msgbox BattleFrontier_OutsideEast_Text_243425, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CC4:: @ 8242CC4
-	msgbox BattleFrontier_OutsideEast_Text_2434A0, 2
+	msgbox BattleFrontier_OutsideEast_Text_2434A0, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CCD:: @ 8242CCD
-	msgbox BattleFrontier_OutsideEast_Text_243504, 2
+	msgbox BattleFrontier_OutsideEast_Text_243504, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CD6:: @ 8242CD6
 	lock
-	msgbox BattleFrontier_OutsideEast_Text_243529, 4
+	msgbox BattleFrontier_OutsideEast_Text_243529, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CE1:: @ 8242CE1
-	msgbox BattleFrontier_OutsideEast_Text_243230, 2
+	msgbox BattleFrontier_OutsideEast_Text_243230, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242CEA:: @ 8242CEA
@@ -123,7 +123,7 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	playse 269
 	applymovement 14, BattleFrontier_OutsideEast_Movement_242D69
 	waitmovement 0
-	msgbox gUnknown_082731BD, 4
+	msgbox gUnknown_082731BD, MSGBOX_DEFAULT
 	closemessage
 	waitse
 	playmoncry SPECIES_SUDOWOODO, 2
@@ -169,55 +169,55 @@ BattleFrontier_OutsideEast_Movement_242D69: @ 8242D69
 	step_end
 
 BattleFrontier_OutsideEast_EventScript_242D79:: @ 8242D79
-	msgbox BattleFrontier_OutsideEast_Text_243598, 2
+	msgbox BattleFrontier_OutsideEast_Text_243598, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242D82:: @ 8242D82
-	msgbox BattleFrontier_OutsideEast_Text_243668, 2
+	msgbox BattleFrontier_OutsideEast_Text_243668, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242D8B:: @ 8242D8B
-	msgbox BattleFrontier_OutsideEast_Text_2436F2, 2
+	msgbox BattleFrontier_OutsideEast_Text_2436F2, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242D94:: @ 8242D94
-	msgbox BattleFrontier_OutsideEast_Text_243809, 2
+	msgbox BattleFrontier_OutsideEast_Text_243809, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242D9D:: @ 8242D9D
-	msgbox BattleFrontier_OutsideEast_Text_243895, 2
+	msgbox BattleFrontier_OutsideEast_Text_243895, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DA6:: @ 8242DA6
-	msgbox BattleFrontier_OutsideEast_Text_243943, 2
+	msgbox BattleFrontier_OutsideEast_Text_243943, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DAF:: @ 8242DAF
-	msgbox BattleFrontier_OutsideEast_Text_2439A0, 2
+	msgbox BattleFrontier_OutsideEast_Text_2439A0, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DB8:: @ 8242DB8
 	lock
-	msgbox BattleFrontier_OutsideEast_Text_243A2B, 4
+	msgbox BattleFrontier_OutsideEast_Text_243A2B, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DC3:: @ 8242DC3
 	lock
-	msgbox BattleFrontier_OutsideEast_Text_243A53, 4
+	msgbox BattleFrontier_OutsideEast_Text_243A53, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DCE:: @ 8242DCE
-	msgbox BattleFrontier_OutsideEast_Text_242F0D, 3
+	msgbox BattleFrontier_OutsideEast_Text_242F0D, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DD7:: @ 8242DD7
-	msgbox BattleFrontier_OutsideEast_Text_242F4A, 3
+	msgbox BattleFrontier_OutsideEast_Text_242F4A, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DE0:: @ 8242DE0
-	msgbox BattleFrontier_OutsideEast_Text_243B68, 2
+	msgbox BattleFrontier_OutsideEast_Text_243B68, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DE9:: @ 8242DE9
@@ -225,17 +225,17 @@ BattleFrontier_OutsideEast_EventScript_242DE9:: @ 8242DE9
 	faceplayer
 	checkflag FLAG_0x1C6
 	goto_eq BattleFrontier_OutsideEast_EventScript_242DFE
-	msgbox BattleFrontier_OutsideEast_Text_243C2C, 4
+	msgbox BattleFrontier_OutsideEast_Text_243C2C, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242DFE:: @ 8242DFE
-	msgbox BattleFrontier_OutsideEast_Text_243CA3, 4
+	msgbox BattleFrontier_OutsideEast_Text_243CA3, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242E08:: @ 8242E08
-	msgbox BattleFrontier_OutsideEast_Text_243D0B, 2
+	msgbox BattleFrontier_OutsideEast_Text_243D0B, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideEast_Text_242E11: @ 8242E11

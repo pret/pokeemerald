@@ -11,13 +11,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A:: @ 821C79A
 	lockall
 	applymovement 1, LilycoveCity_PokemonTrainerFanClub_Movement_2725AA
 	waitmovement 0
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF00, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF00, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C7FD
 	applymovement 2, LilycoveCity_PokemonTrainerFanClub_Movement_21C7F5
 	waitmovement 0
 	applymovement 255, LilycoveCity_PokemonTrainerFanClub_Movement_2725A8
 	waitmovement 0
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF12, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF12, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C804
 	waitmovement 0
 	applymovement 255, LilycoveCity_PokemonTrainerFanClub_Movement_2725A4
@@ -217,7 +217,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA17:: @ 821CA17
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CA7A
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D12A, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D12A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -225,22 +225,22 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA56:: @ 821CA56
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CA70
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D094, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D094, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CA70:: @ 821CA70
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D0BB, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D0BB, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CA7A:: @ 821CA7A
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D1B5, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D1B5, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CA84:: @ 821CA84
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D20C, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D20C, MSGBOX_DEFAULT
 	release
 	end
 
@@ -257,7 +257,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA8E:: @ 821CA8E
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CAF1
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D347, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D347, MSGBOX_DEFAULT
 	release
 	end
 
@@ -265,22 +265,22 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CACD:: @ 821CACD
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CAE7
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D2A6, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D2A6, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CAE7:: @ 821CAE7
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D2CE, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D2CE, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CAF1:: @ 821CAF1
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D377, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D377, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CAFB:: @ 821CAFB
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D3EE, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D3EE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -297,7 +297,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB05:: @ 821CB05
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CB68
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D52E, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D52E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -305,22 +305,22 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB44:: @ 821CB44
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CB5E
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D438, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D438, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CB5E:: @ 821CB5E
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D4A3, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D4A3, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CB68:: @ 821CB68
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D5DC, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D5DC, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CB72:: @ 821CB72
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D69C, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D69C, MSGBOX_DEFAULT
 	release
 	end
 
@@ -337,7 +337,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB7C:: @ 821CB7C
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CBDF
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D822, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D822, MSGBOX_DEFAULT
 	release
 	end
 
@@ -345,22 +345,22 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CBBB:: @ 821CBBB
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CBD5
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D751, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D751, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CBD5:: @ 821CBD5
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D79B, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D79B, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CBDF:: @ 821CBDF
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D857, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D857, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CBE9:: @ 821CBE9
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D8C4, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D8C4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -375,7 +375,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CBF3:: @ 821CBF3
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CC4B
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D9D1, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D9D1, MSGBOX_DEFAULT
 	release
 	end
 
@@ -383,17 +383,17 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CC27:: @ 821CC27
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CC41
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D921, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D921, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CC41:: @ 821CC41
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D96A, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D96A, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CC4B:: @ 821CC4B
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DA0D, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DA0D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -408,7 +408,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CC55:: @ 821CC55
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CCAD
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DB69, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DB69, MSGBOX_DEFAULT
 	release
 	end
 
@@ -416,17 +416,17 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CC89:: @ 821CC89
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CCA3
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DA73, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DA73, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CCA3:: @ 821CCA3
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DAF5, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DAF5, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CCAD:: @ 821CCAD
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DBFB, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DBFB, MSGBOX_DEFAULT
 	release
 	end
 
@@ -441,7 +441,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CCB7:: @ 821CCB7
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD0F
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DD36, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DD36, MSGBOX_DEFAULT
 	release
 	end
 
@@ -449,17 +449,17 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CCEB:: @ 821CCEB
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD05
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DC68, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DC68, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD05:: @ 821CD05
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DCD6, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DCD6, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD0F:: @ 821CD0F
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DDCE, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DDCE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -474,7 +474,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD19:: @ 821CD19
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD71
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DEFF, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DEFF, MSGBOX_DEFAULT
 	release
 	end
 
@@ -482,17 +482,17 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD4D:: @ 821CD4D
 	specialvar VAR_RESULT, GetNumMovedLilycoveFanClubMembers
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD67
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE72, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE72, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD67:: @ 821CD67
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE83, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE83, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD71:: @ 821CD71
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DF51, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DF51, MSGBOX_DEFAULT
 	release
 	end
 
@@ -513,7 +513,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
 	copyvar VAR_0x800A, VAR_0x8006
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281BCB, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281BCB, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 14
 	copyvar VAR_0x8005, VAR_0x800A
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C
@@ -526,14 +526,14 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CDE0:: @ 821CDE0
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C06, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C06, MSGBOX_DEFAULT
 	goto LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE:: @ 821CDEE
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C3D, 5
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C3D, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
 	compare VAR_RESULT, 0
@@ -543,7 +543,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE:: @ 821CDEE
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15:: @ 821CE15
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C65, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C65, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 14
 	copyvar VAR_0x8005, VAR_0x800A
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C
@@ -578,7 +578,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D:: @ 821CE4D
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F:: @ 821CE9F
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CCD, 5
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CCD, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
 	compare VAR_RESULT, 0
@@ -588,14 +588,14 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F:: @ 821CE9F
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6:: @ 821CEC6
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CF5, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CF5, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CED8:: @ 821CED8
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281D40, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281D40, MSGBOX_DEFAULT
 	setflag FLAG_0x0D2
 	release
 	end
@@ -603,7 +603,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CED8:: @ 821CED8
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CEED:: @ 821CEED
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
-	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281DB4, 4
+	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281DB4, MSGBOX_DEFAULT
 	release
 	end
 

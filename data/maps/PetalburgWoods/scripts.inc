@@ -6,26 +6,26 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	call PetalburgWoods_EventScript_22E124
 	applymovement 4, PetalburgWoods_Movement_22E1CB
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E34F, 4
+	msgbox PetalburgWoods_Text_22E34F, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E3AA, 4
+	msgbox PetalburgWoods_Text_22E3AA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E1F6
 	waitmovement 0
 	applymovement 4, PetalburgWoods_Movement_2725A6
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E428, 4
+	msgbox PetalburgWoods_Text_22E428, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, PetalburgWoods_Movement_22E1E4
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E457, 4
+	msgbox PetalburgWoods_Text_22E457, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E20E
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E4A5, 4
+	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_GRUNT_8, 0, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
@@ -43,25 +43,25 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	waitmovement 0
 	applymovement 255, PetalburgWoods_Movement_2725A4
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E34F, 4
+	msgbox PetalburgWoods_Text_22E34F, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E3AA, 4
+	msgbox PetalburgWoods_Text_22E3AA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E205
 	waitmovement 0
 	applymovement 4, PetalburgWoods_Movement_2725A6
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E428, 4
+	msgbox PetalburgWoods_Text_22E428, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, PetalburgWoods_Movement_22E1EA
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E457, 4
+	msgbox PetalburgWoods_Text_22E457, MSGBOX_DEFAULT
 	applymovement 255, PetalburgWoods_Movement_2725A6
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E4A5, 4
+	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_GRUNT_8, 0, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
@@ -75,19 +75,19 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 PetalburgWoods_EventScript_22E124:: @ 822E124
 	applymovement 4, PetalburgWoods_Movement_22E1B1
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E332, 4
+	msgbox PetalburgWoods_Text_22E332, MSGBOX_DEFAULT
 	closemessage
 	return
 
 PetalburgWoods_EventScript_22E138:: @ 822E138
-	msgbox PetalburgWoods_Text_22E563, 4
+	msgbox PetalburgWoods_Text_22E563, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E1FD
 	waitmovement 0
 	removeobject 3
 	applymovement 255, PetalburgWoods_Movement_2725AA
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E63D, 4
+	msgbox PetalburgWoods_Text_22E63D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_22E17D
@@ -95,15 +95,15 @@ PetalburgWoods_EventScript_22E138:: @ 822E138
 	end
 
 PetalburgWoods_EventScript_22E17D:: @ 822E17D
-	msgbox PetalburgWoods_Text_22E741, 4
+	msgbox PetalburgWoods_Text_22E741, MSGBOX_DEFAULT
 	goto PetalburgWoods_EventScript_22E18B
 	end
 
 PetalburgWoods_EventScript_22E18B:: @ 822E18B
-	msgbox PetalburgWoods_Text_22E6C7, 4
+	msgbox PetalburgWoods_Text_22E6C7, MSGBOX_DEFAULT
 	applymovement 4, PetalburgWoods_Movement_22E1EE
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E712, 4
+	msgbox PetalburgWoods_Text_22E712, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -239,11 +239,11 @@ PetalburgWoods_Movement_22E20E: @ 822E20E
 	step_end
 
 PetalburgWoods_EventScript_22E210:: @ 822E210
-	msgbox PetalburgWoods_Text_22EA0C, 2
+	msgbox PetalburgWoods_Text_22EA0C, MSGBOX_NPC
 	end
 
 PetalburgWoods_EventScript_22E219:: @ 822E219
-	msgbox PetalburgWoods_Text_22EA8B, 2
+	msgbox PetalburgWoods_Text_22EA8B, MSGBOX_NPC
 	end
 
 PetalburgWoods_EventScript_22E222:: @ 822E222
@@ -251,7 +251,7 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	faceplayer
 	checkflag FLAG_0x129
 	goto_eq PetalburgWoods_EventScript_22E251
-	msgbox PetalburgWoods_Text_22EAFE, 4
+	msgbox PetalburgWoods_Text_22EAFE, MSGBOX_DEFAULT
 	giveitem_std ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_272054
@@ -260,21 +260,21 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	end
 
 PetalburgWoods_EventScript_22E251:: @ 822E251
-	msgbox PetalburgWoods_Text_22EB63, 4
+	msgbox PetalburgWoods_Text_22EB63, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgWoods_EventScript_22E25B:: @ 822E25B
-	msgbox PetalburgWoods_Text_22EC10, 3
+	msgbox PetalburgWoods_Text_22EC10, MSGBOX_SIGN
 	end
 
 PetalburgWoods_EventScript_22E264:: @ 822E264
-	msgbox PetalburgWoods_Text_22ED07, 3
+	msgbox PetalburgWoods_Text_22ED07, MSGBOX_SIGN
 	end
 
 PetalburgWoods_EventScript_22E26D:: @ 822E26D
 	trainerbattle 0, TRAINER_LYLE, 0, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
-	msgbox PetalburgWoods_Text_22E7EF, 6
+	msgbox PetalburgWoods_Text_22E7EF, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_EventScript_22E284:: @ 822E284
@@ -286,7 +286,7 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_22E2EF
-	msgbox PetalburgWoods_Text_22E889, 4
+	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT
 	release
 	end
 
@@ -299,33 +299,33 @@ PetalburgWoods_EventScript_22E2C5:: @ 822E2C5
 	end
 
 PetalburgWoods_EventScript_22E2D6:: @ 822E2D6
-	msgbox PetalburgWoods_Text_22E8C3, 4
+	msgbox PetalburgWoods_Text_22E8C3, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 621
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 621
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 PetalburgWoods_EventScript_22E2EF:: @ 822E2EF
 	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq PetalburgWoods_EventScript_22E302
-	msgbox PetalburgWoods_Text_22E889, 4
+	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgWoods_EventScript_22E302:: @ 822E302
-	msgbox PetalburgWoods_Text_22E914, 4
+	msgbox PetalburgWoods_Text_22E914, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 621
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 621
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 PetalburgWoods_EventScript_22E31B:: @ 822E31B
 	trainerbattle 5, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E966, PetalburgWoods_Text_22E998
-	msgbox PetalburgWoods_Text_22E9B6, 6
+	msgbox PetalburgWoods_Text_22E9B6, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_Text_22E332: @ 822E332

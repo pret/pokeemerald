@@ -36,10 +36,10 @@ MossdeepCity_SpaceCenter_2F_EventScript_223DBF:: @ 8223DBF
 	waitmovement 0
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_27259A
 	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2243A4, 5
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2243A4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223E09
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2243FE, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2243FE, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_223E07
 	waitmovement 0
@@ -53,19 +53,19 @@ MossdeepCity_SpaceCenter_2F_Movement_223E07: @ 8223E07
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
-	msgbox MossdeepCity_SpaceCenter_2F_Text_22442D, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_22442D, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_GRUNT_34, 0, MossdeepCity_SpaceCenter_2F_Text_224461
 	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_223E85
 	waitmovement 0
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_2725A4
 	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_22446E, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_22446E, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_GRUNT_35, 0, MossdeepCity_SpaceCenter_2F_Text_224499
 	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_223E81
 	waitmovement 0
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_2725A8
 	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2244AB, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2244AB, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_GRUNT_36, 0, MossdeepCity_SpaceCenter_2F_Text_2244F1
 	applymovement 7, MossdeepCity_SpaceCenter_2F_Movement_223E89
 	waitmovement 0
@@ -107,12 +107,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E8D:: @ 8223E8D
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223EB4:: @ 8223EB4
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2241A1, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2241A1, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223EBE:: @ 8223EBE
-	msgbox MossdeepCity_SpaceCenter_2F_Text_22420C, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_22420C, MSGBOX_DEFAULT
 	release
 	end
 
@@ -129,12 +129,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_223EC8:: @ 8223EC8
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223EEF:: @ 8223EEF
-	msgbox MossdeepCity_SpaceCenter_2F_Text_224253, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_224253, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223EF9:: @ 8223EF9
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2242C5, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2242C5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -151,31 +151,31 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F03:: @ 8223F03
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F2A:: @ 8223F2A
-	msgbox MossdeepCity_SpaceCenter_2F_Text_224342, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_224342, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F34:: @ 8223F34
-	msgbox MossdeepCity_SpaceCenter_2F_Text_224376, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_224376, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F3E:: @ 8223F3E
-	msgbox MossdeepCity_SpaceCenter_2F_Text_22452C, 2
+	msgbox MossdeepCity_SpaceCenter_2F_Text_22452C, MSGBOX_NPC
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F47:: @ 8223F47
-	msgbox MossdeepCity_SpaceCenter_2F_Text_224570, 2
+	msgbox MossdeepCity_SpaceCenter_2F_Text_224570, MSGBOX_NPC
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F50:: @ 8223F50
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2245AF, 2
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2245AF, MSGBOX_NPC
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F59:: @ 8223F59
 	lock
 	faceplayer
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2245D9, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2245D9, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725A2
 	waitmovement 0
 	release
@@ -183,7 +183,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F59:: @ 8223F59
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F6F:: @ 8223F6F
 	lockall
-	msgbox MossdeepCity_SpaceCenter_2F_Text_22467B, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_22467B, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -192,8 +192,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F7A:: @ 8223F7A
 	checkflag FLAG_0x0CD
 	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223FDA
 	setflag FLAG_0x0CD
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2246B2, 4
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2246F0, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2246B2, MSGBOX_DEFAULT
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2246F0, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	playse SE_KOUKA_L
@@ -237,10 +237,10 @@ MossdeepCity_SpaceCenter_2F_Movement_223FCF: @ 8223FCF
 MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_27259E
 	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2247FF, 5
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2247FF, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_22400C
-	msgbox MossdeepCity_SpaceCenter_2F_Text_224854, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_224854, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725AA
 	waitmovement 0
@@ -278,7 +278,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224032:: @ 8224032
 	waitstate
 
 MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2248C2, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2248C2, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	applymovement 9, MossdeepCity_SpaceCenter_2F_Movement_2725A4
@@ -289,7 +289,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	applymovement 8, MossdeepCity_SpaceCenter_2F_Movement_2725A8
 	waitmovement 0
 	delay 20
-	msgbox MossdeepCity_SpaceCenter_2F_Text_2249DC, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_2249DC, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x405D, 3
 	fadedefaultbgm
@@ -311,7 +311,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	turnobject 1, 2
 	call MossdeepCity_SpaceCenter_2F_EventScript_224131
 	fadescreen 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_224A4A, 4
+	msgbox MossdeepCity_SpaceCenter_2F_Text_224A4A, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1
 	setflag FLAG_0x075

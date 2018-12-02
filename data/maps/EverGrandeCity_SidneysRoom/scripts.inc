@@ -51,20 +51,20 @@ EverGrandeCity_SidneysRoom_EventScript_227F64:: @ 8227F64
 	checkflag FLAG_0x4FB
 	goto_eq EverGrandeCity_SidneysRoom_EventScript_227F8B
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_SidneysRoom_Text_227FA7, 4
+	msgbox EverGrandeCity_SidneysRoom_Text_227FA7, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_2280A2
 	goto EverGrandeCity_SidneysRoom_EventScript_227F95
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_227F8B:: @ 8227F8B
-	msgbox EverGrandeCity_SidneysRoom_Text_2280EC, 4
+	msgbox EverGrandeCity_SidneysRoom_Text_2280EC, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_227F95:: @ 8227F95
 	setflag FLAG_0x4FB
 	call EverGrandeCity_SidneysRoom_EventScript_2723F8
-	msgbox EverGrandeCity_SidneysRoom_Text_2280EC, 4
+	msgbox EverGrandeCity_SidneysRoom_Text_2280EC, MSGBOX_DEFAULT
 	release
 	end
 

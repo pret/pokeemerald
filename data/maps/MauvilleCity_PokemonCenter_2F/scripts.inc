@@ -18,7 +18,7 @@ MauvilleCity_PokemonCenter_2F_EventScript_211029:: @ 8211029
 	end
 
 MauvilleCity_PokemonCenter_2F_EventScript_21102F:: @ 821102F
-	msgbox MauvilleCity_PokemonCenter_2F_Text_211038, 2
+	msgbox MauvilleCity_PokemonCenter_2F_Text_211038, MSGBOX_NPC
 	end
 
 MauvilleCity_PokemonCenter_2F_Text_211038: @ 8211038

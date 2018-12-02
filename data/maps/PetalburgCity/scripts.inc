@@ -35,13 +35,13 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	applymovement 2, PetalburgCity_Movement_1DC451
 	applymovement 255, PetalburgCity_Movement_1DC430
 	waitmovement 0
-	msgbox PetalburgCity_Text_1EC1F8, 4
+	msgbox PetalburgCity_Text_1EC1F8, MSGBOX_DEFAULT
 	special StartWallyTutorialBattle
 	waitstate
-	msgbox PetalburgCity_Text_1EC271, 4
+	msgbox PetalburgCity_Text_1EC271, MSGBOX_DEFAULT
 	applymovement 2, PetalburgCity_Movement_2725A4, MAP_PETALBURG_CITY
 	waitmovement 2, MAP_PETALBURG_CITY
-	msgbox PetalburgCity_Text_1EC297, 4
+	msgbox PetalburgCity_Text_1EC297, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	setvar VAR_0x4057, 3
@@ -82,7 +82,7 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 PetalburgCity_EventScript_1DC3E6:: @ 81DC3E6
 	lock
 	faceplayer
-	msgbox PetalburgCity_Text_1DC985, 4
+	msgbox PetalburgCity_Text_1DC985, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgCity_Movement_2725A2
 	waitmovement 0
@@ -90,7 +90,7 @@ PetalburgCity_EventScript_1DC3E6:: @ 81DC3E6
 	end
 
 PetalburgCity_EventScript_1DC3FD:: @ 81DC3FD
-	msgbox PetalburgCity_Text_1DC837, 2
+	msgbox PetalburgCity_Text_1DC837, MSGBOX_NPC
 	end
 
 PetalburgCity_Movement_1DC406: @ 81DC406
@@ -218,19 +218,19 @@ PetalburgCity_Movement_1DC451: @ 81DC451
 	step_end
 
 PetalburgCity_EventScript_1DC476:: @ 81DC476
-	msgbox PetalburgCity_Text_1DCAAA, 3
+	msgbox PetalburgCity_Text_1DCAAA, MSGBOX_SIGN
 	end
 
 PetalburgCity_EventScript_1DC47F:: @ 81DC47F
-	msgbox PetalburgCity_Text_1DCAF1, 3
+	msgbox PetalburgCity_Text_1DCAF1, MSGBOX_SIGN
 	end
 
 PetalburgCity_EventScript_1DC488:: @ 81DC488
-	msgbox PetalburgCity_Text_1DCA30, 2
+	msgbox PetalburgCity_Text_1DCA30, MSGBOX_NPC
 	end
 
 PetalburgCity_EventScript_1DC491:: @ 81DC491
-	msgbox PetalburgCity_Text_1DCB23, 3
+	msgbox PetalburgCity_Text_1DCB23, MSGBOX_SIGN
 	end
 
 PetalburgCity_EventScript_1DC49A:: @ 81DC49A
@@ -274,7 +274,7 @@ PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 	call_if 1, PetalburgCity_EventScript_1DC59F
 	compare VAR_0x8008, 3
 	call_if 1, PetalburgCity_EventScript_1DC5B4
-	msgbox PetalburgCity_Text_1DC881, 4
+	msgbox PetalburgCity_Text_1DC881, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, PetalburgCity_EventScript_1DC5C9
@@ -284,11 +284,11 @@ PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 	call_if 1, PetalburgCity_EventScript_1DC5ED
 	compare VAR_0x8008, 3
 	call_if 1, PetalburgCity_EventScript_1DC5FF
-	msgbox PetalburgCity_Text_1DC91B, 4
+	msgbox PetalburgCity_Text_1DC91B, MSGBOX_DEFAULT
 	applymovement 8, PetalburgCity_Movement_2725A8
 	applymovement 255, PetalburgCity_Movement_2725A8
 	waitmovement 0
-	msgbox PetalburgCity_Text_1DC93E, 4
+	msgbox PetalburgCity_Text_1DC93E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 8, PetalburgCity_Movement_1DC658
 	waitmovement 0
@@ -547,17 +547,17 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	applymovement 255, PetalburgCity_Movement_2725A8
 	waitmovement 0
 	setvar VAR_0x40D1, 1
-	msgbox PetalburgCity_Text_1DCB31, 4
+	msgbox PetalburgCity_Text_1DCB31, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, PetalburgCity_Movement_2725A8
 	waitmovement 0
 	delay 30
-	msgbox PetalburgCity_Text_1DCB82, 4
+	msgbox PetalburgCity_Text_1DCB82, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, PetalburgCity_Movement_2725A4
 	waitmovement 0
 	delay 30
-	msgbox PetalburgCity_Text_1DCC09, 4
+	msgbox PetalburgCity_Text_1DCC09, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, PetalburgCity_EventScript_1DC78E
@@ -705,7 +705,7 @@ PetalburgCity_Movement_1DC828: @ 81DC828
 	step_end
 
 PetalburgCity_EventScript_1DC82E:: @ 81DC82E
-	msgbox PetalburgCity_Text_1DC881, 2
+	msgbox PetalburgCity_Text_1DC881, MSGBOX_NPC
 	end
 
 PetalburgCity_Text_1DC837: @ 81DC837

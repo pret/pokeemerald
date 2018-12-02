@@ -4,24 +4,24 @@ GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
 GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	lock
 	faceplayer
-	msgbox GraniteCave_StevensRoom_Text_22DD5A, 4
+	msgbox GraniteCave_StevensRoom_Text_22DD5A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 274
 	call GraniteCave_StevensRoom_EventScript_2723E4
 	setflag FLAG_0x0BD
-	msgbox GraniteCave_StevensRoom_Text_22DDBD, 4
+	msgbox GraniteCave_StevensRoom_Text_22DDBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM47
 	compare VAR_RESULT, 0
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD3C
-	msgbox GraniteCave_StevensRoom_Text_22DE6B, 4
+	msgbox GraniteCave_StevensRoom_Text_22DE6B, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox GraniteCave_StevensRoom_Text_22DF6A, 4
+	msgbox GraniteCave_StevensRoom_Text_22DF6A, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_0x131
-	msgbox GraniteCave_StevensRoom_Text_22DF8C, 4
+	msgbox GraniteCave_StevensRoom_Text_22DF8C, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD0D
@@ -54,7 +54,7 @@ GraniteCave_StevensRoom_EventScript_22DD2A:: @ 822DD2A
 	return
 
 GraniteCave_StevensRoom_EventScript_22DD3C:: @ 822DD3C
-	msgbox GraniteCave_StevensRoom_Text_22DFAA, 4
+	msgbox GraniteCave_StevensRoom_Text_22DFAA, MSGBOX_DEFAULT
 	return
 
 GraniteCave_StevensRoom_Movement_22DD45: @ 822DD45

@@ -28,7 +28,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 	applymovement 1, Route114_FossilManiacsTunnel_Movement_2725A6
 	applymovement 255, Route114_FossilManiacsTunnel_Movement_2725AA
 	waitmovement 0
-	msgbox Route114_FossilManiacsTunnel_Text_22B1F7, 4
+	msgbox Route114_FossilManiacsTunnel_Text_22B1F7, MSGBOX_DEFAULT
 	setvar VAR_0x40CC, 2
 	releaseall
 	end
@@ -44,17 +44,17 @@ Route114_FossilManiacsTunnel_EventScript_22AF87:: @ 822AF87
 	checkitem ITEM_CLAW_FOSSIL, 1
 	compare VAR_RESULT, 1
 	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
-	msgbox Route114_FossilManiacsTunnel_Text_22AFD0, 4
+	msgbox Route114_FossilManiacsTunnel_Text_22AFD0, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AFBC:: @ 822AFBC
-	msgbox Route114_FossilManiacsTunnel_Text_22B0D6, 4
+	msgbox Route114_FossilManiacsTunnel_Text_22B0D6, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AFC6:: @ 822AFC6
-	msgbox Route114_FossilManiacsTunnel_Text_22B1CC, 4
+	msgbox Route114_FossilManiacsTunnel_Text_22B1CC, MSGBOX_DEFAULT
 	release
 	end
 

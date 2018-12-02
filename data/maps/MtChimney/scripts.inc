@@ -26,17 +26,17 @@ MtChimney_EventScript_22EDD5:: @ 822EDD5
 	end
 
 MtChimney_EventScript_22EDF9:: @ 822EDF9
-	msgbox MtChimney_Text_22FAD2, 4
+	msgbox MtChimney_Text_22FAD2, MSGBOX_DEFAULT
 	return
 
 MtChimney_EventScript_22EE02:: @ 822EE02
-	msgbox MtChimney_Text_22FBC7, 4
+	msgbox MtChimney_Text_22FBC7, MSGBOX_DEFAULT
 	return
 
 MtChimney_EventScript_22EE0B:: @ 822EE0B
 	lockall
 	playbgm MUS_MGM0, 0
-	msgbox MtChimney_Text_22F26A, 4
+	msgbox MtChimney_Text_22F26A, MSGBOX_DEFAULT
 	applymovement 2, MtChimney_Movement_27259E
 	waitmovement 0
 	playse SE_PIN
@@ -44,9 +44,9 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	waitmovement 0
 	applymovement 2, MtChimney_Movement_27259A
 	waitmovement 0
-	msgbox MtChimney_Text_22F32E, 4
+	msgbox MtChimney_Text_22F32E, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_MAXIE_2, 0, MtChimney_Text_22F5CF
-	msgbox MtChimney_Text_22F5F7, 4
+	msgbox MtChimney_Text_22F5F7, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	fadescreen 1
@@ -64,7 +64,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	call_if 1, MtChimney_EventScript_22EED2
 	applymovement 255, MtChimney_Movement_2725A4
 	waitmovement 0
-	msgbox MtChimney_Text_22FC3D, 4
+	msgbox MtChimney_Text_22FC3D, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 4
 	call_if 1, MtChimney_EventScript_22EEDD
@@ -103,13 +103,13 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	lock
 	faceplayer
 	showmoneybox 0, 0, 0
-	msgbox MtChimney_Text_22FE04, 5
+	msgbox MtChimney_Text_22FE04, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22EF69
 	checkmoney 0xc8, 0
 	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22EF76
-	msgbox MtChimney_Text_22FE4D, 4
+	msgbox MtChimney_Text_22FE4D, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare VAR_RESULT, 1
 	call_if 1, MtChimney_EventScript_22EF5E
@@ -123,7 +123,7 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	end
 
 MtChimney_EventScript_22EF51:: @ 822EF51
-	msgbox gUnknown_08272AD0, 4
+	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop
@@ -137,7 +137,7 @@ MtChimney_EventScript_22EF5E:: @ 822EF5E
 	return
 
 MtChimney_EventScript_22EF69:: @ 822EF69
-	msgbox MtChimney_Text_22FE9B, 4
+	msgbox MtChimney_Text_22FE9B, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop
@@ -145,7 +145,7 @@ MtChimney_EventScript_22EF69:: @ 822EF69
 	end
 
 MtChimney_EventScript_22EF76:: @ 822EF76
-	msgbox MtChimney_Text_22FE5E, 4
+	msgbox MtChimney_Text_22FE5E, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop
@@ -399,57 +399,57 @@ MtChimney_Movement_22F04F: @ 822F04F
 	step_end
 
 MtChimney_EventScript_22F053:: @ 822F053
-	msgbox MtChimney_Text_22FD1F, 3
+	msgbox MtChimney_Text_22FD1F, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F05C:: @ 822F05C
-	msgbox MtChimney_Text_22FD5B, 3
+	msgbox MtChimney_Text_22FD5B, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F065:: @ 822F065
-	msgbox MtChimney_Text_22FDA1, 3
+	msgbox MtChimney_Text_22FDA1, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F06E:: @ 822F06E
 	trainerbattle 0, TRAINER_TABITHA_2, 0, MtChimney_Text_22F6AA, MtChimney_Text_22F72C
-	msgbox MtChimney_Text_22F76D, 6
+	msgbox MtChimney_Text_22F76D, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F085:: @ 822F085
 	trainerbattle 0, TRAINER_GRUNT_31, 0, MtChimney_Text_22F7A2, MtChimney_Text_22F83A
-	msgbox MtChimney_Text_22F859, 6
+	msgbox MtChimney_Text_22F859, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F09C:: @ 822F09C
-	msgbox MtChimney_Text_22F978, 3
+	msgbox MtChimney_Text_22F978, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0A5:: @ 822F0A5
-	msgbox MtChimney_Text_22F9B2, 3
+	msgbox MtChimney_Text_22F9B2, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0AE:: @ 822F0AE
-	msgbox MtChimney_Text_22F9D1, 3
+	msgbox MtChimney_Text_22F9D1, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0B7:: @ 822F0B7
-	msgbox MtChimney_Text_22FA2F, 3
+	msgbox MtChimney_Text_22FA2F, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0C0:: @ 822F0C0
-	msgbox MtChimney_Text_22FA8B, 3
+	msgbox MtChimney_Text_22FA8B, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0C9:: @ 822F0C9
-	msgbox MtChimney_Text_22FAA5, 3
+	msgbox MtChimney_Text_22FAA5, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0D2:: @ 822F0D2
-	msgbox MtChimney_Text_22FACB, 3
+	msgbox MtChimney_Text_22FACB, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0DB:: @ 822F0DB
-	msgbox MtChimney_Text_22FDFC, 3
+	msgbox MtChimney_Text_22FDFC, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F0E4:: @ 822F0E4
@@ -458,32 +458,32 @@ MtChimney_EventScript_22F0E4:: @ 822F0E4
 	goto_if 0, MtChimney_EventScript_22F137
 	checkflag FLAG_0x073
 	goto_eq MtChimney_EventScript_22F12D
-	msgbox MtChimney_Text_22FF12, 5
+	msgbox MtChimney_Text_22FF12, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22F123
-	msgbox MtChimney_Text_22FF66, 4
+	msgbox MtChimney_Text_22FF66, MSGBOX_DEFAULT
 	giveitem_std ITEM_METEORITE
 	setflag FLAG_0x073
 	releaseall
 	end
 
 MtChimney_EventScript_22F123:: @ 822F123
-	msgbox MtChimney_Text_22FF9C, 4
+	msgbox MtChimney_Text_22FF9C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MtChimney_EventScript_22F12D:: @ 822F12D
-	msgbox MtChimney_Text_22FFC0, 4
+	msgbox MtChimney_Text_22FFC0, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MtChimney_EventScript_22F137:: @ 822F137
-	msgbox MtChimney_Text_22FEAA, 4
+	msgbox MtChimney_Text_22FEAA, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MtChimney_EventScript_22F141:: @ 822F141
-	msgbox MtChimney_Text_22FFFA, 3
+	msgbox MtChimney_Text_22FFFA, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_22F14A:: @ 822F14A
@@ -491,44 +491,44 @@ MtChimney_EventScript_22F14A:: @ 822F14A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F195
-	msgbox MtChimney_Text_2300A2, 4
+	msgbox MtChimney_Text_2300A2, MSGBOX_DEFAULT
 	release
 	end
 
 MtChimney_EventScript_22F176:: @ 822F176
 	special sub_80B4808
 	waitmovement 0
-	msgbox MtChimney_Text_2300E3, 4
+	msgbox MtChimney_Text_2300E3, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 313
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 313
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 MtChimney_EventScript_22F195:: @ 822F195
 	trainerbattle 5, TRAINER_SHELBY_1, 0, MtChimney_Text_230153, MtChimney_Text_2301BB
-	msgbox MtChimney_Text_2301E7, 6
+	msgbox MtChimney_Text_2301E7, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1AC:: @ 822F1AC
 	trainerbattle 0, TRAINER_MELISSA, 0, MtChimney_Text_23022A, MtChimney_Text_23026D
-	msgbox MtChimney_Text_230292, 6
+	msgbox MtChimney_Text_230292, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1C3:: @ 822F1C3
 	trainerbattle 0, TRAINER_SHEILA, 0, MtChimney_Text_2302BD, MtChimney_Text_230304
-	msgbox MtChimney_Text_23033A, 6
+	msgbox MtChimney_Text_23033A, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1DA:: @ 822F1DA
 	trainerbattle 0, TRAINER_SHIRLEY, 0, MtChimney_Text_2303DF, MtChimney_Text_230436
-	msgbox MtChimney_Text_230463, 6
+	msgbox MtChimney_Text_230463, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F1F1:: @ 822F1F1
 	trainerbattle 0, TRAINER_GRUNT_24, 0, MtChimney_Text_22F8B6, MtChimney_Text_22F921
-	msgbox MtChimney_Text_22F93A, 6
+	msgbox MtChimney_Text_22F93A, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_22F208:: @ 822F208
@@ -536,24 +536,24 @@ MtChimney_EventScript_22F208:: @ 822F208
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F253
-	msgbox MtChimney_Text_230519, 4
+	msgbox MtChimney_Text_230519, MSGBOX_DEFAULT
 	release
 	end
 
 MtChimney_EventScript_22F234:: @ 822F234
 	special sub_80B4808
 	waitmovement 0
-	msgbox MtChimney_Text_230557, 4
+	msgbox MtChimney_Text_230557, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
 	special SetMatchCallRegisteredFlag
 	setorcopyvar VAR_0x8000, 1
-	callstd 8
+	callstd STD_REGISTER_MATCH_CALL
 	release
 	end
 
 MtChimney_EventScript_22F253:: @ 822F253
 	trainerbattle 5, TRAINER_SAWYER_1, 0, MtChimney_Text_23059C, MtChimney_Text_2305E3
-	msgbox MtChimney_Text_230614, 6
+	msgbox MtChimney_Text_230614, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_Text_22F26A: @ 822F26A

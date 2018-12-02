@@ -22,53 +22,53 @@ DewfordTown_EventScript_1E9511:: @ 81E9511
 	end
 
 DewfordTown_EventScript_1E955A:: @ 81E955A
-	msgbox DewfordTown_Text_1E9CE5, 4
+	msgbox DewfordTown_Text_1E9CE5, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_1E9660
 	release
 	end
 
 DewfordTown_EventScript_1E956A:: @ 81E956A
-	msgbox DewfordTown_Text_1E9D3A, 4
+	msgbox DewfordTown_Text_1E9D3A, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_1E96E7
 	release
 	end
 
 DewfordTown_EventScript_1E957A:: @ 81E957A
-	msgbox DewfordTown_Text_1E9D8F, 4
+	msgbox DewfordTown_Text_1E9D8F, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
 DewfordTown_EventScript_1E9585:: @ 81E9585
-	msgbox DewfordTown_Text_1E9B24, 5
+	msgbox DewfordTown_Text_1E9B24, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E95A2
-	msgbox DewfordTown_Text_1E9BD9, 4
+	msgbox DewfordTown_Text_1E9BD9, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E95A2:: @ 81E95A2
-	msgbox DewfordTown_Text_1E9B7F, 4
+	msgbox DewfordTown_Text_1E9B7F, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_1E9660
 	end
 
 DewfordTown_EventScript_1E95B1:: @ 81E95B1
-	msgbox DewfordTown_Text_1E99A8, 2
+	msgbox DewfordTown_Text_1E99A8, MSGBOX_NPC
 	end
 
 DewfordTown_EventScript_1E95BA:: @ 81E95BA
-	msgbox DewfordTown_Text_1E9A0F, 3
+	msgbox DewfordTown_Text_1E9A0F, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1E95C3:: @ 81E95C3
-	msgbox DewfordTown_Text_1E9A3D, 3
+	msgbox DewfordTown_Text_1E9A3D, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1E95CC:: @ 81E95CC
-	msgbox DewfordTown_Text_1E9A7F, 3
+	msgbox DewfordTown_Text_1E9A7F, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1E95D5:: @ 81E95D5
@@ -76,7 +76,7 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	faceplayer
 	checkflag FLAG_0x101
 	goto_eq DewfordTown_EventScript_1E962A
-	msgbox DewfordTown_Text_1E9DD1, 5
+	msgbox DewfordTown_Text_1E9DD1, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E95FF
 	compare VAR_RESULT, 0
@@ -84,15 +84,15 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	end
 
 DewfordTown_EventScript_1E95FF:: @ 81E95FF
-	msgbox DewfordTown_Text_1E9E14, 4
+	msgbox DewfordTown_Text_1E9E14, MSGBOX_DEFAULT
 	giveitem_std ITEM_OLD_ROD
 	setflag FLAG_0x101
-	msgbox DewfordTown_Text_1E9E65, 4
+	msgbox DewfordTown_Text_1E9E65, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9620:: @ 81E9620
-	msgbox DewfordTown_Text_1E9F92, 4
+	msgbox DewfordTown_Text_1E9F92, MSGBOX_DEFAULT
 	release
 	end
 
@@ -107,12 +107,12 @@ DewfordTown_EventScript_1E962A:: @ 81E962A
 	end
 
 DewfordTown_EventScript_1E964C:: @ 81E964C
-	msgbox DewfordTown_Text_1E9FD0, 4
+	msgbox DewfordTown_Text_1E9FD0, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9656:: @ 81E9656
-	msgbox DewfordTown_Text_1EA004, 4
+	msgbox DewfordTown_Text_1EA004, MSGBOX_DEFAULT
 	release
 	end
 
@@ -189,11 +189,11 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	end
 
 DewfordTown_EventScript_1E9790:: @ 81E9790
-	msgbox DewfordTown_Text_1EEC1D, 4
+	msgbox DewfordTown_Text_1EEC1D, MSGBOX_DEFAULT
 	return
 
 DewfordTown_EventScript_1E9799:: @ 81E9799
-	msgbox DewfordTown_Text_1EEDA7, 4
+	msgbox DewfordTown_Text_1EEDA7, MSGBOX_DEFAULT
 	return
 
 DewfordTown_Movement_1E97A2: @ 81E97A2
@@ -598,7 +598,7 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	lock
 	faceplayer
 	call DewfordTown_EventScript_271E8B
-	msgbox DewfordTown_Text_1EA136, 5
+	msgbox DewfordTown_Text_1EA136, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E9948
 	compare VAR_RESULT, 0
@@ -606,12 +606,12 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	end
 
 DewfordTown_EventScript_1E9948:: @ 81E9948
-	msgbox DewfordTown_Text_1EA491, 4
+	msgbox DewfordTown_Text_1EA491, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9952:: @ 81E9952
-	msgbox DewfordTown_Text_1EA242, 4
+	msgbox DewfordTown_Text_1EA242, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 9
 	call DewfordTown_EventScript_271E7C
 	lock
@@ -626,17 +626,17 @@ DewfordTown_EventScript_1E997D:: @ 81E997D
 	incrementgamestat 2
 	compare VAR_0x8004, 0
 	goto_eq DewfordTown_EventScript_1E999E
-	msgbox DewfordTown_Text_1EA2AA, 4
+	msgbox DewfordTown_Text_1EA2AA, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9994:: @ 81E9994
-	msgbox DewfordTown_Text_1EA443, 4
+	msgbox DewfordTown_Text_1EA443, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E999E:: @ 81E999E
-	msgbox DewfordTown_Text_1EA3FE, 4
+	msgbox DewfordTown_Text_1EA3FE, MSGBOX_DEFAULT
 	release
 	end
 

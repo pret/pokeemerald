@@ -9,7 +9,7 @@ PetalburgCity_Mart_EventScript_207D69:: @ 8207D69
 	checkflag FLAG_0x128
 	goto_eq PetalburgCity_Mart_EventScript_207DA6
 	pokemart PetalburgCity_Mart_Pokemart_207D8C
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -32,7 +32,7 @@ PetalburgCity_Mart_Pokemart_207D8C: @ 8207D8C
 
 PetalburgCity_Mart_EventScript_207DA6:: @ 8207DA6
 	pokemart PetalburgCity_Mart_Pokemart_207DB8
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -56,15 +56,15 @@ PetalburgCity_Mart_Pokemart_207DB8: @ 8207DB8
 	end
 
 PetalburgCity_Mart_EventScript_207DD6:: @ 8207DD6
-	msgbox PetalburgCity_Mart_Text_207DF1, 2
+	msgbox PetalburgCity_Mart_Text_207DF1, MSGBOX_NPC
 	end
 
 PetalburgCity_Mart_EventScript_207DDF:: @ 8207DDF
-	msgbox PetalburgCity_Mart_Text_207E60, 2
+	msgbox PetalburgCity_Mart_Text_207E60, MSGBOX_NPC
 	end
 
 PetalburgCity_Mart_EventScript_207DE8:: @ 8207DE8
-	msgbox PetalburgCity_Mart_Text_207EB0, 2
+	msgbox PetalburgCity_Mart_Text_207EB0, MSGBOX_NPC
 	end
 
 PetalburgCity_Mart_Text_207DF1: @ 8207DF1

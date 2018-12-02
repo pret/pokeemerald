@@ -14,7 +14,7 @@ BattleFrontier_BattleArenaCorridor_EventScript_2573C9:: @ 82573C9
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattleArenaCorridor_Movement_257444
 	waitmovement 0
-	msgbox BattleFrontier_BattleArenaCorridor_Text_257449, 3
+	msgbox BattleFrontier_BattleArenaCorridor_Text_257449, MSGBOX_SIGN
 	applymovement 1, BattleFrontier_BattleArenaCorridor_Movement_257446
 	waitmovement 0
 	applymovement 255, BattleFrontier_BattleArenaCorridor_Movement_25742C

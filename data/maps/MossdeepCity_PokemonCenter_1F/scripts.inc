@@ -16,11 +16,11 @@ MossdeepCity_PokemonCenter_1F_EventScript_22224E:: @ 822224E
 	end
 
 MossdeepCity_PokemonCenter_1F_EventScript_22225C:: @ 822225C
-	msgbox MossdeepCity_PokemonCenter_1F_Text_22226E, 2
+	msgbox MossdeepCity_PokemonCenter_1F_Text_22226E, MSGBOX_NPC
 	end
 
 MossdeepCity_PokemonCenter_1F_EventScript_222265:: @ 8222265
-	msgbox MossdeepCity_PokemonCenter_1F_Text_2222D9, 2
+	msgbox MossdeepCity_PokemonCenter_1F_Text_2222D9, MSGBOX_NPC
 	end
 
 MossdeepCity_PokemonCenter_1F_Text_22226E: @ 822226E

@@ -39,7 +39,7 @@ Underwater_SeafloorCavern_MapScript1_2343D3: @ 82343D3
 	end
 
 Underwater_SeafloorCavern_EventScript_2343DC:: @ 82343DC
-	msgbox Underwater_SeafloorCavern_Text_2343E5, 3
+	msgbox Underwater_SeafloorCavern_Text_2343E5, MSGBOX_SIGN
 	end
 
 Underwater_SeafloorCavern_Text_2343E5: @ 82343E5

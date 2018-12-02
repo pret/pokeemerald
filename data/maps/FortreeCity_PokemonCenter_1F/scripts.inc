@@ -16,15 +16,15 @@ FortreeCity_PokemonCenter_1F_EventScript_2173E7:: @ 82173E7
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_2173F5:: @ 82173F5
-	msgbox FortreeCity_PokemonCenter_1F_Text_217410, 2
+	msgbox FortreeCity_PokemonCenter_1F_Text_217410, MSGBOX_NPC
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_2173FE:: @ 82173FE
-	msgbox FortreeCity_PokemonCenter_1F_Text_21746D, 2
+	msgbox FortreeCity_PokemonCenter_1F_Text_21746D, MSGBOX_NPC
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_217407:: @ 8217407
-	msgbox FortreeCity_PokemonCenter_1F_Text_21751F, 2
+	msgbox FortreeCity_PokemonCenter_1F_Text_21751F, MSGBOX_NPC
 	end
 
 FortreeCity_PokemonCenter_1F_Text_217410: @ 8217410

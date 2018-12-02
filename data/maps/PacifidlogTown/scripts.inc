@@ -12,19 +12,19 @@ PacifidlogTown_MapScript1_1EBAC0: @ 81EBAC0
 	end
 
 PacifidlogTown_EventScript_1EBAC3:: @ 81EBAC3
-	msgbox PacifidlogTown_Text_1EBB6C, 2
+	msgbox PacifidlogTown_Text_1EBB6C, MSGBOX_NPC
 	end
 
 PacifidlogTown_EventScript_1EBACC:: @ 81EBACC
-	msgbox PacifidlogTown_Text_1EBAE7, 2
+	msgbox PacifidlogTown_Text_1EBAE7, MSGBOX_NPC
 	end
 
 PacifidlogTown_EventScript_1EBAD5:: @ 81EBAD5
-	msgbox PacifidlogTown_Text_1EBBAC, 2
+	msgbox PacifidlogTown_Text_1EBBAC, MSGBOX_NPC
 	end
 
 PacifidlogTown_EventScript_1EBADE:: @ 81EBADE
-	msgbox PacifidlogTown_Text_1EBC7A, 3
+	msgbox PacifidlogTown_Text_1EBC7A, MSGBOX_SIGN
 	end
 
 PacifidlogTown_Text_1EBAE7: @ 81EBAE7

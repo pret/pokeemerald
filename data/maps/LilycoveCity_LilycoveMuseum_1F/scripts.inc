@@ -2,7 +2,7 @@ LilycoveCity_LilycoveMuseum_1F_MapScripts:: @ 8218CB8
 	.byte 0
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CB9:: @ 8218CB9
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218E4B, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218E4B, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2:: @ 8218CC2
@@ -18,11 +18,11 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2:: @ 8218CC2
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC:: @ 8218CEC
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F5C, 2
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F5C, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5:: @ 8218CF5
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F98, 5
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F98, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D14
 	compare VAR_RESULT, 1
@@ -30,12 +30,12 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5:: @ 8218CF5
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D14:: @ 8218D14
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218FF8, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218FF8, MSGBOX_SIGN
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E:: @ 8218D1E
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219035, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219035, MSGBOX_SIGN
 	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_218D99
 	waitmovement 0
 	removeobject 2
@@ -89,70 +89,70 @@ LilycoveCity_LilycoveMuseum_1F_Movement_218DA1: @ 8218DA1
 	step_end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DA4:: @ 8218DA4
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219080, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219080, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DAD:: @ 8218DAD
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2190BF, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2190BF, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DB6:: @ 8218DB6
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2190F9, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2190F9, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DBF:: @ 8218DBF
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219142, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219142, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DC8:: @ 8218DC8
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2191A2, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2191A2, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DD1:: @ 8218DD1
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21920D, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21920D, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DDA:: @ 8218DDA
 LilycoveCity_LilycoveMuseum_2F_EventScript_218DDA:: @ 8218DDA
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219260, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219260, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DE3:: @ 8218DE3
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2192AA, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2192AA, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DEC:: @ 8218DEC
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219311, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219311, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DF5:: @ 8218DF5
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2193B4, 2
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2193B4, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218DFE:: @ 8218DFE
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21941A, 2
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21941A, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218E07:: @ 8218E07
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2194BA, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2194BA, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218E10:: @ 8218E10
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2194E1, 3
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2194E1, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218E19:: @ 8218E19
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219515, 2
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_219515, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218E22:: @ 8218E22
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21959B, 2
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21959B, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218E2B:: @ 8218E2B
 	lock
 	faceplayer
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2195FF, 4
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_2195FF, MSGBOX_DEFAULT
 	closemessage
 	applymovement 8, LilycoveCity_LilycoveMuseum_1F_Movement_2725A2
 	waitmovement 0
@@ -160,7 +160,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218E2B:: @ 8218E2B
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218E42:: @ 8218E42
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21967A, 2
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_21967A, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_Text_218E4B: @ 8218E4B
