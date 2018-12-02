@@ -66,8 +66,8 @@
 #define TRAINER_PIC_SCHOOL_KID_M          48
 #define TRAINER_PIC_SCHOOL_KID_F          49
 #define TRAINER_PIC_SR_AND_JR             50
-#define TRAINER_PIC_WINSTRATE_M           51
-#define TRAINER_PIC_WINSTRATE_F           52
+#define TRAINER_PIC_POKEFAN_M             51
+#define TRAINER_PIC_POKEFAN_F             52
 #define TRAINER_PIC_YOUNGSTER             53
 #define TRAINER_PIC_CHAMPION_WALLACE      54
 #define TRAINER_PIC_FISHERMAN             55
