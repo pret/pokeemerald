@@ -1800,8 +1800,9 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
 
                 gBattlerTarget = gActiveBattler;
                 gBattlerAttacker = gWishFutureKnock.futureSightAttacker[gActiveBattler];
-                gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBattler];
                 gSpecialStatuses[gBattlerTarget].dmg = 0xFFFF;
+                gCurrentMove = gWishFutureKnock.futureSightMove[gActiveBattler];
+                SetTypeBeforeUsingMove(gCurrentMove, gActiveBattler);
                 BattleScriptExecute(BattleScript_MonTookFutureAttack);
 
                 if (gWishFutureKnock.futureSightCounter[gActiveBattler] == 0
@@ -1812,12 +1813,8 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
                 return TRUE;
             }
         }
-        // Why do I have to keep doing this to match?
-        {
-            u8 *state = &gBattleStruct->wishPerishSongState;
-            *state = 1;
-            gBattleStruct->wishPerishSongBattlerId = 0;
-        }
+        gBattleStruct->wishPerishSongState = 1;
+        gBattleStruct->wishPerishSongBattlerId = 0;
         // fall through
     case 1:
         while (gBattleStruct->wishPerishSongBattlerId < gBattlersCount)

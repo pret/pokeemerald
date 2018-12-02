@@ -5121,7 +5121,10 @@ BattleScript_MonTookFutureAttack::
 BattleScript_CheckDoomDesireMiss::
 	accuracycheck BattleScript_FutureAttackMiss, MOVE_DOOM_DESIRE
 BattleScript_FutureAttackAnimate::
+	critcalc
+	damagecalc
 	adjustdamage
+	jumpifmovehadnoeffect BattleScript_DoFutureAttackResult
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_FutureHitAnimDoomDesire
 	playanimation BS_ATTACKER, B_ANIM_FUTURE_SIGHT_HIT, NULL
 	goto BattleScript_DoFutureAttackHit
@@ -5133,6 +5136,9 @@ BattleScript_DoFutureAttackHit::
 	waitstate
 	healthbarupdate BS_TARGET
 	datahpupdate BS_TARGET
+	critmessage
+	waitmessage 0x40
+BattleScript_DoFutureAttackResult:
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon BS_TARGET, FALSE, NULL
@@ -5144,11 +5150,9 @@ BattleScript_FutureAttackEnd::
 	moveend 0x2, 0xE
 	sethword gMoveResultFlags, 0
 	end2
-
 BattleScript_FutureAttackMiss::
 	pause 0x20
-	sethword gMoveResultFlags, 0
-	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	sethword gMoveResultFlags, MOVE_RESULT_FAILED
 	resultmessage
 	waitmessage 0x40
 	sethword gMoveResultFlags, 0
