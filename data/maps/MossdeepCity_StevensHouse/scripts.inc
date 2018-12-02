@@ -38,11 +38,11 @@ MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	waitmovement 0
 	applymovement 1, MossdeepCity_StevensHouse_Movement_222833
 	waitmovement 0
-	msgbox MossdeepCity_StevensHouse_Text_222936, 4
+	msgbox MossdeepCity_StevensHouse_Text_222936, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM08
 	setflag FLAG_0x07B
 	setflag FLAG_0x12E
-	msgbox MossdeepCity_StevensHouse_Text_222A0E, 4
+	msgbox MossdeepCity_StevensHouse_Text_222A0E, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	applymovement 1, MossdeepCity_StevensHouse_Movement_22283B
@@ -73,14 +73,14 @@ MossdeepCity_StevensHouse_Movement_22283B: @ 822283B
 
 MossdeepCity_StevensHouse_EventScript_222841:: @ 8222841
 	lockall
-	msgbox MossdeepCity_StevensHouse_Text_222B9E, 5
+	msgbox MossdeepCity_StevensHouse_Text_222B9E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_22285B
 	goto MossdeepCity_StevensHouse_EventScript_222865
 	end
 
 MossdeepCity_StevensHouse_EventScript_22285B:: @ 822285B
-	msgbox MossdeepCity_StevensHouse_Text_222C2A, 4
+	msgbox MossdeepCity_StevensHouse_Text_222C2A, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -96,7 +96,7 @@ MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 
 MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	call MossdeepCity_StevensHouse_EventScript_2228EB
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
@@ -106,7 +106,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 
 MossdeepCity_StevensHouse_EventScript_2228BD:: @ 82228BD
 	call MossdeepCity_StevensHouse_EventScript_2228EB
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_2228E0
 	call MossdeepCity_StevensHouse_EventScript_273797
@@ -135,16 +135,16 @@ MossdeepCity_StevensHouse_EventScript_222901:: @ 8222901
 	end
 
 MossdeepCity_StevensHouse_EventScript_222909:: @ 8222909
-	msgbox MossdeepCity_StevensHouse_Text_222D97, 3
+	msgbox MossdeepCity_StevensHouse_Text_222D97, MSGBOX_SIGN
 	end
 
 MossdeepCity_StevensHouse_EventScript_222912:: @ 8222912
-	msgbox MossdeepCity_StevensHouse_Text_222B11, 2
+	msgbox MossdeepCity_StevensHouse_Text_222B11, MSGBOX_NPC
 	end
 
 MossdeepCity_StevensHouse_EventScript_22291B:: @ 822291B
 	lockall
-	msgbox MossdeepCity_StevensHouse_Text_222C4E, 4
+	msgbox MossdeepCity_StevensHouse_Text_222C4E, MSGBOX_DEFAULT
 	releaseall
 	end
 

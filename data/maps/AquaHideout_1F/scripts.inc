@@ -8,17 +8,17 @@ AquaHideout_1F_EventScript_233494:: @ 8233494
 	goto_eq AquaHideout_1F_EventScript_2334BC
 	checkflag FLAG_0x0D4
 	goto_eq AquaHideout_1F_EventScript_2334B2
-	msgbox AquaHideout_1F_Text_23351D, 4
+	msgbox AquaHideout_1F_Text_23351D, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_1F_EventScript_2334B2:: @ 82334B2
-	msgbox AquaHideout_1F_Text_2335E3, 4
+	msgbox AquaHideout_1F_Text_2335E3, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_1F_EventScript_2334BC:: @ 82334BC
-	msgbox AquaHideout_1F_Text_23367D, 4
+	msgbox AquaHideout_1F_Text_23367D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -29,27 +29,27 @@ AquaHideout_1F_EventScript_2334C6:: @ 82334C6
 	goto_eq AquaHideout_1F_EventScript_2334EE
 	checkflag FLAG_0x0D4
 	goto_eq AquaHideout_1F_EventScript_2334E4
-	msgbox AquaHideout_1F_Text_233739, 4
+	msgbox AquaHideout_1F_Text_233739, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_1F_EventScript_2334E4:: @ 82334E4
-	msgbox AquaHideout_1F_Text_2337FA, 4
+	msgbox AquaHideout_1F_Text_2337FA, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_1F_EventScript_2334EE:: @ 82334EE
-	msgbox AquaHideout_1F_Text_233884, 4
+	msgbox AquaHideout_1F_Text_233884, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_1F_EventScript_2334F8:: @ 82334F8
-	trainerbattle 2, TRAINER_GRUNT_1, 0, AquaHideout_1F_Text_23393D, AquaHideout_1F_Text_233964, AquaHideout_1F_EventScript_233513
-	msgbox AquaHideout_1F_Text_233977, 6
+	trainerbattle_single TRAINER_GRUNT_1, AquaHideout_1F_Text_23393D, AquaHideout_1F_Text_233964, AquaHideout_1F_EventScript_233513
+	msgbox AquaHideout_1F_Text_233977, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_1F_EventScript_233513:: @ 8233513
-	msgbox AquaHideout_1F_Text_233977, 4
+	msgbox AquaHideout_1F_Text_233977, MSGBOX_DEFAULT
 	release
 	end
 

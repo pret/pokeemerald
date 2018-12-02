@@ -2,11 +2,11 @@ VerdanturfTown_House_MapScripts:: @ 820335E
 	.byte 0
 
 VerdanturfTown_House_EventScript_20335F:: @ 820335F
-	msgbox VerdanturfTown_House_Text_203371, 2
+	msgbox VerdanturfTown_House_Text_203371, MSGBOX_NPC
 	end
 
 VerdanturfTown_House_EventScript_203368:: @ 8203368
-	msgbox VerdanturfTown_House_Text_2033EE, 2
+	msgbox VerdanturfTown_House_Text_2033EE, MSGBOX_NPC
 	end
 
 VerdanturfTown_House_Text_203371: @ 8203371

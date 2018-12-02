@@ -27,7 +27,7 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	delay 30
 	setvar VAR_0x40D9, 1
 	moveobjectoffscreen 1
-	msgbox SeafloorCavern_Entrance_Text_234544, 4
+	msgbox SeafloorCavern_Entrance_Text_234544, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SeafloorCavern_Entrance_Movement_2725A6
 	waitmovement 0
@@ -41,7 +41,7 @@ SeafloorCavern_Entrance_EventScript_2344ED:: @ 82344ED
 	call_if 1, SeafloorCavern_Entrance_EventScript_234523
 	compare VAR_FACING, 2
 	call_if 1, SeafloorCavern_Entrance_EventScript_234539
-	msgbox SeafloorCavern_Entrance_Text_2346C8, 4
+	msgbox SeafloorCavern_Entrance_Text_2346C8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SeafloorCavern_Entrance_Movement_2725A6
 	waitmovement 0

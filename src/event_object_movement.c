@@ -27,6 +27,28 @@
 
 // this file was known as evobjmv.c in Game Freak's original source
 
+#define movement_type_def(setup, table) \
+static u8 setup##_callback(struct EventObject *, struct Sprite *);\
+void setup(struct Sprite *sprite)\
+{\
+    UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, setup##_callback);\
+}\
+static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprite)\
+{\
+    return table[sprite->data[1]](eventObject, sprite);\
+}
+
+#define movement_type_empty_callback(setup) \
+static u8 setup##_callback(struct EventObject *, struct Sprite *);\
+void setup(struct Sprite *sprite)\
+{\
+    UpdateEventObjectCurrentMovement(&gEventObjects[sprite->data[0]], sprite, setup##_callback);\
+}\
+static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprite)\
+{\
+    return 0;\
+}
+
 EWRAM_DATA u8 sCurrentReflectionType = 0;
 EWRAM_DATA u16 sCurrentSpecialObjectPaletteTag = 0;
 EWRAM_DATA struct LockedAnimEventObjects *gLockedAnimEventObjects = {0};

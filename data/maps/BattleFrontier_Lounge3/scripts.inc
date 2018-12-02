@@ -10,7 +10,7 @@ BattleFrontier_Lounge3_EventScript_261D83:: @ 8261D83
 	compare VAR_0x8004, 2
 	goto_if 3, BattleFrontier_Lounge3_EventScript_261EEB
 	setflag FLAG_0x157
-	msgbox BattleFrontier_Lounge3_Text_262061, 4
+	msgbox BattleFrontier_Lounge3_Text_262061, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261DAF
 	end
 
@@ -18,10 +18,10 @@ BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
 	special sub_813A820
 	waitmessage
 	waitbuttonpress
-	msgbox BattleFrontier_Lounge3_Text_262A60, 5
+	msgbox BattleFrontier_Lounge3_Text_262A60, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge3_EventScript_261FA5
-	msgbox BattleFrontier_Lounge3_Text_262ABD, 5
+	msgbox BattleFrontier_Lounge3_Text_262ABD, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge3_EventScript_261FA5
 	message BattleFrontier_Lounge3_Text_262B42
@@ -60,7 +60,7 @@ BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
 	specialvar VAR_TEMP_1, sub_813AA04
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if 4, BattleFrontier_Lounge3_EventScript_261E75
-	msgbox BattleFrontier_Lounge3_Text_262B6E, 4
+	msgbox BattleFrontier_Lounge3_Text_262B6E, MSGBOX_DEFAULT
 	message BattleFrontier_Lounge3_Text_262B42
 	waitmessage
 	goto BattleFrontier_Lounge3_EventScript_261DE9
@@ -72,7 +72,7 @@ BattleFrontier_Lounge3_EventScript_261E75:: @ 8261E75
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
 	special sub_813A8FC
 	playse SE_REGI
-	msgbox BattleFrontier_Lounge3_Text_262BE0, 4
+	msgbox BattleFrontier_Lounge3_Text_262BE0, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261E96
 	end
 
@@ -107,12 +107,12 @@ BattleFrontier_Lounge3_EventScript_261EE5:: @ 8261EE5
 	return
 
 BattleFrontier_Lounge3_EventScript_261EEB:: @ 8261EEB
-	msgbox BattleFrontier_Lounge3_Text_261FFE, 4
+	msgbox BattleFrontier_Lounge3_Text_261FFE, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
 BattleFrontier_Lounge3_EventScript_261EF9:: @ 8261EF9
-	msgbox BattleFrontier_Lounge3_Text_26346B, 4
+	msgbox BattleFrontier_Lounge3_Text_26346B, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
 	goto_if 4, BattleFrontier_Lounge3_EventScript_261F12
 	goto BattleFrontier_Lounge3_EventScript_261DAF
@@ -127,7 +127,7 @@ BattleFrontier_Lounge3_EventScript_261F12:: @ 8261F12
 	end
 
 BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
-	msgbox BattleFrontier_Lounge3_Text_263334, 4
+	msgbox BattleFrontier_Lounge3_Text_263334, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 0
 	call_if 1, BattleFrontier_Lounge3_EventScript_261F80
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 1
@@ -136,13 +136,13 @@ BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
 	call_if 1, BattleFrontier_Lounge3_EventScript_261F94
 	msgbox BattleFrontier_Lounge3_Text_2633D4, 9
 	special sub_813A9D0
-	msgbox BattleFrontier_Lounge3_Text_2633F2, 4
+	msgbox BattleFrontier_Lounge3_Text_2633F2, MSGBOX_DEFAULT
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
 	release
 	end
 
 BattleFrontier_Lounge3_EventScript_261F71:: @ 8261F71
-	msgbox BattleFrontier_Lounge3_Text_263298, 4
+	msgbox BattleFrontier_Lounge3_Text_263298, MSGBOX_DEFAULT
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
 	release
 	end
@@ -170,7 +170,7 @@ BattleFrontier_Lounge3_EventScript_261F9E:: @ 8261F9E
 	end
 
 BattleFrontier_Lounge3_EventScript_261FA5:: @ 8261FA5
-	msgbox BattleFrontier_Lounge3_Text_26342D, 4
+	msgbox BattleFrontier_Lounge3_Text_26342D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -180,27 +180,27 @@ BattleFrontier_Lounge3_EventScript_261FAF:: @ 8261FAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261FB8:: @ 8261FB8
-	msgbox BattleFrontier_Lounge3_Text_263545, 2
+	msgbox BattleFrontier_Lounge3_Text_263545, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge3_EventScript_261FC1:: @ 8261FC1
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge3_Text_26346F, 4
+	msgbox BattleFrontier_Lounge3_Text_26346F, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
 BattleFrontier_Lounge3_EventScript_261FD1:: @ 8261FD1
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge3_Text_26351D, 4
+	msgbox BattleFrontier_Lounge3_Text_26351D, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
 BattleFrontier_Lounge3_EventScript_261FE1:: @ 8261FE1
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge3_Text_2634C9, 4
+	msgbox BattleFrontier_Lounge3_Text_2634C9, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 

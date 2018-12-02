@@ -86,7 +86,7 @@ SootopolisCity_Gym_1F_Movement_224F42: @ 8224F42
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
-	trainerbattle 1, TRAINER_JUAN_1, 0, SootopolisCity_Gym_1F_Text_225268, SootopolisCity_Gym_1F_Text_225432, SootopolisCity_Gym_1F_EventScript_224F82
+	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_225268, SootopolisCity_Gym_1F_Text_225432, SootopolisCity_Gym_1F_EventScript_224F82, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_Gym_1F_EventScript_225025
@@ -94,7 +94,7 @@ SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_224FF7
 	checkflag FLAG_BADGE06_GET
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_22501B
-	msgbox SootopolisCity_Gym_1F_Text_225778, 4
+	msgbox SootopolisCity_Gym_1F_Text_225778, MSGBOX_DEFAULT
 	release
 	end
 
@@ -102,7 +102,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	message SootopolisCity_Gym_1F_Text_225598
 	waitmessage
 	call SootopolisCity_Gym_1F_EventScript_27207E
-	msgbox SootopolisCity_Gym_1F_Text_2255BE, 4
+	msgbox SootopolisCity_Gym_1F_Text_2255BE, MSGBOX_DEFAULT
 	setflag FLAG_0x4F7
 	setflag FLAG_BADGE08_GET
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
@@ -116,7 +116,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox SootopolisCity_Gym_1F_Text_22574D, 4
+	msgbox SootopolisCity_Gym_1F_Text_22574D, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -128,7 +128,7 @@ SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_Gym_1F_EventScript_27205E
-	msgbox SootopolisCity_Gym_1F_Text_2256C1, 4
+	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_0x0AC
 	return
 
@@ -136,19 +136,19 @@ SootopolisCity_Gym_1F_EventScript_224FF7:: @ 8224FF7
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_Gym_1F_EventScript_272054
-	msgbox SootopolisCity_Gym_1F_Text_2256C1, 4
+	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_0x0AC
 	release
 	end
 
 SootopolisCity_Gym_1F_EventScript_22501B:: @ 822501B
-	msgbox SootopolisCity_Gym_1F_Text_225865, 4
+	msgbox SootopolisCity_Gym_1F_Text_225865, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_Gym_1F_EventScript_225025:: @ 8225025
-	trainerbattle 7, TRAINER_JUAN_1, 0, SootopolisCity_Gym_1F_Text_225950, SootopolisCity_Gym_1F_Text_225A2E, SootopolisCity_Gym_1F_Text_225B48
-	msgbox SootopolisCity_Gym_1F_Text_225A67, 6
+	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_225950, SootopolisCity_Gym_1F_Text_225A2E, SootopolisCity_Gym_1F_Text_225B48
+	msgbox SootopolisCity_Gym_1F_Text_225A67, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_1F_EventScript_225040:: @ 8225040
@@ -156,12 +156,12 @@ SootopolisCity_Gym_1F_EventScript_225040:: @ 8225040
 	faceplayer
 	checkflag FLAG_0x4F7
 	goto_eq SootopolisCity_Gym_1F_EventScript_225055
-	msgbox SootopolisCity_Gym_1F_Text_225093, 4
+	msgbox SootopolisCity_Gym_1F_Text_225093, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_Gym_1F_EventScript_225055:: @ 8225055
-	msgbox SootopolisCity_Gym_1F_Text_2251AF, 4
+	msgbox SootopolisCity_Gym_1F_Text_2251AF, MSGBOX_DEFAULT
 	release
 	end
 
@@ -180,12 +180,12 @@ SootopolisCity_Gym_1F_EventScript_22506F:: @ 822506F
 	end
 
 SootopolisCity_Gym_1F_EventScript_22507F:: @ 822507F
-	msgbox SootopolisCity_Gym_1F_Text_225916, 4
+	msgbox SootopolisCity_Gym_1F_Text_225916, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SootopolisCity_Gym_1F_EventScript_225089:: @ 8225089
-	msgbox SootopolisCity_Gym_1F_Text_2258FA, 4
+	msgbox SootopolisCity_Gym_1F_Text_2258FA, MSGBOX_DEFAULT
 	releaseall
 	end
 

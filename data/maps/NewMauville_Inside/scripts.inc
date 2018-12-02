@@ -150,7 +150,7 @@ NewMauville_Inside_EventScript_2375D7:: @ 82375D7
 
 NewMauville_Inside_EventScript_237725:: @ 8237725
 	lockall
-	msgbox NewMauville_Inside_Text_237932, 4
+	msgbox NewMauville_Inside_Text_237932, MSGBOX_DEFAULT
 	call NewMauville_Inside_EventScript_23773A
 	setvar VAR_0x40BA, 2
 	releaseall
@@ -173,12 +173,12 @@ NewMauville_Inside_EventScript_23778F:: @ 823778F
 	lockall
 	compare VAR_0x40BA, 2
 	goto_eq NewMauville_Inside_EventScript_2377A5
-	msgbox NewMauville_Inside_Text_237896, 4
+	msgbox NewMauville_Inside_Text_237896, MSGBOX_DEFAULT
 	releaseall
 	end
 
 NewMauville_Inside_EventScript_2377A5:: @ 82377A5
-	msgbox NewMauville_Inside_Text_237916, 4
+	msgbox NewMauville_Inside_Text_237916, MSGBOX_DEFAULT
 	releaseall
 	end
 

@@ -7,7 +7,7 @@ FallarborTown_Mart_EventScript_1FFCBF:: @ 81FFCBF
 	message gUnknown_08272A21
 	waitmessage
 	pokemart FallarborTown_Mart_Pokemart_1FFCD8
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -30,11 +30,11 @@ FallarborTown_Mart_Pokemart_1FFCD8: @ 81FFCD8
 	end
 
 FallarborTown_Mart_EventScript_1FFCF4:: @ 81FFCF4
-	msgbox FallarborTown_Mart_Text_1FFD19, 2
+	msgbox FallarborTown_Mart_Text_1FFD19, MSGBOX_NPC
 	end
 
 FallarborTown_Mart_EventScript_1FFCFD:: @ 81FFCFD
-	msgbox FallarborTown_Mart_Text_1FFE09, 2
+	msgbox FallarborTown_Mart_Text_1FFE09, MSGBOX_NPC
 	end
 
 FallarborTown_Mart_EventScript_1FFD06:: @ 81FFD06
@@ -42,7 +42,7 @@ FallarborTown_Mart_EventScript_1FFD06:: @ 81FFD06
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox FallarborTown_Mart_Text_1FFDFA, 4
+	msgbox FallarborTown_Mart_Text_1FFDFA, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

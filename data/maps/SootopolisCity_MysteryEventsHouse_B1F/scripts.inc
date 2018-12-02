@@ -16,7 +16,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3
 	waitmovement 0
 	special CopyEReaderTrainerGreeting
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, SPECIAL_BATTLE_EREADER
 	setvar VAR_0x8005, 0
@@ -41,7 +41,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF:: @ 8227ECF
 	setvar VAR_0x40C0, 3
-	msgbox SootopolisCity_MysteryEventsHouse_B1F_Text_227D40, 4
+	msgbox SootopolisCity_MysteryEventsHouse_B1F_Text_227D40, MSGBOX_DEFAULT
 	return
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD:: @ 8227EDD

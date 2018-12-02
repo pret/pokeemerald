@@ -50,7 +50,7 @@ RustboroCity_EventScript_1E0715:: @ 81E0715
 	waitmovement 0
 	applymovement 15, RustboroCity_Movement_1E084E
 	waitmovement 0
-	msgbox RustboroCity_Text_1E22A5, 4
+	msgbox RustboroCity_Text_1E22A5, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HAS_MATCH_CALL
 	applymovement 15, RustboroCity_Movement_2725A4
@@ -65,13 +65,13 @@ RustboroCity_EventScript_1E0715:: @ 81E0715
 	delay 20
 	applymovement 15, RustboroCity_Movement_2725AA
 	waitmovement 0
-	msgbox RustboroCity_Text_1E2331, 4
+	msgbox RustboroCity_Text_1E2331, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	goto RustboroCity_EventScript_1E07BD
 
 RustboroCity_EventScript_1E07AC:: @ 81E07AC
-	msgbox RustboroCity_Text_1E2449, 4
+	msgbox RustboroCity_Text_1E2449, MSGBOX_DEFAULT
 	closemessage
 	delay 10
 	goto RustboroCity_EventScript_1E07BD
@@ -92,7 +92,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	special sub_81C72A4
 	waitstate
 	delay 20
-	msgbox RustboroCity_Text_1E2464, 4
+	msgbox RustboroCity_Text_1E2464, MSGBOX_DEFAULT
 	closemessage
 	applymovement 15, RustboroCity_Movement_1E085D
 	waitmovement 0
@@ -136,24 +136,24 @@ RustboroCity_EventScript_1E085F:: @ 81E085F
 	faceplayer
 	checkflag FLAG_0x08E
 	goto_eq RustboroCity_EventScript_1E0874
-	msgbox RustboroCity_Text_1E123F, 4
+	msgbox RustboroCity_Text_1E123F, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_1E0874:: @ 81E0874
-	msgbox RustboroCity_Text_1E12AC, 4
+	msgbox RustboroCity_Text_1E12AC, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_1E087E:: @ 81E087E
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_1E1407, 4
+	msgbox RustboroCity_Text_1E1407, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_1E088A:: @ 81E088A
-	msgbox RustboroCity_Text_1E1480, 2
+	msgbox RustboroCity_Text_1E1480, MSGBOX_NPC
 	end
 
 RustboroCity_EventScript_1E0893:: @ 81E0893
@@ -161,12 +161,12 @@ RustboroCity_EventScript_1E0893:: @ 81E0893
 	faceplayer
 	checkflag FLAG_BADGE01_GET
 	goto_eq RustboroCity_EventScript_1E08A8
-	msgbox RustboroCity_Text_1E130D, 4
+	msgbox RustboroCity_Text_1E130D, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_1E08A8:: @ 81E08A8
-	msgbox RustboroCity_Text_1E139E, 4
+	msgbox RustboroCity_Text_1E139E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -175,55 +175,55 @@ RustboroCity_EventScript_1E08B2:: @ 81E08B2
 	faceplayer
 	checkflag FLAG_0x0BC
 	goto_eq RustboroCity_EventScript_1E08C7
-	msgbox RustboroCity_Text_1E1520, 4
+	msgbox RustboroCity_Text_1E1520, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_1E08C7:: @ 81E08C7
-	msgbox RustboroCity_Text_1E1589, 4
+	msgbox RustboroCity_Text_1E1589, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_EventScript_1E08D1:: @ 81E08D1
-	msgbox RustboroCity_Text_1E1633, 2
+	msgbox RustboroCity_Text_1E1633, MSGBOX_NPC
 	end
 
 RustboroCity_EventScript_1E08DA:: @ 81E08DA
-	msgbox RustboroCity_Text_1E1695, 3
+	msgbox RustboroCity_Text_1E1695, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E08E3:: @ 81E08E3
-	msgbox RustboroCity_Text_1E20A6, 3
+	msgbox RustboroCity_Text_1E20A6, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E08EC:: @ 81E08EC
-	msgbox RustboroCity_Text_1E2128, 3
+	msgbox RustboroCity_Text_1E2128, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E08F5:: @ 81E08F5
-	msgbox RustboroCity_Text_1E2167, 3
+	msgbox RustboroCity_Text_1E2167, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E08FE:: @ 81E08FE
-	msgbox RustboroCity_Text_1E21B3, 3
+	msgbox RustboroCity_Text_1E21B3, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E0907:: @ 81E0907
-	msgbox RustboroCity_Text_1E220B, 3
+	msgbox RustboroCity_Text_1E220B, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E0910:: @ 81E0910
-	msgbox RustboroCity_Text_1E2253, 3
+	msgbox RustboroCity_Text_1E2253, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E0919:: @ 81E0919
-	msgbox RustboroCity_Text_1E2296, 3
+	msgbox RustboroCity_Text_1E2296, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_1E0922:: @ 81E0922
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_1E16F4, 4
+	msgbox RustboroCity_Text_1E16F4, MSGBOX_DEFAULT
 	applymovement 7, RustboroCity_Movement_2725A2
 	waitmovement 0
 	release
@@ -232,7 +232,7 @@ RustboroCity_EventScript_1E0922:: @ 81E0922
 RustboroCity_EventScript_1E0938:: @ 81E0938
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_1E174B, 4
+	msgbox RustboroCity_Text_1E174B, MSGBOX_DEFAULT
 	applymovement 8, RustboroCity_Movement_2725A2
 	waitmovement 0
 	release
@@ -241,7 +241,7 @@ RustboroCity_EventScript_1E0938:: @ 81E0938
 RustboroCity_EventScript_1E094E:: @ 81E094E
 	lock
 	faceplayer
-	msgbox RustboroCity_Text_1E1789, 4
+	msgbox RustboroCity_Text_1E1789, MSGBOX_DEFAULT
 	release
 	end
 
@@ -286,7 +286,7 @@ RustboroCity_EventScript_1E09B6:: @ 81E09B6
 	end
 
 RustboroCity_EventScript_1E09CD:: @ 81E09CD
-	msgbox RustboroCity_Text_1E17FE, 4
+	msgbox RustboroCity_Text_1E17FE, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_AQA_0, 0
 	addobject 10
@@ -296,7 +296,7 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	removeobject 10
 	applymovement 9, RustboroCity_Movement_1E0AB1
 	waitmovement 0
-	msgbox RustboroCity_Text_1E1817, 4
+	msgbox RustboroCity_Text_1E1817, MSGBOX_DEFAULT
 	closemessage
 	applymovement 9, RustboroCity_Movement_1E0AB9
 	waitmovement 0
@@ -317,11 +317,11 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	end
 
 RustboroCity_EventScript_1E0A3B:: @ 81E0A3B
-	msgbox RustboroCity_Text_1E1904, 4
+	msgbox RustboroCity_Text_1E1904, MSGBOX_DEFAULT
 	return
 
 RustboroCity_EventScript_1E0A44:: @ 81E0A44
-	msgbox RustboroCity_Text_1E194D, 4
+	msgbox RustboroCity_Text_1E194D, MSGBOX_DEFAULT
 	return
 
 RustboroCity_EventScript_1E0A4D:: @ 81E0A4D
@@ -453,7 +453,7 @@ RustboroCity_EventScript_1E0ADD:: @ 81E0ADD
 	faceplayer
 	checkflag FLAG_0x08F
 	goto_eq RustboroCity_EventScript_1E0AF2
-	msgbox RustboroCity_Text_1E1904, 4
+	msgbox RustboroCity_Text_1E1904, MSGBOX_DEFAULT
 	release
 	end
 
@@ -499,7 +499,7 @@ RustboroCity_EventScript_1E0B2E:: @ 81E0B2E
 	setflag FLAG_0x09F
 	setvar VAR_0x405A, 3
 	moveobjectoffscreen 9
-	msgbox RustboroCity_Text_1E183E, 4
+	msgbox RustboroCity_Text_1E183E, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -592,11 +592,11 @@ RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	call_if 1, RustboroCity_EventScript_1E0D60
 	compare VAR_TEMP_1, 4
 	call_if 1, RustboroCity_EventScript_1E0D96
-	msgbox RustboroCity_Text_1E194D, 4
+	msgbox RustboroCity_Text_1E194D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
 	call_if 1, RustboroCity_EventScript_1E0CD3
-	msgbox RustboroCity_Text_1E1A21, 4
+	msgbox RustboroCity_Text_1E1A21, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_0x090
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
@@ -608,7 +608,7 @@ RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	end
 
 RustboroCity_EventScript_1E0CD3:: @ 81E0CD3
-	msgbox RustboroCity_Text_1E19E5, 4
+	msgbox RustboroCity_Text_1E19E5, MSGBOX_DEFAULT
 	return
 
 RustboroCity_EventScript_1E0CDC:: @ 81E0CDC
@@ -838,11 +838,11 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	checkflag FLAG_0x120
 	goto_eq RustboroCity_EventScript_1E1070
 	setflag FLAG_0x120
-	msgbox RustboroCity_Text_1E1A49, 4
+	msgbox RustboroCity_Text_1E1A49, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox RustboroCity_Text_1E1ADB, 4
+	msgbox RustboroCity_Text_1E1ADB, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -850,25 +850,25 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
 	setvar VAR_0x8008, 0
-	msgbox RustboroCity_Text_1E1AFA, 5
+	msgbox RustboroCity_Text_1E1AFA, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq RustboroCity_EventScript_1E1092
-	msgbox RustboroCity_Text_1E1BD3, 4
+	msgbox RustboroCity_Text_1E1BD3, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_1E10D6
 	releaseall
 	end
 
 RustboroCity_EventScript_1E1070:: @ 81E1070
 	setvar VAR_0x8008, 1
-	msgbox RustboroCity_Text_1E1C48, 5
+	msgbox RustboroCity_Text_1E1C48, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq RustboroCity_EventScript_1E1092
-	msgbox RustboroCity_Text_1E1BD3, 4
+	msgbox RustboroCity_Text_1E1BD3, MSGBOX_DEFAULT
 	releaseall
 	end
 
 RustboroCity_EventScript_1E1092:: @ 81E1092
-	msgbox RustboroCity_Text_1E1C84, 4
+	msgbox RustboroCity_Text_1E1C84, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_1E10DB
 	case 1, RustboroCity_EventScript_1E10EE
@@ -876,7 +876,7 @@ RustboroCity_EventScript_1E1092:: @ 81E1092
 	end
 
 RustboroCity_EventScript_1E10C1:: @ 81E10C1
-	msgbox RustboroCity_Text_1E1CE7, 4
+	msgbox RustboroCity_Text_1E1CE7, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
 	call_if 1, RustboroCity_EventScript_1E10D6
 	releaseall
@@ -888,19 +888,19 @@ RustboroCity_EventScript_1E10D6:: @ 81E10D6
 	return
 
 RustboroCity_EventScript_1E10DB:: @ 81E10DB
-	trainerbattle 3, TRAINER_MAY_14, 0, RustboroCity_Text_1E1CC1
+	trainerbattle_no_intro TRAINER_MAY_14, RustboroCity_Text_1E1CC1
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E10EE:: @ 81E10EE
-	trainerbattle 3, TRAINER_MAY_15, 0, RustboroCity_Text_1E1CC1
+	trainerbattle_no_intro TRAINER_MAY_15, RustboroCity_Text_1E1CC1
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E1101:: @ 81E1101
-	trainerbattle 3, TRAINER_MAY_10, 0, RustboroCity_Text_1E1CC1
+	trainerbattle_no_intro TRAINER_MAY_10, RustboroCity_Text_1E1CC1
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E10C1
 	end
@@ -911,35 +911,35 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	checkflag FLAG_0x120
 	goto_eq RustboroCity_EventScript_1E1174
 	setflag FLAG_0x120
-	msgbox RustboroCity_Text_1E1D7D, 4
+	msgbox RustboroCity_Text_1E1D7D, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox RustboroCity_Text_1E1E11, 4
+	msgbox RustboroCity_Text_1E1E11, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_0x0FD
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
-	msgbox RustboroCity_Text_1E1E34, 5
+	msgbox RustboroCity_Text_1E1E34, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq RustboroCity_EventScript_1E1191
-	msgbox RustboroCity_Text_1E1F2F, 4
+	msgbox RustboroCity_Text_1E1F2F, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_1E10D6
 	releaseall
 	end
 
 RustboroCity_EventScript_1E1174:: @ 81E1174
-	msgbox RustboroCity_Text_1E1F76, 5
+	msgbox RustboroCity_Text_1E1F76, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq RustboroCity_EventScript_1E1191
-	msgbox RustboroCity_Text_1E1F2F, 4
+	msgbox RustboroCity_Text_1E1F2F, MSGBOX_DEFAULT
 	releaseall
 	end
 
 RustboroCity_EventScript_1E1191:: @ 81E1191
-	msgbox RustboroCity_Text_1E1FA9, 4
+	msgbox RustboroCity_Text_1E1FA9, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_1E11D5
 	case 1, RustboroCity_EventScript_1E11E8
@@ -947,26 +947,26 @@ RustboroCity_EventScript_1E1191:: @ 81E1191
 	end
 
 RustboroCity_EventScript_1E11C0:: @ 81E11C0
-	msgbox RustboroCity_Text_1E2002, 4
+	msgbox RustboroCity_Text_1E2002, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
 	call_if 1, RustboroCity_EventScript_1E10D6
 	releaseall
 	end
 
 RustboroCity_EventScript_1E11D5:: @ 81E11D5
-	trainerbattle 3, TRAINER_BRENDAN_10, 0, RustboroCity_Text_1E1FE9
+	trainerbattle_no_intro TRAINER_BRENDAN_10, RustboroCity_Text_1E1FE9
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E11C0
 	end
 
 RustboroCity_EventScript_1E11E8:: @ 81E11E8
-	trainerbattle 3, TRAINER_BRENDAN_12, 0, RustboroCity_Text_1E1FE9
+	trainerbattle_no_intro TRAINER_BRENDAN_12, RustboroCity_Text_1E1FE9
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E11C0
 	end
 
 RustboroCity_EventScript_1E11FB:: @ 81E11FB
-	trainerbattle 3, TRAINER_BRENDAN_11, 0, RustboroCity_Text_1E1FE9
+	trainerbattle_no_intro TRAINER_BRENDAN_11, RustboroCity_Text_1E1FE9
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E11C0
 	end
@@ -1028,7 +1028,7 @@ RustboroCity_Movement_1E1230: @ 81E1230
 	step_end
 
 RustboroCity_EventScript_1E1236:: @ 81E1236
-	msgbox RustboroCity_Text_1E249D, 2
+	msgbox RustboroCity_Text_1E249D, MSGBOX_NPC
 	end
 
 RustboroCity_Text_1E123F: @ 81E123F

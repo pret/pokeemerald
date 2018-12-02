@@ -40,9 +40,9 @@ VictoryRoad_1F_EventScript_235DC8:: @ 8235DC8
 VictoryRoad_1F_EventScript_235DE1:: @ 8235DE1
 	applymovement 255, VictoryRoad_1F_Movement_2725AA
 	waitmovement 0
-	msgbox VictoryRoad_1F_Text_235EE6, 4
-	trainerbattle 3, TRAINER_WALLY_1, 0, VictoryRoad_1F_Text_235FFC
-	msgbox VictoryRoad_1F_Text_236020, 4
+	msgbox VictoryRoad_1F_Text_235EE6, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_WALLY_1, VictoryRoad_1F_Text_235FFC
+	msgbox VictoryRoad_1F_Text_236020, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	moveobjectoffscreen 4
 	setflag FLAG_0x07E
@@ -78,45 +78,45 @@ VictoryRoad_1F_Movement_235E21: @ 8235E21
 	step_end
 
 VictoryRoad_1F_EventScript_235E2C:: @ 8235E2C
-	msgbox VictoryRoad_1F_Text_236020, 2
+	msgbox VictoryRoad_1F_Text_236020, MSGBOX_NPC
 	end
 
 VictoryRoad_1F_EventScript_235E35:: @ 8235E35
-	trainerbattle 0, TRAINER_WALLY_3, 0, VictoryRoad_1F_Text_236073, VictoryRoad_1F_Text_2360DA
+	trainerbattle_single TRAINER_WALLY_3, VictoryRoad_1F_Text_236073, VictoryRoad_1F_Text_2360DA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq VictoryRoad_1F_EventScript_235E5C
-	msgbox VictoryRoad_1F_Text_2360FE, 6
+	msgbox VictoryRoad_1F_Text_2360FE, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_235E5C:: @ 8235E5C
-	trainerbattle 5, TRAINER_WALLY_3, 0, VictoryRoad_1F_Text_236073, VictoryRoad_1F_Text_2360DA
-	msgbox VictoryRoad_1F_Text_2360FE, 6
+	trainerbattle_rematch TRAINER_WALLY_3, VictoryRoad_1F_Text_236073, VictoryRoad_1F_Text_2360DA
+	msgbox VictoryRoad_1F_Text_2360FE, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_235E73:: @ 8235E73
-	trainerbattle 0, TRAINER_EDGAR, 0, VictoryRoad_1F_Text_236184, VictoryRoad_1F_Text_2361CB
-	msgbox VictoryRoad_1F_Text_2361E5, 6
+	trainerbattle_single TRAINER_EDGAR, VictoryRoad_1F_Text_236184, VictoryRoad_1F_Text_2361CB
+	msgbox VictoryRoad_1F_Text_2361E5, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_235E8A:: @ 8235E8A
-	trainerbattle 0, TRAINER_ALBERT, 0, VictoryRoad_1F_Text_236248, VictoryRoad_1F_Text_236290
-	msgbox VictoryRoad_1F_Text_2362A4, 6
+	trainerbattle_single TRAINER_ALBERT, VictoryRoad_1F_Text_236248, VictoryRoad_1F_Text_236290
+	msgbox VictoryRoad_1F_Text_2362A4, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_235EA1:: @ 8235EA1
-	trainerbattle 0, TRAINER_HOPE, 0, VictoryRoad_1F_Text_2362EE, VictoryRoad_1F_Text_236336
-	msgbox VictoryRoad_1F_Text_236356, 6
+	trainerbattle_single TRAINER_HOPE, VictoryRoad_1F_Text_2362EE, VictoryRoad_1F_Text_236336
+	msgbox VictoryRoad_1F_Text_236356, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_235EB8:: @ 8235EB8
-	trainerbattle 0, TRAINER_QUINCY, 0, VictoryRoad_1F_Text_236390, VictoryRoad_1F_Text_2363C4
-	msgbox VictoryRoad_1F_Text_2363D5, 6
+	trainerbattle_single TRAINER_QUINCY, VictoryRoad_1F_Text_236390, VictoryRoad_1F_Text_2363C4
+	msgbox VictoryRoad_1F_Text_2363D5, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_235ECF:: @ 8235ECF
-	trainerbattle 0, TRAINER_KATELYNN, 0, VictoryRoad_1F_Text_236468, VictoryRoad_1F_Text_2364A7
-	msgbox VictoryRoad_1F_Text_2364BB, 6
+	trainerbattle_single TRAINER_KATELYNN, VictoryRoad_1F_Text_236468, VictoryRoad_1F_Text_2364A7
+	msgbox VictoryRoad_1F_Text_2364BB, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_Text_235EE6: @ 8235EE6
@@ -217,4 +217,3 @@ VictoryRoad_1F_Text_2364A7: @ 82364A7
 VictoryRoad_1F_Text_2364BB: @ 82364BB
 	.string "Humph, go right on ahead.\n"
 	.string "See if I care.$"
-

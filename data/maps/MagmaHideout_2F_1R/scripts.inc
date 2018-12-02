@@ -2,23 +2,23 @@ MagmaHideout_2F_1R_MapScripts:: @ 8239B50
 	.byte 0
 
 MagmaHideout_2F_1R_EventScript_239B51:: @ 8239B51
-	trainerbattle 0, TRAINER_GRUNT_51, 0, MagmaHideout_2F_1R_Text_239BAD, MagmaHideout_2F_1R_Text_239C4B
-	msgbox MagmaHideout_2F_1R_Text_239C74, 6
+	trainerbattle_single TRAINER_GRUNT_51, MagmaHideout_2F_1R_Text_239BAD, MagmaHideout_2F_1R_Text_239C4B
+	msgbox MagmaHideout_2F_1R_Text_239C74, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_2F_1R_EventScript_239B68:: @ 8239B68
-	trainerbattle 0, TRAINER_GRUNT_40, 0, MagmaHideout_2F_1R_Text_239CAB, MagmaHideout_2F_1R_Text_239D09
-	msgbox MagmaHideout_2F_1R_Text_239D1D, 6
+	trainerbattle_single TRAINER_GRUNT_40, MagmaHideout_2F_1R_Text_239CAB, MagmaHideout_2F_1R_Text_239D09
+	msgbox MagmaHideout_2F_1R_Text_239D1D, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_2F_1R_EventScript_239B7F:: @ 8239B7F
-	trainerbattle 0, TRAINER_GRUNT_41, 0, MagmaHideout_2F_1R_Text_239D62, MagmaHideout_2F_1R_Text_239D75
-	msgbox MagmaHideout_2F_1R_Text_239D7D, 6
+	trainerbattle_single TRAINER_GRUNT_41, MagmaHideout_2F_1R_Text_239D62, MagmaHideout_2F_1R_Text_239D75
+	msgbox MagmaHideout_2F_1R_Text_239D7D, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_2F_1R_EventScript_239B96:: @ 8239B96
-	trainerbattle 0, TRAINER_GRUNT_42, 0, MagmaHideout_2F_1R_Text_239DC5, MagmaHideout_2F_1R_Text_239DDA
-	msgbox MagmaHideout_2F_1R_Text_239DE2, 6
+	trainerbattle_single TRAINER_GRUNT_42, MagmaHideout_2F_1R_Text_239DC5, MagmaHideout_2F_1R_Text_239DDA
+	msgbox MagmaHideout_2F_1R_Text_239DE2, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_2F_1R_Text_239BAD: @ 8239BAD

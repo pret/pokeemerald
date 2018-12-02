@@ -17,15 +17,15 @@ LavaridgeTown_PokemonCenter_1F_EventScript_1FFB0E:: @ 81FFB0E
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_1FFB1C:: @ 81FFB1C
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_1FFBAD, 2
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_1FFBAD, MSGBOX_NPC
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_1FFB25:: @ 81FFB25
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_1FFB37, 2
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_1FFB37, MSGBOX_NPC
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_1FFB2E:: @ 81FFB2E
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_1FFC21, 2
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_1FFC21, MSGBOX_NPC
 	end
 
 LavaridgeTown_PokemonCenter_1F_Text_1FFB37: @ 81FFB37

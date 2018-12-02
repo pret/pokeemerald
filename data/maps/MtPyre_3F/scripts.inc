@@ -2,38 +2,35 @@ MtPyre_3F_MapScripts:: @ 8231752
 	.byte 0
 
 MtPyre_3F_EventScript_231753:: @ 8231753
-	trainerbattle 0, TRAINER_WILLIAM, 0, MtPyre_3F_Text_2317E3, MtPyre_3F_Text_231853
-	msgbox MtPyre_3F_Text_231869, 6
+	trainerbattle_single TRAINER_WILLIAM, MtPyre_3F_Text_2317E3, MtPyre_3F_Text_231853
+	msgbox MtPyre_3F_Text_231869, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_EventScript_23176A:: @ 823176A
-	trainerbattle 0, TRAINER_KAYLA, 0, MtPyre_3F_Text_2318A1, MtPyre_3F_Text_2318DD
-	msgbox MtPyre_3F_Text_2318F2, 6
+	trainerbattle_single TRAINER_KAYLA, MtPyre_3F_Text_2318A1, MtPyre_3F_Text_2318DD
+	msgbox MtPyre_3F_Text_2318F2, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_EventScript_231781:: @ 8231781
-	trainerbattle 2, TRAINER_GABRIELLE_1, 0, MtPyre_3F_Text_231952, MtPyre_3F_Text_23196A, MtPyre_3F_EventScript_2317AD
+	trainerbattle_single TRAINER_GABRIELLE_1, MtPyre_3F_Text_231952, MtPyre_3F_Text_23196A, MtPyre_3F_EventScript_2317AD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtPyre_3F_EventScript_2317CC
-	msgbox MtPyre_3F_Text_23199B, 4
+	msgbox MtPyre_3F_Text_23199B, MSGBOX_DEFAULT
 	release
 	end
 
 MtPyre_3F_EventScript_2317AD:: @ 82317AD
 	special sub_80B4808
 	waitmovement 0
-	msgbox MtPyre_3F_Text_231A49, 4
-	setvar VAR_0x8004, 9
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 9
-	callstd 8
+	msgbox MtPyre_3F_Text_231A49, MSGBOX_DEFAULT
+	register_matchcall TRAINER_GABRIELLE_1
 	release
 	end
 
 MtPyre_3F_EventScript_2317CC:: @ 82317CC
-	trainerbattle 5, TRAINER_GABRIELLE_1, 0, MtPyre_3F_Text_231AAB, MtPyre_3F_Text_231AE6
-	msgbox MtPyre_3F_Text_231B0D, 6
+	trainerbattle_rematch TRAINER_GABRIELLE_1, MtPyre_3F_Text_231AAB, MtPyre_3F_Text_231AE6
+	msgbox MtPyre_3F_Text_231B0D, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_Text_2317E3: @ 82317E3

@@ -6,7 +6,7 @@ MauvilleCity_House2_EventScript_210C5D:: @ 8210C5D
 	faceplayer
 	checkflag FLAG_0x102
 	goto_eq MauvilleCity_House2_EventScript_210CDA
-	msgbox MauvilleCity_House2_Text_210CEE, 4
+	msgbox MauvilleCity_House2_Text_210CEE, MSGBOX_DEFAULT
 	checkitem ITEM_HARBOR_MAIL, 1
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_House2_EventScript_210C82
@@ -19,7 +19,7 @@ MauvilleCity_House2_EventScript_210C82:: @ 8210C82
 	waitmovement 0
 	applymovement VAR_LAST_TALKED, MauvilleCity_House2_Movement_27259A
 	waitmovement 0
-	msgbox MauvilleCity_House2_Text_210D76, 5
+	msgbox MauvilleCity_House2_Text_210D76, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_House2_EventScript_210CB8
 	compare VAR_RESULT, 0
@@ -27,7 +27,7 @@ MauvilleCity_House2_EventScript_210C82:: @ 8210C82
 	end
 
 MauvilleCity_House2_EventScript_210CB8:: @ 8210CB8
-	msgbox MauvilleCity_House2_Text_210DB3, 4
+	msgbox MauvilleCity_House2_Text_210DB3, MSGBOX_DEFAULT
 	takeitem ITEM_HARBOR_MAIL, 1
 	giveitem_std ITEM_COIN_CASE
 	setflag FLAG_0x102
@@ -35,12 +35,12 @@ MauvilleCity_House2_EventScript_210CB8:: @ 8210CB8
 	end
 
 MauvilleCity_House2_EventScript_210CDA:: @ 8210CDA
-	msgbox MauvilleCity_House2_Text_210DE7, 4
+	msgbox MauvilleCity_House2_Text_210DE7, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_House2_EventScript_210CE4:: @ 8210CE4
-	msgbox MauvilleCity_House2_Text_210E16, 4
+	msgbox MauvilleCity_House2_Text_210E16, MSGBOX_DEFAULT
 	release
 	end
 

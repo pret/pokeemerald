@@ -21,15 +21,15 @@ Route113_GlassWorkshop_EventScript_26ED1E:: @ 826ED1E
 	goto_eq Route113_GlassWorkshop_EventScript_26ED6E
 	compare VAR_0x40BE, 1
 	goto_eq Route113_GlassWorkshop_EventScript_26ED64
-	msgbox Route113_GlassWorkshop_Text_26F19D, 4
+	msgbox Route113_GlassWorkshop_Text_26F19D, MSGBOX_DEFAULT
 	giveitem_std ITEM_SOOT_SACK
 	setvar VAR_0x40BE, 1
-	msgbox Route113_GlassWorkshop_Text_26F252, 4
+	msgbox Route113_GlassWorkshop_Text_26F252, MSGBOX_DEFAULT
 	release
 	end
 
 Route113_GlassWorkshop_EventScript_26ED64:: @ 826ED64
-	msgbox Route113_GlassWorkshop_Text_26F252, 4
+	msgbox Route113_GlassWorkshop_Text_26F252, MSGBOX_DEFAULT
 	release
 	end
 
@@ -37,7 +37,7 @@ Route113_GlassWorkshop_EventScript_26ED6E:: @ 826ED6E
 	checkitem ITEM_SOOT_SACK, 1
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26ED9D
-	msgbox Route113_GlassWorkshop_Text_26F312, 4
+	msgbox Route113_GlassWorkshop_Text_26F312, MSGBOX_DEFAULT
 	compare VAR_ASH_GATHER_COUNT, 250
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFD6
 	message Route113_GlassWorkshop_Text_26F40A
@@ -46,7 +46,7 @@ Route113_GlassWorkshop_EventScript_26ED6E:: @ 826ED6E
 	end
 
 Route113_GlassWorkshop_EventScript_26ED9D:: @ 826ED9D
-	msgbox Route113_GlassWorkshop_Text_26F772, 4
+	msgbox Route113_GlassWorkshop_Text_26F772, MSGBOX_DEFAULT
 	release
 	end
 
@@ -73,7 +73,7 @@ Route113_GlassWorkshop_EventScript_26EE1E:: @ 826EE1E
 	setvar VAR_0x800A, 250
 	compare VAR_ASH_GATHER_COUNT, 250
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 10
@@ -87,7 +87,7 @@ Route113_GlassWorkshop_EventScript_26EE5A:: @ 826EE5A
 	setvar VAR_0x800A, 500
 	compare VAR_ASH_GATHER_COUNT, 500
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 11
@@ -101,7 +101,7 @@ Route113_GlassWorkshop_EventScript_26EE96:: @ 826EE96
 	setvar VAR_0x800A, 500
 	compare VAR_ASH_GATHER_COUNT, 500
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 12
@@ -115,7 +115,7 @@ Route113_GlassWorkshop_EventScript_26EED2:: @ 826EED2
 	setvar VAR_0x800A, 1000
 	compare VAR_ASH_GATHER_COUNT, 1000
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 13
@@ -129,7 +129,7 @@ Route113_GlassWorkshop_EventScript_26EF0E:: @ 826EF0E
 	setvar VAR_0x800A, 1000
 	compare VAR_ASH_GATHER_COUNT, 1000
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 14
@@ -144,7 +144,7 @@ Route113_GlassWorkshop_EventScript_26EF4A:: @ 826EF4A
 	setvar VAR_0x800A, 6000
 	compare VAR_ASH_GATHER_COUNT, 6000
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 15
@@ -159,7 +159,7 @@ Route113_GlassWorkshop_EventScript_26EF8B:: @ 826EF8B
 	setvar VAR_0x800A, 8000
 	compare VAR_ASH_GATHER_COUNT, 8000
 	goto_if 0, Route113_GlassWorkshop_EventScript_26EFEE
-	msgbox Route113_GlassWorkshop_Text_26F480, 5
+	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route113_GlassWorkshop_EventScript_26F003
 	setvar VAR_0x40BE, 16
@@ -168,7 +168,7 @@ Route113_GlassWorkshop_EventScript_26EF8B:: @ 826EF8B
 	end
 
 Route113_GlassWorkshop_EventScript_26EFCC:: @ 826EFCC
-	msgbox Route113_GlassWorkshop_Text_26F641, 4
+	msgbox Route113_GlassWorkshop_Text_26F641, MSGBOX_DEFAULT
 	release
 	end
 
@@ -176,7 +176,7 @@ Route113_GlassWorkshop_EventScript_26EFD6:: @ 826EFD6
 	setvar VAR_0x800A, 250
 	subvar VAR_0x800A, 16456
 	buffernumberstring 0, VAR_0x800A
-	msgbox Route113_GlassWorkshop_Text_26F34E, 4
+	msgbox Route113_GlassWorkshop_Text_26F34E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -195,13 +195,13 @@ Route113_GlassWorkshop_EventScript_26F003:: @ 826F003
 	end
 
 Route113_GlassWorkshop_EventScript_26F00F:: @ 826F00F
-	msgbox Route113_GlassWorkshop_Text_26F4DA, 4
+	msgbox Route113_GlassWorkshop_Text_26F4DA, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1
 	playse SE_SELECT
 	delay 30
 	fadescreen 0
-	msgbox Route113_GlassWorkshop_Text_26F688, 4
+	msgbox Route113_GlassWorkshop_Text_26F688, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
 	call_if 1, Route113_GlassWorkshop_EventScript_26F047
 	compare VAR_0x8009, 1
@@ -224,13 +224,13 @@ Route113_GlassWorkshop_EventScript_26F05F:: @ 826F05F
 
 Route113_GlassWorkshop_EventScript_26F072:: @ 826F072
 	call Route113_GlassWorkshop_EventScript_27205E
-	msgbox Route113_GlassWorkshop_Text_26F6B7, 4
+	msgbox Route113_GlassWorkshop_Text_26F6B7, MSGBOX_DEFAULT
 	release
 	end
 
 Route113_GlassWorkshop_EventScript_26F081:: @ 826F081
 	call Route113_GlassWorkshop_EventScript_272071
-	msgbox Route113_GlassWorkshop_Text_26F715, 4
+	msgbox Route113_GlassWorkshop_Text_26F715, MSGBOX_DEFAULT
 	release
 	end
 
@@ -295,7 +295,7 @@ Route113_GlassWorkshop_EventScript_26F15B:: @ 826F15B
 	end
 
 Route113_GlassWorkshop_EventScript_26F16F:: @ 826F16F
-	msgbox Route113_GlassWorkshop_Text_26F688, 4
+	msgbox Route113_GlassWorkshop_Text_26F688, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
 	call_if 1, Route113_GlassWorkshop_EventScript_26F047
 	compare VAR_0x8009, 1
@@ -305,7 +305,7 @@ Route113_GlassWorkshop_EventScript_26F16F:: @ 826F16F
 	end
 
 Route113_GlassWorkshop_EventScript_26F194:: @ 826F194
-	msgbox Route113_GlassWorkshop_Text_26F7EC, 2
+	msgbox Route113_GlassWorkshop_Text_26F7EC, MSGBOX_NPC
 	end
 
 Route113_GlassWorkshop_Text_26F19D: @ 826F19D

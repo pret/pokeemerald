@@ -156,13 +156,13 @@ DewfordTown_Gym_EventScript_1FC7C1:: @ 81FC7C1
 	return
 
 DewfordTown_Gym_EventScript_1FC7C2:: @ 81FC7C2
-	trainerbattle 1, TRAINER_BRAWLY_1, 0, DewfordTown_Gym_Text_1FCF44, DewfordTown_Gym_Text_1FD008, DewfordTown_Gym_EventScript_1FC7F7
+	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_1FCF44, DewfordTown_Gym_Text_1FD008, DewfordTown_Gym_EventScript_1FC7F7, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_Gym_EventScript_1FC89C
 	checkflag FLAG_0x0A6
 	goto_if 0, DewfordTown_Gym_EventScript_1FC878
-	msgbox DewfordTown_Gym_Text_1FD20D, 4
+	msgbox DewfordTown_Gym_Text_1FD20D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -171,7 +171,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	message DewfordTown_Gym_Text_1FD07D
 	waitmessage
 	call DewfordTown_Gym_EventScript_27207E
-	msgbox DewfordTown_Gym_Text_1FD0A8, 4
+	msgbox DewfordTown_Gym_Text_1FD0A8, MSGBOX_DEFAULT
 	setflag FLAG_0x4F1
 	setflag FLAG_BADGE02_GET
 	addvar VAR_0x4085, 1
@@ -183,7 +183,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox DewfordTown_Gym_Text_1FD1E0, 4
+	msgbox DewfordTown_Gym_Text_1FD1E0, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -197,7 +197,7 @@ DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
 	goto_eq DewfordTown_Gym_EventScript_27205E
-	msgbox DewfordTown_Gym_Text_1FD181, 4
+	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_0x0A6
 	return
 
@@ -205,19 +205,19 @@ DewfordTown_Gym_EventScript_1FC878:: @ 81FC878
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
 	goto_eq DewfordTown_Gym_EventScript_272054
-	msgbox DewfordTown_Gym_Text_1FD181, 4
+	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_0x0A6
 	release
 	end
 
 DewfordTown_Gym_EventScript_1FC89C:: @ 81FC89C
-	trainerbattle 7, TRAINER_BRAWLY_1, 0, DewfordTown_Gym_Text_1FD2C4, DewfordTown_Gym_Text_1FD367, DewfordTown_Gym_Text_1FD3DE
-	msgbox DewfordTown_Gym_Text_1FD37B, 6
+	trainerbattle_rematch_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_1FD2C4, DewfordTown_Gym_Text_1FD367, DewfordTown_Gym_Text_1FD3DE
+	msgbox DewfordTown_Gym_Text_1FD37B, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC8B7:: @ 81FC8B7
-	trainerbattle 2, TRAINER_TAKAO, 0, DewfordTown_Gym_Text_1FCB9F, DewfordTown_Gym_Text_1FCBB8, DewfordTown_Gym_EventScript_1FC8D2
-	msgbox DewfordTown_Gym_Text_1FCBCA, 6
+	trainerbattle_single TRAINER_TAKAO, DewfordTown_Gym_Text_1FCB9F, DewfordTown_Gym_Text_1FCBB8, DewfordTown_Gym_EventScript_1FC8D2
+	msgbox DewfordTown_Gym_Text_1FCBCA, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC8D2:: @ 81FC8D2
@@ -226,8 +226,8 @@ DewfordTown_Gym_EventScript_1FC8D2:: @ 81FC8D2
 	end
 
 DewfordTown_Gym_EventScript_1FC8D9:: @ 81FC8D9
-	trainerbattle 2, TRAINER_JOCELYN, 0, DewfordTown_Gym_Text_1FCC0A, DewfordTown_Gym_Text_1FCC45, DewfordTown_Gym_EventScript_1FC8F4
-	msgbox DewfordTown_Gym_Text_1FCC6B, 6
+	trainerbattle_single TRAINER_JOCELYN, DewfordTown_Gym_Text_1FCC0A, DewfordTown_Gym_Text_1FCC45, DewfordTown_Gym_EventScript_1FC8F4
+	msgbox DewfordTown_Gym_Text_1FCC6B, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC8F4:: @ 81FC8F4
@@ -236,8 +236,8 @@ DewfordTown_Gym_EventScript_1FC8F4:: @ 81FC8F4
 	end
 
 DewfordTown_Gym_EventScript_1FC8FB:: @ 81FC8FB
-	trainerbattle 2, TRAINER_LAURA, 0, DewfordTown_Gym_Text_1FCD01, DewfordTown_Gym_Text_1FCD3C, DewfordTown_Gym_EventScript_1FC916
-	msgbox DewfordTown_Gym_Text_1FCD4F, 6
+	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_1FCD01, DewfordTown_Gym_Text_1FCD3C, DewfordTown_Gym_EventScript_1FC916
+	msgbox DewfordTown_Gym_Text_1FCD4F, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC916:: @ 81FC916
@@ -246,8 +246,8 @@ DewfordTown_Gym_EventScript_1FC916:: @ 81FC916
 	end
 
 DewfordTown_Gym_EventScript_1FC91D:: @ 81FC91D
-	trainerbattle 2, TRAINER_BRENDEN, 0, DewfordTown_Gym_Text_1FCE48, DewfordTown_Gym_Text_1FCE75, DewfordTown_Gym_EventScript_1FC938
-	msgbox DewfordTown_Gym_Text_1FCEAB, 6
+	trainerbattle_single TRAINER_BRENDEN, DewfordTown_Gym_Text_1FCE48, DewfordTown_Gym_Text_1FCE75, DewfordTown_Gym_EventScript_1FC938
+	msgbox DewfordTown_Gym_Text_1FCEAB, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC938:: @ 81FC938
@@ -256,8 +256,8 @@ DewfordTown_Gym_EventScript_1FC938:: @ 81FC938
 	end
 
 DewfordTown_Gym_EventScript_1FC93F:: @ 81FC93F
-	trainerbattle 2, TRAINER_CRISTIAN, 0, DewfordTown_Gym_Text_1FCEDC, DewfordTown_Gym_Text_1FCF0A, DewfordTown_Gym_EventScript_1FC95A
-	msgbox DewfordTown_Gym_Text_1FCF26, 6
+	trainerbattle_single TRAINER_CRISTIAN, DewfordTown_Gym_Text_1FCEDC, DewfordTown_Gym_Text_1FCF0A, DewfordTown_Gym_EventScript_1FC95A
+	msgbox DewfordTown_Gym_Text_1FCF26, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC95A:: @ 81FC95A
@@ -266,8 +266,8 @@ DewfordTown_Gym_EventScript_1FC95A:: @ 81FC95A
 	end
 
 DewfordTown_Gym_EventScript_1FC961:: @ 81FC961
-	trainerbattle 2, TRAINER_LILITH, 0, DewfordTown_Gym_Text_1FCDB8, DewfordTown_Gym_Text_1FCDE5, DewfordTown_Gym_EventScript_1FC97C
-	msgbox DewfordTown_Gym_Text_1FCE08, 6
+	trainerbattle_single TRAINER_LILITH, DewfordTown_Gym_Text_1FCDB8, DewfordTown_Gym_Text_1FCDE5, DewfordTown_Gym_EventScript_1FC97C
+	msgbox DewfordTown_Gym_Text_1FCE08, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Gym_EventScript_1FC97C:: @ 81FC97C
@@ -280,12 +280,12 @@ DewfordTown_Gym_EventScript_1FC983:: @ 81FC983
 	faceplayer
 	checkflag FLAG_0x4F1
 	goto_eq DewfordTown_Gym_EventScript_1FC998
-	msgbox DewfordTown_Gym_Text_1FC9D6, 4
+	msgbox DewfordTown_Gym_Text_1FC9D6, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_Gym_EventScript_1FC998:: @ 81FC998
-	msgbox DewfordTown_Gym_Text_1FCB5C, 4
+	msgbox DewfordTown_Gym_Text_1FCB5C, MSGBOX_DEFAULT
 	release
 	end
 
@@ -304,12 +304,12 @@ DewfordTown_Gym_EventScript_1FC9B2:: @ 81FC9B2
 	end
 
 DewfordTown_Gym_EventScript_1FC9C2:: @ 81FC9C2
-	msgbox DewfordTown_Gym_Text_1FD28B, 4
+	msgbox DewfordTown_Gym_Text_1FD28B, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Gym_EventScript_1FC9CC:: @ 81FC9CC
-	msgbox DewfordTown_Gym_Text_1FD272, 4
+	msgbox DewfordTown_Gym_Text_1FD272, MSGBOX_DEFAULT
 	releaseall
 	end
 

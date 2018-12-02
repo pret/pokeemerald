@@ -24,8 +24,8 @@ AquaHideout_B2F_EventScript_233DE5:: @ 8233DE5
 	end
 
 AquaHideout_B2F_EventScript_233E09:: @ 8233E09
-	trainerbattle 2, TRAINER_MATT, 0, AquaHideout_B2F_Text_233EDD, AquaHideout_B2F_Text_233F8D, AquaHideout_B2F_EventScript_233E25
-	msgbox AquaHideout_B2F_Text_233FF2, 4
+	trainerbattle_single TRAINER_MATT, AquaHideout_B2F_Text_233EDD, AquaHideout_B2F_Text_233F8D, AquaHideout_B2F_EventScript_233E25
+	msgbox AquaHideout_B2F_Text_233FF2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -37,7 +37,7 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	delay 20
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
 	waitmovement 0
-	msgbox AquaHideout_B2F_Text_233FA6, 4
+	msgbox AquaHideout_B2F_Text_233FA6, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_2725A4
 	applymovement VAR_0x8009, AquaHideout_B2F_Movement_233E80
@@ -46,7 +46,7 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	delay 20
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
 	waitmovement 0
-	msgbox AquaHideout_B2F_Text_233FF2, 4
+	msgbox AquaHideout_B2F_Text_233FF2, MSGBOX_DEFAULT
 	setflag FLAG_0x070
 	setflag FLAG_HIDE_LILYCOVE_CITY_AQUA_GRUNTS
 	release
@@ -67,23 +67,23 @@ AquaHideout_B2F_Movement_233E85: @ 8233E85
 	step_end
 
 AquaHideout_B2F_EventScript_233E8A:: @ 8233E8A
-	trainerbattle 2, TRAINER_GRUNT_4, 0, AquaHideout_B2F_Text_2340B4, AquaHideout_B2F_Text_2340F0, AquaHideout_B2F_EventScript_233EA5
-	msgbox AquaHideout_B2F_Text_234112, 6
+	trainerbattle_single TRAINER_GRUNT_4, AquaHideout_B2F_Text_2340B4, AquaHideout_B2F_Text_2340F0, AquaHideout_B2F_EventScript_233EA5
+	msgbox AquaHideout_B2F_Text_234112, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B2F_EventScript_233EA5:: @ 8233EA5
-	msgbox AquaHideout_B2F_Text_234112, 4
+	msgbox AquaHideout_B2F_Text_234112, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_B2F_EventScript_233EAF:: @ 8233EAF
-	trainerbattle 0, TRAINER_GRUNT_22, 0, AquaHideout_B2F_Text_23412D, AquaHideout_B2F_Text_2341CE
-	msgbox AquaHideout_B2F_Text_2341FE, 6
+	trainerbattle_single TRAINER_GRUNT_22, AquaHideout_B2F_Text_23412D, AquaHideout_B2F_Text_2341CE
+	msgbox AquaHideout_B2F_Text_2341FE, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B2F_EventScript_233EC6:: @ 8233EC6
-	trainerbattle 0, TRAINER_GRUNT_26, 0, AquaHideout_B2F_Text_23426F, AquaHideout_B2F_Text_2342CC
-	msgbox AquaHideout_B2F_Text_2342FF, 6
+	trainerbattle_single TRAINER_GRUNT_26, AquaHideout_B2F_Text_23426F, AquaHideout_B2F_Text_2342CC
+	msgbox AquaHideout_B2F_Text_2342FF, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B2F_Text_233EDD: @ 8233EDD

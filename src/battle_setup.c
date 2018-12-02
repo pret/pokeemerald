@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/trainers.h"
 #include "battle.h"
+#include "constants/battle_setup.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "main.h"
@@ -1091,7 +1092,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 
     switch (sTrainerBattleMode)
     {
-    case TRAINER_BATTLE_NORMAL_NO_INTRO_TEXT:
+    case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(sOrdinaryNoIntroBattleParams, data);
         return EventScript_2713C2;
     case TRAINER_BATTLE_DOUBLE:

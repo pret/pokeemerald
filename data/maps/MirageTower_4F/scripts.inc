@@ -4,7 +4,7 @@ MirageTower_4F_MapScripts:: @ 823AD47
 MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	lock
 	faceplayer
-	msgbox MirageTower_4F_Text_23ADF9, 5
+	msgbox MirageTower_4F_Text_23ADF9, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MirageTower_4F_EventScript_23AD7F
 	giveitem_std ITEM_ROOT_FOSSIL
@@ -18,14 +18,14 @@ MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	end
 
 MirageTower_4F_EventScript_23AD7F:: @ 823AD7F
-	msgbox MirageTower_4F_Text_23AE79, 4
+	msgbox MirageTower_4F_Text_23AE79, MSGBOX_DEFAULT
 	release
 	end
 
 MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	lock
 	faceplayer
-	msgbox MirageTower_4F_Text_23AE98, 5
+	msgbox MirageTower_4F_Text_23AE98, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MirageTower_4F_EventScript_23ADC0
 	giveitem_std ITEM_CLAW_FOSSIL
@@ -39,7 +39,7 @@ MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	end
 
 MirageTower_4F_EventScript_23ADC0:: @ 823ADC0
-	msgbox MirageTower_4F_Text_23AF18, 4
+	msgbox MirageTower_4F_Text_23AF18, MSGBOX_DEFAULT
 	release
 	end
 
