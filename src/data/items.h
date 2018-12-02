@@ -5961,7 +5961,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-	{
+    {
         .name = _("MYSTICTICKET"),
         .itemId = ITEM_MYSTIC_TICKET,
         .price = 0,
@@ -5977,7 +5977,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-	{
+    {
         .name = _("AURORATICKET"),
         .itemId = ITEM_AURORA_TICKET,
         .price = 0,
@@ -5993,7 +5993,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-	{
+    {
         .name = _("POWDER JAR"),
         .itemId = ITEM_POWDER_JAR,
         .price = 0,
@@ -6009,7 +6009,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-	{
+    {
         .name = _("RUBY"),
         .itemId = ITEM_RUBY,
         .price = 0,
@@ -6025,7 +6025,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-	{
+    {
         .name = _("SAPPHIRE"),
         .itemId = ITEM_SAPPHIRE,
         .price = 0,
@@ -6044,7 +6044,7 @@ const struct Item gItems[] =
 
 //Emerald-specific key items
 
-	{
+    {
         .name = _("MAGMA EMBLEM"),
         .itemId = ITEM_MAGMA_EMBLEM,
         .price = 0,
@@ -6060,7 +6060,7 @@ const struct Item gItems[] =
         .battleUseFunc = NULL,
         .secondaryId = 0,
     },
-	{
+    {
         .name = _("OLD SEA MAP"),
         .itemId = ITEM_OLD_SEA_MAP,
         .price = 0,
