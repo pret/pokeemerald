@@ -2279,7 +2279,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             break;
         }
 
-    } while (gBattleStruct->atkCancellerTracker != CANCELLER_END && effect == 0);
+    } while (gBattleStruct->atkCancellerTracker != CANCELLER_END && gBattleStruct->atkCancellerTracker != CANCELLER_END2 && effect == 0);
 
     if (effect == 2)
     {
