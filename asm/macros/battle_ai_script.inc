@@ -581,6 +581,19 @@
 	.4byte \ptr
 	.endm
 	
+	.macro if_share_type battler1:req, battler2:req, ptr:req
+	.byte 0x67
+	.byte \battler1
+	.byte \battler2
+	.4byte \ptr
+	.endm
+	
+	.macro if_cant_use_last_resort battler:req, ptr:req
+	.byte 0x68
+	.byte \battler
+	.4byte \ptr
+	.endm
+	
 @ useful script macros
 	.macro if_holds_no_item battler, ptr:req
 	if_holds_item \battler, 0, \ptr

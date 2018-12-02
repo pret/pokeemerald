@@ -234,7 +234,88 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_ATTACK_ACCURACY_UP, AI_CBM_AtkAccUp
 	if_effect EFFECT_ATTACK_SPATK_UP, AI_CBM_AtkSpAtkUp
 	if_effect EFFECT_GROWTH, AI_CBM_AtkSpAtkUp
+	if_effect EFFECT_AROMATIC_MIST, AI_CBM_AromaticMist
+	if_effect EFFECT_ACUPRESSURE, AI_CBM_Acupressure
+	if_effect EFFECT_BESTOW, AI_CBM_Bestow
+	if_effect EFFECT_PSYCHO_SHIFT, AI_CBM_PsychicShift
+	if_effect EFFECT_DEFOG, AI_CBM_Defog
+	if_effect EFFECT_SYNCHRONOISE, AI_CBM_Synchronoise
+	if_effect EFFECT_AUTONOMIZE, AI_CBM_SpeedUp
+	if_effect EFFECT_TOXIC_THREAD, AI_CBM_ToxicThread
+	if_effect EFFECT_VENOM_DRENCH, AI_CBM_VenomDrench
+	if_effect EFFECT_DEFENSE_UP_3, AI_CBM_DefenseUp
+	if_effect EFFECT_SHIFT_GEAR, AI_CBM_DragonDance
+	if_effect EFFECT_NOBLE_ROAR, AI_CBM_NobleRoar
+	if_effect EFFECT_SHELL_SMASH, AI_CBM_ShellSmash
+	if_effect EFFECT_LAST_RESORT, AI_CBM_LastResort
 	end
+	
+AI_CBM_LastResort:
+	if_cant_use_last_resort AI_USER, Score_Minus10
+	end
+	
+AI_CBM_ShellSmash:
+	if_ability AI_USER, ABILITY_CONTRARY, AI_CBM_ShellSmashContrary
+	if_stat_level_not_equal AI_USER, STAT_SPATK, 12, AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_SPEED, 12, AI_Ret
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	end
+AI_CBM_ShellSmashContrary:
+	if_stat_level_not_equal AI_USER, STAT_DEF, 12, AI_Ret
+	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus10
+	end
+	
+AI_CBM_NobleRoar:
+	if_stat_level_not_equal AI_TARGET, STAT_SPATK, 12, AI_Ret
+	if_stat_level_equal AI_TARGET, STAT_ATK, 12, Score_Minus10
+	end
+	
+AI_CBM_VenomDrench:
+	if_not_status AI_TARGET, STATUS1_PSN_ANY, Score_Minus10
+	if_stat_level_not_equal AI_TARGET, STAT_SPEED, 12, AI_Ret
+	if_stat_level_not_equal AI_TARGET, STAT_SPATK, 12, AI_Ret
+	if_stat_level_equal AI_TARGET, STAT_ATK, 12, Score_Minus10
+	end
+	
+AI_CBM_ToxicThread:
+	if_stat_level_not_equal AI_TARGET, STAT_SPEED, 12, AI_Ret
+	goto AI_CBM_Toxic
+	
+AI_CBM_Synchronoise:
+	if_share_type AI_USER, AI_TARGET AI_Ret
+	goto Score_Minus10
+	
+AI_CBM_Defog:
+	if_side_affecting AI_USER, SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STICKY_WEB, AI_Ret
+	goto AI_CBM_EvasionDown
+	
+AI_CBM_PsychicShift:
+	if_not_status AI_USER, STATUS1_ANY, Score_Minus10
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
+	if_status AI_USER, STATUS1_PARALYSIS, AI_CBM_Paralyze
+	if_status AI_USER, STATUS1_PSN_ANY, AI_CBM_Toxic
+	if_status AI_USER, STATUS1_BURN, AI_CBM_WillOWisp
+	if_status AI_USER, STATUS1_SLEEP, AI_CBM_Sleep
+	end
+	
+AI_CBM_Bestow:
+	if_holds_no_item AI_USER, Score_Minus10
+	end
+	
+AI_CBM_Acupressure:
+	if_double_battle AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_ATK, 12, AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_DEF, 12, AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_SPATK, 12, AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_SPDEF, 12, AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_SPEED, 12, AI_Ret
+	if_stat_level_not_equal AI_USER, STAT_ACC, 12, AI_Ret
+	if_stat_level_equal AI_USER, STAT_EVASION, 12, Score_Minus10
+	end
+	
+AI_CBM_AromaticMist:
+	if_target_is_ally AI_Ret
+	goto Score_Minus10
 	
 AI_CBM_AtkAccUp:
 	if_stat_level_not_equal AI_USER, STAT_ATK, 12, AI_Ret

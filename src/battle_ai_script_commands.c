@@ -156,6 +156,8 @@ static void BattleAICmd_get_ally_chosen_move(void);
 static void BattleAICmd_if_has_no_attacking_moves(void);
 static void BattleAICmd_get_hazards_count(void);
 static void BattleAICmd_if_doesnt_hold_berry(void);
+static void BattleAICmd_if_share_type(void);
+static void BattleAICmd_if_cant_use_last_resort(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -269,6 +271,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_has_no_attacking_moves,                  // 0x64
     BattleAICmd_get_hazards_count,                          // 0x65
     BattleAICmd_if_doesnt_hold_berry,                       // 0x66
+    BattleAICmd_if_share_type,                              // 0x67
+    BattleAICmd_if_cant_use_last_resort,                    // 0x68
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -2522,6 +2526,27 @@ static void BattleAICmd_if_doesnt_hold_berry(void)
         item = BATTLE_HISTORY->itemEffects[battlerId];
 
     if (ItemId_GetPocket(item) == POCKET_BERRIES)
+        gAIScriptPtr += 6;
+    else
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+}
+
+static void BattleAICmd_if_share_type(void)
+{
+    u8 battler1 = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+    u8 battler2 = BattleAI_GetWantedBattler(gAIScriptPtr[2]);
+
+    if (DoBattlersShareType(battler1, battler2))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+static void BattleAICmd_if_cant_use_last_resort(void)
+{
+    u8 battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+
+    if (CanUseLastResort(battler))
         gAIScriptPtr += 6;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
