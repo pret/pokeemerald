@@ -40,7 +40,7 @@ EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
 EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
 	playbgm MUS_DAIGO, 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_WALLACE, 0, EverGrandeCity_ChampionsRoom_Text_228EAC
+	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_228EAC
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A61
 	end
 

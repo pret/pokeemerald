@@ -425,22 +425,22 @@ MtPyre_Summit_Movement_2323F8: @ 82323F8
 	step_end
 
 MtPyre_Summit_EventScript_2323FD:: @ 82323FD
-	trainerbattle 0, TRAINER_GRUNT_17, 0, MtPyre_Summit_Text_232459, MtPyre_Summit_Text_2324A0
+	trainerbattle_normal TRAINER_GRUNT_17, MtPyre_Summit_Text_232459, MtPyre_Summit_Text_2324A0
 	msgbox MtPyre_Summit_Text_2324E0, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_232414:: @ 8232414
-	trainerbattle 0, TRAINER_GRUNT_18, 0, MtPyre_Summit_Text_232513, MtPyre_Summit_Text_2325B0
+	trainerbattle_normal TRAINER_GRUNT_18, MtPyre_Summit_Text_232513, MtPyre_Summit_Text_2325B0
 	msgbox MtPyre_Summit_Text_2325E4, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_23242B:: @ 823242B
-	trainerbattle 0, TRAINER_GRUNT_19, 0, MtPyre_Summit_Text_23261D, MtPyre_Summit_Text_232678
+	trainerbattle_normal TRAINER_GRUNT_19, MtPyre_Summit_Text_23261D, MtPyre_Summit_Text_232678
 	msgbox MtPyre_Summit_Text_2326B3, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_232442:: @ 8232442
-	trainerbattle 0, TRAINER_GRUNT_29, 0, MtPyre_Summit_Text_23271B, MtPyre_Summit_Text_23279A
+	trainerbattle_normal TRAINER_GRUNT_29, MtPyre_Summit_Text_23271B, MtPyre_Summit_Text_23279A
 	msgbox MtPyre_Summit_Text_2327D8, MSGBOX_AUTOCLOSE
 	end
 

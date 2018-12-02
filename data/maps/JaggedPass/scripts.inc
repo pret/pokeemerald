@@ -80,7 +80,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 	waitmovement 0
 	msgbox JaggedPass_Text_230CCB, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle 3, TRAINER_GRUNT_30, 0, JaggedPass_Text_230D2D
+	trainerbattle_no_intro TRAINER_GRUNT_30, JaggedPass_Text_230D2D
 	setflag FLAG_0x139
 	applymovement 5, JaggedPass_Movement_2725A2
 	waitmovement 0
@@ -98,12 +98,12 @@ JaggedPass_EventScript_230766:: @ 8230766
 	end
 
 JaggedPass_EventScript_230785:: @ 8230785
-	trainerbattle 0, TRAINER_ERIC, 0, JaggedPass_Text_230888, JaggedPass_Text_2308FF
+	trainerbattle_normal TRAINER_ERIC, JaggedPass_Text_230888, JaggedPass_Text_2308FF
 	msgbox JaggedPass_Text_230916, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_23079C:: @ 823079C
-	trainerbattle 2, TRAINER_DIANA_1, 0, JaggedPass_Text_230974, JaggedPass_Text_2309B5, JaggedPass_EventScript_2307C8
+	trainerbattle_normal TRAINER_DIANA_1, JaggedPass_Text_230974, JaggedPass_Text_2309B5, JaggedPass_EventScript_2307C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq JaggedPass_EventScript_2307E4
@@ -119,12 +119,12 @@ JaggedPass_EventScript_2307C8:: @ 82307C8
 	end
 
 JaggedPass_EventScript_2307E4:: @ 82307E4
-	trainerbattle 5, TRAINER_DIANA_1, 0, JaggedPass_Text_230A76, JaggedPass_Text_230AAA
+	trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_230A76, JaggedPass_Text_230AAA
 	msgbox JaggedPass_Text_230AD7, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_2307FB:: @ 82307FB
-	trainerbattle 2, TRAINER_ETHAN_1, 0, JaggedPass_Text_230B10, JaggedPass_Text_230B50, JaggedPass_EventScript_230827
+	trainerbattle_normal TRAINER_ETHAN_1, JaggedPass_Text_230B10, JaggedPass_Text_230B50, JaggedPass_EventScript_230827
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq JaggedPass_EventScript_230843
@@ -140,17 +140,17 @@ JaggedPass_EventScript_230827:: @ 8230827
 	end
 
 JaggedPass_EventScript_230843:: @ 8230843
-	trainerbattle 5, TRAINER_ETHAN_1, 0, JaggedPass_Text_230C28, JaggedPass_Text_230C60
+	trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_230C28, JaggedPass_Text_230C60
 	msgbox JaggedPass_Text_230C94, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_23085A:: @ 823085A
-	trainerbattle 0, TRAINER_JULIO, 0, JaggedPass_Text_230DF7, JaggedPass_Text_230E38
+	trainerbattle_normal TRAINER_JULIO, JaggedPass_Text_230DF7, JaggedPass_Text_230E38
 	msgbox JaggedPass_Text_230E57, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_230871:: @ 8230871
-	trainerbattle 0, TRAINER_AUTUMN, 0, JaggedPass_Text_230E8E, JaggedPass_Text_230ECD
+	trainerbattle_normal TRAINER_AUTUMN, JaggedPass_Text_230E8E, JaggedPass_Text_230ECD
 	msgbox JaggedPass_Text_230EE3, MSGBOX_AUTOCLOSE
 	end
 

@@ -1,4 +1,5 @@
 #include "constants/battle_frontier.h"
+#include "constants/battle_setup.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -11734,7 +11735,7 @@ TrainerHill_1F_Movement_2C83EE:: @ 82C83EE
 	step_end
 
 EventScript_2C83F0:: @ 82C83F0
-	trainerbattle 12, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
+	trainerbattle TRAINER_BATTLE_12, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
 	setvar VAR_0x8004, 11
 	special sp194_trainer_tower
 	waitmessage

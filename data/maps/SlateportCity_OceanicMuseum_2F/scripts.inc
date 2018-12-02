@@ -32,7 +32,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCA8
 	compare VAR_FACING, 3
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCB3
-	trainerbattle 3, TRAINER_GRUNT_14, 0, SlateportCity_OceanicMuseum_2F_Text_20BEE2
+	trainerbattle_no_intro TRAINER_GRUNT_14, SlateportCity_OceanicMuseum_2F_Text_20BEE2
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BEFA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCEF
@@ -40,7 +40,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCE2
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BF35, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_GRUNT_15, 0, SlateportCity_OceanicMuseum_2F_Text_20BF66
+	trainerbattle_no_intro TRAINER_GRUNT_15, SlateportCity_OceanicMuseum_2F_Text_20BF66
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCEF
 	waitmovement 0
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_2725AA

@@ -52,7 +52,7 @@ EverGrandeCity_SidneysRoom_EventScript_227F64:: @ 8227F64
 	goto_eq EverGrandeCity_SidneysRoom_EventScript_227F8B
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_227FA7, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_2280A2
+	trainerbattle_no_intro TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_2280A2
 	goto EverGrandeCity_SidneysRoom_EventScript_227F95
 	end
 

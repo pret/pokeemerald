@@ -27,27 +27,27 @@ Route125_MapScript2_1F679A: @ 81F679A
 	.2byte 0
 
 Route125_EventScript_1F67A4:: @ 81F67A4
-	trainerbattle 0, TRAINER_NOLEN, 0, Route125_Text_2A1527, Route125_Text_2A155A
+	trainerbattle_normal TRAINER_NOLEN, Route125_Text_2A1527, Route125_Text_2A155A
 	msgbox Route125_Text_2A1567, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F67BB:: @ 81F67BB
-	trainerbattle 0, TRAINER_STAN, 0, Route125_Text_2A159F, Route125_Text_2A15C7
+	trainerbattle_normal TRAINER_STAN, Route125_Text_2A159F, Route125_Text_2A15C7
 	msgbox Route125_Text_2A15D5, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F67D2:: @ 81F67D2
-	trainerbattle 0, TRAINER_TANYA, 0, Route125_Text_2A1615, Route125_Text_2A164D
+	trainerbattle_normal TRAINER_TANYA, Route125_Text_2A1615, Route125_Text_2A164D
 	msgbox Route125_Text_2A165E, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F67E9:: @ 81F67E9
-	trainerbattle 0, TRAINER_SHARON, 0, Route125_Text_2A1686, Route125_Text_2A16C5
+	trainerbattle_normal TRAINER_SHARON, Route125_Text_2A1686, Route125_Text_2A16C5
 	msgbox Route125_Text_2A16CE, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F6800:: @ 81F6800
-	trainerbattle 2, TRAINER_ERNEST_1, 0, Route125_Text_2A16FC, Route125_Text_2A173A, Route125_EventScript_1F682C
+	trainerbattle_normal TRAINER_ERNEST_1, Route125_Text_2A16FC, Route125_Text_2A173A, Route125_EventScript_1F682C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route125_EventScript_1F684B
@@ -64,27 +64,27 @@ Route125_EventScript_1F682C:: @ 81F682C
 	end
 
 Route125_EventScript_1F684B:: @ 81F684B
-	trainerbattle 5, TRAINER_ERNEST_1, 0, Route125_Text_2A180E, Route125_Text_2A1851
+	trainerbattle_rematch TRAINER_ERNEST_1, Route125_Text_2A180E, Route125_Text_2A1851
 	msgbox Route125_Text_2A187A, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F6862:: @ 81F6862
-	trainerbattle 4, TRAINER_KIM_AND_IRIS, 0, Route125_Text_2A192B, Route125_Text_2A1989, Route125_Text_2A19F8
+	trainerbattle_double TRAINER_KIM_AND_IRIS, Route125_Text_2A192B, Route125_Text_2A1989, Route125_Text_2A19F8
 	msgbox Route125_Text_2A19A6, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F687D:: @ 81F687D
-	trainerbattle 4, TRAINER_KIM_AND_IRIS, 0, Route125_Text_2A1A35, Route125_Text_2A1A71, Route125_Text_2A1AD9
+	trainerbattle_double TRAINER_KIM_AND_IRIS, Route125_Text_2A1A35, Route125_Text_2A1A71, Route125_Text_2A1AD9
 	msgbox Route125_Text_2A1A92, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F6898:: @ 81F6898
-	trainerbattle 0, TRAINER_PRESLEY, 0, Route125_Text_2A1B1A, Route125_Text_2A1B4E
+	trainerbattle_normal TRAINER_PRESLEY, Route125_Text_2A1B1A, Route125_Text_2A1B4E
 	msgbox Route125_Text_2A1B70, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_1F68AF:: @ 81F68AF
-	trainerbattle 0, TRAINER_AURON, 0, Route125_Text_2A1BCE, Route125_Text_2A1BFD
+	trainerbattle_normal TRAINER_AURON, Route125_Text_2A1BCE, Route125_Text_2A1BFD
 	msgbox Route125_Text_2A1C2A, MSGBOX_AUTOCLOSE
 	end
 

@@ -6,7 +6,7 @@ AbandonedShip_Corridors_1F_EventScript_2379A5:: @ 82379A5
 	end
 
 AbandonedShip_Corridors_1F_EventScript_2379AE:: @ 82379AE
-	trainerbattle 0, TRAINER_CHARLIE, 0, AbandonedShip_Corridors_1F_Text_2379C5, AbandonedShip_Corridors_1F_Text_237A01
+	trainerbattle_normal TRAINER_CHARLIE, AbandonedShip_Corridors_1F_Text_2379C5, AbandonedShip_Corridors_1F_Text_237A01
 	msgbox AbandonedShip_Corridors_1F_Text_237A1B, MSGBOX_AUTOCLOSE
 	end
 
@@ -24,4 +24,3 @@ AbandonedShip_Corridors_1F_Text_237A1B: @ 8237A1B
 AbandonedShip_Corridors_1F_Text_237A60: @ 8237A60
 	.string "Isn’t it fun here?\n"
 	.string "I get excited just being here!$"
-

@@ -66,12 +66,12 @@ Route121_Movement_1F5E6B: @ 81F5E6B
 	step_end
 
 Route121_EventScript_1F5E74:: @ 81F5E74
-	trainerbattle 0, TRAINER_VANESSA, 0, Route121_Text_29F0EC, Route121_Text_29F11F
+	trainerbattle_normal TRAINER_VANESSA, Route121_Text_29F0EC, Route121_Text_29F11F
 	msgbox Route121_Text_29F138, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5E8B:: @ 81F5E8B
-	trainerbattle 2, TRAINER_WALTER_1, 0, Route121_Text_29F199, Route121_Text_29F20D, Route121_EventScript_1F5EB7
+	trainerbattle_normal TRAINER_WALTER_1, Route121_Text_29F199, Route121_Text_29F20D, Route121_EventScript_1F5EB7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route121_EventScript_1F5ED6
@@ -88,27 +88,27 @@ Route121_EventScript_1F5EB7:: @ 81F5EB7
 	end
 
 Route121_EventScript_1F5ED6:: @ 81F5ED6
-	trainerbattle 5, TRAINER_WALTER_1, 0, Route121_Text_29F2A6, Route121_Text_29F31A
+	trainerbattle_rematch TRAINER_WALTER_1, Route121_Text_29F2A6, Route121_Text_29F31A
 	msgbox Route121_Text_29F32B, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5EED:: @ 81F5EED
-	trainerbattle 0, TRAINER_TAMMY, 0, Route121_Text_29F381, Route121_Text_29F3B9
+	trainerbattle_normal TRAINER_TAMMY, Route121_Text_29F381, Route121_Text_29F3B9
 	msgbox Route121_Text_29F3C6, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5F04:: @ 81F5F04
-	trainerbattle 4, TRAINER_KATE_AND_JOY, 0, Route121_Text_29F3FB, Route121_Text_29F43F, Route121_Text_29F4C9
+	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_29F3FB, Route121_Text_29F43F, Route121_Text_29F4C9
 	msgbox Route121_Text_29F476, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5F1F:: @ 81F5F1F
-	trainerbattle 4, TRAINER_KATE_AND_JOY, 0, Route121_Text_29F521, Route121_Text_29F564, Route121_Text_29F5CE
+	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_29F521, Route121_Text_29F564, Route121_Text_29F5CE
 	msgbox Route121_Text_29F582, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5F3A:: @ 81F5F3A
-	trainerbattle 2, TRAINER_JESSICA_1, 0, Route121_Text_29F612, Route121_Text_29F641, Route121_EventScript_1F5F66
+	trainerbattle_normal TRAINER_JESSICA_1, Route121_Text_29F612, Route121_Text_29F641, Route121_EventScript_1F5F66
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route121_EventScript_1F5F85
@@ -125,32 +125,32 @@ Route121_EventScript_1F5F66:: @ 81F5F66
 	end
 
 Route121_EventScript_1F5F85:: @ 81F5F85
-	trainerbattle 5, TRAINER_JESSICA_1, 0, Route121_Text_29F6E4, Route121_Text_29F710
+	trainerbattle_rematch TRAINER_JESSICA_1, Route121_Text_29F6E4, Route121_Text_29F710
 	msgbox Route121_Text_29F740, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5F9C:: @ 81F5F9C
-	trainerbattle 0, TRAINER_CALE, 0, Route121_Text_29F91A, Route121_Text_29F97B
+	trainerbattle_normal TRAINER_CALE, Route121_Text_29F91A, Route121_Text_29F97B
 	msgbox Route121_Text_29F9AE, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5FB3:: @ 81F5FB3
-	trainerbattle 0, TRAINER_MYLES, 0, Route121_Text_29FA1E, Route121_Text_29FA64
+	trainerbattle_normal TRAINER_MYLES, Route121_Text_29FA1E, Route121_Text_29FA64
 	msgbox Route121_Text_29FA73, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5FCA:: @ 81F5FCA
-	trainerbattle 0, TRAINER_PAT, 0, Route121_Text_29FAA7, Route121_Text_29FAD8
+	trainerbattle_normal TRAINER_PAT, Route121_Text_29FAA7, Route121_Text_29FAD8
 	msgbox Route121_Text_29FAEA, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5FE1:: @ 81F5FE1
-	trainerbattle 0, TRAINER_MARCEL, 0, Route121_Text_29FB35, Route121_Text_29FB8C
+	trainerbattle_normal TRAINER_MARCEL, Route121_Text_29FB35, Route121_Text_29FB8C
 	msgbox Route121_Text_29FBA8, MSGBOX_AUTOCLOSE
 	end
 
 Route121_EventScript_1F5FF8:: @ 81F5FF8
-	trainerbattle 2, TRAINER_CRISTIN_1, 0, Route121_Text_29F770, Route121_Text_29F7C1, Route121_EventScript_1F6024
+	trainerbattle_normal TRAINER_CRISTIN_1, Route121_Text_29F770, Route121_Text_29F7C1, Route121_EventScript_1F6024
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route121_EventScript_1F6043
@@ -167,7 +167,7 @@ Route121_EventScript_1F6024:: @ 81F6024
 	end
 
 Route121_EventScript_1F6043:: @ 81F6043
-	trainerbattle 5, TRAINER_CRISTIN_1, 0, Route121_Text_29F855, Route121_Text_29F8A8
+	trainerbattle_rematch TRAINER_CRISTIN_1, Route121_Text_29F855, Route121_Text_29F8A8
 	msgbox Route121_Text_29F8D0, MSGBOX_AUTOCLOSE
 	end
 

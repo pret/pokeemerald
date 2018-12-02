@@ -2,7 +2,7 @@ AbandonedShip_Rooms2_1F_MapScripts:: @ 82380A6
 	.byte 0
 
 AbandonedShip_Rooms2_1F_EventScript_2380A7:: @ 82380A7
-	trainerbattle 6, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_23819D, AbandonedShip_Rooms2_1F_Text_2381DA, AbandonedShip_Rooms2_1F_Text_238257, AbandonedShip_Rooms2_1F_EventScript_2380D7
+	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_23819D, AbandonedShip_Rooms2_1F_Text_2381DA, AbandonedShip_Rooms2_1F_Text_238257, AbandonedShip_Rooms2_1F_EventScript_2380D7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms2_1F_EventScript_2380F0
@@ -17,12 +17,12 @@ AbandonedShip_Rooms2_1F_EventScript_2380D7:: @ 82380D7
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_2380F0:: @ 82380F0
-	trainerbattle 7, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_2383FF, AbandonedShip_Rooms2_1F_Text_238473, AbandonedShip_Rooms2_1F_Text_238509
+	trainerbattle_rematch_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_2383FF, AbandonedShip_Rooms2_1F_Text_238473, AbandonedShip_Rooms2_1F_Text_238509
 	msgbox AbandonedShip_Rooms2_1F_Text_238491, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_23810B:: @ 823810B
-	trainerbattle 6, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_2382A4, AbandonedShip_Rooms2_1F_Text_2382F4, AbandonedShip_Rooms2_1F_Text_23836F, AbandonedShip_Rooms2_1F_EventScript_23813B
+	trainerbattle_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_2382A4, AbandonedShip_Rooms2_1F_Text_2382F4, AbandonedShip_Rooms2_1F_Text_23836F, AbandonedShip_Rooms2_1F_EventScript_23813B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms2_1F_EventScript_238154
@@ -37,17 +37,17 @@ AbandonedShip_Rooms2_1F_EventScript_23813B:: @ 823813B
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_238154:: @ 8238154
-	trainerbattle 7, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_238556, AbandonedShip_Rooms2_1F_Text_2385F2, AbandonedShip_Rooms2_1F_Text_238668
+	trainerbattle_rematch_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_238556, AbandonedShip_Rooms2_1F_Text_2385F2, AbandonedShip_Rooms2_1F_Text_238668
 	msgbox AbandonedShip_Rooms2_1F_Text_23860B, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_23816F:: @ 823816F
-	trainerbattle 0, TRAINER_JANI, 0, AbandonedShip_Rooms2_1F_Text_2386B4, AbandonedShip_Rooms2_1F_Text_2386E8
+	trainerbattle_normal TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_2386B4, AbandonedShip_Rooms2_1F_Text_2386E8
 	msgbox AbandonedShip_Rooms2_1F_Text_238708, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_238186:: @ 8238186
-	trainerbattle 0, TRAINER_GARRISON, 0, AbandonedShip_Rooms2_1F_Text_23873F, AbandonedShip_Rooms2_1F_Text_238779
+	trainerbattle_normal TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_23873F, AbandonedShip_Rooms2_1F_Text_238779
 	msgbox AbandonedShip_Rooms2_1F_Text_2387A9, MSGBOX_AUTOCLOSE
 	end
 
@@ -149,4 +149,3 @@ AbandonedShip_Rooms2_1F_Text_238779: @ 8238779
 AbandonedShip_Rooms2_1F_Text_2387A9: @ 82387A9
 	.string "In a cabin somewhere on board,\n"
 	.string "I saw something sparkle.$"
-

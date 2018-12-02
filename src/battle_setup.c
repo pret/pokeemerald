@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/trainers.h"
 #include "battle.h"
+#include "constants/battle_setup.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "main.h"

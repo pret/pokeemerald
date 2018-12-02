@@ -888,19 +888,19 @@ RustboroCity_EventScript_1E10D6:: @ 81E10D6
 	return
 
 RustboroCity_EventScript_1E10DB:: @ 81E10DB
-	trainerbattle 3, TRAINER_MAY_14, 0, RustboroCity_Text_1E1CC1
+	trainerbattle_no_intro TRAINER_MAY_14, RustboroCity_Text_1E1CC1
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E10EE:: @ 81E10EE
-	trainerbattle 3, TRAINER_MAY_15, 0, RustboroCity_Text_1E1CC1
+	trainerbattle_no_intro TRAINER_MAY_15, RustboroCity_Text_1E1CC1
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E1101:: @ 81E1101
-	trainerbattle 3, TRAINER_MAY_10, 0, RustboroCity_Text_1E1CC1
+	trainerbattle_no_intro TRAINER_MAY_10, RustboroCity_Text_1E1CC1
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E10C1
 	end
@@ -954,19 +954,19 @@ RustboroCity_EventScript_1E11C0:: @ 81E11C0
 	end
 
 RustboroCity_EventScript_1E11D5:: @ 81E11D5
-	trainerbattle 3, TRAINER_BRENDAN_10, 0, RustboroCity_Text_1E1FE9
+	trainerbattle_no_intro TRAINER_BRENDAN_10, RustboroCity_Text_1E1FE9
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E11C0
 	end
 
 RustboroCity_EventScript_1E11E8:: @ 81E11E8
-	trainerbattle 3, TRAINER_BRENDAN_12, 0, RustboroCity_Text_1E1FE9
+	trainerbattle_no_intro TRAINER_BRENDAN_12, RustboroCity_Text_1E1FE9
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E11C0
 	end
 
 RustboroCity_EventScript_1E11FB:: @ 81E11FB
-	trainerbattle 3, TRAINER_BRENDAN_11, 0, RustboroCity_Text_1E1FE9
+	trainerbattle_no_intro TRAINER_BRENDAN_11, RustboroCity_Text_1E1FE9
 	setflag FLAG_0x0D3
 	goto RustboroCity_EventScript_1E11C0
 	end

@@ -54,19 +54,19 @@ MossdeepCity_SpaceCenter_2F_Movement_223E07: @ 8223E07
 
 MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	msgbox MossdeepCity_SpaceCenter_2F_Text_22442D, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_GRUNT_34, 0, MossdeepCity_SpaceCenter_2F_Text_224461
+	trainerbattle_no_intro TRAINER_GRUNT_34, MossdeepCity_SpaceCenter_2F_Text_224461
 	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_223E85
 	waitmovement 0
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_2725A4
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_22446E, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_GRUNT_35, 0, MossdeepCity_SpaceCenter_2F_Text_224499
+	trainerbattle_no_intro TRAINER_GRUNT_35, MossdeepCity_SpaceCenter_2F_Text_224499
 	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_223E81
 	waitmovement 0
 	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_2725A8
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2244AB, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_GRUNT_36, 0, MossdeepCity_SpaceCenter_2F_Text_2244F1
+	trainerbattle_no_intro TRAINER_GRUNT_36, MossdeepCity_SpaceCenter_2F_Text_2244F1
 	applymovement 7, MossdeepCity_SpaceCenter_2F_Movement_223E89
 	waitmovement 0
 	setvar VAR_0x409F, 2
@@ -343,11 +343,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_224152:: @ 8224152
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_224157:: @ 8224157
-	trainerbattle 10, TRAINER_MAXIE_3, 0, MossdeepCity_SpaceCenter_2F_Text_22487C, MossdeepCity_SpaceCenter_2F_Text_22487C
+	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, TRAINER_MAXIE_3, 0, MossdeepCity_SpaceCenter_2F_Text_22487C, MossdeepCity_SpaceCenter_2F_Text_22487C
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_224166:: @ 8224166
-	trainerbattle 11, TRAINER_TABITHA_1, 0, MossdeepCity_SpaceCenter_Text_2248AD, MossdeepCity_SpaceCenter_Text_2248AD
+	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, TRAINER_TABITHA_1, 0, MossdeepCity_SpaceCenter_Text_2248AD, MossdeepCity_SpaceCenter_Text_2248AD
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_224175:: @ 8224175

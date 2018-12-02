@@ -18,7 +18,7 @@ Route102_EventScript_1EC0FC:: @ 81EC0FC
 	end
 
 Route102_EventScript_1EC105:: @ 81EC105
-	trainerbattle 2, TRAINER_CALVIN_1, 0, Route102_Text_294513, Route102_Text_29457C, Route102_EventScript_1EC146
+	trainerbattle_normal TRAINER_CALVIN_1, Route102_Text_294513, Route102_Text_29457C, Route102_EventScript_1EC146
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_1EC19C
@@ -58,22 +58,22 @@ Route102_EventScript_1EC183:: @ 81EC183
 	end
 
 Route102_EventScript_1EC19C:: @ 81EC19C
-	trainerbattle 5, TRAINER_CALVIN_1, 0, Route102_Text_2946AE, Route102_Text_29470C
+	trainerbattle_rematch TRAINER_CALVIN_1, Route102_Text_2946AE, Route102_Text_29470C
 	msgbox Route102_Text_29473C, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_1EC1B3:: @ 81EC1B3
-	trainerbattle 0, TRAINER_RICK, 0, Route102_Text_29480C, Route102_Text_294847
+	trainerbattle_normal TRAINER_RICK, Route102_Text_29480C, Route102_Text_294847
 	msgbox Route102_Text_294859, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_1EC1CA:: @ 81EC1CA
-	trainerbattle 0, TRAINER_TIANA, 0, Route102_Text_29489E, Route102_Text_2948F3
+	trainerbattle_normal TRAINER_TIANA, Route102_Text_29489E, Route102_Text_2948F3
 	msgbox Route102_Text_294916, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_1EC1E1:: @ 81EC1E1
-	trainerbattle 0, TRAINER_ALLEN, 0, Route102_Text_294775, Route102_Text_2947AA
+	trainerbattle_normal TRAINER_ALLEN, Route102_Text_294775, Route102_Text_2947AA
 	msgbox Route102_Text_2947DB, MSGBOX_AUTOCLOSE
 	end
 

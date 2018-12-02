@@ -6,17 +6,17 @@ Route106_EventScript_1EE48A:: @ 81EE48A
 	end
 
 Route106_EventScript_1EE493:: @ 81EE493
-	trainerbattle 0, TRAINER_DOUGLAS, 0, Route106_Text_2965BB, Route106_Text_2965FD
+	trainerbattle_normal TRAINER_DOUGLAS, Route106_Text_2965BB, Route106_Text_2965FD
 	msgbox Route106_Text_296608, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_1EE4AA:: @ 81EE4AA
-	trainerbattle 0, TRAINER_KYLA, 0, Route106_Text_296628, Route106_Text_296674
+	trainerbattle_normal TRAINER_KYLA, Route106_Text_296628, Route106_Text_296674
 	msgbox Route106_Text_29669E, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_1EE4C1:: @ 81EE4C1
-	trainerbattle 2, TRAINER_ELLIOT_1, 0, Route106_Text_296327, Route106_Text_29635C, Route106_EventScript_1EE4ED
+	trainerbattle_normal TRAINER_ELLIOT_1, Route106_Text_296327, Route106_Text_29635C, Route106_EventScript_1EE4ED
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route106_EventScript_1EE50C
@@ -33,12 +33,12 @@ Route106_EventScript_1EE4ED:: @ 81EE4ED
 	end
 
 Route106_EventScript_1EE50C:: @ 81EE50C
-	trainerbattle 5, TRAINER_ELLIOT_1, 0, Route106_Text_29642E, Route106_Text_296477
+	trainerbattle_rematch TRAINER_ELLIOT_1, Route106_Text_29642E, Route106_Text_296477
 	msgbox Route106_Text_296493, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_1EE523:: @ 81EE523
-	trainerbattle 0, TRAINER_NED, 0, Route106_Text_2964D4, Route106_Text_296553
+	trainerbattle_normal TRAINER_NED, Route106_Text_2964D4, Route106_Text_296553
 	msgbox Route106_Text_296588, MSGBOX_AUTOCLOSE
 	end
 
