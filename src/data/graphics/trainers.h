@@ -151,11 +151,11 @@ const u32 gTrainerPalette_SchoolKidF[] = INCBIN_U32("graphics/trainers/palettes/
 const u32 gTrainerFrontPic_SrAndJr[] = INCBIN_U32("graphics/trainers/front_pics/sr_and_jr_front_pic.4bpp.lz");
 const u32 gTrainerPalette_SrAndJr[] = INCBIN_U32("graphics/trainers/palettes/sr_and_jr.gbapal.lz");
 
-const u32 gTrainerFrontPic_WinstrateM[] = INCBIN_U32("graphics/trainers/front_pics/winstrate_m_front_pic.4bpp.lz");
-const u32 gTrainerPalette_WinstrateM[] = INCBIN_U32("graphics/trainers/palettes/winstrate_m.gbapal.lz");
+const u32 gTrainerFrontPic_PokefanM[] = INCBIN_U32("graphics/trainers/front_pics/pokefan_m_front_pic.4bpp.lz");
+const u32 gTrainerPalette_PokefanM[] = INCBIN_U32("graphics/trainers/palettes/pokefan_m.gbapal.lz");
 
-const u32 gTrainerFrontPic_WinstrateF[] = INCBIN_U32("graphics/trainers/front_pics/winstrate_f_front_pic.4bpp.lz");
-const u32 gTrainerPalette_WinstrateF[] = INCBIN_U32("graphics/trainers/palettes/winstrate_f.gbapal.lz");
+const u32 gTrainerFrontPic_PokefanF[] = INCBIN_U32("graphics/trainers/front_pics/pokefan_f_front_pic.4bpp.lz");
+const u32 gTrainerPalette_PokefanF[] = INCBIN_U32("graphics/trainers/palettes/pokefan_f.gbapal.lz");
 
 const u32 gTrainerFrontPic_Youngster[] = INCBIN_U32("graphics/trainers/front_pics/youngster_front_pic.4bpp.lz");
 const u32 gTrainerPalette_Youngster[] = INCBIN_U32("graphics/trainers/palettes/youngster.gbapal.lz");
