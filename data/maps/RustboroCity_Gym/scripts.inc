@@ -8,7 +8,7 @@ RustboroCity_Gym_EventScript_212F31:: @ 8212F31
 	goto_eq RustboroCity_Gym_EventScript_212FC8
 	checkflag FLAG_0x0A5
 	goto_if 0, RustboroCity_Gym_EventScript_212FA4
-	msgbox RustboroCity_Gym_Text_2139A7, 4
+	msgbox RustboroCity_Gym_Text_2139A7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -16,7 +16,7 @@ RustboroCity_Gym_EventScript_212F66:: @ 8212F66
 	message RustboroCity_Gym_Text_2137EC
 	waitmessage
 	call RustboroCity_Gym_EventScript_27207E
-	msgbox RustboroCity_Gym_Text_213816, 4
+	msgbox RustboroCity_Gym_Text_213816, MSGBOX_DEFAULT
 	setflag FLAG_0x4F0
 	setflag FLAG_BADGE01_GET
 	setvar VAR_0x405A, 1
@@ -33,28 +33,28 @@ RustboroCity_Gym_EventScript_212FA4:: @ 8212FA4
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_Gym_EventScript_272054
 	setflag FLAG_0x0A5
-	msgbox RustboroCity_Gym_Text_2138B1, 4
+	msgbox RustboroCity_Gym_Text_2138B1, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_Gym_EventScript_212FC8:: @ 8212FC8
 	trainerbattle 7, TRAINER_ROXANNE_1, 0, RustboroCity_Gym_Text_213C2F, RustboroCity_Gym_Text_213CF9, RustboroCity_Gym_Text_213D93
-	msgbox RustboroCity_Gym_Text_213D12, 6
+	msgbox RustboroCity_Gym_Text_213D12, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_212FE3:: @ 8212FE3
 	trainerbattle 0, TRAINER_JOSH, 0, RustboroCity_Gym_Text_2133E9, RustboroCity_Gym_Text_21342D
-	msgbox RustboroCity_Gym_Text_213447, 6
+	msgbox RustboroCity_Gym_Text_213447, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_212FFA:: @ 8212FFA
 	trainerbattle 0, TRAINER_TOMMY, 0, RustboroCity_Gym_Text_213486, RustboroCity_Gym_Text_2134C6
-	msgbox RustboroCity_Gym_Text_2134E6, 6
+	msgbox RustboroCity_Gym_Text_2134E6, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_213011:: @ 8213011
 	trainerbattle 0, TRAINER_MARC, 0, RustboroCity_Gym_Text_213533, RustboroCity_Gym_Text_213589
-	msgbox RustboroCity_Gym_Text_2135C0, 6
+	msgbox RustboroCity_Gym_Text_2135C0, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_213028:: @ 8213028
@@ -62,12 +62,12 @@ RustboroCity_Gym_EventScript_213028:: @ 8213028
 	faceplayer
 	checkflag FLAG_0x4F0
 	goto_eq RustboroCity_Gym_EventScript_21303D
-	msgbox RustboroCity_Gym_Text_21309D, 4
+	msgbox RustboroCity_Gym_Text_21309D, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_Gym_EventScript_21303D:: @ 821303D
-	msgbox RustboroCity_Gym_Text_2132E2, 4
+	msgbox RustboroCity_Gym_Text_2132E2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -86,12 +86,12 @@ RustboroCity_Gym_EventScript_213057:: @ 8213057
 	end
 
 RustboroCity_Gym_EventScript_213067:: @ 8213067
-	msgbox RustboroCity_Gym_Text_213A3B, 4
+	msgbox RustboroCity_Gym_Text_213A3B, MSGBOX_DEFAULT
 	releaseall
 	end
 
 RustboroCity_Gym_EventScript_213071:: @ 8213071
-	msgbox RustboroCity_Gym_Text_213A21, 4
+	msgbox RustboroCity_Gym_Text_213A21, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -101,7 +101,7 @@ RustboroCity_Gym_EventScript_21307B:: @ 821307B
 	waitmessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox RustboroCity_Gym_Text_213C01, 4
+	msgbox RustboroCity_Gym_Text_213C01, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30

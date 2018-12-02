@@ -66,7 +66,7 @@ IslandCave_EventScript_238EEF:: @ 8238EEF
 	end
 
 IslandCave_EventScript_238F13:: @ 8238F13
-	msgbox gUnknown_0827304E, 4
+	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
 	releaseall
 	end
 

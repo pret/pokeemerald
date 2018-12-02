@@ -4,10 +4,10 @@ BirthIsland_Harbor_MapScripts:: @ 826805C
 BirthIsland_Harbor_EventScript_26805D:: @ 826805D
 	lock
 	faceplayer
-	msgbox BirthIsland_Harbor_Text_2C6B90, 5
+	msgbox BirthIsland_Harbor_Text_2C6B90, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BirthIsland_Harbor_EventScript_2680A2
-	msgbox BirthIsland_Harbor_Text_2A6A5D, 4
+	msgbox BirthIsland_Harbor_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, BirthIsland_Harbor_Movement_2725AA
 	waitmovement 0
@@ -21,7 +21,7 @@ BirthIsland_Harbor_EventScript_26805D:: @ 826805D
 	end
 
 BirthIsland_Harbor_EventScript_2680A2:: @ 82680A2
-	msgbox BirthIsland_Harbor_Text_2A6A82, 4
+	msgbox BirthIsland_Harbor_Text_2A6A82, MSGBOX_DEFAULT
 	release
 	end
 

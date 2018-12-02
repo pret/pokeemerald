@@ -2,15 +2,15 @@ LilycoveCity_DepartmentStore_4F_MapScripts:: @ 821FDEA
 	.byte 0
 
 LilycoveCity_DepartmentStore_4F_EventScript_21FDEB:: @ 821FDEB
-	msgbox LilycoveCity_DepartmentStore_4F_Text_21FE50, 2
+	msgbox LilycoveCity_DepartmentStore_4F_Text_21FE50, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_21FDF4:: @ 821FDF4
-	msgbox LilycoveCity_DepartmentStore_4F_Text_21FEC7, 2
+	msgbox LilycoveCity_DepartmentStore_4F_Text_21FEC7, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_21FDFD:: @ 821FDFD
-	msgbox LilycoveCity_DepartmentStore_4F_Text_21FF2D, 2
+	msgbox LilycoveCity_DepartmentStore_4F_Text_21FF2D, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_21FE06:: @ 821FE06
@@ -19,7 +19,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_21FE06:: @ 821FE06
 	message gUnknown_08272A21
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_21FE20
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -39,7 +39,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_21FE2C:: @ 821FE2C
 	message gUnknown_08272A21
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_21FE44
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 

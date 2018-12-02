@@ -3,32 +3,32 @@ VictoryRoad_B2F_MapScripts:: @ 82368D4
 
 VictoryRoad_B2F_EventScript_2368D5:: @ 82368D5
 	trainerbattle 0, TRAINER_VITO, 0, VictoryRoad_B2F_Text_23695F, VictoryRoad_B2F_Text_2369B3
-	msgbox VictoryRoad_B2F_Text_2369DE, 6
+	msgbox VictoryRoad_B2F_Text_2369DE, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_2368EC:: @ 82368EC
 	trainerbattle 0, TRAINER_OWEN, 0, VictoryRoad_B2F_Text_236A4C, VictoryRoad_B2F_Text_236A92
-	msgbox VictoryRoad_B2F_Text_236AAE, 6
+	msgbox VictoryRoad_B2F_Text_236AAE, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_236903:: @ 8236903
 	trainerbattle 0, TRAINER_CAROLINE, 0, VictoryRoad_B2F_Text_236AF0, VictoryRoad_B2F_Text_236B14
-	msgbox VictoryRoad_B2F_Text_236B2F, 6
+	msgbox VictoryRoad_B2F_Text_236B2F, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_23691A:: @ 823691A
 	trainerbattle 0, TRAINER_JULIE, 0, VictoryRoad_B2F_Text_236B88, VictoryRoad_B2F_Text_236C0A
-	msgbox VictoryRoad_B2F_Text_236C21, 6
+	msgbox VictoryRoad_B2F_Text_236C21, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_236931:: @ 8236931
 	trainerbattle 0, TRAINER_FELIX, 0, VictoryRoad_B2F_Text_236C67, VictoryRoad_B2F_Text_236CAB
-	msgbox VictoryRoad_B2F_Text_236CBA, 6
+	msgbox VictoryRoad_B2F_Text_236CBA, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_236948:: @ 8236948
 	trainerbattle 0, TRAINER_DIANNE, 0, VictoryRoad_B2F_Text_236D27, VictoryRoad_B2F_Text_236D6E
-	msgbox VictoryRoad_B2F_Text_236D8C, 6
+	msgbox VictoryRoad_B2F_Text_236D8C, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_Text_23695F: @ 823695F

@@ -11,13 +11,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_270A32:: @ 8270A32
 	faceplayer
 	checkflag FLAG_0x0D9
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270A4E
-	msgbox Route124_DivingTreasureHuntersHouse_Text_270F6C, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_270F6C, MSGBOX_DEFAULT
 	setflag FLAG_0x0D9
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270A5C
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270A4E:: @ 8270A4E
-	msgbox Route124_DivingTreasureHuntersHouse_Text_270FE5, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_270FE5, MSGBOX_DEFAULT
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270A5C
 	end
 
@@ -61,7 +61,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270ACA:: @ 8270ACA
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_270AD0:: @ 8270AD0
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271098, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271098, MSGBOX_DEFAULT
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270ADE
 	end
 
@@ -246,7 +246,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270EB1:: @ 8270EB1
 Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0
 	bufferitemname 0, VAR_0x8008
 	bufferitemname 1, VAR_0x8009
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271132, 5
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271132, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	checkitemspace VAR_0x8009, 1
@@ -261,28 +261,28 @@ Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0
 Route124_DivingTreasureHuntersHouse_EventScript_270F01:: @ 8270F01
 	takeitem VAR_0x8008, 1
 	giveitem_std VAR_0x8009
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271158, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271158, MSGBOX_DEFAULT
 	call Route124_DivingTreasureHuntersHouse_EventScript_270A72
 	compare VAR_TEMP_1, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F61
-	msgbox Route124_DivingTreasureHuntersHouse_Text_27117B, 5
+	msgbox Route124_DivingTreasureHuntersHouse_Text_27117B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270ADE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F43:: @ 8270F43
-	msgbox Route124_DivingTreasureHuntersHouse_Text_2711A0, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_2711A0, MSGBOX_DEFAULT
 	release
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F4D:: @ 8270F4D
-	msgbox Route124_DivingTreasureHuntersHouse_Text_2711D8, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_2711D8, MSGBOX_DEFAULT
 	release
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F57:: @ 8270F57
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271027, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271027, MSGBOX_DEFAULT
 	release
 	end
 
@@ -291,7 +291,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270F61:: @ 8270F61
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F63:: @ 8270F63
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271217, 3
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271217, MSGBOX_SIGN
 	end
 
 Route124_DivingTreasureHuntersHouse_Text_270F6C: @ 8270F6C

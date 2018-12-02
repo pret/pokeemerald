@@ -28,38 +28,38 @@ RustboroCity_DevonCorp_3F_MapScript2_212464: @ 8212464
 
 RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	lockall
-	msgbox RustboroCity_DevonCorp_3F_Text_212C37, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212C37, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212546
 	waitmovement 0
 	delay 80
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_21254F
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_3F_Text_212DE8, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212DE8, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_TSURETEK, 0
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212534
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_212558
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_3F_Text_212E2F, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212E2F, MSGBOX_DEFAULT
 	closemessage
 	fadedefaultbgm
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212543
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_212566
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_3F_Text_212609, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212609, MSGBOX_DEFAULT
 	giveitem_std ITEM_LETTER
-	msgbox RustboroCity_DevonCorp_3F_Text_21277C, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_21277C, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_3F_Text_212820
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
 	setflag FLAG_0x0BC
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
-	msgbox RustboroCity_DevonCorp_3F_Text_212837, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212837, MSGBOX_DEFAULT
 	closemessage
 	call RustboroCity_DevonCorp_3F_EventScript_272083
-	msgbox RustboroCity_DevonCorp_3F_Text_2129D2, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_2129D2, MSGBOX_DEFAULT
 	setflag FLAG_HIDE_ROUTE_116_TUNNELER
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
@@ -154,7 +154,7 @@ RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 	goto_eq RustboroCity_DevonCorp_3F_EventScript_2125CC
 	checkflag FLAG_0x0BD
 	goto_eq RustboroCity_DevonCorp_3F_EventScript_212595
-	msgbox RustboroCity_DevonCorp_3F_Text_212A09, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212A09, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
 	waitmovement 0
@@ -162,12 +162,12 @@ RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
-	msgbox RustboroCity_DevonCorp_3F_Text_212A29, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212A29, MSGBOX_DEFAULT
 	giveitem_std ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_3F_EventScript_272054
 	setflag FLAG_0x110
-	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
 	waitmovement 0
@@ -175,7 +175,7 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_2125CC:: @ 82125CC
-	msgbox RustboroCity_DevonCorp_3F_Text_212B78, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212B78, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
 	waitmovement 0
@@ -187,17 +187,17 @@ RustboroCity_DevonCorp_3F_EventScript_2125E1:: @ 82125E1
 	faceplayer
 	checkflag FLAG_0x100
 	goto_eq RustboroCity_DevonCorp_3F_EventScript_2125F6
-	msgbox RustboroCity_DevonCorp_3F_Text_212E41, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212E41, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_2125F6:: @ 82125F6
-	msgbox RustboroCity_DevonCorp_3F_Text_212E88, 4
+	msgbox RustboroCity_DevonCorp_3F_Text_212E88, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_212600:: @ 8212600
-	msgbox RustboroCity_DevonCorp_3F_Text_212EE9, 3
+	msgbox RustboroCity_DevonCorp_3F_Text_212EE9, MSGBOX_SIGN
 	end
 
 RustboroCity_DevonCorp_3F_Text_212609: @ 8212609

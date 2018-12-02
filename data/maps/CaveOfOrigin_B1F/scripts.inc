@@ -4,7 +4,7 @@ CaveOfOrigin_B1F_MapScripts:: @ 82357A8
 CaveOfOrigin_B1F_EventScript_2357A9:: @ 82357A9
 	lock
 	faceplayer
-	msgbox CaveOfOrigin_B1F_Text_23586E, 4
+	msgbox CaveOfOrigin_B1F_Text_23586E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, CaveOfOrigin_B1F_Movement_2725A6
 	waitmovement 0
@@ -47,7 +47,7 @@ CaveOfOrigin_B1F_EventScript_235842:: @ 8235842
 	goto CaveOfOrigin_B1F_EventScript_2357F0
 
 CaveOfOrigin_B1F_EventScript_23584D:: @ 823584D
-	msgbox CaveOfOrigin_B1F_Text_235CEE, 4
+	msgbox CaveOfOrigin_B1F_Text_235CEE, MSGBOX_DEFAULT
 	closemessage
 	playse SE_KAIDAN
 	fadescreenspeed 1, 4

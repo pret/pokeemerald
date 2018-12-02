@@ -6,23 +6,23 @@ MossdeepCity_House3_EventScript_2225C3:: @ 82225C3
 	faceplayer
 	checkflag FLAG_0x098
 	goto_eq MossdeepCity_House3_EventScript_222602
-	msgbox MossdeepCity_House3_Text_222616, 5
+	msgbox MossdeepCity_House3_Text_222616, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_House3_EventScript_22260C
-	msgbox MossdeepCity_House3_Text_2226B6, 4
+	msgbox MossdeepCity_House3_Text_2226B6, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUPER_ROD
 	setflag FLAG_0x098
-	msgbox MossdeepCity_House3_Text_2226F0, 4
+	msgbox MossdeepCity_House3_Text_2226F0, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_House3_EventScript_222602:: @ 8222602
-	msgbox MossdeepCity_House3_Text_222751, 4
+	msgbox MossdeepCity_House3_Text_222751, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_House3_EventScript_22260C:: @ 822260C
-	msgbox MossdeepCity_House3_Text_222733, 4
+	msgbox MossdeepCity_House3_Text_222733, MSGBOX_DEFAULT
 	release
 	end
 

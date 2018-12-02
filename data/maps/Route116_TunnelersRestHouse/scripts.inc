@@ -7,11 +7,11 @@ Route116_TunnelersRestHouse_MapScript1_22B856: @ 822B856
 	end
 
 Route116_TunnelersRestHouse_EventScript_22B85A:: @ 822B85A
-	msgbox Route116_TunnelersRestHouse_Text_22B88B, 2
+	msgbox Route116_TunnelersRestHouse_Text_22B88B, MSGBOX_NPC
 	end
 
 Route116_TunnelersRestHouse_EventScript_22B863:: @ 822B863
-	msgbox Route116_TunnelersRestHouse_Text_22B99F, 2
+	msgbox Route116_TunnelersRestHouse_Text_22B99F, MSGBOX_NPC
 	end
 
 Route116_TunnelersRestHouse_EventScript_22B86C:: @ 822B86C
@@ -19,12 +19,12 @@ Route116_TunnelersRestHouse_EventScript_22B86C:: @ 822B86C
 	faceplayer
 	checkflag FLAG_RUSTURF_TUNNEL_OPENED
 	goto_eq Route116_TunnelersRestHouse_EventScript_22B881
-	msgbox Route116_TunnelersRestHouse_Text_22BAAF, 4
+	msgbox Route116_TunnelersRestHouse_Text_22BAAF, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_TunnelersRestHouse_EventScript_22B881:: @ 822B881
-	msgbox Route116_TunnelersRestHouse_Text_22BB3B, 4
+	msgbox Route116_TunnelersRestHouse_Text_22BB3B, MSGBOX_DEFAULT
 	release
 	end
 

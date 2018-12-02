@@ -7,7 +7,7 @@ FallarborTown_House2_EventScript_201383:: @ 8201383
 	waitmovement 0
 	checkflag FLAG_TEMP_1
 	goto_eq FallarborTown_House2_EventScript_2013A8
-	msgbox FallarborTown_House2_Text_20145C, 4
+	msgbox FallarborTown_House2_Text_20145C, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
 	goto FallarborTown_House2_EventScript_2013A8
 	end
@@ -16,14 +16,14 @@ FallarborTown_House2_EventScript_2013A8:: @ 82013A8
 	checkitem ITEM_HEART_SCALE, 1
 	compare VAR_RESULT, 0
 	goto_eq FallarborTown_House2_EventScript_201452
-	msgbox FallarborTown_House2_Text_201541, 5
+	msgbox FallarborTown_House2_Text_201541, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, FallarborTown_House2_EventScript_201452
 	goto FallarborTown_House2_EventScript_2013D6
 	end
 
 FallarborTown_House2_EventScript_2013D6:: @ 82013D6
-	msgbox FallarborTown_House2_Text_2015A5, 4
+	msgbox FallarborTown_House2_Text_2015A5, MSGBOX_DEFAULT
 	special sub_81B951C
 	waitstate
 	compare VAR_0x8004, 255
@@ -37,28 +37,28 @@ FallarborTown_House2_EventScript_2013D6:: @ 82013D6
 	end
 
 FallarborTown_House2_EventScript_20140C:: @ 820140C
-	msgbox FallarborTown_House2_Text_2015C3, 4
+	msgbox FallarborTown_House2_Text_2015C3, MSGBOX_DEFAULT
 	special TeachMoveTutorMove
 	waitstate
 	compare VAR_0x8004, 0
 	goto_eq FallarborTown_House2_EventScript_2013D6
-	msgbox FallarborTown_House2_Text_201627, 4
+	msgbox FallarborTown_House2_Text_201627, MSGBOX_DEFAULT
 	takeitem ITEM_HEART_SCALE, 1
 	goto FallarborTown_House2_EventScript_201452
 	end
 
 FallarborTown_House2_EventScript_201436:: @ 8201436
-	msgbox FallarborTown_House2_Text_2015DE, 4
+	msgbox FallarborTown_House2_Text_2015DE, MSGBOX_DEFAULT
 	goto FallarborTown_House2_EventScript_2013D6
 	end
 
 FallarborTown_House2_EventScript_201444:: @ 8201444
-	msgbox FallarborTown_House2_Text_201697, 4
+	msgbox FallarborTown_House2_Text_201697, MSGBOX_DEFAULT
 	goto FallarborTown_House2_EventScript_2013D6
 	end
 
 FallarborTown_House2_EventScript_201452:: @ 8201452
-	msgbox FallarborTown_House2_Text_201653, 4
+	msgbox FallarborTown_House2_Text_201653, MSGBOX_DEFAULT
 	releaseall
 	end
 

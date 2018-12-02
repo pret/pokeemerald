@@ -3,12 +3,12 @@ PetalburgCity_PokemonCenter_1F_EventScript_291539:: @ 8291539
 	faceplayer
 	checkflag FLAG_SYS_CHAT_USED
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915F5
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291687, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291687, MSGBOX_DEFAULT
 	goto PetalburgCity_PokemonCenter_1F_EventScript_291552
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291552:: @ 8291552
-	msgbox PetalburgCity_PokemonCenter_1F_Text_2916FF, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_2916FF, MSGBOX_DEFAULT
 	multichoice 17, 6, 20, 0
 	switch VAR_RESULT
 	case 0, PetalburgCity_PokemonCenter_1F_EventScript_29159F
@@ -18,12 +18,12 @@ PetalburgCity_PokemonCenter_1F_EventScript_291552:: @ 8291552
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291591:: @ 8291591
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291729, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291729, MSGBOX_DEFAULT
 	goto PetalburgCity_PokemonCenter_1F_EventScript_291552
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_29159F:: @ 829159F
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291969, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291969, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_271E7C
@@ -36,7 +36,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_29159F:: @ 829159F
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_2915CB:: @ 82915CB
-	msgbox PetalburgCity_PokemonCenter_1F_Text_2919DC, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_2919DC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -45,22 +45,22 @@ PetalburgCity_PokemonCenter_1F_EventScript_2915D5:: @ 82915D5
 	special sub_811EECC
 	waitmessage
 	delay 80
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291B22, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291B22, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_2915EB:: @ 82915EB
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291991, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291991, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_2915F5:: @ 82915F5
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291A1B, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291A1B, MSGBOX_DEFAULT
 	goto PetalburgCity_PokemonCenter_1F_EventScript_291603
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291603:: @ 8291603
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291A4F, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291A4F, MSGBOX_DEFAULT
 	multichoice 17, 6, 20, 0
 	switch VAR_RESULT
 	case 0, PetalburgCity_PokemonCenter_1F_EventScript_291650
@@ -70,12 +70,12 @@ PetalburgCity_PokemonCenter_1F_EventScript_291603:: @ 8291603
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291642:: @ 8291642
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291729, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291729, MSGBOX_DEFAULT
 	goto PetalburgCity_PokemonCenter_1F_EventScript_291603
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_291650:: @ 8291650
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291A6B, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291A6B, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_271E7C
@@ -88,7 +88,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_291650:: @ 8291650
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_29167C:: @ 829167C
-	msgbox PetalburgCity_PokemonCenter_1F_Text_291ABA, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_291ABA, MSGBOX_DEFAULT
 	release
 	end
 

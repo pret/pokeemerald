@@ -12,7 +12,7 @@ Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	checkflag FLAG_0x083
 	goto_eq Route114_LanettesHouse_EventScript_22B2FF
 	setflag FLAG_SYS_PC_LANETTE
-	msgbox Route114_LanettesHouse_Text_22B34E, 4
+	msgbox Route114_LanettesHouse_Text_22B34E, MSGBOX_DEFAULT
 	givedecoration_std 99
 	compare VAR_RESULT, 0
 	goto_eq Route114_LanettesHouse_EventScript_272067
@@ -21,32 +21,32 @@ Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	end
 
 Route114_LanettesHouse_EventScript_22B2FF:: @ 822B2FF
-	msgbox Route114_LanettesHouse_Text_22B407, 4
+	msgbox Route114_LanettesHouse_Text_22B407, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 	lockall
-	msgbox Route114_LanettesHouse_Text_22B485, 5
+	msgbox Route114_LanettesHouse_Text_22B485, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route114_LanettesHouse_EventScript_22B327
-	msgbox Route114_LanettesHouse_Text_22B6E4, 4
+	msgbox Route114_LanettesHouse_Text_22B6E4, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route114_LanettesHouse_EventScript_22B327:: @ 822B327
-	msgbox Route114_LanettesHouse_Text_22B53C, 5
+	msgbox Route114_LanettesHouse_Text_22B53C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, Route114_LanettesHouse_EventScript_22B33C
 	releaseall
 	end
 
 Route114_LanettesHouse_EventScript_22B33C:: @ 822B33C
-	msgbox Route114_LanettesHouse_Text_22B5EF, 4
+	msgbox Route114_LanettesHouse_Text_22B5EF, MSGBOX_DEFAULT
 	return
 
 Route114_LanettesHouse_EventScript_22B345:: @ 822B345
-	msgbox Route114_LanettesHouse_Text_22B6FC, 3
+	msgbox Route114_LanettesHouse_Text_22B6FC, MSGBOX_SIGN
 	end
 
 Route114_LanettesHouse_Text_22B34E: @ 822B34E

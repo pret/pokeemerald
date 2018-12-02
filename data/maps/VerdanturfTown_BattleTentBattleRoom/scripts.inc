@@ -48,7 +48,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	waitmovement 0
 	setvar VAR_0x8004, 4
 	special sub_81B99B4
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7
 	switch VAR_RESULT
@@ -80,7 +80,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	applymovement 3, VerdanturfTown_BattleTentBattleRoom_Movement_2725AA
 	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_2725A6
 	waitmovement 0
-	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, 4
+	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
@@ -105,7 +105,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	case 2, VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20248A:: @ 820248A
-	msgbox VerdanturfTown_BattleTentBattleRoom_Text_250030, 5
+	msgbox VerdanturfTown_BattleTentBattleRoom_Text_250030, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 	case 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20251F

@@ -2,7 +2,7 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 820AD95
 	.byte 0
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AD96:: @ 820AD96
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AD9F:: @ 820AD9F
@@ -21,7 +21,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADB0:: @ 820ADB0
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	showmoneybox 0, 0, 0
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20AFD5, 5
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20AFD5, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20ADE8
 	closemessage
@@ -41,7 +41,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	takemoney 0x32, 0
 	updatemoneybox 0, 0
 	nop
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
 	setvar VAR_0x40AA, 1
 	hidemoneybox
 	nop
@@ -52,7 +52,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 	checkflag FLAG_0x095
 	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE39
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
 	nop
@@ -63,7 +63,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE39:: @ 820AE39
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B075, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B075, MSGBOX_DEFAULT
 	setvar VAR_0x40AA, 1
 	hidemoneybox
 	nop
@@ -76,79 +76,79 @@ SlateportCity_OceanicMuseum_1F_Movement_20AE4B: @ 820AE4B
 	step_end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE4D:: @ 820AE4D
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B0E8, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B0E8, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE56:: @ 820AE56
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B112, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B112, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE5F:: @ 820AE5F
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B165, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B165, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE68:: @ 820AE68
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B19C, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B19C, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE71:: @ 820AE71
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B1D4, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B1D4, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE7A:: @ 820AE7A
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B218, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B218, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE83:: @ 820AE83
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B4CF, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B4CF, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE8C:: @ 820AE8C
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B547, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B547, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE95:: @ 820AE95
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B5CA, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B5CA, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE9E:: @ 820AE9E
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B699, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B699, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEA7:: @ 820AEA7
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B74B, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B74B, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEB0:: @ 820AEB0
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B81F, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B81F, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEB9:: @ 820AEB9
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B912, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B912, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEC2:: @ 820AEC2
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B9C0, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B9C0, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AECB:: @ 820AECB
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20BA9C, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20BA9C, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AED4:: @ 820AED4
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B25F, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B25F, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEDD:: @ 820AEDD
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B2A2, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B2A2, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEE6:: @ 820AEE6
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B302, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B302, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEEF:: @ 820AEEF
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B369, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B369, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
@@ -160,12 +160,12 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	waitmovement 0
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_27259A
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B3AB, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B3AB, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM46
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AFB5
 	setflag FLAG_0x10D
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
@@ -205,7 +205,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AFAA:: @ 820AFAA
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AFB5:: @ 820AFB5
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B49B, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B49B, MSGBOX_DEFAULT
 	release
 	end
 

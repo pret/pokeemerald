@@ -16,15 +16,15 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2034B6:: @ 82034B6
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_2034C4:: @ 82034C4
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_2034DF, 2
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_2034DF, MSGBOX_NPC
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_2034CD:: @ 82034CD
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_20350F, 2
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_20350F, MSGBOX_NPC
 	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_2034D6:: @ 82034D6
-	msgbox PacifidlogTown_PokemonCenter_1F_Text_20356F, 2
+	msgbox PacifidlogTown_PokemonCenter_1F_Text_20356F, MSGBOX_NPC
 	end
 
 PacifidlogTown_PokemonCenter_1F_Text_2034DF: @ 82034DF

@@ -10,10 +10,10 @@ LilycoveCity_House3_MapScript1_21EE42: @ 821EE42
 LilycoveCity_House3_EventScript_21EE4B:: @ 821EE4B
 	lock
 	faceplayer
-	msgbox LilycoveCity_House3_Text_21EF99, 5
+	msgbox LilycoveCity_House3_Text_21EF99, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_House3_EventScript_21EE75
-	msgbox LilycoveCity_House3_Text_21F0F8, 4
+	msgbox LilycoveCity_House3_Text_21F0F8, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_2725A2
 	waitmovement 0
@@ -21,7 +21,7 @@ LilycoveCity_House3_EventScript_21EE4B:: @ 821EE4B
 	end
 
 LilycoveCity_House3_EventScript_21EE75:: @ 821EE75
-	msgbox LilycoveCity_House3_Text_21F0A9, 4
+	msgbox LilycoveCity_House3_Text_21F0A9, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_2725A2
 	waitmovement 0
@@ -31,7 +31,7 @@ LilycoveCity_House3_EventScript_21EE75:: @ 821EE75
 LilycoveCity_House3_EventScript_21EE8A:: @ 821EE8A
 	lock
 	faceplayer
-	msgbox LilycoveCity_House3_Text_21F430, 4
+	msgbox LilycoveCity_House3_Text_21F430, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_2725A2
 	waitmovement 0
@@ -79,22 +79,22 @@ LilycoveCity_House3_EventScript_21EF3D:: @ 821EF3D
 	end
 
 LilycoveCity_House3_EventScript_21EF71:: @ 821EF71
-	msgbox LilycoveCity_House3_Text_21F4A7, 4
+	msgbox LilycoveCity_House3_Text_21F4A7, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_House3_EventScript_21EF7B:: @ 821EF7B
-	msgbox LilycoveCity_House3_Text_21F4E0, 4
+	msgbox LilycoveCity_House3_Text_21F4E0, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_House3_EventScript_21EF85:: @ 821EF85
-	msgbox LilycoveCity_House3_Text_21F523, 4
+	msgbox LilycoveCity_House3_Text_21F523, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_House3_EventScript_21EF8F:: @ 821EF8F
-	msgbox LilycoveCity_House3_Text_21F55A, 4
+	msgbox LilycoveCity_House3_Text_21F55A, MSGBOX_DEFAULT
 	release
 	end
 

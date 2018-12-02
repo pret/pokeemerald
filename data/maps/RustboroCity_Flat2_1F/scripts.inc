@@ -2,7 +2,7 @@ RustboroCity_Flat2_1F_MapScripts:: @ 8215F76
 	.byte 0
 
 RustboroCity_Flat2_1F_EventScript_215F77:: @ 8215F77
-	msgbox RustboroCity_Flat2_1F_Text_215F93, 2
+	msgbox RustboroCity_Flat2_1F_Text_215F93, MSGBOX_NPC
 	end
 
 RustboroCity_Flat2_1F_EventScript_215F80:: @ 8215F80
@@ -10,7 +10,7 @@ RustboroCity_Flat2_1F_EventScript_215F80:: @ 8215F80
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox RustboroCity_Flat2_1F_Text_215FC6, 4
+	msgbox RustboroCity_Flat2_1F_Text_215FC6, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

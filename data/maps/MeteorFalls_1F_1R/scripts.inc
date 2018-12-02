@@ -22,7 +22,7 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	delay 30
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725B4
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22BF47, 4
+	msgbox MeteorFalls_1F_1R_Text_22BF47, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725A6
 	applymovement 6, MeteorFalls_1F_1R_Movement_2725A6
@@ -32,11 +32,11 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	waitmovement 0
 	applymovement 5, MeteorFalls_1F_1R_Movement_27259A
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22BF84, 4
+	msgbox MeteorFalls_1F_1R_Text_22BF84, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, MeteorFalls_1F_1R_Movement_22BEC0
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22BFE4, 4
+	msgbox MeteorFalls_1F_1R_Text_22BFE4, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MeteorFalls_1F_1R_Movement_2725A4
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725A4
@@ -53,7 +53,7 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725A4
 	applymovement 6, MeteorFalls_1F_1R_Movement_2725A4
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22C04E, 4
+	msgbox MeteorFalls_1F_1R_Text_22C04E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MeteorFalls_1F_1R_Movement_22BF1D
 	applymovement 5, MeteorFalls_1F_1R_Movement_22BEC4
@@ -63,18 +63,18 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	removeobject 6
 	applymovement 7, MeteorFalls_1F_1R_Movement_22BEF8
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22C11C, 4
+	msgbox MeteorFalls_1F_1R_Text_22C11C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 8, MeteorFalls_1F_1R_Movement_22BF08
 	applymovement 9, MeteorFalls_1F_1R_Movement_22BF18
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22C268, 4
+	msgbox MeteorFalls_1F_1R_Text_22C268, MSGBOX_DEFAULT
 	applymovement 7, MeteorFalls_1F_1R_Movement_2725AA
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22C292, 4
+	msgbox MeteorFalls_1F_1R_Text_22C292, MSGBOX_DEFAULT
 	applymovement 7, MeteorFalls_1F_1R_Movement_2725A4
 	waitmovement 0
-	msgbox MeteorFalls_1F_1R_Text_22C2FC, 4
+	msgbox MeteorFalls_1F_1R_Text_22C2FC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, MeteorFalls_1F_1R_Movement_22BEF0
 	applymovement 8, MeteorFalls_1F_1R_Movement_22BEFE
@@ -224,12 +224,12 @@ MeteorFalls_1F_1R_EventScript_22BF25:: @ 822BF25
 	checkflag FLAG_0x0F4
 	goto_eq MeteorFalls_1F_1R_EventScript_22BF3D
 	setflag FLAG_0x0F4
-	msgbox MeteorFalls_1F_1R_Text_22C342, 4
+	msgbox MeteorFalls_1F_1R_Text_22C342, MSGBOX_DEFAULT
 	release
 	end
 
 MeteorFalls_1F_1R_EventScript_22BF3D:: @ 822BF3D
-	msgbox MeteorFalls_1F_1R_Text_22C47D, 4
+	msgbox MeteorFalls_1F_1R_Text_22C47D, MSGBOX_DEFAULT
 	release
 	end
 

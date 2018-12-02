@@ -9,18 +9,18 @@ Route117_EventScript_291C18:: @ 8291C18
 	goto_eq Route117_EventScript_291CD1
 	compare VAR_RESULT, 3
 	goto_eq Route117_EventScript_291CE8
-	msgbox Route117_Text_291FCF, 4
+	msgbox Route117_Text_291FCF, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_291C4D:: @ 8291C4D
-	msgbox Route117_Text_29205D, 5
+	msgbox Route117_Text_29205D, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_291C83
-	msgbox Route117_Text_2922C6, 5
+	msgbox Route117_Text_2922C6, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_291C83
-	msgbox Route117_Text_292149, 4
+	msgbox Route117_Text_292149, MSGBOX_DEFAULT
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
 	release
@@ -30,7 +30,7 @@ Route117_EventScript_291C83:: @ 8291C83
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, 6
 	goto_if 5, Route117_EventScript_291C9D
-	msgbox Route117_Text_29216A, 4
+	msgbox Route117_Text_29216A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -39,7 +39,7 @@ Route117_EventScript_291C9D:: @ 8291C9D
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	msgbox Route117_Text_2921CF, 4
+	msgbox Route117_Text_2921CF, MSGBOX_DEFAULT
 	special GiveEggFromDaycare
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	release
@@ -52,12 +52,12 @@ Route117_EventScript_291CB7:: @ 8291CB7
 	return
 
 Route117_EventScript_291CC8:: @ 8291CC8
-	msgbox Route117_Text_2921E5, 4
+	msgbox Route117_Text_2921E5, MSGBOX_DEFAULT
 	return
 
 Route117_EventScript_291CD1:: @ 8291CD1
 	special GetDaycareMonNicknames
-	msgbox Route117_Text_292114, 4
+	msgbox Route117_Text_292114, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
 	call Route117_EventScript_291CB7
 	release
@@ -65,7 +65,7 @@ Route117_EventScript_291CD1:: @ 8291CD1
 
 Route117_EventScript_291CE8:: @ 8291CE8
 	special GetDaycareMonNicknames
-	msgbox Route117_Text_292299, 4
+	msgbox Route117_Text_292299, MSGBOX_DEFAULT
 	special SetDaycareCompatibilityString
 	special ShowFieldMessageStringVar4
 	waitmessage
@@ -87,10 +87,10 @@ Route117_PokemonDayCare_EventScript_291D11:: @ 8291D11
 	goto_eq Route117_PokemonDayCare_EventScript_291E2F
 	compare VAR_RESULT, 3
 	goto_eq Route117_PokemonDayCare_EventScript_291F5C
-	msgbox Route117_PokemonDayCare_Text_2922F4, 5
+	msgbox Route117_PokemonDayCare_Text_2922F4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291D56
-	msgbox Route117_PokemonDayCare_Text_292416, 4
+	msgbox Route117_PokemonDayCare_Text_292416, MSGBOX_DEFAULT
 	release
 	end
 
@@ -101,7 +101,7 @@ Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
 	specialvar VAR_RESULT, sub_80722E0
 	compare VAR_RESULT, 2
 	goto_eq Route117_PokemonDayCare_EventScript_291E01
-	msgbox Route117_PokemonDayCare_Text_292349, 4
+	msgbox Route117_PokemonDayCare_Text_292349, MSGBOX_DEFAULT
 	fadescreen 1
 	special ChooseSendDaycareMon
 	waitstate
@@ -113,7 +113,7 @@ Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	waitse
 	playmoncry VAR_0x8005, 0
-	msgbox Route117_PokemonDayCare_Text_292370, 4
+	msgbox Route117_PokemonDayCare_Text_292370, MSGBOX_DEFAULT
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
 	incrementgamestat 47
@@ -124,39 +124,39 @@ Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
 	end
 
 Route117_PokemonDayCare_EventScript_291DCA:: @ 8291DCA
-	msgbox Route117_PokemonDayCare_Text_292476, 4
+	msgbox Route117_PokemonDayCare_Text_292476, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_291DD4:: @ 8291DD4
-	msgbox Route117_PokemonDayCare_Text_2923AF, 5
+	msgbox Route117_PokemonDayCare_Text_2923AF, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291D56
 	goto Route117_PokemonDayCare_EventScript_291DCA
 	end
 
 Route117_PokemonDayCare_EventScript_291DED:: @ 8291DED
-	msgbox Route117_PokemonDayCare_Text_2925BB, 4
+	msgbox Route117_PokemonDayCare_Text_2925BB, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_291DF7:: @ 8291DF7
-	msgbox Route117_PokemonDayCare_Text_292617, 4
+	msgbox Route117_PokemonDayCare_Text_292617, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_291E01:: @ 8291E01
-	msgbox Route117_PokemonDayCare_Text_29266D, 4
+	msgbox Route117_PokemonDayCare_Text_29266D, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_291E0B:: @ 8291E0B
-	msgbox Route117_PokemonDayCare_Text_2923F6, 4
+	msgbox Route117_PokemonDayCare_Text_2923F6, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_291E15:: @ 8291E15
-	msgbox Route117_PokemonDayCare_Text_2924CC, 4
+	msgbox Route117_PokemonDayCare_Text_2924CC, MSGBOX_DEFAULT
 	return
 
 Route117_PokemonDayCare_EventScript_291E1E:: @ 8291E1E
@@ -166,13 +166,13 @@ Route117_PokemonDayCare_EventScript_291E1E:: @ 8291E1E
 	return
 
 Route117_PokemonDayCare_EventScript_291E2F:: @ 8291E2F
-	msgbox Route117_PokemonDayCare_Text_292488, 4
+	msgbox Route117_PokemonDayCare_Text_292488, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
 	call Route117_PokemonDayCare_EventScript_291E1E
-	msgbox Route117_PokemonDayCare_Text_2923AF, 5
+	msgbox Route117_PokemonDayCare_Text_2923AF, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291D56
-	msgbox Route117_PokemonDayCare_Text_2925F6, 5
+	msgbox Route117_PokemonDayCare_Text_2925F6, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291E6D
 	goto Route117_PokemonDayCare_EventScript_291DCA
@@ -196,7 +196,7 @@ Route117_PokemonDayCare_EventScript_291E6D:: @ 8291E6D
 
 Route117_PokemonDayCare_EventScript_291EAC:: @ 8291EAC
 	special GetDaycareCost
-	msgbox Route117_PokemonDayCare_Text_292549, 5
+	msgbox Route117_PokemonDayCare_Text_292549, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291EC8
 	goto Route117_PokemonDayCare_EventScript_291DCA
@@ -206,7 +206,7 @@ Route117_PokemonDayCare_EventScript_291EC8:: @ 8291EC8
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291EE2
-	msgbox Route117_PokemonDayCare_Text_292432, 4
+	msgbox Route117_PokemonDayCare_Text_292432, MSGBOX_DEFAULT
 	release
 	end
 
@@ -216,10 +216,10 @@ Route117_PokemonDayCare_EventScript_291EE2:: @ 8291EE2
 	specialvar VAR_RESULT, TakePokemonFromDaycare
 	special SubtractMoneyFromVar0x8005
 	playse SE_REGI
-	msgbox Route117_PokemonDayCare_Text_292575, 4
+	msgbox Route117_PokemonDayCare_Text_292575, MSGBOX_DEFAULT
 	waitse
 	playmoncry VAR_RESULT, 0
-	msgbox Route117_PokemonDayCare_Text_292593, 4
+	msgbox Route117_PokemonDayCare_Text_292593, MSGBOX_DEFAULT
 	waitmoncry
 	specialvar VAR_RESULT, GetDaycareState
 	compare VAR_RESULT, 2
@@ -228,14 +228,14 @@ Route117_PokemonDayCare_EventScript_291EE2:: @ 8291EE2
 	end
 
 Route117_PokemonDayCare_EventScript_291F24:: @ 8291F24
-	msgbox Route117_PokemonDayCare_Text_29244F, 5
+	msgbox Route117_PokemonDayCare_Text_29244F, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291E6D
 	goto Route117_PokemonDayCare_EventScript_291DCA
 	end
 
 Route117_PokemonDayCare_EventScript_291F3D:: @ 8291F3D
-	msgbox Route117_PokemonDayCare_Text_2924EF, 4
+	msgbox Route117_PokemonDayCare_Text_2924EF, MSGBOX_DEFAULT
 	release
 	end
 
@@ -265,15 +265,15 @@ Route117_PokemonDayCare_EventScript_291F5B:: @ 8291F5B
 	end
 
 Route117_PokemonDayCare_EventScript_291F5C:: @ 8291F5C
-	msgbox Route117_PokemonDayCare_Text_292488, 4
+	msgbox Route117_PokemonDayCare_Text_292488, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
 	call Route117_PokemonDayCare_EventScript_291E1E
 	setvar VAR_0x8004, 1
 	call Route117_PokemonDayCare_EventScript_291E1E
-	msgbox Route117_PokemonDayCare_Text_2925F6, 5
+	msgbox Route117_PokemonDayCare_Text_2925F6, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291E6D
-	msgbox Route117_PokemonDayCare_Text_292476, 4
+	msgbox Route117_PokemonDayCare_Text_292476, MSGBOX_DEFAULT
 	release
 	end
 
@@ -284,14 +284,14 @@ Route117_PokemonDayCare_EventScript_291F95:: @ 8291F95
 	goto_eq Route117_PokemonDayCare_EventScript_291DCA
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, TakePokemonFromDaycare
-	msgbox Route117_PokemonDayCare_Text_292575, 4
-	msgbox Route117_PokemonDayCare_Text_292476, 4
+	msgbox Route117_PokemonDayCare_Text_292575, MSGBOX_DEFAULT
+	msgbox Route117_PokemonDayCare_Text_292476, MSGBOX_DEFAULT
 	release
 	end
 
 EventScript_EggHatch:: @ 8291FC0
 	lockall
-	msgbox Text_292668, 4
+	msgbox Text_292668, MSGBOX_DEFAULT
 	special EggHatch
 	waitstate
 	releaseall

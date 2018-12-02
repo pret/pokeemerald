@@ -14,7 +14,7 @@ RustboroCity_Mart_EventScript_214F06:: @ 8214F06
 
 RustboroCity_Mart_EventScript_214F21:: @ 8214F21
 	pokemart RustboroCity_Mart_Pokemart_214F30
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -35,7 +35,7 @@ RustboroCity_Mart_Pokemart_214F30: @ 8214F30
 
 RustboroCity_Mart_EventScript_214F48:: @ 8214F48
 	pokemart RustboroCity_Mart_Pokemart_214F58
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -58,15 +58,15 @@ RustboroCity_Mart_Pokemart_214F58: @ 8214F58
 	end
 
 RustboroCity_Mart_EventScript_214F74:: @ 8214F74
-	msgbox RustboroCity_Mart_Text_214F8F, 2
+	msgbox RustboroCity_Mart_Text_214F8F, MSGBOX_NPC
 	end
 
 RustboroCity_Mart_EventScript_214F7D:: @ 8214F7D
-	msgbox RustboroCity_Mart_Text_214FF1, 2
+	msgbox RustboroCity_Mart_Text_214FF1, MSGBOX_NPC
 	end
 
 RustboroCity_Mart_EventScript_214F86:: @ 8214F86
-	msgbox RustboroCity_Mart_Text_21505C, 2
+	msgbox RustboroCity_Mart_Text_21505C, MSGBOX_NPC
 	end
 
 RustboroCity_Mart_Text_214F8F: @ 8214F8F

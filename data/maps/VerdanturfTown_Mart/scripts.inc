@@ -7,7 +7,7 @@ VerdanturfTown_Mart_EventScript_202587:: @ 8202587
 	message gUnknown_08272A21
 	waitmessage
 	pokemart VerdanturfTown_Mart_Pokemart_2025A0
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -29,15 +29,15 @@ VerdanturfTown_Mart_Pokemart_2025A0: @ 82025A0
 	end
 
 VerdanturfTown_Mart_EventScript_2025BA:: @ 82025BA
-	msgbox VerdanturfTown_Mart_Text_2025D5, 2
+	msgbox VerdanturfTown_Mart_Text_2025D5, MSGBOX_NPC
 	end
 
 VerdanturfTown_Mart_EventScript_2025C3:: @ 82025C3
-	msgbox VerdanturfTown_Mart_Text_20264C, 2
+	msgbox VerdanturfTown_Mart_Text_20264C, MSGBOX_NPC
 	end
 
 VerdanturfTown_Mart_EventScript_2025CC:: @ 82025CC
-	msgbox VerdanturfTown_Mart_Text_2026C9, 2
+	msgbox VerdanturfTown_Mart_Text_2026C9, MSGBOX_NPC
 	end
 
 VerdanturfTown_Mart_Text_2025D5: @ 82025D5

@@ -44,20 +44,20 @@ EverGrandeCity_PhoebesRoom_EventScript_2281CB:: @ 82281CB
 	checkflag FLAG_0x4FC
 	goto_eq EverGrandeCity_PhoebesRoom_EventScript_2281F2
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_PhoebesRoom_Text_22820E, 4
+	msgbox EverGrandeCity_PhoebesRoom_Text_22820E, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_PHOEBE, 0, EverGrandeCity_PhoebesRoom_Text_228325
 	goto EverGrandeCity_PhoebesRoom_EventScript_2281FC
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_2281F2:: @ 82281F2
-	msgbox EverGrandeCity_PhoebesRoom_Text_228343, 4
+	msgbox EverGrandeCity_PhoebesRoom_Text_228343, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_2281FC:: @ 82281FC
 	setflag FLAG_0x4FC
 	call EverGrandeCity_PhoebesRoom_EventScript_2723F8
-	msgbox EverGrandeCity_PhoebesRoom_Text_228343, 4
+	msgbox EverGrandeCity_PhoebesRoom_Text_228343, MSGBOX_DEFAULT
 	release
 	end
 

@@ -30,7 +30,7 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	faceplayer
 	checkflag FLAG_0x0E3
 	goto_eq Route118_EventScript_1F3E69
-	msgbox Route118_Text_1F427B, 5
+	msgbox Route118_Text_1F427B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3E3E
 	compare VAR_RESULT, 0
@@ -38,33 +38,33 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	end
 
 Route118_EventScript_1F3E3E:: @ 81F3E3E
-	msgbox Route118_Text_1F42AF, 4
+	msgbox Route118_Text_1F42AF, MSGBOX_DEFAULT
 	giveitem_std ITEM_GOOD_ROD
 	setflag FLAG_0x0E3
-	msgbox Route118_Text_1F42E7, 4
+	msgbox Route118_Text_1F42E7, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3E5F:: @ 81F3E5F
-	msgbox Route118_Text_1F4319, 4
+	msgbox Route118_Text_1F4319, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3E69:: @ 81F3E69
-	msgbox Route118_Text_1F4331, 4
+	msgbox Route118_Text_1F4331, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3E73:: @ 81F3E73
-	msgbox Route118_Text_1F4367, 2
+	msgbox Route118_Text_1F4367, MSGBOX_NPC
 	end
 
 Route118_EventScript_1F3E7C:: @ 81F3E7C
-	msgbox Route118_Text_1F43F4, 3
+	msgbox Route118_Text_1F43F4, MSGBOX_SIGN
 	end
 
 Route118_EventScript_1F3E85:: @ 81F3E85
-	msgbox Route118_Text_1F440E, 3
+	msgbox Route118_Text_1F440E, MSGBOX_SIGN
 	end
 
 Route118_EventScript_1F3E8E:: @ 81F3E8E
@@ -100,7 +100,7 @@ Route118_EventScript_1F3EE4:: @ 81F3EE4
 	applymovement 19, Route118_Movement_1F3F65
 	waitmovement 0
 	delay 30
-	msgbox Route118_Text_1F40BE, 4
+	msgbox Route118_Text_1F40BE, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, Route118_EventScript_1F3F28
@@ -191,34 +191,31 @@ Route118_EventScript_1F3F87:: @ 81F3F87
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3FD2
-	msgbox Route118_Text_29D2FA, 4
+	msgbox Route118_Text_29D2FA, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3FB3:: @ 81F3FB3
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route118_Text_29D343, 4
-	setvar VAR_0x8004, 37
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 37
-	callstd 8
+	msgbox Route118_Text_29D343, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ROSE_1
 	release
 	end
 
 Route118_EventScript_1F3FD2:: @ 81F3FD2
 	trainerbattle 5, TRAINER_ROSE_1, 0, Route118_Text_29D382, Route118_Text_29D3AA
-	msgbox Route118_Text_29D3D9, 6
+	msgbox Route118_Text_29D3D9, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F3FE9:: @ 81F3FE9
 	trainerbattle 0, TRAINER_BARNY, 0, Route118_Text_29D515, Route118_Text_29D55C
-	msgbox Route118_Text_29D587, 6
+	msgbox Route118_Text_29D587, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4000:: @ 81F4000
 	trainerbattle 0, TRAINER_WADE, 0, Route118_Text_29D5DF, Route118_Text_29D64C
-	msgbox Route118_Text_29D663, 6
+	msgbox Route118_Text_29D663, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4017:: @ 81F4017
@@ -226,39 +223,36 @@ Route118_EventScript_1F4017:: @ 81F4017
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F4062
-	msgbox Route118_Text_29D6D8, 4
+	msgbox Route118_Text_29D6D8, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F4043:: @ 81F4043
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route118_Text_29D74A, 4
-	setvar VAR_0x8004, 196
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 196
-	callstd 8
+	msgbox Route118_Text_29D74A, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DALTON_1
 	release
 	end
 
 Route118_EventScript_1F4062:: @ 81F4062
 	trainerbattle 5, TRAINER_DALTON_1, 0, Route118_Text_29D789, Route118_Text_29D7CA
-	msgbox Route118_Text_29D7D5, 6
+	msgbox Route118_Text_29D7D5, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4079:: @ 81F4079
 	trainerbattle 0, TRAINER_PERRY, 0, Route118_Text_29D41D, Route118_Text_29D45B
-	msgbox Route118_Text_29D46C, 6
+	msgbox Route118_Text_29D46C, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4090:: @ 81F4090
 	trainerbattle 0, TRAINER_CHESTER, 0, Route118_Text_29D4A6, Route118_Text_29D4C4
-	msgbox Route118_Text_29D4DA, 6
+	msgbox Route118_Text_29D4DA, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F40A7:: @ 81F40A7
 	trainerbattle 0, TRAINER_DEANDRE, 0, Route118_Text_29D81B, Route118_Text_29D83C
-	msgbox Route118_Text_29D872, 6
+	msgbox Route118_Text_29D872, MSGBOX_AUTOCLOSE
 	end
 
 Route118_Text_1F40BE: @ 81F40BE
