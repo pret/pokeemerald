@@ -14,17 +14,17 @@ Route110_TrickHousePuzzle4_EventScript_26C873:: @ 826C873
 	end
 
 Route110_TrickHousePuzzle4_EventScript_26C87E:: @ 826C87E
-	trainerbattle 0, TRAINER_CORA, 0, Route110_TrickHousePuzzle4_Text_26C92D, Route110_TrickHousePuzzle4_Text_26C96E
+	trainerbattle_single TRAINER_CORA, Route110_TrickHousePuzzle4_Text_26C92D, Route110_TrickHousePuzzle4_Text_26C96E
 	msgbox Route110_TrickHousePuzzle4_Text_26C9A2, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_26C895:: @ 826C895
-	trainerbattle 0, TRAINER_YUJI, 0, Route110_TrickHousePuzzle4_Text_26C9E4, Route110_TrickHousePuzzle4_Text_26CA20
+	trainerbattle_single TRAINER_YUJI, Route110_TrickHousePuzzle4_Text_26C9E4, Route110_TrickHousePuzzle4_Text_26CA20
 	msgbox Route110_TrickHousePuzzle4_Text_26CA53, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_26C8AC:: @ 826C8AC
-	trainerbattle 0, TRAINER_PAULA, 0, Route110_TrickHousePuzzle4_Text_26CA9C, Route110_TrickHousePuzzle4_Text_26CACB
+	trainerbattle_single TRAINER_PAULA, Route110_TrickHousePuzzle4_Text_26CA9C, Route110_TrickHousePuzzle4_Text_26CACB
 	msgbox Route110_TrickHousePuzzle4_Text_26CAD1, MSGBOX_AUTOCLOSE
 	end
 

@@ -309,32 +309,32 @@ LilycoveCity_EventScript_1E2ECD:: @ 81E2ECD
 	end
 
 LilycoveCity_EventScript_1E2EDE:: @ 81E2EDE
-	trainerbattle 3, TRAINER_MAY_12, 0, LilycoveCity_Text_1E3275
+	trainerbattle_no_intro TRAINER_MAY_12, LilycoveCity_Text_1E3275
 	goto LilycoveCity_EventScript_1E2F3E
 	end
 
 LilycoveCity_EventScript_1E2EEE:: @ 81E2EEE
-	trainerbattle 3, TRAINER_MAY_13, 0, LilycoveCity_Text_1E3275
+	trainerbattle_no_intro TRAINER_MAY_13, LilycoveCity_Text_1E3275
 	goto LilycoveCity_EventScript_1E2F3E
 	end
 
 LilycoveCity_EventScript_1E2EFE:: @ 81E2EFE
-	trainerbattle 3, TRAINER_MAY_11, 0, LilycoveCity_Text_1E3275
+	trainerbattle_no_intro TRAINER_MAY_11, LilycoveCity_Text_1E3275
 	goto LilycoveCity_EventScript_1E2F3E
 	end
 
 LilycoveCity_EventScript_1E2F0E:: @ 81E2F0E
-	trainerbattle 3, TRAINER_BRENDAN_14, 0, LilycoveCity_Text_1E3777
+	trainerbattle_no_intro TRAINER_BRENDAN_14, LilycoveCity_Text_1E3777
 	goto LilycoveCity_EventScript_1E2FAA
 	end
 
 LilycoveCity_EventScript_1E2F1E:: @ 81E2F1E
-	trainerbattle 3, TRAINER_BRENDAN_15, 0, LilycoveCity_Text_1E3777
+	trainerbattle_no_intro TRAINER_BRENDAN_15, LilycoveCity_Text_1E3777
 	goto LilycoveCity_EventScript_1E2FAA
 	end
 
 LilycoveCity_EventScript_1E2F2E:: @ 81E2F2E
-	trainerbattle 3, TRAINER_BRENDAN_13, 0, LilycoveCity_Text_1E3777
+	trainerbattle_no_intro TRAINER_BRENDAN_13, LilycoveCity_Text_1E3777
 	goto LilycoveCity_EventScript_1E2FAA
 	end
 

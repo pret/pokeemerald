@@ -49,7 +49,7 @@ MossdeepCity_Gym_EventScript_220885:: @ 8220885
 	end
 
 MossdeepCity_Gym_EventScript_220898:: @ 8220898
-	trainerbattle 8, TRAINER_TATE_AND_LIZA_1, 0, MossdeepCity_Gym_Text_221783, MossdeepCity_Gym_Text_2218EC, MossdeepCity_Gym_Text_221BCE, MossdeepCity_Gym_EventScript_2208D1
+	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_221783, MossdeepCity_Gym_Text_2218EC, MossdeepCity_Gym_Text_221BCE, MossdeepCity_Gym_EventScript_2208D1, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MossdeepCity_Gym_EventScript_22097E
@@ -109,7 +109,7 @@ MossdeepCity_Gym_EventScript_22095B:: @ 822095B
 	return
 
 MossdeepCity_Gym_EventScript_22097E:: @ 822097E
-	trainerbattle 7, TRAINER_TATE_AND_LIZA_1, 0, MossdeepCity_Gym_Text_221D0B, MossdeepCity_Gym_Text_221E05, MossdeepCity_Gym_Text_221EB8
+	trainerbattle_rematch_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_221D0B, MossdeepCity_Gym_Text_221E05, MossdeepCity_Gym_Text_221EB8
 	msgbox MossdeepCity_Gym_Text_221E45, MSGBOX_AUTOCLOSE
 	end
 
@@ -211,62 +211,62 @@ MossdeepCity_Gym_EventScript_220AF1:: @ 8220AF1
 	end
 
 MossdeepCity_Gym_EventScript_220AFD:: @ 8220AFD
-	trainerbattle 0, TRAINER_PRESTON, 0, MossdeepCity_Gym_Text_220E5C, MossdeepCity_Gym_Text_220EAC
+	trainerbattle_single TRAINER_PRESTON, MossdeepCity_Gym_Text_220E5C, MossdeepCity_Gym_Text_220EAC
 	msgbox MossdeepCity_Gym_Text_220ED3, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B14:: @ 8220B14
-	trainerbattle 0, TRAINER_VIRGIL, 0, MossdeepCity_Gym_Text_220F02, MossdeepCity_Gym_Text_220F1A
+	trainerbattle_single TRAINER_VIRGIL, MossdeepCity_Gym_Text_220F02, MossdeepCity_Gym_Text_220F1A
 	msgbox MossdeepCity_Gym_Text_220F3A, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B2B:: @ 8220B2B
-	trainerbattle 0, TRAINER_BLAKE, 0, MossdeepCity_Gym_Text_220FB0, MossdeepCity_Gym_Text_221024
+	trainerbattle_single TRAINER_BLAKE, MossdeepCity_Gym_Text_220FB0, MossdeepCity_Gym_Text_221024
 	msgbox MossdeepCity_Gym_Text_221055, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B42:: @ 8220B42
-	trainerbattle 0, TRAINER_HANNAH, 0, MossdeepCity_Gym_Text_2210EE, MossdeepCity_Gym_Text_221152
+	trainerbattle_single TRAINER_HANNAH, MossdeepCity_Gym_Text_2210EE, MossdeepCity_Gym_Text_221152
 	msgbox MossdeepCity_Gym_Text_22116A, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B59:: @ 8220B59
-	trainerbattle 0, TRAINER_SAMANTHA, 0, MossdeepCity_Gym_Text_2211E2, MossdeepCity_Gym_Text_221230
+	trainerbattle_single TRAINER_SAMANTHA, MossdeepCity_Gym_Text_2211E2, MossdeepCity_Gym_Text_221230
 	msgbox MossdeepCity_Gym_Text_22123D, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B70:: @ 8220B70
-	trainerbattle 0, TRAINER_MAURA, 0, MossdeepCity_Gym_Text_2212A6, MossdeepCity_Gym_Text_221309
+	trainerbattle_single TRAINER_MAURA, MossdeepCity_Gym_Text_2212A6, MossdeepCity_Gym_Text_221309
 	msgbox MossdeepCity_Gym_Text_22132E, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B87:: @ 8220B87
-	trainerbattle 0, TRAINER_SYLVIA, 0, MossdeepCity_Gym_Text_2213C2, MossdeepCity_Gym_Text_2213F4
+	trainerbattle_single TRAINER_SYLVIA, MossdeepCity_Gym_Text_2213C2, MossdeepCity_Gym_Text_2213F4
 	msgbox MossdeepCity_Gym_Text_221412, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220B9E:: @ 8220B9E
-	trainerbattle 0, TRAINER_NATE, 0, MossdeepCity_Gym_Text_221460, MossdeepCity_Gym_Text_2214A7
+	trainerbattle_single TRAINER_NATE, MossdeepCity_Gym_Text_221460, MossdeepCity_Gym_Text_2214A7
 	msgbox MossdeepCity_Gym_Text_2214D3, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220BB5:: @ 8220BB5
-	trainerbattle 0, TRAINER_MACEY, 0, MossdeepCity_Gym_Text_22161B, MossdeepCity_Gym_Text_221658
+	trainerbattle_single TRAINER_MACEY, MossdeepCity_Gym_Text_22161B, MossdeepCity_Gym_Text_221658
 	msgbox MossdeepCity_Gym_Text_221680, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220BCC:: @ 8220BCC
-	trainerbattle 0, TRAINER_CLIFFORD, 0, MossdeepCity_Gym_Text_22157C, MossdeepCity_Gym_Text_2215B8
+	trainerbattle_single TRAINER_CLIFFORD, MossdeepCity_Gym_Text_22157C, MossdeepCity_Gym_Text_2215B8
 	msgbox MossdeepCity_Gym_Text_2215E2, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220BE3:: @ 8220BE3
-	trainerbattle 0, TRAINER_NICHOLAS, 0, MossdeepCity_Gym_Text_2216EE, MossdeepCity_Gym_Text_22172D
+	trainerbattle_single TRAINER_NICHOLAS, MossdeepCity_Gym_Text_2216EE, MossdeepCity_Gym_Text_22172D
 	msgbox MossdeepCity_Gym_Text_22173A, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_Gym_EventScript_220BFA:: @ 8220BFA
-	trainerbattle 0, TRAINER_KATHLEEN, 0, MossdeepCity_Gym_Text_221507, MossdeepCity_Gym_Text_22153B
+	trainerbattle_single TRAINER_KATHLEEN, MossdeepCity_Gym_Text_221507, MossdeepCity_Gym_Text_22153B
 	msgbox MossdeepCity_Gym_Text_221545, MSGBOX_AUTOCLOSE
 	end
 

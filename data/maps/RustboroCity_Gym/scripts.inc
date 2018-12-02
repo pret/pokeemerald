@@ -2,7 +2,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 	.byte 0
 
 RustboroCity_Gym_EventScript_212F31:: @ 8212F31
-	trainerbattle 1, TRAINER_ROXANNE_1, 0, RustboroCity_Gym_Text_21362A, RustboroCity_Gym_Text_21370B, RustboroCity_Gym_EventScript_212F66
+	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_21362A, RustboroCity_Gym_Text_21370B, RustboroCity_Gym_EventScript_212F66, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq RustboroCity_Gym_EventScript_212FC8
@@ -38,22 +38,22 @@ RustboroCity_Gym_EventScript_212FA4:: @ 8212FA4
 	end
 
 RustboroCity_Gym_EventScript_212FC8:: @ 8212FC8
-	trainerbattle 7, TRAINER_ROXANNE_1, 0, RustboroCity_Gym_Text_213C2F, RustboroCity_Gym_Text_213CF9, RustboroCity_Gym_Text_213D93
+	trainerbattle_rematch_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_213C2F, RustboroCity_Gym_Text_213CF9, RustboroCity_Gym_Text_213D93
 	msgbox RustboroCity_Gym_Text_213D12, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_212FE3:: @ 8212FE3
-	trainerbattle 0, TRAINER_JOSH, 0, RustboroCity_Gym_Text_2133E9, RustboroCity_Gym_Text_21342D
+	trainerbattle_single TRAINER_JOSH, RustboroCity_Gym_Text_2133E9, RustboroCity_Gym_Text_21342D
 	msgbox RustboroCity_Gym_Text_213447, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_212FFA:: @ 8212FFA
-	trainerbattle 0, TRAINER_TOMMY, 0, RustboroCity_Gym_Text_213486, RustboroCity_Gym_Text_2134C6
+	trainerbattle_single TRAINER_TOMMY, RustboroCity_Gym_Text_213486, RustboroCity_Gym_Text_2134C6
 	msgbox RustboroCity_Gym_Text_2134E6, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_213011:: @ 8213011
-	trainerbattle 0, TRAINER_MARC, 0, RustboroCity_Gym_Text_213533, RustboroCity_Gym_Text_213589
+	trainerbattle_single TRAINER_MARC, RustboroCity_Gym_Text_213533, RustboroCity_Gym_Text_213589
 	msgbox RustboroCity_Gym_Text_2135C0, MSGBOX_AUTOCLOSE
 	end
 

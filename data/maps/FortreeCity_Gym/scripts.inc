@@ -16,7 +16,7 @@ FortreeCity_Gym_EventScript_2165C4:: @ 82165C4
 	end
 
 FortreeCity_Gym_EventScript_2165C8:: @ 82165C8
-	trainerbattle 1, TRAINER_WINONA_1, 0, FortreeCity_Gym_Text_216D75, FortreeCity_Gym_Text_216E60, FortreeCity_Gym_EventScript_2165FD
+	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_216D75, FortreeCity_Gym_Text_216E60, FortreeCity_Gym_EventScript_2165FD, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq FortreeCity_Gym_EventScript_21668D
@@ -67,37 +67,37 @@ FortreeCity_Gym_EventScript_21666A:: @ 821666A
 	return
 
 FortreeCity_Gym_EventScript_21668D:: @ 821668D
-	trainerbattle 7, TRAINER_WINONA_1, 0, FortreeCity_Gym_Text_217100, FortreeCity_Gym_Text_2171E6, FortreeCity_Gym_Text_217292
+	trainerbattle_rematch_double TRAINER_WINONA_1, FortreeCity_Gym_Text_217100, FortreeCity_Gym_Text_2171E6, FortreeCity_Gym_Text_217292
 	msgbox FortreeCity_Gym_Text_21720B, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_2166A8:: @ 82166A8
-	trainerbattle 0, TRAINER_JARED, 0, FortreeCity_Gym_Text_2168A2, FortreeCity_Gym_Text_2168D3
+	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_2168A2, FortreeCity_Gym_Text_2168D3
 	msgbox FortreeCity_Gym_Text_2168E7, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_2166BF:: @ 82166BF
-	trainerbattle 0, TRAINER_EDWARDO, 0, FortreeCity_Gym_Text_21695A, FortreeCity_Gym_Text_2169C7
+	trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_21695A, FortreeCity_Gym_Text_2169C7
 	msgbox FortreeCity_Gym_Text_2169F1, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_2166D6:: @ 82166D6
-	trainerbattle 0, TRAINER_FLINT, 0, FortreeCity_Gym_Text_216A66, FortreeCity_Gym_Text_216AC4
+	trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_216A66, FortreeCity_Gym_Text_216AC4
 	msgbox FortreeCity_Gym_Text_216AD7, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_2166ED:: @ 82166ED
-	trainerbattle 0, TRAINER_ASHLEY, 0, FortreeCity_Gym_Text_216B1A, FortreeCity_Gym_Text_216B51
+	trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_216B1A, FortreeCity_Gym_Text_216B51
 	msgbox FortreeCity_Gym_Text_216B5F, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_216704:: @ 8216704
-	trainerbattle 0, TRAINER_HUMBERTO, 0, FortreeCity_Gym_Text_216B9E, FortreeCity_Gym_Text_216C18
+	trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_216B9E, FortreeCity_Gym_Text_216C18
 	msgbox FortreeCity_Gym_Text_216C32, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_21671B:: @ 821671B
-	trainerbattle 0, TRAINER_DARIUS, 0, FortreeCity_Gym_Text_216C96, FortreeCity_Gym_Text_216CF2
+	trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_216C96, FortreeCity_Gym_Text_216CF2
 	msgbox FortreeCity_Gym_Text_216D0F, MSGBOX_AUTOCLOSE
 	end
 

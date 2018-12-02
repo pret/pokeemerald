@@ -176,7 +176,7 @@ Route128_Movement_1F6CBB: @ 81F6CBB
 	step_end
 
 Route128_EventScript_1F6CBE:: @ 81F6CBE
-	trainerbattle 2, TRAINER_ISAIAH_1, 0, Route128_Text_2A287F, Route128_Text_2A28AB, Route128_EventScript_1F6CEA
+	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_2A287F, Route128_Text_2A28AB, Route128_EventScript_1F6CEA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route128_EventScript_1F6D09
@@ -193,12 +193,12 @@ Route128_EventScript_1F6CEA:: @ 81F6CEA
 	end
 
 Route128_EventScript_1F6D09:: @ 81F6D09
-	trainerbattle 5, TRAINER_ISAIAH_1, 0, Route128_Text_2A2975, Route128_Text_2A29B8
+	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_2A2975, Route128_Text_2A29B8
 	msgbox Route128_Text_2A29DC, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6D20:: @ 81F6D20
-	trainerbattle 2, TRAINER_KATELYN_1, 0, Route128_Text_2A2A1F, Route128_Text_2A2A94, Route128_EventScript_1F6D4C
+	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_2A2A1F, Route128_Text_2A2A94, Route128_EventScript_1F6D4C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route128_EventScript_1F6D6B
@@ -215,32 +215,32 @@ Route128_EventScript_1F6D4C:: @ 81F6D4C
 	end
 
 Route128_EventScript_1F6D6B:: @ 81F6D6B
-	trainerbattle 5, TRAINER_KATELYN_1, 0, Route128_Text_2A2B41, Route128_Text_2A2BAB
+	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_2A2B41, Route128_Text_2A2BAB
 	msgbox Route128_Text_2A2BDD, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6D82:: @ 81F6D82
-	trainerbattle 0, TRAINER_ALEXA, 0, Route128_Text_2A2C1C, Route128_Text_2A2C79
+	trainerbattle_single TRAINER_ALEXA, Route128_Text_2A2C1C, Route128_Text_2A2C79
 	msgbox Route128_Text_2A2C95, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6D99:: @ 81F6D99
-	trainerbattle 0, TRAINER_RUBEN, 0, Route128_Text_2A2CD9, Route128_Text_2A2CFE
+	trainerbattle_single TRAINER_RUBEN, Route128_Text_2A2CD9, Route128_Text_2A2CFE
 	msgbox Route128_Text_2A2D0D, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6DB0:: @ 81F6DB0
-	trainerbattle 0, TRAINER_WAYNE, 0, Route128_Text_2A2D3D, Route128_Text_2A2DA9
+	trainerbattle_single TRAINER_WAYNE, Route128_Text_2A2D3D, Route128_Text_2A2DA9
 	msgbox Route128_Text_2A2DBA, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6DC7:: @ 81F6DC7
-	trainerbattle 0, TRAINER_HARRISON, 0, Route128_Text_2A2E0F, Route128_Text_2A2E44
+	trainerbattle_single TRAINER_HARRISON, Route128_Text_2A2E0F, Route128_Text_2A2E44
 	msgbox Route128_Text_2A2E6C, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_1F6DDE:: @ 81F6DDE
-	trainerbattle 0, TRAINER_CARLEE, 0, Route128_Text_2A2EC8, Route128_Text_2A2EFA
+	trainerbattle_single TRAINER_CARLEE, Route128_Text_2A2EC8, Route128_Text_2A2EFA
 	msgbox Route128_Text_2A2F2F, MSGBOX_AUTOCLOSE
 	end
 

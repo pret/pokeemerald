@@ -62,32 +62,32 @@ Route103_EventScript_1EC434:: @ 81EC434
 	end
 
 Route103_EventScript_1EC48E:: @ 81EC48E
-	trainerbattle 3, TRAINER_MAY_4, 0, Route103_Text_1EC881
+	trainerbattle_no_intro TRAINER_MAY_4, Route103_Text_1EC881
 	goto Route103_EventScript_1EC4EE
 	end
 
 Route103_EventScript_1EC49E:: @ 81EC49E
-	trainerbattle 3, TRAINER_MAY_7, 0, Route103_Text_1EC881
+	trainerbattle_no_intro TRAINER_MAY_7, Route103_Text_1EC881
 	goto Route103_EventScript_1EC4EE
 	end
 
 Route103_EventScript_1EC4AE:: @ 81EC4AE
-	trainerbattle 3, TRAINER_MAY_1, 0, Route103_Text_1EC881
+	trainerbattle_no_intro TRAINER_MAY_1, Route103_Text_1EC881
 	goto Route103_EventScript_1EC4EE
 	end
 
 Route103_EventScript_1EC4BE:: @ 81EC4BE
-	trainerbattle 3, TRAINER_BRENDAN_4, 0, Route103_Text_1ECA59
+	trainerbattle_no_intro TRAINER_BRENDAN_4, Route103_Text_1ECA59
 	goto Route103_EventScript_1EC4FC
 	end
 
 Route103_EventScript_1EC4CE:: @ 81EC4CE
-	trainerbattle 3, TRAINER_BRENDAN_7, 0, Route103_Text_1ECA59
+	trainerbattle_no_intro TRAINER_BRENDAN_7, Route103_Text_1ECA59
 	goto Route103_EventScript_1EC4FC
 	end
 
 Route103_EventScript_1EC4DE:: @ 81EC4DE
-	trainerbattle 3, TRAINER_BRENDAN_1, 0, Route103_Text_1ECA59
+	trainerbattle_no_intro TRAINER_BRENDAN_1, Route103_Text_1ECA59
 	goto Route103_EventScript_1EC4FC
 	end
 
@@ -203,12 +203,12 @@ Route103_EventScript_1EC5EB:: @ 81EC5EB
 	end
 
 Route103_EventScript_1EC5F4:: @ 81EC5F4
-	trainerbattle 0, TRAINER_DAISY, 0, Route103_Text_29495A, Route103_Text_29498F
+	trainerbattle_single TRAINER_DAISY, Route103_Text_29495A, Route103_Text_29498F
 	msgbox Route103_Text_2949B4, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC60B:: @ 81EC60B
-	trainerbattle 6, TRAINER_AMY_AND_LIV_1, 0, Route103_Text_2949F9, Route103_Text_294A3D, Route103_Text_294AAE, Route103_EventScript_1EC63A
+	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_2949F9, Route103_Text_294A3D, Route103_Text_294AAE, Route103_EventScript_1EC63A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC653
@@ -222,12 +222,12 @@ Route103_EventScript_1EC63A:: @ 81EC63A
 	end
 
 Route103_EventScript_1EC653:: @ 81EC653
-	trainerbattle 7, TRAINER_AMY_AND_LIV_1, 0, Route103_Text_294C29, Route103_Text_294C6D, Route103_Text_294CEF
+	trainerbattle_rematch_double TRAINER_AMY_AND_LIV_1, Route103_Text_294C29, Route103_Text_294C6D, Route103_Text_294CEF
 	msgbox Route103_Text_294C93, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC66E:: @ 81EC66E
-	trainerbattle 6, TRAINER_AMY_AND_LIV_1, 0, Route103_Text_294AFD, Route103_Text_294B22, Route103_Text_294BD0, Route103_EventScript_1EC69D
+	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_294AFD, Route103_Text_294B22, Route103_Text_294BD0, Route103_EventScript_1EC69D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC6B6
@@ -241,17 +241,17 @@ Route103_EventScript_1EC69D:: @ 81EC69D
 	end
 
 Route103_EventScript_1EC6B6:: @ 81EC6B6
-	trainerbattle 7, TRAINER_AMY_AND_LIV_1, 0, Route103_Text_294D3E, Route103_Text_294D63, Route103_Text_294DDB
+	trainerbattle_rematch_double TRAINER_AMY_AND_LIV_1, Route103_Text_294D3E, Route103_Text_294D63, Route103_Text_294DDB
 	msgbox Route103_Text_294D89, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC6D1:: @ 81EC6D1
-	trainerbattle 0, TRAINER_ANDREW, 0, Route103_Text_294E34, Route103_Text_294E92
+	trainerbattle_single TRAINER_ANDREW, Route103_Text_294E34, Route103_Text_294E92
 	msgbox Route103_Text_294EBB, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC6E8:: @ 81EC6E8
-	trainerbattle 2, TRAINER_MIGUEL_1, 0, Route103_Text_294EDF, Route103_Text_294F21, Route103_EventScript_1EC714
+	trainerbattle_single TRAINER_MIGUEL_1, Route103_Text_294EDF, Route103_Text_294F21, Route103_EventScript_1EC714
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC733
@@ -268,27 +268,27 @@ Route103_EventScript_1EC714:: @ 81EC714
 	end
 
 Route103_EventScript_1EC733:: @ 81EC733
-	trainerbattle 5, TRAINER_MIGUEL_1, 0, Route103_Text_294FC3, Route103_Text_295006
+	trainerbattle_rematch TRAINER_MIGUEL_1, Route103_Text_294FC3, Route103_Text_295006
 	msgbox Route103_Text_29501E, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC74A:: @ 81EC74A
-	trainerbattle 0, TRAINER_MARCOS, 0, Route103_Text_295206, Route103_Text_29522B
+	trainerbattle_single TRAINER_MARCOS, Route103_Text_295206, Route103_Text_29522B
 	msgbox Route103_Text_295246, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC761:: @ 81EC761
-	trainerbattle 0, TRAINER_RHETT, 0, Route103_Text_295199, Route103_Text_2951C6
+	trainerbattle_single TRAINER_RHETT, Route103_Text_295199, Route103_Text_2951C6
 	msgbox Route103_Text_2951DE, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC778:: @ 81EC778
-	trainerbattle 0, TRAINER_PETE, 0, Route103_Text_295063, Route103_Text_295093
+	trainerbattle_single TRAINER_PETE, Route103_Text_295063, Route103_Text_295093
 	msgbox Route103_Text_2950AA, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_1EC78F:: @ 81EC78F
-	trainerbattle 0, TRAINER_ISABELLE, 0, Route103_Text_295116, Route103_Text_295146
+	trainerbattle_single TRAINER_ISABELLE, Route103_Text_295116, Route103_Text_295146
 	msgbox Route103_Text_29514D, MSGBOX_AUTOCLOSE
 	end
 

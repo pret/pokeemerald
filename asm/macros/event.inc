@@ -629,58 +629,99 @@
 	.endm
 
 	@ If the Trainer flag for Trainer index is not set, this command does absolutely nothing.
-	.macro trainerbattle type:req, trainer:req, word:req, pointer1:req, pointer2, pointer3, pointer4
+	.macro trainerbattle type:req, trainer:req, local_id:req, pointer1:req, pointer2, pointer3, pointer4
 	.byte 0x5c
 	.byte \type
 	.2byte \trainer
-	.2byte \word
-	.if \type == 0
+	.2byte \local_id
+	.if \type == TRAINER_BATTLE_SINGLE
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == 1
-		.4byte \pointer1 @ text
-		.4byte \pointer2 @ text
-		.4byte \pointer3 @ event script
-	.elseif \type == 2
+	.elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ event script
-	.elseif \type == 3
+	.elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT
 		.4byte \pointer1 @ text
-	.elseif \type == 4
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ event script
+	.elseif \type == TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT
+		.4byte \pointer1 @ text
+	.elseif \type == TRAINER_BATTLE_DOUBLE
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ text
-	.elseif \type == 5
+	.elseif \type == TRAINER_BATTLE_REMATCH
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == 6
+	.elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ text
 		.4byte \pointer4 @ event script
-	.elseif \type == 7
+	.elseif \type == TRAINER_BATTLE_REMATCH_DOUBLE
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ text
-	.elseif \type == 8
+	.elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ text
 		.4byte \pointer4 @ event script
-	.elseif \type == 9
+	.elseif \type == TRAINER_BATTLE_9
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == 10
+	.elseif \type == TRAINER_BATTLE_SET_TRAINER_A
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == 11
+	.elseif \type == TRAINER_BATTLE_SET_TRAINER_B
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
-	.elseif \type == 12
+	.elseif \type == TRAINER_BATTLE_12
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 	.endif
+	.endm
+
+	NO_MUSIC = FALSE
+
+	@ Starts a single trainer battle, takes a trainer, intro text, loss text, and an optional event script
+	@ when used with an event script, you can also pass in an optional flag to disable music
+	.macro trainerbattle_single trainer:req, intro_text:req, lose_text:req, event_script=FALSE, music=TRUE
+	.if \event_script == FALSE
+	trainerbattle TRAINER_BATTLE_SINGLE, \trainer, 0, \intro_text, \lose_text
+	.elseif \music == TRUE
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, \trainer, 0, \intro_text, \lose_text, \event_script
+	.else
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, \trainer, 0, \intro_text, \lose_text, \event_script
+	.endif
+	.endm
+
+	@ Starts a double trainer battle, takes a trainer, intro text, loss text, text for when you have too few pokemon
+	@ and an optional event script, when used with an event script you can pass in an optional flag to disable music
+	.macro trainerbattle_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req, event_script=FALSE, music=TRUE
+	.if \event_script == FALSE
+	trainerbattle TRAINER_BATTLE_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
+	.elseif \music == TRUE
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text, \event_script
+	.else
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text, \event_script
+	.endif
+	.endm
+
+	@ Starts a rematch battle, takes a trainer, intro text and loss text
+	.macro trainerbattle_rematch trainer:req, intro_text:req, lose_text:req
+	trainerbattle TRAINER_BATTLE_REMATCH, \trainer, 0, \intro_text, \lose_text
+	.endm
+
+	@ Starts a rematch double battle, takes a trainer, intro text, loss text, and text for when you have too few pokemon
+	.macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
+	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
+	.endm
+
+	@ Starts a trainer battle, skipping intro text, takes a trainer and loss text
+	.macro trainerbattle_no_intro trainer:req, lose_text:req
+	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, 0, \lose_text
 	.endm
 
 

@@ -7,12 +7,12 @@ MagmaHideout_1F_MapScript1_239886: @ 8239886
 	end
 
 MagmaHideout_1F_EventScript_23988C:: @ 823988C
-	trainerbattle 0, TRAINER_GRUNT_38, 0, MagmaHideout_1F_Text_2398BA, MagmaHideout_1F_Text_239964
+	trainerbattle_single TRAINER_GRUNT_38, MagmaHideout_1F_Text_2398BA, MagmaHideout_1F_Text_239964
 	msgbox MagmaHideout_1F_Text_2399B1, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_1F_EventScript_2398A3:: @ 82398A3
-	trainerbattle 0, TRAINER_GRUNT_39, 0, MagmaHideout_1F_Text_2399F5, MagmaHideout_1F_Text_239ABA
+	trainerbattle_single TRAINER_GRUNT_39, MagmaHideout_1F_Text_2399F5, MagmaHideout_1F_Text_239ABA
 	msgbox MagmaHideout_1F_Text_239ACD, MSGBOX_AUTOCLOSE
 	end
 

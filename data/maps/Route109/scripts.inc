@@ -376,27 +376,27 @@ Route109_EventScript_1EEA34:: @ 81EEA34
 	end
 
 Route109_EventScript_1EEA3D:: @ 81EEA3D
-	trainerbattle 0, TRAINER_DAVID, 0, Route109_Text_297140, Route109_Text_29717D
+	trainerbattle_single TRAINER_DAVID, Route109_Text_297140, Route109_Text_29717D
 	msgbox Route109_Text_297191, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA54:: @ 81EEA54
-	trainerbattle 0, TRAINER_ALICE, 0, Route109_Text_2971D1, Route109_Text_2971FD
+	trainerbattle_single TRAINER_ALICE, Route109_Text_2971D1, Route109_Text_2971FD
 	msgbox Route109_Text_29720F, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA6B:: @ 81EEA6B
-	trainerbattle 0, TRAINER_HUEY, 0, Route109_Text_297235, Route109_Text_29727B
+	trainerbattle_single TRAINER_HUEY, Route109_Text_297235, Route109_Text_29727B
 	msgbox Route109_Text_29728C, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA82:: @ 81EEA82
-	trainerbattle 0, TRAINER_EDMOND, 0, Route109_Text_2972B3, Route109_Text_2972CE
+	trainerbattle_single TRAINER_EDMOND, Route109_Text_2972B3, Route109_Text_2972CE
 	msgbox Route109_Text_2972ED, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA99:: @ 81EEA99
-	trainerbattle 2, TRAINER_RICKY_1, 0, Route109_Text_29733B, Route109_Text_297379, Route109_EventScript_1EEAC5
+	trainerbattle_single TRAINER_RICKY_1, Route109_Text_29733B, Route109_Text_297379, Route109_EventScript_1EEAC5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route109_EventScript_1EEAE4
@@ -413,12 +413,12 @@ Route109_EventScript_1EEAC5:: @ 81EEAC5
 	end
 
 Route109_EventScript_1EEAE4:: @ 81EEAE4
-	trainerbattle 5, TRAINER_RICKY_1, 0, Route109_Text_2973FF, Route109_Text_297437
+	trainerbattle_rematch TRAINER_RICKY_1, Route109_Text_2973FF, Route109_Text_297437
 	msgbox Route109_Text_297458, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEAFB:: @ 81EEAFB
-	trainerbattle 2, TRAINER_LOLA_1, 0, Route109_Text_29749C, Route109_Text_2974CF, Route109_EventScript_1EEB27
+	trainerbattle_single TRAINER_LOLA_1, Route109_Text_29749C, Route109_Text_2974CF, Route109_EventScript_1EEB27
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route109_EventScript_1EEB46
@@ -435,47 +435,47 @@ Route109_EventScript_1EEB27:: @ 81EEB27
 	end
 
 Route109_EventScript_1EEB46:: @ 81EEB46
-	trainerbattle 5, TRAINER_LOLA_1, 0, Route109_Text_297538, Route109_Text_297576
+	trainerbattle_rematch TRAINER_LOLA_1, Route109_Text_297538, Route109_Text_297576
 	msgbox Route109_Text_29757D, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEB5D:: @ 81EEB5D
-	trainerbattle 0, TRAINER_AUSTINA, 0, Route109_Text_2975C0, Route109_Text_297601
+	trainerbattle_single TRAINER_AUSTINA, Route109_Text_2975C0, Route109_Text_297601
 	msgbox Route109_Text_29762A, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEB74:: @ 81EEB74
-	trainerbattle 0, TRAINER_GWEN, 0, Route109_Text_297667, Route109_Text_297691
+	trainerbattle_single TRAINER_GWEN, Route109_Text_297667, Route109_Text_297691
 	msgbox Route109_Text_2976A4, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEB8B:: @ 81EEB8B
-	trainerbattle 0, TRAINER_CARTER, 0, Route109_Text_2976C5, Route109_Text_2976FC
+	trainerbattle_single TRAINER_CARTER, Route109_Text_2976C5, Route109_Text_2976FC
 	msgbox Route109_Text_297715, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBA2:: @ 81EEBA2
-	trainerbattle 4, TRAINER_MEL_AND_PAUL, 0, Route109_Text_297754, Route109_Text_2977B0, Route109_Text_29781D
+	trainerbattle_double TRAINER_MEL_AND_PAUL, Route109_Text_297754, Route109_Text_2977B0, Route109_Text_29781D
 	msgbox Route109_Text_2977C7, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBBD:: @ 81EEBBD
-	trainerbattle 4, TRAINER_MEL_AND_PAUL, 0, Route109_Text_297872, Route109_Text_2978BD, Route109_Text_29792E
+	trainerbattle_double TRAINER_MEL_AND_PAUL, Route109_Text_297872, Route109_Text_2978BD, Route109_Text_29792E
 	msgbox Route109_Text_2978F1, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBD8:: @ 81EEBD8
-	trainerbattle 0, TRAINER_CHANDLER, 0, Route109_Text_29798A, Route109_Text_2979AE
+	trainerbattle_single TRAINER_CHANDLER, Route109_Text_29798A, Route109_Text_2979AE
 	msgbox Route109_Text_2979BF, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBEF:: @ 81EEBEF
-	trainerbattle 0, TRAINER_HAILEY, 0, Route109_Text_2979EC, Route109_Text_297A15
+	trainerbattle_single TRAINER_HAILEY, Route109_Text_2979EC, Route109_Text_297A15
 	msgbox Route109_Text_297A40, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEC06:: @ 81EEC06
-	trainerbattle 0, TRAINER_ELIJAH, 0, Route109_Text_297A82, Route109_Text_297AC7
+	trainerbattle_single TRAINER_ELIJAH, Route109_Text_297A82, Route109_Text_297AC7
 	msgbox Route109_Text_297AE5, MSGBOX_AUTOCLOSE
 	end
 

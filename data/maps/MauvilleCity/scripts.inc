@@ -208,7 +208,7 @@ MauvilleCity_EventScript_1DF628:: @ 81DF628
 
 MauvilleCity_EventScript_1DF63A:: @ 81DF63A
 	msgbox MauvilleCity_Text_1DFB6D, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_WALLY_2, 0, MauvilleCity_Text_1DFB96
+	trainerbattle_no_intro TRAINER_WALLY_2, MauvilleCity_Text_1DFB96
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFBC3, MSGBOX_DEFAULT

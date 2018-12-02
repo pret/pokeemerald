@@ -59,7 +59,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE78B:: @ 81FE78B
 	return
 
 LavaridgeTown_Gym_1F_EventScript_1FE78C:: @ 81FE78C
-	trainerbattle 1, TRAINER_FLANNERY_1, 0, LavaridgeTown_Gym_1F_Text_1FF0DC, LavaridgeTown_Gym_1F_Text_1FF233, LavaridgeTown_Gym_1F_EventScript_1FE7C1
+	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_1FF0DC, LavaridgeTown_Gym_1F_Text_1FF233, LavaridgeTown_Gym_1F_EventScript_1FE7C1, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq LavaridgeTown_Gym_1F_EventScript_1FE864
@@ -114,12 +114,12 @@ LavaridgeTown_Gym_1F_EventScript_1FE841:: @ 81FE841
 	return
 
 LavaridgeTown_Gym_1F_EventScript_1FE864:: @ 81FE864
-	trainerbattle 7, TRAINER_FLANNERY_1, 0, LavaridgeTown_Gym_1F_Text_1FF601, LavaridgeTown_Gym_1F_Text_1FF69F, LavaridgeTown_Gym_1F_Text_1FF75E
+	trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_1FF601, LavaridgeTown_Gym_1F_Text_1FF69F, LavaridgeTown_Gym_1F_Text_1FF75E
 	msgbox LavaridgeTown_Gym_1F_Text_1FF6BF, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1FE87F:: @ 81FE87F
-	trainerbattle 2, TRAINER_COLE, 2, LavaridgeTown_Gym_1F_Text_1FEADE, LavaridgeTown_Gym_1F_Text_1FEAFB, LavaridgeTown_Gym_1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_COLE, 2, LavaridgeTown_Gym_1F_Text_1FEADE, LavaridgeTown_Gym_1F_Text_1FEAFB, LavaridgeTown_Gym_1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_1F_Text_1FEB1C, MSGBOX_AUTOCLOSE
 	end
 
@@ -133,37 +133,37 @@ LavaridgeTown_Gym_B1F_EventScript_1FE89A:: @ 81FE89A
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1FE8AF:: @ 81FE8AF
-	trainerbattle 2, TRAINER_AXLE, 4, LavaridgeTown_Gym_1F_Text_1FEB7B, LavaridgeTown_Gym_1F_Text_1FEBC0, LavaridgeTown_Gym_1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_AXLE, 4, LavaridgeTown_Gym_1F_Text_1FEB7B, LavaridgeTown_Gym_1F_Text_1FEBC0, LavaridgeTown_Gym_1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_1F_Text_1FEBE1, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_1FE8CA:: @ 81FE8CA
-	trainerbattle 2, TRAINER_KEEGAN, 2, LavaridgeTown_Gym_B1F_Text_1FEC31, LavaridgeTown_Gym_B1F_Text_1FECE3, LavaridgeTown_Gym_B1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_KEEGAN, 2, LavaridgeTown_Gym_B1F_Text_1FEC31, LavaridgeTown_Gym_B1F_Text_1FECE3, LavaridgeTown_Gym_B1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_B1F_Text_1FED02, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1FE8E5:: @ 81FE8E5
-	trainerbattle 2, TRAINER_DANIELLE, 5, LavaridgeTown_Gym_1F_Text_1FEE22, LavaridgeTown_Gym_1F_Text_1FEE42, LavaridgeTown_Gym_1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_DANIELLE, 5, LavaridgeTown_Gym_1F_Text_1FEE22, LavaridgeTown_Gym_1F_Text_1FEE42, LavaridgeTown_Gym_1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_1F_Text_1FEE5D, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1FE900:: @ 81FE900
-	trainerbattle 2, TRAINER_GERALD, 3, LavaridgeTown_Gym_1F_Text_1FED72, LavaridgeTown_Gym_1F_Text_1FED9E, LavaridgeTown_Gym_1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_GERALD, 3, LavaridgeTown_Gym_1F_Text_1FED72, LavaridgeTown_Gym_1F_Text_1FED9E, LavaridgeTown_Gym_1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_1F_Text_1FEDBB, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_1FE91B:: @ 81FE91B
-	trainerbattle 2, TRAINER_JACE, 1, LavaridgeTown_Gym_B1F_Text_1FEE9D, LavaridgeTown_Gym_B1F_Text_1FEED5, LavaridgeTown_Gym_B1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_JACE, 1, LavaridgeTown_Gym_B1F_Text_1FEE9D, LavaridgeTown_Gym_B1F_Text_1FEED5, LavaridgeTown_Gym_B1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_B1F_Text_1FEF07, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_1FE936:: @ 81FE936
-	trainerbattle 2, TRAINER_JEFF, 3, LavaridgeTown_Gym_B1F_Text_1FEF60, LavaridgeTown_Gym_B1F_Text_1FEFA7, LavaridgeTown_Gym_B1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_JEFF, 3, LavaridgeTown_Gym_B1F_Text_1FEF60, LavaridgeTown_Gym_B1F_Text_1FEFA7, LavaridgeTown_Gym_B1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_B1F_Text_1FEFC2, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_1FE951:: @ 81FE951
-	trainerbattle 2, TRAINER_ELI, 4, LavaridgeTown_Gym_B1F_Text_1FF025, LavaridgeTown_Gym_B1F_Text_1FF05F, LavaridgeTown_Gym_B1F_EventScript_1FE89A
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_ELI, 4, LavaridgeTown_Gym_B1F_Text_1FF025, LavaridgeTown_Gym_B1F_Text_1FF05F, LavaridgeTown_Gym_B1F_EventScript_1FE89A
 	msgbox LavaridgeTown_Gym_B1F_Text_1FF09A, MSGBOX_AUTOCLOSE
 	end
 

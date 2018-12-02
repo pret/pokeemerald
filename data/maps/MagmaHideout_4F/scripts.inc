@@ -57,7 +57,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_23AB33, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle 3, TRAINER_MAXIE_1, 0, MagmaHideout_4F_Text_23ABB5
+	trainerbattle_no_intro TRAINER_MAXIE_1, MagmaHideout_4F_Text_23ABB5
 	msgbox MagmaHideout_4F_Text_23ABE2, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
@@ -109,22 +109,22 @@ MagmaHideout_4F_Movement_23A680: @ 823A680
 	step_end
 
 MagmaHideout_4F_EventScript_23A68C:: @ 823A68C
-	trainerbattle 0, TRAINER_GRUNT_48, 0, MagmaHideout_4F_Text_23A6E8, MagmaHideout_4F_Text_23A775
+	trainerbattle_single TRAINER_GRUNT_48, MagmaHideout_4F_Text_23A6E8, MagmaHideout_4F_Text_23A775
 	msgbox MagmaHideout_4F_Text_23A7B5, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_23A6A3:: @ 823A6A3
-	trainerbattle 0, TRAINER_GRUNT_49, 0, MagmaHideout_4F_Text_23A7DA, MagmaHideout_4F_Text_23A81B
+	trainerbattle_single TRAINER_GRUNT_49, MagmaHideout_4F_Text_23A7DA, MagmaHideout_4F_Text_23A81B
 	msgbox MagmaHideout_4F_Text_23A841, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_23A6BA:: @ 823A6BA
-	trainerbattle 0, TRAINER_GRUNT_50, 0, MagmaHideout_4F_Text_23A86D, MagmaHideout_4F_Text_23A8A7
+	trainerbattle_single TRAINER_GRUNT_50, MagmaHideout_4F_Text_23A86D, MagmaHideout_4F_Text_23A8A7
 	msgbox MagmaHideout_4F_Text_23A8C6, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_23A6D1:: @ 823A6D1
-	trainerbattle 0, TRAINER_TABITHA_3, 0, MagmaHideout_4F_Text_23A8E1, MagmaHideout_4F_Text_23A994
+	trainerbattle_single TRAINER_TABITHA_3, MagmaHideout_4F_Text_23A8E1, MagmaHideout_4F_Text_23A994
 	msgbox MagmaHideout_4F_Text_23A9AC, MSGBOX_AUTOCLOSE
 	end
 

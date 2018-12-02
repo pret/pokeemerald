@@ -30,37 +30,37 @@ SSTidalRooms_EventScript_23CA33:: @ 823CA33
 	end
 
 SSTidalRooms_EventScript_23CA49:: @ 823CA49
-	trainerbattle 0, TRAINER_COLTON, 0, SSTidalRooms_Text_23CB14, SSTidalRooms_Text_23CB58
+	trainerbattle_single TRAINER_COLTON, SSTidalRooms_Text_23CB14, SSTidalRooms_Text_23CB58
 	msgbox SSTidalRooms_Text_23CB75, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA60:: @ 823CA60
-	trainerbattle 0, TRAINER_MICAH, 0, SSTidalRooms_Text_23CBEB, SSTidalRooms_Text_23CC04
+	trainerbattle_single TRAINER_MICAH, SSTidalRooms_Text_23CBEB, SSTidalRooms_Text_23CC04
 	msgbox SSTidalRooms_Text_23CC26, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA77:: @ 823CA77
-	trainerbattle 0, TRAINER_THOMAS, 0, SSTidalRooms_Text_23CC68, SSTidalRooms_Text_23CC8A
+	trainerbattle_single TRAINER_THOMAS, SSTidalRooms_Text_23CC68, SSTidalRooms_Text_23CC8A
 	msgbox SSTidalRooms_Text_23CCBB, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA8E:: @ 823CA8E
-	trainerbattle 4, TRAINER_LEA_AND_JED, 0, SSTidalRooms_Text_23CD04, SSTidalRooms_Text_23CD54, SSTidalRooms_Text_23CDC6
+	trainerbattle_double TRAINER_LEA_AND_JED, SSTidalRooms_Text_23CD04, SSTidalRooms_Text_23CD54, SSTidalRooms_Text_23CDC6
 	msgbox SSTidalRooms_Text_23CD5F, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CAA9:: @ 823CAA9
-	trainerbattle 4, TRAINER_LEA_AND_JED, 0, SSTidalRooms_Text_23CE04, SSTidalRooms_Text_23CE4B, SSTidalRooms_Text_23CEB0
+	trainerbattle_double TRAINER_LEA_AND_JED, SSTidalRooms_Text_23CE04, SSTidalRooms_Text_23CE4B, SSTidalRooms_Text_23CEB0
 	msgbox SSTidalRooms_Text_23CE59, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CAC4:: @ 823CAC4
-	trainerbattle 0, TRAINER_GARRET, 0, SSTidalRooms_Text_23CEEE, SSTidalRooms_Text_23CF36
+	trainerbattle_single TRAINER_GARRET, SSTidalRooms_Text_23CEEE, SSTidalRooms_Text_23CF36
 	msgbox SSTidalRooms_Text_23CF45, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CADB:: @ 823CADB
-	trainerbattle 0, TRAINER_NAOMI, 0, SSTidalRooms_Text_23CF97, SSTidalRooms_Text_23CFF4
+	trainerbattle_single TRAINER_NAOMI, SSTidalRooms_Text_23CF97, SSTidalRooms_Text_23CFF4
 	msgbox SSTidalRooms_Text_23D013, MSGBOX_AUTOCLOSE
 	end
 

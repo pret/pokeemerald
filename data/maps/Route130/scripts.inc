@@ -36,17 +36,17 @@ Route130_EventScript_1F73B5:: @ 81F73B5
 	return
 
 Route130_EventScript_1F73BF:: @ 81F73BF
-	trainerbattle 0, TRAINER_RODNEY, 0, Route130_Text_2A328A, Route130_Text_2A32E6
+	trainerbattle_single TRAINER_RODNEY, Route130_Text_2A328A, Route130_Text_2A32E6
 	msgbox Route130_Text_2A3300, MSGBOX_AUTOCLOSE
 	end
 
 Route130_EventScript_1F73D6:: @ 81F73D6
-	trainerbattle 0, TRAINER_KATIE, 0, Route130_Text_2A3363, Route130_Text_2A33AC
+	trainerbattle_single TRAINER_KATIE, Route130_Text_2A3363, Route130_Text_2A33AC
 	msgbox Route130_Text_2A33F5, MSGBOX_AUTOCLOSE
 	end
 
 Route130_EventScript_1F73ED:: @ 81F73ED
-	trainerbattle 0, TRAINER_SANTIAGO, 0, Route130_Text_2A343A, Route130_Text_2A346D
+	trainerbattle_single TRAINER_SANTIAGO, Route130_Text_2A343A, Route130_Text_2A346D
 	msgbox Route130_Text_2A3494, MSGBOX_AUTOCLOSE
 	end
 

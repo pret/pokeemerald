@@ -65,12 +65,12 @@ Route119_WeatherInstitute_1F_EventScript_26FB18:: @ 826FB18
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FB29:: @ 826FB29
-	trainerbattle 0, TRAINER_GRUNT_11, 0, Route119_WeatherInstitute_1F_Text_26FB57, Route119_WeatherInstitute_1F_Text_26FBBB
+	trainerbattle_single TRAINER_GRUNT_11, Route119_WeatherInstitute_1F_Text_26FB57, Route119_WeatherInstitute_1F_Text_26FBBB
 	msgbox Route119_WeatherInstitute_1F_Text_26FBD7, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FB40:: @ 826FB40
-	trainerbattle 0, TRAINER_GRUNT_20, 0, Route119_WeatherInstitute_1F_Text_26FC34, Route119_WeatherInstitute_1F_Text_26FC52
+	trainerbattle_single TRAINER_GRUNT_20, Route119_WeatherInstitute_1F_Text_26FC34, Route119_WeatherInstitute_1F_Text_26FC52
 	msgbox Route119_WeatherInstitute_1F_Text_26FC60, MSGBOX_AUTOCLOSE
 	end
 

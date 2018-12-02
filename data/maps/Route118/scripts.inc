@@ -187,7 +187,7 @@ Route118_Movement_1F3F7E: @ 81F3F7E
 	step_end
 
 Route118_EventScript_1F3F87:: @ 81F3F87
-	trainerbattle 2, TRAINER_ROSE_1, 0, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
+	trainerbattle_single TRAINER_ROSE_1, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3FD2
@@ -204,22 +204,22 @@ Route118_EventScript_1F3FB3:: @ 81F3FB3
 	end
 
 Route118_EventScript_1F3FD2:: @ 81F3FD2
-	trainerbattle 5, TRAINER_ROSE_1, 0, Route118_Text_29D382, Route118_Text_29D3AA
+	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_29D382, Route118_Text_29D3AA
 	msgbox Route118_Text_29D3D9, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F3FE9:: @ 81F3FE9
-	trainerbattle 0, TRAINER_BARNY, 0, Route118_Text_29D515, Route118_Text_29D55C
+	trainerbattle_single TRAINER_BARNY, Route118_Text_29D515, Route118_Text_29D55C
 	msgbox Route118_Text_29D587, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4000:: @ 81F4000
-	trainerbattle 0, TRAINER_WADE, 0, Route118_Text_29D5DF, Route118_Text_29D64C
+	trainerbattle_single TRAINER_WADE, Route118_Text_29D5DF, Route118_Text_29D64C
 	msgbox Route118_Text_29D663, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4017:: @ 81F4017
-	trainerbattle 2, TRAINER_DALTON_1, 0, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
+	trainerbattle_single TRAINER_DALTON_1, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F4062
@@ -236,22 +236,22 @@ Route118_EventScript_1F4043:: @ 81F4043
 	end
 
 Route118_EventScript_1F4062:: @ 81F4062
-	trainerbattle 5, TRAINER_DALTON_1, 0, Route118_Text_29D789, Route118_Text_29D7CA
+	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_29D789, Route118_Text_29D7CA
 	msgbox Route118_Text_29D7D5, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4079:: @ 81F4079
-	trainerbattle 0, TRAINER_PERRY, 0, Route118_Text_29D41D, Route118_Text_29D45B
+	trainerbattle_single TRAINER_PERRY, Route118_Text_29D41D, Route118_Text_29D45B
 	msgbox Route118_Text_29D46C, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4090:: @ 81F4090
-	trainerbattle 0, TRAINER_CHESTER, 0, Route118_Text_29D4A6, Route118_Text_29D4C4
+	trainerbattle_single TRAINER_CHESTER, Route118_Text_29D4A6, Route118_Text_29D4C4
 	msgbox Route118_Text_29D4DA, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F40A7:: @ 81F40A7
-	trainerbattle 0, TRAINER_DEANDRE, 0, Route118_Text_29D81B, Route118_Text_29D83C
+	trainerbattle_single TRAINER_DEANDRE, Route118_Text_29D81B, Route118_Text_29D83C
 	msgbox Route118_Text_29D872, MSGBOX_AUTOCLOSE
 	end
 

@@ -39,7 +39,7 @@ Route117_EventScript_1F39C7:: @ 81F39C7
 	end
 
 Route117_EventScript_1F39D0:: @ 81F39D0
-	trainerbattle 2, TRAINER_ISAAC_1, 0, Route117_Text_29C43F, Route117_Text_29C47A, Route117_EventScript_1F39FC
+	trainerbattle_single TRAINER_ISAAC_1, Route117_Text_29C43F, Route117_Text_29C47A, Route117_EventScript_1F39FC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3A1B
@@ -56,12 +56,12 @@ Route117_EventScript_1F39FC:: @ 81F39FC
 	end
 
 Route117_EventScript_1F3A1B:: @ 81F3A1B
-	trainerbattle 5, TRAINER_ISAAC_1, 0, Route117_Text_29C549, Route117_Text_29C58B
+	trainerbattle_rematch TRAINER_ISAAC_1, Route117_Text_29C549, Route117_Text_29C58B
 	msgbox Route117_Text_29C5D0, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3A32:: @ 81F3A32
-	trainerbattle 2, TRAINER_LYDIA_1, 0, Route117_Text_29C612, Route117_Text_29C659, Route117_EventScript_1F3A5E
+	trainerbattle_single TRAINER_LYDIA_1, Route117_Text_29C612, Route117_Text_29C659, Route117_EventScript_1F3A5E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3A7D
@@ -78,12 +78,12 @@ Route117_EventScript_1F3A5E:: @ 81F3A5E
 	end
 
 Route117_EventScript_1F3A7D:: @ 81F3A7D
-	trainerbattle 5, TRAINER_LYDIA_1, 0, Route117_Text_29C6FD, Route117_Text_29C73E
+	trainerbattle_rematch TRAINER_LYDIA_1, Route117_Text_29C6FD, Route117_Text_29C73E
 	msgbox Route117_Text_29C75A, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3A94:: @ 81F3A94
-	trainerbattle 2, TRAINER_DYLAN_1, 0, Route117_Text_29C7A5, Route117_Text_29C7EB, Route117_EventScript_1F3AC0
+	trainerbattle_single TRAINER_DYLAN_1, Route117_Text_29C7A5, Route117_Text_29C7EB, Route117_EventScript_1F3AC0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3ADF
@@ -100,12 +100,12 @@ Route117_EventScript_1F3AC0:: @ 81F3AC0
 	end
 
 Route117_EventScript_1F3ADF:: @ 81F3ADF
-	trainerbattle 5, TRAINER_DYLAN_1, 0, Route117_Text_29C880, Route117_Text_29C8E3
+	trainerbattle_rematch TRAINER_DYLAN_1, Route117_Text_29C880, Route117_Text_29C8E3
 	msgbox Route117_Text_29C8FE, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3AF6:: @ 81F3AF6
-	trainerbattle 2, TRAINER_MARIA_1, 0, Route117_Text_29C955, Route117_Text_29C9A6, Route117_EventScript_1F3B22
+	trainerbattle_single TRAINER_MARIA_1, Route117_Text_29C955, Route117_Text_29C9A6, Route117_EventScript_1F3B22
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3B41
@@ -122,17 +122,17 @@ Route117_EventScript_1F3B22:: @ 81F3B22
 	end
 
 Route117_EventScript_1F3B41:: @ 81F3B41
-	trainerbattle 5, TRAINER_MARIA_1, 0, Route117_Text_29CA7C, Route117_Text_29CACC
+	trainerbattle_rematch TRAINER_MARIA_1, Route117_Text_29CA7C, Route117_Text_29CACC
 	msgbox Route117_Text_29CAF6, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3B58:: @ 81F3B58
-	trainerbattle 0, TRAINER_DEREK, 0, Route117_Text_29CB32, Route117_Text_29CB87
+	trainerbattle_single TRAINER_DEREK, Route117_Text_29CB32, Route117_Text_29CB87
 	msgbox Route117_Text_29CBAD, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3B6F:: @ 81F3B6F
-	trainerbattle 6, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CC4A, Route117_Text_29CC8E, Route117_Text_29CD61, Route117_EventScript_1F3B9F
+	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_29CC4A, Route117_Text_29CC8E, Route117_Text_29CD61, Route117_EventScript_1F3B9F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3BB8
@@ -147,12 +147,12 @@ Route117_EventScript_1F3B9F:: @ 81F3B9F
 	end
 
 Route117_EventScript_1F3BB8:: @ 81F3BB8
-	trainerbattle 7, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CEB6, Route117_Text_29CEF6, Route117_Text_29CF6E
+	trainerbattle_rematch_double TRAINER_ANNA_AND_MEG_1, Route117_Text_29CEB6, Route117_Text_29CEF6, Route117_Text_29CF6E
 	msgbox Route117_Text_29CF1C, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3BD3:: @ 81F3BD3
-	trainerbattle 6, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CD9D, Route117_Text_29CDE9, Route117_Text_29CE52, Route117_EventScript_1F3C03
+	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_29CD9D, Route117_Text_29CDE9, Route117_Text_29CE52, Route117_EventScript_1F3C03
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3C1C
@@ -167,22 +167,22 @@ Route117_EventScript_1F3C03:: @ 81F3C03
 	end
 
 Route117_EventScript_1F3C1C:: @ 81F3C1C
-	trainerbattle 7, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CFAA, Route117_Text_29CFED, Route117_Text_29D053
+	trainerbattle_rematch_double TRAINER_ANNA_AND_MEG_1, Route117_Text_29CFAA, Route117_Text_29CFED, Route117_Text_29D053
 	msgbox Route117_Text_29CFFE, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3C37:: @ 81F3C37
-	trainerbattle 0, TRAINER_MELINA, 0, Route117_Text_29D0B7, Route117_Text_29D0F1
+	trainerbattle_single TRAINER_MELINA, Route117_Text_29D0B7, Route117_Text_29D0F1
 	msgbox Route117_Text_29D10E, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3C4E:: @ 81F3C4E
-	trainerbattle 0, TRAINER_BRANDI, 0, Route117_Text_29D14B, Route117_Text_29D189
+	trainerbattle_single TRAINER_BRANDI, Route117_Text_29D14B, Route117_Text_29D189
 	msgbox Route117_Text_29D196, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3C65:: @ 81F3C65
-	trainerbattle 0, TRAINER_AISHA, 0, Route117_Text_29D1D1, Route117_Text_29D206
+	trainerbattle_single TRAINER_AISHA, Route117_Text_29D1D1, Route117_Text_29D206
 	msgbox Route117_Text_29D24C, MSGBOX_AUTOCLOSE
 	end
 

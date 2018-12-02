@@ -86,17 +86,17 @@ Route109_SeashoreHouse_EventScript_2694D5:: @ 82694D5
 	end
 
 Route109_SeashoreHouse_EventScript_2694E2:: @ 82694E2
-	trainerbattle 2, TRAINER_DWAYNE, 0, Route109_SeashoreHouse_Text_269803, Route109_SeashoreHouse_Text_269867, Route109_SeashoreHouse_EventScript_269533
+	trainerbattle_single TRAINER_DWAYNE, Route109_SeashoreHouse_Text_269803, Route109_SeashoreHouse_Text_269867, Route109_SeashoreHouse_EventScript_269533
 	msgbox Route109_SeashoreHouse_Text_26989D, MSGBOX_AUTOCLOSE
 	end
 
 Route109_SeashoreHouse_EventScript_2694FD:: @ 82694FD
-	trainerbattle 2, TRAINER_JOHANNA, 0, Route109_SeashoreHouse_Text_2698E3, Route109_SeashoreHouse_Text_269947, Route109_SeashoreHouse_EventScript_269533
+	trainerbattle_single TRAINER_JOHANNA, Route109_SeashoreHouse_Text_2698E3, Route109_SeashoreHouse_Text_269947, Route109_SeashoreHouse_EventScript_269533
 	msgbox Route109_SeashoreHouse_Text_269953, MSGBOX_AUTOCLOSE
 	end
 
 Route109_SeashoreHouse_EventScript_269518:: @ 8269518
-	trainerbattle 2, TRAINER_SIMON, 0, Route109_SeashoreHouse_Text_269986, Route109_SeashoreHouse_Text_2699C5, Route109_SeashoreHouse_EventScript_269533
+	trainerbattle_single TRAINER_SIMON, Route109_SeashoreHouse_Text_269986, Route109_SeashoreHouse_Text_2699C5, Route109_SeashoreHouse_EventScript_269533
 	msgbox Route109_SeashoreHouse_Text_2699DF, MSGBOX_AUTOCLOSE
 	end
 

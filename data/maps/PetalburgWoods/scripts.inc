@@ -26,7 +26,7 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	applymovement 3, PetalburgWoods_Movement_22E20E
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_GRUNT_8, 0, PetalburgWoods_Text_22E542
+	trainerbattle_no_intro TRAINER_GRUNT_8, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
 	call PetalburgWoods_EventScript_22E138
@@ -62,7 +62,7 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	applymovement 255, PetalburgWoods_Movement_2725A6
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
-	trainerbattle 3, TRAINER_GRUNT_8, 0, PetalburgWoods_Text_22E542
+	trainerbattle_no_intro TRAINER_GRUNT_8, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
 	call PetalburgWoods_EventScript_22E138
@@ -273,12 +273,12 @@ PetalburgWoods_EventScript_22E264:: @ 822E264
 	end
 
 PetalburgWoods_EventScript_22E26D:: @ 822E26D
-	trainerbattle 0, TRAINER_LYLE, 0, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
+	trainerbattle_single TRAINER_LYLE, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
 	msgbox PetalburgWoods_Text_22E7EF, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_EventScript_22E284:: @ 822E284
-	trainerbattle 2, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
+	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq PetalburgWoods_EventScript_22E31B
@@ -318,7 +318,7 @@ PetalburgWoods_EventScript_22E302:: @ 822E302
 	end
 
 PetalburgWoods_EventScript_22E31B:: @ 822E31B
-	trainerbattle 5, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E966, PetalburgWoods_Text_22E998
+	trainerbattle_rematch TRAINER_JAMES_1, PetalburgWoods_Text_22E966, PetalburgWoods_Text_22E998
 	msgbox PetalburgWoods_Text_22E9B6, MSGBOX_AUTOCLOSE
 	end
 

@@ -304,32 +304,32 @@ Route110_TrickHousePuzzle7_EventScript_26E373:: @ 826E373
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E389:: @ 826E389
-	trainerbattle 0, TRAINER_JOSHUA, 0, Route110_TrickHousePuzzle7_Text_26E481, Route110_TrickHousePuzzle7_Text_26E4C1
+	trainerbattle_single TRAINER_JOSHUA, Route110_TrickHousePuzzle7_Text_26E481, Route110_TrickHousePuzzle7_Text_26E4C1
 	msgbox Route110_TrickHousePuzzle7_Text_26E4F4, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E3A0:: @ 826E3A0
-	trainerbattle 0, TRAINER_PATRICIA, 0, Route110_TrickHousePuzzle7_Text_26E531, Route110_TrickHousePuzzle7_Text_26E564
+	trainerbattle_single TRAINER_PATRICIA, Route110_TrickHousePuzzle7_Text_26E531, Route110_TrickHousePuzzle7_Text_26E564
 	msgbox Route110_TrickHousePuzzle7_Text_26E57F, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E3B7:: @ 826E3B7
-	trainerbattle 0, TRAINER_ALEXIS, 0, Route110_TrickHousePuzzle7_Text_26E5C0, Route110_TrickHousePuzzle7_Text_26E604
+	trainerbattle_single TRAINER_ALEXIS, Route110_TrickHousePuzzle7_Text_26E5C0, Route110_TrickHousePuzzle7_Text_26E604
 	msgbox Route110_TrickHousePuzzle7_Text_26E61E, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E3CE:: @ 826E3CE
-	trainerbattle 0, TRAINER_MARIELA, 0, Route110_TrickHousePuzzle7_Text_26E66B, Route110_TrickHousePuzzle7_Text_26E69C
+	trainerbattle_single TRAINER_MARIELA, Route110_TrickHousePuzzle7_Text_26E66B, Route110_TrickHousePuzzle7_Text_26E69C
 	msgbox Route110_TrickHousePuzzle7_Text_26E6BC, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E3E5:: @ 826E3E5
-	trainerbattle 0, TRAINER_ALVARO, 0, Route110_TrickHousePuzzle7_Text_26E6DA, Route110_TrickHousePuzzle7_Text_26E700
+	trainerbattle_single TRAINER_ALVARO, Route110_TrickHousePuzzle7_Text_26E6DA, Route110_TrickHousePuzzle7_Text_26E700
 	msgbox Route110_TrickHousePuzzle7_Text_26E722, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E3FC:: @ 826E3FC
-	trainerbattle 0, TRAINER_EVERETT, 0, Route110_TrickHousePuzzle7_Text_26E78D, Route110_TrickHousePuzzle7_Text_26E7AB
+	trainerbattle_single TRAINER_EVERETT, Route110_TrickHousePuzzle7_Text_26E78D, Route110_TrickHousePuzzle7_Text_26E7AB
 	msgbox Route110_TrickHousePuzzle7_Text_26E7C4, MSGBOX_AUTOCLOSE
 	end
 
