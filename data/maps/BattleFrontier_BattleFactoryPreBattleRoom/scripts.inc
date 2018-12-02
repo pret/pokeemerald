@@ -43,7 +43,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A1C8, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A1C8, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 8
 	special CallBattleFactoryFunction
@@ -52,7 +52,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	waitstate
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB96, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23F2B7
 	compare VAR_RESULT, 0
@@ -69,7 +69,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 16
 	special CallBattleFactoryFunction
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -79,15 +79,15 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26
 	playse 263
 	waitse
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC15, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC15, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1BF
 	waitmovement 0
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC58, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC58, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1C3
 	waitmovement 0
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC89, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC89, MSGBOX_DEFAULT
 	closemessage
 	delay 16
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
@@ -148,7 +148,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D2E:: @ 8259D2E
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D38:: @ 8259D38
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A350, 5
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A350, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E47
@@ -174,7 +174,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D98:: @ 8259D98
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB2E, 5
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB2E, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2
@@ -189,7 +189,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2:: @ 8259DF2
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 	setvar VAR_0x8004, 8
 	special CallBattleFactoryFunction
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB6C, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB6C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E1D:: @ 8259E1D
@@ -248,7 +248,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93:: @ 8259E93
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4, MSGBOX_DEFAULT
 	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62
 	compare VAR_0x8005, 1
@@ -288,75 +288,75 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93:: @ 8259E93
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62:: @ 8259F62
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3F8, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3F8, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F6B:: @ 8259F6B
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A597, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A597, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F74:: @ 8259F74
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A66B, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A66B, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F7D:: @ 8259F7D
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A5DF, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A5DF, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F86:: @ 8259F86
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A625, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A625, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F8F:: @ 8259F8F
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A73B, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A73B, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F98:: @ 8259F98
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A6F8, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A6F8, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FA1:: @ 8259FA1
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A77F, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A77F, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FAA:: @ 8259FAA
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A84E, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A84E, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FB3:: @ 8259FB3
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A43E, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A43E, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FBC:: @ 8259FBC
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A482, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A482, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FC5:: @ 8259FC5
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A50F, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A50F, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FCE:: @ 8259FCE
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A4C7, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A4C7, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FD7:: @ 8259FD7
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A6B1, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A6B1, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE0:: @ 8259FE0
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A554, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A554, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE9:: @ 8259FE9
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A7C4, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A7C4, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FF2:: @ 8259FF2
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A80A, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A80A, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB:: @ 8259FFB
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A893, 4
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A893, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004:: @ 825A004
@@ -381,39 +381,39 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004:: @ 825A004
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068:: @ 825A068
-	msgbox Text_StyleUnrestrained, 4
+	msgbox Text_StyleUnrestrained, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A071:: @ 825A071
-	msgbox Text_StyleTotalPreparation, 4
+	msgbox Text_StyleTotalPreparation, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A07A:: @ 825A07A
-	msgbox Text_StyleSlowAndSteady, 4
+	msgbox Text_StyleSlowAndSteady, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A083:: @ 825A083
-	msgbox Text_StyleEndurance, 4
+	msgbox Text_StyleEndurance, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A08C:: @ 825A08C
-	msgbox Text_StyleHighRisk, 4
+	msgbox Text_StyleHighRisk, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A095:: @ 825A095
-	msgbox Text_StyleWeakenFoe, 4
+	msgbox Text_StyleWeakenFoe, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A09E:: @ 825A09E
-	msgbox Text_StyleImpossibleToPredict, 4
+	msgbox Text_StyleImpossibleToPredict, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0A7:: @ 825A0A7
-	msgbox Text_StyleDependsOnFlow, 4
+	msgbox Text_StyleDependsOnFlow, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B0:: @ 825A0B0
-	msgbox Text_StyleFlexible, 4
+	msgbox Text_StyleFlexible, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9:: @ 825A0B9
@@ -439,8 +439,8 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A110:: @ 825A110
 	case 127, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A146:: @ 825A146
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD61, 4
-	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB2E, 5
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD61, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB2E, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 	case 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2

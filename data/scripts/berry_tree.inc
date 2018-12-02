@@ -31,7 +31,7 @@ Route102_EventScript_274359:: @ 8274359
 	end
 
 Route102_EventScript_274374:: @ 8274374
-	msgbox Route102_Text_274507, 5
+	msgbox Route102_Text_274507, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_274393
 	compare VAR_RESULT, 0
@@ -106,7 +106,7 @@ Route102_EventScript_274421:: @ 8274421
 	lock
 	faceplayer
 	special EventObjectInteractionGetBerryCountString
-	msgbox Route102_Text_2745EE, 5
+	msgbox Route102_Text_2745EE, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_274448
 	compare VAR_RESULT, 0
@@ -155,7 +155,7 @@ Route102_EventScript_27448D:: @ 827448D
 	compare VAR_RESULT, 0
 	goto_eq Route102_EventScript_2744BE
 	special EventObjectInteractionGetBerryName
-	msgbox Route102_Text_2746E4, 5
+	msgbox Route102_Text_2746E4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_2744C4
 	compare VAR_RESULT, 0

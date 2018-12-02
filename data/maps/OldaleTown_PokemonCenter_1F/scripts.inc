@@ -17,11 +17,11 @@ OldaleTown_PokemonCenter_1F_EventScript_1FC01A:: @ 81FC01A
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_1FC028:: @ 81FC028
-	msgbox OldaleTown_PokemonCenter_1F_Text_1FC059, 2
+	msgbox OldaleTown_PokemonCenter_1F_Text_1FC059, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_1FC031:: @ 81FC031
-	msgbox OldaleTown_PokemonCenter_1F_Text_1FC0CD, 2
+	msgbox OldaleTown_PokemonCenter_1F_Text_1FC0CD, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_1FC03A:: @ 81FC03A
@@ -29,12 +29,12 @@ OldaleTown_PokemonCenter_1F_EventScript_1FC03A:: @ 81FC03A
 	faceplayer
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_1FC04F
-	msgbox OldaleTown_PokemonCenter_1F_Text_1FC148, 4
+	msgbox OldaleTown_PokemonCenter_1F_Text_1FC148, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_1FC04F:: @ 81FC04F
-	msgbox OldaleTown_PokemonCenter_1F_Text_1FC1B9, 4
+	msgbox OldaleTown_PokemonCenter_1F_Text_1FC1B9, MSGBOX_DEFAULT
 	release
 	end
 

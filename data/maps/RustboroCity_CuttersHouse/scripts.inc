@@ -6,20 +6,20 @@ RustboroCity_CuttersHouse_EventScript_215BD4:: @ 8215BD4
 	faceplayer
 	checkflag FLAG_0x089
 	goto_eq RustboroCity_CuttersHouse_EventScript_215C00
-	msgbox RustboroCity_CuttersHouse_Text_215C13, 4
+	msgbox RustboroCity_CuttersHouse_Text_215C13, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM01
 	setflag FLAG_0x089
-	msgbox RustboroCity_CuttersHouse_Text_215D33, 4
+	msgbox RustboroCity_CuttersHouse_Text_215D33, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_CuttersHouse_EventScript_215C00:: @ 8215C00
-	msgbox RustboroCity_CuttersHouse_Text_215D33, 4
+	msgbox RustboroCity_CuttersHouse_Text_215D33, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_CuttersHouse_EventScript_215C0A:: @ 8215C0A
-	msgbox RustboroCity_CuttersHouse_Text_215E39, 2
+	msgbox RustboroCity_CuttersHouse_Text_215E39, MSGBOX_NPC
 	end
 
 RustboroCity_CuttersHouse_Text_215C13: @ 8215C13

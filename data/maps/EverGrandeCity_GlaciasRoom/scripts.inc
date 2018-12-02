@@ -44,20 +44,20 @@ EverGrandeCity_GlaciasRoom_EventScript_228469:: @ 8228469
 	checkflag FLAG_0x4FD
 	goto_eq EverGrandeCity_GlaciasRoom_EventScript_228490
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_2285B4
 	goto EverGrandeCity_GlaciasRoom_EventScript_22849A
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_228490:: @ 8228490
-	msgbox EverGrandeCity_GlaciasRoom_Text_228640, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_228640, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_22849A:: @ 822849A
 	setflag FLAG_0x4FD
 	call EverGrandeCity_GlaciasRoom_EventScript_2723F8
-	msgbox EverGrandeCity_GlaciasRoom_Text_228640, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_228640, MSGBOX_DEFAULT
 	release
 	end
 

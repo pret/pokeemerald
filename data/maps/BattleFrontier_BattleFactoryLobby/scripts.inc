@@ -27,7 +27,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258431:: @ 8258431
 
 BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
 	lockall
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258ECA, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258ECA, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 8
 	special CallBattleFactoryFunction
@@ -57,16 +57,16 @@ BattleFrontier_BattleFactoryLobby_EventScript_25849B:: @ 825849B
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_2584BD
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattleFactoryLobby_EventScript_2584C6
 
 BattleFrontier_BattleFactoryLobby_EventScript_2584BD:: @ 82584BD
-	msgbox BattleFrontier_BattleFactoryLobby_Text_25926A, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_25926A, MSGBOX_DEFAULT
 	waitmessage
 
 BattleFrontier_BattleFactoryLobby_EventScript_2584C6:: @ 82584C6
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2592BD, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2592BD, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryLobby_Text_241520, 9
@@ -116,7 +116,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25857D:: @ 825857D
 	call BattleFrontier_BattleFactoryLobby_EventScript_23E8B4
 
 BattleFrontier_BattleFactoryLobby_EventScript_258582:: @ 8258582
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -184,7 +184,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258653:: @ 8258653
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258C27, 5
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258C27, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_25879A
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_2586B9
@@ -216,7 +216,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 
 BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	special SavePlayerParty
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_25875C
@@ -256,7 +256,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25879A:: @ 825879A
 	special LoadPlayerParty
 
 BattleFrontier_BattleFactoryLobby_EventScript_25879D:: @ 825879D
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -275,11 +275,11 @@ BattleFrontier_BattleFactoryLobby_Movement_2587AC: @ 82587AC
 	step_end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587B1:: @ 82587B1
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2588EE, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2588EE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587BA:: @ 82587BA
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258F93, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258F93, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587C3:: @ 82587C3
@@ -291,11 +291,11 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587C9:: @ 82587C9
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587CF:: @ 82587CF
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2589B3, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2589B3, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587D8:: @ 82587D8
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259058, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259058, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587E1:: @ 82587E1
@@ -321,26 +321,26 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587FA:: @ 82587FA
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258813:: @ 8258813
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2593D7, 2
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2593D7, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_25881C:: @ 825881C
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2594E5, 2
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2594E5, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258825:: @ 8258825
 	lock
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259547, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259547, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258830:: @ 8258830
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2595C4, 2
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2595C4, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258839:: @ 8258839
 	lockall
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259721, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259721, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
@@ -359,27 +359,27 @@ BattleFrontier_BattleFactoryLobby_EventScript_258848:: @ 8258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588A6:: @ 82588A6
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259766, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259766, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588B4:: @ 82588B4
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2597FB, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2597FB, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588C2:: @ 82588C2
-	msgbox BattleFrontier_BattleFactoryLobby_Text_25987E, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_25987E, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588D0:: @ 82588D0
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259920, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259920, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588DE:: @ 82588DE
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259A5E, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259A5E, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 

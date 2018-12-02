@@ -71,34 +71,34 @@ BattleFrontier_RankingHall_EventScript_25E522:: @ 825E522
 	end
 
 BattleFrontier_RankingHall_EventScript_25E52F:: @ 825E52F
-	msgbox BattleFrontier_RankingHall_Text_25E57C, 2
+	msgbox BattleFrontier_RankingHall_Text_25E57C, MSGBOX_NPC
 	end
 
 BattleFrontier_RankingHall_EventScript_25E538:: @ 825E538
-	msgbox BattleFrontier_RankingHall_Text_25E5F9, 3
+	msgbox BattleFrontier_RankingHall_Text_25E5F9, MSGBOX_SIGN
 	end
 
 BattleFrontier_RankingHall_EventScript_25E541:: @ 825E541
-	msgbox BattleFrontier_RankingHall_Text_25E62E, 3
+	msgbox BattleFrontier_RankingHall_Text_25E62E, MSGBOX_SIGN
 	end
 
 BattleFrontier_RankingHall_EventScript_25E54A:: @ 825E54A
 	lock
 	faceplayer
-	msgbox BattleFrontier_RankingHall_Text_25E666, 5
+	msgbox BattleFrontier_RankingHall_Text_25E666, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_RankingHall_EventScript_25E569
-	msgbox BattleFrontier_RankingHall_Text_25E6B6, 4
+	msgbox BattleFrontier_RankingHall_Text_25E6B6, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_RankingHall_EventScript_25E569:: @ 825E569
-	msgbox BattleFrontier_RankingHall_Text_25E685, 4
+	msgbox BattleFrontier_RankingHall_Text_25E685, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_RankingHall_EventScript_25E573:: @ 825E573
-	msgbox BattleFrontier_RankingHall_Text_25E715, 2
+	msgbox BattleFrontier_RankingHall_Text_25E715, MSGBOX_NPC
 	end
 
 BattleFrontier_RankingHall_Text_25E57C: @ 825E57C

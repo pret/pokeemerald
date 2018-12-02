@@ -3,12 +3,12 @@ SeafloorCavern_Room4_MapScripts:: @ 8234C9B
 
 SeafloorCavern_Room4_EventScript_234C9C:: @ 8234C9C
 	trainerbattle 0, TRAINER_GRUNT_7, 0, SeafloorCavern_Room4_Text_234CCA, SeafloorCavern_Room4_Text_234CF3
-	msgbox SeafloorCavern_Room4_Text_234CFC, 6
+	msgbox SeafloorCavern_Room4_Text_234CFC, MSGBOX_AUTOCLOSE
 	end
 
 SeafloorCavern_Room4_EventScript_234CB3:: @ 8234CB3
 	trainerbattle 0, TRAINER_GRUNT_9, 0, SeafloorCavern_Room4_Text_234D3A, SeafloorCavern_Room4_Text_234D68
-	msgbox SeafloorCavern_Room4_Text_234D79, 6
+	msgbox SeafloorCavern_Room4_Text_234D79, MSGBOX_AUTOCLOSE
 	end
 
 SeafloorCavern_Room4_Text_234CCA: @ 8234CCA

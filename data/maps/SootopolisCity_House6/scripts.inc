@@ -6,10 +6,10 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	faceplayer
 	checkflag FLAG_0x0F5
 	goto_eq SootopolisCity_House6_EventScript_226FA3
-	msgbox SootopolisCity_House6_Text_226FC3, 5
+	msgbox SootopolisCity_House6_Text_226FC3, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	call_if 1, SootopolisCity_House6_EventScript_226F99
-	msgbox SootopolisCity_House6_Text_227034, 4
+	msgbox SootopolisCity_House6_Text_227034, MSGBOX_DEFAULT
 	givedecoration_std 117
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_House6_EventScript_226FAD
@@ -18,19 +18,19 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	end
 
 SootopolisCity_House6_EventScript_226F99:: @ 8226F99
-	msgbox SootopolisCity_House6_Text_22708F, 4
+	msgbox SootopolisCity_House6_Text_22708F, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House6_EventScript_226FA3:: @ 8226FA3
-	msgbox SootopolisCity_House6_Text_2270B7, 4
+	msgbox SootopolisCity_House6_Text_2270B7, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_House6_EventScript_226FAD:: @ 8226FAD
 	bufferdecorationname 1, 117
-	msgbox gUnknown_08272B1A, 4
-	msgbox SootopolisCity_House6_Text_22704A, 4
+	msgbox gUnknown_08272B1A, MSGBOX_DEFAULT
+	msgbox SootopolisCity_House6_Text_22704A, MSGBOX_DEFAULT
 	release
 	end
 

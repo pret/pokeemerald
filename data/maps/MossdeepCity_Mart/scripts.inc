@@ -7,7 +7,7 @@ MossdeepCity_Mart_EventScript_2223C8:: @ 82223C8
 	message gUnknown_08272A21
 	waitmessage
 	pokemart MossdeepCity_Mart_Pokemart_2223E0
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -27,15 +27,15 @@ MossdeepCity_Mart_Pokemart_2223E0: @ 82223E0
 	end
 
 MossdeepCity_Mart_EventScript_2223F6:: @ 82223F6
-	msgbox MossdeepCity_Mart_Text_222411, 2
+	msgbox MossdeepCity_Mart_Text_222411, MSGBOX_NPC
 	end
 
 MossdeepCity_Mart_EventScript_2223FF:: @ 82223FF
-	msgbox MossdeepCity_Mart_Text_2224A0, 2
+	msgbox MossdeepCity_Mart_Text_2224A0, MSGBOX_NPC
 	end
 
 MossdeepCity_Mart_EventScript_222408:: @ 8222408
-	msgbox MossdeepCity_Mart_Text_2224FA, 2
+	msgbox MossdeepCity_Mart_Text_2224FA, MSGBOX_NPC
 	end
 
 MossdeepCity_Mart_Text_222411: @ 8222411

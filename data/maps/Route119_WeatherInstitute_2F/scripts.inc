@@ -28,39 +28,39 @@ Route119_WeatherInstitute_2F_EventScript_26FF5C:: @ 826FF5C
 
 Route119_WeatherInstitute_2F_EventScript_26FF68:: @ 826FF68
 	trainerbattle 0, TRAINER_GRUNT_37, 0, Route119_WeatherInstitute_2F_Text_270335, Route119_WeatherInstitute_2F_Text_27039F
-	msgbox Route119_WeatherInstitute_2F_Text_2703C0, 6
+	msgbox Route119_WeatherInstitute_2F_Text_2703C0, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FF7F:: @ 826FF7F
 	trainerbattle 0, TRAINER_GRUNT_12, 0, Route119_WeatherInstitute_2F_Text_27019C, Route119_WeatherInstitute_2F_Text_270208
-	msgbox Route119_WeatherInstitute_2F_Text_27022B, 6
+	msgbox Route119_WeatherInstitute_2F_Text_27022B, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FF96:: @ 826FF96
 	trainerbattle 0, TRAINER_GRUNT_13, 0, Route119_WeatherInstitute_2F_Text_270292, Route119_WeatherInstitute_2F_Text_2702CE
-	msgbox Route119_WeatherInstitute_2F_Text_2702DA, 6
+	msgbox Route119_WeatherInstitute_2F_Text_2702DA, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FFAD:: @ 826FFAD
 	trainerbattle 2, TRAINER_SHELLY_1, 0, Route119_WeatherInstitute_2F_Text_270409, Route119_WeatherInstitute_2F_Text_2704BD, Route119_WeatherInstitute_2F_EventScript_26FFC8
-	msgbox Route119_WeatherInstitute_2F_Text_2704E4, 6
+	msgbox Route119_WeatherInstitute_2F_Text_2704E4, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
-	msgbox Route119_WeatherInstitute_2F_Text_2704E4, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2704E4, MSGBOX_DEFAULT
 	closemessage
 	addobject 7
 	applymovement 7, Route119_WeatherInstitute_2F_Movement_270170
 	applymovement 255, Route119_WeatherInstitute_2F_Movement_27017C
 	waitmovement 0
-	msgbox Route119_WeatherInstitute_2F_Text_270568, 4
+	msgbox Route119_WeatherInstitute_2F_Text_270568, MSGBOX_DEFAULT
 	closemessage
 	playse SE_PIN
 	applymovement 3, Route119_WeatherInstitute_2F_Movement_272598
 	waitmovement 0
 	applymovement 3, Route119_WeatherInstitute_2F_Movement_27259A
 	waitmovement 0
-	msgbox Route119_WeatherInstitute_2F_Text_2705DD, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2705DD, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS
@@ -83,7 +83,7 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	end
 
 Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
-	msgbox Route119_WeatherInstitute_2F_Text_270650, 4
+	msgbox Route119_WeatherInstitute_2F_Text_270650, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, 385
 	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
@@ -95,7 +95,7 @@ Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 
 Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
@@ -105,7 +105,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 
 Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700D0
 	call Route119_WeatherInstitute_2F_EventScript_273797
@@ -126,7 +126,7 @@ Route119_WeatherInstitute_2F_EventScript_2700DB:: @ 82700DB
 	return
 
 Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
-	msgbox Route119_WeatherInstitute_2F_Text_2706FE, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2706FE, MSGBOX_DEFAULT
 	setflag FLAG_0x097
 	release
 	end
@@ -134,7 +134,7 @@ Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
 Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq Route119_WeatherInstitute_2F_EventScript_27010A
-	msgbox Route119_WeatherInstitute_2F_Text_27077E, 4
+	msgbox Route119_WeatherInstitute_2F_Text_27077E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -151,12 +151,12 @@ Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	specialvar VAR_RESULT, sub_813B374
 	compare VAR_RESULT, 1
 	goto_eq Route119_WeatherInstitute_2F_EventScript_27014F
-	msgbox Route119_WeatherInstitute_2F_Text_2707F1, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2707F1, MSGBOX_DEFAULT
 	release
 	end
 
 Route119_WeatherInstitute_2F_EventScript_27014F:: @ 827014F
-	msgbox Route119_WeatherInstitute_2F_Text_270873, 4
+	msgbox Route119_WeatherInstitute_2F_Text_270873, MSGBOX_DEFAULT
 	release
 	end
 
@@ -170,7 +170,7 @@ Route119_WeatherInstitute_2F_EventScript_270160:: @ 8270160
 	return
 
 Route119_WeatherInstitute_2F_EventScript_270166:: @ 8270166
-	msgbox Route119_WeatherInstitute_2F_Text_2708FC, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2708FC, MSGBOX_DEFAULT
 	release
 	end
 

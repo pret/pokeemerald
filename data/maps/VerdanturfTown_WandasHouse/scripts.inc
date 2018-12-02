@@ -6,13 +6,13 @@ VerdanturfTown_WandasHouse_EventScript_2028BF:: @ 82028BF
 	faceplayer
 	checkflag FLAG_0x0C1
 	goto_eq VerdanturfTown_WandasHouse_EventScript_2028D7
-	msgbox VerdanturfTown_WandasHouse_Text_202993, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202993, MSGBOX_DEFAULT
 	setflag FLAG_0x0C1
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_2028D7:: @ 82028D7
-	msgbox VerdanturfTown_WandasHouse_Text_202ABE, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202ABE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -23,22 +23,22 @@ VerdanturfTown_WandasHouse_EventScript_2028E1:: @ 82028E1
 	goto_eq VerdanturfTown_WandasHouse_EventScript_202909
 	checkflag FLAG_0x4F3
 	goto_eq VerdanturfTown_WandasHouse_EventScript_2028FF
-	msgbox VerdanturfTown_WandasHouse_Text_202B37, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202B37, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_2028FF:: @ 82028FF
-	msgbox VerdanturfTown_WandasHouse_Text_202C20, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202C20, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_202909:: @ 8202909
-	msgbox VerdanturfTown_WandasHouse_Text_202C4E, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202C4E, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_202913:: @ 8202913
-	msgbox VerdanturfTown_WandasHouse_Text_202E00, 2
+	msgbox VerdanturfTown_WandasHouse_Text_202E00, MSGBOX_NPC
 	end
 
 VerdanturfTown_WandasHouse_EventScript_20291C:: @ 820291C
@@ -48,17 +48,17 @@ VerdanturfTown_WandasHouse_EventScript_20291C:: @ 820291C
 	goto_eq VerdanturfTown_WandasHouse_EventScript_202944
 	checkflag FLAG_0x0BE
 	goto_eq VerdanturfTown_WandasHouse_EventScript_20293A
-	msgbox VerdanturfTown_WandasHouse_Text_202D91, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202D91, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_20293A:: @ 820293A
-	msgbox VerdanturfTown_WandasHouse_Text_202CCF, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202CCF, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_202944:: @ 8202944
-	msgbox VerdanturfTown_WandasHouse_Text_202D91, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202D91, MSGBOX_DEFAULT
 	release
 	end
 
@@ -71,22 +71,22 @@ VerdanturfTown_WandasHouse_EventScript_20294E:: @ 820294E
 	goto_eq VerdanturfTown_WandasHouse_EventScript_20297F
 	checkflag FLAG_RUSTURF_TUNNEL_OPENED
 	goto_eq VerdanturfTown_WandasHouse_EventScript_202975
-	msgbox VerdanturfTown_WandasHouse_Text_202E47, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202E47, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_202975:: @ 8202975
-	msgbox VerdanturfTown_WandasHouse_Text_202F19, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202F19, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_20297F:: @ 820297F
-	msgbox VerdanturfTown_WandasHouse_Text_202F73, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202F73, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_WandasHouse_EventScript_202989:: @ 8202989
-	msgbox VerdanturfTown_WandasHouse_Text_202FDB, 4
+	msgbox VerdanturfTown_WandasHouse_Text_202FDB, MSGBOX_DEFAULT
 	release
 	end
 

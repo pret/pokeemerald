@@ -17,15 +17,15 @@ RustboroCity_PokemonCenter_1F_EventScript_214D76:: @ 8214D76
 	end
 
 RustboroCity_PokemonCenter_1F_EventScript_214D84:: @ 8214D84
-	msgbox RustboroCity_PokemonCenter_1F_Text_214D9F, 2
+	msgbox RustboroCity_PokemonCenter_1F_Text_214D9F, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonCenter_1F_EventScript_214D8D:: @ 8214D8D
-	msgbox RustboroCity_PokemonCenter_1F_Text_214E13, 2
+	msgbox RustboroCity_PokemonCenter_1F_Text_214E13, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonCenter_1F_EventScript_214D96:: @ 8214D96
-	msgbox RustboroCity_PokemonCenter_1F_Text_214E81, 2
+	msgbox RustboroCity_PokemonCenter_1F_Text_214E81, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonCenter_1F_Text_214D9F: @ 8214D9F

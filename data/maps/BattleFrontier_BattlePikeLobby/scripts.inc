@@ -29,7 +29,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
 	setvar VAR_0x8004, 27
 	special CallBattlePikeFunction
 	lockall
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -53,16 +53,16 @@ BattleFrontier_BattlePikeLobby_EventScript_25B762:: @ 825B762
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25B784
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C18A, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C18A, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattlePikeLobby_EventScript_25B78D
 
 BattleFrontier_BattlePikeLobby_EventScript_25B784:: @ 825B784
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C383, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C383, MSGBOX_DEFAULT
 	waitmessage
 
 BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C3D9, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C3D9, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePikeLobby_Text_241520, 9
@@ -87,7 +87,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -116,7 +116,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -128,7 +128,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B868:: @ 825B868
 	setvar VAR_FRONTIER_FACILITY, 5
 	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	special SavePlayerParty
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BB52, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BB52, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePikeLobby_EventScript_25B87F:: @ 825B87F
 	message BattleFrontier_BattlePikeLobby_Text_25BBC1
@@ -155,7 +155,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C094, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C094, MSGBOX_DEFAULT
 	fadescreen 1
 	call BattleFrontier_BattlePikeLobby_EventScript_23F2B7
 	copyvar VAR_0x8004, VAR_RESULT
@@ -164,7 +164,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C0D8, 5
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C0D8, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BA73
 	case 1, BattleFrontier_BattlePikeLobby_EventScript_25B95C
@@ -205,7 +205,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C130, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C130, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 5
 	special CallFrontierUtilFunc
@@ -218,7 +218,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA1A:: @ 825BA1A
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BBF5, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BBF5, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25B87F
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA27:: @ 825BA27
@@ -227,11 +227,11 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA27:: @ 825BA27
 	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BA4F
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA42:: @ 825BA42
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BE8C, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE8C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BA7E
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA4F:: @ 825BA4F
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BF9A, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BF9A, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BA7E
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA5C:: @ 825BA5C
@@ -245,7 +245,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA73:: @ 825BA73
 	special LoadPlayerParty
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA76:: @ 825BA76
-	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA7E:: @ 825BA7E
 	release
@@ -277,20 +277,20 @@ BattleFrontier_BattlePikeLobby_Movement_25BAA7: @ 825BAA7
 	step_end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BAAB:: @ 825BAAB
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C422, 2
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C422, MSGBOX_NPC
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BAB4:: @ 825BAB4
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C4A5, 2
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C4A5, MSGBOX_NPC
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BABD:: @ 825BABD
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C4FD, 2
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C4FD, MSGBOX_NPC
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BAC6:: @ 825BAC6
 	lockall
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C5FB, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C5FB, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
 	end
 
@@ -307,17 +307,17 @@ BattleFrontier_BattlePikeLobby_EventScript_25BAD5:: @ 825BAD5
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BB1D:: @ 825BB1D
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C644, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C644, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BB2B:: @ 825BB2B
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C68A, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C68A, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25BB39:: @ 825BB39
-	msgbox BattleFrontier_BattlePikeLobby_Text_25C6EB, 4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C6EB, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
 	end
 

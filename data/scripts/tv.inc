@@ -32,18 +32,18 @@ EventScript_27EE54:: @ 827EE54
 
 EventScript_27EE8A:: @ 827EE8A
 	special GetMomOrDadStringForTVMessage
-	msgbox gUnknown_08272BCF, 4
+	msgbox gUnknown_08272BCF, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
 
 EventScript_27EE9A:: @ 827EE9A
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F0F, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7F0F, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_27EEA4:: @ 827EEA4
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATI
 	setflag FLAG_0x0FF
@@ -68,7 +68,7 @@ EventScript_27EED0:: @ 827EED0
 
 EventScript_27EED8:: @ 827EED8
 	special GetMomOrDadStringForTVMessage
-	msgbox gUnknown_08272BCF, 4
+	msgbox gUnknown_08272BCF, MSGBOX_DEFAULT
 	goto EventScript_27EED0
 	end
 

@@ -20,11 +20,11 @@ Route104_PrettyPetalFlowerShop_EventScript_22A373:: @ 822A373
 	faceplayer
 	checkflag FLAG_TEMP_1
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_22A3E4
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A7686, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A7686, MSGBOX_DEFAULT
 	checkflag FLAG_0x07F
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_22A3B2
 	setflag FLAG_0x07F
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A7706, 5
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A7706, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3D2
 	compare VAR_RESULT, 0
@@ -33,7 +33,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A373:: @ 822A373
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3B2:: @ 822A3B2
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A76D9, 5
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A76D9, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3D2
 	compare VAR_RESULT, 0
@@ -42,18 +42,18 @@ Route104_PrettyPetalFlowerShop_EventScript_22A3B2:: @ 822A3B2
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3D2:: @ 822A3D2
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A775B, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A775B, MSGBOX_DEFAULT
 	return
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3DB:: @ 822A3DB
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A78DF, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A78DF, MSGBOX_DEFAULT
 	return
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3E4:: @ 822A3E4
 	message gUnknown_08272A52
 	waitmessage
 	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_22A3FC
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -74,14 +74,14 @@ Route104_PrettyPetalFlowerShop_EventScript_22A40C:: @ 822A40C
 	faceplayer
 	checkflag FLAG_0x05E
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_22A421
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A79A6, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A79A6, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A421:: @ 822A421
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A7916, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A7916, MSGBOX_DEFAULT
 	giveitem_std ITEM_WAILMER_PAIL
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A79A6, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A79A6, MSGBOX_DEFAULT
 	setflag FLAG_0x05E
 	release
 	end
@@ -92,19 +92,19 @@ Route104_PrettyPetalFlowerShop_EventScript_22A442:: @ 822A442
 	dodailyevents
 	checkflag FLAG_0x930
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_22A482
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A7A98, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A7A98, MSGBOX_DEFAULT
 	random 8
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_272054
 	setflag FLAG_0x930
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A482:: @ 822A482
-	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, 4
+	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, MSGBOX_DEFAULT
 	release
 	end
 

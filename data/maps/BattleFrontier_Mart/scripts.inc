@@ -7,7 +7,7 @@ BattleFrontier_Mart_EventScript_267ACC:: @ 8267ACC
 	message gUnknown_08272A21
 	waitmessage
 	pokemart BattleFrontier_Mart_Pokemart_267AE4
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -31,19 +31,19 @@ BattleFrontier_Mart_Pokemart_267AE4: @ 8267AE4
 	end
 
 BattleFrontier_Mart_EventScript_267B02:: @ 8267B02
-	msgbox BattleFrontier_Mart_Text_267B29, 2
+	msgbox BattleFrontier_Mart_Text_267B29, MSGBOX_NPC
 	end
 
 BattleFrontier_Mart_EventScript_267B0B:: @ 8267B0B
 	lock
 	applymovement 2, BattleFrontier_Mart_Movement_2725B0
 	waitmovement 0
-	msgbox BattleFrontier_Mart_Text_267B8F, 4
+	msgbox BattleFrontier_Mart_Text_267B8F, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Mart_EventScript_267B20:: @ 8267B20
-	msgbox BattleFrontier_Mart_Text_267C01, 2
+	msgbox BattleFrontier_Mart_Text_267C01, MSGBOX_NPC
 	end
 
 BattleFrontier_Mart_Text_267B29: @ 8267B29

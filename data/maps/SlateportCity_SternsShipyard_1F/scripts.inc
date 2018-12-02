@@ -11,10 +11,10 @@ SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 	goto_eq SlateportCity_SternsShipyard_1F_EventScript_207FD9
 	checkflag FLAG_0x094
 	goto_eq SlateportCity_SternsShipyard_1F_EventScript_207FBA
-	msgbox SlateportCity_SternsShipyard_1F_Text_208008, 4
+	msgbox SlateportCity_SternsShipyard_1F_Text_208008, MSGBOX_DEFAULT
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_2080A5, 4
+	msgbox SlateportCity_SternsShipyard_1F_Text_2080A5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_2725A2
 	waitmovement 0
@@ -26,21 +26,21 @@ SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 SlateportCity_SternsShipyard_1F_EventScript_207F92:: @ 8207F92
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_208323, 4
+	msgbox SlateportCity_SternsShipyard_1F_Text_208323, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_207FA6:: @ 8207FA6
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_2082A8, 4
+	msgbox SlateportCity_SternsShipyard_1F_Text_2082A8, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_207FBA:: @ 8207FBA
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_2081A5, 4
+	msgbox SlateportCity_SternsShipyard_1F_Text_2081A5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_2725A2
 	waitmovement 0
@@ -50,20 +50,20 @@ SlateportCity_SternsShipyard_1F_EventScript_207FBA:: @ 8207FBA
 SlateportCity_SternsShipyard_1F_EventScript_207FD9:: @ 8207FD9
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_208213, 4
+	msgbox SlateportCity_SternsShipyard_1F_Text_208213, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_207FED:: @ 8207FED
-	msgbox SlateportCity_SternsShipyard_1F_Text_208558, 2
+	msgbox SlateportCity_SternsShipyard_1F_Text_208558, MSGBOX_NPC
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_207FF6:: @ 8207FF6
-	msgbox SlateportCity_SternsShipyard_1F_Text_2085FF, 2
+	msgbox SlateportCity_SternsShipyard_1F_Text_2085FF, MSGBOX_NPC
 	end
 
 SlateportCity_SternsShipyard_1F_EventScript_207FFF:: @ 8207FFF
-	msgbox SlateportCity_SternsShipyard_1F_Text_2083EE, 2
+	msgbox SlateportCity_SternsShipyard_1F_Text_2083EE, MSGBOX_NPC
 	end
 
 SlateportCity_SternsShipyard_1F_Text_208008: @ 8208008

@@ -7,12 +7,12 @@ BattleFrontier_Lounge2_EventScript_260643:: @ 8260643
 	checkflag FLAG_0x154
 	goto_eq BattleFrontier_Lounge2_EventScript_26065F
 	setflag FLAG_0x154
-	msgbox BattleFrontier_Lounge2_Text_260766, 4
+	msgbox BattleFrontier_Lounge2_Text_260766, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge2_EventScript_26066D
 	end
 
 BattleFrontier_Lounge2_EventScript_26065F:: @ 826065F
-	msgbox BattleFrontier_Lounge2_Text_260857, 4
+	msgbox BattleFrontier_Lounge2_Text_260857, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge2_EventScript_26066D
 	end
 
@@ -48,11 +48,11 @@ BattleFrontier_Lounge2_EventScript_26066D:: @ 826066D
 	end
 
 BattleFrontier_Lounge2_EventScript_2606F8:: @ 82606F8
-	msgbox BattleFrontier_Lounge2_Text_260933, 4
+	msgbox BattleFrontier_Lounge2_Text_260933, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_Lounge2_EventScript_260701:: @ 8260701
-	msgbox BattleFrontier_Lounge2_Text_2608F2, 4
+	msgbox BattleFrontier_Lounge2_Text_2608F2, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_Lounge2_EventScript_26070A:: @ 826070A
@@ -97,24 +97,24 @@ BattleFrontier_Lounge2_EventScript_260737:: @ 8260737
 
 BattleFrontier_Lounge2_EventScript_26073C:: @ 826073C
 	lock
-	msgbox BattleFrontier_Lounge2_Text_261C9C, 4
+	msgbox BattleFrontier_Lounge2_Text_261C9C, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge2_EventScript_260747:: @ 8260747
 	lock
-	msgbox BattleFrontier_Lounge2_Text_261CDC, 4
+	msgbox BattleFrontier_Lounge2_Text_261CDC, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge2_EventScript_260752:: @ 8260752
 	lock
-	msgbox BattleFrontier_Lounge2_Text_261D1D, 4
+	msgbox BattleFrontier_Lounge2_Text_261D1D, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge2_EventScript_26075D:: @ 826075D
-	msgbox BattleFrontier_Lounge2_Text_261D5C, 2
+	msgbox BattleFrontier_Lounge2_Text_261D5C, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge2_Text_260766:: @ 8260766

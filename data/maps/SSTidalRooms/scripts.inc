@@ -6,23 +6,23 @@ SSTidalRooms_EventScript_23C9F2:: @ 823C9F2
 	faceplayer
 	checkflag FLAG_0x104
 	goto_eq SSTidalRooms_EventScript_23CA29
-	msgbox SSTidalRooms_Text_23D098, 4
+	msgbox SSTidalRooms_Text_23D098, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM49
 	compare VAR_RESULT, 0
 	goto_eq SSTidalRooms_EventScript_272054
 	setflag FLAG_0x104
-	msgbox SSTidalRooms_Text_23D145, 4
+	msgbox SSTidalRooms_Text_23D145, MSGBOX_DEFAULT
 	release
 	end
 
 SSTidalRooms_EventScript_23CA29:: @ 823CA29
-	msgbox SSTidalRooms_Text_23D145, 4
+	msgbox SSTidalRooms_Text_23D145, MSGBOX_DEFAULT
 	release
 	end
 
 SSTidalRooms_EventScript_23CA33:: @ 823CA33
 	lockall
-	msgbox SSTidalRooms_Text_23CAF2, 4
+	msgbox SSTidalRooms_Text_23CAF2, MSGBOX_DEFAULT
 	closemessage
 	call SSTidalRooms_EventScript_272083
 	call SSTidalRooms_EventScript_23C0A7
@@ -31,37 +31,37 @@ SSTidalRooms_EventScript_23CA33:: @ 823CA33
 
 SSTidalRooms_EventScript_23CA49:: @ 823CA49
 	trainerbattle 0, TRAINER_COLTON, 0, SSTidalRooms_Text_23CB14, SSTidalRooms_Text_23CB58
-	msgbox SSTidalRooms_Text_23CB75, 6
+	msgbox SSTidalRooms_Text_23CB75, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA60:: @ 823CA60
 	trainerbattle 0, TRAINER_MICAH, 0, SSTidalRooms_Text_23CBEB, SSTidalRooms_Text_23CC04
-	msgbox SSTidalRooms_Text_23CC26, 6
+	msgbox SSTidalRooms_Text_23CC26, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA77:: @ 823CA77
 	trainerbattle 0, TRAINER_THOMAS, 0, SSTidalRooms_Text_23CC68, SSTidalRooms_Text_23CC8A
-	msgbox SSTidalRooms_Text_23CCBB, 6
+	msgbox SSTidalRooms_Text_23CCBB, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CA8E:: @ 823CA8E
 	trainerbattle 4, TRAINER_LEA_AND_JED, 0, SSTidalRooms_Text_23CD04, SSTidalRooms_Text_23CD54, SSTidalRooms_Text_23CDC6
-	msgbox SSTidalRooms_Text_23CD5F, 6
+	msgbox SSTidalRooms_Text_23CD5F, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CAA9:: @ 823CAA9
 	trainerbattle 4, TRAINER_LEA_AND_JED, 0, SSTidalRooms_Text_23CE04, SSTidalRooms_Text_23CE4B, SSTidalRooms_Text_23CEB0
-	msgbox SSTidalRooms_Text_23CE59, 6
+	msgbox SSTidalRooms_Text_23CE59, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CAC4:: @ 823CAC4
 	trainerbattle 0, TRAINER_GARRET, 0, SSTidalRooms_Text_23CEEE, SSTidalRooms_Text_23CF36
-	msgbox SSTidalRooms_Text_23CF45, 6
+	msgbox SSTidalRooms_Text_23CF45, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_23CADB:: @ 823CADB
 	trainerbattle 0, TRAINER_NAOMI, 0, SSTidalRooms_Text_23CF97, SSTidalRooms_Text_23CFF4
-	msgbox SSTidalRooms_Text_23D013, 6
+	msgbox SSTidalRooms_Text_23D013, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_Text_23CAF2: @ 823CAF2

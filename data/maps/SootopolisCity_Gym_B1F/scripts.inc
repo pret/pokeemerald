@@ -3,52 +3,52 @@ SootopolisCity_Gym_B1F_MapScripts:: @ 8225C8A
 
 SootopolisCity_Gym_B1F_EventScript_225C8B:: @ 8225C8B
 	trainerbattle 0, TRAINER_ANDREA, 0, SootopolisCity_Gym_B1F_Text_225D71, SootopolisCity_Gym_B1F_Text_225DB6
-	msgbox SootopolisCity_Gym_B1F_Text_225DCF, 6
+	msgbox SootopolisCity_Gym_B1F_Text_225DCF, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225CA2:: @ 8225CA2
 	trainerbattle 0, TRAINER_CRISSY, 0, SootopolisCity_Gym_B1F_Text_225E04, SootopolisCity_Gym_B1F_Text_225E60
-	msgbox SootopolisCity_Gym_B1F_Text_225E90, 6
+	msgbox SootopolisCity_Gym_B1F_Text_225E90, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225CB9:: @ 8225CB9
 	trainerbattle 0, TRAINER_BRIANNA, 0, SootopolisCity_Gym_B1F_Text_22646E, SootopolisCity_Gym_B1F_Text_226495
-	msgbox SootopolisCity_Gym_B1F_Text_2264BC, 6
+	msgbox SootopolisCity_Gym_B1F_Text_2264BC, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225CD0:: @ 8225CD0
 	trainerbattle 0, TRAINER_CONNIE, 0, SootopolisCity_Gym_B1F_Text_225FBE, SootopolisCity_Gym_B1F_Text_225FEB
-	msgbox SootopolisCity_Gym_B1F_Text_225FFE, 6
+	msgbox SootopolisCity_Gym_B1F_Text_225FFE, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225CE7:: @ 8225CE7
 	trainerbattle 0, TRAINER_BRIDGET, 0, SootopolisCity_Gym_B1F_Text_226061, SootopolisCity_Gym_B1F_Text_2260B6
-	msgbox SootopolisCity_Gym_B1F_Text_2260D1, 6
+	msgbox SootopolisCity_Gym_B1F_Text_2260D1, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225CFE:: @ 8225CFE
 	trainerbattle 0, TRAINER_OLIVIA, 0, SootopolisCity_Gym_B1F_Text_226164, SootopolisCity_Gym_B1F_Text_2261A7
-	msgbox SootopolisCity_Gym_B1F_Text_2261B5, 6
+	msgbox SootopolisCity_Gym_B1F_Text_2261B5, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225D15:: @ 8225D15
 	trainerbattle 0, TRAINER_TIFFANY, 0, SootopolisCity_Gym_B1F_Text_2261F7, SootopolisCity_Gym_B1F_Text_226274
-	msgbox SootopolisCity_Gym_B1F_Text_226286, 6
+	msgbox SootopolisCity_Gym_B1F_Text_226286, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225D2C:: @ 8225D2C
 	trainerbattle 0, TRAINER_BETHANY, 0, SootopolisCity_Gym_B1F_Text_2262F3, SootopolisCity_Gym_B1F_Text_22633B
-	msgbox SootopolisCity_Gym_B1F_Text_226341, 6
+	msgbox SootopolisCity_Gym_B1F_Text_226341, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225D43:: @ 8225D43
 	trainerbattle 0, TRAINER_ANNIKA, 0, SootopolisCity_Gym_B1F_Text_226388, SootopolisCity_Gym_B1F_Text_2263BD
-	msgbox SootopolisCity_Gym_B1F_Text_2263F4, 6
+	msgbox SootopolisCity_Gym_B1F_Text_2263F4, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_EventScript_225D5A:: @ 8225D5A
 	trainerbattle 0, TRAINER_DAPHNE, 0, SootopolisCity_Gym_B1F_Text_225ED6, SootopolisCity_Gym_B1F_Text_225F35
-	msgbox SootopolisCity_Gym_B1F_Text_225F67, 6
+	msgbox SootopolisCity_Gym_B1F_Text_225F67, MSGBOX_AUTOCLOSE
 	end
 
 SootopolisCity_Gym_B1F_Text_225D71: @ 8225D71

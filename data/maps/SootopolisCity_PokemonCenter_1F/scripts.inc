@@ -22,12 +22,12 @@ SootopolisCity_PokemonCenter_1F_EventScript_22650E:: @ 822650E
 	goto_if 4, SootopolisCity_PokemonCenter_1F_EventScript_22652E
 	checkflag FLAG_0x081
 	goto_if 0, SootopolisCity_PokemonCenter_1F_EventScript_22652E
-	msgbox SootopolisCity_PokemonCenter_1F_Text_22664B, 4
+	msgbox SootopolisCity_PokemonCenter_1F_Text_22664B, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_PokemonCenter_1F_EventScript_22652E:: @ 822652E
-	msgbox SootopolisCity_PokemonCenter_1F_Text_226562, 4
+	msgbox SootopolisCity_PokemonCenter_1F_Text_226562, MSGBOX_DEFAULT
 	release
 	end
 
@@ -38,12 +38,12 @@ SootopolisCity_PokemonCenter_1F_EventScript_226538:: @ 8226538
 	goto_if 4, SootopolisCity_PokemonCenter_1F_EventScript_226558
 	checkflag FLAG_0x081
 	goto_if 0, SootopolisCity_PokemonCenter_1F_EventScript_226558
-	msgbox SootopolisCity_PokemonCenter_1F_Text_22672F, 4
+	msgbox SootopolisCity_PokemonCenter_1F_Text_22672F, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_PokemonCenter_1F_EventScript_226558:: @ 8226558
-	msgbox SootopolisCity_PokemonCenter_1F_Text_2266B9, 4
+	msgbox SootopolisCity_PokemonCenter_1F_Text_2266B9, MSGBOX_DEFAULT
 	release
 	end
 

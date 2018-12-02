@@ -35,8 +35,8 @@ Route104_MrBrineysHouse_EventScript_229D67:: @ 8229D67
 
 Route104_MrBrineysHouse_EventScript_229D8A:: @ 8229D8A
 	setflag FLAG_0x093
-	msgbox Route104_MrBrineysHouse_Text_229E70, 4
-	msgbox Route104_MrBrineysHouse_Text_229E9B, 5
+	msgbox Route104_MrBrineysHouse_Text_229E70, MSGBOX_DEFAULT
+	msgbox Route104_MrBrineysHouse_Text_229E9B, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route104_MrBrineysHouse_EventScript_229E13
 	goto Route104_MrBrineysHouse_EventScript_229E27
@@ -53,31 +53,31 @@ Route104_MrBrineysHouse_EventScript_229DAE:: @ 8229DAE
 	end
 
 Route104_MrBrineysHouse_EventScript_229DE1:: @ 8229DE1
-	msgbox Route104_MrBrineysHouse_Text_22A0AD, 5
+	msgbox Route104_MrBrineysHouse_Text_22A0AD, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route104_MrBrineysHouse_EventScript_229E13
 	goto Route104_MrBrineysHouse_EventScript_229E27
 	end
 
 Route104_MrBrineysHouse_EventScript_229DFA:: @ 8229DFA
-	msgbox Route104_MrBrineysHouse_Text_22A18F, 5
+	msgbox Route104_MrBrineysHouse_Text_22A18F, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route104_MrBrineysHouse_EventScript_229E13
 	goto Route104_MrBrineysHouse_EventScript_229E27
 	end
 
 Route104_MrBrineysHouse_EventScript_229E13:: @ 8229E13
-	msgbox Route104_MrBrineysHouse_Text_22A041, 4
+	msgbox Route104_MrBrineysHouse_Text_22A041, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_MrBrineysHouse_EventScript_229E1D:: @ 8229E1D
-	msgbox Route104_MrBrineysHouse_Text_22A2C3, 4
+	msgbox Route104_MrBrineysHouse_Text_22A2C3, MSGBOX_DEFAULT
 	release
 	end
 
 Route104_MrBrineysHouse_EventScript_229E27:: @ 8229E27
-	msgbox Route104_MrBrineysHouse_Text_229FE9, 4
+	msgbox Route104_MrBrineysHouse_Text_229FE9, MSGBOX_DEFAULT
 	call Route104_MrBrineysHouse_EventScript_271E95
 	setvar VAR_0x408E, 1
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY
@@ -97,7 +97,7 @@ Route104_MrBrineysHouse_EventScript_229E5D:: @ 8229E5D
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox Route104_MrBrineysHouse_Text_22A337, 4
+	msgbox Route104_MrBrineysHouse_Text_22A337, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

@@ -15,7 +15,7 @@ SSTidalCorridor_EventScript_23BFFF:: @ 823BFFF
 	setvar VAR_PORTHOLE_STATE, 2
 	lockall
 	playse SE_PINPON
-	msgbox SSTidalCorridor_Text_23C462, 4
+	msgbox SSTidalCorridor_Text_23C462, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -23,7 +23,7 @@ SSTidalCorridor_EventScript_23C015:: @ 823C015
 	setvar VAR_PORTHOLE_STATE, 6
 	lockall
 	playse SE_PINPON
-	msgbox SSTidalCorridor_Text_23C4E3, 4
+	msgbox SSTidalCorridor_Text_23C4E3, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -31,14 +31,14 @@ SSTidalRooms_EventScript_23C028:: @ 823C028
 	special SetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 7
 	playse SE_PINPON
-	msgbox SSTidalRooms_Text_23C462, 4
+	msgbox SSTidalRooms_Text_23C462, MSGBOX_DEFAULT
 	return
 
 SSTidalRooms_EventScript_23C03C:: @ 823C03C
 	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 4
 	playse SE_PINPON
-	msgbox SSTidalRooms_Text_23C553, 4
+	msgbox SSTidalRooms_Text_23C553, MSGBOX_DEFAULT
 	return
 
 SSTidalCorridor_EventScript_23C050:: @ 823C050
@@ -53,7 +53,7 @@ SSTidalCorridor_EventScript_23C067:: @ 823C067
 	setvar VAR_PORTHOLE_STATE, 3
 	lockall
 	playse SE_PINPON
-	msgbox SSTidalCorridor_Text_23C4E3, 4
+	msgbox SSTidalCorridor_Text_23C4E3, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -62,7 +62,7 @@ SSTidalCorridor_EventScript_23C07D:: @ 823C07D
 	setvar VAR_PORTHOLE_STATE, 8
 	lockall
 	playse SE_PINPON
-	msgbox SSTidalCorridor_Text_23C50F, 4
+	msgbox SSTidalCorridor_Text_23C50F, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -70,7 +70,7 @@ SSTidalRooms_EventScript_23C093:: @ 823C093
 	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE_STATE, 8
 	playse SE_PINPON
-	msgbox SSTidalRooms_Text_23C50F, 4
+	msgbox SSTidalRooms_Text_23C50F, MSGBOX_DEFAULT
 	return
 
 SSTidalRooms_EventScript_23C0A7:: @ 823C0A7
@@ -82,7 +82,7 @@ SSTidalRooms_EventScript_23C0A7:: @ 823C0A7
 	return
 
 SSTidalCorridor_EventScript_23C0D9:: @ 823C0D9
-	msgbox SSTidalCorridor_Text_23C6EC, 2
+	msgbox SSTidalCorridor_Text_23C6EC, MSGBOX_NPC
 	end
 
 SSTidalCorridor_EventScript_23C0E2:: @ 823C0E2
@@ -90,25 +90,25 @@ SSTidalCorridor_EventScript_23C0E2:: @ 823C0E2
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox SSTidalCorridor_Text_23C7E1, 4
+	msgbox SSTidalCorridor_Text_23C7E1, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 SSTidalCorridor_EventScript_23C0F5:: @ 823C0F5
-	msgbox SSTidalCorridor_Text_23C7F8, 3
+	msgbox SSTidalCorridor_Text_23C7F8, MSGBOX_SIGN
 	end
 
 SSTidalCorridor_EventScript_23C0FE:: @ 823C0FE
-	msgbox SSTidalCorridor_Text_23C800, 3
+	msgbox SSTidalCorridor_Text_23C800, MSGBOX_SIGN
 	end
 
 SSTidalCorridor_EventScript_23C107:: @ 823C107
-	msgbox SSTidalCorridor_Text_23C808, 3
+	msgbox SSTidalCorridor_Text_23C808, MSGBOX_SIGN
 	end
 
 SSTidalCorridor_EventScript_23C110:: @ 823C110
-	msgbox SSTidalCorridor_Text_23C810, 3
+	msgbox SSTidalCorridor_Text_23C810, MSGBOX_SIGN
 	end
 
 SSTidalCorridor_EventScript_23C119:: @ 823C119
@@ -118,13 +118,13 @@ SSTidalCorridor_EventScript_23C119:: @ 823C119
 	goto_eq SSTidalCorridor_EventScript_23C13B
 	compare VAR_PORTHOLE_STATE, 8
 	goto_eq SSTidalCorridor_EventScript_23C15A
-	msgbox SSTidalCorridor_Text_23C596, 4
+	msgbox SSTidalCorridor_Text_23C596, MSGBOX_DEFAULT
 	release
 	end
 
 SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
-	msgbox SSTidalCorridor_Text_23C64F, 4
+	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
 	checkflag FLAG_0x104
 	call_if 1, SSTidalCorridor_EventScript_23C179
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
@@ -134,7 +134,7 @@ SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 
 SSTidalCorridor_EventScript_23C15A:: @ 823C15A
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
-	msgbox SSTidalCorridor_Text_23C64F, 4
+	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
 	checkflag FLAG_0x104
 	call_if 1, SSTidalCorridor_EventScript_23C179
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
@@ -152,7 +152,7 @@ SSTidalCorridor_EventScript_23C17D:: @ 823C17D
 	goto_eq SSTidalCorridor_EventScript_23C19E
 	compare VAR_PORTHOLE_STATE, 7
 	goto_eq SSTidalCorridor_EventScript_23C19E
-	msgbox SSTidalCorridor_Text_23C6C3, 4
+	msgbox SSTidalCorridor_Text_23C6C3, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -167,12 +167,12 @@ SSTidalCorridor_EventScript_23C1A3:: @ 823C1A3
 	checkflag FLAG_0x0F7
 	goto_eq SSTidalCorridor_EventScript_23C1BD
 	call SSTidalCorridor_EventScript_23C1C7
-	msgbox SSTidalCorridor_Text_23C65E, 4
+	msgbox SSTidalCorridor_Text_23C65E, MSGBOX_DEFAULT
 	release
 	end
 
 SSTidalCorridor_EventScript_23C1BD:: @ 823C1BD
-	msgbox SSTidalCorridor_Text_23C6B0, 4
+	msgbox SSTidalCorridor_Text_23C6B0, MSGBOX_DEFAULT
 	release
 	end
 
@@ -206,7 +206,7 @@ SSTidalCorridor_EventScript_23C219:: @ 823C219
 	waitmovement 0
 	applymovement 255, SSTidalCorridor_Movement_2725A8
 	waitmovement 0
-	msgbox SSTidalCorridor_Text_23C28F, 4
+	msgbox SSTidalCorridor_Text_23C28F, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, SSTidalCorridor_Movement_23C27D
 	applymovement 1, SSTidalCorridor_Movement_23C284

@@ -140,12 +140,12 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	checkflag FLAG_0x150
 	goto_eq Route111_EventScript_1F0EA7
-	msgbox Route111_Text_1F1C74, 4
+	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route111_EventScript_1F0EA7:: @ 81F0EA7
-	msgbox Route111_Text_1F1C9F, 4
+	msgbox Route111_Text_1F1C9F, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -165,18 +165,18 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	dodailyevents
 	checkflag FLAG_0x92C
 	goto_eq Route111_EventScript_1F0EF4
-	msgbox Route111_Text_2A6EBD, 4
+	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_272054
 	setflag FLAG_0x92C
 	special GetPlayerBigGuyGirlString
-	msgbox Route111_Text_2A6F3D, 4
+	msgbox Route111_Text_2A6F3D, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F0EF4:: @ 81F0EF4
-	msgbox Route111_Text_2A6F9A, 4
+	msgbox Route111_Text_2A6F9A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -213,7 +213,7 @@ Route111_EventScript_1F0F2E:: @ 81F0F2E
 	end
 
 Route111_EventScript_1F0F45:: @ 81F0F45
-	msgbox gUnknown_08272C5F, 4
+	msgbox gUnknown_08272C5F, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
 	call_if 1, Route111_EventScript_1F0F7C
@@ -279,20 +279,20 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 	lock
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
-	msgbox Route111_Text_1F1475, 5
+	msgbox Route111_Text_1F1475, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F0FE7
-	msgbox Route111_Text_1F14F5, 4
+	msgbox Route111_Text_1F14F5, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F0FE7:: @ 81F0FE7
-	msgbox Route111_Text_1F1523, 4
+	msgbox Route111_Text_1F1523, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_VICTOR, 0, Route111_Text_1F1542
 	applymovement 1, Route111_Movement_2725A6
 	waitmovement 0
 	call Route111_EventScript_1F113C
-	msgbox Route111_Text_1F156F, 4
+	msgbox Route111_Text_1F156F, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route111_Movement_1F114A
 	waitmovement 0
@@ -305,12 +305,12 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	applymovement 2, Route111_Movement_1F114D
 	waitmovement 0
 	call Route111_EventScript_1F1143
-	msgbox Route111_Text_1F159D, 4
+	msgbox Route111_Text_1F159D, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_VICTORIA, 0, Route111_Text_1F1616
 	applymovement 2, Route111_Movement_2725A6
 	waitmovement 0
 	call Route111_EventScript_1F113C
-	msgbox Route111_Text_1F1645, 4
+	msgbox Route111_Text_1F1645, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, Route111_Movement_1F114A
 	waitmovement 0
@@ -323,12 +323,12 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	applymovement 3, Route111_Movement_1F114D
 	waitmovement 0
 	call Route111_EventScript_1F1143
-	msgbox Route111_Text_1F167E, 4
+	msgbox Route111_Text_1F167E, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_VIVI, 0, Route111_Text_1F16C6
 	applymovement 3, Route111_Movement_2725A6
 	waitmovement 0
 	call Route111_EventScript_1F113C
-	msgbox Route111_Text_1F16DC, 4
+	msgbox Route111_Text_1F16DC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route111_Movement_1F114A
 	waitmovement 0
@@ -341,9 +341,9 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	applymovement 4, Route111_Movement_1F114D
 	waitmovement 0
 	call Route111_EventScript_1F1143
-	msgbox Route111_Text_1F16FB, 4
+	msgbox Route111_Text_1F16FB, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_VICKY, 0, Route111_Text_1F1756
-	msgbox Route111_Text_1F1788, 4
+	msgbox Route111_Text_1F1788, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route111_Movement_2725A6
 	waitmovement 0
@@ -381,35 +381,35 @@ Route111_Movement_1F114F: @ 81F114F
 	step_end
 
 Route111_EventScript_1F1153:: @ 81F1153
-	msgbox Route111_Text_1F18CE, 3
+	msgbox Route111_Text_1F18CE, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F115C:: @ 81F115C
-	msgbox Route111_Text_1F18E8, 3
+	msgbox Route111_Text_1F18E8, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1165:: @ 81F1165
-	msgbox Route111_Text_1F1921, 3
+	msgbox Route111_Text_1F1921, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F116E:: @ 81F116E
-	msgbox Route111_Text_1F1937, 3
+	msgbox Route111_Text_1F1937, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1177:: @ 81F1177
-	msgbox Route111_Text_1F194D, 3
+	msgbox Route111_Text_1F194D, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1180:: @ 81F1180
-	msgbox Route111_Text_1F1987, 3
+	msgbox Route111_Text_1F1987, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1189:: @ 81F1189
-	msgbox Route111_Text_1F17BA, 2
+	msgbox Route111_Text_1F17BA, MSGBOX_NPC
 	end
 
 Route111_EventScript_1F1192:: @ 81F1192
-	msgbox Route111_Text_1F186E, 2
+	msgbox Route111_Text_1F186E, MSGBOX_NPC
 	end
 
 Route111_EventScript_1F119B:: @ 81F119B
@@ -421,22 +421,22 @@ Route111_EventScript_1F119B:: @ 81F119B
 	goto_eq Route111_EventScript_1F11D0
 	checkflag FLAG_0x14E
 	goto_eq Route111_EventScript_1F11DA
-	msgbox Route111_Text_1F1A22, 4
+	msgbox Route111_Text_1F1A22, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F11C6:: @ 81F11C6
-	msgbox Route111_Text_1F1C12, 4
+	msgbox Route111_Text_1F1C12, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F11D0:: @ 81F11D0
-	msgbox Route111_Text_1F1B92, 4
+	msgbox Route111_Text_1F1B92, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F11DA:: @ 81F11DA
-	msgbox Route111_Text_1F1AC7, 4
+	msgbox Route111_Text_1F1AC7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -444,7 +444,7 @@ Route111_EventScript_1F11E4:: @ 81F11E4
 	lockall
 	applymovement 46, Route111_Movement_27259E
 	waitmovement 0
-	msgbox Route111_Text_1F1CCA, 4
+	msgbox Route111_Text_1F1CCA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 46, Route111_Movement_2725A2
 	waitmovement 0
@@ -453,22 +453,22 @@ Route111_EventScript_1F11E4:: @ 81F11E4
 
 Route111_EventScript_1F1204:: @ 81F1204
 	trainerbattle 0, TRAINER_DREW, 0, Route111_Text_29878E, Route111_Text_29880A
-	msgbox Route111_Text_298853, 6
+	msgbox Route111_Text_298853, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F121B:: @ 81F121B
 	trainerbattle 0, TRAINER_HEIDI, 0, Route111_Text_2988A3, Route111_Text_298908
-	msgbox Route111_Text_29891B, 6
+	msgbox Route111_Text_29891B, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1232:: @ 81F1232
 	trainerbattle 0, TRAINER_BEAU, 0, Route111_Text_29898E, Route111_Text_2989E6
-	msgbox Route111_Text_298A03, 6
+	msgbox Route111_Text_298A03, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1249:: @ 81F1249
 	trainerbattle 0, TRAINER_BECKY, 0, Route111_Text_298A65, Route111_Text_298AAF
-	msgbox Route111_Text_298AC0, 6
+	msgbox Route111_Text_298AC0, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1260:: @ 81F1260
@@ -476,39 +476,36 @@ Route111_EventScript_1F1260:: @ 81F1260
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F12AB
-	msgbox Route111_Text_298B9A, 4
+	msgbox Route111_Text_298B9A, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F128C:: @ 81F128C
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route111_Text_298C00, 4
-	setvar VAR_0x8004, 44
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 44
-	callstd 8
+	msgbox Route111_Text_298C00, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DUSTY_1
 	release
 	end
 
 Route111_EventScript_1F12AB:: @ 81F12AB
 	trainerbattle 5, TRAINER_DUSTY_1, 0, Route111_Text_298C5F, Route111_Text_298CD2
-	msgbox Route111_Text_298D0C, 6
+	msgbox Route111_Text_298D0C, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F12C2:: @ 81F12C2
 	trainerbattle 0, TRAINER_TRAVIS, 0, Route111_Text_298DA9, Route111_Text_298DD8
-	msgbox Route111_Text_298DF1, 6
+	msgbox Route111_Text_298DF1, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F12D9:: @ 81F12D9
 	trainerbattle 0, TRAINER_IRENE, 0, Route111_Text_298E2F, Route111_Text_298E6E
-	msgbox Route111_Text_298E8C, 6
+	msgbox Route111_Text_298E8C, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F12F0:: @ 81F12F0
 	trainerbattle 0, TRAINER_DAISUKE, 0, Route111_Text_298EE6, Route111_Text_298F14
-	msgbox Route111_Text_298F26, 6
+	msgbox Route111_Text_298F26, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1307:: @ 81F1307
@@ -516,24 +513,21 @@ Route111_EventScript_1F1307:: @ 81F1307
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F1352
-	msgbox Route111_Text_298FD4, 4
+	msgbox Route111_Text_298FD4, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F1333:: @ 81F1333
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route111_Text_29903D, 4
-	setvar VAR_0x8004, 78
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 78
-	callstd 8
+	msgbox Route111_Text_29903D, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WILTON_1
 	release
 	end
 
 Route111_EventScript_1F1352:: @ 81F1352
 	trainerbattle 5, TRAINER_WILTON_1, 0, Route111_Text_29909B, Route111_Text_2990EE
-	msgbox Route111_Text_299102, 6
+	msgbox Route111_Text_299102, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1369:: @ 81F1369
@@ -541,63 +535,60 @@ Route111_EventScript_1F1369:: @ 81F1369
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F13B4
-	msgbox Route111_Text_2991C2, 4
+	msgbox Route111_Text_2991C2, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F1395:: @ 81F1395
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route111_Text_29921D, 4
-	setvar VAR_0x8004, 94
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 94
-	callstd 8
+	msgbox Route111_Text_29921D, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BROOKE_1
 	release
 	end
 
 Route111_EventScript_1F13B4:: @ 81F13B4
 	trainerbattle 5, TRAINER_BROOKE_1, 0, Route111_Text_29925D, Route111_Text_2992D6
-	msgbox Route111_Text_2992F5, 6
+	msgbox Route111_Text_2992F5, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F13CB:: @ 81F13CB
 	trainerbattle 0, TRAINER_HAYDEN, 0, Route111_Text_299682, Route111_Text_2996BE
-	msgbox Route111_Text_2996C5, 6
+	msgbox Route111_Text_2996C5, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F13E2:: @ 81F13E2
 	trainerbattle 0, TRAINER_BIANCA, 0, Route111_Text_2996FE, Route111_Text_29973D
-	msgbox Route111_Text_29975D, 6
+	msgbox Route111_Text_29975D, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F13F9:: @ 81F13F9
 	trainerbattle 0, TRAINER_TYRON, 0, Route111_Text_299524, Route111_Text_299549
-	msgbox Route111_Text_299576, 6
+	msgbox Route111_Text_299576, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1410:: @ 81F1410
 	trainerbattle 0, TRAINER_CELINA, 0, Route111_Text_2995F0, Route111_Text_299625
-	msgbox Route111_Text_29964B, 6
+	msgbox Route111_Text_29964B, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1427:: @ 81F1427
 	trainerbattle 0, TRAINER_CELIA, 0, Route111_Text_29934B, Route111_Text_299384
-	msgbox Route111_Text_2993A7, 6
+	msgbox Route111_Text_2993A7, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F143E:: @ 81F143E
 	trainerbattle 0, TRAINER_BRYAN, 0, Route111_Text_299401, Route111_Text_299431
-	msgbox Route111_Text_29945F, 6
+	msgbox Route111_Text_29945F, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1455:: @ 81F1455
 	trainerbattle 0, TRAINER_BRANDEN, 0, Route111_Text_299493, Route111_Text_2994C5
-	msgbox Route111_Text_2994FB, 6
+	msgbox Route111_Text_2994FB, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F146C:: @ 81F146C
-	msgbox Route111_Text_1F1D61, 3
+	msgbox Route111_Text_1F1D61, MSGBOX_SIGN
 	end
 
 Route111_Text_1F1475: @ 81F1475

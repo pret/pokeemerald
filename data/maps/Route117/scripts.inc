@@ -15,27 +15,27 @@ Route117_EventScript_1F3999:: @ 81F3999
 	return
 
 Route117_EventScript_1F399A:: @ 81F399A
-	msgbox Route117_Text_1F3CFD, 2
+	msgbox Route117_Text_1F3CFD, MSGBOX_NPC
 	end
 
 Route117_EventScript_1F39A3:: @ 81F39A3
-	msgbox Route117_Text_1F3D41, 2
+	msgbox Route117_Text_1F3D41, MSGBOX_NPC
 	end
 
 Route117_EventScript_1F39AC:: @ 81F39AC
-	msgbox Route117_Text_1F3C7C, 2
+	msgbox Route117_Text_1F3C7C, MSGBOX_NPC
 	end
 
 Route117_EventScript_1F39B5:: @ 81F39B5
-	msgbox Route117_Text_1F3D58, 3
+	msgbox Route117_Text_1F3D58, MSGBOX_SIGN
 	end
 
 Route117_EventScript_1F39BE:: @ 81F39BE
-	msgbox Route117_Text_1F3D74, 3
+	msgbox Route117_Text_1F3D74, MSGBOX_SIGN
 	end
 
 Route117_EventScript_1F39C7:: @ 81F39C7
-	msgbox Route117_Text_1F3D8E, 3
+	msgbox Route117_Text_1F3D8E, MSGBOX_SIGN
 	end
 
 Route117_EventScript_1F39D0:: @ 81F39D0
@@ -43,24 +43,21 @@ Route117_EventScript_1F39D0:: @ 81F39D0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3A1B
-	msgbox Route117_Text_29C498, 4
+	msgbox Route117_Text_29C498, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_1F39FC:: @ 81F39FC
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route117_Text_29C508, 4
-	setvar VAR_0x8004, 538
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 538
-	callstd 8
+	msgbox Route117_Text_29C508, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ISAAC_1
 	release
 	end
 
 Route117_EventScript_1F3A1B:: @ 81F3A1B
 	trainerbattle 5, TRAINER_ISAAC_1, 0, Route117_Text_29C549, Route117_Text_29C58B
-	msgbox Route117_Text_29C5D0, 6
+	msgbox Route117_Text_29C5D0, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3A32:: @ 81F3A32
@@ -68,24 +65,21 @@ Route117_EventScript_1F3A32:: @ 81F3A32
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3A7D
-	msgbox Route117_Text_29C679, 4
+	msgbox Route117_Text_29C679, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_1F3A5E:: @ 81F3A5E
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route117_Text_29C6BC, 4
-	setvar VAR_0x8004, 545
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 545
-	callstd 8
+	msgbox Route117_Text_29C6BC, MSGBOX_DEFAULT
+	register_matchcall TRAINER_LYDIA_1
 	release
 	end
 
 Route117_EventScript_1F3A7D:: @ 81F3A7D
 	trainerbattle 5, TRAINER_LYDIA_1, 0, Route117_Text_29C6FD, Route117_Text_29C73E
-	msgbox Route117_Text_29C75A, 6
+	msgbox Route117_Text_29C75A, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3A94:: @ 81F3A94
@@ -93,24 +87,21 @@ Route117_EventScript_1F3A94:: @ 81F3A94
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3ADF
-	msgbox Route117_Text_29C800, 4
+	msgbox Route117_Text_29C800, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_1F3AC0:: @ 81F3AC0
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route117_Text_29C846, 4
-	setvar VAR_0x8004, 364
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 364
-	callstd 8
+	msgbox Route117_Text_29C846, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DYLAN_1
 	release
 	end
 
 Route117_EventScript_1F3ADF:: @ 81F3ADF
 	trainerbattle 5, TRAINER_DYLAN_1, 0, Route117_Text_29C880, Route117_Text_29C8E3
-	msgbox Route117_Text_29C8FE, 6
+	msgbox Route117_Text_29C8FE, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3AF6:: @ 81F3AF6
@@ -118,29 +109,26 @@ Route117_EventScript_1F3AF6:: @ 81F3AF6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3B41
-	msgbox Route117_Text_29C9D0, 4
+	msgbox Route117_Text_29C9D0, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_1F3B22:: @ 81F3B22
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route117_Text_29CA32, 4
-	setvar VAR_0x8004, 369
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 369
-	callstd 8
+	msgbox Route117_Text_29CA32, MSGBOX_DEFAULT
+	register_matchcall TRAINER_MARIA_1
 	release
 	end
 
 Route117_EventScript_1F3B41:: @ 81F3B41
 	trainerbattle 5, TRAINER_MARIA_1, 0, Route117_Text_29CA7C, Route117_Text_29CACC
-	msgbox Route117_Text_29CAF6, 6
+	msgbox Route117_Text_29CAF6, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3B58:: @ 81F3B58
 	trainerbattle 0, TRAINER_DEREK, 0, Route117_Text_29CB32, Route117_Text_29CB87
-	msgbox Route117_Text_29CBAD, 6
+	msgbox Route117_Text_29CBAD, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3B6F:: @ 81F3B6F
@@ -148,22 +136,19 @@ Route117_EventScript_1F3B6F:: @ 81F3B6F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3BB8
-	msgbox Route117_Text_29CCCB, 4
+	msgbox Route117_Text_29CCCB, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_1F3B9F:: @ 81F3B9F
-	msgbox Route117_Text_29CD1D, 4
-	setvar VAR_0x8004, 287
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 287
-	callstd 8
+	msgbox Route117_Text_29CD1D, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ANNA_AND_MEG_1
 	release
 	end
 
 Route117_EventScript_1F3BB8:: @ 81F3BB8
 	trainerbattle 7, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CEB6, Route117_Text_29CEF6, Route117_Text_29CF6E
-	msgbox Route117_Text_29CF1C, 6
+	msgbox Route117_Text_29CF1C, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3BD3:: @ 81F3BD3
@@ -171,37 +156,34 @@ Route117_EventScript_1F3BD3:: @ 81F3BD3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3C1C
-	msgbox Route117_Text_29CE17, 4
+	msgbox Route117_Text_29CE17, MSGBOX_DEFAULT
 	release
 	end
 
 Route117_EventScript_1F3C03:: @ 81F3C03
-	msgbox Route117_Text_29CD1D, 4
-	setvar VAR_0x8004, 287
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 287
-	callstd 8
+	msgbox Route117_Text_29CD1D, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ANNA_AND_MEG_1
 	release
 	end
 
 Route117_EventScript_1F3C1C:: @ 81F3C1C
 	trainerbattle 7, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CFAA, Route117_Text_29CFED, Route117_Text_29D053
-	msgbox Route117_Text_29CFFE, 6
+	msgbox Route117_Text_29CFFE, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3C37:: @ 81F3C37
 	trainerbattle 0, TRAINER_MELINA, 0, Route117_Text_29D0B7, Route117_Text_29D0F1
-	msgbox Route117_Text_29D10E, 6
+	msgbox Route117_Text_29D10E, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3C4E:: @ 81F3C4E
 	trainerbattle 0, TRAINER_BRANDI, 0, Route117_Text_29D14B, Route117_Text_29D189
-	msgbox Route117_Text_29D196, 6
+	msgbox Route117_Text_29D196, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_1F3C65:: @ 81F3C65
 	trainerbattle 0, TRAINER_AISHA, 0, Route117_Text_29D1D1, Route117_Text_29D206
-	msgbox Route117_Text_29D24C, 6
+	msgbox Route117_Text_29D24C, MSGBOX_AUTOCLOSE
 	end
 
 Route117_Text_1F3C7C: @ 81F3C7C

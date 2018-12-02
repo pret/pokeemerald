@@ -32,7 +32,7 @@ Route112_CableCarStation_EventScript_22AAF3:: @ 822AAF3
 Route112_CableCarStation_EventScript_22AB17:: @ 822AB17
 	lock
 	faceplayer
-	msgbox Route112_CableCarStation_Text_22AB85, 5
+	msgbox Route112_CableCarStation_Text_22AB85, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route112_CableCarStation_EventScript_22AB38
 	compare VAR_RESULT, 0
@@ -40,7 +40,7 @@ Route112_CableCarStation_EventScript_22AB17:: @ 822AB17
 	end
 
 Route112_CableCarStation_EventScript_22AB38:: @ 822AB38
-	msgbox Route112_CableCarStation_Text_22ABC2, 4
+	msgbox Route112_CableCarStation_Text_22ABC2, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route112_CableCarStation_Movement_22AB71
 	applymovement 255, Route112_CableCarStation_Movement_22AB7B
@@ -55,7 +55,7 @@ Route112_CableCarStation_EventScript_22AB38:: @ 822AB38
 	end
 
 Route112_CableCarStation_EventScript_22AB67:: @ 822AB67
-	msgbox Route112_CableCarStation_Text_22ABD8, 4
+	msgbox Route112_CableCarStation_Text_22ABD8, MSGBOX_DEFAULT
 	release
 	end
 

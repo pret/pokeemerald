@@ -2,12 +2,12 @@ AbandonedShip_Rooms_1F_MapScripts:: @ 8237A92
 	.byte 0
 
 AbandonedShip_Rooms_1F_EventScript_237A93:: @ 8237A93
-	msgbox AbandonedShip_Rooms_1F_Text_237B15, 2
+	msgbox AbandonedShip_Rooms_1F_Text_237B15, MSGBOX_NPC
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237A9C:: @ 8237A9C
 	trainerbattle 0, TRAINER_DEMETRIUS, 0, AbandonedShip_Rooms_1F_Text_237D0C, AbandonedShip_Rooms_1F_Text_237D2A
-	msgbox AbandonedShip_Rooms_1F_Text_237D41, 6
+	msgbox AbandonedShip_Rooms_1F_Text_237D41, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237AB3:: @ 8237AB3
@@ -15,24 +15,21 @@ AbandonedShip_Rooms_1F_EventScript_237AB3:: @ 8237AB3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms_1F_EventScript_237AFE
-	msgbox AbandonedShip_Rooms_1F_Text_237BDB, 4
+	msgbox AbandonedShip_Rooms_1F_Text_237BDB, MSGBOX_DEFAULT
 	release
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237ADF:: @ 8237ADF
 	special sub_80B4808
 	waitmovement 0
-	msgbox AbandonedShip_Rooms_1F_Text_237C2A, 4
-	setvar VAR_0x8004, 144
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 144
-	callstd 8
+	msgbox AbandonedShip_Rooms_1F_Text_237C2A, MSGBOX_DEFAULT
+	register_matchcall TRAINER_THALIA_1
 	release
 	end
 
 AbandonedShip_Rooms_1F_EventScript_237AFE:: @ 8237AFE
 	trainerbattle 5, TRAINER_THALIA_1, 0, AbandonedShip_Rooms_1F_Text_237C69, AbandonedShip_Rooms_1F_Text_237CB2
-	msgbox AbandonedShip_Rooms_1F_Text_237CC9, 6
+	msgbox AbandonedShip_Rooms_1F_Text_237CC9, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms_1F_Text_237B15: @ 8237B15

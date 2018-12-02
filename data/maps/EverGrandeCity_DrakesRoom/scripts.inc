@@ -44,13 +44,13 @@ EverGrandeCity_DrakesRoom_EventScript_2286F3:: @ 82286F3
 	checkflag FLAG_0x4FE
 	goto_eq EverGrandeCity_DrakesRoom_EventScript_22871A
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_DrakesRoom_Text_22873E, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_22873E, MSGBOX_DEFAULT
 	trainerbattle 3, TRAINER_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_228895
 	goto EverGrandeCity_DrakesRoom_EventScript_228724
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_22871A:: @ 822871A
-	msgbox EverGrandeCity_DrakesRoom_Text_2288B0, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_2288B0, MSGBOX_DEFAULT
 	release
 	end
 
@@ -59,7 +59,7 @@ EverGrandeCity_DrakesRoom_EventScript_228724:: @ 8228724
 	special sub_813BF7C
 	setflag FLAG_0x4FE
 	call EverGrandeCity_DrakesRoom_EventScript_2723F8
-	msgbox EverGrandeCity_DrakesRoom_Text_2288B0, 4
+	msgbox EverGrandeCity_DrakesRoom_Text_2288B0, MSGBOX_DEFAULT
 	release
 	end
 

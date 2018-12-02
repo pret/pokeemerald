@@ -7,7 +7,7 @@ SootopolisCity_Mart_EventScript_226795:: @ 8226795
 	message gUnknown_08272A21
 	waitmessage
 	pokemart SootopolisCity_Mart_Pokemart_2267AC
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -32,12 +32,12 @@ SootopolisCity_Mart_EventScript_2267C2:: @ 82267C2
 	goto_if 4, SootopolisCity_Mart_EventScript_2267E2
 	checkflag FLAG_0x081
 	goto_if 0, SootopolisCity_Mart_EventScript_2267E2
-	msgbox SootopolisCity_Mart_Text_22685D, 4
+	msgbox SootopolisCity_Mart_Text_22685D, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_Mart_EventScript_2267E2:: @ 82267E2
-	msgbox SootopolisCity_Mart_Text_226816, 4
+	msgbox SootopolisCity_Mart_Text_226816, MSGBOX_DEFAULT
 	release
 	end
 
@@ -48,12 +48,12 @@ SootopolisCity_Mart_EventScript_2267EC:: @ 82267EC
 	goto_if 4, SootopolisCity_Mart_EventScript_22680C
 	checkflag FLAG_0x081
 	goto_if 0, SootopolisCity_Mart_EventScript_22680C
-	msgbox SootopolisCity_Mart_Text_226928, 4
+	msgbox SootopolisCity_Mart_Text_226928, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_Mart_EventScript_22680C:: @ 822680C
-	msgbox SootopolisCity_Mart_Text_2268AF, 4
+	msgbox SootopolisCity_Mart_Text_2268AF, MSGBOX_DEFAULT
 	release
 	end
 

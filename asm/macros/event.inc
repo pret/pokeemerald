@@ -50,6 +50,12 @@
 	.byte \function
 	.endm
 
+	@ callstd function names
+	STD_OBTAIN_ITEM = 0
+	STD_FIND_ITEM = 1
+	STD_OBTAIN_DECORATION = 7
+	STD_REGISTER_MATCH_CALL = 8
+
 	@ Calls the standard function at index function.
 	.macro callstd function
 	.byte 0x09
@@ -262,7 +268,7 @@
 	.2byte \output
 	.2byte SPECIAL_\function
 	.endm
-	
+
 	@ temporary solution
 	.macro specialvar_ output, functionId
 	.byte 0x26
@@ -1523,16 +1529,20 @@
 	goto_eq \dest
 	.endm
 
-	.macro msgbox text, type=4
-	loadword 0, \text
-	callstd \type
-	.endm
-
 	@ Message box types
+	MSGBOX_NPC = 2
+	MSGBOX_SIGN = 3
+	MSGBOX_DEFAULT = 4
 	MSGBOX_YESNO = 5
+	MSGBOX_AUTOCLOSE = 6
 
 	YES = 1
 	NO  = 0
+
+	.macro msgbox text, type=MSGBOX_DEFAULT
+	loadword 0, \text
+	callstd \type
+	.endm
 
 	.macro giveitem_std item, amount=1, function=0
 	setorcopyvar 0x8000, \item
@@ -1542,5 +1552,12 @@
 
 	.macro givedecoration_std decoration
 	setorcopyvar 0x8000, \decoration
-	callstd 7
+	callstd STD_OBTAIN_DECORATION
+	.endm
+
+	.macro register_matchcall trainer
+	setvar VAR_0x8004, \trainer
+	special SetMatchCallRegisteredFlag
+	setorcopyvar VAR_0x8000, \trainer
+	callstd STD_REGISTER_MATCH_CALL
 	.endm

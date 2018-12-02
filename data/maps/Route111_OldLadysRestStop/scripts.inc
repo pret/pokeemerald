@@ -9,7 +9,7 @@ Route111_OldLadysRestStop_MapScript1_22A91C: @ 822A91C
 Route111_OldLadysRestStop_EventScript_22A920:: @ 822A920
 	lock
 	faceplayer
-	msgbox Route111_OldLadysRestStop_Text_22A978, 5
+	msgbox Route111_OldLadysRestStop_Text_22A978, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route111_OldLadysRestStop_EventScript_22A941
 	compare VAR_RESULT, 0
@@ -17,10 +17,10 @@ Route111_OldLadysRestStop_EventScript_22A920:: @ 822A920
 	end
 
 Route111_OldLadysRestStop_EventScript_22A941:: @ 822A941
-	msgbox Route111_OldLadysRestStop_Text_22A9EC, 4
+	msgbox Route111_OldLadysRestStop_Text_22A9EC, MSGBOX_DEFAULT
 	closemessage
 	call Route111_OldLadysRestStop_EventScript_272083
-	msgbox Route111_OldLadysRestStop_Text_22AA16, 5
+	msgbox Route111_OldLadysRestStop_Text_22AA16, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route111_OldLadysRestStop_EventScript_22A941
 	compare VAR_RESULT, 0
@@ -28,7 +28,7 @@ Route111_OldLadysRestStop_EventScript_22A941:: @ 822A941
 	end
 
 Route111_OldLadysRestStop_EventScript_22A96E:: @ 822A96E
-	msgbox Route111_OldLadysRestStop_Text_22AA8F, 4
+	msgbox Route111_OldLadysRestStop_Text_22AA8F, MSGBOX_DEFAULT
 	release
 	end
 

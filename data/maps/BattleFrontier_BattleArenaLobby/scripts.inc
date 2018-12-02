@@ -27,7 +27,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255C7F:: @ 8255C7F
 
 BattleFrontier_BattleArenaLobby_EventScript_255C88:: @ 8255C88
 	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_256811, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256811, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -51,21 +51,21 @@ BattleFrontier_BattleArenaLobby_EventScript_255CCF:: @ 8255CCF
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255CF0
-	msgbox BattleFrontier_BattleArenaLobby_Text_2568E7, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_2568E7, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_255CF8
 
 BattleFrontier_BattleArenaLobby_EventScript_255CF0:: @ 8255CF0
-	msgbox BattleFrontier_BattleArenaLobby_Text_2572D9, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_2572D9, MSGBOX_DEFAULT
 
 BattleFrontier_BattleArenaLobby_EventScript_255CF8:: @ 8255CF8
-	msgbox BattleFrontier_BattleArenaLobby_Text_257353, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_257353, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleArenaLobby_Text_241520, 9
 	message BattleFrontier_BattleArenaLobby_Text_256931
 	waitmessage
 	call BattleFrontier_BattleArenaLobby_EventScript_255D59
-	msgbox BattleFrontier_BattleArenaLobby_Text_256A74, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256A74, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -80,7 +80,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D2B:: @ 8255D2B
 	setvar VAR_0x8006, 0
 	special CallBattleArenaFunction
 	call BattleFrontier_BattleArenaLobby_EventScript_255D59
-	msgbox BattleFrontier_BattleArenaLobby_Text_256A74, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256A74, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -135,7 +135,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255DF4:: @ 8255DF4
 	setvar VAR_FRONTIER_FACILITY, 3
 	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	special SavePlayerParty
-	msgbox BattleFrontier_BattleArenaLobby_Text_256166, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256166, MSGBOX_DEFAULT
 
 BattleFrontier_BattleArenaLobby_EventScript_255E0B:: @ 8255E0B
 	message BattleFrontier_BattleArenaLobby_Text_2561EA
@@ -162,7 +162,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleArenaLobby_Text_256573, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256573, MSGBOX_DEFAULT
 	fadescreen 1
 	call BattleFrontier_BattleArenaLobby_EventScript_23F2B7
 	copyvar VAR_0x8004, VAR_RESULT
@@ -171,7 +171,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FF8
-	msgbox BattleFrontier_BattleArenaLobby_Text_2564CE, 5
+	msgbox BattleFrontier_BattleArenaLobby_Text_2564CE, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_255FF8
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_255EE8
@@ -209,7 +209,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleArenaLobby_Text_2567E6, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_2567E6, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
@@ -224,7 +224,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_255F9F:: @ 8255F9F
-	msgbox BattleFrontier_BattleArenaLobby_Text_25624C, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_25624C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_255E0B
 
 BattleFrontier_BattleArenaLobby_EventScript_255FAC:: @ 8255FAC
@@ -233,11 +233,11 @@ BattleFrontier_BattleArenaLobby_EventScript_255FAC:: @ 8255FAC
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_255FD4
 
 BattleFrontier_BattleArenaLobby_EventScript_255FC7:: @ 8255FC7
-	msgbox BattleFrontier_BattleArenaLobby_Text_2566A8, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_2566A8, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_256003
 
 BattleFrontier_BattleArenaLobby_EventScript_255FD4:: @ 8255FD4
-	msgbox BattleFrontier_BattleArenaLobby_Text_2565A5, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_2565A5, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_256003
 
 BattleFrontier_BattleArenaLobby_EventScript_255FE1:: @ 8255FE1
@@ -251,7 +251,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255FF8:: @ 8255FF8
 	special LoadPlayerParty
 
 BattleFrontier_BattleArenaLobby_EventScript_255FFB:: @ 8255FFB
-	msgbox BattleFrontier_BattleArenaLobby_Text_25621F, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_25621F, MSGBOX_DEFAULT
 
 BattleFrontier_BattleArenaLobby_EventScript_256003:: @ 8256003
 	release
@@ -353,24 +353,24 @@ BattleFrontier_BattleArenaLobby_EventScript_256092:: @ 8256092
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_2560A6:: @ 82560A6
-	msgbox BattleFrontier_BattleArenaLobby_Text_256B5C, 2
+	msgbox BattleFrontier_BattleArenaLobby_Text_256B5C, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_2560AF:: @ 82560AF
-	msgbox BattleFrontier_BattleArenaLobby_Text_256BCB, 2
+	msgbox BattleFrontier_BattleArenaLobby_Text_256BCB, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_2560B8:: @ 82560B8
-	msgbox BattleFrontier_BattleArenaLobby_Text_256C19, 2
+	msgbox BattleFrontier_BattleArenaLobby_Text_256C19, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_2560C1:: @ 82560C1
-	msgbox BattleFrontier_BattleArenaLobby_Text_256C9A, 2
+	msgbox BattleFrontier_BattleArenaLobby_Text_256C9A, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_2560CA:: @ 82560CA
 	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_256DB8, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256DB8, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_2560D9
 	end
 
@@ -388,22 +388,22 @@ BattleFrontier_BattleArenaLobby_EventScript_2560D9:: @ 82560D9
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_25612C:: @ 825612C
-	msgbox BattleFrontier_BattleArenaLobby_Text_256E02, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256E02, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_2560D9
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_25613A:: @ 825613A
-	msgbox BattleFrontier_BattleArenaLobby_Text_256F43, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256F43, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_2560D9
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_256148:: @ 8256148
-	msgbox BattleFrontier_BattleArenaLobby_Text_256FF2, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_256FF2, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_2560D9
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_256156:: @ 8256156
-	msgbox BattleFrontier_BattleArenaLobby_Text_257202, 4
+	msgbox BattleFrontier_BattleArenaLobby_Text_257202, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_2560D9
 	end
 
