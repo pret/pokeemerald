@@ -4822,7 +4822,7 @@ void sub_8011C84(void)
     gUnknown_03005000.unk_67 = CreateTask(sub_800EB44, 1);
 }
 
-u16 ReadU16(const void *ptr)
+static u16 ReadU16(const void *ptr)
 {
     const u8 *ptr_ = ptr;
     return (ptr_[1] << 8) | (ptr_[0]);
