@@ -1,20 +1,20 @@
 #include "global.h"
-#include "malloc.h"
 #include "battle.h"
 #include "berry_blender.h"
-#include "task.h"
-#include "random.h"
 #include "decompress.h"
-#include "text.h"
-#include "string_util.h"
 #include "event_data.h"
-#include "overworld.h"
-#include "link.h"
-#include "librfu.h"
-#include "rom_8011DC0.h"
-#include "link_rfu.h"
-#include "palette.h"
 #include "gpu_regs.h"
+#include "librfu.h"
+#include "link.h"
+#include "link_rfu.h"
+#include "malloc.h"
+#include "overworld.h"
+#include "random.h"
+#include "palette.h"
+#include "rom_8011DC0.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
 #include "constants/species.h"
 
 extern u16 gUnknown_03005DA8;
@@ -65,7 +65,7 @@ static void rfufunc_80FA020(void);
 bool32 sub_8010454(u32 a0);
 static void sub_8010528(void);
 void sub_8010750(void);
-int sub_80107A0(void);
+s32 sub_80107A0(void);
 void sub_801084C(u8 taskId);
 void sub_80109E8(u16 a0);
 void sub_8010A70(void *a0);
@@ -75,7 +75,7 @@ void sub_80115EC(s32 a0);
 u8 sub_8011CE4(const u8 *a0, u16 a1);
 void sub_8011D6C(u32 a0);
 void sub_8011E94(u32 a0, u32 a1);
-u8 sub_8012224(void);
+bool8 sub_8012224(void);
 void sub_801227C(void);
 void sub_801209C(u8 taskId);
 void sub_8011BF8(void);
@@ -308,6 +308,11 @@ const char gUnknown_082ED7EC[] = "PokemonSioInfo";
 const char gUnknown_082ED7FC[] = "LINK LOSS DISCONNECT!";
 const char gUnknown_082ED814[] = "LINK LOSS RECOVERY NOW";
 
+extern const char gUnknown_082ED82C[];
+extern const char gUnknown_082ED84B[];
+extern const char gUnknown_082ED85B[];
+extern const char gUnknown_082ED868[];
+
 // .text
 
 u32 sub_800BEC0(void)
@@ -352,7 +357,7 @@ void rfu_REQ_sendData_wrapper(u8 r2)
     rfu_REQ_sendData(r2);
 }
 
-int sub_800BF4C(void (*func1)(u8, u8), void (*func2)(u16))
+s32 sub_800BF4C(void (*func1)(u8, u8), void (*func2)(u16))
 {
     if (func1 == NULL)
     {
@@ -1684,8 +1689,8 @@ void sub_800D658(void)
 
 void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
 {
-    int i;
-    int j;
+    s32 i;
+    s32 j;
 
     for (i = 0; i < 32; i++)
     {
@@ -1702,8 +1707,8 @@ void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
 
 void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
 {
-    int i;
-    int j;
+    s32 i;
+    s32 j;
 
     for (i = 0; i < 40; i++)
     {
@@ -1720,8 +1725,8 @@ void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
 
 void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
 {
-    int i;
-    int j;
+    s32 i;
+    s32 j;
 
     for (i = 0; i < 2; i++)
     {
@@ -1738,7 +1743,7 @@ void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
 
 void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
 {
-    int i;
+    s32 i;
     u16 imeBak;
     u8 count;
 
@@ -1778,7 +1783,7 @@ void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
 
 void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
 {
-    int i;
+    s32 i;
     u16 imeBak;
 
     if (q1->unk_232 < 40)
@@ -1817,7 +1822,7 @@ void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
 bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
 {
     u16 imeBak;
-    int i;
+    s32 i;
 
     imeBak = REG_IME;
     REG_IME = 0;
@@ -1843,7 +1848,7 @@ bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
 
 bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
 {
-    int i;
+    s32 i;
     u16 imeBak;
 
     if (q1->unk_230 == q1->unk_231 || q1->unk_233 != 0)
@@ -1865,7 +1870,7 @@ bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
 
 void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2)
 {
-    int i;
+    s32 i;
 
     if (q2[1] == 0)
     {
@@ -1892,7 +1897,7 @@ void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2)
 
 static bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
 {
-    int i;
+    s32 i;
 
     if (q1->unk_1e == 0)
     {
@@ -1913,7 +1918,7 @@ static bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
 
 void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
 {
-    int i;
+    s32 i;
 
     if (q1->unk_202 < 2)
     {
@@ -1933,7 +1938,7 @@ void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
 
 bool8 sub_800DB84(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
 {
-    int i;
+    s32 i;
 
     if (q1->unk_200 == q1->unk_201 || q1->unk_203)
     {
@@ -1951,7 +1956,7 @@ bool8 sub_800DB84(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
 
 void sub_800DBF8(u8 *q1, u8 mode)
 {
-    int i;
+    s32 i;
     u8 rval;
     u16 r5 = 0;
     switch (mode)
@@ -1995,7 +2000,7 @@ void sub_800DBF8(u8 *q1, u8 mode)
 
 void PkmnStrToASCII(u8 *q1, const u8 *q2)
 {
-    int i;
+    s32 i;
 
     for (i = 0; q2[i] != EOS; i++)
     {
@@ -2006,7 +2011,7 @@ void PkmnStrToASCII(u8 *q1, const u8 *q2)
 
 void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 {
-    int i;
+    s32 i;
 
     for (i = 0; q2[i] != 0; i++)
     {
@@ -2114,9 +2119,9 @@ NAKED u8 sub_800DD1C(u8 maxFlags)
 }
 #endif
 
-void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, int r3)
+void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, s32 r3)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 2; i++)
     {
@@ -2260,7 +2265,7 @@ u8 sub_800E124(void)
     return 0;
 }
 
-void sub_800E15C(struct Sprite *sprite, int signalStrengthAnimNum)
+void sub_800E15C(struct Sprite *sprite, s32 signalStrengthAnimNum)
 {
     if (sprite->data[2] != signalStrengthAnimNum)
     {
@@ -2350,7 +2355,7 @@ void sub_800E378(struct UnkSaveSubstruct_3b98 *dest, u32 trainerId, const u8 *na
 
 bool32 sub_800E388(const u8 *name)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 8; i++)
     {
@@ -2366,10 +2371,10 @@ void sub_800E3A8(void)
 {
     if (gWirelessCommType != 0)
     {
-        int i;
-        int j;
-        int cnt;
-        int sp0[5];
+        s32 i;
+        s32 j;
+        s32 cnt;
+        s32 sp0[5];
         struct UnkSaveSubstruct_3b98 *sp14 = calloc(20, sizeof(struct UnkSaveSubstruct_3b98));
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
@@ -2413,7 +2418,7 @@ void sub_800E3A8(void)
 
 bool32 sub_800E540(u16 id, u8 *name)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 20; i++)
     {
@@ -2431,7 +2436,7 @@ bool32 sub_800E540(u16 id, u8 *name)
 
 void sub_800E5AC(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 20; i++)
     {
@@ -2445,14 +2450,14 @@ void nullsub_5(const char *unused_0, u8 unused_1, u8 unused_2)
     // debug?
 }
 
-void nullsub_13(u8 unused_0, u8 unused_1, u8 unused_2, u8 unused_3)
+void nullsub_13(u16 unused_0, u8 unused_1, u8 unused_2, u8 unused_3)
 {
 
 }
 
 void sub_800E604(void)
 {
-    int i;
+    s32 i;
     u8 unk_ee_bak = gUnknown_03005000.unk_ee;
     CpuFill16(0, &gUnknown_03005000, sizeof gUnknown_03005000);
     gUnknown_03005000.unk_ee = unk_ee_bak;
@@ -2541,12 +2546,12 @@ s32 sub_800E87C(u8 idx)
     return gUnknown_082ED6A5[idx];
 }
 
-void sub_800E88C(int r2, int r5)
+void sub_800E88C(s32 r2, s32 r5)
 {
     u8 i;
     u8 r4 = 1;
-    int r1 = r2;
-    int r6 = 0;
+    s32 r1 = r2;
+    s32 r6 = 0;
     if (r5 == -1)
     {
         for (i = 0; i < 4; r2 >>= 1, i++)
@@ -2737,7 +2742,7 @@ void sub_800ED28(void)
 
 void sub_800ED34(u16 unused)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 14; i++)
     {
@@ -2879,7 +2884,7 @@ void sub_800EF88(u8 a0)
 // FIXME: gRecvCmds should be in r6 and r7
 void sub_800EFB0(void)
 {
-    int i, j;
+    s32 i, j;
     for (i = 0; i < 5; i++)
     {
         for (j = 0; j < 7; j++)
@@ -2941,7 +2946,7 @@ NAKED void sub_800EFB0(void)
 
 void sub_800F014(void)
 {
-    int i;
+    s32 i;
     for (i = 0; i < 7; i++)
     {
         gRecvCmds[0][i] = gSendCmd[i];
@@ -2975,8 +2980,8 @@ static void sub_800F048(void)
 
 bool32 sub_800F0B8(void)
 {
-    int i;
-    int j;
+    s32 i;
+    s32 j;
 
     if (gUnknown_03007890->unk_06 == 0)
     {
@@ -3131,7 +3136,7 @@ bool32 sub_800F1E0(void)
 
 void sub_800F498(u16 *a0, u8 *a1)
 {
-    int i;
+    s32 i;
 
     if (a0[0])
     {
@@ -3199,7 +3204,7 @@ bool32 sub_800F4F0(void)
 
 void sub_800F638(u8 unused, u32 flags)
 {
-    int i, j;
+    s32 i, j;
 
     const u8 *r10 = gUnknown_03005000.unk_6c.unk_04;
     for (i = 0; i < gUnknown_03005000.unk_6c.unk_02; i++)
@@ -3404,7 +3409,7 @@ static void sub_800F86C(u8 unused)
 
 bool8 sub_800FC60(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 5; i++)
     {
@@ -3416,7 +3421,7 @@ bool8 sub_800FC60(void)
 
 bool8 sub_800FC88(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < gUnknown_03005000.playerCount; i++)
     {
@@ -3440,7 +3445,7 @@ static void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data)
 u8 sub_800FCD8(void)
 {
     u8 flags = 0;
-    int i;
+    s32 i;
 
     for (i = 0; i < 5; i++)
     {
@@ -3560,7 +3565,7 @@ static void rfufunc_80F9F44(void)
 
 static void sub_800FFB0(void)
 {
-    int i;
+    s32 i;
     const u8 *src = gUnknown_03005000.unk_6c.unk_04;
     gSendCmd[0] = 0x8900 | gUnknown_03005000.unk_6c.unk_00;
     for (i = 0; i < 7; i++)
@@ -3577,7 +3582,7 @@ static void rfufunc_80FA020(void)
 {
     const u8 *src = gUnknown_03005000.unk_6c.unk_04;
     u8 mpId = GetMultiplayerId();
-    int i;
+    s32 i;
     if (gUnknown_03005000.unk_0c == 0)
     {
         gSendCmd[0] = (~0x76ff) | (gUnknown_03005000.unk_6c.unk_02 - 1);
@@ -3641,9 +3646,9 @@ void sub_8010198(void)
 
 void sub_80101CC(void)
 {
-    int i;
+    s32 i;
     u8 playerCount = gUnknown_03005000.playerCount;
-    int count = 0;
+    s32 count = 0;
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
@@ -3770,7 +3775,7 @@ void sub_8010434(void)
 
 bool32 sub_8010454(u32 a0)
 {
-    int i;
+    s32 i;
     for (i = 0; gUnknown_082ED6E0[i] != a0; i++)
     {
         if (gUnknown_082ED6E0[i] == 0xffff)
@@ -3820,7 +3825,7 @@ static void sub_8010528(void)
 
 bool8 sub_8010540(void)
 {
-    int i;
+    s32 i;
     bool8 retval = FALSE;
     for (i = 0; i < 4; i++)
     {
@@ -3851,7 +3856,7 @@ bool8 sub_8010540(void)
 bool32 sub_80105EC(void)
 {
     u8 flags = 0;
-    int i;
+    s32 i;
     for (i = 0; i < 4; i++)
     {
         if (gUnknown_03005000.unk_cd5[i] == 11)
@@ -3910,7 +3915,7 @@ u32 sub_8010714(u16 a0, const u8 *a1)
 
 void sub_8010750(void)
 {
-    int i;
+    s32 i;
 
     sub_8010540();
     for (i = 0; i < 4; i++)
@@ -3924,9 +3929,9 @@ void sub_8010750(void)
     }
 }
 
-int sub_80107A0(void)
+s32 sub_80107A0(void)
 {
-    int retval = 0;
+    s32 retval = 0;
     if (gUnknown_03005000.unk_c85 == 8)
     {
         if (gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_0 == 0x26 || gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_0 == 0x27)
@@ -3948,7 +3953,7 @@ int sub_80107A0(void)
 
 void sub_801084C(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (gUnknown_03005000.unk_f1 == 1 || gUnknown_03005000.unk_f1 == 2)
     {
@@ -4032,7 +4037,7 @@ void sub_801084C(u8 taskId)
 
 void sub_80109E8(u16 a0)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 4; i++)
     {
@@ -4043,7 +4048,7 @@ void sub_80109E8(u16 a0)
 
 void sub_8010A14(const struct UnkRfuStruct_8010A14 *a0)
 {
-    int i;
+    s32 i;
     gUnknown_03005000.playerCount = a0->unk_0f;
     for (i = 0; i < 4; i++)
         gUnknown_03005000.unk_cde[i] = a0->unk_10[i];
@@ -4066,7 +4071,7 @@ void sub_8010A70(void *a0)
 
 void sub_8010AAC(u8 taskId)
 {
-    int i;
+    s32 i;
     struct LinkPlayerBlock *r2;
     struct UnkRfuStruct_8010A14 *r5;
     u8 r4 = gUnknown_03005000.unk_cde[gUnknown_082ED68C[gUnknown_03005000.unk_ce9]];
@@ -4267,7 +4272,7 @@ void sub_8010FCC(u32 a0, u32 a1, u32 a2)
     gUnknown_02022B14.unk_0b_1 = a2;
 }
 
-u8 sub_801100C(int a0)
+u8 sub_801100C(s32 a0)
 {
     u8 retval = 0x80;
     retval |= (gLinkPlayers[a0].gender << 3);
@@ -4278,7 +4283,7 @@ u8 sub_801100C(int a0)
 void sub_801103C(void)
 {
     struct UnkLinkRfuStruct_02022B14 *r5 = &gUnknown_02022B14;
-    int i;
+    s32 i;
 
     for (i = 1; i < GetLinkPlayerCount(); i++)
         r5->unk_04[i - 1] = sub_801100C(i);
@@ -4299,10 +4304,10 @@ void sub_8011090(u8 a0, u32 a1, u32 a2)
 
 void sub_80110B8(u32 a0)
 {
-    int i;
+    s32 i;
     u32 r5;
     u32 r7;
-    int r8;
+    s32 r8;
 
     if (sub_800F7DC()->unk_0a_0 == 0x45)
     {
@@ -4962,7 +4967,7 @@ void sub_8011FC8(const u8 *src, u16 trainerId)
     data[8] = trainerId;
 }
 
-bool32 sub_801200C(u16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
+bool32 sub_801200C(s16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
 {
     if (sub_800F7DC()->unk_0a_0 == 0x45)
     {
@@ -4992,4 +4997,160 @@ bool32 sub_801200C(u16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
     }
 
     return FALSE;
+}
+
+void sub_801209C(u8 taskId)
+{
+    if (gUnknown_03005000.unk_f1 == 4)
+        DestroyTask(taskId);
+
+    if (++gTasks[taskId].data[0] > 300)
+    {
+        sub_8011A64(2, 0x7000);
+        DestroyTask(taskId);
+    }
+
+    if (gUnknown_03005000.unk_ccd != 0 && gUnknown_03004140.unk_06 == 0)
+    {
+        u16 trainerId = ReadU16(gUnknown_03005000.unk_10A.unk_00.playerTrainerId);
+        u8 id = sub_8011CE4(gUnknown_03005000.playerName, trainerId);
+        if (id != 0xFF)
+        {
+            if (!sub_801200C(gTasks[taskId].data[1], &gUnknown_03007890->unk_14[id].unk_06))
+            {
+                if (gUnknown_03007890->unk_14[id].unk_02 != 0xFF && !sub_800C12C(gUnknown_03007890->unk_14[id].unk_00, 0x5A))
+                {
+                    gUnknown_03005000.unk_04 = 0xA;
+                    DestroyTask(taskId);
+                }
+            }
+            else
+            {
+                sub_8011A64(2, 0x7000);
+                DestroyTask(taskId);
+            }
+        }
+    }
+}
+
+void sub_8012188(const u8 *name, struct UnkLinkRfuStruct_02022B14 *structPtr, u8 a2)
+{
+    u8 taskId, taskId2;
+
+    gUnknown_03005000.unk_ccf = 0;
+    gUnknown_03005000.unk_f1 = 0;
+    StringCopy(gUnknown_03005000.playerName, name);
+    memcpy(&gUnknown_03005000.unk_10A, structPtr, 0xD);
+    sub_800D658();
+    taskId = CreateTask(sub_801209C, 2);
+    gTasks[taskId].data[1] = a2;
+    taskId2 = FindTaskIdByFunc(sub_800EB44);
+    if (a2 == 0x45)
+    {
+        if (taskId2 != 0xFF)
+            gTasks[taskId2].data[7] = 1;
+    }
+    else
+    {
+        if (taskId2 != 0xFF)
+            gTasks[taskId2].data[7] = 0;
+    }
+}
+
+bool8 sub_8012224(void)
+{
+    if (gUnknown_03005000.unk_f0 == 1)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool32 sub_8012240(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if ((gUnknown_03004140.unk_00 >> i) & 1 && gUnknown_03005000.unk_cd1[i] == 0)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_801227C(void)
+{
+    s32 i;
+
+    for (i = 0; i < 20; i++)
+        nullsub_5(gUnknown_082ED82C, 0, i);
+}
+
+void sub_801229C(void)
+{
+    s32 i, j;
+
+    nullsub_13(GetBlockReceivedStatus(), 0x1C, 0x13, 2);
+    nullsub_13(gUnknown_03007890->unk_02, 0x14, 1, 1);
+    nullsub_13(gUnknown_03007890->unk_03, 0x17, 1, 1);
+    if (gUnknown_03005000.unk_0c == 1)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if ((gUnknown_03007890->unk_07 >> i) & 1)
+            {
+                nullsub_13(gUnknown_03007890->unk_14[i].unk_04, 1, i + 3, 4);
+                nullsub_5((void*) &gUnknown_03007890->unk_14[i].unk_06, 6, i + 3);
+                nullsub_5(gUnknown_03007890->unk_14[i].playerName, 0x16, i + 3);
+            }
+        }
+        for (i = 0; i < 4; i++)
+        {
+            for (j = 0; j < 14; j++)
+            {
+                nullsub_13(gUnknown_03005000.unk_14[i][j], j * 2, i + 11, 2);
+            }
+        }
+        nullsub_5(gUnknown_082ED868, 1, 0xF);
+    }
+    else if (gUnknown_03007890->unk_02 != 0 && gUnknown_03007890->unk_07 != 0)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            nullsub_13(0, 1, i + 3, 4);
+            nullsub_5(gUnknown_082ED84B, 6, i + 3);
+            nullsub_5(gUnknown_082ED85B, 0x16, i + 3);
+        }
+        nullsub_13(gUnknown_03007890->unk_14[gUnknown_03005000.unk_c3e].unk_04, 1, 3, 4);
+        nullsub_5((void*) &gUnknown_03007890->unk_14[gUnknown_03005000.unk_c3e].unk_06, 6, 3);
+        nullsub_5(gUnknown_03007890->unk_14[gUnknown_03005000.unk_c3e].playerName, 0x16, 3);
+    }
+    else
+    {
+        for (i = 0; i < gUnknown_03007890->unk_08; i++)
+        {
+            if (gUnknown_03007890->unk_14[i].unk_02 != 0xFF)
+            {
+                nullsub_13(gUnknown_03007890->unk_14[i].unk_04, 1, i + 3, 4);
+                nullsub_13(gUnknown_03007890->unk_14[i].unk_00, 6, i + 3, 4);
+                nullsub_5(gUnknown_03007890->unk_14[i].playerName, 0x16, i + 3);
+            }
+        }
+        for (; i < 4; i++)
+        {
+            nullsub_13(0, 1, i + 3, 4);
+            nullsub_5(gUnknown_082ED84B, 6, i + 3);
+            nullsub_5(gUnknown_082ED85B, 0x16, i + 3);
+        }
+    }
+}
+
+u32 sub_80124C0(void)
+{
+    return gUnknown_03005000.unk_9e8.unk_232;
+}
+
+u32 sub_80124D4(void)
+{
+    return gUnknown_03005000.unk_124.unk_8c2;
 }

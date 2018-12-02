@@ -39,7 +39,7 @@ extern void HealPlayerParty(void);
 struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
-    u8 needingPadding[3];
+    u8 needingPadding[2];
     u8 playerName[PLAYER_NAME_LENGTH + 1];
 };
 
@@ -265,7 +265,7 @@ void sub_801689C(struct UnkStruct_URoom *arg0);
 u8 sub_80181DC(struct UnkStruct_URoom *arg0);
 bool32 sub_80168DC(struct UnkStruct_URoom *arg0);
 bool32 sub_801704C(void);
-u32 sub_8017CF8(u32 arg1, struct UnkStruct_Main0 *arg0);
+s32 sub_8017CF8(s32 arg1, struct UnkStruct_Main0 *arg0);
 s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender);
 void sub_801818C(bool32 arg0);
 void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
@@ -2510,13 +2510,11 @@ void sub_80156C8(struct UnkStruct_URoom *data)
     memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 0x100);
 }
 
-// Cannot match, please fix later.
-/*
 void sub_80156E0(u8 taskId)
 {
     u32 id = 0;
     s32 var5 = 0;
-    u32 playerGender = 0;
+    s32 playerGender = 0;
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
     s16 *taskData = gTasks[taskId].data;
 
@@ -2679,7 +2677,7 @@ void sub_80156E0(u8 taskId)
             break;
         case 1:
             sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, gUnknown_02022C2C);
-            data->field_12 = id;
+            data->field_12 = id; // Should be just 0, but won't match any other way.
             data->state = 25;
             break;
         case 2:
@@ -2730,6 +2728,11 @@ void sub_80156E0(u8 taskId)
             data->state = 2;
         }
         break;
+    case 5:
+        id = sub_80179AC(&data->field_0->arr[taskData[1]]);
+        playerGender = sub_8017CF8(taskData[1], data->field_0);
+        sub_8015664(6, gUnknown_082EE24C[id][playerGender]);
+        break;
     case 6:
         var5 = sub_8017178(&data->textState, &data->field_1B, &data->field_1C, &gUnknown_082F021C, &gUnknown_082F0244);
         if (var5 != -1)
@@ -2742,16 +2745,15 @@ void sub_80156E0(u8 taskId)
             {
                 data->field_98 = 0;
                 playerGender = sub_8017CF8(taskData[1], data->field_0);
-                switch (var5)
+                if (var5 == -2 || var5 == 0x40)
                 {
-                case -2:
-                case 0x40:
                     data->field_4C[0] = 0x40;
                     sub_800FE50(data->field_4C);
                     StringCopy(gStringVar4, gUnknown_082EEB80[gLinkPlayers[0].gender]);
                     data->state = 32;
-                    break;
-                default:
+                }
+                else
+                {
                     gUnknown_02022C2C = var5;
                     gUnknown_02022C2D = (u32)(var5) >> 8;
                     if (gUnknown_02022C2C == 0x41 && !sub_8018024())
@@ -2764,7 +2766,6 @@ void sub_80156E0(u8 taskId)
                         sub_800FE50(data->field_4C);
                         data->state = 27;
                     }
-                    break;
                 }
             }
         }
@@ -2823,7 +2824,7 @@ void sub_80156E0(u8 taskId)
             }
         }
         break;
-    case 5:
+
     case 7:
         id = sub_80179AC(&data->field_0->arr[taskData[1]]);
         playerGender = sub_8017CF8(taskData[1], data->field_0);
@@ -3261,5 +3262,3 @@ void var_800D_set_xB(void)
     if (InUnionRoom() == TRUE)
         gSpecialVar_Result = 11;
 }
-
-*/

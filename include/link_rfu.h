@@ -1,6 +1,8 @@
 #ifndef GUARD_LINK_RFU_H
 #define GUARD_LINK_RFU_H
 
+#include "librfu.h"
+
 // Exported type declarations
 
 struct UnkLinkRfuStruct_02022B2C
@@ -158,7 +160,8 @@ struct UnkRfuStruct_2
     /* 0x102 */ u8 unk_102;
     /* 0x103 */ u8 filler_103[0x10A - 0x103];
     /* 0x10A */ struct UnkLinkRfuStruct_02022B14 unk_10A;
-    u8 filler_120[12];
+    u8 filler_;
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
@@ -193,7 +196,8 @@ struct UnkRfuStruct_2
     /* 0xcee */ u8 unk_cee[4];
 }; // size = 0xcf4
 
-struct UnkRfuStruct_8010A14 {
+struct UnkRfuStruct_8010A14
+{
     char unk_00[15];
     u8 unk_0f;
     u8 unk_10[4];
@@ -266,7 +270,7 @@ void sub_8010FA0(bool32 a0, bool32 a1);
 void sub_8010F60(void);
 void sub_8010FCC(u32 a0, u32 a1, u32 a2);
 void sub_8011C84(void);
-void sub_8012188(const u8 *a0, struct UnkLinkRfuStruct_02022B14 *arg1, u8 arg2);
+void sub_8012188(const u8 *name, struct UnkLinkRfuStruct_02022B14 *structPtr, u8 a2);
 bool32 sub_8011B90(void);
 void sub_800FE50(u16 *a0);
 bool32 sub_800E540(u16 id, u8 *name);
