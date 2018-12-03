@@ -249,7 +249,7 @@ void sub_80C2668(u32, const u8*);
 void sub_80C267C(void);
 
 // const rom data
-#include "data/pokedex_orders.h"
+#include "data/pokemon/pokedex_orders.h"
 
 static const struct OamData sOamData_855CFE4 =
 {
@@ -832,7 +832,7 @@ static const struct BgTemplate gUnknown_0856E630[] =
     }
 };
 
-static const struct WindowTemplate gUnknown_0856E640[] = 
+static const struct WindowTemplate gUnknown_0856E640[] =
 {
     {
         .bg = 2,
@@ -895,7 +895,7 @@ static const struct BgTemplate gUnknown_0856E668[] =
     },
 };
 
-static const struct WindowTemplate gUnknown_0856E670[] = 
+static const struct WindowTemplate gUnknown_0856E670[] =
 {
     {
         .bg = 2,
@@ -1195,7 +1195,7 @@ static const struct BgTemplate gUnknown_0856EFF8[] =
     }
 };
 
-static const struct WindowTemplate gUnknown_0856F008[] = 
+static const struct WindowTemplate gUnknown_0856F008[] =
 {
     {
         .bg = 2,

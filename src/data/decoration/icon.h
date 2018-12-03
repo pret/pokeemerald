@@ -1,10 +1,3 @@
-//
-// Created by scott on 10/21/2017.
-//
-
-#ifndef GUARD_ICON_H
-#define GUARD_ICON_H
-
 const u32 *const gUnknown_085A6BE8[][2] = {
     {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     {NULL, NULL},
@@ -128,5 +121,3 @@ const u32 *const gUnknown_085A6BE8[][2] = {
     {gUnknown_08DB9DD4, gUnknown_08DB9EE4},
     {gUnknown_08DBA020, gUnknown_08DBA12C}
 };
-
-#endif //GUARD_ICON_H

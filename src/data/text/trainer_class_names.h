@@ -1,8 +1,3 @@
-#include "constants/trainers.h"
-
-#ifndef GUARD_TRAINER_CLASS_NAMES_H
-#define GUARD_TRAINER_CLASS_NAMES_H
-
 const u8 gTrainerClassNames[][13] = {
     [TRAINER_CLASS_PKMN_TRAINER_1] = _("{PKMN} TRAINER"),
     [TRAINER_CLASS_PKMN_TRAINER_2] = _("{PKMN} TRAINER"),
@@ -71,5 +66,3 @@ const u8 gTrainerClassNames[][13] = {
     [TRAINER_CLASS_PYRAMID_KING] = _("PYRAMID KING"),
     [TRAINER_CLASS_PKMN_TRAINER_4] = _("{PKMN} TRAINER"),
 };
-
-#endif

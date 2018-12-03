@@ -1,6 +1,3 @@
-#ifndef GUARD_BERRY_TREE_GRAPHICS_TABLES_H
-#define GUARD_BERRY_TREE_GRAPHICS_TABLES_H
-
 const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[] = {
     overworld_frame(gEventObjectPic_BerryTreeDirtPile, 2, 2, 0),
     overworld_frame(gEventObjectPic_BerryTreeSprout, 2, 2, 0),
@@ -565,6 +562,3 @@ const u8 *const gBerryTreeEventObjectGraphicsIdTablePointers[] = {
     gBerryTreeEventObjectGraphicsIdTable,
     gBerryTreeEventObjectGraphicsIdTable,
 };
-
-
-#endif //GUARD_BERRY_TREE_GRAPHICS_TABLES_H

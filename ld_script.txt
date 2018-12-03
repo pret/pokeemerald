@@ -459,6 +459,8 @@ SECTIONS {
         src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
+        src/battle_anim_80D51AC.o(.rodata);
+        src/item.o(.rodata);
         data/contest.o(.rodata);
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
