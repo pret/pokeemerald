@@ -190,11 +190,13 @@ $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
-$(DATA_ASM_BUILDDIR)/berry_fix_program.elf: $(DATA_ASM_BUILDDIR)/berry_fix_program.o
-	$(LD) -o $@ $<
+#$(DATA_ASM_BUILDDIR)/berry_fix_program.elf: $(DATA_ASM_BUILDDIR)/berry_fix_program.o
+#	$(LD) -o $@ $<
+#
+#data/berry_fix_program.mb: $(DATA_ASM_BUILDDIR)/berry_fix_program.elf
+#	$(OBJCOPY) -O binary $< $@
 
-data/berry_fix_program.mb: $(DATA_ASM_BUILDDIR)/berry_fix_program.elf
-	$(OBJCOPY) -O binary $< $@
+data/berry_fix_program.mb.lz: ;
 
 $(DATA_ASM_BUILDDIR)/berry_fix.elf: $(DATA_ASM_BUILDDIR)/berry_fix.o
 	$(LD) -o $@ $<
