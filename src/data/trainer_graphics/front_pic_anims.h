@@ -375,7 +375,7 @@ const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
     gTrainerFrontAnims_Hiker,                 // TRAINER_PIC_HIKER
     gTrainerFrontAnims_AquaGruntM,            // TRAINER_PIC_AQUA_GRUNT_M
     gTrainerFrontAnims_PokemonBreederF,       // TRAINER_PIC_POKEMON_BREEDER_F
-    gTrainerFrontAnims_CoolTrainerM,          // TRAINER_PIC_COOL_TRAINER_M
+    gTrainerFrontAnims_CoolTrainerM,          // TRAINER_PIC_COOLTRAINER_M
     gTrainerFrontAnims_BirdKeeper,            // TRAINER_PIC_BIRD_KEEPER
     gTrainerFrontAnims_Collector,             // TRAINER_PIC_COLLECTOR
     gTrainerFrontAnims_AquaGruntF,            // TRAINER_PIC_AQUA_GRUNT_F
@@ -392,7 +392,7 @@ const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
     gTrainerFrontAnims_Interviewer,           // TRAINER_PIC_INTERVIEWER
     gTrainerFrontAnims_TuberF,                // TRAINER_PIC_TUBER_F
     gTrainerFrontAnims_TuberM,                // TRAINER_PIC_TUBER_M
-    gTrainerFrontAnims_CoolTrainerF,          // TRAINER_PIC_COOL_TRAINER_F
+    gTrainerFrontAnims_CoolTrainerF,          // TRAINER_PIC_COOLTRAINER_F
     gTrainerFrontAnims_Lady,                  // TRAINER_PIC_LADY
     gTrainerFrontAnims_Beauty,                // TRAINER_PIC_BEAUTY
     gTrainerFrontAnims_RichBoy,               // TRAINER_PIC_RICH_BOY
@@ -463,6 +463,6 @@ const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
     gTrainerFrontAnims_PyramidKingBrandon,    // TRAINER_PIC_PYRAMID_KING_BRANDON
     gTrainerFrontAnims_Red,                   // TRAINER_PIC_RED
     gTrainerFrontAnims_Leaf,                  // TRAINER_PIC_LEAF
-    gTrainerFrontAnims_RubySapphireBrendan,   // TRAINER_PIC_RUBY_SAPPHIRE_BRENDAN
-    gTrainerFrontAnims_RubySapphireMay,       // TRAINER_PIC_RUBY_SAPPHIRE_MAY
+    gTrainerFrontAnims_RubySapphireBrendan,   // TRAINER_PIC_RS_BRENDAN
+    gTrainerFrontAnims_RubySapphireMay,       // TRAINER_PIC_RS_MAY
 };
