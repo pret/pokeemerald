@@ -1,3 +1,5 @@
+#include "constants/battle_frontier.h"
+
 	.align 2
 gBattleFrontierMons:: @ 85D97BC
 @ 0
