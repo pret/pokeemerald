@@ -87,7 +87,7 @@ extern u8 gUnknown_03005DB4;
 extern void sub_80AF688(void);
 extern void var_800D_set_xB(void);
 extern void sub_808B864(void);
-extern void sub_80BB534(void);
+extern void CB2_Pokedex(void);
 extern void play_some_sound(void);
 extern void CB2_PartyMenuFromStartMenu(void);
 extern void CB2_PokeNav(void);
@@ -624,7 +624,7 @@ static bool8 StartMenuPokedexCallback(void)
         play_some_sound();
         RemoveExtraStartMenuWindows();
         overworld_free_bg_tilemaps();
-        SetMainCallback2(sub_80BB534); // Display pokedex
+        SetMainCallback2(CB2_Pokedex);
 
         return TRUE;
     }
