@@ -8,8 +8,8 @@ MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC94
 	checkflag FLAG_0x059
 	goto_eq MauvilleCity_BikeShop_EventScript_20EBF7
-	msgbox MauvilleCity_BikeShop_Text_20EE22, 4
-	msgbox MauvilleCity_BikeShop_Text_20EE99, 5
+	msgbox MauvilleCity_BikeShop_Text_20EE22, MSGBOX_DEFAULT
+	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
 	compare VAR_RESULT, 0
@@ -17,7 +17,7 @@ MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	end
 
 MauvilleCity_BikeShop_EventScript_20EBF7:: @ 820EBF7
-	msgbox MauvilleCity_BikeShop_Text_20EE99, 5
+	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
 	compare VAR_RESULT, 0
@@ -35,7 +35,7 @@ MauvilleCity_BikeShop_EventScript_20EC16:: @ 820EC16
 
 MauvilleCity_BikeShop_EventScript_20EC3D:: @ 820EC3D
 	setflag FLAG_0x059
-	msgbox MauvilleCity_BikeShop_Text_20EEE8, 4
+	msgbox MauvilleCity_BikeShop_Text_20EEE8, MSGBOX_DEFAULT
 	release
 	end
 
@@ -45,25 +45,25 @@ MauvilleCity_BikeShop_EventScript_20EC4A:: @ 820EC4A
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC53:: @ 820EC53
-	msgbox MauvilleCity_BikeShop_Text_20F18D, 4
+	msgbox MauvilleCity_BikeShop_Text_20F18D, MSGBOX_DEFAULT
 	giveitem_std ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC6D:: @ 820EC6D
-	msgbox MauvilleCity_BikeShop_Text_20F1A5, 4
+	msgbox MauvilleCity_BikeShop_Text_20F1A5, MSGBOX_DEFAULT
 	giveitem_std ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC87:: @ 820EC87
-	msgbox MauvilleCity_BikeShop_Text_20F1BD, 4
+	msgbox MauvilleCity_BikeShop_Text_20F1BD, MSGBOX_DEFAULT
 	special SwapRegisteredBike
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC94:: @ 820EC94
-	msgbox MauvilleCity_BikeShop_Text_20F1FB, 5
+	msgbox MauvilleCity_BikeShop_Text_20F1FB, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECB3
 	compare VAR_RESULT, 0
@@ -71,25 +71,25 @@ MauvilleCity_BikeShop_EventScript_20EC94:: @ 820EC94
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECB3:: @ 820ECB3
-	msgbox MauvilleCity_BikeShop_Text_20F22F, 4
+	msgbox MauvilleCity_BikeShop_Text_20F22F, MSGBOX_DEFAULT
 	checkitem ITEM_ACRO_BIKE, 1
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECEF
 	checkitem ITEM_MACH_BIKE, 1
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ED10
-	msgbox MauvilleCity_BikeShop_Text_20F2F3, 4
+	msgbox MauvilleCity_BikeShop_Text_20F2F3, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECE5:: @ 820ECE5
-	msgbox MauvilleCity_BikeShop_Text_20F2C4, 4
+	msgbox MauvilleCity_BikeShop_Text_20F2C4, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
 	incrementgamestat 4
-	msgbox MauvilleCity_BikeShop_Text_20F294, 4
+	msgbox MauvilleCity_BikeShop_Text_20F294, MSGBOX_DEFAULT
 	takeitem ITEM_ACRO_BIKE, 1
 	giveitem_std ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
@@ -97,14 +97,14 @@ MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
 
 MauvilleCity_BikeShop_EventScript_20ED10:: @ 820ED10
 	incrementgamestat 4
-	msgbox MauvilleCity_BikeShop_Text_20F263, 4
+	msgbox MauvilleCity_BikeShop_Text_20F263, MSGBOX_DEFAULT
 	takeitem ITEM_MACH_BIKE, 1
 	giveitem_std ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED31:: @ 820ED31
-	msgbox MauvilleCity_BikeShop_Text_20F3C3, 2
+	msgbox MauvilleCity_BikeShop_Text_20F3C3, MSGBOX_NPC
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED3A:: @ 820ED3A

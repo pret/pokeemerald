@@ -153,7 +153,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
-	trainerbattle 9, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
+	trainerbattle TRAINER_BATTLE_9, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
 	setvar VAR_0x8004, 10
 	special CallBattlePyramidFunction
 	waitmessage
@@ -165,7 +165,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A:: @ 8252C6A
 	setvar VAR_0x8004, 7
 	special CallBattlePyramidFunction
-	callstd 1
+	callstd STD_FIND_ITEM
 	compare VAR_0x8007, 0
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
 	setvar VAR_0x8004, 8
@@ -781,4 +781,3 @@ BattleFrontier_BattlePyramidEmptySquare_Text_25502F:: @ 825502F
 BattleFrontier_BattlePyramidEmptySquare_Text_255068:: @ 8255068
 	.string "There aren’t any TRAINERS left that\n"
 	.string "can take you on now…$"
-

@@ -344,4 +344,3 @@ u16 RtcGetLocalDayCount(void)
 {
     return RtcGetDayCount(&sRtc);
 }
-

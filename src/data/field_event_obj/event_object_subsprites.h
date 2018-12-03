@@ -1,6 +1,3 @@
-#ifndef GUARD_EVENT_OBJECT_SUBSPRITES_H
-#define GUARD_EVENT_OBJECT_SUBSPRITES_H
-
 const struct Subsprite gEventObjectSpriteOamTable_16x16_0[] = {
     { -8,  -8, 0, 1, 0, 2}
 };
@@ -338,5 +335,3 @@ const struct SubspriteTable gEventObjectSpriteOamTables_SubmarineShadow[] = {
     {16, gEventObjectSpriteOamTable_SubmarineShadow_3},
     {16, gEventObjectSpriteOamTable_SubmarineShadow_3}
 };
-
-#endif //GUARD_EVENT_OBJECT_SUBSPRITES_H

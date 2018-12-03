@@ -125,6 +125,7 @@ u8 sub_80A89C8(int, u8, int);
 void sub_80A6D60(struct UnknownAnimStruct2*, const void*, u32);
 void sub_80A6CC0(u32, const void*, u32);
 void sub_80A6DAC(bool8);
+void sub_80A634C(struct Sprite *);
 
 enum
 {
@@ -168,7 +169,7 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
 
-u32 sub_811583C(s16);
+u32 UnpackSelectedBattleAnimPalettes(s16);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 

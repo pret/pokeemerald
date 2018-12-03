@@ -51,7 +51,7 @@ DesertRuins_EventScript_22D9DB:: @ 822D9DB
 	end
 
 DesertRuins_EventScript_22D9EE:: @ 822D9EE
-	msgbox gUnknown_0827304E, 4
+	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
 	releaseall
 	end
 

@@ -17,17 +17,17 @@ PetalburgCity_PokemonCenter_1F_EventScript_2079FC:: @ 82079FC
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A0A:: @ 8207A0A
-	msgbox PetalburgCity_PokemonCenter_1F_Text_207A76, 2
+	msgbox PetalburgCity_PokemonCenter_1F_Text_207A76, MSGBOX_NPC
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A13:: @ 8207A13
-	msgbox PetalburgCity_PokemonCenter_1F_Text_207AD6, 2
+	msgbox PetalburgCity_PokemonCenter_1F_Text_207AD6, MSGBOX_NPC
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A1C:: @ 8207A1C
 	lock
 	faceplayer
-	msgbox PetalburgCity_PokemonCenter_1F_Text_207B09, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_207B09, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, IsStarterInParty
 	compare VAR_RESULT, 1
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_207A38
@@ -45,15 +45,15 @@ PetalburgCity_PokemonCenter_1F_EventScript_207A38:: @ 8207A38
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A5B:: @ 8207A5B
-	msgbox PetalburgCity_PokemonCenter_1F_Text_207BB0, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_207BB0, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A64:: @ 8207A64
-	msgbox PetalburgCity_PokemonCenter_1F_Text_207C35, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_207C35, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A6D:: @ 8207A6D
-	msgbox PetalburgCity_PokemonCenter_1F_Text_207CB7, 4
+	msgbox PetalburgCity_PokemonCenter_1F_Text_207CB7, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_PokemonCenter_1F_Text_207A76: @ 8207A76

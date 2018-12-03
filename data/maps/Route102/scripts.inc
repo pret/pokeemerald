@@ -2,23 +2,23 @@ Route102_MapScripts:: @ 81EC0E0
 	.byte 0
 
 Route102_EventScript_1EC0E1:: @ 81EC0E1
-	msgbox Route102_Text_1EC2C0, 2
+	msgbox Route102_Text_1EC2C0, MSGBOX_NPC
 	end
 
 Route102_EventScript_1EC0EA:: @ 81EC0EA
-	msgbox Route102_Text_1EC35B, 3
+	msgbox Route102_Text_1EC35B, MSGBOX_SIGN
 	end
 
 Route102_EventScript_1EC0F3:: @ 81EC0F3
-	msgbox Route102_Text_1EC373, 3
+	msgbox Route102_Text_1EC373, MSGBOX_SIGN
 	end
 
 Route102_EventScript_1EC0FC:: @ 81EC0FC
-	msgbox Route102_Text_1EC32E, 2
+	msgbox Route102_Text_1EC32E, MSGBOX_NPC
 	end
 
 Route102_EventScript_1EC105:: @ 81EC105
-	trainerbattle 2, TRAINER_CALVIN_1, 0, Route102_Text_294513, Route102_Text_29457C, Route102_EventScript_1EC146
+	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_294513, Route102_Text_29457C, Route102_EventScript_1EC146
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_1EC19C
@@ -26,7 +26,7 @@ Route102_EventScript_1EC105:: @ 81EC105
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
 	goto_eq Route102_EventScript_1EC170
-	msgbox Route102_Text_2945AC, 4
+	msgbox Route102_Text_2945AC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -39,48 +39,42 @@ Route102_EventScript_1EC146:: @ 81EC146
 	end
 
 Route102_EventScript_1EC157:: @ 81EC157
-	msgbox Route102_Text_294668, 4
-	setvar VAR_0x8004, 318
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 318
-	callstd 8
+	msgbox Route102_Text_294668, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CALVIN_1
 	release
 	end
 
 Route102_EventScript_1EC170:: @ 81EC170
 	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route102_EventScript_1EC183
-	msgbox Route102_Text_2945AC, 4
+	msgbox Route102_Text_2945AC, MSGBOX_DEFAULT
 	release
 	end
 
 Route102_EventScript_1EC183:: @ 81EC183
-	msgbox Route102_Text_2945EB, 4
-	setvar VAR_0x8004, 318
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 318
-	callstd 8
+	msgbox Route102_Text_2945EB, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CALVIN_1
 	release
 	end
 
 Route102_EventScript_1EC19C:: @ 81EC19C
-	trainerbattle 5, TRAINER_CALVIN_1, 0, Route102_Text_2946AE, Route102_Text_29470C
-	msgbox Route102_Text_29473C, 6
+	trainerbattle_rematch TRAINER_CALVIN_1, Route102_Text_2946AE, Route102_Text_29470C
+	msgbox Route102_Text_29473C, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_1EC1B3:: @ 81EC1B3
-	trainerbattle 0, TRAINER_RICK, 0, Route102_Text_29480C, Route102_Text_294847
-	msgbox Route102_Text_294859, 6
+	trainerbattle_single TRAINER_RICK, Route102_Text_29480C, Route102_Text_294847
+	msgbox Route102_Text_294859, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_1EC1CA:: @ 81EC1CA
-	trainerbattle 0, TRAINER_TIANA, 0, Route102_Text_29489E, Route102_Text_2948F3
-	msgbox Route102_Text_294916, 6
+	trainerbattle_single TRAINER_TIANA, Route102_Text_29489E, Route102_Text_2948F3
+	msgbox Route102_Text_294916, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_1EC1E1:: @ 81EC1E1
-	trainerbattle 0, TRAINER_ALLEN, 0, Route102_Text_294775, Route102_Text_2947AA
-	msgbox Route102_Text_2947DB, 6
+	trainerbattle_single TRAINER_ALLEN, Route102_Text_294775, Route102_Text_2947AA
+	msgbox Route102_Text_2947DB, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgCity_Text_1EC1F8: @ 81EC1F8

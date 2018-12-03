@@ -10,7 +10,7 @@ PacifidlogTown_House3_EventScript_203C11:: @ 8203C11
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, sub_807E73C
 	copyvar VAR_0x8009, VAR_RESULT
-	msgbox PacifidlogTown_House3_Text_203CBE, 5
+	msgbox PacifidlogTown_House3_Text_203CBE, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_House3_EventScript_203C93
 	special sub_81B94B0
@@ -29,29 +29,29 @@ PacifidlogTown_House3_EventScript_203C11:: @ 8203C11
 	special sub_807F0E4
 	waitstate
 	bufferspeciesname 0, VAR_0x8009
-	msgbox PacifidlogTown_House3_Text_203D87, 4
+	msgbox PacifidlogTown_House3_Text_203D87, MSGBOX_DEFAULT
 	setflag FLAG_0x09A
 	release
 	end
 
 PacifidlogTown_House3_EventScript_203C93:: @ 8203C93
-	msgbox PacifidlogTown_House3_Text_203E12, 4
+	msgbox PacifidlogTown_House3_Text_203E12, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House3_EventScript_203C9D:: @ 8203C9D
 	bufferspeciesname 0, VAR_0x8009
-	msgbox PacifidlogTown_House3_Text_203DDE, 4
+	msgbox PacifidlogTown_House3_Text_203DDE, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House3_EventScript_203CAB:: @ 8203CAB
-	msgbox PacifidlogTown_House3_Text_203E7F, 4
+	msgbox PacifidlogTown_House3_Text_203E7F, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House3_EventScript_203CB5:: @ 8203CB5
-	msgbox PacifidlogTown_House3_Text_203EF1, 2
+	msgbox PacifidlogTown_House3_Text_203EF1, MSGBOX_NPC
 	end
 
 PacifidlogTown_House3_Text_203CBE: @ 8203CBE

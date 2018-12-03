@@ -19,17 +19,17 @@ RustboroCity_DevonCorp_1F_EventScript_211261:: @ 8211261
 	goto_eq RustboroCity_DevonCorp_1F_EventScript_211289
 	checkflag FLAG_0x08E
 	goto_eq RustboroCity_DevonCorp_1F_EventScript_21127F
-	msgbox RustboroCity_DevonCorp_1F_Text_2113D1, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_2113D1, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_21127F:: @ 821127F
-	msgbox RustboroCity_DevonCorp_1F_Text_211446, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_211446, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_211289:: @ 8211289
-	msgbox RustboroCity_DevonCorp_1F_Text_2114DE, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_2114DE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -42,17 +42,17 @@ RustboroCity_DevonCorp_1F_EventScript_211293:: @ 8211293
 	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112C4
 	checkflag FLAG_0x08E
 	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112C4
-	msgbox RustboroCity_DevonCorp_1F_Text_21151B, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_21151B, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_2112BA:: @ 82112BA
-	msgbox RustboroCity_DevonCorp_1F_Text_211585, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_211585, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_2112C4:: @ 82112C4
-	msgbox RustboroCity_DevonCorp_1F_Text_211558, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_211558, MSGBOX_DEFAULT
 	release
 	end
 
@@ -65,26 +65,26 @@ RustboroCity_DevonCorp_1F_EventScript_2112CE:: @ 82112CE
 	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112FF
 	checkflag FLAG_0x08E
 	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112FF
-	msgbox RustboroCity_DevonCorp_1F_Text_21131B, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_21131B, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_2112F5:: @ 82112F5
-	msgbox RustboroCity_DevonCorp_1F_Text_21131B, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_21131B, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_2112FF:: @ 82112FF
-	msgbox RustboroCity_DevonCorp_1F_Text_21138B, 4
+	msgbox RustboroCity_DevonCorp_1F_Text_21138B, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_211309:: @ 8211309
-	msgbox RustboroCity_DevonCorp_1F_Text_2115AC, 3
+	msgbox RustboroCity_DevonCorp_1F_Text_2115AC, MSGBOX_SIGN
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_211312:: @ 8211312
-	msgbox RustboroCity_DevonCorp_1F_Text_211722, 3
+	msgbox RustboroCity_DevonCorp_1F_Text_211722, MSGBOX_SIGN
 	end
 
 RustboroCity_DevonCorp_1F_Text_21131B: @ 821131B

@@ -21,7 +21,7 @@ RusturfTunnel_EventScript_22CE50:: @ 822CE50
 RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 	lock
 	faceplayer
-	msgbox RusturfTunnel_Text_22D7A3, 4
+	msgbox RusturfTunnel_Text_22D7A3, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
 	waitmovement 0
@@ -34,7 +34,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	checkflag FLAG_TEMP_1
 	goto_eq RusturfTunnel_EventScript_22CE99
 	setflag FLAG_TEMP_1
-	msgbox RusturfTunnel_Text_22D510, 4
+	msgbox RusturfTunnel_Text_22D510, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
 	waitmovement 0
@@ -42,7 +42,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	end
 
 RusturfTunnel_EventScript_22CE99:: @ 822CE99
-	msgbox RusturfTunnel_Text_22D5F3, 4
+	msgbox RusturfTunnel_Text_22D5F3, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
 	waitmovement 0
@@ -58,14 +58,14 @@ RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_22CFC7
 	call RusturfTunnel_EventScript_22CFFF
-	msgbox RusturfTunnel_Text_22D65C, 4
+	msgbox RusturfTunnel_Text_22D65C, MSGBOX_DEFAULT
 	compare VAR_TEMP_1, 2
 	call_if 1, RusturfTunnel_EventScript_22CFC8
 	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_22CFC8
 	giveitem_std ITEM_HM04
 	setflag FLAG_0x06A
-	msgbox RusturfTunnel_Text_22D6D2, 4
+	msgbox RusturfTunnel_Text_22D6D2, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_22CF5D
@@ -73,7 +73,7 @@ RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	call_if 1, RusturfTunnel_EventScript_22CF6F
 	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_22CF8B
-	msgbox RusturfTunnel_Text_22D745, 4
+	msgbox RusturfTunnel_Text_22D745, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_22CFD4
@@ -281,7 +281,7 @@ RusturfTunnel_EventScript_22D07D:: @ 822D07D
 
 RusturfTunnel_EventScript_22D083:: @ 822D083
 	lockall
-	msgbox RusturfTunnel_Text_22D1C8, 4
+	msgbox RusturfTunnel_Text_22D1C8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 6, RusturfTunnel_Movement_22D0AB
 	applymovement 7, RusturfTunnel_Movement_22D0AB
@@ -303,7 +303,7 @@ RusturfTunnel_EventScript_22D0AF:: @ 822D0AF
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox RusturfTunnel_Text_22D1F7, 4
+	msgbox RusturfTunnel_Text_22D1F7, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -312,9 +312,9 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	lock
 	faceplayer
 	playbgm MUS_AQA_0, 0
-	msgbox RusturfTunnel_Text_22D20A, 4
-	trainerbattle 3, TRAINER_GRUNT_10, 0, RusturfTunnel_Text_22D2B0
-	msgbox RusturfTunnel_Text_22D2E1, 4
+	msgbox RusturfTunnel_Text_22D20A, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_10, RusturfTunnel_Text_22D2B0
+	msgbox RusturfTunnel_Text_22D2E1, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_GOODS
 	closemessage
 	applymovement 255, RusturfTunnel_Movement_22D178
@@ -328,7 +328,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	applymovement 255, RusturfTunnel_Movement_22D17E
 	applymovement 5, RusturfTunnel_Movement_22D1A4
 	waitmovement 0
-	msgbox RusturfTunnel_Text_22D395, 4
+	msgbox RusturfTunnel_Text_22D395, MSGBOX_DEFAULT
 	applymovement 5, RusturfTunnel_Movement_27259E
 	waitmovement 0
 	message RusturfTunnel_Text_22D3BA
@@ -426,8 +426,8 @@ RusturfTunnel_Movement_22D1A7: @ 822D1A7
 	step_end
 
 RusturfTunnel_EventScript_22D1B1:: @ 822D1B1
-	trainerbattle 0, TRAINER_MIKE_2, 0, RusturfTunnel_Text_22D84D, RusturfTunnel_Text_22D8DB
-	msgbox RusturfTunnel_Text_22D8F9, 6
+	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_22D84D, RusturfTunnel_Text_22D8DB
+	msgbox RusturfTunnel_Text_22D8F9, MSGBOX_AUTOCLOSE
 	end
 
 RusturfTunnel_Text_22D1C8: @ 822D1C8

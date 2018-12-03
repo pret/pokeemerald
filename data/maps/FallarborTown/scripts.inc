@@ -13,21 +13,21 @@ FallarborTown_EventScript_1EB20C:: @ 81EB20C
 	faceplayer
 	checkflag FLAG_0x08B
 	goto_eq FallarborTown_EventScript_1EB221
-	msgbox FallarborTown_Text_1EB26B, 4
+	msgbox FallarborTown_Text_1EB26B, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_EventScript_1EB221:: @ 81EB221
-	msgbox FallarborTown_Text_1EB2DE, 4
+	msgbox FallarborTown_Text_1EB2DE, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_EventScript_1EB22B:: @ 81EB22B
-	msgbox FallarborTown_Text_1EB35F, 2
+	msgbox FallarborTown_Text_1EB35F, MSGBOX_NPC
 	end
 
 FallarborTown_EventScript_1EB234:: @ 81EB234
-	msgbox FallarborTown_Text_1EB3CA, 2
+	msgbox FallarborTown_Text_1EB3CA, MSGBOX_NPC
 	end
 
 FallarborTown_EventScript_1EB23D:: @ 81EB23D
@@ -35,21 +35,21 @@ FallarborTown_EventScript_1EB23D:: @ 81EB23D
 	faceplayer
 	waitse
 	playmoncry SPECIES_AZURILL, 0
-	msgbox FallarborTown_Text_1EB3B5, 4
+	msgbox FallarborTown_Text_1EB3B5, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 FallarborTown_EventScript_1EB250:: @ 81EB250
-	msgbox FallarborTown_Text_1EB4C2, 3
+	msgbox FallarborTown_Text_1EB4C2, MSGBOX_SIGN
 	end
 
 FallarborTown_EventScript_1EB259:: @ 81EB259
-	msgbox FallarborTown_Text_1EB4FE, 3
+	msgbox FallarborTown_Text_1EB4FE, MSGBOX_SIGN
 	end
 
 FallarborTown_EventScript_1EB262:: @ 81EB262
-	msgbox FallarborTown_Text_1EB534, 3
+	msgbox FallarborTown_Text_1EB534, MSGBOX_SIGN
 	end
 
 FallarborTown_Text_1EB26B: @ 81EB26B

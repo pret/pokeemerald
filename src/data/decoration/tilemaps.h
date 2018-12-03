@@ -1,6 +1,3 @@
-#ifndef GUARD_TILEMAPS_H
-#define GUARD_TILEMAPS_H
-
 const u8 Unknown_085A6FB0[] = {
     0x00, 0x01, 0x02, 0x03
 };
@@ -231,5 +228,3 @@ const struct {
         Unknown_085A7198,
         0x18
     }};
-
-#endif //GUARD_TILEMAPS_H

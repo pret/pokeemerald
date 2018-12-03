@@ -7,10 +7,10 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 	goto_eq LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA
 	checkflag FLAG_BADGE07_GET
 	goto_eq LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218264, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218264, MSGBOX_DEFAULT
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
 	waitmovement 0
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21831E, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21831E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
 	waitmovement 0
@@ -18,10 +18,10 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3:: @ 82181C3
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2183C3, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2183C3, MSGBOX_DEFAULT
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
 	waitmovement 0
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218470, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218470, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
 	waitmovement 0
@@ -29,10 +29,10 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3:: @ 82181C3
 	end
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA:: @ 82181EA
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218544, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218544, MSGBOX_DEFAULT
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
 	waitmovement 0
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2185F4, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2185F4, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
 	waitmovement 0
@@ -48,7 +48,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218211:: @ 8218211
 	waitmovement 0
 	applymovement 255, LilycoveCity_CoveLilyMotel_1F_Movement_2725AA
 	waitmovement 0
-	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21839B, 4
+	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21839B, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LilycoveCity_CoveLilyMotel_1F_Movement_218259
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_21825E

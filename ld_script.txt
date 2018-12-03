@@ -54,7 +54,6 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/link_rfu.o(.text);
-        asm/link_rfu.o(.text);
         src/rom_8011DC0.o(.text);
         asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
@@ -172,7 +171,7 @@ SECTIONS {
         src/dragon.o(.text);
         asm/dark.o(.text);
         src/ground.o(.text);
-        asm/normal.o(.text);
+        src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
         asm/battle_intro.o(.text);
         src/bike.o(.text);
@@ -203,7 +202,7 @@ SECTIONS {
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/battle_records.o(.text);
-        asm/pokedex_area_screen.o(.text);
+        src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         asm/roulette.o(.text);
         src/pokedex_cry_screen.o(.text);
@@ -481,6 +480,8 @@ SECTIONS {
         src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
         src/item_menu_icons.o(.rodata);
+        src/battle_anim_80D51AC.o(.rodata);
+        src/item.o(.rodata);
         src/contest.o(.rodata);
         data/contest.o(.rodata);
         src/shop.o(.rodata);
@@ -542,7 +543,7 @@ SECTIONS {
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
-        data/pokedex_area_screen.o(.rodata);
+        src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);

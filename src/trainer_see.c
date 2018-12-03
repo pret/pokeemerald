@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/battle_setup.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"

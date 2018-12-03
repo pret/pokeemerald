@@ -19,7 +19,7 @@ BattleFrontier_ReceptionGate_EventScript_2661F3:: @ 82661F3
 	waitmovement 0
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_27259A
 	waitmovement 0
-	msgbox BattleFrontier_ReceptionGate_Text_266580, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266580, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, BattleFrontier_ReceptionGate_Movement_2662D2
 	waitmovement 0
@@ -27,16 +27,16 @@ BattleFrontier_ReceptionGate_EventScript_2661F3:: @ 82661F3
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
-	msgbox BattleFrontier_ReceptionGate_Text_2665B2, 4
-	msgbox BattleFrontier_ReceptionGate_Text_2665F7, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2665B2, MSGBOX_DEFAULT
+	msgbox BattleFrontier_ReceptionGate_Text_2665F7, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message BattleFrontier_ReceptionGate_Text_266676
 	waitfanfare
 	waitmessage
-	msgbox BattleFrontier_ReceptionGate_Text_266695, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266695, MSGBOX_DEFAULT
 	setflag FLAG_SYS_FRONTIER_PASS
-	msgbox BattleFrontier_ReceptionGate_Text_2666C6, 4
-	msgbox BattleFrontier_ReceptionGate_Text_266703, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
+	msgbox BattleFrontier_ReceptionGate_Text_266703, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_2725A6
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_2725A6
@@ -47,14 +47,14 @@ BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_272598
 	applymovement 255, BattleFrontier_ReceptionGate_Movement_272598
 	waitmovement 0
-	msgbox BattleFrontier_ReceptionGate_Text_266733, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266733, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_2662F0
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_2662F6
 	applymovement 255, BattleFrontier_ReceptionGate_Movement_2662D7
 	applymovement 4, BattleFrontier_ReceptionGate_Movement_2662E0
 	waitmovement 0
-	msgbox BattleFrontier_ReceptionGate_Text_266764, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266764, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, BattleFrontier_ReceptionGate_Movement_2662E8
 	waitmovement 0
@@ -121,15 +121,15 @@ BattleFrontier_ReceptionGate_Movement_2662F6: @ 82662F6
 BattleFrontier_ReceptionGate_EventScript_2662FC:: @ 82662FC
 	lock
 	faceplayer
-	msgbox BattleFrontier_ReceptionGate_Text_2665B2, 4
-	msgbox BattleFrontier_ReceptionGate_Text_2666C6, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2665B2, MSGBOX_DEFAULT
+	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266310:: @ 8266310
 	lock
 	faceplayer
-	msgbox BattleFrontier_ReceptionGate_Text_266857, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266857, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
@@ -154,59 +154,59 @@ BattleFrontier_ReceptionGate_EventScript_266320:: @ 8266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663AE:: @ 82663AE
-	msgbox BattleFrontier_ReceptionGate_Text_2668C2, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2668C2, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663BC:: @ 82663BC
-	msgbox BattleFrontier_ReceptionGate_Text_26696F, 4
+	msgbox BattleFrontier_ReceptionGate_Text_26696F, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663CA:: @ 82663CA
-	msgbox BattleFrontier_ReceptionGate_Text_266A34, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266A34, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663D8:: @ 82663D8
-	msgbox BattleFrontier_ReceptionGate_Text_266AC2, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266AC2, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663E6:: @ 82663E6
-	msgbox BattleFrontier_ReceptionGate_Text_266B5D, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266B5D, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2663F4:: @ 82663F4
-	msgbox BattleFrontier_ReceptionGate_Text_266C24, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266C24, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266402:: @ 8266402
-	msgbox BattleFrontier_ReceptionGate_Text_266CBB, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266CBB, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266410:: @ 8266410
-	msgbox BattleFrontier_ReceptionGate_Text_266D1C, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266D1C, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_26641E:: @ 826641E
-	msgbox BattleFrontier_ReceptionGate_Text_266DCB, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266DCB, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266320
 	end
 
 BattleFrontier_ReceptionGate_EventScript_26642C:: @ 826642C
-	msgbox BattleFrontier_ReceptionGate_Text_2666C6, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266436:: @ 8266436
 	lock
 	faceplayer
-	msgbox BattleFrontier_ReceptionGate_Text_266E66, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266E66, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266446
 	end
 
@@ -225,39 +225,39 @@ BattleFrontier_ReceptionGate_EventScript_266446:: @ 8266446
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664A4:: @ 82664A4
-	msgbox BattleFrontier_ReceptionGate_Text_266F04, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266F04, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266446
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664B2:: @ 82664B2
-	msgbox BattleFrontier_ReceptionGate_Text_266F69, 4
+	msgbox BattleFrontier_ReceptionGate_Text_266F69, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266446
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664C0:: @ 82664C0
-	msgbox BattleFrontier_ReceptionGate_Text_267080, 4
+	msgbox BattleFrontier_ReceptionGate_Text_267080, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266446
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664CE:: @ 82664CE
-	msgbox BattleFrontier_ReceptionGate_Text_26716A, 4
+	msgbox BattleFrontier_ReceptionGate_Text_26716A, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266446
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664DC:: @ 82664DC
-	msgbox BattleFrontier_ReceptionGate_Text_267298, 4
+	msgbox BattleFrontier_ReceptionGate_Text_267298, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266446
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664EA:: @ 82664EA
-	msgbox BattleFrontier_ReceptionGate_Text_2666C6, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ReceptionGate_EventScript_2664F4:: @ 82664F4
 	lock
 	faceplayer
-	msgbox BattleFrontier_ReceptionGate_Text_267357, 4
+	msgbox BattleFrontier_ReceptionGate_Text_267357, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266504
 	end
 
@@ -274,22 +274,22 @@ BattleFrontier_ReceptionGate_EventScript_266504:: @ 8266504
 	end
 
 BattleFrontier_ReceptionGate_EventScript_26654C:: @ 826654C
-	msgbox BattleFrontier_ReceptionGate_Text_2673A1, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2673A1, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266504
 	end
 
 BattleFrontier_ReceptionGate_EventScript_26655A:: @ 826655A
-	msgbox BattleFrontier_ReceptionGate_Text_2674F3, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2674F3, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266504
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266568:: @ 8266568
-	msgbox BattleFrontier_ReceptionGate_Text_26761C, 4
+	msgbox BattleFrontier_ReceptionGate_Text_26761C, MSGBOX_DEFAULT
 	goto BattleFrontier_ReceptionGate_EventScript_266504
 	end
 
 BattleFrontier_ReceptionGate_EventScript_266576:: @ 8266576
-	msgbox BattleFrontier_ReceptionGate_Text_2666C6, 4
+	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
 	release
 	end
 

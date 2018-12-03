@@ -9,7 +9,7 @@ OldaleTown_Mart_EventScript_1FC240:: @ 81FC240
 	checkflag FLAG_0x074
 	goto_eq OldaleTown_Mart_EventScript_1FC26C
 	pokemart OldaleTown_Mart_Pokemart_1FC260
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -24,7 +24,7 @@ OldaleTown_Mart_Pokemart_1FC260: @ 81FC260
 
 OldaleTown_Mart_EventScript_1FC26C:: @ 81FC26C
 	pokemart OldaleTown_Mart_Pokemart_1FC27C
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -44,17 +44,17 @@ OldaleTown_Mart_EventScript_1FC28A:: @ 81FC28A
 	faceplayer
 	checkflag FLAG_0x074
 	goto_eq OldaleTown_Mart_EventScript_1FC29F
-	msgbox OldaleTown_Mart_Text_1FC2B2, 4
+	msgbox OldaleTown_Mart_Text_1FC2B2, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_Mart_EventScript_1FC29F:: @ 81FC29F
-	msgbox OldaleTown_Mart_Text_1FC2F3, 4
+	msgbox OldaleTown_Mart_Text_1FC2F3, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_Mart_EventScript_1FC2A9:: @ 81FC2A9
-	msgbox OldaleTown_Mart_Text_1FC338, 2
+	msgbox OldaleTown_Mart_Text_1FC338, MSGBOX_NPC
 	end
 
 OldaleTown_Mart_Text_1FC2B2: @ 81FC2B2

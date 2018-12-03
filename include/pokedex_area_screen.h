@@ -3,6 +3,6 @@
 
 #include <gba/gba.h>
 
-void sub_813D3D8(u16, u8*);
+void ShowPokedexAreaScreen(u16, u8*);
 
 #endif // GUARD_POKEDEX_AREA_SCREEN_H

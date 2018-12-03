@@ -2501,10 +2501,8 @@ static void sub_80B8584(struct Task *task)
 
 static void sub_80B85F8(struct Task *task)
 {
-    u16 offset;
-    u16 delta;
-    offset = ((REG_BG0CNT >> 2) << 14);
-    delta = ((REG_BG0CNT >> 8) << 11);
+    u16 offset = ((REG_BG0CNT >> 2) << 14);
+    u16 delta = ((REG_BG0CNT >> 8) << 11);
     CpuCopy16(gFieldMoveStreaksTiles, (void *)(VRAM + offset), 0x200);
     CpuFill32(0, (void *)(VRAM + delta), 0x800);
     LoadPalette(gFieldMoveStreaksPalette, 0xf0, 0x20);
@@ -2580,8 +2578,7 @@ static void sub_80B871C(struct Task *task)
 
 static void sub_80B8770(struct Task *task)
 {
-    u16 bg0cnt;
-    bg0cnt = (REG_BG0CNT >> 8) << 11;
+    u16 bg0cnt = (REG_BG0CNT >> 8) << 11;
     CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
     task->data[1] = 0xf1;
     task->data[2] = 0xa1;
@@ -2603,9 +2600,8 @@ static void overworld_bg_setup_2(struct Task *task)
 
 static void sub_80B880C(void)
 {
-    struct Task *task;
     IntrCallback callback;
-    task = &gTasks[FindTaskIdByFunc(sub_80B8554)];
+    struct Task *task = &gTasks[FindTaskIdByFunc(sub_80B8554)];
     LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
     callback();
     SetGpuReg(REG_OFFSET_WIN0H, task->data[1]);
@@ -2735,7 +2731,6 @@ static void sub_80B8B28(struct Task *task)
     task->data[3] += 16;
 }
 
-#ifdef NONMATCHING
 static bool8 sub_80B8B38(struct Task *task)
 {
     u16 i;
@@ -2752,116 +2747,18 @@ static bool8 sub_80B8B38(struct Task *task)
         dstOffs = (32 - dstOffs) & 0x1f;
         srcOffs = (32 - task->data[4]) & 0x1f;
         dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
-        for (i=0; i<10; i++)
+        for (i = 0; i < 10; i++)
         {
-            dest[dstOffs + i * 32] = gDarknessFieldMoveStreaksTilemap[srcOffs + i * 32] | 0xf000;
+            dest[dstOffs + i * 32] = gDarknessFieldMoveStreaksTilemap[srcOffs + i * 32];
+            dest[dstOffs + i * 32] |= 0xf000;
+
             dest[((dstOffs + 1) & 0x1f) + i * 32] = gDarknessFieldMoveStreaksTilemap[((srcOffs + 1) & 0x1f) + i * 32] | 0xf000;
+            dest[((dstOffs + 1) & 0x1f) + i * 32] |= 0xf000;
         }
         task->data[4] += 2;
     }
     return FALSE;
 }
-#else
-NAKED
-static bool8 sub_80B8B38(struct Task *task)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x4\n"
-                    "\tadds r5, r0, 0\n"
-                    "\tldrh r2, [r5, 0x10]\n"
-                    "\tmovs r1, 0x10\n"
-                    "\tldrsh r0, [r5, r1]\n"
-                    "\tcmp r0, 0x1F\n"
-                    "\tble _08088724\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tb _080887A8\n"
-                    "_08088724:\n"
-                    "\tldrh r0, [r5, 0xE]\n"
-                    "\tlsls r0, 16\n"
-                    "\tasrs r3, r0, 19\n"
-                    "\tmovs r1, 0x1F\n"
-                    "\tands r3, r1\n"
-                    "\tmovs r4, 0x10\n"
-                    "\tldrsh r0, [r5, r4]\n"
-                    "\tcmp r3, r0\n"
-                    "\tblt _080887A6\n"
-                    "\tmovs r0, 0x20\n"
-                    "\tsubs r3, r0, r3\n"
-                    "\tands r3, r1\n"
-                    "\tsubs r0, r2\n"
-                    "\tmov r12, r0\n"
-                    "\tmov r7, r12\n"
-                    "\tands r7, r1\n"
-                    "\tmov r12, r7\n"
-                    "\tldrh r0, [r5, 0x20]\n"
-                    "\tldr r1, _080887B8 @ =0x06000140\n"
-                    "\tadds r1, r0\n"
-                    "\tmov r8, r1\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r7, _080887BC @ =gDarknessFieldMoveStreaksTilemap\n"
-                    "\tmov r10, r7\n"
-                    "\tmovs r0, 0xF0\n"
-                    "\tlsls r0, 8\n"
-                    "\tmov r9, r0\n"
-                    "\tadds r1, r3, 0x1\n"
-                    "\tmovs r0, 0x1F\n"
-                    "\tands r1, r0\n"
-                    "\tstr r1, [sp]\n"
-                    "\tmov r6, r12\n"
-                    "\tadds r6, 0x1\n"
-                    "\tands r6, r0\n"
-                    "_08088768:\n"
-                    "\tlsls r1, r4, 5\n"
-                    "\tadds r2, r1, r3\n"
-                    "\tlsls r2, 1\n"
-                    "\tadd r2, r8\n"
-                    "\tmov r7, r12\n"
-                    "\tadds r0, r7, r1\n"
-                    "\tlsls r0, 1\n"
-                    "\tadd r0, r10\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tmov r7, r9\n"
-                    "\torrs r0, r7\n"
-                    "\tstrh r0, [r2]\n"
-                    "\tldr r0, [sp]\n"
-                    "\tadds r2, r1, r0\n"
-                    "\tlsls r2, 1\n"
-                    "\tadd r2, r8\n"
-                    "\tadds r1, r6, r1\n"
-                    "\tlsls r1, 1\n"
-                    "\tadd r1, r10\n"
-                    "\tldrh r0, [r1]\n"
-                    "\tmov r1, r9\n"
-                    "\torrs r0, r1\n"
-                    "\tstrh r0, [r2]\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r4, r0, 16\n"
-                    "\tcmp r4, 0x9\n"
-                    "\tbls _08088768\n"
-                    "\tldrh r0, [r5, 0x10]\n"
-                    "\tadds r0, 0x2\n"
-                    "\tstrh r0, [r5, 0x10]\n"
-                    "_080887A6:\n"
-                    "\tmovs r0, 0\n"
-                    "_080887A8:\n"
-                    "\tadd sp, 0x4\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.align 2, 0\n"
-                    "_080887B8: .4byte 0x06000140\n"
-                    "_080887BC: .4byte gDarknessFieldMoveStreaksTilemap");
-}
-#endif
 
 static bool8 sub_80B8BF0(struct Task *task)
 {
@@ -2877,7 +2774,7 @@ static bool8 sub_80B8BF0(struct Task *task)
     {
         dstOffs = (task->data[1] >> 3) & 0x1f;
         dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
-        for (i=0; i<10; i++)
+        for (i = 0; i < 10; i++)
         {
             dest[dstOffs + i * 32] = 0xf000;
             dest[((dstOffs + 1) & 0x1f) + i * 32] = 0xf000;
@@ -2913,7 +2810,8 @@ static void sub_80B8CC0(struct Sprite *sprite)
         if (sprite->data[6])
         {
             PlayCry2(sprite->data[0], 0, 0x7d, 0xa);
-        } else
+        }
+        else
         {
             PlayCry1(sprite->data[0], 0);
         }
@@ -2933,7 +2831,8 @@ static void sub_80B8D20(struct Sprite *sprite)
     if (sprite->pos1.x < -0x40)
     {
         sprite->data[7] = 1;
-    } else
+    }
+    else
     {
         sprite->pos1.x -= 20;
     }
@@ -2941,8 +2840,7 @@ static void sub_80B8D20(struct Sprite *sprite)
 
 u8 FldEff_UseSurf(void)
 {
-    u8 taskId;
-    taskId = CreateTask(sub_80B8D84, 0xff);
+    u8 taskId = CreateTask(sub_80B8D84, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
     Overworld_ChangeMusicTo(MUS_NAMINORI);
@@ -3031,13 +2929,12 @@ static void sub_80B8F24(struct Task *task)
     }
 }
 
-#ifdef NONMATCHING
 u8 sub_80B8F98(void)
 {
-    u8 spriteId, i, j, k, l;
-    struct Sprite *sprite;
-    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[36], 0x78, -0x18, 1);
-    sprite = &gSprites[spriteId];
+    u8 i, j, k;
+    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[36], 0x78, -0x18, 1);
+    struct Sprite *sprite = &gSprites[spriteId];
+
     sprite->oam.priority = 1;
     sprite->oam.paletteNum = 4;
     sprite->data[0] = 0;
@@ -3048,7 +2945,7 @@ u8 sub_80B8F98(void)
     sprite->data[5] = 0;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(14, 14));
-    SetGpuReg(REG_OFFSET_WININ, 0x3F3F);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     LoadPalette(gUnknown_0855B610, 0xC0, sizeof(gUnknown_0855B610));
     SetGpuReg(REG_OFFSET_BG0VOFS, 120);
     for (i = 3; i < 15; i++)
@@ -3060,156 +2957,20 @@ u8 sub_80B8F98(void)
     }
     for (k = 0; k < 90; k++)
     {
-        for (l = 0; l < 8; l++)
+        for (i = 0; i < 8; i++)
         {
-            *(u16*)(VRAM + 0x8000 + (k + 1) * 32 + l * 4) = (gUnknown_0855B630[k * 32 + l * 4 + 1] << 8) + gUnknown_0855B630[k * 32 + l * 4];
-            *(u16*)(VRAM + 0x8000 + (k + 1) * 32 + l * 4 + 2) = (gUnknown_0855B630[k * 32 + l * 4 + 3] << 8) + gUnknown_0855B630[k * 32 + l * 4 + 2];
+            *(u16*)(VRAM + 0x8000 + (k + 1) * 32 + i * 4) = (gUnknown_0855B630[k * 32 + i * 4 + 1] << 8) + gUnknown_0855B630[k * 32 + i * 4];
+            *(u16*)(VRAM + 0x8000 + (k + 1) * 32 + i * 4 + 2) = (gUnknown_0855B630[k * 32 + i * 4 + 3] << 8) + gUnknown_0855B630[k * 32 + i * 4 + 2];
         }
     }
     return spriteId;
 }
-#else
-NAKED
-u8 sub_80B8F98(void)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    ldr r0, =gFieldEffectObjectTemplatePointers\n\
-    adds r0, 0x90\n\
-    ldr r0, [r0]\n\
-    movs r2, 0x18\n\
-    negs r2, r2\n\
-    movs r1, 0x78\n\
-    movs r3, 0x1\n\
-    bl CreateSprite\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r1, r0, 4\n\
-    add r1, r8\n\
-    lsls r1, 2\n\
-    ldr r0, =gSprites\n\
-    adds r1, r0\n\
-    ldrb r2, [r1, 0x5]\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    movs r2, 0x4\n\
-    orrs r0, r2\n\
-    movs r2, 0xF\n\
-    ands r0, r2\n\
-    movs r2, 0x40\n\
-    orrs r0, r2\n\
-    strb r0, [r1, 0x5]\n\
-    movs r2, 0\n\
-    strh r2, [r1, 0x2E]\n\
-    strh r2, [r1, 0x30]\n\
-    strh r2, [r1, 0x32]\n\
-    ldr r0, =0x0000ffff\n\
-    strh r0, [r1, 0x34]\n\
-    ldrh r0, [r1, 0x22]\n\
-    strh r0, [r1, 0x36]\n\
-    strh r2, [r1, 0x38]\n\
-    ldr r1, =0x00003e41\n\
-    movs r0, 0x50\n\
-    bl SetGpuReg\n\
-    ldr r1, =0x00000e0e\n\
-    movs r0, 0x52\n\
-    bl SetGpuReg\n\
-    ldr r1, =0x00003f3f\n\
-    movs r0, 0x48\n\
-    bl SetGpuReg\n\
-    ldr r0, =gUnknown_0855B610\n\
-    movs r1, 0xC0\n\
-    movs r2, 0x20\n\
-    bl LoadPalette\n\
-    movs r0, 0x12\n\
-    movs r1, 0x78\n\
-    bl SetGpuReg\n\
-    movs r4, 0x3\n\
-    ldr r7, =0x0600f800\n\
-    ldr r0, =0x0000bff4\n\
-    adds r6, r0, 0\n\
-_080B901A:\n\
-    movs r2, 0xC\n\
-    lsls r0, r4, 1\n\
-    lsls r5, r4, 5\n\
-    adds r0, r4\n\
-    lsls r3, r0, 1\n\
-_080B9024:\n\
-    adds r0, r5, r2\n\
-    lsls r0, 1\n\
-    adds r0, r7\n\
-    adds r1, r2, r6\n\
-    adds r1, r3, r1\n\
-    adds r1, 0x1\n\
-    strh r1, [r0]\n\
-    adds r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0x11\n\
-    bls _080B9024\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0xE\n\
-    bls _080B901A\n\
-    movs r0, 0\n\
-    ldr r5, =gUnknown_0855B630\n\
-_080B904A:\n\
-    movs r4, 0\n\
-    adds r7, r0, 0x1\n\
-    lsls r6, r0, 5\n\
-_080B9050:\n\
-    lsls r1, r4, 2\n\
-    adds r1, r6, r1\n\
-    ldr r0, =0x06008020\n\
-    adds r3, r1, r0\n\
-    adds r0, r1, 0x1\n\
-    adds r0, r5\n\
-    ldrb r2, [r0]\n\
-    lsls r2, 8\n\
-    adds r0, r1, r5\n\
-    ldrb r0, [r0]\n\
-    adds r0, r2\n\
-    strh r0, [r3]\n\
-    ldr r0, =0x06008022\n\
-    adds r3, r1, r0\n\
-    adds r0, r1, 0x3\n\
-    adds r0, r5\n\
-    ldrb r2, [r0]\n\
-    lsls r2, 8\n\
-    adds r1, 0x2\n\
-    adds r1, r5\n\
-    ldrb r0, [r1]\n\
-    adds r0, r2\n\
-    strh r0, [r3]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r4, 0x7\n\
-    bls _080B9050\n\
-    lsls r0, r7, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x59\n\
-    bls _080B904A\n\
-    mov r0, r8\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 u8 FldEff_NPCFlyOut(void)
 {
-    u8 spriteId;
-    struct Sprite *sprite;
-    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0x78, 0, 1);
-    sprite = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0x78, 0, 1);
+    struct Sprite *sprite = &gSprites[spriteId];
+
     sprite->oam.paletteNum = 0;
     sprite->oam.priority = 1;
     sprite->callback = sub_80B9128;
@@ -3221,6 +2982,7 @@ u8 FldEff_NPCFlyOut(void)
 static void sub_80B9128(struct Sprite *sprite)
 {
     struct Sprite *npcSprite;
+
     sprite->pos2.x = Cos(sprite->data[2], 0x8c);
     sprite->pos2.y = Sin(sprite->data[2], 0x48);
     sprite->data[2] = (sprite->data[2] + 4) & 0xff;
@@ -3241,8 +3003,7 @@ static void sub_80B9128(struct Sprite *sprite)
 
 u8 FldEff_UseFly(void)
 {
-    u8 taskId;
-    taskId = CreateTask(sub_80B91D4, 0xfe);
+    u8 taskId = CreateTask(sub_80B91D4, 0xfe);
     gTasks[taskId].data[1] = gFieldEffectArguments[0];
     return 0;
 }
@@ -3266,8 +3027,7 @@ static void sub_80B91D4(u8 taskId)
 
 static void sub_80B9204(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[15] = gPlayerAvatar.flags;
@@ -3281,8 +3041,7 @@ static void sub_80B9204(struct Task *task)
 
 static void sub_80B925C(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
@@ -3293,10 +3052,9 @@ static void sub_80B925C(struct Task *task)
 
 static void sub_80B92A0(struct Task *task)
 {
-    struct EventObject *eventObject;
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         if (task->data[15] & 0x08)
         {
             sub_81555AC(eventObject->fieldEffectSpriteId, 2);
@@ -3320,8 +3078,7 @@ static void sub_80B92F8(struct Task *task)
 
 static void sub_80B933C(struct Task *task)
 {
-    struct EventObject *eventObject;
-    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if ((task->data[2] == 0 || (--task->data[2]) == 0) && EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
@@ -3332,10 +3089,9 @@ static void sub_80B933C(struct Task *task)
 
 static void sub_80B9390(struct Task *task)
 {
-    struct EventObject *eventObject;
     if ((++task->data[2]) >= 8)
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(0x03));
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
         eventObject->inanimate = 1;
@@ -3351,10 +3107,9 @@ static void sub_80B9390(struct Task *task)
 
 static void sub_80B9418(struct Task *task)
 {
-    struct EventObject *eventObject;
     if ((++task->data[2]) >= 10)
     {
-        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         EventObjectClearHeldMovementIfActive(eventObject);
         eventObject->inanimate = 0;
         eventObject->hasShadow = 0;

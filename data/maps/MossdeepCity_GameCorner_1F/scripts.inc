@@ -27,7 +27,7 @@ MossdeepCity_GameCorner_1F_EventScript_224B54:: @ 8224B54
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_224B5D:: @ 8224B5D
-	msgbox MossdeepCity_GameCorner_1F_Text_224BFD, 3
+	msgbox MossdeepCity_GameCorner_1F_Text_224BFD, MSGBOX_SIGN
 	end
 
 MossdeepCity_GameCorner_1F_Text_224B66: @ 8224B66

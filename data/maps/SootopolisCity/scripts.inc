@@ -704,22 +704,22 @@ SootopolisCity_EventScript_1E5E8D:: @ 81E5E8D
 	goto_eq SootopolisCity_EventScript_1E5ECE
 	compare VAR_0x405E, 2
 	goto_if 4, SootopolisCity_EventScript_1E5EBA
-	msgbox SootopolisCity_Text_1E6D77, 4
+	msgbox SootopolisCity_Text_1E6D77, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E5EBA:: @ 81E5EBA
-	msgbox SootopolisCity_Text_1E6DFE, 4
+	msgbox SootopolisCity_Text_1E6DFE, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E5EC4:: @ 81E5EC4
-	msgbox SootopolisCity_Text_1E6F38, 4
+	msgbox SootopolisCity_Text_1E6F38, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E5ECE:: @ 81E5ECE
-	msgbox SootopolisCity_Text_1E6ED4, 4
+	msgbox SootopolisCity_Text_1E6ED4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -732,7 +732,7 @@ SootopolisCity_EventScript_1E5ED8:: @ 81E5ED8
 	goto_if 4, SootopolisCity_EventScript_1E5F1B
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E5F10
-	msgbox SootopolisCity_Text_1E6BFF, 4
+	msgbox SootopolisCity_Text_1E6BFF, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -740,7 +740,7 @@ SootopolisCity_EventScript_1E5ED8:: @ 81E5ED8
 	end
 
 SootopolisCity_EventScript_1E5F10:: @ 81E5F10
-	msgbox SootopolisCity_Text_1E6C53, 4
+	msgbox SootopolisCity_Text_1E6C53, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
@@ -750,7 +750,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	special GetPlayerBigGuyGirlString
 	checkflag FLAG_0x932
 	goto_eq SootopolisCity_EventScript_1E5FBB
-	msgbox SootopolisCity_Text_2A7BB0, 4
+	msgbox SootopolisCity_Text_2A7BB0, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
 	addvar VAR_RESULT, 133
@@ -758,7 +758,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_EventScript_272054
 	setflag FLAG_0x932
-	msgbox SootopolisCity_Text_2A7C7C, 4
+	msgbox SootopolisCity_Text_2A7C7C, MSGBOX_DEFAULT
 	random 2
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_EventScript_1E5F79
@@ -770,7 +770,7 @@ SootopolisCity_EventScript_1E5F79:: @ 81E5F79
 	giveitem_std ITEM_FIGY_BERRY
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_EventScript_272054
-	msgbox SootopolisCity_Text_2A7CB7, 4
+	msgbox SootopolisCity_Text_2A7CB7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -778,20 +778,20 @@ SootopolisCity_EventScript_1E5F9A:: @ 81E5F9A
 	giveitem_std ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_EventScript_272054
-	msgbox SootopolisCity_Text_2A7CB7, 4
+	msgbox SootopolisCity_Text_2A7CB7, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E5FBB:: @ 81E5FBB
-	msgbox SootopolisCity_Text_2A7CEC, 5
+	msgbox SootopolisCity_Text_2A7CEC, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_EventScript_1E5FD8
-	msgbox SootopolisCity_Text_2A7DD2, 4
+	msgbox SootopolisCity_Text_2A7DD2, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E5FD8:: @ 81E5FD8
-	msgbox SootopolisCity_Text_2A7D80, 4
+	msgbox SootopolisCity_Text_2A7D80, MSGBOX_DEFAULT
 	release
 	end
 
@@ -801,7 +801,7 @@ SootopolisCity_EventScript_1E5FE2:: @ 81E5FE2
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E600D
-	msgbox SootopolisCity_Text_1E71A1, 4
+	msgbox SootopolisCity_Text_1E71A1, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -809,7 +809,7 @@ SootopolisCity_EventScript_1E5FE2:: @ 81E5FE2
 	end
 
 SootopolisCity_EventScript_1E600D:: @ 81E600D
-	msgbox SootopolisCity_Text_1E728C, 4
+	msgbox SootopolisCity_Text_1E728C, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -818,12 +818,12 @@ SootopolisCity_EventScript_1E6017:: @ 81E6017
 	faceplayer
 	compare VAR_0x405E, 6
 	goto_if 4, SootopolisCity_EventScript_1E602E
-	msgbox SootopolisCity_Text_1E6CCA, 4
+	msgbox SootopolisCity_Text_1E6CCA, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E602E:: @ 81E602E
-	msgbox SootopolisCity_Text_1E6D57, 4
+	msgbox SootopolisCity_Text_1E6D57, MSGBOX_DEFAULT
 	release
 	end
 
@@ -836,12 +836,12 @@ SootopolisCity_EventScript_1E6038:: @ 81E6038
 	goto_eq SootopolisCity_EventScript_1E6084
 	compare VAR_0x405E, 2
 	goto_if 4, SootopolisCity_EventScript_1E6065
-	msgbox SootopolisCity_Text_1E6F90, 4
+	msgbox SootopolisCity_Text_1E6F90, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E6065:: @ 81E6065
-	msgbox SootopolisCity_Text_1E7078, 4
+	msgbox SootopolisCity_Text_1E7078, MSGBOX_DEFAULT
 	closemessage
 	applymovement 8, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -849,12 +849,12 @@ SootopolisCity_EventScript_1E6065:: @ 81E6065
 	end
 
 SootopolisCity_EventScript_1E607A:: @ 81E607A
-	msgbox SootopolisCity_Text_1E710B, 4
+	msgbox SootopolisCity_Text_1E710B, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E6084:: @ 81E6084
-	msgbox SootopolisCity_Text_1E70D4, 4
+	msgbox SootopolisCity_Text_1E70D4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -868,7 +868,7 @@ SootopolisCity_EventScript_1E608E:: @ 81E608E
 	goto_if 4, SootopolisCity_EventScript_1E60CF
 	compare VAR_0x405E, 1
 	goto_if 3, SootopolisCity_EventScript_1E60CF
-	msgbox SootopolisCity_Text_1E690B, 4
+	msgbox SootopolisCity_Text_1E690B, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -876,12 +876,12 @@ SootopolisCity_EventScript_1E608E:: @ 81E608E
 	end
 
 SootopolisCity_EventScript_1E60CF:: @ 81E60CF
-	msgbox SootopolisCity_Text_1E68A1, 4
+	msgbox SootopolisCity_Text_1E68A1, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E60D9:: @ 81E60D9
-	msgbox SootopolisCity_Text_1E6920, 4
+	msgbox SootopolisCity_Text_1E6920, MSGBOX_DEFAULT
 	release
 	end
 
@@ -897,7 +897,7 @@ SootopolisCity_EventScript_1E60E3:: @ 81E60E3
 	goto_if 4, SootopolisCity_EventScript_1E6141
 	compare VAR_0x405E, 1
 	goto_if 3, SootopolisCity_EventScript_1E6141
-	msgbox SootopolisCity_Text_1E6692, 4
+	msgbox SootopolisCity_Text_1E6692, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -905,30 +905,30 @@ SootopolisCity_EventScript_1E60E3:: @ 81E60E3
 	end
 
 SootopolisCity_EventScript_1E612D:: @ 81E612D
-	msgbox SootopolisCity_Text_1E6750, 4
+	msgbox SootopolisCity_Text_1E6750, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E6137:: @ 81E6137
-	msgbox SootopolisCity_Text_1E677F, 4
+	msgbox SootopolisCity_Text_1E677F, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E6141:: @ 81E6141
-	msgbox SootopolisCity_Text_1E6618, 4
+	msgbox SootopolisCity_Text_1E6618, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E614B:: @ 81E614B
-	msgbox SootopolisCity_Text_1E656F, 3
+	msgbox SootopolisCity_Text_1E656F, MSGBOX_SIGN
 	end
 
 SootopolisCity_EventScript_1E6154:: @ 81E6154
-	msgbox SootopolisCity_Text_1E65C8, 3
+	msgbox SootopolisCity_Text_1E65C8, MSGBOX_SIGN
 	end
 
 EventScript_ClosedSootopolisDoor:: @ 81E615D
-	msgbox SootopolisCity_Text_1E6604, 3
+	msgbox SootopolisCity_Text_1E6604, MSGBOX_SIGN
 	end
 
 SootopolisCity_EventScript_1E6166:: @ 81E6166
@@ -945,33 +945,33 @@ SootopolisCity_EventScript_1E6166:: @ 81E6166
 	goto_eq SootopolisCity_EventScript_1E61C2
 	checkflag FLAG_0x09E
 	goto_eq SootopolisCity_EventScript_1E61B8
-	msgbox SootopolisCity_Text_1E78E5, 4
+	msgbox SootopolisCity_Text_1E78E5, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E61AE:: @ 81E61AE
-	msgbox SootopolisCity_Text_1E7866, 4
+	msgbox SootopolisCity_Text_1E7866, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E61B8:: @ 81E61B8
-	msgbox SootopolisCity_Text_1E794B, 4
+	msgbox SootopolisCity_Text_1E794B, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E61C2:: @ 81E61C2
-	msgbox SootopolisCity_Text_1E789A, 4
+	msgbox SootopolisCity_Text_1E789A, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E61CC:: @ 81E61CC
-	msgbox SootopolisCity_Text_1E75CB, 4
+	msgbox SootopolisCity_Text_1E75CB, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 3
 	call_if 1, SootopolisCity_EventScript_1E6243
 	compare VAR_FACING, 2
 	call_if 1, SootopolisCity_EventScript_1E6255
-	msgbox SootopolisCity_Text_1E7737, 4
+	msgbox SootopolisCity_Text_1E7737, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, SootopolisCity_Movement_1E62D4
 	applymovement 255, SootopolisCity_Movement_1E630E
@@ -982,7 +982,7 @@ SootopolisCity_EventScript_1E61CC:: @ 81E61CC
 	applymovement 7, SootopolisCity_Movement_1E6344
 	applymovement 255, SootopolisCity_Movement_1E634F
 	waitmovement 0
-	msgbox SootopolisCity_Text_1E77F0, 4
+	msgbox SootopolisCity_Text_1E77F0, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_0x133
 	applymovement 255, SootopolisCity_Movement_1E635A
@@ -1273,7 +1273,7 @@ SootopolisCity_EventScript_1E635D:: @ 81E635D
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E6388
-	msgbox SootopolisCity_Text_1E67DC, 4
+	msgbox SootopolisCity_Text_1E67DC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 15, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -1281,7 +1281,7 @@ SootopolisCity_EventScript_1E635D:: @ 81E635D
 	end
 
 SootopolisCity_EventScript_1E6388:: @ 81E6388
-	msgbox SootopolisCity_Text_1E6853, 4
+	msgbox SootopolisCity_Text_1E6853, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
@@ -1290,11 +1290,11 @@ SootopolisCity_EventScript_1E6393:: @ 81E6393
 	lockall
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E63C7
-	msgbox SootopolisCity_Text_1E6936, 4
+	msgbox SootopolisCity_Text_1E6936, MSGBOX_DEFAULT
 	closemessage
 	applymovement 14, SootopolisCity_Movement_27259E
 	waitmovement 0
-	msgbox SootopolisCity_Text_1E696C, 4
+	msgbox SootopolisCity_Text_1E696C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 14, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -1304,7 +1304,7 @@ SootopolisCity_EventScript_1E6393:: @ 81E6393
 SootopolisCity_EventScript_1E63C7:: @ 81E63C7
 	applymovement 14, SootopolisCity_Movement_27259E
 	waitmovement 0
-	msgbox SootopolisCity_Text_1E69B8, 4
+	msgbox SootopolisCity_Text_1E69B8, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -1314,7 +1314,7 @@ SootopolisCity_EventScript_1E63DB:: @ 81E63DB
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E6406
-	msgbox SootopolisCity_Text_1E6C7C, 4
+	msgbox SootopolisCity_Text_1E6C7C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 13, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -1322,7 +1322,7 @@ SootopolisCity_EventScript_1E63DB:: @ 81E63DB
 	end
 
 SootopolisCity_EventScript_1E6406:: @ 81E6406
-	msgbox SootopolisCity_Text_1E6CA6, 4
+	msgbox SootopolisCity_Text_1E6CA6, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
@@ -1333,7 +1333,7 @@ SootopolisCity_EventScript_1E6411:: @ 81E6411
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E643C
-	msgbox SootopolisCity_Text_1E6A50, 4
+	msgbox SootopolisCity_Text_1E6A50, MSGBOX_DEFAULT
 	closemessage
 	applymovement 12, SootopolisCity_Movement_2725A2
 	waitmovement 0
@@ -1341,7 +1341,7 @@ SootopolisCity_EventScript_1E6411:: @ 81E6411
 	end
 
 SootopolisCity_EventScript_1E643C:: @ 81E643C
-	msgbox SootopolisCity_Text_1E6B2A, 4
+	msgbox SootopolisCity_Text_1E6B2A, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -1354,15 +1354,15 @@ SootopolisCity_EventScript_1E6446:: @ 81E6446
 	goto_eq SootopolisCity_EventScript_1E64E2
 	checkflag FLAG_0x09E
 	goto_eq SootopolisCity_EventScript_1E646F
-	msgbox SootopolisCity_Text_1E7A3E, 4
+	msgbox SootopolisCity_Text_1E7A3E, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E646F:: @ 81E646F
-	msgbox SootopolisCity_Text_1E7ACF, 4
+	msgbox SootopolisCity_Text_1E7ACF, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM07
 	setflag FLAG_0x138
-	msgbox SootopolisCity_Text_1E7B86, 4
+	msgbox SootopolisCity_Text_1E7B86, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if 1, SootopolisCity_EventScript_1E64B2
@@ -1388,12 +1388,12 @@ SootopolisCity_EventScript_1E64C5:: @ 81E64C5
 	return
 
 SootopolisCity_EventScript_1E64D8:: @ 81E64D8
-	msgbox SootopolisCity_Text_1E79C8, 4
+	msgbox SootopolisCity_Text_1E79C8, MSGBOX_DEFAULT
 	release
 	end
 
 SootopolisCity_EventScript_1E64E2:: @ 81E64E2
-	msgbox SootopolisCity_Text_1E7CBC, 4
+	msgbox SootopolisCity_Text_1E7CBC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1411,13 +1411,13 @@ SootopolisCity_EventScript_1E64F2:: @ 81E64F2
 	lockall
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E6509
-	msgbox SootopolisCity_Text_1E72DB, 4
+	msgbox SootopolisCity_Text_1E72DB, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E6509:: @ 81E6509
-	msgbox SootopolisCity_Text_1E737E, 4
+	msgbox SootopolisCity_Text_1E737E, MSGBOX_DEFAULT
 	setflag FLAG_0x135
 	checkflag FLAG_0x134
 	goto_eq SootopolisCity_EventScript_1E654C
@@ -1428,13 +1428,13 @@ SootopolisCity_EventScript_1E651F:: @ 81E651F
 	lockall
 	compare VAR_0x405E, 5
 	goto_eq SootopolisCity_EventScript_1E6536
-	msgbox SootopolisCity_Text_1E7460, 4
+	msgbox SootopolisCity_Text_1E7460, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E6536:: @ 81E6536
-	msgbox SootopolisCity_Text_1E74F6, 4
+	msgbox SootopolisCity_Text_1E74F6, MSGBOX_DEFAULT
 	setflag FLAG_0x134
 	checkflag FLAG_0x135
 	goto_eq SootopolisCity_EventScript_1E654C

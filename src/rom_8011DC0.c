@@ -40,7 +40,7 @@ extern void HealPlayerParty(void);
 struct UnkStruct_Shared
 {
     struct UnkLinkRfuStruct_02022B14 field_0;
-    u8 needingPadding[3];
+    u8 needingPadding[2];
     u8 playerName[PLAYER_NAME_LENGTH + 1];
 };
 
@@ -64,7 +64,7 @@ struct UnkStruct_x20
 
 struct UnkStruct_Main0
 {
-    struct UnkStruct_x20 arr[5];
+    struct UnkStruct_x20 arr[8];
 };
 
 struct UnkStruct_Main4
@@ -154,9 +154,7 @@ struct UnkStruct_URoom
     u16 field_4C[6];
     u8 field_58[0x98 - 0x58];
     u16 field_98;
-    u16 field_9A;
-    u16 field_9C;
-    u16 field_9E;
+    u16 field_9A[3];
     struct UnkStruct_8019BA8 field_A0[8];
 };
 
@@ -183,17 +181,18 @@ struct TradeUnkStruct
 };
 
 extern struct TradeUnkStruct gUnknown_02022C40;
-
+extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
 extern union UnkUnion_Main gUnknown_02022C30;
-
 extern u8 gUnknown_02022C2C;
 extern u8 gUnknown_02022C2D;
 extern u8 gUnknown_02022C3E;
 extern u16 gUnknown_02022C3C;
-extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_02022C38;
-
+extern u8 gUnknown_02022C20[];
 extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_03005DB4;
+extern u8 gSelectedOrderFromParty[];
+extern struct MailStruct gUnknown_020321C0[PARTY_SIZE];
+extern u8 gUnknown_02032298[2];
 
 // IWRAM vars
 BSS_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -213,7 +212,7 @@ void sub_8014F48(u8 taskId);
 void sub_80152F4(u8 taskId);
 void sub_80156E0(u8 taskId);
 void sub_80175EC(struct UnkStruct_Main4 *arg0, u8 count);
-void sub_8017580(struct UnkStruct_Main0 *arg0, u8 count);
+void sub_8017580(struct UnkStruct_x20 *arg0, u8 count);
 u8 sub_8016FC0(struct UnkStruct_Main4 *arg0, u32 arg1);
 u8 sub_8016FF0(struct UnkStruct_Main4 *arg0, u32 arg1);
 bool8 PrintOnTextbox(u8 *textState, const u8 *str);
@@ -266,7 +265,7 @@ void sub_801689C(struct UnkStruct_URoom *arg0);
 u8 sub_80181DC(struct UnkStruct_URoom *arg0);
 bool32 sub_80168DC(struct UnkStruct_URoom *arg0);
 bool32 sub_801704C(void);
-u32 sub_8017CF8(u32 arg1, struct UnkStruct_Main0 *arg0);
+s32 sub_8017CF8(s32 arg1, struct UnkStruct_Main0 *arg0);
 s32 sub_80179D4(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender);
 void sub_801818C(bool32 arg0);
 void sub_801A3D0(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
@@ -283,7 +282,10 @@ void sub_8019E3C(void);
 void sub_80173B0(void);
 s32 sub_8017D04(u32 type, u32 species);
 void sub_8017020(const u8 *src);
-void sub_8019BA8();
+void sub_8019BA8(void *);
+s32 sub_8017EA0(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3);
+void sub_801697C(u8 taskId);
+bool8 sub_8017630(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1);
 
 // const rom data
 extern const u8 *const gUnknown_082EDB60[][5];
@@ -377,7 +379,9 @@ extern const u8 *const gUnknown_082EE82C[][4];
 
 extern const u8 *const gUnknown_082EE24C[][2];
 
-extern const struct UnkStruct_Shared gUnknown_082F045C[];
+extern const struct UnkStruct_Shared gUnknown_082F045C;
+
+extern const u8 *const gUnknown_082F04D8[22];
 
 // code
 void nullsub_89(void)
@@ -485,7 +489,7 @@ void sub_8012780(u8 taskId)
         data->field_0 = AllocZeroed(0xA0);
         data->field_8 = AllocZeroed(0xA0);
         sub_80175EC(data->field_4, 4);
-        sub_8017580(data->field_0, 5);
+        sub_8017580(data->field_0->arr, 5);
         sub_800DF90(&data->field_0->arr[0].unk.field_0, data->field_0->arr[0].unk.playerName);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].field_1A_0 = 1;
@@ -1009,7 +1013,7 @@ u8 sub_8013398(struct UnkStruct_Main0 *arg0)
     ret = copiedCount;
     for (; copiedCount < 5; copiedCount++)
     {
-        data->field_0->arr[copiedCount].unk = gUnknown_082F045C[0];
+        data->field_0->arr[copiedCount].unk = gUnknown_082F045C;
         data->field_0->arr[copiedCount].field_18 = 0;
         data->field_0->arr[copiedCount].field_1A_0 = 0;
         data->field_0->arr[copiedCount].field_1A_1 = 0;
@@ -1069,7 +1073,7 @@ void sub_80134E8(u8 taskId)
         break;
     case 2:
         sub_80175EC(data->field_4, 4);
-        sub_8017580(data->field_0, 16);
+        sub_8017580(data->field_0->arr, 16);
         data->field_11 = sub_8016FC0(data->field_4, gSpecialVar_0x8004);
         data->field_C = AddWindow(&gUnknown_082F00BC);
         data->listWindowId = AddWindow(&gUnknown_082F0174);
@@ -1371,7 +1375,7 @@ void sub_8013C7C(u8 taskId)
         break;
     case 2:
         sub_80175EC(data->field_4, 4);
-        sub_8017580(data->field_0, 16);
+        sub_8017580(data->field_0->arr, 16);
         data->field_11 = sub_8016FC0(data->field_4, 0xFF);
         data->field_F = 0;
         data->state = 3;
@@ -1395,8 +1399,6 @@ void sub_8013C7C(u8 taskId)
         break;
     }
 }
-
-extern const u8 *const gUnknown_082F04D8[22];
 
 bool32 sub_8013D88(u32 arg0, u32 id)
 {
@@ -1518,9 +1520,6 @@ u8 sub_8013F78(void)
 
     return taskId;
 }
-
-extern struct MailStruct gUnknown_020321C0[PARTY_SIZE];
-extern u8 gUnknown_02032298[2];
 
 void sub_8013F90(u8 taskId)
 {
@@ -1785,8 +1784,6 @@ void sub_801440C(u8 taskId)
         ScriptContext2_Disable();
 }
 
-extern u8 gSelectedOrderFromParty[];
-
 void sub_8014790(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -1935,7 +1932,7 @@ void sub_8014A40(u8 taskId)
         data->field_0 = AllocZeroed(0xA0);
         data->field_8 = AllocZeroed(0xA0);
         sub_80175EC(data->field_4, 4);
-        sub_8017580(data->field_0, 5);
+        sub_8017580(data->field_0->arr, 5);
         sub_800DF90(&data->field_0->arr[0].unk.field_0, data->field_0->arr[0].unk.playerName);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].field_1A_0 = 1;
@@ -2144,7 +2141,7 @@ void sub_8014F48(u8 taskId)
         break;
     case 2:
         sub_80175EC(data->field_4, 4);
-        sub_8017580(data->field_0, 16);
+        sub_8017580(data->field_0->arr, 16);
         data->field_11 = sub_8016FC0(data->field_4, data->field_12 + 7);
 
         winTemplate1 = gUnknown_082F0174;
@@ -2313,7 +2310,7 @@ void sub_80152F4(u8 taskId)
         break;
     case 2:
         sub_80175EC(data->field_4, 4);
-        sub_8017580(data->field_0, 16);
+        sub_8017580(data->field_0->arr, 16);
         data->field_11 = sub_8016FF0(data->field_4, data->field_12 + 7);
 
         if (data->field_13 != 0)
@@ -2511,13 +2508,11 @@ void sub_80156C8(struct UnkStruct_URoom *data)
     memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 0x100);
 }
 
-// Cannot match, please fix later.
-/*
 void sub_80156E0(u8 taskId)
 {
     u32 id = 0;
     s32 var5 = 0;
-    u32 playerGender = 0;
+    s32 playerGender = 0;
     struct UnkStruct_URoom *data = gUnknown_02022C30.uRoom;
     s16 *taskData = gTasks[taskId].data;
 
@@ -2528,7 +2523,7 @@ void sub_80156E0(u8 taskId)
         data->field_C = AllocZeroed(0x70);
         data->field_0 = AllocZeroed(0x100);
         data->field_8 = AllocZeroed(0x20);
-        sub_8017580(data->field_0, 8);
+        sub_8017580(data->field_0->arr, 8);
         gUnknown_02022C2C = 0x40;
         data->field_20 = sub_8016DF0(data->field_C, data->field_4, 9);
         sub_8019BA8(data->field_A0);
@@ -2546,7 +2541,7 @@ void sub_80156E0(u8 taskId)
         sub_800B488();
         OpenLink();
         sub_8011C84();
-        sub_8017580(data->field_8, 1);
+        sub_8017580(&data->field_8->arr[0], 1);
         sub_80175EC(data->field_4, 4);
         sub_80175EC(data->field_C, 4);
         gSpecialVar_Result = 0;
@@ -2680,7 +2675,7 @@ void sub_80156E0(u8 taskId)
             break;
         case 1:
             sub_8012188(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, gUnknown_02022C2C);
-            data->field_12 = id;
+            data->field_12 = id; // Should be just 0, but won't match any other way.
             data->state = 25;
             break;
         case 2:
@@ -2731,6 +2726,11 @@ void sub_80156E0(u8 taskId)
             data->state = 2;
         }
         break;
+    case 5:
+        id = sub_80179AC(&data->field_0->arr[taskData[1]]);
+        playerGender = sub_8017CF8(taskData[1], data->field_0);
+        sub_8015664(6, gUnknown_082EE24C[id][playerGender]);
+        break;
     case 6:
         var5 = sub_8017178(&data->textState, &data->field_1B, &data->field_1C, &gUnknown_082F021C, &gUnknown_082F0244);
         if (var5 != -1)
@@ -2743,16 +2743,15 @@ void sub_80156E0(u8 taskId)
             {
                 data->field_98 = 0;
                 playerGender = sub_8017CF8(taskData[1], data->field_0);
-                switch (var5)
+                if (var5 == -2 || var5 == 0x40)
                 {
-                case -2:
-                case 0x40:
                     data->field_4C[0] = 0x40;
                     sub_800FE50(data->field_4C);
                     StringCopy(gStringVar4, gUnknown_082EEB80[gLinkPlayers[0].gender]);
                     data->state = 32;
-                    break;
-                default:
+                }
+                else
+                {
                     gUnknown_02022C2C = var5;
                     gUnknown_02022C2D = (u32)(var5) >> 8;
                     if (gUnknown_02022C2C == 0x41 && !sub_8018024())
@@ -2765,7 +2764,6 @@ void sub_80156E0(u8 taskId)
                         sub_800FE50(data->field_4C);
                         data->state = 27;
                     }
-                    break;
                 }
             }
         }
@@ -2824,7 +2822,7 @@ void sub_80156E0(u8 taskId)
             }
         }
         break;
-    case 5:
+
     case 7:
         id = sub_80179AC(&data->field_0->arr[taskData[1]]);
         playerGender = sub_8017CF8(taskData[1], data->field_0);
@@ -2836,7 +2834,7 @@ void sub_80156E0(u8 taskId)
             data->state = 41;
             sub_800ADF8();
             data->field_98 = 0;
-            data->field_9A = 0;
+            data->field_9A[0] = 0;
         }
         break;
     case 41:
@@ -2920,7 +2918,7 @@ void sub_80156E0(u8 taskId)
         PlaySE(SE_PINPON);
         sub_800EF7C();
         data->state = 12;
-        data->field_9A = 0;
+        data->field_9A[0] = 0;
         break;
     case 12:
         if (sub_8011A80())
@@ -3020,7 +3018,7 @@ void sub_80156E0(u8 taskId)
             gUnknown_02022C2C = 0x40;
             sub_8015664(0x25, gStringVar4);
             memset(data->field_4C, 0, sizeof(data->field_4C));
-            data->field_9A = 0;
+            data->field_9A[0] = 0;
             data->field_98 = 0;
         }
         break;
@@ -3263,4 +3261,247 @@ void var_800D_set_xB(void)
         gSpecialVar_Result = 11;
 }
 
+void sub_801689C(struct UnkStruct_URoom *arg0)
+{
+    if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == 0x2F00)
+    {
+        arg0->field_9A[0] = gRecvCmds[1][1];
+        if (gRecvCmds[1][1] == 0x44)
+        {
+            arg0->field_9A[1] = gRecvCmds[1][2];
+            arg0->field_9A[2] = gRecvCmds[1][3];
+        }
+    }
+}
+
+bool32 sub_80168DC(struct UnkStruct_URoom *arg0)
+{
+    if (arg0->field_9A[0] != 0)
+    {
+        s32 var = sub_8017EA0(gStringVar4, gLinkPlayers[1].gender, &arg0->field_9A[0], arg0);
+        if (var == 0)
+        {
+            return TRUE;
+        }
+        else if (var == 1)
+        {
+            arg0->state = 35;
+            gUnknown_02022C2C = arg0->field_9A[0];
+            return FALSE;
+        }
+        else if (var == 2)
+        {
+            arg0->state = 36;
+            sub_800AC34();
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+void sub_8016934(void)
+{
+    struct UnkStruct_URoom *ptr;
+
+    gUnknown_02022C20[0] = EOS;
+    CreateTask(sub_801697C, 0);
+    gUnknown_02022C30.uRoom = gUnknown_02022C30.uRoom; // Needed to match.
+    gUnknown_02022C30.uRoom = ptr = AllocZeroed(0x26C);
+    gUnknown_03000DA8 = gUnknown_02022C30.uRoom;
+    ptr->state = 0;
+    ptr->textState = 0;
+    ptr->field_10 = 0;
+    ptr->field_12 = 0;
+    gUnknown_02022C20[0] = EOS;
+}
+
+void sub_801697C(u8 taskId)
+{
+    s32 i;
+    u8 text[32];
+    struct UnkStruct_URoom *structPtr = gUnknown_02022C30.uRoom;
+
+    switch (structPtr->state)
+    {
+    case 0:
+        structPtr->state = 1;
+        break;
+    case 1:
+        sub_8010F84(0xC, 0, 0);
+        sub_800B488();
+        OpenLink();
+        sub_8011C84();
+        sub_80111B0(1);
+        structPtr->state = 2;
+        break;
+    case 2:
+        structPtr->field_4 = AllocZeroed(0x70);
+        sub_80175EC(structPtr->field_4, 4);
+        structPtr->field_C = AllocZeroed(0x70);
+        sub_80175EC(structPtr->field_C, 4);
+        structPtr->field_0 = AllocZeroed(0x100);
+        sub_8017580(structPtr->field_0->arr, 8);
+        structPtr->field_8 = AllocZeroed(0x20);
+        sub_8017580(&structPtr->field_8->arr[0], 1);
+        structPtr->field_20 = sub_8016DF0(structPtr->field_C, structPtr->field_4, 10);
+        structPtr->state = 3;
+        break;
+    case 3:
+        switch (sub_8016B00())
+        {
+        case 1:
+        case 2:
+            if (gUnknown_02022C20[0] == EOS)
+            {
+                for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
+                {
+                    if (structPtr->field_0->arr[i].field_1A_0 == 1)
+                    {
+                        sub_8018404(text, &structPtr->field_0->arr[i]);
+                        if (sub_800E540(ReadAsU16(structPtr->field_0->arr[i].unk.field_0.unk_00.playerTrainerId), text))
+                        {
+                            StringCopy(gUnknown_02022C20, text);
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+        case 3:
+            break;
+        }
+        break;
+    case 4:
+        free(structPtr->field_8);
+        free(structPtr->field_0);
+        free(structPtr->field_C);
+        free(structPtr->field_4);
+        DestroyTask(structPtr->field_20);
+        free(gUnknown_02022C30.uRoom);
+        sub_800EDD4();
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+bool16 sp182_move_string(void)
+{
+    if (gUnknown_02022C20[0] != EOS)
+    {
+        StringCopy(gStringVar1, gUnknown_02022C20);
+        gUnknown_02022C20[0] = EOS;
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+u8 sub_8016B00(void)
+{
+    s32 i;
+    u8 j;
+    struct UnkStruct_URoom *structPtr = gUnknown_02022C30.uRoom;
+    s32 r7 = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sub_8017630(&structPtr->field_C->arr[i].unk0, &gUnknown_082F045C) == TRUE)
+        {
+            structPtr->field_8->arr[0].unk = structPtr->field_C->arr[i].unk0;
+            structPtr->field_8->arr[0].field_18 = 0;
+            structPtr->field_8->arr[0].field_1A_0 = 1;
+            structPtr->field_8->arr[0].field_1B = 1;
+            return 4;
+        }
+    }
+    for (j = 0; j < 8; j++)
+    {
+        if (structPtr->field_0->arr[j].field_1A_0 != 0)
+        {
+            i = sub_80176E4(&structPtr->field_0->arr[j], &structPtr->field_4->arr[0]);
+            if (i != 0xFF)
+            {
+                if (structPtr->field_0->arr[j].field_1A_0 == 1)
+                {
+                    if (sub_8017678(&structPtr->field_0->arr[j], &structPtr->field_4->arr[i]))
+                    {
+                        structPtr->field_0->arr[j].unk = structPtr->field_4->arr[i].unk0;
+                        structPtr->field_0->arr[j].field_1B = 0x40;
+                        r7 = 1;
+                    }
+                    else if (structPtr->field_0->arr[j].field_1B != 0)
+                    {
+                        structPtr->field_0->arr[j].field_1B--;
+                        if (structPtr->field_0->arr[j].field_1B == 0)
+                            r7 = 2;
+                    }
+                }
+                else
+                {
+                    structPtr->field_0->arr[j].field_1A_0 = 1;
+                    structPtr->field_0->arr[j].field_1B = 0;
+                    r7 = 2;
+                }
+                structPtr->field_0->arr[j].field_18 = 0;
+            }
+            else if (structPtr->field_0->arr[j].field_1A_0 != 2)
+            {
+                structPtr->field_0->arr[j].field_18++;
+                if (structPtr->field_0->arr[j].field_18 >= 600)
+                {
+                    structPtr->field_0->arr[j].field_1A_0 = 2;
+                    r7 = 2;
+                }
+            }
+            else if (structPtr->field_0->arr[j].field_1A_0 == 2)
+            {
+                structPtr->field_0->arr[j].field_18++;
+                if (structPtr->field_0->arr[j].field_18 >= 900)
+                {
+                    sub_8017580(&structPtr->field_0->arr[j], 1);
+                }
+            }
+        }
+    }
+    for (i = 0; i < 4; i++)
+    {
+        if (sub_8017734(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i].unk0, 8) != 0xFF)
+            r7 = 1;
+    }
+
+    return r7;
+}
+
+/*
+void sub_8016CA0(u8 taskId)
+{
+    s32 i, j;
+    struct UnkLinkRfuStruct_02022B14 sp0;
+    u8 text[10];
+    struct UnkStruct_Main4 *ptr = (void*) gTasks[taskId].data;
+
+    for (i = 0; i < 4; i++)
+    {
+        j = sub_800DE7C(&sp0, text, i);
+        if (!sub_8013D88(sp0.unk_0a_0, gTasks[taskId].data[4]))
+            sp0 = gUnknown_082F045C.field_0;
+        if (sp0.unk_00.unk_00_0 == 1)
+            sp0 = gUnknown_082F045C.field_0;
+
+        if (!j)
+        {
+            for (j = 0; j < i; j++)
+            {
+                if (sub_8017630())
+            }
+        }
+        else
+        {
+
+        }
+    }
+}
 */

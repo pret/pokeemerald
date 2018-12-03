@@ -1,6 +1,3 @@
-#ifndef GUARD_DATA_DECORATION_HEADER_H
-#define GUARD_DATA_DECORATION_HEADER_H
-
 const struct Decoration gDecorations[] = {
     {
         DECOR_NONE,
@@ -1092,5 +1089,3 @@ const struct Decoration gDecorations[] = {
         DecorDesc_REGISTEEL_DOLL,
         DecorGfx_REGISTEEL_DOLL}
 };
-
-#endif //GUARD_DATA_DECORATION_HEADER_H

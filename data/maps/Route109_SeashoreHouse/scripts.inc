@@ -15,18 +15,18 @@ Route109_SeashoreHouse_EventScript_2693FE:: @ 82693FE
 	goto_eq Route109_SeashoreHouse_EventScript_269432
 	checkflag FLAG_TEMP_2
 	goto_eq Route109_SeashoreHouse_EventScript_269428
-	msgbox Route109_SeashoreHouse_Text_269555, 4
+	msgbox Route109_SeashoreHouse_Text_269555, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_269428:: @ 8269428
-	msgbox Route109_SeashoreHouse_Text_269635, 4
+	msgbox Route109_SeashoreHouse_Text_269635, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_269432:: @ 8269432
-	msgbox Route109_SeashoreHouse_Text_269685, 4
+	msgbox Route109_SeashoreHouse_Text_269685, MSGBOX_DEFAULT
 	giveitem_std ITEM_SODA_POP, 6
 	compare VAR_RESULT, 0
 	goto_eq Route109_SeashoreHouse_EventScript_269456
@@ -35,16 +35,16 @@ Route109_SeashoreHouse_EventScript_269432:: @ 8269432
 	end
 
 Route109_SeashoreHouse_EventScript_269456:: @ 8269456
-	msgbox Route109_SeashoreHouse_Text_26973A, 4
+	msgbox Route109_SeashoreHouse_Text_26973A, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 	showmoneybox 0, 0, 0
-	msgbox Route109_SeashoreHouse_Text_26977E, 5
+	msgbox Route109_SeashoreHouse_Text_26977E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route109_SeashoreHouse_EventScript_269484
-	msgbox Route109_SeashoreHouse_Text_2697EF, 4
+	msgbox Route109_SeashoreHouse_Text_2697EF, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop
@@ -58,7 +58,7 @@ Route109_SeashoreHouse_EventScript_269484:: @ 8269484
 	checkitemspace ITEM_SODA_POP, 1
 	compare VAR_RESULT, 0
 	goto_eq Route109_SeashoreHouse_EventScript_2694D5
-	msgbox Route109_SeashoreHouse_Text_2697C8, 4
+	msgbox Route109_SeashoreHouse_Text_2697C8, MSGBOX_DEFAULT
 	takemoney 0x12c, 0
 	updatemoneybox 0, 0
 	nop
@@ -70,7 +70,7 @@ Route109_SeashoreHouse_EventScript_269484:: @ 8269484
 	end
 
 Route109_SeashoreHouse_EventScript_2694C8:: @ 82694C8
-	msgbox Route109_SeashoreHouse_Text_2697D5, 4
+	msgbox Route109_SeashoreHouse_Text_2697D5, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop
@@ -78,7 +78,7 @@ Route109_SeashoreHouse_EventScript_2694C8:: @ 82694C8
 	end
 
 Route109_SeashoreHouse_EventScript_2694D5:: @ 82694D5
-	msgbox gUnknown_08272AD0, 4
+	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop
@@ -86,18 +86,18 @@ Route109_SeashoreHouse_EventScript_2694D5:: @ 82694D5
 	end
 
 Route109_SeashoreHouse_EventScript_2694E2:: @ 82694E2
-	trainerbattle 2, TRAINER_DWAYNE, 0, Route109_SeashoreHouse_Text_269803, Route109_SeashoreHouse_Text_269867, Route109_SeashoreHouse_EventScript_269533
-	msgbox Route109_SeashoreHouse_Text_26989D, 6
+	trainerbattle_single TRAINER_DWAYNE, Route109_SeashoreHouse_Text_269803, Route109_SeashoreHouse_Text_269867, Route109_SeashoreHouse_EventScript_269533
+	msgbox Route109_SeashoreHouse_Text_26989D, MSGBOX_AUTOCLOSE
 	end
 
 Route109_SeashoreHouse_EventScript_2694FD:: @ 82694FD
-	trainerbattle 2, TRAINER_JOHANNA, 0, Route109_SeashoreHouse_Text_2698E3, Route109_SeashoreHouse_Text_269947, Route109_SeashoreHouse_EventScript_269533
-	msgbox Route109_SeashoreHouse_Text_269953, 6
+	trainerbattle_single TRAINER_JOHANNA, Route109_SeashoreHouse_Text_2698E3, Route109_SeashoreHouse_Text_269947, Route109_SeashoreHouse_EventScript_269533
+	msgbox Route109_SeashoreHouse_Text_269953, MSGBOX_AUTOCLOSE
 	end
 
 Route109_SeashoreHouse_EventScript_269518:: @ 8269518
-	trainerbattle 2, TRAINER_SIMON, 0, Route109_SeashoreHouse_Text_269986, Route109_SeashoreHouse_Text_2699C5, Route109_SeashoreHouse_EventScript_269533
-	msgbox Route109_SeashoreHouse_Text_2699DF, 6
+	trainerbattle_single TRAINER_SIMON, Route109_SeashoreHouse_Text_269986, Route109_SeashoreHouse_Text_2699C5, Route109_SeashoreHouse_EventScript_269533
+	msgbox Route109_SeashoreHouse_Text_2699DF, MSGBOX_AUTOCLOSE
 	end
 
 Route109_SeashoreHouse_EventScript_269533:: @ 8269533

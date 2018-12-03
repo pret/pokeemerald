@@ -66,11 +66,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223012:: @ 8223012
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2232A7, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2232A7, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_22301B:: @ 822301B
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2232C8, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2232C8, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
@@ -88,11 +88,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223051:: @ 8223051
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223305, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223305, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_22305A:: @ 822305A
-	msgbox MossdeepCity_SpaceCenter_1F_Text_22335E, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_22335E, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_223063:: @ 8223063
@@ -100,12 +100,12 @@ MossdeepCity_SpaceCenter_1F_EventScript_223063:: @ 8223063
 	faceplayer
 	compare VAR_0x405D, 2
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_22307A
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2233D3, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2233D3, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_22307A:: @ 822307A
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2234B7, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2234B7, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
 	waitmovement 0
 	release
@@ -118,36 +118,36 @@ MossdeepCity_SpaceCenter_1F_EventScript_22308E:: @ 822308E
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_2230DA
 	checkflag FLAG_0x0C0
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_2230D0
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223540, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223540, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
 	setflag FLAG_0x0C0
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_2230D0:: @ 82230D0
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_2230DA:: @ 82230DA
 	checkflag FLAG_0x0C0
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_223119
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2235F0, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2235F0, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
 	setflag FLAG_0x0C0
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
 	waitmovement 0
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223119:: @ 8223119
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
 	waitmovement 0
 	release
@@ -166,12 +166,12 @@ MossdeepCity_SpaceCenter_1F_EventScript_22312D:: @ 822312D
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223154:: @ 8223154
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2236A6, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2236A6, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_22315E:: @ 822315E
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2236E8, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2236E8, MSGBOX_DEFAULT
 	release
 	end
 
@@ -188,7 +188,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223168:: @ 8223168
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_22318F:: @ 822318F
-	msgbox MossdeepCity_SpaceCenter_1F_Text_22375B, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_22375B, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
 	waitmovement 0
@@ -196,7 +196,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22318F:: @ 822318F
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_2231A4:: @ 82231A4
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2237B5, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2237B5, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
 	waitmovement 0
@@ -206,7 +206,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_2231A4:: @ 82231A4
 MossdeepCity_SpaceCenter_1F_EventScript_2231B9:: @ 82231B9
 	lock
 	faceplayer
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223849, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223849, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
 	waitmovement 0
 	release
@@ -214,23 +214,23 @@ MossdeepCity_SpaceCenter_1F_EventScript_2231B9:: @ 82231B9
 
 MossdeepCity_SpaceCenter_1F_EventScript_2231CF:: @ 82231CF
 	lockall
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223C2C, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223C2C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_2231DA:: @ 82231DA
-	trainerbattle 0, TRAINER_GRUNT_32, 0, MossdeepCity_SpaceCenter_1F_Text_22396C, MossdeepCity_SpaceCenter_1F_Text_223999
-	msgbox MossdeepCity_SpaceCenter_1F_Text_2239AA, 6
+	trainerbattle_single TRAINER_GRUNT_32, MossdeepCity_SpaceCenter_1F_Text_22396C, MossdeepCity_SpaceCenter_1F_Text_223999
+	msgbox MossdeepCity_SpaceCenter_1F_Text_2239AA, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_2231F1:: @ 82231F1
-	trainerbattle 0, TRAINER_GRUNT_16, 0, MossdeepCity_SpaceCenter_1F_Text_2239E6, MossdeepCity_SpaceCenter_1F_Text_223A21
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223A4B, 6
+	trainerbattle_single TRAINER_GRUNT_16, MossdeepCity_SpaceCenter_1F_Text_2239E6, MossdeepCity_SpaceCenter_1F_Text_223A21
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223A4B, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_223208:: @ 8223208
-	trainerbattle 0, TRAINER_GRUNT_33, 0, MossdeepCity_SpaceCenter_1F_Text_223A8A, MossdeepCity_SpaceCenter_1F_Text_223AFA
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223B37, 6
+	trainerbattle_single TRAINER_GRUNT_33, MossdeepCity_SpaceCenter_1F_Text_223A8A, MossdeepCity_SpaceCenter_1F_Text_223AFA
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223B37, MSGBOX_AUTOCLOSE
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
@@ -238,8 +238,8 @@ MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
 	faceplayer
 	checkflag FLAG_0x0BF
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_22326E
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223B90, 4
-	trainerbattle 3, TRAINER_GRUNT_23, 0, MossdeepCity_SpaceCenter_1F_Text_223BC2
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223B90, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_23, MossdeepCity_SpaceCenter_1F_Text_223BC2
 	setflag FLAG_0x0BF
 	moveobjectoffscreen 9
 	switch VAR_FACING
@@ -252,7 +252,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_22326E:: @ 822326E
-	msgbox MossdeepCity_SpaceCenter_1F_Text_223BD3, 4
+	msgbox MossdeepCity_SpaceCenter_1F_Text_223BD3, MSGBOX_DEFAULT
 	release
 	end
 

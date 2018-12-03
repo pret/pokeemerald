@@ -16,15 +16,15 @@ BattleFrontier_PokemonCenter_1F_EventScript_267908:: @ 8267908
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267916:: @ 8267916
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267944, 2
+	msgbox BattleFrontier_PokemonCenter_1F_Text_267944, MSGBOX_NPC
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_26791F:: @ 826791F
-	msgbox BattleFrontier_PokemonCenter_1F_Text_2679EB, 2
+	msgbox BattleFrontier_PokemonCenter_1F_Text_2679EB, MSGBOX_NPC
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267928:: @ 8267928
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267A4B, 2
+	msgbox BattleFrontier_PokemonCenter_1F_Text_267A4B, MSGBOX_NPC
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267931:: @ 8267931
@@ -32,7 +32,7 @@ BattleFrontier_PokemonCenter_1F_EventScript_267931:: @ 8267931
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267A90, 4
+	msgbox BattleFrontier_PokemonCenter_1F_Text_267A90, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end

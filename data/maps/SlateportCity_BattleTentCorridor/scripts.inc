@@ -35,14 +35,14 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	special sub_81B9D08
 	setvar VAR_0x8004, 8
 	special sub_81B9D08
-	msgbox SlateportCity_BattleTentCorridor_Text_25A1C8, 4
+	msgbox SlateportCity_BattleTentCorridor_Text_25A1C8, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 6
 	special sub_81B9D08
 	waitstate
 
 SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
-	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, 4
+	msgbox SlateportCity_BattleTentCorridor_Text_25AB96, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_2725A6
 	waitmovement 0
@@ -62,7 +62,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 16
 	special CallBattleFactoryFunction
-	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, 4
+	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -82,7 +82,7 @@ SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	case 2, SlateportCity_BattleTentCorridor_EventScript_208F89
 
 SlateportCity_BattleTentCorridor_EventScript_208F5B:: @ 8208F5B
-	msgbox SlateportCity_BattleTentCorridor_Text_25A350, 5
+	msgbox SlateportCity_BattleTentCorridor_Text_25A350, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_208F0D
 	case 1, SlateportCity_BattleTentCorridor_EventScript_209022
@@ -100,7 +100,7 @@ SlateportCity_BattleTentCorridor_EventScript_208F89:: @ 8208F89
 SlateportCity_BattleTentCorridor_EventScript_208FBB:: @ 8208FBB
 	setvar VAR_0x8004, 8
 	special sub_81B9D08
-	msgbox SlateportCity_BattleTentCorridor_Text_25AB2E, 5
+	msgbox SlateportCity_BattleTentCorridor_Text_25AB2E, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_208EB4
 	case 1, SlateportCity_BattleTentCorridor_EventScript_208FF1
@@ -113,7 +113,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	waitstate
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
-	msgbox SlateportCity_BattleTentCorridor_Text_25AB6C, 4
+	msgbox SlateportCity_BattleTentCorridor_Text_25AB6C, MSGBOX_DEFAULT
 	goto SlateportCity_BattleTentCorridor_EventScript_208EB4
 
 SlateportCity_BattleTentCorridor_EventScript_209014:: @ 8209014

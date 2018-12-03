@@ -18,12 +18,12 @@ Route119_WeatherInstitute_1F_EventScript_26FAA4:: @ 826FAA4
 	special GetPlayerBigGuyGirlString
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	goto_eq Route119_WeatherInstitute_1F_EventScript_26FABE
-	msgbox Route119_WeatherInstitute_1F_Text_26FCE5, 4
+	msgbox Route119_WeatherInstitute_1F_Text_26FCE5, MSGBOX_DEFAULT
 	release
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FABE:: @ 826FABE
-	msgbox Route119_WeatherInstitute_1F_Text_26FCB7, 4
+	msgbox Route119_WeatherInstitute_1F_Text_26FCB7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -39,7 +39,7 @@ Route119_WeatherInstitute_1F_EventScript_26FAC8:: @ 826FAC8
 	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FAFF
 	compare VAR_0x8004, 2
 	goto_eq Route119_WeatherInstitute_1F_EventScript_26FB05
-	msgbox Route119_WeatherInstitute_1F_Text_26FDE8, 4
+	msgbox Route119_WeatherInstitute_1F_Text_26FDE8, MSGBOX_DEFAULT
 	release
 	end
 
@@ -48,30 +48,30 @@ Route119_WeatherInstitute_1F_EventScript_26FAFF:: @ 826FAFF
 	return
 
 Route119_WeatherInstitute_1F_EventScript_26FB05:: @ 826FB05
-	msgbox Route119_WeatherInstitute_1F_Text_26FD2E, 4
+	msgbox Route119_WeatherInstitute_1F_Text_26FD2E, MSGBOX_DEFAULT
 	release
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FB0F:: @ 826FB0F
-	msgbox Route119_WeatherInstitute_1F_Text_26FE94, 2
+	msgbox Route119_WeatherInstitute_1F_Text_26FE94, MSGBOX_NPC
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FB18:: @ 826FB18
 	lockall
-	msgbox Route119_WeatherInstitute_1F_Text_26FEFC, 4
+	msgbox Route119_WeatherInstitute_1F_Text_26FEFC, MSGBOX_DEFAULT
 	closemessage
 	call Route119_WeatherInstitute_1F_EventScript_272083
 	releaseall
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FB29:: @ 826FB29
-	trainerbattle 0, TRAINER_GRUNT_11, 0, Route119_WeatherInstitute_1F_Text_26FB57, Route119_WeatherInstitute_1F_Text_26FBBB
-	msgbox Route119_WeatherInstitute_1F_Text_26FBD7, 6
+	trainerbattle_single TRAINER_GRUNT_11, Route119_WeatherInstitute_1F_Text_26FB57, Route119_WeatherInstitute_1F_Text_26FBBB
+	msgbox Route119_WeatherInstitute_1F_Text_26FBD7, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FB40:: @ 826FB40
-	trainerbattle 0, TRAINER_GRUNT_20, 0, Route119_WeatherInstitute_1F_Text_26FC34, Route119_WeatherInstitute_1F_Text_26FC52
-	msgbox Route119_WeatherInstitute_1F_Text_26FC60, 6
+	trainerbattle_single TRAINER_GRUNT_20, Route119_WeatherInstitute_1F_Text_26FC34, Route119_WeatherInstitute_1F_Text_26FC52
+	msgbox Route119_WeatherInstitute_1F_Text_26FC60, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_1F_Text_26FB57: @ 826FB57

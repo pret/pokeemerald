@@ -84,13 +84,13 @@ TrainerHill_Entrance_EventScript_268182:: @ 8268182
 TrainerHill_Entrance_EventScript_2681B5:: @ 82681B5
 	lockall
 	applymovement 255, TrainerHill_Entrance_Movement_26837F
-	msgbox TrainerHill_Entrance_Text_268689, 4
+	msgbox TrainerHill_Entrance_Text_268689, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_2681DA
 
 TrainerHill_Entrance_EventScript_2681CA:: @ 82681CA
 	lockall
 	applymovement 255, TrainerHill_Entrance_Movement_26837F
-	msgbox TrainerHill_Entrance_Text_268712, 4
+	msgbox TrainerHill_Entrance_Text_268712, MSGBOX_DEFAULT
 
 TrainerHill_Entrance_EventScript_2681DA:: @ 82681DA
 	closemessage
@@ -118,11 +118,11 @@ TrainerHill_Entrance_EventScript_2681FD:: @ 82681FD
 	special sp194_trainer_tower
 	compare VAR_RESULT, 0
 	goto_eq TrainerHill_Entrance_EventScript_26821F
-	msgbox TrainerHill_Entrance_Text_2686F4, 4
+	msgbox TrainerHill_Entrance_Text_2686F4, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_268227
 
 TrainerHill_Entrance_EventScript_26821F:: @ 826821F
-	msgbox TrainerHill_Entrance_Text_2687AC, 4
+	msgbox TrainerHill_Entrance_Text_2687AC, MSGBOX_DEFAULT
 
 TrainerHill_Entrance_EventScript_268227:: @ 8268227
 	release
@@ -133,7 +133,7 @@ TrainerHill_Entrance_EventScript_268229:: @ 8268229
 	applymovement 255, TrainerHill_Entrance_Movement_26837F
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, TrainerHill_Entrance_EventScript_26836A
-	msgbox TrainerHill_Entrance_Text_2684C6, 4
+	msgbox TrainerHill_Entrance_Text_2684C6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 13
 	special sp194_trainer_tower
 	compare VAR_RESULT, 0
@@ -142,11 +142,11 @@ TrainerHill_Entrance_EventScript_268229:: @ 8268229
 	special sp194_trainer_tower
 	compare VAR_RESULT, 1
 	goto_eq TrainerHill_Entrance_EventScript_268275
-	msgbox TrainerHill_Entrance_Text_268564, 4
+	msgbox TrainerHill_Entrance_Text_268564, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_26827D
 
 TrainerHill_Entrance_EventScript_268275:: @ 8268275
-	msgbox TrainerHill_Entrance_Text_26859E, 4
+	msgbox TrainerHill_Entrance_Text_26859E, MSGBOX_DEFAULT
 
 TrainerHill_Entrance_EventScript_26827D:: @ 826827D
 	message TrainerHill_Entrance_Text_2685F8
@@ -160,7 +160,7 @@ TrainerHill_Entrance_EventScript_26827D:: @ 826827D
 	end
 
 TrainerHill_Entrance_EventScript_2682BA:: @ 82682BA
-	msgbox TrainerHill_Entrance_Text_2687C3, 4
+	msgbox TrainerHill_Entrance_Text_2687C3, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_26827D
 	end
 
@@ -175,7 +175,7 @@ TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
 	setvar VAR_0x40D6, 1
 	setvar VAR_TEMP_5, 0
 	special HealPlayerParty
-	msgbox TrainerHill_Entrance_Text_26862A, 4
+	msgbox TrainerHill_Entrance_Text_26862A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
 	special sp194_trainer_tower
 	releaseall
@@ -183,7 +183,7 @@ TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
 
 TrainerHill_Entrance_EventScript_268314:: @ 8268314
 	setvar VAR_TEMP_5, 0
-	msgbox TrainerHill_Entrance_Text_26866F, 4
+	msgbox TrainerHill_Entrance_Text_26866F, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
@@ -191,7 +191,7 @@ TrainerHill_Entrance_EventScript_268314:: @ 8268314
 	end
 
 TrainerHill_Entrance_EventScript_26832E:: @ 826832E
-	msgbox TrainerHill_Entrance_Text_26851C, 4
+	msgbox TrainerHill_Entrance_Text_26851C, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 14
 	special sp194_trainer_tower
 	setvar VAR_TEMP_5, 1
@@ -209,7 +209,7 @@ TrainerHill_Entrance_EventScript_26835C:: @ 826835C
 	end
 
 TrainerHill_Entrance_EventScript_26836A:: @ 826836A
-	msgbox TrainerHill_Entrance_Text_268430, 4
+	msgbox TrainerHill_Entrance_Text_268430, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
@@ -244,21 +244,21 @@ TrainerHill_Entrance_EventScript_268388:: @ 8268388
 TrainerHill_Entrance_EventScript_268391:: @ 8268391
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, TrainerHill_Entrance_EventScript_2683A3
-	msgbox TrainerHill_Entrance_Text_268D5A, 2
+	msgbox TrainerHill_Entrance_Text_268D5A, MSGBOX_NPC
 	end
 
 TrainerHill_Entrance_EventScript_2683A3:: @ 82683A3
-	msgbox TrainerHill_Entrance_Text_268DDA, 2
+	msgbox TrainerHill_Entrance_Text_268DDA, MSGBOX_NPC
 	end
 
 TrainerHill_Entrance_EventScript_2683AC:: @ 82683AC
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, TrainerHill_Entrance_EventScript_2683BE
-	msgbox TrainerHill_Entrance_Text_268E6A, 2
+	msgbox TrainerHill_Entrance_Text_268E6A, MSGBOX_NPC
 	end
 
 TrainerHill_Entrance_EventScript_2683BE:: @ 82683BE
-	msgbox TrainerHill_Entrance_Text_268EDC, 2
+	msgbox TrainerHill_Entrance_Text_268EDC, MSGBOX_NPC
 	end
 
 TrainerHill_Entrance_EventScript_2683C7:: @ 82683C7
@@ -269,7 +269,7 @@ TrainerHill_Entrance_EventScript_2683C7:: @ 82683C7
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq TrainerHill_Entrance_EventScript_268402
 	pokemart TrainerHill_Entrance_Pokemart_2683E8
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -292,7 +292,7 @@ TrainerHill_Entrance_Pokemart_2683E8: @ 82683E8
 
 TrainerHill_Entrance_EventScript_268402:: @ 8268402
 	pokemart TrainerHill_Entrance_Pokemart_268414
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 

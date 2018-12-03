@@ -78,14 +78,14 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	delay 15
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 1
 	special sub_8161F74
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_249545
 	waitmovement 0
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249069
 
@@ -144,7 +144,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2490AA:: @ 82490AA
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249118
-	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_242217, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_242217, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249121
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249118:: @ 8249118
@@ -203,7 +203,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249219:: @ 8249219
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249223:: @ 8249223
-	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_2423FC, 5
+	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_2423FC, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	case 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB

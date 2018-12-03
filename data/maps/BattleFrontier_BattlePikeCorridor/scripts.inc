@@ -22,7 +22,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0
 	lockall
-	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, 4
+	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	applymovement 255, BattleFrontier_BattlePikeCorridor_Movement_25C80E

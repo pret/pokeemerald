@@ -25,16 +25,12 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 
-extern u32 gTransformedPersonalities[MAX_BATTLERS_COUNT];
-extern u8 gUnknown_0203C7B4;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void RecordedPlayerHandleGetMonData(void);

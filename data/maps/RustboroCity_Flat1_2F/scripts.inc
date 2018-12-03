@@ -25,50 +25,50 @@ RustboroCity_Flat1_2F_EventScript_215157:: @ 8215157
 	end
 
 RustboroCity_Flat1_2F_EventScript_21518D:: @ 821518D
-	msgbox RustboroCity_Flat1_2F_Text_2152FA, 5
+	msgbox RustboroCity_Flat1_2F_Text_2152FA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_Flat1_2F_EventScript_2151CD
-	msgbox RustboroCity_Flat1_2F_Text_2154AD, 4
+	msgbox RustboroCity_Flat1_2F_Text_2154AD, MSGBOX_DEFAULT
 	goto RustboroCity_Flat1_2F_EventScript_215157
 
 RustboroCity_Flat1_2F_EventScript_2151AD:: @ 82151AD
-	msgbox RustboroCity_Flat1_2F_Text_215448, 5
+	msgbox RustboroCity_Flat1_2F_Text_215448, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_Flat1_2F_EventScript_2151CD
-	msgbox RustboroCity_Flat1_2F_Text_2154AD, 4
+	msgbox RustboroCity_Flat1_2F_Text_2154AD, MSGBOX_DEFAULT
 	goto RustboroCity_Flat1_2F_EventScript_215157
 
 RustboroCity_Flat1_2F_EventScript_2151CD:: @ 82151CD
-	msgbox RustboroCity_Flat1_2F_Text_2154E7, 4
+	msgbox RustboroCity_Flat1_2F_Text_2154E7, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_Flat1_2F_EventScript_2151D7:: @ 82151D7
-	msgbox RustboroCity_Flat1_2F_Text_2156E3, 4
+	msgbox RustboroCity_Flat1_2F_Text_2156E3, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_Flat1_2F_EventScript_2151E1:: @ 82151E1
-	msgbox RustboroCity_Flat1_2F_Text_21561E, 4
+	msgbox RustboroCity_Flat1_2F_Text_21561E, MSGBOX_DEFAULT
 	call RustboroCity_Flat1_2F_EventScript_215238
-	msgbox RustboroCity_Flat1_2F_Text_215699, 4
+	msgbox RustboroCity_Flat1_2F_Text_215699, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_Flat1_2F_EventScript_2151F8:: @ 82151F8
-	msgbox RustboroCity_Flat1_2F_Text_215535, 4
+	msgbox RustboroCity_Flat1_2F_Text_215535, MSGBOX_DEFAULT
 	call RustboroCity_Flat1_2F_EventScript_215238
-	msgbox RustboroCity_Flat1_2F_Text_215565, 4
+	msgbox RustboroCity_Flat1_2F_Text_215565, MSGBOX_DEFAULT
 	applymovement 6, RustboroCity_Flat1_2F_Movement_27259E
 	waitmovement 0
-	msgbox RustboroCity_Flat1_2F_Text_215792, 4
+	msgbox RustboroCity_Flat1_2F_Text_215792, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_Flat1_2F_EventScript_215221:: @ 8215221
-	msgbox RustboroCity_Flat1_2F_Text_2155A4, 4
+	msgbox RustboroCity_Flat1_2F_Text_2155A4, MSGBOX_DEFAULT
 	call RustboroCity_Flat1_2F_EventScript_215238
-	msgbox RustboroCity_Flat1_2F_Text_2155D4, 4
+	msgbox RustboroCity_Flat1_2F_Text_2155D4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -77,11 +77,11 @@ RustboroCity_Flat1_2F_EventScript_215238:: @ 8215238
 	return
 
 RustboroCity_Flat1_2F_EventScript_21523D:: @ 821523D
-	msgbox RustboroCity_Flat1_2F_Text_21524F, 2
+	msgbox RustboroCity_Flat1_2F_Text_21524F, MSGBOX_NPC
 	end
 
 RustboroCity_Flat1_2F_EventScript_215246:: @ 8215246
-	msgbox RustboroCity_Flat1_2F_Text_215923, 3
+	msgbox RustboroCity_Flat1_2F_Text_215923, MSGBOX_SIGN
 	end
 
 RustboroCity_Flat1_2F_Text_21524F: @ 821524F

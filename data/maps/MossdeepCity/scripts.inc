@@ -16,12 +16,12 @@ MossdeepCity_EventScript_1E4AB2:: @ 81E4AB2
 	faceplayer
 	checkflag FLAG_0x07B
 	goto_eq MossdeepCity_EventScript_1E4AC7
-	msgbox MossdeepCity_Text_1E4E90, 4
+	msgbox MossdeepCity_Text_1E4E90, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_EventScript_1E4AC7:: @ 81E4AC7
-	msgbox MossdeepCity_Text_1E4F15, 4
+	msgbox MossdeepCity_Text_1E4F15, MSGBOX_DEFAULT
 	release
 	end
 
@@ -30,45 +30,45 @@ MossdeepCity_EventScript_1E4AD1:: @ 81E4AD1
 	faceplayer
 	checkflag FLAG_0x07B
 	goto_eq MossdeepCity_EventScript_1E4AE6
-	msgbox MossdeepCity_Text_1E4F50, 4
+	msgbox MossdeepCity_Text_1E4F50, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_EventScript_1E4AE6:: @ 81E4AE6
-	msgbox MossdeepCity_Text_1E5051, 4
+	msgbox MossdeepCity_Text_1E5051, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_EventScript_1E4AF0:: @ 81E4AF0
-	msgbox MossdeepCity_Text_1E4E22, 2
+	msgbox MossdeepCity_Text_1E4E22, MSGBOX_NPC
 	end
 
 MossdeepCity_EventScript_1E4AF9:: @ 81E4AF9
-	msgbox MossdeepCity_Text_1E5135, 2
+	msgbox MossdeepCity_Text_1E5135, MSGBOX_NPC
 	end
 
 MossdeepCity_EventScript_1E4B02:: @ 81E4B02
-	msgbox MossdeepCity_Text_1E50D9, 2
+	msgbox MossdeepCity_Text_1E50D9, MSGBOX_NPC
 	end
 
 MossdeepCity_EventScript_1E4B0B:: @ 81E4B0B
-	msgbox MossdeepCity_Text_1E529D, 2
+	msgbox MossdeepCity_Text_1E529D, MSGBOX_NPC
 	end
 
 MossdeepCity_EventScript_1E4B14:: @ 81E4B14
-	msgbox MossdeepCity_Text_1E5396, 3
+	msgbox MossdeepCity_Text_1E5396, MSGBOX_SIGN
 	end
 
 MossdeepCity_EventScript_1E4B1D:: @ 81E4B1D
-	msgbox MossdeepCity_Text_1E53A9, 3
+	msgbox MossdeepCity_Text_1E53A9, MSGBOX_SIGN
 	end
 
 MossdeepCity_EventScript_1E4B26:: @ 81E4B26
-	msgbox MossdeepCity_Text_1E53F2, 3
+	msgbox MossdeepCity_Text_1E53F2, MSGBOX_SIGN
 	end
 
 MossdeepCity_EventScript_1E4B2F:: @ 81E4B2F
-	msgbox MossdeepCity_Text_1E541F, 3
+	msgbox MossdeepCity_Text_1E541F, MSGBOX_SIGN
 	end
 
 MossdeepCity_EventScript_1E4B38:: @ 81E4B38
@@ -218,7 +218,7 @@ MossdeepCity_Movement_1E4C00: @ 81E4C00
 MossdeepCity_EventScript_1E4C10:: @ 81E4C10
 	lock
 	faceplayer
-	msgbox MossdeepCity_Text_1E5213, 4
+	msgbox MossdeepCity_Text_1E5213, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_Movement_2725A2
 	waitmovement 0
 	release
@@ -229,10 +229,10 @@ MossdeepCity_EventScript_1E4C26:: @ 81E4C26
 	faceplayer
 	checkflag FLAG_0x114
 	goto_eq MossdeepCity_EventScript_1E4C68
-	msgbox MossdeepCity_Text_1E4CED, 5
+	msgbox MossdeepCity_Text_1E4CED, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_1E4C72
-	msgbox MossdeepCity_Text_1E4D5B, 4
+	msgbox MossdeepCity_Text_1E4D5B, MSGBOX_DEFAULT
 	giveitem_std ITEM_KINGS_ROCK
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_272054
@@ -241,23 +241,23 @@ MossdeepCity_EventScript_1E4C26:: @ 81E4C26
 	end
 
 MossdeepCity_EventScript_1E4C68:: @ 81E4C68
-	msgbox MossdeepCity_Text_1E4DB3, 4
+	msgbox MossdeepCity_Text_1E4DB3, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_EventScript_1E4C72:: @ 81E4C72
-	msgbox MossdeepCity_Text_1E4DD7, 4
+	msgbox MossdeepCity_Text_1E4DD7, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_EventScript_1E4C7C:: @ 81E4C7C
-	msgbox MossdeepCity_Text_1E5581, 2
+	msgbox MossdeepCity_Text_1E5581, MSGBOX_NPC
 	end
 
 MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	lock
 	faceplayer
-	msgbox MossdeepCity_Text_1E5453, 4
+	msgbox MossdeepCity_Text_1E5453, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if 1, MossdeepCity_EventScript_1E4CB0

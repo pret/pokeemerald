@@ -17,11 +17,11 @@ SlateportCity_PokemonCenter_1F_EventScript_20DAD3:: @ 820DAD3
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_20DAE1:: @ 820DAE1
-	msgbox SlateportCity_PokemonCenter_1F_Text_20DAF3, 2
+	msgbox SlateportCity_PokemonCenter_1F_Text_20DAF3, MSGBOX_NPC
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_20DAEA:: @ 820DAEA
-	msgbox SlateportCity_PokemonCenter_1F_Text_20DBBC, 2
+	msgbox SlateportCity_PokemonCenter_1F_Text_20DBBC, MSGBOX_NPC
 	end
 
 SlateportCity_PokemonCenter_1F_Text_20DAF3: @ 820DAF3

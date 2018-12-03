@@ -198,7 +198,7 @@ FarawayIsland_Interior_EventScript_267EDB:: @ 8267EDB
 	setflag FLAG_HIDE_MEW
 	removeobject 1
 	fadescreenswapbuffers 0
-	msgbox FarawayIsland_Interior_Text_267EF1, 4
+	msgbox FarawayIsland_Interior_Text_267EF1, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end

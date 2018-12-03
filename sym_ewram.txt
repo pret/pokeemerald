@@ -104,24 +104,8 @@ gUnknown_02022D00: @ 2022D00
 	.space 0x4
 
 	.include "src/main_menu.o"
-
-gUnknown_02022D08: @ 2022D08
-	.space 0x1
-
-gUnknown_02022D09: @ 2022D09
-	.space 0x1
-
-gUnknown_02022D0A: @ 2022D0A
-	.space 0x2
-
-gUnknown_02022D0C: @ 2022D0C
-	.space 0x4
-
 	.include "src/battle_controllers.o"
-
-gUnknown_02022E10: @ 2022E10
-	.space 0x4
-
+	.include "src/rom_8034C54.o"
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
 	.include "src/random.o"
@@ -345,10 +329,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
     .include "src/battle_records.o"
-
-gUnknown_0203AB7C: @ 203AB7C
-	.space 0x4
-
+    .include "src/pokedex_area_screen.o"
     .include "src/evolution_scene.o"
 
 gUnknown_0203AB88: @ 203AB88
