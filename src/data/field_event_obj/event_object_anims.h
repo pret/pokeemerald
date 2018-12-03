@@ -1,6 +1,3 @@
-#ifndef GUARD_EVENT_OBJECT_ANIMS_H
-#define GUARD_EVENT_OBJECT_ANIMS_H
-
 const union AnimCmd gEventObjectImageAnim_StayStill[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -1172,5 +1169,3 @@ const struct UnkStruct_085094AC gUnknown_085094AC[] = {
         {0, 0, 0, 0},
     },
 };
-
-#endif //GUARD_EVENT_OBJECT_ANIMS_H

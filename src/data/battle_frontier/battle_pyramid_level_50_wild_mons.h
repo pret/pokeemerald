@@ -1,4 +1,3 @@
-
 static const struct PyramidWildMon sLevel50WildMons_Round1[] =
 {
     {

@@ -1,6 +1,3 @@
-#ifndef GUARD_EVENT_OBJECT_GFX_H
-#define GUARD_EVENT_OBJECT_GFX_H
-
 const u32 gEventObjectPic_BrendanNormal[] = INCBIN_U32("graphics/event_objects/pics/people/brendan/walking.4bpp");
 const u32 gEventObjectPic_BrendanRunning[] = INCBIN_U32("graphics/event_objects/pics/people/brendan/running.4bpp");
 const u16 gEventObjectPalette8[] = INCBIN_U16("graphics/event_objects/palettes/field_object_palette_08.gbapal");
@@ -307,7 +304,7 @@ const u16 gFieldEffectObjectPalette0[] = INCBIN_U16("graphics/event_objects/pale
 const u16 gFieldEffectObjectPalette1[] = INCBIN_U16("graphics/event_objects/palettes/field_effect_object_palette_01.gbapal");
 const u32 gFieldEffectObjectPic_GroundImpactDust[] = INCBIN_U32("graphics/event_objects/pics/effects/ground_impact_dust.4bpp");
 const u32 gFieldEffectObjectPic_BikeHopTallGrass[] = INCBIN_U32("graphics/event_objects/pics/effects/bike_hop_tall_grass.4bpp");
-const u32 gUnusedGrass[] = INCBIN_U32("graphics/event_objects/pics/effects/unused_grass.4bpp");	
+const u32 gUnusedGrass[] = INCBIN_U32("graphics/event_objects/pics/effects/unused_grass.4bpp");
 const u32 gFieldEffectObjectPic_Unknown16[] = INCBIN_U32("graphics/event_objects/pics/effects/unknown_16.4bpp");
 const u32 gFieldEffectObjectPic_Unknown17[] = INCBIN_U32("graphics/event_objects/pics/effects/unknown_17.4bpp");
 const u32 gFieldEffectObjectPic_Unknown18[] = INCBIN_U32("graphics/event_objects/pics/effects/unknown_18.4bpp");
@@ -363,5 +360,3 @@ const u32 gEventObjectPic_Lugia[] = INCBIN_U32("graphics/event_objects/pics/poke
 const u16 gEventObjectPalette32[] = INCBIN_U16("graphics/event_objects/palettes/field_object_palette_32.gbapal");
 const u32 gEventObjectPic_HoOh[] = INCBIN_U32("graphics/event_objects/pics/pokemon/ho_oh.4bpp");
 const u16 gEventObjectPalette31[] = INCBIN_U16("graphics/event_objects/palettes/field_object_palette_31.gbapal");
-
-#endif //GUARD_EVENT_OBJECT_GFX_H

@@ -1,6 +1,3 @@
-#ifndef GUARD_BASE_OAM_H
-#define GUARD_BASE_OAM_H
-
 const struct OamData gEventObjectBaseOam_8x8 = {
     .shape = 0,
     .size = 0,
@@ -48,5 +45,3 @@ const struct OamData gEventObjectBaseOam_64x64 = {
     .size = 3,
     .priority = 2
 };
-
-#endif //GUARD_BASE_OAM_H

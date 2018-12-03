@@ -249,7 +249,7 @@ void sub_80C2668(u32, const u8*);
 void sub_80C267C(void);
 
 // const rom data
-#include "data/pokedex_orders.h"
+#include "data/pokemon/pokedex_orders.h"
 
 static const struct OamData sOamData_855CFE4 =
 {
