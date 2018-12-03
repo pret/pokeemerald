@@ -169,7 +169,7 @@ static void berry_fix_main(void)
             }
             else if (++ berry_fix_mb_manager->unk2 > 180)
             {
-                MultiBootStartMaster(&berry_fix_mb_manager->mb, gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE, (u32)(gMultiBootProgram_BerryGlitchFix_End - (gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE)), 4, 1);
+                MultiBootStartMaster(&berry_fix_mb_manager->mb, gMultiBootProgram_BerryGlitchFix_Start + MULTIBOOT_HEADER_SIZE, (u32)(gMultiBootProgram_BerryGlitchFix_End - (gMultiBootProgram_BerryGlitchFix_Start + MULTIBOOT_HEADER_SIZE)), 4, 1);
                 berry_fix_mb_manager->state = 5;
             }
             break;
