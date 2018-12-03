@@ -1,10 +1,3 @@
-//
-// Created by scott on 10/21/2017.
-//
-
-#ifndef GUARD_DATA_DECORATION_DESCRIPTION_H
-#define GUARD_DATA_DECORATION_DESCRIPTION_H
-
 const u8 DecorDesc_SMALL_DESK[] = _(
     "A small desk built\n"
         "for one.");
@@ -578,4 +571,3 @@ const u8 DecorDesc_REGISTEEL_DOLL[] = _(
     "A large doll.\n"
         "Place it on a mat\n"
         "or a desk.");
-#endif //GUARD_DATA_DECORATION_DESCRIPTION_H

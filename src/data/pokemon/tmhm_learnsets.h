@@ -1,6 +1,3 @@
-#ifndef GUARD_TMHM_LEARNSETS_H
-#define GUARD_TMHM_LEARNSETS_H
-
 #define TMHM_LEARNSET(moves) {(u32)(moves), ((u64)(moves) >> 32)}
 #define TMHM(tmhm) ((u64)1 << (ITEM_##tmhm - ITEM_TM01_FOCUS_PUNCH))
 
@@ -9389,5 +9386,3 @@ const u32 gTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
 };
-
-#endif  // GUARD_TMHM_LEARNSETS_H

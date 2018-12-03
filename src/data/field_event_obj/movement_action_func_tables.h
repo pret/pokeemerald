@@ -1,6 +1,3 @@
-#ifndef GUARD_MOVEMENT_ACTION_FUNC_TABLES_H
-#define GUARD_MOVEMENT_ACTION_FUNC_TABLES_H
-
 u8 MovementAction_FaceDown_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_FaceDown_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_PauseSpriteAnim(struct EventObject *, struct Sprite *);
@@ -1514,5 +1511,3 @@ u8 (*const gMovementActionFuncs_DestroyExtraTaskIfAtTop[])(struct EventObject *,
 	MovementAction_DestroyExtraTaskIfAtTop_Step0,
 	MovementAction_Finish,
 };
-
-#endif //GUARD_MOVEMENT_ACTION_FUNC_TABLES_H

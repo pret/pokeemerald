@@ -6,6 +6,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_setup.h"
+#include "battle_tower.h"
 #include "bg.h"
 #include "data2.h"
 #include "item_use.h"
@@ -26,15 +27,11 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern struct UnusedControllerStruct gUnknown_02022D0C;
-
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_81358F4(void);
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void SetMultiuseSpriteTemplateToPokemon(u16, u8);
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void PlayerPartnerHandleGetMonData(void);

@@ -1,6 +1,3 @@
-#ifndef GUARD_FIELD_EFFECT_OBJECTS_H
-#define GUARD_FIELD_EFFECT_OBJECTS_H
-
 const struct SpritePalette gFieldEffectObjectPaletteInfo0 = {gFieldEffectObjectPalette0, 0x1004};
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo1 = {gFieldEffectObjectPalette1, 0x1005};
@@ -993,5 +990,3 @@ const struct SpriteFrameImage  gFieldEffectObjectPicTable_Rayquaza[] = {
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {0xFFFF, 0xFFFF, &gEventObjectBaseOam_32x32, gFieldEffectObjectImageAnimTable_Rayquaza, gFieldEffectObjectPicTable_Rayquaza, gDummySpriteAffineAnimTable, sub_8155F80};
 
 const struct SpritePalette gFieldEffectObjectPaletteInfoUnused = {gEventObjectPalette2, 0x1011};
-
-#endif //GUARD_FIELD_EFFECT_OBJECTS_H

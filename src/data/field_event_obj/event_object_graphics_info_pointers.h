@@ -1,6 +1,3 @@
-#ifndef GUARD_EVENT_OBJECT_GRAPHICS_INFO_POINTERS_H
-#define GUARD_EVENT_OBJECT_GRAPHICS_INFO_POINTERS_H
-
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_BrendanNormal;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_BrendanMachBike;
 const struct EventObjectGraphicsInfo gEventObjectGraphicsInfo_BrendanSurfing;
@@ -500,5 +497,3 @@ const struct EventObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[
 	&gEventObjectGraphicsInfo_UnusedMauvilleOldMan1,
 	&gEventObjectGraphicsInfo_UnusedMauvilleOldMan2,
 };
-
-#endif //GUARD_EVENT_OBJECT_GRAPHICS_INFO_POINTERS_H

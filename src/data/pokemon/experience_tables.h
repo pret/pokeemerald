@@ -1,6 +1,3 @@
-#ifndef POKEEMERALD_EXPERIENCE_TABLES_H
-#define POKEEMERALD_EXPERIENCE_TABLES_H
-
 #define SQUARE(n)(n * n)
 #define CUBE(n)(n * n * n)
 
@@ -845,5 +842,3 @@ const u32 gExperienceTables[][MAX_LEVEL + 1] =
         EXP_MEDIUM_FAST(100),
     }
 };
-
-#endif //POKEEMERALD_EXPERIENCE_TABLES_H
