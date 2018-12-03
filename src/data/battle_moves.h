@@ -7218,7 +7218,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 		.split = SPLIT_STATUS,
 	},
 	{ // MOVE_POWDER
-		.effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+		.effect = EFFECT_POWDER,
 		.power = 0,
 		.type = TYPE_BUG,
 		.accuracy = 100,

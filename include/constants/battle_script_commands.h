@@ -133,6 +133,7 @@
 #define VARIOUS_SET_AURORA_VEIL 				71
 #define VARIOUS_TRY_THIRD_TYPE 					72
 #define VARIOUS_ACUPRESSURE						73
+#define VARIOUS_SET_POWDER						74
 
 // atk80, dmg manipulation
 #define ATK80_DMG_CHANGE_SIGN                               0

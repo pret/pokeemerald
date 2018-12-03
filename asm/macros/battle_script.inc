@@ -1580,6 +1580,10 @@
 	various \battler, VARIOUS_ACUPRESSURE
 	.4byte \ptr
 	.endm
+	
+	.macro setpowder battler:req
+	various \battler, VARIOUS_SET_POWDER
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req

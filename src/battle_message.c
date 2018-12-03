@@ -651,6 +651,8 @@ static const u8 sText_BestowItemGiving[] = _("{B_DEF_NAME_WITH_PREFIX} received 
 static const u8 sText_ThirdTypeAdded[] = _("{B_BUFF1} type was added to\n{B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_FellForFeint[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe feint!");
 static const u8 sText_PokemonCannotUseMove[] = _("{B_ATK_NAME_WITH_PREFIX} cannot\nuse {B_CURRENT_MOVE}!");
+static const u8 sText_CoveredInPowder[] = _("{B_DEF_NAME_WITH_PREFIX} is covered in powder!");
+static const u8 sText_PowderExplodes[] = _("When the flame touched the powder \non the Pokémon, it exploded!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
@@ -1156,6 +1158,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     sText_ThirdTypeAdded,
     sText_FellForFeint,
     sText_PokemonCannotUseMove,
+    sText_CoveredInPowder,
+    sText_PowderExplodes,
 };
 
 const u16 gTerrainStringIds[] =

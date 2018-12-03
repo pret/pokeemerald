@@ -116,6 +116,7 @@
 #define STATUS2_LOCK_CONFUSE          0x00000C00
 #define STATUS2_MULTIPLETURNS         0x00001000
 #define STATUS2_WRAPPED               0x00002000
+#define STATUS2_POWDER                0x00004000
 #define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
 #define STATUS2_FOCUS_ENERGY          0x00100000

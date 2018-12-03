@@ -339,6 +339,20 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSparklingAria
 	.4byte BattleScript_EffectAcupressure
 	.4byte BattleScript_EffectAromaticMist
+	.4byte BattleScript_EffectPowder
+	
+BattleScript_EffectPowder:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, NO_ACC_CALC_CHECK_LOCK_ON
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_POWDER, BattleScript_ButItFailed
+	setpowder BS_TARGET
+	attackanimation
+	waitanimation
+	printstring STRINGID_COVEREDINPOWDER
+	waitmessage 0x40
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectAromaticMist:
 	attackcanceler
@@ -5522,6 +5536,25 @@ BattleScript_DoSelfConfusionDmg::
 	goto BattleScript_MoveEnd
 BattleScript_MoveUsedIsConfusedRet::
 	return
+	
+BattleScript_MoveUsedPowder::
+	bicword gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_ATTACKSTRING_PRINTED
+	attackstring
+	ppreduce
+	pause 0x20
+	cancelmultiturnmoves BS_ATTACKER
+	status2animation BS_ATTACKER, STATUS2_POWDER
+	waitanimation
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_POWDEREXPLODES
+	waitmessage 0x40
+	tryfaintmon BS_ATTACKER, FALSE, NULL
+	goto BattleScript_MoveEnd
 
 BattleScript_MoveUsedIsConfusedNoMore::
 	printstring STRINGID_PKMNHEALEDCONFUSION

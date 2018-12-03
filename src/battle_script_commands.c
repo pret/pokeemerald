@@ -6338,6 +6338,9 @@ static void atk76_various(void)
 
     switch (gBattlescriptCurrInstr[2])
     {
+    case VARIOUS_SET_POWDER:
+        gBattleMons[gActiveBattler].status2 |= STATUS2_POWDER;
+        break;
     case VARIOUS_ACUPRESSURE:
         bits = 0;
         for (i = STAT_ATK; i < NUM_BATTLE_STATS; i++)

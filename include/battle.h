@@ -203,6 +203,7 @@ struct ProtectStruct
     u32 usesBouncedMove:1;
     u32 usedHealBlockedMove:1;
     u32 usedGravityPreventedMove:1;
+    u32 powderSelfDmg:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;

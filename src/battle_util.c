@@ -483,7 +483,8 @@ bool8 WasUnableToUseMove(u8 battler)
         || gProtectStructs[battler].usedHealBlockedMove
         || gProtectStructs[battler].flag2Unknown
         || gProtectStructs[battler].flinchImmobility
-        || gProtectStructs[battler].confusionSelfDmg)
+        || gProtectStructs[battler].confusionSelfDmg
+        || gProtectStructs[battler].powderSelfDmg)
         return TRUE;
     else
         return FALSE;
@@ -1306,6 +1307,7 @@ enum
 	ENDTURN_ITEMS2,
 	ENDTURN_ROOST,
 	ENDTURN_ELECTRIFY,
+	ENDTURN_POWDER,
 	ENDTURN_BATTLER_COUNT
 };
 
@@ -1756,7 +1758,9 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_ELECTRIFY:
                 gStatuses3[gActiveBattler] &= ~(STATUS3_ELECTRIFIED);
                 gBattleStruct->turnEffectsTracker++;
-                break;
+            case ENDTURN_POWDER:
+                gBattleMons[gActiveBattler].status2 &= ~(STATUS2_POWDER);
+                gBattleStruct->turnEffectsTracker++;
             case ENDTURN_BATTLER_COUNT:  // done
                 gBattleStruct->turnEffectsTracker = 0;
                 gBattleStruct->turnEffectsBattlerId++;
@@ -1982,6 +1986,7 @@ enum
 	CANCELLER_IN_LOVE,
 	CANCELLER_BIDE,
 	CANCELLER_THAW,
+	CANCELLER_POWDER,
 	CANCELLER_END,
 	CANCELLER_PSYCHIC_TERRAIN,
 	CANCELLER_END2,
@@ -2269,6 +2274,20 @@ u8 AtkCanceller_UnableToUseMove(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 }
                 effect = 2;
+            }
+            gBattleStruct->atkCancellerTracker++;
+            break;
+        case CANCELLER_POWDER:
+            if (gBattleMons[gBattlerAttacker].status2 & STATUS2_POWDER)
+            {
+                u32 moveType;
+                GET_MOVE_TYPE(gCurrentMove, moveType);
+                if (moveType == TYPE_FIRE)
+                {
+                    gProtectStructs[gBattlerAttacker].powderSelfDmg = 1;
+                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedPowder;
+                }
             }
             gBattleStruct->atkCancellerTracker++;
             break;
