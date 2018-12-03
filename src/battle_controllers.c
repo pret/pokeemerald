@@ -13,10 +13,10 @@
 #include "constants/abilities.h"
 #include "constants/species.h"
 
-extern u8 gUnknown_02022D08;
-extern u8 gUnknown_02022D09;
-extern u8 gUnknown_02022D0A;
-
+static EWRAM_DATA u8 sLinkSendTaskId = 0;
+static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
+static EWRAM_DATA u8 sUnknown_02022D0A = 0;
+EWRAM_DATA struct UnusedControllerStruct gUnknown_02022D0C = {};
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
 
 extern void sub_81B8D64(u8 battlerId, u8 arg1); // party_menu
@@ -681,20 +681,20 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
 
 static void CreateTasksForSendRecvLinkBuffers(void)
 {
-    gUnknown_02022D08 = CreateTask(Task_HandleSendLinkBuffersData, 0);
-    gTasks[gUnknown_02022D08].data[11] = 0;
-    gTasks[gUnknown_02022D08].data[12] = 0;
-    gTasks[gUnknown_02022D08].data[13] = 0;
-    gTasks[gUnknown_02022D08].data[14] = 0;
-    gTasks[gUnknown_02022D08].data[15] = 0;
+    sLinkSendTaskId = CreateTask(Task_HandleSendLinkBuffersData, 0);
+    gTasks[sLinkSendTaskId].data[11] = 0;
+    gTasks[sLinkSendTaskId].data[12] = 0;
+    gTasks[sLinkSendTaskId].data[13] = 0;
+    gTasks[sLinkSendTaskId].data[14] = 0;
+    gTasks[sLinkSendTaskId].data[15] = 0;
 
-    gUnknown_02022D09 = CreateTask(Task_HandleCopyReceivedLinkBuffersData, 0);
-    gTasks[gUnknown_02022D09].data[12] = 0;
-    gTasks[gUnknown_02022D09].data[13] = 0;
-    gTasks[gUnknown_02022D09].data[14] = 0;
-    gTasks[gUnknown_02022D09].data[15] = 0;
+    sLinkReceiveTaskId = CreateTask(Task_HandleCopyReceivedLinkBuffersData, 0);
+    gTasks[sLinkReceiveTaskId].data[12] = 0;
+    gTasks[sLinkReceiveTaskId].data[13] = 0;
+    gTasks[sLinkReceiveTaskId].data[14] = 0;
+    gTasks[sLinkReceiveTaskId].data[15] = 0;
 
-    gUnknown_02022D0A = 0;
+    sUnknown_02022D0A = 0;
 }
 
 enum
@@ -716,24 +716,24 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
     s32 i;
 
     alignedSize = size - size % 4 + 4;
-    if (gTasks[gUnknown_02022D08].data[14] + alignedSize + LINK_BUFF_DATA + 1 > BATTLE_BUFFER_LINK_SIZE)
+    if (gTasks[sLinkSendTaskId].data[14] + alignedSize + LINK_BUFF_DATA + 1 > BATTLE_BUFFER_LINK_SIZE)
     {
-        gTasks[gUnknown_02022D08].data[12] = gTasks[gUnknown_02022D08].data[14];
-        gTasks[gUnknown_02022D08].data[14] = 0;
+        gTasks[sLinkSendTaskId].data[12] = gTasks[sLinkSendTaskId].data[14];
+        gTasks[sLinkSendTaskId].data[14] = 0;
     }
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ACTIVE_BATTLER] = gActiveBattler;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ATTACKER] = gBattlerAttacker;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_TARGET] = gBattlerTarget;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BATTLER_FLAGS] = gAbsentBattlerFlags;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_EFFECT_BATTLER] = gEffectBattler;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ACTIVE_BATTLER] = gActiveBattler;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ATTACKER] = gBattlerAttacker;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_TARGET] = gBattlerTarget;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_ABSENT_BATTLER_FLAGS] = gAbsentBattlerFlags;
+    gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_EFFECT_BATTLER] = gEffectBattler;
 
     for (i = 0; i < size; i++)
-        gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_DATA + i] = data[i];
+        gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].data[14] + LINK_BUFF_DATA + i] = data[i];
 
-    gTasks[gUnknown_02022D08].data[14] = gTasks[gUnknown_02022D08].data[14] + alignedSize + LINK_BUFF_DATA;
+    gTasks[sLinkSendTaskId].data[14] = gTasks[sLinkSendTaskId].data[14] + alignedSize + LINK_BUFF_DATA;
 }
 
 static void Task_HandleSendLinkBuffersData(u8 taskId)
@@ -845,19 +845,19 @@ void sub_8033648(void)
                 #endif
                 r6 = gBlockRecvBuffer[i][2];
 
-                if (gTasks[gUnknown_02022D09].data[14] + 9 + r6 > 0x1000)
+                if (gTasks[sLinkReceiveTaskId].data[14] + 9 + r6 > 0x1000)
                 {
-                    gTasks[gUnknown_02022D09].data[12] = gTasks[gUnknown_02022D09].data[14];
-                    gTasks[gUnknown_02022D09].data[14] = 0;
+                    gTasks[sLinkReceiveTaskId].data[12] = gTasks[sLinkReceiveTaskId].data[14];
+                    gTasks[sLinkReceiveTaskId].data[14] = 0;
                 }
 
-                dest = &gLinkBattleRecvBuffer[gTasks[gUnknown_02022D09].data[14]];
+                dest = &gLinkBattleRecvBuffer[gTasks[sLinkReceiveTaskId].data[14]];
                 src = recvBuffer;
 
                 for (j = 0; j < r6 + 8; j++)
                     dest[j] = src[j];
 
-                gTasks[gUnknown_02022D09].data[14] = gTasks[gUnknown_02022D09].data[14] + r6 + 8;
+                gTasks[sLinkReceiveTaskId].data[14] = gTasks[sLinkReceiveTaskId].data[14] + r6 + 8;
             }
         }
     }
