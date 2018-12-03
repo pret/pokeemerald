@@ -8,22 +8,14 @@
 #include "menu_helpers.h"
 #include "berry.h"
 #include "graphics.h"
-#include "constants/items.h"
 #include "item.h"
-#include "item_use.h"
-#include "constants/hold_effects.h"
+#include "constants/items.h"
 
 struct CompressedTilesPal
 {
     const u32 *tiles;
     const u32 *pal;
 };
-
-extern void DoHorizontalLunge(struct Sprite *sprite);
-extern void DoVerticalDip(struct Sprite *sprite);
-extern void SlideMonToOriginalPos(struct Sprite *sprite);
-extern void SlideMonToOffset(struct Sprite *sprite);
-extern void sub_80D5B48(struct Sprite *sprite);
 
 // this file's functions
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
@@ -413,64 +405,6 @@ static const struct SpriteTemplate gUnknown_0857FE10 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
-
-const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = DoHorizontalLunge,
-};
-
-const struct SpriteTemplate gVerticalDipSpriteTemplate =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = DoVerticalDip,
-};
-
-const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SlideMonToOriginalPos,
-};
-
-const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SlideMonToOffset,
-};
-
-const struct SpriteTemplate gUnknown_0857FE88 =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80D5B48,
-};
-
-#include "data/text/item_descriptions.h"
-#include "data/items.h"
 
 // code
 void RemoveBagSprite(u8 id)

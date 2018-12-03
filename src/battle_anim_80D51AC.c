@@ -28,6 +28,61 @@ void sub_80D6308(u8 taskId);
 void sub_80D646C(u8 taskId);
 void sub_80A8B3C(u8 taskId);
 
+const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = DoHorizontalLunge,
+};
+
+const struct SpriteTemplate gVerticalDipSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = DoVerticalDip,
+};
+
+const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SlideMonToOriginalPos,
+};
+
+const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SlideMonToOffset,
+};
+
+const struct SpriteTemplate gUnknown_0857FE88 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5B48,
+};
+
 // Task to facilitate simple shaking of a pokemon's picture in battle.
 // The shaking alternates between the original position and the target position.
 // arg 0: anim battler
