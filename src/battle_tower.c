@@ -424,10 +424,9 @@ u16 sub_8162548(u8 challengeNum, u8 battleNum)
     return trainerId;
 }
 
-#ifdef NONMATCHING
-static u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3) // Unused
+static void sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3) // Unused
 {
-    register u16 trainerId, count;
+    u16 trainerId, count;
 
     if (challengeNum <= 7)
     {
@@ -451,59 +450,6 @@ static u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg
     *trainerIdPtr = trainerId;
     *arg3 = count;
 }
-#else
-NAKED
-static u16 sub_81625B4(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *arg3)
-{
-    asm_unified("	push {r4,lr}\n\
-	adds r4, r2, 0\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r2, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	cmp r0, 0x7\n\
-	bhi _081625F4\n\
-	cmp r1, 0x6\n\
-	bne _081625D4\n\
-	ldr r1, =gUnknown_085DFA1A\n\
-	lsls r2, r0, 2\n\
-	b _081625D8\n\
-	.pool\n\
-_081625D4:\n\
-	ldr r1, =gUnknown_085DF9FA\n\
-	lsls r2, 2\n\
-_081625D8:\n\
-	adds r0, r1, 0x2\n\
-	adds r0, r2, r0\n\
-	adds r2, r1\n\
-	ldrh r0, [r0]\n\
-	ldrh r1, [r2]\n\
-	subs r0, r1\n\
-	adds r0, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	ldrh r0, [r2]\n\
-	b _08162604\n\
-	.pool\n\
-_081625F4:\n\
-	ldr r0, =gUnknown_085DF9FA\n\
-	ldrh r1, [r0, 0x1E]\n\
-	ldrh r2, [r0, 0x1C]\n\
-	subs r1, r2\n\
-	adds r1, 0x1\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	ldrh r0, [r0, 0x1C]\n\
-_08162604:\n\
-	strh r0, [r4]\n\
-	strb r1, [r3]\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
-}
-#endif
 
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
 {
