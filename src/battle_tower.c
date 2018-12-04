@@ -263,8 +263,6 @@ const u8 gTowerFemaleTrainerGfxIds[] =
     EVENT_OBJ_GFX_LASS
 };
 
-extern const u8 sRubyFacilityClassToEmerald[82][2];
-/*
 const u8 sRubyFacilityClassToEmerald[82][2] = 
 {
     {0x00, 0x0b},
@@ -344,7 +342,6 @@ const u8 sRubyFacilityClassToEmerald[82][2] =
     {0x4c, 0x4a},
     {0x00, 0x00}
 };
-*/
 
 const u8 *const gUnknown_085DCFD8[] = 
 {
