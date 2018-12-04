@@ -1,4 +1,3 @@
-
 // Slateport Battle Tent.
 const u16 gSlateportBattleTentTrainerMons_Jolie[] = 
 {
