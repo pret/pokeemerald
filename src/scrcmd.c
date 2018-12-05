@@ -790,7 +790,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == INVALID_U8 && mapNum == INVALID_U8)
+    if (mapGroup == 0xFF && mapNum == 0xFF)
         SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
@@ -1491,7 +1491,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     if (width > 0x1C)
         width = 0x1C;
 
-    for (i = 0, height = 4; gStringVar4[i] != INVALID_U8;)
+    for (i = 0, height = 4; gStringVar4[i] != 0xFF;)
     {
         if (gStringVar4[i++] == 0xFE)
             height += 3;
@@ -2238,8 +2238,8 @@ bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-	sub_808D074(GetPlayerFacingDirection());
-	sub_80B0244();
+    sub_808D074(GetPlayerFacingDirection());
+    sub_80B0244();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -2292,7 +2292,7 @@ bool8 ScrCmd_warpE0(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-	sub_80AF79C();
+    sub_80AF79C();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }

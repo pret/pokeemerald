@@ -2141,7 +2141,7 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
 
 static const struct SpriteTemplate gUnknown_0858C180 =
 {
-    .tileTag = INVALID_U16,
+    .tileTag = 0xFFFF,
     .paletteTag = 0x0000,
     .oam = &gOamData_858BFEC,
     .anims = gSpriteAnimTable_858C0BC,

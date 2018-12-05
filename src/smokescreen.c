@@ -12,7 +12,7 @@ u8 sub_807521C(s16 x, s16 y, u8 a3)
     u8 spriteId1, spriteId2, spriteId3, spriteId4;
     struct Sprite *mainSprite;
 
-    if (GetSpriteTileStartByTag(gUnknown_0831C620.tag) == INVALID_U16)
+    if (GetSpriteTileStartByTag(gUnknown_0831C620.tag) == 0xFFFF)
     {
         LoadCompressedObjectPicUsingHeap(&gUnknown_0831C620);
         LoadCompressedObjectPaletteUsingHeap(&gUnknown_0831C628);

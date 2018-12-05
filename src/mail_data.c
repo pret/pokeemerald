@@ -20,7 +20,7 @@ void ClearMailStruct(struct MailStruct *mail)
     s32 i;
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)
-        mail->words[i] = INVALID_U16;
+        mail->words[i] = 0xFFFF;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->playerName[i] = EOS;
@@ -35,7 +35,7 @@ void ClearMailStruct(struct MailStruct *mail)
 bool8 MonHasMail(struct Pokemon *mon)
 {
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
-    if (ItemIsMail(heldItem) && GetMonData(mon, MON_DATA_MAIL) != INVALID_U8)
+    if (ItemIsMail(heldItem) && GetMonData(mon, MON_DATA_MAIL) != 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -56,7 +56,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
         if (gSaveBlock1Ptr->mail[id].itemId == 0)
         {
             for (i = 0; i < MAIL_WORDS_COUNT; i++)
-                gSaveBlock1Ptr->mail[id].words[i] = INVALID_U16;
+                gSaveBlock1Ptr->mail[id].words[i] = 0xFFFF;
 
             for (i = 0; i < PLAYER_NAME_LENGTH + 1 - 1; i++)
                 gSaveBlock1Ptr->mail[id].playerName[i] = gSaveBlock2Ptr->playerName[i];
@@ -76,7 +76,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
         }
     }
 
-    return INVALID_U8;
+    return 0xFF;
 }
 
 u16 SpeciesToMailSpecies(u16 species, u32 personality)
@@ -113,8 +113,8 @@ u8 GiveMailToMon2(struct Pokemon *mon, struct MailStruct *mail)
     u16 itemId = mail->itemId;
     u8 mailId = GiveMailToMon(mon, itemId);
 
-    if (mailId == INVALID_U8)
-        return INVALID_U8;
+    if (mailId == 0xFF)
+        return 0xFF;
 
     gSaveBlock1Ptr->mail[mailId] = *mail;
 
@@ -142,7 +142,7 @@ void TakeMailFromMon(struct Pokemon *mon)
     {
         mailId = GetMonData(mon, MON_DATA_MAIL);
         gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
-        mailId = INVALID_U8;
+        mailId = 0xFF;
         heldItem[0] = ITEM_NONE;
         heldItem[1] = ITEM_NONE << 8;
         SetMonData(mon, MON_DATA_MAIL, &mailId);
@@ -163,7 +163,7 @@ u8 TakeMailFromMon2(struct Pokemon *mon)
 
     newHeldItem[0] = ITEM_NONE;
     newHeldItem[1] = ITEM_NONE << 8;
-    newMailId = INVALID_U8;
+    newMailId = 0xFF;
 
     for (i = PARTY_SIZE; i < MAIL_COUNT; i++)
     {
@@ -177,7 +177,7 @@ u8 TakeMailFromMon2(struct Pokemon *mon)
         }
     }
 
-    return INVALID_U8;
+    return 0xFF;
 }
 
 bool8 ItemIsMail(u16 itemId)

@@ -465,7 +465,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
                 }
 
                 varValue = VarGet(0x403B);
-                if (varValue != INVALID_U16 || VarGet(0x403C) != varValue || VarGet(0x403D) != 0xF)
+                if (varValue != 0xFFFF || VarGet(0x403C) != varValue || VarGet(0x403D) != 0xF)
                     return FALSE;
 
                 if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)

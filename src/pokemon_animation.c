@@ -588,7 +588,7 @@ static const u8 sUnknown_0860AA64[][2] =
     {0, 2},
     {1, 2},
     {0, 2},
-    {0, INVALID_U8}
+    {0, 0xFF}
 };
 
 static const u8 sUnknown_0860AA80[][2] =
@@ -787,30 +787,30 @@ static const u8 sBackAnimationIds[] =
 static const u8 sBackAnimNatureModTable[] =
 {
     0x00, // NATURE_HARDY
-	0x02, // NATURE_LONELY
-	0x00, // NATURE_BRAVE
-	0x00, // NATURE_ADAMANT
-	0x00, // NATURE_NAUGHTY
-	0x01, // NATURE_BOLD
-	0x01, // NATURE_DOCILE
-	0x01, // NATURE_RELAXED
-	0x00, // NATURE_IMPISH
-	0x01, // NATURE_LAX
-	0x02, // NATURE_TIMID
-	0x00, // NATURE_HASTY
-	0x01, // NATURE_SERIOUS
-	0x00, // NATURE_JOLLY
-	0x00, // NATURE_NAIVE
-	0x02, // NATURE_MODEST
-	0x02, // NATURE_MILD
-	0x02, // NATURE_QUIET
-	0x02, // NATURE_BASHFUL
-	0x01, // NATURE_RASH
-	0x01, // NATURE_CALM
-	0x02, // NATURE_GENTLE
-	0x01, // NATURE_SASSY
-	0x02, // NATURE_CAREFUL
-	0x01, // NATURE_QUIRKY
+    0x02, // NATURE_LONELY
+    0x00, // NATURE_BRAVE
+    0x00, // NATURE_ADAMANT
+    0x00, // NATURE_NAUGHTY
+    0x01, // NATURE_BOLD
+    0x01, // NATURE_DOCILE
+    0x01, // NATURE_RELAXED
+    0x00, // NATURE_IMPISH
+    0x01, // NATURE_LAX
+    0x02, // NATURE_TIMID
+    0x00, // NATURE_HASTY
+    0x01, // NATURE_SERIOUS
+    0x00, // NATURE_JOLLY
+    0x00, // NATURE_NAIVE
+    0x02, // NATURE_MODEST
+    0x02, // NATURE_MILD
+    0x02, // NATURE_QUIET
+    0x02, // NATURE_BASHFUL
+    0x01, // NATURE_RASH
+    0x01, // NATURE_CALM
+    0x02, // NATURE_GENTLE
+    0x01, // NATURE_SASSY
+    0x02, // NATURE_CAREFUL
+    0x01, // NATURE_QUIRKY
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_860AD48[] =
@@ -1164,67 +1164,67 @@ NAKED
 static void sub_817F9F4(struct Sprite *sprite)
 {
     asm(".syntax unified\n\
-        	push {r4,lr}\n\
-	adds r4, r0, 0\n\
-	movs r0, 0x32\n\
-	ldrsh r1, [r4, r0]\n\
-	movs r0, 0xC0\n\
-	lsls r0, 1\n\
-	cmp r1, r0\n\
-	ble _0817FA14\n\
-	ldr r0, =SpriteCB_SetDummyOnAnimEnd\n\
-	str r0, [r4, 0x1C]\n\
-	movs r0, 0\n\
-	strh r0, [r4, 0x24]\n\
-	b _0817FA5E\n\
-	.pool\n\
+            push {r4,lr}\n\
+    adds r4, r0, 0\n\
+    movs r0, 0x32\n\
+    ldrsh r1, [r4, r0]\n\
+    movs r0, 0xC0\n\
+    lsls r0, 1\n\
+    cmp r1, r0\n\
+    ble _0817FA14\n\
+    ldr r0, =SpriteCB_SetDummyOnAnimEnd\n\
+    str r0, [r4, 0x1C]\n\
+    movs r0, 0\n\
+    strh r0, [r4, 0x24]\n\
+    b _0817FA5E\n\
+    .pool\n\
 _0817FA14:\n\
-	adds r0, r1, 0\n\
-	cmp r1, 0\n\
-	bge _0817FA1C\n\
-	adds r0, 0x7F\n\
+    adds r0, r1, 0\n\
+    cmp r1, 0\n\
+    bge _0817FA1C\n\
+    adds r0, 0x7F\n\
 _0817FA1C:\n\
-	asrs r2, r0, 7\n\
-	lsls r0, r2, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0\n\
-	blt _0817FA60\n\
-	cmp r0, 0x1\n\
-	ble _0817FA48\n\
-	cmp r0, 0x3\n\
-	bgt _0817FA60\n\
-	ldr r2, =0xffffff00\n\
-	adds r1, r2\n\
-	lsls r0, r1, 16\n\
-	asrs r0, 16\n\
-	movs r1, 0x2E\n\
-	ldrsh r2, [r4, r1]\n\
-	lsls r1, r2, 1\n\
-	adds r1, r2\n\
-	lsls r1, 16\n\
-	b _0817FA56\n\
-	.pool\n\
+    asrs r2, r0, 7\n\
+    lsls r0, r2, 16\n\
+    asrs r0, 16\n\
+    cmp r0, 0\n\
+    blt _0817FA60\n\
+    cmp r0, 0x1\n\
+    ble _0817FA48\n\
+    cmp r0, 0x3\n\
+    bgt _0817FA60\n\
+    ldr r2, =0xffffff00\n\
+    adds r1, r2\n\
+    lsls r0, r1, 16\n\
+    asrs r0, 16\n\
+    movs r1, 0x2E\n\
+    ldrsh r2, [r4, r1]\n\
+    lsls r1, r2, 1\n\
+    adds r1, r2\n\
+    lsls r1, 16\n\
+    b _0817FA56\n\
+    .pool\n\
 _0817FA48:\n\
-	lsls r0, r2, 7\n\
-	subs r0, r1, r0\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	movs r2, 0x2E\n\
-	ldrsh r1, [r4, r2]\n\
-	lsls r1, 17\n\
+    lsls r0, r2, 7\n\
+    subs r0, r1, r0\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    movs r2, 0x2E\n\
+    ldrsh r1, [r4, r2]\n\
+    lsls r1, 17\n\
 _0817FA56:\n\
-	asrs r1, 16\n\
-	bl Sin\n\
-	negs r0, r0\n\
+    asrs r1, 16\n\
+    bl Sin\n\
+    negs r0, r0\n\
 _0817FA5E:\n\
-	strh r0, [r4, 0x26]\n\
+    strh r0, [r4, 0x26]\n\
 _0817FA60:\n\
-	ldrh r0, [r4, 0x32]\n\
-	adds r0, 0xC\n\
-	strh r0, [r4, 0x32]\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
+    ldrh r0, [r4, 0x32]\n\
+    adds r0, 0xC\n\
+    strh r0, [r4, 0x32]\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
         .syntax divided");
 }
 
@@ -1666,7 +1666,7 @@ static void sub_818031C(struct Sprite *sprite)
     else
         amplitude = 0;
 
-    if (var5 == INVALID_U8)
+    if (var5 == 0xFF)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
         sprite->pos2.y = 0;
@@ -2570,7 +2570,7 @@ static void pokemonanimfunc_2C(struct Sprite *sprite)
         sprite->data[4] = 0;
     }
 
-    if (sUnknown_0860AA64[sprite->data[6]][1] == INVALID_U8)
+    if (sUnknown_0860AA64[sprite->data[6]][1] == 0xFF)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
     }
@@ -4157,17 +4157,17 @@ static void sub_8183574(struct Sprite *sprite)
     u8 var9 = sprite->data[6];
     u8 var5 = sUnknown_0860AA80[sprite->data[5]][0];
     u8 var2 = var5;
-    if (var5 != INVALID_U8)
+    if (var5 != 0xFF)
         var5 = sprite->data[7];
     else
-        var5 = INVALID_U8; // needed to match
+        var5 = 0xFF; // needed to match
 
     var6 = sUnknown_0860AA80[sprite->data[5]][1];
     var7 = 0;
     if (var2 != 0xFE)
         var7 = (var6 - var9) * var5 / var6;
 
-    if (var5 == INVALID_U8)
+    if (var5 == 0xFF)
     {
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;
         sprite->pos2.y = 0;
@@ -5278,7 +5278,7 @@ static const struct YellowBlendStruct sUnknown_0860ADCC[] =
     {0, 1},
     {1, 1},
     {0, 1},
-    {0, INVALID_U8}
+    {0, 0xFF}
 };
 
 static const struct YellowBlendStruct sUnknown_0860AE1C[] =
@@ -5296,7 +5296,7 @@ static const struct YellowBlendStruct sUnknown_0860AE1C[] =
     {0, 2},
     {1, 2},
     {0, 2},
-    {0, INVALID_U8}
+    {0, 0xFF}
 };
 
 static const struct YellowBlendStruct sUnknown_0860AE54[] =
@@ -5310,7 +5310,7 @@ static const struct YellowBlendStruct sUnknown_0860AE54[] =
     {0, 20},
     {1, 1},
     {0, 1},
-    {0, INVALID_U8}
+    {0, 0xFF}
 };
 
 static const struct YellowBlendStruct *const sUnknown_0860AE7C[] =
@@ -5324,7 +5324,7 @@ static void BackAnimBlendYellow(struct Sprite *sprite)
 {
     const struct YellowBlendStruct *array = sUnknown_0860AE7C[sprite->data[3]];
     sub_8184770(sprite);
-    if (array[sprite->data[6]].field_1 == INVALID_U8)
+    if (array[sprite->data[6]].field_1 == 0xFF)
     {
         sprite->pos2.x = 0;
         sprite->callback = SpriteCB_SetDummyOnAnimEnd;

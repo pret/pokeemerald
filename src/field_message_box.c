@@ -53,7 +53,7 @@ void task_add_textbox(void)
 void task_del_textbox(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_8098154);
-    if (taskId != INVALID_U8)
+    if (taskId != 0xFF)
         DestroyTask(taskId);
 }
 

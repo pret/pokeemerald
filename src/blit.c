@@ -3,7 +3,7 @@
 
 void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
-    BlitBitmapRect4Bit(src, dst, srcX, srcY, dstX, dstY, width, height, INVALID_U8);
+    BlitBitmapRect4Bit(src, dst, srcX, srcY, dstX, dstY, width, height, 0xFF);
 }
 
 void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey)
@@ -33,7 +33,7 @@ void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 sr
     multiplierSrcY = (src->width + (src->width & 7)) >> 3;
     multiplierDstY = (dst->width + (dst->width & 7)) >> 3;
 
-    if (colorKey == INVALID_U8)
+    if (colorKey == 0xFF)
     {
         for (loopSrcY = srcY, loopDstY = dstY; loopSrcY < yEnd; loopSrcY++, loopDstY++)
         {
@@ -132,7 +132,7 @@ void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
     multiplierSrcY = (src->width + (src->width & 7)) >> 3;
     multiplierDstY = (dst->width + (dst->width & 7)) >> 3;
 
-    if (colorKey == INVALID_U8)
+    if (colorKey == 0xFF)
     {
         for (loopSrcY = srcY, loopDstY = dstY; loopSrcY < yEnd; loopSrcY++, loopDstY++)
         {

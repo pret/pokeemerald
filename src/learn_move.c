@@ -381,7 +381,7 @@ static void LearnMoveMain(void)
 
             if (selection == 0)
             {
-                if (GiveMoveToMon(&gPlayerParty[sLearnMoveStruct->partyMon], GetCurrentItemId()) != INVALID_U16)
+                if (GiveMoveToMon(&gPlayerParty[sLearnMoveStruct->partyMon], GetCurrentItemId()) != 0xFFFF)
                 {
                     sub_816084C(gText_PkmnLearnedMove4);
                     gSpecialVar_0x8004 = 1;
@@ -727,12 +727,12 @@ static void CreateHearts(void)
 
 static void AddScrollArrows(void)
 {
-    if (sLearnMoveStruct->scrollArrowTaskId2 == INVALID_U8)
+    if (sLearnMoveStruct->scrollArrowTaskId2 == 0xFF)
     {
         sLearnMoveStruct->scrollArrowTaskId2 = AddScrollIndicatorArrowPair(&gUnknown_085CEBC0, &sLearnMoveStruct->scrollOffset);
     }
 
-    if (sLearnMoveStruct->scrollArrowTaskId1 == INVALID_U8)
+    if (sLearnMoveStruct->scrollArrowTaskId1 == 0xFF)
     {
         gTempScrollArrowTemplate = gUnknown_085CEBD0;
         gTempScrollArrowTemplate.fullyDownThreshold = sLearnMoveStruct->numMenuChoices - sLearnMoveStruct->numToShowAtOnce;
@@ -742,16 +742,16 @@ static void AddScrollArrows(void)
 
 static void RemoveScrollArrows(void)
 {
-    if (sLearnMoveStruct->scrollArrowTaskId2 != INVALID_U8)
+    if (sLearnMoveStruct->scrollArrowTaskId2 != 0xFF)
     {
         RemoveScrollIndicatorArrowPair(sLearnMoveStruct->scrollArrowTaskId2);
-        sLearnMoveStruct->scrollArrowTaskId2 = INVALID_U8;
+        sLearnMoveStruct->scrollArrowTaskId2 = 0xFF;
     }
 
-    if (sLearnMoveStruct->scrollArrowTaskId1 != INVALID_U8)
+    if (sLearnMoveStruct->scrollArrowTaskId1 != 0xFF)
     {
         RemoveScrollIndicatorArrowPair(sLearnMoveStruct->scrollArrowTaskId1);
-        sLearnMoveStruct->scrollArrowTaskId1 = INVALID_U8;
+        sLearnMoveStruct->scrollArrowTaskId1 = 0xFF;
     }
 }
 
@@ -792,7 +792,7 @@ void ShowHideHearts(s32 item)
     {
         numHearts = (u8)(gContestEffects[gContestMoves[item].effect].appeal / 10);
         
-        if (numHearts == INVALID_U8)
+        if (numHearts == 0xFF)
         {
             numHearts = 0;
         }
@@ -812,7 +812,7 @@ void ShowHideHearts(s32 item)
 
         numHearts = (u8)(gContestEffects[gContestMoves[item].effect].jam / 10);
         
-        if (numHearts == INVALID_U8)
+        if (numHearts == 0xFF)
         {
             numHearts = 0;
         }

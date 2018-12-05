@@ -82,7 +82,7 @@ void sub_8116664(u8 taskId)
         animBattlers[1] = gBattleAnimTarget;
         break;
     case 5:
-        animBattlers[0] = INVALID_U8;
+        animBattlers[0] = 0xFF;
         break;
     case 6:
         selectedPalettes = 0;

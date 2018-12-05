@@ -392,7 +392,7 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
     s32 i;
 
     u8 taskId = ListMenuInitInternal(listMenuTemplate, scrollOffset, selectedRow);
-    for (i = 0; rect[i].palNum != INVALID_U8; i++)
+    for (i = 0; rect[i].palNum != 0xFF; i++)
     {
         PutWindowRectTilemapOverridePalette(listMenuTemplate->windowId,
                                             rect[i].x,
@@ -465,7 +465,7 @@ s32 ListMenuHandleInputGetItemId(u8 listTaskId)
     }
 }
 
-#define TASK_NONE INVALID_U8
+#define TASK_NONE 0xFF
 
 void DestroyListMenuTask(u8 listTaskId, u16 *scrollOffset, u16 *selectedRow)
 {
@@ -953,52 +953,52 @@ void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value)
     case 0:
     case 1:
         data->field_4 = (void*)(value);
-		break;
+        break;
     case 2:
         data->field_C = value;
-		break;
+        break;
     case 3:
         data->field_E = value;
-		break;
+        break;
     case 4:
         data->field_10 = value;
-		break;
+        break;
     case 5:
         data->field_11 = value;
-		break;
+        break;
     case 6:
         data->field_12 = value;
-		break;
+        break;
     case 7:
         data->field_13 = value;
-		break;
+        break;
     case 8:
         data->field_14_0 = value;
-		break;
+        break;
     case 9:
         data->field_14_1 = value;
-		break;
+        break;
     case 10:
         data->field_15_0 = value;
-		break;
+        break;
     case 11:
         data->field_15_1 = value;
-		break;
+        break;
     case 12:
         data->field_16_0 = value;
-		break;
+        break;
     case 13:
         data->field_16_1 = value;
-		break;
+        break;
     case 14:
         data->field_16_2 = value;
-		break;
+        break;
     case 15:
         data->field_17_0 = value;
-		break;
+        break;
     case 16:
         data->field_17_1 = value;
-		break;
+        break;
     }
 }
 
@@ -1143,7 +1143,7 @@ static void Task_ScrollIndicatorArrowPair(u8 taskId)
     struct ScrollIndicatorPair *data = (void*) gTasks[taskId].data;
     u16 currItem = (*data->scrollOffset);
 
-    if (currItem == data->fullyUpThreshold && currItem != INVALID_U16)
+    if (currItem == data->fullyUpThreshold && currItem != 0xFFFF)
         gSprites[data->topSpriteId].invisible = TRUE;
     else
         gSprites[data->topSpriteId].invisible = FALSE;

@@ -46,12 +46,12 @@ void RtcRestoreInterrupts(void)
 u32 ConvertBcdToBinary(u8 bcd)
 {
     if (bcd > 0x9F)
-        return INVALID_U8;
+        return 0xFF;
 
     if ((bcd & 0xF) <= 9)
         return (10 * ((bcd >> 4) & 0xF)) + (bcd & 0xF);
     else
-        return INVALID_U8;
+        return 0xFF;
 }
 
 bool8 IsLeapYear(u32 year)
@@ -166,17 +166,17 @@ u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 
     year = ConvertBcdToBinary(rtc->year);
 
-    if (year == INVALID_U8)
+    if (year == 0xFF)
         errorFlags |= RTC_ERR_INVALID_YEAR;
 
     month = ConvertBcdToBinary(rtc->month);
 
-    if (month == INVALID_U8 || month == 0 || month > 12)
+    if (month == 0xFF || month == 0 || month > 12)
         errorFlags |= RTC_ERR_INVALID_MONTH;
 
     value = ConvertBcdToBinary(rtc->day);
 
-    if (value == INVALID_U8)
+    if (value == 0xFF)
         errorFlags |= RTC_ERR_INVALID_DAY;
 
     if (month == MONTH_FEB)

@@ -160,7 +160,7 @@ static u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location
 
         if (gDamagedSaveSectors != 0) // skip the damaged sector.
         {
-            retVal = INVALID_U8;
+            retVal = 0xFF;
             gLastWrittenSector = gLastKnownGoodSector;
             gSaveCounter = gLastSaveCounter;
         }
@@ -220,7 +220,7 @@ static u8 TryWriteSector(u8 sector, u8 *data)
     if (ProgramFlashSectorAndVerify(sector, data) != 0) // is damaged?
     {
         SetDamagedSectorBits(ENABLE, sector); // set damaged sector bits.
-        return INVALID_U8;
+        return 0xFF;
     }
     else
     {
@@ -263,14 +263,14 @@ static u8 sub_81529D4(u16 a1, const struct SaveSectionLocation *location)
         gUnknown_03006208++;
         if (gDamagedSaveSectors)
         {
-            retVal = INVALID_U8;
+            retVal = 0xFF;
             gLastWrittenSector = gLastKnownGoodSector;
             gSaveCounter = gLastSaveCounter;
         }
     }
     else
     {
-        retVal = INVALID_U8;
+        retVal = 0xFF;
     }
 
     return retVal;
@@ -284,7 +284,7 @@ static u8 sub_8152A34(u16 a1, const struct SaveSectionLocation *location)
 
     if (gDamagedSaveSectors)
     {
-        retVal = INVALID_U8;
+        retVal = 0xFF;
         gLastWrittenSector = gLastKnownGoodSector;
         gSaveCounter = gLastSaveCounter;
     }
@@ -329,15 +329,15 @@ static u8 ClearSaveData_2(u16 a1, const struct SaveSectionLocation *location)
     {
         if (ProgramFlashByte(sector, i, ((u8 *)gFastSaveSection)[i]))
         {
-            status = INVALID_U8;
+            status = 0xFF;
             break;
         }
     }
 
-    if (status == INVALID_U8)
+    if (status == 0xFF)
     {
         SetDamagedSectorBits(ENABLE, sector);
-        return INVALID_U8;
+        return 0xFF;
     }
     else
     {
@@ -347,15 +347,15 @@ static u8 ClearSaveData_2(u16 a1, const struct SaveSectionLocation *location)
         {
             if (ProgramFlashByte(sector, 0xFF9 + i, ((u8 *)gFastSaveSection)[0xFF9 + i]))
             {
-                status = INVALID_U8;
+                status = 0xFF;
                 break;
             }
         }
 
-        if (status == INVALID_U8)
+        if (status == 0xFF)
         {
             SetDamagedSectorBits(ENABLE, sector);
-            return INVALID_U8;
+            return 0xFF;
         }
         else
         {
@@ -379,7 +379,7 @@ static u8 sav12_xor_get(u16 a1, const struct SaveSectionLocation *location)
         SetDamagedSectorBits(ENABLE, sector);
         gLastWrittenSector = gLastKnownGoodSector;
         gSaveCounter = gLastSaveCounter;
-        return INVALID_U8;
+        return 0xFF;
     }
     else
     {
@@ -402,7 +402,7 @@ static u8 sub_8152CAC(u16 a1, const struct SaveSectionLocation *location)
         SetDamagedSectorBits(ENABLE, sector);
         gLastWrittenSector = gLastKnownGoodSector;
         gSaveCounter = gLastSaveCounter;
-        return INVALID_U8;
+        return 0xFF;
     }
     else
     {
@@ -425,7 +425,7 @@ static u8 sub_8152D44(u16 a1, const struct SaveSectionLocation *location)
         SetDamagedSectorBits(ENABLE, sector);
         gLastWrittenSector = gLastKnownGoodSector;
         gSaveCounter = gLastSaveCounter;
-        return INVALID_U8;
+        return 0xFF;
     }
     else
     {
@@ -440,7 +440,7 @@ static u8 sub_8152DD0(u16 a1, const struct SaveSectionLocation *location)
     gFastSaveSection = &gSaveDataBuffer;
     if (a1 != 0xFFFF)
     {
-        retVal = INVALID_U8;
+        retVal = 0xFF;
     }
     else
     {
@@ -715,8 +715,8 @@ u8 TrySavingData(u8 saveType)
 {
     if (gFlashMemoryPresent != TRUE)
     {
-        gUnknown_03006294 = INVALID_U8;
-        return INVALID_U8;
+        gUnknown_03006294 = 0xFF;
+        return 0xFF;
     }
 
     HandleSavingData(saveType);
@@ -728,8 +728,8 @@ u8 TrySavingData(u8 saveType)
     else
     {
         DoSaveFailedScreen(saveType);
-        gUnknown_03006294 = INVALID_U8;
-        return INVALID_U8;
+        gUnknown_03006294 = 0xFF;
+        return 0xFF;
     }
 }
 
@@ -748,7 +748,7 @@ bool8 sub_81533AC(void) // trade.s save
     u8 retVal = sub_81529D4(SECTOR_SAVE_SLOT_LENGTH, gRamSaveSectionLocations);
     if (gDamagedSaveSectors)
         DoSaveFailedScreen(0);
-    if (retVal == INVALID_U8)
+    if (retVal == 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -808,7 +808,7 @@ u8 Save_LoadGameData(u8 a1)
     if (gFlashMemoryPresent != TRUE)
     {
         gSaveFileStatus = 4;
-        return INVALID_U8;
+        return 0xFF;
     }
 
     UpdateSaveAddresses();
@@ -861,10 +861,10 @@ u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
     u8* savData;
 
     if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
-        return INVALID_U8;
+        return 0xFF;
     ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, sizeof(struct SaveSection));
     if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
-        return INVALID_U8;
+        return 0xFF;
     // copies whole save section except u32 counter
     i = 0;
     size = 0xFFB;
@@ -882,7 +882,7 @@ u32 sub_8153634(u8 sector, u8* src)
     void* savDataBuffer;
 
     if (sector != 30 && sector != 31)
-        return INVALID_U8;
+        return 0xFF;
 
     savDataBuffer = &gSaveDataBuffer;
     *(u32*)(savDataBuffer) = 0xB39D;
@@ -894,7 +894,7 @@ u32 sub_8153634(u8 sector, u8* src)
     for (; i <= size; i++)
         savData[i] = src[i];
     if (ProgramFlashSectorAndVerify(sector, savDataBuffer) != 0)
-        return INVALID_U8;
+        return 0xFF;
     return 1;
 }
 

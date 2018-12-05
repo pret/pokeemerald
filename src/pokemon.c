@@ -2300,7 +2300,7 @@ static const u8 sHoldEffectToType[][2] =
 const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
 {
     {   // B_POSITION_PLAYER_LEFT
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2309,7 +2309,7 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
         .callback = sub_8039BB4,
     },
     {   // B_POSITION_OPPONENT_LEFT
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACA8,
         .anims = NULL,
@@ -2318,7 +2318,7 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
         .callback = oac_poke_opponent,
     },
     {   // B_POSITION_PLAYER_RIGHT
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2327,7 +2327,7 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
         .callback = sub_8039BB4,
     },
     {   // B_POSITION_OPPONENT_RIGHT
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACA8,
         .anims = NULL,
@@ -2340,7 +2340,7 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
 static const struct SpriteTemplate gUnknown_08329DF8[] =
 {
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2349,7 +2349,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2358,7 +2358,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2367,7 +2367,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2376,7 +2376,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2385,7 +2385,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2394,7 +2394,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2403,7 +2403,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .callback = sub_8039BB4,
     },
     {
-        .tileTag = INVALID_U16,
+        .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gUnknown_0831ACB0,
         .anims = NULL,
@@ -2450,20 +2450,20 @@ static const s8 gUnknown_08329ECE[][3] =
 static const u16 sHMMoves[] =
 {
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
-    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, INVALID_U16
+    MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
 };
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
 {
     {SPECIES_NONE,      ITEM_NONE},
     {SPECIES_MAREEP,    ITEM_GANLON_BERRY},
-    {SPECIES_PINECO,	ITEM_APICOT_BERRY},
-    {SPECIES_HOUNDOUR,	ITEM_BIG_MUSHROOM},
-    {SPECIES_TEDDIURSA,	ITEM_PETAYA_BERRY},
-    {SPECIES_AIPOM,		ITEM_BERRY_JUICE},
-    {SPECIES_SHUCKLE,	ITEM_BERRY_JUICE},
-    {SPECIES_STANTLER,	ITEM_PETAYA_BERRY},
-    {SPECIES_SMEARGLE,	ITEM_SALAC_BERRY},
+    {SPECIES_PINECO,    ITEM_APICOT_BERRY},
+    {SPECIES_HOUNDOUR,    ITEM_BIG_MUSHROOM},
+    {SPECIES_TEDDIURSA,    ITEM_PETAYA_BERRY},
+    {SPECIES_AIPOM,        ITEM_BERRY_JUICE},
+    {SPECIES_SHUCKLE,    ITEM_BERRY_JUICE},
+    {SPECIES_STANTLER,    ITEM_PETAYA_BERRY},
+    {SPECIES_SMEARGLE,    ITEM_SALAC_BERRY},
 };
 
 static const struct OamData sOamData_8329F20 =
@@ -2485,8 +2485,8 @@ static const struct OamData sOamData_8329F20 =
 
 static const struct SpriteTemplate gUnknown_08329F28 =
 {
-    .tileTag = INVALID_U16,
-    .paletteTag = INVALID_U16,
+    .tileTag = 0xFFFF,
+    .paletteTag = 0xFFFF,
     .oam = &sOamData_8329F20,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -3286,7 +3286,7 @@ u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
         if (existingMove == move)
             return -2;
     }
-    return INVALID_U16;
+    return 0xFFFF;
 }
 
 u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move)
@@ -3303,7 +3303,7 @@ u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move)
         }
     }
 
-    return INVALID_U16;
+    return 0xFFFF;
 }
 
 void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot)
@@ -3341,7 +3341,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
         move = (gLevelUpLearnsets[species][i] & 0x1FF);
 
-        if (GiveMoveToBoxMon(boxMon, move) == INVALID_U16)
+        if (GiveMoveToBoxMon(boxMon, move) == 0xFFFF)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
 }
@@ -6495,7 +6495,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     {
         u16 moveLevel;
 
-        if (gLevelUpLearnsets[species][i] == INVALID_U16)
+        if (gLevelUpLearnsets[species][i] == 0xFFFF)
             break;
 
         moveLevel = gLevelUpLearnsets[species][i] & 0xFE00;
@@ -6524,7 +6524,7 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     u8 numMoves = 0;
     int i;
 
-    for (i = 0; i < 20 && gLevelUpLearnsets[species][i] != INVALID_U16; i++)
+    for (i = 0; i < 20 && gLevelUpLearnsets[species][i] != 0xFFFF; i++)
          moves[numMoves++] = gLevelUpLearnsets[species][i] & 0x1FF;
 
      return numMoves;
@@ -6549,7 +6549,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     {
         u16 moveLevel;
 
-        if (gLevelUpLearnsets[species][i] == INVALID_U16)
+        if (gLevelUpLearnsets[species][i] == 0xFFFF)
             break;
 
         moveLevel = gLevelUpLearnsets[species][i] & 0xFE00;
@@ -6584,7 +6584,7 @@ u16 SpeciesToPokedexNum(u16 species)
         species = SpeciesToHoennPokedexNum(species);
         if (species <= 202)
             return species;
-        return INVALID_U16;
+        return 0xFFFF;
     }
 }
 
@@ -6747,7 +6747,7 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 bool32 IsHMMove2(u16 move)
 {
     int i = 0;
-    while (sHMMoves[i] != INVALID_U16)
+    while (sHMMoves[i] != 0xFFFF)
     {
         if (sHMMoves[i++] == move)
             return TRUE;

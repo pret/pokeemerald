@@ -54,7 +54,7 @@ void GetWordPhonemes(struct BardSong *song, u16 word)
     for (i = 0; i < 6; i ++)
     {
         sound = &song->sound[i];
-        if (sound->var00 != INVALID_U8)
+        if (sound->var00 != 0xFF)
         {
             song->phonemes[i].length = sound->var01 + gBardSoundLengthTable[sound->var00];
             song->phonemes[i].pitch = CalcWordPitch(word + 30, i);

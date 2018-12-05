@@ -1040,7 +1040,7 @@ bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress)
     }
     else
     {
-        gSpecialVar_Result = INVALID_U8;
+        gSpecialVar_Result = 0xFF;
         DrawMultichoiceMenu(left, top, multichoiceId, ignoreBPress, 0);
         return TRUE;
     }
@@ -1054,7 +1054,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8
     }
     else
     {
-        gSpecialVar_Result = INVALID_U8;
+        gSpecialVar_Result = 0xFF;
         DrawMultichoiceMenu(left, top, multichoiceId, ignoreBPress, defaultChoice);
         return TRUE;
     }
@@ -1201,7 +1201,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
     }
     else
     {
-        gSpecialVar_Result = INVALID_U8;
+        gSpecialVar_Result = 0xFF;
         DisplayYesNoMenu();
         taskId = CreateTask(Task_HandleYesNoInput, 0x50);
         return TRUE;
@@ -1211,7 +1211,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
 // unused
 bool8 IsScriptActive(void)
 {
-    if (gSpecialVar_Result == INVALID_U8)
+    if (gSpecialVar_Result == 0xFF)
         return FALSE;
     else
         return TRUE;
@@ -1261,7 +1261,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPr
         int i;
         u8 newWidth;
 
-        gSpecialVar_Result = INVALID_U8;
+        gSpecialVar_Result = 0xFF;
         width = 0;
 
         for (i = 0; i < gMultichoiceLists[multichoiceId].count; i++)
@@ -1320,7 +1320,7 @@ bool8 ScrSpecial_CreatePCMenu(void)
     }
     else
     {
-        gSpecialVar_Result = INVALID_U8;
+        gSpecialVar_Result = 0xFF;
         CreatePCMenu();
         return TRUE;
     }
@@ -1389,7 +1389,7 @@ bool8 sub_80E2548(void)
     }
     else
     {
-        gSpecialVar_Result = INVALID_U8;
+        gSpecialVar_Result = 0xFF;
         sub_80E2578();
         return TRUE;
     }
@@ -1407,7 +1407,7 @@ static void sub_80E2578(void)
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_03001124); i++)
     {
-        gUnknown_03001124[i] |= INVALID_U8;
+        gUnknown_03001124[i] |= 0xFF;
     }
 
     GetFontAttribute(1, FONTATTR_MAX_LETTER_WIDTH);
@@ -1508,7 +1508,7 @@ static void sub_80E2578(void)
         for (j = 0; j < ARRAY_COUNT(gUnknown_0858BB80); j++)
         {
             u8 test = gUnknown_03001124[j];
-            if (test != INVALID_U8)
+            if (test != 0xFF)
             {
                 pixelWidth = display_text_and_get_width(gUnknown_0858BB80[test], pixelWidth);
             }
@@ -1520,7 +1520,7 @@ static void sub_80E2578(void)
 
         for (temp = 0, i = 0; i < ARRAY_COUNT(gUnknown_0858BB80); i++)
         {
-            if (gUnknown_03001124[i] != INVALID_U8)
+            if (gUnknown_03001124[i] != 0xFF)
             {
                 AddTextPrinterParameterized(windowId, 1, gUnknown_0858BB80[gUnknown_03001124[i]], 8, temp * 16 + 1, TEXT_SPEED_FF, NULL);
                 temp++;
@@ -1575,7 +1575,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     u8 taskId;
     u8 spriteId;
 
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) != INVALID_U8)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) != 0xFF)
     {
         return FALSE;
     }
@@ -1599,7 +1599,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_PokemonPicWindow);
 
-    if (taskId == INVALID_U8)
+    if (taskId == 0xFF)
         return NULL;
     gTasks[taskId].tState++;
     return IsPicboxClosed;
@@ -1607,7 +1607,7 @@ bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void)
 
 static bool8 IsPicboxClosed(void)
 {
-    if (FindTaskIdByFunc(Task_PokemonPicWindow) == INVALID_U8)
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) == 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -1672,7 +1672,7 @@ bool16 sp106_CreateStartMenu(void)
         return FALSE;
     }
 
-    gSpecialVar_Result = INVALID_U8;
+    gSpecialVar_Result = 0xFF;
     CreateStartMenu();
     return TRUE;
 }

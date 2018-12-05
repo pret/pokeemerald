@@ -276,7 +276,7 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
     EFFECT_SUPERPOWER,
     EFFECT_ERUPTION,
     EFFECT_OVERHEAT,
-    INVALID_U16
+    0xFFFF
 };
 
 // code
@@ -463,8 +463,8 @@ static u8 ChooseMoveOrAction_Doubles(void)
     {
         if (i == sBattler_AI || gBattleMons[i].hp == 0)
         {
-            actionOrMoveIndex[i] = INVALID_U8;
-            bestMovePointsForTarget[i] = INVALID_S16    ;
+            actionOrMoveIndex[i] = 0xFF;
+            bestMovePointsForTarget[i] = -1    ;
         }
         else
         {
@@ -530,7 +530,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 // Don't use a move against ally if it has less than 100 points.
                 if (i == (sBattler_AI ^ BIT_FLANK) && bestMovePointsForTarget[i] < 100)
                 {
-                    bestMovePointsForTarget[i] = INVALID_S16;
+                    bestMovePointsForTarget[i] = -1;
                     mostViableMovesScores[0] = mostViableMovesScores[0]; // Needed to match.
                 }
             }
@@ -1003,7 +1003,7 @@ static void BattleAICmd_if_in_bytes(void)
 {
     const u8 *ptr = T1_READ_PTR(gAIScriptPtr + 1);
 
-    while (*ptr != INVALID_U8)
+    while (*ptr != 0xFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
@@ -1019,7 +1019,7 @@ static void BattleAICmd_if_not_in_bytes(void)
 {
     const u8 *ptr = T1_READ_PTR(gAIScriptPtr + 1);
 
-    while (*ptr != INVALID_U8)
+    while (*ptr != 0xFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
@@ -1035,7 +1035,7 @@ static void BattleAICmd_if_in_hwords(void)
 {
     const u16 *ptr = (const u16 *)T1_READ_PTR(gAIScriptPtr + 1);
 
-    while (*ptr != INVALID_U16)
+    while (*ptr != 0xFFFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
@@ -1051,7 +1051,7 @@ static void BattleAICmd_if_not_in_hwords(void)
 {
     const u16 *ptr = (const u16 *)T1_READ_PTR(gAIScriptPtr + 1);
 
-    while (*ptr != INVALID_U16)
+    while (*ptr != 0xFFFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
@@ -1167,14 +1167,14 @@ static void BattleAICmd_get_how_powerful_move_is(void)
     s32 i, checkedMove;
     s32 moveDmgs[4];
 
-    for (i = 0; sDiscouragedPowerfulMoveEffects[i] != INVALID_U16; i++)
+    for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
     {
         if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
             break;
     }
 
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
-        && sDiscouragedPowerfulMoveEffects[i] == INVALID_U16)
+        && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
         *(&gBattleStruct->dynamicMoveType) = 0;
@@ -1184,14 +1184,14 @@ static void BattleAICmd_get_how_powerful_move_is(void)
 
         for (checkedMove = 0; checkedMove < 4; checkedMove++)
         {
-            for (i = 0; sDiscouragedPowerfulMoveEffects[i] != INVALID_U16; i++)
+            for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
             {
                 if (gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
                     break;
             }
 
             if (gBattleMons[sBattler_AI].moves[checkedMove] != MOVE_NONE
-                && sDiscouragedPowerfulMoveEffects[i] == INVALID_U16
+                && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
                 && gBattleMoves[gBattleMons[sBattler_AI].moves[checkedMove]].power > 1)
             {
                 gCurrentMove = gBattleMons[sBattler_AI].moves[checkedMove];

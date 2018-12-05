@@ -63,7 +63,7 @@ static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
 
 static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
-    .uid = INVALID_U16,
+    .uid = 0xFFFF,
     .pst_field_B_5 = 1
 };
 

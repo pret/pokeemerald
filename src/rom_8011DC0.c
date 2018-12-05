@@ -961,7 +961,7 @@ u8 sub_80132D4(struct UnkStruct_Main0 *arg0)
         if (var == 1)
         {
             id = sub_80176E4(&data->field_0->arr[i], data->field_4->arr);
-            if (id != INVALID_U8)
+            if (id != 0xFF)
             {
                 data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
                 data->field_0->arr[i].field_18 = var;
@@ -1382,7 +1382,7 @@ void sub_8013C7C(u8 taskId)
     case 3:
         if (sub_8013E44() == 1)
             PlaySE(SE_PC_LOGIN);
-        if (gTasks[taskId].data[15] == INVALID_U8)
+        if (gTasks[taskId].data[15] == 0xFF)
             data->state = 10;
         break;
     case 10:
@@ -1401,14 +1401,14 @@ void sub_8013C7C(u8 taskId)
 
 bool32 sub_8013D88(u32 arg0, u32 id)
 {
-    if (id == INVALID_U8)
+    if (id == 0xFF)
         return TRUE;
 
     if (id <= ARRAY_COUNT(gUnknown_082F04D8)) // UB: <= may access data outside the array
     {
         const u8 *bytes = gUnknown_082F04D8[id];
 
-        while ((*(bytes) != INVALID_U8))
+        while ((*(bytes) != 0xFF))
         {
             if ((*bytes) == arg0)
                 return TRUE;
@@ -1454,7 +1454,7 @@ u8 sub_8013E44(void)
         if (data->field_0->arr[i].field_1A_0 != 0)
         {
             id = sub_80176E4(&data->field_0->arr[i], data->field_4->arr);
-            if (id != INVALID_U8)
+            if (id != 0xFF)
             {
                 if (data->field_0->arr[i].field_1A_0 == 1)
                 {
@@ -1500,7 +1500,7 @@ u8 sub_8013E44(void)
 
     for (id = 0; id < 4; id++)
     {
-        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 16) != INVALID_U8)
+        if (sub_8017734(data->field_0->arr, &data->field_4->arr[id].unk0, 16) != 0xFF)
             ret = 1;
     }
 
@@ -2178,7 +2178,7 @@ void sub_8014F48(u8 taskId)
             break;
         case 0:
             id = ListMenuHandleInputGetItemId(data->listTaskId);
-            if (gMain.newKeys & A_BUTTON && id != INVALID_S32)
+            if (gMain.newKeys & A_BUTTON && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
@@ -2732,7 +2732,7 @@ void sub_80156E0(u8 taskId)
         break;
     case 6:
         var5 = sub_8017178(&data->textState, &data->field_1B, &data->field_1C, &gUnknown_082F021C, &gUnknown_082F0244);
-        if (var5 != INVALID_S32)
+        if (var5 != -1)
         {
             if (gReceivedRemoteLinkPlayers == 0)
             {

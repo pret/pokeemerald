@@ -588,7 +588,7 @@ void sub_81152DC(u8 taskId)
         break;
     default:
         task->data[9] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
-        if (task->data[9] == INVALID_U8)
+        if (task->data[9] == 0xFF)
         {
             DestroyAnimVisualTask(taskId);
         }

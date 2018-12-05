@@ -64,7 +64,7 @@
     v12 = (u16*)((u32)&sub_82E53F4 & ~1);
     v13 = (u16*)gUnknown_03007898->unk_8;
         
-    for (i = 47; i != INVALID_U16; i--)
+    for (i = 47; i != 0xFFFF; i--)
     {
         *v13 = *v12;
         ++v12;

@@ -2250,7 +2250,7 @@ static bool8 DoHandshake(void)
     u16 minRecv;
 
     playerCount = 0;
-    minRecv = INVALID_U16;
+    minRecv = 0xFFFF;
     if (gLink.handshakeAsMaster == TRUE)
     {
         REG_SIOMLT_SEND = MASTER_HANDSHAKE;
@@ -2274,7 +2274,7 @@ static bool8 DoHandshake(void)
         }
         else
         {
-            if (gLink.tempRecvBuffer[i] != INVALID_U16)
+            if (gLink.tempRecvBuffer[i] != 0xFFFF)
             {
                 playerCount = 0;
             }

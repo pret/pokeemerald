@@ -543,11 +543,11 @@ enum
 
 static const u16 sStatusIconColors[] =
 {
-    RGB(24, 12, 24), // PAL_STATUS_PSN
-    RGB(23, 23, 3), // PAL_STATUS_PAR
-    RGB(20, 20, 17), // PAL_STATUS_SLP
-    RGB(17, 22, 28), // PAL_STATUS_FRZ
-    RGB(28, 14, 10) // PAL_STATUS_BRN
+    [PAL_STATUS_PSN] = RGB(24, 12, 24),
+    [PAL_STATUS_PAR] = RGB(23, 23, 3),
+    [PAL_STATUS_SLP] = RGB(20, 20, 17),
+    [PAL_STATUS_FRZ] = RGB(17, 22, 28),
+    [PAL_STATUS_BRN] = RGB(28, 14, 10),
 };
 
 static const struct WindowTemplate sHealthboxWindowTemplate = {0, 0, 0, 8, 2, 0, 0}; // width = 8, height = 2
@@ -589,17 +589,17 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 
     for (; i > -1; i--)
     {
-        array[i] = INVALID_U8;
+        array[i] = 0xFF;
     }
 
-    if (arrayPtr[3] == INVALID_U8)
+    if (arrayPtr[3] == 0xFF)
         arrayPtr[3] = 0;
 
     if (arg2 == 0)
     {
         for (i = 0, j = 0; i < 4; i++)
         {
-            if (array[j] == INVALID_U8)
+            if (array[j] == 0xFF)
             {
                 arg1[j] &= 0xFC00;
                 arg1[j] |= 0x1E;
@@ -622,7 +622,7 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
     {
         for (i = 0; i < 4; i++)
         {
-            if (array[i] == INVALID_U8)
+            if (array[i] == 0xFF)
             {
                 arg1[i] &= 0xFC00;
                 arg1[i] |= 0x1E;
@@ -647,225 +647,225 @@ NAKED
 static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
 {
     asm(".syntax unified\n\
-        	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x4\n\
-	adds r7, r1, 0\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	mov r10, r2\n\
-	movs r3, 0\n\
-	movs r2, 0\n\
+            push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x4\n\
+    adds r7, r1, 0\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    mov r10, r2\n\
+    movs r3, 0\n\
+    movs r2, 0\n\
 _08072324:\n\
-	lsls r0, r3, 24\n\
-	asrs r0, 24\n\
-	mov r3, sp\n\
-	adds r1, r3, r0\n\
-	strb r2, [r1]\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r3, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0x3\n\
-	ble _08072324\n\
-	movs r3, 0x3\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	mov r9, r0\n\
-	mov r8, sp\n\
+    lsls r0, r3, 24\n\
+    asrs r0, 24\n\
+    mov r3, sp\n\
+    adds r1, r3, r0\n\
+    strb r2, [r1]\n\
+    adds r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x3\n\
+    ble _08072324\n\
+    movs r3, 0x3\n\
+    movs r0, 0x1\n\
+    negs r0, r0\n\
+    mov r9, r0\n\
+    mov r8, sp\n\
 _08072344:\n\
-	lsls r0, r5, 16\n\
-	asrs r6, r0, 16\n\
-	cmp r6, 0\n\
-	ble _08072372\n\
-	lsls r4, r3, 24\n\
-	asrs r4, 24\n\
-	mov r1, sp\n\
-	adds r5, r1, r4\n\
-	adds r0, r6, 0\n\
-	movs r1, 0xA\n\
-	bl __modsi3\n\
-	strb r0, [r5]\n\
-	adds r0, r6, 0\n\
-	movs r1, 0xA\n\
-	bl __divsi3\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	subs r4, 0x1\n\
-	lsls r4, 24\n\
-	lsrs r3, r4, 24\n\
-	b _08072344\n\
+    lsls r0, r5, 16\n\
+    asrs r6, r0, 16\n\
+    cmp r6, 0\n\
+    ble _08072372\n\
+    lsls r4, r3, 24\n\
+    asrs r4, 24\n\
+    mov r1, sp\n\
+    adds r5, r1, r4\n\
+    adds r0, r6, 0\n\
+    movs r1, 0xA\n\
+    bl __modsi3\n\
+    strb r0, [r5]\n\
+    adds r0, r6, 0\n\
+    movs r1, 0xA\n\
+    bl __divsi3\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    subs r4, 0x1\n\
+    lsls r4, 24\n\
+    lsrs r3, r4, 24\n\
+    b _08072344\n\
 _08072372:\n\
-	lsls r1, r3, 24\n\
-	asrs r0, r1, 24\n\
-	cmp r0, r9\n\
-	ble _08072396\n\
-	movs r4, 0xFF\n\
-	movs r3, 0x1\n\
-	negs r3, r3\n\
+    lsls r1, r3, 24\n\
+    asrs r0, r1, 24\n\
+    cmp r0, r9\n\
+    ble _08072396\n\
+    movs r4, 0xFF\n\
+    movs r3, 0x1\n\
+    negs r3, r3\n\
 _08072380:\n\
-	asrs r2, r1, 24\n\
-	mov r5, sp\n\
-	adds r1, r5, r2\n\
-	ldrb r0, [r1]\n\
-	orrs r0, r4\n\
-	strb r0, [r1]\n\
-	subs r2, 0x1\n\
-	lsls r1, r2, 24\n\
-	asrs r0, r1, 24\n\
-	cmp r0, r3\n\
-	bgt _08072380\n\
+    asrs r2, r1, 24\n\
+    mov r5, sp\n\
+    adds r1, r5, r2\n\
+    ldrb r0, [r1]\n\
+    orrs r0, r4\n\
+    strb r0, [r1]\n\
+    subs r2, 0x1\n\
+    lsls r1, r2, 24\n\
+    asrs r0, r1, 24\n\
+    cmp r0, r3\n\
+    bgt _08072380\n\
 _08072396:\n\
-	mov r1, r8\n\
-	ldrb r0, [r1, 0x3]\n\
-	cmp r0, 0xFF\n\
-	bne _080723A2\n\
-	movs r0, 0\n\
-	strb r0, [r1, 0x3]\n\
+    mov r1, r8\n\
+    ldrb r0, [r1, 0x3]\n\
+    cmp r0, 0xFF\n\
+    bne _080723A2\n\
+    movs r0, 0\n\
+    strb r0, [r1, 0x3]\n\
 _080723A2:\n\
-	mov r2, r10\n\
-	cmp r2, 0\n\
-	bne _08072432\n\
-	movs r3, 0\n\
-	movs r1, 0\n\
-	movs r6, 0xFC\n\
-	lsls r6, 8\n\
-	movs r5, 0x1E\n\
-	mov r12, r5\n\
+    mov r2, r10\n\
+    cmp r2, 0\n\
+    bne _08072432\n\
+    movs r3, 0\n\
+    movs r1, 0\n\
+    movs r6, 0xFC\n\
+    lsls r6, 8\n\
+    movs r5, 0x1E\n\
+    mov r12, r5\n\
 _080723B4:\n\
-	lsls r1, 24\n\
-	asrs r2, r1, 24\n\
-	mov r0, sp\n\
-	adds r5, r0, r2\n\
-	ldrb r0, [r5]\n\
-	mov r8, r1\n\
-	cmp r0, 0xFF\n\
-	bne _080723EA\n\
-	lsls r1, r2, 1\n\
-	adds r1, r7\n\
-	ldrh r2, [r1]\n\
-	adds r0, r6, 0\n\
-	ands r0, r2\n\
-	mov r2, r12\n\
-	orrs r0, r2\n\
-	strh r0, [r1]\n\
-	lsls r3, 24\n\
-	asrs r1, r3, 23\n\
-	adds r1, r7\n\
-	adds r1, 0x40\n\
-	ldrh r2, [r1]\n\
-	adds r0, r6, 0\n\
-	ands r0, r2\n\
-	mov r5, r12\n\
-	orrs r0, r5\n\
-	strh r0, [r1]\n\
-	b _0807241A\n\
+    lsls r1, 24\n\
+    asrs r2, r1, 24\n\
+    mov r0, sp\n\
+    adds r5, r0, r2\n\
+    ldrb r0, [r5]\n\
+    mov r8, r1\n\
+    cmp r0, 0xFF\n\
+    bne _080723EA\n\
+    lsls r1, r2, 1\n\
+    adds r1, r7\n\
+    ldrh r2, [r1]\n\
+    adds r0, r6, 0\n\
+    ands r0, r2\n\
+    mov r2, r12\n\
+    orrs r0, r2\n\
+    strh r0, [r1]\n\
+    lsls r3, 24\n\
+    asrs r1, r3, 23\n\
+    adds r1, r7\n\
+    adds r1, 0x40\n\
+    ldrh r2, [r1]\n\
+    adds r0, r6, 0\n\
+    ands r0, r2\n\
+    mov r5, r12\n\
+    orrs r0, r5\n\
+    strh r0, [r1]\n\
+    b _0807241A\n\
 _080723EA:\n\
-	lsls r2, 1\n\
-	adds r2, r7\n\
-	ldrh r0, [r2]\n\
-	adds r1, r6, 0\n\
-	ands r1, r0\n\
-	ldrb r0, [r5]\n\
-	adds r0, 0x14\n\
-	orrs r1, r0\n\
-	strh r1, [r2]\n\
-	lsls r4, r3, 24\n\
-	asrs r3, r4, 24\n\
-	lsls r2, r3, 1\n\
-	adds r2, r7\n\
-	adds r2, 0x40\n\
-	ldrh r0, [r2]\n\
-	adds r1, r6, 0\n\
-	ands r1, r0\n\
-	mov r5, sp\n\
-	adds r0, r5, r3\n\
-	ldrb r0, [r0]\n\
-	adds r0, 0x34\n\
-	orrs r1, r0\n\
-	strh r1, [r2]\n\
-	adds r3, r4, 0\n\
+    lsls r2, 1\n\
+    adds r2, r7\n\
+    ldrh r0, [r2]\n\
+    adds r1, r6, 0\n\
+    ands r1, r0\n\
+    ldrb r0, [r5]\n\
+    adds r0, 0x14\n\
+    orrs r1, r0\n\
+    strh r1, [r2]\n\
+    lsls r4, r3, 24\n\
+    asrs r3, r4, 24\n\
+    lsls r2, r3, 1\n\
+    adds r2, r7\n\
+    adds r2, 0x40\n\
+    ldrh r0, [r2]\n\
+    adds r1, r6, 0\n\
+    ands r1, r0\n\
+    mov r5, sp\n\
+    adds r0, r5, r3\n\
+    ldrb r0, [r0]\n\
+    adds r0, 0x34\n\
+    orrs r1, r0\n\
+    strh r1, [r2]\n\
+    adds r3, r4, 0\n\
 _0807241A:\n\
-	movs r0, 0x80\n\
-	lsls r0, 17\n\
-	add r0, r8\n\
-	lsrs r1, r0, 24\n\
-	movs r2, 0x80\n\
-	lsls r2, 17\n\
-	adds r0, r3, r2\n\
-	lsrs r3, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0x3\n\
-	ble _080723B4\n\
-	b _08072496\n\
+    movs r0, 0x80\n\
+    lsls r0, 17\n\
+    add r0, r8\n\
+    lsrs r1, r0, 24\n\
+    movs r2, 0x80\n\
+    lsls r2, 17\n\
+    adds r0, r3, r2\n\
+    lsrs r3, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x3\n\
+    ble _080723B4\n\
+    b _08072496\n\
 _08072432:\n\
-	movs r3, 0\n\
-	movs r4, 0xFC\n\
-	lsls r4, 8\n\
-	movs r6, 0x1E\n\
+    movs r3, 0\n\
+    movs r4, 0xFC\n\
+    lsls r4, 8\n\
+    movs r6, 0x1E\n\
 _0807243A:\n\
-	lsls r1, r3, 24\n\
-	asrs r2, r1, 24\n\
-	mov r3, sp\n\
-	adds r5, r3, r2\n\
-	ldrb r0, [r5]\n\
-	adds r3, r1, 0\n\
-	cmp r0, 0xFF\n\
-	bne _08072466\n\
-	lsls r1, r2, 1\n\
-	adds r1, r7\n\
-	ldrh r2, [r1]\n\
-	adds r0, r4, 0\n\
-	ands r0, r2\n\
-	orrs r0, r6\n\
-	strh r0, [r1]\n\
-	adds r1, 0x40\n\
-	ldrh r2, [r1]\n\
-	adds r0, r4, 0\n\
-	ands r0, r2\n\
-	orrs r0, r6\n\
-	strh r0, [r1]\n\
-	b _08072488\n\
+    lsls r1, r3, 24\n\
+    asrs r2, r1, 24\n\
+    mov r3, sp\n\
+    adds r5, r3, r2\n\
+    ldrb r0, [r5]\n\
+    adds r3, r1, 0\n\
+    cmp r0, 0xFF\n\
+    bne _08072466\n\
+    lsls r1, r2, 1\n\
+    adds r1, r7\n\
+    ldrh r2, [r1]\n\
+    adds r0, r4, 0\n\
+    ands r0, r2\n\
+    orrs r0, r6\n\
+    strh r0, [r1]\n\
+    adds r1, 0x40\n\
+    ldrh r2, [r1]\n\
+    adds r0, r4, 0\n\
+    ands r0, r2\n\
+    orrs r0, r6\n\
+    strh r0, [r1]\n\
+    b _08072488\n\
 _08072466:\n\
-	lsls r2, 1\n\
-	adds r2, r7\n\
-	ldrh r0, [r2]\n\
-	adds r1, r4, 0\n\
-	ands r1, r0\n\
-	ldrb r0, [r5]\n\
-	adds r0, 0x14\n\
-	orrs r1, r0\n\
-	strh r1, [r2]\n\
-	adds r2, 0x40\n\
-	ldrh r0, [r2]\n\
-	adds r1, r4, 0\n\
-	ands r1, r0\n\
-	ldrb r0, [r5]\n\
-	adds r0, 0x34\n\
-	orrs r1, r0\n\
-	strh r1, [r2]\n\
+    lsls r2, 1\n\
+    adds r2, r7\n\
+    ldrh r0, [r2]\n\
+    adds r1, r4, 0\n\
+    ands r1, r0\n\
+    ldrb r0, [r5]\n\
+    adds r0, 0x14\n\
+    orrs r1, r0\n\
+    strh r1, [r2]\n\
+    adds r2, 0x40\n\
+    ldrh r0, [r2]\n\
+    adds r1, r4, 0\n\
+    ands r1, r0\n\
+    ldrb r0, [r5]\n\
+    adds r0, 0x34\n\
+    orrs r1, r0\n\
+    strh r1, [r2]\n\
 _08072488:\n\
-	movs r5, 0x80\n\
-	lsls r5, 17\n\
-	adds r0, r3, r5\n\
-	lsrs r3, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0x3\n\
-	ble _0807243A\n\
+    movs r5, 0x80\n\
+    lsls r5, 17\n\
+    adds r0, r3, r5\n\
+    lsrs r3, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x3\n\
+    ble _0807243A\n\
 _08072496:\n\
-	add sp, 0x4\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    add sp, 0x4\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
         .syntax divided");
 }
 
@@ -1580,7 +1580,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (i = 0; i < PARTY_SIZE; i++)
             {
-                if (partyInfo[i].hp == INVALID_U16) // empty slot or an egg
+                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
@@ -1599,7 +1599,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (i = 0, var = 5, j = 0; j < PARTY_SIZE; j++)
             {
-                if (partyInfo[j].hp == INVALID_U16) // empty slot or an egg
+                if (partyInfo[j].hp == 0xFFFF) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[var]].data[7] = 1;
@@ -1628,7 +1628,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (var = 5, i = 0; i < PARTY_SIZE; i++)
             {
-                if (partyInfo[i].hp == INVALID_U16) // empty slot or an egg
+                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[var]].data[7] = 1;
@@ -1648,7 +1648,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             for (var = 0, i = 0, j = 0; j < PARTY_SIZE; j++)
             {
-                if (partyInfo[j].hp == INVALID_U16) // empty slot or an egg
+                if (partyInfo[j].hp == 0xFFFF) // empty slot or an egg
                 {
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
@@ -1765,7 +1765,7 @@ static void sub_8073E64(u8 taskId)
     s32 i;
 
     u8 battlerId = gTasks[taskId].tBattler;
-    if (--gTasks[taskId].tData15 == INVALID_S16)
+    if (--gTasks[taskId].tData15 == -1)
     {
         u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
 
@@ -1808,7 +1808,7 @@ static void sub_8073F98(u8 taskId)
     {
         SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].tData15) | ((16 - gTasks[taskId].tData15) << 8));
     }
-    else if (gTasks[taskId].tData15 == INVALID_S16)
+    else if (gTasks[taskId].tData15 == -1)
     {
         u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
 
@@ -2289,7 +2289,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
     if (whichBar == EXP_BAR || (whichBar == HEALTH_BAR && !gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars))
         MoveBattleBarGraphically(battlerId, whichBar);
 
-    if (currentBarValue == INVALID_S32)
+    if (currentBarValue == -1)
         gBattleSpritesDataPtr->battleBars[battlerId].currValue = 0;
 
     return currentBarValue;
@@ -2376,12 +2376,12 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     if (maxValue < scale)
     {
         if (newValue == Q_24_8_TO_INT(*currValue) && (*currValue & 0xFF) == 0)
-            return INVALID_S32;
+            return -1;
     }
     else
     {
         if (newValue == *currValue) // we're done, the bar's value has been updated
-            return INVALID_S32;
+            return -1;
     }
 
     if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
@@ -2403,7 +2403,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
             *currValue -= toAdd;
             ret = Q_24_8_TO_INT(*currValue);
             // try round up
-            if ((*currValue & INVALID_U8) > 0)
+            if ((*currValue & 0xFF) > 0)
                 ret++;
             if (ret <= newValue)
             {

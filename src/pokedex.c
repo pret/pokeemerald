@@ -1271,7 +1271,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->seenCount = 0;
     pokedexView->ownCount = 0;
     for (i = 0; i <= 3; i++)
-        pokedexView->unk61E[i] |= INVALID_U16;
+        pokedexView->unk61E[i] |= 0xFFFF;
     pokedexView->unk628 = 0;
     pokedexView->unk62A = 0;
     pokedexView->unk62C = 0;
@@ -2459,7 +2459,7 @@ u32 sub_80BDACC(u16 num, s16 x, s16 y)
             return spriteId;
         }
     }
-    return INVALID_U16;
+    return 0xFFFF;
 }
 
 static void CreateInterfaceSprites(u8 a)
@@ -2717,8 +2717,8 @@ void sub_80BE4E0(struct Sprite *sprite)
 
         sprite->pos2.y = gSineTable[(u8)sprite->data[5]] * 76 / 256;
         var = 0x10000 / gSineTable[sprite->data[5] + 0x40];
-        if (var > INVALID_U16)
-            var = INVALID_U16;
+        if (var > 0xFFFF)
+            var = 0xFFFF;
         SetOamMatrix(sprite->data[1] + 1, 0x100, 0, 0, var);
         sprite->oam.matrixNum = data1 + 1;
 
@@ -3558,61 +3558,61 @@ void sub_80BFD0C(u8 a, u16 unused)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	movs r0, 0x1\n\
-	bl GetBgTilemapBuffer\n\
-	adds r7, r0, 0\n\
-	movs r1, 0\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    movs r0, 0x1\n\
+    bl GetBgTilemapBuffer\n\
+    adds r7, r0, 0\n\
+    movs r1, 0\n\
 _080BFD22:\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r3, 0x80\n\
-	lsls r3, 7\n\
-	cmp r1, r8\n\
-	bne _080BFD38\n\
-	movs r3, 0x80\n\
-	lsls r3, 6\n\
+    lsls r0, r1, 3\n\
+    subs r0, r1\n\
+    adds r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    movs r3, 0x80\n\
+    lsls r3, 7\n\
+    cmp r1, r8\n\
+    bne _080BFD38\n\
+    movs r3, 0x80\n\
+    lsls r3, 6\n\
 _080BFD38:\n\
-	movs r2, 0\n\
-	adds r6, r1, 0x1\n\
-	ldr r4, =0x00000fff\n\
+    movs r2, 0\n\
+    adds r6, r1, 0x1\n\
+    ldr r4, =0x00000fff\n\
 _080BFD3E:\n\
-	adds r1, r5, r2\n\
-	lsls r1, 1\n\
-	adds r1, r7\n\
-	ldrh r0, [r1]\n\
-	ands r0, r4\n\
-	orrs r0, r3\n\
-	strh r0, [r1]\n\
-	adds r1, 0x40\n\
-	ldrh r0, [r1]\n\
-	ands r0, r4\n\
-	orrs r0, r3\n\
-	strh r0, [r1]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0x6\n\
-	bls _080BFD3E\n\
-	lsls r0, r6, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x3\n\
-	bls _080BFD22\n\
-	movs r0, 0x1\n\
-	bl CopyBgTilemapBufferToVram\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    adds r1, r5, r2\n\
+    lsls r1, 1\n\
+    adds r1, r7\n\
+    ldrh r0, [r1]\n\
+    ands r0, r4\n\
+    orrs r0, r3\n\
+    strh r0, [r1]\n\
+    adds r1, 0x40\n\
+    ldrh r0, [r1]\n\
+    ands r0, r4\n\
+    orrs r0, r3\n\
+    strh r0, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0x6\n\
+    bls _080BFD3E\n\
+    lsls r0, r6, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0x3\n\
+    bls _080BFD22\n\
+    movs r0, 0x1\n\
+    bl CopyBgTilemapBufferToVram\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
     .syntax divided\n");
 }
 #endif
@@ -3648,66 +3648,66 @@ void sub_80BFD7C(u8 a, u16 b)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	movs r0, 0x1\n\
-	bl GetBgTilemapBuffer\n\
-	adds r7, r0, 0\n\
-	movs r1, 0\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r8, r0\n\
+    movs r0, 0x1\n\
+    bl GetBgTilemapBuffer\n\
+    adds r7, r0, 0\n\
+    movs r1, 0\n\
 _080BFD92:\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	cmp r1, r8\n\
-	beq _080BFDA4\n\
-	cmp r1, 0x3\n\
-	bne _080BFDAA\n\
+    lsls r0, r1, 3\n\
+    subs r0, r1\n\
+    adds r0, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    cmp r1, r8\n\
+    beq _080BFDA4\n\
+    cmp r1, 0x3\n\
+    bne _080BFDAA\n\
 _080BFDA4:\n\
-	movs r3, 0x80\n\
-	lsls r3, 6\n\
-	b _080BFDAE\n\
+    movs r3, 0x80\n\
+    lsls r3, 6\n\
+    b _080BFDAE\n\
 _080BFDAA:\n\
-	movs r3, 0x80\n\
-	lsls r3, 7\n\
+    movs r3, 0x80\n\
+    lsls r3, 7\n\
 _080BFDAE:\n\
-	movs r2, 0\n\
-	adds r5, r1, 0x1\n\
-	ldr r4, =0x00000fff\n\
+    movs r2, 0\n\
+    adds r5, r1, 0x1\n\
+    ldr r4, =0x00000fff\n\
 _080BFDB4:\n\
-	adds r1, r6, r2\n\
-	lsls r1, 1\n\
-	adds r1, r7\n\
-	ldrh r0, [r1]\n\
-	ands r0, r4\n\
-	orrs r0, r3\n\
-	strh r0, [r1]\n\
-	adds r1, 0x40\n\
-	ldrh r0, [r1]\n\
-	ands r0, r4\n\
-	orrs r0, r3\n\
-	strh r0, [r1]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0x6\n\
-	bls _080BFDB4\n\
-	lsls r0, r5, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x3\n\
-	bls _080BFD92\n\
-	movs r0, 0x1\n\
-	bl CopyBgTilemapBufferToVram\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    adds r1, r6, r2\n\
+    lsls r1, 1\n\
+    adds r1, r7\n\
+    ldrh r0, [r1]\n\
+    ands r0, r4\n\
+    orrs r0, r3\n\
+    strh r0, [r1]\n\
+    adds r1, 0x40\n\
+    ldrh r0, [r1]\n\
+    ands r0, r4\n\
+    orrs r0, r3\n\
+    strh r0, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0x6\n\
+    bls _080BFDB4\n\
+    lsls r0, r5, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0x3\n\
+    bls _080BFD92\n\
+    movs r0, 0x1\n\
+    bl CopyBgTilemapBufferToVram\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
     .syntax divided\n");
 }
 #endif
@@ -4012,216 +4012,216 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x14\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	mov r10, r1\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	str r2, [sp, 0x10]\n\
-	ldr r5, =0x000186a0\n\
-	muls r0, r5\n\
-	ldr r1, =0x000011b8\n\
-	bl __divsi3\n\
-	adds r7, r0, 0\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	cmp r0, 0x4\n\
-	bls _080C0494\n\
-	adds r7, 0xA\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x14\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r10, r1\n\
+    lsls r2, 24\n\
+    lsrs r2, 24\n\
+    str r2, [sp, 0x10]\n\
+    ldr r5, =0x000186a0\n\
+    muls r0, r5\n\
+    ldr r1, =0x000011b8\n\
+    bl __divsi3\n\
+    adds r7, r0, 0\n\
+    movs r1, 0xA\n\
+    bl __umodsi3\n\
+    cmp r0, 0x4\n\
+    bls _080C0494\n\
+    adds r7, 0xA\n\
 _080C0494:\n\
-	movs r0, 0\n\
-	mov r8, r0\n\
-	mov r4, sp\n\
-	adds r0, r7, 0\n\
-	adds r1, r5, 0\n\
-	bl __udivsi3\n\
-	adds r0, 0xA1\n\
-	strb r0, [r4]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0xA1\n\
-	bne _080C04C0\n\
-	movs r6, 0x1\n\
-	mov r1, sp\n\
-	movs r0, 0x77\n\
-	strb r0, [r1]\n\
-	b _080C04C6\n\
-	.pool\n\
+    movs r0, 0\n\
+    mov r8, r0\n\
+    mov r4, sp\n\
+    adds r0, r7, 0\n\
+    adds r1, r5, 0\n\
+    bl __udivsi3\n\
+    adds r0, 0xA1\n\
+    strb r0, [r4]\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0xA1\n\
+    bne _080C04C0\n\
+    movs r6, 0x1\n\
+    mov r1, sp\n\
+    movs r0, 0x77\n\
+    strb r0, [r1]\n\
+    b _080C04C6\n\
+    .pool\n\
 _080C04C0:\n\
-	movs r1, 0x1\n\
-	mov r8, r1\n\
-	movs r6, 0x1\n\
+    movs r1, 0x1\n\
+    mov r8, r1\n\
+    movs r6, 0x1\n\
 _080C04C6:\n\
-	ldr r1, =0x000186a0\n\
-	adds r0, r7, 0\n\
-	bl __umodsi3\n\
-	adds r7, r0, 0\n\
-	mov r4, sp\n\
-	adds r4, 0x1\n\
-	ldr r1, =0x00002710\n\
-	bl __udivsi3\n\
-	adds r0, 0xA1\n\
-	strb r0, [r4]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0xA1\n\
-	bne _080C0504\n\
-	mov r2, r8\n\
-	cmp r2, 0\n\
-	bne _080C0504\n\
-	adds r1, r6, 0\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	add r1, sp\n\
-	movs r0, 0x77\n\
-	strb r0, [r1]\n\
-	b _080C050E\n\
-	.pool\n\
+    ldr r1, =0x000186a0\n\
+    adds r0, r7, 0\n\
+    bl __umodsi3\n\
+    adds r7, r0, 0\n\
+    mov r4, sp\n\
+    adds r4, 0x1\n\
+    ldr r1, =0x00002710\n\
+    bl __udivsi3\n\
+    adds r0, 0xA1\n\
+    strb r0, [r4]\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0xA1\n\
+    bne _080C0504\n\
+    mov r2, r8\n\
+    cmp r2, 0\n\
+    bne _080C0504\n\
+    adds r1, r6, 0\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    add r1, sp\n\
+    movs r0, 0x77\n\
+    strb r0, [r1]\n\
+    b _080C050E\n\
+    .pool\n\
 _080C0504:\n\
-	movs r3, 0x1\n\
-	mov r8, r3\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
+    movs r3, 0x1\n\
+    mov r8, r3\n\
+    adds r0, r6, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
 _080C050E:\n\
-	ldr r1, =0x00002710\n\
-	adds r0, r7, 0\n\
-	bl __umodsi3\n\
-	adds r7, r0, 0\n\
-	mov r0, sp\n\
-	adds r4, r0, r6\n\
-	movs r1, 0xFA\n\
-	lsls r1, 2\n\
-	adds r0, r7, 0\n\
-	bl __udivsi3\n\
-	adds r0, 0xA1\n\
-	strb r0, [r4]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0xA1\n\
-	bne _080C054C\n\
-	mov r1, r8\n\
-	cmp r1, 0\n\
-	bne _080C054C\n\
-	adds r1, r6, 0\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	add r1, sp\n\
-	movs r0, 0x77\n\
-	strb r0, [r1]\n\
-	b _080C0552\n\
-	.pool\n\
+    ldr r1, =0x00002710\n\
+    adds r0, r7, 0\n\
+    bl __umodsi3\n\
+    adds r7, r0, 0\n\
+    mov r0, sp\n\
+    adds r4, r0, r6\n\
+    movs r1, 0xFA\n\
+    lsls r1, 2\n\
+    adds r0, r7, 0\n\
+    bl __udivsi3\n\
+    adds r0, 0xA1\n\
+    strb r0, [r4]\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0xA1\n\
+    bne _080C054C\n\
+    mov r1, r8\n\
+    cmp r1, 0\n\
+    bne _080C054C\n\
+    adds r1, r6, 0\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    add r1, sp\n\
+    movs r0, 0x77\n\
+    strb r0, [r1]\n\
+    b _080C0552\n\
+    .pool\n\
 _080C054C:\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
+    adds r0, r6, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
 _080C0552:\n\
-	movs r1, 0xFA\n\
-	lsls r1, 2\n\
-	adds r0, r7, 0\n\
-	bl __umodsi3\n\
-	adds r7, r0, 0\n\
-	adds r1, r6, 0\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r5, r6, 0\n\
-	mov r2, sp\n\
-	adds r4, r2, r1\n\
-	adds r0, r7, 0\n\
-	movs r1, 0x64\n\
-	bl __udivsi3\n\
-	adds r0, 0xA1\n\
-	movs r3, 0\n\
-	mov r9, r3\n\
-	strb r0, [r4]\n\
-	adds r0, r7, 0\n\
-	movs r1, 0x64\n\
-	bl __umodsi3\n\
-	adds r7, r0, 0\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r1, r6, 0\n\
-	mov r2, sp\n\
-	adds r0, r2, r5\n\
-	movs r3, 0xAD\n\
-	mov r8, r3\n\
-	mov r2, r8\n\
-	strb r2, [r0]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r5, r6, 0\n\
-	mov r3, sp\n\
-	adds r4, r3, r1\n\
-	adds r0, r7, 0\n\
-	movs r1, 0xA\n\
-	bl __udivsi3\n\
-	adds r0, 0xA1\n\
-	strb r0, [r4]\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r1, r6, 0\n\
-	mov r2, sp\n\
-	adds r0, r2, r5\n\
-	mov r3, r9\n\
-	strb r3, [r0]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r2, r6, 0\n\
-	add r1, sp\n\
-	movs r0, 0xE0\n\
-	strb r0, [r1]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r3, r6, 0\n\
-	mov r0, sp\n\
-	adds r1, r0, r2\n\
-	movs r0, 0xD6\n\
-	strb r0, [r1]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r2, r6, 0\n\
-	mov r0, sp\n\
-	adds r1, r0, r3\n\
-	movs r0, 0xE7\n\
-	strb r0, [r1]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r3, sp\n\
-	adds r1, r3, r2\n\
-	mov r2, r8\n\
-	strb r2, [r1]\n\
-	adds r1, r3, r0\n\
-	movs r0, 0xFF\n\
-	strb r0, [r1]\n\
-	mov r0, sp\n\
-	mov r1, r10\n\
-	ldr r2, [sp, 0x10]\n\
-	bl sub_80BE8DC\n\
-	add sp, 0x14\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    movs r1, 0xFA\n\
+    lsls r1, 2\n\
+    adds r0, r7, 0\n\
+    bl __umodsi3\n\
+    adds r7, r0, 0\n\
+    adds r1, r6, 0\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r5, r6, 0\n\
+    mov r2, sp\n\
+    adds r4, r2, r1\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x64\n\
+    bl __udivsi3\n\
+    adds r0, 0xA1\n\
+    movs r3, 0\n\
+    mov r9, r3\n\
+    strb r0, [r4]\n\
+    adds r0, r7, 0\n\
+    movs r1, 0x64\n\
+    bl __umodsi3\n\
+    adds r7, r0, 0\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r1, r6, 0\n\
+    mov r2, sp\n\
+    adds r0, r2, r5\n\
+    movs r3, 0xAD\n\
+    mov r8, r3\n\
+    mov r2, r8\n\
+    strb r2, [r0]\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r5, r6, 0\n\
+    mov r3, sp\n\
+    adds r4, r3, r1\n\
+    adds r0, r7, 0\n\
+    movs r1, 0xA\n\
+    bl __udivsi3\n\
+    adds r0, 0xA1\n\
+    strb r0, [r4]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r1, r6, 0\n\
+    mov r2, sp\n\
+    adds r0, r2, r5\n\
+    mov r3, r9\n\
+    strb r3, [r0]\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r2, r6, 0\n\
+    add r1, sp\n\
+    movs r0, 0xE0\n\
+    strb r0, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r3, r6, 0\n\
+    mov r0, sp\n\
+    adds r1, r0, r2\n\
+    movs r0, 0xD6\n\
+    strb r0, [r1]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    adds r2, r6, 0\n\
+    mov r0, sp\n\
+    adds r1, r0, r3\n\
+    movs r0, 0xE7\n\
+    strb r0, [r1]\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r3, sp\n\
+    adds r1, r3, r2\n\
+    mov r2, r8\n\
+    strb r2, [r1]\n\
+    adds r1, r3, r0\n\
+    movs r0, 0xFF\n\
+    strb r0, [r1]\n\
+    mov r0, sp\n\
+    mov r1, r10\n\
+    ldr r2, [sp, 0x10]\n\
+    bl sub_80BE8DC\n\
+    add sp, 0x14\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
     .syntax divided\n");
 }
 #endif
@@ -4627,12 +4627,12 @@ u32 sub_80C0E68(u16 a)
 u16 sub_80C0E9C(u16 num, s16 x, s16 y, u16 paletteSlot)
 {
     num = NationalPokedexNumToSpecies(num);
-    return CreateMonPicSprite_HandleDeoxys(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, INVALID_U16);
+    return CreateMonPicSprite_HandleDeoxys(num, 8, sub_80C0E68(num), TRUE, x, y, paletteSlot, 0xFFFF);
 }
 
 u16 sub_80C0EF8(u16 species, s16 x, s16 y, s8 paletteSlot)
 {
-    return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, INVALID_U16);
+    return CreateTrainerPicSprite(species, TRUE, x, y, paletteSlot, 0xFFFF);
 }
 
 int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8 type2)
@@ -4655,7 +4655,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     sPokedexView->pokemonListCount = resultsCount;
 
     // Search by name
-    if (abcGroup != INVALID_U8)
+    if (abcGroup != 0xFF)
     {
         for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
         {
@@ -4674,7 +4674,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by body color
-    if (bodyColor != INVALID_U8)
+    if (bodyColor != 0xFF)
     {
         for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
         {
@@ -4690,15 +4690,15 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by type
-    if (type1 != INVALID_U8 || type2 != INVALID_U8)
+    if (type1 != 0xFF || type2 != 0xFF)
     {
-        if (type1 == INVALID_U8)
+        if (type1 == 0xFF)
         {
             type1 = type2;
-            type2 = INVALID_U8;
+            type2 = 0xFF;
         }
 
-        if (type2 == INVALID_U8)
+        if (type2 == 0xFF)
         {
             for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
             {
@@ -4744,7 +4744,6 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
             sPokedexView->pokedexList[i].dexNum = 0xFFFF;
             sPokedexView->pokedexList[i].seen = FALSE;
             sPokedexView->pokedexList[i].owned = FALSE;
-
         }
     }
 
@@ -4987,7 +4986,7 @@ void sub_80C170C(u8 taskId)
         return;
     }
 
-    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != INVALID_U8)
+    if ((gMain.newKeys & DPAD_LEFT) && r6[gTasks[taskId].data[1]][0] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][0];
@@ -4995,7 +4994,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != INVALID_U8)
+    if ((gMain.newKeys & DPAD_RIGHT) && r6[gTasks[taskId].data[1]][1] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][1];
@@ -5003,7 +5002,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != INVALID_U8)
+    if ((gMain.newKeys & DPAD_UP) && r6[gTasks[taskId].data[1]][2] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][2];
@@ -5011,7 +5010,7 @@ void sub_80C170C(u8 taskId)
         CopyWindowToVram(0, 2);
         CopyBgTilemapBufferToVram(3);
     }
-    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != INVALID_U8)
+    if ((gMain.newKeys & DPAD_DOWN) && r6[gTasks[taskId].data[1]][3] != 0xFF)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].data[1] = r6[gTasks[taskId].data[1]][3];
@@ -5215,54 +5214,54 @@ void sub_80C1D98(u8 a, u8 b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	adds r4, r3, 0\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	mov r8, r1\n\
-	lsls r2, 24\n\
-	lsrs r5, r2, 24\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	movs r0, 0x3\n\
-	bl GetBgTilemapBuffer\n\
-	adds r2, r0, 0\n\
-	movs r3, 0\n\
-	cmp r3, r4\n\
-	bcs _080C1DEC\n\
-	lsls r0, r5, 6\n\
-	adds r7, r0, r2\n\
-	ldr r5, =0x00000fff\n\
-	lsls r2, r6, 12\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    adds r4, r3, 0\n\
+    lsls r0, 24\n\
+    lsrs r6, r0, 24\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r8, r1\n\
+    lsls r2, 24\n\
+    lsrs r5, r2, 24\n\
+    lsls r4, 24\n\
+    lsrs r4, 24\n\
+    movs r0, 0x3\n\
+    bl GetBgTilemapBuffer\n\
+    adds r2, r0, 0\n\
+    movs r3, 0\n\
+    cmp r3, r4\n\
+    bcs _080C1DEC\n\
+    lsls r0, r5, 6\n\
+    adds r7, r0, r2\n\
+    ldr r5, =0x00000fff\n\
+    lsls r2, r6, 12\n\
 _080C1DC8:\n\
-	mov r0, r8\n\
-	adds r1, r0, r3\n\
-	lsls r1, 1\n\
-	adds r1, r7\n\
-	ldrh r0, [r1]\n\
-	ands r0, r5\n\
-	orrs r0, r2\n\
-	strh r0, [r1]\n\
-	adds r1, 0x40\n\
-	ldrh r0, [r1]\n\
-	ands r0, r5\n\
-	orrs r0, r2\n\
-	strh r0, [r1]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	cmp r3, r4\n\
-	bcc _080C1DC8\n\
+    mov r0, r8\n\
+    adds r1, r0, r3\n\
+    lsls r1, 1\n\
+    adds r1, r7\n\
+    ldrh r0, [r1]\n\
+    ands r0, r5\n\
+    orrs r0, r2\n\
+    strh r0, [r1]\n\
+    adds r1, 0x40\n\
+    ldrh r0, [r1]\n\
+    ands r0, r5\n\
+    orrs r0, r2\n\
+    strh r0, [r1]\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r3, r4\n\
+    bcc _080C1DC8\n\
 _080C1DEC:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
     .syntax divided\n");
 }
 #endif
@@ -5475,12 +5474,12 @@ u8 sub_80C2318(u8 taskId, u8 b)
             return gUnknown_0856EFAE[r2];
         case 0:
             if (r2 == 0)
-                return INVALID_U8;
+                return 0xFF;
             else
                 return r2;
         case 1:
             if (r2 == 0)
-                return INVALID_U8;
+                return 0xFF;
             else
                 return r2 - 1;
         case 2:

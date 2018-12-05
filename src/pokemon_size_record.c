@@ -109,7 +109,7 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 
 static u8 CompareMonSize(u16 species, u16 *sizeRecord)
 {
-    if (gSpecialVar_Result == INVALID_U8)
+    if (gSpecialVar_Result == 0xFF)
     {
         return 0;
     }

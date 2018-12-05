@@ -364,7 +364,7 @@ static void sub_81BA040(void)
         } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
         gTrainerBattleOpponent_A = trainerId;
-        while (gFacilityTrainers[gTrainerBattleOpponent_A].monSets[setsCount] != INVALID_U16)
+        while (gFacilityTrainers[gTrainerBattleOpponent_A].monSets[setsCount] != 0xFFFF)
             setsCount++;
         if (setsCount > 8)
             break;

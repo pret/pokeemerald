@@ -202,9 +202,9 @@ static void sub_81A5E94(void)
 
     gUnknown_03001288 = FALSE;
     for (i = 0; i < 6; i++)
-        gSaveBlock2Ptr->frontier.field_E70[i].monId |= INVALID_U16;
+        gSaveBlock2Ptr->frontier.field_E70[i].monId |= 0xFFFF;
     for (i = 0; i < 3; i++)
-        gUnknown_03006298[i] |= INVALID_U16;
+        gUnknown_03006298[i] |= 0xFFFF;
 
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;

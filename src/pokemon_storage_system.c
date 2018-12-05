@@ -134,7 +134,7 @@ s16 GetFirstFreeBoxSpot(u8 boxId)
             return i;
     }
 
-    return INVALID_S16; // all spots are taken
+    return -1; // all spots are taken
 }
 
 u8 CountPartyNonEggMons(void)
@@ -426,7 +426,7 @@ s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx
                 return i;
         }
     }
-    return INVALID_S16;
+    return -1;
 }
 
 void ResetPokemonStorageSystem(void)

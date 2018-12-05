@@ -1530,7 +1530,7 @@ static s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *tab
             return i;
     }
 
-    return INVALID_S32;
+    return -1;
 }
 
 static s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
@@ -1548,7 +1548,7 @@ static s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 tra
         }
     }
 
-    return INVALID_S32;
+    return -1;
 }
 
 static bool32 sub_80B1D94(s32 rematchTableId)
@@ -1640,7 +1640,7 @@ static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table,
 {
     s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
-    if (tableId == INVALID_S32)
+    if (tableId == -1)
         return FALSE;
     if (tableId >= 100)
         return FALSE;
@@ -1654,7 +1654,7 @@ static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 t
 {
     s32 tableId = TrainerIdToRematchTableId(table, trainerId);
 
-    if (tableId == INVALID_S32)
+    if (tableId == -1)
         return FALSE;
     if (tableId >= 100)
         return FALSE;
@@ -1670,7 +1670,7 @@ static u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 
     s32 i;
     s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
-    if (tableId == INVALID_S32)
+    if (tableId == -1)
         return FALSE;
 
     trainerEntry = &table[tableId];
@@ -1691,7 +1691,7 @@ static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *t
     s32 i;
     s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
-    if (tableId == INVALID_S32)
+    if (tableId == -1)
         return FALSE;
 
     trainerEntry = &table[tableId];
@@ -1710,7 +1710,7 @@ static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16
 {
     s32 tableId = TrainerIdToRematchTableId(table, firstBattleTrainerId);
 
-    if (tableId != INVALID_S32)
+    if (tableId != -1)
         gSaveBlock1Ptr->trainerRematches[tableId] = 0;
 }
 
@@ -1724,7 +1724,7 @@ static u32 GetTrainerMatchCallFlag(u32 trainerId)
             return FLAG_MATCH_CALL_REGISTERED + i;
     }
 
-    return INVALID_U16;
+    return 0xFFFF;
 }
 
 static void RegisterTrainerInMatchCall(void)
@@ -1732,7 +1732,7 @@ static void RegisterTrainerInMatchCall(void)
     if (FlagGet(FLAG_HAS_MATCH_CALL))
     {
         u32 matchCallFlagId = GetTrainerMatchCallFlag(gTrainerBattleOpponent_A);
-        if (matchCallFlagId != INVALID_U16)
+        if (matchCallFlagId != 0xFFFF)
             FlagSet(matchCallFlagId);
     }
 }
@@ -1741,7 +1741,7 @@ static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBa
 {
     s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
-    if (tableId == INVALID_S32)
+    if (tableId == -1)
         return FALSE;
     if (!HasTrainerBeenFought(table[tableId].trainerIds[1]))
         return FALSE;

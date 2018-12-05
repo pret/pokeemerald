@@ -388,11 +388,11 @@ void sub_81C4F98(u8 a0, void (*callback)(void))
         gPyramidBagCursorData.callback = callback;
 
     gPyramidBagResources->callback2 = NULL;
-    gPyramidBagResources->unk814 = INVALID_U8;
-    gPyramidBagResources->scrollIndicatorsTaskId = INVALID_U8;
+    gPyramidBagResources->unk814 = 0xFF;
+    gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
 
-    memset(gPyramidBagResources->itemsSpriteIds, INVALID_U8, sizeof(gPyramidBagResources->itemsSpriteIds));
-    memset(gPyramidBagResources->windowIds, INVALID_U8, sizeof(gPyramidBagResources->windowIds));
+    memset(gPyramidBagResources->itemsSpriteIds, 0xFF, sizeof(gPyramidBagResources->itemsSpriteIds));
+    memset(gPyramidBagResources->windowIds, 0xFF, sizeof(gPyramidBagResources->windowIds));
 
     SetMainCallback2(sub_81C504C);
 }
@@ -604,7 +604,7 @@ static void PyramidBagMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
         PlaySE(SE_SELECT);
         sub_81C6F20();
     }
-    if (gPyramidBagResources->unk814 == INVALID_U8)
+    if (gPyramidBagResources->unk814 == 0xFF)
     {
         sub_81C6FF8(gPyramidBagResources->unk815 ^ 1);
         if (itemIndex != LIST_B_PRESSED)
@@ -622,7 +622,7 @@ static void PrintItemQuantity(u8 windowId, s32 itemIndex, u8 y)
     if (itemIndex == LIST_B_PRESSED)
         return;
 
-    if (gPyramidBagResources->unk814 != INVALID_U8)
+    if (gPyramidBagResources->unk814 != 0xFF)
     {
         if (gPyramidBagResources->unk814 == (u8)(itemIndex))
             sub_81C5AB8(y, 1);
@@ -657,16 +657,16 @@ static void PrintItemDescription(s32 listMenuId)
 
 static void AddScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollIndicatorsTaskId == INVALID_U8)
+    if (gPyramidBagResources->scrollIndicatorsTaskId == 0xFF)
         gPyramidBagResources->scrollIndicatorsTaskId = AddScrollIndicatorArrowPairParameterized(2, 172, 12, 148, gPyramidBagResources->listMenuCount - gPyramidBagResources->listMenuMaxShown, 0xB5E, 0xB5E, &gPyramidBagCursorData.scrollPosition);
 }
 
 static void RemoveScrollArrow(void)
 {
-    if (gPyramidBagResources->scrollIndicatorsTaskId != INVALID_U8)
+    if (gPyramidBagResources->scrollIndicatorsTaskId != 0xFF)
     {
         RemoveScrollIndicatorArrowPair(gPyramidBagResources->scrollIndicatorsTaskId);
-        gPyramidBagResources->scrollIndicatorsTaskId = INVALID_U8;
+        gPyramidBagResources->scrollIndicatorsTaskId = 0xFF;
     }
 }
 
@@ -803,7 +803,7 @@ static void sub_81C5A98(u8 listMenuTaskId, u8 arg1)
 
 static void sub_81C5AB8(u8 y, u8 arg1)
 {
-    if (arg1 == INVALID_U8)
+    if (arg1 == 0xFF)
         FillWindowPixelRect(0, 0, 0, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
         PrintOnWindow_Font1(0, gText_SelectorArrow2, 0, y, 0, 0, 0, arg1);
@@ -1323,7 +1323,7 @@ static void PerformItemSwap(u8 taskId)
     else
     {
         MovePyramidBagItemSlotInList(data[1], var);
-        gPyramidBagResources->unk814 = INVALID_U8;
+        gPyramidBagResources->unk814 = 0xFF;
         sub_81C7028(TRUE);
         DestroyListMenuTask(data[0], scrollOffset, selectedRow);
         if (data[1] < var)
@@ -1340,7 +1340,7 @@ static void sub_81C6A14(u8 taskId)
     u16 *scrollOffset = &gPyramidBagCursorData.scrollPosition;
     u16 *selectedRow = &gPyramidBagCursorData.cursorPosition;
 
-    gPyramidBagResources->unk814 = INVALID_U8;
+    gPyramidBagResources->unk814 = 0xFF;
     sub_81C7028(TRUE);
     DestroyListMenuTask(data[0], scrollOffset, selectedRow);
     if (data[1] < *scrollOffset + *selectedRow)
@@ -1427,7 +1427,7 @@ static u8 sub_81C6D08(u8 windowArrayId)
 static u8 sub_81C6D24(u8 windowArrayId)
 {
     u8 *windowId = &gPyramidBagResources->windowIds[windowArrayId];
-    if (*windowId == INVALID_U8)
+    if (*windowId == 0xFF)
     {
         *windowId = AddWindow(&gUnknown_0861F350[windowArrayId]);
         SetWindowBorderStyle(*windowId, FALSE, 1, 0xE);
@@ -1439,13 +1439,13 @@ static u8 sub_81C6D24(u8 windowArrayId)
 static void sub_81C6D6C(u8 windowArrayId)
 {
     u8 *windowId = &gPyramidBagResources->windowIds[windowArrayId];
-    if (*windowId != INVALID_U8)
+    if (*windowId != 0xFF)
     {
         sub_8198070(*windowId, FALSE);
         ClearWindowTilemap(*windowId);
         RemoveWindow(*windowId);
         schedule_bg_copy_tilemap_to_vram(1);
-        *windowId = INVALID_U8;
+        *windowId = 0xFF;
     }
 }
 
@@ -1473,13 +1473,13 @@ static void sub_81C6E1C(void)
 static void sub_81C6E38(u8 itemSpriteArrayId)
 {
     u8 *spriteId = &gPyramidBagResources->itemsSpriteIds[itemSpriteArrayId];
-    if (*spriteId != INVALID_U8)
+    if (*spriteId != 0xFF)
     {
         FreeSpriteTilesByTag(ITEM_IMAGE_TAG + itemSpriteArrayId);
         FreeSpritePaletteByTag(ITEM_IMAGE_TAG + itemSpriteArrayId);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
-        *spriteId = INVALID_U8;
+        *spriteId = 0xFF;
     }
 }
 
@@ -1524,7 +1524,7 @@ static void ShowItemImage(u16 itemId, u8 itemSpriteArrayId)
 {
     u8 itemSpriteId;
     u8 *spriteId = &gPyramidBagResources->itemsSpriteIds[itemSpriteArrayId + 1];
-    if (*spriteId == INVALID_U8)
+    if (*spriteId == 0xFF)
     {
         FreeSpriteTilesByTag(ITEM_IMAGE_TAG + 1 + itemSpriteArrayId);
         FreeSpritePaletteByTag(ITEM_IMAGE_TAG + 1 + itemSpriteArrayId);

@@ -22,10 +22,10 @@ void ScanlineEffect_Stop(void)
 {
     gScanlineEffect.state = 0;
     DmaStop(0);
-    if (gScanlineEffect.waveTaskId != INVALID_U8)
+    if (gScanlineEffect.waveTaskId != 0xFF)
     {
         DestroyTask(gScanlineEffect.waveTaskId);
-        gScanlineEffect.waveTaskId = INVALID_U8;
+        gScanlineEffect.waveTaskId = 0xFF;
     }
 }
 
@@ -40,7 +40,7 @@ void ScanlineEffect_Clear(void)
     gScanlineEffect.state = 0;
     gScanlineEffect.unused16 = 0;
     gScanlineEffect.unused17 = 0;
-    gScanlineEffect.waveTaskId = INVALID_U8;
+    gScanlineEffect.waveTaskId = 0xFF;
 }
 
 void ScanlineEffect_SetParams(struct ScanlineEffectParams params)
@@ -132,7 +132,7 @@ static void TaskFunc_UpdateWavePerFrame(u8 taskId)
     if (sShouldStopWaveTask)
     {
         DestroyTask(taskId);
-        gScanlineEffect.waveTaskId = INVALID_U8;
+        gScanlineEffect.waveTaskId = 0xFF;
     }
     else
     {

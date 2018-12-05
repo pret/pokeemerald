@@ -296,15 +296,51 @@ static const u8 sUnusedData[] =
 
 const struct UCoords32 gDirectionToVectors[] =
 {
-    { 0,  0}, // DIR_NONE
-    { 0,  1}, // DIR_SOUTH
-    { 0, -1}, // DIR_NORTH
-    {-1,  0}, // DIR_WEST
-    { 1,  0}, // DIR_EAST
-    {-1,  1}, // DIR_SOUTHWEST
-    { 1,  1}, // DIR_SOUTHEAST
-    {-1, -1}, // DIR_NORTHWEST
-    { 1, -1}, // DIR_NORTHEAST
+    [DIR_NONE] =
+    {
+        .x =  0,
+        .y =  0,
+    },
+    [DIR_SOUTH] =
+    {
+        .x =  0,
+        .y =  1,
+    },
+    [DIR_NORTH] =
+    {
+        .x =  0,
+        .y = -1,
+    },
+    [DIR_WEST] =
+    {
+        .x = -1,
+        .y =  0,
+    },
+    [DIR_EAST] =
+    {
+        .x =  1,
+        .y =  0,
+    },
+    [DIR_SOUTHWEST] =
+    {
+        .x = -1,
+        .y =  1,
+    },
+    [DIR_SOUTHEAST] =
+    {
+        .x =  1,
+        .y =  1,
+    },
+    [DIR_NORTHWEST] =
+    {
+        .x = -1,
+        .y = -1,
+    },
+    [DIR_NORTHEAST] =
+    {
+        .x =  1,
+        .y = -1,
+    },
 };
 
 static const struct BgTemplate gUnknown_08339DAC[] =
@@ -1110,7 +1146,7 @@ static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
 u16 GetLocationMusic(struct WarpData *warp)
 {
     if (NoMusicInSotopolisWithLegendaries(warp) == TRUE)
-        return INVALID_U16;
+        return 0xFFFF;
     else if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
         return MUS_OOAME;
     else if (IsInflitratedSpaceCenter(warp) == TRUE)
@@ -1171,7 +1207,7 @@ void Overworld_PlaySpecialMapMusic(void)
 {
     u16 music = GetCurrLocationDefaultMusic();
 
-    if (music != MUS_OOAME && music != INVALID_U16)
+    if (music != MUS_OOAME && music != 0xFFFF)
     {
         if (gSaveBlock1Ptr->savedMusic)
             music = gSaveBlock1Ptr->savedMusic;
@@ -1201,7 +1237,7 @@ static void sub_8085810(void)
     {
         u16 newMusic = GetWarpDestinationMusic();
         u16 currentMusic = GetCurrentMapMusic();
-        if (newMusic != MUS_OOAME && newMusic != INVALID_U16)
+        if (newMusic != MUS_OOAME && newMusic != 0xFFFF)
         {
             if (currentMusic == MUS_DEEPDEEP || currentMusic == MUS_NAMINORI)
                 return;

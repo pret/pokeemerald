@@ -19,7 +19,7 @@ void ResetTasks(void)
         gTasks[i].func = TaskDummy;
         gTasks[i].prev = i;
         gTasks[i].next = i + 1;
-        gTasks[i].priority = INVALID_S8;
+        gTasks[i].priority = -1;
         memset(gTasks[i].data, 0, sizeof(gTasks[i].data));
     }
 
@@ -186,7 +186,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return INVALID_U8;
+    return 0xFF;
 }
 
 u8 GetTaskCount(void)

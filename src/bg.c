@@ -87,37 +87,37 @@ void SetBgControlAttributes(u8 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenS
 {
     if (IsInvalidBg(bg) == FALSE)
     {
-        if (charBaseIndex != INVALID_U8)
+        if (charBaseIndex != 0xFF)
         {
             sGpuBgConfigs.configs[bg].charBaseIndex = charBaseIndex & 0x3;
         }
 
-        if (mapBaseIndex != INVALID_U8)
+        if (mapBaseIndex != 0xFF)
         {
             sGpuBgConfigs.configs[bg].mapBaseIndex = mapBaseIndex & 0x1F;
         }
 
-        if (screenSize != INVALID_U8)
+        if (screenSize != 0xFF)
         {
             sGpuBgConfigs.configs[bg].screenSize = screenSize & 0x3;
         }
 
-        if (paletteMode != INVALID_U8)
+        if (paletteMode != 0xFF)
         {
             sGpuBgConfigs.configs[bg].paletteMode = paletteMode;
         }
 
-        if (priority != INVALID_U8)
+        if (priority != 0xFF)
         {
             sGpuBgConfigs.configs[bg].priority = priority & 0x3;
         }
 
-        if (mosaic != INVALID_U8)
+        if (mosaic != 0xFF)
         {
             sGpuBgConfigs.configs[bg].mosaic = mosaic & 0x1;
         }
 
-        if (wraparound != INVALID_U8)
+        if (wraparound != 0xFF)
         {
             sGpuBgConfigs.configs[bg].wraparound = wraparound;
         }
@@ -154,7 +154,7 @@ u16 GetBgControlAttribute(u8 bg, u8 attributeId)
         }
     }
 
-    return INVALID_U8;
+    return 0xFF;
 }
 
 u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
@@ -379,7 +379,7 @@ u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset)
 
     cursor = LoadBgVram(bg, src, size, tileOffset, DISPCNT_MODE_1);
 
-    if (cursor == INVALID_U8)
+    if (cursor == 0xFF)
     {
         return -1;
     }
@@ -400,7 +400,7 @@ u16 LoadBgTilemap(u8 bg, const void *src, u16 size, u16 destOffset)
 
     cursor = LoadBgVram(bg, src, size, destOffset * 2, DISPCNT_MODE_2);
 
-    if (cursor == INVALID_U8)
+    if (cursor == 0xFF)
     {
         return -1;
     }
@@ -480,25 +480,25 @@ void SetBgAttribute(u8 bg, u8 attributeId, u8 value)
     switch (attributeId)
     {
     case 1:
-        SetBgControlAttributes(bg, value, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8);
+        SetBgControlAttributes(bg, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
         break;
     case 2:
-        SetBgControlAttributes(bg, INVALID_U8, value, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8);
+        SetBgControlAttributes(bg, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
         break;
     case 3:
-        SetBgControlAttributes(bg, INVALID_U8, INVALID_U8, value, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8);
+        SetBgControlAttributes(bg, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF);
         break;
     case 4:
-        SetBgControlAttributes(bg, INVALID_U8, INVALID_U8, INVALID_U8, value, INVALID_U8, INVALID_U8, INVALID_U8);
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF);
         break;
     case 7:
-        SetBgControlAttributes(bg, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, value, INVALID_U8, INVALID_U8);
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF);
         break;
     case 5:
-        SetBgControlAttributes(bg, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, value, INVALID_U8);
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF);
         break;
     case 6:
-        SetBgControlAttributes(bg, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, INVALID_U8, value);
+        SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value);
         break;
     }
 }
@@ -1284,7 +1284,7 @@ u32 GetBgType(u8 bg)
         break;
     }
 
-    return INVALID_U16;
+    return 0xFFFF;
 }
 
 bool32 IsInvalidBg32(u8 bg)

@@ -25,14 +25,6 @@
 #define INCBIN_S32 {0}
 #endif // IDE support
 
-// Invalid / Out of Bound Placeholder values
-#define INVALID_U8 0xFF
-#define INVALID_U16 0xFFFF
-#define INVALID_U32 0xFFFFFFFF
-#define INVALID_S8 -1
-#define INVALID_S16 -1
-#define INVALID_S32 -1
-
 #define ARRAY_COUNT(array) (size_t)(sizeof(array) / sizeof((array)[0]))
 
 #define SWAP(a, b, temp)    \

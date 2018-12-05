@@ -161,7 +161,7 @@ u8 AddCustomItemIconSprite(struct SpriteTemplate *customSpriteTemplate, u16 tile
 
 const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
 {
-    if (itemId == INVALID_U16)
+    if (itemId == 0xFFFF)
         itemId = ITEM_FIELD_ARROW;
     else if (itemId >= ITEMS_COUNT)
         itemId = 0;

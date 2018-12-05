@@ -1877,7 +1877,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     if (func == NULL)
         return 0;
 
-    if (letterSpacing == INVALID_S16)
+    if (letterSpacing == -1)
         localLetterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     else
         localLetterSpacing = letterSpacing;
@@ -1953,7 +1953,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 func = GetFontWidthFunc(*++str);
                 if (func == NULL)
                     return 0;
-                if (letterSpacing == INVALID_S16)
+                if (letterSpacing == -1)
                     localLetterSpacing = GetFontAttribute(*str, FONTATTR_LETTER_SPACING);
                 break;
             case 0x11:

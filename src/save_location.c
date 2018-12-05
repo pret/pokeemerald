@@ -12,7 +12,7 @@ static bool32 IsCurMapInLocationList(const u16 *list)
     s32 i;
     u16 locSum = (gSaveBlock1Ptr->location.mapGroup << 8) + (gSaveBlock1Ptr->location.mapNum);
 
-    for (i = 0; list[i] != INVALID_U16; i++)
+    for (i = 0; list[i] != 0xFFFF; i++)
     {
         if (list[i] == locSum)
             return TRUE;
@@ -61,7 +61,7 @@ static const u16 sSaveLocationPokeCenterList[] =
     MAP_TRADE_CENTER,
     MAP_RECORD_CORNER,
     MAP_DOUBLE_BATTLE_COLOSSEUM,
-    INVALID_U16,
+    0xFFFF,
 };
 
 static bool32 IsCurMapPokeCenter(void)
@@ -72,7 +72,7 @@ static bool32 IsCurMapPokeCenter(void)
 static const u16 sSaveLocationReloadLocList[] = // There's only 1 location, and it's presumed its for the save reload feature for battle tower.
 {
     MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY,
-    INVALID_U16,
+    0xFFFF,
 };
 
 static bool32 IsCurMapReloadLocation(void)
@@ -83,7 +83,7 @@ static bool32 IsCurMapReloadLocation(void)
 // Nulled out list. Unknown what this would have been.
 static const u16 sUnknown_0861440E[] =
 {
-    INVALID_U16,
+    0xFFFF,
 };
 
 static bool32 sub_81AFCEC(void)

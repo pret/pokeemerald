@@ -1386,54 +1386,54 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 
 static void (* const sScriptCmdTable[])(void) =
 {
-	ScriptCmd_loadspritegfx,
-	ScriptCmd_unloadspritegfx,
-	ScriptCmd_createsprite,
-	ScriptCmd_createvisualtask,
-	ScriptCmd_delay,
-	ScriptCmd_waitforvisualfinish,
-	ScriptCmd_hang1,
-	ScriptCmd_hang2,
-	ScriptCmd_end,
-	ScriptCmd_playse,
-	ScriptCmd_monbg,
-	ScriptCmd_clearmonbg,
-	ScriptCmd_setalpha,
-	ScriptCmd_blendoff,
-	ScriptCmd_call,
-	ScriptCmd_return,
-	ScriptCmd_setarg,
-	ScriptCmd_choosetwoturnanim,
-	ScriptCmd_jumpifmoveturn,
-	ScriptCmd_goto,
-	ScriptCmd_fadetobg,
-	ScriptCmd_restorebg,
-	ScriptCmd_waitbgfadeout,
-	ScriptCmd_waitbgfadein,
-	ScriptCmd_changebg,
-	ScriptCmd_playsewithpan,
-	ScriptCmd_setpan,
-	ScriptCmd_panse_1B,
-	ScriptCmd_loopsewithpan,
-	ScriptCmd_waitplaysewithpan,
-	ScriptCmd_setbldcnt,
-	ScriptCmd_createsoundtask,
-	ScriptCmd_waitsound,
-	ScriptCmd_jumpargeq,
-	ScriptCmd_monbg_22,
-	ScriptCmd_clearmonbg_23,
-	ScriptCmd_jumpifcontest,
-	ScriptCmd_fadetobgfromset,
-	ScriptCmd_panse_26,
-	ScriptCmd_panse_27,
-	ScriptCmd_monbgprio_28,
-	ScriptCmd_monbgprio_29,
-	ScriptCmd_monbgprio_2A,
-	ScriptCmd_invisible,
-	ScriptCmd_visible,
-	ScriptCmd_doublebattle_2D,
-	ScriptCmd_doublebattle_2E,
-	ScriptCmd_stopsound
+    ScriptCmd_loadspritegfx,
+    ScriptCmd_unloadspritegfx,
+    ScriptCmd_createsprite,
+    ScriptCmd_createvisualtask,
+    ScriptCmd_delay,
+    ScriptCmd_waitforvisualfinish,
+    ScriptCmd_hang1,
+    ScriptCmd_hang2,
+    ScriptCmd_end,
+    ScriptCmd_playse,
+    ScriptCmd_monbg,
+    ScriptCmd_clearmonbg,
+    ScriptCmd_setalpha,
+    ScriptCmd_blendoff,
+    ScriptCmd_call,
+    ScriptCmd_return,
+    ScriptCmd_setarg,
+    ScriptCmd_choosetwoturnanim,
+    ScriptCmd_jumpifmoveturn,
+    ScriptCmd_goto,
+    ScriptCmd_fadetobg,
+    ScriptCmd_restorebg,
+    ScriptCmd_waitbgfadeout,
+    ScriptCmd_waitbgfadein,
+    ScriptCmd_changebg,
+    ScriptCmd_playsewithpan,
+    ScriptCmd_setpan,
+    ScriptCmd_panse_1B,
+    ScriptCmd_loopsewithpan,
+    ScriptCmd_waitplaysewithpan,
+    ScriptCmd_setbldcnt,
+    ScriptCmd_createsoundtask,
+    ScriptCmd_waitsound,
+    ScriptCmd_jumpargeq,
+    ScriptCmd_monbg_22,
+    ScriptCmd_clearmonbg_23,
+    ScriptCmd_jumpifcontest,
+    ScriptCmd_fadetobgfromset,
+    ScriptCmd_panse_26,
+    ScriptCmd_panse_27,
+    ScriptCmd_monbgprio_28,
+    ScriptCmd_monbgprio_29,
+    ScriptCmd_monbgprio_2A,
+    ScriptCmd_invisible,
+    ScriptCmd_visible,
+    ScriptCmd_doublebattle_2D,
+    ScriptCmd_doublebattle_2E,
+    ScriptCmd_stopsound
 };
 
 // code
@@ -1452,14 +1452,14 @@ void ClearBattleAnimationVars(void)
 
     // Clear index array.
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
-        sAnimSpriteIndexArray[i] |= INVALID_U16;
+        sAnimSpriteIndexArray[i] |= 0xFFFF;
 
     // Clear anim args.
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
-    sMonAnimTaskIdArray[0] = INVALID_U8;
-    sMonAnimTaskIdArray[1] = INVALID_U8;
+    sMonAnimTaskIdArray[0] = 0xFF;
+    sMonAnimTaskIdArray[1] = 0xFF;
     gAnimMoveTurn = 0;
     sAnimBackgroundFadeState = 0;
     sAnimMoveIndex = 0;
@@ -1505,19 +1505,19 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
-    sMonAnimTaskIdArray[0] = INVALID_U8;
-    sMonAnimTaskIdArray[1] = INVALID_U8;
+    sMonAnimTaskIdArray[0] = 0xFF;
+    sMonAnimTaskIdArray[1] = 0xFF;
     sBattleAnimScriptPtr = animsTable[tableId];
     gAnimScriptActive = TRUE;
     gAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
-        sAnimSpriteIndexArray[i] |= INVALID_U16;
+        sAnimSpriteIndexArray[i] |= 0xFFFF;
 
     if (isMoveAnim)
     {
-        for (i = 0; gMovesWithQuietBGM[i] != INVALID_U16; i++)
+        for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
         {
             if (tableId == gMovesWithQuietBGM[i])
             {
@@ -1558,7 +1558,7 @@ static void AddSpriteIndex(u16 index)
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
     {
-        if (sAnimSpriteIndexArray[i] == INVALID_U16)
+        if (sAnimSpriteIndexArray[i] == 0xFFFF)
         {
             sAnimSpriteIndexArray[i] = index;
             return;
@@ -1574,7 +1574,7 @@ static void ClearSpriteIndex(u16 index)
     {
         if (sAnimSpriteIndexArray[i] == index)
         {
-            sAnimSpriteIndexArray[i] |= INVALID_U16;
+            sAnimSpriteIndexArray[i] |= 0xFFFF;
             return;
         }
     }
@@ -1712,7 +1712,7 @@ static void ScriptCmd_delay(void)
     sBattleAnimScriptPtr++;
     gAnimFramesToWait = sBattleAnimScriptPtr[0];
     if (gAnimFramesToWait == 0)
-        gAnimFramesToWait = INVALID_S8;
+        gAnimFramesToWait = -1;
     sBattleAnimScriptPtr++;
     gAnimScriptCallback = WaitAnimFrameCount;
 }
@@ -1746,7 +1746,7 @@ static void ScriptCmd_end(void)
 
     // Keep waiting as long as there are animations to be done.
     if (gAnimVisualTaskCount != 0 || gAnimSoundTaskCount != 0
-     || sMonAnimTaskIdArray[0] != INVALID_U8 || sMonAnimTaskIdArray[1] != INVALID_U8)
+     || sMonAnimTaskIdArray[0] != 0xFF || sMonAnimTaskIdArray[1] != 0xFF)
     {
         sSoundAnimFramesToWait = 0;
         gAnimFramesToWait = 1;
@@ -1773,11 +1773,11 @@ static void ScriptCmd_end(void)
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
     {
-        if (sAnimSpriteIndexArray[i] != INVALID_U16)
+        if (sAnimSpriteIndexArray[i] != 0xFFFF)
         {
             FreeSpriteTilesByTag(gBattleAnimPicTable[sAnimSpriteIndexArray[i]].tag);
             FreeSpritePaletteByTag(gBattleAnimPicTable[sAnimSpriteIndexArray[i]].tag);
-            sAnimSpriteIndexArray[i] |= INVALID_U16; // set terminator.
+            sAnimSpriteIndexArray[i] |= 0xFFFF; // set terminator.
         }
     }
 
@@ -2122,9 +2122,9 @@ static void ScriptCmd_clearmonbg(void)
     else
         battlerId = gBattleAnimTarget;
 
-    if (sMonAnimTaskIdArray[0] != INVALID_U8)
+    if (sMonAnimTaskIdArray[0] != 0xFF)
         gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
-    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != INVALID_U8)
+    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != 0xFF)
         gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = FALSE;
     else
         animBattlerId = 0;
@@ -2148,17 +2148,17 @@ static void sub_80A4980(u8 taskId)
         else
             to_BG2 = TRUE;
 
-        if (sMonAnimTaskIdArray[0] != INVALID_U8)
+        if (sMonAnimTaskIdArray[0] != 0xFF)
         {
             sub_80A477C(to_BG2);
             DestroyTask(sMonAnimTaskIdArray[0]);
-            sMonAnimTaskIdArray[0] = INVALID_U8;
+            sMonAnimTaskIdArray[0] = 0xFF;
         }
         if (gTasks[taskId].data[0] > 1)
         {
             sub_80A477C(to_BG2 ^ 1);
             DestroyTask(sMonAnimTaskIdArray[1]);
-            sMonAnimTaskIdArray[1] = INVALID_U8;
+            sMonAnimTaskIdArray[1] = 0xFF;
         }
         DestroyTask(taskId);
     }
@@ -2421,7 +2421,7 @@ static void Task_FadeToBg(u8 taskId)
     {
         s16 bgId = gTasks[taskId].tBackgroundId;
 
-        if (bgId == INVALID_S16)
+        if (bgId == -1)
             LoadDefaultBg();
         else
             LoadMoveBg(bgId);
@@ -2477,7 +2477,7 @@ static void ScriptCmd_restorebg(void)
 
     sBattleAnimScriptPtr++;
     taskId = CreateTask(Task_FadeToBg, 5);
-    gTasks[taskId].tBackgroundId = INVALID_S16;
+    gTasks[taskId].tBackgroundId = -1;
     sAnimBackgroundFadeState = 1;
 }
 
@@ -3001,7 +3001,7 @@ static void ScriptCmd_invisible(void)
     u8 spriteId;
 
     spriteId = GetAnimBattlerSpriteId(sBattleAnimScriptPtr[1]);
-    if (spriteId != INVALID_U8)
+    if (spriteId != 0xFF)
         gSprites[spriteId].invisible = TRUE;
 
     sBattleAnimScriptPtr += 2;
@@ -3012,7 +3012,7 @@ static void ScriptCmd_visible(void)
     u8 spriteId;
 
     spriteId = GetAnimBattlerSpriteId(sBattleAnimScriptPtr[1]);
-    if (spriteId != INVALID_U8)
+    if (spriteId != 0xFF)
         gSprites[spriteId].invisible = FALSE;
 
     sBattleAnimScriptPtr += 2;
@@ -3039,7 +3039,7 @@ static void ScriptCmd_doublebattle_2D(void)
             r4 = sub_80A8364(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
-        if (spriteId != INVALID_U8)
+        if (spriteId != 0xFF)
         {
             gSprites[spriteId].invisible = FALSE;
             if (r4 == 2)
@@ -3075,7 +3075,7 @@ static void ScriptCmd_doublebattle_2E(void)
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
 
-        if (spriteId != INVALID_U8 && r4 == 2)
+        if (spriteId != 0xFF && r4 == 2)
             gSprites[spriteId].oam.priority = 2;
     }
 }

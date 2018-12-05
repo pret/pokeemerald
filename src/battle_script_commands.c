@@ -677,45 +677,45 @@ static const u32 sStatusFlagsForMoveEffects[] =
 
 static const u8* const sMoveEffectBS_Ptrs[] =
 {
-    BattleScript_MoveEffectSleep,	    //  0
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SLEEP
-    BattleScript_MoveEffectPoison,		//	MOVE_EFFECT_POISON
-    BattleScript_MoveEffectBurn,		//	MOVE_EFFECT_BURN
-    BattleScript_MoveEffectFreeze,		//	MOVE_EFFECT_FREEZE
-    BattleScript_MoveEffectParalysis,   //	MOVE_EFFECT_PARALYSIS
-    BattleScript_MoveEffectToxic,		//	MOVE_EFFECT_TOXIC
-    BattleScript_MoveEffectConfusion,	//	MOVE_EFFECT_CONFUSION
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_FLINCH
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_TRI_ATTACK
-    BattleScript_MoveEffectUproar,		//	MOVE_EFFECT_UPROAR
-    BattleScript_MoveEffectPayDay,		//	MOVE_EFFECT_PAYDAY
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_CHARGING
-    BattleScript_MoveEffectWrap,		//	MOVE_EFFECT_WRAP
-    BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_25
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_DEF_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SPD_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_ATK_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_DEF_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ACC_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_EVS_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_DEF_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SPD_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_ATK_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_DEF_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ACC_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_EVS_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RECHARGE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RAGE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_STEAL_ITEM
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_PREVENT_ESCAPE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_NIGHTMARE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ALL_STATS_UP
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RAPIDSPIN
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_REMOVE_PARALYSIS
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_DEF_DOWN
-    BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_33
+    BattleScript_MoveEffectSleep,        //  0
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SLEEP
+    BattleScript_MoveEffectPoison,        //    MOVE_EFFECT_POISON
+    BattleScript_MoveEffectBurn,        //    MOVE_EFFECT_BURN
+    BattleScript_MoveEffectFreeze,        //    MOVE_EFFECT_FREEZE
+    BattleScript_MoveEffectParalysis,   //    MOVE_EFFECT_PARALYSIS
+    BattleScript_MoveEffectToxic,        //    MOVE_EFFECT_TOXIC
+    BattleScript_MoveEffectConfusion,    //    MOVE_EFFECT_CONFUSION
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_FLINCH
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_TRI_ATTACK
+    BattleScript_MoveEffectUproar,        //    MOVE_EFFECT_UPROAR
+    BattleScript_MoveEffectPayDay,        //    MOVE_EFFECT_PAYDAY
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_CHARGING
+    BattleScript_MoveEffectWrap,        //    MOVE_EFFECT_WRAP
+    BattleScript_MoveEffectRecoil,        //    MOVE_EFFECT_RECOIL_25
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_ATK_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_DEF_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SPD_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SP_ATK_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SP_DEF_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_ACC_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_EVS_PLUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_ATK_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_DEF_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SPD_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SP_ATK_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_SP_DEF_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_ACC_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_EVS_MINUS_1
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_RECHARGE
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_RAGE
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_STEAL_ITEM
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_PREVENT_ESCAPE
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_NIGHTMARE
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_ALL_STATS_UP
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_RAPIDSPIN
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_REMOVE_PARALYSIS
+    BattleScript_MoveEffectSleep,        //    MOVE_EFFECT_ATK_DEF_DOWN
+    BattleScript_MoveEffectRecoil,        //    MOVE_EFFECT_RECOIL_33
 };
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
@@ -763,8 +763,8 @@ static const struct SpriteTemplate sSpriteTemplate_MonIconOnLvlUpBox =
 static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX / 4, USHRT_MAX / 8};
 
 #define MIMIC_FORBIDDEN_END             0xFFFE
-#define METRONOME_FORBIDDEN_END         INVALID_U16
-#define ASSIST_FORBIDDEN_END            INVALID_U16
+#define METRONOME_FORBIDDEN_END         0xFFFF
+#define ASSIST_FORBIDDEN_END            0xFFFF
 
 static const u16 sMovesForbiddenToCopy[] =
 {
@@ -822,44 +822,44 @@ static const u16 sWeightToDamageTable[] =
     500, 60,
     1000, 80,
     2000, 100,
-    INVALID_U16, INVALID_U16
+    0xFFFF, 0xFFFF
 };
 
 static const u16 sPickupItems[] =
 {
     ITEM_POTION,
-	ITEM_ANTIDOTE,
-	ITEM_SUPER_POTION,
-	ITEM_GREAT_BALL,
-	ITEM_REPEL,
-	ITEM_ESCAPE_ROPE,
-	ITEM_X_ATTACK,
-	ITEM_FULL_HEAL,
-	ITEM_ULTRA_BALL,
-	ITEM_HYPER_POTION,
-	ITEM_RARE_CANDY,
-	ITEM_PROTEIN,
-	ITEM_REVIVE,
-	ITEM_HP_UP,
-	ITEM_FULL_RESTORE,
-	ITEM_MAX_REVIVE,
-	ITEM_PP_UP,
-	ITEM_MAX_ELIXIR,
+    ITEM_ANTIDOTE,
+    ITEM_SUPER_POTION,
+    ITEM_GREAT_BALL,
+    ITEM_REPEL,
+    ITEM_ESCAPE_ROPE,
+    ITEM_X_ATTACK,
+    ITEM_FULL_HEAL,
+    ITEM_ULTRA_BALL,
+    ITEM_HYPER_POTION,
+    ITEM_RARE_CANDY,
+    ITEM_PROTEIN,
+    ITEM_REVIVE,
+    ITEM_HP_UP,
+    ITEM_FULL_RESTORE,
+    ITEM_MAX_REVIVE,
+    ITEM_PP_UP,
+    ITEM_MAX_ELIXIR,
 };
 
 static const u16 sRarePickupItems[] =
 {
     ITEM_HYPER_POTION,
-	ITEM_NUGGET,
-	ITEM_KINGS_ROCK,
-	ITEM_FULL_RESTORE,
-	ITEM_ETHER,
-	ITEM_WHITE_HERB,
-	ITEM_TM44_REST,
-	ITEM_ELIXIR,
-	ITEM_TM01_FOCUS_PUNCH,
-	ITEM_LEFTOVERS,
-	ITEM_TM26_EARTHQUAKE,
+    ITEM_NUGGET,
+    ITEM_KINGS_ROCK,
+    ITEM_FULL_RESTORE,
+    ITEM_ETHER,
+    ITEM_WHITE_HERB,
+    ITEM_TM44_REST,
+    ITEM_ELIXIR,
+    ITEM_TM01_FOCUS_PUNCH,
+    ITEM_LEFTOVERS,
+    ITEM_TM26_EARTHQUAKE,
 };
 
 static const u8 sPickupProbabilities[] =
@@ -917,10 +917,10 @@ const ALIGNED(4) u8 gUnknown_0831C494[][4] =
 
 static const u8 sUnknown_0831C4F8[] =
 {
-	0x03, 0x00, 0x01, 0x00, 0x00, 0x01, 0x03, 0x00,
-	0x01, 0x02, 0x02, 0x00, 0x03, 0x01, 0x03, 0x01,
-	0x02, 0x03, 0x03, 0x02, 0x01, 0x00, 0x02, 0x02,
-	0x03, 0x00, 0x00, 0x00
+    0x03, 0x00, 0x01, 0x00, 0x00, 0x01, 0x03, 0x00,
+    0x01, 0x02, 0x02, 0x00, 0x03, 0x01, 0x03, 0x01,
+    0x02, 0x03, 0x03, 0x02, 0x01, 0x00, 0x02, 0x02,
+    0x03, 0x00, 0x00, 0x00
 };
 
 static void atk00_attackcanceler(void)
@@ -1976,7 +1976,7 @@ static void atk0C_datahpupdate(void)
     {
         gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
         if (gSpecialStatuses[gActiveBattler].dmg == 0)
-            gSpecialStatuses[gActiveBattler].dmg = INVALID_U16;
+            gSpecialStatuses[gActiveBattler].dmg = 0xFFFF;
     }
     gBattlescriptCurrInstr += 2;
 }
@@ -2579,7 +2579,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     u16 PayDay = gPaydayMoney;
                     gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 5);
                     if (PayDay > gPaydayMoney)
-                        gPaydayMoney = INVALID_U16;
+                        gPaydayMoney = 0xFFFF;
                 }
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
                 gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -3403,8 +3403,8 @@ static void atk23_getexp(void)
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId)
 
-					// buffer 'gained' or 'gained a boosted'
-					PREPARE_STRING_BUFFER(gBattleTextBuff2, i)
+                    // buffer 'gained' or 'gained a boosted'
+                    PREPARE_STRING_BUFFER(gBattleTextBuff2, i)
 
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage)
 
@@ -4490,24 +4490,24 @@ static void atk48_playstatchangeanimation(void)
 
 enum
 {
-	ATK49_RAGE,
-	ATK49_DEFROST,
-	ATK49_SYNCHRONIZE_TARGET,
-	ATK49_MOVE_END_ABILITIES,
-	ATK49_STATUS_IMMUNITY_ABILITIES,
-	ATK49_SYNCHRONIZE_ATTACKER,
-	ATK49_CHOICE_MOVE,
-	ATK49_CHANGED_ITEMS,
-	ATK49_ATTACKER_INVISIBLE,
-	ATK49_ATTACKER_VISIBLE,
-	ATK49_TARGET_VISIBLE,
-	ATK49_ITEM_EFFECTS_ALL,
-	ATK49_KINGSROCK_SHELLBELL,
-	ATK49_SUBSTITUTE,
-	ATK49_UPDATE_LAST_MOVES,
-	ATK49_MIRROR_MOVE,
-	ATK49_NEXT_TARGET,
-	ATK49_COUNT,
+    ATK49_RAGE,
+    ATK49_DEFROST,
+    ATK49_SYNCHRONIZE_TARGET,
+    ATK49_MOVE_END_ABILITIES,
+    ATK49_STATUS_IMMUNITY_ABILITIES,
+    ATK49_SYNCHRONIZE_ATTACKER,
+    ATK49_CHOICE_MOVE,
+    ATK49_CHANGED_ITEMS,
+    ATK49_ATTACKER_INVISIBLE,
+    ATK49_ATTACKER_VISIBLE,
+    ATK49_TARGET_VISIBLE,
+    ATK49_ITEM_EFFECTS_ALL,
+    ATK49_KINGSROCK_SHELLBELL,
+    ATK49_SUBSTITUTE,
+    ATK49_UPDATE_LAST_MOVES,
+    ATK49_MIRROR_MOVE,
+    ATK49_NEXT_TARGET,
+    ATK49_COUNT,
 };
 
 static void atk49_moveend(void)
@@ -4520,7 +4520,7 @@ static void atk49_moveend(void)
     u8 arg1, arg2;
     u16 originallyUsedMove;
 
-    if (gChosenMove == INVALID_U16)
+    if (gChosenMove == 0xFFFF)
         originallyUsedMove = 0;
     else
         originallyUsedMove = gChosenMove;
@@ -4593,7 +4593,7 @@ static void atk49_moveend(void)
             break;
         case ATK49_CHOICE_MOVE: // update choice band move
             if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
-                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != INVALID_U16))
+                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
                     goto LOOP;
             if (gChosenMove == MOVE_BATON_PASS && !(gMoveResultFlags & MOVE_RESULT_FAILED))
             {
@@ -4708,8 +4708,8 @@ static void atk49_moveend(void)
                 }
                 else
                 {
-                    gLastMoves[gBattlerAttacker] = INVALID_U16;
-                    gLastResultingMoves[gBattlerAttacker] = INVALID_U16;
+                    gLastMoves[gBattlerAttacker] = 0xFFFF;
+                    gLastResultingMoves[gBattlerAttacker] = 0xFFFF;
                 }
 
                 if (!(gHitMarker & HITMARKER_FAINTED(gBattlerTarget)))
@@ -4717,7 +4717,7 @@ static void atk49_moveend(void)
 
                 if (gHitMarker & HITMARKER_OBEYS && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
                 {
-                    if (gChosenMove == INVALID_U16)
+                    if (gChosenMove == 0xFFFF)
                     {
                         gLastLandedMoves[gBattlerTarget] = gChosenMove;
                     }
@@ -4729,7 +4729,7 @@ static void atk49_moveend(void)
                 }
                 else
                 {
-                    gLastLandedMoves[gBattlerTarget] = INVALID_U16;
+                    gLastLandedMoves[gBattlerTarget] = 0xFFFF;
                 }
             }
             gBattleScripting.atk49_state++;
@@ -5560,7 +5560,7 @@ static void atk52_switchineffects(void)
         gDisableStructs[gActiveBattler].truantUnknownBit = 0;
 
         if (!AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0)
-			&& !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
+            && !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
         {
             gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
 
@@ -5662,7 +5662,7 @@ static void atk59_handlelearnnewmove(void)
     {
         gBattlescriptCurrInstr = jumpPtr2;
     }
-    else if (ret == INVALID_U16)
+    else if (ret == 0xFFFF)
     {
         gBattlescriptCurrInstr += 10;
     }
@@ -6015,7 +6015,7 @@ static void atk61_drawpartystatussummary(void)
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_NONE
             || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
         {
-            hpStatuses[i].hp = INVALID_U16;
+            hpStatuses[i].hp = 0xFFFF;
             hpStatuses[i].status = 0;
         }
         else
@@ -6930,7 +6930,7 @@ static void atk7C_trymirrormove(void)
             move = *(i * 2 + gBattlerAttacker * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0)
                 | (*(i * 2 + gBattlerAttacker * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) << 8);
 
-            if (move != 0 && move != INVALID_U16)
+            if (move != 0 && move != 0xFFFF)
             {
                 movesArray[validMovesCount] = move;
                 validMovesCount++;
@@ -6941,7 +6941,7 @@ static void atk7C_trymirrormove(void)
     move = *(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 0)
         | (*(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 1) << 8);
 
-    if (move != 0 && move != INVALID_U16)
+    if (move != 0 && move != 0xFFFF)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         gCurrentMove = move;
@@ -7094,7 +7094,7 @@ bool8 UproarWakeUpCheck(u8 battlerId)
 
         gBattleScripting.battler = i;
 
-        if (gBattlerTarget == INVALID_U8)
+        if (gBattlerTarget == 0xFF)
             gBattlerTarget = i;
         else if (gBattlerTarget == i)
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -8008,7 +8008,7 @@ static void atk9A_setfocusenergy(void)
 
 static void atk9B_transformdataexecution(void)
 {
-    gChosenMove = INVALID_U16;
+    gChosenMove = 0xFFFF;
     gBattlescriptCurrInstr++;
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_TRANSFORMED
         || gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
@@ -8088,12 +8088,12 @@ static bool8 IsMoveUncopyableByMimic(u16 move)
 
 static void atk9D_mimicattackcopy(void)
 {
-    gChosenMove = INVALID_U16;
+    gChosenMove = 0xFFFF;
 
     if (IsMoveUncopyableByMimic(gLastMoves[gBattlerTarget])
         || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED
         || gLastMoves[gBattlerTarget] == 0
-        || gLastMoves[gBattlerTarget] == INVALID_U16)
+        || gLastMoves[gBattlerTarget] == 0xFFFF)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -8296,7 +8296,7 @@ static void atkA5_painsplitdmgcalc(void)
         storeLoc[3] = (painSplitHp & 0xFF000000) >> 24;
 
         gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp - hpDiff;
-        gSpecialStatuses[gBattlerTarget].dmg = INVALID_U16;
+        gSpecialStatuses[gBattlerTarget].dmg = 0xFFFF;
 
         gBattlescriptCurrInstr += 5;
     }
@@ -8309,7 +8309,7 @@ static void atkA5_painsplitdmgcalc(void)
 static void atkA6_settypetorandomresistance(void) // conversion 2
 {
     if (gLastLandedMoves[gBattlerAttacker] == 0
-        || gLastLandedMoves[gBattlerAttacker] == INVALID_U16)
+        || gLastLandedMoves[gBattlerAttacker] == 0xFFFF)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
@@ -8376,12 +8376,12 @@ static void atkA7_setalwayshitflag(void)
 
 static void atkA8_copymovepermanently(void) // sketch
 {
-    gChosenMove = INVALID_U16;
+    gChosenMove = 0xFFFF;
 
     if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
         && gLastPrintedMoves[gBattlerTarget] != MOVE_STRUGGLE
         && gLastPrintedMoves[gBattlerTarget] != 0
-        && gLastPrintedMoves[gBattlerTarget] != INVALID_U16
+        && gLastPrintedMoves[gBattlerTarget] != 0xFFFF
         && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH)
     {
         s32 i;
@@ -8550,7 +8550,7 @@ static void atkAC_remaininghptopower(void)
 static void atkAD_tryspiteppreduce(void)
 {
     if (gLastMoves[gBattlerTarget] != 0
-        && gLastMoves[gBattlerTarget] != INVALID_U16)
+        && gLastMoves[gBattlerTarget] != 0xFFFF)
     {
         s32 i;
 
@@ -9671,13 +9671,13 @@ static void atkDC_trysetgrudge(void)
 static void atkDD_weightdamagecalculation(void)
 {
     s32 i;
-    for (i = 0; sWeightToDamageTable[i] != INVALID_U16; i += 2)
+    for (i = 0; sWeightToDamageTable[i] != 0xFFFF; i += 2)
     {
         if (sWeightToDamageTable[i] > GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1))
             break;
     }
 
-    if (sWeightToDamageTable[i] != INVALID_U16)
+    if (sWeightToDamageTable[i] != 0xFFFF)
         gDynamicBasePower = sWeightToDamageTable[i + 1];
     else
         gDynamicBasePower = 120;

@@ -1763,7 +1763,7 @@ static void sub_80E8880(struct RankingHall1P *arg0, struct RankingHall1P *arg1)
     for (i = 0; i < 3; i++)
     {
         s32 highestWinStreak = 0;
-        s32 highestId = INVALID_S32;
+        s32 highestId = -1;
         for (j = 0; j < 6; j++)
         {
             if (arg1[j].winStreak > highestWinStreak)
@@ -1788,7 +1788,7 @@ static void sub_80E88CC(struct RankingHall2P *arg0, struct RankingHall2P *arg1)
     for (i = 0; i < 3; i++)
     {
         s32 highestWinStreak = 0;
-        s32 highestId = INVALID_S32;
+        s32 highestId = -1;
         for (j = 0; j < 6; j++)
         {
             if (arg1[j].winStreak > highestWinStreak)

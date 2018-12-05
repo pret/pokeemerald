@@ -1228,7 +1228,7 @@ static void sub_81A7E60(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 
 static bool8 sub_81A7EC4(void)
 {
-    if (FindTaskIdByFunc(sub_81A7D54) == INVALID_U8)
+    if (FindTaskIdByFunc(sub_81A7D54) == 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -1448,7 +1448,7 @@ static void sub_81A84B4(void)
     u8 i;
 
     for (i = 0; i < 14; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] |= INVALID_U16;
+        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
 }
 
 static void sub_81A84EC(void)

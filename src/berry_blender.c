@@ -1455,7 +1455,7 @@ static void sub_808074C(void)
 
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
-        sBerryBlenderData->field_96[i] = INVALID_U8;
+        sBerryBlenderData->field_96[i] = 0xFF;
         sBerryBlenderData->field_8E[i] = sUnknown_083399D0[sBerryBlenderData->playersNo - 2][i];
     }
     for (j = 0; j < BLENDER_MAX_PLAYERS; j++)
@@ -1479,7 +1479,7 @@ static void Blender_PrintPlayerNames(void)
 
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
-        if (sBerryBlenderData->field_8E[i] != INVALID_U8)
+        if (sBerryBlenderData->field_8E[i] != 0xFF)
         {
             sBerryBlenderData->syncArrowSpriteIds[sBerryBlenderData->field_8E[i]] = sBerryBlenderData->syncArrowSprite2Ids[i];
             StartSpriteAnim(&gSprites[sBerryBlenderData->syncArrowSpriteIds[sBerryBlenderData->field_8E[i]]], i);

@@ -212,7 +212,7 @@ static void sub_8064470(void)
 
 static void sub_80644D8(void)
 {
-    if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 == INVALID_U8)
+    if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 == 0xFF)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_9 = 0;
         LinkOpponentBufferExecCompleted();
@@ -395,7 +395,7 @@ static void CompleteOnHealthbarDone(void)
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
 
-    if (hpValue != INVALID_S16)
+    if (hpValue != -1)
     {
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
     }

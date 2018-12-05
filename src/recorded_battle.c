@@ -221,7 +221,7 @@ u8 RecordedBattle_GetBattlerAction(u8 battlerId)
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
-        return INVALID_U8;
+        return 0xFF;
     }
     else
     {

@@ -1590,7 +1590,7 @@ s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8 whichBattler)
             }
         }
     }
-    return INVALID_S16;
+    return -1;
 }
 
 void obj_delete_but_dont_free_vram(struct Sprite *sprite)

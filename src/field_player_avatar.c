@@ -1389,7 +1389,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     u8 eventObjectId;
     struct EventObject *eventObject;
 
-    playerEventObjTemplate.localId = INVALID_U8;
+    playerEventObjTemplate.localId = 0xFF;
     playerEventObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
     playerEventObjTemplate.x = x - 7;
     playerEventObjTemplate.y = y - 7;

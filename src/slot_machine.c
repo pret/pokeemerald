@@ -1637,7 +1637,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_8102A44(void)
 {
-    if (FindTaskIdByFunc(sub_8102A64) == INVALID_U8)
+    if (FindTaskIdByFunc(sub_8102A64) == 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -2672,7 +2672,7 @@ s16 sub_8102D5C(s16 a0)
 
 /*static */bool8 sub_810432C(void)
 {
-    if (FindTaskIdByFunc(sub_810434C) == INVALID_U8)
+    if (FindTaskIdByFunc(sub_810434C) == 0xFF)
         return TRUE;
     return FALSE;
 }
@@ -3007,7 +3007,7 @@ s16 sub_8102D5C(s16 a0)
 
 /*static */bool8 sub_8104AEC(void)
 {
-    if (FindTaskIdByFunc(sub_8104B0C) == INVALID_U8)
+    if (FindTaskIdByFunc(sub_8104B0C) == 0xFF)
         return TRUE;
     else
         return FALSE;
@@ -3108,7 +3108,7 @@ s16 sub_8102D5C(s16 a0)
     task = gTasks + sSlotMachine->unk3D;
     task->data[1] = arg0;
 
-    for (i = 0; gUnknown_083ED048[arg0][i].unk00 != INVALID_U8; i++)
+    for (i = 0; gUnknown_083ED048[arg0][i].unk00 != 0xFF; i++)
     {
         u8 spriteId;
         spriteId = sub_8105BB4(
@@ -3138,7 +3138,7 @@ s16 sub_8102D5C(s16 a0)
 {
     u8 i;
     struct Task *task = gTasks + sSlotMachine->unk3D;
-    if ((u16)task->data[1] != INVALID_U16)
+    if ((u16)task->data[1] != 0xFFFF)
         gUnknown_083ED064[task->data[1]]();
     for (i = 4; i < 16; i++)
     {
@@ -4201,74 +4201,74 @@ extern const u16 gSlotMachineMenu_Pal[];
 /*static */void SlotMachineSetup_8_0(void)
 {
     gUnknown_0203AAF4 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AAF4[0].data = gUnknown_0203AAD4;
-	gUnknown_0203AAF4[0].size = 0x600;
+    gUnknown_0203AAF4[0].data = gUnknown_0203AAD4;
+    gUnknown_0203AAF4[0].size = 0x600;
 
-	gUnknown_0203AAF8 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AAF8[0].data = gUnknown_0203AAD4 + 0x600;
-	gUnknown_0203AAF8[0].size = 0x200;
+    gUnknown_0203AAF8 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AAF8[0].data = gUnknown_0203AAD4 + 0x600;
+    gUnknown_0203AAF8[0].size = 0x200;
 
-	gUnknown_0203AAFC = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AAFC[0].data = gUnknown_0203AAD4 + 0x800;
-	gUnknown_0203AAFC[0].size = 0x200;
+    gUnknown_0203AAFC = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AAFC[0].data = gUnknown_0203AAD4 + 0x800;
+    gUnknown_0203AAFC[0].size = 0x200;
 
-	gUnknown_0203AB00 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB00[0].data = gUnknown_0203AAD4 + 0xA00;
-	gUnknown_0203AB00[0].size = 0x200;
+    gUnknown_0203AB00 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB00[0].data = gUnknown_0203AAD4 + 0xA00;
+    gUnknown_0203AB00[0].size = 0x200;
 
-	gUnknown_0203AB04 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB04[0].data = gUnknown_0203AAD4 + 0xC00;
-	gUnknown_0203AB04[0].size = 0x300;
+    gUnknown_0203AB04 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB04[0].data = gUnknown_0203AAD4 + 0xC00;
+    gUnknown_0203AB04[0].size = 0x300;
 
-	gUnknown_0203AB08 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB08[0].data = gUnknown_0203AAD4 + 0x1000;
-	gUnknown_0203AB08[0].size = 0x400;
+    gUnknown_0203AB08 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB08[0].data = gUnknown_0203AAD4 + 0x1000;
+    gUnknown_0203AB08[0].size = 0x400;
 
-	gUnknown_0203AB0C = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB0C[0].data = gUnknown_0203AAD4 + 0x1400;
-	gUnknown_0203AB0C[0].size = 0x200;
+    gUnknown_0203AB0C = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB0C[0].data = gUnknown_0203AAD4 + 0x1400;
+    gUnknown_0203AB0C[0].size = 0x200;
 
-	gUnknown_0203AB10 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB10[0].data = gUnknown_0203AAD4 + 0x1600;
-	gUnknown_0203AB10[0].size = 0x300;
+    gUnknown_0203AB10 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB10[0].data = gUnknown_0203AAD4 + 0x1600;
+    gUnknown_0203AB10[0].size = 0x300;
 
-	gUnknown_0203AB14 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB14[0].data = gUnknown_0203AAD4 + 0x1900;
-	gUnknown_0203AB14[0].size = 0x300;
+    gUnknown_0203AB14 = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB14[0].data = gUnknown_0203AAD4 + 0x1900;
+    gUnknown_0203AB14[0].size = 0x300;
 
-	gUnknown_0203AB18 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
-	gUnknown_0203AB18[0].data = gUnknown_0203AAD4 + 0x1C00;
-	gUnknown_0203AB18[0].size = 0x200;
-	gUnknown_0203AB18[1].data = gUnknown_0203AAD4 + 0x1E00;
-	gUnknown_0203AB18[1].size = 0x200;
+    gUnknown_0203AB18 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+    gUnknown_0203AB18[0].data = gUnknown_0203AAD4 + 0x1C00;
+    gUnknown_0203AB18[0].size = 0x200;
+    gUnknown_0203AB18[1].data = gUnknown_0203AAD4 + 0x1E00;
+    gUnknown_0203AB18[1].size = 0x200;
 
-	gUnknown_0203AB1C = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
-	gUnknown_0203AB1C[0].data = gUnknown_0203AAD4 + 0x2000;
-	gUnknown_0203AB1C[0].size = 640;
+    gUnknown_0203AB1C = AllocZeroed(sizeof(struct SpriteFrameImage) * 1);
+    gUnknown_0203AB1C[0].data = gUnknown_0203AAD4 + 0x2000;
+    gUnknown_0203AB1C[0].size = 640;
 
-	gUnknown_0203AB20 = AllocZeroed(sizeof(struct SpriteFrameImage) * 5);
-	gUnknown_0203AB20[0].data = gUnknown_0203AAD4 + 0x2280;
-	gUnknown_0203AB20[0].size = 0x80;
-	gUnknown_0203AB20[1].data = gUnknown_0203AAD4 + 0x2300;
-	gUnknown_0203AB20[1].size = 0x80;
-	gUnknown_0203AB20[2].data = gUnknown_0203AAD4 + 0x2380;
-	gUnknown_0203AB20[2].size = 0x80;
-	gUnknown_0203AB20[3].data = gUnknown_0203AAD4 + 0x2400;
-	gUnknown_0203AB20[3].size = 0x80;
-	gUnknown_0203AB20[4].data = gUnknown_0203AAD4 + 0x2480;
-	gUnknown_0203AB20[4].size = 0x80;
+    gUnknown_0203AB20 = AllocZeroed(sizeof(struct SpriteFrameImage) * 5);
+    gUnknown_0203AB20[0].data = gUnknown_0203AAD4 + 0x2280;
+    gUnknown_0203AB20[0].size = 0x80;
+    gUnknown_0203AB20[1].data = gUnknown_0203AAD4 + 0x2300;
+    gUnknown_0203AB20[1].size = 0x80;
+    gUnknown_0203AB20[2].data = gUnknown_0203AAD4 + 0x2380;
+    gUnknown_0203AB20[2].size = 0x80;
+    gUnknown_0203AB20[3].data = gUnknown_0203AAD4 + 0x2400;
+    gUnknown_0203AB20[3].size = 0x80;
+    gUnknown_0203AB20[4].data = gUnknown_0203AAD4 + 0x2480;
+    gUnknown_0203AB20[4].size = 0x80;
 
-	gUnknown_0203AB24 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
-	gUnknown_0203AB24[0].data = gUnknown_0203AAD4 + 0x2600;
-	gUnknown_0203AB24[0].size = 0x480;
-	gUnknown_0203AB24[1].data = gUnknown_0203AAD4 + 10880;
-	gUnknown_0203AB24[1].size = 0x480;
+    gUnknown_0203AB24 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+    gUnknown_0203AB24[0].data = gUnknown_0203AAD4 + 0x2600;
+    gUnknown_0203AB24[0].size = 0x480;
+    gUnknown_0203AB24[1].data = gUnknown_0203AAD4 + 10880;
+    gUnknown_0203AB24[1].size = 0x480;
 
-	gUnknown_0203AB28 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
-	gUnknown_0203AB28[0].data = gUnknown_0203AAD4 + 0x2F00;
-	gUnknown_0203AB28[0].size = 0x180;
-	gUnknown_0203AB28[1].data = gUnknown_0203AAD4 + 0x3080;
-	gUnknown_0203AB28[1].size = 0x180;
+    gUnknown_0203AB28 = AllocZeroed(sizeof(struct SpriteFrameImage) * 2);
+    gUnknown_0203AB28[0].data = gUnknown_0203AAD4 + 0x2F00;
+    gUnknown_0203AB28[0].size = 0x180;
+    gUnknown_0203AB28[1].data = gUnknown_0203AAD4 + 0x3080;
+    gUnknown_0203AB28[1].size = 0x180;
 }
 
 const u8 sReelSymbols[][21] =

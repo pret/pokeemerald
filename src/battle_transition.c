@@ -612,32 +612,32 @@ static const s16 gUnknown_085C8CF2[] = {4, 517, -1};
 
 static const s16 *const gUnknown_085C8CF8[] =
 {
-	gUnknown_085C8C90,
-	gUnknown_085C8CA4,
-	gUnknown_085C8C98,
-	gUnknown_085C8C9E,
-	gUnknown_085C8CEA,
-	gUnknown_085C8CE4,
-	gUnknown_085C8CF2,
-	gUnknown_085C8CDE
+    gUnknown_085C8C90,
+    gUnknown_085C8CA4,
+    gUnknown_085C8C98,
+    gUnknown_085C8C9E,
+    gUnknown_085C8CEA,
+    gUnknown_085C8CE4,
+    gUnknown_085C8CF2,
+    gUnknown_085C8CDE
 };
 
 static const s16 *const gUnknown_085C8D18[] =
 {
-	gUnknown_085C8CBC,
-	gUnknown_085C8CB0,
-	gUnknown_085C8CB6,
-	gUnknown_085C8CAA,
-	gUnknown_085C8CCA,
-	gUnknown_085C8CD8,
-	gUnknown_085C8CC4,
-	gUnknown_085C8CD2
+    gUnknown_085C8CBC,
+    gUnknown_085C8CB0,
+    gUnknown_085C8CB6,
+    gUnknown_085C8CAA,
+    gUnknown_085C8CCA,
+    gUnknown_085C8CD8,
+    gUnknown_085C8CC4,
+    gUnknown_085C8CD2
 };
 
 static const s16 *const *const gUnknown_085C8D38[] =
 {
-	gUnknown_085C8CF8,
-	gUnknown_085C8D18
+    gUnknown_085C8CF8,
+    gUnknown_085C8D18
 };
 
 static const TransitionStateFunc sPhase2_Groudon_Funcs[] =
@@ -749,7 +749,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_85C8E60[] =
 
 static const struct SpriteTemplate gUnknown_085C8E68 =
 {
-    .tileTag = INVALID_U16,
+    .tileTag = 0xFFFF,
     .paletteTag = 4105,
     .oam = &gEventObjectBaseOam_32x32,
     .anims = sSpriteAnimTable_85C8E3C,
@@ -798,7 +798,7 @@ static const union AnimCmd *const sSpriteAnimTable_85C8EA0[] =
 
 static const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
 {
-    .tileTag = INVALID_U16,
+    .tileTag = 0xFFFF,
     .paletteTag = 4106,
     .oam = &gOamData_85C8E80,
     .anims = sSpriteAnimTable_85C8EA0,
@@ -809,7 +809,7 @@ static const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
 
 static const struct SpriteTemplate sSpriteTemplate_85C8EBC =
 {
-    .tileTag = INVALID_U16,
+    .tileTag = 0xFFFF,
     .paletteTag = 4106,
     .oam = &gOamData_85C8E80,
     .anims = sSpriteAnimTable_85C8EA0,
@@ -998,7 +998,7 @@ static bool8 Transition_Phase1(struct Task *task)
 
 static bool8 Transition_WaitForPhase1(struct Task *task)
 {
-    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == INVALID_U8)
+    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == 0xFF)
     {
         task->tState++;
         return TRUE;
@@ -1019,7 +1019,7 @@ static bool8 Transition_Phase2(struct Task *task)
 static bool8 Transition_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == INVALID_U8)
+    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == 0xFF)
         task->tTransitionDone = TRUE;
     return FALSE;
 }
@@ -3605,7 +3605,7 @@ static void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 
 static bool8 IsPhase1Done(void)
 {
-    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == INVALID_U8)
+    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == 0xFF)
         return TRUE;
     else
         return FALSE;

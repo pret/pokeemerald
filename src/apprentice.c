@@ -1079,7 +1079,7 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
     u8 i;
 
     for (i = 0; i < 6; i++)
-        apprentice->easyChatWords[i] |= INVALID_U16;
+        apprentice->easyChatWords[i] |= 0xFFFF;
 
     apprentice->playerName[0] = EOS;
     apprentice->id = 16;
@@ -1093,7 +1093,7 @@ void ResetAllApprenticeData(void)
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] |= INVALID_U16;
+            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] |= 0xFFFF;
         gSaveBlock2Ptr->apprentices[i].id = 16;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;
@@ -1290,7 +1290,7 @@ static u16 sub_819FF98(u8 arg0)
     else
         level = 60;
 
-    for (j = 0; learnset[j] != INVALID_U16; j++)
+    for (j = 0; learnset[j] != 0xFFFF; j++)
     {
         if ((learnset[j] & 0xFE00) > (level << 9))
             break;
@@ -1393,7 +1393,7 @@ static void GetLatestLearnedMoves(u16 species, u16 *moves)
         level = 60;
 
     learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i] != INVALID_U16; i++)
+    for (i = 0; learnset[i] != 0xFFFF; i++)
     {
         if ((learnset[i] & 0xFE00) > (level << 9))
             break;
@@ -2047,172 +2047,172 @@ NAKED
 static void sub_81A1224(void)
 {
     asm_unified("\n\
-                	push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	ldr r1, =gSaveBlock2Ptr\n\
-	ldr r3, [r1]\n\
-	adds r0, r3, 0\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	adds r7, r1, 0\n\
-	cmp r0, 0x2\n\
-	bhi _081A1242\n\
-	b _081A1362\n\
+                    push {r4-r7,lr}\n\
+    mov r7, r9\n\
+    mov r6, r8\n\
+    push {r6,r7}\n\
+    ldr r1, =gSaveBlock2Ptr\n\
+    ldr r3, [r1]\n\
+    adds r0, r3, 0\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    adds r7, r1, 0\n\
+    cmp r0, 0x2\n\
+    bhi _081A1242\n\
+    b _081A1362\n\
 _081A1242:\n\
-	movs r5, 0\n\
-	movs r2, 0\n\
-	adds r0, r3, 0\n\
-	adds r0, 0xB8\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 30\n\
-	ldr r1, =gSpecialVar_0x8005\n\
-	mov r12, r1\n\
-	ldr r1, =gSpecialVar_Result\n\
-	mov r8, r1\n\
-	cmp r0, 0\n\
-	beq _081A127C\n\
-	adds r3, r7, 0\n\
+    movs r5, 0\n\
+    movs r2, 0\n\
+    adds r0, r3, 0\n\
+    adds r0, 0xB8\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 30\n\
+    ldr r1, =gSpecialVar_0x8005\n\
+    mov r12, r1\n\
+    ldr r1, =gSpecialVar_Result\n\
+    mov r8, r1\n\
+    cmp r0, 0\n\
+    beq _081A127C\n\
+    adds r3, r7, 0\n\
 _081A125C:\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	cmp r2, 0x8\n\
-	bhi _081A127C\n\
-	ldr r0, [r3]\n\
-	lsls r1, r2, 2\n\
-	adds r0, r1\n\
-	adds r0, 0xB8\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 30\n\
-	cmp r0, 0\n\
-	bne _081A125C\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    adds r0, r2, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    cmp r2, 0x8\n\
+    bhi _081A127C\n\
+    ldr r0, [r3]\n\
+    lsls r1, r2, 2\n\
+    adds r0, r1\n\
+    adds r0, 0xB8\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 30\n\
+    cmp r0, 0\n\
+    bne _081A125C\n\
 _081A127C:\n\
-	movs r4, 0\n\
-	cmp r4, r5\n\
-	bcs _081A1322\n\
-	ldr r0, [r7]\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	subs r0, 0x3\n\
-	cmp r4, r0\n\
-	bge _081A1322\n\
-	adds r6, r7, 0\n\
-	mov r9, r4\n\
+    movs r4, 0\n\
+    cmp r4, r5\n\
+    bcs _081A1322\n\
+    ldr r0, [r7]\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    subs r0, 0x3\n\
+    cmp r4, r0\n\
+    bge _081A1322\n\
+    adds r6, r7, 0\n\
+    mov r9, r4\n\
 _081A1296:\n\
-	ldr r3, [r6]\n\
-	lsls r0, r4, 2\n\
-	adds r2, r3, r0\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xB8\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 30\n\
-	lsrs r0, 30\n\
-	cmp r0, 0x1\n\
-	bne _081A1308\n\
-	lsrs r0, r1, 6\n\
-	cmp r0, 0\n\
-	beq _081A1308\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xBA\n\
-	ldrh r0, [r0]\n\
-	mov r2, r12\n\
-	ldrh r2, [r2]\n\
-	cmp r0, r2\n\
-	bne _081A1308\n\
-	adds r0, r3, 0\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	subs r0, 0x3\n\
-	lsls r0, 2\n\
-	adds r0, r3, r0\n\
-	adds r0, 0xB8\n\
-	ldrb r2, [r0]\n\
-	movs r1, 0x3F\n\
-	ands r1, r2\n\
-	strb r1, [r0]\n\
-	ldr r1, [r6]\n\
-	adds r0, r1, 0\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	subs r0, 0x3\n\
-	lsls r0, 2\n\
-	adds r1, r0\n\
-	mov r2, r12\n\
-	ldrh r0, [r2]\n\
-	adds r1, 0xBA\n\
-	strh r0, [r1]\n\
-	mov r1, r9\n\
-	mov r0, r8\n\
-	strh r1, [r0]\n\
-	b _081A1362\n\
-	.pool\n\
+    ldr r3, [r6]\n\
+    lsls r0, r4, 2\n\
+    adds r2, r3, r0\n\
+    adds r0, r2, 0\n\
+    adds r0, 0xB8\n\
+    ldrb r1, [r0]\n\
+    lsls r0, r1, 30\n\
+    lsrs r0, 30\n\
+    cmp r0, 0x1\n\
+    bne _081A1308\n\
+    lsrs r0, r1, 6\n\
+    cmp r0, 0\n\
+    beq _081A1308\n\
+    adds r0, r2, 0\n\
+    adds r0, 0xBA\n\
+    ldrh r0, [r0]\n\
+    mov r2, r12\n\
+    ldrh r2, [r2]\n\
+    cmp r0, r2\n\
+    bne _081A1308\n\
+    adds r0, r3, 0\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    subs r0, 0x3\n\
+    lsls r0, 2\n\
+    adds r0, r3, r0\n\
+    adds r0, 0xB8\n\
+    ldrb r2, [r0]\n\
+    movs r1, 0x3F\n\
+    ands r1, r2\n\
+    strb r1, [r0]\n\
+    ldr r1, [r6]\n\
+    adds r0, r1, 0\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    subs r0, 0x3\n\
+    lsls r0, 2\n\
+    adds r1, r0\n\
+    mov r2, r12\n\
+    ldrh r0, [r2]\n\
+    adds r1, 0xBA\n\
+    strh r0, [r1]\n\
+    mov r1, r9\n\
+    mov r0, r8\n\
+    strh r1, [r0]\n\
+    b _081A1362\n\
+    .pool\n\
 _081A1308:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, r5\n\
-	bcs _081A1322\n\
-	ldr r0, [r6]\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	subs r0, 0x3\n\
-	cmp r4, r0\n\
-	blt _081A1296\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, r5\n\
+    bcs _081A1322\n\
+    ldr r0, [r6]\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    subs r0, 0x3\n\
+    cmp r4, r0\n\
+    blt _081A1296\n\
 _081A1322:\n\
-	ldr r2, [r7]\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	subs r0, 0x3\n\
-	lsls r0, 2\n\
-	adds r2, r0\n\
-	adds r2, 0xB8\n\
-	ldrb r1, [r2]\n\
-	movs r0, 0x3F\n\
-	ands r0, r1\n\
-	movs r1, 0x40\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	ldr r1, [r7]\n\
-	adds r0, r1, 0\n\
-	adds r0, 0xB1\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 26\n\
-	lsrs r0, 28\n\
-	subs r0, 0x3\n\
-	lsls r0, 2\n\
-	adds r1, r0\n\
-	mov r2, r12\n\
-	ldrh r0, [r2]\n\
-	adds r1, 0xBA\n\
-	strh r0, [r1]\n\
-	movs r0, 0x1\n\
-	mov r1, r8\n\
-	strh r0, [r1]\n\
+    ldr r2, [r7]\n\
+    adds r0, r2, 0\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    subs r0, 0x3\n\
+    lsls r0, 2\n\
+    adds r2, r0\n\
+    adds r2, 0xB8\n\
+    ldrb r1, [r2]\n\
+    movs r0, 0x3F\n\
+    ands r0, r1\n\
+    movs r1, 0x40\n\
+    orrs r0, r1\n\
+    strb r0, [r2]\n\
+    ldr r1, [r7]\n\
+    adds r0, r1, 0\n\
+    adds r0, 0xB1\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 26\n\
+    lsrs r0, 28\n\
+    subs r0, 0x3\n\
+    lsls r0, 2\n\
+    adds r1, r0\n\
+    mov r2, r12\n\
+    ldrh r0, [r2]\n\
+    adds r1, 0xBA\n\
+    strh r0, [r1]\n\
+    movs r0, 0x1\n\
+    mov r1, r8\n\
+    strh r0, [r1]\n\
 _081A1362:\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
+    pop {r3,r4}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
 ");
 }
 #endif // NONMATCHING
@@ -2236,7 +2236,7 @@ static void sub_81A1370(void)
     }
 
     r10 = 0xFFFF;
-    r9 = INVALID_S32;
+    r9 = -1;
     for (i = 1; i < 4; i++)
     {
         if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)

@@ -449,7 +449,7 @@ static const union AnimCmd *const sSpriteAnimTable_8611F4C[] =
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
     .tileTag = 0x3E8,
-    .paletteTag = INVALID_U16,
+    .paletteTag = 0xFFFF,
     .oam = &sOamData_8611F24,
     .anims = sSpriteAnimTable_8611F4C,
     .images = NULL,

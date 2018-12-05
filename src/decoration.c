@@ -312,7 +312,7 @@ const struct SpriteFrameImage sDecorSelectorSpriteFrameImages = {
 };
 
 const struct SpriteTemplate sDecorSelectorSpriteTemplate = {
-    INVALID_U16,
+    0xFFFF,
     OVERWORLD_PLACE_DECOR_SELECTOR_PAL_TAG,
     &sDecorSelectorOam,
     sDecorSelectorAnims,
@@ -409,7 +409,7 @@ const struct SpriteFrameImage Unknown_085A73FC = {
 };
 
 const struct SpriteTemplate gUnknown_085A7404 = {
-    INVALID_U16,
+    0xFFFF,
     OVERWORLD_PLACE_DECOR_PLAYER_PAL_TAG,
     &Unknown_085A73E8,
     Unknown_085A73F8,
@@ -881,7 +881,7 @@ void sub_81274A0(u8 a0, s32 a1, u8 a2)
 
 void sub_8127500(void)
 {
-    if (sDecorPCBuffer->unk_522 == INVALID_U8)
+    if (sDecorPCBuffer->unk_522 == 0xFF)
     {
         sDecorPCBuffer->unk_522 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 0x3c, 0x0c, 0x94, sDecorPCBuffer->unk_520 - sDecorPCBuffer->unk_521, 0x6e, 0x6e, &sSecretBasePCSelectDecorPageNo);
     }
@@ -889,10 +889,10 @@ void sub_8127500(void)
 
 void sub_8127554(void)
 {
-    if (sDecorPCBuffer->unk_522 != INVALID_U8)
+    if (sDecorPCBuffer->unk_522 != 0xFF)
     {
         RemoveScrollIndicatorArrowPair(sDecorPCBuffer->unk_522);
-        sDecorPCBuffer->unk_522 = INVALID_U8;
+        sDecorPCBuffer->unk_522 = 0xFF;
     }
 }
 
@@ -910,7 +910,7 @@ void sub_812759C(u8 taskId)
     sub_81269D4(3);
     sub_8127718(sCurDecorationCategory);
     sDecorPCBuffer = calloc(1, sizeof(struct DecorPCBuffer));
-    sDecorPCBuffer->unk_522 = INVALID_U8;
+    sDecorPCBuffer->unk_522 = 0xFF;
     sub_8127284();
     sub_81272C8();
     sub_81272F8();
@@ -1188,7 +1188,7 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
                 v0 = 0;
             }
             v1 = sub_8127B54(gDecorations[decor].id, i * decWidth + j);
-            if (v1 != INVALID_U16)
+            if (v1 != 0xFFFF)
             {
                 MapGridSetMetatileEntryAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | flags | v1);
             }

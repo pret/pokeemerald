@@ -236,7 +236,7 @@ static void sub_81BE968(void)
     u8 taskId;
 
     taskId = FindTaskIdByFunc(sub_81BE9C0);
-    if(taskId != INVALID_U8)
+    if(taskId != 0xFF)
         gTasks[taskId].data[0]++;
 }
 

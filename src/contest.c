@@ -324,7 +324,7 @@ void sub_80D787C(void)
     *gContestResources->field_0 = (struct Contest){};
     for (i = 0; i < 4; i++)
     {
-        gContestResources->field_0->unk19206[i] = INVALID_U8;
+        gContestResources->field_0->unk19206[i] = 0xFF;
     }
     for (i = 0; i < 4; i++)
     {
@@ -344,7 +344,7 @@ void sub_80D787C(void)
         sub_80DCE58(0);
     for (i = 0; i < 4; i++)
     {
-        gContestResources->field_4[i].nextTurnOrder = INVALID_U8;
+        gContestResources->field_4[i].nextTurnOrder = 0xFF;
         gContestResources->field_0->unk19218[i] = gUnknown_02039F26[i];
     }
     sub_80DD590();
@@ -2097,7 +2097,7 @@ void sub_80DAB8C(u8 contestType, u8 rank)
                 opponents[opponentsCount++] = i;
         }
     }
-    opponents[opponentsCount] = INVALID_U8;
+    opponents[opponentsCount] = 0xFF;
 
     // Choose three random opponents from the list
     for (i = 0; i < 3; i++)
@@ -2106,7 +2106,7 @@ void sub_80DAB8C(u8 contestType, u8 rank)
         s32 j;
 
         gContestMons[i] = gContestOpponents[opponents[rnd]];
-        for (j = rnd; opponents[j] != INVALID_U8; j++)
+        for (j = rnd; opponents[j] != 0xFF; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
     }
@@ -2151,7 +2151,7 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
         else if (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough)
             opponents[opponentsCount++] = i;
     }
-    opponents[opponentsCount] = INVALID_U8;
+    opponents[opponentsCount] = 0xFF;
     for (i = 0; i < 4 - gUnknown_02039F30; i++)
     {
         u16 rnd = sub_80F903C() % opponentsCount;
@@ -2160,7 +2160,7 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
         gContestMons[gUnknown_02039F30 + i] = gContestOpponents[opponents[rnd]];
         sub_80DF9D4(gContestMons[gUnknown_02039F30 + i].trainerName);
         sub_80DF9E0(gContestMons[gUnknown_02039F30 + i].nickname, GAME_LANGUAGE);
-        for (j = rnd; opponents[j] != INVALID_U8; j++)
+        for (j = rnd; opponents[j] != 0xFF; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
     }
@@ -2591,7 +2591,7 @@ void prints_contest_move_description(u16 a)
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile,        0x0b, 0x1f, 0x05, 0x01, 0x11, 0x01);
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
-    if (gContestEffects[gContestMoves[a].effect].appeal == INVALID_U8)
+    if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
         numHearts = 0;
     else
         numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
@@ -2600,7 +2600,7 @@ void prints_contest_move_description(u16 a)
     ContestBG_FillBoxWithTile(0, 0x5035, 0x15, 0x1f, 0x08,      0x01, 0x11);
     ContestBG_FillBoxWithTile(0, 0x5012, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
-    if (gContestEffects[gContestMoves[a].effect].jam == INVALID_U8)
+    if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
         numHearts = 0;
     else
         numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;

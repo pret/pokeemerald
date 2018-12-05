@@ -500,7 +500,7 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {TRAINER_CLASS_HIKER, 10},
     {TRAINER_CLASS_YOUNG_COUPLE, 8},
     {TRAINER_CLASS_WINSTRATE, 10},
-    {INVALID_U8, 5},
+    {0xFF, 5},
 };
 
 #include "data/text/abilities.h"
@@ -2251,7 +2251,7 @@ static void sub_8038F34(void)
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
-        gBattleCommunication[1] = INVALID_U8;
+        gBattleCommunication[1] = 0xFF;
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 1:
@@ -2993,7 +2993,7 @@ static void BattleStartClearSetData(void)
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
         gLastResultingMoves[i] = 0;
-        gLastHitBy[i] = INVALID_U8;
+        gLastHitBy[i] = 0xFF;
         gLockedMoves[i] = 0;
         gLastPrintedMoves[i] = 0;
         gBattleResources->flags->flags[i] = 0;
@@ -3161,7 +3161,7 @@ void SwitchInClearSetData(void)
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
-    gLastHitBy[gActiveBattler] = INVALID_U8;
+    gLastHitBy[gActiveBattler] = 0xFF;
 
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 0) = 0;
     *(gBattleStruct->lastTakenMove + gActiveBattler * 2 + 1) = 0;
@@ -3192,7 +3192,7 @@ void SwitchInClearSetData(void)
 
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = 0;
-    gBattleStruct->field_DA = INVALID_U8;
+    gBattleStruct->field_DA = 0xFF;
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
@@ -3253,7 +3253,7 @@ void FaintClearSetData(void)
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
-    gLastHitBy[gActiveBattler] = INVALID_U8;
+    gLastHitBy[gActiveBattler] = 0xFF;
 
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBattler]) + 0) = 0;
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBattler]) + 1) = 0;
@@ -3440,7 +3440,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = INVALID_U16;
+                hpStatus[i].hp = 0xFFFF;
                 hpStatus[i].status = 0;
             }
             else
@@ -3458,7 +3458,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = INVALID_U16;
+                hpStatus[i].hp = 0xFFFF;
                 hpStatus[i].status = 0;
             }
             else
@@ -3484,7 +3484,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             {
-                hpStatus[i].hp = INVALID_U16;
+                hpStatus[i].hp = 0xFFFF;
                 hpStatus[i].status = 0;
             }
             else
@@ -3610,85 +3610,85 @@ NAKED
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
     asm(".syntax unified\n\
-        	push {r4-r6,lr}\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r2, [r0]\n\
-	movs r0, 0x80\n\
-	lsls r0, 17\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _0803B298\n\
-	movs r0, 0x80\n\
-	lsls r0, 18\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _0803B298\n\
-	movs r1, 0x80\n\
-	lsls r1, 24\n\
-	ands r1, r2\n\
-	negs r0, r1\n\
-	orrs r0, r1\n\
-	lsrs r5, r0, 31\n\
-	b _0803B29A\n\
-	.pool\n\
+            push {r4-r6,lr}\n\
+    ldr r0, =gBattleTypeFlags\n\
+    ldr r2, [r0]\n\
+    movs r0, 0x80\n\
+    lsls r0, 17\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _0803B298\n\
+    movs r0, 0x80\n\
+    lsls r0, 18\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _0803B298\n\
+    movs r1, 0x80\n\
+    lsls r1, 24\n\
+    ands r1, r2\n\
+    negs r0, r1\n\
+    orrs r0, r1\n\
+    lsrs r5, r0, 31\n\
+    b _0803B29A\n\
+    .pool\n\
 _0803B288:\n\
-	ldr r1, =gBattleMainFunc\n\
-	ldr r0, =BattleIntroOpponent2SendsOutMonAnimation\n\
-	b _0803B2F0\n\
-	.pool\n\
+    ldr r1, =gBattleMainFunc\n\
+    ldr r0, =BattleIntroOpponent2SendsOutMonAnimation\n\
+    b _0803B2F0\n\
+    .pool\n\
 _0803B298:\n\
-	movs r5, 0x1\n\
+    movs r5, 0x1\n\
 _0803B29A:\n\
-	ldr r0, =gBattleControllerExecFlags\n\
-	ldr r2, [r0]\n\
-	cmp r2, 0\n\
-	bne _0803B2F2\n\
-	ldr r0, =gActiveBattler\n\
-	strb r2, [r0]\n\
-	ldr r1, =gBattlersCount\n\
-	adds r4, r0, 0\n\
-	ldrb r1, [r1]\n\
-	cmp r2, r1\n\
-	bcs _0803B2EC\n\
-	adds r6, r4, 0\n\
+    ldr r0, =gBattleControllerExecFlags\n\
+    ldr r2, [r0]\n\
+    cmp r2, 0\n\
+    bne _0803B2F2\n\
+    ldr r0, =gActiveBattler\n\
+    strb r2, [r0]\n\
+    ldr r1, =gBattlersCount\n\
+    adds r4, r0, 0\n\
+    ldrb r1, [r1]\n\
+    cmp r2, r1\n\
+    bcs _0803B2EC\n\
+    adds r6, r4, 0\n\
 _0803B2B2:\n\
-	ldrb r0, [r4]\n\
-	bl GetBattlerPosition\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, r5\n\
-	bne _0803B2D8\n\
-	movs r0, 0\n\
-	bl BtlController_EmitIntroTrainerBallThrow\n\
-	ldrb r0, [r4]\n\
-	bl MarkBattlerForControllerExec\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x00008040\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _0803B288\n\
+    ldrb r0, [r4]\n\
+    bl GetBattlerPosition\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, r5\n\
+    bne _0803B2D8\n\
+    movs r0, 0\n\
+    bl BtlController_EmitIntroTrainerBallThrow\n\
+    ldrb r0, [r4]\n\
+    bl MarkBattlerForControllerExec\n\
+    ldr r0, =gBattleTypeFlags\n\
+    ldr r0, [r0]\n\
+    ldr r1, =0x00008040\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0803B288\n\
 _0803B2D8:\n\
-	ldrb r0, [r6]\n\
-	adds r0, 0x1\n\
-	strb r0, [r6]\n\
-	ldr r1, =gBattlersCount\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldr r4, =gActiveBattler\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bcc _0803B2B2\n\
+    ldrb r0, [r6]\n\
+    adds r0, 0x1\n\
+    strb r0, [r6]\n\
+    ldr r1, =gBattlersCount\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    ldr r4, =gActiveBattler\n\
+    ldrb r1, [r1]\n\
+    cmp r0, r1\n\
+    bcc _0803B2B2\n\
 _0803B2EC:\n\
-	ldr r1, =gBattleMainFunc\n\
-	ldr r0, =BattleIntroRecordMonsToDex\n\
+    ldr r1, =gBattleMainFunc\n\
+    ldr r0, =BattleIntroRecordMonsToDex\n\
 _0803B2F0:\n\
-	str r0, [r1]\n\
+    str r0, [r1]\n\
 _0803B2F2:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
         .syntax divided");
 }
 #endif // NONMATCHING
@@ -3991,7 +3991,7 @@ void BattleTurnPassed(void)
         return;
     }
 
-    if (gBattleResults.battleTurnCounter < INVALID_U8)
+    if (gBattleResults.battleTurnCounter < 0xFF)
     {
         gBattleResults.battleTurnCounter++;
         gBattleStruct->field_DA++;
@@ -4375,7 +4375,7 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     default:
                         sub_818603C(2);
-                        if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == INVALID_U16)
+                        if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == 0xFFFF)
                         {
                             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                             RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
@@ -4591,10 +4591,10 @@ static void sub_803CDF8(void)
 
 void SwapTurnOrder(u8 id1, u8 id2)
 {
-	u32 temp;
+    u32 temp;
 
-	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
-	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
+    SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
+    SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
@@ -5740,7 +5740,7 @@ static void HandleAction_ThrowPokeblock(void)
     gBattleCommunication[MULTISTRING_CHOOSER] = gBattleBufferB[gBattlerAttacker][1] - 1;
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][2];
 
-    if (gBattleResults.pokeblockThrows < INVALID_U8)
+    if (gBattleResults.pokeblockThrows < 0xFF)
         gBattleResults.pokeblockThrows++;
     if (gBattleStruct->safariPkblThrowCounter < 3)
         gBattleStruct->safariPkblThrowCounter++;

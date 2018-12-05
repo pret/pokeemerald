@@ -50,7 +50,7 @@ void sub_80D338C(void)
     u8 taskId;
 
     taskId = sub_80D33F4();
-    if (taskId != INVALID_U8)
+    if (taskId != 0xFF)
     {
         UnfreezeObjects(taskId);
         DestroyTask(taskId);
@@ -65,7 +65,7 @@ static void sub_80D33AC(u8 priority)
 
     taskId = CreateTask(sub_80D3660, priority);
     for (i = 1; i < 16; i++)
-        gTasks[taskId].data[i] = INVALID_U16;
+        gTasks[taskId].data[i] = 0xFFFF;
 }
 
 static u8 sub_80D33F4(void)
@@ -188,7 +188,7 @@ static void UnfreezeObjects(u8 taskId)
     pEventObjId = (u8 *)&gTasks[taskId].data[1];
     for (i = 0; i < 16; i++, pEventObjId++)
     {
-        if (*pEventObjId != INVALID_U8)
+        if (*pEventObjId != 0xFF)
             UnfreezeEventObject(&gEventObjects[*pEventObjId]);
     }
 }
@@ -201,7 +201,7 @@ static void sub_80D3660(u8 taskId)
     for (i = 0; i < 16; i++)
     {
         sub_80D3508(taskId, i, &var);
-        if (var != INVALID_U8)
+        if (var != 0xFF)
             sub_80A2490(taskId, i, var, sub_80D35CC(i));
     }
 }
