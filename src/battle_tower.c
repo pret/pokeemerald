@@ -10,6 +10,7 @@
 #include "international_string_util.h"
 #include "battle.h"
 #include "frontier_util.h"
+#include "strings.h"
 #include "recorded_battle.h"
 #include "easy_chat.h"
 #include "gym_leader_rematch.h"
@@ -23,13 +24,12 @@
 #include "tv.h"
 #include "battle_factory.h"
 #include "constants/battle_frontier.h"
+#include "constants/items.h"
 #include "constants/trainers.h"
 #include "constants/event_objects.h"
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/easy_chat.h"
-
-extern void sub_81A4C30(void);
 
 extern const u16 gUnknown_085DFA46[];
 
@@ -76,7 +76,7 @@ static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderT
 static u8 SetTentPtrsGetLevel(void);
 
 // Const rom data.
-const u16 gBattleFrontierHeldItems[] = 
+const u16 gBattleFrontierHeldItems[] =
 {
     ITEM_NONE,
     ITEM_KINGS_ROCK,
@@ -147,7 +147,7 @@ const u16 gBattleFrontierHeldItems[] =
 #include "data/battle_frontier/battle_frontier_trainers.h"
 #include "data/battle_frontier/battle_frontier_mons.h"
 
-const u8 gTowerMaleFacilityClasses[] = 
+const u8 gTowerMaleFacilityClasses[30] =
 {
     FACILITY_CLASS_RUIN_MANIAC,
     FACILITY_CLASS_TUBER_M,
@@ -181,7 +181,7 @@ const u8 gTowerMaleFacilityClasses[] =
     FACILITY_CLASS_HIKER
 };
 
-const u8 gTowerFemaleFacilityClasses[] = 
+const u8 gTowerFemaleFacilityClasses[20] =
 {
     FACILITY_CLASS_AROMA_LADY,
     FACILITY_CLASS_TUBER_F,
@@ -205,7 +205,7 @@ const u8 gTowerFemaleFacilityClasses[] =
     FACILITY_CLASS_LASS
 };
 
-const u8 gTowerMaleTrainerGfxIds[] = 
+const u8 gTowerMaleTrainerGfxIds[30] =
 {
     EVENT_OBJ_GFX_HIKER,
     EVENT_OBJ_GFX_TUBER_M,
@@ -239,7 +239,7 @@ const u8 gTowerMaleTrainerGfxIds[] =
     EVENT_OBJ_GFX_HIKER
 };
 
-const u8 gTowerFemaleTrainerGfxIds[] = 
+const u8 gTowerFemaleTrainerGfxIds[20] =
 {
     EVENT_OBJ_GFX_WOMAN_2,
     EVENT_OBJ_GFX_TUBER_F,
@@ -263,7 +263,7 @@ const u8 gTowerFemaleTrainerGfxIds[] =
     EVENT_OBJ_GFX_LASS
 };
 
-const u8 sRubyFacilityClassToEmerald[82][2] = 
+static const u8 sRubyFacilityClassToEmerald[][2] =
 {
     {0x00, 0x0b},
     {0x01, 0x01},
@@ -340,10 +340,9 @@ const u8 sRubyFacilityClassToEmerald[82][2] =
     {0x4a, 0x48},
     {0x4b, 0x49},
     {0x4c, 0x4a},
-    {0x00, 0x00}
 };
 
-const u8 *const gUnknown_085DCFD8[] = 
+static const u8 *const gUnknown_085DCFD8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244383,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2443E7,
@@ -352,7 +351,7 @@ const u8 *const gUnknown_085DCFD8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2444D6
 };
 
-const u8 *const gUnknown_085DCFEC[] = 
+static const u8 *const gUnknown_085DCFEC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2444EF,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24451E,
@@ -361,7 +360,7 @@ const u8 *const gUnknown_085DCFEC[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2445C5
 };
 
-const u8 *const gUnknown_085DD000[] = 
+static const u8 *const gUnknown_085DD000[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2445E8,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244618,
@@ -370,7 +369,7 @@ const u8 *const gUnknown_085DD000[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2446B4
 };
 
-const u8 *const gUnknown_085DD014[] = 
+static const u8 *const gUnknown_085DD014[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2446E5,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24474D,
@@ -379,7 +378,7 @@ const u8 *const gUnknown_085DD014[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2448A7
 };
 
-const u8 *const gUnknown_085DD028[] = 
+static const u8 *const gUnknown_085DD028[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2448CD,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2448F5,
@@ -388,7 +387,7 @@ const u8 *const gUnknown_085DD028[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2449E6
 };
 
-const u8 *const gUnknown_085DD03C[] = 
+static const u8 *const gUnknown_085DD03C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244A23,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244AA9,
@@ -397,7 +396,7 @@ const u8 *const gUnknown_085DD03C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244B93
 };
 
-const u8 *const gUnknown_085DD050[] = 
+static const u8 *const gUnknown_085DD050[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244BD2,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244C18,
@@ -406,7 +405,7 @@ const u8 *const gUnknown_085DD050[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244D07
 };
 
-const u8 *const gUnknown_085DD064[] = 
+static const u8 *const gUnknown_085DD064[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244D36,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244D82,
@@ -415,7 +414,7 @@ const u8 *const gUnknown_085DD064[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244E5B
 };
 
-const u8 *const gUnknown_085DD078[] = 
+static const u8 *const gUnknown_085DD078[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244E7E,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244ECA,
@@ -424,7 +423,7 @@ const u8 *const gUnknown_085DD078[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244F98
 };
 
-const u8 *const gUnknown_085DD08C[] = 
+static const u8 *const gUnknown_085DD08C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_244FD3,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245013,
@@ -433,7 +432,7 @@ const u8 *const gUnknown_085DD08C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2450C0
 };
 
-const u8 *const gUnknown_085DD0A0[] = 
+static const u8 *const gUnknown_085DD0A0[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2450E6,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245196,
@@ -442,7 +441,7 @@ const u8 *const gUnknown_085DD0A0[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24529A
 };
 
-const u8 *const gUnknown_085DD0B4[] = 
+static const u8 *const gUnknown_085DD0B4[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2452EF,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2453B4,
@@ -451,7 +450,7 @@ const u8 *const gUnknown_085DD0B4[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2454A3
 };
 
-const u8 *const gUnknown_085DD0C8[] = 
+static const u8 *const gUnknown_085DD0C8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2454D6,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245535,
@@ -460,7 +459,7 @@ const u8 *const gUnknown_085DD0C8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245656
 };
 
-const u8 *const gUnknown_085DD0DC[] = 
+static const u8 *const gUnknown_085DD0DC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24568A,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2456F5,
@@ -469,7 +468,7 @@ const u8 *const gUnknown_085DD0DC[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24581F
 };
 
-const u8 *const gUnknown_085DD0F0[] = 
+static const u8 *const gUnknown_085DD0F0[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245851,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24589C,
@@ -478,7 +477,7 @@ const u8 *const gUnknown_085DD0F0[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24597F
 };
 
-const u8 *const gUnknown_085DD104[] = 
+static const u8 *const gUnknown_085DD104[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2459BE,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2459F7,
@@ -487,7 +486,7 @@ const u8 *const gUnknown_085DD104[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245B3E
 };
 
-const u8 *const gUnknown_085DD118[] = 
+static const u8 *const gUnknown_085DD118[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245B79,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245B91,
@@ -496,7 +495,7 @@ const u8 *const gUnknown_085DD118[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245C2D
 };
 
-const u8 *const gUnknown_085DD12C[] = 
+static const u8 *const gUnknown_085DD12C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245C66,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245C7F,
@@ -505,7 +504,7 @@ const u8 *const gUnknown_085DD12C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245D07
 };
 
-const u8 *const gUnknown_085DD140[] = 
+static const u8 *const gUnknown_085DD140[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245D4B,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245D60,
@@ -514,7 +513,7 @@ const u8 *const gUnknown_085DD140[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245DF0
 };
 
-const u8 *const gUnknown_085DD154[] = 
+static const u8 *const gUnknown_085DD154[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245E20,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245E41,
@@ -523,7 +522,7 @@ const u8 *const gUnknown_085DD154[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245EEC
 };
 
-const u8 *const gUnknown_085DD168[] = 
+static const u8 *const gUnknown_085DD168[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245F2B,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_245F58,
@@ -532,7 +531,7 @@ const u8 *const gUnknown_085DD168[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246002
 };
 
-const u8 *const gUnknown_085DD17C[] = 
+static const u8 *const gUnknown_085DD17C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246020,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246051,
@@ -541,7 +540,7 @@ const u8 *const gUnknown_085DD17C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24610D
 };
 
-const u8 *const gUnknown_085DD190[] = 
+static const u8 *const gUnknown_085DD190[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24614A,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24615D,
@@ -550,7 +549,7 @@ const u8 *const gUnknown_085DD190[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2461F5
 };
 
-const u8 *const gUnknown_085DD1A4[] = 
+static const u8 *const gUnknown_085DD1A4[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24622A,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246244,
@@ -559,7 +558,7 @@ const u8 *const gUnknown_085DD1A4[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2462E4
 };
 
-const u8 *const gUnknown_085DD1B8[] = 
+static const u8 *const gUnknown_085DD1B8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24631F,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24633C,
@@ -568,7 +567,7 @@ const u8 *const gUnknown_085DD1B8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2463FF
 };
 
-const u8 *const gUnknown_085DD1CC[] = 
+static const u8 *const gUnknown_085DD1CC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246449,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246478,
@@ -577,7 +576,7 @@ const u8 *const gUnknown_085DD1CC[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246529
 };
 
-const u8 *const gUnknown_085DD1E0[] = 
+static const u8 *const gUnknown_085DD1E0[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246571,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24658C,
@@ -586,7 +585,7 @@ const u8 *const gUnknown_085DD1E0[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24662A
 };
 
-const u8 *const gUnknown_085DD1F4[] = 
+static const u8 *const gUnknown_085DD1F4[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246662,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246686,
@@ -595,7 +594,7 @@ const u8 *const gUnknown_085DD1F4[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24670A
 };
 
-const u8 *const gUnknown_085DD208[] = 
+static const u8 *const gUnknown_085DD208[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246741,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246760,
@@ -604,7 +603,7 @@ const u8 *const gUnknown_085DD208[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2467E6
 };
 
-const u8 *const gUnknown_085DD21C[] = 
+static const u8 *const gUnknown_085DD21C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2467FF,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246831,
@@ -613,7 +612,7 @@ const u8 *const gUnknown_085DD21C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2468FE
 };
 
-const u8 *const gUnknown_085DD230[] = 
+static const u8 *const gUnknown_085DD230[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24692B,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24694B,
@@ -622,7 +621,7 @@ const u8 *const gUnknown_085DD230[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2469F1
 };
 
-const u8 *const gUnknown_085DD244[] = 
+static const u8 *const gUnknown_085DD244[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246A22,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246A4E,
@@ -631,7 +630,7 @@ const u8 *const gUnknown_085DD244[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246AF7
 };
 
-const u8 *const gUnknown_085DD258[] = 
+static const u8 *const gUnknown_085DD258[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246B2B,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246B3F,
@@ -640,7 +639,7 @@ const u8 *const gUnknown_085DD258[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246BE9
 };
 
-const u8 *const gUnknown_085DD26C[] = 
+static const u8 *const gUnknown_085DD26C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246C22,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246C35,
@@ -649,7 +648,7 @@ const u8 *const gUnknown_085DD26C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246CE9
 };
 
-const u8 *const gUnknown_085DD280[] = 
+static const u8 *const gUnknown_085DD280[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246D2D,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246D3F,
@@ -658,7 +657,7 @@ const u8 *const gUnknown_085DD280[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246DD3
 };
 
-const u8 *const gUnknown_085DD294[] = 
+static const u8 *const gUnknown_085DD294[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246E1A,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246E39,
@@ -667,7 +666,7 @@ const u8 *const gUnknown_085DD294[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246EEE
 };
 
-const u8 *const gUnknown_085DD2A8[] = 
+static const u8 *const gUnknown_085DD2A8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246F21,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_246F4C,
@@ -676,7 +675,7 @@ const u8 *const gUnknown_085DD2A8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247013
 };
 
-const u8 *const gUnknown_085DD2BC[] = 
+static const u8 *const gUnknown_085DD2BC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24705B,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24707D,
@@ -685,7 +684,7 @@ const u8 *const gUnknown_085DD2BC[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24712A
 };
 
-const u8 *const gUnknown_085DD2D0[] = 
+static const u8 *const gUnknown_085DD2D0[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24716C,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24718D,
@@ -694,7 +693,7 @@ const u8 *const gUnknown_085DD2D0[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247238
 };
 
-const u8 *const gUnknown_085DD2E4[] = 
+static const u8 *const gUnknown_085DD2E4[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247268,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247291,
@@ -703,7 +702,7 @@ const u8 *const gUnknown_085DD2E4[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247348
 };
 
-const u8 *const gUnknown_085DD2F8[] = 
+static const u8 *const gUnknown_085DD2F8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24737A,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24738F,
@@ -712,7 +711,7 @@ const u8 *const gUnknown_085DD2F8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247438
 };
 
-const u8 *const gUnknown_085DD30C[] = 
+static const u8 *const gUnknown_085DD30C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247470,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247484,
@@ -721,7 +720,7 @@ const u8 *const gUnknown_085DD30C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24751D
 };
 
-const u8 *const gUnknown_085DD320[] = 
+static const u8 *const gUnknown_085DD320[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24754A,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24755C,
@@ -730,7 +729,7 @@ const u8 *const gUnknown_085DD320[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2475D5
 };
 
-const u8 *const gUnknown_085DD334[] = 
+static const u8 *const gUnknown_085DD334[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24760D,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247629,
@@ -739,7 +738,7 @@ const u8 *const gUnknown_085DD334[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2476ED
 };
 
-const u8 *const gUnknown_085DD348[] = 
+static const u8 *const gUnknown_085DD348[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247724,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247749,
@@ -748,7 +747,7 @@ const u8 *const gUnknown_085DD348[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247807
 };
 
-const u8 *const gUnknown_085DD35C[] = 
+static const u8 *const gUnknown_085DD35C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247838,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247854,
@@ -757,7 +756,7 @@ const u8 *const gUnknown_085DD35C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24790D
 };
 
-const u8 *const gUnknown_085DD370[] = 
+static const u8 *const gUnknown_085DD370[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247942,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24795F,
@@ -766,7 +765,7 @@ const u8 *const gUnknown_085DD370[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247A18
 };
 
-const u8 *const gUnknown_085DD384[] = 
+static const u8 *const gUnknown_085DD384[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247A51,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247A76,
@@ -775,7 +774,7 @@ const u8 *const gUnknown_085DD384[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247B16
 };
 
-const u8 *const gUnknown_085DD398[] = 
+static const u8 *const gUnknown_085DD398[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247B3E,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247B62,
@@ -784,7 +783,7 @@ const u8 *const gUnknown_085DD398[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247C23
 };
 
-const u8 *const gUnknown_085DD3AC[] = 
+static const u8 *const gUnknown_085DD3AC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247C4E,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247C8C,
@@ -793,7 +792,7 @@ const u8 *const gUnknown_085DD3AC[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247D4E
 };
 
-const u8 *const gUnknown_085DD3C0[] = 
+static const u8 *const gUnknown_085DD3C0[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247D97,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247DC7,
@@ -802,7 +801,7 @@ const u8 *const gUnknown_085DD3C0[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247E7E
 };
 
-const u8 *const gUnknown_085DD3D4[] = 
+static const u8 *const gUnknown_085DD3D4[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247EA1,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247EB5,
@@ -811,7 +810,7 @@ const u8 *const gUnknown_085DD3D4[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247F6D
 };
 
-const u8 *const gUnknown_085DD3E8[] = 
+static const u8 *const gUnknown_085DD3E8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247FA3,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_247FB7,
@@ -820,7 +819,7 @@ const u8 *const gUnknown_085DD3E8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24805E
 };
 
-const u8 *const gUnknown_085DD3FC[] = 
+static const u8 *const gUnknown_085DD3FC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24808D,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2480AB,
@@ -829,7 +828,7 @@ const u8 *const gUnknown_085DD3FC[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248151
 };
 
-const u8 *const gUnknown_085DD410[] = 
+static const u8 *const gUnknown_085DD410[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24818E,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2481A9,
@@ -838,7 +837,7 @@ const u8 *const gUnknown_085DD410[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24824F
 };
 
-const u8 *const gUnknown_085DD424[] = 
+static const u8 *const gUnknown_085DD424[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248297,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2482B1,
@@ -847,7 +846,7 @@ const u8 *const gUnknown_085DD424[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24833D
 };
 
-const u8 *const gUnknown_085DD438[] = 
+static const u8 *const gUnknown_085DD438[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248369,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24838D,
@@ -856,7 +855,7 @@ const u8 *const gUnknown_085DD438[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248431
 };
 
-const u8 *const gUnknown_085DD44C[] = 
+static const u8 *const gUnknown_085DD44C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248467,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248477,
@@ -865,7 +864,7 @@ const u8 *const gUnknown_085DD44C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248517
 };
 
-const u8 *const gUnknown_085DD460[] = 
+static const u8 *const gUnknown_085DD460[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248553,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24856A,
@@ -874,7 +873,7 @@ const u8 *const gUnknown_085DD460[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248614
 };
 
-const u8 *const gUnknown_085DD474[] = 
+static const u8 *const gUnknown_085DD474[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24864E,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248661,
@@ -883,7 +882,7 @@ const u8 *const gUnknown_085DD474[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2486FF
 };
 
-const u8 *const gUnknown_085DD488[] = 
+static const u8 *const gUnknown_085DD488[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248725,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248751,
@@ -892,7 +891,7 @@ const u8 *const gUnknown_085DD488[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2487F7
 };
 
-const u8 *const gUnknown_085DD49C[] = 
+static const u8 *const gUnknown_085DD49C[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248829,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24885B,
@@ -901,7 +900,7 @@ const u8 *const gUnknown_085DD49C[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248908
 };
 
-const u8 *const gUnknown_085DD4B0[] = 
+static const u8 *const gUnknown_085DD4B0[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24894B,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_24895F,
@@ -910,7 +909,7 @@ const u8 *const gUnknown_085DD4B0[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_2489E7
 };
 
-const u8 *const gUnknown_085DD4C4[] = 
+static const u8 *const gUnknown_085DD4C4[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248A10,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248A40,
@@ -919,7 +918,7 @@ const u8 *const gUnknown_085DD4C4[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248AEB
 };
 
-const u8 *const gUnknown_085DD4D8[] = 
+static const u8 *const gUnknown_085DD4D8[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248B22,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248B39,
@@ -928,7 +927,7 @@ const u8 *const gUnknown_085DD4D8[] =
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248BEE
 };
 
-const u8 *const gUnknown_085DD4EC[] = 
+static const u8 *const gUnknown_085DD4EC[] =
 {
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248C2E,
     BattleFrontier_BattleTowerMultiBattleRoom_Text_248C5B,
@@ -941,7 +940,7 @@ struct
 {
     u32 facilityClass;
     const u8 *const *strings;
-} const gUnknown_085DD500[50] = 
+} const gUnknown_085DD500[] =
 {
     {0x00000047, gUnknown_085DD118},
     {0x0000002b, gUnknown_085DD12C},
@@ -995,7 +994,7 @@ struct
     {0x00000007, gUnknown_085DD4EC}
 };
 
-const u8 *const *const gUnknown_085DD690[] = 
+static const u8 *const *const gUnknown_085DD690[] =
 {
     gUnknown_085DCFD8,
     gUnknown_085DCFEC,
@@ -3298,12 +3297,13 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
     {
         dst->lvlMode = src->lvlMode;
         dst->winStreak = src->winStreak;
-        for (i = 0; i < (signed) ARRAY_COUNT(sRubyFacilityClassToEmerald); i++)
+        // BUG: Reading outside the array. sRubyFacilityClassToEmerald has less than FACILITY_CLASSES_COUNT entries.
+        for (i = 0; i < FACILITY_CLASSES_COUNT; i++)
         {
             if (sRubyFacilityClassToEmerald[i][0] == src->facilityClass)
                 break;
         }
-        if (i != ARRAY_COUNT(sRubyFacilityClassToEmerald))
+        if (i != FACILITY_CLASSES_COUNT)
             dst->facilityClass = sRubyFacilityClassToEmerald[i][1];
         else
             dst->facilityClass = FACILITY_CLASS_YOUNGSTER;
@@ -3346,12 +3346,13 @@ bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, stru
     {
         dst->lvlMode = src->lvlMode;
         dst->winStreak = src->winStreak;
-        for (i = 0; i < (signed) ARRAY_COUNT(sRubyFacilityClassToEmerald); i++)
+        // BUG: Reading outside the array. sRubyFacilityClassToEmerald has less than FACILITY_CLASSES_COUNT entries.
+        for (i = 0; i < FACILITY_CLASSES_COUNT; i++)
         {
             if (sRubyFacilityClassToEmerald[i][1] == src->facilityClass)
                 break;
         }
-        if (i != ARRAY_COUNT(sRubyFacilityClassToEmerald))
+        if (i != FACILITY_CLASSES_COUNT)
             dst->facilityClass = sRubyFacilityClassToEmerald[i][0];
         else
             dst->facilityClass = 0x24; // FACILITY_CLASS_YOUNGSTER in Ruby/Sapphire.
