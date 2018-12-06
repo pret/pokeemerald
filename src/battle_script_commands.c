@@ -3270,7 +3270,7 @@ static void atk23_getexp(void)
         else
         {
             gBattleScripting.atk23_state++;
-            gBattleStruct->field_DF |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
+            gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
         }
         break;
     case 1: // calculate experience points to redistribute

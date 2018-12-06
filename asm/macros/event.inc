@@ -668,7 +668,7 @@
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ text
 		.4byte \pointer4 @ event script
-	.elseif \type == TRAINER_BATTLE_9
+	.elseif \type == TRAINER_BATTLE_PYRAMID
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
 	.elseif \type == TRAINER_BATTLE_SET_TRAINER_A

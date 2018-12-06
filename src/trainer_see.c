@@ -630,26 +630,26 @@ static void Task_DestroyTrainerApproachTask(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void sub_80B45D0(void)
+void TryPrepareSecondApproachingTrainer(void)
 {
     if (gNoOfApproachingTrainers == 2)
     {
         if (gApproachingTrainerId == 0)
         {
             gApproachingTrainerId++;
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = TRUE;
             UnfreezeEventObjects();
             FreezeEventObjectsExceptOne(gApproachingTrainers[1].eventObjectId);
         }
         else
         {
             gApproachingTrainerId = 0;
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = FALSE;
         }
     }
     else
     {
-        gSpecialVar_Result = 0;
+        gSpecialVar_Result = FALSE;
     }
 }
 
