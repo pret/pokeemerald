@@ -42,15 +42,15 @@ static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 u8 gUnknown_030060B0;
 void (*gUnknown_030060B4)(void);
 
-struct UnknownStruct2
+struct PokedexOption
 {
-    const u8 *text1;
-    const u8 *text2;
+    const u8 *description;
+    const u8 *title;
 };
 
 struct UnknownStruct1
 {
-    const struct UnknownStruct2 *pokedexList;
+    const struct PokedexOption *pokedexList;
     u8 unk4;
     u8 unk5;
     u16 unk6;
@@ -1069,90 +1069,109 @@ static const u8 gUnknown_0856EDF0[][4] =
     {0xFF, 0xFF,    4, 0xFF},
 };
 
-static const struct UnknownStruct2 gUnknown_0856EE0C[] =
+static const struct PokedexOption gDexModeOptions[] =
 {
-    {gUnknown_085E89A4, gUnknown_085E88DF},
-    {gUnknown_085E89BB, gUnknown_085E88E9},
+    {gText_DexHoennDescription, gText_DexHoennTitle},
+    {gText_DexNatDescription, gText_DexNatTitle},
     {NULL, NULL},
 };
 
-static const struct UnknownStruct2 gUnknown_0856EE24[] =
+static const struct PokedexOption gDexSortOptions[] =
 {
-    {gUnknown_085E89D4, gUnknown_085E88F6},
-    {gUnknown_085E8A02, gUnknown_085E8905},
-    {gUnknown_085E8A37, gUnknown_085E8911},
-    {gUnknown_085E8A73, gUnknown_085E891F},
-    {gUnknown_085E8AAF, gUnknown_085E892D},
-    {gUnknown_085E8AEA, gUnknown_085E893A},
+    {gText_DexSortNumericalDescription, gText_DexSortNumericalTitle},
+    {gText_DexSortAtoZDescription, gText_DexSortAtoZTitle},
+    {gText_DexSortHeaviestDescription, gText_DexSortHeaviestTitle},
+    {gText_DexSortLightestDescription, gText_DexSortLightestTitle},
+    {gText_DexSortTallestDescription, gText_DexSortTallestTitle},
+    {ggText_DexSortSmallestDescription, gText_DexSortSmallestTitle},
     {NULL, NULL},
 };
 
-static const struct UnknownStruct2 gUnknown_0856EE5C[] =
+static const struct PokedexOption gDexSearchAlphaOptions[] =
 {
-    {gUnknown_085E8B25, gUnknown_085E8B26},
-    {gUnknown_085E8B25, gUnknown_085E8948},
-    {gUnknown_085E8B25, gUnknown_085E894C},
-    {gUnknown_085E8B25, gUnknown_085E8950},
-    {gUnknown_085E8B25, gUnknown_085E8954},
-    {gUnknown_085E8B25, gUnknown_085E8958},
-    {gUnknown_085E8B25, gUnknown_085E895C},
-    {gUnknown_085E8B25, gUnknown_085E8960},
-    {gUnknown_085E8B25, gUnknown_085E8964},
-    {gUnknown_085E8B25, gUnknown_085E8968},
+    {gText_DexEmptyString, gText_DexSearchDontSpecify},
+    {gText_DexEmptyString, gText_DexSearchAlphaABC},
+    {gText_DexEmptyString, gText_DexSearchAlphaDEF},
+    {gText_DexEmptyString, gText_DexSearchAlphaGHI},
+    {gText_DexEmptyString, gText_DexSearchAlphaJKL},
+    {gText_DexEmptyString, gText_DexSearchAlphaMNO},
+    {gText_DexEmptyString, gText_DexSearchAlphaPQR},
+    {gText_DexEmptyString, gText_DexSearchAlphaSTU},
+    {gText_DexEmptyString, gText_DexSearchAlphaVWX},
+    {gText_DexEmptyString, gText_DexSearchAlphaYZ},
     {NULL, NULL},
 };
 
-static const struct UnknownStruct2 gUnknown_0856EEB4[] =
+static const struct PokedexOption gDexSearchColorOptions[] =
 {
-    {gUnknown_085E8B25, gUnknown_085E8B26},
-    {gUnknown_085E8B25, gUnknown_085E896B},
-    {gUnknown_085E8B25, gUnknown_085E896F},
-    {gUnknown_085E8B25, gUnknown_085E8974},
-    {gUnknown_085E8B25, gUnknown_085E897B},
-    {gUnknown_085E8B25, gUnknown_085E8981},
-    {gUnknown_085E8B25, gUnknown_085E8987},
-    {gUnknown_085E8B25, gUnknown_085E898D},
-    {gUnknown_085E8B25, gUnknown_085E8994},
-    {gUnknown_085E8B25, gUnknown_085E8999},
-    {gUnknown_085E8B25, gUnknown_085E899F},
+    {gText_DexEmptyString, gText_DexSearchDontSpecify},
+    {gText_DexEmptyString, gText_DexSearchColorRed},
+    {gText_DexEmptyString, gText_DexSearchColorBlue},
+    {gText_DexEmptyString, gText_DexSearchColorYellow},
+    {gText_DexEmptyString, gText_DexSearchColorGreen},
+    {gText_DexEmptyString, gText_DexSearchColorBlack},
+    {gText_DexEmptyString, gText_DexSearchColorBrown},
+    {gText_DexEmptyString, gText_DexSearchColorPurple},
+    {gText_DexEmptyString, gText_DexSearchColorGray},
+    {gText_DexEmptyString, gText_DexSearchColorWhite},
+    {gText_DexEmptyString, gText_DexSearchColorPink},
     {NULL, NULL},
 };
 
-static const struct UnknownStruct2 gUnknown_0856EF14[] =
+static const struct PokedexOption gDexSearchTypeOptions[] =
 {
-    {gUnknown_085E8B25, gUnknown_085E8B35},
-    {gUnknown_085E8B25, gTypeNames[TYPE_NORMAL]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_FIGHTING]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_FLYING]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_POISON]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_GROUND]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_ROCK]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_BUG]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_GHOST]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_STEEL]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_FIRE]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_WATER]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_GRASS]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_ELECTRIC]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_PSYCHIC]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_ICE]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_DRAGON]},
-    {gUnknown_085E8B25, gTypeNames[TYPE_DARK]},
+    {gText_DexEmptyString, gText_DexSearchTypeNone},
+    {gText_DexEmptyString, gTypeNames[TYPE_NORMAL]},
+    {gText_DexEmptyString, gTypeNames[TYPE_FIGHTING]},
+    {gText_DexEmptyString, gTypeNames[TYPE_FLYING]},
+    {gText_DexEmptyString, gTypeNames[TYPE_POISON]},
+    {gText_DexEmptyString, gTypeNames[TYPE_GROUND]},
+    {gText_DexEmptyString, gTypeNames[TYPE_ROCK]},
+    {gText_DexEmptyString, gTypeNames[TYPE_BUG]},
+    {gText_DexEmptyString, gTypeNames[TYPE_GHOST]},
+    {gText_DexEmptyString, gTypeNames[TYPE_STEEL]},
+    {gText_DexEmptyString, gTypeNames[TYPE_FIRE]},
+    {gText_DexEmptyString, gTypeNames[TYPE_WATER]},
+    {gText_DexEmptyString, gTypeNames[TYPE_GRASS]},
+    {gText_DexEmptyString, gTypeNames[TYPE_ELECTRIC]},
+    {gText_DexEmptyString, gTypeNames[TYPE_PSYCHIC]},
+    {gText_DexEmptyString, gTypeNames[TYPE_ICE]},
+    {gText_DexEmptyString, gTypeNames[TYPE_DRAGON]},
+    {gText_DexEmptyString, gTypeNames[TYPE_DARK]},
     {NULL, NULL},
 };
 
 static const u8 gUnknown_0856EFAC[] = {0x00, 0x01};
 static const u8 gUnknown_0856EFAE[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05};
-static const u8 gUnknown_0856EFB4[] = {0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17};
+static const u8 gDexSearchTypeIds[] = {
+    TYPE_NONE,
+    TYPE_NORMAL,
+    TYPE_FIGHTING,
+    TYPE_FLYING,
+    TYPE_POISON,
+    TYPE_GROUND,
+    TYPE_ROCK,
+    TYPE_BUG,
+    TYPE_GHOST,
+    TYPE_STEEL,
+    TYPE_FIRE,
+    TYPE_WATER,
+    TYPE_GRASS,
+    TYPE_ELECTRIC,
+    TYPE_PSYCHIC,
+    TYPE_ICE,
+    TYPE_DRAGON,
+    TYPE_DARK,
+};
 
 static const struct UnknownStruct1 gUnknown_0856EFC8[] =
 {
-    {gUnknown_0856EE5C, 6, 7, 10},
-    {gUnknown_0856EEB4, 8, 9, 11},
-    {gUnknown_0856EF14, 10,11, 18},
-    {gUnknown_0856EF14, 12, 13, 18},
-    {gUnknown_0856EE24, 4, 5, 6},
-    {gUnknown_0856EE0C, 2, 3, 2},
+    {gDexSearchAlphaOptions, 6, 7, 10},
+    {gDexSearchColorOptions, 8, 9, 11},
+    {gDexSearchTypeOptions, 10, 11, NUMBER_OF_MON_TYPES},
+    {gDexSearchTypeOptions, 12, 13, NUMBER_OF_MON_TYPES},
+    {gDexSortOptions, 4, 5, 6},
+    {gDexModeOptions, 2, 3, 2},
 };
 
 static const struct BgTemplate gUnknown_0856EFF8[] =
@@ -4690,15 +4709,15 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
     }
 
     // Search by type
-    if (type1 != 0xFF || type2 != 0xFF)
+    if (type1 != TYPE_NONE || type2 != TYPE_NONE)
     {
-        if (type1 == 0xFF)
+        if (type1 == TYPE_NONE)
         {
             type1 = type2;
-            type2 = 0xFF;
+            type2 = TYPE_NONE;
         }
 
-        if (type2 == 0xFF)
+        if (type2 == TYPE_NONE)
         {
             for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
             {
@@ -5095,7 +5114,7 @@ void sub_80C1B64(u8 taskId)
 void sub_80C1BCC(u8 taskId)
 {
     u8 r1;
-    const struct UnknownStruct2 *r8;
+    const struct PokedexOption *r8;
     u16 *p1;
     u16 *p2;
     u16 r2;
@@ -5148,7 +5167,7 @@ void sub_80C1BCC(u8 taskId)
         if (r3)
         {
             PlaySE(SE_SELECT);
-            sub_80C2618(r8[*p1 + *p2].text1);
+            sub_80C2618(r8[*p1 + *p2].description);
             CopyWindowToVram(0, 2);
         }
         return;
@@ -5172,7 +5191,7 @@ void sub_80C1BCC(u8 taskId)
         if (r3)
         {
             PlaySE(SE_SELECT);
-            sub_80C2618(r8[*p1 + *p2].text1);
+            sub_80C2618(r8[*p1 + *p2].description);
             CopyWindowToVram(0, 2);
         }
         return;
@@ -5391,24 +5410,24 @@ void sub_80C20F8(u8 taskId)
     sub_80C12B0(0x28, 0x10, 0x60, 0x50);
 
     var = gTasks[taskId].data[6] + gTasks[taskId].data[7];
-    sub_80C1270(gUnknown_0856EE5C[var].text2, 0x2D, 0x11);
+    sub_80C1270(gDexSearchAlphaOptions[var].title, 0x2D, 0x11);
 
     var = gTasks[taskId].data[8] + gTasks[taskId].data[9];
-    sub_80C1270(gUnknown_0856EEB4[var].text2, 0x2D, 0x21);
+    sub_80C1270(gDexSearchColorOptions[var].title, 0x2D, 0x21);
 
     var = gTasks[taskId].data[10] + gTasks[taskId].data[11];
-    sub_80C1270(gUnknown_0856EF14[var].text2, 0x2D, 0x31);
+    sub_80C1270(gDexSearchTypeOptions[var].title, 0x2D, 0x31);
 
     var = gTasks[taskId].data[12] + gTasks[taskId].data[13];
-    sub_80C1270(gUnknown_0856EF14[var].text2, 0x5D, 0x31);
+    sub_80C1270(gDexSearchTypeOptions[var].title, 0x5D, 0x31);
 
     var = gTasks[taskId].data[4] + gTasks[taskId].data[5];
-    sub_80C1270(gUnknown_0856EE24[var].text2, 0x2D, 0x41);
+    sub_80C1270(gDexSortOptions[var].title, 0x2D, 0x41);
 
     if (IsNationalPokedexEnabled())
     {
         var = gTasks[taskId].data[2] + gTasks[taskId].data[3];
-        sub_80C1270(gUnknown_0856EE0C[var].text2, 0x2D, 0x51);
+        sub_80C1270(gDexModeOptions[var].title, 0x2D, 0x51);
     }
 }
 
@@ -5447,45 +5466,45 @@ void sub_80C21D4(u8 a)
 
 void sub_80C2294(u8 taskId)
 {
-    const struct UnknownStruct2 *r6 = gUnknown_0856EFC8[gTasks[taskId].data[1]].pokedexList;
+    const struct PokedexOption *r6 = gUnknown_0856EFC8[gTasks[taskId].data[1]].pokedexList;
     const u16 *r8 = &gTasks[taskId].data[gUnknown_0856EFC8[gTasks[taskId].data[1]].unk4];
     const u16 *r7 = &gTasks[taskId].data[gUnknown_0856EFC8[gTasks[taskId].data[1]].unk5];
     u16 i;
     u16 j;
 
     sub_80C267C();
-    for (i = 0, j = *r7; i < 6 && r6[j].text2 != NULL; i++, j++)
-        sub_80C2668(i, r6[j].text2);
-    sub_80C2618(r6[*r8 + *r7].text1);
+    for (i = 0, j = *r7; i < 6 && r6[j].title != NULL; i++, j++)
+        sub_80C2668(i, r6[j].title);
+    sub_80C2618(r6[*r8 + *r7].description);
 }
 
 u8 sub_80C2318(u8 taskId, u8 b)
 {
     const u16 *ptr1 = &gTasks[taskId].data[gUnknown_0856EFC8[b].unk4];
     const u16 *ptr2 = &gTasks[taskId].data[gUnknown_0856EFC8[b].unk5];
-    u16 r2 = *ptr1 + *ptr2;
+    u16 type = *ptr1 + *ptr2;
 
     switch (b)
     {
         default:
             return 0;
         case 5:
-            return gUnknown_0856EFAC[r2];
+            return gUnknown_0856EFAC[type];
         case 4:
-            return gUnknown_0856EFAE[r2];
+            return gUnknown_0856EFAE[type];
         case 0:
-            if (r2 == 0)
+            if (type == 0)
                 return 0xFF;
             else
-                return r2;
+                return type;
         case 1:
-            if (r2 == 0)
+            if (type == 0)
                 return 0xFF;
             else
-                return r2 - 1;
+                return type - 1;
         case 2:
         case 3:
-            return gUnknown_0856EFB4[r2];
+            return gDexSearchTypeIds[type];
     }
 }
 
