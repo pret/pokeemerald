@@ -375,7 +375,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_22419A:: @ 822419A
 MossdeepCity_SpaceCenter_2F_Text_2241A1: @ 82241A1
 	.string "MOSSDEEP has mainly sunny weather,\n"
 	.string "and its winds are stable.\p"
-	.string "It’s an ideal location for launching\n"
+	.string "It's an ideal location for launching\n"
 	.string "rockets.$"
 
 MossdeepCity_SpaceCenter_2F_Text_22420C: @ 822420C
@@ -385,13 +385,13 @@ MossdeepCity_SpaceCenter_2F_Text_22420C: @ 822420C
 MossdeepCity_SpaceCenter_2F_Text_224253: @ 8224253
 	.string "If only I was a little younger, I would\n"
 	.string "have liked being an astronaut…\p"
-	.string "No… It’s not too late!\n"
+	.string "No… It's not too late!\n"
 	.string "I can and will try!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2242C5: @ 82242C5
 	.string "If TEAM MAGMA takes the rocket fuel,\n"
-	.string "I won’t be able to go to space!\p"
-	.string "They can’t be allowed to get away\n"
+	.string "I won't be able to go to space!\p"
+	.string "They can't be allowed to get away\n"
 	.string "with such an outrage!$"
 
 MossdeepCity_SpaceCenter_2F_Text_224342: @ 8224342
@@ -403,25 +403,25 @@ MossdeepCity_SpaceCenter_2F_Text_224376: @ 8224376
 	.string "Do they want to go to space, too?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2243A4: @ 82243A4
-	.string "What’s wrong with you?\p"
-	.string "You’re outnumbered three to one,\n"
+	.string "What's wrong with you?\p"
+	.string "You're outnumbered three to one,\n"
 	.string "but you still want to take us on?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2243FE: @ 82243FE
 	.string "Good answer!\n"
-	.string "That’s what a smart person’ll do!$"
+	.string "That's what a smart person'll do!$"
 
 MossdeepCity_SpaceCenter_2F_Text_22442D: @ 822442D
 	.string "A reckless go-getter, are you?\n"
-	.string "Okay, I’ll go first!$"
+	.string "Okay, I'll go first!$"
 
 MossdeepCity_SpaceCenter_2F_Text_224461: @ 8224461
 	.string "I lost!\n"
 	.string "But!$"
 
 MossdeepCity_SpaceCenter_2F_Text_22446E: @ 822446E
-	.string "It’s too soon to be relieved!\n"
-	.string "I’m up next!$"
+	.string "It's too soon to be relieved!\n"
+	.string "I'm up next!$"
 
 MossdeepCity_SpaceCenter_2F_Text_224499: @ 8224499
 	.string "I lost, too!\n"
@@ -429,11 +429,11 @@ MossdeepCity_SpaceCenter_2F_Text_224499: @ 8224499
 
 MossdeepCity_SpaceCenter_2F_Text_2244AB: @ 82244AB
 	.string "I bet you want to take a break.\n"
-	.string "But I’m not about to let you do that!$"
+	.string "But I'm not about to let you do that!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2244F1: @ 82244F1
-	.string "We should’ve taken a break…\n"
-	.string "That’s what we should’ve done…$"
+	.string "We should've taken a break…\n"
+	.string "That's what we should've done…$"
 
 MossdeepCity_SpaceCenter_2F_Text_22452C: @ 822452C
 	.string "Three of us here, and look at the sorry\n"
@@ -450,34 +450,34 @@ MossdeepCity_SpaceCenter_2F_Text_2245AF: @ 82245AF
 MossdeepCity_SpaceCenter_2F_Text_2245D9: @ 82245D9
 	.string "Hehehe!\p"
 	.string "We come all the way here to get some\n"
-	.string "fuel, and we’re interfered with again!\p"
-	.string "If you’re going to mess with us too,\n"
-	.string "we’ll take care of you at the same time!$"
+	.string "fuel, and we're interfered with again!\p"
+	.string "If you're going to mess with us too,\n"
+	.string "we'll take care of you at the same time!$"
 
 MossdeepCity_SpaceCenter_2F_Text_22467B: @ 822467B
 	.string "MAXIE: Clear out of the way!\n"
-	.string "Don’t you dare interfere!$"
+	.string "Don't you dare interfere!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2246B2: @ 82246B2
 	.string "STEVEN: TEAM MAGMA…\p"
-	.string "What’s the point of stealing rocket\n"
+	.string "What's the point of stealing rocket\n"
 	.string "fuel?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2246F0: @ 82246F0
-	.string "MAXIE: Fufufu… Since you’re so\n"
+	.string "MAXIE: Fufufu… Since you're so\n"
 	.string "curious, you deserve an explanation.\p"
-	.string "We’re going to jettison the entire\n"
+	.string "We're going to jettison the entire\n"
 	.string "load into MT. CHIMNEY!\p"
 	.string "With GROUDON gone, we have no need\n"
 	.string "for that slag heap of a mountain!\p"
-	.string "So we’ll use the fuel’s power to make\n"
+	.string "So we'll use the fuel's power to make\n"
 	.string "the volcano erupt!\p"
 	.string "It will be savage!$"
 
 MossdeepCity_SpaceCenter_2F_Text_2247FF: @ 82247FF
 	.string "STEVEN: {PLAYER}{KUN}!\n"
-	.string "You’re going to help me?\p"
-	.string "Let’s go into battle together!\n"
+	.string "You're going to help me?\p"
+	.string "Let's go into battle together!\n"
 	.string "Are you ready?$"
 
 MossdeepCity_SpaceCenter_2F_Text_224854: @ 8224854
@@ -489,7 +489,7 @@ MossdeepCity_SpaceCenter_2F_Text_22487C: @ 822487C
 	.string "I just want to expand the land mass…$"
 
 MossdeepCity_SpaceCenter_Text_2248AD: @ 82248AD
-	.string "I’m with our leader…$"
+	.string "I'm with our leader…$"
 
 MossdeepCity_SpaceCenter_2F_Text_2248C2: @ 82248C2
 	.string "MAXIE: We failed to make the volcano\n"
@@ -503,7 +503,7 @@ MossdeepCity_SpaceCenter_2F_Text_2248C2: @ 82248C2
 	.string "If…\n"
 	.string "If we, TEAM MAGMA, are wrong…\l"
 	.string "… … … … … …\p"
-	.string "Then might TEAM AQUA’s goal to expand\n"
+	.string "Then might TEAM AQUA's goal to expand\n"
 	.string "the sea also be equally misguided?$"
 
 MossdeepCity_SpaceCenter_2F_Text_2249DC: @ 82249DC
@@ -519,6 +519,6 @@ MossdeepCity_SpaceCenter_2F_Text_224A4A: @ 8224A4A
 	.string "thanks for your support.\p"
 	.string "Please come see me at home\n"
 	.string "after this.\p"
-	.string "Oh, yes, I don’t live in RUSTBORO CITY.\n"
+	.string "Oh, yes, I don't live in RUSTBORO CITY.\n"
 	.string "I live right here on this island.$"
 

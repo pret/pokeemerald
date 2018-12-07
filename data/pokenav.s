@@ -483,7 +483,7 @@ gUnknown_086203DB:: @ 86203DB
 	.string "body and mind healthy.$"
 
 gUnknown_086203F2:: @ 86203F2
-	.string "I’m not very good at this.$"
+	.string "I'm not very good at this.$"
 
 gUnknown_0862040D:: @ 862040D
 	.string "Ruin-exploration partners.$"
@@ -507,7 +507,7 @@ gUnknown_0862049C:: @ 862049C
 	.string "I travel the world.$"
 
 gUnknown_086204B0:: @ 86204B0
-	.string "I’m going to try hard!$"
+	.string "I'm going to try hard!$"
 
 gUnknown_086204C7:: @ 86204C7
 	.string "Good swimmer POKéMON.$"
@@ -519,13 +519,13 @@ gUnknown_086204F9:: @ 86204F9
 	.string "using an inner tube.$"
 
 gUnknown_0862050E:: @ 862050E
-	.string "I don’t know. I’ll try hard.$"
+	.string "I don't know. I'll try hard.$"
 
 gUnknown_0862052B:: @ 862052B
 	.string "WATER POKéMON are buddies.$"
 
 gUnknown_08620546:: @ 8620546
-	.string "It’s not like I can’t swim.$"
+	.string "It's not like I can't swim.$"
 
 gUnknown_08620562:: @ 8620562
 	.string "I just like my inner tube.$"
@@ -555,7 +555,7 @@ gUnknown_0862062F:: @ 862062F
 	.string "TRAINER!$"
 
 gUnknown_08620638:: @ 8620638
-	.string "Exploit the foe’s weakness.$"
+	.string "Exploit the foe's weakness.$"
 
 gUnknown_08620654:: @ 8620654
 	.string "Balance is crucial.$"
@@ -570,13 +570,13 @@ gUnknown_08620693:: @ 8620693
 	.string "Upset the opponent.$"
 
 gUnknown_086206A7:: @ 86206A7
-	.string "Type doesn’t matter.$"
+	.string "Type doesn't matter.$"
 
 gUnknown_086206BC:: @ 86206BC
-	.string "I’m a top student at the$"
+	.string "I'm a top student at the$"
 
 gUnknown_086206D5:: @ 86206D5
-	.string "TRAINER’S SCHOOL.$"
+	.string "TRAINER'S SCHOOL.$"
 
 gUnknown_086206E7:: @ 86206E7
 	.string "Slow, steady suffering.$"
@@ -588,7 +588,7 @@ gUnknown_08620717:: @ 8620717
 	.string "I see things that others$"
 
 gUnknown_08620730:: @ 8620730
-	.string "can’t see...$"
+	.string "can't see...$"
 
 gUnknown_0862073D:: @ 862073D
 	.string "Anything to win.$"
@@ -603,7 +603,7 @@ gUnknown_08620779:: @ 8620779
 	.string "my POKéMON at home.$"
 
 gUnknown_0862078D:: @ 862078D
-	.string "You’ll fall under my spell!$"
+	.string "You'll fall under my spell!$"
 
 gUnknown_086207A9:: @ 86207A9
 	.string "Mature WATER type.$"
@@ -615,7 +615,7 @@ gUnknown_086207D7:: @ 86207D7
 	.string "the world on a luxury liner.$"
 
 gUnknown_086207F4:: @ 86207F4
-	.string "I’ll lead you astray.$"
+	.string "I'll lead you astray.$"
 
 gUnknown_0862080A:: @ 862080A
 	.string "Cute, of course.$"
@@ -657,10 +657,10 @@ gUnknown_0862091C:: @ 862091C
 	.string "Funky WATER type!$"
 
 gUnknown_0862092E:: @ 862092E
-	.string "If I can’t be out swimming,$"
+	.string "If I can't be out swimming,$"
 
 gUnknown_0862094A:: @ 862094A
-	.string "I’ll be pumping weights.$"
+	.string "I'll be pumping weights.$"
 
 gUnknown_08620963:: @ 8620963
 	.string "Grand slam pummeling!$"
@@ -699,10 +699,10 @@ gUnknown_08620A66:: @ 8620A66
 	.string "you and stun you!$"
 
 gUnknown_08620A78:: @ 8620A78
-	.string "I’ll electrify you!$"
+	.string "I'll electrify you!$"
 
 gUnknown_08620A8C:: @ 8620A8C
-	.string "They’re ELECTRIC!$"
+	.string "They're ELECTRIC!$"
 
 gUnknown_08620A9E:: @ 8620A9E
 	.string "I want to make people cry$"
@@ -720,13 +720,13 @@ gUnknown_08620AFB:: @ 8620AFB
 	.string "When you light a campfire,$"
 
 gUnknown_08620B16:: @ 8620B16
-	.string "be sure there’s some water.$"
+	.string "be sure there's some water.$"
 
 gUnknown_08620B32:: @ 8620B32
 	.string "Hang in and be tenacious!$"
 
 gUnknown_08620B4C:: @ 8620B4C
-	.string "I’ll raise any POKéMON.$"
+	.string "I'll raise any POKéMON.$"
 
 gUnknown_08620B64:: @ 8620B64
 	.string "POKéMON raised in the wild$"
@@ -738,10 +738,10 @@ gUnknown_08620B8C:: @ 8620B8C
 	.string "Our love lets us prevail.$"
 
 gUnknown_08620BA6:: @ 8620BA6
-	.string "We’ve had them for years.$"
+	.string "We've had them for years.$"
 
 gUnknown_08620BC0:: @ 8620BC0
-	.string "Married 50 years, we’ve$"
+	.string "Married 50 years, we've$"
 
 gUnknown_08620BD8:: @ 8620BD8
 	.string "devotedly raised POKéMON.$"
@@ -768,7 +768,7 @@ gUnknown_08620C78:: @ 8620C78
 	.string "I can see through exactly$"
 
 gUnknown_08620C92:: @ 8620C92
-	.string "what you’re thinking!$"
+	.string "what you're thinking!$"
 
 gUnknown_08620CA8:: @ 8620CA8
 	.string "Battle at full power.$"
@@ -792,7 +792,7 @@ gUnknown_08620D32:: @ 8620D32
 	.string "We enjoy a spot of tea$"
 
 gUnknown_08620D49:: @ 8620D49
-	.string "every day. It’s imported.$"
+	.string "every day. It's imported.$"
 
 gUnknown_08620D63:: @ 8620D63
 	.string "I use my head to battle.$"
@@ -825,7 +825,7 @@ gUnknown_08620E39:: @ 8620E39
 	.string "POKéMON that we both like.$"
 
 gUnknown_08620E54:: @ 8620E54
-	.string "We’re senior and junior$"
+	.string "We're senior and junior$"
 
 gUnknown_08620E6C:: @ 8620E6C
 	.string "students into POKéMON!$"
@@ -849,7 +849,7 @@ gUnknown_08620EF6:: @ 8620EF6
 	.string "A POKéMON raised with love!$"
 
 gUnknown_08620F12:: @ 8620F12
-	.string "It’s important to build$"
+	.string "It's important to build$"
 
 gUnknown_08620F2A:: @ 8620F2A
 	.string "trust with your POKéMON.$"
@@ -861,7 +861,7 @@ gUnknown_08620F5D:: @ 8620F5D
 	.string "The essence of FIGHTING.$"
 
 gUnknown_08620F76:: @ 8620F76
-	.string "I’m not ready to give way$"
+	.string "I'm not ready to give way$"
 
 gUnknown_08620F90:: @ 8620F90
 	.string "to the young yet!$"
@@ -885,7 +885,7 @@ gUnknown_0862100A:: @ 862100A
 	.string "I use different types.$"
 
 gUnknown_08621021:: @ 8621021
-	.string "I’m going to keep working$"
+	.string "I'm going to keep working$"
 
 gUnknown_0862103B:: @ 862103B
 	.string "until I beat a GYM LEADER.$"
@@ -897,7 +897,7 @@ gUnknown_0862106A:: @ 862106A
 	.string "WATER POKéMON to battle!$"
 
 gUnknown_08621083:: @ 8621083
-	.string "I’m the world’s only guy to$"
+	.string "I'm the world's only guy to$"
 
 gUnknown_0862109F:: @ 862109F
 	.string "catch a huge POKéMON!$"
@@ -909,7 +909,7 @@ gUnknown_086210CE:: @ 86210CE
 	.string "All hail the WATER type!$"
 
 gUnknown_086210E7:: @ 86210E7
-	.string "I won’t be beaten by some$"
+	.string "I won't be beaten by some$"
 
 gUnknown_08621101:: @ 8621101
 	.string "beach bum SWIMMER!$"
@@ -945,7 +945,7 @@ gUnknown_086211E4:: @ 86211E4
 	.string "A fast-running POKéMON!$"
 
 gUnknown_086211FC:: @ 86211FC
-	.string "If you ran and ran, you’d$"
+	.string "If you ran and ran, you'd$"
 
 gUnknown_08621216:: @ 8621216
 	.string "become one with the wind.$"
@@ -969,7 +969,7 @@ gUnknown_08621290:: @ 8621290
 	.string "The strength of STEEL.$"
 
 gUnknown_086212A7:: @ 86212A7
-	.string "If you’re sweating, get$"
+	.string "If you're sweating, get$"
 
 gUnknown_086212BF:: @ 86212BF
 	.string "fluids into you regularly.$"
@@ -984,22 +984,22 @@ gUnknown_0862130C:: @ 862130C
 	.string "Training POKéMON is good,$"
 
 gUnknown_08621326:: @ 8621326
-	.string "but don’t neglect yourself.$"
+	.string "but don't neglect yourself.$"
 
 gUnknown_08621342:: @ 8621342
-	.string "It’s about POKéMON power!$"
+	.string "It's about POKéMON power!$"
 
 gUnknown_0862135C:: @ 862135C
 	.string "See the power of DRAGONS!$"
 
 gUnknown_08621376:: @ 8621376
-	.string "I’ll become legendary as the$"
+	.string "I'll become legendary as the$"
 
 gUnknown_08621393:: @ 8621393
 	.string "strongest one day!$"
 
 gUnknown_086213A6:: @ 86213A6
-	.string "I’ll show you my technique!$"
+	.string "I'll show you my technique!$"
 
 gUnknown_086213C2:: @ 86213C2
 	.string "Elegantly wheeling BIRDS.$"
@@ -1011,7 +1011,7 @@ gUnknown_086213F8:: @ 86213F8
 	.string "love to that girl!$"
 
 gUnknown_0862140B:: @ 862140B
-	.string "You’ll suffer from poison!$"
+	.string "You'll suffer from poison!$"
 
 gUnknown_08621426:: @ 8621426
 	.string "Poisonous POKéMON.$"
@@ -1032,16 +1032,16 @@ gUnknown_08621499:: @ 8621499
 	.string "If my POKéMON lose,$"
 
 gUnknown_086214AD:: @ 86214AD
-	.string "I’ll carry on the fight!$"
+	.string "I'll carry on the fight!$"
 
 gUnknown_086214C6:: @ 86214C6
 	.string "Go, go, my POKéMON!$"
 
 gUnknown_086214DA:: @ 86214DA
-	.string "I’ll raise anything.$"
+	.string "I'll raise anything.$"
 
 gUnknown_086214EF:: @ 86214EF
-	.string "UV rays are your skin’s$"
+	.string "UV rays are your skin's$"
 
 gUnknown_08621507:: @ 8621507
 	.string "enemy. Get protected.$"
@@ -1116,7 +1116,7 @@ gUnknown_08621710:: @ 8621710
 	.string "I want to collect all the$"
 
 gUnknown_0862172A:: @ 862172A
-	.string "world’s rare POKéMON.$"
+	.string "world's rare POKéMON.$"
 
 gUnknown_08621740:: @ 8621740
 	.string "I count on power.$"
@@ -1134,7 +1134,7 @@ gUnknown_08621799:: @ 8621799
 	.string "Full-on attack!$"
 
 gUnknown_086217A9:: @ 86217A9
-	.string "Anything. I’ll raise it.$"
+	.string "Anything. I'll raise it.$"
 
 gUnknown_086217C2:: @ 86217C2
 	.string "I give them {POKEBLOCK}S for$"
@@ -1161,7 +1161,7 @@ gUnknown_0862186A:: @ 862186A
 	.string "I like strong POKéMON.$"
 
 gUnknown_08621881:: @ 8621881
-	.string "I’m training for rescue$"
+	.string "I'm training for rescue$"
 
 gUnknown_08621899:: @ 8621899
 	.string "work with my POKéMON.$"
@@ -1179,7 +1179,7 @@ gUnknown_086218F0:: @ 86218F0
 	.string "must never be forgiven!$"
 
 gUnknown_08621908:: @ 8621908
-	.string "I’ll show you some guts!$"
+	.string "I'll show you some guts!$"
 
 gUnknown_08621921:: @ 8621921
 	.string "Cute POKéMON are my faves!$"
@@ -1209,10 +1209,10 @@ gUnknown_086219E3:: @ 86219E3
 	.string "Hard-bodied POKéMON.$"
 
 gUnknown_086219F8:: @ 86219F8
-	.string "I’ve been planning a month$"
+	.string "I've been planning a month$"
 
 gUnknown_08621A13:: @ 8621A13
-	.string "for today’s hike.$"
+	.string "for today's hike.$"
 
 gUnknown_08621A25:: @ 8621A25
 	.string "I like it hot!$"
@@ -1233,7 +1233,7 @@ gUnknown_08621A88:: @ 8621A88
 	.string "Lovey-dovey POKéMON!$"
 
 gUnknown_08621A9D:: @ 8621A9D
-	.string "We’re lovey-dovey!$"
+	.string "We're lovey-dovey!$"
 
 gUnknown_08621AB0:: @ 8621AB0
 	.string "Forever lovey-dovey!$"
@@ -1350,19 +1350,19 @@ gUnknown_08621E38:: @ 8621E38
 	.string "Offense over defense!$"
 
 gUnknown_08621E4E:: @ 8621E4E
-	.string "The DARK side’s beauties.$"
+	.string "The DARK side's beauties.$"
 
 gUnknown_08621E68:: @ 8621E68
 	.string "They said I was a punk, but$"
 
 gUnknown_08621E84:: @ 8621E84
-	.string "I’m one of the ELITE FOUR!$"
+	.string "I'm one of the ELITE FOUR!$"
 
 gUnknown_08621E9F:: @ 8621E9F
 	.string "Confuse and confound.$"
 
 gUnknown_08621EB5:: @ 8621EB5
-	.string "There’s nothing definite.$"
+	.string "There's nothing definite.$"
 
 gUnknown_08621ECF:: @ 8621ECF
 	.string "I wonder how my grandma at$"

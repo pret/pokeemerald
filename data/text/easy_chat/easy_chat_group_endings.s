@@ -35,10 +35,10 @@ gEasyChatWord_Is:: @ 859A1A0
 	.string "IS$"
 
 gEasyChatWord_IsntItQues:: @ 859A1A3
-	.string "ISN’T IT?$"
+	.string "ISN'T IT?$"
 
 gEasyChatWord_Lets:: @ 859A1AD
-	.string "LET’S$"
+	.string "LET'S$"
 
 gEasyChatWord_Other:: @ 859A1B3
 	.string "OTHER$"
@@ -56,19 +56,19 @@ gEasyChatWord_Those:: @ 859A1C6
 	.string "THOSE$"
 
 gEasyChatWord_Isnt:: @ 859A1CC
-	.string "ISN’T$"
+	.string "ISN'T$"
 
 gEasyChatWord_Wont:: @ 859A1D2
-	.string "WON’T$"
+	.string "WON'T$"
 
 gEasyChatWord_Cant:: @ 859A1D8
-	.string "CAN’T$"
+	.string "CAN'T$"
 
 gEasyChatWord_Can:: @ 859A1DE
 	.string "CAN$"
 
 gEasyChatWord_Dont:: @ 859A1E2
-	.string "DON’T$"
+	.string "DON'T$"
 
 gEasyChatWord_Do:: @ 859A1E8
 	.string "DO$"
@@ -83,16 +83,16 @@ gEasyChatWord_Which:: @ 859A1F5
 	.string "WHICH$"
 
 gEasyChatWord_Wasnt:: @ 859A1FB
-	.string "WASN’T$"
+	.string "WASN'T$"
 
 gEasyChatWord_Werent:: @ 859A202
-	.string "WEREN’T$"
+	.string "WEREN'T$"
 
 gEasyChatWord_Have:: @ 859A20A
 	.string "HAVE$"
 
 gEasyChatWord_Havent:: @ 859A20F
-	.string "HAVEN’T$"
+	.string "HAVEN'T$"
 
 gEasyChatWord_A:: @ 859A217
 	.string "A$"
@@ -179,10 +179,10 @@ gEasyChatWord_Did:: @ 859A28E
 	.string "DID$"
 
 gEasyChatWord_Didnt:: @ 859A292
-	.string "DIDN’T$"
+	.string "DIDN'T$"
 
 gEasyChatWord_Doesnt:: @ 859A299
-	.string "DOESN’T$"
+	.string "DOESN'T$"
 
 gEasyChatWord_Without:: @ 859A2A1
 	.string "WITHOUT$"

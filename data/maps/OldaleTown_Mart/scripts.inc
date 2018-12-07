@@ -58,16 +58,16 @@ OldaleTown_Mart_EventScript_1FC2A9:: @ 81FC2A9
 	end
 
 OldaleTown_Mart_Text_1FC2B2: @ 81FC2B2
-	.string "The clerk says they’re all sold out.\n"
-	.string "I can’t buy any POKé BALLS.$"
+	.string "The clerk says they're all sold out.\n"
+	.string "I can't buy any POKé BALLS.$"
 
 OldaleTown_Mart_Text_1FC2F3: @ 81FC2F3
-	.string "I’m going to buy a bunch of POKé BALLS\n"
+	.string "I'm going to buy a bunch of POKé BALLS\n"
 	.string "and catch a bunch of POKéMON!$"
 
 OldaleTown_Mart_Text_1FC338: @ 81FC338
 	.string "If a POKéMON gets hurt and loses its HP\n"
-	.string "and faints, it won’t be able to battle.\p"
+	.string "and faints, it won't be able to battle.\p"
 	.string "To prevent your POKéMON from fainting,\n"
 	.string "restore its HP with a POTION.$"
 

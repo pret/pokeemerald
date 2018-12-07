@@ -21,8 +21,8 @@ LilycoveCity_House2_EventScript_21EDAC:: @ 821EDAC
 	end
 
 LilycoveCity_House2_Text_21EDB6: @ 821EDB6
-	.string "Huh? What? What’s that?\p"
-	.string "I’m not near awake yet…\n"
+	.string "Huh? What? What's that?\p"
+	.string "I'm not near awake yet…\n"
 	.string "You can have this…$"
 
 LilycoveCity_House2_Text_21EDF9: @ 821EDF9

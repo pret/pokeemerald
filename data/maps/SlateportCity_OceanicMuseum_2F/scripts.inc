@@ -274,23 +274,23 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BD76:: @ 820BD76
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_20BD8D: @ 820BD8D
-	.string "Yes? If you’re looking for STERN,\n"
+	.string "Yes? If you're looking for STERN,\n"
 	.string "that would be me.\p"
 	.string "Ah! Those must be the parts I ordered\n"
 	.string "from MR. STONE of DEVON.\p"
-	.string "Thank you! That’s great!\n"
+	.string "Thank you! That's great!\n"
 	.string "We can prepare for our expedition now.$"
 
 SlateportCity_OceanicMuseum_2F_Text_20BE40: @ 820BE40
 	.string "Hehehe, hold it!\n"
-	.string "We’ll take those parts!$"
+	.string "We'll take those parts!$"
 
 SlateportCity_OceanicMuseum_2F_Text_20BE69: @ 820BE69
 	.string "CAPT. STERN: Wh-what?\n"
 	.string "Who are you people?$"
 
 SlateportCity_OceanicMuseum_2F_Text_20BE93: @ 820BE93
-	.string "We’re TEAM AQUA!\p"
+	.string "We're TEAM AQUA!\p"
 	.string "Our BOSS wants those parts!\n"
 	.string "Shut your yap and fork them over!$"
 
@@ -311,9 +311,9 @@ SlateportCity_OceanicMuseum_2F_Text_20BF66: @ 820BF66
 	.string "I lost, too!$"
 
 SlateportCity_OceanicMuseum_2F_Text_20BF7A: @ 820BF7A
-	.string "Now what? If we don’t get the parts,\n"
-	.string "we’re in for it!\p"
-	.string "Arrgh, I didn’t count on being meddled\n"
+	.string "Now what? If we don't get the parts,\n"
+	.string "we're in for it!\p"
+	.string "Arrgh, I didn't count on being meddled\n"
 	.string "with by some meddling kid!$"
 
 SlateportCity_OceanicMuseum_2F_Text_20BFF2: @ 820BFF2
@@ -324,33 +324,33 @@ SlateportCity_OceanicMuseum_2F_Text_20BFF2: @ 820BFF2
 SlateportCity_OceanicMuseum_2F_Text_20C059: @ 820C059
 	.string "We are TEAM AQUA,\n"
 	.string "and we love the sea!\p"
-	.string "And I am TEAM AQUA’s leader,\n"
+	.string "And I am TEAM AQUA's leader,\n"
 	.string "ARCHIE!\p"
 	.string "What makes you interfere with us?\p"
-	.string "…No! You can’t be!\n"
-	.string "You’re not one of TEAM MAGMA?\p"
-	.string "Wait, that can’t be right.\n"
-	.string "You’re not dressed for the part.\p"
+	.string "…No! You can't be!\n"
+	.string "You're not one of TEAM MAGMA?\p"
+	.string "Wait, that can't be right.\n"
+	.string "You're not dressed for the part.\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "POKéMON, people… All life depends on\n"
 	.string "the sea.\p"
 	.string "So, TEAM AQUA is dedicated to\n"
 	.string "the expansion of the sea.\p"
-	.string "Don’t you agree? What we are doing\n"
+	.string "Don't you agree? What we are doing\n"
 	.string "is a magnificent undertaking.\p"
 	.string "Ah, fine…\n"
-	.string "You’re still too young to understand\l"
+	.string "You're still too young to understand\l"
 	.string "our noble objective.\p"
-	.string "But, I warn you, don’t even consider\n"
+	.string "But, I warn you, don't even consider\n"
 	.string "interfering with our plans again.\p"
 	.string "The consequences will cost you\n"
 	.string "dearly!\p"
-	.string "And don’t you forget it!$"
+	.string "And don't you forget it!$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C2BE: @ 820C2BE
-	.string "CAPT. STERN: You’re…\n"
-	.string "Ah, okay, you’re {PLAYER}{KUN}…\p"
+	.string "CAPT. STERN: You're…\n"
+	.string "Ah, okay, you're {PLAYER}{KUN}…\p"
 	.string "Anyway, that was a tense situation!\n"
 	.string "Thank you for saving us!\p"
 	.string "Oh, yes, I almost forgot that you\n"
@@ -358,10 +358,10 @@ SlateportCity_OceanicMuseum_2F_Text_20C2BE: @ 820C2BE
 
 SlateportCity_OceanicMuseum_2F_Text_20C36C: @ 820C36C
 	.string "CAPT. STERN: Whoops!\n"
-	.string "There’s no time to lose!\p"
+	.string "There's no time to lose!\p"
 	.string "We have to set out on our ocean-floor\n"
 	.string "expedition really soon.\p"
-	.string "Thanks again, but now I’ve got\n"
+	.string "Thanks again, but now I've got\n"
 	.string "to go!\p"
 	.string "Feel free to wander around and check\n"
 	.string "out our facilities, though.$"
@@ -372,11 +372,11 @@ SlateportCity_OceanicMuseum_2F_Text_20C43F: @ 820C43F
 	.string "near DEWFORD TOWN…$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C495: @ 820C495
-	.string "Don’t you dare run around inside\n"
+	.string "Don't you dare run around inside\n"
 	.string "the MUSEUM!$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C4C2: @ 820C4C2
-	.string "Wow, the submarine’s awesome!\n"
+	.string "Wow, the submarine's awesome!\n"
 	.string "I want to go for a ride!$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C4F9: @ 820C4F9
@@ -404,25 +404,25 @@ SlateportCity_OceanicMuseum_2F_Text_20C5C6: @ 820C5C6
 
 SlateportCity_OceanicMuseum_2F_Text_20C6C7: @ 820C6C7
 	.string "“MODEL OF HOENN REGION”\p"
-	.string "It’s a miniature diorama of the\n"
+	.string "It's a miniature diorama of the\n"
 	.string "HOENN region.\p"
 	.string "Where is LITTLEROOT TOWN on this?$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C72F: @ 820C72F
-	.string "It’s a display on the flow of seawater.\p"
+	.string "It's a display on the flow of seawater.\p"
 	.string "“Near the bottom of the sea, water\n"
 	.string "flows due to differences in such\l"
 	.string "factors as temperature and salinity.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C7C1: @ 820C7C1
-	.string "It’s a display on the flow of seawater.\p"
+	.string "It's a display on the flow of seawater.\p"
 	.string "“Toward the surface, seawater flows\n"
 	.string "as currents driven by the winds.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C82F: @ 820C82F
 	.string "“THE FERRY S.S. TIDAL\p"
 	.string "“A scale replica of the ship under\n"
-	.string "construction at STERN’S SHIPYARD.”$"
+	.string "construction at STERN'S SHIPYARD.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_20C88B: @ 820C88B
 	.string "“SUBMARINE EXPLORER 1\p"

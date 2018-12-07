@@ -391,15 +391,15 @@ Route116_Text_1F3140: @ 81F3140
 
 Route116_Text_1F3166: @ 81F3166
 	.string "Nnn… Roar!\n"
-	.string "What’s going on?\p"
+	.string "What's going on?\p"
 	.string "I was digging the tunnel without any\n"
 	.string "tools when some goon ordered me out!\p"
-	.string "That tunnel’s filled with POKéMON\n"
+	.string "That tunnel's filled with POKéMON\n"
 	.string "that react badly to loud noises.\l"
 	.string "They could cause an uproar.\p"
-	.string "That’s why we stopped using heavy\n"
+	.string "That's why we stopped using heavy\n"
 	.string "equipment for tunneling…\p"
-	.string "I’m worried that the goon will do\n"
+	.string "I'm worried that the goon will do\n"
 	.string "something stupid and startle the\l"
 	.string "POKéMON into an uproar.$"
 
@@ -409,8 +409,8 @@ Route116_Text_1F32C1: @ 81F32C1
 	.string "the tunnel! I can go back to digging!$"
 
 Route116_Text_1F3317: @ 81F3317
-	.string "Oh! It’s you!\p"
-	.string "You’re that person who not only helped\n"
+	.string "Oh! It's you!\p"
+	.string "You're that person who not only helped\n"
 	.string "me in PETALBURG WOODS, but also got\l"
 	.string "back my stolen package and then even\l"
 	.string "graciously delivered it to SLATEPORT!\p"
@@ -435,7 +435,7 @@ Route116_Text_1F3521: @ 81F3521
 
 Route116_Text_1F3593: @ 81F3593
 	.string "Your BAG is jam-packed.\n"
-	.string "I can’t give you this REPEAT BALL.$"
+	.string "I can't give you this REPEAT BALL.$"
 
 Route116_Text_1F35CE: @ 81F35CE
 	.string "As a token of our appreciation for\n"
@@ -454,19 +454,19 @@ Route116_Text_1F3688: @ 81F3688
 Route116_Text_1F36B4: @ 81F36B4
 	.string "Hmm…\n"
 	.string "These are BLACKGLASSES.\l"
-	.string "They’re not what I’m looking for…\p"
-	.string "Maybe my glasses aren’t around\n"
+	.string "They're not what I'm looking for…\p"
+	.string "Maybe my glasses aren't around\n"
 	.string "here…$"
 
 Route116_Text_1F3718: @ 81F3718
 	.string "Hmm…\n"
-	.string "I can’t find my glasses anywhere…\l"
-	.string "Maybe they’re not around here…$"
+	.string "I can't find my glasses anywhere…\l"
+	.string "Maybe they're not around here…$"
 
 Route116_Text_1F375E: @ 81F375E
 	.string "Hmm…\n"
 	.string "These are BLACKGLASSES.\l"
-	.string "They’re not what I’m looking for…$"
+	.string "They're not what I'm looking for…$"
 
 Route116_Text_1F379D: @ 81F379D
 	.string "ROUTE 116\n"
@@ -479,7 +479,7 @@ Route116_Text_1F37B7: @ 81F37B7
 	.string "canceled.”$"
 
 Route116_Text_1F380F: @ 81F380F
-	.string "TUNNELER’S REST HOUSE$"
+	.string "TUNNELER'S REST HOUSE$"
 
 Route116_Text_1F3825: @ 81F3825
 	.string "TRAINER TIPS\p"

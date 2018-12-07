@@ -104,5 +104,5 @@ Route124_EventScript_1F6722:: @ 81F6722
 	end
 
 Route124_Text_1F6739: @ 81F6739
-	.string "HUNTER’S HOUSE$"
+	.string "HUNTER'S HOUSE$"
 

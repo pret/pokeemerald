@@ -231,7 +231,7 @@ EverGrandeCity_ChampionsRoom_Text_228C4C: @ 8228C4C
 	.string "That was superb work, putting an end\l"
 	.string "to that crisis all by yourself.\p"
 	.string "Oops!\p"
-	.string "It wouldn’t be fair to say that you\n"
+	.string "It wouldn't be fair to say that you\n"
 	.string "alone ended the crisis.\p"
 	.string "You overcame that difficult situation\n"
 	.string "by working as one with your POKéMON.\p"
@@ -274,7 +274,7 @@ EverGrandeCity_ChampionsRoom_Text_228F66: @ 8228F66
 
 EverGrandeCity_ChampionsRoom_Text_2290CA: @ 82290CA
 	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "Here’s some advice before you challenge\n"
+	.string "Here's some advice before you challenge\n"
 	.string "the CHAMPION…$"
 
 EverGrandeCity_ChampionsRoom_Text_22910B: @ 822910B
@@ -282,7 +282,7 @@ EverGrandeCity_ChampionsRoom_Text_22910B: @ 822910B
 	.string "What, what, what?\p"
 	.string "{PLAYER}{KUN}…\n"
 	.string "Could it be that…\l"
-	.string "It’s already over?$"
+	.string "It's already over?$"
 
 EverGrandeCity_ChampionsRoom_Text_229152: @ 8229152
 	.string "BRENDAN: {PLAYER}!\p"
@@ -292,19 +292,19 @@ EverGrandeCity_ChampionsRoom_Text_229152: @ 8229152
 EverGrandeCity_ChampionsRoom_Text_2291A2: @ 82291A2
 	.string "BRENDAN: {PLAYER}…\p"
 	.string "Are you trying to tell me…\n"
-	.string "You’ve beaten the CHAMPION?$"
+	.string "You've beaten the CHAMPION?$"
 
 EverGrandeCity_ChampionsRoom_Text_2291E6: @ 82291E6
 	.string "PROF. BIRCH: See?\n"
 	.string "What did I tell you, {RIVAL}?\p"
-	.string "Didn’t I tell you that you don’t need\n"
+	.string "Didn't I tell you that you don't need\n"
 	.string "to worry about {PLAYER}{KUN}?\p"
 	.string "… … … … … … … …\n"
-	.string "{PLAYER}{KUN}, you’ve finally done it.\p"
+	.string "{PLAYER}{KUN}, you've finally done it.\p"
 	.string "When I heard that you defeated your\n"
 	.string "own father at the PETALBURG GYM,\l"
 	.string "I thought perhaps you had a chance…\p"
-	.string "But to think you’ve actually become\n"
+	.string "But to think you've actually become\n"
 	.string "the CHAMPION!\p"
 	.string "Ah, yes!\p"
 	.string "What became of your POKéDEX?\n"
@@ -322,25 +322,25 @@ EverGrandeCity_ChampionsRoom_Text_229399: @ 8229399
 	.string "Come with me.$"
 
 EverGrandeCity_ChampionsRoom_Text_2293EB: @ 82293EB
-	.string "WALLACE: I’m sorry, but…\p"
+	.string "WALLACE: I'm sorry, but…\p"
 	.string "From here on, only those TRAINERS who\n"
 	.string "have become CHAMPIONS may enter.\p"
-	.string "You’ll have to wait outside with\n"
+	.string "You'll have to wait outside with\n"
 	.string "PROF. BIRCH.$"
 
 EverGrandeCity_ChampionsRoom_Text_229479: @ 8229479
 	.string "MAY: Groan…\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "I’m just joking! That’s okay!\n"
-	.string "That’s the rule!\p"
+	.string "I'm just joking! That's okay!\n"
+	.string "That's the rule!\p"
 	.string "{PLAYER}{KUN}!\n"
 	.string "Honestly, congratulations!$"
 
 EverGrandeCity_ChampionsRoom_Text_2294F5: @ 82294F5
 	.string "BRENDAN: Whaaaat?! … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "It can’t be helped if that’s the rule.\p"
+	.string "It can't be helped if that's the rule.\p"
 	.string "{PLAYER}, way to go!\n"
 	.string "Congratulations!$"
 

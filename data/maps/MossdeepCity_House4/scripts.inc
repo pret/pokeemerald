@@ -43,11 +43,11 @@ MossdeepCity_House4_EventScript_222E1E:: @ 8222E1E
 
 MossdeepCity_House4_Text_222E31: @ 8222E31
 	.string "My little brother says he likes to go\n"
-	.string "find people’s SECRET BASES.$"
+	.string "find people's SECRET BASES.$"
 
 MossdeepCity_House4_Text_222E73: @ 8222E73
 	.string "My little brother says he likes to\n"
-	.string "visit people’s SECRET BASES and have\l"
+	.string "visit people's SECRET BASES and have\l"
 	.string "POKéMON battles.$"
 
 MossdeepCity_House4_Text_222ECC: @ 8222ECC
@@ -56,7 +56,7 @@ MossdeepCity_House4_Text_222ECC: @ 8222ECC
 
 MossdeepCity_House4_Text_222EF7: @ 8222EF7
 	.string "You should make a SECRET BASE\n"
-	.string "somewhere. I’ll go find it!$"
+	.string "somewhere. I'll go find it!$"
 
 MossdeepCity_House4_Text_222F31: @ 8222F31
 	.string "SKITTY: Miyaan?$"

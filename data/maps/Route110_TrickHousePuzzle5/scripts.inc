@@ -1011,7 +1011,7 @@ Route110_TrickHousePuzzle5_Text_26D8C9: @ 826D8C9
 Route110_TrickHousePuzzle5_Text_26D8EA: @ 826D8EA
 	.string "CLICKETY-CLACK…\n"
 	.string "MECHADOLL 2 AM I!\p"
-	.string "MECHADOLL 1’S QUIZ DIFFICULTY LEVEL\n"
+	.string "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
 	.string "IS SET TOO LOW.$"
 
 Route110_TrickHousePuzzle5_Text_26D940: @ 826D940
@@ -1066,18 +1066,18 @@ Route110_TrickHousePuzzle5_Text_26DBD7: @ 826DBD7
 
 Route110_TrickHousePuzzle5_Text_26DC2A: @ 826DC2A
 	.string "MECHADOLL 4 QUIZ.\p"
-	.string "In the TRAINER’S SCHOOL, how many\n"
+	.string "In the TRAINER'S SCHOOL, how many\n"
 	.string "girl students were there?$"
 
 Route110_TrickHousePuzzle5_Text_26DC78: @ 826DC78
 	.string "CLICKETY-CLACK…\n"
 	.string "MECHADOLL 5 AM I!\p"
-	.string "THE MASTER’S BEST AND PROUDEST\n"
+	.string "THE MASTER'S BEST AND PROUDEST\n"
 	.string "ACHIEVEMENT AM I.$"
 
 Route110_TrickHousePuzzle5_Text_26DCCB: @ 826DCCB
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "In SLATEPORT’s POKéMON FAN CLUB,\n"
+	.string "In SLATEPORT's POKéMON FAN CLUB,\n"
 	.string "how many POKéMON were there?$"
 
 Route110_TrickHousePuzzle5_Text_26DD1B: @ 826DD1B

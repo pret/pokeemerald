@@ -447,7 +447,7 @@ MtPyre_Summit_EventScript_232442:: @ 8232442
 MtPyre_Summit_Text_232459: @ 8232459
 	.string "No! Those TEAM MAGMA goons got\n"
 	.string "here ahead of us!\p"
-	.string "We can’t fall behind!$"
+	.string "We can't fall behind!$"
 
 MtPyre_Summit_Text_2324A0: @ 82324A0
 	.string "I thought you were one of the MAGMAS\n"
@@ -455,36 +455,36 @@ MtPyre_Summit_Text_2324A0: @ 82324A0
 
 MtPyre_Summit_Text_2324E0: @ 82324E0
 	.string "Yeah, so you are strong…\n"
-	.string "But there’re a lot of us!$"
+	.string "But there're a lot of us!$"
 
 MtPyre_Summit_Text_232513: @ 8232513
 	.string "Hah!\n"
 	.string "Too bad for you!\p"
-	.string "If you came earlier, you only would’ve\n"
+	.string "If you came earlier, you only would've\n"
 	.string "had to battle the wimpy TEAM MAGMA.\p"
 	.string "But since you arrived now, you have\n"
 	.string "to take on us toughies!$"
 
 MtPyre_Summit_Text_2325B0: @ 82325B0
-	.string "Urgh… I should’ve let you take on\n"
+	.string "Urgh… I should've let you take on\n"
 	.string "TEAM MAGMA first…$"
 
 MtPyre_Summit_Text_2325E4: @ 82325E4
-	.string "You don’t know anything!\n"
+	.string "You don't know anything!\n"
 	.string "So why are you messing with us?$"
 
 MtPyre_Summit_Text_23261D: @ 823261D
 	.string "You…\n"
 	.string "We saw you at MT. CHIMNEY.\p"
-	.string "You don’t belong to either TEAM,\n"
+	.string "You don't belong to either TEAM,\n"
 	.string "so why would you be here?$"
 
 MtPyre_Summit_Text_232678: @ 8232678
-	.string "If you’re going to mess with anyone,\n"
+	.string "If you're going to mess with anyone,\n"
 	.string "let it be TEAM MAGMA…$"
 
 MtPyre_Summit_Text_2326B3: @ 82326B3
-	.string "Heh, it doesn’t matter!\n"
+	.string "Heh, it doesn't matter!\n"
 	.string "We bought ourselves some time!\p"
 	.string "The BOSS should have snatched what\n"
 	.string "he was after!$"
@@ -492,8 +492,8 @@ MtPyre_Summit_Text_2326B3: @ 82326B3
 MtPyre_Summit_Text_23271B: @ 823271B
 	.string "Oh, I know!\n"
 	.string "You tried to join TEAM MAGMA,\l"
-	.string "but they wouldn’t have you!\p"
-	.string "Well, don’t think that we’ll let you\n"
+	.string "but they wouldn't have you!\p"
+	.string "Well, don't think that we'll let you\n"
 	.string "join our TEAM AQUA!$"
 
 MtPyre_Summit_Text_23279A: @ 823279A
@@ -505,14 +505,14 @@ MtPyre_Summit_Text_2327D8: @ 82327D8
 	.string "with us members and our leader.$"
 
 MtPyre_Summit_Text_23281A: @ 823281A
-	.string "ARCHIE: TEAM MAGMA’s MAXIE got ahead\n"
+	.string "ARCHIE: TEAM MAGMA's MAXIE got ahead\n"
 	.string "of us, but we also got what we wanted.\p"
 	.string "The RED ORB preserved at MT. PYRE…\n"
 	.string "I, ARCHIE, now have it in my possession!\p"
 	.string "Fufufu… Now we can bring our ultimate\n"
 	.string "objective to fruition!\p"
 	.string "Okay, TEAM!\n"
-	.string "We’re pulling out!$"
+	.string "We're pulling out!$"
 
 MtPyre_Summit_Text_23290E: @ 823290E
 	.string "Oh, no…\n"
@@ -529,7 +529,7 @@ MtPyre_Summit_Text_23290E: @ 823290E
 	.string "and took the BLUE ORB first?\p"
 	.string "Well, in their haste, they left this\n"
 	.string "behind.\p"
-	.string "I couldn’t imagine what exactly it\n"
+	.string "I couldn't imagine what exactly it\n"
 	.string "could be.\p"
 	.string "I would like you to have it.\n"
 	.string "Perhaps it will be useful in some way.$"

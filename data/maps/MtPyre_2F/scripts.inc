@@ -49,62 +49,62 @@ MtPyre_2F_Text_2311A3: @ 82311A3
 MtPyre_2F_Text_2311E6: @ 82311E6
 	.string "Ooch, ouch… There are holes in the\n"
 	.string "ground here and there.\p"
-	.string "I didn’t notice and took a tumble from\n"
+	.string "I didn't notice and took a tumble from\n"
 	.string "the floor above.$"
 
 MtPyre_2F_Text_231258: @ 8231258
 	.string "Hey! Are you searching for POKéMON?\n"
-	.string "You came along after me! You’re rude!$"
+	.string "You came along after me! You're rude!$"
 
 MtPyre_2F_Text_2312A2: @ 82312A2
 	.string "Ayieeeeh!\n"
-	.string "I’m sorry, forgive me, please!$"
+	.string "I'm sorry, forgive me, please!$"
 
 MtPyre_2F_Text_2312CB: @ 82312CB
-	.string "People don’t come here often, so\n"
-	.string "I thought there’d be rare POKéMON.$"
+	.string "People don't come here often, so\n"
+	.string "I thought there'd be rare POKéMON.$"
 
 MtPyre_2F_Text_23130F: @ 823130F
-	.string "LUKE: We’re here on a dare.\p"
+	.string "LUKE: We're here on a dare.\p"
 	.string "Heheh, if I show her how cool I am,\n"
-	.string "she’ll fall for me. I know it!\p"
-	.string "I know! I’ll cream you and show her\n"
+	.string "she'll fall for me. I know it!\p"
+	.string "I know! I'll cream you and show her\n"
 	.string "how cool I am!$"
 
 MtPyre_2F_Text_2313A1: @ 82313A1
 	.string "LUKE: Whoopsie!$"
 
 MtPyre_2F_Text_2313B1: @ 82313B1
-	.string "LUKE: Well, we lost but that’s okay!\n"
-	.string "I’m right here by your side.\l"
-	.string "We’ll make it through this dare!$"
+	.string "LUKE: Well, we lost but that's okay!\n"
+	.string "I'm right here by your side.\l"
+	.string "We'll make it through this dare!$"
 
 MtPyre_2F_Text_231414: @ 8231414
 	.string "LUKE: If you want to take me on,\n"
 	.string "bring some more POKéMON.\p"
-	.string "If you don’t, I won’t be able to show\n"
+	.string "If you don't, I won't be able to show\n"
 	.string "off to my girl how cool I am!$"
 
 MtPyre_2F_Text_231492: @ 8231492
 	.string "DEZ: I came here on a dare with my\n"
 	.string "boyfriend.\p"
-	.string "It’s really scary, but I’m with my\n"
-	.string "boyfriend. It’s okay.\p"
-	.string "I know! I’ll get my boyfriend to look\n"
+	.string "It's really scary, but I'm with my\n"
+	.string "boyfriend. It's okay.\p"
+	.string "I know! I'll get my boyfriend to look\n"
 	.string "cool by beating you!$"
 
 MtPyre_2F_Text_231534: @ 8231534
-	.string "DEZ: Waaaah! I’m scared!$"
+	.string "DEZ: Waaaah! I'm scared!$"
 
 MtPyre_2F_Text_23154D: @ 823154D
-	.string "DEZ: We’re lovey-dovey, so we don’t\n"
+	.string "DEZ: We're lovey-dovey, so we don't\n"
 	.string "care if we lose!$"
 
 MtPyre_2F_Text_231582: @ 8231582
 	.string "DEZ: If you want to challenge us, you\n"
 	.string "should bring at least two POKéMON.\p"
-	.string "My boyfriend’s strong.\n"
-	.string "Just one POKéMON won’t do at all.$"
+	.string "My boyfriend's strong.\n"
+	.string "Just one POKéMON won't do at all.$"
 
 MtPyre_2F_Text_231604: @ 8231604
 	.string "You are an unfamiliar sight…\n"
@@ -112,17 +112,17 @@ MtPyre_2F_Text_231604: @ 8231604
 
 MtPyre_2F_Text_231645: @ 8231645
 	.string "Hmm…\n"
-	.string "You’re durable.$"
+	.string "You're durable.$"
 
 MtPyre_2F_Text_23165A: @ 823165A
 	.string "Our family has been TRAINERS here\n"
-	.string "since my great-grandmother’s time…\p"
+	.string "since my great-grandmother's time…\p"
 	.string "It is my duty to protect this\n"
 	.string "mountain…$"
 
 MtPyre_2F_Text_2316C7: @ 82316C7
 	.string "Kiyaaaaah!\n"
-	.string "I’m terrified!$"
+	.string "I'm terrified!$"
 
 MtPyre_2F_Text_2316E1: @ 82316E1
 	.string "Nooooooo!\n"
@@ -131,5 +131,5 @@ MtPyre_2F_Text_2316E1: @ 82316E1
 MtPyre_2F_Text_2316FB: @ 82316FB
 	.string "I get freaked out every time I see\n"
 	.string "anything move…\p"
-	.string "I shouldn’t have come here to train…$"
+	.string "I shouldn't have come here to train…$"
 

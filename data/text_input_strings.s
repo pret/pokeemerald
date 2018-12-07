@@ -51,7 +51,7 @@ gUnknown_0862B9C7:: @ 862B9C7
 	.string "{CLEAR 12}!{CLEAR 17}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 17}-$"
 	
 gUnknown_0862B9E0:: @ 862B9E0
-	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 19}’{CLEAR 18} $"
+	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 19}'{CLEAR 18} $"
 
 gUnknown_0862B9F9:: @ 862B9F9
     .string "ABCDE$"

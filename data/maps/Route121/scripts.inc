@@ -173,7 +173,7 @@ Route121_EventScript_1F6043:: @ 81F6043
 
 Route121_Text_1F605A: @ 81F605A
 	.string "Okay!\n"
-	.string "We’re to move out to MT. PYRE!$"
+	.string "We're to move out to MT. PYRE!$"
 
 Route121_Text_1F607F: @ 81F607F
 	.string "Ahead looms MT. PYRE…\p"

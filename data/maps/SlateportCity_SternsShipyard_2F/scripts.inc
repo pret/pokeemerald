@@ -15,7 +15,7 @@ SlateportCity_SternsShipyard_2F_Text_208650: @ 8208650
 	.string "together a transportation vehicle.$"
 
 SlateportCity_SternsShipyard_2F_Text_2086BA: @ 82086BA
-	.string "Don’t you think it’s strange that\n"
+	.string "Don't you think it's strange that\n"
 	.string "a ship made of heavy iron floats?\p"
 	.string "It floats because of a principle\n"
 	.string "called buoyancy.$"

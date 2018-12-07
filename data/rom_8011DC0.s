@@ -71,7 +71,7 @@ gText_AwaitingCommunication:: @ 82ED960
 	.string "{STR_VAR_1}! Awaiting\ncommunication from another player.$"
 
 gText_AwaitingLink:: @ 82ED990
-	.string "{STR_VAR_1}! Awaiting link!\nPress START when everyone’s ready.$"
+	.string "{STR_VAR_1}! Awaiting link!\nPress START when everyone's ready.$"
 
 	.align 2
 gJPText_SingleBattle:: @ 82ED9C8
@@ -225,11 +225,11 @@ gUnknown_082EDC9C:: @ 82EDC9C
 
 	.align 2
 gUnknown_082EDCB4:: @ 82EDCB4
-	.string "The other TRAINER doesn’t appear\nto be available now…\p$"
+	.string "The other TRAINER doesn't appear\nto be available now…\p$"
 
 	.align 2
 gUnknown_082EDCEC:: @ 82EDCEC
-	.string "You can’t transmit with a TRAINER\nwho is too far away.\p$"
+	.string "You can't transmit with a TRAINER\nwho is too far away.\p$"
 
 	.align 2
 gUnknown_082EDD24:: @ 82EDD24
@@ -263,7 +263,7 @@ gUnknown_082EDDF4:: @ 82EDDF4
 
 	.align 2
 gUnknown_082EDE0C:: @ 82EDE0C
-	.string "{STR_VAR_1} OK’d your registration as\na member.$"
+	.string "{STR_VAR_1} OK'd your registration as\na member.$"
 
 	.align 2
 gUnknown_082EDE34:: @ 82EDE34
@@ -340,7 +340,7 @@ gUnknown_082EDFC4:: @ 82EDFC4
 
 	.align 2
 gUnknown_082EE004:: @ 82EE004
-	.string "Awaiting {STR_VAR_1}’s response about\nthe trade…$"
+	.string "Awaiting {STR_VAR_1}'s response about\nthe trade…$"
 
 	.align 2
 gUnknown_082EE02C:: @ 82EE02C
@@ -474,19 +474,19 @@ gUnknown_082EE598:: @ 82EE598
 
 	.align 2
 gUnknown_082EE5C0:: @ 82EE5C0
-	.string "Oh, hey! We’re in a chat right now.\nWant to join us?$"
+	.string "Oh, hey! We're in a chat right now.\nWant to join us?$"
 
 	.align 2
 gUnknown_082EE5F8:: @ 82EE5F8
-	.string "{STR_VAR_1}: Hey, {PLAYER}!\nWe’re having a chat right now.\lWant to join us?$"
+	.string "{STR_VAR_1}: Hey, {PLAYER}!\nWe're having a chat right now.\lWant to join us?$"
 
 	.align 2
 gUnknown_082EE638:: @ 82EE638
-	.string "Oh, hi! We’re having a chat now.\nWould you like to join us?$"
+	.string "Oh, hi! We're having a chat now.\nWould you like to join us?$"
 
 	.align 2
 gUnknown_082EE674:: @ 82EE674
-	.string "{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe’re having a chat now.\lWould you like to join us?$"
+	.string "{STR_VAR_1}: Oh, hi, {PLAYER}!\nWe're having a chat now.\lWould you like to join us?$"
 
 	.align 2
 gUnknown_082EE6B8:: @ 82EE6B8
@@ -509,7 +509,7 @@ gUnknown_082EE720:: @ 82EE720
 
 	.align 2
 gUnknown_082EE754:: @ 82EE754
-	.string "Sure thing! As my “Greetings,”\nhere’s my TRAINER CARD.$"
+	.string "Sure thing! As my “Greetings,”\nhere's my TRAINER CARD.$"
 
 	.align 2
 gUnknown_082EE78C:: @ 82EE78C
@@ -521,7 +521,7 @@ gUnknown_082EE7C0:: @ 82EE7C0
 
 	.align 2
 gUnknown_082EE7F8:: @ 82EE7F8
-	.string "As my introduction, I’ll show you\nmy TRAINER CARD.$"
+	.string "As my introduction, I'll show you\nmy TRAINER CARD.$"
 
 	.align 2
 gUnknown_082EE82C:: @ 82EE82C
@@ -539,19 +539,19 @@ gUnknown_082EE82C:: @ 82EE82C
 
 	.align 2
 gUnknown_082EE880:: @ 82EE880
-	.string "Thanks for waiting!\nLet’s get our battle started!{PAUSE 60}$"
+	.string "Thanks for waiting!\nLet's get our battle started!{PAUSE 60}$"
 
 	.align 2
 gUnknown_082EE8B8:: @ 82EE880
-	.string "All right!\nLet’s chat!{PAUSE 60}$"
+	.string "All right!\nLet's chat!{PAUSE 60}$"
 
 	.align 2
 gUnknown_082EE8D4:: @ 82EE8D4
-	.string "Sorry I made you wait!\nLet’s get started!{PAUSE 60}$"
+	.string "Sorry I made you wait!\nLet's get started!{PAUSE 60}$"
 
 	.align 2
 gUnknown_082EE904:: @ 82EE904
-	.string "Sorry I made you wait!\nLet’s chat.{PAUSE 60}$"
+	.string "Sorry I made you wait!\nLet's chat.{PAUSE 60}$"
 
 	.align 2
 gUnknown_082EE92C:: @ 82EE92C
@@ -582,11 +582,11 @@ gUnknown_082EE984:: @ 82EE984
 
 	.align 2
 gUnknown_082EE9B4:: @ 82EE9B4
-	.string "Sorry! My POKéMON don’t seem to\nbe feeling too well right now.\lLet me battle you another time.\p$"
+	.string "Sorry! My POKéMON don't seem to\nbe feeling too well right now.\lLet me battle you another time.\p$"
 
 	.align 2
 gUnknown_082EEA14:: @ 82EEA14
-	.string "I’m terribly sorry, but my POKéMON\naren’t feeling well…\pLet’s battle another time.\p$"
+	.string "I'm terribly sorry, but my POKéMON\naren't feeling well…\pLet's battle another time.\p$"
 
 	.align 2
 gUnknown_082EEA68:: @ 82EEA68
@@ -595,11 +595,11 @@ gUnknown_082EEA68:: @ 82EEA68
 
 	.align 2
 gUnknown_082EEA70:: @ 82EEA70
-	.string "Huh? My TRAINER CARD…\nWhere’d it go now?\lSorry! I’ll show you another time!\p$"
+	.string "Huh? My TRAINER CARD…\nWhere'd it go now?\lSorry! I'll show you another time!\p$"
 
 	.align 2
 gUnknown_082EEAC0:: @ 82EEAC0
-	.string "Oh? Now where did I put my\nTRAINER CARD?…\lSorry! I’ll show you later!\p$"
+	.string "Oh? Now where did I put my\nTRAINER CARD?…\lSorry! I'll show you later!\p$"
 
 	.align 2
 gUnknown_082EEB08:: @ 82EEB08
@@ -612,7 +612,7 @@ gUnknown_082EEB10:: @ 82EEB10
 
 	.align 2
 gUnknown_082EEB4C:: @ 82EEB4C
-	.string "If you want to do something with\nme, don’t be shy.\p$"
+	.string "If you want to do something with\nme, don't be shy.\p$"
 
 	.align 2
 gUnknown_082EEB80:: @ 82EEB80
@@ -646,11 +646,11 @@ gUnknown_082EEC9C:: @ 82EEC9C
 
 	.align 2
 gUnknown_082EECA4:: @ 82EECA4
-	.string "Oh, sorry!\nI just can’t right this instant.\lLet’s chat another time.\p$"
+	.string "Oh, sorry!\nI just can't right this instant.\lLet's chat another time.\p$"
 
 	.align 2
 gUnknown_082EECEC:: @ 82EECEC
-	.string "Oh, I’m sorry.\nI have too much to do right now.\lLet’s chat some other time.\p$"
+	.string "Oh, I'm sorry.\nI have too much to do right now.\lLet's chat some other time.\p$"
 
 	.align 2
 gUnknown_082EED3C:: @ 82EED3C
@@ -659,11 +659,11 @@ gUnknown_082EED3C:: @ 82EED3C
 
 	.align 2
 gUnknown_082EED44:: @ 82EED3C
-	.string "Whoa!\nI can tell you’re pretty tough!\p$"
+	.string "Whoa!\nI can tell you're pretty tough!\p$"
 
 	.align 2
 gUnknown_082EED6C:: @ 82EED6C
-	.string "You used that move?\nThat’s good strategy!\p$"
+	.string "You used that move?\nThat's good strategy!\p$"
 
 	.align 2
 gUnknown_082EED98:: @ 82EED98
@@ -675,15 +675,15 @@ gUnknown_082EEDBC:: @ 82EEDBC
 
 	.align 2
 gUnknown_082EEDF4:: @ 82EEDF4
-	.string "That POKéMON…\nIt’s been raised really well!\p$"
+	.string "That POKéMON…\nIt's been raised really well!\p$"
 
 	.align 2
 gUnknown_082EEE24:: @ 82EEE24
-	.string "That’s it!\nThis is the right move now!\p$"
+	.string "That's it!\nThis is the right move now!\p$"
 
 	.align 2
 gUnknown_082EEE4C:: @ 82EEE4C
-	.string "That’s awesome!\nYou can battle that way?\p$"
+	.string "That's awesome!\nYou can battle that way?\p$"
 
 	.align 2
 gUnknown_082EEE78:: @ 82EEE78
@@ -706,7 +706,7 @@ gUnknown_082EEECC:: @ 82EEECC
 
 	.align 2
 gUnknown_082EEEF0:: @ 82EEEF0
-	.string "Don’t say anything funny anymore!\nI’m sore from laughing!\p$"
+	.string "Don't say anything funny anymore!\nI'm sore from laughing!\p$"
 
 	.align 2
 gUnknown_082EEF2C:: @ 82EEF2C
@@ -714,11 +714,11 @@ gUnknown_082EEF2C:: @ 82EEF2C
 
 	.align 2
 gUnknown_082EEF50:: @ 82EEF50
-	.string "Hmhm… What?\nSo is this what you’re saying?\p$"
+	.string "Hmhm… What?\nSo is this what you're saying?\p$"
 
 	.align 2
 gUnknown_082EEF7C:: @ 82EEF7C
-	.string "Is that right?\nI didn’t know that.\p$"
+	.string "Is that right?\nI didn't know that.\p$"
 
 	.align 2
 gUnknown_082EEFA0:: @ 82EEFA0
@@ -726,11 +726,11 @@ gUnknown_082EEFA0:: @ 82EEFA0
 
 	.align 2
 gUnknown_082EEFBC:: @ 82EEFBC
-	.string "Yes, that’s exactly it!\nThat’s what I meant.\p$"
+	.string "Yes, that's exactly it!\nThat's what I meant.\p$"
 
 	.align 2
 gUnknown_082EEFEC:: @ 82EEFEC
-	.string "In other words…\nYes! That’s right!\p$"
+	.string "In other words…\nYes! That's right!\p$"
 
 	.align 2
 gUnknown_082EF010:: @ 82EF010
@@ -745,7 +745,7 @@ gUnknown_082EF010:: @ 82EF010
 
 	.align 2
 gUnknown_082EF030:: @ 82EF030
-	.string "I’m just showing my TRAINER CARD\nas my way of greeting.\p$"
+	.string "I'm just showing my TRAINER CARD\nas my way of greeting.\p$"
 
 	.align 2
 gUnknown_082EF06C:: @ 82EF06C
@@ -753,11 +753,11 @@ gUnknown_082EF06C:: @ 82EF06C
 
 	.align 2
 gUnknown_082EF090:: @ 82EF010
-	.string "We’re showing each other our\nTRAINER CARDS to get acquainted.\p$"
+	.string "We're showing each other our\nTRAINER CARDS to get acquainted.\p$"
 
 	.align 2
 gUnknown_082EF0D0:: @ 82EF0D0
-	.string "Glad to meet you.\nPlease don’t be a stranger!\p$"
+	.string "Glad to meet you.\nPlease don't be a stranger!\p$"
 
 	.align 2
 gUnknown_082EF100:: @ 82EF100
@@ -772,11 +772,11 @@ gUnknown_082EF110:: @ 82EF110
 
 	.align 2
 gUnknown_082EF138:: @ 82EF138
-	.string "Finally, a trade got me that\nPOKéMON I’d wanted a long time.\p$"
+	.string "Finally, a trade got me that\nPOKéMON I'd wanted a long time.\p$"
 
 	.align 2
 gUnknown_082EF178:: @ 82EF178
-	.string "I’m trading POKéMON right now.\p$"
+	.string "I'm trading POKéMON right now.\p$"
 
 	.align 2
 gUnknown_082EF198:: @ 82EF198
@@ -861,19 +861,19 @@ gUnknown_082EF65C:: @ 82EF65C
 
 	.align 2
 gUnknown_082EF6E4:: @ 82EF6E4
-	.string "You don’t have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p$"
+	.string "You don't have a {STR_VAR_2}-type\nPOKéMON that {STR_VAR_1} wants.\p$"
 
 	.align 2
 gUnknown_082EF718:: @ 82EF718
-	.string "You don’t have an EGG that\n{STR_VAR_1} wants.\p$"
+	.string "You don't have an EGG that\n{STR_VAR_1} wants.\p$"
 
 	.align 2
 gUnknown_082EF740:: @ 82EF740
-	.string "{STR_VAR_1} can’t make a trade for\nyour POKéMON right now.\p$"
+	.string "{STR_VAR_1} can't make a trade for\nyour POKéMON right now.\p$"
 
 	.align 2
 gUnknown_082EF774:: @ 82EF774
-	.string "You can’t make a trade for\n{STR_VAR_1}’s POKéMON right now.\p$"
+	.string "You can't make a trade for\n{STR_VAR_1}'s POKéMON right now.\p$"
 
 	.align 2
 	.4byte gUnknown_082EF740
@@ -1001,7 +1001,7 @@ gUnknown_082EFBC8:: @ 82EFBC8
 
 	.align 2
 gUnknown_082EFC3C:: @ 82EFC3C
-	.string "Awaiting {STR_VAR_1}’s response…$"
+	.string "Awaiting {STR_VAR_1}'s response…$"
 
 	.align 2
 gUnknown_082EFC54:: @ 82EFC54
@@ -1141,23 +1141,23 @@ gUnknown_082EFED4:: @ 82EFED4
 
 	.align 2
 gUnknown_082EFEEC:: @ 82EFEEC
-	.string "It’s a NORMAL CARD.$"
+	.string "It's a NORMAL CARD.$"
 
 	.align 2
 gUnknown_082EFF00:: @ 82EFF00
-	.string "It’s a BRONZE CARD!$"
+	.string "It's a BRONZE CARD!$"
 
 	.align 2
 gUnknown_082EFF14:: @ 82EFF14
-	.string "It’s a COPPER CARD!$"
+	.string "It's a COPPER CARD!$"
 
 	.align 2
 gUnknown_082EFF28:: @ 82EFF28
-	.string "It’s a SILVER CARD!$"
+	.string "It's a SILVER CARD!$"
 
 	.align 2
 gUnknown_082EFF3C:: @ 82EFF3C
-	.string "It’s a GOLD CARD!$"
+	.string "It's a GOLD CARD!$"
 
 	.align 2
 gUnknown_082EFF50:: @ 82EFF50
@@ -1168,7 +1168,7 @@ gUnknown_082EFF50:: @ 82EFF50
 	.4byte gUnknown_082EFF3C
 
 gUnknown_082EFF64:: @ 82EFF64
-	.string "This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}’s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p$"
+	.string "This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p$"
 
 	.align 2
 gUnknown_082EFFA4:: @ 82EFFA4
@@ -1189,7 +1189,7 @@ gUnknown_082F0018:: @ 82F0018
 
 	.align 2
 gUnknown_082F0020:: @ 82F0020
-	.string "Finished checking {SPECIAL_F7 0x01}’s\nTRAINER CARD.{PAUSE 60}$"
+	.string "Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}$"
 
 	.align 2
 gUnknown_082F0048:: @ 82F0048

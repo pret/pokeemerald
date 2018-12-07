@@ -1,8 +1,8 @@
 LilycoveCity_ContestLobby_Text_27EF15: @ 827EF15
 	.string "Oh, hello! You were in a POKéMON\n"
-	.string "CONTEST, weren’t you?\l"
-	.string "It’s easy to tell from your POKéMON.\p"
-	.string "I’m a reporter. I’m working on a story\n"
+	.string "CONTEST, weren't you?\l"
+	.string "It's easy to tell from your POKéMON.\p"
+	.string "I'm a reporter. I'm working on a story\n"
 	.string "on POKéMON CONTESTS.\p"
 	.string "If I may, would you be willing to answer\n"
 	.string "a few questions?$"
@@ -15,24 +15,24 @@ LilycoveCity_ContestLobby_Text_27EFE7: @ 827EFE7
 
 LilycoveCity_ContestLobby_Text_27F03E: @ 827F03E
 	.string "Ah, I see.\n"
-	.string "That’s a very edifying comment.\p"
+	.string "That's a very edifying comment.\p"
 	.string "You get a good feel for what\n"
 	.string "the CONTEST was like.\p"
-	.string "I’ve got one last question.\p"
+	.string "I've got one last question.\p"
 	.string "When you hear the word “{STR_VAR_2},”\n"
 	.string "what image do you get?$"
 
 LilycoveCity_ContestLobby_Text_27F0EC: @ 827F0EC
 	.string "I see!\p"
-	.string "So that’s how you imagine the concept\n"
+	.string "So that's how you imagine the concept\n"
 	.string "of “{STR_VAR_2}” to be.\p"
 	.string "Thank you!\n"
-	.string "You’ve given me some good ideas.\p"
+	.string "You've given me some good ideas.\p"
 	.string "I think I can write a good story on\n"
 	.string "POKéMON CONTESTS now.\p"
 	.string "Maybe, just maybe, this story will even\n"
 	.string "make it to television.\l"
-	.string "I hope you’ll look forward to it!$"
+	.string "I hope you'll look forward to it!$"
 
 LilycoveCity_ContestLobby_Text_27F1EF: @ 827F1EF
 	.string "Oh, too bad…\p"
@@ -40,13 +40,13 @@ LilycoveCity_ContestLobby_Text_27F1EF: @ 827F1EF
 	.string "please do share it with me.$"
 
 LilycoveCity_ContestLobby_Text_27F23F: @ 827F23F
-	.string "I’ll be looking forward to your next\n"
+	.string "I'll be looking forward to your next\n"
 	.string "POKéMON CONTEST.$"
 
 gTVBravoTrainerText00:: @ 0827F275
 	.string "Yeah!\n"
-	.string "It’s BRAVO TRAINER time!\p"
-	.string "Today, we’re going to profile a POKéMON\n"
+	.string "It's BRAVO TRAINER time!\p"
+	.string "Today, we're going to profile a POKéMON\n"
 	.string "belonging to {STR_VAR_1}.\p"
 	.string "Now, this POKéMON boasts a {STR_VAR_3}\n"
 	.string "Rank in the {STR_VAR_2} Category.$"
@@ -68,28 +68,28 @@ gTVBravoTrainerText03:: @ 0827F3E4
 	.string "Asked about the CONTEST afterwards,\n"
 	.string "{STR_VAR_1} happily replied with a huge\l"
 	.string "grin, “{STR_VAR_2}!”\p"
-	.string "Well, sure, {STR_VAR_1}’s POKéMON came in\n"
+	.string "Well, sure, {STR_VAR_1}'s POKéMON came in\n"
 	.string "number {STR_VAR_3} in the CONTEST.\p"
 	.string "That line perfectly suits {STR_VAR_1}\n"
-	.string "right now, I’d say!$"
+	.string "right now, I'd say!$"
 
 gTVBravoTrainerText04:: @ 0827F49F
 	.string "Asked about the CONTEST afterwards,\n"
 	.string "{STR_VAR_1} replied with a tinge of\l"
 	.string "bitterness, “{STR_VAR_2}.”\p"
-	.string "Well, sure, {STR_VAR_1}’s POKéMON came in\n"
+	.string "Well, sure, {STR_VAR_1}'s POKéMON came in\n"
 	.string "number {STR_VAR_3} in the CONTEST.\p"
-	.string "{STR_VAR_1}’s disappointment comes across\n"
-	.string "loud and clear, I’d say!$"
+	.string "{STR_VAR_1}'s disappointment comes across\n"
+	.string "loud and clear, I'd say!$"
 
 gTVBravoTrainerText05:: @ 0827F565
-	.string "Wouldn’t you also like to know what\n"
+	.string "Wouldn't you also like to know what\n"
 	.string "{STR_VAR_1} imagines {STR_VAR_2} to be?\p"
 	.string "You bet we did!\n"
 	.string "So we asked, of course!\p"
 	.string "The answer is all perfectly condensed:\n"
 	.string "“{STR_VAR_3}!”\p"
-	.string "That’s what the concept of {STR_VAR_2}\n"
+	.string "That's what the concept of {STR_VAR_2}\n"
 	.string "represents to {STR_VAR_1}!$"
 
 gTVBravoTrainerText06:: @ 0827F624
@@ -102,16 +102,16 @@ gTVBravoTrainerText07:: @ 0827F65C
 	.string "Bravo, {STR_VAR_2}!\p"
 	.string "I hope we can count on seeing\n"
 	.string "{STR_VAR_1} scale even greater heights!\p"
-	.string "That’s all the time we have!\n"
+	.string "That's all the time we have!\n"
 	.string "Until next time, see you!$"
 
 gTVBravoTrainerText08:: @ 0827F6E6
-	.string "Introducing the TRAINER’s {STR_VAR_1}!$"
+	.string "Introducing the TRAINER's {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerLobby_Text_27F704:: @ 0827F704
-	.string "Hello! You’re the TRAINER who just had\n"
+	.string "Hello! You're the TRAINER who just had\n"
 	.string "a battle, right?\p"
-	.string "I’m gathering interviews with TRAINERS\n"
+	.string "I'm gathering interviews with TRAINERS\n"
 	.string "all over the place.\p"
 	.string "May I get a few words from you about\n"
 	.string "your impressions on battling?$"
@@ -135,7 +135,7 @@ BattleFrontier_BattleTowerLobby_Text_27F8AE:: @ 0827F8AE
 	.string "Well, of course!\p"
 	.string "That unmistakable look of satisfaction\n"
 	.string "on your face…\p"
-	.string "It’s obvious that you’ve had a great\n"
+	.string "It's obvious that you've had a great\n"
 	.string "battle.$"
 
 BattleFrontier_BattleTowerLobby_Text_27F921:: @ 0827F921
@@ -151,25 +151,25 @@ BattleFrontier_BattleTowerLobby_Text_27F97A:: @ 0827F97A
 
 BattleFrontier_BattleTowerLobby_Text_27F9FD:: @ 0827F9FD
 	.string "Oh, that is stunningly cool!\p"
-	.string "That’s a great line!\n"
-	.string "I hope you’ll do great next time, too.\p"
+	.string "That's a great line!\n"
+	.string "I hope you'll do great next time, too.\p"
 	.string "I hope to see you again!$"
 
 BattleFrontier_BattleTowerLobby_Text_27FA6F:: @ 0827FA6F
 	.string "Oh, I see…\p"
 	.string "Still, being the silent type is also\n"
-	.string "cool, isn’t it?\p"
-	.string "I hope you’ll give me the opportunity\n"
+	.string "cool, isn't it?\p"
+	.string "I hope you'll give me the opportunity\n"
 	.string "to share your thoughts again!$"
 
 BattleFrontier_BattleTowerLobby_Text_27FAF3:: @ 0827FAF3
-	.string "I’ll be looking forward to your\n"
+	.string "I'll be looking forward to your\n"
 	.string "next battle!$"
 
 gTVBravoTrainerBattleTowerText00:: @ 0827FB20
 	.string "Yeah!\n"
-	.string "It’s BRAVO TRAINER time!\p"
-	.string "Today, we’re going to profile {STR_VAR_1},\n"
+	.string "It's BRAVO TRAINER time!\p"
+	.string "Today, we're going to profile {STR_VAR_1},\n"
 	.string "who took the BATTLE TOWER challenge!\p"
 	.string "For the challenge, {STR_VAR_1} entered\n"
 	.string "one wicked {STR_VAR_2}.$"
@@ -183,14 +183,14 @@ gTVBravoTrainerBattleTowerText02:: @ 0827FC04
 	.string "The twosome finally succumbed to\n"
 	.string "{STR_VAR_1} in match number {STR_VAR_2}.\l"
 	.string "Nice try, TRAINER!\p"
-	.string "But, hey, it’s just bad luck to run into\n"
+	.string "But, hey, it's just bad luck to run into\n"
 	.string "{STR_VAR_1} so early in the challenge.\p"
 	.string "We asked the TRAINER for impressions\n"
 	.string "on the match with {STR_VAR_1}.$"
 
 gTVBravoTrainerBattleTowerText03:: @ 0827FCD1
 	.string "The twosome won it all by defeating\n"
-	.string "{STR_VAR_1}’s {STR_VAR_2} thoroughly.\l"
+	.string "{STR_VAR_1}'s {STR_VAR_2} thoroughly.\l"
 	.string "Bravo, TRAINER!\p"
 	.string "Knocking off even {STR_VAR_1}…\n"
 	.string "It defies belief! Simply astounding!\p"
@@ -199,31 +199,31 @@ gTVBravoTrainerBattleTowerText03:: @ 0827FCD1
 
 gTVBravoTrainerBattleTowerText04:: @ 0827FD91
 	.string "After a string of wins, the pair finally\n"
-	.string "succumbed to {STR_VAR_1}’s {STR_VAR_2},\l"
+	.string "succumbed to {STR_VAR_1}'s {STR_VAR_2},\l"
 	.string "their final hurdle.\p"
 	.string "Nice try, TRAINER!\p"
 	.string "Still, you have to give credit.\n"
-	.string "You don’t see many famous combinations\l"
+	.string "You don't see many famous combinations\l"
 	.string "like {STR_VAR_1} and {STR_VAR_2}.\p"
 	.string "We asked the TRAINER for impressions\n"
 	.string "on battling the celebrity pair.$"
 
 gTVBravoTrainerBattleTowerText05:: @ 0827FE93
 	.string "This is what the TRAINER had to say:\n"
-	.string "“I’m satisfied!”\p"
-	.string "Now isn’t that a refreshing reply?\n"
+	.string "“I'm satisfied!”\p"
+	.string "Now isn't that a refreshing reply?\n"
 	.string "Bravo, TRAINER!\p"
-	.string "Isn’t it out-and-out awesome to be\n"
+	.string "Isn't it out-and-out awesome to be\n"
 	.string "able to battle to full satisfaction?\p"
 	.string "I found out exactly how satisfied\n"
 	.string "when I heard the TRAINER say this:$"
 
 gTVBravoTrainerBattleTowerText06:: @ 0827FF89
 	.string "This is what the TRAINER had to say:\n"
-	.string "“I’m not satisfied…”\p"
+	.string "“I'm not satisfied…”\p"
 	.string "Our TRAINER was obviously a little down\n"
 	.string "when that was uttered.\p"
-	.string "Still, it’s not easy to be able to battle\n"
+	.string "Still, it's not easy to be able to battle\n"
 	.string "with complete satisfaction, am I right?\p"
 	.string "Anyway, I found out how dissatisfied\n"
 	.string "our TRAINER was when I heard this:$"
@@ -245,37 +245,37 @@ gTVBravoTrainerBattleTowerText11:: @ 082800B0
 
 gTVBravoTrainerBattleTowerText12:: @ 082800B6
 	.string "“{STR_VAR_1}.”\n"
-	.string "Now isn’t that great?\p"
-	.string "It really expresses {STR_VAR_2}’s joy,\n"
-	.string "I’d say.\p"
+	.string "Now isn't that great?\p"
+	.string "It really expresses {STR_VAR_2}'s joy,\n"
+	.string "I'd say.\p"
 	.string "That battle with {STR_VAR_3} at the\n"
-	.string "end… It really was what you’d call\l"
+	.string "end… It really was what you'd call\l"
 	.string "“{STR_VAR_1}”!$"
 
 gTVBravoTrainerBattleTowerText13:: @ 0828013D
 	.string "“{STR_VAR_1}.”\n"
-	.string "Now isn’t that fitting?\p"
+	.string "Now isn't that fitting?\p"
 	.string "That battle with {STR_VAR_3} at the\n"
-	.string "end… You can’t describe it as anything\l"
+	.string "end… You can't describe it as anything\l"
 	.string "else but “{STR_VAR_1}”!\p"
-	.string "{STR_VAR_2}’s disappointment comes across\n"
-	.string "loud and clear, I’d say!$"
+	.string "{STR_VAR_2}'s disappointment comes across\n"
+	.string "loud and clear, I'd say!$"
 
 gTVBravoTrainerBattleTowerText14:: @ 082801E6
 	.string "Bravo, {STR_VAR_1}!\n"
 	.string "Bravo, {STR_VAR_2}!\p"
 	.string "I hope we can count on seeing\n"
 	.string "{STR_VAR_1} scale even greater heights!\p"
-	.string "That’s all the time we have!\n"
+	.string "That's all the time we have!\n"
 	.string "Until next time, see you!$"
 
 SlateportCity_PokemonFanClub_Text_280270: @ 08280270
 	.string "Wow!\p"
-	.string "It’s plain to see that you lavish your\n"
+	.string "It's plain to see that you lavish your\n"
 	.string "love on your {STR_VAR_1}.\p"
-	.string "Okay, it’s named {STR_VAR_2}.\p"
+	.string "Okay, it's named {STR_VAR_2}.\p"
 	.string "Can I ask you a favor?\p"
-	.string "I’m a TV reporter, and I’m running\n"
+	.string "I'm a TV reporter, and I'm running\n"
 	.string "a survey on POKéMON.\p"
 	.string "Would you be willing to answer a few\n"
 	.string "simple questions for me?$"
@@ -316,15 +316,15 @@ SlateportCity_PokemonFanClub_Text_280523: @ 08280523
 	.string "Thanks for helping me out.\p"
 	.string "It was fun and enlightening\n"
 	.string "chatting with you.\p"
-	.string "It’s possible that our interview will\n"
+	.string "It's possible that our interview will\n"
 	.string "end up on TV. Tune in and check!\p"
-	.string "Okay, that’s all.\n"
+	.string "Okay, that's all.\n"
 	.string "Bye-bye!$"
 
 SlateportCity_PokemonFanClub_Text_2805E2: @ 082805E2
 	.string "Oh, okay…\p"
 	.string "Well, if you get the urge to tell me\n"
-	.string "about POKéMON, I’ll be here!$"
+	.string "about POKéMON, I'll be here!$"
 
 SlateportCity_PokemonFanClub_Text_28062E: @ 0828062E
 	.string "I enjoy this job--you get to learn\n"
@@ -334,57 +334,57 @@ SlateportCity_PokemonFanClub_Text_280674: @ 08280674
 	.string "Hi, you seem to be very close to your\n"
 	.string "{STR_VAR_1}.\p"
 	.string "Do you know what?\n"
-	.string "I’m a TV reporter.\p"
+	.string "I'm a TV reporter.\p"
 	.string "I travel around interviewing people\n"
 	.string "about POKéMON.\p"
-	.string "I’m wondering if you’d be willing to tell\n"
+	.string "I'm wondering if you'd be willing to tell\n"
 	.string "me a little about your {STR_VAR_1}?$"
 
 SlateportCity_PokemonFanClub_Text_28073B: @ 0828073B
 	.string "Wow, thank you!\p"
 	.string "Okay, then, please tell me anything\n"
-	.string "you’d like about your {STR_VAR_1}.$"
+	.string "you'd like about your {STR_VAR_1}.$"
 
 SlateportCity_PokemonFanClub_Text_280789: @ 08280789
 	.string "Wow…\n"
-	.string "That’s an interesting account.\p"
+	.string "That's an interesting account.\p"
 	.string "You really are tight with {STR_VAR_1},\n"
-	.string "aren’t you?\p"
+	.string "aren't you?\p"
 	.string "I get the feeling that your account\n"
 	.string "will make a great TV story.\p"
-	.string "I promise that I’ll turn this into\n"
+	.string "I promise that I'll turn this into\n"
 	.string "an entertaining show.\l"
 	.string "Keep your eyes out for it.\p"
-	.string "Okay, that’s all.\n"
+	.string "Okay, that's all.\n"
 	.string "Bye-bye!$"
 
 gTVFanClubOpinionsText00:: @ 08280886
 	.string "WE ARE THE POKéMON FAN CLUB!\p"
-	.string "We’re on the air!\p"
+	.string "We're on the air!\p"
 	.string "On this program, we get your opinions,\n"
 	.string "and I shout them out on your behalf!\l"
-	.string "Isn’t it a fantastic program concept?\p"
+	.string "Isn't it a fantastic program concept?\p"
 	.string "Today, we bring you this report from\n"
 	.string "our reporter, who we sent out to the\l"
 	.string "POKéMON FAN CLUB.\p"
-	.string "So, just who is today’s featured\n"
+	.string "So, just who is today's featured\n"
 	.string "POKéMON fan?\p"
 	.string "… … … … … … … …\p"
 	.string "{STR_VAR_1}!\p"
-	.string "So, let’s hear what {STR_VAR_1} has to\n"
+	.string "So, let's hear what {STR_VAR_1} has to\n"
 	.string "say about {STR_VAR_3} the {STR_VAR_2}.\p"
 	.string "And, I will shout those words of love\n"
 	.string "out loud on TV!\p"
 	.string "Hoo-hah!\p"
-	.string "Let’s shout!$"
+	.string "Let's shout!$"
 
 gTVFanClubOpinionsText01:: @ 08280A44
 	.string "We asked {STR_VAR_1}, “When you first\n"
 	.string "laid eyes on your {STR_VAR_2}, what was\l"
 	.string "your initial thought?”\p"
 	.string "“{STR_VAR_3}!”\p"
-	.string "Yeahah! That’s a mighty fine shout!\p"
-	.string "Doesn’t it bring back memories of those\n"
+	.string "Yeahah! That's a mighty fine shout!\p"
+	.string "Doesn't it bring back memories of those\n"
 	.string "days long gone by?$"
 
 gTVFanClubOpinionsText02:: @ 08280AFC
@@ -393,54 +393,54 @@ gTVFanClubOpinionsText02:: @ 08280AFC
 	.string "it would be…”\p"
 	.string "… … … … … … … …\p"
 	.string "“{STR_VAR_3}!”\p"
-	.string "Whoah-oh, now that’s an original idea!\p"
+	.string "Whoah-oh, now that's an original idea!\p"
 	.string "You sure can sense the intensity of\n"
 	.string "feeling the TRAINER has for\l"
 	.string "{STR_VAR_2}.$"
 
 gTVFanClubOpinionsText03:: @ 08280BC4
-	.string "And let’s see…\n"
+	.string "And let's see…\n"
 	.string "What was it about that {STR_VAR_2}\l"
 	.string "that so attracted {STR_VAR_1}?\p"
 	.string "… … … … … … … …\p"
 	.string "“{STR_VAR_3}!”\p"
 	.string "Whoa! Such a spectacular declaration!\p"
-	.string "The TRAINER’s love for the {STR_VAR_2}\n"
+	.string "The TRAINER's love for the {STR_VAR_2}\n"
 	.string "comes across loud and clear!$"
 
 gTVFanClubOpinionsText04:: @ 08280C7A
-	.string "Hm? Oh, there’s still more.\n"
-	.string "Let’s check it out!\p"
+	.string "Hm? Oh, there's still more.\n"
+	.string "Let's check it out!\p"
 	.string "Let me see, now…\p"
 	.string "We asked {STR_VAR_1}, “What do POKéMON\n"
 	.string "mean to you?”\p"
 	.string "… … … … … …\p"
 	.string "“{STR_VAR_3}!”\p"
 	.string "Bravo!\p"
-	.string "That’s the best shout I’ve had all day!\p"
+	.string "That's the best shout I've had all day!\p"
 	.string "“{STR_VAR_3}!”\p"
 	.string "It makes you want to shout it out loud\n"
 	.string "again and again!\p"
-	.string "Now that we’ve had a great shout, it’s\n"
+	.string "Now that we've had a great shout, it's\n"
 	.string "time to say good-bye until next time!\p"
-	.string "So, let’s all have one last shout!\n"
+	.string "So, let's all have one last shout!\n"
 	.string "All together now…\p"
 	.string "“{STR_VAR_3}!”$"
 
 gTVFanClubText00:: @ 08280DEE
 	.string "WE ARE THE POKéMON FAN CLUB!\p"
-	.string "We’re on the air!\p"
-	.string "Today, we’ll get rolling with the\n"
+	.string "We're on the air!\p"
+	.string "Today, we'll get rolling with the\n"
 	.string "POKéMON SURVEY CORNER.\p"
 	.string "Out of all the tales woven by POKéMON\n"
 	.string "and TRAINERS, what startling new drama\l"
 	.string "will grab our attention today?\p"
 	.string "Let me see…\p"
 	.string "This one!\p"
-	.string "We’ll start with this letter!\p"
-	.string "It’s a letter from {STR_VAR_1} about a\n"
+	.string "We'll start with this letter!\p"
+	.string "It's a letter from {STR_VAR_1} about a\n"
 	.string "beloved {STR_VAR_2}.\p"
-	.string "Let’s see how passionately our writer\n"
+	.string "Let's see how passionately our writer\n"
 	.string "can express love for the {STR_VAR_2}!\l"
 	.string "Hmhm…$"
 
@@ -458,7 +458,7 @@ gTVFanClubText03:: @ 08280FA9
 gTVFanClubText04:: @ 08280FD5
 	.string "The bit “{STR_VAR_3},” that really\n"
 	.string "accentuates emotional impact!\p"
-	.string "It’s a great letter that has real\n"
+	.string "It's a great letter that has real\n"
 	.string "heartfelt depth!$"
 
 gTVFanClubText05:: @ 08281040
@@ -466,15 +466,15 @@ gTVFanClubText05:: @ 08281040
 	.string "I love how “{STR_VAR_3}” is used!$"
 
 gTVFanClubText06:: @ 08281073
-	.string "By the way, and it’s not important,\n"
+	.string "By the way, and it's not important,\n"
 	.string "but “{STR_VAR_3}” is a great saying.\p"
-	.string "I’ve been using “{STR_VAR_3}” a lot\n"
+	.string "I've been using “{STR_VAR_3}” a lot\n"
 	.string "in conversations lately.$"
 
 gTVFanClubText07:: @ 082810E7
 	.string "If I had to score this letter,\n"
-	.string "I’d give it {STR_VAR_3} points.\p"
-	.string "Next time, I’ll be expecting an even\n"
+	.string "I'd give it {STR_VAR_3} points.\p"
+	.string "Next time, I'll be expecting an even\n"
 	.string "better letter, {STR_VAR_1}!\p"
 	.string "A-whoops, will you look at the time?\n"
 	.string "Time to say good-bye until next time!$"
@@ -482,16 +482,16 @@ gTVFanClubText07:: @ 082810E7
 SlateportCity_OceanicMuseum_1F_Text_2811A0: @ 082811A0
 	.string "Oh?\n"
 	.string "Do you perhaps like POKéMON?\p"
-	.string "I’m on assignment with the TV network.\p"
-	.string "I’m gathering stories on POKéMON and\n"
+	.string "I'm on assignment with the TV network.\p"
+	.string "I'm gathering stories on POKéMON and\n"
 	.string "TRAINERS that occurred recently.\p"
-	.string "If you don’t mind, could you tell me\n"
+	.string "If you don't mind, could you tell me\n"
 	.string "something about yourself?$"
 
 SlateportCity_OceanicMuseum_1F_Text_28126D: @ 0828126D
-	.string "I’m gathering stories on POKéMON and\n"
+	.string "I'm gathering stories on POKéMON and\n"
 	.string "TRAINERS that occurred recently.\p"
-	.string "If you don’t mind, could you tell me\n"
+	.string "If you don't mind, could you tell me\n"
 	.string "something about yourself?$"
 
 SlateportCity_OceanicMuseum_1F_Text_2812F2: @ 082812F2
@@ -508,18 +508,18 @@ SlateportCity_OceanicMuseum_1F_Text_281367: @ 08281367
 
 SlateportCity_OceanicMuseum_1F_Text_2813B9: @ 082813B9
 	.string "Oh, what an uplifting story!\p"
-	.string "I’ll be sure to get your story told\n"
+	.string "I'll be sure to get your story told\n"
 	.string "on television.\p"
 	.string "It should be aired sometime, I think,\n"
 	.string "so please look forward to it.$"
 
 SlateportCity_OceanicMuseum_1F_Text_28144D: @ 0828144D
 	.string "Hmmm…\n"
-	.string "I’ve got a good story for a TV program.\p"
-	.string "I’d better write it up in a hurry!$"
+	.string "I've got a good story for a TV program.\p"
+	.string "I'd better write it up in a hurry!$"
 
 gTVRecentHappeningsText00:: @ 0828149E
-	.string "Hello, it’s time for RECENT HAPPENINGS.\p"
+	.string "Hello, it's time for RECENT HAPPENINGS.\p"
 	.string "For POKéMON TRAINERS, every day\n"
 	.string "is a storybook tale.\p"
 	.string "What we want to do is to introduce you\n"
@@ -527,14 +527,14 @@ gTVRecentHappeningsText00:: @ 0828149E
 	.string "Today, we bring you the story\n"
 	.string "of the TRAINER {STR_VAR_1}.\p"
 	.string "What did {STR_VAR_1} experience recently?\n"
-	.string "Let’s find out.\p"
-	.string "Let’s see…$"
+	.string "Let's find out.\p"
+	.string "Let's see…$"
 
 gTVRecentHappeningsText01:: @ 082815AF
-	.string "Wasn’t that enlightening?\p"
+	.string "Wasn't that enlightening?\p"
 	.string "The story gives you a clear idea of what\n"
 	.string "{STR_VAR_1} has experienced recently.\l"
-	.string "It’s as if we were there as witnesses!$"
+	.string "It's as if we were there as witnesses!$"
 
 gTVRecentHappeningsText02:: @ 08281636
 	.string "“{STR_VAR_3}.” That\n"
@@ -543,7 +543,7 @@ gTVRecentHappeningsText02:: @ 08281636
 gTVRecentHappeningsText03:: @ 08281666
 	.string "“{STR_VAR_3}.”\n"
 	.string "That gives the tale a sense of place.\l"
-	.string "It lets us envision the tale’s setting.$"
+	.string "It lets us envision the tale's setting.$"
 
 gTVRecentHappeningsText04:: @ 082816BA
 	.string "The “{STR_VAR_3}”\n"
@@ -552,29 +552,29 @@ gTVRecentHappeningsText04:: @ 082816BA
 gTVRecentHappeningsText05:: @ 082816EB
 	.string "{STR_VAR_1} has recounted a wonderful\n"
 	.string "tale involving POKéMON.\p"
-	.string "And now {STR_VAR_1}’s tale is indelibly\n"
+	.string "And now {STR_VAR_1}'s tale is indelibly\n"
 	.string "etched into your soul, too.\p"
-	.string "That’s it for today.\n"
+	.string "That's it for today.\n"
 	.string "Please tune in next time.$"
 
 gTVMassOutbreakText00:: @ 0828178A
 	.string "Greetings!\n"
-	.string "It’s time for POKéMON NEWS.\p"
-	.string "We’ve just received word of a very\n"
+	.string "It's time for POKéMON NEWS.\p"
+	.string "We've just received word of a very\n"
 	.string "rare occurrence.\p"
 	.string "There have been reports of a mass\n"
 	.string "outbreak of {STR_VAR_2} in the vicinity\l"
 	.string "of {STR_VAR_1}.\p"
-	.string "{STR_VAR_2}, as you’re probably aware,\n"
-	.string "is known as a POKéMON that’s rare\l"
+	.string "{STR_VAR_2}, as you're probably aware,\n"
+	.string "is known as a POKéMON that's rare\l"
 	.string "and hard to find.\p"
 	.string "It sounds like a rare opportunity to\n"
 	.string "see the mystifying outbreak of\l"
 	.string "{STR_VAR_2} in the wild.\p"
-	.string "That’s the news on POKéMON NEWS.$"
+	.string "That's the news on POKéMON NEWS.$"
 
 gTV3CheersForPokeblocksText00:: @ 082818F4
-	.string "MC: We hope you’re in good cheer,\n"
+	.string "MC: We hope you're in good cheer,\n"
 	.string "“3 CHEERS FOR {POKEBLOCK}S” is here!\p"
 	.string "Today, we examine the {POKEBLOCK} blended\n"
 	.string "by {STR_VAR_1} and associates.\p"
@@ -590,22 +590,22 @@ gTV3CheersForPokeblocksText01:: @ 082819C7
 	.string "Thank you so much, {STR_VAR_3}!$"
 
 gTV3CheersForPokeblocksText02:: @ 08281A2F
-	.string "{STR_VAR_1}’s blending performance\n"
+	.string "{STR_VAR_1}'s blending performance\n"
 	.string "left something to be desired.\p"
 	.string "If this TRAINER could blend better,\n"
 	.string "the {POKEBLOCK} would be much tastier.$"
 
 gTV3CheersForPokeblocksText03:: @ 08281AAC
 	.string "GULPIN: Gubi! Gubii!\p"
-	.string "MC: Hmm… It’s too {STR_VAR_1}.\n"
+	.string "MC: Hmm… It's too {STR_VAR_1}.\n"
 	.string "GULPIN says it tastes “{STR_VAR_2}!”\p"
-	.string "It looks like {STR_VAR_3}’s errors\n"
+	.string "It looks like {STR_VAR_3}'s errors\n"
 	.string "hurt the blending quality…$"
 
 gTV3CheersForPokeblocksText04:: @ 08281B28
-	.string "It’s too bad that {STR_VAR_1}’s\n"
+	.string "It's too bad that {STR_VAR_1}'s\n"
 	.string "leading effort went to waste.\p"
-	.string "Let’s hope {STR_VAR_2} can turn in\n"
+	.string "Let's hope {STR_VAR_2} can turn in\n"
 	.string "a better showing next time!$"
 
 gTV3CheersForPokeblocksText05:: @ 08281B93
@@ -614,11 +614,11 @@ gTV3CheersForPokeblocksText05:: @ 08281B93
 
 LilycoveCity_PokemonTrainerFanClub_Text_281BCB:: @ 8281BCB
 	.string "Hi, there!\p"
-	.string "I’m a big fan of {STR_VAR_1}.\n"
-	.string "What’s your opinion of {STR_VAR_1}?$"
+	.string "I'm a big fan of {STR_VAR_1}.\n"
+	.string "What's your opinion of {STR_VAR_1}?$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_281C06:: @ 8281C06
-	.string "I see, I see. That’s what you think\n"
+	.string "I see, I see. That's what you think\n"
 	.string "about the TRAINER.$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_281C3D:: @ 8281C3D
@@ -626,8 +626,8 @@ LilycoveCity_PokemonTrainerFanClub_Text_281C3D:: @ 8281C3D
 	.string "about {STR_VAR_1}?$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_281C65:: @ 8281C65
-	.string "I’m a big fan of {STR_VAR_1}.\n"
-	.string "What’s your opinion of {STR_VAR_1}?$"
+	.string "I'm a big fan of {STR_VAR_1}.\n"
+	.string "What's your opinion of {STR_VAR_1}?$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_281C95:: @ 8281C95
 	.string "How strong would you rate {STR_VAR_1}\n"
@@ -640,17 +640,17 @@ LilycoveCity_PokemonTrainerFanClub_Text_281CCD:: @ 8281CCD
 LilycoveCity_PokemonTrainerFanClub_Text_281CF5:: @ 8281CF5
 	.string "Oh, I see!\n"
 	.string "You should meet {STR_VAR_1} sometime.\l"
-	.string "I’m sure you’ll become a fan, too!$"
+	.string "I'm sure you'll become a fan, too!$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_281D40:: @ 8281D40
 	.string "I see, I see.\p"
 	.string "Thank you!\n"
-	.string "That’s very useful to know.\p"
-	.string "I’ll share this information with other\n"
+	.string "That's very useful to know.\p"
+	.string "I'll share this information with other\n"
 	.string "{STR_VAR_1} fans and discuss it.$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_281DB4:: @ 8281DB4
-	.string "There’s going to be a TV special on\n"
+	.string "There's going to be a TV special on\n"
 	.string "{STR_VAR_1} very soon.\p"
 	.string "I hope you catch it!$"
 
@@ -670,7 +670,7 @@ gTVTrainerFanClubSpecialText00:: @ 08281DFB
 	.string "What a perceptive opinion!\p"
 	.string "“{STR_VAR_3} {STR_VAR_1}.”\n"
 	.string "It has such a nice ring to it!\p"
-	.string "{STR_VAR_2} also scored {STR_VAR_1}’s\n"
+	.string "{STR_VAR_2} also scored {STR_VAR_1}'s\n"
 	.string "strength from 0 to 100.$"
 
 gTVTrainerFanClubSpecialText01:: @ 08281F90
@@ -687,13 +687,13 @@ gTVTrainerFanClubSpecialText02:: @ 08281FFA
 
 gTVTrainerFanClubSpecialText03:: @ 08282052
 	.string "The score was {STR_VAR_3} points!\n"
-	.string "That’s a rather weak score.\p"
+	.string "That's a rather weak score.\p"
 	.string "{STR_VAR_2} must consider\n"
 	.string "{STR_VAR_1} to be a mere sidekick.$"
 
 gTVTrainerFanClubSpecialText04:: @ 082820B2
 	.string "The score was {STR_VAR_3} point(s)!\n"
-	.string "That’s a terrible score.\p"
+	.string "That's a terrible score.\p"
 	.string "{STR_VAR_2} must consider\n"
 	.string "{STR_VAR_1} to be an underling.$"
 
@@ -701,19 +701,19 @@ gTVTrainerFanClubSpecialText05:: @ 0828210E
 	.string "There you have it, folks!\p"
 	.string "I think we all learned something\n"
 	.string "new about {STR_VAR_1}.\p"
-	.string "In closing, I’ll leave you with\n"
-	.string "{STR_VAR_2}’s words.\p"
+	.string "In closing, I'll leave you with\n"
+	.string "{STR_VAR_2}'s words.\p"
 	.string "{STR_VAR_3} {STR_VAR_1}!$"
 
 gTVNameRaterText00:: @ 0828218A
-	.string "And now, it’s time for…\n"
+	.string "And now, it's time for…\n"
 	.string "THE NAME RATER SHOW.\p"
-	.string "I tell your POKéMON’s fortune from\n"
-	.string "the nickname you’ve bestowed.\p"
+	.string "I tell your POKéMON's fortune from\n"
+	.string "the nickname you've bestowed.\p"
 	.string "Advice is what I have to give, and it is\n"
 	.string "helpful advice that I offer.\p"
 	.string "Today, I shall do a reading of\n"
-	.string "the nickname {STR_VAR_3} of {STR_VAR_1}’s\l"
+	.string "the nickname {STR_VAR_3} of {STR_VAR_1}'s\l"
 	.string "POKéMON {STR_VAR_2}.\p"
 	.string "Hmhm…\p"
 	.string "Hmm…\n"
@@ -727,14 +727,14 @@ gTVNameRaterText01:: @ 0828229E
 
 gTVNameRaterText02:: @ 08282317
 	.string "A nickname that perfectly complements\n"
-	.string "{STR_VAR_1}, the TRAINER’s name.\p"
+	.string "{STR_VAR_1}, the TRAINER's name.\p"
 	.string "It suggests that you will forge a fine\n"
 	.string "partnership with precise timing.$"
 
 gTVNameRaterText03:: @ 0828239D
 	.string "A nickname fit for a unique individual\n"
 	.string "of a POKéMON!\p"
-	.string "If raised properly, this POKéMON’s\n"
+	.string "If raised properly, this POKéMON's\n"
 	.string "uniqueness will bloom excessively!$"
 
 gTVNameRaterText04:: @ 08282418
@@ -764,7 +764,7 @@ gTVNameRaterText07:: @ 082825A1
 gTVNameRaterText08:: @ 08282623
 	.string "An appealing nickname that should make\n"
 	.string "the POKéMON very charming!\p"
-	.string "I don’t doubt that this POKéMON will be\n"
+	.string "I don't doubt that this POKéMON will be\n"
 	.string "quite the charmer in POKéMON CONTESTS.$"
 
 gTVNameRaterText09:: @ 082826B4
@@ -787,7 +787,7 @@ gTVNameRaterText11:: @ 082827CB
 	.string "“{STR_VAR_3}” is especially wonderful.$"
 
 gTVNameRaterText12:: @ 08282849
-	.string "Let’s examine other examples of fine\n"
+	.string "Let's examine other examples of fine\n"
 	.string "nicknames, shall we?$"
 
 gTVNameRaterText13:: @ 08282883
@@ -800,7 +800,7 @@ gTVNameRaterText14:: @ 082828E4
 	.string "quite well.$"
 
 gTVNameRaterText15:: @ 08282912
-	.string "The POKéMON’s species name of\n"
+	.string "The POKéMON's species name of\n"
 	.string "{STR_VAR_2} could be used as the basis\l"
 	.string "for making the nickname {STR_VAR_1}{STR_VAR_3}.$"
 
@@ -820,30 +820,30 @@ gTVNameRaterText18:: @ 08282A36
 	.string "a good nickname.\p"
 	.string "I hope that the TRAINER will continue\n"
 	.string "to treat {STR_VAR_1} with love.\p"
-	.string "That’s it for today’s show.\n"
+	.string "That's it for today's show.\n"
 	.string "May we meet again.$"
 
 gTVPokemonAnglerText00:: @ 08282ACF
 	.string "{STR_VAR_2} ANGLER\p"
-	.string "ANNOUNCER: Hello! Today, we’ll get tips\n"
+	.string "ANNOUNCER: Hello! Today, we'll get tips\n"
 	.string "on fishing for {STR_VAR_2}.\p"
 	.string "GURU, what advice can you give for\n"
 	.string "catching {STR_VAR_2}?\p"
 	.string "GURU: Hm? Catching {STR_VAR_2}?\n"
 	.string "Well, let me tell you, be patient and\l"
-	.string "wait. That’s the bottom line.\p"
+	.string "wait. That's the bottom line.\p"
 	.string "Do you see {STR_VAR_1} over there?\n"
 	.string "That TRAINER makes a good example.\p"
-	.string "That TRAINER’s already had\n"
+	.string "That TRAINER's already had\n"
 	.string "{STR_VAR_3} POKéMON get away.\p"
 	.string "But there {STR_VAR_1} waits. No giving up.\n"
-	.string "That’s the law for catching {STR_VAR_2}.\p"
+	.string "That's the law for catching {STR_VAR_2}.\p"
 	.string "ANNOUNCER: I see…\p"
 	.string "Oh! {STR_VAR_1} has finally landed an\n"
 	.string "elusive {STR_VAR_2}!\p"
 	.string "The TRAINER appears close to tears\n"
 	.string "out of sheer joy!\p"
-	.string "Seeing that elated look, I’m getting\n"
+	.string "Seeing that elated look, I'm getting\n"
 	.string "the itch to go fishing, too!\p"
 	.string "Viewers, why not take this as a cue to\n"
 	.string "try some {STR_VAR_2} fishing?\p"
@@ -852,7 +852,7 @@ gTVPokemonAnglerText00:: @ 08282ACF
 
 gTVPokemonAnglerText01:: @ 08282D7C
 	.string "{STR_VAR_2} ANGLER\p"
-	.string "ANNOUNCER: Hello! Today, we’ll get tips\n"
+	.string "ANNOUNCER: Hello! Today, we'll get tips\n"
 	.string "on fishing for {STR_VAR_2}.\p"
 	.string "GURU, what advice can you give for\n"
 	.string "catching {STR_VAR_2}?\p"
@@ -861,11 +861,11 @@ gTVPokemonAnglerText01:: @ 08282D7C
 	.string "ROD with vigor!\p"
 	.string "Do you see {STR_VAR_1} over there?\n"
 	.string "See how the ROD is handled?\p"
-	.string "That TRAINER’s already caught\n"
+	.string "That TRAINER's already caught\n"
 	.string "{STR_VAR_3} in a row.\p"
-	.string "ANNOUNCER: It’s incredible!\n"
+	.string "ANNOUNCER: It's incredible!\n"
 	.string "It looks like a storm…\p"
-	.string "Seeing technique of that caliber, I’m\n"
+	.string "Seeing technique of that caliber, I'm\n"
 	.string "getting the itch to go fishing, too.\p"
 	.string "Viewers, why not take this as a cue to\n"
 	.string "try some {STR_VAR_2} fishing?\p"
@@ -874,12 +874,12 @@ gTVPokemonAnglerText01:: @ 08282D7C
 
 gTVPokemonTodayFailedText00:: @ 08282F9B
 	.string "Hello!\p"
-	.string "It’s time for POKéMON TODAY!\p"
+	.string "It's time for POKéMON TODAY!\p"
 	.string "BIG SIS: Hi! Is everyone peachy and\n"
 	.string "perky today?\p"
-	.string "Today, we’re going to look at {STR_VAR_1}’s\n"
+	.string "Today, we're going to look at {STR_VAR_1}'s\n"
 	.string "POKéMON {STR_VAR_2}!\p"
-	.string "BIG BRO: Yeah! That’s what we’re going\n"
+	.string "BIG BRO: Yeah! That's what we're going\n"
 	.string "to do!$"
 
 gTVPokemonTodayFailedText01:: @ 0828304D
@@ -890,7 +890,7 @@ gTVPokemonTodayFailedText01:: @ 0828304D
 	.string "BIG SIS: Oh, what did you see?\p"
 	.string "BIG BRO: Well, I had to go on a trip to\n"
 	.string "{STR_VAR_2}.\p"
-	.string "That’s when I happened to come across\n"
+	.string "That's when I happened to come across\n"
 	.string "{STR_VAR_1}, who was trying to catch the\l"
 	.string "POKéMON {STR_VAR_3}, but…$"
 
@@ -899,7 +899,7 @@ gTVPokemonTodayFailedText02:: @ 08283135
 	.string "It ended up wasting this many\n"
 	.string "POKé BALLS: {STR_VAR_2}!\p"
 	.string "You should have seen the expression\n"
-	.string "of frustration on {STR_VAR_1}’s face when\l"
+	.string "of frustration on {STR_VAR_1}'s face when\l"
 	.string "the POKéMON took off!$"
 
 gTVPokemonTodayFailedText03:: @ 082831DF
@@ -908,17 +908,17 @@ gTVPokemonTodayFailedText03:: @ 082831DF
 	.string "It ended up wasting this many\n"
 	.string "POKé BALLS: {STR_VAR_2}!\p"
 	.string "You should have seen the expression\n"
-	.string "of stunned dismay on {STR_VAR_1}’s face\l"
+	.string "of stunned dismay on {STR_VAR_1}'s face\l"
 	.string "when the POKéMON fainted!$"
 
 gTVPokemonTodayFailedText04:: @ 08283294
 	.string "BIG SIS: Hey, there!\n"
-	.string "That’s not nice!\p"
-	.string "You shouldn’t be laughing at other\n"
-	.string "people’s misfortune!\p"
+	.string "That's not nice!\p"
+	.string "You shouldn't be laughing at other\n"
+	.string "people's misfortune!\p"
 	.string "Oh, poor {STR_VAR_1}.\n"
 	.string "What a shame!\p"
-	.string "BIG BRO: That’s true!\n"
+	.string "BIG BRO: That's true!\n"
 	.string "Sorry for laughing.$"
 
 gTVPokemonTodayFailedText05:: @ 08283337
@@ -926,31 +926,31 @@ gTVPokemonTodayFailedText05:: @ 08283337
 	.string "BIG BRO: Hey!\n"
 	.string "You just laughed, too!\p"
 	.string "BIG SIS: Huh?!\p"
-	.string "I didn’t laugh!\n"
-	.string "Honestly, I didn’t!\p"
+	.string "I didn't laugh!\n"
+	.string "Honestly, I didn't!\p"
 	.string "Oh, poor {STR_VAR_1}.\n"
 	.string "What a shame!\p"
 	.string "BIG BRO: …$"
 
 gTVPokemonTodayFailedText06:: @ 082833C6
-	.string "BIG SIS: That’s enough silliness!\n"
-	.string "Let’s look at today’s POKéMON…\p"
+	.string "BIG SIS: That's enough silliness!\n"
+	.string "Let's look at today's POKéMON…\p"
 	.string "Huh?\n"
-	.string "We’re out of time already?\p"
+	.string "We're out of time already?\p"
 	.string "Aww!\n"
-	.string "We couldn’t profile a POKéMON today!\p"
+	.string "We couldn't profile a POKéMON today!\p"
 	.string "BIG BRO: See you again next time!\p"
-	.string "BIG SIS: Hey, don’t end the show\n"
+	.string "BIG SIS: Hey, don't end the show\n"
 	.string "without me!$"
 
 gTVPokemonTodaySuccessfulText00:: @ 082834A0
 	.string "Hello!\p"
-	.string "It’s time for POKéMON TODAY!\p"
+	.string "It's time for POKéMON TODAY!\p"
 	.string "BIG SIS: Hi! Is everyone peachy and\n"
 	.string "perky today?\p"
-	.string "Today, we’re going to look at {STR_VAR_1}’s\n"
+	.string "Today, we're going to look at {STR_VAR_1}'s\n"
 	.string "POKéMON {STR_VAR_2}!\p"
-	.string "BIG BRO: Yeah! That’s what we’re going\n"
+	.string "BIG BRO: Yeah! That's what we're going\n"
 	.string "to do!$"
 
 gTVPokemonTodaySuccessfulText01:: @ 08283552
@@ -971,16 +971,16 @@ gTVPokemonTodaySuccessfulText03:: @ 0828361F
 	.string "{STR_VAR_1} and the {STR_VAR_2} together!$"
 
 gTVPokemonTodaySuccessfulText04:: @ 08283685
-	.string "BIG SIS: Wow! That’s so neat!\p"
+	.string "BIG SIS: Wow! That's so neat!\p"
 	.string "But you know what they say, a POKéMON\n"
 	.string "that takes a lot of effort to catch\l"
 	.string "earns the love of its TRAINER!$"
 
 gTVPokemonTodaySuccessfulText05:: @ 0828370C
-	.string "BIG SIS: {STR_VAR_1}’s {STR_VAR_2} is a\n"
+	.string "BIG SIS: {STR_VAR_1}'s {STR_VAR_2} is a\n"
 	.string "memorable POKéMON because it took an\l"
 	.string "invaluable MASTER BALL to catch!\p"
-	.string "BIG BRO: Wow! That’s mega-awesome!\p"
+	.string "BIG BRO: Wow! That's mega-awesome!\p"
 	.string "BIG SIS: {STR_VAR_1} must have really\n"
 	.string "wanted that {STR_VAR_2}, for sure!$"
 
@@ -988,18 +988,18 @@ gTVPokemonTodaySuccessfulText06:: @ 082837C2
 	.string "BIG BRO: Then to give the nickname\n"
 	.string "{STR_VAR_3} to that {STR_VAR_2}…\p"
 	.string "You really get a good idea about\n"
-	.string "{STR_VAR_1}’s TRAINER sense.\p"
+	.string "{STR_VAR_1}'s TRAINER sense.\p"
 	.string "BIG SIS: I second that notion!$"
 
 gTVPokemonTodaySuccessfulText07:: @ 08283848
-	.string "If it were me, I’d give that nickname\n"
+	.string "If it were me, I'd give that nickname\n"
 	.string "to something like this {STR_VAR_3}!\p"
 	.string "BIG BRO: Whoa! That could be the start\n"
 	.string "of something new!$"
 
 gTVPokemonTodaySuccessfulText08:: @ 082838C2
 	.string "{STR_VAR_2} the {STR_VAR_1}?\n"
-	.string "Doesn’t that sound perfect?\p"
+	.string "Doesn't that sound perfect?\p"
 	.string "The letters and everything--they\n"
 	.string "sound just right for the POKéMON\l"
 	.string "{STR_VAR_1}!\p"
@@ -1017,7 +1017,7 @@ gTVPokemonTodaySuccessfulText10:: @ 082839EA
 	.string "The next time I catch a POKéMON,\n"
 	.string "I should give it the name {STR_VAR_2}.\p"
 	.string "BIG BRO: Huh? Me, too!\n"
-	.string "I’ll use the nickname {STR_VAR_2}, too!$"
+	.string "I'll use the nickname {STR_VAR_2}, too!$"
 
 gTVPokemonTodaySuccessfulText11:: @ 08283A5F
 	.string "BIG SIS: Oh, no!\n"
@@ -1029,18 +1029,18 @@ gTVPokemonTodaySuccessfulText11:: @ 08283A5F
 
 gTVTodaysSmartShopperText00:: @ 08283B05
 	.string "Hello!\p"
-	.string "It’s time for TODAY’S SMART SHOPPER.\p"
+	.string "It's time for TODAY'S SMART SHOPPER.\p"
 	.string "INTERVIEWER: How are you, viewers?\p"
-	.string "Today we’re visiting a shop\n"
+	.string "Today we're visiting a shop\n"
 	.string "in {STR_VAR_2}.\p"
-	.string "Let’s check on what the hot sellers\n"
+	.string "Let's check on what the hot sellers\n"
 	.string "have been recently.$"
 
 gTVTodaysSmartShopperText01:: @ 08283BAF
-	.string "Let’s interview the clerk to get the\n"
+	.string "Let's interview the clerk to get the\n"
 	.string "lowdown.\p"
-	.string "Hi, how’s your business?\p"
-	.string "CLERK: Oh, we’re doing excellent.\p"
+	.string "Hi, how's your business?\p"
+	.string "CLERK: Oh, we're doing excellent.\p"
 	.string "Recently, {STR_VAR_2} has been\n"
 	.string "selling especially strongly.\p"
 	.string "Why, just the other day a TRAINER\n"
@@ -1048,7 +1048,7 @@ gTVTodaysSmartShopperText01:: @ 08283BAF
 
 gTVTodaysSmartShopperText02:: @ 08283C81
 	.string "INTERVIEWER: The TRAINER bought\n"
-	.string "{STR_VAR_3} {STR_VAR_2}S? That’s a haul!\p"
+	.string "{STR_VAR_3} {STR_VAR_2}S? That's a haul!\p"
 	.string "If I may say so, {STR_VAR_1} must have\n"
 	.string "been stocking up for a long journey\l"
 	.string "to far-off places.\p"
@@ -1059,12 +1059,12 @@ gTVTodaysSmartShopperText03:: @ 08283D32
 	.string "INTERVIEWER: Speaking of the item\n"
 	.string "{STR_VAR_2}, I just bought {STR_VAR_3} of\l"
 	.string "them recently.\p"
-	.string "After all, {STR_VAR_2}’s a great item!$"
+	.string "After all, {STR_VAR_2}'s a great item!$"
 
 gTVTodaysSmartShopperText04:: @ 08283D99
 	.string "INTERVIEWER: {STR_VAR_2}?!\n"
 	.string "But {STR_VAR_3} of them?!\p"
-	.string "I didn’t think there would be anyone\n"
+	.string "I didn't think there would be anyone\n"
 	.string "buying that many.\p"
 	.string "My goodness, I can only afford one or\n"
 	.string "two at a time…$"
@@ -1077,13 +1077,13 @@ gTVTodaysSmartShopperText05:: @ 08283E28
 	.string "Since then, I only buy strictly what\n"
 	.string "I absolutely need…\p"
 	.string "Oops!\p"
-	.string "There’s no point talking about me!$"
+	.string "There's no point talking about me!$"
 
 gTVTodaysSmartShopperText06:: @ 08283F01
 	.string "CLERK: {STR_VAR_1} also bought the item\n"
 	.string "{STR_VAR_2} in bulk, taking {STR_VAR_3}.\p"
-	.string "INTERVIEWER: Oh, that’s smart.\n"
-	.string "{STR_VAR_2}’s a very good item, too.$"
+	.string "INTERVIEWER: Oh, that's smart.\n"
+	.string "{STR_VAR_2}'s a very good item, too.$"
 
 gTVTodaysSmartShopperText07:: @ 08283F72
 	.string "CLERK: And, the TRAINER also bought\n"
@@ -1091,15 +1091,15 @@ gTVTodaysSmartShopperText07:: @ 08283F72
 
 gTVTodaysSmartShopperText08:: @ 08283FA9
 	.string "CLERK: Plus, it was during a big sale.\n"
-	.string "That’s smart shopping.$"
+	.string "That's smart shopping.$"
 
 gTVTodaysSmartShopperText09:: @ 08283FE7
 	.string "INTERVIEWER: Hmm… {STR_VAR_1} sounds like\n"
 	.string "quite the shrewd bargain hunter!\p"
-	.string "In total, {STR_VAR_1}’s purchases came to…\p"
+	.string "In total, {STR_VAR_1}'s purchases came to…\p"
 	.string "¥{STR_VAR_2}?!\n"
 	.string "What an amazing sum!\p"
-	.string "Oops! We’re out of time!\n"
+	.string "Oops! We're out of time!\n"
 	.string "See you on our next broadcast!$"
 
 gTVTodaysSmartShopperText10:: @ 0828409E
@@ -1107,18 +1107,18 @@ gTVTodaysSmartShopperText10:: @ 0828409E
 	.string "no doubt about it.$"
 
 gTVTodaysSmartShopperText11:: @ 082840CE
-	.string "Let’s interview the clerk to get the\n"
+	.string "Let's interview the clerk to get the\n"
 	.string "lowdown.\p"
-	.string "Hi, how’s your business?\p"
-	.string "CLERK: Oh, we’re doing unbelievable\n"
-	.string "business. It’s almost overwhelming.\p"
+	.string "Hi, how's your business?\p"
+	.string "CLERK: Oh, we're doing unbelievable\n"
+	.string "business. It's almost overwhelming.\p"
 	.string "Recently, a TRAINER named {STR_VAR_1}\n"
 	.string "bought the item {STR_VAR_2} in bulk.\p"
 	.string "The TRAINER almost cleared out our\n"
 	.string "entire stock of {STR_VAR_2}S.\p"
 	.string "I never dreamt that any customer\n"
 	.string "would ever need so many {STR_VAR_2}S.\l"
-	.string "It’s just unheard of!\p"
+	.string "It's just unheard of!\p"
 	.string "INTERVIEWER: So that would be like 100\n"
 	.string "or 200 sold?\p"
 	.string "CLERK: Oh, no, much more than that!\p"
@@ -1145,7 +1145,7 @@ gTVWorldOfMastersText00:: @ 082843BA
 	.string "named {STR_VAR_1}.\p"
 	.string "{STR_VAR_1} is famous as a master at\n"
 	.string "catching POKéMON.\p"
-	.string "{STR_VAR_1}’s quest for POKéMON depends\n"
+	.string "{STR_VAR_1}'s quest for POKéMON depends\n"
 	.string "entirely on a careful search on foot.\p"
 	.string "On one memorable day, the TRAINER\n"
 	.string "walked some {STR_VAR_2} steps.\p"
@@ -1158,42 +1158,42 @@ gTVWorldOfMastersText01:: @ 082844FD
 	.string "the TRAINER and {STR_VAR_1}.$"
 
 gTVWorldOfMastersText02:: @ 0828455B
-	.string "The master caught the day’s last\n"
+	.string "The master caught the day's last\n"
 	.string "{STR_VAR_3} near {STR_VAR_2}.\p"
 	.string "That POKéMON apparently enjoys\n"
 	.string "a special status as a record holder.\p"
 	.string "Skilled TRAINERS should be encouraged\n"
 	.string "to challenge this fine record.\p"
-	.string "That’s all for today.\n"
+	.string "That's all for today.\n"
 	.string "Please tune in next time.$"
 
 gTVTodaysRivalTrainerText00:: @ 08284641
-	.string "TODAY’S RIVAL TRAINER!\p"
+	.string "TODAY'S RIVAL TRAINER!\p"
 	.string "Hello, fellow POKéMON TRAINERS!\n"
 	.string "How are we all doing today?\p"
 	.string "Today, like every other day,\n"
-	.string "we’ll examine one of our rivals!$"
+	.string "we'll examine one of our rivals!$"
 
 gTVTodaysRivalTrainerText07:: @ 082846D2
-	.string "Today’s rival TRAINER is {STR_VAR_1},\n"
-	.string "who’s around {STR_VAR_3} now.\p"
+	.string "Today's rival TRAINER is {STR_VAR_1},\n"
+	.string "who's around {STR_VAR_3} now.\p"
 	.string "{STR_VAR_1} has so far registered\n"
 	.string "{STR_VAR_2} POKéMON in the POKéDEX.$"
 
 gTVTodaysRivalTrainerText08:: @ 08284738
-	.string "Today’s rival TRAINER is {STR_VAR_1},\n"
-	.string "who’s in a SECRET BASE now.\p"
+	.string "Today's rival TRAINER is {STR_VAR_1},\n"
+	.string "who's in a SECRET BASE now.\p"
 	.string "{STR_VAR_1} has so far registered\n"
 	.string "{STR_VAR_2} POKéMON in the POKéDEX.$"
 
 gTVTodaysRivalTrainerText09:: @ 082847A5
-	.string "Today’s rival TRAINER is {STR_VAR_1}.\p"
+	.string "Today's rival TRAINER is {STR_VAR_1}.\p"
 	.string "So far, {STR_VAR_1} has registered\n"
 	.string "{STR_VAR_2} POKéMON in the POKéDEX.$"
 
 gTVTodaysRivalTrainerText10:: @ 082847F7
-	.string "Today’s rival TRAINER is {STR_VAR_1},\n"
-	.string "who’s on a ferry now.\p"
+	.string "Today's rival TRAINER is {STR_VAR_1},\n"
+	.string "who's on a ferry now.\p"
 	.string "{STR_VAR_1} has so far registered\n"
 	.string "{STR_VAR_2} POKéMON in the POKéDEX.$"
 
@@ -1204,15 +1204,15 @@ gTVTodaysRivalTrainerText01:: @ 0828485F
 	.string "have? The number is {STR_VAR_1}!$"
 
 gTVTodaysRivalTrainerText02:: @ 0828489A
-	.string "But our rival hasn’t obtained\n"
+	.string "But our rival hasn't obtained\n"
 	.string "a single BADGE yet!$"
 
 gTVTodaysRivalTrainerText03:: @ 082848CC
-	.string "Our rival hasn’t obtained a single\n"
+	.string "Our rival hasn't obtained a single\n"
 	.string "BATTLE FRONTIER Symbol yet.$"
 
 gTVTodaysRivalTrainerText04:: @ 0828490B
-	.string "Let’s see how many BATTLE FRONTIER\n"
+	.string "Let's see how many BATTLE FRONTIER\n"
 	.string "Symbols our rival has.\p"
 	.string "Gold Symbols: {STR_VAR_1}!\n"
 	.string "Silver Symbols: {STR_VAR_2}!$"
@@ -1226,20 +1226,20 @@ gTVTodaysRivalTrainerText06:: @ 082849AE
 	.string "comparison to {STR_VAR_1}?\p"
 	.string "The adventure rolls on!\p"
 	.string "Fellow TRAINERS!\p"
-	.string "Let’s all keep moving forward\n"
+	.string "Let's all keep moving forward\n"
 	.string "and ahead of our rivals!$"
 
 gTVDewfordTrendWatcherNetworkText00:: @ 08284A3E
 	.string "DEWFORD TREND-WATCHER NETWORK!\p"
 	.string "MC: Wassup?\n"
-	.string "We’ll keep it real with the latest on\l"
-	.string "what’s hip and happening in DEWFORD.\p"
+	.string "We'll keep it real with the latest on\l"
+	.string "what's hip and happening in DEWFORD.\p"
 	.string "Our guest today is this old cat whose\n"
 	.string "claim to fame is being the authority\l"
 	.string "on all things in DEWFORD.\p"
 	.string "Old man: Glad to be here.\p"
-	.string "MC: Let’s cut to the chase, right on.\p"
-	.string "What’s your word on what’s groovin’\n"
+	.string "MC: Let's cut to the chase, right on.\p"
+	.string "What's your word on what's groovin'\n"
 	.string "the good folks of DEWFORD?\p"
 	.string "Old man: {STR_VAR_1} {STR_VAR_2}.\p"
 	.string "MC: {STR_VAR_1} {STR_VAR_2},\n"
@@ -1249,7 +1249,7 @@ gTVDewfordTrendWatcherNetworkText00:: @ 08284A3E
 	.string "did get popular at all.\p"
 	.string "Would you like to hear about it?\p"
 	.string "MC: Uh, no. What we want to know is\n"
-	.string "what’s the in thing of the moment…$"
+	.string "what's the in thing of the moment…$"
 
 gTVDewfordTrendWatcherNetworkText01:: @ 08284C55
 	.string "Old man: {STR_VAR_1} {STR_VAR_2}\n"
@@ -1268,9 +1268,9 @@ gTVDewfordTrendWatcherNetworkText03:: @ 08284CE1
 	.string "I tried teaching everyone the best\n"
 	.string "I could, but…\p"
 	.string "Perhaps the {STR_VAR_1} part just\n"
-	.string "wasn’t right…\p"
+	.string "wasn't right…\p"
 	.string "MC: Uh, excuse me, compadre, I need\n"
-	.string "to hear about what’s in now…$"
+	.string "to hear about what's in now…$"
 
 gTVDewfordTrendWatcherNetworkText04:: @ 08284DB6
 	.string "Old man: {STR_VAR_3}!\n"
@@ -1286,7 +1286,7 @@ gTVDewfordTrendWatcherNetworkText06:: @ 08284E34
 	.string "MC: …Uh… So, there you have it,\n"
 	.string "all you trendy, hep cats out there!\p"
 	.string "{STR_VAR_1} {STR_VAR_2}…uh…\n"
-	.string "Didn’t get hip or happening in DEWFORD!\p"
+	.string "Didn't get hip or happening in DEWFORD!\p"
 	.string "My time is up. Catch you on the fly!\p"
 	.string "Old man: {STR_VAR_1} {STR_VAR_2}!$"
 
@@ -1294,13 +1294,13 @@ gTVHoennTreasureInvestigatorsText00:: @ 08284EDF
 	.string "HOENN TREASURE INVESTIGATORS!\p"
 	.string "Hi, gang!\n"
 	.string "Score any secret items lately?\p"
-	.string "As always, we’ll examine eyewitness\n"
+	.string "As always, we'll examine eyewitness\n"
 	.string "reports of secrets from all over!\p"
-	.string "Let’s start with a letter.\n"
+	.string "Let's start with a letter.\n"
 	.string "It says, “{STR_VAR_1} discovered!”$"
 
 gTVHoennTreasureInvestigatorsText01:: @ 08284FA1
-	.string "Wow, we’d better check this letter\n"
+	.string "Wow, we'd better check this letter\n"
 	.string "out! Let me read it to you.\p"
 	.string "…Dear INVESTIGATORS,\n"
 	.string "I hope you are well.\p"
@@ -1311,11 +1311,11 @@ gTVHoennTreasureInvestigatorsText01:: @ 08284FA1
 	.string "…Well, good going, {STR_VAR_2}!\p"
 	.string "Viewers, let that motivate you to\n"
 	.string "fire up your ITEMFINDERS and search!\p"
-	.string "I’ll be waiting for exciting news\n"
+	.string "I'll be waiting for exciting news\n"
 	.string "from all of you!$"
 
 gTVHoennTreasureInvestigatorsText02:: @ 082850F5
-	.string "Wow, we’d better check this letter\n"
+	.string "Wow, we'd better check this letter\n"
 	.string "out! Let me read it to you.\p"
 	.string "…Dear INVESTIGATORS,\n"
 	.string "I hope you are well.\p"
@@ -1325,15 +1325,15 @@ gTVHoennTreasureInvestigatorsText02:: @ 082850F5
 	.string "…Well, good going, {STR_VAR_2}!\p"
 	.string "Viewers, let that motivate you to\n"
 	.string "fire up your ITEMFINDERS and search!\p"
-	.string "I’ll be waiting for exciting news\n"
+	.string "I'll be waiting for exciting news\n"
 	.string "from all of you!$"
 
 gTVFindThatGamerText00:: @ 08285240
 	.string "FIND THAT GAMER!\p"
 	.string "Hey, all you gamers!\n"
-	.string "How’s your {STR_VAR_2} spinning?\p"
-	.string "Like always, we’ll cast our spotlight\n"
-	.string "on a rare TRAINER who’s visited the\l"
+	.string "How's your {STR_VAR_2} spinning?\p"
+	.string "Like always, we'll cast our spotlight\n"
+	.string "on a rare TRAINER who's visited the\l"
 	.string "GAME CORNER!\p"
 	.string "Today, our no. 1 gamer is…\n"
 	.string "{STR_VAR_1}!$"
@@ -1343,30 +1343,30 @@ gTVFindThatGamerText01:: @ 082852F4
 	.string "and won a rare {STR_VAR_3} COINS.\p"
 	.string "“When {STR_VAR_1} comes, we need to\n"
 	.string "make sure we have enough COINS.”\p"
-	.string "That’s what the GAME CORNER clerks\n"
+	.string "That's what the GAME CORNER clerks\n"
 	.string "mutter when our gamer is in play!\p"
-	.string "Viewers, it’s best to watch your COINS\n"
+	.string "Viewers, it's best to watch your COINS\n"
 	.string "like {STR_VAR_1} if you visit the GAME\l"
 	.string "CORNER and play the {STR_VAR_2} game.\p"
 	.string "This is live from the GAME CORNER--\n"
 	.string "where you can feel the excitement!\p"
-	.string "That’s all for today!$"
+	.string "That's all for today!$"
 
 gTVFindThatGamerText02:: @ 08285463
 	.string "{STR_VAR_1} played the {STR_VAR_2} game\n"
 	.string "and lost {STR_VAR_3} COINS.\p"
 	.string "“When {STR_VAR_1} comes, our COIN\n"
 	.string "sales seem to increase.”\p"
-	.string "That’s what the GAME CORNER clerks\n"
+	.string "That's what the GAME CORNER clerks\n"
 	.string "say when our gamer is in play!$"
 
 gTVFindThatGamerText03:: @ 08285500
-	.string "Viewers, it’s best to watch your COINS\n"
+	.string "Viewers, it's best to watch your COINS\n"
 	.string "like {STR_VAR_1} if you visit the GAME\l"
 	.string "CORNER and play the {STR_VAR_2} game.\p"
 	.string "This is live from the GAME CORNER--\n"
 	.string "where you can feel the excitement!\p"
-	.string "That’s all for today!$"
+	.string "That's all for today!$"
 
 gTVBreakingNewsText00:: @ 082855BF
 	.string "BREAKING NEWS TV!$"
@@ -1374,7 +1374,7 @@ gTVBreakingNewsText00:: @ 082855BF
 gTVBreakingNewsText01:: @ 082855D1
 	.string "Rare {STR_VAR_2} caught by\n"
 	.string "{STR_VAR_1}!\p"
-	.string "We’re live from the vicinity of\n"
+	.string "We're live from the vicinity of\n"
 	.string "{STR_VAR_3}!\p"
 	.string "{STR_VAR_1} successfully captured\n"
 	.string "a rare {STR_VAR_2} earlier here!$"
@@ -1392,17 +1392,17 @@ gTVBreakingNewsText03:: @ 08285682
 
 gTVBreakingNewsText04:: @ 08285705
 	.string "In that instant, {STR_VAR_2}\n"
-	.string "echoed with {STR_VAR_1}’s roars of\l"
+	.string "echoed with {STR_VAR_1}'s roars of\l"
 	.string "triumphant joy.\p"
-	.string "I must say I’m a little envious of\n"
-	.string "{STR_VAR_1}. I’d love to roar, too.\p"
+	.string "I must say I'm a little envious of\n"
+	.string "{STR_VAR_1}. I'd love to roar, too.\p"
 	.string "…That ends the live feed from\n"
 	.string "the happy scene!$"
 
 gTVBreakingNewsText05:: @ 082857B0
 	.string "{STR_VAR_1} fails to capture a rare\n"
 	.string "{STR_VAR_2}!\p"
-	.string "We’re live from the vicinity of\n"
+	.string "We're live from the vicinity of\n"
 	.string "{STR_VAR_3}!\p"
 	.string "It was here that {STR_VAR_1} failed\n"
 	.string "to capture a rare {STR_VAR_2}!$"
@@ -1428,7 +1428,7 @@ gTVBreakingNewsText12:: @ 082858D0
 
 gTVBreakingNewsText08:: @ 0828596F
 	.string "In that instant, {STR_VAR_2}\n"
-	.string "echoed with {STR_VAR_1}’s shrieks of\l"
+	.string "echoed with {STR_VAR_1}'s shrieks of\l"
 	.string "frustration…$"
 
 gTVBreakingNewsText09:: @ 082859AC
@@ -1437,14 +1437,14 @@ gTVBreakingNewsText09:: @ 082859AC
 	.string "The TRAINER had to break off\n"
 	.string "the battle with the rare {STR_VAR_2}.\p"
 	.string "In that instant, {STR_VAR_3}\n"
-	.string "echoed with {STR_VAR_1}’s shrieks of\l"
+	.string "echoed with {STR_VAR_1}'s shrieks of\l"
 	.string "frustration…$"
 
 gTVBreakingNewsText10:: @ 08285A50
 	.string "However, the {STR_VAR_2} fled without\n"
 	.string "warning.\p"
 	.string "In that instant, {STR_VAR_3}\n"
-	.string "echoed with {STR_VAR_1}’s shrieks of\l"
+	.string "echoed with {STR_VAR_1}'s shrieks of\l"
 	.string "frustration…$"
 
 gTVBreakingNewsText11:: @ 08285AB3
@@ -1455,32 +1455,32 @@ gTVBreakingNewsText11:: @ 08285AB3
 
 gTVSecretBaseVisitText00:: @ 08285B27
 	.string "Hello, folks!\n"
-	.string "It’s time again for\l"
+	.string "It's time again for\l"
 	.string "a SECRET BASE VISIT.\p"
 	.string "Today, we visit the SECRET BASE\n"
 	.string "of {STR_VAR_1}.\p"
 	.string "How has {STR_VAR_1} personalized\n"
 	.string "the SECRET BASE?\p"
-	.string "Let’s find out!\n"
+	.string "Let's find out!\n"
 	.string "… … … … … …$"
 
 gTVSecretBaseVisitText01:: @ 08285BCA
 	.string "Oh!\n"
 	.string "How marvelous!\p"
 	.string "This {STR_VAR_2}…\n"
-	.string "It’s not what one would expect to\l"
+	.string "It's not what one would expect to\l"
 	.string "find here!$"
 
 gTVSecretBaseVisitText02:: @ 08285C13
 	.string "Oh!\n"
 	.string "How remarkable!\p"
-	.string "There isn’t a single piece\n"
+	.string "There isn't a single piece\n"
 	.string "of furniture or interior goods!\p"
-	.string "Mere mortals couldn’t hope to\n"
+	.string "Mere mortals couldn't hope to\n"
 	.string "imitate this bold statement!\p"
-	.string "It’s simple, but it bursts, yes,\n"
+	.string "It's simple, but it bursts, yes,\n"
 	.string "bursts with wildness!\p"
-	.string "My hat’s off to you, {STR_VAR_1}.\n"
+	.string "My hat's off to you, {STR_VAR_1}.\n"
 	.string "It had to be you!$"
 
 gTVSecretBaseVisitText03:: @ 08285CFF
@@ -1500,7 +1500,7 @@ gTVSecretBaseVisitText05:: @ 08285DE0
 	.string "Wheeew!\p"
 	.string "The pairing of the {STR_VAR_2}\n"
 	.string "with the {STR_VAR_3}!\p"
-	.string "It’s a dream combination if there\n"
+	.string "It's a dream combination if there\n"
 	.string "ever was one!$"
 
 gTVSecretBaseVisitText06:: @ 08285E3B
@@ -1512,23 +1512,23 @@ gTVSecretBaseVisitText06:: @ 08285E3B
 
 gTVSecretBaseVisitText07:: @ 08285E9D
 	.string "Wheeew!\p"
-	.string "There’s nothing in place here.\p"
+	.string "There's nothing in place here.\p"
 	.string "This empty space has an effect on\n"
 	.string "the entire SECRET BASE.$"
 
 gTVSecretBaseVisitText08:: @ 08285EFE
 	.string "Oh!\n"
 	.string "Here comes {STR_VAR_1}!\l"
-	.string "Let’s challenge the TRAINER!\p"
+	.string "Let's challenge the TRAINER!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …$"
 
 gTVSecretBaseVisitText09:: @ 08285F46
 	.string "Sigh…\n"
-	.string "I’ve got to hand it to {STR_VAR_1}.\p"
-	.string "The TRAINER’s POKéMON were truly\n"
-	.string "worthy of the CHAMPION’s title.\p"
-	.string "They gave ample proof of {STR_VAR_1}’s\n"
+	.string "I've got to hand it to {STR_VAR_1}.\p"
+	.string "The TRAINER's POKéMON were truly\n"
+	.string "worthy of the CHAMPION's title.\p"
+	.string "They gave ample proof of {STR_VAR_1}'s\n"
 	.string "toughness as a TRAINER.\p"
 	.string "That the {STR_VAR_2} knew the move\n"
 	.string "{STR_VAR_3}…\p"
@@ -1538,10 +1538,10 @@ gTVSecretBaseVisitText09:: @ 08285F46
 
 gTVSecretBaseVisitText10:: @ 08286049
 	.string "Aiyeeh!\n"
-	.string "I’ve got to hand it to {STR_VAR_1}.\p"
-	.string "The TRAINER’s POKéMON were\n"
+	.string "I've got to hand it to {STR_VAR_1}.\p"
+	.string "The TRAINER's POKéMON were\n"
 	.string "monstrously tough!\p"
-	.string "They gave ample proof of {STR_VAR_1}’s\n"
+	.string "They gave ample proof of {STR_VAR_1}'s\n"
 	.string "tenacity as a TRAINER.\p"
 	.string "That the {STR_VAR_2} knew the move\n"
 	.string "{STR_VAR_3}…\p"
@@ -1551,10 +1551,10 @@ gTVSecretBaseVisitText10:: @ 08286049
 
 gTVSecretBaseVisitText11:: @ 0828613A
 	.string "Wheeew!\n"
-	.string "I’ve got to hand it to {STR_VAR_1}.\p"
-	.string "The TRAINER’s POKéMON were clearly\n"
+	.string "I've got to hand it to {STR_VAR_1}.\p"
+	.string "The TRAINER's POKéMON were clearly\n"
 	.string "raised in a well-balanced manner.\p"
-	.string "They gave ample proof of {STR_VAR_1}’s\n"
+	.string "They gave ample proof of {STR_VAR_1}'s\n"
 	.string "thoughtfulness as a TRAINER.\p"
 	.string "That the {STR_VAR_2} knew the move\n"
 	.string "{STR_VAR_3}…\p"
@@ -1564,10 +1564,10 @@ gTVSecretBaseVisitText11:: @ 0828613A
 
 gTVSecretBaseVisitText12:: @ 08286248
 	.string "Well, well!\n"
-	.string "I’ve got to hand it to {STR_VAR_1}.\p"
-	.string "The TRAINER’s POKéMON showed\n"
+	.string "I've got to hand it to {STR_VAR_1}.\p"
+	.string "The TRAINER's POKéMON showed\n"
 	.string "great promise for future growth.\p"
-	.string "They represented {STR_VAR_1}’s\n"
+	.string "They represented {STR_VAR_1}'s\n"
 	.string "hopes and dreams.\p"
 	.string "That the {STR_VAR_2} knew the move\n"
 	.string "{STR_VAR_3}…\p"
@@ -1579,27 +1579,27 @@ gTVSecretBaseVisitText13:: @ 08286340
 	.string "I must say, what a superb SECRET BASE\n"
 	.string "it was!\p"
 	.string "Viewers, if you have the chance,\n"
-	.string "do visit {STR_VAR_1}’s SECRET BASE.\p"
+	.string "do visit {STR_VAR_1}'s SECRET BASE.\p"
 	.string "Until next time, I bid you adieu!$"
 
 gTVPokemonLotteryWinnerFlashReportText00:: @ 082863CC
-	.string "It’s exciting!\n"
-	.string "It’s dramatic!\p"
-	.string "It’s the POKéMON LOTTERY\n"
+	.string "It's exciting!\n"
+	.string "It's dramatic!\p"
+	.string "It's the POKéMON LOTTERY\n"
 	.string "WINNER FLASH REPORT!\p"
-	.string "Hello! We’re coming at you live from\n"
+	.string "Hello! We're coming at you live from\n"
 	.string "the POKéMON LOTTERY CORNER on\l"
 	.string "the ground floor of the LILYCOVE\l"
 	.string "DEPARTMENT STORE!\p"
 	.string "Like it always happens, another\n"
 	.string "lucky TRAINER appeared today!\p"
-	.string "That TRAINER’s name…\n"
+	.string "That TRAINER's name…\n"
 	.string "{STR_VAR_1}!\p"
 	.string "{STR_VAR_1} won the {STR_VAR_2} prize\n"
 	.string "and took home the {STR_VAR_3}!\p"
 	.string "{STR_VAR_1}!\n"
 	.string "Congratulations!\p"
-	.string "Viewers, don’t just watch,\n"
+	.string "Viewers, don't just watch,\n"
 	.string "get in on the action!\p"
 	.string "All of us at the LILYCOVE DEPARTMENT\n"
 	.string "STORE look forward to your next visit!\p"
@@ -1612,20 +1612,20 @@ gTVThePokemonBattleSeminarText00:: @ 08286616
 	.string "THE POKéMON BATTLE SEMINAR!\p"
 	.string "We examine battles to see what\n"
 	.string "lessons we may learn from others.\p"
-	.string "Today’s case study is on {STR_VAR_1}’s\n"
+	.string "Today's case study is on {STR_VAR_1}'s\n"
 	.string "battle.\p"
-	.string "{STR_VAR_1}’s {STR_VAR_2} was\n"
+	.string "{STR_VAR_1}'s {STR_VAR_2} was\n"
 	.string "battling one {STR_VAR_3}…$"
 
 gTVThePokemonBattleSeminarText01:: @ 082866B6
 	.string "And it used the move {STR_VAR_3}\n"
 	.string "on the {STR_VAR_2}…\p"
 	.string "Hmm… {STR_VAR_1}!\n"
-	.string "That’s the wrong thing to do!$"
+	.string "That's the wrong thing to do!$"
 
 gTVThePokemonBattleSeminarText02:: @ 08286700
 	.string "In addition to the doomed move,\n"
-	.string "the TRAINER’s {STR_VAR_1} also knew$"
+	.string "the TRAINER's {STR_VAR_1} also knew$"
 
 gTVThePokemonBattleSeminarText03:: @ 0828673B
 	.string "the moves {STR_VAR_1}, {STR_VAR_2},\n"
@@ -1652,8 +1652,8 @@ gTVThePokemonBattleSeminarText06:: @ 08286777
 gTVTrainerFanClubText00:: @ 08286866
 	.string "All together now!\n"
 	.string "TRAINER FAN CLUB!\p"
-	.string "MC: How’s everyone groovin’?\n"
-	.string "Today, we’ve rounded up the fans of\l"
+	.string "MC: How's everyone groovin'?\n"
+	.string "Today, we've rounded up the fans of\l"
 	.string "the hyper-popular TRAINER {STR_VAR_1}!\p"
 	.string "FANS: Wrooooooaaaaah!\p"
 	.string "FANS: {STR_VAR_1}!\p"
@@ -1675,45 +1675,45 @@ gTVTrainerFanClubText03:: @ 082869B0
 	.string "when the going gets tough!$"
 
 gTVTrainerFanClubText04:: @ 082869ED
-	.string "FANS: The TRAINER’s knowledge of\n"
+	.string "FANS: The TRAINER's knowledge of\n"
 	.string "POKéMON!$"
 
 gTVTrainerFanClubText05:: @ 08286A17
-	.string "FANS: The TRAINER’s kindness toward\n"
+	.string "FANS: The TRAINER's kindness toward\n"
 	.string "all POKéMON!$"
 
 gTVTrainerFanClubText06:: @ 08286A48
-	.string "FANS: The TRAINER’s amazing\n"
+	.string "FANS: The TRAINER's amazing\n"
 	.string "BIKE-riding techniques!$"
 
 gTVTrainerFanClubText07:: @ 08286A7C
-	.string "FANS: The TRAINER’s impressive\n"
+	.string "FANS: The TRAINER's impressive\n"
 	.string "item-buying style!$"
 
 gTVTrainerFanClubText08:: @ 08286AAE
-	.string "FANS: The TRAINER’s charming way\n"
+	.string "FANS: The TRAINER's charming way\n"
 	.string "of nicknaming POKéMON!$"
 
 gTVTrainerFanClubText09:: @ 08286AE6
-	.string "FANS: The TRAINER’s nifty style of\n"
+	.string "FANS: The TRAINER's nifty style of\n"
 	.string "decorating a SECRET BASE!$"
 
 gTVTrainerFanClubText10:: @ 08286B23
-	.string "FANS: The TRAINER’s bold ways of\n"
+	.string "FANS: The TRAINER's bold ways of\n"
 	.string "using TMs!$"
 
 gTVTrainerFanClubText11:: @ 08286B4F
-	.string "MC: As you’ve just seen, {STR_VAR_1}\n"
+	.string "MC: As you've just seen, {STR_VAR_1}\n"
 	.string "is hot! Like, too hot to touch, yow!\p"
-	.string "Among {STR_VAR_1}’s FANS\n"
-	.string "there’s a special slogan!\p"
+	.string "Among {STR_VAR_1}'s FANS\n"
+	.string "there's a special slogan!\p"
 	.string "MC: When I say {STR_VAR_1},\n"
 	.string "you say…\p"
 	.string "FANS: {STR_VAR_2}!\p"
 	.string "FANS: {STR_VAR_3}!\p"
 	.string "FANS: {STR_VAR_2}!\p"
 	.string "FANS: {STR_VAR_3}!\p"
-	.string "MC: That’s right, when someone says,\n"
+	.string "MC: That's right, when someone says,\n"
 	.string "“{STR_VAR_1}”…\p"
 	.string "Come back with, “{STR_VAR_2}\n"
 	.string "{STR_VAR_3}!”\p"
@@ -1730,7 +1730,7 @@ gTVTrainerFanClubText11:: @ 08286B4F
 	.string "FANS: {STR_VAR_3}!\p"
 	.string "MC: Thanks for joining us, all you\n"
 	.string "wild FANS of {STR_VAR_1}!\l"
-	.string "That’s the show! See you again!\p"
+	.string "That's the show! See you again!\p"
 	.string "MC: When I say {STR_VAR_1},\n"
 	.string "you say…\p"
 	.string "FANS: {STR_VAR_2}!\p"
@@ -1740,13 +1740,13 @@ gTVCutiesText00:: @ 08286D8F
 	.string "SPOT THE CUTIES!\n"
 	.string "POKéMON IN RIBBONS!\p"
 	.string "Hello, my sweet viewers!\p"
-	.string "I just know you’ll agree, but a POKéMON\n"
+	.string "I just know you'll agree, but a POKéMON\n"
 	.string "wearing RIBBONS is simply divine!\p"
 	.string "Today, I want to share with you\n"
 	.string "a lovely POKéMON I spotted while\l"
 	.string "out on a stroll in town.\p"
-	.string "Today’s featured pretty POKéMON\n"
-	.string "is {STR_VAR_1}’s {STR_VAR_2}.$"
+	.string "Today's featured pretty POKéMON\n"
+	.string "is {STR_VAR_1}'s {STR_VAR_2}.$"
 
 gTVCutiesText01:: @ 08286E9D
 	.string "The number of RIBBONS that\n"
@@ -1757,13 +1757,13 @@ gTVCutiesText01:: @ 08286E9D
 gTVCutiesText02:: @ 08286EFC
 	.string "{STR_VAR_2} wears an amazing\n"
 	.string "{STR_VAR_3} RIBBONS!\p"
-	.string "It speaks volumes about {STR_VAR_1}’s\n"
+	.string "It speaks volumes about {STR_VAR_1}'s\n"
 	.string "commitment to the POKéMON!$"
 
 gTVCutiesText03:: @ 08286F54
 	.string "{STR_VAR_2} wears an incredible\n"
 	.string "{STR_VAR_3} RIBBONS!\p"
-	.string "It shows you {STR_VAR_1}’s total\n"
+	.string "It shows you {STR_VAR_1}'s total\n"
 	.string "dedication as a collector!$"
 
 gTVCutiesText04:: @ 08286FAA
@@ -1879,100 +1879,100 @@ gTVCutiesText15:: @ 08287779
 
 gTVPokemonNewsBattleFrontierText00:: @ 082877DE
 	.string "Greetings!\n"
-	.string "It’s time for POKéMON NEWS.\p"
-	.string "We’ve got some uplifting news from\n"
+	.string "It's time for POKéMON NEWS.\p"
+	.string "We've got some uplifting news from\n"
 	.string "the BATTLE FRONTIER.$"
 
 gTVPokemonNewsBattleFrontierText01:: @ 0828783D
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE TOWER’s SINGLE BATTLE\l"
+	.string "the BATTLE TOWER's SINGLE BATTLE\l"
 	.string "ROOM challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText02:: @ 082878B3
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE TOWER’s DOUBLE BATTLE\l"
+	.string "the BATTLE TOWER's DOUBLE BATTLE\l"
 	.string "ROOM challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText03:: @ 08287929
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE TOWER’s MULTI BATTLE\l"
+	.string "the BATTLE TOWER's MULTI BATTLE\l"
 	.string "ROOM challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText04:: @ 0828799E
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE TOWER’s LINK MULTI BATTLE\l"
+	.string "the BATTLE TOWER's LINK MULTI BATTLE\l"
 	.string "ROOM challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText05:: @ 08287A18
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-championship-streak record\l"
-	.string "competing in the BATTLE DOME’s\l"
+	.string "competing in the BATTLE DOME's\l"
 	.string "SINGLE BATTLE Tournaments.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText06:: @ 08287A97
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-championship-streak record\l"
-	.string "competing in the BATTLE DOME’s\l"
+	.string "competing in the BATTLE DOME's\l"
 	.string "DOUBLE BATTLE Tournaments.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText07:: @ 08287B16
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE FACTORY’s Battle\l"
+	.string "the BATTLE FACTORY's Battle\l"
 	.string "Swap Single challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText08:: @ 08287B8E
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE FACTORY’s Battle\l"
+	.string "the BATTLE FACTORY's Battle\l"
 	.string "Swap Double challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText09:: @ 08287C06
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "record of clearing {STR_VAR_2} rooms\l"
-	.string "while on the BATTLE PIKE’s Battle\l"
+	.string "while on the BATTLE PIKE's Battle\l"
 	.string "Choice challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText10:: @ 08287C7D
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while\l"
-	.string "competing in the BATTLE ARENA’s\l"
+	.string "competing in the BATTLE ARENA's\l"
 	.string "Set KO Tournaments.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText11:: @ 08287CF3
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE PALACE’s SINGLE BATTLE\l"
+	.string "the BATTLE PALACE's SINGLE BATTLE\l"
 	.string "HALL challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText12:: @ 08287D6A
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "{STR_VAR_2}-win-streak record while on\l"
-	.string "the BATTLE PALACE’s DOUBLE BATTLE\l"
+	.string "the BATTLE PALACE's DOUBLE BATTLE\l"
 	.string "HALL challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText13:: @ 08287DE1
 	.string "The TRAINER {STR_VAR_1} set a new\n"
 	.string "record of clearing {STR_VAR_2} floors\l"
-	.string "while on the BATTLE PYRAMID’s\l"
+	.string "while on the BATTLE PYRAMID's\l"
 	.string "Battle Quest challenge.\p"
-	.string "Here’s to {STR_VAR_1}!$"
+	.string "Here's to {STR_VAR_1}!$"
 
 gTVPokemonNewsBattleFrontierText14:: @ 08287E5B
 	.string "And to the three POKéMON, {STR_VAR_1},\n"
@@ -1997,28 +1997,28 @@ gTVPokemonNewsBattleFrontierText17:: @ 08287F39
 	.string "record-breaking performance!$"
 
 gTVPokemonNewsBattleFrontierText18:: @ 08287F77
-	.string "Let’s hope for more record-setting\n"
+	.string "Let's hope for more record-setting\n"
 	.string "feats from {STR_VAR_1} and the loyal\l"
 	.string "POKéMON!\p"
-	.string "That’s the news on POKéMON NEWS!$"
+	.string "That's the news on POKéMON NEWS!$"
 
 gTVWhatsNo1InHoennTodayText00:: @ 08287FE0
-	.string "WHAT’S NO. 1 IN HOENN TODAY?\n"
-	.string "Yes, it’s that time again!\p"
+	.string "WHAT'S NO. 1 IN HOENN TODAY?\n"
+	.string "Yes, it's that time again!\p"
 	.string "Hello, viewers! Are you giving your\n"
 	.string "best at whatever you do?\p"
-	.string "Let’s have a look at the TRAINER\n"
+	.string "Let's have a look at the TRAINER\n"
 	.string "who did the very best today!\p"
-	.string "Today’s no. 1 TRAINER is none other\n"
+	.string "Today's no. 1 TRAINER is none other\n"
 	.string "than {STR_VAR_1}!$"
 
 gTVWhatsNo1InHoennTodayText01:: @ 082880C0
 	.string "In one day, {STR_VAR_1} spun the SLOTS\n"
 	.string "at the GAME CORNER {STR_VAR_2} times.\p"
 	.string "While playing, {STR_VAR_1} was heard\n"
-	.string "murmuring, “For me, the reels don’t\l"
+	.string "murmuring, “For me, the reels don't\l"
 	.string "even move…”\l"
-	.string "Isn’t that interesting?$"
+	.string "Isn't that interesting?$"
 
 gTVWhatsNo1InHoennTodayText02:: @ 0828815F
 	.string "In one day, {STR_VAR_1} played\n"
@@ -2026,13 +2026,13 @@ gTVWhatsNo1InHoennTodayText02:: @ 0828815F
 	.string "CORNER {STR_VAR_2} times.\p"
 	.string "While playing, {STR_VAR_1} shouted,\n"
 	.string "“Let the balls decide!”\p"
-	.string "The TRAINER’s eyes were focused and\n"
+	.string "The TRAINER's eyes were focused and\n"
 	.string "the face showed concentration.$"
 
 gTVWhatsNo1InHoennTodayText03:: @ 0828821A
 	.string "In one day, {STR_VAR_1} battled\n"
 	.string "wild POKéMON {STR_VAR_2} times!\p"
-	.string "Apparently, {STR_VAR_1}’s POKéMON\n"
+	.string "Apparently, {STR_VAR_1}'s POKéMON\n"
 	.string "have grown incomparably stronger.\p"
 	.string "They appear eager to battle anywhere,\n"
 	.string "anytime, and anyhow!$"
@@ -2048,7 +2048,7 @@ gTVWhatsNo1InHoennTodayText04:: @ 082882BE
 gTVWhatsNo1InHoennTodayText05:: @ 08288355
 	.string "In just one day, {STR_VAR_1} planted\n"
 	.string "{STR_VAR_2} BERRIES!\p"
-	.string "As a result, {STR_VAR_1}’s clothes\n"
+	.string "As a result, {STR_VAR_1}'s clothes\n"
 	.string "became filthy with dirt.\p"
 	.string "Where the TRAINER planted, countless\n"
 	.string "flowers have burst into bloom.\p"
@@ -2058,7 +2058,7 @@ gTVWhatsNo1InHoennTodayText05:: @ 08288355
 gTVWhatsNo1InHoennTodayText06:: @ 0828842B
 	.string "In just one day, {STR_VAR_1} picked\n"
 	.string "{STR_VAR_2} BERRIES!\p"
-	.string "{STR_VAR_1}’s BAG became so filled\n"
+	.string "{STR_VAR_1}'s BAG became so filled\n"
 	.string "with BERRIES, the TRAINER had trouble\l"
 	.string "walking afterward!$"
 
@@ -2073,9 +2073,9 @@ gTVWhatsNo1InHoennTodayText07:: @ 082884A5
 	.string "while mulling options.$"
 
 gTVWhatsNo1InHoennTodayText08:: @ 0828858B
-	.string "Well, isn’t that something!\p"
+	.string "Well, isn't that something!\p"
 	.string "{STR_VAR_1}!\n"
-	.string "You’re today’s no. 1 TRAINER!\p"
+	.string "You're today's no. 1 TRAINER!\p"
 	.string "Viewers, take heart from {STR_VAR_1}!\n"
 	.string "You, too, can be no. 1 every day!$"
 
@@ -2083,11 +2083,11 @@ gTVSecretBaseSecretsText00:: @ 08288608
 	.string "SECRET BASE SECRETS!\p"
 	.string "What do TRAINERS do in the secrecy\n"
 	.string "of SECRET BASES?\p"
-	.string "Today, we investigate {STR_VAR_1}’s\n"
+	.string "Today, we investigate {STR_VAR_1}'s\n"
 	.string "SECRET BASE.\p"
 	.string "Oh? It looks like {STR_VAR_2} has come\n"
 	.string "for a visit.\p"
-	.string "Let’s have a peek!\p"
+	.string "Let's have a peek!\p"
 	.string "What will {STR_VAR_2} do?$"
 
 gTVSecretBaseSecretsText01:: @ 082886C8
@@ -2098,38 +2098,38 @@ gTVSecretBaseSecretsText02:: @ 082886DE
 
 gTVSecretBaseSecretsText03:: @ 082886F8
 	.string "In the end, {STR_VAR_2} took {STR_VAR_3} steps\n"
-	.string "in {STR_VAR_1}’s SECRET BASE before\l"
+	.string "in {STR_VAR_1}'s SECRET BASE before\l"
 	.string "leaving.$"
 
 gTVSecretBaseSecretsText04:: @ 08288739
 	.string "Hmm…\p"
-	.string "It appears as if {STR_VAR_1}’s SECRET\n"
+	.string "It appears as if {STR_VAR_1}'s SECRET\n"
 	.string "BASE failed to interest {STR_VAR_2}…$"
 
 gTVSecretBaseSecretsText05:: @ 08288777
 	.string "{STR_VAR_2} appears to have enjoyed\n"
-	.string "{STR_VAR_1}’s SECRET BASE thoroughly.$"
+	.string "{STR_VAR_1}'s SECRET BASE thoroughly.$"
 
 gTVSecretBaseSecretsText06:: @ 082887AF
 	.string "{STR_VAR_2} appears to have become\n"
-	.string "a huge fan of {STR_VAR_1}’s\l"
+	.string "a huge fan of {STR_VAR_1}'s\l"
 	.string "SECRET BASE.$"
 
 gTVSecretBaseSecretsText07:: @ 082887E9
 	.string "Viewers may want to check out\n"
-	.string "{STR_VAR_1}’s SECRET BASE, too.\p"
+	.string "{STR_VAR_1}'s SECRET BASE, too.\p"
 	.string "Tune in next time as we visit another\n"
 	.string "SECRET BASE! Thanks for joining us!$"
 
 gTVSecretBaseSecretsText08:: @ 08288868
 	.string "The visitor has stopped!\p"
-	.string "The visitor isn’t moving at all!\p"
-	.string "Was {STR_VAR_1}’s SECRET BASE\n"
+	.string "The visitor isn't moving at all!\p"
+	.string "Was {STR_VAR_1}'s SECRET BASE\n"
 	.string "that unimpressive?$"
 
 gTVSecretBaseSecretsText09:: @ 082888CA
 	.string "The visitor has stopped!\p"
-	.string "The visitor isn’t moving at all!\p"
+	.string "The visitor isn't moving at all!\p"
 	.string "Is it fatigue?\n"
 	.string "Has the visitor grown weary?$"
 
@@ -2152,7 +2152,7 @@ gTVSecretBaseSecretsText12:: @ 08288A3A
 	.string "The visitor is running around!\p"
 	.string "Oh, my, the visitor is frolicking!\p"
 	.string "The visitor appears surprised by\n"
-	.string "the TENT’s size!$"
+	.string "the TENT's size!$"
 
 gTVSecretBaseSecretsText13:: @ 08288ACA
 	.string "The visitor is examining\n"
@@ -2163,7 +2163,7 @@ gTVSecretBaseSecretsText13:: @ 08288ACA
 gTVSecretBaseSecretsText14:: @ 08288B1E
 	.string "The visitor is examining\n"
 	.string "a GOLD SHIELD!\p"
-	.string "The visitor’s eyes appear to be\n"
+	.string "The visitor's eyes appear to be\n"
 	.string "lit up with wonder!$"
 
 gTVSecretBaseSecretsText15:: @ 08288B7A
@@ -2176,7 +2176,7 @@ gTVSecretBaseSecretsText16:: @ 08288BC9
 	.string "a GLASS ORNAMENT!\p"
 	.string "Oh, no!\p"
 	.string "The visitor is touching it!\p"
-	.string "It’s getting covered with\n"
+	.string "It's getting covered with\n"
 	.string "fingerprints…$"
 
 gTVSecretBaseSecretsText17:: @ 08288C40
@@ -2195,7 +2195,7 @@ gTVSecretBaseSecretsText19:: @ 08288CC8
 	.string "one {STR_VAR_2}!\p"
 	.string "Look at the visitor smile while\n"
 	.string "holding up the {STR_VAR_2}!\p"
-	.string "It’s like a TV commercial!$"
+	.string "It's like a TV commercial!$"
 
 gTVSecretBaseSecretsText20:: @ 08288D7F
 	.string "The visitor grabs a cushion and…$"
@@ -2212,10 +2212,10 @@ gTVSecretBaseSecretsText22:: @ 08288DDA
 gTVSecretBaseSecretsText23:: @ 08288E1E
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
-	.string "It looks like they’re going to\n"
+	.string "It looks like they're going to\n"
 	.string "have a battle!\p"
 	.string "And…\p"
-	.string "It’s the visitor!\n"
+	.string "It's the visitor!\n"
 	.string "The visitor won an away match!\p"
 	.string "The visitor is doing\n"
 	.string "a victory dance!$"
@@ -2223,31 +2223,31 @@ gTVSecretBaseSecretsText23:: @ 08288E1E
 gTVSecretBaseSecretsText24:: @ 08288EC9
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
-	.string "It looks like they’re going to\n"
+	.string "It looks like they're going to\n"
 	.string "have a battle!\p"
 	.string "And…\p"
-	.string "It’s {STR_VAR_1}!\n"
+	.string "It's {STR_VAR_1}!\n"
 	.string "The visitor has lost!\p"
 	.string "The visitor looks dejected!$"
 
 gTVSecretBaseSecretsText25:: @ 08288F58
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
-	.string "It looks like they’re going to\n"
+	.string "It looks like they're going to\n"
 	.string "have a battle!\p"
 	.string "And…\p"
 	.string "No, the visitor has refused!\p"
-	.string "There won’t be a battle after all!\p"
+	.string "There won't be a battle after all!\p"
 	.string "Did the visitor find {STR_VAR_1}\n"
 	.string "unappealing?$"
 
 gTVSecretBaseSecretsText26:: @ 08289011
 	.string "The visitor is staring intently\n"
 	.string "at a poster!\p"
-	.string "Is the poster to the visitor’s\n"
+	.string "Is the poster to the visitor's\n"
 	.string "liking?\p"
-	.string "…But… There’s something disturbing\n"
-	.string "about the visitor’s stares.$"
+	.string "…But… There's something disturbing\n"
+	.string "about the visitor's stares.$"
 
 gTVSecretBaseSecretsText27:: @ 082890A4
 	.string "The visitor stepped on a NOTE MAT!\p"
@@ -2257,11 +2257,11 @@ gTVSecretBaseSecretsText27:: @ 082890A4
 gTVSecretBaseSecretsText28:: @ 082890F0
 	.string "The visitor is chatting with\n"
 	.string "{STR_VAR_1}!\p"
-	.string "It looks like they’re going to\n"
+	.string "It looks like they're going to\n"
 	.string "have a battle!\p"
 	.string "And…\p"
-	.string "It’s a draw!\n"
-	.string "Nothing’s resolved!\p"
+	.string "It's a draw!\n"
+	.string "Nothing's resolved!\p"
 	.string "Both TRAINERS appear to be very\n"
 	.string "disappointed!$"
 
@@ -2277,7 +2277,7 @@ gTVSecretBaseSecretsText30:: @ 08289204
 	.string "a SAND ORNAMENT!\p"
 	.string "Oh!\p"
 	.string "It crumbled!\n"
-	.string "It’s fallen apart!\p"
+	.string "It's fallen apart!\p"
 	.string "The visitor looks sheepish\n"
 	.string "and guilty!$"
 
@@ -2305,7 +2305,7 @@ gTVSecretBaseSecretsText34:: @ 082893FF
 	.string "The visitor is looking intently\n"
 	.string "at a FENCE!\p"
 	.string "Has a new idea for a trap popped\n"
-	.string "into the visitor’s head?$"
+	.string "into the visitor's head?$"
 
 gTVSecretBaseSecretsText35:: @ 08289465
 	.string "The visitor stepped on\n"
@@ -2324,7 +2324,7 @@ gTVSecretBaseSecretsText36:: @ 082894F2
 gTVSecretBaseSecretsText37:: @ 08289564
 	.string "The visitor climbed a STAND!\p"
 	.string "The visitor is looking out across\n"
-	.string "{STR_VAR_1}’s BASE from high up!\p"
+	.string "{STR_VAR_1}'s BASE from high up!\p"
 	.string "And…\p"
 	.string "Lets loose a roar!\n"
 	.string "The visitor is roaring!$"
@@ -2336,7 +2336,7 @@ gTVSecretBaseSecretsText38:: @ 082895EB
 
 gTVSecretBaseSecretsText39:: @ 08289645
 	.string "The visitor is talking to a DOLL!\p"
-	.string "…It’s a little creepy…$"
+	.string "…It's a little creepy…$"
 
 gTVSecretBaseSecretsText40:: @ 0828967E
 	.string "The visitor is climbing the ladder\n"
@@ -2369,7 +2369,7 @@ gTVSafariFanClubText00:: @ 08289813
 	.string "Tossing them SAFARI BALLS, are you?\p"
 	.string "You can bet I am here in the SAFARI\n"
 	.string "ZONE chock-full of amazing POKéMON!\p"
-	.string "Let’s get with it and have a chat with\n"
+	.string "Let's get with it and have a chat with\n"
 	.string "this good fellow of a SAFARI GUIDE!\p"
 	.string "All right, mate, how are the visiting\n"
 	.string "TRAINERS looking?$"
@@ -2386,9 +2386,9 @@ gTVSafariFanClubText02:: @ 0828999D
 	.string "Used {STR_VAR_2} that time, I think.$"
 
 gTVSafariFanClubText03:: @ 082899DC
-	.string "The TRAINER didn’t use a single\n"
+	.string "The TRAINER didn't use a single\n"
 	.string "{POKEBLOCK}! Not a one!\p"
-	.string "There’s an expert for you.$"
+	.string "There's an expert for you.$"
 
 gTVSafariFanClubText04:: @ 08289A29
 	.string "REPORTER: Is that right, then?\p"
@@ -2408,7 +2408,7 @@ gTVSafariFanClubText06:: @ 08289B42
 	.string "GUIDE: No one seems to be doing\n"
 	.string "very well.\p"
 	.string "{STR_VAR_1} had it especially bad.\p"
-	.string "Why, before, the TRAINER didn’t\n"
+	.string "Why, before, the TRAINER didn't\n"
 	.string "catch one POKéMON. Not a one!$"
 
 gTVSafariFanClubText07:: @ 08289BC5
@@ -2419,7 +2419,7 @@ gTVSafariFanClubText07:: @ 08289BC5
 
 gTVSafariFanClubText08:: @ 08289C3B
 	.string "I think the TRAINER would have better\n"
-	.string "luck using {POKEBLOCK}S, which weren’t\l"
+	.string "luck using {POKEBLOCK}S, which weren't\l"
 	.string "used at all that time.$"
 
 gTVSafariFanClubText09:: @ 08289C99
@@ -2439,20 +2439,20 @@ gTVSafariFanClubText10:: @ 08289D33
 gTVContestLiveUpdatesText00:: @ 08289DD6
 	.string "“POKéMON CONTEST LIVE UPDATES!”\p"
 	.string "MC: Thanks for joining us!\p"
-	.string "We’re live from the just-ended\n"
+	.string "We're live from the just-ended\n"
 	.string "{STR_VAR_1} site.\p"
 	.string "The hall is still filled with\n"
 	.string "an audience unwilling to leave.\p"
 	.string "Spectator: {STR_VAR_2}!\p"
 	.string "Spectator: {STR_VAR_3}!\p"
-	.string "MC: As you’ve just heard, the CONTEST\n"
+	.string "MC: As you've just heard, the CONTEST\n"
 	.string "was won by the POKéMON {STR_VAR_2}\l"
 	.string "of {STR_VAR_3}.\p"
 	.string "Spectator: {STR_VAR_2}!\n"
-	.string "You’re the best!\p"
+	.string "You're the best!\p"
 	.string "Spectator: {STR_VAR_3}!\n"
 	.string "Way to go!\p"
-	.string "MC: Let’s hear what the fans have\n"
+	.string "MC: Let's hear what the fans have\n"
 	.string "to say about this CONTEST.$"
 
 gTVContestLiveUpdatesText01:: @ 08289F53
@@ -2461,7 +2461,7 @@ gTVContestLiveUpdatesText01:: @ 08289F53
 	.string "That {STR_VAR_2} will keep winning!$"
 
 gTVContestLiveUpdatesText02:: @ 08289FB0
-	.string "Spectator: The {STR_VAR_2} didn’t do\n"
+	.string "Spectator: The {STR_VAR_2} didn't do\n"
 	.string "well in the primary judging, but it\l"
 	.string "cleaned up in the secondary judging!\p"
 	.string "It was a miraculous comeback\n"
@@ -2472,7 +2472,7 @@ gTVContestLiveUpdatesText03:: @ 0828A047
 	.string "consistent throughout both primary\l"
 	.string "and secondary judging.\p"
 	.string "{STR_VAR_3} and the {STR_VAR_2},\n"
-	.string "they’re no ordinary combo!$"
+	.string "they're no ordinary combo!$"
 
 gTVContestLiveUpdatesText04:: @ 0828A0C6
 	.string "Spectator: In terms of being {STR_VAR_1},\n"
@@ -2482,23 +2482,23 @@ gTVContestLiveUpdatesText04:: @ 0828A0C6
 
 gTVContestLiveUpdatesText05:: @ 0828A132
 	.string "Spectator: When the {STR_VAR_2} got\n"
-	.string "nervous, I couldn’t stop myself from\l"
+	.string "nervous, I couldn't stop myself from\l"
 	.string "shouting encouragement.\p"
-	.string "I’d like to say this to that\n"
+	.string "I'd like to say this to that\n"
 	.string "{STR_VAR_2}, “Congratulations!”$"
 
 gTVContestLiveUpdatesText06:: @ 0828A1BE
-	.string "Spectator: That {STR_VAR_2}’s appeal\n"
+	.string "Spectator: That {STR_VAR_2}'s appeal\n"
 	.string "startled even me!\p"
 	.string "{STR_VAR_2}, you were awesome!$"
 
 gTVContestLiveUpdatesText07:: @ 0828A202
-	.string "Spectator: That {STR_VAR_2}’s combo\n"
+	.string "Spectator: That {STR_VAR_2}'s combo\n"
 	.string "appeal was stunning!\p"
-	.string "It’s shaken me to the core!$"
+	.string "It's shaken me to the core!$"
 
 gTVContestLiveUpdatesText08:: @ 0828A24E
-	.string "Spectator: The winning {STR_VAR_2}’s\n"
+	.string "Spectator: The winning {STR_VAR_2}'s\n"
 	.string "appeal got my heart pounding!$"
 
 gTVContestLiveUpdatesText09:: @ 0828A288
@@ -2522,56 +2522,56 @@ gTVContestLiveUpdatesText13:: @ 0828A2DA
 	.string "You were tough!$"
 
 gTVContestLiveUpdatesText14:: @ 0828A2EE
-	.string "Spectator: The winning {STR_VAR_2}’s\n"
+	.string "Spectator: The winning {STR_VAR_2}'s\n"
 	.string "appeal still has my heart pounding!$"
 
 gTVContestLiveUpdatesText15:: @ 0828A32E
 	.string "{STR_VAR_2}!\n"
-	.string "You’re the last word in cool!$"
+	.string "You're the last word in cool!$"
 
 gTVContestLiveUpdatesText16:: @ 0828A350
 	.string "{STR_VAR_2}!\n"
-	.string "You’re the most beautiful!$"
+	.string "You're the most beautiful!$"
 
 gTVContestLiveUpdatesText17:: @ 0828A36F
 	.string "{STR_VAR_2}!\n"
-	.string "You’re simply the cutest!$"
+	.string "You're simply the cutest!$"
 
 gTVContestLiveUpdatesText18:: @ 0828A38D
 	.string "{STR_VAR_2}!\n"
-	.string "You’re the smartest among the smart!$"
+	.string "You're the smartest among the smart!$"
 
 gTVContestLiveUpdatesText19:: @ 0828A3B6
 	.string "{STR_VAR_2}!\n"
-	.string "You’re the toughest of the tough!$"
+	.string "You're the toughest of the tough!$"
 
 gTVContestLiveUpdatesText20:: @ 0828A3DC
 	.string "Spectator: Even when the {STR_VAR_2}\n"
 	.string "took a break from making appeals,\l"
-	.string "I couldn’t take my eyes off it.\p"
-	.string "I’m captivated by that {STR_VAR_2}.$"
+	.string "I couldn't take my eyes off it.\p"
+	.string "I'm captivated by that {STR_VAR_2}.$"
 
 gTVContestLiveUpdatesText21:: @ 0828A455
 	.string "Spectator: When the {STR_VAR_2} was\n"
-	.string "startled by another POKéMON’s appeal,\l"
+	.string "startled by another POKéMON's appeal,\l"
 	.string "I was close to tears.\p"
 	.string "{STR_VAR_2}, you were resilient!\n"
 	.string "Way to go!$"
 
 gTVContestLiveUpdatesText22:: @ 0828A4CF
 	.string "Spectator: Oh…\n"
-	.string "That {STR_VAR_2}’s {STR_VAR_3}!\l"
-	.string "{STR_VAR_2}’s {STR_VAR_3}!\l"
-	.string "{STR_VAR_2}’s {STR_VAR_3}!\l"
+	.string "That {STR_VAR_2}'s {STR_VAR_3}!\l"
+	.string "{STR_VAR_2}'s {STR_VAR_3}!\l"
+	.string "{STR_VAR_2}'s {STR_VAR_3}!\l"
 	.string "How could it be so wonderful?$"
 
 gTVContestLiveUpdatesText23:: @ 0828A51C
 	.string "MC: Well, there you have it. This place\n"
-	.string "is full of the {STR_VAR_1}’s fans!\p"
+	.string "is full of the {STR_VAR_1}'s fans!\p"
 	.string "I should also mention that another\n"
-	.string "POKéMON, {STR_VAR_2}’s {STR_VAR_3}, \l"
+	.string "POKéMON, {STR_VAR_2}'s {STR_VAR_3}, \l"
 	.string "caught my eye.\p"
-	.string "{STR_VAR_2}’s {STR_VAR_3}…$"
+	.string "{STR_VAR_2}'s {STR_VAR_3}…$"
 
 gTVContestLiveUpdatesText24:: @ 0828A5AC
 	.string "It failed to make a single appeal during\n"
@@ -2588,7 +2588,7 @@ gTVContestLiveUpdatesText25:: @ 0828A638
 
 gTVContestLiveUpdatesText26:: @ 0828A6CF
 	.string "It failed to take advantage of\n"
-	.string "the audience’s excitement and make\l"
+	.string "the audience's excitement and make\l"
 	.string "an appropriate appeal.\p"
 	.string "We hope {STR_VAR_1} will learn how to get\n"
 	.string "a feel for the audience and whip their\l"
@@ -2600,7 +2600,7 @@ gTVContestLiveUpdatesText27:: @ 0828A797
 	.string "judging failed to click.\p"
 	.string "It suffered a humiliating come-from-\n"
 	.string "behind loss.\p"
-	.string "I’m sure {STR_VAR_1} is studying how to\n"
+	.string "I'm sure {STR_VAR_1} is studying how to\n"
 	.string "make more effective appeals now.$"
 
 gTVContestLiveUpdatesText28:: @ 0828A86D
@@ -2611,17 +2611,17 @@ gTVContestLiveUpdatesText28:: @ 0828A86D
 	.string "its appeals to the audience more.$"
 
 gTVContestLiveUpdatesText29:: @ 0828A920
-	.string "It lost to {STR_VAR_1}’s {STR_VAR_2}\n"
+	.string "It lost to {STR_VAR_1}'s {STR_VAR_2}\n"
 	.string "by only a small margin.\p"
 	.string "It must be heartbreaking to come\n"
 	.string "so close to victory only to fail.\p"
-	.string "I wouldn’t be surprised if {STR_VAR_3}\n"
+	.string "I wouldn't be surprised if {STR_VAR_3}\n"
 	.string "were weeping over this outcome.$"
 
 gTVContestLiveUpdatesText30:: @ 0828A9CC
 	.string "It disappointed the JUDGE by\n"
 	.string "repeating the same appeals.\p"
-	.string "It’s an unforgivable error in any\n"
+	.string "It's an unforgivable error in any\n"
 	.string "CONTEST, and the POKéMON paid.\p"
 	.string "{STR_VAR_1} should feel guilty for\n"
 	.string "this sorry showing.$"
@@ -2634,15 +2634,15 @@ gTVContestLiveUpdatesText31:: @ 0828AA74
 	.string "and put the knowledge to good use.$"
 
 gTVContestLiveUpdatesText32:: @ 0828AB01
-	.string "I’d like to end this program with our\n"
+	.string "I'd like to end this program with our\n"
 	.string "usual farewell to the winners.\p"
-	.string "This time, it’s {STR_VAR_1} and\n"
+	.string "This time, it's {STR_VAR_1} and\n"
 	.string "the {STR_VAR_2}!\p"
 	.string "MC: Is everyone ready?\n"
 	.string "All together now!\p"
 	.string "Audience: {STR_VAR_1}! {STR_VAR_2}!\n"
 	.string "Congratulations!\l"
-	.string "You’re the CONTEST winner!$"
+	.string "You're the CONTEST winner!$"
 
 gTVPokemonBattleUpdateText00:: @ 0828ABCC
 	.string "“POKéMON BATTLE UPDATE!”\p"
@@ -2657,12 +2657,12 @@ gTVPokemonBattleUpdateText01:: @ 0828AC22
 	.string "{STR_VAR_1}!$"
 
 gTVPokemonBattleUpdateText02:: @ 0828AC7E
-	.string "In the battle, {STR_VAR_1}’s\n"
+	.string "In the battle, {STR_VAR_1}'s\n"
 	.string "{STR_VAR_2} was a formidable force\l"
 	.string "using {STR_VAR_3}!$"
 
 gTVPokemonBattleUpdateText03:: @ 0828ACB6
-	.string "{STR_VAR_1}’s {STR_VAR_2} had a weak\n"
+	.string "{STR_VAR_1}'s {STR_VAR_2} had a weak\n"
 	.string "showing that really hurt.$"
 
 gTVPokemonBattleUpdateText04:: @ 0828ACE3
@@ -2677,39 +2677,39 @@ gTVPokemonBattleUpdateText05:: @ 0828AD80
 	.string "The teams of TRAINERS {STR_VAR_1} and\n"
 	.string "{STR_VAR_2} met in a MULTI BATTLE.\p"
 	.string "This match ended in victory for\n"
-	.string "{STR_VAR_1}’s team.$"
+	.string "{STR_VAR_1}'s team.$"
 
 gTVPokemonBattleUpdateText06:: @ 0828ADE2
 	.string "In the battle, the {STR_VAR_2} on\n"
-	.string "{STR_VAR_1}’s team was a formidable\l"
+	.string "{STR_VAR_1}'s team was a formidable\l"
 	.string "force using {STR_VAR_3}.$"
 
 gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "The weak showing by the {STR_VAR_3}\n"
-	.string "on {STR_VAR_2}’s team really hurt.\p"
-	.string "Congratulations on your team’s\n"
+	.string "on {STR_VAR_2}'s team really hurt.\p"
+	.string "Congratulations on your team's\n"
 	.string "victory, {STR_VAR_1}!\p"
-	.string "As for the defeated {STR_VAR_2}’s team,\n"
+	.string "As for the defeated {STR_VAR_2}'s team,\n"
 	.string "we hope for a better result next time!\p"
 	.string "This concludes this episode of\n"
 	.string "“POKéMON BATTLE UPDATE!”$"
 
 Route111_Text_28AF05: @ 0828AF05
-	.string "GABBY: Oh! We’ve just spotted a tough-\n"
+	.string "GABBY: Oh! We've just spotted a tough-\n"
 	.string "looking TRAINER here of all places!\p"
 	.string "Okay, roll camera!\n"
-	.string "Let’s get this interview.$"
+	.string "Let's get this interview.$"
 
 Route111_Text_28AF7D: @ 0828AF7D
 Route118_Text_28AF7D: @ 0828AF7D
 Route120_Text_28AF7D: @ 0828AF7D
-	.string "GABBY: Oh! You’re {PLAYER}! Hi!\n"
+	.string "GABBY: Oh! You're {PLAYER}! Hi!\n"
 	.string "Do you remember us from last time?\p"
 	.string "Can you show us how much stronger\n"
-	.string "you’ve become? Okay, cue interview!$"
+	.string "you've become? Okay, cue interview!$"
 
 Route111_Text_28B000: @ 0828B000
-	.string "GABBY: My eyes didn’t lie!\n"
+	.string "GABBY: My eyes didn't lie!\n"
 	.string "I did discover an astonishing TRAINER!$"
 
 Route111_Text_28B042: @ 0828B042
@@ -2725,7 +2725,7 @@ Route111_Text_28B042: @ 0828B042
 
 Route111_Text_28B137: @ 0828B137
 	.string "GABBY: “{STR_VAR_1}!”\p"
-	.string "Remember? That’s the quote you gave\n"
+	.string "Remember? That's the quote you gave\n"
 	.string "us as the battle clincher last time.\p"
 	.string "I never, ever forget stuff like that!$"
 
@@ -2736,7 +2736,7 @@ Route111_Text_28B1B3: @ 0828B1B3
 	.string "Do you want to be interviewed again?$"
 
 Route111_Text_28B23D: @ 0828B23D
-	.string "The last time we battled, didn’t you\n"
+	.string "The last time we battled, didn't you\n"
 	.string "throw a POKé BALL at us?\p"
 	.string "We were shocked! So we told everyone,\n"
 	.string "just everyone, about it!\p"
@@ -2768,23 +2768,23 @@ Route111_Text_28B433: @ 0828B433
 
 Route111_Text_28B4AB: @ 0828B4AB
 	.string "GABBY: Mmm, yeah!\n"
-	.string "That’s the perfect clincher!\p"
+	.string "That's the perfect clincher!\p"
 	.string "I get the feeling that this will make\n"
 	.string "a great TV show.\p"
-	.string "There’s a chance that they’ll air this\n"
+	.string "There's a chance that they'll air this\n"
 	.string "on TV, so make sure to look for us!\p"
 	.string "Okay!\n"
-	.string "We’ll be seeing you!$"
+	.string "We'll be seeing you!$"
 
 Route111_Text_28B577: @ 0828B577
 	.string "GABBY: Oh…\p"
-	.string "Okay, but don’t give up!\n"
-	.string "We’ll be keeping an eye out for you!$"
+	.string "Okay, but don't give up!\n"
+	.string "We'll be keeping an eye out for you!$"
 
 Route111_Text_28B5C0: @ 0828B5C0
 Route118_Text_28B5C0: @ 0828B5C0
 Route120_Text_28B5C0: @ 0828B5C0
-	.string "GABBY: We’ll be keeping an eye out\n"
+	.string "GABBY: We'll be keeping an eye out\n"
 	.string "for you!$"
 
 Route111_Text_28B5EC: @ 0828B5EC
@@ -2795,7 +2795,7 @@ Route120_Text_28B5EC: @ 0828B5EC
 
 Route111_Text_28B62D: @ 0828B62D
 	.string "GABBY: Wow, you are something!\p"
-	.string "You’ve gotten a lot stronger--a lot--\n"
+	.string "You've gotten a lot stronger--a lot--\n"
 	.string "since we last battled.\p"
 	.string "We were right about you when we\n"
 	.string "spotted you as a hot TRAINER.\p"
@@ -2812,28 +2812,28 @@ Route120_Text_28B719: @ 0828B719
 Route111_Text_28B75C: @ 0828B75C
 	.string "TY: Hey, lookie here! A tough-looking\n"
 	.string "TRAINER here, of all places!\l"
-	.string "Camera’s rolling!$"
+	.string "Camera's rolling!$"
 
 Route111_Text_28B7B1: @ 0828B7B1
 Route118_Text_28B7B1: @ 0828B7B1
 Route120_Text_28B7B1: @ 0828B7B1
 	.string "TY: Hey, lookie here!\n"
 	.string "I remember you!\p"
-	.string "I’ll get this battle all on this\n"
+	.string "I'll get this battle all on this\n"
 	.string "here camera!$"
 
 Route111_Text_28B805: @ 0828B805
 Route118_Text_28B805: @ 0828B805
 Route120_Text_28B805: @ 0828B805
-	.string "TY: You’re a natural!\n"
+	.string "TY: You're a natural!\n"
 	.string "Got me some prime footage right here!$"
 
 Route111_Text_28B841: @ 0828B841
 Route118_Text_28B841: @ 0828B841
 Route120_Text_28B841: @ 0828B841
 	.string "TY: Do you only have the one POKéMON\n"
-	.string "and that’s it?\p"
-	.string "If you had more POKéMON, it’d make for\n"
+	.string "and that's it?\p"
+	.string "If you had more POKéMON, it'd make for\n"
 	.string "better footage, but…$"
 
 Route111_Text_28B8B1: @ 0828B8B1
@@ -2844,21 +2844,21 @@ Route111_Text_28B8F6: @ 0828B8F6
 Route118_Text_28B8F6: @ 0828B8F6
 Route120_Text_28B8F6: @ 0828B8F6
 	.string "TY: Yep, I got it all.\n"
-	.string "That whole battle’s on camera.$"
+	.string "That whole battle's on camera.$"
 
 gTVInSearchOfTrainersText00:: @ 0828B92C
 	.string "IN SEARCH OF TRAINERS…\p"
-	.string "GABBY: Hi! Today I’m visiting an area\n"
+	.string "GABBY: Hi! Today I'm visiting an area\n"
 	.string "near {STR_VAR_1}.\p"
-	.string "We’re trying to spot some up-and-\n"
+	.string "We're trying to spot some up-and-\n"
 	.string "coming new talent in the field.\p"
 	.string "Today, we turned our lens on the\n"
 	.string "TRAINER {PLAYER}.\p"
-	.string "There’s something about this TRAINER\n"
+	.string "There's something about this TRAINER\n"
 	.string "that piqued our interest.$"
 
 gTVInSearchOfTrainersText01:: @ 0828BA20
-	.string "We’ve battled {PLAYER} before, but we\n"
+	.string "We've battled {PLAYER} before, but we\n"
 	.string "can attest that the TRAINER has most\l"
 	.string "definitely improved from before.\p"
 	.string "I knew we were onto someone special\n"
@@ -2870,12 +2870,12 @@ gTVInSearchOfTrainersText02:: @ 0828BAC8
 	.string "Well, the fastest way is to battle.\n"
 	.string "And so we began our investigation!\p"
 	.string "… …\p"
-	.string "That’s how we ended up in battle\n"
+	.string "That's how we ended up in battle\n"
 	.string "with {PLAYER}.\p"
 	.string "In a dominating performance, we were\n"
 	.string "flattened, rolled up, and tossed aside!\p"
 	.string "{PLAYER} is ruthlessly strong…\p"
-	.string "Here’s our impressions after having\n"
+	.string "Here's our impressions after having\n"
 	.string "battled our featured TRAINER.$"
 
 gTVInSearchOfTrainersText03:: @ 0828BC18
@@ -2888,7 +2888,7 @@ gTVInSearchOfTrainersText03:: @ 0828BC18
 	.string "{STR_VAR_2} was the move the TRAINER\n"
 	.string "used last in our battle.\p"
 	.string "The move {STR_VAR_2} is {STR_VAR_1}\n"
-	.string "and {STR_VAR_3}’s sign of friendship!$"
+	.string "and {STR_VAR_3}'s sign of friendship!$"
 
 gTVInSearchOfTrainersText04:: @ 0828BD20
 	.string "…I lost confidence in myself as\n"
@@ -2896,14 +2896,14 @@ gTVInSearchOfTrainersText04:: @ 0828BD20
 	.string "We were beaten before we could launch\n"
 	.string "a single attack.\l"
 	.string "Ohhh… Snivel…\p"
-	.string "In spite of that, {PLAYER}’s battles\n"
+	.string "In spite of that, {PLAYER}'s battles\n"
 	.string "are worth seeing.\p"
 	.string "I recommend confident TRAINERS to\n"
 	.string "challenge {PLAYER}.$"
 
 gTVInSearchOfTrainersText05:: @ 0828BE01
-	.string "There’s only one thing to be said.\n"
-	.string "Don’t you dare throw a POKé BALL during\l"
+	.string "There's only one thing to be said.\n"
+	.string "Don't you dare throw a POKé BALL during\l"
 	.string "a TRAINER battle!\p"
 	.string "{PLAYER} is certainly strong, but has\n"
 	.string "no clue about the basic rules.\p"
@@ -2913,7 +2913,7 @@ gTVInSearchOfTrainersText05:: @ 0828BE01
 
 gTVInSearchOfTrainersText06:: @ 0828BEEE
 	.string "{PLAYER} is adept at reading the\n"
-	.string "opponent’s actions.\p"
+	.string "opponent's actions.\p"
 	.string "The timing of item usage was remarkably\n"
 	.string "effective!$"
 
@@ -2922,21 +2922,21 @@ gTVInSearchOfTrainersText07:: @ 0828BF50
 	.string "I might even be pretty good.\p"
 	.string "While we did end up losing, we did have\n"
 	.string "a hotly contested battle.\p"
-	.string "But if you’re struggling against me,\n"
+	.string "But if you're struggling against me,\n"
 	.string "you have a ways to go, {PLAYER}!$"
 
 gTVInSearchOfTrainersText08:: @ 0828C011
 	.string "After our battle, we asked {PLAYER} for\n"
 	.string "a succinct summary.\p"
 	.string "The TRAINER replied, “{STR_VAR_1}.”\p"
-	.string "{PLAYER}’s POKéMON {STR_VAR_2} and\n"
+	.string "{PLAYER}'s POKéMON {STR_VAR_2} and\n"
 	.string "{STR_VAR_3}…\l"
 	.string "And “{STR_VAR_1}”…\p"
-	.string "Mmm! That’s deep! There’s deep\n"
+	.string "Mmm! That's deep! There's deep\n"
 	.string "significance behind that quote!\p"
-	.string "It’s no surprise--a good TRAINER has\n"
+	.string "It's no surprise--a good TRAINER has\n"
 	.string "good things to say.\p"
-	.string "That’s all for today!\n"
+	.string "That's all for today!\n"
 	.string "See you again on our next broadcast!$"
 
 gTVPokemonContestLiveUpdates2Text00:: @ 0828C137
@@ -2949,7 +2949,7 @@ gTVPokemonContestLiveUpdates2Text00:: @ 0828C137
 	.string "Spectators: ?!!!!\p"
 	.string "MC: Oh! It looks like the CONTEST\n"
 	.string "participants are headed this way!\p"
-	.string "I’ll try to get an impromptu interview\n"
+	.string "I'll try to get an impromptu interview\n"
 	.string "for you folks at home!\p"
 	.string "Spectators: ?!!!!\n"
 	.string "?!!!!$"
@@ -2958,16 +2958,16 @@ gTVPokemonContestLiveUpdates2Text01:: @ 0828C28C
 	.string "MC: Excuse me!\n"
 	.string "Thanks for joining us on live TV!\p"
 	.string "May I congratulate you on your win?\p"
-	.string "What was the key factor in today’s\n"
+	.string "What was the key factor in today's\n"
 	.string "stunning victory?\p"
 	.string "BEAUTY: We gave it our best effort\n"
 	.string "today, my {STR_VAR_2} and I!\p"
-	.string "But I’m sure we wouldn’t have made it\n"
-	.string "if it weren’t for all the help we\l"
+	.string "But I'm sure we wouldn't have made it\n"
+	.string "if it weren't for all the help we\l"
 	.string "received leading up to the CONTEST!\p"
 	.string "MC: Do you have a special someone\n"
-	.string "with whom you’d like to share your joy?\l"
-	.string "Let’s hear it live!\p"
+	.string "with whom you'd like to share your joy?\l"
+	.string "Let's hear it live!\p"
 	.string "BEAUTY: Hey, out there!\p"
 	.string "{STR_VAR_3}! Are you watching?\n"
 	.string "We did it!\l"
@@ -2978,19 +2978,19 @@ gTVPokemonContestLiveUpdates2Text02:: @ 0828C45B
 	.string "Thanks for joining us on live TV!\p"
 	.string "You must be disappointed by that turn\n"
 	.string "of events. Do you have any comments?\p"
-	.string "BEAUTY: It’s heartbreaking…\n"
+	.string "BEAUTY: It's heartbreaking…\n"
 	.string "My {STR_VAR_2} and I, we did our best…\p"
-	.string "But I feel like I’ve let down everyone\n"
+	.string "But I feel like I've let down everyone\n"
 	.string "who has supported us through this.\p"
-	.string "MC: I hate to say it, but the POKéMON’s\n"
+	.string "MC: I hate to say it, but the POKéMON's\n"
 	.string "coloration is a little wanting.\p"
-	.string "BEAUTY: {STR_VAR_3}, I’m so sorry…\n"
-	.string "I’ll do better next time, I swear…\l"
+	.string "BEAUTY: {STR_VAR_3}, I'm so sorry…\n"
+	.string "I'll do better next time, I swear…\l"
 	.string "…Sniff… Waaaaah!\p"
 	.string "Spectators: See that?\n"
 	.string "The poor girl!\p"
 	.string "MC: Uh… Uh-oh…\p"
-	.string "Uh… That’s all the time we have today!\n"
+	.string "Uh… That's all the time we have today!\n"
 	.string "Thanks for tuning in!$"
 
 gTVPokemonContestLiveUpdates2Text03:: @ 0828C662
@@ -2999,13 +2999,13 @@ gTVPokemonContestLiveUpdates2Text03:: @ 0828C662
 	.string "How did your CONTEST appearance go?\p"
 	.string "BEAUTY: Nothing went right…\n"
 	.string "For some reason, my {STR_VAR_2}\l"
-	.string "couldn’t attract any popularity.\p"
-	.string "MC: I hate to say it, but the POKéMON’s\n"
+	.string "couldn't attract any popularity.\p"
+	.string "MC: I hate to say it, but the POKéMON's\n"
 	.string "coloration is a little wanting.\p"
 	.string "BEAUTY: … … … … … …\n"
 	.string "…Sniff… Waaaaah!\p"
 	.string "Spectators: See that?\n"
 	.string "The poor girl!\p"
 	.string "MC: Uh… Uh-oh…\p"
-	.string "Uh… That’s all the time we have today!\n"
+	.string "Uh… That's all the time we have today!\n"
 	.string "Thanks for tuning in!$"

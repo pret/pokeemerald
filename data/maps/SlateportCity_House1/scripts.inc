@@ -72,13 +72,13 @@ SlateportCity_House1_EventScript_209B84:: @ 8209B84
 	end
 
 SlateportCity_House1_Text_209B8E: @ 8209B8E
-	.string "Hi, hi! I’m the NAME RATER!\n"
-	.string "I’m the fortune-teller of names!\p"
+	.string "Hi, hi! I'm the NAME RATER!\n"
+	.string "I'm the fortune-teller of names!\p"
 	.string "I shall be pleased to rate your\n"
-	.string "POKéMON’s nickname.$"
+	.string "POKéMON's nickname.$"
 
 SlateportCity_House1_Text_209BFF: @ 8209BFF
-	.string "Which POKéMON’s nickname should\n"
+	.string "Which POKéMON's nickname should\n"
 	.string "I critique?$"
 
 SlateportCity_House1_Text_209C2B: @ 8209C2B
@@ -112,7 +112,7 @@ SlateportCity_House1_Text_209DF0: @ 8209DF0
 	.string "Hmmm… {STR_VAR_1} it is!\p"
 	.string "This is a magnificent nickname!\n"
 	.string "It is impeccably beyond reproach!\p"
-	.string "You’ll do well to cherish your\n"
+	.string "You'll do well to cherish your\n"
 	.string "{STR_VAR_1} now and beyond.$"
 
 SlateportCity_House1_Text_209E74: @ 8209E74

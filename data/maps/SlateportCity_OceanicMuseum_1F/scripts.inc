@@ -248,14 +248,14 @@ SlateportCity_OceanicMuseum_1F_Text_20B026: @ 820B026
 	.string "Please enjoy yourself.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B03D: @ 820B03D
-	.string "Oh? I’m sorry, but you don’t seem to\n"
+	.string "Oh? I'm sorry, but you don't seem to\n"
 	.string "have enough money.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B075: @ 820B075
-	.string "Oh? You’re with that group that\n"
+	.string "Oh? You're with that group that\n"
 	.string "went in earlier?\p"
-	.string "You’re the only one who’s late.\n"
-	.string "You’d better go catch up to them!$"
+	.string "You're the only one who's late.\n"
+	.string "You'd better go catch up to them!$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B0E8: @ 820B0E8
 	.string "We, TEAM AQUA, exist for the good\n"
@@ -264,7 +264,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B0E8: @ 820B0E8
 SlateportCity_OceanicMuseum_1F_Text_20B112: @ 820B112
 	.string "We were told to assemble here,\n"
 	.string "so we did, but…\p"
-	.string "Our BOSS, the linchpin, isn’t here.$"
+	.string "Our BOSS, the linchpin, isn't here.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B165: @ 820B165
 	.string "If I ripped off the stuff here,\n"
@@ -275,11 +275,11 @@ SlateportCity_OceanicMuseum_1F_Text_20B19C: @ 820B19C
 	.string "nefarious deeds…$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B1D4: @ 820B1D4
-	.string "If our goons didn’t bungle things\n"
-	.string "in RUSTBORO, we wouldn’t be here!$"
+	.string "If our goons didn't bungle things\n"
+	.string "in RUSTBORO, we wouldn't be here!$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B218: @ 820B218
-	.string "I didn’t have ¥50, so it took a long\n"
+	.string "I didn't have ¥50, so it took a long\n"
 	.string "time getting by the receptionist.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B25F: @ 820B25F
@@ -296,7 +296,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B302: @ 820B302
 	.string "The sea is vast without end, and\n"
 	.string "infinitely deep…\p"
 	.string "There must be many POKéMON that\n"
-	.string "we don’t know about.$"
+	.string "we don't know about.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B369: @ 820B369
 	.string "I want a sea POKéMON.\p"
@@ -306,7 +306,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B369: @ 820B369
 SlateportCity_OceanicMuseum_1F_Text_20B3AB: @ 820B3AB
 	.string "Aiyeeeh!\n"
 	.string "What are you doing here?\p"
-	.string "Me? I’m the TEAM AQUA member\n"
+	.string "Me? I'm the TEAM AQUA member\n"
 	.string "you thumped before, remember?\l"
 	.string "Back in RUSTURF TUNNEL?\p"
 	.string "Here, take this!\n"
@@ -332,10 +332,10 @@ SlateportCity_OceanicMuseum_1F_Text_20B547: @ 820B547
 	.string "A red ball is bobbing up and down\n"
 	.string "inside a glass vessel.\p"
 	.string "“This is an experiment simulating a\n"
-	.string "WATERFALL using the ball’s buoyancy.”$"
+	.string "WATERFALL using the ball's buoyancy.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B5CA: @ 820B5CA
-	.string "It’s a sample of soil from the ocean\n"
+	.string "It's a sample of soil from the ocean\n"
 	.string "floor.\p"
 	.string "“Over many years, the remains of\n"
 	.string "life-forms settle at the bottom of\l"
@@ -344,7 +344,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B5CA: @ 820B5CA
 	.string "ancient past is revealed.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B699: @ 820B699
-	.string "It’s a sample of beach sand.\p"
+	.string "It's a sample of beach sand.\p"
 	.string "“Stones from mountains are washed\n"
 	.string "down by rivers where they are\l"
 	.string "chipped and ground down.\p"
@@ -379,7 +379,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B912: @ 820B912
 	.string "the size of land.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B9C0: @ 820B9C0
-	.string "It’s a fossil with wavy ridges on it.\p"
+	.string "It's a fossil with wavy ridges on it.\p"
 	.string "“Soil on the ocean floor gets scoured\n"
 	.string "by the tide.\p"
 	.string "“The flowing seawater marks the soil\n"
@@ -390,6 +390,6 @@ SlateportCity_OceanicMuseum_1F_Text_20B9C0: @ 820B9C0
 SlateportCity_OceanicMuseum_1F_Text_20BA9C: @ 820BA9C
 	.string "A strange machine is rotating under\n"
 	.string "a glass dome.\p"
-	.string "Maybe it’s for measuring the depth\n"
+	.string "Maybe it's for measuring the depth\n"
 	.string "of something…$"
 

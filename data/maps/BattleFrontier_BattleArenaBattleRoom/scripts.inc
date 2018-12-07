@@ -652,22 +652,22 @@ BattleFrontier_BattleArenaBattleRoom_Text_25804E: @ 825804E
 	.string "Hmhm…$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_258068: @ 8258068
-	.string "I don’t know how to say it, but…\n"
+	.string "I don't know how to say it, but…\n"
 	.string "To put it bluntly, you look pretty weak.\l"
-	.string "Are you sure you’re up for me?\p"
+	.string "Are you sure you're up for me?\p"
 	.string "Hmm…\p"
 	.string "Well, all right!\n"
-	.string "We’ll take things easy to start with!$"
+	.string "We'll take things easy to start with!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_25810D: @ 825810D
-	.string "Okay! Let’s see you ignite my passion\n"
+	.string "Okay! Let's see you ignite my passion\n"
 	.string "for battle!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_25813F: @ 825813F
 	.string "GRETA: Ow, wait a second!\n"
 	.string "You are tough after all!\p"
 	.string "I like you!\n"
-	.string "Let’s see your FRONTIER PASS.$"
+	.string "Let's see your FRONTIER PASS.$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_25819C: @ 825819C
 	.string "The Guts Symbol was embossed on\n"
@@ -675,8 +675,8 @@ BattleFrontier_BattleArenaBattleRoom_Text_25819C: @ 825819C
 
 BattleFrontier_BattleArenaBattleRoom_Text_2581CF: @ 82581CF
 	.string "Hmm…\p"
-	.string "It’s going to be fun the next time!\n"
-	.string "I’m looking forward to it!$"
+	.string "It's going to be fun the next time!\n"
+	.string "I'm looking forward to it!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_258213: @ 8258213
 	.string "GRETA: Hey! Howdy!\n"
@@ -690,16 +690,16 @@ BattleFrontier_BattleArenaBattleRoom_Text_2582A2: @ 82582A2
 	.string "So, are you ready?$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_2582BB: @ 82582BB
-	.string "I won’t allow a halfhearted effort!\n"
+	.string "I won't allow a halfhearted effort!\n"
 	.string "Be ready for a thrashing!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_2582F9: @ 82582F9
 	.string "Come on, REFEREE!\n"
-	.string "Let’s get this started!$"
+	.string "Let's get this started!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_258323: @ 8258323
 	.string "GRETA: Gaaah! Blown away!\n"
-	.string "Let’s see your FRONTIER PASS!$"
+	.string "Let's see your FRONTIER PASS!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_25835B: @ 825835B
 	.string "The Guts Symbol took on\n"
@@ -708,5 +708,5 @@ BattleFrontier_BattleArenaBattleRoom_Text_25835B: @ 825835B
 BattleFrontier_BattleArenaBattleRoom_Text_258383: @ 8258383
 	.string "Arrrgh!\n"
 	.string "This is so infuriating!\p"
-	.string "If we ever battle again, I won’t lose!\n"
-	.string "Don’t you forget it! Bye-bye!$"
+	.string "If we ever battle again, I won't lose!\n"
+	.string "Don't you forget it! Bye-bye!$"

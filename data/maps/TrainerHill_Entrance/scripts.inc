@@ -318,7 +318,7 @@ TrainerHill_Entrance_Text_268430: @ 8268430
 	.string "This is the TRAINER HILL where\n"
 	.string "you may enjoy tag battles with many\l"
 	.string "TRAINERS.\p"
-	.string "Unfortunately, we’re still getting\n"
+	.string "Unfortunately, we're still getting\n"
 	.string "things ready. Please come back later!$"
 
 TrainerHill_Entrance_Text_2684C6: @ 82684C6
@@ -333,12 +333,12 @@ TrainerHill_Entrance_Text_26851C: @ 826851C
 	.string "your game.$"
 
 TrainerHill_Entrance_Text_268564: @ 8268564
-	.string "Let’s see…\n"
+	.string "Let's see…\n"
 	.string "The TRAINERS here now are…\p"
 	.string "Up to floor no. {STR_VAR_1}.$"
 
 TrainerHill_Entrance_Text_26859E: @ 826859E
-	.string "Let’s see…\n"
+	.string "Let's see…\n"
 	.string "The TRAINERS here now are…\p"
 	.string "There appear to be TRAINERS gathered\n"
 	.string "in every room.$"
@@ -371,7 +371,7 @@ TrainerHill_Entrance_Text_268712: @ 8268712
 	.string "the movement can be hectic.\p"
 	.string "To avoid the stampede, we moved\n"
 	.string "the reception counter here.\p"
-	.string "I’m sorry for the inconvenience.$"
+	.string "I'm sorry for the inconvenience.$"
 
 TrainerHill_Entrance_Text_2687AC: @ 82687AC
 	.string "Thank you for playing!$"
@@ -390,7 +390,7 @@ TrainerHill_Entrance_Text_2687C3: @ 82687C3
 	.string "be awarded.$"
 
 TrainerHill_Entrance_Text_26890D: @ 826890D
-	.string "Oh, I’m sorry, but you appear to have\n"
+	.string "Oh, I'm sorry, but you appear to have\n"
 	.string "only one POKéMON with you.\p"
 	.string "You will need at least two POKéMON\n"
 	.string "to enter this event.$"
@@ -399,7 +399,7 @@ TrainerHill_Roof_Text_268986: @ 8268986
 	.string "Hm! Hm!\p"
 	.string "You finally came!\n"
 	.string "Yes, you have arrived!\p"
-	.string "Wait! Don’t say it!\n"
+	.string "Wait! Don't say it!\n"
 	.string "I know why you came all the way\l"
 	.string "here by yourself!\p"
 	.string "You wanted to see me, the owner\n"
@@ -407,7 +407,7 @@ TrainerHill_Roof_Text_268986: @ 8268986
 	.string "You want to form a tag team with me!\n"
 	.string "Wa-hoo!\p"
 	.string "…Uh?\n"
-	.string "That’s not it?\p"
+	.string "That's not it?\p"
 	.string "Anyway, I watched you on your way up.\n"
 	.string "Marvelous battling! Bravo, indeed!$"
 
@@ -417,19 +417,19 @@ TrainerHill_Roof_Text_268AC5: @ 8268AC5
 
 TrainerHill_Roof_Text_268B07: @ 8268B07
 	.string "Oh, no, full up with things!\n"
-	.string "You’ll be back later for this!$"
+	.string "You'll be back later for this!$"
 
 TrainerHill_Roof_Text_268B43: @ 8268B43
 	.string "Oh, hold on here! Did you possibly get\n"
 	.string "here marvelously quickly?\p"
-	.string "How splendid! You needn’t have\n"
+	.string "How splendid! You needn't have\n"
 	.string "hurried so to see me!\p"
-	.string "That is so delightful. I’ll have the Time\n"
+	.string "That is so delightful. I'll have the Time\n"
 	.string "Board at the reception updated!$"
 
 TrainerHill_Roof_Text_268C03: @ 8268C03
 	.string "But, oh…\n"
-	.string "You weren’t very quick getting here.$"
+	.string "You weren't very quick getting here.$"
 
 TrainerHill_Roof_Text_268C31: @ 8268C31
 	.string "Perhaps it would please me more if you\n"
@@ -450,14 +450,14 @@ TrainerHill_Entrance_Text_268D47: @ 8268D47
 TrainerHill_Entrance_Text_268D5A: @ 8268D5A
 	.string "Who knows what sort of TRAINERS\n"
 	.string "and POKéMON combos are ahead?\p"
-	.string "All I know is that I’ll knock aside\n"
+	.string "All I know is that I'll knock aside\n"
 	.string "anyone that stands in my way!$"
 
 TrainerHill_Entrance_Text_268DDA: @ 8268DDA
 	.string "I heard tough TRAINERS come to this\n"
 	.string "TRAINER HILL from all over.\p"
-	.string "I can’t wait to test the waters!\p"
-	.string "I’ll knock aside anyone that stands\n"
+	.string "I can't wait to test the waters!\p"
+	.string "I'll knock aside anyone that stands\n"
 	.string "in my way!$"
 
 TrainerHill_Entrance_Text_268E6A: @ 8268E6A
@@ -466,9 +466,9 @@ TrainerHill_Entrance_Text_268E6A: @ 8268E6A
 	.string "can reach the top in the least time.$"
 
 TrainerHill_Entrance_Text_268EDC: @ 8268EDC
-	.string "Do you know when they’re opening\n"
+	.string "Do you know when they're opening\n"
 	.string "this place up?\p"
-	.string "I’m waiting here to be the first\n"
+	.string "I'm waiting here to be the first\n"
 	.string "challenger ever!$"
 
 TrainerHill_Elevator_Text_268F3E: @ 8268F3E

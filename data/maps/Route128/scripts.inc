@@ -263,7 +263,7 @@ Route128_Text_1F6E5A: @ 81F6E5A
 	.string "completely out of control!$"
 
 Route128_Text_1F6F1E: @ 81F6F1E
-	.string "MAXIE: {PLAYER}, don’t say anything.\p"
+	.string "MAXIE: {PLAYER}, don't say anything.\p"
 	.string "I know that I have no right to be\n"
 	.string "critical of ARCHIE…\p"
 	.string "But the way things are now, I doubt\n"
@@ -278,7 +278,7 @@ Route128_Text_1F704F: @ 81F704F
 	.string "MAXIE: This defies belief…\p"
 	.string "Those super-ancient POKéMON…\p"
 	.string "Their power is unbelievable.\n"
-	.string "They’ve upset the balance of nature…$"
+	.string "They've upset the balance of nature…$"
 
 Route128_Text_1F70C9: @ 81F70C9
 	.string "STEVEN: {PLAYER}{KUN}!\n"
@@ -288,18 +288,18 @@ Route128_Text_1F70EA: @ 81F70EA
 	.string "This is terrible…\p"
 	.string "After the scorching heat wave ended,\n"
 	.string "this deluge began.\p"
-	.string "If this doesn’t stop, all of HOENN…\n"
+	.string "If this doesn't stop, all of HOENN…\n"
 	.string "No, the whole world will drown.\p"
 	.string "This huge rain cloud is spreading\n"
 	.string "from above SOOTOPOLIS…\p"
 	.string "What in the world is taking place there?\p"
-	.string "There’s no point arguing here…\n"
+	.string "There's no point arguing here…\n"
 	.string "SOOTOPOLIS might provide answers…$"
 
 Route128_Text_1F721B: @ 81F721B
 	.string "{PLAYER}{KUN}…\n"
-	.string "I don’t know what you intend to do,\l"
-	.string "but don’t do anything reckless.\p"
+	.string "I don't know what you intend to do,\l"
+	.string "but don't do anything reckless.\p"
 	.string "Okay.\n"
-	.string "I’m going to SOOTOPOLIS.$"
+	.string "I'm going to SOOTOPOLIS.$"
 
