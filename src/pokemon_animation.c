@@ -786,30 +786,30 @@ static const u8 sBackAnimationIds[] =
 
 static const u8 sBackAnimNatureModTable[] =
 {
-    0x00, // NATURE_HARDY
-    0x02, // NATURE_LONELY
-    0x00, // NATURE_BRAVE
-    0x00, // NATURE_ADAMANT
-    0x00, // NATURE_NAUGHTY
-    0x01, // NATURE_BOLD
-    0x01, // NATURE_DOCILE
-    0x01, // NATURE_RELAXED
-    0x00, // NATURE_IMPISH
-    0x01, // NATURE_LAX
-    0x02, // NATURE_TIMID
-    0x00, // NATURE_HASTY
-    0x01, // NATURE_SERIOUS
-    0x00, // NATURE_JOLLY
-    0x00, // NATURE_NAIVE
-    0x02, // NATURE_MODEST
-    0x02, // NATURE_MILD
-    0x02, // NATURE_QUIET
-    0x02, // NATURE_BASHFUL
-    0x01, // NATURE_RASH
-    0x01, // NATURE_CALM
-    0x02, // NATURE_GENTLE
-    0x01, // NATURE_SASSY
-    0x02, // NATURE_CAREFUL
+    [NATURE_HARDY] = 0x00,
+    [NATURE_LONELY] = 0x02,
+    [NATURE_BRAVE] = 0x00,
+    [NATURE_ADAMANT] = 0x00,
+    [NATURE_NAUGHTY] = 0x00,
+    [NATURE_BOLD] = 0x01,
+    [NATURE_DOCILE] = 0x01,
+    [NATURE_RELAXED] = 0x01,
+    [NATURE_IMPISH] = 0x00,
+    [NATURE_LAX] = 0x01,
+    [NATURE_TIMID] = 0x02,
+    [NATURE_HASTY] = 0x00,
+    [NATURE_SERIOUS] = 0x01,
+    [NATURE_JOLLY] = 0x00,
+    [NATURE_NAIVE] = 0x00,
+    [NATURE_MODEST] = 0x02,
+    [NATURE_MILD] = 0x02,
+    [NATURE_QUIET] = 0x02,
+    [NATURE_BASHFUL] = 0x02,
+    [NATURE_RASH] = 0x01,
+    [NATURE_CALM] = 0x01,
+    [NATURE_GENTLE] = 0x02,
+    [NATURE_SASSY] = 0x01,
+    [NATURE_CAREFUL] = 0x02,
     0x01, // NATURE_QUIRKY
 };
 
