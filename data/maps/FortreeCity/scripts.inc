@@ -101,26 +101,26 @@ FortreeCity_Text_1E2676: @ 81E2676
 
 FortreeCity_Text_1E2738: @ 81E2738
 	.string "I want to go to the POKéMON GYM,\n"
-	.string "but something’s blocking the way.\p"
+	.string "but something's blocking the way.\p"
 	.string "After all the bother I went through\n"
 	.string "training on ROUTE 120…$"
 
 FortreeCity_Text_1E27B6: @ 81E27B6
-	.string "I’ve got my pride-and-joy POKéMON\n"
-	.string "with me. This time, I’ll beat WINONA.$"
+	.string "I've got my pride-and-joy POKéMON\n"
+	.string "with me. This time, I'll beat WINONA.$"
 
 FortreeCity_Text_1E27FE: @ 81E27FE
 	.string "The ground absorbs rainwater, and\n"
 	.string "trees grow by drinking that water…\p"
 	.string "Our FORTREE CITY exists because\n"
-	.string "there’s both water and soil.$"
+	.string "there's both water and soil.$"
 
 FortreeCity_Text_1E2880: @ 81E2880
 	.string "The CITY consists of homes built on\n"
 	.string "trees.\p"
 	.string "Perhaps because of that lifestyle,\n"
 	.string "everyone is healthy and lively.\p"
-	.string "Why, even myself--I feel as if I’ve\n"
+	.string "Why, even myself--I feel as if I've\n"
 	.string "grown thirty years younger.$"
 
 FortreeCity_Text_1E292E: @ 81E292E
@@ -131,7 +131,7 @@ FortreeCity_Text_1E292E: @ 81E292E
 
 FortreeCity_Text_1E299D: @ 81E299D
 	.string "There are POKéMON that evolve when\n"
-	.string "you trade them! That’s what I heard.$"
+	.string "you trade them! That's what I heard.$"
 
 FortreeCity_Text_1E29E5: @ 81E29E5
 	.string "Something unseeable is in the way.$"

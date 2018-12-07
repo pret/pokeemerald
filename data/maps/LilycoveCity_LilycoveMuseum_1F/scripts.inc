@@ -170,9 +170,9 @@ LilycoveCity_LilycoveMuseum_1F_Text_218E4B: @ 8218E4B
 	.string "featuring POKéMON.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_218EBC: @ 8218EBC
-	.string "I’m the CURATOR of this MUSEUM of\n"
+	.string "I'm the CURATOR of this MUSEUM of\n"
 	.string "fine arts.\p"
-	.string "It’s heartening to see someone so\n"
+	.string "It's heartening to see someone so\n"
 	.string "young as you in our MUSEUM.\p"
 	.string "Have you viewed our collection of\n"
 	.string "paintings already?$"
@@ -189,7 +189,7 @@ LilycoveCity_LilycoveMuseum_1F_Text_218F98: @ 8218F98
 
 LilycoveCity_LilycoveMuseum_1F_Text_218FF8: @ 8218FF8
 	.string "I see…\p"
-	.string "I’m honored that you would visit\n"
+	.string "I'm honored that you would visit\n"
 	.string "us in spite of that.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_219035: @ 8219035
@@ -198,46 +198,46 @@ LilycoveCity_LilycoveMuseum_1F_Text_219035: @ 8219035
 	.string "Then, may I ask you to come with me?$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_219080: @ 8219080
-	.string "It’s a very old painting.\n"
+	.string "It's a very old painting.\n"
 	.string "The paint is peeling here and there.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_2190BF: @ 82190BF
-	.string "It’s an odd landscape with bizarre\n"
+	.string "It's an odd landscape with bizarre\n"
 	.string "and fantastic scenery.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_2190F9: @ 82190F9
-	.string "It’s a painting of a beautiful, smiling\n"
+	.string "It's a painting of a beautiful, smiling\n"
 	.string "woman with a POKéMON on her lap.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_219142: @ 8219142
-	.string "It’s a painting of a legendary POKéMON\n"
+	.string "It's a painting of a legendary POKéMON\n"
 	.string "from long ago.\p"
 	.string "The artist painted this from\n"
 	.string "imagination.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_2191A2: @ 82191A2
-	.string "It’s a painting of GRASS POKéMON\n"
+	.string "It's a painting of GRASS POKéMON\n"
 	.string "swaying in a breeze.\p"
-	.string "They appear to be enjoying the wind’s\n"
+	.string "They appear to be enjoying the wind's\n"
 	.string "gentle caress.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_21920D: @ 821920D
-	.string "It’s a delicious-looking painting\n"
+	.string "It's a delicious-looking painting\n"
 	.string "of BERRIES.\p"
 	.string "This painting could make you hungry!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_219260: @ 8219260
-	.string "It’s a replica of a famous sculpture.\p"
+	.string "It's a replica of a famous sculpture.\p"
 	.string "It depicts an ancient BIRD POKéMON.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_2192AA: @ 82192AA
-	.string "It’s a big POKé BALL carved from\n"
+	.string "It's a big POKé BALL carved from\n"
 	.string "a black stone.\p"
 	.string "It was apparently used in festivals\n"
 	.string "in the olden days.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_219311: @ 8219311
-	.string "It’s a huge stone tablet inscribed\n"
+	.string "It's a huge stone tablet inscribed\n"
 	.string "with POKéMON and dense text in the\l"
 	.string "small characters of an ancient,\l"
 	.string "unreadable language.$"
@@ -248,8 +248,8 @@ LilycoveCity_LilycoveMuseum_1F_Text_21938C: @ 821938C
 
 LilycoveCity_LilycoveMuseum_1F_Text_2193B4: @ 82193B4
 	.string "Battling with POKéMON is fun,\n"
-	.string "I’ll grant you that.\p"
-	.string "But one mustn’t forget our love for\n"
+	.string "I'll grant you that.\p"
+	.string "But one mustn't forget our love for\n"
 	.string "the fine arts.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_21941A: @ 821941A
@@ -261,14 +261,14 @@ LilycoveCity_LilycoveMuseum_1F_Text_21941A: @ 821941A
 
 LilycoveCity_LilycoveMuseum_1F_Text_2194BA: @ 82194BA
 	.string "This lady is pretty!\n"
-	.string "She’s like Mommy!$"
+	.string "She's like Mommy!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_2194E1: @ 82194E1
 	.string "This POKéMON is adorable!\n"
 	.string "Just like our little boy!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_219515: @ 8219515
-	.string "I’d heard that this ART MUSEUM got\n"
+	.string "I'd heard that this ART MUSEUM got\n"
 	.string "in some new paintings.\p"
 	.string "So, naturally I hurried over.\p"
 	.string "Are the new paintings up on\n"
@@ -289,8 +289,8 @@ LilycoveCity_LilycoveMuseum_1F_Text_2195FF: @ 82195FF
 LilycoveCity_LilycoveMuseum_1F_Text_21967A: @ 821967A
 	.string "The ART MUSEUM has become a favorite\n"
 	.string "tourist destination.\p"
-	.string "It’s great for LILYCOVE…\n"
+	.string "It's great for LILYCOVE…\n"
 	.string "No, great for the HOENN region!\p"
-	.string "This is what I’ve heard--a lone TRAINER\n"
+	.string "This is what I've heard--a lone TRAINER\n"
 	.string "procured all the paintings upstairs.$"
 

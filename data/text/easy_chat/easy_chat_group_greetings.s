@@ -53,7 +53,7 @@ gEasyChatWord_ThankYou:: @ 859908A
 	.string "THANK YOU$"
 
 gEasyChatWord_IveArrived:: @ 8599094
-	.string "I’VE ARRIVED$"
+	.string "I'VE ARRIVED$"
 
 gEasyChatWord_Pardon:: @ 85990A1
 	.string "PARDON$"
@@ -80,7 +80,7 @@ gEasyChatWord_HeyQues:: @ 85990DF
 	.string "HEY?$"
 
 gEasyChatWord_WhatsUpQues:: @ 85990E4
-	.string "WHAT’S UP?$"
+	.string "WHAT'S UP?$"
 
 gEasyChatWord_HuhQues:: @ 85990EF
 	.string "HUH?$"

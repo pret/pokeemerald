@@ -119,17 +119,17 @@ BattleFrontier_RankingHall_Text_25E666: @ 825E666
 	.string "Hi, is your name on this list?$"
 
 BattleFrontier_RankingHall_Text_25E685: @ 825E685
-	.string "Wow, that’s super!\n"
-	.string "I’ll have to try harder, too!$"
+	.string "Wow, that's super!\n"
+	.string "I'll have to try harder, too!$"
 
 BattleFrontier_RankingHall_Text_25E6B6: @ 825E6B6
 	.string "Oh, is that right?\p"
-	.string "If you saw your friend’s name up here,\n"
+	.string "If you saw your friend's name up here,\n"
 	.string "I bet it would make you work harder!$"
 
 BattleFrontier_RankingHall_Text_25E715: @ 825E715
 	.string "Hmm…\n"
-	.string "My name’s not up there…\p"
-	.string "Well, it’s only natural since I haven’t\n"
+	.string "My name's not up there…\p"
+	.string "Well, it's only natural since I haven't\n"
 	.string "taken any challenges yet.$"
 

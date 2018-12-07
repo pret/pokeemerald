@@ -146,7 +146,7 @@ Route111_Text_29083A: @ 829083A
 	.string "Would you like to use ROCK SMASH?$"
 
 Route111_Text_29087F: @ 829087F
-	.string "It’s a rugged rock, but a POKéMON\n"
+	.string "It's a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
 
 FieryPath_EventScript_2908BA:: @ 82908BA
@@ -206,17 +206,17 @@ FieryPath_EventScript_290929:: @ 8290929
 	end
 
 FieryPath_Text_29092C: @ 829092C
-	.string "It’s a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.\p"
 	.string "Would you like to use STRENGTH?$"
 
 FieryPath_Text_29098C: @ 829098C
 	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}’s STRENGTH made it\n"
+	.string "{STR_VAR_1}'s STRENGTH made it\n"
 	.string "possible to move boulders around!$"
 
 FieryPath_Text_2909D6: @ 82909D6
-	.string "It’s a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.$"
 
 FieryPath_Text_290A16: @ 8290A16
@@ -252,7 +252,7 @@ Text_290A8E: @ 8290A8E
 	.string "a mighty roar.$"
 
 Text_290AC3: @ 8290AC3
-	.string "It’s a large waterfall.\n"
+	.string "It's a large waterfall.\n"
 	.string "Would you like to use WATERFALL?$"
 
 Text_290AFC: @ 8290AFC
@@ -333,4 +333,4 @@ EventScript_290CAE:: @ 8290CAE
 	end
 
 Text_290CB7: @ 8290CB7
-	.string "Looks like there’s nothing here…$"
+	.string "Looks like there's nothing here…$"

@@ -29,7 +29,7 @@ MtPyre_6F_EventScript_231D9D:: @ 8231D9D
 	end
 
 MtPyre_6F_Text_231DB4: @ 8231DB4
-	.string "When I’m here…\n"
+	.string "When I'm here…\n"
 	.string "A curious power flows into me…$"
 
 MtPyre_6F_Text_231DE2: @ 8231DE2
@@ -61,10 +61,10 @@ MtPyre_6F_Text_231F11: @ 8231F11
 	.string "Have no fear for I am here!$"
 
 MtPyre_6F_Text_231F4A: @ 8231F4A
-	.string "Weren’t you lost?$"
+	.string "Weren't you lost?$"
 
 MtPyre_6F_Text_231F5C: @ 8231F5C
 	.string "I had this feeling that a lost TRAINER\n"
 	.string "would be panicked and easy to beat.\p"
-	.string "It’s dirty and I won’t try it again…$"
+	.string "It's dirty and I won't try it again…$"
 

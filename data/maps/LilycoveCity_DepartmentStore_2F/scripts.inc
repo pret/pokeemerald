@@ -68,13 +68,13 @@ LilycoveCity_DepartmentStore_2F_Pokemart_21FB94: @ 821FB94
 
 LilycoveCity_DepartmentStore_2F_Text_21FBAC: @ 821FBAC
 	.string "Learn to use items properly.\n"
-	.string "That’s basic, really.$"
+	.string "That's basic, really.$"
 
 LilycoveCity_DepartmentStore_2F_Text_21FBDF: @ 821FBDF
 	.string "My husband is waiting at home.\n"
 	.string "What would make a good gift for him?$"
 
 LilycoveCity_DepartmentStore_2F_Text_21FC23: @ 821FC23
-	.string "I’m leaving on a long journey soon.\n"
+	.string "I'm leaving on a long journey soon.\n"
 	.string "I need to stock up on items.$"
 

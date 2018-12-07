@@ -187,11 +187,11 @@ MauvilleCity_BikeShop_Text_20EE22: @ 820EE22
 	.string "Well, well, what have we here?\n"
 	.string "A most energetic customer!\p"
 	.string "Me? You may call me RYDEL.\n"
-	.string "I’m the owner of this cycle shop.$"
+	.string "I'm the owner of this cycle shop.$"
 
 MauvilleCity_BikeShop_Text_20EE99: @ 820EE99
 	.string "RYDEL: Your RUNNING SHOES…\n"
-	.string "They’re awfully filthy.\p"
+	.string "They're awfully filthy.\p"
 	.string "Did you come from far away?$"
 
 MauvilleCity_BikeShop_Text_20EEE8: @ 820EEE8
@@ -201,15 +201,15 @@ MauvilleCity_BikeShop_Text_20EEE8: @ 820EEE8
 
 MauvilleCity_BikeShop_Text_20EF32: @ 820EF32
 	.string "RYDEL: Hm, hm… … … … …\p"
-	.string "You’re saying that you came all this\n"
+	.string "You're saying that you came all this\n"
 	.string "way from LITTLEROOT?\p"
 	.string "My goodness!\n"
-	.string "That’s ridiculously far!\p"
+	.string "That's ridiculously far!\p"
 	.string "If you had one of my BIKES, you could\n"
 	.string "go anywhere easily while feeling the\l"
 	.string "gentle caress of the wind!\p"
-	.string "I’ll tell you what!\n"
-	.string "I’ll give you a BIKE!\p"
+	.string "I'll tell you what!\n"
+	.string "I'll give you a BIKE!\p"
 	.string "Oh, wait a second!\p"
 	.string "I forgot to tell you that there are\n"
 	.string "two kinds of BIKES!\p"
@@ -219,7 +219,7 @@ MauvilleCity_BikeShop_Text_20EF32: @ 820EF32
 	.string "to feel the wind with their bodies!\p"
 	.string "And an ACRO BIKE is for those who\n"
 	.string "prefer technical rides!\p"
-	.string "I’m a real sweetheart, so you can\n"
+	.string "I'm a real sweetheart, so you can\n"
 	.string "have whichever one you like!\p"
 	.string "Which one will you choose?$"
 
@@ -239,7 +239,7 @@ MauvilleCity_BikeShop_Text_20F1FB: @ 820F1FB
 
 MauvilleCity_BikeShop_Text_20F22F: @ 820F22F
 	.string "RYDEL: Okay, no problem!\n"
-	.string "I’ll switch BIKES for you!$"
+	.string "I'll switch BIKES for you!$"
 
 MauvilleCity_BikeShop_Text_20F263: @ 820F263
 	.string "{PLAYER} got the MACH BIKE exchanged\n"
@@ -251,26 +251,26 @@ MauvilleCity_BikeShop_Text_20F294: @ 820F294
 
 MauvilleCity_BikeShop_Text_20F2C4: @ 820F2C4
 	.string "RYDEL: Good, good!\n"
-	.string "I’m happy that you like it!$"
+	.string "I'm happy that you like it!$"
 
 MauvilleCity_BikeShop_Text_20F2F3: @ 820F2F3
 	.string "Oh? What happened to that BIKE\n"
 	.string "I gave you?\p"
 	.string "Oh, I get it, you stored it using your PC.\p"
 	.string "Well, take it out of PC storage,\n"
-	.string "and I’ll be happy to exchange it!\p"
+	.string "and I'll be happy to exchange it!\p"
 	.string "May the wind always be at your back\n"
 	.string "on your adventure!$"
 
 MauvilleCity_BikeShop_Text_20F3C3: @ 820F3C3
-	.string "I’m learning about BIKES while\n"
+	.string "I'm learning about BIKES while\n"
 	.string "I work here.\p"
 	.string "If you need advice on how to ride your\n"
-	.string "BIKE, there’re a couple handbooks in\l"
+	.string "BIKE, there're a couple handbooks in\l"
 	.string "the back.$"
 
 MauvilleCity_BikeShop_Text_20F445: @ 820F445
-	.string "It’s a handbook on the MACH BIKE.\p"
+	.string "It's a handbook on the MACH BIKE.\p"
 	.string "Which page do you want to read?$"
 
 MauvilleCity_BikeShop_Text_20F487: @ 820F487
@@ -282,7 +282,7 @@ MauvilleCity_BikeShop_Text_20F487: @ 820F487
 	.string "Want to read a different page?$"
 
 MauvilleCity_BikeShop_Text_20F550: @ 820F550
-	.string "A MACH BIKE is speedy, but it can’t\n"
+	.string "A MACH BIKE is speedy, but it can't\n"
 	.string "stop very quickly.\p"
 	.string "It gets a little tricky to get around\n"
 	.string "a corner.\p"
@@ -300,7 +300,7 @@ MauvilleCity_BikeShop_Text_20F61A: @ 820F61A
 	.string "Want to read a different page?$"
 
 MauvilleCity_BikeShop_Text_20F6ED: @ 820F6ED
-	.string "It’s a handbook on the ACRO BIKE.\p"
+	.string "It's a handbook on the ACRO BIKE.\p"
 	.string "Which page do you want to read?$"
 
 MauvilleCity_BikeShop_Text_20F72F: @ 820F72F

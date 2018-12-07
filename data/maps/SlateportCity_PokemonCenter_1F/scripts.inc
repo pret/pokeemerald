@@ -26,9 +26,9 @@ SlateportCity_PokemonCenter_1F_EventScript_20DAEA:: @ 820DAEA
 
 SlateportCity_PokemonCenter_1F_Text_20DAF3: @ 820DAF3
 	.string "Want a tip for battling?\p"
-	.string "I’d say it’s raising different kinds\n"
+	.string "I'd say it's raising different kinds\n"
 	.string "of POKéMON in a balanced manner.\p"
-	.string "It’s no good to make just one\n"
+	.string "It's no good to make just one\n"
 	.string "POKéMON strong.\p"
 	.string "If it has a type disadvantage,\n"
 	.string "it might not stand a chance.$"

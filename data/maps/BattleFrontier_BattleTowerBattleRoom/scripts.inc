@@ -556,7 +556,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_2423A3: @ 82423A3
 	.string "FRONTIER PASS?$"
 
 BattleFrontier_BattleTowerLobby_Text_2423CD: @ 82423CD
-	.string "{PLAYER}’s battle was recorded\n"
+	.string "{PLAYER}'s battle was recorded\n"
 	.string "on the FRONTIER PASS.$"
 
 BattleFrontier_BattleTowerBattleRoom2_Text_2423FC: @ 82423FC
@@ -597,7 +597,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_242579: @ 8242579
 	.string "about you…\p"
 	.string "In all honesty, what I have heard does\n"
 	.string "not seem attractive in any way…\p"
-	.string "The reason I’ve come to see you…\n"
+	.string "The reason I've come to see you…\n"
 	.string "Well, there is but one reason…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_24268C: @ 824268C
@@ -616,7 +616,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_24270E: @ 824270E
 BattleFrontier_BattleTowerBattleRoom_Text_242744: @ 8242744
 	.string "… … … … … …\p"
 	.string "You have confidence in your POKéMON\n"
-	.string "battling talent, don’t you?\p"
+	.string "battling talent, don't you?\p"
 	.string "I urge you to keep battling and\n"
 	.string "keep on winning.\p"
 	.string "I will be waiting for you.\n"
@@ -626,14 +626,14 @@ BattleFrontier_BattleTowerBattleRoom_Text_2427F9: @ 82427F9
 	.string "ANABEL: You really did come back to\n"
 	.string "see me…\p"
 	.string "… … … … … …\p"
-	.string "You’ve won straight matches to see me…\n"
-	.string "I won’t have to hold back against you…\p"
-	.string "It’s been too long now…\p"
-	.string "Too long since I’ve been able to battle\n"
+	.string "You've won straight matches to see me…\n"
+	.string "I won't have to hold back against you…\p"
+	.string "It's been too long now…\p"
+	.string "Too long since I've been able to battle\n"
 	.string "without thinking about anything…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2428E0: @ 82428E0
-	.string "Let’s begin, shall we?$"
+	.string "Let's begin, shall we?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2428F7: @ 82428F7
 	.string "ANABEL: Fufu, congratulations…\n"

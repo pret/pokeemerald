@@ -71,18 +71,18 @@ SlateportCity_SternsShipyard_1F_Text_208008: @ 8208008
 	.string "goes over there…\p"
 	.string "Then where does this thing go?\n"
 	.string "And what about that doohickey?\p"
-	.string "Aaargh! I can’t make heads or tails\n"
+	.string "Aaargh! I can't make heads or tails\n"
 	.string "of this!$"
 
 SlateportCity_SternsShipyard_1F_Text_2080A5: @ 82080A5
 	.string "Hm?\n"
-	.string "Hi, I’m DOCK.\p"
+	.string "Hi, I'm DOCK.\p"
 	.string "CAPT. STERN commissioned me to\n"
 	.string "design a ferry.\p"
 	.string "Oh! That there…\n"
 	.string "Are they DEVON GOODS?\p"
 	.string "But, hmm…\n"
-	.string "This won’t do…\p"
+	.string "This won't do…\p"
 	.string "CAPT. STERN went off somewhere.\n"
 	.string "He said he had some work to do.\p"
 	.string "Could I get you to go find CAPT.\n"
@@ -96,13 +96,13 @@ SlateportCity_SternsShipyard_1F_Text_2081A5: @ 82081A5
 
 SlateportCity_SternsShipyard_1F_Text_208213: @ 8208213
 	.string "DOCK: Shipbuilding is an art.\p"
-	.string "A lot of things can’t be figured out\n"
+	.string "A lot of things can't be figured out\n"
 	.string "just by calculating.\p"
 	.string "I really could use advice from a veteran\n"
 	.string "who knows the seas…$"
 
 SlateportCity_SternsShipyard_1F_Text_2082A8: @ 82082A8
-	.string "DOCK: Hi! MR. BRINEY’s joined us to\n"
+	.string "DOCK: Hi! MR. BRINEY's joined us to\n"
 	.string "lend us his help.\p"
 	.string "Thanks to the veteran sailor, the\n"
 	.string "ferry is steadily coming together.$"
@@ -113,22 +113,22 @@ SlateportCity_SternsShipyard_1F_Text_208323: @ 8208323
 	.string "of technology!\p"
 	.string "But, I get the feeling that we can\n"
 	.string "make something even better.\p"
-	.string "You know, there’s never an end to\n"
-	.string "technology’s march.$"
+	.string "You know, there's never an end to\n"
+	.string "technology's march.$"
 
 SlateportCity_SternsShipyard_1F_Text_2083EE: @ 82083EE
 	.string "MR. BRINEY: Ah, {PLAYER}{KUN}!\n"
-	.string "It’s been too long!\p"
-	.string "Aye, since I met you, this old sea dog’s\n"
+	.string "It's been too long!\p"
+	.string "Aye, since I met you, this old sea dog's\n"
 	.string "been feeling frisky!\p"
-	.string "So I’ve decided to help DOCK make\n"
+	.string "So I've decided to help DOCK make\n"
 	.string "a ferry.\p"
 	.string "Aye, after all, a ferry would be able\n"
 	.string "to carry a lot of people.\p"
 	.string "But, you know, that DOCK is really\n"
 	.string "something special.\p"
 	.string "With his knack for technology and\n"
-	.string "my experience, I’m sure that we can\l"
+	.string "my experience, I'm sure that we can\l"
 	.string "build one great ship, aye!$"
 
 SlateportCity_SternsShipyard_1F_Text_208558: @ 8208558
@@ -136,7 +136,7 @@ SlateportCity_SternsShipyard_1F_Text_208558: @ 8208558
 	.string "the moon sits in the sky…\p"
 	.string "These and other conditions make\n"
 	.string "the sea change its expression.\p"
-	.string "That’s right!\n"
+	.string "That's right!\n"
 	.string "The sea is like a living thing!$"
 
 SlateportCity_SternsShipyard_1F_Text_2085FF: @ 82085FF

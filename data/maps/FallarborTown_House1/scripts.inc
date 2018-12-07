@@ -78,7 +78,7 @@ FallarborTown_House1_Text_200FEE: @ 8200FEE
 	.string "conned into telling TEAM MAGMA where\l"
 	.string "you can find METEORITES…\p"
 	.string "That METEORITE from METEOR FALLS…\n"
-	.string "It’s never going to be mine now…$"
+	.string "It's never going to be mine now…$"
 
 FallarborTown_House1_Text_2010A2: @ 82010A2
 	.string "Oh!\n"
@@ -88,7 +88,7 @@ FallarborTown_House1_Text_2010A2: @ 82010A2
 	.string "Is it the METEORITE that TEAM MAGMA\n"
 	.string "took from METEOR FALLS?\p"
 	.string "Please, may I have it?\p"
-	.string "I’m not asking for it for free.\n"
+	.string "I'm not asking for it for free.\n"
 	.string "How about in exchange for this TM?$"
 
 FallarborTown_House1_Text_201159: @ 8201159
@@ -97,18 +97,18 @@ FallarborTown_House1_Text_201159: @ 8201159
 	.string "Please use it!$"
 
 FallarborTown_House1_Text_2011A5: @ 82011A5
-	.string "PROF. COZMO: Oh, I can’t believe it.\n"
+	.string "PROF. COZMO: Oh, I can't believe it.\n"
 	.string "This is really, really great!\p"
 	.string "This is really going to help my research!$"
 
 FallarborTown_House1_Text_201212: @ 8201212
 	.string "PROF. COZMO: Oh, but…\n"
-	.string "I’m crushed with disappointment…$"
+	.string "I'm crushed with disappointment…$"
 
 FallarborTown_House1_Text_201249: @ 8201249
 	.string "PROF. COZMO: Please, may I have that\n"
 	.string "METEORITE?\p"
-	.string "I’m not asking for it for free.\n"
+	.string "I'm not asking for it for free.\n"
 	.string "How about in exchange for this TM?$"
 
 FallarborTown_House1_Text_2012BC: @ 82012BC
@@ -118,9 +118,9 @@ FallarborTown_House1_Text_2012BC: @ 82012BC
 
 FallarborTown_House1_Text_201310: @ 8201310
 	.string "Poor PROF. COZMO…\n"
-	.string "He’s so depressed… I feel sorry for him.$"
+	.string "He's so depressed… I feel sorry for him.$"
 
 FallarborTown_House1_Text_20134B: @ 820134B
 	.string "Look at PROF. COZMO…\n"
-	.string "He’s so happy! I think it’s cute.$"
+	.string "He's so happy! I think it's cute.$"
 

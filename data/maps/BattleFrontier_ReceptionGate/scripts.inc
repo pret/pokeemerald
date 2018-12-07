@@ -304,7 +304,7 @@ BattleFrontier_ReceptionGate_Text_2665B2: @ 82665B2
 BattleFrontier_ReceptionGate_Text_2665F7: @ 82665F7
 	.string "For a first-time visitor, we issue\n"
 	.string "the FRONTIER PASS.\p"
-	.string "It’s for use at all the facilities\n"
+	.string "It's for use at all the facilities\n"
 	.string "in the BATTLE FRONTIER.\p"
 	.string "Here you are!$"
 
@@ -321,7 +321,7 @@ BattleFrontier_ReceptionGate_Text_2666C6: @ 82666C6
 	.string "FRONTIER has to offer!$"
 
 BattleFrontier_ReceptionGate_Text_266703: @ 8266703
-	.string "???: Well, if it isn’t {PLAYER}{KUN}!\n"
+	.string "???: Well, if it isn't {PLAYER}{KUN}!\n"
 	.string "You came out here!$"
 
 BattleFrontier_ReceptionGate_Text_266733: @ 8266733
@@ -329,17 +329,17 @@ BattleFrontier_ReceptionGate_Text_266733: @ 8266733
 	.string "Good day to you, sir!$"
 
 BattleFrontier_ReceptionGate_Text_266764: @ 8266764
-	.string "SCOTT: It’s great to see you here,\n"
+	.string "SCOTT: It's great to see you here,\n"
 	.string "it really is!\p"
-	.string "I hope you’ll take your time and\n"
+	.string "I hope you'll take your time and\n"
 	.string "explore everywhere.\p"
-	.string "Naturally, I hope you’ll also experience\n"
+	.string "Naturally, I hope you'll also experience\n"
 	.string "the pure essence of battling.\p"
 	.string "I also have my quarters here, so feel\n"
 	.string "free to visit if you have time.$"
 
 BattleFrontier_ReceptionGate_Text_266857: @ 8266857
-	.string "I’m your guide to the various facilities\n"
+	.string "I'm your guide to the various facilities\n"
 	.string "here in the BATTLE FRONTIER.$"
 
 BattleFrontier_ReceptionGate_Text_26689D: @ 826689D
@@ -347,7 +347,7 @@ BattleFrontier_ReceptionGate_Text_26689D: @ 826689D
 
 BattleFrontier_ReceptionGate_Text_2668C2: @ 82668C2
 	.string "It is the gigantic tower considered\n"
-	.string "to be the BATTLE FRONTIER’s symbol.\p"
+	.string "to be the BATTLE FRONTIER's symbol.\p"
 	.string "There are four kinds of BATTLE ROOMS\n"
 	.string "in the tower for SINGLE, DOUBLE, MULTI,\l"
 	.string "and LINK MULTI BATTLES.$"
@@ -412,7 +412,7 @@ BattleFrontier_ReceptionGate_Text_266DCB: @ 8266DCB
 	.string "for fabulous prizes there.$"
 
 BattleFrontier_ReceptionGate_Text_266E66: @ 8266E66
-	.string "I’m your guide to the basic rules that\n"
+	.string "I'm your guide to the basic rules that\n"
 	.string "are common to all the challenges\l"
 	.string "offered by the facilities in the BATTLE\l"
 	.string "FRONTIER.$"
@@ -422,7 +422,7 @@ BattleFrontier_ReceptionGate_Text_266EE0: @ 8266EE0
 
 BattleFrontier_ReceptionGate_Text_266F04: @ 8266F04
 	.string "All the challenges at the BATTLE\n"
-	.string "FRONTIER’s facilities come in\l"
+	.string "FRONTIER's facilities come in\l"
 	.string "two courses--Level 50 and Open Level.$"
 
 BattleFrontier_ReceptionGate_Text_266F69: @ 8266F69
@@ -466,7 +466,7 @@ BattleFrontier_ReceptionGate_Text_267298: @ 8267298
 	.string "different items.$"
 
 BattleFrontier_ReceptionGate_Text_267357: @ 8267357
-	.string "I’m your guide to the FRONTIER PASS.$"
+	.string "I'm your guide to the FRONTIER PASS.$"
 
 BattleFrontier_ReceptionGate_Text_26737C: @ 826737C
 	.string "Which would you like to learn about?$"
@@ -480,7 +480,7 @@ BattleFrontier_ReceptionGate_Text_2673A1: @ 82673A1
 	.string "To earn a symbol, TRAINERS may need\n"
 	.string "to defeat other TRAINERS in a row,\l"
 	.string "and may need to win events repeatedly.\p"
-	.string "It’s certainly not easy to win symbols.\n"
+	.string "It's certainly not easy to win symbols.\n"
 	.string "I wish you the best of luck!$"
 
 BattleFrontier_ReceptionGate_Text_2674F3: @ 82674F3

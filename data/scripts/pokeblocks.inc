@@ -21,41 +21,41 @@ Text_Pblock1_Yes: @ 8292E28
 
 Text_Pblock1_No: @ 8292E33
 	.string "Oh…\n"
-	.string "You’ve made this old-timer sad…$"
+	.string "You've made this old-timer sad…$"
 
 Text_Pblock1_KnowHow: @ 8292E57
 	.string "Do you know how to make a {POKEBLOCK}?$"
 
 Text_Pblock1_Start: @ 8292E78
-	.string "Let’s get started, then!\p"
-	.string "Let’s BERRY BLENDER!$"
+	.string "Let's get started, then!\p"
+	.string "Let's BERRY BLENDER!$"
 
 Text_Pblock1_Explain: @ 8292EA6
 	.string "Okay, a little explanation, then.\p"
-	.string "Oh, don’t worry, it’s quite simple.\p"
-	.string "When the BLENDER’s arrow comes to\n"
+	.string "Oh, don't worry, it's quite simple.\p"
+	.string "When the BLENDER's arrow comes to\n"
 	.string "your marker, just press the A Button.\p"
-	.string "That’s all you have to do.\n"
-	.string "You’ll see how easy it is when you try.$"
+	.string "That's all you have to do.\n"
+	.string "You'll see how easy it is when you try.$"
 
 Text_Pblock1_NoBerries: @ 8292F77
 	.string "Oh?\n"
-	.string "You don’t have any BERRIES?\p"
-	.string "If you don’t have any BERRIES,\n"
-	.string "you can’t make any {POKEBLOCK}S.$"
+	.string "You don't have any BERRIES?\p"
+	.string "If you don't have any BERRIES,\n"
+	.string "you can't make any {POKEBLOCK}S.$"
 
 LilycoveCity_ContestLobby_Text_292FD1: @ 8292FD1
-	.string "Well, that won’t do at all now, will it?\p"
-	.string "If you don’t mind leftovers, you can\n"
+	.string "Well, that won't do at all now, will it?\p"
+	.string "If you don't mind leftovers, you can\n"
 	.string "have one of my BERRIES.\p"
 	.string "That way, we could make some {POKEBLOCK}S\n"
 	.string "together using the BERRY BLENDER.$"
 
 LilycoveCity_ContestLobby_Text_29307D: @ 829307D
 	.string "If I had some BERRIES left over,\n"
-	.string "I’d gladly give you one…\p"
-	.string "But, I don’t have any to spare today.\n"
-	.string "We’ll have to do this another time.$"
+	.string "I'd gladly give you one…\p"
+	.string "But, I don't have any to spare today.\n"
+	.string "We'll have to do this another time.$"
 
 Text_Pblock1_FullPokeblock: @ 8293101
 	.string "But your {POKEBLOCK} CASE is full.\p"
@@ -63,15 +63,15 @@ Text_Pblock1_FullPokeblock: @ 8293101
 	.string "you come see me again.$"
 
 Text_Pblock1_NoPokeblock: @ 8293157
-	.string "But you don’t have a {POKEBLOCK} CASE.\p"
+	.string "But you don't have a {POKEBLOCK} CASE.\p"
 	.string "You should get a {POKEBLOCK} CASE and then\n"
 	.string "come see me.$"
 
 LilycoveCity_ContestLobby_Text_2931AA: @ 82931AA
-	.string "Let’s get blending already!$"
+	.string "Let's get blending already!$"
 
 LilycoveCity_ContestLobby_Text_2931C6: @ 82931C6
-	.string "I wonder what kind of {POKEBLOCK} I’ll get?\n"
+	.string "I wonder what kind of {POKEBLOCK} I'll get?\n"
 	.string "This is so exciting!$"
 
 LilycoveCity_ContestLobby_Text_293201: @ 8293201
@@ -82,33 +82,33 @@ LilycoveCity_ContestLobby_Text_293237: @ 8293237
 	.string "Okay!$"
 
 LilycoveCity_ContestLobby_Text_29323D: @ 829323D
-	.string "That’s too bad…\p"
-	.string "But we’ll always be around whenever\n"
+	.string "That's too bad…\p"
+	.string "But we'll always be around whenever\n"
 	.string "you get the urge to blend!$"
 
 LilycoveCity_ContestLobby_Text_29328C: @ 829328C
 	.string "Of course, you do know how to\n"
-	.string "blend {POKEBLOCK}S, don’t you?$"
+	.string "blend {POKEBLOCK}S, don't you?$"
 
 LilycoveCity_ContestLobby_Text_2932C3: @ 82932C3
-	.string "Let’s get started, then!\p"
-	.string "Let’s BERRY BLENDER!$"
+	.string "Let's get started, then!\p"
+	.string "Let's BERRY BLENDER!$"
 
 LilycoveCity_ContestLobby_Text_2932F1: @ 82932F1
 	.string "Okay!\n"
 	.string "Let me explain it to you!\p"
-	.string "When the spinning BLENDER’s arrow\n"
+	.string "When the spinning BLENDER's arrow\n"
 	.string "reaches your marker, just press\l"
 	.string "the A Button.\p"
-	.string "That’s all it takes.\n"
-	.string "Pretty easy, don’t you think?$"
+	.string "That's all it takes.\n"
+	.string "Pretty easy, don't you think?$"
 
 LilycoveCity_ContestLobby_Text_293394: @ 8293394
 	.string "Oh, but wait a second here…\n"
-	.string "You don’t have any BERRIES.\p"
-	.string "You can’t make any {POKEBLOCK}S without\n"
+	.string "You don't have any BERRIES.\p"
+	.string "You can't make any {POKEBLOCK}S without\n"
 	.string "BERRIES…\p"
-	.string "We’ll always be around whenever you\n"
+	.string "We'll always be around whenever you\n"
 	.string "get hold of some BERRIES to blend.$"
 
 LilycoveCity_ContestLobby_Text_29343E: @ 829343E
@@ -119,7 +119,7 @@ LilycoveCity_ContestLobby_Text_29343E: @ 829343E
 
 LilycoveCity_ContestLobby_Text_2934A2: @ 82934A2
 	.string "Oh, but wait a second here…\n"
-	.string "You don’t have a {POKEBLOCK} CASE.\p"
+	.string "You don't have a {POKEBLOCK} CASE.\p"
 	.string "You should get a {POKEBLOCK} CASE and\n"
 	.string "then come back.$"
 
@@ -132,32 +132,32 @@ LilycoveCity_ContestLobby_Text_29354E: @ 829354E
 
 LilycoveCity_ContestLobby_Text_293558: @ 8293558
 	.string "Oh, dear me…\p"
-	.string "You’ve left us in shock!$"
+	.string "You've left us in shock!$"
 
 LilycoveCity_ContestLobby_Text_29357E: @ 829357E
 	.string "Naturally, you know how to make\n"
-	.string "{POKEBLOCK}S, don’t you?$"
+	.string "{POKEBLOCK}S, don't you?$"
 
 LilycoveCity_ContestLobby_Text_2935B1: @ 82935B1
 	.string "Okay, dear!\n"
-	.string "Let’s get started!\p"
-	.string "Let’s BERRY BLENDER!$"
+	.string "Let's get started!\p"
+	.string "Let's BERRY BLENDER!$"
 
 LilycoveCity_ContestLobby_Text_2935E5: @ 82935E5
 	.string "Oh, dear!\p"
-	.string "Then, I’ll explain it to you nicely.\p"
-	.string "When the BLENDER’s arrow spins to\n"
+	.string "Then, I'll explain it to you nicely.\p"
+	.string "When the BLENDER's arrow spins to\n"
 	.string "your marker, press the A Button.\p"
-	.string "That’s all it takes.\n"
-	.string "Isn’t it simple?$"
+	.string "That's all it takes.\n"
+	.string "Isn't it simple?$"
 
 LilycoveCity_ContestLobby_Text_29367D: @ 829367D
-	.string "You don’t have any BERRIES,\n"
+	.string "You don't have any BERRIES,\n"
 	.string "do you?\p"
-	.string "If you don’t have any BERRIES,\n"
-	.string "you can’t make any {POKEBLOCK}S.\p"
-	.string "We’ll always be making {POKEBLOCK}S here,\n"
-	.string "so let’s make some together when\l"
+	.string "If you don't have any BERRIES,\n"
+	.string "you can't make any {POKEBLOCK}S.\p"
+	.string "We'll always be making {POKEBLOCK}S here,\n"
+	.string "so let's make some together when\l"
 	.string "you get a BERRY or two.$"
 
 LilycoveCity_ContestLobby_Text_293738: @ 8293738
@@ -167,22 +167,22 @@ LilycoveCity_ContestLobby_Text_293738: @ 8293738
 	.string "and then come back.$"
 
 LilycoveCity_ContestLobby_Text_293792: @ 8293792
-	.string "You haven’t gotten a {POKEBLOCK} CASE\n"
+	.string "You haven't gotten a {POKEBLOCK} CASE\n"
 	.string "yet, it looks like.\p"
 	.string "You need to get a {POKEBLOCK} CASE before\n"
 	.string "you come back.$"
 
 LilycoveCity_ContestLobby_Text_2937F9: @ 82937F9
-	.string "Okay! Today’s going to be the day that\n"
+	.string "Okay! Today's going to be the day that\n"
 	.string "I set a new BLENDER speed record!$"
 
 LilycoveCity_ContestLobby_Text_293842: @ 8293842
 	.string "Oh, dear!\n"
-	.string "You look as if you’re good at blending.\l"
+	.string "You look as if you're good at blending.\l"
 	.string "Would you like to join us?$"
 
 LilycoveCity_ContestLobby_Text_29388F: @ 829388F
-	.string "I’m going to make delicious {POKEBLOCK}S\n"
+	.string "I'm going to make delicious {POKEBLOCK}S\n"
 	.string "and make my POKéMON cuter.$"
 
 Text_PblockLink_Ask: @ 82938CD
@@ -207,42 +207,42 @@ Text_PblockLink_3Arrived: @ 82939A5
 
 Text_PblockLink_NoBerries: @ 82939BD
 	.string "You have no BERRIES.\n"
-	.string "The BERRY BLENDER can’t be used.$"
+	.string "The BERRY BLENDER can't be used.$"
 
 Text_PblockLink_FullPokeblock: @ 82939F3
 	.string "Your {POKEBLOCK} CASE is full.\n"
-	.string "The BERRY BLENDER can’t be used.$"
+	.string "The BERRY BLENDER can't be used.$"
 
 Text_PblockLink_NoPokeblock: @ 8293A2D
-	.string "You don’t have a {POKEBLOCK} CASE.\n"
-	.string "The BERRY BLENDER can’t be used.$"
+	.string "You don't have a {POKEBLOCK} CASE.\n"
+	.string "The BERRY BLENDER can't be used.$"
 
 Text_Pblock1_Talk_0: @ 8293A6B
 	.string "I love making {POKEBLOCK}S.\p"
 	.string "I always have some BERRIES with me.$"
 
 Text_Pblock1_Talk_1: @ 8293AA5
-	.string "If you’d like, we could make some\n"
+	.string "If you'd like, we could make some\n"
 	.string "{POKEBLOCK}S together using the\l"
 	.string "BERRY BLENDER.$"
 
 LilycoveCity_ContestLobby_Text_293AF0: @ 8293AF0
 	.string "Oh?\n"
-	.string "You don’t have any BERRIES?\p"
-	.string "Well, that won’t do at all now, will it?\p"
-	.string "If you don’t mind leftovers, you can\n"
+	.string "You don't have any BERRIES?\p"
+	.string "Well, that won't do at all now, will it?\p"
+	.string "If you don't mind leftovers, you can\n"
 	.string "have one of my BERRIES.$"
 
 LilycoveCity_ContestLobby_Text_293B76: @ 8293B76
-	.string "We’ll use it to make {POKEBLOCK}S together\n"
+	.string "We'll use it to make {POKEBLOCK}S together\n"
 	.string "using the BERRY BLENDER.$"
 
 LilycoveCity_ContestLobby_Text_293BB4: @ 8293BB4
 	.string "Oh?\n"
-	.string "You don’t have any BERRIES?\p"
-	.string "If I had some left over, I’d gladly\n"
+	.string "You don't have any BERRIES?\p"
+	.string "If I had some left over, I'd gladly\n"
 	.string "give you one…\p"
-	.string "But, I don’t have any to spare today.\n"
+	.string "But, I don't have any to spare today.\n"
 	.string "Sorry about that.$"
 
 EventScript_Pblock1_Ask:: @ 8293C3E

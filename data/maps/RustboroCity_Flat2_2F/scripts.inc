@@ -28,12 +28,12 @@ RustboroCity_Flat2_2F_Text_21601A: @ 821601A
 	.string "a teeny, tiny company.$"
 
 RustboroCity_Flat2_2F_Text_21605A: @ 821605A
-	.string "My daddy’s working at the CORPORATION.\p"
+	.string "My daddy's working at the CORPORATION.\p"
 	.string "My daddy made this!\n"
-	.string "But I can’t use it, so you can have it.$"
+	.string "But I can't use it, so you can have it.$"
 
 RustboroCity_Flat2_2F_Text_2160BD: @ 82160BD
-	.string "My daddy’s working at the CORPORATION.\p"
-	.string "When I grow up, I’m going to work for\n"
+	.string "My daddy's working at the CORPORATION.\p"
+	.string "When I grow up, I'm going to work for\n"
 	.string "DEVON, too.$"
 

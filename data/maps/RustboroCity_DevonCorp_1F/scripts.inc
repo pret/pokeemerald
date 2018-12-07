@@ -90,7 +90,7 @@ RustboroCity_DevonCorp_1F_EventScript_211312:: @ 8211312
 RustboroCity_DevonCorp_1F_Text_21131B: @ 821131B
 	.string "Hello and welcome to the DEVON\n"
 	.string "CORPORATION.\p"
-	.string "We’re proud producers of items and\n"
+	.string "We're proud producers of items and\n"
 	.string "medicine that enhance your life.$"
 
 RustboroCity_DevonCorp_1F_Text_21138B: @ 821138B
@@ -99,37 +99,37 @@ RustboroCity_DevonCorp_1F_Text_21138B: @ 821138B
 
 RustboroCity_DevonCorp_1F_Text_2113D1: @ 82113D1
 	.string "Hey, those RUNNING SHOES!\n"
-	.string "They’re one of our products!\p"
+	.string "They're one of our products!\p"
 	.string "It makes me happy when I see someone\n"
 	.string "using something we made.$"
 
 RustboroCity_DevonCorp_1F_Text_211446: @ 8211446
 	.string "That stolen parcel…\p"
-	.string "Well, sure it’s important, but it’s not\n"
+	.string "Well, sure it's important, but it's not\n"
 	.string "anything that anyone can use.\p"
 	.string "In my estimation, that robber must not\n"
 	.string "have been very bright.$"
 
 RustboroCity_DevonCorp_1F_Text_2114DE: @ 82114DE
-	.string "It sounds like they’ve recovered\n"
+	.string "It sounds like they've recovered\n"
 	.string "the ripped-off DEVON GOODS.$"
 
 RustboroCity_DevonCorp_1F_Text_21151B: @ 821151B
-	.string "I’m sorry, only authorized people\n"
+	.string "I'm sorry, only authorized people\n"
 	.string "are allowed to enter here.$"
 
 RustboroCity_DevonCorp_1F_Text_211558: @ 8211558
-	.string "It’s beyond stupid.\n"
+	.string "It's beyond stupid.\n"
 	.string "How could we get robbed?$"
 
 RustboroCity_DevonCorp_1F_Text_211585: @ 8211585
 	.string "Hi, there!\n"
-	.string "You’re always welcome here!$"
+	.string "You're always welcome here!$"
 
 RustboroCity_DevonCorp_1F_Text_2115AC: @ 82115AC
 	.string "Samples of rocks and metal are\n"
 	.string "displayed in the glass case.\p"
-	.string "There’s a panel with some writing\n"
+	.string "There's a panel with some writing\n"
 	.string "on it…\p"
 	.string "“DEVON CORPORATION got its start as\n"
 	.string "a producer of stones from quarries.\p"
@@ -143,7 +143,7 @@ RustboroCity_DevonCorp_1F_Text_2115AC: @ 82115AC
 RustboroCity_DevonCorp_1F_Text_211722: @ 8211722
 	.string "Prototypes and test products fill\n"
 	.string "the glass display case.\p"
-	.string "There’s a panel with a description…\p"
+	.string "There's a panel with a description…\p"
 	.string "“In addition to industrial products,\n"
 	.string "DEVON now markets sundries and\l"
 	.string "pharmaceuticals for better lifestyles.\p"

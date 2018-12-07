@@ -26,7 +26,7 @@ SecretBase_RedCave1_Text_2748A0: @ 82748A0
 	.string "Have you made a SECRET BASE already?\p"
 	.string "I went here, there, everywhere before\n"
 	.string "choosing this place.\p"
-	.string "Since you’re already here, how would\n"
+	.string "Since you're already here, how would\n"
 	.string "you like to battle?$"
 
 SecretBase_RedCave1_Text_274939: @ 8274939
@@ -35,10 +35,10 @@ SecretBase_RedCave1_Text_274939: @ 8274939
 
 SecretBase_RedCave1_Text_27494D: @ 827494D
 	.string "Hunh?\n"
-	.string "Oh, you can’t now…$"
+	.string "Oh, you can't now…$"
 
 SecretBase_RedCave1_Text_274966:: @ 8274966
-	.string "Waaargh! You’re too strong!\n"
+	.string "Waaargh! You're too strong!\n"
 	.string "About me losing… Please keep it secret!$"
 
 SecretBase_RedCave1_Text_2749AA: @ 82749AA
@@ -52,10 +52,10 @@ SecretBase_RedCave1_Text_2749ED: @ 82749ED
 	.string "Feel free to hang out!$"
 
 SecretBase_RedCave1_Text_274A64: @ 8274A64
-	.string "There’re a lot of places where\n"
+	.string "There're a lot of places where\n"
 	.string "you can make a SECRET BASE.\p"
 	.string "But I like this spot best.\n"
-	.string "Don’t you think it’s nice?\p"
+	.string "Don't you think it's nice?\p"
 	.string "Oh, would you like to have a battle?$"
 
 SecretBase_RedCave1_Text_274AFA: @ 8274AFA
@@ -63,41 +63,41 @@ SecretBase_RedCave1_Text_274AFA: @ 8274AFA
 
 SecretBase_RedCave1_Text_274B0B: @ 8274B0B
 	.string "Oh…\n"
-	.string "You can’t now, okay.$"
+	.string "You can't now, okay.$"
 
 SecretBase_RedCave1_Text_274B24:: @ 8274B24
-	.string "Hmmm… It’s our loss…\n"
-	.string "But don’t tell anyone!\l"
-	.string "It’s a confidential secret!$"
+	.string "Hmmm… It's our loss…\n"
+	.string "But don't tell anyone!\l"
+	.string "It's a confidential secret!$"
 
 SecretBase_RedCave1_Text_274B6C: @ 8274B6C
-	.string "If you’re in this area again,\n"
-	.string "I hope you’ll visit me.$"
+	.string "If you're in this area again,\n"
+	.string "I hope you'll visit me.$"
 
 SecretBase_RedCave1_Text_274BA2: @ 8274BA2
-	.string "There’re a lot of places where you can\n"
+	.string "There're a lot of places where you can\n"
 	.string "make a SECRET BASE.\p"
 	.string "But I like this spot best.\n"
-	.string "Don’t you think it’s nice?$"
+	.string "Don't you think it's nice?$"
 
 SecretBase_RedCave1_Text_274C13: @ 8274C13
 	.string "This is a popular spot.\n"
-	.string "It’s always taken.\p"
+	.string "It's always taken.\p"
 	.string "Oh! Were you thinking about\n"
 	.string "taking this spot, too?\p"
-	.string "I’ll tell you what, you can have this\n"
+	.string "I'll tell you what, you can have this\n"
 	.string "spot if you can beat me.$"
 
 SecretBase_RedCave1_Text_274CB0: @ 8274CB0
 	.string "Okay!\n"
-	.string "I’m going to defend my SECRET BASE!$"
+	.string "I'm going to defend my SECRET BASE!$"
 
 SecretBase_RedCave1_Text_274CDA: @ 8274CDA
 	.string "Hunh? Is that right?\n"
-	.string "You’re not interested in this spot?$"
+	.string "You're not interested in this spot?$"
 
 SecretBase_RedCave1_Text_274D13:: @ 8274D13
-	.string "I can’t keep going!\n"
+	.string "I can't keep going!\n"
 	.string "I surrender!$"
 
 SecretBase_RedCave1_Text_274D34: @ 8274D34
@@ -106,7 +106,7 @@ SecretBase_RedCave1_Text_274D34: @ 8274D34
 
 SecretBase_RedCave1_Text_274D69: @ 8274D69
 	.string "This is a popular spot.\n"
-	.string "It’s always taken.\p"
+	.string "It's always taken.\p"
 	.string "I waited a long time for it to open.\n"
 	.string "I finally got to use it!$"
 
@@ -117,14 +117,14 @@ SecretBase_RedCave1_Text_274DD2: @ 8274DD2
 	.string "Would you like to see how strong I am?$"
 
 SecretBase_RedCave1_Text_274E41: @ 8274E41
-	.string "I’m going to go all out!$"
+	.string "I'm going to go all out!$"
 
 SecretBase_RedCave1_Text_274E5A: @ 8274E5A
 	.string "Oh.\n"
 	.string "Some other time, then!$"
 
 SecretBase_RedCave1_Text_274E75:: @ 8274E75
-	.string "Hmm… I’ve still got lots to learn.\n"
+	.string "Hmm… I've still got lots to learn.\n"
 	.string "I have to study some more.$"
 
 SecretBase_RedCave1_Text_274EB3: @ 8274EB3
@@ -144,14 +144,14 @@ SecretBase_RedCave1_Text_274F39: @ 8274F39
 	.string "So, how would you like a battle?$"
 
 SecretBase_RedCave1_Text_274FCA: @ 8274FCA
-	.string "That’s the way!$"
+	.string "That's the way!$"
 
 SecretBase_RedCave1_Text_274FDA: @ 8274FDA
-	.string "When you’re ready, give me a shout!$"
+	.string "When you're ready, give me a shout!$"
 
 SecretBase_RedCave1_Text_274FFE:: @ 8274FFE
 	.string "Aww! Done in!\n"
-	.string "But it’s still fun to battle!$"
+	.string "But it's still fun to battle!$"
 
 SecretBase_RedCave1_Text_27502A: @ 827502A
 	.string "Well, anyway, I should go buy some\n"
@@ -202,7 +202,7 @@ SecretBase_RedCave1_Text_275287: @ 8275287
 	.string "have a battle?$"
 
 SecretBase_RedCave1_Text_275315: @ 8275315
-	.string "I’m not going down easily!$"
+	.string "I'm not going down easily!$"
 
 SecretBase_RedCave1_Text_275330: @ 8275330
 	.string "Oh… Are you maybe tired from searching\n"
@@ -212,7 +212,7 @@ SecretBase_RedCave1_Text_275367:: @ 8275367
 	.string "I went down…$"
 
 SecretBase_RedCave1_Text_275374: @ 8275374
-	.string "Where’s your SECRET BASE?\n"
+	.string "Where's your SECRET BASE?\n"
 	.string "I should go visit you there.$"
 
 SecretBase_RedCave1_Text_2753AB: @ 82753AB
@@ -229,17 +229,17 @@ SecretBase_RedCave1_Text_275405: @ 8275405
 
 SecretBase_RedCave1_Text_2754B2: @ 82754B2
 	.string "This is my SECRET BASE.\n"
-	.string "I can’t lose!$"
+	.string "I can't lose!$"
 
 SecretBase_RedCave1_Text_2754D8: @ 82754D8
-	.string "I’ll battle with you anytime.$"
+	.string "I'll battle with you anytime.$"
 
 SecretBase_RedCave1_Text_2754F6:: @ 82754F6
 	.string "Huh?\n"
 	.string "Did I just lose?$"
 
 SecretBase_RedCave1_Text_27550C: @ 827550C
-	.string "I won’t lose at collecting decorations.\n"
+	.string "I won't lose at collecting decorations.\n"
 	.string "Come visit again!$"
 
 SecretBase_RedCave1_Text_275546: @ 8275546
@@ -253,22 +253,22 @@ SecretBase_RedCave1_Text_2755D2: @ 82755D2
 	.string "with my favorite decorations.\p"
 	.string "I raise my favorite POKéMON and grow\n"
 	.string "stronger with it.\p"
-	.string "That’s what I do.\n"
+	.string "That's what I do.\n"
 	.string "Want to battle with me?$"
 
 SecretBase_RedCave1_Text_275679: @ 8275679
-	.string "Show me what you’re made of!$"
+	.string "Show me what you're made of!$"
 
 SecretBase_RedCave1_Text_275696: @ 8275696
-	.string "I guess there are times when you’re not\n"
+	.string "I guess there are times when you're not\n"
 	.string "into it.$"
 
 SecretBase_RedCave1_Text_2756C7:: @ 82756C7
-	.string "I know exactly what you’re made of now.$"
+	.string "I know exactly what you're made of now.$"
 
 SecretBase_RedCave1_Text_2756EF: @ 82756EF
 	.string "We can both become stronger.\n"
-	.string "Let’s keep at it!$"
+	.string "Let's keep at it!$"
 
 SecretBase_RedCave1_Text_27571E: @ 827571E
 	.string "I found a spot I liked, and I did it up\n"
@@ -287,19 +287,19 @@ SecretBase_RedCave1_Text_2757B5: @ 82757B5
 	.string "Want to see my taste in battling?$"
 
 SecretBase_RedCave1_Text_275884: @ 8275884
-	.string "There’s no holding back!$"
+	.string "There's no holding back!$"
 
 SecretBase_RedCave1_Text_27589D: @ 827589D
-	.string "I’ll be happy to demonstrate my style\n"
+	.string "I'll be happy to demonstrate my style\n"
 	.string "anytime.$"
 
 SecretBase_RedCave1_Text_2758CC:: @ 82758CC
-	.string "You’re supremely talented!\n"
+	.string "You're supremely talented!\n"
 	.string "Your power seems to be limitless…$"
 
 SecretBase_RedCave1_Text_275909: @ 8275909
 	.string "What did you think of my style?\n"
-	.string "I’ll keep on polishing it!$"
+	.string "I'll keep on polishing it!$"
 
 SecretBase_RedCave1_Text_275944: @ 8275944
 	.string "You can learn a lot about the taste\n"
@@ -1056,7 +1056,7 @@ Text_2766AA: @ 82766AA
 
 Text_276707: @ 8276707
 	.string "Do you want to register\n"
-	.string "{STR_VAR_1}’s SECRET BASE?$"
+	.string "{STR_VAR_1}'s SECRET BASE?$"
 
 Text_276731: @ 8276731
 	.string "This data is already registered.\n"

@@ -293,12 +293,12 @@ LittlerootTown_BrendansHouse_2F_Text_1F8668: @ 81F8668
 LittlerootTown_BrendansHouse_2F_Text_1F869A: @ 81F869A
 	.string "MOM: {PLAYER}, how do you like your\n"
 	.string "new room?\p"
-	.string "Good! Everything’s put away neatly!\p"
+	.string "Good! Everything's put away neatly!\p"
 	.string "They finished moving everything in\n"
 	.string "downstairs, too.\p"
 	.string "POKéMON movers are so convenient!\p"
 	.string "Oh, you should make sure that\n"
-	.string "everything’s all there on your desk.$"
+	.string "everything's all there on your desk.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F877F: @ 81F877F
 	.string "{PLAYER} flipped open the notebook.\p"
@@ -313,6 +313,6 @@ LittlerootTown_BrendansHouse_2F_Text_1F8820: @ 81F8820
 	.string "HOENN region map.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F884F: @ 81F884F
-	.string "It’s a Nintendo GameCube.\p"
+	.string "It's a Nintendo GameCube.\p"
 	.string "A Game Boy Advance is connected to\n"
 	.string "serve as the Controller.$"

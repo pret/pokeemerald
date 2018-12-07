@@ -70,7 +70,7 @@ FortreeCity_House4_Text_217D33: @ 8217D33
 	.string "By being together with POKéMON,\n"
 	.string "people make more and more friends.\p"
 	.string "And that brings the world closer\n"
-	.string "together. I think it’s wonderful!$"
+	.string "together. I think it's wonderful!$"
 
 FortreeCity_House4_Text_217DB9: @ 8217DB9
 	.string "There!\n"
@@ -87,7 +87,7 @@ FortreeCity_House4_Text_217E05: @ 8217E05
 	.string "What is it holding?\p"
 	.string "A MENTAL HERB?\n"
 	.string "It must have picked it up somewhere.\p"
-	.string "But I’m not a TRAINER, so you can\n"
+	.string "But I'm not a TRAINER, so you can\n"
 	.string "have it.$"
 
 FortreeCity_House4_Text_217EA8: @ 8217EA8

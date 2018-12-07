@@ -295,8 +295,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_270F63:: @ 8270F63
 	end
 
 Route124_DivingTreasureHuntersHouse_Text_270F6C: @ 8270F6C
-	.string "I’m the DIVING TREASURE HUNTER!\p"
-	.string "I’m the awesome dude who makes\n"
+	.string "I'm the DIVING TREASURE HUNTER!\p"
+	.string "I'm the awesome dude who makes\n"
 	.string "deep-sea dives to gather treasures\l"
 	.string "resting at the bottom.$"
 
@@ -305,37 +305,37 @@ Route124_DivingTreasureHuntersHouse_Text_270FE5: @ 8270FE5
 	.string "tools made in ancient times?$"
 
 Route124_DivingTreasureHuntersHouse_Text_271027: @ 8271027
-	.string "You haven’t got any treasures\n"
+	.string "You haven't got any treasures\n"
 	.string "for me…\p"
 	.string "If you see any SHARDS, like the RED\n"
-	.string "SHARD, you’ve got to trade it with me!$"
+	.string "SHARD, you've got to trade it with me!$"
 
 Route124_DivingTreasureHuntersHouse_Text_271098: @ 8271098
 	.string "Oh, hey! That…\n"
-	.string "That’s a SHARD! I’m looking for those!\p"
-	.string "Oh, man, you’ve got to trade that\n"
-	.string "with me! I’ll give you something good!$"
+	.string "That's a SHARD! I'm looking for those!\p"
+	.string "Oh, man, you've got to trade that\n"
+	.string "with me! I'll give you something good!$"
 
 Route124_DivingTreasureHuntersHouse_Text_271117: @ 8271117
 	.string "What do you want to trade?$"
 
 Route124_DivingTreasureHuntersHouse_Text_271132: @ 8271132
-	.string "You’ll trade your {STR_VAR_1} for\n"
+	.string "You'll trade your {STR_VAR_1} for\n"
 	.string "my {STR_VAR_2}, then?$"
 
 Route124_DivingTreasureHuntersHouse_Text_271158: @ 8271158
-	.string "It’s a done deal!\n"
+	.string "It's a done deal!\n"
 	.string "Use that wisely!$"
 
 Route124_DivingTreasureHuntersHouse_Text_27117B: @ 827117B
 	.string "Do you want to trade something else?$"
 
 Route124_DivingTreasureHuntersHouse_Text_2711A0: @ 82711A0
-	.string "Whoops, your BAG’s full.\n"
+	.string "Whoops, your BAG's full.\n"
 	.string "Get rid of some items, friend!$"
 
 Route124_DivingTreasureHuntersHouse_Text_2711D8: @ 82711D8
-	.string "No? That’s a downer.\n"
+	.string "No? That's a downer.\n"
 	.string "Well, if you change your mind, come back.$"
 
 Route124_DivingTreasureHuntersHouse_Text_271217: @ 8271217

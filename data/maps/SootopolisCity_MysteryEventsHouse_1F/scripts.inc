@@ -182,7 +182,7 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_227B43: @ 8227B43
 SootopolisCity_MysteryEventsHouse_1F_Text_227B46: @ 8227B46
 	.string "When I was young, I traveled the world\n"
 	.string "as a POKéMON TRAINER.\p"
-	.string "Now that I’ve become an old buzzard,\n"
+	.string "Now that I've become an old buzzard,\n"
 	.string "my only amusement is watching young\l"
 	.string "TRAINERS battle.$"
 
@@ -196,12 +196,12 @@ SootopolisCity_MysteryEventsHouse_1F_Text_227BFC: @ 8227BFC
 	.string "{STR_VAR_1}?$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227C44: @ 8227C44
-	.string "You won’t battle? I’m disappointed\n"
-	.string "that I can’t see you battle…$"
+	.string "You won't battle? I'm disappointed\n"
+	.string "that I can't see you battle…$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227C84: @ 8227C84
 	.string "Oh, good, good!\p"
-	.string "But my house isn’t all that sturdy.\p"
+	.string "But my house isn't all that sturdy.\p"
 	.string "Could I ask you to keep it down to\n"
 	.string "a 3-on-3 match?$"
 
