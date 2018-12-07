@@ -1,19 +1,25 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_interface.h"
 #include "bg.h"
+#include "constants/battle.h"
+#include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "contest.h"
+#include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "fldeff_softboiled.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
 #include "main.h"
+#include "mail.h"
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -21,6 +27,7 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
+#include "rom_8011DC0.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
@@ -28,11 +35,16 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "text_window.h"
 #include "window.h"
 
 struct Unk_Rodata1 {
     void (*unk0)(u8, u8, u8, u8, u8, u8);
-    u32 unk4[7];
+    u8 unk4[24];
+    u8 unk1C;
+    u8 unk1D;
+    u8 unk1E;
+    u8 unk1F;
 };
 
 struct Unk_203CEC4 {
@@ -52,7 +64,7 @@ struct Unk_203CEC4 {
 
 struct Unk_203CEDC {
     struct Unk_Rodata1 *unk0;
-    u32 *unk4;
+    u8 *unk4;
     u8 unk8;
     u8 unk9;
     u8 unkA;
@@ -78,12 +90,57 @@ extern u8 gUnknown_0203CEF8[];
 
 // BELOW TO BE CONVERTED TO C
 
+extern u32 gUnknown_08615048[]; // tutor compatibility table
 extern struct BgTemplate gUnknown_086156B8[];
 extern struct Unk_Rodata1 gUnknown_086156C4[2];
 // extern struct Unk_Rodata1 gUnknown_086156E4;
-extern u32 gUnknown_08615704[][6][2];
+extern u8 gUnknown_08615704[][6][8];
 extern u8 gUnknown_086157C4[];
 extern u8 gUnknown_086157E0[];
+extern const u8 gUnknown_086157FC[][3];
+extern struct WindowTemplate gUnknown_08615810[];
+extern struct WindowTemplate gUnknown_08615850[];
+extern struct WindowTemplate gUnknown_086158D0[];
+extern struct WindowTemplate gUnknown_08615890[];
+extern struct WindowTemplate gUnknown_08615908;
+extern struct WindowTemplate gUnknown_08615910;
+extern struct WindowTemplate gUnknown_08615918;
+extern struct WindowTemplate gUnknown_08615920;
+extern struct WindowTemplate gUnknown_08615928;
+extern struct WindowTemplate gUnknown_08615930;
+extern struct WindowTemplate gUnknown_08615938;
+extern struct WindowTemplate gUnknown_08615940;
+extern struct WindowTemplate gUnknown_08615948;
+extern u8 gUnknown_08615988[];
+extern u8 gUnknown_086159CE[];
+extern u8 gUnknown_08615A14[];
+extern u8 gUnknown_08615A4A[];
+extern u8 gUnknown_08615A80[];
+extern u8 gUnknown_08615AB6[];
+extern u8 gUnknown_08615AB8[];
+extern u8 gUnknown_08615ABA[];
+extern u8 gUnknown_08615ABD[];
+extern u8 gUnknown_08615AC0[];
+extern u8 gUnknown_08615AC3[];
+extern u8 gUnknown_08615AC5[];
+extern u8 gUnknown_08615AC7[];
+extern u8 gUnknown_08615AC9[];
+extern u8 gUnknown_08615ACB[];
+extern u8 gUnknown_08615ACD[];
+extern u8 gUnknown_08615AD0[];
+extern u8 gUnknown_08615AD3[];
+extern u8 gUnknown_08615AD6[];
+extern u8 gUnknown_08615AD9[];
+extern u8 gUnknown_08615ADC[];
+extern u8 gUnknown_08615ADF[];
+extern u8 gUnknown_08615AE2[];
+extern u8 gUnknown_08615AE5[];
+extern u8 gUnknown_08615AE8[];
+extern u8 gUnknown_08615AEB[];
+extern u8 gUnknown_08615AEE[];
+extern u8 gUnknown_08615AF1[];
+extern const u8 *gUnknown_08615AF4[];
+extern const u8 *gUnknown_08615B60[];
 
 // ABOVE TO BE CONVERTED TO C
 
@@ -132,7 +189,7 @@ bool8 sub_81B85AC(struct Pokemon *);
 bool8 sub_81B218C(u8);
 void sub_81B0C94(u8, u16, u8);
 u8 sub_81B22D8(struct Pokemon *, u16, u8);
-void sub_81B2A3C(u8, u8*, u8, u32*);
+void sub_81B2A3C(u8, const u8*, u8, u8*);
 void sub_81B2B40(u8, struct Unk_203CEDC *);
 void sub_81B2BF4(u8, u16, u8*, struct Unk_203CEDC *);
 void sub_81B2D3C(u16, struct Unk_203CEDC *);
@@ -182,7 +239,21 @@ void sub_81B1708(u8);
 bool8 sub_81B1BD4(void);
 void sub_81B1C1C(u8);
 void sub_81B8558(void);
-void sub_81B17F8(s8*);
+void sub_81B17F8(s8*, s8);
+void sub_81B1854(s8*, s8);
+void sub_81B195C(s8*, s8);
+s8 sub_81B1B00(s8, s8);
+void sub_81B3300(const u8*);
+void sub_81B1B8C(u8);
+void sub_81B2CD4(struct Pokemon*, struct Unk_203CEDC*, u8);
+void sub_81B2E28(struct Pokemon*, struct Unk_203CEDC*);
+bool16 sub_81B2134(struct Pokemon*);
+bool16 sub_81B2164(struct Pokemon*);
+void sub_81B2248(u8);
+void sub_81B227C(u8);
+bool8 sub_81B2370(u16, u8);
+u16 sub_81B2360(u8);
+bool8 sub_81B314C(void);
 
 void sub_81B0038(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc f, MainCallback g)
 {
@@ -642,7 +713,7 @@ void sub_81B0B08(u8 slot)
 
 void sub_81B0B60(u8 slot)
 {
-    if (!GetNumberOfRelearnableMoves(&gPlayerParty[slot]))
+    if (GetNumberOfRelearnableMoves(&gPlayerParty[slot]) == 0)
         sub_81B0A10(slot, 9);
     else
         sub_81B0A10(slot, 8);
@@ -1139,7 +1210,7 @@ void sub_81B1708(u8 taskId)
     }
 }
 
-/* u16 sub_81B1760(s8* ptr)
+u16 sub_81B1760(s8 *ptr)
 {
     s8 r1;
     
@@ -1175,9 +1246,9 @@ void sub_81B1708(u8 taskId)
     if (gMain.newKeys & START_BUTTON)
         return 8;
     
-    if ((s8)r1)
+    if (r1)
     {
-        sub_81B17F8(ptr);
+        sub_81B17F8(ptr, r1);
         return 0;
     }
     
@@ -1185,4 +1256,1530 @@ void sub_81B1708(u8 taskId)
         return 2;
     
     return gMain.newKeys & (A_BUTTON | B_BUTTON);
-} */
+}
+
+#ifdef NONMATCHING
+void sub_81B17F8(s8 *ptr, s8 b)
+{
+    s8 slot = *ptr;
+    
+    if (!gUnknown_0203CEC8.unk8_1)
+        sub_81B1854(ptr, b);
+    else
+        sub_81B195C(ptr, b);
+    
+    if (*ptr != slot)
+    {
+        PlaySE(SE_SELECT);
+        sub_81B0FCC(slot, 0);
+        sub_81B0FCC(*ptr, 1);
+    }
+}
+#else
+NAKED
+void sub_81B17F8(s8 *ptr, s8 b)
+{
+    asm_unified("push {r4,r5,lr}\n\
+	adds r5, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	ldrb r4, [r5]\n\
+	ldr r0, =gUnknown_0203CEC8\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 26\n\
+	lsrs r0, 30\n\
+	cmp r0, 0\n\
+	bne _081B1820\n\
+	lsls r1, 24\n\
+	asrs r1, 24\n\
+	adds r0, r5, 0\n\
+	bl sub_81B1854\n\
+	b _081B182A\n\
+	.pool\n\
+_081B1820:\n\
+	lsls r1, 24\n\
+	asrs r1, 24\n\
+	adds r0, r5, 0\n\
+	bl sub_81B195C\n\
+_081B182A:\n\
+	movs r1, 0\n\
+	ldrsb r1, [r5, r1]\n\
+	lsls r4, 24\n\
+	asrs r0, r4, 24\n\
+	cmp r1, r0\n\
+	beq _081B184C\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	lsrs r0, r4, 24\n\
+	movs r1, 0\n\
+	bl sub_81B0FCC\n\
+	ldrb r0, [r5]\n\
+	movs r1, 0x1\n\
+	bl sub_81B0FCC\n\
+_081B184C:\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n");
+}
+#endif
+
+#ifdef NONMATCHING
+void sub_81B1854(s8 *ptr, s8 b)
+{
+    u8 r0r2;
+    
+    switch (b)
+    {
+        case -1:
+            r0r2 = *ptr;
+            if (*ptr == 0)
+            {
+                *ptr = 7;
+            }
+            else if (*ptr == 6)
+            {
+                *ptr = gPlayerPartyCount - 1;
+            }
+            else if (*ptr == 7)
+            {
+                if (gUnknown_0203CEC4->unk8_0)
+                    *ptr = 6;
+                else
+                    *ptr = gPlayerPartyCount - 1;
+            }
+            else
+            {
+                *ptr = r0r2 - 1;
+            }
+            break;
+        case 1:
+            r0r2 = *ptr;
+            if (*ptr != 7)
+            {
+                if ((u32)*ptr == gPlayerPartyCount - 1)
+                {
+                    if (gUnknown_0203CEC4->unk8_0)
+                        *ptr = 6;
+                    else
+                        *ptr = 7;
+                }
+                else
+                {
+                    *ptr = r0r2 + 1;
+                }
+            }
+            else
+            {
+                *ptr = 0;
+            }
+            break;
+        case 2:
+            if (gPlayerPartyCount != 1 && *ptr == 0)
+            {
+                if (gUnknown_0203CEC4->unk8_1 == 0)
+                    *ptr = 1;
+                else
+                    *ptr = gUnknown_0203CEC4->unk8_1;
+            }
+            break;
+        case -2:
+            if (*ptr != 0 && *ptr != 6 && *ptr != 7)
+            {
+                gUnknown_0203CEC4->unk8_1 = *ptr;
+                *ptr = 0;
+            }
+            break;
+    }
+}
+#else
+NAKED
+void sub_81B1854(s8 *ptr, s8 b)
+{
+    asm_unified("push {r4,lr}\n\
+	adds r4, r0, 0\n\
+	lsls r1, 24\n\
+	asrs r1, 24\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	cmp r1, r0\n\
+	beq _081B187A\n\
+	cmp r1, r0\n\
+	bgt _081B1870\n\
+	subs r0, 0x1\n\
+	cmp r1, r0\n\
+	beq _081B1924\n\
+	b _081B1952\n\
+_081B1870:\n\
+	cmp r1, 0x1\n\
+	beq _081B18C0\n\
+	cmp r1, 0x2\n\
+	beq _081B18F8\n\
+	b _081B1952\n\
+_081B187A:\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0\n\
+	ldrsb r1, [r4, r1]\n\
+	cmp r1, 0\n\
+	bne _081B1888\n\
+	movs r0, 0x7\n\
+	b _081B1950\n\
+_081B1888:\n\
+	cmp r1, 0x6\n\
+	bne _081B1898\n\
+	ldr r0, =gPlayerPartyCount\n\
+	ldrb r0, [r0]\n\
+	subs r0, 0x1\n\
+	b _081B1950\n\
+	.pool\n\
+_081B1898:\n\
+	cmp r1, 0x7\n\
+	bne _081B18BC\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 31\n\
+	cmp r0, 0\n\
+	beq _081B18B0\n\
+	movs r0, 0x6\n\
+	b _081B1950\n\
+	.pool\n\
+_081B18B0:\n\
+	ldr r0, =gPlayerPartyCount\n\
+	ldrb r0, [r0]\n\
+	subs r0, 0x1\n\
+	b _081B1950\n\
+	.pool\n\
+_081B18BC:\n\
+	subs r0, 0x1\n\
+	b _081B1950\n\
+_081B18C0:\n\
+	ldrb r2, [r4]\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	cmp r0, 0x7\n\
+	beq _081B194E\n\
+	movs r1, 0\n\
+	ldrsb r1, [r4, r1]\n\
+	ldr r0, =gPlayerPartyCount\n\
+	ldrb r0, [r0]\n\
+	subs r0, 0x1\n\
+	cmp r1, r0\n\
+	bne _081B18F4\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 31\n\
+	cmp r0, 0\n\
+	beq _081B18F0\n\
+	movs r0, 0x6\n\
+	b _081B1950\n\
+	.pool\n\
+_081B18F0:\n\
+	movs r0, 0x7\n\
+	b _081B1950\n\
+_081B18F4:\n\
+	adds r0, r2, 0x1\n\
+	b _081B1950\n\
+_081B18F8:\n\
+	ldr r0, =gPlayerPartyCount\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x1\n\
+	beq _081B1952\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	cmp r0, 0\n\
+	bne _081B1952\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 28\n\
+	lsrs r0, 29\n\
+	cmp r0, 0\n\
+	bne _081B1950\n\
+	movs r0, 0x1\n\
+	b _081B1950\n\
+	.pool\n\
+_081B1924:\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	cmp r0, 0\n\
+	beq _081B1952\n\
+	cmp r0, 0x6\n\
+	beq _081B1952\n\
+	cmp r0, 0x7\n\
+	beq _081B1952\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r3, [r0]\n\
+	movs r1, 0\n\
+	ldrsb r1, [r4, r1]\n\
+	movs r0, 0x7\n\
+	ands r1, r0\n\
+	lsls r1, 1\n\
+	ldrb r2, [r3, 0x8]\n\
+	movs r0, 0xF\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	orrs r0, r1\n\
+	strb r0, [r3, 0x8]\n\
+_081B194E:\n\
+	movs r0, 0\n\
+_081B1950:\n\
+	strb r0, [r4]\n\
+_081B1952:\n\
+	pop {r4}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .pool\n");
+}
+#endif
+
+#ifdef NONMATCHING
+void sub_81B195C(s8 *ptr, s8 b)
+{
+    u8 unk;
+    s8 unk2 = b;
+    u8 unk3;
+    
+    switch (b)
+    {
+        case -1:
+            unk = *ptr;
+            if (*ptr == 0)
+            {
+                *ptr = 7;
+            }
+            else if (*ptr == 6)
+            {
+                *ptr = gPlayerPartyCount - 1;
+            }
+            else if (*ptr == 7)
+            {
+                if (gUnknown_0203CEC4->unk8_0)
+                {
+                    *ptr = 6;
+                }
+                else
+                {
+                    *ptr = unk - 1;
+                    unk2 = sub_81B1B00(*ptr, unk2);
+                    if (unk2 != -1)
+                        *ptr = unk2;
+                }
+            }
+            else
+            {
+                unk2 = sub_81B1B00(*ptr, unk2);
+                if (unk2 != -1)
+                    *ptr = unk2;
+            }
+            break;
+        case 1:
+            if (*ptr == 6)
+            {
+                *ptr = 7;
+            }
+            else if (*ptr == 7)
+            {
+                *ptr = 0;
+            }
+            else
+            {
+                unk2 = sub_81B1B00(*ptr, 1);
+                if (unk2 == -1)
+                {
+                    if (gUnknown_0203CEC4->unk8_0)
+                        *ptr = 6;
+                    else
+                        *ptr = 7;
+                }
+                else
+                {
+                    *ptr = unk2;
+                }
+            }
+            break;
+        case 2:
+            if (*ptr == 0)
+            {
+                if (gUnknown_0203CEC4->unk8_1 == 3)
+                {
+                    if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE)
+                        *ptr = 3;
+                }
+                else if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE)
+                {
+                    *ptr = 2;
+                }
+            }
+            else if (*ptr == 1)
+            {
+                if (gUnknown_0203CEC4->unk8_1 == 5)
+                {
+                    if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
+                        *ptr = 5;
+                }
+                else if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE)
+                {
+                    *ptr = 4;
+                }
+            }
+            break;
+        case -2:
+            unk3 = *ptr - 2;
+            if (unk3 <= 1)
+            {
+                gUnknown_0203CEC4->unk8_1 = *ptr;
+                *ptr = 0;
+            }
+            else 
+            {
+                unk3 = *ptr - 4;
+                if (unk3 <= 1)
+                {
+                    gUnknown_0203CEC4->unk8_1 = *ptr;
+                    *ptr = 1;
+                }
+            }
+            break;
+    }
+}
+#else
+NAKED
+void sub_81B195C(s8 *ptr, s8 b)
+{
+    asm_unified("push {r4-r6,lr}\n\
+	adds r4, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r2, r1, 24\n\
+	asrs r5, r1, 24\n\
+	movs r6, 0x1\n\
+	negs r6, r6\n\
+	cmp r5, r6\n\
+	beq _081B1988\n\
+	cmp r5, r6\n\
+	bgt _081B197E\n\
+	movs r0, 0x2\n\
+	negs r0, r0\n\
+	cmp r5, r0\n\
+	bne _081B197C\n\
+	b _081B1A9C\n\
+_081B197C:\n\
+	b _081B1AF4\n\
+_081B197E:\n\
+	cmp r5, 0x1\n\
+	beq _081B19E4\n\
+	cmp r5, 0x2\n\
+	beq _081B1A24\n\
+	b _081B1AF4\n\
+_081B1988:\n\
+	ldrb r1, [r4]\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	cmp r0, 0\n\
+	bne _081B1996\n\
+	movs r0, 0x7\n\
+	b _081B1AF2\n\
+_081B1996:\n\
+	cmp r0, 0x6\n\
+	bne _081B19A8\n\
+	ldr r0, =gPlayerPartyCount\n\
+	ldrb r0, [r0]\n\
+	subs r0, 0x1\n\
+	b _081B1AF2\n\
+	.pool\n\
+_081B19A8:\n\
+	cmp r0, 0x7\n\
+	bne _081B19C4\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 31\n\
+	cmp r0, 0\n\
+	beq _081B19C0\n\
+	movs r0, 0x6\n\
+	b _081B1AF2\n\
+	.pool\n\
+_081B19C0:\n\
+	subs r0, r1, 0x1\n\
+	strb r0, [r4]\n\
+_081B19C4:\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	lsls r1, r2, 24\n\
+	asrs r1, 24\n\
+	bl sub_81B1B00\n\
+	lsls r0, 24\n\
+	lsrs r2, r0, 24\n\
+	asrs r0, 24\n\
+	movs r1, 0x1\n\
+	negs r1, r1\n\
+	cmp r0, r1\n\
+	bne _081B19E0\n\
+	b _081B1AF4\n\
+_081B19E0:\n\
+	strb r2, [r4]\n\
+	b _081B1AF4\n\
+_081B19E4:\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	cmp r0, 0x6\n\
+	bne _081B19F0\n\
+	movs r0, 0x7\n\
+	b _081B1AF2\n\
+_081B19F0:\n\
+	cmp r0, 0x7\n\
+	bne _081B19F8\n\
+	movs r0, 0\n\
+	b _081B1AF2\n\
+_081B19F8:\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	movs r1, 0x1\n\
+	bl sub_81B1B00\n\
+	lsls r0, 24\n\
+	lsrs r2, r0, 24\n\
+	asrs r0, 24\n\
+	cmp r0, r6\n\
+	bne _081B19E0\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 31\n\
+	cmp r0, 0\n\
+	beq _081B1A20\n\
+	movs r0, 0x6\n\
+	b _081B1AF2\n\
+	.pool\n\
+_081B1A20:\n\
+	movs r0, 0x7\n\
+	b _081B1AF2\n\
+_081B1A24:\n\
+	movs r0, 0\n\
+	ldrsb r0, [r4, r0]\n\
+	cmp r0, 0\n\
+	bne _081B1A5C\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 28\n\
+	lsrs r6, r0, 29\n\
+	cmp r6, 0x3\n\
+	bne _081B1A54\n\
+	ldr r0, =gPlayerParty + 300\n\
+	movs r1, 0xB\n\
+	bl GetMonData\n\
+	cmp r0, 0\n\
+	beq _081B1AF4\n\
+	strb r6, [r4]\n\
+	b _081B1AF4\n\
+	.pool\n\
+_081B1A54:\n\
+	ldr r0, =gPlayerParty + 200\n\
+	b _081B1A70\n\
+	.pool\n\
+_081B1A5C:\n\
+	cmp r0, 0x1\n\
+	bne _081B1AF4\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r0, [r0]\n\
+	ldrb r0, [r0, 0x8]\n\
+	lsls r0, 28\n\
+	lsrs r5, r0, 29\n\
+	cmp r5, 0x5\n\
+	bne _081B1A88\n\
+	ldr r0, =gPlayerParty + 500\n\
+_081B1A70:\n\
+	movs r1, 0xB\n\
+	bl GetMonData\n\
+	cmp r0, 0\n\
+	beq _081B1AF4\n\
+	strb r5, [r4]\n\
+	b _081B1AF4\n\
+	.pool\n\
+_081B1A88:\n\
+	ldr r0, =gPlayerParty + 400\n\
+	movs r1, 0xB\n\
+	bl GetMonData\n\
+	cmp r0, 0\n\
+	beq _081B1AF4\n\
+	movs r0, 0x4\n\
+	b _081B1AF2\n\
+	.pool\n\
+_081B1A9C:\n\
+	ldrb r1, [r4]\n\
+	subs r0, r1, 0x2\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	bhi _081B1ACC\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r3, [r0]\n\
+	movs r1, 0\n\
+	ldrsb r1, [r4, r1]\n\
+	movs r0, 0x7\n\
+	ands r1, r0\n\
+	lsls r1, 1\n\
+	ldrb r2, [r3, 0x8]\n\
+	movs r0, 0xF\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	orrs r0, r1\n\
+	strb r0, [r3, 0x8]\n\
+	movs r0, 0\n\
+	b _081B1AF2\n\
+	.pool\n\
+_081B1ACC:\n\
+	subs r0, r1, 0x4\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	bhi _081B1AF4\n\
+	ldr r0, =gUnknown_0203CEC4\n\
+	ldr r3, [r0]\n\
+	movs r1, 0\n\
+	ldrsb r1, [r4, r1]\n\
+	movs r0, 0x7\n\
+	ands r1, r0\n\
+	lsls r1, 1\n\
+	ldrb r2, [r3, 0x8]\n\
+	movs r0, 0xF\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	orrs r0, r1\n\
+	strb r0, [r3, 0x8]\n\
+	movs r0, 0x1\n\
+_081B1AF2:\n\
+	strb r0, [r4]\n\
+_081B1AF4:\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n");
+}
+#endif
+
+s8 sub_81B1B00(s8 a, s8 b)
+{
+    while (TRUE)
+    {
+        a += b;
+        if ((u8)a >= 6)
+            return -1;
+        if (GetMonData(&gPlayerParty[a], MON_DATA_SPECIES) != SPECIES_NONE)
+            return a;
+    }
+}
+
+u8* GetMonNickname(struct Pokemon *mon, u8 *dest)
+{
+    GetMonData(mon, MON_DATA_NICKNAME, dest);
+    return StringGetEnd10(dest);
+}
+
+u8 sub_81B1B5C(const u8* str, u8 b)
+{
+    u8 taskId;
+    
+    sub_81B3300(str);
+    taskId = CreateTask(sub_81B1B8C, 1);
+    gTasks[taskId].data[0] = b;
+    return taskId;
+}
+
+void sub_81B1B8C(u8 taskId)
+{
+    if (RunTextPrintersRetIsActive(6) != TRUE)
+    {
+        if (gTasks[taskId].data[0] == 0)
+        {
+            sub_8198070(6, 0);
+            ClearWindowTilemap(6);
+        }
+        DestroyTask(taskId);
+    }
+}
+
+bool8 sub_81B1BD4(void)
+{
+    return FuncIsActiveTask(sub_81B1B8C);
+}
+
+void sub_81B1BE8(u8 taskId)
+{
+    if (sub_81221EC() != TRUE)
+    {
+        display_pokemon_menu_message(0);
+        gTasks[taskId].func = sub_81B1370;
+    }
+}
+
+void sub_81B1C1C(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_8198070(6, 0);
+        ClearWindowTilemap(6);
+        if (sub_81221AC() == TRUE)
+        {
+            gTasks[taskId].func = sub_81B1BE8;
+        }
+        else
+        {
+            display_pokemon_menu_message(0);
+            gTasks[taskId].func = sub_81B1370;
+        }
+    }
+}
+
+void sub_81B1C84(struct Pokemon *mon, u16 item, u8 c)
+{
+    GetMonNickname(mon, gStringVar1);
+    CopyItemName(item, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnWasGivenItem);
+    sub_81B1B5C(gStringVar4, c);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81B1CD0(struct Pokemon *mon, u16 item, u8 c)
+{
+    GetMonNickname(mon, gStringVar1);
+    CopyItemName(item, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_RecievedItemFromPkmn);
+    sub_81B1B5C(gStringVar4, c);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81B1D1C(struct Pokemon *mon, u16 item, u8 c)
+{
+    GetMonNickname(mon, gStringVar1);
+    CopyItemName(item, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_SwitchPkmnItem);
+    sub_81B1B5C(gStringVar4, c);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81B1D68(u16 item, u16 item2, u8 c)
+{
+    CopyItemName(item, gStringVar1);
+    CopyItemName(item2, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_SwitchedPkmnItem);
+    sub_81B1B5C(gStringVar4, c);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81B1DB8(struct Pokemon *mon, u16 item)
+{
+    u8 itemBytes[2];
+    
+    if (ItemIsMail(item) == TRUE)
+    {
+        if (GiveMailToMon(mon, item) == 0xFF)
+            return;
+    }
+    itemBytes[0] = item;
+    itemBytes[1] = item >> 8;
+    SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
+}
+
+u8 sub_81B1E00(struct Pokemon* mon)
+{
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    
+    if (item == ITEM_NONE)
+        return 0;
+    if (AddBagItem(item, 1) == FALSE)
+        return 1;
+    
+    item = ITEM_NONE;
+    SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+    return 2;
+}
+
+void pokemon_item_not_removed(void)
+{
+    StringExpandPlaceholders(gStringVar4, gText_BagFullCouldNotRemoveItem);
+}
+
+void sub_81B1E60(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    data[0] += data[2];
+    data[3]--;
+    SetMonData(&gPlayerParty[data[4]], MON_DATA_HP, &data[0]);
+    sub_81B2CD4(&gPlayerParty[data[4]], &gUnknown_0203CEDC[data[4]], 1);
+    sub_81B2E28(&gPlayerParty[data[4]], &gUnknown_0203CEDC[data[4]]);
+    if (data[3] == 0 || data[0] == 0 || data[0] == data[1])
+    {
+        if (data[0] > data[5])
+            ConvertIntToDecimalStringN(gStringVar2, data[0] - data[5], 0, 3);
+        SwitchTaskToFollowupFunc(taskId);
+    }
+}
+
+void sub_81B1F18(u8 taskId, u8 slot, s8 c, s16 HPSomething, TaskFunc func)
+{
+    struct Pokemon *mon = &gPlayerParty[slot];
+    s16 *data = gTasks[taskId].data;
+    
+    data[0] = GetMonData(mon, MON_DATA_HP);
+    data[1] = GetMonData(mon, MON_DATA_MAX_HP);
+    data[2] = c;
+    data[3] = HPSomething;
+    data[4] = slot;
+    data[5] = data[0];
+    SetTaskFuncWithFollowupFunc(taskId, sub_81B1E60, func);
+}
+
+void sub_81B1FA8(u8 taskId, u8 b, u32 hp)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    switch (b) // only case 0 is used
+    {
+        case 0:
+            data[0] = hp;
+            data[5] = hp;
+            break;
+        case 1:
+            data[1] = hp;
+            break;
+        case 2:
+            data[2] = hp;
+            break;
+        case 3:
+            data[3] = hp;
+            break;
+        case 4:
+            data[4] = hp;
+            break;
+        case 5:
+            SetTaskFuncWithFollowupFunc(taskId, sub_81B1E60, (TaskFunc)hp); // >casting hp as a taskfunc
+            break;
+    }
+}
+
+u8 pokemon_ailments_get_primary(u32 status)
+{
+    if (status & STATUS1_PSN_ANY)
+        return AILMENT_PSN;
+    if (status & STATUS1_PARALYSIS)
+        return AILMENT_PRZ;
+    if (status & STATUS1_SLEEP)
+        return AILMENT_SLP;
+    if (status & STATUS1_FREEZE)
+        return AILMENT_FRZ;
+    if (status & STATUS1_BURN)
+        return AILMENT_BRN;
+    return AILMENT_NONE;
+}
+
+u8 sub_81B205C(struct Pokemon *mon)
+{
+    u8 ailment;
+    
+    if (GetMonData(mon, MON_DATA_HP) == 0)
+        return AILMENT_FNT;
+    ailment = pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS));
+    if (ailment != AILMENT_NONE)
+        return ailment;
+    if (CheckPartyPokerus(mon, 0))
+        return AILMENT_PKRS;
+    return AILMENT_NONE;
+}
+
+void sub_81B209C(void)
+{
+    u16 *ptr;
+    
+    if (gUnknown_0203CEC8.unk8_0 == 11)
+    {
+        u8 i;
+        
+        ptr = &gUnknown_0203CEC8.unkE;
+        gUnknown_0203CEC8.unkE = 0;
+        if (gSpecialVar_0x8005 == 0)
+        {
+            for (i = 0; i < gPlayerPartyCount; i++)
+                *ptr += sub_81B2134(&gPlayerParty[i]) << i;
+        }
+        else
+        {
+            for (i = 0; i < gPlayerPartyCount; i++)
+                *ptr += sub_81B2164(&gPlayerParty[i]) << i;
+        }
+    }
+}
+
+bool16 sub_81B2134(struct Pokemon *mon)
+{
+    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && sub_802C908(GetMonData(mon, MON_DATA_SPECIES)) != FALSE)
+        return TRUE;
+    return FALSE;
+}
+
+// Dodrio Berry Picking select?
+
+bool16 sub_81B2164(struct Pokemon *mon)
+{
+    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_DODRIO)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 sub_81B218C(u8 slot)
+{
+    if (!((gUnknown_0203CEC8.unkE >> slot) & 1))
+        return FALSE;
+    return TRUE;
+}
+
+void sub_81B21AC(u8 taskId, u8 slot)
+{
+    if (sub_81B218C(slot) == TRUE)
+    {
+        PlaySE(SE_SELECT);
+        gSpecialVar_0x8004 = slot;
+        sub_81B12C0(taskId);
+    }
+    else
+    {
+        PlaySE(SE_HAZURE);
+        sub_81B1B5C(gText_PkmnCantParticipate, 0);
+        schedule_bg_copy_tilemap_to_vram(2);
+        gTasks[taskId].func = sub_81B1C1C;
+    }
+}
+
+void sub_81B2210(u8 taskId)
+{
+    sub_81B1B5C(gText_CancelParticipation, 1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    gTasks[taskId].func = sub_81B2248;
+}
+
+void sub_81B2248(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B227C;
+    }
+}
+
+void sub_81B227C(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrap_())
+    {
+        case 0:
+            gSpecialVar_0x8004 = 7;
+            sub_81B12C0(taskId);
+            break;
+        case -1:
+            PlaySE(SE_SELECT);
+        case 1:
+            gTasks[taskId].func = sub_81B1C1C;
+            break;
+    }
+}
+
+u8 sub_81B22D8(struct Pokemon *mon, u16 item, u8 c)
+{
+    u16 move;
+    
+    if (GetMonData(mon, MON_DATA_IS_EGG) != FALSE)
+        return 3;
+    if (item >= ITEM_TM01_FOCUS_PUNCH)
+    {
+        if (CanMonLearnTMHM(mon, item - 33) != FALSE)
+            move = ItemIdToBattleMoveId(item);
+        else
+            return 1;
+        do {} while (0); // :morphon:
+    }
+    else if (sub_81B2370(GetMonData(mon, MON_DATA_SPECIES), c) == FALSE)
+    {
+        return 1;
+    }
+    else
+    {
+        move = sub_81B2360(c);
+    }
+    
+    if (pokemon_has_move(mon, move) == TRUE)
+        return 2;
+    return 0;
+}
+
+u16 sub_81B2360(u8 tutor)
+{
+    return gUnknown_0861500C[tutor];
+}
+
+bool8 sub_81B2370(u16 species, u8 tutor)
+{
+    if (gUnknown_08615048[species] & (1 << tutor))
+        return TRUE;
+    return FALSE;
+}
+
+void sub_81B239C(u8 a)
+{
+    u8 i;
+    
+    switch (a)
+    {
+        case 0:
+            InitWindows(gUnknown_08615810);
+            break;
+        case 1:
+            InitWindows(gUnknown_08615850);
+            break;
+        case 2:
+            InitWindows(gUnknown_08615890);
+            break;
+        default:
+            InitWindows(gUnknown_086158D0);
+            break;
+    }
+    DeactivateAllTextPrinters();
+    for (i = 0; i < 6; i++)
+        FillWindowPixelBuffer(i, 0);
+    LoadUserWindowBorderGfx(0, 0x4F, 0xD0);
+    LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
+    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+}
+
+void sub_81B2428(bool8 a)
+{
+    u8 firstWindowId;
+    u8 windowId;
+    u8 offset;
+    u8 mainOffset;
+    
+    if (gUnknown_0203CEC8.unk8_0 != 5)
+    {
+        if (a == TRUE)
+        {
+            firstWindowId = AddWindow(&gUnknown_08615918);
+            FillWindowPixelBuffer(firstWindowId, 0);
+            mainOffset = GetStringCenterAlignXOffset(0, gMenuText_Confirm, 48);
+            AddTextPrinterParameterized4(firstWindowId, 0, mainOffset, 1, 0, 0, gUnknown_086157FC[0], -1, gMenuText_Confirm);
+            PutWindowTilemap(firstWindowId);
+            CopyWindowToVram(firstWindowId, 2);
+            windowId = AddWindow(&gUnknown_08615910);
+            offset = 0;
+        }
+        else
+        {
+            windowId = AddWindow(&gUnknown_08615908);
+            offset = 3;
+        }
+        FillWindowPixelBuffer(windowId, 0);
+        if (gUnknown_0203CEC8.unk8_0 != 10)
+        {
+            mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel, 48);
+            AddTextPrinterParameterized3(windowId, 0, mainOffset + offset, 1, gUnknown_086157FC[0], -1, gText_Cancel);
+        }
+        else
+        {
+            mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel2, 48);
+            AddTextPrinterParameterized3(windowId, 0, mainOffset + offset, 1, gUnknown_086157FC[0], -1, gText_Cancel2);
+        }
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, 2);
+        schedule_bg_copy_tilemap_to_vram(0);
+    }
+}
+
+u16* sub_81B2564(u8 a)
+{
+    return &gUnknown_0203CEC4->unk18[a];
+}
+
+void sub_81B2578(u8 windowId, u8 *b, u8 c, u8 x, u8 y, u8 width, u8 height)
+{
+    u8 *pixels = AllocZeroed(height * width * 32);
+    u8 i, j;
+    
+    if (pixels != NULL)
+    {
+        for (i = 0; i < height; i++)
+        {
+            for (j = 0; j < width; j++)
+                CpuCopy16(sub_81B0DD4(b[x + j + ((y + i) * c)]), &pixels[(i * width + j) * 32], 32);
+        }
+        BlitBitmapToWindow(windowId, pixels, x * 8, y * 8, width * 8, height * 8);
+        Free(pixels);
+    }
+}
+
+void sub_81B2658(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f)
+{
+    if (width == 0 && height == 0)
+    {
+        width = 10;
+        height = 7;
+    }
+    if (f == 0)
+        sub_81B2578(windowId, gUnknown_08615988, 10, x, y, width, height);
+    else
+        sub_81B2578(windowId, gUnknown_086159CE, 10, x, y, width, height);
+}
+
+void sub_81B26BC(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f)
+{
+    if (width == 0 && height == 0)
+    {
+        width = 18;
+        height = 3;
+    }
+    if (f == 0)
+        sub_81B2578(windowId, gUnknown_08615A14, 18, x, y, width, height);
+    else
+        sub_81B2578(windowId, gUnknown_08615A4A, 18, x, y, width, height);
+}
+
+void sub_81B2720(u8 windowId)
+{
+    sub_81B2578(windowId, gUnknown_08615A80, 18, 0, 0, 18, 3);
+}
+
+void sub_81B2748(struct Unk_203CEDC *ptr, u8 bitfield)
+{
+    u8 palNum = GetWindowAttribute(ptr->unk8, WINDOW_PALETTE_NUM) * 16;
+    
+    if (0x40 & bitfield)
+    {
+        LoadPalette(sub_81B2564(gUnknown_08615AF1[0]), gUnknown_08615AC0[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AF1[1]), gUnknown_08615AC0[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AF1[2]), gUnknown_08615AC0[2] + palNum, 2);
+    }
+    else if (0x20 & bitfield)
+    {
+        if (1 & bitfield)
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+        else
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEE[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+    }
+    else if (0x10 & bitfield)
+    {
+        LoadPalette(sub_81B2564(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AEE[0]), gUnknown_08615ABD[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
+    }
+    else if (4 & bitfield)
+    {
+        if (1 & bitfield)
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+        else
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADF[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEE[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+    }
+    else if (2 & bitfield)
+    {
+        if (1 & bitfield)
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615ADC[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADC[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ADC[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+        else
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615AD3[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AD3[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AD3[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AE8[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AE8[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AE8[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+    }
+    else if (8 & bitfield)
+    {
+        if (1 & bitfield)
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615AD9[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AD9[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AD9[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+        else
+        {
+            LoadPalette(sub_81B2564(gUnknown_08615AD0[0]), gUnknown_08615ABA[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AD0[1]), gUnknown_08615ABA[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AD0[2]), gUnknown_08615ABA[2] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AE5[0]), gUnknown_08615ABD[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AE5[1]), gUnknown_08615ABD[1] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AE5[2]), gUnknown_08615ABD[2] + palNum, 2);
+        }
+    }
+    else if (1 & bitfield)
+    {
+        LoadPalette(sub_81B2564(gUnknown_08615AD6[0]), gUnknown_08615ABA[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AD6[1]), gUnknown_08615ABA[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AD6[2]), gUnknown_08615ABA[2] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AEB[0]), gUnknown_08615ABD[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AEB[1]), gUnknown_08615ABD[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AEB[2]), gUnknown_08615ABD[2] + palNum, 2);
+    }
+    else
+    {
+        LoadPalette(sub_81B2564(gUnknown_08615ACD[0]), gUnknown_08615ABA[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615ACD[1]), gUnknown_08615ABA[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615ACD[2]), gUnknown_08615ABA[2] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AE2[0]), gUnknown_08615ABD[0] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AE2[1]), gUnknown_08615ABD[1] + palNum, 2);
+        LoadPalette(sub_81B2564(gUnknown_08615AE2[2]), gUnknown_08615ABD[2] + palNum, 2);
+    }
+}
+
+void sub_81B2A3C(u8 windowId, const u8 *str, u8 color, u8 *ptr)
+{
+    AddTextPrinterParameterized3(windowId, 0, ptr[0], ptr[1], gUnknown_086157FC[color], 0, str);
+}
+
+void sub_81B2A70(struct Pokemon *mon, struct Unk_203CEDC *ptr, u8 c)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    
+    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    {
+        if (c == 1)
+            ptr->unk0->unk0(ptr->unk8, ptr->unk0->unk4[0] >> 3, ptr->unk0->unk4[1] >> 3, ptr->unk0->unk4[2] >> 3, ptr->unk0->unk4[3] >> 3, 0);
+        GetMonNickname(mon, nickname);
+        sub_81B2A3C(ptr->unk8, nickname, 0, ptr->unk0->unk4);
+    }
+}
+
+void sub_81B2AC8(struct Pokemon *mon, struct Unk_203CEDC *ptr, u8 c)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    {
+        u8 ailment = sub_81B205C(mon);
+        if (ailment == AILMENT_NONE ||  ailment == AILMENT_PKRS)
+        {
+            if (c != 0)
+                ptr->unk0->unk0(ptr->unk8, ptr->unk0->unk4[4] >> 3, (ptr->unk0->unk4[5] >> 3) + 1, ptr->unk0->unk4[6] >> 3, ptr->unk0->unk4[7] >> 3, 0);
+            if (c != 2)
+                sub_81B2B40(GetMonData(mon, MON_DATA_LEVEL), ptr);
+        }
+    }
+}
+
+void sub_81B2B40(u8 level, struct Unk_203CEDC *ptr)
+{
+    ConvertIntToDecimalStringN(gStringVar2, level, 0, 3);
+    StringCopy(gStringVar1, gText_LevelSymbol);
+    StringAppend(gStringVar1, gStringVar2);
+    sub_81B2A3C(ptr->unk8, gStringVar1, 0, &ptr->unk0->unk4[4]);
+}
+
+void sub_81B2B8C(struct Pokemon *mon, struct Unk_203CEDC *ptr, u8 c)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    
+    if (c == 1)
+        ptr->unk0->unk0(ptr->unk8, ptr->unk0->unk4[8] >> 3, (ptr->unk0->unk4[9] >> 3) + 1, ptr->unk0->unk4[10] >> 3, ptr->unk0->unk4[11] >> 3, 0);
+    GetMonNickname(mon, nickname);
+    sub_81B2BF4(GetMonGender(mon), GetMonData(mon, MON_DATA_SPECIES), nickname, ptr);
+}
+
+void sub_81B2BF4(u8 gender, u16 species, u8 *nickname, struct Unk_203CEDC *ptr)
+{
+    u8 palNum = GetWindowAttribute(ptr->unk8, WINDOW_PALETTE_NUM) * 16;
+    
+    if (species == SPECIES_NONE)
+        return;
+    if (species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
+    {
+        if (StringCompare(nickname, gSpeciesNames[species]) == 0)
+            return;
+    }
+    switch (gender)
+    {
+        case MON_MALE:
+            LoadPalette(sub_81B2564(gUnknown_08615AC3[0]), gUnknown_08615AB6[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AC3[1]), gUnknown_08615AB6[1] + palNum, 2);
+            sub_81B2A3C(ptr->unk8, gText_MaleSymbol, 2, &ptr->unk0->unk4[8]);
+            break;
+        case MON_FEMALE:
+            LoadPalette(sub_81B2564(gUnknown_08615AC5[0]), gUnknown_08615AB6[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AC5[1]), gUnknown_08615AB6[1] + palNum, 2);
+            sub_81B2A3C(ptr->unk8, gText_FemaleSymbol, 2, &ptr->unk0->unk4[8]);
+            break;
+    }
+}
+
+void sub_81B2CD4(struct Pokemon *mon, struct Unk_203CEDC *ptr, u8 c)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    {
+        if (c != 0)
+            ptr->unk0->unk0(ptr->unk8, ptr->unk0->unk4[12] >> 3, (ptr->unk0->unk4[13] >> 3) + 1, ptr->unk0->unk4[14] >> 3, ptr->unk0->unk4[15] >> 3, 0);
+        if (c != 2)
+            sub_81B2D3C(GetMonData(mon, MON_DATA_HP), ptr);
+    }
+}
+
+void sub_81B2D3C(u16 hp, struct Unk_203CEDC *ptr)
+{
+    u8 *strOut = ConvertIntToDecimalStringN(gStringVar1, hp, 1, 3);
+    
+    strOut[0] = CHAR_SLASH;
+    strOut[1] = EOS;
+    
+    sub_81B2A3C(ptr->unk8, gStringVar1, 0, &ptr->unk0->unk4[12]);
+}
+
+void sub_81B2D74(struct Pokemon *mon, struct Unk_203CEDC *ptr, u8 c)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    {
+        if (c != 0)
+            ptr->unk0->unk0(ptr->unk8, (ptr->unk0->unk4[16] >> 3) + 1, (ptr->unk0->unk4[17] >> 3) + 1, ptr->unk0->unk4[18] >> 3, ptr->unk0->unk4[19] >> 3, 0);
+        if (c != 2)
+            sub_81B2DDC(GetMonData(mon, MON_DATA_MAX_HP), ptr);
+    }
+}
+
+void sub_81B2DDC(u16 maxhp, struct Unk_203CEDC *ptr)
+{
+    ConvertIntToDecimalStringN(gStringVar2, maxhp, 1, 3);
+    StringCopy(gStringVar1, gText_Slash);
+    StringAppend(gStringVar1, gStringVar2);
+    sub_81B2A3C(ptr->unk8, gStringVar1, 0, &ptr->unk0->unk4[16]);
+}
+
+void sub_81B2E28(struct Pokemon *mon, struct Unk_203CEDC *ptr)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+        sub_81B2E64(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP), ptr);
+}
+
+void sub_81B2E64(u16 hp, u16 maxhp, struct Unk_203CEDC *ptr)
+{
+    u8 palNum = GetWindowAttribute(ptr->unk8, WINDOW_PALETTE_NUM) * 16;
+    u8 hpFraction;
+    
+    switch (GetHPBarLevel(hp, maxhp))
+    {
+        case 3:
+        case 4:
+            LoadPalette(sub_81B2564(gUnknown_08615AC7[0]), gUnknown_08615AB8[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AC7[1]), gUnknown_08615AB8[1] + palNum, 2);
+            break;
+        case 2:
+            LoadPalette(sub_81B2564(gUnknown_08615AC9[0]), gUnknown_08615AB8[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615AC9[1]), gUnknown_08615AB8[1] + palNum, 2);
+            break;
+        default:
+            LoadPalette(sub_81B2564(gUnknown_08615ACB[0]), gUnknown_08615AB8[0] + palNum, 2);
+            LoadPalette(sub_81B2564(gUnknown_08615ACB[1]), gUnknown_08615AB8[1] + palNum, 2);
+            break;
+    }
+    
+    hpFraction = GetScaledHPFraction(hp, maxhp, ptr->unk0->unk4[22]);
+    FillWindowPixelRect(ptr->unk8, gUnknown_08615AB8[1], ptr->unk0->unk4[20], ptr->unk0->unk4[21], hpFraction, 1);
+    FillWindowPixelRect(ptr->unk8, gUnknown_08615AB8[0], ptr->unk0->unk4[20], ptr->unk0->unk4[21] + 1, hpFraction, 2);
+    if (hpFraction != ptr->unk0->unk4[22])
+    {
+        FillWindowPixelRect(ptr->unk8, 13, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21], ptr->unk0->unk4[22] - hpFraction, 1);
+        FillWindowPixelRect(ptr->unk8, 2, ptr->unk0->unk4[20] + hpFraction, ptr->unk0->unk4[21] + 1, ptr->unk0->unk4[22] - hpFraction, 2);
+    }
+    CopyWindowToVram(ptr->unk8, 2);
+}
+
+#ifdef NONMATCHING
+void sub_81B2FA8(u8 stringID, struct Unk_203CEDC *ptr, u8 c)
+{
+    if (c != 0)
+    {
+        int unk = ((ptr->unk0->unk1C & 7) + ptr->unk0->unk1E + 7) / 8;
+        int unk2 = ((ptr->unk0->unk1D & 7) + ptr->unk0->unk1F + 7) / 8;
+        ptr->unk0->unk0(ptr->unk8, ptr->unk0->unk1C >> 3, ptr->unk0->unk1D >> 3, unk, unk2, 1);
+    }
+    if (c != 2)
+        AddTextPrinterParameterized3(ptr->unk8, 1, ptr->unk0->unk1C, ptr->unk0->unk1D, gUnknown_086157FC[0], 0, gUnknown_08615B60[stringID]);
+}
+#else
+NAKED
+void sub_81B2FA8(u8 stringID, struct Unk_203CEDC *ptr, u8 c)
+{
+    asm_unified("push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	sub sp, 0xC\n\
+	adds r6, r1, 0\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r8, r0\n\
+	lsls r2, 24\n\
+	lsrs r7, r2, 24\n\
+	cmp r7, 0\n\
+	beq _081B2FF2\n\
+	ldr r5, [r6]\n\
+	ldrb r1, [r5, 0x1C]\n\
+	movs r4, 0x7\n\
+	adds r0, r1, 0\n\
+	ands r0, r4\n\
+	ldrb r2, [r5, 0x1E]\n\
+	adds r0, r2\n\
+	adds r3, r0, 0x7\n\
+	asrs r3, 3\n\
+	ldrb r2, [r5, 0x1D]\n\
+	adds r0, r2, 0\n\
+	ands r0, r4\n\
+	ldrb r4, [r5, 0x1F]\n\
+	adds r0, r4\n\
+	adds r4, r0, 0x7\n\
+	ldrb r0, [r6, 0x8]\n\
+	lsrs r1, 3\n\
+	lsrs r2, 3\n\
+	lsrs r4, 3\n\
+	str r4, [sp]\n\
+	movs r4, 0x1\n\
+	str r4, [sp, 0x4]\n\
+	ldr r4, [r5]\n\
+	bl _call_via_r4\n\
+_081B2FF2:\n\
+	cmp r7, 0x2\n\
+	beq _081B3018\n\
+	ldrb r0, [r6, 0x8]\n\
+	ldr r1, [r6]\n\
+	ldrb r2, [r1, 0x1C]\n\
+	ldrb r3, [r1, 0x1D]\n\
+	ldr r1, =gUnknown_086157FC\n\
+	str r1, [sp]\n\
+	movs r1, 0\n\
+	str r1, [sp, 0x4]\n\
+	ldr r4, =gUnknown_08615B60\n\
+	mov r5, r8\n\
+	lsls r1, r5, 2\n\
+	adds r1, r4\n\
+	ldr r1, [r1]\n\
+	str r1, [sp, 0x8]\n\
+	movs r1, 0x1\n\
+	bl AddTextPrinterParameterized3\n\
+_081B3018:\n\
+	add sp, 0xC\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n");
+}
+#endif
+
+void sub_81B302C(u8 *ptr)
+{
+    if (*ptr != 0xFF)
+    {
+        sub_8198070(*ptr, 0);
+        RemoveWindow(*ptr);
+        *ptr = 0xFF;
+        schedule_bg_copy_tilemap_to_vram(2);
+    }
+}
+
+void display_pokemon_menu_message(u32 stringID)
+{
+    u8 *windowPtr = &gUnknown_0203CEC4->unkC[1];
+    
+    if (*windowPtr != 0xFF)
+        sub_81B302C(windowPtr);
+    
+    if (stringID != 0x7F)
+    {
+        switch (stringID - 21)
+        {
+            case 0:
+                *windowPtr = AddWindow(&gUnknown_08615928);
+                break;
+            case 3:
+                *windowPtr = AddWindow(&gUnknown_08615930);
+                break;
+            case 4:
+                *windowPtr = AddWindow(&gUnknown_08615938);
+                break;
+            case 1:
+            case 2:
+                *windowPtr = AddWindow(&gUnknown_08615940);
+                break;
+            case 5:
+                *windowPtr = AddWindow(&gUnknown_08615948);
+                break;
+            default:
+                *windowPtr = AddWindow(&gUnknown_08615920);
+                break;
+        }
+        if (stringID == 0)
+        {
+            if (gUnknown_0203CEC4->unk8_0 != FALSE)
+                stringID = 2;
+            else if (sub_81B314C() == FALSE)
+                stringID = 1;
+        }
+        SetWindowBorderStyle(*windowPtr, 0, 0x4F, 0xD);
+        StringExpandPlaceholders(gStringVar4, gUnknown_08615AF4[stringID]);
+        AddTextPrinterParameterized(*windowPtr, 1, gStringVar4, 0, 1, 0, 0);
+        schedule_bg_copy_tilemap_to_vram(2);
+    }
+}
+
+bool8 sub_81B314C(void)
+{
+    struct Pokemon *party = gPlayerParty;
+    u8 i;
+    u8 j = 0;
+    
+    if (gUnknown_0203CEC8.unkB == 1)
+        return TRUE;
+    
+    for (i = 0; i < 6; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG) != FALSE)
+                j++;
+        }
+        if (j > 1)
+            return TRUE;
+    }
+    return FALSE;
+}

@@ -12,7 +12,8 @@ enum
     AILMENT_SLP,
     AILMENT_FRZ,
     AILMENT_BRN,
-    AILMENT_FNT = 7
+    AILMENT_PKRS,
+    AILMENT_FNT
 };
 
 enum
@@ -35,12 +36,12 @@ struct Struct203CEC8 {
     s8 unkA;
     u8 unkB;
     u8 unkD;
-    u8 unkE;
+    s16 unkE;
 };
 
 extern struct Struct203CEC8 gUnknown_0203CEC8;
 
-extern const u16 gUnknown_0861500C[];
+extern const u16 gUnknown_0861500C[]; // tutor table
 
 bool8 pokemon_has_move(struct Pokemon *, u16);
 void sub_81B58A8(void);
