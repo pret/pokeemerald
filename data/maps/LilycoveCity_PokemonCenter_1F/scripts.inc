@@ -17,11 +17,11 @@ LilycoveCity_PokemonCenter_1F_EventScript_21C5C6:: @ 821C5C6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E0:: @ 821C5E0
-	setflag FLAG_0x3E1
+	setflag FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E4:: @ 821C5E4
-	clearflag FLAG_0x3E1
+	clearflag FLAG_HIDE_LILYCOVE_POKEMON_CENTER_LADY
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5E8:: @ 821C5E8
@@ -33,7 +33,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_21C5E8:: @ 821C5E8
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5F6:: @ 821C5F6
-	msgbox LilycoveCity_PokemonCenter_1F_Text_21C61E, 2
+	msgbox LilycoveCity_PokemonCenter_1F_Text_21C61E, MSGBOX_NPC
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5FF:: @ 821C5FF
@@ -41,12 +41,12 @@ LilycoveCity_PokemonCenter_1F_EventScript_21C5FF:: @ 821C5FF
 	faceplayer
 	checkflag FLAG_BADGE07_GET
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_21C614
-	msgbox LilycoveCity_PokemonCenter_1F_Text_21C69D, 4
+	msgbox LilycoveCity_PokemonCenter_1F_Text_21C69D, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C614:: @ 821C614
-	msgbox LilycoveCity_PokemonCenter_1F_Text_21C6F6, 4
+	msgbox LilycoveCity_PokemonCenter_1F_Text_21C6F6, MSGBOX_DEFAULT
 	release
 	end
 

@@ -1,35 +1,32 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_controllers.h"
-#include "battle_message.h"
-#include "battle_interface.h"
-#include "battle_anim.h"
-#include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
+#include "battle_anim.h"
+#include "battle_controllers.h"
+#include "battle_interface.h"
+#include "battle_message.h"
+#include "battle_setup.h"
 #include "battle_tv.h"
-#include "pokemon.h"
+#include "bg.h"
+#include "data2.h"
 #include "link.h"
-#include "util.h"
 #include "main.h"
-#include "constants/songs.h"
-#include "constants/trainers.h"
-#include "sound.h"
-#include "window.h"
 #include "m4a.h"
 #include "palette.h"
+#include "pokeball.h"
+#include "pokemon.h"
+#include "reshow_battle_screen.h"
+#include "sound.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "string_util.h"
-#include "bg.h"
-#include "reshow_battle_screen.h"
-#include "pokeball.h"
-#include "data2.h"
-#include "battle_setup.h"
+#include "util.h"
+#include "window.h"
+#include "constants/battle_anim.h"
+#include "constants/songs.h"
+#include "constants/trainers.h"
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
@@ -558,7 +555,7 @@ static void LinkOpponentHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 size += CopyLinkOpponentMonData(i, monData + size);
@@ -892,7 +889,7 @@ static void LinkOpponentHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 SetLinkOpponentMonData(i);
@@ -1253,17 +1250,17 @@ static void LinkOpponentHandleDrawTrainerPic(void)
             || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_LEAF_GREEN)
             {
                 if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != MALE)
-                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_LEAF];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
                 else
-                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_RED];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
             }
             else if ((gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_RUBY
                      || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != MALE)
-                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_RS_MAY];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
                 else
-                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_RS_BRENDAN];
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_BRENDAN];
             }
             else
             {
@@ -1282,17 +1279,17 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_LEAF];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
             else
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_RED];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_RS_MAY];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
             else
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_RS_BRENDAN];
+                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_BRENDAN];
         }
         else
         {
@@ -1346,7 +1343,7 @@ static void LinkOpponentHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = sub_8064470;
 }
@@ -1364,7 +1361,7 @@ static void LinkOpponentHandleFaintAnimation(void)
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_OPPONENT);
+            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_TARGET);
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_FaintOpponentMon;
             gBattlerControllerFuncs[gActiveBattler] = sub_8064C14;
         }
@@ -1660,9 +1657,9 @@ static void LinkOpponentHandlePlaySE(void)
     s8 pan;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        pan = PAN_SIDE_PLAYER;
+        pan = SOUND_PAN_ATTACKER;
     else
-        pan = PAN_SIDE_OPPONENT;
+        pan = SOUND_PAN_TARGET;
 
     PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     LinkOpponentBufferExecCompleted();
@@ -1708,7 +1705,7 @@ static void LinkOpponentHandleIntroTrainerBallThrow(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 280;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
 
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_80676FC);
 

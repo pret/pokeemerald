@@ -5,7 +5,7 @@ Route111_WinstrateFamilysHouse_EventScript_22A48D:: @ 822A48D
 	lock
 	faceplayer
 	setvar VAR_0x8008, 2
-	msgbox Route111_WinstrateFamilysHouse_Text_22A539, 4
+	msgbox Route111_WinstrateFamilysHouse_Text_22A539, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_22A52C
 	end
 
@@ -15,7 +15,7 @@ Route111_WinstrateFamilysHouse_EventScript_22A4A2:: @ 822A4A2
 	setvar VAR_0x8008, 3
 	checkflag FLAG_0x115
 	goto_eq Route111_WinstrateFamilysHouse_EventScript_22A4DA
-	msgbox Route111_WinstrateFamilysHouse_Text_22A5F4, 4
+	msgbox Route111_WinstrateFamilysHouse_Text_22A5F4, MSGBOX_DEFAULT
 	giveitem_std ITEM_MACHO_BRACE
 	compare VAR_RESULT, 0
 	goto_eq Route111_WinstrateFamilysHouse_EventScript_272054
@@ -24,7 +24,7 @@ Route111_WinstrateFamilysHouse_EventScript_22A4A2:: @ 822A4A2
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_22A4DA:: @ 822A4DA
-	msgbox Route111_WinstrateFamilysHouse_Text_22A6B4, 4
+	msgbox Route111_WinstrateFamilysHouse_Text_22A6B4, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_22A52C
 	end
 
@@ -32,7 +32,7 @@ Route111_WinstrateFamilysHouse_EventScript_22A4E8:: @ 822A4E8
 	lock
 	faceplayer
 	setvar VAR_0x8008, 1
-	msgbox Route111_WinstrateFamilysHouse_Text_22A6F7, 4
+	msgbox Route111_WinstrateFamilysHouse_Text_22A6F7, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_22A52C
 	end
 
@@ -40,15 +40,15 @@ Route111_WinstrateFamilysHouse_EventScript_22A4FD:: @ 822A4FD
 	lock
 	faceplayer
 	setvar VAR_0x8008, 4
-	checkflag FLAG_0x004
+	checkflag FLAG_TEMP_4
 	goto_eq Route111_WinstrateFamilysHouse_EventScript_22A51E
-	msgbox Route111_WinstrateFamilysHouse_Text_22A780, 4
-	setflag FLAG_0x004
+	msgbox Route111_WinstrateFamilysHouse_Text_22A780, MSGBOX_DEFAULT
+	setflag FLAG_TEMP_4
 	goto Route111_WinstrateFamilysHouse_EventScript_22A52C
 	end
 
 Route111_WinstrateFamilysHouse_EventScript_22A51E:: @ 822A51E
-	msgbox Route111_WinstrateFamilysHouse_Text_22A89B, 4
+	msgbox Route111_WinstrateFamilysHouse_Text_22A89B, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_22A52C
 	end
 

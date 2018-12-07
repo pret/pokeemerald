@@ -1,9 +1,12 @@
 #ifndef GUARD_NEW_GAME_H
 #define GUARD_NEW_GAME_H
 
-void WriteUnalignedWord(u32 var, u8 *dataPtr);
-u32 ReadUnalignedWord(u8* dataPtr);
-void CopyUnalignedWord(u8 *copyTo, u8 *copyFrom);
+extern bool8 gDifferentSaveFile;
+extern bool8 gUnknown_020322D5; // The purpose of this variable is unknown as it's read only 3 times(2 times in contest.c and 1 time in berry_blender.c), never written to.
+
+void SetTrainerId(u32 trainerId, u8 *dst);
+u32 GetTrainerId(u8 *trainerId);
+void CopyTrainerId(u8 *dst, u8 *src);
 void NewGameInitData(void);
 void sub_808447C(void);
 void Sav2_ClearSetDefault(void);

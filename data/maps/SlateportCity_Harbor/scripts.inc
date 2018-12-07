@@ -12,14 +12,14 @@ SlateportCity_Harbor_MapScript1_20C983: @ 820C983
 	end
 
 SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
-	clearflag FLAG_0x35C
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
 	return
 
 SlateportCity_Harbor_EventScript_20C9A9:: @ 820C9A9
 	savebgm MUS_AQA_0
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
-	setflag FLAG_0x389
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	return
 
 SlateportCity_Harbor_EventScript_20C9BB:: @ 820C9BB
@@ -54,7 +54,7 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	applymovement 6, SlateportCity_Harbor_Movement_2725AA
 	applymovement 255, SlateportCity_Harbor_Movement_2725A6
 	waitmovement 0
-	msgbox SlateportCity_Harbor_Text_20D291, 4
+	msgbox SlateportCity_Harbor_Text_20D291, MSGBOX_DEFAULT
 	closemessage
 	applymovement 6, SlateportCity_Harbor_Movement_20CAC8
 	applymovement 7, SlateportCity_Harbor_Movement_20CAC8
@@ -65,7 +65,7 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	removeobject 8
 	setvar VAR_0x40A0, 2
 	setflag FLAG_0x061
-	setflag FLAG_0x313
+	setflag FLAG_HIDE_LILCOVE_MOTEL_SCOTT
 	compare VAR_0x8008, 0
 	call_if 1, SlateportCity_Harbor_EventScript_20CA89
 	compare VAR_0x8008, 1
@@ -74,10 +74,10 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
 	compare VAR_0x8008, 3
 	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
-	msgbox SlateportCity_Harbor_Text_20D35A, 4
+	msgbox SlateportCity_Harbor_Text_20D35A, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_0x335
-	setflag FLAG_0x336
+	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
+	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE
 	moveobjectoffscreen 4
 	setobjectmovementtype 4, 10
 	releaseall
@@ -164,12 +164,12 @@ SlateportCity_Harbor_EventScript_20CAF1:: @ 820CAF1
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq SlateportCity_Harbor_EventScript_20CB06
-	msgbox SlateportCity_Harbor_Text_20CE20, 4
+	msgbox SlateportCity_Harbor_Text_20CE20, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_20CB06:: @ 820CB06
-	msgbox SlateportCity_Harbor_Text_20CE87, 4
+	msgbox SlateportCity_Harbor_Text_20CE87, MSGBOX_DEFAULT
 	message SlateportCity_Harbor_Text_20CF1C
 	waitmessage
 	goto SlateportCity_Harbor_EventScript_20CB1A
@@ -195,12 +195,12 @@ SlateportCity_Harbor_EventScript_20CB50:: @ 820CB50
 	end
 
 SlateportCity_Harbor_EventScript_20CB88:: @ 820CB88
-	msgbox SlateportCity_Harbor_Text_20CEC1, 4
+	msgbox SlateportCity_Harbor_Text_20CEC1, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
-	msgbox SlateportCity_Harbor_Text_20CF93, 5
+	msgbox SlateportCity_Harbor_Text_20CF93, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
 	setvar VAR_PORTHOLE_STATE, 1
@@ -211,7 +211,7 @@ SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 	end
 
 SlateportCity_Harbor_EventScript_20CBBA:: @ 820CBBA
-	msgbox SlateportCity_Harbor_Text_20CFAE, 5
+	msgbox SlateportCity_Harbor_Text_20CFAE, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
 	call SlateportCity_Harbor_EventScript_20CBE9
@@ -227,7 +227,7 @@ SlateportCity_Harbor_EventScript_20CBDD:: @ 820CBDD
 	end
 
 SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
-	msgbox SlateportCity_Harbor_Text_20CFCB, 4
+	msgbox SlateportCity_Harbor_Text_20CFCB, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_2725A6
 	waitmovement 0
@@ -244,7 +244,7 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	return
 
 SlateportCity_Harbor_EventScript_20CC2D:: @ 820CC2D
-	msgbox SlateportCity_Harbor_Text_20CF71, 4
+	msgbox SlateportCity_Harbor_Text_20CF71, MSGBOX_DEFAULT
 	release
 	end
 
@@ -279,12 +279,12 @@ SlateportCity_Harbor_EventScript_20CC52:: @ 820CC52
 	call_if 1, SlateportCity_Harbor_EventScript_20CC93
 	compare VAR_0x8004, 2
 	goto_eq SlateportCity_Harbor_EventScript_20CC89
-	msgbox SlateportCity_Harbor_Text_20D08E, 4
+	msgbox SlateportCity_Harbor_Text_20D08E, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_20CC89:: @ 820CC89
-	msgbox SlateportCity_Harbor_Text_20D01C, 4
+	msgbox SlateportCity_Harbor_Text_20D01C, MSGBOX_DEFAULT
 	release
 	end
 
@@ -293,7 +293,7 @@ SlateportCity_Harbor_EventScript_20CC93:: @ 820CC93
 	return
 
 SlateportCity_Harbor_EventScript_20CC99:: @ 820CC99
-	msgbox SlateportCity_Harbor_Text_20D194, 2
+	msgbox SlateportCity_Harbor_Text_20D194, MSGBOX_NPC
 	end
 
 SlateportCity_Harbor_EventScript_20CCA2:: @ 820CCA2
@@ -307,7 +307,7 @@ SlateportCity_Harbor_EventScript_20CCA2:: @ 820CCA2
 	goto_eq SlateportCity_Harbor_EventScript_20CCE9
 	compare VAR_0x40A0, 2
 	goto_eq SlateportCity_Harbor_EventScript_20CCDF
-	msgbox SlateportCity_Harbor_Text_20D232, 4
+	msgbox SlateportCity_Harbor_Text_20D232, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, SlateportCity_Harbor_Movement_2725A2
 	waitmovement 0
@@ -315,18 +315,18 @@ SlateportCity_Harbor_EventScript_20CCA2:: @ 820CCA2
 	end
 
 SlateportCity_Harbor_EventScript_20CCDF:: @ 820CCDF
-	msgbox SlateportCity_Harbor_Text_20D35A, 4
+	msgbox SlateportCity_Harbor_Text_20D35A, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_20CCE9:: @ 820CCE9
 	setflag FLAG_0x10F
-	msgbox SlateportCity_Harbor_Text_20D42B, 4
+	msgbox SlateportCity_Harbor_Text_20D42B, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_20CCF6:: @ 820CCF6
-	msgbox SlateportCity_Harbor_Text_20D58A, 4
+	msgbox SlateportCity_Harbor_Text_20D58A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -338,12 +338,12 @@ SlateportCity_Harbor_EventScript_20CD00:: @ 820CD00
 	goto_eq SlateportCity_Harbor_EventScript_20CD38
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq SlateportCity_Harbor_EventScript_20CD2E
-	msgbox SlateportCity_Harbor_Text_20D65C, 4
+	msgbox SlateportCity_Harbor_Text_20D65C, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_20CD2E:: @ 820CD2E
-	msgbox SlateportCity_Harbor_Text_20D6CB, 4
+	msgbox SlateportCity_Harbor_Text_20D6CB, MSGBOX_DEFAULT
 	release
 	end
 
@@ -363,33 +363,33 @@ SlateportCity_Harbor_EventScript_20CD44:: @ 820CD44
 	end
 
 SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
-	msgbox SlateportCity_Harbor_Text_20D8BC, 5
+	msgbox SlateportCity_Harbor_Text_20D8BC, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_TOOTH
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
-	msgbox SlateportCity_Harbor_Text_20D94A, 4
-	setflag FLAG_0x126
+	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
+	setflag FLAG_TRADED_SCANNER_TO_STERN
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 
 SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
-	msgbox SlateportCity_Harbor_Text_20D8F1, 5
+	msgbox SlateportCity_Harbor_Text_20D8F1, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
-	msgbox SlateportCity_Harbor_Text_20D94A, 4
-	setflag FLAG_0x126
+	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
+	setflag FLAG_TRADED_SCANNER_TO_STERN
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 
 SlateportCity_Harbor_EventScript_20CDFB:: @ 820CDFB
-	msgbox SlateportCity_Harbor_Text_20D841, 4
+	msgbox SlateportCity_Harbor_Text_20D841, MSGBOX_DEFAULT
 	release
 	end
 
@@ -401,7 +401,7 @@ SlateportCity_Harbor_EventScript_20CE05:: @ 820CE05
 
 SlateportCity_Harbor_EventScript_20CE11:: @ 820CE11
 	setvar VAR_TEMP_1, 1
-	msgbox SlateportCity_Harbor_Text_20D970, 4
+	msgbox SlateportCity_Harbor_Text_20D970, MSGBOX_DEFAULT
 	release
 	end
 

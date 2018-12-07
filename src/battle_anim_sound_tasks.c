@@ -1,11 +1,11 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_anim.h"
+#include "contest.h"
+#include "sound.h"
+#include "task.h"
 #include "constants/battle_anim.h"
 #include "constants/species.h"
-#include "battle_anim.h"
-#include "task.h"
-#include "sound.h"
-#include "contest.h"
 
 // this file's functions
 static void sub_8158B98(u8 taskId);
@@ -23,8 +23,8 @@ void sub_8158B30(u8 taskId)
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
 
-    pan1 = BattleAnimAdjustPanning(PAN_SIDE_PLAYER);
-    pan2 = BattleAnimAdjustPanning(PAN_SIDE_OPPONENT);
+    pan1 = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    pan2 = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     panIncrement = CalculatePanIncrement(pan1, pan2, 2);
 
     gTasks[taskId].data[2] = pan1;
@@ -64,7 +64,7 @@ static void sub_8158C04(u8 taskId)
         s8 pan;
 
         gTasks[taskId].data[10] = 0;
-        pan = BattleAnimAdjustPanning(PAN_SIDE_OPPONENT);
+        pan = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
         PlaySE12WithPanning(gTasks[taskId].data[1], pan);
         if (++gTasks[taskId].data[11] == 2)
             DestroyAnimSoundTask(taskId);
@@ -127,11 +127,11 @@ static void sub_8158D08(u8 taskId)
 void sub_8158D8C(u8 taskId)
 {
     u16 species = 0;
-    s8 pan = BattleAnimAdjustPanning(PAN_SIDE_PLAYER);
+    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            species = gContestResources->field_18->unk0;
+            species = gContestResources->field_18->species;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
@@ -173,11 +173,11 @@ void sub_8158D8C(u8 taskId)
 void sub_8158E9C(u8 taskId)
 {
     u16 species = 0;
-    s8 pan = BattleAnimAdjustPanning(PAN_SIDE_PLAYER);
+    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
     if (IsContest())
     {
         if (gBattleAnimArgs[0] == ANIM_ATTACKER)
-            species = gContestResources->field_18->unk0;
+            species = gContestResources->field_18->species;
         else
             DestroyAnimVisualTask(taskId); // UB: function should return upon destroying task.
     }
@@ -278,10 +278,10 @@ void sub_81590B8(u8 taskId)
     s8 pan;
 
     gTasks[taskId].data[10] = gBattleAnimArgs[0];
-    pan = BattleAnimAdjustPanning(PAN_SIDE_PLAYER);
+    pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
 
     if (IsContest())
-        species = gContestResources->field_18->unk0;
+        species = gContestResources->field_18->species;
     else
         species = gAnimBattlerSpecies[gBattleAnimAttacker];
 

@@ -736,7 +736,7 @@ sub_8140914: @ 8140914
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8197930
+	bl DisplayYesNoMenu
 	ldr r5, =gUnknown_0203AB8C
 	ldrb r0, [r5]
 	movs r1, 0
@@ -4502,7 +4502,7 @@ sub_81428C4: @ 81428C4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_8197930
+	bl DisplayYesNoMenu
 	ldr r1, =gUnknown_085B6408
 	adds r0, r4, 0
 	bl sub_8121F68

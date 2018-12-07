@@ -1,17 +1,18 @@
 #include "global.h"
-#include "battle_ai_script_commands.h"
-#include "pokemon.h"
 #include "battle.h"
+#include "battle_ai_script_commands.h"
+#include "battle_factory.h"
 #include "battle_setup.h"
-#include "recorded_battle.h"
-#include "constants/species.h"
-#include "constants/abilities.h"
-#include "random.h"
 #include "item.h"
+#include "pokemon.h"
+#include "random.h"
+#include "recorded_battle.h"
+#include "util.h"
+#include "constants/abilities.h"
+#include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
-#include "util.h"
-#include "constants/battle_ai.h"
+#include "constants/species.h"
 
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
@@ -43,8 +44,6 @@ AI scripts.
 */
 
 extern const u8 *const gBattleAI_ScriptsTable[];
-
-extern u32 GetAiScriptsInBattleFactory();
 
 static u8 ChooseMoveOrAction_Singles(void);
 static u8 ChooseMoveOrAction_Doubles(void);

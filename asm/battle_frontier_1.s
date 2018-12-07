@@ -7,180 +7,6 @@
 
 
 
-	thumb_func_start sub_8195C7C
-sub_8195C7C: @ 8195C7C
-	push {r4-r7,lr}
-	ldr r4, =gSaveBlock2Ptr
-	ldr r0, [r4]
-	ldr r1, =0x00000ca9
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 30
-	lsrs r7, r0, 30
-	ldr r0, =0x000040ce
-	bl VarGet
-	lsls r0, 24
-	ldr r4, [r4]
-	lsls r1, r7, 1
-	lsrs r5, r0, 22
-	adds r1, r5
-	ldr r3, =0x00000dc8
-	adds r6, r4, r3
-	adds r3, r6, r1
-	ldrh r2, [r3]
-	ldr r0, =0x0000270e
-	cmp r2, r0
-	bhi _08195CCA
-	adds r2, 0x1
-	strh r2, [r3]
-	movs r3, 0xDD
-	lsls r3, 4
-	adds r0, r4, r3
-	adds r1, r0, r1
-	adds r0, r5, 0
-	ldrh r3, [r1]
-	cmp r7, r3
-	bls _08195CC0
-	adds r0, 0x2
-_08195CC0:
-	adds r0, r6, r0
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _08195CCA
-	strh r2, [r1]
-_08195CCA:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8195C7C
-
-	thumb_func_start sub_8195CE4
-sub_8195CE4: @ 8195CE4
-	push {r4,lr}
-	ldr r4, =gSaveBlock2Ptr
-	ldr r0, [r4]
-	ldr r1, =gSpecialVar_0x8005
-	ldrh r1, [r1]
-	ldr r2, =0x00000ca8
-	adds r0, r2
-	strb r1, [r0]
-	movs r0, 0x80
-	lsls r0, 7
-	movs r1, 0
-	bl VarSet
-	ldr r1, [r4]
-	ldr r0, =0x00000ca9
-	adds r1, r0
-	ldrb r0, [r1]
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1]
-	bl sub_81A4C30
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8195CE4
-
-	thumb_func_start sub_8195D28
-sub_8195D28: @ 8195D28
-	push {r4,r5,lr}
-	ldr r0, =0x000040ce
-	bl VarGet
-	lsls r0, 16
-	ldr r4, =gSaveBlock2Ptr
-	ldr r2, [r4]
-	ldr r3, =0x00000ca9
-	adds r1, r2, r3
-	ldrb r1, [r1]
-	lsls r1, 30
-	lsrs r1, 29
-	lsrs r0, 14
-	adds r1, r0
-	ldr r0, =0x00000dc8
-	adds r2, r0
-	adds r2, r1
-	ldrh r0, [r2]
-	cmp r0, 0x29
-	bls _08195D88
-	bl Random
-	ldr r4, [r4]
-	ldr r5, =gUnknown_0860DE84
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x9
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 15
-	adds r0, r5
-	ldrh r0, [r0]
-	ldr r1, =0x00000dc6
-	adds r4, r1
-	b _08195DA6
-	.pool
-_08195D88:
-	bl Random
-	ldr r4, [r4]
-	ldr r5, =gUnknown_0860DE78
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x6
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 15
-	adds r0, r5
-	ldrh r0, [r0]
-	ldr r3, =0x00000dc6
-	adds r4, r3
-_08195DA6:
-	strh r0, [r4]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8195D28
-
-	thumb_func_start sub_8195DB8
-sub_8195DB8: @ 8195DB8
-	push {r4,r5,lr}
-	ldr r4, =gSaveBlock2Ptr
-	ldr r0, [r4]
-	ldr r1, =0x00000dc6
-	adds r0, r1
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl AddBagItem
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x1
-	bne _08195E00
-	ldr r0, [r4]
-	ldr r1, =0x00000dc6
-	adds r0, r1
-	ldrh r0, [r0]
-	ldr r1, =gStringVar1
-	bl CopyItemName
-	ldr r0, [r4]
-	ldr r1, =0x00000dc6
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gSpecialVar_Result
-	strh r5, [r0]
-	b _08195E06
-	.pool
-_08195E00:
-	ldr r1, =gSpecialVar_Result
-	movs r0, 0
-	strh r0, [r1]
-_08195E06:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8195DB8
-
 	thumb_func_start sub_8195E10
 sub_8195E10: @ 8195E10
 	push {lr}
@@ -1180,7 +1006,7 @@ sub_81965D8: @ 81965D8
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl GetPlayerTextSpeed
+	bl GetPlayerTextSpeedDelay
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2163,7 +1989,7 @@ sub_8196D74: @ 8196D74
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA
-	bl ReadUnalignedWord
+	bl GetTrainerId
 	adds r6, r0, 0
 	ldr r0, =0x0000ffff
 	ands r6, r0

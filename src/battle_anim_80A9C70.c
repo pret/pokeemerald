@@ -1,23 +1,21 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "constants/battle_anim.h"
-#include "constants/rgb.h"
-#include "util.h"
 #include "decompress.h"
+#include "gpu_regs.h"
 #include "palette.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-#include "gpu_regs.h"
+#include "util.h"
+#include "constants/battle_anim.h"
+#include "constants/rgb.h"
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const u8 *const gBattleAnims_StatusConditions[];
 extern const struct OamData gUnknown_08524904;
 extern const struct OamData gUnknown_08524A3C;
-
-extern void sub_8116EB4(u8 taskId);
 
 // This file's functions.
 static void sub_80A9DB4(u8 taskId);
@@ -56,8 +54,8 @@ static const struct SpriteTemplate gUnknown_0853EF48 =
 
 static const struct SpriteTemplate gUnknown_0853EF60 =
 {
-    .tileTag = ANIM_TAG_136,
-    .paletteTag = ANIM_TAG_136,
+    .tileTag = ANIM_TAG_CIRCLE_IMPACT,
+    .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
     .oam = &gUnknown_08524904,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -73,8 +71,8 @@ u8 sub_80A9C70(u8 battlerId, bool8 b)
     u8 spriteId2;
     u8 i;
 
-    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_136)]);
-    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_136)]);
+    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
+    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)]);
     gTasks[taskId].data[0] = battlerId;
     if (b)
     {

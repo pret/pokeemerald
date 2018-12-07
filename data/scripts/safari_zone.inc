@@ -13,7 +13,7 @@ EventScript_2A4B5D:: @ 82A4B5D
 
 EventScript_2A4B6F:: @ 82A4B6F
 	lockall
-	msgbox Text_2A4BF4, 5
+	msgbox Text_2A4BF4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_2A4B85
 	releaseall
@@ -45,7 +45,7 @@ EventScript_2A4BAC:: @ 82A4BAC
 	special GetPokeblockFeederInFront
 	compare VAR_RESULT, 65535
 	goto_if 5, EventScript_2A4BEB
-	msgbox Text_2A4C90, 5
+	msgbox Text_2A4C90, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_2A4BD0
 	releaseall

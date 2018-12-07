@@ -3,13 +3,13 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "constants/flags.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
-#include "constants/songs.h"
 #include "sound.h"
+#include "constants/flags.h"
 #include "constants/map_types.h"
+#include "constants/songs.h"
 
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
@@ -18,7 +18,7 @@ extern u8 sub_808B980(u8 direction);
 extern u8 sub_808B9BC(u8 direction);
 extern u8 sub_808B9A4(u8 direction);
 extern u8 sub_808C1B4(u8 direction);
-extern u8 npc_use_some_d2s(u8 direction);
+extern u8 sub_808B9D4(u8 direction);
 extern void Overworld_ClearSavedMusic(void);
 extern void Overworld_PlaySpecialMapMusic(void);
 
@@ -575,7 +575,7 @@ static void AcroBikeTransition_Moving(u8 direction)
     }
     else
     {
-        PlayerGoSpeed3(direction);
+        PlayerRideWaterCurrent(direction);
     }
 }
 
@@ -768,7 +768,7 @@ static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
             PlayerEndWheelie(direction);
         return;
     }
-    npc_use_some_d2s(direction);
+    sub_808B9D4(direction);
 }
 
 void Bike_TryAcroBikeHistoryUpdate(u16 newKeys, u16 heldKeys)
@@ -968,7 +968,7 @@ bool8 IsBikingDisallowedByPlayer(void)
     s16 x, y;
     u8 tileBehavior;
 
-    if (!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_4)))
+    if (!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER)))
     {
         PlayerGetDestCoords(&x, &y);
         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);

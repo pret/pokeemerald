@@ -6,16 +6,16 @@ MauvilleCity_House1_EventScript_20F976:: @ 820F976
 	faceplayer
 	checkflag FLAG_0x06B
 	goto_eq MauvilleCity_House1_EventScript_20F9A5
-	msgbox MauvilleCity_House1_Text_20F9AF, 4
+	msgbox MauvilleCity_House1_Text_20F9AF, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM06
 	setflag FLAG_0x06B
-	setflag FLAG_0x34B
-	msgbox MauvilleCity_House1_Text_20FAA9, 4
+	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
+	msgbox MauvilleCity_House1_Text_20FAA9, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_House1_EventScript_20F9A5:: @ 820F9A5
-	msgbox MauvilleCity_House1_Text_20FB67, 4
+	msgbox MauvilleCity_House1_Text_20FB67, MSGBOX_DEFAULT
 	release
 	end
 

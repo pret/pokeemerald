@@ -193,24 +193,6 @@ EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
 
 u32 gContestRngValue;
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern s16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
-extern u16 gBattle_WIN0H;
-extern u16 gBattle_WIN0V;
-extern u16 gBattle_WIN1H;
-extern u16 gBattle_WIN1V;
-
-extern const u8 gContestMiscGfx[];
-extern const u8 gContestAudienceGfx[];
-extern const u8 gUnknown_08C16FA8[];
-extern const u8 gUnknown_08C16E90[];
-extern const u8 gUnknown_08C17170[];
 extern const u16 gUnknown_08587C30[];
 extern const struct BgTemplate gUnknown_08587F34[4];
 extern const struct WindowTemplate gUnknown_08587F44[];
@@ -316,11 +298,11 @@ void sub_80D77E4(void)
     DeactivateAllTextPrinters();
     if (gIsLinkContest & 1)
     {
-        gTextFlags.flag_0 = FALSE;
+        gTextFlags.canABSpeedUpPrint = FALSE;
     }
     else
     {
-        gTextFlags.flag_0 = TRUE;
+        gTextFlags.canABSpeedUpPrint = TRUE;
     }
 }
 
@@ -643,7 +625,8 @@ void sub_80D8108(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 1:
-            if ((gBattle_BG1_Y += 7) <= 160)
+            (s16)gBattle_BG1_Y += 7;
+            if ((s16)gBattle_BG1_Y <= 160)
                 break;
             gTasks[taskId].data[0]++;
             break;
@@ -1920,9 +1903,9 @@ void sub_80DA6B4(u8 taskId)
 void sub_80DA700(u8 taskId)
 {
     gBattle_BG1_Y -= 7;
-    if (gBattle_BG1_Y < 0)
+    if ((s16)gBattle_BG1_Y < 0)
         gBattle_BG1_Y = 0;
-    if (*(u16 *)&gBattle_BG1_Y == 0)  // Why cast?
+    if (gBattle_BG1_Y == 0)  // Why cast?
     {
         gTasks[taskId].func = sub_80DA740;
         gTasks[taskId].data[0] = 0;

@@ -1,13 +1,13 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "constants/abilities.h"
-#include "constants/moves.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "random.h"
 #include "util.h"
+#include "constants/abilities.h"
 #include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
@@ -310,7 +310,7 @@ static bool8 AreStatsRaised(void)
     u8 buffedStatsValue = 0;
     s32 i;
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
         if (gBattleMons[gActiveBattler].statStages[i] > 6)
             buffedStatsValue += gBattleMons[gActiveBattler].statStages[i] - 6;

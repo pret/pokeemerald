@@ -1,18 +1,16 @@
-
-// Includes
 #include "global.h"
+#include "bg.h"
+#include "gpu_regs.h"
+#include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
-#include "gpu_regs.h"
-#include "bg.h"
-#include "text.h"
-#include "window.h"
-#include "text_window.h"
-#include "palette.h"
 #include "menu.h"
-#include "strings.h"
-#include "international_string_util.h"
+#include "palette.h"
 #include "region_map.h"
+#include "strings.h"
+#include "text.h"
+#include "text_window.h"
+#include "window.h"
 
 // Static type declarations
 
@@ -58,7 +56,7 @@ static const struct BgTemplate gUnknown_085E5068[] = {
 static const struct WindowTemplate gUnknown_085E5070[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 17,
         .width = 12,
@@ -67,7 +65,7 @@ static const struct WindowTemplate gUnknown_085E5070[] =
         .baseBlock = 1
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 1,
         .width = 7,

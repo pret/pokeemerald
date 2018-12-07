@@ -1,7 +1,6 @@
 #include "global.h"
 #include "item.h"
 #include "berry.h"
-#include "constants/items.h"
 #include "string_util.h"
 #include "text.h"
 #include "event_data.h"
@@ -10,11 +9,13 @@
 #include "item_menu.h"
 #include "strings.h"
 #include "load_save.h"
+#include "item_use.h"
+#include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
+#include "constants/items.h"
+#include "constants/hold_effects.h"
 
-extern bool8 InBattlePyramid(void);
 extern u16 gUnknown_0203CF30[];
-extern const struct Item gItems[];
 
 // this file's functions
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
@@ -22,6 +23,10 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
 // EWRAM variables
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
+
+// rodata
+#include "data/text/item_descriptions.h"
+#include "data/items.h"
 
 // code
 static u16 GetBagItemQuantity(u16 *quantity)

@@ -340,16 +340,10 @@ extern const u8 gText_082B7185[];
 extern const u8 gText_082B71C1[];
 extern const u8 gText_082B71F9[];
 
-extern struct Unk030062ECStruct *gUnknown_030062EC;
-extern struct Unk030062F0Struct *gUnknown_030062F0;
-extern void (*gUnknown_030062F4)(void);
-
-extern void sub_8165AE8(struct Apprentice *);
-
-extern const u8 gUnknown_085DCEDC[];
-extern const u8 gUnknown_085DCF0E[];
-extern const u8 gUnknown_085DCEFA[];
-extern const u8 gUnknown_085DCF2C[];
+// IWRAM common
+struct Unk030062ECStruct *gUnknown_030062EC;
+struct Unk030062F0Struct *gUnknown_030062F0;
+void (*gUnknown_030062F4)(void);
 
 // This file's functions.
 static u16 sub_819FF98(u8 arg0);
@@ -382,7 +376,7 @@ static void sub_81A1218(void);
 static void sub_81A1224(void);
 static void sub_81A1438(void);
 static void sub_81A150C(void);
-static void sub_81A15A4(void);
+static void Script_SetPlayerApprenticeTrainerGfxId(void);
 static void sub_81A1644(void);
 static void sub_81A1370(void);
 
@@ -395,112 +389,128 @@ const struct ApprenticeTrainer gApprentices[] =
         .otId = 0xBDC9,
         .facilityClass = 0x43,
         .species = {SPECIES_BEAUTIFLY, SPECIES_DUSTOX, SPECIES_ILLUMISE, SPECIES_SHIFTRY, SPECIES_BRELOOM, SPECIES_NINJASK, SPECIES_SHEDINJA, SPECIES_PINSIR, SPECIES_HERACROSS, SPECIES_VOLBEAT},
-        .rest = {0, 0, 0x1D, 8, 0x3e, 20, 0, 12, 1, 10, 0x30, 6, 0x44, 20},
+        .id = 0,
+        .easyChatWords = {0x81D, 0x143E, 0xC00, 0xA01, 0x630, 0x1444},
     },
     {
         .name = {_("ヒロオ"), _("LIONEL"), _("LIONEL"), _("CAIO"), _("LUDWIG"), _("LEO")},
         .otId = 0xCF09,
         .facilityClass = 0x2B,
         .species = {SPECIES_SWELLOW, SPECIES_SWALOT, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_TORKOAL, SPECIES_HARIYAMA, SPECIES_MIGHTYENA, SPECIES_LUDICOLO, SPECIES_CRAWDAUNT, SPECIES_WHISCASH},
-        .rest = {1, 0, 0x38, 12, 1, 10, 0x30, 6, 6, 10, 0x20, 0x10, 0x13, 0x22},
+        .id = 1,
+        .easyChatWords = {0xC38, 0xA01, 0x630, 0xA06, 0x1020, 0x2213},
     },
     {
         .name = {_("ケイジ"), _("SONNY"), _("HERVE"), _("FEDRO"), _("WENZEL"), _("SANTI")},
         .otId = 0x2E34,
         .facilityClass = 0x26,
         .species = {SPECIES_LINOONE, SPECIES_MIGHTYENA, SPECIES_WHISCASH, SPECIES_ZANGOOSE, SPECIES_SEVIPER, SPECIES_NINETALES, SPECIES_KECLEON, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_MACHAMP},
-        .rest = {2, 0, 1, 10, 10, 0x16, 0x15, 14, 0x30, 6, 0x3b, 12, 0x4, 12},
+        .id = 2,
+        .easyChatWords = {0xA01, 0x160A, 0xE15, 0x630, 0xC3B, 0xC04},
     },
     {
         .name = {_("ユラ"), _("LAYLA"), _("LAYLA"), _("ASTRID"), _("SONJA"), _("LOLA")},
         .otId = 0x84EF,
         .facilityClass = 0x47,
         .species = {SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA},
-        .rest = {3, 0, 11, 16, 15, 0x1e, 0x39, 16, 0x21, 0x14, 0x3, 12, 0xff, 0xff},
+        .id = 3,
+        .easyChatWords = {0x100B, 0x1E0F, 0x1039, 0x1421, 0xC03, 0xFFFF},
     },
     {
         .name = {_("ヨウカ"), _("MACY"), _("AMELIE"), _("CLEO"), _("MARIA"), _("ELISA")},
         .otId = 0x1E43,
         .facilityClass = 0x27,
         .species = {SPECIES_WIGGLYTUFF, SPECIES_LINOONE, SPECIES_KINGDRA, SPECIES_DELCATTY, SPECIES_RAICHU, SPECIES_FEAROW, SPECIES_STARMIE, SPECIES_MEDICHAM, SPECIES_SHIFTRY, SPECIES_BEAUTIFLY},
-        .rest = {4, 0, 15, 0x1e, 0x14, 16, 6, 16, 15, 0x28, 0x1c, 0x1c, 0x13, 0x1c},
+        .id = 4,
+        .easyChatWords = {0x1E0F, 0x1014, 0x1006, 0x280F, 0x1C1C, 0x1C13},
     },
     {
         .name = {_("ヤスシ"), _("DONTE"), _("BRAHIM"), _("GLAUCO"), _("JOSEF"), _("ROQUE")},
         .otId = 0x379F,
         .facilityClass = 0x30,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_AGGRON, SPECIES_MAGNETON, SPECIES_MACHAMP, SPECIES_ARMALDO, SPECIES_HERACROSS, SPECIES_NOSEPASS, SPECIES_EXPLOUD, SPECIES_MIGHTYENA},
-        .rest = {5, 0, 0x29, 0x0A, 0x08, 0x14, 0x2F, 0x10, 0x38, 0x16, 0x20, 0x08, 0x00, 0x0C},
+        .id = 5,
+        .easyChatWords = {0xA29, 0x1408, 0x102F, 0x1638, 0x820, 0xC00},
     },
     {
         .name = {_("ミサオ"), _("AMIRA"), _("LAURE"), _("DAFNE"), _("AMELIE"), _("LARA")},
         .otId = 0xF555,
         .facilityClass = 0x31,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO},
-        .rest = {6, 0, 0x0B, 0x0C, 0x3E, 0x12, 0x00, 0x0C, 0x31, 0x0A, 0x30, 0x14, 0x00, 0x0C},
+        .id = 6,
+        .easyChatWords = {0xC0B, 0x123E, 0xC00, 0xA31, 0x1430, 0xC00},
     },
     {
         .name = {_("カズサ"), _("KALI"), _("JODIE"), _("ILENIA"), _("KARO"), _("ELSA")},
         .otId = 0x8D26,
         .facilityClass = 0x14,
         .species = {SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC},
-        .rest = {7, 0, 0x06, 0x0A, 0x20, 0x06, 0x1F, 0x0A, 0x02, 0x0A, 0x03, 0x0C, 0xFF, 0xFF},
+        .id = 7,
+        .easyChatWords = {0xA06, 0x620, 0xA1F, 0xA02, 0xC03, 0xFFFF},
     },
     {
         .name = {_("スミレ"), _("ANNIE"), _("ANNIE"), _("IMELDA"), _("INES"), _("ROSA")},
         .otId = 0x800C,
         .facilityClass = 0xD,
         .species = {SPECIES_SCEPTILE, SPECIES_VILEPLUME, SPECIES_BELLOSSOM, SPECIES_ROSELIA, SPECIES_CORSOLA, SPECIES_FLYGON, SPECIES_BRELOOM, SPECIES_MILOTIC, SPECIES_ALTARIA, SPECIES_CRADILY},
-        .rest = {8, 0, 0x22, 0x1E, 0x33, 0x04, 0x0E, 0x02, 0x02, 0x0A, 0x1E, 0x10, 0x00, 0x0C},
+        .id = 8,
+        .easyChatWords = {0x1E22, 0x433, 0x20E, 0xA02, 0x101E, 0xC00},
     },
     {
         .name = {_("アキノリ"), _("DILLEN"), _("RENE"), _("INDRO"), _("DETLEF"), _("PEDRO")},
         .otId = 0x469f,
         .facilityClass = 0,
         .species = {SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON},
-        .rest = {9, 0, 0x3D, 0x0A, 0x11, 0x10, 0x1E, 0x0E, 0x1C, 0x20, 0x04, 0x0C, 0xFF, 0xFF},
+        .id = 9,
+        .easyChatWords = {0xA3D, 0x1011, 0xE1E, 0x201C, 0xC04, 0xFFFF},
     },
     {
         .name = {_("トウゾウ"), _("DALLAS"), _("BRUNO"), _("LEARCO"), _("ANSGAR"), _("MANOLO")},
         .otId = 0x71FC,
         .facilityClass = 0x2D,
         .species = {SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA},
-        .rest = {10, 0, 0x05, 0x0A, 0x06, 0x06, 0x0E, 0x16, 0x14, 0x0A, 0x00, 0x0C, 0xFF, 0xFF},
+        .id = 10,
+        .easyChatWords = {0xA05, 0x606, 0x160E, 0xA14, 0xC00, 0xFFFF},
     },
     {
         .name = {_("セイヤ"), _("FRANK"), _("FRANK"), _("OLINDO"), _("FRANK"), _("MAURO")},
         .otId = 0xA39E,
         .facilityClass = 0x3A,
         .species = {SPECIES_QUAGSIRE, SPECIES_STARMIE, SPECIES_PELIPPER, SPECIES_CRAWDAUNT, SPECIES_WAILORD, SPECIES_GYARADOS, SPECIES_SWAMPERT, SPECIES_LANTURN, SPECIES_WHISCASH, SPECIES_SHUCKLE},
-        .rest = {11, 0, 0x0E, 0x28, 0x3D, 0x10, 0x0F, 0x24, 0x14, 0x0A, 0x23, 0x1E, 0x24, 0x10},
+        .id = 11,
+        .easyChatWords = {0x280E, 0x103D, 0x240F, 0xA14, 0x1E23, 0x1024},
     },
     {
         .name = {_("リュウジ"), _("LAMONT"), _("XAV"), _("ORFEO"), _("JÜRGEN"), _("JORGE")},
         .otId = 0xE590,
         .facilityClass = 0x19,
         .species = {SPECIES_ABSOL, SPECIES_CROBAT, SPECIES_EXPLOUD, SPECIES_MAGNETON, SPECIES_SHARPEDO, SPECIES_MANECTRIC, SPECIES_METAGROSS, SPECIES_ELECTRODE, SPECIES_NOSEPASS, SPECIES_WEEZING},
-        .rest = {12, 0, 0x20, 0x10, 0x2E, 0x06, 0x0B, 0x10, 0x22, 0x1E, 0x0F, 0x1E, 0x0B, 0x10},
+        .id = 12,
+        .easyChatWords = {0x1020, 0x62E, 0x100B, 0x1E22, 0x1E0F, 0x100B},
     },
     {
         .name = {_("カツアキ"), _("TYRESE"), _("ANDY"), _("PARIDE"), _("DAVID"), _("CHICHO")},
         .otId = 0xD018,
         .facilityClass = 10,
         .species = {SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING},
-        .rest = {13, 0, 0x29, 0x0A, 0x3A, 0x06, 0x15, 0x0E, 0x35, 0x14, 0x34, 0x10, 0x1E, 0x06},
+        .id = 13,
+        .easyChatWords = {0xA29, 0x63A, 0xE15, 0x1435, 0x1034, 0x61E},
     },
     {
         .name = {_("トシミツ"), _("DANTE"), _("DANTE"), _("RAOUL"), _("LOTHAR"), _("PABLO")},
         .otId = 0xBC75,
         .facilityClass = 14,
         .species = {SPECIES_SCEPTILE, SPECIES_SANDSLASH, SPECIES_FLYGON, SPECIES_CLAYDOL, SPECIES_ARMALDO, SPECIES_CROBAT, SPECIES_CRADILY, SPECIES_SOLROCK, SPECIES_LUNATONE, SPECIES_GOLEM},
-        .rest = {14, 0, 0x01, 0x0A, 0x17, 0x10, 0x43, 0x12, 0x22, 0x1E, 0x0B, 0x10, 0x0F, 0x28},
+        .id = 14,
+        .easyChatWords = {0xA01, 0x1017, 0x1243, 0x1E22, 0x100B, 0x280F},
     },
     {
         .name = {_("ローウェン"), _("ARTURO"), _("ARTURO"), _("ROMOLO"), _("BRIAN"), _("ARTURO")},
         .otId = 0xFA02,
         .facilityClass = 0x20,
         .species = {SPECIES_ABSOL, SPECIES_MIGHTYENA, SPECIES_ALAKAZAM, SPECIES_BANETTE, SPECIES_NINETALES, SPECIES_CLAYDOL, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_WALREIN, SPECIES_DUSCLOPS},
-        .rest = {15, 0, 0x0F, 0x1E, 0x04, 0x14, 0x2F, 0x10, 0x06, 0x10, 0x20, 0x10, 0x03, 0x0E},
+        .id = 15,
+        .easyChatWords = {0x1E0F, 0x1404, 0x102F, 0x1006, 0x1020, 0xE03},
     },
 };
 
@@ -1030,7 +1040,7 @@ static void (* const sApprenticeFunctions[])(void) =
     sub_81A1224,
     sub_81A1438,
     sub_81A150C,
-    sub_81A15A4,
+    Script_SetPlayerApprenticeTrainerGfxId,
     sub_81A1644,
     sub_81A1370,
 };
@@ -1092,7 +1102,7 @@ void ResetAllApprenticeData(void)
         for (j = 0; j < 4; j++)
             gSaveBlock2Ptr->apprentices[i].playerId[j] = 0;
         gSaveBlock2Ptr->apprentices[i].language = gGameLanguage;
-        gSaveBlock2Ptr->apprentices[i].unk40 = 0;
+        gSaveBlock2Ptr->apprentices[i].checksum = 0;
     }
 
     Script_ResetPlayerApprentice();
@@ -1435,16 +1445,16 @@ static void sub_81A0390(u8 arg0)
 
     for (i = 0; i < 3; i++)
     {
-        gSaveBlock2Ptr->apprentices[0].monData[i].species = 0;
-        gSaveBlock2Ptr->apprentices[0].monData[i].item = 0;
+        gSaveBlock2Ptr->apprentices[0].party[i].species = 0;
+        gSaveBlock2Ptr->apprentices[0].party[i].item = 0;
         for (j = 0; j < 4; j++)
-            gSaveBlock2Ptr->apprentices[0].monData[i].moves[j] = 0;
+            gSaveBlock2Ptr->apprentices[0].party[i].moves[j] = 0;
     }
 
     j = PLAYER_APPRENTICE.field_B1_2;
     for (i = 0; i < 3; i++)
     {
-        apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].monData[i];
+        apprenticeMons[j] = &gSaveBlock2Ptr->apprentices[0].party[i];
         j = (j + 1) % 3;
     }
 
@@ -1570,9 +1580,9 @@ static void Task_ChooseAnswer(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     if (!tWrapAround)
-        input = Menu_ProcessInputNoWrapAround();
+        input = Menu_ProcessInputNoWrap();
     else
-        input = ProcessMenuInput();
+        input = Menu_ProcessInput();
 
     switch (input)
     {
@@ -1975,7 +1985,7 @@ static void sub_81A0FFC(void)
             StringCopy(stringDst, gText_OpenLevel);
         break;
     case APPRENTICE_BUFF_EASY_CHAT:
-        ConvertBattleFrontierTrainerSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
+        FrontierSpeechToString(gSaveBlock2Ptr->apprentices[0].easyChatWords);
         StringCopy(stringDst, gStringVar4);
         break;
     case APPRENTICE_BUFF_SPECIES4:
@@ -2229,7 +2239,7 @@ static void sub_81A1370(void)
     r9 = -1;
     for (i = 1; i < 4; i++)
     {
-        if (ReadUnalignedWord(gSaveBlock2Ptr->apprentices[i].playerId) == ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId)
+        if (GetTrainerId(gSaveBlock2Ptr->apprentices[i].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId)
             && gSaveBlock2Ptr->apprentices[i].number < r10)
         {
             r10 = gSaveBlock2Ptr->apprentices[i].number;
@@ -2261,7 +2271,7 @@ static void sub_81A1438(void)
 
     StringCopy(gSaveBlock2Ptr->apprentices[0].playerName, gSaveBlock2Ptr->playerName);
     gSaveBlock2Ptr->apprentices[0].language = gGameLanguage;
-    sub_8165AE8(&gSaveBlock2Ptr->apprentices[0]);
+    CalcApprenticeChecksum(&gSaveBlock2Ptr->apprentices[0]);
 }
 
 static void sub_81A150C(void)
@@ -2270,51 +2280,46 @@ static void sub_81A150C(void)
     u8 mapObjectGfxId;
     u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
 
-    for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
+    // Search male classes.
+    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
-
-    if (i != 30)
+    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gUnknown_085DCF0E[i];
+        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
         VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        return;
     }
-    else
-    {
-        for (i = 0; i < 20 && gUnknown_085DCEFA[i] != class; i++)
-            ;
 
-        if (i != 20)
-        {
-            mapObjectGfxId = gUnknown_085DCF2C[i];
-            VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
-        }
+    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
+        ;
+    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
+    {
+        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
     }
 }
 
-static void sub_81A15A4(void)
+static void Script_SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
     u8 mapObjectGfxId;
     u8 class = gApprentices[PLAYER_APPRENTICE.id].facilityClass;
 
-    for (i = 0; i < 30 && gUnknown_085DCEDC[i] != class; i++)
+    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
-
-    if (i != 30)
+    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gUnknown_085DCF0E[i];
+        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
         VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        return;
     }
-    else
-    {
-        for (i = 0; i < 20 && gUnknown_085DCEFA[i] != class; i++)
-            ;
 
-        if (i != 20)
-        {
-            mapObjectGfxId = gUnknown_085DCF2C[i];
-            VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
-        }
+    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
+        ;
+    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
+    {
+        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
     }
 }
 

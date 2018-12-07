@@ -145,7 +145,7 @@ void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
-const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
+const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
@@ -217,7 +217,7 @@ void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
 const struct WindowTemplate gUnknown_085A6B90[4] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 18,
@@ -226,7 +226,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0001
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 13,
@@ -235,7 +235,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x0091
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 1,
         .width = 12,
@@ -244,7 +244,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] =
         .baseBlock = 0x017b
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 13,
         .width = 13,
@@ -520,7 +520,7 @@ void sub_8126B80(u8 taskId)
     if (!gPaletteFade.active)
     {
         menuPos = GetMenuCursorPos();
-        switch (ProcessMenuInput())
+        switch (Menu_ProcessInput())
         {
             default:
                 PlaySE(SE_SELECT);
@@ -710,7 +710,7 @@ void sub_8127088(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        input = ProcessMenuInput();
+        input = Menu_ProcessInput();
         switch (input)
         {
             case -1:
@@ -1347,12 +1347,12 @@ void sub_8128060(u8 taskId)
 
 void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.spriteId].data[0];
-    gUnknown_03005DD0.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
-    gSprites[gUnknown_03005DD0.spriteId].oam.priority = 1;
-    gSprites[gUnknown_03005DD0.spriteId].callback = sub_81292D0;
-    gSprites[gUnknown_03005DD0.spriteId].pos1.x = gUnknown_085A7250[data->decoration->shape].x;
-    gSprites[gUnknown_03005DD0.spriteId].pos1.y = gUnknown_085A7250[data->decoration->shape].y;
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
+    gFieldCamera.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
+    gSprites[gFieldCamera.spriteId].oam.priority = 1;
+    gSprites[gFieldCamera.spriteId].callback = sub_81292D0;
+    gSprites[gFieldCamera.spriteId].pos1.x = gUnknown_085A7250[data->decoration->shape].x;
+    gSprites[gFieldCamera.spriteId].pos1.y = gUnknown_085A7250[data->decoration->shape].y;
 }
 
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data)
@@ -1374,7 +1374,7 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphic
     }
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
-    sDecor_CameraSpriteObjectIdx1 = gUnknown_03005DD0.spriteId;
+    sDecor_CameraSpriteObjectIdx1 = gFieldCamera.spriteId;
 }
 
 void sub_812826C(u8 taskId)
@@ -1628,7 +1628,7 @@ void sub_8128950(u8 taskId)
 
 void sub_81289D0(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A72C4);
 }
 
@@ -1693,7 +1693,7 @@ void sub_8128AAC(u8 taskId)
 
 void sub_8128B80(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A72CC);
 }
 
@@ -2076,7 +2076,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     return spriteId;
 }
 
-const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
+const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
 {
     if (decor > 120)
     {
@@ -2293,9 +2293,9 @@ bool8 sub_81299AC(u8 taskId)
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
     GetPlayerFacingDirection();
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.spriteId].data[0];
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
     sub_812A39C();
-    gUnknown_03005DD0.spriteId = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
+    gFieldCamera.spriteId = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
     if (gSaveBlock2Ptr->playerGender == MALE)
     {
         sDecor_CameraSpriteObjectIdx2 = AddPseudoEventObject(0xC1, SpriteCallbackDummy, 0x88, 0x48, 0);
@@ -2306,7 +2306,7 @@ void SetUpPuttingAwayDecorationPlayerAvatar(void)
     }
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
-    sDecor_CameraSpriteObjectIdx1 = gUnknown_03005DD0.spriteId;
+    sDecor_CameraSpriteObjectIdx1 = gFieldCamera.spriteId;
     gSprites[sDecor_CameraSpriteObjectIdx1].oam.priority = 1;
 }
 
@@ -2588,7 +2588,7 @@ void sub_812A0E8(u8 taskId)
 
 void sub_812A1A0(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A7348);
 }
 
@@ -2601,7 +2601,7 @@ void sub_812A1C0(u8 taskId)
 
 void sub_812A1F0(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A7350);
 }
 
@@ -2725,7 +2725,7 @@ void sub_812A3D4(u8 taskId)
 
 void sub_812A458(u8 taskId)
 {
-    sub_8197930();
+    DisplayYesNoMenu();
     sub_8121F68(taskId, &gUnknown_085A741C);
 }
 

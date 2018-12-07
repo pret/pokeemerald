@@ -1,23 +1,25 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_message.h"
-#include "constants/battle_string_ids.h"
-#include "constants/moves.h"
-#include "text.h"
-#include "string_util.h"
-#include "constants/items.h"
-#include "constants/trainers.h"
-#include "event_data.h"
-#include "link.h"
-#include "item.h"
-#include "window.h"
-#include "palette.h"
 #include "battle_controllers.h"
+#include "battle_message.h"
 #include "battle_setup.h"
-#include "menu.h"
-#include "recorded_battle.h"
+#include "battle_tower.h"
+#include "data2.h"
+#include "event_data.h"
+#include "frontier_util.h"
 #include "international_string_util.h"
-#include "battle_frontier_2.h"
+#include "item.h"
+#include "link.h"
+#include "menu.h"
+#include "palette.h"
+#include "recorded_battle.h"
+#include "string_util.h"
+#include "text.h"
+#include "window.h"
+#include "constants/battle_string_ids.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/trainers.h"
 
 struct BattleWindowText
 {
@@ -35,7 +37,6 @@ struct BattleWindowText
 
 extern u8 gUnknown_0203C7B4;
 
-extern const u8 gMoveNames[MOVES_COUNT][13];
 extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
 
@@ -46,14 +47,10 @@ extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 
 extern u8 GetFrontierBrainTrainerClass(void); // battle_frontier_2
-extern u8 GetFrontierOpponentClass(u16 trainerId); // battle_tower
 extern u8 GetTrainerHillOpponentClass(u16 trainerId); // pokenav
-extern u8 GetEreaderTrainerClassId(void); // battle_tower
 extern void CopyFrontierBrainTrainerName(u8 *txtPtr); // battle_frontier_2
 extern void GetTrainerHillTrainerName(u8 *txtPtr, u16 trainerId); // pokenav
-extern void GetEreaderTrainerName(u8 *txtPtr);
 extern void CopyTrainerHillTrainerText(u8 arg0, u16 trainerId); // pokenav
-extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 
 // this file's functions
 static void ChooseMoveUsedParticle(u8 *textPtr);
@@ -1370,7 +1367,8 @@ static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, 
 
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 {
-	{ // 0
+// The corresponding WindowTemplate is gStandardBattleWindowTemplates[] within src/battle_bg.c
+	{ // 0 Standard battle message
 		.fillValue = 0xFF,
 		.fontId = 1,
 		.x = 0,
@@ -1382,7 +1380,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 15,
 		.shadowColor = 6,
 	},
-	{ // 1
+	{ // 1 "What will (pokemon) do?"
 		.fillValue = 0xFF,
 		.fontId = 1,
 		.x = 1,
@@ -1394,7 +1392,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 15,
 		.shadowColor = 6,
 	},
-	{ // 2
+	{ // 2 "Fight/Pokemon/Bag/Run"
 		.fillValue = 0xEE,
 		.fontId = 1,
 		.x = 0,
@@ -1406,7 +1404,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 3
+	{ // 3 Top left move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1418,7 +1416,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 4
+	{ // 4 Top right move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1430,7 +1428,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 5
+	{ // 5 Bottom left move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1442,7 +1440,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 6
+	{ // 6 Bottom right move
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1454,7 +1452,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 7
+	{ // 7 "PP"
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1478,7 +1476,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 9
+	{ // 9 PP remaining
 		.fillValue = 0xEE,
 		.fontId = 1,
 		.x = 2,
@@ -1490,7 +1488,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 11,
 	},
-	{ // 10
+	{ // 10 "type"
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1502,7 +1500,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 11
+	{ // 11 "switch which?"
 		.fillValue = 0xEE,
 		.fontId = 7,
 		.x = 0,
@@ -1514,7 +1512,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
 		.bgColor = 14,
 		.shadowColor = 15,
 	},
-	{ // 12
+	{ // 12 "gText_BattleYesNoChoice"
 		.fillValue = 0xEE,
 		.fontId = 1,
 		.x = 0,
@@ -2582,7 +2580,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_LOSE_TEXT: // trainerA lose text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_A);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_WON_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -2598,7 +2596,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_WIN_TEXT: // trainerA win text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_A);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, gTrainerBattleOpponent_A);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -2679,7 +2677,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_LOSE_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_LOSE_TEXT, gTrainerBattleOpponent_B);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_WON_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -2695,7 +2693,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER2_WIN_TEXT:
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 {
-                    CopyFrontierTrainerText(FRONTIER_WIN_TEXT, gTrainerBattleOpponent_B);
+                    CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, gTrainerBattleOpponent_B);
                     toCpy = gStringVar4;
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -2941,7 +2939,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 {
     const struct BattleWindowText *textInfo = sBattleTextOnWindowsInfo[gBattleScripting.windowsType];
     bool32 copyToVram;
-    struct TextSubPrinter textSubPrinter;
+    struct TextPrinterTemplate printerTemplate;
     u8 speed;
 
     if (windowId & 0x80)
@@ -2955,36 +2953,36 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         copyToVram = TRUE;
     }
 
-    textSubPrinter.current_text_offset = text;
-    textSubPrinter.windowId = windowId;
-    textSubPrinter.fontId = textInfo[windowId].fontId;
-    textSubPrinter.x = textInfo[windowId].x;
-    textSubPrinter.y = textInfo[windowId].y;
-    textSubPrinter.currentX = textSubPrinter.x;
-    textSubPrinter.currentY = textSubPrinter.y;
-    textSubPrinter.letterSpacing = textInfo[windowId].letterSpacing;
-    textSubPrinter.lineSpacing = textInfo[windowId].lineSpacing;
-    textSubPrinter.fontColor_l = 0;
-    textSubPrinter.fgColor = textInfo[windowId].fgColor;
-    textSubPrinter.bgColor = textInfo[windowId].bgColor;
-    textSubPrinter.shadowColor = textInfo[windowId].shadowColor;
+    printerTemplate.currentChar = text;
+    printerTemplate.windowId = windowId;
+    printerTemplate.fontId = textInfo[windowId].fontId;
+    printerTemplate.x = textInfo[windowId].x;
+    printerTemplate.y = textInfo[windowId].y;
+    printerTemplate.currentX = printerTemplate.x;
+    printerTemplate.currentY = printerTemplate.y;
+    printerTemplate.letterSpacing = textInfo[windowId].letterSpacing;
+    printerTemplate.lineSpacing = textInfo[windowId].lineSpacing;
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = textInfo[windowId].fgColor;
+    printerTemplate.bgColor = textInfo[windowId].bgColor;
+    printerTemplate.shadowColor = textInfo[windowId].shadowColor;
 
-    if (textSubPrinter.x == 0xFF)
+    if (printerTemplate.x == 0xFF)
     {
         u32 width = sub_80397C4(gBattleScripting.windowsType, windowId);
-        s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(textSubPrinter.fontId, textSubPrinter.current_text_offset, width, textSubPrinter.letterSpacing);
-        textSubPrinter.x = textSubPrinter.currentX = alignX;
+        s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(printerTemplate.fontId, printerTemplate.currentChar, width, printerTemplate.letterSpacing);
+        printerTemplate.x = printerTemplate.currentX = alignX;
     }
 
     if (windowId == 0x16)
-        gTextFlags.flag_1 = 0;
+        gTextFlags.useAlternateDownArrow = 0;
     else
-        gTextFlags.flag_1 = 1;
+        gTextFlags.useAlternateDownArrow = 1;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED))
-        gTextFlags.flag_2 = 1;
+        gTextFlags.autoScroll = 1;
     else
-        gTextFlags.flag_2 = 0;
+        gTextFlags.autoScroll = 0;
 
     if (windowId == 0 || windowId == 0x16)
     {
@@ -2993,17 +2991,17 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
-            speed = GetPlayerTextSpeed();
+            speed = GetPlayerTextSpeedDelay();
 
-        gTextFlags.flag_0 = 1;
+        gTextFlags.canABSpeedUpPrint = 1;
     }
     else
     {
         speed = textInfo[windowId].speed;
-        gTextFlags.flag_0 = 0;
+        gTextFlags.canABSpeedUpPrint = 0;
     }
 
-    AddTextPrinter(&textSubPrinter, speed, NULL);
+    AddTextPrinter(&printerTemplate, speed, NULL);
 
     if (copyToVram)
     {

@@ -17,11 +17,11 @@ VerdanturfTown_PokemonCenter_1F_EventScript_20273A:: @ 820273A
 	end
 
 VerdanturfTown_PokemonCenter_1F_EventScript_202748:: @ 8202748
-	msgbox VerdanturfTown_PokemonCenter_1F_Text_20275A, 2
+	msgbox VerdanturfTown_PokemonCenter_1F_Text_20275A, MSGBOX_NPC
 	end
 
 VerdanturfTown_PokemonCenter_1F_EventScript_202751:: @ 8202751
-	msgbox VerdanturfTown_PokemonCenter_1F_Text_20280B, 2
+	msgbox VerdanturfTown_PokemonCenter_1F_Text_20280B, MSGBOX_NPC
 	end
 
 VerdanturfTown_PokemonCenter_1F_Text_20275A: @ 820275A

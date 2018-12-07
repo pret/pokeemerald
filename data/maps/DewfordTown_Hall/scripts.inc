@@ -8,12 +8,12 @@ DewfordTown_Hall_EventScript_1FD4D0:: @ 81FD4D0
 	special TrendyPhraseIsOld
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_Hall_EventScript_1FD4EF
-	msgbox DewfordTown_Hall_Text_1FD818, 4
+	msgbox DewfordTown_Hall_Text_1FD818, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_Hall_EventScript_1FD4EF:: @ 81FD4EF
-	msgbox DewfordTown_Hall_Text_1FD877, 4
+	msgbox DewfordTown_Hall_Text_1FD877, MSGBOX_DEFAULT
 	release
 	end
 
@@ -21,7 +21,7 @@ DewfordTown_Hall_EventScript_1FD4F9:: @ 81FD4F9
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	msgbox DewfordTown_Hall_Text_1FD8ED, 4
+	msgbox DewfordTown_Hall_Text_1FD8ED, MSGBOX_DEFAULT
 	release
 	end
 
@@ -30,7 +30,7 @@ DewfordTown_Hall_EventScript_1FD50A:: @ 81FD50A
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
 	special sub_811EF6C
-	msgbox DewfordTown_Hall_Text_1FD948, 5
+	msgbox DewfordTown_Hall_Text_1FD948, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_Hall_EventScript_1FD533
 	compare VAR_RESULT, 0
@@ -38,12 +38,12 @@ DewfordTown_Hall_EventScript_1FD50A:: @ 81FD50A
 	end
 
 DewfordTown_Hall_EventScript_1FD533:: @ 81FD533
-	msgbox DewfordTown_Hall_Text_1FD9B3, 4
+	msgbox DewfordTown_Hall_Text_1FD9B3, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_Hall_EventScript_1FD53D:: @ 81FD53D
-	msgbox DewfordTown_Hall_Text_1FDA06, 4
+	msgbox DewfordTown_Hall_Text_1FDA06, MSGBOX_DEFAULT
 	release
 	end
 
@@ -51,7 +51,7 @@ DewfordTown_Hall_EventScript_1FD547:: @ 81FD547
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	msgbox DewfordTown_Hall_Text_1FDA5C, 4
+	msgbox DewfordTown_Hall_Text_1FDA5C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, DewfordTown_Hall_Movement_2725A6
 	waitmovement 0
@@ -62,7 +62,7 @@ DewfordTown_Hall_EventScript_1FD563:: @ 81FD563
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	msgbox DewfordTown_Hall_Text_1FDA99, 4
+	msgbox DewfordTown_Hall_Text_1FDA99, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, DewfordTown_Hall_Movement_2725A6
 	waitmovement 0
@@ -73,14 +73,14 @@ DewfordTown_Hall_EventScript_1FD57F:: @ 81FD57F
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	msgbox DewfordTown_Hall_Text_1FDAC4, 4
+	msgbox DewfordTown_Hall_Text_1FDAC4, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_Hall_EventScript_1FD590:: @ 81FD590
 	lockall
 	call DewfordTown_Hall_EventScript_271E8B
-	msgbox DewfordTown_Hall_Text_1FDB89, 4
+	msgbox DewfordTown_Hall_Text_1FDB89, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -100,22 +100,22 @@ DewfordTown_Hall_EventScript_1FD5A0:: @ 81FD5A0
 	end
 
 DewfordTown_Hall_EventScript_1FD607:: @ 81FD607
-	msgbox DewfordTown_Hall_Text_1FDC05, 4
+	msgbox DewfordTown_Hall_Text_1FDC05, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD611:: @ 81FD611
-	msgbox DewfordTown_Hall_Text_1FDC21, 4
+	msgbox DewfordTown_Hall_Text_1FDC21, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD61B:: @ 81FD61B
-	msgbox DewfordTown_Hall_Text_1FDC3C, 4
+	msgbox DewfordTown_Hall_Text_1FDC3C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD625:: @ 81FD625
-	msgbox DewfordTown_Hall_Text_1FDC57, 4
+	msgbox DewfordTown_Hall_Text_1FDC57, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -147,41 +147,41 @@ DewfordTown_Hall_EventScript_1FD647:: @ 81FD647
 
 DewfordTown_Hall_EventScript_1FD6AD:: @ 81FD6AD
 	call DewfordTown_Hall_EventScript_1FD73A
-	msgbox DewfordTown_Hall_Text_1FDC76, 4
+	msgbox DewfordTown_Hall_Text_1FDC76, MSGBOX_DEFAULT
 	call DewfordTown_Hall_EventScript_1FD772
-	msgbox DewfordTown_Hall_Text_1FDCE2, 4
+	msgbox DewfordTown_Hall_Text_1FDCE2, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD6C9:: @ 81FD6C9
 	call DewfordTown_Hall_EventScript_1FD73A
-	msgbox DewfordTown_Hall_Text_1FDD95, 4
+	msgbox DewfordTown_Hall_Text_1FDD95, MSGBOX_DEFAULT
 	call DewfordTown_Hall_EventScript_1FD772
-	msgbox DewfordTown_Hall_Text_1FDE0E, 4
+	msgbox DewfordTown_Hall_Text_1FDE0E, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD6E5:: @ 81FD6E5
 	call DewfordTown_Hall_EventScript_1FD73A
-	msgbox DewfordTown_Hall_Text_1FDE77, 4
+	msgbox DewfordTown_Hall_Text_1FDE77, MSGBOX_DEFAULT
 	call DewfordTown_Hall_EventScript_1FD772
-	msgbox DewfordTown_Hall_Text_1FDED8, 4
+	msgbox DewfordTown_Hall_Text_1FDED8, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD701:: @ 81FD701
 	call DewfordTown_Hall_EventScript_1FD73A
-	msgbox DewfordTown_Hall_Text_1FDF72, 4
+	msgbox DewfordTown_Hall_Text_1FDF72, MSGBOX_DEFAULT
 	call DewfordTown_Hall_EventScript_1FD772
-	msgbox DewfordTown_Hall_Text_1FDFF1, 4
+	msgbox DewfordTown_Hall_Text_1FDFF1, MSGBOX_DEFAULT
 	releaseall
 	end
 
 DewfordTown_Hall_EventScript_1FD71D:: @ 81FD71D
 	call DewfordTown_Hall_EventScript_1FD73A
-	msgbox DewfordTown_Hall_Text_1FE09A, 4
+	msgbox DewfordTown_Hall_Text_1FE09A, MSGBOX_DEFAULT
 	call DewfordTown_Hall_EventScript_1FD772
-	msgbox DewfordTown_Hall_Text_1FE0F2, 4
+	msgbox DewfordTown_Hall_Text_1FE0F2, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -252,18 +252,18 @@ DewfordTown_Hall_EventScript_1FD7DA:: @ 81FD7DA
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	checkflag FLAG_0x0E6
+	checkflag FLAG_RECEIVED_TM_36
 	goto_eq DewfordTown_Hall_EventScript_1FD80E
-	msgbox DewfordTown_Hall_Text_1FE142, 4
+	msgbox DewfordTown_Hall_Text_1FE142, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM36
 	compare VAR_RESULT, 0
 	goto_eq DewfordTown_Hall_EventScript_272054
-	setflag FLAG_0x0E6
+	setflag FLAG_RECEIVED_TM_36
 	release
 	end
 
 DewfordTown_Hall_EventScript_1FD80E:: @ 81FD80E
-	msgbox DewfordTown_Hall_Text_1FE1ED, 4
+	msgbox DewfordTown_Hall_Text_1FE1ED, MSGBOX_DEFAULT
 	release
 	end
 

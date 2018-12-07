@@ -7,7 +7,7 @@ FortreeCity_Mart_EventScript_217666:: @ 8217666
 	message gUnknown_08272A21
 	waitmessage
 	pokemart FortreeCity_Mart_Pokemart_217680
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -28,15 +28,15 @@ FortreeCity_Mart_Pokemart_217680: @ 8217680
 	end
 
 FortreeCity_Mart_EventScript_217698:: @ 8217698
-	msgbox FortreeCity_Mart_Text_2176B3, 2
+	msgbox FortreeCity_Mart_Text_2176B3, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_EventScript_2176A1:: @ 82176A1
-	msgbox FortreeCity_Mart_Text_217715, 2
+	msgbox FortreeCity_Mart_Text_217715, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_EventScript_2176AA:: @ 82176AA
-	msgbox FortreeCity_Mart_Text_21778E, 2
+	msgbox FortreeCity_Mart_Text_21778E, MSGBOX_NPC
 	end
 
 FortreeCity_Mart_Text_2176B3: @ 82176B3

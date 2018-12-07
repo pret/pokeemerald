@@ -2,7 +2,7 @@ LilycoveCity_DepartmentStore_1F_MapScripts:: @ 821F692
 	.byte 0
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F693:: @ 821F693
-	msgbox LilycoveCity_DepartmentStore_1F_Text_21F866, 2
+	msgbox LilycoveCity_DepartmentStore_1F_Text_21F866, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
@@ -13,7 +13,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_21F7F7
 	checkflag FLAG_0x92A
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F78D
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6390, 5
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6390, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F797
 	setflag FLAG_0x92A
@@ -22,7 +22,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	special RetrieveLotteryNumber
 	copyvar VAR_0x8008, VAR_RESULT
 	special BufferLottoTicketNumber
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A650B, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A650B, MSGBOX_DEFAULT
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_2725A8
 	waitmovement 0
 	playse SE_PC_ON
@@ -57,47 +57,47 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F77B:: @ 821F77B
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6592, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6592, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F784:: @ 821F784
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A65E6, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A65E6, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F78D:: @ 821F78D
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6496, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6496, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F797:: @ 821F797
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A64B1, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A64B1, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7A1:: @ 821F7A1
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A663C, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A663C, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStore_1F_EventScript_21F7AF
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7AF:: @ 821F7AF
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6831, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6831, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7B9:: @ 821F7B9
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6664, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6664, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7C2:: @ 821F7C2
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A66A7, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A66A7, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7CB:: @ 821F7CB
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A66ED, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A66ED, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7D4:: @ 821F7D4
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6731, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6731, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7DD:: @ 821F7DD
@@ -107,12 +107,12 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F7DD:: @ 821F7DD
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7ED:: @ 821F7ED
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A678C, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A678C, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F7F7:: @ 821F7F7
-	msgbox LilycoveCity_DepartmentStore_1F_Text_2A67E1, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_2A67E1, MSGBOX_DEFAULT
 	giveitem_std VAR_POKELOT_PRIZE
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7ED
@@ -125,15 +125,15 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F7F7:: @ 821F7F7
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F82F:: @ 821F82F
-	msgbox LilycoveCity_DepartmentStore_1F_Text_21F88C, 2
+	msgbox LilycoveCity_DepartmentStore_1F_Text_21F88C, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F838:: @ 821F838
-	msgbox LilycoveCity_DepartmentStore_1F_Text_21F8F5, 2
+	msgbox LilycoveCity_DepartmentStore_1F_Text_21F8F5, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F841:: @ 821F841
-	msgbox LilycoveCity_DepartmentStore_1F_Text_21F92B, 2
+	msgbox LilycoveCity_DepartmentStore_1F_Text_21F92B, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F84A:: @ 821F84A
@@ -141,13 +141,13 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F84A:: @ 821F84A
 	faceplayer
 	waitse
 	playmoncry SPECIES_AZUMARILL, 0
-	msgbox LilycoveCity_DepartmentStore_1F_Text_21F974, 4
+	msgbox LilycoveCity_DepartmentStore_1F_Text_21F974, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 LilycoveCity_DepartmentStore_1F_EventScript_21F85D:: @ 821F85D
-	msgbox LilycoveCity_DepartmentStore_1F_Text_21F98A, 3
+	msgbox LilycoveCity_DepartmentStore_1F_Text_21F98A, MSGBOX_SIGN
 	end
 
 LilycoveCity_DepartmentStore_1F_Text_21F866: @ 821F866

@@ -4,7 +4,7 @@ SlateportCity_OceanicMuseum_2F_MapScripts:: @ 820BAFF
 SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	lock
 	faceplayer
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BD8D, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BD8D, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_AQA_0, 1
 	addobject 3
@@ -20,11 +20,11 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC92
 	compare VAR_FACING, 4
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC92
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE40, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE40, MSGBOX_DEFAULT
 	compare VAR_FACING, 4
 	call_if 5, SlateportCity_OceanicMuseum_2F_EventScript_20BC9D
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE69, 4
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE93, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE69, MSGBOX_DEFAULT
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE93, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCE2
 	waitmovement 0
@@ -32,32 +32,32 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCA8
 	compare VAR_FACING, 3
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCB3
-	trainerbattle 3, TRAINER_GRUNT_14, 0, SlateportCity_OceanicMuseum_2F_Text_20BEE2
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BEFA, 4
+	trainerbattle_no_intro TRAINER_GRUNT_14, SlateportCity_OceanicMuseum_2F_Text_20BEE2
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BEFA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCEF
 	waitmovement 0
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCE2
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BF35, 4
-	trainerbattle 3, TRAINER_GRUNT_15, 0, SlateportCity_OceanicMuseum_2F_Text_20BF66
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BF35, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_15, SlateportCity_OceanicMuseum_2F_Text_20BF66
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCEF
 	waitmovement 0
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_2725AA
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_2725A6
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BF7A, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BF7A, MSGBOX_DEFAULT
 	closemessage
 	delay 35
 	addobject 2
 	applymovement 2, SlateportCity_OceanicMuseum_2F_Movement_20BCD8
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCFE
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20BFF2, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20BFF2, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, SlateportCity_OceanicMuseum_2F_Movement_20BCD6
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C059, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C059, MSGBOX_DEFAULT
 	closemessage
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -67,25 +67,25 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	removeobject 4
 	fadescreen 0
 	delay 30
-	setflag FLAG_0x373
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
 	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_2725A8
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 269
 	call SlateportCity_OceanicMuseum_2F_EventScript_2723E4
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C36C, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C36C, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 	removeobject 1
-	setflag FLAG_0x384
+	setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
 	compare VAR_0x40DA, 0
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
 	setflag FLAG_0x095
-	clearflag FLAG_0x3B3
-	setflag FLAG_0x3B5
+	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
+	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setvar VAR_0x40D2, 1
 	fadescreen 0
 	release
@@ -216,57 +216,57 @@ SlateportCity_OceanicMuseum_2F_Movement_20BCFE: @ 820BCFE
 	step_end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD0A:: @ 820BD0A
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C4F9, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C4F9, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD13:: @ 820BD13
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C566, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C566, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD1C:: @ 820BD1C
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C5C6, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C5C6, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD25:: @ 820BD25
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C6C7, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C6C7, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD2E:: @ 820BD2E
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C72F, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C72F, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD37:: @ 820BD37
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C7C1, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C7C1, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD40:: @ 820BD40
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C82F, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C82F, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD49:: @ 820BD49
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C88B, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C88B, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD52:: @ 820BD52
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C8E8, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C8E8, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD5B:: @ 820BD5B
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C93A, 3
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C93A, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD64:: @ 820BD64
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C43F, 2
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C43F, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD6D:: @ 820BD6D
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C495, 2
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C495, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BD76:: @ 820BD76
 	lock
 	faceplayer
-	msgbox SlateportCity_OceanicMuseum_2F_Text_20C4C2, 4
+	msgbox SlateportCity_OceanicMuseum_2F_Text_20C4C2, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, SlateportCity_OceanicMuseum_2F_Movement_2725A2
 	waitmovement 0

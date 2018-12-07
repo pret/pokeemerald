@@ -41,7 +41,7 @@ LittlerootTown_EventScript_1E7E4F:: @ 81E7E4F
 
 LittlerootTown_EventScript_1E7E53:: @ 81E7E53
 	setvar VAR_0x40C7, 2
-	setflag FLAG_0x3D3
+	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	return
 
 LittlerootTown_EventScript_1E7E5C:: @ 81E7E5C
@@ -66,7 +66,7 @@ LittlerootTown_EventScript_1E7E86:: @ 81E7E86
 	return
 
 LittlerootTown_EventScript_1E7E92:: @ 81E7E92
-	clearflag FLAG_0x2F0
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setobjectmovementtype 4, 8
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -94,7 +94,7 @@ LittlerootTown_EventScript_1E7EDB:: @ 81E7EDB
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 8
 	call LittlerootTown_EventScript_1E7F17
-	setflag FLAG_0x2F9
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
 	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
@@ -105,7 +105,7 @@ LittlerootTown_EventScript_1E7EF9:: @ 81E7EF9
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
 	call LittlerootTown_EventScript_1E7F17
-	setflag FLAG_0x2FA
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
 	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
@@ -126,7 +126,7 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	delay 10
 	applymovement 4, LittlerootTown_Movement_1E7F9A
 	waitmovement 0
-	msgbox LittlerootTown_Text_1E86BC, 4
+	msgbox LittlerootTown_Text_1E86BC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_1E7F9D
 	applymovement 255, LittlerootTown_Movement_1E7FA4
@@ -136,12 +136,12 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	applymovement 4, LittlerootTown_Movement_1E7FA1
 	applymovement 255, LittlerootTown_Movement_1E7FA9
 	waitmovement 0
-	setflag FLAG_0x2F0
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setvar VAR_0x4092, 3
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
-	clearflag FLAG_0x364
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	return
 
@@ -190,10 +190,10 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	applymovement 8, LittlerootTown_Movement_272598
 	waitmovement 0
 	delay 80
-	msgbox LittlerootTown_Text_1E8DA2, 4
+	msgbox LittlerootTown_Text_1E8DA2, MSGBOX_DEFAULT
 	closemessage
-	clearflag FLAG_0x31A
-	clearflag FLAG_0x31B
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	delay 20
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
@@ -225,11 +225,11 @@ LittlerootTown_EventScript_1E8013:: @ 81E8013
 	end
 
 LittlerootTown_EventScript_1E8022:: @ 81E8022
-	msgbox LittlerootTown_Text_1E8ACF, 2
+	msgbox LittlerootTown_Text_1E8ACF, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_1E802B:: @ 81E802B
-	msgbox LittlerootTown_Text_1E8B25, 2
+	msgbox LittlerootTown_Text_1E8B25, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_1E8034:: @ 81E8034
@@ -241,13 +241,13 @@ LittlerootTown_EventScript_1E8034:: @ 81E8034
 	goto_eq LittlerootTown_EventScript_1E807A
 	compare VAR_0x4050, 0
 	goto_if 5, LittlerootTown_EventScript_1E805D
-	msgbox LittlerootTown_Text_1E8BB8, 4
+	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_1E805D:: @ 81E805D
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_1E8C3A, 4
+	msgbox LittlerootTown_Text_1E8C3A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
 	waitmovement 0
@@ -257,12 +257,12 @@ LittlerootTown_EventScript_1E805D:: @ 81E805D
 
 LittlerootTown_EventScript_1E807A:: @ 81E807A
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_1E8CE3, 4
+	msgbox LittlerootTown_Text_1E8CE3, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_1E8087:: @ 81E8087
-	msgbox LittlerootTown_Text_1E8D07, 4
+	msgbox LittlerootTown_Text_1E8D07, MSGBOX_DEFAULT
 	release
 	end
 
@@ -277,12 +277,12 @@ LittlerootTown_EventScript_1E8091:: @ 81E8091
 	end
 
 LittlerootTown_EventScript_1E80AD:: @ 81E80AD
-	msgbox LittlerootTown_Text_1E8BB8, 4
+	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1E80DF
 	applymovement 255, LittlerootTown_Movement_1E80EB
 	waitmovement 0
-	msgbox LittlerootTown_Text_1E8C07, 4
+	msgbox LittlerootTown_Text_1E8C07, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -365,7 +365,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	applymovement 255, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_1E8C3A, 4
+	msgbox LittlerootTown_Text_1E8C3A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
 	waitmovement 0
@@ -374,11 +374,11 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	end
 
 LittlerootTown_EventScript_1E8151:: @ 81E8151
-	msgbox LittlerootTown_Text_1E8D32, 3
+	msgbox LittlerootTown_Text_1E8D32, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_1E815A:: @ 81E815A
-	msgbox LittlerootTown_Text_1E8D69, 3
+	msgbox LittlerootTown_Text_1E8D69, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_1E8163:: @ 81E8163
@@ -392,11 +392,11 @@ LittlerootTown_EventScript_1E8163:: @ 81E8163
 	end
 
 LittlerootTown_EventScript_1E817D:: @ 81E817D
-	msgbox LittlerootTown_Text_1E8D83, 4
+	msgbox LittlerootTown_Text_1E8D83, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E8186:: @ 81E8186
-	msgbox LittlerootTown_Text_1E8D8E, 4
+	msgbox LittlerootTown_Text_1E8D8E, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E818F:: @ 81E818F
@@ -410,11 +410,11 @@ LittlerootTown_EventScript_1E818F:: @ 81E818F
 	end
 
 LittlerootTown_EventScript_1E81A9:: @ 81E81A9
-	msgbox LittlerootTown_Text_1E8D8E, 4
+	msgbox LittlerootTown_Text_1E8D8E, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E81B2:: @ 81E81B2
-	msgbox LittlerootTown_Text_1E8D83, 4
+	msgbox LittlerootTown_Text_1E8D83, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E81BB:: @ 81E81BB
@@ -466,7 +466,7 @@ LittlerootTown_EventScript_1E8211:: @ 81E8211
 	call_if 1, LittlerootTown_EventScript_1E8281
 	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E828C
-	msgbox LittlerootTown_Text_1E87E1, 4
+	msgbox LittlerootTown_Text_1E87E1, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -917,13 +917,13 @@ LittlerootTown_EventScript_1E8686:: @ 81E8686
 	end
 
 LittlerootTown_EventScript_1E8693:: @ 81E8693
-	msgbox LittlerootTown_Text_1E87F0, 4
+	msgbox LittlerootTown_Text_1E87F0, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_1E8925
 	waitfanfare
 	setflag FLAG_0x112
-	msgbox LittlerootTown_Text_1E894F, 4
-	msgbox LittlerootTown_Text_1E8A03, 4
+	msgbox LittlerootTown_Text_1E894F, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_1E8A03, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	return

@@ -29,11 +29,11 @@ OldaleTown_PokemonCenter_2F_EventScript_276AD5:: @ 8276AD5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276AFB:: @ 8276AFB
-	clearflag FLAG_0x2BE
+	clearflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_276AFF:: @ 8276AFF
-	setflag FLAG_0x2BE
+	setflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
 BattleFrontier_PokemonCenter_2F_EventScript_276B03:: @ 8276B03
@@ -63,7 +63,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276B19:: @ 8276B19
 	execram
 
 OldaleTown_PokemonCenter_2F_EventScript_276B1A:: @ 8276B1A
-	msgbox gUnknown_08273178, 2
+	msgbox gUnknown_08273178, MSGBOX_NPC
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
@@ -72,16 +72,16 @@ OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276B19
 	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276B19
-	msgbox gUnknown_08273594, 4
+	msgbox gUnknown_08273594, MSGBOX_DEFAULT
 	giveitem_std ITEM_EON_TICKET
 	setflag FLAG_SYS_HAS_EON_TICKET
 	setvar VAR_0x403F, 0
-	msgbox gUnknown_082735F2, 4
+	msgbox gUnknown_082735F2, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276B62:: @ 8276B62
-	msgbox gUnknown_08273178, 4
+	msgbox gUnknown_08273178, MSGBOX_DEFAULT
 	release
 	end
 
@@ -331,12 +331,12 @@ OldaleTown_PokemonCenter_2F_EventScript_276DE0:: @ 8276DE0
 	lockall
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_2725A6
 	waitmovement 0
-	msgbox OldaleTown_PokemonCenter_2F_Text_27964A, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27964A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_276E10
 	waitmovement 0
 	delay 30
-	msgbox OldaleTown_PokemonCenter_2F_Text_279718, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_279718, MSGBOX_DEFAULT
 	setvar VAR_0x40CD, 2
 	releaseall
 	end
@@ -354,7 +354,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276E13:: @ 8276E13
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276E22:: @ 8276E22
-	msgbox OldaleTown_PokemonCenter_2F_Text_277EF1, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_277EF1, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_276E30
 	end
 
@@ -399,7 +399,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276EC2:: @ 8276EC2
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276F15:: @ 8276F15
-	msgbox OldaleTown_PokemonCenter_2F_Text_279142, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_279142, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_276EC2
 	end
 
@@ -417,7 +417,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276F2E:: @ 8276F2E
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276F47:: @ 8276F47
-	msgbox OldaleTown_PokemonCenter_2F_Text_277FEE, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_277FEE, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_276EC2
 	end
 
@@ -502,25 +502,25 @@ OldaleTown_PokemonCenter_2F_EventScript_277046:: @ 8277046
 
 OldaleTown_PokemonCenter_2F_EventScript_277072:: @ 8277072
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_27833D, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27833D, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_2770A5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277083:: @ 8277083
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_278307, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278307, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_2770A5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277094:: @ 8277094
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_2782D1, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2782D1, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_2770A5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2770A5:: @ 82770A5
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_278372, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278372, MSGBOX_DEFAULT
 	release
 	end
 
@@ -593,12 +593,12 @@ OldaleTown_PokemonCenter_2F_EventScript_277199:: @ 8277199
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_2771BF:: @ 82771BF
-	msgbox OldaleTown_PokemonCenter_2F_Text_278027, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278027, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_2771CD:: @ 82771CD
-	msgbox OldaleTown_PokemonCenter_2F_Text_278061, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278061, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
 
@@ -659,45 +659,45 @@ OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
 
 OldaleTown_PokemonCenter_2F_EventScript_2772AB:: @ 82772AB
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_278565, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278565, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2772B8:: @ 82772B8
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_2785C9, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2785C9, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_2772C5:: @ 82772C5
 OldaleTown_PokemonCenter_2F_EventScript_2772C5:: @ 82772C5
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_27821C, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27821C, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_2772D2:: @ 82772D2
 OldaleTown_PokemonCenter_2F_EventScript_2772D2:: @ 82772D2
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_2781C7, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2781C7, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2772DF:: @ 82772DF
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_278255, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278255, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2772EC:: @ 82772EC
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_278291, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278291, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_2772F9:: @ 82772F9
 	special CloseLink
-	msgbox MossdeepCity_GameCorner_1F_Text_278D51, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278D51, MSGBOX_DEFAULT
 	release
 	end
 
@@ -709,29 +709,29 @@ OldaleTown_PokemonCenter_2F_EventScript_277306:: @ 8277306
 
 OldaleTown_PokemonCenter_2F_EventScript_27730E:: @ 827730E
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_2782A8, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2782A8, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27731B:: @ 827731B
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_2785E9, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2785E9, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277328:: @ 8277328
 	special CloseLink
-	msgbox OldaleTown_PokemonCenter_2F_Text_278651, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_278651, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277335:: @ 8277335
-	msgbox gUnknown_0827306F, 4
+	msgbox gUnknown_0827306F, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27733F:: @ 827733F
-	msgbox gUnknown_082730BC, 4
+	msgbox gUnknown_082730BC, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -917,34 +917,34 @@ RecordCorner_EventScript_277471:: @ 8277471
 	end
 
 EventScript_TradeRoom_ReadTrainerCard1:: @ 827747E
-	msgbox Text_278452, 4
+	msgbox Text_278452, MSGBOX_DEFAULT
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
 EventScript_TradeRoom_ReadTrainerCard2:: @ 827748D
-	msgbox Text_27847B, 4
+	msgbox Text_27847B, MSGBOX_DEFAULT
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
 EventScript_TradeRoom_TooBusyToNotice:: @ 827749C
-	msgbox Text_27842E, 4
+	msgbox Text_27842E, MSGBOX_DEFAULT
 	closemessage
 	end
 
 SingleBattleColosseum_EventScript_2774A6:: @ 82774A6
 	special sub_8098574
-	msgbox SingleBattleColosseum_Text_2784B4, 4
+	msgbox SingleBattleColosseum_Text_2784B4, MSGBOX_DEFAULT
 	special sub_809859C
 	closemessage
 	end
 
 TradeCenter_EventScript_2774B6:: @ 82774B6
 	special sub_8098574
-	msgbox TradeCenter_Text_2784E2, 4
+	msgbox TradeCenter_Text_2784E2, MSGBOX_DEFAULT
 	special sub_809859C
 	closemessage
 	end
@@ -970,7 +970,7 @@ RecordCorner_EventScript_2774E0:: @ 82774E0
 	end
 
 gUnknown_082774EF:: @ 82774EF
-	msgbox Text_2783A8, 5
+	msgbox Text_2783A8, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq gUnknown_08277509
 	erasebox 0, 0, 29, 19
@@ -1029,7 +1029,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
-	msgbox OldaleTown_PokemonCenter_2F_Text_27961C, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27961C, MSGBOX_DEFAULT
 	closemessage
 	special HealPlayerParty
 	setvar VAR_0x8004, 6
@@ -1068,17 +1068,17 @@ OldaleTown_PokemonCenter_2F_EventScript_277626:: @ 8277626
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_27764C:: @ 827764C
-	msgbox OldaleTown_PokemonCenter_2F_Text_27893E, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27893E, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_273755
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27765A:: @ 827765A
-	msgbox OldaleTown_PokemonCenter_2F_Text_27897B, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27897B, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_273755
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277668:: @ 8277668
-	msgbox OldaleTown_PokemonCenter_2F_Text_2789B5, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2789B5, MSGBOX_DEFAULT
 	release
 	return
 
@@ -1087,15 +1087,15 @@ OldaleTown_PokemonCenter_2F_EventScript_277672:: @ 8277672
 	faceplayer
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_277335
-	msgbox OldaleTown_PokemonCenter_2F_Text_279937, 5
+	msgbox OldaleTown_PokemonCenter_2F_Text_279937, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27769A
-	msgbox OldaleTown_PokemonCenter_2F_Text_2799AA, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2799AA, MSGBOX_DEFAULT
 	release
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_27769A:: @ 827769A
-	msgbox OldaleTown_PokemonCenter_2F_Text_279C91, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_279C91, MSGBOX_DEFAULT
 	release
 	return
 
@@ -1165,7 +1165,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2777CB:: @ 82777CB
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27780D:: @ 827780D
-	msgbox OldaleTown_PokemonCenter_2F_Text_27909D, 5
+	msgbox OldaleTown_PokemonCenter_2F_Text_27909D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	call OldaleTown_PokemonCenter_2F_EventScript_277199
@@ -1202,7 +1202,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277899:: @ 8277899
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2778B2:: @ 82778B2
-	msgbox OldaleTown_PokemonCenter_2F_Text_277FEE, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_277FEE, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_27783B
 	end
 
@@ -1212,12 +1212,12 @@ OldaleTown_PokemonCenter_2F_EventScript_2778C0:: @ 82778C0
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2778CB:: @ 82778CB
-	msgbox OldaleTown_PokemonCenter_2F_Text_279142, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_279142, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_27783B
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2778D9:: @ 82778D9
-	msgbox OldaleTown_PokemonCenter_2F_Text_2790E8, 5
+	msgbox OldaleTown_PokemonCenter_2F_Text_2790E8, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	setvar VAR_0x8004, 12
@@ -1225,7 +1225,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2778D9:: @ 82778D9
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_2778F7:: @ 82778F7
-	msgbox OldaleTown_PokemonCenter_2F_Text_279114, 5
+	msgbox OldaleTown_PokemonCenter_2F_Text_279114, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	special HasAtLeastOneBerry
@@ -1236,7 +1236,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2778F7:: @ 82778F7
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277923:: @ 8277923
-	msgbox OldaleTown_PokemonCenter_2F_Text_2788FC, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_2788FC, MSGBOX_DEFAULT
 	goto OldaleTown_PokemonCenter_2F_EventScript_2776E3
 	end
 
@@ -1402,12 +1402,12 @@ EventScript_WirelessBoxResults:: @ 8277B8A
 	fadescreen 1
 	special sub_801A42C
 	waitstate
-	msgbox OldaleTown_PokemonCenter_2F_Text_27874F, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27874F, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_277BB4:: @ 8277BB4
-	msgbox OldaleTown_PokemonCenter_2F_Text_27871F, 4
+	msgbox OldaleTown_PokemonCenter_2F_Text_27871F, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -1476,17 +1476,17 @@ MossdeepCity_GameCorner_1F_EventScript_277C34:: @ 8277C34
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277C73:: @ 8277C73
-	msgbox MossdeepCity_GameCorner_1F_Text_278ACB, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278ACB, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277C7D:: @ 8277C7D
-	msgbox MossdeepCity_GameCorner_1F_Text_278BF1, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278BF1, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277C87:: @ 8277C87
-	msgbox MossdeepCity_GameCorner_1F_Text_278CAC, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278CAC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1514,7 +1514,7 @@ MossdeepCity_GameCorner_1F_EventScript_277CE9:: @ 8277CE9
 	special sub_802C920
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E55
-	msgbox MossdeepCity_GameCorner_1F_Text_278DD9, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278DD9, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8005, 0
 	special sub_81B8958
@@ -1533,7 +1533,7 @@ MossdeepCity_GameCorner_1F_EventScript_277D35:: @ 8277D35
 	special sub_8027A5C
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E55
-	msgbox MossdeepCity_GameCorner_1F_Text_278DD9, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278DD9, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8005, 1
 	special sub_81B8958
@@ -1602,12 +1602,12 @@ MossdeepCity_GameCorner_1F_EventScript_277E0E:: @ 8277E0E
 
 MossdeepCity_GameCorner_1F_EventScript_277E48:: @ 8277E48
 	delay 60
-	msgbox MossdeepCity_GameCorner_1F_Text_278D68, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278D68, MSGBOX_DEFAULT
 	release
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277E55:: @ 8277E55
-	msgbox MossdeepCity_GameCorner_1F_Text_278E60, 5
+	msgbox MossdeepCity_GameCorner_1F_Text_278E60, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	compare VAR_0x8005, 0
@@ -1618,11 +1618,11 @@ MossdeepCity_GameCorner_1F_EventScript_277E55:: @ 8277E55
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_277E84:: @ 8277E84
-	msgbox MossdeepCity_GameCorner_1F_Text_278EDC, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278EDC, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_277E8D:: @ 8277E8D
-	msgbox MossdeepCity_GameCorner_1F_Text_278FA4, 4
+	msgbox MossdeepCity_GameCorner_1F_Text_278FA4, MSGBOX_DEFAULT
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_277E96:: @ 8277E96

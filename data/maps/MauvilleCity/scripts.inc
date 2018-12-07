@@ -5,7 +5,7 @@ MauvilleCity_MapScripts:: @ 81DF385
 MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	setflag FLAG_VISITED_MAUVILLE_CITY
 	clearflag FLAG_0x09D
-	clearflag FLAG_SPRITEVIS_SLATEPORT_MUSEUM_POPULATION
+	clearflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_0x063
 	setvar VAR_0x4093, 0
@@ -14,41 +14,41 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	end
 
 MauvilleCity_EventScript_1DF3A9:: @ 81DF3A9
-	clearflag FLAG_SPRITEVIS_MAUVILLE_GYM_WATTSON
-	setflag FLAG_SPRITEVIS_MAUVILLE_CITY_WATTSON
+	clearflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
+	setflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
 	setflag FLAG_WATTSON_REMATCH_AVAILABLE
 	return
 
 MauvilleCity_EventScript_1DF3B3:: @ 81DF3B3
-	msgbox MauvilleCity_Text_1E0301, 2
+	msgbox MauvilleCity_Text_1E0301, MSGBOX_NPC
 	end
 
 MauvilleCity_EventScript_1DF3BC:: @ 81DF3BC
-	msgbox MauvilleCity_Text_1E037C, 2
+	msgbox MauvilleCity_Text_1E037C, MSGBOX_NPC
 	end
 
 MauvilleCity_EventScript_1DF3C5:: @ 81DF3C5
-	msgbox MauvilleCity_Text_1E03FB, 2
+	msgbox MauvilleCity_Text_1E03FB, MSGBOX_NPC
 	end
 
 MauvilleCity_EventScript_1DF3CE:: @ 81DF3CE
-	msgbox MauvilleCity_Text_1E044A, 2
+	msgbox MauvilleCity_Text_1E044A, MSGBOX_NPC
 	end
 
 MauvilleCity_EventScript_1DF3D7:: @ 81DF3D7
-	msgbox MauvilleCity_Text_1E0485, 3
+	msgbox MauvilleCity_Text_1E0485, MSGBOX_SIGN
 	end
 
 MauvilleCity_EventScript_1DF3E0:: @ 81DF3E0
-	msgbox MauvilleCity_Text_1E04B7, 3
+	msgbox MauvilleCity_Text_1E04B7, MSGBOX_SIGN
 	end
 
 MauvilleCity_EventScript_1DF3E9:: @ 81DF3E9
-	msgbox MauvilleCity_Text_1E0504, 3
+	msgbox MauvilleCity_Text_1E0504, MSGBOX_SIGN
 	end
 
 MauvilleCity_EventScript_1DF3F2:: @ 81DF3F2
-	msgbox MauvilleCity_Text_1E053C, 3
+	msgbox MauvilleCity_Text_1E053C, MSGBOX_SIGN
 	end
 
 MauvilleCity_EventScript_1DF3FB:: @ 81DF3FB
@@ -56,13 +56,13 @@ MauvilleCity_EventScript_1DF3FB:: @ 81DF3FB
 	faceplayer
 	checkflag FLAG_0x062
 	goto_eq MauvilleCity_EventScript_1DF413
-	msgbox MauvilleCity_Text_1E056A, 4
+	msgbox MauvilleCity_Text_1E056A, MSGBOX_DEFAULT
 	setflag FLAG_0x062
 	release
 	end
 
 MauvilleCity_EventScript_1DF413:: @ 81DF413
-	msgbox MauvilleCity_Text_1E0699, 4
+	msgbox MauvilleCity_Text_1E0699, MSGBOX_DEFAULT
 	release
 	end
 
@@ -71,7 +71,7 @@ MauvilleCity_EventScript_1DF41D:: @ 81DF41D
 	faceplayer
 	checkflag FLAG_0x11C
 	goto_eq MauvilleCity_EventScript_1DF43D
-	msgbox MauvilleCity_Text_1DF7DC, 4
+	msgbox MauvilleCity_Text_1DF7DC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, MauvilleCity_Movement_2725A2
 	waitmovement 0
@@ -79,7 +79,7 @@ MauvilleCity_EventScript_1DF41D:: @ 81DF41D
 	end
 
 MauvilleCity_EventScript_1DF43D:: @ 81DF43D
-	msgbox MauvilleCity_Text_1DFAA5, 4
+	msgbox MauvilleCity_Text_1DFAA5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, MauvilleCity_Movement_2725A2
 	waitmovement 0
@@ -92,9 +92,9 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 	goto_eq MauvilleCity_EventScript_1DF690
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DF845, 4
-	msgbox MauvilleCity_Text_1DF8B9, 4
-	msgbox MauvilleCity_Text_1DF963, 4
+	msgbox MauvilleCity_Text_1DF845, MSGBOX_DEFAULT
+	msgbox MauvilleCity_Text_1DF8B9, MSGBOX_DEFAULT
+	msgbox MauvilleCity_Text_1DF963, MSGBOX_DEFAULT
 	applymovement 6, MauvilleCity_Movement_27259E
 	waitmovement 0
 	playse SE_PIN
@@ -102,7 +102,7 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 	waitmovement 0
 	applymovement 6, MauvilleCity_Movement_27259A
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DF9B2, 5
+	msgbox MauvilleCity_Text_1DF9B2, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_1DF4AD
 	end
 
@@ -128,7 +128,7 @@ MauvilleCity_EventScript_1DF4E0:: @ 81DF4E0
 	applymovement 255, MauvilleCity_Movement_1DF6EE
 	applymovement 7, MauvilleCity_Movement_1DF6F3
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFD34, 4
+	msgbox MauvilleCity_Text_1DFD34, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MauvilleCity_Movement_1DF6CC
 	applymovement 7, MauvilleCity_Movement_1DF6FA
@@ -147,7 +147,7 @@ MauvilleCity_EventScript_1DF53D:: @ 81DF53D
 	delay 30
 	applymovement 7, MauvilleCity_Movement_1DF6F7
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFD34, 4
+	msgbox MauvilleCity_Text_1DFD34, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, MauvilleCity_Movement_1DF6D0
 	applymovement 7, MauvilleCity_Movement_1DF703
@@ -159,8 +159,8 @@ MauvilleCity_EventScript_1DF53D:: @ 81DF53D
 MauvilleCity_EventScript_1DF593:: @ 81DF593
 	removeobject 6
 	removeobject 7
-	clearflag FLAG_0x326
-	clearflag FLAG_0x329
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
+	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
 	setflag FLAG_0x0BE
 	setvar VAR_0x40F2, 0
 	setflag FLAG_0x088
@@ -170,7 +170,7 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	call_if 1, MauvilleCity_EventScript_1DF601
 	applymovement 255, MauvilleCity_Movement_2725AA
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFED5, 4
+	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage
 	addvar VAR_0x40D1, 1
 	compare VAR_FACING, 2
@@ -207,29 +207,29 @@ MauvilleCity_EventScript_1DF628:: @ 81DF628
 	return
 
 MauvilleCity_EventScript_1DF63A:: @ 81DF63A
-	msgbox MauvilleCity_Text_1DFB6D, 4
-	trainerbattle 3, TRAINER_WALLY_2, 0, MauvilleCity_Text_1DFB96
+	msgbox MauvilleCity_Text_1DFB6D, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_WALLY_2, MauvilleCity_Text_1DFB96
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFBC3, 4
+	msgbox MauvilleCity_Text_1DFBC3, MSGBOX_DEFAULT
 	applymovement 6, MauvilleCity_Movement_27259E
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFBED, 4
+	msgbox MauvilleCity_Text_1DFBED, MSGBOX_DEFAULT
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFC8A, 4
+	msgbox MauvilleCity_Text_1DFC8A, MSGBOX_DEFAULT
 	return
 
 MauvilleCity_EventScript_1DF683:: @ 81DF683
 	setflag FLAG_0x11C
-	msgbox MauvilleCity_Text_1DFA4A, 4
+	msgbox MauvilleCity_Text_1DFA4A, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_EventScript_1DF690:: @ 81DF690
 	applymovement 6, MauvilleCity_Movement_27259E
 	waitmovement 0
-	msgbox MauvilleCity_Text_1DFB42, 5
+	msgbox MauvilleCity_Text_1DFB42, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_1DF4AD
 	end
 
@@ -430,30 +430,30 @@ MauvilleCity_EventScript_1DF73A:: @ 81DF73A
 	goto_eq MauvilleCity_EventScript_1DF784
 	checkflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
 	goto_eq MauvilleCity_EventScript_1DF77A
-	msgbox MauvilleCity_Text_1DFFE4, 4
+	msgbox MauvilleCity_Text_1DFFE4, MSGBOX_DEFAULT
 	giveitem_std ITEM_BASEMENT_KEY
 	setflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
-	msgbox MauvilleCity_Text_1E0154, 4
+	msgbox MauvilleCity_Text_1E0154, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_EventScript_1DF77A:: @ 81DF77A
-	msgbox MauvilleCity_Text_1E0154, 4
+	msgbox MauvilleCity_Text_1E0154, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_EventScript_1DF784:: @ 81DF784
-	msgbox MauvilleCity_Text_1E020E, 4
+	msgbox MauvilleCity_Text_1E020E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM24
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_272054
 	setflag FLAG_GOT_TM24_FROM_WATTSON
-	msgbox MauvilleCity_Text_1E02AA, 4
+	msgbox MauvilleCity_Text_1E02AA, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_EventScript_1DF7B0:: @ 81DF7B0
-	msgbox MauvilleCity_Text_1E02AA, 4
+	msgbox MauvilleCity_Text_1E02AA, MSGBOX_DEFAULT
 	release
 	end
 
@@ -463,7 +463,7 @@ MauvilleCity_EventScript_1DF7BA:: @ 81DF7BA
 	waitmessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox MauvilleCity_Text_1DFEB4, 4
+	msgbox MauvilleCity_Text_1DFEB4, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30

@@ -94,7 +94,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8390
 	def_special sub_80F8850
 	def_special sub_80F82B4
-	def_special sub_80F87D8
+	def_special SetContestTrainerGfxIds
 	def_special sub_80F7F30
 	def_special sub_80F8970
 	def_special sub_80F8AFC
@@ -102,7 +102,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F7F7C
 	def_special sub_80F7FFC
 	def_special sub_80F8D24
-	def_special sub_80F8C7C
+	def_special GiveMonArtistRibbon
 	def_special sub_80B3000
 	def_special SaveGame
 	def_special sub_80FAFF8
@@ -210,7 +210,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special sub_80F972C
+	def_special ExecuteWhiteOut
 	def_special sp0C8_whiteout_maybe
 	def_special RotatingGate_InitPuzzle
 	def_special RotatingGate_InitPuzzleAndGraphics
@@ -242,16 +242,16 @@ gSpecials:: @ 81DBA64
 	def_special FinishCyclingRoadChallenge
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
-	def_special sub_81A1780
+	def_special CallFrontierUtilFunc
 	def_special sub_8161F74
 	def_special CallBattleDomeFunction
-	def_special sub_8195960
-	def_special sub_8165360
-	def_special sub_8163AC4
-	def_special sub_81A5238
-	def_special sub_81A5E74
-	def_special sub_81A703C
-	def_special sub_81A8E7C
+	def_special CallBattlePalaceFunction
+	def_special CopyEReaderTrainerGreeting
+	def_special DoSpecialTrainerBattle
+	def_special CallBattleArenaFunction
+	def_special CallBattleFactoryFunction
+	def_special CallBattlePikeFunction
+	def_special CallBattlePyramidFunction
 	def_special StopMapMusic
 	def_special sub_81B99B4
 	def_special sub_81B9B80
@@ -259,7 +259,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F9490
 	def_special ValidateEReaderTrainer
 	def_special GetBestBattleTowerStreak
-	def_special ReducePlayerPartyToThree
+	def_special ReducePlayerPartyToSelectedMons
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special FieldShowRegionMap
@@ -330,13 +330,13 @@ gSpecials:: @ 81DBA64
 	def_special sub_80AC81C
 	def_special sp13E_warp_to_last_warp
 	def_special sp13F_fall_to_last_warp
-	def_special sub_80F8D28
+	def_special ShowContestEntryMonPic
 	def_special sub_80F8EB8
-	def_special sub_8162794
+	def_special SetEReaderTrainerGfxId
 	def_special BattleSetup_StartLatiBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather
-	def_special sub_80F8FA0
+	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special sub_81B98DC
 	def_special nullsub_54
@@ -350,7 +350,7 @@ gSpecials:: @ 81DBA64
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
 	def_special sub_80F9370
-	def_special sub_80F8FE8
+	def_special ScriptRandom
 	def_special sub_81AFDD0
 	def_special sub_80EDCE8
 	def_special sub_80EE2CC
@@ -448,8 +448,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F90DC
 	def_special sub_80F910C
 	def_special sub_80F9160
-	def_special sub_81A4AA0
-	def_special sub_81A4AE8
+	def_special ShowRankingHallRecordsWindow
+	def_special ScrollRankingHallRecordsWindow
 	def_special sub_8139F20
 	def_special sub_80F9134
 	def_special sub_80F9154

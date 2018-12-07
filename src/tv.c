@@ -1544,7 +1544,7 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->frontier.field_BD8);
     show->bravoTrainerTower.species = gSaveBlock2Ptr->frontier.field_BD4;
     show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->frontier.field_BD6;
-    show->bravoTrainerTower.numFights = sub_8164FCC(gSaveBlock2Ptr->frontier.field_D07, 0);
+    show->bravoTrainerTower.numFights = GetCurrentBattleTowerWinStreak(gSaveBlock2Ptr->frontier.field_D07, 0);
     show->bravoTrainerTower.wonTheChallenge = gSaveBlock2Ptr->frontier.field_D06;
     if (gSaveBlock2Ptr->frontier.field_D07 == 0)
     {
@@ -1580,7 +1580,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
         if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
         {
             TV_SortPurchasesByQuantity();
-            if (gUnknown_02039F80[0].quantity >= 20)
+            if (gMartPurchaseHistory[0].quantity >= 20)
             {
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                 show->smartshopperShow.kind = TVSHOW_SMART_SHOPPER;
@@ -1588,8 +1588,8 @@ void SaveRecordedItemPurchasesForTVShow(void)
                 show->smartshopperShow.shopLocation = gMapHeader.regionMapSectionId;
                 for (i = 0; i < 3; i ++)
                 {
-                    show->smartshopperShow.itemIds[i] = gUnknown_02039F80[i].itemId;
-                    show->smartshopperShow.itemAmounts[i] = gUnknown_02039F80[i].quantity;
+                    show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
+                    show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
                 }
                 show->smartshopperShow.priceReduced = GetPriceReduction(1);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
@@ -1972,7 +1972,7 @@ void sub_80EDB44(void)
                 show->rivalTrainer.nGoldSymbols ++;
             }
         }
-        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.frontierBattlePoints;
+        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontier.battlePoints;
         StringCopy(show->rivalTrainer.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->rivalTrainer.language = gGameLanguage;
@@ -2500,7 +2500,7 @@ bool8 sub_80EE818(void)
     return TRUE;
 }
 
-void sub_80EE8C8(u16 winStreak, u8 facility)
+void sub_80EE8C8(u16 winStreak, u8 facilityAndMode)
 {
     TVShow *show;
 
@@ -2512,8 +2512,8 @@ void sub_80EE8C8(u16 winStreak, u8 facility)
         show->frontier.active = FALSE;
         StringCopy(show->frontier.playerName, gSaveBlock2Ptr->playerName);
         show->frontier.winStreak = winStreak;
-        show->frontier.facility = facility;
-        switch (facility)
+        show->frontier.facility = facilityAndMode;
+        switch (facilityAndMode)
         {
             case  1:
             case  5:
@@ -2540,8 +2540,8 @@ void sub_80EE8C8(u16 winStreak, u8 facility)
                 show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
                 break;
             case 4:
-                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.field_CAA[0] - 1], MON_DATA_SPECIES, NULL);
-                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.field_CAA[1] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[0] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[1] - 1], MON_DATA_SPECIES, NULL);
                 break;
         }
         tv_store_id_3x(show);
@@ -2992,14 +2992,14 @@ void TV_SortPurchasesByQuantity(void)
     {
         for (j = i + 1; j < 3; j ++)
         {
-            if (gUnknown_02039F80[i].quantity < gUnknown_02039F80[j].quantity)
+            if (gMartPurchaseHistory[i].quantity < gMartPurchaseHistory[j].quantity)
             {
-                tmpId = gUnknown_02039F80[i].itemId;
-                tmpQn = gUnknown_02039F80[i].quantity;
-                gUnknown_02039F80[i].itemId = gUnknown_02039F80[j].itemId;
-                gUnknown_02039F80[i].quantity = gUnknown_02039F80[j].quantity;
-                gUnknown_02039F80[j].itemId = tmpId;
-                gUnknown_02039F80[j].quantity = tmpQn;
+                tmpId = gMartPurchaseHistory[i].itemId;
+                tmpQn = gMartPurchaseHistory[i].quantity;
+                gMartPurchaseHistory[i].itemId = gMartPurchaseHistory[j].itemId;
+                gMartPurchaseHistory[i].quantity = gMartPurchaseHistory[j].quantity;
+                gMartPurchaseHistory[j].itemId = tmpId;
+                gMartPurchaseHistory[j].quantity = tmpQn;
             }
         }
     }

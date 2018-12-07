@@ -4,7 +4,7 @@ SlateportCity_House1_MapScripts:: @ 8209AA4
 SlateportCity_House1_EventScript_209AA5:: @ 8209AA5
 	lock
 	faceplayer
-	msgbox SlateportCity_House1_Text_209B8E, 5
+	msgbox SlateportCity_House1_Text_209B8E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209AC6
 	compare VAR_RESULT, 0
@@ -12,7 +12,7 @@ SlateportCity_House1_EventScript_209AA5:: @ 8209AA5
 	end
 
 SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
-	msgbox SlateportCity_House1_Text_209BFF, 4
+	msgbox SlateportCity_House1_Text_209BFF, MSGBOX_DEFAULT
 	special sub_81B94B0
 	waitstate
 	compare VAR_0x8004, 255
@@ -22,7 +22,7 @@ SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
 	end
 
 SlateportCity_House1_EventScript_209AE9:: @ 8209AE9
-	msgbox SlateportCity_House1_Text_209D42, 4
+	msgbox SlateportCity_House1_Text_209D42, MSGBOX_DEFAULT
 	release
 	end
 
@@ -38,7 +38,7 @@ SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B50
-	msgbox SlateportCity_House1_Text_209C2B, 5
+	msgbox SlateportCity_House1_Text_209C2B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B5A
 	compare VAR_RESULT, 0
@@ -46,28 +46,28 @@ SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	end
 
 SlateportCity_House1_EventScript_209B46:: @ 8209B46
-	msgbox SlateportCity_House1_Text_209E74, 4
+	msgbox SlateportCity_House1_Text_209E74, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_House1_EventScript_209B50:: @ 8209B50
-	msgbox SlateportCity_House1_Text_209DF0, 4
+	msgbox SlateportCity_House1_Text_209DF0, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_House1_EventScript_209B5A:: @ 8209B5A
-	msgbox SlateportCity_House1_Text_209CA4, 4
+	msgbox SlateportCity_House1_Text_209CA4, MSGBOX_DEFAULT
 	call SlateportCity_House1_EventScript_2723DD
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B84
-	msgbox SlateportCity_House1_Text_209D5E, 4
+	msgbox SlateportCity_House1_Text_209D5E, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_House1_EventScript_209B84:: @ 8209B84
-	msgbox SlateportCity_House1_Text_209CD4, 4
+	msgbox SlateportCity_House1_Text_209CD4, MSGBOX_DEFAULT
 	release
 	end
 

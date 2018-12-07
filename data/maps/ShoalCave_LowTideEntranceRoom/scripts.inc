@@ -28,7 +28,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	checkitem ITEM_SHOAL_SHELL, 4
 	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E9B
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7F37, 5
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7F37, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236ECF
 	checkitemspace ITEM_SHELL_BELL, 1
@@ -36,14 +36,14 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_236E69
 	compare VAR_RESULT, 2
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E91
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7FAC, 4
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7FAC, MSGBOX_DEFAULT
 	takeitem ITEM_SHOAL_SALT, 4
 	takeitem ITEM_SHOAL_SHELL, 4
 	giveitem_std ITEM_SHELL_BELL
 	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_272054
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A8012, 4
-	setflag FLAG_0x002
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A8012, MSGBOX_DEFAULT
+	setflag FLAG_TEMP_2
 	release
 	end
 
@@ -64,7 +64,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236E8B:: @ 8236E8B
 	return
 
 ShoalCave_LowTideEntranceRoom_EventScript_236E91:: @ 8236E91
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A80F5, 4
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A80F5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -75,17 +75,17 @@ ShoalCave_LowTideEntranceRoom_EventScript_236E9B:: @ 8236E9B
 	checkitem ITEM_SHOAL_SHELL, 1
 	compare VAR_RESULT, 1
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236EC5
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7E0E, 4
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7E0E, MSGBOX_DEFAULT
 	release
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236EC5:: @ 8236EC5
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7EB3, 4
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7EB3, MSGBOX_DEFAULT
 	release
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236ECF:: @ 8236ECF
-	msgbox ShoalCave_LowTideEntranceRoom_Text_2A80C6, 4
+	msgbox ShoalCave_LowTideEntranceRoom_Text_2A80C6, MSGBOX_DEFAULT
 	release
 	end
 

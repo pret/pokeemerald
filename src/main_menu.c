@@ -74,7 +74,7 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8, u8);
 static void NewGameBirchSpeech_ClearWindow(u8);
 static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8);
 static void Task_NewGameBirchSpeech_MainSpeech(u8);
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextSubPrinter *printer, u16 a);
+static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a);
 static void Task_NewGameBirchSpeech_AndYouAre(u8);
 static void Task_NewGameBirchSpeechSub_WaitForLotad(u8);
 static void Task_NewGameBirchSpeech_StartBirchLotadPlatformFade(u8);
@@ -127,8 +127,8 @@ static const u16 sBirchSpeechBgPals[][16] = {
     INCBIN_U16("graphics/birch_speech/bg1.gbapal")
 };
 
-static const u8 sBirchSpeechShadowGfx[] = INCBIN_U8("graphics/birch_speech/shadow.4bpp.lz");
-static const u8 sBirchSpeechBgMap[] = INCBIN_U8("graphics/birch_speech/map.bin.lz");
+static const u32 sBirchSpeechShadowGfx[] = INCBIN_U32("graphics/birch_speech/shadow.4bpp.lz");
+static const u32 sBirchSpeechBgMap[] = INCBIN_U32("graphics/birch_speech/map.bin.lz");
 static const u16 sBirchSpeechBgGradientPal[] = INCBIN_U16("graphics/birch_speech/bg2.gbapal");
 static const u16 sBirchSpeechPlatformBlackPal[] = {RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK};
 
@@ -165,7 +165,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     // No saved game
     // NEW GAME
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN0,
         .width = MENU_WIDTH,
@@ -175,7 +175,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     },
     // OPTIONS
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN1,
         .width = MENU_WIDTH,
@@ -186,7 +186,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     // Has saved game
     // CONTINUE
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN2,
         .width = MENU_WIDTH,
@@ -196,7 +196,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     },
     // NEW GAME
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN3,
         .width = MENU_WIDTH,
@@ -206,7 +206,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     },
     // OPTION / MYSTERY GIFT
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN4,
         .width = MENU_WIDTH,
@@ -216,7 +216,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     },
     // OPTION / MYSTERY EVENTS
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN5,
         .width = MENU_WIDTH,
@@ -226,7 +226,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     },
     // OPTION
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT,
         .tilemapTop = MENU_TOP_WIN6,
         .width = MENU_WIDTH,
@@ -236,7 +236,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     },
     // Error message window
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = MENU_LEFT_ERROR,
         .tilemapTop = MENU_TOP_ERROR,
         .width = MENU_WIDTH_ERROR,
@@ -250,7 +250,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
 static const struct WindowTemplate gUnknown_082FF080[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -259,7 +259,7 @@ static const struct WindowTemplate gUnknown_082FF080[] =
         .baseBlock = 1
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 5,
         .width = 6,
@@ -268,7 +268,7 @@ static const struct WindowTemplate gUnknown_082FF080[] =
         .baseBlock = 0x6D
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 2,
         .width = 9,
@@ -323,7 +323,7 @@ static const union AffineAnimCmd sSpriteAffineAnim_PlayerShrink[] = {
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] = 
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
 {
     sSpriteAffineAnim_PlayerShrink
 };
@@ -1501,7 +1501,7 @@ static void Task_NewGameBirchSpeech_CreateNameYesNo(u8 taskId)
 
 static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
             PlaySE(SE_SELECT);
@@ -1772,12 +1772,12 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[lotadSpriteId].oam.priority = 0;
     gSprites[lotadSpriteId].invisible = TRUE;
     gTasks[taskId].tLotadSpriteId = lotadSpriteId;
-    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_PKMN_TRAINER_BRENDAN), 120, 60, 0, &gDecompressionBuffer[0]);
+    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN), 120, 60, 0, &gDecompressionBuffer[0]);
     gSprites[brendanSpriteId].callback = nullsub_11;
     gSprites[brendanSpriteId].invisible = TRUE;
     gSprites[brendanSpriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = brendanSpriteId;
-    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_PKMN_TRAINER_MAY), 120, 60, 0, &gDecompressionBuffer[0x800]);
+    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_MAY), 120, 60, 0, &gDecompressionBuffer[0x800]);
     gSprites[maySpriteId].callback = nullsub_11;
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;
@@ -1976,7 +1976,7 @@ static void NewGameBirchSpeech_ShowGenderMenu(void)
 
 static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
 {
-    return Menu_ProcessInputNoWrapAround();
+    return Menu_ProcessInputNoWrap();
 }
 
 static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
@@ -2083,21 +2083,21 @@ static void DrawMainMenuWindowBorder(const struct WindowTemplate *template, u16 
     u16 sp14 = 7 + baseTileNum;
     u16 r6 = 8 + baseTileNum;
 
-    FillBgTilemapBufferRect(template->priority, baseTileNum, template->tilemapLeft - 1, template->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(template->priority, r9, template->tilemapLeft, template->tilemapTop - 1, template->width, 1, 2);
-    FillBgTilemapBufferRect(template->priority, r10, template->tilemapLeft + template->width, template->tilemapTop - 1, 1, 1, 2);
-    FillBgTilemapBufferRect(template->priority, sp18, template->tilemapLeft - 1, template->tilemapTop, 1, template->height, 2);
-    FillBgTilemapBufferRect(template->priority, spC, template->tilemapLeft + template->width, template->tilemapTop, 1, template->height, 2);
-    FillBgTilemapBufferRect(template->priority, sp10, template->tilemapLeft - 1, template->tilemapTop + template->height, 1, 1, 2);
-    FillBgTilemapBufferRect(template->priority, sp14, template->tilemapLeft, template->tilemapTop + template->height, template->width, 1, 2);
-    FillBgTilemapBufferRect(template->priority, r6, template->tilemapLeft + template->width, template->tilemapTop + template->height, 1, 1, 2);
-    CopyBgTilemapBufferToVram(template->priority);
+    FillBgTilemapBufferRect(template->bg, baseTileNum, template->tilemapLeft - 1, template->tilemapTop - 1, 1, 1, 2);
+    FillBgTilemapBufferRect(template->bg, r9, template->tilemapLeft, template->tilemapTop - 1, template->width, 1, 2);
+    FillBgTilemapBufferRect(template->bg, r10, template->tilemapLeft + template->width, template->tilemapTop - 1, 1, 1, 2);
+    FillBgTilemapBufferRect(template->bg, sp18, template->tilemapLeft - 1, template->tilemapTop, 1, template->height, 2);
+    FillBgTilemapBufferRect(template->bg, spC, template->tilemapLeft + template->width, template->tilemapTop, 1, template->height, 2);
+    FillBgTilemapBufferRect(template->bg, sp10, template->tilemapLeft - 1, template->tilemapTop + template->height, 1, 1, 2);
+    FillBgTilemapBufferRect(template->bg, sp14, template->tilemapLeft, template->tilemapTop + template->height, template->width, 1, 2);
+    FillBgTilemapBufferRect(template->bg, r6, template->tilemapLeft + template->width, template->tilemapTop + template->height, 1, 1, 2);
+    CopyBgTilemapBufferToVram(template->bg);
 }
 
 static void ClearMainMenuWindowTilemap(const struct WindowTemplate *template)
 {
-    FillBgTilemapBufferRect(template->priority, 0, template->tilemapLeft - 1, template->tilemapTop - 1, template->tilemapLeft + template->width + 1, template->tilemapTop + template->height + 1, 2);
-    CopyBgTilemapBufferToVram(template->priority);
+    FillBgTilemapBufferRect(template->bg, 0, template->tilemapLeft - 1, template->tilemapTop - 1, template->tilemapLeft + template->width + 1, template->tilemapTop + template->height + 1, 2);
+    CopyBgTilemapBufferToVram(template->bg);
 }
 
 static void NewGameBirchSpeech_ClearGenderWindowTilemap(u8 a, u8 b, u8 c, u8 d, u8 e, u8 unused)
@@ -2126,9 +2126,9 @@ static void NewGameBirchSpeech_ClearWindow(u8 windowId)
     CopyWindowToVram(windowId, 2);
 }
 
-static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextSubPrinter *printer, u16 a)
+static void NewGameBirchSpeech_ShowPokeBallPrinterCallback(struct TextPrinterTemplate *printer, u16 a)
 {
-    if (*(printer->current_text_offset - 2) == 8 && gUnknown_02022D04 == 0)
+    if (*(printer->currentChar - 2) == 8 && gUnknown_02022D04 == 0)
     {
         gUnknown_02022D04 = 1;
         CreateTask(Task_NewGameBirchSpeechSub_InitPokeBall, 0);

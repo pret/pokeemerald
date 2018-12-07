@@ -1,8 +1,6 @@
 #ifndef GUARD_BATTLE_CONTROLLERS_H
 #define GUARD_BATTLE_CONTROLLERS_H
 
-#include "battle.h"
-
 enum
 {
     REQUEST_ALL_BATTLE,
@@ -177,6 +175,7 @@ enum
     CONTROLLER_CMDS_COUNT
 };
 
+extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 // general functions
 void HandleLinkBattleSetup(void);

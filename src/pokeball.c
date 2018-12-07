@@ -1,19 +1,19 @@
 #include "global.h"
-#include "pokemon.h"
-#include "sprite.h"
-#include "pokeball.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "task.h"
-#include "sound.h"
-#include "constants/songs.h"
-#include "trig.h"
+#include "decompress.h"
+#include "graphics.h"
 #include "main.h"
 #include "m4a.h"
-#include "decompress.h"
-#include "constants/species.h"
+#include "pokeball.h"
+#include "pokemon.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "trig.h"
 #include "util.h"
-#include "graphics.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -402,7 +402,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     gSprites[ballSpriteId].data[2] = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_X);
     gSprites[ballSpriteId].data[4] = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_Y) - 16;
     gSprites[ballSpriteId].data[5] = -40;
-    sub_80A68D4(&gSprites[ballSpriteId]);
+    InitAnimArcTranslation(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
     gTasks[taskId].tOpponentBattler = gBattlerTarget;
     gTasks[taskId].func = TaskDummy;
@@ -898,7 +898,7 @@ static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(sprite->sBattler, 3) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->sBattler;
-    sub_80A68D4(sprite);
+    InitAnimArcTranslation(sprite);
     sprite->callback = SpriteCB_PlayerMonSendOut_2;
 }
 

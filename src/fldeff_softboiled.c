@@ -2,12 +2,12 @@
 #include "menu.h"
 #include "party_menu.h"
 #include "pokemon.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/songs.h"
 
 static void sub_816166C(u8 taskId);
 static void sub_81616C0(u8 taskId);

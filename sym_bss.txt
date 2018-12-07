@@ -32,79 +32,18 @@
 	.include "src/menu_helpers.o"
 	.include "src/region_map.o"
 	.include "src/slot_machine.o"
-
-gUnknown_030011F0: @ 30011F0
-	.space 0x2
-
-gUnknown_030011F2: @ 30011F2
-	.space 0x2
-
-gUnknown_030011F4: @ 30011F4
-	.space 0x2
-
-gUnknown_030011F6: @ 30011F6
-	.space 0x1
-
-gUnknown_030011F7: @ 30011F7
-	.space 0x1
-
+	.include "src/contest_painting.o"
 	.include "src/starter_choose.o"
-
-	.align 0x2
-
-gUnknown_030011FC: @ 30011FC
-	.space 0x2
-
-gUnknown_030011FE: @ 30011FE
-	.space 0x2
-
-gUnknown_03001200: @ 3001200
-	.space 0x2
-
-gUnknown_03001202: @ 3001202
-	.space 0x2
-
-gUnknown_03001204: @ 3001204
-	.space 0x4
-
+	.include "src/pokedex_area_screen.o"
 	.include "src/battle_transition.o"
 	.include "src/pokemon_animation.o"
-	
-gUnknown_03001278: @ 3001278
-	.space 0x1
-
-gUnknown_03001279: @ 3001279
-	.space 0x3
-
+	.include "src/recorded_battle.o"
+	.include "src/battle_factory_screen.o"
 	.include "src/battle_factory.o"
-
-gUnknown_03001288: @ 3001288
-	.space 0x4
-
-gUnknown_0300128C: @ 300128C
-	.space 0x1
-
-gUnknown_0300128D: @ 300128D
-	.space 0x1
-
-gUnknown_0300128E: @ 300128E
-	.space 0x2
-
-gUnknown_03001290: @ 3001290
-	.space 0x4
-
-gUnknown_03001294: @ 3001294
-	.space 0x4
-
+	.include "src/battle_pike.o"
 	.include "src/battle_tent.o"
 	.include "src/multiboot.o"
-
-	.space 0x4 @ XXX: why is this needed?
-
-	.align 2
-gUnknown_030012A8: @ 30012A8
-	.space 0x10
-
+	.include "src/fossil_specials.o"
 	.include "src/berry_fix_program.o"
 
 gUnknown_030012BC: @ 30012BC

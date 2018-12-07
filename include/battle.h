@@ -498,10 +498,12 @@ struct BattleStruct
     struct BattleTv tv;
     u8 notSureWhatFieldLol[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
-    u8 field_298[8];
-    u8 field_2A0;
-    u8 field_2A1;
-    u8 field_2A2;
+    s8 arenaMindPoints[2];
+    s8 arenaSkillPoints[2];
+    u16 arenaStartHp[2];
+    u8 arenaLostPlayerMons; // Bits for party member, lost as in referee's decision, not by fainting.
+    u8 arenaLostOpponentMons;
+    u8 alreadyStatusedMoveAttempt; // As bits for battlers; For example when using Thunder Wave on an already paralyzed pokemon.
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -561,6 +563,7 @@ struct BattleScripting
     u8 field_23;
     u8 windowsType; // 0 - normal, 1 - battle arena
     u8 multiplayerId;
+    u8 specialTrainerBattleType;
 };
 
 // rom_80A5C6C
@@ -657,10 +660,22 @@ struct MonSpritesGfx
     u8 field_F4[0x80];
     u8 *barFontGfx;
     void *field_178;
-    void *field_17C;
+    u16 *field_17C;
 };
 
 // All battle variables are declared in battle_main.c
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
+extern u16 gBattle_WIN0H;
+extern u16 gBattle_WIN0V;
+extern u16 gBattle_WIN1H;
+extern u16 gBattle_WIN1V;
 extern u8 gDisplayedStringBattle[300];
 extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];

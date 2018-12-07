@@ -7,6 +7,7 @@
 #include "constants/species.h"
 #include "string_util.h"
 #include "text.h"
+#include "pokemon_storage_system.h"
 
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
@@ -55,23 +56,22 @@ void PickLotteryCornerTicket(void)
     gSpecialVar_0x8004 = 0;
     slot = 0;
     box = 0;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *pkmn = &gPlayerParty[i];
+        struct Pokemon *mon = &gPlayerParty[i];
 
-        // UB: Too few arguments for function GetMonData
-        if (GetMonData(pkmn, MON_DATA_SPECIES) != SPECIES_NONE)
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
         {
             // do not calculate ticket values for eggs.
-            if (!GetMonData(pkmn, MON_DATA_IS_EGG))
+            if (!GetMonData(mon, MON_DATA_IS_EGG))
             {
-                u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
+                u32 otId = GetMonData(mon, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
                     gSpecialVar_0x8004 = numMatchingDigits - 1;
-                    box = 14;
+                    box = TOTAL_BOXES_COUNT;
                     slot = i;
                 }
             }
@@ -80,11 +80,9 @@ void PickLotteryCornerTicket(void)
             break;
     }
 
-    // player has 14 boxes.
-    for (i = 0; i < 14; i++)
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
     {
-        // player has 30 slots per box.
-        for (j = 0; j < 30; j++)
+        for (j = 0; j < IN_BOX_COUNT; j++)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES) != SPECIES_NONE &&
             !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
@@ -106,7 +104,7 @@ void PickLotteryCornerTicket(void)
     {
         gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
 
-        if (box == 14)
+        if (box == TOTAL_BOXES_COUNT)
         {
             gSpecialVar_0x8006 = 0;
             GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);

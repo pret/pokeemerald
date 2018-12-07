@@ -43,7 +43,7 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	call_if 1, MtPyre_Summit_EventScript_2320EB
 	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_2320EC
-	msgbox MtPyre_Summit_Text_23281A, 4
+	msgbox MtPyre_Summit_Text_23281A, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1
 	removeobject 2
@@ -51,8 +51,8 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	removeobject 5
 	removeobject 6
 	removeobject 7
-	setflag FLAG_0x394
-	setflag FLAG_0x395
+	setflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
+	setflag FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA
 	fadedefaultbgm
 	fadescreen 0
 	delay 20
@@ -63,10 +63,10 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	call_if 1, MtPyre_Summit_EventScript_23210C
 	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_232117
-	msgbox MtPyre_Summit_Text_23290E, 4
+	msgbox MtPyre_Summit_Text_23290E, MSGBOX_DEFAULT
 	giveitem_std ITEM_MAGMA_EMBLEM
 	setflag FLAG_0x0D4
-	setflag FLAG_0x34F
+	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall
 	end
 
@@ -133,7 +133,7 @@ MtPyre_Summit_EventScript_23213C:: @ 823213C
 	faceplayer
 	checkflag FLAG_0x09E
 	goto_eq MtPyre_Summit_EventScript_232167
-	msgbox MtPyre_Summit_Text_232E0C, 5
+	msgbox MtPyre_Summit_Text_232E0C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, MtPyre_Summit_EventScript_232187
 	compare VAR_RESULT, 0
@@ -142,7 +142,7 @@ MtPyre_Summit_EventScript_23213C:: @ 823213C
 	end
 
 MtPyre_Summit_EventScript_232167:: @ 8232167
-	msgbox MtPyre_Summit_Text_2331A6, 5
+	msgbox MtPyre_Summit_Text_2331A6, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, MtPyre_Summit_EventScript_232199
 	compare VAR_RESULT, 0
@@ -151,15 +151,15 @@ MtPyre_Summit_EventScript_232167:: @ 8232167
 	end
 
 MtPyre_Summit_EventScript_232187:: @ 8232187
-	msgbox MtPyre_Summit_Text_232F27, 4
+	msgbox MtPyre_Summit_Text_232F27, MSGBOX_DEFAULT
 	return
 
 MtPyre_Summit_EventScript_232190:: @ 8232190
-	msgbox MtPyre_Summit_Text_233162, 4
+	msgbox MtPyre_Summit_Text_233162, MSGBOX_DEFAULT
 	return
 
 MtPyre_Summit_EventScript_232199:: @ 8232199
-	msgbox MtPyre_Summit_Text_23325D, 4
+	msgbox MtPyre_Summit_Text_23325D, MSGBOX_DEFAULT
 	return
 
 MtPyre_Summit_EventScript_2321A2:: @ 82321A2
@@ -171,23 +171,23 @@ MtPyre_Summit_EventScript_2321A2:: @ 82321A2
 	call_if 4, MtPyre_Summit_EventScript_2321CB
 	checkflag FLAG_0x081
 	goto_eq MtPyre_Summit_EventScript_2321D8
-	msgbox MtPyre_Summit_Text_232AD8, 4
+	msgbox MtPyre_Summit_Text_232AD8, MSGBOX_DEFAULT
 	release
 	end
 
 MtPyre_Summit_EventScript_2321CB:: @ 82321CB
-	msgbox MtPyre_Summit_Text_232CA6, 4
+	msgbox MtPyre_Summit_Text_232CA6, MSGBOX_DEFAULT
 	setflag FLAG_0x103
 	release
 	end
 
 MtPyre_Summit_EventScript_2321D8:: @ 82321D8
-	msgbox MtPyre_Summit_Text_232B4F, 4
+	msgbox MtPyre_Summit_Text_232B4F, MSGBOX_DEFAULT
 	release
 	end
 
 MtPyre_Summit_EventScript_2321E2:: @ 82321E2
-	msgbox MtPyre_Summit_Text_232D1E, 4
+	msgbox MtPyre_Summit_Text_232D1E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -231,7 +231,7 @@ MtPyre_Summit_EventScript_232210:: @ 8232210
 	call_if 1, MtPyre_Summit_EventScript_232328
 	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_232341
-	msgbox MtPyre_Summit_Text_233183, 4
+	msgbox MtPyre_Summit_Text_233183, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_23235A
@@ -425,23 +425,23 @@ MtPyre_Summit_Movement_2323F8: @ 82323F8
 	step_end
 
 MtPyre_Summit_EventScript_2323FD:: @ 82323FD
-	trainerbattle 0, TRAINER_GRUNT_17, 0, MtPyre_Summit_Text_232459, MtPyre_Summit_Text_2324A0
-	msgbox MtPyre_Summit_Text_2324E0, 6
+	trainerbattle_single TRAINER_GRUNT_17, MtPyre_Summit_Text_232459, MtPyre_Summit_Text_2324A0
+	msgbox MtPyre_Summit_Text_2324E0, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_232414:: @ 8232414
-	trainerbattle 0, TRAINER_GRUNT_18, 0, MtPyre_Summit_Text_232513, MtPyre_Summit_Text_2325B0
-	msgbox MtPyre_Summit_Text_2325E4, 6
+	trainerbattle_single TRAINER_GRUNT_18, MtPyre_Summit_Text_232513, MtPyre_Summit_Text_2325B0
+	msgbox MtPyre_Summit_Text_2325E4, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_23242B:: @ 823242B
-	trainerbattle 0, TRAINER_GRUNT_19, 0, MtPyre_Summit_Text_23261D, MtPyre_Summit_Text_232678
-	msgbox MtPyre_Summit_Text_2326B3, 6
+	trainerbattle_single TRAINER_GRUNT_19, MtPyre_Summit_Text_23261D, MtPyre_Summit_Text_232678
+	msgbox MtPyre_Summit_Text_2326B3, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_232442:: @ 8232442
-	trainerbattle 0, TRAINER_GRUNT_29, 0, MtPyre_Summit_Text_23271B, MtPyre_Summit_Text_23279A
-	msgbox MtPyre_Summit_Text_2327D8, 6
+	trainerbattle_single TRAINER_GRUNT_29, MtPyre_Summit_Text_23271B, MtPyre_Summit_Text_23279A
+	msgbox MtPyre_Summit_Text_2327D8, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_Text_232459: @ 8232459

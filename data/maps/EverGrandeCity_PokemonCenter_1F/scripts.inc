@@ -12,7 +12,7 @@ EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F
 EverGrandeCity_PokemonCenter_1F_EventScript_229A4C:: @ 8229A4C
 	checkflag FLAG_BADGE06_GET
 	goto_if 0, EverGrandeCity_PokemonCenter_1F_EventScript_27374E
-	clearflag FLAG_0x319
+	clearflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	return
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A59:: @ 8229A59
@@ -24,17 +24,17 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A59:: @ 8229A59
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A67:: @ 8229A67
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_229ADA, 2
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_229ADA, MSGBOX_NPC
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A70:: @ 8229A70
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_229B62, 2
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_229B62, MSGBOX_NPC
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A79:: @ 8229A79
 	lock
 	faceplayer
-	msgbox EverGrandeCity_PokemonCenter_1F_Text_229BF1, 4
+	msgbox EverGrandeCity_PokemonCenter_1F_Text_229BF1, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AB6

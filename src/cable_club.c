@@ -31,10 +31,10 @@
 #include "constants/songs.h"
 
 extern u8 gUnknown_02032298[2];
-extern u8 gUnknown_0203CEF8[];
+extern u8 gSelectedOrderFromParty[];
 
 static const struct WindowTemplate gUnknown_08550594 = {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 16,
     .tilemapTop = 11,
     .width = 11,
@@ -358,8 +358,8 @@ static void sub_80B2918(u8 taskId)
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
-        card->monSpecies[0] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[0] - 1], MON_DATA_SPECIES, NULL);
-        card->monSpecies[1] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[1] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = sub_80B2C30;
     }
 }
@@ -405,8 +405,8 @@ static void sub_80B2A08(u8 taskId)
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
-        card->monSpecies[0] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[0] - 1], MON_DATA_SPECIES, NULL);
-        card->monSpecies[1] = GetMonData(&gPlayerParty[gUnknown_0203CEF8[1] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES, NULL);
+        card->monSpecies[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES, NULL);
         gTasks[taskId].func = sub_80B2C30;
         sub_800A4D8(2);
     }
@@ -421,7 +421,7 @@ bool32 sub_80B2AF4(u16 *arg0, u16 *arg1)
 
     gStringVar1[0] = EOS;
     gStringVar2[0] = EOS;
-    
+
     for (i = 0; i < 2; i++)
     {
         for (j = 0; j < 2; j++)
@@ -800,7 +800,7 @@ static void sub_80B3260(int a0)
             gBattleTypeFlags = BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER;
             break;
         case 5:
-            ReducePlayerPartyToThree();
+            ReducePlayerPartyToSelectedMons();
             gBattleTypeFlags = BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER | BATTLE_TYPE_MULTI;
             break;
         case 9:
@@ -1151,7 +1151,7 @@ static void sub_80B3950(void)
 
 void nullsub_37(void)
 {
-    
+
 }
 
 void sub_80B3968(void)

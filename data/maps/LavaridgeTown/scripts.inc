@@ -31,11 +31,11 @@ LavaridgeTown_EventScript_1EA529:: @ 81EA529
 	setobjectxyperm 8, 11, 9
 	setobjectxyperm 7, 9, 8
 	setobjectmovementtype 7, 7
-	clearflag FLAG_0x3A1
+	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
 	return
 
 LavaridgeTown_EventScript_1EA53F:: @ 81EA53F
-	clearflag FLAG_0x36D
+	clearflag FLAG_HIDE_MT_CHIMNEY_TRAINERS
 	return
 
 LavaridgeTown_EventScript_1EA543:: @ 81EA543
@@ -71,18 +71,18 @@ LavaridgeTown_EventScript_1EA551:: @ 81EA551
 	end
 
 LavaridgeTown_EventScript_1EA5B5:: @ 81EA5B5
-	msgbox LavaridgeTown_Text_1EA7C0, 4
+	msgbox LavaridgeTown_Text_1EA7C0, MSGBOX_DEFAULT
 	giveitem_std ITEM_GO_GOGGLES
 	setflag FLAG_0x0DD
-	msgbox LavaridgeTown_Text_1EA897, 4
+	msgbox LavaridgeTown_Text_1EA897, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_1EA5FF
 	end
 
 LavaridgeTown_EventScript_1EA5DA:: @ 81EA5DA
-	msgbox LavaridgeTown_Text_1EA9A2, 4
+	msgbox LavaridgeTown_Text_1EA9A2, MSGBOX_DEFAULT
 	giveitem_std ITEM_GO_GOGGLES
 	setflag FLAG_0x0DD
-	msgbox LavaridgeTown_Text_1EAA2E, 4
+	msgbox LavaridgeTown_Text_1EAA2E, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_1EA5FF
 	end
 
@@ -222,27 +222,27 @@ LavaridgeTown_EventScript_1EA70B:: @ 81EA70B
 	end
 
 LavaridgeTown_EventScript_1EA70E:: @ 81EA70E
-	msgbox LavaridgeTown_Text_1EAE03, 2
+	msgbox LavaridgeTown_Text_1EAE03, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_1EA717:: @ 81EA717
-	msgbox LavaridgeTown_Text_1EAEE1, 3
+	msgbox LavaridgeTown_Text_1EAEE1, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_1EA720:: @ 81EA720
-	msgbox LavaridgeTown_Text_1EAF9B, 2
+	msgbox LavaridgeTown_Text_1EAF9B, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_1EA729:: @ 81EA729
-	msgbox LavaridgeTown_Text_1EB003, 2
+	msgbox LavaridgeTown_Text_1EB003, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_1EA732:: @ 81EA732
-	msgbox LavaridgeTown_Text_1EB092, 2
+	msgbox LavaridgeTown_Text_1EB092, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_1EA73B:: @ 81EA73B
-	msgbox LavaridgeTown_Text_1EAF4E, 2
+	msgbox LavaridgeTown_Text_1EAF4E, MSGBOX_NPC
 	end
 
 LavaridgeTown_EventScript_1EA744:: @ 81EA744
@@ -250,13 +250,13 @@ LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	faceplayer
 	checkflag FLAG_0x10A
 	goto_eq LavaridgeTown_EventScript_1EA787
-	msgbox LavaridgeTown_Text_1EAB80, 5
+	msgbox LavaridgeTown_Text_1EAB80, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_EventScript_1EA79B
 	getpartysize
 	compare VAR_RESULT, 6
 	goto_eq LavaridgeTown_EventScript_1EA791
-	msgbox LavaridgeTown_Text_1EACC0, 4
+	msgbox LavaridgeTown_Text_1EACC0, MSGBOX_DEFAULT
 	setflag FLAG_0x10A
 	playfanfare MUS_FANFA4
 	message LavaridgeTown_Text_1EACF4
@@ -266,30 +266,30 @@ LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	end
 
 LavaridgeTown_EventScript_1EA787:: @ 81EA787
-	msgbox LavaridgeTown_Text_1EAD9E, 4
+	msgbox LavaridgeTown_Text_1EAD9E, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_1EA791:: @ 81EA791
-	msgbox LavaridgeTown_Text_1EAD09, 4
+	msgbox LavaridgeTown_Text_1EAD09, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_1EA79B:: @ 81EA79B
-	msgbox LavaridgeTown_Text_1EAD44, 4
+	msgbox LavaridgeTown_Text_1EAD44, MSGBOX_DEFAULT
 	release
 	end
 
 LavaridgeTown_EventScript_1EA7A5:: @ 81EA7A5
-	msgbox LavaridgeTown_Text_1EB12B, 3
+	msgbox LavaridgeTown_Text_1EB12B, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_1EA7AE:: @ 81EA7AE
-	msgbox LavaridgeTown_Text_1EB178, 3
+	msgbox LavaridgeTown_Text_1EB178, MSGBOX_SIGN
 	end
 
 LavaridgeTown_EventScript_1EA7B7:: @ 81EA7B7
-	msgbox LavaridgeTown_Text_1EB1CB, 3
+	msgbox LavaridgeTown_Text_1EB1CB, MSGBOX_SIGN
 	end
 
 LavaridgeTown_Text_1EA7C0: @ 81EA7C0

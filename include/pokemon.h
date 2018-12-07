@@ -112,25 +112,6 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
-#define TYPE_NORMAL   0x00
-#define TYPE_FIGHTING 0x01
-#define TYPE_FLYING   0x02
-#define TYPE_POISON   0x03
-#define TYPE_GROUND   0x04
-#define TYPE_ROCK     0x05
-#define TYPE_BUG      0x06
-#define TYPE_GHOST    0x07
-#define TYPE_STEEL    0x08
-#define TYPE_MYSTERY  0x09
-#define TYPE_FIRE     0x0a
-#define TYPE_WATER    0x0b
-#define TYPE_GRASS    0x0c
-#define TYPE_ELECTRIC 0x0d
-#define TYPE_PSYCHIC  0x0e
-#define TYPE_ICE      0x0f
-#define TYPE_DRAGON   0x10
-#define TYPE_DARK     0x11
-
 #define FRIENDSHIP_EVENT_GROW_LEVEL           0x0
 #define FRIENDSHIP_EVENT_VITAMIN              0x1 // unused
 #define FRIENDSHIP_EVENT_BATTLE_ITEM          0x2 // unused
@@ -151,7 +132,6 @@
 #define STATUS_PRIMARY_FAINTED   0x7
 
 #define MAX_TOTAL_EVS 510
-#define NUM_STATS 6
 #define UNOWN_FORM_COUNT 28
 
 struct PokemonSubstruct0
@@ -293,8 +273,6 @@ struct Unknown_806F160_Struct
     struct SpriteFrameImage *frameImages;
 };
 
-#define BATTLE_STATS_NO 8
-
 struct BattlePokemon
 {
     /*0x00*/ u16 species;
@@ -312,7 +290,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 altAbility:1;
-    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
+    /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
@@ -468,7 +446,6 @@ extern const u8 gUnknown_08329D2A[];
 extern const u8 gStatStageRatios[][2];
 extern const u16 gUnknown_08329D54[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
-extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const s8 gNatureStatTable[][5];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
@@ -486,7 +463,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lvl50);
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
-void CreateMonWithEVSpreadPersonalityOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
+void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void sub_80686FC(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 void CreateObedientMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 bool8 sub_80688F8(u8 caseId, u8 battlerId);
@@ -595,8 +572,8 @@ u16 GetBattleBGM(void);
 void PlayBattleBGM(void);
 void PlayMapChosenOrBattleBGM(u16 songId);
 void sub_806E694(u16 songId);
-const u8 *GetMonFrontSpritePal(struct Pokemon *mon);
-const u8 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
+const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
+const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);

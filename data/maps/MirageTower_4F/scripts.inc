@@ -4,13 +4,13 @@ MirageTower_4F_MapScripts:: @ 823AD47
 MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	lock
 	faceplayer
-	msgbox MirageTower_4F_Text_23ADF9, 5
+	msgbox MirageTower_4F_Text_23ADF9, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MirageTower_4F_EventScript_23AD7F
 	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
-	setflag FLAG_0x3C3
-	setflag FLAG_0x3C4
+	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
+	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
 	removeobject 1
 	delay 30
 	setflag FLAG_0x14F
@@ -18,20 +18,20 @@ MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	end
 
 MirageTower_4F_EventScript_23AD7F:: @ 823AD7F
-	msgbox MirageTower_4F_Text_23AE79, 4
+	msgbox MirageTower_4F_Text_23AE79, MSGBOX_DEFAULT
 	release
 	end
 
 MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	lock
 	faceplayer
-	msgbox MirageTower_4F_Text_23AE98, 5
+	msgbox MirageTower_4F_Text_23AE98, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MirageTower_4F_EventScript_23ADC0
 	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
-	setflag FLAG_0x3C4
-	setflag FLAG_0x3C3
+	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
+	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
 	removeobject 2
 	delay 30
 	setflag FLAG_0x150
@@ -39,7 +39,7 @@ MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	end
 
 MirageTower_4F_EventScript_23ADC0:: @ 823ADC0
-	msgbox MirageTower_4F_Text_23AF18, 4
+	msgbox MirageTower_4F_Text_23AF18, MSGBOX_DEFAULT
 	release
 	end
 

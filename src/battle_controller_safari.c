@@ -1,30 +1,27 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_controllers.h"
-#include "battle_message.h"
-#include "battle_interface.h"
 #include "battle_anim.h"
-#include "constants/battle_anim.h"
-#include "pokemon.h"
+#include "battle_controllers.h"
+#include "battle_interface.h"
+#include "battle_message.h"
+#include "bg.h"
+#include "data2.h"
+#include "item_menu.h"
 #include "link.h"
-#include "util.h"
 #include "main.h"
-#include "constants/songs.h"
-#include "sound.h"
-#include "window.h"
 #include "m4a.h"
 #include "palette.h"
+#include "pokeball.h"
+#include "pokeblock.h"
+#include "pokemon.h"
+#include "reshow_battle_screen.h"
+#include "sound.h"
 #include "task.h"
 #include "text.h"
-#include "bg.h"
-#include "reshow_battle_screen.h"
-#include "pokeball.h"
-#include "data2.h"
-#include "pokeblock.h"
-#include "item_menu.h"
-
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
+#include "util.h"
+#include "window.h"
+#include "constants/battle_anim.h"
+#include "constants/songs.h"
 
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
@@ -594,9 +591,9 @@ static void SafariHandlePlaySE(void)
     s8 pan;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        pan = PAN_SIDE_PLAYER;
+        pan = SOUND_PAN_ATTACKER;
     else
-        pan = PAN_SIDE_OPPONENT;
+        pan = SOUND_PAN_TARGET;
 
     PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     SafariBufferExecCompleted();

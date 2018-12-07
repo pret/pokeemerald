@@ -5,8 +5,10 @@
 #include "party_menu.h"
 #include "rom6.h"
 #include "script.h"
+#include "string_util.h"
 #include "task.h"
 #include "constants/event_objects.h"
+#include "constants/field_effects.h"
 
 // static functions
 static void FldEff_UseStrength(void);

@@ -23,7 +23,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891:: @ 825C891
 	setvar VAR_0x8004, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C89A:: @ 825C89A
@@ -37,33 +37,33 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C8A4:: @ 825C8A4
 	waitmessage
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 255
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
-	special sub_81A1780
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CDDA, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CDDA, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	setvar VAR_0x8004, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 99
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908:: @ 825C908
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C968
 	case 3, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C978
@@ -77,54 +77,54 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C908:: @ 825C908
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C968:: @ 825C968
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CBDD, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CBDD, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C978:: @ 825C978
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC00, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC00, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C988:: @ 825C988
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC23, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC23, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C998:: @ 825C998
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC46, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC46, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9A8:: @ 825C9A8
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC69, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC69, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9B8:: @ 825C9B8
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC8C, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CC8C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9C8:: @ 825C9C8
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCB0, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCB0, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8:: @ 825C9D8
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCD4, 5
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCD4, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
 	case 127, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A
@@ -133,22 +133,22 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9D8:: @ 825C9D8
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD:: @ 825C9FD
 	setvar VAR_0x8004, 6
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	message BattleFrontier_BattlePikeThreePathRoom_Text_25CE08
 	waitmessage
 	special LoadPlayerParty
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 2
-	special sub_81A703C
+	special CallBattlePikeFunction
 	playse SE_SAVE
 	waitse
 	fadescreen 1
 	setvar VAR_0x8004, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA2A:: @ 825CA2A
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCFB, 5
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CCFB, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25C9FD
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A
@@ -167,7 +167,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
 	setvar VAR_0x8004, 17
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
 	setvar VAR_TEMP_5, 255
@@ -181,7 +181,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
 	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_25CBCE
 	waitmovement 0
 	lockall
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D094, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D094, MSGBOX_DEFAULT
 	releaseall
 	applymovement 2, BattleFrontier_BattlePikeThreePathRoom_Movement_25CBD5
 	waitmovement 0
@@ -190,12 +190,12 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB
 	setvar VAR_0x8004, 19
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CE69, 5
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CE69, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB0A
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00
@@ -204,13 +204,13 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB00:: @ 825CB00
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CEBB, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CEBB, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB0A:: @ 825CB0A
 	setvar VAR_0x8004, 18
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB39
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB46
@@ -218,20 +218,20 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB0A:: @ 825CB0A
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB39:: @ 825CB39
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CF64, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CF64, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB46:: @ 825CB46
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CF23, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CF23, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB53:: @ 825CB53
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CEE3, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CEE3, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60:: @ 825CB60
 	setvar VAR_0x8004, 19
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB9A
 	case 1, BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBA4
@@ -240,29 +240,29 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB60:: @ 825CB60
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CB9A:: @ 825CB9A
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D054, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D054, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBA4:: @ 825CBA4
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D017, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D017, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBAE:: @ 825CBAE
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CFA3, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CFA3, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBB8:: @ 825CBB8
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CFE5, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CFE5, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2:: @ 825CBC2
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D125, 4
+	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25D125, MSGBOX_DEFAULT
 	release
 	end
 

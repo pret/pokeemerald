@@ -18,6 +18,7 @@
 #include "trig.h"
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
+#include "constants/field_effects.h"
 #include "constants/songs.h"
 
 extern void ScriptUnfreezeEventObjects(void);

@@ -7,13 +7,13 @@ BattleFrontier_Lounge7_EventScript_265255:: @ 8265255
 	setvar VAR_TEMP_C, 9
 	checkflag FLAG_0x15A
 	goto_eq BattleFrontier_Lounge7_EventScript_265276
-	msgbox BattleFrontier_Lounge7_Text_2656ED, 4
+	msgbox BattleFrontier_Lounge7_Text_2656ED, MSGBOX_DEFAULT
 	setflag FLAG_0x15A
 	goto BattleFrontier_Lounge7_EventScript_265284
 	end
 
 BattleFrontier_Lounge7_EventScript_265276:: @ 8265276
-	msgbox BattleFrontier_Lounge7_Text_2658AB, 4
+	msgbox BattleFrontier_Lounge7_Text_2658AB, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge7_EventScript_265284
 	end
 
@@ -122,13 +122,13 @@ BattleFrontier_Lounge7_EventScript_265445:: @ 8265445
 	setvar VAR_TEMP_C, 10
 	checkflag FLAG_0x15B
 	goto_eq BattleFrontier_Lounge7_EventScript_265466
-	msgbox BattleFrontier_Lounge7_Text_265A6C, 4
+	msgbox BattleFrontier_Lounge7_Text_265A6C, MSGBOX_DEFAULT
 	setflag FLAG_0x15B
 	goto BattleFrontier_Lounge7_EventScript_265474
 	end
 
 BattleFrontier_Lounge7_EventScript_265466:: @ 8265466
-	msgbox BattleFrontier_Lounge7_Text_265C2C, 4
+	msgbox BattleFrontier_Lounge7_Text_265C2C, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge7_EventScript_265474
 	end
 
@@ -234,12 +234,12 @@ BattleFrontier_Lounge7_EventScript_26562A:: @ 826562A
 BattleFrontier_Lounge7_EventScript_265635:: @ 8265635
 	special sub_813ADB8
 	special sub_813A988
-	msgbox BattleFrontier_Lounge7_Text_265A0E, 4
+	msgbox BattleFrontier_Lounge7_Text_265A0E, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge7_EventScript_265645:: @ 8265645
-	msgbox BattleFrontier_Lounge7_Text_265A0E, 4
+	msgbox BattleFrontier_Lounge7_Text_265A0E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -249,18 +249,18 @@ BattleFrontier_Lounge7_EventScript_26564F:: @ 826564F
 	special sub_813AC7C
 	buffernumberstring 1, VAR_0x8008
 	copyvar VAR_0x8004, VAR_TEMP_C
-	msgbox BattleFrontier_Lounge7_Text_265921, 5
+	msgbox BattleFrontier_Lounge7_Text_265921, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge7_EventScript_2656CA
 	specialvar VAR_TEMP_1, sub_813AA04
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if 4, BattleFrontier_Lounge7_EventScript_265696
-	msgbox BattleFrontier_Lounge7_Text_265997, 4
+	msgbox BattleFrontier_Lounge7_Text_265997, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge7_EventScript_2656CA
 	end
 
 BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
-	msgbox BattleFrontier_Lounge7_Text_26595A, 4
+	msgbox BattleFrontier_Lounge7_Text_26595A, MSGBOX_DEFAULT
 	special sub_813AEB4
 	fadescreen 1
 	special sub_813A988
@@ -269,7 +269,7 @@ BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge7_EventScript_265645
-	msgbox BattleFrontier_Lounge7_Text_2659C7, 4
+	msgbox BattleFrontier_Lounge7_Text_2659C7, MSGBOX_DEFAULT
 	copyvar VAR_0x8004, VAR_0x8008
 	special sub_813A9A4
 	release
@@ -282,11 +282,11 @@ BattleFrontier_Lounge7_EventScript_2656CA:: @ 82656CA
 	end
 
 BattleFrontier_Lounge7_EventScript_2656DB:: @ 82656DB
-	msgbox BattleFrontier_Lounge7_Text_265C6F, 2
+	msgbox BattleFrontier_Lounge7_Text_265C6F, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge7_EventScript_2656E4:: @ 82656E4
-	msgbox BattleFrontier_Lounge7_Text_265D17, 2
+	msgbox BattleFrontier_Lounge7_Text_265D17, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge7_Text_2656ED: @ 82656ED

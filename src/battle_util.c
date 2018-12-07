@@ -1200,8 +1200,8 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
             for (i = 0; i < 2; i++)
                 CancelMultiTurnMoves(i);
 
-            gBattlescriptCurrInstr = BattleScript_82DB8F3;
-            BattleScriptExecute(BattleScript_82DB8F3);
+            gBattlescriptCurrInstr = BattleScript_ArenaDoJudgment;
+            BattleScriptExecute(BattleScript_ArenaDoJudgment);
             gBattleStruct->wishPerishSongState++;
             return TRUE;
         }
@@ -2616,7 +2616,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 gBattleStruct->moneyMultiplier = 2;
             break;
         case HOLD_EFFECT_RESTORE_STATS:
-            for (i = 0; i < BATTLE_STATS_NO; i++)
+            for (i = 0; i < NUM_BATTLE_STATS; i++)
             {
                 if (gBattleMons[battlerId].statStages[i] < 6)
                 {
@@ -2687,7 +2687,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RESTORE_STATS:
-                for (i = 0; i < BATTLE_STATS_NO; i++)
+                for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
                     if (gBattleMons[battlerId].statStages[i] < 6)
                     {
@@ -3163,7 +3163,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_RESTORE_STATS:
-                for (i = 0; i < BATTLE_STATS_NO; i++)
+                for (i = 0; i < NUM_BATTLE_STATS; i++)
                 {
                     if (gBattleMons[battlerId].statStages[i] < 6)
                     {

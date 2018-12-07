@@ -17,17 +17,17 @@ FallarborTown_PokemonCenter_1F_EventScript_200BE1:: @ 8200BE1
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_200BEF:: @ 8200BEF
-	msgbox FallarborTown_PokemonCenter_1F_Text_200E22, 2
+	msgbox FallarborTown_PokemonCenter_1F_Text_200E22, MSGBOX_NPC
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_200BF8:: @ 8200BF8
-	msgbox FallarborTown_PokemonCenter_1F_Text_200E8B, 2
+	msgbox FallarborTown_PokemonCenter_1F_Text_200E8B, MSGBOX_NPC
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_200C01:: @ 8200C01
 	lock
 	faceplayer
-	msgbox FallarborTown_PokemonCenter_1F_Text_200C6B, 4
+	msgbox FallarborTown_PokemonCenter_1F_Text_200C6B, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 2, FallarborTown_PokemonCenter_1F_EventScript_200C28
@@ -49,7 +49,7 @@ FallarborTown_PokemonCenter_1F_EventScript_200C38:: @ 8200C38
 FallarborTown_PokemonCenter_1F_EventScript_200C48:: @ 8200C48
 	playse SE_JIDO_DOA
 	removeobject 4
-	clearflag FLAG_0x366
+	clearflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
 	release
 	end
 

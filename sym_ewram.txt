@@ -3,20 +3,6 @@
     .include "src/window.o"
     .include "src/text.o"
     .include "src/sprite.o"
-    .align 2
-
-gStringVar1: @ 2021CC4
-	.space 0x100
-
-gStringVar2: @ 2021DC4
-	.space 0x100
-
-gStringVar3: @ 2021EC4
-	.space 0x100
-
-gStringVar4: @ 2021FC4
-	.space 0x3E8
-
 	.include "src/string_util.o"
 	.include "src/link.o"
 	.include "src/link_rfu.o"
@@ -117,63 +103,9 @@ gUnknown_02022CFC: @ 2022CFC
 gUnknown_02022D00: @ 2022D00
 	.space 0x4
 
-@ src/main_menu.c
-gUnknown_02022D04: @ 2022D04
 	.include "src/main_menu.o"
-
-gUnknown_02022D08: @ 2022D08
-	.space 0x1
-
-gUnknown_02022D09: @ 2022D09
-	.space 0x1
-
-gUnknown_02022D0A: @ 2022D0A
-	.space 0x2
-
-gUnknown_02022D0C: @ 2022D0C
-	.space 0x4
-
 	.include "src/battle_controllers.o"
-
-gUnknown_02022E10: @ 2022E10
-	.space 0x4
-
-gBattle_BG0_X: @ 2022E14
-	.space 0x2
-
-gBattle_BG0_Y: @ 2022E16
-	.space 0x2
-
-gBattle_BG1_X: @ 2022E18
-	.space 0x2
-
-gBattle_BG1_Y: @ 2022E1A
-	.space 0x2
-
-gBattle_BG2_X: @ 2022E1C
-	.space 0x2
-
-gBattle_BG2_Y: @ 2022E1E
-	.space 0x2
-
-gBattle_BG3_X: @ 2022E20
-	.space 0x2
-
-gBattle_BG3_Y: @ 2022E22
-	.space 0x2
-
-gBattle_WIN0H: @ 2022E24
-	.space 0x2
-
-gBattle_WIN0V: @ 2022E26
-	.space 0x2
-
-gBattle_WIN1H: @ 2022E28
-	.space 0x2
-
-gBattle_WIN1V: @ 2022E2A
-	.space 0x2
-
+	.include "src/rom_8034C54.o"
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
 	.include "src/random.o"
@@ -199,33 +131,11 @@ gUnknown_020322A0: @ 20322A0
 	.space 0x4
     
     .include "src/berry_blender.o"
-
-gDifferentSaveFile: @ 20322D4
-	.space 0x1
-
-gUnknown_020322D5: @ 20322D5
-	.space 0x3
-
+    .include "src/new_game.o"
 	.include "src/overworld.o"
 	.include "src/fieldmap.o"
 	.include "src/field_camera.o"
-
-	.align 2
-gUnknown_0203734C: @ 203734C
-	.space 0x4
-
-gEventObjects: @ 2037350
-	.space 0x240
-
-gPlayerAvatar: @ 2037590
-	.space 0x14
-
-gUnknown_020375A4: @ 20375A4
-	.space 0x8
-
-gUnknown_020375AC: @ 20375AC
-	.space 0x8
-
+	.include "src/field_player_avatar.o"
     .include "src/event_object_movement.o"
     .include "src/field_message_box.o"
 
@@ -373,30 +283,9 @@ gUnknown_02039F5C: @ 2039F5C
 gUnknown_02039F5D: @ 2039F5D
 	.space 0x3
 
-gMartInfo: @ 2039F60
-	.space 0x10
-
-gShopDataPtr: @ 2039F70
-	.space 0x4
-
-gUnknown_02039F74: @ 2039F74
-	.space 0x4
-
-gUnknown_02039F78: @ 2039F78
-	.space 0x4
-
-gUnknown_02039F7C: @ 2039F7C
-	.space 0x4
-
-gUnknown_02039F80: @ 2039F80
-	.space 0xC
-
-gUnknown_02039F8C: @ 2039F8C
-	.space 0x4
-
-gUnknown_02039F90: @ 2039F90
-	.space 0x4
-
+    .include "src/shop.o"
+    .include "src/fldeff_escalator.o"
+    .include "src/script_menu.o"
     .include "src/naming_screen.o"
     .include "src/money.o"
     .include "src/record_mixing.o"
@@ -418,8 +307,7 @@ gUnknown_0203A0F8: @ 203A0F8
 gUnknown_0203A100: @ 203A100
 	.space 0x10
 
-gUnknown_0203A110: @ 203A110
-	.space 0x4
+	.include "src/battle_anim_utility_funcs.o"
 
 gUnknown_0203A114: @ 203A114
 	.space 0x4
@@ -432,6 +320,7 @@ gUnknown_0203A11C: @ 203A11C
 
 gUnknown_0203A120: @ 203A120
 	.space 0x4
+	
 	.include "src/mon_markings.o"
 	.include "src/mauville_old_man.o"
     .include "src/mail.o"
@@ -448,10 +337,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/pokeblock.o"
 	.include "src/field_specials.o"
     .include "src/battle_records.o"
-
-gUnknown_0203AB7C: @ 203AB7C
-	.space 0x4
-
+    .include "src/pokedex_area_screen.o"
     .include "src/evolution_scene.o"
 
 gUnknown_0203AB88: @ 203AB88
@@ -460,15 +346,7 @@ gUnknown_0203AB88: @ 203AB88
 gUnknown_0203AB8C: @ 203AB8C
 	.space 0x4
 
-gUnknown_0203AB90: @ 203AB90
-	.space 0x4
-
-gUnknown_0203AB94: @ 203AB94
-	.space 0x4
-
-gUnknown_0203AB98: @ 203AB98
-	.space 0x4
-
+	.include "src/pokedex_cry_screen.o"
     .include "src/coins.o"
     .include "src/battle_transition.o"
     .include "src/battle_message.o"
@@ -496,20 +374,11 @@ gUnknown_0203ABB5: @ 203ABB5
 
     .include "src/rom_81520A8.o"
     .include "src/save.o"
-
-.space 0x4 /*unused var?*/
-
 	.include "src/mystery_event_script.o"
 	.include "src/learn_move.o"
 	.include "src/decoration_inventory.o"
 	.include "src/roamer.o"
-
-gFacilityTrainers: @ 203BC88
-	.space 0x4
-
-gFacilityTrainerMons: @ 203BC8C
-	.space 0x4
-
+	.include "src/battle_tower.o"
 	.include "src/use_pokeblock.o"
 	.include "src/player_pc.o"
 	.include "src/intro.o"
@@ -536,14 +405,8 @@ gUnknown_0203CD88: @ 203CD88
 	.space 0x4
 
     .include "src/menu.o"
-    .include "src/battle_factory.o"
-
-gUnknown_0203CE50: @ 203CE50
-	.space 0x4
-
-gUnknown_0203CE54: @ 203CE54
-	.align 2
-    
+    .include "src/battle_factory_screen.o"
+    .include "src/mossdeep_gym.o"
     .include "src/item_menu.o"
     .include "src/list_menu.o"
     .include "src/dynamic_placeholder_text_util.o"
@@ -582,7 +445,7 @@ gUnknown_0203CEF0: @ 203CEF0
 gUnknown_0203CEF4: @ 203CEF4
 	.space 0x4
 
-gUnknown_0203CEF8: @ 203CEF8
+gSelectedOrderFromParty: @ 203CEF8
 	.space 0x4
 
 gUnknown_0203CEFC: @ 203CEFC

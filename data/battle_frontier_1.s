@@ -6,31 +6,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_0860DE50:: @ 860DE50
-	.4byte sub_8195980
-	.4byte sub_8195A38
-	.4byte sub_8195AE4
-	.4byte sub_8195BB0
-	.4byte sub_8195C20
-	.4byte sub_8195C50
-	.4byte sub_8195C7C
-	.4byte sub_8195CE4
-	.4byte sub_8195D28
-	.4byte sub_8195DB8
-	
-gUnknown_0860DE78:: @ 860DE78
-	.2byte 0x003f, 0x0040, 0x0041, 0x0043, 0x0042, 0x0046
-
-gUnknown_0860DE84:: @ 860DE84
-	.2byte 0x00b3, 0x00b4, 0x00b7, 0x00c8, 0x00b9, 0x00bb, 0x00c4, 0x00c6, 0x00ba, 0x0000
-
-gUnknown_0860DE98:: @ 860DE98
-	.4byte 0x00000010, 0x00000020, 0x00400000, 0x00800000
-
-gUnknown_0860DEA8:: @ 860DEA8
-	.4byte 0xffffffef, 0xffffffdf, 0xffbfffff, 0xff7fffff
-
-	.align 2
 gUnknown_0860DEB8:: @ 860DEB8 //struct
 	.2byte 0x0025, 0x0000, 0x0108, 0x0208, 0x0308, 0x0103, 0x0008, 0x0108, 0x0208, 0x0000
 	.2byte 0x02e1, 0x0000, 0x010c, 0x020c, 0x030c, 0x013e, 0x000c, 0x010c, 0x020c, 0x0000

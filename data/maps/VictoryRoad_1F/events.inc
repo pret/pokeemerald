@@ -2,10 +2,10 @@ VictoryRoad_1F_EventObjects: @ 8535E04
 	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 33, 22, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, VictoryRoad_1F_EventScript_235E73, 0
 	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 6, 15, 4, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 4, VictoryRoad_1F_EventScript_235EA1, 0
 	object_event 3, EVENT_OBJ_GFX_MAN_3, 0, 27, 34, 3, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, 0, 0, 1, 3, VictoryRoad_1F_EventScript_235E8A, 0
-	object_event 4, EVENT_OBJ_GFX_WALLY, 0, 12, 25, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, VictoryRoad_1F_EventScript_235E2C, 858
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 40, 26, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_291483, 1084
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 37, 39, 4, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_291490, 1085
-	object_event 7, EVENT_OBJ_GFX_WALLY, 0, 31, 9, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_235E35, 751
+	object_event 4, EVENT_OBJ_GFX_WALLY, 0, 12, 25, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, VictoryRoad_1F_EventScript_235E2C, FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 40, 26, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_291483, FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 37, 39, 4, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_291490, FLAG_ITEM_VICTORY_ROAD_1F_PP_UP
+	object_event 7, EVENT_OBJ_GFX_WALLY, 0, 31, 9, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, VictoryRoad_1F_EventScript_235E35, FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
 	object_event 8, EVENT_OBJ_GFX_WOMAN_5, 0, 29, 17, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 2, VictoryRoad_1F_EventScript_235ECF, 0
 	object_event 9, EVENT_OBJ_GFX_MAN_3, 0, 32, 17, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 2, VictoryRoad_1F_EventScript_235EB8, 0
 
@@ -21,7 +21,7 @@ VictoryRoad_1F_MapCoordEvents: @ 8535F04
 	coord_event 3, 23, 4, VAR_0x40C3, 0, VictoryRoad_1F_EventScript_235DC8
 
 VictoryRoad_1F_MapBGEvents: @ 8535F24
-	bg_hidden_item_event 30, 39, 4, ITEM_ULTRA_BALL, 81
+	bg_hidden_item_event 30, 39, 4, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_ULTRA_BALL
 
 VictoryRoad_1F_MapEvents:: @ 8535F30
 	map_events VictoryRoad_1F_EventObjects, VictoryRoad_1F_MapWarps, VictoryRoad_1F_MapCoordEvents, VictoryRoad_1F_MapBGEvents

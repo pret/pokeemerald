@@ -23,7 +23,7 @@ AncientTomb_MapScript1_238FE1: @ 8238FE1
 	end
 
 AncientTomb_EventScript_238FEE:: @ 8238FEE
-	clearflag FLAG_0x3A9
+	clearflag FLAG_HIDE_REGISTEEL
 	return
 
 AncientTomb_MapScript1_238FF2: @ 8238FF2
@@ -51,7 +51,7 @@ AncientTomb_EventScript_239033:: @ 8239033
 	end
 
 AncientTomb_EventScript_239046:: @ 8239046
-	msgbox gUnknown_0827304E, 4
+	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
 	releaseall
 	end
 

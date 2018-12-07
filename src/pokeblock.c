@@ -1,35 +1,35 @@
 #include "global.h"
-#include "pokeblock.h"
-#include "bg.h"
-#include "strings.h"
-#include "text.h"
-#include "text_window.h"
-#include "menu.h"
-#include "task.h"
-#include "menu_helpers.h"
-#include "pokemon.h"
-#include "graphics.h"
-#include "malloc.h"
-#include "main.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "palette.h"
-#include "scanline_effect.h"
-#include "list_menu.h"
-#include "gpu_regs.h"
+#include "battle_message.h"
+#include "berry.h"
+#include "bg.h"
 #include "decompress.h"
+#include "event_data.h"
+#include "gpu_regs.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "constants/items.h"
-#include "string_util.h"
-#include "constants/songs.h"
-#include "sound.h"
-#include "berry.h"
-#include "event_data.h"
-#include "battle_message.h"
-#include "safari_zone.h"
 #include "lilycove_lady.h"
+#include "list_menu.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
 #include "overworld.h"
+#include "palette.h"
+#include "pokeblock.h"
+#include "pokemon.h"
+#include "safari_zone.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "text.h"
+#include "text_window.h"
+#include "constants/items.h"
+#include "constants/songs.h"
 
 #define POKEBLOCK_MAX_FEEL 99
 #define FIELD_E75_COUNT 7
@@ -295,7 +295,7 @@ static const struct Pokeblock sFavoritePokeblocksTable[] =
 static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 1,
         .width = 9,
@@ -304,7 +304,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x1E
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 1,
         .width = 14,
@@ -313,7 +313,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x30
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 13,
         .width = 5,
@@ -322,7 +322,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x12C
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 5,
@@ -331,7 +331,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x136
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 17,
         .width = 5,
@@ -340,7 +340,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x140
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 13,
         .width = 5,
@@ -349,7 +349,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x14A
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 15,
         .width = 5,
@@ -358,7 +358,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x154
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 17,
         .width = 2,
@@ -367,7 +367,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x15E
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 7,
         .tilemapTop = 5,
         .width = 6,
@@ -376,7 +376,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x162
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 7,
         .tilemapTop = 7,
         .width = 6,
@@ -385,7 +385,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
         .baseBlock = 0x186
     },
     {
-        .priority = 1,
+        .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -398,7 +398,7 @@ static const struct WindowTemplate sWindowTemplatesForPokeblockMenu[] =
 
 static const struct WindowTemplate sTossPkblockWindowTemplate =
 {
-    .priority = 1,
+    .bg = 1,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 5,
@@ -1139,7 +1139,7 @@ static void Task_HandlePokeblockOptionsInput(u8 taskId)
     if (sub_81221EC() == TRUE)
         return;
 
-    itemId = Menu_ProcessInputNoWrapAround();
+    itemId = Menu_ProcessInputNoWrap();
     if (itemId == MENU_NOTHING_CHOSEN)
     {
         return;
@@ -1179,7 +1179,7 @@ static void PokeblockAction_Toss(u8 taskId)
     sub_8198070(data[1], FALSE);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayVar1);
-    DisplayMessageAndContinueTask(taskId, 10, 10, 13, 1, GetPlayerTextSpeed(), gStringVar4, CreateTossPokeblockYesNoMenu);
+    DisplayMessageAndContinueTask(taskId, 10, 10, 13, 1, GetPlayerTextSpeedDelay(), gStringVar4, CreateTossPokeblockYesNoMenu);
 }
 
 static void CreateTossPokeblockYesNoMenu(u8 taskId)
@@ -1190,7 +1190,7 @@ static void CreateTossPokeblockYesNoMenu(u8 taskId)
 static void TossPokeblockChoice_Yes(u8 taskId)
 {
     StringExpandPlaceholders(gStringVar4, gText_Var1ThrownAway);
-    DisplayMessageAndContinueTask(taskId, 10, 10, 13, 1, GetPlayerTextSpeed(), gStringVar4, HandleErasePokeblock);
+    DisplayMessageAndContinueTask(taskId, 10, 10, 13, 1, GetPlayerTextSpeedDelay(), gStringVar4, HandleErasePokeblock);
 }
 
 static void HandleErasePokeblock(u8 taskId)

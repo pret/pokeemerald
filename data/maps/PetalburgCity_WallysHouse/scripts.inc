@@ -18,10 +18,10 @@ PetalburgCity_WallysHouse_MapScript2_204247: @ 8204247
 
 PetalburgCity_WallysHouse_EventScript_204251:: @ 8204251
 	lockall
-	msgbox PetalburgCity_WallysHouse_Text_20446E, 4
+	msgbox PetalburgCity_WallysHouse_Text_20446E, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM03
 	setflag FLAG_0x07A
-	msgbox PetalburgCity_WallysHouse_Text_20461A, 4
+	msgbox PetalburgCity_WallysHouse_Text_20461A, MSGBOX_DEFAULT
 	setvar VAR_0x4057, 5
 	releaseall
 	end
@@ -35,23 +35,23 @@ PetalburgCity_WallysHouse_EventScript_204278:: @ 8204278
 	goto_eq PetalburgCity_WallysHouse_EventScript_2042A2
 	checkflag FLAG_0x087
 	goto_eq PetalburgCity_WallysHouse_EventScript_2042B6
-	msgbox PetalburgCity_WallysHouse_Text_2042DF, 4
+	msgbox PetalburgCity_WallysHouse_Text_2042DF, MSGBOX_DEFAULT
 	setflag FLAG_0x087
 	release
 	end
 
 PetalburgCity_WallysHouse_EventScript_2042A2:: @ 82042A2
-	msgbox PetalburgCity_WallysHouse_Text_204661, 4
+	msgbox PetalburgCity_WallysHouse_Text_204661, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_WallysHouse_EventScript_2042AC:: @ 82042AC
-	msgbox PetalburgCity_WallysHouse_Text_204698, 4
+	msgbox PetalburgCity_WallysHouse_Text_204698, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_WallysHouse_EventScript_2042B6:: @ 82042B6
-	msgbox PetalburgCity_WallysHouse_Text_20444D, 4
+	msgbox PetalburgCity_WallysHouse_Text_20444D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -60,12 +60,12 @@ PetalburgCity_WallysHouse_EventScript_2042C0:: @ 82042C0
 	faceplayer
 	checkflag FLAG_0x07A
 	goto_eq PetalburgCity_WallysHouse_EventScript_2042D5
-	msgbox PetalburgCity_WallysHouse_Text_204732, 4
+	msgbox PetalburgCity_WallysHouse_Text_204732, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_WallysHouse_EventScript_2042D5:: @ 82042D5
-	msgbox PetalburgCity_WallysHouse_Text_2047A7, 4
+	msgbox PetalburgCity_WallysHouse_Text_2047A7, MSGBOX_DEFAULT
 	release
 	end
 

@@ -60,7 +60,7 @@ LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA: @ 81F77EA
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
 	lockall
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B67, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F783A
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_1F783A
@@ -99,7 +99,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1F789C
 	waitmovement 0
 	special GetRivalSonDaughterString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8BC5, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
 	setflag FLAG_0x057
 	setvar VAR_0x4082, 2
 	releaseall
@@ -160,7 +160,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F7997
 	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79A2
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F90B4, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F90B4, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79C1
@@ -170,9 +170,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79E5
 	playse SE_KAIDAN
 	removeobject 7
-	setflag FLAG_0x2E9
-	setflag FLAG_0x331
-	clearflag FLAG_0x2F8
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_0x408D, 3
 	setvar VAR_0x4050, 1

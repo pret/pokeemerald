@@ -369,7 +369,7 @@ _0811AF86:
 	thumb_func_start sub_811AF8C
 sub_811AF8C: @ 811AF8C
 	push {lr}
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -418,7 +418,7 @@ _0811AFE6:
 	thumb_func_start sub_811AFEC
 sub_811AFEC: @ 811AFEC
 	push {r4,lr}
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -461,7 +461,7 @@ _0811B03A:
 	thumb_func_start sub_811B040
 sub_811B040: @ 811B040
 	push {lr}
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -566,7 +566,7 @@ sub_811B0E8: @ 811B0E8
 	thumb_func_start sub_811B0F8
 sub_811B0F8: @ 811B0F8
 	push {r4,lr}
-	bl Menu_ProcessInputNoWrap_
+	bl Menu_ProcessInputNoWrapClearOnChoose
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -7951,7 +7951,7 @@ sub_811EA28: @ 811EA28
 	bgt _0811EA48
 	cmp r0, 0x11
 	blt _0811EA66
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	b _0811EA60
 	.pool
@@ -9131,7 +9131,7 @@ _0811F2FE:
 	adds r3, 0x1
 	cmp r3, 0x10
 	ble _0811F2FE
-	ldr r0, =0x00000864
+	ldr r0, =0x00000864 @ = FLAG_SYS_GAME_CLEAR
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0

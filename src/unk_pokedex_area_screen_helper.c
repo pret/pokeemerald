@@ -4,24 +4,17 @@
 #include "bg.h"
 #include "malloc.h"
 #include "palette.h"
+#include "unk_pokedex_area_screen_helper.h"
 
 EWRAM_DATA u8 *gUnknown_0203CF28 = NULL;
 
 static const u16 gUnknown_0861D140[] = INCBIN_U16("graphics/interface/region_map.gbapal");
-static const u8 gUnknown_0861D1A0[] = INCBIN_U8("graphics/interface/region_map.8bpp.lz");
-static const u8 gUnknown_0861DEF4[] = INCBIN_U8("graphics/interface/region_map.bin.lz");
-static const u8 gUnknown_0861E208[] = INCBIN_U8("graphics/interface/region_map_affine.8bpp.lz");
-static const u8 gUnknown_0861EF64[] = INCBIN_U8("graphics/interface/region_map_affine.bin.lz");
+static const u32 gUnknown_0861D1A0[] = INCBIN_U32("graphics/interface/region_map.8bpp.lz");
+static const u32 gUnknown_0861DEF4[] = INCBIN_U32("graphics/interface/region_map.bin.lz");
+static const u32 gUnknown_0861E208[] = INCBIN_U32("graphics/interface/region_map_affine.8bpp.lz");
+static const u32 gUnknown_0861EF64[] = INCBIN_U32("graphics/interface/region_map_affine.bin.lz");
 
-struct UnkStruct_1C4D70
-{
-    u32 bg:2;
-    u32 unk2:8;
-    u32 unk10:2;
-    u32 unk12:20;
-};
-
-void sub_81C4D70(struct UnkStruct_1C4D70 *template)
+void sub_81C4D70(const struct UnkStruct_1C4D70 *template)
 {
     u8 unk;
     gUnknown_0203CF28 = Alloc(4);

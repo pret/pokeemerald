@@ -2,11 +2,11 @@ MossdeepCity_House2_MapScripts:: @ 82220DE
 	.byte 0
 
 MossdeepCity_House2_EventScript_2220DF:: @ 82220DF
-	msgbox MossdeepCity_House2_Text_222146, 2
+	msgbox MossdeepCity_House2_Text_222146, MSGBOX_NPC
 	end
 
 MossdeepCity_House2_EventScript_2220E8:: @ 82220E8
-	msgbox MossdeepCity_House2_Text_2221A6, 2
+	msgbox MossdeepCity_House2_Text_2221A6, MSGBOX_NPC
 	end
 
 MossdeepCity_House2_EventScript_2220F1:: @ 82220F1
@@ -14,11 +14,11 @@ MossdeepCity_House2_EventScript_2220F1:: @ 82220F1
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox MossdeepCity_House2_Text_22222E, 4
+	msgbox MossdeepCity_House2_Text_22222E, MSGBOX_DEFAULT
 	waitmoncry
 	closemessage
 	setflag FLAG_0x0E0
-	clearflag FLAG_0x3A5
+	clearflag FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL
 	compare VAR_FACING, 2
 	call_if 1, MossdeepCity_House2_EventScript_222124
 	compare VAR_FACING, 3

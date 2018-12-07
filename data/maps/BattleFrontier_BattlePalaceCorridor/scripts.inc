@@ -13,7 +13,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	waitmovement 0
 	lockall
 	setvar VAR_0x8004, 3
-	special sub_8195960
+	special CallBattlePalaceFunction
 	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F58B
 	compare VAR_RESULT, 1
@@ -27,7 +27,7 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F553
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5BD
@@ -60,23 +60,23 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F581:: @ 824F581
 	end
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F58B:: @ 824F58B
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F5DD, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F5DD, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F594:: @ 824F594
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F65B, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F65B, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F59D:: @ 824F59D
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F718, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F718, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F5A6:: @ 824F5A6
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F78C, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F78C, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F5AF:: @ 824F5AF
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F7D4, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F7D4, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5B8: @ 824F5B8

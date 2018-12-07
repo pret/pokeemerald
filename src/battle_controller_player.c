@@ -1,44 +1,42 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_controllers.h"
-#include "battle_message.h"
-#include "battle_interface.h"
 #include "battle_anim.h"
-#include "constants/battle_anim.h"
+#include "battle_arena.h"
+#include "battle_controllers.h"
+#include "battle_dome.h"
+#include "battle_interface.h"
+#include "battle_message.h"
+#include "battle_setup.h"
 #include "battle_tv.h"
-#include "pokemon.h"
-#include "link.h"
-#include "util.h"
-#include "main.h"
+#include "bg.h"
+#include "data2.h"
 #include "item.h"
-#include "constants/items.h"
-#include "constants/songs.h"
-#include "sound.h"
-#include "constants/moves.h"
-#include "constants/trainers.h"
-#include "window.h"
+#include "item_menu.h"
+#include "link.h"
+#include "main.h"
 #include "m4a.h"
 #include "palette.h"
+#include "party_menu.h"
+#include "pokeball.h"
+#include "pokemon.h"
+#include "random.h"
+#include "recorded_battle.h"
+#include "reshow_battle_screen.h"
+#include "sound.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "string_util.h"
-#include "bg.h"
-#include "reshow_battle_screen.h"
-#include "random.h"
-#include "pokeball.h"
-#include "data2.h"
-#include "battle_setup.h"
-#include "item_menu.h"
-#include "recorded_battle.h"
-#include "party_menu.h"
-#include "battle_dome.h"
+#include "util.h"
+#include "window.h"
+#include "constants/battle_anim.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/trainers.h"
 
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
 extern u8 gUnknown_0203CF00[];
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -46,7 +44,6 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_81AABB0(void);
-extern void sub_81A57E4(u8 battlerId, u16 stringId);
 extern void sub_81851A8(u8 *);
 
 // this file's functions
@@ -116,7 +113,7 @@ static void MoveSelectionDisplayPpNumber(void);
 static void MoveSelectionDisplayPpString(void);
 static void MoveSelectionDisplayMoveType(void);
 static void MoveSelectionDisplayMoveNames(void);
-static void HandleMoveSwitchting(void);
+static void HandleMoveSwitching(void);
 static void sub_8058FC0(void);
 static void WaitForMonSelection(void);
 static void CompleteWhenChoseItem(void);
@@ -619,7 +616,7 @@ static void HandleInputChooseMove(void)
 
             MoveSelectionCreateCursorAt(gMultiUsePlayerCursor, 27);
             BattlePutTextOnWindow(gText_BattleSwitchWhich, 0xB);
-            gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitchting;
+            gBattlerControllerFuncs[gActiveBattler] = HandleMoveSwitching;
         }
     }
 }
@@ -674,7 +671,7 @@ u32 sub_8057FBC(void) // unused
     return var;
 }
 
-static void HandleMoveSwitchting(void)
+static void HandleMoveSwitching(void)
 {
     u8 perMovePPBonuses[4];
     struct ChooseMoveStruct moveStruct;
@@ -1589,7 +1586,7 @@ static void PlayerHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 size += CopyPlayerMonData(i, monData + size);
@@ -1932,7 +1929,7 @@ static void PlayerHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 SetPlayerMonData(i);
@@ -2387,7 +2384,7 @@ static void PlayerHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
     gBattlerControllerFuncs[gActiveBattler] = sub_80588B4;
@@ -2407,7 +2404,7 @@ static void PlayerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_PLAYER);
+            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8039C00;
@@ -2537,7 +2534,7 @@ static void PlayerHandlePrintString(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, 0);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
     BattleTv_SetDataBasedOnString(*stringId);
-    sub_81A57E4(gActiveBattler, *stringId);
+    BattleArena_DeductMindPoints(gActiveBattler, *stringId);
 }
 
 static void PlayerHandlePrintSelectionString(void)
@@ -2600,9 +2597,11 @@ static void HandleChooseMoveAfterDma3(void)
     }
 }
 
+// arenaMindPoints is used here as a placeholder for a timer.
+
 static void PlayerChooseMoveInBattlePalace(void)
 {
-    if (--*(gBattleStruct->field_298 + gActiveBattler) == 0)
+    if (--*(gBattleStruct->arenaMindPoints + gActiveBattler) == 0)
     {
         gBattlePalaceMoveSelectionRngValue = gRngValue;
         BtlController_EmitTwoReturnValues(1, 10, ChooseMoveAndTargetInBattlePalace());
@@ -2614,7 +2613,7 @@ static void PlayerHandleChooseMove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
-        *(gBattleStruct->field_298 + gActiveBattler) = 8;
+        *(gBattleStruct->arenaMindPoints + gActiveBattler) = 8;
         gBattlerControllerFuncs[gActiveBattler] = PlayerChooseMoveInBattlePalace;
     }
     else
@@ -2882,9 +2881,9 @@ static void PlayerHandlePlaySE(void)
     s8 pan;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        pan = PAN_SIDE_PLAYER;
+        pan = SOUND_PAN_ATTACKER;
     else
-        pan = PAN_SIDE_OPPONENT;
+        pan = SOUND_PAN_TARGET;
 
     PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     PlayerBufferExecCompleted();
@@ -2930,7 +2929,7 @@ static void PlayerHandleIntroTrainerBallThrow(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
 
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_805CC00);

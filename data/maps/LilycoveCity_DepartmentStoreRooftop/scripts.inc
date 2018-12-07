@@ -11,11 +11,11 @@ LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D: @ 822020D
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220227:: @ 8220227
-	clearflag FLAG_0x3C2
+	clearflag FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22022B:: @ 822022B
-	setflag FLAG_0x3C2
+	setflag FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22022F:: @ 822022F
@@ -24,7 +24,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22022F:: @ 822022F
 	message gUnknown_08272A21
 	waitmessage
 	pokemartdecoration LilycoveCity_DepartmentStoreRooftop_PokemartDecor_220248
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -54,17 +54,17 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220268:: @ 8220268
 	getpricereduction 3
 	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220282
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220463, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220463, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220282:: @ 8220282
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2204C9, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2204C9, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22028C:: @ 822028C
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220552, 2
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220552, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220295:: @ 8220295
@@ -82,7 +82,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2202A6:: @ 82202A6
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_2202E4
 	case 1, LilycoveCity_DepartmentStoreRooftop_EventScript_2202EF
 	case 2, LilycoveCity_DepartmentStoreRooftop_EventScript_2202FA
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220603, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220603, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22045E
 	end
 
@@ -147,11 +147,11 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	nop
 	bufferitemname 0, VAR_TEMP_0
 	playse SE_JIHANKI
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205A1, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
-	msgbox gUnknown_08272A9A, 4
+	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
 	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_220436
@@ -159,11 +159,11 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
 	playse SE_JIHANKI
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
-	msgbox gUnknown_08272A9A, 4
+	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
 	random 64
 	compare VAR_RESULT, 0
 	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_220436
@@ -171,11 +171,11 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
 	playse SE_JIHANKI
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, MSGBOX_DEFAULT
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
 	bufferstdstring 2, 14
-	msgbox gUnknown_08272A9A, 4
+	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_220436
 	end
 
@@ -186,12 +186,12 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220436:: @ 8220436
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220442:: @ 8220442
-	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205F1, 4
+	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205F1, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22045E
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220450:: @ 8220450
-	msgbox gUnknown_08272A89, 4
+	msgbox gUnknown_08272A89, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22045E
 	end
 

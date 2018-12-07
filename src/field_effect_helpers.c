@@ -10,26 +10,27 @@
 #include "sound.h"
 #include "sprite.h"
 #include "trig.h"
+#include "constants/field_effects.h"
 #include "constants/songs.h"
 
 #define EVENT_OBJ_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 
-void UpdateObjectReflectionSprite(struct Sprite *);
-void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite);
-void LoadObjectHighBridgeReflectionPalette(struct EventObject *, u8);
-void LoadObjectRegularReflectionPalette(struct EventObject *, u8);
-void sub_81561FC(struct Sprite *, u8, u8);
-void FadeFootprintsTireTracks_Step0(struct Sprite *);
-void FadeFootprintsTireTracks_Step1(struct Sprite *);
-void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *);
-void UpdateAshFieldEffect_Step0(struct Sprite *);
-void UpdateAshFieldEffect_Step1(struct Sprite *);
-void UpdateAshFieldEffect_Step2(struct Sprite *);
-void sub_81556B0(struct EventObject *, struct Sprite *);
-void sub_81556E8(struct EventObject *, struct Sprite *);
-void sub_815577C(struct EventObject *, struct Sprite *, struct Sprite *);
-void sub_8155850(struct Sprite *);
-u32 ShowDisguiseFieldEffect(u8, u8, u8);
+static void UpdateObjectReflectionSprite(struct Sprite *);
+static void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite);
+static void LoadObjectHighBridgeReflectionPalette(struct EventObject *, u8);
+static void LoadObjectRegularReflectionPalette(struct EventObject *, u8);
+static void sub_81561FC(struct Sprite *, u8, u8);
+static void FadeFootprintsTireTracks_Step0(struct Sprite *);
+static void FadeFootprintsTireTracks_Step1(struct Sprite *);
+static void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *);
+static void UpdateAshFieldEffect_Step0(struct Sprite *);
+static void UpdateAshFieldEffect_Step1(struct Sprite *);
+static void UpdateAshFieldEffect_Step2(struct Sprite *);
+static void SynchroniseSurfAnim(struct EventObject *, struct Sprite *);
+static void sub_81556E8(struct EventObject *, struct Sprite *);
+static void CreateBobbingEffect(struct EventObject *, struct Sprite *, struct Sprite *);
+static void sub_8155850(struct Sprite *);
+static u32 ShowDisguiseFieldEffect(u8, u8, u8);
 
 void SetUpReflection(struct EventObject *eventObject, struct Sprite *sprite, bool8 stillReflection)
 {
@@ -59,12 +60,12 @@ static s16 GetReflectionVerticalOffset(struct EventObject *eventObject)
     return GetEventObjectGraphicsInfo(eventObject->graphicsId)->height - 2;
 }
 
-void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite)
+static void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite)
 {
     u8 bridgeType;
     u16 bridgeReflectionVerticalOffsets[] = { 12, 28, 44 };
     sprite->data[2] = 0;
-    if (!GetEventObjectGraphicsInfo(eventObject->graphicsId)->disableReflectionPaletteLoad && ((bridgeType = MetatileBehavior_GetBridgeSth(eventObject->previousMetatileBehavior)) || (bridgeType = MetatileBehavior_GetBridgeSth(eventObject->currentMetatileBehavior))))
+    if (!GetEventObjectGraphicsInfo(eventObject->graphicsId)->disableReflectionPaletteLoad && ((bridgeType = MetatileBehavior_GetBridgeType(eventObject->previousMetatileBehavior)) || (bridgeType = MetatileBehavior_GetBridgeType(eventObject->currentMetatileBehavior))))
     {
         sprite->data[2] = bridgeReflectionVerticalOffsets[bridgeType - 1];
         LoadObjectHighBridgeReflectionPalette(eventObject, sprite->oam.paletteNum);
@@ -75,7 +76,7 @@ void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite 
     }
 }
 
-void LoadObjectRegularReflectionPalette(struct EventObject *eventObject, u8 paletteIndex)
+static void LoadObjectRegularReflectionPalette(struct EventObject *eventObject, u8 paletteIndex)
 {
     const struct EventObjectGraphicsInfo *graphicsInfo;
 
@@ -100,7 +101,7 @@ void LoadObjectRegularReflectionPalette(struct EventObject *eventObject, u8 pale
 
 // When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
 // This is so the sprite blends in with the dark water metatile underneath the bridge.
-void LoadObjectHighBridgeReflectionPalette(struct EventObject *eventObject, u8 paletteNum)
+static void LoadObjectHighBridgeReflectionPalette(struct EventObject *eventObject, u8 paletteNum)
 {
     const struct EventObjectGraphicsInfo *graphicsInfo;
 
@@ -112,7 +113,7 @@ void LoadObjectHighBridgeReflectionPalette(struct EventObject *eventObject, u8 p
     }
 }
 
-void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
+static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 {
     struct EventObject *eventObject;
     struct Sprite *mainSprite;
@@ -141,7 +142,7 @@ void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         reflectionSprite->pos2.x = mainSprite->pos2.x;
         reflectionSprite->pos2.y = -mainSprite->pos2.y;
         reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
-        
+
         if (eventObject->unk3_3 == TRUE)
             reflectionSprite->invisible = TRUE;
 
@@ -579,7 +580,7 @@ void UpdateFootprintsTireTracksFieldEffect(struct Sprite *sprite)
     gFadeFootprintsTireTracksFuncs[sprite->data[0]](sprite);
 }
 
-void FadeFootprintsTireTracks_Step0(struct Sprite *sprite)
+static void FadeFootprintsTireTracks_Step0(struct Sprite *sprite)
 {
     // Wait 40 frames before the flickering starts.
     if (++sprite->data[1] > 40)
@@ -588,7 +589,7 @@ void FadeFootprintsTireTracks_Step0(struct Sprite *sprite)
     UpdateEventObjectSpriteVisibility(sprite, FALSE);
 }
 
-void FadeFootprintsTireTracks_Step1(struct Sprite *sprite)
+static void FadeFootprintsTireTracks_Step1(struct Sprite *sprite)
 {
     sprite->invisible ^= 1;
     sprite->data[1]++;
@@ -708,7 +709,7 @@ u32 FldEff_FeetInFlowingWater(void)
     return 0;
 }
 
-void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *sprite)
+static void UpdateFeetInFlowingWaterFieldEffect(struct Sprite *sprite)
 {
     u8 eventObjectId;
     struct Sprite *linkedSprite;
@@ -913,7 +914,7 @@ void UpdateAshFieldEffect(struct Sprite *sprite)
     gAshFieldEffectFuncs[sprite->data[0]](sprite);
 }
 
-void UpdateAshFieldEffect_Step0(struct Sprite *sprite)
+static void UpdateAshFieldEffect_Step0(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
     sprite->animPaused = TRUE;
@@ -921,7 +922,7 @@ void UpdateAshFieldEffect_Step0(struct Sprite *sprite)
         sprite->data[0] = 1;
 }
 
-void UpdateAshFieldEffect_Step1(struct Sprite *sprite)
+static void UpdateAshFieldEffect_Step1(struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
     sprite->animPaused = FALSE;
@@ -931,7 +932,7 @@ void UpdateAshFieldEffect_Step1(struct Sprite *sprite)
     sprite->data[0] = 2;
 }
 
-void UpdateAshFieldEffect_Step2(struct Sprite *sprite)
+static void UpdateAshFieldEffect_Step2(struct Sprite *sprite)
 {
     UpdateEventObjectSpriteVisibility(sprite, FALSE);
     if (sprite->animEnded)
@@ -975,17 +976,17 @@ void sub_8155604(u8 spriteId, u8 value, s16 data1)
     gSprites[spriteId].data[1] = data1;
 }
 
-u8 sub_8155638(struct Sprite *sprite)
+static u8 sub_8155638(struct Sprite *sprite)
 {
     return sprite->data[0] & 0xF;
 }
 
-u8 sub_8155640(struct Sprite *sprite)
+static u8 sub_8155640(struct Sprite *sprite)
 {
     return (sprite->data[0] & 0xF0) >> 4;
 }
 
-u8 sub_815564C(struct Sprite *sprite)
+static u8 sub_815564C(struct Sprite *sprite)
 {
     return (sprite->data[0] & 0xF00) >> 8;
 }
@@ -997,13 +998,13 @@ void UpdateSurfBlobFieldEffect(struct Sprite *sprite)
 
     eventObject = &gEventObjects[sprite->data[2]];
     linkedSprite = &gSprites[eventObject->spriteId];
-    sub_81556B0(eventObject, sprite);
+    SynchroniseSurfAnim(eventObject, sprite);
     sub_81556E8(eventObject, sprite);
-    sub_815577C(eventObject, linkedSprite, sprite);
+    CreateBobbingEffect(eventObject, linkedSprite, sprite);
     sprite->oam.priority = linkedSprite->oam.priority;
 }
 
-void sub_81556B0(struct EventObject *eventObject, struct Sprite *sprite)
+static void SynchroniseSurfAnim(struct EventObject *eventObject, struct Sprite *sprite)
 {
     u8 surfBlobDirectionAnims[] = {
         0, // DIR_NONE
@@ -1021,19 +1022,19 @@ void sub_81556B0(struct EventObject *eventObject, struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, surfBlobDirectionAnims[eventObject->movementDirection]);
 }
 
-#ifdef NONMATCHING
 void sub_81556E8(struct EventObject *eventObject, struct Sprite *sprite)
 {
-    s16 x;
-    s16 y;
     u8 i;
+    s16 x = eventObject->currentCoords.x;
+    s16 y = eventObject->currentCoords.y;
+    s32 spriteY = sprite->pos2.y;
 
-    x = eventObject->currentCoords.x;
-    y = eventObject->currentCoords.y;
-    if (sprite->pos2.y == 0 && (x != sprite->data[6] || y != sprite->data[7]))
+    if (spriteY == 0 && (x != sprite->data[6] || y != sprite->data[7]))
     {
-        sprite->data[5] = sprite->pos2.y;
-        for (sprite->data[6] = x, sprite->data[7] = y, i = DIR_SOUTH; i <= DIR_EAST; i ++, x = sprite->data[6], y = sprite->data[7])
+        sprite->data[5] = spriteY;
+        sprite->data[6] = x;
+        sprite->data[7] = y;
+        for (i = DIR_SOUTH; i <= DIR_EAST; i++, x = sprite->data[6], y = sprite->data[7])
         {
             MoveCoords(i, &x, &y);
             if (MapGridGetZCoordAt(x, y) == 3)
@@ -1044,89 +1045,8 @@ void sub_81556E8(struct EventObject *eventObject, struct Sprite *sprite)
         }
     }
 }
-#else
-NAKED void sub_81556E8(struct EventObject *eventObject, struct Sprite *sprite)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0x4\n\
-	adds r4, r1, 0\n\
-	ldrh r2, [r0, 0x10]\n\
-	mov r1, sp\n\
-	strh r2, [r1]\n\
-	ldrh r1, [r0, 0x12]\n\
-	mov r0, sp\n\
-	adds r0, 0x2\n\
-	strh r1, [r0]\n\
-	movs r2, 0x26\n\
-	ldrsh r3, [r4, r2]\n\
-	mov r8, r0\n\
-	cmp r3, 0\n\
-	bne _08155770\n\
-	mov r0, sp\n\
-	movs r5, 0\n\
-	ldrsh r2, [r0, r5]\n\
-	movs r5, 0x3A\n\
-	ldrsh r0, [r4, r5]\n\
-	cmp r2, r0\n\
-	bne _08155724\n\
-	lsls r0, r1, 16\n\
-	asrs r0, 16\n\
-	movs r5, 0x3C\n\
-	ldrsh r1, [r4, r5]\n\
-	cmp r0, r1\n\
-	beq _08155770\n\
-_08155724:\n\
-	strh r3, [r4, 0x38]\n\
-	strh r2, [r4, 0x3A]\n\
-	mov r1, r8\n\
-	movs r2, 0\n\
-	ldrsh r0, [r1, r2]\n\
-	strh r0, [r4, 0x3C]\n\
-	movs r5, 0x1\n\
-	mov r7, r8\n\
-	mov r6, sp\n\
-_08155736:\n\
-	adds r0, r5, 0\n\
-	mov r1, sp\n\
-	adds r2, r7, 0\n\
-	bl MoveCoords\n\
-	movs r1, 0\n\
-	ldrsh r0, [r6, r1]\n\
-	movs r2, 0\n\
-	ldrsh r1, [r7, r2]\n\
-	bl MapGridGetZCoordAt\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x3\n\
-	bne _0815575C\n\
-	ldrh r0, [r4, 0x38]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x38]\n\
-	b _08155770\n\
-_0815575C:\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	ldrh r0, [r4, 0x3A]\n\
-	strh r0, [r6]\n\
-	ldrh r0, [r4, 0x3C]\n\
-	mov r1, r8\n\
-	strh r0, [r1]\n\
-	cmp r5, 0x4\n\
-	bls _08155736\n\
-_08155770:\n\
-	add sp, 0x4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0");
-}
-#endif
 
-void sub_815577C(struct EventObject *eventObject, struct Sprite *linkedSprite, struct Sprite *sprite)
+static void CreateBobbingEffect(struct EventObject *eventObject, struct Sprite *linkedSprite, struct Sprite *sprite)
 {
     u16 unk_085CDC6A[] = {3, 7};
     u8 v0 = sub_8155638(sprite);
@@ -1166,7 +1086,7 @@ u8 sub_8155800(u8 oldSpriteId)
     return spriteId;
 }
 
-void sub_8155850(struct Sprite *sprite)
+static void sub_8155850(struct Sprite *sprite)
 {
     struct Sprite *oldSprite;
 
@@ -1320,7 +1240,7 @@ u32 ShowSandDisguiseFieldEffect(void)
     return ShowDisguiseFieldEffect(FLDEFF_SAND_DISGUISE, 28, 2);
 }
 
-u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx, u8 paletteNum)
+static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx, u8 paletteNum)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1449,7 +1369,7 @@ void sub_8155EA0(struct Sprite *sprite)
 bool8 sub_8155EA8(struct Sprite *sprite)
 {
     bool8 returnBool = FALSE;
-    
+
     switch (sprite->data[7])
     {
         case 0:
@@ -1469,7 +1389,7 @@ bool8 sub_8155EA8(struct Sprite *sprite)
             sprite->pos2.y += sub_8097728(0x47 - sprite->data[6]);
             break;
     }
-    
+
     SetGpuReg(REG_OFFSET_BG0HOFS, -sprite->pos2.x);
     if (++sprite->data[6] == 72)
     {
@@ -1482,14 +1402,14 @@ bool8 sub_8155EA8(struct Sprite *sprite)
         sprite->pos2.x = 0;
         returnBool = TRUE;
     }
-    
+
     return returnBool;
 }
 
 void sub_8155F80(struct Sprite *sprite)
 {
     u8 i, j;
-    
+
     switch (sprite->data[2])
     {
         case 0:
@@ -1593,7 +1513,7 @@ void sub_8155F80(struct Sprite *sprite)
             FieldEffectStop(sprite, FLDEFF_64);
             break;
     }
-    
+
     if (sprite->data[2] == 1)
     {
         if ((sprite->data[1] & 7) == 0)
@@ -1602,7 +1522,7 @@ void sub_8155F80(struct Sprite *sprite)
             sprite->data[3] = -sprite->data[3];
         sprite->data[1]++;
     }
-    
+
     sprite->data[0]++;
 }
 
@@ -1619,7 +1539,7 @@ void sub_8156194(struct Sprite *sprite)
     }
 }
 
-void sub_81561D0(struct Sprite *sprite)
+void WaitFieldEffectSpriteAnim(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         FieldEffectStop(sprite, sprite->data[0]);
@@ -1627,150 +1547,35 @@ void sub_81561D0(struct Sprite *sprite)
         UpdateEventObjectSpriteVisibility(sprite, FALSE);
 }
 
-#ifdef NONMATCHING
-void sub_81561FC(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
+static void sub_81561FC(struct Sprite *sprite, u8 z, u8 offset)
 {
     u8 i;
-    s16 xlo;
-    s16 xhi;
-    s16 lx;
-    s16 lyhi;
-    s16 ly;
-    s16 ylo;
-    s16 yhi;
-    struct EventObject *eventObject; // r4
-    const struct EventObjectGraphicsInfo *graphicsInfo; // destroyed
-    struct Sprite *linkedSprite; // r5
+    s16 var, xhi, lyhi, yhi, ylo;
+    const struct EventObjectGraphicsInfo *graphicsInfo; // Unused Variable
+    struct Sprite *linkedSprite;
 
     SetObjectSubpriorityByZCoord(z, sprite, offset);
-    for (i = 0; i < 16; i ++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i ++)
     {
-        eventObject = &gEventObjects[i];
+        struct EventObject *eventObject = &gEventObjects[i];
         if (eventObject->active)
         {
             graphicsInfo = GetEventObjectGraphicsInfo(eventObject->graphicsId);
             linkedSprite = &gSprites[eventObject->spriteId];
             xhi = sprite->pos1.x + sprite->centerToCornerVecX;
-            xlo = sprite->pos1.x - sprite->centerToCornerVecX;
-            lx = linkedSprite->pos1.x;
-            if (xhi < lx && xlo > lx)
+            var = sprite->pos1.x - sprite->centerToCornerVecX;
+            if (xhi < linkedSprite->pos1.x && var > linkedSprite->pos1.x)
             {
                 lyhi = linkedSprite->pos1.y + linkedSprite->centerToCornerVecY;
-                ly = linkedSprite->pos1.y;
+                var = linkedSprite->pos1.y;
                 ylo = sprite->pos1.y - sprite->centerToCornerVecY;
                 yhi = ylo + linkedSprite->centerToCornerVecY;
-                if ((lyhi < yhi || lyhi < ylo) && ly > yhi)
+                if ((lyhi < yhi || lyhi < ylo) && var > yhi && sprite->subpriority <= linkedSprite->subpriority)
                 {
-                    if (sprite->subpriority <= linkedSprite->subpriority)
-                    {
-                        sprite->subpriority = linkedSprite->subpriority + 2;
-                        break;
-                    }
+                    sprite->subpriority = linkedSprite->subpriority + 2;
+                    break;
                 }
             }
         }
     }
 }
-#else
-NAKED void sub_81561FC(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	adds r6, r0, 0\n\
-	adds r0, r1, 0\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	adds r1, r6, 0\n\
-	bl SetObjectSubpriorityByZCoord\n\
-	movs r7, 0\n\
-_08156212:\n\
-	lsls r0, r7, 3\n\
-	adds r0, r7\n\
-	lsls r0, 2\n\
-	ldr r1, =gEventObjects\n\
-	adds r4, r0, r1\n\
-	ldrb r0, [r4]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _081562B4\n\
-	ldrb r0, [r4, 0x5]\n\
-	bl GetEventObjectGraphicsInfo\n\
-	ldrb r1, [r4, 0x4]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	ldr r1, =gSprites\n\
-	adds r5, r0, r1\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x28\n\
-	movs r2, 0\n\
-	ldrsb r2, [r0, r2]\n\
-	ldrh r0, [r6, 0x20]\n\
-	adds r1, r0, r2\n\
-	subs r0, r2\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	lsls r1, 16\n\
-	asrs r1, 16\n\
-	movs r0, 0x20\n\
-	ldrsh r2, [r5, r0]\n\
-	cmp r1, r2\n\
-	bge _081562B4\n\
-	lsls r0, r4, 16\n\
-	asrs r0, 16\n\
-	cmp r0, r2\n\
-	ble _081562B4\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x29\n\
-	movs r3, 0\n\
-	ldrsb r3, [r0, r3]\n\
-	ldrh r2, [r5, 0x22]\n\
-	adds r2, r3\n\
-	ldrh r4, [r5, 0x22]\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x29\n\
-	movs r1, 0\n\
-	ldrsb r1, [r0, r1]\n\
-	ldrh r0, [r6, 0x22]\n\
-	subs r0, r1\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	adds r3, r0, r3\n\
-	lsls r2, 16\n\
-	asrs r2, 16\n\
-	lsls r3, 16\n\
-	asrs r3, 16\n\
-	cmp r2, r3\n\
-	blt _0815628C\n\
-	cmp r2, r0\n\
-	bge _081562B4\n\
-_0815628C:\n\
-	lsls r0, r4, 16\n\
-	asrs r0, 16\n\
-	cmp r0, r3\n\
-	ble _081562B4\n\
-	adds r2, r6, 0\n\
-	adds r2, 0x43\n\
-	adds r0, r5, 0\n\
-	adds r0, 0x43\n\
-	ldrb r1, [r0]\n\
-	ldrb r0, [r2]\n\
-	cmp r0, r1\n\
-	bhi _081562B4\n\
-	adds r0, r1, 0x2\n\
-	strb r0, [r2]\n\
-	b _081562BE\n\
-	.pool\n\
-_081562B4:\n\
-	adds r0, r7, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	cmp r7, 0xF\n\
-	bls _08156212\n\
-_081562BE:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0");
-}
-#endif

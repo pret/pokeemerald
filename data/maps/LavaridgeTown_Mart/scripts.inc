@@ -7,7 +7,7 @@ LavaridgeTown_Mart_EventScript_1FF9CE:: @ 81FF9CE
 	message gUnknown_08272A21
 	waitmessage
 	pokemart LavaridgeTown_Mart_Pokemart_1FF9E8
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -27,11 +27,11 @@ LavaridgeTown_Mart_Pokemart_1FF9E8: @ 81FF9E8
 	end
 
 LavaridgeTown_Mart_EventScript_1FF9FE:: @ 81FF9FE
-	msgbox LavaridgeTown_Mart_Text_1FFA10, 2
+	msgbox LavaridgeTown_Mart_Text_1FFA10, MSGBOX_NPC
 	end
 
 LavaridgeTown_Mart_EventScript_1FFA07:: @ 81FFA07
-	msgbox LavaridgeTown_Mart_Text_1FFA83, 2
+	msgbox LavaridgeTown_Mart_Text_1FFA83, MSGBOX_NPC
 	end
 
 LavaridgeTown_Mart_Text_1FFA10: @ 81FFA10

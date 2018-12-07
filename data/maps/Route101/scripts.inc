@@ -19,7 +19,7 @@ Route101_EventScript_1EBCD5:: @ 81EBCD5
 Route101_EventScript_1EBCDE:: @ 81EBCDE
 	lockall
 	playbgm MUS_EVENT0, 1
-	msgbox Route101_Text_1EBE8F, 4
+	msgbox Route101_Text_1EBE8F, MSGBOX_DEFAULT
 	closemessage
 	setobjectxy 2, 0, 15
 	setobjectxy 4, 0, 16
@@ -35,7 +35,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	applymovement 4, Route101_Movement_1EBDBD
 	applymovement 2, Route101_Movement_1EBDEF
 	waitmovement 0
-	msgbox Route101_Text_1EBE9A, 4
+	msgbox Route101_Text_1EBE9A, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x4060, 2
 	releaseall
@@ -43,7 +43,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 
 Route101_EventScript_1EBD4E:: @ 81EBD4E
 	lockall
-	msgbox Route101_Text_1EBEDF, 4
+	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route101_Movement_1EBD90
 	waitmovement 0
@@ -52,7 +52,7 @@ Route101_EventScript_1EBD4E:: @ 81EBD4E
 
 Route101_EventScript_1EBD64:: @ 81EBD64
 	lockall
-	msgbox Route101_Text_1EBEDF, 4
+	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route101_Movement_1EBD92
 	waitmovement 0
@@ -61,7 +61,7 @@ Route101_EventScript_1EBD64:: @ 81EBD64
 
 Route101_EventScript_1EBD7A:: @ 81EBD7A
 	lockall
-	msgbox Route101_Text_1EBEDF, 4
+	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route101_Movement_1EBD94
 	waitmovement 0
@@ -204,15 +204,15 @@ Route101_Movement_1EBDF7: @ 81EBDF7
 	step_end
 
 Route101_EventScript_1EBDFB:: @ 81EBDFB
-	msgbox Route101_Text_1EBFDD, 2
+	msgbox Route101_Text_1EBFDD, MSGBOX_NPC
 	end
 
 Route101_EventScript_1EBE04:: @ 81EBE04
-	msgbox Route101_Text_1EC04A, 2
+	msgbox Route101_Text_1EC04A, MSGBOX_NPC
 	end
 
 Route101_EventScript_1EBE0D:: @ 81EBE0D
-	msgbox Route101_Text_1EC0C8, 3
+	msgbox Route101_Text_1EC0C8, MSGBOX_SIGN
 	end
 
 Route101_EventScript_1EBE16:: @ 81EBE16
@@ -229,11 +229,11 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	waitstate
 	applymovement 2, Route101_Movement_1EBE8D
 	waitmovement 0
-	msgbox Route101_Text_1EBF12, 4
+	msgbox Route101_Text_1EBF12, MSGBOX_DEFAULT
 	special HealPlayerParty
-	setflag FLAG_0x2D0
-	clearflag FLAG_0x2D1
-	setflag FLAG_0x2BC
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_0x4084, 2
 	setvar VAR_0x4060, 3
 	clearflag FLAG_SPECIAL_FLAG_0x4000
@@ -248,11 +248,11 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	end
 
 Route101_EventScript_1EBE85:: @ 81EBE85
-	setflag FLAG_0x2D2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	return
 
 Route101_EventScript_1EBE89:: @ 81EBE89
-	setflag FLAG_0x2F8
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	return
 
 Route101_Movement_1EBE8D: @ 81EBE8D

@@ -11,9 +11,9 @@
 #define sB_ANIM_ARG2 gBattleScripting + 0x11
 #define sTRIPLE_KICK_POWER gBattleScripting + 0x12
 #define sMOVEEND_STATE gBattleScripting + 0x14
-#define sBANK_WITH_ABILITY gBattleScripting + 0x15
+#define sBATTLER_WITH_ABILITY gBattleScripting + 0x15
 #define sMULTIHIT_EFFECT gBattleScripting + 0x16
-#define sBANK gBattleScripting + 0x17
+#define sBATTLER gBattleScripting + 0x17
 #define sB_ANIM_TURN gBattleScripting + 0x18
 #define sB_ANIM_TARGETS_HIT gBattleScripting + 0x19
 #define sSTATCHANGER gBattleScripting + 0x1A
@@ -26,8 +26,9 @@
 #define sRESHOW_MAIN_STATE gBattleScripting + 0x21
 #define sRESHOW_HELPER_STATE gBattleScripting + 0x22
 #define sFIELD_23 gBattleScripting + 0x23
-#define sFIELD_24 gBattleScripting + 0x24
+#define sWINDOWS_TYPE gBattleScripting + 0x24
 #define sMULTIPLAYER_ID gBattleScripting + 0x25
+#define sSPECIAL_TRAINER_BATTLE_TYPE gBattleScripting + 0x26
 
 #define cEFFECT_CHOOSER gBattleCommunication + 3
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
@@ -67,12 +68,19 @@
 #define VARIOUS_GET_MOVE_TARGET                 3
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
+#define VARIOUS_ARENA_JUDGMENT_WINDOW           9
+#define VARIOUS_ARENA_OPPONENT_MON_LOST         10
+#define VARIOUS_ARENA_PLAYER_MON_LOST           11
+#define VARIOUS_ARENA_BOTH_MONS_LOST            12
 #define VARIOUS_EMIT_YESNOBOX                   13
+#define VARIOUS_ARENA_JUDGMENT_STRING           16
+#define VARIOUS_ARENA_WAIT_STRING               17
 #define VARIOUS_WAIT_CRY                        18
 #define VARIOUS_RETURN_OPPONENT_MON1            19
 #define VARIOUS_RETURN_OPPONENT_MON2            20
 #define VARIOUS_VOLUME_DOWN                     21
 #define VARIOUS_VOLUME_UP                       22
+#define VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT 23
 #define VARIOUS_SET_TELEPORT_OUTCOME            25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
 

@@ -1,13 +1,13 @@
 #include "global.h"
+#include "event_data.h"
 #include "field_door.h"
 #include "field_camera.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "event_data.h"
-#include "constants/songs.h"
+#include "task.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
-#include "task.h"
+#include "constants/songs.h"
 
 bool8 sub_808A964(void);
 

@@ -1,28 +1,28 @@
 #include "global.h"
-#include "pokeblock.h"
-#include "sprite.h"
-#include "task.h"
-#include "palette.h"
-#include "menu.h"
-#include "malloc.h"
-#include "pokemon.h"
-#include "util.h"
-#include "main.h"
-#include "menu_helpers.h"
+#include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
 #include "bg.h"
-#include "gpu_regs.h"
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "strings.h"
-#include "string_util.h"
-#include "party_menu.h"
-#include "m4a.h"
-#include "sound.h"
-#include "trig.h"
+#include "gpu_regs.h"
 #include "graphics.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "m4a.h"
+#include "palette.h"
+#include "party_menu.h"
+#include "pokeblock.h"
+#include "pokemon.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "strings.h"
+#include "sound.h"
+#include "task.h"
 #include "text_window.h"
-#include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
+#include "trig.h"
+#include "util.h"
 
 struct PokeblockFeedStruct
 {
@@ -52,9 +52,6 @@ struct PokeblockFeedStruct
 extern u16 gSpecialVar_ItemId;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
-extern const u8 gBattleTerrainPalette_Frontier[];
-extern const u8 gBattleTerrainTiles_Building[];
-extern const u8 gUnknown_08D9BA44[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
@@ -387,7 +384,7 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8* const sPokeblocksPals[] =
+static const u32* const sPokeblocksPals[] =
 {
     gPokeblockRed_Pal,
     gPokeblockBlue_Pal,
@@ -788,8 +785,8 @@ static void Task_HandleMonAtePokeblock(u8 taskId)
     else
         StringExpandPlaceholders(gStringVar4, gText_Var1DisdainfullyAteVar2);
 
-    gTextFlags.flag_0 = 1;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
+    gTextFlags.canABSpeedUpPrint = 1;
+    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), NULL, 2, 1, 3);
     gTasks[taskId].func = Task_WaitForAtePokeblockText;
 }
 

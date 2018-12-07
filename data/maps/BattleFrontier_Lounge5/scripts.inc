@@ -4,7 +4,7 @@ BattleFrontier_Lounge5_MapScripts:: @ 82645C5
 BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge5_Text_264632, 5
+	msgbox BattleFrontier_Lounge5_Text_264632, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge5_EventScript_26460D
 	special sub_81B94B0
@@ -23,25 +23,25 @@ BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
 	end
 
 BattleFrontier_Lounge5_EventScript_264603:: @ 8264603
-	msgbox BattleFrontier_Lounge5_Text_264EEE, 4
+	msgbox BattleFrontier_Lounge5_Text_264EEE, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge5_EventScript_26460D:: @ 826460D
-	msgbox BattleFrontier_Lounge5_Text_26467F, 4
+	msgbox BattleFrontier_Lounge5_Text_26467F, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge5_EventScript_264617:: @ 8264617
-	msgbox BattleFrontier_Lounge5_Text_264F22, 2
+	msgbox BattleFrontier_Lounge5_Text_264F22, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge5_EventScript_264620:: @ 8264620
-	msgbox BattleFrontier_Lounge5_Text_264F64, 2
+	msgbox BattleFrontier_Lounge5_Text_264F64, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge5_EventScript_264629:: @ 8264629
-	msgbox BattleFrontier_Lounge5_Text_264FAB, 2
+	msgbox BattleFrontier_Lounge5_Text_264FAB, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge5_Text_264632:: @ 8264632

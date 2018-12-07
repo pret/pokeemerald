@@ -43,7 +43,7 @@ static const struct BgTemplate sBgTemplates[] =
 static const struct WindowTemplate sWindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 4,
         .tilemapTop = 15,
         .width = 22,
@@ -52,7 +52,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .baseBlock = 20
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 7,
         .tilemapTop = 6,
         .width = 16,

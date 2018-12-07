@@ -70,17 +70,17 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_219808:: @ 8219808
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
 	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_2199EB, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_2199EB, MSGBOX_SIGN
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
 	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219A0D, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219A0D, MSGBOX_SIGN
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
 	waitmovement 0
 	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219BC4, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219BC4, MSGBOX_SIGN
 	copyvar VAR_0x4094, 0x1
 	releaseall
 	end
@@ -105,25 +105,25 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_219866:: @ 8219866
 	case 3, LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA
 	case 4, LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA
 	case 5, LilycoveCity_LilycoveMuseum_2F_EventScript_2198C3
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219CF3, 2
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219CF3, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA:: @ 82198BA
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219D42, 2
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219D42, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2198C3:: @ 82198C3
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
 	waitmovement 0
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219DD4, 4
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219DD4, MSGBOX_DEFAULT
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_219863
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219DE6, 4
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219DE6, MSGBOX_DEFAULT
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EC5, 4
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EC5, MSGBOX_DEFAULT
 	givedecoration_std 44
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219911
@@ -134,13 +134,13 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219911:: @ 8219911
 	call LilycoveCity_LilycoveMuseum_2F_EventScript_272071
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EED, 4
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EED, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219921:: @ 8219921
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219F1B, 2
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219F1B, MSGBOX_NPC
 	releaseall
 	end
 
@@ -148,79 +148,79 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_21992B:: @ 821992B
 	lockall
 	checkflag FLAG_0x0A2
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199C1
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FA0, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FA0, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21993E:: @ 821993E
 	lockall
 	checkflag FLAG_0x0A4
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199DD
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FD3, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FD3, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219951:: @ 8219951
 	lockall
 	checkflag FLAG_0x0A0
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199A5
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A03B, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A03B, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219964:: @ 8219964
 	lockall
 	checkflag FLAG_0x0A1
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199B3
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A008, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A008, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219977:: @ 8219977
 	lockall
 	checkflag FLAG_0x0A3
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199CF
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A06D, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A06D, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21998A:: @ 821998A
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0BD, 2
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0BD, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219993:: @ 8219993
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A132, 2
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A132, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21999C:: @ 821999C
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A1A8, 2
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A1A8, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2199A5:: @ 82199A5
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, MSGBOX_SIGN
 	fadescreen 1
 	drawcontestwinner 9
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2199B3:: @ 82199B3
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, MSGBOX_SIGN
 	fadescreen 1
 	drawcontestwinner 10
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2199C1:: @ 82199C1
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, MSGBOX_SIGN
 	fadescreen 1
 	drawcontestwinner 11
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2199CF:: @ 82199CF
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, MSGBOX_SIGN
 	fadescreen 1
 	drawcontestwinner 12
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2199DD:: @ 82199DD
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, 3
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A0A1, MSGBOX_SIGN
 	fadescreen 1
 	drawcontestwinner 13
 	releaseall

@@ -32,6 +32,8 @@
 #include "tv.h"
 #include "item_menu.h"
 #include "battle_records.h"
+#include "graphics.h"
+#include "new_game.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -131,20 +133,6 @@ struct BerryBlenderData
 
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern u8 gInGameOpponentsNo;
-extern u8 gUnknown_020322D5;
-
-// graphics
-extern const u8 gBerryBlenderArrowTiles[];
-extern const u8 gBerryBlenderStartTiles[];
-extern const u8 gBerryBlenderMarubatsuTiles[];
-extern const u8 gBerryBlenderParticlesTiles[];
-extern const u8 gBerryBlenderCountdownNumbersTiles[];
-extern const u16 gBerryBlenderMiscPalette[];
-extern const u16 gBerryBlenderArrowPalette[];
-extern const u8 sBlenderCenterGfx[];
-extern const u8 gUnknown_08D91DB8[];
-extern const u8 gUnknown_08D927EC[];
 
 // text
 extern const u8 gText_SavingDontTurnOff2[];
@@ -206,17 +194,20 @@ static void sub_8083170(u16 a0, u16 a1);
 static void Blender_PrintMadePokeblockString(struct Pokeblock *pokeblock, u8 *dst);
 static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlenderStruct *a1);
 
-// ewram
+// EWRAM
 EWRAM_DATA static struct BerryBlenderData *sBerryBlenderData = NULL;
 EWRAM_DATA static s32 sUnknown_020322A8[5] = {0};
 EWRAM_DATA static s32 sUnknown_020322BC[5] = {0};
 EWRAM_DATA static u32 sUnknown_020322D0 = 0;
 
-// iwram
+// IWRAM bss
 IWRAM_DATA static s16 sUnknown_03000DE8[8];
 IWRAM_DATA static s16 sUnknown_03000DF8[6];
 IWRAM_DATA static s16 sUnknown_03000E04;
 IWRAM_DATA static s16 sUnknown_03000E06;
+
+// IWRAM common
+u8 gInGameOpponentsNo;
 
 // rom
 
@@ -323,7 +314,7 @@ static const struct BgTemplate sBerryBlenderBgTemplates[3] =
 static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
 {
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 6,
         .width = 7,
@@ -332,7 +323,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x28,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 6,
         .width = 7,
@@ -341,7 +332,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x36,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 12,
         .width = 7,
@@ -350,7 +341,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x44,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 12,
         .width = 7,
@@ -359,7 +350,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x52,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
         .width = 27,
@@ -368,7 +359,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
         .baseBlock = 0x60,
     },
     {
-        .priority = 0,
+        .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 3,
         .width = 21,
@@ -381,7 +372,7 @@ static const struct WindowTemplate sBerryBlender_WindowTemplates[] =
 
 static const struct WindowTemplate sBlender_YesNoWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 21,
     .tilemapTop = 9,
     .width = 5,
@@ -846,7 +837,7 @@ static const u8 sUnknown_08339CD2[] =
 
 static const struct WindowTemplate sBlenderRecordWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 6,
     .tilemapTop = 4,
     .width = 18,
@@ -1031,7 +1022,7 @@ static void sub_807FAC8(void)
             sBerryBlenderData->mainState++;
         break;
     case 4:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sText_BerryBlenderStart, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sText_BerryBlenderStart, GetPlayerTextSpeedDelay()))
             sBerryBlenderData->mainState++;
         break;
     case 5:
@@ -1124,7 +1115,7 @@ static void Blender_SetPlayerNamesLocal(u8 opponentsNum)
         sBerryBlenderData->playersNo = 2;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
 
-        if (!FlagGet(FLAG_0x340))
+        if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS))
             StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_MASTER]);
         else
             StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_MISTER]);
@@ -1647,7 +1638,7 @@ static void sub_80808D4(void)
 
         if (gSpecialVar_0x8004 == 1)
         {
-            if (!FlagGet(FLAG_0x340))
+            if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS))
                 sBerryBlenderData->field_120[0] = CreateTask(sub_8081224, 10);
             else
                 sBerryBlenderData->field_120[0] = CreateTask(sUnknown_083399EC[0], 10);
@@ -2490,7 +2481,7 @@ static void CB2_HandleBlenderEndGame(void)
         }
         break;
     case 7:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sText_WouldLikeToBlendAnotherBerry, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sText_WouldLikeToBlendAnotherBerry, GetPlayerTextSpeedDelay()))
             sBerryBlenderData->gameEndState++;
         break;
     case 9:
@@ -2499,7 +2490,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 10:
-        switch (Menu_ProcessInputNoWrap_())
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 1:
         case -1:
@@ -2572,7 +2563,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 13:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sText_CommunicationStandby, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sText_CommunicationStandby, GetPlayerTextSpeedDelay()))
         {
             SetMainCallback2(CB2_HandlePlayerLinkPlayAgainChoice);
             sBerryBlenderData->gameEndState = 0;
@@ -2680,7 +2671,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         StringAppend(gStringVar4, sText_HasNoBerriesToPut);
         break;
     case 3:
-        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeedDelay()))
         {
             sBerryBlenderData->framesToWait = 0;
             sBerryBlenderData->gameEndState++;
@@ -2787,7 +2778,7 @@ static void CB2_HandlePlayerPlayAgainChoice(void)
         StringCopy(gStringVar4, sText_RunOutOfBerriesForBlending);
         break;
     case 3:
-        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, gStringVar4, GetPlayerTextSpeedDelay()))
             sBerryBlenderData->gameEndState = 9;
         break;
     case 9:
@@ -3363,7 +3354,7 @@ static bool8 Blender_PrintBlendingResults(void)
         sBerryBlenderData->mainState++;
         break;
     case 6:
-        if (Blender_PrintText(&sBerryBlenderData->textState, sBerryBlenderData->stringVar, GetPlayerTextSpeed()))
+        if (Blender_PrintText(&sBerryBlenderData->textState, sBerryBlenderData->stringVar, GetPlayerTextSpeedDelay()))
         {
             TryUpdateBerryBlenderRecord();
             return TRUE;

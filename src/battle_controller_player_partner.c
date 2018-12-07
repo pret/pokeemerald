@@ -1,42 +1,37 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_ai_script_commands.h"
+#include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_interface.h"
-#include "battle_anim.h"
-#include "constants/battle_anim.h"
-#include "battle_ai_script_commands.h"
-#include "pokemon.h"
+#include "battle_setup.h"
+#include "battle_tower.h"
+#include "bg.h"
+#include "data2.h"
+#include "item_use.h"
 #include "link.h"
-#include "util.h"
 #include "main.h"
-#include "constants/songs.h"
-#include "constants/trainers.h"
-#include "sound.h"
-#include "window.h"
 #include "m4a.h"
 #include "palette.h"
+#include "pokeball.h"
+#include "pokemon.h"
+#include "reshow_battle_screen.h"
+#include "sound.h"
+#include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "string_util.h"
-#include "bg.h"
-#include "reshow_battle_screen.h"
-#include "pokeball.h"
-#include "data2.h"
-#include "battle_setup.h"
-#include "item_use.h"
-
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern struct UnusedControllerStruct gUnknown_02022D0C;
+#include "util.h"
+#include "window.h"
+#include "constants/battle_anim.h"
+#include "constants/songs.h"
+#include "constants/trainers.h"
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_81358F4(void);
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
-extern void SetMultiuseSpriteTemplateToPokemon(u16, u8);
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void PlayerPartnerHandleGetMonData(void);
@@ -632,7 +627,7 @@ static void PlayerPartnerHandleGetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 size += CopyPlayerPartnerMonData(i, monData + size);
@@ -966,7 +961,7 @@ static void PlayerPartnerHandleSetMonData(void)
     else
     {
         monToCheck = gBattleBufferA[gActiveBattler][2];
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (monToCheck & 1)
                 SetPlayerPartnerMonData(i);
@@ -1363,7 +1358,7 @@ static void PlayerPartnerHandleTrainerSlideBack(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattlerControllerFuncs[gActiveBattler] = sub_81BAE98;
 }
@@ -1382,7 +1377,7 @@ static void PlayerPartnerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
-            PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_PLAYER);
+            PlaySE12WithPanning(SE_POKE_DEAD, SOUND_PAN_ATTACKER);
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[1] = 0;
             gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = 5;
             gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_8039C00;
@@ -1739,9 +1734,9 @@ static void PlayerPartnerHandlePlaySE(void)
     s8 pan;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        pan = PAN_SIDE_PLAYER;
+        pan = SOUND_PAN_ATTACKER;
     else
-        pan = PAN_SIDE_OPPONENT;
+        pan = SOUND_PAN_TARGET;
 
     PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     PlayerPartnerBufferExecCompleted();
@@ -1787,7 +1782,7 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = sub_80A6EEC;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
 
     StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[gActiveBattler]], sub_805CC00);

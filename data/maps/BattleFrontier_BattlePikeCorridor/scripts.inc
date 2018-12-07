@@ -12,17 +12,17 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	setvar VAR_0x8006, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 20
-	special sub_81A703C
+	special CallBattlePikeFunction
 	setvar VAR_0x8004, 24
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	applymovement 255, BattleFrontier_BattlePikeCorridor_Movement_25C80B
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0
 	lockall
-	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, 4
+	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	applymovement 255, BattleFrontier_BattlePikeCorridor_Movement_25C80E
@@ -30,7 +30,7 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 99
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	call BattleFrontier_BattlePikeCorridor_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
 	waitstate

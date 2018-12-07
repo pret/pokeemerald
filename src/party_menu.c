@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_controllers.h"
 #include "battle_interface.h"
 #include "bg.h"
 #include "constants/battle.h"
@@ -84,7 +85,7 @@ extern struct Unk_203CEDC *gUnknown_0203CEDC;
 extern u8 *gUnknown_0203CEE0;
 extern struct Unk_203CEE4 *gUnknown_0203CEE4;
 extern u8 gUnknown_0203CEE8;
-extern u8 gUnknown_0203CEF8[];
+extern u8 gSelectedOrderFromParty[];
 
 // ABOVE TO BE PUT IN EWRAM
 
@@ -295,7 +296,7 @@ void sub_81B0038(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc f, MainCallback g)
         else if (gUnknown_0203CEC8.unk9 > 5 || GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES) == SPECIES_NONE)
             gUnknown_0203CEC8.unk9 = 0; // wut why is this else if?
         
-        gTextFlags.flag_2 = 0;
+        gTextFlags.autoScroll = 0;
         CalculatePlayerPartyCount();
         SetMainCallback2(c2_811EBD0);
     }
@@ -672,7 +673,7 @@ void sub_81B0A9C(u8 slot)
 {
     u8 i;
     struct Pokemon *currentPokemon = &gPlayerParty[slot];
-    u8 *ptr = gUnknown_0203CEF8;
+    u8 *ptr = gSelectedOrderFromParty;
     
     if (!sub_81B85AC(currentPokemon))
     {
@@ -952,7 +953,7 @@ bool8 sub_81B118C(u8 slot)
     if (gUnknown_0203CEC8.unk8_1 == 2 && (slot == 1 || slot == 4 || slot == 5))
         return TRUE;
     
-    if (slot < 3 && (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gMain.inBattle && (gBattleStruct->field_2A0 >> sub_81B8F38(slot) & 1))
+    if (slot < 3 && (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gMain.inBattle && (gBattleStruct->arenaLostPlayerMons >> sub_81B8F38(slot) & 1))
         return TRUE;
     
     return FALSE;
@@ -1194,7 +1195,7 @@ void sub_81B16D4(u8 taskId)
 
 void sub_81B1708(u8 taskId)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
             gUnknown_0203CEE8 = 0;
@@ -2169,7 +2170,7 @@ void sub_81B2248(u8 taskId)
 
 void sub_81B227C(u8 taskId)
 {
-    switch (Menu_ProcessInputNoWrap_())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
             gSpecialVar_0x8004 = 7;

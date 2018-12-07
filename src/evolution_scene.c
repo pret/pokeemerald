@@ -27,6 +27,7 @@
 #include "link.h"
 #include "util.h"
 #include "trig.h"
+#include "data2.h"
 
 struct EvoInfo
 {
@@ -40,17 +41,6 @@ struct EvoInfo
 static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
 static EWRAM_DATA u16 *sEvoMovingBgPtr = NULL;
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
-extern bool8 gAffineAnimsDisabled;
-extern const u8 gSpeciesNames[][11];
-
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
 
@@ -60,12 +50,9 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 // strings
 extern const u8 gText_CommunicationStandby5[];
 
-extern void sub_80356D0(void);
 extern void sub_807B154(void);
 extern void sub_807F19C(void);
 extern void sub_807B140(void);
-extern void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
-extern void Overworld_PlaySpecialMapMusic(void);
 extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
 extern u8 sub_81C1B94(void);
 extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);
@@ -535,7 +522,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
     gBattle_BG3_X = 256;
     gBattle_BG3_Y = 0;
 
-    gTextFlags.flag_1 = 1;
+    gTextFlags.useAlternateDownArrow = 1;
 
     SetVBlankCallback(VBlankCB_TradeEvolutionScene);
     SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
@@ -1139,7 +1126,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             DestroyTask(taskID);
             Free(sEvoStructPtr);
             sEvoStructPtr = NULL;
-            gTextFlags.flag_1 = 0;
+            gTextFlags.useAlternateDownArrow = 0;
             SetMainCallback2(gCB2_AfterEvolution);
         }
         break;
@@ -1222,7 +1209,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            switch (Menu_ProcessInputNoWrap_())
+            switch (Menu_ProcessInputNoWrapClearOnChoose())
             {
             case 0:
                 sEvoCursorPos = 0;

@@ -34,7 +34,7 @@ SkyPillar_Top_EventScript_239705:: @ 8239705
 	return
 
 SkyPillar_Top_EventScript_23970F:: @ 823970F
-	clearflag FLAG_0x050
+	clearflag FLAG_RAYQUAZA_ON_SKY_TOWER_SUMMIT
 	return
 
 SkyPillar_Top_MapScript2_239713: @ 8239713
@@ -89,7 +89,7 @@ SkyPillar_Top_EventScript_239785:: @ 8239785
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	bufferspeciesname 0, VAR_0x8004
-	msgbox gUnknown_08273204, 4
+	msgbox gUnknown_08273204, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -124,7 +124,7 @@ SkyPillar_Top_EventScript_23979A:: @ 823979A
 	applymovement 1, SkyPillar_Top_Movement_23984B
 	waitmovement 0
 	removeobject 1
-	msgbox SkyPillar_Top_Text_239860, 4
+	msgbox SkyPillar_Top_Text_239860, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	fadeinbgm 1

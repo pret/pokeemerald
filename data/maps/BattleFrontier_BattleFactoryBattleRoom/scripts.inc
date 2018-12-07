@@ -6,14 +6,14 @@ BattleFrontier_BattleFactoryBattleRoom_MapScripts:: @ 825ADAB
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB: @ 825ADBB
 	setvar VAR_0x8004, 5
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	checkplayergender
 	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B
 	setvar VAR_0x8004, 9
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25ADF3
@@ -51,7 +51,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31: @ 825AE31
 	.2byte 0
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B:: @ 825AE3B
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B1E2, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B1E2, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, BattleFrontier_BattleFactoryBattleRoom_Movement_25B18B
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
@@ -69,7 +69,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
 	setvar VAR_0x8004, 11
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	removeobject 2
 	setobjectxyperm 2, 7, 1
 	addobject 2
@@ -80,19 +80,19 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7:: @ 825AEA7
 	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C
 	setvar VAR_0x8004, 5
-	special sub_8195960
+	special CallBattlePalaceFunction
 	lockall
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special HealPlayerParty
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF0F
@@ -102,21 +102,21 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25AEF8:: @ 825AEF8
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B190
 @ 	goto BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B190
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF0F:: @ 825AF0F
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	compare VAR_RESULT, 9999
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E
 	addvar VAR_RESULT, 1
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E:: @ 825AF3E
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_241EBA
@@ -124,12 +124,12 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E:: @ 825AF3E
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43:: @ 825AF43
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 7, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85
 	setvar VAR_0x8006, 1
@@ -140,7 +140,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85:: @ 825AF85
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B190
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C:: @ 825AF9C
@@ -150,16 +150,16 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF9C:: @ 825AF9C
 	case 4, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B1FB, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B1FB, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF:: @ 825AFEF
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B3F1, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B3F1, MSGBOX_DEFAULT
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25B00C
@@ -167,10 +167,10 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AFEF:: @ 825AFEF
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B00C:: @ 825B00C
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B42D, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B42D, MSGBOX_DEFAULT
 	closemessage
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B182
 	waitmovement 0
@@ -179,23 +179,23 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B00C:: @ 825B00C
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B498, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B498, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B051:: @ 825B051
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B517, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B517, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E:: @ 825B07E
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B5CF, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B5CF, MSGBOX_DEFAULT
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B
@@ -203,10 +203,10 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B07E:: @ 825B07E
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B:: @ 825B09B
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B5E7, 4
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B5E7, MSGBOX_DEFAULT
 	waitmessage
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B182
 	waitmovement 0
@@ -215,8 +215,8 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B:: @ 825B09B
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
-	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B66D, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_25B66D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
@@ -224,38 +224,38 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B0E0:: @ 825B0E0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special HealPlayerParty
-	setvar VAR_0x8004, 6
+	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B105:: @ 825B105
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	compare VAR_RESULT, 9999
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF3E
 	addvar VAR_RESULT, 1
 	setorcopyvar VAR_0x8006, VAR_RESULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	compare VAR_RESULT, 9999
 	goto_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF43
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A5E74
+	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25AF85
 	end

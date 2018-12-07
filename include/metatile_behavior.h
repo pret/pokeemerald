@@ -77,7 +77,7 @@ bool8 MetatileBehavior_IsBerryTreeSoil(u8);
 bool8 MetatileBehavior_IsAshGrass(u8);
 bool8 MetatileBehavior_IsFootprints(u8);
 bool8 MetatileBehavior_IsBridge(u8);
-u8 MetatileBehavior_GetBridgeSth(u8);
+u8 MetatileBehavior_GetBridgeType(u8);
 u8 MetatileBehavior_8089510(u8);
 bool8 MetatileBehavior_IsLandWildEncounter(u8);
 bool8 MetatileBehavior_IsWaterWildEncounter(u8);

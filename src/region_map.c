@@ -34,15 +34,6 @@
 
 // Static type declarations
 
-struct RegionMapLocation
-{
-    u8 x;
-    u8 y;
-    u8 width;
-    u8 height;
-    const u8 *name;
-};
-
 // Static RAM declarations
 
 static EWRAM_DATA struct RegionMap *gRegionMap = NULL;
@@ -99,11 +90,11 @@ static void sub_8124E0C(void);
 // .rodata
 
 static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/pokenav/cursor.gbapal");
-static const u8 sRegionMapCursorSmallGfxLZ[] = INCBIN_U8("graphics/pokenav/cursor_small.4bpp.lz");
-static const u8 sRegionMapCursorLargeGfxLZ[] = INCBIN_U8("graphics/pokenav/cursor_large.4bpp.lz");
+static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("graphics/pokenav/cursor_small.4bpp.lz");
+static const u32 sRegionMapCursorLargeGfxLZ[] = INCBIN_U32("graphics/pokenav/cursor_large.4bpp.lz");
 static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map.gbapal");
-static const u8 sRegionMapBkgnd_GfxLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
-static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
+static const u32 sRegionMapBkgnd_GfxLZ[] = INCBIN_U32("graphics/pokenav/region_map.8bpp.lz");
+static const u32 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U32("graphics/pokenav/region_map_map.bin.lz");
 static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/brendan_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/brendan_icon.4bpp");
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/may_icon.gbapal");
@@ -236,13 +227,13 @@ static const u8 sRegionMapEventSectionIds[] = {
 
 static const u16 sRegionMapFramePal[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
 
-static const u8 sRegionMapFrameGfxLZ[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
+static const u32 sRegionMapFrameGfxLZ[] = INCBIN_U32("graphics/pokenav/map_frame.4bpp.lz");
 
-static const u8 sRegionMapFrameTilemapLZ[] = INCBIN_U8("graphics/pokenav/map_frame.bin.lz");
+static const u32 sRegionMapFrameTilemapLZ[] = INCBIN_U32("graphics/pokenav/map_frame.bin.lz");
 
 static const u16 Unknown_085A1D48[] = INCBIN_U16("graphics/pokenav/fly_target_icons.gbapal");
 
-static const u8 sUnknown_085A1D68[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
+static const u32 sUnknown_085A1D68[] = INCBIN_U32("graphics/pokenav/fly_target_icons.4bpp.lz");
 
 static const u8 sMapHealLocations[][3] = {
     {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},

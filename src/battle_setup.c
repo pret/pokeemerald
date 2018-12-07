@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/trainers.h"
 #include "battle.h"
+#include "constants/battle_setup.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
 #include "main.h"
@@ -31,7 +32,10 @@
 #include "string_util.h"
 #include "overworld.h"
 #include "field_weather.h"
+#include "battle_tower.h"
 #include "gym_leader_rematch.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
 
@@ -52,8 +56,6 @@ struct TrainerBattleParameter
     u8 ptrType;
 };
 
-extern bool8 InBattlePyramid(void);
-extern bool8 InBattlePike(void);
 extern bool32 InTrainerHill(void);
 extern bool32 FieldPoisonEffectIsRunning(void);
 extern void RestartWildEncounterImmunitySteps(void);
@@ -62,19 +64,13 @@ extern void sub_81BE72C(void);
 extern void sub_808BCF4(void);
 extern void sub_80EECC8(void);
 extern void sub_80AF6F0(void);
-extern u16 sub_81A9AA8(u8 localId);
 extern u16 sub_81D6180(u8 localId);
-extern bool8 GetBattlePyramidTrainerFlag(u8 eventObjId);
 extern bool8 GetTrainerHillTrainerFlag(u8 eventObjId);
 extern bool8 sub_81D5C18(void);
-extern void sub_816306C(u8 a0);
-extern void sub_8163048(u8 a0);
-extern void sub_81A9B04(void);
 extern void sub_81D639C(void);
 extern void sub_81D6384(void);
 extern void sub_81D61E8(void);
 extern void sub_80982B8(void);
-extern void sub_81A9EDC(u16 a0);
 extern void CopyTrainerHillTrainerText(u8 a0, u16 arg1);
 
 // this file's functions
@@ -665,7 +661,7 @@ u8 BattleSetup_GetTerrainId(void)
         return BATTLE_TERRAIN_MOUNTAIN;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        if (MetatileBehavior_GetBridgeSth(tileBehavior))
+        if (MetatileBehavior_GetBridgeType(tileBehavior))
             return BATTLE_TERRAIN_POND;
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
             return BATTLE_TERRAIN_WATER;
@@ -885,8 +881,8 @@ u8 sub_80B100C(s32 arg0)
             return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
     }
 
-    var = gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.field_CB2 * 2 + 0]
-        + gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.field_CB2 * 2 + 1];
+    var = gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
+        + gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 1];
 
     return sUnknown_0854FE98[var % ARRAY_COUNT(sUnknown_0854FE98)];
 }
@@ -1090,7 +1086,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 
     switch (sTrainerBattleMode)
     {
-    case TRAINER_BATTLE_NORMAL_NO_INTRO_TEXT:
+    case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(sOrdinaryNoIntroBattleParams, data);
         return EventScript_2713C2;
     case TRAINER_BATTLE_DOUBLE:
@@ -1132,12 +1128,12 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         {
             TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
             SetMapVarsToTrainer();
-            gTrainerBattleOpponent_A = sub_81A9AA8(gSpecialVar_LastTalked);
+            gTrainerBattleOpponent_A = LocalIdToPyramidTrainerId(gSpecialVar_LastTalked);
         }
         else
         {
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
-            gTrainerBattleOpponent_B = sub_81A9AA8(gSpecialVar_LastTalked);
+            gTrainerBattleOpponent_B = LocalIdToPyramidTrainerId(gSpecialVar_LastTalked);
         }
         return EventScript_271362;
     case TRAINER_BATTLE_SET_TRAINER_A:
@@ -1264,7 +1260,7 @@ void BattleSetup_StartTrainerBattle(void)
 
         if (gNoOfApproachingTrainers == 2)
         {
-            sub_816306C(1);
+            FillFrontierTrainersParties(1);
             ZeroMonData(&gEnemyParty[1]);
             ZeroMonData(&gEnemyParty[2]);
             ZeroMonData(&gEnemyParty[4]);
@@ -1272,7 +1268,7 @@ void BattleSetup_StartTrainerBattle(void)
         }
         else
         {
-            sub_8163048(1);
+            FillFrontierTrainerParty(1);
             ZeroMonData(&gEnemyParty[1]);
             ZeroMonData(&gEnemyParty[2]);
         }
@@ -1361,9 +1357,9 @@ void ShowTrainerIntroSpeech(void)
     if (InBattlePyramid())
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            sub_81A9EDC(sub_81A9AA8(gSpecialVar_LastTalked));
+            CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gSpecialVar_LastTalked));
         else
-            sub_81A9EDC(sub_81A9AA8(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
+            CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
 
         sub_80982B8();
     }

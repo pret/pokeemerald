@@ -1,71 +1,61 @@
 #include "global.h"
 #include "battle.h"
-#include "recorded_battle.h"
-#include "main.h"
-#include "load_save.h"
-#include "gpu_regs.h"
-#include "scanline_effect.h"
-#include "battle_setup.h"
-#include "battle_scripts.h"
-#include "battle_interface.h"
-#include "pokemon.h"
-#include "palette.h"
-#include "task.h"
-#include "event_data.h"
-#include "constants/species.h"
-#include "berry.h"
-#include "text.h"
-#include "item.h"
-#include "constants/items.h"
-#include "constants/hold_effects.h"
-#include "constants/trainers.h"
-#include "link.h"
-#include "link_rfu.h"
-#include "bg.h"
-#include "dma3.h"
-#include "string_util.h"
-#include "malloc.h"
-#include "event_data.h"
-#include "m4a.h"
-#include "window.h"
-#include "random.h"
-#include "constants/songs.h"
-#include "sound.h"
-#include "battle_message.h"
-#include "sprite.h"
-#include "util.h"
-#include "trig.h"
 #include "battle_ai_script_commands.h"
-#include "constants/battle_move_effects.h"
+#include "battle_arena.h"
 #include "battle_controllers.h"
-#include "pokedex.h"
-#include "constants/abilities.h"
-#include "constants/moves.h"
-#include "constants/rgb.h"
-#include "evolution_scene.h"
-#include "roamer.h"
-#include "tv.h"
-#include "safari_zone.h"
-#include "constants/battle_string_ids.h"
+#include "battle_interface.h"
+#include "battle_main.h"
+#include "battle_message.h"
+#include "battle_pyramid.h"
+#include "battle_scripts.h"
+#include "battle_setup.h"
+#include "battle_tower.h"
+#include "berry.h"
+#include "bg.h"
 #include "data2.h"
 #include "decompress.h"
+#include "dma3.h"
+#include "event_data.h"
+#include "evolution_scene.h"
+#include "gpu_regs.h"
 #include "international_string_util.h"
-#include "pokeball.h"
+#include "item.h"
+#include "link.h"
+#include "link_rfu.h"
+#include "load_save.h"
+#include "main.h"
+#include "malloc.h"
+#include "m4a.h"
+#include "palette.h"
 #include "party_menu.h"
-#include "battle_main.h"
+#include "pokeball.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "random.h"
+#include "recorded_battle.h"
+#include "roamer.h"
+#include "safari_zone.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
+#include "trig.h"
+#include "tv.h"
+#include "util.h"
+#include "window.h"
+#include "constants/abilities.h"
+#include "constants/battle_move_effects.h"
+#include "constants/battle_string_ids.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/trainers.h"
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
-extern u16 gBattle_WIN0H;
-extern u16 gBattle_WIN0V;
-extern u16 gBattle_WIN1H;
-extern u16 gBattle_WIN1V;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gUnknown_0203CF00[];
@@ -93,17 +83,10 @@ extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
 // functions
-extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
-extern void sub_8166188(void); // battle tower, sets link battle mons level but why?
-extern void sub_8165B88(u8* dst, u16 trainerId); // battle tower, gets language
 extern void sub_81B9150(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern void sub_81A56B4(void); // battle frontier 2
-extern u8 sub_81A9E28(void); // battle frontier 2
-extern void sub_81A56E8(u8 battlerId); // battle frontier 2
 extern void sub_81B8FB0(u8, u8); // party menu
 extern u8 pokemon_order_func(u8); // party menu
-extern bool8 InBattlePyramid(void);
 
 // this file's functions
 static void CB2_InitBattleInternal(void);
@@ -170,13 +153,25 @@ static void HandleAction_WatchesCarefully(void);
 static void HandleAction_SafariZoneBallThrow(void);
 static void HandleAction_ThrowPokeblock(void);
 static void HandleAction_GoNear(void);
-static void HandleAction_SafriZoneRun(void);
+static void HandleAction_SafariZoneRun(void);
 static void HandleAction_WallyBallThrow(void);
 static void HandleAction_Action11(void);
 static void HandleAction_NothingIsFainted(void);
 static void HandleAction_ActionFinished(void);
 
 // EWRAM vars
+EWRAM_DATA u16 gBattle_BG0_X = 0;
+EWRAM_DATA u16 gBattle_BG0_Y = 0;
+EWRAM_DATA u16 gBattle_BG1_X = 0;
+EWRAM_DATA u16 gBattle_BG1_Y = 0;
+EWRAM_DATA u16 gBattle_BG2_X = 0;
+EWRAM_DATA u16 gBattle_BG2_Y = 0;
+EWRAM_DATA u16 gBattle_BG3_X = 0;
+EWRAM_DATA u16 gBattle_BG3_Y = 0;
+EWRAM_DATA u16 gBattle_WIN0H = 0;
+EWRAM_DATA u16 gBattle_WIN0V = 0;
+EWRAM_DATA u16 gBattle_WIN1H = 0;
+EWRAM_DATA u16 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[300] = {0};
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
@@ -443,10 +438,10 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {TRAINER_CLASS_AROMA_LADY, 10},
     {TRAINER_CLASS_RUIN_MANIAC, 15},
     {TRAINER_CLASS_INTERVIEWER, 12},
-    {TRAINER_CLASS_TUBER_1, 1},
-    {TRAINER_CLASS_TUBER_2, 1},
+    {TRAINER_CLASS_TUBER_F, 1},
+    {TRAINER_CLASS_TUBER_M, 1},
     {TRAINER_CLASS_SIS_AND_BRO, 3},
-    {TRAINER_CLASS_COOLTRAINER_1, 12},
+    {TRAINER_CLASS_COOLTRAINER, 12},
     {TRAINER_CLASS_HEX_MANIAC, 6},
     {TRAINER_CLASS_LADY, 50},
     {TRAINER_CLASS_BEAUTY, 20},
@@ -507,7 +502,7 @@ static void (* const sTurnActionsFuncsTable[])(void) =
     HandleAction_SafariZoneBallThrow,   // B_ACTION_SAFARI_BALL
     HandleAction_ThrowPokeblock,        // B_ACTION_SAFARI_POKEBLOCK
     HandleAction_GoNear,                // B_ACTION_SAFARI_GO_NEAR
-    HandleAction_SafriZoneRun,          // B_ACTION_SAFARI_RUN
+    HandleAction_SafariZoneRun,         // B_ACTION_SAFARI_RUN
     HandleAction_WallyBallThrow,        // B_ACTION_WALLY_THROW
     HandleAction_RunBattleScript,       // B_ACTION_EXEC_SCRIPT
     HandleAction_Action11,              // not sure about this one
@@ -1146,9 +1141,9 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                 gLinkPlayers[3].id = 3;
                 GetFrontierTrainerName(gLinkPlayers[2].name, gTrainerBattleOpponent_A);
                 GetFrontierTrainerName(gLinkPlayers[3].name, gTrainerBattleOpponent_B);
-                sub_8165B88(&language, gTrainerBattleOpponent_A);
+                GetBattleTowerTrainerLanguage(&language, gTrainerBattleOpponent_A);
                 gLinkPlayers[2].language = language;
-                sub_8165B88(&language, gTrainerBattleOpponent_B);
+                GetBattleTowerTrainerLanguage(&language, gTrainerBattleOpponent_B);
                 gLinkPlayers[3].language = language;
 
                 if (sub_800A520())
@@ -3016,7 +3011,7 @@ static void BattleStartClearSetData(void)
         if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattleSceneOff == TRUE)
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
-    else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)) && GetBattleStyleInRecordedBattle())
+    else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)) && GetBattleSceneInRecordedBattle())
         gHitMarker |= HITMARKER_NO_ANIMATIONS;
 
     gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
@@ -3074,8 +3069,8 @@ static void BattleStartClearSetData(void)
 
     gBattleResults.shinyWildMon = IsMonShiny(&gEnemyParty[0]);
 
-    gBattleStruct->field_2A0 = 0;
-    gBattleStruct->field_2A1 = 0;
+    gBattleStruct->arenaLostPlayerMons = 0;
+    gBattleStruct->arenaLostOpponentMons = 0;
 }
 
 void SwitchInClearSetData(void)
@@ -3086,7 +3081,7 @@ void SwitchInClearSetData(void)
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
-        for (i = 0; i < BATTLE_STATS_NO; i++)
+        for (i = 0; i < NUM_BATTLE_STATS; i++)
             gBattleMons[gActiveBattler].statStages[i] = 6;
         for (i = 0; i < gBattlersCount; i++)
         {
@@ -3195,7 +3190,7 @@ void FaintClearSetData(void)
     s32 i;
     u8 *ptr;
 
-    for (i = 0; i < BATTLE_STATS_NO; i++)
+    for (i = 0; i < NUM_BATTLE_STATS; i++)
         gBattleMons[gActiveBattler].statStages[i] = 6;
 
     gBattleMons[gActiveBattler].status2 = 0;
@@ -3349,7 +3344,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].altAbility);
             hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(gActiveBattler)];
             *hpOnSwitchout = gBattleMons[gActiveBattler].hp;
-            for (i = 0; i < BATTLE_STATS_NO; i++)
+            for (i = 0; i < NUM_BATTLE_STATS; i++)
                 gBattleMons[gActiveBattler].statStages[i] = 6;
             gBattleMons[gActiveBattler].status2 = 0;
         }
@@ -3412,7 +3407,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-            sub_81A56B4();
+            BattleArena_InitPoints();
     }
     gBattleMainFunc = BattleIntroDrawPartySummaryScreens;
 }
@@ -5468,7 +5463,7 @@ static void HandleAction_UseMove(void)
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        sub_81A56E8(gBattlerAttacker);
+        BattleArena_AddMindPoints(gBattlerAttacker);
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
@@ -5595,7 +5590,7 @@ bool8 TryRunFromBattle(u8 battler)
         if (InBattlePyramid())
         {
             gBattleStruct->runTries++;
-            pyramidMultiplier = sub_81A9E28();
+            pyramidMultiplier = GetPyramidRunMultiplier();
             speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
             if (speedVar > (Random() & 0xFF))
             {
@@ -5621,7 +5616,7 @@ bool8 TryRunFromBattle(u8 battler)
         {
             if (InBattlePyramid())
             {
-                pyramidMultiplier = sub_81A9E28();
+                pyramidMultiplier = GetPyramidRunMultiplier();
                 speedVar = (gBattleMons[battler].speed * pyramidMultiplier) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
                 if (speedVar > (Random() & 0xFF))
                     effect++;
@@ -5775,7 +5770,7 @@ static void HandleAction_GoNear(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
-static void HandleAction_SafriZoneRun(void)
+static void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);

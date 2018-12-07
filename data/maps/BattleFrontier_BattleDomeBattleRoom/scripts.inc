@@ -10,7 +10,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
 	special CallBattleDomeFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C919
@@ -46,7 +46,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD0A:: @ 824BD0A
 	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C970, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C970, MSGBOX_DEFAULT
 	closemessage
 	showobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	compare VAR_TEMP_F, 3
@@ -73,7 +73,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD61:: @ 824BD61
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	setvar VAR_0x8004, 4
 	special CallBattleDomeFunction
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C990, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C990, MSGBOX_DEFAULT
 	closemessage
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C77B
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C789
@@ -81,7 +81,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	special sub_8161F74
-	msgbox 0x2021fc4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 5
 	special CallBattleDomeFunction
@@ -94,7 +94,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	setvar VAR_TEMP_2, 1
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BDF7:: @ 824BDF7
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA86, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA86, MSGBOX_DEFAULT
 	closemessage
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
@@ -137,14 +137,14 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24BE9A:: @ 824BE9A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5
 @ 	goto BattleFrontier_BattleDomePreBattleRoom_EventScript_24C8F5
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BEB1:: @ 824BEB1
 	setvar VAR_0x8004, 20
 	setvar VAR_0x8005, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	message BattleFrontier_BattleDomeBattleRoom_Text_24C9E1
 	waitmessage
 	return
@@ -152,7 +152,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEB1:: @ 824BEB1
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BEC5:: @ 824BEC5
 	setvar VAR_0x8004, 20
 	setvar VAR_0x8005, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	message BattleFrontier_BattleDomeBattleRoom_Text_24CB34
 	waitmessage
 	return
@@ -179,12 +179,12 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
 	special CallBattleDomeFunction
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 	setvar VAR_0x8006, 1
@@ -196,14 +196,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62:: @ 824BF62
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BF96
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA04, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA04, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BF96:: @ 824BF96
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA44, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA44, MSGBOX_DEFAULT
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E:: @ 824BF9E
 	special sub_8175280
@@ -213,15 +213,15 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E:: @ 824BF9E
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 3
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFC3:: @ 824BFC3
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C9BE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C9BE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFCC:: @ 824BFCC
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CB9D, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CB9D, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5:: @ 824BFD5
@@ -340,11 +340,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C151:: @ 824C151
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C158:: @ 824C158
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEBE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEBE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C161:: @ 824C161
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D232, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D232, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C16A:: @ 824C16A
@@ -379,7 +379,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C1B6:: @ 824C1B6
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1BD:: @ 824C1BD
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1CB:: @ 824C1CB
@@ -390,11 +390,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C1CB:: @ 824C1CB
 	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24C209
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC:: @ 824C1FC
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEDE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEDE, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C211
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C209:: @ 824C209
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D26C, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D26C, MSGBOX_DEFAULT
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C211:: @ 824C211
 	closemessage
@@ -428,83 +428,83 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C211:: @ 824C211
 	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24C373
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CFAE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CFAE, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9:: @ 824C2B9
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0D9, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0D9, MSGBOX_DEFAULT
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C400
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 9, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C436
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special CallBattleDomeFunction
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 	closemessage
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C82B
 	waitmovement 0
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D172, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D172, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleDomeBattleRoom_Text_24D1AA
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D1E0, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D1E0, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C346:: @ 824C346
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24C373
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D319, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D319, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C373:: @ 824C373
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D43E, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D43E, MSGBOX_DEFAULT
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C400
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 9, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C436
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special CallBattleDomeFunction
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 	closemessage
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C82B
 	waitmovement 0
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D47F, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D47F, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleDomeBattleRoom_Text_24D522
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D54D, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D54D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C400:: @ 824C400
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D677, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D677, MSGBOX_DEFAULT
 	closemessage
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C787
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C829
@@ -513,7 +513,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C400:: @ 824C400
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C420:: @ 824C420
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D127, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D127, MSGBOX_DEFAULT
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	waitse
@@ -527,12 +527,12 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C440:: @ 824C440
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	special HealPlayerParty
-	setvar VAR_0x8004, 3
+	setvar VAR_0x8004, SPECIAL_BATTLE_DOME
 	setvar VAR_0x8005, 0
 	setvar VAR_TEMP_9, 1
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	setvar VAR_TEMP_9, 0
 	setvar VAR_0x8004, 17
@@ -554,11 +554,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C48B:: @ 824C48B
 	applymovement 255, BattleFrontier_BattleDomeBattleRoom_Movement_24C773
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 3
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24C4EF
 	setvar VAR_0x8004, 9
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_E, VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C4EF

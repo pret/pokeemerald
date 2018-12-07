@@ -23,11 +23,11 @@ AquaHideout_B1F_MapScript1_2339D0: @ 82339D0
 	end
 
 AquaHideout_B1F_EventScript_2339E3:: @ 82339E3
-	clearflag FLAG_0x3D1
+	clearflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1
 	return
 
 AquaHideout_B1F_EventScript_2339E7:: @ 82339E7
-	clearflag FLAG_0x3D2
+	clearflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2
 	return
 
 AquaHideout_B1F_EventScript_2339EB:: @ 82339EB
@@ -85,35 +85,35 @@ AquaHideout_B1F_EventScript_233A7C:: @ 8233A7C
 	end
 
 AquaHideout_B1F_EventScript_233A85:: @ 8233A85
-	trainerbattle 2, TRAINER_GRUNT_2, 0, AquaHideout_B1F_Text_233B03, AquaHideout_B1F_Text_233B4A, AquaHideout_B1F_EventScript_233AA0
-	msgbox AquaHideout_B1F_Text_233B5E, 6
+	trainerbattle_single TRAINER_GRUNT_2, AquaHideout_B1F_Text_233B03, AquaHideout_B1F_Text_233B4A, AquaHideout_B1F_EventScript_233AA0
+	msgbox AquaHideout_B1F_Text_233B5E, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B1F_EventScript_233AA0:: @ 8233AA0
 	special sub_80B4808
 	waitmovement 0
-	msgbox AquaHideout_B1F_Text_233B5E, 4
+	msgbox AquaHideout_B1F_Text_233B5E, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_B1F_EventScript_233AB0:: @ 8233AB0
-	trainerbattle 2, TRAINER_GRUNT_3, 0, AquaHideout_B1F_Text_233BC5, AquaHideout_B1F_Text_233C27, AquaHideout_B1F_EventScript_233ACB
-	msgbox AquaHideout_B1F_Text_233C41, 6
+	trainerbattle_single TRAINER_GRUNT_3, AquaHideout_B1F_Text_233BC5, AquaHideout_B1F_Text_233C27, AquaHideout_B1F_EventScript_233ACB
+	msgbox AquaHideout_B1F_Text_233C41, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B1F_EventScript_233ACB:: @ 8233ACB
-	msgbox AquaHideout_B1F_Text_233C41, 4
+	msgbox AquaHideout_B1F_Text_233C41, MSGBOX_DEFAULT
 	release
 	end
 
 AquaHideout_B1F_EventScript_233AD5:: @ 8233AD5
-	trainerbattle 0, TRAINER_GRUNT_21, 0, AquaHideout_B1F_Text_233C89, AquaHideout_B1F_Text_233CCA
-	msgbox AquaHideout_B1F_Text_233CDC, 6
+	trainerbattle_single TRAINER_GRUNT_21, AquaHideout_B1F_Text_233C89, AquaHideout_B1F_Text_233CCA
+	msgbox AquaHideout_B1F_Text_233CDC, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B1F_EventScript_233AEC:: @ 8233AEC
-	trainerbattle 0, TRAINER_GRUNT_25, 0, AquaHideout_B1F_Text_233D1B, AquaHideout_B1F_Text_233D6E
-	msgbox AquaHideout_B1F_Text_233D84, 6
+	trainerbattle_single TRAINER_GRUNT_25, AquaHideout_B1F_Text_233D1B, AquaHideout_B1F_Text_233D6E
+	msgbox AquaHideout_B1F_Text_233D84, MSGBOX_AUTOCLOSE
 	end
 
 AquaHideout_B1F_Text_233B03: @ 8233B03

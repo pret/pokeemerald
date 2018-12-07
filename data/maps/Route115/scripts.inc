@@ -25,125 +25,116 @@ Route115_MapScript2_1F2969: @ 81F2969
 	.2byte 0
 
 Route115_EventScript_1F2973:: @ 81F2973
-	msgbox Route115_Text_1F2B55, 2
+	msgbox Route115_Text_1F2B55, MSGBOX_NPC
 	end
 
 Route115_EventScript_1F297C:: @ 81F297C
-	msgbox Route115_Text_1F2BC9, 3
+	msgbox Route115_Text_1F2BC9, MSGBOX_SIGN
 	end
 
 Route115_EventScript_1F2985:: @ 81F2985
-	msgbox Route115_Text_1F2BE3, 3
+	msgbox Route115_Text_1F2BE3, MSGBOX_SIGN
 	end
 
 Route115_EventScript_1F298E:: @ 81F298E
-	trainerbattle 2, TRAINER_TIMOTHY_1, 0, Route115_Text_29B1FA, Route115_Text_29B230, Route115_EventScript_1F29BA
+	trainerbattle_single TRAINER_TIMOTHY_1, Route115_Text_29B1FA, Route115_Text_29B230, Route115_EventScript_1F29BA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F29D9
-	msgbox Route115_Text_29B258, 4
+	msgbox Route115_Text_29B258, MSGBOX_DEFAULT
 	release
 	end
 
 Route115_EventScript_1F29BA:: @ 81F29BA
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route115_Text_29B2B3, 4
-	setvar VAR_0x8004, 307
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 307
-	callstd 8
+	msgbox Route115_Text_29B2B3, MSGBOX_DEFAULT
+	register_matchcall TRAINER_TIMOTHY_1
 	release
 	end
 
 Route115_EventScript_1F29D9:: @ 81F29D9
-	trainerbattle 5, TRAINER_TIMOTHY_1, 0, Route115_Text_29B32C, Route115_Text_29B372
-	msgbox Route115_Text_29B385, 6
+	trainerbattle_rematch TRAINER_TIMOTHY_1, Route115_Text_29B32C, Route115_Text_29B372
+	msgbox Route115_Text_29B385, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F29F0:: @ 81F29F0
-	trainerbattle 0, TRAINER_KOICHI, 0, Route115_Text_29B3CC, Route115_Text_29B3ED
-	msgbox Route115_Text_29B3FF, 6
+	trainerbattle_single TRAINER_KOICHI, Route115_Text_29B3CC, Route115_Text_29B3ED
+	msgbox Route115_Text_29B3FF, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2A07:: @ 81F2A07
-	trainerbattle 2, TRAINER_NOB_1, 0, Route115_Text_29B449, Route115_Text_29B480, Route115_EventScript_1F2A33
+	trainerbattle_single TRAINER_NOB_1, Route115_Text_29B449, Route115_Text_29B480, Route115_EventScript_1F2A33
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F2A52
-	msgbox Route115_Text_29B49D, 4
+	msgbox Route115_Text_29B49D, MSGBOX_DEFAULT
 	release
 	end
 
 Route115_EventScript_1F2A33:: @ 81F2A33
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route115_Text_29B50B, 4
-	setvar VAR_0x8004, 183
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 183
-	callstd 8
+	msgbox Route115_Text_29B50B, MSGBOX_DEFAULT
+	register_matchcall TRAINER_NOB_1
 	release
 	end
 
 Route115_EventScript_1F2A52:: @ 81F2A52
-	trainerbattle 5, TRAINER_NOB_1, 0, Route115_Text_29B547, Route115_Text_29B59D
-	msgbox Route115_Text_29B5B5, 6
+	trainerbattle_rematch TRAINER_NOB_1, Route115_Text_29B547, Route115_Text_29B59D
+	msgbox Route115_Text_29B5B5, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2A69:: @ 81F2A69
-	trainerbattle 2, TRAINER_CYNDY_1, 0, Route115_Text_29B5EF, Route115_Text_29B62D, Route115_EventScript_1F2A95
+	trainerbattle_single TRAINER_CYNDY_1, Route115_Text_29B5EF, Route115_Text_29B62D, Route115_EventScript_1F2A95
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F2AB4
-	msgbox Route115_Text_29B647, 4
+	msgbox Route115_Text_29B647, MSGBOX_DEFAULT
 	release
 	end
 
 Route115_EventScript_1F2A95:: @ 81F2A95
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route115_Text_29B6AB, 4
-	setvar VAR_0x8004, 427
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 427
-	callstd 8
+	msgbox Route115_Text_29B6AB, MSGBOX_DEFAULT
+	register_matchcall TRAINER_CYNDY_1
 	release
 	end
 
 Route115_EventScript_1F2AB4:: @ 81F2AB4
-	trainerbattle 5, TRAINER_CYNDY_1, 0, Route115_Text_29B6FA, Route115_Text_29B71A
-	msgbox Route115_Text_29B737, 6
+	trainerbattle_rematch TRAINER_CYNDY_1, Route115_Text_29B6FA, Route115_Text_29B71A
+	msgbox Route115_Text_29B737, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2ACB:: @ 81F2ACB
-	trainerbattle 0, TRAINER_HECTOR, 0, Route115_Text_29B78F, Route115_Text_29B7C5
-	msgbox Route115_Text_29B7EA, 6
+	trainerbattle_single TRAINER_HECTOR, Route115_Text_29B78F, Route115_Text_29B7C5
+	msgbox Route115_Text_29B7EA, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2AE2:: @ 81F2AE2
-	trainerbattle 0, TRAINER_KYRA, 0, Route115_Text_29B826, Route115_Text_29B85D
-	msgbox Route115_Text_29B869, 6
+	trainerbattle_single TRAINER_KYRA, Route115_Text_29B826, Route115_Text_29B85D
+	msgbox Route115_Text_29B869, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2AF9:: @ 81F2AF9
-	trainerbattle 0, TRAINER_JAIDEN, 0, Route115_Text_29B8C1, Route115_Text_29B8E8
-	msgbox Route115_Text_29B904, 6
+	trainerbattle_single TRAINER_JAIDEN, Route115_Text_29B8C1, Route115_Text_29B8E8
+	msgbox Route115_Text_29B904, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2B10:: @ 81F2B10
-	trainerbattle 0, TRAINER_ALIX, 0, Route115_Text_29B9CB, Route115_Text_29B9F6
-	msgbox Route115_Text_29BA04, 6
+	trainerbattle_single TRAINER_ALIX, Route115_Text_29B9CB, Route115_Text_29B9F6
+	msgbox Route115_Text_29BA04, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2B27:: @ 81F2B27
-	trainerbattle 0, TRAINER_HELENE, 0, Route115_Text_29B92D, Route115_Text_29B958
-	msgbox Route115_Text_29B971, 6
+	trainerbattle_single TRAINER_HELENE, Route115_Text_29B92D, Route115_Text_29B958
+	msgbox Route115_Text_29B971, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_1F2B3E:: @ 81F2B3E
-	trainerbattle 0, TRAINER_MARLENE, 0, Route115_Text_29BA2C, Route115_Text_29BA67
-	msgbox Route115_Text_29BA87, 6
+	trainerbattle_single TRAINER_MARLENE, Route115_Text_29BA2C, Route115_Text_29BA67
+	msgbox Route115_Text_29BA87, MSGBOX_AUTOCLOSE
 	end
 
 Route115_Text_1F2B55: @ 81F2B55

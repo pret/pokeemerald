@@ -1,3 +1,4 @@
+#include "constants/battle_anim.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -141,7 +142,7 @@ gUnknown_085E5310:: @ 85E5310
 
 	.align 2
 gBattleAnimSpriteTemplate_85E5338:: @ 85E5338
-	spr_template 0x281d, 0x281d, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817330C
+	spr_template ANIM_TAG_UNUSED_RED_BRICK, ANIM_TAG_UNUSED_RED_BRICK, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817330C
 
 	.align 2
 gUnknown_085E5350:: @ 8535350
@@ -152,5 +153,5 @@ gUnknown_085E5358:: @ 8535358
 	.4byte gUnknown_085E5350
 
 	.align 2
-	spr_template 0x274a, 0x274a, gUnknown_08524914, gUnknown_085E5358, NULL, gDummySpriteAffineAnimTable, sub_817330C
+	spr_template ANIM_TAG_ROCKS, ANIM_TAG_ROCKS, gUnknown_08524914, gUnknown_085E5358, NULL, gDummySpriteAffineAnimTable, sub_817330C
 

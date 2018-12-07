@@ -10,36 +10,36 @@ MtPyre_2F_MapScript1_23110B: @ 823110B
 	end
 
 MtPyre_2F_EventScript_231116:: @ 8231116
-	msgbox MtPyre_2F_Text_2311A3, 2
+	msgbox MtPyre_2F_Text_2311A3, MSGBOX_NPC
 	end
 
 MtPyre_2F_EventScript_23111F:: @ 823111F
-	msgbox MtPyre_2F_Text_2311E6, 2
+	msgbox MtPyre_2F_Text_2311E6, MSGBOX_NPC
 	end
 
 MtPyre_2F_EventScript_231128:: @ 8231128
-	trainerbattle 0, TRAINER_MARK, 0, MtPyre_2F_Text_231258, MtPyre_2F_Text_2312A2
-	msgbox MtPyre_2F_Text_2312CB, 6
+	trainerbattle_single TRAINER_MARK, MtPyre_2F_Text_231258, MtPyre_2F_Text_2312A2
+	msgbox MtPyre_2F_Text_2312CB, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_23113F:: @ 823113F
-	trainerbattle 4, TRAINER_DEZ_AND_LUKE, 0, MtPyre_2F_Text_23130F, MtPyre_2F_Text_2313A1, MtPyre_2F_Text_231414
-	msgbox MtPyre_2F_Text_2313B1, 6
+	trainerbattle_double TRAINER_DEZ_AND_LUKE, MtPyre_2F_Text_23130F, MtPyre_2F_Text_2313A1, MtPyre_2F_Text_231414
+	msgbox MtPyre_2F_Text_2313B1, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_23115A:: @ 823115A
-	trainerbattle 4, TRAINER_DEZ_AND_LUKE, 0, MtPyre_2F_Text_231492, MtPyre_2F_Text_231534, MtPyre_2F_Text_231582
-	msgbox MtPyre_2F_Text_23154D, 6
+	trainerbattle_double TRAINER_DEZ_AND_LUKE, MtPyre_2F_Text_231492, MtPyre_2F_Text_231534, MtPyre_2F_Text_231582
+	msgbox MtPyre_2F_Text_23154D, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_231175:: @ 8231175
-	trainerbattle 0, TRAINER_LEAH, 0, MtPyre_2F_Text_231604, MtPyre_2F_Text_231645
-	msgbox MtPyre_2F_Text_23165A, 6
+	trainerbattle_single TRAINER_LEAH, MtPyre_2F_Text_231604, MtPyre_2F_Text_231645
+	msgbox MtPyre_2F_Text_23165A, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_23118C:: @ 823118C
-	trainerbattle 0, TRAINER_ZANDER, 0, MtPyre_2F_Text_2316C7, MtPyre_2F_Text_2316E1
-	msgbox MtPyre_2F_Text_2316FB, 6
+	trainerbattle_single TRAINER_ZANDER, MtPyre_2F_Text_2316C7, MtPyre_2F_Text_2316E1
+	msgbox MtPyre_2F_Text_2316FB, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_Text_2311A3: @ 82311A3

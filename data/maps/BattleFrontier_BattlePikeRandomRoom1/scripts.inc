@@ -12,7 +12,7 @@ BattleFrontier_BattlePikeRandomRoom1_MapScript2_25D167: @ 825D167
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D171:: @ 825D171
 	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 5
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D1C6
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D50E
@@ -29,14 +29,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D1C6:: @ 825D1C6
 	waitmovement 0
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
-	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	special CallBattlePikeFunction
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D226
@@ -45,7 +45,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A:: @ 825D20A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 4
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
@@ -58,21 +58,21 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D226:: @ 825D226
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D231:: @ 825D231
 	lockall
 	delay 16
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDFE, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDFE, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D795
 	waitmovement 0
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
-	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	special CallBattlePikeFunction
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D285
@@ -86,11 +86,11 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D285:: @ 825D285
 	waitmovement 0
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE3F, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE3F, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE94, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE94, MSGBOX_DEFAULT
 	closemessage
 	release
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D798
@@ -103,14 +103,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2BF:: @ 825D2BF
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DF
 	waitmovement 0
 	setvar VAR_0x8004, 23
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4DC
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4EA
 	case 2, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4FC
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E311, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E311, MSGBOX_DEFAULT
 	closemessage
 	special SpawnScriptEventObject
 	applymovement 127, BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0
@@ -137,23 +137,23 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7E7
 	waitmovement 0
 	setvar VAR_0x8004, 22
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416
 	case 3, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
 	case 4, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA
@@ -161,34 +161,34 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePikeRandomRoom1_Text_25DFD0
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E003, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E003, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
-	special sub_81A1780
+	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460
@@ -196,18 +196,18 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	setvar VAR_0x8004, 12
-	special sub_81A1780
+	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePikeRandomRoom1_Text_25E118
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
-	special sub_81A1780
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E140, 4
+	special CallFrontierUtilFunc
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E140, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	end
@@ -219,30 +219,30 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D:: @ 825D49D
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	special sub_81A703C
+	special CallBattlePikeFunction
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
-	special sub_81A703C
+	special CallBattlePikeFunction
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
 	waitstate
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4DC:: @ 825D4DC
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E15D, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E15D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4EA:: @ 825D4EA
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E1DD, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E1DD, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4FC:: @ 825D4FC
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E238, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E238, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB
@@ -258,7 +258,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D50E:: @ 825D50E
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA13, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA13, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D798
 	waitmovement 0
@@ -281,20 +281,20 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	waitmovement 0
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
-	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	special CallBattlePikeFunction
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	delay 16
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
 	waitmovement 0
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 1
-	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	special CallBattlePikeFunction
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 9
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_DOUBLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D5DC
@@ -318,25 +318,25 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D605:: @ 825D605
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7AA
 	waitmovement 0
 	setvar VAR_0x8004, 12
-	special sub_81A703C
+	special CallBattlePikeFunction
 	copyvar VAR_0x8004, VAR_RESULT
 	compare VAR_0x8004, 0
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643
 	compare VAR_0x8004, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD3F, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD3F, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DBE4, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DBE4, MSGBOX_DEFAULT
 	closemessage
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
 	waitmoncry
 	setvar VAR_0x8004, 11
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D751
 	compare VAR_RESULT, 1
@@ -346,7 +346,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
 	compare VAR_RESULT, 4
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D766
 	setvar VAR_0x8004, 15
-	special sub_81A703C
+	special CallBattlePikeFunction
 	waitstate
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A2
 	waitmovement 0
@@ -355,7 +355,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
 	waitmoncry
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, MSGBOX_DEFAULT
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
 	waitmoncry
@@ -363,23 +363,23 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B3
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A4
 	waitmovement 0
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCCF, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCCF, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DC01, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DC01, MSGBOX_DEFAULT
 	closemessage
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
 	waitmoncry
 	setvar VAR_0x8004, 11
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D76D
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D774
 	setvar VAR_0x8004, 15
-	special sub_81A703C
+	special CallBattlePikeFunction
 	waitstate
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A2
 	waitmovement 0
@@ -388,7 +388,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
 	waitmoncry
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, MSGBOX_DEFAULT
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
 	waitmoncry
@@ -396,7 +396,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B3
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A4
 	waitmovement 0
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD06, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD06, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D751:: @ 825D751
@@ -433,9 +433,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B:: @ 825D77B
 	closemessage
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7DC
 	waitmovement 0
-	setvar VAR_0x8004, 7
+	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_SINGLE
 	setvar VAR_0x8005, 0
-	special sub_8163AC4
+	special DoSpecialTrainerBattle
 	waitstate
 	return
 
@@ -579,7 +579,7 @@ BattleFrontier_BattlePikeRandomRoom1_Movement_25D7EA: @ 825D7EA
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D7ED:: @ 825D7ED
 	setvar VAR_0x8004, 5
-	special sub_81A703C
+	special CallBattlePikeFunction
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D81B
 	case 3, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D831
@@ -589,8 +589,8 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D81B:: @ 825D81B
 	lock
 	faceplayer
 	setvar VAR_0x8004, 14
-	special sub_81A703C
-	msgbox 0x2021fc4, 4
+	special CallBattlePikeFunction
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	release
@@ -599,21 +599,21 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D81B:: @ 825D81B
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D831:: @ 825D831
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDA3, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDA3, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D83E:: @ 825D83E
 	setvar VAR_0x8004, 13
-	special sub_81A703C
+	special CallBattlePikeFunction
 	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D881
 	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D875
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DABE, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DABE, MSGBOX_DEFAULT
 	closemessage
 	release
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D79E
@@ -623,21 +623,21 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D83E:: @ 825D83E
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D875:: @ 825D875
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA51, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA51, MSGBOX_DEFAULT
 	closemessage
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D881:: @ 825D881
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E32E, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E32E, MSGBOX_DEFAULT
 	closemessage
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D88D:: @ 825D88D
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDE6, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDE6, MSGBOX_DEFAULT
 	closemessage
 	release
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B4

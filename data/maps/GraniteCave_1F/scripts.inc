@@ -6,15 +6,15 @@ GraniteCave_1F_EventScript_22DA5E:: @ 822DA5E
 	faceplayer
 	checkflag FLAG_0x06D
 	goto_eq GraniteCave_1F_EventScript_22DA8A
-	msgbox GraniteCave_1F_Text_22DA94, 4
+	msgbox GraniteCave_1F_Text_22DA94, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM05
 	setflag FLAG_0x06D
-	msgbox GraniteCave_1F_Text_22DBB7, 4
+	msgbox GraniteCave_1F_Text_22DBB7, MSGBOX_DEFAULT
 	release
 	end
 
 GraniteCave_1F_EventScript_22DA8A:: @ 822DA8A
-	msgbox GraniteCave_1F_Text_22DBB7, 4
+	msgbox GraniteCave_1F_Text_22DBB7, MSGBOX_DEFAULT
 	release
 	end
 

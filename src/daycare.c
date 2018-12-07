@@ -63,7 +63,7 @@ EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 {
-    .priority = 0,
+    .bg = 0,
     .tilemapLeft = 15,
     .tilemapTop = 1,
     .width = 14,
@@ -1206,17 +1206,17 @@ static void GetDaycareLevelMenuLevelText(struct DayCare *daycare, u8 *dest)
 
 static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
 {
-    struct TextSubPrinter printer;
+    struct TextPrinterTemplate printer;
 
-    printer.current_text_offset = text;
+    printer.currentChar = text;
     printer.windowId = windowId;
     printer.fontId = 1;
     printer.x = x;
     printer.y = y;
     printer.currentX = x;
     printer.currentY = y;
-    printer.fontColor_l = 0;
-    gTextFlags.flag_1 = 0;
+    printer.unk = 0;
+    gTextFlags.useAlternateDownArrow = 0;
     printer.letterSpacing = 0;
     printer.lineSpacing = 1;
     printer.fgColor = 2;

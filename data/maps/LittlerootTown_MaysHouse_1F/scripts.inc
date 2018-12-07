@@ -60,7 +60,7 @@ LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8964:: @ 81F8964
 	lockall
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F7B67, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1F898A
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_1F898A
@@ -99,7 +99,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
 	waitmovement 0
 	special GetRivalSonDaughterString
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
 	setflag FLAG_0x057
 	setvar VAR_0x408C, 2
 	releaseall
@@ -125,22 +125,22 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	compare VAR_0x408D, 3
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
 	special GetRivalSonDaughterString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F:: @ 81F8A1F
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8D37, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8D37, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F8A29:: @ 81F8A29
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8D93, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8D93, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F8A33:: @ 81F8A33
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8E01, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8E01, MSGBOX_DEFAULT
 	release
 	end
 
@@ -149,7 +149,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_BrendansHouse_1F_Text_1F9262, 4
+	msgbox LittlerootTown_BrendansHouse_1F_Text_1F9262, MSGBOX_DEFAULT
 	release
 	end
 
@@ -199,7 +199,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B40
 	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B4B
-	msgbox LittlerootTown_MaysHouse_1F_Text_1F8EC6, 4
+	msgbox LittlerootTown_MaysHouse_1F_Text_1F8EC6, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B6A
@@ -209,9 +209,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B8E
 	playse SE_KAIDAN
 	removeobject 7
-	setflag FLAG_0x2EA
-	setflag FLAG_0x332
-	clearflag FLAG_0x2D2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_0x408D, 3
 	setvar VAR_0x4050, 1

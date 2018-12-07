@@ -1,8 +1,6 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
-#define NUM_EVENT_OBJECTS 16
-
 enum
 {
     CONNECTION_SOUTH = 1,
@@ -194,8 +192,8 @@ struct EventObject
         struct __attribute__((packed)) {
             u8 x:4;
             u8 y:4;
-        } __attribute__((aligned (1))) as_nybbles;
-    } __attribute__((aligned (1))) range;
+        } ALIGNED(1) as_nybbles;
+    } ALIGNED(1) range;
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
     /*0x1C*/ u8 movementActionId;
@@ -228,14 +226,14 @@ struct EventObjectGraphicsInfo
     /*0x20*/ const union AffineAnimCmd *const *affineAnims;
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT   (1 << 0)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE (1 << 1)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE (1 << 2)
-#define PLAYER_AVATAR_FLAG_SURFING   (1 << 3)
-#define PLAYER_AVATAR_FLAG_4         (1 << 4)
-#define PLAYER_AVATAR_FLAG_5         (1 << 5)
-#define PLAYER_AVATAR_FLAG_6         (1 << 6)
-#define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
+#define PLAYER_AVATAR_FLAG_ON_FOOT    (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE  (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE  (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING    (1 << 3)
+#define PLAYER_AVATAR_FLAG_UNDERWATER (1 << 4)
+#define PLAYER_AVATAR_FLAG_5          (1 << 5)
+#define PLAYER_AVATAR_FLAG_6          (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH       (1 << 7)
 
 enum
 {
@@ -311,7 +309,7 @@ struct Camera
     s32 y;
 };
 
-extern struct EventObject gEventObjects[NUM_EVENT_OBJECTS];
+extern struct EventObject gEventObjects[EVENT_OBJECTS_COUNT];
 extern u8 gSelectedEventObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;

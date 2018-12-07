@@ -29,7 +29,7 @@ ShoalCave_LowTideStairsRoom_EventScript_23711A:: @ 823711A
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_23714C:: @ 823714C
-	msgbox ShoalCave_LowTideStairsRoom_Text_2A8169, 4
+	msgbox ShoalCave_LowTideStairsRoom_Text_2A8169, MSGBOX_DEFAULT
 	releaseall
 	end
 

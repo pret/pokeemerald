@@ -1,25 +1,26 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_transition.h"
-#include "unk_transition.h"
-#include "main.h"
-#include "overworld.h"
-#include "task.h"
-#include "palette.h"
-#include "trig.h"
-#include "field_effect.h"
+#include "bg.h"
+#include "decompress.h"
 #include "field_camera.h"
+#include "field_effect.h"
+#include "gpu_regs.h"
+#include "main.h"
+#include "malloc.h"
+#include "overworld.h"
+#include "palette.h"
 #include "random.h"
-#include "sprite.h"
+#include "scanline_effect.h"
 #include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "trig.h"
+#include "unk_transition.h"
+#include "util.h"
+#include "constants/field_effects.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-#include "field_camera.h"
-#include "scanline_effect.h"
-#include "malloc.h"
-#include "gpu_regs.h"
-#include "decompress.h"
-#include "bg.h"
-#include "util.h"
 
 struct TransitionData
 {
@@ -55,9 +56,6 @@ struct StructRectangularSpiral
 
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
-
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
 
 extern const struct OamData gEventObjectBaseOam_32x32;
 

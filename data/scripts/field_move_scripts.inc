@@ -18,10 +18,10 @@ Route123_EventScript_2906BB:: @ 82906BB
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
-	msgbox Route103_Text_29072E, 5
+	msgbox Route103_Text_29072E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route103_EventScript_29072B
-	msgbox Route103_Text_290771, 4
+	msgbox Route103_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect 2
 	waitstate
@@ -47,7 +47,7 @@ Route103_Movement_29071F: @ 829071F
 	step_end
 
 Route103_EventScript_290721:: @ 8290721
-	msgbox Route103_Text_29077D, 4
+	msgbox Route103_Text_29077D, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -92,10 +92,10 @@ VictoryRoad_B1F_EventScript_2907A6:: @ 82907A6
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
-	msgbox Route111_Text_29083A, 5
+	msgbox Route111_Text_29083A, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_290837
-	msgbox Route111_Text_290771, 4
+	msgbox Route111_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect 37
 	waitstate
@@ -132,7 +132,7 @@ Route111_Movement_29082B: @ 829082B
 	step_end
 
 Route111_EventScript_29082D:: @ 829082D
-	msgbox Route111_Text_29087F, 4
+	msgbox Route111_Text_29087F, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -168,7 +168,7 @@ VictoryRoad_B1F_EventScript_2908BA:: @ 82908BA
 	compare VAR_RESULT, 6
 	goto_eq FieryPath_EventScript_290915
 	setfieldeffectargument 0, VAR_RESULT
-	msgbox FieryPath_Text_29092C, 5
+	msgbox FieryPath_Text_29092C, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq FieryPath_EventScript_290929
 	closemessage
@@ -186,17 +186,17 @@ FieryPath_EventScript_2908FD:: @ 82908FD
 
 FieryPath_EventScript_290908:: @ 8290908
 	setflag FLAG_SYS_USE_STRENGTH
-	msgbox FieryPath_Text_29098C, 4
+	msgbox FieryPath_Text_29098C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FieryPath_EventScript_290915:: @ 8290915
-	msgbox FieryPath_Text_2909D6, 4
+	msgbox FieryPath_Text_2909D6, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FieryPath_EventScript_29091F:: @ 829091F
-	msgbox FieryPath_Text_290A16, 4
+	msgbox FieryPath_Text_290A16, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -230,10 +230,10 @@ EventScript_UseWaterfall:: @ 8290A49
 	goto_eq EventScript_290A84
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
-	msgbox Text_290AC3, 5
+	msgbox Text_290AC3, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq EventScript_290A8C
-	msgbox Text_290AFC, 4
+	msgbox Text_290AFC, MSGBOX_DEFAULT
 	dofieldeffect 43
 	goto EventScript_290A8C
 
@@ -241,7 +241,7 @@ EventScript_CannotUseWaterfall:: @ 8290A83
 	lockall
 
 EventScript_290A84:: @ 8290A84
-	msgbox Text_290A8E, 4
+	msgbox Text_290A8E, MSGBOX_DEFAULT
 
 EventScript_290A8C:: @ 8290A8C
 	releaseall
@@ -266,16 +266,16 @@ EventScript_UseDive:: @ 8290B0F
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
-	msgbox Text_290BE8, 5
+	msgbox Text_290BE8, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq EventScript_290B58
-	msgbox Text_290C1A, 4
+	msgbox Text_290C1A, MSGBOX_DEFAULT
 	dofieldeffect 44
 	goto EventScript_290B58
 	end
 
 EventScript_290B4E:: @ 8290B4E
-	msgbox Text_290BAA, 4
+	msgbox Text_290BAA, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -291,17 +291,17 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
-	msgbox Text_290C6E, 5
+	msgbox Text_290C6E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq EventScript_290BA8
-	msgbox Text_290C1A, 4
+	msgbox Text_290C1A, MSGBOX_DEFAULT
 	dofieldeffect 44
 	goto EventScript_290BA8
 	end
 
 EventScript_290B99:: @ 8290B99
 	lockall
-	msgbox Text_290C28, 4
+	msgbox Text_290C28, MSGBOX_DEFAULT
 	goto EventScript_290BA8
 	end
 
@@ -329,7 +329,7 @@ Text_290C6E: @ 8290C6E
 	.string "Would you like to use DIVE?$"
 
 EventScript_290CAE:: @ 8290CAE
-	msgbox Text_290CB7, 3
+	msgbox Text_290CB7, MSGBOX_SIGN
 	end
 
 Text_290CB7: @ 8290CB7

@@ -28,7 +28,7 @@ SealedChamber_InnerRoom_EventScript_2391F8:: @ 82391F8
 	waitstate
 	playse SE_DOOR
 	delay 40
-	msgbox gUnknown_0827301B, 4
+	msgbox gUnknown_0827301B, MSGBOX_DEFAULT
 	closemessage
 	fadeinbgm 0
 	setflag FLAG_0x0E4

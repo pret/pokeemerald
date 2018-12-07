@@ -247,24 +247,24 @@ LilycoveCity_ContestLobby_Text_293BB4: @ 8293BB4
 
 EventScript_Pblock1_Ask:: @ 8293C3E
 	lockall
-	checkflag FLAG_0x340
+	checkflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
 	goto_if 0, LilycoveCity_ContestLobby_EventScript_293EFB
 	setvar VAR_0x8009, 1
 	applymovement 16, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
-	msgbox Text_Pblock1_Ask, 5
+	msgbox Text_Pblock1_Ask, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_Pblock1_Yes
 	goto EventScript_Pblock1_No
 	end
 
 EventScript_Pblock1_No: @ 8293C70
-	msgbox Text_Pblock1_No, 4
+	msgbox Text_Pblock1_No, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_Pblock1_NoBerries: @ 8293C7A
-	msgbox Text_Pblock1_NoBerries, 4
+	msgbox Text_Pblock1_NoBerries, MSGBOX_DEFAULT
 	dodailyevents
 	checkflag FLAG_0x921
 	goto_eq LilycoveCity_ContestLobby_EventScript_293C92
@@ -272,31 +272,31 @@ EventScript_Pblock1_NoBerries: @ 8293C7A
 	end
 
 LilycoveCity_ContestLobby_EventScript_293C92: @ 8293C92
-	msgbox LilycoveCity_ContestLobby_Text_29307D, 4
+	msgbox LilycoveCity_ContestLobby_Text_29307D, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293C9C: @ 8293C9C
-	msgbox LilycoveCity_ContestLobby_Text_292FD1, 4
+	msgbox LilycoveCity_ContestLobby_Text_292FD1, MSGBOX_DEFAULT
 	giveitem_std ITEM_PECHA_BERRY
 	setflag FLAG_0x921
 	goto EventScript_Pblock1_KnowHow
 	end
 
 EventScript_Pblock1_KnowHow: @ 8293CB9
-	msgbox Text_Pblock1_KnowHow, 5
+	msgbox Text_Pblock1_KnowHow, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_Pblock1_Start
 	goto EventScript_Pblock1_Explain
 	end
 
 EventScript_Pblock1_Start: @ 8293CD2
-	msgbox Text_Pblock1_Start, 4
+	msgbox Text_Pblock1_Start, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 EventScript_Pblock1_Explain: @ 8293CE0
-	msgbox Text_Pblock1_Explain, 4
+	msgbox Text_Pblock1_Explain, MSGBOX_DEFAULT
 	goto EventScript_Pblock1_Start
 	end
 
@@ -310,7 +310,7 @@ EventScript_Pblock1_Yes: @ 8293CEE
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
 	goto_eq EventScript_Pblock1_NoBerries
-	msgbox Text_Pblock1_Yes, 4
+	msgbox Text_Pblock1_Yes, MSGBOX_DEFAULT
 	goto EventScript_Pblock1_KnowHow
 	end
 
@@ -323,12 +323,12 @@ EventScript_StartBlending: @ 8293D2C
 	end
 
 EventScript_Pblock1_FullPokeblock: @ 8293D39
-	msgbox Text_Pblock1_FullPokeblock, 4
+	msgbox Text_Pblock1_FullPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_Pblock1_NoPokeblock: @ 8293D43
-	msgbox Text_Pblock1_NoPokeblock, 4
+	msgbox Text_Pblock1_NoPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -338,36 +338,36 @@ LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	applymovement 10, LilycoveCity_ContestLobby_Movement_2725A2
 	applymovement 3, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_293201, 5
+	msgbox LilycoveCity_ContestLobby_Text_293201, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293DC6
 	goto LilycoveCity_ContestLobby_EventScript_293D7D
 	end
 
 LilycoveCity_ContestLobby_EventScript_293D7D: @ 8293D7D
-	msgbox LilycoveCity_ContestLobby_Text_29323D, 4
+	msgbox LilycoveCity_ContestLobby_Text_29323D, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293D87: @ 8293D87
-	msgbox LilycoveCity_ContestLobby_Text_293394, 4
+	msgbox LilycoveCity_ContestLobby_Text_293394, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_293D91: @ 8293D91
-	msgbox LilycoveCity_ContestLobby_Text_29328C, 5
+	msgbox LilycoveCity_ContestLobby_Text_29328C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293DAA
 	goto LilycoveCity_ContestLobby_EventScript_293DB8
 	end
 
 LilycoveCity_ContestLobby_EventScript_293DAA: @ 8293DAA
-	msgbox LilycoveCity_ContestLobby_Text_2932C3, 4
+	msgbox LilycoveCity_ContestLobby_Text_2932C3, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 LilycoveCity_ContestLobby_EventScript_293DB8: @ 8293DB8
-	msgbox LilycoveCity_ContestLobby_Text_2932F1, 4
+	msgbox LilycoveCity_ContestLobby_Text_2932F1, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_293DAA
 	end
 
@@ -378,7 +378,7 @@ LilycoveCity_ContestLobby_EventScript_293DC6: @ 8293DC6
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E14
-	msgbox LilycoveCity_ContestLobby_Text_293237, 4
+	msgbox LilycoveCity_ContestLobby_Text_293237, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293D91
@@ -387,12 +387,12 @@ LilycoveCity_ContestLobby_EventScript_293DC6: @ 8293DC6
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E0A: @ 8293E0A
-	msgbox LilycoveCity_ContestLobby_Text_29343E, 4
+	msgbox LilycoveCity_ContestLobby_Text_29343E, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E14: @ 8293E14
-	msgbox LilycoveCity_ContestLobby_Text_2934A2, 4
+	msgbox LilycoveCity_ContestLobby_Text_2934A2, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -404,36 +404,36 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	applymovement 17, LilycoveCity_ContestLobby_Movement_2725A2
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_293842, 5
+	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EA3
 	goto LilycoveCity_ContestLobby_EventScript_293E5A
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E5A: @ 8293E5A
-	msgbox LilycoveCity_ContestLobby_Text_293558, 4
+	msgbox LilycoveCity_ContestLobby_Text_293558, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E64: @ 8293E64
-	msgbox LilycoveCity_ContestLobby_Text_29367D, 4
+	msgbox LilycoveCity_ContestLobby_Text_29367D, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E6E: @ 8293E6E
-	msgbox LilycoveCity_ContestLobby_Text_29357E, 5
+	msgbox LilycoveCity_ContestLobby_Text_29357E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E87
 	goto LilycoveCity_ContestLobby_EventScript_293E95
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E87: @ 8293E87
-	msgbox LilycoveCity_ContestLobby_Text_2935B1, 4
+	msgbox LilycoveCity_ContestLobby_Text_2935B1, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E95: @ 8293E95
-	msgbox LilycoveCity_ContestLobby_Text_2935E5, 4
+	msgbox LilycoveCity_ContestLobby_Text_2935E5, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_293E87
 	end
 
@@ -444,7 +444,7 @@ LilycoveCity_ContestLobby_EventScript_293EA3: @ 8293EA3
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EF1
-	msgbox LilycoveCity_ContestLobby_Text_29354E, 4
+	msgbox LilycoveCity_ContestLobby_Text_29354E, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293E6E
@@ -453,27 +453,27 @@ LilycoveCity_ContestLobby_EventScript_293EA3: @ 8293EA3
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EE7: @ 8293EE7
-	msgbox LilycoveCity_ContestLobby_Text_293738, 4
+	msgbox LilycoveCity_ContestLobby_Text_293738, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EF1: @ 8293EF1
-	msgbox LilycoveCity_ContestLobby_Text_293792, 4
+	msgbox LilycoveCity_ContestLobby_Text_293792, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EFB: @ 8293EFB
 	lockall
 	setvar VAR_0x8009, 1
-	msgbox LilycoveCity_ContestLobby_Text_2C42F4, 5
+	msgbox LilycoveCity_ContestLobby_Text_2C42F4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F28
-	msgbox LilycoveCity_ContestLobby_Text_2C4332, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4332, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F1E: @ 8293F1E
-	msgbox LilycoveCity_ContestLobby_Text_2C439D, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C439D, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -492,37 +492,37 @@ LilycoveCity_ContestLobby_EventScript_293F28: @ 8293F28
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F64: @ 8293F64
-	msgbox LilycoveCity_ContestLobby_Text_2C43FA, 5
+	msgbox LilycoveCity_ContestLobby_Text_2C43FA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_ContestLobby_EventScript_293F85
-	msgbox LilycoveCity_ContestLobby_Text_2C451B, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C451B, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F85: @ 8293F85
-	msgbox LilycoveCity_ContestLobby_Text_2C444C, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C444C, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_ContestLobby_EventScript_293F8E: @ 8293F8E
-	msgbox LilycoveCity_ContestLobby_Text_2C4573, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4573, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F98: @ 8293F98
-	msgbox LilycoveCity_ContestLobby_Text_2C45E8, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C45E8, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FA2:: @ 8293FA2
-	msgbox LilycoveCity_ContestLobby_Text_2937F9, 2
+	msgbox LilycoveCity_ContestLobby_Text_2937F9, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FAB:: @ 8293FAB
-	msgbox LilycoveCity_ContestLobby_Text_293842, 2
+	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FB4:: @ 8293FB4
-	msgbox LilycoveCity_ContestLobby_Text_29388F, 2
+	msgbox LilycoveCity_ContestLobby_Text_29388F, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FBD:: @ 8293FBD
@@ -533,7 +533,7 @@ LilycoveCity_ContestLobby_EventScript_293FBD:: @ 8293FBD
 LilycoveCity_ContestLobby_EventScript_293FC8: @ 8293FC8
 	lock
 	faceplayer
-	msgbox Text_Pblock1_Talk_0, 4
+	msgbox Text_Pblock1_Talk_0, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293FEE
@@ -542,7 +542,7 @@ LilycoveCity_ContestLobby_EventScript_293FC8: @ 8293FC8
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FEE: @ 8293FEE
-	msgbox Text_Pblock1_Talk_1, 4
+	msgbox Text_Pblock1_Talk_1, MSGBOX_DEFAULT
 	release
 	end
 
@@ -560,15 +560,15 @@ LilycoveCity_ContestLobby_EventScript_293FF8: @ 8293FF8
 	end
 
 LilycoveCity_ContestLobby_EventScript_294028: @ 8294028
-	msgbox LilycoveCity_ContestLobby_Text_293BB4, 4
+	msgbox LilycoveCity_ContestLobby_Text_293BB4, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_294032: @ 8294032
-	msgbox LilycoveCity_ContestLobby_Text_293AF0, 4
+	msgbox LilycoveCity_ContestLobby_Text_293AF0, MSGBOX_DEFAULT
 	giveitem_std ITEM_PECHA_BERRY
 	setflag FLAG_0x921
-	msgbox LilycoveCity_ContestLobby_Text_293B76, 4
+	msgbox LilycoveCity_ContestLobby_Text_293B76, MSGBOX_DEFAULT
 	release
 	end
 
@@ -592,7 +592,7 @@ EventScript_PblockLink:: @ 8294055
 	end
 
 EventScript_PblocLink_Ask: @ 8294092
-	msgbox Text_PblockLink_Ask, 5
+	msgbox Text_PblockLink_Ask, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_PblocLink_TryConnect
 	compare VAR_RESULT, 0
@@ -600,7 +600,7 @@ EventScript_PblocLink_Ask: @ 8294092
 	end
 
 EventScript_PblocLink_NoBerries: @ 82940B1
-	msgbox Text_PblockLink_NoBerries, 4
+	msgbox Text_PblockLink_NoBerries, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -628,17 +628,17 @@ EventScript_PblocLink_TryConnect: @ 82940BB
 	end
 
 EventScript_PblocLink_1Arrived: @ 829411D
-	msgbox Text_PblockLink_1Arrived, 4
+	msgbox Text_PblockLink_1Arrived, MSGBOX_DEFAULT
 	goto EventScript_PblocLink_StartLinkBlending
 	end
 
 EventScript_PblocLink_2Arrived: @ 829412B
-	msgbox Text_PblockLink_2Arrived, 4
+	msgbox Text_PblockLink_2Arrived, MSGBOX_DEFAULT
 	goto EventScript_PblocLink_StartLinkBlending
 	end
 
 EventScript_PblocLink_3Arrived: @ 8294139
-	msgbox Text_PblockLink_3Arrived, 4
+	msgbox Text_PblockLink_3Arrived, MSGBOX_DEFAULT
 	goto EventScript_PblocLink_StartLinkBlending
 	end
 
@@ -659,36 +659,36 @@ EventScript_PblocLink_End: @ 8294160
 	end
 
 EventScript_PblocLink_FullPokeblock: @ 8294162
-	msgbox Text_PblockLink_FullPokeblock, 4
+	msgbox Text_PblockLink_FullPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_NoPokeblock: @ 829416C
-	msgbox Text_PblockLink_NoPokeblock, 4
+	msgbox Text_PblockLink_NoPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_SomeoneNotReady: @ 8294176
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_2781C7, 4
+	msgbox LilycoveCity_ContestLobby_Text_2781C7, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_DifferentSelections: @ 8294183
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_278255, 4
+	msgbox LilycoveCity_ContestLobby_Text_278255, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_CloseLink: @ 8294190
 	special CloseLink
-	msgbox gUnknown_08272D9C, 4
+	msgbox gUnknown_08272D9C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_LinkError: @ 829419D
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, 4
+	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
 	releaseall
 	end
 

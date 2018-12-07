@@ -1,21 +1,22 @@
 #include "global.h"
-#include "trainer_see.h"
+#include "constants/battle_setup.h"
 #include "battle_setup.h"
-#include "pokemon.h"
-#include "sprite.h"
-#include "field_effect.h"
-#include "event_object_movement.h"
-#include "field_player_avatar.h"
-#include "pokenav.h"
-#include "task.h"
-#include "util.h"
-#include "script.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "field_effect.h"
+#include "field_player_avatar.h"
+#include "pokemon.h"
+#include "pokenav.h"
+#include "script.h"
 #include "script_movement.h"
+#include "sprite.h"
+#include "task.h"
+#include "trainer_see.h"
+#include "util.h"
+#include "battle_pyramid.h"
+#include "constants/field_effects.h"
 
-extern bool8 InBattlePyramid(void);
 extern bool32 InTrainerHill(void);
-extern bool8 GetBattlePyramidTrainerFlag(u8 eventObjectId);
 extern bool8 GetTrainerHillTrainerFlag(u8 eventObjectId);
 extern void sub_809BE48(u16 npcId);
 

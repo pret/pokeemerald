@@ -1,26 +1,30 @@
 @ commands
 
-	.macro loadspritegfx param0
+	.macro loadspritegfx tag:req
 	.byte 0x0
-	.2byte \param0
+	.2byte \tag
 	.endm
 
-	.macro unloadspritegfx param0
+	.macro unloadspritegfx tag:req
 	.byte 0x1
-	.2byte \param0
+	.2byte \tag
 	.endm
 
-	.macro createsprite template, priority, argv:vararg
+.macro createsprite template:req, anim_battler:req, subpriority_offset:req, argv:vararg
 	.byte 0x02
 	.4byte \template
-	.byte \priority
+	.if \anim_battler == ANIM_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
 	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
 .Lsprite_\@_1:
 	.2byte \argv
 .Lsprite_\@_2:
 	.endm
 
-	.macro createvisualtask addr, priority, argv:vararg
+	.macro createvisualtask addr:req, priority:req, argv:vararg
 	.byte 0x03
 	.4byte \addr
 	.byte \priority
@@ -30,7 +34,7 @@
 .Lcreatetask_\@_2:
 	.endm
 
-	.macro delay param0
+	.macro delay param0:req
 	.byte 0x4
 	.byte \param0
 	.endm
@@ -51,22 +55,22 @@
 	.byte 0x8
 	.endm
 
-	.macro playse param0
+	.macro playse se:req
 	.byte 0x9
-	.2byte \param0
+	.2byte \se
 	.endm
 
-	.macro monbg battler
+	.macro monbg battler:req
 	.byte 0xa
 	.byte \battler
 	.endm
 
-	.macro clearmonbg battler
+	.macro clearmonbg battler:req
 	.byte 0xb
 	.byte \battler
 	.endm
 
-	.macro setalpha eva, evb
+	.macro setalpha eva:req, evb:req
 	.byte 0x0C
 	.2byte ((\evb) << 8) | (\eva)
 	.endm
@@ -75,7 +79,7 @@
 	.byte 0xd
 	.endm
 
-	.macro call param0
+	.macro call param0:req
 	.byte 0xe
 	.4byte \param0
 	.endm
@@ -84,32 +88,32 @@
 	.byte 0xf
 	.endm
 
-	.macro setarg param0, param1
+	.macro setarg param0:req, param1:req
 	.byte 0x10
 	.byte \param0
 	.2byte \param1
 	.endm
 
-	.macro choosetwoturnanim param0, param1
+	.macro choosetwoturnanim param0:req, param1:req
 	.byte 0x11
 	.4byte \param0
 	.4byte \param1
 	.endm
 
-	.macro jumpifmoveturn param0, param1
+	.macro jumpifmoveturn param0:req, ptr:req
 	.byte 0x12
 	.byte \param0
-	.4byte \param1
+	.4byte \ptr
 	.endm
 
-	.macro goto param0
+	.macro goto ptr:req
 	.byte 0x13
-	.4byte \param0
+	.4byte \ptr
 	.endm
 
-	.macro fadetobg param0
+	.macro fadetobg bg:req
 	.byte 0x14
-	.byte \param0
+	.byte \bg
 	.endm
 
 	.macro restorebg
@@ -124,52 +128,52 @@
 	.byte 0x17
 	.endm
 
-	.macro changebg param0
+	.macro changebg bg:req
 	.byte 0x18
-	.byte \param0
+	.byte \bg
 	.endm
 
-	.macro playsewithpan param0, param1
+	.macro playsewithpan se:req, pan:req
 	.byte 0x19
-	.2byte \param0
-	.byte \param1
+	.2byte \se
+	.byte \pan
 	.endm
 
-	.macro setpan param0
+	.macro setpan pan:req
 	.byte 0x1a
-	.byte \param0
+	.byte \pan
 	.endm
 
-	.macro panse_1B param0, param1, param2, param3, param4
+	.macro panse_1B se:req, param1:req, param2:req, param3:req, param4
 	.byte 0x1b
-	.2byte \param0
+	.2byte \se
 	.byte \param1
 	.byte \param2
 	.byte \param3
 	.byte \param4
 	.endm
 
-	.macro loopsewithpan param0, param1, param2, param3
+	.macro loopsewithpan se:req, param1:req, param2:req, param3:req
 	.byte 0x1c
-	.2byte \param0
+	.2byte \se
 	.byte \param1
 	.byte \param2
 	.byte \param3
 	.endm
 
-	.macro waitplaysewithpan param0, param1, param2
+	.macro waitplaysewithpan se:req, param1:req, param2:req
 	.byte 0x1d
-	.2byte \param0
+	.2byte \se
 	.byte \param1
 	.byte \param2
 	.endm
 
-	.macro setbldcnt param0
+	.macro setbldcnt param0:req
 	.byte 0x1e
 	.2byte \param0
 	.endm
 
-	.macro createsoundtask addr, argv:vararg
+	.macro createsoundtask addr:req, argv:vararg
 	.byte 0x1F
 	.4byte \addr
 	.byte (.Lcreatetask_1F_\@_2 - .Lcreatetask_1F_\@_1) / 2
@@ -182,54 +186,54 @@
 	.byte 0x20
 	.endm
 
-	.macro jumpargeq param0, param1, param2
+	.macro jumpargeq param0:req, param1:req, ptr:req
 	.byte 0x21
 	.byte \param0
 	.2byte \param1
-	.4byte \param2
+	.4byte \ptr
 	.endm
 
-	.macro monbg_22 battler
+	.macro monbg_22 battler:req
 	.byte 0x22
 	.byte \battler
 	.endm
 
-	.macro clearmonbg_23 battler
+	.macro clearmonbg_23 battler:req
 	.byte 0x23
 	.byte \battler
 	.endm
 
-	.macro jumpifcontest param0
+	.macro jumpifcontest ptr:req
 	.byte 0x24
-	.4byte \param0
+	.4byte \ptr
 	.endm
 
-	.macro fadetobgfromset param0, param1, param2
+	.macro fadetobgfromset param0:req, param1:req, param2:req
 	.byte 0x25
 	.byte \param0
 	.byte \param1
 	.byte \param2
 	.endm
 
-	.macro panse_26 param0, param1, param2, param3, param4
+	.macro panse_26 se:req, param1:req, param2:req, param3:req, param4
 	.byte 0x26
-	.2byte \param0
+	.2byte \se
 	.byte \param1
 	.byte \param2
 	.byte \param3
 	.byte \param4
 	.endm
 
-	.macro panse_27 param0, param1, param2, param3, param4
+	.macro panse_27 se:req, param1:req, param2:req, param3:req, param4
 	.byte 0x27
-	.2byte \param0
+	.2byte \se
 	.byte \param1
 	.byte \param2
 	.byte \param3
 	.byte \param4
 	.endm
 
-	.macro monbgprio_28 battler
+	.macro monbgprio_28 battler:req
 	.byte 0x28
 	.byte \battler
 	.endm
@@ -238,27 +242,27 @@
 	.byte 0x29
 	.endm
 
-	.macro monbgprio_2A battler
+	.macro monbgprio_2A battler:req
 	.byte 0x2a
 	.byte \battler
 	.endm
 
-	.macro invisible battler
+	.macro invisible battler:req
 	.byte 0x2b
 	.byte \battler
 	.endm
 
-	.macro visible battler
+	.macro visible battler:req
 	.byte 0x2c
 	.byte \battler
 	.endm
 
-	.macro doublebattle_2D battler
+	.macro doublebattle_2D battler:req
 	.byte 0x2d
 	.byte \battler
 	.endm
 
-	.macro doublebattle_2E battler
+	.macro doublebattle_2E battler:req
 	.byte 0x2e
 	.byte \battler
 	.endm
@@ -268,14 +272,14 @@
 	.endm
 	
 @ useful macros
-	.macro jumpreteq value, ptr
+	.macro jumpreteq value:req, ptr:req
 	jumpargeq ARG_RET_ID, \value, \ptr
 	.endm
 	
-	.macro jumprettrue ptr
+	.macro jumprettrue ptr:req
 	jumpreteq TRUE, \ptr
 	.endm
 	
-	.macro jumpretfalse ptr
+	.macro jumpretfalse ptr:req
 	jumpreteq FALSE, \ptr
 	.endm

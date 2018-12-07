@@ -39,8 +39,8 @@ EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
 
 EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
 	playbgm MUS_DAIGO, 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, 4
-	trainerbattle 3, TRAINER_WALLACE, 0, EverGrandeCity_ChampionsRoom_Text_228EAC
+	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_228EAC
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A61
 	end
 
@@ -49,7 +49,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
 	setmetatile 6, 1, 838, 0
 	setmetatile 6, 2, 839, 0
 	special DrawWholeMapView
-	msgbox EverGrandeCity_ChampionsRoom_Text_228F66, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_228F66, MSGBOX_DEFAULT
 	closemessage
 	playse SE_DOOR
 	checkplayergender
@@ -75,7 +75,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228AC1:: @ 8228AC1
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6
-	msgbox EverGrandeCity_ChampionsRoom_Text_2290CA, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2290CA, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_272598
@@ -83,12 +83,12 @@ EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_27259A
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_228C12
-	msgbox EverGrandeCity_ChampionsRoom_Text_22910B, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_22910B, MSGBOX_DEFAULT
 	goto EverGrandeCity_ChampionsRoom_EventScript_228B30
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228AFB:: @ 8228AFB
-	msgbox EverGrandeCity_ChampionsRoom_Text_229152, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_229152, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_272598
@@ -96,7 +96,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228AFB:: @ 8228AFB
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_27259A
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_228C12
-	msgbox EverGrandeCity_ChampionsRoom_Text_2291A2, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2291A2, MSGBOX_DEFAULT
 	goto EverGrandeCity_ChampionsRoom_EventScript_228B30
 	end
 
@@ -107,15 +107,15 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	waitmovement 0
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725A8
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_2291E6, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2291E6, MSGBOX_DEFAULT
 	call EverGrandeCity_ChampionsRoom_EventScript_272184
-	msgbox EverGrandeCity_ChampionsRoom_Text_22934D, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_22934D, MSGBOX_DEFAULT
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_2725A6
 	waitmovement 0
 	delay 20
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_2725AA
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_229399, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_229399, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3B
@@ -126,7 +126,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	delay 20
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725AA
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, MSGBOX_DEFAULT
 	checkplayergender
 	compare VAR_RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BEB
@@ -136,18 +136,18 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3F
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_228C20
 	waitmovement 0
-	setflag FLAG_0x30D
+	setflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 255, 7, 16
 	waitstate
 	releaseall
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228BEB:: @ 8228BEB
-	msgbox EverGrandeCity_ChampionsRoom_Text_229479, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_229479, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228BF4:: @ 8228BF4
-	msgbox EverGrandeCity_ChampionsRoom_Text_2294F5, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2294F5, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228BFD:: @ 8228BFD

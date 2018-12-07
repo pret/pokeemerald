@@ -1,6 +1,11 @@
 #ifndef GUARD_STRING_UTIL_H
 #define GUARD_STRING_UTIL_H
 
+extern u8 gStringVar1[];
+extern u8 gStringVar2[];
+extern u8 gStringVar3[];
+extern u8 gStringVar4[];
+
 enum StringConvertMode
 {
     STR_CONV_MODE_LEFT_ALIGN,
@@ -34,7 +39,6 @@ u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color);
 bool32 IsStringJapanese(u8 *str);
 bool32 sub_800924C(u8 *str, s32 n);
 u8 GetExtCtrlCodeLength(u8 code);
-static const u8 *SkipExtCtrlCode(const u8 *s);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 void ConvertInternationalString(u8 *s, u8 language);
 void StripExtCtrlCodes(u8 *str);

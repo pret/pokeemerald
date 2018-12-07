@@ -4,9 +4,9 @@ LilycoveCity_CoveLilyMotel_2F_MapScripts:: @ 82186D2
 LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
 	lock
 	faceplayer
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 0, LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9
-	checkflag FLAG_0x002
+	checkflag FLAG_TEMP_2
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
 	specialvar VAR_RESULT, sub_80C08E4
 	compare VAR_RESULT, 1
@@ -15,11 +15,11 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9:: @ 82186F9
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218774, 4
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218774, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218702:: @ 8218702
-	setflag FLAG_0x002
+	setflag FLAG_TEMP_2
 	playfanfare MUS_FANFA4
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
@@ -35,23 +35,23 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_21870F:: @ 821870F
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218720:: @ 8218720
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_2188D6, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_2188D6, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218729:: @ 8218729
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_21892B, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_21892B, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218732:: @ 8218732
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_21896C, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_21896C, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_21873B:: @ 821873B
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218A21, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218A21, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218744:: @ 8218744
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218A5B, 2
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218A5B, MSGBOX_NPC
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_21874D:: @ 821874D
@@ -59,14 +59,14 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_21874D:: @ 821874D
 	faceplayer
 	checkflag FLAG_0x1CE
 	goto_eq LilycoveCity_CoveLilyMotel_2F_EventScript_21876A
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218ACF, 4
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218ACF, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x1CE
 	release
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_21876A:: @ 821876A
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218C33, 4
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218C33, MSGBOX_DEFAULT
 	release
 	end
 

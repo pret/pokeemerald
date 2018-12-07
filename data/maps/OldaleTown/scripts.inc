@@ -28,11 +28,11 @@ OldaleTown_EventScript_1E8EDE:: @ 81E8EDE
 	return
 
 OldaleTown_EventScript_1E8EEA:: @ 81E8EEA
-	msgbox OldaleTown_Text_1E94DA, 3
+	msgbox OldaleTown_Text_1E94DA, MSGBOX_SIGN
 	end
 
 OldaleTown_EventScript_1E8EF3:: @ 81E8EF3
-	msgbox OldaleTown_Text_1E918E, 2
+	msgbox OldaleTown_Text_1E918E, MSGBOX_NPC
 	end
 
 OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
@@ -40,11 +40,11 @@ OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 	faceplayer
 	checkflag FLAG_0x084
 	goto_eq OldaleTown_EventScript_1E8FB9
-	checkflag FLAG_0x001
+	checkflag FLAG_TEMP_1
 	goto_eq OldaleTown_EventScript_1E8FB9
-	setflag FLAG_0x001
+	setflag FLAG_TEMP_1
 	playbgm MUS_TSURETEK, 0
-	msgbox OldaleTown_Text_1E91C0, 4
+	msgbox OldaleTown_Text_1E91C0, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 1, OldaleTown_EventScript_1E8F47
@@ -74,23 +74,23 @@ OldaleTown_EventScript_1E8F75:: @ 81E8F75
 	end
 
 OldaleTown_EventScript_1E8F8C:: @ 81E8F8C
-	msgbox OldaleTown_Text_1E91FD, 4
+	msgbox OldaleTown_Text_1E91FD, MSGBOX_DEFAULT
 	giveitem_std ITEM_POTION
 	compare VAR_RESULT, 0
 	goto_eq OldaleTown_EventScript_1E8FC3
-	msgbox OldaleTown_Text_1E92AF, 4
+	msgbox OldaleTown_Text_1E92AF, MSGBOX_DEFAULT
 	setflag FLAG_0x084
 	fadedefaultbgm
 	release
 	end
 
 OldaleTown_EventScript_1E8FB9:: @ 81E8FB9
-	msgbox OldaleTown_Text_1E92AF, 4
+	msgbox OldaleTown_Text_1E92AF, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_EventScript_1E8FC3:: @ 81E8FC3
-	msgbox gUnknown_08272AD0, 4
+	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
 	fadedefaultbgm
 	release
 	end
@@ -197,7 +197,7 @@ OldaleTown_EventScript_1E901F:: @ 81E901F
 	faceplayer
 	checkflag FLAG_0x074
 	goto_eq OldaleTown_EventScript_1E9066
-	msgbox OldaleTown_Text_1E939A, 4
+	msgbox OldaleTown_Text_1E939A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, OldaleTown_Movement_2725A2
 	waitmovement 0
@@ -209,7 +209,7 @@ OldaleTown_EventScript_1E903F:: @ 81E903F
 	applymovement 255, OldaleTown_Movement_1E9182
 	applymovement 3, OldaleTown_Movement_1E9185
 	waitmovement 0
-	msgbox OldaleTown_Text_1E9313, 4
+	msgbox OldaleTown_Text_1E9313, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, OldaleTown_Movement_1E918B
 	waitmovement 0
@@ -217,7 +217,7 @@ OldaleTown_EventScript_1E903F:: @ 81E903F
 	end
 
 OldaleTown_EventScript_1E9066:: @ 81E9066
-	msgbox OldaleTown_Text_1E93F8, 4
+	msgbox OldaleTown_Text_1E93F8, MSGBOX_DEFAULT
 	release
 	end
 
@@ -268,12 +268,12 @@ OldaleTown_EventScript_1E90E6:: @ 81E90E6
 	end
 
 OldaleTown_EventScript_1E90FE:: @ 81E90FE
-	msgbox OldaleTown_Text_1E9462, 4
+	msgbox OldaleTown_Text_1E9462, MSGBOX_DEFAULT
 	goto OldaleTown_EventScript_1E911A
 	end
 
 OldaleTown_EventScript_1E910C:: @ 81E910C
-	msgbox OldaleTown_Text_1E948A, 4
+	msgbox OldaleTown_Text_1E948A, MSGBOX_DEFAULT
 	goto OldaleTown_EventScript_1E911A
 	end
 
@@ -287,7 +287,7 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 	waitmovement 0
 	removeobject 4
 	setvar VAR_0x40C7, 2
-	setflag FLAG_0x3D3
+	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	releaseall
 	end
 

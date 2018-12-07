@@ -1,20 +1,19 @@
 #include "global.h"
-#include "constants/songs.h"
 #include "braille_puzzles.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_effect.h"
 #include "gpu_regs.h"
-#include "gba/io_reg.h"
 #include "main.h"
+#include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "overworld.h"
 #include "rom6.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/songs.h"
 
 // structures
 struct FlashStruct
@@ -69,8 +68,8 @@ static const u16 gCaveTransitionPalette_Black[] = INCBIN_U16("graphics/misc/cave
 
 static const u16 gUnknown_085B2890[] = INCBIN_U16("graphics/misc/85B2890.gbapal");
 static const u16 gUnknown_085B28A0[] = INCBIN_U16("graphics/misc/85B28A0.gbapal");
-static const u16 gCaveTransitionTilemap[] = INCBIN_U16("graphics/misc/cave_transition_map.bin.lz");
-static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transition.4bpp.lz");
+static const u32 gCaveTransitionTilemap[] = INCBIN_U32("graphics/misc/cave_transition_map.bin.lz");
+static const u32 gCaveTransitionTiles[] = INCBIN_U32("graphics/misc/cave_transition.4bpp.lz");
 
 // text
 bool8 SetUpFieldMove_Flash(void)
@@ -156,7 +155,7 @@ void c2_change_map(void)
 static bool8 sub_8137304(void)
 {
     u8 i;
-    u8 v0 = get_map_light_from_warp0();
+    u8 v0 = GetLastUsedWarpMapType();
     u8 v1 = Overworld_GetMapTypeOfSaveblockLocation();
 
     for (i = 0; gUnknown_085B27C8[i].unk0; i++)

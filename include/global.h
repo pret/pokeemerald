@@ -61,11 +61,6 @@
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
-
 // There are many quirks in the source code which have overarching behavioral differences from
 // a number of other files. For example, diploma.c seems to declare rodata before each use while
 // other files declare out of order and must be at the beginning. There are also a number of
@@ -119,24 +114,26 @@ enum LanguageId
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
 // capacities of various saveblock objects
-#define DAYCARE_MON_COUNT   2
-#define POKEBLOCKS_COUNT    40
-#define EVENT_OBJECTS_COUNT   16
+#define DAYCARE_MON_COUNT     2
+#define POKEBLOCKS_COUNT     40
+#define EVENT_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT   128
 #define FLAGS_COUNT         300
 #define VARS_COUNT          256
-#define MAIL_COUNT          16
-#define SECRET_BASES_COUNT  20
-#define TV_SHOWS_COUNT      25
-#define POKE_NEWS_COUNT     16
-#define PC_ITEMS_COUNT      50
-#define BAG_ITEMS_COUNT     30
-#define BAG_KEYITEMS_COUNT  30
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT      64
-#define BAG_BERRIES_COUNT   46
+#define MAIL_COUNT           16
+#define SECRET_BASES_COUNT   20
+#define TV_SHOWS_COUNT       25
+#define POKE_NEWS_COUNT      16
+#define PC_ITEMS_COUNT       50
+#define BAG_ITEMS_COUNT      30
+#define BAG_KEYITEMS_COUNT   30
+#define BAG_POKEBALLS_COUNT  16
+#define BAG_TMHM_COUNT       64
+#define BAG_BERRIES_COUNT    46
+#define EVENT_OBJECT_TEMPLATES_COUNT 64
 
 #define PYRAMID_BAG_ITEMS_COUNT 10
+#define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
 
 // string lengths
 #define ITEM_NAME_LENGTH    14
@@ -275,26 +272,6 @@ struct BerryCrush
     u32 unk;
 };
 
-struct UnknownSaveBlock2Struct
-{
-    u8 field_0;
-    u8 field_1;
-    u8 field_2[2];
-    u8 field_4[8];
-    u8 field_C[16];
-    u16 field_1C[6];
-    u16 field_28[6];
-    u8 field_34[176];
-    u8 field_E4;
-    u8 field_E5;
-    u8 field_E6;
-    u8 field_E7;
-    u8 field_E8;
-    u8 field_E9;
-    u8 field_EA;
-    u8 field_EB;
-}; // sizeof = 0xEC
-
 struct ApprenticeMon
 {
     u16 species;
@@ -308,12 +285,12 @@ struct Apprentice
     u8 lvlMode:2; // + 1
     u8 field_1;
     u8 number;
-    struct ApprenticeMon monData[3];
+    struct ApprenticeMon party[3];
     u16 easyChatWords[6];
     u8 playerId[4];
     u8 playerName[PLAYER_NAME_LENGTH];
     u8 language;
-    u32 unk40;
+    u32 checksum;
 };
 
 struct UnknownPokemonStruct
@@ -345,18 +322,31 @@ struct UnknownPokemonStruct
 
 struct EmeraldBattleTowerRecord
 {
-    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/ u8 trainerClass;
+    /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 facilityClass;
     /*0x02*/ u16 winStreak;
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
-    /*0x10*/ struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/ u8 filler_1c[0x18];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 speechWon[6];
+    /*0x28*/ u16 speechLost[6];
     /*0x34*/ struct UnknownPokemonStruct party[4];
     /*0xE4*/ u8 language;
     /*0xE8*/ u32 checksum;
+};
+
+struct BattleTowerEReaderTrainer
+{
+    /*0x00*/ u8 unk0;
+    /*0x01*/ u8 facilityClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 farewellPlayerLost[6];
+    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0xB8*/ u32 checksum;
 };
 
 struct FrontierMonData
@@ -386,18 +376,14 @@ struct BattleDomeTrainer
 
 struct BattleFrontier
 {
-    /*0x64C*/ struct EmeraldBattleTowerRecord battleTower;
-    /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
+    /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
+    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[5]; // From record mixing.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
-    /*0xBD8*/ u8 field_BD8[11];
-    /*0xBE3*/ u8 field_BE3[8];
+    /*0xBD8*/ u8 field_BD8[PLAYER_NAME_LENGTH + 1];
+    /*0xBE3*/ u8 field_BE0[POKEMON_NAME_LENGTH + 1];
     /*0xBEB*/ u8 field_BEB;
-    /*0xBEC*/ u8 filler_BEC[16];
-    /*0xBFC*/ u16 ecwords_BFC[6];
-    /*0xC08*/ u16 ecwords_C08[6];
-    /*0xC14*/ u16 ecwords_C14[6];
-    /*0xC20*/ u8 filler_C20[0x88];
+    /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 lvlMode:2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a:1;   // 0x4
@@ -406,16 +392,16 @@ struct BattleFrontier
     /*0xCA9*/ u8 field_CA9_d:1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e:1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f:1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[3];
+    /*0xCAA*/ u16 selectedPartyMons[3];
     /*0xCB0*/ u16 field_CB0;
-    /*0xCB2*/ u16 field_CB2;
+    /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
     /*0xCB4*/ u16 field_CB4[20];
     /*0xCDC*/ u32 field_CDC;
-    /*0xCE0*/ u16 field_CE0[4][2];
-    /*0xCF0*/ u16 field_CF0[2];
-    /*0xCF4*/ u16 field_CF4[2];
-    /*0xCF8*/ u16 field_CF8[2];
-    /*0xCFC*/ u16 field_CFC[5];
+    /*0xCE0*/ u16 towerWinStreaks[4][2];
+    /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
+    /*0xD00*/ u16 field_D00;
+    /*0xD02*/ u16 field_D02;
+    /*0xD04*/ u16 field_D04;
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 field_D08_0:1;
@@ -429,47 +415,44 @@ struct BattleFrontier
     /*0xD09*/ u8 filler_D09;
     /*0xD0A*/ u8 field_D0A;
     /*0xD0B*/ u8 field_D0B;
-    /*0xD0C*/ u16 field_D0C[2][2];
-    /*0xD14*/ u16 field_D14[2][2];
-    /*0xD1C*/ u16 field_D1C[2][2];
+    /*0xD0C*/ u16 domeWinStreaks[2][2];
+    /*0xD14*/ u16 domeRecordWinStreaks[2][2];
+    /*0xD1C*/ u16 domeTotalChampionships[2][2];
     /*0xD24*/ struct BattleDomeTrainer domeTrainers[DOME_TOURNAMENT_TRAINERS_COUNT];
-    /*0xD64*/ u16 domeMonId[DOME_TOURNAMENT_TRAINERS_COUNT][3];
-    /*0xD64*/ u16 field_DC4[2];
-    /*0xDC8*/ u16 field_DC8[2][2];
-    /*0xDD0*/ u16 field_DD0[2][2];
+    /*0xD64*/ u16 domeMonIds[DOME_TOURNAMENT_TRAINERS_COUNT][3];
+    /*0xDC4*/ u16 field_DC4;
+    /*0xDC6*/ u16 field_DC6;
+    /*0xDC8*/ u16 palaceWinStreaks[2][2];
+    /*0xDD0*/ u16 palaceRecordWinStreaks[2][2];
     /*0xDD8*/ u16 field_DD8;
-    /*0xDDA*/ u16 field_DDA[2];
-    /*0xDDE*/ u16 field_DDE[2];
-    /*0xDE2*/ u16 field_DE2[2][2];
-    /*0xDEA*/ u16 field_DEA[2];
-    /*0xDEE*/ u16 field_DEE;
-    /*0xDF0*/ u16 field_DF0;
-    /*0xDF2*/ u16 field_DF2;
-    /*0xDF4*/ u16 field_DF4;
-    /*0xDF6*/ u16 field_DF6;
-    /*0xDF8*/ u16 field_DF8;
-    /*0xDFA*/ u16 field_DFA;
-    /*0xDFC*/ u16 field_DFC;
-    /*0xDFE*/ u16 field_DFE;
-    /*0xE00*/ u16 field_E00;
+    /*0xDDA*/ u16 arenaWinStreaks[2];
+    /*0xDDE*/ u16 arenaRecordStreaks[2];
+    /*0xDE2*/ u16 factoryWinStreaks[2][2];
+    /*0xDEA*/ u16 factoryRecordWinStreaks[2][2];
+    /*0xDF6*/ u16 factoryRentsCount[2][2];
+    /*0xDFA*/ u16 factoryRecordRentsCount[2][2];
     /*0xE02*/ u16 field_E02;
-    /*0xE04*/ u16 field_E04[2];
-    /*0xE08*/ u16 field_E08[9];
-    /*0xE1A*/ u16 field_E1A[2];
-    /*0xE1E*/ u16 field_E1E[7];
+    /*0xE04*/ u16 pikeWinStreaks[2];
+    /*0xE08*/ u16 pikeRecordStreaks[2];
+    /*0xE0C*/ u16 pikeTotalStreaks[2];
+    /*0xE10*/ u8 field_E10_1:3;
+    /*0xE10*/ u8 field_E10_2:4;
+    /*0xE10*/ u8 field_E10_3:1;
+    /*0xE12*/ u16 field_E12[3];
+    /*0xE18*/ u16 field_E18;
+    /*0xE1A*/ u16 pyramidWinStreaks[2];
+    /*0xE1E*/ u16 pyramidRecordStreaks[2];
+    /*0xE22*/ u16 field_E22[4];
+    /*0xE2A*/ u8 field_E2A;
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0xE58*/ u16 field_E58;
+    /*0xE68*/ u8 field_E68;
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
     /*0xE70*/ struct Struct_field_E70 field_E70[6];
-    /*0xEB8*/ u16 frontierBattlePoints;
-    /*0xEBA*/ u8 field_EBA;
-    /*0xEBB*/ u8 field_EBB;
-    /*0xEBC*/ u8 field_EBC;
-    /*0xEBD*/ u8 field_EBD;
-    /*0xEBE*/ u8 field_EBE;
-    /*0xEBF*/ u8 field_EBF;
+    /*0xEB8*/ u16 battlePoints;
+    /*0xEBA*/ u16 field_EBA;
+    /*0xEBC*/ u32 battlesCount;
     /*0xEC0*/ u16 field_EC0[16];
     /*0xEE0*/ u8 field_EE0;
     /*0xEE1*/ u8 field_EE1[2][PLAYER_NAME_LENGTH + 1];
@@ -502,6 +485,24 @@ struct PlayersApprentice
     /*0xB8*/ struct Sav2_B8 field_B8[9];
 };
 
+struct RankingHall1P
+{
+    u8 id[4];
+    u16 winStreak;
+    u8 name[PLAYER_NAME_LENGTH + 1];
+    u8 language;
+};
+
+struct RankingHall2P
+{
+    u8 id1[4];
+    u8 id2[4];
+    u16 winStreak;
+    u8 name1[PLAYER_NAME_LENGTH + 1];
+    u8 name2[PLAYER_NAME_LENGTH + 1];
+    u8 language;
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -526,12 +527,13 @@ struct SaveBlock2
     /*0xA8*/ u32 field_A8;
     /*0xAC*/ u32 encryptionKey;
     /*0xB0*/ struct PlayersApprentice playerApprentice;
-    /*0xDC*/ struct Apprentice apprentices[4];
+    /*0xDC*/ struct Apprentice apprentices[4]; // From record mixing.
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
-    /*0x21C*/ u8 field_21C[1032];
-    /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
+    /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][2][3]; // From record mixing.
+    /*0x57C*/ struct RankingHall2P hallRecords2P[2][3]; // From record mixing.
+    /*0x624*/ u16 contestLinkResults[5][4]; // 4 positions for 5 categories.
     /*0x64C*/ struct BattleFrontier frontier;
 }; // sizeof=0xF2C
 
@@ -901,7 +903,7 @@ struct SaveBlock1
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[100];
     /*0xA30*/ struct EventObject eventObjects[EVENT_OBJECTS_COUNT];
-    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[64];
+    /*0xC70*/ struct EventObjectTemplate eventObjectTemplates[EVENT_OBJECT_TEMPLATES_COUNT];
     /*0x1270*/ u8 flags[FLAGS_COUNT];
     /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
@@ -975,14 +977,5 @@ struct UnkStruct_8054FF8
     struct MapPosition sub;
     u16 field_C;
 };
-
-struct Bitmap           // TODO: Find a better spot for this
-{
-    u8* pixels;
-    u32 width:16;
-    u32 height:16;
-};
-
-extern u8 gReservedSpritePaletteCount;
 
 #endif // GUARD_GLOBAL_H

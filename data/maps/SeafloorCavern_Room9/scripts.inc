@@ -12,27 +12,27 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	applymovement 255, SeafloorCavern_Room9_Movement_23505C
 	waitmovement 0
 	playbgm MUS_AQA_0, 0
-	msgbox SeafloorCavern_Room9_Text_23505F, 4
+	msgbox SeafloorCavern_Room9_Text_23505F, MSGBOX_DEFAULT
 	closemessage
 	addobject VAR_0x8004
 	applymovement 255, SeafloorCavern_Room9_Movement_2725A4
 	waitmovement 0
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_23502A
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_23507C, 4
+	msgbox SeafloorCavern_Room9_Text_23507C, MSGBOX_DEFAULT
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A6
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_2350A6, 4
+	msgbox SeafloorCavern_Room9_Text_2350A6, MSGBOX_DEFAULT
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_27259E
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_23512C, 4
-	trainerbattle 3, TRAINER_ARCHIE, 0, SeafloorCavern_Room9_Text_2351BC
-	msgbox SeafloorCavern_Room9_Text_2351E5, 4
+	msgbox SeafloorCavern_Room9_Text_23512C, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_ARCHIE, SeafloorCavern_Room9_Text_2351BC
+	msgbox SeafloorCavern_Room9_Text_2351E5, MSGBOX_DEFAULT
 	setweather 0
 	doweather
 	special sub_80B05B4
 	waitstate
-	msgbox SeafloorCavern_Room9_Text_235279, 4
+	msgbox SeafloorCavern_Room9_Text_235279, MSGBOX_DEFAULT
 	special WaitWeather
 	waitstate
 	setvar VAR_RESULT, 1
@@ -80,21 +80,21 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	setvar VAR_0x8005, 3
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 5
-	msgbox SeafloorCavern_Room9_Text_2352A7, 4
+	msgbox SeafloorCavern_Room9_Text_2352A7, MSGBOX_DEFAULT
 	playse SE_PC_LOGIN
 	applymovement 255, SeafloorCavern_Room9_Movement_2725A4
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_2352F6, 4
+	msgbox SeafloorCavern_Room9_Text_2352F6, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_235035
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_23532B, 4
+	msgbox SeafloorCavern_Room9_Text_23532B, MSGBOX_DEFAULT
 	closemessage
 	playse SE_PC_OFF
 	delay 20
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725AA
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_23546F, 4
+	msgbox SeafloorCavern_Room9_Text_23546F, MSGBOX_DEFAULT
 	closemessage
 	addobject VAR_0x8005
 	addobject VAR_0x8006
@@ -105,41 +105,41 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	waitmovement 0
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A4
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_2354F0, 4
+	msgbox SeafloorCavern_Room9_Text_2354F0, MSGBOX_DEFAULT
 	playse SE_PIN
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_272598
 	waitmovement 0
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_27259A
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_2355C2, 4
-	msgbox SeafloorCavern_Room9_Text_235692, 4
+	msgbox SeafloorCavern_Room9_Text_2355C2, MSGBOX_DEFAULT
+	msgbox SeafloorCavern_Room9_Text_235692, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8005, SeafloorCavern_Room9_Movement_235054
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_23503A
 	waitmovement 0
-	msgbox SeafloorCavern_Room9_Text_235723, 4
+	msgbox SeafloorCavern_Room9_Text_235723, MSGBOX_DEFAULT
 	setvar VAR_0x407B, 1
 	setvar VAR_0x405E, 1
-	clearflag FLAG_0x3CD
-	clearflag FLAG_0x33A
-	clearflag FLAG_0x33B
-	clearflag FLAG_0x356
-	clearflag FLAG_0x3E6
-	clearflag FLAG_0x3E5
-	setflag FLAG_0x347
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON
+	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE
+	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
-	clearflag FLAG_0x3B0
-	clearflag FLAG_0x3B1
+	clearflag FLAG_HIDE_ROUTE_128_ARCHIE
+	clearflag FLAG_HIDE_ROUTE_128_MAXIE
 	setflag FLAG_SYS_WEATHER_CTRL
 	setflag FLAG_0x081
-	setflag FLAG_0x3C7
+	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
 	setvar VAR_0x40C6, 2
 	setvar VAR_0x40A2, 1
-	setflag FLAG_0x33C
-	setflag FLAG_0x33D
-	setflag FLAG_0x33F
-	setflag FLAG_0x35B
-	setflag FLAG_0x3B2
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_1
+	setflag FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS
 	setflag FLAG_SPECIAL_FLAG_0x4000
 	warp MAP_ROUTE128, 255, 38, 22
 	waitstate

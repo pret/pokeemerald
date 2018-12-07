@@ -4,13 +4,13 @@ BattleFrontier_OutsideWest_MapScripts:: @ 823D3E1
 
 BattleFrontier_OutsideWest_MapScript1_23D3E7: @ 823D3E7
 	setvar VAR_0x40BC, 0
-	setflag FLAG_0x396
+	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D3F0:: @ 823D3F0
 	lock
 	faceplayer
-	msgbox BattleFrontier_OutsideWest_Text_23D808, 4
+	msgbox BattleFrontier_OutsideWest_Text_23D808, MSGBOX_DEFAULT
 	checkitem ITEM_SS_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D44E
@@ -29,15 +29,15 @@ BattleFrontier_OutsideWest_EventScript_23D416:: @ 823D416
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D44E:: @ 823D44E
-	msgbox BattleFrontier_OutsideWest_Text_23D842, 4
+	msgbox BattleFrontier_OutsideWest_Text_23D842, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
-	msgbox BattleFrontier_OutsideWest_Text_23D8F2, 5
+	msgbox BattleFrontier_OutsideWest_Text_23D8F2, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
-	msgbox BattleFrontier_OutsideWest_Text_23D94B, 4
+	msgbox BattleFrontier_OutsideWest_Text_23D94B, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
@@ -45,10 +45,10 @@ BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D483:: @ 823D483
-	msgbox BattleFrontier_OutsideWest_Text_23D90E, 5
+	msgbox BattleFrontier_OutsideWest_Text_23D90E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
-	msgbox BattleFrontier_OutsideWest_Text_23D94B, 4
+	msgbox BattleFrontier_OutsideWest_Text_23D94B, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
@@ -72,32 +72,32 @@ BattleFrontier_OutsideWest_EventScript_23D4BA:: @ 823D4BA
 	return
 
 BattleFrontier_OutsideWest_EventScript_23D4D8:: @ 823D4D8
-	msgbox BattleFrontier_OutsideWest_Text_23D929, 4
+	msgbox BattleFrontier_OutsideWest_Text_23D929, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D4E2:: @ 823D4E2
-	msgbox BattleFrontier_OutsideWest_Text_23D6F7, 3
+	msgbox BattleFrontier_OutsideWest_Text_23D6F7, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D4EB:: @ 823D4EB
-	msgbox BattleFrontier_OutsideWest_Text_23D737, 3
+	msgbox BattleFrontier_OutsideWest_Text_23D737, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D4F4:: @ 823D4F4
-	msgbox BattleFrontier_OutsideWest_Text_23D772, 3
+	msgbox BattleFrontier_OutsideWest_Text_23D772, MSGBOX_SIGN
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D4FD:: @ 823D4FD
-	msgbox BattleFrontier_OutsideWest_Text_23D7A6, 2
+	msgbox BattleFrontier_OutsideWest_Text_23D7A6, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D506:: @ 823D4FD
-	msgbox BattleFrontier_OutsideWest_Text_23D9DD, 2
+	msgbox BattleFrontier_OutsideWest_Text_23D9DD, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D50F:: @ 823D50F
-	msgbox BattleFrontier_OutsideWest_Text_23D99C, 2
+	msgbox BattleFrontier_OutsideWest_Text_23D99C, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D518:: @ 823D518
@@ -112,7 +112,7 @@ BattleFrontier_OutsideWest_EventScript_23D518:: @ 823D518
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D52D:: @ 823D52D
-	msgbox BattleFrontier_OutsideWest_Text_23DABF, 2
+	msgbox BattleFrontier_OutsideWest_Text_23DABF, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D536:: @ 823D536
@@ -128,10 +128,10 @@ BattleFrontier_OutsideWest_EventScript_23D53D:: @ 823D53D
 BattleFrontier_OutsideWest_EventScript_23D544:: @ 823D544
 	applymovement 9, BattleFrontier_OutsideWest_Movement_2725A8
 	waitmovement 0
-	msgbox BattleFrontier_OutsideWest_Text_23DB7D, 4
+	msgbox BattleFrontier_OutsideWest_Text_23DB7D, MSGBOX_DEFAULT
 	applymovement 10, BattleFrontier_OutsideWest_Movement_2725A4
 	waitmovement 0
-	msgbox BattleFrontier_OutsideWest_Text_23DBCE, 4
+	msgbox BattleFrontier_OutsideWest_Text_23DBCE, MSGBOX_DEFAULT
 	closemessage
 	delay 25
 	applymovement 9, BattleFrontier_OutsideWest_Movement_2725A6
@@ -152,7 +152,7 @@ BattleFrontier_OutsideWest_EventScript_23D57F:: @ 823D57F
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
 	compare VAR_FACING, 4
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
-	msgbox BattleFrontier_OutsideWest_Text_23DC36, 4
+	msgbox BattleFrontier_OutsideWest_Text_23DC36, MSGBOX_DEFAULT
 	release
 	end
 
@@ -224,7 +224,7 @@ BattleFrontier_OutsideWest_Movement_23D632: @ 823D632
 BattleFrontier_OutsideWest_EventScript_23D635:: @ 823D635
 	lock
 	faceplayer
-	msgbox BattleFrontier_OutsideWest_Text_23DD3B, 4
+	msgbox BattleFrontier_OutsideWest_Text_23DD3B, MSGBOX_DEFAULT
 	random 2
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D653
@@ -232,71 +232,71 @@ BattleFrontier_OutsideWest_EventScript_23D635:: @ 823D635
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D653:: @ 823D653
-	msgbox BattleFrontier_OutsideWest_Text_23DD7A, 4
+	msgbox BattleFrontier_OutsideWest_Text_23DD7A, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D65D:: @ 823D65D
-	msgbox BattleFrontier_OutsideWest_Text_23DDAD, 4
+	msgbox BattleFrontier_OutsideWest_Text_23DDAD, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D667:: @ 823D667
-	msgbox BattleFrontier_OutsideWest_Text_23DE15, 2
+	msgbox BattleFrontier_OutsideWest_Text_23DE15, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D670:: @ 823D670
-	msgbox BattleFrontier_OutsideWest_Text_23DF7D, 2
+	msgbox BattleFrontier_OutsideWest_Text_23DF7D, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D679:: @ 823D679
-	msgbox BattleFrontier_OutsideWest_Text_23DEFD, 2
+	msgbox BattleFrontier_OutsideWest_Text_23DEFD, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D682:: @ 823D682
-	msgbox BattleFrontier_OutsideWest_Text_23DEB4, 2
+	msgbox BattleFrontier_OutsideWest_Text_23DEB4, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D68B:: @ 823D68B
-	msgbox BattleFrontier_OutsideWest_Text_23DFBF, 2
+	msgbox BattleFrontier_OutsideWest_Text_23DFBF, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D694:: @ 823D694
-	msgbox BattleFrontier_OutsideWest_Text_23E01E, 2
+	msgbox BattleFrontier_OutsideWest_Text_23E01E, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D69D:: @ 823D69D
-	msgbox BattleFrontier_OutsideWest_Text_23E09F, 2
+	msgbox BattleFrontier_OutsideWest_Text_23E09F, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6A6:: @ 823D6A6
-	msgbox BattleFrontier_OutsideWest_Text_23E102, 2
+	msgbox BattleFrontier_OutsideWest_Text_23E102, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6AF:: @ 823D6AF
-	msgbox BattleFrontier_OutsideWest_Text_23E154, 2
+	msgbox BattleFrontier_OutsideWest_Text_23E154, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6B8:: @ 823D6B8
 	lock
-	msgbox BattleFrontier_OutsideWest_Text_23E273, 4
+	msgbox BattleFrontier_OutsideWest_Text_23E273, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6C3:: @ 823D6C3
 	lock
-	msgbox BattleFrontier_OutsideWest_Text_23E2E9, 4
+	msgbox BattleFrontier_OutsideWest_Text_23E2E9, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6CE:: @ 823D6CE
-	msgbox BattleFrontier_OutsideWest_Text_23E37E, 2
+	msgbox BattleFrontier_OutsideWest_Text_23E37E, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6D7:: @ 823D6D7
 	lock
 	faceplayer
-	msgbox BattleFrontier_OutsideWest_Text_23E410, 4
+	msgbox BattleFrontier_OutsideWest_Text_23E410, MSGBOX_DEFAULT
 	closemessage
 	applymovement 23, BattleFrontier_OutsideWest_Movement_2725A2
 	waitmovement 0
@@ -304,7 +304,7 @@ BattleFrontier_OutsideWest_EventScript_23D6D7:: @ 823D6D7
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D6EE:: @ 823D6EE
-	msgbox BattleFrontier_OutsideWest_Text_23E5A5, 2
+	msgbox BattleFrontier_OutsideWest_Text_23E5A5, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_Text_23D6F7: @ 823D6F7

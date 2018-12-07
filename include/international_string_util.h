@@ -2,22 +2,23 @@
 #define GUARD_INTERNATIONAL_STRING_UTIL_H
 
 #include "menu.h"
+#include "list_menu.h"
 
-void sub_81DB52C(const u8 *src);
-void TVShowConvertInternationalString(u8 *dest, const u8 *src, u8 language);
-s32 GetStringCenterAlignXOffset(s32 fontId, const u8 *str, s32 totalWidth);
-s32 GetStringRightAlignXOffset(s32 fontId, const u8 *str, s32 totalWidth);
-s32 GetStringCenterAlignXOffsetWithLetterSpacing(s32 fontId, const u8 *str, s32 totalWidth, s32 letterSpacing);
-s32 GetStringWidthDifference(s32 fontId, const u8 *str, s32 totalWidth, s32 letterSpacing);
-s32 GetMaxWidthInMenuTable(const struct MenuAction *str, s32 arg1);
-s32 sub_81DB3D8(const struct MenuAction *str, const u8* arg1, s32 arg2);
-// sub_81DB41C
-// CopyMonCategoryText
-// sub_81DB494
-void PadNameString(u8 *dst, u8 padWith);
+void sub_81DB52C(u8 *src);
+void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language);
+int GetStringCenterAlignXOffset(int fontId, const u8 *str, int totalWidth);
+int GetStringRightAlignXOffset(int fontId, const u8 *str, int totalWidth);
+int GetStringCenterAlignXOffsetWithLetterSpacing(int fontId, const u8 *str, int totalWidth, int letterSpacing);
+int GetStringWidthDifference(int fontId, const u8 *str, int totalWidth, int letterSpacing);
+int GetMaxWidthInMenuTable(const struct MenuAction *str, int arg1);
+int sub_81DB3D8(const struct MenuAction *str, const u8* arg1, int arg2);
+int sub_81DB41C(const struct ListMenuTemplate *listMenu);
+void CopyMonCategoryText(int dexNum, u8 *dest);
+u8 *sub_81DB494(u8 *str, int fontId, u8 *str2, int totalStringWidth);
+void PadNameString(u8 *dest, u8 padChar);
 void sub_81DB554(u8 *, u8);
-// sub_81DB5AC
-u32 sub_81DB604(const u8 *);
-// sub_81DB620
+void sub_81DB5AC(u8 *);
+int sub_81DB604(u8 *);
+void sub_81DB620(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
 
 #endif // GUARD_INTERNATIONAL_STRING_UTIL_H
