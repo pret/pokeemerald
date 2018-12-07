@@ -3071,7 +3071,7 @@ static void BattleStartClearSetData(void)
         *(gBattleStruct->AI_monToSwitchIntoId + i) = PARTY_SIZE;
     }
 
-    gBattleStruct->field_DF = 0;
+    gBattleStruct->givenExpMons = 0;
     gBattleStruct->field_92 = 0;
 
     gRandomTurnNumber = Random();
@@ -3192,7 +3192,7 @@ void SwitchInClearSetData(void)
 
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = 0;
-    gBattleStruct->field_DA = 0xFF;
+    gBattleStruct->arenaTurnCounter = 0xFF;
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
@@ -3994,7 +3994,7 @@ void BattleTurnPassed(void)
     if (gBattleResults.battleTurnCounter < 0xFF)
     {
         gBattleResults.battleTurnCounter++;
-        gBattleStruct->field_DA++;
+        gBattleStruct->arenaTurnCounter++;
     }
 
     for (i = 0; i < gBattlersCount; i++)
@@ -4013,7 +4013,7 @@ void BattleTurnPassed(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         BattleScriptExecute(BattleScript_82DB881);
-    else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_DA == 0)
+    else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaTurnCounter == 0)
         BattleScriptExecute(BattleScript_ArenaTurnBeginning);
 }
 

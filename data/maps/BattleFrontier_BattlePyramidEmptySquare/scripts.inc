@@ -153,7 +153,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
-	trainerbattle TRAINER_BATTLE_9, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
+	trainerbattle TRAINER_BATTLE_PYRAMID, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
 	setvar VAR_0x8004, 10
 	special CallBattlePyramidFunction
 	waitmessage
