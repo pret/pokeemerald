@@ -63,17 +63,17 @@ AbandonedShip_Corridors_B1F_Text_237E2A: @ 8237E2A
 	.string "How about a quick battle?$"
 
 AbandonedShip_Corridors_B1F_Text_237E80: @ 8237E80
-	.string "Whoops, I’m sunk!$"
+	.string "Whoops, I'm sunk!$"
 
 AbandonedShip_Corridors_B1F_Text_237E92: @ 8237E92
-	.string "The ship’s bottom has sunk into the\n"
+	.string "The ship's bottom has sunk into the\n"
 	.string "depths.\p"
 	.string "If a POKéMON knew how to go underwater,\n"
 	.string "we might make some progress…$"
 
 AbandonedShip_Corridors_B1F_Text_237F03: @ 8237F03
 	.string "Yay!\n"
-	.string "It’s a ship!$"
+	.string "It's a ship!$"
 
 AbandonedShip_Corridors_B1F_Text_237F15: @ 8237F15
 	.string "The door is locked.\p"

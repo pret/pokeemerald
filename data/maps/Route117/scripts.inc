@@ -189,12 +189,12 @@ Route117_EventScript_1F3C65:: @ 81F3C65
 Route117_Text_1F3C7C: @ 81F3C7C
 	.string "I left my POKéMON at the DAY CARE.\p"
 	.string "When I got it back, it had a new move\n"
-	.string "that I didn’t teach it.\l"
+	.string "that I didn't teach it.\l"
 	.string "I was really, really surprised.$"
 
 Route117_Text_1F3CFD: @ 81F3CFD
 	.string "What do you think?\n"
-	.string "Aren’t these flowers pretty?\p"
+	.string "Aren't these flowers pretty?\p"
 	.string "I planted them all!$"
 
 Route117_Text_1F3D41: @ 81F3D41

@@ -456,6 +456,7 @@
 
 // National Dex Index Defines
 
+#define NATIONAL_DEX_NONE 0
 #define NATIONAL_DEX_BULBASAUR 1
 #define NATIONAL_DEX_IVYSAUR 2
 #define NATIONAL_DEX_VENUSAUR 3
@@ -872,6 +873,7 @@
 
 // Hoenn Dex Index Defines
 
+#define HOENN_DEX_NONE 0
 #define HOENN_DEX_BULBASAUR 203
 #define HOENN_DEX_IVYSAUR 204
 #define HOENN_DEX_VENUSAUR 205

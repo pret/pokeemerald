@@ -5,7 +5,7 @@ gBerryDescriptionPart2_Cheri:: @ 8589B09
 	.string "The bright red BERRY is very spicy.$"
 
 gBerryDescriptionPart1_Chesto:: @ 8589B2D
-	.string "The BERRY’s thick skin and fruit are$"
+	.string "The BERRY's thick skin and fruit are$"
 
 gBerryDescriptionPart2_Chesto:: @ 8589B52
 	.string "very tough. It is dry-tasting all over.$"
@@ -41,7 +41,7 @@ gBerryDescriptionPart2_Oran:: @ 8589CAE
 	.string "BERRIES grow in half a day.$"
 
 gBerryDescriptionPart1_Persim:: @ 8589CCA
-	.string "Loves sunlight. The BERRY’s color$"
+	.string "Loves sunlight. The BERRY's color$"
 
 gBerryDescriptionPart2_Persim:: @ 8589CEC
 	.string "grows vivid when exposed to the sun.$"
@@ -248,7 +248,7 @@ gBerryDescriptionPart1_Starf:: @ 858A5E6
 	.string "So strong, it was abandoned at the$"
 
 gBerryDescriptionPart2_Starf:: @ 858A609
-	.string "world’s edge. Considered a mirage.$"
+	.string "world's edge. Considered a mirage.$"
 
 gBerryDescriptionPart1_Enigma:: @ 858A62C
 	.string "A completely enigmatic BERRY.$"

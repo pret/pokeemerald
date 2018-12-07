@@ -57,7 +57,7 @@ LilycoveCity_DepartmentStore_4F_Text_21FE50: @ 821FE50
 	.string "Hmm…\p"
 	.string "An attacking move…\n"
 	.string "Or a defensive move…\p"
-	.string "It’s no easy matter to decide which TM\n"
+	.string "It's no easy matter to decide which TM\n"
 	.string "moves should be taught to POKéMON…$"
 
 LilycoveCity_DepartmentStore_4F_Text_21FEC7: @ 821FEC7
@@ -67,6 +67,6 @@ LilycoveCity_DepartmentStore_4F_Text_21FEC7: @ 821FEC7
 	.string "different kinds.$"
 
 LilycoveCity_DepartmentStore_4F_Text_21FF2D: @ 821FF2D
-	.string "I’d like to get all the different TMs,\n"
+	.string "I'd like to get all the different TMs,\n"
 	.string "but a POKéMON learns only four moves.$"
 

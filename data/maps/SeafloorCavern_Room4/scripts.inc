@@ -19,12 +19,12 @@ SeafloorCavern_Room4_Text_234CF3: @ 8234CF3
 	.string "Lost it…$"
 
 SeafloorCavern_Room4_Text_234CFC: @ 8234CFC
-	.string "I can’t find the way out!\p"
-	.string "I’m not afraid. Don’t get me wrong!$"
+	.string "I can't find the way out!\p"
+	.string "I'm not afraid. Don't get me wrong!$"
 
 SeafloorCavern_Room4_Text_234D3A: @ 8234D3A
 	.string "Who are you?\n"
-	.string "Where do you think you’re going?$"
+	.string "Where do you think you're going?$"
 
 SeafloorCavern_Room4_Text_234D68: @ 8234D68
 	.string "I failed to win!$"
@@ -32,5 +32,5 @@ SeafloorCavern_Room4_Text_234D68: @ 8234D68
 SeafloorCavern_Room4_Text_234D79: @ 8234D79
 	.string "My partner forgot the map in that\n"
 	.string "submarine!\p"
-	.string "How’s that for being useless?$"
+	.string "How's that for being useless?$"
 

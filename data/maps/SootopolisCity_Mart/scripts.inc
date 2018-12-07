@@ -65,14 +65,14 @@ SootopolisCity_Mart_Text_226816: @ 8226816
 SootopolisCity_Mart_Text_22685D: @ 822685D
 	.string "What…\n"
 	.string "What is happening?\p"
-	.string "I really want to know, but it’s too\n"
+	.string "I really want to know, but it's too\n"
 	.string "scary to go outside.$"
 
 SootopolisCity_Mart_Text_2268AF: @ 82268AF
 	.string "Do you know FULL RESTORE?\p"
 	.string "Full restoration of HP!\n"
 	.string "Eradication of all status problems!\p"
-	.string "It’s truly an item of your dreams!$"
+	.string "It's truly an item of your dreams!$"
 
 SootopolisCity_Mart_Text_226928: @ 8226928
 	.string "This weather…\n"

@@ -68,7 +68,7 @@ gEasyChatWord_ThoseWere:: @ 859C141
 	.string "THOSE WERE$"
 
 gEasyChatWord_ThatsItExcl:: @ 859C14C
-	.string "THAT’S IT!$"
+	.string "THAT'S IT!$"
 
 gEasyChatWord_Am:: @ 859C157
 	.string "AM$"

@@ -1453,13 +1453,13 @@ LilycoveCity_ContestLobby_Text_27ADA7: @ 827ADA7
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.\p"
-	.string "Oh? It appears that you don’t have\n"
+	.string "Oh? It appears that you don't have\n"
 	.string "a {POKEBLOCK} CASE yet.\p"
 	.string "In that case, we need to provide you\n"
 	.string "with this!$"
 
 LilycoveCity_ContestLobby_Text_27AE47: @ 827AE47
-	.string "Okay, now that we’ve cleared that\n"
+	.string "Okay, now that we've cleared that\n"
 	.string "up…\p"
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
@@ -1536,12 +1536,12 @@ LilycoveCity_ContestLobby_Text_27B44A: @ 827B44A
 	.string "Which POKéMON would you like to enter?$"
 
 LilycoveCity_ContestLobby_Text_27B471: @ 827B471
-	.string "I’m terribly sorry, but your POKéMON\n"
+	.string "I'm terribly sorry, but your POKéMON\n"
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet…$"
 
 LilycoveCity_ContestLobby_Text_27B4C4: @ 827B4C4
-	.string "I’m sorry, but an EGG cannot take part\n"
+	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
 LilycoveCity_ContestLobby_Text_27B501: @ 827B501
@@ -1551,7 +1551,7 @@ LilycoveCity_ContestLobby_Text_27B501: @ 827B501
 LilycoveCity_ContestLobby_Text_27B547: @ 827B547
 	.string "Oh, but that RIBBON…\p"
 	.string "Your POKéMON has won this CONTEST\n"
-	.string "before, hasn’t it?\p"
+	.string "before, hasn't it?\p"
 	.string "Would you like to enter it in this\n"
 	.string "CONTEST anyway?$"
 
@@ -1579,14 +1579,14 @@ LilycoveCity_ContestLobby_Text_27B6E7: @ 827B6E7
 	.string "later on.$"
 
 LinkContestRoom1_Text_27B711: @ 827B711
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a {STR_VAR_3} Rank POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
 LinkContestRoom1_Text_27B78F: @ 827B78F
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
@@ -1594,12 +1594,12 @@ LinkContestRoom1_Text_27B78F: @ 827B78F
 
 LinkContestRoom1_Text_27B815: @ 827B815
 	.string "MC: Entry No. {STR_VAR_2}!\n"
-	.string "{STR_VAR_1}’s {STR_VAR_3}!$"
+	.string "{STR_VAR_1}'s {STR_VAR_3}!$"
 
 LinkContestRoom1_Text_27B830: @ 827B830
-	.string "MC: We’ve just seen the four POKéMON\n"
+	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
-	.string "Now it’s time for primary judging!\p"
+	.string "Now it's time for primary judging!\p"
 	.string "The audience will vote on their\n"
 	.string "favorite POKéMON contestants.\p"
 	.string "Without any further ado, let the\n"
@@ -1611,16 +1611,16 @@ LinkContestRoom1_Text_27B8F2: @ 827B8F2
 LinkContestRoom1_Text_27B904: @ 827B904
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
-	.string "let’s move on to secondary judging!\p"
+	.string "let's move on to secondary judging!\p"
 	.string "The second stage of judging is the\n"
 	.string "much anticipated appeal time!\p"
 	.string "May the contestants amaze us with\n"
 	.string "superb appeals of dazzling moves!\p"
-	.string "Let’s see a little enthusiasm!\n"
-	.string "Let’s appeal!$"
+	.string "Let's see a little enthusiasm!\n"
+	.string "Let's appeal!$"
 
 LinkContestRoom1_Text_27BA15: @ 827BA15
-	.string "MC: That’s it for judging!$"
+	.string "MC: That's it for judging!$"
 
 LinkContestRoom1_Text_27BA30: @ 827BA30
 	.string "Thank you all for a most wonderful\n"
@@ -1755,7 +1755,7 @@ LilycoveCity_ContestLobby_Text_27C140: @ 827C140
 	.string "condition to take part in a CONTEST…$"
 
 LilycoveCity_ContestLobby_Text_27C186: @ 827C186
-	.string "I’m sorry, but an EGG cannot take part\n"
+	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
 LilycoveCity_ContestLobby_Text_27C1C3: @ 827C1C3
@@ -1823,7 +1823,7 @@ LilycoveCity_ContestLobby_Text_27C742: @ 827C742
 	.string "counter (POKéMON Ruby or Sapphire).$"
 
 LilycoveCity_ContestLobby_Text_27C879: @ 827C879
-	.string "I’m terribly sorry.\p"
+	.string "I'm terribly sorry.\p"
 	.string "G-MODE does not function\n"
 	.string "with Wireless Adapters.\p"
 	.string "Please select E-MODE or try\n"
@@ -1834,7 +1834,7 @@ LilycoveCity_ContestLobby_Text_27C8FD: @ 827C8FD
 	.string "to enter?$"
 
 LinkContestRoom1_Text_27C929: @ 827C929
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!$"
 
@@ -1843,9 +1843,9 @@ LinkContestRoom1_Text_27C972: @ 827C972
 	.string "POKéMON are as follows:$"
 
 LinkContestRoom1_Text_27C9AF: @ 827C9AF
-	.string "MC: We’ve just seen the four POKéMON\n"
+	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
-	.string "Now it’s time for primary judging!$"
+	.string "Now it's time for primary judging!$"
 
 LinkContestRoom1_Text_27CA04: @ 827CA04
 	.string "The audience will vote on their\n"
@@ -1858,7 +1858,7 @@ LinkContestRoom1_Text_27CA42: @ 827CA42
 LinkContestRoom1_Text_27CA71: @ 827CA71
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
-	.string "let’s move on to secondary judging!$"
+	.string "let's move on to secondary judging!$"
 
 LinkContestRoom1_Text_27CAD0: @ 827CAD0
 	.string "The second stage of judging is\n"
@@ -1867,5 +1867,5 @@ LinkContestRoom1_Text_27CAD0: @ 827CAD0
 	.string "superb appeals of dazzling moves!$"
 
 LinkContestRoom1_Text_27CB55: @ 827CB55
-	.string "Let’s see a little enthusiasm!\n"
-	.string "Let’s appeal!$"
+	.string "Let's see a little enthusiasm!\n"
+	.string "Let's appeal!$"

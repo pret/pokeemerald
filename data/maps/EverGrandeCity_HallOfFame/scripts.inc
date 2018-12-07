@@ -92,7 +92,7 @@ EverGrandeCity_HallOfFame_Text_22990E: @ 822990E
 	.string "are honored.$"
 
 EverGrandeCity_HallOfFame_Text_2299A3: @ 82299A3
-	.string "WALLACE: Come on, let’s record your\n"
+	.string "WALLACE: Come on, let's record your\n"
 	.string "name as a TRAINER who triumphed over\l"
 	.string "the POKéMON LEAGUE, and the names of\l"
 	.string "the partners who battled with you.$"

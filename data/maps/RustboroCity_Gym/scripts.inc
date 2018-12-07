@@ -111,22 +111,22 @@ RustboroCity_Gym_EventScript_21307B:: @ 821307B
 	end
 
 RustboroCity_Gym_Text_21309D: @ 821309D
-	.string "Yo, how’s it going?\p"
+	.string "Yo, how's it going?\p"
 	.string "Listen, my friend!\n"
 	.string "Would you like to become the CHAMPION?\p"
-	.string "I’m no TRAINER, not me, but I can\n"
+	.string "I'm no TRAINER, not me, but I can\n"
 	.string "sure give you winning advice.\p"
-	.string "That’s settled, then! We’ll aim for the\n"
+	.string "That's settled, then! We'll aim for the\n"
 	.string "POKéMON CHAMPIONSHIP together!\p"
-	.string "It’s your job as a TRAINER to collect\n"
+	.string "It's your job as a TRAINER to collect\n"
 	.string "GYM BADGES, am I right?\p"
-	.string "But GYM LEADERS aren’t pushovers!\p"
-	.string "And that’s where I come in!\n"
-	.string "I’m here to provide expert advice!\p"
+	.string "But GYM LEADERS aren't pushovers!\p"
+	.string "And that's where I come in!\n"
+	.string "I'm here to provide expert advice!\p"
 	.string "ROXANNE, the GYM LEADER, is a user\n"
 	.string "of ROCK-type POKéMON.\p"
 	.string "The ROCK type is very durable, but\n"
-	.string "it can’t stand WATER-type and\l"
+	.string "it can't stand WATER-type and\l"
 	.string "GRASS-type moves.\p"
 	.string "Come see me afterwards, if you beat\n"
 	.string "the GYM LEADER.\p"
@@ -134,38 +134,38 @@ RustboroCity_Gym_Text_21309D: @ 821309D
 
 RustboroCity_Gym_Text_2132E2: @ 82132E2
 	.string "Whoa! What a breathtaking victory!\n"
-	.string "My cheering must’ve worked!\p"
+	.string "My cheering must've worked!\p"
 	.string "Great!\n"
 	.string "Check your TRAINER CARD.\p"
 	.string "The STONE BADGE you got should be\n"
 	.string "properly recorded on it.\p"
 	.string "In other words…\p"
-	.string "You’ve climbed the first step on\n"
+	.string "You've climbed the first step on\n"
 	.string "the stairs to the CHAMPIONSHIP!\p"
-	.string "That’s got to feel awesome!$"
+	.string "That's got to feel awesome!$"
 
 RustboroCity_Gym_Text_2133E9: @ 82133E9
-	.string "Don’t take us GYM TRAINERS lightly!\n"
-	.string "I’ll show you why we’re better!$"
+	.string "Don't take us GYM TRAINERS lightly!\n"
+	.string "I'll show you why we're better!$"
 
 RustboroCity_Gym_Text_21342D: @ 821342D
 	.string "You were too good for me…$"
 
 RustboroCity_Gym_Text_213447: @ 8213447
-	.string "You haven’t seen anything of the ROCK\n"
-	.string "type’s terrifying power!$"
+	.string "You haven't seen anything of the ROCK\n"
+	.string "type's terrifying power!$"
 
 RustboroCity_Gym_Text_213486: @ 8213486
-	.string "If you can’t beat me, you won’t stand\n"
+	.string "If you can't beat me, you won't stand\n"
 	.string "a chance against ROXANNE!$"
 
 RustboroCity_Gym_Text_2134C6: @ 82134C6
-	.string "Wow! You’ve got some potential!$"
+	.string "Wow! You've got some potential!$"
 
 RustboroCity_Gym_Text_2134E6: @ 82134E6
 	.string "ROXANNE is stronger than me by\n"
 	.string "several times.\p"
-	.string "You’d better be on your guard!$"
+	.string "You'd better be on your guard!$"
 
 RustboroCity_Gym_Text_213533: @ 8213533
 	.string "We might be in the middle of town,\n"
@@ -187,7 +187,7 @@ RustboroCity_Gym_Text_21362A: @ 821362A
 	.string "POKéMON GYM LEADER.\p"
 	.string "I became a GYM LEADER so that I might\n"
 	.string "apply what I learned at the POKéMON\l"
-	.string "TRAINER’S SCHOOL in battle.\p"
+	.string "TRAINER'S SCHOOL in battle.\p"
 	.string "Would you kindly demonstrate how you\n"
 	.string "battle, and with which POKéMON?$"
 
@@ -197,7 +197,7 @@ RustboroCity_Gym_Text_21370B: @ 821370B
 	.string "It seems that I still have much more\n"
 	.string "to learn…\p"
 	.string "I understand.\p"
-	.string "The POKéMON LEAGUE’s rules state\n"
+	.string "The POKéMON LEAGUE's rules state\n"
 	.string "that TRAINERS are to be given this\l"
 	.string "if they defeat a GYM LEADER.\p"
 	.string "Please accept the official POKéMON\n"
@@ -235,7 +235,7 @@ RustboroCity_Gym_Text_213A21: @ 8213A21
 
 RustboroCity_Gym_Text_213A3B: @ 8213A3B
 	.string "RUSTBORO CITY POKéMON GYM\p"
-	.string "ROXANNE’S CERTIFIED TRAINERS:\n"
+	.string "ROXANNE'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 
@@ -244,14 +244,14 @@ RustboroCity_Gym_Text_213A76: @ 8213A76
 	.string "… … … … … Beep!\p"
 	.string "ROXANNE: Oh, hello, {PLAYER}?\n"
 	.string "This is ROXANNE of RUSTBORO CITY.\p"
-	.string "I heard from BRAWLY that you’re\n"
+	.string "I heard from BRAWLY that you're\n"
 	.string "moving up through the ranks of\l"
 	.string "TRAINERS at an incredible clip.\p"
-	.string "Well, I’d rather not think that\n"
-	.string "I can’t beat you.\p"
+	.string "Well, I'd rather not think that\n"
+	.string "I can't beat you.\p"
 	.string "I promise, I will shape up my GYM\n"
 	.string "so that you may challenge us again.\p"
-	.string "I hope you’ll be looking forward to\n"
+	.string "I hope you'll be looking forward to\n"
 	.string "that occasion as much as me!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
@@ -261,12 +261,12 @@ RustboroCity_Gym_Text_213C01: @ 8213C01
 	.string "in the POKéNAV.$"
 
 RustboroCity_Gym_Text_213C2F: @ 8213C2F
-	.string "ROXANNE: I’m so glad to see you again.\n"
-	.string "I’m ROXANNE, the GYM LEADER here.\p"
-	.string "I’m sure we’ve both experienced many\n"
+	.string "ROXANNE: I'm so glad to see you again.\n"
+	.string "I'm ROXANNE, the GYM LEADER here.\p"
+	.string "I'm sure we've both experienced many\n"
 	.string "battles since we last met.\p"
 	.string "I would like to see how much better\n"
-	.string "we’ve become. Let us battle!$"
+	.string "we've become. Let us battle!$"
 
 RustboroCity_Gym_Text_213CF9: @ 8213CF9
 	.string "Grr…\n"
@@ -279,12 +279,12 @@ RustboroCity_Gym_Text_213D12: @ 8213D12
 	.string "all that much more!$"
 
 RustboroCity_Gym_Text_213D93: @ 8213D93
-	.string "ROXANNE: I’m so glad to see you again.\n"
-	.string "I’m ROXANNE, the GYM LEADER here.\p"
-	.string "I’m sure we’ve both experienced many\n"
+	.string "ROXANNE: I'm so glad to see you again.\n"
+	.string "I'm ROXANNE, the GYM LEADER here.\p"
+	.string "I'm sure we've both experienced many\n"
 	.string "battles since we last met.\p"
 	.string "I would like to see how much better\n"
-	.string "we’ve become…\p"
+	.string "we've become…\p"
 	.string "Oh, no…\n"
 	.string "You only have one POKéMON with you?\p"
 	.string "Please return with at least one more\n"

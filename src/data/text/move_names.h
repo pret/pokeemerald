@@ -671,6 +671,6 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_MOONGEIST_BEAM] = _("Moongeist Be"),
     [MOVE_TEARFUL_LOOK] = _("Tearful Look"),
     [MOVE_ZING_ZAP] = _("Zing Zap"),
-    [MOVE_NATURES_MADNESS] = _("Nature’s Mad"),
+    [MOVE_NATURES_MADNESS] = _("Nature's Mad"),
     [MOVE_MULTI_ATTACK] = _("Multi Attack"),
 };

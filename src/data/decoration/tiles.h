@@ -1,6 +1,3 @@
-#ifndef GUARD_DATA_DECORATION_TILES
-#define GUARD_DATA_DECORATION_TILES
-
 const u16 DecorGfx_SMALL_DESK[] = {
     0x87
 };
@@ -642,5 +639,3 @@ const u16 DecorGfx_REGICE_DOLL[] = {
 const u16 DecorGfx_REGISTEEL_DOLL[] = {
     EVENT_OBJ_GFX_BIG_REGISTEEL_DOLL
 };
-
-#endif // GUARD_DATA_DECORATION_TILES

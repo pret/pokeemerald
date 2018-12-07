@@ -116,16 +116,16 @@ Route112_Text_1F1F7A: @ 81F1F7A
 	.string "we need a METEORITE to do it.$"
 
 Route112_Text_1F1FBA: @ 81F1FBA
-	.string "Oh, I get it now. That’s why the rest\n"
+	.string "Oh, I get it now. That's why the rest\n"
 	.string "of the crew went out to FALLARBOR.$"
 
 Route112_Text_1F2003: @ 81F2003
 	.string "You got it. And until they come back,\n"
-	.string "we’re not to let anyone pass, right.$"
+	.string "we're not to let anyone pass, right.$"
 
 Route112_Text_1F204E: @ 81F204E
-	.string "Eh, I’d like to get to MAUVILLE, but if\n"
-	.string "I went down these ledges, it’d be no\l"
+	.string "Eh, I'd like to get to MAUVILLE, but if\n"
+	.string "I went down these ledges, it'd be no\l"
 	.string "easy matter to get back to LAVARIDGE.$"
 
 Route112_Text_1F20C1: @ 81F20C1

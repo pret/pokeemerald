@@ -56,9 +56,9 @@ RustboroCity_House1_EventScript_2159DF:: @ 82159DF
 RustboroCity_House1_Text_2159E8: @ 82159E8
 	.string "Huh? My POKéMON is cute?\n"
 	.string "Sure, I knew that.\p"
-	.string "But if you really want, I’m willing\n"
+	.string "But if you really want, I'm willing\n"
 	.string "to trade it to you.\p"
-	.string "I’ll trade you my {STR_VAR_2} for\n"
+	.string "I'll trade you my {STR_VAR_2} for\n"
 	.string "a {STR_VAR_1} if you want.$"
 
 RustboroCity_House1_Text_215A77: @ 8215A77
@@ -66,11 +66,11 @@ RustboroCity_House1_Text_215A77: @ 8215A77
 	.string "Please be good to my POKéMON.$"
 
 RustboroCity_House1_Text_215A9D: @ 8215A9D
-	.string "Huh? That doesn’t look anything like\n"
+	.string "Huh? That doesn't look anything like\n"
 	.string "a {STR_VAR_1} to me.$"
 
 RustboroCity_House1_Text_215ACE: @ 8215ACE
-	.string "Oh, if you don’t want to, that’s okay.\n"
+	.string "Oh, if you don't want to, that's okay.\n"
 	.string "But my POKéMON is cute, you know…$"
 
 RustboroCity_House1_Text_215B17: @ 8215B17

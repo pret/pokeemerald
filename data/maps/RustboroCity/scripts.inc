@@ -1050,21 +1050,21 @@ RustboroCity_Text_1E130D: @ 81E130D
 	.string "realize what is required of them.$"
 
 RustboroCity_Text_1E139E: @ 81E139E
-	.string "Hey, that’s RUSTBORO’s GYM BADGE!\p"
+	.string "Hey, that's RUSTBORO's GYM BADGE!\p"
 	.string "Out of all the POKéMON GYM BADGES,\n"
-	.string "RUSTBORO’s is the coolest, I’d say.$"
+	.string "RUSTBORO's is the coolest, I'd say.$"
 
 RustboroCity_Text_1E1407: @ 81E1407
 	.string "Oh? Who might you be?\n"
-	.string "You’re a new face around these parts.\p"
+	.string "You're a new face around these parts.\p"
 	.string "Have you just transferred into the\n"
-	.string "POKéMON TRAINER’S SCHOOL?$"
+	.string "POKéMON TRAINER'S SCHOOL?$"
 
 RustboroCity_Text_1E1480: @ 81E1480
 	.string "I challenged the GYM LEADER, but…\p"
-	.string "It’s not going to be easy winning with\n"
+	.string "It's not going to be easy winning with\n"
 	.string "my FIRE-type POKéMON…\p"
-	.string "FIRE-type POKéMON don’t match up\n"
+	.string "FIRE-type POKéMON don't match up\n"
 	.string "well against ROCK-type POKéMON…$"
 
 RustboroCity_Text_1E1520: @ 81E1520
@@ -1083,11 +1083,11 @@ RustboroCity_Text_1E1589: @ 81E1589
 
 RustboroCity_Text_1E1633: @ 81E1633
 	.string "Wow, you have POKéMON with you, too.\p"
-	.string "When I get bigger, I’m going to go\n"
+	.string "When I get bigger, I'm going to go\n"
 	.string "places with POKéMON, too.$"
 
 RustboroCity_Text_1E1695: @ 81E1695
-	.string "POKéMON TRAINER’S SCHOOL!\p"
+	.string "POKéMON TRAINER'S SCHOOL!\p"
 	.string "If I go to this school, will I be able\n"
 	.string "to catch rare POKéMON easily?$"
 
@@ -1103,7 +1103,7 @@ RustboroCity_Text_1E174B: @ 81E174B
 RustboroCity_Text_1E1789: @ 81E1789
 	.string "A POKéMON you get in a trade from\n"
 	.string "someone grows fast.\p"
-	.string "But if you don’t have certain GYM\n"
+	.string "But if you don't have certain GYM\n"
 	.string "BADGES, it may not obey you…$"
 
 RustboroCity_Text_1E17FE: @ 81E17FE
@@ -1112,16 +1112,16 @@ RustboroCity_Text_1E17FE: @ 81E17FE
 
 RustboroCity_Text_1E1817: @ 81E1817
 	.string "Wait! Pleeeaaase!\p"
-	.string "Don’t take my GOODS!$"
+	.string "Don't take my GOODS!$"
 
 RustboroCity_Text_1E183E: @ 81E183E
-	.string "Oh, it’s you!\p"
-	.string "You’re that fantastic TRAINER who\n"
+	.string "Oh, it's you!\p"
+	.string "You're that fantastic TRAINER who\n"
 	.string "helped me in PETALBURG WOODS!\p"
 	.string "Help me! I was robbed by TEAM AQUA!\n"
 	.string "I have to get the DEVON GOODS back!\p"
-	.string "If I don’t…\n"
-	.string "I’m going to be in serious trouble.$"
+	.string "If I don't…\n"
+	.string "I'm going to be in serious trouble.$"
 
 RustboroCity_Text_1E1904: @ 81E1904
 	.string "That shady character, I think he took\n"
@@ -1133,12 +1133,12 @@ RustboroCity_Text_1E194D: @ 81E194D
 	.string "You did!\n"
 	.string "You got them back!\p"
 	.string "You really are a great TRAINER!\p"
-	.string "I know! As my thanks, I’ll give you\n"
+	.string "I know! As my thanks, I'll give you\n"
 	.string "another GREAT BALL!$"
 
 RustboroCity_Text_1E19E5: @ 81E19E5
-	.string "You’re loaded with items.\n"
-	.string "I can’t give you this GREAT BALL.$"
+	.string "You're loaded with items.\n"
+	.string "I can't give you this GREAT BALL.$"
 
 RustboroCity_Text_1E1A21: @ 81E1A21
 	.string "Excuse me, please!\n"
@@ -1148,7 +1148,7 @@ RustboroCity_Text_1E1A49: @ 81E1A49
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
 	.string "You had a MATCH CALL feature put\n"
 	.string "on your POKéNAV!\p"
-	.string "Let’s register each other so we can\n"
+	.string "Let's register each other so we can\n"
 	.string "contact one another anytime!\p"
 	.string "… … … … … …$"
 
@@ -1159,18 +1159,18 @@ RustboroCity_Text_1E1ADB: @ 81E1ADB
 RustboroCity_Text_1E1AFA: @ 81E1AFA
 	.string "MAY: Oh, by the way, I passed\n"
 	.string "MR. BRINEY in PETALBURG WOODS.\p"
-	.string "I guess he’s on his way home to his\n"
+	.string "I guess he's on his way home to his\n"
 	.string "cottage by the sea.\p"
-	.string "How’s your POKéDEX coming along,\n"
-	.string "{PLAYER}{KUN}? Mine’s looking pretty decent!\p"
+	.string "How's your POKéDEX coming along,\n"
+	.string "{PLAYER}{KUN}? Mine's looking pretty decent!\p"
 	.string "So…\n"
 	.string "How about a little battle?$"
 
 RustboroCity_Text_1E1BD3: @ 81E1BD3
-	.string "MAY: Oh, what’s the matter?\p"
-	.string "Haven’t you caught or raised your\n"
+	.string "MAY: Oh, what's the matter?\p"
+	.string "Haven't you caught or raised your\n"
 	.string "POKéMON very much?\p"
-	.string "That’s not very good for a TRAINER!$"
+	.string "That's not very good for a TRAINER!$"
 
 RustboroCity_Text_1E1C48: @ 81E1C48
 	.string "MAY: So, what do you think?\n"
@@ -1178,11 +1178,11 @@ RustboroCity_Text_1E1C48: @ 81E1C48
 
 RustboroCity_Text_1E1C84: @ 81E1C84
 	.string "MAY: You just became a TRAINER,\n"
-	.string "{PLAYER}{KUN}. I’m not going to lose!$"
+	.string "{PLAYER}{KUN}. I'm not going to lose!$"
 
 RustboroCity_Text_1E1CC1: @ 81E1CC1
 	.string "Yikes!\n"
-	.string "You’re better than I expected!$"
+	.string "You're better than I expected!$"
 
 RustboroCity_Text_1E1CE7: @ 81E1CE7
 	.string "MAY: Oh, by the way, MR. BRINEY, who\n"
@@ -1195,7 +1195,7 @@ RustboroCity_Text_1E1D7D: @ 81E1D7D
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
 	.string "You had a MATCH CALL feature put\n"
 	.string "on your POKéNAV! Cool!\p"
-	.string "Let’s register each other so we can\n"
+	.string "Let's register each other so we can\n"
 	.string "get in touch anytime!\p"
 	.string "… … … … … …$"
 
@@ -1208,32 +1208,32 @@ RustboroCity_Text_1E1E34: @ 81E1E34
 	.string "by MR. BRINEY in PETALBURG WOODS.\p"
 	.string "I bet he was on his way home to his\n"
 	.string "cottage by the sea.\p"
-	.string "{PLAYER}, how’s your POKéDEX?\n"
+	.string "{PLAYER}, how's your POKéDEX?\n"
 	.string "Have you filled in any pages yet?\p"
 	.string "Mine rules.\p"
 	.string "Want to have a battle to test how\n"
-	.string "far you’ve progressed?$"
+	.string "far you've progressed?$"
 
 RustboroCity_Text_1E1F2F: @ 81E1F2F
-	.string "BRENDAN: What’s the matter? Don’t have\n"
+	.string "BRENDAN: What's the matter? Don't have\n"
 	.string "any confidence in your POKéMON?$"
 
 RustboroCity_Text_1E1F76: @ 81E1F76
-	.string "BRENDAN: What’s up?\n"
+	.string "BRENDAN: What's up?\n"
 	.string "Want to have a battle with me?$"
 
 RustboroCity_Text_1E1FA9: @ 81E1FA9
 	.string "BRENDAN: I know you just became\n"
-	.string "a TRAINER, but I won’t go easy!$"
+	.string "a TRAINER, but I won't go easy!$"
 
 RustboroCity_Text_1E1FE9: @ 81E1FE9
 	.string "Hmm…\n"
-	.string "You’re pretty good.$"
+	.string "You're pretty good.$"
 
 RustboroCity_Text_1E2002: @ 81E2002
 	.string "BRENDAN: By the way, you know\n"
 	.string "MR. BRINEY? The guy I just passed?\p"
-	.string "I bet you didn’t know this, since you\n"
+	.string "I bet you didn't know this, since you\n"
 	.string "just moved here, {PLAYER}, but\l"
 	.string "MR. BRINEY was once a great sailor.$"
 
@@ -1241,7 +1241,7 @@ RustboroCity_Text_1E20A6: @ 81E20A6
 	.string "“Timesaving tunnel nearing\n"
 	.string "completion!”\p"
 	.string "…Is what it says on the sign, but\n"
-	.string "there’s also a big “X” splashed\l"
+	.string "there's also a big “X” splashed\l"
 	.string "across it in red paint…$"
 
 RustboroCity_Text_1E2128: @ 81E2128
@@ -1265,15 +1265,15 @@ RustboroCity_Text_1E220B: @ 81E220B
 	.string "nature and science.”$"
 
 RustboroCity_Text_1E2253: @ 81E2253
-	.string "POKéMON TRAINER’S SCHOOL\p"
-	.string "“We’ll teach you anything about\n"
+	.string "POKéMON TRAINER'S SCHOOL\p"
+	.string "“We'll teach you anything about\n"
 	.string "POKéMON!”$"
 
 RustboroCity_Text_1E2296: @ 81E2296
-	.string "CUTTER’S HOUSE$"
+	.string "CUTTER'S HOUSE$"
 
 RustboroCity_Text_1E22A5: @ 81E22A5
-	.string "I’ve been developing an added feature\n"
+	.string "I've been developing an added feature\n"
 	.string "for the POKéNAV…\p"
 	.string "And it turned out great!\p"
 	.string "{PLAYER}, may I see that POKéNAV?\n"
@@ -1295,16 +1295,16 @@ RustboroCity_Text_1E2449: @ 81E2449
 	.string "Please select the POKéNAV.$"
 
 RustboroCity_Text_1E2464: @ 81E2464
-	.string "Okay, I’d better get back to work.\n"
+	.string "Okay, I'd better get back to work.\n"
 	.string "Please take care, {PLAYER}!$"
 
 RustboroCity_Text_1E249D: @ 81E249D
 	.string "Did you know this?\p"
 	.string "You can have a 2-on-2 battle even\n"
-	.string "if you’re not with another TRAINER.\p"
+	.string "if you're not with another TRAINER.\p"
 	.string "If you catch the eyes of two TRAINERS\n"
 	.string "when you have two or more POKéMON,\l"
-	.string "they’ll both challenge you.\p"
-	.string "Don’t you think it’d be cool if you\n"
+	.string "they'll both challenge you.\p"
+	.string "Don't you think it'd be cool if you\n"
 	.string "could beat two TRAINERS by yourself?$"
 

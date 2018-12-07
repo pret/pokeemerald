@@ -2,6 +2,7 @@
 #define GUARD_CONSTANTS_POKEMON_H
 
 // Pokemon types
+#define TYPE_NONE     0xFF
 #define TYPE_NORMAL   0x00
 #define TYPE_FIGHTING 0x01
 #define TYPE_FLYING   0x02
@@ -22,6 +23,7 @@
 #define TYPE_DARK     0x11
 #define TYPE_FAIRY    0x12
 #define NUMBER_OF_MON_TYPES     0x13
+
 
 // Pokemon egg groups
 #define EGG_GROUP_NONE 0

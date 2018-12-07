@@ -1,6 +1,3 @@
-#ifndef POKEEMERALD_EVOLUTION_H
-#define POKEEMERALD_EVOLUTION_H
-
 const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 {
     [SPECIES_BULBASAUR]  = {{EVO_LEVEL, 16, SPECIES_IVYSAUR}},
@@ -191,5 +188,3 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SKARMORY]    = {{EVO_LEVEL, 40, SPECIES_EXPLOUD},
                             {EVO_MEGA_EVOLUTION, ITEM_MEGA_STONE_TESTING, SPECIES_HO_OH}},
 };
-
-#endif //POKEEMERALD_EVOLUTION_H

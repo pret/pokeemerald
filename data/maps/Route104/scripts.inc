@@ -1042,26 +1042,26 @@ Route104_Text_1ED5EC: @ 81ED5EC
 
 Route104_Text_1ED662: @ 81ED662
 	.string "The sea, huh?\p"
-	.string "I wonder what it’s like at the bottom\n"
+	.string "I wonder what it's like at the bottom\n"
 	.string "of the sea?$"
 
 Route104_Text_1ED6A2: @ 81ED6A2
-	.string "If you’re going to throw a POKé BALL,\n"
+	.string "If you're going to throw a POKé BALL,\n"
 	.string "weaken the wild POKéMON first.\p"
-	.string "It will be easier to catch if it’s been\n"
+	.string "It will be easier to catch if it's been\n"
 	.string "poisoned, burned, or lulled to sleep.$"
 
 Route104_Text_1ED735: @ 81ED735
-	.string "You’re a thief if you try to steal\n"
-	.string "someone else’s POKéMON.\p"
+	.string "You're a thief if you try to steal\n"
+	.string "someone else's POKéMON.\p"
 	.string "You should throw POKé BALLS only at\n"
 	.string "wild POKéMON.$"
 
 Route104_Text_1ED7A2: @ 81ED7A2
-	.string "Oh, no, I’m not a TRAINER.\p"
-	.string "But that’s right, if TRAINERS lock eyes,\n"
-	.string "it’s a challenge to battle.\p"
-	.string "If you don’t want to battle, stay out\n"
+	.string "Oh, no, I'm not a TRAINER.\p"
+	.string "But that's right, if TRAINERS lock eyes,\n"
+	.string "it's a challenge to battle.\p"
+	.string "If you don't want to battle, stay out\n"
 	.string "of their sight.$"
 
 Route104_Text_1ED838: @ 81ED838
@@ -1075,7 +1075,7 @@ Route104_Text_1ED8E7: @ 81ED8E7
 	.string "A word of advice!\p"
 	.string "A TM, TECHNICAL MACHINE, is good only\n"
 	.string "for one-time use.\p"
-	.string "Once you use it, it’s gone.\n"
+	.string "Once you use it, it's gone.\n"
 	.string "Think twice before using it!$"
 
 Route104_Text_1ED96A: @ 81ED96A
@@ -1083,7 +1083,7 @@ Route104_Text_1ED96A: @ 81ED96A
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
 	.string "shopping.\p"
-	.string "I don’t need this WHITE HERB anymore.\n"
+	.string "I don't need this WHITE HERB anymore.\n"
 	.string "Would you take it, please?$"
 
 Route104_Text_1EDA0F: @ 81EDA0F
@@ -1093,7 +1093,7 @@ Route104_Text_1EDA0F: @ 81EDA0F
 	.string "shopping. Where should I put them?$"
 
 Route104_Text_1EDA8C: @ 81EDA8C
-	.string "MR. BRINEY’S COTTAGE$"
+	.string "MR. BRINEY'S COTTAGE$"
 
 Route104_Text_1EDAA1: @ 81EDAA1
 	.string "ROUTE 1O4\n"
@@ -1130,18 +1130,18 @@ Route104_Text_1EDC8F: @ 81EDC8F
 
 Route104_Text_1EDCB1: @ 81EDCB1
 	.string "MAY: Oh, by the way, {PLAYER}{KUN},\n"
-	.string "how’s your POKéDEX coming along?$"
+	.string "how's your POKéDEX coming along?$"
 
 Route104_Text_1EDCED: @ 81EDCED
-	.string "Mine’s looking pretty decent.\n"
+	.string "Mine's looking pretty decent.\n"
 	.string "So…\l"
 	.string "How about a little battle?$"
 
 Route104_Text_1EDD2A: @ 81EDD2A
-	.string "MAY: Oh, what’s the matter?\p"
-	.string "Haven’t you caught or raised your\n"
+	.string "MAY: Oh, what's the matter?\p"
+	.string "Haven't you caught or raised your\n"
 	.string "POKéMON very much?\p"
-	.string "That’s not very good for a TRAINER!$"
+	.string "That's not very good for a TRAINER!$"
 
 Route104_Text_1EDD9F: @ 81EDD9F
 	.string "MAY: So, what do you think?\n"
@@ -1149,25 +1149,25 @@ Route104_Text_1EDD9F: @ 81EDD9F
 
 Route104_Text_1EDDDB: @ 81EDDDB
 	.string "MAY: You just became a TRAINER,\n"
-	.string "{PLAYER}{KUN}. I’m not going to lose!$"
+	.string "{PLAYER}{KUN}. I'm not going to lose!$"
 
 Route104_Text_1EDE18: @ 81EDE18
 	.string "Yikes!\n"
-	.string "You’re better than I expected!$"
+	.string "You're better than I expected!$"
 
 Route104_Text_1EDE3E: @ 81EDE3E
-	.string "MAY: I can tell you’ve gotten pretty\n"
+	.string "MAY: I can tell you've gotten pretty\n"
 	.string "good with the way you handle POKéMON.\p"
 	.string "But instead of only making them\n"
 	.string "battle, you should be like MR. BRINEY.\p"
-	.string "It’s important to become friends with\n"
+	.string "It's important to become friends with\n"
 	.string "POKéMON, too.$"
 
 Route104_Text_1EDF04: @ 81EDF04
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
 	.string "Cool, you had DEVON install the MATCH\n"
 	.string "CALL system on your POKéNAV!\p"
-	.string "Let’s register each other in our\n"
+	.string "Let's register each other in our\n"
 	.string "POKéNAVS so we can keep in touch.$"
 
 Route104_Text_1EDFA0: @ 81EDFA0
@@ -1175,35 +1175,35 @@ Route104_Text_1EDFA0: @ 81EDFA0
 	.string "in the POKéNAV.$"
 
 Route104_Text_1EDFC6: @ 81EDFC6
-	.string "BRENDAN: {PLAYER}, how’s your POKéDEX?\n"
+	.string "BRENDAN: {PLAYER}, how's your POKéDEX?\n"
 	.string "Have you filled in any pages yet?$"
 
 Route104_Text_1EE009: @ 81EE009
-	.string "Me, I’m doing great!\p"
+	.string "Me, I'm doing great!\p"
 	.string "Want to check out how good I am with\n"
 	.string "a battle?$"
 
 Route104_Text_1EE04D: @ 81EE04D
-	.string "BRENDAN: What’s the matter? Don’t have\n"
+	.string "BRENDAN: What's the matter? Don't have\n"
 	.string "any confidence in your POKéMON?$"
 
 Route104_Text_1EE094: @ 81EE094
-	.string "BRENDAN: What’s up?\n"
+	.string "BRENDAN: What's up?\n"
 	.string "Want to have a battle with me?$"
 
 Route104_Text_1EE0C7: @ 81EE0C7
 	.string "BRENDAN: I know you just became\n"
-	.string "a TRAINER, but I won’t go easy!$"
+	.string "a TRAINER, but I won't go easy!$"
 
 Route104_Text_1EE107: @ 81EE107
 	.string "Hmm…\n"
-	.string "You’re pretty good.$"
+	.string "You're pretty good.$"
 
 Route104_Text_1EE120: @ 81EE120
-	.string "BRENDAN: You’ve gotten pretty decent\n"
+	.string "BRENDAN: You've gotten pretty decent\n"
 	.string "at handling POKéMON.\p"
-	.string "But, you know, you shouldn’t just be\n"
+	.string "But, you know, you shouldn't just be\n"
 	.string "making POKéMON battle.\p"
-	.string "Like MR. BRINEY, it’s important to\n"
+	.string "Like MR. BRINEY, it's important to\n"
 	.string "become friends with your POKéMON.$"
 

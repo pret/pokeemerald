@@ -31,9 +31,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern s32 gUnknown_0203CD70;
-extern struct UnusedControllerStruct gUnknown_02022D0C;
-
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);

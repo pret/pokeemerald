@@ -29,7 +29,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2034D6:: @ 82034D6
 
 PacifidlogTown_PokemonCenter_1F_Text_2034DF: @ 82034DF
 	.string "What color is your TRAINER CARD?\n"
-	.string "Mine’s copper!$"
+	.string "Mine's copper!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_20350F: @ 820350F
 	.string "PACIFIDLOG TOWN floats on top of\n"

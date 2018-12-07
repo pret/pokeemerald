@@ -391,8 +391,8 @@ Route120_EventScript_1F5981:: @ 81F5981
 
 Route120_Text_1F5998: @ 81F5998
 	.string "STEVEN: Hm? {PLAYER}{KUN}, hi.\n"
-	.string "It’s been a while.\p"
-	.string "There’s something here that you can’t\n"
+	.string "It's been a while.\p"
+	.string "There's something here that you can't\n"
 	.string "see, right?\p"
 	.string "Now, if I were to use this device on\n"
 	.string "the invisible obstacle…\p"
@@ -404,7 +404,7 @@ Route120_Text_1F5998: @ 81F5998
 
 Route120_Text_1F5AAC: @ 81F5AAC
 	.string "STEVEN: No?\p"
-	.string "I’ll wait here, so you can get ready.$"
+	.string "I'll wait here, so you can get ready.$"
 
 Route120_Text_1F5ADE: @ 81F5ADE
 	.string "STEVEN: {PLAYER}{KUN}, are your POKéMON\n"
@@ -425,7 +425,7 @@ Route120_Text_1F5BAF: @ 81F5BAF
 	.string "Your battle style is intriguing.\p"
 	.string "Your POKéMON have obviously grown\n"
 	.string "since I first met you in DEWFORD.\p"
-	.string "I’d like you to have this\n"
+	.string "I'd like you to have this\n"
 	.string "DEVON SCOPE.\p"
 	.string "Who knows, there may be other\n"
 	.string "concealed POKéMON.$"
@@ -434,8 +434,8 @@ Route120_Text_1F5C7B: @ 81F5C7B
 	.string "STEVEN: {PLAYER}{KUN}.\p"
 	.string "I enjoy seeing POKéMON and TRAINERS\n"
 	.string "who strive together.\p"
-	.string "I think you’re doing great.\p"
-	.string "Well, let’s meet again somewhere.$"
+	.string "I think you're doing great.\p"
+	.string "Well, let's meet again somewhere.$"
 
 Route119_Text_1F5D00: @ 81F5D00
 Route120_Text_1F5D00: @ 81F5D00

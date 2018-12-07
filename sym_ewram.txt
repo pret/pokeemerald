@@ -104,24 +104,8 @@ gUnknown_02022D00: @ 2022D00
 	.space 0x4
 
 	.include "src/main_menu.o"
-
-gUnknown_02022D08: @ 2022D08
-	.space 0x1
-
-gUnknown_02022D09: @ 2022D09
-	.space 0x1
-
-gUnknown_02022D0A: @ 2022D0A
-	.space 0x2
-
-gUnknown_02022D0C: @ 2022D0C
-	.space 0x4
-
 	.include "src/battle_controllers.o"
-
-gUnknown_02022E10: @ 2022E10
-	.space 0x4
-
+	.include "src/rom_8034C54.o"
 	.include "src/battle_main.o"
 	.include "src/pokemon.o"
 	.include "src/random.o"

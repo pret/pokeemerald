@@ -298,32 +298,32 @@ EventScript_EggHatch:: @ 8291FC0
 	end
 
 Route117_Text_291FCF: @ 8291FCF
-	.string "I’m the DAY-CARE MAN.\p"
+	.string "I'm the DAY-CARE MAN.\p"
 	.string "I help take care of the precious\n"
 	.string "POKéMON of TRAINERS.\p"
-	.string "If you’d like me to raise your POKéMON,\n"
+	.string "If you'd like me to raise your POKéMON,\n"
 	.string "have a word with my wife.$"
 
 Route117_Text_29205D: @ 829205D
-	.string "Ah, it’s you!\p"
+	.string "Ah, it's you!\p"
 	.string "We were raising your POKéMON,\n"
 	.string "and my goodness, were we surprised!\p"
 	.string "Your POKéMON had an EGG!\p"
-	.string "We don’t know how it got there,\n"
+	.string "We don't know how it got there,\n"
 	.string "but your POKéMON had it.\p"
 	.string "You do want it, yes?$"
 
 Route117_Text_292114: @ 8292114
-	.string "Ah, it’s you! Good to see you.\n"
-	.string "Your {STR_VAR_1}’s doing fine.$"
+	.string "Ah, it's you! Good to see you.\n"
+	.string "Your {STR_VAR_1}'s doing fine.$"
 
 Route117_Text_292149: @ 8292149
-	.string "Well then, I’ll keep it.\n"
+	.string "Well then, I'll keep it.\n"
 	.string "Thanks!$"
 
 Route117_Text_29216A: @ 829216A
 	.string "You have no room for it…\n"
-	.string "Come back when you’ve made room.$"
+	.string "Come back when you've made room.$"
 
 Route117_Text_2921A4: @ 82921A4
 	.string "{PLAYER} received the EGG from\n"
@@ -335,7 +335,7 @@ Route117_Text_2921CF: @ 82921CF
 Route117_Text_2921E5: @ 82921E5
 	.string "By the way, about your {STR_VAR_1},\n"
 	.string "it seemed to be friendly with\l"
-	.string "{STR_VAR_2}’s {STR_VAR_3}.\p"
+	.string "{STR_VAR_2}'s {STR_VAR_3}.\p"
 	.string "I may even have seen it receiving\n"
 	.string "a piece of MAIL.$"
 
@@ -344,7 +344,7 @@ Route117_Text_29225A: @ 829225A
 	.string "have a word with my wife.$"
 
 Route117_Text_292299: @ 8292299
-	.string "Ah, it’s you! Your {STR_VAR_1} and\n"
+	.string "Ah, it's you! Your {STR_VAR_1} and\n"
 	.string "{STR_VAR_2} are doing fine.$"
 
 Route117_Text_2922C6: @ 82922C6
@@ -352,7 +352,7 @@ Route117_Text_2922C6: @ 82922C6
 	.string "You do want this, yes?$"
 
 Route117_PokemonDayCare_Text_2922F4: @ 82922F4
-	.string "I’m the DAY-CARE LADY.\p"
+	.string "I'm the DAY-CARE LADY.\p"
 	.string "We can raise POKéMON for you.\p"
 	.string "Would you like us to raise one?$"
 
@@ -361,7 +361,7 @@ Route117_PokemonDayCare_Text_292349: @ 8292349
 	.string "you?$"
 
 Route117_PokemonDayCare_Text_292370: @ 8292370
-	.string "Fine, we’ll raise your {STR_VAR_1}\n"
+	.string "Fine, we'll raise your {STR_VAR_1}\n"
 	.string "for a while.\p"
 	.string "Come back for it later.$"
 
@@ -377,7 +377,7 @@ Route117_PokemonDayCare_Text_292416: @ 8292416
 	.string "Come again.$"
 
 Route117_PokemonDayCare_Text_292432: @ 8292432
-	.string "You don’t have enough money…$"
+	.string "You don't have enough money…$"
 
 Route117_PokemonDayCare_Text_29244F: @ 829244F
 	.string "Will you take back the other one,\n"
@@ -388,7 +388,7 @@ Route117_PokemonDayCare_Text_292476: @ 8292476
 	.string "Come again.$"
 
 Route117_PokemonDayCare_Text_292488: @ 8292488
-	.string "Ah, it’s you! Good to see you.\n"
+	.string "Ah, it's you! Good to see you.\n"
 	.string "Your POKéMON can only be doing good!$"
 
 Route117_PokemonDayCare_Text_2924CC: @ 82924CC
@@ -408,7 +408,7 @@ Route117_PokemonDayCare_Text_292549: @ 8292549
 
 Route117_PokemonDayCare_Text_292575: @ 8292575
 	.string "Perfect!\n"
-	.string "Here’s your POKéMON.$"
+	.string "Here's your POKéMON.$"
 
 Route117_PokemonDayCare_Text_292593: @ 8292593
 	.string "{PLAYER} took back {STR_VAR_1} from\n"
@@ -434,6 +434,6 @@ Route117_PokemonDayCare_Text_29266D: @ 829266D
 	.string "Huh?\n"
 	.string "Now, now.\p"
 	.string "If you leave that POKéMON with\n"
-	.string "me, you’ll be left with just one.\p"
+	.string "me, you'll be left with just one.\p"
 	.string "You will be better off if you catch\n"
 	.string "some more, I dare say.$"

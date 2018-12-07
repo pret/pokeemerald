@@ -40,26 +40,26 @@ Route110_TrickHousePuzzle8_Text_26E8CD: @ 826E8CD
 	.string "this far.$"
 
 Route110_TrickHousePuzzle8_Text_26E8F6: @ 826E8F6
-	.string "That must mean you’re tough, too…$"
+	.string "That must mean you're tough, too…$"
 
 Route110_TrickHousePuzzle8_Text_26E918: @ 826E918
-	.string "You’ve beaten the POKéMON LEAGUE\n"
-	.string "CHAMPION? That’s too much!$"
+	.string "You've beaten the POKéMON LEAGUE\n"
+	.string "CHAMPION? That's too much!$"
 
 Route110_TrickHousePuzzle8_Text_26E954: @ 826E954
 	.string "Consider yourself lucky to be\n"
 	.string "battling me!$"
 
 Route110_TrickHousePuzzle8_Text_26E97F: @ 826E97F
-	.string "This isn’t right!\n"
-	.string "I can’t lose!$"
+	.string "This isn't right!\n"
+	.string "I can't lose!$"
 
 Route110_TrickHousePuzzle8_Text_26E99F: @ 826E99F
-	.string "It’s a miracle that you beat me.\n"
+	.string "It's a miracle that you beat me.\n"
 	.string "You can brag about it.$"
 
 Route110_TrickHousePuzzle8_Text_26E9D7: @ 826E9D7
-	.string "You’ve been slugging through the TRICK\n"
+	.string "You've been slugging through the TRICK\n"
 	.string "HOUSE challenge, too.$"
 
 Route110_TrickHousePuzzle8_Text_26EA14: @ 826EA14

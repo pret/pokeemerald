@@ -156,14 +156,14 @@ LilycoveCity_DepartmentStore_1F_Text_21F866: @ 821F866
 LilycoveCity_DepartmentStore_1F_Text_21F88C: @ 821F88C
 	.string "Whenever I come to the DEPARTMENT\n"
 	.string "STORE, I always end up buying all sorts\l"
-	.string "of things because it’s so fun.$"
+	.string "of things because it's so fun.$"
 
 LilycoveCity_DepartmentStore_1F_Text_21F8F5: @ 821F8F5
 	.string "Today, my mom is going to buy me some\n"
 	.string "nice furniture.$"
 
 LilycoveCity_DepartmentStore_1F_Text_21F92B: @ 821F92B
-	.string "I’m buying something for my AZUMARILL\n"
+	.string "I'm buying something for my AZUMARILL\n"
 	.string "as a reward for winning a CONTEST.$"
 
 LilycoveCity_DepartmentStore_1F_Text_21F974: @ 821F974
@@ -172,7 +172,7 @@ LilycoveCity_DepartmentStore_1F_Text_21F974: @ 821F974
 LilycoveCity_DepartmentStore_1F_Text_21F98A: @ 821F98A
 	.string "1F: SERVICE COUNTER\n"
 	.string "    LOTTERY CORNER\p"
-	.string "2F: TRAINER’S ZONE\p"
+	.string "2F: TRAINER'S ZONE\p"
 	.string "3F: BATTLE COLLECTION\p"
 	.string "4F: TM CORNER\p"
 	.string "5F: POKé DOLL FLOOR\p"
@@ -180,12 +180,12 @@ LilycoveCity_DepartmentStore_1F_Text_21F98A: @ 821F98A
 
 LilycoveCity_DepartmentStore_1F_Text_21FA13: @ 821FA13
 	.string "Wireless Communication is a\n"
-	.string "lot of fun, isn’t it?\p"
+	.string "lot of fun, isn't it?\p"
 	.string "I think it lets you do things that\n"
-	.string "weren’t possible before.\p"
+	.string "weren't possible before.\p"
 	.string "For instance, you can now trade\n"
-	.string "with people you couldn’t before.\p"
-	.string "I think it’s going to be exciting!$"
+	.string "with people you couldn't before.\p"
+	.string "I think it's going to be exciting!$"
 
 LilycoveCity_DepartmentStore_1F_Text_21FAE5: @ 821FAE5
 	.string "I want to spread the word about how\n"

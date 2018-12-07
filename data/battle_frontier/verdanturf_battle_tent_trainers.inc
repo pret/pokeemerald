@@ -53,7 +53,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Dilan
 
 @ 2
-	.4byte FACILITY_CLASS_TUBER_1
+	.4byte FACILITY_CLASS_TUBER_F
 	.string "ELIANA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I_AM
@@ -79,7 +79,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Eliana
 
 @ 3
-	.4byte FACILITY_CLASS_TUBER_2
+	.4byte FACILITY_CLASS_TUBER_M
 	.string "MARKUS$", 8
 @ pre-battle speech
 	.2byte EC_WORD_I_AM
@@ -417,7 +417,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Ashlyn
 
 @ 16
-	.4byte FACILITY_CLASS_POKEFAN_1
+	.4byte FACILITY_CLASS_POKEFAN_M
 	.string "ADDISON$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YES
@@ -443,7 +443,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Addison
 
 @ 17
-	.4byte FACILITY_CLASS_POKEFAN_2
+	.4byte FACILITY_CLASS_POKEFAN_F
 	.string "JUSTINE$", 8
 @ pre-battle speech
 	.2byte EC_WORD_YES
@@ -495,7 +495,7 @@ gVerdanturfBattleTentTrainers:: @ 85DE610
 	.4byte gVerdanturfBattleTentTrainerMons_Tyson
 
 @ 19
-	.4byte FACILITY_CLASS_EXPERT_2
+	.4byte FACILITY_CLASS_EXPERT_F
 	.string "LAILA$", 8
 @ pre-battle speech
 	.2byte EC_WORD_A

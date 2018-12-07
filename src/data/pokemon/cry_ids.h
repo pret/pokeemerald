@@ -1,6 +1,3 @@
-#ifndef POKEEMERALD_CRY_IDS_H
-#define POKEEMERALD_CRY_IDS_H
-
 const u16 gSpeciesIdToCryId[] =
 {
     273, // TREECKO
@@ -139,5 +136,3 @@ const u16 gSpeciesIdToCryId[] =
     386, // DEOXYS
     387  // CHIMECHO
 };
-
-#endif //POKEEMERALD_CRY_IDS_H

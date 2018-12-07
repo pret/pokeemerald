@@ -345,7 +345,7 @@ Route110_TrickHousePuzzle7_Text_26E481: @ 826E481
 	.string "like smoke. How does he do it?$"
 
 Route110_TrickHousePuzzle7_Text_26E4C1: @ 826E4C1
-	.string "Aiyeeeh! You’re much too strong!\n"
+	.string "Aiyeeeh! You're much too strong!\n"
 	.string "How do you do it?$"
 
 Route110_TrickHousePuzzle7_Text_26E4F4: @ 826E4F4
@@ -358,49 +358,49 @@ Route110_TrickHousePuzzle7_Text_26E531: @ 826E531
 
 Route110_TrickHousePuzzle7_Text_26E564: @ 826E564
 	.string "Defeated!\n"
-	.string "It’s a bad sign…$"
+	.string "It's a bad sign…$"
 
 Route110_TrickHousePuzzle7_Text_26E57F: @ 826E57F
-	.string "I’ve circled the same spot over ten\n"
-	.string "times now… It’s ill fortune…$"
+	.string "I've circled the same spot over ten\n"
+	.string "times now… It's ill fortune…$"
 
 Route110_TrickHousePuzzle7_Text_26E5C0: @ 826E5C0
 	.string "Whoever wins will get through here\n"
-	.string "first. That’s the feeling I get.$"
+	.string "first. That's the feeling I get.$"
 
 Route110_TrickHousePuzzle7_Text_26E604: @ 826E604
 	.string "Oh!\n"
 	.string "Well, go ahead, then!$"
 
 Route110_TrickHousePuzzle7_Text_26E61E: @ 826E61E
-	.string "You’re solving all the puzzles in the\n"
-	.string "TRICK HOUSE. That’s the feeling I get.$"
+	.string "You're solving all the puzzles in the\n"
+	.string "TRICK HOUSE. That's the feeling I get.$"
 
 Route110_TrickHousePuzzle7_Text_26E66B: @ 826E66B
 	.string "Nufufufu, here at last!\n"
-	.string "Let’s get right with it!$"
+	.string "Let's get right with it!$"
 
 Route110_TrickHousePuzzle7_Text_26E69C: @ 826E69C
-	.string "You’re so casual about winning!$"
+	.string "You're so casual about winning!$"
 
 Route110_TrickHousePuzzle7_Text_26E6BC: @ 826E6BC
-	.string "Humph! I’m not upset!\n"
+	.string "Humph! I'm not upset!\n"
 	.string "Not me!$"
 
 Route110_TrickHousePuzzle7_Text_26E6DA: @ 826E6DA
 	.string "I ever so closely watched you coming!$"
 
 Route110_TrickHousePuzzle7_Text_26E700: @ 826E700
-	.string "This outcome I didn’t see coming…$"
+	.string "This outcome I didn't see coming…$"
 
 Route110_TrickHousePuzzle7_Text_26E722: @ 826E722
 	.string "Well, anyway, we both picked a weird\n"
 	.string "place to get acquainted.\p"
 	.string "As one weirdo to another,\n"
-	.string "let’s do our best!$"
+	.string "let's do our best!$"
 
 Route110_TrickHousePuzzle7_Text_26E78D: @ 826E78D
-	.string "It’s awfully cramped in here…$"
+	.string "It's awfully cramped in here…$"
 
 Route110_TrickHousePuzzle7_Text_26E7AB: @ 826E7AB
 	.string "Oh, yes, strong you are.$"

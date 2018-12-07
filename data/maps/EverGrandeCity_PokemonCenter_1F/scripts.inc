@@ -81,24 +81,24 @@ EverGrandeCity_PokemonCenter_1F_Movement_229AD3: @ 8229AD3
 EverGrandeCity_PokemonCenter_1F_Text_229ADA: @ 8229ADA
 	.string "The POKéMON LEAGUE is only a short\n"
 	.string "distance after the VICTORY ROAD.\p"
-	.string "If you’ve come this far, what choice\n"
+	.string "If you've come this far, what choice\n"
 	.string "do you have but to keep going?$"
 
 EverGrandeCity_PokemonCenter_1F_Text_229B62: @ 8229B62
 	.string "The long and harrowing VICTORY ROAD…\p"
-	.string "It’s like reliving the path one has\n"
+	.string "It's like reliving the path one has\n"
 	.string "traveled in life…\p"
 	.string "Believe in your POKéMON and give it\n"
 	.string "your very best!$"
 
 EverGrandeCity_PokemonCenter_1F_Text_229BF1: @ 8229BF1
-	.string "SCOTT: {PLAYER}{KUN}, you’ve clawed your\n"
+	.string "SCOTT: {PLAYER}{KUN}, you've clawed your\n"
 	.string "way up to face the POKéMON LEAGUE!\p"
-	.string "I’m happy for you!\n"
+	.string "I'm happy for you!\n"
 	.string "You made my cheering worthwhile!\p"
 	.string "{PLAYER}{KUN}, if you were to become\n"
 	.string "the POKéMON LEAGUE CHAMPION…\p"
-	.string "I’ll get in touch with you then.\p"
+	.string "I'll get in touch with you then.\p"
 	.string "Okay, {PLAYER}{KUN}.\n"
 	.string "Go for greatness!$"
 

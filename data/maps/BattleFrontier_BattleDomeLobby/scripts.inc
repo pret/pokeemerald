@@ -556,14 +556,14 @@ BattleFrontier_BattleDomeLobby_Text_249F8E: @ 8249F8E
 	.string "The other two POKéMON can battle\n"
 	.string "one at a time.\p"
 	.string "Choose the two battling POKéMON after\n"
-	.string "examining the opponent’s trio.\p"
+	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
 	.string "Battle Points are awarded to\n"
 	.string "the tournament winner.\p"
 	.string "If you want to interrupt your\n"
 	.string "tournament, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A1C6: @ 824A1C6
@@ -581,7 +581,7 @@ BattleFrontier_BattleDomeLobby_Text_24A26E: @ 824A26E
 
 BattleFrontier_BattleDomeLobby_Text_24A2AB: @ 824A2AB
 	.string "Excuse me!\p"
-	.string "You don’t have three eligible POKéMON.\p"
+	.string "You don't have three eligible POKéMON.\p"
 	.string "Also, the POKéMON must be holding\n"
 	.string "different kinds of items.\p"
 	.string "EGGS{STR_VAR_1} ineligible.\p"
@@ -589,7 +589,7 @@ BattleFrontier_BattleDomeLobby_Text_24A2AB: @ 824A2AB
 
 BattleFrontier_BattleDomeLobby_Text_24A353: @ 824A353
 	.string "Excuse me!\p"
-	.string "You don’t have three eligible POKéMON.\p"
+	.string "You don't have three eligible POKéMON.\p"
 	.string "You must have three different POKéMON\n"
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
@@ -603,7 +603,7 @@ BattleFrontier_BattleDomeLobby_Text_24A437: @ 824A437
 
 BattleFrontier_BattleDomeLobby_Text_24A45F: @ 824A45F
 	.string "Excuse me!\p"
-	.string "You didn’t save before you quit your\n"
+	.string "You didn't save before you quit your\n"
 	.string "challenge last time.\p"
 	.string "Because of that, your challenge so far\n"
 	.string "has been disqualified. Sorry!$"
@@ -633,7 +633,7 @@ BattleFrontier_BattleDomeLobby_Text_24A5D6: @ 824A5D6
 	.string "Please wait.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A5FE: @ 824A5FE
-	.string "We’ve been waiting for you!$"
+	.string "We've been waiting for you!$"
 
 BattleFrontier_BattleDomeLobby_Text_24A61A: @ 824A61A
 	.string "Before I show you to the BATTLE DOME,\n"
@@ -661,30 +661,30 @@ BattleFrontier_BattleDomeLobby_Text_24A721: @ 824A721
 	.string "The remaining two POKéMON must take\n"
 	.string "part in a DOUBLE BATTLE.\p"
 	.string "Choose the two battling POKéMON after\n"
-	.string "examining the opponent’s trio.\p"
+	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
 	.string "Battle Points are awarded to\n"
 	.string "the tournament winner.\p"
 	.string "If you want to interrupt your\n"
 	.string "tournament, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A966: @ 824A966
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Level 50 SINGLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A9A9: @ 824A9A9
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Level 50 DOUBLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A9EC: @ 824A9EC
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Open Level SINGLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24AA31: @ 824AA31
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Open Level DOUBLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24AA76: @ 824AA76
@@ -697,7 +697,7 @@ BattleFrontier_BattleDomeLobby_Text_24AA76: @ 824AA76
 
 BattleFrontier_OutsideWest_Text_24AB06: @ 824AB06
 	.string "The BATTLE FRONTIER…\n"
-	.string "I’ve long dreamed about a place like it.$"
+	.string "I've long dreamed about a place like it.$"
 
 BattleFrontier_OutsideWest_Text_24AB44: @ 824AB44
 	.string "The BATTLE DOME\n"
@@ -722,9 +722,9 @@ BattleFrontier_BattleDomeLobby_Text_24AC76: @ 824AC76
 	.string "Of course I got trashed…$"
 
 BattleFrontier_BattleDomeLobby_Text_24ACD3: @ 824ACD3
-	.string "I would’ve won if I’d kept this POKéMON\n"
+	.string "I would've won if I'd kept this POKéMON\n"
 	.string "held in reserve.\p"
-	.string "You need to check your opponent’s\n"
+	.string "You need to check your opponent's\n"
 	.string "POKéMON carefully before choosing\l"
 	.string "your battling POKéMON.$"
 
@@ -764,7 +764,7 @@ BattleFrontier_BattleDomeLobby_Text_24AF4C: @ 824AF4C
 	.string "The Tournament Tree will provide\n"
 	.string "several kinds of data.\p"
 	.string "The data on view includes the previous\n"
-	.string "tournament’s results, the POKéMON held\l"
+	.string "tournament's results, the POKéMON held\l"
 	.string "by TRAINERS, and the battle styles of\l"
 	.string "TRAINERS.$"
 

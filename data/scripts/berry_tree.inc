@@ -193,10 +193,10 @@ Route102_EventScript_2744DD:: @ 82744DD
 	return
 
 Route102_Text_2744F0: @ 82744F0
-	.string "It’s soft, loamy soil.$"
+	.string "It's soft, loamy soil.$"
 
 Route102_Text_274507: @ 8274507
-	.string "It’s soft, loamy soil.\n"
+	.string "It's soft, loamy soil.\n"
 	.string "Want to plant a BERRY?$"
 
 Route102_Text_274535: @ 8274535
@@ -235,13 +235,13 @@ Route102_Text_27461B: @ 827461B
 
 Route102_Text_274630: @ 8274630
 	.string "{PLAYER} put away the {STR_VAR_1}\n"
-	.string "in the BAG’s BERRIES POCKET.\p"
+	.string "in the BAG's BERRIES POCKET.\p"
 	.string "The soil returned to its soft and\n"
 	.string "loamy state.$"
 
 Route102_Text_27468F: @ 827468F
-	.string "The BAG’s BERRIES POCKET is full.\p"
-	.string "The {STR_VAR_1} couldn’t be taken.$"
+	.string "The BAG's BERRIES POCKET is full.\p"
+	.string "The {STR_VAR_1} couldn't be taken.$"
 
 Route102_Text_2746CB: @ 82746CB
 	.string "{PLAYER} left the {STR_VAR_1}\n"

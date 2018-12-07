@@ -26,8 +26,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern struct UnusedControllerStruct gUnknown_02022D0C;
-
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 

@@ -1,6 +1,3 @@
-#ifndef GUARD_EVENT_OBJECT_PIC_TABLES_H
-#define GUARD_EVENT_OBJECT_PIC_TABLES_H
-
 const struct SpriteFrameImage gEventObjectPicTable_BrendanNormal[] = {
     overworld_frame(gEventObjectPic_BrendanNormal, 2, 4, 0),
     overworld_frame(gEventObjectPic_BrendanNormal, 2, 4, 1),
@@ -2175,5 +2172,3 @@ const struct SpriteFrameImage gEventObjectPicTable_RubySapphireMay[] = {
     overworld_frame(gEventObjectPic_RubySapphireMayNormal, 2, 4, 7),
     overworld_frame(gEventObjectPic_RubySapphireMayNormal, 2, 4, 8),
 };
-
-#endif //GUARD_EVENT_OBJECT_PIC_TABLES_H
