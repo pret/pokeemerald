@@ -326,7 +326,7 @@ BattleFrontier_BattlePikeThreePathRoom_Text_25CD3C: @ 825CD3C
 	.string "Battle Choice challenge?$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_25CD75: @ 825CD75
-	.string "We’ve been awaiting your return…\p"
+	.string "We've been awaiting your return…\p"
 	.string "Before resuming your Battle Choice\n"
 	.string "challenge, let me save the game…$"
 

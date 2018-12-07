@@ -56,27 +56,27 @@ PacifidlogTown_House3_EventScript_203CB5:: @ 8203CB5
 
 PacifidlogTown_House3_Text_203CBE: @ 8203CBE
 	.string "Check out this {STR_VAR_2}!\p"
-	.string "It’s the {STR_VAR_2} that I caught\n"
+	.string "It's the {STR_VAR_2} that I caught\n"
 	.string "yesterday to celebrate my birthday!\p"
 	.string "Oh, I can see that you want it!\n"
-	.string "After all, it’s priceless!\p"
-	.string "I’ll tell you what. I might be willing\n"
+	.string "After all, it's priceless!\p"
+	.string "I'll tell you what. I might be willing\n"
 	.string "to trade it for a {STR_VAR_1}.$"
 
 PacifidlogTown_House3_Text_203D87: @ 8203D87
 	.string "Oh, so this is a {STR_VAR_1}?\p"
-	.string "It’s sort of like a {STR_VAR_2},\n"
-	.string "and yet it’s subtly different.\p"
+	.string "It's sort of like a {STR_VAR_2},\n"
+	.string "and yet it's subtly different.\p"
 	.string "Thank you!$"
 
 PacifidlogTown_House3_Text_203DDE: @ 8203DDE
-	.string "No, no, no! I won’t accept any\n"
+	.string "No, no, no! I won't accept any\n"
 	.string "less than a real {STR_VAR_1}!$"
 
 PacifidlogTown_House3_Text_203E12: @ 8203E12
-	.string "Oh, so you’re not going to go through\n"
+	.string "Oh, so you're not going to go through\n"
 	.string "with this?\p"
-	.string "That’s cool. I’m not desperate to make\n"
+	.string "That's cool. I'm not desperate to make\n"
 	.string "a trade or anything.$"
 
 PacifidlogTown_House3_Text_203E7F: @ 8203E7F

@@ -236,9 +236,9 @@ SeafloorCavern_Room9_Text_2350A6: @ 82350A6
 	.string "come…$"
 
 SeafloorCavern_Room9_Text_23512C: @ 823512C
-	.string "ARCHIE: It surprises me, how you’ve\n"
+	.string "ARCHIE: It surprises me, how you've\n"
 	.string "managed to chase me here.\p"
-	.string "But that’s all over now.\p"
+	.string "But that's all over now.\p"
 	.string "For the realization of my dream,\n"
 	.string "you must disappear now!$"
 
@@ -260,32 +260,32 @@ SeafloorCavern_Room9_Text_235279: @ 8235279
 
 SeafloorCavern_Room9_Text_2352A7: @ 82352A7
 	.string "ARCHIE: What?!\p"
-	.string "I didn’t do anything.\n"
+	.string "I didn't do anything.\n"
 	.string "Why did the RED ORB…\p"
 	.string "Where did KYOGRE go?$"
 
 SeafloorCavern_Room9_Text_2352F6: @ 82352F6
-	.string "ARCHIE: Hm? It’s a message from our\n"
+	.string "ARCHIE: Hm? It's a message from our\n"
 	.string "members outside…$"
 
 SeafloorCavern_Room9_Text_23532B: @ 823532B
 	.string "ARCHIE: Yes, what is it?\p"
 	.string "Hm…\n"
-	.string "It’s raining heavily?\p"
+	.string "It's raining heavily?\p"
 	.string "Good… That should have happened.\n"
 	.string "That is why we awakened KYOGRE,\l"
-	.string "to realize TEAM AQUA’s vision of\l"
+	.string "to realize TEAM AQUA's vision of\l"
 	.string "expanding the sea.\p"
 	.string "What?!\p"
-	.string "It’s raining far harder than we\n"
-	.string "envisioned? You’re in danger?\p"
-	.string "That can’t be…\n"
-	.string "That’s just not possible…\p"
+	.string "It's raining far harder than we\n"
+	.string "envisioned? You're in danger?\p"
+	.string "That can't be…\n"
+	.string "That's just not possible…\p"
 	.string "Hold your position and monitor\n"
 	.string "the situation!$"
 
 SeafloorCavern_Room9_Text_23546F: @ 823546F
-	.string "ARCHIE: There’s something wrong…\p"
+	.string "ARCHIE: There's something wrong…\p"
 	.string "The RED ORB is supposed to awaken\n"
 	.string "and control KYOGRE…\p"
 	.string "But… Why?\n"
@@ -294,27 +294,27 @@ SeafloorCavern_Room9_Text_23546F: @ 823546F
 
 SeafloorCavern_Room9_Text_2354F0: @ 82354F0
 	.string "MAXIE: What have you wrought?\p"
-	.string "ARCHIE… You’ve finally awoken KYOGRE,\n"
-	.string "haven’t you?\p"
+	.string "ARCHIE… You've finally awoken KYOGRE,\n"
+	.string "haven't you?\p"
 	.string "What will happen to the world if this\n"
 	.string "downpour continues for all eternity?\p"
-	.string "The world’s landmass will drown in\n"
+	.string "The world's landmass will drown in\n"
 	.string "the deepening sea…$"
 
 SeafloorCavern_Room9_Text_2355C2: @ 82355C2
 	.string "ARCHIE: W-what?!\n"
-	.string "Don’t get all high and mighty with me!\p"
-	.string "Wasn’t it you, TEAM MAGMA, that\n"
+	.string "Don't get all high and mighty with me!\p"
+	.string "Wasn't it you, TEAM MAGMA, that\n"
 	.string "infuriated GROUDON?\p"
 	.string "So long as I have this RED ORB,\n"
 	.string "I should be able to control KYOGRE…\p"
 	.string "I should be able to control it…$"
 
 SeafloorCavern_Room9_Text_235692: @ 8235692
-	.string "MAXIE: We don’t have the time to\n"
+	.string "MAXIE: We don't have the time to\n"
 	.string "argue about it here!\p"
 	.string "Get outside and see for yourself!\p"
-	.string "See if what you’ve wrought is the\n"
+	.string "See if what you've wrought is the\n"
 	.string "world that we desired!$"
 
 SeafloorCavern_Room9_Text_235723: @ 8235723

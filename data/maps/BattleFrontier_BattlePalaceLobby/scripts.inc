@@ -477,7 +477,7 @@ BattleFrontier_BattlePalaceLobby_Text_24DE17: @ 824DE17
 	.string "we will present you with Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, you must save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattlePalaceLobby_Text_24E0D8: @ 824E0D8
@@ -529,7 +529,7 @@ BattleFrontier_BattlePalaceLobby_Text_24E408: @ 824E408
 
 BattleFrontier_BattlePalaceLobby_Text_24E41E: @ 824E41E
 	.string "I feel privileged for having seen\n"
-	.string "your POKéMON’s exploits.\p"
+	.string "your POKéMON's exploits.\p"
 	.string "The results will be recorded.\n"
 	.string "I must ask you to briefly wait.$"
 
@@ -578,13 +578,13 @@ BattleFrontier_BattlePalaceLobby_Text_24E6E3: @ 824E6E3
 	.string "hardy POKéMON are the best.\p"
 	.string "Offense is the best defense!\n"
 	.string "A relentless attack is the ultimate!\p"
-	.string "But that’s not what I wanted to chat\n"
+	.string "But that's not what I wanted to chat\n"
 	.string "about.\p"
 	.string "Every so often a really cute lady\n"
 	.string "swings by here.\p"
 	.string "She says that she can tell what\n"
 	.string "POKéMON are thinking.\p"
-	.string "I don’t know about that part,\n"
+	.string "I don't know about that part,\n"
 	.string "but she is really cute.\p"
 	.string "Huh?\n"
 	.string "Why are you looking at me like that?$"
@@ -594,7 +594,7 @@ BattleFrontier_BattlePalaceLobby_Text_24E851: @ 824E851
 	.string "It appears that the nature of POKéMON\n"
 	.string "and the moves that they have been\l"
 	.string "taught are the keys to battle here.\p"
-	.string "To be more precise, it’s how well\n"
+	.string "To be more precise, it's how well\n"
 	.string "the moves match the nature of\l"
 	.string "the POKéMON.\p"
 	.string "If your POKéMON is in trouble and\n"
@@ -604,18 +604,18 @@ BattleFrontier_BattlePalaceLobby_Text_24E851: @ 824E851
 
 BattleFrontier_BattlePalaceLobby_Text_24E992: @ 824E992
 	.string "My POKéMON is usually very docile.\p"
-	.string "But when it’s in a BATTLE HALL,\n"
+	.string "But when it's in a BATTLE HALL,\n"
 	.string "it sometimes seems to become\l"
 	.string "transformed into something wicked!\p"
 	.string "It becomes totally intimidating.\n"
-	.string "It’s shocking, even.$"
+	.string "It's shocking, even.$"
 
 BattleFrontier_BattlePalaceLobby_Text_24EA4B: @ 824EA4B
 	.string "I wonder what sort of nature a POKéMON\n"
 	.string "would have if it favored enfeebling its\l"
 	.string "opponents and chipping away slowly.\p"
-	.string "I’d be surprised if it was a LAX nature.\p"
-	.string "But, nah, that can’t be right.$"
+	.string "I'd be surprised if it was a LAX nature.\p"
+	.string "But, nah, that can't be right.$"
 
 BattleFrontier_BattlePalaceLobby_Text_24EB06: @ 824EB06
 	.string "Where the hearts of TRAINERS\n"
@@ -648,7 +648,7 @@ BattleFrontier_BattlePalaceLobby_Text_24EBC2: @ 824EBC2
 	.string "we will present you with Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattlePalaceLobby_Text_24EE81: @ 824EE81
@@ -722,7 +722,7 @@ VerdanturfTown_BattleTentLobby_Text_24F2E8: @ 824F2E8
 BattleFrontier_BattlePalaceLobby_Text_24F3F4: @ 824F3F4
 VerdanturfTown_BattleTentLobby_Text_24F3F4: @ 824F3F4
 	.string "Depending on its nature, a POKéMON may\n"
-	.string "start using moves that don’t match its\l"
+	.string "start using moves that don't match its\l"
 	.string "nature when it is in trouble.\p"
 	.string "If a POKéMON begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"

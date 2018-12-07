@@ -51,7 +51,7 @@ Route114_LanettesHouse_EventScript_22B345:: @ 822B345
 
 Route114_LanettesHouse_Text_22B34E: @ 822B34E
 	.string "LANETTE: Oh! {PLAYER}{KUN}!\p"
-	.string "I’m sorry everything is so cluttered…\n"
+	.string "I'm sorry everything is so cluttered…\n"
 	.string "When I get engrossed in research,\l"
 	.string "things end up this way…\p"
 	.string "This is embarrassing… Please keep\n"
@@ -64,8 +64,8 @@ Route114_LanettesHouse_Text_22B407: @ 822B407
 	.string "can tell which POKéMON are in them.$"
 
 Route114_LanettesHouse_Text_22B485: @ 822B485
-	.string "It’s LANETTE’s research notes.\n"
-	.string "There’s information about BOXES.\p"
+	.string "It's LANETTE's research notes.\n"
+	.string "There's information about BOXES.\p"
 	.string "Design BOXES to hold 30 POKéMON each.\p"
 	.string "Each TRAINER should be able to store\n"
 	.string "420 POKéMON on the PC system.\p"
@@ -92,7 +92,7 @@ Route114_LanettesHouse_Text_22B6E4: @ 822B6E4
 	.string "{PLAYER} closed the notebook.$"
 
 Route114_LanettesHouse_Text_22B6FC: @ 822B6FC
-	.string "There’s an e-mail from someone on\n"
+	.string "There's an e-mail from someone on\n"
 	.string "the PC.\p"
 	.string "“… … … … … … …\p"
 	.string "“Your Storage System offers more\n"
@@ -101,7 +101,7 @@ Route114_LanettesHouse_Text_22B6FC: @ 822B6FC
 	.string "that make it fun and useful, too.\p"
 	.string "“It makes me proud that I played\n"
 	.string "a part in its development.\p"
-	.string "“Here’s hoping that you’ll continue\n"
+	.string "“Here's hoping that you'll continue\n"
 	.string "research in Storage Systems.\p"
 	.string "“From BILL\n"
 	.string "… … … … … … … …”$"

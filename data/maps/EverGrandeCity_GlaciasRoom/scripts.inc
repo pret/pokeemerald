@@ -64,7 +64,7 @@ EverGrandeCity_GlaciasRoom_EventScript_22849A:: @ 822849A
 EverGrandeCity_GlaciasRoom_Text_2284AC: @ 82284AC
 	.string "Welcome, my name is GLACIA\n"
 	.string "of the ELITE FOUR.\p"
-	.string "I’ve traveled from afar to HOENN\n"
+	.string "I've traveled from afar to HOENN\n"
 	.string "so that I may hone my ice skills.\p"
 	.string "But all I have seen are challenges by\n"
 	.string "weak TRAINERS and their POKéMON.\p"
@@ -76,7 +76,7 @@ EverGrandeCity_GlaciasRoom_Text_2285B4: @ 82285B4
 	.string "You and your POKéMON…\n"
 	.string "How hot your spirits burn!\p"
 	.string "The all-consuming heat overwhelms.\p"
-	.string "It’s no surprise that my icy skills\n"
+	.string "It's no surprise that my icy skills\n"
 	.string "failed to harm you.$"
 
 EverGrandeCity_GlaciasRoom_Text_228640: @ 8228640

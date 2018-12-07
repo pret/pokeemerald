@@ -42,7 +42,7 @@ MossdeepCity_Mart_Text_222411: @ 8222411
 	.string "REVIVE is fantastic!\p"
 	.string "Give it to a fainted POKéMON,\n"
 	.string "and the POKéMON will arise.\p"
-	.string "But be careful, REVIVE doesn’t restore\n"
+	.string "But be careful, REVIVE doesn't restore\n"
 	.string "the used-up PP of moves.$"
 
 MossdeepCity_Mart_Text_2224A0: @ 82224A0

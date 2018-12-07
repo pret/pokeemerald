@@ -20,7 +20,7 @@ ShoalCave_LowTideEntranceRoom_Text_2A7F37: @ 82A7F37
 	.string "a SHELL BELL with them?$"
 
 ShoalCave_LowTideEntranceRoom_Text_2A7FAC: @ 82A7FAC
-	.string "All righty, then! I’ll make you\n"
+	.string "All righty, then! I'll make you\n"
 	.string "a SHELL BELL right away.\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
@@ -28,9 +28,9 @@ ShoalCave_LowTideEntranceRoom_Text_2A7FAC: @ 82A7FAC
 
 ShoalCave_LowTideEntranceRoom_Text_2A8012: @ 82A8012
 	.string "Have a POKéMON hold on to that.\n"
-	.string "It’ll love it, that’s for certain.\p"
-	.string "Why, the SHELL BELL’s chime…\n"
-	.string "It’s simply sublime!\p"
+	.string "It'll love it, that's for certain.\p"
+	.string "Why, the SHELL BELL's chime…\n"
+	.string "It's simply sublime!\p"
 	.string "You can get its ingredients every day,\n"
 	.string "so I can make you more.$"
 
@@ -39,7 +39,7 @@ ShoalCave_LowTideEntranceRoom_Text_2A80C6: @ 82A80C6
 	.string "I wanted to make a SHELL BELL…$"
 
 ShoalCave_LowTideEntranceRoom_Text_2A80F5: @ 82A80F5
-	.string "You don’t have space in your BAG\n"
+	.string "You don't have space in your BAG\n"
 	.string "if I were to make it for you.\p"
 	.string "You should make room and come back\n"
 	.string "for a SHELL BELL.$"
@@ -48,8 +48,8 @@ ShoalCave_LowTideInnerRoom_Text_2A8169: @ 82A8169
 ShoalCave_LowTideLowerRoom_Text_2A8169: @ 82A8169
 ShoalCave_LowTideStairsRoom_Text_2A8169: @ 82A8169
 	.string "There was some SHOAL SALT here.\n"
-	.string "But, there’s nothing here now.$"
+	.string "But, there's nothing here now.$"
 
 ShoalCave_LowTideInnerRoom_Text_2A81A8: @ 82A81A8
 	.string "There was a SHOAL SHELL here.\n"
-	.string "But, there’s nothing here now.$"
+	.string "But, there's nothing here now.$"

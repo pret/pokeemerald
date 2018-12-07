@@ -17,10 +17,10 @@ gEasyChatWord_Your:: @ 8599361
 	.string "YOUR$"
 
 gEasyChatWord_Youre:: @ 8599366
-	.string "YOU’RE$"
+	.string "YOU'RE$"
 
 gEasyChatWord_Youve:: @ 859936D
-	.string "YOU’VE$"
+	.string "YOU'VE$"
 
 gEasyChatWord_Mother:: @ 8599374
 	.string "MOTHER$"
@@ -89,10 +89,10 @@ gEasyChatWord_His:: @ 85993F7
 	.string "HIS$"
 
 gEasyChatWord_Hes:: @ 85993FB
-	.string "HE’S$"
+	.string "HE'S$"
 
 gEasyChatWord_Arent:: @ 8599400
-	.string "AREN’T$"
+	.string "AREN'T$"
 
 gEasyChatWord_Siblings:: @ 8599407
 	.string "SIBLINGS$"
@@ -125,7 +125,7 @@ gEasyChatWord_IAm:: @ 859943C
 	.string "I AM$"
 
 gEasyChatWord_Ive:: @ 8599441
-	.string "I’VE$"
+	.string "I'VE$"
 
 gEasyChatWord_Who:: @ 8599446
 	.string "WHO$"
@@ -146,7 +146,7 @@ gEasyChatWord_WhoIs:: @ 8599468
 	.string "WHO IS$"
 
 gEasyChatWord_Its:: @ 859946F
-	.string "IT’S$"
+	.string "IT'S$"
 
 gEasyChatWord_Lady:: @ 8599474
 	.string "LADY$"
@@ -176,10 +176,10 @@ gEasyChatWord_Their:: @ 85994A8
 	.string "THEIR$"
 
 gEasyChatWord_Theyre:: @ 85994AE
-	.string "THEY’RE$"
+	.string "THEY'RE$"
 
 gEasyChatWord_Theyve:: @ 85994B6
-	.string "THEY’VE$"
+	.string "THEY'VE$"
 
 gEasyChatWord_We:: @ 85994BE
 	.string "WE$"
@@ -194,13 +194,13 @@ gEasyChatWord_Our:: @ 85994CC
 	.string "OUR$"
 
 gEasyChatWord_WeAre:: @ 85994D0
-	.string "WE’RE$"
+	.string "WE'RE$"
 
 gEasyChatWord_Rival:: @ 85994D6
 	.string "RIVAL$"
 
 gEasyChatWord_Weve:: @ 85994DC
-	.string "WE’VE$"
+	.string "WE'VE$"
 
 gEasyChatWord_Woman:: @ 85994E2
 	.string "WOMAN$"

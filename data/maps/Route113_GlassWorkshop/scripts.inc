@@ -311,7 +311,7 @@ Route113_GlassWorkshop_EventScript_26F194:: @ 826F194
 Route113_GlassWorkshop_Text_26F19D: @ 826F19D
 	.string "This area is covered in volcanic ash,\n"
 	.string "huff-puff!\p"
-	.string "I’m specially gifted, huff-puff.\p"
+	.string "I'm specially gifted, huff-puff.\p"
 	.string "I make glass out of volcanic ash\n"
 	.string "and make items, huff-puff.\p"
 	.string "Go collect ashes with this, huff-puff.$"
@@ -321,7 +321,7 @@ Route113_GlassWorkshop_Text_26F252: @ 826F252
 	.string "through piles of ash, huff-puff.\p"
 	.string "And it will fill up with the volcanic ash,\n"
 	.string "huff-puff.\p"
-	.string "Once you think you’ve collected a good\n"
+	.string "Once you think you've collected a good\n"
 	.string "amount, come see me, huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F312: @ 826F312
@@ -330,16 +330,16 @@ Route113_GlassWorkshop_Text_26F312: @ 826F312
 
 Route113_GlassWorkshop_Text_26F34E: @ 826F34E
 	.string "Hmmm…\n"
-	.string "There’s not enough ash here, huff-puff.\l"
-	.string "I can’t make glass with this, huff-puff.\p"
-	.string "Let’s see… {STR_VAR_1} is the number of steps\n"
-	.string "you’ll need to walk for me to make you\l"
+	.string "There's not enough ash here, huff-puff.\l"
+	.string "I can't make glass with this, huff-puff.\p"
+	.string "Let's see… {STR_VAR_1} is the number of steps\n"
+	.string "you'll need to walk for me to make you\l"
 	.string "a BLUE FLUTE, huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F40A: @ 826F40A
 	.string "Oh!\n"
-	.string "You’ve got a lot of ashes, huff-puff!\p"
-	.string "I’ll make you a glass item, huff-puff!\n"
+	.string "You've got a lot of ashes, huff-puff!\p"
+	.string "I'll make you a glass item, huff-puff!\n"
 	.string "Which one would you like, huff-puff?$"
 
 Route113_GlassWorkshop_Text_26F480: @ 826F480
@@ -351,47 +351,47 @@ Route113_GlassWorkshop_Text_26F4B5: @ 826F4B5
 
 Route113_GlassWorkshop_Text_26F4DA: @ 826F4DA
 	.string "A {STR_VAR_1} it is, then, huff-puff!\p"
-	.string "Okay! I’ll make it for you, huff-puff.\n"
+	.string "Okay! I'll make it for you, huff-puff.\n"
 	.string "Just wait a little while, huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F543: @ 826F543
 	.string "A {STR_VAR_1}, huff-puff?\p"
-	.string "There’s not enough ash here to make\n"
+	.string "There's not enough ash here to make\n"
 	.string "that, though, huff-puff.\p"
-	.string "Let’s see… {STR_VAR_2} is the number of steps\n"
-	.string "you’ll need to walk through volcanic ash\l"
+	.string "Let's see… {STR_VAR_2} is the number of steps\n"
+	.string "you'll need to walk through volcanic ash\l"
 	.string "for me to make that item, huff-puff.\p"
 	.string "Which item would you rather have me\n"
 	.string "make instead, huff-puff?$"
 
 Route113_GlassWorkshop_Text_26F641: @ 826F641
-	.string "You’ve collected all that ash, but you\n"
-	.string "don’t want anything, huff-puff?$"
+	.string "You've collected all that ash, but you\n"
+	.string "don't want anything, huff-puff?$"
 
 Route113_GlassWorkshop_Text_26F688: @ 826F688
-	.string "Ah, I’ve finished your {STR_VAR_1}.\n"
+	.string "Ah, I've finished your {STR_VAR_1}.\n"
 	.string "Take it, huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F6B7: @ 826F6B7
 	.string "Oh?\n"
-	.string "You’ve no room in your BAG, huff-puff.\p"
-	.string "I’ll hold on to it, so come back later,\n"
+	.string "You've no room in your BAG, huff-puff.\p"
+	.string "I'll hold on to it, so come back later,\n"
 	.string "huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F715: @ 826F715
 	.string "Oh?\n"
-	.string "You’ve no room in your PC, huff-puff?\p"
-	.string "I’ll hold on to it, so come back later,\n"
+	.string "You've no room in your PC, huff-puff?\p"
+	.string "I'll hold on to it, so come back later,\n"
 	.string "huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F772: @ 826F772
-	.string "Hah? You haven’t got your SOOT SACK\n"
+	.string "Hah? You haven't got your SOOT SACK\n"
 	.string "with you, huff-puff.\p"
 	.string "You have to keep it with you to collect\n"
 	.string "volcanic ash, huff-puff.$"
 
 Route113_GlassWorkshop_Text_26F7EC: @ 826F7EC
-	.string "It’s fun to blow a glass flute while\n"
+	.string "It's fun to blow a glass flute while\n"
 	.string "my boss is talking.\p"
 	.string "Huff-huff! Puff-puff!$"
 

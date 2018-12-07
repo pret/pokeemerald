@@ -626,7 +626,7 @@ BattleFrontier_BattlePyramidLobby_Text_25100C: @ 825100C
 	.string "If you want to interrupt your\n"
 	.string "challenge, you must select “REST”\l"
 	.string "and save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251248: @ 8251248
@@ -696,21 +696,21 @@ BattleFrontier_BattlePyramidLobby_Text_2516D6: @ 82516D6
 	.string "You did not save before ending\n"
 	.string "your challenge the last time.\p"
 	.string "Consequently, your challenge has\n"
-	.string "been disqualified, I’m sorry to say.\p"
-	.string "Here is the BAG we’ve been holding\n"
+	.string "been disqualified, I'm sorry to say.\p"
+	.string "Here is the BAG we've been holding\n"
 	.string "for you.\p"
 	.string "{PLAYER} got the BAG back.$"
 
 BattleFrontier_BattlePyramidLobby_Text_2517B5: @ 82517B5
 	.string "Excellent to see you back!\p"
-	.string "You’ve conquered the PYRAMID!\n"
+	.string "You've conquered the PYRAMID!\n"
 	.string "How splendid!$"
 
 BattleFrontier_BattlePyramidLobby_Text_2517FC: @ 82517FC
 	.string "Ah, a slight problem.\p"
 	.string "At least one POKéMON is holding\n"
 	.string "an item.\p"
-	.string "I’m sorry to say, items obtained in\n"
+	.string "I'm sorry to say, items obtained in\n"
 	.string "the PYRAMID cannot be taken away.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251881: @ 8251881
@@ -719,8 +719,8 @@ BattleFrontier_BattlePyramidLobby_Text_251881: @ 8251881
 
 BattleFrontier_BattlePyramidLobby_Text_2518C6: @ 82518C6
 	.string "The BATTLE BAG cannot hold all your\n"
-	.string "items, I’m sorry to say.\p"
-	.string "Please pick the items you’ll keep in the\n"
+	.string "items, I'm sorry to say.\p"
+	.string "Please pick the items you'll keep in the\n"
 	.string "BATTLE BAG, and with your POKéMON.$"
 
 BattleFrontier_BattlePyramidLobby_Text_25194F: @ 825194F
@@ -728,7 +728,7 @@ BattleFrontier_BattlePyramidLobby_Text_25194F: @ 825194F
 	.string "holding an item.$"
 
 BattleFrontier_BattlePyramidLobby_Text_25197E: @ 825197E
-	.string "Please pick the items you’ll keep in the\n"
+	.string "Please pick the items you'll keep in the\n"
 	.string "BATTLE BAG, and with your POKéMON.$"
 
 BattleFrontier_BattlePyramidLobby_Text_2519CA: @ 82519CA
@@ -739,7 +739,7 @@ BattleFrontier_BattlePyramidLobby_Text_2519F8: @ 82519F8
 	.string "The BATTLE BAG you used will be kept\n"
 	.string "in readiness for your next challenge.\p"
 	.string "{PLAYER} turned the BATTLE BAG over\n"
-	.string "for the BAG’s return.$"
+	.string "for the BAG's return.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251A77: @ 8251A77
 	.string "I must record your results.\n"
@@ -756,12 +756,12 @@ BattleFrontier_BattlePyramidLobby_Text_251AE2: @ 8251AE2
 BattleFrontier_BattlePyramidLobby_Text_251AFC: @ 8251AFC
 	.string "…Ah…\n"
 	.string "Your BAG appears to be filled.\p"
-	.string "Please return after you’ve organized\n"
-	.string "your BAG’s contents.$"
+	.string "Please return after you've organized\n"
+	.string "your BAG's contents.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251B5A: @ 8251B5A
 	.string "How disappointing for you…\p"
-	.string "Here is the BAG we’ve been holding\n"
+	.string "Here is the BAG we've been holding\n"
 	.string "for you.\p"
 	.string "{PLAYER} got the BAG back.$"
 
@@ -818,7 +818,7 @@ BattleFrontier_BattlePyramidLobby_Text_251EA1: @ 8251EA1
 	.string "I sense terrific energy rising from\n"
 	.string "the ground below…\p"
 	.string "…And, I see your POKéMON unable to\n"
-	.string "escape the power’s clutches…$"
+	.string "escape the power's clutches…$"
 
 BattleFrontier_BattlePyramidLobby_Text_251F17: @ 8251F17
 	.string "I see ICE-type POKéMON…\p"
@@ -908,7 +908,7 @@ BattleFrontier_BattlePyramidLobby_Text_2524DA: @ 82524DA
 	.string "If you run fast, TRAINERS may notice\n"
 	.string "and come after you for a battle.\p"
 	.string "So, if you want to avoid TRAINERS,\n"
-	.string "don’t catch their eyes, but sneak\l"
+	.string "don't catch their eyes, but sneak\l"
 	.string "cautiously and quietly past them.$"
 
 BattleFrontier_BattlePyramidLobby_Text_252595: @ 8252595
@@ -919,8 +919,8 @@ BattleFrontier_BattlePyramidLobby_Text_252595: @ 8252595
 
 BattleFrontier_BattlePyramidLobby_Text_2525F4: @ 82525F4
 	.string "Welcome back!\n"
-	.string "You’ve done the unthinkable!\p"
-	.string "You’ve defeated the PYRAMID KING\n"
+	.string "You've done the unthinkable!\p"
+	.string "You've defeated the PYRAMID KING\n"
 	.string "and conquered the BATTLE PYRAMID!$"
 
 BattleFrontier_BattlePyramidLobby_Text_252662: @ 8252662

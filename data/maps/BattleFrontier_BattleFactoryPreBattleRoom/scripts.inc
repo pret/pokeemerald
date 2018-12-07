@@ -567,7 +567,7 @@ SlateportCity_BattleTentCorridor_Text_25A37A: @ 825A37A
 	.string "Battle Swap challenge?$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4: @ 825A3B4
-	.string "I’ve conducted a little investigation\n"
+	.string "I've conducted a little investigation\n"
 	.string "about your upcoming opponent.$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3F8: @ 825A3F8
@@ -656,7 +656,7 @@ Text_StyleHighRisk: @ 825A94C
 
 Text_StyleDependsOnFlow: @ 825A98C
 	.string "The favorite battle style appears to\n"
-	.string "depend on the battle’s flow.$"
+	.string "depend on the battle's flow.$"
 
 Text_StyleTotalPreparation: @ 825A9CE
 	.string "The favorite battle style appears to\n"
@@ -712,9 +712,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC58: @ 825AC58
 BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC89: @ 825AC89
 	.string "Oh, my…\n"
 	.string "Sorry to keep you waiting!\p"
-	.string "I have a message from this facility’s\n"
+	.string "I have a message from this facility's\n"
 	.string "boss, the FACTORY HEAD.\p"
-	.string "He says, “We’re going to do it!\n"
+	.string "He says, “We're going to do it!\n"
 	.string "Come here right now!”$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD20: @ 825AD20
@@ -722,5 +722,5 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD20: @ 825AD20
 	.string "Are you prepared to face him?$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD61: @ 825AD61
-	.string "I’m terribly sorry, but I can’t tell you\n"
+	.string "I'm terribly sorry, but I can't tell you\n"
 	.string "anything about the FACTORY HEAD.$"

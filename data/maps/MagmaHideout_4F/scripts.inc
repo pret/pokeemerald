@@ -130,14 +130,14 @@ MagmaHideout_4F_EventScript_23A6D1:: @ 823A6D1
 
 MagmaHideout_4F_Text_23A6E8: @ 823A6E8
 	.string "I want to see GROUDON, too, but they\n"
-	.string "won’t let me see even its tail…\p"
-	.string "It’s got me feeling really frustrated.\p"
+	.string "won't let me see even its tail…\p"
+	.string "It's got me feeling really frustrated.\p"
 	.string "Oh, no!\n"
 	.string "I blabbed about GROUDON!$"
 
 MagmaHideout_4F_Text_23A775: @ 823A775
-	.string "I guess it’s impossible to win if one\n"
-	.string "doesn’t have a calm mind…$"
+	.string "I guess it's impossible to win if one\n"
+	.string "doesn't have a calm mind…$"
 
 MagmaHideout_4F_Text_23A7B5: @ 823A7B5
 	.string "I wonder if GROUDON even has a tail?$"
@@ -149,15 +149,15 @@ MagmaHideout_4F_Text_23A7DA: @ 823A7DA
 
 MagmaHideout_4F_Text_23A81B: @ 823A81B
 	.string "Grrr…\n"
-	.string "I’ve come so far, but now this?$"
+	.string "I've come so far, but now this?$"
 
 MagmaHideout_4F_Text_23A841: @ 823A841
 	.string "MAXIE, sir!\n"
 	.string "An intruder is headed your way!$"
 
 MagmaHideout_4F_Text_23A86D: @ 823A86D
-	.string "You’re not finished yet!\n"
-	.string "You’re not getting by me easily!$"
+	.string "You're not finished yet!\n"
+	.string "You're not getting by me easily!$"
 
 MagmaHideout_4F_Text_23A8A7: @ 823A8A7
 	.string "Was I that easy to knock down?$"
@@ -167,12 +167,12 @@ MagmaHideout_4F_Text_23A8C6: @ 823A8C6
 
 MagmaHideout_4F_Text_23A8E1: @ 823A8E1
 	.string "Hehehe!\n"
-	.string "You made it this far, so I’ll tell you!\p"
-	.string "That’s right!\n"
+	.string "You made it this far, so I'll tell you!\p"
+	.string "That's right!\n"
 	.string "Up ahead, GROUDON is sleeping!\p"
 	.string "MAXIE went to GROUDON just seconds\n"
 	.string "ago!\p"
-	.string "It’s going to awaken real soon!\n"
+	.string "It's going to awaken real soon!\n"
 	.string "Hehe! Hehehe!$"
 
 MagmaHideout_4F_Text_23A994: @ 823A994
@@ -188,7 +188,7 @@ MagmaHideout_4F_Text_23A9F4: @ 823A9F4
 	.string "Nothing could awaken you from your\n"
 	.string "sleep bathed in magma…\p"
 	.string "This BLUE ORB is what you sought.\n"
-	.string "Wasn’t it?\p"
+	.string "Wasn't it?\p"
 	.string "I have brought you the BLUE ORB.\n"
 	.string "Let its shine awaken you!\p"
 	.string "And show me…\n"
@@ -196,14 +196,14 @@ MagmaHideout_4F_Text_23A9F4: @ 823A9F4
 
 MagmaHideout_4F_Text_23AADA: @ 823AADA
 	.string "MAXIE: GROUDON!\n"
-	.string "What’s wrong?\p"
-	.string "Wasn’t the BLUE ORB the key?\p"
+	.string "What's wrong?\p"
+	.string "Wasn't the BLUE ORB the key?\p"
 	.string "GROUDON!\n"
 	.string "Where have you gone…$"
 
 MagmaHideout_4F_Text_23AB33: @ 823AB33
 	.string "MAXIE: Oh, so it was you?\p"
-	.string "I’ve seen you poking around uninvited\n"
+	.string "I've seen you poking around uninvited\n"
 	.string "here and there…\p"
 	.string "I get it now!\n"
 	.string "You must have pulled a cheap stunt!$"
@@ -215,12 +215,12 @@ MagmaHideout_4F_Text_23ABB5: @ 823ABB5
 MagmaHideout_4F_Text_23ABE2: @ 823ABE2
 	.string "MAXIE: There has to be some reason\n"
 	.string "why GROUDON fled…\p"
-	.string "That’s what you’re trying to say,\n"
-	.string "aren’t you?\p"
+	.string "That's what you're trying to say,\n"
+	.string "aren't you?\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "Humph…\n"
-	.string "You think I didn’t know that?\p"
+	.string "You think I didn't know that?\p"
 	.string "With GROUDON gone, there is no longer\n"
 	.string "any need for this blasted volcano.\p"
 	.string "I am going after GROUDON, so this\n"

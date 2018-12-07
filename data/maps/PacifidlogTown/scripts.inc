@@ -34,7 +34,7 @@ PacifidlogTown_Text_1EBAE7: @ 81EBAE7
 	.string "up swept away somewhere else.$"
 
 PacifidlogTown_Text_1EBB6C: @ 81EBB6C
-	.string "See, isn’t it neat?\n"
+	.string "See, isn't it neat?\n"
 	.string "These houses are on water!\p"
 	.string "I was born here!$"
 
@@ -42,8 +42,8 @@ PacifidlogTown_Text_1EBBAC: @ 81EBBAC
 	.string "The SKY PILLAR?\p"
 	.string "…Oh, you must mean that tall, tall\n"
 	.string "tower a little further out.\p"
-	.string "If you asked me, I wouldn’t climb it.\n"
-	.string "It’s too scary to get up that high.\p"
+	.string "If you asked me, I wouldn't climb it.\n"
+	.string "It's too scary to get up that high.\p"
 	.string "Life at sea level in PACIFIDLOG,\n"
 	.string "that suits me fine.$"
 

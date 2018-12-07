@@ -266,11 +266,11 @@ Route101_Text_1EBE9A: @ 81EBE9A
 	.string "Hello! You over there!\n"
 	.string "Please! Help!\p"
 	.string "In my BAG!\n"
-	.string "There’s a POKé BALL!$"
+	.string "There's a POKé BALL!$"
 
 Route101_Text_1EBEDF: @ 81EBEDF
 	.string "Wh-Where are you going?!\n"
-	.string "Don’t leave me like this!$"
+	.string "Don't leave me like this!$"
 
 Route101_Text_1EBF12: @ 81EBF12
 	.string "PROF. BIRCH: Whew…\p"
@@ -279,14 +279,14 @@ Route101_Text_1EBF12: @ 81EBF12
 	.string "You saved me.\n"
 	.string "Thanks a lot!\p"
 	.string "Oh?\p"
-	.string "Hi, you’re {PLAYER}{KUN}!\p"
+	.string "Hi, you're {PLAYER}{KUN}!\p"
 	.string "This is not the place to chat, so come\n"
 	.string "by my POKéMON LAB later, okay?$"
 
 Route101_Text_1EBFDD: @ 81EBFDD
 	.string "If POKéMON get tired, take them to\n"
 	.string "a POKéMON CENTER.\p"
-	.string "There’s a POKéMON CENTER in OLDALE\n"
+	.string "There's a POKéMON CENTER in OLDALE\n"
 	.string "TOWN right close by.$"
 
 Route101_Text_1EC04A: @ 81EC04A

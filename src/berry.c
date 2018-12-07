@@ -32,7 +32,7 @@ static u16 GetStageDurationByBerryType(u8);
 //.rodata
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
-static const u8 sBerryDescriptionPart1_Chesto[] = _("The BERRY’s thick skin and fruit are");
+static const u8 sBerryDescriptionPart1_Chesto[] = _("The BERRY's thick skin and fruit are");
 static const u8 sBerryDescriptionPart2_Chesto[] = _("very tough. It is dry-tasting all over.");
 static const u8 sBerryDescriptionPart1_Pecha[] = _("Very sweet and delicious.");
 static const u8 sBerryDescriptionPart2_Pecha[] = _("Also very tender - handle with care.");
@@ -44,7 +44,7 @@ static const u8 sBerryDescriptionPart1_Leppa[] = _("Grows slower than CHERI and 
 static const u8 sBerryDescriptionPart2_Leppa[] = _("The smaller the BERRY, the tastier.");
 static const u8 sBerryDescriptionPart1_Oran[] = _("A peculiar BERRY with a mix of flavors.");
 static const u8 sBerryDescriptionPart2_Oran[] = _("BERRIES grow in half a day.");
-static const u8 sBerryDescriptionPart1_Persim[] = _("Loves sunlight. The BERRY’s color");
+static const u8 sBerryDescriptionPart1_Persim[] = _("Loves sunlight. The BERRY's color");
 static const u8 sBerryDescriptionPart2_Persim[] = _("grows vivid when exposed to the sun.");
 static const u8 sBerryDescriptionPart1_Lum[] = _("Slow to grow. If raised with loving");
 static const u8 sBerryDescriptionPart2_Lum[] = _("care, it may grow two BERRIES.");
@@ -113,7 +113,7 @@ static const u8 sBerryDescriptionPart2_Apicot[] = _("what may happen or how it c
 static const u8 sBerryDescriptionPart1_Lansat[] = _("Said to be a legendary BERRY.");
 static const u8 sBerryDescriptionPart2_Lansat[] = _("Holding it supposedly brings joy.");
 static const u8 sBerryDescriptionPart1_Starf[] = _("So strong, it was abandoned at the");
-static const u8 sBerryDescriptionPart2_Starf[] = _("world’s edge. Considered a mirage.");
+static const u8 sBerryDescriptionPart2_Starf[] = _("world's edge. Considered a mirage.");
 static const u8 sBerryDescriptionPart1_Enigma[] = _("A completely enigmatic BERRY.");
 static const u8 sBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars.");
 
