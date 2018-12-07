@@ -5605,6 +5605,16 @@ static void HandleAction_UseMove(void)
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
             }
+            else if (gBattleMoves[gChosenMove].target & MOVE_TARGET_FOES_AND_ALLY)
+            {
+                for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
+                {
+                    if (gBattlerTarget == gBattlerAttacker)
+                        continue;
+                    if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+                        break;
+                }
+            }
             else
             {
                 gBattlerTarget = *(gBattleStruct->moveTarget + gBattlerAttacker);
@@ -5665,6 +5675,17 @@ static void HandleAction_UseMove(void)
             gBattlerTarget = BATTLE_PARTNER(gBattlerAttacker);
         else
             gBattlerTarget = gBattlerAttacker;
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+             && gBattleMoves[gChosenMove].target == MOVE_TARGET_FOES_AND_ALLY)
+    {
+        for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
+        {
+            if (gBattlerTarget == gBattlerAttacker)
+                continue;
+            if (!(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+                break;
+        }
     }
     else
     {
