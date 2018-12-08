@@ -7,12 +7,6 @@
 #include "task.h"
 #include "trig.h"
 
-//battle anim
-extern void sub_80A7E6C(u8 spriteId);
-extern void sub_80A805C(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
-extern u8 sub_80A80C8(struct Task *task);
-
-extern void sub_80A653C(struct Sprite *);
 static void sub_8108EC8(struct Sprite *);
 static void sub_8108F08(struct Sprite *);
 static void sub_8108F4C(struct Sprite *);
@@ -21,7 +15,6 @@ static void sub_8109028(struct Sprite *);
 static void sub_8109064(struct Sprite *);
 static void sub_81090D8(struct Sprite *);
 static void sub_810916C(struct Sprite *);
-extern void TranslateAnimSpriteToTargetMonLocation(struct Sprite *);
 static void AnimEmberFlare(struct Sprite *);
 static void sub_8109200(struct Sprite *);
 static void AnimFireRing(struct Sprite *);
@@ -35,7 +28,6 @@ static void sub_81093E4(struct Sprite *);
 static void sub_810940C(struct Sprite *);
 static void sub_81094D0(u8 taskId);
 static void sub_81097B4(u8 spriteId, u8 taskId, u8 a3);
-extern void sub_80A8EE4(struct Sprite *);
 static void sub_81098EC(struct Sprite *);
 static u16 sub_8109930(u8 spriteId);
 static void sub_8109984(struct Sprite *sprite, s16 x, s16 y);
