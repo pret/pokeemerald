@@ -3,7 +3,7 @@
 #include "event_scripts.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "palette.h"
 #include "party_menu.h"
