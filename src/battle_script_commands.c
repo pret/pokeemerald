@@ -1158,7 +1158,6 @@ static bool32 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
-
     gHitMarker &= ~HITMARKER_IGNORE_ON_AIR;
 
     if (!(gHitMarker & HITMARKER_IGNORE_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
@@ -1167,7 +1166,6 @@ static bool32 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
-
     gHitMarker &= ~HITMARKER_IGNORE_UNDERGROUND;
 
     if (!(gHitMarker & HITMARKER_IGNORE_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER)
@@ -1176,8 +1174,14 @@ static bool32 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
-
     gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
+
+    if (gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
 
     if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE))
      || (gBattleMoves[move].effect == EFFECT_VITAL_THROW)
@@ -2767,8 +2771,11 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gProtectStructs[gBattlerTarget].spikyShielded = 0;
                     gProtectStructs[gBattlerTarget].kingsShielded = 0;
                     gProtectStructs[gBattlerTarget].banefulBunkered = 0;
-                    BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
+                    if (gCurrentMove == MOVE_FEINT)
+                    {
+                        BattleScriptPush(gBattlescriptCurrInstr + 1);
+                        gBattlescriptCurrInstr = BattleScript_MoveEffectFeint;
+                    }
                 }
                 break;
             }
@@ -9728,6 +9735,10 @@ static void atkC5_setsemiinvulnerablebit(void)
     case MOVE_DIVE:
         gStatuses3[gBattlerAttacker] |= STATUS3_UNDERWATER;
         break;
+    case MOVE_PHANTOM_FORCE:
+    case MOVE_SHADOW_FORCE:
+        gStatuses3[gBattlerAttacker] |= STATUS3_PHANTOM_FORCE;
+        break;
     }
 
     gBattlescriptCurrInstr++;
@@ -9735,20 +9746,7 @@ static void atkC5_setsemiinvulnerablebit(void)
 
 static void atkC6_clearsemiinvulnerablebit(void)
 {
-    switch (gCurrentMove)
-    {
-    case MOVE_FLY:
-    case MOVE_BOUNCE:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_ON_AIR;
-        break;
-    case MOVE_DIG:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERGROUND;
-        break;
-    case MOVE_DIVE:
-        gStatuses3[gBattlerAttacker] &= ~STATUS3_UNDERWATER;
-        break;
-    }
-
+    gStatuses3[gBattlerAttacker] &= ~(STATUS3_SEMI_INVULNERABLE);
     gBattlescriptCurrInstr++;
 }
 

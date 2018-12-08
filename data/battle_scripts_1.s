@@ -3495,17 +3495,19 @@ BattleScript_EffectSemiInvulnerable::
 	jumpifmove MOVE_FLY, BattleScript_FirstTurnFly
 	jumpifmove MOVE_DIVE, BattleScript_FirstTurnDive
 	jumpifmove MOVE_BOUNCE, BattleScript_FirstTurnBounce
+	jumpifmove MOVE_PHANTOM_FORCE, BattleScript_FirstTurnPhantomForce
+	jumpifmove MOVE_SHADOW_FORCE, BattleScript_FirstTurnPhantomForce
 	setbyte sTWOTURN_STRINGID, 0x5
 	goto BattleScript_FirstTurnSemiInvulnerable
-
 BattleScript_FirstTurnBounce::
 	setbyte sTWOTURN_STRINGID, 0x7
 	goto BattleScript_FirstTurnSemiInvulnerable
-
 BattleScript_FirstTurnDive::
 	setbyte sTWOTURN_STRINGID, 0x6
 	goto BattleScript_FirstTurnSemiInvulnerable
-
+BattleScript_FirstTurnPhantomForce:
+	setbyte sTWOTURN_STRINGID, 0x8
+	goto BattleScript_FirstTurnSemiInvulnerable
 BattleScript_FirstTurnFly::
 	setbyte sTWOTURN_STRINGID, 0x4
 BattleScript_FirstTurnSemiInvulnerable::
@@ -3519,8 +3521,7 @@ BattleScript_SecondTurnSemiInvulnerable::
 	setbyte sB_ANIM_TURN, 0x1
 	clearstatusfromeffect BS_ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	jumpifnotmove MOVE_BOUNCE, BattleScript_SemiInvulnerableTryHit
-	setmoveeffect MOVE_EFFECT_PARALYSIS
+	argumenttomoveeffect
 BattleScript_SemiInvulnerableTryHit::
 	accuracycheck BattleScript_SemiInvulnerableMiss, ACC_CURR_MOVE
 	clearsemiinvulnerablebit

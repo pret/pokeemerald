@@ -1893,7 +1893,15 @@ Move_FELL_STINGER:
 	end
 	
 Move_PHANTOM_FORCE:
+	choosetwoturnanim PhantomForceSetUp, PhantomForceUnleash
+PhantomForceEnd:
 	end
+PhantomForceSetUp:
+	invisible ANIM_ATTACKER
+	goto PhantomForceEnd
+PhantomForceUnleash:
+	visible ANIM_ATTACKER
+	goto PhantomForceEnd
 	
 Move_TRICK_OR_TREAT:
 	end

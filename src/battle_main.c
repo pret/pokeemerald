@@ -4714,7 +4714,7 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     // various effects
     if (gSideStatuses[GET_BATTLER_SIDE(battlerId)] & SIDE_STATUS_TAILWIND)
         speed *= 2;
-    if (gStatuses3[battlerId] & STATUS3_UNBURDEN)
+    if (gBattleResources->flags->flags[battlerId] & RESOURCE_FLAG_UNBURDEN)
         speed *= 2;
 
     // paralysis drop

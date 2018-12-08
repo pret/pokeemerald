@@ -129,6 +129,7 @@ struct UnknownFlags
 
 #define RESOURCE_FLAG_FLASH_FIRE    0x1
 #define RESOURCE_FLAG_ROOST         0x2
+#define RESOURCE_FLAG_UNBURDEN      0x4
 
 struct DisableStruct
 {

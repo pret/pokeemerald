@@ -182,7 +182,6 @@ static const u8 sText_ShowOpponentHP[] = _("Opponent Hp");
 static const u8 sText_Types[] = _("Types");
 static const u8 sText_GastroAcid[] = _("Gastro Acid");
 static const u8 sText_SmackDown[] = _("Smacked Down");
-static const u8 sText_Unburden[] = _("Unburden");
 static const u8 sText_MiracleEye[] = _("Miracle Eye");
 static const u8 sText_AquaRing[] = _("Aqua Ring");
 static const u8 sText_AuroraVeil[] = _("Aurora Veil");
@@ -265,7 +264,7 @@ static const struct BitfieldInfo sStatus3Bitfield[] =
     {/*Smacked Down*/ 1, 21},
     // Me First 1, 22,
     // Telekinesis 1, 23,
-    {/*Unburden*/ 1, 24},
+    // Phantom Force 1, 24},
     {/*Miracle Eyed*/ 1, 25},
     // Magnet Rise 1, 26,
     // Heal Block 1, 27,
@@ -379,9 +378,8 @@ static const struct ListMenuItem sStatus3ListItems[] =
     {sText_NoCrit, 6},
     {sText_GastroAcid, 7},
     {sText_SmackDown, 8},
-    {sText_Unburden, 9},
-    {sText_MiracleEye, 10},
-    {sText_AquaRing, 11},
+    {sText_MiracleEye, 9},
+    {sText_AquaRing, 10},
 };
 
 static const struct ListMenuItem sSideStatusListItems[] =
