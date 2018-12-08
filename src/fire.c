@@ -436,3 +436,17 @@ const s8 gUnknown_08595694[16] =
 {
     -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1,
 };
+
+void sub_8108EC8(struct Sprite *sprite)
+{
+    sprite->data[0] = gBattleAnimArgs[0];
+    sprite->data[1] = 0x3C;
+    sprite->data[2] = 0x9;
+    sprite->data[3] = 0x1E;
+    sprite->data[4] = 0xFE00;
+
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+
+    sprite->callback = sub_80A634C;
+    sprite->callback(sprite);
+}

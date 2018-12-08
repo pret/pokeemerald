@@ -5,35 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8108EC8
-sub_8108EC8: @ 8108EC8
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r0, =gBattleAnimArgs
-	ldrh r0, [r0]
-	strh r0, [r4, 0x2E]
-	movs r0, 0x3C
-	strh r0, [r4, 0x30]
-	movs r0, 0x9
-	strh r0, [r4, 0x32]
-	movs r0, 0x1E
-	strh r0, [r4, 0x34]
-	movs r0, 0xFE
-	lsls r0, 8
-	strh r0, [r4, 0x36]
-	ldr r1, =DestroyAnimSprite
-	adds r0, r4, 0
-	bl StoreSpriteCallbackInData6
-	ldr r1, =sub_80A634C
-	str r1, [r4, 0x1C]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8108EC8
-
 	thumb_func_start sub_8108F08
 sub_8108F08: @ 8108F08
 	push {r4,r5,lr}
