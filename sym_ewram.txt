@@ -155,13 +155,7 @@ gUnknown_020375C0: @ 20375C0
 	
 	.space 0xC
 	.include "src/field_weather.o"
-
-gUnknown_02038BC4: @ 2038BC4
-	.space 0x2
-
-gUnknown_02038BC6: @ 2038BC6
-	.space 0x2
-
+	.include "src/field_weather_effect.o"
 	.include "src/battle_setup.o"
 	.include "src/trainer_see.o"
     .include "src/wild_encounter.o"

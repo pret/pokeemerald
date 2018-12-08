@@ -5,7 +5,7 @@
 #include "lottery_corner.h"
 #include "dewford_trend.h"
 #include "tv.h"
-#include "field_screen.h"
+#include "field_weather.h"
 #include "berry.h"
 #include "main.h"
 #include "overworld.h"

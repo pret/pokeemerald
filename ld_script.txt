@@ -448,7 +448,6 @@ SECTIONS {
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         src/field_weather.o(.rodata);
-        data/field_screen.o(.rodata);
 		src/field_weather_effect.o(.rodata);
 		data/field_screen_2.o(.rodata);
         src/battle_setup.o(.rodata);
