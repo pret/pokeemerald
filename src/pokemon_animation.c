@@ -810,7 +810,7 @@ static const u8 sBackAnimNatureModTable[] =
     [NATURE_GENTLE] = 0x02,
     [NATURE_SASSY] = 0x01,
     [NATURE_CAREFUL] = 0x02,
-    0x01, // NATURE_QUIRKY
+    [NATURE_QUIRKY] = 0x01,
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_860AD48[] =

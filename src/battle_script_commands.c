@@ -677,45 +677,45 @@ static const u32 sStatusFlagsForMoveEffects[] =
 
 static const u8* const sMoveEffectBS_Ptrs[] =
 {
-    BattleScript_MoveEffectSleep,     //    0
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SLEEP
-    BattleScript_MoveEffectPoison,    //    MOVE_EFFECT_POISON
-    BattleScript_MoveEffectBurn,      //    MOVE_EFFECT_BURN
-    BattleScript_MoveEffectFreeze,    //    MOVE_EFFECT_FREEZE
-    BattleScript_MoveEffectParalysis, //    MOVE_EFFECT_PARALYSIS
-    BattleScript_MoveEffectToxic,     //    MOVE_EFFECT_TOXIC
-    BattleScript_MoveEffectConfusion, //    MOVE_EFFECT_CONFUSION
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_FLINCH
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_TRI_ATTACK
-    BattleScript_MoveEffectUproar,    //    MOVE_EFFECT_UPROAR
-    BattleScript_MoveEffectPayDay,    //    MOVE_EFFECT_PAYDAY
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_CHARGING
-    BattleScript_MoveEffectWrap,      //    MOVE_EFFECT_WRAP
-    BattleScript_MoveEffectRecoil,    //    MOVE_EFFECT_RECOIL_25
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_ATK_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_DEF_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SPD_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SP_ATK_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SP_DEF_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_ACC_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_EVS_PLUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_ATK_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_DEF_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SPD_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SP_ATK_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_SP_DEF_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_ACC_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_EVS_MINUS_1
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_RECHARGE
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_RAGE
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_STEAL_ITEM
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_PREVENT_ESCAPE
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_NIGHTMARE
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_ALL_STATS_UP
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_RAPIDSPIN
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_REMOVE_PARALYSIS
-    BattleScript_MoveEffectSleep,     //    MOVE_EFFECT_ATK_DEF_DOWN
-    BattleScript_MoveEffectRecoil,    //    MOVE_EFFECT_RECOIL_33
+    [0] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SLEEP] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_POISON] = BattleScript_MoveEffectPoison,
+    [MOVE_EFFECT_BURN] = BattleScript_MoveEffectBurn,
+    [MOVE_EFFECT_FREEZE] = BattleScript_MoveEffectFreeze,
+    [MOVE_EFFECT_PARALYSIS] = BattleScript_MoveEffectParalysis,
+    [MOVE_EFFECT_TOXIC] = BattleScript_MoveEffectToxic,
+    [MOVE_EFFECT_CONFUSION] = BattleScript_MoveEffectConfusion,
+    [MOVE_EFFECT_FLINCH] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_TRI_ATTACK] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_UPROAR] = BattleScript_MoveEffectUproar,
+    [MOVE_EFFECT_PAYDAY] = BattleScript_MoveEffectPayDay,
+    [MOVE_EFFECT_CHARGING] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_WRAP] = BattleScript_MoveEffectWrap,
+    [MOVE_EFFECT_RECOIL_25] = BattleScript_MoveEffectRecoil,
+    [MOVE_EFFECT_ATK_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_DEF_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SPD_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_ATK_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_DEF_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ACC_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_EVS_PLUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ATK_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_DEF_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SPD_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_ATK_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_SP_DEF_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ACC_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_EVS_MINUS_1] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RECHARGE] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RAGE] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_STEAL_ITEM] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_PREVENT_ESCAPE] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_NIGHTMARE] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ALL_STATS_UP] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RAPIDSPIN] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_REMOVE_PARALYSIS] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_ATK_DEF_DOWN] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_RECOIL_33] = BattleScript_MoveEffectRecoil,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
@@ -768,26 +768,26 @@ static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX /
 
 static const u16 sMovesForbiddenToCopy[] =
 {
-     MOVE_METRONOME,
-     MOVE_STRUGGLE,
-     MOVE_SKETCH,
-     MOVE_MIMIC,
-     MIMIC_FORBIDDEN_END,
-     MOVE_COUNTER,
-     MOVE_MIRROR_COAT,
-     MOVE_PROTECT,
-     MOVE_DETECT,
-     MOVE_ENDURE,
-     MOVE_DESTINY_BOND,
-     MOVE_SLEEP_TALK,
-     MOVE_THIEF,
-     MOVE_FOLLOW_ME,
-     MOVE_SNATCH,
-     MOVE_HELPING_HAND,
-     MOVE_COVET,
-     MOVE_TRICK,
-     MOVE_FOCUS_PUNCH,
-     METRONOME_FORBIDDEN_END
+    MOVE_METRONOME,
+    MOVE_STRUGGLE,
+    MOVE_SKETCH,
+    MOVE_MIMIC,
+    MIMIC_FORBIDDEN_END,
+    MOVE_COUNTER,
+    MOVE_MIRROR_COAT,
+    MOVE_PROTECT,
+    MOVE_DETECT,
+    MOVE_ENDURE,
+    MOVE_DESTINY_BOND,
+    MOVE_SLEEP_TALK,
+    MOVE_THIEF,
+    MOVE_FOLLOW_ME,
+    MOVE_SNATCH,
+    MOVE_HELPING_HAND,
+    MOVE_COVET,
+    MOVE_TRICK,
+    MOVE_FOCUS_PUNCH,
+    METRONOME_FORBIDDEN_END
 };
 
 static const u8 sFlailHpScaleToPowerTable[] =
