@@ -507,35 +507,35 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 
 static void (* const sTurnActionsFuncsTable[])(void) =
 {
-    HandleAction_UseMove,               // B_ACTION_USE_MOVE
-    HandleAction_UseItem,               // B_ACTION_USE_ITEM
-    HandleAction_Switch,                // B_ACTION_SWITCH
-    HandleAction_Run,                   // B_ACTION_RUN
-    HandleAction_WatchesCarefully,      // B_ACTION_SAFARI_WATCH_CAREFULLY
-    HandleAction_SafariZoneBallThrow,   // B_ACTION_SAFARI_BALL
-    HandleAction_ThrowPokeblock,        // B_ACTION_SAFARI_POKEBLOCK
-    HandleAction_GoNear,                // B_ACTION_SAFARI_GO_NEAR
-    HandleAction_SafariZoneRun,         // B_ACTION_SAFARI_RUN
-    HandleAction_WallyBallThrow,        // B_ACTION_WALLY_THROW
-    HandleAction_RunBattleScript,       // B_ACTION_EXEC_SCRIPT
-    HandleAction_Action11,              // not sure about this one
-    HandleAction_ActionFinished,        // B_ACTION_FINISHED
-    HandleAction_NothingIsFainted,      // B_ACTION_NOTHING_FAINTED
+    [B_ACTION_USE_MOVE] = HandleAction_UseMove,
+    [B_ACTION_USE_ITEM] = HandleAction_UseItem,
+    [B_ACTION_SWITCH] = HandleAction_Switch,
+    [B_ACTION_RUN] = HandleAction_Run,
+    [B_ACTION_SAFARI_WATCH_CAREFULLY] = HandleAction_WatchesCarefully,
+    [B_ACTION_SAFARI_BALL] = HandleAction_SafariZoneBallThrow,
+    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowPokeblock,
+    [B_ACTION_SAFARI_GO_NEAR] = HandleAction_GoNear,
+    [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
+    [B_ACTION_WALLY_THROW] = HandleAction_WallyBallThrow,
+    [B_ACTION_EXEC_SCRIPT] = HandleAction_RunBattleScript,
+    [11] = HandleAction_Action11, // not sure about this one
+    [B_ACTION_FINISHED] = HandleAction_ActionFinished,
+    [B_ACTION_NOTHING_FAINTED] = HandleAction_NothingIsFainted,
 };
 
 static void (* const sEndTurnFuncsTable[])(void) =
 {
-    HandleEndTurn_ContinueBattle,       // battle outcome 0
-    HandleEndTurn_BattleWon,            // B_OUTCOME_WON
-    HandleEndTurn_BattleLost,           // B_OUTCOME_LOST
-    HandleEndTurn_BattleLost,           // B_OUTCOME_DREW
-    HandleEndTurn_RanFromBattle,        // B_OUTCOME_RAN
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_PLAYER_TELEPORTED
-    HandleEndTurn_MonFled,              // B_OUTCOME_MON_FLED
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_CAUGHT
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_NO_SAFARI_BALLS
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_FORFEITED
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_MON_TELEPORTED
+    [0] = HandleEndTurn_ContinueBattle, //B_OUTCOME_NONE?
+    [B_OUTCOME_WON] = HandleEndTurn_BattleWon,
+    [B_OUTCOME_LOST] = HandleEndTurn_BattleLost,
+    [B_OUTCOME_DREW] = HandleEndTurn_BattleLost,
+    [B_OUTCOME_RAN] = HandleEndTurn_RanFromBattle,
+    [B_OUTCOME_PLAYER_TELEPORTED] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_MON_FLED] = HandleEndTurn_MonFled,
+    [B_OUTCOME_CAUGHT] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_NO_SAFARI_BALLS] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_FORFEITED] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_MON_TELEPORTED] = HandleEndTurn_FinishBattle,
 };
 
 const u8 gStatusConditionString_PoisonJpn[8] = _("どく$$$$$");
