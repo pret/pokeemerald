@@ -161,7 +161,7 @@ SECTIONS {
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/fire.o(.text);
         asm/electric.o(.text);
         asm/ice.o(.text);
         src/fight.o(.text);
@@ -217,7 +217,7 @@ SECTIONS {
         src/battle_message.o(.text);
         asm/cable_car.o(.text);
         src/math_util.o(.text);
-        asm/roulette_util.o(.text);
+        src/roulette_util.o(.text);
         src/rom_81520A8.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
