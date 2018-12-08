@@ -13,7 +13,7 @@ static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 extern void* gUnknown_0203CF5C;
 
-extern bool16 IdentifyFlash(void);
+// extern bool16 IdentifyFlash(void);
 extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);
 
 #define SAVEBLOCK_MOVE_RANGE    128
@@ -50,7 +50,7 @@ struct PokemonStorage *gPokemonStoragePtr;
 // code
 void CheckForFlashMemory(void)
 {
-    if (!IdentifyFlash())
+    if (!(bool16)IdentifyFlash())
     {
         gFlashMemoryPresent = TRUE;
         InitFlashTimer();
