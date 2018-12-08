@@ -244,7 +244,7 @@ extern void pal_fill_for_maplights(void);
 extern void sub_80E1558(u8);
 extern void sub_80E1570(void);
 extern bool8 sub_80E1584(void);
-extern void sub_80AF0B4(void);
+extern void WarpFadeScreen(void);
 
 // .rodata
 const u32 gNewGameBirchPic[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
@@ -1593,8 +1593,8 @@ static void sub_80B7004(struct Task *task)
 
 static void sub_80B7050(void)
 {
-    music_something();
-    sub_80AF0B4();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
 }
 
 static void sub_80B7060(void)
@@ -1943,8 +1943,8 @@ static bool8 sub_80B7704(struct Task *task, struct EventObject *eventObject, str
 
 static bool8 sub_80B77F8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    music_something();
-    sub_80AF0B4();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     task->data[0]++;
     return FALSE;
 }
@@ -2099,8 +2099,8 @@ static bool8 sub_80B7BCC(struct Task *task, struct EventObject *eventObject, str
 {
     if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
-        music_something();
-        sub_80AF0B4();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
         task->data[0]++;
     }
     return FALSE;
@@ -2161,8 +2161,8 @@ static void EscapeRopeFieldEffect_Step1(struct Task *task)
     u8 spinDirections[5] =  {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
-        music_something();
-        sub_80AF0B4();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
     }
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
@@ -2314,8 +2314,8 @@ static void TeleportFieldEffectTask3(struct Task *task)
     if (task->data[4] >= 0xa8)
     {
         task->data[0]++;
-        music_something();
-        sub_80AF0B4();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
     }
 }
 
@@ -3123,7 +3123,7 @@ static void sub_80B9474(struct Task *task)
 {
     if (sub_80B9508(task->data[1]))
     {
-        sub_80AF0B4();
+        WarpFadeScreen();
         task->data[0]++;
     }
 }

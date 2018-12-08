@@ -129,7 +129,7 @@ extern void sub_80A0A38(void);
 extern void trainer_hill_map_load_related(void);
 extern void sub_8087D74(void);
 extern void battle_pyramid_map_load_related(u8);
-extern void sub_80B00E8(u8);
+extern void WriteFlashScanlineEffectBuffer(u8);
 extern void sub_80E9238(u8);
 extern void sub_81AA2F8(void);
 extern void sub_8195E10(void);
@@ -1241,7 +1241,7 @@ u8 GetMapMusicFadeoutSpeed(void)
         return 4;
 }
 
-void music_something(void)
+void TryFadeOutOldMapMusic(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
     u16 warpMusic = GetWarpDestinationMusic();
@@ -1819,7 +1819,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
     }
     else if ((flashLevel = Overworld_GetFlashLevel()))
     {
-        sub_80B00E8(flashLevel);
+        WriteFlashScanlineEffectBuffer(flashLevel);
         ScanlineEffect_SetParams(sFlashEffectParams);
     }
 }
