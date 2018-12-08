@@ -116,7 +116,6 @@ SECTIONS {
         src/field_weather.o(.text);
         src/field_weather_effect.o(.text);
         src/field_screen_effect.o(.text);
-        asm/field_screen.o(.text);
         src/battle_setup.o(.text);
         src/cable_club.o(.text);
         src/trainer_see.o(.text);
