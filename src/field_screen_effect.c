@@ -5,9 +5,9 @@
 #include "field_camera.h"
 #include "field_door.h"
 #include "field_effect.h"
-#include "field_fadetransition.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "field_screen_effect.h"
 #include "field_special_scene.h"
 #include "field_weather.h"
 // #include "fldeff_flash.h"
@@ -40,29 +40,31 @@ extern void sub_808D194(void);
 extern void sub_808D1C8(void);
 extern bool32 sub_808D1B4(void);
 extern bool32 sub_808D1E8(void);
+extern void sub_80B6B68(void);
+extern void sub_80B6E4C(u8, u8);
+extern void sub_80B75D8(u8);
+extern void sub_80B7A74(u8);
+extern void sub_808C0A8(u8);
+extern u8 GetMapPairFadeToType(u8, u8);
+extern u8 GetMapPairFadeFromType(u8, u8);
 
 extern const u16 gUnknown_82EC7CC[];
 
-void sub_8080B9C(u8);
-void task_map_chg_seq_0807E20C(u8);
-void task_map_chg_seq_0807E2CC(u8);
-void task0A_fade_n_map_maybe(u8);
-void sub_808115C(u8);
-void palette_bg_faded_fill_white(void);
-u8 GetMapPairFadeToType(u8, u8);
-u8 GetMapPairFadeFromType(u8, u8);
-void sub_808C0A8(u8);
-void sub_80AF438(u8);
-bool32 sub_80AF71C(void);
-void task0A_mpl_807E31C(u8 taskId);
-void sub_80AFA0C(u8 taskId);
-void sub_80AFA88(u8 taskId);
-void sub_80B6B68(void);
-void sub_80B6E4C(u8, u8);
-void sub_80B75D8(u8);
-void sub_80B7A74(u8);
-/*static*/ void task50_0807F0C8(u8);
+// This file's functions.
+static void sub_8080B9C(u8);
+static void task_map_chg_seq_0807E20C(u8);
+static void task_map_chg_seq_0807E2CC(u8);
+static void task0A_fade_n_map_maybe(u8);
+static void sub_808115C(u8);
+static void palette_bg_faded_fill_white(void);
+static void sub_80AF438(u8);
+static bool32 sub_80AF71C(void);
+static void task0A_mpl_807E31C(u8 taskId);
+static void sub_80AFA0C(u8 taskId);
+static void sub_80AFA88(u8 taskId);
+static void task50_0807F0C8(u8);
 
+// const
 const u16 sFlashLevelPixelRadii[] = { 200, 72, 64, 56, 48, 40, 32, 24, 0 };
 const s32 gMaxFlashLevel = 8;
 
@@ -73,12 +75,13 @@ const struct ScanlineEffectParams sFlashEffectParams =
     1
 };
 
-void palette_bg_faded_fill_white(void)
+// code
+static void palette_bg_faded_fill_white(void)
 {
     CpuFastFill16(RGB_WHITE, gPlttBufferFaded, PLTT_SIZE);
 }
 
-void palette_bg_faded_fill_black(void)
+static void palette_bg_faded_fill_black(void)
 {
     CpuFastFill16(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 }
@@ -98,7 +101,7 @@ void pal_fill_for_maplights(void)
     }
 }
 
-void sub_80AF08C(void)
+static void sub_80AF08C(void)
 {
     palette_bg_faded_fill_white();
     FadeScreen(FADE_FROM_WHITE, 8);
@@ -123,12 +126,12 @@ void WarpFadeScreen(void)
     }
 }
 
-void sub_80AF0F4(u8 arg)
+static void sub_80AF0F4(u8 arg)
 {
     sub_808C0A8(!arg);
 }
 
-void task0A_nop_for_a_while(u8 taskId)
+static void task0A_nop_for_a_while(u8 taskId)
 {
     if (sub_80AF71C() == TRUE)
         DestroyTask(taskId);
@@ -142,7 +145,7 @@ void sub_80AF128(void)
     CreateTask(task0A_nop_for_a_while, 10);
 }
 
-void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskID)
+static void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskID)
 {
     if (sub_80AF71C() == TRUE)
     {
@@ -166,7 +169,7 @@ void sub_80AF188(void)
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
-void task_mpl_807DD60(u8 taskId)
+static void task_mpl_807DD60(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -201,7 +204,7 @@ void sub_80AF214(void)
     CreateTask(task_mpl_807DD60, 10);
 }
 
-void sub_80AF234(u8 taskId)
+static void sub_80AF234(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -267,7 +270,7 @@ void sub_80AF314(void)
     CreateTask(sub_80AF234, 10);
 }
 
-void sub_80AF334(void)
+static void sub_80AF334(void)
 {
     s16 x, y;
     u8 behavior;
@@ -328,7 +331,7 @@ void sub_80AF40C(void)
     sub_8085540(0xE);
 }
 
-void sub_80AF438(u8 taskId)
+static void sub_80AF438(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -377,7 +380,7 @@ void sub_80AF438(u8 taskId)
     }
 }
 
-void task_map_chg_seq_0807E20C(u8 taskId)
+static void task_map_chg_seq_0807E20C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -415,7 +418,7 @@ void task_map_chg_seq_0807E20C(u8 taskId)
     }
 }
 
-void task_map_chg_seq_0807E2CC(u8 taskId)
+static void task_map_chg_seq_0807E2CC(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -435,7 +438,7 @@ void task_map_chg_seq_0807E2CC(u8 taskId)
     }
 }
 
-void sub_80AF660(u8 taskId)
+static void sub_80AF660(u8 taskId)
 {
     if (sub_80AF71C() == TRUE)
     {
@@ -451,13 +454,13 @@ void sub_80AF688(void)
     ScriptContext2_Enable();
 }
 
-bool32 sub_80AF6A4(void)
+bool8 sub_80AF6A4(void)
 {
     sub_809FA18();
     return FALSE;
 }
 
-void task_mpl_807E3C8(u8 taskId)
+static void task_mpl_807E3C8(u8 taskId)
 {
     if (sub_80AF71C() == 1)
     {
@@ -482,12 +485,12 @@ void sub_80AF6F0(void)
     CreateTask(task_mpl_807E3C8, 10);
 }
 
-bool32 PaletteFadeActive(void)
+static bool32 PaletteFadeActive(void)
 {
     return gPaletteFade.active;
 }
 
-bool32 sub_80AF71C(void)
+static bool32 sub_80AF71C(void)
 {
     if (IsWeatherNotFadingIn() == TRUE)
         return TRUE;
@@ -587,7 +590,7 @@ void sub_80AF8B8(void)
     gFieldCallback = sub_80FB768;
 }
 
-void sub_80AF8E0(u8 taskId)
+static void sub_80AF8E0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -618,7 +621,7 @@ void sub_80AF948(void)
     CreateTask(sub_80AF8E0, 10);
 }
 
-void sub_80AF96C(u8 taskId)
+static void sub_80AF96C(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -654,7 +657,7 @@ void sub_80AF9F8(void)
     CreateTask(sub_80AF96C, 10);
 }
 
-void sub_80AFA0C(u8 taskId)
+static void sub_80AFA0C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -685,7 +688,7 @@ void sub_80AFA0C(u8 taskId)
     }
 }
 
-void sub_80AFA88(u8 taskId)
+static void sub_80AFA88(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     s16 *x = &task->data[2];
@@ -738,7 +741,7 @@ void sub_80AFA88(u8 taskId)
     }
 }
 
-void task0A_fade_n_map_maybe(u8 taskId)
+static void task0A_fade_n_map_maybe(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -774,7 +777,7 @@ void sub_80AFC60(void)
     CreateTask(task0A_fade_n_map_maybe, 10);
 }
 
-/*static*/ void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
 {
     if (y <= 160)
     {
@@ -790,7 +793,7 @@ void sub_80AFC60(void)
     }
 }
 
-/*static*/ void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
+static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
 {
     s32 r = radius;
     s32 v2 = radius;
@@ -811,7 +814,7 @@ void sub_80AFC60(void)
     }
 }
 
-/*static*/ void SetFlash2ScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetFlash2ScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
 {
     if (y <= 160)
     {
@@ -827,7 +830,7 @@ void sub_80AFC60(void)
     }
 }
 
-/*static*/ void SetFlash2ScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
+static void SetFlash2ScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
 {
     s32 r = radius;
     s32 v2 = radius;
@@ -855,7 +858,7 @@ void sub_80AFC60(void)
 #define tFlashRadiusDelta    data[5]
 #define tClearScanlineEffect data[6]
 
-/*static*/ void UpdateFlashLevelEffect(u8 taskId)
+static void UpdateFlashLevelEffect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -889,7 +892,7 @@ void sub_80AFC60(void)
     }
 }
 
-/*static*/ void UpdateFlash2LevelEffect(u8 taskId)
+static void UpdateFlash2LevelEffect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -923,7 +926,7 @@ void sub_80AFC60(void)
     }
 }
 
-/*static*/ void sub_80AFF90(u8 taskId)
+static void sub_80AFF90(u8 taskId)
 {
     if (!FuncIsActiveTask(UpdateFlashLevelEffect))
     {
@@ -932,13 +935,13 @@ void sub_80AFC60(void)
     }
 }
 
-/*static*/ void sub_80AFFB8(void)
+static void sub_80AFFB8(void)
 {
     if (!FuncIsActiveTask(sub_80AFF90))
         CreateTask(sub_80AFF90, 80);
 }
 
-/*static*/ u8 sub_80AFFDC(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
+static u8 sub_80AFFDC(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
 {
     u8 taskId = CreateTask(UpdateFlashLevelEffect, 80);
     s16 *data = gTasks[taskId].data;
@@ -957,7 +960,7 @@ void sub_80AFC60(void)
     return taskId;
 }
 
-/*static*/ u8 sub_80B003C(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
+static u8 sub_80B003C(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
 {
     u8 taskId = CreateTask(UpdateFlash2LevelEffect, 80);
     s16 *data = gTasks[taskId].data;
@@ -1007,7 +1010,7 @@ void door_upload_tiles(void)
     CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
 }
 
-void task0A_mpl_807E31C(u8 taskId)
+static void task0A_mpl_807E31C(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -1028,7 +1031,7 @@ void task0A_mpl_807E31C(u8 taskId)
     }
 }
 
-void sub_80B01BC(u8 taskId)
+static void sub_80B01BC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1074,7 +1077,7 @@ void sub_80B0268(void)
     CreateTask(sub_80B01BC, 10);
 }
 
-/*static*/ void sub_80B028C(u8 a1)
+static void sub_80B028C(u8 a1)
 {
     int i;
     u16 color[1];
@@ -1090,7 +1093,7 @@ void sub_80B0268(void)
     }
 }
 
-/*static*/ bool8 sub_80B02C8(u16 a1)
+static bool8 sub_80B02C8(u16 a1)
 {
     u8 lo = REG_BLDALPHA & 0xFF;
     u8 hi = REG_BLDALPHA >> 8;
@@ -1118,7 +1121,7 @@ void sub_80B0268(void)
         return FALSE;
 }
 
-/*static*/ void sub_80B0318(u8 taskId)
+static void sub_80B0318(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1248,7 +1251,7 @@ void sub_80B05B4(void)
     CreateTask(task50_0807F0C8, 80);
 }
 
-/*static*/ void task50_0807F0C8(u8 taskId)
+static void task50_0807F0C8(u8 taskId)
 {
     if (BGMusicStopped() == TRUE)
     {

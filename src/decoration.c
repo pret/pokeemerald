@@ -16,7 +16,7 @@
 #include "field_weather.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "event_object_movement.h"
 #include "list_menu.h"
 #include "menu_helpers.h"

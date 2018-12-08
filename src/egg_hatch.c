@@ -30,7 +30,7 @@
 #include "field_weather.h"
 #include "international_string_util.h"
 #include "naming_screen.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData

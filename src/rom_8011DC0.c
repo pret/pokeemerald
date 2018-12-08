@@ -32,7 +32,7 @@
 #include "decompress.h"
 #include "start_menu.h"
 #include "data2.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 
 extern void HealPlayerParty(void);
 
