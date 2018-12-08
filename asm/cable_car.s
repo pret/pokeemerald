@@ -170,9 +170,9 @@ _0814FDD8:
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
-	bl sub_80AAFA4
+	bl StartWeather
 	movs r4, 0
-	ldr r0, =gUnknown_0854C14C
+	ldr r0, =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -334,7 +334,7 @@ _0814FF98:
 	b _08150224
 	.pool
 _0814FFB4:
-	ldr r0, =gUnknown_0854C14C
+	ldr r0, =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -649,7 +649,7 @@ c2_8011A1C: @ 8150258
 	bl sub_80AB130
 	add r0, sp, 0x4
 	mov r8, r0
-	ldr r0, =gUnknown_0854C14C
+	ldr r0, =gWeatherPtr
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0xF0
@@ -831,7 +831,7 @@ _08150422:
 	b _08150542
 _0815042E:
 	ldrb r0, [r3, 0x2]
-	bl weather_set
+	bl ChangeWeather
 	ldr r1, [r5]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -844,7 +844,7 @@ _0815043C:
 	beq _08150448
 	b _08150542
 _08150448:
-	ldr r0, =gUnknown_0854C14C
+	ldr r0, =gWeatherPtr
 	ldr r0, [r0]
 	adds r2, r0, 0
 	adds r2, 0xF0
@@ -881,7 +881,7 @@ _08150478:
 	b _08150542
 	.pool
 _08150490:
-	ldr r0, =gUnknown_0854C14C
+	ldr r0, =gWeatherPtr
 	ldr r2, [r0]
 	movs r1, 0xDA
 	lsls r1, 3
@@ -1290,7 +1290,7 @@ _081507B6:
 	b _081507E6
 	.pool
 _081507DC:
-	ldr r0, =gUnknown_0854C14C
+	ldr r0, =gWeatherPtr
 	ldr r4, [r0]
 	ldr r0, =0x000006fc
 	adds r4, r0

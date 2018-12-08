@@ -23,7 +23,7 @@
 #include "link.h"
 #include "berry.h"
 
-extern u8 weather_get_current(void);
+extern u8 GetCurrentWeather(void);
 
 // rom const data
 static const u16 sSoundMovesTable[] =
@@ -1827,7 +1827,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITYEFFECT_SWITCH_IN_WEATHER:
                 if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
                 {
-                    switch (weather_get_current())
+                    switch (GetCurrentWeather())
                     {
                     case 3:
                     case 5:
@@ -1862,7 +1862,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 if (effect)
                 {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
+                    gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
                     BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
                 }
                 break;

@@ -148,7 +148,7 @@ extern void ResetAllPicSprites(void);
 extern void FieldEffectActiveListClear(void);
 extern void SetUpFieldTasks(void);
 extern void sub_81BE6B8(void);
-extern void sub_80AAFA4(void);
+extern void StartWeather(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
@@ -2160,7 +2160,7 @@ static void sub_8086988(u32 a1)
         InitEventObjectPalettes(1);
 
     FieldEffectActiveListClear();
-    sub_80AAFA4();
+    StartWeather();
     sub_80AEE84();
     if (!a1)
         SetUpFieldTasks();

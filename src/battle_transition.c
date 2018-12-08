@@ -59,7 +59,7 @@ typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
 
 extern const struct OamData gEventObjectBaseOam_32x32;
 
-extern void sub_80AC3D0(void);
+extern void SetWeatherScreenFadeOut(void);
 
 // this file's functions
 static void LaunchBattleTransitionTask(u8 transitionId);
@@ -981,7 +981,7 @@ static void Task_BattleTransitionMain(u8 taskId)
 
 static bool8 Transition_Phase1(struct Task *task)
 {
-    sub_80AC3D0();
+    SetWeatherScreenFadeOut();
     CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
     if (sPhase1_Tasks[task->tTransitionId] != NULL)
     {

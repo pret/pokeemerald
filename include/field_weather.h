@@ -4,7 +4,8 @@
 #include "sprite.h"
 
 // Controls how the weather should be changing the screen palettes.
-enum {
+enum
+{
     WEATHER_PAL_STATE_CHANGING_WEATHER,
     WEATHER_PAL_STATE_SCREEN_FADING_IN,
     WEATHER_PAL_STATE_SCREEN_FADING_OUT,
@@ -38,11 +39,11 @@ struct Weather
     u8 gammaStepDelay;
     u8 gammaStepFrameCounter;
     u16 fadeDestColor;
-    u8 palProcessingState;
-    u8 fadeScreenCounter;
-    bool8 readyForInit;
-    u8 taskId;
-    u8 unknown_6CA;
+    /*0x6C6*/ u8 palProcessingState;
+    /*0x6C7*/ u8 fadeScreenCounter;
+    /*0x6C8*/ bool8 readyForInit;
+    /*0x6C9*/ u8 taskId;
+    /*0x6CA*/ u8 unknown_6CA;
     u8 unknown_6CB;
     u16 initStep;
     u16 finishStep;
@@ -168,6 +169,7 @@ void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
 u8 GetCurrentWeather(void);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
+void SetWeatherScreenFadeOut(void);
 
 
 extern struct Weather gWeather;

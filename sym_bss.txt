@@ -21,7 +21,7 @@
 	.include "src/tileset_anims.o"
 	.include "src/palette.o"
 	.include "src/sound.o"
-	.include "src/field_screen.o"
+	.include "src/field_weather.o"
 	.include "src/field_effect.o"
 	.include "src/pokemon_storage_system.o"
 	.include "src/fldeff_cut.o"
