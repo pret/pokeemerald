@@ -1083,7 +1083,7 @@ static const struct PokedexOption gDexSortOptions[] =
     {gText_DexSortHeaviestDescription, gText_DexSortHeaviestTitle},
     {gText_DexSortLightestDescription, gText_DexSortLightestTitle},
     {gText_DexSortTallestDescription, gText_DexSortTallestTitle},
-    {ggText_DexSortSmallestDescription, gText_DexSortSmallestTitle},
+    {gText_DexSortSmallestDescription, gText_DexSortSmallestTitle},
     {NULL, NULL},
 };
 
