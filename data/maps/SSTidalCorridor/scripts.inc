@@ -270,21 +270,21 @@ SSTidalCorridor_Movement_23C28B: @ 823C28B
 SSTidalCorridor_Text_23C28F: @ 823C28F
 	.string "SCOTT: Well, hi, hi!\n"
 	.string "{PLAYER}{KUN}, {PLAYER}{KUN}!\p"
-	.string "Something’s come up, so I have to\n"
+	.string "Something's come up, so I have to\n"
 	.string "disembark, but am I glad to see you!\p"
 	.string "Congratulations, LEAGUE CHAMPION!\p"
-	.string "There’s a place I’d like to invite\n"
+	.string "There's a place I'd like to invite\n"
 	.string "someone like you.\p"
-	.string "It’s the…\n"
+	.string "It's the…\n"
 	.string "BATTLE FRONTIER!\p"
-	.string "What’s the place like?\n"
-	.string "You’ll understand when you see it!\p"
-	.string "I’ve spoken with the ship’s CAPTAIN\n"
+	.string "What's the place like?\n"
+	.string "You'll understand when you see it!\p"
+	.string "I've spoken with the ship's CAPTAIN\n"
 	.string "about this.\p"
 	.string "The next time you take a ferry,\n"
 	.string "you should be able to sail to\l"
 	.string "the BATTLE FRONTIER.\p"
-	.string "Okay, {PLAYER}{KUN}, I’ll be waiting for you\n"
+	.string "Okay, {PLAYER}{KUN}, I'll be waiting for you\n"
 	.string "at the BATTLE FRONTIER!$"
 
 SSTidalCorridor_Text_23C462: @ 823C462
@@ -308,15 +308,15 @@ SSTidalRooms_Text_23C553: @ 823C553
 	.string "Thank you for sailing with us.$"
 
 SSTidalCorridor_Text_23C596: @ 823C596
-	.string "It’ll be some time before we make land,\n"
+	.string "It'll be some time before we make land,\n"
 	.string "I reckon.\p"
-	.string "You can rest up in your cabin if you’d\n"
-	.string "like. Your cabin’s No. 2.\p"
+	.string "You can rest up in your cabin if you'd\n"
+	.string "like. Your cabin's No. 2.\p"
 	.string "The bed in there is soft and plushy.\n"
 	.string "I can attest to how comfy it is!$"
 
 SSTidalCorridor_Text_23C64F: @ 823C64F
-	.string "We’ve arrived!$"
+	.string "We've arrived!$"
 
 SSTidalCorridor_Text_23C65E: @ 823C65E
 	.string "Go visit other cabins.\n"

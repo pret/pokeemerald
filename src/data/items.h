@@ -3389,7 +3389,7 @@ const struct Item gItems[] =
 
     [ITEM_KINGS_ROCK] =
     {
-        .name = _("KING’S ROCK"),
+        .name = _("KING'S ROCK"),
         .itemId = ITEM_KINGS_ROCK,
         .price = 100,
         .holdEffect = HOLD_EFFECT_FLINCH,
@@ -6311,7 +6311,7 @@ const struct Item gItems[] =
 
     [ITEM_OAKS_PARCEL] =
     {
-        .name = _("OAK’S PARCEL"),
+        .name = _("OAK'S PARCEL"),
         .itemId = ITEM_OAKS_PARCEL,
         .price = 0,
         .holdEffect = HOLD_EFFECT_NONE,

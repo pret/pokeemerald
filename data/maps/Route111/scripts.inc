@@ -592,8 +592,8 @@ Route111_EventScript_1F146C:: @ 81F146C
 	end
 
 Route111_Text_1F1475: @ 81F1475
-	.string "Hello! I take it you’re a traveler.\p"
-	.string "How’s this? What do you say to taking\n"
+	.string "Hello! I take it you're a traveler.\p"
+	.string "How's this? What do you say to taking\n"
 	.string "on our family of four in a series of\l"
 	.string "POKéMON battles?$"
 
@@ -602,33 +602,33 @@ Route111_Text_1F14F5: @ 81F14F5
 	.string "Drop in, if you change your mind!$"
 
 Route111_Text_1F1523: @ 81F1523
-	.string "That’s the spirit! I like you!$"
+	.string "That's the spirit! I like you!$"
 
 Route111_Text_1F1542: @ 81F1542
 	.string "Aiyah!\n"
-	.string "You’re a lot tougher than I expected!$"
+	.string "You're a lot tougher than I expected!$"
 
 Route111_Text_1F156F: @ 81F156F
 	.string "Hey, all!\n"
-	.string "I’ve found a pretty strong TRAINER!$"
+	.string "I've found a pretty strong TRAINER!$"
 
 Route111_Text_1F159D: @ 81F159D
-	.string "Oh, my goodness! Aren’t you young?\p"
+	.string "Oh, my goodness! Aren't you young?\p"
 	.string "You must be quite the TRAINER to beat\n"
 	.string "my husband, though.\p"
-	.string "It’s my turn to battle now!$"
+	.string "It's my turn to battle now!$"
 
 Route111_Text_1F1616: @ 81F1616
 	.string "Oh, gosh!\n"
-	.string "I can’t get over how strong you are!$"
+	.string "I can't get over how strong you are!$"
 
 Route111_Text_1F1645: @ 81F1645
-	.string "There’s a strong TRAINER here!\n"
-	.string "This one’s really strong!$"
+	.string "There's a strong TRAINER here!\n"
+	.string "This one's really strong!$"
 
 Route111_Text_1F167E: @ 81F167E
-	.string "You’re stronger than Mommy? Wow!\p"
-	.string "But I’m strong, too!\n"
+	.string "You're stronger than Mommy? Wow!\p"
+	.string "But I'm strong, too!\n"
 	.string "Really! Honestly!$"
 
 Route111_Text_1F16C6: @ 81F16C6
@@ -641,7 +641,7 @@ Route111_Text_1F16DC: @ 81F16DC
 Route111_Text_1F16FB: @ 81F16FB
 	.string "How dare you make my granddaughter\n"
 	.string "cry!\p"
-	.string "For that, I’m going to smack you!\n"
+	.string "For that, I'm going to smack you!\n"
 	.string "Prepare to lose!$"
 
 Route111_Text_1F1756: @ 81F1756
@@ -649,14 +649,14 @@ Route111_Text_1F1756: @ 81F1756
 	.string "My granddaughter was right…$"
 
 Route111_Text_1F1788: @ 81F1788
-	.string "If you’re not in any hurry,\n"
+	.string "If you're not in any hurry,\n"
 	.string "visit with us awhile.$"
 
 Route111_Text_1F17BA: @ 81F17BA
-	.string "If you don’t raise your POKéMON some\n"
+	.string "If you don't raise your POKéMON some\n"
 	.string "more, it could be tough to keep winning\l"
 	.string "up through the ranks.\p"
-	.string "I’ve heard the POKéMON LEAGUE’s\n"
+	.string "I've heard the POKéMON LEAGUE's\n"
 	.string "ELITE FOUR are far stronger than\l"
 	.string "any GYM LEADER.$"
 
@@ -670,8 +670,8 @@ Route111_Text_1F18CE: @ 81F18CE
 	.string "{DOWN_ARROW} MAUVILLE CITY$"
 
 Route111_Text_1F18E8: @ 81F18E8
-	.string "“Our family’s hearts beat as one!”\n"
-	.string "THE WINSTRATE’S HOUSE$"
+	.string "“Our family's hearts beat as one!”\n"
+	.string "THE WINSTRATE'S HOUSE$"
 
 Route111_Text_1F1921: @ 81F1921
 	.string "ROUTE 111\n"
@@ -682,12 +682,12 @@ Route111_Text_1F1937: @ 81F1937
 	.string "{LEFT_ARROW} ROUTE 113$"
 
 Route111_Text_1F194D: @ 81F194D
-	.string "OLD LADY’S REST STOP\n"
+	.string "OLD LADY'S REST STOP\n"
 	.string "“Come in and rest your tired bones.”$"
 
 Route111_Text_1F1987: @ 81F1987
 	.string "TRAINER TIPS\p"
-	.string "One of the indicators of a POKéMON’s\n"
+	.string "One of the indicators of a POKéMON's\n"
 	.string "powerfulness is SP. ATK. It stands for\l"
 	.string "“SPECIAL ATTACK.”\p"
 	.string "Likewise, SP. DEF stands for “SPECIAL\n"
@@ -698,7 +698,7 @@ Route111_Text_1F1A22: @ 81F1A22
 	.string "around here somewhere.\p"
 	.string "But for some reason, it can be seen\n"
 	.string "sometimes, and sometimes not.\p"
-	.string "That’s why I call it the MIRAGE TOWER.$"
+	.string "That's why I call it the MIRAGE TOWER.$"
 
 Route111_Text_1F1AC7: @ 81F1AC7
 	.string "I see it!\n"
@@ -707,7 +707,7 @@ Route111_Text_1F1AC7: @ 81F1AC7
 	.string "is clearly visible!\p"
 	.string "But it looks so fragile…\n"
 	.string "It could crumble away anytime…\p"
-	.string "I want to go inside it, but I can’t\n"
+	.string "I want to go inside it, but I can't\n"
 	.string "get my courage up for it…$"
 
 Route111_Text_1F1B92: @ 81F1B92
@@ -720,7 +720,7 @@ Route111_Text_1F1B92: @ 81F1B92
 
 Route111_Text_1F1C12: @ 81F1C12
 	.string "Since I spoke to you, the tower of sand\n"
-	.string "hasn’t been seen.\p"
+	.string "hasn't been seen.\p"
 	.string "Perhaps it really was\n"
 	.string "the MIRAGE TOWER…$"
 

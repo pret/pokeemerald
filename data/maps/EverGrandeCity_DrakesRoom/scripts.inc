@@ -73,7 +73,7 @@ EverGrandeCity_DrakesRoom_Text_22873E: @ 822873E
 	.string "For us to battle with POKéMON as\n"
 	.string "partners, do you know what it takes?\p"
 	.string "Do you know what is needed?\p"
-	.string "If you don’t, then you will never\n"
+	.string "If you don't, then you will never\n"
 	.string "prevail over me!$"
 
 EverGrandeCity_DrakesRoom_Text_228895: @ 8228895

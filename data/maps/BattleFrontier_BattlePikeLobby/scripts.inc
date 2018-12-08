@@ -352,7 +352,7 @@ BattleFrontier_BattlePikeLobby_Text_25BBF5: @ 825BBF5
 	.string "simple…\p"
 	.string "Choose one of three paths and make\n"
 	.string "your way to the goal room at the end\l"
-	.string "of the BATTLE PIKE. It’s that simple.\p"
+	.string "of the BATTLE PIKE. It's that simple.\p"
 	.string "However, what happens on the chosen\n"
 	.string "path depends entirely on the luck\l"
 	.string "of the challenger…\p"
@@ -361,7 +361,7 @@ BattleFrontier_BattlePikeLobby_Text_25BBF5: @ 825BBF5
 	.string "If you want to interrupt your\n"
 	.string "challenge, please have a word with\l"
 	.string "our staff in the big rooms on the way.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattlePikeLobby_Text_25BE02: @ 825BE02
@@ -452,29 +452,29 @@ BattleFrontier_BattlePikeLobby_Text_25C3D9: @ 825C3D9
 BattleFrontier_BattlePikeLobby_Text_25C422: @ 825C422
 	.string "Arrgh! I blew my chance!\n"
 	.string "I was one room away from the goal!\p"
-	.string "In this place, you’d better watch out\n"
+	.string "In this place, you'd better watch out\n"
 	.string "for poison, freezing, and so on.$"
 
 BattleFrontier_BattlePikeLobby_Text_25C4A5: @ 825C4A5
-	.string "I’ve completed the challenge 10 times\n"
-	.string "now, but I’ve never had to battle\l"
+	.string "I've completed the challenge 10 times\n"
+	.string "now, but I've never had to battle\l"
 	.string "a TRAINER once.$"
 
 BattleFrontier_BattlePikeLobby_Text_25C4FD: @ 825C4FD
 	.string "Listen! Listen!\p"
-	.string "Don’t you think that the special\n"
+	.string "Don't you think that the special\n"
 	.string "abilities of POKéMON will be useful\l"
 	.string "here?$"
 
 BattleFrontier_BattlePikeLobby_Text_25C558: @ 825C558
 	.string "What is this weird place?\n"
-	.string "I can’t figure it out at all!\p"
-	.string "I’ve taken the challenge a bunch\n"
+	.string "I can't figure it out at all!\p"
+	.string "I've taken the challenge a bunch\n"
 	.string "of times, but all I ever do is run into\l"
 	.string "TRAINERS whichever path I choose.$"
 
 BattleFrontier_BattlePikeLobby_Text_25C5FB: @ 825C5FB
-	.string "The Battle Choice’s rules are listed.$"
+	.string "The Battle Choice's rules are listed.$"
 
 BattleFrontier_BattlePikeLobby_Text_25C621: @ 825C621
 	.string "Which heading do you want to read?$"

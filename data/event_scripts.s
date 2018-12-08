@@ -619,10 +619,10 @@ EventScript_23B6D7:: @ 823B6D7
 	end
 
 gText_23B6E0:: @ 823B6E0
-	.string "There’s a small indent in the wall.$"
+	.string "There's a small indent in the wall.$"
 
 gText_23B704:: @ 823B704
-	.string "There’s a small indent in the wall.\p"
+	.string "There's a small indent in the wall.\p"
 	.string "Use the SECRET POWER?$"
 
 gText_23B73E:: @ 823B73E
@@ -844,144 +844,12 @@ VerdanturfTown_BattleTentLobby_EventScript_27134F:: @ 827134F
 	waitstate
 	return
 
-EventScript_271354:: @ 8271354
+	EventScript_271354:: @ 8271354
 	cmdD8
 	cmdD9
-
-EventScript_271356:: @ 8271356
-	special SetUpTrainerEncounterMusic
-	special EndTrainerApproach
-	waitstate
-	goto EventScript_ShowTrainerIntroMsg
-
-EventScript_271362:: @ 8271362
-	lock
-	faceplayer
-	applymovement VAR_LAST_TALKED, Movement_27143A
-	waitmovement 0
-	specialvar VAR_RESULT, GetTrainerFlag
-	compare VAR_RESULT, 0
-	goto_if 5, EventScript_271389
-	special SetUpTrainerEncounterMusic
-	special sub_80B16D8
-	goto EventScript_ShowTrainerIntroMsg
-
-EventScript_271389:: @ 8271389
-	gotopostbattlescript
-
-EventScript_TryDoDoubleTrainerBattle:: @ 827138A
-	lock
-	faceplayer
-	call EventScript_27142F
-	specialvar VAR_RESULT, GetTrainerFlag
-	compare VAR_RESULT, 0
-	goto_if 5, EventScript_2713C1
-	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, 0
-	goto_if 5, EventScript_NotEnoughMonsForDoubleBattle
-	special SetUpTrainerEncounterMusic
-	special sub_80B16D8
-	goto EventScript_ShowTrainerIntroMsg
-
-EventScript_NotEnoughMonsForDoubleBattle:: @ 82713BA
-	special ShowTrainerCantBattleSpeech
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-EventScript_2713C1:: @ 82713C1
-	gotopostbattlescript
-
-EventScript_2713C2:: @ 82713C2
-	applymovement VAR_LAST_TALKED, Movement_27143A
-	waitmovement 0
-	special SetUpTrainerEncounterMusic
-	trainerbattlebegin
-	gotopostbattlescript
-
-EventScript_2713D1:: @ 82713D1
-	call EventScript_27142F
-	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	compare VAR_RESULT, 0
-	goto_eq EventScript_2713F7
-	special SetUpTrainerEncounterMusic
-	special sub_80B16D8
-	special ShowTrainerIntroSpeech
-	waitmessage
-	waitbuttonpress
-	special BattleSetup_StartRematchBattle
-	waitstate
-	releaseall
-	end
-
-EventScript_2713F7:: @ 82713F7
-	gotopostbattlescript
-
-EventScript_TryDoDoubleRematchBattle:: @ 82713F8
-	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	compare VAR_RESULT, 0
-	goto_eq EventScript_271427
-	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, 0
-	goto_if 5, EventScript_NotEnoughMonsForDoubleRematchBattle
-	special SetUpTrainerEncounterMusic
-	special sub_80B16D8
-	special ShowTrainerIntroSpeech
-	waitmessage
-	waitbuttonpress
-	special BattleSetup_StartRematchBattle
-	waitstate
-	releaseall
-	end
-
-EventScript_271427:: @ 8271427
-	gotopostbattlescript
-
-EventScript_NotEnoughMonsForDoubleRematchBattle:: @ 8271428
-	special ShowTrainerCantBattleSpeech
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-EventScript_27142F:: @ 827142F
-	applymovement VAR_LAST_TALKED, Movement_27143A
-	waitmovement 0
-	return
-
-Movement_27143A: @ 827143A
-	reveal_trainer
-	step_end
-
-EventScript_ShowTrainerIntroMsg:: @ 827143C
-	special ShowTrainerIntroSpeech
-	waitmessage
-	waitbuttonpress
-	special sub_80B45D0
-	compare VAR_RESULT, 1
-	goto_eq EventScript_271356
-	goto EventScript_DoTrainerBattle
-
-EventScript_DoTrainerBattle:: @ 8271454
-	trainerbattlebegin
-	specialvar VAR_RESULT, GetTrainerBattleMode
-	compare VAR_RESULT, 0
-	goto_eq EventScript_271491
-	compare VAR_RESULT, 2
-	goto_eq EventScript_271491
-	compare VAR_RESULT, 1
-	goto_eq EventScript_271491
-	compare VAR_RESULT, 6
-	goto_eq EventScript_271491
-	compare VAR_RESULT, 8
-	goto_eq EventScript_271491
-
-EventScript_271491:: @ 8271491
-	gotobeatenscript
-	releaseall
-	end
-
+	
+	.include "data/scripts/trainer_battle.inc"
+	
 Std_MsgboxAutoclose:: @ 8271494
 	message 0x0
 	waitmessage
@@ -3119,25 +2987,25 @@ gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
 gUnknown_0827268C:: @ 827268C
-	.string "Accessed SOMEONE’S PC.$"
+	.string "Accessed SOMEONE'S PC.$"
 
 gUnknown_082726A3:: @ 82726A3
 	.string "POKéMON Storage System opened.$"
 
 gUnknown_082726C2:: @ 82726C2
-	.string "Accessed {PLAYER}’s PC.$"
+	.string "Accessed {PLAYER}'s PC.$"
 
 gUnknown_082726D4:: @ 82726D4
-	.string "Accessed LANETTE’s PC.$"
+	.string "Accessed LANETTE's PC.$"
 
 gUnknown_082726EB:: @ 82726EB
 	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?$"
 
 gUnknown_08272768:: @ 8272768
-	.string "Okay, I’ll take your POKéMON\nfor a few seconds.$"
+	.string "Okay, I'll take your POKéMON\nfor a few seconds.$"
 
 gUnknown_08272798:: @ 8272798
-	.string "Thank you for waiting.\pWe’ve restored your POKéMON\nto full health.$"
+	.string "Thank you for waiting.\pWe've restored your POKéMON\nto full health.$"
 
 gUnknown_082727DB:: @ 82727DB
 	.string "We hope to see you again!$"
@@ -3146,13 +3014,13 @@ gUnknown_082727F5:: @ 82727F5
 	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…$"
 
 gUnknown_08272860:: @ 8272860
-	.string "Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI’ve seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou’re the first TRAINER I’ve ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!$"
+	.string "Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI've seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou're the first TRAINER I've ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!$"
 
 gUnknown_08272982:: @ 8272982
-	.string "I’m delighted to see you, {PLAYER}!\nYou want the usual, am I right?$"
+	.string "I'm delighted to see you, {PLAYER}!\nYou want the usual, am I right?$"
 
 gUnknown_082729C0:: @ 82729C0
-	.string "Okay, I’ll take your POKéMON\nfor a few seconds.$"
+	.string "Okay, I'll take your POKéMON\nfor a few seconds.$"
 
 gUnknown_082729F0:: @ 82729F0
 	.string "Thank you for waiting.$"
@@ -3191,7 +3059,7 @@ gUnknown_08272B09:: @ 8272B09
 	.string "Obtained the {STR_VAR_2}!$"
 
 gUnknown_08272B1A:: @ 8272B1A
-	.string "Too bad! There’s no room left for\nanother {STR_VAR_2}…$"
+	.string "Too bad! There's no room left for\nanother {STR_VAR_2}…$"
 
 gUnknown_08272B48:: @ 8272B48
 	.string "The {STR_VAR_2} was transferred\nto the PC.$"
@@ -3209,13 +3077,13 @@ gUnknown_08272C1D:: @ 8272C1D
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
 
 gUnknown_08272C5F:: @ 8272C5F
-	.string "The sandstorm is vicious.\nIt’s impossible to keep going.$"
+	.string "The sandstorm is vicious.\nIt's impossible to keep going.$"
 
 gUnknown_08272C98:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
 gUnknown_08272CD5:: @ 8272CD5
-	.string "There’s an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER’s expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
+	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
 
 gUnknown_08272D87:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
@@ -3233,7 +3101,7 @@ gUnknown_08272E0F:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
 
 gUnknown_08272E30:: @ 8272E30
-	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe’ll accept you as a member and sell\nyou good stuff in secrecy.$"
+	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe'll accept you as a member and sell\nyou good stuff in secrecy.$"
 
 gUnknown_08272F07:: @ 8272F07
 	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
@@ -3247,16 +3115,16 @@ gUnknown_0827304E:: @ 827304E
 	.string "There is a big hole in the wall.$"
 
 gUnknown_0827306F:: @ 827306F
-	.string "I’m terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
+	.string "I'm terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
 
 gUnknown_082730BC:: @ 82730BC
 	.string "It appears to be undergoing\nadjustments…$"
 
 gUnknown_082730E5:: @ 82730E5
-	.string "I’m terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
+	.string "I'm terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
 
 gUnknown_08273125:: @ 8273125
-	.string "I’m terribly sorry. The RECORD CORNER\nis under preparation.$"
+	.string "I'm terribly sorry. The RECORD CORNER\nis under preparation.$"
 
 gUnknown_08273161:: @ 8273161
 	.string "{PLAYER} handed over the\n{STR_VAR_1}.$"
@@ -3268,25 +3136,25 @@ gUnknown_082731A9:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
 
 gUnknown_082731BD:: @ 82731BD
-	.string "The weird tree doesn’t like the\nWAILMER PAIL!\pThe weird tree attacked!$"
+	.string "The weird tree doesn't like the\nWAILMER PAIL!\pThe weird tree attacked!$"
 
 gUnknown_08273204:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 gText_PkmnTransferredSomeonesPC:: @ 8273216
-	.string "{STR_VAR_2} was transferred to\nSOMEONE’S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+	.string "{STR_VAR_2} was transferred to\nSOMEONE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
 
 gText_PkmnTransferredLanettesPC:: @ 8273256
-	.string "{STR_VAR_2} was transferred to\nLANETTE’S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+	.string "{STR_VAR_2} was transferred to\nLANETTE'S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
 
 gText_PkmnBoxSomeonesPCFull:: @ 8273296
-	.string "BOX “{STR_VAR_3}” on\nSOMEONE’S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+	.string "BOX “{STR_VAR_3}” on\nSOMEONE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
 
 gText_PkmnBoxLanettesPCFull:: @ 82732D9
-	.string "BOX “{STR_VAR_3}” on\nLANETTE’S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+	.string "BOX “{STR_VAR_3}” on\nLANETTE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
 
 gUnknown_0827331C:: @ 827331C
-	.string "There’s no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan’t accept any more!$"
+	.string "There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!$"
 
 gUnknown_08273374:: @ 8273374
 	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
@@ -4105,1123 +3973,7 @@ EventScript_GotoTrainerScript:: @ 82742F6
 	end
 
 	.include "data/scripts/berry_tree.inc"
-
-Text_274746: @ 8274746
-	.string "If some vines drop down, this tree can\n"
-	.string "be climbed.$"
-
-Text_274779: @ 8274779
-	.string "If some vines drop down, this tree can\n"
-	.string "be climbed.\p"
-	.string "Use the SECRET POWER?$"
-
-Text_2747C2: @ 82747C2
-	.string "A thick vine dropped down!$"
-
-Text_2747DD: @ 82747DD
-	.string "If this clump of grass can be moved,\n"
-	.string "it might be possible to go inside.$"
-
-Text_274825: @ 8274825
-	.string "If this clump of grass can be moved,\n"
-	.string "it might be possible to go inside.\p"
-	.string "Use the SECRET POWER?$"
-
-Text_274883: @ 8274883
-	.string "Discovered a small entrance!$"
-
-SecretBase_RedCave1_Text_2748A0: @ 82748A0
-	.string "Have you made a SECRET BASE already?\p"
-	.string "I went here, there, everywhere before\n"
-	.string "choosing this place.\p"
-	.string "Since you’re already here, how would\n"
-	.string "you like to battle?$"
-
-SecretBase_RedCave1_Text_274939: @ 8274939
-	.string "Okay!\n"
-	.string "Here we come!$"
-
-SecretBase_RedCave1_Text_27494D: @ 827494D
-	.string "Hunh?\n"
-	.string "Oh, you can’t now…$"
-
-SecretBase_RedCave1_Text_274966:: @ 8274966
-	.string "Waaargh! You’re too strong!\n"
-	.string "About me losing… Please keep it secret!$"
-
-SecretBase_RedCave1_Text_2749AA: @ 82749AA
-	.string "What do you think of my SECRET BASE?\n"
-	.string "Come visit me again tomorrow.$"
-
-SecretBase_RedCave1_Text_2749ED: @ 82749ED
-	.string "Have you made a SECRET BASE already?\p"
-	.string "I went here, there, everywhere before\n"
-	.string "choosing this place.\p"
-	.string "Feel free to hang out!$"
-
-SecretBase_RedCave1_Text_274A64: @ 8274A64
-	.string "There’re a lot of places where\n"
-	.string "you can make a SECRET BASE.\p"
-	.string "But I like this spot best.\n"
-	.string "Don’t you think it’s nice?\p"
-	.string "Oh, would you like to have a battle?$"
-
-SecretBase_RedCave1_Text_274AFA: @ 8274AFA
-	.string "Okay, here goes!$"
-
-SecretBase_RedCave1_Text_274B0B: @ 8274B0B
-	.string "Oh…\n"
-	.string "You can’t now, okay.$"
-
-SecretBase_RedCave1_Text_274B24:: @ 8274B24
-	.string "Hmmm… It’s our loss…\n"
-	.string "But don’t tell anyone!\l"
-	.string "It’s a confidential secret!$"
-
-SecretBase_RedCave1_Text_274B6C: @ 8274B6C
-	.string "If you’re in this area again,\n"
-	.string "I hope you’ll visit me.$"
-
-SecretBase_RedCave1_Text_274BA2: @ 8274BA2
-	.string "There’re a lot of places where you can\n"
-	.string "make a SECRET BASE.\p"
-	.string "But I like this spot best.\n"
-	.string "Don’t you think it’s nice?$"
-
-SecretBase_RedCave1_Text_274C13: @ 8274C13
-	.string "This is a popular spot.\n"
-	.string "It’s always taken.\p"
-	.string "Oh! Were you thinking about\n"
-	.string "taking this spot, too?\p"
-	.string "I’ll tell you what, you can have this\n"
-	.string "spot if you can beat me.$"
-
-SecretBase_RedCave1_Text_274CB0: @ 8274CB0
-	.string "Okay!\n"
-	.string "I’m going to defend my SECRET BASE!$"
-
-SecretBase_RedCave1_Text_274CDA: @ 8274CDA
-	.string "Hunh? Is that right?\n"
-	.string "You’re not interested in this spot?$"
-
-SecretBase_RedCave1_Text_274D13:: @ 8274D13
-	.string "I can’t keep going!\n"
-	.string "I surrender!$"
-
-SecretBase_RedCave1_Text_274D34: @ 8274D34
-	.string "Okay, when I move one day,\n"
-	.string "this place will be yours!$"
-
-SecretBase_RedCave1_Text_274D69: @ 8274D69
-	.string "This is a popular spot.\n"
-	.string "It’s always taken.\p"
-	.string "I waited a long time for it to open.\n"
-	.string "I finally got to use it!$"
-
-SecretBase_RedCave1_Text_274DD2: @ 8274DD2
-	.string "Welcome to my POKéMON LAB.\p"
-	.string "I carry out research on battling in\n"
-	.string "secrecy.\p"
-	.string "Would you like to see how strong I am?$"
-
-SecretBase_RedCave1_Text_274E41: @ 8274E41
-	.string "I’m going to go all out!$"
-
-SecretBase_RedCave1_Text_274E5A: @ 8274E5A
-	.string "Oh.\n"
-	.string "Some other time, then!$"
-
-SecretBase_RedCave1_Text_274E75:: @ 8274E75
-	.string "Hmm… I’ve still got lots to learn.\n"
-	.string "I have to study some more.$"
-
-SecretBase_RedCave1_Text_274EB3: @ 8274EB3
-	.string "Thanks for battling with me.\n"
-	.string "Please come back again tomorrow.$"
-
-SecretBase_RedCave1_Text_274EF1: @ 8274EF1
-	.string "Welcome to my POKéMON LAB.\p"
-	.string "I carry out research on battling in\n"
-	.string "secrecy.$"
-
-SecretBase_RedCave1_Text_274F39: @ 8274F39
-	.string "A big mansion is nice, but I like this\n"
-	.string "sort of place more.\p"
-	.string "I like it because all kinds of people\n"
-	.string "come visit me.\p"
-	.string "So, how would you like a battle?$"
-
-SecretBase_RedCave1_Text_274FCA: @ 8274FCA
-	.string "That’s the way!$"
-
-SecretBase_RedCave1_Text_274FDA: @ 8274FDA
-	.string "When you’re ready, give me a shout!$"
-
-SecretBase_RedCave1_Text_274FFE:: @ 8274FFE
-	.string "Aww! Done in!\n"
-	.string "But it’s still fun to battle!$"
-
-SecretBase_RedCave1_Text_27502A: @ 827502A
-	.string "Well, anyway, I should go buy some\n"
-	.string "decorations and furniture.\p"
-	.string "I want my SECRET BASE to be a place\n"
-	.string "other people can enjoy.$"
-
-SecretBase_RedCave1_Text_2750A4: @ 82750A4
-	.string "A big mansion is nice, but I like this\n"
-	.string "sort of place more.\p"
-	.string "I like it because all kinds of people\n"
-	.string "come visit me.$"
-
-SecretBase_RedCave1_Text_275114: @ 8275114
-	.string "I simply adore shopping for decorations\n"
-	.string "and furniture.\p"
-	.string "I also love raising POKéMON just\n"
-	.string "as much.\p"
-	.string "If you would be so kind, will you battle\n"
-	.string "with my POKéMON?$"
-
-SecretBase_RedCave1_Text_2751AF: @ 82751AF
-	.string "Thank you.\n"
-	.string "Shall we begin?$"
-
-SecretBase_RedCave1_Text_2751CA: @ 82751CA
-	.string "Oh.\n"
-	.string "How disappointing…$"
-
-SecretBase_RedCave1_Text_2751E1:: @ 82751E1
-	.string "I concede…$"
-
-SecretBase_RedCave1_Text_2751EC: @ 82751EC
-	.string "That was all in good fun!\n"
-	.string "I should go enjoy shopping now.$"
-
-SecretBase_RedCave1_Text_275226: @ 8275226
-	.string "I simply adore shopping for decorations\n"
-	.string "and furniture.\p"
-	.string "I also love raising POKéMON just\n"
-	.string "as much.$"
-
-SecretBase_RedCave1_Text_275287: @ 8275287
-	.string "Some people make their SECRET BASES in\n"
-	.string "hard-to-find places.\l"
-	.string "Do they want to just lie low?\p"
-	.string "But since you found me, how about we\n"
-	.string "have a battle?$"
-
-SecretBase_RedCave1_Text_275315: @ 8275315
-	.string "I’m not going down easily!$"
-
-SecretBase_RedCave1_Text_275330: @ 8275330
-	.string "Oh… Are you maybe tired from searching\n"
-	.string "for this place?$"
-
-SecretBase_RedCave1_Text_275367:: @ 8275367
-	.string "I went down…$"
-
-SecretBase_RedCave1_Text_275374: @ 8275374
-	.string "Where’s your SECRET BASE?\n"
-	.string "I should go visit you there.$"
-
-SecretBase_RedCave1_Text_2753AB: @ 82753AB
-	.string "Some people make their SECRET BASES in\n"
-	.string "hard-to-find places.\l"
-	.string "Do they want to just lie low?$"
-
-SecretBase_RedCave1_Text_275405: @ 8275405
-	.string "People have told me that you can get\n"
-	.string "decorations in several ways.\p"
-	.string "We should have a race to see who can\n"
-	.string "get nicer decorations and furniture!\p"
-	.string "In the meantime, want to battle?$"
-
-SecretBase_RedCave1_Text_2754B2: @ 82754B2
-	.string "This is my SECRET BASE.\n"
-	.string "I can’t lose!$"
-
-SecretBase_RedCave1_Text_2754D8: @ 82754D8
-	.string "I’ll battle with you anytime.$"
-
-SecretBase_RedCave1_Text_2754F6:: @ 82754F6
-	.string "Huh?\n"
-	.string "Did I just lose?$"
-
-SecretBase_RedCave1_Text_27550C: @ 827550C
-	.string "I won’t lose at collecting decorations.\n"
-	.string "Come visit again!$"
-
-SecretBase_RedCave1_Text_275546: @ 8275546
-	.string "People have told me that you can get\n"
-	.string "decorations in several ways.\p"
-	.string "We should have a race to see who can\n"
-	.string "get nicer decorations and furniture!$"
-
-SecretBase_RedCave1_Text_2755D2: @ 82755D2
-	.string "I found a spot I liked, and I did it up\n"
-	.string "with my favorite decorations.\p"
-	.string "I raise my favorite POKéMON and grow\n"
-	.string "stronger with it.\p"
-	.string "That’s what I do.\n"
-	.string "Want to battle with me?$"
-
-SecretBase_RedCave1_Text_275679: @ 8275679
-	.string "Show me what you’re made of!$"
-
-SecretBase_RedCave1_Text_275696: @ 8275696
-	.string "I guess there are times when you’re not\n"
-	.string "into it.$"
-
-SecretBase_RedCave1_Text_2756C7:: @ 82756C7
-	.string "I know exactly what you’re made of now.$"
-
-SecretBase_RedCave1_Text_2756EF: @ 82756EF
-	.string "We can both become stronger.\n"
-	.string "Let’s keep at it!$"
-
-SecretBase_RedCave1_Text_27571E: @ 827571E
-	.string "I found a spot I liked, and I did it up\n"
-	.string "with my favorite decorations.\p"
-	.string "I raise my favorite POKéMON and grow\n"
-	.string "stronger with it.\p"
-	.string "Every day is a great day.$"
-
-SecretBase_RedCave1_Text_2757B5: @ 82757B5
-	.string "You can learn a lot about the taste\n"
-	.string "and sense of people by the kinds of\l"
-	.string "decorations they have, and how they\l"
-	.string "display them.\p"
-	.string "What do you think of my taste?\n"
-	.string "Are you speechless?\p"
-	.string "Want to see my taste in battling?$"
-
-SecretBase_RedCave1_Text_275884: @ 8275884
-	.string "There’s no holding back!$"
-
-SecretBase_RedCave1_Text_27589D: @ 827589D
-	.string "I’ll be happy to demonstrate my style\n"
-	.string "anytime.$"
-
-SecretBase_RedCave1_Text_2758CC:: @ 82758CC
-	.string "You’re supremely talented!\n"
-	.string "Your power seems to be limitless…$"
-
-SecretBase_RedCave1_Text_275909: @ 8275909
-	.string "What did you think of my style?\n"
-	.string "I’ll keep on polishing it!$"
-
-SecretBase_RedCave1_Text_275944: @ 8275944
-	.string "You can learn a lot about the taste\n"
-	.string "and sense of people by the kinds of\l"
-	.string "decorations they have, and how they\l"
-	.string "display them.\p"
-	.string "What do you think of my taste?\n"
-	.string "Are you speechless?$"
-
-EventScript_2759F1:: @ 82759F1
-	special sub_80E8C98
-	special sub_80E8BC8
-	compare VAR_RESULT, 1
-	goto_eq EventScript_275BE8
-	checkpartymove MOVE_SECRET_POWER
-	setfieldeffectargument 0, VAR_RESULT
-	buffermovename 1, MOVE_SECRET_POWER
-	compare VAR_0x8007, 1
-	goto_eq EventScript_275A50
-	compare VAR_0x8007, 2
-	goto_eq EventScript_275A50
-	compare VAR_0x8007, 3
-	goto_eq EventScript_275A50
-	compare VAR_0x8007, 4
-	goto_eq EventScript_275A50
-	compare VAR_0x8007, 5
-	goto_eq EventScript_275AA9
-	compare VAR_0x8007, 6
-	goto_eq EventScript_275B02
-	end
-
-EventScript_275A50:: @ 8275A50
-	lockall
-	compare VAR_RESULT, 6
-	goto_eq EventScript_275A91
-	bufferpartymonnick 0, VAR_RESULT
-	msgbox gText_23B704, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
-	closemessage
-	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
-	waitstate
-	goto EventScript_275A9B
-	end
-
-EventScript_275A86:: @ 8275A86
-	lockall
-	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
-	waitstate
-	goto EventScript_275A9B
-	end
-
-EventScript_275A91:: @ 8275A91
-	msgbox gText_23B6E0, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_275A9B:: @ 8275A9B
-	msgbox gText_23B73E, MSGBOX_DEFAULT
-	goto EventScript_275B5B
-	end
-
-EventScript_275AA9:: @ 8275AA9
-	lockall
-	compare VAR_RESULT, 6
-	goto_eq EventScript_275AEA
-	bufferpartymonnick 0, VAR_RESULT
-	msgbox Text_274779, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
-	closemessage
-	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
-	waitstate
-	goto EventScript_275AF4
-	end
-
-EventScript_275ADF:: @ 8275ADF
-	lockall
-	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
-	waitstate
-	goto EventScript_275AF4
-	end
-
-EventScript_275AEA:: @ 8275AEA
-	msgbox Text_274746, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_275AF4:: @ 8275AF4
-	msgbox Text_2747C2, MSGBOX_DEFAULT
-	goto EventScript_275B5B
-	end
-
-EventScript_275B02:: @ 8275B02
-	lockall
-	compare VAR_RESULT, 6
-	goto_eq EventScript_275B43
-	bufferpartymonnick 0, VAR_RESULT
-	msgbox Text_274825, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
-	closemessage
-	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
-	waitstate
-	goto EventScript_275B4D
-	end
-
-EventScript_275B38:: @ 8275B38
-	lockall
-	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
-	waitstate
-	goto EventScript_275B4D
-	end
-
-EventScript_275B43:: @ 8275B43
-	msgbox Text_2747DD, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_275B4D:: @ 8275B4D
-	msgbox Text_274883, MSGBOX_DEFAULT
-	goto EventScript_275B5B
-	end
-
-EventScript_275B5B:: @ 8275B5B
-	closemessage
-	playse SE_KAIDAN
-	setvar VAR_0x4097, 0
-	setflag FLAG_DECORATION_0
-	special sub_80E8E18
-	special sub_80E9068
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 0
-	special sub_80E933C
-	setvar VAR_0x4089, 1
-	waitstate
-	end
-
-SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
-	applymovement 255, SecretBase_RedCave1_Movement_275BB4
-	waitmovement 0
-	setvar VAR_0x4097, 1
-	msgbox SecretBase_RedCave1_Text_23B759, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275BAB
-	closemessage
-	playse SE_KAIDAN
-	special sub_80E9A90
-	end
-
-SecretBase_RedCave1_EventScript_275BAB:: @ 8275BAB
-	closemessage
-	setflag FLAG_0x060
-	special sub_80E91F8
-	waitstate
-	end
-
-SecretBase_RedCave1_Movement_275BB4: @ 8275BB4
-	walk_up
-	walk_up
-	step_end
-
-EventScript_275BB7:: @ 8275BB7
-	lockall
-	setvar VAR_0x4097, 1
-	playse SE_KAIDAN
-	special sub_80E9744
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275BDB
-	clearflag FLAG_DECORATION_0
-	special sub_80E9068
-	setvar VAR_0x4089, 0
-	waitstate
-	end
-
-EventScript_275BDB:: @ 8275BDB
-	setflag FLAG_DECORATION_0
-	special sub_80E9068
-	setvar VAR_0x4089, 0
-	waitstate
-	end
-
-EventScript_275BE8:: @ 8275BE8
-	checkpartymove MOVE_SECRET_POWER
-	compare VAR_RESULT, 6
-	goto_eq EventScript_275C9A
-	setfieldeffectargument 0, VAR_RESULT
-	setorcopyvar VAR_0x8004, VAR_RESULT
-	lockall
-	special GetSecretBaseNearbyMapName
-	msgbox Text_276A3D, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
-	msgbox Text_2766AA, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
-	fadescreenswapbuffers 1
-	special sub_80E9B70
-	closemessage
-	fadescreenswapbuffers 0
-	msgbox Text_276A95, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
-	bufferpartymonnick 0, VAR_0x8004
-	buffermovename 1, MOVE_SECRET_POWER
-	msgbox Route103_Text_290771, MSGBOX_DEFAULT
-	closemessage
-	closemessage
-	compare VAR_0x8007, 1
-	goto_eq EventScript_275A86
-	compare VAR_0x8007, 2
-	goto_eq EventScript_275A86
-	compare VAR_0x8007, 3
-	goto_eq EventScript_275A86
-	compare VAR_0x8007, 4
-	goto_eq EventScript_275A86
-	compare VAR_0x8007, 5
-	goto_eq EventScript_275ADF
-	compare VAR_0x8007, 6
-	goto_eq EventScript_275B38
-	releaseall
-	end
-
-EventScript_275C9A:: @ 8275C9A
-	lockall
-	compare VAR_0x8007, 1
-	goto_eq EventScript_275A91
-	compare VAR_0x8007, 2
-	goto_eq EventScript_275A91
-	compare VAR_0x8007, 3
-	goto_eq EventScript_275A91
-	compare VAR_0x8007, 4
-	goto_eq EventScript_275A91
-	compare VAR_0x8007, 5
-	goto_eq EventScript_275AEA
-	compare VAR_0x8007, 6
-	goto_eq EventScript_275B43
-	end
-
-EventScript_275CDE:: @ 8275CDE
-	closemessage
-	releaseall
-	end
-
-LittlerootTown_BrendansHouse_2F_EventScript_275CE1:: @ 8275CE1
-LittlerootTown_MaysHouse_2F_EventScript_275CE1:: @ 8275CE1
-SecretBase_RedCave1_EventScript_275CE1:: @ 8275CE1
-	setflag FLAG_DECORATION_1
-	setflag FLAG_DECORATION_2
-	setflag FLAG_DECORATION_3
-	setflag FLAG_DECORATION_4
-	setflag FLAG_DECORATION_5
-	setflag FLAG_DECORATION_6
-	setflag FLAG_DECORATION_7
-	setflag FLAG_DECORATION_8
-	setflag FLAG_DECORATION_9
-	setflag FLAG_DECORATION_10
-	setflag FLAG_DECORATION_11
-	setflag FLAG_DECORATION_12
-	setflag FLAG_DECORATION_13
-	setflag FLAG_DECORATION_14
-	return
-
-EventScript_275D0C:: @ 8275D0C
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 0
-	special sub_80E933C
-	setvar VAR_0x4089, 1
-	end
-
-EventScript_275D1F:: @ 8275D1F
-	setvar VAR_0x8005, 0
-	goto EventScript_275D2A
-	end
-
-EventScript_275D2A:: @ 8275D2A
-	special sub_8127E18
-	end
-
-EventScript_275D2E:: @ 8275D2E
-	setvar VAR_0x8004, 0
-	goto EventScript_275D39
-	end
-
-EventScript_275D39:: @ 8275D39
-	special sub_8129708
-	compare VAR_RESULT, 1
-	goto_eq EventScript_275D63
-	addvar VAR_0x8004, 1
-	compare VAR_0x8005, 0
-	goto_eq EventScript_275D39
-	removeobject VAR_0x8006
-	setflag 0x8005
-	goto EventScript_275D39
-	end
-
-EventScript_275D63:: @ 8275D63
-	end
-
-SecretBase_BlueCave1_EventScript_275D64:: @ 8275D64
-SecretBase_BlueCave2_EventScript_275D64:: @ 8275D64
-SecretBase_BlueCave3_EventScript_275D64:: @ 8275D64
-SecretBase_BlueCave4_EventScript_275D64:: @ 8275D64
-SecretBase_BrownCave1_EventScript_275D64:: @ 8275D64
-SecretBase_BrownCave2_EventScript_275D64:: @ 8275D64
-SecretBase_BrownCave3_EventScript_275D64:: @ 8275D64
-SecretBase_BrownCave4_EventScript_275D64:: @ 8275D64
-SecretBase_RedCave1_EventScript_275D64:: @ 8275D64
-SecretBase_RedCave2_EventScript_275D64:: @ 8275D64
-SecretBase_RedCave3_EventScript_275D64:: @ 8275D64
-SecretBase_RedCave4_EventScript_275D64:: @ 8275D64
-SecretBase_Shrub1_EventScript_275D64:: @ 8275D64
-SecretBase_Shrub2_EventScript_275D64:: @ 8275D64
-SecretBase_Shrub3_EventScript_275D64:: @ 8275D64
-SecretBase_Shrub4_EventScript_275D64:: @ 8275D64
-SecretBase_Tree1_EventScript_275D64:: @ 8275D64
-SecretBase_Tree2_EventScript_275D64:: @ 8275D64
-SecretBase_Tree3_EventScript_275D64:: @ 8275D64
-SecretBase_Tree4_EventScript_275D64:: @ 8275D64
-SecretBase_YellowCave1_EventScript_275D64:: @ 8275D64
-SecretBase_YellowCave2_EventScript_275D64:: @ 8275D64
-SecretBase_YellowCave3_EventScript_275D64:: @ 8275D64
-SecretBase_YellowCave4_EventScript_275D64:: @ 8275D64
-	special sub_80EA354
-	compare VAR_0x8004, 0
-	goto_eq SecretBase_RedCave1_EventScript_275DD6
-	compare VAR_0x8004, 1
-	goto_eq SecretBase_RedCave1_EventScript_275E4E
-	compare VAR_0x8004, 2
-	goto_eq SecretBase_RedCave1_EventScript_275EC6
-	compare VAR_0x8004, 3
-	goto_eq SecretBase_RedCave1_EventScript_275F3E
-	compare VAR_0x8004, 4
-	goto_eq SecretBase_RedCave1_EventScript_275FB6
-	compare VAR_0x8004, 5
-	goto_eq SecretBase_RedCave1_EventScript_27602E
-	compare VAR_0x8004, 6
-	goto_eq SecretBase_RedCave1_EventScript_2760A6
-	compare VAR_0x8004, 7
-	goto_eq SecretBase_RedCave1_EventScript_27611E
-	compare VAR_0x8004, 8
-	goto_eq SecretBase_RedCave1_EventScript_276196
-	compare VAR_0x8004, 9
-	goto_eq SecretBase_RedCave1_EventScript_27620E
-	end
-
-SecretBase_RedCave1_EventScript_275DD6:: @ 8275DD6
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275E25
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275E44
-	msgbox SecretBase_RedCave1_Text_2748A0, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275E2F
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275E2F
-	msgbox SecretBase_RedCave1_Text_274939, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_275E25:: @ 8275E25
-	msgbox SecretBase_RedCave1_Text_2749ED, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275E2F:: @ 8275E2F
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_27494D, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275E44:: @ 8275E44
-	msgbox SecretBase_RedCave1_Text_2749AA, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275E4E:: @ 8275E4E
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275E9D
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275EBC
-	msgbox SecretBase_RedCave1_Text_274C13, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275EA7
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275EA7
-	msgbox SecretBase_RedCave1_Text_274CB0, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_275E9D:: @ 8275E9D
-	msgbox SecretBase_RedCave1_Text_274D69, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275EA7:: @ 8275EA7
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_274CDA, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275EBC:: @ 8275EBC
-	msgbox SecretBase_RedCave1_Text_274D34, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275EC6:: @ 8275EC6
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275F15
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275F34
-	msgbox SecretBase_RedCave1_Text_274F39, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F1F
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F1F
-	msgbox SecretBase_RedCave1_Text_274FCA, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_275F15:: @ 8275F15
-	msgbox SecretBase_RedCave1_Text_2750A4, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275F1F:: @ 8275F1F
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_274FDA, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275F34:: @ 8275F34
-	msgbox SecretBase_RedCave1_Text_27502A, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275F3E:: @ 8275F3E
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275F8D
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275FAC
-	msgbox SecretBase_RedCave1_Text_275287, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F97
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F97
-	msgbox SecretBase_RedCave1_Text_275315, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_275F8D:: @ 8275F8D
-	msgbox SecretBase_RedCave1_Text_2753AB, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275F97:: @ 8275F97
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_275330, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275FAC:: @ 8275FAC
-	msgbox SecretBase_RedCave1_Text_275374, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_275FB6:: @ 8275FB6
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_276005
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_276024
-	msgbox SecretBase_RedCave1_Text_2755D2, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_27600F
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_27600F
-	msgbox SecretBase_RedCave1_Text_275679, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_276005:: @ 8276005
-	msgbox SecretBase_RedCave1_Text_27571E, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27600F:: @ 827600F
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_275696, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276024:: @ 8276024
-	msgbox SecretBase_RedCave1_Text_2756EF, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27602E:: @ 827602E
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_27607D
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_27609C
-	msgbox SecretBase_RedCave1_Text_274A64, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276087
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276087
-	msgbox SecretBase_RedCave1_Text_274AFA, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_27607D:: @ 827607D
-	msgbox SecretBase_RedCave1_Text_274BA2, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276087:: @ 8276087
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_274B0B, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27609C:: @ 827609C
-	msgbox SecretBase_RedCave1_Text_274B6C, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_2760A6:: @ 82760A6
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_2760F5
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_276114
-	msgbox SecretBase_RedCave1_Text_274DD2, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2760FF
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2760FF
-	msgbox SecretBase_RedCave1_Text_274E41, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_2760F5:: @ 82760F5
-	msgbox SecretBase_RedCave1_Text_274EF1, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_2760FF:: @ 82760FF
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_274E5A, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276114:: @ 8276114
-	msgbox SecretBase_RedCave1_Text_274EB3, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27611E:: @ 827611E
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_27616D
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_27618C
-	msgbox SecretBase_RedCave1_Text_275114, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276177
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276177
-	msgbox SecretBase_RedCave1_Text_2751AF, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_27616D:: @ 827616D
-	msgbox SecretBase_RedCave1_Text_275226, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276177:: @ 8276177
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_2751CA, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27618C:: @ 827618C
-	msgbox SecretBase_RedCave1_Text_2751EC, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276196:: @ 8276196
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_2761E5
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_276204
-	msgbox SecretBase_RedCave1_Text_275405, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2761EF
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2761EF
-	msgbox SecretBase_RedCave1_Text_2754B2, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_2761E5:: @ 82761E5
-	msgbox SecretBase_RedCave1_Text_275546, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_2761EF:: @ 82761EF
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_2754D8, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276204:: @ 8276204
-	msgbox SecretBase_RedCave1_Text_27550C, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27620E:: @ 827620E
-	lock
-	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_27625D
-	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_27627C
-	msgbox SecretBase_RedCave1_Text_2757B5, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276267
-	setvar VAR_RESULT, 1
-	special sub_80EA30C
-	call SecretBase_RedCave1_EventScript_27134F
-	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276267
-	msgbox SecretBase_RedCave1_Text_275884, MSGBOX_DEFAULT
-	goto SecretBase_RedCave1_EventScript_276286
-	end
-
-SecretBase_RedCave1_EventScript_27625D:: @ 827625D
-	msgbox SecretBase_RedCave1_Text_275944, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276267:: @ 8276267
-	special sub_80EB300
-	setvar VAR_RESULT, 0
-	special sub_80EA30C
-	msgbox SecretBase_RedCave1_Text_27589D, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_27627C:: @ 827627C
-	msgbox SecretBase_RedCave1_Text_275909, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_RedCave1_EventScript_276286:: @ 8276286
-	special sub_80EA2E4
-	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
-	setvar VAR_0x8005, 0
-	special DoSpecialTrainerBattle
-	waitstate
-	compare VAR_RESULT, 3
-	call_if 1, SecretBase_RedCave1_EventScript_2762BD
-	compare VAR_RESULT, 1
-	call_if 1, SecretBase_RedCave1_EventScript_2762C1
-	compare VAR_RESULT, 2
-	call_if 1, SecretBase_RedCave1_EventScript_2762C5
-	special HealPlayerParty
-	release
-	end
-
-SecretBase_RedCave1_EventScript_2762BD:: @ 82762BD
-	special sub_80EB438
-	return
-
-SecretBase_RedCave1_EventScript_2762C1:: @ 82762C1
-	special sub_80EB368
-	return
-
-SecretBase_RedCave1_EventScript_2762C5:: @ 82762C5
-	special sub_80EB3D0
-	return
-
-	.include "data/scripts/secret_power_tm.inc"
-
-Text_2766AA: @ 82766AA
-	.string "All decorations and furniture in your\n"
-	.string "SECRET BASE will be returned to your PC.\p"
-	.string "Is that okay?$"
-
-Text_276707: @ 8276707
-	.string "Do you want to register\n"
-	.string "{STR_VAR_1}’s SECRET BASE?$"
-
-Text_276731: @ 8276731
-	.string "This data is already registered.\n"
-	.string "Would you like to delete it?$"
-
-Text_27676F: @ 827676F
-	.string "Up to 10 locations can be registered.\p"
-	.string "Delete a location if you want to\n"
-	.string "register another location.$"
-
-Text_2767D1: @ 82767D1
-	.string "Registration completed.$"
-
-Text_2767E9: @ 82767E9
-	.string "Data has been unregistered.$"
-
-Text_276805: @ 8276805
-	.string "{PLAYER} booted up the PC.$"
-
-Text_27681A: @ 827681A
-	.string "What would you like to do?$"
-
-Text_276835: @ 8276835
-	.string "Once registered, a SECRET BASE will not\n"
-	.string "disappear unless the other TRAINER\l"
-	.string "moves it to a different location.\p"
-	.string "If a SECRET BASE is deleted from the\n"
-	.string "registered list, another one may take\l"
-	.string "its place.\p"
-	.string "Up to ten SECRET BASE locations\n"
-	.string "may be registered.$"
-
-Text_27692B: @ 827692B
-	.string "A shield of {STR_VAR_2} that marks winning\n"
-	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
-
-Text_276974: @ 8276974
-	.string "A realistic toy TV. It could be easily\n"
-	.string "mistaken for the real thing.$"
-
-Text_2769B8: @ 82769B8
-	.string "A toy TV shaped like a SEEDOT.\n"
-	.string "It looks ready to roll away on its own…$"
-
-Text_2769FF: @ 82769FF
-	.string "A toy TV shaped like a SKITTY.\n"
-	.string "It looks ready to stroll away…$"
-
-Text_276A3D: @ 8276A3D
-	.string "You may only make one SECRET BASE.\p"
-	.string "Would you like to move from the SECRET\n"
-	.string "BASE near {STR_VAR_1}?$"
-
-Text_276A95: @ 8276A95
-	.string "Moving completed.\p"
-	.string "Would you like to use the SECRET POWER?$"
-
+	.include "data/scripts/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/contest_strings.inc"
@@ -5233,11 +3985,11 @@ gUnknown_0827E8DA:: @ 827E8DA
 	.string "Link standby!$"
 
 gUnknown_0827E8E8:: @ 827E8E8
-	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\n"
+	.string "The winner is {STR_VAR_1}'s {STR_VAR_2}!\n"
 	.string "Congratulations!$"
 
 gUnknown_0827E910:: @ 827E910
-	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!{PAUSE_UNTIL_PRESS}$"
+	.string "The winner is {STR_VAR_1}'s {STR_VAR_2}!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_0827E929:: @ 827E929
 	.string "Primary judging: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
@@ -5254,7 +4006,7 @@ gUnknown_0827E973:: @ 827E973
 
 gUnknown_0827E992:: @ 827E992
 	.string "The most impressive POKéMON:\n"
-	.string "{STR_VAR_1}’s {STR_VAR_2}{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1}'s {STR_VAR_2}{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_0827E9B9:: @ 827E9B9
 	.string "Set event: No. {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
@@ -5265,7 +4017,7 @@ gUnknown_0827E9CD:: @ 827E9CD
 
 gUnknown_0827EA0C:: @ 827EA0C
 	.string "{STR_VAR_1}\n"
-	.string "{STR_VAR_2}’s {STR_VAR_3}$"
+	.string "{STR_VAR_2}'s {STR_VAR_3}$"
 
 gUnknown_0827EA17:: @ 827EA17
 	.string "CONTEST$"
@@ -5313,22 +4065,22 @@ gContestPaintingCool3::
 	.string "very great {STR_VAR_1}$"
 
 gContestPaintingBeauty1::
-	.string "This century’s last Venus--\n"
+	.string "This century's last Venus--\n"
 	.string "the beautiful {STR_VAR_1}$"
 
 gContestPaintingBeauty2::
-	.string "{STR_VAR_1}’s dazzling,\n"
+	.string "{STR_VAR_1}'s dazzling,\n"
 	.string "glittering smile$"
 
 gContestPaintingBeauty3::
-	.string "POKéMON CENTER’s super idol--\n"
+	.string "POKéMON CENTER's super idol--\n"
 	.string "the incomparable {STR_VAR_1}$"
 
 gContestPaintingCute1::
 	.string "The lovely and sweet {STR_VAR_1}$"
 
 gContestPaintingCute2::
-	.string "The pretty {STR_VAR_1}’s\n"
+	.string "The pretty {STR_VAR_1}'s\n"
 	.string "winning portrait$"
 
 gContestPaintingCute3::
@@ -5344,7 +4096,7 @@ gContestPaintingSmart2::
 	.string "above all POKéMON$"
 
 gContestPaintingSmart3::
-	.string "The excellent {STR_VAR_1}’s\n"
+	.string "The excellent {STR_VAR_1}'s\n"
 	.string "moment of elegance$"
 
 gContestPaintingTough1::
@@ -5493,7 +4245,7 @@ gUnknown_0827EE07:: @ 27EE07
 
 gUnknown_0827EE09:: @ 27EE09
 	.string "8$"
-
+	
 	.include "data/scripts/tv.inc"
 	.include "data/text/tv.inc"
 
@@ -5897,7 +4649,7 @@ gOtherText_Is:: @ 82942FD
 
 gOtherText_DontYouAgree:: @ 8294301
 	.string "\n"
-	.string "Don’t you agree?$"
+	.string "Don't you agree?$"
 
 gUnknown_08294313:: @ 8294313
 	.string "I so want to go on a vacation.\n"
@@ -5905,10 +4657,10 @@ gUnknown_08294313:: @ 8294313
 
 gUnknown_08294359:: @ 8294359
 	.string "I bought crayons with 120 colors!\n"
-	.string "Don’t you think that’s nice?$"
+	.string "Don't you think that's nice?$"
 
 gUnknown_08294398:: @ 8294398
-	.string "Wouldn’t it be nice if we could float\n"
+	.string "Wouldn't it be nice if we could float\n"
 	.string "away on a cloud of bubbles?$"
 
 gUnknown_082943DA:: @ 82943DA
@@ -5916,7 +4668,7 @@ gUnknown_082943DA:: @ 82943DA
 	.string "they wash away. It makes me sad.$"
 
 gUnknown_0829441C:: @ 829441C
-	.string "What’s the bottom of the sea like?\n"
+	.string "What's the bottom of the sea like?\n"
 	.string "Just once I would so love to go!$"
 
 gUnknown_08294460:: @ 8294460
@@ -5925,11 +4677,11 @@ gUnknown_08294460:: @ 8294460
 
 gUnknown_082944A0:: @ 82944A0
 	.string "Lying back in the green grass…\n"
-	.string "Oh, it’s so, so nice!$"
+	.string "Oh, it's so, so nice!$"
 
 gUnknown_082944D5:: @ 82944D5
 	.string "SECRET BASES are so wonderful!\n"
-	.string "Can’t you feel the excitement?$"
+	.string "Can't you feel the excitement?$"
 
 	.include "data/text/trainers.inc"
 
@@ -5938,7 +4690,7 @@ EventScript_RepelWoreOff:: @ 82A4B2A
 	end
 
 Text_RepelWoreOff: @ 82A4B33
-	.string "REPEL’s effect wore off…$"
+	.string "REPEL's effect wore off…$"
 
 	.include "data/scripts/safari_zone.inc"
 
@@ -5980,10 +4732,10 @@ MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
 	.include "data/text/shoal_cave.inc"
 
 Text_2A81E5: @ 82A81E5
-	.string "There’s a set of POKéMON picture books.$"
+	.string "There's a set of POKéMON picture books.$"
 
 Text_2A820D: @ 82A820D
-	.string "It’s filled with all sorts of books.$"
+	.string "It's filled with all sorts of books.$"
 
 Text_2A8232: @ 82A8232
 	.string "POKéMON magazines!\n"
@@ -5997,7 +4749,7 @@ Text_2A8276: @ 82A8276
 	.string "But, it was empty.$"
 
 Text_2A82B3: @ 82A82B3
-	.string "It’s empty.$"
+	.string "It's empty.$"
 
 Text_2A82BF: @ 82A82BF
 	.string "The shelves brim with all sorts of\n"
@@ -6005,7 +4757,7 @@ Text_2A82BF: @ 82A82BF
 
 Text_2A82F7: @ 82A82F7
 	.string "A blueprint of some sort?\n"
-	.string "It’s too complicated!$"
+	.string "It's too complicated!$"
 
 GraniteCave_B1F_MapScript2_2A8327: @ 82A8327
 MirageTower_2F_MapScript2_2A8327: @ 82A8327
@@ -6645,10 +5397,10 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8A56:: @ 82A8A56
 	end
 
 LilycoveCity_PokemonCenter_1F_Text_2A8A69: @ 82A8A69
-	.string "I’m the FAVOR LADY…$"
+	.string "I'm the FAVOR LADY…$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8A7D: @ 82A8A7D
-	.string "I’ve recently developed an obsession\n"
+	.string "I've recently developed an obsession\n"
 	.string "for {STR_VAR_1} things…$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8AB1: @ 82A8AB1
@@ -6659,7 +5411,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A8ACE: @ 82A8ACE
 	.string "Before, I think it was {STR_VAR_3}…\p"
 	.string "{STR_VAR_3} gave me one {STR_VAR_2},\n"
 	.string "saying it was {STR_VAR_1}.\p"
-	.string "But it wasn’t {STR_VAR_1}.\n"
+	.string "But it wasn't {STR_VAR_1}.\n"
 	.string "Not in the least bit.$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8B36: @ 82A8B36
@@ -6678,25 +5430,25 @@ LilycoveCity_PokemonCenter_1F_Text_2A8BAD: @ 82A8BAD
 
 LilycoveCity_PokemonCenter_1F_Text_2A8BCD: @ 82A8BCD
 	.string "Is that so?\n"
-	.string "Then, it’s good-bye…$"
+	.string "Then, it's good-bye…$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8BEE: @ 82A8BEE
 	.string "Oh…\n"
-	.string "You’re not willing to share?$"
+	.string "You're not willing to share?$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8C0F: @ 82A8C0F
 	.string "Oh?\n"
 	.string "That {STR_VAR_2} is {STR_VAR_1}?\p"
 	.string "…Oh, is that right?\p"
 	.string "Well, I owe you a thanks anyway.\n"
-	.string "I’ll try to cherish it…$"
+	.string "I'll try to cherish it…$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8C6F: @ 82A8C6F
 	.string "Oh…\p"
-	.string "That’s a quite {STR_VAR_1}\n"
+	.string "That's a quite {STR_VAR_1}\n"
 	.string "{STR_VAR_2}…\p"
-	.string "Isn’t it nice?\n"
-	.string "It’s so dreamy…\p"
+	.string "Isn't it nice?\n"
+	.string "It's so dreamy…\p"
 	.string "Thank you…\n"
 	.string "I will cherish this…$"
 
@@ -6711,28 +5463,28 @@ LilycoveCity_PokemonCenter_1F_Text_2A8CC8: @ 82A8CC8
 	.string "of my life!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8D5D: @ 82A8D5D
-	.string "I’ll give you this wonderful item in\n"
+	.string "I'll give you this wonderful item in\n"
 	.string "return for your fabulous gift.\p"
 	.string "I hope you will cherish it…$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8DBD: @ 82A8DBD
-	.string "Oh, you can’t have it if you don’t have\n"
+	.string "Oh, you can't have it if you don't have\n"
 	.string "the space for it.\p"
 	.string "Please come see me when you get\n"
 	.string "your BAG organized…$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8E2B: @ 82A8E2B
-	.string "I’m the QUIZ LADY!\n"
+	.string "I'm the QUIZ LADY!\n"
 	.string "I love quizzes!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8E4E: @ 82A8E4E
 	.string "Oh?\p"
-	.string "I’m waiting for a challenger to answer\n"
+	.string "I'm waiting for a challenger to answer\n"
 	.string "the quiz you made.\p"
 	.string "We can chat another time, okay?$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8EAC: @ 82A8EAC
-	.string "I’m waiting for someone to challenge\n"
+	.string "I'm waiting for someone to challenge\n"
 	.string "a quiz this {STR_VAR_1} thought up!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8EEC: @ 82A8EEC
@@ -6751,20 +5503,20 @@ LilycoveCity_PokemonCenter_1F_Text_2A8F65: @ 82A8F65
 
 LilycoveCity_PokemonCenter_1F_Text_2A8F7E: @ 82A8F7E
 	.string "Awww!\n"
-	.string "You’re going to quit?$"
+	.string "You're going to quit?$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8F9A: @ 82A8F9A
 	.string "Please take the quiz challenge\n"
 	.string "another time!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A8FC7: @ 82A8FC7
-	.string "You’re amazing! You’ve got it right!\n"
-	.string "You’re one sharp customer!$"
+	.string "You're amazing! You've got it right!\n"
+	.string "You're one sharp customer!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9007: @ 82A9007
 	.string "Congratulations!\n"
-	.string "You’ve got the quiz right!\p"
-	.string "You’ve won a prize provided by\n"
+	.string "You've got the quiz right!\p"
+	.string "You've won a prize provided by\n"
 	.string "{STR_VAR_1}!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9056: @ 82A9056
@@ -6797,18 +5549,18 @@ LilycoveCity_PokemonCenter_1F_Text_2A9153: @ 82A9153
 	.string "is pick the prize for the person that\l"
 	.string "answers your quiz correctly.\p"
 	.string "But beware, if the person taking\n"
-	.string "the quiz can’t get it right, I get to\l"
+	.string "the quiz can't get it right, I get to\l"
 	.string "keep the prize!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9212: @ 82A9212
-	.string "If you don’t choose a prize,\n"
-	.string "your quiz can’t be made.\p"
+	.string "If you don't choose a prize,\n"
+	.string "your quiz can't be made.\p"
 	.string "Are you going to quit making\n"
 	.string "your quiz?$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9270: @ 82A9270
 	.string "Oh, how nice!\n"
-	.string "That’s a wonderful prize!\p"
+	.string "That's a wonderful prize!\p"
 	.string "Next, you need to write your quiz\n"
 	.string "question and its answer.$"
 
@@ -6822,12 +5574,12 @@ LilycoveCity_PokemonCenter_1F_Text_2A9305: @ 82A9305
 
 LilycoveCity_PokemonCenter_1F_Text_2A9336: @ 82A9336
 	.string "Thank you!\n"
-	.string "You’ve put together a nice quiz.\p"
-	.string "I’ll go look for someone who’ll take\n"
+	.string "You've put together a nice quiz.\p"
+	.string "I'll go look for someone who'll take\n"
 	.string "your quiz challenge right away.$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A93A7: @ 82A93A7
-	.string "I’m the CONTEST LADY!\n"
+	.string "I'm the CONTEST LADY!\n"
 	.string "I sure do love CONTESTS!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A93D6: @ 82A93D6
@@ -6835,26 +5587,26 @@ LilycoveCity_PokemonCenter_1F_Text_2A93D6: @ 82A93D6
 
 LilycoveCity_PokemonCenter_1F_Text_2A93F4: @ 82A93F4
 	.string "This is my friend {STR_VAR_1}!\n"
-	.string "It’s the epitome of {STR_VAR_2}!\p"
+	.string "It's the epitome of {STR_VAR_2}!\p"
 	.string "But I think that it will display\n"
 	.string "even more {STR_VAR_2}!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9451: @ 82A9451
 	.string "So, I need your help!\p"
 	.string "Please, may I have one {POKEBLOCK}?\n"
-	.string "All I’m asking for is one!\p"
+	.string "All I'm asking for is one!\p"
 	.string "…Oh, but…\n"
-	.string "Don’t you have a {POKEBLOCK} CASE?\l"
-	.string "That’s no good. Next time, then!$"
+	.string "Don't you have a {POKEBLOCK} CASE?\l"
+	.string "That's no good. Next time, then!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A94E8: @ 82A94E8
 	.string "So, I need your help!\p"
 	.string "Please, may I have one {POKEBLOCK}?\n"
-	.string "All I’m asking for is one!$"
+	.string "All I'm asking for is one!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9537: @ 82A9537
 	.string "Awww!\n"
-	.string "I can’t have one {POKEBLOCK}?!$"
+	.string "I can't have one {POKEBLOCK}?!$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A9556: @ 82A9556
 	.string "Sheesh!\n"
@@ -6863,11 +5615,11 @@ LilycoveCity_PokemonCenter_1F_Text_2A9556: @ 82A9556
 LilycoveCity_PokemonCenter_1F_Text_2A9571: @ 82A9571
 	.string "Yay!\n"
 	.string "Thank you!\p"
-	.string "I’ll feed my POKéMON your {POKEBLOCK}\n"
+	.string "I'll feed my POKéMON your {POKEBLOCK}\n"
 	.string "right away.$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A95AD: @ 82A95AD
-	.string "…It doesn’t seem to have changed\n"
+	.string "…It doesn't seem to have changed\n"
 	.string "in any way at all…\p"
 	.string "Hmm…\p"
 	.string "Oh, well!\n"
@@ -6875,8 +5627,8 @@ LilycoveCity_PokemonCenter_1F_Text_2A95AD: @ 82A95AD
 
 LilycoveCity_PokemonCenter_1F_Text_2A9605: @ 82A9605
 	.string "Oh, yay!\n"
-	.string "It’s really delighted!\p"
-	.string "I think it really improved {STR_VAR_1}’s\n"
+	.string "It's really delighted!\p"
+	.string "I think it really improved {STR_VAR_1}'s\n"
 	.string "{STR_VAR_2} quality, too.\p"
 	.string "Thank you so much!$"
 
@@ -6885,7 +5637,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A9669: @ 82A9669
 	.string "I think we may be ready to enter\n"
 	.string "some CONTESTS.\p"
 	.string "If you see us in one somewhere,\n"
-	.string "I hope you’ll cheer for us.$"
+	.string "I hope you'll cheer for us.$"
 
 LilycoveCity_PokemonCenter_1F_Text_2A96DA: @ 82A96DA
 	.string "{STR_VAR_1}: Guguuh!$"
@@ -6906,13 +5658,13 @@ BattleFrontier_PokeNav_2A971C:: @ 82A971C
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I saw this {STR_VAR_2} a while back\n"
-	.string "but I couldn’t catch it.\p"
+	.string "but I couldn't catch it.\p"
 	.string "It was so close, too!\n"
 	.string "Well, see you again!$"
 
 BattleFrontier_PokeNav_2A9798:: @ 82A9798
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "I tried to catch a nice {STR_VAR_2}\n"
 	.string "a little while ago.\p"
 	.string "But, it got away.\n"
@@ -6921,7 +5673,7 @@ BattleFrontier_PokeNav_2A9798:: @ 82A9798
 
 BattleFrontier_PokeNav_2A9813:: @ 82A9813
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "I just took a shot at catching\n"
 	.string "this {STR_VAR_2}, but it took off.\p"
 	.string "I came oh so close, too!\p"
@@ -6935,13 +5687,13 @@ BattleFrontier_PokeNav_2A98A8:: @ 82A98A8
 	.string "I came close to getting one.\p"
 	.string "It was just a while back.\n"
 	.string "I thought I had it but it escaped.\p"
-	.string "If I see it again, I’ll get it for\n"
+	.string "If I see it again, I'll get it for\n"
 	.string "sure, though.\p"
 	.string "Okay, catch you later.$"
 
 BattleFrontier_PokeNav_2A9977:: @ 82A9977
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\l"
+	.string "It's {STR_VAR_1}.\l"
 	.string "Catching any POKéMON lately?\p"
 	.string "A little while ago I came close to\n"
 	.string "nabbing one, but it got loose.\p"
@@ -6957,11 +5709,11 @@ BattleFrontier_PokeNav_2A99FD:: @ 82A99FD
 
 BattleFrontier_PokeNav_2A9A78:: @ 82A9A78
 	.string "…Uh, {PLAYER}{STRING 5}?\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "Oh, wait! Wait!\n"
 	.string "I can catch this {STR_VAR_2}…\p"
 	.string "Aaarrrgh! It bolted loose!\n"
-	.string "That wasn’t just close!$"
+	.string "That wasn't just close!$"
 
 BattleFrontier_PokeNav_2A9AE8:: @ 82A9AE8
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
@@ -6978,7 +5730,7 @@ BattleFrontier_PokeNav_2A9BA7:: @ 82A9BA7
 	.string "This is {STR_VAR_1}!\p"
 	.string "So? Are you getting more POKéMON\n"
 	.string "together?\p"
-	.string "I’m having a rotten time of it!\n"
+	.string "I'm having a rotten time of it!\n"
 	.string "They all get away from me!\p"
 	.string "See you!$"
 
@@ -7001,17 +5753,17 @@ BattleFrontier_PokeNav_2A9CC8:: @ 82A9CC8
 
 BattleFrontier_PokeNav_2A9D44:: @ 82A9D44
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you still catching POKéMON?\p"
-	.string "I’ve been trying to catch them\n"
-	.string "myself, but it’s not so easy.\p"
+	.string "I've been trying to catch them\n"
+	.string "myself, but it's not so easy.\p"
 	.string "The way of POKéMON is deep!$"
 
 BattleFrontier_PokeNav_2A9DD7:: @ 82A9DD7
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "Have you been catching POKéMON?\p"
-	.string "I’ve been trying to catch them\n"
+	.string "I've been trying to catch them\n"
 	.string "myself, but with little success.\p"
 	.string "The way of POKéMON is deep!$"
 
@@ -7027,11 +5779,11 @@ BattleFrontier_PokeNav_2A9E70:: @ 82A9E70
 BattleFrontier_PokeNav_2A9EFD:: @ 82A9EFD
 	.string "Hey, {PLAYER}!\n"
 	.string "This is {STR_VAR_1}!\p"
-	.string "I’ve been thinking about trying\n"
+	.string "I've been thinking about trying\n"
 	.string "to catch me some POKéMON.\p"
-	.string "But I can’t seem to find any.\n"
-	.string "It’s a real puzzler for me!\p"
-	.string "I’m at my wit’s end!\n"
+	.string "But I can't seem to find any.\n"
+	.string "It's a real puzzler for me!\p"
+	.string "I'm at my wit's end!\n"
 	.string "See you around!$"
 
 BattleFrontier_PokeNav_2A9FAB:: @ 82A9FAB
@@ -7044,7 +5796,7 @@ BattleFrontier_PokeNav_2A9FAB:: @ 82A9FAB
 
 BattleFrontier_PokeNav_2AA028:: @ 82AA028
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "I challenged someone else after\n"
 	.string "we battled.\p"
 	.string "I came close, but I ended up\n"
@@ -7052,7 +5804,7 @@ BattleFrontier_PokeNav_2AA028:: @ 82AA028
 
 BattleFrontier_PokeNav_2AA099:: @ 82AA099
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "I just got cleaned in a battle.\p"
 	.string "I guess I need to raise my team\n"
 	.string "some more!$"
@@ -7061,33 +5813,33 @@ BattleFrontier_PokeNav_2AA100:: @ 82AA100
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I tried another battle yesterday,\n"
-	.string "but I couldn’t pull out the win.\p"
+	.string "but I couldn't pull out the win.\p"
 	.string "My team needs more raising.\n"
 	.string "Okay, catch you later.$"
 
 BattleFrontier_PokeNav_2AA188:: @ 82AA188
 	.string "Hiya, {PLAYER}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "How are things with you?\p"
-	.string "I’ve been battling on,\n"
-	.string "but I haven’t won very often.\p"
-	.string "I can’t get it together.\n"
+	.string "I've been battling on,\n"
+	.string "but I haven't won very often.\p"
+	.string "I can't get it together.\n"
 	.string "Right, take care!$"
 
 BattleFrontier_PokeNav_2AA214:: @ 82AA214
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
-	.string "How’s it going for you?\p"
-	.string "I’ve been battling hard lately,\n"
+	.string "How's it going for you?\p"
+	.string "I've been battling hard lately,\n"
 	.string "but to little success.\p"
-	.string "I can’t get into the groove.\n"
+	.string "I can't get into the groove.\n"
 	.string "You take care.$"
 
 BattleFrontier_PokeNav_2AA2A1:: @ 82AA2A1
 	.string "{STR_VAR_1} here.\n"
-	.string "How’s it going lately?\p"
+	.string "How's it going lately?\p"
 	.string "I lost a battle yesterday,\n"
-	.string "and it’s filled my thoughts.\p"
+	.string "and it's filled my thoughts.\p"
 	.string "I have to devise a plan…\n"
 	.string "See you.$"
 
@@ -7125,16 +5877,16 @@ BattleFrontier_PokeNav_2AA4C5:: @ 82AA4C5
 
 BattleFrontier_PokeNav_2AA520:: @ 82AA520
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you still battling hard?\p"
-	.string "As for me, I lost recently, so I’ve\n"
+	.string "As for me, I lost recently, so I've\n"
 	.string "been training my team all over.\p"
-	.string "Let’s meet again.$"
+	.string "Let's meet again.$"
 
 BattleFrontier_PokeNav_2AA5AD:: @ 82AA5AD
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
-	.string "I hope you’ve been keeping well.\p"
+	.string "I hope you've been keeping well.\p"
 	.string "I was in a battle just a little\n"
 	.string "while before this.\p"
 	.string "{PLAYER}{STRING 5}, try to be active like me.\n"
@@ -7158,18 +5910,18 @@ BattleFrontier_PokeNav_2AA6AF:: @ 82AA6AF
 
 BattleFrontier_PokeNav_2AA730:: @ 82AA730
 	.string "Hello, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}!\p"
+	.string "It's {STR_VAR_1}!\p"
 	.string "I had a battle yesterday and\n"
-	.string "I won! It’s fantastic!$"
+	.string "I won! It's fantastic!$"
 
 BattleFrontier_PokeNav_2AA77A:: @ 82AA77A
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}!\l"
-	.string "How’s your battling?\p"
+	.string "It's me, {STR_VAR_1}!\l"
+	.string "How's your battling?\p"
 	.string "Me, I had a battle the other day,\n"
 	.string "and my {STR_VAR_2} came up huge!\p"
 	.string "The next time I battle you,\n"
-	.string "{PLAYER}, it won’t be me losing!$"
+	.string "{PLAYER}, it won't be me losing!$"
 
 BattleFrontier_PokeNav_2AA81C:: @ 82AA81C
 	.string "Hey, {PLAYER}.\n"
@@ -7181,35 +5933,35 @@ BattleFrontier_PokeNav_2AA81C:: @ 82AA81C
 
 BattleFrontier_PokeNav_2AA88C:: @ 82AA88C
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "How are things with you?\n"
 	.string "Battling much?\p"
 	.string "I just won a while back!\n"
 	.string "My {STR_VAR_2} was brilliant!\p"
-	.string "You wait. I’m going to beat you\n"
+	.string "You wait. I'm going to beat you\n"
 	.string "next time! Right, take care!$"
 
 BattleFrontier_PokeNav_2AA934:: @ 82AA934
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
-	.string "How’s it going for you?\p"
-	.string "I’ve been riding a hot streak.\n"
+	.string "How's it going for you?\p"
+	.string "I've been riding a hot streak.\n"
 	.string "Why, I just won a battle.\p"
 	.string "When we have our next battle,\n"
-	.string "I’m sure not going to lose!$"
+	.string "I'm sure not going to lose!$"
 
 BattleFrontier_PokeNav_2AA9D3:: @ 82AA9D3
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} is a force!\n"
 	.string "It won me another battle just now!\p"
-	.string "I can’t wait to have a rematch\n"
+	.string "I can't wait to have a rematch\n"
 	.string "with you.$"
 
 BattleFrontier_PokeNav_2AAA40:: @ 82AAA40
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
-	.string "I hope you’ve been well.\n"
+	.string "I hope you've been well.\n"
 	.string "I wanted to tell you I just won.\p"
 	.string "My {STR_VAR_2} worked especially\n"
 	.string "hard to get the win.\p"
@@ -7222,7 +5974,7 @@ BattleFrontier_PokeNav_2AAAE4:: @ 82AAAE4
 	.string "Mine just won a battle!\p"
 	.string "My {STR_VAR_2} was spectacular,\n"
 	.string "I must say!\p"
-	.string "I wish I could’ve shown you!\n"
+	.string "I wish I could've shown you!\n"
 	.string "See you again!$"
 
 BattleFrontier_PokeNav_2AAB8C:: @ 82AAB8C
@@ -7239,25 +5991,25 @@ BattleFrontier_PokeNav_2AAC25:: @ 82AAC25
 	.string "This is {STR_VAR_1}.\p"
 	.string "Been in any battles lately?\n"
 	.string "I just won another one today!\p"
-	.string "I’m on a roll! Gahahaha!\n"
+	.string "I'm on a roll! Gahahaha!\n"
 	.string "Well, see you!$"
 
 BattleFrontier_PokeNav_2AAC9D:: @ 82AAC9D
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\p"
-	.string "I trust you’ve been well?\n"
-	.string "I’m still bursting with life!\p"
+	.string "It's me, {STR_VAR_1}.\p"
+	.string "I trust you've been well?\n"
+	.string "I'm still bursting with life!\p"
 	.string "Why, just now, I won another match.\n"
-	.string "I’m not stepping aside to you\l"
+	.string "I'm not stepping aside to you\l"
 	.string "youngsters yet!$"
 
 BattleFrontier_PokeNav_2AAD41:: @ 82AAD41
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
-	.string "I hope you’ve been keeping well.\n"
+	.string "I hope you've been keeping well.\n"
 	.string "I still have a bounce in my step!\p"
 	.string "Why, I just won a battle yet again.\n"
-	.string "Oh, I won’t lose to young people\l"
+	.string "Oh, I won't lose to young people\l"
 	.string "quite yet!\p"
 	.string "See you again!$"
 
@@ -7272,28 +6024,28 @@ BattleFrontier_PokeNav_2AAE00:: @ 82AAE00
 BattleFrontier_PokeNav_2AAE7F:: @ 82AAE7F
 	.string "Hi! {PLAYER}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "Huh? Wait, you’re near\n"
+	.string "Huh? Wait, you're near\n"
 	.string "{STR_VAR_2}?\p"
 	.string "Oh, wow, we have to battle, then!\n"
-	.string "I’ll be waiting! See you!$"
+	.string "I'll be waiting! See you!$"
 
 BattleFrontier_PokeNav_2AAEF1:: @ 82AAEF1
 	.string "Hello, {PLAYER}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "Oh? You happen to be around\n"
 	.string "{STR_VAR_2} right now?\p"
 	.string "Would you like to battle now?\n"
-	.string "I’ll wait for you! See you!$"
+	.string "I'll wait for you! See you!$"
 
 BattleFrontier_PokeNav_2AAF69:: @ 82AAF69
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "Oh, hey, are you near\n"
 	.string "{STR_VAR_2} right now?\p"
 	.string "How would you like to battle with\n"
 	.string "me right now?\p"
-	.string "I’m not losing again!\n"
-	.string "I’ll be waiting! Catch you soon!$"
+	.string "I'm not losing again!\n"
+	.string "I'll be waiting! Catch you soon!$"
 
 BattleFrontier_PokeNav_2AB010:: @ 82AB010
 	.string "Hey, {PLAYER}{STRING 5}.\n"
@@ -7301,26 +6053,26 @@ BattleFrontier_PokeNav_2AB010:: @ 82AB010
 	.string "Whereabouts are you now?\n"
 	.string "Huh? {STR_VAR_2}?\p"
 	.string "Want to battle now?\n"
-	.string "I’ll wait for you. See you!$"
+	.string "I'll wait for you. See you!$"
 
 BattleFrontier_PokeNav_2AB076:: @ 82AB076
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\l"
+	.string "It's {STR_VAR_1}.\l"
 	.string "How are things with you?\p"
-	.string "You’re where now?\n"
+	.string "You're where now?\n"
 	.string "{STR_VAR_2}?\p"
 	.string "Well, how about we have a quick\n"
 	.string "rematch right away?\p"
-	.string "I’ll keep an eye out for you.\n"
+	.string "I'll keep an eye out for you.\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2AB11A:: @ 82AB11A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "How are your POKéMON keeping?\p"
-	.string "Oh, is that right? You’re around\n"
+	.string "Oh, is that right? You're around\n"
 	.string "{STR_VAR_2}?\p"
-	.string "Well, then, we’d better have\n"
+	.string "Well, then, we'd better have\n"
 	.string "a rematch.\p"
 	.string "I can wait, sure.\n"
 	.string "See you!$"
@@ -7330,37 +6082,37 @@ BattleFrontier_PokeNav_2AB1B4:: @ 82AB1B4
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, you happen to be around\n"
 	.string "{STR_VAR_2}?\p"
-	.string "Then, let’s battle.\n"
+	.string "Then, let's battle.\n"
 	.string "Right away, I mean.\p"
-	.string "I’ll show you my POKéMON.\n"
-	.string "I’ll wait for you.$"
+	.string "I'll show you my POKéMON.\n"
+	.string "I'll wait for you.$"
 
 BattleFrontier_PokeNav_2AB23D:: @ 82AB23D
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
-	.string "I hope you’re doing well.\n"
-	.string "Oh, you’re near {STR_VAR_2}.\p"
+	.string "I hope you're doing well.\n"
+	.string "Oh, you're near {STR_VAR_2}.\p"
 	.string "Would you like to have a battle\n"
 	.string "with me, then?\p"
-	.string "I’ll wait for you.\n"
+	.string "I'll wait for you.\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2AB2E9:: @ 82AB2E9
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "Are you keeping up?\n"
-	.string "Oh, you’re near {STR_VAR_2}?\p"
-	.string "Oh, well, then don’t you think we\n"
+	.string "Oh, you're near {STR_VAR_2}?\p"
+	.string "Oh, well, then don't you think we\n"
 	.string "should battle?\p"
-	.string "Don’t keep me waiting too long!$"
+	.string "Don't keep me waiting too long!$"
 
 BattleFrontier_PokeNav_2AB382:: @ 82AB382
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "How are things with you?\n"
-	.string "Oh, you’re near {STR_VAR_2}.\p"
+	.string "Oh, you're near {STR_VAR_2}.\p"
 	.string "We should have a battle now, then.\p"
-	.string "I’m ready and waiting.\n"
+	.string "I'm ready and waiting.\n"
 	.string "Be quick!$"
 
 BattleFrontier_PokeNav_2AB410:: @ 82AB410
@@ -7369,16 +6121,16 @@ BattleFrontier_PokeNav_2AB410:: @ 82AB410
 	.string "Ah, so where you are now is\n"
 	.string "{STR_VAR_2}?\p"
 	.string "Well, then, we just have to have\n"
-	.string "a battle, don’t you think?\p"
-	.string "I’ll wait around for you!\n"
+	.string "a battle, don't you think?\p"
+	.string "I'll wait around for you!\n"
 	.string "See you real quick!$"
 
 BattleFrontier_PokeNav_2AB4B0:: @ 82AB4B0
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Where might you be now?\p"
 	.string "{STR_VAR_2}?\n"
-	.string "That’s quite close by!\p"
+	.string "That's quite close by!\p"
 	.string "What do you say we have a battle\n"
 	.string "now?\p"
 	.string "I can wait.\n"
@@ -7387,47 +6139,47 @@ BattleFrontier_PokeNav_2AB4B0:: @ 82AB4B0
 BattleFrontier_PokeNav_2AB538:: @ 82AB538
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
-	.string "I hope you’ve been keeping well.\n"
-	.string "Oh, you’re near {STR_VAR_2}?\p"
-	.string "Since that’s not very far away,\n"
+	.string "I hope you've been keeping well.\n"
+	.string "Oh, you're near {STR_VAR_2}?\p"
+	.string "Since that's not very far away,\n"
 	.string "come see me for a battle.\p"
-	.string "I’ll wait for you.\n"
+	.string "I'll wait for you.\n"
 	.string "Bye for now.$"
 
 BattleFrontier_PokeNav_2AB5E4:: @ 82AB5E4
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "You’re what? …{STR_VAR_2}?\n"
-	.string "That’s very close.\p"
-	.string "Don’t you think we ought to have\n"
+	.string "You're what? …{STR_VAR_2}?\n"
+	.string "That's very close.\p"
+	.string "Don't you think we ought to have\n"
 	.string "a battle?\p"
-	.string "I’ll be looking for you!\n"
+	.string "I'll be looking for you!\n"
 	.string "Bye-bye!$"
 
 BattleFrontier_PokeNav_2AB670:: @ 82AB670
 	.string "Hi! {PLAYER}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Want to have a battle with me?\p"
-	.string "I’ll be waiting for you around\n"
+	.string "I'll be waiting for you around\n"
 	.string "{STR_VAR_2}!$"
 
 BattleFrontier_PokeNav_2AB6CD:: @ 82AB6CD
 	.string "Hello, {PLAYER}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "Would you like to have a battle\n"
 	.string "with me again?\p"
 	.string "You can find me around\n"
-	.string "{STR_VAR_2}. I’ll be waiting!$"
+	.string "{STR_VAR_2}. I'll be waiting!$"
 
 BattleFrontier_PokeNav_2AB73C:: @ 82AB73C
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "My POKéMON have grown a lot\n"
 	.string "tougher since last time.\p"
-	.string "I want to see how strong they’ve\n"
+	.string "I want to see how strong they've\n"
 	.string "become with your POKéMON, {PLAYER}.\p"
-	.string "So, let’s have a battle!\p"
-	.string "I’ll be waiting for you around\n"
+	.string "So, let's have a battle!\p"
+	.string "I'll be waiting for you around\n"
 	.string "{STR_VAR_2}.$"
 
 BattleFrontier_PokeNav_2AB808:: @ 82AB808
@@ -7438,24 +6190,24 @@ BattleFrontier_PokeNav_2AB808:: @ 82AB808
 	.string "tough lately.\p"
 	.string "Hey, how would you like to have\n"
 	.string "another battle with me?\p"
-	.string "Let’s meet up around\n"
+	.string "Let's meet up around\n"
 	.string "{STR_VAR_2}, okay?$"
 
 BattleFrontier_PokeNav_2AB8B7:: @ 82AB8B7
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "My POKéMON are growing up in\n"
 	.string "decent ways.\p"
-	.string "I’d really like to have another\n"
+	.string "I'd really like to have another\n"
 	.string "battle with you.\p"
-	.string "I’ll keep an eye out for you around\n"
+	.string "I'll keep an eye out for you around\n"
 	.string "{STR_VAR_2}. See you soon!$"
 
 BattleFrontier_PokeNav_2AB95D:: @ 82AB95D
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
-	.string "I hope you’re on top of things.\p"
-	.string "I was thinking I’d like another\n"
+	.string "I hope you're on top of things.\p"
+	.string "I was thinking I'd like another\n"
 	.string "battle with you. What do you say?\p"
 	.string "If you feel like a battle,\n"
 	.string "come to {STR_VAR_2}.\p"
@@ -7466,19 +6218,19 @@ BattleFrontier_PokeNav_2ABA03:: @ 82ABA03
 	.string "{STR_VAR_1} here…\l"
 	.string "So? Are your POKéMON growing?\p"
 	.string "Mine sure got stronger.\n"
-	.string "I’d like to show you.\p"
-	.string "I’ll be around {STR_VAR_2}.\n"
+	.string "I'd like to show you.\p"
+	.string "I'll be around {STR_VAR_2}.\n"
 	.string "Come see me for a match.\p"
 	.string "See you around.$"
 
 BattleFrontier_PokeNav_2ABA9F:: @ 82ABA9F
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
-	.string "I hope you’re doing well.\n"
+	.string "I hope you're doing well.\n"
 	.string "My POKéMON are very frisky.\p"
-	.string "If you’re ever in the area, please\n"
+	.string "If you're ever in the area, please\n"
 	.string "give me a rematch.\p"
-	.string "I’ll be around {STR_VAR_2}.\n"
+	.string "I'll be around {STR_VAR_2}.\n"
 	.string "Until then, good-bye!$"
 
 BattleFrontier_PokeNav_2ABB62:: @ 82ABB62
@@ -7486,9 +6238,9 @@ BattleFrontier_PokeNav_2ABB62:: @ 82ABB62
 	.string "This is {STR_VAR_1}!\l"
 	.string "How are your POKéMON doing?\p"
 	.string "My POKéMON keep getting better.\n"
-	.string "I’d like to show you, {PLAYER}{STRING 5}.\p"
-	.string "I’m around {STR_VAR_2} now,\n"
-	.string "so let’s battle if you’re close by.\p"
+	.string "I'd like to show you, {PLAYER}{STRING 5}.\p"
+	.string "I'm around {STR_VAR_2} now,\n"
+	.string "so let's battle if you're close by.\p"
 	.string "Hope I see you soon!$"
 
 BattleFrontier_PokeNav_2ABC26:: @ 82ABC26
@@ -7497,10 +6249,10 @@ BattleFrontier_PokeNav_2ABC26:: @ 82ABC26
 	.string "So, how are things with you?\p"
 	.string "My POKéMON have grown much\n"
 	.string "stronger than before.\p"
-	.string "I’d love another battle with you,\n"
+	.string "I'd love another battle with you,\n"
 	.string "{PLAYER}{STRING 5}.\p"
-	.string "I’ll be around {STR_VAR_2}.\n"
-	.string "Come see me if you’re close.$"
+	.string "I'll be around {STR_VAR_2}.\n"
+	.string "Come see me if you're close.$"
 
 BattleFrontier_PokeNav_2ABCE9:: @ 82ABCE9
 	.string "Ah, {PLAYER}{STRING 5}.\n"
@@ -7509,17 +6261,17 @@ BattleFrontier_PokeNav_2ABCE9:: @ 82ABCE9
 	.string "My POKéMON are full of life.\n"
 	.string "They appear to be looking forward\l"
 	.string "to seeing your POKéMON, {PLAYER}{STRING 5}.\p"
-	.string "I’m around {STR_VAR_2} now.\n"
-	.string "I hope you’ll seek us out.$"
+	.string "I'm around {STR_VAR_2} now.\n"
+	.string "I hope you'll seek us out.$"
 
 BattleFrontier_PokeNav_2ABDA2:: @ 82ABDA2
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "I should tell you, my POKéMON have\n"
 	.string "grown to be quite robust lately.\p"
 	.string "I would like to see them in a battle\n"
 	.string "with you, {PLAYER}{STRING 5}.\p"
-	.string "We’ll be around {STR_VAR_2}.\n"
+	.string "We'll be around {STR_VAR_2}.\n"
 	.string "Come see us anytime!$"
 
 BattleFrontier_PokeNav_2ABE5E:: @ 82ABE5E
@@ -7527,10 +6279,10 @@ BattleFrontier_PokeNav_2ABE5E:: @ 82ABE5E
 	.string "This is {STR_VAR_1}!\l"
 	.string "Are your POKéMON keeping well?\p"
 	.string "My POKéMON have been so healthy,\n"
-	.string "they don’t look capable of losing!\p"
+	.string "they don't look capable of losing!\p"
 	.string "I would surely love to have another\n"
 	.string "battle with you.\p"
-	.string "If you’re near {STR_VAR_2},\n"
+	.string "If you're near {STR_VAR_2},\n"
 	.string "do come see us.$"
 
 BattleFrontier_PokeNav_2ABF36:: @ 82ABF36
@@ -7539,19 +6291,19 @@ BattleFrontier_PokeNav_2ABF36:: @ 82ABF36
 	.string "Keeping well, I hope.\p"
 	.string "Oh, yes! My POKéMON are\n"
 	.string "much stronger than before.\p"
-	.string "Don’t you think we ought to have\n"
+	.string "Don't you think we ought to have\n"
 	.string "a battle, {PLAYER}{STRING 5}?\p"
-	.string "We’ll be waiting for you around\n"
+	.string "We'll be waiting for you around\n"
 	.string "{STR_VAR_2}.\p"
 	.string "Come see us anytime, okay?$"
 
 BattleFrontier_PokeNav_2AC009:: @ 82AC009
-	.string "It’s me, the mountain-loving\n"
+	.string "It's me, the mountain-loving\n"
 	.string "{STR_VAR_1}!\p"
 	.string "Well, since we met, have you grown\n"
 	.string "to appreciate the mountains more?\p"
 	.string "I rarely see you in the mountains…\p"
-	.string "Next time, we’ll meet somewhere\n"
+	.string "Next time, we'll meet somewhere\n"
 	.string "around {STR_VAR_2}.$"
 
 BattleFrontier_PokeNav_2AC0BD:: @ 82AC0BD
@@ -7561,14 +6313,14 @@ BattleFrontier_PokeNav_2AC0BD:: @ 82AC0BD
 	.string "about you.\p"
 	.string "I told her about a strong TRAINER\n"
 	.string "who raises POKéMON with care.\p"
-	.string "I hope you’ll become a TRAINER\n"
+	.string "I hope you'll become a TRAINER\n"
 	.string "that everyone will admire.\p"
 	.string "I hope we meet again!$"
 
 BattleFrontier_PokeNav_2AC18C:: @ 82AC18C
-	.string "Hello! It’s {STR_VAR_1}.\p"
+	.string "Hello! It's {STR_VAR_1}.\p"
 	.string "I love where I am now.\n"
-	.string "It’s pleasant with sweet aromas!\p"
+	.string "It's pleasant with sweet aromas!\p"
 	.string "I think someone planted BERRIES,\n"
 	.string "and they burst into bloom.\p"
 	.string "See you again sometime!$"
@@ -7576,62 +6328,62 @@ BattleFrontier_PokeNav_2AC18C:: @ 82AC18C
 BattleFrontier_PokeNav_2AC228:: @ 82AC228
 	.string "Hello! Thirty years of exploration,\n"
 	.string "{STR_VAR_1} at your service!\p"
-	.string "It seems that you’re energetically\n"
+	.string "It seems that you're energetically\n"
 	.string "traveling here and there.\p"
 	.string "Have you discovered any new ruins?\n"
 	.string "Please tell if you have!\p"
-	.string "Now, if you’ll excuse me,\n"
+	.string "Now, if you'll excuse me,\n"
 	.string "I have ruins to explore.$"
 
 BattleFrontier_PokeNav_2AC30C:: @ 82AC30C
-	.string "It’s {STR_VAR_1}!\p"
-	.string "Know what I’m doing today?\n"
+	.string "It's {STR_VAR_1}!\p"
+	.string "Know what I'm doing today?\n"
 	.string "Looking at waves from the beach!\p"
 	.string "Sigh… The waves are all sparkly.\n"
 	.string "The sea is the prettiest from here.\l"
-	.string "I’m getting hungry, so bye-bye!$"
+	.string "I'm getting hungry, so bye-bye!$"
 
 BattleFrontier_PokeNav_2AC3B6:: @ 82AC3B6
 	.string "Munch-chew…\n"
-	.string "Oh, hi, it’s {STR_VAR_1}.\l"
+	.string "Oh, hi, it's {STR_VAR_1}.\l"
 	.string "I love eating on the beach.\p"
 	.string "My POKéMON and I have been doing\n"
-	.string "great. We’re fully fueled!\l"
-	.string "I’m going for a swim. Bye!$"
+	.string "great. We're fully fueled!\l"
+	.string "I'm going for a swim. Bye!$"
 
 BattleFrontier_PokeNav_2AC446:: @ 82AC446
 	.string "Hello, this is {STR_VAR_1}…\p"
-	.string "I’ve grown a little jaded with this\n"
+	.string "I've grown a little jaded with this\n"
 	.string "whole COOLTRAINER thing…\p"
-	.string "Everyone thinks I’m a perfect\n"
+	.string "Everyone thinks I'm a perfect\n"
 	.string "TRAINER, and that makes me try to\l"
 	.string "live up to that expectation.\p"
 	.string "But I guess that goes with being\n"
 	.string "a COOLTRAINER.\p"
-	.string "I’ll just have to buckle down…\n"
+	.string "I'll just have to buckle down…\n"
 	.string "and grin and bear it.\p"
-	.string "You’re the only person that I could\n"
+	.string "You're the only person that I could\n"
 	.string "confide in like this.\p"
 	.string "But when I see you next,\n"
-	.string "don’t worry, I won’t whine!$"
+	.string "don't worry, I won't whine!$"
 
 BattleFrontier_PokeNav_2AC5C7:: @ 82AC5C7
-	.string "Yahoo, it’s {STR_VAR_1}!\n"
+	.string "Yahoo, it's {STR_VAR_1}!\n"
 	.string "How do you do?\p"
-	.string "I’ve been raising my POKéMON with\n"
+	.string "I've been raising my POKéMON with\n"
 	.string "you as the target.\p"
-	.string "I don’t intend to lose when we\n"
+	.string "I don't intend to lose when we\n"
 	.string "battle again.\p"
-	.string "Isn’t it great to have TRAINER\n"
-	.string "friends? Let’s meet again!$"
+	.string "Isn't it great to have TRAINER\n"
+	.string "friends? Let's meet again!$"
 
 BattleFrontier_PokeNav_2AC682:: @ 82AC682
-	.string "It’s {STR_VAR_1}…\n"
+	.string "It's {STR_VAR_1}…\n"
 	.string "Right now, behind you…\l"
-	.string "Wasn’t there something…?\p"
+	.string "Wasn't there something…?\p"
 	.string "The power of the POKéMON that\n"
 	.string "sleep here at MT. PYRE…\p"
-	.string "It’s telling me about you…\p"
+	.string "It's telling me about you…\p"
 	.string "You should walk away quickly and\n"
 	.string "never once look back…\p"
 	.string "Giggle…\n"
@@ -7640,24 +6392,24 @@ BattleFrontier_PokeNav_2AC682:: @ 82AC682
 BattleFrontier_PokeNav_2AC755:: @ 82AC755
 	.string "This is {STR_VAR_1}.\n"
 	.string "How do you do?\p"
-	.string "Isn’t it convenient that we can\n"
+	.string "Isn't it convenient that we can\n"
 	.string "chat like this at a distance?\p"
 	.string "Before, if I wanted to speak with\n"
 	.string "anyone, I had to have my father\l"
 	.string "drive me…\p"
 	.string "I should be going now.\n"
-	.string "I’m glad we had this chat.$"
+	.string "I'm glad we had this chat.$"
 
 BattleFrontier_PokeNav_2AC82C:: @ 82AC82C
-	.string "It’s {STR_VAR_1}!\n"
+	.string "It's {STR_VAR_1}!\n"
 	.string "Will you listen to this?\p"
 	.string "I like the SAFARI ZONE a lot,\n"
 	.string "but whenever I go, I get lost!\p"
 	.string "All that tall grass!\n"
-	.string "And it’s much too spread out!\p"
+	.string "And it's much too spread out!\p"
 	.string "I feel better getting that off\n"
 	.string "my chest!\p"
-	.string "I’m off to the SAFARI ZONE again!\n"
+	.string "I'm off to the SAFARI ZONE again!\n"
 	.string "Catch you!$"
 
 BattleFrontier_PokeNav_2AC914:: @ 82AC914
@@ -7665,33 +6417,33 @@ BattleFrontier_PokeNav_2AC914:: @ 82AC914
 	.string "Yes, correct, I am rich, yes.\p"
 	.string "I should tell you, my wealth has\n"
 	.string "grown since we last met.\p"
-	.string "What’s more, my POKéMON have also\n"
+	.string "What's more, my POKéMON have also\n"
 	.string "grown stronger.\p"
-	.string "I can’t shake the feeling that\n"
+	.string "I can't shake the feeling that\n"
 	.string "this world exists for me!\p"
 	.string "Oh, no need to say a word!\n"
-	.string "Everyone knows it’s true!\p"
+	.string "Everyone knows it's true!\p"
 	.string "Oh, you must excuse me, I have this\n"
 	.string "formal dinner to attend.$"
 
 BattleFrontier_PokeNav_2ACA59:: @ 82ACA59
 	.string "Ufufufufu…\n"
-	.string "It’s me, {STR_VAR_1}…\p"
-	.string "Can you guess what I’m seeing?\n"
+	.string "It's me, {STR_VAR_1}…\p"
+	.string "Can you guess what I'm seeing?\n"
 	.string "A pair of {STR_VAR_2} in a battle.\p"
-	.string "Maybe I’ll try catching the winner…\n"
+	.string "Maybe I'll try catching the winner…\n"
 	.string "Ufufufufufu…\p"
-	.string "I… I’m kind of busy now.\n"
+	.string "I… I'm kind of busy now.\n"
 	.string "I have to go.$"
 
 BattleFrontier_PokeNav_2ACB02:: @ 82ACB02
-	.string "Oh, it’s {STR_VAR_1}!\p"
-	.string "I was just thinking I’m getting\n"
+	.string "Oh, it's {STR_VAR_1}!\p"
+	.string "I was just thinking I'm getting\n"
 	.string "bored of the ABANDONED SHIP.\p"
-	.string "But since I’m already here,\n"
+	.string "But since I'm already here,\n"
 	.string "and I want to beat you once,\l"
-	.string "I’ll be sticking around a bit more.\p"
-	.string "If you feel compelled, why don’t\n"
+	.string "I'll be sticking around a bit more.\p"
+	.string "If you feel compelled, why don't\n"
 	.string "you come see me?\p"
 	.string "I think today will be the day that\n"
 	.string "I finally challenge the man next\l"
@@ -7699,7 +6451,7 @@ BattleFrontier_PokeNav_2ACB02:: @ 82ACB02
 	.string "Be seeing you!$"
 
 BattleFrontier_PokeNav_2ACC3F:: @ 82ACC3F
-	.string "I’m {STR_VAR_1}!\n"
+	.string "I'm {STR_VAR_1}!\n"
 	.string "The man of the sea!\p"
 	.string "You know what I think?\p"
 	.string "The TRAINERS out at sea are\n"
@@ -7707,59 +6459,59 @@ BattleFrontier_PokeNav_2ACC3F:: @ 82ACC3F
 	.string "You should learn from me and train\n"
 	.string "in the sea…\p"
 	.string "Whoops, giant surf rising!\p"
-	.string "It’s a great training opportunity!\n"
+	.string "It's a great training opportunity!\n"
 	.string "Sorry, but I have to go!$"
 
 BattleFrontier_PokeNav_2ACD2F:: @ 82ACD2F
-	.string "It’s {STR_VAR_1}! Listen, I’ve been\n"
+	.string "It's {STR_VAR_1}! Listen, I've been\n"
 	.string "teaching karate to my POKéMON.\p"
-	.string "But now they’re better than me!\n"
-	.string "I’ve done nothing but lose to them!\p"
+	.string "But now they're better than me!\n"
+	.string "I've done nothing but lose to them!\p"
 	.string "But even though I may lose to\n"
-	.string "POKéMON, I won’t lose to another\l"
+	.string "POKéMON, I won't lose to another\l"
 	.string "TRAINER, no sir!\p"
 	.string "We have to battle again!\n"
 	.string "Ugwaah!$"
 
 BattleFrontier_PokeNav_2ACE1E:: @ 82ACE1E
-	.string "It’s me, {STR_VAR_1}.\n"
-	.string "How’re your travels unwinding?\p"
+	.string "It's me, {STR_VAR_1}.\n"
+	.string "How're your travels unwinding?\p"
 	.string "…Whoa, is that right?\n"
 	.string "Sounds awfully stimulating!\p"
 	.string "I think I could write a song about\n"
 	.string "one of your episodes.\p"
-	.string "…Oh, hey, I’m feeling it.\n"
+	.string "…Oh, hey, I'm feeling it.\n"
 	.string "I hear the riffs in my head.\p"
-	.string "I’d better get this tune properly\n"
-	.string "written, so I’ve got to fly! Later!$"
+	.string "I'd better get this tune properly\n"
+	.string "written, so I've got to fly! Later!$"
 
 BattleFrontier_PokeNav_2ACF32:: @ 82ACF32
 	.string "This is {STR_VAR_1}…\n"
 	.string "Hear my new song.\p"
 	.string "Lalala, {STR_VAR_2}, {STR_VAR_2}!\n"
 	.string "Why are you that {STR_VAR_2}?\l"
-	.string "Why can’t I be you, {STR_VAR_2}?\l"
+	.string "Why can't I be you, {STR_VAR_2}?\l"
 	.string "Lala, {STR_VAR_2} and {STR_VAR_1},\l"
 	.string "{STR_VAR_1} and {STR_VAR_2}…\p"
 	.string "Repeat chorus, fade…$"
 
 BattleFrontier_PokeNav_2ACFBE:: @ 82ACFBE
-	.string "I’m {STR_VAR_1}, you know,\n"
+	.string "I'm {STR_VAR_1}, you know,\n"
 	.string "the camping expert!\p"
-	.string "When we battled, I couldn’t help\n"
+	.string "When we battled, I couldn't help\n"
 	.string "but lose to you.\p"
 	.string "After all, my expertise is in\n"
 	.string "camping.\p"
 	.string "But win or lose, I like to battle\n"
-	.string "when I’m camping.\p"
+	.string "when I'm camping.\p"
 	.string "Battle with us again, okay?\n"
-	.string "Oh, and let’s go camping, too!$"
+	.string "Oh, and let's go camping, too!$"
 
 BattleFrontier_PokeNav_2AD0AC:: @ 82AD0AC
-	.string "It’s me, me, {STR_VAR_1}!\p"
-	.string "I’d like to climb other mountains\n"
+	.string "It's me, me, {STR_VAR_1}!\p"
+	.string "I'd like to climb other mountains\n"
 	.string "than this one, to be honest.\p"
-	.string "But I’m not sure if there’d be any\n"
+	.string "But I'm not sure if there'd be any\n"
 	.string "ladies like on MT. CHIMNEY.\p"
 	.string "If you know any other mountain\n"
 	.string "with ladies around, let me know!\p"
@@ -7768,10 +6520,10 @@ BattleFrontier_PokeNav_2AD0AC:: @ 82AD0AC
 BattleFrontier_PokeNav_2AD194:: @ 82AD194
 	.string "… … … … … …\n"
 	.string "… … … … … …\l"
-	.string "It’s {STR_VAR_1}…\p"
+	.string "It's {STR_VAR_1}…\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\l"
-	.string "That’s all today…$"
+	.string "That's all today…$"
 
 BattleFrontier_PokeNav_2AD1DF:: @ 82AD1DF
 	.string "This is {STR_VAR_1}. Today, I had\n"
@@ -7780,100 +6532,100 @@ BattleFrontier_PokeNav_2AD1DF:: @ 82AD1DF
 	.string "by day and by night.\p"
 	.string "You have a rival like that, yes?\n"
 	.string "I wish it were me…\p"
-	.string "I’m glad you heard me out.\n"
+	.string "I'm glad you heard me out.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2AD2A8:: @ 82AD2A8
-	.string "It’s {STR_VAR_1}.\p"
-	.string "When there’s a strong TRAINER\n"
+	.string "It's {STR_VAR_1}.\p"
+	.string "When there's a strong TRAINER\n"
 	.string "nearby, I can sometimes sense that\l"
 	.string "somehow.\p"
 	.string "Did you pass close by, {PLAYER}{STRING 5}?\n"
 	.string "Maybe it was you.\p"
-	.string "I’ll be waiting for your visit.\n"
+	.string "I'll be waiting for your visit.\n"
 	.string "Bye!$"
 
 BattleFrontier_PokeNav_2AD34F:: @ 82AD34F
 	.string "Hello, this is {STR_VAR_1}.\n"
 	.string "You sound well, {PLAYER}{STRING 5}.\p"
-	.string "I’ve traveled around the world,\n"
-	.string "but I must say I’ve taken a great\l"
+	.string "I've traveled around the world,\n"
+	.string "but I must say I've taken a great\l"
 	.string "shine to this region.\p"
 	.string "I plan to stay here a while.\n"
 	.string "Perhaps we can meet again?\p"
-	.string "I’ve not forgotten your dazzling\n"
+	.string "I've not forgotten your dazzling\n"
 	.string "techniques.\p"
 	.string "I do hope for a rematch.$"
 
 BattleFrontier_PokeNav_2AD44E:: @ 82AD44E
-	.string "Snivel… It’s… {STR_VAR_1}…\n"
+	.string "Snivel… It's… {STR_VAR_1}…\n"
 	.string "…Sob…\p"
 	.string "ROXANNE chewed me out in class\n"
 	.string "today.\p"
-	.string "But I don’t dislike her or anything.\p"
+	.string "But I don't dislike her or anything.\p"
 	.string "ROXANNE tells me exactly what\n"
 	.string "I did wrong so I can learn from it.\p"
-	.string "You bet I’ll be going to\n"
-	.string "the TRAINER’S SCHOOL tomorrow!\p"
+	.string "You bet I'll be going to\n"
+	.string "the TRAINER'S SCHOOL tomorrow!\p"
 	.string "See you later!$"
 
 BattleFrontier_PokeNav_2AD53A:: @ 82AD53A
-	.string "It’s {STR_VAR_1}!\p"
+	.string "It's {STR_VAR_1}!\p"
 	.string "ROXANNE let me battle with her\n"
 	.string "yesterday.\p"
 	.string "The results…\n"
 	.string "Terrible, like you needed to ask.\p"
 	.string "But I was delighted that ROXANNE\n"
 	.string "would even let me challenge her!\p"
-	.string "You wouldn’t believe how much\n"
+	.string "You wouldn't believe how much\n"
 	.string "more I admire her!\p"
-	.string "I’m going to really focus and work!\n"
-	.string "I’d better go!$"
+	.string "I'm going to really focus and work!\n"
+	.string "I'd better go!$"
 
 BattleFrontier_PokeNav_2AD642:: @ 82AD642
-	.string "Hi, it’s ANNA! I’m with my junior\n"
+	.string "Hi, it's ANNA! I'm with my junior\n"
 	.string "partner MEG again today.\p"
 	.string "I really love caring for MEG and\n"
-	.string "POKéMON. They’re so cute!\p"
+	.string "POKéMON. They're so cute!\p"
 	.string "I wish I could look after them\n"
 	.string "as if they were my siblings!\p"
 	.string "Oh, hi, MEG!\n"
 	.string "Did you get the buns?\p"
-	.string "Huh? No, no, I’m not treating you\n"
+	.string "Huh? No, no, I'm not treating you\n"
 	.string "like my personal slave!\p"
 	.string "You lost the match, so you have\n"
 	.string "to go buy the bread as punishment!\p"
-	.string "I wouldn’t treat you like a slave,\n"
-	.string "MEG! You’re too special to me!\p"
+	.string "I wouldn't treat you like a slave,\n"
+	.string "MEG! You're too special to me!\p"
 	.string "I have to go now.\n"
-	.string "It’s time for our snack!$"
+	.string "It's time for our snack!$"
 
 BattleFrontier_PokeNav_2AD801:: @ 82AD801
 	.string "I love POKéMON!\n"
-	.string "It’s {STR_VAR_1} from the FAN CLUB!\p"
+	.string "It's {STR_VAR_1} from the FAN CLUB!\p"
 	.string "You have to hear this!\n"
 	.string "My sweet POKéMON…\p"
 	.string "Snort! Wahaha!\n"
-	.string "I can’t say any more! It’s a secret!\l"
-	.string "It’s just too cute for words!\p"
+	.string "I can't say any more! It's a secret!\l"
+	.string "It's just too cute for words!\p"
 	.string "Oh, my sweet {STR_VAR_2} is begging\n"
 	.string "for a {POKEBLOCK}!\p"
-	.string "It’s the picture of cuteness!\p"
-	.string "Sorry, but I can’t talk now!\n"
-	.string "You’ll have to hear this next time!$"
+	.string "It's the picture of cuteness!\p"
+	.string "Sorry, but I can't talk now!\n"
+	.string "You'll have to hear this next time!$"
 
 BattleFrontier_PokeNav_2AD92E:: @ 82AD92E
 	.string "Ohoho!\p"
-	.string "This is {STR_VAR_1}! I can’t wait to\n"
+	.string "This is {STR_VAR_1}! I can't wait to\n"
 	.string "tell you about my darling POKéMON!\p"
 	.string "Please, you must listen to this.\n"
-	.string "It’s about my darling {STR_VAR_2}.\p"
+	.string "It's about my darling {STR_VAR_2}.\p"
 	.string "Whenever anyone picks it up,\n"
 	.string "it leaps straight into my arms!\p"
 	.string "Oh… Oh… Could there be anything\n"
 	.string "more blissful?\p"
 	.string "Oh, it feels so heavenly!\p"
-	.string "I’m so glad I could share some of\n"
+	.string "I'm so glad I could share some of\n"
 	.string "my happiness with you.\p"
 	.string "Well, I must be going.\n"
 	.string "Bye, now!$"
@@ -7891,58 +6643,58 @@ BattleFrontier_PokeNav_2ADA8F:: @ 82ADA8F
 	.string "I shall leave you in good spirits!$"
 
 BattleFrontier_PokeNav_2ADB9B:: @ 82ADB9B
-	.string "It’s {STR_VAR_1}.\n"
-	.string "I’m glad to chat with you!\p"
+	.string "It's {STR_VAR_1}.\n"
+	.string "I'm glad to chat with you!\p"
 	.string "I am feeling alive and refreshed\n"
 	.string "soaking in this hot-spring tub.\p"
-	.string "I’ve been battling young TRAINERS\n"
-	.string "since we met, but you’re still\l"
+	.string "I've been battling young TRAINERS\n"
+	.string "since we met, but you're still\l"
 	.string "the best of the lot.\p"
-	.string "I imagine you’ll become an EXPERT\n"
+	.string "I imagine you'll become an EXPERT\n"
 	.string "in your old age! Ohohoho…$"
 
 BattleFrontier_PokeNav_2ADC92:: @ 82ADC92
 	.string "Yay! This is {STR_VAR_1}!\n"
-	.string "What’s up?\p"
+	.string "What's up?\p"
 	.string "I might be imagining this, but when\n"
 	.string "I win battles, my shorts seem to\l"
 	.string "feel, like, better. Materially.\p"
 	.string "What do I mean by that?\n"
-	.string "It’s kind of hard to explain, but…\l"
+	.string "It's kind of hard to explain, but…\l"
 	.string "How would I say this now…\l"
 	.string "My shorts feel silkier!\p"
 	.string "And when I battled you, {PLAYER}{STRING 5},\n"
 	.string "my shorts felt icky and coarse.\p"
 	.string "… … … … … …\n"
-	.string "You didn’t really believe that?\l"
-	.string "Ehehehe, that’s all! Bye now!$"
+	.string "You didn't really believe that?\l"
+	.string "Ehehehe, that's all! Bye now!$"
 
 BattleFrontier_PokeNav_2ADE08:: @ 82ADE08
 	.string "Ahoy!\n"
 	.string "{STR_VAR_1} here!\p"
-	.string "As always, I’m fishing with wild\n"
+	.string "As always, I'm fishing with wild\n"
 	.string "abandon!\p"
 	.string "Are there other places I can fish\n"
 	.string "than the sea and rivers?\p"
 	.string "I get these powerful urges to\n"
 	.string "fish just about anywhere!\p"
 	.string "Oh, gosh, darn it!\n"
-	.string "My line’s tangled up!\p"
+	.string "My line's tangled up!\p"
 	.string "Gotta go!\n"
 	.string "Find me some new fishing spots!$"
 
 BattleFrontier_PokeNav_2ADF07:: @ 82ADF07
-	.string "Hey, there! It’s {STR_VAR_1}.\n"
+	.string "Hey, there! It's {STR_VAR_1}.\n"
 	.string "Are you taking it casually?\p"
 	.string "Ever since I was a kid, you know,\n"
-	.string "I’ve always been placid, huh?\p"
+	.string "I've always been placid, huh?\p"
 	.string "I never was much for getting all\n"
 	.string "stressed or rushing things.\p"
-	.string "But wouldn’t you know it,\n"
-	.string "I’m now a TRIATHLETE.\p"
-	.string "You just can’t tell where life will\n"
+	.string "But wouldn't you know it,\n"
+	.string "I'm now a TRIATHLETE.\p"
+	.string "You just can't tell where life will\n"
 	.string "take you, if you get my drift.\p"
-	.string "You’re a TRAINER now, but who\n"
+	.string "You're a TRAINER now, but who\n"
 	.string "knows what the future holds, huh?\p"
 	.string "Imagine yourself as a teacher,\n"
 	.string "or maybe an artist. Cool, huh?\p"
@@ -7951,52 +6703,52 @@ BattleFrontier_PokeNav_2ADF07:: @ 82ADF07
 
 BattleFrontier_PokeNav_2AE0D9:: @ 82AE0D9
 	.string "This is {STR_VAR_1}!\n"
-	.string "I’m cycling right now.\p"
+	.string "I'm cycling right now.\p"
 	.string "I love swimming and running,\n"
 	.string "but cycling is my first love!\p"
 	.string "It makes my whole body feel as if\n"
-	.string "I’m one with the wind.\p"
+	.string "I'm one with the wind.\p"
 	.string "It exhilarates me as if I were\n"
 	.string "flying!\p"
-	.string "Okay! Today, I’m going to set a new\n"
+	.string "Okay! Today, I'm going to set a new\n"
 	.string "CYCLING ROAD record!\p"
 	.string "You should make the challenge, too!\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2AE1FD:: @ 82AE1FD
-	.string "Yo, this is {STR_VAR_1}! I’m smack\n"
+	.string "Yo, this is {STR_VAR_1}! I'm smack\n"
 	.string "in the middle of a triathlon!\p"
-	.string "But, hey, I’ve always got time to\n"
+	.string "But, hey, I've always got time to\n"
 	.string "shoot the breeze!\p"
 	.string "Working out with POKéMON feels\n"
 	.string "mighty good!\p"
 	.string "Without exchanging words, we synch\n"
 	.string "as if we shared a heart.\p"
-	.string "It’s inspiring!\p"
+	.string "It's inspiring!\p"
 	.string "Gasp… Chatting while running…\n"
-	.string "I’m getting run down…\l"
+	.string "I'm getting run down…\l"
 	.string "Gasp… Have…to…go…$"
 
 BattleFrontier_PokeNav_2AE327:: @ 82AE327
-	.string "Hi, it’s {STR_VAR_1}.\n"
+	.string "Hi, it's {STR_VAR_1}.\n"
 	.string "If you want to improve endurance,\l"
 	.string "high-altitude training is it!\p"
 	.string "Try running on a mountaintop.\n"
-	.string "You’ll be gasping in no time!\p"
-	.string "I’m getting oxygen starved, too!\n"
+	.string "You'll be gasping in no time!\p"
+	.string "I'm getting oxygen starved, too!\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2AE3DA:: @ 82AE3DA
-	.string "Oh, it’s {STR_VAR_1}, hello.\p"
-	.string "I’ve been swimming a lot but I still\n"
-	.string "can’t seem to reach EVERGRANDE.\p"
-	.string "Maybe I’m just going in circles.\p"
-	.string "No, no, that can’t be possible.\n"
+	.string "Oh, it's {STR_VAR_1}, hello.\p"
+	.string "I've been swimming a lot but I still\n"
+	.string "can't seem to reach EVERGRANDE.\p"
+	.string "Maybe I'm just going in circles.\p"
+	.string "No, no, that can't be possible.\n"
 	.string "Wahahaha.\l"
 	.string "Take care!$"
 
 BattleFrontier_PokeNav_2AE489:: @ 82AE489
-	.string "Hey, it’s {STR_VAR_1}…\n"
+	.string "Hey, it's {STR_VAR_1}…\n"
 	.string "Whoops!\p"
 	.string "Splash!\p"
 	.string "Blug-blug-blug-blug…\p"
@@ -8006,17 +6758,17 @@ BattleFrontier_PokeNav_2AE489:: @ 82AE489
 	.string "I just put on some suntan oil.\p"
 	.string "So my POKéNAV went whoopsy\n"
 	.string "out of my hand into the water!\p"
-	.string "But, boy, DEVON’s POKéNAV is built\n"
+	.string "But, boy, DEVON's POKéNAV is built\n"
 	.string "tough. It survived that dunking!\p"
-	.string "Anyways, I’m busy sunbathing,\n"
-	.string "so let’s chat another time.$"
+	.string "Anyways, I'm busy sunbathing,\n"
+	.string "so let's chat another time.$"
 
 BattleFrontier_PokeNav_2AE5CD:: @ 82AE5CD
 	.string "Hello, this is {STR_VAR_1}.\p"
 	.string "Out of the three triathlon events,\n"
 	.string "I like swimming best.\p"
 	.string "But if I stay in the sea too long,\n"
-	.string "won’t I get all prune-like?\p"
+	.string "won't I get all prune-like?\p"
 	.string "Ooh, triathlon is such a grueling\n"
 	.string "test of human endurance! Bye!$"
 
@@ -8031,7 +6783,7 @@ BattleFrontier_PokeNav_2AE704:: @ 82AE704
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} has grown even more\n"
 	.string "tough than that last time.\p"
-	.string "I’m not going to lose again to you.\n"
+	.string "I'm not going to lose again to you.\n"
 	.string "You wait till next time!\p"
 	.string "See you around!$"
 
@@ -8060,65 +6812,65 @@ BattleFrontier_PokeNav_2AE8E6:: @ 82AE8E6
 	.string "ash will stop falling?\p"
 	.string "If it gets too deep, it will cover\n"
 	.string "up the pattern on my parasol…\p"
-	.string "Let’s promise to meet again!$"
+	.string "Let's promise to meet again!$"
 
 BattleFrontier_PokeNav_2AE998:: @ 82AE998
 	.string "Hi, {STR_VAR_1} here.\p"
-	.string "Did you know that it’s easier to\n"
+	.string "Did you know that it's easier to\n"
 	.string "float in the sea than a pool?\p"
 	.string "Just by lying still, your body will\n"
 	.string "float on its own.\p"
 	.string "But if you float for too long,\n"
-	.string "watch that you don’t get carried\l"
+	.string "watch that you don't get carried\l"
 	.string "off too far out.\p"
 	.string "…Where am I, anyway?\n"
-	.string "I’d better go!$"
+	.string "I'd better go!$"
 
 BattleFrontier_PokeNav_2AEA8F:: @ 82AEA8F
 	.string "Oh, {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\l"
-	.string "I’m up in the mountains now.\p"
+	.string "I'm up in the mountains now.\p"
 	.string "But the ground is too bumpy.\n"
-	.string "I can’t pitch my tent here…\p"
+	.string "I can't pitch my tent here…\p"
 	.string "Oh, I had a brilliant idea!\p"
 	.string "Maybe I can get my POKéMON to tamp\n"
 	.string "the ground flat here!\p"
-	.string "I’m going to try that!\n"
+	.string "I'm going to try that!\n"
 	.string "Bye-bye!$"
 
 BattleFrontier_PokeNav_2AEB77:: @ 82AEB77
 	.string "Oh, hi, hi, this is {STR_VAR_1}!\p"
-	.string "I’m raising POKéMON with LIV!\n"
-	.string "We’re trying very hard!\p"
+	.string "I'm raising POKéMON with LIV!\n"
+	.string "We're trying very hard!\p"
 	.string "If we try harder, can we become\n"
 	.string "number one? Bye-bye!$"
 
 BattleFrontier_PokeNav_2AEBFA:: @ 82AEBFA
 	.string "{STR_VAR_1} here!\p"
-	.string "I’m a SAILOR, but I’m not on a boat\n"
+	.string "I'm a SAILOR, but I'm not on a boat\n"
 	.string "now.\p"
 	.string "It makes me wonder--what should\n"
 	.string "a SAILOR on land be called?\p"
-	.string "That’s what I’ve been thinking\n"
+	.string "That's what I've been thinking\n"
 	.string "while staring out across the waves.\p"
 	.string "All right, next time!$"
 
 BattleFrontier_PokeNav_2AECC1:: @ 82AECC1
-	.string "It’s {STR_VAR_1}.\n"
+	.string "It's {STR_VAR_1}.\n"
 	.string "So? Get any more POKéMON?\p"
 	.string "If you catch a new POKéMON,\n"
 	.string "you have to come show me.\p"
-	.string "I won’t whine for it, honest.\n"
-	.string "I’ll be waiting. See you.$"
+	.string "I won't whine for it, honest.\n"
+	.string "I'll be waiting. See you.$"
 
 BattleFrontier_PokeNav_2AED52:: @ 82AED52
 	.string "This is {STR_VAR_1}.\p"
 	.string "Are you raising your POKéMON\n"
 	.string "in the optimal way?\p"
 	.string "The air is clean where I am.\n"
-	.string "It’s the perfect environment for\l"
+	.string "It's the perfect environment for\l"
 	.string "raising POKéMON.\p"
-	.string "If you’re going to focus on raising\n"
+	.string "If you're going to focus on raising\n"
 	.string "POKéMON, you should come out to\l"
 	.string "{STR_VAR_2}. Take care now.$"
 
@@ -8139,23 +6891,23 @@ BattleFrontier_PokeNav_2AEEF4:: @ 82AEEF4
 	.string "cooperate with POKéMON more.\p"
 	.string "That would be ideal.\n"
 	.string "I really think so.\p"
-	.string "I think you’re on the right track!\n"
+	.string "I think you're on the right track!\n"
 	.string "Catch you later!$"
 
 BattleFrontier_PokeNav_2AEFDA:: @ 82AEFDA
-	.string "Hi, it’s {STR_VAR_1}. You know,\n"
-	.string "the TRAINER who’s always prepared!\p"
+	.string "Hi, it's {STR_VAR_1}. You know,\n"
+	.string "the TRAINER who's always prepared!\p"
 	.string "{PLAYER}{STRING 5}, do you have enough items?\n"
 	.string "Are your POKéMON fit for action?\p"
 	.string "Keeping everything perfect around\n"
 	.string "you all the time is the secret to\l"
 	.string "keeping your journey going.\p"
-	.string "I’d better go check my own\n"
+	.string "I'd better go check my own\n"
 	.string "supplies! Be vigilant!$"
 
 BattleFrontier_PokeNav_2AF0E7:: @ 82AF0E7
-	.string "It’s {STR_VAR_1}!\n"
-	.string "It’s {STR_VAR_1}!\p"
+	.string "It's {STR_VAR_1}!\n"
+	.string "It's {STR_VAR_1}!\p"
 	.string "{STR_VAR_2} is a very busy\n"
 	.string "thoroughfare, so I get challenged\l"
 	.string "by all kinds of TRAINERS every day.\p"
@@ -8165,8 +6917,8 @@ BattleFrontier_PokeNav_2AF0E7:: @ 82AF0E7
 	.string "Tell me about it next time, okay?$"
 
 BattleFrontier_PokeNav_2AF1B8:: @ 82AF1B8
-	.string "It’s me, {STR_VAR_1}.\p"
-	.string "I’m popular because I have lots\n"
+	.string "It's me, {STR_VAR_1}.\p"
+	.string "I'm popular because I have lots\n"
 	.string "of BUG POKéMON, right?\p"
 	.string "Well, I took a bunch of my fave\n"
 	.string "bugs to school today.\p"
@@ -8179,38 +6931,38 @@ BattleFrontier_PokeNav_2AF1B8:: @ 82AF1B8
 
 BattleFrontier_PokeNav_2AF2C4:: @ 82AF2C4
 	.string "Hah! Hah! Hah! Hah!\p"
-	.string "Hi! It’s {STR_VAR_1}! Hah! Hah!\p"
+	.string "Hi! It's {STR_VAR_1}! Hah! Hah!\p"
 	.string "Trying to chat…\n"
 	.string "While climbing…\l"
 	.string "Is harsh exercise… Hah! Hah!\p"
 	.string "Urgh! Oof…\n"
-	.string "It’s steeper now…\l"
-	.string "We’ll chat…another time…\l"
+	.string "It's steeper now…\l"
+	.string "We'll chat…another time…\l"
 	.string "Hah! Hah! Hah!$"
 
 BattleFrontier_PokeNav_2AF371:: @ 82AF371
 	.string "Oh, hi!\p"
-	.string "I’m still searching for treasures\n"
+	.string "I'm still searching for treasures\n"
 	.string "with KIRA!\p"
-	.string "Maybe there isn’t any treasure\n"
+	.string "Maybe there isn't any treasure\n"
 	.string "here at all…\p"
 	.string "But the important thing is for me\n"
 	.string "to search alongside KIRA.\p"
 	.string "Oh, hey, KIRA!\n"
 	.string "Wh-why are you angry?\p"
-	.string "I’m not ignoring you, honey!\n"
-	.string "You’re my one and only!\p"
+	.string "I'm not ignoring you, honey!\n"
+	.string "You're my one and only!\p"
 	.string "…{PLAYER}, I have to go, bye!$"
 
 BattleFrontier_PokeNav_2AF480:: @ 82AF480
 	.string "This is {STR_VAR_1}!\p"
-	.string "I went to DEWFORD’s GYM again\n"
+	.string "I went to DEWFORD's GYM again\n"
 	.string "for training.\p"
 	.string "BRAWLY, the GYM LEADER, seems\n"
 	.string "to be tougher now.\p"
 	.string "Something about being toughened\n"
 	.string "by the wild waves…\p"
-	.string "But he’s still as cool as ever.\n"
+	.string "But he's still as cool as ever.\n"
 	.string "The ladies adore him!\l"
 	.string "It makes me envious, frankly.\p"
 	.string "I wonder… Is his friend BRUNO\n"
@@ -8218,17 +6970,17 @@ BattleFrontier_PokeNav_2AF480:: @ 82AF480
 	.string "You know, all sweaty or smelly,\n"
 	.string "and prone to calling people\l"
 	.string "“big wave,” that sort of thing.\p"
-	.string "But, hey, this jealousy thing isn’t\n"
+	.string "But, hey, this jealousy thing isn't\n"
 	.string "very seemly, is it?\p"
 	.string "Forget this chat ever happened,\n"
 	.string "how about it? So long!$"
 
 BattleFrontier_PokeNav_2AF671:: @ 82AF671
-	.string "It’s a pleasure to chat with\n"
+	.string "It's a pleasure to chat with\n"
 	.string "a young TRAINER like you.\p"
 	.string "I imagine that you will continue to\n"
 	.string "enjoy POKéMON whatever your age.\p"
-	.string "Wouldn’t it be good if you had\n"
+	.string "Wouldn't it be good if you had\n"
 	.string "a partnership like ours?\p"
 	.string "Of course, {PLAYER}{STRING 5}, you already\n"
 	.string "enjoy the trust and companionship\l"
@@ -8241,7 +6993,7 @@ BattleFrontier_PokeNav_2AF671:: @ 82AF671
 BattleFrontier_PokeNav_2AF7D8:: @ 82AF7D8
 	.string "Hi, this is {STR_VAR_1}!\n"
 	.string "We just won a battle!\p"
-	.string "We don’t win often, but it was this\n"
+	.string "We don't win often, but it was this\n"
 	.string "cool SWIMMER guy.\p"
 	.string "My sister was steamed!\p"
 	.string "She wanted to pretend that she\n"
@@ -8259,34 +7011,34 @@ BattleFrontier_PokeNav_2AF8F7:: @ 82AF8F7
 	.string "ruin to explore.\p"
 	.string "But the tides somehow seemed to\n"
 	.string "carry me back where I started.\p"
-	.string "I’m still weak at battling, too…\n"
+	.string "I'm still weak at battling, too…\n"
 	.string "Feel free to mock me…\l"
-	.string "But I won’t give up.\p"
+	.string "But I won't give up.\p"
 	.string "My day will come when I discover\n"
 	.string "a new ruin!\p"
-	.string "That’s all I have to say!\n"
+	.string "That's all I have to say!\n"
 	.string "Farewell for now!$"
 
 BattleFrontier_PokeNav_2AFA39:: @ 82AFA39
 	.string "Ahoy there!\n"
-	.string "It’s me, {STR_VAR_1}!\l"
-	.string "I’m out on ROUTE 108 now!\l"
+	.string "It's me, {STR_VAR_1}!\l"
+	.string "I'm out on ROUTE 108 now!\l"
 	.string "In other words, where I always am!\p"
 	.string "Today, a gorgeous SWIMMER \n"
 	.string "swam by me!\p"
 	.string "So I startled her with a shout!\p"
 	.string "And she gave me a nasty glare!\p"
-	.string "That’s all from ROUTE 108!\n"
+	.string "That's all from ROUTE 108!\n"
 	.string "Brought to you by {STR_VAR_1}!$"
 
 BattleFrontier_PokeNav_2AFB26:: @ 82AFB26
-	.string "It’s {STR_VAR_1}!\p"
-	.string "I’m kind of busy, but I figured\n"
-	.string "I should let you know that I’ve\l"
+	.string "It's {STR_VAR_1}!\p"
+	.string "I'm kind of busy, but I figured\n"
+	.string "I should let you know that I've\l"
 	.string "beaten five TRAINERS again today.\p"
 	.string "If I keep this pace up, I can\n"
 	.string "probably beat you next time.\p"
-	.string "I think we’ll be good rivals,\n"
+	.string "I think we'll be good rivals,\n"
 	.string "you and I. Good-bye for now!$"
 
 BattleFrontier_PokeNav_2AFC07:: @ 82AFC07
@@ -8294,43 +7046,43 @@ BattleFrontier_PokeNav_2AFC07:: @ 82AFC07
 	.string "I heard the news!\p"
 	.string "They say you did excellent at\n"
 	.string "the {STR_VAR_2}.\p"
-	.string "It’s awesome, {STR_VAR_3} straight wins?\n"
+	.string "It's awesome, {STR_VAR_3} straight wins?\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2AFC78:: @ 82AFC78
-	.string "Hello, it’s {STR_VAR_1}!\n"
+	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} straight\n"
 	.string "battles at the {STR_VAR_2}.\p"
-	.string "That’s special! I should try\n"
+	.string "That's special! I should try\n"
 	.string "harder, too! See you!$"
 
 BattleFrontier_PokeNav_2AFCFF:: @ 82AFCFF
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "I heard you went on a tear at\n"
 	.string "the {STR_VAR_2}!\p"
 	.string "A big {STR_VAR_3}-win streak…\n"
-	.string "That is a big record, isn’t it?\p"
-	.string "I’d better get it together, too!\n"
+	.string "That is a big record, isn't it?\p"
+	.string "I'd better get it together, too!\n"
 	.string "Catch you soon!$"
 
 BattleFrontier_PokeNav_2AFDA7:: @ 82AFDA7
 	.string "Hey, {PLAYER}{STRING 5}.\n"
-	.string "{STR_VAR_1} here. What’s up?\p"
-	.string "There’s a rumor going around that\n"
+	.string "{STR_VAR_1} here. What's up?\p"
+	.string "There's a rumor going around that\n"
 	.string "you strung together {STR_VAR_3} straight\l"
 	.string "wins at the {STR_VAR_2}.\p"
-	.string "I’d better step it up, too.\n"
+	.string "I'd better step it up, too.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2AFE3D:: @ 82AFE3D
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "You were at the {STR_VAR_2}\n"
 	.string "and won {STR_VAR_3} battles in a row?\l"
-	.string "Isn’t that something!\p"
-	.string "I’d better work on my POKéMON more.\n"
+	.string "Isn't that something!\p"
+	.string "I'd better work on my POKéMON more.\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2AFECA:: @ 82AFECA
@@ -8354,11 +7106,11 @@ BattleFrontier_PokeNav_2AFF64:: @ 82AFF64
 BattleFrontier_PokeNav_2AFFF0:: @ 82AFFF0
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
-	.string "I hope you’re doing well.\p"
-	.string "Oh, but, you are. I’ve heard that\n"
+	.string "I hope you're doing well.\p"
+	.string "Oh, but, you are. I've heard that\n"
 	.string "you won {STR_VAR_3} matches in a row at\l"
 	.string "the {STR_VAR_2}.\p"
-	.string "That’s very impressive!\n"
+	.string "That's very impressive!\n"
 	.string "I hope you stay successful.$"
 
 BattleFrontier_PokeNav_2B00B5:: @ 82B00B5
@@ -8367,40 +7119,40 @@ BattleFrontier_PokeNav_2B00B5:: @ 82B00B5
 	.string "I heard! Your {STR_VAR_3}-win streak at\n"
 	.string "the {STR_VAR_2}!\p"
 	.string "That is so cool!\n"
-	.string "I’d better try harder, too!$"
+	.string "I'd better try harder, too!$"
 
 BattleFrontier_PokeNav_2B0129:: @ 82B0129
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight battles at\n"
 	.string "the {STR_VAR_2}?\p"
-	.string "That’s quite the accomplishment.\n"
+	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
 BattleFrontier_PokeNav_2B01A5:: @ 82B01A5
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "I hear you’re the terror of\n"
+	.string "I hear you're the terror of\n"
 	.string "the {STR_VAR_2}?\p"
 	.string "You won, what, {STR_VAR_3} matches in\n"
 	.string "a row?\p"
-	.string "You’re good, you.\n"
+	.string "You're good, you.\n"
 	.string "I wonder how many I can win?$"
 
 BattleFrontier_PokeNav_2B0232:: @ 82B0232
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
 	.string "Someone passed on word about you.\n"
 	.string "How you won {STR_VAR_3} straight battles\l"
 	.string "at a place named {STR_VAR_2}?\p"
-	.string "That’s quite the tale.\n"
+	.string "That's quite the tale.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B02D9:: @ 82B02D9
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
-	.string "I hope you’ve been keeping well.\p"
+	.string "I hope you've been keeping well.\p"
 	.string "They say you won {STR_VAR_3} straight\n"
 	.string "battles at the {STR_VAR_2}.\p"
 	.string "I admire your energy!\n"
@@ -8410,9 +7162,9 @@ BattleFrontier_PokeNav_2B0366:: @ 82B0366
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I heard about you!\n"
-	.string "Didn’t you just win {STR_VAR_3} battles in\l"
+	.string "Didn't you just win {STR_VAR_3} battles in\l"
 	.string "a row at the {STR_VAR_2}?\p"
-	.string "You’re an inspiration!\n"
+	.string "You're an inspiration!\n"
 	.string "Bye-bye!$"
 
 BattleFrontier_PokeNav_2B03E6:: @ 82B03E6
@@ -8420,43 +7172,43 @@ BattleFrontier_PokeNav_2B03E6:: @ 82B03E6
 	.string "I heard the news!\p"
 	.string "They say you did excellent at\n"
 	.string "the {STR_VAR_2}.\p"
-	.string "It’s awesome--{STR_VAR_3} straight wins?\n"
+	.string "It's awesome--{STR_VAR_3} straight wins?\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B0457:: @ 82B0457
-	.string "Hello, it’s {STR_VAR_1}!\n"
+	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} straight\n"
 	.string "battles at the {STR_VAR_2}.\p"
-	.string "That’s special! I should try\n"
+	.string "That's special! I should try\n"
 	.string "harder, too! See you!$"
 
 BattleFrontier_PokeNav_2B04DE:: @ 82B04DE
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\p"
+	.string "It's me, {STR_VAR_1}.\p"
 	.string "I heard you went on a tear at\n"
 	.string "the {STR_VAR_2}!\p"
 	.string "A big {STR_VAR_3}-win streak…\n"
-	.string "That is a big record, isn’t it?\p"
-	.string "I’d better get it together, too!\n"
+	.string "That is a big record, isn't it?\p"
+	.string "I'd better get it together, too!\n"
 	.string "Catch you soon!$"
 
 BattleFrontier_PokeNav_2B0586:: @ 82B0586
 	.string "Hey, {PLAYER}{STRING 5}.\n"
-	.string "{STR_VAR_1} here. What’s up?\p"
-	.string "There’s a rumor going around that\n"
+	.string "{STR_VAR_1} here. What's up?\p"
+	.string "There's a rumor going around that\n"
 	.string "you strung together {STR_VAR_3} straight\l"
 	.string "wins at the {STR_VAR_2}.\p"
-	.string "I’d better step it up, too.\n"
+	.string "I'd better step it up, too.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B061C:: @ 82B061C
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "You were at the {STR_VAR_2}\n"
 	.string "and won {STR_VAR_3} battles in a row?\l"
-	.string "Isn’t that something!\p"
-	.string "Me? I’d say I’m coming along.\n"
+	.string "Isn't that something!\p"
+	.string "Me? I'd say I'm coming along.\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2B06A3:: @ 82B06A3
@@ -8465,7 +7217,7 @@ BattleFrontier_PokeNav_2B06A3:: @ 82B06A3
 	.string "By the way, I heard you pulled off\n"
 	.string "the feat of {STR_VAR_3} straight wins at\l"
 	.string "the {STR_VAR_2}.\p"
-	.string "I’d better try harder myself!\n"
+	.string "I'd better try harder myself!\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2B073B:: @ 82B073B
@@ -8480,12 +7232,12 @@ BattleFrontier_PokeNav_2B073B:: @ 82B073B
 BattleFrontier_PokeNav_2B07C7:: @ 82B07C7
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
-	.string "I hope you’re doing well.\p"
-	.string "Oh, but, you are. I’ve heard that\n"
+	.string "I hope you're doing well.\p"
+	.string "Oh, but, you are. I've heard that\n"
 	.string "you won {STR_VAR_3} matches in a row at\l"
 	.string "the {STR_VAR_2}.\p"
-	.string "That’s very impressive!\n"
-	.string "I’d better work on my POKéMON, too!$"
+	.string "That's very impressive!\n"
+	.string "I'd better work on my POKéMON, too!$"
 
 BattleFrontier_PokeNav_2B0894:: @ 82B0894
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
@@ -8493,40 +7245,40 @@ BattleFrontier_PokeNav_2B0894:: @ 82B0894
 	.string "I heard! Your {STR_VAR_3}-win streak at\n"
 	.string "the {STR_VAR_2}!\p"
 	.string "That is so cool!\n"
-	.string "I’d better try harder, too!$"
+	.string "I'd better try harder, too!$"
 
 BattleFrontier_PokeNav_2B0908:: @ 82B0908
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight battles at\n"
 	.string "the {STR_VAR_2}?\p"
-	.string "That’s quite the accomplishment.\n"
+	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
 BattleFrontier_PokeNav_2B0984:: @ 82B0984
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "I hear you’re the terror of\n"
+	.string "I hear you're the terror of\n"
 	.string "the {STR_VAR_2}?\p"
 	.string "You won, what, {STR_VAR_3} matches in\n"
 	.string "a row?\p"
-	.string "You’re good, you.\n"
+	.string "You're good, you.\n"
 	.string "I wonder how many I can win?$"
 
 BattleFrontier_PokeNav_2B0A11:: @ 82B0A11
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
 	.string "Someone passed on word about you.\n"
 	.string "How you won {STR_VAR_3} straight battles\l"
 	.string "at a place named {STR_VAR_2}?\p"
-	.string "That’s quite the tale.\n"
+	.string "That's quite the tale.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B0AB8:: @ 82B0AB8
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
-	.string "I hope you’ve been keeping well.\p"
+	.string "I hope you've been keeping well.\p"
 	.string "They say you won {STR_VAR_3} straight\n"
 	.string "battles at the {STR_VAR_2}.\p"
 	.string "I admire your energy!\n"
@@ -8536,9 +7288,9 @@ BattleFrontier_PokeNav_2B0B45:: @ 82B0B45
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
-	.string "Didn’t you just win {STR_VAR_3} battles in\n"
+	.string "Didn't you just win {STR_VAR_3} battles in\n"
 	.string "a row at the {STR_VAR_2}?\p"
-	.string "You’re an inspiration!\n"
+	.string "You're an inspiration!\n"
 	.string "Bye-bye!$"
 
 BattleFrontier_PokeNav_2B0BC5:: @ 82B0BC5
@@ -8547,21 +7299,21 @@ BattleFrontier_PokeNav_2B0BC5:: @ 82B0BC5
 	.string "I heard the news!\p"
 	.string "You became the champion at\n"
 	.string "the {STR_VAR_2} {STR_VAR_3} times?\p"
-	.string "It’s awesome! I have to do better!\n"
+	.string "It's awesome! I have to do better!\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B0C4A:: @ 82B0C4A
-	.string "Hello, it’s {STR_VAR_1}!\n"
+	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} titles\n"
 	.string "at the {STR_VAR_2}.\p"
-	.string "That’s super! I wonder if I can\n"
+	.string "That's super! I wonder if I can\n"
 	.string "become a champion?$"
 
 BattleFrontier_PokeNav_2B0CC7:: @ 82B0CC7
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\l"
-	.string "How’s it going?\p"
+	.string "It's me, {STR_VAR_1}.\l"
+	.string "How's it going?\p"
 	.string "I heard you won events {STR_VAR_3} times\n"
 	.string "at the {STR_VAR_2}!\p"
 	.string "Make it one more next time!\n"
@@ -8572,15 +7324,15 @@ BattleFrontier_PokeNav_2B0D4A:: @ 82B0D4A
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you became the champion\n"
 	.string "at the {STR_VAR_2} {STR_VAR_3} times.\p"
-	.string "Sounds like you’re working hard.\n"
-	.string "I’ll try to keep up!$"
+	.string "Sounds like you're working hard.\n"
+	.string "I'll try to keep up!$"
 
 BattleFrontier_PokeNav_2B0DC8:: @ 82B0DC8
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "I heard you won {STR_VAR_3} times\n"
 	.string "outright at the {STR_VAR_2}.\p"
-	.string "I’d better get with it, too!\n"
+	.string "I'd better get with it, too!\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2B0E35:: @ 82B0E35
@@ -8589,7 +7341,7 @@ BattleFrontier_PokeNav_2B0E35:: @ 82B0E35
 	.string "By the way, I heard you became\n"
 	.string "the champion {STR_VAR_3} times at\l"
 	.string "the {STR_VAR_2}.\p"
-	.string "I’d better raise my POKéMON before\n"
+	.string "I'd better raise my POKéMON before\n"
 	.string "you pull farther ahead.$"
 
 BattleFrontier_PokeNav_2B0ED1:: @ 82B0ED1
@@ -8597,7 +7349,7 @@ BattleFrontier_PokeNav_2B0ED1:: @ 82B0ED1
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
 	.string "and became the champ {STR_VAR_3} times?\p"
-	.string "That’s neat. By the way, have you\n"
+	.string "That's neat. By the way, have you\n"
 	.string "caught any rare POKéMON lately?\p"
 	.string "Oh, is that right.\n"
 	.string "Okay, bye.$"
@@ -8605,9 +7357,9 @@ BattleFrontier_PokeNav_2B0ED1:: @ 82B0ED1
 BattleFrontier_PokeNav_2B0F72:: @ 82B0F72
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
-	.string "I hope you’re doing well.\l"
+	.string "I hope you're doing well.\l"
 	.string "Oh, but, you are.\p"
-	.string "I’ve heard that you won {STR_VAR_3} titles\n"
+	.string "I've heard that you won {STR_VAR_3} titles\n"
 	.string "at the {STR_VAR_2}.\p"
 	.string "I must raise my POKéMON like you.\n"
 	.string "See you again.$"
@@ -8618,20 +7370,20 @@ BattleFrontier_PokeNav_2B102A:: @ 82B102A
 	.string "I heard! You took the title\n"
 	.string "{STR_VAR_3} times at the {STR_VAR_2}!\p"
 	.string "That is so cool!\n"
-	.string "I’d better try harder, too!$"
+	.string "I'd better try harder, too!$"
 
 BattleFrontier_PokeNav_2B10A7:: @ 82B10A7
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight times at\n"
 	.string "the {STR_VAR_2}?\p"
-	.string "That’s quite the accomplishment.\n"
+	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
 BattleFrontier_PokeNav_2B1121:: @ 82B1121
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "I hear you’re the terror of\n"
+	.string "I hear you're the terror of\n"
 	.string "the {STR_VAR_2}?\p"
 	.string "You won, what, {STR_VAR_3} straight times\n"
 	.string "now?\p"
@@ -8642,17 +7394,17 @@ BattleFrontier_PokeNav_2B1121:: @ 82B1121
 
 BattleFrontier_PokeNav_2B11D3:: @ 82B11D3
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
-	.string "You’ve won {STR_VAR_3} events at a place\n"
+	.string "You've won {STR_VAR_3} events at a place\n"
 	.string "named {STR_VAR_2}?\p"
-	.string "That’s quite the tale.\n"
+	.string "That's quite the tale.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B124D:: @ 82B124D
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
-	.string "I hope you’ve been keeping well.\p"
+	.string "I hope you've been keeping well.\p"
 	.string "They say you won {STR_VAR_3} events\n"
 	.string "at the {STR_VAR_2}?\p"
 	.string "I admire your energy!\n"
@@ -8662,9 +7414,9 @@ BattleFrontier_PokeNav_2B12D0:: @ 82B12D0
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
-	.string "Didn’t you win {STR_VAR_3} titles\n"
+	.string "Didn't you win {STR_VAR_3} titles\n"
 	.string "at the {STR_VAR_2}?\p"
-	.string "You’re an inspiration!\n"
+	.string "You're an inspiration!\n"
 	.string "See you again!$"
 
 BattleFrontier_PokeNav_2B1347:: @ 82B1347
@@ -8673,11 +7425,11 @@ BattleFrontier_PokeNav_2B1347:: @ 82B1347
 	.string "I heard the news!\p"
 	.string "You got through {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}!\p"
-	.string "That’s awesome!\n"
+	.string "That's awesome!\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B13B1:: @ 82B13B1
-	.string "Hello, it’s {STR_VAR_1}!\n"
+	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won your way through\n"
 	.string "{STR_VAR_3} rooms at the {STR_VAR_2}.\p"
@@ -8686,8 +7438,8 @@ BattleFrontier_PokeNav_2B13B1:: @ 82B13B1
 
 BattleFrontier_PokeNav_2B142B:: @ 82B142B
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\l"
-	.string "How’s it going?\p"
+	.string "It's me, {STR_VAR_1}.\l"
+	.string "How's it going?\p"
 	.string "I heard you won through {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}!\p"
 	.string "Try to do even better next time!\n"
@@ -8698,15 +7450,15 @@ BattleFrontier_PokeNav_2B14B4:: @ 82B14B4
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you blew through {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}.\p"
-	.string "I’d better train my POKéMON and\n"
+	.string "I'd better train my POKéMON and\n"
 	.string "try to keep up!$"
 
 BattleFrontier_PokeNav_2B1525:: @ 82B1525
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "I heard you got past {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}.\p"
-	.string "I’d better get with it, too!\n"
+	.string "I'd better get with it, too!\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2B158E:: @ 82B158E
@@ -8714,7 +7466,7 @@ BattleFrontier_PokeNav_2B158E:: @ 82B158E
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you got through\n"
 	.string "{STR_VAR_3} rooms at the {STR_VAR_2}.\p"
-	.string "I’d better raise my POKéMON before\n"
+	.string "I'd better raise my POKéMON before\n"
 	.string "you pull further ahead.$"
 
 BattleFrontier_PokeNav_2B1622:: @ 82B1622
@@ -8722,18 +7474,18 @@ BattleFrontier_PokeNav_2B1622:: @ 82B1622
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
 	.string "and won your way past {STR_VAR_3} rooms?\p"
-	.string "That’s wicked.\p"
+	.string "That's wicked.\p"
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "Okay, bye.$"
 
 BattleFrontier_PokeNav_2B169D:: @ 82B169D
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
-	.string "I hope you’re doing well.\l"
+	.string "I hope you're doing well.\l"
 	.string "Oh, but, you are.\p"
-	.string "I’ve heard that you got through\n"
+	.string "I've heard that you got through\n"
 	.string "{STR_VAR_3} rooms at the {STR_VAR_2}.\p"
-	.string "That’s quite impressive!\n"
+	.string "That's quite impressive!\n"
 	.string "I must raise my POKéMON like you.\l"
 	.string "See you again.$"
 
@@ -8743,23 +7495,23 @@ BattleFrontier_PokeNav_2B1775:: @ 82B1775
 	.string "I heard! You won your way through\n"
 	.string "{STR_VAR_3} rooms at the {STR_VAR_2}!\p"
 	.string "That is so cool!\n"
-	.string "I’d better try harder, too!$"
+	.string "I'd better try harder, too!$"
 
 BattleFrontier_PokeNav_2B17F8:: @ 82B17F8
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won your way past {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}?\p"
-	.string "That’s quite the accomplishment.\n"
+	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
 BattleFrontier_PokeNav_2B1877:: @ 82B1877
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "I hear you’re the terror of\n"
+	.string "I hear you're the terror of\n"
 	.string "the {STR_VAR_2}?\p"
 	.string "You got through, what, {STR_VAR_3} rooms?\n"
-	.string "That’s gotta count for something.\p"
+	.string "That's gotta count for something.\p"
 	.string "I wonder if I can ever become\n"
 	.string "a champion?\p"
 	.string "…Pretty well impossible?\n"
@@ -8767,17 +7519,17 @@ BattleFrontier_PokeNav_2B1877:: @ 82B1877
 
 BattleFrontier_PokeNav_2B1946:: @ 82B1946
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
-	.string "You’ve won through {STR_VAR_3} rooms at\n"
+	.string "You've won through {STR_VAR_3} rooms at\n"
 	.string "a place named {STR_VAR_2}?\p"
-	.string "That’s quite the tale.\n"
+	.string "That's quite the tale.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B19C7:: @ 82B19C7
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
-	.string "I hope you’ve been keeping well.\p"
+	.string "I hope you've been keeping well.\p"
 	.string "They say you won in {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}?\p"
 	.string "I admire your energy!\n"
@@ -8787,9 +7539,9 @@ BattleFrontier_PokeNav_2B1A4C:: @ 82B1A4C
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
-	.string "Didn’t you get through {STR_VAR_3} rooms\n"
+	.string "Didn't you get through {STR_VAR_3} rooms\n"
 	.string "at the {STR_VAR_2}?\p"
-	.string "You’re an inspiration!\n"
+	.string "You're an inspiration!\n"
 	.string "See you again!$"
 
 BattleFrontier_PokeNav_2B1ACA:: @ 82B1ACA
@@ -8798,21 +7550,21 @@ BattleFrontier_PokeNav_2B1ACA:: @ 82B1ACA
 	.string "I heard the news!\p"
 	.string "You climbed {STR_VAR_3} floors inside\n"
 	.string "the {STR_VAR_2}, right?\p"
-	.string "That’s awesome!\n"
+	.string "That's awesome!\n"
 	.string "I should try that challenge.$"
 
 BattleFrontier_PokeNav_2B1B50:: @ 82B1B50
-	.string "Hello, it’s {STR_VAR_1}!\n"
+	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won your way through\n"
 	.string "{STR_VAR_3} floors in the {STR_VAR_2}.\p"
-	.string "Wow, that’s fantastic!\n"
-	.string "I’d better raise my POKéMON, too!$"
+	.string "Wow, that's fantastic!\n"
+	.string "I'd better raise my POKéMON, too!$"
 
 BattleFrontier_PokeNav_2B1BE4:: @ 82B1BE4
 	.string "Hey there, {PLAYER}!\n"
-	.string "It’s me, {STR_VAR_1}.\l"
-	.string "How’s it going?\p"
+	.string "It's me, {STR_VAR_1}.\l"
+	.string "How's it going?\p"
 	.string "I heard you climbed {STR_VAR_3} floors\n"
 	.string "in the {STR_VAR_2}!\p"
 	.string "Try to do even better next time!\n"
@@ -8823,15 +7575,15 @@ BattleFrontier_PokeNav_2B1C6A:: @ 82B1C6A
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you scaled {STR_VAR_3} floors\n"
 	.string "in the {STR_VAR_2}.\p"
-	.string "I’d better work hard and try\n"
+	.string "I'd better work hard and try\n"
 	.string "to keep up!$"
 
 BattleFrontier_PokeNav_2B1CCF:: @ 82B1CCF
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
-	.string "It’s {STR_VAR_1}.\p"
+	.string "It's {STR_VAR_1}.\p"
 	.string "I heard you climbed {STR_VAR_3} floors\n"
 	.string "in the {STR_VAR_2}.\p"
-	.string "I’d better get with it, too!\n"
+	.string "I'd better get with it, too!\n"
 	.string "See you soon!$"
 
 BattleFrontier_PokeNav_2B1D38:: @ 82B1D38
@@ -8839,7 +7591,7 @@ BattleFrontier_PokeNav_2B1D38:: @ 82B1D38
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you got through\n"
 	.string "{STR_VAR_3} floors in the {STR_VAR_2}.\p"
-	.string "I’d better raise my POKéMON before\n"
+	.string "I'd better raise my POKéMON before\n"
 	.string "you pull further ahead.$"
 
 BattleFrontier_PokeNav_2B1DCD:: @ 82B1DCD
@@ -8855,11 +7607,11 @@ BattleFrontier_PokeNav_2B1DCD:: @ 82B1DCD
 BattleFrontier_PokeNav_2B1E4B:: @ 82B1E4B
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
-	.string "I hope you’re doing well.\l"
+	.string "I hope you're doing well.\l"
 	.string "Oh, but, you are.\p"
-	.string "I’ve heard that you got through\n"
+	.string "I've heard that you got through\n"
 	.string "{STR_VAR_3} floors in the {STR_VAR_2}.\p"
-	.string "That’s quite impressive!\n"
+	.string "That's quite impressive!\n"
 	.string "I must raise my POKéMON like you.\l"
 	.string "See you again.$"
 
@@ -8869,23 +7621,23 @@ BattleFrontier_PokeNav_2B1F24:: @ 82B1F24
 	.string "I heard! You won your way through\n"
 	.string "{STR_VAR_3} floors in the {STR_VAR_2}!\p"
 	.string "That is so cool!\n"
-	.string "I’d better try harder, too!$"
+	.string "I'd better try harder, too!$"
 
 BattleFrontier_PokeNav_2B1FA8:: @ 82B1FA8
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You climbed {STR_VAR_3} floors inside\n"
 	.string "the {STR_VAR_2}?\p"
-	.string "That’s quite the accomplishment.\n"
+	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
 BattleFrontier_PokeNav_2B2022:: @ 82B2022
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
-	.string "I hear you’re the terror of\n"
+	.string "I hear you're the terror of\n"
 	.string "the {STR_VAR_2}?\p"
 	.string "You rose through, what, {STR_VAR_3} floors?\n"
-	.string "That’s gotta count for something.\p"
+	.string "That's gotta count for something.\p"
 	.string "I wonder if I can ever become\n"
 	.string "a champion?\p"
 	.string "…Pretty well impossible?\n"
@@ -8893,17 +7645,17 @@ BattleFrontier_PokeNav_2B2022:: @ 82B2022
 
 BattleFrontier_PokeNav_2B20F3:: @ 82B20F3
 	.string "Hello, {PLAYER}{STRING 5}.\n"
-	.string "It’s me, {STR_VAR_1}.\l"
+	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
-	.string "You’ve won through {STR_VAR_3} floors in\n"
+	.string "You've won through {STR_VAR_3} floors in\n"
 	.string "a place named {STR_VAR_2}?\p"
-	.string "That’s quite the tale.\n"
+	.string "That's quite the tale.\n"
 	.string "See you!$"
 
 BattleFrontier_PokeNav_2B2175:: @ 82B2175
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
-	.string "I hope you’ve been keeping well.\p"
+	.string "I hope you've been keeping well.\p"
 	.string "They say you climbed {STR_VAR_3} floors\n"
 	.string "in the {STR_VAR_2}?\p"
 	.string "I admire your energy!\n"
@@ -8913,9 +7665,9 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
-	.string "Didn’t you get through {STR_VAR_3} floors\n"
+	.string "Didn't you get through {STR_VAR_3} floors\n"
 	.string "in the {STR_VAR_2}?\p"
-	.string "You’re an inspiration!\n"
+	.string "You're an inspiration!\n"
 	.string "See you again!$"
 
 gText_Mom_Pokenav_2B227B:: @ 82B227B
@@ -8932,19 +7684,19 @@ gText_Mom_Pokenav_2B2310:: @ 82B2310
 	.string "away in the PETALBURG GYM.\p"
 	.string "He comes home every so often.\n"
 	.string "But he goes back to the GYM when\l"
-	.string "he’s eaten everything he can.\p"
-	.string "I’m guessing that losing to you\n"
+	.string "he's eaten everything he can.\p"
+	.string "I'm guessing that losing to you\n"
 	.string "was a big blow to his pride!$"
 
 gText_Mom_Pokenav_2B23F3:: @ 82B23F3
 	.string "MOM: {PLAYER}…\n"
-	.string "Don’t worry about me or the house.\p"
+	.string "Don't worry about me or the house.\p"
 	.string "Wear those RUNNING SHOES until\n"
 	.string "they fall apart, honey!$"
 
 gText_Roxanne_Pokenav_2B2456:: @ 82B2456
 	.string "ROXANNE: Oh, hello, {PLAYER}!\p"
-	.string "I’ve been hard at work retraining\n"
+	.string "I've been hard at work retraining\n"
 	.string "since we met.\p"
 	.string "I will still need some more time\n"
 	.string "before I can reopen the GYM.\p"
@@ -8954,7 +7706,7 @@ gText_Roxanne_Pokenav_2B2456:: @ 82B2456
 gText_Roxanne_Pokenav_2B250E:: @ 82B250E
 	.string "ROXANNE: Is this {PLAYER}?\n"
 	.string "Congratulations!\l"
-	.string "I’ve been hearing about you!\p"
+	.string "I've been hearing about you!\p"
 	.string "As for me, I need some more time\n"
 	.string "before I can reopen the GYM.\p"
 	.string "But when I do, please visit my GYM\n"
@@ -8977,8 +7729,8 @@ gText_Brawly_Pokenav_2B2659:: @ 82B2659
 	.string "had together.\p"
 	.string "I intend to do my training over,\n"
 	.string "then reopen the GYM.\p"
-	.string "It’s going to take some time before\n"
-	.string "I’m ready to run the GYM again.\p"
+	.string "It's going to take some time before\n"
+	.string "I'm ready to run the GYM again.\p"
 	.string "But if I can reopen the GYM,\n"
 	.string "I want you to challenge us again.$"
 
@@ -8989,44 +7741,44 @@ gText_Brawly_Pokenav_2B275D:: @ 82B275D
 	.string "on tidal winds!\p"
 	.string "It appears as if I need to work on\n"
 	.string "my training some more.\p"
-	.string "It’s going to take some time before\n"
-	.string "I’m ready to run the GYM again.\p"
+	.string "It's going to take some time before\n"
+	.string "I'm ready to run the GYM again.\p"
 	.string "But if I can reopen the GYM,\n"
 	.string "I want you to challenge us again.$"
 
 gText_Brawly_Pokenav_2B286F:: @ 82B286F
 	.string "BRAWLY: Hey, {PLAYER}{STRING 5}!\n"
-	.string "My GYM’s ready for action!\p"
+	.string "My GYM's ready for action!\p"
 	.string "Come back to DEWFORD anytime\n"
 	.string "for another challenge!$"
 
 gText_Brawly_Pokenav_2B28D1:: @ 82B28D1
-	.string "BRAWLY: {PLAYER}{STRING 5}, I don’t think\n"
-	.string "I’ll ever get bored of battling you!$"
+	.string "BRAWLY: {PLAYER}{STRING 5}, I don't think\n"
+	.string "I'll ever get bored of battling you!$"
 
 gText_Wattson_Pokenav_2B2912:: @ 82B2912
-	.string "WATTSON: Oh, it’s you!\p"
-	.string "After you left, I’ve been redoing\n"
+	.string "WATTSON: Oh, it's you!\p"
+	.string "After you left, I've been redoing\n"
 	.string "my training from scratch.\p"
-	.string "I’d say I could use a wee bit more\n"
+	.string "I'd say I could use a wee bit more\n"
 	.string "time to reopen my GYM.\p"
-	.string "You’ll have to wait till then!\n"
+	.string "You'll have to wait till then!\n"
 	.string "Wahahahaha!$"
 
 gText_Wattson_Pokenav_2B29CA:: @ 82B29CA
 	.string "WATTSON: Wahahahaha!\p"
-	.string "You’ve really done it, haven’t you?\n"
-	.string "I’ve been getting word about you!\p"
+	.string "You've really done it, haven't you?\n"
+	.string "I've been getting word about you!\p"
 	.string "It seems I need to retrain some\n"
 	.string "more still.\p"
-	.string "I’d say I could use a wee bit more\n"
+	.string "I'd say I could use a wee bit more\n"
 	.string "time to reopen my GYM.\p"
-	.string "You’ll have to wait till then!\n"
+	.string "You'll have to wait till then!\n"
 	.string "Wahahahaha!$"
 
 gText_Wattson_Pokenav_2B2AB6:: @ 82B2AB6
-	.string "WATTSON: Oh, it’s you!\n"
-	.string "My GYM’s ready!\p"
+	.string "WATTSON: Oh, it's you!\n"
+	.string "My GYM's ready!\p"
 	.string "Visit MAUVILLE anytime!\n"
 	.string "Wahahahaha!$"
 
@@ -9039,8 +7791,8 @@ gText_Flannery_Pokenav_2B2B4D:: @ 82B2B4D
 	.string "FLANNERY: {PLAYER}…\p"
 	.string "When we battled, I learned exactly\n"
 	.string "how immature I was.\p"
-	.string "But I’m not done yet!\p"
-	.string "I’m going to redo my training and\n"
+	.string "But I'm not done yet!\p"
+	.string "I'm going to redo my training and\n"
 	.string "reopen the GYM.\p"
 	.string "When the time comes, {PLAYER},\n"
 	.string "please challenge us again.$"
@@ -9052,39 +7804,39 @@ gText_Flannery_Pokenav_2B2C0E:: @ 82B2C0E
 	.string "us like the heat of a volcano!\p"
 	.string "Our training is coming along very\n"
 	.string "well here.\p"
-	.string "When the GYM’s ready, a mark will\n"
+	.string "When the GYM's ready, a mark will\n"
 	.string "appear beside my name in the\l"
 	.string "MATCH CALL list.$"
 
 gText_Flannery_Pokenav_2B2CF1:: @ 82B2CF1
 	.string "FLANNERY: Oh, {PLAYER}?\n"
-	.string "Our GYM’s ready!\p"
+	.string "Our GYM's ready!\p"
 	.string "Come to LAVARIDGE for a soak\n"
 	.string "in the hot spring and a challenge!$"
 
 gText_Flannery_Pokenav_2B2D54:: @ 82B2D54
 	.string "FLANNERY: {PLAYER}…\n"
-	.string "I’m positive that you keep getting\l"
+	.string "I'm positive that you keep getting\l"
 	.string "better at training every time.$"
 
 gText_Winona_Pokenav_2B2DA4:: @ 82B2DA4
 	.string "WINONA: Hello, {PLAYER}!\p"
-	.string "Thanks to our battle, I’ve come\n"
+	.string "Thanks to our battle, I've come\n"
 	.string "to understand my weak points!\p"
-	.string "When I reopen the GYM, I won’t go\n"
+	.string "When I reopen the GYM, I won't go\n"
 	.string "down in defeat again!$"
 
 gText_Winona_Pokenav_2B2E2B:: @ 82B2E2B
-	.string "WINONA: You’ve done it, {PLAYER}!\p"
+	.string "WINONA: You've done it, {PLAYER}!\p"
 	.string "News about the new CHAMPION\n"
 	.string "has reached us in FORTREE!\p"
 	.string "But… The next time we battle,\n"
-	.string "it’s not going to end the same way.$"
+	.string "it's not going to end the same way.$"
 
 gText_Winona_Pokenav_2B2EC2:: @ 82B2EC2
 	.string "WINONA: Is this {PLAYER}?\n"
 	.string "Our GYM is back in operation!\p"
-	.string "We’re waiting for you in FORTREE!$"
+	.string "We're waiting for you in FORTREE!$"
 
 gText_Winona_Pokenav_2B2F16:: @ 82B2F16
 	.string "WINONA: {PLAYER}…\n"
@@ -9094,13 +7846,13 @@ gText_Winona_Pokenav_2B2F16:: @ 82B2F16
 	.string "you never lost sight of your dream.$"
 
 gText_TateLiza_Pokenav_2B2F97:: @ 82B2F97
-	.string "TATE: Oh! You’re…\n"
+	.string "TATE: Oh! You're…\n"
 	.string "LIZA: {PLAYER}!\p"
-	.string "TATE: We’re in training again…\n"
+	.string "TATE: We're in training again…\n"
 	.string "LIZA: So we can reopen our GYM!\p"
 	.string "TATE: When our GYM is ready…\n"
 	.string "LIZA: When our GYM is ready…\p"
-	.string "TATE: A mark’ll appear by our name…\n"
+	.string "TATE: A mark'll appear by our name…\n"
 	.string "LIZA: On the MATCH CALL list.$"
 
 gText_TateLiza_Pokenav_2B306E:: @ 82B306E
@@ -9110,7 +7862,7 @@ gText_TateLiza_Pokenav_2B306E:: @ 82B306E
 	.string "LIZA: Still in training!\p"
 	.string "TATE: We need some more time, but…\n"
 	.string "LIZA: When our GYM is ready…\p"
-	.string "TATE: A mark’ll appear by our name…\n"
+	.string "TATE: A mark'll appear by our name…\n"
 	.string "LIZA: On the MATCH CALL list.$"
 
 gText_TateLiza_Pokenav_2B3158:: @ 82B3158
@@ -9138,8 +7890,8 @@ gText_Juan_Pokenav_2B3249:: @ 82B3249
 
 gText_Juan_Pokenav_2B32EC:: @ 82B32EC
 	.string "JUAN: Fufu… {PLAYER}{STRING 5}…\n"
-	.string "You’ve finally achieved your goal.\p"
-	.string "My eye for appraising talent wasn’t\n"
+	.string "You've finally achieved your goal.\p"
+	.string "My eye for appraising talent wasn't\n"
 	.string "mistaken…\p"
 	.string "I wish for another chance to meet\n"
 	.string "you, for you have scaled the peak\l"
@@ -9165,20 +7917,20 @@ gText_Sidney_Pokenav_2B34CC:: @ 82B34CC
 	.string "If you want to battle with me\n"
 	.string "again, you come on back whenever\l"
 	.string "you like to the POKéMON LEAGUE.\p"
-	.string "I’ll always be here!\n"
-	.string "I’ll be waiting!$"
+	.string "I'll always be here!\n"
+	.string "I'll be waiting!$"
 
 gText_Phoebe_Pokenav_2B3561:: @ 82B3561
 	.string "PHOEBE: Hi, {PLAYER}!\p"
 	.string "How about coming back here again\n"
 	.string "sometime?\p"
-	.string "I’d like to see how much tighter\n"
+	.string "I'd like to see how much tighter\n"
 	.string "your bond has grown with your\l"
 	.string "POKéMON.$"
 
 gText_Glacia_Pokenav_2B35E4:: @ 82B35E4
 	.string "GLACIA: Hello, {PLAYER}.\p"
-	.string "I trust you haven’t become\n"
+	.string "I trust you haven't become\n"
 	.string "complacent with your power?\p"
 	.string "If you feel the need to cool your\n"
 	.string "hot emotions just a little, do come\l"
@@ -9194,18 +7946,18 @@ gText_Drake_Pokenav_2B368B:: @ 82B368B
 	.string "However, if you wish to have real\n"
 	.string "battles, there is no substitute for\l"
 	.string "the POKéMON LEAGUE!\p"
-	.string "Don’t you agree, {PLAYER}?$"
+	.string "Don't you agree, {PLAYER}?$"
 
 gText_Wallace_Pokenav_2B3790:: @ 82B3790
 	.string "WALLACE: Hello, {PLAYER}{STRING 5}.\n"
 	.string "Have you met STEVEN?\p"
 	.string "He is…\n"
 	.string "Actually incredibly skilled.\p"
-	.string "However, he’s an odd soul who\n"
+	.string "However, he's an odd soul who\n"
 	.string "rarely battles.\p"
 	.string "Instead, he would rather look for\n"
 	.string "rare stones.\p"
-	.string "I’m sure he’s digging in a cave or\n"
+	.string "I'm sure he's digging in a cave or\n"
 	.string "a craggy mountain somewhere.\p"
 	.string "But what is a rare stone exactly?\n"
 	.string "All I can think of is a METEORITE…$"
@@ -9219,7 +7971,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B38C1: @ 82B38C1
 	.string "I saw a giant green POKéMON\n"
 	.string "flying high in the sky.\p"
 	.string "I…\n"
-	.string "I’ve never seen anything like it.\p"
+	.string "I've never seen anything like it.\p"
 	.string "I wonder what it was.\n"
 	.string "Is this maybe a major discovery?\p"
 	.string "… … … … … …\n"
@@ -9232,9 +7984,9 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "I was in PACIFIDLOG just now.\p"
 	.string "I saw this huge green POKéMON\n"
 	.string "flying across the sky.\p"
-	.string "I’ve never seen anything that\n"
+	.string "I've never seen anything that\n"
 	.string "amazing before.\p"
-	.string "I wish you could’ve seen it,\n"
+	.string "I wish you could've seen it,\n"
 	.string "{PLAYER}.\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
@@ -9251,7 +8003,7 @@ gText_May_Pokenav_2B3B3F:: @ 2B3B3F
 	.string "You know how little towns like\n"
 	.string "PETALBURG and DEWFORD have GYMS?\p"
 	.string "For some reason, the big port of\n"
-	.string "SLATEPORT doesn’t have a GYM.\p"
+	.string "SLATEPORT doesn't have a GYM.\p"
 	.string "When they finally build a GYM there,\n"
 	.string "I should apply to be the LEADER.$"
 
@@ -9275,9 +8027,9 @@ gText_May_Pokenav_2B3CF3:: @ 2B3CF3
 
 gText_May_Pokenav_2B3D4B:: @ 2B3D4B
 	.string "MAY: {PLAYER}{STRING 5}, how are you?\p"
-	.string "I’m out on ROUTE 111 now.\p"
-	.string "I’m going to get a rest at an old\n"
-	.string "lady’s house.\p"
+	.string "I'm out on ROUTE 111 now.\p"
+	.string "I'm going to get a rest at an old\n"
+	.string "lady's house.\p"
 	.string "She lives just north of\n"
 	.string "the desert.$"
 
@@ -9291,8 +8043,8 @@ gText_May_Pokenav_2B3DD1:: @ 2B3DD1
 
 gText_May_Pokenav_2B3E69:: @ 2B3E69
 	.string "MAY: {PLAYER}{STRING 5}, yahoo!\n"
-	.string "I’m on ROUTE 119 now.\p"
-	.string "There’s a big river here, and\n"
+	.string "I'm on ROUTE 119 now.\p"
+	.string "There's a big river here, and\n"
 	.string "it often rains.\p"
 	.string "I got soaked!$"
 
@@ -9300,7 +8052,7 @@ gText_May_Pokenav_2B3ECD:: @ 2B3ECD
 	.string "MAY: {PLAYER}{STRING 5}, hi.\p"
 	.string "MT. PYRE is a memorial to POKéMON\n"
 	.string "whose lives have ended.\p"
-	.string "Maybe as a result, it’s infested\n"
+	.string "Maybe as a result, it's infested\n"
 	.string "with many GHOST-type POKéMON!$"
 
 gText_May_Pokenav_2B3F2B:: @ 2B3F2B
@@ -9320,12 +8072,12 @@ gText_May_Pokenav_2B3FFB:: @ 2B3FFB
 
 gText_May_Pokenav_2B402B:: @ 2B402B
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\n"
-	.string "Don’t you think it’s neat?\p"
-	.string "Even if you don’t have a boat,\n"
+	.string "Don't you think it's neat?\p"
+	.string "Even if you don't have a boat,\n"
 	.string "you can cross the sea using\l"
-	.string "a POKéMON’s move.\p"
-	.string "Did you know there’s more?\p"
-	.string "There’s a POKéMON move that lets\n"
+	.string "a POKéMON's move.\p"
+	.string "Did you know there's more?\p"
+	.string "There's a POKéMON move that lets\n"
 	.string "you go to the bottom of the sea.$"
 
 gText_May_Pokenav_2B414B:: @ 2B414B
@@ -9341,7 +8093,7 @@ gText_May_Pokenav_2B414B:: @ 2B414B
 
 gText_May_Pokenav_2B4228:: @ 2B4228
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
-	.string "How’s it going?\n"
+	.string "How's it going?\n"
 	.string "Are you filling your POKéDEX?\p"
 	.string "I heard a rumor that there are\n"
 	.string "super-ancient POKéMON out there.\l"
@@ -9353,15 +8105,15 @@ gText_May_Pokenav_2B42E0:: @ 2B42E0
 	.string "I heard the rumors!\p"
 	.string "You beat the SOOTOPOLIS GYM\n"
 	.string "LEADER?\p"
-	.string "That means you don’t have far\n"
+	.string "That means you don't have far\n"
 	.string "to go, do you?$"
 
 gText_May_Pokenav_2B4350:: @ 2B4350
-	.string "MAY: There isn’t a single TRAINER\n"
-	.string "left in HOENN who doesn’t know who\l"
+	.string "MAY: There isn't a single TRAINER\n"
+	.string "left in HOENN who doesn't know who\l"
 	.string "you are, {PLAYER}{STRING 5}!\p"
-	.string "When I tell people that I’m friends\n"
-	.string "with you, {PLAYER}{STRING 5}, they’re all\l"
+	.string "When I tell people that I'm friends\n"
+	.string "with you, {PLAYER}{STRING 5}, they're all\l"
 	.string "surprised!$"
 
 gText_Brendan_Pokenav_2B43EF:: @ 2B43EF
@@ -9374,10 +8126,10 @@ gText_Brendan_Pokenav_2B43EF:: @ 2B43EF
 
 gText_Brendan_Pokenav_2B4486:: @ 2B4486
 	.string "BRENDAN: Hey, {PLAYER}!\p"
-	.string "I don’t get how little towns like\n"
+	.string "I don't get how little towns like\n"
 	.string "PETALBURG and DEWFORD have GYMS.\p"
 	.string "I mean, not when the big port of\n"
-	.string "SLATEPORT doesn’t have a GYM.\p"
+	.string "SLATEPORT doesn't have a GYM.\p"
 	.string "When they finally build a GYM there,\n"
 	.string "I should apply to be the LEADER.$"
 
@@ -9401,11 +8153,11 @@ gText_Brendan_Pokenav_2B463F:: @ 2B463F
 	.string "Did you know that?$"
 
 gText_Brendan_Pokenav_2B46B7:: @ 2B46B7
-	.string "BRENDAN: {PLAYER}, what’s up?\p"
-	.string "Hey, I’m out on ROUTE 111 now.\p"
-	.string "I’m going to rest up at an old\n"
-	.string "lady’s house north of the desert.\p"
-	.string "If you’re in the area, you should\n"
+	.string "BRENDAN: {PLAYER}, what's up?\p"
+	.string "Hey, I'm out on ROUTE 111 now.\p"
+	.string "I'm going to rest up at an old\n"
+	.string "lady's house north of the desert.\p"
+	.string "If you're in the area, you should\n"
 	.string "visit her, too.$"
 
 gText_Brendan_Pokenav_2B4761:: @ 2B4761
@@ -9414,12 +8166,12 @@ gText_Brendan_Pokenav_2B4761:: @ 2B4761
 	.string "TOWER in the desert?\p"
 	.string "They say, like a mirage, it can be\n"
 	.string "seen only sometimes.\p"
-	.string "I’d like to see that!$"
+	.string "I'd like to see that!$"
 
 gText_Brendan_Pokenav_2B47F4:: @ 2B47F4
-	.string "BRENDAN: Who’s this? Oh, {PLAYER}?\n"
-	.string "Guess what? I’m on ROUTE 119 now.\p"
-	.string "There’s a big river here, and\n"
+	.string "BRENDAN: Who's this? Oh, {PLAYER}?\n"
+	.string "Guess what? I'm on ROUTE 119 now.\p"
+	.string "There's a big river here, and\n"
 	.string "it rains all the time.\p"
 	.string "I got soaked to the bone!$"
 
@@ -9427,7 +8179,7 @@ gText_Brendan_Pokenav_2B4882:: @ 2B4882
 	.string "BRENDAN: {PLAYER}!\p"
 	.string "MT. PYRE is a memorial to POKéMON\n"
 	.string "whose lives have ended.\p"
-	.string "That’s probably why it’s infested\n"
+	.string "That's probably why it's infested\n"
 	.string "with many GHOST-type POKéMON!$"
 
 gText_Brendan_Pokenav_2B4909:: @ 2B4909
@@ -9448,11 +8200,11 @@ gText_Brendan_Pokenav_2B49C4:: @ 2B49C4
 
 gText_Brendan_Pokenav_2B4A44:: @ 2B4A44
 	.string "BRENDAN: Hey there, {PLAYER}!\n"
-	.string "Don’t you think it’s awesome?\p"
-	.string "Even if you don’t have a boat,\n"
+	.string "Don't you think it's awesome?\p"
+	.string "Even if you don't have a boat,\n"
 	.string "you can cross the sea using\l"
-	.string "a POKéMON’s move.\p"
-	.string "And, there’s a move that lets you\n"
+	.string "a POKéMON's move.\p"
+	.string "And, there's a move that lets you\n"
 	.string "travel to the bottom of the sea.\p"
 	.string "Man, POKéMON can do anything!$"
 
@@ -9468,31 +8220,31 @@ gText_Brendan_Pokenav_2B4B28:: @ 2B4B28
 
 gText_Brendan_Pokenav_2B4C15:: @ 2B4C15
 	.string "BRENDAN: Hey there, {PLAYER}!\p"
-	.string "How’s it going? Filling up your\n"
+	.string "How's it going? Filling up your\n"
 	.string "POKéDEX successfully?\p"
 	.string "I heard a rumor that there are\n"
 	.string "super-ancient POKéMON out there.\l"
 	.string "And not just one--three!\p"
-	.string "I’d love to catch even one…$"
+	.string "I'd love to catch even one…$"
 
 gText_Brendan_Pokenav_2B4CD8:: @ 2B4CD8
 	.string "BRENDAN: {PLAYER}!\n"
 	.string "I heard the rumors!\p"
 	.string "You beat the SOOTOPOLIS GYM\n"
 	.string "LEADER? Awesome!\p"
-	.string "You’re getting awful close now!$"
+	.string "You're getting awful close now!$"
 
 gText_Brendan_Pokenav_2B4D46:: @ 2B4D46
-	.string "BRENDAN: There isn’t a TRAINER in\n"
-	.string "all of HOENN who doesn’t know who\l"
+	.string "BRENDAN: There isn't a TRAINER in\n"
+	.string "all of HOENN who doesn't know who\l"
 	.string "you are, {PLAYER}!\p"
-	.string "When I tell people that I’m friends\n"
+	.string "When I tell people that I'm friends\n"
 	.string "with you, {PLAYER}, they get pretty\l"
 	.string "envious!$"
 
 gText_Wally_Pokenav_2B4DE2:: @ 2B4DE2
 	.string "WALLY: Oh, {PLAYER}!\p"
-	.string "I’ve been getting healthier and\n"
+	.string "I've been getting healthier and\n"
 	.string "more physically fit.\p"
 	.string "I hope I can become a TRAINER like\n"
 	.string "you soon, {PLAYER}!$"
@@ -9500,46 +8252,46 @@ gText_Wally_Pokenav_2B4DE2:: @ 2B4DE2
 gText_Wally_Pokenav_2B4E57:: @ 2B4E57
 	.string "WALLY: {PLAYER}, hello!\p"
 	.string "After RUSTURF TUNNEL went\n"
-	.string "through, WANDA’s been very happy!$"
+	.string "through, WANDA's been very happy!$"
 
 gText_Wally_Pokenav_2B4EA5:: @ 2B4EA5
 	.string "WALLY: Oh, {PLAYER}!\p"
-	.string "I… I left my uncle’s place in\n"
+	.string "I… I left my uncle's place in\n"
 	.string "VERDANTURF without telling anyone.\p"
-	.string "I wonder if he’s furious with me…\p"
+	.string "I wonder if he's furious with me…\p"
 	.string "{PLAYER}, you understand how\n"
-	.string "I feel, don’t you?$"
+	.string "I feel, don't you?$"
 
 gText_Wally_Pokenav_2B4F41:: @ 2B4F41
 	.string "WALLY: {PLAYER}?\n"
-	.string "It’s me, WALLY!\p"
+	.string "It's me, WALLY!\p"
 	.string "The world of TRAINERS is amazing!\p"
 	.string "When I have my POKéMON with me,\n"
 	.string "all sorts of people say hi!\p"
-	.string "It’s as if everyone’s getting\n"
+	.string "It's as if everyone's getting\n"
 	.string "connected through POKéMON!$"
 
 gText_Wally_Pokenav_2B4FF3:: @ 2B4FF3
-	.string "WALLY: {PLAYER}? It’s awesome!\n"
+	.string "WALLY: {PLAYER}? It's awesome!\n"
 	.string "That RALTS we caught together?\l"
 	.string "It evolved, {PLAYER}!\p"
-	.string "Maybe I’m talented…\p"
-	.string "Oh, but I shouldn’t get a big head\n"
+	.string "Maybe I'm talented…\p"
+	.string "Oh, but I shouldn't get a big head\n"
 	.string "like that!\p"
-	.string "After all, it’s the POKéMON that\n"
+	.string "After all, it's the POKéMON that\n"
 	.string "should be praised!$"
 
 gText_Wally_Pokenav_2B50B1:: @ 2B50B1
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "WALLY appears to be out of\n"
-	.string "the POKéNAV’s service area…$"
+	.string "the POKéNAV's service area…$"
 
 gText_Wally_Pokenav_2B5100:: @ 2B5100
 	.string "WALLY: Oh, {PLAYER}!\p"
 	.string "Before I met you, I hardly ever\n"
 	.string "left my house…\p"
-	.string "But now, I’m on an adventure with\n"
+	.string "But now, I'm on an adventure with\n"
 	.string "my very own POKéMON…\p"
 	.string "{PLAYER}…\n"
 	.string "Thank you…$"
@@ -9556,9 +8308,9 @@ gText_Scott_Pokenav_2B5184:: @ 2B5184
 	.string "everywhere, too. Busy, busy!$"
 
 gText_Scott_Pokenav_2B5275:: @ 2B5275
-	.string "SCOTT: I’m on ROUTE 119 right now.\n"
-	.string "It’s teeming with TRAINERS!\p"
-	.string "It’s also overgrown with tall grass\n"
+	.string "SCOTT: I'm on ROUTE 119 right now.\n"
+	.string "It's teeming with TRAINERS!\p"
+	.string "It's also overgrown with tall grass\n"
 	.string "everywhere, it seems.\p"
 	.string "Walking around in shorts here\n"
 	.string "makes me all ticklish!$"
@@ -9569,41 +8321,41 @@ gText_Scott_Pokenav_2B5323:: @ 2B5323
 	.string "MT. PYRE?\p"
 	.string "The place is a memorial to POKéMON\n"
 	.string "that have passed away.\p"
-	.string "It’s somewhere every TRAINER\n"
+	.string "It's somewhere every TRAINER\n"
 	.string "should climb to the top of once.$"
 
 gText_Scott_Pokenav_2B53DB:: @ 2B53DB
 	.string "SCOTT: Hi, {PLAYER}{STRING 5}!\p"
-	.string "I’ve been hearing about these odd\n"
+	.string "I've been hearing about these odd\n"
 	.string "gangs being a nuisance.\p"
 	.string "TEAM MAGMA and TEAM AQUA,\n"
 	.string "I think they were.\p"
-	.string "I would think there’d be some\n"
+	.string "I would think there'd be some\n"
 	.string "skilled TRAINERS among them.\p"
-	.string "…But if they’re thugs…$"
+	.string "…But if they're thugs…$"
 
 gText_Scott_Pokenav_2B54A5:: @ 2B54A5
 	.string "SCOTT: Oh, hi, {PLAYER}{STRING 5}.\p"
 	.string "Might there be tough TRAINERS\n"
 	.string "at the bottom of the sea?\p"
-	.string "I can’t go check for myself.\n"
-	.string "I can’t swim, for one.\l"
-	.string "And I don’t raise POKéMON…$"
+	.string "I can't go check for myself.\n"
+	.string "I can't swim, for one.\l"
+	.string "And I don't raise POKéMON…$"
 
 gText_Scott_Pokenav_2B5541:: @ 2B5541
 	.string "SCOTT: Hi, hi, {PLAYER}{STRING 5}!\p"
 	.string "You know that you can challenge\n"
-	.string "the POKéMON LEAGUE when you’ve\l"
+	.string "the POKéMON LEAGUE when you've\l"
 	.string "collected all the GYM BADGES?\p"
 	.string "With your talent, becoming the\n"
-	.string "CHAMPION isn’t a pipe dream.\p"
+	.string "CHAMPION isn't a pipe dream.\p"
 	.string "But did you know?\n"
-	.string "There’s somewhere even better.\p"
-	.string "But, that’s all I’m willing to say\n"
+	.string "There's somewhere even better.\p"
+	.string "But, that's all I'm willing to say\n"
 	.string "for the time being.\p"
-	.string "It’s something you can look\n"
+	.string "It's something you can look\n"
 	.string "forward to.\p"
-	.string "When you’ve won your way through\n"
+	.string "When you've won your way through\n"
 	.string "the POKéMON LEAGUE into the HALL\l"
 	.string "OF FAME!$"
 
@@ -9611,18 +8363,18 @@ gText_Scott_Pokenav_2B56CA:: @ 2B56CA
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "SCOTT appears to be out of\n"
-	.string "the POKéNAV’s service area…$"
+	.string "the POKéNAV's service area…$"
 
 gText_Norman_Pokenav_2B5719:: @ 82B5719
-	.string "DAD: In RUSTBORO, there’s a man\n"
+	.string "DAD: In RUSTBORO, there's a man\n"
 	.string "that goes by the odd name of\l"
 	.string "the CUTTER.\p"
-	.string "If you’re in the area, you should\n"
+	.string "If you're in the area, you should\n"
 	.string "pay him a visit.$"
 
 gText_Norman_Pokenav_2B5795:: @ 82B5795
 	.string "DAD: Hm… Little by little, but also\n"
-	.string "very surely, you’re getting\l"
+	.string "very surely, you're getting\l"
 	.string "tougher, {PLAYER}.\p"
 	.string "The stronger you get, the farther\n"
 	.string "and higher you soar from Mother\l"
@@ -9631,24 +8383,24 @@ gText_Norman_Pokenav_2B5795:: @ 82B5795
 
 gText_Norman_Pokenav_2B584D:: @ 82B584D
 	.string "DAD: I see…\n"
-	.string "You’ve collected four GYM BADGES…\p"
-	.string "There’s no avoiding it now.\n"
+	.string "You've collected four GYM BADGES…\p"
+	.string "There's no avoiding it now.\n"
 	.string "We will battle like I promised.\p"
 	.string "Come anytime.\n"
-	.string "We’ll all be waiting for you!$"
+	.string "We'll all be waiting for you!$"
 
 gText_Norman_Pokenav_2B58E3:: @ 82B58E3
-	.string "DAD: {PLAYER}! You’d better go visit\n"
+	.string "DAD: {PLAYER}! You'd better go visit\n"
 	.string "Mother every so often.\p"
-	.string "I’m going to remain here and\n"
+	.string "I'm going to remain here and\n"
 	.string "redouble my training.\p"
 	.string "The way of battling is deep\n"
 	.string "and unforgiving!$"
 
 gText_Norman_Pokenav_2B5979:: @ 82B5979
 	.string "DAD: Oh, hi, {PLAYER}!\p"
-	.string "What’s that? MAGMA EMBLEM?\n"
-	.string "I don’t know what that’s about.\p"
+	.string "What's that? MAGMA EMBLEM?\n"
+	.string "I don't know what that's about.\p"
 	.string "But with a name like that, it may\n"
 	.string "be somehow linked to a volcano!$"
 
@@ -9660,17 +8412,17 @@ gText_Norman_Pokenav_2B5A07:: @ 82B5A07
 
 gText_Norman_Pokenav_2B5A69:: @ 82B5A69
 	.string "DAD: {PLAYER}!\p"
-	.string "Who would’ve thought you’d become\n"
+	.string "Who would've thought you'd become\n"
 	.string "the POKéMON LEAGUE CHAMPION…\p"
 	.string "Okay!\n"
-	.string "I won’t be left behind!$"
+	.string "I won't be left behind!$"
 
 gText_Norman_Pokenav_2B5ACF:: @ 82B5ACF
 	.string "DAD: Hm? {PLAYER}?\n"
 	.string "What good timing!\p"
-	.string "This time, I’m going to challenge\n"
+	.string "This time, I'm going to challenge\n"
 	.string "you to battle.\p"
-	.string "I’m waiting in the PETALBURG GYM.\n"
+	.string "I'm waiting in the PETALBURG GYM.\n"
 	.string "Accept my challenge anytime!$"
 
 gText_Norman_Pokenav_2B5B5E:: @ 82B5B5E
@@ -9690,37 +8442,37 @@ gText_Steven_Pokenav_2B5B95:: @ 82B5B95
 
 gText_Steven_Pokenav_2B5C53:: @ 82B5C53
 	.string "STEVEN: Hi, {PLAYER}{STRING 5}!\p"
-	.string "I’ve met a lot of different\n"
+	.string "I've met a lot of different\n"
 	.string "TRAINERS so far.\p"
-	.string "But you’re one of a kind.\n"
-	.string "You’re not like anyone else.$"
+	.string "But you're one of a kind.\n"
+	.string "You're not like anyone else.$"
 
 gText_Steven_Pokenav_2B5CC9:: @ 82B5CC9
 	.string "STEVEN: Hi, {PLAYER}{STRING 5}!\p"
-	.string "When you’re on an adventure with\n"
+	.string "When you're on an adventure with\n"
 	.string "your POKéMON, what do you think?\p"
 	.string "Do you consider them to be strong\n"
 	.string "partners?\p"
 	.string "Do you think of them as fun\n"
 	.string "companions?\p"
 	.string "Depending on how you think, your\n"
-	.string "adventure’s significance changes.$"
+	.string "adventure's significance changes.$"
 
 gText_Steven_Pokenav_2B5DB4:: @ 82B5DB4
 	.string "STEVEN: Hello?\n"
 	.string "{PLAYER}{STRING 5}?\p"
-	.string "I’m involved in a spot of trouble\n"
+	.string "I'm involved in a spot of trouble\n"
 	.string "at the SPACE CENTER.\p"
-	.string "I’m sorry, but I can’t talk now.\n"
+	.string "I'm sorry, but I can't talk now.\n"
 	.string "Bye!$"
 
 gText_Steven_Pokenav_2B5E26:: @ 82B5E26
 	.string "STEVEN: Oh!\n"
 	.string "{PLAYER}{STRING 5}!\p"
-	.string "There’s no need to talk.\n"
-	.string "It’s past time for talking.\p"
+	.string "There's no need to talk.\n"
+	.string "It's past time for talking.\p"
 	.string "You have to believe in yourself\n"
-	.string "and do what’s right.$"
+	.string "and do what's right.$"
 
 gText_Steven_Pokenav_2B5EA2:: @ 82B5EA2
 	.string "… … … … … …\p"
@@ -9737,12 +8489,12 @@ gText_Steven_Pokenav_2B5ED9:: @ 82B5ED9
 
 Route101_Text_2B5F52: @ 82B5F52
 	.string "PROF. BIRCH: Oh, {PLAYER}{KUN}!\n"
-	.string "I’ve already heard about you!\p"
-	.string "It seems your POKéNAV’s been\n"
+	.string "I've already heard about you!\p"
+	.string "It seems your POKéNAV's been\n"
 	.string "upgraded with MATCH CALL.\p"
 	.string "Well, I should register, too!\p"
-	.string "That way, I’d be able to examine\n"
-	.string "your POKéDEX even while you’re\l"
+	.string "That way, I'd be able to examine\n"
+	.string "your POKéDEX even while you're\l"
 	.string "out in the field.\p"
 	.string "… … … … … …$"
 
@@ -9764,30 +8516,30 @@ gText_MrStone_Pokenav_2B60C0:: @ 82B60C0
 	.string "You seem to be quite happy!\p"
 	.string "Hm…\n"
 	.string "How could I know that?\p"
-	.string "It’s because I’m looking down at\n"
+	.string "It's because I'm looking down at\n"
 	.string "you from my office window!\p"
 	.string "Wahahaha!\n"
 	.string "See you again!$"
 
 gText_MrStone_Pokenav_2B61E6:: @ 82B61E6
 	.string "MR. STONE: Oh? {PLAYER}{STRING 5}!\p"
-	.string "What’s wrong? Have you forgotten\n"
+	.string "What's wrong? Have you forgotten\n"
 	.string "about that little errand of mine?\p"
 	.string "I need you to deliver my letter\n"
 	.string "to STEVEN in DEWFORD.\p"
 	.string "After that, deliver our parcel to\n"
 	.string "CAPT. STERN in SLATEPORT.\p"
-	.string "You remember, don’t you?\p"
+	.string "You remember, don't you?\p"
 	.string "Now, since I am a busy PRESIDENT,\n"
 	.string "I have to go! Bye-bye!$"
 
 gText_MrStone_Pokenav_2B6302:: @ 82B6302
 	.string "MR. STONE: Oh! {PLAYER}{STRING 5}!\p"
-	.string "Ah, so you’ve met STEVEN!\n"
-	.string "I’d better reward you, then!\p"
+	.string "Ah, so you've met STEVEN!\n"
+	.string "I'd better reward you, then!\p"
 	.string "When you visit RUSTBORO again,\n"
 	.string "come see me at my office.\p"
-	.string "I’ll be waiting for you!$"
+	.string "I'll be waiting for you!$"
 
 gText_MrStone_Pokenav_2B63A0:: @ 82B63A0
 	.string "MR. STONE: Oh! {PLAYER}{STRING 5}!\p"
@@ -9795,23 +8547,23 @@ gText_MrStone_Pokenav_2B63A0:: @ 82B63A0
 	.string "digging the RUSTURF TUNNEL?\p"
 	.string "But we shut down the operation to\n"
 	.string "protect the POKéMON in the area.\p"
-	.string "It’s a no-brainer, really.\p"
-	.string "It’s more important to let POKéMON\n"
+	.string "It's a no-brainer, really.\p"
+	.string "It's more important to let POKéMON\n"
 	.string "live in peace than worry about our\l"
 	.string "own convenience.$"
 
 gText_MrStone_Pokenav_2B64A2:: @ 82B64A2
 	.string "MR. STONE: Hello, hello, {PLAYER}{STRING 5}!\p"
 	.string "I heard from someone in PETALBURG\n"
-	.string "that you’re NORMAN’s child!\p"
-	.string "No wonder you’re such a capable\n"
+	.string "that you're NORMAN's child!\p"
+	.string "No wonder you're such a capable\n"
 	.string "being!$"
 
 gText_MrStone_Pokenav_2B6526:: @ 82B6526
-	.string "MR. STONE: What’s that?\p"
+	.string "MR. STONE: What's that?\p"
 	.string "You battled your own father and\n"
 	.string "defeated him?\p"
-	.string "That’s astounding!\p"
+	.string "That's astounding!\p"
 	.string "I had no idea that I befriended\n"
 	.string "someone so special! Wahaha!$"
 
@@ -9820,39 +8572,39 @@ gText_MrStone_Pokenav_2B65BB:: @ 82B65BB
 	.string "This is DEVON CORPORATI…\l"
 	.string "Oh, hello, {PLAYER}!\p"
 	.string "Our PRESIDENT was here a little\n"
-	.string "while ago, but he’s gone out.\p"
+	.string "while ago, but he's gone out.\p"
 	.string "Our PRESIDENT is busy, but you\n"
 	.string "seem to be just as busy, {PLAYER}.$"
 
 gText_MrStone_Pokenav_2B6664:: @ 82B6664
-	.string "…Huh? …What’s that?\p"
+	.string "…Huh? …What's that?\p"
 	.string "GROU… Yes? …DON?\p"
-	.string "You’re breaking up…\n"
-	.string "…can’t hear…\p"
+	.string "You're breaking up…\n"
+	.string "…can't hear…\p"
 	.string "BZZZZ…$"
 
 gText_MrStone_Pokenav_2B66B1:: @ 82B66B1
-	.string "…Huh? …What’s that?\p"
+	.string "…Huh? …What's that?\p"
 	.string "Seaflo… Yes? …Caver…?\p"
-	.string "You’re breaking up…\n"
-	.string "…can’t hear…\p"
+	.string "You're breaking up…\n"
+	.string "…can't hear…\p"
 	.string "BZZZZ…$"
 
 gText_MrStone_Pokenav_2B6703:: @ 82B6703
-	.string "MR. STONE: {PLAYER}{STRING 5}! It’s me!\p"
+	.string "MR. STONE: {PLAYER}{STRING 5}! It's me!\p"
 	.string "You were apparently involved in all\n"
 	.string "sorts of things, but I, being busy,\l"
-	.string "haven’t a clue exactly what!\p"
+	.string "haven't a clue exactly what!\p"
 	.string "However, I urge you to take\n"
 	.string "the road you believe in and walk it.\p"
-	.string "I’ll always be in your corner!\n"
+	.string "I'll always be in your corner!\n"
 	.string "Take care!$"
 
 gText_MrStone_Pokenav_2B67ED:: @ 82B67ED
 	.string "MR. STONE: … … … … … …\n"
 	.string "Is this maybe {PLAYER}{STRING 5}?\p"
 	.string "Your voice is so full of confidence,\n"
-	.string "I didn’t recognize you right off!\p"
+	.string "I didn't recognize you right off!\p"
 	.string "Hm! You must come visit us at DEVON\n"
 	.string "sometime!$"
 
@@ -9880,7 +8632,7 @@ gBattleDomeOpponentPotential7::
 	.string "A better-than-average team.$"
 
 gBattleDomeOpponentPotential8::
-	.string "This tournament’s average team.$"
+	.string "This tournament's average team.$"
 
 gBattleDomeOpponentPotential9::
 	.string "A team with average potential.$"
@@ -10532,7 +9284,7 @@ LilycoveCity_ContestLobby_Text_2C4332: @ 82C4332
 
 LilycoveCity_ContestLobby_Text_2C439D: @ 82C439D
 	.string "Hmmm!\p"
-	.string "You haven’t got a single BERRY!\p"
+	.string "You haven't got a single BERRY!\p"
 	.string "I shall be here all day!\n"
 	.string "Hurry back with some BERRIES!$"
 
@@ -10546,21 +9298,21 @@ LilycoveCity_ContestLobby_Text_2C43FA: @ 82C43FA
 LilycoveCity_ContestLobby_Text_2C444C: @ 82C444C
 	.string "Hmmm!\p"
 	.string "Ah, but it is a simple process!\p"
-	.string "When the BLENDER’s arrow comes to\n"
+	.string "When the BLENDER's arrow comes to\n"
 	.string "your marker, just press the A Button.\p"
-	.string "That’s all you have to do.\p"
+	.string "That's all you have to do.\p"
 	.string "When you see how precisely I press\n"
 	.string "the A Button, you will understand.$"
 
 LilycoveCity_ContestLobby_Text_2C451B: @ 82C451B
 	.string "Fine!\p"
-	.string "Let’s get started, then!\p"
+	.string "Let's get started, then!\p"
 	.string "All together with the BLEND MASTER,\n"
-	.string "let’s BERRY BLENDER!$"
+	.string "let's BERRY BLENDER!$"
 
 LilycoveCity_ContestLobby_Text_2C4573: @ 82C4573
 	.string "Hmmm!\p"
-	.string "You don’t appear to have gotten\n"
+	.string "You don't appear to have gotten\n"
 	.string "the {POKEBLOCK} CASE!\p"
 	.string "I shall be here all day!\n"
 	.string "Obtain the {POKEBLOCK} CASE and hurry back!$"
@@ -10594,7 +9346,7 @@ LilycoveCity_ContestLobby_Text_2C46B1: @ 82C46B1
 	.string "the BLEND MASTER truly great.$"
 
 LilycoveCity_ContestLobby_Text_2C4763: @ 82C4763
-	.string "The BLEND MASTER’s supposed to work\n"
+	.string "The BLEND MASTER's supposed to work\n"
 	.string "on his skills deep in the mountains.\p"
 	.string "Sometimes, he comes to LILYCOVE\n"
 	.string "to blend BERRIES all day long.$"
@@ -10627,7 +9379,7 @@ FallarborTown_BattleTentLobby_Text_2C48AC: @ 82C48AC
 	.string "three turns, it goes to judging.\p"
 	.string "If you wish to interrupt your challenge,\n"
 	.string "please save the game.\p"
-	.string "If you don’t save, you will not be able\n"
+	.string "If you don't save, you will not be able\n"
 	.string "to continue with your challenge.\p"
 	.string "If you pull off the feat of beating\n"
 	.string "three TRAINERS in succession,\l"
@@ -10720,7 +9472,7 @@ FallarborTown_BattleTentLobby_Text_2C504C: @ 82C504C
 VerdanturfTown_BattleTentLobby_Text_2C50C3: @ 82C50C3
 	.string "I welcome you to the BATTLE TENT\n"
 	.string "VERDANTURF SITE!\p"
-	.string "Here, the TRAINER’s trust toward\n"
+	.string "Here, the TRAINER's trust toward\n"
 	.string "POKéMON is tested.$"
 
 VerdanturfTown_BattleTentLobby_Text_2C5129: @ 82C5129
@@ -10744,7 +9496,7 @@ VerdanturfTown_BattleTentLobby_Text_2C5163: @ 82C5163
 	.string "we will present you with a prize.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 VerdanturfTown_BattleTentLobby_Text_2C539A: @ 82C539A
@@ -10794,7 +9546,7 @@ VerdanturfTown_BattleTentLobby_Text_2C56A2: @ 82C56A2
 
 VerdanturfTown_BattleTentLobby_Text_2C56B8: @ 82C56B8
 	.string "I feel privileged for having seen\n"
-	.string "your POKéMON’s exploits.\p"
+	.string "your POKéMON's exploits.\p"
 	.string "The results will be recorded.\n"
 	.string "I must ask you to briefly wait.$"
 
@@ -10836,7 +9588,7 @@ SlateportCity_BattleTentLobby_Text_2C589C: @ 82C589C
 	.string "a row, you will earn a fine prize.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 SlateportCity_BattleTentLobby_Text_2C5AA5: @ 82C5AA5
@@ -10870,7 +9622,7 @@ SlateportCity_BattleTentLobby_Text_2C5C30: @ 82C5C30
 
 SlateportCity_BattleTentLobby_Text_2C5C6F: @ 82C5C6F
 	.string "Congratulations!\n"
-	.string "You’ve won three straight matches!\p"
+	.string "You've won three straight matches!\p"
 	.string "I will return your POKéMON in exchange\n"
 	.string "for our rental POKéMON.\p"
 	.string "I must also save your event results.\n"
@@ -10887,18 +9639,18 @@ SlateportCity_BattleTentLobby_Text_2C5D52: @ 82C5D52
 	.string "let me know.$"
 
 SlateportCity_BattleTentLobby_Text_2C5DA7: @ 82C5DA7
-	.string "We’ve been waiting for you!\p"
+	.string "We've been waiting for you!\p"
 	.string "Before we resume your challenge,\n"
 	.string "I must save the game.$"
 
 SlateportCity_BattleTentLobby_Text_2C5DFA: @ 82C5DFA
-	.string "I’m sorry to say this, but you didn’t\n"
+	.string "I'm sorry to say this, but you didn't\n"
 	.string "save before you quit playing last time.\p"
 	.string "As a result, you have been disqualified\n"
 	.string "from your challenge.$"
 
 SlateportCity_BattleTentLobby_Text_2C5E85: @ 82C5E85
-	.string "We’ll return your personal POKéMON.$"
+	.string "We'll return your personal POKéMON.$"
 
 SlateportCity_BattleTentLobby_Text_2C5EA9: @ 82C5EA9
 	.string "{PLAYER} received the prize\n"
@@ -10926,14 +9678,14 @@ SlateportCity_BattleTentLobby_Text_2C5F9D: @ 82C5F9D
 SlateportCity_BattleTentLobby_Text_2C6020: @ 82C6020
 	.string "After every battle you win, you may\n"
 	.string "swap for one of your defeated\l"
-	.string "opponent’s POKéMON.\p"
+	.string "opponent's POKéMON.\p"
 	.string "You will not be able to swap POKéMON\n"
 	.string "with the third TRAINER in the event.$"
 
 SlateportCity_BattleTentLobby_Text_2C60C0: @ 82C60C0
 	.string "There are two key points to be aware\n"
 	.string "of when swapping POKéMON.\p"
-	.string "First, when swapping, you can’t check\n"
+	.string "First, when swapping, you can't check\n"
 	.string "the stats of the POKéMON you are\l"
 	.string "about to receive.\p"
 	.string "Second, the POKéMON on your team\n"
@@ -11001,7 +9753,7 @@ VerdanturfTown_BattleTentLobby_Text_2C6612: @ 82C6612
 
 VerdanturfTown_BattleTentLobby_Text_2C671E: @ 82C671E
 	.string "Depending on its nature, a POKéMON may\n"
-	.string "start using moves that don’t match its\l"
+	.string "start using moves that don't match its\l"
 	.string "nature when it is in trouble.\p"
 	.string "If a POKéMON begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"
@@ -11019,33 +9771,33 @@ VerdanturfTown_BattleTentLobby_Text_2C6878: @ 82C6878
 	.string "rules are listed.$"
 
 LilycoveCity_Harbor_Text_2C68A5: @ 82C68A5
-	.string "What’s up, youngster?\p"
-	.string "What, it’s you who’s supposed to have\n"
+	.string "What's up, youngster?\p"
+	.string "What, it's you who's supposed to have\n"
 	.string "a tattered old map?\p"
-	.string "Let’s have a look.\n"
+	.string "Let's have a look.\n"
 	.string "… … … … … …\p"
 	.string "Boy, this is quite a ways away.\n"
-	.string "I’m afraid I can’t help you…$"
+	.string "I'm afraid I can't help you…$"
 
 LilycoveCity_Harbor_Text_2C6951: @ 82C6951
 	.string "BRINEY: Hold on a second!\p"
-	.string "What’s the idea of turning down\n"
+	.string "What's the idea of turning down\n"
 	.string "someone that I owe so much to?$"
 
 LilycoveCity_Harbor_Text_2C69AA: @ 82C69AA
-	.string "{PLAYER}{KUN}, I’m terribly sorry.\p"
+	.string "{PLAYER}{KUN}, I'm terribly sorry.\p"
 	.string "You came to me seeking my help,\n"
 	.string "and we almost turned you away.\p"
 	.string "Well, let me make things right.\p"
-	.string "We’ll sail right away, of course!\p"
-	.string "Let’s find this island on\n"
+	.string "We'll sail right away, of course!\p"
+	.string "Let's find this island on\n"
 	.string "this OLD SEA MAP!$"
 
 LilycoveCity_Harbor_Text_2C6A71: @ 82C6A71
 	.string "Is it you who brought that odd\n"
 	.string "ticket?\p"
-	.string "Where you’re trying to go is an island\n"
-	.string "that’s far, far away.\p"
+	.string "Where you're trying to go is an island\n"
+	.string "that's far, far away.\p"
 	.string "No one knows what awaits there…\p"
 	.string "The very thought excites my blood\n"
 	.string "as a sailing man!\p"
@@ -11076,7 +9828,7 @@ LilycoveCity_Harbor_Text_2C6BD4: @ 82C6BD4
 NavelRock_Harbor_Text_2C6CE6: @ 82C6CE6
 	.string "Did… Did you hear that?\n"
 	.string "That low growling from deep in there.\p"
-	.string "Are you sure it’s safe?\n"
+	.string "Are you sure it's safe?\n"
 	.string "Do you think we should leave?$"
 
 FarawayIsland_Entrance_Text_2C6D5A: @ 82C6D5A
@@ -11096,16 +9848,16 @@ MauvilleCity_Text_2C6E05: @ 82C6E05
 
 SlateportCity_PokemonFanClub_Text_2C6E37: @ 82C6E37
 	.string "Heh! My POKéMON totally rules!\n"
-	.string "It’s cooler than any POKéMON!\p"
+	.string "It's cooler than any POKéMON!\p"
 	.string "I was lipping off with a swagger in\n"
 	.string "my step like that when the CHAIRMAN\l"
 	.string "chewed me out.\p"
 	.string "That took the swagger out of my step.\p"
-	.string "If you’d like, I’ll teach the move\n"
+	.string "If you'd like, I'll teach the move\n"
 	.string "SWAGGER to a POKéMON of yours.$"
 
 SlateportCity_PokemonFanClub_Text_2C6F33: @ 82C6F33
-	.string "What, no? Can’t you get into\n"
+	.string "What, no? Can't you get into\n"
 	.string "the spirit of things?$"
 
 SlateportCity_PokemonFanClub_Text_2C6F66: @ 82C6F66
@@ -11113,7 +9865,7 @@ SlateportCity_PokemonFanClub_Text_2C6F66: @ 82C6F66
 	.string "learn how to SWAGGER?$"
 
 SlateportCity_PokemonFanClub_Text_2C6F9E: @ 82C6F9E
-	.string "I’ll just praise my POKéMON from now\n"
+	.string "I'll just praise my POKéMON from now\n"
 	.string "on without the swagger.$"
 
 MauvilleCity_Text_2C6FDB: @ 82C6FDB
@@ -11125,30 +9877,30 @@ MauvilleCity_Text_2C6FDB: @ 82C6FDB
 	.string "Do you think your POKéMON will\n"
 	.string "want to roll, too?\p"
 	.string "I can teach one the move ROLLOUT\n"
-	.string "if you’d like.$"
+	.string "if you'd like.$"
 
 MauvilleCity_Text_2C70C4: @ 82C70C4
-	.string "You don’t need to be shy about it.\n"
-	.string "Let’s roll!$"
+	.string "You don't need to be shy about it.\n"
+	.string "Let's roll!$"
 
 MauvilleCity_Text_2C70F3: @ 82C70F3
-	.string "Ehehe, sure thing! It’d be great if\n"
+	.string "Ehehe, sure thing! It'd be great if\n"
 	.string "the POKéMON looked like me.$"
 
 MauvilleCity_Text_2C7133: @ 82C7133
 	.string "Rolling around in the grass makes me\n"
-	.string "happy. Come on, let’s roll!$"
+	.string "happy. Come on, let's roll!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_2C7174: @ 82C7174
-	.string "There’s a move that gets stronger\n"
+	.string "There's a move that gets stronger\n"
 	.string "when you keep using it in a row.\p"
-	.string "It’s a BUG-type move, and it is\n"
+	.string "It's a BUG-type move, and it is\n"
 	.string "wickedly cool.\p"
-	.string "It’s called FURY CUTTER.\n"
+	.string "It's called FURY CUTTER.\n"
 	.string "Want me to teach it to a POKéMON?$"
 
 VerdanturfTown_PokemonCenter_1F_Text_2C7221: @ 82C7221
-	.string "We’re not on the same wavelength.$"
+	.string "We're not on the same wavelength.$"
 
 VerdanturfTown_PokemonCenter_1F_Text_2C7243: @ 82C7243
 	.string "Yay!\n"
@@ -11184,27 +9936,27 @@ LavaridgeTown_House_Text_2C73F6: @ 82C73F6
 FallarborTown_Mart_Text_2C7449: @ 82C7449
 	.string "I want all sorts of things!\n"
 	.string "But I used up my allowance…\p"
-	.string "Wouldn’t it be nice if there were\n"
+	.string "Wouldn't it be nice if there were\n"
 	.string "a spell that made money appear when\l"
 	.string "you waggle a finger?\p"
 	.string "If you want, I can teach your POKéMON\n"
 	.string "the move METRONOME.\p"
-	.string "Money won’t appear, but your POKéMON\n"
+	.string "Money won't appear, but your POKéMON\n"
 	.string "will waggle a finger. Yes?$"
 
 FallarborTown_Mart_Text_2C7556: @ 82C7556
-	.string "Okay. I’ll be here if you change\n"
+	.string "Okay. I'll be here if you change\n"
 	.string "your mind.$"
 
 FallarborTown_Mart_Text_2C7582: @ 82C7582
-	.string "Okay! I’ll teach it!\n"
+	.string "Okay! I'll teach it!\n"
 	.string "Which POKéMON should I teach?$"
 
 FallarborTown_Mart_Text_2C75B5: @ 82C75B5
 	.string "When a POKéMON waggles its finger\n"
 	.string "like a METRONOME, all sorts of nice\l"
 	.string "things happen.\p"
-	.string "Wouldn’t it be nice if we could\n"
+	.string "Wouldn't it be nice if we could\n"
 	.string "use it, too?$"
 
 FortreeCity_House2_Text_2C7637: @ 82C7637
@@ -11224,7 +9976,7 @@ FortreeCity_House2_Text_2C7721: @ 82C7721
 	.string "Which POKéMON should I teach?$"
 
 FortreeCity_House2_Text_2C775A: @ 82C775A
-	.string "I’ve never once gotten my wife’s\n"
+	.string "I've never once gotten my wife's\n"
 	.string "coin trick right.\p"
 	.string "I would be happy if I got it right\n"
 	.string "even as I SLEEP TALK…$"
@@ -11235,7 +9987,7 @@ LilycoveCity_DepartmentStoreRooftop_Text_2C77C6: @ 82C77C6
 	.string "I think about how nice it would be\n"
 	.string "if there were more than just one me\l"
 	.string "so I could enjoy all sorts of lives.\p"
-	.string "Of course it’s not possible.\n"
+	.string "Of course it's not possible.\n"
 	.string "Giggle…\p"
 	.string "I know! Would you be interested in\n"
 	.string "having a POKéMON learn SUBSTITUTE?$"
@@ -11253,27 +10005,27 @@ LilycoveCity_DepartmentStoreRooftop_Text_2C7911: @ 82C7911
 LilycoveCity_DepartmentStoreRooftop_Text_2C794B: @ 82C794B
 	.string "We human beings should enjoy our\n"
 	.string "own lives to the utmost!\p"
-	.string "I hope you’ll get that way, too!$"
+	.string "I hope you'll get that way, too!$"
 
 MossdeepCity_Text_2C79A6: @ 82C79A6
-	.string "I can’t do this anymore!\p"
-	.string "It’s utterly hopeless!\p"
-	.string "I’m a FIGHTING-type TRAINER,\n"
-	.string "so I can’t win at the MOSSDEEP GYM\l"
+	.string "I can't do this anymore!\p"
+	.string "It's utterly hopeless!\p"
+	.string "I'm a FIGHTING-type TRAINER,\n"
+	.string "so I can't win at the MOSSDEEP GYM\l"
 	.string "no matter how hard I try!\p"
 	.string "Argh! Punch! Punch! Punch!\n"
 	.string "Punch! Punch! Punch!\p"
-	.string "What, don’t look at me that way!\n"
-	.string "I’m only hitting the ground!\p"
+	.string "What, don't look at me that way!\n"
+	.string "I'm only hitting the ground!\p"
 	.string "Or do you want me to teach your\n"
 	.string "POKéMON DYNAMICPUNCH?$"
 
 MossdeepCity_Text_2C7AD4: @ 82C7AD4
-	.string "Darn! You’re even making fun of me?\n"
+	.string "Darn! You're even making fun of me?\n"
 	.string "Punch! Punch! Punch!$"
 
 MossdeepCity_Text_2C7B0D: @ 82C7B0D
-	.string "What? You do? You’re a good person!\n"
+	.string "What? You do? You're a good person!\n"
 	.string "Which POKéMON should I teach?$"
 
 MossdeepCity_Text_2C7B4F: @ 82C7B4F
@@ -11282,12 +10034,12 @@ MossdeepCity_Text_2C7B4F: @ 82C7B4F
 
 SootopolisCity_PokemonCenter_1F_Text_2C7B8E: @ 82C7B8E
 	.string "Sigh…\p"
-	.string "SOOTOPOLIS’s GYM LEADER is really\n"
+	.string "SOOTOPOLIS's GYM LEADER is really\n"
 	.string "lovably admirable.\p"
 	.string "But that also means I have many\n"
 	.string "rivals for his attention.\p"
-	.string "He’s got appeal with a DOUBLE-EDGE.\n"
-	.string "I couldn’t even catch his eye.\p"
+	.string "He's got appeal with a DOUBLE-EDGE.\n"
+	.string "I couldn't even catch his eye.\p"
 	.string "Please, let me teach your POKéMON\n"
 	.string "the move DOUBLE-EDGE!$"
 
@@ -11300,21 +10052,21 @@ SootopolisCity_PokemonCenter_1F_Text_2C7C98: @ 82C7C98
 	.string "DOUBLE-EDGE?$"
 
 SootopolisCity_PokemonCenter_1F_Text_2C7CC8: @ 82C7CC8
-	.string "I won’t live for love anymore!\n"
-	.string "I’ll become tough!$"
+	.string "I won't live for love anymore!\n"
+	.string "I'll become tough!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_2C7CFA: @ 82C7CFA
-	.string "I don’t intend to be going nowhere\n"
+	.string "I don't intend to be going nowhere\n"
 	.string "fast in the sticks like this forever.\p"
-	.string "You watch me, I’ll get out to the city\n"
+	.string "You watch me, I'll get out to the city\n"
 	.string "and become a huge hit.\p"
-	.string "Seriously, I’m going to cause\n"
+	.string "Seriously, I'm going to cause\n"
 	.string "a huge EXPLOSION of popularity!\p"
-	.string "If you overheard that, I’ll happily\n"
+	.string "If you overheard that, I'll happily\n"
 	.string "teach EXPLOSION to your POKéMON!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_2C7E04: @ 82C7E04
-	.string "Gaah! You’re turning me down because\n"
+	.string "Gaah! You're turning me down because\n"
 	.string "I live in the country?$"
 
 PacifidlogTown_PokemonCenter_1F_Text_2C7E40: @ 82C7E40
@@ -11322,10 +10074,10 @@ PacifidlogTown_PokemonCenter_1F_Text_2C7E40: @ 82C7E40
 	.string "Which POKéMON wants to blow up?$"
 
 PacifidlogTown_PokemonCenter_1F_Text_2C7E7A: @ 82C7E7A
-	.string "For a long time, I’ve taught POKéMON\n"
-	.string "how to use EXPLOSION, but I’ve yet\l"
+	.string "For a long time, I've taught POKéMON\n"
+	.string "how to use EXPLOSION, but I've yet\l"
 	.string "to ignite my own EXPLOSION…\p"
-	.string "Maybe it’s because deep down,\n"
+	.string "Maybe it's because deep down,\n"
 	.string "I would rather stay here…$"
 
 SlateportCity_PokemonFanClub_EventScript_2C7F16:: @ 82C7F16
@@ -11752,31 +10504,31 @@ EventScript_TestSignpostMsg:: @ 82C8436
 	end
 
 gText_082C843F:: @ 82C843F
-	.string "It’s very disappointing…$"
+	.string "It's very disappointing…$"
 
 gText_082C8458:: @ 82C8458
 	.string "Okay, I understand…$"
 
 gText_082C846C:: @ 82C846C
-	.string "I’m terribly sorry…$"
+	.string "I'm terribly sorry…$"
 
 gText_082C8480:: @ 82C8480
 	.string "Thank you…$"
 
 gText_082C848B:: @ 82C848B
-	.string "Ahahaha! Aren’t you embarrassed?\n"
-	.string "Everyone’s watching!$"
+	.string "Ahahaha! Aren't you embarrassed?\n"
+	.string "Everyone's watching!$"
 
 gText_082C84C1:: @ 82C84C1
 	.string "Grr…\n"
 	.string "What the…$"
 
 gText_082C84D0:: @ 82C84D0
-	.string "My DOME ACE title isn’t just for show!$"
+	.string "My DOME ACE title isn't just for show!$"
 
 gText_082C84F7:: @ 82C84F7
 	.string "Ahahaha!\n"
-	.string "You’re inspiring!$"
+	.string "You're inspiring!$"
 
 gText_082C8512:: @ 82C8512
 	.string "Way to work!\n"
@@ -11784,11 +10536,11 @@ gText_082C8512:: @ 82C8512
 
 gText_082C853B:: @ 82C853B
 	.string "Good job!\n"
-	.string "You know what you’re doing!$"
+	.string "You know what you're doing!$"
 
 gText_082C8561:: @ 82C8561
 	.string "Hey, hey, hey!\n"
-	.string "You’re finished already?$"
+	.string "You're finished already?$"
 
 gText_082C8589:: @ 82C8589
 	.string "What happened here?$"
@@ -11823,7 +10575,7 @@ gText_082C8611:: @ 82C8611
 
 gText_082C8628:: @ 82C8628
 	.string "Your POKéMON are wimpy because\n"
-	.string "you’re wimpy as a TRAINER!$"
+	.string "you're wimpy as a TRAINER!$"
 
 gText_082C8662:: @ 82C8662
 	.string "Ah…\n"
@@ -11838,19 +10590,19 @@ gText_082C86B3:: @ 82C86B3
 	.string "Hahahaha!$"
 
 gText_082C86C3:: @ 82C86C3
-	.string "Hey! What’s wrong with you!\n"
-	.string "Let’s see some effort! Get up!$"
+	.string "Hey! What's wrong with you!\n"
+	.string "Let's see some effort! Get up!$"
 
 gText_082C86FE:: @ 82C86FE
-	.string "That’s it! You’ve done great!\n"
-	.string "You’ve worked hard for this!$"
+	.string "That's it! You've done great!\n"
+	.string "You've worked hard for this!$"
 
 gText_082C8739:: @ 82C8739
-	.string "Hey! Don’t you give up now!\n"
-	.string "Get up! Don’t lose faith in yourself!$"
+	.string "Hey! Don't you give up now!\n"
+	.string "Get up! Don't lose faith in yourself!$"
 
 gText_082C877B:: @ 82C877B
-	.string "That’s it! You’ve done it!\n"
+	.string "That's it! You've done it!\n"
 	.string "You kept working for this!$"
 
 	.align 2

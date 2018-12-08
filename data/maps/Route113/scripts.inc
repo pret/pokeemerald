@@ -138,15 +138,15 @@ Route113_EventScript_1F2344:: @ 81F2344
 	end
 
 Route113_Text_1F235B: @ 81F235B
-	.string "Wahahaha! Today’s technology is a\n"
+	.string "Wahahaha! Today's technology is a\n"
 	.string "wondrous thing!\p"
 	.string "Take this volcanic ash here.\n"
 	.string "It can be fashioned into glass.$"
 
 Route113_Text_1F23CA: @ 81F23CA
-	.string "It’s fun walking through the volcano’s\n"
+	.string "It's fun walking through the volcano's\n"
 	.string "ashes on the ground and grass.\p"
-	.string "You can see where you walked--it’s\n"
+	.string "You can see where you walked--it's\n"
 	.string "really neat!$"
 
 Route113_Text_1F2440: @ 81F2440

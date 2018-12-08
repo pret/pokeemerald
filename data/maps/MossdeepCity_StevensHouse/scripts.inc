@@ -155,26 +155,26 @@ MossdeepCity_StevensHouse_EventScript_222926:: @ 8222926
 
 MossdeepCity_StevensHouse_Text_222936: @ 8222936
 	.string "STEVEN: {PLAYER}{KUN}…\p"
-	.string "As you can see, there’s not much here,\n"
+	.string "As you can see, there's not much here,\n"
 	.string "but this is my home.\p"
-	.string "Thank you for all that you’ve done.\p"
+	.string "Thank you for all that you've done.\p"
 	.string "This is my token of appreciation.\n"
-	.string "It’s the HIDDEN MACHINE DIVE.\p"
-	.string "No need to be shy--you’ve earned\n"
+	.string "It's the HIDDEN MACHINE DIVE.\p"
+	.string "No need to be shy--you've earned\n"
 	.string "this HM.$"
 
 MossdeepCity_StevensHouse_Text_222A0E: @ 8222A0E
-	.string "STEVEN: While you’re using SURF, you\n"
+	.string "STEVEN: While you're using SURF, you\n"
 	.string "should notice dark patches of water.\p"
 	.string "Use DIVE if you come to deep water\n"
-	.string "like it. You’ll drop to the seafloor.\p"
+	.string "like it. You'll drop to the seafloor.\p"
 	.string "When you want to come back up, use\n"
 	.string "DIVE again.\p"
-	.string "In some places, it won’t be possible\n"
+	.string "In some places, it won't be possible\n"
 	.string "for you to surface, though.$"
 
 MossdeepCity_StevensHouse_Text_222B11: @ 8222B11
-	.string "STEVEN: Apparently, there’s an\n"
+	.string "STEVEN: Apparently, there's an\n"
 	.string "underwater cavern between\l"
 	.string "MOSSDEEP and SOOTOPOLIS.\p"
 	.string "You know, the one that CAPT. STERN\n"
@@ -197,23 +197,23 @@ MossdeepCity_StevensHouse_Text_222C2A: @ 8222C2A
 	.string "it was.$"
 
 MossdeepCity_StevensHouse_Text_222C4E: @ 8222C4E
-	.string "It’s a letter.\p"
+	.string "It's a letter.\p"
 	.string "… … … … … …\p"
 	.string "To {PLAYER}{KUN}…\p"
-	.string "I’ve decided to do a little soul-\n"
+	.string "I've decided to do a little soul-\n"
 	.string "searching and train on the road.\p"
-	.string "I don’t plan to return home for some\n"
+	.string "I don't plan to return home for some\n"
 	.string "time.\p"
 	.string "I have a favor to ask of you.\p"
 	.string "I want you to take the POKé BALL on\n"
 	.string "the desk.\p"
 	.string "Inside it is a BELDUM, my favorite\n"
 	.string "POKéMON.\p"
-	.string "I’m counting on you.\p"
+	.string "I'm counting on you.\p"
 	.string "May our paths cross someday.\p"
 	.string "STEVEN STONE$"
 
 MossdeepCity_StevensHouse_Text_222D97: @ 8222D97
-	.string "It’s a collection of rare rocks and\n"
+	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by STEVEN.$"
 

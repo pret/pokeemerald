@@ -36,7 +36,7 @@ Route110_TrickHousePuzzle4_Text_26C8C3: @ 826C8C3
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle4_Text_26C92D: @ 826C92D
-	.string "It’s too much bother to think this out.\n"
+	.string "It's too much bother to think this out.\n"
 	.string "I only wanted to battle!$"
 
 Route110_TrickHousePuzzle4_Text_26C96E: @ 826C96E
@@ -44,7 +44,7 @@ Route110_TrickHousePuzzle4_Text_26C96E: @ 826C96E
 	.string "the best!$"
 
 Route110_TrickHousePuzzle4_Text_26C9A2: @ 826C9A2
-	.string "Wouldn’t you agree? You would go\n"
+	.string "Wouldn't you agree? You would go\n"
 	.string "anywhere if TRAINERS were there.$"
 
 Route110_TrickHousePuzzle4_Text_26C9E4: @ 826C9E4
@@ -52,16 +52,16 @@ Route110_TrickHousePuzzle4_Text_26C9E4: @ 826C9E4
 	.string "aside with one finger!$"
 
 Route110_TrickHousePuzzle4_Text_26CA20: @ 826CA20
-	.string "I can push boulders, but I can’t solve\n"
+	.string "I can push boulders, but I can't solve\n"
 	.string "the puzzle…$"
 
 Route110_TrickHousePuzzle4_Text_26CA53: @ 826CA53
-	.string "It’s not good enough to be brawny…\n"
+	.string "It's not good enough to be brawny…\n"
 	.string "You have to use your head. Be brainy!$"
 
 Route110_TrickHousePuzzle4_Text_26CA9C: @ 826CA9C
 	.string "The TRICK HOUSE is getting trickier,\n"
-	.string "isn’t it?$"
+	.string "isn't it?$"
 
 Route110_TrickHousePuzzle4_Text_26CACB: @ 826CACB
 	.string "Aaak!$"

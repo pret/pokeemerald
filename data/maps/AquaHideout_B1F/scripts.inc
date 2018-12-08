@@ -121,12 +121,12 @@ AquaHideout_B1F_Text_233B03: @ 8233B03
 	.string "our HIDEOUT, you have me to beat!$"
 
 AquaHideout_B1F_Text_233B4A: @ 8233B4A
-	.string "I can’t win at all…$"
+	.string "I can't win at all…$"
 
 AquaHideout_B1F_Text_233B5E: @ 8233B5E
-	.string "Our HIDEOUT’s secret?\p"
-	.string "Well, let’s just say…\n"
-	.string "There’s a submarine at the far end!\p"
+	.string "Our HIDEOUT's secret?\p"
+	.string "Well, let's just say…\n"
+	.string "There's a submarine at the far end!\p"
 	.string "But, by now…\n"
 	.string "Kekekeke…$"
 
@@ -146,7 +146,7 @@ AquaHideout_B1F_Text_233C41: @ 8233C41
 
 AquaHideout_B1F_Text_233C89: @ 8233C89
 	.string "Yawn… Keeping watch over the\n"
-	.string "HIDEOUT bores me. I’ll take you on.$"
+	.string "HIDEOUT bores me. I'll take you on.$"
 
 AquaHideout_B1F_Text_233CCA: @ 8233CCA
 	.string "Yawn…\n"
@@ -160,12 +160,12 @@ AquaHideout_B1F_Text_233D1B: @ 8233D1B
 	.string "Hey!\n"
 	.string "You there!\p"
 	.string "Which do you think is cooler?\n"
-	.string "TEAM AQUA’s uniform or TEAM MAGMA’s?$"
+	.string "TEAM AQUA's uniform or TEAM MAGMA's?$"
 
 AquaHideout_B1F_Text_233D6E: @ 8233D6E
 	.string "I lost in a cool way…$"
 
 AquaHideout_B1F_Text_233D84: @ 8233D84
 	.string "If you have a cool uniform, you look\n"
-	.string "good even in a loss, don’t you think?$"
+	.string "good even in a loss, don't you think?$"
 

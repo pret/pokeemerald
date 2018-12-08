@@ -56,11 +56,11 @@ AquaHideout_1F_EventScript_233513:: @ 8233513
 AquaHideout_1F_Text_23351D: @ 823351D
 	.string "What? What? What do you want with \n"
 	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn’t here! He’s gone off to\n"
+	.string "Our BOSS isn't here! He's gone off to\n"
 	.string "snatch something important!\p"
 	.string "… …\n"
 	.string "Where did he go?\p"
-	.string "Wahaha! Do you really think I’d tell\n"
+	.string "Wahaha! Do you really think I'd tell\n"
 	.string "you something that crucial?$"
 
 AquaHideout_1F_Text_2335E3: @ 82335E3
@@ -74,21 +74,21 @@ AquaHideout_1F_Text_2335E3: @ 82335E3
 AquaHideout_1F_Text_23367D: @ 823367D
 	.string "What? What? What do you want with \n"
 	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn’t here!\n"
-	.string "He’s gone off to jack a submarine!\p"
+	.string "Our BOSS isn't here!\n"
+	.string "He's gone off to jack a submarine!\p"
 	.string "… …\n"
 	.string "Where did he go?\p"
-	.string "Wahaha! Do you really think I’d tell\n"
+	.string "Wahaha! Do you really think I'd tell\n"
 	.string "you something that crucial?$"
 
 AquaHideout_1F_Text_233739: @ 8233739
 	.string "What? What? What do you want with \n"
 	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn’t here! He’s on his way to\n"
+	.string "Our BOSS isn't here! He's on his way to\n"
 	.string "MT. PYRE on ROUTE 122!\p"
 	.string "… …\n"
 	.string "Why did he go?\p"
-	.string "Wahaha! Do you really think I’d tell\n"
+	.string "Wahaha! Do you really think I'd tell\n"
 	.string "you something that crucial?$"
 
 AquaHideout_1F_Text_2337FA: @ 82337FA
@@ -101,11 +101,11 @@ AquaHideout_1F_Text_2337FA: @ 82337FA
 AquaHideout_1F_Text_233884: @ 8233884
 	.string "What? What? What do you want with\n"
 	.string "TEAM AQUA?\p"
-	.string "Our BOSS isn’t here!\n"
-	.string "He’s on his way to SLATEPORT CITY!\p"
+	.string "Our BOSS isn't here!\n"
+	.string "He's on his way to SLATEPORT CITY!\p"
 	.string "… …\n"
 	.string "Why did he go?\p"
-	.string "Wahaha! Do you really think I’d tell\n"
+	.string "Wahaha! Do you really think I'd tell\n"
 	.string "you something that crucial?$"
 
 AquaHideout_1F_Text_23393D: @ 823393D

@@ -54,12 +54,12 @@ Route110_TrickHousePuzzle6_Text_26DE93: @ 826DE93
 	.string "house, I had to check it out.$"
 
 Route110_TrickHousePuzzle6_Text_26DED2: @ 826DED2
-	.string "I’ve discovered a tough TRAINER!$"
+	.string "I've discovered a tough TRAINER!$"
 
 Route110_TrickHousePuzzle6_Text_26DEF3: @ 826DEF3
-	.string "I’m sure having a good time checking\n"
+	.string "I'm sure having a good time checking\n"
 	.string "this place out.\p"
-	.string "It’s a challenge I’ve found worth\n"
+	.string "It's a challenge I've found worth\n"
 	.string "repeating!$"
 
 Route110_TrickHousePuzzle6_Text_26DF55: @ 826DF55
@@ -74,14 +74,14 @@ Route110_TrickHousePuzzle6_Text_26DFA0: @ 826DFA0
 	.string "I was trying to cheat.$"
 
 Route110_TrickHousePuzzle6_Text_26DFD7: @ 826DFD7
-	.string "I’m getting dizzy from these rotating\n"
+	.string "I'm getting dizzy from these rotating\n"
 	.string "doors…$"
 
 Route110_TrickHousePuzzle6_Text_26E004: @ 826E004
-	.string "Everything’s spinning around and\n"
-	.string "around. I can’t take this anymore…$"
+	.string "Everything's spinning around and\n"
+	.string "around. I can't take this anymore…$"
 
 Route110_TrickHousePuzzle6_Text_26E048: @ 826E048
-	.string "You don’t seem to be affected at all.\n"
+	.string "You don't seem to be affected at all.\n"
 	.string "Or do you have your poker face on?$"
 

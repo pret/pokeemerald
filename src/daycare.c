@@ -19,6 +19,7 @@
 #include "task.h"
 #include "window.h"
 #include "list_menu.h"
+#include "overworld.h"
 
 #define EGG_MOVES_ARRAY_COUNT           10
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    50
@@ -39,12 +40,8 @@ extern const u8 gDaycareText_PlayOther[];
 
 extern u8 GetCursorSelectionMonId(void);
 extern u16 ItemIdToBattleMoveId(u16);
-extern s32 ListMenuHandleInputGetItemId(u8);
-extern void DestroyListMenuTask(u8, u16*, u16*);
 extern void sub_819746C(u8, bool8);
-extern void NewMenuHelpers_DrawStdWindowFrame(u8, bool8);
 extern void sub_81B9328(void);
-extern void CB2_ReturnToField(void);
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);

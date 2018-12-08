@@ -485,143 +485,143 @@ BattleFrontier_BattlePointExchangeServiceCorner_Text_25F890: @ 825F890
 	.string "Please choose a prize from this list.$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F8B6: @ 825F8B6
-	.string "You’ve chosen the KISS POSTER.\n"
+	.string "You've chosen the KISS POSTER.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F8E6: @ 825F8E6
-	.string "You’ve chosen the KISS CUSHION.\n"
+	.string "You've chosen the KISS CUSHION.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F917: @ 825F917
-	.string "You’ve chosen the SMOOCHUM DOLL.\n"
+	.string "You've chosen the SMOOCHUM DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F949: @ 825F949
-	.string "You’ve chosen the TOGEPI DOLL.\n"
+	.string "You've chosen the TOGEPI DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F979: @ 825F979
-	.string "You’ve chosen the MEOWTH DOLL.\n"
+	.string "You've chosen the MEOWTH DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F9A9: @ 825F9A9
-	.string "You’ve chosen the CLEFAIRY DOLL.\n"
+	.string "You've chosen the CLEFAIRY DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25F9DB: @ 825F9DB
-	.string "You’ve chosen the DITTO DOLL.\n"
+	.string "You've chosen the DITTO DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FA0A: @ 825FA0A
-	.string "You’ve chosen the CYNDAQUIL DOLL.\n"
+	.string "You've chosen the CYNDAQUIL DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FA3D: @ 825FA3D
-	.string "You’ve chosen the CHIKORITA DOLL.\n"
+	.string "You've chosen the CHIKORITA DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FA70: @ 825FA70
-	.string "You’ve chosen the TOTODILE DOLL.\n"
+	.string "You've chosen the TOTODILE DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FAA2: @ 825FAA2
-	.string "You’ve chosen the LAPRAS DOLL.\n"
+	.string "You've chosen the LAPRAS DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FAD2: @ 825FAD2
-	.string "You’ve chosen the SNORLAX DOLL.\n"
+	.string "You've chosen the SNORLAX DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FB03: @ 825FB03
-	.string "You’ve chosen the VENUSAUR DOLL.\n"
+	.string "You've chosen the VENUSAUR DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FB35: @ 825FB35
-	.string "You’ve chosen the CHARIZARD DOLL.\n"
+	.string "You've chosen the CHARIZARD DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FB68: @ 825FB68
-	.string "You’ve chosen the BLASTOISE DOLL.\n"
+	.string "You've chosen the BLASTOISE DOLL.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FB9B: @ 825FB9B
-	.string "You’ve chosen the PROTEIN.\n"
+	.string "You've chosen the PROTEIN.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FBC7: @ 825FBC7
-	.string "You’ve chosen the CALCIUM.\n"
+	.string "You've chosen the CALCIUM.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FBF3: @ 825FBF3
-	.string "You’ve chosen the IRON.\n"
+	.string "You've chosen the IRON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FC1C: @ 825FC1C
-	.string "You’ve chosen the ZINC.\n"
+	.string "You've chosen the ZINC.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FC45: @ 825FC45
-	.string "You’ve chosen the CARBOS.\n"
+	.string "You've chosen the CARBOS.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FC70: @ 825FC70
-	.string "You’ve chosen the HP UP.\n"
+	.string "You've chosen the HP UP.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FC9A: @ 825FC9A
-	.string "You’ve chosen the BRIGHTPOWDER.\n"
+	.string "You've chosen the BRIGHTPOWDER.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FCCB: @ 825FCCB
-	.string "You’ve chosen the WHITE HERB.\n"
+	.string "You've chosen the WHITE HERB.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FCFA: @ 825FCFA
-	.string "You’ve chosen the QUICK CLAW.\n"
+	.string "You've chosen the QUICK CLAW.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FD29: @ 825FD29
-	.string "You’ve chosen the MENTAL HERB.\n"
+	.string "You've chosen the MENTAL HERB.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FD59: @ 825FD59
-	.string "You’ve chosen the CHOICE BAND.\n"
+	.string "You've chosen the CHOICE BAND.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FD89: @ 825FD89
-	.string "You’ve chosen the KING’S ROCK.\n"
+	.string "You've chosen the KING'S ROCK.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FDB9: @ 825FDB9
-	.string "You’ve chosen the FOCUS BAND.\n"
+	.string "You've chosen the FOCUS BAND.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FDE8: @ 825FDE8
-	.string "You’ve chosen the SCOPE LENS.\n"
+	.string "You've chosen the SCOPE LENS.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE17: @ 825FE17
-	.string "You’ve chosen the LEFTOVERS.\n"
+	.string "You've chosen the LEFTOVERS.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE45: @ 825FE45
 	.string "Thank you!\n"
-	.string "We’ll send it to your PC at home.$"
+	.string "We'll send it to your PC at home.$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE72: @ 825FE72
 	.string "Here is your prize!$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FE86: @ 825FE86
-	.string "I’m so sorry…\n"
-	.string "You don’t have enough Battle Points…$"
+	.string "I'm so sorry…\n"
+	.string "You don't have enough Battle Points…$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FEB9: @ 825FEB9
-	.string "I’m so sorry…\n"
+	.string "I'm so sorry…\n"
 	.string "Your PC appears to be full…$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FEE3: @ 825FEE3
-	.string "I’m so sorry…\n"
-	.string "You don’t have space to hold it…$"
+	.string "I'm so sorry…\n"
+	.string "You don't have space to hold it…$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FF12: @ 825FF12
 	.string "Thank you very much.\p"
@@ -629,7 +629,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_Text_25FF12: @ 825FF12
 	.string "saved up Battle Points.$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FF5D: @ 825FF5D
-	.string "Oh, they’re so nice!\n"
+	.string "Oh, they're so nice!\n"
 	.string "I wish I had them!\l"
 	.string "Cute cushions!\l"
 	.string "Big plush DOLLS!\l"
@@ -638,7 +638,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_Text_25FF5D: @ 825FF5D
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_25FFD0: @ 825FFD0
 	.string "Leave it to your mommy!\p"
-	.string "If it’s anything you want, I’ll go\n"
+	.string "If it's anything you want, I'll go\n"
 	.string "through anything to get it, honey!$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_26002E: @ 826002E
@@ -650,10 +650,10 @@ BattleFrontier_BattlePointExchangeServiceCorner_Text_26002E: @ 826002E
 BattleFrontier_BattlePointExchangeServiceCorner_Text_260099: @ 8260099
 	.string "Hah?\n"
 	.string "What are you gawking at?\p"
-	.string "I don’t like you staring at my plush\n"
+	.string "I don't like you staring at my plush\n"
 	.string "doll like that.\p"
 	.string "If you want it, go get one yourself!\n"
-	.string "Isn’t that right, SMOOCHUM?$"
+	.string "Isn't that right, SMOOCHUM?$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_26012D: @ 826012D
 	.string "Did you know?\p"
@@ -748,7 +748,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_Text_260542:: @ 8260542
 	.string "reduce accuracy.$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_260575:: @ 8260575
-	.string "Raises a move’s power, but permits\n"
+	.string "Raises a move's power, but permits\n"
 	.string "only that move.$"
 
 BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8:: @ 82605A8

@@ -289,9 +289,9 @@ SlateportCity_PokemonFanClub_Text_20A233: @ 820A233
 	.string "to raising POKéMON. No one!\p"
 	.string "Well, let me tell you about\n"
 	.string "POKéMON CONTESTS.\p"
-	.string "They’re events where one can show off\n"
+	.string "They're events where one can show off\n"
 	.string "POKéMON for the world to see!\p"
-	.string "However, they’re held in far-off towns,\n"
+	.string "However, they're held in far-off towns,\n"
 	.string "so I cannot participate often enough.\p"
 	.string "That is why we gather here to show\n"
 	.string "off our POKéMON, and have others\l"
@@ -303,7 +303,7 @@ SlateportCity_PokemonFanClub_Text_20A3EE: @ 820A3EE
 	.string "That, I would like to see.$"
 
 SlateportCity_PokemonFanClub_Text_20A445: @ 820A445
-	.string "Er-hem! I see you’ve participated in\n"
+	.string "Er-hem! I see you've participated in\n"
 	.string "a POKéMON CONTEST!\p"
 	.string "Please! Allow me to examine how you\n"
 	.string "have raised your POKéMON.\p"
@@ -329,7 +329,7 @@ SlateportCity_PokemonFanClub_Text_20A65F: @ 820A65F
 	.string "I see…$"
 
 SlateportCity_PokemonFanClub_Text_20A66E: @ 820A66E
-	.string "Hmmm… It’s not bad, but it’s not\n"
+	.string "Hmmm… It's not bad, but it's not\n"
 	.string "good, either…\p"
 	.string "You, the TRAINER, must put more\n"
 	.string "effort into raising this POKéMON!\p"
@@ -372,13 +372,13 @@ SlateportCity_PokemonFanClub_Text_20A933: @ 820A933
 
 SlateportCity_PokemonFanClub_Text_20A984: @ 820A984
 	.string "Let a POKéMON hold that YELLOW SCARF.\p"
-	.string "It will bolster your POKéMON’s\n"
+	.string "It will bolster your POKéMON's\n"
 	.string "toughness so much more!$"
 
 SlateportCity_PokemonFanClub_Text_20A9E1: @ 820A9E1
-	.string "I’m sorry, but I’ve nothing else to\n"
+	.string "I'm sorry, but I've nothing else to\n"
 	.string "give you! None at all!\p"
-	.string "After all, you’re blessed with the gift\n"
+	.string "After all, you're blessed with the gift\n"
 	.string "of raising POKéMON without resorting\l"
 	.string "to any items!$"
 
@@ -388,7 +388,7 @@ SlateportCity_PokemonFanClub_Text_20AA77: @ 820AA77
 	.string "POKéMON are very sensitive to\n"
 	.string "the feelings of their TRAINERS.\p"
 	.string "If you treat your POKéMON with love\n"
-	.string "and care, they’ll love you back.\p"
+	.string "and care, they'll love you back.\p"
 	.string "When your POKéMON grow to love you,\n"
 	.string "please come show me.$"
 
@@ -401,14 +401,14 @@ SlateportCity_PokemonFanClub_Text_20ABC4: @ 820ABC4
 	.string "POKéMON are very sensitive to\n"
 	.string "the feelings of their TRAINERS.\p"
 	.string "If you treat your POKéMON with love\n"
-	.string "and care, they’ll love you back.$"
+	.string "and care, they'll love you back.$"
 
 SlateportCity_PokemonFanClub_Text_20AC47: @ 820AC47
 	.string "If you keep letting a POKéMON faint\n"
-	.string "in battle, it’ll come to resent it.\p"
+	.string "in battle, it'll come to resent it.\p"
 	.string "Soon, it will become less trusting\n"
 	.string "of the TRAINER.\p"
-	.string "In other words, it certainly won’t\n"
+	.string "In other words, it certainly won't\n"
 	.string "like you very much.$"
 
 SlateportCity_PokemonFanClub_Text_20ACF9: @ 820ACF9

@@ -153,7 +153,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
-	trainerbattle TRAINER_BATTLE_9, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
+	trainerbattle TRAINER_BATTLE_PYRAMID, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
 	setvar VAR_0x8004, 10
 	special CallBattlePyramidFunction
 	waitmessage
@@ -190,19 +190,19 @@ gText_BattlePyramidConfirmRetire:: @ 8252CFB
 	.string "PYRAMID quest?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_252D2D:: @ 8252D2D
-	.string "This floor’s exit is in\n"
+	.string "This floor's exit is in\n"
 	.string "that direction: {UP_ARROW}$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_252D57:: @ 8252D57
-	.string "This floor’s exit is in\n"
+	.string "This floor's exit is in\n"
 	.string "that direction: {LEFT_ARROW}$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_252D81:: @ 8252D81
-	.string "This floor’s exit is in\n"
+	.string "This floor's exit is in\n"
 	.string "that direction: {RIGHT_ARROW}$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_252DAB:: @ 8252DAB
-	.string "This floor’s exit is in\n"
+	.string "This floor's exit is in\n"
 	.string "that direction: {DOWN_ARROW}$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_252DD5:: @ 8252DD5
@@ -255,19 +255,19 @@ BattleFrontier_BattlePyramidEmptySquare_Text_252FAC:: @ 8252FAC
 
 BattleFrontier_BattlePyramidEmptySquare_Text_252FE5:: @ 8252FE5
 	.string "The exit?\n"
-	.string "It’s that {UP_ARROW} way.$"
+	.string "It's that {UP_ARROW} way.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253000:: @ 8253000
 	.string "The exit?\n"
-	.string "It’s that {LEFT_ARROW} way.$"
+	.string "It's that {LEFT_ARROW} way.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25301B:: @ 825301B
 	.string "The exit?\n"
-	.string "It’s that {RIGHT_ARROW} way.$"
+	.string "It's that {RIGHT_ARROW} way.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253036:: @ 8253036
 	.string "The exit?\n"
-	.string "It’s that {DOWN_ARROW} way.$"
+	.string "It's that {DOWN_ARROW} way.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253051:: @ 8253051
 	.string "The exit happens to be in\n"
@@ -327,159 +327,159 @@ BattleFrontier_BattlePyramidEmptySquare_Text_2532CC:: @ 82532CC
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25330B:: @ 825330B
 	.string "Are you looking for items?\p"
-	.string "There isn’t anything left to\n"
+	.string "There isn't anything left to\n"
 	.string "be found!$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25334D:: @ 825334D
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are eight items\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2533A6:: @ 82533A6
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are seven items left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253404:: @ 8253404
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are six items left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253460:: @ 8253460
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are five items left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2534BD:: @ 82534BD
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are four items left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25351A:: @ 825351A
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are three items left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253578:: @ 8253578
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There are two items left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2535D4:: @ 82535D4
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
 	.string "There is just one item\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25362E:: @ 825362E
-	.string "Because you won, I’ll tell you\n"
+	.string "Because you won, I'll tell you\n"
 	.string "a little secret!\p"
-	.string "There isn’t anything left\n"
+	.string "There isn't anything left\n"
 	.string "lying around here.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25368B:: @ 825368B
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are eight items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2536F8:: @ 82536F8
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are seven items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253765:: @ 8253765
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are six items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2537D0:: @ 82537D0
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are five items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25383C:: @ 825383C
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are four items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2538A8:: @ 82538A8
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are three items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253915:: @ 8253915
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are two items left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253980:: @ 8253980
-	.string "How’s your stock of items holding up?\p"
-	.string "I reckon there’s but one item left\n"
+	.string "How's your stock of items holding up?\p"
+	.string "I reckon there's but one item left\n"
 	.string "waiting to be found on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2539EC:: @ 82539EC
-	.string "How’s your stock of items holding up?\p"
+	.string "How's your stock of items holding up?\p"
 	.string "I reckon there are no more items\n"
 	.string "waiting to be found on this floor.\l"
 	.string "You take care now!$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253A69:: @ 8253A69
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be eight more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253AC4:: @ 8253AC4
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be seven more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253B1F:: @ 8253B1F
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be six more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253B78:: @ 8253B78
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be five more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253BD2:: @ 8253BD2
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be four more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253C2C:: @ 8253C2C
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be three more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253C87:: @ 8253C87
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be two more\n"
 	.string "items on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253CE0:: @ 8253CE0
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appears to be only one more\n"
 	.string "item on the ground.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_253D3E:: @ 8253D3E
-	.string "You’re strong, so you’ve earned\n"
+	.string "You're strong, so you've earned\n"
 	.string "a hint!\p"
 	.string "There appear to be no more\n"
 	.string "items on the ground.$"
@@ -597,12 +597,12 @@ BattleFrontier_BattlePyramidEmptySquare_Text_25440B:: @ 825440B
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25445A:: @ 825445A
 	.string "You were really awesome!\p"
-	.string "But there’s still one tough\n"
+	.string "But there's still one tough\n"
 	.string "TRAINER other than me!$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2544A6:: @ 82544A6
 	.string "You were really awesome!\p"
-	.string "There’s no one left that\n"
+	.string "There's no one left that\n"
 	.string "can beat you!$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2544E6:: @ 82544E6
@@ -637,8 +637,8 @@ BattleFrontier_BattlePyramidEmptySquare_Text_25467C:: @ 825467C
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2546CC:: @ 82546CC
 	.string "This is so upsetting!\p"
-	.string "But there’s one TRAINER left!\n"
-	.string "I’m sure you will be humbled!$"
+	.string "But there's one TRAINER left!\n"
+	.string "I'm sure you will be humbled!$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25471E:: @ 825471E
 	.string "This is so upsetting!\p"
@@ -646,43 +646,43 @@ BattleFrontier_BattlePyramidEmptySquare_Text_25471E:: @ 825471E
 	.string "who can engage you!$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_254767:: @ 8254767
-	.string "That’s pretty impressive!\p"
+	.string "That's pretty impressive!\p"
 	.string "But there are seven more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2547C9:: @ 82547C9
-	.string "That’s pretty impressive!\p"
+	.string "That's pretty impressive!\p"
 	.string "But there are six more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_254829:: @ 8254829
-	.string "That’s pretty impressive!\p"
+	.string "That's pretty impressive!\p"
 	.string "But there are five more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25488A:: @ 825488A
-	.string "That’s pretty impressive!\p"
+	.string "That's pretty impressive!\p"
 	.string "But there are four more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2548EB:: @ 82548EB
-	.string "That’s pretty impressive!\p"
+	.string "That's pretty impressive!\p"
 	.string "But there are three more TRAINERS\n"
 	.string "on this floor. Can you beat them all?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_25494D:: @ 825494D
-	.string "That’s pretty impressive!\p"
+	.string "That's pretty impressive!\p"
 	.string "But there are two more TRAINERS\n"
 	.string "on this floor. Can you beat them both?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_2549AE:: @ 82549AE
-	.string "That’s pretty impressive!\p"
-	.string "But there’s still one more TRAINER\n"
+	.string "That's pretty impressive!\p"
+	.string "But there's still one more TRAINER\n"
 	.string "on this floor. Can you prevail?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_254A0B:: @ 8254A0B
-	.string "That’s pretty impressive!\p"
-	.string "You’ve gone through all the TRAINERS\n"
+	.string "That's pretty impressive!\p"
+	.string "You've gone through all the TRAINERS\n"
 	.string "on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_254A59:: @ 8254A59
@@ -714,7 +714,7 @@ BattleFrontier_BattlePyramidEmptySquare_Text_254BF1:: @ 8254BF1
 	.string "with the one TRAINER left on this floor.$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_254C3E:: @ 8254C3E
-	.string "There isn’t a single person left who\n"
+	.string "There isn't a single person left who\n"
 	.string "can defeat you now…$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_254C77:: @ 8254C77
@@ -779,5 +779,5 @@ BattleFrontier_BattlePyramidEmptySquare_Text_25502F:: @ 825502F
 	.string "the last remaining TRAINER?$"
 
 BattleFrontier_BattlePyramidEmptySquare_Text_255068:: @ 8255068
-	.string "There aren’t any TRAINERS left that\n"
+	.string "There aren't any TRAINERS left that\n"
 	.string "can take you on now…$"

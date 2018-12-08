@@ -768,8 +768,8 @@ Route110_Movement_1EFB57: @ 81EFB57
 	step_end
 
 Route110_Text_1EFB5D: @ 81EFB5D
-	.string "TEAM AQUA’s activities…\n"
-	.string "We can’t talk about them yet.$"
+	.string "TEAM AQUA's activities…\n"
+	.string "We can't talk about them yet.$"
 
 Route110_Text_1EFB93: @ 81EFB93
 	.string "I want to get going to SLATEPORT and\n"
@@ -777,11 +777,11 @@ Route110_Text_1EFB93: @ 81EFB93
 
 Route110_Text_1EFBCA: @ 81EFBCA
 	.string "This is my first job after joining\n"
-	.string "TEAM AQUA. It’s a little scary.$"
+	.string "TEAM AQUA. It's a little scary.$"
 
 Route110_Text_1EFC0D: @ 81EFC0D
-	.string "TEAM AQUA’s actions should bring\n"
-	.string "smiles to people’s faces!$"
+	.string "TEAM AQUA's actions should bring\n"
+	.string "smiles to people's faces!$"
 
 Route110_Text_1EFC48: @ 81EFC48
 	.string "MAY: Hi, {PLAYER}{KUN}, long time no see!\p"
@@ -792,51 +792,51 @@ Route110_Text_1EFC48: @ 81EFC48
 
 Route110_Text_1EFCCB: @ 81EFCCB
 	.string "Yikes!\n"
-	.string "You’re better than I expected!$"
+	.string "You're better than I expected!$"
 
 Route110_Text_1EFCF1: @ 81EFCF1
-	.string "MAY: {PLAYER}{KUN}, you’ve been busy\n"
-	.string "training, too, haven’t you?\p"
+	.string "MAY: {PLAYER}{KUN}, you've been busy\n"
+	.string "training, too, haven't you?\p"
 	.string "I think you deserve a reward!\n"
 	.string "This is from me!$"
 
 Route110_Text_1EFD58: @ 81EFD58
-	.string "MAY: That’s an ITEMFINDER.\p"
-	.string "Try it out. If there is an item that’s\n"
+	.string "MAY: That's an ITEMFINDER.\p"
+	.string "Try it out. If there is an item that's\n"
 	.string "not visible, it emits a sound.\p"
-	.string "Okay, {PLAYER}{KUN}, let’s meet again!\p"
-	.string "I know it’s a little silly coming from\n"
+	.string "Okay, {PLAYER}{KUN}, let's meet again!\p"
+	.string "I know it's a little silly coming from\n"
 	.string "me, but I think you should train a lot\l"
 	.string "harder for the next time.$"
 
 Route110_Text_1EFE3F: @ 81EFE3F
 	.string "BRENDAN: Hey, {PLAYER}.\n"
 	.string "So this is where you were.\l"
-	.string "How’s it going?\p"
+	.string "How's it going?\p"
 	.string "Have you been raising your POKéMON?\n"
-	.string "I’ll check for you.$"
+	.string "I'll check for you.$"
 
 Route110_Text_1EFEB4: @ 81EFEB4
 	.string "Hmm…\n"
-	.string "You’re pretty good.$"
+	.string "You're pretty good.$"
 
 Route110_Text_1EFECD: @ 81EFECD
-	.string "BRENDAN: {PLAYER}, you’ve trained\n"
+	.string "BRENDAN: {PLAYER}, you've trained\n"
 	.string "without me noticing…\p"
 	.string "Good enough!\n"
 	.string "Here, take this.$"
 
 Route110_Text_1EFF1C: @ 81EFF1C
-	.string "BRENDAN: That’s an ITEMFINDER.\p"
+	.string "BRENDAN: That's an ITEMFINDER.\p"
 	.string "Use it to root around for items that\n"
-	.string "aren’t visible.\p"
+	.string "aren't visible.\p"
 	.string "If it senses something, it emits\n"
 	.string "a sound.\p"
-	.string "Anyway, I’m off to look for new\n"
+	.string "Anyway, I'm off to look for new\n"
 	.string "POKéMON.$"
 
 Route110_Text_1EFFC3: @ 81EFFC3
-	.string "Wouldn’t it be great to ride a BIKE\n"
+	.string "Wouldn't it be great to ride a BIKE\n"
 	.string "at full speed on CYCLING ROAD?$"
 
 Route110_Text_1F0006: @ 81F0006
@@ -846,7 +846,7 @@ Route110_Text_1F0006: @ 81F0006
 
 Route110_Text_1F006A: @ 81F006A
 	.string "Oh, hey, you got that BIKE from RYDEL!\p"
-	.string "Oh, it’s glaringly obvious.\n"
+	.string "Oh, it's glaringly obvious.\n"
 	.string "It says right on your bike…\p"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
@@ -857,9 +857,9 @@ Route110_Text_1F006A: @ 81F006A
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL…\n"
-	.string "That name’s everywhere.\p"
+	.string "That name's everywhere.\p"
 	.string "You should ride it around all over\n"
-	.string "the place--it’s good advertising!$"
+	.string "the place--it's good advertising!$"
 
 Route110_Text_1F0261: @ 81F0261
 	.string "The two roads, one above, one below…\p"
@@ -867,7 +867,7 @@ Route110_Text_1F0261: @ 81F0261
 	.string "Perhaps that is right and fair.$"
 
 Route110_Text_1F02CA: @ 81F02CA
-	.string "I don’t have a BIKE, so I’ll take\n"
+	.string "I don't have a BIKE, so I'll take\n"
 	.string "a leisurely walk on the low road.$"
 
 Route110_Text_1F030E: @ 81F030E
@@ -892,7 +892,7 @@ Route110_Text_1F0431: @ 81F0431
 	.string "Bravo! Splendid showing!\p"
 	.string "Your love of cycling comes from deep\n"
 	.string "within your heart.\l"
-	.string "You’ve shaken me to my very soul!$"
+	.string "You've shaken me to my very soul!$"
 
 Route110_Text_1F04A4: @ 81F04A4
 	.string "Your technique is remarkable.\p"
@@ -902,7 +902,7 @@ Route110_Text_1F04A4: @ 81F04A4
 Route110_Text_1F0500: @ 81F0500
 	.string "I would consider you a work in\n"
 	.string "progress.\p"
-	.string "Still, I hope you don’t forget the\n"
+	.string "Still, I hope you don't forget the\n"
 	.string "sheer pleasure of cycling.$"
 
 Route110_Text_1F0567: @ 81F0567
@@ -913,7 +913,7 @@ Route110_Text_1F0567: @ 81F0567
 
 Route110_Text_1F05CE: @ 81F05CE
 	.string "…I am aghast…\p"
-	.string "You’re perhaps not cut out for this\n"
+	.string "You're perhaps not cut out for this\n"
 	.string "unfortunate cycling business.\p"
 	.string "You ought to give serious thought to\n"
 	.string "returning that BIKE to RYDEL.$"
@@ -935,7 +935,7 @@ Route110_Text_1F0755: @ 81F0755
 	.string "MACH BIKES are rated for their number\l"
 	.string "of collisions and their total times.\p"
 	.string "ACRO BIKES do not qualify for rating.\n"
-	.string "They are easy to turn, so it’s not fair.$"
+	.string "They are easy to turn, so it's not fair.$"
 
 Route110_Text_1F0812: @ 81F0812
 	.string "ROUTE 110\n"
@@ -996,12 +996,12 @@ Route110_Text_1F0AB5: @ 81F0AB5
 Route110_Text_1F0AFF: @ 81F0AFF
 	.string "Oh, I see!\n"
 	.string "You two are running separately.\l"
-	.string "Well, that’s fine.\p"
+	.string "Well, that's fine.\p"
 	.string "Oh, yes, I heard that your POKéNAV\n"
 	.string "had the MATCH CALL system installed.\p"
 	.string "Well, then, I should register you in\n"
 	.string "my POKéNAV as well.\p"
-	.string "That way, even when we’re apart,\n"
+	.string "That way, even when we're apart,\n"
 	.string "I can rate your POKéDEX anytime.\p"
 	.string "… … … … … …$"
 

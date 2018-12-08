@@ -48,13 +48,13 @@ LavaridgeTown_HerbShop_Text_1FE53E: @ 81FE53E
 	.string "effective and inexpensive medicine!$"
 
 LavaridgeTown_HerbShop_Text_1FE584: @ 81FE584
-	.string "You’ve come to look at herbal medicine\n"
+	.string "You've come to look at herbal medicine\n"
 	.string "in LAVARIDGE?\p"
-	.string "That’s rather commendable.\p"
+	.string "That's rather commendable.\p"
 	.string "I like you! Take this!$"
 
 LavaridgeTown_HerbShop_Text_1FE5EB: @ 81FE5EB
-	.string "That CHARCOAL I gave you, it’s used\n"
+	.string "That CHARCOAL I gave you, it's used\n"
 	.string "for making herbal medicine.\p"
 	.string "It also does wonders when held by\n"
 	.string "a POKéMON.\p"

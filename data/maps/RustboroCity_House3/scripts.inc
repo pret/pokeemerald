@@ -22,14 +22,14 @@ RustboroCity_House3_EventScript_2161A3:: @ 82161A3
 RustboroCity_House3_Text_2161B6: @ 82161B6
 	.string "For my own POKéMON, I give them\n"
 	.string "perfectly suited nicknames!\p"
-	.string "It’s my expression of, uh…\n"
-	.string "originality, yes, that’s it!$"
+	.string "It's my expression of, uh…\n"
+	.string "originality, yes, that's it!$"
 
 RustboroCity_House3_Text_21622A: @ 821622A
 	.string "But giving the name PEKACHU to\n"
 	.string "a PIKACHU? It seems pointless.\p"
 	.string "I suppose it is good to use a name\n"
-	.string "that’s easy to understand, but…$"
+	.string "that's easy to understand, but…$"
 
 RustboroCity_House3_Text_2162AB: @ 82162AB
 	.string "PEKACHU: Peka!$"

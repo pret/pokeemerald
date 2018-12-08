@@ -325,7 +325,7 @@ BattleFrontier_BattleDomePreBattleRoom_Text_24B748: @ 824B748
 
 BattleFrontier_BattleDomePreBattleRoom_Text_24B760: @ 824B760
 	.string "Thank you for competing!\p"
-	.string "I’ll restore your POKéMON to\n"
+	.string "I'll restore your POKéMON to\n"
 	.string "full health.$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_24B7A3: @ 824B7A3
@@ -358,11 +358,11 @@ BattleFrontier_BattleDomePreBattleRoom_Text_24B8E6: @ 824B8E6
 BattleFrontier_BattleDomePreBattleRoom_Text_24B94E: @ 824B94E
 	.string "Congratulations for advancing\n"
 	.string "to the final match.\p"
-	.string "You’re one win from the championship.\n"
+	.string "You're one win from the championship.\n"
 	.string "Are you ready?$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5: @ 824B9B5
-	.string "{PLAYER}’s next opponent\n"
+	.string "{PLAYER}'s next opponent\n"
 	.string "is this TRAINER.$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_24B9D9: @ 824B9D9

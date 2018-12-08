@@ -13,15 +13,15 @@ LilycoveCity_Harbor_Text_2A68D2: @ 82A68D2
 LilycoveCity_Harbor_Text_2A68FC: @ 82A68FC
 	.string "Aye, mate, are you the one who brought\n"
 	.string "that mighty odd PASS?\p"
-	.string "I’ll tell you, you’re trying to reach a\n"
+	.string "I'll tell you, you're trying to reach a\n"
 	.string "tiny spit of an island far in the south.\p"
-	.string "There’s no telling what we’ll encounter\n"
+	.string "There's no telling what we'll encounter\n"
 	.string "once we reach there, aye.\l"
 	.string "That shivers my timbers!\p"
 	.string "All aboard!$"
 
 SouthernIsland_Exterior_Text_2A69F1: @ 82A69F1
-	.string "Aye, mate, there’s nothing here to\n"
+	.string "Aye, mate, there's nothing here to\n"
 	.string "see or do on this forgettable island.\p"
 	.string "What say we sail back to LILYCOVE?$"
 

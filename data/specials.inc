@@ -324,7 +324,7 @@ gSpecials:: @ 81DBA64
 	def_special StartGroudonKyogreBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
-	def_special sub_80B16D8
+	def_special SetUpTrainerMovement
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
 	def_special sub_80AC81C
@@ -531,7 +531,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B9A0
 	def_special sub_81B9918
 	def_special sub_80722E0
-	def_special sub_80B45D0
+	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special sub_8139C10
 	def_special sub_80B3BC4

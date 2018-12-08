@@ -19,7 +19,7 @@ extern u8 gApproachingTrainerId;
 bool8 CheckForTrainersWantingBattle(void);
 void sub_80B4578(struct EventObject *var);
 void EndTrainerApproach(void);
-void sub_80B45D0(void);
+void TryPrepareSecondApproachingTrainer(void);
 u8 FldEff_ExclamationMarkIcon(void);
 u8 FldEff_QuestionMarkIcon(void);
 u8 FldEff_HeartIcon(void);

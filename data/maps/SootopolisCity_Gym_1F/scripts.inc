@@ -190,22 +190,22 @@ SootopolisCity_Gym_1F_EventScript_225089:: @ 8225089
 	end
 
 SootopolisCity_Gym_1F_Text_225093: @ 8225093
-	.string "Yo! How’s it going, CHAMPION-\n"
+	.string "Yo! How's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
-	.string "SOOTOPOLIS’s GYM LEADER JUAN is\n"
+	.string "SOOTOPOLIS's GYM LEADER JUAN is\n"
 	.string "a master of WATER-type POKéMON.\p"
 	.string "And, to get to JUAN, an icy floor\n"
 	.string "will hamper your progress…\p"
-	.string "Listen, I’m sorry, but that’s all the\n"
+	.string "Listen, I'm sorry, but that's all the\n"
 	.string "advice that I have for you.\p"
 	.string "The rest of the way, you have to\n"
 	.string "go for it yourself!$"
 
 SootopolisCity_Gym_1F_Text_2251AF: @ 82251AF
-	.string "Yow! You’ve beaten even JUAN, who\n"
+	.string "Yow! You've beaten even JUAN, who\n"
 	.string "was supposedly the best in all HOENN!\p"
 	.string "Okay! Check out your TRAINER CARD.\p"
-	.string "If you’ve gotten all the BADGES, you’re\n"
+	.string "If you've gotten all the BADGES, you're\n"
 	.string "set for the POKéMON LEAGUE challenge!$"
 
 SootopolisCity_Gym_1F_Text_225268: @ 8225268
@@ -289,7 +289,7 @@ SootopolisCity_Gym_1F_Text_2258FA: @ 82258FA
 
 SootopolisCity_Gym_1F_Text_225916: @ 8225916
 	.string "SOOTOPOLIS CITY POKéMON GYM\p"
-	.string "JUAN’S CERTIFIED TRAINERS:\n"
+	.string "JUAN'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 SootopolisCity_Gym_1F_Text_225950: @ 8225950

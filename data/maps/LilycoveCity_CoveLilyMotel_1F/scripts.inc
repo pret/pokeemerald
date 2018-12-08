@@ -79,7 +79,7 @@ LilycoveCity_CoveLilyMotel_1F_Text_218264: @ 8218264
 	.string "Hm, so they doubled the guests by\n"
 	.string "using POKéMON as attractions?\p"
 	.string "Hm, well, maybe I should make a cute\n"
-	.string "POKéMON our inn’s mascot.\p"
+	.string "POKéMON our inn's mascot.\p"
 	.string "I wonder if that will attract more\n"
 	.string "guests to stay with us?$"
 
@@ -91,12 +91,12 @@ LilycoveCity_CoveLilyMotel_1F_Text_21831E: @ 821831E
 
 LilycoveCity_CoveLilyMotel_1F_Text_21839B: @ 821839B
 	.string "Hey, down in front!\n"
-	.string "I can’t see the TV!$"
+	.string "I can't see the TV!$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_2183C3: @ 82183C3
-	.string "Amazing! You’re telling me a POKéMON\n"
-	.string "found someone’s lost item?\p"
-	.string "That’s something. If we had some smart\n"
+	.string "Amazing! You're telling me a POKéMON\n"
+	.string "found someone's lost item?\p"
+	.string "That's something. If we had some smart\n"
 	.string "POKéMON like that…\p"
 	.string "We could recover anything that our\n"
 	.string "guests mislaid…$"
@@ -114,7 +114,7 @@ LilycoveCity_CoveLilyMotel_1F_Text_218470: @ 8218470
 LilycoveCity_CoveLilyMotel_1F_Text_218544: @ 8218544
 	.string "Amazing! A house-sitting POKéMON\n"
 	.string "caught a burglar?\p"
-	.string "That’s something. If we had a tough\n"
+	.string "That's something. If we had a tough\n"
 	.string "POKéMON as a security guard…\p"
 	.string "We would be able to provide our guests\n"
 	.string "with greater safety.$"
@@ -126,6 +126,6 @@ LilycoveCity_CoveLilyMotel_1F_Text_2185F4: @ 82185F4
 	.string "a little while ago.\p"
 	.string "They booked in as GAME FREAK,\n"
 	.string "so I guess they must make games.\p"
-	.string "Uh-oh, I’d better get working on\n"
+	.string "Uh-oh, I'd better get working on\n"
 	.string "their dinner!$"
 

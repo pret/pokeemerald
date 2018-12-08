@@ -205,9 +205,9 @@ Route114_Text_1F28B3: @ 81F28B3
 	.string "RUSTBORO CITY THROUGH HERE$"
 
 Route114_Text_1F28DB: @ 81F28DB
-	.string "FOSSIL MANIAC’S HOUSE\n"
+	.string "FOSSIL MANIAC'S HOUSE\n"
 	.string "“Fossils gratefully accepted!”$"
 
 Route114_Text_1F2910: @ 81F2910
-	.string "LANETTE’S HOUSE$"
+	.string "LANETTE'S HOUSE$"
 

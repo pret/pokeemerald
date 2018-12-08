@@ -91,10 +91,10 @@ AquaHideout_B2F_Text_233EDD: @ 8233EDD
 	.string "Got here already, did you?\n"
 	.string "We underestimated you!\p"
 	.string "But this is it!\p"
-	.string "I’m a cut above the GRUNTS you’ve seen\n"
+	.string "I'm a cut above the GRUNTS you've seen\n"
 	.string "so far.\p"
-	.string "I’m not stalling for time.\n"
-	.string "I’m going to pulverize you!$"
+	.string "I'm not stalling for time.\n"
+	.string "I'm going to pulverize you!$"
 
 AquaHideout_B2F_Text_233F8D: @ 8233F8D
 	.string "Hehehe…\n"
@@ -109,7 +109,7 @@ AquaHideout_B2F_Text_233FF2: @ 8233FF2
 	.string "Hehehe!\p"
 	.string "Our BOSS has already gone on his way to\n"
 	.string "some cave under the sea!\p"
-	.string "If you’re going to give chase, you’d\n"
+	.string "If you're going to give chase, you'd\n"
 	.string "better search the big, wide sea beyond\l"
 	.string "LILYCOVE.\p"
 	.string "But will you find it then?\n"
@@ -128,19 +128,19 @@ AquaHideout_B2F_Text_234112: @ 8234112
 	.string "Is this good enough?$"
 
 AquaHideout_B2F_Text_23412D: @ 823412D
-	.string "Warp panels, the HIDEOUT’s pride\n"
+	.string "Warp panels, the HIDEOUT's pride\n"
 	.string "and joy!\p"
-	.string "You’re clueless about where you are,\n"
-	.string "aren’t you?\p"
+	.string "You're clueless about where you are,\n"
+	.string "aren't you?\p"
 	.string "Fluster and tire out the enemy, then\n"
-	.string "lower the boom! That’s our plan!$"
+	.string "lower the boom! That's our plan!$"
 
 AquaHideout_B2F_Text_2341CE: @ 82341CE
-	.string "What’s wrong with you?\n"
-	.string "You’re not tired at all!$"
+	.string "What's wrong with you?\n"
+	.string "You're not tired at all!$"
 
 AquaHideout_B2F_Text_2341FE: @ 82341FE
-	.string "That reminds me… I can’t remember\n"
+	.string "That reminds me… I can't remember\n"
 	.string "where I put the MASTER BALL.\p"
 	.string "If I fail to guard it, our BOSS will\n"
 	.string "chew me out…$"
@@ -155,6 +155,6 @@ AquaHideout_B2F_Text_2342CC: @ 82342CC
 	.string "the warp panels…$"
 
 AquaHideout_B2F_Text_2342FF: @ 82342FF
-	.string "I’ll have to learn about how I can\n"
+	.string "I'll have to learn about how I can\n"
 	.string "battle more effectively…$"
 
