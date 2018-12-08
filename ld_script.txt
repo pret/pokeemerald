@@ -158,7 +158,7 @@ SECTIONS {
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/fire.o(.text);
         asm/electric.o(.text);
         asm/ice.o(.text);
         src/fight.o(.text);
