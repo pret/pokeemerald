@@ -168,7 +168,6 @@ SECTIONS {
         src/bug.o(.text);
         src/rock.o(.text);
         src/ghost.o(.text);
-        asm/ghost.o(.text);
         src/dragon.o(.text);
         asm/dark.o(.text);
         src/ground.o(.text);
