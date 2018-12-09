@@ -1083,9 +1083,9 @@ static void sub_80B028C(u8 a1)
     u16 color[1];
 
     if (!a1)
-        color[0] = 0x1F;
+        color[0] = RGB_RED;
     else
-        color[0] = 0x7C00;
+        color[0] = RGB_BLUE;
 
     for (i = 0; i < 16; i++)
     {
@@ -1113,7 +1113,7 @@ static bool8 sub_80B02C8(u16 a1)
         }
     }
 
-    SetGpuReg(REG_OFFSET_BLDALPHA, (hi << 8) | lo);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(lo, hi));
 
     if (lo == 0 && hi == 0x10)
         return TRUE;
@@ -1135,9 +1135,9 @@ static void sub_80B0318(u8 taskId)
         data[10] = REG_WINOUT;
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
         SetGpuRegBits(REG_OFFSET_BLDCNT, gUnknown_82EC7CC[0]);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 1804);
-        SetGpuReg(REG_OFFSET_WININ, 63);
-        SetGpuReg(REG_OFFSET_WINOUT, 30);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 7));
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
         sub_8199C30(0, 0, 0, 0x1E, 0x14, 0xF);
         schedule_bg_copy_tilemap_to_vram(0);
         SetFlash2ScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], data[2], data[3], 1);

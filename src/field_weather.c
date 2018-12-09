@@ -75,7 +75,7 @@ IWRAM_DATA static const u8 *sPaletteGammaTypes;
 // CONST
 extern const u16 gUnknown_0854014C[][4096];
 
-// This is a pointer to gWeatherPtr. All code in this file accesses gWeather directly,
+// This is a pointer to gWeather. All code in this file accesses gWeather directly,
 // while code in other field weather files accesses gWeather through this pointer.
 // This is likely the result of compiler optimization, since using the pointer in
 // this file produces the same result as accessing gWeather directly.
@@ -266,11 +266,11 @@ static u8 None_Finish(void)
 static void BuildGammaShiftTables(void)
 {
     u16 v0;
-    u8 (*v1)[32];
+    u8 (*gammaTable)[32];
     u16 v2;
     u16 v4;
     u16 v5;
-    u16 v6;
+    u16 gammaIndex;
     u16 v9;
     u32 v10;
     u16 v11;
@@ -280,9 +280,9 @@ static void BuildGammaShiftTables(void)
     for (v0 = 0; v0 <= 1; v0++)
     {
         if (v0 == 0)
-            v1 = gWeatherPtr->gammaShifts;
+            gammaTable = gWeatherPtr->gammaShifts;
         else
-            v1 = gWeatherPtr->altGammaShifts;
+            gammaTable = gWeatherPtr->altGammaShifts;
 
         for (v2 = 0; v2 < 32; v2++)
         {
@@ -291,10 +291,10 @@ static void BuildGammaShiftTables(void)
                 v5 = (v2 << 8) / 16;
             else
                 v5 = 0;
-            for (v6 = 0; v6 <= 2; v6++)
+            for (gammaIndex = 0; gammaIndex <= 2; gammaIndex++)
             {
                 v4 = (v4 - v5);
-                v1[v6][v2] = v4 >> 8;
+                gammaTable[gammaIndex][v2] = v4 >> 8;
             }
             v9 = v4;
             v10 = 0x1f00 - v4;
@@ -305,25 +305,25 @@ static void BuildGammaShiftTables(void)
             v11 = v10 >> 4;
             if (v2 < 12)
             {
-                for (; v6 < 19; v6++)
+                for (; gammaIndex < 19; gammaIndex++)
                 {
                     v4 += v11;
                     dunno = v4 - v9;
                     if (dunno > 0)
                         v4 -= (dunno + ((u16)dunno >> 15)) >> 1;
-                    v1[v6][v2] = v4 >> 8;
-                    if (v1[v6][v2] > 0x1f)
-                        v1[v6][v2] = 0x1f;
+                    gammaTable[gammaIndex][v2] = v4 >> 8;
+                    if (gammaTable[gammaIndex][v2] > 0x1f)
+                        gammaTable[gammaIndex][v2] = 0x1f;
                 }
             }
             else
             {
-                for (; v6 < 19; v6++)
+                for (; gammaIndex < 19; gammaIndex++)
                 {
                     v4 += v11;
-                    v1[v6][v2] = v4 >> 8;
-                    if (v1[v6][v2] > 0x1f)
-                        v1[v6][v2] = 0x1f;
+                    gammaTable[gammaIndex][v2] = v4 >> 8;
+                    if (gammaTable[gammaIndex][v2] > 0x1f)
+                        gammaTable[gammaIndex][v2] = 0x1f;
                 }
             }
         }
@@ -734,19 +734,19 @@ void FadeScreen(u8 mode, s8 delay)
     switch (mode)
     {
     case FADE_FROM_BLACK:
-        fadeColor = 0;
+        fadeColor = RGB_BLACK;
         fadeOut = FALSE;
         break;
     case FADE_FROM_WHITE:
-        fadeColor = 0xFFFF;
+        fadeColor = RGB_WHITEALPHA;
         fadeOut = FALSE;
         break;
     case FADE_TO_BLACK:
-        fadeColor = 0;
+        fadeColor = RGB_BLACK;
         fadeOut = TRUE;
         break;
     case FADE_TO_WHITE:
-        fadeColor = 0xFFFF;
+        fadeColor = RGB_WHITEALPHA;
         fadeOut = TRUE;
         break;
     default:

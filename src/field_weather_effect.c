@@ -182,7 +182,7 @@ void CreateCloudSprites(void)
     {
         u8 spriteId = CreateSprite(&sCloudSpriteTemplate, 0, 0, 0xFF);
 
-        if (spriteId != 64)
+        if (spriteId != MAX_SPRITES)
         {
             struct Sprite *sprite;
 
@@ -794,7 +794,7 @@ bool8 CreateRainSprite(void)
     spriteNum = gWeatherPtr->rainSpriteCount;
     spriteId = CreateSpriteAtEnd(&sRainSpriteTemplate,
       sRainSpriteCoords[spriteNum].x, sRainSpriteCoords[spriteNum].y, 78);
-    if (spriteId != 64)
+    if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[5] = 0;
         gSprites[spriteId].data[1] = spriteNum * 145;
@@ -953,7 +953,7 @@ bool8 CreateSnowflakeSprite(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSnowflakeSpriteTemplate, 0, 0, 78);
 
-    if (spriteId == 64)
+    if (spriteId == MAX_SPRITES)
         return FALSE;
     gSprites[spriteId].data[4] = gWeatherPtr->snowflakeSpriteCount;
     sub_807EC40(&gSprites[spriteId]);
@@ -1015,7 +1015,7 @@ void sub_807ED48(struct Sprite *sprite)
 
     r3 = (sprite->pos1.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX) & 0x1FF;
     if (r3 & 0x100)
-        r3 = -0x100 | r3;  // hmm... what is this?
+        r3 |= -0x100;  // hmm... what is this?
     if (r3 < -3)
         sprite->pos1.x = 242 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
     else if (r3 > 242)
@@ -2034,7 +2034,7 @@ void CreateSandstormSprites_2(void)
     {
         for (i = 0; i < 5; i++)
         {
-            u8 spriteId = CreateSpriteAtEnd(&sSandstormSpriteTemplate, i * 48 + 0x18, 0xD0, 1);
+            u8 spriteId = CreateSpriteAtEnd(&sSandstormSpriteTemplate, i * 48 + 24, 208, 1);
 
             if (spriteId != MAX_SPRITES)
             {
