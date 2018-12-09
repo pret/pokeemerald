@@ -7,7 +7,9 @@
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "item_menu.h"
+#include "mail.h"
 #include "main.h"
 #include "menu.h"
 #include "mon_markings.h"
@@ -92,6 +94,8 @@ extern bool8 sub_80F9C1C(void);
 void StorageSystemCreatePrimaryMenu(u8 whichMenu, s16 *windowIdPtr);
 void sub_80C7D74(u8 boxOption);
 u8 sub_80CAEA0(void);
+u8 sub_80CF9EC(void);
+u8 sub_80CDC2C(void);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
 void SetCurrentBox(u8 boxId);
 void sub_80CC32C(u8 boxId);
@@ -108,35 +112,126 @@ void sub_80CAA14(void);
 void sub_80CE790(void);
 void sub_80CE8E4(void);
 void sub_80C9F6C(void);
+void sub_80CA888(void);
 void sub_80CA044(void);
 void sub_80CA0C8(void);
+void sub_80CDC18(void);
 void sub_80CD36C(void);
 void sub_80CD3EC(void);
 void sub_80CAC1C(void);
 void sub_80C9FEC(void);
 void sub_80CAEAC(void);
 void sub_80D0C60(void);
+void sub_80CFEA8(void);
 void sub_80CDC0C(void);
 void sub_80CAF04(void);
 void sub_80CA0D8(void);
-void sub_80CADC4(void);
+void sub_80CFFD0(void);
+void sub_80CE250(void);
+void sub_80CE3A0(void);
+void sub_80CE2D8(void);
+void sub_80CA230(void);
+void sub_80CC064(void);
+void sub_80CE324(void);
+void ClearBottomWindow(void);
 void sub_80CA704(void);
+void sub_80D013C(void);
+void sub_80CE00C(void);
+void sub_80D1194(void);
+void sub_80CA4FC(void);
+void sub_80CADD8(void);
+void sub_80D1818(void);
+void sub_80D17B4(void);
+void sub_80CE760(void);
+void sub_80CFECC(void);
+void sub_80CA9EC(void);
+void sub_80CAB20(void);
+void sub_80CE22C(void);
+void sub_80CB950(void);
+void sub_80CA9C0(void);
+void BoxSetMosaic(void);
 void sub_80C7CF4(struct Sprite *sprite);
 bool8 sub_80CA0A4(void);
+bool8 sub_80CC0A0(void);
+bool8 sub_80CE2A8(void);
 bool8 sub_80D0164(void);
 bool8 sub_80CC35C(void);
+bool8 sub_80D01E4(void);
+bool8 sub_80CAB4C(void);
+bool8 sub_80D184C(void);
+bool8 sub_80D18E4(void);
+bool8 sub_80CAB70(void);
+bool8 sub_80D1218(void);
+bool8 sub_80CB9BC(void);
+bool8 ScrollToBox(void);
+bool8 sub_80CD554(void);
+bool8 sub_80CA8C8(void);
+bool8 sub_80D127C(void);
+bool8 sub_80CA2B8(void);
+bool8 DoWallpaperGfxChange(void);
+bool8 sub_80CDCAC(void);
+bool8 sub_80D00A8(void);
+bool8 CanMoveMon(void);
+bool8 CanShifMon(void);
+bool8 IsCursorOnCloseBox(void);
+bool8 IsMonBeingMoved(void);
+bool8 sub_80CE19C(u8 arg0);
 void sub_80C7FA8(u8 taskId);
+void sub_80C8BEC(u8 taskId);
 void sub_80C9E50(u8 taskId);
 void sub_80C81AC(u8 taskId);
-void box_related_2(u8 taskId);
+void sub_80C9D1C(u8 taskId);
+void Cb_HandleBoxOptions(u8 taskId);
+void sub_80C8864(u8 taskId);
+void sub_80C9BE8(u8 taskId);
+void sub_80C87E8(u8 taskId);
+void sub_80C8D78(u8 taskId);
+void sub_80C8B90(u8 taskId);
+void sub_80C91DC(u8 taskId);
+void Cb_SwitchSelectedItem(u8 taskId);
+void sub_80C9128(u8 taskId);
+void Cb_WithdrawMon(u8 taskId);
+void c3_0808DC50(u8 taskId);
+void sub_80C87A8(u8 taskId);
+void sub_80C9498(u8 taskId);
+void sub_80C9B88(u8 taskId);
+void Cb_ItemToBag(u8 taskId);
+void sub_80C9128(u8 taskId);
+void sub_80C90A4(u8 taskId);
+void sub_80C9B28(u8 taskId);
+void Cb_ReleaseMon(u8 taskId);
 void task_pokemon_box_related(u8 taskId);
+void sub_80C972C_2(u8 taskId);
+void sub_80C82AC(u8 taskId);
+void Cb_JumpBox(u8 taskId);
+void Cb_HandleWallpapers(u8 taskId);
+void Cb_NameBox(u8 taskId);
+void Cb_PrintCantStoreMail(u8 taskId);
+void sub_80C9670(u8 taskId);
 void sub_80D2A90(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u32 arg2);
 void sub_80D259C(u8 arg0);
+void sub_80CC464(u8 arg0);
+void sub_80CFE54(u8 arg0);
+void sub_80CC0D4(u8 arg0);
+void sub_80CDC38(u8 arg0);
+void sub_80CE9A8(u8 markings);
+void sub_80CAD9C(u8 arg0);
+void sub_80CDBF8(u8 arg0);
 void sub_80D01D0(u8 arg0);
+void sub_80CD1A8(bool8 arg0);
 void sub_80D2644(u8 arg0, u16 arg1, const u16 *arg2, u16 arg3, u16 arg4);
 void sub_80D2770(u8 arg0, u16 arg1, u16 arg2);
-void PrintStorageActionText(u8 arg0);
+void PrintStorageActionText(u8 id);
+s16 sub_80D00AC(void);
+s8 sub_80CE580(void);
+u8 GetBoxCursorPosition(void);
+void sub_80D0E90(bool8 inParty, u8 boxPosition);
+void sub_80D1080(bool8 inParty, u8 boxPosition);
+void sub_80D1114(bool8 inParty, u8 boxPosition);
+void sub_80D0FAC(bool8 inParty, u8 boxPosition);
 struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
+void SetWallpaperForCurrentBox(u8 wallpaperId);
+void sub_80CAE0C(u8 arg0);
 
 // const rom data
 const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -340,37 +435,37 @@ const struct SpriteTemplate gUnknown_08572754 =
 
 const struct StorageAction gPCStorageActionTexts[] =
 {
-    {gText_ExitFromBox, 0},
-    {gText_WhatDoYouWantToDo, 0},
-    {gText_PleasePickATheme, 0},
-    {gText_PickTheWallpaper, 0},
-    {gText_PkmnIsSelected, 1},
-    {gText_JumpToWhichBox, 0},
-    {gText_DepositInWhichBox, 0},
-    {gText_PkmnWasDeposited, 1},
-    {gText_BoxIsFull2, 0},
-    {gText_ReleaseThisPokemon, 0},
-    {gText_PkmnWasReleased, 4},
-    {gText_ByeByePkmn, 6},
-    {gText_MarkYourPkmn, 0},
-    {gText_ThatsYourLastPkmn, 0},
-    {gText_YourPartysFull, 0},
-    {gText_YoureHoldingAPkmn, 0},
-    {gText_WhichOneWillYouTake, 0},
-    {gText_YouCantReleaseAnEgg, 0},
-    {gText_ContinueBoxOperations, 0},
-    {gText_PkmnCameBack, 1},
-    {gText_WasItWorriedAboutYou, 0},
-    {gText_FourEllipsesExclamation, 0},
-    {gText_PleaseRemoveTheMail, 0},
-    {gText_PkmnIsSelected, 7},
-    {gText_GiveToAPkmn, 0},
-    {gText_PlacedItemInBag, 7},
-    {gText_BagIsFull2, 0},
-    {gText_PutItemInBag, 0},
-    {gText_ItemIsNowHeld, 7},
-    {gText_ChangedToNewItem, 7},
-    {gText_MailCantBeStored, 0},
+    [PC_TEXT_EXIT_BOX] = {gText_ExitFromBox, 0},
+    [PC_TEXT_WHAT_YOU_DO] = {gText_WhatDoYouWantToDo, 0},
+    [PC_TEXT_PICK_A_THEME] = {gText_PleasePickATheme, 0},
+    [PC_TEXT_PICK_A_WALLPAPER] = {gText_PickTheWallpaper, 0},
+    [PC_TEXT_IS_SELECTED] = {gText_PkmnIsSelected, 1},
+    [PC_TEXT_JUMP_TO_WHICH_BOX] = {gText_JumpToWhichBox, 0},
+    [PC_TEXT_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox, 0},
+    [PC_TEXT_WAS_DEPOSITED] = {gText_PkmnWasDeposited, 1},
+    [PC_TEXT_BOX_IS_FULL] = {gText_BoxIsFull2, 0},
+    [PC_TEXT_RELEASE_POKE] = {gText_ReleaseThisPokemon, 0},
+    [PC_TEXT_WAS_RELEASED] = {gText_PkmnWasReleased, 4},
+    [PC_TEXT_BYE_BYE] = {gText_ByeByePkmn, 6},
+    [PC_TEXT_MARK_POKE] = {gText_MarkYourPkmn, 0},
+    [PC_TEXT_LAST_POKE] = {gText_ThatsYourLastPkmn, 0},
+    [PC_TEXT_PARTY_FULL] = {gText_YourPartysFull, 0},
+    [PC_TEXT_HOLDING_POKE] = {gText_YoureHoldingAPkmn, 0},
+    [PC_TEXT_WHICH_ONE_WILL_TAKE] = {gText_WhichOneWillYouTake, 0},
+    [PC_TEXT_CANT_RELEASE_EGG] = {gText_YouCantReleaseAnEgg, 0},
+    [PC_TEXT_CONTINUE_BOX] = {gText_ContinueBoxOperations, 0},
+    [PC_TEXT_CAME_BACK] = {gText_PkmnCameBack, 1},
+    [PC_TEXT_WORRIED] = {gText_WasItWorriedAboutYou, 0},
+    [PC_TEXT_SURPRISE] = {gText_FourEllipsesExclamation, 0},
+    [PC_TEXT_PLEASE_REMOVE_MAIL] = {gText_PleaseRemoveTheMail, 0},
+    [PC_TEXT_IS_SELECTED2] = {gText_PkmnIsSelected, 7},
+    [PC_TEXT_GIVE_TO_MON] = {gText_GiveToAPkmn, 0},
+    [PC_TEXT_PLACED_IN_BAG] = {gText_PlacedItemInBag, 7},
+    [PC_TEXT_BAG_FULL] = {gText_BagIsFull2, 0},
+    [PC_TEXT_PUT_IN_BAG] = {gText_PutItemInBag, 0},
+    [PC_TEXT_ITEM_IS_HELD] = {gText_ItemIsNowHeld, 7},
+    [PC_TEXT_CHANGED_TO_ITEM] = {gText_ChangedToNewItem, 7},
+    [PC_TEXT_CANT_STORE_MAIL] = {gText_MailCantBeStored, 0},
 };
 
 // code
@@ -1126,7 +1221,7 @@ void sub_80C7FA8(u8 taskId)
         else
         {
             BlendPalettes(0xFFFFFFFF, 0x10, 0);
-            SetPSSCallback(box_related_2);
+            SetPSSCallback(sub_80C972C_2);
         }
         SetVBlankCallback(sub_80C7D28);
         return;
@@ -1148,12 +1243,12 @@ void sub_80C81AC(u8 taskId)
         break;
     case 1:
         if (!sub_80F9C1C())
-            SetPSSCallback(task_pokemon_box_related);
+            SetPSSCallback(sub_80C82AC);
         break;
     }
 }
 
-void box_related_2(u8 taskId)
+void sub_80C972C_2(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1166,31 +1261,30 @@ void box_related_2(u8 taskId)
         {
             if (gUnknown_02039D0F == 2 && gSpecialVar_ItemId != 0)
             {
-                PrintStorageActionText(0x1C);
+                PrintStorageActionText(PC_TEXT_ITEM_IS_HELD);
                 gUnknown_02039D08->state++;
             }
             else
             {
-                SetPSSCallback(task_pokemon_box_related);
+                SetPSSCallback(sub_80C82AC);
             }
         }
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy() && gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            sub_80CADC4();
+            ClearBottomWindow();
             gUnknown_02039D08->state++;
         }
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(task_pokemon_box_related);
+            SetPSSCallback(sub_80C82AC);
         break;
     }
 }
 
-/*
-void task_pokemon_box_related(u8 taskId)
+void sub_80C82AC(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1202,7 +1296,7 @@ void task_pokemon_box_related(u8 taskId)
             gUnknown_02039D08->state = 1;
             break;
         case 5:
-            if (gUnknown_02039D08->boxOption != 0 && gUnknown_02039D08->boxOption != 1)
+            if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_MONS && gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
             {
                 PrintStorageActionText(PC_TEXT_WHICH_ONE_WILL_TAKE);
                 gUnknown_02039D08->state = 3;
@@ -1214,36 +1308,39 @@ void task_pokemon_box_related(u8 taskId)
             }
             break;
         case 6:
-            if (gUnknown_02039D08->unk_0005 == 2)
+            if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_MONS)
             {
-                if (sub_80CEAD0() && ItemIsMail(gUnknown_02039D08->field_CE6))
+                if (IsMonBeingMoved() && ItemIsMail(gUnknown_02039D08->selectedItem))
                     gUnknown_02039D08->state = 5;
                 else
                     SetPSSCallback(sub_80C87E8);
+            }
+            else if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
+            {
+                SetPSSCallback(sub_80C87E8);
             }
             break;
         case 4:
             SetPSSCallback(sub_80C9BE8);
             break;
-        case 16:
+        case 19:
             SetPSSCallback(sub_80C9D1C);
             break;
         case 7:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C972C);
+            SetPSSCallback(Cb_HandleBoxOptions);
             break;
         case 8:
-            PlaySE(SE_SELECT);
             SetPSSCallback(sub_80C8864);
             break;
         case 9:
             PlaySE(SE_SELECT);
-            gUnknown_02039D08->field_2CA = StorageGetCurrentBox() + 1;
-            if (gUnknown_02039D08->field_2C >= TOTAL_BOXES_COUNT)
-                gUnknown_02039D08->field_2CA = 0;
-            if (gUnknown_02039D08->boxOption != 3)
+            gUnknown_02039D08->newCurrBoxId = StorageGetCurrentBox() + 1;
+            if (gUnknown_02039D08->newCurrBoxId >= TOTAL_BOXES_COUNT)
+                gUnknown_02039D08->newCurrBoxId = 0;
+            if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
             {
-                sub_80CC464(gUnknown_02039D08->field_2CA);
+                sub_80CC464(gUnknown_02039D08->newCurrBoxId);
                 gUnknown_02039D08->state = 2;
             }
             else
@@ -1254,12 +1351,12 @@ void task_pokemon_box_related(u8 taskId)
             break;
         case 10:
             PlaySE(SE_SELECT);
-            gUnknown_02039D08->field_2CA = StorageGetCurrentBox() - 1;
-            if (gUnknown_02039D08->field_2CA < 0)
-                gUnknown_02039D08->field_2CA = TOTAL_BOXES_COUNT;
-            if (gUnknown_02039D08->boxOption != 3)
+            gUnknown_02039D08->newCurrBoxId = StorageGetCurrentBox() - 1;
+            if (gUnknown_02039D08->newCurrBoxId < 0)
+                gUnknown_02039D08->newCurrBoxId = TOTAL_BOXES_COUNT - 1;
+            if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
             {
-                sub_80CC464(gUnknown_02039D08->field_2CA);
+                sub_80CC464(gUnknown_02039D08->newCurrBoxId);
                 gUnknown_02039D08->state = 2;
             }
             else
@@ -1269,9 +1366,9 @@ void task_pokemon_box_related(u8 taskId)
             }
             break;
         case 11:
-            if (!sub_80CEA30())
+            if (!CanMoveMon())
             {
-                if (ItemIsMail(gUnknown_02039D08->field_CE6))
+                if (ItemIsMail(gUnknown_02039D08->selectedItem))
                 {
                     gUnknown_02039D08->state = 5;
                 }
@@ -1287,7 +1384,7 @@ void task_pokemon_box_related(u8 taskId)
             }
             break;
         case 13:
-            if (sub_80CEA30())
+            if (CanMoveMon())
             {
                 gUnknown_02039D08->state = 4;
             }
@@ -1298,7 +1395,7 @@ void task_pokemon_box_related(u8 taskId)
             }
             break;
         case 14:
-            if (!sub_80CEA30())
+            if (!CanShifMon())
             {
                 gUnknown_02039D08->state = 4;
             }
@@ -1310,7 +1407,7 @@ void task_pokemon_box_related(u8 taskId)
             break;
         case 12:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C8C90);
+            SetPSSCallback(Cb_WithdrawMon);
             break;
         case 15:
             PlaySE(SE_SELECT);
@@ -1326,7 +1423,7 @@ void task_pokemon_box_related(u8 taskId)
             break;
         case 18:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C93B0);
+            SetPSSCallback(Cb_SwitchSelectedItem);
             break;
         case 20:
             PlaySE(SE_SELECT);
@@ -1343,7 +1440,7 @@ void task_pokemon_box_related(u8 taskId)
             gUnknown_02039D08->state = 9;
             break;
         case 23:
-            sub_80D01D0(4);
+            sub_80D01D0(3);
             gUnknown_02039D08->state = 7;
             break;
         case 25:
@@ -1356,36 +1453,48 @@ void task_pokemon_box_related(u8 taskId)
             sub_80D01D0(5);
             gUnknown_02039D08->state = 7;
             break;
+        case 24:
+            PlaySE(SE_HAZURE);
+            break;
         }
         break;
     case 1:
-        if (!sub_809AC00())
+        if (!sub_80CD554())
         {
-            if (sub_809BF48())
-                sub_80986E8();
+            if (IsCursorOnCloseBox())
+                sub_80CA9C0();
             else
-                sub_8098710();
-            if (gUnknown_02039D08->unk_11f6)
+                sub_80CA9EC();
+            if (gUnknown_02039D08->field_CEA)
                 BoxSetMosaic();
             gUnknown_02039D08->state = 0;
         }
         break;
     case 2:
-        if (!sub_8099D34())
+        if (!ScrollToBox())
         {
-            gPokemonStorage.currentBox = gUnknown_02039D08->unk_08b2;
-            if (!gUnknown_0203847C && !sub_80CEAD0())
+            SetCurrentBox(gUnknown_02039D08->newCurrBoxId);
+            if (!sInPartyMenu && !IsMonBeingMoved())
             {
-                sub_809B440();
+                sub_80CE00C();
                 BoxSetMosaic();
             }
-            gUnknown_02039D08->state = 0;
+
+            if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
+            {
+                sub_80CFECC();
+                gUnknown_02039D08->state = 11;
+            }
+            else
+            {
+                gUnknown_02039D08->state = 0;
+            }
         }
         break;
     case 3:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            sub_8098A5C();
+            ClearBottomWindow();
             gUnknown_02039D08->state = 0;
         }
         break;
@@ -1402,10 +1511,1061 @@ void task_pokemon_box_related(u8 taskId)
     case 6:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            sub_8098A5C();
-            SetPSSCallback(sub_8096C84);
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    case 7:
+        if (!sub_80D01E4())
+            gUnknown_02039D08->state = 0;
+        break;
+    case 8:
+        if (!sub_80D01E4())
+            SetPSSCallback(sub_80C8B90);
+        break;
+    case 9:
+        if (!sub_80D01E4())
+        {
+            if (gUnknown_02039D08->field_CEA)
+                BoxSetMosaic();
+            gUnknown_02039D08->state = 0;
+        }
+        break;
+    case 10:
+        if (!sub_80D1218())
+        {
+            sub_80CC464(gUnknown_02039D08->newCurrBoxId);
+            gUnknown_02039D08->state = 2;
+        }
+        break;
+    case 11:
+        if (!sub_80D1218())
+            gUnknown_02039D08->state = 0;
+        break;
+    }
+}
+
+void sub_80C87A8(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CAB4C();
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80CAB70())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void sub_80C87E8(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PlaySE(SE_SELECT);
+        sub_80CA888();
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80CA8C8())
+        {
+            sub_80CDBF8(sub_80CDC2C());
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 2:
+        if (!sub_80CD554())
+        {
+            if (gUnknown_02039D08->field_CEA)
+                BoxSetMosaic();
+            SetPSSCallback(sub_80C82AC);
         }
         break;
     }
 }
-*/
+
+void sub_80C8864(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (!sub_80CA2B8())
+        {
+            PlaySE(SE_SELECT);
+            if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+                PrintStorageActionText(PC_TEXT_IS_SELECTED);
+            else if (sub_80D127C() || gUnknown_02039D08->selectedItem != 0)
+                PrintStorageActionText(PC_TEXT_IS_SELECTED2);
+            else
+                PrintStorageActionText(PC_TEXT_GIVE_TO_MON);
+
+            sub_80CFFD0();
+            gUnknown_02039D08->state = 1;
+        }
+        break;
+    case 1: // debug?
+        if (!sub_80D00A8())
+            gUnknown_02039D08->state = 2;
+        break;
+    case 2:
+        switch (sub_80D00AC())
+        {
+        case -1:
+        case  0:
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+            break;
+        case 3:
+            if (CanMoveMon())
+            {
+                gUnknown_02039D08->state = 3;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPSSCallback(sub_80C8B90);
+            }
+            break;
+        case 5:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C8BEC);
+            break;
+        case 4:
+            if (!CanShifMon())
+            {
+                gUnknown_02039D08->state = 3;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPSSCallback(c3_0808DC50);
+            }
+            break;
+        case 2:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            SetPSSCallback(Cb_WithdrawMon);
+            break;
+        case 1:
+            if (CanMoveMon())
+            {
+                gUnknown_02039D08->state = 3;
+            }
+            else if (ItemIsMail(gUnknown_02039D08->selectedItem))
+            {
+                gUnknown_02039D08->state = 4;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPSSCallback(sub_80C8D78);
+            }
+            break;
+        case 7:
+            if (CanMoveMon())
+            {
+                gUnknown_02039D08->state = 3;
+            }
+            else if (gUnknown_02039D08->field_CED)
+            {
+                gUnknown_02039D08->state = 5;
+            }
+            else if (ItemIsMail(gUnknown_02039D08->selectedItem))
+            {
+                gUnknown_02039D08->state = 4;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                SetPSSCallback(Cb_ReleaseMon);
+            }
+            break;
+        case 6:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(sub_80C9B28);
+            break;
+        case 8:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(sub_80C90A4);
+            break;
+        case 12:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(sub_80C9128);
+            break;
+        case 13:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(sub_80C91DC);
+            break;
+        case 16:
+            SetPSSCallback(Cb_ItemToBag);
+            break;
+        case 15:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(Cb_SwitchSelectedItem);
+            break;
+        case 14:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(sub_80C9B88);
+            break;
+        case 17:
+            SetPSSCallback(sub_80C9498);
+            break;
+        }
+        break;
+    case 3:
+        PlaySE(SE_HAZURE);
+        PrintStorageActionText(PC_TEXT_LAST_POKE);
+        gUnknown_02039D08->state = 6;
+        break;
+    case 5:
+        PlaySE(SE_HAZURE);
+        PrintStorageActionText(PC_TEXT_CANT_RELEASE_EGG);
+        gUnknown_02039D08->state = 6;
+        break;
+    case 4:
+        PlaySE(SE_HAZURE);
+        PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
+        gUnknown_02039D08->state = 6;
+        break;
+    case 6:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void sub_80C8B90(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CDC38(0);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80CDCAC())
+        {
+            if (sInPartyMenu)
+                SetPSSCallback(sub_80C9670);
+            else
+                SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void sub_80C8BEC(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CDC38(1);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80CDCAC())
+        {
+            if (sInPartyMenu)
+                SetPSSCallback(sub_80C9670);
+            else
+                SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void c3_0808DC50(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CDC38(2);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80CDCAC())
+        {
+            BoxSetMosaic();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void Cb_WithdrawMon(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (CalculatePlayerPartyCount() == PARTY_SIZE)
+        {
+            PrintStorageActionText(PC_TEXT_PARTY_FULL);
+            gUnknown_02039D08->state = 1;
+        }
+        else
+        {
+            sub_80CDC18();
+            sub_80CDC38(0);
+            gUnknown_02039D08->state = 2;
+        }
+        break;
+    case 1:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    case 2:
+        if (!sub_80CDCAC())
+        {
+            sub_80CC0D4(1);
+            sub_80CAB4C();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 3:
+        if (!sub_80CAB70())
+        {
+            sub_80CDC38(1);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 4:
+        if (!sub_80CDCAC())
+        {
+            sub_80CAB20();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 5:
+        SetPSSCallback(sub_80C87E8);
+        break;
+    }
+}
+
+void sub_80C8D78(u8 taskId)
+{
+    u8 r4;
+
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+        sub_80C77E8(&gUnknown_02039D08->field_1E5C, 10, 0xDAC7, 3, FALSE);
+        sub_80C78D4(gUnknown_02039D0E);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        r4 = sub_80C78F0();
+        if (r4 == 200);
+        else if (r4 == 201)
+        {
+            ClearBottomWindow();
+            sub_80C78E4();
+            sub_80C7890();
+            SetPSSCallback(sub_80C82AC);
+        }
+        else
+        {
+            if (sub_80CE19C(r4))
+            {
+                gUnknown_02039D0E = r4;
+                ClearBottomWindow();
+                sub_80C78E4();
+                sub_80C7890();
+                gUnknown_02039D08->state = 2;
+            }
+            else
+            {
+                PrintStorageActionText(PC_TEXT_BOX_IS_FULL);
+                gUnknown_02039D08->state = 4;
+            }
+        }
+        break;
+    case 2:
+        CompactPartySlots();
+        sub_80CB950();
+        gUnknown_02039D08->state++;
+        break;
+    case 3:
+        if (!sub_80CB9BC())
+        {
+            sub_80CE22C();
+            BoxSetMosaic();
+            sub_80CAB20();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    case 4:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+            gUnknown_02039D08->state = 1;
+        }
+        break;
+    }
+}
+
+void Cb_ReleaseMon(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_RELEASE_POKE);
+        sub_80CAD9C(1);
+        gUnknown_02039D08->state++;
+        // fallthrough
+    case 1:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+            case -1:
+            case  1:
+                ClearBottomWindow();
+                SetPSSCallback(sub_80C82AC);
+                break;
+            case  0:
+                ClearBottomWindow();
+                sub_80CE3A0();
+                sub_80CE250();
+                gUnknown_02039D08->state++;
+                break;
+        }
+        break;
+    case 2:
+        sub_80CE580();
+        if (!sub_80CE2A8())
+        {
+            while (1)
+            {
+                s8 r0 = sub_80CE580();
+                if (r0 == 1)
+                {
+                    gUnknown_02039D08->state++;
+                    break;
+                }
+                if (r0 == 0)
+                {
+                    gUnknown_02039D08->state = 8;
+                    break;
+                }
+            }
+        }
+        break;
+    case 3:
+        sub_80CE2D8();
+        sub_80CA230();
+        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        gUnknown_02039D08->state++;
+        break;
+    case 4:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_BYE_BYE);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 5:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            if (sInPartyMenu)
+            {
+                CompactPartySlots();
+                sub_80CB950();
+                gUnknown_02039D08->state++;
+            }
+            else
+            {
+                gUnknown_02039D08->state = 7;
+            }
+        }
+        break;
+    case 6:
+        if (!sub_80CB9BC())
+        {
+            sub_80CE00C();
+            BoxSetMosaic();
+            sub_80CAB20();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 7:
+        SetPSSCallback(sub_80C82AC);
+        break;
+    case 8:
+        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        gUnknown_02039D08->state++;
+        break;
+    case 9:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_SURPRISE);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 10:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            sub_80CC064();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 11:
+        if (!sub_80CC0A0())
+        {
+            sub_80CE324();
+            PrintStorageActionText(PC_TEXT_CAME_BACK);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 12:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_WORRIED);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 13:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void sub_80C90A4(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_MARK_POKE);
+        gUnknown_02039D08->field_DA4.markings = gUnknown_02039D08->field_CEB;
+        sub_811FAA4(gUnknown_02039D08->field_CEB, 0xb0, 0x10);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_811FBA4())
+        {
+            sub_811FAF8();
+            ClearBottomWindow();
+            sub_80CE9A8(gUnknown_02039D08->field_DA4.markings);
+            sub_80CA230();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void sub_80C9128(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (!ItemIsMail(gUnknown_02039D08->selectedItem))
+        {
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+        }
+        else
+        {
+            SetPSSCallback(Cb_PrintCantStoreMail);
+        }
+        break;
+    case 1:
+        sub_80CFE54(2);
+        sub_80D0E90((sInPartyMenu != FALSE), GetBoxCursorPosition());
+        gUnknown_02039D08->state++;
+        break;
+    case 2:
+        if (!sub_80D1218())
+        {
+            sub_80CFE54(3);
+            ClearBottomWindow();
+            sub_80CE00C();
+            sub_80CA4FC();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void sub_80C91DC(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        ClearBottomWindow();
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        sub_80CFE54(2);
+        sub_80D1080((sInPartyMenu != FALSE), GetBoxCursorPosition());
+        gUnknown_02039D08->state++;
+        break;
+    case 2:
+        if (!sub_80D1218())
+        {
+            sub_80CFE54(0);
+            sub_80CE00C();
+            sub_80CA4FC();
+            PrintStorageActionText(PC_TEXT_ITEM_IS_HELD);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 3:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 4:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void Cb_ItemToBag(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (!AddBagItem(gUnknown_02039D08->selectedItem, 1))
+        {
+            PlaySE(SE_HAZURE);
+            PrintStorageActionText(PC_TEXT_BAG_FULL);
+            gUnknown_02039D08->state = 3;
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            sub_80D1114((sInPartyMenu != FALSE), GetBoxCursorPosition());
+            gUnknown_02039D08->state = 1;
+        }
+        break;
+    case 1:
+        if (!sub_80D1218())
+        {
+            PrintStorageActionText(PC_TEXT_PLACED_IN_BAG);
+            gUnknown_02039D08->state = 2;
+        }
+        break;
+    case 2:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            sub_80CE00C();
+            sub_80CA4FC();
+            gUnknown_02039D08->state = 4;
+        }
+        break;
+    case 4:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    case 3:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void Cb_SwitchSelectedItem(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (!ItemIsMail(gUnknown_02039D08->selectedItem))
+        {
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+        }
+        else
+        {
+            SetPSSCallback(Cb_PrintCantStoreMail);
+        }
+        break;
+    case 1:
+        sub_80CFE54(2);
+        sub_80D0FAC((sInPartyMenu != FALSE), GetBoxCursorPosition());
+        gUnknown_02039D08->state++;
+        break;
+    case 2:
+        if (!sub_80D1218())
+        {
+            sub_80CFE54(3);
+            sub_80CE00C();
+            sub_80CA4FC();
+            PrintStorageActionText(PC_TEXT_CHANGED_TO_ITEM);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 3:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 4:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void sub_80C9498(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        ClearBottomWindow();
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PlaySE(SE_WIN_OPEN);
+            sub_80D17B4();
+            sub_80D1818();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 2:
+        if (!sub_80D184C())
+            gUnknown_02039D08->state++;
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02039D08->state++;
+        break;
+    case 4:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PlaySE(SE_WIN_OPEN);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 5:
+        if (!sub_80D18E4())
+            gUnknown_02039D08->state++;
+        break;
+    case 6:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void sub_80C954C(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PlaySE(SE_SELECT);
+        PrintStorageActionText(PC_TEXT_PUT_IN_BAG);
+        sub_80CAD9C(0);
+        gUnknown_02039D08->state = 1;
+        break;
+    case 1:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+        case -1:
+        case 1:
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+            break;
+        case 0:
+            if (AddBagItem(gUnknown_02039D08->field_2234, 1) == TRUE)
+            {
+                ClearBottomWindow();
+                gUnknown_02039D08->state = 3;
+            }
+            else
+            {
+                PrintStorageActionText(PC_TEXT_BAG_FULL);
+                gUnknown_02039D08->state = 2;
+            }
+            break;
+        }
+        break;
+    case 2:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            gUnknown_02039D08->state = 5;
+        }
+        break;
+    case 3:
+        sub_80D1194();
+        gUnknown_02039D08->state = 4;
+        break;
+    case 4:
+        if (!sub_80D1218())
+        {
+            sub_80CFE54(0);
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    case 5:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void sub_80C9670(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        CompactPartySlots();
+        sub_80CB950();
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80CB9BC())
+        {
+            sub_80CAB20();
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void Cb_PrintCantStoreMail(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_CANT_STORE_MAIL);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gUnknown_02039D08->state++;
+        break;
+    case 2:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPSSCallback(sub_80C82AC);
+        break;
+    }
+}
+
+void Cb_HandleBoxOptions(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_WHAT_YOU_DO);
+        sub_80CFFD0();
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (sub_80D00A8())
+            return;
+        gUnknown_02039D08->state++;
+    case 2:
+        switch (sub_80D00AC())
+        {
+        case -1:
+        case  0:
+            sub_80CD1A8(TRUE);
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+            break;
+        case 11:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(Cb_NameBox);
+            break;
+        case 10:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            SetPSSCallback(Cb_HandleWallpapers);
+            break;
+        case 9:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            SetPSSCallback(Cb_JumpBox);
+            break;
+        }
+        break;
+    }
+}
+
+void Cb_HandleWallpapers(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CADD8();
+        PrintStorageActionText(PC_TEXT_PICK_A_THEME);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!sub_80D00A8())
+             gUnknown_02039D08->state++;
+        break;
+    case 2:
+        gUnknown_02039D08->wallpaperSetId = sub_80D00AC();
+        switch (gUnknown_02039D08->wallpaperSetId)
+        {
+        case -1:
+            sub_80CD1A8(TRUE);
+            ClearBottomWindow();
+            SetPSSCallback(sub_80C82AC);
+            break;
+        case 18 ... 21:
+            PlaySE(SE_SELECT);
+            sub_80D013C();
+            gUnknown_02039D08->wallpaperSetId -= 18;
+            gUnknown_02039D08->state++;
+            break;
+        // New wallpaper from Walda.
+        case 22:
+            PlaySE(SE_SELECT);
+            gUnknown_02039D08->wallpaperId = 16;
+            sub_80D013C();
+            ClearBottomWindow();
+            gUnknown_02039D08->state = 6;
+            break;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_80CAE0C(gUnknown_02039D08->wallpaperSetId);
+            PrintStorageActionText(PC_TEXT_PICK_A_WALLPAPER);
+            gUnknown_02039D08->state++;
+        }
+        break;
+    case 4:
+        gUnknown_02039D08->wallpaperId = sub_80D00AC();
+        switch (gUnknown_02039D08->wallpaperId)
+        {
+        case -2:
+            break;
+        case -1:
+            ClearBottomWindow();
+            gUnknown_02039D08->state = 0;
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            gUnknown_02039D08->wallpaperId -= 23;
+            SetWallpaperForCurrentBox(gUnknown_02039D08->wallpaperId);
+            gUnknown_02039D08->state++;
+            break;
+        }
+        break;
+    case 5:
+        if (!DoWallpaperGfxChange())
+        {
+            sub_80CD1A8(TRUE);
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    case 6:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            SetWallpaperForCurrentBox(gUnknown_02039D08->wallpaperId);
+            gUnknown_02039D08->state = 5;
+        }
+        break;
+    }
+}
+
+void Cb_JumpBox(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_JUMP_TO_WHICH_BOX);
+        sub_80C77E8(&gUnknown_02039D08->field_1E5C, 10, 0xDAC7, 3, FALSE);
+        sub_80C78D4(StorageGetCurrentBox());
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        gUnknown_02039D08->newCurrBoxId = sub_80C78F0();
+        switch (gUnknown_02039D08->newCurrBoxId)
+        {
+        case 200:
+            break;
+        default:
+            ClearBottomWindow();
+            sub_80C78E4();
+            sub_80C7890();
+            if (gUnknown_02039D08->newCurrBoxId == 201 || gUnknown_02039D08->newCurrBoxId == StorageGetCurrentBox())
+            {
+                sub_80CD1A8(TRUE);
+                SetPSSCallback(sub_80C82AC);
+            }
+            else
+            {
+                gUnknown_02039D08->state++;
+            }
+            break;
+        }
+        break;
+    case 2:
+        sub_80CC464(gUnknown_02039D08->newCurrBoxId);
+        gUnknown_02039D08->state++;
+        break;
+    case 3:
+        if (!ScrollToBox())
+        {
+            SetCurrentBox(gUnknown_02039D08->newCurrBoxId);
+            SetPSSCallback(sub_80C82AC);
+        }
+        break;
+    }
+}
+
+void Cb_NameBox(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CE760();
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+        {
+            gUnknown_02039D0F = 1;
+            gUnknown_02039D08->unk_0002 = 2;
+            SetPSSCallback(sub_80C9E50);
+        }
+        break;
+    }
+}

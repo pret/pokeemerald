@@ -76,12 +76,12 @@ struct PokemonStorageSystemData
     u8 unk_02C7;
     u8 unk_02C8;
     u8 unk_02C9;
-    s16 field_2CA;
+    s16 newCurrBoxId;
     u16 bg2_X;
     u8 field_2CE;
-    u8 field_2CF[1217];
-    u8 changeWallpaper;
-    u8 field_791;
+    u8 field_2CF[1215];
+    s16 wallpaperSetId;
+    s16 wallpaperId;
     u8 wallpaperTilemap[180 * 4];
     u8 wallpaperChangeState;
     u8 field_A63;
@@ -92,9 +92,18 @@ struct PokemonStorageSystemData
     u8 *wallpaperTilemapPtr;
     u8 field_A6C;
     u8 field_A6D[633];
-    u16 field_CE6;
-    u8 field_CE8[188];
+    u16 selectedItem;
+    u16 field_CE8;
+    u8 field_CEA;
+    u8 field_CEB;
+    u8 field_CEC;
+    u8 field_CED;
+    u8 field_CEE;
+    u8 field_CEF[181];
     struct PokemonMarkMenu field_DA4;
+    struct UnkPSSStruct_2002370 field_1E5C;
+    u8 field_20A4[400];
+    u16 field_2234;
 };
 
 extern struct UnkPSSStruct_2002370 *gUnknown_02039D04;
