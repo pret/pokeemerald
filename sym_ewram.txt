@@ -216,10 +216,10 @@ gUnknown_02039D04: @ 2039D04
 gUnknown_02039D08: @ 2039D08
 	.space 0x4
 
-gUnknown_02039D0C: @ 2039D0C
+sInPartyMenu: @ 2039D0C
 	.space 0x1
 
-gUnknown_02039D0D: @ 2039D0D
+sBoxOption: @ 2039D0D
 	.space 0x1
 
 gUnknown_02039D0E: @ 2039D0E
@@ -237,22 +237,22 @@ gUnknown_02039D12: @ 2039D12
 gUnknown_02039D14: @ 2039D14
 	.space 0x64
 
-gUnknown_02039D78: @ 2039D78
+sBoxCursorAction: @ 2039D78
 	.space 0x1
 
-gUnknown_02039D79: @ 2039D79
+sBoxCursorPosition: @ 2039D79
 	.space 0x1
 
-gUnknown_02039D7A: @ 2039D7A
+sIsMonBeingMoved: @ 2039D7A
 	.space 0x1
 
-gUnknown_02039D7B: @ 2039D7B
+sMovingMonOrigBoxId: @ 2039D7B
 	.space 0x1
 
-gUnknown_02039D7C: @ 2039D7C
+sMovingMonOrigBoxPos: @ 2039D7C
 	.space 0x1
 
-gUnknown_02039D7D: @ 2039D7D
+sCanOnlyMove: @ 2039D7D
 	.space 0x1
 
 gUnknown_02039D7E: @ 2039D7E

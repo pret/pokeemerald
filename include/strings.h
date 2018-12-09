@@ -1403,4 +1403,36 @@ extern const u8 BattleFrontier_BattlePyramidEmptySquare_Text_254F47[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_Text_254F0E[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_Text_254ED3[];
 
+// PC strings
+extern const u8 gText_ExitFromBox[];
+extern const u8 gText_WhatDoYouWantToDo[];
+extern const u8 gText_PleasePickATheme[];
+extern const u8 gText_PickTheWallpaper[];
+extern const u8 gText_PkmnIsSelected[];
+extern const u8 gText_JumpToWhichBox[];
+extern const u8 gText_DepositInWhichBox[];
+extern const u8 gText_PkmnWasDeposited[];
+extern const u8 gText_BoxIsFull2[];
+extern const u8 gText_ReleaseThisPokemon[];
+extern const u8 gText_PkmnWasReleased[];
+extern const u8 gText_ByeByePkmn[];
+extern const u8 gText_MarkYourPkmn[];
+extern const u8 gText_ThatsYourLastPkmn[];
+extern const u8 gText_YourPartysFull[];
+extern const u8 gText_YoureHoldingAPkmn[];
+extern const u8 gText_WhichOneWillYouTake[];
+extern const u8 gText_YouCantReleaseAnEgg[];
+extern const u8 gText_ContinueBoxOperations[];
+extern const u8 gText_PkmnCameBack[];
+extern const u8 gText_WasItWorriedAboutYou[];
+extern const u8 gText_FourEllipsesExclamation[];
+extern const u8 gText_PleaseRemoveTheMail[];
+extern const u8 gText_GiveToAPkmn[];
+extern const u8 gText_PlacedItemInBag[];
+extern const u8 gText_BagIsFull2[];
+extern const u8 gText_PutItemInBag[];
+extern const u8 gText_ItemIsNowHeld[];
+extern const u8 gText_ChangedToNewItem[];
+extern const u8 gText_MailCantBeStored[];
+
 #endif //GUARD_STRINGS_H

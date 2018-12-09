@@ -8,576 +8,6 @@
 
 
 
-
-	thumb_func_start sub_80C7D74
-sub_80C7D74: @ 80C7D74
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl ResetTasks
-	ldr r0, =gUnknown_02039D0D
-	strb r5, [r0]
-	ldr r4, =gUnknown_02039D08
-	ldr r0, =0x000062c4
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _080C7DA8
-	ldr r0, =sub_80C7678
-	bl SetMainCallback2
-	b _080C7DD4
-	.pool
-_080C7DA8:
-	movs r2, 0
-	strb r5, [r0, 0x1]
-	ldr r0, [r4]
-	strb r2, [r0, 0x3]
-	ldr r0, =gUnknown_02039D12
-	movs r1, 0
-	strh r2, [r0]
-	ldr r0, [r4]
-	strb r1, [r0]
-	ldr r0, =task_box_related_3
-	movs r1, 0x3
-	bl CreateTask
-	ldr r1, [r4]
-	strb r0, [r1, 0x4]
-	bl StorageGetCurrentBox
-	ldr r1, =gUnknown_02039D10
-	strb r0, [r1]
-	ldr r0, =c2_Box
-	bl SetMainCallback2
-_080C7DD4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80C7D74
-
-	thumb_func_start c2_808CE60
-c2_808CE60: @ 80C7DEC
-	push {r4,lr}
-	bl ResetTasks
-	ldr r4, =gUnknown_02039D08
-	ldr r0, =0x000062c4
-	bl Alloc
-	adds r1, r0, 0
-	str r1, [r4]
-	cmp r1, 0
-	bne _080C7E18
-	ldr r0, =sub_80C7678
-	bl SetMainCallback2
-	b _080C7E3C
-	.pool
-_080C7E18:
-	ldr r0, =gUnknown_02039D0D
-	ldrb r0, [r0]
-	movs r2, 0
-	strb r0, [r1, 0x1]
-	ldr r1, [r4]
-	movs r0, 0x1
-	strb r0, [r1, 0x3]
-	ldr r0, [r4]
-	strb r2, [r0]
-	ldr r0, =task_box_related_3
-	movs r1, 0x3
-	bl CreateTask
-	ldr r1, [r4]
-	strb r0, [r1, 0x4]
-	ldr r0, =c2_Box
-	bl SetMainCallback2
-_080C7E3C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end c2_808CE60
-
-	thumb_func_start sub_80C7E50
-sub_80C7E50: @ 80C7E50
-	push {lr}
-	movs r0, 0x10
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x12
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x14
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x16
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x18
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1A
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1C
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1E
-	movs r1, 0
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80C7E50
-
-	thumb_func_start sub_80C7E98
-sub_80C7E98: @ 80C7E98
-	push {r4,lr}
-	sub sp, 0x4
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl FreeSpriteTileRanges
-	bl FreeAllSpritePalettes
-	bl ClearDma3Requests
-	ldr r1, =gReservedSpriteTileCount
-	movs r2, 0xA0
-	lsls r2, 2
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r4, =gUnknown_02039D08
-	ldr r1, [r4]
-	adds r0, r1, 0
-	adds r0, 0x8
-	adds r1, 0x10
-	movs r2, 0x8
-	bl sub_80D2A90
-	ldr r1, =gKeyRepeatStartDelay
-	movs r0, 0x14
-	strh r0, [r1]
-	bl clear_scheduled_bg_copies_to_vram
-	movs r0, 0x3
-	bl sub_80D259C
-	ldr r2, =gUnknown_0857239C
-	movs r0, 0x4
-	str r0, [sp]
-	movs r0, 0
-	movs r1, 0x1
-	movs r3, 0x8
-	bl sub_80D2644
-	movs r0, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl sub_80D2770
-	ldr r0, [r4]
-	ldr r1, =0x000002c7
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80C7E98
-
-	thumb_func_start sub_80C7F1C
-sub_80C7F1C: @ 80C7F1C
-	push {lr}
-	bl sub_80CDC0C
-	ldr r2, =gUnknown_02039D0C
-	movs r1, 0
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x1
-	bne _080C7F32
-	movs r1, 0x1
-_080C7F32:
-	strb r1, [r2]
-	ldr r1, =gUnknown_02039D0E
-	movs r0, 0
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80C7F1C
-
-	thumb_func_start sub_80C7F4C
-sub_80C7F4C: @ 80C7F4C
-	push {lr}
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x3
-	bne _080C7F6A
-	movs r1, 0xFC
-	lsls r1, 6
-	movs r0, 0x50
-	bl SetGpuReg
-	ldr r1, =0x00000b07
-	movs r0, 0x52
-	bl SetGpuReg
-_080C7F6A:
-	movs r1, 0xFA
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80C7F4C
-
-	thumb_func_start add_to_c3_somehow
-add_to_c3_somehow: @ 80C7F80
-	push {r4,lr}
-	ldr r4, =gTasks
-	ldr r1, =gUnknown_02039D08
-	ldr r3, [r1]
-	ldrb r2, [r3, 0x4]
-	lsls r1, r2, 2
-	adds r1, r2
-	lsls r1, 3
-	adds r1, r4
-	str r0, [r1]
-	movs r0, 0
-	strb r0, [r3]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end add_to_c3_somehow
-
-	thumb_func_start task_box_related_3
-task_box_related_3: @ 80C7FA8
-	push {lr}
-	sub sp, 0x4
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0xA
-	bls _080C7FB8
-	b _080C81A2
-_080C7FB8:
-	lsls r0, 2
-	ldr r1, =_080C7FCC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080C7FCC:
-	.4byte _080C7FF8
-	.4byte _080C8050
-	.4byte _080C805E
-	.4byte _080C808C
-	.4byte _080C80A8
-	.4byte _080C80C6
-	.4byte _080C80E6
-	.4byte _080C80EC
-	.4byte _080C80F2
-	.4byte _080C8100
-	.4byte _080C814A
-_080C7FF8:
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	bl sub_80C7E98
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x3]
-	cmp r0, 0
-	beq _080C8046
-	ldr r0, =gUnknown_02039D0F
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _080C8036
-	cmp r0, 0x1
-	bgt _080C8030
-	cmp r0, 0
-	beq _080C803C
-	b _080C8046
-	.pool
-_080C8030:
-	cmp r0, 0x2
-	beq _080C8042
-	b _080C8046
-_080C8036:
-	bl sub_80CE790
-	b _080C8046
-_080C803C:
-	bl sub_80CE8E4
-	b _080C8046
-_080C8042:
-	bl sub_80C9F6C
-_080C8046:
-	bl sub_80CA044
-	bl sub_80CA0C8
-	b _080C8198
-_080C8050:
-	bl sub_80CA0A4
-	lsls r0, 24
-	cmp r0, 0
-	beq _080C805C
-	b _080C8198
-_080C805C:
-	b _080C80D0
-_080C805E:
-	movs r0, 0
-	bl PutWindowTilemap
-	movs r0, 0x1
-	bl ClearWindowTilemap
-	movs r0, 0
-	str r0, [sp]
-	movs r1, 0xC0
-	lsls r1, 19
-	ldr r2, =0x05000080
-	mov r0, sp
-	bl CpuSet
-	movs r0, 0x1
-	movs r1, 0xB
-	movs r2, 0xE0
-	bl LoadUserWindowBorderGfx
-	b _080C8198
-	.pool
-_080C808C:
-	bl sub_80C7E50
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x3]
-	cmp r0, 0
-	beq _080C809C
-	b _080C8198
-_080C809C:
-	bl sub_80C7F1C
-	b _080C8198
-	.pool
-_080C80A8:
-	bl sub_80CAF04
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x3]
-	cmp r0, 0
-	bne _080C80C0
-	bl sub_80CD36C
-	b _080C8198
-	.pool
-_080C80C0:
-	bl sub_80CD3EC
-	b _080C8198
-_080C80C6:
-	bl sub_80D0164
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C80DC
-_080C80D0:
-	ldr r0, =sub_80C9E50
-	bl add_to_c3_somehow
-	b _080C81A2
-	.pool
-_080C80DC:
-	bl sub_80C9FEC
-	bl sub_80CAC1C
-	b _080C8198
-_080C80E6:
-	bl sub_80CA0D8
-	b _080C8198
-_080C80EC:
-	bl sub_80CA704
-	b _080C8198
-_080C80F2:
-	bl StorageGetCurrentBox
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80CC32C
-	b _080C8198
-_080C8100:
-	bl sub_80CC35C
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C81A2
-	ldr r0, =gUnknown_02039D08
-	ldr r2, [r0]
-	ldrb r0, [r2, 0x1]
-	cmp r0, 0x3
-	beq _080C8140
-	ldr r1, =0x00000da4
-	adds r0, r2, r1
-	movs r1, 0xD
-	strh r1, [r0]
-	ldr r1, =0x00000da6
-	adds r2, r1
-	ldr r1, =0x0000dace
-	strh r1, [r2]
-	bl sub_811F90C
-	bl sub_811FA90
-	b _080C8198
-	.pool
-_080C8140:
-	bl sub_80D0C60
-	bl sub_80CAEAC
-	b _080C8198
-_080C814A:
-	bl sub_80C7F4C
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x3]
-	cmp r0, 0
-	bne _080C8174
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	ldr r0, =sub_80C81AC
-	bl add_to_c3_somehow
-	b _080C8186
-	.pool
-_080C8174:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	ldr r0, =box_related_2
-	bl add_to_c3_somehow
-_080C8186:
-	ldr r0, =sub_80C7D28
-	bl SetVBlankCallback
-	b _080C81A2
-	.pool
-_080C8198:
-	ldr r0, =gUnknown_02039D08
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_080C81A2:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end task_box_related_3
-
-	thumb_func_start sub_80C81AC
-sub_80C81AC: @ 80C81AC
-	push {r4,lr}
-	ldr r4, =gUnknown_02039D08
-	ldr r0, [r4]
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080C81C4
-	cmp r0, 0x1
-	beq _080C81DE
-	b _080C81EE
-	.pool
-_080C81C4:
-	movs r0, 0x2
-	bl PlaySE
-	movs r0, 0x14
-	movs r1, 0
-	movs r2, 0x1
-	bl sub_80F9BCC
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _080C81EE
-_080C81DE:
-	bl sub_80F9C1C
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C81EE
-	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
-_080C81EE:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80C81AC
-
-	thumb_func_start box_related_2
-box_related_2: @ 80C81F8
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r4, =gUnknown_02039D08
-	ldr r0, [r4]
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _080C8230
-	cmp r0, 0x1
-	bgt _080C8214
-	cmp r0, 0
-	beq _080C821E
-	b _080C82A0
-	.pool
-_080C8214:
-	cmp r0, 0x2
-	beq _080C8268
-	cmp r0, 0x3
-	beq _080C8290
-	b _080C82A0
-_080C821E:
-	movs r1, 0x1
-	negs r1, r1
-	str r0, [sp]
-	adds r0, r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	b _080C8282
-_080C8230:
-	bl UpdatePaletteFade
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C82A0
-	ldr r0, =gUnknown_02039D0F
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	bne _080C825C
-	ldr r0, =gSpecialVar_ItemId
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _080C825C
-	movs r0, 0x1C
-	bl sub_80CAC58
-	b _080C8282
-	.pool
-_080C825C:
-	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
-	b _080C82A0
-	.pool
-_080C8268:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C82A0
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x3
-	ands r0, r1
-	cmp r0, 0
-	beq _080C82A0
-	bl sub_80CADC4
-_080C8282:
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _080C82A0
-	.pool
-_080C8290:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _080C82A0
-	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
-_080C82A0:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end box_related_2
-
 	thumb_func_start task_pokemon_box_related
 task_pokemon_box_related: @ 80C82AC
 	push {r4,r5,lr}
@@ -670,7 +100,7 @@ _080C8398:
 	cmp r0, 0x1
 	bls _080C83BC
 	movs r0, 0x10
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r1, [r4]
 	movs r0, 0x3
 	strb r0, [r1]
@@ -679,7 +109,7 @@ _080C8398:
 _080C83BC:
 	bl sub_80CDC0C
 	ldr r0, =sub_80C87A8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C83CC:
@@ -688,7 +118,7 @@ _080C83CC:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x2
 	bne _080C8400
-	bl sub_80CEAD0
+	bl IsMonBeingMoved
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8406
@@ -710,29 +140,29 @@ _080C8400:
 	b _080C879E
 _080C8406:
 	ldr r0, =sub_80C87E8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8414:
 	ldr r0, =sub_80C9BE8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8420:
 	ldr r0, =sub_80C9D1C
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C842C:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8440:
 	ldr r0, =sub_80C8864
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C844C:
@@ -790,7 +220,7 @@ _080C84BC:
 	strb r0, [r1]
 	b _080C879E
 _080C84C8:
-	bl sub_80CEA30
+	bl CanMoveMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8528
@@ -813,11 +243,11 @@ _080C84F8:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C8D78
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C850C:
-	bl sub_80CEA30
+	bl CanMoveMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8528
@@ -825,7 +255,7 @@ _080C850C:
 	bl PlaySE
 	b _080C872C
 _080C851E:
-	bl sub_80CEA6C
+	bl CanShifMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8538
@@ -840,42 +270,42 @@ _080C8538:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =c3_0808DC50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C854C:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C8C90
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8560:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C8BEC
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8574:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C9128
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8588:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C91DC
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C859C:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C93B0
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C85B0:
@@ -935,7 +365,7 @@ _080C861C:
 	beq _080C8628
 	b _080C879E
 _080C8628:
-	bl sub_80CEAF8
+	bl IsCursorOnCloseBox
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8638
@@ -969,11 +399,11 @@ _080C8668:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl SetCurrentBox
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080C8690
-	bl sub_80CEAD0
+	bl IsMonBeingMoved
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8690
@@ -1016,7 +446,7 @@ _080C86E2:
 	bl PlaySE
 	movs r0, 0x16
 _080C86EA:
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x6
@@ -1032,7 +462,7 @@ _080C86FC:
 	beq _080C879E
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C871C:
@@ -1045,7 +475,7 @@ _080C8722:
 	bne _080C879E
 _080C872C:
 	ldr r0, =sub_80C8B90
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C879E
 	.pool
 _080C8738:
@@ -1126,7 +556,7 @@ _080C87CE:
 	cmp r0, 0
 	bne _080C87DE
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C87DE:
 	pop {r4}
 	pop {r0}
@@ -1186,7 +616,7 @@ _080C8836:
 	bl BoxSetMosaic
 _080C8850:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C8856:
 	pop {r4}
 	pop {r0}
@@ -1234,7 +664,7 @@ _080C88AC:
 	cmp r0, 0x3
 	beq _080C88C8
 	movs r0, 0x4
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	b _080C88F2
 	.pool
 _080C88C8:
@@ -1250,12 +680,12 @@ _080C88C8:
 	beq _080C88EC
 _080C88DE:
 	movs r0, 0x17
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	b _080C88F2
 	.pool
 _080C88EC:
 	movs r0, 0x18
-	bl sub_80CAC58
+	bl PrintStorageActionText
 _080C88F2:
 	bl sub_80CFFD0
 	ldr r0, =gUnknown_02039D08
@@ -1316,11 +746,11 @@ _080C8940:
 _080C898C:
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C899C:
-	bl sub_80CEA30
+	bl CanMoveMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8A52
@@ -1328,7 +758,7 @@ _080C899C:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8B90
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C89BC:
@@ -1336,11 +766,11 @@ _080C89BC:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8BEC
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C89D4:
-	bl sub_80CEA6C
+	bl CanShifMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8A52
@@ -1348,7 +778,7 @@ _080C89D4:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =c3_0808DC50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C89F4:
@@ -1356,11 +786,11 @@ _080C89F4:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8C90
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8A0C:
-	bl sub_80CEA30
+	bl CanMoveMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8A52
@@ -1377,11 +807,11 @@ _080C8A0C:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8D78
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8A48:
-	bl sub_80CEA30
+	bl CanMoveMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8A60
@@ -1422,59 +852,59 @@ _080C8A98:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C8EB4
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8AAC:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C9B28
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8AC0:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C90A4
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8AD4:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C9128
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8AE8:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C91DC
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8AFC:
 	ldr r0, =sub_80C9298
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8B08:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C93B0
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8B1C:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C9B88
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8B30:
 	ldr r0, =sub_80C9498
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8B82
 	.pool
 _080C8B3C:
@@ -1492,7 +922,7 @@ _080C8B50:
 	bl PlaySE
 	movs r0, 0x16
 _080C8B58:
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x6
@@ -1508,7 +938,7 @@ _080C8B6C:
 	beq _080C8B82
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C8B82:
 	pop {r4}
 	pop {r0}
@@ -1541,17 +971,17 @@ _080C8BB8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8BE2
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C8BDC
 	ldr r0, =sub_80C9670
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8BE2
 	.pool
 _080C8BDC:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C8BE2:
 	pop {r4}
 	pop {r0}
@@ -1584,17 +1014,17 @@ _080C8C14:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8C3E
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C8C38
 	ldr r0, =sub_80C9670
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8C3E
 	.pool
 _080C8C38:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C8C3E:
 	pop {r4}
 	pop {r0}
@@ -1629,7 +1059,7 @@ _080C8C70:
 	bne _080C8C84
 	bl BoxSetMosaic
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C8C84:
 	pop {r4}
 	pop {r0}
@@ -1666,7 +1096,7 @@ _080C8CC8:
 	cmp r0, 0x6
 	bne _080C8CE8
 	movs r0, 0xE
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -1692,7 +1122,7 @@ _080C8D00:
 	beq _080C8D6E
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8D6E
 	.pool
 _080C8D20:
@@ -1728,7 +1158,7 @@ _080C8D56:
 	.pool
 _080C8D68:
 	ldr r0, =sub_80C87E8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C8D6E:
 	pop {r0}
 	bx r0
@@ -1761,7 +1191,7 @@ _080C8D9C:
 	.4byte _080C8E88
 _080C8DB0:
 	movs r0, 0x6
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r4, =gUnknown_02039D08
 	ldr r0, [r4]
 	ldr r1, =0x00001e5c
@@ -1811,7 +1241,7 @@ _080C8E0C:
 	.pool
 _080C8E38:
 	movs r0, 0x8
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x4
@@ -1836,7 +1266,7 @@ _080C8E64:
 	bl sub_80CAB20
 _080C8E7A:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C8EA2
 	.pool
 _080C8E88:
@@ -1847,7 +1277,7 @@ _080C8E88:
 	cmp r0, 0
 	beq _080C8EA2
 	movs r0, 0x6
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -1895,7 +1325,7 @@ _080C8ED4:
 	.4byte _080C9080
 _080C8F0C:
 	movs r0, 0x9
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	movs r0, 0x1
 	bl sub_80CAD9C
 	ldr r0, =gUnknown_02039D08
@@ -1974,7 +1404,7 @@ _080C8FA4:
 	cmp r0, 0
 	beq _080C9096
 	bl sub_80CADC4
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C8FD0
@@ -2000,7 +1430,7 @@ _080C8FE0:
 	b _080C905C
 _080C8FF8:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9096
 	.pool
 _080C9004:
@@ -2044,7 +1474,7 @@ _080C904A:
 	beq _080C9096
 	movs r0, 0x14
 _080C9058:
-	bl sub_80CAC58
+	bl PrintStorageActionText
 _080C905C:
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
@@ -2069,7 +1499,7 @@ _080C9080:
 	beq _080C9096
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9096:
 	pop {r0}
 	bx r0
@@ -2090,7 +1520,7 @@ sub_80C90A4: @ 80C90A4
 	.pool
 _080C90BC:
 	movs r0, 0xC
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, [r4]
 	ldr r2, =0x00000ceb
 	adds r1, r0, r2
@@ -2124,7 +1554,7 @@ _080C90F0:
 	bl sub_80CE9A8
 	bl sub_80CA230
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9118:
 	pop {r4}
 	pop {r0}
@@ -2165,13 +1595,13 @@ _080C914E:
 	.pool
 _080C9168:
 	ldr r0, =sub_80C96B8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C91D2
 	.pool
 _080C9174:
 	movs r0, 0x2
 	bl sub_80CFE54
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	negs r4, r0
 	orrs r4, r0
@@ -2206,7 +1636,7 @@ _080C91C2:
 	cmp r0, 0
 	bne _080C91D2
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C91D2:
 	pop {r4,r5}
 	pop {r0}
@@ -2238,7 +1668,7 @@ _080C91FC:
 _080C9210:
 	movs r0, 0x2
 	bl sub_80CFE54
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	negs r4, r0
 	orrs r4, r0
@@ -2261,7 +1691,7 @@ _080C9238:
 	bl sub_80CE00C
 	bl sub_80CA4FC
 	movs r0, 0x1C
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	b _080C9268
 _080C9258:
 	ldr r0, =gMain
@@ -2286,7 +1716,7 @@ _080C927C:
 	cmp r0, 0
 	bne _080C928C
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C928C:
 	pop {r4}
 	pop {r0}
@@ -2331,7 +1761,7 @@ _080C92D0:
 	movs r0, 0x20
 	bl PlaySE
 	movs r0, 0x1A
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r1, [r5]
 	movs r0, 0x3
 	strb r0, [r1]
@@ -2340,7 +1770,7 @@ _080C92D0:
 _080C92FC:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	negs r4, r0
 	orrs r4, r0
@@ -2362,7 +1792,7 @@ _080C9328:
 	cmp r0, 0
 	bne _080C93A2
 	movs r0, 0x19
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x2
@@ -2391,7 +1821,7 @@ _080C9374:
 	cmp r0, 0
 	bne _080C93A2
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C93A2
 	.pool
 _080C938C:
@@ -2403,7 +1833,7 @@ _080C938C:
 	beq _080C93A2
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C93A2:
 	pop {r4,r5}
 	pop {r0}
@@ -2448,13 +1878,13 @@ _080C93E4:
 	.pool
 _080C9404:
 	ldr r0, =sub_80C96B8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C948C
 	.pool
 _080C9410:
 	movs r0, 0x2
 	bl sub_80CFE54
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	negs r4, r0
 	orrs r4, r0
@@ -2477,7 +1907,7 @@ _080C9438:
 	bl sub_80CE00C
 	bl sub_80CA4FC
 	movs r0, 0x1D
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	b _080C9468
 _080C9458:
 	ldr r0, =gMain
@@ -2502,7 +1932,7 @@ _080C947C:
 	cmp r0, 0
 	bne _080C948C
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C948C:
 	pop {r4}
 	pop {r0}
@@ -2583,7 +2013,7 @@ _080C9534:
 	cmp r0, 0
 	bne _080C9544
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9544:
 	pop {r0}
 	bx r0
@@ -2618,7 +2048,7 @@ _080C9584:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1B
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	movs r0, 0
 	bl sub_80CAD9C
 	ldr r0, =gUnknown_02039D08
@@ -2666,7 +2096,7 @@ _080C95C8:
 	.pool
 _080C95F4:
 	movs r0, 0x1A
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r1, [r4]
 	movs r0, 0x2
 	strb r0, [r1]
@@ -2702,7 +2132,7 @@ _080C9638:
 	bl sub_80CFE54
 _080C9648:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9664
 	.pool
 _080C9654:
@@ -2711,7 +2141,7 @@ _080C9654:
 	cmp r0, 0
 	bne _080C9664
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9664:
 	pop {r4}
 	pop {r0}
@@ -2746,7 +2176,7 @@ _080C969A:
 	bne _080C96AE
 	bl sub_80CAB20
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C96AE:
 	pop {r4}
 	pop {r0}
@@ -2776,7 +2206,7 @@ _080C96D4:
 	b _080C9720
 _080C96DE:
 	movs r0, 0x1E
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	b _080C9702
 _080C96E6:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -2805,7 +2235,7 @@ _080C9710:
 	cmp r0, 0
 	bne _080C9720
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9720:
 	pop {r4}
 	pop {r0}
@@ -2833,7 +2263,7 @@ _080C9748:
 	b _080C9818
 _080C974E:
 	movs r0, 0x1
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	bl sub_80CFFD0
 	ldr r1, [r4]
 	ldrb r0, [r1]
@@ -2882,14 +2312,14 @@ _080C97C4:
 	bl sub_80CD1A8
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9818
 	.pool
 _080C97DC:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =sub_80C9AC8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9818
 	.pool
 _080C97F0:
@@ -2897,7 +2327,7 @@ _080C97F0:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C9824
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9818
 	.pool
 _080C9808:
@@ -2905,7 +2335,7 @@ _080C9808:
 	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C99D8
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9818:
 	pop {r4}
 	pop {r0}
@@ -2941,7 +2371,7 @@ _080C9844:
 _080C9860:
 	bl sub_80CADD8
 	movs r0, 0x2
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	ldrb r0, [r1]
@@ -3027,7 +2457,7 @@ _080C990C:
 	ldrb r0, [r0]
 	bl sub_80CAE0C
 	movs r0, 0x3
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r1, [r4]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3080,7 +2510,7 @@ _080C9990:
 	bl sub_80CD1A8
 _080C99A0:
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C99CC
 	.pool
 _080C99AC:
@@ -3129,7 +2559,7 @@ _080C99F4:
 	b _080C9AB8
 _080C99FE:
 	movs r0, 0x5
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, [r5]
 	ldr r1, =0x00001e5c
 	adds r0, r1
@@ -3176,7 +2606,7 @@ _080C9A6C:
 	movs r0, 0x1
 	bl sub_80CD1A8
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9AB8
 	.pool
 _080C9A84:
@@ -3202,7 +2632,7 @@ _080C9A9C:
 	ldrb r0, [r0]
 	bl SetCurrentBox
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9AB8:
 	add sp, 0x4
 	pop {r4,r5}
@@ -3249,7 +2679,7 @@ _080C9AFE:
 	movs r0, 0x2
 	strb r0, [r1, 0x2]
 	ldr r0, =sub_80C9E50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9B18:
 	add sp, 0x4
 	pop {r4,r5}
@@ -3296,7 +2726,7 @@ _080C9B5E:
 	ldr r0, [r5]
 	strb r4, [r0, 0x2]
 	ldr r0, =sub_80C9E50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9B78:
 	add sp, 0x4
 	pop {r4,r5}
@@ -3343,7 +2773,7 @@ _080C9BBA:
 	movs r0, 0x3
 	strb r0, [r1, 0x2]
 	ldr r0, =sub_80C9E50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9BD6:
 	add sp, 0x4
 	pop {r4}
@@ -3376,14 +2806,14 @@ _080C9C08:
 	.4byte _080C9CC8
 	.4byte _080C9CE4
 _080C9C1C:
-	bl sub_80CEAD0
+	bl IsMonBeingMoved
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C9C40
 	movs r0, 0x20
 	bl PlaySE
 	movs r0, 0xF
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -3396,14 +2826,14 @@ _080C9C40:
 	cmp r0, 0
 	beq _080C9C58
 	ldr r0, =sub_80C954C
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9D08
 	.pool
 _080C9C58:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	movs r0, 0
 	bl sub_80CAD9C
 	ldr r0, =gUnknown_02039D08
@@ -3440,7 +2870,7 @@ _080C9CA6:
 _080C9CAA:
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9D08
 	.pool
 _080C9CBC:
@@ -3475,7 +2905,7 @@ _080C9CE4:
 	ldr r0, [r0]
 	strb r4, [r0, 0x2]
 	ldr r0, =sub_80C9E50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9D08:
 	pop {r4}
 	pop {r0}
@@ -3507,14 +2937,14 @@ _080C9D3C:
 	.4byte _080C9DFC
 	.4byte _080C9E18
 _080C9D50:
-	bl sub_80CEAD0
+	bl IsMonBeingMoved
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C9D74
 	movs r0, 0x20
 	bl PlaySE
 	movs r0, 0xF
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -3527,14 +2957,14 @@ _080C9D74:
 	cmp r0, 0
 	beq _080C9D8C
 	ldr r0, =sub_80C954C
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9E3C
 	.pool
 _080C9D8C:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x12
-	bl sub_80CAC58
+	bl PrintStorageActionText
 	movs r0, 0
 	bl sub_80CAD9C
 	ldr r0, =gUnknown_02039D08
@@ -3572,7 +3002,7 @@ _080C9DDA:
 _080C9DE0:
 	bl sub_80CADC4
 	ldr r0, =task_pokemon_box_related
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 	b _080C9E3C
 	.pool
 _080C9DF0:
@@ -3607,7 +3037,7 @@ _080C9E18:
 	ldr r0, [r0]
 	strb r4, [r0, 0x2]
 	ldr r0, =sub_80C9E50
-	bl add_to_c3_somehow
+	bl SetPSSCallback
 _080C9E3C:
 	pop {r4}
 	pop {r0}
@@ -3746,7 +3176,7 @@ sub_80C9F6C: @ 80C9F6C
 	bl sub_80CFE08
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C9FAC
@@ -4627,7 +4057,7 @@ sub_80CA704: @ 80CA704
 	movs r2, 0
 	bl sub_80D2770
 	bl sub_80CAA74
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CA790
@@ -4741,7 +4171,7 @@ sub_80CA80C: @ 80CA80C
 	b _080CA87C
 	.pool
 _080CA874:
-	ldr r1, =gUnknown_02039D0C
+	ldr r1, =sInPartyMenu
 	movs r0, 0x1
 	strb r0, [r1]
 _080CA87A:
@@ -4842,7 +4272,7 @@ sub_80CA8C8: @ 80CA8C8
 	b _080CA976
 	.pool
 _080CA94C:
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	movs r1, 0
 	strb r1, [r0]
 	bl sub_80CBB9C
@@ -5226,14 +4656,14 @@ sub_80CAC1C: @ 80CAC1C
 	bx r0
 	thumb_func_end sub_80CAC1C
 
-	thumb_func_start sub_80CAC58
-sub_80CAC58: @ 80CAC58
+	thumb_func_start PrintStorageActionText
+PrintStorageActionText: @ 80CAC58
 	push {r4-r6,lr}
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl DynamicPlaceholderTextUtil_Reset
-	ldr r1, =gUnknown_0857276C
+	ldr r1, =gPCStorageActionTexts
 	lsls r0, r6, 3
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
@@ -5318,7 +4748,7 @@ _080CAD30:
 	ldr r0, [r5]
 	ldr r4, =0x00002190
 	adds r0, r4
-	ldr r2, =gUnknown_0857276C
+	ldr r2, =gPCStorageActionTexts
 	lsls r1, r6, 3
 	adds r1, r2
 	ldr r1, [r1]
@@ -5354,7 +4784,7 @@ _080CAD30:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80CAC58
+	thumb_func_end PrintStorageActionText
 
 	thumb_func_start sub_80CAD9C
 sub_80CAD9C: @ 80CAD9C
@@ -5480,7 +4910,7 @@ _080CAE96:
 
 	thumb_func_start sub_80CAEA0
 sub_80CAEA0: @ 80CAEA0
-	ldr r0, =gUnknown_02039D0D
+	ldr r0, =sBoxOption
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -5489,11 +4919,11 @@ sub_80CAEA0: @ 80CAEA0
 	thumb_func_start sub_80CAEAC
 sub_80CAEAC: @ 80CAEAC
 	push {lr}
-	bl sub_80CEADC
+	bl IsCursorOnBox
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CAEE8
-	ldr r0, =gUnknown_02039D0C
+	ldr r0, =sInPartyMenu
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CAED8
@@ -5609,7 +5039,7 @@ _080CAF6A:
 	thumb_func_start sub_80CAFAC
 sub_80CAFAC: @ 80CAFAC
 	push {lr}
-	bl sub_80CEB24
+	bl IsCursorInBox
 	lsls r0, 24
 	movs r1, 0x1
 	cmp r0, 0
@@ -9625,7 +9055,7 @@ _080CD088:
 	lsrs r5, r0, 16
 	cmp r5, 0x1
 	bls _080CD036
-	bl sub_80CEADC
+	bl IsCursorOnBox
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CD0A2
@@ -10000,25 +9430,25 @@ sub_80CD36C: @ 80CD36C
 	ldrb r1, [r0, 0x1]
 	cmp r1, 0x1
 	beq _080CD388
-	ldr r1, =gUnknown_02039D78
+	ldr r1, =sBoxCursorAction
 	movs r0, 0
 	strb r0, [r1]
 	b _080CD38C
 	.pool
 _080CD388:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	strb r1, [r0]
 _080CD38C:
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	strb r1, [r0]
-	ldr r0, =gUnknown_02039D7B
+	ldr r0, =sMovingMonOrigBoxId
 	strb r1, [r0]
-	ldr r0, =gUnknown_02039D7C
+	ldr r0, =sMovingMonOrigBoxPos
 	strb r1, [r0]
-	ldr r0, =gUnknown_02039D7D
+	ldr r0, =sCanOnlyMove
 	strb r1, [r0]
 	bl sub_80CDC0C
 	bl sub_80CFC14
@@ -10055,7 +9485,7 @@ sub_80CD3EC: @ 80CD3EC
 	ldr r1, =0x000021ff
 	adds r0, r1
 	strb r2, [r0]
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CD426
@@ -10147,7 +9577,7 @@ _080CD4CE:
 	movs r0, 0xC
 	b _080CD4FA
 _080CD4D6:
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	movs r1, 0xE
 	cmp r0, 0
@@ -10176,7 +9606,7 @@ _080CD4FC:
 	thumb_func_start sub_80CD504
 sub_80CD504: @ 80CD504
 	push {lr}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -10184,7 +9614,7 @@ sub_80CD504: @ 80CD504
 	beq _080CD538
 	cmp r0, 0x1
 	bne _080CD54C
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0x64
@@ -10196,7 +9626,7 @@ sub_80CD504: @ 80CD504
 	b _080CD542
 	.pool
 _080CD538:
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	movs r1, 0xB
 	bl GetBoxMonDataFromSelectedBox
@@ -10617,7 +10047,7 @@ sub_80CD894: @ 80CD894
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CD8FC
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CD8FC
@@ -10645,13 +10075,13 @@ _080CD8FC:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x3
 	bne _080CD95C
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0
 	bne _080CD930
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	movs r0, 0
 	bl sub_80D0E50
@@ -10660,7 +10090,7 @@ _080CD8FC:
 _080CD930:
 	cmp r0, 0x1
 	bne _080CD93E
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	movs r0, 0x1
 	bl sub_80D0E50
@@ -10681,7 +10111,7 @@ _080CD950:
 _080CD95C:
 	cmp r4, 0x1
 	bne _080CD988
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -10776,13 +10206,13 @@ _080CDA28:
 	movs r1, 0x8
 	orrs r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0
 	bne _080CDA56
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CDA56
@@ -10798,14 +10228,14 @@ _080CDA56:
 	thumb_func_start sub_80CDA68
 sub_80CDA68: @ 80CDA68
 	push {r4,lr}
-	ldr r1, =gUnknown_02039D78
+	ldr r1, =sBoxCursorAction
 	ldr r4, =gUnknown_02039D08
 	ldr r2, [r4]
 	ldr r3, =0x00000cd4
 	adds r0, r2, r3
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	adds r3, 0x1
 	adds r0, r2, r3
 	ldrb r0, [r0]
@@ -10818,7 +10248,7 @@ sub_80CDA68: @ 80CDA68
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CDAD8
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CDAD8
@@ -10842,7 +10272,7 @@ _080CDAC0:
 	bl StartSpriteAnim
 _080CDAD8:
 	bl sub_80CEB40
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -10933,7 +10363,7 @@ _080CDB8A:
 	thumb_func_start sub_80CDBA0
 sub_80CDBA0: @ 80CDBA0
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CDBB4
@@ -10996,7 +10426,7 @@ sub_80CDC0C: @ 80CDC0C
 	thumb_func_start sub_80CDC18
 sub_80CDC18: @ 80CDC18
 	ldr r0, =gUnknown_02039D7E
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	strb r1, [r0]
 	bx lr
@@ -11104,7 +10534,7 @@ _080CDCEC:
 	beq _080CDCFE
 	b _080CDD54
 _080CDCF6:
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CDD08
@@ -11240,7 +10670,7 @@ _080CDDF8:
 	beq _080CDEA8
 	b _080CDEAC
 _080CDDFE:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -11271,7 +10701,7 @@ _080CDE2A:
 	ldr r2, =0x00000d91
 	adds r0, r2
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	bl sub_80CBD5C
 	ldr r1, [r4]
@@ -11295,7 +10725,7 @@ _080CDE68:
 	ldr r2, =0x00000d91
 	adds r0, r2
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	bl diegohint1
 	ldr r1, [r4]
@@ -11395,7 +10825,7 @@ _080CDF32:
 	thumb_func_start sub_80CDF38
 sub_80CDF38: @ 80CDF38
 	push {r4,lr}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -11403,7 +10833,7 @@ sub_80CDF38: @ 80CDF38
 	beq _080CDF68
 	cmp r0, 0x1
 	bne _080CDF94
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	ldrb r1, [r4]
 	movs r0, 0xE
 	bl sub_80CE018
@@ -11423,14 +10853,14 @@ _080CDF68:
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	ldrb r1, [r4]
 	bl sub_80CE018
 	ldrb r1, [r4]
 	movs r0, 0x1
 	bl sub_80CBC14
 _080CDF8E:
-	ldr r1, =gUnknown_02039D7A
+	ldr r1, =sIsMonBeingMoved
 	movs r0, 0x1
 	strb r0, [r1]
 _080CDF94:
@@ -11443,7 +10873,7 @@ _080CDF94:
 	thumb_func_start sub_80CDFAC
 sub_80CDFAC: @ 80CDFAC
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -11451,7 +10881,7 @@ sub_80CDFAC: @ 80CDFAC
 	beq _080CDFDC
 	cmp r0, 0x1
 	bne _080CDFFE
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	ldrb r1, [r4]
 	movs r0, 0xE
 	bl diegohint2
@@ -11465,7 +10895,7 @@ _080CDFDC:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_02039D79
+	ldr r5, =sBoxCursorPosition
 	ldrb r1, [r5]
 	adds r0, r4, 0
 	bl diegohint2
@@ -11473,7 +10903,7 @@ _080CDFDC:
 	adds r0, r4, 0
 	bl sub_80CBCAC
 _080CDFF8:
-	ldr r1, =gUnknown_02039D7A
+	ldr r1, =sIsMonBeingMoved
 	movs r0, 0
 	strb r0, [r1]
 _080CDFFE:
@@ -11505,7 +10935,7 @@ sub_80CE018: @ 80CE018
 	ldr r1, =0x000020a4
 	adds r0, r1
 	ldr r3, =gPlayerParty
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	movs r2, 0
 	ldrsb r2, [r1, r2]
 	movs r1, 0x64
@@ -11527,9 +10957,9 @@ _080CE064:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80CE0E8
-	ldr r0, =gUnknown_02039D7B
+	ldr r0, =sMovingMonOrigBoxId
 	strb r4, [r0]
-	ldr r0, =gUnknown_02039D7C
+	ldr r0, =sMovingMonOrigBoxPos
 	strb r5, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -11644,9 +11074,9 @@ _080CE154:
 	adds r0, r4
 	movs r1, 0
 	bl sub_80CEC00
-	ldr r0, =gUnknown_02039D7B
+	ldr r0, =sMovingMonOrigBoxId
 	strb r6, [r0]
-	ldr r0, =gUnknown_02039D7C
+	ldr r0, =sMovingMonOrigBoxPos
 	strb r7, [r0]
 	pop {r4-r7}
 	pop {r0}
@@ -11671,7 +11101,7 @@ sub_80CE19C: @ 80CE19C
 	movs r0, 0
 	b _080CE21A
 _080CE1BA:
-	ldr r5, =gUnknown_02039D7A
+	ldr r5, =sIsMonBeingMoved
 	ldrb r0, [r5]
 	cmp r0, 0
 	beq _080CE1DC
@@ -11685,7 +11115,7 @@ _080CE1BA:
 	b _080CE1F6
 	.pool
 _080CE1DC:
-	ldr r5, =gUnknown_02039D79
+	ldr r5, =sBoxCursorPosition
 	ldrb r1, [r5]
 	movs r0, 0xE
 	bl sub_80CE018
@@ -11738,7 +11168,7 @@ sub_80CE22C: @ 80CE22C
 	thumb_func_start sub_80CE250
 sub_80CE250: @ 80CE250
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE264
@@ -11746,7 +11176,7 @@ sub_80CE250: @ 80CE250
 	b _080CE274
 	.pool
 _080CE264:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r2, 0x1
@@ -11755,7 +11185,7 @@ _080CE264:
 	orrs r0, r1
 	lsrs r2, r0, 31
 _080CE274:
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	adds r0, r2, 0
 	bl sub_80CBF14
@@ -11799,7 +11229,7 @@ _080CE2CA:
 sub_80CE2D8: @ 80CE2D8
 	push {lr}
 	bl sub_80CC020
-	ldr r1, =gUnknown_02039D7A
+	ldr r1, =sIsMonBeingMoved
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _080CE2F0
@@ -11808,7 +11238,7 @@ sub_80CE2D8: @ 80CE2D8
 	b _080CE316
 	.pool
 _080CE2F0:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -11822,7 +11252,7 @@ _080CE304:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _080CE30C:
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	adds r0, r2, 0
 	bl sub_80CE0E8
@@ -11836,7 +11266,7 @@ _080CE316:
 	thumb_func_start sub_80CE324
 sub_80CE324: @ 80CE324
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE33E
@@ -11914,7 +11344,7 @@ sub_80CE3A0: @ 80CE3A0
 	b _080CE504
 	.pool
 _080CE3D0:
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE418
@@ -11939,7 +11369,7 @@ _080CE3D0:
 	b _080CE494
 	.pool
 _080CE418:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -11950,7 +11380,7 @@ _080CE418:
 	ldr r2, =0x00002108
 	adds r0, r2
 	ldr r3, =gPlayerParty
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	movs r2, 0
 	ldrsb r2, [r1, r2]
 	movs r1, 0x64
@@ -11969,7 +11399,7 @@ _080CE464:
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	ldr r4, =gUnknown_02039D08
 	ldr r2, [r4]
@@ -11984,7 +11414,7 @@ _080CE464:
 _080CE488:
 	ldr r0, =gUnknown_02039D08
 	ldr r0, [r0]
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	ldr r3, =0x00002171
 	adds r0, r3
@@ -12040,7 +11470,7 @@ _080CE504:
 	thumb_func_start sub_80CE51C
 sub_80CE51C: @ 80CE51C
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r1, [r0]
 	negs r0, r1
 	orrs r0, r1
@@ -12309,7 +11739,7 @@ _080CE736:
 	thumb_func_start sub_80CE760
 sub_80CE760: @ 80CE760
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE77A
@@ -12329,11 +11759,11 @@ _080CE77A:
 	thumb_func_start sub_80CE790
 sub_80CE790: @ 80CE790
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE7D8
-	ldr r0, =gUnknown_02039D7B
+	ldr r0, =sMovingMonOrigBoxId
 	ldrb r0, [r0]
 	cmp r0, 0xE
 	bne _080CE7C8
@@ -12363,7 +11793,7 @@ _080CE7D8:
 	thumb_func_start sub_80CE7E8
 sub_80CE7E8: @ 80CE7E8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r5, [r0]
 	cmp r5, 0
 	beq _080CE838
@@ -12389,7 +11819,7 @@ sub_80CE7E8: @ 80CE7E8
 	b _080CE8CA
 	.pool
 _080CE838:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -12401,7 +11831,7 @@ _080CE838:
 	adds r2, r1, r0
 	ldr r0, =gPlayerParty
 	str r0, [r2]
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	ldr r2, =0x00002187
 	adds r1, r2
@@ -12429,7 +11859,7 @@ _080CE894:
 	ldr r4, =0x0000218c
 	adds r1, r2, r4
 	str r0, [r1]
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	ldr r1, =0x00002187
 	adds r2, r1
@@ -12454,7 +11884,7 @@ _080CE8CA:
 	thumb_func_start sub_80CE8E4
 sub_80CE8E4: @ 80CE8E4
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE8F8
@@ -12462,7 +11892,7 @@ sub_80CE8E4: @ 80CE8E4
 	b _080CE900
 	.pool
 _080CE8F8:
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldr r1, =gUnknown_0203CF20
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -12565,7 +11995,7 @@ sub_80CE9A8: @ 80CE9A8
 	ldr r3, =0x00000ceb
 	adds r1, r3
 	strb r0, [r1]
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CE9E8
@@ -12578,12 +12008,12 @@ sub_80CE9A8: @ 80CE9A8
 	b _080CEA1C
 	.pool
 _080CE9E8:
-	ldr r4, =gUnknown_02039D78
+	ldr r4, =sBoxCursorAction
 	movs r0, 0
 	ldrsb r0, [r4, r0]
 	cmp r0, 0x1
 	bne _080CEA08
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0x64
@@ -12598,7 +12028,7 @@ _080CEA08:
 	ldrsb r0, [r4, r0]
 	cmp r0, 0
 	bne _080CEA1C
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	movs r1, 0x8
 	mov r2, sp
@@ -12611,20 +12041,20 @@ _080CEA1C:
 	.pool
 	thumb_func_end sub_80CE9A8
 
-	thumb_func_start sub_80CEA30
-sub_80CEA30: @ 80CEA30
+	thumb_func_start CanMoveMon
+CanMoveMon: @ 80CEA30
 	push {lr}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
 	bne _080CEA64
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CEA64
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
@@ -12638,22 +12068,22 @@ _080CEA64:
 _080CEA66:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CEA30
+	thumb_func_end CanMoveMon
 
-	thumb_func_start sub_80CEA6C
-sub_80CEA6C: @ 80CEA6C
+	thumb_func_start CanShifMon
+CanShifMon: @ 80CEA6C
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CEAC8
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
 	bne _080CEAAC
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
@@ -12681,21 +12111,21 @@ _080CEAC8:
 _080CEACA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80CEA6C
+	thumb_func_end CanShifMon
 
-	thumb_func_start sub_80CEAD0
-sub_80CEAD0: @ 80CEAD0
-	ldr r0, =gUnknown_02039D7A
+	thumb_func_start IsMonBeingMoved
+IsMonBeingMoved: @ 80CEAD0
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80CEAD0
+	thumb_func_end IsMonBeingMoved
 
-	thumb_func_start sub_80CEADC
-sub_80CEADC: @ 80CEADC
+	thumb_func_start IsCursorOnBox
+IsCursorOnBox: @ 80CEADC
 	push {lr}
 	movs r1, 0
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -12707,19 +12137,19 @@ _080CEAEE:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80CEADC
+	thumb_func_end IsCursorOnBox
 
-	thumb_func_start sub_80CEAF8
-sub_80CEAF8: @ 80CEAF8
+	thumb_func_start IsCursorOnCloseBox
+IsCursorOnCloseBox: @ 80CEAF8
 	push {lr}
 	movs r1, 0
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x3
 	bne _080CEB16
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -12731,13 +12161,13 @@ _080CEB16:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80CEAF8
+	thumb_func_end IsCursorOnCloseBox
 
-	thumb_func_start sub_80CEB24
-sub_80CEB24: @ 80CEB24
+	thumb_func_start IsCursorInBox
+IsCursorInBox: @ 80CEB24
 	push {lr}
 	movs r1, 0
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -12749,7 +12179,7 @@ _080CEB36:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80CEB24
+	thumb_func_end IsCursorInBox
 
 	thumb_func_start sub_80CEB40
 sub_80CEB40: @ 80CEB40
@@ -12757,7 +12187,7 @@ sub_80CEB40: @ 80CEB40
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r2, 0
-	ldr r3, =gUnknown_02039D7A
+	ldr r3, =sIsMonBeingMoved
 	ldrb r0, [r3]
 	cmp r0, 0
 	bne _080CEB52
@@ -12769,7 +12199,7 @@ _080CEB52:
 	ldrb r0, [r3]
 	cmp r0, 0
 	bne _080CEBD0
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -12786,7 +12216,7 @@ _080CEB84:
 	bgt _080CEBD0
 	b _080CEBB0
 _080CEB8A:
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	movs r0, 0
 	ldrsb r0, [r1, r0]
 	cmp r0, 0x5
@@ -12809,7 +12239,7 @@ _080CEBBA:
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	bl GetBoxedMonPtr
 	movs r1, 0x1
@@ -12824,7 +12254,7 @@ _080CEBD0:
 	thumb_func_start sub_80CEBDC
 sub_80CEBDC: @ 80CEBDC
 	push {lr}
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CEBF8
@@ -13367,10 +12797,10 @@ sub_80CF108: @ 80CF108
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	mov r8, r0
-	ldr r2, =gUnknown_02039D79
+	ldr r2, =sBoxCursorPosition
 	ldrb r4, [r2]
 	ldr r5, =gUnknown_02039D08
 	ldr r0, [r5]
@@ -13502,7 +12932,7 @@ _080CF220:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF2E4
-	ldr r0, =gUnknown_02039D7D
+	ldr r0, =sCanOnlyMove
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CF244
@@ -13514,7 +12944,7 @@ _080CF244:
 	ldrb r0, [r1, 0x1]
 	cmp r0, 0x2
 	bne _080CF254
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080CF2D4
@@ -13674,7 +13104,7 @@ sub_80CF374: @ 80CF374
 	ands r0, r1
 	cmp r0, 0
 	beq _080CF3AC
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	movs r0, 0
 	ldrsb r0, [r4, r0]
 	movs r1, 0x6
@@ -13691,7 +13121,7 @@ _080CF3AC:
 	ands r0, r1
 	cmp r0, 0
 	beq _080CF3CC
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	movs r0, 0
 	ldrsb r0, [r1, r0]
 	adds r0, 0x6
@@ -13706,7 +13136,7 @@ _080CF3CC:
 	ands r0, r1
 	cmp r0, 0
 	beq _080CF3F0
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	movs r0, 0
 	ldrsb r0, [r4, r0]
 	movs r1, 0x6
@@ -13723,7 +13153,7 @@ _080CF3F0:
 	ands r0, r1
 	cmp r0, 0
 	beq _080CF424
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	movs r0, 0
 	ldrsb r0, [r4, r0]
 	adds r0, 0x1
@@ -13751,13 +13181,13 @@ _080CF428:
 	bl sub_80D0BA4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	lsls r1, 24
 	asrs r1, 24
 	cmp r0, r1
 	beq _080CF47C
-	ldr r2, =gUnknown_02039D7A
+	ldr r2, =sIsMonBeingMoved
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	ldr r3, =0x00000ce4
@@ -13771,7 +13201,7 @@ _080CF428:
 	movs r0, 0x2
 	strb r0, [r1]
 	bl StorageGetCurrentBox
-	ldr r1, =gUnknown_02039D7B
+	ldr r1, =sMovingMonOrigBoxId
 	strb r0, [r1]
 	movs r0, 0x17
 	b _080CF49C
@@ -13814,7 +13244,7 @@ sub_80CF4B0: @ 80CF4B0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF588
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	subs r1, 0x6
 	b _080CF53A
@@ -13829,7 +13259,7 @@ _080CF4DC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF588
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	adds r1, 0x6
 	b _080CF53A
@@ -13844,7 +13274,7 @@ _080CF4FC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF5A2
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	subs r1, 0x1
 	b _080CF53A
@@ -13861,7 +13291,7 @@ _080CF51C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF5B6
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	adds r1, 0x1
 _080CF53A:
@@ -13882,7 +13312,7 @@ _080CF54C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF588
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	strb r4, [r0]
 	ldr r0, =gUnknown_02039D08
 	ldr r0, [r0]
@@ -13939,10 +13369,10 @@ sub_80CF5C4: @ 80CF5C4
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	mov r9, r0
-	ldr r6, =gUnknown_02039D79
+	ldr r6, =sBoxCursorPosition
 	ldrb r4, [r6]
 	ldr r2, =gUnknown_02039D08
 	ldr r0, [r2]
@@ -14063,7 +13493,7 @@ _080CF6C4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CF75C
-	ldr r0, =gUnknown_02039D7D
+	ldr r0, =sCanOnlyMove
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CF6E0
@@ -14327,10 +13757,10 @@ sub_80CF8D8: @ 80CF8D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	mov r8, r0
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	mov r12, r0
 	ldrb r2, [r0]
 	ldr r3, =gUnknown_02039D08
@@ -14470,7 +13900,7 @@ sub_80CF9EC: @ 80CF9EC
 	adds r4, r0, 0
 	cmp r1, 0
 	beq _080CFA30
-	ldr r5, =gUnknown_02039D78
+	ldr r5, =sBoxCursorAction
 _080CF9FC:
 	lsls r0, r3, 3
 	adds r2, r0, r4
@@ -14574,7 +14004,7 @@ _080CFABA:
 	bl sub_80CFF34
 	b _080CFAF8
 _080CFAC6:
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CFAE8
@@ -14605,7 +14035,7 @@ _080CFAF8:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x2
 	bne _080CFB2A
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -14764,9 +14194,9 @@ sub_80CFC14: @ 80CFC14
 	ldr r5, =0x00000cd9
 	adds r1, r5
 	strb r0, [r1]
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_02039D79
+	ldr r1, =sBoxCursorPosition
 	ldrb r1, [r1]
 	add r4, sp, 0x28
 	mov r5, sp
@@ -14794,7 +14224,7 @@ sub_80CFC14: @ 80CFC14
 	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r3]
-	ldr r0, =gUnknown_02039D7D
+	ldr r0, =sCanOnlyMove
 	ldr r5, =0x00000cd8
 	adds r2, r5
 	ldrb r0, [r0]
@@ -14816,7 +14246,7 @@ sub_80CFC14: @ 80CFC14
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, =gUnknown_02039D7A
+	ldr r0, =sIsMonBeingMoved
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080CFD22
@@ -14834,7 +14264,7 @@ _080CFD18:
 	movs r1, 0
 	str r1, [r0]
 _080CFD22:
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -14873,7 +14303,7 @@ _080CFD40:
 	ands r0, r2
 	orrs r0, r3
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
@@ -14908,7 +14338,7 @@ _080CFDB4:
 	thumb_func_start sub_80CFDC4
 sub_80CFDC4: @ 80CFDC4
 	push {lr}
-	ldr r2, =gUnknown_02039D7D
+	ldr r2, =sCanOnlyMove
 	movs r1, 0
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -14939,7 +14369,7 @@ _080CFDD2:
 
 	thumb_func_start sub_80CFE08
 sub_80CFE08: @ 80CFE08
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -14950,13 +14380,13 @@ sub_80CFE14: @ 80CFE14
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0
 	bne _080CFE48
-	ldr r4, =gUnknown_02039D79
+	ldr r4, =sBoxCursorPosition
 	movs r0, 0
 	ldrsb r0, [r4, r0]
 	movs r1, 0x6
@@ -14997,7 +14427,7 @@ sub_80CFE54: @ 80CFE54
 
 	thumb_func_start sub_80CFE78
 sub_80CFE78: @ 80CFE78
-	ldr r0, =gUnknown_02039D7B
+	ldr r0, =sMovingMonOrigBoxId
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -15024,13 +14454,13 @@ sub_80CFE84: @ 80CFE84
 	thumb_func_start sub_80CFEA8
 sub_80CFEA8: @ 80CFEA8
 	push {lr}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0
 	bne _080CFEC0
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	movs r0, 0
 	bl sub_80D0E50
@@ -15043,13 +14473,13 @@ _080CFEC0:
 	thumb_func_start sub_80CFECC
 sub_80CFECC: @ 80CFECC
 	push {lr}
-	ldr r0, =gUnknown_02039D78
+	ldr r0, =sBoxCursorAction
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0
 	bne _080CFEE4
-	ldr r0, =gUnknown_02039D79
+	ldr r0, =sBoxCursorPosition
 	ldrb r1, [r0]
 	movs r0, 0
 	bl sub_80D0D8C

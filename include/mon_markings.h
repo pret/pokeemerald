@@ -21,6 +21,8 @@ struct PokemonMarkMenu
     /*0x10B4*/ u8 tileLoadState;
 }; // 10b8
 
+void sub_811F90C(struct PokemonMarkMenu *ptr);
+void sub_811FA90(void);
 struct Sprite *sub_811FF94(u16 tileTag, u16 paletteTag, const u16 *palette);
 
 #endif //POKEEMERALD_MON_MARKINGS_H
