@@ -170,7 +170,7 @@ static bool8 sub_8137304(void)
     return FALSE;
 }
 
-bool8 sub_8137360(u8 a1, u8 a2)
+bool8 GetMapPairFadeToType(u8 a1, u8 a2)
 {
     u8 i;
     u8 v0 = a1;
@@ -187,7 +187,7 @@ bool8 sub_8137360(u8 a1, u8 a2)
     return FALSE;
 }
 
-bool8 fade_type_for_given_maplight_pair(u8 a1, u8 a2)
+bool8 GetMapPairFadeFromType(u8 a1, u8 a2)
 {
     u8 i;
     u8 v0 = a1;

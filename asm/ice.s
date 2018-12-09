@@ -1368,7 +1368,7 @@ _0810C0E2:
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
-	ldr r0, =gUnknown_0854C270
+	ldr r0, =gUnknown_083970E8
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -1650,7 +1650,7 @@ _0810C366:
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
-	ldr r0, =gUnknown_0854C270
+	ldr r0, =gUnknown_083970E8
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4

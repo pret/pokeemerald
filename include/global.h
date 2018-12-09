@@ -881,7 +881,7 @@ struct SaveBlock1
     /*0x24*/ struct WarpData warp4;
     /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
-    /*0x2F*/ u8 filler_2F;
+    /*0x2F*/ u8 weatherCycleStage;
     /*0x30*/ u8 flashLevel;
     /*0x32*/ u16 mapLayoutId;
     /*0x34*/ u16 mapView[0x100];

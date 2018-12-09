@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "constants/bg_event_constants.h"
 #include "constants/decorations.h"
@@ -19,7 +17,7 @@
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
