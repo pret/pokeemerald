@@ -48,7 +48,7 @@ MtChimney_CableCarStation_EventScript_22AC6C:: @ 822AC6C
 	setvar VAR_0x40A3, 2
 	incrementgamestat 48
 	special CableCarWarp
-	special sub_814FC9C
+	special CableCar
 	waitstate
 	release
 	end

@@ -163,7 +163,7 @@ gSpecials:: @ 81DBA64
 	def_special GetRivalSonDaughterString
 	def_special SetFlagInVar
 	def_special CableCarWarp
-	def_special sub_814FC9C
+	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
 	def_special Special_ViewWallClock
