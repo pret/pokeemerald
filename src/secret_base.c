@@ -3,7 +3,7 @@
 #include "global.h"
 #include "constants/bg_event_constants.h"
 #include "constants/decorations.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "main.h"
 #include "task.h"
 #include "palette.h"

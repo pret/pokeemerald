@@ -9,7 +9,7 @@
 #include "string_util.h"
 #include "palette.h"
 #include "save.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "util.h"
 #include "task.h"
 #include "text.h"
@@ -221,7 +221,7 @@ u8 RecordedBattle_GetBattlerAction(u8 battlerId)
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
-        return -1;
+        return 0xFF;
     }
     else
     {

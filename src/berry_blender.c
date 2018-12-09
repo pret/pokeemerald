@@ -12,7 +12,7 @@
 #include "bg.h"
 #include "palette.h"
 #include "decompress.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "gpu_regs.h"
 #include "text.h"
 #include "text_window.h"

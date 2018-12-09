@@ -186,7 +186,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
             return (u8)i;
 
-    return -1;
+    return 0xFF;
 }
 
 u8 GetTaskCount(void)

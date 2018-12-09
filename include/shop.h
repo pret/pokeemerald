@@ -17,7 +17,7 @@ enum
     X_COORD,
     Y_COORD,
     ANIM_NUM,
-	LAYER_TYPE
+    LAYER_TYPE
 };
 
 struct MartInfo
@@ -32,16 +32,16 @@ struct MartInfo
 
 struct ShopData
 {
-	/*0x0000*/ u16 tilemapBuffers[4][0x400];
-	/*0x2000*/ u32 totalCost;
-	/*0x2004*/ u16 itemsShowed;
-	/*0x2006*/ u16 selectedRow;
-	/*0x2008*/ u16 scrollOffset;
-	/*0x200A*/ u8 maxQuantity;
-	/*0x200B*/ u8 scrollIndicatorsTaskId;
-	/*0x200C*/ u8 iconSlot;
-	/*0x200D*/ u8 itemSpriteIds[2];
-	/*0x2010*/ s16 viewportObjects[16][5];
+    /*0x0000*/ u16 tilemapBuffers[4][0x400];
+    /*0x2000*/ u32 totalCost;
+    /*0x2004*/ u16 itemsShowed;
+    /*0x2006*/ u16 selectedRow;
+    /*0x2008*/ u16 scrollOffset;
+    /*0x200A*/ u8 maxQuantity;
+    /*0x200B*/ u8 scrollIndicatorsTaskId;
+    /*0x200C*/ u8 iconSlot;
+    /*0x200D*/ u8 itemSpriteIds[2];
+    /*0x2010*/ s16 viewportObjects[16][5];
 };
 
 void CreatePokemartMenu(const u16 *);

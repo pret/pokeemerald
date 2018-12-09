@@ -2,7 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "random.h"
 #include "roulette_util.h"
 #include "script.h"
