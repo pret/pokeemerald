@@ -1458,7 +1458,7 @@ static u16 sub_81A9F90(u8 count)
         do
         {
             trainerId = sub_8162548(challengeNum + 1, battleNum);
-            for (i = 0 ; i < count; i++)
+            for (i = 0; i < count; i++)
             {
                 if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
                     break;
@@ -1470,7 +1470,7 @@ static u16 sub_81A9F90(u8 count)
         do
         {
             trainerId = sub_8162548(challengeNum, battleNum);
-            for (i = 0 ; i < count; i++)
+            for (i = 0; i < count; i++)
             {
                 if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
                     break;

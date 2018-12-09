@@ -5594,7 +5594,7 @@ bool8 TryRunFromBattle(u8 battler)
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
     {
-        gLastUsedItem = gBattleMons[battler].item ;
+        gLastUsedItem = gBattleMons[battler].item;
         gProtectStructs[battler].fleeFlag = 1;
         effect++;
     }
