@@ -214,7 +214,7 @@ SECTIONS {
         src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
-        asm/cable_car.o(.text);
+        src/cable_car.o(.text);
         src/math_util.o(.text);
         src/roulette_util.o(.text);
         src/rom_81520A8.o(.text);
@@ -533,7 +533,7 @@ SECTIONS {
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
-        data/cable_car.o(.rodata);
+        src/cable_car.o(.rodata);
         src/save.o(.rodata);
         src/field_effect_helpers.o(.rodata);
         data/field_effect_helpers.o(.rodata);

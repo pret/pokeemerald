@@ -334,28 +334,7 @@ gUnknown_0203AB8C: @ 203AB8C
 	.include "src/coins.o"
 	.include "src/battle_transition.o"
 	.include "src/battle_message.o"
-
-gUnknown_0203ABAC: @ 203ABAC
-	.space 0x4
-
-gUnknown_0203ABB0: @ 203ABB0
-	.space 0x1
-
-gUnknown_0203ABB1: @ 203ABB1
-	.space 0x1
-
-gUnknown_0203ABB2: @ 203ABB2
-	.space 0x1
-
-gUnknown_0203ABB3: @ 203ABB3
-	.space 0x1
-
-gUnknown_0203ABB4: @ 203ABB4
-	.space 0x1
-
-gUnknown_0203ABB5: @ 203ABB5
-	.space 0x3
-
+	.include "src/cable_car.o"
 	.include "src/rom_81520A8.o"
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"

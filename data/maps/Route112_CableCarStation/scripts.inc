@@ -49,7 +49,7 @@ Route112_CableCarStation_EventScript_22AB38:: @ 822AB38
 	setvar VAR_0x40A3, 1
 	incrementgamestat 48
 	special CableCarWarp
-	special sub_814FC9C
+	special CableCar
 	waitstate
 	release
 	end
