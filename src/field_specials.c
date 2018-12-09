@@ -20,7 +20,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
@@ -1691,22 +1691,22 @@ const struct WindowTemplate gUnknown_085B2BAC = {
 };
 
 const u8 *const gElevatorFloorsTable[] = {
-	gText_B4F,
-	gText_B3F,
-	gText_B2F,
-	gText_B1F,
-	gText_1F,
-	gText_2F,
-	gText_3F,
-	gText_4F,
-	gText_5F,
-	gText_6F,
-	gText_7F,
-	gText_8F,
-	gText_9F,
-	gText_10F,
-	gText_11F,
-	gText_Rooftop
+    gText_B4F,
+    gText_B3F,
+    gText_B2F,
+    gText_B1F,
+    gText_1F,
+    gText_2F,
+    gText_3F,
+    gText_4F,
+    gText_5F,
+    gText_6F,
+    gText_7F,
+    gText_8F,
+    gText_9F,
+    gText_10F,
+    gText_11F,
+    gText_Rooftop
 };
 
 const u16 gUnknown_085B2BF4[][3] =
@@ -1957,7 +1957,7 @@ void sub_8139D98(void)
 
 bool32 warp0_in_pokecenter(void)
 {
-    static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
+    static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xFFFF };
 
     int i;
     u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
@@ -2946,10 +2946,10 @@ void sub_813AA44(void)
 
 static void sub_813AA60(u16 a0, u16 a1)
 {
-    static const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xffff };
-    static const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xffff };
-    static const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xffff };
-    static const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xffff };
+    static const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xFFFF };
+    static const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xFFFF };
+    static const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xFFFF };
+    static const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xFFFF };
 
     static const u8 *const gUnknown_085B3170[] = {
         BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA,
@@ -3841,7 +3841,7 @@ bool32 sub_813B9C0(void)
         MAP_TRADE_CENTER,
         MAP_RECORD_CORNER,
         MAP_DOUBLE_BATTLE_COLOSSEUM,
-        0xffff
+        0xFFFF
     };
 
     int i;

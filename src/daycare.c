@@ -532,7 +532,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     s32 i, j;
     u8 temp[NUM_STATS];
 
-    ivs[selectedIv] = 0xff;
+    ivs[selectedIv] = 0xFF;
     for (i = 0; i < NUM_STATS; i++)
     {
         temp[i] = ivs[i];
@@ -541,7 +541,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     j = 0;
     for (i = 0; i < NUM_STATS; i++)
     {
-        if (temp[i] != 0xff)
+        if (temp[i] != 0xFF)
             ivs[j++] = temp[i];
     }
 }
@@ -681,7 +681,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == sHatchedEggEggMoves[j])
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xFFFF)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                     break;
                 }
@@ -700,7 +700,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xFFFF)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                 }
             }
@@ -725,7 +725,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             if (sHatchedEggLevelUpMoves[j] != MOVE_NONE && sHatchedEggFinalMoves[i] == sHatchedEggLevelUpMoves[j])
             {
-                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == 0xffff)
+                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == 0xFFFF)
                     DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFinalMoves[i]);
                 break;
             }

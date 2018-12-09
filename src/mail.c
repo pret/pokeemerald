@@ -17,7 +17,7 @@
 #include "bg.h"
 #include "pokemon_icon.h"
 #include "constants/species.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "easy_chat.h"
 
 extern const u16 gMailPalette_Orange[];

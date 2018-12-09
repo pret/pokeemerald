@@ -305,7 +305,7 @@ const union AnimCmd *const gNewGameBirchImageAnimTable[] = {
 };
 
 const struct SpriteTemplate gNewGameBirchObjectTemplate = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4102,
     .oam = &gNewGameBirchOamAttributes,
     .anims = gNewGameBirchImageAnimTable,
@@ -383,7 +383,7 @@ const union AnimCmd *const gSpriteAnimTable_855C300[] = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C304 = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4103,
     .oam = &gOamData_855C218,
     .anims = gSpriteAnimTable_855C2F8,
@@ -393,7 +393,7 @@ const struct SpriteTemplate gSpriteTemplate_855C304 = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C31C = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4100,
     .oam = &gOamData_855C220,
     .anims = gSpriteAnimTable_855C2F8,
@@ -403,7 +403,7 @@ const struct SpriteTemplate gSpriteTemplate_855C31C = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C334 = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4112,
     .oam = &gOamData_855C220,
     .anims = gSpriteAnimTable_855C300,
@@ -413,7 +413,7 @@ const struct SpriteTemplate gSpriteTemplate_855C334 = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C34C = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4112,
     .oam = &gOamData_855C26C,
     .anims = gSpriteAnimTable_855C300,
@@ -3591,7 +3591,7 @@ const union AnimCmd *const gSpriteAnimTable_855C5DC[] = {
 };
 
 const struct SpriteTemplate gUnknown_0855C5EC = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4378,
     .oam = &gOamData_855C218,
     .anims = gSpriteAnimTable_855C5DC,

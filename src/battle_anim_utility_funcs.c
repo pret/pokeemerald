@@ -3,7 +3,7 @@
 #include "contest.h"
 #include "gpu_regs.h"
 #include "graphics.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"

@@ -7,7 +7,7 @@
 #include "field_effect.h"
 #include "gpu_regs.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
@@ -612,32 +612,32 @@ static const s16 gUnknown_085C8CF2[] = {4, 517, -1};
 
 static const s16 *const gUnknown_085C8CF8[] =
 {
-	gUnknown_085C8C90,
-	gUnknown_085C8CA4,
-	gUnknown_085C8C98,
-	gUnknown_085C8C9E,
-	gUnknown_085C8CEA,
-	gUnknown_085C8CE4,
-	gUnknown_085C8CF2,
-	gUnknown_085C8CDE
+    gUnknown_085C8C90,
+    gUnknown_085C8CA4,
+    gUnknown_085C8C98,
+    gUnknown_085C8C9E,
+    gUnknown_085C8CEA,
+    gUnknown_085C8CE4,
+    gUnknown_085C8CF2,
+    gUnknown_085C8CDE
 };
 
 static const s16 *const gUnknown_085C8D18[] =
 {
-	gUnknown_085C8CBC,
-	gUnknown_085C8CB0,
-	gUnknown_085C8CB6,
-	gUnknown_085C8CAA,
-	gUnknown_085C8CCA,
-	gUnknown_085C8CD8,
-	gUnknown_085C8CC4,
-	gUnknown_085C8CD2
+    gUnknown_085C8CBC,
+    gUnknown_085C8CB0,
+    gUnknown_085C8CB6,
+    gUnknown_085C8CAA,
+    gUnknown_085C8CCA,
+    gUnknown_085C8CD8,
+    gUnknown_085C8CC4,
+    gUnknown_085C8CD2
 };
 
 static const s16 *const *const gUnknown_085C8D38[] =
 {
-	gUnknown_085C8CF8,
-	gUnknown_085C8D18
+    gUnknown_085C8CF8,
+    gUnknown_085C8D18
 };
 
 static const TransitionStateFunc sPhase2_Groudon_Funcs[] =
