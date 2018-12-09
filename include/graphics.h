@@ -3360,7 +3360,7 @@ extern const u32 gRaySceneHushBg_Gfx[];
 extern const u32 gRaySceneHushRing_Gfx[];
 
 // Pokeballs
-extern const u32 gItemIcon_MasterBall[]; 	
+extern const u32 gItemIcon_MasterBall[];
 extern const u32 gItemIconPalette_MasterBall[];
 extern const u32 gItemIcon_UltraBall[];
 extern const u32 gItemIconPalette_UltraBall[];

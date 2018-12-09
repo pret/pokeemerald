@@ -4,7 +4,7 @@
 #include "main.h"
 #include "pokemon.h"
 #include "random.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "item.h"
 #include "overworld.h"
 #include "decoration_inventory.h"

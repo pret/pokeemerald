@@ -3,7 +3,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "link.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "random.h"
 #include "text.h"
 #include "tv.h"

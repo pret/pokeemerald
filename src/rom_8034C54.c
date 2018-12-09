@@ -1,6 +1,6 @@
 #include "global.h"
 #include "rom_8034C54.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "decompress.h"
 #include "main.h"
 

@@ -3,7 +3,7 @@
 #include "main.h"
 #include "task.h"
 #include "bg.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "window.h"
 #include "text.h"
 #include "menu.h"

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/decorations.h"
 #include "decompress.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "text.h"
 #include "string_util.h"
 #include "international_string_util.h"
@@ -312,7 +312,7 @@ const struct SpriteFrameImage sDecorSelectorSpriteFrameImages = {
 };
 
 const struct SpriteTemplate sDecorSelectorSpriteTemplate = {
-    0xffff,
+    0xFFFF,
     OVERWORLD_PLACE_DECOR_SELECTOR_PAL_TAG,
     &sDecorSelectorOam,
     sDecorSelectorAnims,

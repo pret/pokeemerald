@@ -7,7 +7,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "librfu.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
