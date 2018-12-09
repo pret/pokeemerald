@@ -5,7 +5,7 @@
 #include "graphics.h"
 #include "bg.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "scanline_effect.h"
 #include "menu.h"
@@ -89,13 +89,13 @@ static void sub_81D9868(struct Sprite *sprite, u8 animNum, s16 x, s16 y);
 // const rom data
 static const TaskFunc sTasksForAnimations[] =
 {
-    Task_DuoFightAnim, // RAY_ANIM_DUO_FIGHT_PRE
-    Task_DuoFightAnim, // RAY_ANIM_DUO_FIGHT
-    Task_RayTakesFlightAnim, // RAY_ANIM_TAKES_FLIGHT
-    Task_RayDescendsAnim, // RAY_ANIM_DESCENDS
-    Task_RayChargesAnim, // RAY_ANIM_CHARGES
-    Task_RayChasesAwayAnim, // RAY_ANIM_CHACES_AWAY
-    Task_EndAfterFadeScreen // RAY_ANIM_END
+    [RAY_ANIM_DUO_FIGHT_PRE] = Task_DuoFightAnim,
+    [RAY_ANIM_DUO_FIGHT] = Task_DuoFightAnim,
+    [RAY_ANIM_TAKES_FLIGHT] = Task_RayTakesFlightAnim,
+    [RAY_ANIM_DESCENDS] = Task_RayDescendsAnim,
+    [RAY_ANIM_CHARGES] = Task_RayChargesAnim,
+    [RAY_ANIM_CHACES_AWAY] = Task_RayChasesAwayAnim,
+    [RAY_ANIM_END] = Task_EndAfterFadeScreen,
 };
 
 static const struct OamData sOamData_862A6BC =

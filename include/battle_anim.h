@@ -3,6 +3,7 @@
 
 #include "battle.h"
 #include "constants/battle_anim.h"
+#include "task.h"
 
 enum
 {
@@ -124,6 +125,11 @@ void sub_80A6D60(struct UnknownAnimStruct2*, const void*, u32);
 void sub_80A6CC0(u32, const void*, u32);
 void sub_80A6DAC(bool8);
 void sub_80A634C(struct Sprite *);
+void sub_80A653C(struct Sprite *);
+void sub_80A7E6C(u8 spriteId);
+void sub_80A805C(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
+u8 sub_80A80C8(struct Task *task);
+void sub_80A8EE4(struct Sprite *);
 
 enum
 {

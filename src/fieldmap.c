@@ -496,7 +496,7 @@ u16 GetBehaviorByMetatileId(u16 metatile)
     }
     else
     {
-        return 0xff;
+        return 0xFF;
     }
 }
 

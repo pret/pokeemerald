@@ -1007,15 +1007,15 @@ void UpdateSurfBlobFieldEffect(struct Sprite *sprite)
 static void SynchroniseSurfAnim(struct EventObject *eventObject, struct Sprite *sprite)
 {
     u8 surfBlobDirectionAnims[] = {
-        0, // DIR_NONE
-        0, // DIR_SOUTH
-        1, // DIR_NORTH
-        2, // DIR_WEST
-        3, // DIR_EAST
-        0,
-        0,
-        1,
-        1,
+        [DIR_NONE] = 0,
+        [DIR_SOUTH] = 0,
+        [DIR_NORTH] = 1,
+        [DIR_WEST] = 2,
+        [DIR_EAST] = 3,
+        [DIR_SOUTHWEST] = 0,
+        [DIR_SOUTHEAST] = 0,
+        [DIR_NORTHWEST] = 1,
+        [DIR_NORTHEAST] = 1,
     };
 
     if (sub_8155640(sprite) == 0)

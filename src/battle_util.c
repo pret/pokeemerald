@@ -891,12 +891,12 @@ u8 DoFieldEndTurnEffects(void)
             }
 
             gBattleStruct->turnCountersTracker++;
-            gBattleStruct->turnEffectsSide = 0;
+            gBattleStruct->turnSideTracker = 0;
             // fall through
         case ENDTURN_REFLECT:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].reflectBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_REFLECT)
                 {
@@ -908,20 +908,20 @@ u8 DoFieldEndTurnEffects(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_LIGHT_SCREEN:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].lightscreenBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN)
                 {
@@ -934,20 +934,20 @@ u8 DoFieldEndTurnEffects(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_AURORA_VEIL:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].auroraVeilBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
                 {
@@ -960,20 +960,20 @@ u8 DoFieldEndTurnEffects(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_MIST:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].mistBattlerId;
                 if (gSideTimers[side].mistTimer != 0
                  && --gSideTimers[side].mistTimer == 0)
@@ -984,20 +984,20 @@ u8 DoFieldEndTurnEffects(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_MIST);
                     effect++;
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_SAFEGUARD:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].safeguardBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_SAFEGUARD)
                 {
@@ -1008,20 +1008,20 @@ u8 DoFieldEndTurnEffects(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_LUCKY_CHANT:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].luckyChantBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_LUCKY_CHANT)
                 {
@@ -1032,20 +1032,20 @@ u8 DoFieldEndTurnEffects(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_TAILWIND:
-            while (gBattleStruct->turnEffectsSide < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                side = gBattleStruct->turnEffectsSide;
+                side = gBattleStruct->turnSideTracker;
                 gActiveBattler = gBattlerAttacker = gSideTimers[side].tailwindBattlerId;
                 if (gSideStatuses[side] & SIDE_STATUS_TAILWIND)
                 {
@@ -1056,20 +1056,20 @@ u8 DoFieldEndTurnEffects(void)
                         effect++;
                     }
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
                 gBattleStruct->turnCountersTracker++;
-                gBattleStruct->turnEffectsSide = 0;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case ENDTURN_WISH:
-            while (gBattleStruct->turnEffectsSide < gBattlersCount)
+            while (gBattleStruct->turnSideTracker < gBattlersCount)
             {
-                gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnEffectsSide];
+                gActiveBattler = gBattlerByTurnOrder[gBattleStruct->turnSideTracker];
                 if (gWishFutureKnock.wishCounter[gActiveBattler] != 0
                  && --gWishFutureKnock.wishCounter[gActiveBattler] == 0
                  && gBattleMons[gActiveBattler].hp != 0)
@@ -1078,7 +1078,7 @@ u8 DoFieldEndTurnEffects(void)
                     BattleScriptExecute(BattleScript_WishComesTrue);
                     effect++;
                 }
-                gBattleStruct->turnEffectsSide++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
@@ -1857,7 +1857,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
         // fall through
     case 2:
         if ((gBattleTypeFlags & BATTLE_TYPE_ARENA)
-         && gBattleStruct->field_DA == 2
+         && gBattleStruct->arenaTurnCounter == 2
          && gBattleMons[0].hp != 0 && gBattleMons[1].hp != 0)
         {
             s32 i;
@@ -1903,7 +1903,7 @@ bool8 HandleFaintedMonActions(void)
             {
                 gBattlerFainted = gBattlerTarget = gBattleStruct->faintedActionsBattlerId;
                 if (gBattleMons[gBattleStruct->faintedActionsBattlerId].hp == 0
-                 && !(gBattleStruct->field_DF & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
+                 && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);

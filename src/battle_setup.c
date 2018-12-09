@@ -304,7 +304,7 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
     {{TRAINER_TRENT_1, TRAINER_TRENT_2, TRAINER_TRENT_3, TRAINER_TRENT_4, TRAINER_TRENT_5}, 0x0, 0x1b},
     {{TRAINER_SAWYER_1, TRAINER_SAWYER_2, TRAINER_SAWYER_3, TRAINER_SAWYER_4, TRAINER_SAWYER_5}, 0x18, 0xc},
     {{TRAINER_KIRA_AND_DAN_1, TRAINER_KIRA_AND_DAN_2, TRAINER_KIRA_AND_DAN_3, TRAINER_KIRA_AND_DAN_4, TRAINER_KIRA_AND_DAN_5}, 0x18, 0x3e},
-    {{TRAINER_WALLY_3, 0x292, 0x293, 0x294, 0x294}, 0x18, 0x2b},
+    {{TRAINER_WALLY_3, TRAINER_WALLY_4, TRAINER_WALLY_5, TRAINER_WALLY_6, TRAINER_WALLY_6}, 0x18, 0x2b},
     {{TRAINER_ROXANNE_1, TRAINER_ROXANNE_2, TRAINER_ROXANNE_3, TRAINER_ROXANNE_4, TRAINER_ROXANNE_5}, 0x0, 0x3},
     {{TRAINER_BRAWLY_1, TRAINER_BRAWLY_2, TRAINER_BRAWLY_3, TRAINER_BRAWLY_4, TRAINER_BRAWLY_5}, 0x0, 0xb},
     {{TRAINER_WATTSON_1, TRAINER_WATTSON_2, TRAINER_WATTSON_3, TRAINER_WATTSON_4, TRAINER_WATTSON_5}, 0x0, 0x2},
@@ -1094,7 +1094,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     {
     case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(sOrdinaryNoIntroBattleParams, data);
-        return EventScript_2713C2;
+        return EventScript_DoTainerBattle;
     case TRAINER_BATTLE_DOUBLE:
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
@@ -1109,11 +1109,11 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         {
             TrainerBattleLoadArgs(sTrainerBContinueScriptBattleParams, data);
         }
-        return EventScript_271362;
+        return EventScript_TryDoNormalTrainerBattle;
     case TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC:
         TrainerBattleLoadArgs(sContinueScriptBattleParams, data);
         SetMapVarsToTrainer();
-        return EventScript_271362;
+        return EventScript_TryDoNormalTrainerBattle;
     case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE:
     case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC:
         TrainerBattleLoadArgs(sContinueScriptDoubleBattleParams, data);
@@ -1128,8 +1128,8 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
-        return EventScript_2713D1;
-    case TRAINER_BATTLE_9:
+        return EventScript_TryDoRematchBattle;
+    case TRAINER_BATTLE_PYRAMID:
         if (gApproachingTrainerId == 0)
         {
             TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
@@ -1141,7 +1141,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
             gTrainerBattleOpponent_B = LocalIdToPyramidTrainerId(gSpecialVar_LastTalked);
         }
-        return EventScript_271362;
+        return EventScript_TryDoNormalTrainerBattle;
     case TRAINER_BATTLE_SET_TRAINER_A:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         return sTrainerBattleEndScript;
@@ -1160,7 +1160,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
             gTrainerBattleOpponent_B = sub_81D6180(gSpecialVar_LastTalked);
         }
-        return EventScript_271362;
+        return EventScript_TryDoNormalTrainerBattle;
     default:
         if (gApproachingTrainerId == 0)
         {
@@ -1171,7 +1171,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         {
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
         }
-        return EventScript_271362;
+        return EventScript_TryDoNormalTrainerBattle;
     }
 }
 
@@ -1203,7 +1203,7 @@ bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
     return FlagGet(FLAG_TRAINER_FLAG_START + flag);
 }
 
-void sub_80B16D8(void)
+void SetUpTrainerMovement(void)
 {
     struct EventObject *eventObject = &gEventObjects[gSelectedEventObject];
 

@@ -1034,7 +1034,7 @@ extern const u8 gText_DexSortAtoZDescription[];
 extern const u8 gText_DexSortHeaviestDescription[];
 extern const u8 gText_DexSortLightestDescription[];
 extern const u8 gText_DexSortTallestDescription[];
-extern const u8 ggText_DexSortSmallestDescription[];
+extern const u8 gText_DexSortSmallestDescription[];
 extern const u8 gText_DexEmptyString[];
 extern const u8 gText_DexSearchDontSpecify[];
 extern const u8 gText_DexSearchTypeNone[];

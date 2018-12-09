@@ -1,10 +1,10 @@
 #include "global.h"
+#include "alloc.h"
 #include "battle.h"
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
 #include "item.h"
-#include "malloc.h"
 #include "pokemon.h"
 #include "random.h"
 #include "recorded_battle.h"
@@ -484,7 +484,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     {
         if (i == sBattler_AI || gBattleMons[i].hp == 0)
         {
-            actionOrMoveIndex[i] = -1;
+            actionOrMoveIndex[i] = 0xFF;
             bestMovePointsForTarget[i] = -1;
         }
         else

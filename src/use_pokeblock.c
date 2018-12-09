@@ -1,7 +1,7 @@
 #include "global.h"
 #include "main.h"
 #include "pokeblock.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "pokenav.h"
 #include "scanline_effect.h"

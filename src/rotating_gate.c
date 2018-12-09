@@ -871,7 +871,7 @@ static s32 RotatingGate_CanRotate(u8 gateId, s32 rotationDirection)
     y = gRotatingGate_PuzzleConfig[gateId].y + 7;
 
     // Loop through the gate's "arms" clockwise (north, south, east, west)
-    for (i = GATE_ARM_NORTH ; i <= GATE_ARM_WEST; i++)
+    for (i = GATE_ARM_NORTH; i <= GATE_ARM_WEST; i++)
     {
         // Ensure that no part of the arm collides with the map
         for (j = 0; j < GATE_ARM_MAX_LENGTH; j++)

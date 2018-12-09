@@ -27,7 +27,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -296,15 +296,51 @@ static const u8 sUnusedData[] =
 
 const struct UCoords32 gDirectionToVectors[] =
 {
-    { 0,  0}, // DIR_NONE
-    { 0,  1}, // DIR_SOUTH
-    { 0, -1}, // DIR_NORTH
-    {-1,  0}, // DIR_WEST
-    { 1,  0}, // DIR_EAST
-    {-1,  1}, // DIR_SOUTHWEST
-    { 1,  1}, // DIR_SOUTHEAST
-    {-1, -1}, // DIR_NORTHWEST
-    { 1, -1}, // DIR_NORTHEAST
+    [DIR_NONE] =
+    {
+        .x =  0,
+        .y =  0,
+    },
+    [DIR_SOUTH] =
+    {
+        .x =  0,
+        .y =  1,
+    },
+    [DIR_NORTH] =
+    {
+        .x =  0,
+        .y = -1,
+    },
+    [DIR_WEST] =
+    {
+        .x = -1,
+        .y =  0,
+    },
+    [DIR_EAST] =
+    {
+        .x =  1,
+        .y =  0,
+    },
+    [DIR_SOUTHWEST] =
+    {
+        .x = -1,
+        .y =  1,
+    },
+    [DIR_SOUTHEAST] =
+    {
+        .x =  1,
+        .y =  1,
+    },
+    [DIR_NORTHWEST] =
+    {
+        .x = -1,
+        .y = -1,
+    },
+    [DIR_NORTHEAST] =
+    {
+        .x =  1,
+        .y = -1,
+    },
 };
 
 static const struct BgTemplate gUnknown_08339DAC[] =

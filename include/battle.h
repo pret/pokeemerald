@@ -551,10 +551,10 @@ struct BattleStruct
     u16 changedItems[MAX_BATTLERS_COUNT];
     u8 intimidateBattler;
     u8 switchInItemsCounter;
-    u8 field_DA;
-    u8 turnEffectsSide;
+    u8 arenaTurnCounter;
+    u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
-    u8 field_DF;
+    u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 field_180;

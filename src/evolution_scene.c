@@ -2,7 +2,7 @@
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
 #include "sprite.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "task.h"
 #include "palette.h"
 #include "main.h"

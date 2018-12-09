@@ -2,7 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "random.h"
 #include "roulette_util.h"
 #include "script.h"
@@ -32,7 +32,17 @@ static void sub_81BEA20(void);
 static void sub_81BEAD8(struct Sprite* sprite);
 
 // rodata
-static const u8 gUnknown_08617E18[] = {0x3b, 0x43, 0x61, 0x00, 0x0f, 0x05, 0xff, 0x9b};
+const struct InnerStruct203CF18_3 gUnknown_08617E18 = {
+    .unk0 = 0x433b,
+    .unk2 = 0x61,
+    .unk4 = 0x0F,
+    .unk5 = 0x05,
+    .unk6 = 0xFF,
+    .unk7_0 = 0xB,
+    .unk7_4 = 0x1,
+    .unk7_6 = 0,
+    .unk7_7 = 1,
+};
 
 static const union AnimCmd gSpriteAnim_8617E20[] =
 {
@@ -131,7 +141,7 @@ void sub_81BE6B8(void)
 
     gUnknown_0203CF18 = (struct Struct203CF18 *)AllocZeroed(sizeof(struct Struct203CF18));
     sub_8151B3C(&(gUnknown_0203CF18->unk4));
-    sub_8151B68(&(gUnknown_0203CF18->unk4), gUnknown_08617E18);
+    sub_8151B68(&(gUnknown_0203CF18->unk4), &gUnknown_08617E18);
     sub_8151CA8(&(gUnknown_0203CF18->unk4), 1, 1);
     gUnknown_0203CF18->taskId = CreateTask(sub_81BE698, 0xFF);
 }

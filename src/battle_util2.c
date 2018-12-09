@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "pokemon.h"
 #include "event_data.h"
 #include "constants/abilities.h"

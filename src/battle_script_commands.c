@@ -686,45 +686,18 @@ static const u32 sStatusFlagsForMoveEffects[] =
 
 static const u8* const sMoveEffectBS_Ptrs[] =
 {
-    BattleScript_MoveEffectSleep,	    //  0
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SLEEP
-    BattleScript_MoveEffectPoison,		//	MOVE_EFFECT_POISON
-    BattleScript_MoveEffectBurn,		//	MOVE_EFFECT_BURN
-    BattleScript_MoveEffectFreeze,		//	MOVE_EFFECT_FREEZE
-    BattleScript_MoveEffectParalysis,   //	MOVE_EFFECT_PARALYSIS
-    BattleScript_MoveEffectToxic,		//	MOVE_EFFECT_TOXIC
-    BattleScript_MoveEffectConfusion,	//	MOVE_EFFECT_CONFUSION
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_FLINCH
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_TRI_ATTACK
-    BattleScript_MoveEffectUproar,		//	MOVE_EFFECT_UPROAR
-    BattleScript_MoveEffectPayDay,		//	MOVE_EFFECT_PAYDAY
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_CHARGING
-    BattleScript_MoveEffectWrap,		//	MOVE_EFFECT_WRAP
-    BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_25
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_DEF_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SPD_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_ATK_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_DEF_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ACC_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_EVS_PLUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_DEF_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SPD_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_ATK_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SP_DEF_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ACC_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_EVS_MINUS_1
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RECHARGE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RAGE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_STEAL_ITEM
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_PREVENT_ESCAPE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_NIGHTMARE
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ALL_STATS_UP
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_RAPIDSPIN
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_REMOVE_STATUS
-    BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_ATK_DEF_DOWN
-    BattleScript_MoveEffectRecoil,	    //	MOVE_EFFECT_RECOIL_33
+    [MOVE_EFFECT_SLEEP] = BattleScript_MoveEffectSleep,
+    [MOVE_EFFECT_POISON] = BattleScript_MoveEffectPoison,
+    [MOVE_EFFECT_BURN] = BattleScript_MoveEffectBurn,
+    [MOVE_EFFECT_FREEZE] = BattleScript_MoveEffectFreeze,
+    [MOVE_EFFECT_PARALYSIS] = BattleScript_MoveEffectParalysis,
+    [MOVE_EFFECT_TOXIC] = BattleScript_MoveEffectToxic,
+    [MOVE_EFFECT_CONFUSION] = BattleScript_MoveEffectConfusion,
+    [MOVE_EFFECT_UPROAR] = BattleScript_MoveEffectUproar,
+    [MOVE_EFFECT_PAYDAY] = BattleScript_MoveEffectPayDay,
+    [MOVE_EFFECT_WRAP] = BattleScript_MoveEffectWrap,
+    [MOVE_EFFECT_RECOIL_25] = BattleScript_MoveEffectRecoil,
+    [MOVE_EFFECT_RECOIL_33] = BattleScript_MoveEffectRecoil,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
@@ -778,36 +751,36 @@ static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX /
 
 static const u16 sMovesForbiddenToCopy[] =
 {
-     MOVE_TRANSFORM,
-     MOVE_METRONOME,
-     MOVE_STRUGGLE,
-     MOVE_SKETCH,
-     MOVE_MIMIC,
-     MIMIC_FORBIDDEN_END,
-     MOVE_COUNTER,
-     MOVE_MIRROR_COAT,
-     MOVE_PROTECT,
-     MOVE_DETECT,
-     MOVE_ENDURE,
-     MOVE_DESTINY_BOND,
-     MOVE_SLEEP_TALK,
-     MOVE_THIEF,
-     MOVE_FOLLOW_ME,
-     MOVE_SNATCH,
-     MOVE_HELPING_HAND,
-     MOVE_COVET,
-     MOVE_TRICK,
-     MOVE_FOCUS_PUNCH,
-     MOVE_CIRCLE_THROW,
-     MOVE_DRAGON_TAIL,
-     MOVE_RAGE_POWDER,
-     MOVE_MAT_BLOCK,
-     MOVE_SPIKY_SHIELD,
-     MOVE_SHELL_TRAP,
-     MOVE_SPOTLIGHT,
-     MOVE_FEINT,
-     MOVE_KING_S_SHIELD,
-     METRONOME_FORBIDDEN_END
+    MOVE_TRANSFORM,
+    MOVE_METRONOME,
+    MOVE_STRUGGLE,
+    MOVE_SKETCH,
+    MOVE_MIMIC,
+    MIMIC_FORBIDDEN_END,
+    MOVE_COUNTER,
+    MOVE_MIRROR_COAT,
+    MOVE_PROTECT,
+    MOVE_DETECT,
+    MOVE_ENDURE,
+    MOVE_DESTINY_BOND,
+    MOVE_SLEEP_TALK,
+    MOVE_THIEF,
+    MOVE_FOLLOW_ME,
+    MOVE_SNATCH,
+    MOVE_HELPING_HAND,
+    MOVE_COVET,
+    MOVE_TRICK,
+    MOVE_FOCUS_PUNCH,
+    MOVE_CIRCLE_THROW,
+    MOVE_DRAGON_TAIL,
+    MOVE_RAGE_POWDER,
+    MOVE_MAT_BLOCK,
+    MOVE_SPIKY_SHIELD,
+    MOVE_SHELL_TRAP,
+    MOVE_SPOTLIGHT,
+    MOVE_FEINT,
+    MOVE_KING_S_SHIELD,
+    METRONOME_FORBIDDEN_END
 };
 
 static const u16 sNaturePowerMoves[] =
@@ -827,38 +800,38 @@ static const u16 sNaturePowerMoves[] =
 static const u16 sPickupItems[] =
 {
     ITEM_POTION,
-	ITEM_ANTIDOTE,
-	ITEM_SUPER_POTION,
-	ITEM_GREAT_BALL,
-	ITEM_REPEL,
-	ITEM_ESCAPE_ROPE,
-	ITEM_X_ATTACK,
-	ITEM_FULL_HEAL,
-	ITEM_ULTRA_BALL,
-	ITEM_HYPER_POTION,
-	ITEM_RARE_CANDY,
-	ITEM_PROTEIN,
-	ITEM_REVIVE,
-	ITEM_HP_UP,
-	ITEM_FULL_RESTORE,
-	ITEM_MAX_REVIVE,
-	ITEM_PP_UP,
-	ITEM_MAX_ELIXIR,
+    ITEM_ANTIDOTE,
+    ITEM_SUPER_POTION,
+    ITEM_GREAT_BALL,
+    ITEM_REPEL,
+    ITEM_ESCAPE_ROPE,
+    ITEM_X_ATTACK,
+    ITEM_FULL_HEAL,
+    ITEM_ULTRA_BALL,
+    ITEM_HYPER_POTION,
+    ITEM_RARE_CANDY,
+    ITEM_PROTEIN,
+    ITEM_REVIVE,
+    ITEM_HP_UP,
+    ITEM_FULL_RESTORE,
+    ITEM_MAX_REVIVE,
+    ITEM_PP_UP,
+    ITEM_MAX_ELIXIR,
 };
 
 static const u16 sRarePickupItems[] =
 {
     ITEM_HYPER_POTION,
-	ITEM_NUGGET,
-	ITEM_KINGS_ROCK,
-	ITEM_FULL_RESTORE,
-	ITEM_ETHER,
-	ITEM_WHITE_HERB,
-	ITEM_TM44_REST,
-	ITEM_ELIXIR,
-	ITEM_TM01_FOCUS_PUNCH,
-	ITEM_LEFTOVERS,
-	ITEM_TM26_EARTHQUAKE,
+    ITEM_NUGGET,
+    ITEM_KINGS_ROCK,
+    ITEM_FULL_RESTORE,
+    ITEM_ETHER,
+    ITEM_WHITE_HERB,
+    ITEM_TM44_REST,
+    ITEM_ELIXIR,
+    ITEM_TM01_FOCUS_PUNCH,
+    ITEM_LEFTOVERS,
+    ITEM_TM26_EARTHQUAKE,
 };
 
 static const u8 sPickupProbabilities[] =
@@ -916,10 +889,10 @@ const ALIGNED(4) u8 gUnknown_0831C494[][4] =
 
 static const u8 sUnknown_0831C4F8[] =
 {
-	0x03, 0x00, 0x01, 0x00, 0x00, 0x01, 0x03, 0x00,
-	0x01, 0x02, 0x02, 0x00, 0x03, 0x01, 0x03, 0x01,
-	0x02, 0x03, 0x03, 0x02, 0x01, 0x00, 0x02, 0x02,
-	0x03, 0x00, 0x00, 0x00
+    0x03, 0x00, 0x01, 0x00, 0x00, 0x01, 0x03, 0x00,
+    0x01, 0x02, 0x02, 0x00, 0x03, 0x01, 0x03, 0x01,
+    0x02, 0x03, 0x03, 0x02, 0x01, 0x00, 0x02, 0x02,
+    0x03, 0x00, 0x00, 0x00
 };
 
 bool32 IsBattlerProtected(u8 battlerId, u16 move)
@@ -3156,7 +3129,7 @@ static void atk23_getexp(void)
         else
         {
             gBattleScripting.atk23_state++;
-            gBattleStruct->field_DF |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
+            gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
         }
         break;
     case 1: // calculate experience points to redistribute
@@ -3293,8 +3266,8 @@ static void atk23_getexp(void)
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId)
 
-					// buffer 'gained' or 'gained a boosted'
-					PREPARE_STRING_BUFFER(gBattleTextBuff2, i)
+                    // buffer 'gained' or 'gained a boosted'
+                    PREPARE_STRING_BUFFER(gBattleTextBuff2, i)
 
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage)
 
@@ -4118,25 +4091,25 @@ static void atk48_playstatchangeanimation(void)
 
 enum
 {
-	ATK49_RAGE,
-	ATK49_DEFROST,
-	ATK49_SYNCHRONIZE_TARGET,
-	ATK49_MOVE_END_ABILITIES,
-	ATK49_STATUS_IMMUNITY_ABILITIES,
-	ATK49_SYNCHRONIZE_ATTACKER,
-	ATK49_CHOICE_MOVE,
-	ATK49_CHANGED_ITEMS,
-	ATK49_ATTACKER_INVISIBLE,
-	ATK49_ATTACKER_VISIBLE,
-	ATK49_TARGET_VISIBLE,
-	ATK49_ITEM_EFFECTS_ALL,
-	ATK49_KINGSROCK_SHELLBELL,
-	ATK49_SUBSTITUTE,
-	ATK49_UPDATE_LAST_MOVES,
-	ATK49_MIRROR_MOVE,
-	ATK49_NEXT_TARGET,
-	ATK49_CLEAR_BITS,
-	ATK49_COUNT,
+    ATK49_RAGE,
+    ATK49_DEFROST,
+    ATK49_SYNCHRONIZE_TARGET,
+    ATK49_MOVE_END_ABILITIES,
+    ATK49_STATUS_IMMUNITY_ABILITIES,
+    ATK49_SYNCHRONIZE_ATTACKER,
+    ATK49_CHOICE_MOVE,
+    ATK49_CHANGED_ITEMS,
+    ATK49_ATTACKER_INVISIBLE,
+    ATK49_ATTACKER_VISIBLE,
+    ATK49_TARGET_VISIBLE,
+    ATK49_ITEM_EFFECTS_ALL,
+    ATK49_KINGSROCK_SHELLBELL,
+    ATK49_SUBSTITUTE,
+    ATK49_UPDATE_LAST_MOVES,
+    ATK49_MIRROR_MOVE,
+    ATK49_NEXT_TARGET,
+    ATK49_CLEAR_BITS,
+    ATK49_COUNT,
 };
 
 static void atk49_moveend(void)
@@ -5192,7 +5165,7 @@ static void atk52_switchineffects(void)
         gDisableStructs[gActiveBattler].truantUnknownBit = 0;
 
         if (!AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0)
-			&& !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
+            && !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
         {
             gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_TOXIC_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED | SIDE_STATUS_STICKY_WEB_DAMAGED);
 
