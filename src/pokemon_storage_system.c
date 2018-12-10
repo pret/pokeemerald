@@ -13,9 +13,11 @@
 #include "main.h"
 #include "menu.h"
 #include "mon_markings.h"
+#include "naming_screen.h"
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "script.h"
 #include "sound.h"
@@ -73,6 +75,14 @@ enum
     PC_TEXT_CANT_STORE_MAIL,
 };
 
+enum
+{
+    SCREEN_CHANGE_EXIT_BOX,
+    SCREEN_CHANGE_SUMMARY_SCREEN,
+    SCREEN_CHANGE_NAME_BOX,
+    SCREEN_CHANGE_ITEM_FROM_BAG,
+};
+
 IWRAM_DATA u8 gUnknown_03000F78[0x188];
 
 extern const u8 gText_PartyFull[];
@@ -86,13 +96,16 @@ extern u8 gUnknown_02039D0E;
 extern bool8 sInPartyMenu;
 extern u8 gUnknown_02039D0F;
 extern u16 gUnknown_02039D12;
+extern struct Pokemon gUnknown_02039D14;
 
 extern void sub_80F9BCC(u16, u16, u8);
+extern void sub_80F9BF4(u16, u16, u8);
 extern bool8 sub_80F9C1C(void);
+extern bool8 sub_80F9C30(void);
 
 // This file's functions.
-void StorageSystemCreatePrimaryMenu(u8 whichMenu, s16 *windowIdPtr);
-void sub_80C7D74(u8 boxOption);
+void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
+void Cb2_EnterPSS(u8 boxOption);
 u8 sub_80CAEA0(void);
 u8 sub_80CF9EC(void);
 u8 sub_80CDC2C(void);
@@ -120,6 +133,7 @@ void sub_80CD36C(void);
 void sub_80CD3EC(void);
 void sub_80CAC1C(void);
 void sub_80C9FEC(void);
+void sub_80CABE0(void);
 void sub_80CAEAC(void);
 void sub_80D0C60(void);
 void sub_80CFEA8(void);
@@ -143,8 +157,10 @@ void sub_80CADD8(void);
 void sub_80D1818(void);
 void sub_80D17B4(void);
 void sub_80CE760(void);
+void sub_80CE7E8(void);
 void sub_80CFECC(void);
 void sub_80CA9EC(void);
+void FreePSSData(void);
 void sub_80CAB20(void);
 void sub_80CE22C(void);
 void sub_80CB950(void);
@@ -177,37 +193,37 @@ bool8 IsCursorOnCloseBox(void);
 bool8 IsMonBeingMoved(void);
 bool8 sub_80CE19C(u8 arg0);
 void sub_80C7FA8(u8 taskId);
-void sub_80C8BEC(u8 taskId);
-void sub_80C9E50(u8 taskId);
+void Cb_PlaceMon(u8 taskId);
+void Cb_ChangeScreen(u8 taskId);
 void sub_80C81AC(u8 taskId);
-void sub_80C9D1C(u8 taskId);
+void Cb_OnBPressed(u8 taskId);
 void Cb_HandleBoxOptions(u8 taskId);
-void sub_80C8864(u8 taskId);
-void sub_80C9BE8(u8 taskId);
-void sub_80C87E8(u8 taskId);
-void sub_80C8D78(u8 taskId);
-void sub_80C8B90(u8 taskId);
-void sub_80C91DC(u8 taskId);
+void Cb_OnSelectedMon(u8 taskId);
+void Cb_OnCloseBoxPressed(u8 taskId);
+void Cb_HidePartyPokemon(u8 taskId);
+void Cb_DepositMenu(u8 taskId);
+void Cb_MoveMon(u8 taskId);
+void Cb_GiveMovingItemToMon(u8 taskId);
 void Cb_SwitchSelectedItem(u8 taskId);
-void sub_80C9128(u8 taskId);
+void Cb_TakeItemForMoving(u8 taskId);
 void Cb_WithdrawMon(u8 taskId);
-void c3_0808DC50(u8 taskId);
-void sub_80C87A8(u8 taskId);
-void sub_80C9498(u8 taskId);
-void sub_80C9B88(u8 taskId);
+void Cb_ShiftMon(u8 taskId);
+void Cb_ShowPartyPokemon(u8 taskId);
+void Cb_ShowItemInfo(u8 taskId);
+void Cb_GiveItemFromBag(u8 taskId);
 void Cb_ItemToBag(u8 taskId);
-void sub_80C9128(u8 taskId);
-void sub_80C90A4(u8 taskId);
-void sub_80C9B28(u8 taskId);
+void Cb_TakeItemForMoving(u8 taskId);
+void Cb_ShowMarkMenu(u8 taskId);
+void Cb_ShowMonSummary(u8 taskId);
 void Cb_ReleaseMon(u8 taskId);
 void task_pokemon_box_related(u8 taskId);
 void sub_80C972C_2(u8 taskId);
-void sub_80C82AC(u8 taskId);
+void Cb_MainPSS(u8 taskId);
 void Cb_JumpBox(u8 taskId);
 void Cb_HandleWallpapers(u8 taskId);
 void Cb_NameBox(u8 taskId);
 void Cb_PrintCantStoreMail(u8 taskId);
-void sub_80C9670(u8 taskId);
+void Cb_HandleMovingMonFromParty(u8 taskId);
 void sub_80D2A90(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u32 arg2);
 void sub_80D259C(u8 arg0);
 void sub_80CC464(u8 arg0);
@@ -232,6 +248,7 @@ void sub_80D0FAC(bool8 inParty, u8 boxPosition);
 struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
 void SetWallpaperForCurrentBox(u8 wallpaperId);
 void sub_80CAE0C(u8 arg0);
+u16 GetMovingItem(void);
 
 // const rom data
 const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -606,13 +623,14 @@ void sub_80C71A4(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
         Dma3FillLarge16_(0, dest, width);
 }
 
-void Task_PokemonStorageSystem(u8 taskId)
+void Task_PokemonStorageSystemPC(u8 taskId)
 {
-    struct Task *task = gTasks + taskId;
+    struct Task *task = &gTasks[taskId];
+
     switch (task->data[0])
     {
     case 0:
-        StorageSystemCreatePrimaryMenu(task->data[1], &task->data[15]);
+        CreatePCMenu(task->data[1], &task->data[15]);
         sub_81973A4();
         NewMenuHelpers_DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, 0x11);
@@ -706,7 +724,7 @@ void Task_PokemonStorageSystem(u8 taskId)
         if (!gPaletteFade.active)
         {
             overworld_free_bg_tilemaps();
-            sub_80C7D74(task->data[2]);
+            Cb2_EnterPSS(task->data[2]);
             RemoveWindow(task->data[15]);
             DestroyTask(taskId);
         }
@@ -714,29 +732,29 @@ void Task_PokemonStorageSystem(u8 taskId)
     }
 }
 
-void ShowPokemonStorageSystem(void)
+void ShowPokemonStorageSystemPC(void)
 {
-    u8 taskId = CreateTask(Task_PokemonStorageSystem, 80);
+    u8 taskId = CreateTask(Task_PokemonStorageSystemPC, 80);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     ScriptContext2_Enable();
 }
 
-void mapldr_0808C6D8(void)
+void FieldCb_ReturnToPcMenu(void)
 {
     u8 taskId;
     MainCallback vblankCb = gMain.vblankCallback;
 
     SetVBlankCallback(NULL);
-    taskId = CreateTask(Task_PokemonStorageSystem, 80);
+    taskId = CreateTask(Task_PokemonStorageSystemPC, 80);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gUnknown_02039D00;
-    Task_PokemonStorageSystem(taskId);
+    Task_PokemonStorageSystemPC(taskId);
     SetVBlankCallback(vblankCb);
     pal_fill_black();
 }
 
-void StorageSystemCreatePrimaryMenu(u8 whichMenu, s16 *windowIdPtr)
+void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
 {
     s16 windowId;
     struct WindowTemplate winTemplate = gUnknown_085716E8;
@@ -749,10 +767,10 @@ void StorageSystemCreatePrimaryMenu(u8 whichMenu, s16 *windowIdPtr)
     *windowIdPtr = windowId;
 }
 
-void sub_80C7678(void)
+void Cb2_ExitPSS(void)
 {
     gUnknown_02039D00 = sub_80CAEA0();
-    gFieldCallback = mapldr_0808C6D8;
+    gFieldCallback = FieldCb_ReturnToPcMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
 
@@ -1031,14 +1049,14 @@ void c2_Box(void)
     BuildOamBuffer();
 }
 
-void sub_80C7D74(u8 boxOption)
+void Cb2_EnterPSS(u8 boxOption)
 {
     ResetTasks();
     sBoxOption = boxOption;
     gUnknown_02039D08 = Alloc(0x62C4);
     if (gUnknown_02039D08 == NULL)
     {
-        SetMainCallback2(sub_80C7678);
+        SetMainCallback2(Cb2_ExitPSS);
     }
     else
     {
@@ -1052,13 +1070,13 @@ void sub_80C7D74(u8 boxOption)
     }
 }
 
-void c2_808CE60(void)
+void Cb2_ReturnToPSS(void)
 {
     ResetTasks();
     gUnknown_02039D08 = Alloc(0x62C4);
     if (gUnknown_02039D08 == NULL)
     {
-        SetMainCallback2(sub_80C7678);
+        SetMainCallback2(Cb2_ExitPSS);
     }
     else
     {
@@ -1151,7 +1169,7 @@ void sub_80C7FA8(u8 taskId)
     case 1:
         if (!sub_80CA0A4())
         {
-            SetPSSCallback(sub_80C9E50);
+            SetPSSCallback(Cb_ChangeScreen);
             return;
         }
         break;
@@ -1176,7 +1194,7 @@ void sub_80C7FA8(u8 taskId)
     case 5:
         if (!sub_80D0164())
         {
-            SetPSSCallback(sub_80C9E50);
+            SetPSSCallback(Cb_ChangeScreen);
             return;
         }
         else
@@ -1243,7 +1261,7 @@ void sub_80C81AC(u8 taskId)
         break;
     case 1:
         if (!sub_80F9C1C())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
@@ -1266,7 +1284,7 @@ void sub_80C972C_2(u8 taskId)
             }
             else
             {
-                SetPSSCallback(sub_80C82AC);
+                SetPSSCallback(Cb_MainPSS);
             }
         }
         break;
@@ -1279,12 +1297,12 @@ void sub_80C972C_2(u8 taskId)
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
 
-void sub_80C82AC(u8 taskId)
+void Cb_MainPSS(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1304,7 +1322,7 @@ void sub_80C82AC(u8 taskId)
             else
             {
                 sub_80CDC0C();
-                SetPSSCallback(sub_80C87A8);
+                SetPSSCallback(Cb_ShowPartyPokemon);
             }
             break;
         case 6:
@@ -1313,25 +1331,25 @@ void sub_80C82AC(u8 taskId)
                 if (IsMonBeingMoved() && ItemIsMail(gUnknown_02039D08->selectedItem))
                     gUnknown_02039D08->state = 5;
                 else
-                    SetPSSCallback(sub_80C87E8);
+                    SetPSSCallback(Cb_HidePartyPokemon);
             }
             else if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
             {
-                SetPSSCallback(sub_80C87E8);
+                SetPSSCallback(Cb_HidePartyPokemon);
             }
             break;
         case 4:
-            SetPSSCallback(sub_80C9BE8);
+            SetPSSCallback(Cb_OnCloseBoxPressed);
             break;
         case 19:
-            SetPSSCallback(sub_80C9D1C);
+            SetPSSCallback(Cb_OnBPressed);
             break;
         case 7:
             PlaySE(SE_SELECT);
             SetPSSCallback(Cb_HandleBoxOptions);
             break;
         case 8:
-            SetPSSCallback(sub_80C8864);
+            SetPSSCallback(Cb_OnSelectedMon);
             break;
         case 9:
             PlaySE(SE_SELECT);
@@ -1375,7 +1393,7 @@ void sub_80C82AC(u8 taskId)
                 else
                 {
                     PlaySE(SE_SELECT);
-                    SetPSSCallback(sub_80C8D78);
+                    SetPSSCallback(Cb_DepositMenu);
                 }
             }
             else
@@ -1391,7 +1409,7 @@ void sub_80C82AC(u8 taskId)
             else
             {
                 PlaySE(SE_SELECT);
-                SetPSSCallback(sub_80C8B90);
+                SetPSSCallback(Cb_MoveMon);
             }
             break;
         case 14:
@@ -1402,7 +1420,7 @@ void sub_80C82AC(u8 taskId)
             else
             {
                 PlaySE(SE_SELECT);
-                SetPSSCallback(c3_0808DC50);
+                SetPSSCallback(Cb_ShiftMon);
             }
             break;
         case 12:
@@ -1411,15 +1429,15 @@ void sub_80C82AC(u8 taskId)
             break;
         case 15:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C8BEC);
+            SetPSSCallback(Cb_PlaceMon);
             break;
         case 16:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C9128);
+            SetPSSCallback(Cb_TakeItemForMoving);
             break;
         case 17:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C91DC);
+            SetPSSCallback(Cb_GiveMovingItemToMon);
             break;
         case 18:
             PlaySE(SE_SELECT);
@@ -1465,6 +1483,7 @@ void sub_80C82AC(u8 taskId)
                 sub_80CA9C0();
             else
                 sub_80CA9EC();
+
             if (gUnknown_02039D08->field_CEA)
                 BoxSetMosaic();
             gUnknown_02039D08->state = 0;
@@ -1512,7 +1531,7 @@ void sub_80C82AC(u8 taskId)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     case 7:
@@ -1521,7 +1540,7 @@ void sub_80C82AC(u8 taskId)
         break;
     case 8:
         if (!sub_80D01E4())
-            SetPSSCallback(sub_80C8B90);
+            SetPSSCallback(Cb_MoveMon);
         break;
     case 9:
         if (!sub_80D01E4())
@@ -1545,7 +1564,7 @@ void sub_80C82AC(u8 taskId)
     }
 }
 
-void sub_80C87A8(u8 taskId)
+void Cb_ShowPartyPokemon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1555,12 +1574,12 @@ void sub_80C87A8(u8 taskId)
         break;
     case 1:
         if (!sub_80CAB70())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
 
-void sub_80C87E8(u8 taskId)
+void Cb_HidePartyPokemon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1581,13 +1600,13 @@ void sub_80C87E8(u8 taskId)
         {
             if (gUnknown_02039D08->field_CEA)
                 BoxSetMosaic();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
 }
 
-void sub_80C8864(u8 taskId)
+void Cb_OnSelectedMon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1616,7 +1635,7 @@ void sub_80C8864(u8 taskId)
         case -1:
         case  0:
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
             break;
         case 3:
             if (CanMoveMon())
@@ -1627,13 +1646,13 @@ void sub_80C8864(u8 taskId)
             {
                 PlaySE(SE_SELECT);
                 ClearBottomWindow();
-                SetPSSCallback(sub_80C8B90);
+                SetPSSCallback(Cb_MoveMon);
             }
             break;
         case 5:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
-            SetPSSCallback(sub_80C8BEC);
+            SetPSSCallback(Cb_PlaceMon);
             break;
         case 4:
             if (!CanShifMon())
@@ -1644,7 +1663,7 @@ void sub_80C8864(u8 taskId)
             {
                 PlaySE(SE_SELECT);
                 ClearBottomWindow();
-                SetPSSCallback(c3_0808DC50);
+                SetPSSCallback(Cb_ShiftMon);
             }
             break;
         case 2:
@@ -1665,7 +1684,7 @@ void sub_80C8864(u8 taskId)
             {
                 PlaySE(SE_SELECT);
                 ClearBottomWindow();
-                SetPSSCallback(sub_80C8D78);
+                SetPSSCallback(Cb_DepositMenu);
             }
             break;
         case 7:
@@ -1675,7 +1694,7 @@ void sub_80C8864(u8 taskId)
             }
             else if (gUnknown_02039D08->field_CED)
             {
-                gUnknown_02039D08->state = 5;
+                gUnknown_02039D08->state = 5; // Cannot release an Egg.
             }
             else if (ItemIsMail(gUnknown_02039D08->selectedItem))
             {
@@ -1689,19 +1708,19 @@ void sub_80C8864(u8 taskId)
             break;
         case 6:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C9B28);
+            SetPSSCallback(Cb_ShowMonSummary);
             break;
         case 8:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C90A4);
+            SetPSSCallback(Cb_ShowMarkMenu);
             break;
         case 12:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C9128);
+            SetPSSCallback(Cb_TakeItemForMoving);
             break;
         case 13:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C91DC);
+            SetPSSCallback(Cb_GiveMovingItemToMon);
             break;
         case 16:
             SetPSSCallback(Cb_ItemToBag);
@@ -1712,10 +1731,10 @@ void sub_80C8864(u8 taskId)
             break;
         case 14:
             PlaySE(SE_SELECT);
-            SetPSSCallback(sub_80C9B88);
+            SetPSSCallback(Cb_GiveItemFromBag);
             break;
         case 17:
-            SetPSSCallback(sub_80C9498);
+            SetPSSCallback(Cb_ShowItemInfo);
             break;
         }
         break;
@@ -1738,13 +1757,13 @@ void sub_80C8864(u8 taskId)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
 }
 
-void sub_80C8B90(u8 taskId)
+void Cb_MoveMon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1756,15 +1775,15 @@ void sub_80C8B90(u8 taskId)
         if (!sub_80CDCAC())
         {
             if (sInPartyMenu)
-                SetPSSCallback(sub_80C9670);
+                SetPSSCallback(Cb_HandleMovingMonFromParty);
             else
-                SetPSSCallback(sub_80C82AC);
+                SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
 }
 
-void sub_80C8BEC(u8 taskId)
+void Cb_PlaceMon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1776,15 +1795,15 @@ void sub_80C8BEC(u8 taskId)
         if (!sub_80CDCAC())
         {
             if (sInPartyMenu)
-                SetPSSCallback(sub_80C9670);
+                SetPSSCallback(Cb_HandleMovingMonFromParty);
             else
-                SetPSSCallback(sub_80C82AC);
+                SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
 }
 
-void c3_0808DC50(u8 taskId)
+void Cb_ShiftMon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1796,7 +1815,7 @@ void c3_0808DC50(u8 taskId)
         if (!sub_80CDCAC())
         {
             BoxSetMosaic();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
@@ -1823,7 +1842,7 @@ void Cb_WithdrawMon(u8 taskId)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     case 2:
@@ -1849,12 +1868,12 @@ void Cb_WithdrawMon(u8 taskId)
         }
         break;
     case 5:
-        SetPSSCallback(sub_80C87E8);
+        SetPSSCallback(Cb_HidePartyPokemon);
         break;
     }
 }
 
-void sub_80C8D78(u8 taskId)
+void Cb_DepositMenu(u8 taskId)
 {
     u8 r4;
 
@@ -1874,7 +1893,7 @@ void sub_80C8D78(u8 taskId)
             ClearBottomWindow();
             sub_80C78E4();
             sub_80C7890();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         else
         {
@@ -1904,7 +1923,7 @@ void sub_80C8D78(u8 taskId)
             sub_80CE22C();
             BoxSetMosaic();
             sub_80CAB20();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     case 4:
@@ -1932,7 +1951,7 @@ void Cb_ReleaseMon(u8 taskId)
             case -1:
             case  1:
                 ClearBottomWindow();
-                SetPSSCallback(sub_80C82AC);
+                SetPSSCallback(Cb_MainPSS);
                 break;
             case  0:
                 ClearBottomWindow();
@@ -2001,7 +2020,7 @@ void Cb_ReleaseMon(u8 taskId)
         }
         break;
     case 7:
-        SetPSSCallback(sub_80C82AC);
+        SetPSSCallback(Cb_MainPSS);
         break;
     case 8:
         PrintStorageActionText(PC_TEXT_WAS_RELEASED);
@@ -2041,13 +2060,13 @@ void Cb_ReleaseMon(u8 taskId)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
 }
 
-void sub_80C90A4(u8 taskId)
+void Cb_ShowMarkMenu(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -2064,13 +2083,13 @@ void sub_80C90A4(u8 taskId)
             ClearBottomWindow();
             sub_80CE9A8(gUnknown_02039D08->field_DA4.markings);
             sub_80CA230();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
 }
 
-void sub_80C9128(u8 taskId)
+void Cb_TakeItemForMoving(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -2102,12 +2121,12 @@ void sub_80C9128(u8 taskId)
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
 
-void sub_80C91DC(u8 taskId)
+void Cb_GiveMovingItemToMon(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -2139,7 +2158,7 @@ void sub_80C91DC(u8 taskId)
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
@@ -2180,13 +2199,13 @@ void Cb_ItemToBag(u8 taskId)
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     case 3:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
@@ -2231,12 +2250,12 @@ void Cb_SwitchSelectedItem(u8 taskId)
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
 
-void sub_80C9498(u8 taskId)
+void Cb_ShowItemInfo(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -2274,12 +2293,12 @@ void sub_80C9498(u8 taskId)
         break;
     case 6:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
 
-void sub_80C954C(u8 taskId)
+void Cb_CloseBoxWhileHoldingItem(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -2295,10 +2314,10 @@ void sub_80C954C(u8 taskId)
         case -1:
         case 1:
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
             break;
         case 0:
-            if (AddBagItem(gUnknown_02039D08->field_2234, 1) == TRUE)
+            if (AddBagItem(gUnknown_02039D08->movingItem, 1) == TRUE)
             {
                 ClearBottomWindow();
                 gUnknown_02039D08->state = 3;
@@ -2326,17 +2345,17 @@ void sub_80C954C(u8 taskId)
         if (!sub_80D1218())
         {
             sub_80CFE54(0);
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     case 5:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
 
-void sub_80C9670(u8 taskId)
+void Cb_HandleMovingMonFromParty(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -2349,7 +2368,7 @@ void sub_80C9670(u8 taskId)
         if (!sub_80CB9BC())
         {
             sub_80CAB20();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
@@ -2376,7 +2395,7 @@ void Cb_PrintCantStoreMail(u8 taskId)
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         break;
     }
 }
@@ -2401,7 +2420,7 @@ void Cb_HandleBoxOptions(u8 taskId)
         case  0:
             sub_80CD1A8(TRUE);
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
             break;
         case 11:
             PlaySE(SE_SELECT);
@@ -2442,7 +2461,7 @@ void Cb_HandleWallpapers(u8 taskId)
         case -1:
             sub_80CD1A8(TRUE);
             ClearBottomWindow();
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
             break;
         case 18 ... 21:
             PlaySE(SE_SELECT);
@@ -2491,7 +2510,7 @@ void Cb_HandleWallpapers(u8 taskId)
         if (!DoWallpaperGfxChange())
         {
             sub_80CD1A8(TRUE);
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     case 6:
@@ -2527,7 +2546,7 @@ void Cb_JumpBox(u8 taskId)
             if (gUnknown_02039D08->newCurrBoxId == 201 || gUnknown_02039D08->newCurrBoxId == StorageGetCurrentBox())
             {
                 sub_80CD1A8(TRUE);
-                SetPSSCallback(sub_80C82AC);
+                SetPSSCallback(Cb_MainPSS);
             }
             else
             {
@@ -2544,7 +2563,7 @@ void Cb_JumpBox(u8 taskId)
         if (!ScrollToBox())
         {
             SetCurrentBox(gUnknown_02039D08->newCurrBoxId);
-            SetPSSCallback(sub_80C82AC);
+            SetPSSCallback(Cb_MainPSS);
         }
         break;
     }
@@ -2563,9 +2582,212 @@ void Cb_NameBox(u8 taskId)
         if (!UpdatePaletteFade())
         {
             gUnknown_02039D0F = 1;
-            gUnknown_02039D08->unk_0002 = 2;
-            SetPSSCallback(sub_80C9E50);
+            gUnknown_02039D08->screenChangeType = SCREEN_CHANGE_NAME_BOX;
+            SetPSSCallback(Cb_ChangeScreen);
         }
         break;
     }
+}
+
+void Cb_ShowMonSummary(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        sub_80CE7E8();
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+        {
+            gUnknown_02039D0F = 0;
+            gUnknown_02039D08->screenChangeType = SCREEN_CHANGE_SUMMARY_SCREEN;
+            SetPSSCallback(Cb_ChangeScreen);
+        }
+        break;
+    }
+}
+
+void Cb_GiveItemFromBag(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        gUnknown_02039D08->state++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+        {
+            gUnknown_02039D0F = 2;
+            gUnknown_02039D08->screenChangeType = SCREEN_CHANGE_ITEM_FROM_BAG;
+            SetPSSCallback(Cb_ChangeScreen);
+        }
+        break;
+    }
+}
+
+void Cb_OnCloseBoxPressed(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (IsMonBeingMoved())
+        {
+            PlaySE(SE_HAZURE);
+            PrintStorageActionText(PC_TEXT_HOLDING_POKE);
+            gUnknown_02039D08->state = 1;
+        }
+        else if (sub_80D127C())
+        {
+            SetPSSCallback(Cb_CloseBoxWhileHoldingItem);
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            PrintStorageActionText(PC_TEXT_EXIT_BOX);
+            sub_80CAD9C(0);
+            gUnknown_02039D08->state = 2;
+        }
+        break;
+    case 1:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    case 2:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+        case 1:
+        case -1:
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+            break;
+        case 0:
+            PlaySE(SE_PC_OFF);
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+            break;
+        }
+        break;
+    case 3:
+        sub_80F9BF4(0x14, 0, 1);
+        gUnknown_02039D08->state++;
+        break;
+    case 4:
+        if (!sub_80F9C30())
+        {
+            sub_80CABE0();
+            gPlayerPartyCount = CalculatePlayerPartyCount();
+            gUnknown_02039D08->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
+            SetPSSCallback(Cb_ChangeScreen);
+        }
+        break;
+    }
+}
+
+void Cb_OnBPressed(u8 taskId)
+{
+    switch (gUnknown_02039D08->state)
+    {
+    case 0:
+        if (IsMonBeingMoved())
+        {
+            PlaySE(SE_HAZURE);
+            PrintStorageActionText(PC_TEXT_HOLDING_POKE);
+            gUnknown_02039D08->state = 1;
+        }
+        else if (sub_80D127C())
+        {
+            SetPSSCallback(Cb_CloseBoxWhileHoldingItem);
+        }
+        else
+        {
+            PlaySE(SE_SELECT);
+            PrintStorageActionText(PC_TEXT_CONTINUE_BOX);
+            sub_80CAD9C(0);
+            gUnknown_02039D08->state = 2;
+        }
+        break;
+    case 1:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    case 2:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+        case 0:
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+            break;
+        case 1:
+        case -1:
+            PlaySE(SE_PC_OFF);
+            ClearBottomWindow();
+            gUnknown_02039D08->state++;
+            break;
+        }
+        break;
+    case 3:
+        sub_80F9BF4(0x14, 0, 0);
+        gUnknown_02039D08->state++;
+        break;
+    case 4:
+        if (!sub_80F9C30())
+        {
+            sub_80CABE0();
+            gPlayerPartyCount = CalculatePlayerPartyCount();
+            gUnknown_02039D08->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
+            SetPSSCallback(Cb_ChangeScreen);
+        }
+        break;
+    }
+}
+
+void Cb_ChangeScreen(u8 taskId)
+{
+    struct BoxPokemon *boxMons;
+    u8 mode, monIndex, maxMonIndex;
+    u8 screenChangeType = gUnknown_02039D08->screenChangeType;
+
+    if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS && sub_80D127C() == TRUE)
+        gUnknown_02039D12 = GetMovingItem();
+    else
+        gUnknown_02039D12 = 0;
+
+    switch (screenChangeType)
+    {
+    case SCREEN_CHANGE_EXIT_BOX:
+    default:
+        FreePSSData();
+        SetMainCallback2(Cb2_ExitPSS);
+        break;
+    case SCREEN_CHANGE_SUMMARY_SCREEN:
+        boxMons = gUnknown_02039D08->field_218C;
+        monIndex = gUnknown_02039D08->field_2187;
+        maxMonIndex = gUnknown_02039D08->field_2186;
+        mode = gUnknown_02039D08->field_2188;
+        FreePSSData();
+        if (mode == PSS_MODE_NORMAL && boxMons == &gUnknown_02039D14.box)
+            ShowPokemonSummaryScreenSet40EF(mode, boxMons, monIndex, maxMonIndex, Cb2_ReturnToPSS);
+        else
+            ShowPokemonSummaryScreen(mode, boxMons, monIndex, maxMonIndex, Cb2_ReturnToPSS);
+        break;
+    case SCREEN_CHANGE_NAME_BOX:
+        FreePSSData();
+        DoNamingScreen(NAMING_SCREEN_BOX, GetBoxNamePtr(StorageGetCurrentBox()), 0, 0, 0, Cb2_ReturnToPSS);
+        break;
+    case SCREEN_CHANGE_ITEM_FROM_BAG:
+        FreePSSData();
+        GoToBagMenu(11, 0, Cb2_ReturnToPSS);
+        break;
+    }
+
+    DestroyTask(taskId);
 }

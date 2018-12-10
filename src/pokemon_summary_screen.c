@@ -1005,7 +1005,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     pssData->maxMonIndex = maxMonIndex;
     pssData->callback = callback;
 
-    if (mode == PSS_MODE_UNK2)
+    if (mode == PSS_MODE_BOX)
         pssData->isBoxMon = TRUE;
     else
         pssData->isBoxMon = FALSE;
@@ -1013,7 +1013,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     switch (mode)
     {
     case PSS_MODE_NORMAL:
-    case PSS_MODE_UNK2:
+    case PSS_MODE_BOX:
         pssData->minPageIndex = 0;
         pssData->maxPageIndex = 3;
         break;
@@ -1327,7 +1327,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
         sum->ppBonuses = GetMonData(a, MON_DATA_PP_BONUSES);
         break;
     case 2:
-        if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_UNK2 || pssData->unk40EF == TRUE)
+        if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_BOX || pssData->unk40EF == TRUE)
         {
             sum->nature = GetNature(a);
             sum->currentHP = GetMonData(a, MON_DATA_HP);
@@ -3829,7 +3829,7 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
             {
                 if (gMonSpritesGfxPtr != NULL)
                 {
-                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_UNK2 || pssData->unk40EF == TRUE)
+                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_BOX || pssData->unk40EF == TRUE)
                     {
                         HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], gMonSpritesGfxPtr->sprites[1], summary->species2, summary->pid);
                     }
@@ -3840,7 +3840,7 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
                 }
                 else
                 {
-                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_UNK2 || pssData->unk40EF == TRUE)
+                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_BOX || pssData->unk40EF == TRUE)
                     {
                         HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], sub_806F4F8(0, 1), summary->species2, summary->pid);
                     }

@@ -66,7 +66,7 @@ struct PokemonStorageSystemData
 {
     u8 state;
     u8 boxOption;
-    u8 unk_0002;
+    u8 screenChangeType;
     u8 unk_0003;
     u8 taskId;
     u8 unk_0005;
@@ -102,8 +102,19 @@ struct PokemonStorageSystemData
     u8 field_CEF[181];
     struct PokemonMarkMenu field_DA4;
     struct UnkPSSStruct_2002370 field_1E5C;
-    u8 field_20A4[400];
-    u16 field_2234;
+    u8 field_20A4[220];
+    u8 field_2180;
+    u8 field_2181;
+    u8 field_2182;
+    u8 field_2183;
+    u8 field_2184;
+    u8 field_2185;
+    u8 field_2186;
+    u8 field_2187;
+    u8 field_2188;
+    struct BoxPokemon *field_218C;
+    u8 field_2190[164];
+    u16 movingItem;
 };
 
 extern struct UnkPSSStruct_2002370 *gUnknown_02039D04;
