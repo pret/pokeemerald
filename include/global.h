@@ -301,7 +301,7 @@ struct Apprentice
     u32 checksum;
 };
 
-struct UnknownPokemonStruct
+struct BattleTowerPokemon
 {
     u16 species;
     u16 heldItem;
@@ -338,7 +338,7 @@ struct EmeraldBattleTowerRecord
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 speechWon[6];
     /*0x28*/ u16 speechLost[6];
-    /*0x34*/ struct UnknownPokemonStruct party[4];
+    /*0x34*/ struct BattleTowerPokemon party[4];
     /*0xE4*/ u8 language;
     /*0xE8*/ u32 checksum;
 };
@@ -353,7 +353,7 @@ struct BattleTowerEReaderTrainer
     /*0x10*/ u16 greeting[6];
     /*0x1C*/ u16 farewellPlayerLost[6];
     /*0x28*/ u16 farewellPlayerWon[6];
-    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0x34*/ struct BattleTowerPokemon party[3];
     /*0xB8*/ u32 checksum;
 };
 
