@@ -432,8 +432,8 @@ struct ListBuffer2 {
 struct TempWallyStruct {
     struct ItemSlot bagPocket_Items[30];
     struct ItemSlot bagPocket_PokeBalls[16];
-    u16 cursorPosition[5];
-    u16 scrollPosition[5];
+    u16 cursorPosition[POCKETS_COUNT];
+    u16 scrollPosition[POCKETS_COUNT];
     u8 filler[0x2];
     u16 pocket;
 };
@@ -455,60 +455,60 @@ extern const u16 gUnknown_0860F074[];
 
 void ResetBagScrollPositions(void)
 {
-    gUnknown_0203CE58.pocket = 0;
+    gUnknown_0203CE58.pocket = ITEMS_POCKET;
     memset(gUnknown_0203CE58.cursorPosition, 0, 10);
     memset(gUnknown_0203CE58.scrollPosition, 0, 10);
 }
 
 void CB2_BagMenuFromStartMenu(void)
 {
-    GoToBagMenu(0, 5, CB2_ReturnToFieldWithOpenMenu);
+    GoToBagMenu(RETURN_LOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
 }
 
 void sub_81AABB0(void)
 {
     if (!InBattlePyramid())
-        GoToBagMenu(1, 5, SetCB2ToReshowScreenAfterMenu2);
+        GoToBagMenu(RETURN_LOCATION_BATTLE, POCKETS_COUNT, SetCB2ToReshowScreenAfterMenu2);
     else
         sub_81C4F98(1, SetCB2ToReshowScreenAfterMenu2);
 }
 
 void CB2_ChooseBerry(void)
 {
-    GoToBagMenu(4, 3, CB2_ReturnToFieldContinueScript);
+    GoToBagMenu(RETURN_LOCATION_FIELD_2, BERRIES_POCKET, CB2_ReturnToFieldContinueScript);
 }
 
 void sub_81AABF0(void(*callback)(void))
 {
-    GoToBagMenu(5, 3, callback);
+    GoToBagMenu(RETURN_LOCATION_FIELD_3, BERRIES_POCKET, callback);
 }
 
 void CB2_GoToSellMenu(void)
 {
-    GoToBagMenu(3, 5, CB2_ExitSellMenu);
+    GoToBagMenu(RETURN_LOCATION_SHOP, POCKETS_COUNT, CB2_ExitSellMenu);
 }
 
 void sub_81AAC14(void)
 {
-    GoToBagMenu(6, 5, sub_816B31C);
+    GoToBagMenu(RETURN_LOCATION_PC, POCKETS_COUNT, sub_816B31C);
 }
 
 void sub_81AAC28(void)
 {
-    GoToBagMenu(9, 5, bag_menu_leave_maybe_3);
+    GoToBagMenu(RETURN_LOCATION_FIELD_6, POCKETS_COUNT, bag_menu_leave_maybe_3);
     gSpecialVar_0x8005 = 0;
     gSpecialVar_Result = 0;
 }
 
 void sub_81AAC50(void)
 {
-    GoToBagMenu(7, 5, bag_menu_leave_maybe_2);
+    GoToBagMenu(RETURN_LOCATION_FIELD_4, POCKETS_COUNT, bag_menu_leave_maybe_2);
     gSpecialVar_Result = 0;
 }
 
 void sub_81AAC70(void)
 {
-    GoToBagMenu(8, 5, bag_menu_leave_maybe);
+    GoToBagMenu(RETURN_LOCATION_FIELD_5, POCKETS_COUNT, bag_menu_leave_maybe);
     gSpecialVar_Result = 0;
 }
 
@@ -522,13 +522,13 @@ void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)
     }
     else
     {
-        if (bagMenuType != 12)
+        if (bagMenuType != RETURN_LOCATION_UNCHANGED)
             gUnknown_0203CE58.location = bagMenuType;
         if (postExitMenuMainCallback2)
             gUnknown_0203CE58.bagCallback = postExitMenuMainCallback2;
-        if (pocketId <= 4)
+        if (pocketId < POCKETS_COUNT)
             gUnknown_0203CE58.pocket = pocketId;
-        temp = gUnknown_0203CE58.location - 4;
+        temp = gUnknown_0203CE58.location - (POCKETS_COUNT - 1);
         if (temp <= 1)
             gUnknown_0203CE54->unk81B = 1;
         gUnknown_0203CE54->unk0 = 0;
@@ -788,7 +788,7 @@ void get_name(s8 *dest, u16 itemId)
 {
     switch (gUnknown_0203CE58.pocket)
     {
-        case 2:
+        case TMHM_POCKET:
             StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(itemId)]);
             if (itemId >= ITEM_HM01)
             {
@@ -801,7 +801,7 @@ void get_name(s8 *dest, u16 itemId)
                 StringExpandPlaceholders(dest, gText_UnkF908Var1Clear7Var2);
             }
             break;
-        case 3:
+        case BERRIES_POCKET:
             ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_CHERI_BERRY + 1, 2, 2);
             CopyItemName(itemId, gStringVar2);
             StringExpandPlaceholders(dest, gText_UnkF908Var1Clear7Var2);
@@ -851,14 +851,14 @@ void sub_81AB520(u8 rboxId, int item_index_in_pocket, u8 a)
         itemQuantity = BagGetQuantityByPocketPosition(gUnknown_0203CE58.pocket + 1, item_index_in_pocket);
         if (itemId >= ITEM_HM01 && itemId <= ITEM_HM08)
             BlitBitmapToWindow(rboxId, gBagMenuHMIcon_Gfx, 8, a - 1, 16, 16);
-        if (gUnknown_0203CE58.pocket == 3)
+        if (gUnknown_0203CE58.pocket == BERRIES_POCKET)
         {
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, 1, 3);
             StringExpandPlaceholders(gStringVar4, gText_xVar1);
             offset = GetStringRightAlignXOffset(7, gStringVar4, 0x77);
             bag_menu_print(rboxId, 7, gStringVar4, offset, a, 0, 0, -1, 0);
         }
-        else if (gUnknown_0203CE58.pocket != 4 && (unique = ItemId_GetImportance(itemId)) == FALSE)
+        else if (gUnknown_0203CE58.pocket != KEYITEMS_POCKET && (unique = ItemId_GetImportance(itemId)) == FALSE)
         {
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, 1, 2);
             StringExpandPlaceholders(gStringVar4, gText_xVar1);
@@ -973,8 +973,8 @@ void sub_81AB9A8(u8 pocketId)
     struct BagPocket *pocket = &gBagPockets[pocketId];
     switch (pocketId)
     {
-        case 2:
-        case 3:
+        case TMHM_POCKET:
+        case BERRIES_POCKET:
             SortBerriesOrTMHMs(pocket);
             break;
         default:
@@ -995,7 +995,7 @@ void sub_81AB9A8(u8 pocketId)
 void sub_81ABA6C(void)
 {
     u8 i;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < POCKETS_COUNT; i++)
         sub_81AB9A8(i);
 }
 
@@ -1007,14 +1007,14 @@ void sub_81ABA88(u8 a)
 void sub_81ABAC4(void)
 {
     u8 i;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < POCKETS_COUNT; i++)
         sub_81ABA88(i);
 }
 
 void sub_81ABAE0(void)
 {
     u8 i;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < POCKETS_COUNT; i++)
         sub_8122298(&gUnknown_0203CE58.scrollPosition[i], &gUnknown_0203CE58.cursorPosition[i], gUnknown_0203CE54->unk82E[i], gUnknown_0203CE54->unk829[i], 8);
 }
 
@@ -1055,7 +1055,7 @@ void sub_81ABC3C(u8 a)
 
 void sub_81ABC54(u8 a, s16 b)
 {
-    u8 r3 = (gUnknown_0203CE58.pocket == 3) ? 3 : 2;
+    u8 r3 = (gUnknown_0203CE58.pocket == BERRIES_POCKET) ? 3 : 2;
     ConvertIntToDecimalStringN(gStringVar1, b, 2, r3);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(a, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 0x28), 2, 0, 0);
@@ -1063,7 +1063,7 @@ void sub_81ABC54(u8 a, s16 b)
 
 void sub_81ABCC0(int a, int b, int c)
 {
-    u8 r3 = (gUnknown_0203CE58.pocket == 3) ? 3 : 2;
+    u8 r3 = (gUnknown_0203CE58.pocket == BERRIES_POCKET) ? 3 : 2;
     ConvertIntToDecimalStringN(gStringVar1, b, 2, r3);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(a, 1, gStringVar4, 0, 1, -1, 0);
@@ -1164,10 +1164,10 @@ u8 GetSwitchBagPocketDirection(void)
 
 void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
 {
-    if (deltaBagPocketId == 1 && *bagPocketId == 4)
+    if (deltaBagPocketId == 1 && *bagPocketId == POCKETS_COUNT - 1)
         *bagPocketId = 0;
     else if (deltaBagPocketId == -1 && *bagPocketId == 0)
-        *bagPocketId = 4;
+        *bagPocketId = POCKETS_COUNT - 1;
     else
         *bagPocketId += deltaBagPocketId;
 }
@@ -1444,7 +1444,7 @@ void sub_81AC644(u8 unused)
         default:
             if (sub_81221AC() == TRUE || InUnionRoom() == TRUE)
             {
-                if (gUnknown_0203CE58.pocket == 4 || !sub_8122148(gSpecialVar_ItemId))
+                if (gUnknown_0203CE58.pocket == KEYITEMS_POCKET || !sub_8122148(gSpecialVar_ItemId))
                 {
                     gUnknown_0203CE54->unk820 = &gUnknown_08614046;
                     gUnknown_0203CE54->unk828 = 1;
@@ -1459,14 +1459,14 @@ void sub_81AC644(u8 unused)
             {
                 switch (gUnknown_0203CE58.pocket)
                 {
-                    case 0:
+                    case ITEMS_POCKET:
                         gUnknown_0203CE54->unk820 = &gUnknown_0203CE54->unk824;
                         gUnknown_0203CE54->unk828 = 4;
                         memcpy(&gUnknown_0203CE54->unk824, &gUnknown_0861402C, 4);
                         if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
                             gUnknown_0203CE54->unk824 = 6;
                         break;
-                    case 4:
+                    case KEYITEMS_POCKET:
                         gUnknown_0203CE54->unk820 = &gUnknown_0203CE54->unk824;
                         gUnknown_0203CE54->unk828 = 4;
                         memcpy(&gUnknown_0203CE54->unk824, &gUnknown_08614030, 4);
@@ -1478,22 +1478,22 @@ void sub_81AC644(u8 unused)
                                 gUnknown_0203CE54->unk824 = 7;
                         }
                         break;
-                    case 1:
+                    case BALLS_POCKET:
                         gUnknown_0203CE54->unk820 = gUnknown_08614034;
                         gUnknown_0203CE54->unk828 = 4;
                         break;
-                    case 2:
+                    case TMHM_POCKET:
                         gUnknown_0203CE54->unk820 = gUnknown_08614038;
                         gUnknown_0203CE54->unk828 = 4;
                         break;
-                    case 3:
+                    case BERRIES_POCKET:
                         gUnknown_0203CE54->unk820 = gUnknown_0861403C;
                         gUnknown_0203CE54->unk828 = 6;
                         break;
                 }
             }
     }
-    if (gUnknown_0203CE58.pocket == 2)
+    if (gUnknown_0203CE58.pocket == TMHM_POCKET)
     {
         ClearWindowTilemap(1);
         PrintTMHMMoveData(gSpecialVar_ItemId);
@@ -1624,17 +1624,17 @@ bool8 sub_81ACDFC(s8 a)
 void bag_menu_remove_some_window(void)
 {
     if (gUnknown_0203CE54->unk828 == 1)
-            bag_menu_remove_window(0);
+        bag_menu_remove_window(0);
     else if (gUnknown_0203CE54->unk828 == 2)
     {
-            bag_menu_remove_window(1);
+        bag_menu_remove_window(1);
     }
     else if (gUnknown_0203CE54->unk828 == 4)
     {
-            bag_menu_remove_window(2);
+        bag_menu_remove_window(2);
     }
     else
-            bag_menu_remove_window(3);
+        bag_menu_remove_window(3);
 }
 
 void ItemMenu_UseOutOfBattle(u8 taskId)
@@ -1648,7 +1648,7 @@ void ItemMenu_UseOutOfBattle(u8 taskId)
         {
             FillWindowPixelBuffer(1, 0);
             schedule_bg_copy_tilemap_to_vram(0);
-            if (gUnknown_0203CE58.pocket != 3)
+            if (gUnknown_0203CE58.pocket != BERRIES_POCKET)
                 ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
             else
                 sub_80FDD10(taskId);
@@ -1842,7 +1842,7 @@ void ItemMenu_UseInBattle(u8 taskId)
 
 void bag_menu_mail_related(void)
 {
-    GoToBagMenu(12, 5, NULL);
+    GoToBagMenu(RETURN_LOCATION_UNCHANGED, POCKETS_COUNT, NULL);
 }
 
 void item_menu_type_2(u8 taskId)
@@ -1857,7 +1857,7 @@ void item_menu_type_2(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeldHere);
         DisplayItemMessage(taskId, 1, gStringVar4, sub_81AD350);
     }
-    else if (gUnknown_0203CE58.pocket != 4 && !ItemId_GetImportance(gSpecialVar_ItemId))
+    else if (gUnknown_0203CE58.pocket != KEYITEMS_POCKET && !ItemId_GetImportance(gSpecialVar_ItemId))
     {
         unknown_ItemMenu_Confirm(taskId);
     }
@@ -1871,7 +1871,7 @@ void item_menu_type_b(u8 taskId)
 {
     if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
-    else if (gUnknown_0203CE58.pocket != 4 && !ItemId_GetImportance(gSpecialVar_ItemId))
+    else if (gUnknown_0203CE58.pocket != KEYITEMS_POCKET && !ItemId_GetImportance(gSpecialVar_ItemId))
         gTasks[taskId].func = unknown_ItemMenu_Confirm;
     else
         bag_menu_print_cant_be_held_msg(taskId);
@@ -2157,7 +2157,7 @@ void DoWallyTutorialBagMenu(void)
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(10, 0, SetCB2ToReshowScreenAfterMenu2);
+    GoToBagMenu(RETURN_LOCATION_BATTLE_2, ITEMS_POCKET, SetCB2ToReshowScreenAfterMenu2);
 }
 
 void Task_WallyTutorialBagMenu(u8 taskId)
