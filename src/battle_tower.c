@@ -147,7 +147,7 @@ const u16 gBattleFrontierHeldItems[] =
 #include "data/battle_frontier/battle_frontier_trainers.h"
 #include "data/battle_frontier/battle_frontier_mons.h"
 
-const u8 gTowerMaleFacilityClasses[] =
+const u8 gTowerMaleFacilityClasses[30] =
 {
     FACILITY_CLASS_RUIN_MANIAC,
     FACILITY_CLASS_TUBER_M,
@@ -181,7 +181,7 @@ const u8 gTowerMaleFacilityClasses[] =
     FACILITY_CLASS_HIKER
 };
 
-const u8 gTowerFemaleFacilityClasses[] =
+const u8 gTowerFemaleFacilityClasses[20] =
 {
     FACILITY_CLASS_AROMA_LADY,
     FACILITY_CLASS_TUBER_F,
@@ -205,7 +205,7 @@ const u8 gTowerFemaleFacilityClasses[] =
     FACILITY_CLASS_LASS
 };
 
-const u8 gTowerMaleTrainerGfxIds[] =
+const u8 gTowerMaleTrainerGfxIds[30] =
 {
     EVENT_OBJ_GFX_HIKER,
     EVENT_OBJ_GFX_TUBER_M,
@@ -239,7 +239,7 @@ const u8 gTowerMaleTrainerGfxIds[] =
     EVENT_OBJ_GFX_HIKER
 };
 
-const u8 gTowerFemaleTrainerGfxIds[] =
+const u8 gTowerFemaleTrainerGfxIds[20] =
 {
     EVENT_OBJ_GFX_WOMAN_2,
     EVENT_OBJ_GFX_TUBER_F,
