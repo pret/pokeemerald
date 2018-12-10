@@ -1,11 +1,13 @@
 #include "global.h"
 #include "alloc.h"
 #include "bg.h"
+#include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
 #include "field_screen.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "item_menu.h"
@@ -83,6 +85,18 @@ enum
     SCREEN_CHANGE_ITEM_FROM_BAG,
 };
 
+#define TAG_PAL_WAVEFORM    0xDACA
+#define TAG_PAL_DAC8        0xDAC8
+#define TAG_PAL_DAC6        0xDAC6
+#define TAG_PAL_DACE        0xDACE
+#define TAG_PAL_DAC7        0xDAC7
+
+#define TAG_TILE_WAVEFORM   0x5
+#define TAG_TILE_10         0x10
+#define TAG_TILE_2          0x2
+#define TAG_TILE_D          0xD
+#define TAG_TILE_A          0xA
+
 IWRAM_DATA u8 gUnknown_03000F78[0x188];
 
 extern const u8 gText_PartyFull[];
@@ -117,22 +131,22 @@ void sub_80C7958(u8 curBox);
 void ResetWaldaWallpaper(void);
 void sub_80C7B14(void);
 void sub_80C7BB4(void);
-void sub_80CA028(void);
+void ScrollBackground(void);
 void sub_80C7B80(void);
 void sub_80D2AA4(void);
 void sub_80C7BE4(void);
 void sub_80CAA14(void);
 void sub_80CE790(void);
 void sub_80CE8E4(void);
-void sub_80C9F6C(void);
+void GiveChosenBagItem(void);
 void sub_80CA888(void);
-void sub_80CA044(void);
-void sub_80CA0C8(void);
+void LoadPSSMenuGfx(void);
+void LoadWaveformSpritePalette(void);
 void sub_80CDC18(void);
 void sub_80CD36C(void);
 void sub_80CD3EC(void);
 void sub_80CAC1C(void);
-void sub_80C9FEC(void);
+void SetScrollingBackground(void);
 void sub_80CABE0(void);
 void sub_80CAEAC(void);
 void sub_80D0C60(void);
@@ -143,8 +157,13 @@ void sub_80CA0D8(void);
 void sub_80CFFD0(void);
 void sub_80CE250(void);
 void sub_80CE3A0(void);
+void sub_80D01B8(void);
 void sub_80CE2D8(void);
+void sub_80D25F0(void);
 void sub_80CA230(void);
+void sub_80CA318(void);
+void sub_80CA154(void);
+void sub_80CA1C4(void);
 void sub_80CC064(void);
 void sub_80CE324(void);
 void ClearBottomWindow(void);
@@ -167,7 +186,7 @@ void sub_80CB950(void);
 void sub_80CA9C0(void);
 void BoxSetMosaic(void);
 void sub_80C7CF4(struct Sprite *sprite);
-bool8 sub_80CA0A4(void);
+bool8 InitPSSWindows(void);
 bool8 sub_80CC0A0(void);
 bool8 sub_80CE2A8(void);
 bool8 sub_80D0164(void);
@@ -192,10 +211,10 @@ bool8 CanShifMon(void);
 bool8 IsCursorOnCloseBox(void);
 bool8 IsMonBeingMoved(void);
 bool8 sub_80CE19C(u8 arg0);
-void sub_80C7FA8(u8 taskId);
+void Cb_InitPSS(u8 taskId);
 void Cb_PlaceMon(u8 taskId);
 void Cb_ChangeScreen(u8 taskId);
-void sub_80C81AC(u8 taskId);
+void Cb_ShowPSS(u8 taskId);
 void Cb_OnBPressed(u8 taskId);
 void Cb_HandleBoxOptions(u8 taskId);
 void Cb_OnSelectedMon(u8 taskId);
@@ -217,7 +236,7 @@ void Cb_ShowMarkMenu(u8 taskId);
 void Cb_ShowMonSummary(u8 taskId);
 void Cb_ReleaseMon(u8 taskId);
 void task_pokemon_box_related(u8 taskId);
-void sub_80C972C_2(u8 taskId);
+void Cb_ReshowPSSAfterChoosingBagItem(u8 taskId);
 void Cb_MainPSS(u8 taskId);
 void Cb_JumpBox(u8 taskId);
 void Cb_HandleWallpapers(u8 taskId);
@@ -249,6 +268,7 @@ struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
 void SetWallpaperForCurrentBox(u8 wallpaperId);
 void sub_80CAE0C(u8 arg0);
 u16 GetMovingItem(void);
+void SetCurrentBoxMonData(s32 monId, s32 request, const void *value);
 
 // const rom data
 const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -271,25 +291,25 @@ const struct WindowTemplate gUnknown_085716E8 =
     .baseBlock = 0x1,
 };
 
-static const union AnimCmd sSpriteAnim_85716F0[] =
+const union AnimCmd sSpriteAnim_85716F0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_85716F8[] =
+const union AnimCmd sSpriteAnim_85716F8[] =
 {
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_8571700[] =
+const union AnimCmd sSpriteAnim_8571700[] =
 {
     ANIMCMD_FRAME(6, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_8571708[] =
+const union AnimCmd sSpriteAnim_8571708[] =
 {
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END
@@ -303,13 +323,13 @@ const union AnimCmd *const sSpriteAnimTable_8571710[] =
     sSpriteAnim_8571708
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_8571720[] =
+const union AffineAnimCmd sSpriteAffineAnim_8571720[] =
 {
     AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_8571730[] =
+const union AffineAnimCmd *const sSpriteAffineAnimTable_8571730[] =
 {
     sSpriteAffineAnim_8571720
 };
@@ -320,8 +340,8 @@ const u8 gUnknown_08571737[] = _("/30");
 const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/unknown/unknown_57173C.gbapal");
 const u8 gBoxSelectionPopupCenterTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_center.4bpp");
 const u8 gBoxSelectionPopupSidesTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
-const u32 gUnknown_085720DC[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
-const u32 gUnknown_08572174[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
+const u32 gPokemonStorageScrollingBGTileset[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
+const u32 gPokemonStorageScrollingBGTilemap[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
 const u32 gUnknown_08572280[] = INCBIN_U32("graphics/unknown/unknown_572280.gbapal");
 const u32 gUnknown_085722A0[] = INCBIN_U32("graphics/unknown/unknown_5722A0.bin.lz");
 
@@ -331,7 +351,7 @@ const u16 gUnknown_0857239C[] =
     0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108, 0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118,
 };
 
-const u16 gUnknown_085723DC[] = INCBIN_U16("graphics/unknown/unknown_5723DC.gbapal");
+const u16 gUnknown_085723DC[] = INCBIN_U16("graphics/unknown/unknown_5723DC.gbapal"); // Left-most part and Close Box.
 const u16 gUnknown_085723FC[] = INCBIN_U16("graphics/unknown/unknown_5723FC.gbapal");
 const u16 gUnknown_0857241C[] = INCBIN_U16("graphics/unknown/unknown_57241C.gbapal");
 const u16 gUnknown_0857243C[] = INCBIN_U16("graphics/unknown/unknown_57243C.gbapal");
@@ -430,20 +450,20 @@ const struct BgTemplate gUnknown_08572734[] =
 
 const struct SpritePalette gWaveformSpritePalette =
 {
-    gWaveformPalette, 0xDACA
+    gWaveformPalette, TAG_PAL_WAVEFORM
 };
 
 const struct SpriteSheet gWaveformSpriteSheet =
 {
-    gWaveformTiles, sizeof(gWaveformTiles), 5
+    gWaveformTiles, sizeof(gWaveformTiles), TAG_TILE_WAVEFORM
 };
 
-const struct OamData gOamData_857286C;
+const struct OamData sOamData_857286C;
 const struct SpriteTemplate gUnknown_08572754 =
 {
-    .tileTag = 2,
-    .paletteTag = 0xDAC6,
-    .oam = &gOamData_857286C,
+    .tileTag = TAG_TILE_2,
+    .paletteTag = TAG_PAL_DAC6,
+    .oam = &sOamData_857286C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -483,6 +503,146 @@ const struct StorageAction gPCStorageActionTexts[] =
     [PC_TEXT_ITEM_IS_HELD] = {gText_ItemIsNowHeld, 7},
     [PC_TEXT_CHANGED_TO_ITEM] = {gText_ChangedToNewItem, 7},
     [PC_TEXT_CANT_STORE_MAIL] = {gText_MailCantBeStored, 0},
+};
+
+const struct WindowTemplate gUnknown_08572864 =
+{
+    .bg = 0,
+    .tilemapLeft = 24,
+    .tilemapTop = 11,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x5C,
+};
+
+const struct OamData sOamData_857286C =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData sOamData_8572874 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const union AnimCmd sSpriteAnim_857287C[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd sSpriteAnim_8572884[] =
+{
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd sSpriteAnim_8572894[] =
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd sSpriteAnim_857289C[] =
+{
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(12, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const sSpriteAnimTable_85728AC[] =
+{
+    sSpriteAnim_857287C,
+    sSpriteAnim_8572884,
+    sSpriteAnim_8572894,
+    sSpriteAnim_857289C
+};
+
+const struct SpriteTemplate gUnknown_085728BC =
+{
+    .tileTag = 5,
+    .paletteTag = 0xDACA,
+    .oam = &sOamData_8572874,
+    .anims = sSpriteAnimTable_85728AC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct OamData sOamData_85728EC;
+const struct SpriteTemplate gUnknown_085728D4 =
+{
+    .tileTag = 18,
+    .paletteTag = 0xDAC0,
+    .oam = &sOamData_85728EC,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct OamData sOamData_85728EC =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_85728F4[] =
+{
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_8572904[] =
+{
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_857291C[] =
+{
+    gSpriteAffineAnim_85728F4,
+    gSpriteAffineAnim_8572904
 };
 
 // code
@@ -566,7 +726,7 @@ u8 CountPartyMons(void)
     return count;
 }
 
-static u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
+u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
 {
     u8 *str;
 
@@ -577,7 +737,7 @@ static u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
-static void sub_80C7128(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+void sub_80C7128(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
 {
     u16 i;
 
@@ -1030,7 +1190,7 @@ void sub_80C7CF4(struct Sprite *sprite)
     }
 }
 
-void sub_80C7D28(void)
+void VblankCb_PSS(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -1039,11 +1199,11 @@ void sub_80C7D28(void)
     SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_02039D08->bg2_X);
 }
 
-void c2_Box(void)
+void Cb2_PSS(void)
 {
     RunTasks();
     do_scheduled_bg_tilemap_copies_to_vram();
-    sub_80CA028();
+    ScrollBackground();
     sub_80CAA14();
     AnimateSprites();
     BuildOamBuffer();
@@ -1053,7 +1213,7 @@ void Cb2_EnterPSS(u8 boxOption)
 {
     ResetTasks();
     sBoxOption = boxOption;
-    gUnknown_02039D08 = Alloc(0x62C4);
+    gUnknown_02039D08 = Alloc(sizeof(*gUnknown_02039D08));
     if (gUnknown_02039D08 == NULL)
     {
         SetMainCallback2(Cb2_ExitPSS);
@@ -1061,19 +1221,19 @@ void Cb2_EnterPSS(u8 boxOption)
     else
     {
         gUnknown_02039D08->boxOption = boxOption;
-        gUnknown_02039D08->unk_0003 = 0;
+        gUnknown_02039D08->isReshowingPSS = FALSE;
         gUnknown_02039D12 = 0;
         gUnknown_02039D08->state = 0;
-        gUnknown_02039D08->taskId = CreateTask(sub_80C7FA8, 3);
+        gUnknown_02039D08->taskId = CreateTask(Cb_InitPSS, 3);
         gUnknown_02039D10 = StorageGetCurrentBox();
-        SetMainCallback2(c2_Box);
+        SetMainCallback2(Cb2_PSS);
     }
 }
 
 void Cb2_ReturnToPSS(void)
 {
     ResetTasks();
-    gUnknown_02039D08 = Alloc(0x62C4);
+    gUnknown_02039D08 = Alloc(sizeof(*gUnknown_02039D08));
     if (gUnknown_02039D08 == NULL)
     {
         SetMainCallback2(Cb2_ExitPSS);
@@ -1081,14 +1241,14 @@ void Cb2_ReturnToPSS(void)
     else
     {
         gUnknown_02039D08->boxOption = sBoxOption;
-        gUnknown_02039D08->unk_0003 = 1;
+        gUnknown_02039D08->isReshowingPSS = TRUE;
         gUnknown_02039D08->state = 0;
-        gUnknown_02039D08->taskId = CreateTask(sub_80C7FA8, 3);
-        SetMainCallback2(c2_Box);
+        gUnknown_02039D08->taskId = CreateTask(Cb_InitPSS, 3);
+        SetMainCallback2(Cb2_PSS);
     }
 }
 
-void sub_80C7E50(void)
+void ResetAllBgCoords(void)
 {
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
@@ -1140,7 +1300,7 @@ void SetPSSCallback(TaskFunc newFunc)
     gUnknown_02039D08->state = 0;
 }
 
-void sub_80C7FA8(u8 taskId)
+void Cb_InitPSS(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1148,7 +1308,7 @@ void sub_80C7FA8(u8 taskId)
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         sub_80C7E98();
-        if (gUnknown_02039D08->unk_0003 != 0)
+        if (gUnknown_02039D08->isReshowingPSS)
         {
             switch (gUnknown_02039D0F)
             {
@@ -1159,15 +1319,15 @@ void sub_80C7FA8(u8 taskId)
                 sub_80CE8E4();
                 break;
             case 2:
-                sub_80C9F6C();
+                GiveChosenBagItem();
                 break;
             }
         }
-        sub_80CA044();
-        sub_80CA0C8();
+        LoadPSSMenuGfx();
+        LoadWaveformSpritePalette();
         break;
     case 1:
-        if (!sub_80CA0A4())
+        if (!InitPSSWindows())
         {
             SetPSSCallback(Cb_ChangeScreen);
             return;
@@ -1180,13 +1340,13 @@ void sub_80C7FA8(u8 taskId)
         LoadUserWindowBorderGfx(1, 0xB, 0xE0);
         break;
     case 3:
-        sub_80C7E50();
-        if (gUnknown_02039D08->unk_0003 == 0)
+        ResetAllBgCoords();
+        if (!gUnknown_02039D08->isReshowingPSS)
             sub_80C7F1C();
         break;
     case 4:
         sub_80CAF04();
-        if (gUnknown_02039D08->unk_0003 == 0)
+        if (!gUnknown_02039D08->isReshowingPSS)
             sub_80CD36C();
         else
             sub_80CD3EC();
@@ -1199,7 +1359,7 @@ void sub_80C7FA8(u8 taskId)
         }
         else
         {
-            sub_80C9FEC();
+            SetScrollingBackground();
             sub_80CAC1C();
         }
         break;
@@ -1218,8 +1378,8 @@ void sub_80C7FA8(u8 taskId)
 
         if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
         {
-            gUnknown_02039D08->field_DA4.baseTileTag = 0xD;
-            gUnknown_02039D08->field_DA4.basePaletteTag = 0xDACE;
+            gUnknown_02039D08->field_DA4.baseTileTag = TAG_TILE_D;
+            gUnknown_02039D08->field_DA4.basePaletteTag = TAG_PAL_DACE;
             sub_811F90C(&gUnknown_02039D08->field_DA4);
             sub_811FA90();
         }
@@ -1231,17 +1391,17 @@ void sub_80C7FA8(u8 taskId)
         break;
     case 10:
         sub_80C7F4C();
-        if (gUnknown_02039D08->unk_0003 == 0)
+        if (!gUnknown_02039D08->isReshowingPSS)
         {
             BlendPalettes(0xFFFFFFFF, 0x10, 0);
-            SetPSSCallback(sub_80C81AC);
+            SetPSSCallback(Cb_ShowPSS);
         }
         else
         {
             BlendPalettes(0xFFFFFFFF, 0x10, 0);
-            SetPSSCallback(sub_80C972C_2);
+            SetPSSCallback(Cb_ReshowPSSAfterChoosingBagItem);
         }
-        SetVBlankCallback(sub_80C7D28);
+        SetVBlankCallback(VblankCb_PSS);
         return;
     default:
         return;
@@ -1250,7 +1410,7 @@ void sub_80C7FA8(u8 taskId)
     gUnknown_02039D08->state++;
 }
 
-void sub_80C81AC(u8 taskId)
+void Cb_ShowPSS(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1266,7 +1426,7 @@ void sub_80C81AC(u8 taskId)
     }
 }
 
-void sub_80C972C_2(u8 taskId)
+void Cb_ReshowPSSAfterChoosingBagItem(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1881,7 +2041,7 @@ void Cb_DepositMenu(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
-        sub_80C77E8(&gUnknown_02039D08->field_1E5C, 10, 0xDAC7, 3, FALSE);
+        sub_80C77E8(&gUnknown_02039D08->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_80C78D4(gUnknown_02039D0E);
         gUnknown_02039D08->state++;
         break;
@@ -2529,7 +2689,7 @@ void Cb_JumpBox(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_JUMP_TO_WHICH_BOX);
-        sub_80C77E8(&gUnknown_02039D08->field_1E5C, 10, 0xDAC7, 3, FALSE);
+        sub_80C77E8(&gUnknown_02039D08->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_80C78D4(StorageGetCurrentBox());
         gUnknown_02039D08->state++;
         break;
@@ -2790,4 +2950,110 @@ void Cb_ChangeScreen(u8 taskId)
     }
 
     DestroyTask(taskId);
+}
+
+void GiveChosenBagItem(void)
+{
+    u16 item = gSpecialVar_ItemId;
+
+    if (item != 0)
+    {
+        u8 id = GetBoxCursorPosition();
+
+        if (sInPartyMenu)
+            SetMonData(&gPlayerParty[id], MON_DATA_HELD_ITEM, &item);
+        else
+            SetCurrentBoxMonData(id, MON_DATA_HELD_ITEM, &item);
+
+        RemoveBagItem(item, 1);
+    }
+}
+
+void FreePSSData(void)
+{
+    sub_80D25F0();
+    sub_80D01B8();
+    FREE_AND_SET_NULL(gUnknown_02039D08);
+    FreeAllWindowBuffers();
+}
+
+void SetScrollingBackground(void)
+{
+    SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
+    DecompressAndLoadBgGfxUsingHeap(3, gPokemonStorageScrollingBGTileset, 0, 0, 0);
+    LZ77UnCompVram(gPokemonStorageScrollingBGTilemap, (void *)VRAM + 0xF800);
+}
+
+void ScrollBackground(void)
+{
+    ChangeBgX(3, 128, 1);
+    ChangeBgY(3, 128, 2);
+}
+
+void LoadPSSMenuGfx(void)
+{
+    InitBgsFromTemplates(0, gUnknown_08572734, ARRAY_COUNT(gUnknown_08572734));
+    DecompressAndLoadBgGfxUsingHeap(1, gPSSMenu_Gfx, 0, 0, 0);
+    LZ77UnCompWram(gUnknown_085722A0, gUnknown_02039D08->field_5AC4);
+    SetBgTilemapBuffer(1, gUnknown_02039D08->field_5AC4);
+    ShowBg(1);
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+bool8 InitPSSWindows(void)
+{
+    if (!InitWindows(gUnknown_08572714))
+    {
+        return FALSE;
+    }
+    else
+    {
+        DeactivateAllTextPrinters();
+        return TRUE;
+    }
+}
+
+void LoadWaveformSpritePalette(void)
+{
+    LoadSpritePalette(&gWaveformSpritePalette);
+}
+
+void sub_80CA0D8(void)
+{
+    LoadPalette(gUnknown_085723DC, 0, 0x20);
+    LoadPalette(gUnknown_085723FC, 0x20, 0x20);
+    LoadPalette(gUnknown_085726F4, 0xF0, 0x20);
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        LoadPalette(gUnknown_0857241C, 0x30, 0x20);
+    else
+        LoadPalette(gUnknown_0857243C, 0x30, 0x20);
+
+    SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
+    sub_80CA318();
+    sub_80CA154();
+    sub_80CA1C4();
+    sub_80CA230();
+}
+
+void sub_80CA154(void)
+{
+    gUnknown_02039D08->field_D94 = sub_811FFB4(TAG_TILE_10, TAG_PAL_DAC8, NULL);
+    gUnknown_02039D08->field_D94->oam.priority = 1;
+    gUnknown_02039D08->field_D94->subpriority = 1;
+    gUnknown_02039D08->field_D94->pos1.x = 40;
+    gUnknown_02039D08->field_D94->pos1.y = 150;
+    gUnknown_02039D08->field_DA0 = (void*) OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
+}
+
+void sub_80CA1C4(void)
+{
+    u16 i;
+    struct SpriteSheet sheet = gWaveformSpriteSheet;
+
+    LoadSpriteSheet(&sheet);
+    for (i = 0; i < 2; i++)
+    {
+        u8 spriteId = CreateSprite(&gUnknown_085728BC, i * 63 + 8, 9, 2);
+        gUnknown_02039D08->field_D98[i] = &gSprites[spriteId];
+    }
 }

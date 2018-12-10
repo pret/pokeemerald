@@ -4740,4 +4740,7 @@ extern const u32 gUnknown_08D8D58C[];
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
 
+// Pokemon Storage System
+extern const u32 gPSSMenu_Gfx[];
+
 #endif //GUARD_GRAPHICS_H

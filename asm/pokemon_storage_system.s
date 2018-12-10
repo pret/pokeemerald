@@ -7,309 +7,7 @@
 
 
 
-	thumb_func_start sub_80C9F6C
-sub_80C9F6C: @ 80C9F6C
-	push {lr}
-	sub sp, 0x4
-	ldr r0, =gSpecialVar_ItemId
-	ldrh r1, [r0]
-	mov r0, sp
-	strh r1, [r0]
-	cmp r1, 0
-	beq _080C9FC0
-	bl GetBoxCursorPosition
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, =sInPartyMenu
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080C9FAC
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0xC
-	mov r2, sp
-	bl SetMonData
-	b _080C9FB6
-	.pool
-_080C9FAC:
-	adds r0, r1, 0
-	movs r1, 0xC
-	mov r2, sp
-	bl SetBoxMonDataFromSelectedBox
-_080C9FB6:
-	mov r0, sp
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl RemoveBagItem
-_080C9FC0:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80C9F6C
 
-	thumb_func_start FreePSSData
-FreePSSData: @ 80C9FC8
-	push {r4,lr}
-	bl sub_80D25F0
-	bl sub_80D01B8
-	ldr r4, =gUnknown_02039D08
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	bl FreeAllWindowBuffers
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end FreePSSData
-
-	thumb_func_start sub_80C9FEC
-sub_80C9FEC: @ 80C9FEC
-	push {lr}
-	sub sp, 0x4
-	ldr r1, =0x00001f0f
-	movs r0, 0xE
-	bl SetGpuReg
-	ldr r1, =gUnknown_085720DC
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x3
-	movs r2, 0
-	movs r3, 0
-	bl DecompressAndLoadBgGfxUsingHeap
-	ldr r0, =gUnknown_08572174
-	ldr r1, =0x0600f800
-	bl LZ77UnCompVram
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80C9FEC
-
-	thumb_func_start sub_80CA028
-sub_80CA028: @ 80CA028
-	push {lr}
-	movs r0, 0x3
-	movs r1, 0x80
-	movs r2, 0x1
-	bl ChangeBgX
-	movs r0, 0x3
-	movs r1, 0x80
-	movs r2, 0x2
-	bl ChangeBgY
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80CA028
-
-	thumb_func_start sub_80CA044
-sub_80CA044: @ 80CA044
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r1, =gUnknown_08572734
-	movs r0, 0
-	movs r2, 0x4
-	bl InitBgsFromTemplates
-	ldr r1, =gPSSMenu_Gfx
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0
-	bl DecompressAndLoadBgGfxUsingHeap
-	ldr r0, =gUnknown_085722A0
-	ldr r5, =gUnknown_02039D08
-	ldr r1, [r5]
-	ldr r4, =0x00005ac4
-	adds r1, r4
-	bl LZ77UnCompWram
-	ldr r1, [r5]
-	adds r1, r4
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	movs r0, 0x1
-	bl ShowBg
-	movs r0, 0x1
-	bl schedule_bg_copy_tilemap_to_vram
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80CA044
-
-	thumb_func_start sub_80CA0A4
-sub_80CA0A4: @ 80CA0A4
-	push {lr}
-	ldr r0, =gUnknown_08572714
-	bl InitWindows
-	lsls r0, 16
-	cmp r0, 0
-	beq _080CA0C0
-	bl DeactivateAllTextPrinters
-	movs r0, 0x1
-	b _080CA0C2
-	.pool
-_080CA0C0:
-	movs r0, 0
-_080CA0C2:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80CA0A4
-
-	thumb_func_start sub_80CA0C8
-sub_80CA0C8: @ 80CA0C8
-	push {lr}
-	ldr r0, =gWaveformSpritePalette
-	bl LoadSpritePalette
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80CA0C8
-
-	thumb_func_start sub_80CA0D8
-sub_80CA0D8: @ 80CA0D8
-	push {lr}
-	ldr r0, =gUnknown_085723DC
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =gUnknown_085723FC
-	movs r1, 0x20
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =gUnknown_085726F4
-	movs r1, 0xF0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =gUnknown_02039D08
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x3
-	beq _080CA124
-	ldr r0, =gUnknown_0857241C
-	movs r1, 0x30
-	movs r2, 0x20
-	bl LoadPalette
-	b _080CA12E
-	.pool
-_080CA124:
-	ldr r0, =gUnknown_0857243C
-	movs r1, 0x30
-	movs r2, 0x20
-	bl LoadPalette
-_080CA12E:
-	ldr r1, =0x00001e05
-	movs r0, 0xA
-	bl SetGpuReg
-	bl sub_80CA318
-	bl sub_80CA154
-	bl sub_80CA1C4
-	bl sub_80CA230
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80CA0D8
-
-	thumb_func_start sub_80CA154
-sub_80CA154: @ 80CA154
-	push {r4,lr}
-	ldr r1, =0x0000dac8
-	movs r0, 0x10
-	movs r2, 0
-	bl sub_811FFB4
-	ldr r4, =gUnknown_02039D08
-	ldr r1, [r4]
-	ldr r3, =0x00000d94
-	adds r1, r3
-	str r0, [r1]
-	ldrb r2, [r0, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r2
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0, 0x5]
-	ldr r0, [r4]
-	adds r0, r3
-	ldr r0, [r0]
-	adds r0, 0x43
-	movs r1, 0x1
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, r3
-	ldr r2, [r0]
-	movs r1, 0x28
-	strh r1, [r2, 0x20]
-	ldr r1, [r0]
-	movs r0, 0x96
-	strh r0, [r1, 0x22]
-	movs r0, 0x10
-	bl GetSpriteTileStartByTag
-	ldr r1, [r4]
-	movs r2, 0xDA
-	lsls r2, 4
-	adds r1, r2
-	lsls r0, 16
-	lsrs r0, 11
-	ldr r2, =0x06010000
-	adds r0, r2
-	str r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80CA154
-
-	thumb_func_start sub_80CA1C4
-sub_80CA1C4: @ 80CA1C4
-	push {r4,lr}
-	sub sp, 0x8
-	ldr r0, =gWaveformSpriteSheet
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	mov r0, sp
-	bl LoadSpriteSheet
-	movs r4, 0
-_080CA1DA:
-	lsls r1, r4, 6
-	subs r1, r4
-	adds r1, 0x8
-	lsls r1, 16
-	asrs r1, 16
-	ldr r0, =gUnknown_085728BC
-	movs r2, 0x9
-	movs r3, 0x2
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnknown_02039D08
-	ldr r2, [r1]
-	lsls r1, r4, 2
-	ldr r3, =0x00000d98
-	adds r2, r3
-	adds r2, r1
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, =gSprites
-	adds r1, r0
-	str r1, [r2]
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x1
-	bls _080CA1DA
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80CA1C4
 
 	thumb_func_start sub_80CA230
 sub_80CA230: @ 80CA230
@@ -8876,7 +8574,7 @@ _080CEA08:
 	ldrb r0, [r0]
 	movs r1, 0x8
 	mov r2, sp
-	bl SetBoxMonDataFromSelectedBox
+	bl SetCurrentBoxMonData
 _080CEA1C:
 	add sp, 0x4
 	pop {r4}
@@ -13361,7 +13059,7 @@ sub_80D0E90: @ 80D0E90
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl SetBoxMonDataFromSelectedBox
+	bl SetCurrentBoxMonData
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CB7AC
@@ -13489,7 +13187,7 @@ sub_80D0FAC: @ 80D0FAC
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl SetBoxMonDataFromSelectedBox
+	bl SetCurrentBoxMonData
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r4
@@ -13577,7 +13275,7 @@ sub_80D1080: @ 80D1080
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl SetBoxMonDataFromSelectedBox
+	bl SetCurrentBoxMonData
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_80CB7AC
@@ -13643,7 +13341,7 @@ sub_80D1114: @ 80D1114
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl SetBoxMonDataFromSelectedBox
+	bl SetCurrentBoxMonData
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CB7AC
@@ -15228,8 +14926,8 @@ GetBoxMonDataFromSelectedBox: @ 80D1DB8
 	.pool
 	thumb_func_end GetBoxMonDataFromSelectedBox
 
-	thumb_func_start SetBoxMonDataFromSelectedBox
-SetBoxMonDataFromSelectedBox: @ 80D1DD8
+	thumb_func_start SetCurrentBoxMonData
+SetCurrentBoxMonData: @ 80D1DD8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15246,7 +14944,7 @@ SetBoxMonDataFromSelectedBox: @ 80D1DD8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetBoxMonDataFromSelectedBox
+	thumb_func_end SetCurrentBoxMonData
 
 	thumb_func_start GetBoxMonNickFromAnyBox
 GetBoxMonNickFromAnyBox: @ 80D1DFC
