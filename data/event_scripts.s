@@ -4651,35 +4651,35 @@ gOtherText_DontYouAgree:: @ 8294301
 	.string "\n"
 	.string "Don't you agree?$"
 
-gUnknown_08294313:: @ 8294313
+gMauvilleManText_ISoWantToGoOnAVacation:: @ 8294313
 	.string "I so want to go on a vacation.\n"
 	.string "Would you happen to know a nice place?$"
 
-gUnknown_08294359:: @ 8294359
+gMauvilleManText_IBoughtCrayonsWith120Colors:: @ 8294359
 	.string "I bought crayons with 120 colors!\n"
 	.string "Don't you think that's nice?$"
 
-gUnknown_08294398:: @ 8294398
+gMauvilleManText_WouldntItBeNiceIfWeCouldFloat:: @ 8294398
 	.string "Wouldn't it be nice if we could float\n"
 	.string "away on a cloud of bubbles?$"
 
-gUnknown_082943DA:: @ 82943DA
+gMauvilleManText_WhenYouWriteOnASandyBeach:: @ 82943DA
 	.string "When you write on a sandy beach,\n"
 	.string "they wash away. It makes me sad.$"
 
-gUnknown_0829441C:: @ 829441C
+gMauvilleManText_WhatsTheBottomOfTheSeaLike:: @ 829441C
 	.string "What's the bottom of the sea like?\n"
 	.string "Just once I would so love to go!$"
 
-gUnknown_08294460:: @ 8294460
+gMauvilleManText_WhenYouSeeTheSettingSunDoesIt:: @ 8294460
 	.string "When you see the setting sun, does it\n"
 	.string "make you want to go home?$"
 
-gUnknown_082944A0:: @ 82944A0
+gMauvilleManText_LyingBackInTheGreenGrass:: @ 82944A0
 	.string "Lying back in the green grass…\n"
 	.string "Oh, it's so, so nice!$"
 
-gUnknown_082944D5:: @ 82944D5
+gMauvilleManText_SecretBasesAreSoWonderful:: @ 82944D5
 	.string "SECRET BASES are so wonderful!\n"
 	.string "Can't you feel the excitement?$"
 
