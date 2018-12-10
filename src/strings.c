@@ -255,25 +255,25 @@ const u8 gText_ThePC[] = _("the PC");
 const u8 *const gReturnToXStringsTable[] = 
 {
     gText_TheField,
-	gText_TheBattle,
-	gText_ThePokemonList,
-	gText_TheShop,
-	gText_TheField,
-	gText_TheField,
-	gText_ThePC,
-	gText_TheField,
-	gText_TheField,
-	gText_TheField,
-	gText_TheBattle,
-	gText_ThePC
+    gText_TheBattle,
+    gText_ThePokemonList,
+    gText_TheShop,
+    gText_TheField,
+    gText_TheField,
+    gText_ThePC,
+    gText_TheField,
+    gText_TheField,
+    gText_TheField,
+    gText_TheBattle,
+    gText_ThePC
 };
 
 const u8 *const gReturnToXStringsTable2[] = 
 {
     gText_TheField,
-	gText_TheBattle,
-	gText_ThePokemonList,
-	gText_TheField
+    gText_TheBattle,
+    gText_ThePokemonList,
+    gText_TheField
 };
 
 const u8 gText_ReturnToVar1[] = _("Return to\n{STR_VAR_1}.");
@@ -286,10 +286,10 @@ const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 const u8 *const gPocketNamesStringsTable[] = 
 {
     gText_ItemsPocket,
-	gText_PokeBallsPocket,
-	gText_TMHMPocket,
-	gText_BerriesPocket,
-	gText_KeyItemsPocket
+    gText_PokeBallsPocket,
+    gText_TMHMPocket,
+    gText_BerriesPocket,
+    gText_KeyItemsPocket
 };
 
 const u8 gText_UnkF908Var1Clear7Var2[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
