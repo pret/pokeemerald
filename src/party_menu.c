@@ -2,9 +2,11 @@
 #include "battle.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_pike.h"
 #include "bg.h"
 #include "constants/battle.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -12,6 +14,7 @@
 #include "data2.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "fldeff_softboiled.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -28,10 +31,12 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
+#include "pokemon_summary_screen.h"
 #include "rom_8011DC0.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
+#include "start_menu.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -57,7 +62,8 @@ struct Unk_203CEC4 {
     u32 unk9_0:7;
     u32 unkA_0:14;
     u8 unkC[3];
-    u8 fillerF[9];
+    u8 unkF[8];
+    u8 unk17;
     u16 unk18[0xB0];
     u8 filler[0xA0];
     s16 unk218[16];
@@ -77,6 +83,11 @@ struct Unk_203CEE4 {
     u8 filler[0x800];
 };
 
+struct Unk_8615C08 {
+    const u8 *textPtr;
+    TaskFunc func;
+};
+
 // BELOW TO BE PUT IN EWRAM
 
 extern struct Unk_203CEC4 *gUnknown_0203CEC4;
@@ -85,7 +96,10 @@ extern struct Unk_203CEDC *gUnknown_0203CEDC;
 extern u8 *gUnknown_0203CEE0;
 extern struct Unk_203CEE4 *gUnknown_0203CEE4;
 extern u8 gUnknown_0203CEE8;
+extern u16 *gUnknown_0203CEF0;
+extern u16 *gUnknown_0203CEF4;
 extern u8 gSelectedOrderFromParty[];
+extern u8 gUnknown_0203CF20; // summary screen?
 
 // ABOVE TO BE PUT IN EWRAM
 
@@ -112,6 +126,11 @@ extern struct WindowTemplate gUnknown_08615930;
 extern struct WindowTemplate gUnknown_08615938;
 extern struct WindowTemplate gUnknown_08615940;
 extern struct WindowTemplate gUnknown_08615948;
+extern struct WindowTemplate gUnknown_08615950;
+extern struct WindowTemplate gUnknown_08615958;
+extern struct WindowTemplate gUnknown_08615960;
+extern struct WindowTemplate gUnknown_08615968;
+extern struct WindowTemplate gUnknown_08615970;
 extern u8 gUnknown_08615988[];
 extern u8 gUnknown_086159CE[];
 extern u8 gUnknown_08615A14[];
@@ -142,6 +161,10 @@ extern u8 gUnknown_08615AEE[];
 extern u8 gUnknown_08615AF1[];
 extern const u8 *gUnknown_08615AF4[];
 extern const u8 *gUnknown_08615B60[];
+extern struct Unk_8615C08 gUnknown_08615C08[];
+extern u8 *gUnknown_08615D38[];
+extern u8 gUnknown_08615D70[];
+extern const u16 gUnknown_08615D7E[];
 
 // ABOVE TO BE CONVERTED TO C
 
@@ -255,6 +278,18 @@ void sub_81B227C(u8);
 bool8 sub_81B2370(u16, u8);
 u16 sub_81B2360(u8);
 bool8 sub_81B314C(void);
+void sub_81B3414(struct Pokemon*, u8);
+u8 sub_81B8A2C(struct Pokemon*);
+u8 sub_81B856C(s8);
+void sub_81B469C(u8);
+void sub_81B3730(u8);
+void sub_81B3828(void);
+void pokemon_change_order(void);
+void sub_81B3894(void);
+void sub_81B3CC0(u8);
+void sub_81B3D48(u8);
+void swap_pokemon_and_oams(void);
+void sub_81B3E60(u8);
 
 void sub_81B0038(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc f, MainCallback g)
 {
@@ -2783,4 +2818,576 @@ bool8 sub_81B314C(void)
             return TRUE;
     }
     return FALSE;
+}
+
+u8 sub_81B31B0(u8 a)
+{
+    struct WindowTemplate window;
+    u8 cursorDimension;
+    u8 fontAttribute;
+    u8 i;
+    
+    switch (a)
+    {
+        case 0:
+            SetWindowTemplateFields(&window, 2, 19, 19 - (gUnknown_0203CEC4->unk17 * 2), 10, gUnknown_0203CEC4->unk17 * 2, 14, 0x2E9);
+            break;
+        case 1:
+            window = gUnknown_08615950;
+            break;
+        case 2:
+            window = gUnknown_08615958;
+            break;
+        default:
+            window = gUnknown_08615960;
+            break;
+    }
+    
+    gUnknown_0203CEC4->unkC[0] = AddWindow(&window);
+    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], 0, 0x4F, 13);
+    if (a == 3)
+        return gUnknown_0203CEC4->unkC[0];
+    cursorDimension = GetMenuCursorDimensionByFont(1, 0);
+    fontAttribute = GetFontAttribute(1, 2);
+    
+    for (i = 0; i < gUnknown_0203CEC4->unk17; i++)
+    {
+        u8 unk = (gUnknown_0203CEC4->unkF[i] > 18) ? 4 : 3;
+        AddTextPrinterParameterized4(gUnknown_0203CEC4->unkC[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, gUnknown_086157FC[unk], 0, gUnknown_08615C08[gUnknown_0203CEC4->unkF[i]].textPtr);
+    }
+    
+    InitMenuInUpperLeftCorner(gUnknown_0203CEC4->unkC[0], gUnknown_0203CEC4->unk17, 0, 1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    
+    return gUnknown_0203CEC4->unkC[0];
+}
+
+void sub_81B3300(const u8 *text)
+{
+    SetWindowBorderStyle(6, 0, 0x4F, 13);
+    gTextFlags.canABSpeedUpPrint = TRUE;
+    AddTextPrinterParameterized2(6, 1, text, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
+}
+
+void sub_81B334C(void)
+{
+    CreateYesNoMenu(&gUnknown_08615968, 0x4F, 13, 0);
+}
+
+u8 sub_81B3364(void)
+{
+    gUnknown_0203CEC4->unkC[0] = AddWindow(&gUnknown_08615970);
+    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], 0, 0x4F, 13);
+    return gUnknown_0203CEC4->unkC[0];
+}
+
+void sub_81B3394(void)
+{
+    ClearWindowTilemap(gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+}
+
+void sub_81B33B4(struct Pokemon *mons, u8 a, u8 b)
+{
+    u8 i;
+    
+    if (b == 0)
+    {
+        sub_81B3414(mons, a);
+    }
+    else
+    {
+        gUnknown_0203CEC4->unk17 = gUnknown_08615D70[b];
+        for (i = 0; i < gUnknown_0203CEC4->unk17; i++)
+            gUnknown_0203CEC4->unkF[i] = gUnknown_08615D38[b][i];
+    }
+}
+
+void sub_81B3414(struct Pokemon *mons, u8 a)
+{
+    u8 i, j;
+    
+    gUnknown_0203CEC4->unk17 = 0;
+    AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 0);
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; gUnknown_08615D7E[j] != MOVE_SWORDS_DANCE; j++)
+        {
+            if (GetMonData(&mons[a], i + MON_DATA_MOVE1) == gUnknown_08615D7E[j])
+            {
+                AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, j + 19);
+                break;
+            }
+        }
+    }
+    if (!InBattlePike())
+    {
+        if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
+            AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 1);
+        if (ItemIsMail(GetMonData(&mons[a], MON_DATA_HELD_ITEM)))
+            AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 6);
+        else
+            AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 3);
+    }
+    AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 2);
+}
+
+u8 sub_81B353C(struct Pokemon *mon)
+{
+    u32 returnVar;
+    
+    switch (gUnknown_0203CEC8.unk8_0)
+    {
+        case 0:
+            if (InMultiBattleRoom() == TRUE || GetMonData(mon, MON_DATA_IS_EGG) != FALSE)
+                returnVar = 1;
+            else
+                returnVar = 0;
+            break;
+        case 1:
+            returnVar = sub_81B8A2C(mon);
+            break;
+        case 4:
+            switch (sub_81B856C(gUnknown_0203CEC8.unk9))
+            {
+                default:
+                    returnVar = 7;
+                    break;
+                case 0:
+                    returnVar = 4;
+                    break;
+                case 1:
+                    returnVar = 5;
+                    break;
+            }
+            break;
+        case 6:
+            returnVar = (GetMonData(mon, MON_DATA_IS_EGG) != FALSE) ? 7 : 6;
+            break;
+        case 8:
+            returnVar = 10;
+            break;
+        case 9:
+            returnVar = 11;
+            break;
+        case 10:
+            returnVar = 12;
+            break;
+        case 12:
+            returnVar = 13;
+            break;
+        default:
+            returnVar = 0;
+            break;
+    }
+    return returnVar;
+}
+
+bool8 sub_81B3608(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    u16 item;
+    
+    GetMonNickname(mon, gStringVar1);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    if (gUnknown_0203CEC8.unk8_0 != 12)
+    {
+        sub_81B33B4(gPlayerParty, gUnknown_0203CEC8.unk9, sub_81B353C(mon));
+        sub_81B31B0(0);
+        display_pokemon_menu_message(21);
+    }
+    else
+    {
+        item = GetMonData(mon, MON_DATA_HELD_ITEM);
+        if (item != ITEM_NONE)
+        {
+            sub_81B33B4(gPlayerParty, gUnknown_0203CEC8.unk9, sub_81B353C(mon));
+            sub_81B31B0(1);
+            CopyItemName(item, gStringVar2);
+            display_pokemon_menu_message(26);
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gText_PkmnNotHolding);
+            sub_81B1B5C(gStringVar4, 1);
+            schedule_bg_copy_tilemap_to_vram(2);
+            gTasks[taskId].func = sub_81B469C;
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+void sub_81B36FC(u8 taskId)
+{
+    if (sub_81B3608(taskId) != FALSE)
+    {
+        gTasks[taskId].data[0] = 0xFF;
+        gTasks[taskId].func = sub_81B3730;
+    }
+}
+
+void sub_81B3730(u8 taskId)
+{
+    s16 *data;
+    s8 input;
+    
+    if (gPaletteFade.active == FALSE && sub_81221EC() != TRUE)
+    {
+        data = gTasks[taskId].data;
+        if (gUnknown_0203CEC4->unk17 <= 3)
+            input = Menu_ProcessInputNoWrapAround_other();
+        else
+            input = ProcessMenuInput_other();
+        data[0] = GetMenuCursorPos();
+        if (input != -2)
+        {
+            if (input == -1)
+            {
+                PlaySE(SE_SELECT);
+                sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
+                gUnknown_08615C08[gUnknown_0203CEC4->unkF[gUnknown_0203CEC4->unk17 - 1]].func(taskId);
+            }
+            else
+            {
+                sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
+                gUnknown_08615C08[gUnknown_0203CEC4->unkF[input]].func(taskId);
+            }
+        }
+    }
+}
+
+void sub_81B37FC(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    gUnknown_0203CEC4->unk4 = sub_81B3828;
+    sub_81B12C0(taskId);
+}
+
+void sub_81B3828(void)
+{
+    if (gUnknown_0203CEC8.unk8_0 == 1)
+    {
+        pokemon_change_order();
+        ShowPokemonSummaryScreen(PSS_MODE_UNK1, gPlayerParty, gUnknown_0203CEC8.unk9, gPlayerPartyCount - 1, sub_81B3894);
+    }
+    else
+    {
+        ShowPokemonSummaryScreen(PSS_MODE_NORMAL, gPlayerParty, gUnknown_0203CEC8.unk9, gPlayerPartyCount - 1, sub_81B3894);
+    }
+}
+
+void sub_81B3894(void)
+{
+    gPaletteFade.bufferTransferDisabled = TRUE;
+    gUnknown_0203CEC8.unk9 = gUnknown_0203CF20;
+    sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 21, sub_81B36FC, gUnknown_0203CEC8.unk0);
+}
+
+void brm_switch(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    gUnknown_0203CEC8.unkB = 8;
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    display_pokemon_menu_message(3);
+    sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+    gUnknown_0203CEC8.unkA = gUnknown_0203CEC8.unk9;
+    gTasks[taskId].func = sub_81B1370;
+}
+
+void sub_81B3938(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 windowIds[2];
+    
+    if (gUnknown_0203CEC8.unkA == gUnknown_0203CEC8.unk9)
+    {
+        sub_81B407C(taskId);
+    }
+    else
+    {
+        windowIds[0] = gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unk8;
+        data[0] = GetWindowAttribute(windowIds[0], WINDOW_TILEMAP_LEFT);
+        data[1] = GetWindowAttribute(windowIds[0], WINDOW_TILEMAP_TOP);
+        data[2] = GetWindowAttribute(windowIds[0], WINDOW_WIDTH);
+        data[3] = GetWindowAttribute(windowIds[0], WINDOW_HEIGHT);
+        data[8] = 0;
+        if (data[2] == 10)
+            data[10] = -1;
+        else
+            data[10] = 1;
+        windowIds[1] = gUnknown_0203CEDC[gUnknown_0203CEC8.unkA].unk8;
+        data[4] = GetWindowAttribute(windowIds[1], WINDOW_TILEMAP_LEFT);
+        data[5] = GetWindowAttribute(windowIds[1], WINDOW_TILEMAP_TOP);
+        data[6] = GetWindowAttribute(windowIds[1], WINDOW_WIDTH);
+        data[7] = GetWindowAttribute(windowIds[1], WINDOW_HEIGHT);
+        data[9] = 0;
+        if (data[6] == 10)
+            data[11] = -1;
+        else
+            data[11] = 1;
+        gUnknown_0203CEF0 = Alloc(data[2] * (data[3] << 1));
+        gUnknown_0203CEF4 = Alloc(data[6] * (data[7] << 1));
+        sub_8199CBC(0, gUnknown_0203CEF0, data[0], data[1], data[2], data[3]);
+        sub_8199CBC(0, gUnknown_0203CEF4, data[4], data[5], data[6], data[7]);
+        ClearWindowTilemap(windowIds[0]);
+        ClearWindowTilemap(windowIds[1]);
+        gUnknown_0203CEC8.unkB = 9;
+        sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+        sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
+        sub_81B3CC0(taskId);
+        gTasks[taskId].func = sub_81B3D48;
+    }
+}
+
+#ifdef NONMATCHING
+bool8 sub_81B3AD8(s16 a, s16 b, u8 *c, u8 *d, u8 *e)
+{
+    
+    if ((a + b) < 0 || a > 31)
+    {
+        return FALSE;
+    }
+    if (a < 0)
+    {
+        *c = -a;
+        *d = 0;
+        *e = a + b;
+        return TRUE;
+    }
+    else
+    {
+        *c = 0;
+        *d = a;
+        if ((a + b) > 31)
+            *e = 32 - a;
+        else
+            *e = b;
+        return TRUE;
+    }
+
+}
+#else
+NAKED
+bool8 sub_81B3AD8(s16 a, s16 b, u8 *c, u8 *d, u8 *e)
+{
+    asm_unified("push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	adds r6, r2, 0\n\
+	mov r12, r3\n\
+	ldr r7, [sp, 0x18]\n\
+	lsls r0, 16\n\
+	lsrs r3, r0, 16\n\
+	adds r5, r3, 0\n\
+	lsls r1, 16\n\
+	lsrs r2, r1, 16\n\
+	mov r8, r2\n\
+	lsls r0, r3, 16\n\
+	asrs r1, r0, 16\n\
+	lsls r0, r2, 16\n\
+	asrs r0, 16\n\
+	adds r4, r1, r0\n\
+	cmp r4, 0\n\
+	blt _081B3B02\n\
+	cmp r1, 0x1F\n\
+	ble _081B3B06\n\
+_081B3B02:\n\
+	movs r0, 0\n\
+	b _081B3B34\n\
+_081B3B06:\n\
+	cmp r1, 0\n\
+	bge _081B3B1A\n\
+	negs r0, r1\n\
+	strb r0, [r6]\n\
+	movs r0, 0\n\
+	mov r1, r12\n\
+	strb r0, [r1]\n\
+	adds r0, r2, r3\n\
+	strb r0, [r7]\n\
+	b _081B3B32\n\
+_081B3B1A:\n\
+	movs r0, 0\n\
+	strb r0, [r6]\n\
+	mov r0, r12\n\
+	strb r5, [r0]\n\
+	cmp r4, 0x1F\n\
+	ble _081B3B2E\n\
+	movs r0, 0x20\n\
+	subs r0, r5\n\
+	strb r0, [r7]\n\
+	b _081B3B32\n\
+_081B3B2E:\n\
+	mov r1, r8\n\
+	strb r1, [r7]\n\
+_081B3B32:\n\
+	movs r0, 0x1\n\
+_081B3B34:\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n");
+}
+#endif
+
+void sub_81B3B40(const void *rectSrc, s16 a, s16 b, s16 c, s16 d, s16 e)
+{
+    u8 f, g, h;
+    
+    if (sub_81B3AD8(a, c, &f, &g, &h) != FALSE)
+    {
+        FillBgTilemapBufferRect_Palette0(0, 0, g, b, h, d);
+        if (sub_81B3AD8(a + e, c, &f, &g, &h) != FALSE)
+            CopyRectToBgTilemapBufferRect(0, rectSrc, f, 0, c, d, g, b, h, d, 17, 0, 0);
+    }
+}
+
+void sub_81B3C0C(struct Unk_203CEDC *ptr, s16 a)
+{
+    gSprites[ptr->unkB].pos2.x += a * 8;
+    gSprites[ptr->unkA].pos2.x += a * 8;
+    gSprites[ptr->unk9].pos2.x += a * 8;
+    gSprites[ptr->unkC].pos2.x += a * 8;
+}
+
+void sub_81B3C60(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    if (data[10] != 0)
+        sub_81B3C0C(&gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], data[10]);
+    if (data[11] != 0)
+        sub_81B3C0C(&gUnknown_0203CEDC[gUnknown_0203CEC8.unkA], data[11]);
+}
+
+void sub_81B3CC0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    if (data[10] != 0)
+        sub_81B3B40(gUnknown_0203CEF0, data[0] + data[8], data[1], data[2], data[3], data[10]);
+    if (data[11] != 0)
+        sub_81B3B40(gUnknown_0203CEF4, data[4] + data[9], data[5], data[6], data[7], data[11]);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_81B3D48(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 tilemapRelatedMaybe[2];
+    
+    sub_81B3CC0(taskId);
+    sub_81B3C60(taskId);
+    data[8] += data[10];
+    data[9] += data[11];
+    tilemapRelatedMaybe[0] = data[0] + data[8];
+    tilemapRelatedMaybe[1] = data[4] + data[9];
+    if (tilemapRelatedMaybe[0] > 33 && tilemapRelatedMaybe[1] > 33)
+    {
+        data[10] *= -1;
+        data[11] *= -1;
+        swap_pokemon_and_oams();
+        sub_81B0948(gUnknown_0203CEC8.unk9);
+        sub_81B0948(gUnknown_0203CEC8.unkA);
+        PutWindowTilemap(gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unk8);
+        PutWindowTilemap(gUnknown_0203CEDC[gUnknown_0203CEC8.unkA].unk8);
+        sub_8199CBC(0, gUnknown_0203CEF0, data[0], data[1], data[2], data[3]);
+        sub_8199CBC(0, gUnknown_0203CEF4, data[4], data[5], data[6], data[7]);
+        ClearWindowTilemap(gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unk8);
+        ClearWindowTilemap(gUnknown_0203CEDC[gUnknown_0203CEC8.unkA].unk8);
+        gTasks[taskId].func = sub_81B3E60;
+    }
+}
+
+void sub_81B3E60(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    sub_81B3CC0(taskId);
+    sub_81B3C60(taskId);
+    if (data[10] == 0 && data[11] == 0)
+    {
+        PutWindowTilemap(gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unk8);
+        PutWindowTilemap(gUnknown_0203CEDC[gUnknown_0203CEC8.unkA].unk8);
+        schedule_bg_copy_tilemap_to_vram(0);
+        Free(gUnknown_0203CEF0);
+        Free(gUnknown_0203CEF4);
+        sub_81B407C(taskId);
+    }
+    else
+    {
+        data[8] += data[10];
+        data[9] += data[11];
+        if (data[8] == 0)
+            data[10] = 0;
+        if (data[9] == 0)
+            data[11] = 0;
+    }
+}
+
+void oamt_swap_pos(u8 *spriteIdPtr1, u8 *spriteIdPtr2)
+{
+    u8 spriteIdBuffer = *spriteIdPtr1;
+    u16 xBuffer1, yBuffer1, xBuffer2, yBuffer2;
+    
+    *spriteIdPtr1 = *spriteIdPtr2;
+    *spriteIdPtr2 = spriteIdBuffer;
+    xBuffer1 = gSprites[*spriteIdPtr1].pos1.x;
+    yBuffer1 = gSprites[*spriteIdPtr1].pos1.y;
+    xBuffer2 = gSprites[*spriteIdPtr1].pos2.x;
+    yBuffer2 = gSprites[*spriteIdPtr1].pos2.y;
+    gSprites[*spriteIdPtr1].pos1.x = gSprites[*spriteIdPtr2].pos1.x;
+    gSprites[*spriteIdPtr1].pos1.y = gSprites[*spriteIdPtr2].pos1.y;
+    gSprites[*spriteIdPtr1].pos2.x = gSprites[*spriteIdPtr2].pos2.x;
+    gSprites[*spriteIdPtr1].pos2.y = gSprites[*spriteIdPtr2].pos2.y;
+    gSprites[*spriteIdPtr2].pos1.x = xBuffer1;
+    gSprites[*spriteIdPtr2].pos1.y = yBuffer1;
+    gSprites[*spriteIdPtr2].pos2.x = xBuffer2;
+    gSprites[*spriteIdPtr2].pos2.y = yBuffer2;  
+}
+
+void swap_pokemon_and_oams(void)
+{
+    struct Unk_203CEDC *structPtrs[2];
+    struct Pokemon *mon1, *mon2;
+    struct Pokemon *monBuffer;
+    
+    structPtrs[0] = &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9];
+    structPtrs[1] = &gUnknown_0203CEDC[gUnknown_0203CEC8.unkA];
+    mon1 = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    mon2 = &gPlayerParty[gUnknown_0203CEC8.unkA];
+    monBuffer = Alloc(sizeof(struct Pokemon));
+    *monBuffer = *mon1;
+    *mon1 = *mon2;
+    *mon2 = *monBuffer;
+    Free(monBuffer);
+    oamt_swap_pos(&structPtrs[0]->unkB, &structPtrs[1]->unkB);
+    oamt_swap_pos(&structPtrs[0]->unkA, &structPtrs[1]->unkA);
+    oamt_swap_pos(&structPtrs[0]->unk9, &structPtrs[1]->unk9);
+    oamt_swap_pos(&structPtrs[0]->unkC, &structPtrs[1]->unkC);
+}
+
+void sub_81B407C(u8 taskId)
+{
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    gUnknown_0203CEC8.unkB = 0;
+    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
+    gUnknown_0203CEC8.unk9 = gUnknown_0203CEC8.unkA;
+    sub_81B0FCC(gUnknown_0203CEC8.unkA, 1);
+    display_pokemon_menu_message(0);
+    gTasks[taskId].func = sub_81B1370;
+}
+
+void brm_cancel_1(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    if (gUnknown_0203CEC8.unk8_0 == 6)
+        display_pokemon_menu_message(15);
+    else
+        display_pokemon_menu_message(0);
+    gTasks[taskId].func = sub_81B1370;
 }

@@ -406,6 +406,7 @@ extern const u8 gText_SwitchPkmnItem[];
 extern const u8 gText_SwitchedPkmnItem[];
 extern const u8 gText_BagFullCouldNotRemoveItem[];
 extern const u8 gText_PkmnCantParticipate[];
+extern const u8 gText_PkmnNotHolding[];
 
 //pokedex text
 extern const u8 gText_CryOf[];
