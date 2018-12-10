@@ -462,53 +462,53 @@ void ResetBagScrollPositions(void)
 
 void CB2_BagMenuFromStartMenu(void)
 {
-    GoToBagMenu(0, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
+    GoToBagMenu(RETURN_LOCATION_FIELD, POCKETS_COUNT, CB2_ReturnToFieldWithOpenMenu);
 }
 
 void sub_81AABB0(void)
 {
     if (!InBattlePyramid())
-        GoToBagMenu(1, POCKETS_COUNT, SetCB2ToReshowScreenAfterMenu2);
+        GoToBagMenu(RETURN_LOCATION_BATTLE, POCKETS_COUNT, SetCB2ToReshowScreenAfterMenu2);
     else
         sub_81C4F98(1, SetCB2ToReshowScreenAfterMenu2);
 }
 
 void CB2_ChooseBerry(void)
 {
-    GoToBagMenu(4, BERRIES_POCKET, CB2_ReturnToFieldContinueScript);
+    GoToBagMenu(RETURN_LOCATION_FIELD_2, BERRIES_POCKET, CB2_ReturnToFieldContinueScript);
 }
 
 void sub_81AABF0(void(*callback)(void))
 {
-    GoToBagMenu(5, BERRIES_POCKET, callback);
+    GoToBagMenu(RETURN_LOCATION_FIELD_3, BERRIES_POCKET, callback);
 }
 
 void CB2_GoToSellMenu(void)
 {
-    GoToBagMenu(3, POCKETS_COUNT, CB2_ExitSellMenu);
+    GoToBagMenu(RETURN_LOCATION_SHOP, POCKETS_COUNT, CB2_ExitSellMenu);
 }
 
 void sub_81AAC14(void)
 {
-    GoToBagMenu(6, POCKETS_COUNT, sub_816B31C);
+    GoToBagMenu(RETURN_LOCATION_PC, POCKETS_COUNT, sub_816B31C);
 }
 
 void sub_81AAC28(void)
 {
-    GoToBagMenu(9, POCKETS_COUNT, bag_menu_leave_maybe_3);
+    GoToBagMenu(RETURN_LOCATION_FIELD_6, POCKETS_COUNT, bag_menu_leave_maybe_3);
     gSpecialVar_0x8005 = 0;
     gSpecialVar_Result = 0;
 }
 
 void sub_81AAC50(void)
 {
-    GoToBagMenu(7, POCKETS_COUNT, bag_menu_leave_maybe_2);
+    GoToBagMenu(RETURN_LOCATION_FIELD_4, POCKETS_COUNT, bag_menu_leave_maybe_2);
     gSpecialVar_Result = 0;
 }
 
 void sub_81AAC70(void)
 {
-    GoToBagMenu(8, POCKETS_COUNT, bag_menu_leave_maybe);
+    GoToBagMenu(RETURN_LOCATION_FIELD_5, POCKETS_COUNT, bag_menu_leave_maybe);
     gSpecialVar_Result = 0;
 }
 
@@ -522,11 +522,11 @@ void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)
     }
     else
     {
-        if (bagMenuType != 12)
+        if (bagMenuType != RETURN_LOCATION_UNCHANGED)
             gUnknown_0203CE58.location = bagMenuType;
         if (postExitMenuMainCallback2)
             gUnknown_0203CE58.bagCallback = postExitMenuMainCallback2;
-        if (pocketId <= POCKETS_COUNT - 1)
+        if (pocketId < POCKETS_COUNT)
             gUnknown_0203CE58.pocket = pocketId;
         temp = gUnknown_0203CE58.location - (POCKETS_COUNT - 1);
         if (temp <= 1)
@@ -1842,7 +1842,7 @@ void ItemMenu_UseInBattle(u8 taskId)
 
 void bag_menu_mail_related(void)
 {
-    GoToBagMenu(12, POCKETS_COUNT, NULL);
+    GoToBagMenu(RETURN_LOCATION_UNCHANGED, POCKETS_COUNT, NULL);
 }
 
 void item_menu_type_2(u8 taskId)
@@ -2157,7 +2157,7 @@ void DoWallyTutorialBagMenu(void)
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(10, ITEMS_POCKET, SetCB2ToReshowScreenAfterMenu2);
+    GoToBagMenu(RETURN_LOCATION_BATTLE_2, ITEMS_POCKET, SetCB2ToReshowScreenAfterMenu2);
 }
 
 void Task_WallyTutorialBagMenu(u8 taskId)
