@@ -1,6 +1,8 @@
 #ifndef GUARD_item_menu_H
 #define GUARD_item_menu_H
 
+#include "item.h"
+
 // Exported type declarations
 struct BagStruct
 {
@@ -8,8 +10,8 @@ struct BagStruct
     u8 location;
     u8 pocket;
     u16 unk6;
-    u16 cursorPosition[5];
-    u16 scrollPosition[5];
+    u16 cursorPosition[POCKETS_COUNT];
+    u16 scrollPosition[POCKETS_COUNT];
 };
 
 extern struct BagStruct gUnknown_0203CE58;
@@ -36,7 +38,7 @@ struct UnkBagStruct
     u8 unk825;
     u8 filler[2];
     u8 unk828;
-    u8 unk829[5];
+    u8 unk829[POCKETS_COUNT];
     u8 unk82E[6];
     s16 unk834;
     u8 filler4[0xE];
