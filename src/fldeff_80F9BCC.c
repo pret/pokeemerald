@@ -20,21 +20,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
-
-extern struct MapPosition gPlayerFacingPosition;
-extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
-
-extern const struct SpriteTemplate gUnknown_0858E600;
-extern const struct SpriteTemplate gUnknown_0858E618;
-extern const struct SpriteTemplate gUnknown_0858E630;
-
-extern u8 EventScript_275A86[];
-extern u8 EventScript_275ADF[];
-extern u8 EventScript_275B38[];
-
-extern const struct OamData gEventObjectBaseOam_32x8;
-
-extern const u16 gTilesetPalettes_SecretBase[][16];
+#include "fldeff_80F9BCC.h"
 
 void sub_80F9C90(u8);
 void sub_80F9DFC(u8);
@@ -277,7 +263,7 @@ const union AnimCmd *const gSpriteAnimTable_858E670[] =
 
 const struct SpriteFrameImage gUnknown_0858E674[] =
 {
-    {gSpriteImage_858E1D8, 0x100},// sizeof()?
+    {gSpriteImage_858E1D8, 0x100},
     {gSpriteImage_858E2D8, 0x100},
     {gSpriteImage_858E3D8, 0x100},
 };
@@ -308,7 +294,7 @@ static const struct SpriteFrameImage gUnknown_0858E84C[] =
     {gSpriteImage_858E7AC, sizeof(gSpriteImage_858E7AC)},
 };
 
-static const struct SpritePalette gUnknown_0858E864 = {gUnknown_0858E82C, 0x1000};// sizeof(gUnknown_0858E82C)?
+static const struct SpritePalette gUnknown_0858E864 = {gUnknown_0858E82C, 0x1000};
 
 static const union AnimCmd gSpriteAnim_858E86C[] =
 {
@@ -385,7 +371,6 @@ void sub_80F9C90(u8 taskId)
 {
     //
     struct Task *task = &gTasks[taskId];
-    //u16 ta, tb;
 
     switch(task->data[0])
     {
@@ -709,9 +694,6 @@ void sub_80F9DFC(u8 taskId)
     }
     task->data[0] += 1;
 }
-
-//=============================================================================
-// fldeff_secretpower.c
 
 void SetCurrentSecretBase(void)
 {
@@ -1065,9 +1047,6 @@ void DoSecretBasePCTurnOffEffect(void)
 
     CurrentMapDrawMetatileAt(x, y);
 }
-
-//=============================================================================
-// fldeff_decoration.c
 
 void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y)
 {
