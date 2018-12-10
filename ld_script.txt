@@ -542,7 +542,6 @@ SECTIONS {
         data/battle_anim_815A0D4.o(.rodata);
         src/learn_move.o(.rodata);
         src/roamer.o(.rodata);
-        data/battle_tower.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
         data/use_pokeblock.o(.rodata);

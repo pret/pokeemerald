@@ -13,11 +13,6 @@
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
-extern const struct FacilityMon gBattleFrontierMons[];
-extern const struct FacilityMon gSlateportBattleTentMons[];
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-extern const u16 gBattleFrontierHeldItems[];
-
 // IWRAM bss
 static IWRAM_DATA bool8 gUnknown_03001288;
 

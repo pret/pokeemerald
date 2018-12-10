@@ -50,8 +50,6 @@ struct PikeWildMon
     u16 moves[4];
 };
 
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-
 // IWRAM bss
 static IWRAM_DATA u8 sRoomType;
 static IWRAM_DATA u8 sStatusMon;
