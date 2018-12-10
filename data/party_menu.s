@@ -441,7 +441,7 @@ gUnknown_08615D9C:: @ 8615D9C
 	.4byte hm_prepare_waterfall, 0x0000000d
 	.4byte SetUpFieldMove_Teleport, 0x0000000d
 	.4byte SetUpFieldMove_Dig, 0x0000000d
-	.4byte sub_80FA004, 0x0000000d
+	.4byte SetUpFieldMove_SecretPower, 0x0000000d
 	.4byte SetUpFieldMove_SoftBoiled, 0x00000010
 	.4byte SetUpFieldMove_SoftBoiled, 0x00000010
 	.4byte SetUpFieldMove_SweetScent, 0x0000000d

@@ -1256,7 +1256,7 @@ void sub_80EA3E4(u8 taskId)
                 }
                 else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
                 {
-                    sub_80FA5E4(MapGridGetMetatileIdAt(x, y), x, y);
+                    PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
                     if (gUnknown_0203A01D == TRUE)
                     {
                         switch ((int)MapGridGetMetatileIdAt(x, y))
@@ -1278,7 +1278,7 @@ void sub_80EA3E4(u8 taskId)
                     {
                         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x400);
                     }
-                    sub_80FA794(x, y);
+                    ShatterSecretBaseBreakableDoor(x, y);
                 }
                 else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
                     if (gUnknown_0203A01D == TRUE) {

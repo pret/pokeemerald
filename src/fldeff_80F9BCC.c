@@ -1,25 +1,25 @@
 #include "global.h"
+#include "gpu_regs.h"
+#include "palette.h"
+#include "script.h"
+#include "sound.h"
+#include "task.h"
+#include "rom6.h"
+#include "strings.h"
+#include "party_menu.h"
 #include "fieldmap.h"
 #include "field_effect.h"
 #include "field_camera.h"
-#include "constants/field_effects.h"
-#include "constants/songs.h"
-#include "constants/vars.h"
-#include "rom6.h"
-#include "strings.h"
+#include "field_player_avatar.h"
 #include "secret_base.h"
 #include "event_data.h"
-#include "field_player_avatar.h"
-#include "party_menu.h"
-#include "metatile_behavior.h"
-#include "constants/metatile_behaviors.h"
 #include "event_object_movement.h"
-#include "task.h"
-#include "sound.h"
-#include "script.h"
-#include "palette.h"
-#include "gpu_regs.h"
+#include "metatile_behavior.h"
 #include "string_util.h"
+#include "constants/field_effects.h"
+#include "constants/metatile_behaviors.h"
+#include "constants/songs.h"
+#include "constants/vars.h"
 
 extern struct MapPosition gPlayerFacingPosition;
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
@@ -34,43 +34,43 @@ extern u8 EventScript_275B38[];
 
 extern const struct OamData gEventObjectBaseOam_32x8;
 
-extern const u8 gSpriteImage_858E1D8[];
-extern const u8 gSpriteImage_858E2D8[];
-extern const u8 gSpriteImage_858E3D8[];
 extern const u16 gTilesetPalettes_SecretBase[][16];
 
-//
 void sub_80F9C90(u8);
 void sub_80F9DFC(u8);
-void sub_80FA4A0(u8);
-void sub_80FA62C(u8);
-void sub_80FA6AC(s16);
 
-void sub_80FAEF0(u8);
-void sub_80FAF64(u8);
-void sub_80FAFD4(u8);
+void Task_SecretBasePCTurnOn(u8);
+
+void Task_PopSecretBaseBalloon(u8);
+void DoBalloonSoundEffect(s16);
+
+void Task_WateringBerryTreeAnim_1(u8);
+void Task_WateringBerryTreeAnim_2(u8);
+void Task_WateringBerryTreeAnim_3(u8);
 
 void sub_80F9C44(TaskFunc, u16, u16, u8);
 
-void sub_80FA0DC(void);
-void sub_80FA1E8(void);
-void sub_80FA34C(void);
-void sub_80FA128(void);
-void sub_80FA234(void);
-void sub_80FA398(void);
+void FieldCallback_SecretBaseCave(void);
+static void CaveEntranceSpriteCallback1(struct Sprite *);
+static void CaveEntranceSpriteCallback2(struct Sprite *);
+static void CaveEntranceSpriteCallbackEnd(struct Sprite *);
+static void StartSecretBaseCaveFieldEffect(void);
 
-void door_restore_tilemap(struct Sprite *);
-void sub_80FA1A8(struct Sprite *);
-void sub_80FA1D8(struct Sprite *);
-void sub_80FA304(struct Sprite *);
-void sub_80FA33C(struct Sprite *);
-void sub_80FA418(struct Sprite *);
-void sub_80FA448(struct Sprite *);
-void sub_80FAC24(struct Sprite *);
-void sub_80FAC68(struct Sprite *);
-void sub_80FA18C(struct Sprite *);
-void sub_80FA2D8(struct Sprite *);
-void sub_80FA3FC(struct Sprite *);
+void FieldCallback_SecretBaseTree(void);
+static void TreeEntranceSpriteCallback1(struct Sprite *);
+static void TreeEntranceSpriteCallback2(struct Sprite *);
+static void TreeEntranceSpriteCallbackEnd(struct Sprite *);
+static void StartSecretBaseTreeFieldEffect(void);
+
+void FieldCallback_SecretBaseShrub(void);
+static void ShrubEntranceSpriteCallback1(struct Sprite *);
+static void ShrubEntranceSpriteCallback2(struct Sprite *);
+static void ShrubEntranceSpriteCallbackEnd(struct Sprite *);
+static void StartSecretBaseShrubFieldEffect(void);
+
+void SpriteCB_SandPillar_0(struct Sprite *);
+void SpriteCB_SandPillar_1(struct Sprite *);
+void SpriteCB_SandPillar_2(struct Sprite *);
 
 const u8 gSpriteImage_858D978[] = INCBIN_U8("graphics/unknown/858E588/0.4bpp");
 const u8 gSpriteImage_858D9F8[] = INCBIN_U8("graphics/unknown/858E588/1.4bpp");
@@ -222,7 +222,7 @@ const struct SpriteTemplate gUnknown_0858E600 =
     .anims = gSpriteAnimTable_858E570,
     .images = gUnknown_858E588,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80FA18C,
+    .callback = CaveEntranceSpriteCallback1,
 };
 
 const struct SpriteTemplate gUnknown_0858E618 =
@@ -233,7 +233,7 @@ const struct SpriteTemplate gUnknown_0858E618 =
     .anims = gSpriteAnimTable_858E574,
     .images = gUnknown_858E5B0,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80FA2D8,
+    .callback = TreeEntranceSpriteCallback1,
 };
 
 const struct SpriteTemplate gUnknown_0858E630 =
@@ -244,7 +244,7 @@ const struct SpriteTemplate gUnknown_0858E630 =
     .anims = gSpriteAnimTable_858E584,
     .images = gUnknown_858E5D8,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80FA3FC,
+    .callback = ShrubEntranceSpriteCallback1,
 };
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo7 = {gFieldEffectObjectPalette7, 0x1003};
@@ -290,7 +290,7 @@ const struct SpriteTemplate gUnknown_0858E68C =
     .anims = gSpriteAnimTable_858E670,
     .images = gUnknown_0858E674,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = door_restore_tilemap,
+    .callback = SpriteCB_SandPillar_0,
 };
 
 // This uses one of the secret base palettes, so there is no "field_effect_object_palette_09.pal" file.
@@ -355,11 +355,11 @@ bool8 sub_80F9C30(void)
     return FuncIsActiveTask(sub_80F9DFC);
 }
 
-void sub_80F9C44(void (*a0) (u8), u16 a1, u16 a2, u8 a3)
+void sub_80F9C44(void (*taskfunc) (u8), u16 a1, u16 a2, u8 a3)
 {
     u16 tempA, tempB;
 
-    u8 taskId = CreateTask(a0, a3);
+    u8 taskId = CreateTask(taskfunc, a3);
 
     gTasks[taskId].data[0] = 0;
 
@@ -713,15 +713,13 @@ void sub_80F9DFC(u8 taskId)
 //=============================================================================
 // fldeff_secretpower.c
 
-// SetCurrentSecretBase();
-void sub_80F9F5C(void)
+void SetCurrentSecretBase(void)
 {
     sub_80E9608(&gPlayerFacingPosition, gMapHeader.events);
     sub_80E8B6C();
 }
 
-// AdjustSecretPowerSpritePixelOffsets
-void sub_80F9F78(void)
+void AdjustSecretPowerSpritePixelOffsets(void)
 {
     if (gPlayerAvatar.flags & 0x6)
     {
@@ -769,8 +767,7 @@ void sub_80F9F78(void)
     }
 }
 
-// SetUpFieldMove_SecretPower
-bool8 sub_80FA004(void)
+bool8 SetUpFieldMove_SecretPower(void)
 {
     u8 mb;
 
@@ -784,59 +781,56 @@ bool8 sub_80FA004(void)
 
     if (MetatileBehavior_IsSecretBaseCave(mb) == TRUE)
     {
-        sub_80F9F5C();
+        SetCurrentSecretBase();
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = sub_80FA0DC;
+        gPostMenuFieldCallback = FieldCallback_SecretBaseCave;
         return TRUE;
     }
 
     if (MetatileBehavior_IsSecretBaseTree(mb) == TRUE)
     {
-        sub_80F9F5C();
+        SetCurrentSecretBase();
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = sub_80FA1E8;
+        gPostMenuFieldCallback = FieldCallback_SecretBaseTree;
         return TRUE;
     }
 
     if (MetatileBehavior_IsSecretBaseShrub(mb) == TRUE)
     {
-        sub_80F9F5C();
+        SetCurrentSecretBase();
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = sub_80FA34C;
+        gPostMenuFieldCallback = FieldCallback_SecretBaseShrub;
         return TRUE;
     }
 
     return FALSE;
 }
 
-// FieldCallback_SecretBaseCave
-void sub_80FA0DC(void)
+void FieldCallback_SecretBaseCave(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext1_SetupScript(EventScript_275A86);
 }
 
-bool8 oei_sweet_scent(void)
+bool8 FldEff_UseSecretPowerCave(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_80FA128 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_80FA128;
+    gTasks[taskId].data[8] = (u32)StartSecretBaseCaveFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartSecretBaseCaveFieldEffect;
 
     return FALSE;
 }
 
-// StartSecretBaseCaveFieldEffect
-void sub_80FA128(void)
+static void StartSecretBaseCaveFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_SECRET_POWER_CAVE);
     FieldEffectStart(FLDEFF_SECRET_POWER_CAVE);
 }
 
-// FldEff_SecretPowerCave
-bool8 sub_80FA13C(void)
+bool8 FldEff_SecretPowerCave(void)
 {
-    sub_80F9F78();
+    AdjustSecretPowerSpritePixelOffsets();
 
     CreateSprite(&gUnknown_0858E600,
                  gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
@@ -846,17 +840,15 @@ bool8 sub_80FA13C(void)
     return FALSE;
 }
 
-// CaveEntranceSpriteCallback1
-void sub_80FA18C(struct Sprite *sprite)
+static void CaveEntranceSpriteCallback1(struct Sprite *sprite)
 {
     PlaySE(SE_W088);
 
     sprite->data[0] = 0;
-    sprite->callback = sub_80FA1A8;
+    sprite->callback = CaveEntranceSpriteCallback2;
 }
 
-// CaveEntranceSpriteCallback2
-void sub_80FA1A8(struct Sprite *sprite)
+static void CaveEntranceSpriteCallback2(struct Sprite *sprite)
 {
     if (sprite->data[0] < 40)
     {
@@ -868,45 +860,39 @@ void sub_80FA1A8(struct Sprite *sprite)
     else
     {
         sprite->data[0] = 0;
-        sprite->callback = sub_80FA1D8;
+        sprite->callback = CaveEntranceSpriteCallbackEnd;
     }
 }
 
-// CaveEntranceSpriteCallbackEnd
-void sub_80FA1D8(struct Sprite *sprite)
+static void CaveEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
-    //
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_CAVE);
     EnableBothScriptContexts();
 }
 
-// FieldCallback_SecretBaseTree
-void sub_80FA1E8(void)
+void FieldCallback_SecretBaseTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext1_SetupScript(EventScript_275ADF);
 }
 
-// FldEff_UseSecretPowerTree
-bool8 sub_80FA208(void)
+bool8 FldEff_UseSecretPowerTree(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_80FA234 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_80FA234;
+    gTasks[taskId].data[8] = (u32)StartSecretBaseTreeFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartSecretBaseTreeFieldEffect;
 
     return FALSE;
 }
 
-// StartSecretBaseTreeFieldEffect
-void sub_80FA234(void)
+static void StartSecretBaseTreeFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_SECRET_POWER_TREE);
     FieldEffectStart(FLDEFF_SECRET_POWER_TREE);
 }
 
-// FldEff_SecretPowerTree
-bool8 sub_80FA248(void)
+bool8 FldEff_SecretPowerTree(void)
 {
     s16 mb = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) & 0xFFF;
 
@@ -916,7 +902,7 @@ bool8 sub_80FA248(void)
     if (mb == MB_SECRET_BASE_SPOT_TREE_RIGHT)
         gFieldEffectArguments[7] = 2;
 
-    sub_80F9F78();
+    AdjustSecretPowerSpritePixelOffsets();
 
     CreateSprite(&gUnknown_0858E618,
                  gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
@@ -929,18 +915,16 @@ bool8 sub_80FA248(void)
     return FALSE;
 }
 
-// TreeEntranceSpriteCallback1
-void sub_80FA2D8(struct Sprite *sprite)
+static void TreeEntranceSpriteCallback1(struct Sprite *sprite)
 {
     PlaySE(SE_W010);
 
     sprite->animNum = gFieldEffectArguments[7];
     sprite->data[0] = 0;
-    sprite->callback = sub_80FA304;
+    sprite->callback = TreeEntranceSpriteCallback2;
 }
 
-// TreeEntranceSpriteCallback2
-void sub_80FA304(struct Sprite *sprite)
+static void TreeEntranceSpriteCallback2(struct Sprite *sprite)
 {
     sprite->data[0]++;
 
@@ -950,46 +934,41 @@ void sub_80FA304(struct Sprite *sprite)
             sub_80E8D4C();
 
         sprite->data[0] = 0;
-        sprite->callback = sub_80FA33C;
+        sprite->callback = TreeEntranceSpriteCallbackEnd;
     }
 }
 
-// TreeEntranceSpriteCallbackEnd
-void sub_80FA33C(struct Sprite *sprite)
+static void TreeEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_TREE);
     EnableBothScriptContexts();
 }
 
-// FieldCallback_SecretBaseShrub
-void sub_80FA34C(void)
+void FieldCallback_SecretBaseShrub(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext1_SetupScript(EventScript_275B38);
 }
 
-// FldEff_UseSecretPowerShrub
-bool8 sub_80FA36C(void)
+bool8 FldEff_UseSecretPowerShrub(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_80FA398 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_80FA398;
+    gTasks[taskId].data[8] = (u32)StartSecretBaseShrubFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartSecretBaseShrubFieldEffect;
 
     return FALSE;
 }
 
-// StartSecretBaseShrubFieldEffect
-void sub_80FA398(void)
+static void StartSecretBaseShrubFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_SECRET_POWER_SHRUB);
     FieldEffectStart(FLDEFF_SECRET_POWER_SHRUB);
 }
 
-// FldEff_SecretPowerShrub
-bool8 sub_80FA3AC(void)
+bool8 FldEff_SecretPowerShrub(void)
 {
-    sub_80F9F78();
+    AdjustSecretPowerSpritePixelOffsets();
 
     CreateSprite(&gUnknown_0858E630,
                  gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
@@ -999,17 +978,15 @@ bool8 sub_80FA3AC(void)
     return FALSE;
 }
 
-// ShrubEntranceSpriteCallback1
-void sub_80FA3FC(struct Sprite *sprite)
+static void ShrubEntranceSpriteCallback1(struct Sprite *sprite)
 {
     PlaySE(SE_W077);
 
     sprite->data[0] = 0;
-    sprite->callback = sub_80FA418;
+    sprite->callback = ShrubEntranceSpriteCallback2;
 }
 
-// ShrubEntranceSpriteCallback2
-void sub_80FA418(struct Sprite *sprite)
+static void ShrubEntranceSpriteCallback2(struct Sprite *sprite)
 {
     if (sprite->data[0] < 40)
     {
@@ -1021,29 +998,24 @@ void sub_80FA418(struct Sprite *sprite)
     else
     {
         sprite->data[0] = 0;
-        sprite->callback = sub_80FA448;
+        sprite->callback = ShrubEntranceSpriteCallbackEnd;
     }
 }
 
-// ShrubEntranceSpriteCallbackEnd
-void sub_80FA448(struct Sprite *sprite)
+static void ShrubEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_SHRUB);
     EnableBothScriptContexts();
 }
 
-//=============================================================================
-// fldeff_secretbase_pc.c
-
-// FldEff_SecretBasePCTurnOn
-u32 sub_80FA458(void)
+u32 FldEff_SecretBasePCTurnOn(void)
 {
     s16 x, y;
     u8 taskId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 
-    taskId = CreateTask(sub_80FA4A0, 0);
+    taskId = CreateTask(Task_SecretBasePCTurnOn, 0);
     gTasks[taskId].data[0] = x;
     gTasks[taskId].data[1] = y;
     gTasks[taskId].data[2] = 0;
@@ -1051,8 +1023,7 @@ u32 sub_80FA458(void)
     return 0;
 }
 
-// Task_SecretBasePCTurnOn
-void sub_80FA4A0(u8 taskId)
+void Task_SecretBasePCTurnOn(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1080,8 +1051,7 @@ void sub_80FA4A0(u8 taskId)
     data[2]++;
 }
 
-// DoSecretBasePCTurnOffEffect
-void sub_80FA57C(void)
+void DoSecretBasePCTurnOffEffect(void)
 {
     s16 x, y;
 
@@ -1099,10 +1069,9 @@ void sub_80FA57C(void)
 //=============================================================================
 // fldeff_decoration.c
 
-// PopSecretBaseBalloon
-void sub_80FA5E4(s16 metatileId, s16 x, s16 y)
+void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y)
 {
-    u8 taskId = CreateTask(sub_80FA62C, 0);
+    u8 taskId = CreateTask(Task_PopSecretBaseBalloon, 0);
 
     gTasks[taskId].data[0] = metatileId;
     gTasks[taskId].data[1] = x;
@@ -1111,8 +1080,7 @@ void sub_80FA5E4(s16 metatileId, s16 x, s16 y)
     gTasks[taskId].data[4] = 1;
 }
 
-// 
-void sub_80FA62C(u8 taskId)
+void Task_PopSecretBaseBalloon(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1124,7 +1092,7 @@ void sub_80FA62C(u8 taskId)
     if (data[3] == 0)
     {
         if (data[4] == 2)
-            sub_80FA6AC(data[0]);
+            DoBalloonSoundEffect(data[0]);
 
         MapGridSetMetatileIdAt(data[1], data[2], data[0] + data[4]);
         CurrentMapDrawMetatileAt(data[1], data[2]);
@@ -1136,8 +1104,7 @@ void sub_80FA62C(u8 taskId)
     }
 }
 
-// DoBalloonSoundEffect
-void sub_80FA6AC(s16 metatileId)
+void DoBalloonSoundEffect(s16 metatileId)
 {
     switch (metatileId)
     {
@@ -1156,20 +1123,17 @@ void sub_80FA6AC(s16 metatileId)
     }
 }
 
-// FldEff_Nop47
-bool8 sub_80FA6FC(void)
+bool8 FldEff_NopA6FC(void)
 {
     return FALSE;
 }
 
-// FldEff_Nop48
-bool8 sub_80FA700(void)
+bool8 FldEff_NopA700(void)
 {
     return FALSE;
 }
 
-// 
-void sub_80FA704(s16 x, s16 y)
+void DoSecretBaseBreakableDoorEffect(s16 x, s16 y)
 {
     PlaySE(SE_TOY_KABE);
     MapGridSetMetatileIdAt(x, y, 630);
@@ -1178,12 +1142,11 @@ void sub_80FA704(s16 x, s16 y)
     CurrentMapDrawMetatileAt(x, y - 1);
 }
 
-// 
-void sub_80FA754(u8 taskId)
+void Task_ShatterSecretBaseBreakableDoor(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 7)
     {
-        sub_80FA704(gTasks[taskId].data[1], gTasks[taskId].data[2]);
+        DoSecretBaseBreakableDoorEffect(gTasks[taskId].data[1], gTasks[taskId].data[2]);
         DestroyTask(taskId);
     }
     else
@@ -1192,18 +1155,17 @@ void sub_80FA754(u8 taskId)
     }
 }
 
-// ShatterSecretBaseBreakableDoor
-void sub_80FA794(s16 x, s16 y)
+void ShatterSecretBaseBreakableDoor(s16 x, s16 y)
 {
     u8 dir = GetPlayerFacingDirection();
 
     if (dir == DIR_SOUTH)
     {
-        sub_80FA704(x, y);
+        DoSecretBaseBreakableDoorEffect(x, y);
     }
     else if (dir == DIR_NORTH)
     {
-        u8 taskId = CreateTask(sub_80FA754, 5);
+        u8 taskId = CreateTask(Task_ShatterSecretBaseBreakableDoor, 5);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = x;
         gTasks[taskId].data[2] = y;
@@ -1211,12 +1173,11 @@ void sub_80FA794(s16 x, s16 y)
 }
 
 #define tMetatileID data[0]
-// Task_SecretBaseMusicNoteMatSound
-void sub_80FA7EC(u8 taskId)
+void Task_SecretBaseMusicNoteMatSound(u8 taskId)
 {
     if (gTasks[taskId].data[1] == 7)
     {
-        switch (gTasks[taskId].tMetatileID) // metatileId
+        switch (gTasks[taskId].tMetatileID)
         {
         case 632:
             PlaySE(SE_TOY_C);
@@ -1252,18 +1213,16 @@ void sub_80FA7EC(u8 taskId)
     }
 }
 
-// PlaySecretBaseMusicNoteMatSound
-void sub_80FA970(s16 metatileId)
+void PlaySecretBaseMusicNoteMatSound(s16 metatileId)
 {
-    u8 taskId = CreateTask(sub_80FA7EC, 5);
+    u8 taskId = CreateTask(Task_SecretBaseMusicNoteMatSound, 5);
 
     gTasks[taskId].tMetatileID = metatileId;
     gTasks[taskId].data[1] = 0;
 }
 #undef tMetatileID
 
-// SpriteCB_GlitterMatSparkle
-void sub_80FA9A4(struct Sprite *sprite)
+void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 {
     sprite->data[0]++;
 
@@ -1274,8 +1233,7 @@ void sub_80FA9A4(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-// DoSecretBaseGlitterMatSparkle
-void sub_80FA9D0(void)
+void DoSecretBaseGlitterMatSparkle(void)
 {
     s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
     s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
@@ -1289,13 +1247,12 @@ void sub_80FA9D0(void)
         gSprites[spriteId].coordOffsetEnabled = TRUE;
         gSprites[spriteId].oam.priority = 1;
         gSprites[spriteId].oam.paletteNum = 5;
-        gSprites[spriteId].callback = sub_80FA9A4;
+        gSprites[spriteId].callback = SpriteCB_GlitterMatSparkle;
         gSprites[spriteId].data[0] = 0;
     }
 }
 
-// FldEff_SandPillar
-bool8 sub_80FAA7C(void)
+bool8 FldEff_SandPillar(void)
 {
     s16 x, y;
 
@@ -1343,8 +1300,7 @@ bool8 sub_80FAA7C(void)
     return FALSE;
 }
 
-// SpriteCB_SandPillar_0
-void door_restore_tilemap(struct Sprite *sprite)
+void SpriteCB_SandPillar_0(struct Sprite *sprite)
 {
     PlaySE(SE_W088);
 
@@ -1358,11 +1314,10 @@ void door_restore_tilemap(struct Sprite *sprite)
     CurrentMapDrawMetatileAt(gFieldEffectArguments[5], gFieldEffectArguments[6]);
     
     sprite->data[0] = 0;
-    sprite->callback = sub_80FAC24;
+    sprite->callback = SpriteCB_SandPillar_1;
 }
 
-// SpriteCB_SandPillar_1
-void sub_80FAC24(struct Sprite *sprite)
+void SpriteCB_SandPillar_1(struct Sprite *sprite)
 {
     if (sprite->data[0] < 18)
     {
@@ -1373,19 +1328,17 @@ void sub_80FAC24(struct Sprite *sprite)
         MapGridSetMetatileIdAt(gFieldEffectArguments[5], gFieldEffectArguments[6], 3724);
         CurrentMapDrawMetatileAt(gFieldEffectArguments[5], gFieldEffectArguments[6]);
         sprite->data[0] = 0;
-        sprite->callback = sub_80FAC68;
+        sprite->callback = SpriteCB_SandPillar_2;
     }
 }
 
-// SpriteCB_SandPillar_2
-void sub_80FAC68(struct Sprite *sprite)
+void SpriteCB_SandPillar_2(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SAND_PILLAR);
     EnableBothScriptContexts();
 }
 
-// GetShieldToyTVDecorationInfo
-void sub_80FAC78(void)
+void GetShieldToyTVDecorationInfo(void)
 {
     s16 x, y;
     s32 metatileId;
@@ -1458,31 +1411,8 @@ void sub_80FAC78(void)
 // 
 bool8 sub_80FADE4(u16 arg0, u8 arg1)
 {
-    /*
     //
     if (CurrentMapIsSecretBase())
-    {
-    //    return TRUE;
-        if (arg1 == 0)
-        {
-            //
-            if ((u16)(arg0 + 0xfffffd7b) <= 1 || (arg0 == 0x237))
-                return TRUE;
-            //if (arg0 == 0x237)
-            //else    return FALSE;
-        }
-        else
-        {
-            //
-            if (arg0 == 0x28d || arg0 == 0x23f)
-                return TRUE;
-            //return FALSE;
-        }
-    }
-    return FALSE;
-    */
-    if (!CurrentMapIsSecretBase()) return FALSE;
-    else
     {
     //    return TRUE;
         if (arg1 == 0)
@@ -1549,8 +1479,7 @@ bool8 sub_80FADE4(u16 arg0, u8 arg1)
 }
 #endif
 
-// Task_FieldPoisonEffect
-void task50_overworld_poison_effect(u8 taskId)
+void Task_FieldPoisonEffect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1577,27 +1506,23 @@ void task50_overworld_poison_effect(u8 taskId)
     SetGpuReg(REG_OFFSET_MOSAIC, (data[1] << 4) | data[1]);
 }
 
-// FldeffPoison_Start
 void FldeffPoison_Start(void)
 {
     PlaySE(SE_DOKU);
-    CreateTask(task50_overworld_poison_effect, 80);
+    CreateTask(Task_FieldPoisonEffect, 80);
 }
 
-// FldeffPoison_IsActive
-bool32 FieldPoisonEffectIsRunning(void)
+bool32 FldeffPoison_IsActive(void)
 {
-    return FuncIsActiveTask(task50_overworld_poison_effect);
+    return FuncIsActiveTask(Task_FieldPoisonEffect);
 }
 
-// Task_WateringBerryTreeAnim_0
-void sub_80FAED4(u8 taskId)
+void Task_WateringBerryTreeAnim_0(u8 taskId)
 {
-    gTasks[taskId].func = sub_80FAEF0;
+    gTasks[taskId].func = Task_WateringBerryTreeAnim_1;
 }
 
-// Task_WateringBerryTreeAnim_1
-void sub_80FAEF0(u8 taskId)
+void Task_WateringBerryTreeAnim_1(u8 taskId)
 {
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     
@@ -1606,12 +1531,11 @@ void sub_80FAEF0(u8 taskId)
     {
         sub_808C228(GetPlayerFacingDirection());
         EventObjectSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
-        gTasks[taskId].func = sub_80FAF64;
+        gTasks[taskId].func = Task_WateringBerryTreeAnim_2;
     }
 }
 
-// Task_WateringBerryTreeAnim_2
-void sub_80FAF64(u8 taskId)
+void Task_WateringBerryTreeAnim_2(u8 taskId)
 {
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
     
@@ -1623,25 +1547,22 @@ void sub_80FAF64(u8 taskId)
             EventObjectSetHeldMovement(playerEventObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
         
         else
-            gTasks[taskId].func = sub_80FAFD4;
+            gTasks[taskId].func = Task_WateringBerryTreeAnim_3;
     }
 }
 
-// Task_WateringBerryTreeAnim_3
-void sub_80FAFD4(u8 taskId)
+void Task_WateringBerryTreeAnim_3(u8 taskId)
 {
     SetPlayerAvatarTransitionFlags(sub_808BCD0());
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
 
-// DoWateringBerryTreeAnim
-void sub_80FAFF8(void)
+void DoWateringBerryTreeAnim(void)
 {
-    CreateTask(sub_80FAED4, 80);
+    CreateTask(Task_WateringBerryTreeAnim_0, 80);
 }
 
-// 
 u8 CreateRecordMixingSprite(void)
 {
     u8 spriteId;

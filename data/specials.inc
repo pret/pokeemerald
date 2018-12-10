@@ -34,7 +34,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8129708
 	def_special sub_80E91F8
 	def_special sub_80EA30C
-	def_special sub_80FA57C
+	def_special DoSecretBasePCTurnOffEffect
 	def_special sub_80E6BE8
 	def_special sub_80B2DA4
 	def_special sub_80B2E4C
@@ -105,7 +105,7 @@ gSpecials:: @ 81DBA64
 	def_special GiveMonArtistRibbon
 	def_special sub_80B3000
 	def_special SaveGame
-	def_special sub_80FAFF8
+	def_special DoWateringBerryTreeAnim
 	def_special easy_chat_input_maybe
 	def_special sub_811EECC
 	def_special ScrSpecial_GetCurrentMauvilleMan
@@ -317,7 +317,7 @@ gSpecials:: @ 81DBA64
 	def_special ScriptCheckFreePokemonStorageSpace
 	def_special DoSealedChamberShakingEffect1
 	def_special sub_8139B60
-	def_special sub_80FAC78
+	def_special GetShieldToyTVDecorationInfo
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
 	def_special sub_8139560
