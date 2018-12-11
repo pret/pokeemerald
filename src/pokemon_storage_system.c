@@ -99,10 +99,6 @@ enum
 
 IWRAM_DATA u8 gUnknown_03000F78[0x188];
 
-extern const u8 gText_PartyFull[];
-extern const u8 gText_Box[];
-extern const u8 gText_JustOnePkmn[];
-
 extern u8 gUnknown_02039D00;
 extern u8 sBoxOption;
 extern u8 gUnknown_02039D10;
@@ -116,6 +112,12 @@ extern void sub_80F9BCC(u16, u16, u8);
 extern void sub_80F9BF4(u16, u16, u8);
 extern bool8 sub_80F9C1C(void);
 extern bool8 sub_80F9C30(void);
+
+extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+
+extern const u8 gText_PartyFull[];
+extern const u8 gText_Box[];
+extern const u8 gText_JustOnePkmn[];
 
 // This file's functions.
 void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
@@ -161,7 +163,7 @@ void sub_80D01B8(void);
 void sub_80CE2D8(void);
 void sub_80D25F0(void);
 void sub_80CA230(void);
-void sub_80CA318(void);
+void LoadCursorMonSprite(void);
 void sub_80CA154(void);
 void sub_80CA1C4(void);
 void sub_80CC064(void);
@@ -171,7 +173,8 @@ void sub_80CA704(void);
 void sub_80D013C(void);
 void sub_80CE00C(void);
 void sub_80D1194(void);
-void sub_80CA4FC(void);
+void PrintCursorMonInfo(void);
+void sub_80CA65C(void);
 void sub_80CADD8(void);
 void sub_80D1818(void);
 void sub_80D17B4(void);
@@ -247,6 +250,7 @@ void sub_80D2A90(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1,
 void sub_80D259C(u8 arg0);
 void sub_80CC464(u8 arg0);
 void sub_80CFE54(u8 arg0);
+void sub_80D2918(u8 arg0);
 void sub_80CC0D4(u8 arg0);
 void sub_80CDC38(u8 arg0);
 void sub_80CE9A8(u8 markings);
@@ -269,6 +273,9 @@ void SetWallpaperForCurrentBox(u8 wallpaperId);
 void sub_80CAE0C(u8 arg0);
 u16 GetMovingItem(void);
 void SetCurrentBoxMonData(s32 monId, s32 request, const void *value);
+void LoadCursorMonGfx(u16 species, u32 pid);
+void sub_80CA2D0(struct Sprite *sprite);
+void sub_80D27AC(u8 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 
 // const rom data
 const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -459,7 +466,7 @@ const struct SpriteSheet gWaveformSpriteSheet =
 };
 
 const struct OamData sOamData_857286C;
-const struct SpriteTemplate gUnknown_08572754 =
+const struct SpriteTemplate sSpriteTemplate_CursorMon =
 {
     .tileTag = TAG_TILE_2,
     .paletteTag = TAG_PAL_DAC6,
@@ -2275,7 +2282,7 @@ void Cb_TakeItemForMoving(u8 taskId)
             sub_80CFE54(3);
             ClearBottomWindow();
             sub_80CE00C();
-            sub_80CA4FC();
+            PrintCursorMonInfo();
             gUnknown_02039D08->state++;
         }
         break;
@@ -2304,7 +2311,7 @@ void Cb_GiveMovingItemToMon(u8 taskId)
         {
             sub_80CFE54(0);
             sub_80CE00C();
-            sub_80CA4FC();
+            PrintCursorMonInfo();
             PrintStorageActionText(PC_TEXT_ITEM_IS_HELD);
             gUnknown_02039D08->state++;
         }
@@ -2353,7 +2360,7 @@ void Cb_ItemToBag(u8 taskId)
         {
             ClearBottomWindow();
             sub_80CE00C();
-            sub_80CA4FC();
+            PrintCursorMonInfo();
             gUnknown_02039D08->state = 4;
         }
         break;
@@ -2396,7 +2403,7 @@ void Cb_SwitchSelectedItem(u8 taskId)
         {
             sub_80CFE54(3);
             sub_80CE00C();
-            sub_80CA4FC();
+            PrintCursorMonInfo();
             PrintStorageActionText(PC_TEXT_CHANGED_TO_ITEM);
             gUnknown_02039D08->state++;
         }
@@ -3029,7 +3036,7 @@ void sub_80CA0D8(void)
         LoadPalette(gUnknown_0857243C, 0x30, 0x20);
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
-    sub_80CA318();
+    LoadCursorMonSprite();
     sub_80CA154();
     sub_80CA1C4();
     sub_80CA230();
@@ -3056,4 +3063,156 @@ void sub_80CA1C4(void)
         u8 spriteId = CreateSprite(&gUnknown_085728BC, i * 63 + 8, 9, 2);
         gUnknown_02039D08->field_D98[i] = &gSprites[spriteId];
     }
+}
+
+void sub_80CA230(void)
+{
+    LoadCursorMonGfx(gUnknown_02039D08->cursorMonSpecies, gUnknown_02039D08->cursorMonPersonality);
+    PrintCursorMonInfo();
+    sub_80CA65C();
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void BoxSetMosaic(void)
+{
+    sub_80CA230();
+    if (gUnknown_02039D08->cursorMonSprite)
+    {
+        gUnknown_02039D08->cursorMonSprite->oam.mosaic = TRUE;
+        gUnknown_02039D08->cursorMonSprite->data[0] = 10;
+        gUnknown_02039D08->cursorMonSprite->data[1] = 1;
+        gUnknown_02039D08->cursorMonSprite->callback = sub_80CA2D0;
+        SetGpuReg(REG_OFFSET_MOSAIC, (gUnknown_02039D08->cursorMonSprite->data[0] << 12) | (gUnknown_02039D08->cursorMonSprite->data[0] << 8));
+    }
+}
+
+u8 sub_80CA2B8(void)
+{
+    return gUnknown_02039D08->cursorMonSprite->oam.mosaic;
+}
+
+void sub_80CA2D0(struct Sprite *sprite)
+{
+    sprite->data[0] -= sprite->data[1];
+    if (sprite->data[0] < 0)
+        sprite->data[0] = 0;
+    SetGpuReg(REG_OFFSET_MOSAIC, (sprite->data[0] << 12) | (sprite->data[0] << 8));
+    if (sprite->data[0] == 0)
+    {
+        sprite->oam.mosaic = FALSE;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void LoadCursorMonSprite(void)
+{
+    u16 i;
+    u16 tileStart;
+    u8 palSlot;
+    u8 spriteId;
+    struct SpriteSheet sheet = {gUnknown_02039D08->field_22C4, 0x800, TAG_TILE_2};
+    struct SpritePalette palette = {gUnknown_02039D08->field_2244, TAG_PAL_DAC6};
+    struct SpriteTemplate template = sSpriteTemplate_CursorMon;
+
+    for (i = 0; i < 0x800; i++)
+        gUnknown_02039D08->field_22C4[i] = 0;
+    for (i = 0; i < 0x10; i++)
+        gUnknown_02039D08->field_2244[i] = 0;
+
+    gUnknown_02039D08->cursorMonSprite = NULL;
+
+    do
+    {
+        tileStart = LoadSpriteSheet(&sheet);
+        if (tileStart == 0)
+            break;
+
+        palSlot = LoadSpritePalette(&palette);
+        if (palSlot == 0xFF)
+            break;
+
+        spriteId = CreateSprite(&template, 40, 48, 0);
+        if (spriteId == MAX_SPRITES)
+            break;
+
+        gUnknown_02039D08->cursorMonSprite = &gSprites[spriteId];
+        gUnknown_02039D08->field_223A = palSlot * 16 + 0x100;
+        gUnknown_02039D08->field_223C = (void*) OBJ_VRAM0 + tileStart * 32;
+    } while (0);
+
+    if (gUnknown_02039D08->cursorMonSprite == NULL)
+    {
+        FreeSpriteTilesByTag(TAG_TILE_2);
+        FreeSpritePaletteByTag(TAG_PAL_DAC6);
+    }
+}
+
+void LoadCursorMonGfx(u16 species, u32 pid)
+{
+    if (gUnknown_02039D08->cursorMonSprite == NULL)
+        return;
+
+    if (species != SPECIES_NONE)
+    {
+        LoadSpecialPokePic(&gMonFrontPicTable[species], gUnknown_02039D08->field_22C4, species, pid, TRUE);
+        LZ77UnCompWram(gUnknown_02039D08->field_CDC, gUnknown_02039D08->field_2244);
+        CpuCopy32(gUnknown_02039D08->field_22C4, gUnknown_02039D08->field_223C, 0x800);
+        LoadPalette(gUnknown_02039D08->field_2244, gUnknown_02039D08->field_223A, 0x20);
+        gUnknown_02039D08->cursorMonSprite->invisible = FALSE;
+    }
+    else
+    {
+        gUnknown_02039D08->cursorMonSprite->invisible = TRUE;
+    }
+}
+
+void PrintCursorMonInfo(void)
+{
+    FillWindowPixelBuffer(0, 0x11);
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+    {
+        AddTextPrinterParameterized(0, 1, gUnknown_02039D08->cursorMonNick, 6, 0, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 2, gUnknown_02039D08->cursorMonSpeciesName, 6, 15, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 2, gUnknown_02039D08->cursorMonGenderLvlText, 10, 29, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 0, gUnknown_02039D08->cursorMonItemName, 6, 43, TEXT_SPEED_FF, NULL);
+    }
+    else
+    {
+        AddTextPrinterParameterized(0, 0, gUnknown_02039D08->cursorMonItemName, 6, 0, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 1, gUnknown_02039D08->cursorMonNick, 6, 13, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 2, gUnknown_02039D08->cursorMonSpeciesName, 6, 28, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(0, 2, gUnknown_02039D08->cursorMonGenderLvlText, 10, 42, TEXT_SPEED_FF, NULL);
+    }
+
+    CopyWindowToVram(0, 2);
+    if (gUnknown_02039D08->cursorMonSpecies != SPECIES_NONE)
+    {
+        sub_8120084(gUnknown_02039D08->field_CEB, gUnknown_02039D08->field_DA0);
+        gUnknown_02039D08->field_D94->invisible = FALSE;
+    }
+    else
+    {
+        gUnknown_02039D08->field_D94->invisible = TRUE;
+    }
+}
+
+void sub_80CA65C(void)
+{
+    u16 i;
+
+    if (gUnknown_02039D08->cursorMonSpecies != SPECIES_NONE)
+    {
+        sub_80D27AC(0, 0, 0, 8, 2);
+        for (i = 0; i < 2; i++)
+            StartSpriteAnimIfDifferent(gUnknown_02039D08->field_D98[i], i * 2 + 1);
+    }
+    else
+    {
+        sub_80D27AC(0, 0, 2, 8, 2);
+        for (i = 0; i < 2; i++)
+            StartSpriteAnim(gUnknown_02039D08->field_D98[i], i * 2);
+    }
+
+    sub_80D2918(0);
+    schedule_bg_copy_tilemap_to_vram(1);
 }
