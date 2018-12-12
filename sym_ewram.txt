@@ -207,7 +207,7 @@ gUnknown_02039CF4: @ 2039CF4
 gUnknown_02039CF8: @ 2039CF8
 	.space 0x8
 
-gUnknown_02039D00: @ 2039D00
+sPreviousBoxOption: @ 2039D00
 	.space 0x4
 
 gUnknown_02039D04: @ 2039D04
@@ -219,7 +219,7 @@ gUnknown_02039D08: @ 2039D08
 sInPartyMenu: @ 2039D0C
 	.space 0x1
 
-sBoxOption: @ 2039D0D
+sCurrentBoxOption: @ 2039D0D
 	.space 0x1
 
 gUnknown_02039D0E: @ 2039D0E

@@ -72,6 +72,7 @@ u8 sub_8199134(s8, s8);
 u8 GetStartMenuWindowId(void);
 void sub_819A2BC(u8, u8);
 u8 MoveMenuCursor(s8 cursorDelta);
+u8 MoveMenuCursorNoWrapAround(s8 cursorDelta);
 void NewMenuHelpers_DrawStdWindowFrame(u8 windowId, bool8 CopyToVram);
 u8 sub_81979C4(u8 a1);
 u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);

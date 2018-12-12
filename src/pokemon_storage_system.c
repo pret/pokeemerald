@@ -3,6 +3,7 @@
 #include "bg.h"
 #include "decompress.h"
 #include "dma3.h"
+#include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
 #include "field_screen.h"
 #include "field_weather.h"
@@ -19,6 +20,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "script.h"
@@ -32,6 +34,13 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+
+struct WallpaperTable
+{
+    const u32 *tiles;
+    const u32 *tileMap;
+    const u16 *palettes;
+};
 
 enum
 {
@@ -79,6 +88,18 @@ enum
 
 enum
 {
+    PC_TEXT_FMT_NORMAL,
+    PC_TEXT_FMT_MON_NAME_1,
+    PC_TEXT_FMT_MON_NAME_2,
+    PC_TEXT_FMT_MON_NAME_3,
+    PC_TEXT_FMT_MON_NAME_4,
+    PC_TEXT_FMT_MON_NAME_5,
+    PC_TEXT_FMT_MON_NAME_6,
+    PC_TEXT_FMT_ITEM_NAME,
+};
+
+enum
+{
     SCREEN_CHANGE_EXIT_BOX,
     SCREEN_CHANGE_SUMMARY_SCREEN,
     SCREEN_CHANGE_NAME_BOX,
@@ -99,8 +120,8 @@ enum
 
 IWRAM_DATA u8 gUnknown_03000F78[0x188];
 
-extern u8 gUnknown_02039D00;
-extern u8 sBoxOption;
+extern u8 sPreviousBoxOption;
+extern u8 sCurrentBoxOption;
 extern u8 gUnknown_02039D10;
 extern u8 gUnknown_02039D0E;
 extern bool8 sInPartyMenu;
@@ -122,7 +143,7 @@ extern const u8 gText_JustOnePkmn[];
 // This file's functions.
 void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
 void Cb2_EnterPSS(u8 boxOption);
-u8 sub_80CAEA0(void);
+u8 GetCurrentBoxOption(void);
 u8 sub_80CF9EC(void);
 u8 sub_80CDC2C(void);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
@@ -141,7 +162,9 @@ void sub_80CAA14(void);
 void sub_80CE790(void);
 void sub_80CE8E4(void);
 void GiveChosenBagItem(void);
-void sub_80CA888(void);
+void SetUpHidePartyMenu(void);
+void sub_80CBB9C(void);
+void sub_80D11CC(void);
 void LoadPSSMenuGfx(void);
 void LoadWaveformSpritePalette(void);
 void sub_80CDC18(void);
@@ -176,9 +199,12 @@ void sub_80D1194(void);
 void PrintCursorMonInfo(void);
 void sub_80CA65C(void);
 void sub_80CADD8(void);
+void sub_80CFEF0(void);
 void sub_80D1818(void);
+void sub_80CAA74(void);
 void sub_80D17B4(void);
 void sub_80CE760(void);
+void sub_80CDBA0(void);
 void sub_80CE7E8(void);
 void sub_80CFECC(void);
 void sub_80CA9EC(void);
@@ -187,6 +213,7 @@ void sub_80CAB20(void);
 void sub_80CE22C(void);
 void sub_80CB950(void);
 void sub_80CA9C0(void);
+void SetUpDoShowPartyMenu(void);
 void BoxSetMosaic(void);
 void sub_80C7CF4(struct Sprite *sprite);
 bool8 InitPSSWindows(void);
@@ -195,15 +222,14 @@ bool8 sub_80CE2A8(void);
 bool8 sub_80D0164(void);
 bool8 sub_80CC35C(void);
 bool8 sub_80D01E4(void);
-bool8 sub_80CAB4C(void);
 bool8 sub_80D184C(void);
 bool8 sub_80D18E4(void);
-bool8 sub_80CAB70(void);
+bool8 DoShowPartyMenu(void);
 bool8 sub_80D1218(void);
 bool8 sub_80CB9BC(void);
 bool8 ScrollToBox(void);
 bool8 sub_80CD554(void);
-bool8 sub_80CA8C8(void);
+bool8 HidePartyMenu(void);
 bool8 sub_80D127C(void);
 bool8 sub_80CA2B8(void);
 bool8 DoWallpaperGfxChange(void);
@@ -212,6 +238,7 @@ bool8 sub_80D00A8(void);
 bool8 CanMoveMon(void);
 bool8 CanShifMon(void);
 bool8 IsCursorOnCloseBox(void);
+bool8 IsCursorOnBox(void);
 bool8 IsMonBeingMoved(void);
 bool8 sub_80CE19C(u8 arg0);
 void Cb_InitPSS(u8 taskId);
@@ -239,7 +266,7 @@ void Cb_ShowMarkMenu(u8 taskId);
 void Cb_ShowMonSummary(u8 taskId);
 void Cb_ReleaseMon(u8 taskId);
 void task_pokemon_box_related(u8 taskId);
-void Cb_ReshowPSSAfterChoosingBagItem(u8 taskId);
+void Cb_ReshowPSS(u8 taskId);
 void Cb_MainPSS(u8 taskId);
 void Cb_JumpBox(u8 taskId);
 void Cb_HandleWallpapers(u8 taskId);
@@ -254,11 +281,13 @@ void sub_80D2918(u8 arg0);
 void sub_80CC0D4(u8 arg0);
 void sub_80CDC38(u8 arg0);
 void sub_80CE9A8(u8 markings);
-void sub_80CAD9C(u8 arg0);
+void ShowYesNoWindow(s8 cursorPos);
 void sub_80CDBF8(u8 arg0);
 void sub_80D01D0(u8 arg0);
 void sub_80CD1A8(bool8 arg0);
-void sub_80D2644(u8 arg0, u16 arg1, const u16 *arg2, u16 arg3, u16 arg4);
+void sub_80CA984(bool8 arg0);
+void sub_80CB7E8(bool8 arg0);
+void sub_80D2644(u8 arg0, u16 arg1, const void *arg2, u16 arg3, u16 arg4);
 void sub_80D2770(u8 arg0, u16 arg1, u16 arg2);
 void PrintStorageActionText(u8 id);
 s16 sub_80D00AC(void);
@@ -270,12 +299,20 @@ void sub_80D1114(bool8 inParty, u8 boxPosition);
 void sub_80D0FAC(bool8 inParty, u8 boxPosition);
 struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
 void SetWallpaperForCurrentBox(u8 wallpaperId);
-void sub_80CAE0C(u8 arg0);
+void sub_80CAE0C(u8 wallpaperSet);
 u16 GetMovingItem(void);
 void SetCurrentBoxMonData(s32 monId, s32 request, const void *value);
 void LoadCursorMonGfx(u16 species, u32 pid);
 void sub_80CA2D0(struct Sprite *sprite);
 void sub_80D27AC(u8 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
+void sub_80D27F4(u8 arg0, u8 arg1, s8 arg2);
+void sub_80CBAF0(s16 arg0);
+void sub_80CAAA8(u8 arg0, bool8 isPartyMon);
+const u8 *GetMovingItemName(void);
+bool32 IsWaldaWallpaperUnlocked(void);
+void sub_80CFF34(u8 arg0);
+void sub_80D0D8C(bool8 arg0, u8 cursorPos);
+void sub_80D0F38(u16 item);
 
 // const rom data
 const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -479,40 +516,40 @@ const struct SpriteTemplate sSpriteTemplate_CursorMon =
 
 const struct StorageAction gPCStorageActionTexts[] =
 {
-    [PC_TEXT_EXIT_BOX] = {gText_ExitFromBox, 0},
-    [PC_TEXT_WHAT_YOU_DO] = {gText_WhatDoYouWantToDo, 0},
-    [PC_TEXT_PICK_A_THEME] = {gText_PleasePickATheme, 0},
-    [PC_TEXT_PICK_A_WALLPAPER] = {gText_PickTheWallpaper, 0},
-    [PC_TEXT_IS_SELECTED] = {gText_PkmnIsSelected, 1},
-    [PC_TEXT_JUMP_TO_WHICH_BOX] = {gText_JumpToWhichBox, 0},
-    [PC_TEXT_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox, 0},
-    [PC_TEXT_WAS_DEPOSITED] = {gText_PkmnWasDeposited, 1},
-    [PC_TEXT_BOX_IS_FULL] = {gText_BoxIsFull2, 0},
-    [PC_TEXT_RELEASE_POKE] = {gText_ReleaseThisPokemon, 0},
-    [PC_TEXT_WAS_RELEASED] = {gText_PkmnWasReleased, 4},
-    [PC_TEXT_BYE_BYE] = {gText_ByeByePkmn, 6},
-    [PC_TEXT_MARK_POKE] = {gText_MarkYourPkmn, 0},
-    [PC_TEXT_LAST_POKE] = {gText_ThatsYourLastPkmn, 0},
-    [PC_TEXT_PARTY_FULL] = {gText_YourPartysFull, 0},
-    [PC_TEXT_HOLDING_POKE] = {gText_YoureHoldingAPkmn, 0},
-    [PC_TEXT_WHICH_ONE_WILL_TAKE] = {gText_WhichOneWillYouTake, 0},
-    [PC_TEXT_CANT_RELEASE_EGG] = {gText_YouCantReleaseAnEgg, 0},
-    [PC_TEXT_CONTINUE_BOX] = {gText_ContinueBoxOperations, 0},
-    [PC_TEXT_CAME_BACK] = {gText_PkmnCameBack, 1},
-    [PC_TEXT_WORRIED] = {gText_WasItWorriedAboutYou, 0},
-    [PC_TEXT_SURPRISE] = {gText_FourEllipsesExclamation, 0},
-    [PC_TEXT_PLEASE_REMOVE_MAIL] = {gText_PleaseRemoveTheMail, 0},
-    [PC_TEXT_IS_SELECTED2] = {gText_PkmnIsSelected, 7},
-    [PC_TEXT_GIVE_TO_MON] = {gText_GiveToAPkmn, 0},
-    [PC_TEXT_PLACED_IN_BAG] = {gText_PlacedItemInBag, 7},
-    [PC_TEXT_BAG_FULL] = {gText_BagIsFull2, 0},
-    [PC_TEXT_PUT_IN_BAG] = {gText_PutItemInBag, 0},
-    [PC_TEXT_ITEM_IS_HELD] = {gText_ItemIsNowHeld, 7},
-    [PC_TEXT_CHANGED_TO_ITEM] = {gText_ChangedToNewItem, 7},
-    [PC_TEXT_CANT_STORE_MAIL] = {gText_MailCantBeStored, 0},
+    [PC_TEXT_EXIT_BOX] = {gText_ExitFromBox, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_WHAT_YOU_DO] = {gText_WhatDoYouWantToDo, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_PICK_A_THEME] = {gText_PleasePickATheme, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_PICK_A_WALLPAPER] = {gText_PickTheWallpaper, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_IS_SELECTED] = {gText_PkmnIsSelected, PC_TEXT_FMT_MON_NAME_1},
+    [PC_TEXT_JUMP_TO_WHICH_BOX] = {gText_JumpToWhichBox, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_WAS_DEPOSITED] = {gText_PkmnWasDeposited, PC_TEXT_FMT_MON_NAME_1},
+    [PC_TEXT_BOX_IS_FULL] = {gText_BoxIsFull2, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_RELEASE_POKE] = {gText_ReleaseThisPokemon, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_WAS_RELEASED] = {gText_PkmnWasReleased, PC_TEXT_FMT_MON_NAME_4},
+    [PC_TEXT_BYE_BYE] = {gText_ByeByePkmn, PC_TEXT_FMT_MON_NAME_6},
+    [PC_TEXT_MARK_POKE] = {gText_MarkYourPkmn, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_LAST_POKE] = {gText_ThatsYourLastPkmn, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_PARTY_FULL] = {gText_YourPartysFull, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_HOLDING_POKE] = {gText_YoureHoldingAPkmn, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_WHICH_ONE_WILL_TAKE] = {gText_WhichOneWillYouTake, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_CANT_RELEASE_EGG] = {gText_YouCantReleaseAnEgg, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_CONTINUE_BOX] = {gText_ContinueBoxOperations, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_CAME_BACK] = {gText_PkmnCameBack, PC_TEXT_FMT_MON_NAME_1},
+    [PC_TEXT_WORRIED] = {gText_WasItWorriedAboutYou, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_SURPRISE] = {gText_FourEllipsesExclamation, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_PLEASE_REMOVE_MAIL] = {gText_PleaseRemoveTheMail, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_IS_SELECTED2] = {gText_PkmnIsSelected, PC_TEXT_FMT_ITEM_NAME},
+    [PC_TEXT_GIVE_TO_MON] = {gText_GiveToAPkmn, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_PLACED_IN_BAG] = {gText_PlacedItemInBag, PC_TEXT_FMT_ITEM_NAME},
+    [PC_TEXT_BAG_FULL] = {gText_BagIsFull2, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_PUT_IN_BAG] = {gText_PutItemInBag, PC_TEXT_FMT_NORMAL},
+    [PC_TEXT_ITEM_IS_HELD] = {gText_ItemIsNowHeld, PC_TEXT_FMT_ITEM_NAME},
+    [PC_TEXT_CHANGED_TO_ITEM] = {gText_ChangedToNewItem, PC_TEXT_FMT_ITEM_NAME},
+    [PC_TEXT_CANT_STORE_MAIL] = {gText_MailCantBeStored, PC_TEXT_FMT_NORMAL},
 };
 
-const struct WindowTemplate gUnknown_08572864 =
+const struct WindowTemplate sYesNoWindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 24,
@@ -650,6 +687,179 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_857291C[] =
 {
     gSpriteAffineAnim_85728F4,
     gSpriteAffineAnim_8572904
+};
+
+const u16 gWallpaperPalettes_Forest[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/forest_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/forest_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Forest[] = INCBIN_U32("graphics/pokemon_storage/forest.4bpp.lz");
+const u32 gWallpaperTilemap_Forest[] = INCBIN_U32("graphics/pokemon_storage/forest.bin.lz");
+
+const u16 gWallpaperPalettes_City[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/city_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/city_bg.gbapal"),
+};
+const u32 gWallpaperTiles_City[] = INCBIN_U32("graphics/pokemon_storage/city.4bpp.lz");
+const u32 gWallpaperTilemap_City[] = INCBIN_U32("graphics/pokemon_storage/city.bin.lz");
+
+const u16 gWallpaperPalettes_Desert[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/desert_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/desert_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Desert[] = INCBIN_U32("graphics/pokemon_storage/desert.4bpp.lz");
+const u32 gWallpaperTilemap_Desert[] = INCBIN_U32("graphics/pokemon_storage/desert.bin.lz");
+
+const u16 gWallpaperPalettes_Savanna[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/savanna_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/savanna_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Savanna[] = INCBIN_U32("graphics/pokemon_storage/savanna.4bpp.lz");
+const u32 gWallpaperTilemap_Savanna[] = INCBIN_U32("graphics/pokemon_storage/savanna.bin.lz");
+
+const u16 gWallpaperPalettes_Crag[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/crag_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/crag_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Crag[] = INCBIN_U32("graphics/pokemon_storage/crag.4bpp.lz");
+const u32 gWallpaperTilemap_Crag[] = INCBIN_U32("graphics/pokemon_storage/crag.bin.lz");
+
+const u16 gWallpaperPalettes_Volcano[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/volcano_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/volcano_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Volcano[] = INCBIN_U32("graphics/pokemon_storage/volcano.4bpp.lz");
+const u32 gWallpaperTilemap_Volcano[] = INCBIN_U32("graphics/pokemon_storage/volcano.bin.lz");
+
+const u16 gWallpaperPalettes_Snow[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/snow_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/snow_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Snow[] = INCBIN_U32("graphics/pokemon_storage/snow.4bpp.lz");
+const u32 gWallpaperTilemap_Snow[] = INCBIN_U32("graphics/pokemon_storage/snow.bin.lz");
+
+const u16 gWallpaperPalettes_Cave[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/cave_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/cave_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Cave[] = INCBIN_U32("graphics/pokemon_storage/cave.4bpp.lz");
+const u32 gWallpaperTilemap_Cave[] = INCBIN_U32("graphics/pokemon_storage/cave.bin.lz");
+
+const u16 gWallpaperPalettes_Beach[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/beach_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/beach_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Beach[] = INCBIN_U32("graphics/pokemon_storage/beach.4bpp.lz");
+const u32 gWallpaperTilemap_Beach[] = INCBIN_U32("graphics/pokemon_storage/beach.bin.lz");
+
+const u16 gWallpaperPalettes_Seafloor[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/seafloor_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/seafloor_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Seafloor[] = INCBIN_U32("graphics/pokemon_storage/seafloor.4bpp.lz");
+const u32 gWallpaperTilemap_Seafloor[] = INCBIN_U32("graphics/pokemon_storage/seafloor.bin.lz");
+
+const u16 gWallpaperPalettes_River[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/river_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/river_bg.gbapal"),
+};
+const u32 gWallpaperTiles_River[] = INCBIN_U32("graphics/pokemon_storage/river.4bpp.lz");
+const u32 gWallpaperTilemap_River[] = INCBIN_U32("graphics/pokemon_storage/river.bin.lz");
+const u16 gWallpaperPalettes_Sky[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/sky_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/sky_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Sky[] = INCBIN_U32("graphics/pokemon_storage/sky.4bpp.lz");
+const u32 gWallpaperTilemap_Sky[] = INCBIN_U32("graphics/pokemon_storage/sky.bin.lz");
+
+const u16 gWallpaperPalettes_PolkaDot[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/polkadot_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/polkadot_bg.gbapal"),
+};
+const u32 gWallpaperTiles_PolkaDot[] = INCBIN_U32("graphics/pokemon_storage/polkadot.4bpp.lz");
+const u32 gWallpaperTilemap_PolkaDot[] = INCBIN_U32("graphics/pokemon_storage/polkadot.bin.lz");
+
+const u16 gWallpaperPalettes_Pokecenter[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/pokecenter_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/pokecenter_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Pokecenter[] = INCBIN_U32("graphics/pokemon_storage/pokecenter.4bpp.lz");
+const u32 gWallpaperTilemap_Pokecenter[] = INCBIN_U32("graphics/pokemon_storage/pokecenter.bin.lz");
+
+const u16 gWallpaperPalettes_Machine[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/machine_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/machine_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Machine[] = INCBIN_U32("graphics/pokemon_storage/machine.4bpp.lz");
+const u32 gWallpaperTilemap_Machine[] = INCBIN_U32("graphics/pokemon_storage/machine.bin.lz");
+
+const u16 gWallpaperPalettes_Plain[][16] =
+{
+	INCBIN_U16("graphics/pokemon_storage/plain_frame.gbapal"),
+	INCBIN_U16("graphics/pokemon_storage/plain_bg.gbapal"),
+};
+const u32 gWallpaperTiles_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.4bpp.lz");
+const u32 gWallpaperTilemap_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.bin.lz");
+
+// 12×18 tilemap
+const u32 gUnknown_085773C4[] = INCBIN_U32("graphics/unused/tilemap_5773C4.bin");
+
+const u16 gUnknown_08577574[][2] =
+{
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF},
+    {0x1CE7, 0x7FFF}
+};
+
+#define WALLPAPER_ENTRY(name) {gWallpaperTiles_##name, gWallpaperTilemap_##name, gWallpaperPalettes_##name[0]}
+
+const struct WallpaperTable gWallpaperTable[] =
+{
+    WALLPAPER_ENTRY(Forest),
+    WALLPAPER_ENTRY(City),
+    WALLPAPER_ENTRY(Desert),
+    WALLPAPER_ENTRY(Savanna),
+    WALLPAPER_ENTRY(Crag),
+    WALLPAPER_ENTRY(Volcano),
+    WALLPAPER_ENTRY(Snow),
+    WALLPAPER_ENTRY(Cave),
+    WALLPAPER_ENTRY(Beach),
+    WALLPAPER_ENTRY(Seafloor),
+    WALLPAPER_ENTRY(River),
+    WALLPAPER_ENTRY(Sky),
+    WALLPAPER_ENTRY(PolkaDot),
+    WALLPAPER_ENTRY(Pokecenter),
+    WALLPAPER_ENTRY(Machine),
+    WALLPAPER_ENTRY(Plain),
 };
 
 // code
@@ -915,7 +1125,7 @@ void FieldCb_ReturnToPcMenu(void)
     SetVBlankCallback(NULL);
     taskId = CreateTask(Task_PokemonStorageSystemPC, 80);
     gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = gUnknown_02039D00;
+    gTasks[taskId].data[1] = sPreviousBoxOption;
     Task_PokemonStorageSystemPC(taskId);
     SetVBlankCallback(vblankCb);
     pal_fill_black();
@@ -936,7 +1146,7 @@ void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
 
 void Cb2_ExitPSS(void)
 {
-    gUnknown_02039D00 = sub_80CAEA0();
+    sPreviousBoxOption = GetCurrentBoxOption();
     gFieldCallback = FieldCb_ReturnToPcMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
@@ -1219,7 +1429,7 @@ void Cb2_PSS(void)
 void Cb2_EnterPSS(u8 boxOption)
 {
     ResetTasks();
-    sBoxOption = boxOption;
+    sCurrentBoxOption = boxOption;
     gUnknown_02039D08 = Alloc(sizeof(*gUnknown_02039D08));
     if (gUnknown_02039D08 == NULL)
     {
@@ -1247,7 +1457,7 @@ void Cb2_ReturnToPSS(void)
     }
     else
     {
-        gUnknown_02039D08->boxOption = sBoxOption;
+        gUnknown_02039D08->boxOption = sCurrentBoxOption;
         gUnknown_02039D08->isReshowingPSS = TRUE;
         gUnknown_02039D08->state = 0;
         gUnknown_02039D08->taskId = CreateTask(Cb_InitPSS, 3);
@@ -1406,7 +1616,7 @@ void Cb_InitPSS(u8 taskId)
         else
         {
             BlendPalettes(0xFFFFFFFF, 0x10, 0);
-            SetPSSCallback(Cb_ReshowPSSAfterChoosingBagItem);
+            SetPSSCallback(Cb_ReshowPSS);
         }
         SetVBlankCallback(VblankCb_PSS);
         return;
@@ -1433,7 +1643,7 @@ void Cb_ShowPSS(u8 taskId)
     }
 }
 
-void Cb_ReshowPSSAfterChoosingBagItem(u8 taskId)
+void Cb_ReshowPSS(u8 taskId)
 {
     switch (gUnknown_02039D08->state)
     {
@@ -1736,11 +1946,11 @@ void Cb_ShowPartyPokemon(u8 taskId)
     switch (gUnknown_02039D08->state)
     {
     case 0:
-        sub_80CAB4C();
+        SetUpDoShowPartyMenu();
         gUnknown_02039D08->state++;
         break;
     case 1:
-        if (!sub_80CAB70())
+        if (!DoShowPartyMenu())
             SetPSSCallback(Cb_MainPSS);
         break;
     }
@@ -1752,11 +1962,11 @@ void Cb_HidePartyPokemon(u8 taskId)
     {
     case 0:
         PlaySE(SE_SELECT);
-        sub_80CA888();
+        SetUpHidePartyMenu();
         gUnknown_02039D08->state++;
         break;
     case 1:
-        if (!sub_80CA8C8())
+        if (!HidePartyMenu())
         {
             sub_80CDBF8(sub_80CDC2C());
             gUnknown_02039D08->state++;
@@ -2016,12 +2226,12 @@ void Cb_WithdrawMon(u8 taskId)
         if (!sub_80CDCAC())
         {
             sub_80CC0D4(1);
-            sub_80CAB4C();
+            SetUpDoShowPartyMenu();
             gUnknown_02039D08->state++;
         }
         break;
     case 3:
-        if (!sub_80CAB70())
+        if (!DoShowPartyMenu())
         {
             sub_80CDC38(1);
             gUnknown_02039D08->state++;
@@ -2109,7 +2319,7 @@ void Cb_ReleaseMon(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_RELEASE_POKE);
-        sub_80CAD9C(1);
+        ShowYesNoWindow(1);
         gUnknown_02039D08->state++;
         // fallthrough
     case 1:
@@ -2472,7 +2682,7 @@ void Cb_CloseBoxWhileHoldingItem(u8 taskId)
     case 0:
         PlaySE(SE_SELECT);
         PrintStorageActionText(PC_TEXT_PUT_IN_BAG);
-        sub_80CAD9C(0);
+        ShowYesNoWindow(0);
         gUnknown_02039D08->state = 1;
         break;
     case 1:
@@ -2814,7 +3024,7 @@ void Cb_OnCloseBoxPressed(u8 taskId)
         {
             PlaySE(SE_SELECT);
             PrintStorageActionText(PC_TEXT_EXIT_BOX);
-            sub_80CAD9C(0);
+            ShowYesNoWindow(0);
             gUnknown_02039D08->state = 2;
         }
         break;
@@ -2875,7 +3085,7 @@ void Cb_OnBPressed(u8 taskId)
         {
             PlaySE(SE_SELECT);
             PrintStorageActionText(PC_TEXT_CONTINUE_BOX);
-            sub_80CAD9C(0);
+            ShowYesNoWindow(0);
             gUnknown_02039D08->state = 2;
         }
         break;
@@ -3215,4 +3425,369 @@ void sub_80CA65C(void)
 
     sub_80D2918(0);
     schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void sub_80CA704(void)
+{
+    LZ77UnCompWram(gUnknown_08DD36C8, gUnknown_02039D08->field_B0);
+    LoadPalette(gPSSMenu_Pal, 0x10, 0x20);
+    sub_80D2644(1, 1, gUnknown_02039D08->field_B0, 12, 22);
+    sub_80D2644(2, 1, gUnknown_0857245C, 9, 4);
+    sub_80D2770(1, 10, 0);
+    sub_80D2770(2, 21, 0);
+    sub_80CAA74();
+    if (sInPartyMenu)
+    {
+        sub_80CA984(TRUE);
+        sub_80CB7E8(TRUE);
+        sub_80D2918(2);
+        sub_80D2918(1);
+    }
+    else
+    {
+        sub_80D27AC(1, 0, 20, 12, 2);
+        sub_80CA984(TRUE);
+        sub_80D2918(1);
+        sub_80D2918(2);
+    }
+
+    schedule_bg_copy_tilemap_to_vram(1);
+    gUnknown_02039D08->unk_02C7 = 0;
+}
+
+void SetUpShowPartyMenu(void)
+{
+    gUnknown_02039D08->field_2C0 = 20;
+    gUnknown_02039D08->field_2C2 = 2;
+    gUnknown_02039D08->field_2C5 = 0;
+    sub_80CB7E8(FALSE);
+}
+
+bool8 ShowPartyMenu(void)
+{
+    if (gUnknown_02039D08->field_2C5 == 20)
+        return FALSE;
+
+    gUnknown_02039D08->field_2C0--;
+    gUnknown_02039D08->field_2C2++;
+    sub_80D27F4(1, 3, 1);
+    sub_80D2918(1);
+    schedule_bg_copy_tilemap_to_vram(1);
+    sub_80CBAF0(8);
+    if (++gUnknown_02039D08->field_2C5 == 20)
+    {
+        sInPartyMenu = TRUE;
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+void SetUpHidePartyMenu(void)
+{
+    gUnknown_02039D08->field_2C0 = 0;
+    gUnknown_02039D08->field_2C2 = 22;
+    gUnknown_02039D08->field_2C5 = 0;
+    if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
+        sub_80D11CC();
+}
+
+bool8 HidePartyMenu(void)
+{
+    if (gUnknown_02039D08->field_2C5 != 20)
+    {
+        gUnknown_02039D08->field_2C0++;
+        gUnknown_02039D08->field_2C2--;
+        sub_80D27F4(1, 3, -1);
+        sub_80D2918(1);
+        FillBgTilemapBufferRect_Palette0(1, 0x100, 10, gUnknown_02039D08->field_2C2, 12, 1);
+        sub_80CBAF0(-8);
+        if (++gUnknown_02039D08->field_2C5 != 20)
+        {
+            schedule_bg_copy_tilemap_to_vram(1);
+            return TRUE;
+        }
+        else
+        {
+            sInPartyMenu = FALSE;
+            sub_80CBB9C();
+            CompactPartySlots();
+            sub_80D27AC(2, 0, 0, 9, 2);
+            sub_80D2918(2);
+            schedule_bg_copy_tilemap_to_vram(1);
+            return FALSE;
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_80CA984(bool8 arg0)
+{
+    if (arg0)
+        sub_80D27AC(2, 0, 0, 9, 2);
+    else
+        sub_80D27AC(2, 0, 2, 9, 2);
+
+    sub_80D2918(2);
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void sub_80CA9C0(void)
+{
+    gUnknown_02039D08->unk_02C7 = 1;
+    gUnknown_02039D08->unk_02C8 = 30;
+    gUnknown_02039D08->unk_02C9 = TRUE;
+}
+
+void sub_80CA9EC(void)
+{
+    if (gUnknown_02039D08->unk_02C7)
+    {
+        gUnknown_02039D08->unk_02C7 = 0;
+        sub_80CA984(TRUE);
+    }
+}
+
+void sub_80CAA14(void)
+{
+    if (gUnknown_02039D08->unk_02C7 && ++gUnknown_02039D08->unk_02C8 > 30)
+    {
+        gUnknown_02039D08->unk_02C8 = 0;
+        gUnknown_02039D08->unk_02C9 = (gUnknown_02039D08->unk_02C9 == FALSE);
+        sub_80CA984(gUnknown_02039D08->unk_02C9);
+    }
+}
+
+void sub_80CAA74(void)
+{
+    u8 i;
+
+    for (i = 1; i < PARTY_SIZE; i++)
+    {
+        s32 species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
+        sub_80CAAA8(i, (species != SPECIES_NONE));
+    }
+}
+
+void sub_80CAAA8(u8 arg0, bool8 isPartyMon)
+{
+    u16 i, j, index;
+    const u16 *data;
+
+    if (isPartyMon)
+        data = gUnknown_085724A4;
+    else
+        data = gUnknown_085724BC;
+
+    index = 3 * (3 * (arg0 - 1) + 1);
+    index *= 4;
+    index += 7;
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            gUnknown_02039D08->field_B0[index + j] = data[j];
+        }
+        data += 4;
+        index += 12;
+    }
+}
+
+void sub_80CAB20(void)
+{
+    sub_80CAA74();
+    sub_80D27AC(1, 0, 0, 12, 22);
+    sub_80D2918(1);
+    schedule_bg_copy_tilemap_to_vram(1);
+}
+
+void SetUpDoShowPartyMenu(void)
+{
+    gUnknown_02039D08->showPartyMenuState = 0;
+    PlaySE(SE_WIN_OPEN);
+    SetUpShowPartyMenu();
+}
+
+bool8 DoShowPartyMenu(void)
+{
+    switch (gUnknown_02039D08->showPartyMenuState)
+    {
+    case 0:
+        if (!ShowPartyMenu())
+        {
+            sub_80CDBA0();
+            gUnknown_02039D08->showPartyMenuState++;
+        }
+        break;
+    case 1:
+        if (!sub_80CD554())
+        {
+            if (gUnknown_02039D08->field_CEA)
+                BoxSetMosaic();
+            gUnknown_02039D08->showPartyMenuState++;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_80CABE0(void)
+{
+    if (gUnknown_02039D10 != StorageGetCurrentBox())
+    {
+        FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
+        VarSet(VAR_STORAGE_UNKNOWN, StorageGetCurrentBox());
+    }
+}
+
+void sub_80CAC1C(void)
+{
+    SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
+    LoadUserWindowBorderGfx(1, 2, 208);
+    FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
+    CopyBgTilemapBufferToVram(0);
+}
+
+void PrintStorageActionText(u8 id)
+{
+    u8 *txtPtr;
+
+    DynamicPlaceholderTextUtil_Reset();
+    switch (gPCStorageActionTexts[id].format)
+    {
+    case PC_TEXT_FMT_NORMAL:
+        break;
+    case PC_TEXT_FMT_MON_NAME_1:
+    case PC_TEXT_FMT_MON_NAME_2:
+    case PC_TEXT_FMT_MON_NAME_3:
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_02039D08->field_CEE);
+        break;
+    case PC_TEXT_FMT_MON_NAME_4:
+    case PC_TEXT_FMT_MON_NAME_5:
+    case PC_TEXT_FMT_MON_NAME_6:
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_02039D08->field_21E0);
+        break;
+    case PC_TEXT_FMT_ITEM_NAME:
+        if (sub_80D127C())
+            txtPtr = StringCopy(gUnknown_02039D08->field_21EB, GetMovingItemName());
+        else
+            txtPtr = StringCopy(gUnknown_02039D08->field_21EB, gUnknown_02039D08->cursorMonItemName);
+
+        while (*(txtPtr - 1) == CHAR_SPACE)
+            txtPtr--;
+
+        *txtPtr = EOS;
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_02039D08->field_21EB);
+        break;
+    }
+
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_02039D08->field_2190, gPCStorageActionTexts[id].text);
+    FillWindowPixelBuffer(1, 0x11);
+    AddTextPrinterParameterized(1, 1, gUnknown_02039D08->field_2190, 0, 1, TEXT_SPEED_FF, NULL);
+    sub_8098858(1, 2, 14);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 2);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void ShowYesNoWindow(s8 cursorPos)
+{
+    CreateYesNoMenu(&sYesNoWindowTemplate, 11, 14, 0);
+    MoveMenuCursorNoWrapAround(cursorPos);
+}
+
+void ClearBottomWindow(void)
+{
+    sub_8198070(1, FALSE);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_80CADD8(void)
+{
+    sub_80CFEF0();
+    sub_80CFF34(18);
+    sub_80CFF34(19);
+    sub_80CFF34(20);
+    sub_80CFF34(21);
+    if (IsWaldaWallpaperUnlocked())
+        sub_80CFF34(22);
+    sub_80CFFD0();
+}
+
+void sub_80CAE0C(u8 wallpaperSet)
+{
+    sub_80CFEF0();
+    switch (wallpaperSet)
+    {
+    case 0:
+        sub_80CFF34(23);
+        sub_80CFF34(24);
+        sub_80CFF34(25);
+        sub_80CFF34(26);
+        break;
+    case 1:
+        sub_80CFF34(27);
+        sub_80CFF34(28);
+        sub_80CFF34(29);
+        sub_80CFF34(30);
+        break;
+    case 2:
+        sub_80CFF34(31);
+        sub_80CFF34(32);
+        sub_80CFF34(33);
+        sub_80CFF34(34);
+        break;
+    case 3:
+        sub_80CFF34(35);
+        sub_80CFF34(36);
+        sub_80CFF34(37);
+        sub_80CFF34(38);
+        break;
+    }
+    sub_80CFFD0();
+}
+
+u8 GetCurrentBoxOption(void)
+{
+    return sCurrentBoxOption;
+}
+
+void sub_80CAEAC(void)
+{
+    if (!IsCursorOnBox())
+    {
+        if (sInPartyMenu)
+            sub_80D0D8C(TRUE, GetBoxCursorPosition());
+        else
+            sub_80D0D8C(FALSE, GetBoxCursorPosition());
+    }
+
+    if (gUnknown_02039D12 != 0)
+    {
+        sub_80D0F38(gUnknown_02039D12);
+        sub_80CFE54(3);
+    }
+}
+
+void sub_80CAF04(void)
+{
+    u16 i;
+
+    LoadMonIconPalettes();
+    for (i = 0; i < 40; i++)
+        gUnknown_02039D08->field_B08[i] = 0;
+    for (i = 0; i < 40; i++)
+        gUnknown_02039D08->field_B58[i] = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
+        gUnknown_02039D08->partySprites[i] = NULL;
+    for (i = 0; i < IN_BOX_COUNT; i++)
+        gUnknown_02039D08->boxMonsSprites[i] = NULL;
+
+    gUnknown_02039D08->field_A6C = NULL;
+    gUnknown_02039D08->field_78C = 0;
 }
