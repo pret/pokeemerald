@@ -3,8 +3,10 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "bg.h"
 #include "constants/battle.h"
+#include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
@@ -13,8 +15,14 @@
 #include "contest.h"
 #include "data2.h"
 #include "decompress.h"
+#include "easy_chat.h"
 #include "event_data.h"
+#include "field_control_avatar.h"
+#include "field_effect.h"
+#include "field_player_avatar.h"
+#include "field_screen.h"
 #include "field_specials.h"
+#include "fieldmap.h"
 #include "fldeff_softboiled.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -22,16 +30,21 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "link.h"
+#include "link_rfu.h"
 #include "main.h"
 #include "mail.h"
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
+#include "region_map.h"
 #include "rom_8011DC0.h"
 #include "scanline_effect.h"
 #include "sound.h"
@@ -42,6 +55,7 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
+#include "trade.h"
 #include "window.h"
 
 struct Unk_Rodata1 {
@@ -88,6 +102,11 @@ struct Unk_8615C08 {
     TaskFunc func;
 };
 
+struct Unk_8615D9C {
+    bool8 (*fieldMoveFunc)(void);
+    u8 msgID;
+};
+
 // BELOW TO BE PUT IN EWRAM
 
 extern struct Unk_203CEC4 *gUnknown_0203CEC4;
@@ -99,6 +118,7 @@ extern u8 gUnknown_0203CEE8;
 extern u16 *gUnknown_0203CEF0;
 extern u16 *gUnknown_0203CEF4;
 extern u8 gSelectedOrderFromParty[];
+extern u16 gUnknown_0203CEFC;
 extern u8 gUnknown_0203CF20; // summary screen?
 
 // ABOVE TO BE PUT IN EWRAM
@@ -165,6 +185,9 @@ extern struct Unk_8615C08 gUnknown_08615C08[];
 extern u8 *gUnknown_08615D38[];
 extern u8 gUnknown_08615D70[];
 extern const u16 gUnknown_08615D7E[];
+extern const struct Unk_8615D9C gUnknown_08615D9C[];
+extern const u8 *gUnknown_08615E0C[];
+extern u8 gUnknown_08616020[];
 
 // ABOVE TO BE CONVERTED TO C
 
@@ -219,13 +242,13 @@ void sub_81B2BF4(u8, u16, u8*, struct Unk_203CEDC *);
 void sub_81B2D3C(u16, struct Unk_203CEDC *);
 void sub_81B2DDC(u16, struct Unk_203CEDC *);
 void sub_81B2E64(u16, u16, struct Unk_203CEDC *);
-void party_menu_link_mon_icon_anim(u16, u32, struct Unk_203CEDC *, u8, u8);
+void party_menu_link_mon_icon_anim(u16, u32, struct Unk_203CEDC *, u8, u32);
 void party_menu_link_mon_held_item_object(u16, u16, struct Unk_203CEDC *);
 void party_menu_link_mon_pokeball_object(u16, struct Unk_203CEDC *);
 void party_menu_link_mon_status_condition_object(u16, u8, struct Unk_203CEDC *);
 void party_menu_held_item_object(struct Pokemon *, struct Unk_203CEDC *);
 void party_menu_pokeball_object(struct Pokemon *, struct Unk_203CEDC *);
-void party_menu_icon_anim(struct Pokemon *, struct Unk_203CEDC *, u8);
+void party_menu_icon_anim(struct Pokemon *, struct Unk_203CEDC *, u32);
 void party_menu_status_condition_object(struct Pokemon *, struct Unk_203CEDC *);
 u8 sub_81B5F74(u8, u8);
 void sub_81B120C(void);
@@ -290,6 +313,38 @@ void sub_81B3CC0(u8);
 void sub_81B3D48(u8);
 void swap_pokemon_and_oams(void);
 void sub_81B3E60(u8);
+void sub_81B41C4(void);
+void c2_8123744(void);
+void sub_81B452C(void);
+void sub_81B4350(u8);
+void sub_81B42D0(u8);
+void sub_81B43A8(u8);
+void sub_81B43DC(u8);
+void sub_81B44FC(u8);
+void sub_81B4578(void);
+void sub_81B4624(u8);
+void sub_81B5C94(struct Pokemon*, struct Unk_203CEDC*);
+void sub_81B48A8(u8);
+void sub_81B48DC(u8);
+void sub_81B4988(u8);
+void sub_81B4A98(void);
+void sub_81B4AE0(void);
+void sub_81B4B6C(u8);
+void sub_81B4BA0(u8);
+void sub_81B4C60(u8);
+void sub_81B4C94(u8);
+bool8 sub_81B8A7C(void);
+void sub_81B53FC(u8);
+void sub_81B5430(u8);
+void task_brm_cancel_1_on_keypad_a_or_b(u8);
+void sub_81B5674(u8);
+void sub_81B57DC(void);
+void sub_81B5864(void);
+void sub_81B56A4(u8);
+void sub_81B56D8(u8);
+void task_launch_hm_phase_2(u8);
+u16 brm_get_selected_species(void);
+void sub_81B5B38(u8, struct Pokemon*);
 
 void sub_81B0038(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc f, MainCallback g)
 {
@@ -1238,7 +1293,7 @@ void sub_81B1708(u8 taskId)
             sub_81B8558();
             sub_81B12C0(taskId);
             break;
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
         case 1:
             sub_81B1C1C(taskId);
@@ -1967,7 +2022,7 @@ void sub_81B1C1C(u8 taskId)
     }
 }
 
-void sub_81B1C84(struct Pokemon *mon, u16 item, u8 c)
+void sub_81B1C84(struct Pokemon *mon, u16 item, u8 c, u8 unused)
 {
     GetMonNickname(mon, gStringVar1);
     CopyItemName(item, gStringVar2);
@@ -2031,7 +2086,7 @@ u8 sub_81B1E00(struct Pokemon* mon)
     return 2;
 }
 
-void pokemon_item_not_removed(void)
+void pokemon_item_not_removed(u16 itemUnused)
 {
     StringExpandPlaceholders(gStringVar4, gText_BagFullCouldNotRemoveItem);
 }
@@ -2211,7 +2266,7 @@ void sub_81B227C(u8 taskId)
             gSpecialVar_0x8004 = 7;
             sub_81B12C0(taskId);
             break;
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
         case 1:
             gTasks[taskId].func = sub_81B1C1C;
@@ -2634,12 +2689,12 @@ void sub_81B2E64(u16 hp, u16 maxhp, struct Unk_203CEDC *ptr)
     
     switch (GetHPBarLevel(hp, maxhp))
     {
-        case 3:
-        case 4:
+        case HP_BAR_GREEN:
+        case HP_BAR_FULL:
             LoadPalette(sub_81B2564(gUnknown_08615AC7[0]), gUnknown_08615AB8[0] + palNum, 2);
             LoadPalette(sub_81B2564(gUnknown_08615AC7[1]), gUnknown_08615AB8[1] + palNum, 2);
             break;
-        case 2:
+        case HP_BAR_YELLOW:
             LoadPalette(sub_81B2564(gUnknown_08615AC9[0]), gUnknown_08615AB8[0] + palNum, 2);
             LoadPalette(sub_81B2564(gUnknown_08615AC9[1]), gUnknown_08615AB8[1] + palNum, 2);
             break;
@@ -2809,11 +2864,8 @@ bool8 sub_81B314C(void)
     
     for (i = 0; i < 6; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE)
-        {
-            if (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG) != FALSE)
-                j++;
-        }
+        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG) != FALSE))
+            j++;
         if (j > 1)
             return TRUE;
     }
@@ -3040,9 +3092,9 @@ void sub_81B3730(u8 taskId)
         else
             input = ProcessMenuInput_other();
         data[0] = GetMenuCursorPos();
-        if (input != -2)
+        if (input != MENU_NOTHING_CHOSEN)
         {
-            if (input == -1)
+            if (input == MENU_B_PRESSED)
             {
                 PlaySE(SE_SELECT);
                 sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
@@ -3390,4 +3442,873 @@ void brm_cancel_1(u8 taskId)
     else
         display_pokemon_menu_message(0);
     gTasks[taskId].func = sub_81B1370;
+}
+
+void sub_81B4134(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    sub_81B33B4(gPlayerParty, gUnknown_0203CEC8.unk9, 8);
+    sub_81B31B0(1);
+    display_pokemon_menu_message(24);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = sub_81B3730;
+}
+
+void sub_81B4198(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    gUnknown_0203CEC4->unk4 = sub_81B41C4;
+    sub_81B12C0(taskId);
+}
+
+void sub_81B41C4(void)
+{
+    if (InBattlePyramid() == FALSE)
+        GoToBagMenu(2, 5, c2_8123744);
+    else
+        sub_81C4F98(2, c2_8123744);
+}
+
+void c2_8123744(void)
+{
+    if (gSpecialVar_ItemId == ITEM_NONE)
+    {
+        sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0x7F, sub_81B36FC, gUnknown_0203CEC8.unk0);
+    }
+    else
+    {
+        gUnknown_0203CEFC = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
+        if (gUnknown_0203CEFC != ITEM_NONE)
+        {
+            sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0x7F, sub_81B4350, gUnknown_0203CEC8.unk0);
+        }
+        else if (ItemIsMail(gSpecialVar_ItemId) != FALSE)
+        {
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+            sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
+            sub_81B452C();
+        }
+        else
+        {
+            sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0x7F, sub_81B42D0, gUnknown_0203CEC8.unk0);
+        }
+    }
+}
+
+void sub_81B42D0(u8 taskId)
+{
+    u16 item;
+    
+    if (!gPaletteFade.active)
+    {
+        item = gSpecialVar_ItemId;
+        sub_81B1C84(&gPlayerParty[gUnknown_0203CEC8.unk9], item, 0, 0);
+        sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], item);
+        RemoveBagItem(item, 1);
+        gTasks[taskId].func = sub_81B469C;
+    }
+}
+
+void sub_81B4350(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_81B1D1C(&gPlayerParty[gUnknown_0203CEC8.unk9], gUnknown_0203CEFC, 1);
+        gTasks[taskId].func = sub_81B43A8;
+    }
+}
+
+void sub_81B43A8(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B43DC;
+    }
+}
+
+void sub_81B43DC(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0:
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+            if (AddBagItem(gUnknown_0203CEFC, 1) == FALSE)
+            {
+                AddBagItem(gSpecialVar_ItemId, 1);
+                pokemon_item_not_removed(gUnknown_0203CEFC);
+                sub_81B1B5C(gStringVar4, 0);
+                gTasks[taskId].func = sub_81B1C1C;
+            }
+            else if (ItemIsMail(gSpecialVar_ItemId) != FALSE)
+            {
+                sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
+                gTasks[taskId].func = sub_81B44FC;
+            }
+            else
+            {
+                sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
+                sub_81B1D68(gSpecialVar_ItemId, gUnknown_0203CEFC, 1);
+                gTasks[taskId].func = sub_81B469C;
+            }
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+        case 1:
+            gTasks[taskId].func = sub_81B1C1C;
+            break;
+    }
+}
+
+void sub_81B44FC(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        gUnknown_0203CEC4->unk4 = sub_81B452C;
+        sub_81B12C0(taskId);
+    }
+}
+
+void sub_81B452C(void)
+{
+    u8 mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
+    
+    sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B4578, 3);
+}
+
+void sub_81B4578(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    
+    if (gSpecialVar_Result == FALSE)
+    {
+        TakeMailFromMon(mon);
+        SetMonData(mon, MON_DATA_HELD_ITEM, &gUnknown_0203CEFC);
+        RemoveBagItem(gUnknown_0203CEFC, 1);
+        AddBagItem(item, 1);
+        sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0, sub_81B36FC, gUnknown_0203CEC8.unk0);
+    }
+    else
+    {
+        sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0x7F, sub_81B4624, gUnknown_0203CEC8.unk0);
+    }
+}
+
+void sub_81B4624(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gUnknown_0203CEFC == ITEM_NONE)
+            sub_81B1C84(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId, 0, 0);
+        else
+            sub_81B1D68(gSpecialVar_ItemId, gUnknown_0203CEFC, 0);
+        gTasks[taskId].func = sub_81B469C;
+    }
+}
+
+void sub_81B469C(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B5C94(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
+        if (gUnknown_0203CEC8.unk8_0 == 12)
+        {
+            if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
+                sub_81B2FA8(11, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
+            else
+                sub_81B2FA8(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
+        }
+        sub_81B1C1C(taskId);
+    }
+}
+
+void sub_81B4724(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    switch (sub_81B1E00(mon))
+    {
+        case 0:
+            GetMonNickname(mon, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnNotHolding);
+            sub_81B1B5C(gStringVar4, 1);
+            break;
+        case 1:
+            pokemon_item_not_removed(item);
+            sub_81B1B5C(gStringVar4, 1);
+            break;
+        default:
+            sub_81B1CD0(mon, item, 1);
+            break;
+    }
+    schedule_bg_copy_tilemap_to_vram(2);
+    gTasks[taskId].func = sub_81B469C;
+}
+
+void sub_81B47E0(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
+    
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    if (item == ITEM_NONE)
+    {
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnNotHolding);
+        sub_81B1B5C(gStringVar4, 1);
+        gTasks[taskId].func = sub_81B469C;
+    }
+    else
+    {
+        CopyItemName(item, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_ThrowAwayItem);
+        sub_81B1B5C(gStringVar4, 1);
+        gTasks[taskId].func = sub_81B48A8;
+    }
+}
+
+void sub_81B48A8(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B48DC;
+    }
+}
+
+void sub_81B48DC(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0:
+            CopyItemName(GetMonData(mon, MON_DATA_HELD_ITEM), gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_ItemThrownAway);
+            sub_81B1B5C(gStringVar4, 0);
+            gTasks[taskId].func = sub_81B4988;
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+        case 1:
+            gTasks[taskId].func = sub_81B1C1C;
+            break;
+    }
+}
+
+void sub_81B4988(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    u16 itemClear;
+    
+    if (sub_81B1BD4() != TRUE)
+    {
+        itemClear = ITEM_NONE;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &itemClear);
+        sub_81B5C94(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
+        sub_81B2FA8(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
+        gTasks[taskId].func = sub_81B1C1C;
+    }
+}
+
+void sub_81B4A08(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    sub_81B33B4(gPlayerParty, gUnknown_0203CEC8.unk9, 9);
+    sub_81B31B0(2);
+    display_pokemon_menu_message(25);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = sub_81B3730;
+}
+
+void sub_81B4A6C(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    gUnknown_0203CEC4->unk4 = sub_81B4A98;
+    sub_81B12C0(taskId);
+}
+
+void sub_81B4A98(void)
+{
+    ReadMail(&gSaveBlock1Ptr->mail[GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL)], sub_81B4AE0, 1);
+}
+
+void sub_81B4AE0(void)
+{
+    gPaletteFade.bufferTransferDisabled = TRUE;
+    sub_81B0038(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 21, sub_81B36FC, gUnknown_0203CEC8.unk0);
+}
+
+void brm_take_2(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B1B5C(gText_SendMailToPC, 1);
+    gTasks[taskId].func = sub_81B4B6C;
+}
+
+void sub_81B4B6C(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B4BA0;
+    }
+}
+
+void sub_81B4BA0(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0:
+            if (TakeMailFromMon2(&gPlayerParty[gUnknown_0203CEC8.unk9]) != 0xFF)
+            {
+                sub_81B1B5C(gText_MailSentToPC, 0);
+                gTasks[taskId].func = sub_81B469C;
+            }
+            else
+            {
+                sub_81B1B5C(gText_PCMailboxFull, 0);
+                gTasks[taskId].func = sub_81B1C1C;
+            }
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+        case 1:
+            sub_81B1B5C(gText_MailMessageWillBeLost, 1);
+            gTasks[taskId].func = sub_81B4C60;
+            break;
+    }
+}
+
+void sub_81B4C60(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B4C94;
+    }
+}
+
+void sub_81B4C94(u8 taskId)
+{
+    u16 item;
+    
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0:
+            item = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
+            if (AddBagItem(item, 1) == TRUE)
+            {
+                TakeMailFromMon(&gPlayerParty[gUnknown_0203CEC8.unk9]);
+                sub_81B1B5C(gText_MailTakenFromPkmn, 0);
+                gTasks[taskId].func = sub_81B469C;
+            }
+            else
+            {
+                pokemon_item_not_removed(item);
+                sub_81B1B5C(gStringVar4, 0);
+                gTasks[taskId].func = sub_81B1C1C;
+            }
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+        case 1:
+            gTasks[taskId].func = sub_81B1C1C;
+            break;
+    }
+}
+
+void sub_81B4D78(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
+    
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    sub_81B33B4(gPlayerParty, gUnknown_0203CEC8.unk9, sub_81B353C(mon));
+    if (gUnknown_0203CEC8.unk8_0 != 12)
+    {
+        sub_81B31B0(0);
+        display_pokemon_menu_message(21);
+    }
+    else
+    {
+        sub_81B31B0(1);
+        CopyItemName(GetMonData(mon, MON_DATA_HELD_ITEM), gStringVar2);
+        display_pokemon_menu_message(26);
+    }
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = sub_81B3730;
+}
+
+void brm_shift_sendout(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    if (sub_81B8A7C() == TRUE)
+    {
+        sub_81B12C0(taskId);
+    }
+    else
+    {
+        sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+        sub_81B1B5C(gStringVar4, 1);
+        gTasks[taskId].func = sub_81B1C1C;
+    }
+}
+
+void sub_81B4E8C(u8 taskId)
+{
+    u8 unk;
+    u8 i;
+    
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    unk = sub_81B8830();
+    for (i = 0; i < unk; i++)
+    {
+        if (gSelectedOrderFromParty[i] == 0)
+        {
+            PlaySE(SE_SELECT);
+            gSelectedOrderFromParty[i] = gUnknown_0203CEC8.unk9 + 1;
+            sub_81B2FA8(i + 2, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
+            if (i == (unk - 1))
+                sub_81B4F88();
+            display_pokemon_menu_message(0);
+            gTasks[taskId].func = sub_81B1370;
+            return;
+        }
+    }
+    ConvertIntToDecimalStringN(gStringVar1, unk, 0, 1);
+    StringExpandPlaceholders(gStringVar4, gText_NoMoreThanVar1Pkmn);
+    PlaySE(SE_HAZURE);
+    sub_81B1B5C(gStringVar4, 1);
+    gTasks[taskId].func = sub_81B1C1C;
+}
+
+void sub_81B4F88(void)
+{
+    sub_81B0FCC(gUnknown_0203CEC8.unk9, 0);
+    gUnknown_0203CEC8.unk9 = 6;
+    sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
+}
+
+void sub_81B4FA8(u8 taskId)
+{
+    u8 unk;
+    u8 i, j;
+    
+    PlaySE(SE_SELECT);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    unk = sub_81B8830();
+    for (i = 0; i < unk; i++)
+    {
+        if (gSelectedOrderFromParty[i] == (gUnknown_0203CEC8.unk9 + 1))
+        {
+            for (j = i; j < (unk - 1); j++)
+                gSelectedOrderFromParty[j] = gSelectedOrderFromParty[j + 1];
+            gSelectedOrderFromParty[j] = 0;
+            break;
+        }
+    }
+    sub_81B2FA8(1, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
+    for (i = 0; i < (unk - 1); i++)
+    {
+        if (gSelectedOrderFromParty[i] != 0)
+            sub_81B2FA8(i + 2, &gUnknown_0203CEDC[gSelectedOrderFromParty[i] - 1], 1);
+    }
+    display_pokemon_menu_message(0);
+    gTasks[taskId].func = sub_81B1370;
+}
+
+void sub_81B50AC(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    sub_81B12C0(taskId);
+}
+
+void sub_81B50C8(u8 taskId)
+{
+    u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
+    u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
+    u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
+    
+    switch (sub_807A8D0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, species2, species, obedience))
+    {
+        case 1:
+            StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
+            break;
+        case 2:
+            StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            sub_81B12C0(taskId);
+            return;
+    }
+    PlaySE(SE_HAZURE);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    StringAppend(gStringVar4, gText_PauseUntilPress);
+    sub_81B1B5C(gStringVar4, 1);
+    gTasks[taskId].func = sub_81B1C1C;
+}
+
+void brm_trade_1(u8 taskId)
+{
+    u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
+    u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
+    u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
+    u32 stringId = sub_807A7E0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, *(u32 *)&gUnknown_02022C38 /* dirty cast, probably needs to be changed */, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
+    
+    if (stringId != 0)
+    {
+        StringExpandPlaceholders(gStringVar4, gUnknown_08615E0C[stringId - 1]);
+        PlaySE(SE_HAZURE);
+        sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+        sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+        StringAppend(gStringVar4, gText_PauseUntilPress);
+        sub_81B1B5C(gStringVar4, 1);
+        gTasks[taskId].func = sub_81B1C1C;
+    }
+    else
+    {
+        PlaySE(SE_SELECT);
+        sub_81B12C0(taskId);
+    }
+}
+
+void sub_81B52E4(u8 taskId)
+{
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    switch (sub_807A918(gPlayerParty, gUnknown_0203CEC8.unk9))
+    {
+        case 1:
+            StringExpandPlaceholders(gStringVar4, gText_OnlyPkmnForBattle);
+            break;
+        case 2:
+            StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
+            break;
+        case 3:
+            StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            GetMonNickname(&gPlayerParty[gUnknown_0203CEC8.unk9], gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gJPText_PutVar1IntoSpinner);
+            sub_81B1B5C(gStringVar4, 1);
+            gTasks[taskId].func = sub_81B53FC;
+            return;
+    }
+    PlaySE(SE_HAZURE);
+    StringAppend(gStringVar4, gText_PauseUntilPress);
+    sub_81B1B5C(gStringVar4, 1);
+    gTasks[taskId].func = sub_81B1C1C;
+}
+
+void sub_81B53FC(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B5430;
+    }
+}
+
+void sub_81B5430(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0:
+            sub_81B12C0(taskId);
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+        case 1:
+            sub_81B1C1C(taskId);
+            break;
+    }
+}
+
+void sub_81B5470(u8 taskId)
+{
+    u8 fieldMove = gUnknown_0203CEC4->unkF[GetMenuCursorPos()] - 19;
+    struct MapHeader const *mapHeader;
+    u8 fieldMove2;
+    
+    PlaySE(SE_SELECT);
+    if (gUnknown_08615D9C[fieldMove].fieldMoveFunc != NULL)
+    {
+        sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+        sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+        if (sub_81221AC() == TRUE || InUnionRoom() == TRUE)
+        {
+            fieldMove2 = fieldMove - 11;
+            if (fieldMove2 <= 1)
+                display_pokemon_menu_message(13);
+            else
+                display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
+            gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
+        }
+        else
+        {
+            if (fieldMove <= 7 && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
+            {
+                sub_81B1B5C(gText_CantUseUntilNewBadge, 1);
+                gTasks[taskId].func = sub_81B1C1C;
+            }
+            else if (gUnknown_08615D9C[fieldMove].fieldMoveFunc() == TRUE)
+            {
+                switch (fieldMove - 5)
+                {
+                    case 6:
+                    case 7:
+                        sub_8161560(taskId);
+                        break;
+                    case 3:
+                        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
+                        sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
+                        StringExpandPlaceholders(gStringVar4, gText_ReturnToHealingSpot);
+                        sub_81B5674(taskId);
+                        gUnknown_0203CEC4->unk218[0] = fieldMove;
+                        break;
+                    case 4:
+                        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                        sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
+                        StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+                        sub_81B5674(taskId);
+                        gUnknown_0203CEC4->unk218[0] = fieldMove;
+                        break;
+                    case 0:
+                        gUnknown_0203CEC8.unk0 = MCB2_FlyMap;
+                        sub_81B12C0(taskId);
+                        break;
+                    default:
+                        gUnknown_0203CEC8.unk0 = CB2_ReturnToField;
+                        sub_81B12C0(taskId);
+                        break;
+                }
+            }
+            else
+            {
+                switch (fieldMove)
+                {
+                    case 4:
+                        sub_81B5864();
+                        break;
+                    case 1:
+                        sub_81B57DC();
+                        break;
+                    default:
+                        display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
+                        break;
+                }
+                gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
+            }
+        }
+    }
+}
+
+void sub_81B5674(u8 taskId)
+{
+    sub_81B1B5C(gStringVar4, 1);
+    gTasks[taskId].func = sub_81B56A4;
+}
+
+void sub_81B56A4(u8 taskId)
+{
+    if (sub_81B1BD4() != TRUE)
+    {
+        sub_81B334C();
+        gTasks[taskId].func = sub_81B56D8;
+    }
+}
+
+void sub_81B56D8(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0:
+            gUnknown_0203CEC8.unk0 = CB2_ReturnToField;
+            sub_81B12C0(taskId);
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+        case 1:
+            gFieldCallback2 = NULL;
+            gPostMenuFieldCallback = NULL;
+            sub_81B1C1C(taskId);
+            break;
+    }
+}
+
+bool8 FieldCallback_PrepareFadeInFromMenu(void)
+{
+    pal_fill_black();
+    CreateTask(task_launch_hm_phase_2, 8);
+    return TRUE;
+}
+
+void task_launch_hm_phase_2(u8 taskId)
+{
+    if (IsWeatherNotFadingIn() == TRUE)
+    {
+        gFieldEffectArguments[0] = brm_get_selected_species();
+        gPostMenuFieldCallback();
+        DestroyTask(taskId);
+    }
+}
+
+u16 brm_get_selected_species(void)
+{
+    return GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
+}
+
+void task_brm_cancel_1_on_keypad_a_or_b(u8 taskId)
+{
+    if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
+        brm_cancel_1(taskId);
+}
+
+void sub_81B57DC(void)
+{
+    if (FlagGet(FLAG_SYS_USE_FLASH) == TRUE)
+        display_pokemon_menu_message(12);
+    else
+        display_pokemon_menu_message(13);
+}
+
+void hm_surf_run_dp02scr(void)
+{
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
+    FieldEffectStart(9);
+}
+
+bool8 sub_81B5820(void)
+{
+    if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+    {
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = hm_surf_run_dp02scr;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_81B5864(void)
+{
+    if (TestPlayerAvatarFlags(8) != FALSE)
+        display_pokemon_menu_message(9);
+    else
+        display_pokemon_menu_message(8);
+}
+
+bool8 sub_81B5884(void)
+{
+    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_81B58A8(void)
+{
+    sub_81B0038(0, 0, 0, 1, 0, sub_81B1370, CB2_ReturnToFieldWithOpenMenu);
+}
+
+void hm2_waterfall(void)
+{
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
+    FieldEffectStart(43);
+}
+
+bool8 hm_prepare_waterfall(void)
+{
+    s16 x, y;
+    
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE && IsPlayerSurfingNorth() == TRUE)
+    {
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = hm2_waterfall;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_81B5958(void)
+{
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
+    FieldEffectStart(44);
+}
+
+bool8 sub_81B5974(void)
+{
+    gFieldEffectArguments[1] = TrySetDiveWarp();
+    if (gFieldEffectArguments[1] != 0)
+    {
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_81B5958;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void party_menu_icon_anim(struct Pokemon *mon, struct Unk_203CEDC *ptr, u32 a)
+{
+    u32 bit = 1;
+    u16 species2;
+    
+    if (sub_81B1250() == TRUE && gMain.inBattle != FALSE)
+        bit = (gUnknown_08616020[a] ^ bit) ? 1 : 0;
+    species2 = GetMonData(mon, MON_DATA_SPECIES2);
+    party_menu_link_mon_icon_anim(species2, GetMonData(mon, MON_DATA_PERSONALITY), ptr, 1, bit);
+    sub_81B5B38(ptr->unk9, mon);
+}
+
+void party_menu_link_mon_icon_anim(u16 species, u32 pid, struct Unk_203CEDC *ptr, u8 priority, u32 bit)
+{
+    if (species != SPECIES_NONE)
+    {
+        ptr->unk9 = CreateMonIcon(species, sub_80D3014, ptr->unk4[0], ptr->unk4[1], 4, pid, bit);
+        gSprites[ptr->unk9].oam.priority = priority;
+    }
+}
+
+void sub_81B5A8C(u8 spriteId, s16 hp, s16 maxhp)
+{
+    switch (GetHPBarLevel(hp, maxhp))
+    {
+        case HP_BAR_FULL:
+            sub_80D32C8(&gSprites[spriteId], 0);
+            break;
+        case HP_BAR_GREEN:
+            sub_80D32C8(&gSprites[spriteId], 1);
+            break;
+        case HP_BAR_YELLOW:
+            sub_80D32C8(&gSprites[spriteId], 2);
+            break;
+        case HP_BAR_RED:
+            sub_80D32C8(&gSprites[spriteId], 3);
+            break;
+        default:
+            sub_80D32C8(&gSprites[spriteId], 4);
+            break;
+    }
 }

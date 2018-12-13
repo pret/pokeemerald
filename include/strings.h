@@ -407,6 +407,22 @@ extern const u8 gText_SwitchedPkmnItem[];
 extern const u8 gText_BagFullCouldNotRemoveItem[];
 extern const u8 gText_PkmnCantParticipate[];
 extern const u8 gText_PkmnNotHolding[];
+extern const u8 gText_ThrowAwayItem[];
+extern const u8 gText_ItemThrownAway[];
+extern const u8 gText_SendMailToPC[];
+extern const u8 gText_MailSentToPC[];
+extern const u8 gText_PCMailboxFull[];
+extern const u8 gText_MailMessageWillBeLost[];
+extern const u8 gText_MailTakenFromPkmn[];
+extern const u8 gText_NoMoreThanVar1Pkmn[];
+extern const u8 gText_PkmnCantBeTradedNow[];
+extern const u8 gText_EggCantBeTradedNow[];
+extern const u8 gText_OnlyPkmnForBattle[];
+extern const u8 gJPText_PutVar1IntoSpinner[];
+extern const u8 gText_PauseUntilPress[];
+extern const u8 gText_CantUseUntilNewBadge[];
+extern const u8 gText_ReturnToHealingSpot[];
+extern const u8 gText_EscapeFromHere[];
 
 //pokedex text
 extern const u8 gText_CryOf[];
