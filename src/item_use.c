@@ -10,7 +10,7 @@
 #include "fieldmap.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "item.h"
 #include "item_menu.h"

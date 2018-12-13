@@ -206,13 +206,13 @@ LavaridgeTown_Gym_1F_EventScript_1FE9B5:: @ 81FE9B5
 	end
 
 LavaridgeTown_Gym_1F_Text_1FE9BF: @ 81FE9BF
-	.string "Hey, how’s it going, CHAMPION-\n"
+	.string "Hey, how's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
-	.string "LAVARIDGE’s GYM LEADER FLANNERY\n"
+	.string "LAVARIDGE's GYM LEADER FLANNERY\n"
 	.string "uses FIRE-type POKéMON.\p"
 	.string "Her passion for POKéMON burns stronger\n"
 	.string "and hotter than a volcano.\p"
-	.string "Don’t get too close to her--you’ll burn!\n"
+	.string "Don't get too close to her--you'll burn!\n"
 	.string "Hose her down with water and then\l"
 	.string "go for it!$"
 
@@ -221,20 +221,20 @@ LavaridgeTown_Gym_1F_Text_1FEAB8: @ 81FEAB8
 
 LavaridgeTown_Gym_1F_Text_1FEADE: @ 81FEADE
 	.string "Owowowowow!\n"
-	.string "Yikes, it’s hot!$"
+	.string "Yikes, it's hot!$"
 
 LavaridgeTown_Gym_1F_Text_1FEAFB: @ 81FEAFB
-	.string "I’m blinded by sweat in my eyes…$"
+	.string "I'm blinded by sweat in my eyes…$"
 
 LavaridgeTown_Gym_1F_Text_1FEB1C: @ 81FEB1C
 	.string "Being buried in hot sand promotes\n"
 	.string "circulation.\p"
-	.string "It’s effective for healing pain in\n"
+	.string "It's effective for healing pain in\n"
 	.string "your joints.$"
 
 LavaridgeTown_Gym_1F_Text_1FEB7B: @ 81FEB7B
-	.string "I’m trying to relieve my stress.\n"
-	.string "Don’t come along and stress me out!$"
+	.string "I'm trying to relieve my stress.\n"
+	.string "Don't come along and stress me out!$"
 
 LavaridgeTown_Gym_1F_Text_1FEBC0: @ 81FEBC0
 	.string "I hope FLANNERY flames you good!$"
@@ -246,8 +246,8 @@ LavaridgeTown_Gym_1F_Text_1FEBE1: @ 81FEBE1
 
 LavaridgeTown_Gym_B1F_Text_1FEC31: @ 81FEC31
 	.string "You must be getting tired by now.\n"
-	.string "You’d like to rest in the hot sand,\l"
-	.string "wouldn’t you?\p"
+	.string "You'd like to rest in the hot sand,\l"
+	.string "wouldn't you?\p"
 	.string "But you should know that maintaining\n"
 	.string "your willpower is an important ability\l"
 	.string "for all TRAINERS.$"
@@ -258,7 +258,7 @@ LavaridgeTown_Gym_B1F_Text_1FECE3: @ 81FECE3
 LavaridgeTown_Gym_B1F_Text_1FED02: @ 81FED02
 	.string "Your skill is real…\n"
 	.string "But our LEADER FLANNERY is strong.\p"
-	.string "If you don’t watch yourself, you’ll be\n"
+	.string "If you don't watch yourself, you'll be\n"
 	.string "burned seriously.$"
 
 LavaridgeTown_Gym_1F_Text_1FED72: @ 81FED72
@@ -266,7 +266,7 @@ LavaridgeTown_Gym_1F_Text_1FED72: @ 81FED72
 	.string "392-degree heat?$"
 
 LavaridgeTown_Gym_1F_Text_1FED9E: @ 81FED9E
-	.string "It didn’t burn hotly enough…$"
+	.string "It didn't burn hotly enough…$"
 
 LavaridgeTown_Gym_1F_Text_1FEDBB: @ 81FEDBB
 	.string "The temperature of magma is\n"
@@ -276,21 +276,21 @@ LavaridgeTown_Gym_1F_Text_1FEDBB: @ 81FEDBB
 
 LavaridgeTown_Gym_1F_Text_1FEE22: @ 81FEE22
 	.string "Um…\n"
-	.string "Okay, I’ll battle with you.$"
+	.string "Okay, I'll battle with you.$"
 
 LavaridgeTown_Gym_1F_Text_1FEE42: @ 81FEE42
-	.string "Oh, but you’re too strong.$"
+	.string "Oh, but you're too strong.$"
 
 LavaridgeTown_Gym_1F_Text_1FEE5D: @ 81FEE5D
-	.string "I’m going to be a pretty and strong\n"
+	.string "I'm going to be a pretty and strong\n"
 	.string "TRAINER just like FLANNERY.$"
 
 LavaridgeTown_Gym_B1F_Text_1FEE9D: @ 81FEE9D
 	.string "Come on, get with it!\n"
-	.string "Let’s go before my feelings cool!$"
+	.string "Let's go before my feelings cool!$"
 
 LavaridgeTown_Gym_B1F_Text_1FEED5: @ 81FEED5
-	.string "It’s so hot, and yet my heart is\n"
+	.string "It's so hot, and yet my heart is\n"
 	.string "clutched by ice…$"
 
 LavaridgeTown_Gym_B1F_Text_1FEF07: @ 81FEF07
@@ -303,12 +303,12 @@ LavaridgeTown_Gym_B1F_Text_1FEF60: @ 81FEF60
 	.string "They flare in anticipation of my win!$"
 
 LavaridgeTown_Gym_B1F_Text_1FEFA7: @ 81FEFA7
-	.string "Something didn’t go right.$"
+	.string "Something didn't go right.$"
 
 LavaridgeTown_Gym_B1F_Text_1FEFC2: @ 81FEFC2
 	.string "Well, so what? I say so what?\n"
 	.string "I can walk on hot coals barefoot!\p"
-	.string "…Don’t even think about trying it!$"
+	.string "…Don't even think about trying it!$"
 
 LavaridgeTown_Gym_B1F_Text_1FF025: @ 81FF025
 	.string "As much as I love mountains,\n"
@@ -320,16 +320,16 @@ LavaridgeTown_Gym_B1F_Text_1FF05F: @ 81FF05F
 
 LavaridgeTown_Gym_B1F_Text_1FF09A: @ 81FF09A
 	.string "I stay here because I became a fan\n"
-	.string "of FLANNERY’s power.\p"
+	.string "of FLANNERY's power.\p"
 	.string "Hehehehe.$"
 
 LavaridgeTown_Gym_1F_Text_1FF0DC: @ 81FF0DC
 	.string "Welcome… No, wait.\p"
-	.string "Puny TRAINER, how good to see you’ve\n"
+	.string "Puny TRAINER, how good to see you've\n"
 	.string "made it here!\p"
 	.string "I have been entrusted with the…\n"
 	.string "No, wait.\p"
-	.string "I am FLANNERY, and I’m the GYM\n"
+	.string "I am FLANNERY, and I'm the GYM\n"
 	.string "LEADER here!\p"
 	.string "Uh…\n"
 	.string "Dare not underestimate me, though\l"
@@ -341,12 +341,12 @@ LavaridgeTown_Gym_1F_Text_1FF0DC: @ 81FF0DC
 LavaridgeTown_Gym_1F_Text_1FF233: @ 81FF233
 	.string "Oh…\n"
 	.string "I guess I was trying too hard…\p"
-	.string "I… I’ve only recently become\n"
+	.string "I… I've only recently become\n"
 	.string "a GYM LEADER.\p"
 	.string "I tried too hard to be someone\n"
-	.string "I’m not.\p"
+	.string "I'm not.\p"
 	.string "I have to do things my natural way. If\n"
-	.string "I don’t, my POKéMON will be confused.\p"
+	.string "I don't, my POKéMON will be confused.\p"
 	.string "Thanks for teaching me that.\n"
 	.string "For that, you deserve this.$"
 
@@ -362,7 +362,7 @@ LavaridgeTown_Gym_1F_Text_1FF359: @ 81FF359
 	.string "And, it lets POKéMON use the HM move\n"
 	.string "STRENGTH outside of battle.\p"
 	.string "This is a token of my appreciation.\n"
-	.string "Don’t be shy about taking it!$"
+	.string "Don't be shy about taking it!$"
 
 LavaridgeTown_Gym_1F_Text_1FF45C: @ 81FF45C
 	.string "That TM50 contains OVERHEAT.\p"
@@ -386,16 +386,16 @@ LavaridgeTown_Gym_1F_Text_1FF5A9: @ 81FF5A9
 
 LavaridgeTown_Gym_1F_Text_1FF5C4: @ 81FF5C4
 	.string "LAVARIDGE TOWN POKéMON GYM\p"
-	.string "FLANNERY’S CERTIFIED TRAINERS:\n"
+	.string "FLANNERY'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 LavaridgeTown_Gym_1F_Text_1FF601: @ 81FF601
-	.string "FLANNERY: Losing a battle isn’t going\n"
+	.string "FLANNERY: Losing a battle isn't going\n"
 	.string "to deflate me.\p"
 	.string "I love POKéMON.\n"
 	.string "I love to battle.\l"
 	.string "And… I love this GYM!\p"
-	.string "Let’s exchange superhot moves\n"
+	.string "Let's exchange superhot moves\n"
 	.string "in another battle!$"
 
 LavaridgeTown_Gym_1F_Text_1FF69F: @ 81FF69F
@@ -404,19 +404,19 @@ LavaridgeTown_Gym_1F_Text_1FF69F: @ 81FF69F
 
 LavaridgeTown_Gym_1F_Text_1FF6BF: @ 81FF6BF
 	.string "FLANNERY: I lost the match,\n"
-	.string "but I’m completely satisfied.\p"
-	.string "It’s not often I get to enjoy a battle\n"
+	.string "but I'm completely satisfied.\p"
+	.string "It's not often I get to enjoy a battle\n"
 	.string "this heated.\p"
-	.string "Let’s have another one like this\n"
+	.string "Let's have another one like this\n"
 	.string "again sometime!$"
 
 LavaridgeTown_Gym_1F_Text_1FF75E: @ 81FF75E
-	.string "FLANNERY: Losing a battle isn’t going\n"
+	.string "FLANNERY: Losing a battle isn't going\n"
 	.string "to deflate me.\p"
 	.string "I love POKéMON.\n"
 	.string "I love to battle.\l"
 	.string "And… I love this GYM!\p"
-	.string "Let’s exchange superhot moves\n"
+	.string "Let's exchange superhot moves\n"
 	.string "in another battle!\p"
 	.string "Oh, wait. Do you only have one POKéMON\n"
 	.string "that can battle?\p"

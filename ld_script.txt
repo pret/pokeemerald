@@ -43,7 +43,7 @@ SECTIONS {
     {
         asm/crt0.o(.text);
         src/main.o(.text);
-        src/malloc.o(.text);
+        src/alloc.o(.text);
         src/dma3_manager.o(.text);
         src/gpu_regs.o(.text);
         src/bg.o(.text);
@@ -113,7 +113,9 @@ SECTIONS {
         src/reshow_battle_screen.o(.text);
         src/battle_anim_80A9C70.o(.text);
         src/title_screen.o(.text);
-        asm/field_screen.o(.text);
+        src/field_weather.o(.text);
+        src/field_weather_effect.o(.text);
+        src/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         src/cable_club.o(.text);
         src/trainer_see.o(.text);
@@ -158,7 +160,7 @@ SECTIONS {
         asm/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
-        asm/fire.o(.text);
+        src/fire.o(.text);
         asm/electric.o(.text);
         asm/ice.o(.text);
         src/fight.o(.text);
@@ -167,13 +169,13 @@ SECTIONS {
         asm/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
-        asm/ghost.o(.text);
+        src/ghost.o(.text);
         src/dragon.o(.text);
         asm/dark.o(.text);
         src/ground.o(.text);
         src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
-        asm/battle_intro.o(.text);
+        src/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat.o(.text);
         asm/easy_chat.o(.text);
@@ -212,9 +214,9 @@ SECTIONS {
         src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
-        asm/cable_car.o(.text);
+        src/cable_car.o(.text);
         src/math_util.o(.text);
-        asm/roulette_util.o(.text);
+        src/roulette_util.o(.text);
         src/rom_81520A8.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
@@ -445,7 +447,10 @@ SECTIONS {
         data/battle_anim_80A9C70.o(.rodata);
         src/battle_anim_80A9C70.o(.rodata);
         src/title_screen.o(.rodata);
-        data/field_screen.o(.rodata);
+        data/field_weather.o(.rodata);
+        src/field_weather.o(.rodata);
+        src/field_weather_effect.o(.rodata);
+        src/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
         src/cable_club.o(.rodata);
         src/trainer_see.o(.rodata);
@@ -529,7 +534,7 @@ SECTIONS {
         src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
-        data/cable_car.o(.rodata);
+        src/cable_car.o(.rodata);
         src/save.o(.rodata);
         src/field_effect_helpers.o(.rodata);
         data/field_effect_helpers.o(.rodata);
@@ -538,7 +543,6 @@ SECTIONS {
         data/battle_anim_815A0D4.o(.rodata);
         src/learn_move.o(.rodata);
         src/roamer.o(.rodata);
-        data/battle_tower.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
         data/use_pokeblock.o(.rodata);

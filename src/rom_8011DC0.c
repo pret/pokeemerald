@@ -7,7 +7,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "librfu.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
@@ -32,7 +32,7 @@
 #include "decompress.h"
 #include "start_menu.h"
 #include "data2.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 
 extern void HealPlayerParty(void);
 

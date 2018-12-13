@@ -1031,15 +1031,15 @@ LilycoveCity_ContestLobby_Text_21ADB9: @ 821ADB9
 	.string "Congratulations!\p"
 	.string "I did a painting of your POKéMON to\n"
 	.string "commemorate its victory…\p"
-	.string "Well, your POKéMON’s appeals were\n"
+	.string "Well, your POKéMON's appeals were\n"
 	.string "so fantastic, it spurred me into\l"
 	.string "painting better than I usually do.\l"
 	.string "Look, see?$"
 
 LilycoveCity_ContestLobby_Text_21AE78: @ 821AE78
-	.string "What do you think? I’m confident in\n"
-	.string "what I’ve done, but do you like it?\p"
-	.string "A work of this caliber, it wouldn’t look\n"
+	.string "What do you think? I'm confident in\n"
+	.string "what I've done, but do you like it?\p"
+	.string "A work of this caliber, it wouldn't look\n"
 	.string "out of place in an art museum.\p"
 	.string "Huh? An art museum really is looking\n"
 	.string "for paintings?\p"
@@ -1048,14 +1048,14 @@ LilycoveCity_ContestLobby_Text_21AE78: @ 821AE78
 LilycoveCity_ContestLobby_Text_21AF63: @ 821AF63
 	.string "What, really? Then, sure, I will take\n"
 	.string "this painting there right now.\p"
-	.string "I’ll give it a proper title, too.\p"
-	.string "I hope they’ll like it and consider\n"
+	.string "I'll give it a proper title, too.\p"
+	.string "I hope they'll like it and consider\n"
 	.string "exhibiting this.\p"
 	.string "Please check if they did accept this.\n"
 	.string "Thank you!$"
 
 LilycoveCity_ContestLobby_Text_21B030: @ 821B030
-	.string "Oh, that’s right!\p"
+	.string "Oh, that's right!\p"
 	.string "As a memento of me painting your\n"
 	.string "POKéMON, please take this.$"
 
@@ -1070,15 +1070,15 @@ LilycoveCity_ContestLobby_Text_21B0AD: @ 821B0AD
 	.string "Okay, see you!$"
 
 LilycoveCity_ContestLobby_Text_21B0BC: @ 821B0BC
-	.string "Oh… Then, I guess I’ll just take\n"
+	.string "Oh… Then, I guess I'll just take\n"
 	.string "this home with me…\p"
 	.string "But, you know, I would like to take\n"
 	.string "this to the art museum… Okay?$"
 
 LilycoveCity_ContestLobby_Text_21B132: @ 821B132
-	.string "Oh, fine, that’s the way it is.\n"
+	.string "Oh, fine, that's the way it is.\n"
 	.string "I will hang this in my own house.\p"
-	.string "I’ll just have to try harder next time.\n"
+	.string "I'll just have to try harder next time.\n"
 	.string "Well, be seeing you.$"
 
 LilycoveCity_ContestLobby_Text_21B1B1: @ 821B1B1
@@ -1092,7 +1092,7 @@ LilycoveCity_ContestLobby_Text_21B1B1: @ 821B1B1
 LilycoveCity_ContestLobby_Text_21B24D: @ 821B24D
 	.string "You can see a whole variety of\n"
 	.string "POKéMON here.\p"
-	.string "That’s why I make this place a regular\n"
+	.string "That's why I make this place a regular\n"
 	.string "part of my daily stroll.$"
 
 LilycoveCity_ContestLobby_Text_21B2BA: @ 821B2BA

@@ -19,6 +19,7 @@
 #include "task.h"
 #include "window.h"
 #include "list_menu.h"
+#include "overworld.h"
 
 #define EGG_MOVES_ARRAY_COUNT           10
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    50
@@ -39,12 +40,8 @@ extern const u8 gDaycareText_PlayOther[];
 
 extern u8 GetCursorSelectionMonId(void);
 extern u16 ItemIdToBattleMoveId(u16);
-extern s32 ListMenuHandleInputGetItemId(u8);
-extern void DestroyListMenuTask(u8, u16*, u16*);
 extern void sub_819746C(u8, bool8);
-extern void NewMenuHelpers_DrawStdWindowFrame(u8, bool8);
 extern void sub_81B9328(void);
-extern void CB2_ReturnToField(void);
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
@@ -535,7 +532,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     s32 i, j;
     u8 temp[NUM_STATS];
 
-    ivs[selectedIv] = 0xff;
+    ivs[selectedIv] = 0xFF;
     for (i = 0; i < NUM_STATS; i++)
     {
         temp[i] = ivs[i];
@@ -544,7 +541,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     j = 0;
     for (i = 0; i < NUM_STATS; i++)
     {
-        if (temp[i] != 0xff)
+        if (temp[i] != 0xFF)
             ivs[j++] = temp[i];
     }
 }
@@ -684,7 +681,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == sHatchedEggEggMoves[j])
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xFFFF)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                     break;
                 }
@@ -703,7 +700,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             {
                 if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xffff)
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == 0xFFFF)
                         DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
                 }
             }
@@ -728,7 +725,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         {
             if (sHatchedEggLevelUpMoves[j] != MOVE_NONE && sHatchedEggFinalMoves[i] == sHatchedEggLevelUpMoves[j])
             {
-                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == 0xffff)
+                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == 0xFFFF)
                     DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFinalMoves[i]);
                 break;
             }

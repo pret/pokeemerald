@@ -9,7 +9,7 @@
 #include "task.h"
 #include "battle_tower.h"
 #include "party_menu.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "script.h"
 #include "battle_setup.h"
@@ -49,8 +49,6 @@ struct PikeWildMon
     u8 levelDelta;
     u16 moves[4];
 };
-
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
 // IWRAM bss
 static IWRAM_DATA u8 sRoomType;

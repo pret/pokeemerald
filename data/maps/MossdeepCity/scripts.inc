@@ -312,19 +312,19 @@ MossdeepCity_Movement_1E4CE2: @ 81E4CE2
 	step_end
 
 MossdeepCity_Text_1E4CED: @ 81E4CED
-	.string "I got this from STEVEN, but I don’t\n"
-	.string "know what it’s good for.\p"
-	.string "I think it’s called KING’S ROCK.\n"
+	.string "I got this from STEVEN, but I don't\n"
+	.string "know what it's good for.\p"
+	.string "I think it's called KING'S ROCK.\n"
 	.string "Do you want it?$"
 
 MossdeepCity_Text_1E4D5B: @ 81E4D5B
 	.string "Why would you want it?\n"
-	.string "You’re weird.\p"
+	.string "You're weird.\p"
 	.string "You can keep it, but keep it a secret\n"
 	.string "from STEVEN.$"
 
 MossdeepCity_Text_1E4DB3: @ 81E4DB3
-	.string "STEVEN’s house is right over there!$"
+	.string "STEVEN's house is right over there!$"
 
 MossdeepCity_Text_1E4DD7: @ 81E4DD7
 	.string "Yeah, you think so, too! What are you\n"
@@ -333,19 +333,19 @@ MossdeepCity_Text_1E4DD7: @ 81E4DD7
 MossdeepCity_Text_1E4E22: @ 81E4E22
 	.string "Around MOSSDEEP, you can see wild\n"
 	.string "WAILMER.\p"
-	.string "It’s called, uh…\n"
+	.string "It's called, uh…\n"
 	.string "What was it now…\p"
 	.string "WAI, WAI, WAI…\p"
 	.string "WAILMER watching!$"
 
 MossdeepCity_Text_1E4E90: @ 81E4E90
-	.string "The island’s SPACE CENTER has been\n"
+	.string "The island's SPACE CENTER has been\n"
 	.string "launching huge rockets.\p"
-	.string "There’s been some kind of an uproar\n"
+	.string "There's been some kind of an uproar\n"
 	.string "over a letter they received recently.$"
 
 MossdeepCity_Text_1E4F15: @ 81E4F15
-	.string "The island’s SPACE CENTER has been\n"
+	.string "The island's SPACE CENTER has been\n"
 	.string "launching huge rockets.$"
 
 MossdeepCity_Text_1E4F50: @ 81E4F50
@@ -353,19 +353,19 @@ MossdeepCity_Text_1E4F50: @ 81E4F50
 	.string "TEAM AQUA set up shop in LILYCOVE.\p"
 	.string "I also heard that someone came along\n"
 	.string "and wiped the floor with them!\p"
-	.string "But MOSSDEEP here’s been targeted\n"
+	.string "But MOSSDEEP here's been targeted\n"
 	.string "by that TEAM MAGMA.\p"
-	.string "If you want to know what they’re up to,\n"
+	.string "If you want to know what they're up to,\n"
 	.string "go visit the SPACE CENTER.$"
 
 MossdeepCity_Text_1E5051: @ 81E5051
-	.string "I’m a SAILOR, so the sea’s obviously\n"
+	.string "I'm a SAILOR, so the sea's obviously\n"
 	.string "more important to me.\p"
 	.string "But you know? When I get back on land\n"
 	.string "after a long voyage, I do feel relief!$"
 
 MossdeepCity_Text_1E50D9: @ 81E50D9
-	.string "Wouldn’t it be nice?\p"
+	.string "Wouldn't it be nice?\p"
 	.string "If the whole world was covered in\n"
 	.string "plants and flowers like this island?$"
 
@@ -382,8 +382,8 @@ MossdeepCity_Text_1E5213: @ 81E5213
 	.string "A voyage on a ship is fine.\p"
 	.string "But crossing the sea with POKéMON\n"
 	.string "using SURF…\p"
-	.string "Now that’s an exhilarating trip!\n"
-	.string "Wouldn’t you agree, youngster?$"
+	.string "Now that's an exhilarating trip!\n"
+	.string "Wouldn't you agree, youngster?$"
 
 MossdeepCity_Text_1E529D: @ 81E529D
 	.string "This rock has a special meaning to\n"
@@ -393,10 +393,10 @@ MossdeepCity_Text_1E529D: @ 81E529D
 	.string "When you make a wish, what do you use?\n"
 	.string "Do you wish upon a star?\p"
 	.string "I use a wish tag to make it happen.\n"
-	.string "That’s what I do.$"
+	.string "That's what I do.$"
 
 MossdeepCity_Text_1E5396: @ 81E5396
-	.string "It’s a white rock.$"
+	.string "It's a white rock.$"
 
 MossdeepCity_Text_1E53A9: @ 81E53A9
 	.string "MOSSDEEP CITY POKéMON GYM\n"
@@ -413,15 +413,15 @@ MossdeepCity_Text_1E541F: @ 81E541F
 
 MossdeepCity_Text_1E5453: @ 81E5453
 	.string "SCOTT: {PLAYER}{KUN}, feeling good?\n"
-	.string "I’m doing great!\p"
-	.string "I’d heard MOSSDEEP’s GYM LEADER is\n"
+	.string "I'm doing great!\p"
+	.string "I'd heard MOSSDEEP's GYM LEADER is\n"
 	.string "pretty strong, so I decided to come\l"
 	.string "take a look-see for myself.\p"
-	.string "But there’s something wrong about\n"
+	.string "But there's something wrong about\n"
 	.string "this town.\p"
 	.string "People are going on about a warning\n"
 	.string "letter and the SPACE CENTER…\p"
-	.string "I don’t think it concerns me in any\n"
+	.string "I don't think it concerns me in any\n"
 	.string "way, though.$"
 
 MossdeepCity_Text_1E5581: @ 81E5581

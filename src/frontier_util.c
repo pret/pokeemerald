@@ -24,7 +24,7 @@
 #include "data2.h"
 #include "record_mixing.h"
 #include "strings.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "save.h"
 #include "load_save.h"
 #include "battle_dome.h"
@@ -47,8 +47,6 @@ struct FrontierBrainMon
     u8 evs[NUM_STATS];
     u16 moves[4];
 };
-
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
 extern void sub_81B8558(void);
 

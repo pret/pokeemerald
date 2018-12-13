@@ -17,7 +17,7 @@ SlateportCity_House2_Text_20D9C1: @ 820D9C1
 	.string "do with the stat gains of POKéMON.$"
 
 SlateportCity_House2_Text_20DA59: @ 820DA59
-	.string "You’re a TRAINER, aren’t you?\p"
+	.string "You're a TRAINER, aren't you?\p"
 	.string "Since you came to SLATEPORT CITY,\n"
 	.string "you must be going to the BATTLE TENT.$"
 

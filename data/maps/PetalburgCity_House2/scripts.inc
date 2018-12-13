@@ -10,7 +10,7 @@ PetalburgCity_House2_EventScript_2078FC:: @ 82078FC
 	end
 
 PetalburgCity_House2_Text_207905: @ 8207905
-	.string "NORMAN became our town’s new\n"
+	.string "NORMAN became our town's new\n"
 	.string "GYM LEADER.\p"
 	.string "I think he called his family over from\n"
 	.string "somewhere far away.$"

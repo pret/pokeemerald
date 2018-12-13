@@ -86,7 +86,7 @@ gEasyChatWord_Wild:: @ 8599D98
 	.string "WILD$"
 
 gEasyChatWord_Thats:: @ 8599D9D
-	.string "THAT’S$"
+	.string "THAT'S$"
 
 gEasyChatWord_Just:: @ 8599DA4
 	.string "JUST$"

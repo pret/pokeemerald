@@ -14,12 +14,12 @@ BattleFrontier_Lounge4_EventScript_26359F:: @ 826359F
 	end
 
 BattleFrontier_Lounge4_Text_2635A8: @ 82635A8
-	.string "I wonder if they’ll be airing interviews\n"
+	.string "I wonder if they'll be airing interviews\n"
 	.string "with tough TRAINERS today?$"
 
 BattleFrontier_Lounge4_Text_2635EC: @ 82635EC
 	.string "If I opened a restaurant here,\n"
-	.string "it’d make money for sure.$"
+	.string "it'd make money for sure.$"
 
 BattleFrontier_Lounge4_Text_263625: @ 8263625
 	.string "Whew…\p"

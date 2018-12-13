@@ -296,21 +296,21 @@ LittlerootTown_BrendansHouse_1F_Movement_1F7A16: @ 81F7A16
 
 LittlerootTown_BrendansHouse_1F_Text_1F7A1C: @ 81F7A1C
 	.string "MOM: See, {PLAYER}?\n"
-	.string "Isn’t it nice in here, too?$"
+	.string "Isn't it nice in here, too?$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7A46: @ 81F7A46
-	.string "The mover’s POKéMON do all the work\n"
+	.string "The mover's POKéMON do all the work\n"
 	.string "of moving us in and cleaning up after.\l"
 	.string "This is so convenient!\p"
 	.string "{PLAYER}, your room is upstairs.\n"
 	.string "Go check it out, dear!\p"
 	.string "DAD bought you a new clock to mark\n"
 	.string "our move here.\l"
-	.string "Don’t forget to set it!$"
+	.string "Don't forget to set it!$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7B24: @ 81F7B24
 	.string "MOM: Well, {PLAYER}?\p"
-	.string "Aren’t you interested in seeing your\n"
+	.string "Aren't you interested in seeing your\n"
 	.string "very own room?$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7B67: @ 81F7B67
@@ -324,19 +324,19 @@ LittlerootTown_BrendansHouse_1F_Text_1F7B96: @ 81F7B96
 
 LittlerootTown_BrendansHouse_1F_Text_1F7BBC: @ 81F7BBC
 LittlerootTown_MaysHouse_1F_Text_1F7BBC: @ 81F7BBC
-	.string "MOM: Look! It’s PETALBURG GYM!\n"
+	.string "MOM: Look! It's PETALBURG GYM!\n"
 	.string "Maybe DAD will be on!$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7BF1: @ 81F7BF1
 LittlerootTown_MaysHouse_1F_Text_1F7BF1: @ 81F7BF1
-	.string "MOM: Oh… It’s over.\p"
+	.string "MOM: Oh… It's over.\p"
 	.string "I think DAD was on, but we missed him.\n"
 	.string "Too bad.$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7C35: @ 81F7C35
 LittlerootTown_MaysHouse_1F_Text_1F7C35: @ 81F7C35
 	.string "Oh, yes.\n"
-	.string "One of DAD’s friends lives in town.\p"
+	.string "One of DAD's friends lives in town.\p"
 	.string "PROF. BIRCH is his name.\p"
 	.string "He lives right next door, so you should\n"
 	.string "go over and introduce yourself.$"
@@ -358,10 +358,10 @@ LittlerootTown_BrendansHouse_1F_Text_1F7D5C: @ 81F7D5C
 
 LittlerootTown_BrendansHouse_1F_Text_1F7D73: @ 81F7D73
 	.string "MOM: Oh? Did DAD give you that BADGE?\p"
-	.string "Then here’s something from your MOM!$"
+	.string "Then here's something from your MOM!$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7DBE: @ 81F7DBE
-	.string "Don’t push yourself too hard, dear.\n"
+	.string "Don't push yourself too hard, dear.\n"
 	.string "You can always come home.\p"
 	.string "Go for it, honey!$"
 
@@ -393,7 +393,7 @@ LittlerootTown_BrendansHouse_1F_Text_1F7F0F: @ 81F7F0F
 	.string "Better get going!$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F7F66: @ 81F7F66
-	.string "It’s the instruction booklet for the\n"
+	.string "It's the instruction booklet for the\n"
 	.string "RUNNING SHOES.\p"
 	.string "“Press the B Button to run while\n"
 	.string "wearing your RUNNING SHOES.\p"
@@ -402,11 +402,11 @@ LittlerootTown_BrendansHouse_1F_Text_1F7F66: @ 81F7F66
 
 LittlerootTown_BrendansHouse_1F_Text_1F800E: @ 81F800E
 	.string "DAD: Hm?\p"
-	.string "Hey, it’s {PLAYER}!\p"
-	.string "It’s been a while since I saw you,\n"
+	.string "Hey, it's {PLAYER}!\p"
+	.string "It's been a while since I saw you,\n"
 	.string "but you look…stronger, somehow.\p"
-	.string "That’s the impression I get.\n"
-	.string "But your old man hasn’t given up yet!\p"
+	.string "That's the impression I get.\n"
+	.string "But your old man hasn't given up yet!\p"
 	.string "Oh, yes, I have something for you.\n"
 	.string "This came to you from someone named\l"
 	.string "MR. BRINEY.$"
@@ -417,9 +417,9 @@ LittlerootTown_BrendansHouse_1F_Text_1F80FE: @ 81F80FE
 	.string "SLATEPORT and LILYCOVE.$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F815B: @ 81F815B
-	.string "I’d better get back to PETALBURG GYM.\p"
+	.string "I'd better get back to PETALBURG GYM.\p"
 	.string "MOM, thanks for looking after the house\n"
-	.string "while I’m away.$"
+	.string "while I'm away.$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F81B9: @ 81F81B9
 	.string "MOM: That DAD of yours…\p"
@@ -447,5 +447,5 @@ LittlerootTown_BrendansHouse_1F_Text_1F8351: @ 81F8351
 	.string "that POKéMON was?$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F83A1: @ 81F83A1
-	.string "MOM: Well, isn’t that something!\n"
+	.string "MOM: Well, isn't that something!\n"
 	.string "There are still unknown POKéMON.$"

@@ -49,10 +49,10 @@ gContestEffect0FhDescription:: @ 827CE2C
 	.string "Startles all POKéMON that\nhave done their appeals.$"
 
 gContestEffect10hDescription:: @ 827CE5F
-	.string "Shifts the JUDGE’s\nattention from others.$"
+	.string "Shifts the JUDGE's\nattention from others.$"
 
 gContestEffect11hDescription:: @ 827CE89
-	.string "Startles the POKéMON that\nhas the JUDGE’s attention.$"
+	.string "Startles the POKéMON that\nhas the JUDGE's attention.$"
 
 gContestEffect12hDescription:: @ 827CEBE
 	.string "Jams the others, and misses\none turn of appeals.$"
@@ -103,10 +103,10 @@ gContestEffect21hDescription:: @ 827D16E
 	.string "The appeal works better\nthe later it is performed.$"
 
 gContestEffect22hDescription:: @ 827D1A1
-	.string "The appeal’s quality varies\ndepending on its timing.$"
+	.string "The appeal's quality varies\ndepending on its timing.$"
 
 gContestEffect23hDescription:: @ 827D1D6
-	.string "Works well if it’s the same\ntype as the one before.$"
+	.string "Works well if it's the same\ntype as the one before.$"
 
 gContestEffect24hDescription:: @ 827D20A
 	.string "Works well if different in\ntype than the one before.$"
@@ -115,10 +115,10 @@ gContestEffect25hDescription:: @ 827D23F
 	.string "Affected by how well the\nappeal in front goes.$"
 
 gContestEffect26hDescription:: @ 827D26E
-	.string "Ups the user’s condition.\nHelps prevent nervousness.$"
+	.string "Ups the user's condition.\nHelps prevent nervousness.$"
 
 gContestEffect27hDescription:: @ 827D2A3
-	.string "The appeal works well if the\nuser’s condition is good.$"
+	.string "The appeal works well if the\nuser's condition is good.$"
 
 gContestEffect28hDescription:: @ 827D2DA
 	.string "The next appeal can be\nmade earlier next turn.$"
@@ -127,7 +127,7 @@ gContestEffect29hDescription:: @ 827D309
 	.string "The next appeal can be\nmade later next turn.$"
 
 gContestEffect2AhDescription:: @ 827D336
-	.string "Makes the next turn’s order\nmore easily scrambled.$"
+	.string "Makes the next turn's order\nmore easily scrambled.$"
 
 gContestEffect2BhDescription:: @ 827D369
 	.string "Scrambles the order of\nappeals on the next turn.$"
@@ -208,7 +208,7 @@ gText_0827D507:: @ 827D507
 
 gText_0827D531:: @ 827D531
 	.string "Appeal no. {STR_VAR_1}!\n"
-	.string "But it can’t participate!$"
+	.string "But it can't participate!$"
 
 gText_0827D55A:: @ 827D55A
 	.string "{STR_VAR_1} appealed with\n"
@@ -219,7 +219,7 @@ gText_0827D56F:: @ 827D56F
 	.string "the others.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827D597:: @ 827D597
-	.string "We’re all out of\n"
+	.string "We're all out of\n"
 	.string "Appeal Time!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827D5C1:: @ 827D5C1
@@ -228,7 +228,7 @@ gText_0827D5C1:: @ 827D5C1
 
 gText_0827D5DC:: @ 827D5DC
 	.string "It followed another\n"
-	.string "POKéMON’s lead.$"
+	.string "POKéMON's lead.$"
 
 gText_0827D600:: @ 827D600
 	.string "But it messed up.$"
@@ -246,7 +246,7 @@ gText_0827D654:: @ 827D654
 	.string "past mistakes.$"
 
 gText_0827D67E:: @ 827D67E
-	.string "It can’t make any more\n"
+	.string "It can't make any more\n"
 	.string "moves.$"
 
 gText_0827D69C:: @ 827D69C
@@ -273,7 +273,7 @@ gText_0827D743:: @ 827D743
 	.string "stand out at all…{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D764:: @ 827D764
-	.string "{STR_VAR_1} didn’t stand\n"
+	.string "{STR_VAR_1} didn't stand\n"
 	.string "out very much…{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D785:: @ 827D785
@@ -289,39 +289,39 @@ gText_0827D7C8:: @ 827D7C8
 	.string "total attention.{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D7E8:: @ 827D7E8
-	.string "{STR_VAR_1} hasn’t made\n"
+	.string "{STR_VAR_1} hasn't made\n"
 	.string "its appeal.{PAUSE_UNTIL_PRESS}$"
 
 gText_0827D805:: @ 827D805
 	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}’s appeal next.$"
+	.string "{STR_VAR_1}'s appeal next.$"
 
 gText_0827D830:: @ 827D830
 	.string "$"
 
 gText_0827D831:: @ 827D831
-	.string "The JUDGE ’s views on\n"
+	.string "The JUDGE 's views on\n"
 	.string "{STR_VAR_1} held firm.$"
 
 gText_0827D855:: @ 827D855
-	.string "{STR_VAR_1}’s {STR_VAR_3}\n"
+	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
 	.string "changed perceptions.$"
 
 gText_0827D872:: @ 827D872
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "effect wore off.$"
 
 gText_0827D88F:: @ 827D88F
-	.string "The special appeal’s\n"
+	.string "The special appeal's\n"
 	.string "effect wore off.$"
 
 gText_0827D8B5:: @ 827D8B5
-	.string "Everyone’s appeals were\n"
+	.string "Everyone's appeals were\n"
 	.string "made to look the same.$"
 
 gText_0827D8E4:: @ 827D8E4
 	.string "It cheapened\n"
-	.string "{STR_VAR_2}’s appeal.$"
+	.string "{STR_VAR_2}'s appeal.$"
 
 gText_0827D8FE:: @ 827D8FE
 	.string "It cheapened the appeal\n"
@@ -333,7 +333,7 @@ gText_0827D926:: @ 827D926
 
 gText_0827D947:: @ 827D947
 	.string "It cheapened\n"
-	.string "{STR_VAR_2}’s appeal.$"
+	.string "{STR_VAR_2}'s appeal.$"
 
 gText_0827D961:: @ 827D961
 	.string "It severely cheapened\n"
@@ -341,14 +341,14 @@ gText_0827D961:: @ 827D961
 
 gText_0827D986:: @ 827D986
 	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}’s appeal next.$"
+	.string "{STR_VAR_1}'s appeal next.$"
 
 gText_0827D9B1:: @ 827D9B1
 	.string "It cheapened the appeal\n"
 	.string "of those ahead.$"
 
 gText_0827D9D9:: @ 827D9D9
-	.string "It cheapened the JUDGE’s\n"
+	.string "It cheapened the JUDGE's\n"
 	.string "favorite appeal.$"
 
 gText_0827DA03:: @ 827DA03
@@ -360,7 +360,7 @@ gText_0827DA31:: @ 827DA31
 	.string "for being jammed.$"
 
 gText_0827DA5B:: @ 827DA5B
-	.string "It can’t participate in\n"
+	.string "It can't participate in\n"
 	.string "appeals any more.$"
 
 gText_0827DA85:: @ 827DA85
@@ -384,7 +384,7 @@ gText_0827DB1F:: @ 827DB1F
 	.string "even less noticeable.$"
 
 gText_0827DB4E:: @ 827DB4E
-	.string "Everyone’s appeals were\n"
+	.string "Everyone's appeals were\n"
 	.string "made the same.$"
 
 gText_827DB75:: @ 827DB75
@@ -392,7 +392,7 @@ gText_827DB75:: @ 827DB75
 	.string "of the other POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DBB0:: @ 827DBB0
-	.string "{STR_VAR_1} can’t make an\n"
+	.string "{STR_VAR_1} can't make an\n"
 	.string "appeal after this.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DBE0:: @ 827DBE0
@@ -460,7 +460,7 @@ gText_827DEA5:: @ 827DEA5
 	.string "POKéMON before it.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DED9:: @ 827DED9
-	.string "{STR_VAR_1}’s appeal did\n"
+	.string "{STR_VAR_1}'s appeal did\n"
 	.string "not go well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF02:: @ 827DF02
@@ -468,55 +468,55 @@ gText_827DF02:: @ 827DF02
 	.string "preceding POKéMON.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF3A:: @ 827DF3A
-	.string "{STR_VAR_1}’s appeal did\n"
+	.string "{STR_VAR_1}'s appeal did\n"
 	.string "not go well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF63:: @ 827DF63
-	.string "{STR_VAR_1}’s appeal did\n"
+	.string "{STR_VAR_1}'s appeal did\n"
 	.string "not go well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DF8C:: @ 827DF8C
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went slightly well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DFB8:: @ 827DFB8
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went pretty well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827DFE2:: @ 827DFE2
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went excellently.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E00C:: @ 827E00C
-	.string "{STR_VAR_1}’s appeal was\n"
+	.string "{STR_VAR_1}'s appeal was\n"
 	.string "a dud.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E02F:: @ 827E02F
-	.string "{STR_VAR_1}’s appeal did\n"
+	.string "{STR_VAR_1}'s appeal did\n"
 	.string "not work very well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E05F:: @ 827E05F
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went slightly well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E08B:: @ 827E08B
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went pretty well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E0B5:: @ 827E0B5
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went very well.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E0DD:: @ 827E0DD
-	.string "{STR_VAR_1}’s appeal\n"
+	.string "{STR_VAR_1}'s appeal\n"
 	.string "went excellently.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E107:: @ 827E107
-	.string "It’s the same type as the\n"
+	.string "It's the same type as the\n"
 	.string "POKéMON before--good!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E143:: @ 827E143
-	.string "It’s not the same type as\n"
+	.string "It's not the same type as\n"
 	.string "the one before--good!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E17F:: @ 827E17F
@@ -524,15 +524,15 @@ gText_827E17F:: @ 827E17F
 	.string "than the POKéMON before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E1BB:: @ 827E1BB
-	.string "It didn’t do as well as the\n"
+	.string "It didn't do as well as the\n"
 	.string "POKéMON before.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E1F3:: @ 827E1F3
-	.string "{STR_VAR_1}’s condition\n"
+	.string "{STR_VAR_1}'s condition\n"
 	.string "rose above usual.{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E220:: @ 827E220
-	.string "{STR_VAR_1}’s hot status\n"
+	.string "{STR_VAR_1}'s hot status\n"
 	.string "made it a great appeal!{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 gText_827E254:: @ 827E254
@@ -572,7 +572,7 @@ gText_0827E3EB:: @ 827E3EB
 	.string "avoid seeing it.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E416:: @ 827E416
-	.string "{STR_VAR_1} isn’t fazed\n"
+	.string "{STR_VAR_1} isn't fazed\n"
 	.string "by that sort of thing.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E448:: @ 827E448
@@ -592,11 +592,11 @@ gText_0827E4D5:: @ 827E4D5
 	.string "out of distraction.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E504:: @ 827E504
-	.string "{STR_VAR_1} couldn’t help\n"
+	.string "{STR_VAR_1} couldn't help\n"
 	.string "uttering a cry.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E531:: @ 827E531
-	.string "{STR_VAR_1} couldn’t help\n"
+	.string "{STR_VAR_1} couldn't help\n"
 	.string "leaping up.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E55A:: @ 827E55A
@@ -622,7 +622,7 @@ gText_0827E638:: @ 827E638
 	.string "But it was ignored…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E658:: @ 827E658
-	.string "But it couldn’t improve\n"
+	.string "But it couldn't improve\n"
 	.string "its condition…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E68B:: @ 827E68B
@@ -638,23 +638,23 @@ gText_0827E6E3:: @ 827E6E3
 	.string "by repeating an appeal.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E717:: @ 827E717
-	.string "{STR_VAR_1}’s {STR_VAR_3}\n"
+	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
 	.string "went over great.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E73C:: @ 827E73C
-	.string "{STR_VAR_1}’s {STR_VAR_3}\n"
-	.string "didn’t go over well here…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
+	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
+	.string "didn't go over well here…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E76A:: @ 827E76A
-	.string "{STR_VAR_1}’s {STR_VAR_3}\n"
+	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
 	.string "got the crowd going.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E793:: @ 827E793
-	.string "{STR_VAR_1} can’t appeal\n"
+	.string "{STR_VAR_1} can't appeal\n"
 	.string "next turn…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E7BA:: @ 827E7BA
-	.string "It attracted the crowd’s\n"
+	.string "It attracted the crowd's\n"
 	.string "attention.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E7EA:: @ 827E7EA
@@ -662,7 +662,7 @@ gText_0827E7EA:: @ 827E7EA
 	.string "watch {STR_VAR_3}.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E817:: @ 827E817
-	.string "{STR_VAR_1}’s\n"
+	.string "{STR_VAR_1}'s\n"
 	.string "{STR_VAR_2} is ignored.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 gText_0827E837:: @ 827E837

@@ -4,20 +4,20 @@ gUnknown_082A5C9C:: @ 82A5C9C
 	.string "POKéDEX is coming along?$"
 
 Route101_Text_2A5CEB: @ 82A5CEB
-	.string "Hm? Oh, you haven’t caught enough\n"
+	.string "Hm? Oh, you haven't caught enough\n"
 	.string "POKéMON to make it worthwhile.$"
 
 gUnknown_082A5D2C:: @ 82A5D2C
 	.string "Hmhm…\p"
-	.string "So, you’ve seen {STR_VAR_1} POKéMON,\n"
-	.string "and you’ve caught {STR_VAR_2} POKéMON…$"
+	.string "So, you've seen {STR_VAR_1} POKéMON,\n"
+	.string "and you've caught {STR_VAR_2} POKéMON…$"
 
 gBirchDexRatingText_LessThan10:: @ 82A5D6C
 	.string "Go into grassy areas more and look\n"
 	.string "for POKéMON more carefully.$"
 
 gBirchDexRatingText_LessThan20:: @ 82A5DAB
-	.string "I guess you’re getting the hang\n"
+	.string "I guess you're getting the hang\n"
 	.string "of it. But, it gets harder from here.$"
 
 gBirchDexRatingText_LessThan30:: @ 82A5DF1
@@ -45,10 +45,10 @@ gBirchDexRatingText_LessThan70:: @ 82A5EF4
 gBirchDexRatingText_LessThan80:: @ 82A5F39
 	.string "This is going to be a fantastic\n"
 	.string "POKéDEX.\l"
-	.string "That’s the feeling I’m getting.$"
+	.string "That's the feeling I'm getting.$"
 
 gBirchDexRatingText_LessThan90:: @ 82A5F82
-	.string "You’ve collected this many…\n"
+	.string "You've collected this many…\n"
 	.string "Your talent is remarkable!$"
 
 gBirchDexRatingText_LessThan100:: @ 82A5FB9
@@ -57,7 +57,7 @@ gBirchDexRatingText_LessThan100:: @ 82A5FB9
 	.string "can only be caught there.$"
 
 gBirchDexRatingText_LessThan110:: @ 82A6018
-	.string "You’ve finally reached\n"
+	.string "You've finally reached\n"
 	.string "the 100-kind mark.\p"
 	.string "This is an impressive POKéDEX!$"
 
@@ -70,7 +70,7 @@ gBirchDexRatingText_LessThan130:: @ 82A609C
 	.string "by trading with others.$"
 
 gBirchDexRatingText_LessThan140:: @ 82A60D5
-	.string "I’ve heard of POKéMON that evolve\n"
+	.string "I've heard of POKéMON that evolve\n"
 	.string "when they come to fully love their\l"
 	.string "TRAINERS.$"
 
@@ -82,7 +82,7 @@ gBirchDexRatingText_LessThan150:: @ 82A6124
 gBirchDexRatingText_LessThan160:: @ 82A616F
 	.string "On occasion, some POKéMON appear\n"
 	.string "in large numbers like outbreaks.\p"
-	.string "Don’t miss opportunities like\n"
+	.string "Don't miss opportunities like\n"
 	.string "those.$"
 
 gBirchDexRatingText_LessThan170:: @ 82A61D6
@@ -97,10 +97,10 @@ gBirchDexRatingText_LessThan180:: @ 82A623A
 
 gBirchDexRatingText_LessThan190:: @ 82A6287
 	.string "With a POKéDEX this complete,\n"
-	.string "you’re a real professional at this!$"
+	.string "you're a real professional at this!$"
 
 gBirchDexRatingText_LessThan200:: @ 82A62C9
-	.string "You’re very close to completing\n"
+	.string "You're very close to completing\n"
 	.string "this POKéDEX.\l"
 	.string "I can feel it in my bones!$"
 
@@ -111,5 +111,5 @@ gBirchDexRatingText_DexCompleted:: @ 82A6312
 gUnknown_082A633D:: @ 82A633D
 	.string "Hmhm…\n"
 	.string "On a nationwide basis…\p"
-	.string "You’ve seen {STR_VAR_1} POKéMON,\n"
-	.string "and you’ve caught {STR_VAR_2} POKéMON…$"
+	.string "You've seen {STR_VAR_1} POKéMON,\n"
+	.string "and you've caught {STR_VAR_2} POKéMON…$"

@@ -4,18 +4,17 @@
 #include "battle_setup.h"
 #include "berry.h"
 #include "bg.h"
-// #include "cable_club.h"
+#include "cable_club.h"
 #include "clock.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
-#include "field_fadetransition.h"
 #include "event_object_movement.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
-// #include "field_special_scene.h"
+#include "field_special_scene.h"
 #include "field_specials.h"
 #include "field_tasks.h"
 #include "field_weather.h"
@@ -27,7 +26,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -38,7 +37,7 @@
 #include "play_time.h"
 #include "random.h"
 #include "roamer.h"
-// #include "rotating_gate.h"
+#include "rotating_gate.h"
 #include "safari_zone.h"
 #include "save.h"
 #include "save_location.h"
@@ -129,7 +128,7 @@ extern void sub_80A0A38(void);
 extern void trainer_hill_map_load_related(void);
 extern void sub_8087D74(void);
 extern void battle_pyramid_map_load_related(u8);
-extern void sub_80B00E8(u8);
+extern void WriteFlashScanlineEffectBuffer(u8);
 extern void sub_80E9238(u8);
 extern void sub_81AA2F8(void);
 extern void sub_8195E10(void);
@@ -148,7 +147,6 @@ extern void ResetAllPicSprites(void);
 extern void FieldEffectActiveListClear(void);
 extern void SetUpFieldTasks(void);
 extern void sub_81BE6B8(void);
-extern void sub_80AAFA4(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
@@ -296,15 +294,51 @@ static const u8 sUnusedData[] =
 
 const struct UCoords32 gDirectionToVectors[] =
 {
-    { 0,  0}, // DIR_NONE
-    { 0,  1}, // DIR_SOUTH
-    { 0, -1}, // DIR_NORTH
-    {-1,  0}, // DIR_WEST
-    { 1,  0}, // DIR_EAST
-    {-1,  1}, // DIR_SOUTHWEST
-    { 1,  1}, // DIR_SOUTHEAST
-    {-1, -1}, // DIR_NORTHWEST
-    { 1, -1}, // DIR_NORTHEAST
+    [DIR_NONE] =
+    {
+        .x =  0,
+        .y =  0,
+    },
+    [DIR_SOUTH] =
+    {
+        .x =  0,
+        .y =  1,
+    },
+    [DIR_NORTH] =
+    {
+        .x =  0,
+        .y = -1,
+    },
+    [DIR_WEST] =
+    {
+        .x = -1,
+        .y =  0,
+    },
+    [DIR_EAST] =
+    {
+        .x =  1,
+        .y =  0,
+    },
+    [DIR_SOUTHWEST] =
+    {
+        .x = -1,
+        .y =  1,
+    },
+    [DIR_SOUTHEAST] =
+    {
+        .x =  1,
+        .y =  1,
+    },
+    [DIR_NORTHWEST] =
+    {
+        .x = -1,
+        .y = -1,
+    },
+    [DIR_NORTHEAST] =
+    {
+        .x =  1,
+        .y = -1,
+    },
 };
 
 static const struct BgTemplate gUnknown_08339DAC[] =
@@ -1241,7 +1275,7 @@ u8 GetMapMusicFadeoutSpeed(void)
         return 4;
 }
 
-void music_something(void)
+void TryFadeOutOldMapMusic(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
     u16 warpMusic = GetWarpDestinationMusic();
@@ -1819,7 +1853,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
     }
     else if ((flashLevel = Overworld_GetFlashLevel()))
     {
-        sub_80B00E8(flashLevel);
+        WriteFlashScanlineEffectBuffer(flashLevel);
         ScanlineEffect_SetParams(sFlashEffectParams);
     }
 }
@@ -2160,7 +2194,7 @@ static void sub_8086988(u32 a1)
         InitEventObjectPalettes(1);
 
     FieldEffectActiveListClear();
-    sub_80AAFA4();
+    StartWeather();
     sub_80AEE84();
     if (!a1)
         SetUpFieldTasks();

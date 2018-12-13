@@ -440,7 +440,7 @@ BattleFrontier_BattleArenaLobby_Text_25624C: @ 825624C
 	.string "three turns, it goes to judging.\p"
 	.string "If you wish to interrupt your challenge,\n"
 	.string "please save the game.\p"
-	.string "If you don’t save, you will not be able\n"
+	.string "If you don't save, you will not be able\n"
 	.string "to continue with your challenge.\p"
 	.string "If you pull off the feat of beating\n"
 	.string "seven TRAINERS in succession,\l"
@@ -541,19 +541,19 @@ BattleFrontier_BattleArenaLobby_Text_256B19: @ 8256B19
 	.string "match on your FRONTIER PASS?$"
 
 BattleFrontier_BattleArenaLobby_Text_256B5C: @ 8256B5C
-	.string "I lost on the REFEREE’s decision…\p"
-	.string "I don’t think it was a good idea to only\n"
+	.string "I lost on the REFEREE's decision…\p"
+	.string "I don't think it was a good idea to only\n"
 	.string "use defensive moves and not attack…$"
 
 BattleFrontier_BattleArenaLobby_Text_256BCB: @ 8256BCB
 	.string "I won in judging!\p"
 	.string "Landing hits consistently on\n"
-	.string "the opponent’s POKéMON worked!$"
+	.string "the opponent's POKéMON worked!$"
 
 BattleFrontier_BattleArenaLobby_Text_256C19: @ 8256C19
 	.string "Our match was declared a draw.\p"
 	.string "When we ran out of time, both my\n"
-	.string "POKéMON and the opponent’s had about\l"
+	.string "POKéMON and the opponent's had about\l"
 	.string "the same amount of HP left.$"
 
 BattleFrontier_BattleArenaLobby_Text_256C9A: @ 8256C9A
@@ -569,7 +569,7 @@ BattleFrontier_BattleArenaLobby_Text_256C9A: @ 8256C9A
 
 BattleFrontier_BattleArenaLobby_Text_256DB8: @ 8256DB8
 FallarborTown_BattleTentLobby_Text_256DB8: @ 8256DB8
-	.string "The Set KO Tourney’s rules are listed.$"
+	.string "The Set KO Tourney's rules are listed.$"
 
 BattleFrontier_BattleArenaLobby_Text_256DDF: @ 8256DDF
 FallarborTown_BattleTentLobby_Text_256DDF: @ 8256DDF
@@ -586,7 +586,7 @@ FallarborTown_BattleTentLobby_Text_256E02: @ 8256E02
 	.string "The REFEREE will choose the winner\n"
 	.string "based on how the POKéMON battled.\p"
 	.string "Also, a POKéMON cannot be switched out\n"
-	.string "until its battle’s outcome is decided.$"
+	.string "until its battle's outcome is decided.$"
 
 BattleFrontier_BattleArenaLobby_Text_256F43: @ 8256F43
 FallarborTown_BattleTentLobby_Text_256F43: @ 8256F43

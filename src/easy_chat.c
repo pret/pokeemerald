@@ -1,7 +1,7 @@
 
 // Includes
 #include "global.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "overworld.h"
@@ -50,6 +50,9 @@ EWRAM_DATA struct
     const u16 *words;
     u16 ecWordBuffer[9];
 } *gUnknown_0203A118 = NULL;
+
+EWRAM_DATA void *gUnknown_0203A11C = 0;
+EWRAM_DATA void *gUnknown_0203A120 = 0;
 
 // Static ROM declarations
 

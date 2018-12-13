@@ -10,11 +10,11 @@ extern const u8 EventScript_275D0C[];
 extern const u8 EventScript_275D1F[];
 extern const u8 EventScript_275D2E[];
 extern const u8 EventScript_271354[];
-extern const u8 EventScript_2713C2[];
+extern const u8 EventScript_DoTainerBattle[];
 extern const u8 EventScript_TryDoDoubleTrainerBattle[];
-extern const u8 EventScript_271362[];
+extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
-extern const u8 EventScript_2713D1[];
+extern const u8 EventScript_TryDoRematchBattle[];
 extern const u8 EventScript_SecretPower1[];
 extern const u8 EventScript_SecretPower2[];
 

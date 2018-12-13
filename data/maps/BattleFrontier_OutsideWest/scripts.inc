@@ -329,14 +329,14 @@ BattleFrontier_OutsideWest_Text_23D808: @ 823D808
 	.string "May I see your TICKET?$"
 
 BattleFrontier_OutsideWest_Text_23D842: @ 823D842
-	.string "{PLAYER} doesn’t have the TICKET…\p"
-	.string "I’m terribly sorry.\p"
+	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "I'm terribly sorry.\p"
 	.string "You must have a TICKET to board\n"
 	.string "the ferry.$"
 
 BattleFrontier_OutsideWest_Text_23D89D: @ 823D89D
 	.string "{PLAYER} flashed the TICKET.\p"
-	.string "Perfect! That’s all you need!\p"
+	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
 BattleFrontier_OutsideWest_Text_23D8F2: @ 823D8F2
@@ -356,13 +356,13 @@ BattleFrontier_OutsideWest_Text_23D97A: @ 823D97A
 	.string "Then, where would you like to go?$"
 
 BattleFrontier_OutsideWest_Text_23D99C: @ 823D99C
-	.string "I’m the best out of all my friends.\n"
+	.string "I'm the best out of all my friends.\n"
 	.string "But here…\l"
-	.string "I’ve been useless!$"
+	.string "I've been useless!$"
 
 BattleFrontier_OutsideWest_Text_23D9DD: @ 823D9DD
 	.string "I want to go to the BATTLE TOWER,\n"
-	.string "but I can’t find it even though I have\l"
+	.string "but I can't find it even though I have\l"
 	.string "a map of the BATTLE FRONTIER.\p"
 	.string "This place is just too big!$"
 
@@ -373,40 +373,40 @@ BattleFrontier_OutsideWest_Text_23DA60: @ 823DA60
 	.string "Urrrrp…$"
 
 BattleFrontier_OutsideWest_Text_23DABF: @ 823DABF
-	.string "It’s not as if just anyone can come\n"
+	.string "It's not as if just anyone can come\n"
 	.string "here, you know?\p"
-	.string "Only those TRAINERS who’ve been\n"
+	.string "Only those TRAINERS who've been\n"
 	.string "recognized as tough are brought here.\p"
-	.string "That’s why many TRAINERS don’t even\n"
+	.string "That's why many TRAINERS don't even\n"
 	.string "know about the BATTLE FRONTIER.$"
 
 BattleFrontier_OutsideWest_Text_23DB7D: @ 823DB7D
 	.string "Hey, bro…\p"
 	.string "Are you sure we can make challenges\n"
-	.string "even if we don’t have any POKéMON?$"
+	.string "even if we don't have any POKéMON?$"
 
 BattleFrontier_OutsideWest_Text_23DBCE: @ 823DBCE
 	.string "Uh…\n"
-	.string "I’m sure it’ll be okay.\p"
+	.string "I'm sure it'll be okay.\p"
 	.string "I think…\p"
 	.string "But remember that big scary guy?\n"
-	.string "He said, “I’ll lend you POKéMON!”$"
+	.string "He said, “I'll lend you POKéMON!”$"
 
 BattleFrontier_OutsideWest_Text_23DC36: @ 823DC36
-	.string "That’s the BATTLE FACTORY.\n"
+	.string "That's the BATTLE FACTORY.\n"
 	.string "You can rent strong POKéMON there.\p"
 	.string "But it makes me wonder.\n"
-	.string "Who’s raising those rental POKéMON?$"
+	.string "Who's raising those rental POKéMON?$"
 
 BattleFrontier_OutsideWest_Text_23DCB0: @ 823DCB0
-	.string "I’m scared of going into the BATTLE\n"
+	.string "I'm scared of going into the BATTLE\n"
 	.string "PIKE because of SEVIPER…\p"
 	.string "B-but I came all the way here, so I will\n"
 	.string "try to conquer everything!\l"
 	.string "…Shudder…$"
 
 BattleFrontier_OutsideWest_Text_23DD3B: @ 823DD3B
-	.string "Let’s play rock, paper, scissors!\n"
+	.string "Let's play rock, paper, scissors!\n"
 	.string "One, two, three!\p"
 	.string "… … … … … …$"
 
@@ -417,53 +417,53 @@ BattleFrontier_OutsideWest_Text_23DD7A: @ 823DD7A
 BattleFrontier_OutsideWest_Text_23DDAD: @ 823DDAD
 	.string "Oh, no…\n"
 	.string "I lost.\p"
-	.string "I guess I’m not very lucky today.\n"
-	.string "I’ll put off my BATTLE PIKE challenge\l"
+	.string "I guess I'm not very lucky today.\n"
+	.string "I'll put off my BATTLE PIKE challenge\l"
 	.string "until tomorrow.$"
 
 BattleFrontier_OutsideWest_Text_23DE15: @ 823DE15
-	.string "I believe I’m the only person here who,\n"
+	.string "I believe I'm the only person here who,\n"
 	.string "for some unknown reason, would choose\l"
 	.string "fishing over battling.\p"
-	.string "Huh? You can’t catch anything here?\n"
-	.string "That’s disappointing…$"
+	.string "Huh? You can't catch anything here?\n"
+	.string "That's disappointing…$"
 
 BattleFrontier_OutsideWest_Text_23DEB4: @ 823DEB4
-	.string "Today, I’m going to keep battling, no\n"
+	.string "Today, I'm going to keep battling, no\n"
 	.string "matter what, until I get a Symbol.$"
 
 BattleFrontier_OutsideWest_Text_23DEFD: @ 823DEFD
-	.string "Oh? You’re off to challenge\n"
+	.string "Oh? You're off to challenge\n"
 	.string "the BATTLE DOME?\p"
-	.string "I’ll wish you the best of luck.\n"
+	.string "I'll wish you the best of luck.\n"
 	.string "Let us both win our way up and meet\l"
 	.string "in challenges.$"
 
 BattleFrontier_OutsideWest_Text_23DF7D: @ 823DF7D
 	.string "Grandpa, over here!\n"
 	.string "The BATTLE DOME is here!\l"
-	.string "Go get ’em, Grandpa!$"
+	.string "Go get 'em, Grandpa!$"
 
 BattleFrontier_OutsideWest_Text_23DFBF: @ 823DFBF
 	.string "Ah, so this here is the BATTLE DOME?\n"
-	.string "I won’t let GENTLEMEN beat me!\p"
+	.string "I won't let GENTLEMEN beat me!\p"
 	.string "But where is the entrance?$"
 
 BattleFrontier_OutsideWest_Text_23E01E: @ 823E01E
 	.string "There used to be nothing here not all\n"
 	.string "that long ago.\p"
 	.string "But, now look at this place! Amazing!\n"
-	.string "I’ll bring my mother out to see this.$"
+	.string "I'll bring my mother out to see this.$"
 
 BattleFrontier_OutsideWest_Text_23E09F: @ 823E09F
-	.string "I’ve finally arrived at the BATTLE\n"
+	.string "I've finally arrived at the BATTLE\n"
 	.string "FRONTIER!\p"
-	.string "I’m sure to grab attention with\n"
+	.string "I'm sure to grab attention with\n"
 	.string "my looks and ability!$"
 
 BattleFrontier_OutsideWest_Text_23E102: @ 823E102
 	.string "Munch, munch…\p"
-	.string "It looks like this square’s filled with\n"
+	.string "It looks like this square's filled with\n"
 	.string "tough people.\p"
 	.string "Munch, munch…$"
 
@@ -482,7 +482,7 @@ BattleFrontier_OutsideWest_Text_23E154: @ 823E154
 
 BattleFrontier_OutsideWest_Text_23E273: @ 823E273
 	.string "Huh? Will you listen to yourself?\n"
-	.string "That’s nothing!\p"
+	.string "That's nothing!\p"
 	.string "Why, the last time I cheered for him,\n"
 	.string "our eyes met and sparks flew!$"
 
@@ -504,7 +504,7 @@ BattleFrontier_OutsideWest_Text_23E37E: @ 823E37E
 
 BattleFrontier_OutsideWest_Text_23E410: @ 823E410
 	.string "Those people squabbling over there…\p"
-	.string "It’s hard to believe, but they once\n"
+	.string "It's hard to believe, but they once\n"
 	.string "were TRAINERS, and good ones, too.\p"
 	.string "They used to be incredibly tough,\n"
 	.string "and they were famous, too.\p"
@@ -512,7 +512,7 @@ BattleFrontier_OutsideWest_Text_23E410: @ 823E410
 	.string "certain TRAINER at a tournament.\p"
 	.string "They were so thoroughly whipped,\n"
 	.string "they became smitten by the TRAINER.\p"
-	.string "Now they’re just fans of the TRAINER.\n"
+	.string "Now they're just fans of the TRAINER.\n"
 	.string "They go cheer for their idol at the\l"
 	.string "BATTLE DOME every day now.$"
 
@@ -520,7 +520,7 @@ BattleFrontier_OutsideWest_Text_23E5A5: @ 823E5A5
 	.string "I heard a rumor that someone saw\n"
 	.string "a POKéMON with an unusually long tail\l"
 	.string "somewhere in the BATTLE FRONTIER.\p"
-	.string "It must be adorable. I’m sure of it…\p"
+	.string "It must be adorable. I'm sure of it…\p"
 	.string "Oh, challenges can wait. I feel driven\n"
 	.string "to find the delightful creature!$"
 

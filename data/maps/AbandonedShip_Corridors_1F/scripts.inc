@@ -11,16 +11,16 @@ AbandonedShip_Corridors_1F_EventScript_2379AE:: @ 82379AE
 	end
 
 AbandonedShip_Corridors_1F_Text_2379C5: @ 82379C5
-	.string "What’s so funny about having my inner\n"
+	.string "What's so funny about having my inner\n"
 	.string "tube aboard the ship?$"
 
 AbandonedShip_Corridors_1F_Text_237A01: @ 8237A01
 	.string "Whoa, you overwhelmed me!$"
 
 AbandonedShip_Corridors_1F_Text_237A1B: @ 8237A1B
-	.string "It’s not easy throwing POKé BALLS\n"
+	.string "It's not easy throwing POKé BALLS\n"
 	.string "while hanging on to an inner tube!$"
 
 AbandonedShip_Corridors_1F_Text_237A60: @ 8237A60
-	.string "Isn’t it fun here?\n"
+	.string "Isn't it fun here?\n"
 	.string "I get excited just being here!$"

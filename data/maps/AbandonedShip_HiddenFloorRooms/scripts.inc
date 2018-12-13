@@ -143,6 +143,6 @@ AbandonedShip_HiddenFloorRooms_EventScript_238DF3:: @ 8238DF3
 	end
 
 AbandonedShip_HiddenFloorRooms_Text_238DFE: @ 8238DFE
-	.string "It’s bright and shiny!\n"
-	.string "But it’s just trash…$"
+	.string "It's bright and shiny!\n"
+	.string "But it's just trash…$"
 

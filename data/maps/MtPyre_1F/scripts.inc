@@ -31,7 +31,7 @@ MtPyre_1F_Text_230F8A: @ 8230F8A
 	.string "All sorts of beings wander the slopes\n"
 	.string "of MT. PYRE…\p"
 	.string "There is no telling what may happen.\n"
-	.string "Take this. It’s for your own good.$"
+	.string "Take this. It's for your own good.$"
 
 MtPyre_1F_Text_231005: @ 8231005
 	.string "Have a POKéMON hold that\n"

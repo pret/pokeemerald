@@ -772,47 +772,47 @@ Route110_TrickHouseEntrance_EventScript_26A459:: @ 826A459
 	return
 
 Route110_TrickHouseEntrance_Text_26A474: @ 826A474
-	.string "You’re being watched…$"
+	.string "You're being watched…$"
 
 Route110_TrickHouseEntrance_Text_26A48A: @ 826A48A
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "beneath this desk? You’re sharp!$"
+	.string "beneath this desk? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A4DA: @ 826A4DA
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "behind this tree? You’re sharp!$"
+	.string "behind this tree? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A529: @ 826A529
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "in this dresser? You’re sharp!$"
+	.string "in this dresser? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A577: @ 826A577
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "beyond this window? You’re sharp!$"
+	.string "beyond this window? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A5C8: @ 826A5C8
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "in this planter? You’re sharp!$"
+	.string "in this planter? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A616: @ 826A616
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "in this cupboard? You’re sharp!$"
+	.string "in this cupboard? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A665: @ 826A665
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "behind this window? You’re sharp!$"
+	.string "behind this window? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A6B6: @ 826A6B6
 	.string "Hah? Grrr…\p"
 	.string "How did you know I concealed myself\n"
-	.string "beneath this cushion? You’re sharp!$"
+	.string "beneath this cushion? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_26A709: @ 826A709
 	.string "Behold!\p"
@@ -823,9 +823,9 @@ Route110_TrickHouseEntrance_Text_26A709: @ 826A709
 	.string "Wahahaha! Glad to meet you!$"
 
 Route110_TrickHouseEntrance_Text_26A78C: @ 826A78C
-	.string "You, you’ve come to challenge\n"
-	.string "my TRICK HOUSE, haven’t you?\p"
-	.string "That’s why you’re here, isn’t it?\n"
+	.string "You, you've come to challenge\n"
+	.string "my TRICK HOUSE, haven't you?\p"
+	.string "That's why you're here, isn't it?\n"
 	.string "Yes, it is!\p"
 	.string "Consider your challenge accepted!\p"
 	.string "Enter through the scroll there,\n"
@@ -833,7 +833,7 @@ Route110_TrickHouseEntrance_Text_26A78C: @ 826A78C
 	.string "I shall be waiting in the back!$"
 
 Route110_TrickHouseEntrance_Text_26A878: @ 826A878
-	.string "It’s a scroll.$"
+	.string "It's a scroll.$"
 
 Route110_TrickHouseEntrance_Text_26A887: @ 826A887
 	.string "There is a big hole behind the scroll!\p"
@@ -842,30 +842,30 @@ Route110_TrickHouseEntrance_Text_26A887: @ 826A887
 Route110_TrickHouseEntrance_Text_26A8BD: @ 826A8BD
 	.string "There is a note affixed to the scroll…\p"
 	.string "“I am leaving on a journey.\n"
-	.string "Don’t look for me. TRICK MASTER”$"
+	.string "Don't look for me. TRICK MASTER”$"
 
 Route110_TrickHouseEntrance_Text_26A921: @ 826A921
-	.string "For the next time, I’ll use this trick,\n"
+	.string "For the next time, I'll use this trick,\n"
 	.string "and that scheme, and those ruses…\p"
-	.string "Mufufufu… If I may say so, it’s\n"
+	.string "Mufufufu… If I may say so, it's\n"
 	.string "brilliantly difficult, even for me!$"
 
 Route110_TrickHouseEntrance_Text_26A9AF: @ 826A9AF
 	.string "Hah? What?!\n"
-	.string "Oh, it’s you!\p"
-	.string "I’m in the midst of devising new tricky\n"
+	.string "Oh, it's you!\p"
+	.string "I'm in the midst of devising new tricky\n"
 	.string "challenges!\p"
-	.string "It’s not too much to ask for a bit more\n"
+	.string "It's not too much to ask for a bit more\n"
 	.string "time for me to think, is it now?\l"
-	.string "You wouldn’t begrudge me that?\l"
+	.string "You wouldn't begrudge me that?\l"
 	.string "Come back in a little while!$"
 
 Route110_TrickHouseEntrance_Text_26AA82: @ 826AA82
-	.string "Ah, it’s you! You’re here to accept the\n"
-	.string "reward from before, isn’t that right?\l"
+	.string "Ah, it's you! You're here to accept the\n"
+	.string "reward from before, isn't that right?\l"
 	.string "Yes, right I am!\p"
 	.string "Here!\n"
-	.string "I’ll give it to you now!$"
+	.string "I'll give it to you now!$"
 
 Route110_TrickHouseEntrance_Text_26AB00: @ 826AB00
 	.string "Hah?\n"

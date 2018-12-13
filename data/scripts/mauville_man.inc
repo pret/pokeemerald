@@ -93,15 +93,15 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E1A4:: @ 828E1A4
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_28E1B1: @ 828E1B1
-	.string "Hi, I’m the TRADER.\n"
+	.string "Hi, I'm the TRADER.\n"
 	.string "Want to trade decorations with me?$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E1E8: @ 828E1E8
 	.string "Oh…\n"
-	.string "You’ve left me feeling the blues…$"
+	.string "You've left me feeling the blues…$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E20E: @ 828E20E
-	.string "But we’ve traded decorations already,\n"
+	.string "But we've traded decorations already,\n"
 	.string "you and I.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E23F: @ 828E23F
@@ -109,7 +109,7 @@ MauvilleCity_PokemonCenter_1F_Text_28E23F: @ 828E23F
 	.string "you want of mine, speak up.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E27F: @ 828E27F
-	.string "You don’t want anything?\n"
+	.string "You don't want anything?\n"
 	.string "I feel unwanted…$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E2A9: @ 828E2A9
@@ -118,37 +118,37 @@ MauvilleCity_PokemonCenter_1F_Text_28E2A9: @ 828E2A9
 	.string "Do you want it?$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E2E3: @ 828E2E3
-	.string "Uh… Wait a second. You don’t have a\n"
+	.string "Uh… Wait a second. You don't have a\n"
 	.string "single piece of decoration!$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E323: @ 828E323
-	.string "Okay, pick the decoration that you’ll\n"
+	.string "Okay, pick the decoration that you'll\n"
 	.string "trade to me.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E356: @ 828E356
-	.string "You won’t trade with me?\n"
+	.string "You won't trade with me?\n"
 	.string "I feel unwanted…$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E380: @ 828E380
-	.string "You’ve got all the {STR_VAR_2}S that can\n"
-	.string "be stored. You’ve no room for this.$"
+	.string "You've got all the {STR_VAR_2}S that can\n"
+	.string "be stored. You've no room for this.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E3C4: @ 828E3C4
-	.string "Okay, so we’ll trade my {STR_VAR_3}\n"
+	.string "Okay, so we'll trade my {STR_VAR_3}\n"
 	.string "for your {STR_VAR_2}?$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E3EC: @ 828E3EC
 	.string "That piece of decoration is in use.\n"
-	.string "You can’t trade it.$"
+	.string "You can't trade it.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E424: @ 828E424
-	.string "Then we’ll trade!\n"
-	.string "I’ll send my decoration to your PC.$"
+	.string "Then we'll trade!\n"
+	.string "I'll send my decoration to your PC.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E45A: @ 828E45A
-	.string "Oops! Sorry! That’s a really rare\n"
+	.string "Oops! Sorry! That's a really rare\n"
 	.string "piece of decoration.\l"
-	.string "I can’t trade that one away!\p"
+	.string "I can't trade that one away!\p"
 	.string "Can I interest you in something else?$"
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E4D4:: @ 828E4D4
@@ -248,14 +248,14 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E5EC:: @ 828E5EC
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_28E5F6: @ 828E5F6
-	.string "I’m the STORYTELLER.\n"
-	.string "I’ll tell you tales of legendary\l"
+	.string "I'm the STORYTELLER.\n"
+	.string "I'll tell you tales of legendary\l"
 	.string "TRAINERS.\p"
 	.string "Will you hear my tale?$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E64D: @ 828E64D
 	.string "Oh…\n"
-	.string "You’ve left me feeling the blues…$"
+	.string "You've left me feeling the blues…$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E673: @ 828E673
 	.string "I know of these legends.\n"
@@ -268,12 +268,12 @@ MauvilleCity_PokemonCenter_1F_Text_28E6AE: @ 828E6AE
 	.string "of a legendary tale?$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E726: @ 828E726
-	.string "What’s that?!\n"
+	.string "What's that?!\n"
 	.string "You… You…\p"
 	.string "{STR_VAR_2}\n"
 	.string "{STR_VAR_1} time(s)?!\p"
 	.string "That is indeed magnificent!\n"
-	.string "It’s the birth of a new legend!$"
+	.string "It's the birth of a new legend!$"
 
 MauvilleCity_PokemonCenter_1F_Text_28E78A: @ 828E78A
 	.string "It gets me thinking, could there be\n"
@@ -291,7 +291,7 @@ MauvilleCity_PokemonCenter_1F_Text_28E844: @ 828E844
 
 MauvilleCity_PokemonCenter_1F_Text_28E881: @ 828E881
 	.string "Hmm…\n"
-	.string "I’m not satisfied…\p"
+	.string "I'm not satisfied…\p"
 	.string "I wish you would bring me news worthy\n"
 	.string "of being called a legend.$"
 
@@ -367,7 +367,7 @@ MauvilleCity_PokemonCenter_1F_Text_28EBDD:: @ 828EBDD
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER got interviewed\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "{STR_VAR_3} must be a TRAINER who’s\n"
+	.string "{STR_VAR_3} must be a TRAINER who's\n"
 	.string "attracting much attention!$"
 
 MauvilleCity_PokemonCenter_1F_Text_28EC60:: @ 828EC60
@@ -507,7 +507,7 @@ MauvilleCity_PokemonCenter_1F_Text_28F277:: @ 828F277
 	.string "This TRAINER used ROCK SMASH\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a TRAINER who\n"
-	.string "can’t leave a stone unsmashed!$"
+	.string "can't leave a stone unsmashed!$"
 
 MauvilleCity_PokemonCenter_1F_Text_28F2FC:: @ 828F2FC
 	.string "The Move-Loving TRAINER$"
@@ -674,7 +674,7 @@ MauvilleCity_PokemonCenter_1F_Text_28FAA7:: @ 828FAA7
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER got soaked by rain\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "{STR_VAR_3}’s charisma must even\n"
+	.string "{STR_VAR_3}'s charisma must even\n"
 	.string "attract rain!$"
 
 MauvilleCity_PokemonCenter_1F_Text_28FB1D:: @ 828FB1D
@@ -716,8 +716,8 @@ MauvilleCity_PokemonCenter_1F_Text_28FC98:: @ 828FC98
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER jumped down ledges\n"
 	.string "{STR_VAR_1} times!\p"
-	.string "If there’s a ledge to be jumped,\n"
-	.string "{STR_VAR_3} can’t ignore it!$"
+	.string "If there's a ledge to be jumped,\n"
+	.string "{STR_VAR_3} can't ignore it!$"
 
 MauvilleCity_PokemonCenter_1F_Text_28FD1D:: @ 828FD1D
 	.string "The Legendary TV Viewer$"
@@ -744,7 +744,7 @@ MauvilleCity_PokemonCenter_1F_Text_28FDCE:: @ 828FDCE
 	.string "This TRAINER checked the time\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a punctual TRAINER\n"
-	.string "who’s conscious of the time.$"
+	.string "who's conscious of the time.$"
 
 MauvilleCity_PokemonCenter_1F_Text_28FE57:: @ 828FE57
 	.string "The POKéMON LOTTERY Wizard$"
@@ -786,7 +786,7 @@ MauvilleCity_PokemonCenter_1F_Text_29000D:: @ 829000D
 	.string "This TRAINER rode the CABLE CAR\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a busy TRAINER\n"
-	.string "who’s up and down all the time!$"
+	.string "who's up and down all the time!$"
 
 MauvilleCity_PokemonCenter_1F_Text_290097:: @ 8290097
 	.string "The Hot Spring-Loving TRAINER$"
@@ -876,19 +876,19 @@ MauvilleCity_PokemonCenter_1F_EventScript_29022D:: @ 829022D
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_29022F: @ 829022F
-	.string "I’m GIDDY!\n"
+	.string "I'm GIDDY!\n"
 	.string "I have a scintillating story for you!\p"
 	.string "Would you like to hear my story?$"
 
 MauvilleCity_PokemonCenter_1F_Text_290281: @ 8290281
 	.string "Oh…\n"
-	.string "You’ve left me feeling the blues…$"
+	.string "You've left me feeling the blues…$"
 
 MauvilleCity_PokemonCenter_1F_Text_2902A7: @ 82902A7
 	.string "Also, I was thinking…$"
 
 MauvilleCity_PokemonCenter_1F_Text_2902BD: @ 82902BD
-	.string "That’s about it, I think…\p"
+	.string "That's about it, I think…\p"
 	.string "We should chat again!\n"
 	.string "Bye-bye!$"
 
@@ -945,12 +945,12 @@ MauvilleCity_PokemonCenter_1F_EventScript_290384:: @ 8290384
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_29038E: @ 829038E
-	.string "Hi, I’m the BARD.\n"
+	.string "Hi, I'm the BARD.\n"
 	.string "Would you like to hear my song?$"
 
 MauvilleCity_PokemonCenter_1F_Text_2903C0: @ 82903C0
 	.string "Oh…\n"
-	.string "You’ve left me feeling the blues…$"
+	.string "You've left me feeling the blues…$"
 
 MauvilleCity_PokemonCenter_1F_Text_2903E6: @ 82903E6
 	.string "Oh, what a moving song…\n"
@@ -959,14 +959,14 @@ MauvilleCity_PokemonCenter_1F_Text_2903E6: @ 82903E6
 MauvilleCity_PokemonCenter_1F_Text_290421: @ 8290421
 	.string "So?\n"
 	.string "How do you like my song?\p"
-	.string "But I’m none too happy about\n"
+	.string "But I'm none too happy about\n"
 	.string "the lyrics.\p"
 	.string "How would you like to write some\n"
 	.string "new lyrics for me?$"
 
 MauvilleCity_PokemonCenter_1F_Text_29049B: @ 829049B
 	.string "Oh…\n"
-	.string "You’ve left me feeling the blues…$"
+	.string "You've left me feeling the blues…$"
 
 MauvilleCity_PokemonCenter_1F_Text_2904C1: @ 82904C1
 	.string "Thank you kindly!\n"
@@ -977,26 +977,26 @@ MauvilleCity_PokemonCenter_1F_Text_2904EB: @ 82904EB
 	.string "to go?$"
 
 MauvilleCity_PokemonCenter_1F_Text_290514: @ 8290514
-	.string "Okay! That’s it, then.\n"
-	.string "I’ll sing this song for a while.$"
+	.string "Okay! That's it, then.\n"
+	.string "I'll sing this song for a while.$"
 
 MauvilleCity_PokemonCenter_1F_Text_29054C: @ 829054C
 	.string "Hey, yo! They call me the HIPSTER.\n"
-	.string "I’ll teach you what’s hip and happening.$"
+	.string "I'll teach you what's hip and happening.$"
 
 MauvilleCity_PokemonCenter_1F_Text_290598: @ 8290598
-	.string "But, hey, I taught you what’s hip and\n"
+	.string "But, hey, I taught you what's hip and\n"
 	.string "happening already.\p"
-	.string "I’d like to spread the good word to\n"
+	.string "I'd like to spread the good word to\n"
 	.string "other folks.$"
 
 MauvilleCity_PokemonCenter_1F_Text_290602: @ 8290602
 	.string "But, hey, you already know a lot about\n"
-	.string "what’s hip and happening.\p"
-	.string "I’ve got nothing new to teach you!$"
+	.string "what's hip and happening.\p"
+	.string "I've got nothing new to teach you!$"
 
 MauvilleCity_PokemonCenter_1F_Text_290666: @ 8290666
 	.string "Hey, have you heard about\n"
 	.string "“{STR_VAR_1}”?\p"
-	.string "What’s it mean? Well…\n"
+	.string "What's it mean? Well…\n"
 	.string "Ask your daddy or mommy, okay?$"

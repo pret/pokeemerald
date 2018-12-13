@@ -115,7 +115,7 @@ Route110_TrickHousePuzzle2_Text_26BD25: @ 826BD25
 	.string "Which switch closes which hole?$"
 
 Route110_TrickHousePuzzle2_Text_26BD45: @ 826BD45
-	.string "After that battle, I’m even more\n"
+	.string "After that battle, I'm even more\n"
 	.string "confused!$"
 
 Route110_TrickHousePuzzle2_Text_26BD70: @ 826BD70
@@ -123,11 +123,11 @@ Route110_TrickHousePuzzle2_Text_26BD70: @ 826BD70
 	.string "for me?$"
 
 Route110_TrickHousePuzzle2_Text_26BD9E: @ 826BD9E
-	.string "Oh! You’re on your second TRICK HOUSE\n"
+	.string "Oh! You're on your second TRICK HOUSE\n"
 	.string "challenge!$"
 
 Route110_TrickHousePuzzle2_Text_26BDCF: @ 826BDCF
-	.string "You’re good at battling too?$"
+	.string "You're good at battling too?$"
 
 Route110_TrickHousePuzzle2_Text_26BDEC: @ 826BDEC
 	.string "The TRICK MASTER rigged all the tricks\n"
@@ -135,12 +135,12 @@ Route110_TrickHousePuzzle2_Text_26BDEC: @ 826BDEC
 
 Route110_TrickHousePuzzle2_Text_26BE31: @ 826BE31
 	.string "I want to make my own GYM one day.\n"
-	.string "So, I’m studying how to set traps.$"
+	.string "So, I'm studying how to set traps.$"
 
 Route110_TrickHousePuzzle2_Text_26BE77: @ 826BE77
-	.string "I didn’t study battling enough!$"
+	.string "I didn't study battling enough!$"
 
 Route110_TrickHousePuzzle2_Text_26BE97: @ 826BE97
-	.string "You’re strong, aren’t you?\n"
+	.string "You're strong, aren't you?\n"
 	.string "Maybe even enough to be a GYM LEADER!$"
 

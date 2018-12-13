@@ -21,7 +21,7 @@ PacifidlogTown_House5_EventScript_204137:: @ 8204137
 	end
 
 PacifidlogTown_House5_Text_204140: @ 8204140
-	.string "I can’t see MIRAGE ISLAND today…$"
+	.string "I can't see MIRAGE ISLAND today…$"
 
 PacifidlogTown_House5_Text_204161: @ 8204161
 	.string "Oh! Oh my!\n"

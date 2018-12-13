@@ -95,7 +95,7 @@ gText_TheTradeHasBeenCanceled:: @ 832DB76
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
 
 gText_YourOnlyPkmnForBattle:: @ 832DB9C
-	.string "That’s your only\nPOKéMON for battle.$"
+	.string "That's your only\nPOKéMON for battle.$"
 
 gText_WaitingForYourFriend:: @ 832DBC1
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…$"

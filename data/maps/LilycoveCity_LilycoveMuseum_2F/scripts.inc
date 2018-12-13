@@ -232,7 +232,7 @@ LilycoveCity_LilycoveMuseum_2F_Text_2199EB: @ 82199EB
 LilycoveCity_LilycoveMuseum_2F_Text_219A0D: @ 8219A0D
 	.string "As you can plainly see, there is not\n"
 	.string "a single painting on exhibit.\p"
-	.string "Here, I don’t wish to exhibit works of\n"
+	.string "Here, I don't wish to exhibit works of\n"
 	.string "so-called classical art.\p"
 	.string "Such classical works you can see on\n"
 	.string "our ground floor.\p"
@@ -246,7 +246,7 @@ LilycoveCity_LilycoveMuseum_2F_Text_219A0D: @ 8219A0D
 	.string "forth into glorious life!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219BC4: @ 8219BC4
-	.string "I beg your pardon. I didn’t intend\n"
+	.string "I beg your pardon. I didn't intend\n"
 	.string "to monopolize the conversation.\p"
 	.string "Now, as you are young, and yet\n"
 	.string "obviously well traveled…\p"
@@ -254,7 +254,7 @@ LilycoveCity_LilycoveMuseum_2F_Text_219BC4: @ 8219BC4
 	.string "and works of art depicting them.\p"
 	.string "If you were to come across such\n"
 	.string "a painting, may we ask you to obtain\l"
-	.string "the artist’s permission to exhibit\l"
+	.string "the artist's permission to exhibit\l"
 	.string "it here?$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219CF3: @ 8219CF3
@@ -263,18 +263,18 @@ LilycoveCity_LilycoveMuseum_2F_Text_219CF3: @ 8219CF3
 	.string "POKéMON.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219D42: @ 8219D42
-	.string "Thanks to you, we’ve added a new\n"
+	.string "Thanks to you, we've added a new\n"
 	.string "painting to our collection!\p"
-	.string "I’ve heard it depicts your POKéMON.\n"
+	.string "I've heard it depicts your POKéMON.\n"
 	.string "Truly magnificent!\p"
 	.string "Thank you so very, very much!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219DD4: @ 8219DD4
-	.string "Ah! It’s you!\n"
+	.string "Ah! It's you!\n"
 	.string "{PLAYER}!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219DE6: @ 8219DE6
-	.string "Isn’t this marvelous?\n"
+	.string "Isn't this marvelous?\n"
 	.string "This collection of paintings!\p"
 	.string "Each one of them flawless!\n"
 	.string "None better than another!\p"
@@ -292,36 +292,36 @@ LilycoveCity_LilycoveMuseum_2F_Text_219EED: @ 8219EED
 
 LilycoveCity_LilycoveMuseum_2F_Text_219F1B: @ 8219F1B
 	.string "Ah, so good to see you, {PLAYER}!\p"
-	.string "It’s an honor to have you visit us\n"
+	.string "It's an honor to have you visit us\n"
 	.string "on your busy journeys.\p"
 	.string "Please, relax and do enjoy your\n"
 	.string "visit with us.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219FA0: @ 8219FA0
-	.string "It’s a picture frame with pink-colored\n"
+	.string "It's a picture frame with pink-colored\n"
 	.string "adornments.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_219FD3: @ 8219FD3
-	.string "It’s a picture frame with\n"
+	.string "It's a picture frame with\n"
 	.string "yellow-colored adornments.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_21A008: @ 821A008
-	.string "It’s a picture frame with\n"
+	.string "It's a picture frame with\n"
 	.string "blue-colored adornments.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_21A03B: @ 821A03B
-	.string "It’s a picture frame with\n"
+	.string "It's a picture frame with\n"
 	.string "red-colored adornments.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_21A06D: @ 821A06D
-	.string "It’s a picture frame with\n"
+	.string "It's a picture frame with\n"
 	.string "green-colored adornments.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_21A0A1: @ 821A0A1
-	.string "It’s a painting of POKéMON.$"
+	.string "It's a painting of POKéMON.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_21A0BD: @ 821A0BD
-	.string "I’ve been away awhile, so the new\n"
+	.string "I've been away awhile, so the new\n"
 	.string "paintings up here surprised me.\p"
 	.string "I wish someone would paint my POKéMON\n"
 	.string "this pretty.$"
@@ -335,6 +335,6 @@ LilycoveCity_LilycoveMuseum_2F_Text_21A132: @ 821A132
 LilycoveCity_LilycoveMuseum_2F_Text_21A1A8: @ 821A1A8
 	.string "Wow, is that right?\n"
 	.string "These paintings are of your POKéMON.\p"
-	.string "Isn’t that just the ultimate joy for\n"
+	.string "Isn't that just the ultimate joy for\n"
 	.string "a TRAINER?$"
 
