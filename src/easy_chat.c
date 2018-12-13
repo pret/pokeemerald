@@ -51,6 +51,9 @@ EWRAM_DATA struct
     u16 ecWordBuffer[9];
 } *gUnknown_0203A118 = NULL;
 
+EWRAM_DATA void *gUnknown_0203A11C = 0;
+EWRAM_DATA void *gUnknown_0203A120 = 0;
+
 // Static ROM declarations
 
 static void sub_811A2C0(u8);

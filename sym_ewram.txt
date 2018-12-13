@@ -292,19 +292,8 @@ gUnknown_0203A100: @ 203A100
 	.space 0x10
 
 	.include "src/battle_anim_utility_funcs.o"
-
-gUnknown_0203A114: @ 203A114
-	.space 0x4
-
-gUnknown_0203A118: @ 203A118
-	.space 0x4
-
-gUnknown_0203A11C: @ 203A11C
-	.space 0x4
-
-gUnknown_0203A120: @ 203A120
-	.space 0x4
-	
+	.include "src/battle_intro.o"
+	.include "src/easy_chat.o"
 	.include "src/mon_markings.o"
 	.include "src/mauville_old_man.o"
 	.include "src/mail.o"

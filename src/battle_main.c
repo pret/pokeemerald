@@ -81,7 +81,7 @@ extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
-extern const struct ScanlineEffectParams gUnknown_0831AC70;
+extern const struct ScanlineEffectParams gBattleIntroSlideScanlineEffectParams;
 
 // strings
 extern const u8 gText_LinkStandby3[];
@@ -633,7 +633,7 @@ static void CB2_InitBattleInternal(void)
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
         }
 
-        ScanlineEffect_SetParams(gUnknown_0831AC70);
+        ScanlineEffect_SetParams(gBattleIntroSlideScanlineEffectParams);
     }
 
     ResetPaletteFade();

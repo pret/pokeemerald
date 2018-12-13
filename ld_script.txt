@@ -175,7 +175,7 @@ SECTIONS {
         src/ground.o(.text);
         src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
-        asm/battle_intro.o(.text);
+        src/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat.o(.text);
         asm/easy_chat.o(.text);
