@@ -9,11 +9,11 @@ enum
 {
     BG_ANIM_SCREEN_SIZE,
     BG_ANIM_AREA_OVERFLOW_MODE,
-    BG_ANIM2,
+    BG_ANIM_MOSAIC,
     BG_ANIM_CHAR_BASE_BLOCK,
     BG_ANIM_PRIORITY,
-    BG_ANIM_5,
-    BG_ANIM_6
+    BG_ANIM_PALETTES_MODE,
+    BG_ANIM_SCREEN_BASE_BLOCK,
 };
 
 struct UnknownAnimStruct2
@@ -67,11 +67,11 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
 void sub_80A477C(bool8);
 
-// battle_anim_80FE840.s
+// battle_intro.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
-void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
+void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *arg5, u16 *arg6, u16 arg7);
 void HandleIntroSlide(u8 terrainId);
-u32 GetAnimBgAttribute(u8 bgId, u8 attributeId);
+int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6450(struct Sprite *sprite);
