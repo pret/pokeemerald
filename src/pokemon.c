@@ -45,12 +45,6 @@ struct SpeciesItem
     u16 item;
 };
 
-// Extracts the upper 16 bits of a 32-bit number
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
-
-// Extracts the lower 16 bits of a 32-bit number
-#define LOHALF(n) ((n) & 0xFFFF)
-
 extern const struct OamData gUnknown_0831ACB0;
 extern const struct OamData gUnknown_0831ACA8;
 extern const struct SpriteFrameImage gUnknown_082FF3A8[];
@@ -6706,12 +6700,6 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
     return GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
-
-// Extracts the upper 16 bits of a 32-bit number
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
-
-// Extracts the lower 16 bits of a 32-bit number
-#define LOHALF(n) ((n) & 0xFFFF)
 
 const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {

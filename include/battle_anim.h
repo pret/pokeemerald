@@ -131,6 +131,7 @@ void sub_80A805C(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a
 u8 sub_80A80C8(struct Task *task);
 void sub_80A8EE4(struct Sprite *);
 void sub_80A67F4(struct Sprite *);
+void sub_80A6D48(u32 bgId, const void *src);
 
 enum
 {
@@ -168,8 +169,8 @@ void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);
-u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
+u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);
 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
@@ -222,5 +223,8 @@ extern const struct OamData gUnknown_085249F4;
 extern const struct OamData gUnknown_0852493C;
 extern const struct OamData gUnknown_08524A5C;
 extern const struct OamData gUnknown_08524A74;
+
+extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
+extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 
 #endif // GUARD_BATTLE_ANIM_H

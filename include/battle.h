@@ -599,8 +599,7 @@ struct BattleAnimationInfo
     u8 field_9_x80:1;
     u8 field_A;
     u8 field_B;
-    u8 field_C;
-    u8 field_D;
+    s16 field_C;
     u8 field_E;
     u8 field_F;
 };
