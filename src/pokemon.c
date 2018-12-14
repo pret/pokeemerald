@@ -2749,7 +2749,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     CalculateMonStats(mon);
 }
 
-void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
+void sub_806819C(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
     u8 nickname[30];
@@ -2803,7 +2803,7 @@ void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     CalculateMonStats(mon);
 }
 
-void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lvl50)
+void sub_8068338(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
 {
     s32 i;
     u8 nickname[30];
@@ -2931,7 +2931,7 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
     CalculateMonStats(mon);
 }
 
-void sub_80686FC(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
+void sub_80686FC(struct Pokemon *mon, struct BattleTowerPokemon *dest)
 {
     s32 i;
     u16 heldItem;

@@ -9,7 +9,7 @@ struct RSBattleTowerRecord
     /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
     /*0x0C*/ u8 trainerId[4];
     /*0x10*/ u16 greeting[6];
-    /*0x1C*/ struct UnknownPokemonStruct party[3];
+    /*0x1C*/ struct BattleTowerPokemon party[3];
     /*0xA0*/ u32 checksum;
 };
 

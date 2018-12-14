@@ -405,14 +405,14 @@ extern const u8 gText_SoDesirable[];
 extern const u8 gText_SoExciting[];
 extern const u8 gText_SoAmusing[];
 extern const u8 gText_SoMagical[];
-extern const u8 gUnknown_08294313[];
-extern const u8 gUnknown_08294359[];
-extern const u8 gUnknown_08294398[];
-extern const u8 gUnknown_082943DA[];
-extern const u8 gUnknown_0829441C[];
-extern const u8 gUnknown_08294460[];
-extern const u8 gUnknown_082944A0[];
-extern const u8 gUnknown_082944D5[];
+extern const u8 gMauvilleManText_ISoWantToGoOnAVacation[];
+extern const u8 gMauvilleManText_IBoughtCrayonsWith120Colors[];
+extern const u8 gMauvilleManText_WouldntItBeNiceIfWeCouldFloat[];
+extern const u8 gMauvilleManText_WhenYouWriteOnASandyBeach[];
+extern const u8 gMauvilleManText_WhatsTheBottomOfTheSeaLike[];
+extern const u8 gMauvilleManText_WhenYouSeeTheSettingSunDoesIt[];
+extern const u8 gMauvilleManText_LyingBackInTheGreenGrass[];
+extern const u8 gMauvilleManText_SecretBasesAreSoWonderful[];
 
 
 extern const u8 MauvilleCity_PokemonCenter_1F_Text_28E930[];

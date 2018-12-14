@@ -3245,7 +3245,7 @@ static void FillPartnerParty(u16 trainerId)
         for (i = 0; i < 2; i++)
         {
             struct EmeraldBattleTowerRecord *record = &gSaveBlock2Ptr->frontier.towerRecords[trainerId];
-            struct UnknownPokemonStruct monData = record->party[gSaveBlock2Ptr->frontier.field_CB4[18 + i]];
+            struct BattleTowerPokemon monData = record->party[gSaveBlock2Ptr->frontier.field_CB4[18 + i]];
             StringCopy(trainerName, record->name);
             if (record->language == LANGUAGE_JAPANESE)
             {
