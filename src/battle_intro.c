@@ -250,12 +250,7 @@ static void BattleIntroSlide2(u8 taskId)
 
     if (gTasks[taskId].data[1] == 4)
     {
-        u16 *bg1Y = &gBattle_BG1_Y;
-        int cos = Cos2(gTasks[taskId].data[6]);
-        if (cos < 0)
-            cos += 0x1FF;
-        *bg1Y = (cos >> 9) - 8;
-
+        gBattle_BG1_Y = Cos2(gTasks[taskId].data[6]) / 512 - 8;
         if (gTasks[taskId].data[6] < 180)
             gTasks[taskId].data[6] += 4;
         else

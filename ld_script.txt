@@ -238,7 +238,7 @@ SECTIONS {
         src/intro.o(.text);
         src/reset_save_heap.o(.text);
         src/field_region_map.o(.text);
-        asm/battle_anim_8170478.o(.text);
+        src/battle_anim_8170478.o(.text);
         src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/lottery_corner.o(.text);
@@ -549,7 +549,7 @@ SECTIONS {
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
-        data/battle_anim_8170478.o(.rodata);
+        src/battle_anim_8170478.o(.rodata);
         src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
