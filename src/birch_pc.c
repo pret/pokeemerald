@@ -79,7 +79,7 @@ const u8 *GetPokedexRatingText(u16 count)
         return gBirchDexRatingText_DexCompleted;
     }
     if (count == HOENN_DEX_COUNT)
-        return gBirchDexRatingText_DexCompleted; // Hoenn dex is considered complete, even though the hoenn dex count is 210.
+        return gBirchDexRatingText_DexCompleted;
     return gBirchDexRatingText_LessThan10;
 }
 
