@@ -2254,12 +2254,12 @@ static void sub_8177050(struct Sprite *sprite)
     }
 }
 
-static u8 sub_8177224(u16 species, s16 x, s16 y, u16 position)
+static u8 sub_8177224(u16 nationalDexNum, s16 x, s16 y, u16 position)
 {
     u8 spriteId;
     u8 spriteId2;
 
-    spriteId = CreateMonSpriteFromNationalDexNumber(species, x, y, position);
+    spriteId = CreateMonSpriteFromNationalDexNumber(nationalDexNum, x, y, position);
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].data[1] = position + 1;
     gSprites[spriteId].invisible = TRUE;
