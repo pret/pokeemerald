@@ -231,6 +231,7 @@ extern u8 gContestPlayerMonIndex;
 extern s16 gUnknown_02039F08[4];
 extern s16 gContestMonConditions[4];
 extern u8 gIsLinkContest;
+extern struct ContestWinner gUnknown_02039F3C;
 
 struct Shared18000
 {

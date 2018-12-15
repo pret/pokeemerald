@@ -186,11 +186,10 @@ SECTIONS {
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
-        asm/cute_sketch.o(.text);
+        asm/contest_painting_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
-        asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/trader.o(.text);
         src/starter_choose.o(.text);
@@ -511,11 +510,11 @@ SECTIONS {
         src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
-        data/cute_sketch.o(.rodata);
+        data/contest_painting_effects.o(.rodata);
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
-        data/contest_painting.o(.rodata);
+        src/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         src/trader.o(.rodata);
         src/starter_choose.o(.rodata);

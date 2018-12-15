@@ -220,7 +220,7 @@ static void ShowContestWinnerCleanup(void)
 
 void ShowContestWinner(void)
 {
-    SetMainCallback2(sub_812FDEC);
+    SetMainCallback2(CB2_ContestPainting);
     gMain.savedCallback = ShowContestWinnerCleanup;
 }
 
