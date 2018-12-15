@@ -4376,7 +4376,7 @@ void SetTvShowInactive(u8 showIdx)
 
 static void sub_80F0B24(u16 species, u8 showIdx)
 {
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) == FALSE)
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
     {
         gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
     }
