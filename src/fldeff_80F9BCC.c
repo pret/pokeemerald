@@ -366,11 +366,15 @@ void sub_80F9C44(void (*taskfunc) (u8), u16 a1, u16 a2, u8 a3)
     gTasks[taskId].func(taskId);
 }
 
-#ifdef NONMATCHING
+//#define CHECKIT(a) if(a != 0) return; break;
+
+//#ifdef NONMATCHING
 void sub_80F9C90(u8 taskId)
 {
     //
     struct Task *task = &gTasks[taskId];
+    //s16 temp;
+    //int temp = task->data[0];
 
     switch(task->data[0])
     {
@@ -381,11 +385,12 @@ void sub_80F9C90(u8 taskId)
         task->data[6] = 0x51;
 
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WIN0H, task->data[3] << 8 | task->data[4]);
-        SetGpuReg(REG_OFFSET_WIN0H, task->data[5] << 8 | task->data[6]);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[4]));
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[5], task->data[6]));
         SetGpuReg(REG_OFFSET_WININ, 0x3F);
         SetGpuReg(REG_OFFSET_WINOUT, 0);
 
+        //task->data[0]++;
         break;
 
     case 1:// correct
@@ -395,31 +400,32 @@ void sub_80F9C90(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDCNT, 0xBF);
         SetGpuReg(REG_OFFSET_BLDY, 0x10);
 
+        //task->data[0]++;
         break;
 
     case 2:
-        //r5 = 0 somewhere in here
         task->data[3] -= task->data[1];
         task->data[4] += task->data[1];
 
         if (task->data[3] <= 0 || task->data[4] > 0xEF)
         {
             //
-            task->data[3] = 0;// r5
+            task->data[3] = 0;
             task->data[4] = 0xF0;
             SetGpuReg(REG_OFFSET_BLDY, 0);
             SetGpuReg(REG_OFFSET_BLDCNT, task->data[7]);
-            //BlendPalettes(0xFFFF, 0, 0);
-            BlendPalettes(-1, 0, 0);// 0xFFFFFFFF ?
-            *gPlttBufferFaded = 0;// r5
+            BlendPalettes(0xFFFFFFFF, 0, 0);// 0xFFFFFFFF ?
+            gPlttBufferFaded[0] = 0;
         }
-        //SetGpuReg(REG_OFFSET_WIN0H, task->data[3] << 8 | task->data[4]);
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[4]));
 
-        //break;
-        // can I ternary this? NO stupid
         if (task->data[3] != 0) return;
         break;
+        
+
+        //if (task->data[3] == 0)
+        //    task->data[0]++;
+        //break;
 
     case 3:
         task->data[5] -= task->data[2];
@@ -432,12 +438,14 @@ void sub_80F9C90(u8 taskId)
             task->data[6] = 0xA0;
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         }
-        //SetGpuReg(REG_OFFSET_WIN0V, task->data[5] << 8 | task->data[6]);
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[6]));
 
         if (task->data[5] != 0) return;
         break;
 
+
+        //if (task->data[5] == 0)
+        //    task->data[0]++;
         //break;
 
     default:
@@ -446,8 +454,10 @@ void sub_80F9C90(u8 taskId)
         return;
     }
     //
-    task->data[0] += 1;
+    //task->data[0] += 1;
+    task->data[0]++;
 }
+/*
 #else
 NAKED
 void sub_80F9C90(u8 taskId)
@@ -627,6 +637,7 @@ void sub_80F9C90(u8 taskId)
                 "\tbx r0");
 }
 #endif
+*/
 
 void sub_80F9DFC(u8 taskId)
 {
