@@ -4097,13 +4097,13 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_LANGUAGE:
         retVal = boxMon->language;
         break;
-    case MON_DATA_SANITY_BIT1:
+    case MON_DATA_SANITY_IS_BAD_EGG:
         retVal = boxMon->isBadEgg;
         break;
-    case MON_DATA_SANITY_BIT2:
+    case MON_DATA_SANITY_HAS_SPECIES:
         retVal = boxMon->hasSpecies;
         break;
-    case MON_DATA_SANITY_BIT3:
+    case MON_DATA_SANITY_IS_EGG:
         retVal = boxMon->isEgg;
         break;
     case MON_DATA_OT_NAME:
@@ -4304,7 +4304,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             u16 *moves = (u16 *)data;
             s32 i = 0;
 
-            while (moves[i] != 355)
+            while (moves[i] != MOVES_COUNT)
             {
                 u16 move = moves[i];
                 if (substruct1->moves[0] == move
@@ -4466,13 +4466,13 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_LANGUAGE:
         SET8(boxMon->language);
         break;
-    case MON_DATA_SANITY_BIT1:
+    case MON_DATA_SANITY_IS_BAD_EGG:
         SET8(boxMon->isBadEgg);
         break;
-    case MON_DATA_SANITY_BIT2:
+    case MON_DATA_SANITY_HAS_SPECIES:
         SET8(boxMon->hasSpecies);
         break;
-    case MON_DATA_SANITY_BIT3:
+    case MON_DATA_SANITY_IS_EGG:
         SET8(boxMon->isEgg);
         break;
     case MON_DATA_OT_NAME:
@@ -4897,7 +4897,7 @@ bool8 IsPokemonStorageFull(void)
 
     for (i = 0; i < 14; i++)
         for (j = 0; j < 30; j++)
-            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
+            if (GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
                 return FALSE;
 
     return TRUE;
@@ -6859,7 +6859,7 @@ void SetWildMonHeldItem(void)
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
         u16 var1 = 45;
         u16 var2 = 95;
-        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3, 0)
+        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
             && GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES)
         {
             var1 = 20;

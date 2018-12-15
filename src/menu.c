@@ -1797,9 +1797,9 @@ bool8 free_temp_tile_data_buffers_if_possible(void)
     }
 }
 
-void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
-    int sizeOut;
+    u32 sizeOut;
     if (gUnknown_0203CDA8 < ARRAY_COUNT(gUnknown_0203CDAC))
     {
         void *ptr = malloc_and_decompress(src, &sizeOut);
@@ -1815,9 +1815,9 @@ void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, 
     return NULL;
 }
 
-void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode)
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode)
 {
-    int sizeOut;
+    u32 sizeOut;
     void *ptr = malloc_and_decompress(src, &sizeOut);
     if (!size)
         size = sizeOut;
@@ -1838,7 +1838,7 @@ void task_free_buf_after_copying_tile_data_to_vram(u8 taskId)
     }
 }
 
-void *malloc_and_decompress(const void *src, int *size)
+void *malloc_and_decompress(const void *src, u32 *size)
 {
     void *ptr;
     u8 *sizeAsBytes = (u8 *)size;

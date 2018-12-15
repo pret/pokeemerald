@@ -409,14 +409,14 @@ _081C73C2:
 _081C73C6:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80D2270
+	bl CheckBoxedMonSanity
 	cmp r0, 0
 	beq _081C73EC
 	lsls r1, r5, 24
 	lsrs r1, 24
 	lsrs r0, r6, 24
 	movs r2, 0x52
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 	cmp r0, 0
 	beq _081C73EC
 _081C73E2:
@@ -16376,7 +16376,7 @@ _081CF1F4:
 _081CF1FC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80D2270
+	bl CheckBoxedMonSanity
 	cmp r0, 0
 	beq _081CF23A
 	ldr r1, =0xffffff00
@@ -16392,7 +16392,7 @@ _081CF1FC:
 	str r0, [sp]
 	ldr r2, [r6, 0x14]
 	adds r0, r7, 0
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 	lsls r0, 16
 	ldr r2, =0x0000ffff
 	ldr r1, [sp]
@@ -17735,7 +17735,7 @@ sub_81CFC40: @ 81CFC40
 _081CFC60:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_80D2270
+	bl CheckBoxedMonSanity
 	cmp r0, 0
 	beq _081CFCA6
 	lsls r0, r7, 24
@@ -17745,7 +17745,7 @@ _081CFC60:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x52
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 	adds r3, r0, 0
 	cmp r3, 0
 	beq _081CFCA6
@@ -17900,14 +17900,14 @@ _081CFD92:
 _081CFD96:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80D2270
+	bl CheckBoxedMonSanity
 	cmp r0, 0
 	beq _081CFDBC
 	lsls r1, r4, 24
 	lsrs r1, 24
 	lsrs r0, r6, 24
 	movs r2, 0x53
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 	cmp r0, 0
 	beq _081CFDBC
 _081CFDB2:
@@ -19257,7 +19257,7 @@ sub_81D07D8: @ 81D07D8
 	beq _081D07FA
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x52
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 	b _081D080A
 _081D07FA:
 	ldrb r1, [r1, 0x1]
@@ -19302,7 +19302,7 @@ _081D0848:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x53
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 _081D0852:
 	mov r12, r0
 	movs r0, 0
@@ -23046,14 +23046,14 @@ _081D2CB0:
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl GetAndCopyBoxMonDataFromAnyBox
+	bl GetAndCopyBoxMonDataAt
 	b _081D2CCA
 _081D2CBE:
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl GetBoxMonDataFromAnyBox
+	bl GetBoxMonDataAt
 _081D2CCA:
 	pop {r1}
 	bx r1

@@ -901,7 +901,7 @@ static bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
-        if (GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SANITY_BIT2))
+        if (GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SANITY_HAS_SPECIES))
             daycare->mons[i].steps++, validEggs++;
     }
 
@@ -922,7 +922,7 @@ static bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
         {
             if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
                 continue;
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT1))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG))
                 continue;
 
             steps = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);

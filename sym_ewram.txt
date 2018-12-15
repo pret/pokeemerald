@@ -237,7 +237,7 @@ gUnknown_02039D12: @ 2039D12
 gUnknown_02039D14: @ 2039D14
 	.space 0x64
 
-sBoxCursorAction: @ 2039D78
+sBoxCursorArea: @ 2039D78
 	.space 0x1
 
 sBoxCursorPosition: @ 2039D79

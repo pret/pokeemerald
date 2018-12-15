@@ -8,9 +8,9 @@
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
 #define MON_DATA_LANGUAGE           3
-#define MON_DATA_SANITY_BIT1        4
-#define MON_DATA_SANITY_BIT2        5
-#define MON_DATA_SANITY_BIT3        6
+#define MON_DATA_SANITY_IS_BAD_EGG  4
+#define MON_DATA_SANITY_HAS_SPECIES 5
+#define MON_DATA_SANITY_IS_EGG      6
 #define MON_DATA_OT_NAME            7
 #define MON_DATA_MARKINGS           8
 #define MON_DATA_CHECKSUM           9

@@ -1,9 +1,12 @@
 #ifndef GUARD_POKEMON_ICON_H
 #define GUARD_POKEMON_ICON_H
 
+extern const u8 gMonIconPaletteIndices[];
+
 const u8 *GetMonIconTiles(u16 species, bool32);
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);
 const u16 *GetValidMonIconPalettePtr(u16 speciesId);
+u16 GetIconSpecies(u16 species, u32 personality);
 u16 GetUnownLetterByPersonality(u32 personality);
 u16 sub_80D2E84(u16 speciesId);
 void LoadMonIconPalettes(void);

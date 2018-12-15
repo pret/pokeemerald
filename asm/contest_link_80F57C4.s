@@ -2093,7 +2093,7 @@ _080F6AA6:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0
-	bl mon_icon_convert_unown_species_id
+	bl GetIconSpecies
 	lsls r0, 16
 	lsrs r0, 16
 	adds r0, r6
