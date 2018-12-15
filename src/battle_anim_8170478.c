@@ -79,9 +79,9 @@ static void sub_817330C(struct Sprite *);
 
 struct BallCaptureSuccessStarData
 {
-	s8 xOffset;
-	s8 yOffset;
-	s8 unk2;
+    s8 xOffset;
+    s8 yOffset;
+    s8 unk2;
 };
 
 static const struct BallCaptureSuccessStarData sBallCaptureSuccessStarData[] =
@@ -478,7 +478,7 @@ static void sub_8170660(u8 taskId)
                 SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
                 SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
                 if (!IsContest())
-                	SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
+                    SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
                 SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) ^ DISPCNT_OBJWIN_ON);
                 SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -522,9 +522,9 @@ static void sub_8170834(u8 *paletteId1, u8 *paletteId2, u8 battler)
 
 void sub_8170920(u8 taskId)
 {
-	u8 paletteId1, paletteId2;
-	sub_8170834(&paletteId1, &paletteId2, gBattleAnimAttacker);
-	DestroyAnimVisualTask(taskId);
+    u8 paletteId1, paletteId2;
+    sub_8170834(&paletteId1, &paletteId2, gBattleAnimAttacker);
+    DestroyAnimVisualTask(taskId);
 }
 
 static void sub_817094C(u8 battler)
@@ -548,8 +548,8 @@ static void sub_817094C(u8 battler)
 
 void sub_81709EC(u8 taskId)
 {
-	sub_817094C(gBattleAnimAttacker);
-	DestroyAnimVisualTask(taskId);
+    sub_817094C(gBattleAnimAttacker);
+    DestroyAnimVisualTask(taskId);
 }
 
 void sub_8170A0C(u8 taskId)
@@ -1162,13 +1162,13 @@ static void sub_81717F8(struct Sprite *sprite)
     sprite->data[4]++;
     if (sprite->data[4] == 40)
     {
-    	PlaySE(SE_RG_GETTING);
-    	BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
-    	sub_81719EC(sprite);
+        PlaySE(SE_RG_GETTING);
+        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
+        sub_81719EC(sprite);
     }
     else if (sprite->data[4] == 60)
     {
-    	BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB(0, 0, 0));
+        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB(0, 0, 0));
     }
     else if (sprite->data[4] == 95)
     {
@@ -1243,41 +1243,41 @@ static void sub_81719C0(struct Sprite *sprite)
 
 static void sub_81719EC(struct Sprite *sprite)
 {
-	u32 i;
-	u8 subpriority;
+    u32 i;
+    u8 subpriority;
 
     if (sprite->subpriority)
     {
-    	subpriority = sprite->subpriority - 1;
+        subpriority = sprite->subpriority - 1;
     }
     else
     {
-    	subpriority = 0;
-    	sprite->subpriority = 1;
+        subpriority = 0;
+        sprite->subpriority = 1;
     }
 
     sub_8171D60(4);
     for (i = 0; i < 3; i++)
     {
-    	u8 spriteId = CreateSprite(&gUnknown_085E51F0[4], sprite->pos1.x, sprite->pos1.y, subpriority);
-    	if (spriteId != MAX_SPRITES)
-    	{
-    		gSprites[spriteId].data[0] = 24;
-    		gSprites[spriteId].data[2] = sprite->pos1.x + sBallCaptureSuccessStarData[i].xOffset;
-    		gSprites[spriteId].data[4] = sprite->pos1.y + sBallCaptureSuccessStarData[i].yOffset;
-    		gSprites[spriteId].data[5] = sBallCaptureSuccessStarData[i].unk2;
-    		InitAnimArcTranslation(&gSprites[spriteId]);
-    		gSprites[spriteId].callback = sub_8171AAC;
-    		StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[4]);
-    	}
+        u8 spriteId = CreateSprite(&gUnknown_085E51F0[4], sprite->pos1.x, sprite->pos1.y, subpriority);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].data[0] = 24;
+            gSprites[spriteId].data[2] = sprite->pos1.x + sBallCaptureSuccessStarData[i].xOffset;
+            gSprites[spriteId].data[4] = sprite->pos1.y + sBallCaptureSuccessStarData[i].yOffset;
+            gSprites[spriteId].data[5] = sBallCaptureSuccessStarData[i].unk2;
+            InitAnimArcTranslation(&gSprites[spriteId]);
+            gSprites[spriteId].callback = sub_8171AAC;
+            StartSpriteAnim(&gSprites[spriteId], gBallOpenParticleAnimNums[4]);
+        }
     }
 }
 
 static void sub_8171AAC(struct Sprite *sprite)
 {
-	sprite->invisible = !sprite->invisible;
-	if (TranslateAnimArc(sprite))
-		DestroySprite(sprite);
+    sprite->invisible = !sprite->invisible;
+    if (TranslateAnimArc(sprite))
+        DestroySprite(sprite);
 }
 
 // fakematching. I think the return type of ItemIdToBallId()

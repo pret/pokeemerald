@@ -63,7 +63,7 @@ gUnknown_030061A0: @ 30061A0
 gUnknown_030061C0: @ 30061C0
 	.space 0x4
 
-gUnknown_030061C4: @ 30061C4
+gContestPaintingMonPalette: @ 30061C4
 	.space 0xC
 
 	.include "field_specials.o"
