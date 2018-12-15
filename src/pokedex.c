@@ -1889,9 +1889,9 @@ void sub_80BC890(void)
 void sub_80BC8D4(u8 dexMode, u8 sortMode)
 {
     u16 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
-#define temp_dexCount       vars[0]
-#define temp_notNationalDex vars[1]
-#define temp_dexNum         vars[2]
+#define temp_dexCount   vars[0]
+#define temp_isHoennDex vars[1]
+#define temp_dexNum     vars[2]
     s16 i;
 
     sPokedexView->pokemonListCount = 0;
@@ -1901,18 +1901,18 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
         default:
         case DEX_MODE_HOENN:
             temp_dexCount = HOENN_DEX_COUNT;
-            temp_notNationalDex = TRUE;
+            temp_isHoennDex = TRUE;
             break;
         case DEX_MODE_NATIONAL:
             if (IsNationalPokedexEnabled())
             {
                 temp_dexCount = NATIONAL_DEX_COUNT;
-                temp_notNationalDex = FALSE;
+                temp_isHoennDex = FALSE;
             }
             else
             {
                 temp_dexCount = HOENN_DEX_COUNT;
-                temp_notNationalDex = TRUE;
+                temp_isHoennDex = TRUE;
             }
             break;
     }
@@ -1920,7 +1920,7 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
     switch (sortMode)
     {
         case 0:
-            if (temp_notNationalDex)
+            if (temp_isHoennDex)
             {
                 for (i = 0; i < temp_dexCount; i++)
                 {
@@ -2957,7 +2957,7 @@ void sub_80BEA24(u8 taskId)
         case 5:
             if (gTasks[taskId].data[1] == 0)
             {
-                gTasks[taskId].data[4] = (u16)CreateMonSpriteFromNationalDexNumber(sPokedexListItem->dexNum, 0x30, 0x38, 0);
+                gTasks[taskId].data[4] = (u16)CreateMonSpriteFromNationalDexNumber(sPokedexListItem->dexNum, 48, 56, 0);
                 gSprites[gTasks[taskId].data[4]].oam.priority = 0;
             }
             gMain.state++;
@@ -3784,7 +3784,7 @@ void sub_80BFE38(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 4:
-            spriteId = CreateMonSpriteFromNationalDexNumber(dexNum, 0x30, 0x38, 0);
+            spriteId = CreateMonSpriteFromNationalDexNumber(dexNum, 48, 56, 0);
             gSprites[spriteId].oam.priority = 0;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
             SetVBlankCallback(gUnknown_030060B4);
