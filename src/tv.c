@@ -3229,7 +3229,7 @@ u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16 passedSpecies)
 
     species = (Random() % (NUM_SPECIES - 1)) + 1;
     initSpecies = species;
-    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != 1 || species == passedSpecies)
+    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) != TRUE || species == passedSpecies)
     {
         if (species == 1)
         {
@@ -4376,7 +4376,7 @@ void SetTvShowInactive(u8 showIdx)
 
 static void sub_80F0B24(u16 species, u8 showIdx)
 {
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0)
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) == FALSE)
     {
         gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
     }

@@ -135,7 +135,7 @@ struct Unk201C000
     u16 unk90;
     u16 unk92;
     u16 unk94;
-    u16 unk96[386];
+    u16 unk96[NATIONAL_DEX_COUNT];
     u16 unk39A;
     u16 unk39C[7];
 };
@@ -2259,7 +2259,7 @@ static u8 sub_8177224(u16 species, s16 x, s16 y, u16 position)
     u8 spriteId;
     u8 spriteId2;
 
-    spriteId = sub_80C0E9C(species, x, y, position);
+    spriteId = CreateMonSpriteFromNationalDexNumber(species, x, y, position);
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].data[1] = position + 1;
     gSprites[spriteId].invisible = TRUE;
@@ -2297,16 +2297,16 @@ static void sub_8177388(void)
     u16 dexNum;
     u16 j;
 
-    for (dexNum = 1, j = 0; dexNum < 386; dexNum++)
+    for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
     {
-        if (GetSetPokedexFlag(dexNum, 1))
+        if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {
             gUnknown_0203BCE8->unk96[j] = dexNum;
             j++;
         }
     }
 
-    for (dexNum = j; dexNum < 386; dexNum++)
+    for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
         gUnknown_0203BCE8->unk96[dexNum] = 0;
 
     gUnknown_0203BCE8->unk39A = j;
