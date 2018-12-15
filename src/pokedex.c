@@ -4411,17 +4411,17 @@ u16 sub_80C0944(void)
 
     for (i = 0; i < 150; i++)
     {
-        if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT) == FALSE)
+        if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
             return 0;
     }
     for (i = 151; i < 248; i++)
     {
-        if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT) == FALSE)
+        if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
             return 0;
     }
     for (i = 251; i < 384; i++)
     {
-        if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT) == FALSE)
+        if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
             return 0;
     }
     return 1;
