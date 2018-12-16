@@ -5858,10 +5858,10 @@ u16 HoennPokedexNumToSpecies(u16 hoennNum)
 
     species = 0;
 
-    while (species < 411 && gSpeciesToHoennPokedexNum[species] != hoennNum)
+    while (species < (NUM_SPECIES - 1) && gSpeciesToHoennPokedexNum[species] != hoennNum)
         species++;
 
-    if (species == 411)
+    if (species == NUM_SPECIES - 1)
         return 0;
 
     return species + 1;
@@ -5876,10 +5876,10 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
 
     species = 0;
 
-    while (species < 411 && gSpeciesToNationalPokedexNum[species] != nationalNum)
+    while (species < (NUM_SPECIES - 1) && gSpeciesToNationalPokedexNum[species] != nationalNum)
         species++;
 
-    if (species == 411)
+    if (species == NUM_SPECIES - 1)
         return 0;
 
     return species + 1;
@@ -5894,10 +5894,10 @@ u16 NationalToHoennOrder(u16 nationalNum)
 
     hoennNum = 0;
 
-    while (hoennNum < 411 && gHoennToNationalOrder[hoennNum] != nationalNum)
+    while (hoennNum < (NUM_SPECIES - 1) && gHoennToNationalOrder[hoennNum] != nationalNum)
         hoennNum++;
 
-    if (hoennNum == 411)
+    if (hoennNum == NUM_SPECIES - 1)
         return 0;
 
     return hoennNum + 1;
@@ -6578,15 +6578,15 @@ u16 SpeciesToPokedexNum(u16 species)
     else
     {
         species = SpeciesToHoennPokedexNum(species);
-        if (species <= 202)
+        if (species <= HOENN_DEX_COUNT)
             return species;
         return 0xFFFF;
     }
 }
 
-bool32 sub_806E3F8(u16 species)
+bool32 IsSpeciesInHoennDex(u16 species)
 {
-    if (SpeciesToHoennPokedexNum(species) > 202)
+    if (SpeciesToHoennPokedexNum(species) > HOENN_DEX_COUNT)
         return FALSE;
     else
         return TRUE;

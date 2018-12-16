@@ -563,8 +563,8 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     {
     case 0:
     case 1:
-        GetSetPokedexFlag(nationalDexNum, 2);
-        GetSetPokedexFlag(nationalDexNum, 3);
+        GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
+        GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
         break;
     }
     return sentToPc;

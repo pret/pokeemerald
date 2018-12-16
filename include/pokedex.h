@@ -4,6 +4,15 @@
 extern u8 gUnknown_030060B0;
 extern void (*gUnknown_030060B4)(void);
 
+#define HOENN_DEX_COUNT 202
+#define NATIONAL_DEX_COUNT 386
+
+enum
+{
+    DEX_MODE_HOENN,
+    DEX_MODE_NATIONAL
+};
+
 enum
 {
     FLAG_GET_SEEN,
@@ -31,6 +40,6 @@ u16 GetNationalPokedexCount(u8);
 u16 GetHoennPokedexCount(u8);
 u8 CreateDexDisplayMonDataTask(u16 dexNum, u32 trainerId, u32 personality);
 s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
-u16 sub_80C0E9C(u16, s16, s16, u16);
+u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
 
 #endif // GUARD_POKEDEX_H

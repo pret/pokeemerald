@@ -236,7 +236,7 @@ struct Time
 struct Pokedex
 {
     /*0x00*/ u8 order;
-    /*0x01*/ u8 unknown1;
+    /*0x01*/ u8 mode;
     /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
     /*0x03*/ u8 unknown2;
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
