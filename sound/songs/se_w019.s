@@ -28,7 +28,7 @@ se_w019_1:
 	.byte		VOL   , 55*se_w019_mvl/mxv
 	.byte		PAN   , c_v+10
 	.byte		BEND  , c_v-16
-	.byte		N07   , An1 
+	.byte		N07   , An1
 	.byte	W01
 	.byte		VOL   , 71*se_w019_mvl/mxv
 	.byte		PAN   , c_v+0
@@ -51,7 +51,7 @@ se_w019_1:
 	.byte		VOL   , 90*se_w019_mvl/mxv
 	.byte		PAN   , c_v+10
 	.byte		BEND  , c_v+1
-	.byte		N04   
+	.byte		N04
 	.byte	W01
 	.byte		VOL   , 54*se_w019_mvl/mxv
 	.byte		PAN   , c_v+0
@@ -95,7 +95,7 @@ se_w019_1:
 	.byte		PAN   , c_v+10
 	.byte		VOL   , 90*se_w019_mvl/mxv
 	.byte		BEND  , c_v+1
-	.byte		N04   
+	.byte		N04
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte		VOL   , 54*se_w019_mvl/mxv
@@ -139,7 +139,7 @@ se_w019_1:
 	.byte		PAN   , c_v+10
 	.byte		VOL   , 90*se_w019_mvl/mxv
 	.byte		BEND  , c_v+1
-	.byte		N04   
+	.byte		N04
 	.byte	W01
 	.byte		PAN   , c_v+0
 	.byte		VOL   , 54*se_w019_mvl/mxv
@@ -177,7 +177,7 @@ se_w019_2:
 	.byte		        14*se_w019_mvl/mxv
 	.byte	W02
 	.byte		        110*se_w019_mvl/mxv
-	.byte		N04   , Gn4 
+	.byte		N04   , Gn4
 	.byte	W01
 	.byte		VOL   , 84*se_w019_mvl/mxv
 	.byte	W02
@@ -201,7 +201,7 @@ se_w019_2:
 	.byte		        14*se_w019_mvl/mxv
 	.byte	W02
 	.byte		        110*se_w019_mvl/mxv
-	.byte		N04   , Gn4 
+	.byte		N04   , Gn4
 	.byte	W01
 	.byte		VOL   , 84*se_w019_mvl/mxv
 	.byte	W01
@@ -225,7 +225,7 @@ se_w019_2:
 	.byte		        14*se_w019_mvl/mxv
 	.byte	W03
 	.byte		        110*se_w019_mvl/mxv
-	.byte		N04   , Gn4 
+	.byte		N04   , Gn4
 	.byte	W01
 	.byte		VOL   , 84*se_w019_mvl/mxv
 	.byte	W01

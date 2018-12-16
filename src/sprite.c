@@ -406,7 +406,7 @@ void SortSprites(void)
             sprite2Y = sprite2Y - 256;
 
         if (sprite1->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-         && sprite1->oam.size == 3)
+        && sprite1->oam.size == 3)
         {
             u32 shape = sprite1->oam.shape;
             if (shape == ST_OAM_SQUARE || shape == 2)
@@ -417,7 +417,7 @@ void SortSprites(void)
         }
 
         if (sprite2->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-         && sprite2->oam.size == 3)
+        && sprite2->oam.size == 3)
         {
             u32 shape = sprite2->oam.shape;
             if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
@@ -429,7 +429,7 @@ void SortSprites(void)
 
         while (j > 0
             && ((sprite1Priority > sprite2Priority)
-             || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
+            || (sprite1Priority == sprite2Priority && sprite1Y < sprite2Y)))
         {
             u8 temp = sSpriteOrder[j];
             sSpriteOrder[j] = sSpriteOrder[j - 1];
@@ -455,7 +455,7 @@ void SortSprites(void)
                 sprite2Y = sprite2Y - 256;
 
             if (sprite1->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-             && sprite1->oam.size == 3)
+            && sprite1->oam.size == 3)
             {
                 u32 shape = sprite1->oam.shape;
                 if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)
@@ -466,7 +466,7 @@ void SortSprites(void)
             }
 
             if (sprite2->oam.affineMode == ST_OAM_AFFINE_DOUBLE
-             && sprite2->oam.size == 3)
+            && sprite2->oam.size == 3)
             {
                 u32 shape = sprite2->oam.shape;
                 if (shape == ST_OAM_SQUARE || shape == ST_OAM_V_RECTANGLE)

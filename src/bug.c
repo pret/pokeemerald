@@ -377,7 +377,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
     if (!IsContest() && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
         if (GetBattlerPosition(gBattleAnimTarget) == B_POSITION_PLAYER_LEFT
-         || GetBattlerPosition(gBattleAnimTarget) == B_POSITION_OPPONENT_LEFT)
+        || GetBattlerPosition(gBattleAnimTarget) == B_POSITION_OPPONENT_LEFT)
         {
             s16 temp1, temp2;
 
@@ -456,7 +456,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
         if (!TranslateAnimArc(sprite))
         {
             u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - x2,
-                                  sprite->pos1.y + sprite->pos2.y - y2);
+                                sprite->pos1.y + sprite->pos2.y - y2);
             rotation += 0xC000;
             sub_80A73E0(sprite, FALSE, 0x100, 0x100, rotation);
 

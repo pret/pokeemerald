@@ -51,8 +51,8 @@ int GameClear(void)
         ribbonCounts[i].count = 0;
 
         if (GetMonData(mon, MON_DATA_SANITY_BIT2)
-         && !GetMonData(mon, MON_DATA_SANITY_BIT3)
-         && !GetMonData(mon, MON_DATA_CHAMPION_RIBBON))
+        && !GetMonData(mon, MON_DATA_SANITY_BIT3)
+        && !GetMonData(mon, MON_DATA_CHAMPION_RIBBON))
         {
             u8 val[1] = {TRUE};
             SetMonData(mon, MON_DATA_CHAMPION_RIBBON, val);
@@ -65,7 +65,7 @@ int GameClear(void)
     {
         IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
         FlagSet(FLAG_SYS_RIBBON_GET);
-        
+
         for (i = 1; i < 6; i++)
         {
             if (ribbonCounts[i].count > ribbonCounts[0].count)

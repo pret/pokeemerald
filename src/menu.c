@@ -814,12 +814,12 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
         FillWindowPixelBuffer(gUnknown_0203CDA0, 0xFF);
         width = GetStringWidth(0, string, 0);
         AddTextPrinterParameterized3(gUnknown_0203CDA0,
-                  0,
-                  0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
-                  1,
-                  gUnknown_0860F0D0,
-                  0,
-                  string);
+                0,
+                0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a2 - width,
+                1,
+                gUnknown_0860F0D0,
+                0,
+                string);
         if (copyToVram)
             CopyWindowToVram(gUnknown_0203CDA0, 3);
     }
@@ -850,12 +850,12 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
         {
             width = GetStringWidth(0, string2, 0);
             AddTextPrinterParameterized3(gUnknown_0203CDA0,
-                      0,
-                      0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
-                      1,
-                      color,
-                      0,
-                      string2);
+                    0,
+                    0xEC - (GetWindowAttribute(gUnknown_0203CDA0, WINDOW_TILEMAP_LEFT) * 8) - a4 - width,
+                    1,
+                    color,
+                    0,
+                    string2);
         }
         AddTextPrinterParameterized4(gUnknown_0203CDA0, 1, 4, 1, 0, 0, color, 0, string);
         if (copyToVram)
@@ -1318,12 +1318,12 @@ void sub_8199060(u8 oldCursorPos, u8 newCursorPos)
     xPos = (newCursorPos % gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionWidth + gUnknown_0203CD90.left;
     yPos = (newCursorPos / gUnknown_0203CD90.horizontalCount) * gUnknown_0203CD90.optionHeight + gUnknown_0203CD90.top;
     AddTextPrinterParameterized(gUnknown_0203CD90.windowId,
-                      gUnknown_0203CD90.fontId,
-                      gText_SelectorArrow3,
-                      xPos,
-                      yPos,
-                      0,
-                      0);
+                    gUnknown_0203CD90.fontId,
+                    gText_SelectorArrow3,
+                    xPos,
+                    yPos,
+                    0,
+                    0);
 }
 
 u8 sub_8199134(s8 deltaX, s8 deltaY)

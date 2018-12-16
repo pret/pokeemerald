@@ -65,7 +65,7 @@ se_track_stop_1:
 	.byte	W09
 	.byte		        0*se_track_stop_mvl/mxv
 	.byte	W01
-	.byte		EOT   
+	.byte		EOT
 	.byte	W05
 	.byte	FINE
 
@@ -79,7 +79,7 @@ se_track_stop_2:
 	.byte		N09   , Gs6 , v024
 	.byte	W18
 	.byte	W05
-	.byte		N15   
+	.byte		N15
 	.byte	W19
 	.byte	W24
 	.byte	W24
@@ -97,7 +97,7 @@ se_track_stop_3:
 	.byte		N09   , An6 , v024
 	.byte	W18
 	.byte	W05
-	.byte		N15   
+	.byte		N15
 	.byte	W19
 	.byte	W24
 	.byte	W24

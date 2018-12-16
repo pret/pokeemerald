@@ -311,8 +311,8 @@ static void InitBGs(void)
     InitBgsFromTemplates(0, gUnknown_085CEC28, 2);
     ResetAllBgsCoordinates();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
-                                  DISPCNT_OBJ_1D_MAP |
-                                  DISPCNT_OBJ_ON);
+                                DISPCNT_OBJ_1D_MAP |
+                                DISPCNT_OBJ_ON);
     ShowBg(0);
     ShowBg(1);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);

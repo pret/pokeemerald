@@ -1,5 +1,5 @@
 // Slateport Battle Tent.
-const u16 gSlateportBattleTentTrainerMons_Jolie[] = 
+const u16 gSlateportBattleTentTrainerMons_Jolie[] =
 {
     9,
     10,
@@ -15,7 +15,7 @@ const u16 gSlateportBattleTentTrainerMons_Jolie[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Malachi[] = 
+const u16 gSlateportBattleTentTrainerMons_Malachi[] =
 {
     9,
     16,
@@ -31,7 +31,7 @@ const u16 gSlateportBattleTentTrainerMons_Malachi[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Kelsie[] = 
+const u16 gSlateportBattleTentTrainerMons_Kelsie[] =
 {
     4,
     5,
@@ -47,7 +47,7 @@ const u16 gSlateportBattleTentTrainerMons_Kelsie[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Davon[] = 
+const u16 gSlateportBattleTentTrainerMons_Davon[] =
 {
     4,
     5,
@@ -64,7 +64,7 @@ const u16 gSlateportBattleTentTrainerMons_Davon[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Glenda[] = 
+const u16 gSlateportBattleTentTrainerMons_Glenda[] =
 {
     0,
     1,
@@ -82,7 +82,7 @@ const u16 gSlateportBattleTentTrainerMons_Glenda[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Helena[] = 
+const u16 gSlateportBattleTentTrainerMons_Helena[] =
 {
     18,
     19,
@@ -98,7 +98,7 @@ const u16 gSlateportBattleTentTrainerMons_Helena[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Rodolfo[] = 
+const u16 gSlateportBattleTentTrainerMons_Rodolfo[] =
 {
     0,
     1,
@@ -116,7 +116,7 @@ const u16 gSlateportBattleTentTrainerMons_Rodolfo[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Davion[] = 
+const u16 gSlateportBattleTentTrainerMons_Davion[] =
 {
     17,
     23,
@@ -135,7 +135,7 @@ const u16 gSlateportBattleTentTrainerMons_Davion[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Kendall[] = 
+const u16 gSlateportBattleTentTrainerMons_Kendall[] =
 {
     4,
     7,
@@ -154,7 +154,7 @@ const u16 gSlateportBattleTentTrainerMons_Kendall[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Colten[] = 
+const u16 gSlateportBattleTentTrainerMons_Colten[] =
 {
     0,
     2,
@@ -171,7 +171,7 @@ const u16 gSlateportBattleTentTrainerMons_Colten[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Irvin[] = 
+const u16 gSlateportBattleTentTrainerMons_Irvin[] =
 {
     0,
     1,
@@ -189,7 +189,7 @@ const u16 gSlateportBattleTentTrainerMons_Irvin[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Shaun[] = 
+const u16 gSlateportBattleTentTrainerMons_Shaun[] =
 {
     17,
     18,
@@ -207,7 +207,7 @@ const u16 gSlateportBattleTentTrainerMons_Shaun[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Kyler[] = 
+const u16 gSlateportBattleTentTrainerMons_Kyler[] =
 {
     22,
     23,
@@ -224,7 +224,7 @@ const u16 gSlateportBattleTentTrainerMons_Kyler[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Maggie[] = 
+const u16 gSlateportBattleTentTrainerMons_Maggie[] =
 {
     10,
     13,
@@ -240,7 +240,7 @@ const u16 gSlateportBattleTentTrainerMons_Maggie[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Stephon[] = 
+const u16 gSlateportBattleTentTrainerMons_Stephon[] =
 {
     8,
     10,
@@ -256,7 +256,7 @@ const u16 gSlateportBattleTentTrainerMons_Stephon[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Rebecca[] = 
+const u16 gSlateportBattleTentTrainerMons_Rebecca[] =
 {
     8,
     13,
@@ -272,7 +272,7 @@ const u16 gSlateportBattleTentTrainerMons_Rebecca[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Reggie[] = 
+const u16 gSlateportBattleTentTrainerMons_Reggie[] =
 {
     6,
     7,
@@ -289,7 +289,7 @@ const u16 gSlateportBattleTentTrainerMons_Reggie[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Janae[] = 
+const u16 gSlateportBattleTentTrainerMons_Janae[] =
 {
     0,
     1,
@@ -306,7 +306,7 @@ const u16 gSlateportBattleTentTrainerMons_Janae[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Caiden[] = 
+const u16 gSlateportBattleTentTrainerMons_Caiden[] =
 {
     10,
     14,
@@ -324,7 +324,7 @@ const u16 gSlateportBattleTentTrainerMons_Caiden[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Kirsten[] = 
+const u16 gSlateportBattleTentTrainerMons_Kirsten[] =
 {
     10,
     16,
@@ -342,7 +342,7 @@ const u16 gSlateportBattleTentTrainerMons_Kirsten[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Kurtis[] = 
+const u16 gSlateportBattleTentTrainerMons_Kurtis[] =
 {
     0,
     1,
@@ -358,7 +358,7 @@ const u16 gSlateportBattleTentTrainerMons_Kurtis[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Stefan[] = 
+const u16 gSlateportBattleTentTrainerMons_Stefan[] =
 {
     4,
     5,
@@ -374,7 +374,7 @@ const u16 gSlateportBattleTentTrainerMons_Stefan[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Avery[] = 
+const u16 gSlateportBattleTentTrainerMons_Avery[] =
 {
     2,
     3,
@@ -390,7 +390,7 @@ const u16 gSlateportBattleTentTrainerMons_Avery[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Dwane[] = 
+const u16 gSlateportBattleTentTrainerMons_Dwane[] =
 {
     14,
     15,
@@ -406,7 +406,7 @@ const u16 gSlateportBattleTentTrainerMons_Dwane[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Mckenna[] = 
+const u16 gSlateportBattleTentTrainerMons_Mckenna[] =
 {
     27,
     29,
@@ -422,7 +422,7 @@ const u16 gSlateportBattleTentTrainerMons_Mckenna[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Camryn[] = 
+const u16 gSlateportBattleTentTrainerMons_Camryn[] =
 {
     5,
     6,
@@ -439,7 +439,7 @@ const u16 gSlateportBattleTentTrainerMons_Camryn[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Natasha[] = 
+const u16 gSlateportBattleTentTrainerMons_Natasha[] =
 {
     1,
     3,
@@ -455,7 +455,7 @@ const u16 gSlateportBattleTentTrainerMons_Natasha[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Austyn[] = 
+const u16 gSlateportBattleTentTrainerMons_Austyn[] =
 {
     25,
     31,
@@ -472,7 +472,7 @@ const u16 gSlateportBattleTentTrainerMons_Austyn[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Donovan[] = 
+const u16 gSlateportBattleTentTrainerMons_Donovan[] =
 {
     10,
     16,
@@ -491,7 +491,7 @@ const u16 gSlateportBattleTentTrainerMons_Donovan[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Tamia[] = 
+const u16 gSlateportBattleTentTrainerMons_Tamia[] =
 {
     2,
     6,
@@ -507,7 +507,7 @@ const u16 gSlateportBattleTentTrainerMons_Tamia[] =
     -1
 };
 
-const struct BattleFrontierTrainer gSlateportBattleTentTrainers[] = 
+const struct BattleFrontierTrainer gSlateportBattleTentTrainers[] =
 {
     [0] = {
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
@@ -751,7 +751,7 @@ const struct BattleFrontierTrainer gSlateportBattleTentTrainers[] =
     }
 };
 
-const struct FacilityMon gSlateportBattleTentMons[] = 
+const struct FacilityMon gSlateportBattleTentMons[] =
 {
     [0] = {
         .species = SPECIES_ZIGZAGOON,
@@ -1246,7 +1246,7 @@ const struct FacilityMon gSlateportBattleTentMons[] =
 };
 
 // Verdanturf Battle Tent.
-const u16 gVerdanturfBattleTentTrainerMons_Brenna[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Brenna[] =
 {
     4,
     11,
@@ -1256,7 +1256,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Brenna[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Dilan[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Dilan[] =
 {
     30,
     37,
@@ -1266,7 +1266,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Dilan[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Eliana[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Eliana[] =
 {
     6,
     7,
@@ -1276,7 +1276,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Eliana[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Markus[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Markus[] =
 {
     6,
     7,
@@ -1286,7 +1286,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Markus[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Caitlyn[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Caitlyn[] =
 {
     0,
     12,
@@ -1297,7 +1297,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Caitlyn[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Desiree[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Desiree[] =
 {
     8,
     12,
@@ -1307,7 +1307,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Desiree[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Ronald[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Ronald[] =
 {
     1,
     20,
@@ -1317,7 +1317,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Ronald[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Ashten[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Ashten[] =
 {
     9,
     12,
@@ -1327,7 +1327,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Ashten[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Gerard[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Gerard[] =
 {
     36,
     7,
@@ -1337,7 +1337,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Gerard[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Bradly[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Bradly[] =
 {
     26,
     3,
@@ -1347,7 +1347,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Bradly[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Dennis[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Dennis[] =
 {
     14,
     37,
@@ -1357,7 +1357,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Dennis[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Prestin[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Prestin[] =
 {
     31,
     28,
@@ -1369,7 +1369,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Prestin[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Ernesto[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Ernesto[] =
 {
     33,
     32,
@@ -1379,7 +1379,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Ernesto[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Nala[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Nala[] =
 {
     1,
     4,
@@ -1391,7 +1391,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Nala[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Darnell[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Darnell[] =
 {
     0,
     29,
@@ -1402,7 +1402,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Darnell[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Ashlyn[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Ashlyn[] =
 {
     29,
     36,
@@ -1414,7 +1414,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Ashlyn[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Addison[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Addison[] =
 {
     0,
     1,
@@ -1424,7 +1424,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Addison[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Justine[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Justine[] =
 {
     0,
     1,
@@ -1434,7 +1434,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Justine[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Tyson[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Tyson[] =
 {
     5,
     15,
@@ -1446,7 +1446,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Tyson[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Laila[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Laila[] =
 {
     5,
     15,
@@ -1457,7 +1457,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Laila[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Waren[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Waren[] =
 {
     0,
     9,
@@ -1467,7 +1467,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Waren[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Tobias[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Tobias[] =
 {
     6,
     7,
@@ -1477,7 +1477,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Tobias[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Josiah[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Josiah[] =
 {
     8,
     16,
@@ -1487,7 +1487,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Josiah[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Dion[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Dion[] =
 {
     14,
     2,
@@ -1498,7 +1498,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Dion[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Kenzie[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Kenzie[] =
 {
     18,
     10,
@@ -1509,7 +1509,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Kenzie[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Lillian[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Lillian[] =
 {
     24,
     34,
@@ -1519,7 +1519,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Lillian[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Lesley[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Lesley[] =
 {
     26,
     0,
@@ -1529,7 +1529,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Lesley[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Marquis[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Marquis[] =
 {
     24,
     34,
@@ -1540,7 +1540,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Marquis[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Freddy[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Freddy[] =
 {
     18,
     21,
@@ -1550,7 +1550,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Freddy[] =
     -1
 };
 
-const u16 gVerdanturfBattleTentTrainerMons_Cecilia[] = 
+const u16 gVerdanturfBattleTentTrainerMons_Cecilia[] =
 {
     23,
     26,
@@ -1560,7 +1560,7 @@ const u16 gVerdanturfBattleTentTrainerMons_Cecilia[] =
     -1
 };
 
-const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[] = 
+const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[] =
 {
     [0] = {
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
@@ -1804,7 +1804,7 @@ const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[] =
     }
 };
 
-const struct FacilityMon gVerdanturfBattleTentMons[] = 
+const struct FacilityMon gVerdanturfBattleTentMons[] =
 {
     [0] = {
         .species = SPECIES_POOCHYENA,
@@ -2124,7 +2124,7 @@ const struct FacilityMon gVerdanturfBattleTentMons[] =
 };
 
 // Fallarbor Battle Tent.
-const u16 gFallarborBattleTentTrainerMons_Amber[] = 
+const u16 gFallarborBattleTentTrainerMons_Amber[] =
 {
     39,
     40,
@@ -2135,7 +2135,7 @@ const u16 gFallarborBattleTentTrainerMons_Amber[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Javier[] = 
+const u16 gFallarborBattleTentTrainerMons_Javier[] =
 {
     6,
     35,
@@ -2146,7 +2146,7 @@ const u16 gFallarborBattleTentTrainerMons_Javier[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Natalie[] = 
+const u16 gFallarborBattleTentTrainerMons_Natalie[] =
 {
     5,
     29,
@@ -2156,7 +2156,7 @@ const u16 gFallarborBattleTentTrainerMons_Natalie[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Treve[] = 
+const u16 gFallarborBattleTentTrainerMons_Treve[] =
 {
     28,
     29,
@@ -2166,7 +2166,7 @@ const u16 gFallarborBattleTentTrainerMons_Treve[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Arianna[] = 
+const u16 gFallarborBattleTentTrainerMons_Arianna[] =
 {
     18,
     23,
@@ -2176,7 +2176,7 @@ const u16 gFallarborBattleTentTrainerMons_Arianna[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Jadyn[] = 
+const u16 gFallarborBattleTentTrainerMons_Jadyn[] =
 {
     0,
     22,
@@ -2187,7 +2187,7 @@ const u16 gFallarborBattleTentTrainerMons_Jadyn[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Gerardo[] = 
+const u16 gFallarborBattleTentTrainerMons_Gerardo[] =
 {
     6,
     18,
@@ -2197,7 +2197,7 @@ const u16 gFallarborBattleTentTrainerMons_Gerardo[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Jonn[] = 
+const u16 gFallarborBattleTentTrainerMons_Jonn[] =
 {
     16,
     17,
@@ -2207,7 +2207,7 @@ const u16 gFallarborBattleTentTrainerMons_Jonn[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Esteban[] = 
+const u16 gFallarborBattleTentTrainerMons_Esteban[] =
 {
     5,
     28,
@@ -2217,7 +2217,7 @@ const u16 gFallarborBattleTentTrainerMons_Esteban[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Jameson[] = 
+const u16 gFallarborBattleTentTrainerMons_Jameson[] =
 {
     1,
     2,
@@ -2227,7 +2227,7 @@ const u16 gFallarborBattleTentTrainerMons_Jameson[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Alanzo[] = 
+const u16 gFallarborBattleTentTrainerMons_Alanzo[] =
 {
     9,
     10,
@@ -2239,7 +2239,7 @@ const u16 gFallarborBattleTentTrainerMons_Alanzo[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Howard[] = 
+const u16 gFallarborBattleTentTrainerMons_Howard[] =
 {
     18,
     23,
@@ -2249,7 +2249,7 @@ const u16 gFallarborBattleTentTrainerMons_Howard[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Conrad[] = 
+const u16 gFallarborBattleTentTrainerMons_Conrad[] =
 {
     18,
     19,
@@ -2259,7 +2259,7 @@ const u16 gFallarborBattleTentTrainerMons_Conrad[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Makenna[] = 
+const u16 gFallarborBattleTentTrainerMons_Makenna[] =
 {
     4,
     21,
@@ -2269,7 +2269,7 @@ const u16 gFallarborBattleTentTrainerMons_Makenna[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Brayan[] = 
+const u16 gFallarborBattleTentTrainerMons_Brayan[] =
 {
     0,
     4,
@@ -2281,7 +2281,7 @@ const u16 gFallarborBattleTentTrainerMons_Brayan[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Mariana[] = 
+const u16 gFallarborBattleTentTrainerMons_Mariana[] =
 {
     0,
     4,
@@ -2293,7 +2293,7 @@ const u16 gFallarborBattleTentTrainerMons_Mariana[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Sheldon[] = 
+const u16 gFallarborBattleTentTrainerMons_Sheldon[] =
 {
     2,
     3,
@@ -2303,7 +2303,7 @@ const u16 gFallarborBattleTentTrainerMons_Sheldon[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Gianna[] = 
+const u16 gFallarborBattleTentTrainerMons_Gianna[] =
 {
     1,
     2,
@@ -2313,7 +2313,7 @@ const u16 gFallarborBattleTentTrainerMons_Gianna[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Yahir[] = 
+const u16 gFallarborBattleTentTrainerMons_Yahir[] =
 {
     4,
     8,
@@ -2324,7 +2324,7 @@ const u16 gFallarborBattleTentTrainerMons_Yahir[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Britney[] = 
+const u16 gFallarborBattleTentTrainerMons_Britney[] =
 {
     4,
     7,
@@ -2335,7 +2335,7 @@ const u16 gFallarborBattleTentTrainerMons_Britney[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Hecter[] = 
+const u16 gFallarborBattleTentTrainerMons_Hecter[] =
 {
     0,
     1,
@@ -2346,7 +2346,7 @@ const u16 gFallarborBattleTentTrainerMons_Hecter[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Tannor[] = 
+const u16 gFallarborBattleTentTrainerMons_Tannor[] =
 {
     5,
     30,
@@ -2356,7 +2356,7 @@ const u16 gFallarborBattleTentTrainerMons_Tannor[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Benji[] = 
+const u16 gFallarborBattleTentTrainerMons_Benji[] =
 {
     25,
     26,
@@ -2366,7 +2366,7 @@ const u16 gFallarborBattleTentTrainerMons_Benji[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Rory[] = 
+const u16 gFallarborBattleTentTrainerMons_Rory[] =
 {
     9,
     11,
@@ -2377,7 +2377,7 @@ const u16 gFallarborBattleTentTrainerMons_Rory[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Eleanor[] = 
+const u16 gFallarborBattleTentTrainerMons_Eleanor[] =
 {
     23,
     28,
@@ -2389,7 +2389,7 @@ const u16 gFallarborBattleTentTrainerMons_Eleanor[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Evelyn[] = 
+const u16 gFallarborBattleTentTrainerMons_Evelyn[] =
 {
     29,
     31,
@@ -2399,7 +2399,7 @@ const u16 gFallarborBattleTentTrainerMons_Evelyn[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Arielle[] = 
+const u16 gFallarborBattleTentTrainerMons_Arielle[] =
 {
     1,
     3,
@@ -2409,7 +2409,7 @@ const u16 gFallarborBattleTentTrainerMons_Arielle[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Connar[] = 
+const u16 gFallarborBattleTentTrainerMons_Connar[] =
 {
     7,
     8,
@@ -2420,7 +2420,7 @@ const u16 gFallarborBattleTentTrainerMons_Connar[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Maurice[] = 
+const u16 gFallarborBattleTentTrainerMons_Maurice[] =
 {
     4,
     5,
@@ -2430,7 +2430,7 @@ const u16 gFallarborBattleTentTrainerMons_Maurice[] =
     -1
 };
 
-const u16 gFallarborBattleTentTrainerMons_Kianna[] = 
+const u16 gFallarborBattleTentTrainerMons_Kianna[] =
 {
     22,
     24,
@@ -2441,7 +2441,7 @@ const u16 gFallarborBattleTentTrainerMons_Kianna[] =
     -1
 };
 
-const struct BattleFrontierTrainer gFallarborBattleTentTrainers[] = 
+const struct BattleFrontierTrainer gFallarborBattleTentTrainers[] =
 {
     [0] = {
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
@@ -2685,7 +2685,7 @@ const struct BattleFrontierTrainer gFallarborBattleTentTrainers[] =
     }
 };
 
-const struct FacilityMon gFallarborBattleTentMons[] = 
+const struct FacilityMon gFallarborBattleTentMons[] =
 {
     [0] = {
         .species = SPECIES_NUMEL,

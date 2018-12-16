@@ -573,7 +573,7 @@ u8 sub_818E06C(void)
 
     quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
     if (sub_811F8D8(quiz->unk_014) == 0)
-   {
+    {
         i = quiz->unk_02b;
         do
         {

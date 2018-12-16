@@ -441,4 +441,3 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     [SPECIES_UNOWN_EMARK] = {gMonBackPic_UnownExclamationMark, 0x800, SPECIES_UNOWN_EMARK},
     [SPECIES_UNOWN_QMARK] = {gMonBackPic_UnownQuestionMark, 0x800, SPECIES_UNOWN_QMARK},
 };
-

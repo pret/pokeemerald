@@ -4,7 +4,7 @@
 	.syntax unified
 
 	.text
-	
+
 
 
 	thumb_func_start sub_81C7078

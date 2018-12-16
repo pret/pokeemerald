@@ -23,7 +23,7 @@ se_tu_saa_1:
 	.byte		N03   , Cn4 , v060
 	.byte	W03
 	.byte		VOL   , 62*se_tu_saa_mvl/mxv
-	.byte		N32   , Gs4 
+	.byte		N32   , Gs4
 	.byte	W03
 	.byte		VOL   , 68*se_tu_saa_mvl/mxv
 	.byte	W03

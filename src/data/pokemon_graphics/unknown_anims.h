@@ -1629,7 +1629,7 @@ const union AnimCmd *const gUnknown_08300444[] =
     gUnknown_082FFC0C,
 };
 
-const union AnimCmd *const gUnknown_0830044C[] = 
+const union AnimCmd *const gUnknown_0830044C[] =
 {
     gAnimCmd_General_Frame0,
     gUnknown_082FFC14,
@@ -1695,7 +1695,7 @@ const union AnimCmd *const gUnknown_083004A0[] =
 
 const union AnimCmd *const gUnknown_083004AC[] = {gAnimCmd_General_Frame0};
 
-const union AnimCmd *const gUnknown_083004B0[] = 
+const union AnimCmd *const gUnknown_083004B0[] =
 {
     gAnimCmd_General_Frame0,
     gUnknown_082FFCAC,

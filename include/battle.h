@@ -128,36 +128,36 @@ struct UnknownFlags
 
 struct DisableStruct
 {
-     u32 transformedMonPersonality;
-     u16 disabledMove;
-     u16 encoredMove;
-     u8 protectUses;
-     u8 stockpileCounter;
-     u8 substituteHP;
-     u8 disableTimer:4;
-     u8 disableTimerStartValue:4;
-     u8 encoredMovePos;
-     u8 filler_D; // Unused field.
-     u8 encoreTimer:4;
-     u8 encoreTimerStartValue:4;
-     u8 perishSongTimer:4;
-     u8 perishSongTimerStartValue:4;
-     u8 furyCutterCounter;
-     u8 rolloutTimer:4;
-     u8 rolloutTimerStartValue:4;
-     u8 chargeTimer:4;
-     u8 chargeTimerStartValue:4;
-     u8 tauntTimer:4;
-     u8 tauntTimer2:4;
-     u8 battlerPreventingEscape;
-     u8 battlerWithSureHit;
-     u8 isFirstTurn;
-     u8 unk17;
-     u8 truantCounter:1;
-     u8 truantUnknownBit:1;
-     u8 unk18_a_2:2;
-     u8 unk18_b:4;
-     u8 rechargeTimer;
+    u32 transformedMonPersonality;
+    u16 disabledMove;
+    u16 encoredMove;
+    u8 protectUses;
+    u8 stockpileCounter;
+    u8 substituteHP;
+    u8 disableTimer:4;
+    u8 disableTimerStartValue:4;
+    u8 encoredMovePos;
+    u8 filler_D; // Unused field.
+    u8 encoreTimer:4;
+    u8 encoreTimerStartValue:4;
+    u8 perishSongTimer:4;
+    u8 perishSongTimerStartValue:4;
+    u8 furyCutterCounter;
+    u8 rolloutTimer:4;
+    u8 rolloutTimerStartValue:4;
+    u8 chargeTimer:4;
+    u8 chargeTimerStartValue:4;
+    u8 tauntTimer:4;
+    u8 tauntTimer2:4;
+    u8 battlerPreventingEscape;
+    u8 battlerWithSureHit;
+    u8 isFirstTurn;
+    u8 unk17;
+    u8 truantCounter:1;
+    u8 truantUnknownBit:1;
+    u8 unk18_a_2:2;
+    u8 unk18_b:4;
+    u8 rechargeTimer;
 };
 
 struct ProtectStruct

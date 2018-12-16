@@ -76,7 +76,7 @@ se_w056_1:
 	.byte	W01
 	.byte		VOL   , 6*se_w056_mvl/mxv
 	.byte	W05
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@

@@ -601,10 +601,10 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
         colors[1] = gListMenuOverride.cursorPal;
         colors[2] = gListMenuOverride.cursorShadowPal;
         AddTextPrinterParameterized4(list->template.windowId,
-                                     gListMenuOverride.fontId,
-                                     x, y,
-                                     gListMenuOverride.lettersSpacing,
-                                     0, colors, TEXT_SPEED_FF, str);
+                                    gListMenuOverride.fontId,
+                                    x, y,
+                                    gListMenuOverride.lettersSpacing,
+                                    0, colors, TEXT_SPEED_FF, str);
 
         gListMenuOverride.enabled = FALSE;
     }
@@ -614,10 +614,10 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
         colors[1] = list->template.cursorPal;
         colors[2] = list->template.cursorShadowPal;
         AddTextPrinterParameterized4(list->template.windowId,
-                                     list->template.fontId,
-                                     x, y,
-                                     list->template.lettersSpacing,
-                                     0, colors, TEXT_SPEED_FF, str);
+                                    list->template.fontId,
+                                    x, y,
+                                    list->template.lettersSpacing,
+                                    0, colors, TEXT_SPEED_FF, str);
     }
 }
 
@@ -659,15 +659,15 @@ static void ListMenuDrawCursor(struct ListMenu *list)
         if (list->taskId == TASK_NONE)
             list->taskId = ListMenuAddCursorObject(list, 0);
         ListMenuUpdateCursorObject(list->taskId,
-                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 - 1,
-                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y - 1, 0);
+                                    GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 - 1,
+                                    GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y - 1, 0);
         break;
     case 3:
         if (list->taskId == TASK_NONE)
             list->taskId = ListMenuAddCursorObject(list, 1);
         ListMenuUpdateCursorObject(list->taskId,
-                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 + x,
-                                   GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y, 1);
+                                    GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 + x,
+                                    GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y, 1);
         break;
     }
 }

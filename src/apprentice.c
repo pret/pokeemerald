@@ -1252,14 +1252,14 @@ static void sub_819FD64(void)
 // No idea why a do-while loop is needed, but it will not match without it.
 
 #define APPRENTICE_SPECIES_ID(speciesArrId, monId) speciesArrId = (PLAYER_APPRENTICE.monIds[monId] >> \
-                                                                  (((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1) << 2)) & 0xF; \
-                                                   do {} while (0)
+                                                                (((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1) << 2)) & 0xF; \
+                                                    do {} while (0)
 
 // Why the need to have two macros do the exact thing differently?
 #define APPRENTICE_SPECIES_ID_2(speciesArrId, monId) {  u8 a0 = ((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1);\
                                                         speciesArrId = PLAYER_APPRENTICE.monIds[monId];     \
                                                         speciesArrId = ((speciesArrId) >> (a0 << 2)) & 0xF; \
-                                                     }
+                                                    }
 
 static u16 sub_819FF98(u8 arg0)
 {

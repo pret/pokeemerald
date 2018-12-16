@@ -52,7 +52,7 @@ se_w004_2:
 	.byte		PAN   , c_v+9
 	.byte		N03   , An2 , v052
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W02
 	.byte		PAN   , c_v-8
 	.byte	W18

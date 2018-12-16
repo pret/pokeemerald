@@ -30,7 +30,7 @@ se_toy_kabe_1:
 	.byte	W01
 	.byte	W01
 	.byte		        c_v+0
-	.byte		N10   , Cn4 
+	.byte		N10   , Cn4
 	.byte	W02
 	.byte	W03
 	.byte	W01

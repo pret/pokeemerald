@@ -18,7 +18,7 @@
 #include "constants/species.h"
 
 #define GET_UNOWN_LETTER(personality) ((        \
-      (((personality & 0x03000000) >> 24) << 6) \
+    (((personality & 0x03000000) >> 24) << 6) \
     | (((personality & 0x00030000) >> 16) << 4) \
     | (((personality & 0x00000300) >> 8) << 2)  \
     | (((personality & 0x00000003) >> 0) << 0)  \
@@ -2045,10 +2045,10 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
                                                 TRUE);
         else
             LoadSpecialPokePic_2(&gMonFrontPicTable[species],
-                                 gMonSpritesGfxPtr->field_17C,
-                                 species,
-                                 personality,
-                                 TRUE);
+                                gMonSpritesGfxPtr->field_17C,
+                                species,
+                                personality,
+                                TRUE);
     }
     else
     {
@@ -2061,10 +2061,10 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
                                                 FALSE);
         else
             LoadSpecialPokePic_2(&gMonBackPicTable[species],
-                                 gMonSpritesGfxPtr->field_17C,
-                                 species,
-                                 personality,
-                                 FALSE);
+                                gMonSpritesGfxPtr->field_17C,
+                                species,
+                                personality,
+                                FALSE);
     }
 
     RequestDma3Copy(gMonSpritesGfxPtr->field_17C, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);

@@ -100,7 +100,7 @@ se_w161b_2:
 	.byte		VOL   , 110*se_w161b_mvl/mxv
 	.byte		N06   , Cn3 , v060
 	.byte	W09
-	.byte		N15   
+	.byte		N15
 	.byte	W15
 	.byte	W24
 	.byte	W24

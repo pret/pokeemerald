@@ -27,131 +27,131 @@ static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite);
 enum
 {
     /*
-     * |
-     * +--
-     */
+    * |
+    * +--
+    */
     GATE_SHAPE_L1,
 
     /*
-     * |
-     * |
-     * +--
-     */
+    * |
+    * |
+    * +--
+    */
     GATE_SHAPE_L2,
 
     /*
-     * |
-     * +----
-     */
+    * |
+    * +----
+    */
     GATE_SHAPE_L3,
 
     /*
-     * |
-     * |
-     * +----
-     */
+    * |
+    * |
+    * +----
+    */
     GATE_SHAPE_L4,
 
     /*
-     * |
-     * +--
-     * |
-     */
+    * |
+    * +--
+    * |
+    */
     GATE_SHAPE_T1,
 
     /*
-     * |
-     * |
-     * +--
-     * |
-     */
+    * |
+    * |
+    * +--
+    * |
+    */
     GATE_SHAPE_T2,
 
     /*
-     * |
-     * +----
-     * |
-     */
+    * |
+    * +----
+    * |
+    */
     GATE_SHAPE_T3,
 
     /*
-     * An unused T-shape gate
-     * |
-     * +--
-     * |
-     * |
-     */
+    * An unused T-shape gate
+    * |
+    * +--
+    * |
+    * |
+    */
     GATE_SHAPE_T4,
 
     /*
-     * An unused T-shape gate
-     * |
-     * |
-     * +----
-     * |
-     */
+    * An unused T-shape gate
+    * |
+    * |
+    * +----
+    * |
+    */
     GATE_SHAPE_UNUSED_T1,
 
     /*
-     * An unused T-shape gate
-     * |
-     * |
-     * +--
-     * |
-     * |
-     */
+    * An unused T-shape gate
+    * |
+    * |
+    * +--
+    * |
+    * |
+    */
     GATE_SHAPE_UNUSED_T2,
 
     /*
-     * An unused T-shape gate
-     * |
-     * +----
-     * |
-     * |
-     */
+    * An unused T-shape gate
+    * |
+    * +----
+    * |
+    * |
+    */
     GATE_SHAPE_UNUSED_T3,
 
     /*
-     * An unused T-shape gate
-     * |
-     * |
-     * +----
-     * |
-     * |
-     */
+    * An unused T-shape gate
+    * |
+    * |
+    * +----
+    * |
+    * |
+    */
     GATE_SHAPE_UNUSED_T4,
 };
 
 enum
 {
     /*
-     * 0 degrees (clockwise)
-     * |
-     * +--
-     * |
-     */
+    * 0 degrees (clockwise)
+    * |
+    * +--
+    * |
+    */
     GATE_ORIENTATION_0,
 
     /*
-     * 90 degress (clockwise)
-     * --+--
-     *   |
-     */
+    * 90 degress (clockwise)
+    * --+--
+    *   |
+    */
     GATE_ORIENTATION_90,
 
     /*
-     * 180 degrees (clockwise)
-     *   |
-     * --+
-     *   |
-     */
+    * 180 degrees (clockwise)
+    *   |
+    * --+
+    *   |
+    */
     GATE_ORIENTATION_180,
 
     /*
-     * 270 degrees (clockwise)
-     *   |
-     * --+--
-     */
+    * 270 degrees (clockwise)
+    *   |
+    * --+--
+    */
     GATE_ORIENTATION_270,
 
     GATE_ORIENTATION_MAX,

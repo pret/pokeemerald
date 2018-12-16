@@ -232,7 +232,7 @@ static void sub_8064520(void)
     else
     {
         if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
-         && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)]].callback == SpriteCallbackDummy)
+        && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)]].callback == SpriteCallbackDummy)
         {
             r8 = TRUE;
         }
@@ -369,7 +369,7 @@ static void sub_8064734(void)
 static void sub_8064B04(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
+    && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80)
         {
@@ -478,7 +478,7 @@ static void sub_8064DD0(void)
 static void sub_8064E50(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
@@ -1134,9 +1134,9 @@ static void LinkOpponentHandleLoadMonSprite(void)
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               GetBattlerSpriteCoord(gActiveBattler, 2),
-                                               GetBattlerSpriteDefault_Y(gActiveBattler),
-                                               sub_80A82E4(gActiveBattler));
+                                                GetBattlerSpriteCoord(gActiveBattler, 2),
+                                                GetBattlerSpriteDefault_Y(gActiveBattler),
+                                                sub_80A82E4(gActiveBattler));
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
@@ -1167,10 +1167,10 @@ static void sub_8066494(u8 battlerId, bool8 dontClearSubstituteBit)
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
 
     gBattlerSpriteIds[battlerId] = CreateSprite(
-      &gMultiuseSpriteTemplate,
-      GetBattlerSpriteCoord(battlerId, 2),
-      GetBattlerSpriteDefault_Y(battlerId),
-      sub_80A82E4(battlerId));
+    &gMultiuseSpriteTemplate,
+    GetBattlerSpriteCoord(battlerId, 2),
+    GetBattlerSpriteDefault_Y(battlerId),
+    sub_80A82E4(battlerId));
 
     gSprites[gUnknown_03005D7C[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
     gSprites[gUnknown_03005D7C[battlerId]].data[2] = battlerId;
@@ -1255,7 +1255,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                     trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
             }
             else if ((gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_RUBY
-                     || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_SAPPHIRE)
+                    || (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].version & 0xFF) == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != MALE)
                     trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
@@ -1276,7 +1276,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
             trainerPicId = sub_8068B48();
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_FIRE_RED
-                 || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
+                || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
@@ -1284,7 +1284,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
-                 || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
+                || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
@@ -1300,9 +1300,9 @@ static void LinkOpponentHandleDrawTrainerPic(void)
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               xPos,
-                                               (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
-                                               sub_80A82E4(gActiveBattler));
+                                                xPos,
+                                                (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
+                                                sub_80A82E4(gActiveBattler));
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;

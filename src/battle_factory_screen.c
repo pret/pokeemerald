@@ -1690,12 +1690,12 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
         else
             ivs = GetFactoryMonFixedIV(challengeNum, 0);
         CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
-                                             gFacilityTrainerMons[monSetId].species,
-                                             level,
-                                             gFacilityTrainerMons[monSetId].nature,
-                                             ivs,
-                                             gFacilityTrainerMons[monSetId].evSpread,
-                                             otId);
+                                            gFacilityTrainerMons[monSetId].species,
+                                            level,
+                                            gFacilityTrainerMons[monSetId].nature,
+                                            ivs,
+                                            gFacilityTrainerMons[monSetId].evSpread,
+                                            otId);
         happiness = 0;
         for (j = 0; j < 4; j++)
             SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monSetId].moves[j], j);
@@ -1720,12 +1720,12 @@ static void CreateTentFactorySelectableMons(u8 firstMonId)
         u16 monSetId = gSaveBlock2Ptr->frontier.field_E70[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monSetId = monSetId;
         CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
-                                             gFacilityTrainerMons[monSetId].species,
-                                             level,
-                                             gFacilityTrainerMons[monSetId].nature,
-                                             ivs,
-                                             gFacilityTrainerMons[monSetId].evSpread,
-                                             otId);
+                                            gFacilityTrainerMons[monSetId].species,
+                                            level,
+                                            gFacilityTrainerMons[monSetId].nature,
+                                            ivs,
+                                            gFacilityTrainerMons[monSetId].evSpread,
+                                            otId);
         happiness = 0;
         for (j = 0; j < 4; j++)
             SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monSetId].moves[j], j);

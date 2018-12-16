@@ -158,7 +158,7 @@ static const struct WindowTemplate sUnknown_0859F29C[] = {
 };
 
 static const u8 sUnknown_0859F2AC[] = {
-     0,
+    0,
     10,
     11
 };

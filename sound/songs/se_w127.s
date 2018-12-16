@@ -100,23 +100,23 @@ se_w127_2:
 	.byte		VOL   , 115*se_w127_mvl/mxv
 	.byte		N06   , Cn3 , v040
 	.byte	W06
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W06
 se_w127_2_000:
 	.byte		N06   , Cn3 , v040
 	.byte	W06
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W06
 	.byte	PEND
 	.byte	PATT
 	 .word	se_w127_2_000
 	.byte		N06   , Cn3 , v032
 	.byte	W06
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W06
 	.byte		        Cn3 , v012
 	.byte	W06
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W06
 	.byte	FINE
 

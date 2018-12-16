@@ -27,7 +27,7 @@ se_w221_1:
 	.byte	W03
 	.byte		PAN   , c_v+0
 	.byte	W01
-	.byte		N18   , Gn4 
+	.byte		N18   , Gn4
 	.byte	W02
 	.byte		PAN   , c_v-5
 	.byte	W01
@@ -70,9 +70,9 @@ se_w221_2:
 	.byte		VOL   , 110*se_w221_mvl/mxv
 	.byte		N01   , Gn2 , v032
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W02
-	.byte		N18   
+	.byte		N18
 	.byte	W03
 	.byte		VOL   , 98*se_w221_mvl/mxv
 	.byte	W03

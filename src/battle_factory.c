@@ -409,11 +409,11 @@ static void sub_81A64C4(void)
             monSetId = gSaveBlock2Ptr->frontier.field_E70[i].monId;
             ivs = gSaveBlock2Ptr->frontier.field_E70[i].ivs;
             CreateMon(&gPlayerParty[i],
-                      gFacilityTrainerMons[monSetId].species,
-                      monLevel,
-                      ivs,
-                      TRUE, gSaveBlock2Ptr->frontier.field_E70[i].personality,
-                      0, 0);
+                    gFacilityTrainerMons[monSetId].species,
+                    monLevel,
+                    ivs,
+                    TRUE, gSaveBlock2Ptr->frontier.field_E70[i].personality,
+                    0, 0);
 
             count = 0;
             bits = gFacilityTrainerMons[monSetId].evSpread;
@@ -450,11 +450,11 @@ static void sub_81A64C4(void)
             monSetId = gSaveBlock2Ptr->frontier.field_E70[i + 3].monId;
             ivs = gSaveBlock2Ptr->frontier.field_E70[i + 3].ivs;
             CreateMon(&gEnemyParty[i],
-                      gFacilityTrainerMons[monSetId].species,
-                      monLevel,
-                      ivs,
-                      TRUE, gSaveBlock2Ptr->frontier.field_E70[i + 3].personality,
-                      0, 0);
+                    gFacilityTrainerMons[monSetId].species,
+                    monLevel,
+                    ivs,
+                    TRUE, gSaveBlock2Ptr->frontier.field_E70[i + 3].personality,
+                    0, 0);
 
             count = 0;
             bits = gFacilityTrainerMons[monSetId].evSpread;
@@ -676,8 +676,8 @@ static void sub_81A6C1C(void)
     for (i = 0; i < 3; i++)
     {
         SetMonData(&gPlayerParty[i],
-                   MON_DATA_HELD_ITEM,
-                   &gBattleFrontierHeldItems[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.field_E70[i].monId].itemTableId]);
+                    MON_DATA_HELD_ITEM,
+                    &gBattleFrontierHeldItems[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.field_E70[i].monId].itemTableId]);
     }
 }
 
@@ -748,12 +748,12 @@ void FillFactoryBrainParty(void)
         species[i] = gFacilityTrainerMons[monSetId].species;
         heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
         CreateMonWithEVSpreadNatureOTID(&gEnemyParty[i],
-                                             gFacilityTrainerMons[monSetId].species,
-                                             monLevel,
-                                             gFacilityTrainerMons[monSetId].nature,
-                                             fixedIV,
-                                             gFacilityTrainerMons[monSetId].evSpread,
-                                             otId);
+                                            gFacilityTrainerMons[monSetId].species,
+                                            monLevel,
+                                            gFacilityTrainerMons[monSetId].nature,
+                                            fixedIV,
+                                            gFacilityTrainerMons[monSetId].evSpread,
+                                            otId);
 
         friendship = 0;
         for (k = 0; k < 4; k++)

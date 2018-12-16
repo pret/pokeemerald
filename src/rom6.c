@@ -65,7 +65,7 @@ static void task08_080C9820(u8 taskId)
     gPlayerAvatar.preventStep = TRUE;
     eventObjId = gPlayerAvatar.eventObjectId;
     if (!EventObjectIsMovementOverridden(&gEventObjects[eventObjId])
-     || EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
+    || EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
     {
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {

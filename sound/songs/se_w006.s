@@ -43,7 +43,7 @@ se_w006_1:
 	.byte	W03
 	.byte		VOL   , 95*se_w006_mvl/mxv
 	.byte		PAN   , c_v+1
-	.byte		N01   , An5 
+	.byte		N01   , An5
 	.byte	W02
 	.byte		        Fn5 , v064
 	.byte	W01

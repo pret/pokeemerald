@@ -7,24 +7,24 @@
 #include <stdbool.h>
 
 struct Color {
-	unsigned char red;
-	unsigned char green;
-	unsigned char blue;
+    unsigned char red;
+    unsigned char green;
+    unsigned char blue;
 };
 
 struct Palette {
-	struct Color colors[256];
-	int numColors;
+    struct Color colors[256];
+    int numColors;
 };
 
 struct Image {
-	int width;
-	int height;
-	int bitDepth;
-	unsigned char *pixels;
-	bool hasPalette;
-	struct Palette palette;
-	bool hasTransparency;
+    int width;
+    int height;
+    int bitDepth;
+    unsigned char *pixels;
+    bool hasPalette;
+    struct Palette palette;
+    bool hasTransparency;
 };
 
 void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);

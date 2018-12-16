@@ -64,7 +64,7 @@ se_w013_2:
 	.byte		VOL   , 110*se_w013_mvl/mxv
 	.byte		N06   , Fn3 , v040
 	.byte	W09
-	.byte		N24   , Gn3 
+	.byte		N24   , Gn3
 	.byte	W15
 	.byte	W24
 	.byte	FINE

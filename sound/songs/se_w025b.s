@@ -35,7 +35,7 @@ se_w025b_1:
 	.byte	W03
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N03   , An2 
+	.byte		N03   , An2
 	.byte	W01
 	.byte		PAN   , c_v+7
 	.byte		BEND  , c_v-28
@@ -94,11 +94,11 @@ se_w025b_2:
 	.byte		PAN   , c_v-7
 	.byte		N03   , Gs2 , v052
 	.byte	W03
-	.byte		N03   
+	.byte		N03
 	.byte	W05
 	.byte		VOICE , 27
 	.byte		PAN   , c_v+0
-	.byte		N13   
+	.byte		N13
 	.byte	W04
 	.byte		VOL   , 101*se_w025b_mvl/mxv
 	.byte	W02

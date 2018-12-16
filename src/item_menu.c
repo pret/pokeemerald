@@ -821,9 +821,9 @@ void bag_menu_change_item_callback(s32 a, bool8 b, struct ListMenu *unused)
     {
         RemoveBagItemIconSprite(1 ^ gUnknown_0203CE54->unk81B_1);
         if (a != -2)
-           AddBagItemIconSprite(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, a), gUnknown_0203CE54->unk81B_1);
+            AddBagItemIconSprite(BagGetItemIdByPocketPosition(gUnknown_0203CE58.pocket + 1, a), gUnknown_0203CE54->unk81B_1);
         else
-           AddBagItemIconSprite(-1, gUnknown_0203CE54->unk81B_1);
+            AddBagItemIconSprite(-1, gUnknown_0203CE54->unk81B_1);
         gUnknown_0203CE54->unk81B_1 ^= 1;
         if (!gUnknown_0203CE54->unk81B_3)
             bag_menu_print_description_box_text(a);

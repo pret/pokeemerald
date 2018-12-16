@@ -44,7 +44,7 @@ se_track_move_1_B1:
 	.byte	W96
 	.byte	W96
 	.byte	W96
-	.byte		EOT   
+	.byte		EOT
 	.byte	GOTO
 	 .word	se_track_move_1_B1
 	.byte	FINE
@@ -62,7 +62,7 @@ se_track_move_2:
 	.byte	W04
 	.byte		VOL   , 42*se_track_move_mvl/mxv
 	.byte	W02
-	.byte		N03   , An2 
+	.byte		N03   , An2
 	.byte	W06
 	.byte		VOL   , 59*se_track_move_mvl/mxv
 	.byte	W06
@@ -95,11 +95,11 @@ se_track_move_2_B1:
 	.byte	W06
 	.byte		        Gn2 , v044
 	.byte	W24
-	.byte		N03   
+	.byte		N03
 	.byte	W12
-	.byte		        Fn2 
+	.byte		        Fn2
 	.byte	W12
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W18
 	.byte		        Cs2 , v052
 	.byte	W12
@@ -107,19 +107,19 @@ se_track_move_2_B1:
 	.byte	W06
 	.byte		N03   , Fn2 , v044
 	.byte	W24
-	.byte		N03   
+	.byte		N03
 	.byte	W18
 	.byte		        Cs2 , v052
 	.byte	W18
 	.byte		        Gn2 , v044
 	.byte	W18
-	.byte		        An2 
+	.byte		        An2
 	.byte	W12
 	.byte		        Cs2 , v052
 	.byte	W18
 	.byte		        Gn2 , v044
 	.byte	W12
-	.byte		        Fn2 
+	.byte		        Fn2
 	.byte	W18
 	.byte		N01   , Bn2 , v032
 	.byte	W06

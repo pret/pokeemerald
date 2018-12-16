@@ -1681,11 +1681,11 @@ static void sub_8080DF8(void)
 
 static void sub_8080E20(u8 taskId)
 {
-   if(++gTasks[taskId].data[0] > gTasks[taskId].data[1])
-   {
+    if(++gTasks[taskId].data[0] > gTasks[taskId].data[1])
+    {
         gRecvCmds[gTasks[taskId].data[2]][2] = 0x2345;
         DestroyTask(taskId);
-   }
+    }
 }
 
 static void sub_8080E6C(u8 a0, u8 a1)
@@ -2086,13 +2086,13 @@ static void Blender_DummiedOutFunc(s16 a0, s16 a1)
 static bool8 sub_8081964(struct BlenderBerry* berries, u8 index1, u8 index2)
 {
     if (berries[index1].itemId != berries[index2].itemId
-     || (StringCompare(berries[index1].name, berries[index2].name) == 0
-      && (berries[index1].flavors[FLAVOR_SPICY] == berries[index2].flavors[FLAVOR_SPICY]
-       && berries[index1].flavors[FLAVOR_DRY] == berries[index2].flavors[FLAVOR_DRY]
-       && berries[index1].flavors[FLAVOR_SWEET] == berries[index2].flavors[FLAVOR_SWEET]
-       && berries[index1].flavors[FLAVOR_BITTER] == berries[index2].flavors[FLAVOR_BITTER]
-       && berries[index1].flavors[FLAVOR_SOUR] == berries[index2].flavors[FLAVOR_SOUR]
-       && berries[index1].smoothness == berries[index2].smoothness)))
+    || (StringCompare(berries[index1].name, berries[index2].name) == 0
+    && (berries[index1].flavors[FLAVOR_SPICY] == berries[index2].flavors[FLAVOR_SPICY]
+        && berries[index1].flavors[FLAVOR_DRY] == berries[index2].flavors[FLAVOR_DRY]
+        && berries[index1].flavors[FLAVOR_SWEET] == berries[index2].flavors[FLAVOR_SWEET]
+        && berries[index1].flavors[FLAVOR_BITTER] == berries[index2].flavors[FLAVOR_BITTER]
+        && berries[index1].flavors[FLAVOR_SOUR] == berries[index2].flavors[FLAVOR_SOUR]
+        && berries[index1].smoothness == berries[index2].smoothness)))
         return TRUE;
     else
         return FALSE;
@@ -3217,8 +3217,8 @@ static bool8 sub_8083380(void)
 
 static void sub_80833F8(struct Sprite* sprite)
 {
-   sprite->pos2.x = -(sBerryBlenderData->bg_X);
-   sprite->pos2.y = -(sBerryBlenderData->bg_Y);
+    sprite->pos2.x = -(sBerryBlenderData->bg_X);
+    sprite->pos2.y = -(sBerryBlenderData->bg_Y);
 }
 
 static void TryUpdateBerryBlenderRecord(void)

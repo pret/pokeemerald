@@ -3088,8 +3088,8 @@ void sub_80BEDF4(u8 taskId)
         return;
     }
     if (((gMain.newKeys & DPAD_LEFT)
-     || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
-     && sPokedexView->selectedScreen > 0)
+    || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    && sPokedexView->selectedScreen > 0)
     {
         sPokedexView->selectedScreen--;
         sub_80BFD0C(sPokedexView->selectedScreen, 0xD);
@@ -3097,8 +3097,8 @@ void sub_80BEDF4(u8 taskId)
         return;
     }
     if (((gMain.newKeys & DPAD_RIGHT)
-     || ((gMain.newKeys & R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
-     && sPokedexView->selectedScreen < 3)
+    || ((gMain.newKeys & R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    && sPokedexView->selectedScreen < 3)
     {
         sPokedexView->selectedScreen++;
         sub_80BFD0C(sPokedexView->selectedScreen, 0xD);
@@ -3334,7 +3334,7 @@ void sub_80BF5CC(u8 taskId)
             return;
         }
         if ((gMain.newKeys & DPAD_LEFT)
-         || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
             m4aMPlayContinue(&gMPlayInfo_BGM);
@@ -3344,7 +3344,7 @@ void sub_80BF5CC(u8 taskId)
             return;
         }
         if ((gMain.newKeys & DPAD_RIGHT)
-         || ((gMain.newKeys & R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        || ((gMain.newKeys & R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
             if (!sPokedexListItem->owned)
             {
@@ -3504,7 +3504,7 @@ void sub_80BFBB0(u8 taskId)
         PlaySE(SE_PC_OFF);
     }
     else if ((gMain.newKeys & DPAD_LEFT)
-     || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+    || ((gMain.newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
     {
         BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
         sPokedexView->unk64E = 2;
@@ -4275,7 +4275,7 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
             if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
             {
                 if ((gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
-                 && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
                     retVal = 1;
                 else
                 {
@@ -4290,8 +4290,8 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
             if (gSaveBlock2Ptr->pokedex.owned[index] & mask)
             {
                 if ((gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock2Ptr->pokedex.seen[index] & mask)
-                 && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
-                 && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
                     retVal = 1;
                 else
                 {
@@ -4677,7 +4677,7 @@ int sub_80C0F30(u8 dexMode, u8 sortMode, u8 abcGroup, u8 bodyColor, u8 type1, u8
             species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
             r3 = gSpeciesNames[species][0];
             if ((r3 >= gUnknown_0856ED08[abcGroup][0] && r3 < gUnknown_0856ED08[abcGroup][0] + gUnknown_0856ED08[abcGroup][1])
-             || (r3 >= gUnknown_0856ED08[abcGroup][2] && r3 < gUnknown_0856ED08[abcGroup][2] + gUnknown_0856ED08[abcGroup][3]))
+            || (r3 >= gUnknown_0856ED08[abcGroup][2] && r3 < gUnknown_0856ED08[abcGroup][2] + gUnknown_0856ED08[abcGroup][3]))
             {
                 sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
                 resultsCount++;

@@ -1156,7 +1156,7 @@ bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
     if (gEventObjects[gSelectedEventObject].active)
     {
         EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject],
-          GetPlayerFacingDirection());
+        GetPlayerFacingDirection());
     }
     return FALSE;
 }

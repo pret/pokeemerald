@@ -1144,8 +1144,8 @@ static void sub_81754DC(void)
     AnimateSprites();
 
     if ((gMain.heldKeys & B_BUTTON)
-     && gHasHallOfFameRecords != 0
-     && gTasks[gUnknown_0203BCE2].func == sub_8175774)
+    && gHasHallOfFameRecords != 0
+    && gTasks[gUnknown_0203BCE2].func == sub_8175774)
     {
         sub_81754C8();
         RunTasks();
@@ -1376,10 +1376,10 @@ static void sub_81758E4(u8 taskIdA)
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
         SetGpuReg(REG_OFFSET_BG3VOFS, 32);
         SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_SCREENBASE(7)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                     | DISPCNT_OBJ_1D_MAP
                                     | DISPCNT_BG0_ON
@@ -1424,10 +1424,10 @@ static void sub_8175B1C(u8 taskIdA)
     BeginNormalPaletteFade(0xFFFFFFFF, 8, 16, 0, RGB_BLACK);
 
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
-                               | BGCNT_CHARBASE(0)
-                               | BGCNT_SCREENBASE(7)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(0)
+                                | BGCNT_SCREENBASE(7)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT256x256);
     EnableInterrupts(INTR_FLAG_VBLANK);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP

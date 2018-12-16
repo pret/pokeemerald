@@ -90,7 +90,7 @@ static bool8 sub_808B618(void);
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
 
-static void PlayerRun(u8); 
+static void PlayerRun(u8);
 static void PlayerNotOnBikeCollide(u8);
 static void PlayerNotOnBikeCollideWithFarawayIslandMew(u8);
 
@@ -343,10 +343,10 @@ static bool8 TryInterruptEventObjectSpecialAnim(struct EventObject *playerEventO
         u8 r5 = direction;
         register u8 r6 asm("r6") = direction;
     #endif
-    //a very bad HACK 
+    //a very bad HACK
 
     if (EventObjectIsMovementOverridden(playerEventObj)
-     && !EventObjectClearHeldMovementIfFinished(playerEventObj))
+    && !EventObjectClearHeldMovementIfFinished(playerEventObj))
     {
         u8 heldMovementActionId = EventObjectGetHeldMovementActionId(playerEventObj);
         if (heldMovementActionId > MOVEMENT_ACTION_WALK_FAST_RIGHT && heldMovementActionId < MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN)
@@ -386,7 +386,7 @@ static void npc_clear_strange_bits(struct EventObject *eventObj)
 static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
-     || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
         MovePlayerOnBike(direction, newKeys, heldKeys);
     else
         MovePlayerNotOnBike(direction, heldKeys);
@@ -648,7 +648,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     }
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
-     && IsRunningDisallowed(gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior) == 0)
+    && IsRunningDisallowed(gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior) == 0)
     {
         PlayerRun(direction);
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
@@ -722,8 +722,8 @@ static u8 sub_808B164(struct EventObject *a, s16 x, s16 y, u8 direction, u8 e)
 static bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
-     && MapGridGetZCoordAt(x, y) == 3
-     && GetEventObjectIdByXYZ(x, y, 3) == 16)
+    && MapGridGetZCoordAt(x, y) == 3
+    && GetEventObjectIdByXYZ(x, y, 3) == 16)
     {
         sub_808C750(direction);
         return TRUE;
@@ -754,7 +754,7 @@ static u8 sub_808B238(s16 x, s16 y, u8 direction)
             y = gEventObjects[eventObjectId].currentCoords.y;
             MoveCoords(direction, &x, &y);
             if (GetCollisionAtCoords(&gEventObjects[eventObjectId], x, y, direction) == 0
-             && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y)) == 0)
+            && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y)) == 0)
             {
                 StartStrengthAnim(eventObjectId, direction);
                 return 1;
@@ -927,10 +927,10 @@ static bool8 player_is_anim_in_certain_ranges(void)
     u8 movementActionId = gEventObjects[gPlayerAvatar.eventObjectId].movementActionId;
 
     if (movementActionId <= MOVEMENT_ACTION_FACE_RIGHT
-     || (movementActionId >= MOVEMENT_ACTION_DELAY_1 && movementActionId <= MOVEMENT_ACTION_DELAY_16)
-     || (movementActionId >= MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN && movementActionId <= MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT)
-     || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT)
-     || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT))
+    || (movementActionId >= MOVEMENT_ACTION_DELAY_1 && movementActionId <= MOVEMENT_ACTION_DELAY_16)
+    || (movementActionId >= MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN && movementActionId <= MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT)
+    || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT)
+    || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT))
         return TRUE;
     else
         return FALSE;
@@ -1154,7 +1154,7 @@ void PlayerGetDestCoords(s16 *x, s16 *y)
 u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y)
 {
     struct EventObject *object = &gEventObjects[gPlayerAvatar.eventObjectId];
-    
+
     if (object->heldMovementActive && !object->heldMovementFinished && !gSprites[object->spriteId].data[2])
     {
         *x = object->currentCoords.x;
@@ -1333,7 +1333,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
 
     MoveCoords(playerEventObj->facingDirection, &x, &y);
     if (GetCollisionAtCoords(playerEventObj, x, y, playerEventObj->facingDirection) == 3 && PlayerGetZCoord() == 3
-     && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
+    && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
     else
         return FALSE;
@@ -1482,8 +1482,8 @@ static void StartStrengthAnim(u8 a, u8 b)
 static void Task_BumpBoulder(u8 taskId)
 {
     while (gUnknown_08497530[gTasks[taskId].data[0]](&gTasks[taskId],
-                                                     &gEventObjects[gPlayerAvatar.eventObjectId],
-                                                     &gEventObjects[gTasks[taskId].data[1]]))
+                                                    &gEventObjects[gPlayerAvatar.eventObjectId],
+                                                    &gEventObjects[gTasks[taskId].data[1]]))
         ;
 }
 
@@ -1508,7 +1508,7 @@ static bool8 do_boulder_dust(struct Task *task, struct EventObject *playerObject
     }
 
     if (!EventObjectIsMovementOverridden(playerObject)
-     && !EventObjectIsMovementOverridden(strengthObject))
+    && !EventObjectIsMovementOverridden(strengthObject))
     {
         EventObjectClearHeldMovementIfFinished(playerObject);
         EventObjectClearHeldMovementIfFinished(strengthObject);
@@ -1528,7 +1528,7 @@ static bool8 do_boulder_dust(struct Task *task, struct EventObject *playerObject
 static bool8 sub_808C484(struct Task *task, struct EventObject *playerObject, struct EventObject *strengthObject)
 {
     if (EventObjectCheckHeldMovementStatus(playerObject)
-     && EventObjectCheckHeldMovementStatus(strengthObject))
+    && EventObjectCheckHeldMovementStatus(strengthObject))
     {
         EventObjectClearHeldMovementIfFinished(playerObject);
         EventObjectClearHeldMovementIfFinished(strengthObject);
@@ -1768,7 +1768,7 @@ static bool8 Fishing2(struct Task *task)
 static bool8 Fishing3(struct Task *task)
 {
     AlignFishingAnimationFrames();
-    
+
     // Wait one second
     task->tFrameCounter++;
     if (task->tFrameCounter >= 60)

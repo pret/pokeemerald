@@ -65,69 +65,69 @@
 void
 ieee754_write_extended(double in, uint8_t* out)
 {
-	int sgn, exp, shift;
-	double fraction, t;
-	unsigned int lexp, hexp;
-	unsigned long low, high;
+    int sgn, exp, shift;
+    double fraction, t;
+    unsigned int lexp, hexp;
+    unsigned long low, high;
 
-	if (in == 0.0) {
-		memset(out, 0, 10);
-		return;
-	}
-	if (in < 0.0) {
-		in = fabs(in);
-		sgn = 1;
-	} else
-		sgn = 0;
+    if (in == 0.0) {
+        memset(out, 0, 10);
+        return;
+    }
+    if (in < 0.0) {
+        in = fabs(in);
+        sgn = 1;
+    } else
+        sgn = 0;
 
-	fraction = frexp(in, &exp);
+    fraction = frexp(in, &exp);
 
-	if (exp == 0 || exp > 16384) {
-		if (exp > 16384) /* infinite value */
-			low = high = 0;
-		else {
-			low = 0x80000000;
-			high = 0;
-		}
-		exp = 32767;
-		goto done;
-	}
-	fraction = ldexp(fraction, 32);
-	t = floor(fraction);
-	low = (unsigned long) t;
-	fraction -= t;
-	t = floor(ldexp(fraction, 32));
-	high = (unsigned long) t;
+    if (exp == 0 || exp > 16384) {
+        if (exp > 16384) /* infinite value */
+            low = high = 0;
+        else {
+            low = 0x80000000;
+            high = 0;
+        }
+        exp = 32767;
+        goto done;
+    }
+    fraction = ldexp(fraction, 32);
+    t = floor(fraction);
+    low = (unsigned long) t;
+    fraction -= t;
+    t = floor(ldexp(fraction, 32));
+    high = (unsigned long) t;
 
-	/* Convert exponents < -16382 to -16382 (then they will be
-	 * stored as -16383) */
-	if (exp < -16382) {
-		shift = 0 - exp - 16382;
-		high >>= shift;
-		high |= (low << (32 - shift));
-		low >>= shift;
-		exp = -16382;
-	}
-	exp += 16383 - 1;	/* bias */
+    /* Convert exponents < -16382 to -16382 (then they will be
+    * stored as -16383) */
+    if (exp < -16382) {
+        shift = 0 - exp - 16382;
+        high >>= shift;
+        high |= (low << (32 - shift));
+        low >>= shift;
+        exp = -16382;
+    }
+    exp += 16383 - 1;	/* bias */
 
 done:
-	lexp = ((unsigned int) exp) >> 8;
-	hexp = ((unsigned int) exp) & 0xFF;
+    lexp = ((unsigned int) exp) >> 8;
+    hexp = ((unsigned int) exp) & 0xFF;
 
-	/* big endian */
-	out[0] = ((uint8_t) sgn) << 7;
-	out[0] |= (uint8_t) lexp;
-	out[1] = (uint8_t) hexp;
-	out[2] = (uint8_t) (low >> 24);
-	out[3] = (uint8_t) ((low >> 16) & 0xFF);
-	out[4] = (uint8_t) ((low >> 8) & 0xFF);
-	out[5] = (uint8_t) (low & 0xFF);
-	out[6] = (uint8_t) (high >> 24);
-	out[7] = (uint8_t) ((high >> 16) & 0xFF);
-	out[8] = (uint8_t) ((high >> 8) & 0xFF);
-	out[9] = (uint8_t) (high & 0xFF);
+    /* big endian */
+    out[0] = ((uint8_t) sgn) << 7;
+    out[0] |= (uint8_t) lexp;
+    out[1] = (uint8_t) hexp;
+    out[2] = (uint8_t) (low >> 24);
+    out[3] = (uint8_t) ((low >> 16) & 0xFF);
+    out[4] = (uint8_t) ((low >> 8) & 0xFF);
+    out[5] = (uint8_t) (low & 0xFF);
+    out[6] = (uint8_t) (high >> 24);
+    out[7] = (uint8_t) ((high >> 16) & 0xFF);
+    out[8] = (uint8_t) ((high >> 8) & 0xFF);
+    out[9] = (uint8_t) (high & 0xFF);
 
-	return;
+    return;
 }
 
 
@@ -137,36 +137,36 @@ done:
 double
 ieee754_read_extended(uint8_t* in)
 {
-	int sgn, exp;
-	unsigned long low, high;
-	double out;
+    int sgn, exp;
+    unsigned long low, high;
+    double out;
 
-	/* Extract the components from the big endian buffer */
-	sgn = (int) (in[0] >> 7);
-	exp = ((int) (in[0] & 0x7F) << 8) | ((int) in[1]);
-	low = (((unsigned long) in[2]) << 24)
-		| (((unsigned long) in[3]) << 16)
-		| (((unsigned long) in[4]) << 8) | (unsigned long) in[5];
-	high = (((unsigned long) in[6]) << 24)
-		| (((unsigned long) in[7]) << 16)
-		| (((unsigned long) in[8]) << 8) | (unsigned long) in[9];
+    /* Extract the components from the big endian buffer */
+    sgn = (int) (in[0] >> 7);
+    exp = ((int) (in[0] & 0x7F) << 8) | ((int) in[1]);
+    low = (((unsigned long) in[2]) << 24)
+        | (((unsigned long) in[3]) << 16)
+        | (((unsigned long) in[4]) << 8) | (unsigned long) in[5];
+    high = (((unsigned long) in[6]) << 24)
+        | (((unsigned long) in[7]) << 16)
+        | (((unsigned long) in[8]) << 8) | (unsigned long) in[9];
 
-	if (exp == 0 && low == 0 && high == 0)
-		return (sgn ? -0.0 : 0.0);
+    if (exp == 0 && low == 0 && high == 0)
+        return (sgn ? -0.0 : 0.0);
 
-	switch (exp) {
-	case 32767:
-		if (low == 0 && high == 0)
-			return (sgn ? -INFINITE_VALUE : INFINITE_VALUE);
-		else
-			return (sgn ? -NAN_VALUE : NAN_VALUE);
-	default:
-		exp -= 16383;	/* unbias exponent */
+    switch (exp) {
+    case 32767:
+        if (low == 0 && high == 0)
+            return (sgn ? -INFINITE_VALUE : INFINITE_VALUE);
+        else
+            return (sgn ? -NAN_VALUE : NAN_VALUE);
+    default:
+        exp -= 16383;	/* unbias exponent */
 
-	}
+    }
 
-	out = ldexp((double) low, -31 + exp);
-	out += ldexp((double) high, -63 + exp);
+    out = ldexp((double) low, -31 + exp);
+    out += ldexp((double) high, -63 + exp);
 
-	return (sgn ? -out : out);
+    return (sgn ? -out : out);
 }

@@ -834,7 +834,7 @@ static void sub_80E3B30(struct Sprite *sprite)
     if (sprite->data[0] == GetCurrentPageColumnCount())
         sprite->invisible = TRUE;
     if (sprite->invisible || (sprite->data[4] & 0xFF00) == 0
-     || sprite->data[0] != sprite->data[2] || sprite->data[1] != sprite->data[3])
+    || sprite->data[0] != sprite->data[2] || sprite->data[1] != sprite->data[3])
     {
         sprite->data[5] = 0;
         sprite->data[6] = 2;

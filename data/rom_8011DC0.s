@@ -1765,7 +1765,7 @@ gWirelessInfoScreenTilemap:: @ 82F0BA0
 	.align 2
 gUnknown_082F0D34:: @ 82F0D34
 	.4byte 0x000001f8
-    .4byte 0x00001081
+	.4byte 0x00001081
 
 	.align 2
 gUnknown_082F0D3C:: @ 82F0D3C
@@ -4224,7 +4224,7 @@ gUnknown_082FE6C8:: @ 82FE6C8
 	.align 2
 gUnknown_082FE6D8:: @ 82FE6D8
 	obj_pal gPkmnJump321StartPal1, 0x2000
-    null_obj_pal
+	null_obj_pal
 
 	.align 2
 gUnknown_082FE6E8:: @ 82FE6E8
@@ -4382,4 +4382,3 @@ gUnknown_082FEC90:: @ 82FEC90
 
 gUnknown_082FECA8:: @ 82FECA8
 	spr_template 0x0000, 0x0000, gUnknown_082FEBE4, gUnknown_082FEC20, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-

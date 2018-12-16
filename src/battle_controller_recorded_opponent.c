@@ -227,17 +227,17 @@ static void sub_8186678(void)
     if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
     {
         if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
-         && gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded)
+        && gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded)
             var = TRUE;
 
     }
     else
     {
         if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
-         && gSprites[gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK]].callback == SpriteCallbackDummy
-         && gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded
-         && gSprites[gBattlerSpriteIds[gActiveBattler ^ BIT_FLANK]].animEnded)
-             var = TRUE;
+        && gSprites[gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK]].callback == SpriteCallbackDummy
+        && gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded
+        && gSprites[gBattlerSpriteIds[gActiveBattler ^ BIT_FLANK]].animEnded)
+            var = TRUE;
     }
 
     if (var)
@@ -351,7 +351,7 @@ static void sub_818686C(void)
 static void sub_8186C48(void)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
+    && gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x == 0)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80)
         {
@@ -461,7 +461,7 @@ static void sub_8186F14(void)
 static void sub_8186F94(void)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1
-     && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
+    && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 = 0;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1 = 0;
@@ -1117,9 +1117,9 @@ static void RecordedOpponentHandleLoadMonSprite(void)
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(gActiveBattler));
 
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               GetBattlerSpriteCoord(gActiveBattler, 2),
-                                               GetBattlerSpriteDefault_Y(gActiveBattler),
-                                               sub_80A82E4(gActiveBattler));
+                                                GetBattlerSpriteCoord(gActiveBattler, 2),
+                                                GetBattlerSpriteDefault_Y(gActiveBattler),
+                                                sub_80A82E4(gActiveBattler));
 
 
 
@@ -1249,9 +1249,9 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
     gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                               xPos,
-                                               (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
-                                               sub_80A82E4(gActiveBattler));
+                                                xPos,
+                                                (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
+                                                sub_80A82E4(gActiveBattler));
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -240;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 2;

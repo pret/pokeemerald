@@ -351,7 +351,7 @@ static void CableCarMainCallback_Run(void)
 static void CleanupCableCar(void)
 {
     u8 i = 0;
-    
+
     HideBg(0);
     HideBg(1);
     HideBg(2);
@@ -361,7 +361,7 @@ static void CleanupCableCar(void)
     sub_80AB130(WEATHER_NONE);
     for (i = 0; i < 20; i++)
         gWeatherPtr->sprites.s2.ashSprites[i] = NULL;
-    
+
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

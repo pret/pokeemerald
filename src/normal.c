@@ -733,7 +733,7 @@ void sub_8115F94(u8 taskId)
         paletteIndex = IndexOfSpritePaletteTag(gSprites[gHealthboxSpriteIds[attackerBattler]].template->paletteTag);
         selectedPalettes |= (1 << paletteIndex) << 16;
     }
-    
+
     if (gTasks[taskId].data[3] & 0x100)
         selectedPalettes |= (1 << attackerBattler) << 16;
 
@@ -905,7 +905,7 @@ void sub_8116420(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER && !IsContest())
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    
+
     sub_8116388(sprite);
 }
 

@@ -760,8 +760,8 @@ void sub_80D8490(u8 taskId)
             r5 = StringCopy(sp8, gText_ColorLightShadowDarkGrey);
         }
         else if (move != 0
-                 && gContestResources->field_4[gContestPlayerMonIndex].prevMove == move
-                 && gContestMoves[move].effect != CONTEST_EFFECT_REPETITION_NOT_BORING)
+                && gContestResources->field_4[gContestPlayerMonIndex].prevMove == move
+                && gContestMoves[move].effect != CONTEST_EFFECT_REPETITION_NOT_BORING)
         {
             // Gray the text because it is a repeated move
             r5 = StringCopy(sp8, gText_ColorBlue);

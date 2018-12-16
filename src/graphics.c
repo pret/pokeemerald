@@ -1605,9 +1605,9 @@ const u32 gUnknown_08DE3FD4[] = INCBIN_U32("graphics/berry_crusher/tiles.bin.lz"
 
 // random garbage at the end.
 asm(".space 0x54BAC \n\
-     .byte 0x0D, 0x00, 0x58, 0x02 \n\
-     .space 0x1145 \n\
-     .byte 0x02 \n\
-     .space 0x3242 \n\
-     .byte 0x40 \n\
-     .space 0x13");
+    .byte 0x0D, 0x00, 0x58, 0x02 \n\
+    .space 0x1145 \n\
+    .byte 0x02 \n\
+    .space 0x3242 \n\
+    .byte 0x40 \n\
+    .space 0x13");

@@ -365,7 +365,7 @@ u8 MapGridGetZCoordAt(int x, int y)
     u16 *border;
 
     if (x >= 0 && x < gUnknown_03005DC0.width
-     && y >= 0 && y < gUnknown_03005DC0.height)
+    && y >= 0 && y < gUnknown_03005DC0.height)
     {
         block = gUnknown_03005DC0.map[x + gUnknown_03005DC0.width * y];
     }
@@ -393,7 +393,7 @@ u8 MapGridIsImpassableAt(int x, int y)
     u16 *border;
 
     if (x >= 0 && x < gUnknown_03005DC0.width
-     && y >= 0 && y < gUnknown_03005DC0.height)
+    && y >= 0 && y < gUnknown_03005DC0.height)
     {
         block = gUnknown_03005DC0.map[x + gUnknown_03005DC0.width * y];
     }
@@ -422,7 +422,7 @@ u32 MapGridGetMetatileIdAt(int x, int y)
     u16 block2;
 
     if (x >= 0 && x < gUnknown_03005DC0.width
-     && y >= 0 && y < gUnknown_03005DC0.height)
+    && y >= 0 && y < gUnknown_03005DC0.height)
     {
         block = gUnknown_03005DC0.map[x + gUnknown_03005DC0.width * y];
     }
@@ -463,7 +463,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
 {
     int i;
     if (x >= 0 && x < gUnknown_03005DC0.width
-     && y >= 0 && y < gUnknown_03005DC0.height)
+    && y >= 0 && y < gUnknown_03005DC0.height)
     {
         i = x + y * gUnknown_03005DC0.width;
         gUnknown_03005DC0.map[i] = (gUnknown_03005DC0.map[i] & 0xf000) | (metatile & 0xfff);
@@ -474,7 +474,7 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 {
     int i;
     if (x >= 0 && x < gUnknown_03005DC0.width
-     && y >= 0 && y < gUnknown_03005DC0.height)
+    && y >= 0 && y < gUnknown_03005DC0.height)
     {
         i = x + gUnknown_03005DC0.width * y;
         gUnknown_03005DC0.map[i] = metatile;
@@ -642,7 +642,7 @@ int GetMapBorderIdAt(int x, int y)
     u16 block, block2;
     int i, j;
     if (x >= 0 && x < gUnknown_03005DC0.width
-     && y >= 0 && y < gUnknown_03005DC0.height)
+    && y >= 0 && y < gUnknown_03005DC0.height)
     {
         i = gUnknown_03005DC0.width;
         i *= y;
@@ -869,10 +869,10 @@ struct MapConnection *sub_8088A8C(s16 x, s16 y)
         {
             direction = connection->direction;
             if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE)
-             || (direction == CONNECTION_NORTH && y > 6)
-             || (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + 7)
-             || (direction == CONNECTION_WEST && x > 6)
-             || (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + 7))
+            || (direction == CONNECTION_NORTH && y > 6)
+            || (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + 7)
+            || (direction == CONNECTION_WEST && x > 6)
+            || (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + 7))
             {
                 continue;
             }

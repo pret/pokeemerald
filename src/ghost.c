@@ -261,20 +261,20 @@ static void sub_81116E8(struct Sprite *sprite)
     TranslateAnimLinear(sprite);
     sprite->pos2.x += Sin(sprite->data[5], 10);
     sprite->pos2.y += Cos(sprite->data[5], 15);
-    
+
     r2 = sprite->data[5];
     sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
     r0 = sprite->data[5];
-    
+
     if (r2 == 0 || r2 > 196)
     {
         if (r0 > 0)
             PlaySE(SE_W109);
     }
-    
+
     if (sprite->data[6] == 0)
     {
-        sprite->invisible = TRUE; 
+        sprite->invisible = TRUE;
         sprite->callback = sub_80A67F4;
     }
     else
@@ -283,18 +283,18 @@ static void sub_81116E8(struct Sprite *sprite)
 
 static void sub_8111764(struct Sprite *sprite)
 {
-    
-    s16 r0; 
+
+    s16 r0;
     if (sprite->data[6] > 0xFF)
     {
         if (++sprite->data[6] == 0x10d)
             sprite->data[6] = 0;
         return;
     }
-    
+
     r0 = sprite->data[7];
     sprite->data[7]++;
-    
+
     if ((r0 & 0xFF) == 0)
     {
         sprite->data[7] &= 0xff00;
@@ -392,8 +392,8 @@ static void sub_811196C(u8 taskId)
     }
 }
 
-// Spins a sprite towards the target, pausing in the middle. 
-// Used in Shadow Ball. 
+// Spins a sprite towards the target, pausing in the middle.
+// Used in Shadow Ball.
 // arg 0: duration step 1 (attacker -> center)
 // arg 1: duration step 2 (spin center)
 // arg 2: duration step 3 (center -> target)
@@ -466,7 +466,7 @@ static void sub_8111B9C(struct Sprite *sprite)
 }
 
 static void sub_8111BB4(struct Sprite *sprite) {
-    
+
     s8 r5 = FALSE;
     bool8 r6 = FALSE;
     if(sprite->animEnded)
@@ -508,7 +508,7 @@ static void sub_8111BB4(struct Sprite *sprite) {
 void sub_8111C50(u8 taskId)
 {
     struct Task *task;
-    
+
     task = &gTasks[taskId];
     task->data[0] = duplicate_obj_of_side_rel2move_in_transparent_mode(1);
     if (task->data[0] < 0)
@@ -806,8 +806,8 @@ void sub_81123C4(u8 taskId)
         for (battler = 0; battler < 4; battler++)
         {
             if (battler != gBattleAnimAttacker
-             && battler != (gBattleAnimAttacker ^ 2)
-             && IsBattlerSpriteVisible(battler))
+            && battler != (gBattleAnimAttacker ^ 2)
+            && IsBattlerSpriteVisible(battler))
             {
                 spriteId = CreateSprite(&gUnknown_08596DB8, baseX, baseY, 55);
                 if (spriteId != MAX_SPRITES)
@@ -886,7 +886,7 @@ static void sub_81125E0(u8 taskId)
                 }
             }
         }
-        
+
         if (task->data[10])
             task->data[10]--;
         else if (task->data[6])
@@ -1120,7 +1120,7 @@ static void sub_8112B78(struct Sprite *sprite)
     sprite->pos2.x = Sin(sprite->data[0], 12);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         sprite->pos2.x = -sprite->pos2.x;
-    
+
     sprite->data[0] = (sprite->data[0] + 6) & 0xFF;
     sprite->data[1] += 0x100;
     sprite->pos2.y = -(sprite->data[1] >> 8);

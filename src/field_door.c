@@ -567,7 +567,7 @@ const u8 DoorAnimPalettes_8497124[] = {7, 7, 7, 7, 7, 7, 7, 7}; // door 41
 const u8 DoorAnimPalettes_849712C[] = {1, 1, 1, 1, 1, 1, 1, 1}; // doors 42, 43, and 44
 const u8 DoorAnimPalettes_8497134[] = {7, 7, 7, 7, 7, 7, 7, 7}; // door 45
 const u8 DoorAnimPalettes_849713C[] = {7, 7, 7, 7, 7, 7, 7, 7}; // door 46
-const u8 DoorAnimPalettes_8497144[] = {1, 1, 1, 1, 1, 1, 1, 1}; // unused 
+const u8 DoorAnimPalettes_8497144[] = {1, 1, 1, 1, 1, 1, 1, 1}; // unused
 const u8 DoorAnimPalettes_849714C[] = {1, 1, 1, 1, 1, 1, 1, 1}; // doors 47 and 48
 const u8 DoorAnimPalettes_8497154[] = {9, 9, 7, 7, 7, 7, 7, 7}; // door 49
 const u8 DoorAnimPalettes_849715C[] = {9, 9, 9, 9, 9, 9, 9, 9}; // door 50
@@ -660,7 +660,7 @@ static void door_build_blockdef(u16 *a, u16 b, const u8 *c)
 static void DrawCurrentDoorAnimFrame(const struct DoorGraphics *gfx, u32 x, u32 y, const u8 *pal)
 {
     u16 arr[24];
-    
+
     if (gfx->size == 2)
     {
         door_build_blockdef(&arr[8], 0x3F0, pal);
@@ -874,7 +874,7 @@ bool8 FieldIsDoorAnimationRunning(void)
 u32 GetDoorSoundEffect(u32 x, u32 y)
 {
     int sound = cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, x, y);
-    
+
     if (sound == 0)
         return SE_DOOR;
     else if (sound == 1)

@@ -935,14 +935,14 @@ static bool8 CanBikeFaceDirOnMetatile(u8 direction, u8 tile)
     {
         // Bike cannot face east or west on a vertical rail
         if (MetatileBehavior_IsIsolatedVerticalRail(tile)
-         || MetatileBehavior_IsVerticalRail(tile))
+        || MetatileBehavior_IsVerticalRail(tile))
             return FALSE;
     }
     else
     {
         // Bike cannot face north or south on a horizontal rail
         if (MetatileBehavior_IsIsolatedHorizontalRail(tile)
-         || MetatileBehavior_IsHorizontalRail(tile))
+        || MetatileBehavior_IsHorizontalRail(tile))
             return FALSE;
     }
     return TRUE;

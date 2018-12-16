@@ -466,7 +466,7 @@ static u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location)
             gLastWrittenSector = i;
         checksum = CalculateChecksum(gFastSaveSection->data, location[id].size);
         if (gFastSaveSection->security == UNKNOWN_CHECK_VALUE
-         && gFastSaveSection->checksum == checksum)
+        && gFastSaveSection->checksum == checksum)
         {
             u16 j;
             for (j = 0; j < location[id].size; j++)
@@ -847,9 +847,9 @@ u16 sub_815355C(void)
         DoReadFlashWholeSection(i + v3, gFastSaveSection);
         if (gFastSaveSection->id == 0)
             return savSection->data[10] +
-                   savSection->data[11] +
-                   savSection->data[12] +
-                   savSection->data[13];
+                    savSection->data[11] +
+                    savSection->data[12] +
+                    savSection->data[13];
     }
     return 0;
 }

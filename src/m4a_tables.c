@@ -46,22 +46,22 @@ void * const gMPlayJumpTableTemplate[] =
 // This is a table of deltas between sample values in compressed PCM data.
 const s8 gDeltaEncodingTable[] =
 {
-      0,
-      1,
-      4,
-      9,
-     16,
-     25,
-     36,
-     49,
+    0,
+    1,
+    4,
+    9,
+    16,
+    25,
+    36,
+    49,
     -64,
     -49,
     -36,
     -25,
     -16,
-     -9,
-     -4,
-     -1,
+    -9,
+    -4,
+    -1,
 };
 
 const u8 gScaleTable[] =

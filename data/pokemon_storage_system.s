@@ -21,8 +21,8 @@ gUnknown_085722A0:: @ 85722A0
 
 	.align 1
 gUnknown_0857239C:: @ 857239C
-    .2byte 0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108, 0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118
-    .2byte 0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108, 0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118
+	.2byte 0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108, 0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118
+	.2byte 0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108, 0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118
 
 	.align 2
 gUnknown_085723DC:: @ 85723DC
@@ -829,36 +829,36 @@ gUnknown_0857AF44:: @ 857AF44
 
 	.align 2
 gUnknown_0857B004:: @ 857B004
-    .4byte gWallpaperIcon_Aqua
-    .4byte gWallpaperIcon_Heart
-    .4byte gWallpaperIcon_FiveStar
-    .4byte gWallpaperIcon_Brick
-    .4byte gWallpaperIcon_FourStar
-    .4byte gWallpaperIcon_Asterisk
-    .4byte gWallpaperIcon_Dot
-    .4byte gWallpaperIcon_Cross
-    .4byte gWallpaperIcon_LineCircle
-    .4byte gWallpaperIcon_PokeBall
-    .4byte gWallpaperIcon_Maze
-    .4byte gWallpaperIcon_Footprint
-    .4byte gWallpaperIcon_BigAsterisk
-    .4byte gWallpaperIcon_Circle
-    .4byte gWallpaperIcon_Koffing
-    .4byte gWallpaperIcon_Ribbon
-    .4byte gWallpaperIcon_Bolt
-    .4byte gWallpaperIcon_FourCircles
-    .4byte gWallpaperIcon_Lotad
-    .4byte gWallpaperIcon_Crystal
-    .4byte gWallpaperIcon_Pichu
-    .4byte gWallpaperIcon_Diglett
-    .4byte gWallpaperIcon_Luvdisc
-    .4byte gWallpaperIcon_StarInCircle
-    .4byte gWallpaperIcon_Spinda
-    .4byte gWallpaperIcon_Latis
-    .4byte gWallpaperIcon_Plusle
-    .4byte gWallpaperIcon_Minun
-    .4byte gWallpaperIcon_Togepi
-    .4byte gWallpaperIcon_Magma
+	.4byte gWallpaperIcon_Aqua
+	.4byte gWallpaperIcon_Heart
+	.4byte gWallpaperIcon_FiveStar
+	.4byte gWallpaperIcon_Brick
+	.4byte gWallpaperIcon_FourStar
+	.4byte gWallpaperIcon_Asterisk
+	.4byte gWallpaperIcon_Dot
+	.4byte gWallpaperIcon_Cross
+	.4byte gWallpaperIcon_LineCircle
+	.4byte gWallpaperIcon_PokeBall
+	.4byte gWallpaperIcon_Maze
+	.4byte gWallpaperIcon_Footprint
+	.4byte gWallpaperIcon_BigAsterisk
+	.4byte gWallpaperIcon_Circle
+	.4byte gWallpaperIcon_Koffing
+	.4byte gWallpaperIcon_Ribbon
+	.4byte gWallpaperIcon_Bolt
+	.4byte gWallpaperIcon_FourCircles
+	.4byte gWallpaperIcon_Lotad
+	.4byte gWallpaperIcon_Crystal
+	.4byte gWallpaperIcon_Pichu
+	.4byte gWallpaperIcon_Diglett
+	.4byte gWallpaperIcon_Luvdisc
+	.4byte gWallpaperIcon_StarInCircle
+	.4byte gWallpaperIcon_Spinda
+	.4byte gWallpaperIcon_Latis
+	.4byte gWallpaperIcon_Plusle
+	.4byte gWallpaperIcon_Minun
+	.4byte gWallpaperIcon_Togepi
+	.4byte gWallpaperIcon_Magma
 
 	.align 2
 gUnknown_0857B07C:: @ 857B07C
@@ -1115,4 +1115,3 @@ gSpriteTemplate_857BC70:: @ 857BC70
 
 gSpriteTemplate_857BC88:: @ 857BC88
 	.2byte 0x0100, 0x0100, 0x0200, 0x0100, 0x0100, 0x0200, 0x0200, 0x0200, 0x0080, 0x0080, 0x0100, 0x0100, 0x0200, 0x0200, 0x0400, 0x0400
-

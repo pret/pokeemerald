@@ -112,10 +112,10 @@ void MoveSaveBlocks_ResetHeap(void)
     // change saveblocks' pointers
     // argument is a sum of the individual trainerId bytes
     SetSaveBlocksPointers(
-      saveBlock2Copy->playerTrainerId[0] +
-      saveBlock2Copy->playerTrainerId[1] +
-      saveBlock2Copy->playerTrainerId[2] +
-      saveBlock2Copy->playerTrainerId[3]);
+    saveBlock2Copy->playerTrainerId[0] +
+    saveBlock2Copy->playerTrainerId[1] +
+    saveBlock2Copy->playerTrainerId[2] +
+    saveBlock2Copy->playerTrainerId[3]);
 
     // restore saveblock data since the pointers changed
     *gSaveBlock2Ptr = *saveBlock2Copy;

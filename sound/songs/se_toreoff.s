@@ -24,7 +24,7 @@ se_toreoff_1:
 	.byte	W01
 	.byte		N01   , Ds3 , v112
 	.byte	W04
-	.byte		        Gs1 
+	.byte		        Gs1
 	.byte	W01
 	.byte		        Bn1 , v056
 	.byte	W04
@@ -63,7 +63,7 @@ se_toreoff_2:
 	.byte	W02
 	.byte		BEND  , c_v+0
 	.byte	W02
-	.byte		N01   , Cs1 
+	.byte		N01   , Cs1
 	.byte	W02
 	.byte	W06
 	.byte	W06

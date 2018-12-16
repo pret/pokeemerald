@@ -240,7 +240,7 @@ int sub_8151B68(struct InnerStruct203CF18 *arg0, const struct InnerStruct203CF18
 
     if (r4 == 0)
         return 0xFF;
-    
+
     r4->unk1_0 = 0;
     r4->unk1_4 = 0;
     r4->unk1_6 = 1;
@@ -316,7 +316,7 @@ void sub_8151CA8(struct InnerStruct203CF18 *arg0, u16 arg1, u8 arg2)
                 arg0->unk0 |= 1 << i;
             }
         }
-    }    
+    }
 }
 
 void sub_8151D28(struct InnerStruct203CF18 *arg0, u16 arg1, u8 arg2)
@@ -413,7 +413,7 @@ void sub_8151E50(struct InnerStruct203CF18 *arg0)
                             var0->unk1_0 = 0;
                         else
                             var0->unk1_0 = var0->unk4.unk7_0;
-                        
+
                         var0->unk1_4 ^= 1;
                         var0->unk3++;
                         break;

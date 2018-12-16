@@ -119,8 +119,8 @@ void sub_80F88DC(void)
 void sub_80F88E8(void)
 {
     if (gContestFinalStandings[gContestPlayerMonIndex] == 0
-     && gSpecialVar_ContestRank == 3
-     && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+    && gSpecialVar_ContestRank == 3
+    && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = 1;
     }
@@ -289,7 +289,7 @@ u8 GiveMonArtistRibbon(void)
 
     hasArtistRibbon = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON);
     if (!hasArtistRibbon && gContestFinalStandings[gContestPlayerMonIndex] == 0 && gSpecialVar_ContestRank == 3
-     && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
+    && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
     {
         hasArtistRibbon = 1;
         SetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);

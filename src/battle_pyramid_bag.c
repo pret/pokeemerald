@@ -518,8 +518,8 @@ static void sub_81C51DC(void)
     ResetAllBgsCoordinates();
     schedule_bg_copy_tilemap_to_vram(2);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
-                                  DISPCNT_OBJ_1D_MAP |
-                                  DISPCNT_OBJ_ON);
+                                DISPCNT_OBJ_1D_MAP |
+                                DISPCNT_OBJ_ON);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -630,9 +630,9 @@ static void PrintItemQuantity(u8 windowId, s32 itemIndex, u8 y)
             sub_81C5AB8(y, 0xFF);
     }
     ConvertIntToDecimalStringN(gStringVar1,
-                               gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode][itemIndex],
-                               STR_CONV_MODE_RIGHT_ALIGN,
-                               2);
+                                gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode][itemIndex],
+                                STR_CONV_MODE_RIGHT_ALIGN,
+                                2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     xAlign = GetStringRightAlignXOffset(7, gStringVar4, 0x77);
     PrintOnWindow_Font7(windowId, gStringVar4, xAlign, y, 0, 0, TEXT_SPEED_FF, 0);

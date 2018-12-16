@@ -145,7 +145,7 @@ se_w257_1:
 	.byte	W02
 	.byte		VOL   , 17*se_w257_mvl/mxv
 	.byte	W03
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@

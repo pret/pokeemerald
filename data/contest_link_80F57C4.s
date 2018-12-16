@@ -85,4 +85,3 @@ gUnknown_0858D8E0:: @ 858D8E0
 	.align 2
 gUnknown_0858D8E8:: @ 858D8E8
 	.byte 0x01, 0x0f, 0x0e, 0x00
-

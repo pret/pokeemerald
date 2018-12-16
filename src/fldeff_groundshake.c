@@ -198,7 +198,7 @@ static void sub_81BE808(u8 taskId)
     playerAvatarEventObject = &(gEventObjects[gPlayerAvatar.eventObjectId]);
 
     if((gSprites[fieldEventObject->spriteId].pos1.y + gSprites[fieldEventObject->spriteId].pos2.y) >=
-       (gSprites[playerAvatarEventObject->spriteId].pos1.y + gSprites[playerAvatarEventObject->spriteId].pos2.y))
+        (gSprites[playerAvatarEventObject->spriteId].pos1.y + gSprites[playerAvatarEventObject->spriteId].pos2.y))
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();

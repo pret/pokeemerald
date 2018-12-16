@@ -23,7 +23,7 @@ se_track_haiki_1:
 	.byte		N06   , Bn3 , v028
 	.byte	W03
 	.byte	W03
-	.byte		N21   , Gs4 
+	.byte		N21   , Gs4
 	.byte	W03
 	.byte	W03
 	.byte	W03

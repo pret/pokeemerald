@@ -55,7 +55,7 @@ se_w017_1:
 	.byte	W05
 	.byte		VOL   , 40*se_w017_mvl/mxv
 	.byte		BEND  , c_v+1
-	.byte		N06   
+	.byte		N06
 	.byte	W01
 	.byte		VOL   , 52*se_w017_mvl/mxv
 	.byte		PAN   , c_v+10
@@ -98,7 +98,7 @@ se_w017_2:
 	.byte	W06
 	.byte		VOICE , 25
 	.byte		VOL   , 52*se_w017_mvl/mxv
-	.byte		N06   , Gs4 
+	.byte		N06   , Gs4
 	.byte	W01
 	.byte		VOL   , 81*se_w017_mvl/mxv
 	.byte	W01

@@ -1,10 +1,10 @@
 #include "constants/species.h"
 #include "constants/moves.h"
 	.include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
-    .align 2, 0
+	.section .rodata
+	.align 2, 0
 
 gUnknown_08587A6C:: @ 8587A6C
 	.byte 0x24, 0x4c, 0x74, 0x9c
@@ -349,7 +349,7 @@ gUnknown_08587FA4:: @ 8587FA4
 	.string "KITSY$", 11
 	.string "OMAR$", 8
 	.2byte 3
-	
+
 
 	.align 2
 gContestOpponents:: @ 85880A4
@@ -408,5 +408,3 @@ gSpriteTemplate_858998C:: @ 858998C
 	.align 2
 gUnknown_085899EC:: @ 85899EC
 	.2byte 0x0001, 0xffff, 0x0000, 0x0001, 0xffff, 0x00ff, 0x0001, 0xffff, 0x00ff, 0x0001, 0xff00, 0x00ff, 0x0001, 0x0000
-
-

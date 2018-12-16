@@ -252,7 +252,7 @@ const u8 gText_ThePokemonList[] = _("the POKéMON LIST");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
 
-const u8 *const gReturnToXStringsTable[] = 
+const u8 *const gReturnToXStringsTable[] =
 {
     gText_TheField,
     gText_TheBattle,
@@ -268,7 +268,7 @@ const u8 *const gReturnToXStringsTable[] =
     gText_ThePC
 };
 
-const u8 *const gReturnToXStringsTable2[] = 
+const u8 *const gReturnToXStringsTable2[] =
 {
     gText_TheField,
     gText_TheBattle,
@@ -283,7 +283,7 @@ const u8 gText_TMHMPocket[] = _("TMs & HMs");
 const u8 gText_BerriesPocket[] = _("BERRIES");
 const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 
-const u8 *const gPocketNamesStringsTable[] = 
+const u8 *const gPocketNamesStringsTable[] =
 {
     gText_ItemsPocket,
     gText_PokeBallsPocket,

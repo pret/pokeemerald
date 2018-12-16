@@ -198,7 +198,7 @@ bool8 CheckForTrainersWantingBattle(void)
     {
         ResetTrainerOpponentIds();
         ConfigureAndSetUpOneTrainerBattle(gApproachingTrainers[gNoOfApproachingTrainers - 1].eventObjectId,
-                                          gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr);
+                                        gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr);
         gUnknown_030060AC = 1;
         return TRUE;
     }
@@ -208,7 +208,7 @@ bool8 CheckForTrainersWantingBattle(void)
         for (i = 0; i < gNoOfApproachingTrainers; i++, gApproachingTrainerId++)
         {
             ConfigureTwoTrainersBattle(gApproachingTrainers[i].eventObjectId,
-                                       gApproachingTrainers[i].trainerScriptPtr);
+                                        gApproachingTrainers[i].trainerScriptPtr);
         }
         SetUpTwoTrainersBattle();
         gApproachingTrainerId = 0;
@@ -304,8 +304,8 @@ static u8 GetTrainerApproachDistance(struct EventObject *trainerObj)
 static u8 GetTrainerApproachDistanceSouth(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.x == x
-     && y > trainerObj->currentCoords.y
-     && y <= trainerObj->currentCoords.y + range)
+    && y > trainerObj->currentCoords.y
+    && y <= trainerObj->currentCoords.y + range)
         return (y - trainerObj->currentCoords.y);
     else
         return 0;
@@ -315,8 +315,8 @@ static u8 GetTrainerApproachDistanceSouth(struct EventObject *trainerObj, s16 ra
 static u8 GetTrainerApproachDistanceNorth(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.x == x
-     && y < trainerObj->currentCoords.y
-     && y >= trainerObj->currentCoords.y - range)
+    && y < trainerObj->currentCoords.y
+    && y >= trainerObj->currentCoords.y - range)
         return (trainerObj->currentCoords.y - y);
     else
         return 0;
@@ -326,8 +326,8 @@ static u8 GetTrainerApproachDistanceNorth(struct EventObject *trainerObj, s16 ra
 static u8 GetTrainerApproachDistanceWest(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.y == y
-     && x < trainerObj->currentCoords.x
-     && x >= trainerObj->currentCoords.x - range)
+    && x < trainerObj->currentCoords.x
+    && x >= trainerObj->currentCoords.x - range)
         return (trainerObj->currentCoords.x - x);
     else
         return 0;
@@ -337,8 +337,8 @@ static u8 GetTrainerApproachDistanceWest(struct EventObject *trainerObj, s16 ran
 static u8 GetTrainerApproachDistanceEast(struct EventObject *trainerObj, s16 range, s16 x, s16 y)
 {
     if (trainerObj->currentCoords.y == y
-     && x > trainerObj->currentCoords.x
-     && x <= trainerObj->currentCoords.x + range)
+    && x > trainerObj->currentCoords.x
+    && x <= trainerObj->currentCoords.x + range)
         return (x - trainerObj->currentCoords.x);
     else
         return 0;
@@ -508,7 +508,7 @@ static bool8 sub_80B4318(u8 taskId, struct Task *task, struct EventObject *train
     struct EventObject *playerObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     if (!EventObjectIsMovementOverridden(playerObj)
-     || EventObjectClearHeldMovementIfFinished(playerObj))
+    || EventObjectClearHeldMovementIfFinished(playerObj))
         SwitchTaskToFollowupFunc(taskId);
     return FALSE;
 }
@@ -516,7 +516,7 @@ static bool8 sub_80B4318(u8 taskId, struct Task *task, struct EventObject *train
 static bool8 sub_80B435C(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
     if (!EventObjectIsMovementOverridden(trainerObj)
-     || EventObjectClearHeldMovementIfFinished(trainerObj))
+    || EventObjectClearHeldMovementIfFinished(trainerObj))
     {
         EventObjectSetHeldMovement(trainerObj, 0x59);
         task->tFuncId++;
@@ -535,7 +535,7 @@ static bool8 sub_80B4390(u8 taskId, struct Task *task, struct EventObject *train
 static bool8 sub_80B43AC(u8 taskId, struct Task *task, struct EventObject *trainerObj)
 {
     if (!EventObjectIsMovementOverridden(trainerObj)
-     || EventObjectClearHeldMovementIfFinished(trainerObj))
+    || EventObjectClearHeldMovementIfFinished(trainerObj))
     {
         EventObjectSetHeldMovement(trainerObj, 0x3E);
         task->tFuncId++;
@@ -714,7 +714,7 @@ static void SpriteCB_TrainerIcons(struct Sprite *sprite)
     u8 eventObjId;
 
     if (TryGetEventObjectIdByLocalIdAndMap(sprite->sLocalId, sprite->sMapNum, sprite->sMapGroup, &eventObjId)
-     || sprite->animEnded)
+    || sprite->animEnded)
     {
         FieldEffectStop(sprite, sprite->sFldEffId);
     }

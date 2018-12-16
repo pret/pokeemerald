@@ -291,10 +291,10 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
     // Items are allowed to use in ONLY trainer battles.
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER
-                               | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_FRONTIER
-                               | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_x2000000)
+                                | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_FRONTIER
+                                | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_x2000000)
             )
-       )
+        )
     {
         for (i = 0; i < 4; i++)
         {
@@ -373,7 +373,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags | gTrainers[gTrainerBattleOpponent_B].aiFlags;
     else
-       AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
+        AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         AI_THINKING_STRUCT->aiFlags |= AI_SCRIPT_DOUBLE_BATTLE; // act smart in doubles and don't attack your partner
@@ -592,7 +592,7 @@ static void BattleAI_DoAIProcessing(void)
                 }
                 if (AI_THINKING_STRUCT->aiAction & AI_ACTION_DONE)
                 {
-                   AI_THINKING_STRUCT->movesetIndex++;
+                    AI_THINKING_STRUCT->movesetIndex++;
 
                     if (AI_THINKING_STRUCT->movesetIndex < 4 && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK))
                         AI_THINKING_STRUCT->aiState = AIState_SettingUp;
@@ -615,7 +615,7 @@ static void RecordLastUsedMoveByTarget(void)
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] != gLastMoves[gBattlerTarget]  // HACK: This redundant condition is a hack to make the asm match.
-         && BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
+        && BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == MOVE_NONE)
         {
             BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] = gLastMoves[gBattlerTarget];
             break;
@@ -1087,7 +1087,7 @@ static void BattleAICmd_if_user_has_no_attacking_moves(void)
     for (i = 0; i < 4; i++)
     {
         if (gBattleMons[sBattler_AI].moves[i] != 0
-         && gBattleMoves[gBattleMons[sBattler_AI].moves[i]].power != 0)
+        && gBattleMoves[gBattleMons[sBattler_AI].moves[i]].power != 0)
             break;
     }
 
@@ -1311,9 +1311,9 @@ static void BattleAICmd_count_usable_party_mons(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (i != battlerOnField1 && i != battlerOnField2
-         && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        && GetMonData(&party[i], MON_DATA_HP) != 0
+        && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+        && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
         {
             AI_THINKING_STRUCT->funcResult++;
         }

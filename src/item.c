@@ -545,7 +545,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
 
         var = GetItemListPosition(pocket);
         if (itemPocket->capacity > var
-         && itemPocket->itemSlots[var].itemId == itemId)
+        && itemPocket->itemSlots[var].itemId == itemId)
         {
             ownedCount = GetBagItemQuantity(&itemPocket->itemSlots[var].quantity);
             if (ownedCount >= count)

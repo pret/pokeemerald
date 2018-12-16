@@ -365,20 +365,20 @@ void sub_817B150(u8 a)
     default:
     case 0:
         SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(6)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(6)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(7)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1)
-                                   | BGCNT_CHARBASE(1)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(15)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(1)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(15)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                     | DISPCNT_OBJ_1D_MAP
                                     | DISPCNT_BG1_ON
@@ -388,20 +388,20 @@ void sub_817B150(u8 a)
         break;
     case 1:
         SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(6)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(6)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(7)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1)
-                                   | BGCNT_CHARBASE(1)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(15)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(1)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(15)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                     | DISPCNT_OBJ_1D_MAP
                                     | DISPCNT_BG1_ON
@@ -411,20 +411,20 @@ void sub_817B150(u8 a)
         break;
     case 2:
         SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(6)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(6)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(7)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1)
-                                   | BGCNT_CHARBASE(1)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_SCREENBASE(15)
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(1)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_SCREENBASE(15)
+                                    | BGCNT_TXT256x256);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                     | DISPCNT_OBJ_1D_MAP
                                     | DISPCNT_BG1_ON
@@ -489,20 +489,20 @@ void sub_817B1C8(u8 a)
 void sub_817B3A8(u8 a)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
-                               | BGCNT_CHARBASE(0)
-                               | BGCNT_16COLOR
-                               | BGCNT_SCREENBASE(6)
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(0)
+                                | BGCNT_16COLOR
+                                | BGCNT_SCREENBASE(6)
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2)
-                               | BGCNT_CHARBASE(0)
-                               | BGCNT_16COLOR
-                               | BGCNT_SCREENBASE(7)
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(0)
+                                | BGCNT_16COLOR
+                                | BGCNT_SCREENBASE(7)
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1)
-                               | BGCNT_CHARBASE(1)
-                               | BGCNT_16COLOR
-                               | BGCNT_SCREENBASE(15)
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(1)
+                                | BGCNT_16COLOR
+                                | BGCNT_SCREENBASE(15)
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG_ALL_ON
@@ -620,7 +620,7 @@ static void sub_817B62C(struct Sprite *sprite)
 {
     s32 var;
     s16 var2 = gUnknown_0203BD28;
-    
+
     if (var2 != 2)
     {
         switch (var2)

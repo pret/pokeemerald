@@ -205,13 +205,13 @@ const u8 *const sSecretBasePCMenuItemDescriptions[] = {
 };
 
 void (*const SecretBasePC_SelectedDecorActions[][2])(u8 taskId) = {
-   {
+    {
         sub_8127F68, sub_8127A8C
-   }, {
+    }, {
         sub_812A3D4, sub_8127A8C
-   }, {
+    }, {
         sub_8133DA0, sub_8127A8C
-   }
+    }
 };
 
 const struct WindowTemplate gUnknown_085A6B90[4] =

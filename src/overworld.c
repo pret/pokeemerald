@@ -545,8 +545,8 @@ void LoadEventObjTemplatesFromHeader(void)
 
     // Copy map header events to save block
     CpuCopy32(gMapHeader.events->eventObjects,
-              gSaveBlock1Ptr->eventObjectTemplates,
-              gMapHeader.events->eventObjectCount * sizeof(struct EventObjectTemplate));
+            gSaveBlock1Ptr->eventObjectTemplates,
+            gMapHeader.events->eventObjectCount * sizeof(struct EventObjectTemplate));
 }
 
 void LoadSaveblockEventObjScripts(void)
@@ -1010,7 +1010,7 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
     else if (MetatileBehavior_IsEastArrowWarp(metatileBehavior) == TRUE)
         return DIR_WEST;
     else if ((playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER  && transitionFlags == PLAYER_AVATAR_FLAG_SURFING)
-     || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER ))
+    || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER ))
         return playerStruct->direction;
     else if (MetatileBehavior_IsLadder(metatileBehavior) == TRUE)
         return playerStruct->direction;
@@ -1121,7 +1121,7 @@ static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
     else if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
         return FALSE;
     else if (warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_1F)
-     || warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_2F))
+    || warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_2F))
         return TRUE;
     else
         return FALSE;
@@ -1136,7 +1136,7 @@ static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
     else if (warp->mapGroup != MAP_GROUP(MOSSDEEP_CITY_SPACE_CENTER_1F))
         return FALSE;
     else if (warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_1F)
-     || warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_2F))
+    || warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_2F))
         return TRUE;
     return FALSE;
 }
@@ -1161,8 +1161,8 @@ u16 GetCurrLocationDefaultMusic(void)
 
     // Play the desert music only when the sandstorm is active on Route 111.
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
-     && GetSav1Weather() == 8)
+    && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
+    && GetSav1Weather() == 8)
         return MUS_ASHROAD;
 
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
@@ -1189,7 +1189,7 @@ u16 GetWarpDestinationMusic(void)
     else
     {
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAUVILLE_CITY)
-         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAUVILLE_CITY))
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAUVILLE_CITY))
             return MUS_DOORO_X1;
         else
             return MUS_GRANROAD;
@@ -1312,7 +1312,7 @@ static void PlayAmbientCry(void)
 
     PlayerGetDestCoords(&x, &y);
     if (sIsAmbientCryWaterMon == TRUE
-     && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
+    && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
         return;
     pan = (Random() % 88) + 212;
     volume = (Random() % 30) + 50;
@@ -1366,8 +1366,8 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
 static void ChooseAmbientCrySpecies(void)
 {
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE130)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE130))
-     && !IsMirageIslandPresent())
+    && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE130))
+    && !IsMirageIslandPresent())
     {
         // Only play water pokemon cries on this route
         // when Mirage Island is not present
@@ -1403,10 +1403,10 @@ u8 GetLastUsedWarpMapType(void)
 bool8 is_map_type_1_2_3_5_or_6(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
-     || mapType == MAP_TYPE_TOWN
-     || mapType == MAP_TYPE_UNDERWATER
-     || mapType == MAP_TYPE_CITY
-     || mapType == MAP_TYPE_6)
+    || mapType == MAP_TYPE_TOWN
+    || mapType == MAP_TYPE_UNDERWATER
+    || mapType == MAP_TYPE_CITY
+    || mapType == MAP_TYPE_6)
         return TRUE;
     else
         return FALSE;
@@ -1415,9 +1415,9 @@ bool8 is_map_type_1_2_3_5_or_6(u8 mapType)
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
 {
     if (mapType == MAP_TYPE_ROUTE
-     || mapType == MAP_TYPE_TOWN
-     || mapType == MAP_TYPE_6
-     || mapType == MAP_TYPE_CITY)
+    || mapType == MAP_TYPE_TOWN
+    || mapType == MAP_TYPE_6
+    || mapType == MAP_TYPE_CITY)
         return TRUE;
     else
         return FALSE;
@@ -1426,7 +1426,7 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
 bool8 Overworld_MapTypeIsIndoors(u8 mapType)
 {
     if (mapType == MAP_TYPE_INDOOR
-     || mapType == MAP_TYPE_SECRET_BASE)
+    || mapType == MAP_TYPE_SECRET_BASE)
         return TRUE;
     else
         return FALSE;
@@ -2156,7 +2156,7 @@ static void InitOverworldGraphicsRegisters(void)
     SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
     SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_82EC7C4[1] | gUnknown_82EC7C4[2] | gUnknown_82EC7C4[3]
-                               | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
+                                | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
     overworld_bg_setup();
     schedule_bg_copy_tilemap_to_vram(1);
@@ -3037,7 +3037,7 @@ static u8 GetLinkPlayerIdAt(s16 x, s16 y)
     for (i = 0; i < 4; i++)
     {
         if (gLinkPlayerEventObjects[i].active
-         && (gLinkPlayerEventObjects[i].mode == 0 || gLinkPlayerEventObjects[i].mode == 2))
+        && (gLinkPlayerEventObjects[i].mode == 0 || gLinkPlayerEventObjects[i].mode == 2))
         {
             struct EventObject *eventObj = &gEventObjects[gLinkPlayerEventObjects[i].eventObjId];
             if (eventObj->currentCoords.x == x && eventObj->currentCoords.y == y)
@@ -3153,7 +3153,7 @@ static u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
         if (i != selfEventObjId)
         {
             if ((gEventObjects[i].currentCoords.x == x && gEventObjects[i].currentCoords.y == y)
-             || (gEventObjects[i].previousCoords.x == x && gEventObjects[i].previousCoords.y == y))
+            || (gEventObjects[i].previousCoords.x == x && gEventObjects[i].previousCoords.y == y))
             {
                 return 1;
             }

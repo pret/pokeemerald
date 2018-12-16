@@ -844,7 +844,7 @@ static void Mailbox_UpdateMailListAfterDeposit(void)
     playerPCItemPageInfo.count = GetMailboxMailCount();
     Mailbox_UpdateMailList();
     if (prevCount != playerPCItemPageInfo.count && (playerPCItemPageInfo.count < (playerPCItemPageInfo.pageItems + playerPCItemPageInfo.itemsAbove))
-       && playerPCItemPageInfo.itemsAbove != 0)
+        && playerPCItemPageInfo.itemsAbove != 0)
         playerPCItemPageInfo.itemsAbove--;
     ItemStorage_SetItemAndMailCount(taskId);
     sub_81973A4();

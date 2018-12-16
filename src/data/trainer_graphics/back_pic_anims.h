@@ -62,7 +62,7 @@ const union AnimCmd gAnimCmd_RubySapphireMay_1[] =
 {
     ANIMCMD_FRAME(0, 24),
     ANIMCMD_FRAME(1, 9),
-    ANIMCMD_FRAME(2, 24), 
+    ANIMCMD_FRAME(2, 24),
     ANIMCMD_FRAME(0, 9),
     ANIMCMD_FRAME(3, 50),
     ANIMCMD_END,

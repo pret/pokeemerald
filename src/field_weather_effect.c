@@ -404,8 +404,8 @@ bool8 LightRain_Finish(void)
     {
     case 0:
         if (gWeatherPtr->nextWeather == WEATHER_RAIN_LIGHT
-         || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
-         || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
+        || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
+        || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
         {
             gWeatherPtr->finishStep = 0xFF;
             return FALSE;
@@ -477,8 +477,8 @@ void sub_807E5C0(struct Sprite *sprite)
         sprite->pos1.y = sprite->data[3] >> 4;
 
         if (sprite->data[5] != 0
-         && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
-         && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
+        && (sprite->pos1.x >= -8 && sprite->pos1.x <= 248)
+        && sprite->pos1.y >= -16 && sprite->pos1.y <= 176)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
@@ -629,8 +629,8 @@ static const struct SpriteTemplate sRainSpriteTemplate =
 
 const s16 gUnknown_0839AABC[][2] =
 {
-	{-104, 208},
-	{-160, 320},
+    {-104, 208},
+    {-160, 320},
 };
 
 const u16 gUnknown_0839AAC4[][2] =
@@ -793,7 +793,7 @@ bool8 CreateRainSprite(void)
 
     spriteNum = gWeatherPtr->rainSpriteCount;
     spriteId = CreateSpriteAtEnd(&sRainSpriteTemplate,
-      sRainSpriteCoords[spriteNum].x, sRainSpriteCoords[spriteNum].y, 78);
+    sRainSpriteCoords[spriteNum].x, sRainSpriteCoords[spriteNum].y, 78);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[5] = 0;
@@ -1221,8 +1221,8 @@ bool8 Rain_Finish(void)
         if (gWeatherPtr->unknown_6EA != 0)
         {
             if (gWeatherPtr->nextWeather == WEATHER_RAIN_LIGHT
-             || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
-             || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
+            || gWeatherPtr->nextWeather == WEATHER_RAIN_MED
+            || gWeatherPtr->nextWeather == WEATHER_RAIN_HEAVY)
                 return FALSE;
             gWeatherPtr->unknown_6D9 = 0;
             gWeatherPtr->finishStep++;
@@ -2230,10 +2230,10 @@ void sub_8080588(u16 a)
     s16 x = gUnknown_0839AC78[a][0];
     s16 y = gUnknown_0839AC78[a][1] - gSpriteCoordOffsetY;
     u8 spriteId = CreateSpriteAtEnd(
-      &gSpriteTemplate_839ACBC,
-      x,
-      y,
-      0);
+    &gSpriteTemplate_839ACBC,
+    x,
+    y,
+    0);
 
     if (spriteId != MAX_SPRITES)
     {
@@ -2466,6 +2466,6 @@ void UpdateWeatherPerDay(u16 increment)
 static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
 {
     if (newWeather != oldWeather
-     && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
+    && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
         IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
 }

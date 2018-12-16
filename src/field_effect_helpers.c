@@ -254,11 +254,11 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->pos1.x = linkedSprite->pos1.x;
         sprite->pos1.y = linkedSprite->pos1.y + sprite->data[3];
         if (!eventObject->active || !eventObject->hasShadow
-         || MetatileBehavior_IsPokeGrass(eventObject->currentMetatileBehavior)
-         || MetatileBehavior_IsSurfableWaterOrUnderwater(eventObject->currentMetatileBehavior)
-         || MetatileBehavior_IsSurfableWaterOrUnderwater(eventObject->previousMetatileBehavior)
-         || MetatileBehavior_IsReflective(eventObject->currentMetatileBehavior)
-         || MetatileBehavior_IsReflective(eventObject->previousMetatileBehavior))
+        || MetatileBehavior_IsPokeGrass(eventObject->currentMetatileBehavior)
+        || MetatileBehavior_IsSurfableWaterOrUnderwater(eventObject->currentMetatileBehavior)
+        || MetatileBehavior_IsSurfableWaterOrUnderwater(eventObject->previousMetatileBehavior)
+        || MetatileBehavior_IsReflective(eventObject->currentMetatileBehavior)
+        || MetatileBehavior_IsReflective(eventObject->previousMetatileBehavior))
         {
             FieldEffectStop(sprite, FLDEFF_SHADOW);
         }

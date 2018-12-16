@@ -139,8 +139,8 @@ void GetPokeblockFeederInFront(void)
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
         if (gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum
-         && sPokeblockFeeders[i].x == x
-         && sPokeblockFeeders[i].y == y)
+        && sPokeblockFeeders[i].x == x
+        && sPokeblockFeeders[i].y == y)
         {
             gSpecialVar_Result = i;
             StringCopy(gStringVar1, gPokeblockNames[sPokeblockFeeders[i].pokeblock.color]);
@@ -210,8 +210,8 @@ void SafariZoneActivatePokeblockFeeder(u8 pkblId)
     {
         // Find free entry in sPokeblockFeeders
         if (sPokeblockFeeders[i].mapNum == 0
-         && sPokeblockFeeders[i].x == 0
-         && sPokeblockFeeders[i].y == 0)
+        && sPokeblockFeeders[i].x == 0
+        && sPokeblockFeeders[i].y == 0)
         {
             // Initialize Pokeblock feeder
             GetXYCoordsOneStepInFrontOfPlayer(&x, &y);

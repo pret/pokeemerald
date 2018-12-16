@@ -25,7 +25,7 @@ se_w028_1:
 	.byte		BEND  , c_v+0
 	.byte		N02   , Gn5 , v092
 	.byte	W02
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W04
 	.byte		VOICE , 36
 	.byte		VOL   , 84*se_w028_mvl/mxv
@@ -74,7 +74,7 @@ se_w028_2:
 	.byte		PAN   , c_v+0
 	.byte		N01   , Cn3 , v040
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W22
 	.byte	FINE
 

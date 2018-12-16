@@ -577,9 +577,9 @@ static void Task_BardSong(u8 taskId)
             register s16 zero asm("r1");
 
             while (*str != CHAR_SPACE
-                   && *str != CHAR_NEWLINE
-                   && *str != EXT_CTRL_CODE_BEGIN
-                   && *str != EOS)
+                    && *str != CHAR_NEWLINE
+                    && *str != EXT_CTRL_CODE_BEGIN
+                    && *str != EOS)
             {
                 str++;
                 wordLen++;
@@ -1245,4 +1245,3 @@ bool8 ScrSpecial_StorytellerInitializeRandomStat(void)
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
     return StorytellerInitializeRandomStat();
 }
-

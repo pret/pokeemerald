@@ -123,36 +123,36 @@ void Task_Truck2(u8 taskId)
 
 void Task_Truck3(u8 taskId)
 {
-   s16 *data = gTasks[taskId].data;
-   s16 cameraXpan;
-   s16 cameraYpan;
+    s16 *data = gTasks[taskId].data;
+    s16 cameraXpan;
+    s16 cameraYpan;
 
-   data[0]++;
+    data[0]++;
 
-   if (data[0] > 5)
-   {
-       data[0] = 0;
-       data[1]++;
-   }
+    if (data[0] > 5)
+    {
+        data[0] = 0;
+        data[1]++;
+    }
 
-   if ((u16)data[1] == 19)
-   {
-       DestroyTask(taskId);
-   }
-   else
-   {
-       cameraXpan = gTruckCamera_HorizontalTable[data[1]];
-       cameraYpan = 0;
-       SetCameraPanning(cameraXpan, 0);
-       sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
-       sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, cameraYpan - 3);
-       sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, cameraYpan);
-   }
+    if ((u16)data[1] == 19)
+    {
+        DestroyTask(taskId);
+    }
+    else
+    {
+        cameraXpan = gTruckCamera_HorizontalTable[data[1]];
+        cameraYpan = 0;
+        SetCameraPanning(cameraXpan, 0);
+        sub_808E82C(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
+        sub_808E82C(2, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -cameraXpan, cameraYpan - 3);
+        sub_808E82C(3, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, -3 - cameraXpan, cameraYpan);
+    }
 }
 
 void Task_HandleTruckSequence(u8 taskId)
 {
-   s16 *data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     switch (data[0])
     {

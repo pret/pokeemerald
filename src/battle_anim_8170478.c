@@ -1314,7 +1314,7 @@ static void sub_8171BAC(struct Sprite *sprite)
 
     if (sprite->animEnded)
         sprite->invisible = 1;
-    
+
     if (gSprites[gBattlerSpriteIds[gBattleAnimTarget]].affineAnimEnded)
     {
         StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 0);
@@ -1323,7 +1323,7 @@ static void sub_8171BAC(struct Sprite *sprite)
     else
     {
         gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] -= 288;
-        gSprites[gBattlerSpriteIds[gBattleAnimTarget]].pos2.y = gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] >> 8;   
+        gSprites[gBattlerSpriteIds[gBattleAnimTarget]].pos2.y = gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] >> 8;
     }
 
     if (sprite->animEnded && next)
@@ -1361,7 +1361,7 @@ static void sub_8171CE8(struct Sprite *sprite)
     sprite->data[1] = (sprite->data[1] + 0x680) & 0xFF;
 
     if (sprite->pos1.y + sprite->pos2.y > 160
-     || sprite->pos1.x + sprite->pos2.x < -8)
+    || sprite->pos1.x + sprite->pos2.x < -8)
     {
         sprite->data[0] = 0;
         sprite->callback = sub_81719C0;
@@ -1907,7 +1907,7 @@ void sub_8172BF0(u8 taskId)
     u8 spriteId;
     u32 x;
     u32 done;
-    
+
     done = FALSE;
     spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
     switch (gTasks[taskId].data[10])
@@ -2063,7 +2063,7 @@ static void sub_8172FEC(u8 taskId)
         gTasks[taskId].data[13]++;
         return;
     }
-    
+
     if (gBattleSpritesDataPtr->animationData->field_A)
         return;
 

@@ -2306,7 +2306,7 @@ void sub_80FEB44(struct Sprite* sprite)
 {
     u16 a = Random2();
     u16 b;
-    
+
     StartSpriteAnim(sprite, a & 7);
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
@@ -2503,7 +2503,7 @@ static void sub_80FEF98(struct Sprite* sprite)
     }
     else
     {
-       DestroyAnimSprite(sprite);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -2604,7 +2604,7 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
     s16 a = sprite->data[0];
     s16 b = sprite->data[7];
     s16 r0;
-    
+
     sprite->data[0] = 1;
     TranslateAnimArc(sprite);
     r0 = sprite->data[7];
@@ -2619,11 +2619,11 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
         if (sprite->oam.affineParam == 30)
             destroy = TRUE;
     }
-    
+
     if (sprite->pos1.x + sprite->pos2.x > 256
-     || sprite->pos1.x + sprite->pos2.x < -16
-     || sprite->pos1.y + sprite->pos2.y > 160
-     || sprite->pos1.y + sprite->pos2.y < -16)
+    || sprite->pos1.x + sprite->pos2.x < -16
+    || sprite->pos1.y + sprite->pos2.y > 160
+    || sprite->pos1.y + sprite->pos2.y < -16)
         destroy = TRUE;
 
     if (destroy)
@@ -3681,7 +3681,7 @@ void sub_8100A94(struct Sprite* sprite)
 }
 
 // Moves the sprite in a diagonally slashing motion across the target mon.
-// Used by moves such as MOVE_CUT and MOVE_AERIAL_ACE. 
+// Used by moves such as MOVE_CUT and MOVE_AERIAL_ACE.
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: slice direction; 0 = right-to-left, 1 = left-to-right
@@ -5261,10 +5261,10 @@ static void sub_8102DE4(struct Sprite* sprite)
 
 void sub_8102EB0(struct Sprite* sprite)
 {
-    int a; 
+    int a;
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
     {
-        a = gBattleAnimArgs[1]; 
+        a = gBattleAnimArgs[1];
         (u16)gBattleAnimArgs[1] = -a;
     }
 

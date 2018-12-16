@@ -23,9 +23,9 @@ se_track_door_1:
 	.byte		BEND  , c_v+0
 	.byte		N03   , Cn2 , v092
 	.byte	W06
-	.byte		N01   , Cn3 
+	.byte		N01   , Cn3
 	.byte	W02
-	.byte		N02   , Cn4 
+	.byte		N02   , Cn4
 	.byte	W04
 	.byte	FINE
 
@@ -37,10 +37,10 @@ se_track_door_2:
 	.byte		VOICE , 4
 	.byte		N03   , Cn2 , v032
 	.byte	W05
-	.byte		N01   , Cn4 
+	.byte		N01   , Cn4
 	.byte	W01
 	.byte	W02
-	.byte		N02   
+	.byte		N02
 	.byte	W04
 	.byte	FINE
 

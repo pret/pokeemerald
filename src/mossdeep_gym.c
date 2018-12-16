@@ -201,9 +201,9 @@ void MossdeepGym_TurnEvents(void)
                     continue;
                 }
                 ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId,
-                                                         gSaveBlock1Ptr->location.mapNum,
-                                                         gSaveBlock1Ptr->location.mapGroup,
-                                                         movementScript);
+                                                        gSaveBlock1Ptr->location.mapNum,
+                                                        gSaveBlock1Ptr->location.mapGroup,
+                                                        movementScript);
             }
             else if (r6 == 1)
             {
@@ -229,9 +229,9 @@ void MossdeepGym_TurnEvents(void)
                     continue;
                 }
                 ScriptMovement_StartObjectMovementScript(events[gUnknown_0203CE50->objects[i].eventTemplateId].localId,
-                                                         gSaveBlock1Ptr->location.mapNum,
-                                                         gSaveBlock1Ptr->location.mapGroup,
-                                                         movementScript);
+                                                        gSaveBlock1Ptr->location.mapNum,
+                                                        gSaveBlock1Ptr->location.mapGroup,
+                                                        movementScript);
             }
         }
     }

@@ -45,7 +45,7 @@ Run the following commands in Terminal:
 ```
 xcode-select --install
 
-sudo dkp-pacman -S devkitARM 
+sudo dkp-pacman -S devkitARM
 
 export DEVKITPRO=/opt/devkitpro
 echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
@@ -58,7 +58,7 @@ git clone https://github.com/pret/agbcc
 
 cd agbcc/
 ./build.sh
-./install.sh ../pokeemerald 
+./install.sh ../pokeemerald
 
 cd ../pokeemerald
 ./build_tools.sh
@@ -92,4 +92,3 @@ If you have 8 cores, run: `make -j8`
 If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
 
 `make NODEP=1`
-

@@ -2383,9 +2383,9 @@ static void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
 
     s16 mugshotId = task->tMugshotId;
     task->tOpponentSpriteId = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotId],
-                                                     sMugshotsOpponentCoords[mugshotId][0] - 32,
-                                                     sMugshotsOpponentCoords[mugshotId][1] + 42,
-                                                     0, gDecompressionBuffer);
+                                                    sMugshotsOpponentCoords[mugshotId][0] - 32,
+                                                    sMugshotsOpponentCoords[mugshotId][1] + 42,
+                                                    0, gDecompressionBuffer);
     task->tPlayerSpriteId = CreateTrainerSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), 272, 106, 0, gDecompressionBuffer);
 
     opponentSprite = &gSprites[task->tOpponentSpriteId];
@@ -3320,12 +3320,12 @@ static bool8 Phase2_WhiteFade_Func4(struct Task *task)
 
 static bool8 Phase2_WhiteFade_Func5(struct Task *task)
 {
-   if (++sTransitionStructPtr->BLDY > 16)
-   {
-       sub_8149F84();
-       DestroyTask(FindTaskIdByFunc(Phase2Task_WhiteFade));
-   }
-   return FALSE;
+    if (++sTransitionStructPtr->BLDY > 16)
+    {
+        sub_8149F84();
+        DestroyTask(FindTaskIdByFunc(Phase2Task_WhiteFade));
+    }
+    return FALSE;
 }
 
 static void VBlankCB0_Phase2_WhiteFade(void)

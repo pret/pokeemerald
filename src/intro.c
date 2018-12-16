@@ -950,10 +950,10 @@ static u8 SetUpCopyrightScreen(void)
         FreeAllSpritePalettes();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITEALPHA);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_TXT256x256);
+                                    | BGCNT_CHARBASE(0)
+                                    | BGCNT_SCREENBASE(7)
+                                    | BGCNT_16COLOR
+                                    | BGCNT_TXT256x256);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Intro);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
@@ -1556,16 +1556,16 @@ static void Task_IntroLoadPart1Graphics4(u8 taskId)
     SetGpuReg(REG_OFFSET_WININ, 0x3F);
     SetGpuReg(REG_OFFSET_WINOUT, 0);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0)
-                               | BGCNT_CHARBASE(0)
-                               | BGCNT_SCREENBASE(24)
-                               | BGCNT_256COLOR
-                               | BGCNT_WRAP
-                               | BGCNT_AFF512x512);
+                                | BGCNT_CHARBASE(0)
+                                | BGCNT_SCREENBASE(24)
+                                | BGCNT_256COLOR
+                                | BGCNT_WRAP
+                                | BGCNT_AFF512x512);
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1)
-                               | BGCNT_CHARBASE(1)
-                               | BGCNT_SCREENBASE(28)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(1)
+                                | BGCNT_SCREENBASE(28)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG1_ON
@@ -1991,26 +1991,26 @@ static void sub_816E7B4(struct Sprite *sprite)
 static void Task_IntroFadeIn1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0
-                               | BLDCNT_TGT1_BG1
-                               | BLDCNT_TGT1_BG2
-                               | BLDCNT_EFFECT_LIGHTEN);
+                                | BLDCNT_TGT1_BG1
+                                | BLDCNT_TGT1_BG2
+                                | BLDCNT_EFFECT_LIGHTEN);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(31, 31));
     SetGpuReg(REG_OFFSET_BLDY, 31);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
-                               | BGCNT_CHARBASE(0)
-                               | BGCNT_SCREENBASE(24)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT512x256);
+                                | BGCNT_CHARBASE(0)
+                                | BGCNT_SCREENBASE(24)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT512x256);
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0)
-                               | BGCNT_CHARBASE(1)
-                               | BGCNT_SCREENBASE(26)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT512x256);
+                                | BGCNT_CHARBASE(1)
+                                | BGCNT_SCREENBASE(26)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT512x256);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2)
-                               | BGCNT_CHARBASE(1)
-                               | BGCNT_SCREENBASE(28)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(1)
+                                | BGCNT_SCREENBASE(28)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
@@ -2359,12 +2359,12 @@ static void Task_IntroWaterDrops_1(u8 taskId)
     case 0:
     default:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND
-                                   | BLDCNT_TGT2_BG0
-                                   | BLDCNT_TGT2_BG1
-                                   | BLDCNT_TGT2_BG2
-                                   | BLDCNT_TGT2_BG3
-                                   | BLDCNT_TGT2_OBJ
-                                   | BLDCNT_TGT2_BD);
+                                    | BLDCNT_TGT2_BG0
+                                    | BLDCNT_TGT2_BG1
+                                    | BLDCNT_TGT2_BG2
+                                    | BLDCNT_TGT2_BG3
+                                    | BLDCNT_TGT2_OBJ
+                                    | BLDCNT_TGT2_BD);
         SetGpuReg(REG_OFFSET_BLDALPHA, gUnknown_0853FF70[31]);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         gTasks[taskId].data[1] = 0x40;
@@ -2402,12 +2402,12 @@ static void Task_IntroWaterDrops_2(u8 taskId)
     case 0:
     default:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND
-                                   | BLDCNT_TGT2_BG0
-                                   | BLDCNT_TGT2_BG1
-                                   | BLDCNT_TGT2_BG2
-                                   | BLDCNT_TGT2_BG3
-                                   | BLDCNT_TGT2_OBJ
-                                   | BLDCNT_TGT2_BD);
+                                    | BLDCNT_TGT2_BG0
+                                    | BLDCNT_TGT2_BG1
+                                    | BLDCNT_TGT2_BG2
+                                    | BLDCNT_TGT2_BG3
+                                    | BLDCNT_TGT2_OBJ
+                                    | BLDCNT_TGT2_BD);
         SetGpuReg(REG_OFFSET_BLDALPHA, gUnknown_0853FF70[0]);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         gTasks[taskId].data[1] = 0;

@@ -188,7 +188,7 @@ u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode)
     }
     else
     {
-       return -1;
+        return -1;
     }
 
 end:
@@ -314,13 +314,13 @@ void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numT
         bg = templates[i].bg;
         if (bg < 4) {
             SetBgControlAttributes(bg,
-                                   templates[i].charBaseIndex,
-                                   templates[i].mapBaseIndex,
-                                   templates[i].screenSize,
-                                   templates[i].paletteMode,
-                                   templates[i].priority,
-                                   0,
-                                   0);
+                                    templates[i].charBaseIndex,
+                                    templates[i].mapBaseIndex,
+                                    templates[i].screenSize,
+                                    templates[i].paletteMode,
+                                    templates[i].priority,
+                                    0,
+                                    0);
 
             sGpuBgConfigs2[bg].baseTile = templates[i].baseTile;
             sGpuBgConfigs2[bg].basePalette = 0;
@@ -340,13 +340,13 @@ void InitBgFromTemplate(const struct BgTemplate *template)
     if (bg < 4)
     {
         SetBgControlAttributes(bg,
-                               template->charBaseIndex,
-                               template->mapBaseIndex,
-                               template->screenSize,
-                               template->paletteMode,
-                               template->priority,
-                               0,
-                               0);
+                                template->charBaseIndex,
+                                template->mapBaseIndex,
+                                template->screenSize,
+                                template->paletteMode,
+                                template->priority,
+                                0,
+                                0);
 
         sGpuBgConfigs2[bg].baseTile = template->baseTile;
         sGpuBgConfigs2[bg].basePalette = 0;

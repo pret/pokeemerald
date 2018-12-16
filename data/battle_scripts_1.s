@@ -12,7 +12,7 @@
 	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
-	
+
 .align 2
 gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectHit
@@ -2855,7 +2855,7 @@ BattleScript_GiveExp::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp BS_TARGET
 	end2
-	
+
 BattleScript_HandleFaintedMon::
 	atk24 BattleScript_82DA8F6
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
@@ -4079,7 +4079,7 @@ BattleScript_IntimidatePrevented:
 	printstring STRINGID_PREVENTEDFROMWORKING
 	waitmessage 0x40
 	goto BattleScript_IntimidateActivatesLoopIncrement
-	
+
 BattleScript_DroughtActivates::
 	pause 0x20
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
@@ -4493,7 +4493,7 @@ BattleScript_ArenaTurnBeginning::
 	various15 BS_ATTACKER
 	volumeup
 	end2
-	
+
 BattleScript_82DB8E0:: @ Unused battlescript
 	playse SE_PINPON
 	various14 BS_ATTACKER

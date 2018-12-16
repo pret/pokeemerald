@@ -1,4 +1,4 @@
-const u16 gBattleFrontierTrainerMons_Brady[] = 
+const u16 gBattleFrontierTrainerMons_Brady[] =
 {
     0,
     1,
@@ -62,10 +62,10 @@ const u16 gBattleFrontierTrainerMons_Brady[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Conner[] = 
+const u16 gBattleFrontierTrainerMons_Conner[] =
 {
     0,
     1,
@@ -129,10 +129,10 @@ const u16 gBattleFrontierTrainerMons_Conner[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Bradley[] = 
+const u16 gBattleFrontierTrainerMons_Bradley[] =
 {
     0,
     1,
@@ -196,10 +196,10 @@ const u16 gBattleFrontierTrainerMons_Bradley[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Cybil[] = 
+const u16 gBattleFrontierTrainerMons_Cybil[] =
 {
     0,
     1,
@@ -263,10 +263,10 @@ const u16 gBattleFrontierTrainerMons_Cybil[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Rodette[] = 
+const u16 gBattleFrontierTrainerMons_Rodette[] =
 {
     0,
     1,
@@ -330,10 +330,10 @@ const u16 gBattleFrontierTrainerMons_Rodette[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Peggy[] = 
+const u16 gBattleFrontierTrainerMons_Peggy[] =
 {
     0,
     1,
@@ -397,10 +397,10 @@ const u16 gBattleFrontierTrainerMons_Peggy[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Keith[] = 
+const u16 gBattleFrontierTrainerMons_Keith[] =
 {
     66,
     67,
@@ -446,10 +446,10 @@ const u16 gBattleFrontierTrainerMons_Keith[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Grayson[] = 
+const u16 gBattleFrontierTrainerMons_Grayson[] =
 {
     66,
     67,
@@ -495,10 +495,10 @@ const u16 gBattleFrontierTrainerMons_Grayson[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Glenn[] = 
+const u16 gBattleFrontierTrainerMons_Glenn[] =
 {
     66,
     67,
@@ -544,10 +544,10 @@ const u16 gBattleFrontierTrainerMons_Glenn[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Liliana[] = 
+const u16 gBattleFrontierTrainerMons_Liliana[] =
 {
     66,
     67,
@@ -593,10 +593,10 @@ const u16 gBattleFrontierTrainerMons_Liliana[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Elise[] = 
+const u16 gBattleFrontierTrainerMons_Elise[] =
 {
     66,
     67,
@@ -642,10 +642,10 @@ const u16 gBattleFrontierTrainerMons_Elise[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Zoey[] = 
+const u16 gBattleFrontierTrainerMons_Zoey[] =
 {
     66,
     67,
@@ -691,10 +691,10 @@ const u16 gBattleFrontierTrainerMons_Zoey[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Manuel[] = 
+const u16 gBattleFrontierTrainerMons_Manuel[] =
 {
     5,
     20,
@@ -733,10 +733,10 @@ const u16 gBattleFrontierTrainerMons_Manuel[] =
     154,
     158,
     160,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Russ[] = 
+const u16 gBattleFrontierTrainerMons_Russ[] =
 {
     5,
     20,
@@ -775,10 +775,10 @@ const u16 gBattleFrontierTrainerMons_Russ[] =
     154,
     158,
     160,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dustin[] = 
+const u16 gBattleFrontierTrainerMons_Dustin[] =
 {
     5,
     20,
@@ -817,10 +817,10 @@ const u16 gBattleFrontierTrainerMons_Dustin[] =
     154,
     158,
     160,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Tina[] = 
+const u16 gBattleFrontierTrainerMons_Tina[] =
 {
     5,
     20,
@@ -859,10 +859,10 @@ const u16 gBattleFrontierTrainerMons_Tina[] =
     154,
     158,
     160,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gillian[] = 
+const u16 gBattleFrontierTrainerMons_Gillian[] =
 {
     5,
     20,
@@ -901,10 +901,10 @@ const u16 gBattleFrontierTrainerMons_Gillian[] =
     154,
     158,
     160,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Zoe[] = 
+const u16 gBattleFrontierTrainerMons_Zoe[] =
 {
     5,
     20,
@@ -943,10 +943,10 @@ const u16 gBattleFrontierTrainerMons_Zoe[] =
     154,
     158,
     160,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Chen[] = 
+const u16 gBattleFrontierTrainerMons_Chen[] =
 {
     110,
     111,
@@ -999,10 +999,10 @@ const u16 gBattleFrontierTrainerMons_Chen[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Al[] = 
+const u16 gBattleFrontierTrainerMons_Al[] =
 {
     110,
     111,
@@ -1055,10 +1055,10 @@ const u16 gBattleFrontierTrainerMons_Al[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Mitch[] = 
+const u16 gBattleFrontierTrainerMons_Mitch[] =
 {
     110,
     111,
@@ -1111,10 +1111,10 @@ const u16 gBattleFrontierTrainerMons_Mitch[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Anne[] = 
+const u16 gBattleFrontierTrainerMons_Anne[] =
 {
     110,
     111,
@@ -1167,10 +1167,10 @@ const u16 gBattleFrontierTrainerMons_Anne[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alize[] = 
+const u16 gBattleFrontierTrainerMons_Alize[] =
 {
     110,
     111,
@@ -1223,10 +1223,10 @@ const u16 gBattleFrontierTrainerMons_Alize[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lauren[] = 
+const u16 gBattleFrontierTrainerMons_Lauren[] =
 {
     110,
     111,
@@ -1279,10 +1279,10 @@ const u16 gBattleFrontierTrainerMons_Lauren[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kipp[] = 
+const u16 gBattleFrontierTrainerMons_Kipp[] =
 {
     5,
     6,
@@ -1316,10 +1316,10 @@ const u16 gBattleFrontierTrainerMons_Kipp[] =
     112,
     114,
     121,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jason[] = 
+const u16 gBattleFrontierTrainerMons_Jason[] =
 {
     5,
     6,
@@ -1353,10 +1353,10 @@ const u16 gBattleFrontierTrainerMons_Jason[] =
     112,
     114,
     121,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_John[] = 
+const u16 gBattleFrontierTrainerMons_John[] =
 {
     5,
     6,
@@ -1390,10 +1390,10 @@ const u16 gBattleFrontierTrainerMons_John[] =
     112,
     114,
     121,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ann[] = 
+const u16 gBattleFrontierTrainerMons_Ann[] =
 {
     5,
     6,
@@ -1427,10 +1427,10 @@ const u16 gBattleFrontierTrainerMons_Ann[] =
     112,
     114,
     121,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Eileen[] = 
+const u16 gBattleFrontierTrainerMons_Eileen[] =
 {
     5,
     6,
@@ -1464,10 +1464,10 @@ const u16 gBattleFrontierTrainerMons_Eileen[] =
     112,
     114,
     121,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Carlie[] = 
+const u16 gBattleFrontierTrainerMons_Carlie[] =
 {
     5,
     6,
@@ -1501,10 +1501,10 @@ const u16 gBattleFrontierTrainerMons_Carlie[] =
     112,
     114,
     121,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gordon[] = 
+const u16 gBattleFrontierTrainerMons_Gordon[] =
 {
     1,
     13,
@@ -1556,10 +1556,10 @@ const u16 gBattleFrontierTrainerMons_Gordon[] =
     151,
     152,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ayden[] = 
+const u16 gBattleFrontierTrainerMons_Ayden[] =
 {
     1,
     13,
@@ -1611,10 +1611,10 @@ const u16 gBattleFrontierTrainerMons_Ayden[] =
     151,
     152,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Marco[] = 
+const u16 gBattleFrontierTrainerMons_Marco[] =
 {
     1,
     13,
@@ -1666,10 +1666,10 @@ const u16 gBattleFrontierTrainerMons_Marco[] =
     151,
     152,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Cierra[] = 
+const u16 gBattleFrontierTrainerMons_Cierra[] =
 {
     1,
     13,
@@ -1718,10 +1718,10 @@ const u16 gBattleFrontierTrainerMons_Cierra[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Marcy[] = 
+const u16 gBattleFrontierTrainerMons_Marcy[] =
 {
     1,
     13,
@@ -1770,10 +1770,10 @@ const u16 gBattleFrontierTrainerMons_Marcy[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kathy[] = 
+const u16 gBattleFrontierTrainerMons_Kathy[] =
 {
     1,
     13,
@@ -1822,10 +1822,10 @@ const u16 gBattleFrontierTrainerMons_Kathy[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Peyton[] = 
+const u16 gBattleFrontierTrainerMons_Peyton[] =
 {
     84,
     85,
@@ -1863,10 +1863,10 @@ const u16 gBattleFrontierTrainerMons_Peyton[] =
     151,
     152,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Julian[] = 
+const u16 gBattleFrontierTrainerMons_Julian[] =
 {
     84,
     85,
@@ -1904,10 +1904,10 @@ const u16 gBattleFrontierTrainerMons_Julian[] =
     151,
     152,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Quinn[] = 
+const u16 gBattleFrontierTrainerMons_Quinn[] =
 {
     84,
     85,
@@ -1945,10 +1945,10 @@ const u16 gBattleFrontierTrainerMons_Quinn[] =
     151,
     152,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Haylee[] = 
+const u16 gBattleFrontierTrainerMons_Haylee[] =
 {
     1,
     5,
@@ -1991,10 +1991,10 @@ const u16 gBattleFrontierTrainerMons_Haylee[] =
     71,
     72,
     79,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Amanda[] = 
+const u16 gBattleFrontierTrainerMons_Amanda[] =
 {
     1,
     5,
@@ -2037,10 +2037,10 @@ const u16 gBattleFrontierTrainerMons_Amanda[] =
     71,
     72,
     79,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Stacy[] = 
+const u16 gBattleFrontierTrainerMons_Stacy[] =
 {
     1,
     5,
@@ -2083,10 +2083,10 @@ const u16 gBattleFrontierTrainerMons_Stacy[] =
     71,
     72,
     79,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Rafael[] = 
+const u16 gBattleFrontierTrainerMons_Rafael[] =
 {
     0,
     1,
@@ -2150,10 +2150,10 @@ const u16 gBattleFrontierTrainerMons_Rafael[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Oliver[] = 
+const u16 gBattleFrontierTrainerMons_Oliver[] =
 {
     66,
     67,
@@ -2199,10 +2199,10 @@ const u16 gBattleFrontierTrainerMons_Oliver[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Payton[] = 
+const u16 gBattleFrontierTrainerMons_Payton[] =
 {
     110,
     111,
@@ -2255,10 +2255,10 @@ const u16 gBattleFrontierTrainerMons_Payton[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Pamela[] = 
+const u16 gBattleFrontierTrainerMons_Pamela[] =
 {
     0,
     1,
@@ -2322,10 +2322,10 @@ const u16 gBattleFrontierTrainerMons_Pamela[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Eliza[] = 
+const u16 gBattleFrontierTrainerMons_Eliza[] =
 {
     66,
     67,
@@ -2371,10 +2371,10 @@ const u16 gBattleFrontierTrainerMons_Eliza[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Marisa[] = 
+const u16 gBattleFrontierTrainerMons_Marisa[] =
 {
     110,
     111,
@@ -2427,10 +2427,10 @@ const u16 gBattleFrontierTrainerMons_Marisa[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lewis[] = 
+const u16 gBattleFrontierTrainerMons_Lewis[] =
 {
     2,
     3,
@@ -2457,10 +2457,10 @@ const u16 gBattleFrontierTrainerMons_Lewis[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Yoshi[] = 
+const u16 gBattleFrontierTrainerMons_Yoshi[] =
 {
     2,
     3,
@@ -2487,10 +2487,10 @@ const u16 gBattleFrontierTrainerMons_Yoshi[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Destin[] = 
+const u16 gBattleFrontierTrainerMons_Destin[] =
 {
     2,
     3,
@@ -2515,10 +2515,10 @@ const u16 gBattleFrontierTrainerMons_Destin[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Keon[] = 
+const u16 gBattleFrontierTrainerMons_Keon[] =
 {
     5,
     21,
@@ -2568,10 +2568,10 @@ const u16 gBattleFrontierTrainerMons_Keon[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Stuart[] = 
+const u16 gBattleFrontierTrainerMons_Stuart[] =
 {
     5,
     21,
@@ -2621,10 +2621,10 @@ const u16 gBattleFrontierTrainerMons_Stuart[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Nestor[] = 
+const u16 gBattleFrontierTrainerMons_Nestor[] =
 {
     5,
     21,
@@ -2674,10 +2674,10 @@ const u16 gBattleFrontierTrainerMons_Nestor[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Derrick[] = 
+const u16 gBattleFrontierTrainerMons_Derrick[] =
 {
     21,
     27,
@@ -2709,10 +2709,10 @@ const u16 gBattleFrontierTrainerMons_Derrick[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Bryson[] = 
+const u16 gBattleFrontierTrainerMons_Bryson[] =
 {
     21,
     27,
@@ -2744,10 +2744,10 @@ const u16 gBattleFrontierTrainerMons_Bryson[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Clayton[] = 
+const u16 gBattleFrontierTrainerMons_Clayton[] =
 {
     21,
     27,
@@ -2779,10 +2779,10 @@ const u16 gBattleFrontierTrainerMons_Clayton[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Trenton[] = 
+const u16 gBattleFrontierTrainerMons_Trenton[] =
 {
     6,
     7,
@@ -2803,10 +2803,10 @@ const u16 gBattleFrontierTrainerMons_Trenton[] =
     138,
     139,
     151,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jenson[] = 
+const u16 gBattleFrontierTrainerMons_Jenson[] =
 {
     6,
     7,
@@ -2827,10 +2827,10 @@ const u16 gBattleFrontierTrainerMons_Jenson[] =
     138,
     139,
     151,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Wesley[] = 
+const u16 gBattleFrontierTrainerMons_Wesley[] =
 {
     6,
     7,
@@ -2851,10 +2851,10 @@ const u16 gBattleFrontierTrainerMons_Wesley[] =
     138,
     139,
     151,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Anton[] = 
+const u16 gBattleFrontierTrainerMons_Anton[] =
 {
     31,
     39,
@@ -2878,10 +2878,10 @@ const u16 gBattleFrontierTrainerMons_Anton[] =
     151,
     152,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lawson[] = 
+const u16 gBattleFrontierTrainerMons_Lawson[] =
 {
     31,
     39,
@@ -2905,10 +2905,10 @@ const u16 gBattleFrontierTrainerMons_Lawson[] =
     151,
     152,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Sammy[] = 
+const u16 gBattleFrontierTrainerMons_Sammy[] =
 {
     31,
     39,
@@ -2932,245 +2932,10 @@ const u16 gBattleFrontierTrainerMons_Sammy[] =
     151,
     152,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Arnie[] = 
-{
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    10,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36,
-    37,
-    38,
-    39,
-    40,
-    41,
-    42,
-    43,
-    44,
-    45,
-    46,
-    47,
-    48,
-    49,
-    50,
-    51,
-    52,
-    53,
-    54,
-    55,
-    56,
-    57,
-    58,
-    59,
-    60,
-    61,
-    62,
-    63,
-    64,
-    65,
-    -1 
-};
-
-const u16 gBattleFrontierTrainerMons_Adrian[] = 
-{
-    66,
-    67,
-    68,
-    69,
-    70,
-    71,
-    72,
-    73,
-    74,
-    75,
-    76,
-    77,
-    78,
-    79,
-    80,
-    81,
-    82,
-    83,
-    84,
-    85,
-    86,
-    87,
-    88,
-    89,
-    90,
-    91,
-    92,
-    93,
-    94,
-    95,
-    96,
-    97,
-    98,
-    99,
-    100,
-    101,
-    102,
-    103,
-    104,
-    105,
-    106,
-    107,
-    108,
-    109,
-    -1 
-};
-
-const u16 gBattleFrontierTrainerMons_Tristan[] = 
-{
-    110,
-    111,
-    112,
-    113,
-    114,
-    115,
-    116,
-    117,
-    118,
-    119,
-    120,
-    121,
-    122,
-    123,
-    124,
-    125,
-    127,
-    128,
-    129,
-    130,
-    131,
-    132,
-    133,
-    134,
-    135,
-    136,
-    137,
-    138,
-    139,
-    140,
-    141,
-    142,
-    143,
-    144,
-    145,
-    146,
-    147,
-    148,
-    149,
-    150,
-    151,
-    152,
-    153,
-    154,
-    155,
-    156,
-    157,
-    158,
-    159,
-    160,
-    161,
-    -1 
-};
-
-const u16 gBattleFrontierTrainerMons_Juliana[] = 
-{
-    0,
-    14,
-    19,
-    28,
-    42,
-    58,
-    59,
-    67,
-    68,
-    85,
-    118,
-    120,
-    123,
-    155,
-    156,
-    193,
-    -1 
-};
-
-const u16 gBattleFrontierTrainerMons_Rylee[] = 
-{
-    0,
-    14,
-    19,
-    28,
-    42,
-    58,
-    59,
-    67,
-    68,
-    85,
-    118,
-    120,
-    123,
-    155,
-    156,
-    193,
-    -1 
-};
-
-const u16 gBattleFrontierTrainerMons_Chelsea[] = 
-{
-    0,
-    14,
-    19,
-    28,
-    42,
-    58,
-    59,
-    67,
-    68,
-    85,
-    118,
-    120,
-    123,
-    155,
-    156,
-    193,
-    -1 
-};
-
-const u16 gBattleFrontierTrainerMons_Danela[] = 
+const u16 gBattleFrontierTrainerMons_Arnie[] =
 {
     0,
     1,
@@ -3234,10 +2999,10 @@ const u16 gBattleFrontierTrainerMons_Danela[] =
     63,
     64,
     65,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lizbeth[] = 
+const u16 gBattleFrontierTrainerMons_Adrian[] =
 {
     66,
     67,
@@ -3283,10 +3048,10 @@ const u16 gBattleFrontierTrainerMons_Lizbeth[] =
     107,
     108,
     109,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Amelia[] = 
+const u16 gBattleFrontierTrainerMons_Tristan[] =
 {
     110,
     111,
@@ -3339,10 +3104,245 @@ const u16 gBattleFrontierTrainerMons_Amelia[] =
     159,
     160,
     161,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jillian[] = 
+const u16 gBattleFrontierTrainerMons_Juliana[] =
+{
+    0,
+    14,
+    19,
+    28,
+    42,
+    58,
+    59,
+    67,
+    68,
+    85,
+    118,
+    120,
+    123,
+    155,
+    156,
+    193,
+    -1
+};
+
+const u16 gBattleFrontierTrainerMons_Rylee[] =
+{
+    0,
+    14,
+    19,
+    28,
+    42,
+    58,
+    59,
+    67,
+    68,
+    85,
+    118,
+    120,
+    123,
+    155,
+    156,
+    193,
+    -1
+};
+
+const u16 gBattleFrontierTrainerMons_Chelsea[] =
+{
+    0,
+    14,
+    19,
+    28,
+    42,
+    58,
+    59,
+    67,
+    68,
+    85,
+    118,
+    120,
+    123,
+    155,
+    156,
+    193,
+    -1
+};
+
+const u16 gBattleFrontierTrainerMons_Danela[] =
+{
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    -1
+};
+
+const u16 gBattleFrontierTrainerMons_Lizbeth[] =
+{
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    -1
+};
+
+const u16 gBattleFrontierTrainerMons_Amelia[] =
+{
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    -1
+};
+
+const u16 gBattleFrontierTrainerMons_Jillian[] =
 {
     0,
     5,
@@ -3373,10 +3373,10 @@ const u16 gBattleFrontierTrainerMons_Jillian[] =
     130,
     131,
     140,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Abbie[] = 
+const u16 gBattleFrontierTrainerMons_Abbie[] =
 {
     0,
     5,
@@ -3407,10 +3407,10 @@ const u16 gBattleFrontierTrainerMons_Abbie[] =
     130,
     131,
     140,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Briana[] = 
+const u16 gBattleFrontierTrainerMons_Briana[] =
 {
     0,
     5,
@@ -3441,10 +3441,10 @@ const u16 gBattleFrontierTrainerMons_Briana[] =
     130,
     131,
     140,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Antonio[] = 
+const u16 gBattleFrontierTrainerMons_Antonio[] =
 {
     5,
     10,
@@ -3477,10 +3477,10 @@ const u16 gBattleFrontierTrainerMons_Antonio[] =
     143,
     148,
     152,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jaden[] = 
+const u16 gBattleFrontierTrainerMons_Jaden[] =
 {
     5,
     10,
@@ -3513,10 +3513,10 @@ const u16 gBattleFrontierTrainerMons_Jaden[] =
     143,
     148,
     152,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dakota[] = 
+const u16 gBattleFrontierTrainerMons_Dakota[] =
 {
     5,
     10,
@@ -3549,10 +3549,10 @@ const u16 gBattleFrontierTrainerMons_Dakota[] =
     143,
     148,
     152,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Brayden[] = 
+const u16 gBattleFrontierTrainerMons_Brayden[] =
 {
     1,
     13,
@@ -3588,10 +3588,10 @@ const u16 gBattleFrontierTrainerMons_Brayden[] =
     142,
     144,
     145,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Corson[] = 
+const u16 gBattleFrontierTrainerMons_Corson[] =
 {
     1,
     13,
@@ -3627,10 +3627,10 @@ const u16 gBattleFrontierTrainerMons_Corson[] =
     142,
     144,
     145,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Trevin[] = 
+const u16 gBattleFrontierTrainerMons_Trevin[] =
 {
     1,
     13,
@@ -3666,10 +3666,10 @@ const u16 gBattleFrontierTrainerMons_Trevin[] =
     142,
     144,
     145,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Patrick[] = 
+const u16 gBattleFrontierTrainerMons_Patrick[] =
 {
     15,
     22,
@@ -3703,10 +3703,10 @@ const u16 gBattleFrontierTrainerMons_Patrick[] =
     151,
     155,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kaden[] = 
+const u16 gBattleFrontierTrainerMons_Kaden[] =
 {
     15,
     22,
@@ -3740,10 +3740,10 @@ const u16 gBattleFrontierTrainerMons_Kaden[] =
     151,
     155,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Maxwell[] = 
+const u16 gBattleFrontierTrainerMons_Maxwell[] =
 {
     15,
     22,
@@ -3777,10 +3777,10 @@ const u16 gBattleFrontierTrainerMons_Maxwell[] =
     151,
     155,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Daryl[] = 
+const u16 gBattleFrontierTrainerMons_Daryl[] =
 {
     15,
     22,
@@ -3809,10 +3809,10 @@ const u16 gBattleFrontierTrainerMons_Daryl[] =
     144,
     150,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kenneth[] = 
+const u16 gBattleFrontierTrainerMons_Kenneth[] =
 {
     15,
     22,
@@ -3841,10 +3841,10 @@ const u16 gBattleFrontierTrainerMons_Kenneth[] =
     144,
     150,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Rich[] = 
+const u16 gBattleFrontierTrainerMons_Rich[] =
 {
     15,
     22,
@@ -3873,10 +3873,10 @@ const u16 gBattleFrontierTrainerMons_Rich[] =
     144,
     150,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Caden[] = 
+const u16 gBattleFrontierTrainerMons_Caden[] =
 {
     30,
     62,
@@ -3899,10 +3899,10 @@ const u16 gBattleFrontierTrainerMons_Caden[] =
     150,
     152,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Marlon[] = 
+const u16 gBattleFrontierTrainerMons_Marlon[] =
 {
     30,
     62,
@@ -3925,10 +3925,10 @@ const u16 gBattleFrontierTrainerMons_Marlon[] =
     150,
     152,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Nash[] = 
+const u16 gBattleFrontierTrainerMons_Nash[] =
 {
     30,
     62,
@@ -3951,10 +3951,10 @@ const u16 gBattleFrontierTrainerMons_Nash[] =
     150,
     152,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Robby[] = 
+const u16 gBattleFrontierTrainerMons_Robby[] =
 {
     1,
     13,
@@ -4000,10 +4000,10 @@ const u16 gBattleFrontierTrainerMons_Robby[] =
     144,
     145,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Reece[] = 
+const u16 gBattleFrontierTrainerMons_Reece[] =
 {
     1,
     13,
@@ -4049,10 +4049,10 @@ const u16 gBattleFrontierTrainerMons_Reece[] =
     144,
     145,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kathryn[] = 
+const u16 gBattleFrontierTrainerMons_Kathryn[] =
 {
     1,
     13,
@@ -4098,10 +4098,10 @@ const u16 gBattleFrontierTrainerMons_Kathryn[] =
     144,
     145,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ellen[] = 
+const u16 gBattleFrontierTrainerMons_Ellen[] =
 {
     1,
     13,
@@ -4147,10 +4147,10 @@ const u16 gBattleFrontierTrainerMons_Ellen[] =
     144,
     145,
     156,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ramon[] = 
+const u16 gBattleFrontierTrainerMons_Ramon[] =
 {
     15,
     22,
@@ -4184,10 +4184,10 @@ const u16 gBattleFrontierTrainerMons_Ramon[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Arthur[] = 
+const u16 gBattleFrontierTrainerMons_Arthur[] =
 {
     15,
     22,
@@ -4221,10 +4221,10 @@ const u16 gBattleFrontierTrainerMons_Arthur[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alondra[] = 
+const u16 gBattleFrontierTrainerMons_Alondra[] =
 {
     15,
     22,
@@ -4258,10 +4258,10 @@ const u16 gBattleFrontierTrainerMons_Alondra[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Adriana[] = 
+const u16 gBattleFrontierTrainerMons_Adriana[] =
 {
     15,
     22,
@@ -4295,10 +4295,10 @@ const u16 gBattleFrontierTrainerMons_Adriana[] =
     145,
     151,
     155,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Malik[] = 
+const u16 gBattleFrontierTrainerMons_Malik[] =
 {
     10,
     15,
@@ -4329,10 +4329,10 @@ const u16 gBattleFrontierTrainerMons_Malik[] =
     145,
     148,
     152,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jill[] = 
+const u16 gBattleFrontierTrainerMons_Jill[] =
 {
     10,
     15,
@@ -4363,10 +4363,10 @@ const u16 gBattleFrontierTrainerMons_Jill[] =
     145,
     148,
     152,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Erik[] = 
+const u16 gBattleFrontierTrainerMons_Erik[] =
 {
     162,
     164,
@@ -4402,10 +4402,10 @@ const u16 gBattleFrontierTrainerMons_Erik[] =
     246,
     250,
     263,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Yazmin[] = 
+const u16 gBattleFrontierTrainerMons_Yazmin[] =
 {
     162,
     164,
@@ -4441,10 +4441,10 @@ const u16 gBattleFrontierTrainerMons_Yazmin[] =
     246,
     250,
     263,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jamal[] = 
+const u16 gBattleFrontierTrainerMons_Jamal[] =
 {
     170,
     176,
@@ -4477,10 +4477,10 @@ const u16 gBattleFrontierTrainerMons_Jamal[] =
     262,
     265,
     266,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Leslie[] = 
+const u16 gBattleFrontierTrainerMons_Leslie[] =
 {
     170,
     176,
@@ -4513,10 +4513,10 @@ const u16 gBattleFrontierTrainerMons_Leslie[] =
     262,
     265,
     266,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dave[] = 
+const u16 gBattleFrontierTrainerMons_Dave[] =
 {
     162,
     164,
@@ -4549,10 +4549,10 @@ const u16 gBattleFrontierTrainerMons_Dave[] =
     244,
     246,
     250,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Carlo[] = 
+const u16 gBattleFrontierTrainerMons_Carlo[] =
 {
     162,
     164,
@@ -4585,10 +4585,10 @@ const u16 gBattleFrontierTrainerMons_Carlo[] =
     244,
     246,
     250,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Emilia[] = 
+const u16 gBattleFrontierTrainerMons_Emilia[] =
 {
     162,
     164,
@@ -4621,10 +4621,10 @@ const u16 gBattleFrontierTrainerMons_Emilia[] =
     244,
     246,
     250,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dalia[] = 
+const u16 gBattleFrontierTrainerMons_Dalia[] =
 {
     162,
     164,
@@ -4657,10 +4657,10 @@ const u16 gBattleFrontierTrainerMons_Dalia[] =
     244,
     246,
     250,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Hitomi[] = 
+const u16 gBattleFrontierTrainerMons_Hitomi[] =
 {
     164,
     166,
@@ -4702,10 +4702,10 @@ const u16 gBattleFrontierTrainerMons_Hitomi[] =
     252,
     254,
     262,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ricardo[] = 
+const u16 gBattleFrontierTrainerMons_Ricardo[] =
 {
     164,
     166,
@@ -4747,10 +4747,10 @@ const u16 gBattleFrontierTrainerMons_Ricardo[] =
     252,
     254,
     262,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Shizuka[] = 
+const u16 gBattleFrontierTrainerMons_Shizuka[] =
 {
     164,
     166,
@@ -4792,10 +4792,10 @@ const u16 gBattleFrontierTrainerMons_Shizuka[] =
     252,
     254,
     262,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Joana[] = 
+const u16 gBattleFrontierTrainerMons_Joana[] =
 {
     164,
     166,
@@ -4837,10 +4837,10 @@ const u16 gBattleFrontierTrainerMons_Joana[] =
     252,
     254,
     262,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kelly[] = 
+const u16 gBattleFrontierTrainerMons_Kelly[] =
 {
     164,
     166,
@@ -4882,10 +4882,10 @@ const u16 gBattleFrontierTrainerMons_Kelly[] =
     252,
     254,
     262,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Rayna[] = 
+const u16 gBattleFrontierTrainerMons_Rayna[] =
 {
     164,
     166,
@@ -4927,10 +4927,10 @@ const u16 gBattleFrontierTrainerMons_Rayna[] =
     252,
     254,
     262,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Evan[] = 
+const u16 gBattleFrontierTrainerMons_Evan[] =
 {
     162,
     163,
@@ -4970,10 +4970,10 @@ const u16 gBattleFrontierTrainerMons_Evan[] =
     197,
     198,
     199,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jordan[] = 
+const u16 gBattleFrontierTrainerMons_Jordan[] =
 {
     200,
     201,
@@ -5012,10 +5012,10 @@ const u16 gBattleFrontierTrainerMons_Jordan[] =
     234,
     235,
     236,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Joel[] = 
+const u16 gBattleFrontierTrainerMons_Joel[] =
 {
     237,
     238,
@@ -5047,10 +5047,10 @@ const u16 gBattleFrontierTrainerMons_Joel[] =
     264,
     265,
     266,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kristen[] = 
+const u16 gBattleFrontierTrainerMons_Kristen[] =
 {
     162,
     163,
@@ -5090,10 +5090,10 @@ const u16 gBattleFrontierTrainerMons_Kristen[] =
     197,
     198,
     199,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Selphy[] = 
+const u16 gBattleFrontierTrainerMons_Selphy[] =
 {
     200,
     201,
@@ -5132,10 +5132,10 @@ const u16 gBattleFrontierTrainerMons_Selphy[] =
     234,
     235,
     236,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Chloe[] = 
+const u16 gBattleFrontierTrainerMons_Chloe[] =
 {
     237,
     238,
@@ -5167,10 +5167,10 @@ const u16 gBattleFrontierTrainerMons_Chloe[] =
     264,
     265,
     266,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Norton[] = 
+const u16 gBattleFrontierTrainerMons_Norton[] =
 {
     267,
     268,
@@ -5205,10 +5205,10 @@ const u16 gBattleFrontierTrainerMons_Norton[] =
     359,
     363,
     370,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lukas[] = 
+const u16 gBattleFrontierTrainerMons_Lukas[] =
 {
     267,
     268,
@@ -5243,10 +5243,10 @@ const u16 gBattleFrontierTrainerMons_Lukas[] =
     359,
     363,
     370,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Zach[] = 
+const u16 gBattleFrontierTrainerMons_Zach[] =
 {
     267,
     268,
@@ -5281,10 +5281,10 @@ const u16 gBattleFrontierTrainerMons_Zach[] =
     359,
     363,
     370,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kaitlyn[] = 
+const u16 gBattleFrontierTrainerMons_Kaitlyn[] =
 {
     267,
     268,
@@ -5319,10 +5319,10 @@ const u16 gBattleFrontierTrainerMons_Kaitlyn[] =
     359,
     363,
     370,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Breanna[] = 
+const u16 gBattleFrontierTrainerMons_Breanna[] =
 {
     267,
     268,
@@ -5357,10 +5357,10 @@ const u16 gBattleFrontierTrainerMons_Breanna[] =
     359,
     363,
     370,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kendra[] = 
+const u16 gBattleFrontierTrainerMons_Kendra[] =
 {
     267,
     268,
@@ -5395,10 +5395,10 @@ const u16 gBattleFrontierTrainerMons_Kendra[] =
     359,
     363,
     370,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Molly[] = 
+const u16 gBattleFrontierTrainerMons_Molly[] =
 {
     268,
     270,
@@ -5427,10 +5427,10 @@ const u16 gBattleFrontierTrainerMons_Molly[] =
     354,
     356,
     359,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jazmin[] = 
+const u16 gBattleFrontierTrainerMons_Jazmin[] =
 {
     268,
     270,
@@ -5459,10 +5459,10 @@ const u16 gBattleFrontierTrainerMons_Jazmin[] =
     354,
     356,
     359,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kelsey[] = 
+const u16 gBattleFrontierTrainerMons_Kelsey[] =
 {
     268,
     270,
@@ -5491,10 +5491,10 @@ const u16 gBattleFrontierTrainerMons_Kelsey[] =
     354,
     356,
     359,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jalen[] = 
+const u16 gBattleFrontierTrainerMons_Jalen[] =
 {
     269,
     271,
@@ -5527,10 +5527,10 @@ const u16 gBattleFrontierTrainerMons_Jalen[] =
     350,
     353,
     357,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Griffen[] = 
+const u16 gBattleFrontierTrainerMons_Griffen[] =
 {
     269,
     271,
@@ -5563,10 +5563,10 @@ const u16 gBattleFrontierTrainerMons_Griffen[] =
     350,
     353,
     357,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Xander[] = 
+const u16 gBattleFrontierTrainerMons_Xander[] =
 {
     269,
     271,
@@ -5599,10 +5599,10 @@ const u16 gBattleFrontierTrainerMons_Xander[] =
     350,
     353,
     357,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Marvin[] = 
+const u16 gBattleFrontierTrainerMons_Marvin[] =
 {
     267,
     268,
@@ -5642,10 +5642,10 @@ const u16 gBattleFrontierTrainerMons_Marvin[] =
     302,
     303,
     304,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Brennan[] = 
+const u16 gBattleFrontierTrainerMons_Brennan[] =
 {
     305,
     306,
@@ -5684,10 +5684,10 @@ const u16 gBattleFrontierTrainerMons_Brennan[] =
     339,
     340,
     341,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Baley[] = 
+const u16 gBattleFrontierTrainerMons_Baley[] =
 {
     159,
     160,
@@ -5708,10 +5708,10 @@ const u16 gBattleFrontierTrainerMons_Baley[] =
     343,
     368,
     369,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Zackary[] = 
+const u16 gBattleFrontierTrainerMons_Zackary[] =
 {
     271,
     283,
@@ -5735,10 +5735,10 @@ const u16 gBattleFrontierTrainerMons_Zackary[] =
     364,
     365,
     366,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gabriel[] = 
+const u16 gBattleFrontierTrainerMons_Gabriel[] =
 {
     342,
     343,
@@ -5770,10 +5770,10 @@ const u16 gBattleFrontierTrainerMons_Gabriel[] =
     369,
     370,
     371,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Emily[] = 
+const u16 gBattleFrontierTrainerMons_Emily[] =
 {
     272,
     301,
@@ -5787,10 +5787,10 @@ const u16 gBattleFrontierTrainerMons_Emily[] =
     362,
     363,
     365,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jordyn[] = 
+const u16 gBattleFrontierTrainerMons_Jordyn[] =
 {
     267,
     269,
@@ -5823,10 +5823,10 @@ const u16 gBattleFrontierTrainerMons_Jordyn[] =
     351,
     353,
     355,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Sofia[] = 
+const u16 gBattleFrontierTrainerMons_Sofia[] =
 {
     270,
     272,
@@ -5846,10 +5846,10 @@ const u16 gBattleFrontierTrainerMons_Sofia[] =
     356,
     359,
     360,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Braden[] = 
+const u16 gBattleFrontierTrainerMons_Braden[] =
 {
     372,
     373,
@@ -5884,10 +5884,10 @@ const u16 gBattleFrontierTrainerMons_Braden[] =
     402,
     403,
     404,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kayden[] = 
+const u16 gBattleFrontierTrainerMons_Kayden[] =
 {
     405,
     406,
@@ -5922,10 +5922,10 @@ const u16 gBattleFrontierTrainerMons_Kayden[] =
     435,
     436,
     437,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Cooper[] = 
+const u16 gBattleFrontierTrainerMons_Cooper[] =
 {
     438,
     439,
@@ -5957,10 +5957,10 @@ const u16 gBattleFrontierTrainerMons_Cooper[] =
     465,
     466,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Julia[] = 
+const u16 gBattleFrontierTrainerMons_Julia[] =
 {
     372,
     373,
@@ -5995,10 +5995,10 @@ const u16 gBattleFrontierTrainerMons_Julia[] =
     402,
     403,
     404,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Amara[] = 
+const u16 gBattleFrontierTrainerMons_Amara[] =
 {
     405,
     406,
@@ -6033,10 +6033,10 @@ const u16 gBattleFrontierTrainerMons_Amara[] =
     435,
     436,
     437,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lynn[] = 
+const u16 gBattleFrontierTrainerMons_Lynn[] =
 {
     438,
     439,
@@ -6068,10 +6068,10 @@ const u16 gBattleFrontierTrainerMons_Lynn[] =
     465,
     466,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jovan[] = 
+const u16 gBattleFrontierTrainerMons_Jovan[] =
 {
     238,
     331,
@@ -6106,10 +6106,10 @@ const u16 gBattleFrontierTrainerMons_Jovan[] =
     460,
     462,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dominic[] = 
+const u16 gBattleFrontierTrainerMons_Dominic[] =
 {
     238,
     331,
@@ -6144,10 +6144,10 @@ const u16 gBattleFrontierTrainerMons_Dominic[] =
     460,
     462,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Nikolas[] = 
+const u16 gBattleFrontierTrainerMons_Nikolas[] =
 {
     238,
     331,
@@ -6182,10 +6182,10 @@ const u16 gBattleFrontierTrainerMons_Nikolas[] =
     460,
     462,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Valeria[] = 
+const u16 gBattleFrontierTrainerMons_Valeria[] =
 {
     238,
     331,
@@ -6220,10 +6220,10 @@ const u16 gBattleFrontierTrainerMons_Valeria[] =
     460,
     462,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Delaney[] = 
+const u16 gBattleFrontierTrainerMons_Delaney[] =
 {
     238,
     331,
@@ -6258,10 +6258,10 @@ const u16 gBattleFrontierTrainerMons_Delaney[] =
     460,
     462,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Meghan[] = 
+const u16 gBattleFrontierTrainerMons_Meghan[] =
 {
     238,
     331,
@@ -6296,10 +6296,10 @@ const u16 gBattleFrontierTrainerMons_Meghan[] =
     460,
     462,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Roberto[] = 
+const u16 gBattleFrontierTrainerMons_Roberto[] =
 {
     386,
     403,
@@ -6318,10 +6318,10 @@ const u16 gBattleFrontierTrainerMons_Roberto[] =
     463,
     464,
     465,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Damian[] = 
+const u16 gBattleFrontierTrainerMons_Damian[] =
 {
     386,
     403,
@@ -6340,10 +6340,10 @@ const u16 gBattleFrontierTrainerMons_Damian[] =
     463,
     464,
     465,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Brody[] = 
+const u16 gBattleFrontierTrainerMons_Brody[] =
 {
     386,
     403,
@@ -6362,10 +6362,10 @@ const u16 gBattleFrontierTrainerMons_Brody[] =
     463,
     464,
     465,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Graham[] = 
+const u16 gBattleFrontierTrainerMons_Graham[] =
 {
     386,
     403,
@@ -6384,10 +6384,10 @@ const u16 gBattleFrontierTrainerMons_Graham[] =
     463,
     464,
     465,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Tylor[] = 
+const u16 gBattleFrontierTrainerMons_Tylor[] =
 {
     374,
     381,
@@ -6411,10 +6411,10 @@ const u16 gBattleFrontierTrainerMons_Tylor[] =
     462,
     463,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jaren[] = 
+const u16 gBattleFrontierTrainerMons_Jaren[] =
 {
     374,
     381,
@@ -6438,10 +6438,10 @@ const u16 gBattleFrontierTrainerMons_Jaren[] =
     462,
     463,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Cordell[] = 
+const u16 gBattleFrontierTrainerMons_Cordell[] =
 {
     420,
     421,
@@ -6491,10 +6491,10 @@ const u16 gBattleFrontierTrainerMons_Cordell[] =
     465,
     466,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jazlyn[] = 
+const u16 gBattleFrontierTrainerMons_Jazlyn[] =
 {
     372,
     373,
@@ -6544,10 +6544,10 @@ const u16 gBattleFrontierTrainerMons_Jazlyn[] =
     417,
     418,
     419,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Zachery[] = 
+const u16 gBattleFrontierTrainerMons_Zachery[] =
 {
     468,
     469,
@@ -6582,10 +6582,10 @@ const u16 gBattleFrontierTrainerMons_Zachery[] =
     498,
     499,
     500,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Johan[] = 
+const u16 gBattleFrontierTrainerMons_Johan[] =
 {
     469,
     470,
@@ -6619,10 +6619,10 @@ const u16 gBattleFrontierTrainerMons_Johan[] =
     498,
     499,
     500,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Shea[] = 
+const u16 gBattleFrontierTrainerMons_Shea[] =
 {
     468,
     469,
@@ -6657,10 +6657,10 @@ const u16 gBattleFrontierTrainerMons_Shea[] =
     498,
     499,
     500,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kaila[] = 
+const u16 gBattleFrontierTrainerMons_Kaila[] =
 {
     468,
     469,
@@ -6695,10 +6695,10 @@ const u16 gBattleFrontierTrainerMons_Kaila[] =
     498,
     499,
     500,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Isiah[] = 
+const u16 gBattleFrontierTrainerMons_Isiah[] =
 {
     501,
     502,
@@ -6733,10 +6733,10 @@ const u16 gBattleFrontierTrainerMons_Isiah[] =
     531,
     532,
     533,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Garrett[] = 
+const u16 gBattleFrontierTrainerMons_Garrett[] =
 {
     501,
     502,
@@ -6771,10 +6771,10 @@ const u16 gBattleFrontierTrainerMons_Garrett[] =
     531,
     532,
     533,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Haylie[] = 
+const u16 gBattleFrontierTrainerMons_Haylie[] =
 {
     501,
     502,
@@ -6809,10 +6809,10 @@ const u16 gBattleFrontierTrainerMons_Haylie[] =
     531,
     532,
     533,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Megan[] = 
+const u16 gBattleFrontierTrainerMons_Megan[] =
 {
     501,
     502,
@@ -6847,10 +6847,10 @@ const u16 gBattleFrontierTrainerMons_Megan[] =
     531,
     532,
     533,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Issac[] = 
+const u16 gBattleFrontierTrainerMons_Issac[] =
 {
     534,
     535,
@@ -6882,10 +6882,10 @@ const u16 gBattleFrontierTrainerMons_Issac[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Quinton[] = 
+const u16 gBattleFrontierTrainerMons_Quinton[] =
 {
     534,
     535,
@@ -6917,10 +6917,10 @@ const u16 gBattleFrontierTrainerMons_Quinton[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Salma[] = 
+const u16 gBattleFrontierTrainerMons_Salma[] =
 {
     534,
     535,
@@ -6952,10 +6952,10 @@ const u16 gBattleFrontierTrainerMons_Salma[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ansley[] = 
+const u16 gBattleFrontierTrainerMons_Ansley[] =
 {
     534,
     535,
@@ -6987,10 +6987,10 @@ const u16 gBattleFrontierTrainerMons_Ansley[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Holden[] = 
+const u16 gBattleFrontierTrainerMons_Holden[] =
 {
     343,
     368,
@@ -7015,10 +7015,10 @@ const u16 gBattleFrontierTrainerMons_Holden[] =
     537,
     541,
     549,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Luca[] = 
+const u16 gBattleFrontierTrainerMons_Luca[] =
 {
     343,
     368,
@@ -7043,10 +7043,10 @@ const u16 gBattleFrontierTrainerMons_Luca[] =
     537,
     541,
     549,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jamison[] = 
+const u16 gBattleFrontierTrainerMons_Jamison[] =
 {
     282,
     331,
@@ -7080,10 +7080,10 @@ const u16 gBattleFrontierTrainerMons_Jamison[] =
     537,
     542,
     553,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gunnar[] = 
+const u16 gBattleFrontierTrainerMons_Gunnar[] =
 {
     282,
     331,
@@ -7117,10 +7117,10 @@ const u16 gBattleFrontierTrainerMons_Gunnar[] =
     537,
     542,
     553,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Craig[] = 
+const u16 gBattleFrontierTrainerMons_Craig[] =
 {
     471,
     474,
@@ -7155,10 +7155,10 @@ const u16 gBattleFrontierTrainerMons_Craig[] =
     558,
     559,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Pierce[] = 
+const u16 gBattleFrontierTrainerMons_Pierce[] =
 {
     471,
     474,
@@ -7193,10 +7193,10 @@ const u16 gBattleFrontierTrainerMons_Pierce[] =
     558,
     559,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Regina[] = 
+const u16 gBattleFrontierTrainerMons_Regina[] =
 {
     471,
     474,
@@ -7231,10 +7231,10 @@ const u16 gBattleFrontierTrainerMons_Regina[] =
     558,
     559,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alison[] = 
+const u16 gBattleFrontierTrainerMons_Alison[] =
 {
     471,
     474,
@@ -7269,10 +7269,10 @@ const u16 gBattleFrontierTrainerMons_Alison[] =
     558,
     559,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Hank[] = 
+const u16 gBattleFrontierTrainerMons_Hank[] =
 {
     277,
     278,
@@ -7297,10 +7297,10 @@ const u16 gBattleFrontierTrainerMons_Hank[] =
     615,
     616,
     624,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Earl[] = 
+const u16 gBattleFrontierTrainerMons_Earl[] =
 {
     277,
     278,
@@ -7325,10 +7325,10 @@ const u16 gBattleFrontierTrainerMons_Earl[] =
     615,
     616,
     624,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ramiro[] = 
+const u16 gBattleFrontierTrainerMons_Ramiro[] =
 {
     316,
     333,
@@ -7345,10 +7345,10 @@ const u16 gBattleFrontierTrainerMons_Ramiro[] =
     621,
     626,
     631,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Hunter[] = 
+const u16 gBattleFrontierTrainerMons_Hunter[] =
 {
     316,
     333,
@@ -7365,10 +7365,10 @@ const u16 gBattleFrontierTrainerMons_Hunter[] =
     621,
     626,
     631,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Aiden[] = 
+const u16 gBattleFrontierTrainerMons_Aiden[] =
 {
     564,
     575,
@@ -7392,10 +7392,10 @@ const u16 gBattleFrontierTrainerMons_Aiden[] =
     642,
     650,
     658,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Xavier[] = 
+const u16 gBattleFrontierTrainerMons_Xavier[] =
 {
     564,
     575,
@@ -7419,10 +7419,10 @@ const u16 gBattleFrontierTrainerMons_Xavier[] =
     642,
     650,
     658,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Clinton[] = 
+const u16 gBattleFrontierTrainerMons_Clinton[] =
 {
     564,
     565,
@@ -7472,10 +7472,10 @@ const u16 gBattleFrontierTrainerMons_Clinton[] =
     609,
     610,
     611,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jesse[] = 
+const u16 gBattleFrontierTrainerMons_Jesse[] =
 {
     564,
     565,
@@ -7525,10 +7525,10 @@ const u16 gBattleFrontierTrainerMons_Jesse[] =
     609,
     610,
     611,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Eduardo[] = 
+const u16 gBattleFrontierTrainerMons_Eduardo[] =
 {
     268,
     307,
@@ -7545,10 +7545,10 @@ const u16 gBattleFrontierTrainerMons_Eduardo[] =
     618,
     635,
     639,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Hal[] = 
+const u16 gBattleFrontierTrainerMons_Hal[] =
 {
     268,
     307,
@@ -7565,10 +7565,10 @@ const u16 gBattleFrontierTrainerMons_Hal[] =
     618,
     635,
     639,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gage[] = 
+const u16 gBattleFrontierTrainerMons_Gage[] =
 {
     289,
     318,
@@ -7590,10 +7590,10 @@ const u16 gBattleFrontierTrainerMons_Gage[] =
     577,
     578,
     649,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Arnold[] = 
+const u16 gBattleFrontierTrainerMons_Arnold[] =
 {
     289,
     318,
@@ -7615,10 +7615,10 @@ const u16 gBattleFrontierTrainerMons_Arnold[] =
     577,
     578,
     649,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jarrett[] = 
+const u16 gBattleFrontierTrainerMons_Jarrett[] =
 {
     565,
     573,
@@ -7643,10 +7643,10 @@ const u16 gBattleFrontierTrainerMons_Jarrett[] =
     651,
     653,
     655,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Garett[] = 
+const u16 gBattleFrontierTrainerMons_Garett[] =
 {
     565,
     573,
@@ -7671,10 +7671,10 @@ const u16 gBattleFrontierTrainerMons_Garett[] =
     651,
     653,
     655,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Emanuel[] = 
+const u16 gBattleFrontierTrainerMons_Emanuel[] =
 {
     564,
     565,
@@ -7696,10 +7696,10 @@ const u16 gBattleFrontierTrainerMons_Emanuel[] =
     627,
     642,
     643,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gustavo[] = 
+const u16 gBattleFrontierTrainerMons_Gustavo[] =
 {
     564,
     565,
@@ -7721,10 +7721,10 @@ const u16 gBattleFrontierTrainerMons_Gustavo[] =
     627,
     642,
     643,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kameron[] = 
+const u16 gBattleFrontierTrainerMons_Kameron[] =
 {
     568,
     581,
@@ -7745,10 +7745,10 @@ const u16 gBattleFrontierTrainerMons_Kameron[] =
     654,
     656,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alfredo[] = 
+const u16 gBattleFrontierTrainerMons_Alfredo[] =
 {
     568,
     581,
@@ -7769,10 +7769,10 @@ const u16 gBattleFrontierTrainerMons_Alfredo[] =
     654,
     656,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ruben[] = 
+const u16 gBattleFrontierTrainerMons_Ruben[] =
 {
     612,
     613,
@@ -7822,10 +7822,10 @@ const u16 gBattleFrontierTrainerMons_Ruben[] =
     657,
     658,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lamar[] = 
+const u16 gBattleFrontierTrainerMons_Lamar[] =
 {
     612,
     613,
@@ -7875,10 +7875,10 @@ const u16 gBattleFrontierTrainerMons_Lamar[] =
     657,
     658,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jaxon[] = 
+const u16 gBattleFrontierTrainerMons_Jaxon[] =
 {
     660,
     661,
@@ -7913,10 +7913,10 @@ const u16 gBattleFrontierTrainerMons_Jaxon[] =
     690,
     691,
     692,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Logan[] = 
+const u16 gBattleFrontierTrainerMons_Logan[] =
 {
     660,
     661,
@@ -7951,10 +7951,10 @@ const u16 gBattleFrontierTrainerMons_Logan[] =
     690,
     691,
     692,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Emilee[] = 
+const u16 gBattleFrontierTrainerMons_Emilee[] =
 {
     660,
     661,
@@ -7989,10 +7989,10 @@ const u16 gBattleFrontierTrainerMons_Emilee[] =
     690,
     691,
     692,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Josie[] = 
+const u16 gBattleFrontierTrainerMons_Josie[] =
 {
     660,
     661,
@@ -8027,10 +8027,10 @@ const u16 gBattleFrontierTrainerMons_Josie[] =
     690,
     691,
     692,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Armando[] = 
+const u16 gBattleFrontierTrainerMons_Armando[] =
 {
     693,
     694,
@@ -8065,10 +8065,10 @@ const u16 gBattleFrontierTrainerMons_Armando[] =
     723,
     724,
     725,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Skyler[] = 
+const u16 gBattleFrontierTrainerMons_Skyler[] =
 {
     693,
     694,
@@ -8103,10 +8103,10 @@ const u16 gBattleFrontierTrainerMons_Skyler[] =
     723,
     724,
     725,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ruth[] = 
+const u16 gBattleFrontierTrainerMons_Ruth[] =
 {
     693,
     694,
@@ -8141,10 +8141,10 @@ const u16 gBattleFrontierTrainerMons_Ruth[] =
     723,
     724,
     725,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Melody[] = 
+const u16 gBattleFrontierTrainerMons_Melody[] =
 {
     693,
     694,
@@ -8179,10 +8179,10 @@ const u16 gBattleFrontierTrainerMons_Melody[] =
     723,
     724,
     725,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Pedro[] = 
+const u16 gBattleFrontierTrainerMons_Pedro[] =
 {
     347,
     661,
@@ -8219,10 +8219,10 @@ const u16 gBattleFrontierTrainerMons_Pedro[] =
     750,
     751,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Erick[] = 
+const u16 gBattleFrontierTrainerMons_Erick[] =
 {
     347,
     661,
@@ -8259,10 +8259,10 @@ const u16 gBattleFrontierTrainerMons_Erick[] =
     750,
     751,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Elaine[] = 
+const u16 gBattleFrontierTrainerMons_Elaine[] =
 {
     664,
     665,
@@ -8297,10 +8297,10 @@ const u16 gBattleFrontierTrainerMons_Elaine[] =
     750,
     751,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Joyce[] = 
+const u16 gBattleFrontierTrainerMons_Joyce[] =
 {
     664,
     665,
@@ -8335,10 +8335,10 @@ const u16 gBattleFrontierTrainerMons_Joyce[] =
     750,
     751,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Todd[] = 
+const u16 gBattleFrontierTrainerMons_Todd[] =
 {
     267,
     273,
@@ -8380,10 +8380,10 @@ const u16 gBattleFrontierTrainerMons_Todd[] =
     748,
     750,
     751,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gavin[] = 
+const u16 gBattleFrontierTrainerMons_Gavin[] =
 {
     267,
     273,
@@ -8425,10 +8425,10 @@ const u16 gBattleFrontierTrainerMons_Gavin[] =
     748,
     750,
     751,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Malory[] = 
+const u16 gBattleFrontierTrainerMons_Malory[] =
 {
     267,
     273,
@@ -8470,10 +8470,10 @@ const u16 gBattleFrontierTrainerMons_Malory[] =
     748,
     750,
     751,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Esther[] = 
+const u16 gBattleFrontierTrainerMons_Esther[] =
 {
     267,
     273,
@@ -8515,10 +8515,10 @@ const u16 gBattleFrontierTrainerMons_Esther[] =
     748,
     750,
     751,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Oscar[] = 
+const u16 gBattleFrontierTrainerMons_Oscar[] =
 {
     726,
     727,
@@ -8550,10 +8550,10 @@ const u16 gBattleFrontierTrainerMons_Oscar[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Wilson[] = 
+const u16 gBattleFrontierTrainerMons_Wilson[] =
 {
     726,
     727,
@@ -8585,10 +8585,10 @@ const u16 gBattleFrontierTrainerMons_Wilson[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Clare[] = 
+const u16 gBattleFrontierTrainerMons_Clare[] =
 {
     726,
     727,
@@ -8620,10 +8620,10 @@ const u16 gBattleFrontierTrainerMons_Clare[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Tess[] = 
+const u16 gBattleFrontierTrainerMons_Tess[] =
 {
     726,
     727,
@@ -8655,10 +8655,10 @@ const u16 gBattleFrontierTrainerMons_Tess[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Leon[] = 
+const u16 gBattleFrontierTrainerMons_Leon[] =
 {
     420,
     421,
@@ -8756,10 +8756,10 @@ const u16 gBattleFrontierTrainerMons_Leon[] =
     729,
     730,
     731,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alonzo[] = 
+const u16 gBattleFrontierTrainerMons_Alonzo[] =
 {
     444,
     445,
@@ -8857,10 +8857,10 @@ const u16 gBattleFrontierTrainerMons_Alonzo[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Vince[] = 
+const u16 gBattleFrontierTrainerMons_Vince[] =
 {
     421,
     425,
@@ -8962,10 +8962,10 @@ const u16 gBattleFrontierTrainerMons_Vince[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Bryon[] = 
+const u16 gBattleFrontierTrainerMons_Bryon[] =
 {
     756,
     757,
@@ -9049,10 +9049,10 @@ const u16 gBattleFrontierTrainerMons_Bryon[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ava[] = 
+const u16 gBattleFrontierTrainerMons_Ava[] =
 {
     372,
     373,
@@ -9150,10 +9150,10 @@ const u16 gBattleFrontierTrainerMons_Ava[] =
     681,
     682,
     683,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Miriam[] = 
+const u16 gBattleFrontierTrainerMons_Miriam[] =
 {
     396,
     397,
@@ -9251,10 +9251,10 @@ const u16 gBattleFrontierTrainerMons_Miriam[] =
     705,
     706,
     707,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Carrie[] = 
+const u16 gBattleFrontierTrainerMons_Carrie[] =
 {
     421,
     425,
@@ -9356,10 +9356,10 @@ const u16 gBattleFrontierTrainerMons_Carrie[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gillian2[] = 
+const u16 gBattleFrontierTrainerMons_Gillian2[] =
 {
     756,
     757,
@@ -9443,10 +9443,10 @@ const u16 gBattleFrontierTrainerMons_Gillian2[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Tyler[] = 
+const u16 gBattleFrontierTrainerMons_Tyler[] =
 {
     660,
     661,
@@ -9544,10 +9544,10 @@ const u16 gBattleFrontierTrainerMons_Tyler[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Chaz[] = 
+const u16 gBattleFrontierTrainerMons_Chaz[] =
 {
     564,
     565,
@@ -9645,10 +9645,10 @@ const u16 gBattleFrontierTrainerMons_Chaz[] =
     657,
     658,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Nelson[] = 
+const u16 gBattleFrontierTrainerMons_Nelson[] =
 {
     756,
     757,
@@ -9732,10 +9732,10 @@ const u16 gBattleFrontierTrainerMons_Nelson[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Shania[] = 
+const u16 gBattleFrontierTrainerMons_Shania[] =
 {
     468,
     469,
@@ -9833,10 +9833,10 @@ const u16 gBattleFrontierTrainerMons_Shania[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Stella[] = 
+const u16 gBattleFrontierTrainerMons_Stella[] =
 {
     372,
     373,
@@ -9934,10 +9934,10 @@ const u16 gBattleFrontierTrainerMons_Stella[] =
     465,
     466,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dorine[] = 
+const u16 gBattleFrontierTrainerMons_Dorine[] =
 {
     756,
     757,
@@ -10021,10 +10021,10 @@ const u16 gBattleFrontierTrainerMons_Dorine[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Maddox[] = 
+const u16 gBattleFrontierTrainerMons_Maddox[] =
 {
     403,
     412,
@@ -10122,10 +10122,10 @@ const u16 gBattleFrontierTrainerMons_Maddox[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Davin[] = 
+const u16 gBattleFrontierTrainerMons_Davin[] =
 {
     403,
     412,
@@ -10223,10 +10223,10 @@ const u16 gBattleFrontierTrainerMons_Davin[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Trevon[] = 
+const u16 gBattleFrontierTrainerMons_Trevon[] =
 {
     403,
     412,
@@ -10324,10 +10324,10 @@ const u16 gBattleFrontierTrainerMons_Trevon[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Mateo[] = 
+const u16 gBattleFrontierTrainerMons_Mateo[] =
 {
     373,
     382,
@@ -10385,10 +10385,10 @@ const u16 gBattleFrontierTrainerMons_Mateo[] =
     809,
     810,
     811,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Bret[] = 
+const u16 gBattleFrontierTrainerMons_Bret[] =
 {
     373,
     382,
@@ -10450,10 +10450,10 @@ const u16 gBattleFrontierTrainerMons_Bret[] =
     809,
     810,
     811,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Raul[] = 
+const u16 gBattleFrontierTrainerMons_Raul[] =
 {
     373,
     382,
@@ -10511,10 +10511,10 @@ const u16 gBattleFrontierTrainerMons_Raul[] =
     833,
     834,
     835,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Kay[] = 
+const u16 gBattleFrontierTrainerMons_Kay[] =
 {
     373,
     382,
@@ -10572,10 +10572,10 @@ const u16 gBattleFrontierTrainerMons_Kay[] =
     809,
     810,
     811,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Elena[] = 
+const u16 gBattleFrontierTrainerMons_Elena[] =
 {
     373,
     382,
@@ -10637,10 +10637,10 @@ const u16 gBattleFrontierTrainerMons_Elena[] =
     809,
     810,
     811,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alana[] = 
+const u16 gBattleFrontierTrainerMons_Alana[] =
 {
     373,
     382,
@@ -10698,10 +10698,10 @@ const u16 gBattleFrontierTrainerMons_Alana[] =
     833,
     834,
     835,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alexas[] = 
+const u16 gBattleFrontierTrainerMons_Alexas[] =
 {
     382,
     387,
@@ -10803,10 +10803,10 @@ const u16 gBattleFrontierTrainerMons_Alexas[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Weston[] = 
+const u16 gBattleFrontierTrainerMons_Weston[] =
 {
     374,
     377,
@@ -10908,10 +10908,10 @@ const u16 gBattleFrontierTrainerMons_Weston[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jasper[] = 
+const u16 gBattleFrontierTrainerMons_Jasper[] =
 {
     378,
     388,
@@ -11013,10 +11013,10 @@ const u16 gBattleFrontierTrainerMons_Jasper[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Nadia[] = 
+const u16 gBattleFrontierTrainerMons_Nadia[] =
 {
     382,
     387,
@@ -11118,10 +11118,10 @@ const u16 gBattleFrontierTrainerMons_Nadia[] =
     857,
     858,
     859,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Miranda[] = 
+const u16 gBattleFrontierTrainerMons_Miranda[] =
 {
     374,
     377,
@@ -11223,10 +11223,10 @@ const u16 gBattleFrontierTrainerMons_Miranda[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Emma[] = 
+const u16 gBattleFrontierTrainerMons_Emma[] =
 {
     378,
     388,
@@ -11328,10 +11328,10 @@ const u16 gBattleFrontierTrainerMons_Emma[] =
     857,
     858,
     859,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Rolando[] = 
+const u16 gBattleFrontierTrainerMons_Rolando[] =
 {
     185,
     290,
@@ -11425,10 +11425,10 @@ const u16 gBattleFrontierTrainerMons_Rolando[] =
     873,
     874,
     875,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Stanly[] = 
+const u16 gBattleFrontierTrainerMons_Stanly[] =
 {
     185,
     290,
@@ -11522,10 +11522,10 @@ const u16 gBattleFrontierTrainerMons_Stanly[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dario[] = 
+const u16 gBattleFrontierTrainerMons_Dario[] =
 {
     185,
     290,
@@ -11619,10 +11619,10 @@ const u16 gBattleFrontierTrainerMons_Dario[] =
     847,
     848,
     849,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Karlee[] = 
+const u16 gBattleFrontierTrainerMons_Karlee[] =
 {
     185,
     290,
@@ -11716,10 +11716,10 @@ const u16 gBattleFrontierTrainerMons_Karlee[] =
     873,
     874,
     875,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jaylin[] = 
+const u16 gBattleFrontierTrainerMons_Jaylin[] =
 {
     185,
     290,
@@ -11813,10 +11813,10 @@ const u16 gBattleFrontierTrainerMons_Jaylin[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ingrid[] = 
+const u16 gBattleFrontierTrainerMons_Ingrid[] =
 {
     185,
     290,
@@ -11910,10 +11910,10 @@ const u16 gBattleFrontierTrainerMons_Ingrid[] =
     843,
     844,
     845,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Delilah[] = 
+const u16 gBattleFrontierTrainerMons_Delilah[] =
 {
     347,
     352,
@@ -11945,10 +11945,10 @@ const u16 gBattleFrontierTrainerMons_Delilah[] =
     801,
     802,
     803,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Carly[] = 
+const u16 gBattleFrontierTrainerMons_Carly[] =
 {
     344,
     374,
@@ -12003,10 +12003,10 @@ const u16 gBattleFrontierTrainerMons_Carly[] =
     801,
     802,
     803,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Lexie[] = 
+const u16 gBattleFrontierTrainerMons_Lexie[] =
 {
     344,
     347,
@@ -12067,10 +12067,10 @@ const u16 gBattleFrontierTrainerMons_Lexie[] =
     801,
     802,
     803,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Miller[] = 
+const u16 gBattleFrontierTrainerMons_Miller[] =
 {
     345,
     376,
@@ -12159,10 +12159,10 @@ const u16 gBattleFrontierTrainerMons_Miller[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Marv[] = 
+const u16 gBattleFrontierTrainerMons_Marv[] =
 {
     345,
     568,
@@ -12251,10 +12251,10 @@ const u16 gBattleFrontierTrainerMons_Marv[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Layton[] = 
+const u16 gBattleFrontierTrainerMons_Layton[] =
 {
     345,
     425,
@@ -12345,10 +12345,10 @@ const u16 gBattleFrontierTrainerMons_Layton[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Brooks[] = 
+const u16 gBattleFrontierTrainerMons_Brooks[] =
 {
     660,
     661,
@@ -12446,10 +12446,10 @@ const u16 gBattleFrontierTrainerMons_Brooks[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gregory[] = 
+const u16 gBattleFrontierTrainerMons_Gregory[] =
 {
     421,
     425,
@@ -12551,10 +12551,10 @@ const u16 gBattleFrontierTrainerMons_Gregory[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Reese[] = 
+const u16 gBattleFrontierTrainerMons_Reese[] =
 {
     756,
     757,
@@ -12646,10 +12646,10 @@ const u16 gBattleFrontierTrainerMons_Reese[] =
     879,
     880,
     881,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Mason[] = 
+const u16 gBattleFrontierTrainerMons_Mason[] =
 {
     660,
     661,
@@ -12747,10 +12747,10 @@ const u16 gBattleFrontierTrainerMons_Mason[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Toby[] = 
+const u16 gBattleFrontierTrainerMons_Toby[] =
 {
     564,
     565,
@@ -12848,10 +12848,10 @@ const u16 gBattleFrontierTrainerMons_Toby[] =
     657,
     658,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dorothy[] = 
+const u16 gBattleFrontierTrainerMons_Dorothy[] =
 {
     468,
     469,
@@ -12949,10 +12949,10 @@ const u16 gBattleFrontierTrainerMons_Dorothy[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Piper[] = 
+const u16 gBattleFrontierTrainerMons_Piper[] =
 {
     372,
     373,
@@ -13050,10 +13050,10 @@ const u16 gBattleFrontierTrainerMons_Piper[] =
     465,
     466,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Finn[] = 
+const u16 gBattleFrontierTrainerMons_Finn[] =
 {
     317,
     371,
@@ -13135,10 +13135,10 @@ const u16 gBattleFrontierTrainerMons_Finn[] =
     821,
     822,
     823,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Samir[] = 
+const u16 gBattleFrontierTrainerMons_Samir[] =
 {
     317,
     371,
@@ -13220,10 +13220,10 @@ const u16 gBattleFrontierTrainerMons_Samir[] =
     821,
     822,
     823,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Fiona[] = 
+const u16 gBattleFrontierTrainerMons_Fiona[] =
 {
     317,
     371,
@@ -13305,10 +13305,10 @@ const u16 gBattleFrontierTrainerMons_Fiona[] =
     821,
     822,
     823,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gloria[] = 
+const u16 gBattleFrontierTrainerMons_Gloria[] =
 {
     317,
     371,
@@ -13390,10 +13390,10 @@ const u16 gBattleFrontierTrainerMons_Gloria[] =
     821,
     822,
     823,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Nico[] = 
+const u16 gBattleFrontierTrainerMons_Nico[] =
 {
     660,
     661,
@@ -13491,10 +13491,10 @@ const u16 gBattleFrontierTrainerMons_Nico[] =
     753,
     754,
     755,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Jeremy[] = 
+const u16 gBattleFrontierTrainerMons_Jeremy[] =
 {
     564,
     565,
@@ -13592,10 +13592,10 @@ const u16 gBattleFrontierTrainerMons_Jeremy[] =
     657,
     658,
     659,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Caitlin[] = 
+const u16 gBattleFrontierTrainerMons_Caitlin[] =
 {
     468,
     469,
@@ -13693,10 +13693,10 @@ const u16 gBattleFrontierTrainerMons_Caitlin[] =
     561,
     562,
     563,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Reena[] = 
+const u16 gBattleFrontierTrainerMons_Reena[] =
 {
     372,
     373,
@@ -13794,10 +13794,10 @@ const u16 gBattleFrontierTrainerMons_Reena[] =
     465,
     466,
     467,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Avery[] = 
+const u16 gBattleFrontierTrainerMons_Avery[] =
 {
     21,
     238,
@@ -13827,10 +13827,10 @@ const u16 gBattleFrontierTrainerMons_Avery[] =
     711,
     712,
     720,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Liam[] = 
+const u16 gBattleFrontierTrainerMons_Liam[] =
 {
     21,
     238,
@@ -13860,10 +13860,10 @@ const u16 gBattleFrontierTrainerMons_Liam[] =
     711,
     712,
     720,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Theo[] = 
+const u16 gBattleFrontierTrainerMons_Theo[] =
 {
     333,
     347,
@@ -13899,10 +13899,10 @@ const u16 gBattleFrontierTrainerMons_Theo[] =
     817,
     818,
     819,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Bailey[] = 
+const u16 gBattleFrontierTrainerMons_Bailey[] =
 {
     333,
     347,
@@ -13938,10 +13938,10 @@ const u16 gBattleFrontierTrainerMons_Bailey[] =
     817,
     818,
     819,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Hugo[] = 
+const u16 gBattleFrontierTrainerMons_Hugo[] =
 {
     383,
     386,
@@ -14013,10 +14013,10 @@ const u16 gBattleFrontierTrainerMons_Hugo[] =
     839,
     840,
     841,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Bryce[] = 
+const u16 gBattleFrontierTrainerMons_Bryce[] =
 {
     383,
     386,
@@ -14088,10 +14088,10 @@ const u16 gBattleFrontierTrainerMons_Bryce[] =
     839,
     840,
     841,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gideon[] = 
+const u16 gBattleFrontierTrainerMons_Gideon[] =
 {
     441,
     445,
@@ -14129,10 +14129,10 @@ const u16 gBattleFrontierTrainerMons_Gideon[] =
     742,
     743,
     746,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Triston[] = 
+const u16 gBattleFrontierTrainerMons_Triston[] =
 {
     441,
     445,
@@ -14170,10 +14170,10 @@ const u16 gBattleFrontierTrainerMons_Triston[] =
     742,
     743,
     746,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Charles[] = 
+const u16 gBattleFrontierTrainerMons_Charles[] =
 {
     352,
     381,
@@ -14234,10 +14234,10 @@ const u16 gBattleFrontierTrainerMons_Charles[] =
     873,
     874,
     875,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Raymond[] = 
+const u16 gBattleFrontierTrainerMons_Raymond[] =
 {
     374,
     376,
@@ -14274,10 +14274,10 @@ const u16 gBattleFrontierTrainerMons_Raymond[] =
     843,
     846,
     847,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dirk[] = 
+const u16 gBattleFrontierTrainerMons_Dirk[] =
 {
     355,
     375,
@@ -14340,10 +14340,10 @@ const u16 gBattleFrontierTrainerMons_Dirk[] =
     829,
     830,
     831,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Harold[] = 
+const u16 gBattleFrontierTrainerMons_Harold[] =
 {
     355,
     375,
@@ -14406,10 +14406,10 @@ const u16 gBattleFrontierTrainerMons_Harold[] =
     829,
     830,
     831,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Omar[] = 
+const u16 gBattleFrontierTrainerMons_Omar[] =
 {
     373,
     388,
@@ -14491,10 +14491,10 @@ const u16 gBattleFrontierTrainerMons_Omar[] =
     821,
     822,
     823,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Peter[] = 
+const u16 gBattleFrontierTrainerMons_Peter[] =
 {
     373,
     388,
@@ -14576,10 +14576,10 @@ const u16 gBattleFrontierTrainerMons_Peter[] =
     821,
     822,
     823,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dev[] = 
+const u16 gBattleFrontierTrainerMons_Dev[] =
 {
     372,
     387,
@@ -14659,10 +14659,10 @@ const u16 gBattleFrontierTrainerMons_Dev[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Corey[] = 
+const u16 gBattleFrontierTrainerMons_Corey[] =
 {
     372,
     387,
@@ -14742,10 +14742,10 @@ const u16 gBattleFrontierTrainerMons_Corey[] =
     867,
     868,
     869,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Andre[] = 
+const u16 gBattleFrontierTrainerMons_Andre[] =
 {
     374,
     378,
@@ -14809,10 +14809,10 @@ const u16 gBattleFrontierTrainerMons_Andre[] =
     857,
     858,
     859,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Ferris[] = 
+const u16 gBattleFrontierTrainerMons_Ferris[] =
 {
     374,
     378,
@@ -14876,10 +14876,10 @@ const u16 gBattleFrontierTrainerMons_Ferris[] =
     857,
     858,
     859,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Alivia[] = 
+const u16 gBattleFrontierTrainerMons_Alivia[] =
 {
     399,
     400,
@@ -14916,10 +14916,10 @@ const u16 gBattleFrontierTrainerMons_Alivia[] =
     714,
     729,
     732,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Paige[] = 
+const u16 gBattleFrontierTrainerMons_Paige[] =
 {
     399,
     400,
@@ -14956,10 +14956,10 @@ const u16 gBattleFrontierTrainerMons_Paige[] =
     714,
     729,
     732,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Anya[] = 
+const u16 gBattleFrontierTrainerMons_Anya[] =
 {
     442,
     443,
@@ -14981,10 +14981,10 @@ const u16 gBattleFrontierTrainerMons_Anya[] =
     732,
     734,
     735,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Dawn[] = 
+const u16 gBattleFrontierTrainerMons_Dawn[] =
 {
     377,
     381,
@@ -15025,10 +15025,10 @@ const u16 gBattleFrontierTrainerMons_Dawn[] =
     823,
     831,
     843,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Abby[] = 
+const u16 gBattleFrontierTrainerMons_Abby[] =
 {
     185,
     290,
@@ -15125,10 +15125,10 @@ const u16 gBattleFrontierTrainerMons_Abby[] =
     817,
     818,
     819,
-    -1 
+    -1
 };
 
-const u16 gBattleFrontierTrainerMons_Gretel[] = 
+const u16 gBattleFrontierTrainerMons_Gretel[] =
 {
     185,
     290,
@@ -15225,5 +15225,5 @@ const u16 gBattleFrontierTrainerMons_Gretel[] =
     817,
     818,
     819,
-    -1 
+    -1
 };

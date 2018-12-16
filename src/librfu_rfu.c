@@ -15,10 +15,10 @@
     {
         return 2;
     }
-    
+
     if ((u32)unk0 & 3)
         return 2;
-    
+
     // Nintendo pls, just use a ternary for once
     if (copyInterruptToRam)
     {
@@ -47,7 +47,7 @@
         gUnknown_03007880[i] = (struct RfuUnk2*)&gUnknown_03007880[i-1]->unk_70;
         gUnknown_03007870[i] = (struct RfuUnk1*)&gUnknown_03007870[i-1]->unk_1c;
     }
-    
+
     gUnknown_03007898->unk_dc = (u32)&gUnknown_03007870[3]->unk_1c;
     STWI_init_all(&gUnknown_03007870[3]->unk_1c, interrupt, copyInterruptToRam);
     rfu_STC_clearAPIVariables();
@@ -63,15 +63,15 @@
     // Not matching, register differences
     v12 = (u16*)((u32)&sub_82E53F4 & ~1);
     v13 = (u16*)gUnknown_03007898->unk_8;
-        
+
     for (i = 47; i != 0xFFFF; i--)
     {
         *v13 = *v12;
         ++v12;
         ++v13;
     }
-        
+
     gUnknown_03007898->unk_4 = (u32)(&gUnknown_03007898->unk_8[1]);
-        
+
     return 0;
 }*/

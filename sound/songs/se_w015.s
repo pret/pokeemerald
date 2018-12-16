@@ -81,9 +81,9 @@ se_w015_2:
 	.byte		VOL   , 120*se_w015_mvl/mxv
 	.byte		N15   , Cn2 , v040
 	.byte	W15
-	.byte		N06   , Fs3 
+	.byte		N06   , Fs3
 	.byte	W09
-	.byte		N24   , Gs3 
+	.byte		N24   , Gs3
 	.byte	W24
 	.byte	FINE
 

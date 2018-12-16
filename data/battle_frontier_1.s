@@ -382,12 +382,12 @@ gUnknown_0860EFAC:: @ 860EFAC
 
 	.align 2
 gUnknown_0860EFC4:: @ 860EFC4
-    .4byte 0x00000282, gText_Kira
-    .4byte 0x000001e1, gText_Amy
-    .4byte 0x000002a9, gText_John
-    .4byte 0x000002af, gText_Roy
-    .4byte 0x00000033, gText_Gabby
-    .4byte 0x0000011f, gText_Anna
+	.4byte 0x00000282, gText_Kira
+	.4byte 0x000001e1, gText_Amy
+	.4byte 0x000002a9, gText_John
+	.4byte 0x000002af, gText_Roy
+	.4byte 0x00000033, gText_Gabby
+	.4byte 0x0000011f, gText_Anna
 
 	.align 2
 gUnknown_0860EFF4:: @ 860EFF4

@@ -46,9 +46,9 @@ se_w010_1:
 	.byte	W02
 	.byte		VOICE , 21
 	.byte		BEND  , c_v+63
-	.byte		N01   , Cn5 
+	.byte		N01   , Cn5
 	.byte	W02
-	.byte		        Gn5 
+	.byte		        Gn5
 	.byte	W02
 	.byte		        Gn5 , v064
 	.byte	W10

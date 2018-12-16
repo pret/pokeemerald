@@ -36,10 +36,10 @@ se_w233_1:
 	.byte		VOICE , 21
 	.byte		VOL   , 110*se_w233_mvl/mxv
 	.byte		BEND  , c_v+0
-	.byte		N03   , Gn4 
+	.byte		N03   , Gn4
 	.byte	W06
 	.byte		PAN   , c_v+16
-	.byte		N03   , Cn5 
+	.byte		N03   , Cn5
 	.byte	W09
 	.byte	FINE
 
@@ -54,7 +54,7 @@ se_w233_2:
 	.byte		N03   , Cn3 , v052
 	.byte	W06
 	.byte		PAN   , c_v-7
-	.byte		N03   
+	.byte		N03
 	.byte	W09
 	.byte	FINE
 

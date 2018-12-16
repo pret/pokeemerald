@@ -4805,7 +4805,7 @@ const union AnimCmd gAnimCmd_UNOWN_QMARK_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
- 
+
 const union AnimCmd *const gAnims_NONE[] ={
     gAnimCmd_General_Frame0,
     gAnimCmd_NONE_1,

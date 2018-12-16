@@ -38,19 +38,19 @@ int ExtensionToBpp(const char *extension)
 
 int main(int argc, char **argv)
 {
-	if (argc < 5)
-		FATAL_ERROR("Usage: rsfont INPUT_FILE OUTPUT_FILE NUM_GLYPHS LAYOUT_TYPE\n");
+    if (argc < 5)
+        FATAL_ERROR("Usage: rsfont INPUT_FILE OUTPUT_FILE NUM_GLYPHS LAYOUT_TYPE\n");
 
-	char *inputPath = argv[1];
-	char *outputPath = argv[2];
-	char *inputFileExtension = GetFileExtension(inputPath);
-	char *outputFileExtension = GetFileExtension(outputPath);
+    char *inputPath = argv[1];
+    char *outputPath = argv[2];
+    char *inputFileExtension = GetFileExtension(inputPath);
+    char *outputFileExtension = GetFileExtension(outputPath);
 
-	if (inputFileExtension == NULL)
-		FATAL_ERROR("Input file \"%s\" has no extension.\n", inputPath);
+    if (inputFileExtension == NULL)
+        FATAL_ERROR("Input file \"%s\" has no extension.\n", inputPath);
 
-	if (outputFileExtension == NULL)
-		FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
+    if (outputFileExtension == NULL)
+        FATAL_ERROR("Output file \"%s\" has no extension.\n", outputPath);
 
     int numGlyphs;
     int bpp;

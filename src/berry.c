@@ -944,7 +944,7 @@ bool32 EventObjectInteractionWaterBerryTree(void)
 bool8 IsPlayerFacingPlantedBerryTree(void)
 {
     if (GetEventObjectScriptPointerPlayerFacing() == BerryTreeScript
-     && GetStageByBerryTreeId(EventObjectGetBerryTreeId(gSelectedEventObject)) == 0)
+    && GetStageByBerryTreeId(EventObjectGetBerryTreeId(gSelectedEventObject)) == 0)
         return TRUE;
     else
         return FALSE;

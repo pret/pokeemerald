@@ -39,7 +39,7 @@ se_w020_1:
 	.byte	W06
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N11   
+	.byte		N11
 	.byte	W02
 	.byte		BEND  , c_v-10
 	.byte	W01

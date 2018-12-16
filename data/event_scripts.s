@@ -847,9 +847,9 @@ VerdanturfTown_BattleTentLobby_EventScript_27134F:: @ 827134F
 	EventScript_271354:: @ 8271354
 	cmdD8
 	cmdD9
-	
+
 	.include "data/scripts/trainer_battle.inc"
-	
+
 Std_MsgboxAutoclose:: @ 8271494
 	message 0x0
 	waitmessage
@@ -4245,7 +4245,7 @@ gUnknown_0827EE07:: @ 27EE07
 
 gUnknown_0827EE09:: @ 27EE09
 	.string "8$"
-	
+
 	.include "data/scripts/tv.inc"
 	.include "data/text/tv.inc"
 

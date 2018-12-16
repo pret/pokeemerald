@@ -154,7 +154,7 @@ se_w227b_1_000:
 	.byte		        12*se_w227b_mvl/mxv
 	.byte		PAN   , c_v-2
 	.byte	W02
-	.byte		EOT   , Cn3 
+	.byte		EOT   , Cn3
 	.byte	FINE
 
 @******************************************************@

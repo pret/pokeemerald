@@ -27,7 +27,7 @@ se_tamakoro_1:
 	.byte	W96
 	.byte	W96
 	.byte	W96
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

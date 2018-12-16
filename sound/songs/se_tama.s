@@ -121,7 +121,7 @@ se_tama_1:
 	.byte	W01
 	.byte		        4*se_tama_mvl/mxv
 	.byte	W02
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @********************** Track  2 **********************@
@@ -226,7 +226,7 @@ se_tama_2:
 	.byte		VOL   , 5*se_tama_mvl/mxv
 	.byte		BEND  , c_v+63
 	.byte	W02
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

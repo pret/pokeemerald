@@ -45,7 +45,7 @@ se_w029_1:
 	.byte	W01
 	.byte		VOL   , 25*se_w029_mvl/mxv
 	.byte		BEND  , c_v-48
-	.byte		N07   , Dn1 
+	.byte		N07   , Dn1
 	.byte	W01
 	.byte		PAN   , c_v+19
 	.byte		VOL   , 41*se_w029_mvl/mxv

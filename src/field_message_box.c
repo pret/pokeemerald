@@ -29,13 +29,13 @@ void sub_8098154(u8 taskId)
     switch (task->data[0])
     {
         case 0:
-           sub_81973A4();
-           task->data[0]++;
-           break;
+            sub_81973A4();
+            task->data[0]++;
+            break;
         case 1:
-           NewMenuHelpers_DrawDialogueFrame(0, 1);
-           task->data[0]++;
-           break;
+            NewMenuHelpers_DrawDialogueFrame(0, 1);
+            task->data[0]++;
+            break;
         case 2:
             if (RunTextPrintersAndIsPrinter0Active() != 1)
             {

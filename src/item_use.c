@@ -459,9 +459,9 @@ void sub_80FD7C8(u8 taskId)
         for (curY = y - 5; curY <= y + 5; curY++)
         {
             if (var1 > curX
-             || curX >= width
-             || var2 > curY
-             || curY >= height)
+            || curX >= width
+            || var2 > curY
+            || curY >= height)
             {
                 struct MapConnection *conn = sub_8088A8C(curX, curY);
                 if (conn && sub_80FD730(conn, curX, curY) == TRUE)

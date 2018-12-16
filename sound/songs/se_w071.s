@@ -29,7 +29,7 @@ se_w071_1:
 	.byte	W01
 	.byte		VOICE , 38
 	.byte		VOL   , 58*se_w071_mvl/mxv
-	.byte		N08   , Gn4 
+	.byte		N08   , Gn4
 	.byte	W01
 	.byte		VOL   , 68*se_w071_mvl/mxv
 	.byte		PAN   , c_v+8

@@ -340,19 +340,19 @@ static void InitSinglePlayerBtlControllers(void)
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
-                  gBattlerControllerFuncs[1] = SetControllerToRecordedOpponent;
-                  gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+                gBattlerControllerFuncs[1] = SetControllerToRecordedOpponent;
+                gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-                  gBattlerControllerFuncs[3] = SetControllerToRecordedOpponent;
-                  gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
+                gBattlerControllerFuncs[3] = SetControllerToRecordedOpponent;
+                gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
                 }
                 else
                 {
-                  gBattlerControllerFuncs[1] = SetControllerToOpponent;
-                  gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+                gBattlerControllerFuncs[1] = SetControllerToOpponent;
+                gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-                  gBattlerControllerFuncs[3] = SetControllerToOpponent;
-                  gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
+                gBattlerControllerFuncs[3] = SetControllerToOpponent;
+                gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
                 }
             }
             else
@@ -538,7 +538,7 @@ static void InitLinkBtlControllers(void)
             else
             {
                 if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[multiplayerId].id & 1))
-                 || ((gLinkPlayers[i].id & 1) && (gLinkPlayers[multiplayerId].id & 1)))
+                || ((gLinkPlayers[i].id & 1) && (gLinkPlayers[multiplayerId].id & 1)))
                 {
                     gBattlerControllerFuncs[gLinkPlayers[i].id] = SetControllerToLinkPartner;
                     switch (gLinkPlayers[i].id)
@@ -594,9 +594,9 @@ static void SetBattlePartyIds(void)
                     if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
+                        && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
+                        && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                        && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -605,9 +605,9 @@ static void SetBattlePartyIds(void)
                     else
                     {
                         if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
+                        && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
+                        && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                        && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -619,10 +619,10 @@ static void SetBattlePartyIds(void)
                     if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE  // Probably a typo by Game Freak. The rest use SPECIES2.
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlerPartyIndexes[i - 2] != j)
+                        && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE  // Probably a typo by Game Freak. The rest use SPECIES2.
+                        && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                        && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
+                        && gBattlerPartyIndexes[i - 2] != j)
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -631,10 +631,10 @@ static void SetBattlePartyIds(void)
                     else
                     {
                         if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
-                         && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlerPartyIndexes[i - 2] != j)
+                        && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
+                        && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
+                        && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
+                        && gBattlerPartyIndexes[i - 2] != j)
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -784,7 +784,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
             if (gTasks[taskId].data[13] == 0)
             {
                 if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
-                 && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+                && gTasks[taskId].data[15] == gTasks[taskId].data[12])
                 {
                     gTasks[taskId].data[12] = 0;
                     gTasks[taskId].data[15] = 0;
@@ -872,7 +872,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
     if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
     {
         if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
-         && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+        && gTasks[taskId].data[15] == gTasks[taskId].data[12])
         {
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;

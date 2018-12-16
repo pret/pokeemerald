@@ -1,4 +1,4 @@
-const struct CompressedSpriteSheet gMonStillFrontPicTable[] = 
+const struct CompressedSpriteSheet gMonStillFrontPicTable[] =
 {   //.data                .size             .tag
     gMonStillFrontPic_CircledQuestionMark, 0x800, 0,
     gMonStillFrontPic_Bulbasaur, 0x800, 1,

@@ -44,7 +44,7 @@ se_w036_1:
 	.byte		        c_v+0
 	.byte		VOL   , 105*se_w036_mvl/mxv
 	.byte		BEND  , c_v-32
-	.byte		N10   
+	.byte		N10
 	.byte	W02
 	.byte		PAN   , c_v-8
 	.byte		BEND  , c_v-16
@@ -65,7 +65,7 @@ se_w036_1:
 	.byte		        c_v+0
 	.byte		VOL   , 105*se_w036_mvl/mxv
 	.byte		BEND  , c_v-16
-	.byte		N10   
+	.byte		N10
 	.byte	W02
 	.byte		BEND  , c_v+0
 	.byte	W01

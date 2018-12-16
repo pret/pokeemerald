@@ -231,10 +231,10 @@ static void sub_8137420(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
-                               | BGCNT_CHARBASE(3)
-                               | BGCNT_SCREENBASE(31)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(3)
+                                | BGCNT_SCREENBASE(31)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON
@@ -308,10 +308,10 @@ static void sub_81375D8(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
-                               | BGCNT_CHARBASE(3)
-                               | BGCNT_SCREENBASE(31)
-                               | BGCNT_16COLOR
-                               | BGCNT_TXT256x256);
+                                | BGCNT_CHARBASE(3)
+                                | BGCNT_SCREENBASE(31)
+                                | BGCNT_16COLOR
+                                | BGCNT_TXT256x256);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON

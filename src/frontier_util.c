@@ -1841,7 +1841,7 @@ static void sub_81A3B00(void)
 u8 GetPlayerSymbolCountForFacility(u8 facility)
 {
     return FlagGet(FLAG_SYS_TOWER_SILVER + facility * 2)
-         + FlagGet(FLAG_SYS_TOWER_GOLD + facility * 2);
+        + FlagGet(FLAG_SYS_TOWER_GOLD + facility * 2);
 }
 
 static void sub_81A3B64(void)
@@ -2502,11 +2502,11 @@ void CreateFrontierBrainPokemon(void)
             j = Random32();
         } while (IsShinyOtIdPersonality(FRONTIER_BRAIN_OTID, j) || sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
         CreateMon(&gEnemyParty[monPartyId],
-                  sFrontierBrainsMons[facility][symbol][i].species,
-                  monLevel,
-                  sFrontierBrainsMons[facility][symbol][i].fixedIV,
-                  TRUE, j,
-                  TRUE, FRONTIER_BRAIN_OTID);
+                sFrontierBrainsMons[facility][symbol][i].species,
+                monLevel,
+                sFrontierBrainsMons[facility][symbol][i].fixedIV,
+                TRUE, j,
+                TRUE, FRONTIER_BRAIN_OTID);
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
         for (j = 0; j < NUM_STATS; j++)
             SetMonData(&gEnemyParty[monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
@@ -2811,7 +2811,7 @@ s32 GetFronterBrainSymbol(void)
         else if (winStreak + gUnknown_08611550[facility][3] == gUnknown_08611550[facility][1])
             symbol = 1;
         else if (winStreak + gUnknown_08611550[facility][3] > gUnknown_08611550[facility][1]
-                 && (winStreak + gUnknown_08611550[facility][3] - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
+                && (winStreak + gUnknown_08611550[facility][3] - gUnknown_08611550[facility][1]) % gUnknown_08611550[facility][2] == 0)
             symbol = 1;
     }
     return symbol;

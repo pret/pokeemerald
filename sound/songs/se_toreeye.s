@@ -25,43 +25,43 @@ se_toreeye_1:
 	.byte		PAN   , c_v-16
 	.byte		N01   , An5 , v064
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        An5 
+	.byte		        An5
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Fs6 
+	.byte		        Fs6
 	.byte	W02
-	.byte		        An5 
+	.byte		        An5
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        An5 
+	.byte		        An5
 	.byte	W01
-	.byte		        Fs6 
+	.byte		        Fs6
 	.byte	W01
-	.byte		        An5 
+	.byte		        An5
 	.byte	W02
-	.byte		N01   
+	.byte		N01
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        An5 
+	.byte		        An5
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        Fs6 
+	.byte		        Fs6
 	.byte	W02
-	.byte		        An5 
+	.byte		        An5
 	.byte	W01
-	.byte		        Dn6 
+	.byte		        Dn6
 	.byte	W01
-	.byte		        An5 
+	.byte		        An5
 	.byte	W01
-	.byte		        Fs6 
+	.byte		        Fs6
 	.byte	W01
-	.byte		        An5 
+	.byte		        An5
 	.byte	W02
 	.byte	FINE
 
@@ -80,52 +80,52 @@ se_toreeye_2:
 	.byte		BEND  , c_v+2
 	.byte		N01   , Dn5 , v064
 	.byte	W01
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W01
 	.byte		PAN   , c_v-62
-	.byte		N01   , Dn5 
+	.byte		N01   , Dn5
 	.byte	W01
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W01
 	.byte		PAN   , c_v+63
-	.byte		N01   , An5 
+	.byte		N01   , An5
 	.byte	W02
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W01
 	.byte		PAN   , c_v-61
-	.byte		N01   , Fs5 
+	.byte		N01   , Fs5
 	.byte	W01
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W01
 	.byte		PAN   , c_v+63
-	.byte		N01   , An5 
+	.byte		N01   , An5
 	.byte	W01
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W02
 	.byte		PAN   , c_v-61
-	.byte		N01   
+	.byte		N01
 	.byte	W01
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W01
 	.byte		PAN   , c_v+63
-	.byte		N01   , Dn5 
+	.byte		N01   , Dn5
 	.byte	W01
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W01
 	.byte		PAN   , c_v-61
-	.byte		N01   , An5 
+	.byte		N01   , An5
 	.byte	W02
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W01
 	.byte		PAN   , c_v+63
-	.byte		N01   , Fs5 
+	.byte		N01   , Fs5
 	.byte	W01
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W01
 	.byte		PAN   , c_v-61
-	.byte		N01   , An5 
+	.byte		N01   , An5
 	.byte	W01
-	.byte		        Dn5 
+	.byte		        Dn5
 	.byte	W02
 	.byte	FINE
 

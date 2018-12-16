@@ -68,8 +68,8 @@ static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
 };
 
 static const u8 sRoundedDownGrayscaleMap[] = {
-     0,  0,  0,  0,  0,
-     5,  5,  5,  5,  5,
+    0,  0,  0,  0,  0,
+    5,  5,  5,  5,  5,
     11, 11, 11, 11, 11,
     16, 16, 16, 16, 16,
     21, 21, 21, 21, 21,
@@ -881,7 +881,7 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
 {
     s32 r, g, b, i;
     u32 gray;
-    
+
     for (i = 0; i < count; i++)
     {
         r = (*palette >>  0) & 0x1F;

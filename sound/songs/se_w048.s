@@ -44,7 +44,7 @@ se_w048_1:
 	.byte		VOL   , 0*se_w048_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-4
-	.byte		N32   
+	.byte		N32
 	.byte	W01
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-1

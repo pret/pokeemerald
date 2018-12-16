@@ -1829,7 +1829,7 @@ static void sub_81C0F44(u8 taskId)
         else if (gMain.newKeys & A_BUTTON)
         {
             if (pssData->unk40C8 == TRUE
-             || (pssData->newMove == MOVE_NONE && pssData->firstMoveIndex == MAX_MON_MOVES))
+            || (pssData->newMove == MOVE_NONE && pssData->firstMoveIndex == MAX_MON_MOVES))
             {
                 PlaySE(SE_SELECT);
                 sub_81C11F4(taskId);

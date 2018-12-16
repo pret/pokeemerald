@@ -601,9 +601,9 @@ static u16 sub_811AB68(void)
         return 3;
     }
     /*
-     * FIXME: right, down, left, b, and start
-     * should be inserted here, but aren't
-     */
+    * FIXME: right, down, left, b, and start
+    * should be inserted here, but aren't
+    */
     if (gUnknown_0203A118->unk_05 < 0)
     {
         gUnknown_0203A118->unk_05 = gUnknown_08597550[gUnknown_0203A118->unk_01].unk_01 - 1;

@@ -2041,9 +2041,9 @@ static void sub_81D81A4(u8 taskId)
     if ((data[1] & 3) == 0)
     {
         u8 spriteId = CreateSprite(&sUnknown_0862AAA0,
-                                   (sUnknown_0862AAB8[data[0]][0] * 4) + 120,
-                                   (sUnknown_0862AAB8[data[0]][1] * 4) + 80,
-                                   0);
+                                    (sUnknown_0862AAB8[data[0]][0] * 4) + 120,
+                                    (sUnknown_0862AAB8[data[0]][1] * 4) + 80,
+                                    0);
         gSprites[spriteId].data[0] = (s8)(data[0]);
         gSprites[spriteId].oam.objMode = 1;
         gSprites[spriteId].oam.affineMode = 3;

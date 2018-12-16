@@ -25,7 +25,7 @@ const struct CompressedSpriteSheet gTrainerBackPicTable[] =
     (const u32 *)gTrainerBackPic_Steven, 0x2000, 7,
 };
 
-const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] = 
+const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] =
 {
     gTrainerPalette_Brendan, 0,
     gTrainerPalette_May, 1,

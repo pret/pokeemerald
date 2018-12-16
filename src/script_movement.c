@@ -211,7 +211,7 @@ static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
     u8 var;
 
     if (EventObjectIsHeldMovementActive(&gEventObjects[eventObjId])
-     && !EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
+    && !EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]))
         return;
 
     var = *d;
@@ -229,4 +229,3 @@ static void sub_80A2490(u8 taskId, u8 b, u8 eventObjId, const u8 *d)
         }
     }
 }
-

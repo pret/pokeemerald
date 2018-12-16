@@ -68,7 +68,7 @@ se_w011_2:
 	.byte		PAN   , c_v+0
 	.byte		N06   , Cn2 , v040
 	.byte	W10
-	.byte		N02   , Gn2 
+	.byte		N02   , Gn2
 	.byte	W14
 	.byte	FINE
 

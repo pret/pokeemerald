@@ -71,8 +71,8 @@ void sub_8179944(void);
 bool8 ShouldDoBrailleDigEffect(void)
 {
     if (!FlagGet(FLAG_SYS_BRAILLE_DIG)
-     && (gSaveBlock1Ptr->location.mapGroup == 0x18
-     && gSaveBlock1Ptr->location.mapNum == 0x47))
+    && (gSaveBlock1Ptr->location.mapGroup == 0x18
+    && gSaveBlock1Ptr->location.mapNum == 0x47))
     {
         if (gSaveBlock1Ptr->pos.x == 10 && gSaveBlock1Ptr->pos.y == 3)
             return TRUE;

@@ -1,7 +1,7 @@
-    .include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
+	.section .rodata
 
 	.align 2
 
@@ -46,101 +46,101 @@ gUnknown_0862B995:: @ 862B995
 
 gUnknown_0862B9AE:: @ 862B9AE
 	.string "{CLEAR 11}5{CLEAR 16}6{CLEAR 16}7{CLEAR 16}8{CLEAR 16}9{CLEAR 16} $"
- 
+
 gUnknown_0862B9C7:: @ 862B9C7
 	.string "{CLEAR 12}!{CLEAR 17}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 17}-$"
-	
+
 gUnknown_0862B9E0:: @ 862B9E0
 	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 19}'{CLEAR 18} $"
 
 gUnknown_0862B9F9:: @ 862B9F9
-    .string "ABCDE$"
+	.string "ABCDE$"
 
 gUnknown_0862B9FF:: @ 862B9FF
-    .string "FGHIJ$"
+	.string "FGHIJ$"
 
 gUnknown_0862BA05:: @ 862BA05
-    .string "KLMNO$"
+	.string "KLMNO$"
 
 gUnknown_0862BA0B:: @ 862BA0B
-    .string "PQRST$"
+	.string "PQRST$"
 
 gUnknown_0862BA11:: @ 862BA11
-    .string "UVWXY$"
+	.string "UVWXY$"
 
 gUnknown_0862BA17:: @ 862BA17
-    .string "Z    $"
+	.string "Z    $"
 
 gUnknown_0862BA1D:: @ 862BA1D
-    .string "01234$"
+	.string "01234$"
 
 gUnknown_0862BA23:: @ 862BA23
-    .string "56789$"
+	.string "56789$"
 
 gUnknown_0862BA29:: @ 862BA29
-    .string ".,!? $"
+	.string ".,!? $"
 
 gUnknown_0862BA2F:: @ 862BA2F
-    .string "-/&… $"
+	.string "-/&… $"
 
 gUnknown_0862BA35:: @ 862BA35
-    .string "abcde$"
+	.string "abcde$"
 
 gUnknown_0862BA3B:: @ 862BA3B
-    .string "fghij$"
+	.string "fghij$"
 
 gUnknown_0862BA41:: @ 862BA41
-    .string "klmno$"
+	.string "klmno$"
 
 gUnknown_0862BA47:: @ 862BA47
-    .string "pqrst$"
+	.string "pqrst$"
 
 gUnknown_0862BA4D:: @ 862BA4D
-    .string "uvwxy$"
+	.string "uvwxy$"
 
 gUnknown_0862BA53:: @ 862BA53
-    .string "z    $"
+	.string "z    $"
 
 gUnknown_0862BA59:: @ 862BA59
-    .string "01234$"
+	.string "01234$"
 
 gUnknown_0862BA5F:: @ 862BA5F
-    .string "56789$"
+	.string "56789$"
 
 gUnknown_0862BA65:: @ 862BA65
-    .string ".,!? $"
+	.string ".,!? $"
 
 gUnknown_0862BA6B:: @ 862BA6B
-    .string "-/&… $"
+	.string "-/&… $"
 
-    .string "$$$$$$$$"
+	.string "$$$$$$$$"
 
 gUnknown_0862BA79:: @ 862BA79
-    .string "{EMOJI_MISCHIEVOUS}{EMOJI_HAPPY}{EMOJI_ANGRY}{EMOJI_SURPRISED}{EMOJI_BIGANGER}$"
+	.string "{EMOJI_MISCHIEVOUS}{EMOJI_HAPPY}{EMOJI_ANGRY}{EMOJI_SURPRISED}{EMOJI_BIGANGER}$"
 
 gUnknown_0862BA84:: @ 862BA84
-    .string "{EMOJI_BIGSMILE}{EMOJI_EVIL}{EMOJI_NEUTRAL}{EMOJI_TIRED}{EMOJI_SHOCKED}$"
+	.string "{EMOJI_BIGSMILE}{EMOJI_EVIL}{EMOJI_NEUTRAL}{EMOJI_TIRED}{EMOJI_SHOCKED}$"
 
 gUnknown_0862BA8F:: @ 862BA8F
-    .string "{EMOJI_LEAF}{EMOJI_FIRE}{EMOJI_WATER}{EMOJI_BOLT}{EMOJI_BALL}$"
+	.string "{EMOJI_LEAF}{EMOJI_FIRE}{EMOJI_WATER}{EMOJI_BOLT}{EMOJI_BALL}$"
 
 gUnknown_0862BA9A:: @ 862BA9A
-    .string "♂♀{EMOJI_LEFT_PAREN}{EMOJI_RIGHT_PAREN}{EMOJI_TILDE}$"
+	.string "♂♀{EMOJI_LEFT_PAREN}{EMOJI_RIGHT_PAREN}{EMOJI_TILDE}$"
 
 gUnknown_0862BAA3:: @ 862BAA3
-    .string "{EMOJI_LEFT_EYE}{EMOJI_RIGHT_EYE}{EMOJI_SMALLWHEEL}{EMOJI_SPHERE}{EMOJI_IRRITATED}$"
+	.string "{EMOJI_LEFT_EYE}{EMOJI_RIGHT_EYE}{EMOJI_SMALLWHEEL}{EMOJI_SPHERE}{EMOJI_IRRITATED}$"
 
 gUnknown_0862BAAE:: @ 862BAAE
-    .string "{EMOJI_AT}{EMOJI_BIGWHEEL}{EMOJI_TONGUE}{EMOJI_ACUTE}{EMOJI_GRAVE}$"
+	.string "{EMOJI_AT}{EMOJI_BIGWHEEL}{EMOJI_TONGUE}{EMOJI_ACUTE}{EMOJI_GRAVE}$"
 
 gUnknown_0862BAB9:: @ 862BAB9
-    .string "{EMOJI_RIGHT_FIST}{EMOJI_LEFT_FIST}{EMOJI_TRIANGLE_OUTLINE}{EMOJI_UNION}{EMOJI_GREATER_THAN}$"
+	.string "{EMOJI_RIGHT_FIST}{EMOJI_LEFT_FIST}{EMOJI_TRIANGLE_OUTLINE}{EMOJI_UNION}{EMOJI_GREATER_THAN}$"
 
 gUnknown_0862BAC4:: @ 862BAC4
-    .string "{EMOJI_CIRCLE}{EMOJI_TRIANGLE}{EMOJI_SQUARE}{EMOJI_HEART}{EMOJI_MOON}$"
+	.string "{EMOJI_CIRCLE}{EMOJI_TRIANGLE}{EMOJI_SQUARE}{EMOJI_HEART}{EMOJI_MOON}$"
 
 gUnknown_0862BACF:: @ 862BACF
-    .string "{EMOJI_NOTE}{EMOJI_PLUS}{EMOJI_MINUS}{EMOJI_EQUALS}{EMOJI_PIPE}$"
+	.string "{EMOJI_NOTE}{EMOJI_PLUS}{EMOJI_MINUS}{EMOJI_EQUALS}{EMOJI_PIPE}$"
 
 gUnknown_0862BADA:: @ 862BADA
-    .string "{EMOJI_HIGHBAR}{EMOJI_UNDERSCORE};: $"
+	.string "{EMOJI_HIGHBAR}{EMOJI_UNDERSCORE};: $"

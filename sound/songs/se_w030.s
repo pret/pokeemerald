@@ -26,7 +26,7 @@ se_w030_1:
 	.byte		N01   , Bn5 , v127
 	.byte	W02
 	.byte		VOICE , 18
-	.byte		N01   , Cn4 
+	.byte		N01   , Cn4
 	.byte	W02
 	.byte		VOICE , 36
 	.byte		N06   , Gn5 , v040

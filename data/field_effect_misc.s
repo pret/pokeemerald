@@ -3,25 +3,25 @@
 
 	.section .rodata
 
-    .align 2
+	.align 2
 gSpriteImage_858D978:: @ 858D978
-    .incbin "graphics/unknown/858E588/0.4bpp"
+	.incbin "graphics/unknown/858E588/0.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858D9F8:: @ 858D9F8
-    .incbin "graphics/unknown/858E588/1.4bpp"
+	.incbin "graphics/unknown/858E588/1.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DA78:: @ 858DA78
-    .incbin "graphics/unknown/858E588/2.4bpp"
+	.incbin "graphics/unknown/858E588/2.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DAF8:: @ 858DAF8
-    .incbin "graphics/unknown/858E588/3.4bpp"
+	.incbin "graphics/unknown/858E588/3.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DB78:: @ 858DB78
-    .incbin "graphics/unknown/858E588/4.4bpp"
+	.incbin "graphics/unknown/858E588/4.4bpp"
 
 	.space 32
 
@@ -29,65 +29,65 @@ gSpriteImage_858DB78:: @ 858DB78
 gFieldEffectObjectPalette7:: @ 858DC18
 	.incbin "graphics/event_objects/palettes/field_effect_object_palette_07.gbapal"
 
-    .align 2
+	.align 2
 gSpriteImage_858DC38:: @ 858DC38
-    .incbin "graphics/unknown/858E5D8/0.4bpp"
+	.incbin "graphics/unknown/858E5D8/0.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DCB8:: @ 858DCB8
-    .incbin "graphics/unknown/858E5D8/1.4bpp"
+	.incbin "graphics/unknown/858E5D8/1.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DD38:: @ 858DD38
-    .incbin "graphics/unknown/858E5D8/2.4bpp"
+	.incbin "graphics/unknown/858E5D8/2.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DDB8:: @ 858DDB8
-    .incbin "graphics/unknown/858E5D8/3.4bpp"
+	.incbin "graphics/unknown/858E5D8/3.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DE38:: @ 858DE38
-    .incbin "graphics/unknown/858E5D8/4.4bpp"
+	.incbin "graphics/unknown/858E5D8/4.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DEB8:: @ 858DEB8
-    .incbin "graphics/unknown/858E5B0/0.4bpp"
+	.incbin "graphics/unknown/858E5B0/0.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DF38:: @ 858DF38
-    .incbin "graphics/unknown/858E5B0/1.4bpp"
+	.incbin "graphics/unknown/858E5B0/1.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858DFB8:: @ 858DFB8
-    .incbin "graphics/unknown/858E5B0/2.4bpp"
+	.incbin "graphics/unknown/858E5B0/2.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E038:: @ 858E038
-    .incbin "graphics/unknown/858E5B0/3.4bpp"
+	.incbin "graphics/unknown/858E5B0/3.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E0B8:: @ 858E0B8
-    .incbin "graphics/unknown/858E5B0/4.4bpp"
+	.incbin "graphics/unknown/858E5B0/4.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E138:: @ 858E138
-    .incbin "graphics/unknown/858E5B0/5.4bpp"
+	.incbin "graphics/unknown/858E5B0/5.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette8:: @ 858E1B8
 	.incbin "graphics/event_objects/palettes/field_effect_object_palette_08.gbapal"
 
-    .align 2
+	.align 2
 gSpriteImage_858E1D8:: @ 858E1D8
-    .incbin "graphics/unknown/858E674/0.4bpp"
+	.incbin "graphics/unknown/858E674/0.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E2D8:: @ 858E2D8
-    .incbin "graphics/unknown/858E674/1.4bpp"
+	.incbin "graphics/unknown/858E674/1.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E3D8:: @ 858E3D8
-    .incbin "graphics/unknown/858E674/2.4bpp"
+	.incbin "graphics/unknown/858E674/2.4bpp"
 
 	.align 2
 gOamData_858E4D8:: @ 858E4D8
@@ -204,41 +204,40 @@ gUnknown_0858E68C:: @ 858E68C
 gFieldEffectObjectPaletteInfo9:: @ 858E6A4
 	obj_pal gTilesetPalettes_SecretBase + 5 * 0x20, 0x100E
 
-    .align 2
+	.align 2
 gSpriteImage_858E6AC:: @ 858E6AC
-    .incbin "graphics/unknown/858E84C/0.4bpp"
+	.incbin "graphics/unknown/858E84C/0.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E72C:: @ 858E72C
-    .incbin "graphics/unknown/858E84C/1.4bpp"
+	.incbin "graphics/unknown/858E84C/1.4bpp"
 
-    .align 2
+	.align 2
 gSpriteImage_858E7AC:: @ 858E7AC
-    .incbin "graphics/unknown/858E84C/2.4bpp"
+	.incbin "graphics/unknown/858E84C/2.4bpp"
 
-    .align 2
+	.align 2
 gUnknown_0858E82C:: @ 858E82C
-    .incbin "graphics/unknown/unknown_58E82C.gbapal"
+	.incbin "graphics/unknown/unknown_58E82C.gbapal"
 
-    .align 2
+	.align 2
 gUnknown_0858E84C:: @ 858E84C
 	obj_frame_tiles gSpriteImage_858E6AC, 0x0080
 	obj_frame_tiles gSpriteImage_858E72C, 0x0080
 	obj_frame_tiles gSpriteImage_858E7AC, 0x0080
 
-    .align 2
+	.align 2
 gUnknown_0858E864:: @ 858E864
 	obj_pal gUnknown_0858E82C, 0x1000
 
-    .align 2
+	.align 2
 gSpriteAnim_858E86C:: @ 858E86C
 	.2byte 0x0000, 0x001e, 0x0001, 0x001e, 0x0002, 0x001e, 0xfffe, 0x0000
 
-    .align 2
+	.align 2
 gSpriteAnimTable_858E87C:: @ 858E87C
 	.4byte gSpriteAnim_858E86C
 
-    .align 2
+	.align 2
 gUnknown_0858E880:: @ 858E880
 	spr_template 0xffff, 0x1000, gEventObjectBaseOam_32x8, gSpriteAnimTable_858E87C, gUnknown_0858E84C, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-

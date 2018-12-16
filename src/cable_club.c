@@ -150,7 +150,7 @@ static bool32 sub_80B24F8(u8 taskId)
 static bool32 sub_80B252C(u8 taskId)
 {
     if ((gMain.newKeys & B_BUTTON)
-     && IsLinkConnectionEstablished() == FALSE)
+    && IsLinkConnectionEstablished() == FALSE)
     {
         gLinkType = 0;
         gTasks[taskId].func = sub_80B2CEC;
@@ -216,8 +216,8 @@ static void sub_80B2688(u8 taskId)
     u32 playerCount = GetLinkPlayerCount_2();
 
     if (sub_80B252C(taskId) == TRUE
-     || sub_80B2578(taskId) == TRUE
-     || playerCount < 2)
+    || sub_80B2578(taskId) == TRUE
+    || playerCount < 2)
         return;
 
     SetSuppressLinkErrorMessage(TRUE);
@@ -239,8 +239,8 @@ static void sub_80B2688(u8 taskId)
 static void sub_80B270C(u8 taskId)
 {
     if (sub_80B252C(taskId) == TRUE
-     || sub_80B25CC(taskId) == TRUE
-     || sub_80B24F8(taskId) == TRUE)
+    || sub_80B25CC(taskId) == TRUE
+    || sub_80B24F8(taskId) == TRUE)
         return;
 
     if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
@@ -256,8 +256,8 @@ static void sub_80B275C(u8 taskId)
     s32 linkPlayerCount = GetLinkPlayerCount_2();
 
     if (sub_80B252C(taskId) == TRUE
-     || sub_80B25CC(taskId) == TRUE
-     || sub_80B24F8(taskId) == TRUE)
+    || sub_80B25CC(taskId) == TRUE
+    || sub_80B24F8(taskId) == TRUE)
         return;
 
     sub_80B243C(taskId, linkPlayerCount);
@@ -278,8 +278,8 @@ static void sub_80B275C(u8 taskId)
 static void sub_80B2804(u8 taskId)
 {
     if (sub_80B252C(taskId) == TRUE
-     || sub_80B25CC(taskId) == TRUE
-     || sub_80B24F8(taskId) == TRUE)
+    || sub_80B25CC(taskId) == TRUE
+    || sub_80B24F8(taskId) == TRUE)
         return;
 
     if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
@@ -309,7 +309,7 @@ static void sub_80B28A8(u8 taskId)
     u8 local2 = gTasks[taskId].data[2];
 
     if (sub_80B24F8(taskId) == TRUE
-     || sub_80B2D6C(taskId) == TRUE)
+    || sub_80B2D6C(taskId) == TRUE)
         return;
 
     if (GetLinkPlayerCount_2() != sub_800AA48())
@@ -333,7 +333,7 @@ static void sub_80B2918(u8 taskId)
     local2 = gTasks[taskId].data[2];
 
     if (sub_80B252C(taskId) == TRUE
-     || sub_80B24F8(taskId) == TRUE)
+    || sub_80B24F8(taskId) == TRUE)
         return;
 
     gSpecialVar_Result = sub_80B2478(local1, local2);
@@ -776,7 +776,7 @@ static void sub_80B31E8(u8 taskId)
 static void sub_80B3220(u8 taskId)
 {
     if (gReceivedRemoteLinkPlayers == TRUE
-     && IsLinkPlayerDataExchangeComplete() == TRUE)
+    && IsLinkPlayerDataExchangeComplete() == TRUE)
     {
         sub_800AB18();
         sub_8009F18();

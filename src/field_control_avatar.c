@@ -222,12 +222,12 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
 
     // Don't play interaction sound for certain scripts.
     if (script != EventScript_PlayerPCMale
-     && script != EventScript_PlayerPCFemale
-     && script != EventScript_SecretBasePC
-     && script != EventScript_RecordMixingSecretBasePC
-     && script != EventScript_SecretPower1
-     && script != EventScript_SecretPower2
-     && script != EventScript_PC)
+    && script != EventScript_PlayerPCFemale
+    && script != EventScript_SecretBasePC
+    && script != EventScript_RecordMixingSecretBasePC
+    && script != EventScript_SecretPower1
+    && script != EventScript_SecretPower2
+    && script != EventScript_PC)
         PlaySE(SE_SELECT);
 
     ScriptContext1_SetupScript(script);
@@ -751,15 +751,15 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
 static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
 {
     if (MetatileBehavior_IsWarpDoor(metatileBehavior) != TRUE
-     && MetatileBehavior_IsLadder(metatileBehavior) != TRUE
-     && MetatileBehavior_IsEscalator(metatileBehavior) != TRUE
-     && MetatileBehavior_IsNonAnimDoor(metatileBehavior) != TRUE
-     && MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
-     && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsWarpOrBridge(metatileBehavior) != TRUE)
+    && MetatileBehavior_IsLadder(metatileBehavior) != TRUE
+    && MetatileBehavior_IsEscalator(metatileBehavior) != TRUE
+    && MetatileBehavior_IsNonAnimDoor(metatileBehavior) != TRUE
+    && MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) != TRUE
+    && MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) != TRUE
+    && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
+    && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
+    && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
+    && MetatileBehavior_IsWarpOrBridge(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }

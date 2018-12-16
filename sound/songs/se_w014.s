@@ -29,10 +29,10 @@ se_w014_1:
 	.byte		N01   , Fs5 , v088
 	.byte	W01
 	.byte		PAN   , c_v+5
-	.byte		N01   , Gn5 
+	.byte		N01   , Gn5
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Fs5 
+	.byte		N01   , Fs5
 	.byte	W01
 	.byte		N14   , Gn5 , v100
 	.byte	W02
@@ -94,7 +94,7 @@ se_w014_1:
 	.byte		VOL   , 100*se_w014_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N10   
+	.byte		N10
 	.byte	W01
 	.byte		BEND  , c_v+3
 	.byte	W01
@@ -123,7 +123,7 @@ se_w014_1:
 	.byte		VOL   , 100*se_w014_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N16   
+	.byte		N16
 	.byte	W01
 	.byte		BEND  , c_v+3
 	.byte	W01
@@ -177,7 +177,7 @@ se_w014_2:
 	.byte		VOL   , 100*se_w014_mvl/mxv
 	.byte		N04   , Cn3 , v040
 	.byte	W04
-	.byte		N14   , Gs4 
+	.byte		N14   , Gs4
 	.byte	W08
 	.byte		VOL   , 89*se_w014_mvl/mxv
 	.byte	W01

@@ -6,12 +6,12 @@
 #define EXP_MEDIUM_FAST(n)(CUBE(n)) // (n)^3
 #define EXP_MEDIUM_SLOW(n)((6 * CUBE(n)) / 5 - (15 * SQUARE(n)) + (100 * n) - 140)    // (6 * (n)^3) / 5 - (15 * (n)^2) + (100 * n) - 140
 #define EXP_ERRATIC(n)                                      \
-     (n <= 50) ? ((100 - n) * CUBE(n) /  50)                \
+    (n <= 50) ? ((100 - n) * CUBE(n) /  50)                \
     :(n <= 68) ? ((150 - n) * CUBE(n) / 100)                \
     :(n <= 98) ? (((1911 - 10 * n) / 3) * CUBE(n) / 500)    \
     :            ((160 - n) * CUBE(n) / 100)
 #define EXP_FLUCTUATING(n)                                  \
-     (n <= 15) ? (((n + 1) / 3 + 24) * CUBE(n) / 50)        \
+    (n <= 15) ? (((n + 1) / 3 + 24) * CUBE(n) / 50)        \
     :(n <= 36) ? ((n + 14)           * CUBE(n) / 50)        \
     :            (((n / 2) + 32)     * CUBE(n) / 50)
 

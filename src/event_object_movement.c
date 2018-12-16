@@ -1799,10 +1799,10 @@ static void RemoveEventObjectIfOutsideView(struct EventObject *eventObject)
     s16 bottom = gSaveBlock1Ptr->pos.y + 16;
 
     if (eventObject->currentCoords.x >= left && eventObject->currentCoords.x <= right
-     && eventObject->currentCoords.y >= top && eventObject->currentCoords.y <= bottom)
+    && eventObject->currentCoords.y >= top && eventObject->currentCoords.y <= bottom)
         return;
     if (eventObject->initialCoords.x >= left && eventObject->initialCoords.x <= right
-     && eventObject->initialCoords.y >= top && eventObject->initialCoords.y <= bottom)
+    && eventObject->initialCoords.y >= top && eventObject->initialCoords.y <= bottom)
         return;
     RemoveEventObject(eventObject);
 }
@@ -7723,7 +7723,7 @@ static void GetGroundEffectFlags_Tracks(struct EventObject *eventObj, u32 *flags
         *flags |= GROUND_EFFECT_FLAG_DEEP_SAND;
     }
     else if (MetatileBehavior_IsSandOrDeepSand(eventObj->previousMetatileBehavior)
-             || MetatileBehavior_IsFootprints(eventObj->previousMetatileBehavior))
+            || MetatileBehavior_IsFootprints(eventObj->previousMetatileBehavior))
     {
         *flags |= GROUND_EFFECT_FLAG_SAND;
     }
@@ -7750,7 +7750,7 @@ static void GetGroundEffectFlags_SandHeap(struct EventObject *eventObj, u32 *fla
 static void GetGroundEffectFlags_ShallowFlowingWater(struct EventObject *eventObj, u32 *flags)
 {
     if ((MetatileBehavior_IsShallowFlowingWater(eventObj->currentMetatileBehavior)
-         && MetatileBehavior_IsShallowFlowingWater(eventObj->previousMetatileBehavior))
+        && MetatileBehavior_IsShallowFlowingWater(eventObj->previousMetatileBehavior))
         || (MetatileBehavior_IsPacifidlogLog(eventObj->currentMetatileBehavior)
             && MetatileBehavior_IsPacifidlogLog(eventObj->previousMetatileBehavior)))
     {
@@ -8316,10 +8316,10 @@ void filters_out_some_ground_effects(struct EventObject *eventObj, u32 *flags)
         eventObj->inShallowFlowingWater = 0;
         eventObj->inHotSprings = 0;
         *flags &= ~(GROUND_EFFECT_FLAG_HOT_SPRINGS
-                  | GROUND_EFFECT_FLAG_SHORT_GRASS
-                  | GROUND_EFFECT_FLAG_SAND_PILE
-                  | GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER
-                  | GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE);
+                | GROUND_EFFECT_FLAG_SHORT_GRASS
+                | GROUND_EFFECT_FLAG_SAND_PILE
+                | GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER
+                | GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE);
     }
 }
 
@@ -8583,13 +8583,13 @@ static const s8 gUnknown_0850E772[] = {
 };
 
 static const s8 gUnknown_0850E7BA[] = {
-     0,  0,  1,  0,  0,  1,  0,  0,
-     1,  0,  1,  1,  0,  1,  1,  0,
-     1,  1,  0,  1,  1,  0,  1,  1,
-     0,  0,  1,  0,  0,  1,  0,  0,
-     1,  0,  0,  0,  0,  0,  0,  0,
-     0,  0,  0,  0,  0,  0,  0,  0,
-     0,  0, -1,  0,  0, -1,  0,  0,
+    0,  0,  1,  0,  0,  1,  0,  0,
+    1,  0,  1,  1,  0,  1,  1,  0,
+    1,  1,  0,  1,  1,  0,  1,  1,
+    0,  0,  1,  0,  0,  1,  0,  0,
+    1,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0, -1,  0,  0, -1,  0,  0,
     -1,  0, -1, -1,  0, -1, -1,  0,
     -1, -1, -1, -1, -1, -1, -1, -2,
 };

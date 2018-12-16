@@ -106,7 +106,7 @@ const u8 *const gContestRankTextPointers[] =
     gContestLink,
 };
 
-const struct BgTemplate gUnknown_085B07E8[] = 
+const struct BgTemplate gUnknown_085B07E8[] =
 {
     {
         .bg = 1,
@@ -119,7 +119,7 @@ const struct BgTemplate gUnknown_085B07E8[] =
     },
 };
 
-const struct WindowTemplate gUnknown_085B07EC = 
+const struct WindowTemplate gUnknown_085B07EC =
 {
     .bg = 1,
     .tilemapLeft = 2,
@@ -173,9 +173,9 @@ void sub_812FDA8(int contestWinner)
     // probably fakematching
     u8 *ptr1 = &gUnknown_02039F5D;
     u8 *ptr2 = &gUnknown_02039F5C;
-	gUnknown_02039F3C = gSaveBlock1Ptr->contestWinners[contestWinner - 1];
-	*ptr1 = contestWinner - 1;
-	*ptr2 = 0;
+    gUnknown_02039F3C = gSaveBlock1Ptr->contestWinners[contestWinner - 1];
+    *ptr1 = contestWinner - 1;
+    *ptr2 = 0;
 }
 
 void CB2_ContestPainting(void)

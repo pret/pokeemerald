@@ -86,7 +86,7 @@ u8 SiiRtcProbe()
     errorCode = 0;
 
     if ((rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == SIIRTCINFO_POWER
-     || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
+    || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
     {
         // The RTC is in 12-hour mode. Reset it and switch to 24-hour mode.
 
@@ -191,9 +191,9 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 5;
 
     statusData = STATUS_24HOUR
-               | ((rtc->status & SIIRTCINFO_INTAE) << 3)
-               | ((rtc->status & SIIRTCINFO_INTME) << 2)
-               | ((rtc->status & SIIRTCINFO_INTFE) << 1);
+                | ((rtc->status & SIIRTCINFO_INTAE) << 3)
+                | ((rtc->status & SIIRTCINFO_INTME) << 2)
+                | ((rtc->status & SIIRTCINFO_INTFE) << 1);
 
     GPIO_PORT_DIRECTION = 7;
 

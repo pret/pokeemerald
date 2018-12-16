@@ -63,8 +63,8 @@ output_burst:
         }
 
         if (mp->server_type == MULTIBOOT_SERVER_TYPE_QUICK
-         && mp->probe_count > 0xe1
-         && MultiBootCheckComplete(mp) == 0)
+        && mp->probe_count > 0xe1
+        && MultiBootCheckComplete(mp) == 0)
         {
             MultiBootWaitSendDone();
             goto output_burst;
@@ -183,7 +183,7 @@ output_burst:
             if (mp->probe_target_bit & (1 << i))
             {
                 if ((j >> 8) != MULTIBOOT_CLIENT_INFO
-                 && (j >> 8) != MULTIBOOT_CLIENT_DLREADY)
+                && (j >> 8) != MULTIBOOT_CLIENT_DLREADY)
                 {
                     MultiBootInit(mp);
                     return MULTIBOOT_ERROR_NO_DLREADY;
@@ -243,7 +243,7 @@ output_burst:
             {
                 j = *(vu16 *)(REG_ADDR_SIOMULTI0 + i * 2);
                 if ((j >> 8) != (MULTIBOOT_MASTER_START_PROBE + 1 - (mp->probe_count >> 1))
-                 || ((j & 0xff) != (1 << i)))
+                || ((j & 0xff) != (1 << i)))
                 {
                     mp->probe_target_bit ^= 1 << i;
                 }
@@ -321,8 +321,8 @@ void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, int length,
     int i = 0;
 
     if (mp->probe_count != 0
-     || mp->client_bit == 0
-     || mp->check_wait != 0)
+    || mp->client_bit == 0
+    || mp->check_wait != 0)
     {
         MultiBootInit(mp);
         return;

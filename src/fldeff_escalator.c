@@ -13,7 +13,7 @@ void sub_80E12E8(u8 taskId, const s16 *list, u16 c)
     s16 r4 = gTasks[taskId].data[1];
     s16 y;
     s16 x;
-    
+
     if (gTasks[taskId].data[2] == 0)
     {
         for (y = 0; y < 3; y++)
@@ -21,7 +21,7 @@ void sub_80E12E8(u8 taskId, const s16 *list, u16 c)
             for (x = 0; x < 3; x++)
             {
                 s16 metatileId = MapGridGetMetatileIdAt(r5 + x, r3 + y);
-                
+
                 if (list[r4] == metatileId)
                 {
                     if (r4 != 2)
@@ -39,7 +39,7 @@ void sub_80E12E8(u8 taskId, const s16 *list, u16 c)
             for (x = 0; x < 3; x++)
             {
                 s16 metatileId = MapGridGetMetatileIdAt(r5 + x, r3 + y);
-                
+
                 if (list[2 - r4] == metatileId)
                 {
                     if (r4 != 2)

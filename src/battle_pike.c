@@ -1129,8 +1129,8 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
         return FALSE;
 
     SetMonData(&gEnemyParty[0],
-               MON_DATA_EXP,
-               &gExperienceTables[gBaseStats[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
+                MON_DATA_EXP,
+                &gExperienceTables[gBaseStats[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
 
     if (gBaseStats[wildMons[headerId][pikeMonId].species].ability2)
         abilityBit = Random() % 2;
@@ -1505,8 +1505,8 @@ static u8 sub_81A8590(u8 arg0)
         if (wins == gUnknown_086125DC[var][0] - gUnknown_086125DC[var][3])
             ret = 3;
         else if (wins == gUnknown_086125DC[var][1] - gUnknown_086125DC[var][3]
-                 || (wins > gUnknown_086125DC[var][1]
-                     && (wins - gUnknown_086125DC[var][1] + gUnknown_086125DC[var][3]) % gUnknown_086125DC[var][2] == 0))
+                || (wins > gUnknown_086125DC[var][1]
+                    && (wins - gUnknown_086125DC[var][1] + gUnknown_086125DC[var][3]) % gUnknown_086125DC[var][2] == 0))
             ret = 4;
         break;
     }
@@ -1578,7 +1578,7 @@ static void sub_81A8794(void)
     for (i = 0; i < 3; i++)
     {
         s32 heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
-                                  MON_DATA_HELD_ITEM);
+                                MON_DATA_HELD_ITEM);
         gSaveBlock2Ptr->frontier.field_E12[i] = heldItem;
     }
 }
@@ -1590,8 +1590,8 @@ static void sub_81A87E8(void)
     for (i = 0; i < 3; i++)
     {
         SetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
-                   MON_DATA_HELD_ITEM,
-                   &gSaveBlock2Ptr->frontier.field_E12[i]);
+                    MON_DATA_HELD_ITEM,
+                    &gSaveBlock2Ptr->frontier.field_E12[i]);
     }
 }
 

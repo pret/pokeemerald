@@ -77,12 +77,12 @@ int ExtractData(unsigned char *buffer, int offset, int size)
         return buffer[offset];
     case 2:
         return (buffer[offset + 1] << 8)
-             | buffer[offset];
+            | buffer[offset];
     case 4:
         return (buffer[offset + 3] << 24)
-             | (buffer[offset + 2] << 16)
-             | (buffer[offset + 1] << 8)
-             | buffer[offset];
+            | (buffer[offset + 2] << 16)
+            | (buffer[offset + 1] << 8)
+            | buffer[offset];
     default:
         FATAL_ERROR("Invalid size passed to ExtractData.\n");
     }

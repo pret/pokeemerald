@@ -25,7 +25,7 @@ se_w043_1:
 	.byte		BEND  , c_v+0
 	.byte		N02   , En3 , v124
 	.byte	W02
-	.byte		        As3 
+	.byte		        As3
 	.byte	W04
 	.byte	W01
 	.byte		N03   , En3 , v092
@@ -36,7 +36,7 @@ se_w043_1:
 	.byte	W02
 	.byte	W01
 	.byte		PAN   , c_v+6
-	.byte		N02   , As3 
+	.byte		N02   , As3
 	.byte	W05
 	.byte		PAN   , c_v+0
 	.byte		N03   , En3 , v052
@@ -46,7 +46,7 @@ se_w043_1:
 	.byte		N02   , En3 , v056
 	.byte	W03
 	.byte		PAN   , c_v+10
-	.byte		N02   , As3 
+	.byte		N02   , As3
 	.byte	W04
 	.byte		PAN   , c_v+0
 	.byte		N03   , En3 , v032
@@ -57,7 +57,7 @@ se_w043_1:
 	.byte		N02   , En3 , v044
 	.byte	W02
 	.byte		PAN   , c_v+16
-	.byte		N02   , As3 
+	.byte		N02   , As3
 	.byte	W03
 	.byte	W02
 	.byte		PAN   , c_v+0
@@ -73,10 +73,10 @@ se_w043_2:
 	.byte		VOL   , 110*se_w043_mvl/mxv
 	.byte		N01   , Cn3 , v040
 	.byte	W03
-	.byte		        En3 
+	.byte		        En3
 	.byte	W03
 	.byte	W01
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W05
 	.byte	W06
 	.byte	W06

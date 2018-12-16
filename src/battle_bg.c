@@ -146,7 +146,7 @@ const struct BgTemplate gBattleBgTemplates[] =
         .priority = 1,
         .baseTile = 0
     },
-   {
+    {
         .bg = 3,
         .charBaseIndex = 2,
         .mapBaseIndex = 26,

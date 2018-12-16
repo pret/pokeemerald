@@ -4781,7 +4781,7 @@ void sub_8011BA4(void)
 
 void sub_8011BD0(void)
 {
-     if (FuncIsActiveTask(nullsub_89) == TRUE)
+    if (FuncIsActiveTask(nullsub_89) == TRUE)
         DestroyTask(gUnknown_03005000.unk_66);
 }
 
@@ -4989,8 +4989,8 @@ bool32 sub_801200C(s16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
                 return TRUE;
         }
         else if (structPtr->species != structPtr2->species
-                 || structPtr->unk_0b_1 != structPtr2->unk_0b_1
-                 || structPtr->type != structPtr2->type)
+                || structPtr->unk_0b_1 != structPtr2->unk_0b_1
+                || structPtr->type != structPtr2->type)
         {
             return TRUE;
         }

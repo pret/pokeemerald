@@ -215,7 +215,7 @@ bool8 sub_8145354(struct CryRelatedStruct *arg0, u8 windowId)
     case 1:
         for (i = 0; i < sDexCryScreen->unk16 * 8; i++)
             sub_81456A8(i, 0);
-        
+
         gDexCryScreenState++;
         break;
     case 2:
@@ -253,7 +253,7 @@ void sub_814545C(u8 windowId)
         sub_814560C();
         return;
     }
-    
+
     if (sDexCryScreen->unk10 == 1)
     {
         sub_81455A8();

@@ -3,8 +3,8 @@
 
 enum DecorPerm {
     /*
-     * The nomenclature here describes collision and placement permissions, in that order.
-     */
+    * The nomenclature here describes collision and placement permissions, in that order.
+    */
     DECORPERM_SOLID_FLOOR,
     DECORPERM_PASS_FLOOR,
     DECORPERM_BEHIND_FLOOR,
@@ -14,8 +14,8 @@ enum DecorPerm {
 
 enum DecorShape {
     /*
-     * Width-x-height
-     */
+    * Width-x-height
+    */
     DECORSHAPE_1x1,
     DECORSHAPE_2x1,
     DECORSHAPE_3x1, // unused
@@ -30,8 +30,8 @@ enum DecorShape {
 
 enum DecorCat {
     /*
-     * In which category you can find the decoration in the PC.
-     */
+    * In which category you can find the decoration in the PC.
+    */
     /*0*/ DECORCAT_DESK,
     /*1*/ DECORCAT_CHAIR,
     /*2*/ DECORCAT_PLANT,

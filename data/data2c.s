@@ -26,7 +26,7 @@ gUnknown_0831AC88:: @ 831AC88
 
 gText_ShedinjaJapaneseName:: @ 831ACA0
 	.string "ヌケニン$" @ Nukenin
-    
+
 	.align 2
 gUnknown_0831ACA8:: @ 831ACA8
 	.2byte 0x0100
