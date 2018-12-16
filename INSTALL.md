@@ -6,32 +6,37 @@ Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
 Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
 
-Then get the compiler from https://github.com/pret/agbcc and run the following commands.
+Then get the compiler from https://github.com/pikalaxalt/agbcc/tree/new_layout_with_libs and run the following commands.
 
-```
-./build.sh
-./install.sh PATH_OF_POKEEMERALD_DIRECTORY
+```bash
+make
+make install prefix=PATH_OF_POKEEMERALD_DIRECTORY
 ```
 
 Then in the pokeemerald directory, build the tools.
 
-```
+```bash
 ./build_tools.sh
 ```
 
 Finally, build the rom.
 
-```
+```bash
 make
+```
+
+To invoke the devkitARM compiler (`$DEVKITARM/bin/arm-none-eabi-gcc`), run
+```bash
+make modern
 ```
 
 # Windows
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Then get the compiled tools from https://github.com/pret/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeemerald directory.
+In the MSYS environment provided with devkitARM, use pacman to install the required dependencies.  TODO: Compile the list of required packages.
 
-You can then build pokeemerald using `make` in the MSYS environment provided with devkitARM.
+Then, follow the instructions for compiling on Linux.
 
 # Mac
 
@@ -42,7 +47,7 @@ Download a [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v
 Run the following commands in Terminal:
 
 
-```
+```bash
 xcode-select --install
 
 sudo dkp-pacman -S devkitARM 
@@ -54,11 +59,11 @@ echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
 
 git clone https://github.com/pret/pokeemerald
-git clone https://github.com/pret/agbcc
+git clone https://github.com/pikalaxalt/agbcc -b new_layout_with_libs
 
 cd agbcc/
-./build.sh
-./install.sh ../pokeemerald 
+make
+make install prefix=../pokeemerald 
 
 cd ../pokeemerald
 ./build_tools.sh
@@ -78,7 +83,7 @@ By default `make` only runs a single thread. You can tell `make` to run on multi
 
 The optimal value for `-j` is the number of logical cores on your machine. You can run `nproc` to see the exact number.
 
-```
+```bash
 $ nproc
 8
 ```
