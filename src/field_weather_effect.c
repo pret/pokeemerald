@@ -535,7 +535,7 @@ void sub_807E6F0(struct Sprite *sprite, u16 b)
     }
 }
 
-extern const struct SpriteSheet sRainSpriteSheet;  // defined below
+static const struct SpriteSheet sRainSpriteSheet;  // defined below
 
 void LoadRainSpriteSheet(void)
 {

@@ -68,8 +68,6 @@ extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
 extern u8 gSelectedOrderFromParty[];
 
-extern const struct SpriteTemplate gUnknown_0860CFA8;
-
 // text
 extern const u8 gTrainerClassNames[][0xD];
 
