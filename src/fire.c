@@ -890,8 +890,6 @@ static void sub_81094D0(u8 taskId) // animate Move_ERUPTION?
             DestroyAnimVisualTask(taskId);
 
         break;
-    default:
-        break;
     }
 }
 

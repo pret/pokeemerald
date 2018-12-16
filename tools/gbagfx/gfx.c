@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 #include "global.h"
 #include "gfx.h"
 #include "util.h"
@@ -17,6 +18,140 @@
 #define UPCONVERT_BIT_DEPTH(x) (((x) * 255) / 31)
 
 #define DOWNCONVERT_BIT_DEPTH(x) ((x) / 8)
+
+static inline void swap_bytes(unsigned char * orig, unsigned char * dest) {
+	unsigned char tmp = *orig;
+	*orig = *dest;
+	*dest = tmp;
+}
+
+static inline unsigned char swap_nybbles(unsigned char orig)
+{
+	return (orig >> 4) | (orig << 4);
+}
+
+static inline void swap_bytes_nybswap(unsigned char * orig, unsigned char * dest) {
+	unsigned char tmp = swap_nybbles(*orig);
+	*orig = swap_nybbles(*dest);
+	*dest = tmp;
+}
+
+static inline unsigned char reverse_bits(unsigned char orig) {
+	unsigned char dest = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		dest <<= 1;
+		dest |= orig & 1;
+		orig >>= 1;
+	}
+	return dest;
+}
+
+static void vflip(unsigned char * tile, int bitDepth) {
+	for (int x = 0; x < bitDepth; x++)
+	{
+		unsigned char * col = tile + x;
+		swap_bytes(col + 0 * bitDepth, col + 7 * bitDepth);
+		swap_bytes(col + 1 * bitDepth, col + 6 * bitDepth);
+		swap_bytes(col + 2 * bitDepth, col + 5 * bitDepth);
+		swap_bytes(col + 3 * bitDepth, col + 4 * bitDepth);
+	}
+}
+
+static void hflip(unsigned char * tile, int bitDepth) {
+	for (int y = 0; y < 8; y++)
+	{
+		unsigned char * row = tile + y * bitDepth;
+		switch (bitDepth)
+		{
+			case 1:
+				*row = reverse_bits(*row);
+				break;
+			case 4:
+				swap_bytes_nybswap(row + 0, row + 3);
+				swap_bytes_nybswap(row + 1, row + 2);
+				break;
+			case 8:
+				swap_bytes(row +  0, row + 56);
+				swap_bytes(row +  8, row + 48);
+				swap_bytes(row + 16, row + 40);
+				swap_bytes(row + 24, row + 32);
+				break;
+		}
+	}
+}
+
+static unsigned char * ApplyTilemap(struct Image *image, unsigned char * buffer, int bitDepth)
+{
+	int tileSize = bitDepth * 8;
+	unsigned char * tiles = calloc(image->tileMap.numTiles, tileSize);
+	int i;
+	struct Tile tileInfo;
+
+	for (i = 0; i < image->tileMap.numTiles; i++) {
+		tileInfo = image->tileMap.data[i];
+		unsigned char * tile = tiles + i * tileSize;
+		memcpy(tile, buffer + tileInfo.index * tileSize, tileSize);
+		if (tileInfo.xflip)
+			hflip(tile, bitDepth);
+		if (tileInfo.yflip)
+			vflip(tile, bitDepth);
+	}
+	free(buffer);
+	return tiles;
+}
+
+static unsigned char * BuildTilemap(struct Image *image, unsigned char * buffer, int * bufferSize)
+{
+	int tileSize = image->bitDepth * 8;
+	unsigned char * outputPixels = calloc(1024, tileSize);
+	int nTilesIn = image->height * image->width / 64;
+	image->tileMap.data = calloc(nTilesIn, sizeof(struct Tilemap));
+	image->tileMap.numTiles = nTilesIn;
+	int nTilesOut = 0;
+	unsigned char curTile1[tileSize];
+	unsigned char curTile2[tileSize];
+
+	for (int i = 0; i < nTilesIn; i++) {
+		bool xflip = false;
+		bool yflip = false;
+		int j;
+		memcpy(curTile1, buffer + i * tileSize, tileSize);
+
+		for (j = 0; j < nTilesOut; j++) {
+			memcpy(curTile2, outputPixels + j * tileSize, tileSize);
+			if (memcmp(curTile1, curTile2, tileSize) == 0)
+				break;
+			xflip = true;
+			hflip(curTile2, image->bitDepth);
+			if (memcmp(curTile1, curTile2, tileSize) == 0)
+				break;
+			yflip = true;
+			vflip(curTile2, image->bitDepth);
+			if (memcmp(curTile1, curTile2, tileSize) == 0)
+				break;
+			xflip = false;
+			hflip(curTile2, image->bitDepth);
+			if (memcmp(curTile1, curTile2, tileSize) == 0)
+				break;
+			yflip = false;
+		}
+		image->tileMap.data[i].index = j;
+		image->tileMap.data[i].xflip = xflip;
+		image->tileMap.data[i].yflip = yflip;
+		image->tileMap.data[i].palno = 0;
+		if (j >= nTilesOut) {
+			if (nTilesOut >= 1024)
+				FATAL_ERROR("Cannot reduce image to 1024 or fewer tiles.\n");
+			memcpy(outputPixels + nTilesOut * tileSize, curTile1, tileSize);
+			nTilesOut++;
+		}
+	}
+
+	free(buffer);
+	*bufferSize = nTilesOut * tileSize;
+	return outputPixels;
+}
 
 static void AdvanceMetatilePosition(int *subTileX, int *subTileY, int *metatileX, int *metatileY, int metatilesWide, int metatileWidth, int metatileHeight)
 {
@@ -210,15 +345,21 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
 
-	int numTiles = fileSize / tileSize;
+	int numTiles;
+	if (image->hasTilemap) {
+		buffer = ApplyTilemap(image, buffer, bitDepth);
+		numTiles = image->tileMap.numTiles;
+	}
+	else
+		numTiles = fileSize / tileSize;
 
 	int tilesHeight = (numTiles + tilesWidth - 1) / tilesWidth;
 
 	if (tilesWidth % metatileWidth != 0)
-		FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)", tilesWidth, metatileWidth);
+		FATAL_ERROR("The width in tiles (%d) isn't a multiple of the specified metatile width (%d)\n", tilesWidth, metatileWidth);
 
 	if (tilesHeight % metatileHeight != 0)
-		FATAL_ERROR("The height in tiles (%d) isn't a multiple of the specified metatile height (%d)", tilesHeight, metatileHeight);
+		FATAL_ERROR("The height in tiles (%d) isn't a multiple of the specified metatile height (%d)\n", tilesHeight, metatileHeight);
 
 	image->width = tilesWidth * 8;
 	image->height = tilesHeight * 8;
@@ -291,6 +432,9 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 		break;
 	}
 
+	if (image->hasTilemap)
+		buffer = BuildTilemap(image, buffer, &bufferSize);
+
 	WriteWholeFile(path, buffer, bufferSize);
 
 	free(buffer);
@@ -300,6 +444,11 @@ void FreeImage(struct Image *image)
 {
 	free(image->pixels);
 	image->pixels = NULL;
+	if (image->hasTilemap && image->tileMap.data != NULL) {
+		free(image->tileMap.data);
+		image->tileMap.data = NULL;
+		image->tileMap.numTiles = 0;
+	}
 }
 
 void ReadGbaPalette(char *path, struct Palette *palette)
@@ -338,6 +487,48 @@ void WriteGbaPalette(char *path, struct Palette *palette)
 
 		fputc(paletteEntry & 0xFF, fp);
 		fputc(paletteEntry >> 8, fp);
+	}
+
+	fclose(fp);
+}
+
+void ReadGbaTilemap(char *path, struct Tilemap *tileMap)
+{
+	int fileSize;
+	unsigned char *data = ReadWholeFile(path, &fileSize);
+
+	if (fileSize % 2 != 0)
+		FATAL_ERROR("The file size (%d) is not a multiple of 2.\n", fileSize);
+
+	tileMap->numTiles = fileSize / 2;
+	tileMap->data = malloc(tileMap->numTiles * sizeof(struct Tile));
+
+	for (int i = 0; i < tileMap->numTiles; i++)
+	{
+		uint16_t raw = data[2 * i + 0] | (data[2 * i + 1] << 8);
+		tileMap->data[i].index = raw & 0x3FF;
+		tileMap->data[i].xflip = raw & 0x400 ? 1 : 0;
+		tileMap->data[i].yflip = raw & 0x800 ? 1 : 0;
+		tileMap->data[i].palno = raw >> 12;
+	}
+
+	free(data);
+}
+
+void WriteGbaTilemap(char *path, struct Tilemap *tileMap)
+{
+	FILE *fp = fopen(path, "wb");
+
+	if (fp == NULL)
+		FATAL_ERROR("Failed to open \"%s\" for writing.\n", path);
+
+	for (int i = 0; i < tileMap->numTiles; i++) {
+		uint16_t raw =    tileMap->data[i].index
+			           | (tileMap->data[i].xflip << 10)
+			           | (tileMap->data[i].yflip << 11)
+			           | (tileMap->data[i].palno << 12);
+		fputc(raw & 0xFF, fp);
+		fputc(raw >> 8, fp);
 	}
 
 	fclose(fp);

@@ -17,6 +17,18 @@ struct Palette {
 	int numColors;
 };
 
+struct __attribute__((packed)) Tile {
+	unsigned short index:10;
+	unsigned short xflip:1;
+	unsigned short yflip:1;
+	unsigned short palno:4;
+};
+
+struct Tilemap {
+	struct Tile *data;
+	int numTiles;
+};
+
 struct Image {
 	int width;
 	int height;
@@ -25,6 +37,9 @@ struct Image {
 	bool hasPalette;
 	struct Palette palette;
 	bool hasTransparency;
+	struct Tilemap tileMap;
+	bool hasTilemap;
+
 };
 
 void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
@@ -32,5 +47,7 @@ void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int m
 void FreeImage(struct Image *image);
 void ReadGbaPalette(char *path, struct Palette *palette);
 void WriteGbaPalette(char *path, struct Palette *palette);
+void ReadGbaTilemap(char *path, struct Tilemap *tileMap);
+void WriteGbaTilemap(char *path, struct Tilemap *tileMap);
 
 #endif // GFX_H
