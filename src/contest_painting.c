@@ -344,7 +344,7 @@ static void InitContestPaintingVars(bool8 arg0)
     }
 }
 
-static void UpdateContestPaitingMosaicEffect(void)
+static void UpdateContestPaintingMosaicEffect(void)
 {
     if (!gUnknown_030011F6)
     {
@@ -360,7 +360,7 @@ static void UpdateContestPaitingMosaicEffect(void)
 
 static void VBlankCB_ContestPainting(void)
 {
-    UpdateContestPaitingMosaicEffect();
+    UpdateContestPaintingMosaicEffect();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
