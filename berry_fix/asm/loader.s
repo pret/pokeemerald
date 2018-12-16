@@ -1,11 +1,12 @@
-	.include "asm/macros.inc"
-	.include "constants/constants.inc"
+	.include "asm/macros/asm.inc"
+	.include "asm/macros/function.inc"
+	.include "constants/gba_constants.inc"
 
 	.set SIO_ERROR,      0x0040
 	.set SIO_MULTI_BUSY, 0x0080
 
 	.set EWRAM_ORIG, 0x02000000
-	.set EXEC_ORIG,  0x02010000
+	.set gCode,  0x02010000
 	.set PROG_ORIG,  0x00008000
 
 	.syntax unified
@@ -90,7 +91,7 @@ _170:
 	lsr r2, 5
 	cmp r1, 0
 	bne _170
-	ldr r3, =BerryFixMBHeaderGameCode - PROG_ORIG + EWRAM_ORIG
+	ldr r3, =BerryFixMBHeaderGameCode
 	ldrh r2, [r3]
 	strh r2, [r0, 0xa] @ SIOMLT_SEND
 	bl _recv
@@ -106,20 +107,13 @@ _1a0:
 	bne _1a0
 	mov r1, 0
 	strh r1, [r0, 0xa] @ SIOMLT_SEND
-	ldr r0, =_data_2f0 - PROG_ORIG + EWRAM_ORIG
-	ldr r1, =EXEC_ORIG
+	ldr r0, =_data_2f0
+	ldr r1, =gCode
 	swi 0x11 << 16
-	ldr lr, =EXEC_ORIG
+	ldr lr, =gCode
 	bx lr
 	.pool
 	arm_func_end _send
 	@ 1f0
 
 	.align 2, 0 @ don't pad with nop
-
-	@ The program is loaded into EWRAM.
-	@ This is a small memory buffer.
-	.space 0x100
-
-_data_2f0:
-	.incbin "data/berry_fix_program.mb.lz"
