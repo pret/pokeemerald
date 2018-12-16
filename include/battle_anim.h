@@ -132,6 +132,12 @@ u8 sub_80A80C8(struct Task *task);
 void sub_80A8EE4(struct Sprite *);
 void sub_80A67F4(struct Sprite *);
 void sub_80A6D48(u32 bgId, const void *src);
+void sub_80A7160(struct Sprite *sprite);
+bool8 sub_80A70E8(struct Sprite *sprite);
+void sub_80A70C0(struct Sprite *sprite);
+void TranslateMonBGUntil(struct Sprite *sprite);
+void TranslateSpriteOverDuration(struct Sprite *sprite);
+void sub_80A77C8(struct Sprite *sprite);
 
 enum
 {

@@ -35,7 +35,6 @@ extern const union AffineAnimCmd *gUnknown_082FF6C0[];
 
 // This file's functions.
 void sub_80A64EC(struct Sprite *sprite);
-void sub_80A653C(struct Sprite *sprite);
 void sub_80A6FB4(struct Sprite *sprite);
 void sub_80A7144(struct Sprite *sprite);
 void sub_80A791C(struct Sprite *sprite);
@@ -539,7 +538,7 @@ void WaitAnimForDuration(struct Sprite *sprite)
 void sub_80A64D0(struct Sprite *sprite)
 {
     sub_80A64EC(sprite);
-    sprite->callback = sub_80A653C;
+    sprite->callback = TranslateSpriteOverDuration;
     sprite->callback(sprite);
 }
 
@@ -557,7 +556,7 @@ void sub_80A64EC(struct Sprite *sprite)
     sprite->data[1] = old;
 }
 
-void sub_80A653C(struct Sprite *sprite)
+void TranslateSpriteOverDuration(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -613,7 +612,7 @@ void sub_80A65EC(struct Sprite *sprite)
     sprite->callback = sub_80A64D0;
 }
 
-void sub_80A6630(struct Sprite *sprite)
+void TranslateMonBGUntil(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -627,7 +626,7 @@ void sub_80A6630(struct Sprite *sprite)
     }
 }
 
-// Same as sub_80A6630, but it operates on sub-pixel values
+// Same as TranslateMonBGUntil, but it operates on sub-pixel values
 // to handle slower translations.
 void sub_80A6680(struct Sprite *sprite)
 {
