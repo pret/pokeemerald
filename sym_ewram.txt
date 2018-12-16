@@ -285,8 +285,7 @@ gUnknown_0203A034: @ 203A034
 gUnknown_0203A0F4: @ 203A0F4
 	.space 0x4
 
-gUnknown_0203A0F8: @ 203A0F8
-	.space 0x8
+	.include "src/battle_anim_effects_1.o"
 
 gUnknown_0203A100: @ 203A100
 	.space 0x10

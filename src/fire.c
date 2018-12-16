@@ -726,7 +726,7 @@ static void AnimFireCross(struct Sprite *sprite)
 
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 
-    sprite->callback = sub_80A653C; //TranslateSpriteOverDuration
+    sprite->callback = TranslateSpriteOverDuration;
 }
 
 static void sub_81093A4(struct Sprite *sprite)
