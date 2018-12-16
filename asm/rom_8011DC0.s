@@ -14596,7 +14596,7 @@ _0801E1B4:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0801E23A
 	.pool
 _0801E1D4:

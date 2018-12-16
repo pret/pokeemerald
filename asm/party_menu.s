@@ -6700,7 +6700,7 @@ _081B3774:
 _081B3778:
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -9914,7 +9914,7 @@ sub_81B5470: @ 81B5470
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	ldr r5, =gUnknown_0203CEC4
 	ldr r1, [r5]
 	lsls r0, 24
@@ -12639,7 +12639,7 @@ ether_effect_related_2: @ 81B6B80
 	ldr r0, [r0]
 	adds r0, 0xC
 	bl sub_81B302C
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	ldr r1, =gUnknown_0203CEC8
 	lsls r0, 24
 	lsrs r0, 24

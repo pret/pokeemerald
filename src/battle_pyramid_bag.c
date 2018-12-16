@@ -964,7 +964,7 @@ static void HandleMenuActionInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE)
     {
-        s8 id = GetMenuCursorPos();
+        s8 id = Menu_GetCursorPos();
         if (gMain.newKeys & DPAD_UP)
         {
             if (id > 0 && IsValidMenuAction(id - 2))

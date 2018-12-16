@@ -131,8 +131,6 @@ struct FactorySwapMonsStruct
     bool8 unk30;
 };
 
-extern u8 gUnknown_0203CF20;
-
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct FacilityMon gSlateportBattleTentMons[];

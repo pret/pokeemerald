@@ -21,7 +21,7 @@ struct StorageAction
     u8 format;
 };
 
-struct StorageText
+struct StorageMenu
 {
     const u8 *text;
     int textId;
@@ -124,7 +124,7 @@ struct PokemonStorageSystemData
     u8 field_A66;
     u8 field_A67;
     u8 *wallpaperTiles;
-    struct Sprite *field_A6C;
+    struct Sprite *movingMonSprite;
     struct Sprite *partySprites[PARTY_SIZE];
     struct Sprite *boxMonsSprites[IN_BOX_COUNT];
     struct Sprite **field_B00;
@@ -145,7 +145,15 @@ struct PokemonStorageSystemData
     s8 field_C69;
     u8 field_C6A;
     u8 field_C6B;
-    u8 field_C6C[72];
+    struct WindowTemplate menuWindow;
+    struct StorageMenu menuItems[7];
+    u8 menuItemsCount;
+    u8 menuWidth;
+    u8 field_CAE;
+    u8 field_CAF;
+    u16 field_CB0;
+    u8 field_CB2;
+    u8 field_CB3;
     struct Sprite *field_CB4;
     struct Sprite *field_CB8;
     s32 field_CBC;
@@ -161,21 +169,20 @@ struct PokemonStorageSystemData
     u8 field_CD5;
     u8 field_CD6;
     u8 field_CD7;
-    u8 field_CD8;
-    u8 field_CD9;
+    u8 field_CD8[2];
     u8 field_CDA;
     u8 field_CDB;
-    u32 *field_CDC;
+    const u32 *cursorMonPalette;
     u32 cursorMonPersonality;
     u16 cursorMonSpecies;
-    u16 selectedItem;
+    u16 cursorMonItem;
     u16 field_CE8;
     u8 field_CEA;
-    u8 field_CEB;
-    u8 field_CEC;
-    u8 field_CED;
-    u8 field_CEE[POKEMON_NAME_LENGTH + 1];
-    u8 cursorMonNick[36];
+    u8 cursorMonMarkings;
+    u8 cursorMonLevel;
+    bool8 cursorMonIsEgg;
+    u8 cursorMonNick[POKEMON_NAME_LENGTH + 1];
+    u8 cursorMonNickText[36];
     u8 cursorMonSpeciesName[36];
     u8 cursorMonGenderLvlText[36];
     u8 cursorMonItemName[36];
@@ -187,7 +194,7 @@ struct PokemonStorageSystemData
     u16 *field_DA0;
     struct PokemonMarkMenu field_DA4;
     struct UnkPSSStruct_2002370 field_1E5C;
-    struct Pokemon field_20A4;
+    struct Pokemon movingMon;
     struct Pokemon field_2108;
     s8 field_216C;
     u8 field_216D;
@@ -207,7 +214,11 @@ struct PokemonStorageSystemData
     u8 field_2186;
     u8 field_2187;
     u8 field_2188;
-    struct BoxPokemon *field_218C;
+    union
+    {
+        struct Pokemon *mon;
+        struct BoxPokemon *box;
+    } field_218C;
     u8 field_2190[40];
     u8 field_21B8[40];
     u8 field_21E0[POKEMON_NAME_LENGTH + 1];
@@ -217,7 +228,7 @@ struct PokemonStorageSystemData
     u8 field_21FC;
     u8 field_21FD;
     u8 field_21FE;
-    u8 field_21FF;
+    u8 inBoxMovingMode;
     u8 field_2200;
     u8 field_2201[51];
     u16 movingItem;
@@ -242,7 +253,7 @@ extern struct PokemonStorageSystemData *gUnknown_02039D08;
 u8* GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8, u8);
 void SetBoxMonNickFromAnyBox(u8, u8, u8 *);
-void CompactPartySlots(void);
+s16 CompactPartySlots(void);
 u32 GetBoxMonDataAt(u8 boxId, u8 monPosition, u32 request);
 bool8 CheckFreePokemonStorageSpace(void);
 u8 StorageGetCurrentBox(void);

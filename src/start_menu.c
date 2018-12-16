@@ -574,13 +574,13 @@ static bool8 HandleStartMenuInput(void)
     if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = MoveMenuCursor(-1);
+        sStartMenuCursorPos = Menu_MoveCursor(-1);
     }
 
     if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = MoveMenuCursor(1);
+        sStartMenuCursorPos = Menu_MoveCursor(1);
     }
 
     if (gMain.newKeys & A_BUTTON)

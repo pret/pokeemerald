@@ -1564,7 +1564,7 @@ void Task_HandleOutOfBattleItemMenuInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE)
     {
-        s8 cursorPos = GetMenuCursorPos();
+        s8 cursorPos = Menu_GetCursorPos();
         if (gMain.newKeys & DPAD_UP)
         {
             if (cursorPos > 0 && sub_81ACDFC(cursorPos - 2))
