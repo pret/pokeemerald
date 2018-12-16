@@ -290,6 +290,10 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
 {
     struct Image image;
 
+    image.hasTilemap = false;
+    image.tileMap.data = NULL;
+    image.tileMap.numTiles = 0;
+
     ReadLatinFont(inputPath, &image);
     WritePng(outputPath, &image);
 
@@ -299,6 +303,10 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
 void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+
+    image.hasTilemap = false;
+    image.tileMap.data = NULL;
+    image.tileMap.numTiles = 0;
 
     image.bitDepth = 2;
 
@@ -312,6 +320,10 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 {
     struct Image image;
 
+    image.hasTilemap = false;
+    image.tileMap.data = NULL;
+    image.tileMap.numTiles = 0;
+
     ReadHalfwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
 
@@ -321,6 +333,10 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+
+    image.hasTilemap = false;
+    image.tileMap.data = NULL;
+    image.tileMap.numTiles = 0;
 
     image.bitDepth = 2;
 
@@ -334,6 +350,10 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 {
     struct Image image;
 
+    image.hasTilemap = false;
+    image.tileMap.data = NULL;
+    image.tileMap.numTiles = 0;
+
     ReadFullwidthJapaneseFont(inputPath, &image);
     WritePng(outputPath, &image);
 
@@ -343,6 +363,10 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
 void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
+
+    image.hasTilemap = false;
+    image.tileMap.data = NULL;
+    image.tileMap.numTiles = 0;
 
     image.bitDepth = 2;
 
