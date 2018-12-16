@@ -722,21 +722,21 @@ PetalburgCity_Text_1DC881: @ 81DC881
 	.string "is in the town.$"
 
 PetalburgCity_Text_1DC91B: @ 81DC91B
-	.string "See? This is PETALBURG CITY’s GYM.$"
+	.string "See? This is PETALBURG CITY's GYM.$"
 
 PetalburgCity_Text_1DC93E: @ 81DC93E
-	.string "This is the GYM’s sign. Look for it\n"
-	.string "whenever you’re looking for a GYM.$"
+	.string "This is the GYM's sign. Look for it\n"
+	.string "whenever you're looking for a GYM.$"
 
 PetalburgCity_Text_1DC985: @ 81DC985
 	.string "My face is reflected in the water.\p"
-	.string "It’s a shining grin full of hope…\p"
+	.string "It's a shining grin full of hope…\p"
 	.string "Or it could be a look of somber silence\n"
 	.string "struggling with fear…\p"
 	.string "What do you see reflected in your face?$"
 
 PetalburgCity_Text_1DCA30: @ 81DCA30
-	.string "Let’s say you have six POKéMON.\n"
+	.string "Let's say you have six POKéMON.\n"
 	.string "If you catch another one…\p"
 	.string "It is automatically sent to a STORAGE\n"
 	.string "BOX over a PC connection.$"
@@ -751,21 +751,21 @@ PetalburgCity_Text_1DCAF1: @ 81DCAF1
 	.string "“Where people mingle with nature.”$"
 
 PetalburgCity_Text_1DCB23: @ 81DCB23
-	.string "WALLY’S HOUSE$"
+	.string "WALLY'S HOUSE$"
 
 PetalburgCity_Text_1DCB31: @ 81DCB31
 	.string "Excuse me!\p"
-	.string "Let me guess, from the way you’re\n"
+	.string "Let me guess, from the way you're\n"
 	.string "dressed, are you a POKéMON TRAINER?$"
 
 PetalburgCity_Text_1DCB82: @ 81DCB82
 	.string "… … … … … …\p"
 	.string "Well, maybe not.\n"
-	.string "Your clothes aren’t all that dirty.\p"
-	.string "You’re either a rookie TRAINER,\n"
-	.string "or maybe you’re just an ordinary kid.$"
+	.string "Your clothes aren't all that dirty.\p"
+	.string "You're either a rookie TRAINER,\n"
+	.string "or maybe you're just an ordinary kid.$"
 
 PetalburgCity_Text_1DCC09: @ 81DCC09
-	.string "I’m roaming the land in search of\n"
+	.string "I'm roaming the land in search of\n"
 	.string "talented TRAINERS.\p"
-	.string "I’m sorry to have taken your time.$"
+	.string "I'm sorry to have taken your time.$"

@@ -155,8 +155,8 @@ JaggedPass_EventScript_230871:: @ 8230871
 	end
 
 JaggedPass_Text_230888: @ 8230888
-	.string "MT. CHIMNEY’s JAGGED PASS…\p"
-	.string "Now this is what I’ve always wanted\n"
+	.string "MT. CHIMNEY's JAGGED PASS…\p"
+	.string "Now this is what I've always wanted\n"
 	.string "in a mountain.\p"
 	.string "This jagged bumpiness…\n"
 	.string "It rocks my soul!$"
@@ -170,8 +170,8 @@ JaggedPass_Text_230916: @ 8230916
 	.string "the mountains, I have you beat!$"
 
 JaggedPass_Text_230974: @ 8230974
-	.string "This place isn’t your casual hike.\n"
-	.string "It’s not suited for a picnic.$"
+	.string "This place isn't your casual hike.\n"
+	.string "It's not suited for a picnic.$"
 
 JaggedPass_Text_2309B5: @ 82309B5
 	.string "Ohhh, no!\n"
@@ -184,7 +184,7 @@ JaggedPass_Text_2309D8: @ 82309D8
 
 JaggedPass_Text_230A2C: @ 8230A2C
 	.string "Will you ever be back in this area?\n"
-	.string "If you do return, I’d like a rematch.$"
+	.string "If you do return, I'd like a rematch.$"
 
 JaggedPass_Text_230A76: @ 8230A76
 	.string "Picnics are fun wherever you go.\n"
@@ -195,24 +195,24 @@ JaggedPass_Text_230AAA: @ 8230AAA
 	.string "too bumpy!$"
 
 JaggedPass_Text_230AD7: @ 8230AD7
-	.string "I’ll forget about losing and just\n"
+	.string "I'll forget about losing and just\n"
 	.string "enjoy this bumpy hike.$"
 
 JaggedPass_Text_230B10: @ 8230B10
 	.string "JAGGED PASS is hard to walk on.\n"
-	.string "It’s a good place for training.$"
+	.string "It's a good place for training.$"
 
 JaggedPass_Text_230B50: @ 8230B50
 	.string "It was all over while we were still\n"
 	.string "trying to find a good footing…$"
 
 JaggedPass_Text_230B93: @ 8230B93
-	.string "If I had an ACRO BIKE, I’d be able to\n"
+	.string "If I had an ACRO BIKE, I'd be able to\n"
 	.string "jump ledges.$"
 
 JaggedPass_Text_230BC6: @ 8230BC6
 	.string "When I get more used to this bumpiness,\n"
-	.string "I’ll be sure to win!\p"
+	.string "I'll be sure to win!\p"
 	.string "Can you register me in your POKéNAV?$"
 
 JaggedPass_Text_230C28: @ 8230C28
@@ -220,7 +220,7 @@ JaggedPass_Text_230C28: @ 8230C28
 	.string "I sing while I climb now.$"
 
 JaggedPass_Text_230C60: @ 8230C60
-	.string "It’s still not easy to battle on this\n"
+	.string "It's still not easy to battle on this\n"
 	.string "bumpy ground…$"
 
 JaggedPass_Text_230C94: @ 8230C94
@@ -235,13 +235,13 @@ JaggedPass_Text_230CCB: @ 8230CCB
 
 JaggedPass_Text_230D2D: @ 8230D2D
 	.string "Urrrgh…\p"
-	.string "I should’ve ducked into our HIDEOUT\n"
+	.string "I should've ducked into our HIDEOUT\n"
 	.string "right away…$"
 
 JaggedPass_Text_230D65: @ 8230D65
 	.string "Okay, oh-kay!\n"
-	.string "I admit it--you’re strong!\p"
-	.string "Don’t worry about me.\n"
+	.string "I admit it--you're strong!\p"
+	.string "Don't worry about me.\n"
 	.string "Go wherever you want!$"
 
 JaggedPass_Text_230DBA: @ 8230DBA
@@ -249,15 +249,15 @@ JaggedPass_Text_230DBA: @ 8230DBA
 	.string "to the MAGMA EMBLEM!$"
 
 JaggedPass_Text_230DF7: @ 8230DF7
-	.string "Aiyeeh! It’s awfully scary to shoot\n"
+	.string "Aiyeeh! It's awfully scary to shoot\n"
 	.string "down the mountain in one go!$"
 
 JaggedPass_Text_230E38: @ 8230E38
-	.string "I feel like I’m falling apart…$"
+	.string "I feel like I'm falling apart…$"
 
 JaggedPass_Text_230E57: @ 8230E57
 	.string "My bicycle bounced around so much,\n"
-	.string "my rear end’s sore…$"
+	.string "my rear end's sore…$"
 
 JaggedPass_Text_230E8E: @ 8230E8E
 	.string "I climb this hill every day.\n"

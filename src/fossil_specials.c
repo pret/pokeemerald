@@ -8,7 +8,7 @@
 #include "fieldmap.h"
 #include "global.fieldmap.h"
 #include "gpu_regs.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "random.h"
 #include "script.h"
@@ -458,104 +458,104 @@ static void sub_81BF2B8(u8* a, u16 b, u8 c, u8 d, u8 e)
 {
     asm_unified("\n\
     push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x8\n\
-	str r0, [sp]\n\
-	mov r10, r1\n\
-	adds r6, r2, 0\n\
-	mov r8, r3\n\
-	ldr r0, [sp, 0x28]\n\
-	mov r9, r0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	mov r10, r1\n\
-	lsls r6, 24\n\
-	lsrs r6, 24\n\
-	mov r0, r8\n\
-	lsls r0, 24\n\
-	mov r8, r0\n\
-	lsrs r7, r0, 24\n\
-	mov r1, r9\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	mov r9, r1\n\
-	mov r0, r10\n\
-	adds r1, r7, 0\n\
-	bl __divsi3\n\
-	adds r5, r0, 0\n\
-	lsls r5, 24\n\
-	lsrs r4, r5, 24\n\
-	ldr r3, =gUnknown_030012A8\n\
-	strh r4, [r3]\n\
-	mov r0, r10\n\
-	adds r1, r7, 0\n\
-	str r3, [sp, 0x4]\n\
-	bl __modsi3\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	ldr r3, [sp, 0x4]\n\
-	strh r2, [r3, 0x2]\n\
-	movs r1, 0x7\n\
-	ands r4, r1\n\
-	ands r2, r1\n\
-	strh r4, [r3, 0x4]\n\
-	strh r2, [r3, 0x6]\n\
-	lsrs r0, 27\n\
-	lsrs r5, 27\n\
-	strh r0, [r3, 0x8]\n\
-	strh r5, [r3, 0xA]\n\
-	mov r1, r8\n\
-	lsrs r1, 27\n\
-	lsls r1, 6\n\
-	mov r8, r1\n\
-	mov r1, r8\n\
-	muls r1, r5\n\
-	lsls r0, 6\n\
-	adds r1, r0\n\
-	lsls r1, 16\n\
-	lsrs r1, 16\n\
-	strh r1, [r3, 0xC]\n\
-	lsls r4, 3\n\
-	adds r4, r2\n\
-	adds r1, r4\n\
-	lsls r4, r1, 16\n\
-	lsrs r4, 17\n\
-	strh r1, [r3, 0xE]\n\
-	movs r1, 0x1\n\
-	mov r0, r10\n\
-	ands r1, r0\n\
-	movs r2, 0x1\n\
-	eors r1, r2\n\
-	lsls r0, r1, 2\n\
-	lsls r6, r0\n\
-	eors r1, r2\n\
-	lsls r1, 2\n\
-	movs r0, 0xF\n\
-	lsls r0, r1\n\
-	orrs r6, r0\n\
-	lsls r6, 24\n\
-	lsrs r6, 24\n\
-	mov r1, r9\n\
-	lsls r1, 5\n\
-	mov r9, r1\n\
-	add r9, r4\n\
-	ldr r1, [sp]\n\
-	add r1, r9\n\
-	ldrb r0, [r1]\n\
-	ands r6, r0\n\
-	strb r6, [r1]\n\
-	add sp, 0x8\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x8\n\
+    str r0, [sp]\n\
+    mov r10, r1\n\
+    adds r6, r2, 0\n\
+    mov r8, r3\n\
+    ldr r0, [sp, 0x28]\n\
+    mov r9, r0\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    mov r10, r1\n\
+    lsls r6, 24\n\
+    lsrs r6, 24\n\
+    mov r0, r8\n\
+    lsls r0, 24\n\
+    mov r8, r0\n\
+    lsrs r7, r0, 24\n\
+    mov r1, r9\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    mov r9, r1\n\
+    mov r0, r10\n\
+    adds r1, r7, 0\n\
+    bl __divsi3\n\
+    adds r5, r0, 0\n\
+    lsls r5, 24\n\
+    lsrs r4, r5, 24\n\
+    ldr r3, =gUnknown_030012A8\n\
+    strh r4, [r3]\n\
+    mov r0, r10\n\
+    adds r1, r7, 0\n\
+    str r3, [sp, 0x4]\n\
+    bl __modsi3\n\
+    lsls r0, 24\n\
+    lsrs r2, r0, 24\n\
+    ldr r3, [sp, 0x4]\n\
+    strh r2, [r3, 0x2]\n\
+    movs r1, 0x7\n\
+    ands r4, r1\n\
+    ands r2, r1\n\
+    strh r4, [r3, 0x4]\n\
+    strh r2, [r3, 0x6]\n\
+    lsrs r0, 27\n\
+    lsrs r5, 27\n\
+    strh r0, [r3, 0x8]\n\
+    strh r5, [r3, 0xA]\n\
+    mov r1, r8\n\
+    lsrs r1, 27\n\
+    lsls r1, 6\n\
+    mov r8, r1\n\
+    mov r1, r8\n\
+    muls r1, r5\n\
+    lsls r0, 6\n\
+    adds r1, r0\n\
+    lsls r1, 16\n\
+    lsrs r1, 16\n\
+    strh r1, [r3, 0xC]\n\
+    lsls r4, 3\n\
+    adds r4, r2\n\
+    adds r1, r4\n\
+    lsls r4, r1, 16\n\
+    lsrs r4, 17\n\
+    strh r1, [r3, 0xE]\n\
+    movs r1, 0x1\n\
+    mov r0, r10\n\
+    ands r1, r0\n\
+    movs r2, 0x1\n\
+    eors r1, r2\n\
+    lsls r0, r1, 2\n\
+    lsls r6, r0\n\
+    eors r1, r2\n\
+    lsls r1, 2\n\
+    movs r0, 0xF\n\
+    lsls r0, r1\n\
+    orrs r6, r0\n\
+    lsls r6, 24\n\
+    lsrs r6, 24\n\
+    mov r1, r9\n\
+    lsls r1, 5\n\
+    mov r9, r1\n\
+    add r9, r4\n\
+    ldr r1, [sp]\n\
+    add r1, r9\n\
+    ldrb r0, [r1]\n\
+    ands r6, r0\n\
+    strb r6, [r1]\n\
+    add sp, 0x8\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
                 ");
 }
 #endif // NONMATCHING

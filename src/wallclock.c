@@ -890,13 +890,13 @@ static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
     {
         case MVMT_BACKWARD:
             if (angle)
-                angle -= delta ;
+                angle -= delta;
             else
-                angle = 360 - delta ;
+                angle = 360 - delta;
             break;
         case MVMT_FORWARD:
-            if (angle < 360 - delta )
-                angle += delta ;
+            if (angle < 360 - delta)
+                angle += delta;
             else
                 angle = 0;
             break;

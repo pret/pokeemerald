@@ -138,10 +138,10 @@ Route115_EventScript_1F2B3E:: @ 81F2B3E
 	end
 
 Route115_Text_1F2B55: @ 81F2B55
-	.string "Exploring a cave isn’t like walking\n"
+	.string "Exploring a cave isn't like walking\n"
 	.string "on a road.\p"
 	.string "You never know when wild POKéMON will\n"
-	.string "appear. It’s full of suspense.$"
+	.string "appear. It's full of suspense.$"
 
 Route115_Text_1F2BC9: @ 81F2BC9
 	.string "ROUTE 115\n"

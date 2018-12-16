@@ -60,13 +60,13 @@ FortreeCity_DecorationShop_PokemartDecor_218064: @ 8218064
 FortreeCity_DecorationShop_Text_218078: @ 8218078
 	.string "Merchandise you buy here is sent to\n"
 	.string "your own PC.\p"
-	.string "That’s fantastic! I wish they could\n"
+	.string "That's fantastic! I wish they could\n"
 	.string "also deliver me home like that.$"
 
 FortreeCity_DecorationShop_Text_2180ED: @ 82180ED
-	.string "I’m buying a pretty desk and I’m\n"
+	.string "I'm buying a pretty desk and I'm\n"
 	.string "putting my cute DOLLS on it.\p"
-	.string "If I don’t, when I decorate my\n"
+	.string "If I don't, when I decorate my\n"
 	.string "SECRET BASE, my DOLLS will get\l"
 	.string "dirty or poked with splinters.$"
 

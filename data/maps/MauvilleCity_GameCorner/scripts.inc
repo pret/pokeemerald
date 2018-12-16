@@ -677,12 +677,12 @@ MauvilleCity_GameCorner_Text_210460: @ 8210460
 MauvilleCity_GameCorner_Text_21047E: @ 821047E
 	.string "Okay, you wanted some COINS for\n"
 	.string "the games?\p"
-	.string "But you don’t have a COIN CASE for\n"
+	.string "But you don't have a COIN CASE for\n"
 	.string "stowing the COINS.$"
 
 MauvilleCity_GameCorner_Text_2104DF: @ 82104DF
 	.string "Were you looking for COINS?\p"
-	.string "It’s ¥1000 for 50 COINS.\n"
+	.string "It's ¥1000 for 50 COINS.\n"
 	.string "Would you like some?$"
 
 MauvilleCity_GameCorner_Text_210529: @ 8210529
@@ -690,7 +690,7 @@ MauvilleCity_GameCorner_Text_210529: @ 8210529
 	.string "Here are your COINS!$"
 
 MauvilleCity_GameCorner_Text_210553: @ 8210553
-	.string "Um… You don’t appear to have\n"
+	.string "Um… You don't appear to have\n"
 	.string "enough money…$"
 
 MauvilleCity_GameCorner_Text_21057E: @ 821057E
@@ -698,7 +698,7 @@ MauvilleCity_GameCorner_Text_21057E: @ 821057E
 	.string "Your COIN CASE is full.$"
 
 MauvilleCity_GameCorner_Text_21059A: @ 821059A
-	.string "Oh… You don’t need COINS, then?\n"
+	.string "Oh… You don't need COINS, then?\n"
 	.string "Good luck on your adventure!$"
 
 MauvilleCity_GameCorner_Text_2105D7: @ 82105D7
@@ -715,13 +715,13 @@ MauvilleCity_GameCorner_Text_210629: @ 8210629
 
 MauvilleCity_GameCorner_Text_210646: @ 8210646
 	.string "Thank you!\n"
-	.string "We’ll send it to your PC at home.$"
+	.string "We'll send it to your PC at home.$"
 
 MauvilleCity_GameCorner_Text_210673: @ 8210673
-	.string "You don’t have enough COINS.$"
+	.string "You don't have enough COINS.$"
 
 MauvilleCity_GameCorner_Text_210690: @ 8210690
-	.string "There isn’t any room available for\n"
+	.string "There isn't any room available for\n"
 	.string "placing {STR_VAR_1}.$"
 
 MauvilleCity_GameCorner_Text_2106BF: @ 82106BF
@@ -736,7 +736,7 @@ MauvilleCity_GameCorner_Text_21071B: @ 821071B
 	.string "Here you go!$"
 
 MauvilleCity_GameCorner_Text_210728: @ 8210728
-	.string "Oh, you can’t carry any more than that.$"
+	.string "Oh, you can't carry any more than that.$"
 
 MauvilleCity_GameCorner_Text_210750: @ 8210750
 	.string "I made a mistake and got two of\n"
@@ -751,11 +751,11 @@ MauvilleCity_GameCorner_Text_2107A9: @ 82107A9
 	.string "You want it, but not right now?$"
 
 MauvilleCity_GameCorner_Text_2107CE: @ 82107CE
-	.string "Oh, don’t be so negative!\n"
+	.string "Oh, don't be so negative!\n"
 	.string "You can have this!$"
 
 MauvilleCity_GameCorner_Text_2107FB: @ 82107FB
-	.string "There’s a prize I want, but I can’t win\n"
+	.string "There's a prize I want, but I can't win\n"
 	.string "the jackpot.$"
 
 MauvilleCity_GameCorner_Text_210830: @ 8210830
@@ -772,16 +772,16 @@ MauvilleCity_GameCorner_Text_2108A0: @ 82108A0
 MauvilleCity_GameCorner_Text_2108EF: @ 82108EF
 	.string "MAUVILLE has something for\n"
 	.string "everyone.\p"
-	.string "For me, it’s the GAME CORNER.$"
+	.string "For me, it's the GAME CORNER.$"
 
 MauvilleCity_GameCorner_Text_210932: @ 8210932
 	.string "The ROULETTE tables have different\n"
 	.string "rates.\p"
-	.string "Check your COINS if you’re going to\n"
+	.string "Check your COINS if you're going to\n"
 	.string "pick a table.$"
 
 MauvilleCity_GameCorner_Text_21098E: @ 821098E
-	.string "It’s easy to lose track of time in here. \n"
+	.string "It's easy to lose track of time in here. \n"
 	.string "I should get back to work.$"
 
 MauvilleCity_GameCorner_Text_2109D3: @ 82109D3
@@ -790,21 +790,21 @@ MauvilleCity_GameCorner_Text_2109D3: @ 82109D3
 
 MauvilleCity_GameCorner_Text_210A05: @ 8210A05
 	.string "This ROULETTE thing…\n"
-	.string "It’s rather demanding.\p"
-	.string "Win or lose, it’s only by luck.$"
+	.string "It's rather demanding.\p"
+	.string "Win or lose, it's only by luck.$"
 
 MauvilleCity_GameCorner_Text_210A51: @ 8210A51
 	.string "Up to three COINS can be used to play\n"
 	.string "the SLOTS.$"
 
 MauvilleCity_GameCorner_Text_210A82: @ 8210A82
-	.string "It’s very difficult to make it stop\n"
+	.string "It's very difficult to make it stop\n"
 	.string "right on “7.”\p"
 	.string "If it stops on “7” during the REEL TIME\n"
-	.string "bonus game, you’ll receive extra COINS.$"
+	.string "bonus game, you'll receive extra COINS.$"
 
 MauvilleCity_GameCorner_Text_210B04: @ 8210B04
-	.string "Here’s some information for you\n"
+	.string "Here's some information for you\n"
 	.string "about the SLOTS.\p"
 	.string "The more lightning bolts you stock,\n"
 	.string "the more REEL TIME chances you get.\p"
@@ -812,10 +812,10 @@ MauvilleCity_GameCorner_Text_210B04: @ 8210B04
 	.string "REEL TIME chances…\p"
 	.string "It is possible to receive four regular\n"
 	.string "bonuses, then a big bonus.\p"
-	.string "That would total 660 COINS, but it’s\n"
+	.string "That would total 660 COINS, but it's\n"
 	.string "very difficult to get.$"
 
 MauvilleCity_GameCorner_Text_210C2E: @ 8210C2E
-	.string "You can’t play if you don’t have\n"
+	.string "You can't play if you don't have\n"
 	.string "a COIN CASE.$"
 

@@ -1,7 +1,7 @@
 #include <librfu.h>
 #include "global.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "battle.h"
 #include "berry_blender.h"
 #include "decompress.h"
@@ -11,7 +11,6 @@
 #include "rom_8011DC0.h"
 #include "gpu_regs.h"
 #include "link_rfu.h"
-#include "malloc.h"
 #include "overworld.h"
 #include "random.h"
 #include "palette.h"
@@ -280,7 +279,7 @@ const struct {
     { gBlockSendBuffer,  40 }
 };
 const u16 gUnknown_082ED6E0[] = {
-    0x0002, 0x7f7d, 0x0000, 0xffff
+    0x0002, 0x7f7d, 0x0000, 0xFFFF
 };
 
 const char sUnref_082ED6E8[][15] = {
@@ -1473,7 +1472,7 @@ static u8 sub_800D294(void)
 
     for (i = 0; i < gUnknown_03007890->unk_08; i++)
     {
-        for (ptr = gUnknown_03004140.unk_20; *ptr != 0xffff; ptr++)
+        for (ptr = gUnknown_03004140.unk_20; *ptr != 0xFFFF; ptr++)
         {
             if (gUnknown_03007890->unk_14[i].unk_04 == *ptr)
             {
@@ -3081,7 +3080,7 @@ bool32 sub_800F1E0(void)
                 {
                     if (gUnknown_03005000.unk_14[i][1])
                     {
-                        if (gUnknown_03005000.unk_cee[i] != 0xff && (gUnknown_03005000.unk_14[i][0] >> 5) != ((gUnknown_03005000.unk_cee[i] + 1) & 7))
+                        if (gUnknown_03005000.unk_cee[i] != 0xFF && (gUnknown_03005000.unk_14[i][0] >> 5) != ((gUnknown_03005000.unk_cee[i] + 1) & 7))
                         {
                             if (++gUnknown_03005000.unk_cea[i] > 4)
                                 sub_8011170(0x8100);
@@ -3782,7 +3781,7 @@ bool32 sub_8010454(u32 a0)
     s32 i;
     for (i = 0; gUnknown_082ED6E0[i] != a0; i++)
     {
-        if (gUnknown_082ED6E0[i] == 0xffff)
+        if (gUnknown_082ED6E0[i] == 0xFFFF)
             return FALSE;
     }
     return TRUE;
@@ -3910,7 +3909,7 @@ void sub_80106D4(void)
 u32 sub_8010714(u16 a0, const u8 *a1)
 {
     u8 r0 = sub_8011CE4(a1, a0);
-    if (r0 == 0xff)
+    if (r0 == 0xFF)
         return 2;
     if (gUnknown_03007880[r0]->unk_0 == 0)
         return 1;

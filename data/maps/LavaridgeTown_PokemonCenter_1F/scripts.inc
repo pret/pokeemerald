@@ -32,10 +32,10 @@ LavaridgeTown_PokemonCenter_1F_Text_1FFB37: @ 81FFB37
 	.string "I think POKéMON get closer to their\n"
 	.string "TRAINERS if they spend time together.\p"
 	.string "The longer the better.\n"
-	.string "That’s what I think.$"
+	.string "That's what I think.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_1FFBAD: @ 81FFBAD
-	.string "It’s sort of magical how just sitting\n"
+	.string "It's sort of magical how just sitting\n"
 	.string "in a hot-spring pool can invigorate.\p"
 	.string "I wish I could let my POKéMON\n"
 	.string "soak, too.$"

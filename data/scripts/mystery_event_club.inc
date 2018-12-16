@@ -97,7 +97,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_291686:: @ 8291686
 
 PetalburgCity_PokemonCenter_1F_Text_291687: @ 8291687
 	.string "Hello there, TRAINER!\n"
-	.string "You’ve got a wonderful smile, there.\p"
+	.string "You've got a wonderful smile, there.\p"
 	.string "I have a hobby--collecting the profiles\n"
 	.string "of POKéMON TRAINERS.$"
 
@@ -108,7 +108,7 @@ PetalburgCity_PokemonCenter_1F_Text_2916FF: @ 82916FF
 PetalburgCity_PokemonCenter_1F_Text_291729: @ 8291729
 	.string "You make your own profile by putting\n"
 	.string "together four words or phrases.\p"
-	.string "Here, I’ll show you an example of a\n"
+	.string "Here, I'll show you an example of a\n"
 	.string "profile using four pieces of text.\p"
 	.string "You can switch those four pieces with\n"
 	.string "other text pieces any which way you\l"
@@ -122,11 +122,11 @@ PetalburgCity_PokemonCenter_1F_Text_291729: @ 8291729
 	.string "pieces to display a list of choices.\p"
 	.string "Then, pick the choice you want.\p"
 	.string "Repeat for the remaining text choices,\n"
-	.string "and you’ll have your very own profile.$"
+	.string "and you'll have your very own profile.$"
 
 PetalburgCity_PokemonCenter_1F_Text_291969: @ 8291969
 	.string "Yes! Thank you!\n"
-	.string "So, let’s see it, then.$"
+	.string "So, let's see it, then.$"
 
 PetalburgCity_PokemonCenter_1F_Text_291991: @ 8291991
 	.string "Oh, no, really?\p"
@@ -134,30 +134,30 @@ PetalburgCity_PokemonCenter_1F_Text_291991: @ 8291991
 	.string "a wonderful profile…$"
 
 PetalburgCity_PokemonCenter_1F_Text_2919DC: @ 82919DC
-	.string "Oh? You’re not into it right now?\p"
+	.string "Oh? You're not into it right now?\p"
 	.string "Well, anytime is good by me!$"
 
 PetalburgCity_PokemonCenter_1F_Text_291A1B: @ 8291A1B
 	.string "Hello there, TRAINER!\n"
-	.string "You’ve got a wonderful smile.$"
+	.string "You've got a wonderful smile.$"
 
 PetalburgCity_PokemonCenter_1F_Text_291A4F: @ 8291A4F
 	.string "May I see your new profile?$"
 
 PetalburgCity_PokemonCenter_1F_Text_291A6B: @ 8291A6B
 	.string "Yes! Thank you!\p"
-	.string "I hope it’s even better than the profile\n"
+	.string "I hope it's even better than the profile\n"
 	.string "you showed me before.$"
 
 PetalburgCity_PokemonCenter_1F_Text_291ABA: @ 8291ABA
 	.string "Oh, you like your profile the way it is.\p"
-	.string "I don’t blame you--it’s a wonderful\n"
+	.string "I don't blame you--it's a wonderful\n"
 	.string "profile the way it is now.$"
 
 PetalburgCity_PokemonCenter_1F_Text_291B22: @ 8291B22
 	.string "F-fantastic!\p"
-	.string "Your profile, it’s wonderful!\n"
-	.string "It really says what you’re about.\p"
+	.string "Your profile, it's wonderful!\n"
+	.string "It really says what you're about.\p"
 	.string "Why, anyone hearing this profile would\n"
 	.string "be captivated by you!\p"
 	.string "Thank you!$"
@@ -165,5 +165,5 @@ PetalburgCity_PokemonCenter_1F_Text_291B22: @ 8291B22
 PetalburgCity_PokemonCenter_1F_Text_291BB7: @ 8291BB7
 	.string "Oh?\n"
 	.string "You know the secret saying!\p"
-	.string "That means you’re now a fellow member\n"
+	.string "That means you're now a fellow member\n"
 	.string "of the MYSTERY EVENT CLUB!$"

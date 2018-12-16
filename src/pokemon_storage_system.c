@@ -1,7 +1,7 @@
 #include "global.h"
 #include "bg.h"
 #include "event_data.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"

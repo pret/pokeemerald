@@ -27,8 +27,8 @@ struct UnkSaveSection
 
 struct SaveSectionOffsets
 {
-	u16 toAdd;
-	u16 size;
+    u16 toAdd;
+    u16 size;
 };
 
 // Emerald changes this definition to be the sectors per slot.
@@ -50,7 +50,7 @@ enum
     SAVE_NORMAL,
     SAVE_LINK,
     //EREADER_SAVE, // deprecated in Emerald
-	SAVE_LINK2, // unknown 2nd link save
+    SAVE_LINK2, // unknown 2nd link save
     SAVE_HALL_OF_FAME,
     SAVE_OVERWRITE_DIFFERENT_FILE,
     SAVE_HALL_OF_FAME_ERASE_BEFORE // unused

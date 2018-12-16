@@ -33,7 +33,7 @@ MossdeepCity_GameCorner_1F_EventScript_224B5D:: @ 8224B5D
 MossdeepCity_GameCorner_1F_Text_224B66: @ 8224B66
 	.string "When I was young, I traveled the world\n"
 	.string "as a POKéMON TRAINER.\p"
-	.string "Now that I’ve become an old buzzard,\n"
+	.string "Now that I've become an old buzzard,\n"
 	.string "my only amusement is watching young\l"
 	.string "TRAINERS battle.$"
 
@@ -47,12 +47,12 @@ MossdeepCity_GameCorner_1F_Text_224C1C: @ 8224C1C
 	.string "{STR_VAR_1}?$"
 
 MossdeepCity_GameCorner_1F_Text_224C64: @ 8224C64
-	.string "You won’t battle? I’m disappointed\n"
-	.string "that I can’t see you battle…$"
+	.string "You won't battle? I'm disappointed\n"
+	.string "that I can't see you battle…$"
 
 MossdeepCity_GameCorner_1F_Text_224CA4: @ 8224CA4
 	.string "Oh, good, good!\p"
-	.string "But my house isn’t all that sturdy.\p"
+	.string "But my house isn't all that sturdy.\p"
 	.string "Could I ask you to keep it down to\n"
 	.string "a 3-on-3 match?$"
 

@@ -22,15 +22,15 @@ BattleFrontier_Lounge8_Text_2676E5: @ 82676E5
 	.string "Spirit…\l"
 	.string "Bravery…\l"
 	.string "And ability…\p"
-	.string "Well, I’m all set in every way!\n"
-	.string "I’ll be unstoppable at every building!\p"
+	.string "Well, I'm all set in every way!\n"
+	.string "I'll be unstoppable at every building!\p"
 	.string "Huh? POKéMON?\n"
-	.string "What’s that?$"
+	.string "What's that?$"
 
 BattleFrontier_Lounge8_Text_26779C: @ 826779C
 	.string "Do you know about the FRONTIER\n"
 	.string "BRAINS?\p"
-	.string "That’s what SCOTT calls the seven\n"
+	.string "That's what SCOTT calls the seven\n"
 	.string "special TRAINERS that run the seven\l"
 	.string "facilities in the BATTLE FRONTIER.$"
 
@@ -39,7 +39,7 @@ BattleFrontier_Lounge8_Text_26782C: @ 826782C
 	.string "told me that I have a lot of talent\l"
 	.string "for battling!\p"
 	.string "I like POKéMON CONTESTS more!\p"
-	.string "But I’m no good at CONTESTS!\p"
+	.string "But I'm no good at CONTESTS!\p"
 	.string "I guess having talent and liking\n"
-	.string "something aren’t the same.$"
+	.string "something aren't the same.$"
 

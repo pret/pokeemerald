@@ -53,10 +53,10 @@ FallarborTown_BattleTentCorridor_Text_200791: @ 8200791
 	.string "You can check them on your POKéNAV.$"
 
 FallarborTown_BattleTentCorridor_Text_200802: @ 8200802
-	.string "I can’t beat GYM LEADERS…\p"
-	.string "I can’t win any CONTESTS…\p"
-	.string "I’ve been here, there, and everywhere,\n"
-	.string "and it’s all for naught…$"
+	.string "I can't beat GYM LEADERS…\p"
+	.string "I can't win any CONTESTS…\p"
+	.string "I've been here, there, and everywhere,\n"
+	.string "and it's all for naught…$"
 
 FallarborTown_BattleTentCorridor_Text_200876: @ 8200876
 	.string "POKéMON CONTESTS\n"

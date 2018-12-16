@@ -1,7 +1,7 @@
 #include "global.h"
 #include "gpu_regs.h"
 #include "multiboot.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "bg.h"
 #include "graphics.h"
 #include "main.h"

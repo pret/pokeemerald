@@ -23,7 +23,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include <m4a.h>
 #include "palette.h"
 #include "party_menu.h"
@@ -81,7 +81,7 @@ extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
-extern const struct ScanlineEffectParams gUnknown_0831AC70;
+extern const struct ScanlineEffectParams gBattleIntroSlideScanlineEffectParams;
 
 // strings
 extern const u8 gText_LinkStandby3[];
@@ -507,35 +507,35 @@ const struct TrainerMoney gTrainerMoneyTable[] =
 
 static void (* const sTurnActionsFuncsTable[])(void) =
 {
-    HandleAction_UseMove,               // B_ACTION_USE_MOVE
-    HandleAction_UseItem,               // B_ACTION_USE_ITEM
-    HandleAction_Switch,                // B_ACTION_SWITCH
-    HandleAction_Run,                   // B_ACTION_RUN
-    HandleAction_WatchesCarefully,      // B_ACTION_SAFARI_WATCH_CAREFULLY
-    HandleAction_SafariZoneBallThrow,   // B_ACTION_SAFARI_BALL
-    HandleAction_ThrowPokeblock,        // B_ACTION_SAFARI_POKEBLOCK
-    HandleAction_GoNear,                // B_ACTION_SAFARI_GO_NEAR
-    HandleAction_SafariZoneRun,         // B_ACTION_SAFARI_RUN
-    HandleAction_WallyBallThrow,        // B_ACTION_WALLY_THROW
-    HandleAction_RunBattleScript,       // B_ACTION_EXEC_SCRIPT
-    HandleAction_Action11,              // not sure about this one
-    HandleAction_ActionFinished,        // B_ACTION_FINISHED
-    HandleAction_NothingIsFainted,      // B_ACTION_NOTHING_FAINTED
+    [B_ACTION_USE_MOVE] = HandleAction_UseMove,
+    [B_ACTION_USE_ITEM] = HandleAction_UseItem,
+    [B_ACTION_SWITCH] = HandleAction_Switch,
+    [B_ACTION_RUN] = HandleAction_Run,
+    [B_ACTION_SAFARI_WATCH_CAREFULLY] = HandleAction_WatchesCarefully,
+    [B_ACTION_SAFARI_BALL] = HandleAction_SafariZoneBallThrow,
+    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowPokeblock,
+    [B_ACTION_SAFARI_GO_NEAR] = HandleAction_GoNear,
+    [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
+    [B_ACTION_WALLY_THROW] = HandleAction_WallyBallThrow,
+    [B_ACTION_EXEC_SCRIPT] = HandleAction_RunBattleScript,
+    [11] = HandleAction_Action11, // not sure about this one
+    [B_ACTION_FINISHED] = HandleAction_ActionFinished,
+    [B_ACTION_NOTHING_FAINTED] = HandleAction_NothingIsFainted,
 };
 
 static void (* const sEndTurnFuncsTable[])(void) =
 {
-    HandleEndTurn_ContinueBattle,       // battle outcome 0
-    HandleEndTurn_BattleWon,            // B_OUTCOME_WON
-    HandleEndTurn_BattleLost,           // B_OUTCOME_LOST
-    HandleEndTurn_BattleLost,           // B_OUTCOME_DREW
-    HandleEndTurn_RanFromBattle,        // B_OUTCOME_RAN
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_PLAYER_TELEPORTED
-    HandleEndTurn_MonFled,              // B_OUTCOME_MON_FLED
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_CAUGHT
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_NO_SAFARI_BALLS
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_FORFEITED
-    HandleEndTurn_FinishBattle,         // B_OUTCOME_MON_TELEPORTED
+    [0] = HandleEndTurn_ContinueBattle, //B_OUTCOME_NONE?
+    [B_OUTCOME_WON] = HandleEndTurn_BattleWon,
+    [B_OUTCOME_LOST] = HandleEndTurn_BattleLost,
+    [B_OUTCOME_DREW] = HandleEndTurn_BattleLost,
+    [B_OUTCOME_RAN] = HandleEndTurn_RanFromBattle,
+    [B_OUTCOME_PLAYER_TELEPORTED] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_MON_FLED] = HandleEndTurn_MonFled,
+    [B_OUTCOME_CAUGHT] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_NO_SAFARI_BALLS] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_FORFEITED] = HandleEndTurn_FinishBattle,
+    [B_OUTCOME_MON_TELEPORTED] = HandleEndTurn_FinishBattle,
 };
 
 const u8 gStatusConditionString_PoisonJpn[8] = _("どく$$$$$");
@@ -633,7 +633,7 @@ static void CB2_InitBattleInternal(void)
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
         }
 
-        ScanlineEffect_SetParams(gUnknown_0831AC70);
+        ScanlineEffect_SetParams(gBattleIntroSlideScanlineEffectParams);
     }
 
     ResetPaletteFade();
@@ -3071,7 +3071,7 @@ static void BattleStartClearSetData(void)
         *(gBattleStruct->AI_monToSwitchIntoId + i) = PARTY_SIZE;
     }
 
-    gBattleStruct->field_DF = 0;
+    gBattleStruct->givenExpMons = 0;
     gBattleStruct->field_92 = 0;
 
     gRandomTurnNumber = Random();
@@ -3192,7 +3192,7 @@ void SwitchInClearSetData(void)
 
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = 0;
-    gBattleStruct->field_DA = 0xFF;
+    gBattleStruct->arenaTurnCounter = 0xFF;
 
     ClearBattlerMoveHistory(gActiveBattler);
     ClearBattlerAbilityHistory(gActiveBattler);
@@ -3610,85 +3610,85 @@ NAKED
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
     asm(".syntax unified\n\
-        	push {r4-r6,lr}\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r2, [r0]\n\
-	movs r0, 0x80\n\
-	lsls r0, 17\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _0803B298\n\
-	movs r0, 0x80\n\
-	lsls r0, 18\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _0803B298\n\
-	movs r1, 0x80\n\
-	lsls r1, 24\n\
-	ands r1, r2\n\
-	negs r0, r1\n\
-	orrs r0, r1\n\
-	lsrs r5, r0, 31\n\
-	b _0803B29A\n\
-	.pool\n\
+            push {r4-r6,lr}\n\
+    ldr r0, =gBattleTypeFlags\n\
+    ldr r2, [r0]\n\
+    movs r0, 0x80\n\
+    lsls r0, 17\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _0803B298\n\
+    movs r0, 0x80\n\
+    lsls r0, 18\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _0803B298\n\
+    movs r1, 0x80\n\
+    lsls r1, 24\n\
+    ands r1, r2\n\
+    negs r0, r1\n\
+    orrs r0, r1\n\
+    lsrs r5, r0, 31\n\
+    b _0803B29A\n\
+    .pool\n\
 _0803B288:\n\
-	ldr r1, =gBattleMainFunc\n\
-	ldr r0, =BattleIntroOpponent2SendsOutMonAnimation\n\
-	b _0803B2F0\n\
-	.pool\n\
+    ldr r1, =gBattleMainFunc\n\
+    ldr r0, =BattleIntroOpponent2SendsOutMonAnimation\n\
+    b _0803B2F0\n\
+    .pool\n\
 _0803B298:\n\
-	movs r5, 0x1\n\
+    movs r5, 0x1\n\
 _0803B29A:\n\
-	ldr r0, =gBattleControllerExecFlags\n\
-	ldr r2, [r0]\n\
-	cmp r2, 0\n\
-	bne _0803B2F2\n\
-	ldr r0, =gActiveBattler\n\
-	strb r2, [r0]\n\
-	ldr r1, =gBattlersCount\n\
-	adds r4, r0, 0\n\
-	ldrb r1, [r1]\n\
-	cmp r2, r1\n\
-	bcs _0803B2EC\n\
-	adds r6, r4, 0\n\
+    ldr r0, =gBattleControllerExecFlags\n\
+    ldr r2, [r0]\n\
+    cmp r2, 0\n\
+    bne _0803B2F2\n\
+    ldr r0, =gActiveBattler\n\
+    strb r2, [r0]\n\
+    ldr r1, =gBattlersCount\n\
+    adds r4, r0, 0\n\
+    ldrb r1, [r1]\n\
+    cmp r2, r1\n\
+    bcs _0803B2EC\n\
+    adds r6, r4, 0\n\
 _0803B2B2:\n\
-	ldrb r0, [r4]\n\
-	bl GetBattlerPosition\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, r5\n\
-	bne _0803B2D8\n\
-	movs r0, 0\n\
-	bl BtlController_EmitIntroTrainerBallThrow\n\
-	ldrb r0, [r4]\n\
-	bl MarkBattlerForControllerExec\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x00008040\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _0803B288\n\
+    ldrb r0, [r4]\n\
+    bl GetBattlerPosition\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, r5\n\
+    bne _0803B2D8\n\
+    movs r0, 0\n\
+    bl BtlController_EmitIntroTrainerBallThrow\n\
+    ldrb r0, [r4]\n\
+    bl MarkBattlerForControllerExec\n\
+    ldr r0, =gBattleTypeFlags\n\
+    ldr r0, [r0]\n\
+    ldr r1, =0x00008040\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0803B288\n\
 _0803B2D8:\n\
-	ldrb r0, [r6]\n\
-	adds r0, 0x1\n\
-	strb r0, [r6]\n\
-	ldr r1, =gBattlersCount\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldr r4, =gActiveBattler\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bcc _0803B2B2\n\
+    ldrb r0, [r6]\n\
+    adds r0, 0x1\n\
+    strb r0, [r6]\n\
+    ldr r1, =gBattlersCount\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    ldr r4, =gActiveBattler\n\
+    ldrb r1, [r1]\n\
+    cmp r0, r1\n\
+    bcc _0803B2B2\n\
 _0803B2EC:\n\
-	ldr r1, =gBattleMainFunc\n\
-	ldr r0, =BattleIntroRecordMonsToDex\n\
+    ldr r1, =gBattleMainFunc\n\
+    ldr r0, =BattleIntroRecordMonsToDex\n\
 _0803B2F0:\n\
-	str r0, [r1]\n\
+    str r0, [r1]\n\
 _0803B2F2:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
         .syntax divided");
 }
 #endif // NONMATCHING
@@ -3994,7 +3994,7 @@ void BattleTurnPassed(void)
     if (gBattleResults.battleTurnCounter < 0xFF)
     {
         gBattleResults.battleTurnCounter++;
-        gBattleStruct->field_DA++;
+        gBattleStruct->arenaTurnCounter++;
     }
 
     for (i = 0; i < gBattlersCount; i++)
@@ -4013,7 +4013,7 @@ void BattleTurnPassed(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         BattleScriptExecute(BattleScript_82DB881);
-    else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_DA == 0)
+    else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaTurnCounter == 0)
         BattleScriptExecute(BattleScript_ArenaTurnBeginning);
 }
 
@@ -4591,10 +4591,10 @@ static void sub_803CDF8(void)
 
 void SwapTurnOrder(u8 id1, u8 id2)
 {
-	u32 temp;
+    u32 temp;
 
-	SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
-	SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
+    SWAP(gActionsByTurnOrder[id1], gActionsByTurnOrder[id2], temp);
+    SWAP(gBattlerByTurnOrder[id1], gBattlerByTurnOrder[id2], temp);
 }
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
@@ -5594,7 +5594,7 @@ bool8 TryRunFromBattle(u8 battler)
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
     {
-        gLastUsedItem = gBattleMons[battler].item ;
+        gLastUsedItem = gBattleMons[battler].item;
         gProtectStructs[battler].fleeFlag = 1;
         effect++;
     }

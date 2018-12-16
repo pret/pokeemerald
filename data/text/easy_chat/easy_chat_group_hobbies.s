@@ -17,7 +17,7 @@ gEasyChatWord_Chat:: @ 859B97D
 	.string "CHAT$"
 
 gEasyChatWord_ChildsPlay:: @ 859B982
-	.string "CHILD’S PLAY$"
+	.string "CHILD'S PLAY$"
 
 gEasyChatWord_Toys:: @ 859B98F
 	.string "TOYS$"

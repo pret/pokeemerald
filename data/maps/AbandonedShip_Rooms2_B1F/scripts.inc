@@ -7,7 +7,7 @@ AbandonedShip_Rooms2_B1F_EventScript_238025:: @ 8238025
 
 AbandonedShip_Rooms2_B1F_Text_23802E: @ 823802E
 	.string "This is a perfect place to go exploring!\n"
-	.string "It’s exciting here!\p"
-	.string "I bet there’re amazing treasures on\n"
+	.string "It's exciting here!\p"
+	.string "I bet there're amazing treasures on\n"
 	.string "board.$"
 

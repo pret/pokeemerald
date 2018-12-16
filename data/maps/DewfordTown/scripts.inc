@@ -656,12 +656,12 @@ DewfordTown_Text_1E9A3D: @ 81E9A3D
 
 DewfordTown_Text_1E9A7F: @ 81E9A7F
 	.string "DEWFORD HALL\n"
-	.string "“Everyone’s information exchange!”$"
+	.string "“Everyone's information exchange!”$"
 
 Route104_Text_1E9AAF: @ 81E9AAF
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "We’ve hit land in DEWFORD.\p"
-	.string "I suppose you’re off to deliver that\n"
+	.string "We've hit land in DEWFORD.\p"
+	.string "I suppose you're off to deliver that\n"
 	.string "LETTER to, who was it now, STEVEN!$"
 
 DewfordTown_Text_1E9B24: @ 81E9B24
@@ -673,33 +673,33 @@ DewfordTown_Text_1E9B24: @ 81E9B24
 DewfordTown_Text_1E9B7F: @ 81E9B7F
 	.string "MR. BRINEY: PETALBURG it is, then!\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_1E9BD9: @ 81E9BD9
 	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the LETTER. I’ll be waiting.$"
+	.string "the LETTER. I'll be waiting.$"
 
 Route104_Text_1E9C1D: @ 81E9C1D
 Route109_Text_1E9C1D: @ 81E9C1D
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "We’ve hit land in DEWFORD!\p"
+	.string "We've hit land in DEWFORD!\p"
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail again!$"
 
 DewfordTown_Text_1E9C8A: @ 81E9C8A
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I’ll go out to sea anytime!\p"
+	.string "For you, I'll go out to sea anytime!\p"
 	.string "Now, my friend, where are we bound?$"
 
 DewfordTown_Text_1E9CE5: @ 81E9CE5
 	.string "MR. BRINEY: PETALBURG, is it?\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_1E9D3A: @ 81E9D3A
 	.string "MR. BRINEY: SLATEPORT, is it?\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_1E9D8F: @ 81E9D8F
 	.string "MR. BRINEY: You just tell me whenever\n"
@@ -711,11 +711,11 @@ DewfordTown_Text_1E9DD1: @ 81E9DD1
 
 DewfordTown_Text_1E9E14: @ 81E9E14
 	.string "I hear you, and I like what\n"
-	.string "you’re saying!\p"
-	.string "I’ll give you one of my fishing RODS.$"
+	.string "you're saying!\p"
+	.string "I'll give you one of my fishing RODS.$"
 
 DewfordTown_Text_1E9E65: @ 81E9E65
-	.string "And, as an added bonus, I’ll even throw\n"
+	.string "And, as an added bonus, I'll even throw\n"
 	.string "in a little fishing advice!\p"
 	.string "First, you want to face the water,\n"
 	.string "then use the ROD.\p"
@@ -728,19 +728,19 @@ DewfordTown_Text_1E9E65: @ 81E9E65
 
 DewfordTown_Text_1E9F92: @ 81E9F92
 	.string "Oh, is that so?\n"
-	.string "That’s too bad, then.$"
+	.string "That's too bad, then.$"
 
 DewfordTown_Text_1E9FB8: @ 81E9FB8
 	.string "Yo!\n"
-	.string "How’s your fishing?$"
+	.string "How's your fishing?$"
 
 DewfordTown_Text_1E9FD0: @ 81E9FD0
-	.string "Is that right! That’s great!\n"
+	.string "Is that right! That's great!\n"
 	.string "Haul in some big ones!$"
 
 DewfordTown_Text_1EA004: @ 81EA004
-	.string "Oh, hey, don’t get down on yourself!\n"
-	.string "I’ll give you a little fishing advice.\p"
+	.string "Oh, hey, don't get down on yourself!\n"
+	.string "I'll give you a little fishing advice.\p"
 	.string "First, you want to face the water,\n"
 	.string "then use the ROD.\p"
 	.string "Focus your mind…\n"
@@ -751,49 +751,49 @@ DewfordTown_Text_1EA004: @ 81EA004
 	.string "to haul them in.$"
 
 DewfordTown_Text_1EA136: @ 81EA136
-	.string "I like what’s hip, happening, and trendy.\n"
-	.string "I’m always checking it out.\p"
+	.string "I like what's hip, happening, and trendy.\n"
+	.string "I'm always checking it out.\p"
 	.string "Listen, have you heard about this new\n"
 	.string "“{STR_VAR_1}”?\p"
-	.string "That’s right!\n"
+	.string "That's right!\n"
 	.string "Of course you know!\p"
 	.string "I mean, sheesh,\n"
 	.string "“{STR_VAR_1}”…\l"
-	.string "It’s the hottest thing in cool!\p"
-	.string "Wherever you’re from,\n"
+	.string "It's the hottest thing in cool!\p"
+	.string "Wherever you're from,\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "is the biggest happening thing, right?$"
 
 DewfordTown_Text_1EA242: @ 81EA242
 	.string "Hunh?\n"
-	.string "It’s not the hip and happening thing?\p"
+	.string "It's not the hip and happening thing?\p"
 	.string "Well, hey, you have to tell me,\n"
-	.string "what’s new and what’s “in”?$"
+	.string "what's new and what's “in”?$"
 
 DewfordTown_Text_1EA2AA: @ 81EA2AA
 	.string "Hunh?\n"
 	.string "“{STR_VAR_2}”?\p"
 	.string "… …\p"
-	.string "…Uh… Yeah! That’s right!\n"
+	.string "…Uh… Yeah! That's right!\n"
 	.string "Yeah, I knew that! Knew it all along!\p"
 	.string "Of course I know about that!\n"
 	.string "“{STR_VAR_2},” right?\p"
-	.string "Yeah, that’s it, it’s there!\n"
-	.string "Isn’t “{STR_VAR_2}”\l"
+	.string "Yeah, that's it, it's there!\n"
+	.string "Isn't “{STR_VAR_2}”\l"
 	.string "the coolest, or what?\p"
-	.string "It’s the hippest thing in hip.\n"
-	.string "You think I’d not know about it?\p"
+	.string "It's the hippest thing in hip.\n"
+	.string "You think I'd not know about it?\p"
 	.string "“{STR_VAR_1}”…\n"
-	.string "It’s, like, so five minutes ago.\p"
+	.string "It's, like, so five minutes ago.\p"
 	.string "Now, “{STR_VAR_2}” is\n"
-	.string "what’s vital and in tune with the times!$"
+	.string "what's vital and in tune with the times!$"
 
 DewfordTown_Text_1EA3FE: @ 81EA3FE
 	.string "Hmm…\n"
 	.string "“{STR_VAR_2},” huh?\p"
 	.string "But personally, I think\n"
 	.string "“{STR_VAR_1}”\l"
-	.string "is what’s real in cool.$"
+	.string "is what's real in cool.$"
 
 DewfordTown_Text_1EA443: @ 81EA443
 	.string "Well, if you hear of any happening new\n"

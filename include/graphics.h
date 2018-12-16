@@ -3362,7 +3362,7 @@ extern const u32 gRaySceneHushBg_Gfx[];
 extern const u32 gRaySceneHushRing_Gfx[];
 
 // Pokeballs
-extern const u32 gItemIcon_MasterBall[]; 	
+extern const u32 gItemIcon_MasterBall[];
 extern const u32 gItemIconPalette_MasterBall[];
 extern const u32 gItemIcon_UltraBall[];
 extern const u32 gItemIconPalette_UltraBall[];
@@ -4232,6 +4232,7 @@ extern const u32 gBattleAnimSpriteSheet_132[];
 extern const u32 gBattleAnimSpriteSheet_133[];
 extern const u32 gBattleAnimSpriteSheet_134[];
 extern const u32 gBattleAnimSpriteSheet_135[];
+extern const u32 gBattleAnimSpriteSheet_Particles[];
 extern const u32 gBattleAnimSpriteSheet_136[];
 extern const u32 gBattleAnimSpriteSheet_137[];
 extern const u32 gBattleAnimSpriteSheet_138[];
@@ -4738,5 +4739,18 @@ extern const u32 gUnknown_08D8D58C[];
 // Pokedex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
+
+// Cable Car
+extern const u32 gUnknown_08DBA5B8[];
+extern const u16 gUnknown_08DBA518[];
+extern const u32 gCableCar_Gfx[];
+extern const u32 gCableCarDoor_Gfx[];
+extern const u32 gCableCarCord_Gfx[];
+extern const u16 gCableCar_Pal[];
+
+// Battle Anim
+extern const u32 gUnknown_08C2DDA4[];
+extern const u32 gUnknown_08C2EA50[];
+extern const u32 gUnknown_08C2EA9C[];
 
 #endif //GUARD_GRAPHICS_H

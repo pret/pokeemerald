@@ -8,7 +8,7 @@
 #include "trig.h"
 #include "decompress.h"
 #include "palette.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "strings.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -953,52 +953,52 @@ void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value)
     case 0:
     case 1:
         data->field_4 = (void*)(value);
-		break;
+        break;
     case 2:
         data->field_C = value;
-		break;
+        break;
     case 3:
         data->field_E = value;
-		break;
+        break;
     case 4:
         data->field_10 = value;
-		break;
+        break;
     case 5:
         data->field_11 = value;
-		break;
+        break;
     case 6:
         data->field_12 = value;
-		break;
+        break;
     case 7:
         data->field_13 = value;
-		break;
+        break;
     case 8:
         data->field_14_0 = value;
-		break;
+        break;
     case 9:
         data->field_14_1 = value;
-		break;
+        break;
     case 10:
         data->field_15_0 = value;
-		break;
+        break;
     case 11:
         data->field_15_1 = value;
-		break;
+        break;
     case 12:
         data->field_16_0 = value;
-		break;
+        break;
     case 13:
         data->field_16_1 = value;
-		break;
+        break;
     case 14:
         data->field_16_2 = value;
-		break;
+        break;
     case 15:
         data->field_17_0 = value;
-		break;
+        break;
     case 16:
         data->field_17_1 = value;
-		break;
+        break;
     }
 }
 

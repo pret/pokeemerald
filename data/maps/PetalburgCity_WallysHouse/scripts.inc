@@ -70,18 +70,18 @@ PetalburgCity_WallysHouse_EventScript_2042D5:: @ 82042D5
 	end
 
 PetalburgCity_WallysHouse_Text_2042DF: @ 82042DF
-	.string "You’re…\n"
+	.string "You're…\n"
 	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
 	.string "Thank you for playing with WALLY a\n"
 	.string "little while ago.\p"
-	.string "He’s been frail and sickly ever\n"
+	.string "He's been frail and sickly ever\n"
 	.string "since he was a baby.\p"
-	.string "We’ve sent him to stay with my relatives\n"
+	.string "We've sent him to stay with my relatives\n"
 	.string "in VERDANTURF TOWN for a while.\p"
 	.string "The air is a lot cleaner there\n"
 	.string "than it is here.\p"
-	.string "What’s that? Where’s WALLY?\n"
-	.string "He’s already left, our WALLY.\p"
+	.string "What's that? Where's WALLY?\n"
+	.string "He's already left, our WALLY.\p"
 	.string "I wonder where he could have\n"
 	.string "gotten by now?$"
 
@@ -91,7 +91,7 @@ PetalburgCity_WallysHouse_Text_20444D: @ 820444D
 PetalburgCity_WallysHouse_Text_20446E: @ 820446E
 	.string "{PLAYER}{KUN}! Please excuse us for\n"
 	.string "dragging you here this way.\p"
-	.string "But our WALLY’s become very healthy\n"
+	.string "But our WALLY's become very healthy\n"
 	.string "since he went to VERDANTURF TOWN.\p"
 	.string "We owe it all to you!\p"
 	.string "When WALLY left town, you helped\n"
@@ -100,31 +100,31 @@ PetalburgCity_WallysHouse_Text_20446E: @ 820446E
 	.string "happy.\p"
 	.string "Actually, not just WALLY.\n"
 	.string "It made me, his father, happy too.\p"
-	.string "Happy that he’s gained such a great\n"
+	.string "Happy that he's gained such a great\n"
 	.string "friend as you.\p"
-	.string "This isn’t a bribe or anything, but\n"
-	.string "I’d really like you to have this.$"
+	.string "This isn't a bribe or anything, but\n"
+	.string "I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_20461A: @ 820461A
-	.string "If your POKéMON can SURF, you’ll be\n"
+	.string "If your POKéMON can SURF, you'll be\n"
 	.string "able to go to all sorts of places.$"
 
 PetalburgCity_WallysHouse_Text_204661: @ 8204661
-	.string "WALLY’s coming home soon.\n"
-	.string "I’m looking forward to that.$"
+	.string "WALLY's coming home soon.\n"
+	.string "I'm looking forward to that.$"
 
 PetalburgCity_WallysHouse_Text_204698: @ 8204698
 	.string "Oh? You met WALLY in\n"
 	.string "EVER GRANDE CITY?\p"
-	.string "Oh, {PLAYER}{KUN}, don’t be silly.\p"
+	.string "Oh, {PLAYER}{KUN}, don't be silly.\p"
 	.string "He may have gotten healthy, but he\n"
-	.string "can’t go somewhere far away like\l"
+	.string "can't go somewhere far away like\l"
 	.string "that all by himself.$"
 
 PetalburgCity_WallysHouse_Text_204732: @ 8204732
 	.string "WALLY was really happy when he told\n"
 	.string "us that he caught a POKéMON.\p"
-	.string "It’s been ages since I’ve seen him\n"
+	.string "It's been ages since I've seen him\n"
 	.string "smile like that.$"
 
 PetalburgCity_WallysHouse_Text_2047A7: @ 82047A7
@@ -133,7 +133,7 @@ PetalburgCity_WallysHouse_Text_2047A7: @ 82047A7
 	.string "But our WALLY left VERDANTURF TOWN\n"
 	.string "without telling anyone.\p"
 	.string "You know, WALLY is frail, but\n"
-	.string "he’s surprisingly strong-willed.\p"
-	.string "I’m sure that he’ll come back safe\n"
+	.string "he's surprisingly strong-willed.\p"
+	.string "I'm sure that he'll come back safe\n"
 	.string "and sound one day!$"
 

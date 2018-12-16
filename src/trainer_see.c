@@ -75,17 +75,17 @@ static u8 (*const sDirectionalApproachDistanceFuncs[])(struct EventObject *train
 static bool8 (*const sTrainerSeeFuncList[])(u8 taskId, struct Task *task, struct EventObject *trainerObj) =
 {
     sub_80B4178,
-	sub_80B417C,
-	sub_80B41C0,
-	sub_80B4200,
-	sub_80B425C,
-	sub_80B4318,
-	sub_80B435C,
-	sub_80B4390,
-	sub_80B43AC,
-	sub_80B43E0,
-	sub_80B4438,
-	sub_80B44AC
+    sub_80B417C,
+    sub_80B41C0,
+    sub_80B4200,
+    sub_80B425C,
+    sub_80B4318,
+    sub_80B435C,
+    sub_80B4390,
+    sub_80B43AC,
+    sub_80B43E0,
+    sub_80B4438,
+    sub_80B44AC
 };
 
 static bool8 (*const sTrainerSeeFuncList2[])(u8 taskId, struct Task *task, struct EventObject *trainerObj) =
@@ -630,26 +630,26 @@ static void Task_DestroyTrainerApproachTask(u8 taskId)
     EnableBothScriptContexts();
 }
 
-void sub_80B45D0(void)
+void TryPrepareSecondApproachingTrainer(void)
 {
     if (gNoOfApproachingTrainers == 2)
     {
         if (gApproachingTrainerId == 0)
         {
             gApproachingTrainerId++;
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = TRUE;
             UnfreezeEventObjects();
             FreezeEventObjectsExceptOne(gApproachingTrainers[1].eventObjectId);
         }
         else
         {
             gApproachingTrainerId = 0;
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = FALSE;
         }
     }
     else
     {
-        gSpecialVar_Result = 0;
+        gSpecialVar_Result = FALSE;
     }
 }
 

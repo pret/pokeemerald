@@ -63,7 +63,7 @@ EverGrandeCity_PhoebesRoom_EventScript_2281FC:: @ 82281FC
 
 EverGrandeCity_PhoebesRoom_Text_22820E: @ 822820E
 	.string "Ahahaha!\p"
-	.string "I’m PHOEBE of the ELITE FOUR.\n"
+	.string "I'm PHOEBE of the ELITE FOUR.\n"
 	.string "I did my training on MT. PYRE.\p"
 	.string "While I trained, I gained the ability\n"
 	.string "to commune with GHOST-type POKéMON.\p"
@@ -74,14 +74,14 @@ EverGrandeCity_PhoebesRoom_Text_22820E: @ 822820E
 
 EverGrandeCity_PhoebesRoom_Text_228325: @ 8228325
 	.string "Oh, darn.\n"
-	.string "I’ve gone and lost.$"
+	.string "I've gone and lost.$"
 
 EverGrandeCity_PhoebesRoom_Text_228343: @ 8228343
-	.string "There’s a definite bond between you\n"
+	.string "There's a definite bond between you\n"
 	.string "and your POKéMON, too.\p"
-	.string "I didn’t recognize it, so it’s only\n"
+	.string "I didn't recognize it, so it's only\n"
 	.string "natural that I lost.\p"
-	.string "Yup, I’d like to see how far your bond\n"
+	.string "Yup, I'd like to see how far your bond\n"
 	.string "will carry you.\p"
 	.string "Go ahead, move on to the next room.$"
 

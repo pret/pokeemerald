@@ -461,7 +461,7 @@ RusturfTunnel_Text_22D2E1: @ 822D2E1
 
 RusturfTunnel_Text_22D395: @ 822D395
 	.string "PEEKO!\n"
-	.string "Am I glad to see you’re safe!$"
+	.string "Am I glad to see you're safe!$"
 
 RusturfTunnel_Text_22D3BA: @ 822D3BA
 	.string "PEEKO owes her life to you!\p"
@@ -471,8 +471,8 @@ RusturfTunnel_Text_22D3BA: @ 822D3BA
 	.string "… … … … … … … …\p"
 	.string "Ah, so you are {PLAYER}{KUN}!\n"
 	.string "I sincerely thank you!\p"
-	.string "Now, if there’s anything that troubles\n"
-	.string "you, don’t hesitate to tell me!\p"
+	.string "Now, if there's anything that troubles\n"
+	.string "you, don't hesitate to tell me!\p"
 	.string "You can usually find me in my cottage\n"
 	.string "by the sea near PETALBURG WOODS.\p"
 	.string "Come, PEEKO, we should make our way\n"
@@ -481,7 +481,7 @@ RusturfTunnel_Text_22D3BA: @ 822D3BA
 
 RusturfTunnel_Text_22D510: @ 822D510
 	.string "… …\p"
-	.string "Why can’t they keep digging?\n"
+	.string "Why can't they keep digging?\n"
 	.string "Is the bedrock too hard?\p"
 	.string "My beloved awaits me in VERDANTURF\n"
 	.string "TOWN just beyond here…\p"
@@ -500,7 +500,7 @@ RusturfTunnel_Text_22D65C: @ 822D65C
 	.string "Wow! You shattered that boulder\n"
 	.string "blocking the way.\p"
 	.string "To show you how much I appreciate it,\n"
-	.string "I’d like you to have this HM.$"
+	.string "I'd like you to have this HM.$"
 
 RusturfTunnel_Text_22D6D2: @ 822D6D2
 	.string "That HM contains STRENGTH.\p"
@@ -511,13 +511,13 @@ RusturfTunnel_Text_22D6D2: @ 822D6D2
 RusturfTunnel_Text_22D745: @ 822D745
 	.string "WANDA!\n"
 	.string "Now I can see you anytime!\p"
-	.string "WANDA: That’s…wonderful.\p"
+	.string "WANDA: That's…wonderful.\p"
 	.string "Please, take some rest at my home.$"
 
 RusturfTunnel_Text_22D7A3: @ 822D7A3
 	.string "On the other side of this rock…\n"
 	.string "My boyfriend is there.\p"
-	.string "He… He’s not just digging the tunnel\n"
+	.string "He… He's not just digging the tunnel\n"
 	.string "to come see me.\p"
 	.string "He works his hands raw and rough\n"
 	.string "for the benefit of everyone.$"
@@ -525,7 +525,7 @@ RusturfTunnel_Text_22D7A3: @ 822D7A3
 RusturfTunnel_Text_22D84D: @ 822D84D
 	.string "What do you call a wild man up in the\n"
 	.string "mountains? A mountain man, right?\p"
-	.string "So why don’t they call a POKéMON in\n"
+	.string "So why don't they call a POKéMON in\n"
 	.string "the mountains a mountain POKéMON?$"
 
 RusturfTunnel_Text_22D8DB: @ 822D8DB
@@ -535,5 +535,5 @@ RusturfTunnel_Text_22D8DB: @ 822D8DB
 RusturfTunnel_Text_22D8F9: @ 822D8F9
 	.string "They halted development here to\n"
 	.string "protect POKéMON, right?\l"
-	.string "There’s a feel-good story!$"
+	.string "There's a feel-good story!$"
 

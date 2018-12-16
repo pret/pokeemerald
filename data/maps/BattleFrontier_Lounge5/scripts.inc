@@ -187,8 +187,8 @@ BattleFrontier_Lounge5_Text_264E8F:: @ 8264E8F
 	.string "it will turn sneaky!$"
 
 BattleFrontier_Lounge5_Text_264EEE:: @ 8264EEE
-	.string "That’s silly! An EGG is asleep!\n"
-	.string "I can’t talk to it!$"
+	.string "That's silly! An EGG is asleep!\n"
+	.string "I can't talk to it!$"
 
 BattleFrontier_Lounge5_Text_264F22:: @ 8264F22
 	.string "How charming!\n"

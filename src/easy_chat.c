@@ -1,7 +1,7 @@
 
 // Includes
 #include "global.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "overworld.h"
@@ -52,8 +52,9 @@ struct UnkStruct_203A118
 };
 
 EWRAM_DATA struct UnkStruct_203A118 *gUnknown_0203A118 = NULL;
-EWRAM_DATA u32 gUnknown_0203A11C = 0;
-EWRAM_DATA u32 gUnknown_0203A120 = 0;
+
+EWRAM_DATA void *gUnknown_0203A11C = 0;
+EWRAM_DATA void *gUnknown_0203A120 = 0;
 
 // Static ROM declarations
 

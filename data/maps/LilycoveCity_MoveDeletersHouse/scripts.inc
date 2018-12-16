@@ -73,7 +73,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EAF0:: @ 821EAF0
 
 LilycoveCity_MoveDeletersHouse_Text_21EAFD: @ 821EAFD
 	.string "Uh…\n"
-	.string "Oh, yes, I’m the MOVE DELETER.\p"
+	.string "Oh, yes, I'm the MOVE DELETER.\p"
 	.string "I can make POKéMON forget their moves.\p"
 	.string "Would you like me to do that?$"
 
@@ -85,10 +85,10 @@ LilycoveCity_MoveDeletersHouse_Text_21EB89: @ 821EB89
 
 LilycoveCity_MoveDeletersHouse_Text_21EBA9: @ 821EBA9
 	.string "{STR_VAR_1} knows only one move\n"
-	.string "so it can’t be forgotten…$"
+	.string "so it can't be forgotten…$"
 
 LilycoveCity_MoveDeletersHouse_Text_21EBDA: @ 821EBDA
-	.string "Hm! {STR_VAR_1}’s {STR_VAR_2}?\n"
+	.string "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
 	.string "That move should be forgotten?$"
 
 LilycoveCity_MoveDeletersHouse_Text_21EC06: @ 821EC06
@@ -106,6 +106,6 @@ LilycoveCity_MoveDeletersHouse_Text_21EC78: @ 821EC78
 
 LilycoveCity_MoveDeletersHouse_Text_21EC9C: @ 821EC9C
 	.string "Hm!\p"
-	.string "Your {STR_VAR_1} doesn’t seem willing\n"
+	.string "Your {STR_VAR_1} doesn't seem willing\n"
 	.string "to forget SURF.$"
 

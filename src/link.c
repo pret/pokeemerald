@@ -3,7 +3,7 @@
 #include "global.h"
 #include "main.h"
 #include <m4a.h>
-#include "malloc.h"
+#include "alloc.h"
 #include "reset_save_heap.h"
 #include "save.h"
 #include "bg.h"

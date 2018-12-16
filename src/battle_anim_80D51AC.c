@@ -441,14 +441,14 @@ static void DoHorizontalLunge(struct Sprite *sprite)
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseHorizontalLungeDirection);
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
 }
 
 static void ReverseHorizontalLungeDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[1] = -sprite->data[1];
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -468,14 +468,14 @@ static void DoVerticalDip(struct Sprite *sprite)
     sprite->data[3] = spriteId;
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseVerticalDipDirection);
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
 }
 
 static void ReverseVerticalDipDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[2] = -sprite->data[2];
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 

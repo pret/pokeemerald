@@ -1,7 +1,7 @@
 #include "global.h"
 #include "gpu_regs.h"
 #include "bg.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "constants/items.h"
 #include "constants/event_objects.h"
 #include "constants/moves.h"

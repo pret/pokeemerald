@@ -21,7 +21,7 @@
 #include "main.h"
 #include "load_save.h"
 #include "script.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "overworld.h"
 #include "event_scripts.h"
 #include "constants/battle_frontier.h"
@@ -37,9 +37,6 @@ extern void door_upload_tiles(void);
 
 extern const struct MapLayout *const gMapLayouts[];
 extern const u16 gUnknown_08D856C8[][16];
-extern const u16 gBattleFrontierHeldItems[];
-extern const struct FacilityMon gBattleFrontierMons[];
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
 #define TOTAL_ROUNDS 20
 #define PICKUP_ITEMS_PER_ROUND 10
@@ -1458,7 +1455,7 @@ static u16 sub_81A9F90(u8 count)
         do
         {
             trainerId = sub_8162548(challengeNum + 1, battleNum);
-            for (i = 0 ; i < count; i++)
+            for (i = 0; i < count; i++)
             {
                 if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
                     break;
@@ -1470,7 +1467,7 @@ static u16 sub_81A9F90(u8 count)
         do
         {
             trainerId = sub_8162548(challengeNum, battleNum);
-            for (i = 0 ; i < count; i++)
+            for (i = 0; i < count; i++)
             {
                 if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
                     break;

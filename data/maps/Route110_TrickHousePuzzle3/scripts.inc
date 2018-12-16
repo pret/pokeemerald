@@ -327,34 +327,34 @@ Route110_TrickHousePuzzle3_Text_26C676: @ 826C676
 	.string "I keep coming back to this same place!$"
 
 Route110_TrickHousePuzzle3_Text_26C69D: @ 826C69D
-	.string "I’m already having trouble, and then\n"
-	.string "you have to beat me? It’s not fair!$"
+	.string "I'm already having trouble, and then\n"
+	.string "you have to beat me? It's not fair!$"
 
 Route110_TrickHousePuzzle3_Text_26C6E6: @ 826C6E6
-	.string "It’s full of doors here!\n"
-	.string "It’s too small and dark in here! Help!$"
+	.string "It's full of doors here!\n"
+	.string "It's too small and dark in here! Help!$"
 
 Route110_TrickHousePuzzle3_Text_26C726: @ 826C726
-	.string "I don’t know what’s going on here.\n"
-	.string "I’m starting to feel sad…$"
+	.string "I don't know what's going on here.\n"
+	.string "I'm starting to feel sad…$"
 
 Route110_TrickHousePuzzle3_Text_26C763: @ 826C763
-	.string "You… You’re awful!$"
+	.string "You… You're awful!$"
 
 Route110_TrickHousePuzzle3_Text_26C776: @ 826C776
-	.string "I know I’m weak!\n"
+	.string "I know I'm weak!\n"
 	.string "And, I have no sense of direction!$"
 
 Route110_TrickHousePuzzle3_Text_26C7AA: @ 826C7AA
-	.string "I don’t get it. What would anyone want\n"
+	.string "I don't get it. What would anyone want\n"
 	.string "with a house this bizarre?$"
 
 Route110_TrickHousePuzzle3_Text_26C7EC: @ 826C7EC
-	.string "I don’t get it.\n"
+	.string "I don't get it.\n"
 	.string "How did I lose?$"
 
 Route110_TrickHousePuzzle3_Text_26C80C: @ 826C80C
-	.string "I don’t get it.\n"
+	.string "I don't get it.\n"
 	.string "How many traps are in this house?\p"
 	.string "You may be the one to solve that.$"
 

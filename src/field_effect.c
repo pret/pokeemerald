@@ -6,7 +6,7 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "fldeff_groundshake.h"
@@ -244,7 +244,7 @@ extern void pal_fill_for_maplights(void);
 extern void sub_80E1558(u8);
 extern void sub_80E1570(void);
 extern bool8 sub_80E1584(void);
-extern void sub_80AF0B4(void);
+extern void WarpFadeScreen(void);
 
 // .rodata
 const u32 gNewGameBirchPic[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
@@ -305,7 +305,7 @@ const union AnimCmd *const gNewGameBirchImageAnimTable[] = {
 };
 
 const struct SpriteTemplate gNewGameBirchObjectTemplate = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4102,
     .oam = &gNewGameBirchOamAttributes,
     .anims = gNewGameBirchImageAnimTable,
@@ -383,7 +383,7 @@ const union AnimCmd *const gSpriteAnimTable_855C300[] = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C304 = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4103,
     .oam = &gOamData_855C218,
     .anims = gSpriteAnimTable_855C2F8,
@@ -393,7 +393,7 @@ const struct SpriteTemplate gSpriteTemplate_855C304 = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C31C = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4100,
     .oam = &gOamData_855C220,
     .anims = gSpriteAnimTable_855C2F8,
@@ -403,7 +403,7 @@ const struct SpriteTemplate gSpriteTemplate_855C31C = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C334 = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4112,
     .oam = &gOamData_855C220,
     .anims = gSpriteAnimTable_855C300,
@@ -413,7 +413,7 @@ const struct SpriteTemplate gSpriteTemplate_855C334 = {
 };
 
 const struct SpriteTemplate gSpriteTemplate_855C34C = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4112,
     .oam = &gOamData_855C26C,
     .anims = gSpriteAnimTable_855C300,
@@ -1593,8 +1593,8 @@ static void sub_80B7004(struct Task *task)
 
 static void sub_80B7050(void)
 {
-    music_something();
-    sub_80AF0B4();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
 }
 
 static void sub_80B7060(void)
@@ -1943,8 +1943,8 @@ static bool8 sub_80B7704(struct Task *task, struct EventObject *eventObject, str
 
 static bool8 sub_80B77F8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    music_something();
-    sub_80AF0B4();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     task->data[0]++;
     return FALSE;
 }
@@ -2099,8 +2099,8 @@ static bool8 sub_80B7BCC(struct Task *task, struct EventObject *eventObject, str
 {
     if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
-        music_something();
-        sub_80AF0B4();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
         task->data[0]++;
     }
     return FALSE;
@@ -2161,8 +2161,8 @@ static void EscapeRopeFieldEffect_Step1(struct Task *task)
     u8 spinDirections[5] =  {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
-        music_something();
-        sub_80AF0B4();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
     }
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
@@ -2314,8 +2314,8 @@ static void TeleportFieldEffectTask3(struct Task *task)
     if (task->data[4] >= 0xa8)
     {
         task->data[0]++;
-        music_something();
-        sub_80AF0B4();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
     }
 }
 
@@ -3123,7 +3123,7 @@ static void sub_80B9474(struct Task *task)
 {
     if (sub_80B9508(task->data[1]))
     {
-        sub_80AF0B4();
+        WarpFadeScreen();
         task->data[0]++;
     }
 }
@@ -3591,7 +3591,7 @@ const union AnimCmd *const gSpriteAnimTable_855C5DC[] = {
 };
 
 const struct SpriteTemplate gUnknown_0855C5EC = {
-    .tileTag = 0xffff,
+    .tileTag = 0xFFFF,
     .paletteTag = 4378,
     .oam = &gOamData_855C218,
     .anims = gSpriteAnimTable_855C5DC,

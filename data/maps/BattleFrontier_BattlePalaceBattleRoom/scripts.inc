@@ -600,26 +600,26 @@ BattleFrontier_BattlePalaceBattleRoom_Text_25036D: @ 825036D
 	.string "My, my, if only you could maintain that\n"
 	.string "facade of distinguished authority…\p"
 	.string "Here!\n"
-	.string "Let’s see your FRONTIER PASS!$"
+	.string "Let's see your FRONTIER PASS!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_2503DC: @ 82503DC
 	.string "The Spirits Symbol was embossed on\n"
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_250412: @ 8250412
-	.string "SPENSER: Your POKéMON’s eyes are \n"
+	.string "SPENSER: Your POKéMON's eyes are \n"
 	.string "truly clear and unclouded.\p"
 	.string "I will eagerly await the next\n"
 	.string "opportunity to see you.$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_250485: @ 8250485
 	.string "SPENSER: Gwahahah!\n"
-	.string "You’ve battled your way up again?\p"
+	.string "You've battled your way up again?\p"
 	.string "You must have developed a truly\n"
 	.string "formidable bond with your POKéMON.\p"
 	.string "So be it!\p"
-	.string "This time, I won’t bluster or hold back.\n"
-	.string "This time, there’s no fooling around.\p"
+	.string "This time, I won't bluster or hold back.\n"
+	.string "This time, there's no fooling around.\p"
 	.string "Ready now?\n"
 	.string "Prepare to lose!$"
 

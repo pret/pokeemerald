@@ -205,14 +205,14 @@ void NewGameInitData(void)
     ScriptContext2_RunNewScript(EventScript_2715DE);
     ResetMiniGamesResults();
     copy_strings_to_sav1();
-	SetLilycoveLady();
-	ResetAllApprenticeData();
-	ClearRankingHallRecords();
-	sub_8195E10();
-	sub_801AFD8();
-	sub_800E5AC();
-	sub_81D54BC();
-	ResetContestLinkResults();
+    SetLilycoveLady();
+    ResetAllApprenticeData();
+    ClearRankingHallRecords();
+    sub_8195E10();
+    sub_801AFD8();
+    sub_800E5AC();
+    sub_81D54BC();
+    ResetContestLinkResults();
 }
 
 static void ResetMiniGamesResults(void)
