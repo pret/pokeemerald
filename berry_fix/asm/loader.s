@@ -1,6 +1,6 @@
-	.include "asm/macros/asm.inc"
-	.include "asm/macros/function.inc"
-	.include "constants/gba_constants.inc"
+	.include "../asm/macros/asm.inc"
+	.include "../asm/macros/function.inc"
+	.include "../constants/gba_constants.inc"
 
 	.set SIO_ERROR,      0x0040
 	.set SIO_MULTI_BUSY, 0x0080
