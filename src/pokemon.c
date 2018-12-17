@@ -45,12 +45,6 @@ struct SpeciesItem
     u16 item;
 };
 
-// Extracts the upper 16 bits of a 32-bit number
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
-
-// Extracts the lower 16 bits of a 32-bit number
-#define LOHALF(n) ((n) & 0xFFFF)
-
 extern const struct OamData gUnknown_0831ACB0;
 extern const struct OamData gUnknown_0831ACA8;
 extern const struct SpriteFrameImage gUnknown_082FF3A8[];
@@ -2755,7 +2749,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     CalculateMonStats(mon);
 }
 
-void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
+void sub_806819C(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
     u8 nickname[30];
@@ -2809,7 +2803,7 @@ void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     CalculateMonStats(mon);
 }
 
-void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lvl50)
+void sub_8068338(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
 {
     s32 i;
     u8 nickname[30];
@@ -2937,7 +2931,7 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
     CalculateMonStats(mon);
 }
 
-void sub_80686FC(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
+void sub_80686FC(struct Pokemon *mon, struct BattleTowerPokemon *dest)
 {
     s32 i;
     u16 heldItem;
@@ -5864,10 +5858,10 @@ u16 HoennPokedexNumToSpecies(u16 hoennNum)
 
     species = 0;
 
-    while (species < 411 && gSpeciesToHoennPokedexNum[species] != hoennNum)
+    while (species < (NUM_SPECIES - 1) && gSpeciesToHoennPokedexNum[species] != hoennNum)
         species++;
 
-    if (species == 411)
+    if (species == NUM_SPECIES - 1)
         return 0;
 
     return species + 1;
@@ -5882,10 +5876,10 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
 
     species = 0;
 
-    while (species < 411 && gSpeciesToNationalPokedexNum[species] != nationalNum)
+    while (species < (NUM_SPECIES - 1) && gSpeciesToNationalPokedexNum[species] != nationalNum)
         species++;
 
-    if (species == 411)
+    if (species == NUM_SPECIES - 1)
         return 0;
 
     return species + 1;
@@ -5900,10 +5894,10 @@ u16 NationalToHoennOrder(u16 nationalNum)
 
     hoennNum = 0;
 
-    while (hoennNum < 411 && gHoennToNationalOrder[hoennNum] != nationalNum)
+    while (hoennNum < (NUM_SPECIES - 1) && gHoennToNationalOrder[hoennNum] != nationalNum)
         hoennNum++;
 
-    if (hoennNum == 411)
+    if (hoennNum == NUM_SPECIES - 1)
         return 0;
 
     return hoennNum + 1;
@@ -6584,15 +6578,15 @@ u16 SpeciesToPokedexNum(u16 species)
     else
     {
         species = SpeciesToHoennPokedexNum(species);
-        if (species <= 202)
+        if (species <= HOENN_DEX_COUNT)
             return species;
         return 0xFFFF;
     }
 }
 
-bool32 sub_806E3F8(u16 species)
+bool32 IsSpeciesInHoennDex(u16 species)
 {
-    if (SpeciesToHoennPokedexNum(species) > 202)
+    if (SpeciesToHoennPokedexNum(species) > HOENN_DEX_COUNT)
         return FALSE;
     else
         return TRUE;
@@ -6706,12 +6700,6 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
     return GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
-
-// Extracts the upper 16 bits of a 32-bit number
-#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
-
-// Extracts the lower 16 bits of a 32-bit number
-#define LOHALF(n) ((n) & 0xFFFF)
 
 const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {

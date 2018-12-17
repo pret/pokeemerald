@@ -157,7 +157,7 @@ SECTIONS {
         src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
         src/item_use.o(.text);
-        asm/battle_anim_effects_1.o(.text);
+        src/battle_anim_effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
         src/fire.o(.text);
@@ -186,11 +186,10 @@ SECTIONS {
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
-        asm/cute_sketch.o(.text);
+        asm/contest_painting_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
-        asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/trader.o(.text);
         src/starter_choose.o(.text);
@@ -238,7 +237,7 @@ SECTIONS {
         src/intro.o(.text);
         src/reset_save_heap.o(.text);
         src/field_region_map.o(.text);
-        asm/battle_anim_8170478.o(.text);
+        src/battle_anim_8170478.o(.text);
         src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/lottery_corner.o(.text);
@@ -485,7 +484,7 @@ SECTIONS {
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
-        src/effects_1.o(.rodata);
+        src/battle_anim_effects_1.o(.rodata);
         src/effects_2.o(.rodata);
         src/water.o(.rodata);
         src/fire.o(.rodata);
@@ -512,11 +511,11 @@ SECTIONS {
         src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
-        data/cute_sketch.o(.rodata);
+        data/contest_painting_effects.o(.rodata);
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
         data/slot_machine.o(.rodata);
-        data/contest_painting.o(.rodata);
+        src/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         src/trader.o(.rodata);
         src/starter_choose.o(.rodata);
@@ -550,7 +549,7 @@ SECTIONS {
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
-        data/battle_anim_8170478.o(.rodata);
+        src/battle_anim_8170478.o(.rodata);
         src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
