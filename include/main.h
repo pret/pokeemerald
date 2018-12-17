@@ -51,7 +51,7 @@ extern bool8 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
 extern u8 gLinkVSyncDisabled;
 extern u32 IntrMain_Buffer[];
-extern u8 gPcmDmaCounter;
+extern s8 gPcmDmaCounter;
 
 void AgbMain(void);
 void SetMainCallback2(MainCallback callback);

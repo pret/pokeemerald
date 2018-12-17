@@ -246,7 +246,7 @@ void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
     if (!STWI_init(RFU_SYSTEM_CONFIG))
     {
         u8 *packetBytes;
-        
+
         gRfuState->txParams = 1;
 
         packetBytes = gRfuState->txPacket->rfuPacket8.data;
@@ -348,7 +348,7 @@ void STWI_send_DataTxREQ(void *in, u8 size)
         u8 txParams = (size / sizeof(u32));
         if (size & (sizeof(u32) - 1))
             txParams += 1;
-            
+
         gRfuState->txParams = txParams;
         CpuCopy32(in, gRfuState->txPacket->rfuPacket32.data, gRfuState->txParams * sizeof(u32));
         STWI_start_Command();
@@ -469,11 +469,11 @@ void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
 {
     u32 *packetData;
     u32 arg1;
-    
+
     if (!STWI_init(RFU_CPR_START))
     {
         gRfuState->txParams = 2;
-        
+
         arg1 = unk1 | (unk0 << 16);
         packetData = gRfuState->txPacket->rfuPacket32.data;
         packetData[0] = arg1;
@@ -569,7 +569,7 @@ void STWI_set_timer(u8 unk)
 void STWI_stop_timer(void)
 {
     gRfuState->timerState = 0;
-    
+
     REG_TMCNT_L(gRfuState->timerSelect) = 0;
     REG_TMCNT_H(gRfuState->timerSelect) = 0;
 }
@@ -612,7 +612,7 @@ u16 STWI_init(u8 request)
         gRfuState->timerActive = 0;
         gRfuState->unk_12 = 0;
         gRfuState->unk_15 = 0;
-        
+
         REG_RCNT = 0x100;
         REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
         return FALSE;
@@ -622,22 +622,22 @@ u16 STWI_init(u8 request)
 int STWI_start_Command()
 {
     u16 imeTemp;
-    
+
     // Yes, it matters that it's casted to a u32...
     *(u32*)gRfuState->txPacket->rfuPacket8.data = 0x99660000 | (gRfuState->txParams << 8) | gRfuState->activeCommand;
     REG_SIODATA32 = gRfuState->txPacket->rfuPacket32.command;
-    
+
     gRfuState->unk_0 = 0;
     gRfuState->unk_5 = 1;
-    
+
     imeTemp = REG_IME;
     REG_IME = 0;
     REG_IE |= (INTR_FLAG_TIMER0 << gRfuState->timerSelect);
     REG_IE |= INTR_FLAG_SERIAL;
     REG_IME = imeTemp;
-    
+
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_MULTI_BUSY | SIO_115200_BPS;
-    
+
     return 0;
 }
 
@@ -654,7 +654,7 @@ int STWI_restart_Command(void)
         {
             gRfuState->unk_12 = 1;
             gRfuState->unk_2c = 0;
-            
+
             if (gRfuState->callbackM)
                 gRfuState->callbackM(gRfuState->activeCommand, gRfuState->unk_12);
         }
@@ -662,18 +662,18 @@ int STWI_restart_Command(void)
         {
             gRfuState->unk_12 = 1;
             gRfuState->unk_2c = 0;
-            
+
             if (gRfuState->callbackM)
                 gRfuState->callbackM(gRfuState->activeCommand, gRfuState->unk_12);
-            
+
             gRfuState->unk_0 = 4; //TODO: what's 4
         }
     }
-    
+
     return 0;
 }
 
-int STWI_reset_ClockCounter()
+int STWI_reset_ClockCounter(void)
 {
     gRfuState->unk_0 = 5; //TODO: what is 5
     gRfuState->txParams = 0;
@@ -682,6 +682,6 @@ int STWI_reset_ClockCounter()
     REG_SIOCNT = 0;
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
     REG_SIOCNT = (SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS) + 0x7F;
-    
+
     return 0;
 }

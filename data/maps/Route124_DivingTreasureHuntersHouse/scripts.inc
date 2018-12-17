@@ -11,13 +11,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_270A32:: @ 8270A32
 	faceplayer
 	checkflag FLAG_0x0D9
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270A4E
-	msgbox Route124_DivingTreasureHuntersHouse_Text_270F6C, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_270F6C, MSGBOX_DEFAULT
 	setflag FLAG_0x0D9
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270A5C
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270A4E:: @ 8270A4E
-	msgbox Route124_DivingTreasureHuntersHouse_Text_270FE5, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_270FE5, MSGBOX_DEFAULT
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270A5C
 	end
 
@@ -61,7 +61,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270ACA:: @ 8270ACA
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_270AD0:: @ 8270AD0
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271098, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271098, MSGBOX_DEFAULT
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270ADE
 	end
 
@@ -246,7 +246,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270EB1:: @ 8270EB1
 Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0
 	bufferitemname 0, VAR_0x8008
 	bufferitemname 1, VAR_0x8009
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271132, 5
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271132, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	checkitemspace VAR_0x8009, 1
@@ -261,28 +261,28 @@ Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0
 Route124_DivingTreasureHuntersHouse_EventScript_270F01:: @ 8270F01
 	takeitem VAR_0x8008, 1
 	giveitem_std VAR_0x8009
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271158, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271158, MSGBOX_DEFAULT
 	call Route124_DivingTreasureHuntersHouse_EventScript_270A72
 	compare VAR_TEMP_1, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F61
-	msgbox Route124_DivingTreasureHuntersHouse_Text_27117B, 5
+	msgbox Route124_DivingTreasureHuntersHouse_Text_27117B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270ADE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F43:: @ 8270F43
-	msgbox Route124_DivingTreasureHuntersHouse_Text_2711A0, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_2711A0, MSGBOX_DEFAULT
 	release
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F4D:: @ 8270F4D
-	msgbox Route124_DivingTreasureHuntersHouse_Text_2711D8, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_2711D8, MSGBOX_DEFAULT
 	release
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F57:: @ 8270F57
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271027, 4
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271027, MSGBOX_DEFAULT
 	release
 	end
 
@@ -291,12 +291,12 @@ Route124_DivingTreasureHuntersHouse_EventScript_270F61:: @ 8270F61
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270F63:: @ 8270F63
-	msgbox Route124_DivingTreasureHuntersHouse_Text_271217, 3
+	msgbox Route124_DivingTreasureHuntersHouse_Text_271217, MSGBOX_SIGN
 	end
 
 Route124_DivingTreasureHuntersHouse_Text_270F6C: @ 8270F6C
-	.string "I’m the DIVING TREASURE HUNTER!\p"
-	.string "I’m the awesome dude who makes\n"
+	.string "I'm the DIVING TREASURE HUNTER!\p"
+	.string "I'm the awesome dude who makes\n"
 	.string "deep-sea dives to gather treasures\l"
 	.string "resting at the bottom.$"
 
@@ -305,37 +305,37 @@ Route124_DivingTreasureHuntersHouse_Text_270FE5: @ 8270FE5
 	.string "tools made in ancient times?$"
 
 Route124_DivingTreasureHuntersHouse_Text_271027: @ 8271027
-	.string "You haven’t got any treasures\n"
+	.string "You haven't got any treasures\n"
 	.string "for me…\p"
 	.string "If you see any SHARDS, like the RED\n"
-	.string "SHARD, you’ve got to trade it with me!$"
+	.string "SHARD, you've got to trade it with me!$"
 
 Route124_DivingTreasureHuntersHouse_Text_271098: @ 8271098
 	.string "Oh, hey! That…\n"
-	.string "That’s a SHARD! I’m looking for those!\p"
-	.string "Oh, man, you’ve got to trade that\n"
-	.string "with me! I’ll give you something good!$"
+	.string "That's a SHARD! I'm looking for those!\p"
+	.string "Oh, man, you've got to trade that\n"
+	.string "with me! I'll give you something good!$"
 
 Route124_DivingTreasureHuntersHouse_Text_271117: @ 8271117
 	.string "What do you want to trade?$"
 
 Route124_DivingTreasureHuntersHouse_Text_271132: @ 8271132
-	.string "You’ll trade your {STR_VAR_1} for\n"
+	.string "You'll trade your {STR_VAR_1} for\n"
 	.string "my {STR_VAR_2}, then?$"
 
 Route124_DivingTreasureHuntersHouse_Text_271158: @ 8271158
-	.string "It’s a done deal!\n"
+	.string "It's a done deal!\n"
 	.string "Use that wisely!$"
 
 Route124_DivingTreasureHuntersHouse_Text_27117B: @ 827117B
 	.string "Do you want to trade something else?$"
 
 Route124_DivingTreasureHuntersHouse_Text_2711A0: @ 82711A0
-	.string "Whoops, your BAG’s full.\n"
+	.string "Whoops, your BAG's full.\n"
 	.string "Get rid of some items, friend!$"
 
 Route124_DivingTreasureHuntersHouse_Text_2711D8: @ 82711D8
-	.string "No? That’s a downer.\n"
+	.string "No? That's a downer.\n"
 	.string "Well, if you change your mind, come back.$"
 
 Route124_DivingTreasureHuntersHouse_Text_271217: @ 8271217

@@ -11,18 +11,18 @@ LilycoveCity_ContestLobby_EventScript_279CC5:: @ 8279CC5
 	end
 
 LilycoveCity_ContestLobby_EventScript_279CEA:: @ 8279CEA
-	msgbox LilycoveCity_ContestLobby_Text_27AEA8, 4
+	msgbox LilycoveCity_ContestLobby_Text_27AEA8, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_ContestLobby_EventScript_279CF3:: @ 8279CF3
-	msgbox LilycoveCity_ContestLobby_Text_27ADA7, 4
+	msgbox LilycoveCity_ContestLobby_Text_27ADA7, MSGBOX_DEFAULT
 	giveitem_std ITEM_POKEBLOCK_CASE
 	setflag FLAG_0x05F
-	msgbox LilycoveCity_ContestLobby_Text_27AE47, 4
+	msgbox LilycoveCity_ContestLobby_Text_27AE47, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_ContestLobby_EventScript_279D13:: @ 8279D13
-	msgbox LilycoveCity_ContestLobby_Text_27B67B, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B67B, MSGBOX_DEFAULT
 	switch VAR_0x408A
 	case 4, LilycoveCity_ContestLobby_EventScript_279D2C
 	end
@@ -38,7 +38,7 @@ LilycoveCity_ContestLobby_EventScript_279D2C:: @ 8279D2C
 
 LilycoveCity_ContestLobby_EventScript_279D4B:: @ 8279D4B
 	call LilycoveCity_ContestLobby_EventScript_27205E
-	msgbox LilycoveCity_ContestLobby_Text_27B6E7, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B6E7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -66,27 +66,27 @@ LilycoveCity_ContestLobby_EventScript_279D97:: @ 8279D97
 	end
 
 LilycoveCity_ContestLobby_EventScript_279DDF:: @ 8279DDF
-	msgbox LilycoveCity_ContestLobby_Text_27AF7A, 4
+	msgbox LilycoveCity_ContestLobby_Text_27AF7A, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_279D97
 	end
 
 LilycoveCity_ContestLobby_EventScript_279DED:: @ 8279DED
-	msgbox LilycoveCity_ContestLobby_Text_27B17D, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B17D, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_279D97
 	end
 
 LilycoveCity_ContestLobby_EventScript_279DFB:: @ 8279DFB
-	msgbox LilycoveCity_ContestLobby_Text_27B221, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B221, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_279D97
 	end
 
 LilycoveCity_ContestLobby_EventScript_279E09:: @ 8279E09
-	msgbox LilycoveCity_ContestLobby_Text_27BD4F, 4
+	msgbox LilycoveCity_ContestLobby_Text_27BD4F, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_279E13:: @ 8279E13
-	msgbox LilycoveCity_ContestLobby_Text_27B44A, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B44A, MSGBOX_DEFAULT
 	choosecontestmon
 	compare VAR_0x8004, 255
 	goto_eq LilycoveCity_ContestLobby_EventScript_279E09
@@ -148,39 +148,39 @@ LilycoveCity_ContestLobby_EventScript_279EE1:: @ 8279EE1
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F12:: @ 8279F12
-	msgbox LilycoveCity_ContestLobby_Text_27B471, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B471, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_279E13
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F21:: @ 8279F21
-	msgbox LilycoveCity_ContestLobby_Text_27B5C4, 5
+	msgbox LilycoveCity_ContestLobby_Text_27B5C4, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_279E13
 	case 1, LilycoveCity_ContestLobby_EventScript_279F87
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F45:: @ 8279F45
-	msgbox LilycoveCity_ContestLobby_Text_27B547, 5
+	msgbox LilycoveCity_ContestLobby_Text_27B547, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_279E13
 	case 1, LilycoveCity_ContestLobby_EventScript_279F87
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F69:: @ 8279F69
-	msgbox LilycoveCity_ContestLobby_Text_27B4C4, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B4C4, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_279E13
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F78:: @ 8279F78
-	msgbox LilycoveCity_ContestLobby_Text_27B501, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B501, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_279E13
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_279F87:: @ 8279F87
-	msgbox LilycoveCity_ContestLobby_Text_27B5E2, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B5E2, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	setvar VAR_0x4086, 1
@@ -276,7 +276,7 @@ LinkContestRoom1_EventScript_27A0B1:: @ 827A0B1
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A0C7
 	lockall
-	msgbox LinkContestRoom1_Text_27B711, 4
+	msgbox LinkContestRoom1_Text_27B711, MSGBOX_DEFAULT
 	releaseall
 	return
 
@@ -423,7 +423,7 @@ LinkContestRoom1_EventScript_27A230:: @ 827A230
 LinkContestRoom1_EventScript_27A26C:: @ 827A26C
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A280
-	msgbox LinkContestRoom1_Text_27B830, 4
+	msgbox LinkContestRoom1_Text_27B830, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27A280:: @ 827A280
@@ -847,7 +847,7 @@ LinkContestRoom1_EventScript_27A801:: @ 827A801
 LinkContestRoom1_EventScript_27A853:: @ 827A853
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A867
-	msgbox LinkContestRoom1_Text_27B904, 4
+	msgbox LinkContestRoom1_Text_27B904, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27A867:: @ 827A867
@@ -897,7 +897,7 @@ LinkContestRoom1_EventScript_27A8A5:: @ 827A8A5
 LinkContestRoom1_EventScript_27A8FB:: @ 827A8FB
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A90F
-	msgbox LinkContestRoom1_Text_27BA15, 4
+	msgbox LinkContestRoom1_Text_27BA15, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27A90F:: @ 827A90F
@@ -910,7 +910,7 @@ LinkContestRoom1_EventScript_27A90F:: @ 827A90F
 LinkContestRoom1_EventScript_27A91E:: @ 827A91E
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A932
-	msgbox LinkContestRoom1_Text_27BA30, 4
+	msgbox LinkContestRoom1_Text_27BA30, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27A932:: @ 827A932
@@ -923,7 +923,7 @@ LinkContestRoom1_EventScript_27A932:: @ 827A932
 LinkContestRoom1_EventScript_27A941:: @ 827A941
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A955
-	msgbox LinkContestRoom1_Text_27BAAC, 4
+	msgbox LinkContestRoom1_Text_27BAAC, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27A955:: @ 827A955
@@ -936,7 +936,7 @@ LinkContestRoom1_EventScript_27A955:: @ 827A955
 LinkContestRoom1_EventScript_27A964:: @ 827A964
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27A978
-	msgbox LinkContestRoom1_Text_27BB25, 4
+	msgbox LinkContestRoom1_Text_27BB25, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27A978:: @ 827A978
@@ -987,7 +987,7 @@ LinkContestRoom1_EventScript_27A9D4:: @ 827A9D4
 LinkContestRoom1_EventScript_27AA00:: @ 827AA00
 	compare VAR_0x4088, 5
 	goto_eq LinkContestRoom1_EventScript_27AA14
-	msgbox LinkContestRoom1_Text_27BB4C, 4
+	msgbox LinkContestRoom1_Text_27BB4C, MSGBOX_DEFAULT
 	return
 
 LinkContestRoom1_EventScript_27AA14:: @ 827AA14
@@ -1089,7 +1089,7 @@ LinkContestRoom1_EventScript_27AB36:: @ 827AB36
 	checkflag FLAG_TEMP_2
 	goto_eq LinkContestRoom1_EventScript_27AB82
 	lockall
-	msgbox LinkContestRoom1_Text_27BBA8, 4
+	msgbox LinkContestRoom1_Text_27BBA8, MSGBOX_DEFAULT
 	releaseall
 	call LinkContestRoom1_EventScript_27ABF8
 	call LinkContestRoom1_EventScript_27AC5E
@@ -1104,7 +1104,7 @@ LinkContestRoom1_EventScript_27AB36:: @ 827AB36
 
 LinkContestRoom1_EventScript_27AB82:: @ 827AB82
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, 4
+	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
 	releaseall
 	delay 90
 	special sub_80F88E8
@@ -1199,7 +1199,7 @@ LinkContestRoom1_EventScript_27AC5E:: @ 827AC5E
 	compare VAR_0x8005, 3
 	goto_eq LinkContestRoom1_EventScript_27AC77
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, 4
+	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
 	releaseall
 	return
 
@@ -1212,14 +1212,14 @@ LinkContestRoom1_EventScript_27AC77:: @ 827AC77
 	compare VAR_CONTEST_RANK, 3
 	goto_eq LinkContestRoom1_EventScript_27ACBD
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, 4
+	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
 	releaseall
 	return
 
 LinkContestRoom1_EventScript_27ACA8:: @ 827ACA8
 	lockall
 	call LinkContestRoom1_EventScript_27205E
-	msgbox LinkContestRoom1_Text_27BC2F, 4
+	msgbox LinkContestRoom1_Text_27BC2F, MSGBOX_DEFAULT
 	releaseall
 	setvar VAR_0x408A, 4
 	return
@@ -1229,7 +1229,7 @@ LinkContestRoom1_EventScript_27ACBD:: @ 827ACBD
 	compare VAR_RESULT, 0
 	goto_eq LinkContestRoom1_EventScript_27ACA8
 	lockall
-	msgbox LinkContestRoom1_Text_27BB7A, 4
+	msgbox LinkContestRoom1_Text_27BB7A, MSGBOX_DEFAULT
 	releaseall
 	return
 
@@ -1238,12 +1238,12 @@ LinkContestRoom1_EventScript_27ACDF:: @ 827ACDF
 	incrementgamestat 42
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
-	msgbox LinkContestRoom1_Text_27BBD4, 4
+	msgbox LinkContestRoom1_Text_27BBD4, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
-	msgbox LinkContestRoom1_Text_27BC00, 4
+	msgbox LinkContestRoom1_Text_27BC00, MSGBOX_DEFAULT
 	waitfanfare
 	special sub_80F8390
-	msgbox LinkContestRoom1_Text_27BC16, 4
+	msgbox LinkContestRoom1_Text_27BC16, MSGBOX_DEFAULT
 	releaseall
 	return
 
@@ -1453,13 +1453,13 @@ LilycoveCity_ContestLobby_Text_27ADA7: @ 827ADA7
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
 	.string "POKéMON CONTESTS.\p"
-	.string "Oh? It appears that you don’t have\n"
+	.string "Oh? It appears that you don't have\n"
 	.string "a {POKEBLOCK} CASE yet.\p"
 	.string "In that case, we need to provide you\n"
 	.string "with this!$"
 
 LilycoveCity_ContestLobby_Text_27AE47: @ 827AE47
-	.string "Okay, now that we’ve cleared that\n"
+	.string "Okay, now that we've cleared that\n"
 	.string "up…\p"
 	.string "Hello!\p"
 	.string "This is the reception counter for\n"
@@ -1536,12 +1536,12 @@ LilycoveCity_ContestLobby_Text_27B44A: @ 827B44A
 	.string "Which POKéMON would you like to enter?$"
 
 LilycoveCity_ContestLobby_Text_27B471: @ 827B471
-	.string "I’m terribly sorry, but your POKéMON\n"
+	.string "I'm terribly sorry, but your POKéMON\n"
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet…$"
 
 LilycoveCity_ContestLobby_Text_27B4C4: @ 827B4C4
-	.string "I’m sorry, but an EGG cannot take part\n"
+	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
 LilycoveCity_ContestLobby_Text_27B501: @ 827B501
@@ -1551,7 +1551,7 @@ LilycoveCity_ContestLobby_Text_27B501: @ 827B501
 LilycoveCity_ContestLobby_Text_27B547: @ 827B547
 	.string "Oh, but that RIBBON…\p"
 	.string "Your POKéMON has won this CONTEST\n"
-	.string "before, hasn’t it?\p"
+	.string "before, hasn't it?\p"
 	.string "Would you like to enter it in this\n"
 	.string "CONTEST anyway?$"
 
@@ -1579,14 +1579,14 @@ LilycoveCity_ContestLobby_Text_27B6E7: @ 827B6E7
 	.string "later on.$"
 
 LinkContestRoom1_Text_27B711: @ 827B711
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a {STR_VAR_3} Rank POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
 	.string "POKéMON are as follows:$"
 
 LinkContestRoom1_Text_27B78F: @ 827B78F
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!\p"
 	.string "The participating TRAINERS and their\n"
@@ -1594,12 +1594,12 @@ LinkContestRoom1_Text_27B78F: @ 827B78F
 
 LinkContestRoom1_Text_27B815: @ 827B815
 	.string "MC: Entry No. {STR_VAR_2}!\n"
-	.string "{STR_VAR_1}’s {STR_VAR_3}!$"
+	.string "{STR_VAR_1}'s {STR_VAR_3}!$"
 
 LinkContestRoom1_Text_27B830: @ 827B830
-	.string "MC: We’ve just seen the four POKéMON\n"
+	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
-	.string "Now it’s time for primary judging!\p"
+	.string "Now it's time for primary judging!\p"
 	.string "The audience will vote on their\n"
 	.string "favorite POKéMON contestants.\p"
 	.string "Without any further ado, let the\n"
@@ -1611,16 +1611,16 @@ LinkContestRoom1_Text_27B8F2: @ 827B8F2
 LinkContestRoom1_Text_27B904: @ 827B904
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
-	.string "let’s move on to secondary judging!\p"
+	.string "let's move on to secondary judging!\p"
 	.string "The second stage of judging is the\n"
 	.string "much anticipated appeal time!\p"
 	.string "May the contestants amaze us with\n"
 	.string "superb appeals of dazzling moves!\p"
-	.string "Let’s see a little enthusiasm!\n"
-	.string "Let’s appeal!$"
+	.string "Let's see a little enthusiasm!\n"
+	.string "Let's appeal!$"
 
 LinkContestRoom1_Text_27BA15: @ 827BA15
-	.string "MC: That’s it for judging!$"
+	.string "MC: That's it for judging!$"
 
 LinkContestRoom1_Text_27BA30: @ 827BA30
 	.string "Thank you all for a most wonderful\n"
@@ -1755,7 +1755,7 @@ LilycoveCity_ContestLobby_Text_27C140: @ 827C140
 	.string "condition to take part in a CONTEST…$"
 
 LilycoveCity_ContestLobby_Text_27C186: @ 827C186
-	.string "I’m sorry, but an EGG cannot take part\n"
+	.string "I'm sorry, but an EGG cannot take part\n"
 	.string "in a POKéMON CONTEST.$"
 
 LilycoveCity_ContestLobby_Text_27C1C3: @ 827C1C3
@@ -1823,7 +1823,7 @@ LilycoveCity_ContestLobby_Text_27C742: @ 827C742
 	.string "counter (POKéMON Ruby or Sapphire).$"
 
 LilycoveCity_ContestLobby_Text_27C879: @ 827C879
-	.string "I’m terribly sorry.\p"
+	.string "I'm terribly sorry.\p"
 	.string "G-MODE does not function\n"
 	.string "with Wireless Adapters.\p"
 	.string "Please select E-MODE or try\n"
@@ -1834,7 +1834,7 @@ LilycoveCity_ContestLobby_Text_27C8FD: @ 827C8FD
 	.string "to enter?$"
 
 LinkContestRoom1_Text_27C929: @ 827C929
-	.string "MC: Hello! We’re just getting started\n"
+	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
 	.string "{STR_VAR_2}!$"
 
@@ -1843,9 +1843,9 @@ LinkContestRoom1_Text_27C972: @ 827C972
 	.string "POKéMON are as follows:$"
 
 LinkContestRoom1_Text_27C9AF: @ 827C9AF
-	.string "MC: We’ve just seen the four POKéMON\n"
+	.string "MC: We've just seen the four POKéMON\n"
 	.string "contestants.\p"
-	.string "Now it’s time for primary judging!$"
+	.string "Now it's time for primary judging!$"
 
 LinkContestRoom1_Text_27CA04: @ 827CA04
 	.string "The audience will vote on their\n"
@@ -1858,7 +1858,7 @@ LinkContestRoom1_Text_27CA42: @ 827CA42
 LinkContestRoom1_Text_27CA71: @ 827CA71
 	.string "Voting is now complete!\p"
 	.string "While the votes are being tallied,\n"
-	.string "let’s move on to secondary judging!$"
+	.string "let's move on to secondary judging!$"
 
 LinkContestRoom1_Text_27CAD0: @ 827CAD0
 	.string "The second stage of judging is\n"
@@ -1867,5 +1867,5 @@ LinkContestRoom1_Text_27CAD0: @ 827CAD0
 	.string "superb appeals of dazzling moves!$"
 
 LinkContestRoom1_Text_27CB55: @ 827CB55
-	.string "Let’s see a little enthusiasm!\n"
-	.string "Let’s appeal!$"
+	.string "Let's see a little enthusiasm!\n"
+	.string "Let's appeal!$"

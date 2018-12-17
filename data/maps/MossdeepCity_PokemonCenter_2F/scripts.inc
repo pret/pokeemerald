@@ -18,7 +18,7 @@ MossdeepCity_PokemonCenter_2F_EventScript_222355:: @ 8222355
 	end
 
 MossdeepCity_PokemonCenter_2F_EventScript_22235B:: @ 822235B
-	msgbox MossdeepCity_PokemonCenter_2F_Text_222364, 2
+	msgbox MossdeepCity_PokemonCenter_2F_Text_222364, MSGBOX_NPC
 	end
 
 MossdeepCity_PokemonCenter_2F_Text_222364: @ 8222364

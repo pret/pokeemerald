@@ -27,7 +27,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258431:: @ 8258431
 
 BattleFrontier_BattleFactoryLobby_EventScript_25843A:: @ 825843A
 	lockall
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258ECA, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258ECA, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 8
 	special CallBattleFactoryFunction
@@ -57,16 +57,16 @@ BattleFrontier_BattleFactoryLobby_EventScript_25849B:: @ 825849B
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_2584BD
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattleFactoryLobby_EventScript_2584C6
 
 BattleFrontier_BattleFactoryLobby_EventScript_2584BD:: @ 82584BD
-	msgbox BattleFrontier_BattleFactoryLobby_Text_25926A, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_25926A, MSGBOX_DEFAULT
 	waitmessage
 
 BattleFrontier_BattleFactoryLobby_EventScript_2584C6:: @ 82584C6
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2592BD, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2592BD, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleFactoryLobby_Text_241520, 9
@@ -116,7 +116,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25857D:: @ 825857D
 	call BattleFrontier_BattleFactoryLobby_EventScript_23E8B4
 
 BattleFrontier_BattleFactoryLobby_EventScript_258582:: @ 8258582
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -184,7 +184,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258653:: @ 8258653
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258C27, 5
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258C27, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_25879A
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_2586B9
@@ -216,7 +216,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 
 BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	special SavePlayerParty
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_25875C
@@ -256,7 +256,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25879A:: @ 825879A
 	special LoadPlayerParty
 
 BattleFrontier_BattleFactoryLobby_EventScript_25879D:: @ 825879D
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258BC5, MSGBOX_DEFAULT
 	release
 	end
 
@@ -275,11 +275,11 @@ BattleFrontier_BattleFactoryLobby_Movement_2587AC: @ 82587AC
 	step_end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587B1:: @ 82587B1
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2588EE, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2588EE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587BA:: @ 82587BA
-	msgbox BattleFrontier_BattleFactoryLobby_Text_258F93, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_258F93, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587C3:: @ 82587C3
@@ -291,11 +291,11 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587C9:: @ 82587C9
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587CF:: @ 82587CF
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2589B3, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2589B3, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587D8:: @ 82587D8
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259058, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259058, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_2587E1:: @ 82587E1
@@ -321,26 +321,26 @@ BattleFrontier_BattleFactoryLobby_EventScript_2587FA:: @ 82587FA
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258813:: @ 8258813
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2593D7, 2
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2593D7, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_25881C:: @ 825881C
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2594E5, 2
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2594E5, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258825:: @ 8258825
 	lock
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259547, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259547, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258830:: @ 8258830
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2595C4, 2
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2595C4, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_258839:: @ 8258839
 	lockall
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259721, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259721, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
@@ -359,27 +359,27 @@ BattleFrontier_BattleFactoryLobby_EventScript_258848:: @ 8258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588A6:: @ 82588A6
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259766, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259766, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588B4:: @ 82588B4
-	msgbox BattleFrontier_BattleFactoryLobby_Text_2597FB, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_2597FB, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588C2:: @ 82588C2
-	msgbox BattleFrontier_BattleFactoryLobby_Text_25987E, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_25987E, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588D0:: @ 82588D0
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259920, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259920, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_2588DE:: @ 82588DE
-	msgbox BattleFrontier_BattleFactoryLobby_Text_259A5E, 4
+	msgbox BattleFrontier_BattleFactoryLobby_Text_259A5E, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258848
 	end
 
@@ -413,7 +413,7 @@ BattleFrontier_BattleFactoryLobby_Text_2589B3: @ 82589B3
 	.string "a row, you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
-	.string "If you don’t save, you will be\n"
+	.string "If you don't save, you will be\n"
 	.string "disqualified from your challenge.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258BC5: @ 8258BC5
@@ -446,7 +446,7 @@ BattleFrontier_BattleFactoryLobby_Text_258D54: @ 8258D54
 	.string "for our rental POKéMON.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258D93: @ 8258D93
-	.string "Congratulations! You’ve won seven\n"
+	.string "Congratulations! You've won seven\n"
 	.string "straight Battle Swap matches!$"
 
 BattleFrontier_BattleFactoryLobby_Text_258DD3: @ 8258DD3
@@ -460,18 +460,18 @@ BattleFrontier_BattleFactoryLobby_Text_258E1C: @ 8258E1C
 	.string "some Battle Points.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258E77: @ 8258E77
-	.string "We’ve been waiting for you!\p"
+	.string "We've been waiting for you!\p"
 	.string "Before we resume your challenge,\n"
 	.string "I must save the game.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258ECA: @ 8258ECA
-	.string "I’m sorry to say this, but you didn’t\n"
+	.string "I'm sorry to say this, but you didn't\n"
 	.string "save before you quit playing last time.\p"
 	.string "As a result, you have been disqualified\n"
 	.string "from your challenge.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258F55: @ 8258F55
-	.string "We’ll return your personal POKéMON.$"
+	.string "We'll return your personal POKéMON.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258F79: @ 8258F79
 	.string "{PLAYER} received the prize\n"
@@ -503,7 +503,7 @@ BattleFrontier_BattleFactoryLobby_Text_259058: @ 8259058
 	.string "a row, you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattleFactoryLobby_Text_25926A: @ 825926A
@@ -531,11 +531,11 @@ BattleFrontier_BattleFactoryLobby_Text_2593D7: @ 82593D7
 	.string "Hi!\n"
 	.string "You, there!\p"
 	.string "Are you thinking that the events here\n"
-	.string "are easy since you don’t need to have\l"
+	.string "are easy since you don't need to have\l"
 	.string "a raised team of POKéMON?\p"
-	.string "I wouldn’t be too sure about winning\n"
+	.string "I wouldn't be too sure about winning\n"
 	.string "that easily.\p"
-	.string "If you don’t have thorough knowledge\n"
+	.string "If you don't have thorough knowledge\n"
 	.string "about POKéMON and their moves,\l"
 	.string "it will be tough to keep winning.$"
 
@@ -545,20 +545,20 @@ BattleFrontier_BattleFactoryLobby_Text_2594E5: @ 82594E5
 	.string "They wiped the floor with us…$"
 
 BattleFrontier_BattleFactoryLobby_Text_259547: @ 8259547
-	.string "Things haven’t been going my way\n"
+	.string "Things haven't been going my way\n"
 	.string "at all.\p"
-	.string "You need to check your opponent’s\n"
+	.string "You need to check your opponent's\n"
 	.string "POKéMON during battle to see if\l"
-	.string "they’re any good.$"
+	.string "they're any good.$"
 
 BattleFrontier_BattleFactoryLobby_Text_2595C4: @ 82595C4
 	.string "You know how the staff here give you\n"
 	.string "a few hints about your next opponent?\p"
-	.string "Well, I’m a full-grown man, but I have\n"
+	.string "Well, I'm a full-grown man, but I have\n"
 	.string "trouble figuring out their hints.$"
 
 BattleFrontier_BattleFactoryLobby_Text_259658: @ 8259658
-	.string "Like, I’m really tough, but I get bored\n"
+	.string "Like, I'm really tough, but I get bored\n"
 	.string "really easily, so I just kept swapping\l"
 	.string "and battling over and over.\p"
 	.string "So anyway, when I kept entering\n"
@@ -589,14 +589,14 @@ BattleFrontier_BattleFactoryLobby_Text_2597FB: @ 82597FB
 BattleFrontier_BattleFactoryLobby_Text_25987E: @ 825987E
 	.string "After every battle you win, you may\n"
 	.string "swap for one of your defeated\l"
-	.string "opponent’s POKéMON.\p"
+	.string "opponent's POKéMON.\p"
 	.string "You will not be able to swap POKéMON\n"
 	.string "with the seventh TRAINER in the event.$"
 
 BattleFrontier_BattleFactoryLobby_Text_259920: @ 8259920
 	.string "There are two key points to be aware\n"
 	.string "of when swapping POKéMON.\p"
-	.string "First, when swapping, you can’t check\n"
+	.string "First, when swapping, you can't check\n"
 	.string "the stats of the POKéMON you are\l"
 	.string "about to receive.\p"
 	.string "Second, the POKéMON on your team\n"
@@ -607,5 +607,5 @@ BattleFrontier_BattleFactoryLobby_Text_259920: @ 8259920
 
 BattleFrontier_BattleFactoryLobby_Text_259A5E: @ 8259A5E
 	.string "In the Open Level, the rental POKéMON\n"
-	.string "and the opposing TRAINERS’ POKéMON\l"
+	.string "and the opposing TRAINERS' POKéMON\l"
 	.string "are all Level 100.$"

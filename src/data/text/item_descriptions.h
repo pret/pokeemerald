@@ -1,7 +1,5 @@
-#ifndef POKEEMERALD_DATA_TEXT_ITEM_DESCRIPTIONS_H
-#define POKEEMERALD_DATA_TEXT_ITEM_DESCRIPTIONS_H
 const u8 gDummyItemDescription[] = _("?????");
-//Pokeballs
+// Pokeballs
 const u8 gMasterBallItemDescription[] = _("The best BALL that\ncatches a POKéMON\nwithout fail.");
 const u8 gUltraBallItemDescription[] = _("A better BALL with\na higher catch rate\nthan a GREAT BALL.");
 const u8 gGreatBallItemDescription[] = _("A good BALL with a\nhigher catch rate\nthan a POKé BALL.");
@@ -9,12 +7,12 @@ const u8 gPokeBallItemDescription[] = _("A tool used for\ncatching wild\nPOKéMO
 const u8 gSafariBallItemDescription[] = _("A special BALL that\nis used only in the\nSAFARI ZONE.");
 const u8 gNetBallItemDescription[] = _("A BALL that works\nwell on WATER- and\nBUG-type POKéMON.");
 const u8 gDiveBallItemDescription[] = _("A BALL that works\nbetter on POKéMON\non the ocean floor.");
-const u8 gNestBallItemDescription[] =	_("A BALL that works\nbetter on weaker\nPOKéMON.");
+const u8 gNestBallItemDescription[] = _("A BALL that works\nbetter on weaker\nPOKéMON.");
 const u8 gRepeatBallItemDescription[] = _("A BALL that works\nbetter on POKéMON\ncaught before.");
 const u8 gTimerBallItemDescription[] = _("A BALL that gains\npower in battles\ntaking many turns.");
 const u8 gLuxuryBallItemDescription[] = _("A cozy BALL that\nmakes POKéMON\nmore friendly.");
 const u8 gPremierBallItemDescription[] = _("A rare BALL made\nin commemoration\nof some event.");
-//Medicine
+// Medicine
 const u8 gPotionItemDescription[] = _("Restores the HP of\na POKéMON by\n20 points.");
 const u8 gAntidoteItemDescription[] = _("Heals a poisoned\nPOKéMON.");
 const u8 gBurnHealItemDescription[] = _("Heals POKéMON\nof a burn.");
@@ -39,7 +37,7 @@ const u8 gRevivalHerbItemDescription[] = _("A very bitter herb\nthat revives a\n
 const u8 gEtherItemDescription[] = _("Restores the PP\nof a selected move\nby 10.");
 const u8 gMaxEtherItemDescription[] = _("Fully restores the\nPP of a selected\nmove.");
 const u8 gElixirItemDescription[] = _("Restores the PP\nof all moves by 10.");
-const u8 gMaxElixirItemDescription[] = _("Fully restores the\nPP of a POKéMON’s\nmoves.");
+const u8 gMaxElixirItemDescription[] = _("Fully restores the\nPP of a POKéMON's\nmoves.");
 const u8 gLavaCookieItemDescription[] = _("A local specialty\nthat heals all\nstatus problems.");
 const u8 gBlueFluteItemDescription[] = _("A glass flute that\nawakens sleeping\nPOKéMON.");
 const u8 gYellowFluteItemDescription[] = _("A glass flute that\nsnaps POKéMON\nout of confusion.");
@@ -48,14 +46,14 @@ const u8 gBlackFluteItemDescription[] = _("A glass flute that\nkeeps away wild\n
 const u8 gWhiteFluteItemDescription[] = _("A glass flute that\nlures wild POKéMON.");
 const u8 gBerryJuiceItemDescription[] = _("A 100% pure juice\nthat restores HP\nby 20 points.");
 const u8 gSacredAshItemDescription[] = _("Fully revives and\nrestores all\nfainted POKéMON.");
-//Collectibles
+// Collectibles
 const u8 gShoalSaltItemDescription[] = _("Salt obtained from\ndeep inside the\nSHOAL CAVE.");
 const u8 gShoalShellItemDescription[] = _("A seashell found\ndeep inside the\nSHOAL CAVE.");
 const u8 gRedShardItemDescription[] = _("A shard from an\nancient item. Can\nbe sold cheaply.");
 const u8 gBlueShardItemDescription[] = _("A shard from an\nancient item. Can\nbe sold cheaply.");
 const u8 gYellowShardItemDescription[] = _("A shard from an\nancient item. Can\nbe sold cheaply.");
 const u8 gGreenShardItemDescription[] = _("A shard from an\nancient item. Can\nbe sold cheaply.");
-//Vitamins
+// Vitamins
 const u8 gHPUpItemDescription[] = _("Raises the base HP\nof one POKéMON.");
 const u8 gProteinItemDescription[] = _("Raises the base\nATTACK stat of one\nPOKéMON.");
 const u8 gIronItemDescription[] = _("Raises the base\nDEFENSE stat of\none POKéMON.");
@@ -65,7 +63,7 @@ const u8 gRareCandyItemDescription[] = _("Raises the level\nof a POKéMON by\non
 const u8 gPPUpItemDescription[] = _("Raises the maximum\nPP of a selected\nmove.");
 const u8 gZincItemDescription[] = _("Raises the base\nSP. DEF stat of one\nPOKéMON.");
 const u8 gPPMaxItemDescription[] = _("Raises the PP of a\nmove to its maximum\npoints.");
-//Battle items
+// Battle items
 const u8 gGuardSpecItemDescription[] = _("Prevents stat\nreduction when\nused in battle.");
 const u8 gDireHitItemDescription[] = _("Raises the\ncritical-hit ratio\nduring one battle.");
 const u8 gXAttackItemDescription[] = _("Raises the stat\nATTACK during one\nbattle.");
@@ -75,19 +73,19 @@ const u8 gXAccuracyItemDescription[] = _("Raises accuracy\nof attack moves\nduri
 const u8 gXSpecialItemDescription[] = _("Raises the stat\nSP. ATK during one\nbattle.");
 const u8 gPokeDollItemDescription[] = _("Use to flee from\nany battle with\na wild POKéMON.");
 const u8 gFluffyTailItemDescription[] = _("Use to flee from\nany battle with\na wild POKéMON.");
-//Field items
+// Field items
 const u8 gSuperRepelItemDescription[] = _("Repels weak wild\nPOKéMON for 200\nsteps.");
 const u8 gMaxRepelItemDescription[] = _("Repels weak wild\nPOKéMON for 250\nsteps.");
 const u8 gEscapeRopeItemDescription[] = _("Use to escape\ninstantly from a\ncave or a dungeon.");
 const u8 gRepelItemDescription[] = _("Repels weak wild\nPOKéMON for 100\nsteps.");
-//Evolution stones
+// Evolution stones
 const u8 gSunStoneItemDescription[] = _("Makes certain\nspecies of POKéMON\nevolve.");
 const u8 gMoonStoneItemDescription[] = _("Makes certain\nspecies of POKéMON\nevolve.");
 const u8 gFireStoneItemDescription[] = _("Makes certain\nspecies of POKéMON\nevolve.");
 const u8 gThunderStoneItemDescription[] = _("Makes certain\nspecies of POKéMON\nevolve.");
 const u8 gWaterStoneItemDescription[] = _("Makes certain\nspecies of POKéMON\nevolve.");
 const u8 gLeafStoneItemDescription[] = _("Makes certain\nspecies of POKéMON\nevolve.");
-//Valuable items
+// Valuable items
 const u8 gTinyMushroomItemDescription[] = _("A plain mushroom\nthat would sell\nat a cheap price.");
 const u8 gBigMushroomItemDescription[] = _("A rare mushroom\nthat would sell at a\nhigh price.");
 const u8 gPearlItemDescription[] = _("A pretty pearl\nthat would sell at a\ncheap price.");
@@ -96,7 +94,7 @@ const u8 gStardustItemDescription[] = _("Beautiful red sand.\nCan be sold at a\n
 const u8 gStarPieceItemDescription[] = _("A red gem shard.\nIt would sell for a\nvery high price.");
 const u8 gNuggetItemDescription[] = _("A nugget of pure\ngold. Can be sold at\na high price.");
 const u8 gHeartScaleItemDescription[] = _("A lovely scale.\nIt is coveted by\ncollectors.");
-//Mail
+// Mail
 const u8 gOrangeMailItemDescription[] = _("A ZIGZAGOON-print\nMAIL to be held by\na POKéMON.");
 const u8 gHarborMailItemDescription[] = _("A WINGULL-print\nMAIL to be held by\na POKéMON.");
 const u8 gGlitterMailItemDescription[] = _("A PIKACHU-print\nMAIL to be held by\na POKéMON.");
@@ -109,7 +107,7 @@ const u8 gTropicMailItemDescription[] = _("A BELLOSSOM-print\nMAIL to be held by
 const u8 gDreamMailItemDescription[] = _("MAIL featuring a\nsketch of the\nholding POKéMON.");
 const u8 gFabMailItemDescription[] = _("A gorgeous-print\nMAIL to be held\nby a POKéMON.");
 const u8 gRetroMailItemDescription[] = _("MAIL featuring the\ndrawings of three\nPOKéMON.");
-//Berries
+// Berries
 const u8 gCheriBerryItemDescription[] = _("A hold item that\nheals paralysis\nin battle.");
 const u8 gChestoBerryItemDescription[] = _("A hold item that\nawakens POKéMON\nin battle.");
 const u8 gPechaBerryItemDescription[] = _("A hold item that\nheals poisoning\nin battle.");
@@ -153,7 +151,7 @@ const u8 gApicotBerryItemDescription[] = _("A hold item that\nraises SP. DEF in\
 const u8 gLansatBerryItemDescription[] = _("A hold item that\nups the critical-\nhit rate in a pinch.");
 const u8 gStarfBerryItemDescription[] = _("A hold item that\nsharply boosts a\nstat in a pinch.");
 const u8 gEnigmaBerryItemDescription[] = _("{POKEBLOCK} ingredient.\nPlant in loamy soil\nto grow a mystery.");
-//Hold items
+// Hold items
 const u8 gBrightPowderItemDescription[] = _("A hold item that\ncasts a glare to\nreduce accuracy.");
 const u8 gWhiteHerbItemDescription[] = _("A hold item that\nrestores any\nlowered stat.");
 const u8 gMachoBraceItemDescription[] = _("A hold item that\npromotes growth,\nbut reduces SPEED.");
@@ -161,7 +159,7 @@ const u8 gExpShareItemDescription[] = _("A hold item that\ngets EXP. points\nfro
 const u8 gQuickClawItemDescription[] = _("A hold item that\noccasionally allows\nthe first strike.");
 const u8 gSootheBellItemDescription[] = _("A hold item that\ncalms spirits and\nfosters friendship.");
 const u8 gMentalHerbItemDescription[] = _("A hold item that\nsnaps POKéMON out\nof infatuation.");
-const u8 gChoiceBandItemDescription[] = _("Raises a move’s\npower, but permits\nonly that move.");
+const u8 gChoiceBandItemDescription[] = _("Raises a move's\npower, but permits\nonly that move.");
 const u8 gKingsRockItemDescription[] = _("A hold item that\nmay cause flinching\nwhen the foe is hit.");
 const u8 gSilverPowderItemDescription[] = _("A hold item that\nraises the power of\nBUG-type moves.");
 const u8 gAmuletCoinItemDescription[] = _("Doubles money in\nbattle if the\nholder takes part.");
@@ -196,17 +194,17 @@ const u8 gSilkScarfItemDescription[] = _("A hold item that\nraises the power of\
 const u8 gUpGradeItemDescription[] = _("A peculiar box made\nby SILPH CO.");
 const u8 gShellBellItemDescription[] = _("A hold item that\nrestores HP upon\nstriking the foe.");
 const u8 gSeaIncenseItemDescription[] = _("A hold item that\nslightly boosts\nWATER-type moves.");
-const u8 gLaxIncenseItemDescription[] = _("A hold item that\nslightly lowers the\nfoe’s accuracy.");
-const u8 gLuckyPunchItemDescription[] = _("A hold item that\nraises CHANSEY’s\ncritical-hit rate.");
-const u8 gMetalPowderItemDescription[] = _("A hold item that\nraises DITTO’s\nDEFENSE.");
-const u8 gThickClubItemDescription[] = _("A hold item that \nraises CUBONE or\nMAROWAK’s ATTACK.");
-const u8 gStickItemDescription[] = _("A hold item that\nraises FARFETCH’D’s\ncritical-hit ratio.");
+const u8 gLaxIncenseItemDescription[] = _("A hold item that\nslightly lowers the\nfoe's accuracy.");
+const u8 gLuckyPunchItemDescription[] = _("A hold item that\nraises CHANSEY's\ncritical-hit rate.");
+const u8 gMetalPowderItemDescription[] = _("A hold item that\nraises DITTO's\nDEFENSE.");
+const u8 gThickClubItemDescription[] = _("A hold item that \nraises CUBONE or\nMAROWAK's ATTACK.");
+const u8 gStickItemDescription[] = _("A hold item that\nraises FARFETCH'D's\ncritical-hit ratio.");
 const u8 gRedScarfItemDescription[] = _("A hold item that\nraises COOL in\nCONTESTS.");
 const u8 gBlueScarfItemDescription[] = _("A hold item that\nraises BEAUTY in\nCONTESTS.");
 const u8 gPinkScarfItemDescription[] = _("A hold item that\nraises CUTE in\nCONTESTS.");
 const u8 gGreenScarfItemDescription[] = _("A hold item that\nraises SMART in\nCONTESTS.");
 const u8 gYellowScarfItemDescription[] = _("A hold item that\nraises TOUGH in\nCONTESTS.");
-//Key items
+// Key items
 const u8 gMachBikeItemDescription[] = _("A folding bicycle\nthat doubles your\nspeed or better.");
 const u8 gCoinCaseItemDescription[] = _("A case that holds\nup to 9,999 COINS.");
 const u8 gItemfinderItemDescription[] = _("A device that\nsignals an invisible\nitem by sound.");
@@ -216,7 +214,7 @@ const u8 gSuperRodItemDescription[] = _("The best fishing\nrod for catching\nwil
 const u8 gSSTicketItemDescription[] = _("The ticket required\nfor sailing on a\nferry.");
 const u8 gContestPassItemDescription[] = _("The pass required\nfor entering\nPOKéMON CONTESTS.");
 const u8 gWailmerPailItemDescription[] = _("A tool used for\nwatering BERRIES\nand plants.");
-const u8 gDevonGoodsItemDescription[] = _("A package that\ncontains DEVON’s\nmachine parts.");
+const u8 gDevonGoodsItemDescription[] = _("A package that\ncontains DEVON's\nmachine parts.");
 const u8 gSootSackItemDescription[] = _("A sack used to\ngather and hold\nvolcanic ash.");
 const u8 gBasementKeyItemDescription[] = _("The key for NEW\nMAUVILLE beneath\nMAUVILLE CITY.");
 const u8 gAcroBikeItemDescription[] = _("A folding bicycle\ncapable of jumps\nand wheelies.");
@@ -236,7 +234,7 @@ const u8 gStorageKeyItemDescription[] = _("The key to the\nstorage inside the\nA
 const u8 gRootFossilItemDescription[] = _("A fossil of an\nancient, seafloor-\ndwelling POKéMON.");
 const u8 gClawFossilItemDescription[] = _("A fossil of an\nancient, seafloor-\ndwelling POKéMON.");
 const u8 gDevonScopeItemDescription[] = _("A device by DEVON\nthat signals any\nunseeable POKéMON.");
-//TMs/HMs
+// TMs/HMs
 const u8 gTM01ItemDescription[] = _("Powerful, but makes\nthe user flinch if\nhit by the foe.");
 const u8 gTM02ItemDescription[] = _("Hooks and slashes\nthe foe with long,\nsharp claws.");
 const u8 gTM03ItemDescription[] = _("Generates an\nultrasonic wave\nthat may confuse.");
@@ -276,13 +274,13 @@ const u8 gTM36ItemDescription[] = _("Hurls sludge at the\nfoe. It may poison\nth
 const u8 gTM37ItemDescription[] = _("Causes a sandstorm\nthat hits the foe\nover several turns.");
 const u8 gTM38ItemDescription[] = _("A powerful fire\nattack that may\nburn the foe.");
 const u8 gTM39ItemDescription[] = _("Stops the foe from\nmoving with rocks.\nMay lower SPEED.");
-const u8 gTM40ItemDescription[] = _("An extremely fast\nattack that can’t\nbe avoided.");
+const u8 gTM40ItemDescription[] = _("An extremely fast\nattack that can't\nbe avoided.");
 const u8 gTM41ItemDescription[] = _("Prevents the foe\nfrom using the same\nmove in a row.");
 const u8 gTM42ItemDescription[] = _("Raises ATTACK when\npoisoned, burned,\nor paralyzed.");
 const u8 gTM43ItemDescription[] = _("Adds an effect to\nattack depending\non the location.");
 const u8 gTM44ItemDescription[] = _("The user sleeps for\n2 turns to restore\nhealth and status.");
 const u8 gTM45ItemDescription[] = _("Makes it tough to\nattack a foe of the\nopposite gender.");
-const u8 gTM46ItemDescription[] = _("While attacking,\nit may steal the\nfoe’s held item.");
+const u8 gTM46ItemDescription[] = _("While attacking,\nit may steal the\nfoe's held item.");
 const u8 gTM47ItemDescription[] = _("Spreads hard-\nedged wings and\nslams into the foe.");
 const u8 gTM48ItemDescription[] = _("Switches abilities\nwith the foe on the\nturn this is used.");
 const u8 gTM49ItemDescription[] = _("Steals the effects\nof the move the foe\nis trying to use.");
@@ -296,18 +294,18 @@ const u8 gHM05ItemDescription[] = _("Looses a powerful\nblast of light that\nred
 const u8 gHM06ItemDescription[] = _("A rock-crushingly\ntough attack that\nmay lower DEFENSE.");
 const u8 gHM07ItemDescription[] = _("Attacks the foe\nwith enough power\nto climb waterfalls.");
 const u8 gHM08ItemDescription[] = _("Dives underwater\nthe 1st turn, then\nattacks next turn.");
-//FireRed/LeafGreen key items
-const u8 gOaksParcelItemDescription[] = _("A parcel for PROF.\nOAK from a POKéMON\nMART’s clerk.");
+// FireRed/LeafGreen key items
+const u8 gOaksParcelItemDescription[] = _("A parcel for PROF.\nOAK from a POKéMON\nMART's clerk.");
 const u8 gPokeFluteItemDescription[] = _("A sweet-sounding\nflute that awakens\nPOKéMON.");
-const u8 gSecretKeyItemDescription[] = _("The key to the\nCINNABAR ISLAND\nGYM’s entrance.");
+const u8 gSecretKeyItemDescription[] = _("The key to the\nCINNABAR ISLAND\nGYM's entrance.");
 const u8 gBikeVoucherItemDescription[] = _("A voucher for\nobtaining a bicycle\nfrom the BIKE SHOP.");
-const u8 gGoldTeethItemDescription[] = _("Gold dentures lost\nby the SAFARI\nZONE’s WARDEN.");
+const u8 gGoldTeethItemDescription[] = _("Gold dentures lost\nby the SAFARI\nZONE's WARDEN.");
 const u8 gOldAmberItemDescription[] = _("A stone containing\nthe genes of an\nancient POKéMON.");
-const u8 gCardKeyItemDescription[] = _("A card-type door\nkey used in SILPH\nCO’s office.");
-const u8 gLiftKeyItemDescription[] = _("An elevator key\nused in TEAM\nROCKET’s HIDEOUT.");
-const u8 gHelixFossilItemDescription[] = _("A piece of an\nancient marine\nPOKéMON’s seashell.");
-const u8 gDomeFossilItemDescription[] = _("A piece of an\nancient marine\nPOKéMON’s shell.");
-const u8 gSilphScopeItemDescription[] = _("SILPH CO’s scope\nmakes unseeable\nPOKéMON visible.");
+const u8 gCardKeyItemDescription[] = _("A card-type door\nkey used in SILPH\nCO's office.");
+const u8 gLiftKeyItemDescription[] = _("An elevator key\nused in TEAM\nROCKET's HIDEOUT.");
+const u8 gHelixFossilItemDescription[] = _("A piece of an\nancient marine\nPOKéMON's seashell.");
+const u8 gDomeFossilItemDescription[] = _("A piece of an\nancient marine\nPOKéMON's shell.");
+const u8 gSilphScopeItemDescription[] = _("SILPH CO's scope\nmakes unseeable\nPOKéMON visible.");
 const u8 gBicycleItemDescription[] = _("A folding bicycle\nthat is faster than\nthe RUNNING SHOES.");
 const u8 gTownMapItemDescription[] = _("Can be viewed\nanytime. Shows your\npresent location.");
 const u8 gVSSeekerItemDescription[] = _("A rechargeable unit\nthat flags battle-\nready TRAINERS.");
@@ -323,7 +321,6 @@ const u8 gAuroraTicketItemDescription[] = _("A ticket required\nto board the shi
 const u8 gPowderJarItemDescription[] = _("Stores BERRY\nPOWDER made using\na BERRY CRUSHER.");
 const u8 gRubyItemDescription[] = _("An exquisite, red-\nglowing gem that\nsymbolizes passion.");
 const u8 gSapphireItemDescription[] = _("A brilliant blue gem\nthat symbolizes\nhonesty.");
-//Emerald-specific key items
-const u8 gMagmaEmblemItemDescription[] = _("A medal-like item in\nthe same shape as\nTEAM MAGMA’s mark.");
+// Emerald-specific key items
+const u8 gMagmaEmblemItemDescription[] = _("A medal-like item in\nthe same shape as\nTEAM MAGMA's mark.");
 const u8 gOldSeaMapItemDescription[] = _("A faded sea chart\nthat shows the way\nto a certain island.");
-#endif // POKEEMERALD_DATA_TEXT_ITEM_DESCRIPTIONS_H

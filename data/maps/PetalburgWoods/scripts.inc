@@ -6,27 +6,27 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	call PetalburgWoods_EventScript_22E124
 	applymovement 4, PetalburgWoods_Movement_22E1CB
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E34F, 4
+	msgbox PetalburgWoods_Text_22E34F, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E3AA, 4
+	msgbox PetalburgWoods_Text_22E3AA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E1F6
 	waitmovement 0
 	applymovement 4, PetalburgWoods_Movement_2725A6
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E428, 4
+	msgbox PetalburgWoods_Text_22E428, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, PetalburgWoods_Movement_22E1E4
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E457, 4
+	msgbox PetalburgWoods_Text_22E457, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E20E
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E4A5, 4
-	trainerbattle 3, TRAINER_GRUNT_8, 0, PetalburgWoods_Text_22E542
+	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_8, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
 	call PetalburgWoods_EventScript_22E138
@@ -43,26 +43,26 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	waitmovement 0
 	applymovement 255, PetalburgWoods_Movement_2725A4
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E34F, 4
+	msgbox PetalburgWoods_Text_22E34F, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E3AA, 4
+	msgbox PetalburgWoods_Text_22E3AA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E205
 	waitmovement 0
 	applymovement 4, PetalburgWoods_Movement_2725A6
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E428, 4
+	msgbox PetalburgWoods_Text_22E428, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, PetalburgWoods_Movement_22E1EA
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E457, 4
+	msgbox PetalburgWoods_Text_22E457, MSGBOX_DEFAULT
 	applymovement 255, PetalburgWoods_Movement_2725A6
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E4A5, 4
-	trainerbattle 3, TRAINER_GRUNT_8, 0, PetalburgWoods_Text_22E542
+	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_8, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
 	call PetalburgWoods_EventScript_22E138
@@ -75,19 +75,19 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 PetalburgWoods_EventScript_22E124:: @ 822E124
 	applymovement 4, PetalburgWoods_Movement_22E1B1
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E332, 4
+	msgbox PetalburgWoods_Text_22E332, MSGBOX_DEFAULT
 	closemessage
 	return
 
 PetalburgWoods_EventScript_22E138:: @ 822E138
-	msgbox PetalburgWoods_Text_22E563, 4
+	msgbox PetalburgWoods_Text_22E563, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, PetalburgWoods_Movement_22E1FD
 	waitmovement 0
 	removeobject 3
 	applymovement 255, PetalburgWoods_Movement_2725AA
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E63D, 4
+	msgbox PetalburgWoods_Text_22E63D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_22E17D
@@ -95,15 +95,15 @@ PetalburgWoods_EventScript_22E138:: @ 822E138
 	end
 
 PetalburgWoods_EventScript_22E17D:: @ 822E17D
-	msgbox PetalburgWoods_Text_22E741, 4
+	msgbox PetalburgWoods_Text_22E741, MSGBOX_DEFAULT
 	goto PetalburgWoods_EventScript_22E18B
 	end
 
 PetalburgWoods_EventScript_22E18B:: @ 822E18B
-	msgbox PetalburgWoods_Text_22E6C7, 4
+	msgbox PetalburgWoods_Text_22E6C7, MSGBOX_DEFAULT
 	applymovement 4, PetalburgWoods_Movement_22E1EE
 	waitmovement 0
-	msgbox PetalburgWoods_Text_22E712, 4
+	msgbox PetalburgWoods_Text_22E712, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -239,11 +239,11 @@ PetalburgWoods_Movement_22E20E: @ 822E20E
 	step_end
 
 PetalburgWoods_EventScript_22E210:: @ 822E210
-	msgbox PetalburgWoods_Text_22EA0C, 2
+	msgbox PetalburgWoods_Text_22EA0C, MSGBOX_NPC
 	end
 
 PetalburgWoods_EventScript_22E219:: @ 822E219
-	msgbox PetalburgWoods_Text_22EA8B, 2
+	msgbox PetalburgWoods_Text_22EA8B, MSGBOX_NPC
 	end
 
 PetalburgWoods_EventScript_22E222:: @ 822E222
@@ -251,7 +251,7 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	faceplayer
 	checkflag FLAG_0x129
 	goto_eq PetalburgWoods_EventScript_22E251
-	msgbox PetalburgWoods_Text_22EAFE, 4
+	msgbox PetalburgWoods_Text_22EAFE, MSGBOX_DEFAULT
 	giveitem_std ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_272054
@@ -260,25 +260,25 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	end
 
 PetalburgWoods_EventScript_22E251:: @ 822E251
-	msgbox PetalburgWoods_Text_22EB63, 4
+	msgbox PetalburgWoods_Text_22EB63, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgWoods_EventScript_22E25B:: @ 822E25B
-	msgbox PetalburgWoods_Text_22EC10, 3
+	msgbox PetalburgWoods_Text_22EC10, MSGBOX_SIGN
 	end
 
 PetalburgWoods_EventScript_22E264:: @ 822E264
-	msgbox PetalburgWoods_Text_22ED07, 3
+	msgbox PetalburgWoods_Text_22ED07, MSGBOX_SIGN
 	end
 
 PetalburgWoods_EventScript_22E26D:: @ 822E26D
-	trainerbattle 0, TRAINER_LYLE, 0, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
-	msgbox PetalburgWoods_Text_22E7EF, 6
+	trainerbattle_single TRAINER_LYLE, PetalburgWoods_Text_22E77D, PetalburgWoods_Text_22E7C1
+	msgbox PetalburgWoods_Text_22E7EF, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_EventScript_22E284:: @ 822E284
-	trainerbattle 2, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
+	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq PetalburgWoods_EventScript_22E31B
@@ -286,7 +286,7 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_22E2EF
-	msgbox PetalburgWoods_Text_22E889, 4
+	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT
 	release
 	end
 
@@ -299,33 +299,27 @@ PetalburgWoods_EventScript_22E2C5:: @ 822E2C5
 	end
 
 PetalburgWoods_EventScript_22E2D6:: @ 822E2D6
-	msgbox PetalburgWoods_Text_22E8C3, 4
-	setvar VAR_0x8004, 621
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 621
-	callstd 8
+	msgbox PetalburgWoods_Text_22E8C3, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JAMES_1
 	release
 	end
 
 PetalburgWoods_EventScript_22E2EF:: @ 822E2EF
 	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq PetalburgWoods_EventScript_22E302
-	msgbox PetalburgWoods_Text_22E889, 4
+	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgWoods_EventScript_22E302:: @ 822E302
-	msgbox PetalburgWoods_Text_22E914, 4
-	setvar VAR_0x8004, 621
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 621
-	callstd 8
+	msgbox PetalburgWoods_Text_22E914, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JAMES_1
 	release
 	end
 
 PetalburgWoods_EventScript_22E31B:: @ 822E31B
-	trainerbattle 5, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E966, PetalburgWoods_Text_22E998
-	msgbox PetalburgWoods_Text_22E9B6, 6
+	trainerbattle_rematch TRAINER_JAMES_1, PetalburgWoods_Text_22E966, PetalburgWoods_Text_22E998
+	msgbox PetalburgWoods_Text_22E9B6, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_Text_22E332: @ 822E332
@@ -340,7 +334,7 @@ PetalburgWoods_Text_22E34F: @ 822E34F
 PetalburgWoods_Text_22E3AA: @ 822E3AA
 	.string "I was going to ambush you, but you\n"
 	.string "had to dawdle in PETALBURG WOODS\l"
-	.string "forever, didn’t you?\p"
+	.string "forever, didn't you?\p"
 	.string "I got sick of waiting, so here I am!$"
 
 PetalburgWoods_Text_22E428: @ 822E428
@@ -349,49 +343,49 @@ PetalburgWoods_Text_22E428: @ 822E428
 
 PetalburgWoods_Text_22E457: @ 822E457
 	.string "Aiyeeeh!\p"
-	.string "You’re a POKéMON TRAINER, aren’t you?\n"
-	.string "You’ve got to help me, please!$"
+	.string "You're a POKéMON TRAINER, aren't you?\n"
+	.string "You've got to help me, please!$"
 
 PetalburgWoods_Text_22E4A5: @ 822E4A5
-	.string "Hunh? What do you think you’re doing?\n"
-	.string "What, you’re going to protect him?\p"
+	.string "Hunh? What do you think you're doing?\n"
+	.string "What, you're going to protect him?\p"
 	.string "No one who crosses TEAM AQUA\n"
 	.string "gets any mercy, not even a kid!\p"
 	.string "Come on and battle me!$"
 
 PetalburgWoods_Text_22E542: @ 822E542
-	.string "You’re kidding me! You’re tough!$"
+	.string "You're kidding me! You're tough!$"
 
 PetalburgWoods_Text_22E563: @ 822E563
-	.string "Grrr… You’ve got some nerve\n"
+	.string "Grrr… You've got some nerve\n"
 	.string "meddling with TEAM AQUA!\l"
 	.string "Come on and battle me again!\p"
-	.string "I wish I could say that, but I’m out of\n"
+	.string "I wish I could say that, but I'm out of\n"
 	.string "POKéMON…\p"
 	.string "And, hey, we of TEAM AQUA are also\n"
 	.string "after something in RUSTBORO.\p"
-	.string "I’ll let you go today!$"
+	.string "I'll let you go today!$"
 
 PetalburgWoods_Text_22E63D: @ 822E63D
 	.string "Whew…\n"
 	.string "That was awfully close!\p"
-	.string "Thanks to you, he didn’t rob me of\n"
+	.string "Thanks to you, he didn't rob me of\n"
 	.string "these important papers.\p"
-	.string "I know, I’ll give you a GREAT BALL as\n"
+	.string "I know, I'll give you a GREAT BALL as\n"
 	.string "my thanks!$"
 
 PetalburgWoods_Text_22E6C7: @ 822E6C7
-	.string "Didn’t that TEAM AQUA thug say\n"
+	.string "Didn't that TEAM AQUA thug say\n"
 	.string "they were after something in\l"
 	.string "RUSTBORO, too?$"
 
 PetalburgWoods_Text_22E712: @ 822E712
-	.string "Uh-oh! It’s a crisis!\n"
-	.string "I can’t be wasting time!$"
+	.string "Uh-oh! It's a crisis!\n"
+	.string "I can't be wasting time!$"
 
 PetalburgWoods_Text_22E741: @ 822E741
-	.string "You’re loaded with items.\n"
-	.string "I can’t give you this GREAT BALL.$"
+	.string "You're loaded with items.\n"
+	.string "I can't give you this GREAT BALL.$"
 
 PetalburgWoods_Text_22E77D: @ 822E77D
 	.string "I caught a whole bunch of POKéMON!\p"
@@ -400,18 +394,18 @@ PetalburgWoods_Text_22E77D: @ 822E77D
 
 PetalburgWoods_Text_22E7C1: @ 822E7C1
 	.string "I have all these POKéMON,\n"
-	.string "but I couldn’t win…$"
+	.string "but I couldn't win…$"
 
 PetalburgWoods_Text_22E7EF: @ 822E7EF
 	.string "I caught a bunch of POKéMON.\n"
-	.string "Now I’m out of POKé BALLS.$"
+	.string "Now I'm out of POKé BALLS.$"
 
 PetalburgWoods_Text_22E827: @ 822E827
 	.string "If you take BUG POKéMON to school,\n"
 	.string "you get to be instantly popular!$"
 
 PetalburgWoods_Text_22E86B: @ 822E86B
-	.string "I can’t be popular if I lose.$"
+	.string "I can't be popular if I lose.$"
 
 PetalburgWoods_Text_22E889: @ 822E889
 	.string "If you have a big BUG POKéMON,\n"
@@ -420,24 +414,24 @@ PetalburgWoods_Text_22E889: @ 822E889
 PetalburgWoods_Text_22E8C3: @ 822E8C3
 	.string "I want a rematch when my BUG\n"
 	.string "POKéMON grow up!\p"
-	.string "I’m registering you in my POKéNAV!$"
+	.string "I'm registering you in my POKéNAV!$"
 
 PetalburgWoods_Text_22E914: @ 822E914
 	.string "I want a rematch when my BUG \n"
 	.string "POKéMON grow up!\p"
-	.string "I’m registering you in my POKéNAV!$"
+	.string "I'm registering you in my POKéNAV!$"
 
 PetalburgWoods_Text_22E966: @ 822E966
 	.string "My BUG POKéMON have grown.\n"
-	.string "I’ll be popular again.$"
+	.string "I'll be popular again.$"
 
 PetalburgWoods_Text_22E998: @ 822E998
-	.string "I can’t be popular if I lose.$"
+	.string "I can't be popular if I lose.$"
 
 PetalburgWoods_Text_22E9B6: @ 822E9B6
 	.string "You get to be popular if you have\n"
 	.string "strong POKéMON, right?\l"
-	.string "So, I’ve been training hard.$"
+	.string "So, I've been training hard.$"
 
 PetalburgWoods_Text_22EA0C: @ 822EA0C
 	.string "Yo, there!\n"
@@ -448,18 +442,18 @@ PetalburgWoods_Text_22EA0C: @ 822EA0C
 
 PetalburgWoods_Text_22EA8B: @ 822EA8B
 	.string "Sometimes, there are things on the\n"
-	.string "ground even if you can’t see them.\p"
-	.string "That’s why I always check where I’m\n"
+	.string "ground even if you can't see them.\p"
+	.string "That's why I always check where I'm\n"
 	.string "walking.$"
 
 PetalburgWoods_Text_22EAFE: @ 822EAFE
 	.string "Oh, neat!\n"
-	.string "That’s the BADGE from RUSTBORO GYM!\p"
+	.string "That's the BADGE from RUSTBORO GYM!\p"
 	.string "You must be a TRAINER.\n"
 	.string "You should try using this item.$"
 
 PetalburgWoods_Text_22EB63: @ 822EB63
-	.string "It’s a MIRACLE SEED.\n"
+	.string "It's a MIRACLE SEED.\n"
 	.string "If a POKéMON holds that item, its\l"
 	.string "GRASS-type moves become stronger.\p"
 	.string "Besides MIRACLE SEED, I think there are\n"

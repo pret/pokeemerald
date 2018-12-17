@@ -30,7 +30,7 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	faceplayer
 	checkflag FLAG_0x0E3
 	goto_eq Route118_EventScript_1F3E69
-	msgbox Route118_Text_1F427B, 5
+	msgbox Route118_Text_1F427B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3E3E
 	compare VAR_RESULT, 0
@@ -38,33 +38,33 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	end
 
 Route118_EventScript_1F3E3E:: @ 81F3E3E
-	msgbox Route118_Text_1F42AF, 4
+	msgbox Route118_Text_1F42AF, MSGBOX_DEFAULT
 	giveitem_std ITEM_GOOD_ROD
 	setflag FLAG_0x0E3
-	msgbox Route118_Text_1F42E7, 4
+	msgbox Route118_Text_1F42E7, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3E5F:: @ 81F3E5F
-	msgbox Route118_Text_1F4319, 4
+	msgbox Route118_Text_1F4319, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3E69:: @ 81F3E69
-	msgbox Route118_Text_1F4331, 4
+	msgbox Route118_Text_1F4331, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3E73:: @ 81F3E73
-	msgbox Route118_Text_1F4367, 2
+	msgbox Route118_Text_1F4367, MSGBOX_NPC
 	end
 
 Route118_EventScript_1F3E7C:: @ 81F3E7C
-	msgbox Route118_Text_1F43F4, 3
+	msgbox Route118_Text_1F43F4, MSGBOX_SIGN
 	end
 
 Route118_EventScript_1F3E85:: @ 81F3E85
-	msgbox Route118_Text_1F440E, 3
+	msgbox Route118_Text_1F440E, MSGBOX_SIGN
 	end
 
 Route118_EventScript_1F3E8E:: @ 81F3E8E
@@ -100,7 +100,7 @@ Route118_EventScript_1F3EE4:: @ 81F3EE4
 	applymovement 19, Route118_Movement_1F3F65
 	waitmovement 0
 	delay 30
-	msgbox Route118_Text_1F40BE, 4
+	msgbox Route118_Text_1F40BE, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
 	call_if 1, Route118_EventScript_1F3F28
@@ -187,122 +187,116 @@ Route118_Movement_1F3F7E: @ 81F3F7E
 	step_end
 
 Route118_EventScript_1F3F87:: @ 81F3F87
-	trainerbattle 2, TRAINER_ROSE_1, 0, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
+	trainerbattle_single TRAINER_ROSE_1, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3FD2
-	msgbox Route118_Text_29D2FA, 4
+	msgbox Route118_Text_29D2FA, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F3FB3:: @ 81F3FB3
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route118_Text_29D343, 4
-	setvar VAR_0x8004, 37
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 37
-	callstd 8
+	msgbox Route118_Text_29D343, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ROSE_1
 	release
 	end
 
 Route118_EventScript_1F3FD2:: @ 81F3FD2
-	trainerbattle 5, TRAINER_ROSE_1, 0, Route118_Text_29D382, Route118_Text_29D3AA
-	msgbox Route118_Text_29D3D9, 6
+	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_29D382, Route118_Text_29D3AA
+	msgbox Route118_Text_29D3D9, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F3FE9:: @ 81F3FE9
-	trainerbattle 0, TRAINER_BARNY, 0, Route118_Text_29D515, Route118_Text_29D55C
-	msgbox Route118_Text_29D587, 6
+	trainerbattle_single TRAINER_BARNY, Route118_Text_29D515, Route118_Text_29D55C
+	msgbox Route118_Text_29D587, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4000:: @ 81F4000
-	trainerbattle 0, TRAINER_WADE, 0, Route118_Text_29D5DF, Route118_Text_29D64C
-	msgbox Route118_Text_29D663, 6
+	trainerbattle_single TRAINER_WADE, Route118_Text_29D5DF, Route118_Text_29D64C
+	msgbox Route118_Text_29D663, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4017:: @ 81F4017
-	trainerbattle 2, TRAINER_DALTON_1, 0, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
+	trainerbattle_single TRAINER_DALTON_1, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F4062
-	msgbox Route118_Text_29D6D8, 4
+	msgbox Route118_Text_29D6D8, MSGBOX_DEFAULT
 	release
 	end
 
 Route118_EventScript_1F4043:: @ 81F4043
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route118_Text_29D74A, 4
-	setvar VAR_0x8004, 196
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 196
-	callstd 8
+	msgbox Route118_Text_29D74A, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DALTON_1
 	release
 	end
 
 Route118_EventScript_1F4062:: @ 81F4062
-	trainerbattle 5, TRAINER_DALTON_1, 0, Route118_Text_29D789, Route118_Text_29D7CA
-	msgbox Route118_Text_29D7D5, 6
+	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_29D789, Route118_Text_29D7CA
+	msgbox Route118_Text_29D7D5, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4079:: @ 81F4079
-	trainerbattle 0, TRAINER_PERRY, 0, Route118_Text_29D41D, Route118_Text_29D45B
-	msgbox Route118_Text_29D46C, 6
+	trainerbattle_single TRAINER_PERRY, Route118_Text_29D41D, Route118_Text_29D45B
+	msgbox Route118_Text_29D46C, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F4090:: @ 81F4090
-	trainerbattle 0, TRAINER_CHESTER, 0, Route118_Text_29D4A6, Route118_Text_29D4C4
-	msgbox Route118_Text_29D4DA, 6
+	trainerbattle_single TRAINER_CHESTER, Route118_Text_29D4A6, Route118_Text_29D4C4
+	msgbox Route118_Text_29D4DA, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_1F40A7:: @ 81F40A7
-	trainerbattle 0, TRAINER_DEANDRE, 0, Route118_Text_29D81B, Route118_Text_29D83C
-	msgbox Route118_Text_29D872, 6
+	trainerbattle_single TRAINER_DEANDRE, Route118_Text_29D81B, Route118_Text_29D83C
+	msgbox Route118_Text_29D872, MSGBOX_AUTOCLOSE
 	end
 
 Route118_Text_1F40BE: @ 81F40BE
 	.string "STEVEN: Hi, {PLAYER}{KUN}!\p"
-	.string "It’s me, STEVEN!\n"
+	.string "It's me, STEVEN!\n"
 	.string "We met in the cave near DEWFORD.\p"
 	.string "Have you met many kinds of POKéMON\n"
 	.string "since I last saw you?\p"
 	.string "There are many, many kinds of POKéMON\n"
 	.string "in this wide world of ours.\p"
 	.string "If you wanted to raise only your\n"
-	.string "favorites, that’s fine.\p"
+	.string "favorites, that's fine.\p"
 	.string "Perhaps you find it more fun to raise\n"
 	.string "all sorts of POKéMON.\p"
 	.string "As a TRAINER of POKéMON,\n"
 	.string "what do you think?\p"
-	.string "Of course, it’s not any of my business.\p"
+	.string "Of course, it's not any of my business.\p"
 	.string "It would be nice if we were to meet\n"
 	.string "again somewhere.$"
 
 Route118_Text_1F427B: @ 81F427B
 	.string "Hmm!\n"
 	.string "A GOOD ROD is really good!\p"
-	.string "Wouldn’t you agree?$"
+	.string "Wouldn't you agree?$"
 
 Route118_Text_1F42AF: @ 81F42AF
 	.string "Hmm!\n"
-	.string "We’re of identical minds!\p"
+	.string "We're of identical minds!\p"
 	.string "Hmm!\n"
 	.string "Take this GOOD ROD!$"
 
 Route118_Text_1F42E7: @ 81F42E7
-	.string "Wherever there’s water, try your luck\n"
+	.string "Wherever there's water, try your luck\n"
 	.string "at fishing.$"
 
 Route118_Text_1F4319: @ 81F4319
-	.string "Don’t you like to fish?$"
+	.string "Don't you like to fish?$"
 
 Route118_Text_1F4331: @ 81F4331
 	.string "Try catching all sorts of POKéMON\n"
 	.string "with your GOOD ROD.$"
 
 Route118_Text_1F4367: @ 81F4367
-	.string "Even if there isn’t a boat, you can\n"
+	.string "Even if there isn't a boat, you can\n"
 	.string "cross rivers and the sea if you have\l"
 	.string "a POKéMON that knows SURF.\p"
 	.string "POKéMON can be counted on to do so\n"

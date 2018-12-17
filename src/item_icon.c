@@ -1,16 +1,17 @@
 #include "global.h"
-#include "item_icon.h"
-#include "malloc.h"
-#include "sprite.h"
 #include "decompress.h"
+#include "graphics.h"
+#include "item_icon.h"
+#include "alloc.h"
+#include "sprite.h"
 #include "constants/items.h"
-#include "data/item_icon_table.h"
 
 // EWRAM vars
 EWRAM_DATA void *gItemIconDecompressionBuffer = NULL;
 EWRAM_DATA void *gItemIcon4x4Buffer = NULL;
 
 // const rom data
+#include "data/item_icon_table.h"
 
 static const struct OamData sOamData_ItemIcon =
 {

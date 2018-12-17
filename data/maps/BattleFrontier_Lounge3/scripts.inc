@@ -10,7 +10,7 @@ BattleFrontier_Lounge3_EventScript_261D83:: @ 8261D83
 	compare VAR_0x8004, 2
 	goto_if 3, BattleFrontier_Lounge3_EventScript_261EEB
 	setflag FLAG_0x157
-	msgbox BattleFrontier_Lounge3_Text_262061, 4
+	msgbox BattleFrontier_Lounge3_Text_262061, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261DAF
 	end
 
@@ -18,10 +18,10 @@ BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
 	special sub_813A820
 	waitmessage
 	waitbuttonpress
-	msgbox BattleFrontier_Lounge3_Text_262A60, 5
+	msgbox BattleFrontier_Lounge3_Text_262A60, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge3_EventScript_261FA5
-	msgbox BattleFrontier_Lounge3_Text_262ABD, 5
+	msgbox BattleFrontier_Lounge3_Text_262ABD, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge3_EventScript_261FA5
 	message BattleFrontier_Lounge3_Text_262B42
@@ -60,7 +60,7 @@ BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
 	specialvar VAR_TEMP_1, sub_813AA04
 	compare VAR_TEMP_1, VAR_0x8008
 	goto_if 4, BattleFrontier_Lounge3_EventScript_261E75
-	msgbox BattleFrontier_Lounge3_Text_262B6E, 4
+	msgbox BattleFrontier_Lounge3_Text_262B6E, MSGBOX_DEFAULT
 	message BattleFrontier_Lounge3_Text_262B42
 	waitmessage
 	goto BattleFrontier_Lounge3_EventScript_261DE9
@@ -72,7 +72,7 @@ BattleFrontier_Lounge3_EventScript_261E75:: @ 8261E75
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
 	special sub_813A8FC
 	playse SE_REGI
-	msgbox BattleFrontier_Lounge3_Text_262BE0, 4
+	msgbox BattleFrontier_Lounge3_Text_262BE0, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261E96
 	end
 
@@ -107,12 +107,12 @@ BattleFrontier_Lounge3_EventScript_261EE5:: @ 8261EE5
 	return
 
 BattleFrontier_Lounge3_EventScript_261EEB:: @ 8261EEB
-	msgbox BattleFrontier_Lounge3_Text_261FFE, 4
+	msgbox BattleFrontier_Lounge3_Text_261FFE, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
 BattleFrontier_Lounge3_EventScript_261EF9:: @ 8261EF9
-	msgbox BattleFrontier_Lounge3_Text_26346B, 4
+	msgbox BattleFrontier_Lounge3_Text_26346B, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
 	goto_if 4, BattleFrontier_Lounge3_EventScript_261F12
 	goto BattleFrontier_Lounge3_EventScript_261DAF
@@ -127,7 +127,7 @@ BattleFrontier_Lounge3_EventScript_261F12:: @ 8261F12
 	end
 
 BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
-	msgbox BattleFrontier_Lounge3_Text_263334, 4
+	msgbox BattleFrontier_Lounge3_Text_263334, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 0
 	call_if 1, BattleFrontier_Lounge3_EventScript_261F80
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 1
@@ -136,13 +136,13 @@ BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
 	call_if 1, BattleFrontier_Lounge3_EventScript_261F94
 	msgbox BattleFrontier_Lounge3_Text_2633D4, 9
 	special sub_813A9D0
-	msgbox BattleFrontier_Lounge3_Text_2633F2, 4
+	msgbox BattleFrontier_Lounge3_Text_2633F2, MSGBOX_DEFAULT
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
 	release
 	end
 
 BattleFrontier_Lounge3_EventScript_261F71:: @ 8261F71
-	msgbox BattleFrontier_Lounge3_Text_263298, 4
+	msgbox BattleFrontier_Lounge3_Text_263298, MSGBOX_DEFAULT
 	setvar VAR_FRONTIER_GAMBLER_PLACED_BET_F, 0
 	release
 	end
@@ -170,7 +170,7 @@ BattleFrontier_Lounge3_EventScript_261F9E:: @ 8261F9E
 	end
 
 BattleFrontier_Lounge3_EventScript_261FA5:: @ 8261FA5
-	msgbox BattleFrontier_Lounge3_Text_26342D, 4
+	msgbox BattleFrontier_Lounge3_Text_26342D, MSGBOX_DEFAULT
 	release
 	end
 
@@ -180,27 +180,27 @@ BattleFrontier_Lounge3_EventScript_261FAF:: @ 8261FAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261FB8:: @ 8261FB8
-	msgbox BattleFrontier_Lounge3_Text_263545, 2
+	msgbox BattleFrontier_Lounge3_Text_263545, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge3_EventScript_261FC1:: @ 8261FC1
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge3_Text_26346F, 4
+	msgbox BattleFrontier_Lounge3_Text_26346F, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
 BattleFrontier_Lounge3_EventScript_261FD1:: @ 8261FD1
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge3_Text_26351D, 4
+	msgbox BattleFrontier_Lounge3_Text_26351D, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
 BattleFrontier_Lounge3_EventScript_261FE1:: @ 8261FE1
 	lock
 	faceplayer
-	msgbox BattleFrontier_Lounge3_Text_2634C9, 4
+	msgbox BattleFrontier_Lounge3_Text_2634C9, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261FF1
 	end
 
@@ -212,9 +212,9 @@ BattleFrontier_Lounge3_EventScript_261FF1:: @ 8261FF1
 	end
 
 BattleFrontier_Lounge3_Text_261FFE:: @ 8261FFE
-	.string "…What’s that you want?\p"
-	.string "Can’t you see we’re kind of busy here?\n"
-	.string "Can’t your business wait till later?$"
+	.string "…What's that you want?\p"
+	.string "Can't you see we're kind of busy here?\n"
+	.string "Can't your business wait till later?$"
 
 BattleFrontier_Lounge3_Text_262061:: @ 8262061
 	.string "…Huh?\n"
@@ -228,7 +228,7 @@ BattleFrontier_Lounge3_Text_262061:: @ 8262061
 	.string "First, we pick one of the facilities\n"
 	.string "in the BATTLE FRONTIER.\p"
 	.string "Then, we each pick a different TRAINER\n"
-	.string "who’s taking that facility’s challenge,\l"
+	.string "who's taking that facility's challenge,\l"
 	.string "and bet with our Battle Points.\p"
 	.string "The guy who bet on the TRAINER with\n"
 	.string "the best record takes all the Battle\l"
@@ -237,99 +237,99 @@ BattleFrontier_Lounge3_Text_262061:: @ 8262061
 	.string "So, anyway…$"
 
 BattleFrontier_Lounge3_Text_262261:: @ 8262261
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be challenging the BATTLE\l"
-	.string "TOWER’s SINGLE BATTLE ROOMS.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "TOWER's SINGLE BATTLE ROOMS.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_26230D:: @ 826230D
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be challenging the BATTLE\l"
-	.string "TOWER’s DOUBLE BATTLE ROOMS.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "TOWER's DOUBLE BATTLE ROOMS.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_2623B9:: @ 82623B9
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be challenging the BATTLE\l"
-	.string "TOWER’s MULTI BATTLE ROOMS.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "TOWER's MULTI BATTLE ROOMS.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_262464:: @ 8262464
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be entering the BATTLE\l"
-	.string "DOME’s SINGLE BATTLE Tourney.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "DOME's SINGLE BATTLE Tourney.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_26250E:: @ 826250E
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be entering the BATTLE\l"
-	.string "DOME’s DOUBLE BATTLE Tourney.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "DOME's DOUBLE BATTLE Tourney.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_2625B8:: @ 82625B8
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be entering the BATTLE\l"
-	.string "FACTORY’s Battle Swap Single Tourney.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "FACTORY's Battle Swap Single Tourney.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_26266A:: @ 826266A
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be entering the BATTLE\l"
-	.string "FACTORY’s Battle Swap Double Tourney.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "FACTORY's Battle Swap Double Tourney.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_26271C:: @ 826271C
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be challenging the BATTLE\l"
-	.string "PALACE’s SINGLE BATTLE HALLS.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "PALACE's SINGLE BATTLE HALLS.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_2627C9:: @ 82627C9
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be challenging the BATTLE\l"
-	.string "PALACE’s DOUBLE BATTLE HALLS.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "PALACE's DOUBLE BATTLE HALLS.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_262876:: @ 8262876
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be entering the BATTLE\l"
-	.string "ARENA’s Set KO Tourney.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "ARENA's Set KO Tourney.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_26291A:: @ 826291A
-	.string "What I’m looking for is a TRAINER who’s\n"
-	.string "going to be entering the BATTLE PIKE’s\l"
+	.string "What I'm looking for is a TRAINER who's\n"
+	.string "going to be entering the BATTLE PIKE's\l"
 	.string "Battle Choice.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_2629BC:: @ 82629BC
-	.string "What I’m looking for is a TRAINER who’s\n"
+	.string "What I'm looking for is a TRAINER who's\n"
 	.string "going to be entering the BATTLE\l"
-	.string "PYRAMID’s Battle Quest.\p"
-	.string "But so far, I haven’t seen a TRAINER\n"
+	.string "PYRAMID's Battle Quest.\p"
+	.string "But so far, I haven't seen a TRAINER\n"
 	.string "that has that winning quality.$"
 
 BattleFrontier_Lounge3_Text_262A60:: @ 8262A60
-	.string "I’ll see to it that you benefit, too.\n"
+	.string "I'll see to it that you benefit, too.\n"
 	.string "So how about it?\l"
 	.string "How about entering that event for me?$"
 
 BattleFrontier_Lounge3_Text_262ABD:: @ 8262ABD
-	.string "All right, that’s perfect.\n"
+	.string "All right, that's perfect.\n"
 	.string "So, uh… How about spotting me some\l"
 	.string "of your Battle Points?\p"
-	.string "Trust me, I’ll show you my gratitude\n"
+	.string "Trust me, I'll show you my gratitude\n"
 	.string "afterward.$"
 
 BattleFrontier_Lounge3_Text_262B42:: @ 8262B42
@@ -338,104 +338,104 @@ BattleFrontier_Lounge3_Text_262B42:: @ 8262B42
 
 BattleFrontier_Lounge3_Text_262B6E:: @ 8262B6E
 	.string "Oh, no, no, no!\n"
-	.string "You don’t have enough Battle Points!\p"
-	.string "I wish you wouldn’t monkey around and\n"
-	.string "waste everyone’s time!$"
+	.string "You don't have enough Battle Points!\p"
+	.string "I wish you wouldn't monkey around and\n"
+	.string "waste everyone's time!$"
 
 BattleFrontier_Lounge3_Text_262BE0:: @ 8262BE0
 	.string "Heheh! Thanks much!\n"
 	.string "So, off you go!$"
 
 BattleFrontier_Lounge3_Text_262C04:: @ 8262C04
-	.string "Get to the BATTLE TOWER’s\n"
+	.string "Get to the BATTLE TOWER's\n"
 	.string "SINGLE BATTLE ROOMS pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262C90:: @ 8262C90
-	.string "Get to the BATTLE TOWER’s\n"
+	.string "Get to the BATTLE TOWER's\n"
 	.string "DOUBLE BATTLE ROOMS pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262D1C:: @ 8262D1C
-	.string "Get to the BATTLE TOWER’s\n"
+	.string "Get to the BATTLE TOWER's\n"
 	.string "MULTI BATTLE ROOMS pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262DA7:: @ 8262DA7
-	.string "Get to the BATTLE DOME’s\n"
+	.string "Get to the BATTLE DOME's\n"
 	.string "SINGLE BATTLE Tourney pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262E34:: @ 8262E34
-	.string "Get to the BATTLE DOME’s\n"
+	.string "Get to the BATTLE DOME's\n"
 	.string "DOUBLE BATTLE Tourney pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262EC1:: @ 8262EC1
-	.string "Get to the BATTLE FACTORY’s\n"
+	.string "Get to the BATTLE FACTORY's\n"
 	.string "Battle Swap Single Tourney pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262F56:: @ 8262F56
-	.string "Get to the BATTLE FACTORY’s\n"
+	.string "Get to the BATTLE FACTORY's\n"
 	.string "Battle Swap Double Tourney pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_262FEB:: @ 8262FEB
-	.string "Get to the BATTLE PALACE’s\n"
+	.string "Get to the BATTLE PALACE's\n"
 	.string "SINGLE BATTLE HALLS pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_263078:: @ 8263078
-	.string "Get to the BATTLE PALACE’s\n"
+	.string "Get to the BATTLE PALACE's\n"
 	.string "DOUBLE BATTLE HALLS pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_263105:: @ 8263105
-	.string "Get to the BATTLE ARENA’s\n"
+	.string "Get to the BATTLE ARENA's\n"
 	.string "Set KO Tourney pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_26318C:: @ 826318C
-	.string "Get to the BATTLE PIKE’s\n"
+	.string "Get to the BATTLE PIKE's\n"
 	.string "Battle Choice pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_263211:: @ 8263211
-	.string "Get to the BATTLE PYRAMID’s\n"
+	.string "Get to the BATTLE PYRAMID's\n"
 	.string "Battle Quest pronto!\p"
-	.string "It’s a must-win situation!\n"
-	.string "Don’t blow your chance!\l"
+	.string "It's a must-win situation!\n"
+	.string "Don't blow your chance!\l"
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_263298:: @ 8263298
-	.string "Oh, it’s you…\n"
+	.string "Oh, it's you…\n"
 	.string "Nice try…\p"
-	.string "I hate to break it to you, but I can’t\n"
+	.string "I hate to break it to you, but I can't\n"
 	.string "return your Battle Points…\p"
-	.string "I guess we’ll have to let it motivate\n"
+	.string "I guess we'll have to let it motivate\n"
 	.string "us to try harder next time!$"
 
 BattleFrontier_Lounge3_Text_263334:: @ 8263334
@@ -443,8 +443,8 @@ BattleFrontier_Lounge3_Text_263334:: @ 8263334
 	.string "Hello there, champ!\p"
 	.string "I knew you could!\n"
 	.string "I knew you would!\l"
-	.string "We’re both big winners!\p"
-	.string "I’ll return your Battle Points and,\n"
+	.string "We're both big winners!\p"
+	.string "I'll return your Battle Points and,\n"
 	.string "of course, a little extra from me!$"
 
 BattleFrontier_Lounge3_Text_2633D4:: @ 82633D4
@@ -452,11 +452,11 @@ BattleFrontier_Lounge3_Text_2633D4:: @ 82633D4
 	.string "{STR_VAR_1} Battle Points.$"
 
 BattleFrontier_Lounge3_Text_2633F2:: @ 82633F2
-	.string "If you’re up for another challenge,\n"
+	.string "If you're up for another challenge,\n"
 	.string "please do think of me!$"
 
 BattleFrontier_Lounge3_Text_26342D:: @ 826342D
-	.string "Not interested?! You shouldn’t be\n"
+	.string "Not interested?! You shouldn't be\n"
 	.string "so afraid to take a chance!$"
 
 BattleFrontier_Lounge3_Text_26346B:: @ 826346B
@@ -469,7 +469,7 @@ BattleFrontier_Lounge3_Text_26346F:: @ 826346F
 
 BattleFrontier_Lounge3_Text_2634C9:: @ 82634C9
 	.string "That TRAINER…\p"
-	.string "He’s good, but he gets rattled too\n"
+	.string "He's good, but he gets rattled too\n"
 	.string "easily to survive the BATTLE DOME…$"
 
 BattleFrontier_Lounge3_Text_26351D:: @ 826351D

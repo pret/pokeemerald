@@ -89,6 +89,13 @@
 #define EXT_CTRL_CODE_COLOR     0x1
 #define EXT_CTRL_CODE_HIGHLIGHT 0x2
 #define EXT_CTRL_CODE_SHADOW    0x3
+//
+#define EXT_CTRL_CODE_UNKNOWN_7 0x7
+//
+#define EXT_CTRL_CODE_CLEAR     0x11
+//
+#define EXT_CTRL_CODE_JPN       0x15
+#define EXT_CTRL_CODE_ENG       0x16
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
@@ -101,9 +108,6 @@
 #define TEXT_COLOR_BLUE         0x8
 
 // battle placeholders are located in battle_message.h
-
-#define EXT_CTRL_CODE_JPN   0x15
-#define EXT_CTRL_CODE_ENG   0x16
 
 #define NUM_TEXT_PRINTERS 32
 

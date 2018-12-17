@@ -7,7 +7,7 @@ BattleFrontier_Mart_EventScript_267ACC:: @ 8267ACC
 	message gUnknown_08272A21
 	waitmessage
 	pokemart BattleFrontier_Mart_Pokemart_267AE4
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -31,36 +31,36 @@ BattleFrontier_Mart_Pokemart_267AE4: @ 8267AE4
 	end
 
 BattleFrontier_Mart_EventScript_267B02:: @ 8267B02
-	msgbox BattleFrontier_Mart_Text_267B29, 2
+	msgbox BattleFrontier_Mart_Text_267B29, MSGBOX_NPC
 	end
 
 BattleFrontier_Mart_EventScript_267B0B:: @ 8267B0B
 	lock
 	applymovement 2, BattleFrontier_Mart_Movement_2725B0
 	waitmovement 0
-	msgbox BattleFrontier_Mart_Text_267B8F, 4
+	msgbox BattleFrontier_Mart_Text_267B8F, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Mart_EventScript_267B20:: @ 8267B20
-	msgbox BattleFrontier_Mart_Text_267C01, 2
+	msgbox BattleFrontier_Mart_Text_267C01, MSGBOX_NPC
 	end
 
 BattleFrontier_Mart_Text_267B29: @ 8267B29
 	.string "We came here to chaperon our\n"
 	.string "grandson.\p"
-	.string "But since we’re here, we thought\n"
+	.string "But since we're here, we thought\n"
 	.string "we should get some souvenirs.$"
 
 BattleFrontier_Mart_Text_267B8F: @ 8267B8F
 	.string "Dear, what do you think of this?\n"
-	.string "Wouldn’t this make a nice gift?\p"
-	.string "It’s…PRO…TE…IN?\n"
-	.string "It sounds delicious, doesn’t it?$"
+	.string "Wouldn't this make a nice gift?\p"
+	.string "It's…PRO…TE…IN?\n"
+	.string "It sounds delicious, doesn't it?$"
 
 BattleFrontier_Mart_Text_267C01: @ 8267C01
-	.string "A lot of the BATTLE FRONTIER’s\n"
-	.string "facilities don’t allow the use of items\l"
+	.string "A lot of the BATTLE FRONTIER's\n"
+	.string "facilities don't allow the use of items\l"
 	.string "during battles.\p"
 	.string "That rule makes things tougher than\n"
 	.string "they already are!$"

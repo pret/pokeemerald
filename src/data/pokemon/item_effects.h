@@ -1,6 +1,3 @@
-#ifndef GUARD_ITEM_EFFECTS_H
-#define GUARD_ITEM_EFFECTS_H
-
 const u8 gItemEffect_Potion[]       = {0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 20};
 const u8 gItemEffect_Antidote[]     = {0x00, 0x00, 0x00, 0x10, 0x00, 0x00};
 const u8 gItemEffect_BurnHeal[]     = {0x00, 0x00, 0x00, 0x08, 0x00, 0x00};
@@ -237,5 +234,3 @@ const u8 *const gItemEffectTable[] =
     NULL,
     NULL
 };
-
-#endif //GUARD_ITEM_EFFECTS_H

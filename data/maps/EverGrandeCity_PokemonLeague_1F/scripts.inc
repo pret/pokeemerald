@@ -29,7 +29,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_22960A:: @ 822960A
 	message gUnknown_08272A21
 	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart_229624
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -88,14 +88,14 @@ EverGrandeCity_PokemonLeague_1F_EventScript_2296A3:: @ 82296A3
 
 EverGrandeCity_PokemonLeague_1F_EventScript_2296AE:: @ 82296AE
 	playse SE_HAZURE
-	msgbox EverGrandeCity_PokemonLeague_1F_Text_229787, 4
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_229787, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_2296BB:: @ 82296BB
 	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_1F_Movement_27259E
 	waitmovement 0
-	msgbox EverGrandeCity_PokemonLeague_1F_Text_2297EF, 4
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_2297EF, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, EverGrandeCity_PokemonLeague_1F_Movement_2725A2
 	waitmovement 0
@@ -132,8 +132,8 @@ EverGrandeCity_PokemonLeague_1F_Text_2296E8: @ 82296E8
 	.string "all the GYM BADGES.$"
 
 EverGrandeCity_PokemonLeague_1F_Text_229787: @ 8229787
-	.string "You haven’t obtained all the BADGES.\p"
-	.string "If you’re bound for the POKéMON\n"
+	.string "You haven't obtained all the BADGES.\p"
+	.string "If you're bound for the POKéMON\n"
 	.string "LEAGUE, you must return with them.$"
 
 EverGrandeCity_PokemonLeague_1F_Text_2297EF: @ 82297EF

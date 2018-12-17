@@ -3590,7 +3590,7 @@ _08079138:
 	cmp r0, 0
 	bne _08079158
 	adds r0, r4, 0
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _08079164
 _08079158:
@@ -6160,7 +6160,7 @@ _0807A62E:
 _0807A64C:
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _0807A65C
 	movs r0, 0x2
@@ -6200,7 +6200,7 @@ _0807A65C:
 _0807A6A0:
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	beq _0807A6D2
 _0807A6AC:
@@ -6471,7 +6471,7 @@ _0807A87C:
 	b _0807A8C0
 _0807A88E:
 	adds r0, r7, 0
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _0807A89C
 _0807A898:
@@ -6479,7 +6479,7 @@ _0807A898:
 	b _0807A8C0
 _0807A89C:
 	mov r0, r8
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _0807A8AA
 	movs r0, 0x5
@@ -6489,7 +6489,7 @@ _0807A8AA:
 	cmp r0, 0
 	bne _0807A8BE
 	adds r0, r7, 0
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _0807A8BE
 	movs r0, 0x7
@@ -6533,7 +6533,7 @@ sub_807A8D0: @ 807A8D0
 	b _0807A910
 _0807A900:
 	adds r0, r6, 0
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _0807A90E
 _0807A90A:
@@ -6645,7 +6645,7 @@ _0807A9B4:
 	mov r1, sp
 	adds r4, r1, r0
 	ldrh r0, [r4]
-	bl sub_806E3F8
+	bl IsSpeciesInHoennDex
 	cmp r0, 0
 	bne _0807A9E0
 	movs r0, 0x2

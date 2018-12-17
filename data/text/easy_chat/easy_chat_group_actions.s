@@ -134,7 +134,7 @@ gEasyChatWord_Using:: @ 859B174
 	.string "USING$"
 
 gEasyChatWord_Couldnt:: @ 859B17A
-	.string "COULDN’T$"
+	.string "COULDN'T$"
 
 gEasyChatWord_Capable:: @ 859B183
 	.string "CAPABLE$"

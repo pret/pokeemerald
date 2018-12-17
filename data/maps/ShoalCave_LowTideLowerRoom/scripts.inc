@@ -29,7 +29,7 @@ ShoalCave_LowTideLowerRoom_EventScript_237176:: @ 8237176
 	end
 
 ShoalCave_LowTideLowerRoom_EventScript_2371A8:: @ 82371A8
-	msgbox ShoalCave_LowTideLowerRoom_Text_2A8169, 4
+	msgbox ShoalCave_LowTideLowerRoom_Text_2A8169, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -38,7 +38,7 @@ ShoalCave_LowTideLowerRoom_EventScript_2371B2:: @ 82371B2
 	faceplayer
 	checkflag FLAG_0x11B
 	goto_eq ShoalCave_LowTideLowerRoom_EventScript_2371E1
-	msgbox ShoalCave_LowTideLowerRoom_Text_2371EB, 4
+	msgbox ShoalCave_LowTideLowerRoom_Text_2371EB, MSGBOX_DEFAULT
 	giveitem_std ITEM_FOCUS_BAND
 	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideLowerRoom_EventScript_272054
@@ -47,7 +47,7 @@ ShoalCave_LowTideLowerRoom_EventScript_2371B2:: @ 82371B2
 	end
 
 ShoalCave_LowTideLowerRoom_EventScript_2371E1:: @ 82371E1
-	msgbox ShoalCave_LowTideLowerRoom_Text_23728D, 4
+	msgbox ShoalCave_LowTideLowerRoom_Text_23728D, MSGBOX_DEFAULT
 	release
 	end
 

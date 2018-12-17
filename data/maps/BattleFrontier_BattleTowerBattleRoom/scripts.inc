@@ -45,7 +45,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241BC3:: @ 8241BC3
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	special sub_8161F74
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattleTowerBattleRoom_EventScript_24210E
 	switch VAR_RESULT
@@ -81,7 +81,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241C2F:: @ 8241C2F
 	waitmovement 0
 	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
 	waitmovement 0
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242217, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242217, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
@@ -129,7 +129,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241D72:: @ 8241D72
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_241C8F
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241D7C:: @ 8241D7C
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2423FC, 5
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2423FC, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleTowerBattleRoom_EventScript_241C8F
 	case 1, BattleFrontier_BattleTowerBattleRoom_EventScript_241E22
@@ -247,7 +247,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241EC3:: @ 8241EC3
 BattleFrontier_BattleTowerBattleRoom_EventScript_241F0A:: @ 8241F0A
 	compare VAR_TEMP_2, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_241F22
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2424C2, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2424C2, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241F22:: @ 8241F22
@@ -291,13 +291,13 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241FAF:: @ 8241FAF
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleTowerBattleRoom_EventScript_242029
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242579, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242579, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_242029:: @ 8242029
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_24268C, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_24268C, MSGBOX_DEFAULT
 	call BattleFrontier_BattleTowerBattleRoom_EventScript_24210E
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_242046
@@ -309,14 +309,14 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_242046:: @ 8242046
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2426B4, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2426B4, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleTowerBattleRoom_Text_24270E
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242744, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242744, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_242085:: @ 8242085
@@ -325,13 +325,13 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_242085:: @ 8242085
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleTowerBattleRoom_EventScript_2420B2
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2427F9, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2427F9, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_2420B2:: @ 82420B2
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2428E0, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2428E0, MSGBOX_DEFAULT
 	call BattleFrontier_BattleTowerBattleRoom_EventScript_24210E
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_2420CF
@@ -343,14 +343,14 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_2420CF:: @ 82420CF
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2428F7, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2428F7, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleTowerBattleRoom_Text_242932
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleTowerBattleRoom_Text_24295D, 4
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_24295D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_24210E:: @ 824210E
@@ -556,7 +556,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_2423A3: @ 82423A3
 	.string "FRONTIER PASS?$"
 
 BattleFrontier_BattleTowerLobby_Text_2423CD: @ 82423CD
-	.string "{PLAYER}’s battle was recorded\n"
+	.string "{PLAYER}'s battle was recorded\n"
 	.string "on the FRONTIER PASS.$"
 
 BattleFrontier_BattleTowerBattleRoom2_Text_2423FC: @ 82423FC
@@ -597,7 +597,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_242579: @ 8242579
 	.string "about you…\p"
 	.string "In all honesty, what I have heard does\n"
 	.string "not seem attractive in any way…\p"
-	.string "The reason I’ve come to see you…\n"
+	.string "The reason I've come to see you…\n"
 	.string "Well, there is but one reason…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_24268C: @ 824268C
@@ -616,7 +616,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_24270E: @ 824270E
 BattleFrontier_BattleTowerBattleRoom_Text_242744: @ 8242744
 	.string "… … … … … …\p"
 	.string "You have confidence in your POKéMON\n"
-	.string "battling talent, don’t you?\p"
+	.string "battling talent, don't you?\p"
 	.string "I urge you to keep battling and\n"
 	.string "keep on winning.\p"
 	.string "I will be waiting for you.\n"
@@ -626,14 +626,14 @@ BattleFrontier_BattleTowerBattleRoom_Text_2427F9: @ 82427F9
 	.string "ANABEL: You really did come back to\n"
 	.string "see me…\p"
 	.string "… … … … … …\p"
-	.string "You’ve won straight matches to see me…\n"
-	.string "I won’t have to hold back against you…\p"
-	.string "It’s been too long now…\p"
-	.string "Too long since I’ve been able to battle\n"
+	.string "You've won straight matches to see me…\n"
+	.string "I won't have to hold back against you…\p"
+	.string "It's been too long now…\p"
+	.string "Too long since I've been able to battle\n"
 	.string "without thinking about anything…$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2428E0: @ 82428E0
-	.string "Let’s begin, shall we?$"
+	.string "Let's begin, shall we?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_2428F7: @ 82428F7
 	.string "ANABEL: Fufu, congratulations…\n"

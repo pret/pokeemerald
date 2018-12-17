@@ -43,7 +43,7 @@ Route110_TrickHouseEnd_EventScript_26AD0D:: @ 826AD0D
 Route110_TrickHouseEnd_EventScript_26AD17:: @ 826AD17
 	lock
 	faceplayer
-	msgbox Route110_TrickHouseEnd_Text_26B08D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B08D, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
 	switch VAR_0x4044
 	case 0, Route110_TrickHouseEnd_EventScript_26AD84
@@ -57,98 +57,98 @@ Route110_TrickHouseEnd_EventScript_26AD17:: @ 826AD17
 	end
 
 Route110_TrickHouseEnd_EventScript_26AD84:: @ 826AD84
-	msgbox Route110_TrickHouseEnd_Text_26B0BC, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B0BC, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_RARE_CANDY
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26ADC0:: @ 826ADC0
-	msgbox Route110_TrickHouseEnd_Text_26B13B, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B13B, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_TIMER_BALL
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26ADFC:: @ 826ADFC
-	msgbox Route110_TrickHouseEnd_Text_26B1AD, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B1AD, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_HARD_STONE
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26AE38:: @ 826AE38
-	msgbox Route110_TrickHouseEnd_Text_26B223, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B223, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_SMOKE_BALL
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26AE74:: @ 826AE74
-	msgbox Route110_TrickHouseEnd_Text_26B293, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B293, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_TM12
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26AEB0:: @ 826AEB0
-	msgbox Route110_TrickHouseEnd_Text_26B315, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B315, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_MAGNET
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
-	msgbox Route110_TrickHouseEnd_Text_26B365, 4
-	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
+	msgbox Route110_TrickHouseEnd_Text_26B365, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEnd_Text_26B73D, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_PP_MAX
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
-	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
+	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	release
 	end
 
 Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
-	msgbox Route110_TrickHouseEnd_Text_26B3AB, 4
+	msgbox Route110_TrickHouseEnd_Text_26B3AB, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B015
@@ -159,17 +159,17 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	compare VAR_FACING, 4
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B036
 	delay 30
-	msgbox Route110_TrickHouseEnd_Text_26B3FA, 4
+	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route110_TrickHouseEnd_Movement_27259E
 	waitmovement 0
 	delay 30
-	msgbox Route110_TrickHouseEnd_Text_26B485, 4
+	msgbox Route110_TrickHouseEnd_Text_26B485, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 0
 	call Route110_TrickHouseEnd_EventScript_26AFA5
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B002
-	msgbox Route110_TrickHouseEnd_Text_26B69A, 4
+	msgbox Route110_TrickHouseEnd_Text_26B69A, MSGBOX_DEFAULT
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	special ResetTrickHouseEndRoomFlag
 	release
@@ -201,13 +201,13 @@ Route110_TrickHouseEnd_EventScript_26AFCF:: @ 826AFCF
 
 Route110_TrickHouseEnd_EventScript_26AFEF:: @ 826AFEF
 	call Route110_TrickHouseEnd_EventScript_27205E
-	msgbox Route110_TrickHouseEnd_Text_26B760, 4
+	msgbox Route110_TrickHouseEnd_Text_26B760, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 1
 	return
 
 Route110_TrickHouseEnd_EventScript_26B002:: @ 826B002
 	call Route110_TrickHouseEnd_EventScript_272071
-	msgbox Route110_TrickHouseEnd_Text_26B615, 4
+	msgbox Route110_TrickHouseEnd_Text_26B615, MSGBOX_DEFAULT
 	setvar VAR_0x40C1, 1
 	return
 
@@ -243,7 +243,7 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	playse SE_W153
 	applymovement 255, Route110_TrickHouseEnd_Movement_2725AA
 	waitmovement 0
-	msgbox Route110_TrickHouseEnd_Text_26B8BD, 4
+	msgbox Route110_TrickHouseEnd_Text_26B8BD, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route110_TrickHouseEnd_Movement_26B089
 	waitmovement 0
@@ -262,50 +262,50 @@ Route110_TrickHouseEnd_Movement_26B08B: @ 826B08B
 
 Route110_TrickHouseEnd_Text_26B08D: @ 826B08D
 	.string "Aak!\n"
-	.string "You’ve made it to me?\l"
-	.string "Hmmm… You’re sharp!$"
+	.string "You've made it to me?\l"
+	.string "Hmmm… You're sharp!$"
 
 Route110_TrickHouseEnd_Text_26B0BC: @ 826B0BC
 	.string "It took me all night to plant all those\n"
 	.string "trees…\p"
-	.string "You’re almost my equal in greatness by\n"
+	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three, four, five, six places!$"
 
 Route110_TrickHouseEnd_Text_26B13B: @ 826B13B
 	.string "It took me all night to make the maze…\p"
-	.string "You’re almost my equal in greatness by\n"
+	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three, four, five places!$"
 
 Route110_TrickHouseEnd_Text_26B1AD: @ 826B1AD
 	.string "It took me all night to prepare\n"
 	.string "the wall panels…\p"
-	.string "You’re almost my equal in greatness by\n"
+	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three, four places!$"
 
 Route110_TrickHouseEnd_Text_26B223: @ 826B223
 	.string "It took me all night to shove in those\n"
 	.string "boulders…\p"
-	.string "You’re almost my equal in greatness by\n"
+	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three places!$"
 
 Route110_TrickHouseEnd_Text_26B293: @ 826B293
 	.string "It took me all night to make MECHADOLLS\n"
 	.string "and another to think up the quiz…\p"
-	.string "You’re almost my equal in greatness by\n"
+	.string "You're almost my equal in greatness by\n"
 	.string "one, two places!$"
 
 Route110_TrickHouseEnd_Text_26B315: @ 826B315
 	.string "It took me all night to install\n"
 	.string "the doors…\p"
-	.string "You’re almost my equal in greatness!$"
+	.string "You're almost my equal in greatness!$"
 
 Route110_TrickHouseEnd_Text_26B365: @ 826B365
 	.string "It took me all night setting up arrows…\p"
-	.string "You’re my equal in greatness!$"
+	.string "You're my equal in greatness!$"
 
 Route110_TrickHouseEnd_Text_26B3AB: @ 826B3AB
 	.string "It took me all night polishing floors…\p"
-	.string "You’re above me in greatness!\n"
+	.string "You're above me in greatness!\n"
 	.string "Possibly…$"
 
 Route110_TrickHouseEnd_Text_26B3FA: @ 826B3FA
@@ -352,18 +352,18 @@ Route110_TrickHouseEnd_Text_26B73D: @ 826B73D
 Route110_TrickHouseEnd_Text_26B760: @ 826B760
 	.string "What? Have you no room for this?\n"
 	.string "What manner of items do you carry?\p"
-	.string "But fine, since you’ve reached me,\n"
+	.string "But fine, since you've reached me,\n"
 	.string "your reward will be with me till later.$"
 
 Route110_TrickHouseEnd_Text_26B7EF: @ 826B7EF
 	.string "Scrub that smug smirk from your face!\n"
-	.string "It’s much too early to think you’ve won!\p"
-	.string "I’ll make new tricks to stump you, I will.\n"
-	.string "You may mock me only when you’re done.\p"
+	.string "It's much too early to think you've won!\p"
+	.string "I'll make new tricks to stump you, I will.\n"
+	.string "You may mock me only when you're done.\p"
 	.string "Come back for the next exciting\n"
 	.string "installment!$"
 
 Route110_TrickHouseEnd_Text_26B8BD: @ 826B8BD
-	.string "Now, now! You’re ignoring me now?\n"
+	.string "Now, now! You're ignoring me now?\n"
 	.string "Now that, I consider heartbreaking!$"
 

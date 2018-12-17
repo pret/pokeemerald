@@ -46,7 +46,7 @@ BattleFrontier_ScottsHouse_EventScript_263704:: @ 8263704
 	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
 	checkflag FLAG_SYS_PYRAMID_SILVER
 	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	msgbox BattleFrontier_ScottsHouse_Text_2640BC, 4
+	msgbox BattleFrontier_ScottsHouse_Text_2640BC, MSGBOX_DEFAULT
 	giveitem_std ITEM_LANSAT_BERRY
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
@@ -70,7 +70,7 @@ BattleFrontier_ScottsHouse_EventScript_26376A:: @ 826376A
 	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
 	checkflag FLAG_SYS_PYRAMID_GOLD
 	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	msgbox BattleFrontier_ScottsHouse_Text_264216, 4
+	msgbox BattleFrontier_ScottsHouse_Text_264216, MSGBOX_DEFAULT
 	giveitem_std ITEM_STARF_BERRY
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
@@ -80,12 +80,12 @@ BattleFrontier_ScottsHouse_EventScript_26376A:: @ 826376A
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2637D0:: @ 82637D0
-	msgbox BattleFrontier_ScottsHouse_Text_2643EB, 4
+	msgbox BattleFrontier_ScottsHouse_Text_2643EB, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2637DA:: @ 82637DA
-	msgbox BattleFrontier_ScottsHouse_Text_264373, 4
+	msgbox BattleFrontier_ScottsHouse_Text_264373, MSGBOX_DEFAULT
 	release
 	end
 
@@ -95,17 +95,17 @@ BattleFrontier_ScottsHouse_EventScript_2637E4:: @ 82637E4
 	goto_eq BattleFrontier_ScottsHouse_EventScript_263807
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_ScottsHouse_EventScript_263811
-	msgbox BattleFrontier_ScottsHouse_Text_263DDD, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263DDD, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263807:: @ 8263807
-	msgbox BattleFrontier_ScottsHouse_Text_263F12, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263F12, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263811:: @ 8263811
-	msgbox BattleFrontier_ScottsHouse_Text_263FFE, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263FFE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -133,7 +133,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	end
 
 BattleFrontier_ScottsHouse_EventScript_26387A:: @ 826387A
-	msgbox BattleFrontier_ScottsHouse_Text_264412, 4
+	msgbox BattleFrontier_ScottsHouse_Text_264412, MSGBOX_DEFAULT
 	givedecoration_std 42
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
@@ -143,12 +143,12 @@ BattleFrontier_ScottsHouse_EventScript_26387A:: @ 826387A
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2638A0:: @ 82638A0
-	msgbox BattleFrontier_ScottsHouse_Text_264583, 4
+	msgbox BattleFrontier_ScottsHouse_Text_264583, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2638AA:: @ 82638AA
-	msgbox BattleFrontier_ScottsHouse_Text_264546, 4
+	msgbox BattleFrontier_ScottsHouse_Text_264546, MSGBOX_DEFAULT
 	release
 	end
 
@@ -176,7 +176,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263913:: @ 8263913
-	msgbox BattleFrontier_ScottsHouse_Text_26449F, 4
+	msgbox BattleFrontier_ScottsHouse_Text_26449F, MSGBOX_DEFAULT
 	givedecoration_std 43
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
@@ -186,12 +186,12 @@ BattleFrontier_ScottsHouse_EventScript_263913:: @ 8263913
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263939:: @ 8263939
-	msgbox BattleFrontier_ScottsHouse_Text_263DB8, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263DB8, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
-	msgbox BattleFrontier_ScottsHouse_Text_263A3F, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263A3F, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	compare VAR_FACING, 2
@@ -202,10 +202,10 @@ BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
 	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A29
 	compare VAR_FACING, 3
 	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A34
-	msgbox BattleFrontier_ScottsHouse_Text_263B29, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263B29, MSGBOX_DEFAULT
 	applymovement 1, BattleFrontier_ScottsHouse_Movement_27259E
 	waitmovement 0
-	msgbox BattleFrontier_ScottsHouse_Text_263BD4, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263BD4, MSGBOX_DEFAULT
 	compare VAR_0x40D1, 13
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2639BC
 	compare VAR_0x40D1, 9
@@ -242,7 +242,7 @@ BattleFrontier_ScottsHouse_EventScript_2639E9:: @ 82639E9
 BattleFrontier_ScottsHouse_EventScript_2639F8:: @ 82639F8
 	special sub_813A9D0
 	msgbox BattleFrontier_ScottsHouse_Text_263CB0, 9
-	msgbox BattleFrontier_ScottsHouse_Text_263CD0, 4
+	msgbox BattleFrontier_ScottsHouse_Text_263CD0, MSGBOX_DEFAULT
 	setflag FLAG_0x1D1
 	setflag FLAG_TEMP_2
 	release
@@ -274,7 +274,7 @@ BattleFrontier_ScottsHouse_Text_263A3F: @ 8263A3F
 	.string "Anyway, {PLAYER}{KUN}, let me formally\n"
 	.string "welcome you to the BATTLE FRONTIER.\p"
 	.string "This is my dream come true.\n"
-	.string "It took me years and years, but I’ve\l"
+	.string "It took me years and years, but I've\l"
 	.string "finally given shape to my dream.$"
 
 BattleFrontier_ScottsHouse_Text_263B29: @ 8263B29
@@ -286,10 +286,10 @@ BattleFrontier_ScottsHouse_Text_263B29: @ 8263B29
 	.string "or time it took to make this real.$"
 
 BattleFrontier_ScottsHouse_Text_263BD4: @ 8263BD4
-	.string "But that’s all in the past.\n"
+	.string "But that's all in the past.\n"
 	.string "No point dwelling on that!\p"
 	.string "All I want for you is to enjoy battling\n"
-	.string "to your heart’s content here.\p"
+	.string "to your heart's content here.\p"
 	.string "{PLAYER}{KUN}, I want you to have this\n"
 	.string "as a memento for all the time our\l"
 	.string "paths crossed on our journeys.$"
@@ -308,17 +308,17 @@ BattleFrontier_ScottsHouse_Text_263CD0: @ 8263CD0
 	.string "see fit, like trading them for items.$"
 
 BattleFrontier_ScottsHouse_Text_263DB8: @ 8263DB8
-	.string "I’m expecting great things from you!$"
+	.string "I'm expecting great things from you!$"
 
 BattleFrontier_ScottsHouse_Text_263DDD: @ 8263DDD
 	.string "SCOTT: Every TRAINER is an individual.\n"
 	.string "They all lead lives of their own.\p"
-	.string "But when they’re in a battle,\n"
-	.string "it doesn’t matter who they are.\p"
-	.string "They’re all the same!\p"
+	.string "But when they're in a battle,\n"
+	.string "it doesn't matter who they are.\p"
+	.string "They're all the same!\p"
 	.string "I love the purity of battle,\n"
 	.string "where everyone is equal.\p"
-	.string "That’s why I go everywhere seeking\n"
+	.string "That's why I go everywhere seeking\n"
 	.string "TRAINERS who are serious about\l"
 	.string "battling, and invite them here.$"
 
@@ -329,11 +329,11 @@ BattleFrontier_ScottsHouse_Text_263F12: @ 8263F12
 	.string "symbols from them?\p"
 	.string "I handpicked the FRONTIER BRAINS\n"
 	.string "as the toughest TRAINERS anywhere.\p"
-	.string "But I’m sure that seeing how tough\n"
+	.string "But I'm sure that seeing how tough\n"
 	.string "you are will startle even them!$"
 
 BattleFrontier_ScottsHouse_Text_263FFE: @ 8263FFE
-	.string "SCOTT: You don’t just train for battle,\n"
+	.string "SCOTT: You don't just train for battle,\n"
 	.string "right?\p"
 	.string "I think I remember you working on\n"
 	.string "a POKéDEX as well.\p"
@@ -348,34 +348,34 @@ BattleFrontier_ScottsHouse_Text_2640BC: @ 82640BC
 	.string "…Wait a second…\n"
 	.string "Oh!\p"
 	.string "Your FRONTIER PASS!\n"
-	.string "You’ve collected the full set\l"
+	.string "You've collected the full set\l"
 	.string "of silver symbols!\p"
-	.string "That’s more than impressive!\n"
+	.string "That's more than impressive!\n"
 	.string "You are tough, just as I suspected!\p"
-	.string "Normally, I wouldn’t do something\n"
+	.string "Normally, I wouldn't do something\n"
 	.string "like this, but this is a special time!\p"
 	.string "I want you to have this.\n"
-	.string "I’m sure you can put it to proper use.$"
+	.string "I'm sure you can put it to proper use.$"
 
 BattleFrontier_ScottsHouse_Text_264216: @ 8264216
-	.string "SCOTT: I hope you’re enjoying\n"
+	.string "SCOTT: I hope you're enjoying\n"
 	.string "everything in the BATTLE FRONTIER.\p"
 	.string "…Wait a second…\n"
 	.string "Oh, my disbelieving eyes!\p"
 	.string "Your FRONTIER PASS!\n"
-	.string "You’ve gathered up the full set\l"
+	.string "You've gathered up the full set\l"
 	.string "of gold symbols!\p"
-	.string "That’s more than stupendous!\n"
-	.string "You’re incredible, just as I suspected!\p"
+	.string "That's more than stupendous!\n"
+	.string "You're incredible, just as I suspected!\p"
 	.string "… … … … … …\p"
-	.string "{PLAYER}, you’ve got to accept this!\p"
+	.string "{PLAYER}, you've got to accept this!\p"
 	.string "I think you will be able to\n"
 	.string "appreciate the value of my gift!$"
 
 BattleFrontier_ScottsHouse_Text_264373: @ 8264373
 	.string "I must say I have the gift of knowing\n"
 	.string "a good TRAINER when I see one.\p"
-	.string "I’m so glad I had the foresight to\n"
+	.string "I'm so glad I had the foresight to\n"
 	.string "bring you here!$"
 
 BattleFrontier_ScottsHouse_Text_2643EB: @ 82643EB
@@ -386,18 +386,18 @@ BattleFrontier_ScottsHouse_Text_264412: @ 8264412
 	.string "SCOTT: Oh, I heard about you!\n"
 	.string "How you ruled the BATTLE TOWER!\l"
 	.string "You beat over 50 TRAINERS in a row?\p"
-	.string "That’s fantastic!\n"
+	.string "That's fantastic!\n"
 	.string "I want you to have this!$"
 
 BattleFrontier_ScottsHouse_Text_26449F: @ 826449F
 	.string "SCOTT: Oh, my! I heard about you!\n"
 	.string "How you overwhelmed the BATTLE TOWER!\l"
 	.string "You beat over 100 TRAINERS in a row?\p"
-	.string "That’s ridiculously spectacular!\n"
-	.string "You’ve got to have this!$"
+	.string "That's ridiculously spectacular!\n"
+	.string "You've got to have this!$"
 
 BattleFrontier_ScottsHouse_Text_264546: @ 8264546
-	.string "I’ll be expecting to hear even greater\n"
+	.string "I'll be expecting to hear even greater\n"
 	.string "things about you now!$"
 
 BattleFrontier_ScottsHouse_Text_264583: @ 8264583

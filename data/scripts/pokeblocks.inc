@@ -21,41 +21,41 @@ Text_Pblock1_Yes: @ 8292E28
 
 Text_Pblock1_No: @ 8292E33
 	.string "Oh…\n"
-	.string "You’ve made this old-timer sad…$"
+	.string "You've made this old-timer sad…$"
 
 Text_Pblock1_KnowHow: @ 8292E57
 	.string "Do you know how to make a {POKEBLOCK}?$"
 
 Text_Pblock1_Start: @ 8292E78
-	.string "Let’s get started, then!\p"
-	.string "Let’s BERRY BLENDER!$"
+	.string "Let's get started, then!\p"
+	.string "Let's BERRY BLENDER!$"
 
 Text_Pblock1_Explain: @ 8292EA6
 	.string "Okay, a little explanation, then.\p"
-	.string "Oh, don’t worry, it’s quite simple.\p"
-	.string "When the BLENDER’s arrow comes to\n"
+	.string "Oh, don't worry, it's quite simple.\p"
+	.string "When the BLENDER's arrow comes to\n"
 	.string "your marker, just press the A Button.\p"
-	.string "That’s all you have to do.\n"
-	.string "You’ll see how easy it is when you try.$"
+	.string "That's all you have to do.\n"
+	.string "You'll see how easy it is when you try.$"
 
 Text_Pblock1_NoBerries: @ 8292F77
 	.string "Oh?\n"
-	.string "You don’t have any BERRIES?\p"
-	.string "If you don’t have any BERRIES,\n"
-	.string "you can’t make any {POKEBLOCK}S.$"
+	.string "You don't have any BERRIES?\p"
+	.string "If you don't have any BERRIES,\n"
+	.string "you can't make any {POKEBLOCK}S.$"
 
 LilycoveCity_ContestLobby_Text_292FD1: @ 8292FD1
-	.string "Well, that won’t do at all now, will it?\p"
-	.string "If you don’t mind leftovers, you can\n"
+	.string "Well, that won't do at all now, will it?\p"
+	.string "If you don't mind leftovers, you can\n"
 	.string "have one of my BERRIES.\p"
 	.string "That way, we could make some {POKEBLOCK}S\n"
 	.string "together using the BERRY BLENDER.$"
 
 LilycoveCity_ContestLobby_Text_29307D: @ 829307D
 	.string "If I had some BERRIES left over,\n"
-	.string "I’d gladly give you one…\p"
-	.string "But, I don’t have any to spare today.\n"
-	.string "We’ll have to do this another time.$"
+	.string "I'd gladly give you one…\p"
+	.string "But, I don't have any to spare today.\n"
+	.string "We'll have to do this another time.$"
 
 Text_Pblock1_FullPokeblock: @ 8293101
 	.string "But your {POKEBLOCK} CASE is full.\p"
@@ -63,15 +63,15 @@ Text_Pblock1_FullPokeblock: @ 8293101
 	.string "you come see me again.$"
 
 Text_Pblock1_NoPokeblock: @ 8293157
-	.string "But you don’t have a {POKEBLOCK} CASE.\p"
+	.string "But you don't have a {POKEBLOCK} CASE.\p"
 	.string "You should get a {POKEBLOCK} CASE and then\n"
 	.string "come see me.$"
 
 LilycoveCity_ContestLobby_Text_2931AA: @ 82931AA
-	.string "Let’s get blending already!$"
+	.string "Let's get blending already!$"
 
 LilycoveCity_ContestLobby_Text_2931C6: @ 82931C6
-	.string "I wonder what kind of {POKEBLOCK} I’ll get?\n"
+	.string "I wonder what kind of {POKEBLOCK} I'll get?\n"
 	.string "This is so exciting!$"
 
 LilycoveCity_ContestLobby_Text_293201: @ 8293201
@@ -82,33 +82,33 @@ LilycoveCity_ContestLobby_Text_293237: @ 8293237
 	.string "Okay!$"
 
 LilycoveCity_ContestLobby_Text_29323D: @ 829323D
-	.string "That’s too bad…\p"
-	.string "But we’ll always be around whenever\n"
+	.string "That's too bad…\p"
+	.string "But we'll always be around whenever\n"
 	.string "you get the urge to blend!$"
 
 LilycoveCity_ContestLobby_Text_29328C: @ 829328C
 	.string "Of course, you do know how to\n"
-	.string "blend {POKEBLOCK}S, don’t you?$"
+	.string "blend {POKEBLOCK}S, don't you?$"
 
 LilycoveCity_ContestLobby_Text_2932C3: @ 82932C3
-	.string "Let’s get started, then!\p"
-	.string "Let’s BERRY BLENDER!$"
+	.string "Let's get started, then!\p"
+	.string "Let's BERRY BLENDER!$"
 
 LilycoveCity_ContestLobby_Text_2932F1: @ 82932F1
 	.string "Okay!\n"
 	.string "Let me explain it to you!\p"
-	.string "When the spinning BLENDER’s arrow\n"
+	.string "When the spinning BLENDER's arrow\n"
 	.string "reaches your marker, just press\l"
 	.string "the A Button.\p"
-	.string "That’s all it takes.\n"
-	.string "Pretty easy, don’t you think?$"
+	.string "That's all it takes.\n"
+	.string "Pretty easy, don't you think?$"
 
 LilycoveCity_ContestLobby_Text_293394: @ 8293394
 	.string "Oh, but wait a second here…\n"
-	.string "You don’t have any BERRIES.\p"
-	.string "You can’t make any {POKEBLOCK}S without\n"
+	.string "You don't have any BERRIES.\p"
+	.string "You can't make any {POKEBLOCK}S without\n"
 	.string "BERRIES…\p"
-	.string "We’ll always be around whenever you\n"
+	.string "We'll always be around whenever you\n"
 	.string "get hold of some BERRIES to blend.$"
 
 LilycoveCity_ContestLobby_Text_29343E: @ 829343E
@@ -119,7 +119,7 @@ LilycoveCity_ContestLobby_Text_29343E: @ 829343E
 
 LilycoveCity_ContestLobby_Text_2934A2: @ 82934A2
 	.string "Oh, but wait a second here…\n"
-	.string "You don’t have a {POKEBLOCK} CASE.\p"
+	.string "You don't have a {POKEBLOCK} CASE.\p"
 	.string "You should get a {POKEBLOCK} CASE and\n"
 	.string "then come back.$"
 
@@ -132,32 +132,32 @@ LilycoveCity_ContestLobby_Text_29354E: @ 829354E
 
 LilycoveCity_ContestLobby_Text_293558: @ 8293558
 	.string "Oh, dear me…\p"
-	.string "You’ve left us in shock!$"
+	.string "You've left us in shock!$"
 
 LilycoveCity_ContestLobby_Text_29357E: @ 829357E
 	.string "Naturally, you know how to make\n"
-	.string "{POKEBLOCK}S, don’t you?$"
+	.string "{POKEBLOCK}S, don't you?$"
 
 LilycoveCity_ContestLobby_Text_2935B1: @ 82935B1
 	.string "Okay, dear!\n"
-	.string "Let’s get started!\p"
-	.string "Let’s BERRY BLENDER!$"
+	.string "Let's get started!\p"
+	.string "Let's BERRY BLENDER!$"
 
 LilycoveCity_ContestLobby_Text_2935E5: @ 82935E5
 	.string "Oh, dear!\p"
-	.string "Then, I’ll explain it to you nicely.\p"
-	.string "When the BLENDER’s arrow spins to\n"
+	.string "Then, I'll explain it to you nicely.\p"
+	.string "When the BLENDER's arrow spins to\n"
 	.string "your marker, press the A Button.\p"
-	.string "That’s all it takes.\n"
-	.string "Isn’t it simple?$"
+	.string "That's all it takes.\n"
+	.string "Isn't it simple?$"
 
 LilycoveCity_ContestLobby_Text_29367D: @ 829367D
-	.string "You don’t have any BERRIES,\n"
+	.string "You don't have any BERRIES,\n"
 	.string "do you?\p"
-	.string "If you don’t have any BERRIES,\n"
-	.string "you can’t make any {POKEBLOCK}S.\p"
-	.string "We’ll always be making {POKEBLOCK}S here,\n"
-	.string "so let’s make some together when\l"
+	.string "If you don't have any BERRIES,\n"
+	.string "you can't make any {POKEBLOCK}S.\p"
+	.string "We'll always be making {POKEBLOCK}S here,\n"
+	.string "so let's make some together when\l"
 	.string "you get a BERRY or two.$"
 
 LilycoveCity_ContestLobby_Text_293738: @ 8293738
@@ -167,22 +167,22 @@ LilycoveCity_ContestLobby_Text_293738: @ 8293738
 	.string "and then come back.$"
 
 LilycoveCity_ContestLobby_Text_293792: @ 8293792
-	.string "You haven’t gotten a {POKEBLOCK} CASE\n"
+	.string "You haven't gotten a {POKEBLOCK} CASE\n"
 	.string "yet, it looks like.\p"
 	.string "You need to get a {POKEBLOCK} CASE before\n"
 	.string "you come back.$"
 
 LilycoveCity_ContestLobby_Text_2937F9: @ 82937F9
-	.string "Okay! Today’s going to be the day that\n"
+	.string "Okay! Today's going to be the day that\n"
 	.string "I set a new BLENDER speed record!$"
 
 LilycoveCity_ContestLobby_Text_293842: @ 8293842
 	.string "Oh, dear!\n"
-	.string "You look as if you’re good at blending.\l"
+	.string "You look as if you're good at blending.\l"
 	.string "Would you like to join us?$"
 
 LilycoveCity_ContestLobby_Text_29388F: @ 829388F
-	.string "I’m going to make delicious {POKEBLOCK}S\n"
+	.string "I'm going to make delicious {POKEBLOCK}S\n"
 	.string "and make my POKéMON cuter.$"
 
 Text_PblockLink_Ask: @ 82938CD
@@ -207,42 +207,42 @@ Text_PblockLink_3Arrived: @ 82939A5
 
 Text_PblockLink_NoBerries: @ 82939BD
 	.string "You have no BERRIES.\n"
-	.string "The BERRY BLENDER can’t be used.$"
+	.string "The BERRY BLENDER can't be used.$"
 
 Text_PblockLink_FullPokeblock: @ 82939F3
 	.string "Your {POKEBLOCK} CASE is full.\n"
-	.string "The BERRY BLENDER can’t be used.$"
+	.string "The BERRY BLENDER can't be used.$"
 
 Text_PblockLink_NoPokeblock: @ 8293A2D
-	.string "You don’t have a {POKEBLOCK} CASE.\n"
-	.string "The BERRY BLENDER can’t be used.$"
+	.string "You don't have a {POKEBLOCK} CASE.\n"
+	.string "The BERRY BLENDER can't be used.$"
 
 Text_Pblock1_Talk_0: @ 8293A6B
 	.string "I love making {POKEBLOCK}S.\p"
 	.string "I always have some BERRIES with me.$"
 
 Text_Pblock1_Talk_1: @ 8293AA5
-	.string "If you’d like, we could make some\n"
+	.string "If you'd like, we could make some\n"
 	.string "{POKEBLOCK}S together using the\l"
 	.string "BERRY BLENDER.$"
 
 LilycoveCity_ContestLobby_Text_293AF0: @ 8293AF0
 	.string "Oh?\n"
-	.string "You don’t have any BERRIES?\p"
-	.string "Well, that won’t do at all now, will it?\p"
-	.string "If you don’t mind leftovers, you can\n"
+	.string "You don't have any BERRIES?\p"
+	.string "Well, that won't do at all now, will it?\p"
+	.string "If you don't mind leftovers, you can\n"
 	.string "have one of my BERRIES.$"
 
 LilycoveCity_ContestLobby_Text_293B76: @ 8293B76
-	.string "We’ll use it to make {POKEBLOCK}S together\n"
+	.string "We'll use it to make {POKEBLOCK}S together\n"
 	.string "using the BERRY BLENDER.$"
 
 LilycoveCity_ContestLobby_Text_293BB4: @ 8293BB4
 	.string "Oh?\n"
-	.string "You don’t have any BERRIES?\p"
-	.string "If I had some left over, I’d gladly\n"
+	.string "You don't have any BERRIES?\p"
+	.string "If I had some left over, I'd gladly\n"
 	.string "give you one…\p"
-	.string "But, I don’t have any to spare today.\n"
+	.string "But, I don't have any to spare today.\n"
 	.string "Sorry about that.$"
 
 EventScript_Pblock1_Ask:: @ 8293C3E
@@ -252,19 +252,19 @@ EventScript_Pblock1_Ask:: @ 8293C3E
 	setvar VAR_0x8009, 1
 	applymovement 16, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
-	msgbox Text_Pblock1_Ask, 5
+	msgbox Text_Pblock1_Ask, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_Pblock1_Yes
 	goto EventScript_Pblock1_No
 	end
 
 EventScript_Pblock1_No: @ 8293C70
-	msgbox Text_Pblock1_No, 4
+	msgbox Text_Pblock1_No, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_Pblock1_NoBerries: @ 8293C7A
-	msgbox Text_Pblock1_NoBerries, 4
+	msgbox Text_Pblock1_NoBerries, MSGBOX_DEFAULT
 	dodailyevents
 	checkflag FLAG_0x921
 	goto_eq LilycoveCity_ContestLobby_EventScript_293C92
@@ -272,31 +272,31 @@ EventScript_Pblock1_NoBerries: @ 8293C7A
 	end
 
 LilycoveCity_ContestLobby_EventScript_293C92: @ 8293C92
-	msgbox LilycoveCity_ContestLobby_Text_29307D, 4
+	msgbox LilycoveCity_ContestLobby_Text_29307D, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293C9C: @ 8293C9C
-	msgbox LilycoveCity_ContestLobby_Text_292FD1, 4
+	msgbox LilycoveCity_ContestLobby_Text_292FD1, MSGBOX_DEFAULT
 	giveitem_std ITEM_PECHA_BERRY
 	setflag FLAG_0x921
 	goto EventScript_Pblock1_KnowHow
 	end
 
 EventScript_Pblock1_KnowHow: @ 8293CB9
-	msgbox Text_Pblock1_KnowHow, 5
+	msgbox Text_Pblock1_KnowHow, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_Pblock1_Start
 	goto EventScript_Pblock1_Explain
 	end
 
 EventScript_Pblock1_Start: @ 8293CD2
-	msgbox Text_Pblock1_Start, 4
+	msgbox Text_Pblock1_Start, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 EventScript_Pblock1_Explain: @ 8293CE0
-	msgbox Text_Pblock1_Explain, 4
+	msgbox Text_Pblock1_Explain, MSGBOX_DEFAULT
 	goto EventScript_Pblock1_Start
 	end
 
@@ -310,7 +310,7 @@ EventScript_Pblock1_Yes: @ 8293CEE
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
 	goto_eq EventScript_Pblock1_NoBerries
-	msgbox Text_Pblock1_Yes, 4
+	msgbox Text_Pblock1_Yes, MSGBOX_DEFAULT
 	goto EventScript_Pblock1_KnowHow
 	end
 
@@ -323,12 +323,12 @@ EventScript_StartBlending: @ 8293D2C
 	end
 
 EventScript_Pblock1_FullPokeblock: @ 8293D39
-	msgbox Text_Pblock1_FullPokeblock, 4
+	msgbox Text_Pblock1_FullPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_Pblock1_NoPokeblock: @ 8293D43
-	msgbox Text_Pblock1_NoPokeblock, 4
+	msgbox Text_Pblock1_NoPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -338,36 +338,36 @@ LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	applymovement 10, LilycoveCity_ContestLobby_Movement_2725A2
 	applymovement 3, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_293201, 5
+	msgbox LilycoveCity_ContestLobby_Text_293201, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293DC6
 	goto LilycoveCity_ContestLobby_EventScript_293D7D
 	end
 
 LilycoveCity_ContestLobby_EventScript_293D7D: @ 8293D7D
-	msgbox LilycoveCity_ContestLobby_Text_29323D, 4
+	msgbox LilycoveCity_ContestLobby_Text_29323D, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293D87: @ 8293D87
-	msgbox LilycoveCity_ContestLobby_Text_293394, 4
+	msgbox LilycoveCity_ContestLobby_Text_293394, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_293D91: @ 8293D91
-	msgbox LilycoveCity_ContestLobby_Text_29328C, 5
+	msgbox LilycoveCity_ContestLobby_Text_29328C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293DAA
 	goto LilycoveCity_ContestLobby_EventScript_293DB8
 	end
 
 LilycoveCity_ContestLobby_EventScript_293DAA: @ 8293DAA
-	msgbox LilycoveCity_ContestLobby_Text_2932C3, 4
+	msgbox LilycoveCity_ContestLobby_Text_2932C3, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 LilycoveCity_ContestLobby_EventScript_293DB8: @ 8293DB8
-	msgbox LilycoveCity_ContestLobby_Text_2932F1, 4
+	msgbox LilycoveCity_ContestLobby_Text_2932F1, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_293DAA
 	end
 
@@ -378,7 +378,7 @@ LilycoveCity_ContestLobby_EventScript_293DC6: @ 8293DC6
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E14
-	msgbox LilycoveCity_ContestLobby_Text_293237, 4
+	msgbox LilycoveCity_ContestLobby_Text_293237, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293D91
@@ -387,12 +387,12 @@ LilycoveCity_ContestLobby_EventScript_293DC6: @ 8293DC6
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E0A: @ 8293E0A
-	msgbox LilycoveCity_ContestLobby_Text_29343E, 4
+	msgbox LilycoveCity_ContestLobby_Text_29343E, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E14: @ 8293E14
-	msgbox LilycoveCity_ContestLobby_Text_2934A2, 4
+	msgbox LilycoveCity_ContestLobby_Text_2934A2, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -404,36 +404,36 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	applymovement 17, LilycoveCity_ContestLobby_Movement_2725A2
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_293842, 5
+	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EA3
 	goto LilycoveCity_ContestLobby_EventScript_293E5A
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E5A: @ 8293E5A
-	msgbox LilycoveCity_ContestLobby_Text_293558, 4
+	msgbox LilycoveCity_ContestLobby_Text_293558, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E64: @ 8293E64
-	msgbox LilycoveCity_ContestLobby_Text_29367D, 4
+	msgbox LilycoveCity_ContestLobby_Text_29367D, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E6E: @ 8293E6E
-	msgbox LilycoveCity_ContestLobby_Text_29357E, 5
+	msgbox LilycoveCity_ContestLobby_Text_29357E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E87
 	goto LilycoveCity_ContestLobby_EventScript_293E95
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E87: @ 8293E87
-	msgbox LilycoveCity_ContestLobby_Text_2935B1, 4
+	msgbox LilycoveCity_ContestLobby_Text_2935B1, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E95: @ 8293E95
-	msgbox LilycoveCity_ContestLobby_Text_2935E5, 4
+	msgbox LilycoveCity_ContestLobby_Text_2935E5, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_293E87
 	end
 
@@ -444,7 +444,7 @@ LilycoveCity_ContestLobby_EventScript_293EA3: @ 8293EA3
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EF1
-	msgbox LilycoveCity_ContestLobby_Text_29354E, 4
+	msgbox LilycoveCity_ContestLobby_Text_29354E, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293E6E
@@ -453,27 +453,27 @@ LilycoveCity_ContestLobby_EventScript_293EA3: @ 8293EA3
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EE7: @ 8293EE7
-	msgbox LilycoveCity_ContestLobby_Text_293738, 4
+	msgbox LilycoveCity_ContestLobby_Text_293738, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EF1: @ 8293EF1
-	msgbox LilycoveCity_ContestLobby_Text_293792, 4
+	msgbox LilycoveCity_ContestLobby_Text_293792, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EFB: @ 8293EFB
 	lockall
 	setvar VAR_0x8009, 1
-	msgbox LilycoveCity_ContestLobby_Text_2C42F4, 5
+	msgbox LilycoveCity_ContestLobby_Text_2C42F4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F28
-	msgbox LilycoveCity_ContestLobby_Text_2C4332, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4332, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F1E: @ 8293F1E
-	msgbox LilycoveCity_ContestLobby_Text_2C439D, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C439D, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -492,37 +492,37 @@ LilycoveCity_ContestLobby_EventScript_293F28: @ 8293F28
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F64: @ 8293F64
-	msgbox LilycoveCity_ContestLobby_Text_2C43FA, 5
+	msgbox LilycoveCity_ContestLobby_Text_2C43FA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_ContestLobby_EventScript_293F85
-	msgbox LilycoveCity_ContestLobby_Text_2C451B, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C451B, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F85: @ 8293F85
-	msgbox LilycoveCity_ContestLobby_Text_2C444C, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C444C, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_ContestLobby_EventScript_293F8E: @ 8293F8E
-	msgbox LilycoveCity_ContestLobby_Text_2C4573, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4573, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F98: @ 8293F98
-	msgbox LilycoveCity_ContestLobby_Text_2C45E8, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C45E8, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FA2:: @ 8293FA2
-	msgbox LilycoveCity_ContestLobby_Text_2937F9, 2
+	msgbox LilycoveCity_ContestLobby_Text_2937F9, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FAB:: @ 8293FAB
-	msgbox LilycoveCity_ContestLobby_Text_293842, 2
+	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FB4:: @ 8293FB4
-	msgbox LilycoveCity_ContestLobby_Text_29388F, 2
+	msgbox LilycoveCity_ContestLobby_Text_29388F, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FBD:: @ 8293FBD
@@ -533,7 +533,7 @@ LilycoveCity_ContestLobby_EventScript_293FBD:: @ 8293FBD
 LilycoveCity_ContestLobby_EventScript_293FC8: @ 8293FC8
 	lock
 	faceplayer
-	msgbox Text_Pblock1_Talk_0, 4
+	msgbox Text_Pblock1_Talk_0, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293FEE
@@ -542,7 +542,7 @@ LilycoveCity_ContestLobby_EventScript_293FC8: @ 8293FC8
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FEE: @ 8293FEE
-	msgbox Text_Pblock1_Talk_1, 4
+	msgbox Text_Pblock1_Talk_1, MSGBOX_DEFAULT
 	release
 	end
 
@@ -560,15 +560,15 @@ LilycoveCity_ContestLobby_EventScript_293FF8: @ 8293FF8
 	end
 
 LilycoveCity_ContestLobby_EventScript_294028: @ 8294028
-	msgbox LilycoveCity_ContestLobby_Text_293BB4, 4
+	msgbox LilycoveCity_ContestLobby_Text_293BB4, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_294032: @ 8294032
-	msgbox LilycoveCity_ContestLobby_Text_293AF0, 4
+	msgbox LilycoveCity_ContestLobby_Text_293AF0, MSGBOX_DEFAULT
 	giveitem_std ITEM_PECHA_BERRY
 	setflag FLAG_0x921
-	msgbox LilycoveCity_ContestLobby_Text_293B76, 4
+	msgbox LilycoveCity_ContestLobby_Text_293B76, MSGBOX_DEFAULT
 	release
 	end
 
@@ -592,7 +592,7 @@ EventScript_PblockLink:: @ 8294055
 	end
 
 EventScript_PblocLink_Ask: @ 8294092
-	msgbox Text_PblockLink_Ask, 5
+	msgbox Text_PblockLink_Ask, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq EventScript_PblocLink_TryConnect
 	compare VAR_RESULT, 0
@@ -600,7 +600,7 @@ EventScript_PblocLink_Ask: @ 8294092
 	end
 
 EventScript_PblocLink_NoBerries: @ 82940B1
-	msgbox Text_PblockLink_NoBerries, 4
+	msgbox Text_PblockLink_NoBerries, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -628,17 +628,17 @@ EventScript_PblocLink_TryConnect: @ 82940BB
 	end
 
 EventScript_PblocLink_1Arrived: @ 829411D
-	msgbox Text_PblockLink_1Arrived, 4
+	msgbox Text_PblockLink_1Arrived, MSGBOX_DEFAULT
 	goto EventScript_PblocLink_StartLinkBlending
 	end
 
 EventScript_PblocLink_2Arrived: @ 829412B
-	msgbox Text_PblockLink_2Arrived, 4
+	msgbox Text_PblockLink_2Arrived, MSGBOX_DEFAULT
 	goto EventScript_PblocLink_StartLinkBlending
 	end
 
 EventScript_PblocLink_3Arrived: @ 8294139
-	msgbox Text_PblockLink_3Arrived, 4
+	msgbox Text_PblockLink_3Arrived, MSGBOX_DEFAULT
 	goto EventScript_PblocLink_StartLinkBlending
 	end
 
@@ -659,36 +659,36 @@ EventScript_PblocLink_End: @ 8294160
 	end
 
 EventScript_PblocLink_FullPokeblock: @ 8294162
-	msgbox Text_PblockLink_FullPokeblock, 4
+	msgbox Text_PblockLink_FullPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_NoPokeblock: @ 829416C
-	msgbox Text_PblockLink_NoPokeblock, 4
+	msgbox Text_PblockLink_NoPokeblock, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_SomeoneNotReady: @ 8294176
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_2781C7, 4
+	msgbox LilycoveCity_ContestLobby_Text_2781C7, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_DifferentSelections: @ 8294183
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_278255, 4
+	msgbox LilycoveCity_ContestLobby_Text_278255, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_CloseLink: @ 8294190
 	special CloseLink
-	msgbox gUnknown_08272D9C, 4
+	msgbox gUnknown_08272D9C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EventScript_PblocLink_LinkError: @ 829419D
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, 4
+	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
 	releaseall
 	end
 

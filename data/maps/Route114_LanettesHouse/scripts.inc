@@ -12,7 +12,7 @@ Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	checkflag FLAG_0x083
 	goto_eq Route114_LanettesHouse_EventScript_22B2FF
 	setflag FLAG_SYS_PC_LANETTE
-	msgbox Route114_LanettesHouse_Text_22B34E, 4
+	msgbox Route114_LanettesHouse_Text_22B34E, MSGBOX_DEFAULT
 	givedecoration_std 99
 	compare VAR_RESULT, 0
 	goto_eq Route114_LanettesHouse_EventScript_272067
@@ -21,37 +21,37 @@ Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	end
 
 Route114_LanettesHouse_EventScript_22B2FF:: @ 822B2FF
-	msgbox Route114_LanettesHouse_Text_22B407, 4
+	msgbox Route114_LanettesHouse_Text_22B407, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 	lockall
-	msgbox Route114_LanettesHouse_Text_22B485, 5
+	msgbox Route114_LanettesHouse_Text_22B485, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route114_LanettesHouse_EventScript_22B327
-	msgbox Route114_LanettesHouse_Text_22B6E4, 4
+	msgbox Route114_LanettesHouse_Text_22B6E4, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route114_LanettesHouse_EventScript_22B327:: @ 822B327
-	msgbox Route114_LanettesHouse_Text_22B53C, 5
+	msgbox Route114_LanettesHouse_Text_22B53C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, Route114_LanettesHouse_EventScript_22B33C
 	releaseall
 	end
 
 Route114_LanettesHouse_EventScript_22B33C:: @ 822B33C
-	msgbox Route114_LanettesHouse_Text_22B5EF, 4
+	msgbox Route114_LanettesHouse_Text_22B5EF, MSGBOX_DEFAULT
 	return
 
 Route114_LanettesHouse_EventScript_22B345:: @ 822B345
-	msgbox Route114_LanettesHouse_Text_22B6FC, 3
+	msgbox Route114_LanettesHouse_Text_22B6FC, MSGBOX_SIGN
 	end
 
 Route114_LanettesHouse_Text_22B34E: @ 822B34E
 	.string "LANETTE: Oh! {PLAYER}{KUN}!\p"
-	.string "I’m sorry everything is so cluttered…\n"
+	.string "I'm sorry everything is so cluttered…\n"
 	.string "When I get engrossed in research,\l"
 	.string "things end up this way…\p"
 	.string "This is embarrassing… Please keep\n"
@@ -64,8 +64,8 @@ Route114_LanettesHouse_Text_22B407: @ 822B407
 	.string "can tell which POKéMON are in them.$"
 
 Route114_LanettesHouse_Text_22B485: @ 822B485
-	.string "It’s LANETTE’s research notes.\n"
-	.string "There’s information about BOXES.\p"
+	.string "It's LANETTE's research notes.\n"
+	.string "There's information about BOXES.\p"
 	.string "Design BOXES to hold 30 POKéMON each.\p"
 	.string "Each TRAINER should be able to store\n"
 	.string "420 POKéMON on the PC system.\p"
@@ -92,7 +92,7 @@ Route114_LanettesHouse_Text_22B6E4: @ 822B6E4
 	.string "{PLAYER} closed the notebook.$"
 
 Route114_LanettesHouse_Text_22B6FC: @ 822B6FC
-	.string "There’s an e-mail from someone on\n"
+	.string "There's an e-mail from someone on\n"
 	.string "the PC.\p"
 	.string "“… … … … … … …\p"
 	.string "“Your Storage System offers more\n"
@@ -101,7 +101,7 @@ Route114_LanettesHouse_Text_22B6FC: @ 822B6FC
 	.string "that make it fun and useful, too.\p"
 	.string "“It makes me proud that I played\n"
 	.string "a part in its development.\p"
-	.string "“Here’s hoping that you’ll continue\n"
+	.string "“Here's hoping that you'll continue\n"
 	.string "research in Storage Systems.\p"
 	.string "“From BILL\n"
 	.string "… … … … … … … …”$"

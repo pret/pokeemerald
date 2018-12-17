@@ -1,6 +1,3 @@
-#ifndef GUARD_MOVEMENT_TYPE_FUNC_TABLES_H
-#define GUARD_MOVEMENT_TYPE_FUNC_TABLES_H
-
 u8 (*const gMovementTypeFuncs_WanderAround[])(struct EventObject *, struct Sprite *) = {
     MovementType_WanderAround_Step0,
     MovementType_WanderAround_Step1,
@@ -439,5 +436,3 @@ u8 (*const gMovementTypeFuncs_Invisible[])(struct EventObject *, struct Sprite *
     MovementType_Invisible_Step1,
     MovementType_Invisible_Step2,
 };
-
-#endif //GUARD_MOVEMENT_TYPE_FUNC_TABLES_H

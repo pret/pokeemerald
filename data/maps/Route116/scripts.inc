@@ -37,17 +37,17 @@ Route116_EventScript_1F2C70:: @ 81F2C70
 	goto_eq Route116_EventScript_1F2C8E
 	checkflag FLAG_0x08E
 	goto_eq Route116_EventScript_1F2C98
-	msgbox Route116_Text_1F3140, 4
+	msgbox Route116_Text_1F3140, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_1F2C8E:: @ 81F2C8E
-	msgbox Route116_Text_1F32C1, 4
+	msgbox Route116_Text_1F32C1, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_1F2C98:: @ 81F2C98
-	msgbox Route116_Text_1F3166, 4
+	msgbox Route116_Text_1F3166, MSGBOX_DEFAULT
 	release
 	end
 
@@ -56,7 +56,7 @@ Route116_EventScript_1F2CA2:: @ 81F2CA2
 	faceplayer
 	checkflag FLAG_0x11F
 	goto_eq Route116_EventScript_1F2D2B
-	msgbox Route116_Text_1F3317, 4
+	msgbox Route116_Text_1F3317, MSGBOX_DEFAULT
 	goto Route116_EventScript_1F2CBB
 	end
 
@@ -65,7 +65,7 @@ Route116_EventScript_1F2CBB:: @ 81F2CBB
 	giveitem_std ITEM_REPEAT_BALL
 	compare VAR_RESULT, 0
 	goto_eq Route116_EventScript_1F2D39
-	msgbox Route116_Text_1F3521, 4
+	msgbox Route116_Text_1F3521, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if 1, Route116_EventScript_1F2D15
@@ -92,12 +92,12 @@ Route116_EventScript_1F2D20:: @ 81F2D20
 	return
 
 Route116_EventScript_1F2D2B:: @ 81F2D2B
-	msgbox Route116_Text_1F35CE, 4
+	msgbox Route116_Text_1F35CE, MSGBOX_DEFAULT
 	goto Route116_EventScript_1F2CBB
 	end
 
 Route116_EventScript_1F2D39:: @ 81F2D39
-	msgbox Route116_Text_1F3593, 4
+	msgbox Route116_Text_1F3593, MSGBOX_DEFAULT
 	release
 	end
 
@@ -126,29 +126,29 @@ Route116_Movement_1F2D4C: @ 81F2D4C
 	step_end
 
 Route116_EventScript_1F2D57:: @ 81F2D57
-	msgbox Route116_Text_1F379D, 3
+	msgbox Route116_Text_1F379D, MSGBOX_SIGN
 	end
 
 Route116_EventScript_1F2D60:: @ 81F2D60
-	msgbox Route116_Text_1F37B7, 3
+	msgbox Route116_Text_1F37B7, MSGBOX_SIGN
 	end
 
 Route116_EventScript_1F2D69:: @ 81F2D69
-	msgbox Route116_Text_1F380F, 3
+	msgbox Route116_Text_1F380F, MSGBOX_SIGN
 	end
 
 Route116_EventScript_1F2D72:: @ 81F2D72
-	msgbox Route116_Text_1F3825, 3
+	msgbox Route116_Text_1F3825, MSGBOX_SIGN
 	end
 
 Route116_EventScript_1F2D7B:: @ 81F2D7B
-	msgbox Route116_Text_1F38D4, 3
+	msgbox Route116_Text_1F38D4, MSGBOX_SIGN
 	end
 
 Route116_EventScript_1F2D84:: @ 81F2D84
 	lock
 	faceplayer
-	msgbox Route116_Text_1F309D, 4
+	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
 	setvar VAR_0x406F, 2
 	release
 	end
@@ -158,7 +158,7 @@ Route116_EventScript_1F2D95:: @ 81F2D95
 	applymovement 11, Route116_Movement_2725A8
 	applymovement 255, Route116_Movement_2725A4
 	waitmovement 0
-	msgbox Route116_Text_1F309D, 4
+	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
 	setvar VAR_0x406F, 2
 	releaseall
 	end
@@ -172,28 +172,28 @@ Route116_EventScript_1F2DB6:: @ 81F2DB6
 	specialvar VAR_RESULT, FoundBlackGlasses
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2DE2
-	msgbox Route116_Text_1F3657, 4
+	msgbox Route116_Text_1F3657, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_1F2DE2:: @ 81F2DE2
-	msgbox Route116_Text_1F3718, 4
+	msgbox Route116_Text_1F3718, MSGBOX_DEFAULT
 	closemessage
 	goto Route116_EventScript_1F2E2A
 	end
 
 Route116_EventScript_1F2DF1:: @ 81F2DF1
-	msgbox Route116_Text_1F3657, 4
-	msgbox Route116_Text_1F3688, 4
+	msgbox Route116_Text_1F3657, MSGBOX_DEFAULT
+	msgbox Route116_Text_1F3688, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, FoundBlackGlasses
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2E1B
-	msgbox Route116_Text_1F375E, 4
+	msgbox Route116_Text_1F375E, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_1F2E1B:: @ 81F2E1B
-	msgbox Route116_Text_1F36B4, 4
+	msgbox Route116_Text_1F36B4, MSGBOX_DEFAULT
 	closemessage
 	goto Route116_EventScript_1F2E2A
 	end
@@ -248,17 +248,17 @@ Route116_Movement_1F2E7E: @ 81F2E7E
 	step_end
 
 Route116_EventScript_1F2E89:: @ 81F2E89
-	trainerbattle 0, TRAINER_JOEY, 0, Route116_Text_29BB79, Route116_Text_29BB9A
-	msgbox Route116_Text_29BBC6, 6
+	trainerbattle_single TRAINER_JOEY, Route116_Text_29BB79, Route116_Text_29BB9A
+	msgbox Route116_Text_29BBC6, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F2EA0:: @ 81F2EA0
-	trainerbattle 0, TRAINER_JOSE, 0, Route116_Text_29BBFD, Route116_Text_29BC25
-	msgbox Route116_Text_29BC42, 6
+	trainerbattle_single TRAINER_JOSE, Route116_Text_29BBFD, Route116_Text_29BC25
+	msgbox Route116_Text_29BC42, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F2EB7:: @ 81F2EB7
-	trainerbattle 2, TRAINER_JERRY_1, 0, Route116_Text_29BD0C, Route116_Text_29BD66, Route116_EventScript_1F2EF8
+	trainerbattle_single TRAINER_JERRY_1, Route116_Text_29BD0C, Route116_Text_29BD66, Route116_EventScript_1F2EF8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2F4E
@@ -266,7 +266,7 @@ Route116_EventScript_1F2EB7:: @ 81F2EB7
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
 	goto_eq Route116_EventScript_1F2F22
-	msgbox Route116_Text_29BD92, 4
+	msgbox Route116_Text_29BD92, MSGBOX_DEFAULT
 	release
 	end
 
@@ -279,47 +279,41 @@ Route116_EventScript_1F2EF8:: @ 81F2EF8
 Route116_EventScript_1F2F03:: @ 81F2F03
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route116_Text_29BE71, 4
-	setvar VAR_0x8004, 273
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 273
-	callstd 8
+	msgbox Route116_Text_29BE71, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JERRY_1
 	release
 	end
 
 Route116_EventScript_1F2F22:: @ 81F2F22
 	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F35
-	msgbox Route116_Text_29BD92, 4
+	msgbox Route116_Text_29BD92, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_1F2F35:: @ 81F2F35
-	msgbox Route116_Text_29BDEF, 4
-	setvar VAR_0x8004, 273
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 273
-	callstd 8
+	msgbox Route116_Text_29BDEF, MSGBOX_DEFAULT
+	register_matchcall TRAINER_JERRY_1
 	release
 	end
 
 Route116_EventScript_1F2F4E:: @ 81F2F4E
-	trainerbattle 5, TRAINER_JERRY_1, 0, Route116_Text_29BEF3, Route116_Text_29BF4C
-	msgbox Route116_Text_29BF68, 6
+	trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_29BEF3, Route116_Text_29BF4C
+	msgbox Route116_Text_29BF68, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F2F65:: @ 81F2F65
-	trainerbattle 0, TRAINER_CLARK, 0, Route116_Text_29BACD, Route116_Text_29BB0F
-	msgbox Route116_Text_29BB31, 6
+	trainerbattle_single TRAINER_CLARK, Route116_Text_29BACD, Route116_Text_29BB0F
+	msgbox Route116_Text_29BB31, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F2F7C:: @ 81F2F7C
-	trainerbattle 0, TRAINER_JANICE, 0, Route116_Text_29BC7F, Route116_Text_29BCB3
-	msgbox Route116_Text_29BCCC, 6
+	trainerbattle_single TRAINER_JANICE, Route116_Text_29BC7F, Route116_Text_29BCB3
+	msgbox Route116_Text_29BCCC, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F2F93:: @ 81F2F93
-	trainerbattle 2, TRAINER_KAREN_1, 0, Route116_Text_29BFC5, Route116_Text_29BFFA, Route116_EventScript_1F2FD4
+	trainerbattle_single TRAINER_KAREN_1, Route116_Text_29BFC5, Route116_Text_29BFFA, Route116_EventScript_1F2FD4
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F302A
@@ -327,7 +321,7 @@ Route116_EventScript_1F2F93:: @ 81F2F93
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
 	goto_eq Route116_EventScript_1F2FFE
-	msgbox Route116_Text_29C010, 4
+	msgbox Route116_Text_29C010, MSGBOX_DEFAULT
 	release
 	end
 
@@ -340,53 +334,47 @@ Route116_EventScript_1F2FD4:: @ 81F2FD4
 Route116_EventScript_1F2FDF:: @ 81F2FDF
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route116_Text_29C096, 4
-	setvar VAR_0x8004, 280
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 280
-	callstd 8
+	msgbox Route116_Text_29C096, MSGBOX_DEFAULT
+	register_matchcall TRAINER_KAREN_1
 	release
 	end
 
 Route116_EventScript_1F2FFE:: @ 81F2FFE
 	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F3011
-	msgbox Route116_Text_29C010, 4
+	msgbox Route116_Text_29C010, MSGBOX_DEFAULT
 	release
 	end
 
 Route116_EventScript_1F3011:: @ 81F3011
-	msgbox Route116_Text_29C052, 4
-	setvar VAR_0x8004, 280
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 280
-	callstd 8
+	msgbox Route116_Text_29C052, MSGBOX_DEFAULT
+	register_matchcall TRAINER_KAREN_1
 	release
 	end
 
 Route116_EventScript_1F302A:: @ 81F302A
-	trainerbattle 5, TRAINER_KAREN_1, 0, Route116_Text_29C0DA, Route116_Text_29C11F
-	msgbox Route116_Text_29C13B, 6
+	trainerbattle_rematch TRAINER_KAREN_1, Route116_Text_29C0DA, Route116_Text_29C11F
+	msgbox Route116_Text_29C13B, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F3041:: @ 81F3041
-	trainerbattle 0, TRAINER_SARAH, 0, Route116_Text_29C173, Route116_Text_29C1B8
-	msgbox Route116_Text_29C1EA, 6
+	trainerbattle_single TRAINER_SARAH, Route116_Text_29C173, Route116_Text_29C1B8
+	msgbox Route116_Text_29C1EA, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F3058:: @ 81F3058
-	trainerbattle 0, TRAINER_DAWSON, 0, Route116_Text_29C266, Route116_Text_29C2C2
-	msgbox Route116_Text_29C2DD, 6
+	trainerbattle_single TRAINER_DAWSON, Route116_Text_29C266, Route116_Text_29C2C2
+	msgbox Route116_Text_29C2DD, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F306F:: @ 81F306F
-	trainerbattle 0, TRAINER_DEVAN, 0, Route116_Text_29C350, Route116_Text_29C365
-	msgbox Route116_Text_29C380, 6
+	trainerbattle_single TRAINER_DEVAN, Route116_Text_29C350, Route116_Text_29C365
+	msgbox Route116_Text_29C380, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_1F3086:: @ 81F3086
-	trainerbattle 0, TRAINER_JOHNSON, 0, Route116_Text_29C3C1, Route116_Text_29C3F7
-	msgbox Route116_Text_29C418, 6
+	trainerbattle_single TRAINER_JOHNSON, Route116_Text_29C3C1, Route116_Text_29C3F7
+	msgbox Route116_Text_29C418, MSGBOX_AUTOCLOSE
 	end
 
 Route116_Text_1F309D: @ 81F309D
@@ -403,15 +391,15 @@ Route116_Text_1F3140: @ 81F3140
 
 Route116_Text_1F3166: @ 81F3166
 	.string "Nnn… Roar!\n"
-	.string "What’s going on?\p"
+	.string "What's going on?\p"
 	.string "I was digging the tunnel without any\n"
 	.string "tools when some goon ordered me out!\p"
-	.string "That tunnel’s filled with POKéMON\n"
+	.string "That tunnel's filled with POKéMON\n"
 	.string "that react badly to loud noises.\l"
 	.string "They could cause an uproar.\p"
-	.string "That’s why we stopped using heavy\n"
+	.string "That's why we stopped using heavy\n"
 	.string "equipment for tunneling…\p"
-	.string "I’m worried that the goon will do\n"
+	.string "I'm worried that the goon will do\n"
 	.string "something stupid and startle the\l"
 	.string "POKéMON into an uproar.$"
 
@@ -421,8 +409,8 @@ Route116_Text_1F32C1: @ 81F32C1
 	.string "the tunnel! I can go back to digging!$"
 
 Route116_Text_1F3317: @ 81F3317
-	.string "Oh! It’s you!\p"
-	.string "You’re that person who not only helped\n"
+	.string "Oh! It's you!\p"
+	.string "You're that person who not only helped\n"
 	.string "me in PETALBURG WOODS, but also got\l"
 	.string "back my stolen package and then even\l"
 	.string "graciously delivered it to SLATEPORT!\p"
@@ -447,7 +435,7 @@ Route116_Text_1F3521: @ 81F3521
 
 Route116_Text_1F3593: @ 81F3593
 	.string "Your BAG is jam-packed.\n"
-	.string "I can’t give you this REPEAT BALL.$"
+	.string "I can't give you this REPEAT BALL.$"
 
 Route116_Text_1F35CE: @ 81F35CE
 	.string "As a token of our appreciation for\n"
@@ -466,19 +454,19 @@ Route116_Text_1F3688: @ 81F3688
 Route116_Text_1F36B4: @ 81F36B4
 	.string "Hmm…\n"
 	.string "These are BLACKGLASSES.\l"
-	.string "They’re not what I’m looking for…\p"
-	.string "Maybe my glasses aren’t around\n"
+	.string "They're not what I'm looking for…\p"
+	.string "Maybe my glasses aren't around\n"
 	.string "here…$"
 
 Route116_Text_1F3718: @ 81F3718
 	.string "Hmm…\n"
-	.string "I can’t find my glasses anywhere…\l"
-	.string "Maybe they’re not around here…$"
+	.string "I can't find my glasses anywhere…\l"
+	.string "Maybe they're not around here…$"
 
 Route116_Text_1F375E: @ 81F375E
 	.string "Hmm…\n"
 	.string "These are BLACKGLASSES.\l"
-	.string "They’re not what I’m looking for…$"
+	.string "They're not what I'm looking for…$"
 
 Route116_Text_1F379D: @ 81F379D
 	.string "ROUTE 116\n"
@@ -491,7 +479,7 @@ Route116_Text_1F37B7: @ 81F37B7
 	.string "canceled.”$"
 
 Route116_Text_1F380F: @ 81F380F
-	.string "TUNNELER’S REST HOUSE$"
+	.string "TUNNELER'S REST HOUSE$"
 
 Route116_Text_1F3825: @ 81F3825
 	.string "TRAINER TIPS\p"

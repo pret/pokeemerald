@@ -17,18 +17,18 @@ SlateportCity_PokemonCenter_1F_EventScript_20DAD3:: @ 820DAD3
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_20DAE1:: @ 820DAE1
-	msgbox SlateportCity_PokemonCenter_1F_Text_20DAF3, 2
+	msgbox SlateportCity_PokemonCenter_1F_Text_20DAF3, MSGBOX_NPC
 	end
 
 SlateportCity_PokemonCenter_1F_EventScript_20DAEA:: @ 820DAEA
-	msgbox SlateportCity_PokemonCenter_1F_Text_20DBBC, 2
+	msgbox SlateportCity_PokemonCenter_1F_Text_20DBBC, MSGBOX_NPC
 	end
 
 SlateportCity_PokemonCenter_1F_Text_20DAF3: @ 820DAF3
 	.string "Want a tip for battling?\p"
-	.string "I’d say it’s raising different kinds\n"
+	.string "I'd say it's raising different kinds\n"
 	.string "of POKéMON in a balanced manner.\p"
-	.string "It’s no good to make just one\n"
+	.string "It's no good to make just one\n"
 	.string "POKéMON strong.\p"
 	.string "If it has a type disadvantage,\n"
 	.string "it might not stand a chance.$"

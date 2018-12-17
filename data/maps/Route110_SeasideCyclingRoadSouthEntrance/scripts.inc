@@ -16,7 +16,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE:: @ 826EBBE
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBC4:: @ 826EBC4
 	lock
 	faceplayer
-	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_26EC23, 4
+	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_26EC23, MSGBOX_DEFAULT
 	release
 	end
 
@@ -37,7 +37,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBF6:: @ 826EBF6
 	return
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBFC:: @ 826EBFC
-	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_26ECAA, 4
+	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_26ECAA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, Route110_SeasideCyclingRoadSouthEntrance_Movement_26EC11
 	waitmovement 0
@@ -58,12 +58,12 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EC13:: @ 826EC13
 
 Route110_SeasideCyclingRoadSouthEntrance_Text_26EC23: @ 826EC23
 	.string "On CYCLING ROAD, you can go all out\n"
-	.string "and cycle as fast as you’d like.\p"
+	.string "and cycle as fast as you'd like.\p"
 	.string "It feels great to go that fast, but try\n"
 	.string "not to crash into anyone!$"
 
 Route110_SeasideCyclingRoadSouthEntrance_Text_26ECAA: @ 826ECAA
-	.string "Sorry, you can’t walk on CYCLING\n"
-	.string "ROAD. It’s too dangerous.\p"
+	.string "Sorry, you can't walk on CYCLING\n"
+	.string "ROAD. It's too dangerous.\p"
 	.string "Please come back with a BIKE.$"
 

@@ -16,7 +16,7 @@ RustboroCity_DevonCorp_2F_EventScript_21186F:: @ 821186F
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
-	msgbox RustboroCity_DevonCorp_2F_Text_211BFB, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211BFB, MSGBOX_DEFAULT
 	release
 	end
 
@@ -27,12 +27,12 @@ RustboroCity_DevonCorp_2F_EventScript_211886:: @ 8211886
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	checkflag FLAG_0x11F
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2118A6
-	msgbox RustboroCity_DevonCorp_2F_Text_211C50, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211C50, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_2118A6:: @ 82118A6
-	msgbox RustboroCity_DevonCorp_2F_Text_211C99, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211C99, MSGBOX_DEFAULT
 	release
 	end
 
@@ -43,12 +43,12 @@ RustboroCity_DevonCorp_2F_EventScript_2118B0:: @ 82118B0
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	checkflag FLAG_0x0BC
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2118D0
-	msgbox RustboroCity_DevonCorp_2F_Text_211D9F, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211D9F, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_2118D0:: @ 82118D0
-	msgbox RustboroCity_DevonCorp_2F_Text_211DF3, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211DF3, MSGBOX_DEFAULT
 	release
 	end
 
@@ -57,7 +57,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118DA:: @ 82118DA
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
-	msgbox RustboroCity_DevonCorp_2F_Text_211EE0, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211EE0, MSGBOX_DEFAULT
 	release
 	end
 
@@ -68,7 +68,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118F1:: @ 82118F1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A03
 	compare VAR_0x40C4, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119F9
-	msgbox RustboroCity_DevonCorp_2F_Text_211F48, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_211F48, MSGBOX_DEFAULT
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211933
@@ -85,7 +85,7 @@ RustboroCity_DevonCorp_2F_EventScript_211933:: @ 8211933
 	waitmovement 0
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, 5
+	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
 	checkitem ITEM_CLAW_FOSSIL, 1
@@ -96,7 +96,7 @@ RustboroCity_DevonCorp_2F_EventScript_211933:: @ 8211933
 
 RustboroCity_DevonCorp_2F_EventScript_211974:: @ 8211974
 	bufferitemname 0, ITEM_ROOT_FOSSIL
-	msgbox RustboroCity_DevonCorp_2F_Text_212153, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212153, MSGBOX_DEFAULT
 	takeitem ITEM_ROOT_FOSSIL, 1
 	setvar VAR_0x40C4, 1
 	setvar VAR_0x40C5, 1
@@ -110,7 +110,7 @@ RustboroCity_DevonCorp_2F_EventScript_211991:: @ 8211991
 	waitmovement 0
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
 	waitmovement 0
-	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, 5
+	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
 	checkitem ITEM_ROOT_FOSSIL, 1
@@ -121,7 +121,7 @@ RustboroCity_DevonCorp_2F_EventScript_211991:: @ 8211991
 
 RustboroCity_DevonCorp_2F_EventScript_2119D2:: @ 82119D2
 	bufferitemname 0, ITEM_CLAW_FOSSIL
-	msgbox RustboroCity_DevonCorp_2F_Text_212153, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212153, MSGBOX_DEFAULT
 	takeitem ITEM_CLAW_FOSSIL, 1
 	setvar VAR_0x40C4, 1
 	setvar VAR_0x40C5, 2
@@ -129,12 +129,12 @@ RustboroCity_DevonCorp_2F_EventScript_2119D2:: @ 82119D2
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_2119EF:: @ 82119EF
-	msgbox RustboroCity_DevonCorp_2F_Text_212046, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212046, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_2119F9:: @ 82119F9
-	msgbox RustboroCity_DevonCorp_2F_Text_2121A2, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_2121A2, MSGBOX_DEFAULT
 	release
 	end
 
@@ -147,13 +147,13 @@ RustboroCity_DevonCorp_2F_EventScript_211A03:: @ 8211A03
 
 RustboroCity_DevonCorp_2F_EventScript_211A1A:: @ 8211A1A
 	bufferspeciesname 1, SPECIES_LILEEP
-	msgbox RustboroCity_DevonCorp_2F_Text_212251, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212251, MSGBOX_DEFAULT
 	goto RustboroCity_DevonCorp_2F_EventScript_211A3E
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211A2C:: @ 8211A2C
 	bufferspeciesname 1, SPECIES_ANORITH
-	msgbox RustboroCity_DevonCorp_2F_Text_212251, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212251, MSGBOX_DEFAULT
 	goto RustboroCity_DevonCorp_2F_EventScript_211AE1
 	end
 
@@ -169,7 +169,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
 
 RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
@@ -179,7 +179,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 
 RustboroCity_DevonCorp_2F_EventScript_211A96:: @ 8211A96
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AB9
 	call RustboroCity_DevonCorp_2F_EventScript_273797
@@ -218,7 +218,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
 
 RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
@@ -228,7 +228,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 
 RustboroCity_DevonCorp_2F_EventScript_211B39:: @ 8211B39
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B5C
 	call RustboroCity_DevonCorp_2F_EventScript_273797
@@ -285,30 +285,30 @@ RustboroCity_DevonCorp_2F_EventScript_211BCF:: @ 8211BCF
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	compare VAR_0x405A, 6
 	goto_if 4, RustboroCity_DevonCorp_2F_EventScript_211BF1
-	msgbox RustboroCity_DevonCorp_2F_Text_212338, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212338, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211BF1:: @ 8211BF1
-	msgbox RustboroCity_DevonCorp_2F_Text_212386, 4
+	msgbox RustboroCity_DevonCorp_2F_Text_212386, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_DevonCorp_2F_Text_211BFB: @ 8211BFB
-	.string "We’re developing a device for talking\n"
+	.string "We're developing a device for talking\n"
 	.string "with POKéMON.\p"
-	.string "But we haven’t had much success…$"
+	.string "But we haven't had much success…$"
 
 RustboroCity_DevonCorp_2F_Text_211C50: @ 8211C50
-	.string "I’m developing new kinds of\n"
+	.string "I'm developing new kinds of\n"
 	.string "POKé BALLS…\p"
-	.string "But I haven’t made much headway…$"
+	.string "But I haven't made much headway…$"
 
 RustboroCity_DevonCorp_2F_Text_211C99: @ 8211C99
 	.string "We finally made new kinds of\n"
 	.string "POKé BALLS!\p"
 	.string "The REPEAT BALL makes it easier to\n"
-	.string "catch POKéMON you’ve caught before.\p"
+	.string "catch POKéMON you've caught before.\p"
 	.string "The TIMER BALL gets better at catching\n"
 	.string "POKéMON the longer a battle runs.\p"
 	.string "Both are proudly developed by\n"
@@ -322,25 +322,25 @@ RustboroCity_DevonCorp_2F_Text_211D9F: @ 8211D9F
 
 RustboroCity_DevonCorp_2F_Text_211DF3: @ 8211DF3
 	.string "Oh, wow!\n"
-	.string "That’s a POKéNAV!\p"
+	.string "That's a POKéNAV!\p"
 	.string "It came about as a result of our\n"
-	.string "PRESIDENT’s desire to learn about\l"
+	.string "PRESIDENT's desire to learn about\l"
 	.string "the feelings of POKéMON.\p"
 	.string "Would you like me to describe its\n"
 	.string "features in detail?\p"
-	.string "No, no. I think you’ll find out just by\n"
+	.string "No, no. I think you'll find out just by\n"
 	.string "trying the POKéNAV out.$"
 
 RustboroCity_DevonCorp_2F_Text_211EE0: @ 8211EE0
-	.string "I’m trying to develop a device that\n"
+	.string "I'm trying to develop a device that\n"
 	.string "visually reproduces the dreams of\l"
 	.string "POKéMON…\p"
-	.string "But it’s not going well.$"
+	.string "But it's not going well.$"
 
 RustboroCity_DevonCorp_2F_Text_211F48: @ 8211F48
-	.string "I’ve been trying to develop a device\n"
+	.string "I've been trying to develop a device\n"
 	.string "that resurrects POKéMON from fossils…\p"
-	.string "And, it’s working!$"
+	.string "And, it's working!$"
 
 RustboroCity_DevonCorp_2F_Text_211FA6: @ 8211FA6
 	.string "Wait! That thing you have there…\n"
@@ -352,11 +352,11 @@ RustboroCity_DevonCorp_2F_Text_211FA6: @ 8211FA6
 
 RustboroCity_DevonCorp_2F_Text_212046: @ 8212046
 	.string "Oh, is that so?\p"
-	.string "DEVON’s technological expertise\n"
+	.string "DEVON's technological expertise\n"
 	.string "is outstanding, I tell you.$"
 
 RustboroCity_DevonCorp_2F_Text_212092: @ 8212092
-	.string "Oh, now that’s a surprise!\n"
+	.string "Oh, now that's a surprise!\n"
 	.string "You have not one, but two, fossils?\p"
 	.string "Unfortunately, my machine can only\n"
 	.string "regenerate one POKéMON at a time.\p"
@@ -365,7 +365,7 @@ RustboroCity_DevonCorp_2F_Text_212092: @ 8212092
 
 RustboroCity_DevonCorp_2F_Text_212153: @ 8212153
 	.string "Excellent!\n"
-	.string "Let’s do this right away.\p"
+	.string "Let's do this right away.\p"
 	.string "{PLAYER} handed the {STR_VAR_1} to\n"
 	.string "the DEVON RESEARCHER.$"
 
@@ -389,19 +389,19 @@ RustboroCity_DevonCorp_2F_Text_2122CB: @ 82122CB
 	.string "the DEVON RESEARCHER.$"
 
 RustboroCity_DevonCorp_2F_Text_2122F5: @ 82122F5
-	.string "Uh-oh, you’ve got too many POKéMON.\n"
+	.string "Uh-oh, you've got too many POKéMON.\n"
 	.string "You have no room for this one.$"
 
 RustboroCity_DevonCorp_2F_Text_212338: @ 8212338
-	.string "I’m trying to develop a new feature\n"
+	.string "I'm trying to develop a new feature\n"
 	.string "for the POKéNAV…\p"
-	.string "But it’s not going well.$"
+	.string "But it's not going well.$"
 
 RustboroCity_DevonCorp_2F_Text_212386: @ 8212386
 	.string "Well, now what shall I work on\n"
 	.string "developing next?\p"
 	.string "Our company allows us to make our\n"
 	.string "inspirations into reality.\p"
-	.string "One couldn’t ask for a better\n"
+	.string "One couldn't ask for a better\n"
 	.string "environment as an engineer.$"
 

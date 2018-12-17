@@ -50,11 +50,11 @@ InsideOfTruck_EventScript_23BF46:: @ 823BF46
 	end
 
 InsideOfTruck_EventScript_23BF6C:: @ 823BF6C
-	msgbox InsideOfTruck_Text_23BF75, 3
+	msgbox InsideOfTruck_Text_23BF75, MSGBOX_SIGN
 	end
 
 InsideOfTruck_Text_23BF75: @ 823BF75
 	.string "The box is printed with a POKéMON logo.\p"
-	.string "It’s a POKéMON brand moving and\n"
+	.string "It's a POKéMON brand moving and\n"
 	.string "delivery service.$"
 

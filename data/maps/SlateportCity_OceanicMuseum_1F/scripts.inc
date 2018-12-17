@@ -2,7 +2,7 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 820AD95
 	.byte 0
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AD96:: @ 820AD96
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AD9F:: @ 820AD9F
@@ -21,7 +21,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADB0:: @ 820ADB0
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	showmoneybox 0, 0, 0
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20AFD5, 5
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20AFD5, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20ADE8
 	closemessage
@@ -41,7 +41,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	takemoney 0x32, 0
 	updatemoneybox 0, 0
 	nop
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
 	setvar VAR_0x40AA, 1
 	hidemoneybox
 	nop
@@ -52,7 +52,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 	checkflag FLAG_0x095
 	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE39
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
 	nop
@@ -63,7 +63,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE39:: @ 820AE39
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B075, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B075, MSGBOX_DEFAULT
 	setvar VAR_0x40AA, 1
 	hidemoneybox
 	nop
@@ -76,79 +76,79 @@ SlateportCity_OceanicMuseum_1F_Movement_20AE4B: @ 820AE4B
 	step_end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE4D:: @ 820AE4D
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B0E8, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B0E8, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE56:: @ 820AE56
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B112, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B112, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE5F:: @ 820AE5F
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B165, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B165, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE68:: @ 820AE68
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B19C, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B19C, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE71:: @ 820AE71
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B1D4, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B1D4, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE7A:: @ 820AE7A
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B218, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B218, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE83:: @ 820AE83
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B4CF, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B4CF, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE8C:: @ 820AE8C
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B547, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B547, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE95:: @ 820AE95
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B5CA, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B5CA, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE9E:: @ 820AE9E
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B699, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B699, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEA7:: @ 820AEA7
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B74B, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B74B, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEB0:: @ 820AEB0
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B81F, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B81F, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEB9:: @ 820AEB9
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B912, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B912, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEC2:: @ 820AEC2
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B9C0, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B9C0, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AECB:: @ 820AECB
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20BA9C, 3
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20BA9C, MSGBOX_SIGN
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AED4:: @ 820AED4
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B25F, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B25F, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEDD:: @ 820AEDD
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B2A2, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B2A2, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEE6:: @ 820AEE6
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B302, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B302, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEEF:: @ 820AEEF
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B369, 2
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B369, MSGBOX_NPC
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
@@ -160,12 +160,12 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	waitmovement 0
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_27259A
 	waitmovement 0
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B3AB, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B3AB, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM46
 	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AFB5
 	setflag FLAG_0x10D
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
@@ -205,7 +205,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AFAA:: @ 820AFAA
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AFB5:: @ 820AFB5
-	msgbox SlateportCity_OceanicMuseum_1F_Text_20B49B, 4
+	msgbox SlateportCity_OceanicMuseum_1F_Text_20B49B, MSGBOX_DEFAULT
 	release
 	end
 
@@ -248,14 +248,14 @@ SlateportCity_OceanicMuseum_1F_Text_20B026: @ 820B026
 	.string "Please enjoy yourself.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B03D: @ 820B03D
-	.string "Oh? I’m sorry, but you don’t seem to\n"
+	.string "Oh? I'm sorry, but you don't seem to\n"
 	.string "have enough money.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B075: @ 820B075
-	.string "Oh? You’re with that group that\n"
+	.string "Oh? You're with that group that\n"
 	.string "went in earlier?\p"
-	.string "You’re the only one who’s late.\n"
-	.string "You’d better go catch up to them!$"
+	.string "You're the only one who's late.\n"
+	.string "You'd better go catch up to them!$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B0E8: @ 820B0E8
 	.string "We, TEAM AQUA, exist for the good\n"
@@ -264,7 +264,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B0E8: @ 820B0E8
 SlateportCity_OceanicMuseum_1F_Text_20B112: @ 820B112
 	.string "We were told to assemble here,\n"
 	.string "so we did, but…\p"
-	.string "Our BOSS, the linchpin, isn’t here.$"
+	.string "Our BOSS, the linchpin, isn't here.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B165: @ 820B165
 	.string "If I ripped off the stuff here,\n"
@@ -275,11 +275,11 @@ SlateportCity_OceanicMuseum_1F_Text_20B19C: @ 820B19C
 	.string "nefarious deeds…$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B1D4: @ 820B1D4
-	.string "If our goons didn’t bungle things\n"
-	.string "in RUSTBORO, we wouldn’t be here!$"
+	.string "If our goons didn't bungle things\n"
+	.string "in RUSTBORO, we wouldn't be here!$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B218: @ 820B218
-	.string "I didn’t have ¥50, so it took a long\n"
+	.string "I didn't have ¥50, so it took a long\n"
 	.string "time getting by the receptionist.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B25F: @ 820B25F
@@ -296,7 +296,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B302: @ 820B302
 	.string "The sea is vast without end, and\n"
 	.string "infinitely deep…\p"
 	.string "There must be many POKéMON that\n"
-	.string "we don’t know about.$"
+	.string "we don't know about.$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B369: @ 820B369
 	.string "I want a sea POKéMON.\p"
@@ -306,7 +306,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B369: @ 820B369
 SlateportCity_OceanicMuseum_1F_Text_20B3AB: @ 820B3AB
 	.string "Aiyeeeh!\n"
 	.string "What are you doing here?\p"
-	.string "Me? I’m the TEAM AQUA member\n"
+	.string "Me? I'm the TEAM AQUA member\n"
 	.string "you thumped before, remember?\l"
 	.string "Back in RUSTURF TUNNEL?\p"
 	.string "Here, take this!\n"
@@ -332,10 +332,10 @@ SlateportCity_OceanicMuseum_1F_Text_20B547: @ 820B547
 	.string "A red ball is bobbing up and down\n"
 	.string "inside a glass vessel.\p"
 	.string "“This is an experiment simulating a\n"
-	.string "WATERFALL using the ball’s buoyancy.”$"
+	.string "WATERFALL using the ball's buoyancy.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B5CA: @ 820B5CA
-	.string "It’s a sample of soil from the ocean\n"
+	.string "It's a sample of soil from the ocean\n"
 	.string "floor.\p"
 	.string "“Over many years, the remains of\n"
 	.string "life-forms settle at the bottom of\l"
@@ -344,7 +344,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B5CA: @ 820B5CA
 	.string "ancient past is revealed.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B699: @ 820B699
-	.string "It’s a sample of beach sand.\p"
+	.string "It's a sample of beach sand.\p"
 	.string "“Stones from mountains are washed\n"
 	.string "down by rivers where they are\l"
 	.string "chipped and ground down.\p"
@@ -379,7 +379,7 @@ SlateportCity_OceanicMuseum_1F_Text_20B912: @ 820B912
 	.string "the size of land.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_20B9C0: @ 820B9C0
-	.string "It’s a fossil with wavy ridges on it.\p"
+	.string "It's a fossil with wavy ridges on it.\p"
 	.string "“Soil on the ocean floor gets scoured\n"
 	.string "by the tide.\p"
 	.string "“The flowing seawater marks the soil\n"
@@ -390,6 +390,6 @@ SlateportCity_OceanicMuseum_1F_Text_20B9C0: @ 820B9C0
 SlateportCity_OceanicMuseum_1F_Text_20BA9C: @ 820BA9C
 	.string "A strange machine is rotating under\n"
 	.string "a glass dome.\p"
-	.string "Maybe it’s for measuring the depth\n"
+	.string "Maybe it's for measuring the depth\n"
 	.string "of something…$"
 

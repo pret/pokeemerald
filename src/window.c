@@ -1,6 +1,6 @@
 #include "global.h"
 #include "window.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "bg.h"
 #include "blit.h"
 

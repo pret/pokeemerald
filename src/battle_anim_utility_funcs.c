@@ -3,7 +3,7 @@
 #include "contest.h"
 #include "gpu_regs.h"
 #include "graphics.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"
@@ -40,14 +40,14 @@ static void sub_8117FD0(u8);
 
 const u16 gUnknown_08597418 = RGB(31, 31, 31);
 
-// no clue what these are...
-// possibly some register offsets
-const u8 gUnknown_0859741A[] = {0x08, 0x0a, 0x0c, 0x0e};
-const u8 gUnknown_0859741E[] = {0x08, 0x0a, 0x0c, 0x0e};
+// These belong in battle_intro.c, but there putting them there causes 2 bytes of alignment padding
+// between the two .rodata segments. Perhaps battle_intro.c actually belongs in this file, too.
+const u8 gUnknown_0859741A[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+const u8 gUnknown_0859741E[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
 void sub_8116620(u8 taskId)
 {
-    u32 selectedPalettes = sub_811583C(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     selectedPalettes |= sub_80A76C4((gBattleAnimArgs[0] >>  7) & 1,
                                     (gBattleAnimArgs[0] >>  8) & 1,
                                     (gBattleAnimArgs[0] >>  9) & 1,
@@ -62,7 +62,7 @@ void sub_8116664(u8 taskId)
     u8 animBattlers[2];
 
     animBattlers[1] = 0xFF;
-    selectedPalettes = sub_811583C(1);
+    selectedPalettes = UnpackSelectedBattleAnimPalettes(1);
     switch (gBattleAnimArgs[0])
     {
     case 2:
@@ -105,7 +105,7 @@ void sub_8116664(u8 taskId)
 
 void AnimTask_SetCamouflageBlend(u8 taskId)
 {
-    u32 selectedPalettes = sub_811583C(gBattleAnimArgs[0]);
+    u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     switch (gBattleTerrain)
     {
     case BATTLE_TERRAIN_GRASS:

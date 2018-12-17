@@ -17,13 +17,13 @@
 #include "string_util.h"
 #include "battle_message.h"
 #include "constants/battle_string_ids.h"
+#include "constants/weather.h"
 #include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
 #include "event_data.h"
 #include "link.h"
 #include "berry.h"
-
-extern u8 weather_get_current(void);
+#include "field_weather.h"
 
 // rom const data
 static const u16 sSoundMovesTable[] =
@@ -1192,7 +1192,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
         // fall through
     case 2:
         if ((gBattleTypeFlags & BATTLE_TYPE_ARENA)
-         && gBattleStruct->field_DA == 2
+         && gBattleStruct->arenaTurnCounter == 2
          && gBattleMons[0].hp != 0 && gBattleMons[1].hp != 0)
         {
             s32 i;
@@ -1238,7 +1238,7 @@ bool8 HandleFaintedMonActions(void)
             {
                 gBattlerFainted = gBattlerTarget = gBattleStruct->faintedActionsBattlerId;
                 if (gBattleMons[gBattleStruct->faintedActionsBattlerId].hp == 0
-                 && !(gBattleStruct->field_DF & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
+                 && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
@@ -1827,11 +1827,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             case ABILITYEFFECT_SWITCH_IN_WEATHER:
                 if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
                 {
-                    switch (weather_get_current())
+                    switch (GetCurrentWeather())
                     {
-                    case 3:
-                    case 5:
-                    case 13:
+                    case WEATHER_RAIN_LIGHT:
+                    case WEATHER_RAIN_MED:
+                    case WEATHER_RAIN_HEAVY:
                         if (!(gBattleWeather & WEATHER_RAIN_ANY))
                         {
                             gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
@@ -1840,7 +1840,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             effect++;
                         }
                         break;
-                    case 8:
+                    case WEATHER_SANDSTORM:
                         if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                         {
                             gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
@@ -1849,7 +1849,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             effect++;
                         }
                         break;
-                    case 12:
+                    case WEATHER_DROUGHT:
                         if (!(gBattleWeather & WEATHER_SUN_ANY))
                         {
                             gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
@@ -1862,7 +1862,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 }
                 if (effect)
                 {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
+                    gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
                     BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
                 }
                 break;

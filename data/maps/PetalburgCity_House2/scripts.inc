@@ -2,15 +2,15 @@ PetalburgCity_House2_MapScripts:: @ 82078F2
 	.byte 0
 
 PetalburgCity_House2_EventScript_2078F3:: @ 82078F3
-	msgbox PetalburgCity_House2_Text_207905, 2
+	msgbox PetalburgCity_House2_Text_207905, MSGBOX_NPC
 	end
 
 PetalburgCity_House2_EventScript_2078FC:: @ 82078FC
-	msgbox PetalburgCity_House2_Text_207969, 2
+	msgbox PetalburgCity_House2_Text_207969, MSGBOX_NPC
 	end
 
 PetalburgCity_House2_Text_207905: @ 8207905
-	.string "NORMAN became our town’s new\n"
+	.string "NORMAN became our town's new\n"
 	.string "GYM LEADER.\p"
 	.string "I think he called his family over from\n"
 	.string "somewhere far away.$"

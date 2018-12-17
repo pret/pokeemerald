@@ -1,11 +1,15 @@
 #include "global.h"
-#include "safari_zone.h"
-#include "event_data.h"
-#include "constants/game_stat.h"
-#include "main.h"
 #include "battle.h"
-#include "string_util.h"
+#include "event_data.h"
+#include "field_player_avatar.h"
+#include "overworld.h"
+#include "main.h"
 #include "pokeblock.h"
+#include "safari_zone.h"
+#include "script.h"
+#include "string_util.h"
+#include "tv.h"
+#include "constants/game_stat.h"
 
 struct PokeblockFeeder
 {
@@ -18,26 +22,12 @@ struct PokeblockFeeder
 
 #define NUM_POKEBLOCK_FEEDERS 10
 
-extern u8 gBattleOutcome;
-extern void* gFieldCallback;
+extern const u8 EventScript_2A4B8A[];
+extern const u8 EventScript_2A4B6F[];
+extern const u8 EventScript_2A4B4C[];
+extern const u8 EventScript_2A4B9B[];
 
-extern u8 EventScript_2A4B8A[];
-extern u8 EventScript_2A4B6F[];
-extern u8 EventScript_2A4B4C[];
-extern u8 EventScript_2A4B9B[];
-
-extern void sub_80EE44C(u8, u8);
-extern void IncrementGameStat(u8 index);
-extern void ScriptContext1_SetupScript(u8*);
-extern void ScriptContext2_RunNewScript(u8*);
-extern void CB2_ReturnToField(void);
-extern void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
-extern void CB2_LoadMap(void);
 extern void sub_80AF6F0(void);
-extern void ScriptContext1_Stop(void);
-extern void WarpIntoMap(void);
-extern void GetXYCoordsOneStepInFrontOfPlayer(s16* x, s16* y);
-extern void PlayerGetDestCoords(s16* x, s16* y);
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA static u16 sSafariZoneStepCounter = 0;

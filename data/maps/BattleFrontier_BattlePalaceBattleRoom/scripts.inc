@@ -61,7 +61,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8BF:: @ 824F8BF
 	waitmovement 0
 	setvar VAR_0x8004, 5
 	special CallBattlePalaceFunction
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
 	switch VAR_RESULT
@@ -92,7 +92,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
 	waitmovement 0
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_24FF00, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_24FF00, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
@@ -156,7 +156,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAAA:: @ 824FAAA
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FAB4:: @ 824FAB4
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250030, 5
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250030, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A
 	case 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F
@@ -200,7 +200,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61:: @ 824FB61
 	compare VAR_TEMP_2, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2500DD, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2500DD, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79:: @ 824FB79
@@ -227,7 +227,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FBD0:: @ 824FBD0
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_242170
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25017C, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25017C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE97
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE97
@@ -249,13 +249,13 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2501C1, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2501C1, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA:: @ 824FCAA
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502C4, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502C4, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7
@@ -268,10 +268,10 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502FF, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502FF, MSGBOX_DEFAULT
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25036D, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25036D, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePalaceBattleRoom_Text_2503DC
 	waitmessage
@@ -283,7 +283,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
 	waitmovement 0
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250412, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250412, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A:: @ 824FD3A
@@ -292,13 +292,13 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A:: @ 824FD3A
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250485, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250485, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67:: @ 824FD67
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250572, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250572, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84
@@ -311,10 +311,10 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25057E, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25057E, MSGBOX_DEFAULT
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250629, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250629, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePalaceBattleRoom_Text_250699
 	waitmessage
@@ -326,7 +326,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_2725A8
 	waitmovement 0
-	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2506C4, 4
+	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2506C4, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7:: @ 824FDF7
@@ -600,26 +600,26 @@ BattleFrontier_BattlePalaceBattleRoom_Text_25036D: @ 825036D
 	.string "My, my, if only you could maintain that\n"
 	.string "facade of distinguished authority…\p"
 	.string "Here!\n"
-	.string "Let’s see your FRONTIER PASS!$"
+	.string "Let's see your FRONTIER PASS!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_2503DC: @ 82503DC
 	.string "The Spirits Symbol was embossed on\n"
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_250412: @ 8250412
-	.string "SPENSER: Your POKéMON’s eyes are \n"
+	.string "SPENSER: Your POKéMON's eyes are \n"
 	.string "truly clear and unclouded.\p"
 	.string "I will eagerly await the next\n"
 	.string "opportunity to see you.$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_250485: @ 8250485
 	.string "SPENSER: Gwahahah!\n"
-	.string "You’ve battled your way up again?\p"
+	.string "You've battled your way up again?\p"
 	.string "You must have developed a truly\n"
 	.string "formidable bond with your POKéMON.\p"
 	.string "So be it!\p"
-	.string "This time, I won’t bluster or hold back.\n"
-	.string "This time, there’s no fooling around.\p"
+	.string "This time, I won't bluster or hold back.\n"
+	.string "This time, there's no fooling around.\p"
 	.string "Ready now?\n"
 	.string "Prepare to lose!$"
 

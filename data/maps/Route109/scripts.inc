@@ -53,7 +53,7 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	hideobjectat 1, MAP_ROUTE109
-	msgbox Route109_Text_1E9C1D, 4
+	msgbox Route109_Text_1E9C1D, MSGBOX_DEFAULT
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
 	resetobjectpriority 255, MAP_ROUTE109
@@ -279,7 +279,7 @@ Route109_EventScript_1EE910:: @ 81EE910
 
 Route109_EventScript_1EE921:: @ 81EE921
 	message Route109_Text_1EEC96
-	msgbox Route109_Text_1EEC96, 5
+	msgbox Route109_Text_1EEC96, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route109_EventScript_1EE981
 	goto Route109_EventScript_1EE972
@@ -296,29 +296,29 @@ Route109_EventScript_1EE93F:: @ 81EE93F
 	end
 
 Route109_EventScript_1EE972:: @ 81EE972
-	msgbox Route109_Text_1EED06, 4
+	msgbox Route109_Text_1EED06, MSGBOX_DEFAULT
 	closemessage
 	goto Route109_EventScript_1EE760
 	end
 
 Route109_EventScript_1EE981:: @ 81EE981
-	msgbox Route109_Text_1EED5E, 4
+	msgbox Route109_Text_1EED5E, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_EventScript_1EE98B:: @ 81EE98B
-	msgbox Route109_Text_1EEE72, 4
+	msgbox Route109_Text_1EEE72, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_EventScript_1EE995:: @ 81EE995
-	msgbox Route109_Text_1EEEB4, 2
+	msgbox Route109_Text_1EEEB4, MSGBOX_NPC
 	end
 
 Route109_EventScript_1EE99E:: @ 81EE99E
 	lock
 	faceplayer
-	msgbox Route109_Text_1EEFB0, 4
+	msgbox Route109_Text_1EEFB0, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Route109_Movement_2725A2
 	waitmovement 0
@@ -331,7 +331,7 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	special GetPlayerBigGuyGirlString
 	checkflag FLAG_0x118
 	goto_eq Route109_EventScript_1EE9F2
-	msgbox Route109_Text_1EEFDE, 4
+	msgbox Route109_Text_1EEFDE, MSGBOX_DEFAULT
 	giveitem_std ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
 	goto_eq Route109_EventScript_272054
@@ -343,18 +343,18 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	end
 
 Route109_EventScript_1EE9F2:: @ 81EE9F2
-	msgbox Route109_Text_1EEFF1, 4
+	msgbox Route109_Text_1EEFF1, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Route109_Movement_2725A2
 	waitmovement 0
 	release
 	end
 
 Route109_EventScript_1EEA06:: @ 81EEA06
-	msgbox Route109_Text_1EEF08, 2
+	msgbox Route109_Text_1EEF08, MSGBOX_NPC
 	end
 
 Route109_EventScript_1EEA0F:: @ 81EEA0F
-	msgbox Route109_Text_1EF080, 2
+	msgbox Route109_Text_1EF080, MSGBOX_NPC
 	end
 
 Route109_EventScript_1EEA18:: @ 81EEA18
@@ -362,137 +362,131 @@ Route109_EventScript_1EEA18:: @ 81EEA18
 	faceplayer
 	waitse
 	playmoncry SPECIES_ZIGZAGOON, 0
-	msgbox Route109_Text_1EF173, 4
+	msgbox Route109_Text_1EF173, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 Route109_EventScript_1EEA2B:: @ 81EEA2B
-	msgbox Route109_Text_1EF185, 3
+	msgbox Route109_Text_1EF185, MSGBOX_SIGN
 	end
 
 Route109_EventScript_1EEA34:: @ 81EEA34
-	msgbox Route109_Text_1EF1D5, 3
+	msgbox Route109_Text_1EF1D5, MSGBOX_SIGN
 	end
 
 Route109_EventScript_1EEA3D:: @ 81EEA3D
-	trainerbattle 0, TRAINER_DAVID, 0, Route109_Text_297140, Route109_Text_29717D
-	msgbox Route109_Text_297191, 6
+	trainerbattle_single TRAINER_DAVID, Route109_Text_297140, Route109_Text_29717D
+	msgbox Route109_Text_297191, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA54:: @ 81EEA54
-	trainerbattle 0, TRAINER_ALICE, 0, Route109_Text_2971D1, Route109_Text_2971FD
-	msgbox Route109_Text_29720F, 6
+	trainerbattle_single TRAINER_ALICE, Route109_Text_2971D1, Route109_Text_2971FD
+	msgbox Route109_Text_29720F, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA6B:: @ 81EEA6B
-	trainerbattle 0, TRAINER_HUEY, 0, Route109_Text_297235, Route109_Text_29727B
-	msgbox Route109_Text_29728C, 6
+	trainerbattle_single TRAINER_HUEY, Route109_Text_297235, Route109_Text_29727B
+	msgbox Route109_Text_29728C, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA82:: @ 81EEA82
-	trainerbattle 0, TRAINER_EDMOND, 0, Route109_Text_2972B3, Route109_Text_2972CE
-	msgbox Route109_Text_2972ED, 6
+	trainerbattle_single TRAINER_EDMOND, Route109_Text_2972B3, Route109_Text_2972CE
+	msgbox Route109_Text_2972ED, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEA99:: @ 81EEA99
-	trainerbattle 2, TRAINER_RICKY_1, 0, Route109_Text_29733B, Route109_Text_297379, Route109_EventScript_1EEAC5
+	trainerbattle_single TRAINER_RICKY_1, Route109_Text_29733B, Route109_Text_297379, Route109_EventScript_1EEAC5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route109_EventScript_1EEAE4
-	msgbox Route109_Text_297380, 4
+	msgbox Route109_Text_297380, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_EventScript_1EEAC5:: @ 81EEAC5
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route109_Text_2973C1, 4
-	setvar VAR_0x8004, 64
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 64
-	callstd 8
+	msgbox Route109_Text_2973C1, MSGBOX_DEFAULT
+	register_matchcall TRAINER_RICKY_1
 	release
 	end
 
 Route109_EventScript_1EEAE4:: @ 81EEAE4
-	trainerbattle 5, TRAINER_RICKY_1, 0, Route109_Text_2973FF, Route109_Text_297437
-	msgbox Route109_Text_297458, 6
+	trainerbattle_rematch TRAINER_RICKY_1, Route109_Text_2973FF, Route109_Text_297437
+	msgbox Route109_Text_297458, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEAFB:: @ 81EEAFB
-	trainerbattle 2, TRAINER_LOLA_1, 0, Route109_Text_29749C, Route109_Text_2974CF, Route109_EventScript_1EEB27
+	trainerbattle_single TRAINER_LOLA_1, Route109_Text_29749C, Route109_Text_2974CF, Route109_EventScript_1EEB27
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route109_EventScript_1EEB46
-	msgbox Route109_Text_2974D6, 4
+	msgbox Route109_Text_2974D6, MSGBOX_DEFAULT
 	release
 	end
 
 Route109_EventScript_1EEB27:: @ 81EEB27
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route109_Text_297520, 4
-	setvar VAR_0x8004, 57
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 57
-	callstd 8
+	msgbox Route109_Text_297520, MSGBOX_DEFAULT
+	register_matchcall TRAINER_LOLA_1
 	release
 	end
 
 Route109_EventScript_1EEB46:: @ 81EEB46
-	trainerbattle 5, TRAINER_LOLA_1, 0, Route109_Text_297538, Route109_Text_297576
-	msgbox Route109_Text_29757D, 6
+	trainerbattle_rematch TRAINER_LOLA_1, Route109_Text_297538, Route109_Text_297576
+	msgbox Route109_Text_29757D, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEB5D:: @ 81EEB5D
-	trainerbattle 0, TRAINER_AUSTINA, 0, Route109_Text_2975C0, Route109_Text_297601
-	msgbox Route109_Text_29762A, 6
+	trainerbattle_single TRAINER_AUSTINA, Route109_Text_2975C0, Route109_Text_297601
+	msgbox Route109_Text_29762A, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEB74:: @ 81EEB74
-	trainerbattle 0, TRAINER_GWEN, 0, Route109_Text_297667, Route109_Text_297691
-	msgbox Route109_Text_2976A4, 6
+	trainerbattle_single TRAINER_GWEN, Route109_Text_297667, Route109_Text_297691
+	msgbox Route109_Text_2976A4, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEB8B:: @ 81EEB8B
-	trainerbattle 0, TRAINER_CARTER, 0, Route109_Text_2976C5, Route109_Text_2976FC
-	msgbox Route109_Text_297715, 6
+	trainerbattle_single TRAINER_CARTER, Route109_Text_2976C5, Route109_Text_2976FC
+	msgbox Route109_Text_297715, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBA2:: @ 81EEBA2
-	trainerbattle 4, TRAINER_MEL_AND_PAUL, 0, Route109_Text_297754, Route109_Text_2977B0, Route109_Text_29781D
-	msgbox Route109_Text_2977C7, 6
+	trainerbattle_double TRAINER_MEL_AND_PAUL, Route109_Text_297754, Route109_Text_2977B0, Route109_Text_29781D
+	msgbox Route109_Text_2977C7, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBBD:: @ 81EEBBD
-	trainerbattle 4, TRAINER_MEL_AND_PAUL, 0, Route109_Text_297872, Route109_Text_2978BD, Route109_Text_29792E
-	msgbox Route109_Text_2978F1, 6
+	trainerbattle_double TRAINER_MEL_AND_PAUL, Route109_Text_297872, Route109_Text_2978BD, Route109_Text_29792E
+	msgbox Route109_Text_2978F1, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBD8:: @ 81EEBD8
-	trainerbattle 0, TRAINER_CHANDLER, 0, Route109_Text_29798A, Route109_Text_2979AE
-	msgbox Route109_Text_2979BF, 6
+	trainerbattle_single TRAINER_CHANDLER, Route109_Text_29798A, Route109_Text_2979AE
+	msgbox Route109_Text_2979BF, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEBEF:: @ 81EEBEF
-	trainerbattle 0, TRAINER_HAILEY, 0, Route109_Text_2979EC, Route109_Text_297A15
-	msgbox Route109_Text_297A40, 6
+	trainerbattle_single TRAINER_HAILEY, Route109_Text_2979EC, Route109_Text_297A15
+	msgbox Route109_Text_297A40, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_1EEC06:: @ 81EEC06
-	trainerbattle 0, TRAINER_ELIJAH, 0, Route109_Text_297A82, Route109_Text_297AC7
-	msgbox Route109_Text_297AE5, 6
+	trainerbattle_single TRAINER_ELIJAH, Route109_Text_297A82, Route109_Text_297AC7
+	msgbox Route109_Text_297AE5, MSGBOX_AUTOCLOSE
 	end
 
 DewfordTown_Text_1EEC1D: @ 81EEC1D
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "We’ve made land in SLATEPORT!\p"
-	.string "I suppose you’re going to visit CAPT.\n"
+	.string "We've made land in SLATEPORT!\p"
+	.string "I suppose you're going to visit CAPT.\n"
 	.string "STERN and deliver the DEVON GOODS?$"
 
 Route109_Text_1EEC96: @ 81EEC96
-	.string "MR. BRINEY: I thought you’re supposed\n"
+	.string "MR. BRINEY: I thought you're supposed\n"
 	.string "to deliver the DEVON GOODS.\p"
 	.string "Would you like to sail back to\n"
 	.string "DEWFORD, then?$"
@@ -500,21 +494,21 @@ Route109_Text_1EEC96: @ 81EEC96
 Route109_Text_1EED06: @ 81EED06
 	.string "MR. BRINEY: DEWFORD it is, then!\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 Route109_Text_1EED5E: @ 81EED5E
 	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the DEVON GOODS. I’ll be waiting.$"
+	.string "the DEVON GOODS. I'll be waiting.$"
 
 DewfordTown_Text_1EEDA7: @ 81EEDA7
-	.string "MR. BRINEY: Ahoy! We’ve made land in\n"
+	.string "MR. BRINEY: Ahoy! We've made land in\n"
 	.string "SLATEPORT!\p"
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail again!$"
 
 Route109_Text_1EEE17: @ 81EEE17
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I’ll go out to sea anytime!\p"
+	.string "For you, I'll go out to sea anytime!\p"
 	.string "Now, my friend, where are we bound?$"
 
 Route109_Text_1EEE72: @ 81EEE72
@@ -523,30 +517,30 @@ Route109_Text_1EEE72: @ 81EEE72
 
 Route109_Text_1EEEB4: @ 81EEEB4
 	.string "Yo, TRAINERS!\n"
-	.string "Whether you’re hot to trot,\l"
+	.string "Whether you're hot to trot,\l"
 	.string "or cool cat not,\l"
-	.string "chill at my papa’s spot!$"
+	.string "chill at my papa's spot!$"
 
 Route109_Text_1EEF08: @ 81EEF08
 	.string "Little kids can dart around so quickly…\p"
-	.string "You don’t dare take your eyes off them\n"
-	.string "for an instant. It’s very taxing.\p"
+	.string "You don't dare take your eyes off them\n"
+	.string "for an instant. It's very taxing.\p"
 	.string "Mine are with my POKéMON, so they\n"
 	.string "should be okay, but…$"
 
 Route109_Text_1EEFB0: @ 81EEFB0
-	.string "Our sand castle’s taking a long time\n"
+	.string "Our sand castle's taking a long time\n"
 	.string "to make.$"
 
 Route109_Text_1EEFDE: @ 81EEFDE
 	.string "You can have this!$"
 
 Route109_Text_1EEFF1: @ 81EEFF1
-	.string "We’re going to get all the sand from\n"
+	.string "We're going to get all the sand from\n"
 	.string "the beach and make a big castle!\p"
-	.string "And then we’re going to be a king and\n"
+	.string "And then we're going to be a king and\n"
 	.string "queen.\p"
-	.string "We’ll let you be a servant.$"
+	.string "We'll let you be a servant.$"
 
 Route109_Text_1EF080: @ 81EF080
 	.string "The water around these parts is clean.\p"

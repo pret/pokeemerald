@@ -2,11 +2,11 @@ MossdeepCity_House2_MapScripts:: @ 82220DE
 	.byte 0
 
 MossdeepCity_House2_EventScript_2220DF:: @ 82220DF
-	msgbox MossdeepCity_House2_Text_222146, 2
+	msgbox MossdeepCity_House2_Text_222146, MSGBOX_NPC
 	end
 
 MossdeepCity_House2_EventScript_2220E8:: @ 82220E8
-	msgbox MossdeepCity_House2_Text_2221A6, 2
+	msgbox MossdeepCity_House2_Text_2221A6, MSGBOX_NPC
 	end
 
 MossdeepCity_House2_EventScript_2220F1:: @ 82220F1
@@ -14,7 +14,7 @@ MossdeepCity_House2_EventScript_2220F1:: @ 82220F1
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox MossdeepCity_House2_Text_22222E, 4
+	msgbox MossdeepCity_House2_Text_22222E, MSGBOX_DEFAULT
 	waitmoncry
 	closemessage
 	setflag FLAG_0x0E0
@@ -56,13 +56,13 @@ MossdeepCity_House2_Movement_222141: @ 8222141
 MossdeepCity_House2_Text_222146: @ 8222146
 	.string "My little sister exchanges MAIL with\n"
 	.string "her boyfriend in FORTREE.\p"
-	.string "I don’t envy her one bit at all.$"
+	.string "I don't envy her one bit at all.$"
 
 MossdeepCity_House2_Text_2221A6: @ 82221A6
-	.string "Even though I can’t see my friend in\n"
+	.string "Even though I can't see my friend in\n"
 	.string "FORTREE, my POKéMON carries MAIL\l"
 	.string "back and forth for us.\p"
-	.string "I’m not lonesome, even though we’re\n"
+	.string "I'm not lonesome, even though we're\n"
 	.string "apart.$"
 
 MossdeepCity_House2_Text_22222E: @ 822222E

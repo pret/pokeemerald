@@ -30,7 +30,7 @@ Route114_EventScript_1F2582:: @ 81F2582
 	dodailyevents
 	checkflag FLAG_0x92B
 	goto_eq Route114_EventScript_1F25C7
-	msgbox Route114_Text_2A6FCB, 4
+	msgbox Route114_Text_2A6FCB, MSGBOX_DEFAULT
 	random 5
 	addvar VAR_RESULT, 15
 	addvar VAR_RESULT, 133
@@ -38,12 +38,12 @@ Route114_EventScript_1F2582:: @ 81F2582
 	compare VAR_RESULT, 0
 	goto_eq Route114_EventScript_272054
 	setflag FLAG_0x92B
-	msgbox Route114_Text_2A7034, 4
+	msgbox Route114_Text_2A7034, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_EventScript_1F25C7:: @ 81F25C7
-	msgbox Route114_Text_2A706E, 4
+	msgbox Route114_Text_2A706E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -52,17 +52,17 @@ Route114_EventScript_1F25D1:: @ 81F25D1
 	faceplayer
 	checkflag FLAG_0x0E7
 	goto_eq Route114_EventScript_1F2608
-	msgbox Route114_Text_1F2809, 4
+	msgbox Route114_Text_1F2809, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM05
 	compare VAR_RESULT, 0
 	goto_eq Route114_EventScript_272054
 	setflag FLAG_0x0E7
-	msgbox Route114_Text_1F2872, 4
+	msgbox Route114_Text_1F2872, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_EventScript_1F2608:: @ 81F2608
-	msgbox Route114_Text_1F2872, 4
+	msgbox Route114_Text_1F2872, MSGBOX_DEFAULT
 	release
 	end
 
@@ -71,126 +71,120 @@ Route114_EventScript_1F2612:: @ 81F2612
 	faceplayer
 	waitse
 	playmoncry SPECIES_POOCHYENA, 2
-	msgbox Route114_Text_1F28A6, 4
+	msgbox Route114_Text_1F28A6, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 Route114_EventScript_1F2625:: @ 81F2625
-	msgbox Route114_Text_1F28B3, 3
+	msgbox Route114_Text_1F28B3, MSGBOX_SIGN
 	end
 
 Route114_EventScript_1F262E:: @ 81F262E
-	msgbox Route114_Text_1F28DB, 3
+	msgbox Route114_Text_1F28DB, MSGBOX_SIGN
 	end
 
 Route114_EventScript_1F2637:: @ 81F2637
-	msgbox Route114_Text_1F2910, 3
+	msgbox Route114_Text_1F2910, MSGBOX_SIGN
 	end
 
 Route114_EventScript_1F2640:: @ 81F2640
-	trainerbattle 0, TRAINER_LENNY, 0, Route114_Text_29A6B1, Route114_Text_29A707
-	msgbox Route114_Text_29A715, 6
+	trainerbattle_single TRAINER_LENNY, Route114_Text_29A6B1, Route114_Text_29A707
+	msgbox Route114_Text_29A715, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2657:: @ 81F2657
-	trainerbattle 0, TRAINER_LUCAS_1, 0, Route114_Text_29A777, Route114_Text_29A7B5
-	msgbox Route114_Text_29A7D4, 6
+	trainerbattle_single TRAINER_LUCAS_1, Route114_Text_29A777, Route114_Text_29A7B5
+	msgbox Route114_Text_29A7D4, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F266E:: @ 81F266E
-	trainerbattle 0, TRAINER_SHANE, 0, Route114_Text_29A818, Route114_Text_29A88F
-	msgbox Route114_Text_29A89F, 6
+	trainerbattle_single TRAINER_SHANE, Route114_Text_29A818, Route114_Text_29A88F
+	msgbox Route114_Text_29A89F, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2685:: @ 81F2685
-	trainerbattle 0, TRAINER_NANCY, 0, Route114_Text_29A8D9, Route114_Text_29A90E
-	msgbox Route114_Text_29A916, 6
+	trainerbattle_single TRAINER_NANCY, Route114_Text_29A8D9, Route114_Text_29A90E
+	msgbox Route114_Text_29A916, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F269C:: @ 81F269C
-	trainerbattle 2, TRAINER_STEVE_1, 0, Route114_Text_29A943, Route114_Text_29A973, Route114_EventScript_1F26C8
+	trainerbattle_single TRAINER_STEVE_1, Route114_Text_29A943, Route114_Text_29A973, Route114_EventScript_1F26C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route114_EventScript_1F26E7
-	msgbox Route114_Text_29A981, 4
+	msgbox Route114_Text_29A981, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_EventScript_1F26C8:: @ 81F26C8
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route114_Text_29A9F7, 4
-	setvar VAR_0x8004, 143
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 143
-	callstd 8
+	msgbox Route114_Text_29A9F7, MSGBOX_DEFAULT
+	register_matchcall TRAINER_STEVE_1
 	release
 	end
 
 Route114_EventScript_1F26E7:: @ 81F26E7
-	trainerbattle 5, TRAINER_STEVE_1, 0, Route114_Text_29AA3E, Route114_Text_29AA67
-	msgbox Route114_Text_29AA94, 6
+	trainerbattle_rematch TRAINER_STEVE_1, Route114_Text_29AA3E, Route114_Text_29AA67
+	msgbox Route114_Text_29AA94, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F26FE:: @ 81F26FE
-	trainerbattle 2, TRAINER_BERNIE_1, 0, Route114_Text_29AADB, Route114_Text_29AB1A, Route114_EventScript_1F272A
+	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_29AADB, Route114_Text_29AB1A, Route114_EventScript_1F272A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route114_EventScript_1F2749
-	msgbox Route114_Text_29AB36, 4
+	msgbox Route114_Text_29AB36, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_EventScript_1F272A:: @ 81F272A
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route114_Text_29ABA6, 4
-	setvar VAR_0x8004, 206
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 206
-	callstd 8
+	msgbox Route114_Text_29ABA6, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BERNIE_1
 	release
 	end
 
 Route114_EventScript_1F2749:: @ 81F2749
-	trainerbattle 5, TRAINER_BERNIE_1, 0, Route114_Text_29ABDC, Route114_Text_29AC10
-	msgbox Route114_Text_29AC43, 6
+	trainerbattle_rematch TRAINER_BERNIE_1, Route114_Text_29ABDC, Route114_Text_29AC10
+	msgbox Route114_Text_29AC43, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2760:: @ 81F2760
-	trainerbattle 0, TRAINER_CLAUDE, 0, Route114_Text_29ACB3, Route114_Text_29AD0A
-	msgbox Route114_Text_29AD2E, 6
+	trainerbattle_single TRAINER_CLAUDE, Route114_Text_29ACB3, Route114_Text_29AD0A
+	msgbox Route114_Text_29AD2E, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F2777:: @ 81F2777
-	trainerbattle 0, TRAINER_NOLAN, 0, Route114_Text_29ADA1, Route114_Text_29AE05
-	msgbox Route114_Text_29AE3D, 6
+	trainerbattle_single TRAINER_NOLAN, Route114_Text_29ADA1, Route114_Text_29AE05
+	msgbox Route114_Text_29AE3D, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F278E:: @ 81F278E
-	trainerbattle 4, TRAINER_TYRA_AND_IVY, 0, Route114_Text_29AE96, Route114_Text_29AEE7, Route114_Text_29AF3D
-	msgbox Route114_Text_29AF0B, 6
+	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_29AE96, Route114_Text_29AEE7, Route114_Text_29AF3D
+	msgbox Route114_Text_29AF0B, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F27A9:: @ 81F27A9
-	trainerbattle 4, TRAINER_TYRA_AND_IVY, 0, Route114_Text_29AF89, Route114_Text_29AFAC, Route114_Text_29B01B
-	msgbox Route114_Text_29AFCF, 6
+	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_29AF89, Route114_Text_29AFAC, Route114_Text_29B01B
+	msgbox Route114_Text_29AFCF, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F27C4:: @ 81F27C4
-	trainerbattle 0, TRAINER_ANGELINA, 0, Route114_Text_29B16F, Route114_Text_29B19C
-	msgbox Route114_Text_29B1BC, 6
+	trainerbattle_single TRAINER_ANGELINA, Route114_Text_29B16F, Route114_Text_29B19C
+	msgbox Route114_Text_29B1BC, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F27DB:: @ 81F27DB
-	trainerbattle 0, TRAINER_CHARLOTTE, 0, Route114_Text_29B0DB, Route114_Text_29B0FB
-	msgbox Route114_Text_29B11A, 6
+	trainerbattle_single TRAINER_CHARLOTTE, Route114_Text_29B0DB, Route114_Text_29B0FB
+	msgbox Route114_Text_29B11A, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_1F27F2:: @ 81F27F2
-	trainerbattle 0, TRAINER_KAI, 0, Route114_Text_29B05D, Route114_Text_29B089
-	msgbox Route114_Text_29B0B5, 6
+	trainerbattle_single TRAINER_KAI, Route114_Text_29B05D, Route114_Text_29B089
+	msgbox Route114_Text_29B0B5, MSGBOX_AUTOCLOSE
 	end
 
 Route114_Text_1F2809: @ 81F2809
@@ -211,9 +205,9 @@ Route114_Text_1F28B3: @ 81F28B3
 	.string "RUSTBORO CITY THROUGH HERE$"
 
 Route114_Text_1F28DB: @ 81F28DB
-	.string "FOSSIL MANIAC’S HOUSE\n"
+	.string "FOSSIL MANIAC'S HOUSE\n"
 	.string "“Fossils gratefully accepted!”$"
 
 Route114_Text_1F2910: @ 81F2910
-	.string "LANETTE’S HOUSE$"
+	.string "LANETTE'S HOUSE$"
 

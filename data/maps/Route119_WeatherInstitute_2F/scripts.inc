@@ -27,40 +27,40 @@ Route119_WeatherInstitute_2F_EventScript_26FF5C:: @ 826FF5C
 	return
 
 Route119_WeatherInstitute_2F_EventScript_26FF68:: @ 826FF68
-	trainerbattle 0, TRAINER_GRUNT_37, 0, Route119_WeatherInstitute_2F_Text_270335, Route119_WeatherInstitute_2F_Text_27039F
-	msgbox Route119_WeatherInstitute_2F_Text_2703C0, 6
+	trainerbattle_single TRAINER_GRUNT_37, Route119_WeatherInstitute_2F_Text_270335, Route119_WeatherInstitute_2F_Text_27039F
+	msgbox Route119_WeatherInstitute_2F_Text_2703C0, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FF7F:: @ 826FF7F
-	trainerbattle 0, TRAINER_GRUNT_12, 0, Route119_WeatherInstitute_2F_Text_27019C, Route119_WeatherInstitute_2F_Text_270208
-	msgbox Route119_WeatherInstitute_2F_Text_27022B, 6
+	trainerbattle_single TRAINER_GRUNT_12, Route119_WeatherInstitute_2F_Text_27019C, Route119_WeatherInstitute_2F_Text_270208
+	msgbox Route119_WeatherInstitute_2F_Text_27022B, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FF96:: @ 826FF96
-	trainerbattle 0, TRAINER_GRUNT_13, 0, Route119_WeatherInstitute_2F_Text_270292, Route119_WeatherInstitute_2F_Text_2702CE
-	msgbox Route119_WeatherInstitute_2F_Text_2702DA, 6
+	trainerbattle_single TRAINER_GRUNT_13, Route119_WeatherInstitute_2F_Text_270292, Route119_WeatherInstitute_2F_Text_2702CE
+	msgbox Route119_WeatherInstitute_2F_Text_2702DA, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FFAD:: @ 826FFAD
-	trainerbattle 2, TRAINER_SHELLY_1, 0, Route119_WeatherInstitute_2F_Text_270409, Route119_WeatherInstitute_2F_Text_2704BD, Route119_WeatherInstitute_2F_EventScript_26FFC8
-	msgbox Route119_WeatherInstitute_2F_Text_2704E4, 6
+	trainerbattle_single TRAINER_SHELLY_1, Route119_WeatherInstitute_2F_Text_270409, Route119_WeatherInstitute_2F_Text_2704BD, Route119_WeatherInstitute_2F_EventScript_26FFC8
+	msgbox Route119_WeatherInstitute_2F_Text_2704E4, MSGBOX_AUTOCLOSE
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
-	msgbox Route119_WeatherInstitute_2F_Text_2704E4, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2704E4, MSGBOX_DEFAULT
 	closemessage
 	addobject 7
 	applymovement 7, Route119_WeatherInstitute_2F_Movement_270170
 	applymovement 255, Route119_WeatherInstitute_2F_Movement_27017C
 	waitmovement 0
-	msgbox Route119_WeatherInstitute_2F_Text_270568, 4
+	msgbox Route119_WeatherInstitute_2F_Text_270568, MSGBOX_DEFAULT
 	closemessage
 	playse SE_PIN
 	applymovement 3, Route119_WeatherInstitute_2F_Movement_272598
 	waitmovement 0
 	applymovement 3, Route119_WeatherInstitute_2F_Movement_27259A
 	waitmovement 0
-	msgbox Route119_WeatherInstitute_2F_Text_2705DD, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2705DD, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_WEATHER_INSTITUTE_STATE, 1
 	clearflag FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS
@@ -83,7 +83,7 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	end
 
 Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
-	msgbox Route119_WeatherInstitute_2F_Text_270650, 4
+	msgbox Route119_WeatherInstitute_2F_Text_270650, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, 385
 	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
@@ -95,7 +95,7 @@ Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 
 Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
@@ -105,7 +105,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 
 Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
-	msgbox gUnknown_08273374, 5
+	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700D0
 	call Route119_WeatherInstitute_2F_EventScript_273797
@@ -126,7 +126,7 @@ Route119_WeatherInstitute_2F_EventScript_2700DB:: @ 82700DB
 	return
 
 Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
-	msgbox Route119_WeatherInstitute_2F_Text_2706FE, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2706FE, MSGBOX_DEFAULT
 	setflag FLAG_0x097
 	release
 	end
@@ -134,7 +134,7 @@ Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
 Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq Route119_WeatherInstitute_2F_EventScript_27010A
-	msgbox Route119_WeatherInstitute_2F_Text_27077E, 4
+	msgbox Route119_WeatherInstitute_2F_Text_27077E, MSGBOX_DEFAULT
 	release
 	end
 
@@ -151,12 +151,12 @@ Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	specialvar VAR_RESULT, sub_813B374
 	compare VAR_RESULT, 1
 	goto_eq Route119_WeatherInstitute_2F_EventScript_27014F
-	msgbox Route119_WeatherInstitute_2F_Text_2707F1, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2707F1, MSGBOX_DEFAULT
 	release
 	end
 
 Route119_WeatherInstitute_2F_EventScript_27014F:: @ 827014F
-	msgbox Route119_WeatherInstitute_2F_Text_270873, 4
+	msgbox Route119_WeatherInstitute_2F_Text_270873, MSGBOX_DEFAULT
 	release
 	end
 
@@ -170,7 +170,7 @@ Route119_WeatherInstitute_2F_EventScript_270160:: @ 8270160
 	return
 
 Route119_WeatherInstitute_2F_EventScript_270166:: @ 8270166
-	msgbox Route119_WeatherInstitute_2F_Text_2708FC, 4
+	msgbox Route119_WeatherInstitute_2F_Text_2708FC, MSGBOX_DEFAULT
 	release
 	end
 
@@ -220,10 +220,10 @@ Route119_WeatherInstitute_2F_EventScript_27018B:: @ 827018B
 Route119_WeatherInstitute_2F_Text_27019C: @ 827019C
 	.string "The INSTITUTE created a type of\n"
 	.string "POKéMON that has something to do with\l"
-	.string "the weather. We’re here to take them!$"
+	.string "the weather. We're here to take them!$"
 
 Route119_WeatherInstitute_2F_Text_270208: @ 8270208
-	.string "Our plan’s being spoiled by a kid?$"
+	.string "Our plan's being spoiled by a kid?$"
 
 Route119_WeatherInstitute_2F_Text_27022B: @ 827022B
 	.string "If the POKéMON they made here can\n"
@@ -231,7 +231,7 @@ Route119_WeatherInstitute_2F_Text_27022B: @ 827022B
 	.string "TEAM AQUA definitely need it!$"
 
 Route119_WeatherInstitute_2F_Text_270292: @ 8270292
-	.string "We’re TEAM AQUA!\n"
+	.string "We're TEAM AQUA!\n"
 	.string "We appear wherever anything rare is\l"
 	.string "found!$"
 
@@ -239,14 +239,14 @@ Route119_WeatherInstitute_2F_Text_2702CE: @ 82702CE
 	.string "You got me!$"
 
 Route119_WeatherInstitute_2F_Text_2702DA: @ 82702DA
-	.string "You don’t have any idea what we of\n"
+	.string "You don't have any idea what we of\n"
 	.string "TEAM AQUA are working towards!\l"
 	.string "You stay out of our way!$"
 
 Route119_WeatherInstitute_2F_Text_270335: @ 8270335
-	.string "Don’t tell me you’re looking for that\n"
+	.string "Don't tell me you're looking for that\n"
 	.string "weather POKéMON, too?\p"
-	.string "That’s a no-no!\n"
+	.string "That's a no-no!\n"
 	.string "We were here to get it first!$"
 
 Route119_WeatherInstitute_2F_Text_27039F: @ 827039F
@@ -255,25 +255,25 @@ Route119_WeatherInstitute_2F_Text_27039F: @ 827039F
 Route119_WeatherInstitute_2F_Text_2703C0: @ 82703C0
 	.string "Humph, so what?\n"
 	.string "What we want…\p"
-	.string "What we really want isn’t here…\n"
+	.string "What we really want isn't here…\n"
 	.string "Ihihihihi…$"
 
 Route119_WeatherInstitute_2F_Text_270409: @ 8270409
 	.string "Ahahahaha!\p"
-	.string "You’re going to meddle in TEAM AQUA’s\n"
+	.string "You're going to meddle in TEAM AQUA's\n"
 	.string "affairs?\p"
-	.string "You’re either absolutely fearless,\n"
+	.string "You're either absolutely fearless,\n"
 	.string "simply ignorant, or both!\p"
-	.string "You’re so cute, you’re disgusting!\n"
-	.string "I’ll put you down, kiddy!$"
+	.string "You're so cute, you're disgusting!\n"
+	.string "I'll put you down, kiddy!$"
 
 Route119_WeatherInstitute_2F_Text_2704BD: @ 82704BD
 	.string "Ahahahaha!\n"
-	.string "You’re disgustingly strong!$"
+	.string "You're disgustingly strong!$"
 
 Route119_WeatherInstitute_2F_Text_2704E4: @ 82704E4
-	.string "It’s bad enough to have TEAM MAGMA\n"
-	.string "blunder about, but now there’s you!\p"
+	.string "It's bad enough to have TEAM MAGMA\n"
+	.string "blunder about, but now there's you!\p"
 	.string "What makes you want to sniff around\n"
 	.string "in our business, anyway?$"
 
@@ -286,19 +286,19 @@ Route119_WeatherInstitute_2F_Text_270568: @ 8270568
 
 Route119_WeatherInstitute_2F_Text_2705DD: @ 82705DD
 	.string "What?!\p"
-	.string "We can’t waste any more time here!\n"
+	.string "We can't waste any more time here!\n"
 	.string "We have to hurry to MT. PYRE, too!\p"
 	.string "Ahahahaha!\n"
 	.string "TEAM MAGMA, just you wait!$"
 
 Route119_WeatherInstitute_2F_Text_270650: @ 8270650
 	.string "Thanks!\n"
-	.string "Thanks to you, we’re safe!\p"
+	.string "Thanks to you, we're safe!\p"
 	.string "It might be an odd way of thanking you,\n"
 	.string "but take this POKéMON.$"
 
 Route119_WeatherInstitute_2F_Text_2706B2: @ 82706B2
-	.string "Hm? You don’t seem to have any room\n"
+	.string "Hm? You don't seem to have any room\n"
 	.string "for this POKéMON.$"
 
 Route119_WeatherInstitute_2F_Text_2706E8: @ 82706E8
@@ -307,12 +307,12 @@ Route119_WeatherInstitute_2F_Text_2706E8: @ 82706E8
 Route119_WeatherInstitute_2F_Text_2706FE: @ 82706FE
 	.string "That POKéMON changes shape according\n"
 	.string "to the weather conditions.\p"
-	.string "There’re plenty of them in the\n"
+	.string "There're plenty of them in the\n"
 	.string "INSTITUTE--go ahead and take it.$"
 
 Route119_WeatherInstitute_2F_Text_27077E: @ 827077E
-	.string "I’ve been researching rain for many\n"
-	.string "years, but it’s ridiculous to think that\l"
+	.string "I've been researching rain for many\n"
+	.string "years, but it's ridiculous to think that\l"
 	.string "humans can freely change the weather.$"
 
 Route119_WeatherInstitute_2F_Text_2707F1: @ 82707F1

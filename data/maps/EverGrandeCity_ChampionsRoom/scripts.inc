@@ -39,8 +39,8 @@ EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
 
 EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
 	playbgm MUS_DAIGO, 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, 4
-	trainerbattle 3, TRAINER_WALLACE, 0, EverGrandeCity_ChampionsRoom_Text_228EAC
+	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_228EAC
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A61
 	end
 
@@ -49,7 +49,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
 	setmetatile 6, 1, 838, 0
 	setmetatile 6, 2, 839, 0
 	special DrawWholeMapView
-	msgbox EverGrandeCity_ChampionsRoom_Text_228F66, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_228F66, MSGBOX_DEFAULT
 	closemessage
 	playse SE_DOOR
 	checkplayergender
@@ -75,7 +75,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228AC1:: @ 8228AC1
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6
-	msgbox EverGrandeCity_ChampionsRoom_Text_2290CA, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2290CA, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_272598
@@ -83,12 +83,12 @@ EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_27259A
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_228C12
-	msgbox EverGrandeCity_ChampionsRoom_Text_22910B, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_22910B, MSGBOX_DEFAULT
 	goto EverGrandeCity_ChampionsRoom_EventScript_228B30
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228AFB:: @ 8228AFB
-	msgbox EverGrandeCity_ChampionsRoom_Text_229152, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_229152, MSGBOX_DEFAULT
 	delay 40
 	playse SE_PIN
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_272598
@@ -96,7 +96,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228AFB:: @ 8228AFB
 	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_27259A
 	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_228C12
-	msgbox EverGrandeCity_ChampionsRoom_Text_2291A2, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2291A2, MSGBOX_DEFAULT
 	goto EverGrandeCity_ChampionsRoom_EventScript_228B30
 	end
 
@@ -107,15 +107,15 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	waitmovement 0
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725A8
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_2291E6, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2291E6, MSGBOX_DEFAULT
 	call EverGrandeCity_ChampionsRoom_EventScript_272184
-	msgbox EverGrandeCity_ChampionsRoom_Text_22934D, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_22934D, MSGBOX_DEFAULT
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_2725A6
 	waitmovement 0
 	delay 20
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_2725AA
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_229399, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_229399, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3B
@@ -126,7 +126,7 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	delay 20
 	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725AA
 	waitmovement 0
-	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, MSGBOX_DEFAULT
 	checkplayergender
 	compare VAR_RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BEB
@@ -143,11 +143,11 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228BEB:: @ 8228BEB
-	msgbox EverGrandeCity_ChampionsRoom_Text_229479, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_229479, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228BF4:: @ 8228BF4
-	msgbox EverGrandeCity_ChampionsRoom_Text_2294F5, 4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2294F5, MSGBOX_DEFAULT
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228BFD:: @ 8228BFD
@@ -231,7 +231,7 @@ EverGrandeCity_ChampionsRoom_Text_228C4C: @ 8228C4C
 	.string "That was superb work, putting an end\l"
 	.string "to that crisis all by yourself.\p"
 	.string "Oops!\p"
-	.string "It wouldn’t be fair to say that you\n"
+	.string "It wouldn't be fair to say that you\n"
 	.string "alone ended the crisis.\p"
 	.string "You overcame that difficult situation\n"
 	.string "by working as one with your POKéMON.\p"
@@ -274,7 +274,7 @@ EverGrandeCity_ChampionsRoom_Text_228F66: @ 8228F66
 
 EverGrandeCity_ChampionsRoom_Text_2290CA: @ 82290CA
 	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "Here’s some advice before you challenge\n"
+	.string "Here's some advice before you challenge\n"
 	.string "the CHAMPION…$"
 
 EverGrandeCity_ChampionsRoom_Text_22910B: @ 822910B
@@ -282,7 +282,7 @@ EverGrandeCity_ChampionsRoom_Text_22910B: @ 822910B
 	.string "What, what, what?\p"
 	.string "{PLAYER}{KUN}…\n"
 	.string "Could it be that…\l"
-	.string "It’s already over?$"
+	.string "It's already over?$"
 
 EverGrandeCity_ChampionsRoom_Text_229152: @ 8229152
 	.string "BRENDAN: {PLAYER}!\p"
@@ -292,19 +292,19 @@ EverGrandeCity_ChampionsRoom_Text_229152: @ 8229152
 EverGrandeCity_ChampionsRoom_Text_2291A2: @ 82291A2
 	.string "BRENDAN: {PLAYER}…\p"
 	.string "Are you trying to tell me…\n"
-	.string "You’ve beaten the CHAMPION?$"
+	.string "You've beaten the CHAMPION?$"
 
 EverGrandeCity_ChampionsRoom_Text_2291E6: @ 82291E6
 	.string "PROF. BIRCH: See?\n"
 	.string "What did I tell you, {RIVAL}?\p"
-	.string "Didn’t I tell you that you don’t need\n"
+	.string "Didn't I tell you that you don't need\n"
 	.string "to worry about {PLAYER}{KUN}?\p"
 	.string "… … … … … … … …\n"
-	.string "{PLAYER}{KUN}, you’ve finally done it.\p"
+	.string "{PLAYER}{KUN}, you've finally done it.\p"
 	.string "When I heard that you defeated your\n"
 	.string "own father at the PETALBURG GYM,\l"
 	.string "I thought perhaps you had a chance…\p"
-	.string "But to think you’ve actually become\n"
+	.string "But to think you've actually become\n"
 	.string "the CHAMPION!\p"
 	.string "Ah, yes!\p"
 	.string "What became of your POKéDEX?\n"
@@ -322,25 +322,25 @@ EverGrandeCity_ChampionsRoom_Text_229399: @ 8229399
 	.string "Come with me.$"
 
 EverGrandeCity_ChampionsRoom_Text_2293EB: @ 82293EB
-	.string "WALLACE: I’m sorry, but…\p"
+	.string "WALLACE: I'm sorry, but…\p"
 	.string "From here on, only those TRAINERS who\n"
 	.string "have become CHAMPIONS may enter.\p"
-	.string "You’ll have to wait outside with\n"
+	.string "You'll have to wait outside with\n"
 	.string "PROF. BIRCH.$"
 
 EverGrandeCity_ChampionsRoom_Text_229479: @ 8229479
 	.string "MAY: Groan…\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "I’m just joking! That’s okay!\n"
-	.string "That’s the rule!\p"
+	.string "I'm just joking! That's okay!\n"
+	.string "That's the rule!\p"
 	.string "{PLAYER}{KUN}!\n"
 	.string "Honestly, congratulations!$"
 
 EverGrandeCity_ChampionsRoom_Text_2294F5: @ 82294F5
 	.string "BRENDAN: Whaaaat?! … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "It can’t be helped if that’s the rule.\p"
+	.string "It can't be helped if that's the rule.\p"
 	.string "{PLAYER}, way to go!\n"
 	.string "Congratulations!$"
 

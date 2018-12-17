@@ -21,7 +21,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "bg.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "scanline_effect.h"
 #include "gpu_regs.h"
 #include "graphics.h"
