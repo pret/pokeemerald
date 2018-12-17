@@ -54,15 +54,16 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/link_rfu.o(.text);
-        src/rom_8011DC0.o(.text);
-        asm/rom_8011DC0.o(.text);
+        src/link_rfu_3.o(.text);
+        asm/link_rfu_3.o(.text);
         asm/mevent2.o(.text);
         asm/mevent_801BAAC.o(.text);
         asm/mevent_server.o(.text);
         asm/mevent_server_ish.o(.text);
         asm/mevent_server_helpers.o(.text);
         asm/menews_jisan.o(.text);
-        asm/rom_8011DC0.o(.text.801BAAC);
+        asm/union_room_chat.o(.text);
+        asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
@@ -419,7 +420,7 @@ SECTIONS {
         src/link.o(.rodata.str1.4);
         src/link_rfu.o(.rodata);
         src/link_rfu.o(.rodata.str1.4);
-        src/rom_8011DC0.o(.rodata);
+        src/link_rfu_3.o(.rodata);
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
