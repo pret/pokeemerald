@@ -2257,9 +2257,9 @@ static void sub_80FE9E4(struct Sprite* sprite)
     else
     {
         if (sprite->data[5] > 0x7F)
-            sprite->subpriority = sub_80A82E4(gBattleAnimTarget) + 1;
+            sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) + 1;
         else
-            sprite->subpriority = sub_80A82E4(gBattleAnimTarget) + 6;
+            sprite->subpriority = GetBattlerSubpriority(gBattleAnimTarget) + 6;
 
         sprite->pos2.x += Sin(sprite->data[5], 5);
         sprite->pos2.y += Cos(sprite->data[5], 14);
@@ -2278,7 +2278,7 @@ void sub_80FEA58(u8 taskId)
         gBattleAnimArgs[1] = 0;
         gBattleAnimArgs[2] = 80;
         gBattleAnimArgs[3] = 0;
-        CreateSpriteAndAnimate(&gUnknown_08592210, 0, 0, sub_80A82E4(gBattleAnimTarget) + 1);
+        CreateSpriteAndAnimate(&gUnknown_08592210, 0, 0, GetBattlerSubpriority(gBattleAnimTarget) + 1);
     }
 
     if (gTasks[taskId].data[1] == 15)
@@ -2465,9 +2465,9 @@ static void sub_80FEECC(struct Sprite* sprite)
         sprite->pos2.x += Sin(sprite->data[5], 32);
         sprite->pos2.y += Cos(sprite->data[5], -5);
         if ((u16)(sprite->data[5] - 0x40) < 0x80)
-            sprite->subpriority = sub_80A82E4(gBattleAnimAttacker) - 1;
+            sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) - 1;
         else
-            sprite->subpriority = sub_80A82E4(gBattleAnimAttacker) + 1;
+            sprite->subpriority = GetBattlerSubpriority(gBattleAnimAttacker) + 1;
 
         sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
     }
@@ -3205,7 +3205,7 @@ void sub_80FFFC0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[4] = sub_80A82E4(gBattleAnimTarget) - 1;
+    task->data[4] = GetBattlerSubpriority(gBattleAnimTarget) - 1;
     task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     task->data[10] = sub_80A861C(gBattleAnimTarget, 1);

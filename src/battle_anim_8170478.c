@@ -756,7 +756,7 @@ void sub_8170F2C(u8 taskId)
     }
 
     ballId = ItemIdToBallId(gLastUsedItem);
-    subpriority = sub_80A82E4(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
+    subpriority = GetBattlerSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
     spriteId = CreateSprite(&gBallSpriteTemplates[ballId], x + 32, y | 80, subpriority);
     gSprites[spriteId].data[0] = 34;
     gSprites[spriteId].data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 0);

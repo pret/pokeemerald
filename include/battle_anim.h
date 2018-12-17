@@ -108,7 +108,7 @@ void sub_80A8048(s16 *bottom, s16 *top, const void *ptr);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
-u8 sub_80A82E4(u8 battlerId);
+u8 GetBattlerSubpriority(u8 battlerId);
 bool8 TranslateAnimArc(struct Sprite *sprite);
 void sub_80A6630(struct Sprite *sprite);
 void sub_80A6680(struct Sprite *sprite);
@@ -161,7 +161,6 @@ u8 sub_80A8364(u8 battlerId);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
-u8 sub_80A82E4(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 
 // battle_anim_80A9C70.s
