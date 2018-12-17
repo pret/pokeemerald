@@ -61,6 +61,7 @@ SECTIONS {
         asm/mevent_server.o(.text);
         asm/mevent_server_ish.o(.text);
         asm/mevent_server_helpers.o(.text);
+        asm/menews_jisan.o(.text);
         asm/rom_8011DC0.o(.text.801BAAC);
         src/rtc.o(.text);
         src/main_menu.o(.text);
