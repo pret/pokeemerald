@@ -27,3 +27,4 @@ Thumbs.db
 build/
 .DS_Store
 *.ddump
+.idea/
