@@ -35,8 +35,9 @@ struct Struct203CEC8 {
     s8 unk9;
     s8 unkA;
     u8 unkB;
-    u8 unkD;
+    u16 unkC;
     s16 unkE;
+    s16 unk10;
 };
 
 extern struct Struct203CEC8 gUnknown_0203CEC8;
