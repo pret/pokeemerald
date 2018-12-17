@@ -47,7 +47,7 @@ void sub_80A7AFC(u8 taskId);
 void sub_80A8CAC(u8 taskId);
 void AnimTask_BlendMonInAndOutStep(u8 taskId);
 bool8 sub_80A7238(void);
-u8 sub_80A82E4(u8 battlerId);
+u8 GetBattlerSubpriority(u8 battlerId);
 void sub_80A8D78(struct Task *task, u8 taskId);
 
 // EWRAM vars
@@ -1968,13 +1968,13 @@ void sub_80A8278(void)
     {
         if (IsBattlerSpriteVisible(i))
         {
-            gSprites[gBattlerSpriteIds[i]].subpriority = sub_80A82E4(i);
+            gSprites[gBattlerSpriteIds[i]].subpriority = GetBattlerSubpriority(i);
             gSprites[gBattlerSpriteIds[i]].oam.priority = 2;
         }
     }
 }
 
-u8 sub_80A82E4(u8 battlerId)
+u8 GetBattlerSubpriority(u8 battlerId)
 {
     u8 position;
     u8 ret;
@@ -2339,7 +2339,7 @@ void sub_80A8BC4(u8 taskId)
 
     dest = (task->data[4] + 0x10) * 0x10;
     src = (gSprites[task->data[0]].oam.paletteNum + 0x10) * 0x10;
-    task->data[6] = sub_80A82E4(gBattleAnimAttacker);
+    task->data[6] = GetBattlerSubpriority(gBattleAnimAttacker);
     if (task->data[6] == 20 || task->data[6] == 40)
         task->data[6] = 2;
     else

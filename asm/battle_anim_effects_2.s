@@ -1357,7 +1357,7 @@ _08103F28:
 	ble _08103FA0
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x0000ffc0
@@ -1374,7 +1374,7 @@ _08103F78:
 	ble _08103FA0
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x0000ffc0
@@ -1387,7 +1387,7 @@ _08103F78:
 _08103FA0:
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x8]
@@ -2246,7 +2246,7 @@ sub_8104674: @ 8104674
 	strh r5, [r4, 0x14]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x16]
@@ -6256,7 +6256,7 @@ sub_810673C: @ 810673C
 	ldrh r0, [r1, 0x2]
 	strh r0, [r4, 0x30]
 	ldrb r0, [r5]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x3C]
@@ -6774,7 +6774,7 @@ sub_8106B54: @ 8106B54
 	bl StartSpriteAnim
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
