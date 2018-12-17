@@ -56,6 +56,12 @@ SECTIONS {
         src/link_rfu.o(.text);
         src/rom_8011DC0.o(.text);
         asm/rom_8011DC0.o(.text);
+        asm/mevent2.o(.text);
+        asm/mevent_801BAAC.o(.text);
+        asm/mevent_server.o(.text);
+        asm/mevent_server_ish.o(.text);
+        asm/mevent_server_helpers.o(.text);
+        asm/rom_8011DC0.o(.text.801BAAC);
         src/rtc.o(.text);
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
