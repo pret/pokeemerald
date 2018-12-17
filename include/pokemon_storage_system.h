@@ -64,6 +64,16 @@ struct UnkPSSStruct_2002370
     u8 unk_0246;
 };
 
+struct UnkStorageStruct
+{
+    struct Sprite *sprite;
+    u8 *tiles;
+    u16 palIndex;
+    u8 unk8;
+    u8 unk9;
+    u8 unk10;
+};
+
 struct PokemonStorageSystemData
 {
     u8 state;
@@ -229,8 +239,8 @@ struct PokemonStorageSystemData
     u8 field_21FD;
     u8 field_21FE;
     u8 inBoxMovingMode;
-    u8 field_2200;
-    u8 field_2201[51];
+    u16 field_2200;
+    struct UnkStorageStruct field_2204[3];
     u16 movingItem;
     u8 field_2236;
     u8 field_2237;

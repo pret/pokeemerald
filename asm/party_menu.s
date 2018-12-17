@@ -11361,11 +11361,11 @@ _081B602C:
 sub_81B6040: @ 81B6040
 	push {lr}
 	ldr r0, =gUnknown_08615EF8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08615F70
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08615F00
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.pool
@@ -11506,9 +11506,9 @@ _081B6152:
 sub_81B6160: @ 81B6160
 	push {lr}
 	ldr r0, =gUnknown_08615FF8
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08616000
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	pop {r0}
 	bx r0
 	.pool

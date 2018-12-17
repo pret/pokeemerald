@@ -1219,7 +1219,7 @@ void sub_80D304C(u16 offset)
     }
 }
 
-u8 sub_80D3080(u16 species)
+u8 GetValidMonIconPalIndex(u16 species)
 {
     if (species > SPECIES_EGG)
         species = 260;

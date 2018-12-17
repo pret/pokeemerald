@@ -1524,7 +1524,7 @@ sub_81C7C28: @ 81C7C28
 	ldr r4, =gUnknown_0861FA4C
 _081C7C36:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0
@@ -1648,7 +1648,7 @@ sub_81C7D28: @ 81C7D28
 	bl sub_81C763C
 	adds r6, r0, 0
 	ldr r0, =gUnknown_0861FA64
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	movs r0, 0x1
 	bl AllocSpritePalette
 	movs r0, 0x2
@@ -3924,7 +3924,7 @@ sub_81C8ED0: @ 81C8ED0
 	ldr r4, =gUnknown_0861FBFC
 _081C8ED6:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0
@@ -6086,7 +6086,7 @@ sub_81C9FC4: @ 81C9FC4
 	ldr r4, =gUnknown_086201C4
 _081C9FCA:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x1
@@ -10537,7 +10537,7 @@ sub_81CC214: @ 81CC214
 	ldr r4, =gUnknown_08622810
 _081CC224:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0
@@ -11509,7 +11509,7 @@ sub_81CC9C0: @ 81CC9C0
 	ldr r4, =gUnknown_086230F8
 _081CC9C6:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0
@@ -20756,7 +20756,7 @@ sub_81D13FC: @ 81D13FC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, =gUnknown_08624C78
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08624C80
 	bl sub_81C795C
 	ldr r0, =gUnknown_08624D04

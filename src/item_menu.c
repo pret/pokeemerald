@@ -715,13 +715,13 @@ bool8 load_bag_menu_graphics(void)
             break;
         case 3:
             if (IsWallysBag() == TRUE || gSaveBlock2Ptr->playerGender == MALE)
-                LoadCompressedObjectPic(&gUnknown_0857FB34);
+                LoadCompressedSpriteSheet(&gUnknown_0857FB34);
             else
-                LoadCompressedObjectPic(&gUnknown_0857FB3C);
+                LoadCompressedSpriteSheet(&gUnknown_0857FB3C);
             gUnknown_0203CE54->unk834++;
             break;
         case 4:
-            LoadCompressedObjectPalette(&gUnknown_0857FB44);
+            LoadCompressedSpritePalette(&gUnknown_0857FB44);
             gUnknown_0203CE54->unk834++;
             break;
         default:

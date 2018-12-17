@@ -583,7 +583,7 @@ static void sub_80D5070(u8 berryId)
 
     pal.data = gBerryPicTable[berryId].pal;
     pal.tag = 0x7544;
-    LoadCompressedObjectPalette(&pal);
+    LoadCompressedSpritePalette(&pal);
     LZDecompressWram(gBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
     sub_80D5018(&gDecompressionBuffer[0x1000], &gDecompressionBuffer[0]);
 }

@@ -640,11 +640,11 @@ static bool8 LoadPokeblockMenuGfx(void)
         sPokeblockMenu->gfxState++;
         break;
     case 3:
-        LoadCompressedObjectPic(&gPokeblockCase_SpriteSheet);
+        LoadCompressedSpriteSheet(&gPokeblockCase_SpriteSheet);
         sPokeblockMenu->gfxState++;
         break;
     case 4:
-        LoadCompressedObjectPalette(&gPokeblockCase_SpritePal);
+        LoadCompressedSpritePalette(&gPokeblockCase_SpritePal);
         sPokeblockMenu->gfxState++;
         break;
     case 5:

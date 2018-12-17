@@ -1255,23 +1255,23 @@ static bool8 SummaryScreen_DecompressGraphics(void)
         pssData->unk40F0++;
         break;
     case 7:
-        LoadCompressedObjectPic(&sSpriteSheet_MoveTypes);
+        LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypes);
         pssData->unk40F0++;
         break;
     case 8:
-        LoadCompressedObjectPic(&gUnknown_0861D074);
+        LoadCompressedSpriteSheet(&gUnknown_0861D074);
         pssData->unk40F0++;
         break;
     case 9:
-        LoadCompressedObjectPic(&gUnknown_0861D0F8);
+        LoadCompressedSpriteSheet(&gUnknown_0861D0F8);
         pssData->unk40F0++;
         break;
     case 10:
-        LoadCompressedObjectPalette(&gUnknown_0861D100);
+        LoadCompressedSpritePalette(&gUnknown_0861D100);
         pssData->unk40F0++;
         break;
     case 11:
-        LoadCompressedObjectPalette(&gUnknown_0861D07C);
+        LoadCompressedSpritePalette(&gUnknown_0861D07C);
         pssData->unk40F0++;
         break;
     case 12:
@@ -3854,7 +3854,7 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
             return -1;
         case 1:
             pal = GetMonSpritePalStructFromOtIdPersonality(summary->species2, summary->OTID, summary->pid);
-            LoadCompressedObjectPalette(pal);
+            LoadCompressedSpritePalette(pal);
             SetMultiuseSpriteTemplateToPokemon(pal->tag, 1);
             (*a1)++;
             return -1;

@@ -3,7 +3,7 @@
 
 struct Bitmap
 {
-    u8* pixels;
+    const u8 *pixels;
     u32 width:16;
     u32 height:16;
 };

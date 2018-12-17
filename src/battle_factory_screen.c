@@ -1165,7 +1165,7 @@ static void CB2_InitSelectScreen(void)
     case 4:
         LoadSpritePalettes(gUnknown_086103F4);
         LoadSpriteSheets(gUnknown_086103BC);
-        LoadCompressedObjectPic(gUnknown_086103E4);
+        LoadCompressedSpriteSheet(gUnknown_086103E4);
         ShowBg(0);
         ShowBg(1);
         SetVBlankCallback(Select_VblankCb);
@@ -3169,7 +3169,7 @@ static void CB2_InitSwapScreen(void)
     case 4:
         LoadSpritePalettes(gUnknown_086106B0);
         LoadSpriteSheets(gUnknown_08610650);
-        LoadCompressedObjectPic(gUnknown_086106A0);
+        LoadCompressedSpriteSheet(gUnknown_086106A0);
         SetVBlankCallback(Swap_VblankCb);
         gMain.state++;
         break;

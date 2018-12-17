@@ -46,6 +46,26 @@ struct WallpaperTable
     const u16 *palettes;
 };
 
+struct Struct_02039D80
+{
+    u8 field_0;
+    u8 state;
+    u8 fromRow;
+    u8 fromColumn;
+    u8 toRow;
+    u8 toColumn;
+    u8 field_6;
+    u8 field_7;
+    u8 minRow;
+    u8 minColumn;
+    u8 rowsTotal;
+    u8 columsTotal;
+    u16 bgX;
+    u16 bgY;
+    u16 field_10;
+    struct BoxPokemon boxMons[IN_BOX_COUNT];
+};
+
 enum
 {
     BOX_OPTION_WITHDRAW,
@@ -161,8 +181,9 @@ enum
 #define TAG_TILE_3          0x3
 #define TAG_TILE_4          0x4
 
-IWRAM_DATA u8 gUnknown_03000F78[0x188];
+IWRAM_DATA u32 gUnknown_03000F78[98];
 
+// EWRAM DATA
 extern u8 sPreviousBoxOption;
 extern u8 sCurrentBoxOption;
 extern u8 sMovingMonOrigBoxPos;
@@ -178,6 +199,7 @@ extern bool8 sIsMonBeingMoved;
 extern u8 gUnknown_02039D0F;
 extern u16 gUnknown_02039D12;
 extern struct Pokemon gUnknown_02039D14;
+extern struct Struct_02039D80 *gUnknown_02039D80;
 
 extern void sub_80F9BCC(u16, u16, u8);
 extern void sub_80F9BF4(u16, u16, u8);
@@ -367,10 +389,10 @@ void PrintStorageActionText(u8 id);
 s16 sub_80D00AC(void);
 s8 RunCanReleaseMon(void);
 u8 GetBoxCursorPosition(void);
-void sub_80D0E90(bool8 inParty, u8 boxPosition);
-void sub_80D1080(bool8 inParty, u8 boxPosition);
-void sub_80D1114(bool8 inParty, u8 boxPosition);
-void sub_80D0FAC(bool8 inParty, u8 boxPosition);
+static void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos);
+static void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos);
+static void Item_TakeMons(u8 cursorArea, u8 cursorPos);
+static void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos);
 struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
 static void SetWallpaperForCurrentBox(u8 wallpaperId);
 static void AddWallpapersMenu(u8 wallpaperSet);
@@ -389,8 +411,8 @@ static void sub_80CAAA8(u8 arg0, bool8 isPartyMon);
 const u8 *GetMovingItemName(void);
 bool32 IsWaldaWallpaperUnlocked(void);
 static void SetMenuText(u8 textId);
-void sub_80D0D8C(u8 arg0, u8 cursorPos);
-void sub_80D0E50(u8 arg0, u8 cursorPos);
+void sub_80D0D8C(u8 cursorArea, u8 cursorPos);
+void sub_80D0E50(u8 cursorArea, u8 cursorPos);
 void sub_80D0F38(u16 item);
 static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority);
 static void DestroyBoxMonIcon(struct Sprite *sprite);
@@ -430,6 +452,27 @@ u8 sub_80CFA5C(void);
 u8 sub_80D0BA4(void);
 static bool8 sub_80CFA84(void);
 static bool8 sub_80CFB44(void);
+bool8 sub_80D024C(void);
+bool8 sub_80D0344(void);
+bool8 sub_80D03B0(void);
+bool8 sub_80D0420(void);
+bool8 sub_80D04A0(void);
+bool8 sub_80D04C8(void);
+void sub_80D304C(u16 palIndex);
+void sub_80D07B0(u8 arg0, u8 arg1);
+void sub_80D0834(u8 arg0, u8 arg1);
+void sub_80D0B5C(void);
+void sub_80D062C(void);
+void sub_80D0884(u16 arg0, u16 arg1, u16 arg2);
+void sub_80D08CC(void);
+void sub_80D09A4(void);
+void sub_80D0A1C(void);
+void sub_80D0AAC(void);
+u8 sub_80D0894(void);
+void sub_80D0778(u8 arg0, u8 arg1, u8 arg2);
+void sub_80D0708(u8 arg0, u8 arg1, u8 arg2);
+void sub_80D06D0(u8 arg0, u8 arg1, u8 arg2);
+void sub_80D0740(u8 arg0, u8 arg1, u8 arg2);
 
 // static const rom data
 static const struct PSS_MenuStringPtrs gUnknown_085716C0[] =
@@ -2875,7 +2918,7 @@ static void Cb_TakeItemForMoving(u8 taskId)
         break;
     case 1:
         sub_80CFE54(2);
-        sub_80D0E90((sInPartyMenu != FALSE), GetBoxCursorPosition());
+        Item_FromMonToMoving((sInPartyMenu != FALSE) ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
         gUnknown_02039D08->state++;
         break;
     case 2:
@@ -2905,7 +2948,7 @@ static void Cb_GiveMovingItemToMon(u8 taskId)
         break;
     case 1:
         sub_80CFE54(2);
-        sub_80D1080((sInPartyMenu != FALSE), GetBoxCursorPosition());
+        Item_GiveMovingToMon((sInPartyMenu != FALSE) ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
         gUnknown_02039D08->state++;
         break;
     case 2:
@@ -2946,7 +2989,7 @@ static void Cb_ItemToBag(u8 taskId)
         else
         {
             PlaySE(SE_SELECT);
-            sub_80D1114((sInPartyMenu != FALSE), GetBoxCursorPosition());
+            Item_TakeMons((sInPartyMenu != FALSE) ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
             gUnknown_02039D08->state = 1;
         }
         break;
@@ -2997,7 +3040,7 @@ static void Cb_SwitchSelectedItem(u8 taskId)
         break;
     case 1:
         sub_80CFE54(2);
-        sub_80D0FAC((sInPartyMenu != FALSE), GetBoxCursorPosition());
+        Item_SwitchMonsWithMoving((sInPartyMenu != FALSE) ? CURSOR_AREA_IN_PARTY : CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
         gUnknown_02039D08->state++;
         break;
     case 2:
@@ -4154,9 +4197,9 @@ static void sub_80CAEAC(void)
     if (!IsCursorOnBox())
     {
         if (sInPartyMenu)
-            sub_80D0D8C(1, GetBoxCursorPosition());
+            sub_80D0D8C(CURSOR_AREA_IN_PARTY, GetBoxCursorPosition());
         else
-            sub_80D0D8C(0, GetBoxCursorPosition());
+            sub_80D0D8C(CURSOR_AREA_IN_BOX, GetBoxCursorPosition());
     }
 
     if (gUnknown_02039D12 != 0)
@@ -5636,14 +5679,14 @@ static void sub_80CD894(u8 newCurosrArea, u8 newCursorPosition)
     if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
-            sub_80D0E50(0, sBoxCursorPosition);
+            sub_80D0E50(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
         else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
-            sub_80D0E50(1, sBoxCursorPosition);
+            sub_80D0E50(CURSOR_AREA_IN_PARTY, sBoxCursorPosition);
 
         if (newCurosrArea == CURSOR_AREA_IN_BOX)
-            sub_80D0D8C(0, newCursorPosition);
+            sub_80D0D8C(newCurosrArea, newCursorPosition);
         else if (newCurosrArea == CURSOR_AREA_IN_PARTY)
-            sub_80D0D8C(1, newCursorPosition);
+            sub_80D0D8C(newCurosrArea, newCursorPosition);
     }
 
     if (newCurosrArea == CURSOR_AREA_IN_PARTY && sBoxCursorArea != CURSOR_AREA_IN_PARTY)
@@ -8298,13 +8341,13 @@ void sub_80CFE84(void)
 void sub_80CFEA8(void)
 {
     if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
-        sub_80D0E50(0, sBoxCursorPosition);
+        sub_80D0E50(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
 }
 
 void sub_80CFECC(void)
 {
     if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
-        sub_80D0D8C(0, sBoxCursorPosition);
+        sub_80D0D8C(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
 }
 
 static void InitMenu(void)
@@ -8448,4 +8491,971 @@ void sub_80D013C(void)
 {
     sub_8198070(gUnknown_02039D08->field_CB0, TRUE);
     RemoveWindow(gUnknown_02039D08->field_CB0);
+}
+
+// The functions below handle moving and grabbing multiple mons at once.
+// The icons are converted to background 0 which coordinates are changed while moving mons.
+// There is also a bit of math involved in determining how many column/rows of mons to grab/move.
+
+const struct WindowTemplate gUnknown_0857BB1C =
+{
+    .bg = 0,
+    .tilemapLeft = 10,
+    .tilemapTop = 3,
+    .width = 20,
+    .height = 18,
+    .paletteNum = 9,
+    .baseBlock = 0xA,
+};
+
+bool8 sub_80D0164(void)
+{
+    gUnknown_02039D80 = Alloc(sizeof(*gUnknown_02039D80));
+    if (gUnknown_02039D80 != NULL)
+    {
+        gUnknown_02039D08->field_2200 = AddWindow8Bit(&gUnknown_0857BB1C);
+        if (gUnknown_02039D08->field_2200 != 0xFF)
+        {
+            FillWindowPixelBuffer(gUnknown_02039D08->field_2200, 0);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void sub_80D01B8(void)
+{
+    if (gUnknown_02039D80 != NULL)
+        Free(gUnknown_02039D80);
+}
+
+void sub_80D01D0(u8 arg0)
+{
+    gUnknown_02039D80->field_0 = arg0;
+    gUnknown_02039D80->state = 0;
+}
+
+bool8 sub_80D01E4(void)
+{
+    switch (gUnknown_02039D80->field_0)
+    {
+    case 0:
+        return sub_80D024C();
+    case 1:
+        return sub_80D0344();
+    case 2:
+        return sub_80D03B0();
+    case 3:
+        return sub_80D0420();
+    case 4:
+        return sub_80D04A0();
+    case 5:
+        return sub_80D04C8();
+    }
+
+    return FALSE;
+}
+
+bool8 sub_80D024C(void)
+{
+    switch (gUnknown_02039D80->state)
+    {
+    case 0:
+        HideBg(0);
+        sub_80D304C(0x80);
+        gUnknown_02039D80->state++;
+        break;
+    case 1:
+        sub_80CFE14(&gUnknown_02039D80->fromRow, &gUnknown_02039D80->fromColumn);
+        gUnknown_02039D80->toRow = gUnknown_02039D80->fromRow;
+        gUnknown_02039D80->toColumn = gUnknown_02039D80->fromColumn;
+        ChangeBgX(0, -1024, 0);
+        ChangeBgY(0, -1024, 0);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+        FillWindowPixelBuffer8Bit(gUnknown_02039D08->field_2200, 0);
+        sub_80D07B0(gUnknown_02039D80->fromRow, gUnknown_02039D80->fromColumn);
+        SetBgAttribute(0, 4, 1);
+        PutWindowTilemap(gUnknown_02039D08->field_2200);
+        CopyWindowToVram8Bit(gUnknown_02039D08->field_2200, 3);
+        BlendPalettes(0x3F00, 8, 0x7FFF);
+        sub_80CFE54(2);
+        SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
+        gUnknown_02039D80->state++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            ShowBg(0);
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80D0344(void)
+{
+    switch (gUnknown_02039D80->state)
+    {
+    case 0:
+        HideBg(0);
+        gUnknown_02039D80->state++;
+        break;
+    case 1:
+        sub_80D0B5C();
+        sub_80CFE54(0);
+        gUnknown_02039D80->state++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_80CFE84();
+            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            ShowBg(0);
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80D03B0(void)
+{
+    switch (gUnknown_02039D80->state)
+    {
+    case 0:
+        if (!sub_80CD554())
+        {
+            sub_80CFE14(&gUnknown_02039D80->field_6, &gUnknown_02039D80->field_7);
+            sub_80D062C();
+            gUnknown_02039D80->toRow = gUnknown_02039D80->field_6;
+            gUnknown_02039D80->toColumn = gUnknown_02039D80->field_7;
+            CopyWindowToVram8Bit(gUnknown_02039D08->field_2200, 2);
+            gUnknown_02039D80->state++;
+        }
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80D0420(void)
+{
+    u8 var1, var2;
+
+    switch (gUnknown_02039D80->state)
+    {
+    case 0:
+        sub_80D08CC();
+        sub_80D09A4();
+        sub_80CDC64(FALSE);
+        gUnknown_02039D80->state++;
+        break;
+    case 1:
+        if (!DoMonPlaceChange())
+        {
+            sub_80CFE54(3);
+            sub_80D0884(0, 256, 8);
+            sub_80CDC64(TRUE);
+            gUnknown_02039D80->state++;
+        }
+        break;
+    case 2:
+        var1 = sub_80D0894();
+        var2 = DoMonPlaceChange();
+        if (!var1 && !var2)
+            return FALSE;
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80D04A0(void)
+{
+    u8 var1 = sub_80CD554();
+    u8 var2 = sub_80D0894();
+
+    if (!var1 && !var2)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool8 sub_80D04C8(void)
+{
+    switch (gUnknown_02039D80->state)
+    {
+    case 0:
+        sub_80D0AAC();
+        sub_80D0884(0, -256, 8);
+        sub_80CDC64(FALSE);
+        gUnknown_02039D80->state++;
+        break;
+    case 1:
+        if (!DoMonPlaceChange() && !sub_80D0894())
+        {
+            sub_80D0A1C();
+            sub_80CFE54(2);
+            sub_80CDC64(TRUE);
+            HideBg(0);
+            gUnknown_02039D80->state++;
+        }
+        break;
+    case 2:
+        if (!DoMonPlaceChange())
+        {
+            sub_80CFE54(0);
+            sub_80D0B5C();
+            gUnknown_02039D80->state++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            LoadPalette(stdpal_get(3), 0xD0, 0x20);
+            sub_80CFE84();
+            ShowBg(0);
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 sub_80D0580(u8 arg0)
+{
+    switch (arg0)
+    {
+    case 0:
+        if (gUnknown_02039D80->minColumn == 0)
+            return FALSE;
+        gUnknown_02039D80->minColumn--;
+        sub_80D0884(0, 1024, 6);
+        break;
+    case 1:
+        if (gUnknown_02039D80->minColumn + gUnknown_02039D80->columsTotal >= 5)
+            return FALSE;
+        gUnknown_02039D80->minColumn++;
+        sub_80D0884(0, -1024, 6);
+        break;
+    case 2:
+        if (gUnknown_02039D80->minRow == 0)
+            return FALSE;
+        gUnknown_02039D80->minRow--;
+        sub_80D0884(1024, 0, 6);
+        break;
+    case 3:
+        if (gUnknown_02039D80->minRow + gUnknown_02039D80->rowsTotal > 5)
+            return FALSE;
+        gUnknown_02039D80->minRow++;
+        sub_80D0884(-1024, 0, 6);
+        break;
+    }
+
+    return TRUE;
+}
+
+void sub_80D062C(void)
+{
+    s16 var = (abs(gUnknown_02039D80->fromRow - gUnknown_02039D80->field_6)) - (abs(gUnknown_02039D80->fromRow - gUnknown_02039D80->toRow));
+    s16 var2 = (abs(gUnknown_02039D80->fromColumn - gUnknown_02039D80->field_7)) - (abs(gUnknown_02039D80->fromColumn - gUnknown_02039D80->toColumn));
+
+    if (var > 0)
+        sub_80D06D0(gUnknown_02039D80->field_6, gUnknown_02039D80->fromColumn, gUnknown_02039D80->toColumn);
+
+    if (var < 0)
+    {
+        sub_80D0740(gUnknown_02039D80->toRow, gUnknown_02039D80->fromColumn, gUnknown_02039D80->toColumn);
+        sub_80D06D0(gUnknown_02039D80->field_6, gUnknown_02039D80->fromColumn, gUnknown_02039D80->toColumn);
+    }
+
+    if (var2 > 0)
+        sub_80D0708(gUnknown_02039D80->field_7, gUnknown_02039D80->fromRow, gUnknown_02039D80->toRow);
+
+    if (var2 < 0)
+    {
+        sub_80D0778(gUnknown_02039D80->toColumn, gUnknown_02039D80->fromRow, gUnknown_02039D80->toRow);
+        sub_80D0708(gUnknown_02039D80->field_7, gUnknown_02039D80->fromRow, gUnknown_02039D80->toRow);
+    }
+}
+
+void sub_80D06D0(u8 arg0, u8 arg1, u8 arg2)
+{
+    u8 var1 = arg1;
+
+    if (arg1 > arg2)
+    {
+        arg1 = arg2;
+        arg2 = var1;
+    }
+
+    while (arg1 <= arg2)
+        sub_80D07B0(arg0, arg1++);
+}
+
+void sub_80D0708(u8 arg0, u8 arg1, u8 arg2)
+{
+    u8 var1 = arg1;
+
+    if (arg1 > arg2)
+    {
+        arg1 = arg2;
+        arg2 = var1;
+    }
+
+    while (arg1 <= arg2)
+        sub_80D07B0(arg1++, arg0);
+}
+
+void sub_80D0740(u8 arg0, u8 arg1, u8 arg2)
+{
+    u8 var1 = arg1;
+
+    if (arg1 > arg2)
+    {
+        arg1 = arg2;
+        arg2 = var1;
+    }
+
+    while (arg1 <= arg2)
+        sub_80D0834(arg0, arg1++);
+}
+
+void sub_80D0778(u8 arg0, u8 arg1, u8 arg2)
+{
+    u8 var1 = arg1;
+
+    if (arg1 > arg2)
+    {
+        arg1 = arg2;
+        arg2 = var1;
+    }
+
+    while (arg1 <= arg2)
+        sub_80D0834(arg1++, arg0);
+}
+
+void sub_80D07B0(u8 arg0, u8 arg1)
+{
+    u8 position = arg0 + (6 * arg1);
+    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
+    u32 personality = GetCurrentBoxMonData(position, MON_DATA_PERSONALITY);
+
+    if (species != SPECIES_NONE)
+    {
+        const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
+        u8 index = GetValidMonIconPalIndex(species) + 8;
+
+        BlitBitmapRectToWindow4BitTo8Bit(gUnknown_02039D08->field_2200,
+                                         iconGfx,
+                                         0,
+                                         0,
+                                         32,
+                                         32,
+                                         24 * arg0,
+                                         24 * arg1,
+                                         32,
+                                         32,
+                                         index);
+    }
+}
+
+void sub_80D0834(u8 arg0, u8 arg1)
+{
+    u8 position = arg0 + (6 * arg1);
+    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
+
+    if (species != SPECIES_NONE)
+    {
+        FillWindowPixelRect8Bit(gUnknown_02039D08->field_2200,
+                                0,
+                                24 * arg0,
+                                24 * arg1,
+                                32,
+                                32);
+    }
+}
+
+void sub_80D0884(u16 arg0, u16 arg1, u16 arg2)
+{
+    gUnknown_02039D80->bgX = arg0;
+    gUnknown_02039D80->bgY = arg1;
+    gUnknown_02039D80->field_10 = arg2;
+}
+
+u8 sub_80D0894(void)
+{
+    if (gUnknown_02039D80->field_10 != 0)
+    {
+        ChangeBgX(0, gUnknown_02039D80->bgX, 1);
+        ChangeBgY(0, gUnknown_02039D80->bgY, 1);
+        gUnknown_02039D80->field_10--;
+    }
+
+    return gUnknown_02039D80->field_10;
+}
+
+void sub_80D08CC(void)
+{
+    s32 i, j, r8, r9;
+    s32 rowCount, columnCount;
+    u8 boxId;
+    u8 monArrayId;
+
+    gUnknown_02039D80->minRow = min(gUnknown_02039D80->fromRow, gUnknown_02039D80->toRow);
+    gUnknown_02039D80->minColumn = min(gUnknown_02039D80->fromColumn, gUnknown_02039D80->toColumn);
+    gUnknown_02039D80->rowsTotal = abs(gUnknown_02039D80->fromRow - gUnknown_02039D80->toRow) + 1;
+    gUnknown_02039D80->columsTotal = abs(gUnknown_02039D80->fromColumn - gUnknown_02039D80->toColumn) + 1;
+    boxId = StorageGetCurrentBox();
+    monArrayId = 0;
+    rowCount = gUnknown_02039D80->minRow + gUnknown_02039D80->rowsTotal;
+    columnCount = gUnknown_02039D80->minColumn + gUnknown_02039D80->columsTotal;
+    for (i = gUnknown_02039D80->minColumn; i < columnCount; i++)
+    {
+        u8 boxPosition = (IN_BOX_ROWS * i) + gUnknown_02039D80->minRow;
+        for (j = gUnknown_02039D80->minRow; j < rowCount; j++)
+        {
+            struct BoxPokemon *boxMon = GetBoxedMonPtr(boxId, boxPosition);
+
+            gUnknown_02039D80->boxMons[monArrayId] = *boxMon;
+            monArrayId++;
+            boxPosition++;
+        }
+    }
+}
+
+void sub_80D09A4(void)
+{
+    s32 i, j;
+    s32 rowCount = gUnknown_02039D80->minRow + gUnknown_02039D80->rowsTotal;
+    s32 columnCount = gUnknown_02039D80->minColumn + gUnknown_02039D80->columsTotal;
+    u8 boxId = StorageGetCurrentBox();
+
+    for (i = gUnknown_02039D80->minColumn; i < columnCount; i++)
+    {
+        u8 boxPosition = (IN_BOX_ROWS * i) + gUnknown_02039D80->minRow;
+        for (j = gUnknown_02039D80->minRow; j < rowCount; j++)
+        {
+            DestroyBoxMonIconAtPosition(boxPosition);
+            ZeroBoxMonAt(boxId, boxPosition);
+            boxPosition++;
+        }
+    }
+}
+
+void sub_80D0A1C(void)
+{
+    s32 i, j;
+    s32 rowCount = gUnknown_02039D80->minRow + gUnknown_02039D80->rowsTotal;
+    s32 columnCount = gUnknown_02039D80->minColumn + gUnknown_02039D80->columsTotal;
+    u8 monArrayId = 0;
+
+    for (i = gUnknown_02039D80->minColumn; i < columnCount; i++)
+    {
+        u8 boxPosition = (IN_BOX_ROWS * i) + gUnknown_02039D80->minRow;
+        for (j = gUnknown_02039D80->minRow; j < rowCount; j++)
+        {
+            if (GetBoxMonData(&gUnknown_02039D80->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
+                sub_80CB140(boxPosition);
+            monArrayId++;
+            boxPosition++;
+        }
+    }
+}
+
+void sub_80D0AAC(void)
+{
+    s32 i, j;
+    s32 rowCount = gUnknown_02039D80->minRow + gUnknown_02039D80->rowsTotal;
+    s32 columnCount = gUnknown_02039D80->minColumn + gUnknown_02039D80->columsTotal;
+    u8 boxId = StorageGetCurrentBox();
+    u8 monArrayId = 0;
+
+    for (i = gUnknown_02039D80->minColumn; i < columnCount; i++)
+    {
+        u8 boxPosition = (IN_BOX_ROWS * i) + gUnknown_02039D80->minRow;
+        for (j = gUnknown_02039D80->minRow; j < rowCount; j++)
+        {
+            if (GetBoxMonData(&gUnknown_02039D80->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
+                SetBoxMonAt(boxId, boxPosition, &gUnknown_02039D80->boxMons[monArrayId]);
+            boxPosition++;
+            monArrayId++;
+        }
+    }
+}
+
+void sub_80D0B5C(void)
+{
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    SetBgAttribute(0, 4, 0);
+    ClearGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
+    CopyBgTilemapBufferToVram(0);
+}
+
+u8 sub_80D0BA4(void)
+{
+    return (IN_BOX_ROWS * gUnknown_02039D80->fromColumn) + gUnknown_02039D80->fromRow;
+}
+
+bool8 sub_80D0BC0(void)
+{
+    s32 i, j;
+    s32 rowCount = gUnknown_02039D80->minRow + gUnknown_02039D80->rowsTotal;
+    s32 columnCount = gUnknown_02039D80->minColumn + gUnknown_02039D80->columsTotal;
+    u8 monArrayId = 0;
+
+    for (i = gUnknown_02039D80->minColumn; i < columnCount; i++)
+    {
+        u8 boxPosition = (IN_BOX_ROWS * i) + gUnknown_02039D80->minRow;
+        for (j = gUnknown_02039D80->minRow; j < rowCount; j++)
+        {
+            if (GetBoxMonData(&gUnknown_02039D80->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES)
+                && GetCurrentBoxMonData(boxPosition, MON_DATA_SANITY_HAS_SPECIES))
+                return FALSE;
+
+            monArrayId++;
+            boxPosition++;
+        }
+    }
+
+    return TRUE;
+}
+
+const u32 gUnknown_0857BB24[] = INCBIN_U32("graphics/pokemon_storage/unknown_frame.4bpp");
+
+static const struct OamData sOamData_857BBA4 =
+{
+    .y = 0,
+    .affineMode = 1,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BBAC[] =
+{
+    AFFINEANIMCMD_FRAME(128, 128, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BBBC[] =
+{
+    AFFINEANIMCMD_FRAME(88, 88, 0, 0),
+    AFFINEANIMCMD_FRAME(5, 5, 0, 8),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BBD4[] =
+{
+    AFFINEANIMCMD_FRAME(128, 128, 0, 0),
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 8),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BBEC[] =
+{
+    AFFINEANIMCMD_FRAME(128, 128, 0, 0),
+    AFFINEANIMCMD_FRAME(10, 10, 0, 12),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BC0C[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 12),
+    AFFINEANIMCMD_FRAME(128, 128, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BC2C[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 16),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_857BC44[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_857BC44[] =
+{
+    sSpriteAffineAnim_857BBAC,
+    sSpriteAffineAnim_857BBBC,
+    sSpriteAffineAnim_857BBD4,
+    sSpriteAffineAnim_857BBEC,
+    sSpriteAffineAnim_857BC0C,
+    sSpriteAffineAnim_857BC2C,
+    sSpriteAffineAnim_857BC44
+};
+
+const struct SpriteTemplate gSpriteTemplate_857BC70 =
+{
+    .tileTag = 7,
+    .paletteTag = 0xdacb,
+    .oam = &sOamData_857BBA4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sSpriteAffineAnimTable_857BC44,
+    .callback = SpriteCallbackDummy,
+};
+
+void sub_80D0C60(void)
+{
+    s32 i;
+    u8 spriteId;
+    struct CompressedSpriteSheet spriteSheet;
+    struct SpriteTemplate spriteTemplate;
+
+    if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
+    {
+        spriteSheet.data = gUnknown_03000F78;
+        spriteSheet.size = 0x200;
+        spriteTemplate = gSpriteTemplate_857BC70;
+
+        for (i = 0; i < 3; i++)
+        {
+            spriteSheet.tag = 7 + i;
+            LoadCompressedSpriteSheet(&spriteSheet);
+            gUnknown_02039D08->field_2204[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
+            gUnknown_02039D08->field_2204[i].palIndex = AllocSpritePalette(0xDACB + i);
+            gUnknown_02039D08->field_2204[i].palIndex *= 16;
+            gUnknown_02039D08->field_2204[i].palIndex += 0x100;
+            spriteTemplate.tileTag = 7 + i;
+            spriteTemplate.paletteTag = 0xDACB + i;
+            spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
+            gUnknown_02039D08->field_2204[i].sprite = &gSprites[spriteId];
+            gUnknown_02039D08->field_2204[i].sprite->invisible = TRUE;
+            gUnknown_02039D08->field_2204[i].unk10 = 0;
+        }
+    }
+    gUnknown_02039D08->movingItem = 0;
+}
+
+// The functions below handle new features of MOVE_ITEMS box option.
+
+bool32 sub_80D1324(u8 cursorArea, u8 cursorPos);
+const u32 *GetItemIconPic(u16 itemId);
+const u16 *GetItemIconPalette(u16 itemId);
+u8 sub_80D12E8(void);
+void sub_80D140C(u8 id, u8 cursorArea, u8 cursorPos);
+void sub_80D1524(u8 id, const u32 *itemTiles, const u16 *itemPal);
+void sub_80D15D4(u8 id, u8 animNum);
+void sub_80D1740(u8 id, bool8 arg1);
+u8 sub_80D1370(u8 cursorArea, u8 cursorPos);
+void sub_80D1604(u8 id, u8 arg1, u8 cursorArea, u8 cursorPos);
+void sub_80D1AD8(struct Sprite *sprite);
+
+void sub_80D0D8C(u8 cursorArea, u8 cursorPos)
+{
+    u16 heldItem;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+    if (sub_80D1324(cursorArea, cursorPos))
+        return;
+
+    switch (cursorArea)
+    {
+    case CURSOR_AREA_IN_BOX:
+        if (!GetCurrentBoxMonData(cursorPos, MON_DATA_SANITY_HAS_SPECIES))
+            return;
+        heldItem = GetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM);
+        break;
+    case CURSOR_AREA_IN_PARTY:
+        if (cursorPos >= PARTY_SIZE || !GetMonData(&gPlayerParty[cursorPos], MON_DATA_SANITY_HAS_SPECIES))
+            return;
+        heldItem = GetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM);
+        break;
+    default:
+        return;
+    }
+
+    if (heldItem != 0)
+    {
+        const u32 *tiles = GetItemIconPic(heldItem);
+        const u16 *pal = GetItemIconPalette(heldItem);
+        u8 id = sub_80D12E8();
+
+        sub_80D140C(id, cursorArea, cursorPos);
+        sub_80D1524(id, tiles, pal);
+        sub_80D15D4(id, 1);
+        sub_80D1740(id, TRUE);
+    }
+}
+
+void sub_80D0E50(u8 cursorArea, u8 cursorPos)
+{
+    u8 id;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+
+    id = sub_80D1370(cursorArea, cursorPos);
+    sub_80D15D4(id, 2);
+    sub_80D1604(id, 0, cursorArea, cursorPos);
+}
+
+static void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
+{
+    u8 id;
+    u16 item;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+
+    id = sub_80D1370(cursorArea, cursorPos);
+    item = 0;
+    sub_80D15D4(id, 3);
+    sub_80D1604(id, 1, cursorArea, cursorPos);
+    sub_80D140C(id, 2, 0);
+    if (cursorArea  == CURSOR_AREA_IN_BOX)
+    {
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &item);
+        SetBoxMonIconObjMode(cursorPos, 1);
+    }
+    else
+    {
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &item);
+        SetPartyMonIconObjMode(cursorPos, 1);
+    }
+
+    gUnknown_02039D08->movingItem = gUnknown_02039D08->cursorMonItem;
+}
+
+void sub_80D0F38(u16 item)
+{
+    const u32 *tiles = GetItemIconPic(item);
+    const u16 *pal = GetItemIconPalette(item);
+    u8 id = sub_80D12E8();
+
+    sub_80D1524(id, tiles, pal);
+    sub_80D15D4(id, 6);
+    sub_80D1604(id, 1, 0, 0);
+    sub_80D140C(id, 2, 0);
+    sub_80D1740(id, TRUE);
+    gUnknown_02039D08->movingItem = item;
+}
+
+static void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
+{
+    u8 id;
+    u16 item;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+
+    id = sub_80D1370(cursorArea, cursorPos);
+    sub_80D15D4(id, 3);
+    sub_80D1604(id, 3, 2, 0);
+    if (cursorArea == CURSOR_AREA_IN_BOX)
+    {
+        item = GetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM);
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gUnknown_02039D08->movingItem);
+        gUnknown_02039D08->movingItem = item;
+    }
+    else
+    {
+        item = GetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM);
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gUnknown_02039D08->movingItem);
+        gUnknown_02039D08->movingItem = item;
+    }
+
+    id = sub_80D1370(2, 0);
+    sub_80D15D4(id, 4);
+    sub_80D1604(id, 4, cursorArea, cursorPos);
+}
+
+static void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos)
+{
+    u8 id;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+
+    id = sub_80D1370(2, 0);
+    sub_80D15D4(id, 4);
+    sub_80D1604(id, 2, cursorArea, cursorPos);
+    if (cursorArea == CURSOR_AREA_IN_BOX)
+    {
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gUnknown_02039D08->movingItem);
+        SetBoxMonIconObjMode(cursorPos, 0);
+    }
+    else
+    {
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gUnknown_02039D08->movingItem);
+        SetPartyMonIconObjMode(cursorPos, 0);
+    }
+}
+
+static void Item_TakeMons(u8 cursorArea, u8 cursorPos)
+{
+    u8 id;
+    u16 item;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+
+    item = 0;
+    id = sub_80D1370(cursorArea, cursorPos);
+    sub_80D15D4(id, 2);
+    sub_80D1604(id, 0, cursorArea, cursorPos);
+    if (cursorArea  == CURSOR_AREA_IN_BOX)
+    {
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &item);
+        SetBoxMonIconObjMode(cursorPos, 1);
+    }
+    else
+    {
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &item);
+        SetPartyMonIconObjMode(cursorPos, 1);
+    }
+}
+
+void sub_80D1194(void)
+{
+    if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
+    {
+        u8 id = sub_80D1370(2, 0);
+        sub_80D15D4(id, 5);
+        sub_80D1604(id, 0, 2, 0);
+    }
+}
+
+void sub_80D11CC(void)
+{
+    s32 i;
+
+    if (gUnknown_02039D08->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02039D08->field_2204[i].unk10 && gUnknown_02039D08->field_2204[i].unk8 == 1)
+            sub_80D1604(i, 7, 2, 0);
+    }
+}
+
+bool8 sub_80D1218(void)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02039D08->field_2204[i].unk10)
+        {
+            if (!gUnknown_02039D08->field_2204[i].sprite->affineAnimEnded && gUnknown_02039D08->field_2204[i].sprite->affineAnimBeginning)
+                return TRUE;
+            if (gUnknown_02039D08->field_2204[i].sprite->callback != SpriteCallbackDummy && gUnknown_02039D08->field_2204[i].sprite->callback != sub_80D1AD8)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 sub_80D127C(void)
+{
+    s32 i;
+
+    if (gUnknown_02039D08->boxOption == BOX_OPTION_MOVE_ITEMS)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            if (gUnknown_02039D08->field_2204[i].unk10 && gUnknown_02039D08->field_2204[i].unk8 == 2)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+const u8 *GetMovingItemName(void)
+{
+    return ItemId_GetName(gUnknown_02039D08->movingItem);
+}
+
+u16 GetMovingItem(void)
+{
+    return gUnknown_02039D08->movingItem;
+}
+
+u8 sub_80D12E8(void)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02039D08->field_2204[i].unk10 == 0)
+        {
+            gUnknown_02039D08->field_2204[i].unk10 = 1;
+            return i;
+        }
+    }
+
+    return 3;
+}
+
+bool32 sub_80D1324(u8 cursorArea, u8 cursorPos)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02039D08->field_2204[i].unk10
+            && gUnknown_02039D08->field_2204[i].unk8 == cursorArea
+            && gUnknown_02039D08->field_2204[i].unk9 == cursorPos)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+u8 sub_80D1370(u8 cursorArea, u8 cursorPos)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02039D08->field_2204[i].unk10
+            && gUnknown_02039D08->field_2204[i].unk8 == cursorArea
+            && gUnknown_02039D08->field_2204[i].unk9 == cursorPos)
+            return i;
+    }
+
+    return 3;
+}
+
+u8 sub_80D13C4(struct Sprite *sprite)
+{
+    u8 i;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_02039D08->field_2204[i].unk10
+            && gUnknown_02039D08->field_2204[i].sprite == sprite)
+            return i;
+    }
+
+    return 3;
 }

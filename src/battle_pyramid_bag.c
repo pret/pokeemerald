@@ -547,7 +547,7 @@ static bool8 sub_81C5238(void)
         gPyramidBagResources->state++;
         break;
     case 3:
-        LoadCompressedObjectPic(&gUnknown_0861F3CC);
+        LoadCompressedSpriteSheet(&gUnknown_0861F3CC);
         gPyramidBagResources->state++;
         break;
     case 4:

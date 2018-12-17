@@ -234,7 +234,7 @@ _0814FE90:
 _0814FE96:
 	lsls r0, r4, 3
 	adds r0, r6
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24

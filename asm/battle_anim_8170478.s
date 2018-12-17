@@ -2996,10 +2996,10 @@ sub_8171D60: @ 8171D60
 	cmp r0, r1
 	bne _08171D86
 	adds r0, r4, 0
-	bl LoadCompressedObjectPicUsingHeap
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, =gUnknown_085E50F4
 	adds r0, r5, r0
-	bl LoadCompressedObjectPaletteUsingHeap
+	bl LoadCompressedSpritePaletteUsingHeap
 _08171D86:
 	pop {r4,r5}
 	pop {r0}
@@ -5135,9 +5135,9 @@ _08172F4E:
 	cmp r0, r7
 	bne _08172F6E
 	ldr r0, =gBattleAnimPicTable + 0x748
-	bl LoadCompressedObjectPicUsingHeap
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, =gBattleAnimPaletteTable + 0x748
-	bl LoadCompressedObjectPaletteUsingHeap
+	bl LoadCompressedSpritePaletteUsingHeap
 _08172F6E:
 	ldr r5, =sub_8172FEC
 	adds r0, r5, 0
@@ -5534,9 +5534,9 @@ sub_81732B0: @ 81732B0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, =gBattleAnimPicTable + 0x868
-	bl LoadCompressedObjectPicUsingHeap
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, =gBattleAnimPaletteTable + 0x868
-	bl LoadCompressedObjectPaletteUsingHeap
+	bl LoadCompressedSpritePaletteUsingHeap
 	ldr r0, =0x0000281d
 	bl IndexOfSpritePaletteTag
 	adds r0, r4, 0

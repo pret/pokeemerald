@@ -1417,7 +1417,7 @@ _080F64F2:
 	adds r2, r4, 0
 	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl SetMultiuseSpriteTemplateToPokemon
@@ -1451,9 +1451,9 @@ _080F64F2:
 	ldr r1, [r1]
 	strb r0, [r1, 0x8]
 	ldr r0, =gUnknown_0858D878
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_0858D880
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, =sub_80F7670
 	movs r1, 0xA
 	bl CreateTask
