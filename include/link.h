@@ -313,5 +313,9 @@ void sub_800AD10(void);
 void sub_800AB18(void);
 void sub_8009F18(void);
 bool8 sub_800AA60(void);
+void sub_800ABF4(u16 a0);
+
+bool32 mevent_0814257C(u8 * cmdPtr, const u8 * src);
+void sub_8018884(const u8 *str);
 
 #endif // GUARD_LINK_H

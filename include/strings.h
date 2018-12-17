@@ -1737,4 +1737,22 @@ extern const u8 BattleFrontier_BattlePyramidEmptySquare_Text_254F47[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_Text_254F0E[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_Text_254ED3[];
 
+// mevent
+
+extern const u8 gUnknown_085EDFD6[];
+extern const u8 gUnknown_085EDFF5[];
+extern const u8 gUnknown_085EE014[];
+extern const u8 gUnknown_085EE035[];
+extern const u8 gUnknown_085EE05C[];
+extern const u8 gUnknown_085EE06B[];
+extern const u8 gUnknown_085EE080[];
+extern const u8 gUnknown_085EE097[];
+extern const u8 gUnknown_085EE0A3[];
+extern const u8 gUnknown_085EE0BF[];
+extern const u8 gUnknown_085EE0DC[];
+extern const u8 gUnknown_085EE0FA[];
+extern const u8 gUnknown_085EE107[];
+extern const u8 gUnknown_085EE120[];
+extern const u8 gUnknown_085EE12D[];
+
 #endif //GUARD_STRINGS_H

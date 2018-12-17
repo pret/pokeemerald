@@ -94,6 +94,15 @@
     f;                       \
 })
 
+// This macro is required to prevent the compiler from optimizing
+// a dpad up/down check in sub_812CAD8 (fame_checker.c).
+// We suspect it was used globally.
+// GameFreak never ceases to amaze.
+// TODO: Propagate use of this macro
+#define TEST_BUTTON(field, button) ({(field) & (button);})
+#define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
+#define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
 // In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
@@ -886,6 +895,76 @@ struct UnkSaveSubstruct_3b98 {
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
+struct MysteryEventStruct
+{
+    u8 unk_0_0:2;
+    u8 unk_0_2:3;
+    u8 unk_0_5:3;
+    u8 unk_1;
+};
+
+struct MEventBuffer_3120_Sub
+{
+    u16 unk_00;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04[40];
+    u8 unk_2C[10][40];
+};
+
+struct MEventBuffer_3120
+{
+    u32 crc;
+    struct MEventBuffer_3120_Sub data;
+};
+
+struct MEventBuffer_32E0_Sub
+{
+    u16 unk_00;
+    u16 unk_02;
+    u32 unk_04;
+    u8 unk_08_0:2;
+    u8 unk_08_2:4;
+    u8 unk_08_6:2;
+    u8 unk_09;
+    u8 unk_0A[40];
+    u8 unk_32[40];
+    u8 unk_5A[4][40];
+    u8 unk_FA[40];
+    u8 unk_122[40];
+};
+
+struct MEventBuffer_32E0
+{
+    u32 crc;
+    struct MEventBuffer_32E0_Sub data;
+};
+
+struct MEventBuffer_3430_Sub
+{
+    u16 unk_00;
+    u16 unk_02;
+    u16 unk_04;
+    u16 unk_06;
+    u16 unk_08[2][7];
+};
+
+struct MEventBuffer_3430
+{
+    u32 crc;
+    struct MEventBuffer_3430_Sub data;
+};
+
+struct MEventBuffers
+{
+    /*0x000 0x322C*/ struct MEventBuffer_3120 buffer_000;
+    /*0x1c0 0x33EC*/ struct MEventBuffer_32E0 buffer_1c0;
+    /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
+    /*0x338 0x3564*/ u16 unk_338[4];
+    /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
+    /*0x344 0x3570*/ u32 unk_344[2][5];
+}; // 0x36C 0x3598
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -962,7 +1041,8 @@ struct SaveBlock1
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ u8 field_322C[1276];
+    /*0x322C*/ struct MEventBuffers unk_322C;
+    /*0x3598*/ u8 field_3598[0x190];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];

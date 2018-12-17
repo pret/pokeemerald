@@ -24987,6 +24987,8 @@ sub_81D3B34: @ 81D3B34
 	bx r1
 	thumb_func_end sub_81D3B34
 
+    @ FireRed: unk_815C27C.s
+
 	thumb_func_start sub_81D3B54
 sub_81D3B54: @ 81D3B54
 	push {r4-r7,lr}
