@@ -5588,14 +5588,14 @@ sub_815CDFC: @ 815CDFC
 _0815CE36:
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	b _0815CE52
 	.pool
 _0815CE48:
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	adds r0, 0x1
 _0815CE52:
 	adds r1, r4, 0
@@ -7393,7 +7393,7 @@ _0815DCEA:
 	lsrs r0, 24
 	strh r0, [r5, 0x12]
 	adds r0, r4, 0
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]
@@ -8395,7 +8395,7 @@ _0815E4EE:
 	ldrsh r6, [r7, r1]
 	mov r1, r8
 	ldrb r0, [r1]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	adds r3, r0, 0
 	subs r3, 0x5
 	lsls r3, 24
@@ -10367,7 +10367,7 @@ sub_815F48C: @ 815F48C
 	cmp r0, 0
 	bne _0815F4B8
 	ldrb r0, [r4]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	subs r0, 0x2
 	adds r1, r5, 0
 	adds r1, 0x43
@@ -10377,7 +10377,7 @@ sub_815F48C: @ 815F48C
 	.pool
 _0815F4B8:
 	ldrb r0, [r4]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	adds r0, 0x2
 	adds r1, r5, 0
 	adds r1, 0x43
@@ -11038,7 +11038,7 @@ _0815F9F4:
 	ldrh r6, [r0]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r7, 0

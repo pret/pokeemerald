@@ -1656,7 +1656,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_80A82E4(gBattleAnimTarget) + (s8)(argVar);
+        subpriority = GetBattlerSubpriority(gBattleAnimTarget) + (s8)(argVar);
     }
     else
     {
@@ -1665,7 +1665,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_80A82E4(gBattleAnimAttacker) + (s8)(argVar);
+        subpriority = GetBattlerSubpriority(gBattleAnimAttacker) + (s8)(argVar);
     }
 
     if (subpriority < 3)

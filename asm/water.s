@@ -711,7 +711,7 @@ sub_8107730: @ 8107730
 	ldr r6, =0x0000fff6
 	strh r6, [r4, 0x26]
 	ldrb r0, [r7]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl IsContest
@@ -2286,7 +2286,7 @@ sub_8108408: @ 8108408
 	lsrs r6, r0, 24
 	movs r5, 0xAC
 	ldrb r0, [r4]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -3517,7 +3517,7 @@ _08108DE2:
 	strh r0, [r4, 0x30]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
@@ -3572,7 +3572,7 @@ _08108E58:
 	strh r0, [r4, 0x30]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
