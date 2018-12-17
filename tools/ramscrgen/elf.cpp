@@ -236,15 +236,15 @@ static std::map<std::string, std::uint32_t> GetCommonSymbols_Shared()
     return commonSymbols;
 }
 
-std::map<std::string, std::uint32_t> GetCommonSymbolsFromLib(std::string libpath)
+std::map<std::string, std::uint32_t> GetCommonSymbolsFromLib(std::string sourcePath, std::string libpath)
 {
     std::size_t colonPos = libpath.find(':');
     if (colonPos == std::string::npos)
         FATAL_ERROR("error: missing colon separator in libfile \"%s\"\n", s_elfPath.c_str());
 
     s_archiveObjectPath = libpath.substr(colonPos + 1);
-    s_archiveFilePath = "tools/agbcc/lib/" + libpath.substr(1, colonPos - 1);
-    s_elfPath = "tools/agbcc/lib/" + libpath.substr(1);
+    s_archiveFilePath = sourcePath + "/" + libpath.substr(1, colonPos - 1);
+    s_elfPath = sourcePath + "/" + libpath.substr(1);
 
     s_file = std::fopen(s_archiveFilePath.c_str(), "rb");
 
@@ -260,7 +260,7 @@ std::map<std::string, std::uint32_t> GetCommonSymbols(std::string sourcePath, st
 {
     s_elfFileOffset = 0;
     if (path[0] == '*')
-        return GetCommonSymbolsFromLib(path);
+        return GetCommonSymbolsFromLib(sourcePath, path);
 
     s_elfPath = sourcePath + "/" + path;
     s_file = std::fopen(s_elfPath.c_str(), "rb");
