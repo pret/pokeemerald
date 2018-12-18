@@ -2122,12 +2122,12 @@ static void sub_8038B94(u8 taskId)
         if (species != SPECIES_EGG && hp != 0 && status == 0)
             r7 |= 1 << i * 2;
 
-        if (species == 0)
+        if (species == SPECIES_NONE)
             continue;
         if (hp != 0 && (species == SPECIES_EGG || status != 0))
             r7 |= 2 << i * 2;
 
-        if (species == 0)
+        if (species == SPECIES_NONE)
             continue;
         if (species != SPECIES_EGG && hp == 0)
             r7 |= 3 << i * 2;
