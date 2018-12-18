@@ -1,9 +1,15 @@
 #include "global.h"
+#include "alloc.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
+#include "decompress.h"
 #include "gpu_regs.h"
+#include "graphics.h"
+#include "main.h"
+#include "math_util.h"
 #include "palette.h"
 #include "random.h"
+#include "scanline_effect.h"
 #include "sound.h"
 #include "trig.h"
 #include "util.h"
@@ -2795,7 +2801,6 @@ void sub_80FF698(struct Sprite* sprite)
     switch (sprite->data[0])
     {
     case 0:
-    {
         if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
             gBattleAnimArgs[0] *= -1;
 
@@ -2804,9 +2809,7 @@ void sub_80FF698(struct Sprite* sprite)
         sprite->invisible = 1;
         sprite->data[0]++;
         break;
-    }
     case 1:
-    {
         sprite->invisible = 0;
         if (sprite->affineAnimEnded)
         {
@@ -2818,7 +2821,6 @@ void sub_80FF698(struct Sprite* sprite)
             StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
             break;
         }
-    }
     }
 }
 
