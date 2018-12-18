@@ -2987,7 +2987,7 @@ Move_FLASH:
 	end
 
 Move_SPLASH:
-	createvisualtask sub_8104938, 2, 0, 3
+	createvisualtask AnimTask_Splash, 2, 0, 3
 	delay 8
 	loopsewithpan SE_W039, SOUND_PAN_ATTACKER, 38, 3
 	waitforvisualfinish
@@ -3066,7 +3066,7 @@ Move_SKETCH:
 	createsprite gUnknown_085936D4, ANIM_TARGET, 2
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
-	createvisualtask sub_8104938, 2, 0, 2
+	createvisualtask AnimTask_Splash, 2, 0, 2
 	loopsewithpan SE_W039, SOUND_PAN_ATTACKER, 38, 2
 	end
 
@@ -4008,7 +4008,7 @@ Move_TEETER_DANCE:
 
 Move_MUD_SPORT:
 	loadspritegfx ANIM_TAG_MUD_SAND
-	createvisualtask sub_8104938, 2, 0, 6
+	createvisualtask AnimTask_Splash, 2, 0, 6
 	delay 24
 	createsprite gUnknown_085971E4, ANIM_TARGET, 2, 0, -4, -16
 	createsprite gUnknown_085971E4, ANIM_TARGET, 2, 0, 4, -12
