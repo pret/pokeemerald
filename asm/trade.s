@@ -725,7 +725,7 @@ _080777B8:
 	b _08077B22
 	.pool
 _080777E8:
-	bl sub_81B5D30
+	bl LoadHeldItemIcons
 	ldr r0, =gUnknown_0203229C
 	ldr r1, [r0]
 	adds r0, r1, 0
@@ -1343,7 +1343,7 @@ _08077D80:
 	b _080780D8
 	.pool
 _08077DB0:
-	bl sub_81B5D30
+	bl LoadHeldItemIcons
 	ldr r0, =gUnknown_0203229C
 	ldr r1, [r0]
 	adds r0, r1, 0

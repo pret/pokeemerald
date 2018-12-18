@@ -27,10 +27,10 @@ enum
 };
 
 struct Struct203CEC8 {
-    MainCallback unk0;
+    MainCallback exitCallback;
     TaskFunc unk4;
     u8 unk8_0:4;
-    u8 unk8_1:2;
+    u8 mode:2;
     u8 unk8_2:2;
     s8 unk9;
     s8 unkA;

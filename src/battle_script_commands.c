@@ -59,7 +59,7 @@ extern void sub_81D3640(u16 arg0, void* statStoreLocation1, void* statStoreLocat
 extern void sub_81D3784(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
 extern u8* GetMonNickname(struct Pokemon* mon, u8* dst); // party_menu
 extern void sub_81B8E80(u8 battlerId, u8, u8); // party menu
-extern bool8 sub_81B1250(void); // ?
+extern bool8 IsMultiBattle(void); // ?
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 
@@ -7609,7 +7609,7 @@ static void atk8F_forcerandomswitch(void)
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
-            if (!sub_81B1250())
+            if (!IsMultiBattle())
                 sub_803BDA0(gBattlerTarget);
 
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)

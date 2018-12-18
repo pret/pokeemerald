@@ -129,7 +129,7 @@ struct UnkStruct_61CC04
 };
 
 // forward declarations
-bool8 sub_81B1250(void);
+bool8 IsMultiBattle(void);
 static bool8 SummaryScreen_LoadGraphics(void);
 static void SummaryScreen_LoadingCB2(void);
 static void InitBGs(void);
@@ -1500,7 +1500,7 @@ static void sub_81C0604(u8 taskId, s8 a)
             }
             r4_2 = sub_80D214C(pssData->monList.boxMons, pssData->curMonIndex, pssData->maxMonIndex, a);
         }
-        else if (sub_81B1250() == 1)
+        else if (IsMultiBattle() == 1)
         {
             r4_2 = sub_81C09B4(a);
         }
@@ -3254,7 +3254,7 @@ static void PrintHeldItemName(void)
     const u8 *text;
     int offset;
 
-    if (pssData->summary.item == ITEM_ENIGMA_BERRY && sub_81B1250() == TRUE && (pssData->curMonIndex == 1 || pssData->curMonIndex == 4 || pssData->curMonIndex == 5))
+    if (pssData->summary.item == ITEM_ENIGMA_BERRY && IsMultiBattle() == TRUE && (pssData->curMonIndex == 1 || pssData->curMonIndex == 4 || pssData->curMonIndex == 5))
     {
         text = ItemId_GetName(ITEM_ENIGMA_BERRY);
     }
