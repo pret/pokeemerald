@@ -40,6 +40,8 @@ struct Main
 
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
+extern const char RomHeaderGameCode[4];
+extern const char RomHeaderSoftwareVersion;
 
 extern u16 gKeyRepeatStartDelay;
 extern bool8 gLinkTransferringData;

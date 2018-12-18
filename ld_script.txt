@@ -56,7 +56,7 @@ SECTIONS {
         src/link_rfu.o(.text);
         src/link_rfu_3.o(.text);
         asm/link_rfu_3.o(.text);
-        asm/mevent2.o(.text);
+        src/mevent2.o(.text);
         asm/mevent_801BAAC.o(.text);
         asm/mevent_server.o(.text);
         asm/mevent_server_ish.o(.text);

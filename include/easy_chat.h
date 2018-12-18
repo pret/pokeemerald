@@ -14,5 +14,6 @@ u16 sub_811EE38(u16 group);
 u16 sub_811F01C(void);
 bool16 EasyChat_GetNumWordsInGroup(u8);
 u16 sub_811EE90(u16);
+void sub_811F8BC(void);
 
 #endif // GUARD_EASYCHAT_H

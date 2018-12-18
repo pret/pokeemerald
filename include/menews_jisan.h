@@ -1,0 +1,6 @@
+#ifndef GUARD_MENEWS_JISAN_H
+#define GUARD_MENEWS_JISAN_H
+
+void sub_801DBC0(void);
+
+#endif //GUARD_MENEWS_JISAN_H
