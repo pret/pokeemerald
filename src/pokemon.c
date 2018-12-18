@@ -5939,7 +5939,7 @@ u16 SpeciesToCryId(u16 species)
         return species;
 
     if (species < SPECIES_TREECKO - 1)
-        return 200;
+        return SPECIES_UNOWN - 1;
 
     return gSpeciesIdToCryId[species - (SPECIES_TREECKO - 1)];
 }
