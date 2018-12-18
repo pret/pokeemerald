@@ -447,7 +447,7 @@ sub_8113A58: @ 8113A58
 	cmp r0, 0
 	bne _08113A8A
 	adds r0, r3, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _08113A8A:
 	pop {r0}
 	bx r0
@@ -581,7 +581,7 @@ sub_8113B90: @ 8113B90
 	cmp r0, 0
 	beq _08113BA4
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _08113BA4:
 	pop {r4}
 	pop {r0}
@@ -1684,7 +1684,7 @@ sub_81144BC: @ 81144BC
 	ldrb r1, [r1, 0x4]
 	adds r0, r4, 0
 	bl StartSpriteAnim
-	ldr r0, =sub_80A67D8
+	ldr r0, =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
@@ -1895,7 +1895,7 @@ _0811465C:
 	bne _08114708
 	adds r0, r1, 0
 	movs r1, 0
-	bl sub_80A750C
+	bl SetGreyscaleOrOriginalPalette
 	b _08114714
 	.pool
 _08114708:
@@ -1984,7 +1984,7 @@ _08114776:
 	bne _081147B8
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_80A750C
+	bl SetGreyscaleOrOriginalPalette
 _081147B8:
 	movs r0, 0x8
 	ldrsh r1, [r4, r0]
@@ -2159,7 +2159,7 @@ _0811492E:
 	adds r0, 0x10
 	ldr r1, =gBattleAnimArgs
 	ldrb r1, [r1, 0x2]
-	bl sub_80A750C
+	bl SetGreyscaleOrOriginalPalette
 _0811494A:
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask

@@ -355,7 +355,7 @@ sub_810B8AC: @ 810B8AC
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r1, =sub_80A634C
+	ldr r1, =TranslateSpriteInGrowingCircleOverDuration
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -466,7 +466,7 @@ _0810B9C6:
 	ldr r1, =sub_810B9E8
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, =sub_80A67BC
+	ldr r0, =RunStoredCallbackWhenAffineAnimEnds
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -501,7 +501,7 @@ sub_810B9E8: @ 810B9E8
 	cmp r0, 0x14
 	bne _0810BA1E
 	adds r0, r3, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _0810BA1E:
 	pop {r0}
 	bx r0
@@ -2816,7 +2816,7 @@ sub_810CD1C: @ 810CD1C
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAnim
-	ldr r0, =sub_80A67D8
+	ldr r0, =RunStoredCallbackWhenAnimEnds
 	str r0, [r4, 0x1C]
 	ldr r1, =DestroyAnimSprite
 	adds r0, r4, 0

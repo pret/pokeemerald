@@ -828,7 +828,7 @@ static void sub_810D6A8(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(sprite->data[7], 3);
 
         InitAnimLinearTranslation(sprite);
-        StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+        StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
         sprite->callback = sub_80A6F98;
     }
 }
@@ -839,7 +839,7 @@ void sub_810D714(struct Sprite *sprite)
     sprite->pos1.y = 120;
 
     sprite->data[0] = gBattleAnimArgs[3];
-    sub_80A8048(&sprite->data[4], &sprite->data[5], (void *)(sprite->pos1.y << 8));
+    StorePointerInVars(&sprite->data[4], &sprite->data[5], (void *)(sprite->pos1.y << 8));
 
     sprite->data[6] = gBattleAnimArgs[1];
     sprite->oam.tileNum += gBattleAnimArgs[2] * 4;
@@ -853,9 +853,9 @@ static void sub_810D770(struct Sprite *sprite)
 
     if (sprite->data[0] != 0)
     {
-        var0 = sub_80A8050(sprite->data[4], sprite->data[5]);
+        var0 = LoadPointerFromVars(sprite->data[4], sprite->data[5]);
         var0 -= sprite->data[6];
-        sub_80A8048(&sprite->data[4], &sprite->data[5], var0);
+        StorePointerInVars(&sprite->data[4], &sprite->data[5], var0);
 
         var0 = (void *)(((intptr_t)var0) >> 8);
         sprite->pos1.y = (intptr_t)var0;
@@ -978,7 +978,7 @@ void sub_810DA10(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
     }
 
-    sprite->callback = sub_80A67D8;
+    sprite->callback = RunStoredCallbackWhenAnimEnds;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 

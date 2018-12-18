@@ -342,8 +342,8 @@ void sub_811188C(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
     spriteId = GetAnimBattlerSpriteId(0);
-    sub_80A7270(spriteId, 1);
-    obj_id_set_rotscale(spriteId, 128, 128, 0);
+    PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_BLEND);
+    SetSpriteRotScale(spriteId, 128, 128, 0);
     gSprites[spriteId].invisible = FALSE;
     gTasks[taskId].data[0] = 128;
     gTasks[taskId].data[1] = *gBattleAnimArgs;
@@ -381,11 +381,11 @@ static void sub_811196C(u8 taskId)
     gTasks[taskId].data[0] += 8;
     if (gTasks[taskId].data[0] <= 0xFF)
     {
-        obj_id_set_rotscale(spriteId, gTasks[taskId].data[0], gTasks[taskId].data[0], 0);
+        SetSpriteRotScale(spriteId, gTasks[taskId].data[0], gTasks[taskId].data[0], 0);
     }
     else
     {
-        sub_80A7344(spriteId);
+        ResetSpriteRotScale(spriteId);
         DestroyAnimVisualTask(taskId);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -454,7 +454,7 @@ static void AnimShadowBallStep(struct Sprite *sprite)
         sprite->data[0] += 1;
         break;
     case 3:
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
         break;
     }
 }
@@ -510,7 +510,7 @@ void sub_8111C50(u8 taskId)
     struct Task *task;
     
     task = &gTasks[taskId];
-    task->data[0] = duplicate_obj_of_side_rel2move_in_transparent_mode(1);
+    task->data[0] = CloneBattlerSpriteWithBlend(1);
     if (task->data[0] < 0)
     {
         DestroyAnimVisualTask(taskId);
@@ -536,7 +536,7 @@ void sub_8111C50(u8 taskId)
     gSprites[task->data[0]].data[3] = 0;
     gSprites[task->data[0]].data[4] = 0;
     StoreSpriteCallbackInData6(&gSprites[task->data[0]], SpriteCallbackDummy);
-    gSprites[task->data[0]].callback = sub_80A656C;
+    gSprites[task->data[0]].callback = TranslateAnimLinearSimple;
     task->func = sub_8111D78;
 }
 
@@ -602,7 +602,7 @@ static void sub_8111E78(u8 taskId)
         }
         else
         {
-            task->data[0] = duplicate_obj_of_side_rel2move_in_transparent_mode(1);
+            task->data[0] = CloneBattlerSpriteWithBlend(1);
             if (task->data[0] < 0)
             {
                 FreeSpritePaletteByTag(0x2771);
@@ -1171,7 +1171,7 @@ void sub_8112C6C(u8 taskId)
     task->data[11] = (sub_80A861C(gBattleAnimAttacker, 1) / 2) + 8;
     task->data[7] = 0;
     task->data[5] = sub_80A8328(gBattleAnimAttacker);
-    task->data[6] = GetBattlerSubpriority(gBattleAnimAttacker) - 2;
+    task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 2;
     task->data[3] = 0;
     task->data[4] = 16;
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
@@ -1322,6 +1322,6 @@ static void sub_8112FB8(struct Sprite *sprite)
         gSprites[sprite->data[5]].pos2.x = 0;
         gSprites[sprite->data[5]].pos2.y = 0;
         gSprites[sprite->data[5]].pos1.y -= 8;
-        sprite->callback = move_anim_8074EE0;
+        sprite->callback = DestroySpriteAndMatrix;
     }
 }
