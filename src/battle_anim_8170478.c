@@ -604,19 +604,19 @@ void sub_8170B04(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        sub_80A7270(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[10] = 0x100;
         gTasks[taskId].data[0]++;
         break;
     case 1:
         gTasks[taskId].data[10] += 0x30;
-        obj_id_set_rotscale(spriteId, gTasks[taskId].data[10], gTasks[taskId].data[10], 0);
-        sub_80A7E6C(spriteId);
+        SetSpriteRotScale(spriteId, gTasks[taskId].data[10], gTasks[taskId].data[10], 0);
+        SetBattlerSpriteYOffsetFromYScale(spriteId);
         if (gTasks[taskId].data[10] >= 0x2D0)
             gTasks[taskId].data[0]++;
         break;
     case 2:
-        sub_80A7344(spriteId);
+        ResetSpriteRotScale(spriteId);
         gSprites[spriteId].invisible = 1;
         DestroyAnimVisualTask(taskId);
         break;
@@ -756,7 +756,7 @@ void sub_8170F2C(u8 taskId)
     }
 
     ballId = ItemIdToBallId(gLastUsedItem);
-    subpriority = GetBattlerSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
+    subpriority = GetBattlerSpriteSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
     spriteId = CreateSprite(&gBallSpriteTemplates[ballId], x + 32, y | 80, subpriority);
     gSprites[spriteId].data[0] = 34;
     gSprites[spriteId].data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 0);
@@ -862,7 +862,7 @@ static void sub_8171240(struct Sprite *sprite)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        sub_80A7270(spriteId, 0);
+        PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         gTasks[taskId].data[10] = 256;
         gUnknown_030062DC = 28;
         gUnknown_030062E4 = (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) - (sprite->pos1.y + sprite->pos2.y);
@@ -872,14 +872,14 @@ static void sub_8171240(struct Sprite *sprite)
         break;
     case 1:
         gTasks[taskId].data[10] += 0x20;
-        obj_id_set_rotscale(spriteId, gTasks[taskId].data[10], gTasks[taskId].data[10], 0);
+        SetSpriteRotScale(spriteId, gTasks[taskId].data[10], gTasks[taskId].data[10], 0);
         gTasks[taskId].data[3] += gTasks[taskId].data[2];
         gSprites[spriteId].pos2.y = -gTasks[taskId].data[3] >> 8;
         if (gTasks[taskId].data[10] >= 0x480)
             gTasks[taskId].data[0]++;
         break;
     case 2:
-        sub_80A7344(spriteId);
+        ResetSpriteRotScale(spriteId);
         gSprites[spriteId].invisible = 1;
         gTasks[taskId].data[0]++;
         break;

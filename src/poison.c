@@ -258,7 +258,7 @@ void sub_810DCD0(struct Sprite *sprite)
 
 static void sub_810DD24(struct Sprite *sprite)
 {
-    sub_80A656C(sprite);
+    TranslateAnimLinearSimple(sprite);
 
     sprite->data[1] -= sprite->data[5];
     sprite->data[2] -= sprite->data[6];

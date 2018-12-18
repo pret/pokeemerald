@@ -395,7 +395,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
     lVarY = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + gBattleAnimArgs[3];
     rot = ArcTan2Neg(lVarX - sprite->pos1.x, lVarY - sprite->pos1.y);
     rot += 0xC000;
-    sub_80A73E0(sprite, FALSE, 0x100, 0x100, rot);
+    TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rot);
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = lVarX;
@@ -458,7 +458,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
             u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - x2,
                                   sprite->pos1.y + sprite->pos2.y - y2);
             rotation += 0xC000;
-            sub_80A73E0(sprite, FALSE, 0x100, 0x100, rotation);
+            TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
 
             for (i = 0; i < 8; i++)
                 data[i] = tempData[i];
@@ -479,6 +479,6 @@ void sub_8110994(struct Sprite *sprite)
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 18;
     }
 
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
-    sprite->callback = sub_80A67BC;
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+    sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
 }
