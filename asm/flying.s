@@ -201,7 +201,7 @@ _0810DFC8:
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
 	bl InitAnimLinearTranslation
-	ldr r0, =sub_80A67BC
+	ldr r0, =RunStoredCallbackWhenAffineAnimEnds
 	str r0, [r6, 0x1C]
 	ldr r1, =sub_810E028
 	adds r0, r6, 0
@@ -2056,7 +2056,7 @@ _0810EE42:
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80A73E0
+	bl TrySetSpriteRotScale
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
@@ -2085,7 +2085,7 @@ _0810EE92:
 	ldrsh r3, [r5, r0]
 	str r1, [sp]
 	adds r0, r5, 0
-	bl sub_80A73E0
+	bl TrySetSpriteRotScale
 	ldrb r1, [r5, 0x3]
 	lsls r1, 26
 	lsrs r1, 27
@@ -2409,7 +2409,7 @@ sub_810F084: @ 810F084
 	mov r0, r8
 	movs r1, 0x1
 	adds r2, r3, 0
-	bl sub_80A73E0
+	bl TrySetSpriteRotScale
 	ldr r0, =sub_810F140
 	mov r2, r8
 	str r0, [r2, 0x1C]
@@ -2456,7 +2456,7 @@ sub_810F140: @ 810F140
 	bge _0810F180
 _0810F17A:
 	adds r0, r2, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _0810F180:
 	pop {r0}
 	bx r0

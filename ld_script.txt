@@ -158,10 +158,10 @@ SECTIONS {
         asm/contest_link_80FC4F4.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
-        asm/battle_anim_effects_2.o(.text);
+        src/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
         src/fire.o(.text);
-        asm/electric.o(.text);
+        src/electric.o(.text);
         asm/ice.o(.text);
         src/fight.o(.text);
         src/poison.o(.text);
@@ -485,7 +485,7 @@ SECTIONS {
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
-        src/effects_2.o(.rodata);
+        src/battle_anim_effects_2.o(.rodata);
         src/water.o(.rodata);
         src/fire.o(.rodata);
         src/electric.o(.rodata);

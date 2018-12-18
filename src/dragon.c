@@ -208,13 +208,13 @@ void sub_8113064(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[4];
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->invisible = 1;
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = sub_80A66DC;
 }
 
 static void sub_8113100(struct Sprite *sprite)
 {
-    sub_80A6838(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -235,7 +235,7 @@ static void sub_8113100(struct Sprite *sprite)
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 void sub_81131B4(struct Sprite *sprite)
@@ -253,8 +253,8 @@ void sub_81131B4(struct Sprite *sprite)
 
     sub_80A6864(sprite, gBattleAnimArgs[1]);
     sprite->pos1.y += gBattleAnimArgs[2];
-    sprite->callback = sub_80A67D8;
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    sprite->callback = RunStoredCallbackWhenAnimEnds;
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 void sub_8113224(struct Sprite *sprite)

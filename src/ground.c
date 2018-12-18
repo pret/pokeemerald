@@ -221,7 +221,7 @@ void AnimDirtScatter(struct Sprite *sprite)
     sprite->data[2] = targetXPos + xOffset;
     sprite->data[4] = targetYPos + yOffset;
     sprite->callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 // Moves a particle of dirt in the Mud Sport animation.

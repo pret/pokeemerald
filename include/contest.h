@@ -416,7 +416,6 @@ extern struct ContestResources *gContestResources;
 #define eContestAI (gContestResources->field_C)
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
-#define shared19348 (*gContestResources->field_18)
 
 #define shared15800 (gHeap + 0x18000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))

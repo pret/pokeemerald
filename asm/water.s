@@ -315,7 +315,7 @@ sub_8107408: @ 8107408
 	negs r1, r1
 	ands r1, r2
 	strb r1, [r3]
-	ldr r1, =sub_80A67D8
+	ldr r1, =RunStoredCallbackWhenAnimEnds
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_8107430
 	bl StoreSpriteCallbackInData6
@@ -331,7 +331,7 @@ sub_8107430: @ 8107430
 	strh r1, [r0, 0x2E]
 	ldr r1, =WaitAnimForDuration
 	str r1, [r0, 0x1C]
-	ldr r1, =move_anim_8074EE0
+	ldr r1, =DestroySpriteAndMatrix
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
@@ -711,7 +711,7 @@ sub_8107730: @ 8107730
 	ldr r6, =0x0000fff6
 	strh r6, [r4, 0x26]
 	ldrb r0, [r7]
-	bl sub_80A82E4
+	bl GetBattlerSpriteSubpriority
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl IsContest
@@ -1906,7 +1906,7 @@ sub_81080E4: @ 81080E4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80A7270
+	bl PrepareBattlerSpriteForRotScale
 	ldr r0, =sub_8108140
 	str r0, [r4]
 	pop {r4}
@@ -2026,7 +2026,7 @@ _08108222:
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80A7E6C
+	bl SetBattlerSpriteYOffsetFromYScale
 	ldr r2, =gSprites
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
@@ -2166,7 +2166,7 @@ _08108320:
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80A7344
+	bl ResetSpriteRotScale
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2286,7 +2286,7 @@ sub_8108408: @ 8108408
 	lsrs r6, r0, 24
 	movs r5, 0xAC
 	ldrb r0, [r4]
-	bl sub_80A82E4
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -3517,7 +3517,7 @@ _08108DE2:
 	strh r0, [r4, 0x30]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
@@ -3572,7 +3572,7 @@ _08108E58:
 	strh r0, [r4, 0x30]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A82E4
+	bl GetBattlerSpriteSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
