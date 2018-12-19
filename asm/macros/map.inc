@@ -15,6 +15,7 @@
 	.endm
 
 	.macro object_event index:req, gfx:req, replacement:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
+	.byte \index, \gfx, \replacement, 0
 	.2byte \x
 	.2byte \y
 	.byte \elevation, \movement_type, ((\y_radius << 4) | \x_radius), 0
