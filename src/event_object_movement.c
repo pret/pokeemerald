@@ -1144,7 +1144,7 @@ u8 GetFirstInactiveEventObjectId(void)
 
 u8 GetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId)
 {
-    if (localId < 0xFF)
+    if (localId < EVENT_OBJ_ID_PLAYER)
     {
         return GetEventObjectIdByLocalIdAndMapInternal(localId, mapNum, mapGroupId);
     }

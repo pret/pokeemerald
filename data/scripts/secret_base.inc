@@ -442,7 +442,7 @@ EventScript_275B5B:: @ 8275B5B
 	end
 
 SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
-	applymovement 255, SecretBase_RedCave1_Movement_275BB4
+	applymovement EVENT_OBJ_ID_PLAYER, SecretBase_RedCave1_Movement_275BB4
 	waitmovement 0
 	setvar VAR_0x4097, 1
 	msgbox SecretBase_RedCave1_Text_23B759, MSGBOX_YESNO

@@ -37,7 +37,7 @@ LilycoveCity_ContestLobby_EventScript_21A264:: @ 821A264
 	addobject 4
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A407
 	waitmovement 4
-	applymovement 255, LilycoveCity_ContestLobby_Movement_21A418
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_ContestLobby_Movement_21A418
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_21ADB9, MSGBOX_DEFAULT
 	lockall
@@ -212,7 +212,7 @@ LilycoveCity_ContestLobby_EventScript_21A436:: @ 821A436
 	addobject 11
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A533
 	waitmovement 11
-	applymovement 255, LilycoveCity_ContestLobby_Movement_21A545
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_ContestLobby_Movement_21A545
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_21ADB9, MSGBOX_DEFAULT
 	lockall
@@ -422,12 +422,12 @@ LilycoveCity_ContestLobby_EventScript_21A670:: @ 821A670
 	delay 20
 	applymovement 1, LilycoveCity_ContestLobby_Movement_21A706
 	waitmovement 0
-	applymovement 255, LilycoveCity_ContestLobby_Movement_21A6F2
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_ContestLobby_Movement_21A6F2
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_27B653, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_ContestLobby_Movement_21A6FD
-	applymovement 255, LilycoveCity_ContestLobby_Movement_21A6E8
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_ContestLobby_Movement_21A6E8
 	waitmovement 0
 	releaseall
 	return
@@ -945,7 +945,7 @@ LilycoveCity_ContestLobby_EventScript_21AC49:: @ 821AC49
 	delay 20
 	applymovement 2, LilycoveCity_ContestLobby_Movement_21ACEF
 	waitmovement 0
-	applymovement 255, LilycoveCity_ContestLobby_Movement_21ACDB
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_ContestLobby_Movement_21ACDB
 	waitmovement 0
 	messageautoscroll LilycoveCity_ContestLobby_Text_27B653
 	waitmessage
@@ -953,7 +953,7 @@ LilycoveCity_ContestLobby_EventScript_21AC49:: @ 821AC49
 	closemessage
 	call LilycoveCity_ContestLobby_EventScript_27AD92
 	applymovement 2, LilycoveCity_ContestLobby_Movement_21ACE5
-	applymovement 255, LilycoveCity_ContestLobby_Movement_21ACD0
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_ContestLobby_Movement_21ACD0
 	waitmovement 0
 	release
 	return

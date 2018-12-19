@@ -8,7 +8,7 @@ Route121_SafariZoneEntrance_MapScript2_22BBC1: @ 822BBC1
 
 Route121_SafariZoneEntrance_EventScript_22BBCB:: @ 822BBCB
 	lockall
-	applymovement 255, Route121_SafariZoneEntrance_Movement_22BBDD
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BBDD
 	waitmovement 0
 	setvar VAR_0x40A4, 0
 	releaseall
@@ -46,7 +46,7 @@ Route121_SafariZoneEntrance_EventScript_22BC0E:: @ 822BC0E
 
 Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 	lockall
-	applymovement 255, Route121_SafariZoneEntrance_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_2725A6
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_2A4F74, MSGBOX_YESNO
@@ -78,7 +78,7 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	hidemoneybox
 	nop
 	nop
-	applymovement 255, Route121_SafariZoneEntrance_Movement_22BD18
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BD18
 	waitmovement 0
 	special EnterSafariMode
 	setvar VAR_0x40A4, 2
@@ -116,7 +116,7 @@ Route121_SafariZoneEntrance_EventScript_22BD06:: @ 822BD06
 	hidemoneybox
 	nop
 	nop
-	applymovement 255, Route121_SafariZoneEntrance_Movement_22BD16
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BD16
 	waitmovement 0
 	releaseall
 	end

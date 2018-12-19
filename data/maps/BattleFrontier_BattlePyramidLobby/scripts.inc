@@ -434,7 +434,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D42:: @ 8250D42
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D56:: @ 8250D56
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_250DC4
-	applymovement 255, BattleFrontier_BattlePyramidLobby_Movement_250DCD
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DCD
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251569, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
@@ -457,7 +457,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D9C:: @ 8250D9C
 	closemessage
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_250DD5
 	waitmovement 0
-	applymovement 255, BattleFrontier_BattlePyramidLobby_Movement_250DD8
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePyramidLobby_Movement_250DD8
 	waitmovement 0
 	return
 

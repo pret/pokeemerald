@@ -62,7 +62,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	call_if 1, MtChimney_EventScript_22EEC7
 	compare VAR_FACING, 2
 	call_if 1, MtChimney_EventScript_22EED2
-	applymovement 255, MtChimney_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_Movement_2725A4
 	waitmovement 0
 	msgbox MtChimney_Text_22FC3D, MSGBOX_DEFAULT
 	closemessage

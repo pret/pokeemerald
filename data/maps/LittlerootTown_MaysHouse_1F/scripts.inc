@@ -62,7 +62,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8964:: @ 81F8964
 	lockall
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1F898A
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F898A
 	applymovement 1, LittlerootTown_MaysHouse_1F_Movement_1F898A
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
@@ -95,7 +95,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	waitmovement 0
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_27259A
 	waitmovement 0
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725A8
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -221,7 +221,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8B2A:: @ 81F8B2A
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725AA
 	waitmovement 0
 	return
 
@@ -267,19 +267,19 @@ LittlerootTown_MaysHouse_1F_Movement_1F8B62: @ 81F8B62
 	step_end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8B6A:: @ 81F8B6A
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1F8BA0
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F8BA0
 	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8BAF
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8B7C:: @ 81F8B7C
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1F8BA4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F8BA4
 	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8BB5
 	waitmovement 0
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8B8E:: @ 81F8B8E
-	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_1F8BAB
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_1F8BAB
 	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_1F8BBF
 	waitmovement 0
 	return

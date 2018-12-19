@@ -39,13 +39,13 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	closemessage
 	playbgm MUS_TSURETEK, 0
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212534
-	applymovement 255, RustboroCity_DevonCorp_3F_Movement_212558
+	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_212558
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_212E2F, MSGBOX_DEFAULT
 	closemessage
 	fadedefaultbgm
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212543
-	applymovement 255, RustboroCity_DevonCorp_3F_Movement_212566
+	applymovement EVENT_OBJ_ID_PLAYER, RustboroCity_DevonCorp_3F_Movement_212566
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_212609, MSGBOX_DEFAULT
 	giveitem_std ITEM_LETTER
