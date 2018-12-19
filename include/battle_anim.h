@@ -144,6 +144,11 @@ void SetGreyscaleOrOriginalPalette(u16 a1, bool8 a2);
 void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds);
 bool8 RunAffineAnimFromTaskData(struct Task *task);
 void sub_80A78AC(struct Sprite *sprite);
+void sub_80A6BFC(struct UnknownAnimStruct2 *unk, u8 unused);
+u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10);
+void sub_80A749C(struct Sprite *sprite);
+void sub_80A6814(u8 taskId);
+void sub_80A8610(struct Sprite *sprite);
 
 enum
 {
@@ -185,6 +190,7 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, 
 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
+void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u8 *arg8, const u8 *arg9, const u16 *palette);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);
 
