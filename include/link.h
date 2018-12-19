@@ -311,5 +311,6 @@ void sub_800AD10(void);
 void sub_800AB18(void);
 void sub_8009F18(void);
 bool8 sub_800AA60(void);
+void sub_800ABF4(u16 a0);
 
 #endif // GUARD_LINK_H

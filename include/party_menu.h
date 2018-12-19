@@ -61,6 +61,8 @@ u8 sub_81B205C(struct Pokemon* a);
 void sub_81B617C(void);
 u8 sub_81B6D14(u16 a);
 bool8 hm_add_c3_without_phase_2(void);
+void sub_81B5D30(void);
+void sub_81B5D4C(u8 *a0, u8 *a1, u8 a2);
 
 extern void dp05_ether(u8, u16, TaskFunc);
 extern void dp05_pp_up(u8, u16, TaskFunc);

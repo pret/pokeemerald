@@ -16,5 +16,6 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 u8 UpdateMonIconFrame(struct Sprite *sprite);
 void LoadMonIconPalette(u16 species);
 void sub_80D328C(struct Sprite *sprite);
+void sub_80D3014(struct Sprite *sprite);
 
 #endif // GUARD_POKEMON_ICON_H

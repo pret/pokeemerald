@@ -4754,4 +4754,9 @@ extern const u32 gUnknown_08C2DDA4[];
 extern const u32 gUnknown_08C2EA50[];
 extern const u32 gUnknown_08C2EA9C[];
 
+// Trade
+extern const u16 gUnknown_08DDB3E4[];
+extern const u8 gUnknown_08DDB464[];
+extern const u16 gUnknown_08DDCF04[];
+
 #endif //GUARD_GRAPHICS_H
