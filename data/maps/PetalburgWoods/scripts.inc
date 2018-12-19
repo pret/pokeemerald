@@ -30,7 +30,7 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
 	call PetalburgWoods_EventScript_22E138
-	applymovement 255, PetalburgWoods_Movement_22E1E0
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_22E1E0
 	applymovement 4, PetalburgWoods_Movement_22E1C2
 	waitmovement 0
 	goto PetalburgWoods_EventScript_22E1A7
@@ -41,7 +41,7 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	call PetalburgWoods_EventScript_22E124
 	applymovement 4, PetalburgWoods_Movement_22E1D0
 	waitmovement 0
-	applymovement 255, PetalburgWoods_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_2725A4
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E34F, MSGBOX_DEFAULT
 	closemessage
@@ -59,14 +59,14 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	applymovement 4, PetalburgWoods_Movement_22E1EA
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E457, MSGBOX_DEFAULT
-	applymovement 255, PetalburgWoods_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_2725A6
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E4A5, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_8, PetalburgWoods_Text_22E542
 	applymovement 3, PetalburgWoods_Movement_22E1F9
 	waitmovement 0
 	call PetalburgWoods_EventScript_22E138
-	applymovement 255, PetalburgWoods_Movement_22E1E0
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_22E1E0
 	applymovement 4, PetalburgWoods_Movement_22E1D7
 	waitmovement 0
 	goto PetalburgWoods_EventScript_22E1A7
@@ -85,7 +85,7 @@ PetalburgWoods_EventScript_22E138:: @ 822E138
 	applymovement 3, PetalburgWoods_Movement_22E1FD
 	waitmovement 0
 	removeobject 3
-	applymovement 255, PetalburgWoods_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgWoods_Movement_2725AA
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E63D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL

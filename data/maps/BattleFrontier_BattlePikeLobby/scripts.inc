@@ -263,7 +263,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25BA80:: @ 825BA80
 
 BattleFrontier_BattlePikeLobby_EventScript_25BA94:: @ 825BA94
 	applymovement 1, BattleFrontier_BattlePikeLobby_Movement_25BAA7
-	applymovement 255, BattleFrontier_BattlePikeLobby_Movement_25BAA6
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_25BAA6
 	waitmovement 0
 	return
 

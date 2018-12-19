@@ -114,7 +114,7 @@ LittlerootTown_EventScript_1E7EF9:: @ 81E7EF9
 LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	delay 15
 	playse SE_DANSA
-	applymovement 255, LittlerootTown_Movement_1E7FAC
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FAC
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
@@ -129,12 +129,12 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	msgbox LittlerootTown_Text_1E86BC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_1E7F9D
-	applymovement 255, LittlerootTown_Movement_1E7FA4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FA4
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	applymovement 4, LittlerootTown_Movement_1E7FA1
-	applymovement 255, LittlerootTown_Movement_1E7FA9
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FA9
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setvar VAR_0x4092, 3
@@ -280,7 +280,7 @@ LittlerootTown_EventScript_1E80AD:: @ 81E80AD
 	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1E80DF
-	applymovement 255, LittlerootTown_Movement_1E80EB
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E80EB
 	waitmovement 0
 	msgbox LittlerootTown_Text_1E8C07, MSGBOX_DEFAULT
 	closemessage
@@ -362,7 +362,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	lockall
 	applymovement 1, LittlerootTown_Movement_2725A8
 	waitmovement 0
-	applymovement 255, LittlerootTown_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_1E8C3A, MSGBOX_DEFAULT
@@ -533,70 +533,70 @@ LittlerootTown_EventScript_1E82F0:: @ 81E82F0
 	return
 
 LittlerootTown_EventScript_1E8333:: @ 81E8333
-	applymovement 255, LittlerootTown_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725AA
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85D1
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E8348:: @ 81E8348
-	applymovement 255, LittlerootTown_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725AA
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85D8
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E835D:: @ 81E835D
-	applymovement 255, LittlerootTown_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85DF
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E8372:: @ 81E8372
-	applymovement 255, LittlerootTown_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85E4
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E8387:: @ 81E8387
-	applymovement 255, LittlerootTown_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85EA
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E839C:: @ 81E839C
-	applymovement 255, LittlerootTown_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85ED
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83B1:: @ 81E83B1
-	applymovement 255, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F1
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83C6:: @ 81E83C6
-	applymovement 255, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F5
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83DB:: @ 81E83DB
-	applymovement 255, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F8
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83F0:: @ 81E83F0
-	applymovement 255, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85FE
 	waitmovement 0

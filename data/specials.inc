@@ -286,8 +286,8 @@ gSpecials:: @ 81DBA64
 	def_special GameClear
 	def_special ShakeScreenInElevator
 	def_special nullsub_55
-	def_special SpawnScriptEventObject
-	def_special RemoveScriptEventObject
+	def_special SpawnCameraObject
+	def_special RemoveCameraObject
 	def_special GetPokeblockNameByMonNature
 	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord

@@ -9,7 +9,7 @@ SafariZone_South_MapScript2_23D284: @ 823D284
 
 SafariZone_South_EventScript_23D28E:: @ 823D28E
 	lockall
-	applymovement 255, SafariZone_South_Movement_23D2C5
+	applymovement EVENT_OBJ_ID_PLAYER, SafariZone_South_Movement_23D2C5
 	waitmovement 0
 	applymovement 1, SafariZone_South_Movement_23D2C7
 	waitmovement 0
@@ -77,7 +77,7 @@ SafariZone_South_EventScript_23D31A:: @ 823D31A
 SafariZone_South_EventScript_23D33F:: @ 823D33F
 	applymovement 1, SafariZone_South_Movement_23D38A
 	waitmovement 0
-	applymovement 255, SafariZone_South_Movement_23D385
+	applymovement EVENT_OBJ_ID_PLAYER, SafariZone_South_Movement_23D385
 	waitmovement 0
 	goto SafariZone_South_EventScript_23D373
 	end
@@ -85,7 +85,7 @@ SafariZone_South_EventScript_23D33F:: @ 823D33F
 SafariZone_South_EventScript_23D359:: @ 823D359
 	applymovement 1, SafariZone_South_Movement_23D38D
 	waitmovement 0
-	applymovement 255, SafariZone_South_Movement_23D387
+	applymovement EVENT_OBJ_ID_PLAYER, SafariZone_South_Movement_23D387
 	waitmovement 0
 	goto SafariZone_South_EventScript_23D373
 	end

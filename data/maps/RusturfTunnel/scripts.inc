@@ -86,13 +86,13 @@ RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	end
 
 RusturfTunnel_EventScript_22CF5D:: @ 822CF5D
-	applymovement 255, RusturfTunnel_Movement_22D042
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D042
 	applymovement 1, RusturfTunnel_Movement_22D067
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_22CF6F:: @ 822CF6F
-	applymovement 255, RusturfTunnel_Movement_22D045
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
 	applymovement 10, RusturfTunnel_Movement_2725AA
@@ -100,7 +100,7 @@ RusturfTunnel_EventScript_22CF6F:: @ 822CF6F
 	return
 
 RusturfTunnel_EventScript_22CF8B:: @ 822CF8B
-	applymovement 255, RusturfTunnel_Movement_22D045
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
 	applymovement 10, RusturfTunnel_Movement_2725AA
@@ -110,7 +110,7 @@ RusturfTunnel_EventScript_22CF8B:: @ 822CF8B
 RusturfTunnel_EventScript_22CFA7:: @ 822CFA7
 	applymovement 1, RusturfTunnel_Movement_2725A6
 	waitmovement 0
-	applymovement 255, RusturfTunnel_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_2725AA
 	waitmovement 0
 	return
 
@@ -135,7 +135,7 @@ RusturfTunnel_EventScript_22CFD4:: @ 822CFD4
 	return
 
 RusturfTunnel_EventScript_22CFE6:: @ 822CFE6
-	applymovement 255, RusturfTunnel_Movement_22D02F
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D02F
 	applymovement 10, RusturfTunnel_Movement_22D023
 	applymovement 1, RusturfTunnel_Movement_22D058
 	waitmovement 0
@@ -317,7 +317,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	msgbox RusturfTunnel_Text_22D2E1, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_GOODS
 	closemessage
-	applymovement 255, RusturfTunnel_Movement_22D178
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D178
 	applymovement 6, RusturfTunnel_Movement_22D181
 	waitmovement 0
 	removeobject 6
@@ -325,7 +325,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	addobject 5
 	applymovement 5, RusturfTunnel_Movement_22D18B
 	waitmovement 0
-	applymovement 255, RusturfTunnel_Movement_22D17E
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D17E
 	applymovement 5, RusturfTunnel_Movement_22D1A4
 	waitmovement 0
 	msgbox RusturfTunnel_Text_22D395, MSGBOX_DEFAULT
@@ -338,7 +338,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	waitbuttonpress
 	waitmoncry
 	closemessage
-	applymovement 255, RusturfTunnel_Movement_22D19F
+	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D19F
 	applymovement 5, RusturfTunnel_Movement_22D193
 	applymovement 7, RusturfTunnel_Movement_22D1A7
 	waitmovement 0

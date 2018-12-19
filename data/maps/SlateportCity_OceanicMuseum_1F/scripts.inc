@@ -7,14 +7,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AD96:: @ 820AD96
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AD9F:: @ 820AD9F
 	lockall
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_2725A4
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_20ADC1
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADB0:: @ 820ADB0
 	lockall
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_2725A8
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_20ADC1
 	end
@@ -28,7 +28,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	hidemoneybox
 	nop
 	nop
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_20AE4B
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_20AE4B
 	waitmovement 0
 	releaseall
 	end
@@ -57,7 +57,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 	hidemoneybox
 	nop
 	nop
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_20AE4B
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_20AE4B
 	waitmovement 0
 	releaseall
 	end
@@ -178,7 +178,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AF6C:: @ 820AF6C
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_20AFBF
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_20AFBF
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_20AFCE
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_20AFAA
@@ -191,7 +191,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AF83:: @ 820AF83
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AF93:: @ 820AF93
-	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_20AFC4
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_20AFC4
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_20AFC7
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_20AFAA

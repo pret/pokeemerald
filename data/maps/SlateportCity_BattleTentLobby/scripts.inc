@@ -182,12 +182,12 @@ SlateportCity_BattleTentLobby_EventScript_2089AC:: @ 82089AC
 
 SlateportCity_BattleTentLobby_EventScript_2089C9:: @ 82089C9
 	applymovement 1, SlateportCity_BattleTentLobby_Movement_2089F8
-	applymovement 255, SlateportCity_BattleTentLobby_Movement_2089FF
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_2089FF
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, SlateportCity_BattleTentLobby_Movement_2089FC
-	applymovement 255, SlateportCity_BattleTentLobby_Movement_208A03
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_208A03
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim
