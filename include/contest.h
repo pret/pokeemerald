@@ -385,6 +385,14 @@ struct UnknownContestStruct4
     u8 unk2_2:1;
 };
 
+struct UnknownContestStruct6
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
 struct ContestResourcesField1C
 {
     u8 filler_00[0x40];

@@ -42,6 +42,7 @@
 #include "international_string_util.h"
 #include "data2.h"
 #include "constants/rgb.h"
+#include "contest_ai.h"
 
 extern void (*gFieldCallback)(void);
 
@@ -104,7 +105,7 @@ void sub_80DB2BC(void);
 void prints_contest_move_description(u16);
 u16 sub_80DE84C(u16);
 void sub_80DB89C(void);
-u16 sub_80DB8B8(u8);
+u16 GetChosenMove(u8);
 void sub_80DB918(void);
 bool8 Contest_IsMonsTurnDisabled(u8);
 void sub_80DBF68(void);
@@ -169,6 +170,9 @@ void sub_80DF9D4(u8 *);
 void sub_80DF9E0(u8 *, s32);
 void ContestBG_FillBoxWithTile(u8, u16, u8, u8, u8, u8, u8);
 void Contest_PrintTextToBg0WindowStd(u8, const u8 *);
+s16 sub_80DBD34(u8);
+void DetermineFinalStandings(void);
+bool8 sub_80DBF30(s32, s32, struct UnknownContestStruct6 *);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gContestMonConditions[4] = {0};
@@ -199,6 +203,7 @@ extern const struct WindowTemplate gUnknown_08587F44[];
 extern const u8 *const gUnknown_08587D90[];
 extern const u8 *const gUnknown_08587F08[];
 extern const u8 *const gUnknown_08587F1C[];
+extern const u8 *const gUnknown_0827E8DA[];
 extern const u8 gText_0827D55A[];
 extern const u8 gText_0827E793[];
 extern const u8 gText_0827E32E[];
@@ -855,7 +860,7 @@ void sub_80D8894(u8 taskId)
 {
     if (gIsLinkContest & 1)
     {
-        u16 var = sub_80DB8B8(gContestPlayerMonIndex);
+        u16 var = GetChosenMove(gContestPlayerMonIndex);
         u8 taskId2;
 
         gContestResources->field_4[gContestPlayerMonIndex].currMove = var;
@@ -934,7 +939,7 @@ void sub_80D8A88(u8 taskId)
 
             for (i = 0; i + gNumLinkContestPlayers < 4; i++)
             {
-                gContestResources->field_4[gNumLinkContestPlayers + i].currMove = sub_80DB8B8(gNumLinkContestPlayers + i);
+                gContestResources->field_4[gNumLinkContestPlayers + i].currMove = GetChosenMove(gNumLinkContestPlayers + i);
             }
         }
         gTasks[taskId].data[0] = 0;
@@ -2740,3 +2745,300 @@ bool8 sub_80DB798(u8 a)
     }
     return r9;
 }
+
+void sub_80DB884(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80DB798(i);
+}
+
+void sub_80DB89C(void)
+{
+	FillWindowPixelBuffer(4, 0);
+	CopyWindowToVram(4, 2);
+	Contest_SetBgCopyFlags(0);
+}
+
+u16 GetChosenMove(u8 a)
+{
+    if (Contest_IsMonsTurnDisabled(a))
+        return 0;
+    if (a == gContestPlayerMonIndex)
+    {
+        return gContestMons[a].moves[sContest.playerMoveChoice];
+    }
+    else
+    {
+        u8 moveChoice;
+
+        ContestAI_ResetAI(a);
+        moveChoice = ContestAI_GetActionToUse();
+        return gContestMons[a].moves[moveChoice];
+    }	
+}
+
+void sub_80DB918(void)
+{
+	s32 i;
+
+    for (i = 0; i < 4; i++)
+		sContestantStatus[i].currMove = GetChosenMove(i); 
+}
+
+void sub_80DB944(void)
+{
+	s32 i;
+    s32 j;
+    s16 arr[4];
+
+    for (i = 0; i < 4; i++)
+    {
+        sContestantStatus[i].unk4 += sContestantStatus[i].appeal2;
+        arr[i] = sContestantStatus[i].unk4;
+    }
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 3; j > i; j--)
+        {
+            if (arr[j - 1] < arr[j])
+            {
+                u16 temp = arr[j];
+
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+        }
+    }
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            if (sContestantStatus[i].unk4 == arr[j])
+            {
+                sContestantStatus[i].unkB_0 = j;
+                break;
+            }
+        }
+    }
+    sub_80DCE58(1);
+    sub_80DD590();
+}
+
+void sub_80DBA18(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 attentionLevel;
+
+        if (sContestantStatus[i].currMove == MOVE_NONE)
+            attentionLevel = 5;
+        else if (sContestantStatus[i].appeal2 <= 0)
+            attentionLevel = 0;
+        else if (sContestantStatus[i].appeal2 < 30)
+            attentionLevel = 1;
+        else if (sContestantStatus[i].appeal2 < 60)
+            attentionLevel = 2;
+        else if (sContestantStatus[i].appeal2 < 80)
+            attentionLevel = 3;
+        else
+            attentionLevel = 4;
+
+        sContestantStatus[i].attentionLevel = attentionLevel;
+    }
+}
+
+bool8 sub_80DBA68(u8 a)
+{
+    if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void sub_80DBAA0(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        sContestantStatus[i].appeal2 = 0;
+        sContestantStatus[i].appeal1 = 0;
+        sContestantStatus[i].jamSafetyCount = 0;
+        if (sContestantStatus[i].numTurnsSkipped > 0)
+            sContestantStatus[i].numTurnsSkipped--;
+        sContestantStatus[i].jam = 0;
+        sContestantStatus[i].resistant = 0;
+        sContestantStatus[i].jamReduction = 0;
+        sContestantStatus[i].immune = 0;
+        sContestantStatus[i].moreEasilyStartled = 0;
+        sContestantStatus[i].usedRepeatableMove = 0;
+        sContestantStatus[i].nervous = 0;
+        sContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
+        sContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
+        sContestantStatus[i].conditionMod = 0;
+        sContestantStatus[i].unk15_2 = sContestantStatus[i].disappointedRepeat;
+        sContestantStatus[i].disappointedRepeat = FALSE;
+        sContestantStatus[i].turnOrderModAction = 0;
+        sContestantStatus[i].appealTripleCondition = 0;
+        if (sContestantStatus[i].turnSkipped)
+        {
+            sContestantStatus[i].numTurnsSkipped = 1;
+            sContestantStatus[i].turnSkipped = 0;
+        }
+        if (sContestantStatus[i].exploded)
+        {
+            sContestantStatus[i].noMoreTurns = 1;
+            sContestantStatus[i].exploded = 0;
+        }
+        sContestantStatus[i].overrideCategoryExcitementMod = 0;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        sContestantStatus[i].prevMove = sContestantStatus[i].currMove;
+        sContest.unk19220[sContest.turnNumber][i] = sContestantStatus[i].currMove;
+        sContest.unk19248[sContest.turnNumber][i] = Contest_GetMoveExcitement(sContestantStatus[i].currMove);
+        sContestantStatus[i].currMove = MOVE_NONE;
+    }
+    shared19328.excitementFrozen = 0;
+}
+
+bool8 Contest_IsMonsTurnDisabled(u8 a)
+{
+    if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80DBCE0(u8 a)
+{
+    gUnknown_02039F18[a] = sub_80DBD34(a);
+    gUnknown_02039F08[a] = gContestMonConditions[a] + gUnknown_02039F18[a];
+}
+
+void sub_80DBD18(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80DBCE0(i);
+    DetermineFinalStandings();
+}
+
+s16 sub_80DBD34(u8 a)
+{
+    return gUnknown_02039F10[a] * 2;
+}
+
+void DetermineFinalStandings(void)
+{
+    u16 sp0[4] = {0};
+    struct UnknownContestStruct6 sp8[4];
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 4; i++)
+    {
+        s32 r2;
+
+        sp0[i] = Random();
+        for (r2 = 0; r2 < i; r2++)
+        {
+            if (sp0[i] == sp0[r2])
+            {
+                i--;
+                break;
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        sp8[i].unk0 = gUnknown_02039F08[i];
+        sp8[i].unk4 = gContestMonConditions[i];
+        sp8[i].unk8 = sp0[i];
+        sp8[i].unkC = i;
+    }
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 3; j > i; j--)
+        {
+            if (sub_80DBF30(j - 1, j, sp8))
+            {
+                struct UnknownContestStruct6 temp;
+
+                temp.unk0 = sp8[j - 1].unk0;
+                temp.unk4 = sp8[j - 1].unk4;
+                temp.unk8 = sp8[j - 1].unk8;
+                temp.unkC = sp8[j - 1].unkC;
+
+                sp8[j - 1].unk0 = sp8[j].unk0;
+                sp8[j - 1].unk4 = sp8[j].unk4;
+                sp8[j - 1].unk8 = sp8[j].unk8;
+                sp8[j - 1].unkC = sp8[j].unkC;
+
+                sp8[j].unk0 = temp.unk0;
+                sp8[j].unk4 = temp.unk4;
+                sp8[j].unk8 = temp.unk8;
+                sp8[j].unkC = temp.unkC;
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+        gContestFinalStandings[sp8[i].unkC] = i;
+}
+
+void sub_80DBED4(void)
+{
+	if ((gIsLinkContest & 1))
+    {
+        gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] = 
+        ((gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1) > 0x270F) ? 0x270F :
+        (gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1);
+        
+    }
+}
+
+bool8 sub_80DBF30(s32 a, s32 b, struct UnknownContestStruct6 *c)
+{
+	bool8 retVal;
+
+    if (c[a].unk0 < c[b].unk0)
+        retVal = TRUE;
+    else if (c[a].unk0 > c[b].unk0)
+        retVal = FALSE;
+    else if (c[a].unk4 < c[b].unk4)
+        retVal = TRUE;
+    else if (c[a].unk4 > c[b].unk4)
+        retVal = FALSE;
+    else if (c[a].unk8 < c[b].unk8)
+        retVal = TRUE;
+    else
+        retVal = FALSE;
+    return retVal;
+}
+
+void sub_80DBF68(void)
+{
+	gBattle_BG0_Y = 0;
+	gBattle_BG2_Y = 0;
+	sub_80DB89C();
+	Contest_StartTextPrinter((u8*) &gUnknown_0827E8DA, 0);
+}
+
+void sub_80DBF90(void)
+{
+	u16 temp = BGCNT_WRAP;
+	s32 i;
+	for(i = 3; i >= 0; i--)
+	{
+	    ContestBG_FillBoxWithIncrementingTile(0, temp, 0, 0x16, 0, 0, 0, 0);
+	}
+}
+
