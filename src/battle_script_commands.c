@@ -8648,7 +8648,7 @@ static void atkAE_healpartystatus(void)
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityBit = GetMonData(&party[i], MON_DATA_ALT_ABILITY);
 
-            if (species != 0 && species != SPECIES_EGG)
+            if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
                 u8 ability;
 

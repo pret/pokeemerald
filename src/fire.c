@@ -466,7 +466,7 @@ static void sub_8108EC8(struct Sprite *sprite)
 
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 
-    sprite->callback = sub_80A634C;
+    sprite->callback = TranslateSpriteInGrowingCircleOverDuration;
     sprite->callback(sprite);
 }
 
@@ -479,13 +479,13 @@ static void sub_8108F08(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[2] = gBattleAnimArgs[3];
 
-    sprite->callback = sub_80A656C;
+    sprite->callback = TranslateAnimLinearSimple;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
 static void sub_8108F4C(struct Sprite *sprite)
 {
-    sub_80A6838(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
 
     if (GetBattlerSide(gBattleAnimAttacker))
     {
@@ -538,12 +538,12 @@ static void sub_8109028(struct Sprite *sprite)
     }
 
     if (sprite->data[0] == sprite->data[1])
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
 }
 
 static void sub_8109064(struct Sprite *sprite)
 {
-    sub_80A6838(sprite);
+    SetSpriteCoordsToAnimAttackerCoords(sprite);
 
     if (GetBattlerSide(gBattleAnimAttacker))
     {
@@ -588,7 +588,7 @@ static void sub_81090D8(struct Sprite *sprite)
     }
     else
     {
-        move_anim_8074EE0(sprite);
+        DestroySpriteAndMatrix(sprite);
     }
 }
 
@@ -779,7 +779,7 @@ void sub_8109460(u8 taskId) // initialize animation task for Move_ERUPTION?
     task->data[5] = GetBattlerSide(gBattleAnimAttacker);
     task->data[6] = 0;
 
-    sub_80A7270(task->data[15], 0);
+    PrepareBattlerSpriteForRotScale(task->data[15], ST_OAM_OBJ_NORMAL);
 
     task->func = sub_81094D0;
 }
@@ -816,7 +816,7 @@ static void sub_81094D0(u8 taskId) // animate Move_ERUPTION?
 
         if(!sub_80A80C8(task))
         {
-            sub_80A7E6C(task->data[15]);
+            SetBattlerSpriteYOffsetFromYScale(task->data[15]);
             gSprites[task->data[15]].pos2.x = 0;
 
             task->data[1] = 0;
@@ -879,7 +879,7 @@ static void sub_81094D0(u8 taskId) // animate Move_ERUPTION?
         if (!sub_80A80C8(task))
         {
             gSprites[task->data[15]].pos1.y = task->data[4];
-            sub_80A7344(task->data[15]);
+            ResetSpriteRotScale(task->data[15]);
 
             task->data[2] = 0;
             task->data[0]++;
