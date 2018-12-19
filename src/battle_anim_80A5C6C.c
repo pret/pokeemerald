@@ -906,7 +906,7 @@ void sub_80A6B90(struct UnknownAnimStruct2 *unk, u32 arg1)
     }
 }
 
-void sub_80A6BFC(struct UnknownAnimStruct2 *unk)
+void sub_80A6BFC(struct UnknownAnimStruct2 *unk, u8 unused)
 {
     unk->bgTiles = gUnknown_0202305C;
     unk->unk4 = (u16 *)gUnknown_02023060;
