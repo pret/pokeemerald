@@ -12444,7 +12444,7 @@ _081CD174:
 	adds r1, r3, 0
 	movs r2, 0x8
 	mov r3, sp
-	bl SetBoxMonDataFromAnyBox
+	bl SetBoxMonDataAt
 _081CD180:
 	ldr r0, =0x00006304
 	adds r1, r6, r0

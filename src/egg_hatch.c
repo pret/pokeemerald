@@ -31,6 +31,7 @@
 #include "international_string_util.h"
 #include "naming_screen.h"
 #include "field_screen.h"
+#include "pokemon_storage_system.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData
@@ -61,8 +62,6 @@ extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
 
 extern void play_some_sound(void);
-extern u16 sub_80D22D0(void);
-extern u8 CountPartyAliveNonEggMonsExcept(u8);
 
 static void Task_EggHatch(u8 taskID);
 static void CB2_EggHatch_0(void);
@@ -888,7 +887,7 @@ u8 GetEggStepsToSubtract(void)
 
 u16 sub_80722E0(void)
 {
-    u16 value = sub_80D22D0();
-    value += CountPartyAliveNonEggMonsExcept(6);
-    return value;
+    u16 aliveNonEggMonsCount = CountStorageNonEggMons();
+    aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(6);
+    return aliveNonEggMonsCount;
 }

@@ -17996,7 +17996,7 @@ _081B9980:
 	cmp r6, r0
 	bcc _081B9958
 	mov r0, r8
-	bl sub_80D23A8
+	bl AnyStorageMonWithMove
 	cmp r0, 0x1
 	beq _081B999C
 	ldr r1, =gSpecialVar_Result

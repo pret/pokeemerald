@@ -251,14 +251,6 @@ struct Pokemon
     u16 spDefense;
 };
 
-struct PokemonStorage
-{
-    /*0x0000*/ u8 currentBox;
-    /*0x0001*/ struct BoxPokemon boxes[14][30];
-    /*0x8344*/ u8 boxNames[14][9];
-    /*0x83C2*/ u8 boxWallpapers[14];
-};
-
 struct Unknown_806F160_Struct
 {
     u8 field_0_0:4;
@@ -430,7 +422,6 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
-extern struct PokemonStorage* gPokemonStoragePtr;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gFacilityClassToPicIndex[];
