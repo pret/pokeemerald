@@ -4736,6 +4736,13 @@ extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
 
+extern const u32 gUnknown_08D95E00[];
+extern const u32 gUnknown_08D960D0[];
+extern const u32 gUnknown_08D963A4[];
+extern const u32 gBattleAnimBackgroundImage_Surf[];
+extern const u32 gBattleAnimBackgroundPalette_Surf[];
+extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
+
 // Berry blender
 extern const u32 gBerryBlenderArrowTiles[];
 extern const u32 gBerryBlenderStartTiles[];
