@@ -692,26 +692,26 @@ gBattleAnims_Special::
 Move_ROOST:
 	loadspritegfx ANIM_TAG_WHITE_FEATHER
 	loadspritegfx ANIM_TAG_BLUE_STAR
-	monbg ANIM_DEF_PARTNER
+	monbg ANIM_ATTACKER
 	monbgprio_29
 	playsewithpan SE_W080, SOUND_PAN_TARGET
 	delay 0
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 64, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 64, 2, 104, 11304, 32, 1
 	delay 6
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 32, 2, 104, 11304, 32, 1
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 0, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 32, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 0, 2, 104, 11304, 32, 1
 	delay 6
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 224, 2, 104, 11304, 32, 1
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 128, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 224, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 128, 2, 104, 11304, 32, 1
 	delay 6
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 192, 2, 104, 11304, 32, 1
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 160, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 192, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 160, 2, 104, 11304, 32, 1
 	delay 6
-	createsprite gUnknown_08596388, ANIM_TARGET, 0, 0, -16, 96, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, ANIM_ATTACKER, 0, 0, -16, 96, 2, 104, 11304, 32, 1
 	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
 	call HealingEffect
 	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
 	end
 	
 Move_GRAVITY:
