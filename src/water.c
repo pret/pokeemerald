@@ -1,9 +1,20 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_anim.h"
+#include "random.h"
+#include "sprite.h"
+#include "task.h"
+#include "trig.h"
+#include "util.h"
+#include "constants/battle.h"
 #include "constants/rgb.h"
 
 extern void sub_810721C(struct Sprite *);
+extern void sub_8107228(struct Sprite *);
 extern void sub_8107260(struct Sprite *);
+extern void sub_8107380(struct Sprite *);
+extern void sub_8107408(struct Sprite *);
+extern void sub_8107430(struct Sprite *);
 extern void sub_810744C(struct Sprite *);
 extern void sub_81075EC(struct Sprite *);
 extern void sub_8107730(struct Sprite *);
@@ -440,3 +451,111 @@ const struct SpriteTemplate gUnknown_08595328 =
     .affineAnims = gUnknown_085952F4,
     .callback = sub_80A8EE4,
 };
+
+void AnimTask_CreateRaindrops(u8 taskId)
+{
+    u8 x, y;
+    
+    if (gTasks[taskId].data[0] == 0)
+    {
+        gTasks[taskId].data[1] = gBattleAnimArgs[0];
+        gTasks[taskId].data[2] = gBattleAnimArgs[1];
+        gTasks[taskId].data[3] = gBattleAnimArgs[2];
+    }
+    gTasks[taskId].data[0]++;
+    if (gTasks[taskId].data[0] % gTasks[taskId].data[2] == 1)
+    {
+        x = Random2() % 240;
+        y = Random2() % 80;
+        CreateSprite(&gUnknown_08595020, x, y, 4);
+    }
+    if (gTasks[taskId].data[0] == gTasks[taskId].data[3])
+        DestroyAnimVisualTask(taskId);
+}
+
+void sub_810721C(struct Sprite *sprite)
+{
+    sprite->callback = sub_8107228;
+}
+
+void sub_8107228(struct Sprite *sprite)
+{
+    if (++sprite->data[0] <= 13)
+    {
+        sprite->pos2.x++;
+        sprite->pos2.y += 4;
+    }
+    if (sprite->animEnded != FALSE)
+        DestroySprite(sprite);
+}
+
+void sub_8107260(struct Sprite *sprite)
+{
+    u8 spriteId;
+    
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) - gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
+        sprite->animPaused = TRUE;
+    }
+    else
+    {
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3) + gBattleAnimArgs[1];
+        sprite->animPaused = TRUE;
+    }
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+    sprite->data[0] = gBattleAnimArgs[6];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    InitAnimLinearTranslation(sprite);
+    spriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    sprite->data[5] = spriteId;
+    sprite->pos1.x -= Sin((u8)gBattleAnimArgs[4], gBattleAnimArgs[2]);
+    sprite->pos1.y -= Cos((u8)gBattleAnimArgs[4], gBattleAnimArgs[3]);
+    gSprites[spriteId].data[0] = gBattleAnimArgs[2];
+    gSprites[spriteId].data[1] = gBattleAnimArgs[3];
+    gSprites[spriteId].data[2] = gBattleAnimArgs[5];
+    gSprites[spriteId].data[3] = (u8)gBattleAnimArgs[4] * 256;
+    gSprites[spriteId].data[4] = gBattleAnimArgs[6];
+    sprite->callback = sub_8107380;
+    sub_8107380(sprite);
+}
+
+void sub_8107380(struct Sprite *sprite)
+{
+    u8 otherSpriteId = sprite->data[5];
+    u8 timer = gSprites[otherSpriteId].data[4];
+    u16 trigIndex = gSprites[otherSpriteId].data[3];
+    
+    sprite->data[0] = 1;
+    TranslateAnimLinear(sprite);
+    sprite->pos2.x += Sin(trigIndex >> 8, gSprites[otherSpriteId].data[0]);
+    sprite->pos2.y += Cos(trigIndex >> 8, gSprites[otherSpriteId].data[1]);
+    gSprites[otherSpriteId].data[3] = trigIndex + gSprites[otherSpriteId].data[2];
+    if (--timer != 0)
+    {
+        gSprites[otherSpriteId].data[4] = timer;
+    }
+    else
+    {
+        sprite->callback = sub_8107408;
+        DestroySprite(&gSprites[otherSpriteId]);
+    }
+}
+
+/* void FuncNameHere(struct Sprite *sprite)
+{
+    
+} */
+
+void sub_8107408(struct Sprite *sprite)
+{
+    sprite->animPaused = FALSE;
+    sprite->callback = RunStoredCallbackWhenAnimEnds;
+    StoreSpriteCallbackInData6(sprite, sub_8107430);
+}
