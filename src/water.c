@@ -2436,7 +2436,7 @@ void sub_8108D54(struct Sprite *sprite, int xDiff, int yDiff)
     }
     for (i = 0; i <= 0; i++)
     {
-        spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY, 130);
+        spriteId = CreateSprite(&gUnknown_08595310, combinedX, combinedY - something, 130);
         gSprites[spriteId].data[0] = 20;
         gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
