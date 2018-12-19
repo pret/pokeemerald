@@ -217,7 +217,6 @@ extern const u8 gText_0827D597[];
 extern const struct ContestPokemon gContestOpponents[96];
 extern const u8 gUnknown_085898A4[96];
 extern const struct CompressedSpriteSheet gUnknown_08587C00;
-extern const u8 gContest2Pal[];
 extern const struct SpriteTemplate gSpriteTemplate_8587BE8;
 extern const struct CompressedSpriteSheet gUnknown_08587C08;
 extern const struct CompressedSpritePalette gUnknown_08587C10;

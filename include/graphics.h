@@ -3071,7 +3071,7 @@ extern const u32 gTrainerBackPicPalette_Leaf[];
 
 // pokeblock
 extern const u32 gMenuPokeblock_Gfx[];
-extern const u8 gMenuPokeblock_Pal[];
+extern const u32 gMenuPokeblock_Pal[];
 extern const u32 gMenuPokeblock_Tilemap[];
 extern const u32 gMenuPokeblockDevice_Gfx[];
 extern const u32 gMenuPokeblockDevice_Pal[];
@@ -3859,8 +3859,8 @@ extern const u8 gFireRedMenuElements_Gfx[];
 
 // item menu graphics
 extern const u32 gBagScreen_Gfx[];
-extern const u16 gBagScreenFemale_Pal[];
-extern const u16 gBagScreenMale_Pal[];
+extern const u32 gBagScreenFemale_Pal[];
+extern const u32 gBagScreenMale_Pal[];
 extern const u8 gBagMenuHMIcon_Gfx[];
 
 // item menu icons graphics
@@ -4099,6 +4099,10 @@ extern const u32 gUnknown_08D83B2C[];
 extern const u32 gUnknown_08D83C3C[];
 extern const u32 gUnknown_08D83900[];
 extern const u32 gBattleFrontierGfx_DomeOptions[];
+
+extern const u32 gUnknown_08D854E8[];
+extern const u32 gUnknown_08D855E8[];
+extern const u32 gContest2Pal[];
 
 extern const u32 gBattleAnimSpriteSheet_000[];
 extern const u32 gBattleAnimSpriteSheet_001[];
@@ -4769,5 +4773,7 @@ extern const u16 gCableCar_Pal[];
 extern const u16 gUnknown_08DDB3E4[];
 extern const u8 gUnknown_08DDB464[];
 extern const u16 gUnknown_08DDCF04[];
+extern const u16 gTradeGba2_Pal[];
+extern const u8 gTradeGba_Gfx[];
 
 #endif //GUARD_GRAPHICS_H

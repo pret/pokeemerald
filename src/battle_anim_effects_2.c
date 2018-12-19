@@ -3390,8 +3390,8 @@ void sub_81064F8(u8 taskId)
     else
         sub_80A6D60(&unknownStruct, &gBattleAnimBackgroundTilemap_ScaryFaceOpponent, 0);
 
-    sub_80A6CC0(unknownStruct.bgId, &gUnknown_08C249F8, unknownStruct.tilesOffset);
-    LoadCompressedPalette(&gUnknown_08C249D0, unknownStruct.unk8 << 4, 32);
+    sub_80A6CC0(unknownStruct.bgId, gUnknown_08C249F8, unknownStruct.tilesOffset);
+    LoadCompressedPalette(gUnknown_08C249D0, unknownStruct.unk8 << 4, 32);
     gTasks[taskId].func = sub_81065EC;
 }
 

@@ -16,6 +16,7 @@
 #include "dma3.h"
 #include "event_data.h"
 #include "evolution_scene.h"
+#include "graphics.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -73,7 +74,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gUnknown_0203CF00[];
 
-extern const u16 gBattleTextboxPalette[];
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 extern const u8 *const gBattleScriptsForMoveEffects[];
