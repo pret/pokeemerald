@@ -3,7 +3,7 @@ RustboroCity_PokemonSchool_MapScripts:: @ 8213EA8
 
 RustboroCity_PokemonSchool_EventScript_213EA9:: @ 8213EA9
 	lockall
-	msgbox RustboroCity_PokemonSchool_Text_2140B2, 4
+	msgbox RustboroCity_PokemonSchool_Text_2140B2, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_213EB8
 	end
 
@@ -22,27 +22,27 @@ RustboroCity_PokemonSchool_EventScript_213EB8:: @ 8213EB8
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F17:: @ 8213F17
-	msgbox RustboroCity_PokemonSchool_Text_21411A, 4
+	msgbox RustboroCity_PokemonSchool_Text_21411A, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_213EB8
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F25:: @ 8213F25
-	msgbox RustboroCity_PokemonSchool_Text_2141D8, 4
+	msgbox RustboroCity_PokemonSchool_Text_2141D8, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_213EB8
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F33:: @ 8213F33
-	msgbox RustboroCity_PokemonSchool_Text_21427D, 4
+	msgbox RustboroCity_PokemonSchool_Text_21427D, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_213EB8
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F41:: @ 8213F41
-	msgbox RustboroCity_PokemonSchool_Text_214336, 4
+	msgbox RustboroCity_PokemonSchool_Text_214336, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_213EB8
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F4F:: @ 8213F4F
-	msgbox RustboroCity_PokemonSchool_Text_2143B8, 4
+	msgbox RustboroCity_PokemonSchool_Text_2143B8, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_213EB8
 	end
 
@@ -51,27 +51,27 @@ RustboroCity_PokemonSchool_EventScript_213F5D:: @ 8213F5D
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F5F:: @ 8213F5F
-	msgbox RustboroCity_PokemonSchool_Text_21459F, 2
+	msgbox RustboroCity_PokemonSchool_Text_21459F, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F68:: @ 8213F68
-	msgbox RustboroCity_PokemonSchool_Text_2145CD, 2
+	msgbox RustboroCity_PokemonSchool_Text_2145CD, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F71:: @ 8213F71
-	msgbox RustboroCity_PokemonSchool_Text_214604, 2
+	msgbox RustboroCity_PokemonSchool_Text_214604, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F7A:: @ 8213F7A
-	msgbox RustboroCity_PokemonSchool_Text_214669, 2
+	msgbox RustboroCity_PokemonSchool_Text_214669, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F83:: @ 8213F83
-	msgbox RustboroCity_PokemonSchool_Text_214719, 2
+	msgbox RustboroCity_PokemonSchool_Text_214719, MSGBOX_NPC
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F8C:: @ 8213F8C
-	msgbox RustboroCity_PokemonSchool_Text_2147A2, 3
+	msgbox RustboroCity_PokemonSchool_Text_2147A2, MSGBOX_SIGN
 	end
 
 RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
@@ -83,7 +83,7 @@ RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
 	call_if 1, RustboroCity_PokemonSchool_EventScript_213FE5
 	compare VAR_FACING, 3
 	call_if 1, RustboroCity_PokemonSchool_EventScript_213FF0
-	msgbox RustboroCity_PokemonSchool_Text_214433, 4
+	msgbox RustboroCity_PokemonSchool_Text_214433, MSGBOX_DEFAULT
 	giveitem_std ITEM_QUICK_CLAW
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_PokemonSchool_EventScript_272054
@@ -105,7 +105,7 @@ RustboroCity_PokemonSchool_EventScript_213FF0:: @ 8213FF0
 	return
 
 RustboroCity_PokemonSchool_EventScript_213FFB:: @ 8213FFB
-	msgbox RustboroCity_PokemonSchool_Text_2144C8, 4
+	msgbox RustboroCity_PokemonSchool_Text_2144C8, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_2725AA
 	waitmovement 0
@@ -173,7 +173,7 @@ RustboroCity_PokemonSchool_EventScript_214040:: @ 8214040
 	goto_eq RustboroCity_PokemonSchool_EventScript_21406F
 	checkflag FLAG_BADGE01_GET
 	goto_eq RustboroCity_PokemonSchool_EventScript_214082
-	msgbox RustboroCity_PokemonSchool_Text_2148C0, 4
+	msgbox RustboroCity_PokemonSchool_Text_2148C0, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x136
 	release
@@ -182,17 +182,17 @@ RustboroCity_PokemonSchool_EventScript_214040:: @ 8214040
 RustboroCity_PokemonSchool_EventScript_21406F:: @ 821406F
 	checkflag FLAG_BADGE01_GET
 	goto_eq RustboroCity_PokemonSchool_EventScript_214090
-	msgbox RustboroCity_PokemonSchool_Text_214A5F, 4
+	msgbox RustboroCity_PokemonSchool_Text_214A5F, MSGBOX_DEFAULT
 	release
 	end
 
 RustboroCity_PokemonSchool_EventScript_214082:: @ 8214082
-	msgbox RustboroCity_PokemonSchool_Text_214B8A, 4
+	msgbox RustboroCity_PokemonSchool_Text_214B8A, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_21409E
 	end
 
 RustboroCity_PokemonSchool_EventScript_214090:: @ 8214090
-	msgbox RustboroCity_PokemonSchool_Text_214AB6, 4
+	msgbox RustboroCity_PokemonSchool_Text_214AB6, MSGBOX_DEFAULT
 	goto RustboroCity_PokemonSchool_EventScript_21409E
 	end
 
@@ -203,7 +203,7 @@ RustboroCity_PokemonSchool_EventScript_21409E:: @ 821409E
 	end
 
 RustboroCity_PokemonSchool_EventScript_2140A8:: @ 82140A8
-	msgbox RustboroCity_PokemonSchool_Text_214A5F, 4
+	msgbox RustboroCity_PokemonSchool_Text_214A5F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -219,7 +219,7 @@ RustboroCity_PokemonSchool_Text_21411A: @ 821411A
 	.string "steadily lose HP.\p"
 	.string "The effects of poison remain after\n"
 	.string "a battle.\p"
-	.string "A poisoned POKéMON’s HP will drop\n"
+	.string "A poisoned POKéMON's HP will drop\n"
 	.string "while it is traveling.\p"
 	.string "Heal a poisoning using an ANTIDOTE.$"
 
@@ -241,7 +241,7 @@ RustboroCity_PokemonSchool_Text_21427D: @ 821427D
 
 RustboroCity_PokemonSchool_Text_214336: @ 8214336
 	.string "A burn reduces ATTACK power, and it\n"
-	.string "steadily reduces the victim’s HP.\p"
+	.string "steadily reduces the victim's HP.\p"
 	.string "A burn lingers after battle.\n"
 	.string "Cure a burn using a BURN HEAL.$"
 
@@ -252,7 +252,7 @@ RustboroCity_PokemonSchool_Text_2143B8: @ 82143B8
 	.string "Thaw it out using an ICE HEAL.$"
 
 RustboroCity_PokemonSchool_Text_214433: @ 8214433
-	.string "Students who don’t study get a little\n"
+	.string "Students who don't study get a little\n"
 	.string "taste of my QUICK CLAW.\p"
 	.string "Whether or not you are a good student \n"
 	.string "will be evident from the way you use\l"
@@ -268,16 +268,16 @@ RustboroCity_PokemonSchool_Text_2144C8: @ 82144C8
 	.string "topics to study!$"
 
 RustboroCity_PokemonSchool_Text_21459F: @ 821459F
-	.string "I’m trading POKéMON with my friend\n"
+	.string "I'm trading POKéMON with my friend\n"
 	.string "right now.$"
 
 RustboroCity_PokemonSchool_Text_2145CD: @ 82145CD
 	.string "I always wanted a SEEDOT, and\n"
-	.string "I’m finally getting one!$"
+	.string "I'm finally getting one!$"
 
 RustboroCity_PokemonSchool_Text_214604: @ 8214604
 	.string "POKéMON can hold items, but they\n"
-	.string "don’t know what to do with man-made\l"
+	.string "don't know what to do with man-made\l"
 	.string "items like POTION and ANTIDOTE.$"
 
 RustboroCity_PokemonSchool_Text_214669: @ 8214669
@@ -297,7 +297,7 @@ RustboroCity_PokemonSchool_Text_214719: @ 8214719
 	.string "down…$"
 
 RustboroCity_PokemonSchool_Text_2147A2: @ 82147A2
-	.string "It’s this student’s notebook…\p"
+	.string "It's this student's notebook…\p"
 	.string "POKéMON are to be caught using\n"
 	.string "POKé BALLS.\p"
 	.string "Up to six POKéMON can accompany\n"
@@ -305,18 +305,18 @@ RustboroCity_PokemonSchool_Text_2147A2: @ 82147A2
 	.string "A TRAINER is someone who catches\n"
 	.string "POKéMON, raises them, and battles\l"
 	.string "with them.\p"
-	.string "A TRAINER’s mission is to defeat\n"
+	.string "A TRAINER's mission is to defeat\n"
 	.string "the strong TRAINERS who await\l"
 	.string "challengers in POKéMON GYMS.$"
 
 RustboroCity_PokemonSchool_Text_2148C0: @ 82148C0
-	.string "Hello? Didn’t we meet before?\n"
+	.string "Hello? Didn't we meet before?\n"
 	.string "I think back in PETALBURG CITY.\p"
 	.string "Let me introduce myself.\n"
-	.string "My name’s SCOTT.\p"
-	.string "I’ve been traveling everywhere in\n"
+	.string "My name's SCOTT.\p"
+	.string "I've been traveling everywhere in\n"
 	.string "search of outstanding TRAINERS.\p"
-	.string "More specifically, I’m looking for\n"
+	.string "More specifically, I'm looking for\n"
 	.string "POKéMON battle experts.\p"
 	.string "So, what brings you to this SCHOOL?\n"
 	.string "Are you a TRAINER, too?\p"
@@ -328,32 +328,32 @@ RustboroCity_PokemonSchool_Text_2148C0: @ 82148C0
 RustboroCity_PokemonSchool_Text_214A5F: @ 8214A5F
 	.string "SCOTT: Hmm…\p"
 	.string "The talent levels of the students here\n"
-	.string "are unknown. The potential’s there.$"
+	.string "are unknown. The potential's there.$"
 
 RustboroCity_PokemonSchool_Text_214AB6: @ 8214AB6
-	.string "SCOTT: Oh, what’s that?\p"
-	.string "It’s a STONE BADGE, isn’t it?\n"
-	.string "That’s pretty impressive, I’d say.\p"
-	.string "But, you know, I would’ve loved to see\n"
+	.string "SCOTT: Oh, what's that?\p"
+	.string "It's a STONE BADGE, isn't it?\n"
+	.string "That's pretty impressive, I'd say.\p"
+	.string "But, you know, I would've loved to see\n"
 	.string "you in battle.\p"
-	.string "It’s hard to tell what you’re like as\n"
+	.string "It's hard to tell what you're like as\n"
 	.string "a TRAINER from a LEAGUE BADGE.$"
 
 RustboroCity_PokemonSchool_Text_214B8A: @ 8214B8A
-	.string "Hello? Didn’t we meet before?\n"
+	.string "Hello? Didn't we meet before?\n"
 	.string "I think back in PETALBURG CITY.\p"
 	.string "Let me introduce myself.\n"
-	.string "My name’s SCOTT.\p"
-	.string "I’ve been traveling everywhere in\n"
+	.string "My name's SCOTT.\p"
+	.string "I've been traveling everywhere in\n"
 	.string "search of outstanding TRAINERS.\p"
-	.string "More specifically, I’m looking for\n"
+	.string "More specifically, I'm looking for\n"
 	.string "POKéMON battle experts.\p"
-	.string "Oh, what’s that?\n"
-	.string "It’s a STONE BADGE, isn’t it?\p"
-	.string "That’s pretty impressive, I’d say, for\n"
+	.string "Oh, what's that?\n"
+	.string "It's a STONE BADGE, isn't it?\p"
+	.string "That's pretty impressive, I'd say, for\n"
 	.string "a starting TRAINER like yourself.\p"
-	.string "But, you know, I would’ve loved to see\n"
+	.string "But, you know, I would've loved to see\n"
 	.string "you in battle.\p"
-	.string "It’s hard to tell what you’re like as\n"
+	.string "It's hard to tell what you're like as\n"
 	.string "a TRAINER from a LEAGUE BADGE.$"
 

@@ -39,12 +39,12 @@ LilycoveCity_ContestLobby_EventScript_21A264:: @ 821A264
 	waitmovement 4
 	applymovement 255, LilycoveCity_ContestLobby_Movement_21A418
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_21ADB9, 4
+	msgbox LilycoveCity_ContestLobby_Text_21ADB9, MSGBOX_DEFAULT
 	lockall
 	fadescreen 1
 	drawcontestwinner 0
 	lockall
-	msgbox LilycoveCity_ContestLobby_Text_21AE78, 5
+	msgbox LilycoveCity_ContestLobby_Text_21AE78, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A2AA
 	compare VAR_RESULT, 0
@@ -53,7 +53,7 @@ LilycoveCity_ContestLobby_EventScript_21A264:: @ 821A264
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
-	msgbox LilycoveCity_ContestLobby_Text_21AF63, 4
+	msgbox LilycoveCity_ContestLobby_Text_21AF63, MSGBOX_DEFAULT
 	closemessage
 	special sub_80F88DC
 	setvar VAR_0x4099, 0
@@ -69,10 +69,10 @@ LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A2E4:: @ 821A2E4
-	msgbox LilycoveCity_ContestLobby_Text_21B0BC, 5
+	msgbox LilycoveCity_ContestLobby_Text_21B0BC, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A2AA
-	msgbox LilycoveCity_ContestLobby_Text_21B132, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B132, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A40F
 	waitmovement 0
@@ -91,12 +91,12 @@ LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41E
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_21B030, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B030, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
-	msgbox LilycoveCity_ContestLobby_Text_21B07E, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B07E, MSGBOX_DEFAULT
 	waitfanfare
-	msgbox LilycoveCity_ContestLobby_Text_21B094, 4
-	msgbox LilycoveCity_ContestLobby_Text_21B0AD, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B094, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_21B0AD, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -214,11 +214,11 @@ LilycoveCity_ContestLobby_EventScript_21A436:: @ 821A436
 	waitmovement 11
 	applymovement 255, LilycoveCity_ContestLobby_Movement_21A545
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_21ADB9, 4
+	msgbox LilycoveCity_ContestLobby_Text_21ADB9, MSGBOX_DEFAULT
 	lockall
 	fadescreen 1
 	drawcontestwinner 0
-	msgbox LilycoveCity_ContestLobby_Text_21AE78, 5
+	msgbox LilycoveCity_ContestLobby_Text_21AE78, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A47A
 	compare VAR_RESULT, 0
@@ -226,7 +226,7 @@ LilycoveCity_ContestLobby_EventScript_21A436:: @ 821A436
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
-	msgbox LilycoveCity_ContestLobby_Text_21AF63, 4
+	msgbox LilycoveCity_ContestLobby_Text_21AF63, MSGBOX_DEFAULT
 	closemessage
 	special sub_80F88DC
 	setvar VAR_0x4099, 0
@@ -242,10 +242,10 @@ LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A4B4:: @ 821A4B4
-	msgbox LilycoveCity_ContestLobby_Text_21B0BC, 5
+	msgbox LilycoveCity_ContestLobby_Text_21B0BC, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A47A
-	msgbox LilycoveCity_ContestLobby_Text_21B132, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B132, MSGBOX_DEFAULT
 	closemessage
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A53C
 	waitmovement 0
@@ -265,12 +265,12 @@ LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A54B
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_21B030, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B030, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
-	msgbox LilycoveCity_ContestLobby_Text_21B07E, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B07E, MSGBOX_DEFAULT
 	waitfanfare
-	msgbox LilycoveCity_ContestLobby_Text_21B094, 4
-	msgbox LilycoveCity_ContestLobby_Text_21B0AD, 4
+	msgbox LilycoveCity_ContestLobby_Text_21B094, MSGBOX_DEFAULT
+	msgbox LilycoveCity_ContestLobby_Text_21B0AD, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -424,7 +424,7 @@ LilycoveCity_ContestLobby_EventScript_21A670:: @ 821A670
 	waitmovement 0
 	applymovement 255, LilycoveCity_ContestLobby_Movement_21A6F2
 	waitmovement 0
-	msgbox LilycoveCity_ContestLobby_Text_27B653, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B653, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LilycoveCity_ContestLobby_Movement_21A6FD
 	applymovement 255, LilycoveCity_ContestLobby_Movement_21A6E8
@@ -477,27 +477,27 @@ LilycoveCity_ContestLobby_Movement_21A706: @ 821A706
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_21A708:: @ 821A708
-	msgbox LilycoveCity_ContestLobby_Text_21B1B1, 2
+	msgbox LilycoveCity_ContestLobby_Text_21B1B1, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A711:: @ 821A711
-	msgbox LilycoveCity_ContestLobby_Text_21B24D, 2
+	msgbox LilycoveCity_ContestLobby_Text_21B24D, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A71A:: @ 821A71A
-	msgbox LilycoveCity_ContestLobby_Text_21B2BA, 2
+	msgbox LilycoveCity_ContestLobby_Text_21B2BA, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A723:: @ 821A723
-	msgbox LilycoveCity_ContestLobby_Text_21B334, 2
+	msgbox LilycoveCity_ContestLobby_Text_21B334, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A72C:: @ 821A72C
-	msgbox LilycoveCity_ContestLobby_Text_21B392, 2
+	msgbox LilycoveCity_ContestLobby_Text_21B392, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A735:: @ 821A735
-	msgbox LilycoveCity_ContestLobby_Text_21B3FC, 2
+	msgbox LilycoveCity_ContestLobby_Text_21B3FC, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A73E:: @ 821A73E
@@ -543,11 +543,11 @@ LilycoveCity_ContestLobby_EventScript_21A761:: @ 821A761
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A768:: @ 821A768
-	msgbox LilycoveCity_ContestLobby_Text_2931AA, 2
+	msgbox LilycoveCity_ContestLobby_Text_2931AA, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A771:: @ 821A771
-	msgbox LilycoveCity_ContestLobby_Text_2931C6, 2
+	msgbox LilycoveCity_ContestLobby_Text_2931C6, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A77A:: @ 821A77A
@@ -571,46 +571,46 @@ LilycoveCity_ContestLobby_EventScript_21A784:: @ 821A784
 LilycoveCity_ContestLobby_EventScript_21A798:: @ 821A798
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_2C427C, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C427C, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A7F9
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A7A8:: @ 821A7A8
 	lock
-	msgbox LilycoveCity_ContestLobby_Text_2C464B, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C464B, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A7B3:: @ 821A7B3
 	lock
-	msgbox LilycoveCity_ContestLobby_Text_2C465A, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C465A, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A7BE:: @ 821A7BE
 	lock
-	msgbox LilycoveCity_ContestLobby_Text_2C4669, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4669, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A7C9:: @ 821A7C9
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_2C4679, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4679, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A7F9
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A7D9:: @ 821A7D9
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_2C46B1, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C46B1, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A7F9
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A7E9:: @ 821A7E9
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_2C4763, 4
+	msgbox LilycoveCity_ContestLobby_Text_2C4763, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A7F9
 	end
 
@@ -625,7 +625,7 @@ LilycoveCity_ContestLobby_EventScript_21A806:: @ 821A806
 	special sub_80F9154
 	lock
 	faceplayer
-	msgbox LilycoveCity_ContestLobby_Text_27C063, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C063, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A819
 	end
 
@@ -641,7 +641,7 @@ LilycoveCity_ContestLobby_EventScript_21A819:: @ 821A819
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
-	msgbox LilycoveCity_ContestLobby_Text_27BD17, 5
+	msgbox LilycoveCity_ContestLobby_Text_27BD17, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	call LilycoveCity_ContestLobby_EventScript_27134F
@@ -694,28 +694,28 @@ LilycoveCity_ContestLobby_EventScript_21A90D:: @ 821A90D
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A955:: @ 821A955
-	msgbox LilycoveCity_ContestLobby_Text_27C340, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C340, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A90D
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A963:: @ 821A963
-	msgbox LilycoveCity_ContestLobby_Text_27C5B1, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C5B1, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A90D
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A971:: @ 821A971
-	msgbox LilycoveCity_ContestLobby_Text_27C742, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C742, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A90D
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A97F:: @ 821A97F
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27BD4F, 4
+	msgbox LilycoveCity_ContestLobby_Text_27BD4F, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A98C:: @ 821A98C
-	msgbox LilycoveCity_ContestLobby_Text_27C1C3, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C1C3, MSGBOX_DEFAULT
 	setvar VAR_CONTEST_RANK, 0
 	choosecontestmon
 	compare VAR_0x8004, 255
@@ -734,17 +734,17 @@ LilycoveCity_ContestLobby_EventScript_21A98C:: @ 821A98C
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A9E0:: @ 821A9E0
-	msgbox LilycoveCity_ContestLobby_Text_27B471, 4
+	msgbox LilycoveCity_ContestLobby_Text_27B471, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A98C
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A9EE:: @ 821A9EE
-	msgbox LilycoveCity_ContestLobby_Text_27C186, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C186, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A98C
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A9FC:: @ 821A9FC
-	msgbox LilycoveCity_ContestLobby_Text_27C140, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C140, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A98C
 	end
 
@@ -796,34 +796,34 @@ LilycoveCity_ContestLobby_EventScript_21AAC0:: @ 821AAC0
 	return
 
 LilycoveCity_ContestLobby_EventScript_21AAC5:: @ 821AAC5
-	msgbox LilycoveCity_ContestLobby_Text_27BF0E, 4
+	msgbox LilycoveCity_ContestLobby_Text_27BF0E, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AAD3:: @ 821AAD3
-	msgbox LilycoveCity_ContestLobby_Text_27BF4B, 4
+	msgbox LilycoveCity_ContestLobby_Text_27BF4B, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AAE1:: @ 821AAE1
-	msgbox LilycoveCity_ContestLobby_Text_27C254, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C254, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AAEF:: @ 821AAEF
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27821C, 4
+	msgbox LilycoveCity_ContestLobby_Text_27821C, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AAFC:: @ 821AAFC
 	special CloseLink
-	msgbox LilycoveCity_ContestLobby_Text_27C879, 4
+	msgbox LilycoveCity_ContestLobby_Text_27C879, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AB09:: @ 821AB09
-	msgbox LilycoveCity_ContestLobby_Text_27BEFA, 4
+	msgbox LilycoveCity_ContestLobby_Text_27BEFA, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_21A97F
 	end
 
@@ -1008,12 +1008,12 @@ LilycoveCity_ContestLobby_EventScript_21ACF1:: @ 821ACF1
 	faceplayer
 	checkflag FLAG_0x05F
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AD06
-	msgbox LilycoveCity_ContestLobby_Text_21AD10, 4
+	msgbox LilycoveCity_ContestLobby_Text_21AD10, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AD06:: @ 821AD06
-	msgbox LilycoveCity_ContestLobby_Text_21AD55, 4
+	msgbox LilycoveCity_ContestLobby_Text_21AD55, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1031,15 +1031,15 @@ LilycoveCity_ContestLobby_Text_21ADB9: @ 821ADB9
 	.string "Congratulations!\p"
 	.string "I did a painting of your POKéMON to\n"
 	.string "commemorate its victory…\p"
-	.string "Well, your POKéMON’s appeals were\n"
+	.string "Well, your POKéMON's appeals were\n"
 	.string "so fantastic, it spurred me into\l"
 	.string "painting better than I usually do.\l"
 	.string "Look, see?$"
 
 LilycoveCity_ContestLobby_Text_21AE78: @ 821AE78
-	.string "What do you think? I’m confident in\n"
-	.string "what I’ve done, but do you like it?\p"
-	.string "A work of this caliber, it wouldn’t look\n"
+	.string "What do you think? I'm confident in\n"
+	.string "what I've done, but do you like it?\p"
+	.string "A work of this caliber, it wouldn't look\n"
 	.string "out of place in an art museum.\p"
 	.string "Huh? An art museum really is looking\n"
 	.string "for paintings?\p"
@@ -1048,14 +1048,14 @@ LilycoveCity_ContestLobby_Text_21AE78: @ 821AE78
 LilycoveCity_ContestLobby_Text_21AF63: @ 821AF63
 	.string "What, really? Then, sure, I will take\n"
 	.string "this painting there right now.\p"
-	.string "I’ll give it a proper title, too.\p"
-	.string "I hope they’ll like it and consider\n"
+	.string "I'll give it a proper title, too.\p"
+	.string "I hope they'll like it and consider\n"
 	.string "exhibiting this.\p"
 	.string "Please check if they did accept this.\n"
 	.string "Thank you!$"
 
 LilycoveCity_ContestLobby_Text_21B030: @ 821B030
-	.string "Oh, that’s right!\p"
+	.string "Oh, that's right!\p"
 	.string "As a memento of me painting your\n"
 	.string "POKéMON, please take this.$"
 
@@ -1070,15 +1070,15 @@ LilycoveCity_ContestLobby_Text_21B0AD: @ 821B0AD
 	.string "Okay, see you!$"
 
 LilycoveCity_ContestLobby_Text_21B0BC: @ 821B0BC
-	.string "Oh… Then, I guess I’ll just take\n"
+	.string "Oh… Then, I guess I'll just take\n"
 	.string "this home with me…\p"
 	.string "But, you know, I would like to take\n"
 	.string "this to the art museum… Okay?$"
 
 LilycoveCity_ContestLobby_Text_21B132: @ 821B132
-	.string "Oh, fine, that’s the way it is.\n"
+	.string "Oh, fine, that's the way it is.\n"
 	.string "I will hang this in my own house.\p"
-	.string "I’ll just have to try harder next time.\n"
+	.string "I'll just have to try harder next time.\n"
 	.string "Well, be seeing you.$"
 
 LilycoveCity_ContestLobby_Text_21B1B1: @ 821B1B1
@@ -1092,7 +1092,7 @@ LilycoveCity_ContestLobby_Text_21B1B1: @ 821B1B1
 LilycoveCity_ContestLobby_Text_21B24D: @ 821B24D
 	.string "You can see a whole variety of\n"
 	.string "POKéMON here.\p"
-	.string "That’s why I make this place a regular\n"
+	.string "That's why I make this place a regular\n"
 	.string "part of my daily stroll.$"
 
 LilycoveCity_ContestLobby_Text_21B2BA: @ 821B2BA

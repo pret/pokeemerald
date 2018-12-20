@@ -1,6 +1,6 @@
 #include "global.h"
 #include "rom_8034C54.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "decompress.h"
 #include "main.h"
 
@@ -31,8 +31,6 @@ struct UnkStruct1
     struct UnkStruct2 *array;
 };
 
-extern struct UnkStruct1 *gUnknown_02022E10;
-
 extern const struct SpriteTemplate gUnknown_0831AC88;
 
 // this file's functions
@@ -49,6 +47,9 @@ static void sub_8035648(void);
 static IWRAM_DATA s32 gUnknown_03000DD4;
 static IWRAM_DATA s32 gUnknown_03000DD8;
 static IWRAM_DATA s32 gUnknown_03000DDC;
+
+// ewram
+static EWRAM_DATA struct UnkStruct1 *gUnknown_02022E10 = {0};
 
 // const rom data
 static const u8 gUnknown_082FF1C8[][4] =

@@ -48,7 +48,7 @@ JaggedPass_EventScript_2306BB:: @ 82306BB
 	setvar VAR_0x8007, 5
 	special sub_8139560
 	waitstate
-	msgbox JaggedPass_Text_230DBA, 4
+	msgbox JaggedPass_Text_230DBA, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
@@ -78,9 +78,9 @@ JaggedPass_EventScript_230718:: @ 8230718
 	waitmovement 0
 	applymovement 5, JaggedPass_Movement_27259E
 	waitmovement 0
-	msgbox JaggedPass_Text_230CCB, 4
+	msgbox JaggedPass_Text_230CCB, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle 3, TRAINER_GRUNT_30, 0, JaggedPass_Text_230D2D
+	trainerbattle_no_intro TRAINER_GRUNT_30, JaggedPass_Text_230D2D
 	setflag FLAG_0x139
 	applymovement 5, JaggedPass_Movement_2725A2
 	waitmovement 0
@@ -90,7 +90,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 JaggedPass_EventScript_230766:: @ 8230766
 	applymovement 5, JaggedPass_Movement_27259E
 	waitmovement 0
-	msgbox JaggedPass_Text_230D65, 4
+	msgbox JaggedPass_Text_230D65, MSGBOX_DEFAULT
 	closemessage
 	applymovement 5, JaggedPass_Movement_2725A2
 	waitmovement 0
@@ -98,71 +98,65 @@ JaggedPass_EventScript_230766:: @ 8230766
 	end
 
 JaggedPass_EventScript_230785:: @ 8230785
-	trainerbattle 0, TRAINER_ERIC, 0, JaggedPass_Text_230888, JaggedPass_Text_2308FF
-	msgbox JaggedPass_Text_230916, 6
+	trainerbattle_single TRAINER_ERIC, JaggedPass_Text_230888, JaggedPass_Text_2308FF
+	msgbox JaggedPass_Text_230916, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_23079C:: @ 823079C
-	trainerbattle 2, TRAINER_DIANA_1, 0, JaggedPass_Text_230974, JaggedPass_Text_2309B5, JaggedPass_EventScript_2307C8
+	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_230974, JaggedPass_Text_2309B5, JaggedPass_EventScript_2307C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq JaggedPass_EventScript_2307E4
-	msgbox JaggedPass_Text_2309D8, 4
+	msgbox JaggedPass_Text_2309D8, MSGBOX_DEFAULT
 	release
 	end
 
 JaggedPass_EventScript_2307C8:: @ 82307C8
 	special sub_80B4808
-	msgbox JaggedPass_Text_230A2C, 4
-	setvar VAR_0x8004, 474
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 474
-	callstd 8
+	msgbox JaggedPass_Text_230A2C, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DIANA_1
 	release
 	end
 
 JaggedPass_EventScript_2307E4:: @ 82307E4
-	trainerbattle 5, TRAINER_DIANA_1, 0, JaggedPass_Text_230A76, JaggedPass_Text_230AAA
-	msgbox JaggedPass_Text_230AD7, 6
+	trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_230A76, JaggedPass_Text_230AAA
+	msgbox JaggedPass_Text_230AD7, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_2307FB:: @ 82307FB
-	trainerbattle 2, TRAINER_ETHAN_1, 0, JaggedPass_Text_230B10, JaggedPass_Text_230B50, JaggedPass_EventScript_230827
+	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_230B10, JaggedPass_Text_230B50, JaggedPass_EventScript_230827
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq JaggedPass_EventScript_230843
-	msgbox JaggedPass_Text_230B93, 4
+	msgbox JaggedPass_Text_230B93, MSGBOX_DEFAULT
 	release
 	end
 
 JaggedPass_EventScript_230827:: @ 8230827
 	special sub_80B4808
-	msgbox JaggedPass_Text_230BC6, 4
-	setvar VAR_0x8004, 216
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 216
-	callstd 8
+	msgbox JaggedPass_Text_230BC6, MSGBOX_DEFAULT
+	register_matchcall TRAINER_ETHAN_1
 	release
 	end
 
 JaggedPass_EventScript_230843:: @ 8230843
-	trainerbattle 5, TRAINER_ETHAN_1, 0, JaggedPass_Text_230C28, JaggedPass_Text_230C60
-	msgbox JaggedPass_Text_230C94, 6
+	trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_230C28, JaggedPass_Text_230C60
+	msgbox JaggedPass_Text_230C94, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_23085A:: @ 823085A
-	trainerbattle 0, TRAINER_JULIO, 0, JaggedPass_Text_230DF7, JaggedPass_Text_230E38
-	msgbox JaggedPass_Text_230E57, 6
+	trainerbattle_single TRAINER_JULIO, JaggedPass_Text_230DF7, JaggedPass_Text_230E38
+	msgbox JaggedPass_Text_230E57, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_230871:: @ 8230871
-	trainerbattle 0, TRAINER_AUTUMN, 0, JaggedPass_Text_230E8E, JaggedPass_Text_230ECD
-	msgbox JaggedPass_Text_230EE3, 6
+	trainerbattle_single TRAINER_AUTUMN, JaggedPass_Text_230E8E, JaggedPass_Text_230ECD
+	msgbox JaggedPass_Text_230EE3, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_Text_230888: @ 8230888
-	.string "MT. CHIMNEY’s JAGGED PASS…\p"
-	.string "Now this is what I’ve always wanted\n"
+	.string "MT. CHIMNEY's JAGGED PASS…\p"
+	.string "Now this is what I've always wanted\n"
 	.string "in a mountain.\p"
 	.string "This jagged bumpiness…\n"
 	.string "It rocks my soul!$"
@@ -176,8 +170,8 @@ JaggedPass_Text_230916: @ 8230916
 	.string "the mountains, I have you beat!$"
 
 JaggedPass_Text_230974: @ 8230974
-	.string "This place isn’t your casual hike.\n"
-	.string "It’s not suited for a picnic.$"
+	.string "This place isn't your casual hike.\n"
+	.string "It's not suited for a picnic.$"
 
 JaggedPass_Text_2309B5: @ 82309B5
 	.string "Ohhh, no!\n"
@@ -190,7 +184,7 @@ JaggedPass_Text_2309D8: @ 82309D8
 
 JaggedPass_Text_230A2C: @ 8230A2C
 	.string "Will you ever be back in this area?\n"
-	.string "If you do return, I’d like a rematch.$"
+	.string "If you do return, I'd like a rematch.$"
 
 JaggedPass_Text_230A76: @ 8230A76
 	.string "Picnics are fun wherever you go.\n"
@@ -201,24 +195,24 @@ JaggedPass_Text_230AAA: @ 8230AAA
 	.string "too bumpy!$"
 
 JaggedPass_Text_230AD7: @ 8230AD7
-	.string "I’ll forget about losing and just\n"
+	.string "I'll forget about losing and just\n"
 	.string "enjoy this bumpy hike.$"
 
 JaggedPass_Text_230B10: @ 8230B10
 	.string "JAGGED PASS is hard to walk on.\n"
-	.string "It’s a good place for training.$"
+	.string "It's a good place for training.$"
 
 JaggedPass_Text_230B50: @ 8230B50
 	.string "It was all over while we were still\n"
 	.string "trying to find a good footing…$"
 
 JaggedPass_Text_230B93: @ 8230B93
-	.string "If I had an ACRO BIKE, I’d be able to\n"
+	.string "If I had an ACRO BIKE, I'd be able to\n"
 	.string "jump ledges.$"
 
 JaggedPass_Text_230BC6: @ 8230BC6
 	.string "When I get more used to this bumpiness,\n"
-	.string "I’ll be sure to win!\p"
+	.string "I'll be sure to win!\p"
 	.string "Can you register me in your POKéNAV?$"
 
 JaggedPass_Text_230C28: @ 8230C28
@@ -226,7 +220,7 @@ JaggedPass_Text_230C28: @ 8230C28
 	.string "I sing while I climb now.$"
 
 JaggedPass_Text_230C60: @ 8230C60
-	.string "It’s still not easy to battle on this\n"
+	.string "It's still not easy to battle on this\n"
 	.string "bumpy ground…$"
 
 JaggedPass_Text_230C94: @ 8230C94
@@ -241,13 +235,13 @@ JaggedPass_Text_230CCB: @ 8230CCB
 
 JaggedPass_Text_230D2D: @ 8230D2D
 	.string "Urrrgh…\p"
-	.string "I should’ve ducked into our HIDEOUT\n"
+	.string "I should've ducked into our HIDEOUT\n"
 	.string "right away…$"
 
 JaggedPass_Text_230D65: @ 8230D65
 	.string "Okay, oh-kay!\n"
-	.string "I admit it--you’re strong!\p"
-	.string "Don’t worry about me.\n"
+	.string "I admit it--you're strong!\p"
+	.string "Don't worry about me.\n"
 	.string "Go wherever you want!$"
 
 JaggedPass_Text_230DBA: @ 8230DBA
@@ -255,15 +249,15 @@ JaggedPass_Text_230DBA: @ 8230DBA
 	.string "to the MAGMA EMBLEM!$"
 
 JaggedPass_Text_230DF7: @ 8230DF7
-	.string "Aiyeeh! It’s awfully scary to shoot\n"
+	.string "Aiyeeh! It's awfully scary to shoot\n"
 	.string "down the mountain in one go!$"
 
 JaggedPass_Text_230E38: @ 8230E38
-	.string "I feel like I’m falling apart…$"
+	.string "I feel like I'm falling apart…$"
 
 JaggedPass_Text_230E57: @ 8230E57
 	.string "My bicycle bounced around so much,\n"
-	.string "my rear end’s sore…$"
+	.string "my rear end's sore…$"
 
 JaggedPass_Text_230E8E: @ 8230E8E
 	.string "I climb this hill every day.\n"

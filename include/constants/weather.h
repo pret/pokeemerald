@@ -16,6 +16,7 @@
 #define WEATHER_DROUGHT        12
 #define WEATHER_RAIN_HEAVY     13
 #define WEATHER_BUBBLES        14
+#define WEATHER_15             15
 #define WEATHER_ROUTE119_CYCLE 20
 #define WEATHER_ROUTE123_CYCLE 21
 

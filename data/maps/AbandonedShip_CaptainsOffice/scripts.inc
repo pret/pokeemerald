@@ -11,28 +11,28 @@ AbandonedShip_CaptainsOffice_EventScript_2387E2:: @ 82387E2
 	goto_eq AbandonedShip_CaptainsOffice_EventScript_238810
 	checkflag FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER
 	goto_eq AbandonedShip_CaptainsOffice_EventScript_23881A
-	msgbox AbandonedShip_CaptainsOffice_Text_238824, 4
+	msgbox AbandonedShip_CaptainsOffice_Text_238824, MSGBOX_DEFAULT
 	release
 	end
 
 AbandonedShip_CaptainsOffice_EventScript_238810:: @ 8238810
-	msgbox AbandonedShip_CaptainsOffice_Text_23889D, 4
+	msgbox AbandonedShip_CaptainsOffice_Text_23889D, MSGBOX_DEFAULT
 	release
 	end
 
 AbandonedShip_CaptainsOffice_EventScript_23881A:: @ 823881A
-	msgbox AbandonedShip_CaptainsOffice_Text_238918, 4
+	msgbox AbandonedShip_CaptainsOffice_Text_238918, MSGBOX_DEFAULT
 	release
 	end
 
 AbandonedShip_CaptainsOffice_Text_238824: @ 8238824
-	.string "I’m investigating this ship on behalf\n"
+	.string "I'm investigating this ship on behalf\n"
 	.string "of CAPT. STERN.\p"
 	.string "He also asked me to find a SCANNER,\n"
-	.string "but I haven’t had any success…$"
+	.string "but I haven't had any success…$"
 
 AbandonedShip_CaptainsOffice_Text_23889D: @ 823889D
-	.string "Oh! That’s a SCANNER!\p"
+	.string "Oh! That's a SCANNER!\p"
 	.string "Listen, can I get you to deliver that\n"
 	.string "to CAPT. STERN?\p"
 	.string "I want to investigate this ship a\n"

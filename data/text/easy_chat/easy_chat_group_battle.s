@@ -29,7 +29,7 @@ gEasyChatWord_WhenIWin:: @ 8598B76
 	.string "WHEN I WIN$"
 
 gEasyChatWord_CantWin:: @ 8598B81
-	.string "CAN’T WIN$"
+	.string "CAN'T WIN$"
 
 gEasyChatWord_CanWin:: @ 8598B8B
 	.string "CAN WIN$"

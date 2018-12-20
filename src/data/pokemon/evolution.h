@@ -1,6 +1,3 @@
-#ifndef POKEEMERALD_EVOLUTION_H
-#define POKEEMERALD_EVOLUTION_H
-
 const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 {
     [SPECIES_BULBASAUR]  = {{EVO_LEVEL, 16, SPECIES_IVYSAUR}},
@@ -188,5 +185,3 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_BELDUM]     = {{EVO_LEVEL, 20, SPECIES_METANG}},
     [SPECIES_METANG]     = {{EVO_LEVEL, 45, SPECIES_METAGROSS}},
 };
-
-#endif //POKEEMERALD_EVOLUTION_H

@@ -62,14 +62,14 @@ static const u8 * const sGiddyAdjectives[] = {
 };
 
 static const u8 * const sGiddyQuestions[] = {
-    gUnknown_08294313,
-    gUnknown_08294359,
-    gUnknown_08294398,
-    gUnknown_082943DA,
-    gUnknown_0829441C,
-    gUnknown_08294460,
-    gUnknown_082944A0,
-    gUnknown_082944D5
+    gMauvilleManText_ISoWantToGoOnAVacation,
+    gMauvilleManText_IBoughtCrayonsWith120Colors,
+    gMauvilleManText_WouldntItBeNiceIfWeCouldFloat,
+    gMauvilleManText_WhenYouWriteOnASandyBeach,
+    gMauvilleManText_WhatsTheBottomOfTheSeaLike,
+    gMauvilleManText_WhenYouSeeTheSettingSunDoesIt,
+    gMauvilleManText_LyingBackInTheGreenGrass,
+    gMauvilleManText_SecretBasesAreSoWonderful
 };
 
 static void SetupBard(void)

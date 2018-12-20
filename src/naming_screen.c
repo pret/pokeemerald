@@ -1,6 +1,6 @@
 #include "global.h"
 #include "naming_screen.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "palette.h"
 #include "task.h"
 #include "sprite.h"
@@ -150,7 +150,7 @@ static const struct WindowTemplate gUnknown_0858BE10[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 gUnknown_0858BE40[] = __("abcdef .ghijkl ,mnopqrs tuvwxyz ABCDEF .GHIJKL ,MNOPQRS TUVWXYZ 01234   56789   !?♂♀/-  …“”‘’   ");
+static const u8 gUnknown_0858BE40[] = __("abcdef .ghijkl ,mnopqrs tuvwxyz ABCDEF .GHIJKL ,MNOPQRS TUVWXYZ 01234   56789   !?♂♀/-  …“”‘'   ");
 
 static const u8 gUnknown_0858BEA0[] = { 8, 8, 6 };
 static const u8 gUnknown_0858BEA3[] = { 0, 12, 24, 56, 68, 80, 92, 123, 0, 12, 24, 56, 68, 80, 92, 123, 0, 22, 44, 66, 88, 110, 0, 0 };

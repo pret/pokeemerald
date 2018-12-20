@@ -9,10 +9,13 @@
 	.section .rodata
 
 	.align 2
-gUnknown_0831AC70:: @ 831AC70
+gBattleIntroSlideScanlineEffectParams:: @ 831AC70
 	.4byte REG_BG3HOFS
 	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
 	.4byte 1
+
+	.align 2
+gUnknown_0831AC7C:: @ 831AC7C
 	.4byte REG_BG3HOFS
 	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_32BIT | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
 	.4byte 1

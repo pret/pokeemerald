@@ -17,16 +17,16 @@ VerdanturfTown_PokemonCenter_1F_EventScript_20273A:: @ 820273A
 	end
 
 VerdanturfTown_PokemonCenter_1F_EventScript_202748:: @ 8202748
-	msgbox VerdanturfTown_PokemonCenter_1F_Text_20275A, 2
+	msgbox VerdanturfTown_PokemonCenter_1F_Text_20275A, MSGBOX_NPC
 	end
 
 VerdanturfTown_PokemonCenter_1F_EventScript_202751:: @ 8202751
-	msgbox VerdanturfTown_PokemonCenter_1F_Text_20280B, 2
+	msgbox VerdanturfTown_PokemonCenter_1F_Text_20280B, MSGBOX_NPC
 	end
 
 VerdanturfTown_PokemonCenter_1F_Text_20275A: @ 820275A
-	.string "You can’t consider yourself a real\n"
-	.string "TRAINER if you don’t have faith\l"
+	.string "You can't consider yourself a real\n"
+	.string "TRAINER if you don't have faith\l"
 	.string "in your POKéMON.\p"
 	.string "Only those people who can believe\n"
 	.string "in their battling POKéMON can win\l"
@@ -35,7 +35,7 @@ VerdanturfTown_PokemonCenter_1F_Text_20275A: @ 820275A
 VerdanturfTown_PokemonCenter_1F_Text_20280B: @ 820280B
 	.string "The reason why anyone would visit\n"
 	.string "VERDANTURF…\p"
-	.string "It’s the BATTLE TENT. It goes without\n"
+	.string "It's the BATTLE TENT. It goes without\n"
 	.string "saying.\p"
 	.string "Or is there somebody here that you\n"
 	.string "came to see?$"

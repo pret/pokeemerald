@@ -60,23 +60,23 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F581:: @ 824F581
 	end
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F58B:: @ 824F58B
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F5DD, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F5DD, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F594:: @ 824F594
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F65B, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F65B, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F59D:: @ 824F59D
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F718, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F718, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F5A6:: @ 824F5A6
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F78C, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F78C, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F5AF:: @ 824F5AF
-	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F7D4, 4
+	msgbox BattleFrontier_BattlePalaceCorridor_Text_24F7D4, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePalaceCorridor_Movement_24F5B8: @ 824F5B8
@@ -141,18 +141,18 @@ BattleFrontier_BattlePalaceCorridor_Text_24F65B: @ 824F65B
 	.string "Rather than trying to make a POKéMON\n"
 	.string "do what it dislikes, try to let it do\l"
 	.string "what it likes and is good at doing.\p"
-	.string "Put yourself in the POKéMON’s position\n"
+	.string "Put yourself in the POKéMON's position\n"
 	.string "and consider what moves it would like.$"
 
 BattleFrontier_BattlePalaceCorridor_Text_24F718: @ 824F718
-	.string "A POKéMON’s nature is a remarkable\n"
+	.string "A POKéMON's nature is a remarkable\n"
 	.string "thing…\p"
 	.string "Some POKéMON behave in a completely\n"
 	.string "different way when they are cornered.$"
 
 BattleFrontier_BattlePalaceCorridor_Text_24F78C: @ 824F78C
 	.string "Are you beginning to understand how\n"
-	.string "a POKéMON’s nature makes it behave?$"
+	.string "a POKéMON's nature makes it behave?$"
 
 BattleFrontier_BattlePalaceCorridor_Text_24F7D4: @ 824F7D4
 	.string "Ah… I see a strong, heartfelt bond\n"

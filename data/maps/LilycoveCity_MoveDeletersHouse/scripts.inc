@@ -5,7 +5,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA0B:: @ 821EA0B
 	lockall
 	applymovement 1, LilycoveCity_MoveDeletersHouse_Movement_27259E
 	waitmovement 0
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EAFD, 5
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EAFD, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 1, LilycoveCity_MoveDeletersHouse_EventScript_21EA3B
 	case 0, LilycoveCity_MoveDeletersHouse_EventScript_21EAE6
@@ -13,7 +13,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA0B:: @ 821EA0B
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_21EA3B:: @ 821EA3B
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB65, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB65, MSGBOX_DEFAULT
 	special sub_81B94B0
 	waitstate
 	compare VAR_0x8004, 255
@@ -24,14 +24,14 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA3B:: @ 821EA3B
 	special sub_81B96D0
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EACF
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB89, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB89, MSGBOX_DEFAULT
 	fadescreen 1
 	special sub_81B968C
 	fadescreen 0
 	compare VAR_0x8005, 4
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EA3B
 	special sub_81B9718
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EBDA, 5
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EBDA, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 1, LilycoveCity_MoveDeletersHouse_EventScript_21EAB0
 	case 0, LilycoveCity_MoveDeletersHouse_EventScript_21EAE6
@@ -45,35 +45,35 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EAB0:: @ 821EAB0
 	special sub_81B9770
 	playfanfare MUS_ME_WASURE
 	waitfanfare
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC06, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC06, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_21EACF:: @ 821EACF
 	special sub_81B9718
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EBA9, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EBA9, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_21EADC:: @ 821EADC
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC78, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC78, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_21EAE6:: @ 821EAE6
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC3F, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC3F, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_MoveDeletersHouse_EventScript_21EAF0:: @ 821EAF0
 	special sub_81B9718
-	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC9C, 4
+	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC9C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LilycoveCity_MoveDeletersHouse_Text_21EAFD: @ 821EAFD
 	.string "Uh…\n"
-	.string "Oh, yes, I’m the MOVE DELETER.\p"
+	.string "Oh, yes, I'm the MOVE DELETER.\p"
 	.string "I can make POKéMON forget their moves.\p"
 	.string "Would you like me to do that?$"
 
@@ -85,10 +85,10 @@ LilycoveCity_MoveDeletersHouse_Text_21EB89: @ 821EB89
 
 LilycoveCity_MoveDeletersHouse_Text_21EBA9: @ 821EBA9
 	.string "{STR_VAR_1} knows only one move\n"
-	.string "so it can’t be forgotten…$"
+	.string "so it can't be forgotten…$"
 
 LilycoveCity_MoveDeletersHouse_Text_21EBDA: @ 821EBDA
-	.string "Hm! {STR_VAR_1}’s {STR_VAR_2}?\n"
+	.string "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
 	.string "That move should be forgotten?$"
 
 LilycoveCity_MoveDeletersHouse_Text_21EC06: @ 821EC06
@@ -106,6 +106,6 @@ LilycoveCity_MoveDeletersHouse_Text_21EC78: @ 821EC78
 
 LilycoveCity_MoveDeletersHouse_Text_21EC9C: @ 821EC9C
 	.string "Hm!\p"
-	.string "Your {STR_VAR_1} doesn’t seem willing\n"
+	.string "Your {STR_VAR_1} doesn't seem willing\n"
 	.string "to forget SURF.$"
 

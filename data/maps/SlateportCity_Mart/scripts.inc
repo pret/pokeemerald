@@ -7,7 +7,7 @@ SlateportCity_Mart_EventScript_20DC49:: @ 820DC49
 	message gUnknown_08272A21
 	waitmessage
 	pokemart SlateportCity_Mart_Pokemart_20DC60
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -26,11 +26,11 @@ SlateportCity_Mart_Pokemart_20DC60: @ 820DC60
 	end
 
 SlateportCity_Mart_EventScript_20DC76:: @ 820DC76
-	msgbox SlateportCity_Mart_Text_20DC88, 2
+	msgbox SlateportCity_Mart_Text_20DC88, MSGBOX_NPC
 	end
 
 SlateportCity_Mart_EventScript_20DC7F:: @ 820DC7F
-	msgbox SlateportCity_Mart_Text_20DCF8, 2
+	msgbox SlateportCity_Mart_Text_20DCF8, MSGBOX_NPC
 	end
 
 SlateportCity_Mart_Text_20DC88: @ 820DC88

@@ -12,7 +12,7 @@ FortreeCity_MapScript1_1E25B3: @ 81E25B3
 	end
 
 FortreeCity_EventScript_1E25B6:: @ 81E25B6
-	msgbox FortreeCity_Text_1E2676, 2
+	msgbox FortreeCity_Text_1E2676, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_1E25BF:: @ 81E25BF
@@ -20,37 +20,37 @@ FortreeCity_EventScript_1E25BF:: @ 81E25BF
 	faceplayer
 	checkflag FLAG_0x127
 	goto_eq FortreeCity_EventScript_1E25D4
-	msgbox FortreeCity_Text_1E2738, 4
+	msgbox FortreeCity_Text_1E2738, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_1E25D4:: @ 81E25D4
-	msgbox FortreeCity_Text_1E27B6, 4
+	msgbox FortreeCity_Text_1E27B6, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_1E25DE:: @ 81E25DE
-	msgbox FortreeCity_Text_1E27FE, 2
+	msgbox FortreeCity_Text_1E27FE, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_1E25E7:: @ 81E25E7
-	msgbox FortreeCity_Text_1E2880, 2
+	msgbox FortreeCity_Text_1E2880, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_1E25F0:: @ 81E25F0
-	msgbox FortreeCity_Text_1E292E, 2
+	msgbox FortreeCity_Text_1E292E, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_1E25F9:: @ 81E25F9
-	msgbox FortreeCity_Text_1E299D, 2
+	msgbox FortreeCity_Text_1E299D, MSGBOX_NPC
 	end
 
 FortreeCity_EventScript_1E2602:: @ 81E2602
-	msgbox FortreeCity_Text_1E2AAC, 3
+	msgbox FortreeCity_Text_1E2AAC, MSGBOX_SIGN
 	end
 
 FortreeCity_EventScript_1E260B:: @ 81E260B
-	msgbox FortreeCity_Text_1E2AE6, 3
+	msgbox FortreeCity_Text_1E2AE6, MSGBOX_SIGN
 	end
 
 FortreeCity_EventScript_1E2614:: @ 81E2614
@@ -59,19 +59,19 @@ FortreeCity_EventScript_1E2614:: @ 81E2614
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare VAR_RESULT, 1
 	goto_eq FortreeCity_EventScript_1E2630
-	msgbox FortreeCity_Text_1E29E5, 4
+	msgbox FortreeCity_Text_1E29E5, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_1E2630:: @ 81E2630
-	msgbox FortreeCity_Text_1E2A08, 5
+	msgbox FortreeCity_Text_1E2A08, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq FortreeCity_EventScript_1E2645
 	release
 	end
 
 FortreeCity_EventScript_1E2645:: @ 81E2645
-	msgbox FortreeCity_Text_1E2A48, 4
+	msgbox FortreeCity_Text_1E2A48, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, FortreeCity_Movement_2723C7
 	waitmovement 0
@@ -101,26 +101,26 @@ FortreeCity_Text_1E2676: @ 81E2676
 
 FortreeCity_Text_1E2738: @ 81E2738
 	.string "I want to go to the POKéMON GYM,\n"
-	.string "but something’s blocking the way.\p"
+	.string "but something's blocking the way.\p"
 	.string "After all the bother I went through\n"
 	.string "training on ROUTE 120…$"
 
 FortreeCity_Text_1E27B6: @ 81E27B6
-	.string "I’ve got my pride-and-joy POKéMON\n"
-	.string "with me. This time, I’ll beat WINONA.$"
+	.string "I've got my pride-and-joy POKéMON\n"
+	.string "with me. This time, I'll beat WINONA.$"
 
 FortreeCity_Text_1E27FE: @ 81E27FE
 	.string "The ground absorbs rainwater, and\n"
 	.string "trees grow by drinking that water…\p"
 	.string "Our FORTREE CITY exists because\n"
-	.string "there’s both water and soil.$"
+	.string "there's both water and soil.$"
 
 FortreeCity_Text_1E2880: @ 81E2880
 	.string "The CITY consists of homes built on\n"
 	.string "trees.\p"
 	.string "Perhaps because of that lifestyle,\n"
 	.string "everyone is healthy and lively.\p"
-	.string "Why, even myself--I feel as if I’ve\n"
+	.string "Why, even myself--I feel as if I've\n"
 	.string "grown thirty years younger.$"
 
 FortreeCity_Text_1E292E: @ 81E292E
@@ -131,7 +131,7 @@ FortreeCity_Text_1E292E: @ 81E292E
 
 FortreeCity_Text_1E299D: @ 81E299D
 	.string "There are POKéMON that evolve when\n"
-	.string "you trade them! That’s what I heard.$"
+	.string "you trade them! That's what I heard.$"
 
 FortreeCity_Text_1E29E5: @ 81E29E5
 	.string "Something unseeable is in the way.$"

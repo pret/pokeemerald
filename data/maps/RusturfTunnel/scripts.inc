@@ -21,7 +21,7 @@ RusturfTunnel_EventScript_22CE50:: @ 822CE50
 RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 	lock
 	faceplayer
-	msgbox RusturfTunnel_Text_22D7A3, 4
+	msgbox RusturfTunnel_Text_22D7A3, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
 	waitmovement 0
@@ -34,7 +34,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	checkflag FLAG_TEMP_1
 	goto_eq RusturfTunnel_EventScript_22CE99
 	setflag FLAG_TEMP_1
-	msgbox RusturfTunnel_Text_22D510, 4
+	msgbox RusturfTunnel_Text_22D510, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
 	waitmovement 0
@@ -42,7 +42,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	end
 
 RusturfTunnel_EventScript_22CE99:: @ 822CE99
-	msgbox RusturfTunnel_Text_22D5F3, 4
+	msgbox RusturfTunnel_Text_22D5F3, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
 	waitmovement 0
@@ -58,14 +58,14 @@ RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_22CFC7
 	call RusturfTunnel_EventScript_22CFFF
-	msgbox RusturfTunnel_Text_22D65C, 4
+	msgbox RusturfTunnel_Text_22D65C, MSGBOX_DEFAULT
 	compare VAR_TEMP_1, 2
 	call_if 1, RusturfTunnel_EventScript_22CFC8
 	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_22CFC8
 	giveitem_std ITEM_HM04
 	setflag FLAG_0x06A
-	msgbox RusturfTunnel_Text_22D6D2, 4
+	msgbox RusturfTunnel_Text_22D6D2, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_22CF5D
@@ -73,7 +73,7 @@ RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	call_if 1, RusturfTunnel_EventScript_22CF6F
 	compare VAR_TEMP_1, 3
 	call_if 1, RusturfTunnel_EventScript_22CF8B
-	msgbox RusturfTunnel_Text_22D745, 4
+	msgbox RusturfTunnel_Text_22D745, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
 	call_if 1, RusturfTunnel_EventScript_22CFD4
@@ -281,7 +281,7 @@ RusturfTunnel_EventScript_22D07D:: @ 822D07D
 
 RusturfTunnel_EventScript_22D083:: @ 822D083
 	lockall
-	msgbox RusturfTunnel_Text_22D1C8, 4
+	msgbox RusturfTunnel_Text_22D1C8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 6, RusturfTunnel_Movement_22D0AB
 	applymovement 7, RusturfTunnel_Movement_22D0AB
@@ -303,7 +303,7 @@ RusturfTunnel_EventScript_22D0AF:: @ 822D0AF
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox RusturfTunnel_Text_22D1F7, 4
+	msgbox RusturfTunnel_Text_22D1F7, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -312,9 +312,9 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	lock
 	faceplayer
 	playbgm MUS_AQA_0, 0
-	msgbox RusturfTunnel_Text_22D20A, 4
-	trainerbattle 3, TRAINER_GRUNT_10, 0, RusturfTunnel_Text_22D2B0
-	msgbox RusturfTunnel_Text_22D2E1, 4
+	msgbox RusturfTunnel_Text_22D20A, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_10, RusturfTunnel_Text_22D2B0
+	msgbox RusturfTunnel_Text_22D2E1, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_GOODS
 	closemessage
 	applymovement 255, RusturfTunnel_Movement_22D178
@@ -328,7 +328,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	applymovement 255, RusturfTunnel_Movement_22D17E
 	applymovement 5, RusturfTunnel_Movement_22D1A4
 	waitmovement 0
-	msgbox RusturfTunnel_Text_22D395, 4
+	msgbox RusturfTunnel_Text_22D395, MSGBOX_DEFAULT
 	applymovement 5, RusturfTunnel_Movement_27259E
 	waitmovement 0
 	message RusturfTunnel_Text_22D3BA
@@ -426,8 +426,8 @@ RusturfTunnel_Movement_22D1A7: @ 822D1A7
 	step_end
 
 RusturfTunnel_EventScript_22D1B1:: @ 822D1B1
-	trainerbattle 0, TRAINER_MIKE_2, 0, RusturfTunnel_Text_22D84D, RusturfTunnel_Text_22D8DB
-	msgbox RusturfTunnel_Text_22D8F9, 6
+	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_22D84D, RusturfTunnel_Text_22D8DB
+	msgbox RusturfTunnel_Text_22D8F9, MSGBOX_AUTOCLOSE
 	end
 
 RusturfTunnel_Text_22D1C8: @ 822D1C8
@@ -461,7 +461,7 @@ RusturfTunnel_Text_22D2E1: @ 822D2E1
 
 RusturfTunnel_Text_22D395: @ 822D395
 	.string "PEEKO!\n"
-	.string "Am I glad to see you’re safe!$"
+	.string "Am I glad to see you're safe!$"
 
 RusturfTunnel_Text_22D3BA: @ 822D3BA
 	.string "PEEKO owes her life to you!\p"
@@ -471,8 +471,8 @@ RusturfTunnel_Text_22D3BA: @ 822D3BA
 	.string "… … … … … … … …\p"
 	.string "Ah, so you are {PLAYER}{KUN}!\n"
 	.string "I sincerely thank you!\p"
-	.string "Now, if there’s anything that troubles\n"
-	.string "you, don’t hesitate to tell me!\p"
+	.string "Now, if there's anything that troubles\n"
+	.string "you, don't hesitate to tell me!\p"
 	.string "You can usually find me in my cottage\n"
 	.string "by the sea near PETALBURG WOODS.\p"
 	.string "Come, PEEKO, we should make our way\n"
@@ -481,7 +481,7 @@ RusturfTunnel_Text_22D3BA: @ 822D3BA
 
 RusturfTunnel_Text_22D510: @ 822D510
 	.string "… …\p"
-	.string "Why can’t they keep digging?\n"
+	.string "Why can't they keep digging?\n"
 	.string "Is the bedrock too hard?\p"
 	.string "My beloved awaits me in VERDANTURF\n"
 	.string "TOWN just beyond here…\p"
@@ -500,7 +500,7 @@ RusturfTunnel_Text_22D65C: @ 822D65C
 	.string "Wow! You shattered that boulder\n"
 	.string "blocking the way.\p"
 	.string "To show you how much I appreciate it,\n"
-	.string "I’d like you to have this HM.$"
+	.string "I'd like you to have this HM.$"
 
 RusturfTunnel_Text_22D6D2: @ 822D6D2
 	.string "That HM contains STRENGTH.\p"
@@ -511,13 +511,13 @@ RusturfTunnel_Text_22D6D2: @ 822D6D2
 RusturfTunnel_Text_22D745: @ 822D745
 	.string "WANDA!\n"
 	.string "Now I can see you anytime!\p"
-	.string "WANDA: That’s…wonderful.\p"
+	.string "WANDA: That's…wonderful.\p"
 	.string "Please, take some rest at my home.$"
 
 RusturfTunnel_Text_22D7A3: @ 822D7A3
 	.string "On the other side of this rock…\n"
 	.string "My boyfriend is there.\p"
-	.string "He… He’s not just digging the tunnel\n"
+	.string "He… He's not just digging the tunnel\n"
 	.string "to come see me.\p"
 	.string "He works his hands raw and rough\n"
 	.string "for the benefit of everyone.$"
@@ -525,7 +525,7 @@ RusturfTunnel_Text_22D7A3: @ 822D7A3
 RusturfTunnel_Text_22D84D: @ 822D84D
 	.string "What do you call a wild man up in the\n"
 	.string "mountains? A mountain man, right?\p"
-	.string "So why don’t they call a POKéMON in\n"
+	.string "So why don't they call a POKéMON in\n"
 	.string "the mountains a mountain POKéMON?$"
 
 RusturfTunnel_Text_22D8DB: @ 822D8DB
@@ -535,5 +535,5 @@ RusturfTunnel_Text_22D8DB: @ 822D8DB
 RusturfTunnel_Text_22D8F9: @ 822D8F9
 	.string "They halted development here to\n"
 	.string "protect POKéMON, right?\l"
-	.string "There’s a feel-good story!$"
+	.string "There's a feel-good story!$"
 

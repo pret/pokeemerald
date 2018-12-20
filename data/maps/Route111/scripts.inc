@@ -140,12 +140,12 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	checkflag FLAG_0x150
 	goto_eq Route111_EventScript_1F0EA7
-	msgbox Route111_Text_1F1C74, 4
+	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route111_EventScript_1F0EA7:: @ 81F0EA7
-	msgbox Route111_Text_1F1C9F, 4
+	msgbox Route111_Text_1F1C9F, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -165,18 +165,18 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	dodailyevents
 	checkflag FLAG_0x92C
 	goto_eq Route111_EventScript_1F0EF4
-	msgbox Route111_Text_2A6EBD, 4
+	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_272054
 	setflag FLAG_0x92C
 	special GetPlayerBigGuyGirlString
-	msgbox Route111_Text_2A6F3D, 4
+	msgbox Route111_Text_2A6F3D, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F0EF4:: @ 81F0EF4
-	msgbox Route111_Text_2A6F9A, 4
+	msgbox Route111_Text_2A6F9A, MSGBOX_DEFAULT
 	release
 	end
 
@@ -213,7 +213,7 @@ Route111_EventScript_1F0F2E:: @ 81F0F2E
 	end
 
 Route111_EventScript_1F0F45:: @ 81F0F45
-	msgbox gUnknown_08272C5F, 4
+	msgbox gUnknown_08272C5F, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
 	call_if 1, Route111_EventScript_1F0F7C
@@ -279,20 +279,20 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 	lock
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
-	msgbox Route111_Text_1F1475, 5
+	msgbox Route111_Text_1F1475, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F0FE7
-	msgbox Route111_Text_1F14F5, 4
+	msgbox Route111_Text_1F14F5, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F0FE7:: @ 81F0FE7
-	msgbox Route111_Text_1F1523, 4
-	trainerbattle 3, TRAINER_VICTOR, 0, Route111_Text_1F1542
+	msgbox Route111_Text_1F1523, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_1F1542
 	applymovement 1, Route111_Movement_2725A6
 	waitmovement 0
 	call Route111_EventScript_1F113C
-	msgbox Route111_Text_1F156F, 4
+	msgbox Route111_Text_1F156F, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Route111_Movement_1F114A
 	waitmovement 0
@@ -305,12 +305,12 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	applymovement 2, Route111_Movement_1F114D
 	waitmovement 0
 	call Route111_EventScript_1F1143
-	msgbox Route111_Text_1F159D, 4
-	trainerbattle 3, TRAINER_VICTORIA, 0, Route111_Text_1F1616
+	msgbox Route111_Text_1F159D, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_1F1616
 	applymovement 2, Route111_Movement_2725A6
 	waitmovement 0
 	call Route111_EventScript_1F113C
-	msgbox Route111_Text_1F1645, 4
+	msgbox Route111_Text_1F1645, MSGBOX_DEFAULT
 	closemessage
 	applymovement 2, Route111_Movement_1F114A
 	waitmovement 0
@@ -323,12 +323,12 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	applymovement 3, Route111_Movement_1F114D
 	waitmovement 0
 	call Route111_EventScript_1F1143
-	msgbox Route111_Text_1F167E, 4
-	trainerbattle 3, TRAINER_VIVI, 0, Route111_Text_1F16C6
+	msgbox Route111_Text_1F167E, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_1F16C6
 	applymovement 3, Route111_Movement_2725A6
 	waitmovement 0
 	call Route111_EventScript_1F113C
-	msgbox Route111_Text_1F16DC, 4
+	msgbox Route111_Text_1F16DC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route111_Movement_1F114A
 	waitmovement 0
@@ -341,9 +341,9 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	applymovement 4, Route111_Movement_1F114D
 	waitmovement 0
 	call Route111_EventScript_1F1143
-	msgbox Route111_Text_1F16FB, 4
-	trainerbattle 3, TRAINER_VICKY, 0, Route111_Text_1F1756
-	msgbox Route111_Text_1F1788, 4
+	msgbox Route111_Text_1F16FB, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_VICKY, Route111_Text_1F1756
+	msgbox Route111_Text_1F1788, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route111_Movement_2725A6
 	waitmovement 0
@@ -381,35 +381,35 @@ Route111_Movement_1F114F: @ 81F114F
 	step_end
 
 Route111_EventScript_1F1153:: @ 81F1153
-	msgbox Route111_Text_1F18CE, 3
+	msgbox Route111_Text_1F18CE, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F115C:: @ 81F115C
-	msgbox Route111_Text_1F18E8, 3
+	msgbox Route111_Text_1F18E8, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1165:: @ 81F1165
-	msgbox Route111_Text_1F1921, 3
+	msgbox Route111_Text_1F1921, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F116E:: @ 81F116E
-	msgbox Route111_Text_1F1937, 3
+	msgbox Route111_Text_1F1937, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1177:: @ 81F1177
-	msgbox Route111_Text_1F194D, 3
+	msgbox Route111_Text_1F194D, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1180:: @ 81F1180
-	msgbox Route111_Text_1F1987, 3
+	msgbox Route111_Text_1F1987, MSGBOX_SIGN
 	end
 
 Route111_EventScript_1F1189:: @ 81F1189
-	msgbox Route111_Text_1F17BA, 2
+	msgbox Route111_Text_1F17BA, MSGBOX_NPC
 	end
 
 Route111_EventScript_1F1192:: @ 81F1192
-	msgbox Route111_Text_1F186E, 2
+	msgbox Route111_Text_1F186E, MSGBOX_NPC
 	end
 
 Route111_EventScript_1F119B:: @ 81F119B
@@ -421,22 +421,22 @@ Route111_EventScript_1F119B:: @ 81F119B
 	goto_eq Route111_EventScript_1F11D0
 	checkflag FLAG_0x14E
 	goto_eq Route111_EventScript_1F11DA
-	msgbox Route111_Text_1F1A22, 4
+	msgbox Route111_Text_1F1A22, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F11C6:: @ 81F11C6
-	msgbox Route111_Text_1F1C12, 4
+	msgbox Route111_Text_1F1C12, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F11D0:: @ 81F11D0
-	msgbox Route111_Text_1F1B92, 4
+	msgbox Route111_Text_1F1B92, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F11DA:: @ 81F11DA
-	msgbox Route111_Text_1F1AC7, 4
+	msgbox Route111_Text_1F1AC7, MSGBOX_DEFAULT
 	release
 	end
 
@@ -444,7 +444,7 @@ Route111_EventScript_1F11E4:: @ 81F11E4
 	lockall
 	applymovement 46, Route111_Movement_27259E
 	waitmovement 0
-	msgbox Route111_Text_1F1CCA, 4
+	msgbox Route111_Text_1F1CCA, MSGBOX_DEFAULT
 	closemessage
 	applymovement 46, Route111_Movement_2725A2
 	waitmovement 0
@@ -452,157 +452,148 @@ Route111_EventScript_1F11E4:: @ 81F11E4
 	end
 
 Route111_EventScript_1F1204:: @ 81F1204
-	trainerbattle 0, TRAINER_DREW, 0, Route111_Text_29878E, Route111_Text_29880A
-	msgbox Route111_Text_298853, 6
+	trainerbattle_single TRAINER_DREW, Route111_Text_29878E, Route111_Text_29880A
+	msgbox Route111_Text_298853, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F121B:: @ 81F121B
-	trainerbattle 0, TRAINER_HEIDI, 0, Route111_Text_2988A3, Route111_Text_298908
-	msgbox Route111_Text_29891B, 6
+	trainerbattle_single TRAINER_HEIDI, Route111_Text_2988A3, Route111_Text_298908
+	msgbox Route111_Text_29891B, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1232:: @ 81F1232
-	trainerbattle 0, TRAINER_BEAU, 0, Route111_Text_29898E, Route111_Text_2989E6
-	msgbox Route111_Text_298A03, 6
+	trainerbattle_single TRAINER_BEAU, Route111_Text_29898E, Route111_Text_2989E6
+	msgbox Route111_Text_298A03, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1249:: @ 81F1249
-	trainerbattle 0, TRAINER_BECKY, 0, Route111_Text_298A65, Route111_Text_298AAF
-	msgbox Route111_Text_298AC0, 6
+	trainerbattle_single TRAINER_BECKY, Route111_Text_298A65, Route111_Text_298AAF
+	msgbox Route111_Text_298AC0, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1260:: @ 81F1260
-	trainerbattle 2, TRAINER_DUSTY_1, 0, Route111_Text_298B08, Route111_Text_298B53, Route111_EventScript_1F128C
+	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_298B08, Route111_Text_298B53, Route111_EventScript_1F128C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F12AB
-	msgbox Route111_Text_298B9A, 4
+	msgbox Route111_Text_298B9A, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F128C:: @ 81F128C
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route111_Text_298C00, 4
-	setvar VAR_0x8004, 44
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 44
-	callstd 8
+	msgbox Route111_Text_298C00, MSGBOX_DEFAULT
+	register_matchcall TRAINER_DUSTY_1
 	release
 	end
 
 Route111_EventScript_1F12AB:: @ 81F12AB
-	trainerbattle 5, TRAINER_DUSTY_1, 0, Route111_Text_298C5F, Route111_Text_298CD2
-	msgbox Route111_Text_298D0C, 6
+	trainerbattle_rematch TRAINER_DUSTY_1, Route111_Text_298C5F, Route111_Text_298CD2
+	msgbox Route111_Text_298D0C, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F12C2:: @ 81F12C2
-	trainerbattle 0, TRAINER_TRAVIS, 0, Route111_Text_298DA9, Route111_Text_298DD8
-	msgbox Route111_Text_298DF1, 6
+	trainerbattle_single TRAINER_TRAVIS, Route111_Text_298DA9, Route111_Text_298DD8
+	msgbox Route111_Text_298DF1, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F12D9:: @ 81F12D9
-	trainerbattle 0, TRAINER_IRENE, 0, Route111_Text_298E2F, Route111_Text_298E6E
-	msgbox Route111_Text_298E8C, 6
+	trainerbattle_single TRAINER_IRENE, Route111_Text_298E2F, Route111_Text_298E6E
+	msgbox Route111_Text_298E8C, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F12F0:: @ 81F12F0
-	trainerbattle 0, TRAINER_DAISUKE, 0, Route111_Text_298EE6, Route111_Text_298F14
-	msgbox Route111_Text_298F26, 6
+	trainerbattle_single TRAINER_DAISUKE, Route111_Text_298EE6, Route111_Text_298F14
+	msgbox Route111_Text_298F26, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1307:: @ 81F1307
-	trainerbattle 2, TRAINER_WILTON_1, 0, Route111_Text_298F79, Route111_Text_298FA9, Route111_EventScript_1F1333
+	trainerbattle_single TRAINER_WILTON_1, Route111_Text_298F79, Route111_Text_298FA9, Route111_EventScript_1F1333
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F1352
-	msgbox Route111_Text_298FD4, 4
+	msgbox Route111_Text_298FD4, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F1333:: @ 81F1333
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route111_Text_29903D, 4
-	setvar VAR_0x8004, 78
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 78
-	callstd 8
+	msgbox Route111_Text_29903D, MSGBOX_DEFAULT
+	register_matchcall TRAINER_WILTON_1
 	release
 	end
 
 Route111_EventScript_1F1352:: @ 81F1352
-	trainerbattle 5, TRAINER_WILTON_1, 0, Route111_Text_29909B, Route111_Text_2990EE
-	msgbox Route111_Text_299102, 6
+	trainerbattle_rematch TRAINER_WILTON_1, Route111_Text_29909B, Route111_Text_2990EE
+	msgbox Route111_Text_299102, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1369:: @ 81F1369
-	trainerbattle 2, TRAINER_BROOKE_1, 0, Route111_Text_299143, Route111_Text_299193, Route111_EventScript_1F1395
+	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_299143, Route111_Text_299193, Route111_EventScript_1F1395
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F13B4
-	msgbox Route111_Text_2991C2, 4
+	msgbox Route111_Text_2991C2, MSGBOX_DEFAULT
 	release
 	end
 
 Route111_EventScript_1F1395:: @ 81F1395
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route111_Text_29921D, 4
-	setvar VAR_0x8004, 94
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 94
-	callstd 8
+	msgbox Route111_Text_29921D, MSGBOX_DEFAULT
+	register_matchcall TRAINER_BROOKE_1
 	release
 	end
 
 Route111_EventScript_1F13B4:: @ 81F13B4
-	trainerbattle 5, TRAINER_BROOKE_1, 0, Route111_Text_29925D, Route111_Text_2992D6
-	msgbox Route111_Text_2992F5, 6
+	trainerbattle_rematch TRAINER_BROOKE_1, Route111_Text_29925D, Route111_Text_2992D6
+	msgbox Route111_Text_2992F5, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F13CB:: @ 81F13CB
-	trainerbattle 0, TRAINER_HAYDEN, 0, Route111_Text_299682, Route111_Text_2996BE
-	msgbox Route111_Text_2996C5, 6
+	trainerbattle_single TRAINER_HAYDEN, Route111_Text_299682, Route111_Text_2996BE
+	msgbox Route111_Text_2996C5, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F13E2:: @ 81F13E2
-	trainerbattle 0, TRAINER_BIANCA, 0, Route111_Text_2996FE, Route111_Text_29973D
-	msgbox Route111_Text_29975D, 6
+	trainerbattle_single TRAINER_BIANCA, Route111_Text_2996FE, Route111_Text_29973D
+	msgbox Route111_Text_29975D, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F13F9:: @ 81F13F9
-	trainerbattle 0, TRAINER_TYRON, 0, Route111_Text_299524, Route111_Text_299549
-	msgbox Route111_Text_299576, 6
+	trainerbattle_single TRAINER_TYRON, Route111_Text_299524, Route111_Text_299549
+	msgbox Route111_Text_299576, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1410:: @ 81F1410
-	trainerbattle 0, TRAINER_CELINA, 0, Route111_Text_2995F0, Route111_Text_299625
-	msgbox Route111_Text_29964B, 6
+	trainerbattle_single TRAINER_CELINA, Route111_Text_2995F0, Route111_Text_299625
+	msgbox Route111_Text_29964B, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1427:: @ 81F1427
-	trainerbattle 0, TRAINER_CELIA, 0, Route111_Text_29934B, Route111_Text_299384
-	msgbox Route111_Text_2993A7, 6
+	trainerbattle_single TRAINER_CELIA, Route111_Text_29934B, Route111_Text_299384
+	msgbox Route111_Text_2993A7, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F143E:: @ 81F143E
-	trainerbattle 0, TRAINER_BRYAN, 0, Route111_Text_299401, Route111_Text_299431
-	msgbox Route111_Text_29945F, 6
+	trainerbattle_single TRAINER_BRYAN, Route111_Text_299401, Route111_Text_299431
+	msgbox Route111_Text_29945F, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F1455:: @ 81F1455
-	trainerbattle 0, TRAINER_BRANDEN, 0, Route111_Text_299493, Route111_Text_2994C5
-	msgbox Route111_Text_2994FB, 6
+	trainerbattle_single TRAINER_BRANDEN, Route111_Text_299493, Route111_Text_2994C5
+	msgbox Route111_Text_2994FB, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_1F146C:: @ 81F146C
-	msgbox Route111_Text_1F1D61, 3
+	msgbox Route111_Text_1F1D61, MSGBOX_SIGN
 	end
 
 Route111_Text_1F1475: @ 81F1475
-	.string "Hello! I take it you’re a traveler.\p"
-	.string "How’s this? What do you say to taking\n"
+	.string "Hello! I take it you're a traveler.\p"
+	.string "How's this? What do you say to taking\n"
 	.string "on our family of four in a series of\l"
 	.string "POKéMON battles?$"
 
@@ -611,33 +602,33 @@ Route111_Text_1F14F5: @ 81F14F5
 	.string "Drop in, if you change your mind!$"
 
 Route111_Text_1F1523: @ 81F1523
-	.string "That’s the spirit! I like you!$"
+	.string "That's the spirit! I like you!$"
 
 Route111_Text_1F1542: @ 81F1542
 	.string "Aiyah!\n"
-	.string "You’re a lot tougher than I expected!$"
+	.string "You're a lot tougher than I expected!$"
 
 Route111_Text_1F156F: @ 81F156F
 	.string "Hey, all!\n"
-	.string "I’ve found a pretty strong TRAINER!$"
+	.string "I've found a pretty strong TRAINER!$"
 
 Route111_Text_1F159D: @ 81F159D
-	.string "Oh, my goodness! Aren’t you young?\p"
+	.string "Oh, my goodness! Aren't you young?\p"
 	.string "You must be quite the TRAINER to beat\n"
 	.string "my husband, though.\p"
-	.string "It’s my turn to battle now!$"
+	.string "It's my turn to battle now!$"
 
 Route111_Text_1F1616: @ 81F1616
 	.string "Oh, gosh!\n"
-	.string "I can’t get over how strong you are!$"
+	.string "I can't get over how strong you are!$"
 
 Route111_Text_1F1645: @ 81F1645
-	.string "There’s a strong TRAINER here!\n"
-	.string "This one’s really strong!$"
+	.string "There's a strong TRAINER here!\n"
+	.string "This one's really strong!$"
 
 Route111_Text_1F167E: @ 81F167E
-	.string "You’re stronger than Mommy? Wow!\p"
-	.string "But I’m strong, too!\n"
+	.string "You're stronger than Mommy? Wow!\p"
+	.string "But I'm strong, too!\n"
 	.string "Really! Honestly!$"
 
 Route111_Text_1F16C6: @ 81F16C6
@@ -650,7 +641,7 @@ Route111_Text_1F16DC: @ 81F16DC
 Route111_Text_1F16FB: @ 81F16FB
 	.string "How dare you make my granddaughter\n"
 	.string "cry!\p"
-	.string "For that, I’m going to smack you!\n"
+	.string "For that, I'm going to smack you!\n"
 	.string "Prepare to lose!$"
 
 Route111_Text_1F1756: @ 81F1756
@@ -658,14 +649,14 @@ Route111_Text_1F1756: @ 81F1756
 	.string "My granddaughter was right…$"
 
 Route111_Text_1F1788: @ 81F1788
-	.string "If you’re not in any hurry,\n"
+	.string "If you're not in any hurry,\n"
 	.string "visit with us awhile.$"
 
 Route111_Text_1F17BA: @ 81F17BA
-	.string "If you don’t raise your POKéMON some\n"
+	.string "If you don't raise your POKéMON some\n"
 	.string "more, it could be tough to keep winning\l"
 	.string "up through the ranks.\p"
-	.string "I’ve heard the POKéMON LEAGUE’s\n"
+	.string "I've heard the POKéMON LEAGUE's\n"
 	.string "ELITE FOUR are far stronger than\l"
 	.string "any GYM LEADER.$"
 
@@ -679,8 +670,8 @@ Route111_Text_1F18CE: @ 81F18CE
 	.string "{DOWN_ARROW} MAUVILLE CITY$"
 
 Route111_Text_1F18E8: @ 81F18E8
-	.string "“Our family’s hearts beat as one!”\n"
-	.string "THE WINSTRATE’S HOUSE$"
+	.string "“Our family's hearts beat as one!”\n"
+	.string "THE WINSTRATE'S HOUSE$"
 
 Route111_Text_1F1921: @ 81F1921
 	.string "ROUTE 111\n"
@@ -691,12 +682,12 @@ Route111_Text_1F1937: @ 81F1937
 	.string "{LEFT_ARROW} ROUTE 113$"
 
 Route111_Text_1F194D: @ 81F194D
-	.string "OLD LADY’S REST STOP\n"
+	.string "OLD LADY'S REST STOP\n"
 	.string "“Come in and rest your tired bones.”$"
 
 Route111_Text_1F1987: @ 81F1987
 	.string "TRAINER TIPS\p"
-	.string "One of the indicators of a POKéMON’s\n"
+	.string "One of the indicators of a POKéMON's\n"
 	.string "powerfulness is SP. ATK. It stands for\l"
 	.string "“SPECIAL ATTACK.”\p"
 	.string "Likewise, SP. DEF stands for “SPECIAL\n"
@@ -707,7 +698,7 @@ Route111_Text_1F1A22: @ 81F1A22
 	.string "around here somewhere.\p"
 	.string "But for some reason, it can be seen\n"
 	.string "sometimes, and sometimes not.\p"
-	.string "That’s why I call it the MIRAGE TOWER.$"
+	.string "That's why I call it the MIRAGE TOWER.$"
 
 Route111_Text_1F1AC7: @ 81F1AC7
 	.string "I see it!\n"
@@ -716,7 +707,7 @@ Route111_Text_1F1AC7: @ 81F1AC7
 	.string "is clearly visible!\p"
 	.string "But it looks so fragile…\n"
 	.string "It could crumble away anytime…\p"
-	.string "I want to go inside it, but I can’t\n"
+	.string "I want to go inside it, but I can't\n"
 	.string "get my courage up for it…$"
 
 Route111_Text_1F1B92: @ 81F1B92
@@ -729,7 +720,7 @@ Route111_Text_1F1B92: @ 81F1B92
 
 Route111_Text_1F1C12: @ 81F1C12
 	.string "Since I spoke to you, the tower of sand\n"
-	.string "hasn’t been seen.\p"
+	.string "hasn't been seen.\p"
 	.string "Perhaps it really was\n"
 	.string "the MIRAGE TOWER…$"
 

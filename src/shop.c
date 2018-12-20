@@ -6,7 +6,7 @@
 #include "decoration_inventory.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "gpu_regs.h"
@@ -17,7 +17,7 @@
 #include "item_menu.h"
 #include "list_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "money.h"
@@ -447,8 +447,8 @@ static void CB2_InitBuyMenu(void)
         clear_scheduled_bg_copies_to_vram();
         gShopDataPtr = AllocZeroed(sizeof(struct ShopData));
         gShopDataPtr->scrollIndicatorsTaskId = 0xFF;
-        gShopDataPtr->itemSpriteIds[0] = -1;
-        gShopDataPtr->itemSpriteIds[1] = -1;
+        gShopDataPtr->itemSpriteIds[0] = 0xFF;
+        gShopDataPtr->itemSpriteIds[1] = 0xFF;
         BuyMenuBuildListMenuTemplate();
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);

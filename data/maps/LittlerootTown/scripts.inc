@@ -126,7 +126,7 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	delay 10
 	applymovement 4, LittlerootTown_Movement_1E7F9A
 	waitmovement 0
-	msgbox LittlerootTown_Text_1E86BC, 4
+	msgbox LittlerootTown_Text_1E86BC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LittlerootTown_Movement_1E7F9D
 	applymovement 255, LittlerootTown_Movement_1E7FA4
@@ -190,7 +190,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	applymovement 8, LittlerootTown_Movement_272598
 	waitmovement 0
 	delay 80
-	msgbox LittlerootTown_Text_1E8DA2, 4
+	msgbox LittlerootTown_Text_1E8DA2, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
@@ -225,11 +225,11 @@ LittlerootTown_EventScript_1E8013:: @ 81E8013
 	end
 
 LittlerootTown_EventScript_1E8022:: @ 81E8022
-	msgbox LittlerootTown_Text_1E8ACF, 2
+	msgbox LittlerootTown_Text_1E8ACF, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_1E802B:: @ 81E802B
-	msgbox LittlerootTown_Text_1E8B25, 2
+	msgbox LittlerootTown_Text_1E8B25, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_1E8034:: @ 81E8034
@@ -241,13 +241,13 @@ LittlerootTown_EventScript_1E8034:: @ 81E8034
 	goto_eq LittlerootTown_EventScript_1E807A
 	compare VAR_0x4050, 0
 	goto_if 5, LittlerootTown_EventScript_1E805D
-	msgbox LittlerootTown_Text_1E8BB8, 4
+	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_1E805D:: @ 81E805D
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_1E8C3A, 4
+	msgbox LittlerootTown_Text_1E8C3A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
 	waitmovement 0
@@ -257,12 +257,12 @@ LittlerootTown_EventScript_1E805D:: @ 81E805D
 
 LittlerootTown_EventScript_1E807A:: @ 81E807A
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_1E8CE3, 4
+	msgbox LittlerootTown_Text_1E8CE3, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_1E8087:: @ 81E8087
-	msgbox LittlerootTown_Text_1E8D07, 4
+	msgbox LittlerootTown_Text_1E8D07, MSGBOX_DEFAULT
 	release
 	end
 
@@ -277,12 +277,12 @@ LittlerootTown_EventScript_1E8091:: @ 81E8091
 	end
 
 LittlerootTown_EventScript_1E80AD:: @ 81E80AD
-	msgbox LittlerootTown_Text_1E8BB8, 4
+	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_1E80DF
 	applymovement 255, LittlerootTown_Movement_1E80EB
 	waitmovement 0
-	msgbox LittlerootTown_Text_1E8C07, 4
+	msgbox LittlerootTown_Text_1E8C07, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -365,7 +365,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	applymovement 255, LittlerootTown_Movement_2725A4
 	waitmovement 0
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_1E8C3A, 4
+	msgbox LittlerootTown_Text_1E8C3A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
 	waitmovement 0
@@ -374,11 +374,11 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	end
 
 LittlerootTown_EventScript_1E8151:: @ 81E8151
-	msgbox LittlerootTown_Text_1E8D32, 3
+	msgbox LittlerootTown_Text_1E8D32, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_1E815A:: @ 81E815A
-	msgbox LittlerootTown_Text_1E8D69, 3
+	msgbox LittlerootTown_Text_1E8D69, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_1E8163:: @ 81E8163
@@ -392,11 +392,11 @@ LittlerootTown_EventScript_1E8163:: @ 81E8163
 	end
 
 LittlerootTown_EventScript_1E817D:: @ 81E817D
-	msgbox LittlerootTown_Text_1E8D83, 4
+	msgbox LittlerootTown_Text_1E8D83, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E8186:: @ 81E8186
-	msgbox LittlerootTown_Text_1E8D8E, 4
+	msgbox LittlerootTown_Text_1E8D8E, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E818F:: @ 81E818F
@@ -410,11 +410,11 @@ LittlerootTown_EventScript_1E818F:: @ 81E818F
 	end
 
 LittlerootTown_EventScript_1E81A9:: @ 81E81A9
-	msgbox LittlerootTown_Text_1E8D8E, 4
+	msgbox LittlerootTown_Text_1E8D8E, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E81B2:: @ 81E81B2
-	msgbox LittlerootTown_Text_1E8D83, 4
+	msgbox LittlerootTown_Text_1E8D83, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_1E81BB:: @ 81E81BB
@@ -466,7 +466,7 @@ LittlerootTown_EventScript_1E8211:: @ 81E8211
 	call_if 1, LittlerootTown_EventScript_1E8281
 	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E828C
-	msgbox LittlerootTown_Text_1E87E1, 4
+	msgbox LittlerootTown_Text_1E87E1, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -917,28 +917,28 @@ LittlerootTown_EventScript_1E8686:: @ 81E8686
 	end
 
 LittlerootTown_EventScript_1E8693:: @ 81E8693
-	msgbox LittlerootTown_Text_1E87F0, 4
+	msgbox LittlerootTown_Text_1E87F0, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_1E8925
 	waitfanfare
 	setflag FLAG_0x112
-	msgbox LittlerootTown_Text_1E894F, 4
-	msgbox LittlerootTown_Text_1E8A03, 4
+	msgbox LittlerootTown_Text_1E894F, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_1E8A03, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	return
 
 LittlerootTown_Text_1E86BC: @ 81E86BC
-	.string "MOM: {PLAYER}, we’re here, honey!\p"
+	.string "MOM: {PLAYER}, we're here, honey!\p"
 	.string "It must be tiring riding with our things\n"
 	.string "in the moving truck.\p"
 	.string "Well, this is LITTLEROOT TOWN.\p"
 	.string "How do you like it?\n"
 	.string "This is our new home!\p"
 	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don’t you think?\p"
+	.string "an easy place to live, don't you think?\p"
 	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let’s go inside.$"
+	.string "Let's go inside.$"
 
 LittlerootTown_Text_1E87E1: @ 81E87E1
 	.string "MOM: Wait, {PLAYER}!$"
@@ -948,11 +948,11 @@ LittlerootTown_Text_1E87F0: @ 81E87F0
 	.string "introduce yourself to PROF. BIRCH?\p"
 	.string "Oh! What an adorable POKéMON!\n"
 	.string "You got it from PROF. BIRCH. How nice!\p"
-	.string "You’re your father’s child, all right.\n"
+	.string "You're your father's child, all right.\n"
 	.string "You look good together with POKéMON!\p"
-	.string "Here, honey! If you’re going out on an\n"
+	.string "Here, honey! If you're going out on an\n"
 	.string "adventure, wear these RUNNING SHOES.\p"
-	.string "They’ll put a zip in your step!$"
+	.string "They'll put a zip in your step!$"
 
 LittlerootTown_Text_1E8925: @ 81E8925
 	.string "{PLAYER} switched shoes with the\n"
@@ -983,7 +983,7 @@ LittlerootTown_Text_1E8ACF: @ 81E8ACF
 
 LittlerootTown_Text_1E8B25: @ 81E8B25
 	.string "PROF. BIRCH spends days in his LAB\n"
-	.string "studying, then he’ll suddenly go out in\l"
+	.string "studying, then he'll suddenly go out in\l"
 	.string "the wild to do more research…\p"
 	.string "When does PROF. BIRCH spend time\n"
 	.string "at home?$"
@@ -994,21 +994,21 @@ LittlerootTown_Text_1E8BB8: @ 81E8BB8
 	.string "wild POKéMON will jump out!$"
 
 LittlerootTown_Text_1E8C07: @ 81E8C07
-	.string "It’s dangerous if you don’t have\n"
+	.string "It's dangerous if you don't have\n"
 	.string "your own POKéMON.$"
 
 LittlerootTown_Text_1E8C3A: @ 81E8C3A
 	.string "Um, hi!\p"
 	.string "There are scary POKéMON outside!\n"
 	.string "I can hear their cries!\p"
-	.string "I want to go see what’s going on,\n"
-	.string "but I don’t have any POKéMON…\p"
-	.string "Can you go see what’s happening\n"
+	.string "I want to go see what's going on,\n"
+	.string "but I don't have any POKéMON…\p"
+	.string "Can you go see what's happening\n"
 	.string "for me?$"
 
 LittlerootTown_Text_1E8CE3: @ 81E8CE3
 	.string "You saved PROF. BIRCH!\n"
-	.string "I’m so glad!$"
+	.string "I'm so glad!$"
 
 LittlerootTown_Text_1E8D07: @ 81E8D07
 	.string "Are you going to catch POKéMON?\n"
@@ -1016,16 +1016,16 @@ LittlerootTown_Text_1E8D07: @ 81E8D07
 
 LittlerootTown_Text_1E8D32: @ 81E8D32
 	.string "LITTLEROOT TOWN\n"
-	.string "“A town that can’t be shaded any hue.”$"
+	.string "“A town that can't be shaded any hue.”$"
 
 LittlerootTown_Text_1E8D69: @ 81E8D69
-	.string "PROF. BIRCH’S POKéMON LAB$"
+	.string "PROF. BIRCH'S POKéMON LAB$"
 
 LittlerootTown_Text_1E8D83: @ 81E8D83
-	.string "{PLAYER}’s HOUSE$"
+	.string "{PLAYER}'s HOUSE$"
 
 LittlerootTown_Text_1E8D8E: @ 81E8D8E
-	.string "PROF. BIRCH’S HOUSE$"
+	.string "PROF. BIRCH'S HOUSE$"
 
 LittlerootTown_Text_1E8DA2: @ 81E8DA2
 	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
@@ -1036,5 +1036,5 @@ LittlerootTown_Text_1E8DA2: @ 81E8DA2
 	.string "Oh, yes. Do you still have the POKéDEX\n"
 	.string "I gave you?\p"
 	.string "I have something to show you.\n"
-	.string "Let’s go to my LAB.$"
+	.string "Let's go to my LAB.$"
 

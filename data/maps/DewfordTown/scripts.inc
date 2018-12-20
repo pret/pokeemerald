@@ -22,53 +22,53 @@ DewfordTown_EventScript_1E9511:: @ 81E9511
 	end
 
 DewfordTown_EventScript_1E955A:: @ 81E955A
-	msgbox DewfordTown_Text_1E9CE5, 4
+	msgbox DewfordTown_Text_1E9CE5, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_1E9660
 	release
 	end
 
 DewfordTown_EventScript_1E956A:: @ 81E956A
-	msgbox DewfordTown_Text_1E9D3A, 4
+	msgbox DewfordTown_Text_1E9D3A, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_1E96E7
 	release
 	end
 
 DewfordTown_EventScript_1E957A:: @ 81E957A
-	msgbox DewfordTown_Text_1E9D8F, 4
+	msgbox DewfordTown_Text_1E9D8F, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
 DewfordTown_EventScript_1E9585:: @ 81E9585
-	msgbox DewfordTown_Text_1E9B24, 5
+	msgbox DewfordTown_Text_1E9B24, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E95A2
-	msgbox DewfordTown_Text_1E9BD9, 4
+	msgbox DewfordTown_Text_1E9BD9, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E95A2:: @ 81E95A2
-	msgbox DewfordTown_Text_1E9B7F, 4
+	msgbox DewfordTown_Text_1E9B7F, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_1E9660
 	end
 
 DewfordTown_EventScript_1E95B1:: @ 81E95B1
-	msgbox DewfordTown_Text_1E99A8, 2
+	msgbox DewfordTown_Text_1E99A8, MSGBOX_NPC
 	end
 
 DewfordTown_EventScript_1E95BA:: @ 81E95BA
-	msgbox DewfordTown_Text_1E9A0F, 3
+	msgbox DewfordTown_Text_1E9A0F, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1E95C3:: @ 81E95C3
-	msgbox DewfordTown_Text_1E9A3D, 3
+	msgbox DewfordTown_Text_1E9A3D, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1E95CC:: @ 81E95CC
-	msgbox DewfordTown_Text_1E9A7F, 3
+	msgbox DewfordTown_Text_1E9A7F, MSGBOX_SIGN
 	end
 
 DewfordTown_EventScript_1E95D5:: @ 81E95D5
@@ -76,7 +76,7 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	faceplayer
 	checkflag FLAG_0x101
 	goto_eq DewfordTown_EventScript_1E962A
-	msgbox DewfordTown_Text_1E9DD1, 5
+	msgbox DewfordTown_Text_1E9DD1, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E95FF
 	compare VAR_RESULT, 0
@@ -84,15 +84,15 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	end
 
 DewfordTown_EventScript_1E95FF:: @ 81E95FF
-	msgbox DewfordTown_Text_1E9E14, 4
+	msgbox DewfordTown_Text_1E9E14, MSGBOX_DEFAULT
 	giveitem_std ITEM_OLD_ROD
 	setflag FLAG_0x101
-	msgbox DewfordTown_Text_1E9E65, 4
+	msgbox DewfordTown_Text_1E9E65, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9620:: @ 81E9620
-	msgbox DewfordTown_Text_1E9F92, 4
+	msgbox DewfordTown_Text_1E9F92, MSGBOX_DEFAULT
 	release
 	end
 
@@ -107,12 +107,12 @@ DewfordTown_EventScript_1E962A:: @ 81E962A
 	end
 
 DewfordTown_EventScript_1E964C:: @ 81E964C
-	msgbox DewfordTown_Text_1E9FD0, 4
+	msgbox DewfordTown_Text_1E9FD0, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9656:: @ 81E9656
-	msgbox DewfordTown_Text_1EA004, 4
+	msgbox DewfordTown_Text_1EA004, MSGBOX_DEFAULT
 	release
 	end
 
@@ -189,11 +189,11 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	end
 
 DewfordTown_EventScript_1E9790:: @ 81E9790
-	msgbox DewfordTown_Text_1EEC1D, 4
+	msgbox DewfordTown_Text_1EEC1D, MSGBOX_DEFAULT
 	return
 
 DewfordTown_EventScript_1E9799:: @ 81E9799
-	msgbox DewfordTown_Text_1EEDA7, 4
+	msgbox DewfordTown_Text_1EEDA7, MSGBOX_DEFAULT
 	return
 
 DewfordTown_Movement_1E97A2: @ 81E97A2
@@ -598,7 +598,7 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	lock
 	faceplayer
 	call DewfordTown_EventScript_271E8B
-	msgbox DewfordTown_Text_1EA136, 5
+	msgbox DewfordTown_Text_1EA136, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E9948
 	compare VAR_RESULT, 0
@@ -606,12 +606,12 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	end
 
 DewfordTown_EventScript_1E9948:: @ 81E9948
-	msgbox DewfordTown_Text_1EA491, 4
+	msgbox DewfordTown_Text_1EA491, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9952:: @ 81E9952
-	msgbox DewfordTown_Text_1EA242, 4
+	msgbox DewfordTown_Text_1EA242, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 9
 	call DewfordTown_EventScript_271E7C
 	lock
@@ -626,17 +626,17 @@ DewfordTown_EventScript_1E997D:: @ 81E997D
 	incrementgamestat 2
 	compare VAR_0x8004, 0
 	goto_eq DewfordTown_EventScript_1E999E
-	msgbox DewfordTown_Text_1EA2AA, 4
+	msgbox DewfordTown_Text_1EA2AA, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E9994:: @ 81E9994
-	msgbox DewfordTown_Text_1EA443, 4
+	msgbox DewfordTown_Text_1EA443, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_EventScript_1E999E:: @ 81E999E
-	msgbox DewfordTown_Text_1EA3FE, 4
+	msgbox DewfordTown_Text_1EA3FE, MSGBOX_DEFAULT
 	release
 	end
 
@@ -656,12 +656,12 @@ DewfordTown_Text_1E9A3D: @ 81E9A3D
 
 DewfordTown_Text_1E9A7F: @ 81E9A7F
 	.string "DEWFORD HALL\n"
-	.string "“Everyone’s information exchange!”$"
+	.string "“Everyone's information exchange!”$"
 
 Route104_Text_1E9AAF: @ 81E9AAF
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "We’ve hit land in DEWFORD.\p"
-	.string "I suppose you’re off to deliver that\n"
+	.string "We've hit land in DEWFORD.\p"
+	.string "I suppose you're off to deliver that\n"
 	.string "LETTER to, who was it now, STEVEN!$"
 
 DewfordTown_Text_1E9B24: @ 81E9B24
@@ -673,33 +673,33 @@ DewfordTown_Text_1E9B24: @ 81E9B24
 DewfordTown_Text_1E9B7F: @ 81E9B7F
 	.string "MR. BRINEY: PETALBURG it is, then!\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_1E9BD9: @ 81E9BD9
 	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the LETTER. I’ll be waiting.$"
+	.string "the LETTER. I'll be waiting.$"
 
 Route104_Text_1E9C1D: @ 81E9C1D
 Route109_Text_1E9C1D: @ 81E9C1D
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "We’ve hit land in DEWFORD!\p"
+	.string "We've hit land in DEWFORD!\p"
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail again!$"
 
 DewfordTown_Text_1E9C8A: @ 81E9C8A
 	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I’ll go out to sea anytime!\p"
+	.string "For you, I'll go out to sea anytime!\p"
 	.string "Now, my friend, where are we bound?$"
 
 DewfordTown_Text_1E9CE5: @ 81E9CE5
 	.string "MR. BRINEY: PETALBURG, is it?\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_1E9D3A: @ 81E9D3A
 	.string "MR. BRINEY: SLATEPORT, is it?\p"
 	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
+	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_1E9D8F: @ 81E9D8F
 	.string "MR. BRINEY: You just tell me whenever\n"
@@ -711,11 +711,11 @@ DewfordTown_Text_1E9DD1: @ 81E9DD1
 
 DewfordTown_Text_1E9E14: @ 81E9E14
 	.string "I hear you, and I like what\n"
-	.string "you’re saying!\p"
-	.string "I’ll give you one of my fishing RODS.$"
+	.string "you're saying!\p"
+	.string "I'll give you one of my fishing RODS.$"
 
 DewfordTown_Text_1E9E65: @ 81E9E65
-	.string "And, as an added bonus, I’ll even throw\n"
+	.string "And, as an added bonus, I'll even throw\n"
 	.string "in a little fishing advice!\p"
 	.string "First, you want to face the water,\n"
 	.string "then use the ROD.\p"
@@ -728,19 +728,19 @@ DewfordTown_Text_1E9E65: @ 81E9E65
 
 DewfordTown_Text_1E9F92: @ 81E9F92
 	.string "Oh, is that so?\n"
-	.string "That’s too bad, then.$"
+	.string "That's too bad, then.$"
 
 DewfordTown_Text_1E9FB8: @ 81E9FB8
 	.string "Yo!\n"
-	.string "How’s your fishing?$"
+	.string "How's your fishing?$"
 
 DewfordTown_Text_1E9FD0: @ 81E9FD0
-	.string "Is that right! That’s great!\n"
+	.string "Is that right! That's great!\n"
 	.string "Haul in some big ones!$"
 
 DewfordTown_Text_1EA004: @ 81EA004
-	.string "Oh, hey, don’t get down on yourself!\n"
-	.string "I’ll give you a little fishing advice.\p"
+	.string "Oh, hey, don't get down on yourself!\n"
+	.string "I'll give you a little fishing advice.\p"
 	.string "First, you want to face the water,\n"
 	.string "then use the ROD.\p"
 	.string "Focus your mind…\n"
@@ -751,49 +751,49 @@ DewfordTown_Text_1EA004: @ 81EA004
 	.string "to haul them in.$"
 
 DewfordTown_Text_1EA136: @ 81EA136
-	.string "I like what’s hip, happening, and trendy.\n"
-	.string "I’m always checking it out.\p"
+	.string "I like what's hip, happening, and trendy.\n"
+	.string "I'm always checking it out.\p"
 	.string "Listen, have you heard about this new\n"
 	.string "“{STR_VAR_1}”?\p"
-	.string "That’s right!\n"
+	.string "That's right!\n"
 	.string "Of course you know!\p"
 	.string "I mean, sheesh,\n"
 	.string "“{STR_VAR_1}”…\l"
-	.string "It’s the hottest thing in cool!\p"
-	.string "Wherever you’re from,\n"
+	.string "It's the hottest thing in cool!\p"
+	.string "Wherever you're from,\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "is the biggest happening thing, right?$"
 
 DewfordTown_Text_1EA242: @ 81EA242
 	.string "Hunh?\n"
-	.string "It’s not the hip and happening thing?\p"
+	.string "It's not the hip and happening thing?\p"
 	.string "Well, hey, you have to tell me,\n"
-	.string "what’s new and what’s “in”?$"
+	.string "what's new and what's “in”?$"
 
 DewfordTown_Text_1EA2AA: @ 81EA2AA
 	.string "Hunh?\n"
 	.string "“{STR_VAR_2}”?\p"
 	.string "… …\p"
-	.string "…Uh… Yeah! That’s right!\n"
+	.string "…Uh… Yeah! That's right!\n"
 	.string "Yeah, I knew that! Knew it all along!\p"
 	.string "Of course I know about that!\n"
 	.string "“{STR_VAR_2},” right?\p"
-	.string "Yeah, that’s it, it’s there!\n"
-	.string "Isn’t “{STR_VAR_2}”\l"
+	.string "Yeah, that's it, it's there!\n"
+	.string "Isn't “{STR_VAR_2}”\l"
 	.string "the coolest, or what?\p"
-	.string "It’s the hippest thing in hip.\n"
-	.string "You think I’d not know about it?\p"
+	.string "It's the hippest thing in hip.\n"
+	.string "You think I'd not know about it?\p"
 	.string "“{STR_VAR_1}”…\n"
-	.string "It’s, like, so five minutes ago.\p"
+	.string "It's, like, so five minutes ago.\p"
 	.string "Now, “{STR_VAR_2}” is\n"
-	.string "what’s vital and in tune with the times!$"
+	.string "what's vital and in tune with the times!$"
 
 DewfordTown_Text_1EA3FE: @ 81EA3FE
 	.string "Hmm…\n"
 	.string "“{STR_VAR_2},” huh?\p"
 	.string "But personally, I think\n"
 	.string "“{STR_VAR_1}”\l"
-	.string "is what’s real in cool.$"
+	.string "is what's real in cool.$"
 
 DewfordTown_Text_1EA443: @ 81EA443
 	.string "Well, if you hear of any happening new\n"

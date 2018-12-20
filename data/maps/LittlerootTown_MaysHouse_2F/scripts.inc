@@ -59,7 +59,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334
 	lockall
 	compare VAR_0x408D, 2
 	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F934A
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F9991, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1F9991, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -97,7 +97,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 	waitmovement 0
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A4
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_1F9483
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9479
@@ -109,7 +109,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 	waitmovement 0
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A4
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_1F9497
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948F
@@ -121,7 +121,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 	waitmovement 0
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A6
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94A4
 	waitmovement 0
@@ -132,7 +132,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9440:: @ 81F9440
 	waitmovement 0
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A4
 	waitmovement 0
-	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, 4
+	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
 	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_1F94BB
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94B2
@@ -260,12 +260,12 @@ LittlerootTown_MaysHouse_2F_EventScript_1F94C1:: @ 81F94C1
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F94E3:: @ 81F94E3
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F978A, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F978A, MSGBOX_DEFAULT
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F94ED:: @ 81F94ED
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9962, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9962, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -284,21 +284,21 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
 LittlerootTown_BrendansHouse_2F_EventScript_1F951D:: @ 81F951D
 	checkflag FLAG_0x125
 	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F9541
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F99C9, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F99C9, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F952F:: @ 81F952F
 	checkflag FLAG_0x125
 	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F954A
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9B0D, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9B0D, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F9541:: @ 81F9541
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9A9E, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9A9E, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F954A:: @ 81F954A
-	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9BE7, 4
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9BE7, MSGBOX_DEFAULT
 	return
 
 EventScript_PlayerPCFemale:: @ 81F9553
@@ -311,7 +311,7 @@ EventScript_PlayerPCFemale:: @ 81F9553
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C
-	msgbox gUnknown_08272CD5, 4
+	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -319,7 +319,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	setvar VAR_0x8004, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox gUnknown_08272D87, 4
+	msgbox gUnknown_08272D87, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall
@@ -337,9 +337,9 @@ LittlerootTown_MaysHouse_2F_Text_1F959C: @ 81F959C
 	.string "Who… Who are you?\p"
 	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "Oh, you’re {PLAYER}{KUN}.\n"
+	.string "Oh, you're {PLAYER}{KUN}.\n"
 	.string "So your move was today.\p"
-	.string "Um… I’m MAY.\n"
+	.string "Um… I'm MAY.\n"
 	.string "Glad to meet you!\p"
 	.string "I…\n"
 	.string "I have this dream of becoming friends\l"
@@ -348,13 +348,13 @@ LittlerootTown_MaysHouse_2F_Text_1F959C: @ 81F959C
 	.string "my dad, PROF. BIRCH.\p"
 	.string "I was hoping that you would be nice,\n"
 	.string "{PLAYER}{KUN}, and that we could be friends.\p"
-	.string "Oh, this is silly, isn’t it?\n"
-	.string "I… I’ve just met you, {PLAYER}{KUN}.\p"
+	.string "Oh, this is silly, isn't it?\n"
+	.string "I… I've just met you, {PLAYER}{KUN}.\p"
 	.string "Eheheh…\p"
 	.string "Oh, no! I forgot!\p"
 	.string "I was supposed to go help Dad catch\n"
 	.string "some wild POKéMON!\p"
-	.string "{PLAYER}{KUN}, I’ll catch you later!$"
+	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F978A: @ 81F978A
 	.string "POKéMON fully restored!\n"
@@ -364,19 +364,19 @@ LittlerootTown_BrendansHouse_2F_Text_1F97B4: @ 81F97B4
 	.string "Hey!\n"
 	.string "You…\p"
 	.string "Who are you?\p"
-	.string "Oh, you’re {PLAYER}, aren’t you?\n"
+	.string "Oh, you're {PLAYER}, aren't you?\n"
 	.string "Moved in next door, right?\p"
-	.string "I didn’t know that you’re a girl.\p"
+	.string "I didn't know that you're a girl.\p"
 	.string "Dad, PROF. BIRCH, said that our new\n"
-	.string "next-door neighbor is a GYM LEADER’s\l"
-	.string "kid, so I assumed you’d be a guy.\p"
-	.string "My name’s BRENDAN.\n"
+	.string "next-door neighbor is a GYM LEADER's\l"
+	.string "kid, so I assumed you'd be a guy.\p"
+	.string "My name's BRENDAN.\n"
 	.string "So, hi, neighbor!\p"
-	.string "Huh? Hey, {PLAYER}, don’t you have\n"
+	.string "Huh? Hey, {PLAYER}, don't you have\n"
 	.string "a POKéMON?\p"
 	.string "Do you want me to go catch you one?\p"
 	.string "Aw, darn, I forgot…\p"
-	.string "I’m supposed to go help my dad catch\n"
+	.string "I'm supposed to go help my dad catch\n"
 	.string "some wild POKéMON.\p"
 	.string "Some other time, okay?$"
 
@@ -386,14 +386,14 @@ LittlerootTown_BrendansHouse_2F_Text_1F9962: @ 81F9962
 
 LittlerootTown_BrendansHouse_2F_Text_1F9991: @ 81F9991
 LittlerootTown_MaysHouse_2F_Text_1F9991: @ 81F9991
-	.string "It’s {RIVAL}’s POKé BALL!\p"
+	.string "It's {RIVAL}'s POKé BALL!\p"
 	.string "Better leave it right where it is.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F99C9: @ 81F99C9
 	.string "MAY: {PLAYER}{KUN}!\p"
 	.string "I was just checking my POKéDEX.\p"
-	.string "There’s still a lot of POKéMON that\n"
-	.string "I’ve seen but haven’t caught.\p"
+	.string "There's still a lot of POKéMON that\n"
+	.string "I've seen but haven't caught.\p"
 	.string "And there are many others that\n"
 	.string "I think will evolve.\p"
 	.string "I wonder where I should go catch\n"
@@ -402,11 +402,11 @@ LittlerootTown_BrendansHouse_2F_Text_1F99C9: @ 81F99C9
 LittlerootTown_BrendansHouse_2F_Text_1F9A9E: @ 81F9A9E
 	.string "MAY: I wonder where I should go catch\n"
 	.string "some POKéMON next?\p"
-	.string "Wouldn’t it be funny if we ran into each\n"
+	.string "Wouldn't it be funny if we ran into each\n"
 	.string "other, {PLAYER}{KUN}?$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F9B0D: @ 81F9B0D
-	.string "BRENDAN: Hey, it’s {PLAYER}.\p"
+	.string "BRENDAN: Hey, it's {PLAYER}.\p"
 	.string "I was just checking out my POKéDEX.\p"
 	.string "There are still many POKéMON that\n"
 	.string "I need to catch, I know, but this\l"
@@ -415,8 +415,8 @@ LittlerootTown_BrendansHouse_2F_Text_1F9B0D: @ 81F9B0D
 	.string "the urge to hit the road again.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F9BE7: @ 81F9BE7
-	.string "BRENDAN: I’m having a hard time deciding\n"
+	.string "BRENDAN: I'm having a hard time deciding\n"
 	.string "where I should catch POKéMON next.\p"
-	.string "Hey, {PLAYER}, if I see you while I’m out\n"
+	.string "Hey, {PLAYER}, if I see you while I'm out\n"
 	.string "catching POKéMON, I can pitch you a\l"
-	.string "battle if you’d like.$"
+	.string "battle if you'd like.$"

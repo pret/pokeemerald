@@ -37,15 +37,15 @@ SafariZone_South_Movement_23D2C7: @ 823D2C7
 	step_end
 
 SafariZone_South_EventScript_23D2CA:: @ 823D2CA
-	msgbox SafariZone_South_Text_2A52EF, 2
+	msgbox SafariZone_South_Text_2A52EF, MSGBOX_NPC
 	end
 
 SafariZone_South_EventScript_23D2D3:: @ 823D2D3
-	msgbox SafariZone_South_Text_2A533B, 2
+	msgbox SafariZone_South_Text_2A533B, MSGBOX_NPC
 	end
 
 SafariZone_South_EventScript_23D2DC:: @ 823D2DC
-	msgbox SafariZone_South_Text_2A553E, 2
+	msgbox SafariZone_South_Text_2A553E, MSGBOX_NPC
 	end
 
 SafariZone_South_EventScript_23D2E5:: @ 823D2E5
@@ -53,21 +53,21 @@ SafariZone_South_EventScript_23D2E5:: @ 823D2E5
 	faceplayer
 	checkflag FLAG_0x05D
 	goto_if 0, SafariZone_South_EventScript_23D30D
-	msgbox SafariZone_South_Text_2A51D4, 5
+	msgbox SafariZone_South_Text_2A51D4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq SafariZone_South_EventScript_23D31A
-	msgbox SafariZone_South_Text_2A521A, 4
+	msgbox SafariZone_South_Text_2A521A, MSGBOX_DEFAULT
 	release
 	end
 
 SafariZone_South_EventScript_23D30D:: @ 823D30D
 	setflag FLAG_0x05D
-	msgbox SafariZone_South_Text_2A52AB, 4
+	msgbox SafariZone_South_Text_2A52AB, MSGBOX_DEFAULT
 	release
 	end
 
 SafariZone_South_EventScript_23D31A:: @ 823D31A
-	msgbox SafariZone_South_Text_2A5248, 4
+	msgbox SafariZone_South_Text_2A5248, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
 	case 2, SafariZone_South_EventScript_23D33F
@@ -117,38 +117,38 @@ SafariZone_South_Movement_23D38D: @ 823D38D
 	step_end
 
 SafariZone_South_EventScript_23D390:: @ 823D390
-	msgbox SafariZone_South_Text_2A57EE, 2
+	msgbox SafariZone_South_Text_2A57EE, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_23D399:: @ 823D399
-	msgbox SafariZone_Southeast_Text_2A582D, 2
+	msgbox SafariZone_Southeast_Text_2A582D, MSGBOX_NPC
 	end
 
 SafariZone_South_EventScript_23D3A2:: @ 823D3A2
-	msgbox SafariZone_South_Text_2A5887, 2
+	msgbox SafariZone_South_Text_2A5887, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_23D3AB:: @ 823D3AB
-	msgbox SafariZone_Southeast_Text_2A58C6, 2
+	msgbox SafariZone_Southeast_Text_2A58C6, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_23D3B4:: @ 823D3B4
-	msgbox SafariZone_Southeast_Text_2A58FD, 2
+	msgbox SafariZone_Southeast_Text_2A58FD, MSGBOX_NPC
 	end
 
 SafariZone_Southeast_EventScript_23D3BD:: @ 823D3BD
-	msgbox SafariZone_Southeast_Text_2A5960, 2
+	msgbox SafariZone_Southeast_Text_2A5960, MSGBOX_NPC
 	end
 
 SafariZone_Northeast_EventScript_23D3C6:: @ 823D3C6
-	msgbox SafariZone_Northeast_Text_2A59A4, 2
+	msgbox SafariZone_Northeast_Text_2A59A4, MSGBOX_NPC
 	end
 
 SafariZone_Northeast_EventScript_23D3CF:: @ 823D3CF
-	msgbox SafariZone_Northeast_Text_2A5A09, 2
+	msgbox SafariZone_Northeast_Text_2A5A09, MSGBOX_NPC
 	end
 
 SafariZone_Northeast_EventScript_23D3D8:: @ 823D3D8
-	msgbox SafariZone_Northeast_Text_2A5A44, 2
+	msgbox SafariZone_Northeast_Text_2A5A44, MSGBOX_NPC
 	end
 

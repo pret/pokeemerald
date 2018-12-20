@@ -34,7 +34,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249839:: @ 8249839
 
 BattleFrontier_BattleDomeLobby_EventScript_249842:: @ 8249842
 	lockall
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A45F, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A45F, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0
@@ -63,14 +63,14 @@ BattleFrontier_BattleDomeLobby_EventScript_24989B:: @ 824989B
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2498C1
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A4E9, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A4E9, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_2498C9
 
 BattleFrontier_BattleDomeLobby_EventScript_2498C1:: @ 82498C1
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AD67, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AD67, MSGBOX_DEFAULT
 
 BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
-	msgbox BattleFrontier_BattleDomeLobby_Text_24ADB1, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24ADB1, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattleDomeLobby_Text_241520, 9
@@ -100,7 +100,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 
 BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
 	lockall
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A5BF, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A5BF, MSGBOX_DEFAULT
 	message BattleFrontier_BattleDomeLobby_Text_24A5D6
 	waitmessage
 	special LoadPlayerParty
@@ -141,7 +141,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2499E4:: @ 82499E4
 	call BattleFrontier_BattleDomeLobby_EventScript_23E8B4
 
 BattleFrontier_BattleDomeLobby_EventScript_2499E9:: @ 82499E9
-	msgbox BattleFrontier_BattleDomeLobby_Text_249F74, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_249F74, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -149,7 +149,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2499E9:: @ 82499E9
 
 BattleFrontier_BattleDomeLobby_EventScript_2499F9:: @ 82499F9
 	lockall
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A5FE, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A5FE, MSGBOX_DEFAULT
 	message BattleFrontier_BattleDomeLobby_Text_24A61A
 	waitmessage
 	setvar VAR_0x8004, 13
@@ -215,7 +215,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A26E, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A26E, MSGBOX_DEFAULT
 	fadescreen 1
 	call BattleFrontier_BattleDomeLobby_EventScript_23F2B7
 	copyvar VAR_0x8004, VAR_RESULT
@@ -224,7 +224,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C61
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A1C6, 5
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A1C6, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_249C61
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_249B60
@@ -262,7 +262,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 	special CallFrontierUtilFunc
 	setvar VAR_0x8004, 15
 	special CallBattleDomeFunction
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A437, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A437, MSGBOX_DEFAULT
 	closemessage
 	call BattleFrontier_BattleDomeLobby_EventScript_249C6E
 	special HealPlayerParty
@@ -284,11 +284,11 @@ BattleFrontier_BattleDomeLobby_EventScript_249C15:: @ 8249C15
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_249C3D
 
 BattleFrontier_BattleDomeLobby_EventScript_249C30:: @ 8249C30
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A353, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A353, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_249C6C
 
 BattleFrontier_BattleDomeLobby_EventScript_249C3D:: @ 8249C3D
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A2AB, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A2AB, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_249C6C
 
 BattleFrontier_BattleDomeLobby_EventScript_249C4A:: @ 8249C4A
@@ -302,7 +302,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C61:: @ 8249C61
 	special LoadPlayerParty
 
 BattleFrontier_BattleDomeLobby_EventScript_249C64:: @ 8249C64
-	msgbox BattleFrontier_BattleDomeLobby_Text_249F74, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_249F74, MSGBOX_DEFAULT
 
 BattleFrontier_BattleDomeLobby_EventScript_249C6C:: @ 8249C6C
 	release
@@ -350,11 +350,11 @@ BattleFrontier_BattleDomeLobby_EventScript_249CF5:: @ 8249CF5
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249CFD:: @ 8249CFD
-	msgbox BattleFrontier_BattleDomeLobby_Text_249EB7, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_249EB7, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249D06:: @ 8249D06
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A664, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A664, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249D0F:: @ 8249D0F
@@ -366,11 +366,11 @@ BattleFrontier_BattleDomeLobby_EventScript_249D15:: @ 8249D15
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249D1B:: @ 8249D1B
-	msgbox BattleFrontier_BattleDomeLobby_Text_249F8E, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_249F8E, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249D24:: @ 8249D24
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A721, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A721, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249D2D:: @ 8249D2D
@@ -449,56 +449,54 @@ BattleFrontier_BattleDomeLobby_EventScript_249D84:: @ 8249D84
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249DC9:: @ 8249DC9
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A966, 3
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A966, MSGBOX_SIGN
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249DD2:: @ 8249DD2
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A9A9, 3
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A9A9, MSGBOX_SIGN
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249DDB:: @ 8249DDB
-	msgbox BattleFrontier_BattleDomeLobby_Text_24A9EC, 3
+	msgbox BattleFrontier_BattleDomeLobby_Text_24A9EC, MSGBOX_SIGN
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249DE4:: @ 8249DE4
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AA31, 3
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AA31, MSGBOX_SIGN
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_249DED:: @ 8249DED
 	setvar VAR_0x8004, 20
 	special CallBattleDomeFunction
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AA76, 2
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AA76, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249DFE:: @ 8249DFE
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AB94, 2
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AB94, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E07:: @ 8249E07
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AC76, 2
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AC76, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E10:: @ 8249E10
-	msgbox BattleFrontier_BattleDomeLobby_Text_24ACD3, 2
+	msgbox BattleFrontier_BattleDomeLobby_Text_24ACD3, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_249E19:: @ 8249E19
-	msgbox BattleFrontier_OutsideWest_Text_24AB06, 2
+	msgbox BattleFrontier_OutsideWest_Text_24AB06, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_249E22:: @ 8249E22
-	loadword 0, BattleFrontier_OutsideWest_Text_24AB44
-	callstd 2
+	msgbox BattleFrontier_OutsideWest_Text_24AB44, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_249E2B:: @ 8249E2B
-	loadword 0, BattleFrontier_OutsideWest_Text_24AB75
-	callstd 2
+	msgbox BattleFrontier_OutsideWest_Text_24AB75, MSGBOX_NPC
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E34:: @ 8249E34
 	lockall
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AE63, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AE63, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_249E43
 	end
 
@@ -515,17 +513,17 @@ BattleFrontier_BattleDomeLobby_EventScript_249E43:: @ 8249E43
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E8B:: @ 8249E8B
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AEAE, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AEAE, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_249E43
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E99:: @ 8249E99
-	msgbox BattleFrontier_BattleDomeLobby_Text_24AF4C, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24AF4C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_249E43
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249EA7:: @ 8249EA7
-	msgbox BattleFrontier_BattleDomeLobby_Text_24B073, 4
+	msgbox BattleFrontier_BattleDomeLobby_Text_24B073, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_249E43
 	end
 
@@ -558,14 +556,14 @@ BattleFrontier_BattleDomeLobby_Text_249F8E: @ 8249F8E
 	.string "The other two POKéMON can battle\n"
 	.string "one at a time.\p"
 	.string "Choose the two battling POKéMON after\n"
-	.string "examining the opponent’s trio.\p"
+	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
 	.string "Battle Points are awarded to\n"
 	.string "the tournament winner.\p"
 	.string "If you want to interrupt your\n"
 	.string "tournament, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A1C6: @ 824A1C6
@@ -583,7 +581,7 @@ BattleFrontier_BattleDomeLobby_Text_24A26E: @ 824A26E
 
 BattleFrontier_BattleDomeLobby_Text_24A2AB: @ 824A2AB
 	.string "Excuse me!\p"
-	.string "You don’t have three eligible POKéMON.\p"
+	.string "You don't have three eligible POKéMON.\p"
 	.string "Also, the POKéMON must be holding\n"
 	.string "different kinds of items.\p"
 	.string "EGGS{STR_VAR_1} ineligible.\p"
@@ -591,7 +589,7 @@ BattleFrontier_BattleDomeLobby_Text_24A2AB: @ 824A2AB
 
 BattleFrontier_BattleDomeLobby_Text_24A353: @ 824A353
 	.string "Excuse me!\p"
-	.string "You don’t have three eligible POKéMON.\p"
+	.string "You don't have three eligible POKéMON.\p"
 	.string "You must have three different POKéMON\n"
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
@@ -605,7 +603,7 @@ BattleFrontier_BattleDomeLobby_Text_24A437: @ 824A437
 
 BattleFrontier_BattleDomeLobby_Text_24A45F: @ 824A45F
 	.string "Excuse me!\p"
-	.string "You didn’t save before you quit your\n"
+	.string "You didn't save before you quit your\n"
 	.string "challenge last time.\p"
 	.string "Because of that, your challenge so far\n"
 	.string "has been disqualified. Sorry!$"
@@ -635,7 +633,7 @@ BattleFrontier_BattleDomeLobby_Text_24A5D6: @ 824A5D6
 	.string "Please wait.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A5FE: @ 824A5FE
-	.string "We’ve been waiting for you!$"
+	.string "We've been waiting for you!$"
 
 BattleFrontier_BattleDomeLobby_Text_24A61A: @ 824A61A
 	.string "Before I show you to the BATTLE DOME,\n"
@@ -663,30 +661,30 @@ BattleFrontier_BattleDomeLobby_Text_24A721: @ 824A721
 	.string "The remaining two POKéMON must take\n"
 	.string "part in a DOUBLE BATTLE.\p"
 	.string "Choose the two battling POKéMON after\n"
-	.string "examining the opponent’s trio.\p"
+	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
 	.string "Battle Points are awarded to\n"
 	.string "the tournament winner.\p"
 	.string "If you want to interrupt your\n"
 	.string "tournament, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A966: @ 824A966
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Level 50 SINGLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A9A9: @ 824A9A9
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Level 50 DOUBLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A9EC: @ 824A9EC
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Open Level SINGLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24AA31: @ 824AA31
-	.string "They’re the results of the last\n"
+	.string "They're the results of the last\n"
 	.string "Open Level DOUBLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_24AA76: @ 824AA76
@@ -699,7 +697,7 @@ BattleFrontier_BattleDomeLobby_Text_24AA76: @ 824AA76
 
 BattleFrontier_OutsideWest_Text_24AB06: @ 824AB06
 	.string "The BATTLE FRONTIER…\n"
-	.string "I’ve long dreamed about a place like it.$"
+	.string "I've long dreamed about a place like it.$"
 
 BattleFrontier_OutsideWest_Text_24AB44: @ 824AB44
 	.string "The BATTLE DOME\n"
@@ -724,9 +722,9 @@ BattleFrontier_BattleDomeLobby_Text_24AC76: @ 824AC76
 	.string "Of course I got trashed…$"
 
 BattleFrontier_BattleDomeLobby_Text_24ACD3: @ 824ACD3
-	.string "I would’ve won if I’d kept this POKéMON\n"
+	.string "I would've won if I'd kept this POKéMON\n"
 	.string "held in reserve.\p"
-	.string "You need to check your opponent’s\n"
+	.string "You need to check your opponent's\n"
 	.string "POKéMON carefully before choosing\l"
 	.string "your battling POKéMON.$"
 
@@ -766,7 +764,7 @@ BattleFrontier_BattleDomeLobby_Text_24AF4C: @ 824AF4C
 	.string "The Tournament Tree will provide\n"
 	.string "several kinds of data.\p"
 	.string "The data on view includes the previous\n"
-	.string "tournament’s results, the POKéMON held\l"
+	.string "tournament's results, the POKéMON held\l"
 	.string "by TRAINERS, and the battle styles of\l"
 	.string "TRAINERS.$"
 

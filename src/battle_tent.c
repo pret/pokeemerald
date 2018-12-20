@@ -14,10 +14,6 @@
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
-extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
-extern const struct FacilityMon gSlateportBattleTentMons[];
-extern const u16 gBattleFrontierHeldItems[];
-
 // This file's functions.
 static void sub_81B99D4(void);
 static void sub_81B9A28(void);

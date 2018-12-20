@@ -7,7 +7,7 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "m4a.h"
@@ -88,31 +88,31 @@ EWRAM_DATA static struct CompressedSpritePalette sPokeblockSpritePal = {0};
 // const rom data
 static const u8 sNatureToMonPokeblockAnim[][2] =
 {
-    {  0, 0 }, // HARDY
-    {  3, 0 }, // LONELY
-    {  4, 1 }, // BRAVE
-    {  5, 0 }, // ADAMANT
-    { 10, 0 }, // NAUGHTY
-    { 13, 0 }, // BOLD
-    { 15, 0 }, // DOCILE
-    { 16, 2 }, // RELAXED
-    { 18, 0 }, // IMPISH
-    { 19, 0 }, // LAX
-    { 20, 0 }, // TIMID
-    { 25, 0 }, // HASTY
-    { 27, 3 }, // SERIOUS
-    { 28, 0 }, // JOLLY
-    { 29, 0 }, // NAIVE
-    { 33, 4 }, // MODEST
-    { 36, 0 }, // MILD
-    { 37, 0 }, // QUIET
-    { 39, 0 }, // BASHFUL
-    { 42, 0 }, // RASH
-    { 45, 0 }, // CALM
-    { 46, 5 }, // GENTLE
-    { 47, 6 }, // SASSY
-    { 48, 0 }, // CAREFUL
-    { 53, 0 }, // QUIRKY
+    [NATURE_HARDY] = {  0, 0 },
+    [NATURE_LONELY] = {  3, 0 },
+    [NATURE_BRAVE] = {  4, 1 },
+    [NATURE_ADAMANT] = {  5, 0 },
+    [NATURE_NAUGHTY] = { 10, 0 },
+    [NATURE_BOLD] = { 13, 0 },
+    [NATURE_DOCILE] = { 15, 0 },
+    [NATURE_RELAXED] = { 16, 2 },
+    [NATURE_IMPISH] = { 18, 0 },
+    [NATURE_LAX] = { 19, 0 },
+    [NATURE_TIMID] = { 20, 0 },
+    [NATURE_HASTY] = { 25, 0 },
+    [NATURE_SERIOUS] = { 27, 3 },
+    [NATURE_JOLLY] = { 28, 0 },
+    [NATURE_NAIVE] = { 29, 0 },
+    [NATURE_MODEST] = { 33, 4 },
+    [NATURE_MILD] = { 36, 0 },
+    [NATURE_QUIET] = { 37, 0 },
+    [NATURE_BASHFUL] = { 39, 0 },
+    [NATURE_RASH] = { 42, 0 },
+    [NATURE_CALM] = { 45, 0 },
+    [NATURE_GENTLE] = { 46, 5 },
+    [NATURE_SASSY] = { 47, 6 },
+    [NATURE_CAREFUL] = { 48, 0 },
+    [NATURE_QUIRKY] = { 53, 0 },
 };
 
 static const s16 sMonPokeblockAnims[][10] =

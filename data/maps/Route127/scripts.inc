@@ -27,62 +27,59 @@ Route127_MapScript2_1F6A2B: @ 81F6A2B
 	.2byte 0
 
 Route127_EventScript_1F6A35:: @ 81F6A35
-	trainerbattle 0, TRAINER_CAMDEN, 0, Route127_Text_2A225F, Route127_Text_2A2294
-	msgbox Route127_Text_2A22A1, 6
+	trainerbattle_single TRAINER_CAMDEN, Route127_Text_2A225F, Route127_Text_2A2294
+	msgbox Route127_Text_2A22A1, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6A4C:: @ 81F6A4C
-	trainerbattle 0, TRAINER_DONNY, 0, Route127_Text_2A22DD, Route127_Text_2A2315
-	msgbox Route127_Text_2A232C, 6
+	trainerbattle_single TRAINER_DONNY, Route127_Text_2A22DD, Route127_Text_2A2315
+	msgbox Route127_Text_2A232C, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6A63:: @ 81F6A63
-	trainerbattle 0, TRAINER_JONAH, 0, Route127_Text_2A2381, Route127_Text_2A23E1
-	msgbox Route127_Text_2A240C, 6
+	trainerbattle_single TRAINER_JONAH, Route127_Text_2A2381, Route127_Text_2A23E1
+	msgbox Route127_Text_2A240C, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6A7A:: @ 81F6A7A
-	trainerbattle 0, TRAINER_HENRY, 0, Route127_Text_2A2450, Route127_Text_2A2483
-	msgbox Route127_Text_2A2494, 6
+	trainerbattle_single TRAINER_HENRY, Route127_Text_2A2450, Route127_Text_2A2483
+	msgbox Route127_Text_2A2494, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6A91:: @ 81F6A91
-	trainerbattle 0, TRAINER_ROGER, 0, Route127_Text_2A24C6, Route127_Text_2A250B
-	msgbox Route127_Text_2A2538, 6
+	trainerbattle_single TRAINER_ROGER, Route127_Text_2A24C6, Route127_Text_2A250B
+	msgbox Route127_Text_2A2538, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6AA8:: @ 81F6AA8
-	trainerbattle 0, TRAINER_AIDAN, 0, Route127_Text_2A257A, Route127_Text_2A25C1
-	msgbox Route127_Text_2A25D2, 6
+	trainerbattle_single TRAINER_AIDAN, Route127_Text_2A257A, Route127_Text_2A25C1
+	msgbox Route127_Text_2A25D2, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6ABF:: @ 81F6ABF
-	trainerbattle 0, TRAINER_ATHENA, 0, Route127_Text_2A27D0, Route127_Text_2A27FC
-	msgbox Route127_Text_2A2832, 6
+	trainerbattle_single TRAINER_ATHENA, Route127_Text_2A27D0, Route127_Text_2A27FC
+	msgbox Route127_Text_2A2832, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_1F6AD6:: @ 81F6AD6
-	trainerbattle 2, TRAINER_KOJI_1, 0, Route127_Text_2A264D, Route127_Text_2A2685, Route127_EventScript_1F6B02
+	trainerbattle_single TRAINER_KOJI_1, Route127_Text_2A264D, Route127_Text_2A2685, Route127_EventScript_1F6B02
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq Route127_EventScript_1F6B21
-	msgbox Route127_Text_2A26AC, 4
+	msgbox Route127_Text_2A26AC, MSGBOX_DEFAULT
 	release
 	end
 
 Route127_EventScript_1F6B02:: @ 81F6B02
 	special sub_80B4808
 	waitmovement 0
-	msgbox Route127_Text_2A26EE, 4
-	setvar VAR_0x8004, 672
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 672
-	callstd 8
+	msgbox Route127_Text_2A26EE, MSGBOX_DEFAULT
+	register_matchcall TRAINER_KOJI_1
 	release
 	end
 
 Route127_EventScript_1F6B21:: @ 81F6B21
-	trainerbattle 5, TRAINER_KOJI_1, 0, Route127_Text_2A2734, Route127_Text_2A276B
-	msgbox Route127_Text_2A278E, 6
+	trainerbattle_rematch TRAINER_KOJI_1, Route127_Text_2A2734, Route127_Text_2A276B
+	msgbox Route127_Text_2A278E, MSGBOX_AUTOCLOSE
 	end
 

@@ -12,25 +12,25 @@ VerdanturfTown_EventScript_1EB575:: @ 81EB575
 	faceplayer
 	checkflag FLAG_RUSTURF_TUNNEL_OPENED
 	goto_eq VerdanturfTown_EventScript_1EB594
-	msgbox VerdanturfTown_Text_1EB5FD, 4
+	msgbox VerdanturfTown_Text_1EB5FD, MSGBOX_DEFAULT
 	applymovement 2, VerdanturfTown_Movement_2725A2
 	waitmovement 0
 	release
 	end
 
 VerdanturfTown_EventScript_1EB594:: @ 81EB594
-	msgbox VerdanturfTown_Text_1EB6E0, 4
+	msgbox VerdanturfTown_Text_1EB6E0, MSGBOX_DEFAULT
 	applymovement 2, VerdanturfTown_Movement_2725A2
 	waitmovement 0
 	release
 	end
 
 VerdanturfTown_EventScript_1EB5A8:: @ 81EB5A8
-	msgbox VerdanturfTown_Text_1EB736, 2
+	msgbox VerdanturfTown_Text_1EB736, MSGBOX_NPC
 	end
 
 VerdanturfTown_EventScript_1EB5B1:: @ 81EB5B1
-	msgbox VerdanturfTown_Text_1EB7E2, 2
+	msgbox VerdanturfTown_Text_1EB7E2, MSGBOX_NPC
 	end
 
 VerdanturfTown_EventScript_1EB5BA:: @ 81EB5BA
@@ -38,29 +38,29 @@ VerdanturfTown_EventScript_1EB5BA:: @ 81EB5BA
 	faceplayer
 	checkflag FLAG_RUSTURF_TUNNEL_OPENED
 	goto_eq VerdanturfTown_EventScript_1EB5CF
-	msgbox VerdanturfTown_Text_1EB854, 4
+	msgbox VerdanturfTown_Text_1EB854, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_EventScript_1EB5CF:: @ 81EB5CF
-	msgbox VerdanturfTown_Text_1EB935, 4
+	msgbox VerdanturfTown_Text_1EB935, MSGBOX_DEFAULT
 	release
 	end
 
 VerdanturfTown_EventScript_1EB5D9:: @ 81EB5D9
-	msgbox VerdanturfTown_Text_1EB9C4, 3
+	msgbox VerdanturfTown_Text_1EB9C4, MSGBOX_SIGN
 	end
 
 VerdanturfTown_EventScript_1EB5E2:: @ 81EB5E2
-	msgbox VerdanturfTown_Text_1EBA11, 3
+	msgbox VerdanturfTown_Text_1EBA11, MSGBOX_SIGN
 	end
 
 VerdanturfTown_EventScript_1EB5EB:: @ 81EB5EB
-	msgbox VerdanturfTown_Text_1EBA1F, 3
+	msgbox VerdanturfTown_Text_1EBA1F, MSGBOX_SIGN
 	end
 
 VerdanturfTown_EventScript_1EB5F4:: @ 81EB5F4
-	msgbox VerdanturfTown_Text_1EBA59, 3
+	msgbox VerdanturfTown_Text_1EBA59, MSGBOX_SIGN
 	end
 
 VerdanturfTown_Text_1EB5FD: @ 81EB5FD
@@ -71,13 +71,13 @@ VerdanturfTown_Text_1EB5FD: @ 81EB5FD
 	.string "make a big uproar.\p"
 	.string "So they had to stop the big tunnel\n"
 	.string "project.\p"
-	.string "But there’s one man. He’s trying to dig\n"
+	.string "But there's one man. He's trying to dig\n"
 	.string "the tunnel by himself!$"
 
 VerdanturfTown_Text_1EB6E0: @ 81EB6E0
 	.string "There was a man who dug a tunnel for\n"
 	.string "a lady he loved.\p"
-	.string "I don’t really get it, but hey!$"
+	.string "I don't really get it, but hey!$"
 
 VerdanturfTown_Text_1EB736: @ 81EB736
 	.string "The way the winds blow, volcanic ash\n"
@@ -87,7 +87,7 @@ VerdanturfTown_Text_1EB736: @ 81EB736
 	.string "frail and sickly people.$"
 
 VerdanturfTown_Text_1EB7E2: @ 81EB7E2
-	.string "My POKéMON and I, we’ve been riding\n"
+	.string "My POKéMON and I, we've been riding\n"
 	.string "a hot winning streak.\p"
 	.string "So I decided to make my BATTLE TENT\n"
 	.string "debut in this town.$"
@@ -95,16 +95,16 @@ VerdanturfTown_Text_1EB7E2: @ 81EB7E2
 VerdanturfTown_Text_1EB854: @ 81EB854
 	.string "Did you see the cave next to the\n"
 	.string "POKéMON MART?\p"
-	.string "There’s a guy in there who’s trying to\n"
+	.string "There's a guy in there who's trying to\n"
 	.string "bust up boulders so he can bust out\l"
 	.string "through to the other side.\p"
-	.string "It’d be great if we could go through…\n"
-	.string "It’ll make it easy to visit RUSTBORO.$"
+	.string "It'd be great if we could go through…\n"
+	.string "It'll make it easy to visit RUSTBORO.$"
 
 VerdanturfTown_Text_1EB935: @ 81EB935
 	.string "That cave next to the POKéMON MART\n"
 	.string "is now a tunnel to the other side.\p"
-	.string "It’s great--it’s easy to go shop for\n"
+	.string "It's great--it's easy to go shop for\n"
 	.string "new DEVON products in RUSTBORO now.$"
 
 VerdanturfTown_Text_1EB9C4: @ 81EB9C4
@@ -113,7 +113,7 @@ VerdanturfTown_Text_1EB9C4: @ 81EB9C4
 	.string "sweet fragrance of grass.”$"
 
 VerdanturfTown_Text_1EBA11: @ 81EBA11
-	.string "WANDA’S HOUSE$"
+	.string "WANDA'S HOUSE$"
 
 VerdanturfTown_Text_1EBA1F: @ 81EBA1F
 	.string "BATTLE TENT VERDANTURF SITE\n"

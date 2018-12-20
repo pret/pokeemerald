@@ -35,7 +35,7 @@ LilycoveCity_Harbor_EventScript_21E00F:: @ 821E00F
 LilycoveCity_Harbor_EventScript_21E080:: @ 821E080
 	compare VAR_TEMP_A, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E557
-	msgbox LilycoveCity_Harbor_Text_21E758, 4
+	msgbox LilycoveCity_Harbor_Text_21E758, MSGBOX_DEFAULT
 	message LilycoveCity_Harbor_Text_21E7ED
 	waitmessage
 	goto LilycoveCity_Harbor_EventScript_21E09F
@@ -86,7 +86,7 @@ LilycoveCity_Harbor_EventScript_21E139:: @ 821E139
 	end
 
 LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
-	msgbox LilycoveCity_Harbor_Text_21E864, 5
+	msgbox LilycoveCity_Harbor_Text_21E864, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE_STATE, 5
@@ -97,7 +97,7 @@ LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 	end
 
 LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
-	msgbox LilycoveCity_Harbor_Text_21E880, 5
+	msgbox LilycoveCity_Harbor_Text_21E880, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
@@ -216,10 +216,10 @@ LilycoveCity_Harbor_EventScript_21E2EA:: @ 821E2EA
 
 LilycoveCity_Harbor_EventScript_21E2F0:: @ 821E2F0
 	setflag FLAG_0x1AE
-	msgbox LilycoveCity_Harbor_Text_2A68D2, 4
+	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
-	msgbox LilycoveCity_Harbor_Text_2A68FC, 4
+	msgbox LilycoveCity_Harbor_Text_2A68FC, MSGBOX_DEFAULT
 	goto LilycoveCity_Harbor_EventScript_21E30F
 	end
 
@@ -233,10 +233,10 @@ LilycoveCity_Harbor_EventScript_21E30F:: @ 821E30F
 
 LilycoveCity_Harbor_EventScript_21E320:: @ 821E320
 	setflag FLAG_0x1AF
-	msgbox LilycoveCity_Harbor_Text_2A68D2, 4
+	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
-	msgbox LilycoveCity_Harbor_Text_2C6A71, 4
+	msgbox LilycoveCity_Harbor_Text_2C6A71, MSGBOX_DEFAULT
 	goto LilycoveCity_Harbor_EventScript_21E33F
 	end
 
@@ -250,10 +250,10 @@ LilycoveCity_Harbor_EventScript_21E33F:: @ 821E33F
 
 LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
 	setflag FLAG_0x1B0
-	msgbox LilycoveCity_Harbor_Text_2A6848, 4
+	msgbox LilycoveCity_Harbor_Text_2A6848, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
-	msgbox LilycoveCity_Harbor_Text_2C68A5, 4
+	msgbox LilycoveCity_Harbor_Text_2C68A5, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LilycoveCity_Harbor_Movement_2725A6
 	waitmovement 0
@@ -271,12 +271,12 @@ LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
 	call_if 1, LilycoveCity_Harbor_EventScript_21E675
 	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E680
-	msgbox LilycoveCity_Harbor_Text_2C6951, 4
+	msgbox LilycoveCity_Harbor_Text_2C6951, MSGBOX_DEFAULT
 	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E68B
 	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E696
-	msgbox LilycoveCity_Harbor_Text_2C69AA, 4
+	msgbox LilycoveCity_Harbor_Text_2C69AA, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E6A1
@@ -299,10 +299,10 @@ LilycoveCity_Harbor_EventScript_21E40C:: @ 821E40C
 
 LilycoveCity_Harbor_EventScript_21E41D:: @ 821E41D
 	setflag FLAG_0x1DB
-	msgbox LilycoveCity_Harbor_Text_2A68D2, 4
+	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
-	msgbox LilycoveCity_Harbor_Text_2C6A71, 4
+	msgbox LilycoveCity_Harbor_Text_2C6A71, MSGBOX_DEFAULT
 	goto LilycoveCity_Harbor_EventScript_21E43C
 	end
 
@@ -315,7 +315,7 @@ LilycoveCity_Harbor_EventScript_21E43C:: @ 821E43C
 	end
 
 LilycoveCity_Harbor_EventScript_21E44D:: @ 821E44D
-	msgbox LilycoveCity_Harbor_Text_2A68D2, 4
+	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
 	message LilycoveCity_Harbor_Text_2C6BD4
@@ -335,7 +335,7 @@ LilycoveCity_Harbor_EventScript_21E44D:: @ 821E44D
 	end
 
 LilycoveCity_Harbor_EventScript_21E4B6:: @ 821E4B6
-	msgbox LilycoveCity_Harbor_Text_2A6A82, 4
+	msgbox LilycoveCity_Harbor_Text_2A6A82, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, LilycoveCity_Harbor_Movement_2725A6
 	waitmovement 0
@@ -346,7 +346,7 @@ LilycoveCity_Harbor_EventScript_21E4B6:: @ 821E4B6
 	waitmovement 0
 	showobjectat 1, MAP_LILYCOVE_CITY_HARBOR
 	delay 30
-	msgbox LilycoveCity_Harbor_Text_21E842, 4
+	msgbox LilycoveCity_Harbor_Text_21E842, MSGBOX_DEFAULT
 	release
 	end
 
@@ -378,24 +378,24 @@ LilycoveCity_Harbor_EventScript_21E514:: @ 821E514
 	return
 
 LilycoveCity_Harbor_EventScript_21E54D:: @ 821E54D
-	msgbox LilycoveCity_Harbor_Text_21E6F1, 4
+	msgbox LilycoveCity_Harbor_Text_21E6F1, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_21E557:: @ 821E557
-	msgbox LilycoveCity_Harbor_Text_21E758, 4
+	msgbox LilycoveCity_Harbor_Text_21E758, MSGBOX_DEFAULT
 	message LilycoveCity_Harbor_Text_21E7ED
 	waitmessage
 	goto LilycoveCity_Harbor_EventScript_21E09F
 	end
 
 LilycoveCity_Harbor_EventScript_21E56B:: @ 821E56B
-	msgbox LilycoveCity_Harbor_Text_21E792, 4
+	msgbox LilycoveCity_Harbor_Text_21E792, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
-	msgbox LilycoveCity_Harbor_Text_21E864, 5
+	msgbox LilycoveCity_Harbor_Text_21E864, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE_STATE, 5
@@ -406,7 +406,7 @@ LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 	end
 
 LilycoveCity_Harbor_EventScript_21E59D:: @ 821E59D
-	msgbox LilycoveCity_Harbor_Text_21E880, 5
+	msgbox LilycoveCity_Harbor_Text_21E880, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
@@ -422,7 +422,7 @@ LilycoveCity_Harbor_EventScript_21E5C0:: @ 821E5C0
 	end
 
 LilycoveCity_Harbor_EventScript_21E5CC:: @ 821E5CC
-	msgbox LilycoveCity_Harbor_Text_21E89D, 4
+	msgbox LilycoveCity_Harbor_Text_21E89D, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_Harbor_Movement_2725A6
 	waitmovement 0
@@ -449,7 +449,7 @@ LilycoveCity_Harbor_EventScript_21E61B:: @ 821E61B
 	return
 
 LilycoveCity_Harbor_EventScript_21E626:: @ 821E626
-	msgbox LilycoveCity_Harbor_Text_21E842, 4
+	msgbox LilycoveCity_Harbor_Text_21E842, MSGBOX_DEFAULT
 	release
 	end
 
@@ -471,12 +471,12 @@ LilycoveCity_Harbor_EventScript_21E637:: @ 821E637
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq LilycoveCity_Harbor_EventScript_21E64C
-	msgbox LilycoveCity_Harbor_Text_21E8EE, 4
+	msgbox LilycoveCity_Harbor_Text_21E8EE, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_21E64C:: @ 821E64C
-	msgbox LilycoveCity_Harbor_Text_21E976, 4
+	msgbox LilycoveCity_Harbor_Text_21E976, MSGBOX_DEFAULT
 	release
 	end
 
@@ -579,8 +579,8 @@ LilycoveCity_Harbor_Movement_21E6EA: @ 821E6EA
 
 LilycoveCity_Harbor_Text_21E6F1: @ 821E6F1
 	.string "I beg your pardon?\n"
-	.string "You’re looking for a ship?\p"
-	.string "I’m sorry, the ferry service isn’t\n"
+	.string "You're looking for a ship?\p"
+	.string "I'm sorry, the ferry service isn't\n"
 	.string "available at present…$"
 
 LilycoveCity_Harbor_Text_21E758: @ 821E758
@@ -589,14 +589,14 @@ LilycoveCity_Harbor_Text_21E758: @ 821E758
 
 
 LilycoveCity_Harbor_Text_21E792: @ 821E792
-	.string "{PLAYER} doesn’t have the TICKET…\p"
-	.string "I’m terribly sorry.\p"
+	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "I'm terribly sorry.\p"
 	.string "You must have a TICKET to board\n"
 	.string "the ferry.$"
 
 LilycoveCity_Harbor_Text_21E7ED: @ 821E7ED
 	.string "{PLAYER} flashed the TICKET.\p"
-	.string "Perfect! That’s all you need!\p"
+	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
 LilycoveCity_Harbor_Text_21E842: @ 821E842
@@ -618,13 +618,13 @@ LilycoveCity_Harbor_Text_21E8CC: @ 821E8CC
 LilycoveCity_Harbor_Text_21E8EE: @ 821E8EE
 	.string "Until they finish making the ferry,\n"
 	.string "we sailors have nothing to do…\p"
-	.string "I wish they’d get a move on, the folks\n"
+	.string "I wish they'd get a move on, the folks\n"
 	.string "at the SHIPYARD in SLATEPORT.$"
 
 LilycoveCity_Harbor_Text_21E976: @ 821E976
 	.string "The ferry S.S. TIDAL is finally in\n"
 	.string "operation.\p"
 	.string "The folks at the SHIPYARD in SLATEPORT\n"
-	.string "must’ve worked extra hard.\p"
-	.string "Well, it’s my turn to get busy now!$"
+	.string "must've worked extra hard.\p"
+	.string "Well, it's my turn to get busy now!$"
 

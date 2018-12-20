@@ -8,8 +8,8 @@ MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC94
 	checkflag FLAG_0x059
 	goto_eq MauvilleCity_BikeShop_EventScript_20EBF7
-	msgbox MauvilleCity_BikeShop_Text_20EE22, 4
-	msgbox MauvilleCity_BikeShop_Text_20EE99, 5
+	msgbox MauvilleCity_BikeShop_Text_20EE22, MSGBOX_DEFAULT
+	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
 	compare VAR_RESULT, 0
@@ -17,7 +17,7 @@ MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	end
 
 MauvilleCity_BikeShop_EventScript_20EBF7:: @ 820EBF7
-	msgbox MauvilleCity_BikeShop_Text_20EE99, 5
+	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
 	compare VAR_RESULT, 0
@@ -35,7 +35,7 @@ MauvilleCity_BikeShop_EventScript_20EC16:: @ 820EC16
 
 MauvilleCity_BikeShop_EventScript_20EC3D:: @ 820EC3D
 	setflag FLAG_0x059
-	msgbox MauvilleCity_BikeShop_Text_20EEE8, 4
+	msgbox MauvilleCity_BikeShop_Text_20EEE8, MSGBOX_DEFAULT
 	release
 	end
 
@@ -45,25 +45,25 @@ MauvilleCity_BikeShop_EventScript_20EC4A:: @ 820EC4A
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC53:: @ 820EC53
-	msgbox MauvilleCity_BikeShop_Text_20F18D, 4
+	msgbox MauvilleCity_BikeShop_Text_20F18D, MSGBOX_DEFAULT
 	giveitem_std ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC6D:: @ 820EC6D
-	msgbox MauvilleCity_BikeShop_Text_20F1A5, 4
+	msgbox MauvilleCity_BikeShop_Text_20F1A5, MSGBOX_DEFAULT
 	giveitem_std ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC87:: @ 820EC87
-	msgbox MauvilleCity_BikeShop_Text_20F1BD, 4
+	msgbox MauvilleCity_BikeShop_Text_20F1BD, MSGBOX_DEFAULT
 	special SwapRegisteredBike
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC94:: @ 820EC94
-	msgbox MauvilleCity_BikeShop_Text_20F1FB, 5
+	msgbox MauvilleCity_BikeShop_Text_20F1FB, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECB3
 	compare VAR_RESULT, 0
@@ -71,25 +71,25 @@ MauvilleCity_BikeShop_EventScript_20EC94:: @ 820EC94
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECB3:: @ 820ECB3
-	msgbox MauvilleCity_BikeShop_Text_20F22F, 4
+	msgbox MauvilleCity_BikeShop_Text_20F22F, MSGBOX_DEFAULT
 	checkitem ITEM_ACRO_BIKE, 1
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECEF
 	checkitem ITEM_MACH_BIKE, 1
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ED10
-	msgbox MauvilleCity_BikeShop_Text_20F2F3, 4
+	msgbox MauvilleCity_BikeShop_Text_20F2F3, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECE5:: @ 820ECE5
-	msgbox MauvilleCity_BikeShop_Text_20F2C4, 4
+	msgbox MauvilleCity_BikeShop_Text_20F2C4, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
 	incrementgamestat 4
-	msgbox MauvilleCity_BikeShop_Text_20F294, 4
+	msgbox MauvilleCity_BikeShop_Text_20F294, MSGBOX_DEFAULT
 	takeitem ITEM_ACRO_BIKE, 1
 	giveitem_std ITEM_MACH_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
@@ -97,14 +97,14 @@ MauvilleCity_BikeShop_EventScript_20ECEF:: @ 820ECEF
 
 MauvilleCity_BikeShop_EventScript_20ED10:: @ 820ED10
 	incrementgamestat 4
-	msgbox MauvilleCity_BikeShop_Text_20F263, 4
+	msgbox MauvilleCity_BikeShop_Text_20F263, MSGBOX_DEFAULT
 	takeitem ITEM_MACH_BIKE, 1
 	giveitem_std ITEM_ACRO_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC87
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED31:: @ 820ED31
-	msgbox MauvilleCity_BikeShop_Text_20F3C3, 2
+	msgbox MauvilleCity_BikeShop_Text_20F3C3, MSGBOX_NPC
 	end
 
 MauvilleCity_BikeShop_EventScript_20ED3A:: @ 820ED3A
@@ -187,11 +187,11 @@ MauvilleCity_BikeShop_Text_20EE22: @ 820EE22
 	.string "Well, well, what have we here?\n"
 	.string "A most energetic customer!\p"
 	.string "Me? You may call me RYDEL.\n"
-	.string "I’m the owner of this cycle shop.$"
+	.string "I'm the owner of this cycle shop.$"
 
 MauvilleCity_BikeShop_Text_20EE99: @ 820EE99
 	.string "RYDEL: Your RUNNING SHOES…\n"
-	.string "They’re awfully filthy.\p"
+	.string "They're awfully filthy.\p"
 	.string "Did you come from far away?$"
 
 MauvilleCity_BikeShop_Text_20EEE8: @ 820EEE8
@@ -201,15 +201,15 @@ MauvilleCity_BikeShop_Text_20EEE8: @ 820EEE8
 
 MauvilleCity_BikeShop_Text_20EF32: @ 820EF32
 	.string "RYDEL: Hm, hm… … … … …\p"
-	.string "You’re saying that you came all this\n"
+	.string "You're saying that you came all this\n"
 	.string "way from LITTLEROOT?\p"
 	.string "My goodness!\n"
-	.string "That’s ridiculously far!\p"
+	.string "That's ridiculously far!\p"
 	.string "If you had one of my BIKES, you could\n"
 	.string "go anywhere easily while feeling the\l"
 	.string "gentle caress of the wind!\p"
-	.string "I’ll tell you what!\n"
-	.string "I’ll give you a BIKE!\p"
+	.string "I'll tell you what!\n"
+	.string "I'll give you a BIKE!\p"
 	.string "Oh, wait a second!\p"
 	.string "I forgot to tell you that there are\n"
 	.string "two kinds of BIKES!\p"
@@ -219,7 +219,7 @@ MauvilleCity_BikeShop_Text_20EF32: @ 820EF32
 	.string "to feel the wind with their bodies!\p"
 	.string "And an ACRO BIKE is for those who\n"
 	.string "prefer technical rides!\p"
-	.string "I’m a real sweetheart, so you can\n"
+	.string "I'm a real sweetheart, so you can\n"
 	.string "have whichever one you like!\p"
 	.string "Which one will you choose?$"
 
@@ -239,7 +239,7 @@ MauvilleCity_BikeShop_Text_20F1FB: @ 820F1FB
 
 MauvilleCity_BikeShop_Text_20F22F: @ 820F22F
 	.string "RYDEL: Okay, no problem!\n"
-	.string "I’ll switch BIKES for you!$"
+	.string "I'll switch BIKES for you!$"
 
 MauvilleCity_BikeShop_Text_20F263: @ 820F263
 	.string "{PLAYER} got the MACH BIKE exchanged\n"
@@ -251,26 +251,26 @@ MauvilleCity_BikeShop_Text_20F294: @ 820F294
 
 MauvilleCity_BikeShop_Text_20F2C4: @ 820F2C4
 	.string "RYDEL: Good, good!\n"
-	.string "I’m happy that you like it!$"
+	.string "I'm happy that you like it!$"
 
 MauvilleCity_BikeShop_Text_20F2F3: @ 820F2F3
 	.string "Oh? What happened to that BIKE\n"
 	.string "I gave you?\p"
 	.string "Oh, I get it, you stored it using your PC.\p"
 	.string "Well, take it out of PC storage,\n"
-	.string "and I’ll be happy to exchange it!\p"
+	.string "and I'll be happy to exchange it!\p"
 	.string "May the wind always be at your back\n"
 	.string "on your adventure!$"
 
 MauvilleCity_BikeShop_Text_20F3C3: @ 820F3C3
-	.string "I’m learning about BIKES while\n"
+	.string "I'm learning about BIKES while\n"
 	.string "I work here.\p"
 	.string "If you need advice on how to ride your\n"
-	.string "BIKE, there’re a couple handbooks in\l"
+	.string "BIKE, there're a couple handbooks in\l"
 	.string "the back.$"
 
 MauvilleCity_BikeShop_Text_20F445: @ 820F445
-	.string "It’s a handbook on the MACH BIKE.\p"
+	.string "It's a handbook on the MACH BIKE.\p"
 	.string "Which page do you want to read?$"
 
 MauvilleCity_BikeShop_Text_20F487: @ 820F487
@@ -282,7 +282,7 @@ MauvilleCity_BikeShop_Text_20F487: @ 820F487
 	.string "Want to read a different page?$"
 
 MauvilleCity_BikeShop_Text_20F550: @ 820F550
-	.string "A MACH BIKE is speedy, but it can’t\n"
+	.string "A MACH BIKE is speedy, but it can't\n"
 	.string "stop very quickly.\p"
 	.string "It gets a little tricky to get around\n"
 	.string "a corner.\p"
@@ -300,7 +300,7 @@ MauvilleCity_BikeShop_Text_20F61A: @ 820F61A
 	.string "Want to read a different page?$"
 
 MauvilleCity_BikeShop_Text_20F6ED: @ 820F6ED
-	.string "It’s a handbook on the ACRO BIKE.\p"
+	.string "It's a handbook on the ACRO BIKE.\p"
 	.string "Which page do you want to read?$"
 
 MauvilleCity_BikeShop_Text_20F72F: @ 820F72F

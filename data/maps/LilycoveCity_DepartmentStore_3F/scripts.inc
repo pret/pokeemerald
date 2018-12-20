@@ -7,7 +7,7 @@ LilycoveCity_DepartmentStore_3F_EventScript_21FC65:: @ 821FC65
 	message gUnknown_08272A21
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_21FC7C
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -28,7 +28,7 @@ LilycoveCity_DepartmentStore_3F_EventScript_21FC8C:: @ 821FC8C
 	message gUnknown_08272A21
 	waitmessage
 	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_21FCA4
-	msgbox gUnknown_08272A3F, 4
+	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
 	end
 
@@ -46,15 +46,15 @@ LilycoveCity_DepartmentStore_3F_Pokemart_21FCA4: @ 821FCA4
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_21FCB6:: @ 821FCB6
-	msgbox LilycoveCity_DepartmentStore_3F_Text_21FCD1, 2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_21FCD1, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_21FCBF:: @ 821FCBF
-	msgbox LilycoveCity_DepartmentStore_3F_Text_21FD3B, 2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_21FD3B, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_21FCC8:: @ 821FCC8
-	msgbox LilycoveCity_DepartmentStore_3F_Text_21FDB4, 2
+	msgbox LilycoveCity_DepartmentStore_3F_Text_21FDB4, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_Text_21FCD1: @ 821FCD1
@@ -66,7 +66,7 @@ LilycoveCity_DepartmentStore_3F_Text_21FCD1: @ 821FCD1
 LilycoveCity_DepartmentStore_3F_Text_21FD3B: @ 821FD3B
 	.string "I want my POKéMON to have more\n"
 	.string "endurance.\p"
-	.string "I’m trying to decide whether to raise\n"
+	.string "I'm trying to decide whether to raise\n"
 	.string "DEFENSE with IRON, or SP. DEF with ZINC.$"
 
 LilycoveCity_DepartmentStore_3F_Text_21FDB4: @ 821FDB4

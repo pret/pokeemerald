@@ -335,25 +335,25 @@ static const struct MenuAction sMenuActions_Gender[] = {
 
 static const u8 *const gMalePresetNames[] = {
     gText_DefaultNameStu,
-	gText_DefaultNameMilton,
-	gText_DefaultNameTom,
-	gText_DefaultNameKenny,
-	gText_DefaultNameReid,
-	gText_DefaultNameJude,
-	gText_DefaultNameJaxson,
-	gText_DefaultNameEaston,
-	gText_DefaultNameWalker,
-	gText_DefaultNameTeru,
-	gText_DefaultNameJohnny,
-	gText_DefaultNameBrett,
-	gText_DefaultNameSeth,
-	gText_DefaultNameTerry,
-	gText_DefaultNameCasey,
-	gText_DefaultNameDarren,
-	gText_DefaultNameLandon,
-	gText_DefaultNameCollin,
-	gText_DefaultNameStanley,
-	gText_DefaultNameQuincy
+    gText_DefaultNameMilton,
+    gText_DefaultNameTom,
+    gText_DefaultNameKenny,
+    gText_DefaultNameReid,
+    gText_DefaultNameJude,
+    gText_DefaultNameJaxson,
+    gText_DefaultNameEaston,
+    gText_DefaultNameWalker,
+    gText_DefaultNameTeru,
+    gText_DefaultNameJohnny,
+    gText_DefaultNameBrett,
+    gText_DefaultNameSeth,
+    gText_DefaultNameTerry,
+    gText_DefaultNameCasey,
+    gText_DefaultNameDarren,
+    gText_DefaultNameLandon,
+    gText_DefaultNameCollin,
+    gText_DefaultNameStanley,
+    gText_DefaultNameQuincy
 };
 
 static const u8 *const gFemalePresetNames[] = {
@@ -1772,12 +1772,12 @@ static void AddBirchSpeechObjects(u8 taskId)
     gSprites[lotadSpriteId].oam.priority = 0;
     gSprites[lotadSpriteId].invisible = TRUE;
     gTasks[taskId].tLotadSpriteId = lotadSpriteId;
-    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_PKMN_TRAINER_BRENDAN), 120, 60, 0, &gDecompressionBuffer[0]);
+    brendanSpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN), 120, 60, 0, &gDecompressionBuffer[0]);
     gSprites[brendanSpriteId].callback = nullsub_11;
     gSprites[brendanSpriteId].invisible = TRUE;
     gSprites[brendanSpriteId].oam.priority = 0;
     gTasks[taskId].tBrendanSpriteId = brendanSpriteId;
-    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_PKMN_TRAINER_MAY), 120, 60, 0, &gDecompressionBuffer[0x800]);
+    maySpriteId = CreateTrainerSprite(FacilityClassToPicIndex(FACILITY_CLASS_MAY), 120, 60, 0, &gDecompressionBuffer[0x800]);
     gSprites[maySpriteId].callback = nullsub_11;
     gSprites[maySpriteId].invisible = TRUE;
     gSprites[maySpriteId].oam.priority = 0;

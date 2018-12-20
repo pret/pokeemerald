@@ -30,7 +30,7 @@
 #include "text.h"
 #include "script_menu.h"
 #include "naming_screen.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "region_map.h"
 #include "constants/region_map_sections.h"
 #include "decoration.h"
@@ -833,7 +833,7 @@ void UpdateTVScreensOnMap(int width, int height)
             {
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
-            else if (FlagGet(FLAG_SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+            else if (FlagGet(FLAG_SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xFF || FindAnyTVNewsOnTheAir() != 0xFF || IsTVShowInSearchOfTrainersAiring()))
             {
                 FlagClear(FLAG_SYS_TV_WATCH);
                 SetTVMetatilesOnMap(width, height, 0x3);
@@ -2742,7 +2742,7 @@ u8 FindAnyTVNewsOnTheAir(void)
             return i;
         }
     }
-    return -1;
+    return 0xFF;
 }
 
 void DoPokeNews(void)
@@ -3229,7 +3229,7 @@ u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16 passedSpecies)
 
     species = (Random() % (NUM_SPECIES - 1)) + 1;
     initSpecies = species;
-    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != 1 || species == passedSpecies)
+    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) != TRUE || species == passedSpecies)
     {
         if (species == 1)
         {
@@ -4376,7 +4376,7 @@ void SetTvShowInactive(u8 showIdx)
 
 static void sub_80F0B24(u16 species, u8 showIdx)
 {
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0)
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
     {
         gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
     }

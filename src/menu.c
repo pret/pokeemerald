@@ -7,7 +7,7 @@
 #include "main.h"
 #include "sound.h"
 #include "menu_helpers.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "task.h"
 #include "dma3.h"
 #include "string_util.h"
@@ -2096,253 +2096,253 @@ void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16
 NAKED
 void sub_819A080(struct UnkStruct_819A080 *a0, struct UnkStruct_819A080 *a1, u16 a2, u16 a3, u16 a4, u16 a5, u16 a6, u16 a7)
 {
-	asm("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, #0x28\n\
-	str r0, [sp]\n\
-	str r1, [sp, #0x4]\n\
-	ldr r0, [sp, #0x48]\n\
-	ldr r4, [sp, #0x4C]\n\
-	ldr r1, [sp, #0x50]\n\
-	ldr r5, [sp, #0x54]\n\
-	lsl r2, #16\n\
-	lsr r2, #16\n\
-	str r2, [sp, #0x8]\n\
-	lsl r3, #16\n\
-	lsr r3, #16\n\
-	lsl r0, #16\n\
-	lsr r0, #16\n\
-	str r0, [sp, #0xC]\n\
-	lsl r4, #16\n\
-	lsr r4, #16\n\
-	lsl r1, #16\n\
-	lsr r1, #16\n\
-	lsl r5, #16\n\
-	lsr r5, #16\n\
-	ldr r2, [sp, #0x4]\n\
-	ldrh r0, [r2, #0x4]\n\
-	ldr r2, [sp, #0xC]\n\
-	sub r0, r2\n\
-	ldr r2, [sp, #0x8]\n\
-	add r2, r1, r2\n\
-	str r2, [sp, #0x10]\n\
-	cmp r0, r1\n\
-	bge _0819A0CC\n\
-	ldr r1, [sp, #0x8]\n\
-	add r0, r1\n\
-	str r0, [sp, #0x10]\n\
+    asm("push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, #0x28\n\
+    str r0, [sp]\n\
+    str r1, [sp, #0x4]\n\
+    ldr r0, [sp, #0x48]\n\
+    ldr r4, [sp, #0x4C]\n\
+    ldr r1, [sp, #0x50]\n\
+    ldr r5, [sp, #0x54]\n\
+    lsl r2, #16\n\
+    lsr r2, #16\n\
+    str r2, [sp, #0x8]\n\
+    lsl r3, #16\n\
+    lsr r3, #16\n\
+    lsl r0, #16\n\
+    lsr r0, #16\n\
+    str r0, [sp, #0xC]\n\
+    lsl r4, #16\n\
+    lsr r4, #16\n\
+    lsl r1, #16\n\
+    lsr r1, #16\n\
+    lsl r5, #16\n\
+    lsr r5, #16\n\
+    ldr r2, [sp, #0x4]\n\
+    ldrh r0, [r2, #0x4]\n\
+    ldr r2, [sp, #0xC]\n\
+    sub r0, r2\n\
+    ldr r2, [sp, #0x8]\n\
+    add r2, r1, r2\n\
+    str r2, [sp, #0x10]\n\
+    cmp r0, r1\n\
+    bge _0819A0CC\n\
+    ldr r1, [sp, #0x8]\n\
+    add r0, r1\n\
+    str r0, [sp, #0x10]\n\
 _0819A0CC:\n\
-	ldr r2, [sp, #0x4]\n\
-	ldrh r1, [r2, #0x6]\n\
-	sub r0, r1, r4\n\
-	cmp r0, r5\n\
-	bge _0819A0DE\n\
-	add r0, r3, r1\n\
-	sub r0, r4\n\
-	str r0, [sp, #0x14]\n\
-	b _0819A0E2\n\
+    ldr r2, [sp, #0x4]\n\
+    ldrh r1, [r2, #0x6]\n\
+    sub r0, r1, r4\n\
+    cmp r0, r5\n\
+    bge _0819A0DE\n\
+    add r0, r3, r1\n\
+    sub r0, r4\n\
+    str r0, [sp, #0x14]\n\
+    b _0819A0E2\n\
 _0819A0DE:\n\
-	add r5, r3, r5\n\
-	str r5, [sp, #0x14]\n\
+    add r5, r3, r5\n\
+    str r5, [sp, #0x14]\n\
 _0819A0E2:\n\
-	ldr r0, [sp]\n\
-	ldrh r1, [r0, #0x4]\n\
-	mov r2, #0x7\n\
-	add r0, r1, #0\n\
-	and r0, r2\n\
-	add r1, r0\n\
-	asr r1, #3\n\
-	str r1, [sp, #0x18]\n\
-	ldr r0, [sp, #0x4]\n\
-	ldrh r1, [r0, #0x4]\n\
-	add r0, r1, #0\n\
-	and r0, r2\n\
-	add r1, r0\n\
-	asr r1, #3\n\
-	str r1, [sp, #0x1C]\n\
-	mov r12, r3\n\
-	mov r8, r4\n\
-	ldr r1, [sp, #0x14]\n\
-	cmp r12, r1\n\
-	blt _0819A10C\n\
-	b _0819A24A\n\
+    ldr r0, [sp]\n\
+    ldrh r1, [r0, #0x4]\n\
+    mov r2, #0x7\n\
+    add r0, r1, #0\n\
+    and r0, r2\n\
+    add r1, r0\n\
+    asr r1, #3\n\
+    str r1, [sp, #0x18]\n\
+    ldr r0, [sp, #0x4]\n\
+    ldrh r1, [r0, #0x4]\n\
+    add r0, r1, #0\n\
+    and r0, r2\n\
+    add r1, r0\n\
+    asr r1, #3\n\
+    str r1, [sp, #0x1C]\n\
+    mov r12, r3\n\
+    mov r8, r4\n\
+    ldr r1, [sp, #0x14]\n\
+    cmp r12, r1\n\
+    blt _0819A10C\n\
+    b _0819A24A\n\
 _0819A10C:\n\
-	ldr r5, [sp, #0x8]\n\
-	ldr r6, [sp, #0xC]\n\
-	mov r2, r12\n\
-	add r2, #0x1\n\
-	str r2, [sp, #0x20]\n\
-	mov r0, r8\n\
-	add r0, #0x1\n\
-	str r0, [sp, #0x24]\n\
-	ldr r1, [sp, #0x10]\n\
-	cmp r5, r1\n\
-	blt _0819A124\n\
-	b _0819A23A\n\
+    ldr r5, [sp, #0x8]\n\
+    ldr r6, [sp, #0xC]\n\
+    mov r2, r12\n\
+    add r2, #0x1\n\
+    str r2, [sp, #0x20]\n\
+    mov r0, r8\n\
+    add r0, #0x1\n\
+    str r0, [sp, #0x24]\n\
+    ldr r1, [sp, #0x10]\n\
+    cmp r5, r1\n\
+    blt _0819A124\n\
+    b _0819A23A\n\
 _0819A124:\n\
-	mov r7, #0x1\n\
-	mov r2, #0xF0\n\
-	mov r10, r2\n\
-	mov r0, #0xF\n\
-	mov r9, r0\n\
+    mov r7, #0x1\n\
+    mov r2, #0xF0\n\
+    mov r10, r2\n\
+    mov r0, #0xF\n\
+    mov r9, r0\n\
 _0819A12E:\n\
-	asr r0, r5, #1\n\
-	mov r1, #0x3\n\
-	and r0, r1\n\
-	ldr r2, [sp]\n\
-	ldr r1, [r2]\n\
-	add r1, r0\n\
-	asr r0, r5, #3\n\
-	lsl r0, #5\n\
-	add r1, r0\n\
-	mov r2, r12\n\
-	asr r0, r2, #3\n\
-	ldr r2, [sp, #0x18]\n\
-	mul r0, r2\n\
-	lsl r0, #5\n\
-	add r1, r0\n\
-	mov r2, r12\n\
-	lsl r0, r2, #29\n\
-	lsr r0, #27\n\
-	add r3, r1, r0\n\
-	asr r0, r6, #1\n\
-	mov r1, #0x3\n\
-	and r0, r1\n\
-	ldr r2, [sp, #0x4]\n\
-	ldr r1, [r2]\n\
-	add r1, r0\n\
-	asr r0, r6, #3\n\
-	lsl r0, #5\n\
-	add r1, r0\n\
-	mov r2, r8\n\
-	asr r0, r2, #3\n\
-	ldr r2, [sp, #0x1C]\n\
-	mul r0, r2\n\
-	lsl r0, #5\n\
-	add r1, r0\n\
-	mov r2, r8\n\
-	lsl r0, r2, #29\n\
-	lsr r0, #27\n\
-	add r4, r1, r0\n\
-	add r0, r4, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A1DA\n\
-	sub r4, #0x1\n\
-	add r0, r6, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A1B2\n\
-	ldrh r0, [r4]\n\
-	ldr r2, =0x00000fff\n\
-	and r2, r0\n\
-	add r0, r5, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A1A8\n\
-	ldrb r1, [r3]\n\
-	mov r0, r10\n\
-	and r0, r1\n\
-	lsl r0, #8\n\
-	b _0819A22A\n\
-	.pool\n\
+    asr r0, r5, #1\n\
+    mov r1, #0x3\n\
+    and r0, r1\n\
+    ldr r2, [sp]\n\
+    ldr r1, [r2]\n\
+    add r1, r0\n\
+    asr r0, r5, #3\n\
+    lsl r0, #5\n\
+    add r1, r0\n\
+    mov r2, r12\n\
+    asr r0, r2, #3\n\
+    ldr r2, [sp, #0x18]\n\
+    mul r0, r2\n\
+    lsl r0, #5\n\
+    add r1, r0\n\
+    mov r2, r12\n\
+    lsl r0, r2, #29\n\
+    lsr r0, #27\n\
+    add r3, r1, r0\n\
+    asr r0, r6, #1\n\
+    mov r1, #0x3\n\
+    and r0, r1\n\
+    ldr r2, [sp, #0x4]\n\
+    ldr r1, [r2]\n\
+    add r1, r0\n\
+    asr r0, r6, #3\n\
+    lsl r0, #5\n\
+    add r1, r0\n\
+    mov r2, r8\n\
+    asr r0, r2, #3\n\
+    ldr r2, [sp, #0x1C]\n\
+    mul r0, r2\n\
+    lsl r0, #5\n\
+    add r1, r0\n\
+    mov r2, r8\n\
+    lsl r0, r2, #29\n\
+    lsr r0, #27\n\
+    add r4, r1, r0\n\
+    add r0, r4, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A1DA\n\
+    sub r4, #0x1\n\
+    add r0, r6, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A1B2\n\
+    ldrh r0, [r4]\n\
+    ldr r2, =0x00000fff\n\
+    and r2, r0\n\
+    add r0, r5, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A1A8\n\
+    ldrb r1, [r3]\n\
+    mov r0, r10\n\
+    and r0, r1\n\
+    lsl r0, #8\n\
+    b _0819A22A\n\
+    .pool\n\
 _0819A1A8:\n\
-	ldrb r1, [r3]\n\
-	mov r0, r9\n\
-	and r0, r1\n\
-	lsl r0, #12\n\
-	b _0819A22A\n\
+    ldrb r1, [r3]\n\
+    mov r0, r9\n\
+    and r0, r1\n\
+    lsl r0, #12\n\
+    b _0819A22A\n\
 _0819A1B2:\n\
-	ldrh r0, [r4]\n\
-	ldr r2, =0x0000f0ff\n\
-	and r2, r0\n\
-	add r0, r5, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A1D0\n\
-	ldrb r1, [r3]\n\
-	mov r0, r10\n\
-	and r0, r1\n\
-	lsl r0, #4\n\
-	b _0819A22A\n\
-	.pool\n\
+    ldrh r0, [r4]\n\
+    ldr r2, =0x0000f0ff\n\
+    and r2, r0\n\
+    add r0, r5, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A1D0\n\
+    ldrb r1, [r3]\n\
+    mov r0, r10\n\
+    and r0, r1\n\
+    lsl r0, #4\n\
+    b _0819A22A\n\
+    .pool\n\
 _0819A1D0:\n\
-	ldrb r1, [r3]\n\
-	mov r0, r9\n\
-	and r0, r1\n\
-	lsl r0, #8\n\
-	b _0819A22A\n\
+    ldrb r1, [r3]\n\
+    mov r0, r9\n\
+    and r0, r1\n\
+    lsl r0, #8\n\
+    b _0819A22A\n\
 _0819A1DA:\n\
-	add r0, r6, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A206\n\
-	ldrh r0, [r4]\n\
-	ldr r2, =0x0000ff0f\n\
-	and r2, r0\n\
-	add r0, r5, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A1FC\n\
-	ldrb r1, [r3]\n\
-	mov r0, r10\n\
-	b _0819A228\n\
-	.pool\n\
+    add r0, r6, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A206\n\
+    ldrh r0, [r4]\n\
+    ldr r2, =0x0000ff0f\n\
+    and r2, r0\n\
+    add r0, r5, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A1FC\n\
+    ldrb r1, [r3]\n\
+    mov r0, r10\n\
+    b _0819A228\n\
+    .pool\n\
 _0819A1FC:\n\
-	ldrb r1, [r3]\n\
-	mov r0, r9\n\
-	and r0, r1\n\
-	lsl r0, #4\n\
-	b _0819A22A\n\
+    ldrb r1, [r3]\n\
+    mov r0, r9\n\
+    and r0, r1\n\
+    lsl r0, #4\n\
+    b _0819A22A\n\
 _0819A206:\n\
-	ldrh r0, [r4]\n\
-	ldr r2, =0x0000fff0\n\
-	and r2, r0\n\
-	add r0, r5, #0\n\
-	and r0, r7\n\
-	cmp r0, #0\n\
-	beq _0819A224\n\
-	ldrb r1, [r3]\n\
-	mov r0, r10\n\
-	and r0, r1\n\
-	lsr r0, #4\n\
-	b _0819A22A\n\
-	.pool\n\
+    ldrh r0, [r4]\n\
+    ldr r2, =0x0000fff0\n\
+    and r2, r0\n\
+    add r0, r5, #0\n\
+    and r0, r7\n\
+    cmp r0, #0\n\
+    beq _0819A224\n\
+    ldrb r1, [r3]\n\
+    mov r0, r10\n\
+    and r0, r1\n\
+    lsr r0, #4\n\
+    b _0819A22A\n\
+    .pool\n\
 _0819A224:\n\
-	ldrb r1, [r3]\n\
-	mov r0, r9\n\
+    ldrb r1, [r3]\n\
+    mov r0, r9\n\
 _0819A228:\n\
-	and r0, r1\n\
+    and r0, r1\n\
 _0819A22A:\n\
-	orr r2, r0\n\
-	strh r2, [r4]\n\
-	add r5, #0x1\n\
-	add r6, #0x1\n\
-	ldr r0, [sp, #0x10]\n\
-	cmp r5, r0\n\
-	bge _0819A23A\n\
-	b _0819A12E\n\
+    orr r2, r0\n\
+    strh r2, [r4]\n\
+    add r5, #0x1\n\
+    add r6, #0x1\n\
+    ldr r0, [sp, #0x10]\n\
+    cmp r5, r0\n\
+    bge _0819A23A\n\
+    b _0819A12E\n\
 _0819A23A:\n\
-	ldr r1, [sp, #0x20]\n\
-	mov r12, r1\n\
-	ldr r2, [sp, #0x24]\n\
-	mov r8, r2\n\
-	ldr r0, [sp, #0x14]\n\
-	cmp r12, r0\n\
-	bge _0819A24A\n\
-	b _0819A10C\n\
+    ldr r1, [sp, #0x20]\n\
+    mov r12, r1\n\
+    ldr r2, [sp, #0x24]\n\
+    mov r8, r2\n\
+    ldr r0, [sp, #0x14]\n\
+    cmp r12, r0\n\
+    bge _0819A24A\n\
+    b _0819A10C\n\
 _0819A24A:\n\
-	add sp, #0x28\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n");
+    add sp, #0x28\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n");
 }
 #endif
 

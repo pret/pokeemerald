@@ -12,7 +12,7 @@
 #include "field_effect.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "international_string_util.h"
@@ -20,7 +20,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
@@ -1691,26 +1691,36 @@ const struct WindowTemplate gUnknown_085B2BAC = {
 };
 
 const u8 *const gElevatorFloorsTable[] = {
-	gText_B4F,
-	gText_B3F,
-	gText_B2F,
-	gText_B1F,
-	gText_1F,
-	gText_2F,
-	gText_3F,
-	gText_4F,
-	gText_5F,
-	gText_6F,
-	gText_7F,
-	gText_8F,
-	gText_9F,
-	gText_10F,
-	gText_11F,
-	gText_Rooftop
+    gText_B4F,
+    gText_B3F,
+    gText_B2F,
+    gText_B1F,
+    gText_1F,
+    gText_2F,
+    gText_3F,
+    gText_4F,
+    gText_5F,
+    gText_6F,
+    gText_7F,
+    gText_8F,
+    gText_9F,
+    gText_10F,
+    gText_11F,
+    gText_Rooftop
 };
 
-const u16 gUnknown_085B2BF4[] = { 0x0329, 0x032a, 0x032b, 0x0331, 0x0332, 0x0333, 0x0339, 0x033a, 0x033b };
-const u16 gUnknown_085B2C06[] = { 0x0329, 0x032b, 0x032a, 0x0331, 0x0333, 0x0332, 0x0339, 0x033b, 0x033a };
+const u16 gUnknown_085B2BF4[][3] =
+{
+    {0x0329, 0x032a, 0x032b},
+    {0x0331, 0x0332, 0x0333},
+    {0x0339, 0x033a, 0x033b},
+};
+const u16 gUnknown_085B2C06[][3] =
+{
+    {0x0329, 0x032b, 0x032a},
+    {0x0331, 0x0333, 0x0332},
+    {0x0339, 0x033b, 0x033a},
+};
 
 void SetDepartmentStoreFloorVar(void)
 {
@@ -1866,9 +1876,6 @@ static void sub_8139C2C(u16 a1, u8 a2)
     }
 }
 
-// Annoyingly close but compiler wants to add all the parts of the index into the arrays
-// first and then shift by one, whereas we need each individual part to shift and then be added.
-#ifdef NONMATCHING
 static void sub_8139C80(u8 taskId)
 {
     u8 x, y;
@@ -1883,7 +1890,7 @@ static void sub_8139C80(u8 taskId)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y * 3 + data[0] % 3] | 0xC00);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2BF4[y][data[0] % 3] | 0xC00);
                 }
             }
         }
@@ -1893,7 +1900,7 @@ static void sub_8139C80(u8 taskId)
             {
                 for (x = 0; x < 3; x++)
                 {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y * 3 + data[0] % 3] | 0xC00);
+                    MapGridSetMetatileIdAt(x + 8, y + 7, gUnknown_085B2C06[y][data[0] % 3] | 0xC00);
                 }
             }
         }
@@ -1906,148 +1913,6 @@ static void sub_8139C80(u8 taskId)
     }
     data[1]++;
 }
-#else
-NAKED
-static void sub_8139C80(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x4\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp]\n\
-	lsls r0, 2\n\
-	ldr r1, [sp]\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	ldr r1, =gTasks + 0x8\n\
-	adds r6, r0, r1\n\
-	movs r2, 0x2\n\
-	ldrsh r0, [r6, r2]\n\
-	cmp r0, 0x6\n\
-	bne _08139D7C\n\
-	ldrh r0, [r6]\n\
-	adds r0, 0x1\n\
-	strh r0, [r6]\n\
-	movs r1, 0x4\n\
-	ldrsh r0, [r6, r1]\n\
-	cmp r0, 0\n\
-	bne _08139D10\n\
-	movs r1, 0\n\
-	ldr r2, =gUnknown_085B2BF4\n\
-	mov r10, r2\n\
-_08139CBA:\n\
-	movs r5, 0\n\
-	adds r7, r1, 0x7\n\
-	lsls r0, r1, 1\n\
-	adds r2, r1, 0x1\n\
-	mov r8, r2\n\
-	adds r0, r1\n\
-	lsls r0, 1\n\
-	mov r9, r0\n\
-_08139CCA:\n\
-	adds r4, r5, 0\n\
-	adds r4, 0x8\n\
-	movs r1, 0\n\
-	ldrsh r0, [r6, r1]\n\
-	movs r1, 0x3\n\
-	bl __modsi3\n\
-	lsls r0, 16\n\
-	asrs r0, 15\n\
-	add r0, r9\n\
-	add r0, r10\n\
-	ldrh r0, [r0]\n\
-	movs r1, 0xC0\n\
-	lsls r1, 4\n\
-	adds r2, r1, 0\n\
-	orrs r2, r0\n\
-	adds r0, r4, 0\n\
-	adds r1, r7, 0\n\
-	bl MapGridSetMetatileIdAt\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0x2\n\
-	bls _08139CCA\n\
-	mov r2, r8\n\
-	lsls r0, r2, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x2\n\
-	bls _08139CBA\n\
-	b _08139D62\n\
-	.pool\n\
-_08139D10:\n\
-	movs r1, 0\n\
-	ldr r0, =gUnknown_085B2C06\n\
-	mov r10, r0\n\
-_08139D16:\n\
-	movs r5, 0\n\
-	adds r7, r1, 0x7\n\
-	lsls r0, r1, 1\n\
-	adds r2, r1, 0x1\n\
-	mov r8, r2\n\
-	adds r0, r1\n\
-	lsls r0, 1\n\
-	mov r9, r0\n\
-_08139D26:\n\
-	adds r4, r5, 0\n\
-	adds r4, 0x8\n\
-	movs r1, 0\n\
-	ldrsh r0, [r6, r1]\n\
-	movs r1, 0x3\n\
-	bl __modsi3\n\
-	lsls r0, 16\n\
-	asrs r0, 15\n\
-	add r0, r9\n\
-	add r0, r10\n\
-	ldrh r0, [r0]\n\
-	movs r1, 0xC0\n\
-	lsls r1, 4\n\
-	adds r2, r1, 0\n\
-	orrs r2, r0\n\
-	adds r0, r4, 0\n\
-	adds r1, r7, 0\n\
-	bl MapGridSetMetatileIdAt\n\
-	adds r0, r5, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	cmp r5, 0x2\n\
-	bls _08139D26\n\
-	mov r2, r8\n\
-	lsls r0, r2, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x2\n\
-	bls _08139D16\n\
-_08139D62:\n\
-	bl DrawWholeMapView\n\
-	movs r0, 0\n\
-	strh r0, [r6, 0x2]\n\
-	movs r0, 0\n\
-	ldrsh r1, [r6, r0]\n\
-	movs r2, 0x6\n\
-	ldrsh r0, [r6, r2]\n\
-	cmp r1, r0\n\
-	bne _08139D7C\n\
-	ldr r0, [sp]\n\
-	bl DestroyTask\n\
-_08139D7C:\n\
-	ldrh r0, [r6, 0x2]\n\
-	adds r0, 0x1\n\
-	strh r0, [r6, 0x2]\n\
-	add sp, 0x4\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
-}
-#endif // NAKED
 
 void sub_8139D98(void)
 {
@@ -2069,7 +1934,7 @@ void sub_8139D98(void)
     }
 
     gSpecialVar_0x8006 = 0;
-    gSpecialVar_0x8007 = ivStorage[STAT_HP]; 
+    gSpecialVar_0x8007 = ivStorage[STAT_HP];
 
     for (i = 1; i < NUM_STATS; i++)
     {
@@ -2092,7 +1957,7 @@ void sub_8139D98(void)
 
 bool32 warp0_in_pokecenter(void)
 {
-    static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xffff };
+    static const u16 gUnknown_085B2C2A[] = { 0x0202, 0x0301, 0x0405, 0x0504, 0x0604, 0x0700, 0x0804, 0x090b, 0x0a05, 0x0b05, 0x0c02, 0x0d06, 0x0e03, 0x0f02, 0x100c, 0x100a, 0x1a35, 0x193c, 0xFFFF };
 
     int i;
     u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
@@ -3081,10 +2946,10 @@ void sub_813AA44(void)
 
 static void sub_813AA60(u16 a0, u16 a1)
 {
-    static const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xffff };
-    static const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xffff };
-    static const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xffff };
-    static const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xffff };
+    static const u16 gUnknown_085B312C[] = { 0x004b, 0x0067, 0x0057, 0x004f, 0x0054, 0x0055, 0x0056, 0x0050, 0x0051, 0x0052, 0xFFFF };
+    static const u16 gUnknown_085B3142[] = { 0x0071, 0x006f, 0x0072, 0x0073, 0x0074, 0xFFFF };
+    static const u16 gUnknown_085B314E[] = { 0x0040, 0x0043, 0x0041, 0x0046, 0x0042, 0x003f, 0xFFFF };
+    static const u16 gUnknown_085B315C[] = { 0x00c8, 0x00b4, 0x00b7, 0x00b9, 0x00b3, 0x00ba, 0x00bb, 0x00c4, 0x00c6, 0xFFFF };
 
     static const u8 *const gUnknown_085B3170[] = {
         BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA,
@@ -3976,7 +3841,7 @@ bool32 sub_813B9C0(void)
         MAP_TRADE_CENTER,
         MAP_RECORD_CORNER,
         MAP_DOUBLE_BATTLE_COLOSSEUM,
-        0xffff
+        0xFFFF
     };
 
     int i;

@@ -65,7 +65,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A19:: @ 8238A19
 	checkitem ITEM_ROOM_1_KEY, 1
 	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238AF5
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_1_KEY, 1
 	setflag FLAG_0x0F0
@@ -81,7 +81,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A50:: @ 8238A50
 	checkitem ITEM_ROOM_2_KEY, 1
 	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238AFF
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_2_KEY, 1
 	setflag FLAG_0x0F1
@@ -97,7 +97,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A87:: @ 8238A87
 	checkitem ITEM_ROOM_4_KEY, 1
 	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B09
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_4_KEY, 1
 	setflag FLAG_0x0F2
@@ -113,7 +113,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238ABE:: @ 8238ABE
 	checkitem ITEM_ROOM_6_KEY, 1
 	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B13
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_6_KEY, 1
 	setflag FLAG_0x0F3
@@ -123,27 +123,27 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238ABE:: @ 8238ABE
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238AF5:: @ 8238AF5
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238B27, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238B27, MSGBOX_DEFAULT
 	releaseall
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238AFF:: @ 8238AFF
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238B5B, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238B5B, MSGBOX_DEFAULT
 	releaseall
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238B09:: @ 8238B09
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238B8F, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238B8F, MSGBOX_DEFAULT
 	releaseall
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238B13:: @ 8238B13
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BC3, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BC3, MSGBOX_DEFAULT
 	releaseall
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238B1D:: @ 8238B1D
-	msgbox AbandonedShip_HiddenFloorCorridors_Text_237FA5, 4
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_237FA5, MSGBOX_DEFAULT
 	releaseall
 	end
 

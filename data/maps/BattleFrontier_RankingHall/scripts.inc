@@ -71,34 +71,34 @@ BattleFrontier_RankingHall_EventScript_25E522:: @ 825E522
 	end
 
 BattleFrontier_RankingHall_EventScript_25E52F:: @ 825E52F
-	msgbox BattleFrontier_RankingHall_Text_25E57C, 2
+	msgbox BattleFrontier_RankingHall_Text_25E57C, MSGBOX_NPC
 	end
 
 BattleFrontier_RankingHall_EventScript_25E538:: @ 825E538
-	msgbox BattleFrontier_RankingHall_Text_25E5F9, 3
+	msgbox BattleFrontier_RankingHall_Text_25E5F9, MSGBOX_SIGN
 	end
 
 BattleFrontier_RankingHall_EventScript_25E541:: @ 825E541
-	msgbox BattleFrontier_RankingHall_Text_25E62E, 3
+	msgbox BattleFrontier_RankingHall_Text_25E62E, MSGBOX_SIGN
 	end
 
 BattleFrontier_RankingHall_EventScript_25E54A:: @ 825E54A
 	lock
 	faceplayer
-	msgbox BattleFrontier_RankingHall_Text_25E666, 5
+	msgbox BattleFrontier_RankingHall_Text_25E666, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_RankingHall_EventScript_25E569
-	msgbox BattleFrontier_RankingHall_Text_25E6B6, 4
+	msgbox BattleFrontier_RankingHall_Text_25E6B6, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_RankingHall_EventScript_25E569:: @ 825E569
-	msgbox BattleFrontier_RankingHall_Text_25E685, 4
+	msgbox BattleFrontier_RankingHall_Text_25E685, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_RankingHall_EventScript_25E573:: @ 825E573
-	msgbox BattleFrontier_RankingHall_Text_25E715, 2
+	msgbox BattleFrontier_RankingHall_Text_25E715, MSGBOX_NPC
 	end
 
 BattleFrontier_RankingHall_Text_25E57C: @ 825E57C
@@ -119,17 +119,17 @@ BattleFrontier_RankingHall_Text_25E666: @ 825E666
 	.string "Hi, is your name on this list?$"
 
 BattleFrontier_RankingHall_Text_25E685: @ 825E685
-	.string "Wow, that’s super!\n"
-	.string "I’ll have to try harder, too!$"
+	.string "Wow, that's super!\n"
+	.string "I'll have to try harder, too!$"
 
 BattleFrontier_RankingHall_Text_25E6B6: @ 825E6B6
 	.string "Oh, is that right?\p"
-	.string "If you saw your friend’s name up here,\n"
+	.string "If you saw your friend's name up here,\n"
 	.string "I bet it would make you work harder!$"
 
 BattleFrontier_RankingHall_Text_25E715: @ 825E715
 	.string "Hmm…\n"
-	.string "My name’s not up there…\p"
-	.string "Well, it’s only natural since I haven’t\n"
+	.string "My name's not up there…\p"
+	.string "Well, it's only natural since I haven't\n"
 	.string "taken any challenges yet.$"
 

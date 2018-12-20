@@ -44,27 +44,27 @@ EverGrandeCity_GlaciasRoom_EventScript_228469:: @ 8228469
 	checkflag FLAG_0x4FD
 	goto_eq EverGrandeCity_GlaciasRoom_EventScript_228490
 	playbgm MUS_SITENNOU, 0
-	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, 4
-	trainerbattle 3, TRAINER_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_2285B4
+	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_2285B4
 	goto EverGrandeCity_GlaciasRoom_EventScript_22849A
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_228490:: @ 8228490
-	msgbox EverGrandeCity_GlaciasRoom_Text_228640, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_228640, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_22849A:: @ 822849A
 	setflag FLAG_0x4FD
 	call EverGrandeCity_GlaciasRoom_EventScript_2723F8
-	msgbox EverGrandeCity_GlaciasRoom_Text_228640, 4
+	msgbox EverGrandeCity_GlaciasRoom_Text_228640, MSGBOX_DEFAULT
 	release
 	end
 
 EverGrandeCity_GlaciasRoom_Text_2284AC: @ 82284AC
 	.string "Welcome, my name is GLACIA\n"
 	.string "of the ELITE FOUR.\p"
-	.string "I’ve traveled from afar to HOENN\n"
+	.string "I've traveled from afar to HOENN\n"
 	.string "so that I may hone my ice skills.\p"
 	.string "But all I have seen are challenges by\n"
 	.string "weak TRAINERS and their POKéMON.\p"
@@ -76,7 +76,7 @@ EverGrandeCity_GlaciasRoom_Text_2285B4: @ 82285B4
 	.string "You and your POKéMON…\n"
 	.string "How hot your spirits burn!\p"
 	.string "The all-consuming heat overwhelms.\p"
-	.string "It’s no surprise that my icy skills\n"
+	.string "It's no surprise that my icy skills\n"
 	.string "failed to harm you.$"
 
 EverGrandeCity_GlaciasRoom_Text_228640: @ 8228640

@@ -46,7 +46,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD0A:: @ 824BD0A
 	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C970, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C970, MSGBOX_DEFAULT
 	closemessage
 	showobjectat 13, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	compare VAR_TEMP_F, 3
@@ -73,7 +73,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD61:: @ 824BD61
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	setvar VAR_0x8004, 4
 	special CallBattleDomeFunction
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C990, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C990, MSGBOX_DEFAULT
 	closemessage
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C77B
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C789
@@ -81,7 +81,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
 	special sub_8161F74
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 5
 	special CallBattleDomeFunction
@@ -94,7 +94,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD82:: @ 824BD82
 	setvar VAR_TEMP_2, 1
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BDF7:: @ 824BDF7
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA86, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA86, MSGBOX_DEFAULT
 	closemessage
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
@@ -199,11 +199,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62:: @ 824BF62
 	special CallFrontierUtilFunc
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BF96
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA04, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA04, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BF96:: @ 824BF96
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA44, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CA44, MSGBOX_DEFAULT
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E:: @ 824BF9E
 	special sub_8175280
@@ -217,11 +217,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BF9E:: @ 824BF9E
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFC3:: @ 824BFC3
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C9BE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24C9BE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFCC:: @ 824BFCC
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CB9D, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CB9D, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5:: @ 824BFD5
@@ -340,11 +340,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C151:: @ 824C151
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C158:: @ 824C158
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEBE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEBE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C161:: @ 824C161
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D232, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D232, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C16A:: @ 824C16A
@@ -390,11 +390,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C1CB:: @ 824C1CB
 	case 4, BattleFrontier_BattleDomeBattleRoom_EventScript_24C209
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C1FC:: @ 824C1FC
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEDE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CEDE, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24C211
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C209:: @ 824C209
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D26C, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D26C, MSGBOX_DEFAULT
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C211:: @ 824C211
 	closemessage
@@ -431,19 +431,19 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C211:: @ 824C211
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CFAE, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24CFAE, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9:: @ 824C2B9
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0D9, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0D9, MSGBOX_DEFAULT
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C400
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 9, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C436
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special CallBattleDomeFunction
@@ -454,14 +454,14 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9:: @ 824C2B9
 	closemessage
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C82B
 	waitmovement 0
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D172, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D172, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleDomeBattleRoom_Text_24D1AA
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D1E0, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D1E0, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C346:: @ 824C346
@@ -470,19 +470,19 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C346:: @ 824C346
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleDomeBattleRoom_EventScript_24C373
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D319, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D319, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C373:: @ 824C373
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D43E, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D43E, MSGBOX_DEFAULT
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C400
 	switch VAR_RESULT
 	case 2, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 9, BattleFrontier_BattleDomeBattleRoom_EventScript_24C420
 	case 3, BattleFrontier_BattleDomeBattleRoom_EventScript_24C436
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D0F6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	setvar VAR_0x8005, 1
 	special CallBattleDomeFunction
@@ -493,18 +493,18 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C373:: @ 824C373
 	closemessage
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C82B
 	waitmovement 0
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D47F, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D47F, MSGBOX_DEFAULT
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleDomeBattleRoom_Text_24D522
 	waitmessage
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D54D, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D54D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_24BF62
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C400:: @ 824C400
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D677, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D677, MSGBOX_DEFAULT
 	closemessage
 	applymovement 13, BattleFrontier_BattleDomeBattleRoom_Movement_24C787
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C829
@@ -513,7 +513,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C400:: @ 824C400
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C420:: @ 824C420
-	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D127, 4
+	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D127, MSGBOX_DEFAULT
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	waitse
@@ -1055,7 +1055,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_24CA86: @ 824CA86
 	.string "What an unbelievable finish!\n"
 	.string "We have a double knockout!\p"
 	.string "In this event, the Battle Tournament\n"
-	.string "rules call for a REFEREE’S decision.\p"
+	.string "rules call for a REFEREE'S decision.\p"
 	.string "Please wait while the judging\n"
 	.string "is under way.$"
 
@@ -1155,7 +1155,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_24CEBE: @ 824CEBE
 
 BattleFrontier_BattleDomeBattleRoom_Text_24CEDE: @ 824CEDE
 	.string "And now… The TRAINER standing in\n"
-	.string "{PLAYER}’s record-setting path…\p"
+	.string "{PLAYER}'s record-setting path…\p"
 	.string "Yes! The one and only!\n"
 	.string "The BATTLE DOME COMMISSIONER!\l"
 	.string "Our very own DOME ACE!\l"
@@ -1168,21 +1168,21 @@ BattleFrontier_BattleDomeBattleRoom_Text_24CF7A: @ 824CF7A
 BattleFrontier_BattleDomeBattleRoom_Text_24CFAE: @ 824CFAE
 	.string "TUCKER: Ahahah!\p"
 	.string "Do you hear it? This crowd!\n"
-	.string "They’re all itching to see our match!\p"
+	.string "They're all itching to see our match!\p"
 	.string "Ahahah!\p"
-	.string "I bet you’re twitching all over from\n"
+	.string "I bet you're twitching all over from\n"
 	.string "the tension of getting to battle me!\p"
-	.string "But don’t you worry about a thing!\p"
-	.string "I’m the no. 1 star of the BATTLE DOME!\n"
+	.string "But don't you worry about a thing!\p"
+	.string "I'm the no. 1 star of the BATTLE DOME!\n"
 	.string "I, TUCKER the DOME ACE, will bathe you\l"
 	.string "in my brilliant glow!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D0D9: @ 824D0D9
 	.string "Your strategy!\n"
-	.string "Let’s see it!$"
+	.string "Let's see it!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D0F6: @ 824D0F6
-	.string "Unbelievable! It’s incredible!\n"
+	.string "Unbelievable! It's incredible!\n"
 	.string "The victor is {PLAYER}!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D127: @ 824D127
@@ -1200,7 +1200,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_24D1AA: @ 824D1AA
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D1E0: @ 824D1E0
 	.string "… … … … … …\p"
-	.string "I sorely underestimated you. I won’t\n"
+	.string "I sorely underestimated you. I won't\n"
 	.string "make the same mistake next time…$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D232: @ 824D232
@@ -1214,7 +1214,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_24D26C: @ 824D26C
 	.string "Finally, the legend has returned!\p"
 	.string "Yes, the name of that legend!\n"
 	.string "Our very own DOME ACE!\l"
-	.string "It’s none other than TUCKER!$"
+	.string "It's none other than TUCKER!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D319: @ 824D319
 	.string "TUCKER: Ah…\n"
@@ -1233,9 +1233,9 @@ BattleFrontier_BattleDomeBattleRoom_Text_24D43E: @ 824D43E
 	.string "I possess! Right here and now!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D47F: @ 824D47F
-	.string "TUCKER: You’re genuinely fantastic!\p"
-	.string "Never before! I haven’t ever lost in the\n"
-	.string "times I’ve had to unleash my power.\p"
+	.string "TUCKER: You're genuinely fantastic!\p"
+	.string "Never before! I haven't ever lost in the\n"
+	.string "times I've had to unleash my power.\p"
 	.string "Yes, quite fantastic!\n"
 	.string "Your FRONTIER PASS, please?$"
 
@@ -1244,7 +1244,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_24D522: @ 824D522
 	.string "a golden shine!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D54D: @ 824D54D
-	.string "You’re strong, but above all,\n"
+	.string "You're strong, but above all,\n"
 	.string "you have a unique charm!\p"
 	.string "In you, I see a definite potential for\n"
 	.string "a superstar like me.\p"
@@ -1272,6 +1272,6 @@ BattleFrontier_BattleDomeBattleRoom_Text_24D6BE: @ 824D6BE
 	.string "The winner is…\n"
 	.string "Oh, my goodness!\l"
 	.string "The winner is our very own DOME ACE!\l"
-	.string "It’s TUCKER!\p"
+	.string "It's TUCKER!\p"
 	.string "Congratulations! And thank you!\n"
-	.string "Let’s hear it for the DOME ACE, TUCKER!$"
+	.string "Let's hear it for the DOME ACE, TUCKER!$"

@@ -1,6 +1,3 @@
-#ifndef GUARD_FIELD_EFFECT_OBJECT_TEMPLATE_POINTERS_H
-#define GUARD_FIELD_EFFECT_OBJECT_TEMPLATE_POINTERS_H
-
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall;
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium;
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge;
@@ -78,5 +75,3 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     &gFieldEffectObjectTemplate_Unknown35,
     &gFieldEffectObjectTemplate_Rayquaza,
 };
-
-#endif //GUARD_FIELD_EFFECT_OBJECT_TEMPLATE_POINTERS_H

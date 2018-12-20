@@ -2,7 +2,7 @@
 #include "main.h"
 #include "text.h"
 #include "menu.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -33,15 +33,6 @@
 #define MAPCURSOR_Y_MAX (MAPCURSOR_Y_MIN + MAP_HEIGHT - 1)
 
 // Static type declarations
-
-struct RegionMapLocation
-{
-    u8 x;
-    u8 y;
-    u8 width;
-    u8 height;
-    const u8 *name;
-};
 
 // Static RAM declarations
 

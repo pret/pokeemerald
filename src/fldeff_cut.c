@@ -6,7 +6,7 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "fldeff_cut.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "party_menu.h"

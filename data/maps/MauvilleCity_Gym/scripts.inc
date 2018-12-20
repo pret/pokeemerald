@@ -76,7 +76,7 @@ MauvilleCity_Gym_EventScript_20DEE7:: @ 820DEE7
 	end
 
 MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
-	trainerbattle 1, TRAINER_WATTSON_1, 0, MauvilleCity_Gym_Text_20E602, MauvilleCity_Gym_Text_20E734, MauvilleCity_Gym_EventScript_20DF2B
+	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_20E602, MauvilleCity_Gym_Text_20E734, MauvilleCity_Gym_EventScript_20DF2B, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_Gym_EventScript_20DFDE
@@ -84,7 +84,7 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	goto_if 0, MauvilleCity_Gym_EventScript_20DF8D
 	compare VAR_0x40BA, 2
 	goto_eq MauvilleCity_Gym_EventScript_20DFD4
-	msgbox MauvilleCity_Gym_Text_20E8E3, 4
+	msgbox MauvilleCity_Gym_Text_20E8E3, MSGBOX_DEFAULT
 	release
 	end
 
@@ -92,7 +92,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	message MauvilleCity_Gym_Text_20E77F
 	waitmessage
 	call MauvilleCity_Gym_EventScript_27207E
-	msgbox MauvilleCity_Gym_Text_20E7AA, 4
+	msgbox MauvilleCity_Gym_Text_20E7AA, MSGBOX_DEFAULT
 	setvar VAR_0x40D2, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_0x4F2
@@ -109,7 +109,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox MauvilleCity_Gym_Text_20E8B5, 4
+	msgbox MauvilleCity_Gym_Text_20E8B5, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
@@ -121,7 +121,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_Gym_EventScript_272054
-	msgbox MauvilleCity_Gym_Text_20E844, 4
+	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_0x0A7
 	release
 	end
@@ -130,18 +130,18 @@ MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_Gym_EventScript_27205E
-	msgbox MauvilleCity_Gym_Text_20E844, 4
+	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_0x0A7
 	return
 
 MauvilleCity_Gym_EventScript_20DFD4:: @ 820DFD4
-	msgbox MauvilleCity_Gym_Text_20E925, 4
+	msgbox MauvilleCity_Gym_Text_20E925, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_Gym_EventScript_20DFDE:: @ 820DFDE
-	trainerbattle 7, TRAINER_WATTSON_1, 0, MauvilleCity_Gym_Text_20E9A7, MauvilleCity_Gym_Text_20EA42, MauvilleCity_Gym_Text_20EAFD
-	msgbox MauvilleCity_Gym_Text_20EA5E, 6
+	trainerbattle_rematch_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_20E9A7, MauvilleCity_Gym_Text_20EA42, MauvilleCity_Gym_Text_20EAFD
+	msgbox MauvilleCity_Gym_Text_20EA5E, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
@@ -215,28 +215,28 @@ MauvilleCity_Gym_EventScript_20E0B4:: @ 820E0B4
 	end
 
 MauvilleCity_Gym_EventScript_20E0B9:: @ 820E0B9
-	trainerbattle 0, TRAINER_KIRK, 0, MauvilleCity_Gym_Text_20E2BC, MauvilleCity_Gym_Text_20E2FC
-	msgbox MauvilleCity_Gym_Text_20E336, 6
+	trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_20E2BC, MauvilleCity_Gym_Text_20E2FC
+	msgbox MauvilleCity_Gym_Text_20E336, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_20E0D0:: @ 820E0D0
-	trainerbattle 0, TRAINER_SHAWN, 0, MauvilleCity_Gym_Text_20E369, MauvilleCity_Gym_Text_20E3A7
-	msgbox MauvilleCity_Gym_Text_20E3C1, 6
+	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_20E369, MauvilleCity_Gym_Text_20E3A7
+	msgbox MauvilleCity_Gym_Text_20E3C1, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_20E0E7:: @ 820E0E7
-	trainerbattle 0, TRAINER_BEN, 0, MauvilleCity_Gym_Text_20E443, MauvilleCity_Gym_Text_20E469
-	msgbox MauvilleCity_Gym_Text_20E47E, 6
+	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_20E443, MauvilleCity_Gym_Text_20E469
+	msgbox MauvilleCity_Gym_Text_20E47E, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_20E0FE:: @ 820E0FE
-	trainerbattle 0, TRAINER_VIVIAN, 0, MauvilleCity_Gym_Text_20E4BB, MauvilleCity_Gym_Text_20E4F4
-	msgbox MauvilleCity_Gym_Text_20E50F, 6
+	trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_20E4BB, MauvilleCity_Gym_Text_20E4F4
+	msgbox MauvilleCity_Gym_Text_20E50F, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_20E115:: @ 820E115
-	trainerbattle 0, TRAINER_ANGELO, 0, MauvilleCity_Gym_Text_20E593, MauvilleCity_Gym_Text_20E5A8
-	msgbox MauvilleCity_Gym_Text_20E5C2, 6
+	trainerbattle_single TRAINER_ANGELO, MauvilleCity_Gym_Text_20E593, MauvilleCity_Gym_Text_20E5A8
+	msgbox MauvilleCity_Gym_Text_20E5C2, MSGBOX_AUTOCLOSE
 	end
 
 MauvilleCity_Gym_EventScript_20E12C:: @ 820E12C
@@ -244,12 +244,12 @@ MauvilleCity_Gym_EventScript_20E12C:: @ 820E12C
 	faceplayer
 	checkflag FLAG_0x4F2
 	goto_eq MauvilleCity_Gym_EventScript_20E141
-	msgbox MauvilleCity_Gym_Text_20E17F, 4
+	msgbox MauvilleCity_Gym_Text_20E17F, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_Gym_EventScript_20E141:: @ 820E141
-	msgbox MauvilleCity_Gym_Text_20E283, 4
+	msgbox MauvilleCity_Gym_Text_20E283, MSGBOX_DEFAULT
 	release
 	end
 
@@ -268,32 +268,32 @@ MauvilleCity_Gym_EventScript_20E15B:: @ 820E15B
 	end
 
 MauvilleCity_Gym_EventScript_20E16B:: @ 820E16B
-	msgbox MauvilleCity_Gym_Text_20E96C, 4
+	msgbox MauvilleCity_Gym_Text_20E96C, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MauvilleCity_Gym_EventScript_20E175:: @ 820E175
-	msgbox MauvilleCity_Gym_Text_20E952, 4
+	msgbox MauvilleCity_Gym_Text_20E952, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MauvilleCity_Gym_Text_20E17F: @ 820E17F
-	.string "Hey, how’s it going, CHAMPION-\n"
+	.string "Hey, how's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
 	.string "WATTSON, the LEADER of MAUVILLE\n"
 	.string "GYM, uses ELECTRIC-type POKéMON.\p"
 	.string "If you challenge him with WATER-type\n"
-	.string "POKéMON, he’ll zap them! Bzzt!\p"
-	.string "And, he’s put in switch-controlled\n"
+	.string "POKéMON, he'll zap them! Bzzt!\p"
+	.string "And, he's put in switch-controlled\n"
 	.string "doors all over his GYM! Eccentric!\p"
 	.string "Hey, go for it!$"
 
 MauvilleCity_Gym_Text_20E283: @ 820E283
-	.string "Whoa, you’re electrifying!\n"
-	.string "You’ve powered the door open!$"
+	.string "Whoa, you're electrifying!\n"
+	.string "You've powered the door open!$"
 
 MauvilleCity_Gym_Text_20E2BC: @ 820E2BC
-	.string "My electric soul, it’ll shatter your\n"
+	.string "My electric soul, it'll shatter your\n"
 	.string "dreams whole, whoa-yeahah!$"
 
 MauvilleCity_Gym_Text_20E2FC: @ 820E2FC
@@ -301,12 +301,12 @@ MauvilleCity_Gym_Text_20E2FC: @ 820E2FC
 	.string "over-driven electric, man!$"
 
 MauvilleCity_Gym_Text_20E336: @ 820E336
-	.string "POKéMON and rock, it’s all about heart,\n"
+	.string "POKéMON and rock, it's all about heart,\n"
 	.string "whoa-yeah!$"
 
 MauvilleCity_Gym_Text_20E369: @ 820E369
 	.string "I trained under WATTSON!\n"
-	.string "There ain’t no way I’ll lose easily!$"
+	.string "There ain't no way I'll lose easily!$"
 
 MauvilleCity_Gym_Text_20E3A7: @ 820E3A7
 	.string "Unplugged and turned off…$"
@@ -318,25 +318,25 @@ MauvilleCity_Gym_Text_20E3C1: @ 820E3C1
 	.string "daddy was born, that tough coot.$"
 
 MauvilleCity_Gym_Text_20E443: @ 820E443
-	.string "This GYM’s got puzzles!\n"
-	.string "Isn’t it fun?$"
+	.string "This GYM's got puzzles!\n"
+	.string "Isn't it fun?$"
 
 MauvilleCity_Gym_Text_20E469: @ 820E469
-	.string "It’s no fun to lose…$"
+	.string "It's no fun to lose…$"
 
 MauvilleCity_Gym_Text_20E47E: @ 820E47E
 	.string "WATTSON says he likes setting up\n"
 	.string "little traps with switches.$"
 
 MauvilleCity_Gym_Text_20E4BB: @ 820E4BB
-	.string "With my charm and my POKéMON’s moves,\n"
-	.string "you’ll be shocked!$"
+	.string "With my charm and my POKéMON's moves,\n"
+	.string "you'll be shocked!$"
 
 MauvilleCity_Gym_Text_20E4F4: @ 820E4F4
-	.string "I’m shocked by your power!$"
+	.string "I'm shocked by your power!$"
 
 MauvilleCity_Gym_Text_20E50F: @ 820E50F
-	.string "I’ve heard that MAUVILLE was founded\n"
+	.string "I've heard that MAUVILLE was founded\n"
 	.string "by WATTSON.\p"
 	.string "He was a TRAINER long before we\n"
 	.string "became TRAINERS.\l"
@@ -350,16 +350,16 @@ MauvilleCity_Gym_Text_20E5A8: @ 820E5A8
 	.string "My eyes are frazzled…$"
 
 MauvilleCity_Gym_Text_20E5C2: @ 820E5C2
-	.string "MAUVILLE GYM’s WATTSON has a shiny\n"
+	.string "MAUVILLE GYM's WATTSON has a shiny\n"
 	.string "forehead. It makes me happy!$"
 
 MauvilleCity_Gym_Text_20E602: @ 820E602
-	.string "I’ve given up on my plans to convert\n"
+	.string "I've given up on my plans to convert\n"
 	.string "the city, I have.\p"
 	.string "And so, I put my time into making\n"
 	.string "door traps in my GYM.\p"
 	.string "Oh? Now, what are you doing here?\p"
-	.string "What’s that? You say you’ve gotten\n"
+	.string "What's that? You say you've gotten\n"
 	.string "past all my rigged doors?\p"
 	.string "Wahahahah!\n"
 	.string "Now, that is amusing!\p"
@@ -386,7 +386,7 @@ MauvilleCity_Gym_Text_20E7AA: @ 820E7AA
 
 MauvilleCity_Gym_Text_20E844: @ 820E844
 	.string "That TM34 there contains SHOCK WAVE.\p"
-	.string "It’s a trustworthy move that never\n"
+	.string "It's a trustworthy move that never\n"
 	.string "misses! You can count on it!\p"
 	.string "… … … … … …$"
 
@@ -407,7 +407,7 @@ MauvilleCity_Gym_Text_20E952: @ 820E952
 
 MauvilleCity_Gym_Text_20E96C: @ 820E96C
 	.string "MAUVILLE CITY POKéMON GYM\p"
-	.string "WATTSON’S CERTIFIED TRAINERS:\n"
+	.string "WATTSON'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 MauvilleCity_Gym_Text_20E9A7: @ 820E9A7
@@ -415,20 +415,20 @@ MauvilleCity_Gym_Text_20E9A7: @ 820E9A7
 	.string "I know what you want.\l"
 	.string "You want to battle my POKéMON!\p"
 	.string "Wahahahaha!\p"
-	.string "I’ll make sparks fly from you!\n"
-	.string "Don’t say I didn’t warn you!$"
+	.string "I'll make sparks fly from you!\n"
+	.string "Don't say I didn't warn you!$"
 
 MauvilleCity_Gym_Text_20EA42: @ 820EA42
 	.string "Oof…\n"
 	.string "Our batteries ran dry…$"
 
 MauvilleCity_Gym_Text_20EA5E: @ 820EA5E
-	.string "WATTSON: We’ll have to recharge our\n"
+	.string "WATTSON: We'll have to recharge our\n"
 	.string "batteries again.\p"
-	.string "When we’re fully charged up, we’ll\n"
+	.string "When we're fully charged up, we'll\n"
 	.string "gladly accept your challenge.\p"
 	.string "So, come back again sometime,\n"
-	.string "won’t you?$"
+	.string "won't you?$"
 
 MauvilleCity_Gym_Text_20EAFD: @ 820EAFD
 	.string "WATTSON: Ah-ha! Here at last!\n"
@@ -436,7 +436,7 @@ MauvilleCity_Gym_Text_20EAFD: @ 820EAFD
 	.string "You want to battle my POKéMON!\p"
 	.string "Wahahahaha!\p"
 	.string "Oops! Wait!\n"
-	.string "You’ve only one POKéMON with you!\p"
+	.string "You've only one POKéMON with you!\p"
 	.string "Come see me with two or more\n"
 	.string "POKéMON, all right?$"
 

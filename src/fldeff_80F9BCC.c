@@ -320,7 +320,6 @@ static const struct SpriteTemplate gUnknown_0858E880 =
     .callback = SpriteCallbackDummy,
 };
 
-// TODO: name these functions and arguments
 void sub_80F9BCC(u16 a0, u16 a1, u8 a2)
 {
     sub_80F9C44(sub_80F9C90, a0, a1, a2);
@@ -366,19 +365,14 @@ void sub_80F9C44(void (*taskfunc) (u8), u16 a1, u16 a2, u8 a3)
     gTasks[taskId].func(taskId);
 }
 
-//#define CHECKIT(a) if(a != 0) return; break;
-
-//#ifdef NONMATCHING
+#ifdef NONMATCHING
 void sub_80F9C90(u8 taskId)
 {
-    //
     struct Task *task = &gTasks[taskId];
-    //s16 temp;
-    //int temp = task->data[0];
 
     switch(task->data[0])
     {
-    case 0:// correct
+    case 0:
         task->data[3] = 0x78;
         task->data[4] = 0x78;
         task->data[5] = 0x50;
@@ -390,50 +384,41 @@ void sub_80F9C90(u8 taskId)
         SetGpuReg(REG_OFFSET_WININ, 0x3F);
         SetGpuReg(REG_OFFSET_WINOUT, 0);
 
-        //task->data[0]++;
         break;
 
-    case 1:// correct
+    case 1:
         task->data[7] = GetGpuReg(REG_OFFSET_BLDCNT);
         task->data[8] = GetGpuReg(REG_OFFSET_BLDY);
 
         SetGpuReg(REG_OFFSET_BLDCNT, 0xBF);
         SetGpuReg(REG_OFFSET_BLDY, 0x10);
 
-        //task->data[0]++;
         break;
 
     case 2:
         task->data[3] -= task->data[1];
         task->data[4] += task->data[1];
 
-        if (task->data[3] <= 0 || task->data[4] > 0xEF)
+        if (task->data[3] < 1 || task->data[4] > 0xEF)
         {
-            //
             task->data[3] = 0;
             task->data[4] = 0xF0;
             SetGpuReg(REG_OFFSET_BLDY, 0);
             SetGpuReg(REG_OFFSET_BLDCNT, task->data[7]);
-            BlendPalettes(0xFFFFFFFF, 0, 0);// 0xFFFFFFFF ?
+            BlendPalettes(0xFFFFFFFF, 0, 0);
             gPlttBufferFaded[0] = 0;
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[4]));
 
         if (task->data[3] != 0) return;
         break;
-        
-
-        //if (task->data[3] == 0)
-        //    task->data[0]++;
-        //break;
 
     case 3:
         task->data[5] -= task->data[2];
         task->data[6] += task->data[2];
 
-        if (task->data[5] <= 0 || task->data[2] > 0x9F)
+        if (task->data[5] < 1 || task->data[2] > 0x9F)
         {
-            //
             task->data[5] = 0;
             task->data[6] = 0xA0;
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
@@ -443,21 +428,13 @@ void sub_80F9C90(u8 taskId)
         if (task->data[5] != 0) return;
         break;
 
-
-        //if (task->data[5] == 0)
-        //    task->data[0]++;
-        //break;
-
     default:
         SetGpuReg(REG_OFFSET_BLDCNT, task->data[7]);
         DestroyTask(taskId);
         return;
     }
-    //
-    //task->data[0] += 1;
-    task->data[0]++;
+    task->data[0] += 1;
 }
-/*
 #else
 NAKED
 void sub_80F9C90(u8 taskId)
@@ -637,7 +614,6 @@ void sub_80F9C90(u8 taskId)
                 "\tbx r0");
 }
 #endif
-*/
 
 void sub_80F9DFC(u8 taskId)
 {
@@ -668,7 +644,7 @@ void sub_80F9DFC(u8 taskId)
         task->data[5] += task->data[2];
         task->data[6] -= task->data[2];
 
-        if (task->data[5] > 0x4F || task->data[6] <= 0x51)
+        if (task->data[5] > 0x4F || task->data[6] < 0x52)
         {
             task->data[5] = 0x50;
             task->data[6] = 0x51;
@@ -684,7 +660,7 @@ void sub_80F9DFC(u8 taskId)
         task->data[3] += task->data[1];
         task->data[4] -= task->data[1];
 
-        if (task->data[3] > 0x77 || task->data[4] <= 0x78)
+        if (task->data[3] > 0x77 || task->data[4] < 0x79)
         {
             task->data[3] = 0x78;
             task->data[4] = 0x78;
@@ -1398,27 +1374,19 @@ void GetShieldToyTVDecorationInfo(void)
 }
 
 #ifdef NONMATCHING
-// 
 bool8 sub_80FADE4(u16 arg0, u8 arg1)
 {
-    //
     if (CurrentMapIsSecretBase())
     {
-    //    return TRUE;
         if (arg1 == 0)
         {
-            //
             if ((u16)(arg0 + 0xfffffd7b) <= 1 || (arg0 == 0x237))
                 return TRUE;
-            //if (arg0 == 0x237)
-            //else    return FALSE;
         }
         else
         {
-            //
             if (arg0 == 0x28d || arg0 == 0x23f)
                 return TRUE;
-            //return FALSE;
         }
     }
     return FALSE;

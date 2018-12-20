@@ -1,23 +1,6 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
-enum
-{
-    TRAINER_BATTLE_NORMAL,
-    TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC,
-    TRAINER_BATTLE_CONTINUE_SCRIPT,
-    TRAINER_BATTLE_NORMAL_NO_INTRO_TEXT,
-    TRAINER_BATTLE_DOUBLE,
-    TRAINER_BATTLE_REMATCH,
-    TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE,
-    TRAINER_BATTLE_REMATCH_DOUBLE,
-    TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC,
-    TRAINER_BATTLE_9,
-    TRAINER_BATTLE_SET_TRAINER_A,
-    TRAINER_BATTLE_SET_TRAINER_B,
-    TRAINER_BATTLE_12,
-};
-
 #define REMATCHES_COUNT 5
 #define REMATCH_TABLE_ENTRIES 78
 #define REMATCH_WALLY_ENTRY 64
@@ -55,7 +38,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerSc
 void ConfigureTwoTrainersBattle(u8 trainerEventObjId, const u8 *trainerScript);
 void SetUpTwoTrainersBattle(void);
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
-void sub_80B16D8(void);
+void SetUpTrainerMovement(void);
 u8 GetTrainerBattleMode(void);
 bool8 GetTrainerFlag(void);
 bool8 HasTrainerBeenFought(u16 trainerId);

@@ -30,7 +30,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D1C6:: @ 825D1C6
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
@@ -58,7 +58,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D226:: @ 825D226
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D231:: @ 825D231
 	lockall
 	delay 16
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDFE, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDFE, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D795
@@ -66,7 +66,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D231:: @ 825D231
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
@@ -86,11 +86,11 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D285:: @ 825D285
 	waitmovement 0
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE3F, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE3F, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE94, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE94, MSGBOX_DEFAULT
 	closemessage
 	release
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D798
@@ -110,7 +110,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2BF:: @ 825D2BF
 	case 2, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4FC
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E311, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E311, MSGBOX_DEFAULT
 	closemessage
 	special SpawnScriptEventObject
 	applymovement 127, BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0
@@ -147,13 +147,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA
@@ -164,7 +164,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePikeRandomRoom1_Text_25DFD0
@@ -172,7 +172,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E003, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E003, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 
@@ -182,13 +182,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460
@@ -199,7 +199,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePikeRandomRoom1_Text_25E118
@@ -207,7 +207,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	waitfanfare
 	setvar VAR_0x8004, 13
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E140, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E140, MSGBOX_DEFAULT
 	closemessage
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	end
@@ -230,19 +230,19 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D:: @ 825D49D
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4DC:: @ 825D4DC
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E15D, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E15D, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4EA:: @ 825D4EA
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E1DD, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E1DD, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D4FC:: @ 825D4FC
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E238, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E238, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB
@@ -258,7 +258,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D50E:: @ 825D50E
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA13, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA13, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D798
 	waitmovement 0
@@ -282,7 +282,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 0
 	special CallBattlePikeFunction
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	delay 16
 	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7BD
@@ -290,7 +290,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D53E:: @ 825D53E
 	setvar VAR_0x8004, 21
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, SPECIAL_BATTLE_PIKE_DOUBLE
 	setvar VAR_0x8005, 0
@@ -324,13 +324,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D605:: @ 825D605
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643
 	compare VAR_0x8004, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD3F, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD3F, MSGBOX_DEFAULT
 	closemessage
 	releaseall
 	end
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DBE4, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DBE4, MSGBOX_DEFAULT
 	closemessage
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
@@ -355,7 +355,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
 	waitmoncry
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, MSGBOX_DEFAULT
 	waitse
 	playmoncry SPECIES_KIRLIA, 0
 	waitmoncry
@@ -363,11 +363,11 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B3
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A4
 	waitmovement 0
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCCF, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCCF, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DC01, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DC01, MSGBOX_DEFAULT
 	closemessage
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
@@ -388,7 +388,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
 	waitmoncry
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF, MSGBOX_DEFAULT
 	waitse
 	playmoncry SPECIES_DUSCLOPS, 0
 	waitmoncry
@@ -396,7 +396,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B3
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7A4
 	waitmovement 0
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD06, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD06, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D751:: @ 825D751
@@ -590,7 +590,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D81B:: @ 825D81B
 	faceplayer
 	setvar VAR_0x8004, 14
 	special CallBattlePikeFunction
-	msgbox gStringVar4, 4
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	release
@@ -599,7 +599,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D81B:: @ 825D81B
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D831:: @ 825D831
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDA3, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDA3, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
@@ -613,7 +613,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D83E:: @ 825D83E
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D875
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DABE, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DABE, MSGBOX_DEFAULT
 	closemessage
 	release
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D79E
@@ -623,21 +623,21 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D83E:: @ 825D83E
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D875:: @ 825D875
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA51, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA51, MSGBOX_DEFAULT
 	closemessage
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D881:: @ 825D881
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E32E, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E32E, MSGBOX_DEFAULT
 	closemessage
 	return
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D88D:: @ 825D88D
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDE6, 4
+	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DDE6, MSGBOX_DEFAULT
 	closemessage
 	release
 	applymovement 2, BattleFrontier_BattlePikeRandomRoom1_Movement_25D7B4
@@ -709,8 +709,8 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25DA13: @ 825DA13
 	.string "Battle Choice challenge…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DA51: @ 825DA51
-	.string "Ah, you’re a lucky one.\n"
-	.string "I’m in somewhat-good spirits now.\p"
+	.string "Ah, you're a lucky one.\n"
+	.string "I'm in somewhat-good spirits now.\p"
 	.string "I will restore one of your POKéMON\n"
 	.string "to full health.$"
 
@@ -721,7 +721,7 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25DABE: @ 825DABE
 BattleFrontier_BattlePikeRandomRoom1_Text_25DAE1: @ 825DAE1
 	.string "Excuse me…\p"
 	.string "Would you care for a battle?\n"
-	.string "I’ll restore your POKéMON if you win.$"
+	.string "I'll restore your POKéMON if you win.$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DB2F: @ 825DB2F
 	.string "Very well…\n"
@@ -772,7 +772,7 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25DC97: @ 825DC97
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DCAF: @ 825DCAF
 	.string "Look here!\n"
-	.string "That’s quite enough!$"
+	.string "That's quite enough!$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DCCF: @ 825DCCF
 	.string "I must apologize to you…\p"
@@ -815,12 +815,12 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25DED2: @ 825DED2
 	.string "For I am the PIKE QUEEN…\p"
 	.string "You already know it, but to advance,\n"
 	.string "you must defeat me…\p"
-	.string "…I’m not one for idle chatter.\n"
+	.string "…I'm not one for idle chatter.\n"
 	.string "Hurry. Come on…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DF71: @ 825DF71
 	.string "Your luck…\n"
-	.string "I hope you didn’t use it all up here…$"
+	.string "I hope you didn't use it all up here…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2: @ 825DFA2
 	.string "LUCY: … … … … … …\n"
@@ -831,18 +831,18 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25DFD0: @ 825DFD0
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E003: @ 825E003
-	.string "…That’s all there is…\n"
+	.string "…That's all there is…\n"
 	.string "Disappear already…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E02C: @ 825E02C
 	.string "LUCY: …You again…\p"
 	.string "… … … … … …\p"
-	.string "…I’ve trampled flowers and braved\n"
+	.string "…I've trampled flowers and braved\n"
 	.string "storms to get to where I am…\p"
-	.string "I don’t feel any compulsion to keep\n"
+	.string "I don't feel any compulsion to keep\n"
 	.string "losing to the same opponent…\p"
 	.string "… … … … … …\n"
-	.string "Fine… I’ll do it…$"
+	.string "Fine… I'll do it…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8: @ 825E0E8
 	.string "Now!\n"
@@ -857,14 +857,14 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25E118: @ 825E118
 	.string "a golden shine!$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E140: @ 825E140
-	.string "…You, I won’t forget…\n"
+	.string "…You, I won't forget…\n"
 	.string "…Ever…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E15D: @ 825E15D
 	.string "I welcome you…\p"
 	.string "Giggle…\n"
 	.string "You seem to be bereft of luck…\p"
-	.string "If only you hadn’t chosen this room,\n"
+	.string "If only you hadn't chosen this room,\n"
 	.string "your POKéMON could have been healed…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E1DD: @ 825E1DD
@@ -888,8 +888,8 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25E311: @ 825E311
 	.string "I shall go fetch our master…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E32E: @ 825E32E
-	.string "Ah, you’re a lucky one!\n"
-	.string "I’m in good spirits now.\p"
+	.string "Ah, you're a lucky one!\n"
+	.string "I'm in good spirits now.\p"
 	.string "I will restore two of your POKéMON\n"
 	.string "to full health!$"
 

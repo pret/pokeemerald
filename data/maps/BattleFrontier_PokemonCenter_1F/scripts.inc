@@ -16,15 +16,15 @@ BattleFrontier_PokemonCenter_1F_EventScript_267908:: @ 8267908
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267916:: @ 8267916
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267944, 2
+	msgbox BattleFrontier_PokemonCenter_1F_Text_267944, MSGBOX_NPC
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_26791F:: @ 826791F
-	msgbox BattleFrontier_PokemonCenter_1F_Text_2679EB, 2
+	msgbox BattleFrontier_PokemonCenter_1F_Text_2679EB, MSGBOX_NPC
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267928:: @ 8267928
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267A4B, 2
+	msgbox BattleFrontier_PokemonCenter_1F_Text_267A4B, MSGBOX_NPC
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_267931:: @ 8267931
@@ -32,26 +32,26 @@ BattleFrontier_PokemonCenter_1F_EventScript_267931:: @ 8267931
 	faceplayer
 	waitse
 	playmoncry SPECIES_SKITTY, 0
-	msgbox BattleFrontier_PokemonCenter_1F_Text_267A90, 4
+	msgbox BattleFrontier_PokemonCenter_1F_Text_267A90, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
 BattleFrontier_PokemonCenter_1F_Text_267944: @ 8267944
 	.string "There was someone here using a \n"
-	.string "POKéMON I’ve never seen before.\p"
+	.string "POKéMON I've never seen before.\p"
 	.string "I never learned about it at\n"
-	.string "TRAINER’S SCHOOL at least.\p"
+	.string "TRAINER'S SCHOOL at least.\p"
 	.string "I wonder where you can catch POKéMON\n"
 	.string "like that.$"
 
 BattleFrontier_PokemonCenter_1F_Text_2679EB: @ 82679EB
 	.string "Okay! Next stop, the BATTLE ARENA!\n"
-	.string "I’d better get the right POKéMON from\l"
+	.string "I'd better get the right POKéMON from\l"
 	.string "the PC Storage System.$"
 
 BattleFrontier_PokemonCenter_1F_Text_267A4B: @ 8267A4B
-	.string "Giggle… I’m going to go through every\n"
+	.string "Giggle… I'm going to go through every\n"
 	.string "challenge with just this baby!$"
 
 BattleFrontier_PokemonCenter_1F_Text_267A90: @ 8267A90

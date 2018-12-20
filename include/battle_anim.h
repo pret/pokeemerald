@@ -3,16 +3,17 @@
 
 #include "battle.h"
 #include "constants/battle_anim.h"
+#include "task.h"
 
 enum
 {
     BG_ANIM_SCREEN_SIZE,
     BG_ANIM_AREA_OVERFLOW_MODE,
-    BG_ANIM2,
+    BG_ANIM_MOSAIC,
     BG_ANIM_CHAR_BASE_BLOCK,
     BG_ANIM_PRIORITY,
-    BG_ANIM_5,
-    BG_ANIM_6
+    BG_ANIM_PALETTES_MODE,
+    BG_ANIM_SCREEN_BASE_BLOCK,
 };
 
 struct UnknownAnimStruct2
@@ -66,11 +67,11 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
 void sub_80A477C(bool8);
 
-// battle_anim_80FE840.s
+// battle_intro.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
-void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
+void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *arg5, u16 *arg6, u16 arg7);
 void HandleIntroSlide(u8 terrainId);
-u32 GetAnimBgAttribute(u8 bgId, u8 attributeId);
+int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6450(struct Sprite *sprite);
@@ -123,6 +124,20 @@ u8 sub_80A89C8(int, u8, int);
 void sub_80A6D60(struct UnknownAnimStruct2*, const void*, u32);
 void sub_80A6CC0(u32, const void*, u32);
 void sub_80A6DAC(bool8);
+void sub_80A634C(struct Sprite *);
+void sub_80A653C(struct Sprite *);
+void sub_80A7E6C(u8 spriteId);
+void sub_80A805C(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
+u8 sub_80A80C8(struct Task *task);
+void sub_80A8EE4(struct Sprite *);
+void sub_80A67F4(struct Sprite *);
+void sub_80A6D48(u32 bgId, const void *src);
+void sub_80A7160(struct Sprite *sprite);
+bool8 sub_80A70E8(struct Sprite *sprite);
+void sub_80A70C0(struct Sprite *sprite);
+void TranslateMonBGUntil(struct Sprite *sprite);
+void TranslateSpriteOverDuration(struct Sprite *sprite);
+void sub_80A77C8(struct Sprite *sprite);
 
 enum
 {
@@ -160,13 +175,13 @@ void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);
-u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
+u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);
 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
 
-u32 sub_811583C(s16);
+u32 UnpackSelectedBattleAnimPalettes(s16);
 
 u8 GetBattlerSpriteFinal_Y(u8, u16, u8);
 
@@ -214,5 +229,8 @@ extern const struct OamData gUnknown_085249F4;
 extern const struct OamData gUnknown_0852493C;
 extern const struct OamData gUnknown_08524A5C;
 extern const struct OamData gUnknown_08524A74;
+
+extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
+extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 
 #endif // GUARD_BATTLE_ANIM_H

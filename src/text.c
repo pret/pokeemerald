@@ -1539,7 +1539,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 subStruct->glyphId = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
                 return 2;
             case 8:
                 textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
@@ -1591,7 +1591,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case 24:
                 m4aMPlayContinue(&gMPlayInfo_BGM);
                 return 2;
-            case 17:
+            case EXT_CTRL_CODE_CLEAR:
                 width = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 if (width > 0)
@@ -1622,10 +1622,10 @@ u16 RenderText(struct TextPrinter *textPrinter)
             case 20:
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return 2;
-            case 21:
+            case EXT_CTRL_CODE_JPN:
                 textPrinter->japanese = 1;
                 return 2;
-            case 22:
+            case EXT_CTRL_CODE_ENG:
                 textPrinter->japanese = 0;
                 return 2;
             }
@@ -1810,12 +1810,12 @@ u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
             case 0x14:
                 ++strPos;
                 break;
-            case 0x7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
             case 0x9:
             case 0xA:
             case 0xF:
-            case 0x15:
-            case 0x16:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
             default:
                 break;
             }
@@ -1970,13 +1970,13 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case 0x14:
                 minGlyphWidth = *++str;
                 break;
-            case 0x15:
+            case EXT_CTRL_CODE_JPN:
                 isJapanese = 1;
                 break;
-            case 0x16:
+            case EXT_CTRL_CODE_ENG:
                 isJapanese = 0;
                 break;
-            case 0x7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
             case 0x9:
             case 0xA:
             case 0xF:
@@ -2096,12 +2096,12 @@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
             case 0x14:
                 ++strPos;
                 break;
-            case 0x7:
+            case EXT_CTRL_CODE_UNKNOWN_7:
             case 0x9:
             case 0xA:
             case 0xF:
-            case 0x15:
-            case 0x16:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
             default:
                 continue;
             }

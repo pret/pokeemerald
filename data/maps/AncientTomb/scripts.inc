@@ -51,7 +51,7 @@ AncientTomb_EventScript_239033:: @ 8239033
 	end
 
 AncientTomb_EventScript_239046:: @ 8239046
-	msgbox gUnknown_0827304E, 4
+	msgbox gUnknown_0827304E, MSGBOX_DEFAULT
 	releaseall
 	end
 

@@ -13,7 +13,7 @@
 #include "lilycove_lady.h"
 #include "list_menu.h"
 #include "main.h"
-#include "malloc.h"
+#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"

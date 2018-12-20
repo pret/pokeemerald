@@ -54,11 +54,11 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507B1:: @ 82507B1
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_2507D2
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2517B5, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2517B5, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_2507DA
 
 BattleFrontier_BattlePyramidLobby_EventScript_2507D2:: @ 82507D2
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2525F4, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2525F4, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special sub_81B95E0
@@ -75,7 +75,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	waitmessage
 	playse SE_EXPMAX
 	waitse
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252662, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252662, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 11
 	special CallFrontierUtilFunc
 	msgbox BattleFrontier_BattlePyramidLobby_Text_241520, 9
@@ -88,7 +88,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special CallBattlePyramidFunction
 	playse SE_SAVE
 	waitse
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -117,7 +117,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	special CallBattlePyramidFunction
 	playse SE_SAVE
 	waitse
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251BB6, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_0, 255
 	releaseall
@@ -132,7 +132,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2508B1:: @ 82508B1
 	setvar VAR_FRONTIER_FACILITY, 6
 	setvar VAR_FRONTIER_BATTLE_MODE, 0
 	special SavePlayerParty
-	msgbox BattleFrontier_BattlePyramidLobby_Text_250F31, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_250F31, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePyramidLobby_EventScript_2508C8:: @ 82508C8
 	message BattleFrontier_BattlePyramidLobby_Text_250FA7
@@ -159,7 +159,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251297, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251297, MSGBOX_DEFAULT
 	fadescreen 1
 	call BattleFrontier_BattlePyramidLobby_EventScript_23F2B7
 	copyvar VAR_0x8004, VAR_RESULT
@@ -168,7 +168,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AC1
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2514E6, 5
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2514E6, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250AC1
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_2509A5
@@ -210,7 +210,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special CallFrontierUtilFunc
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251531, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251531, MSGBOX_DEFAULT
 	closemessage
 	call BattleFrontier_BattlePyramidLobby_EventScript_250D56
 	setvar VAR_0x8004, 2
@@ -225,7 +225,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A68:: @ 8250A68
-	msgbox BattleFrontier_BattlePyramidLobby_Text_25100C, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_25100C, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_2508C8
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A75:: @ 8250A75
@@ -234,11 +234,11 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A75:: @ 8250A75
 	case 1, BattleFrontier_BattlePyramidLobby_EventScript_250A9D
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A90:: @ 8250A90
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2513C1, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2513C1, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250ACC
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A9D:: @ 8250A9D
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2512E2, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2512E2, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250ACC
 
 BattleFrontier_BattlePyramidLobby_EventScript_250AAA:: @ 8250AAA
@@ -252,7 +252,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250AC1:: @ 8250AC1
 	special LoadPlayerParty
 
 BattleFrontier_BattlePyramidLobby_EventScript_250AC4:: @ 8250AC4
-	msgbox BattleFrontier_BattlePyramidLobby_Text_250FE5, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_250FE5, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePyramidLobby_EventScript_250ACC:: @ 8250ACC
 	release
@@ -262,9 +262,9 @@ BattleFrontier_BattlePyramidLobby_EventScript_250ACE:: @ 8250ACE
 	lockall
 	applymovement 2, BattleFrontier_BattlePyramidLobby_Movement_27259E
 	waitmovement 0
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251C3B, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251C3B, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidLobby_EventScript_250AF0
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252461, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252461, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -281,7 +281,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B27:: @ 8250B27
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B28:: @ 8250B28
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251C8A, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251C8A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special CallBattlePyramidFunction
@@ -299,7 +299,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B53:: @ 8250B53
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250B66:: @ 8250B66
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251C8A, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251C8A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 6
 	special CallBattlePyramidFunction
@@ -343,83 +343,83 @@ BattleFrontier_BattlePyramidLobby_EventScript_250BA4:: @ 8250BA4
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250C8E:: @ 8250C8E
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251CB3, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251CB3, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250C97:: @ 8250C97
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251D07, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251D07, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CA0:: @ 8250CA0
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251D54, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251D54, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CA9:: @ 8250CA9
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251D9C, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251D9C, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CB2:: @ 8250CB2
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251E3D, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251E3D, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CBB:: @ 8250CBB
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251EA1, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251EA1, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CC4:: @ 8250CC4
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251F17, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251F17, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CCD:: @ 8250CCD
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251F6E, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251F6E, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CD6:: @ 8250CD6
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251FC7, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251FC7, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CDF:: @ 8250CDF
-	msgbox BattleFrontier_BattlePyramidLobby_Text_25201B, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_25201B, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CE8:: @ 8250CE8
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252068, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252068, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CF1:: @ 8250CF1
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2520BA, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2520BA, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250CFA:: @ 8250CFA
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252158, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252158, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D03:: @ 8250D03
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2521B4, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2521B4, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D0C:: @ 8250D0C
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252206, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252206, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D15:: @ 8250D15
-	msgbox BattleFrontier_BattlePyramidLobby_Text_25225A, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_25225A, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D1E:: @ 8250D1E
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2522AE, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2522AE, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D27:: @ 8250D27
-	msgbox BattleFrontier_BattlePyramidLobby_Text_25230B, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_25230B, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D30:: @ 8250D30
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252364, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252364, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D39:: @ 8250D39
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252403, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252403, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D42:: @ 8250D42
@@ -436,24 +436,24 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D56:: @ 8250D56
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_250DC4
 	applymovement 255, BattleFrontier_BattlePyramidLobby_Movement_250DCD
 	waitmovement 0
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251569, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251569, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250D94
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2515AD, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2515AD, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250D9C
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D94:: @ 8250D94
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2515F4, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2515F4, MSGBOX_DEFAULT
 
 BattleFrontier_BattlePyramidLobby_EventScript_250D9C:: @ 8250D9C
 	message BattleFrontier_BattlePyramidLobby_Text_25161E
 	waitmessage
 	playse SE_EXPMAX
 	waitse
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251647, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251647, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_BattlePyramidLobby_Movement_250DD5
 	waitmovement 0
@@ -493,7 +493,7 @@ BattleFrontier_BattlePyramidLobby_Movement_250DD8: @ 8250DD8
 	step_end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250DDB:: @ 8250DDB
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2517FC, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2517FC, MSGBOX_DEFAULT
 	setflag FLAG_SPECIAL_FLAG_0x4004
 	special sub_81C6A94
 	compare VAR_RESULT, 0
@@ -504,7 +504,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250DDB:: @ 8250DDB
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E00:: @ 8250E00
-	msgbox BattleFrontier_BattlePyramidLobby_Text_251881, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_251881, MSGBOX_DEFAULT
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E09:: @ 8250E09
@@ -539,23 +539,23 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E60:: @ 8250E60
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E6F:: @ 8250E6F
-	msgbox BattleFrontier_BattlePyramidLobby_Text_25194F, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_25194F, MSGBOX_DEFAULT
 	message BattleFrontier_BattlePyramidLobby_Text_25197E
 	waitmessage
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250E09
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E83:: @ 8250E83
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2524DA, 2
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2524DA, MSGBOX_NPC
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E8C:: @ 8250E8C
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252595, 2
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252595, MSGBOX_NPC
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E95:: @ 8250E95
 	lockall
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2526B6, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2526B6, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250EA4
 	end
 
@@ -573,22 +573,22 @@ BattleFrontier_BattlePyramidLobby_EventScript_250EA4:: @ 8250EA4
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250EF7:: @ 8250EF7
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2526FC, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2526FC, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250EA4
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250F05:: @ 8250F05
-	msgbox BattleFrontier_BattlePyramidLobby_Text_2527A9, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_2527A9, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250EA4
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250F13:: @ 8250F13
-	msgbox BattleFrontier_BattlePyramidLobby_Text_25285A, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_25285A, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250EA4
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_250F21:: @ 8250F21
-	msgbox BattleFrontier_BattlePyramidLobby_Text_252924, 4
+	msgbox BattleFrontier_BattlePyramidLobby_Text_252924, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250EA4
 	end
 
@@ -626,7 +626,7 @@ BattleFrontier_BattlePyramidLobby_Text_25100C: @ 825100C
 	.string "If you want to interrupt your\n"
 	.string "challenge, you must select “REST”\l"
 	.string "and save the game.\p"
-	.string "If you don’t save before interrupting,\n"
+	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251248: @ 8251248
@@ -696,21 +696,21 @@ BattleFrontier_BattlePyramidLobby_Text_2516D6: @ 82516D6
 	.string "You did not save before ending\n"
 	.string "your challenge the last time.\p"
 	.string "Consequently, your challenge has\n"
-	.string "been disqualified, I’m sorry to say.\p"
-	.string "Here is the BAG we’ve been holding\n"
+	.string "been disqualified, I'm sorry to say.\p"
+	.string "Here is the BAG we've been holding\n"
 	.string "for you.\p"
 	.string "{PLAYER} got the BAG back.$"
 
 BattleFrontier_BattlePyramidLobby_Text_2517B5: @ 82517B5
 	.string "Excellent to see you back!\p"
-	.string "You’ve conquered the PYRAMID!\n"
+	.string "You've conquered the PYRAMID!\n"
 	.string "How splendid!$"
 
 BattleFrontier_BattlePyramidLobby_Text_2517FC: @ 82517FC
 	.string "Ah, a slight problem.\p"
 	.string "At least one POKéMON is holding\n"
 	.string "an item.\p"
-	.string "I’m sorry to say, items obtained in\n"
+	.string "I'm sorry to say, items obtained in\n"
 	.string "the PYRAMID cannot be taken away.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251881: @ 8251881
@@ -719,8 +719,8 @@ BattleFrontier_BattlePyramidLobby_Text_251881: @ 8251881
 
 BattleFrontier_BattlePyramidLobby_Text_2518C6: @ 82518C6
 	.string "The BATTLE BAG cannot hold all your\n"
-	.string "items, I’m sorry to say.\p"
-	.string "Please pick the items you’ll keep in the\n"
+	.string "items, I'm sorry to say.\p"
+	.string "Please pick the items you'll keep in the\n"
 	.string "BATTLE BAG, and with your POKéMON.$"
 
 BattleFrontier_BattlePyramidLobby_Text_25194F: @ 825194F
@@ -728,7 +728,7 @@ BattleFrontier_BattlePyramidLobby_Text_25194F: @ 825194F
 	.string "holding an item.$"
 
 BattleFrontier_BattlePyramidLobby_Text_25197E: @ 825197E
-	.string "Please pick the items you’ll keep in the\n"
+	.string "Please pick the items you'll keep in the\n"
 	.string "BATTLE BAG, and with your POKéMON.$"
 
 BattleFrontier_BattlePyramidLobby_Text_2519CA: @ 82519CA
@@ -739,7 +739,7 @@ BattleFrontier_BattlePyramidLobby_Text_2519F8: @ 82519F8
 	.string "The BATTLE BAG you used will be kept\n"
 	.string "in readiness for your next challenge.\p"
 	.string "{PLAYER} turned the BATTLE BAG over\n"
-	.string "for the BAG’s return.$"
+	.string "for the BAG's return.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251A77: @ 8251A77
 	.string "I must record your results.\n"
@@ -756,12 +756,12 @@ BattleFrontier_BattlePyramidLobby_Text_251AE2: @ 8251AE2
 BattleFrontier_BattlePyramidLobby_Text_251AFC: @ 8251AFC
 	.string "…Ah…\n"
 	.string "Your BAG appears to be filled.\p"
-	.string "Please return after you’ve organized\n"
-	.string "your BAG’s contents.$"
+	.string "Please return after you've organized\n"
+	.string "your BAG's contents.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251B5A: @ 8251B5A
 	.string "How disappointing for you…\p"
-	.string "Here is the BAG we’ve been holding\n"
+	.string "Here is the BAG we've been holding\n"
 	.string "for you.\p"
 	.string "{PLAYER} got the BAG back.$"
 
@@ -818,7 +818,7 @@ BattleFrontier_BattlePyramidLobby_Text_251EA1: @ 8251EA1
 	.string "I sense terrific energy rising from\n"
 	.string "the ground below…\p"
 	.string "…And, I see your POKéMON unable to\n"
-	.string "escape the power’s clutches…$"
+	.string "escape the power's clutches…$"
 
 BattleFrontier_BattlePyramidLobby_Text_251F17: @ 8251F17
 	.string "I see ICE-type POKéMON…\p"
@@ -908,7 +908,7 @@ BattleFrontier_BattlePyramidLobby_Text_2524DA: @ 82524DA
 	.string "If you run fast, TRAINERS may notice\n"
 	.string "and come after you for a battle.\p"
 	.string "So, if you want to avoid TRAINERS,\n"
-	.string "don’t catch their eyes, but sneak\l"
+	.string "don't catch their eyes, but sneak\l"
 	.string "cautiously and quietly past them.$"
 
 BattleFrontier_BattlePyramidLobby_Text_252595: @ 8252595
@@ -919,8 +919,8 @@ BattleFrontier_BattlePyramidLobby_Text_252595: @ 8252595
 
 BattleFrontier_BattlePyramidLobby_Text_2525F4: @ 82525F4
 	.string "Welcome back!\n"
-	.string "You’ve done the unthinkable!\p"
-	.string "You’ve defeated the PYRAMID KING\n"
+	.string "You've done the unthinkable!\p"
+	.string "You've defeated the PYRAMID KING\n"
 	.string "and conquered the BATTLE PYRAMID!$"
 
 BattleFrontier_BattlePyramidLobby_Text_252662: @ 8252662

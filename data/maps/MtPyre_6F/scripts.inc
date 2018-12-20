@@ -2,37 +2,34 @@ MtPyre_6F_MapScripts:: @ 8231D3A
 	.byte 0
 
 MtPyre_6F_EventScript_231D3B:: @ 8231D3B
-	trainerbattle 2, TRAINER_VALERIE_1, 0, MtPyre_6F_Text_231DB4, MtPyre_6F_Text_231DE2, MtPyre_6F_EventScript_231D67
+	trainerbattle_single TRAINER_VALERIE_1, MtPyre_6F_Text_231DB4, MtPyre_6F_Text_231DE2, MtPyre_6F_EventScript_231D67
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_eq MtPyre_6F_EventScript_231D86
-	msgbox MtPyre_6F_Text_231DFC, 4
+	msgbox MtPyre_6F_Text_231DFC, MSGBOX_DEFAULT
 	release
 	end
 
 MtPyre_6F_EventScript_231D67:: @ 8231D67
 	special sub_80B4808
 	waitmovement 0
-	msgbox MtPyre_6F_Text_231E43, 4
-	setvar VAR_0x8004, 108
-	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, 108
-	callstd 8
+	msgbox MtPyre_6F_Text_231E43, MSGBOX_DEFAULT
+	register_matchcall TRAINER_VALERIE_1
 	release
 	end
 
 MtPyre_6F_EventScript_231D86:: @ 8231D86
-	trainerbattle 5, TRAINER_VALERIE_1, 0, MtPyre_6F_Text_231EB3, MtPyre_6F_Text_231ECB
-	msgbox MtPyre_6F_Text_231EE1, 6
+	trainerbattle_rematch TRAINER_VALERIE_1, MtPyre_6F_Text_231EB3, MtPyre_6F_Text_231ECB
+	msgbox MtPyre_6F_Text_231EE1, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_6F_EventScript_231D9D:: @ 8231D9D
-	trainerbattle 0, TRAINER_CEDRIC, 0, MtPyre_6F_Text_231F11, MtPyre_6F_Text_231F4A
-	msgbox MtPyre_6F_Text_231F5C, 6
+	trainerbattle_single TRAINER_CEDRIC, MtPyre_6F_Text_231F11, MtPyre_6F_Text_231F4A
+	msgbox MtPyre_6F_Text_231F5C, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_6F_Text_231DB4: @ 8231DB4
-	.string "When I’m here…\n"
+	.string "When I'm here…\n"
 	.string "A curious power flows into me…$"
 
 MtPyre_6F_Text_231DE2: @ 8231DE2
@@ -64,10 +61,10 @@ MtPyre_6F_Text_231F11: @ 8231F11
 	.string "Have no fear for I am here!$"
 
 MtPyre_6F_Text_231F4A: @ 8231F4A
-	.string "Weren’t you lost?$"
+	.string "Weren't you lost?$"
 
 MtPyre_6F_Text_231F5C: @ 8231F5C
 	.string "I had this feeling that a lost TRAINER\n"
 	.string "would be panicked and easy to beat.\p"
-	.string "It’s dirty and I won’t try it again…$"
+	.string "It's dirty and I won't try it again…$"
 

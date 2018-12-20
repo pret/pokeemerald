@@ -2,7 +2,7 @@ FortreeCity_House4_MapScripts:: @ 8217C80
 	.byte 0
 
 FortreeCity_House4_EventScript_217C81:: @ 8217C81
-	msgbox FortreeCity_House4_Text_217D33, 2
+	msgbox FortreeCity_House4_Text_217D33, MSGBOX_NPC
 	end
 
 FortreeCity_House4_EventScript_217C8A:: @ 8217C8A
@@ -13,7 +13,7 @@ FortreeCity_House4_EventScript_217C8A:: @ 8217C8A
 	goto_eq FortreeCity_House4_EventScript_217CD8
 	checkflag FLAG_0x0DE
 	goto_eq FortreeCity_House4_EventScript_217CC4
-	msgbox FortreeCity_House4_Text_217DB9, 4
+	msgbox FortreeCity_House4_Text_217DB9, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_0x0DE
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
@@ -26,14 +26,14 @@ FortreeCity_House4_EventScript_217C8A:: @ 8217C8A
 FortreeCity_House4_EventScript_217CC4:: @ 8217CC4
 	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_27259E
 	waitmovement 0
-	msgbox FortreeCity_House4_Text_217DD2, 4
+	msgbox FortreeCity_House4_Text_217DD2, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_217CD8:: @ 8217CD8
 	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_27259E
 	waitmovement 0
-	msgbox FortreeCity_House4_Text_217E05, 4
+	msgbox FortreeCity_House4_Text_217E05, MSGBOX_DEFAULT
 	giveitem_std ITEM_MENTAL_HERB
 	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House4_EventScript_272054
@@ -44,7 +44,7 @@ FortreeCity_House4_EventScript_217CD8:: @ 8217CD8
 FortreeCity_House4_EventScript_217D06:: @ 8217D06
 	applymovement VAR_LAST_TALKED, FortreeCity_House4_Movement_27259E
 	waitmovement 0
-	msgbox FortreeCity_House4_Text_217EA8, 4
+	msgbox FortreeCity_House4_Text_217EA8, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -61,7 +61,7 @@ FortreeCity_House4_EventScript_217D20:: @ 8217D20
 	faceplayer
 	waitse
 	playmoncry SPECIES_WINGULL, 0
-	msgbox FortreeCity_House4_Text_217EE0, 4
+	msgbox FortreeCity_House4_Text_217EE0, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -70,7 +70,7 @@ FortreeCity_House4_Text_217D33: @ 8217D33
 	.string "By being together with POKéMON,\n"
 	.string "people make more and more friends.\p"
 	.string "And that brings the world closer\n"
-	.string "together. I think it’s wonderful!$"
+	.string "together. I think it's wonderful!$"
 
 FortreeCity_House4_Text_217DB9: @ 8217DB9
 	.string "There!\n"
@@ -87,7 +87,7 @@ FortreeCity_House4_Text_217E05: @ 8217E05
 	.string "What is it holding?\p"
 	.string "A MENTAL HERB?\n"
 	.string "It must have picked it up somewhere.\p"
-	.string "But I’m not a TRAINER, so you can\n"
+	.string "But I'm not a TRAINER, so you can\n"
 	.string "have it.$"
 
 FortreeCity_House4_Text_217EA8: @ 8217EA8
