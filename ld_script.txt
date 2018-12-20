@@ -156,6 +156,7 @@ SECTIONS {
         asm/contest_link_80FC4F4.o(.text);
         src/item_use.o(.text);
         asm/battle_anim_effects_1.o(.text);
+        src/effects_1.o(.text);
         asm/battle_anim_effects_2.o(.text);
         asm/water.o(.text);
         src/fire.o(.text);

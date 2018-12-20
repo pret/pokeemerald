@@ -296,6 +296,7 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
+#define ANIM_TAG_WHITE_STREAK               (ANIM_SPRITES_START + 289)
 
 // battlers
 #define ANIM_ATTACKER    0
