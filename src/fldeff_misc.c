@@ -20,7 +20,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 
 void sub_80F9C90(u8);
 void sub_80F9DFC(u8);
@@ -342,26 +342,11 @@ bool8 sub_80F9C30(void)
 
 void sub_80F9C44(void (*taskfunc) (u8), u16 a1, u16 a2, u8 a3)
 {
-    u16 tempA, tempB;
-
     u8 taskId = CreateTask(taskfunc, a3);
 
     gTasks[taskId].data[0] = 0;
-
-    tempA = 16;
-    if (a1 != 0)
-    {
-        tempA = a1;
-    }
-    gTasks[taskId].data[1] = tempA;
-
-    tempB = 20;
-    if (a1 != 0)
-    {
-        tempB = a1;
-    }
-    gTasks[taskId].data[2] = tempB;
-
+    gTasks[taskId].data[1] = a1 == 0 ? 16 : a1;
+    gTasks[taskId].data[2] = a1 == 0 ? 20 : a1;
     gTasks[taskId].func(taskId);
 }
 
@@ -385,7 +370,6 @@ void sub_80F9C90(u8 taskId)
         SetGpuReg(REG_OFFSET_WINOUT, 0);
 
         break;
-
     case 1:
         task->data[7] = GetGpuReg(REG_OFFSET_BLDCNT);
         task->data[8] = GetGpuReg(REG_OFFSET_BLDY);
@@ -394,7 +378,6 @@ void sub_80F9C90(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDY, 0x10);
 
         break;
-
     case 2:
         task->data[3] -= task->data[1];
         task->data[4] += task->data[1];
@@ -410,9 +393,9 @@ void sub_80F9C90(u8 taskId)
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[4]));
 
-        if (task->data[3] != 0) return;
+        if (task->data[3] != 0)
+            return;
         break;
-
     case 3:
         task->data[5] -= task->data[2];
         task->data[6] += task->data[2];
@@ -425,9 +408,9 @@ void sub_80F9C90(u8 taskId)
         }
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[6]));
 
-        if (task->data[5] != 0) return;
+        if (task->data[5] != 0)
+            return;
         break;
-
     default:
         SetGpuReg(REG_OFFSET_BLDCNT, task->data[7]);
         DestroyTask(taskId);
@@ -626,7 +609,6 @@ void sub_80F9DFC(u8 taskId)
     case 0:
         gPlttBufferFaded[0] = temp;
         break;
-
     case 1:
         task->data[3] = 0;
         task->data[4] = 0xF0;
@@ -639,7 +621,6 @@ void sub_80F9DFC(u8 taskId)
         SetGpuReg(REG_OFFSET_WININ, 0x3F);
         SetGpuReg(REG_OFFSET_WINOUT, 0);
         break;
-
     case 2:
         task->data[5] += task->data[2];
         task->data[6] -= task->data[2];
@@ -653,9 +634,9 @@ void sub_80F9DFC(u8 taskId)
         }
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[6]));
 
-        if (task->data[5] != 0x50) return;
+        if (task->data[5] != 0x50)
+            return;
         break;
-
     case 3:
         task->data[3] += task->data[1];
         task->data[4] -= task->data[1];
@@ -669,9 +650,9 @@ void sub_80F9DFC(u8 taskId)
         }
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(task->data[3], task->data[4]));
 
-        if (task->data[3] != 0x78) return;
+        if (task->data[3] != 0x78)
+            return;
         break;
-
     default:
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -800,12 +781,10 @@ static void StartSecretBaseCaveFieldEffect(void)
 bool8 FldEff_SecretPowerCave(void)
 {
     AdjustSecretPowerSpritePixelOffsets();
-
     CreateSprite(&gUnknown_0858E600,
                  gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
                  gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
                  148);
-    
     return FALSE;
 }
 
@@ -1325,9 +1304,7 @@ void GetShieldToyTVDecorationInfo(void)
             return;
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x10);
-
         break;
-    
     case 734:
         ConvertIntToDecimalStringN(gStringVar1, 50, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringCopy(gStringVar2, gText_Silver);
@@ -1338,9 +1315,7 @@ void GetShieldToyTVDecorationInfo(void)
             return;
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x20);
-
         break;
-    
     case 756:
         gSpecialVar_Result = 1;
 
@@ -1348,9 +1323,7 @@ void GetShieldToyTVDecorationInfo(void)
             return;
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
-
         break;
-    
     case 757:
         gSpecialVar_Result = 2;
 
@@ -1358,9 +1331,7 @@ void GetShieldToyTVDecorationInfo(void)
             return;
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
-
         break;
-    
     case 758:
         gSpecialVar_Result = 3;
 
@@ -1368,7 +1339,6 @@ void GetShieldToyTVDecorationInfo(void)
             return;
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
-
         break;
     }
 }
@@ -1447,16 +1417,12 @@ void Task_FieldPoisonEffect(u8 taskId)
         data[1] += 2;
         if (data[1] > 8)
             data[0]++;
-
         break;
-
     case 1:
         data[1] -= 2;
         if (data[1] == 0)
             data[0]++;
-
         break;
-
     case 2:
         DestroyTask(taskId);
         return;
@@ -1464,13 +1430,13 @@ void Task_FieldPoisonEffect(u8 taskId)
     SetGpuReg(REG_OFFSET_MOSAIC, (data[1] << 4) | data[1]);
 }
 
-void FldeffPoison_Start(void)
+void FldEffPoison_Start(void)
 {
     PlaySE(SE_DOKU);
     CreateTask(Task_FieldPoisonEffect, 80);
 }
 
-bool32 FldeffPoison_IsActive(void)
+bool32 FldEffPoison_IsActive(void)
 {
     return FuncIsActiveTask(Task_FieldPoisonEffect);
 }
@@ -1541,7 +1507,6 @@ u8 CreateRecordMixingSprite(void)
         sprite->pos1.x += 16;
         sprite->pos1.y += 2;
     }
-
     return spriteId;
 }
 

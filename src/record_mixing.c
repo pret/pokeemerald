@@ -23,7 +23,7 @@
 #include "menu.h"
 #include "overworld.h"
 #include "field_screen_effect.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "script.h"
 #include "event_data.h"
 #include "lilycove_lady.h"

@@ -12,7 +12,7 @@
 #include "field_poison.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "item_menu.h"
 #include "link.h"
 #include "metatile_behavior.h"

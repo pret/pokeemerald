@@ -21,7 +21,7 @@
 #include "field_weather.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "metatile_behavior.h"
 #include "map_name_popup.h"
 #include "string_util.h"
