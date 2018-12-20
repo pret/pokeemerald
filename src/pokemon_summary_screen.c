@@ -1500,7 +1500,7 @@ static void sub_81C0604(u8 taskId, s8 a)
             }
             r4_2 = sub_80D214C(pssData->monList.boxMons, pssData->curMonIndex, pssData->maxMonIndex, a);
         }
-        else if (IsMultiBattle() == 1)
+        else if (IsMultiBattle() == TRUE)
         {
             r4_2 = sub_81C09B4(a);
         }
