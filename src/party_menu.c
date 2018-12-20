@@ -2389,7 +2389,7 @@ u8 CanPartyPokemonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
         return CANNOT_LEARN_MOVE_IS_EGG;
     if (item >= ITEM_TM01_FOCUS_PUNCH)
     {
-        if (CanMonLearnTMHM(mon, item - 33))
+        if (CanMonLearnTMHM(mon, item - ITEM_TM01_FOCUS_PUNCH))
             move = ItemIdToBattleMoveId(item);
         else
             return CANNOT_LEARN_MOVE;
