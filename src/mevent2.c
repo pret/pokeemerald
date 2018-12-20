@@ -13,8 +13,6 @@
 
 static EWRAM_DATA bool32 gUnknown_02022C70 = FALSE;
 
-extern const u16 gUnknown_082F0DE8[];
-
 void sub_801B180(void);
 void sub_801B14C(void);
 bool32 sub_801B114(const struct MEventBuffer_3120_Sub * data);
@@ -23,6 +21,8 @@ void sub_801B330(void);
 void sub_801B368(void);
 void sub_801B9F8(void);
 void sub_8144824(u32 a0, u32 a1, u32 * a2, s32 a3);
+
+extern const u16 gUnknown_082F0DE8[];
 
 void sub_801AFD8(void)
 {
