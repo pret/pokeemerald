@@ -563,7 +563,7 @@ void sub_8107380(struct Sprite *sprite)
     u16 trigIndex = gSprites[otherSpriteId].data[3];
     
     sprite->data[0] = 1;
-    TranslateAnimLinear(sprite);
+    AnimTranslateLinear(sprite);
     sprite->pos2.x += Sin(trigIndex >> 8, gSprites[otherSpriteId].data[0]);
     sprite->pos2.y += Cos(trigIndex >> 8, gSprites[otherSpriteId].data[1]);
     gSprites[otherSpriteId].data[3] = trigIndex + gSprites[otherSpriteId].data[2];
@@ -596,7 +596,7 @@ void sub_810744C(struct Sprite *sprite)
 {
     s16 unkArg;
     
-    InitAnimSpritePos(sprite, TRUE);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         unkArg = -gBattleAnimArgs[2];
     else
@@ -619,7 +619,7 @@ void sub_81074E4(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
     }
-    if (TranslateAnimLinear(sprite))
+    if (AnimTranslateLinear(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -727,7 +727,7 @@ void sub_81075EC(struct Sprite *sprite)
 {
     u16 retArg;
     
-    InitAnimSpritePos(sprite, TRUE);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = 30;
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
@@ -752,7 +752,7 @@ void sub_81075EC(struct Sprite *sprite)
 
 void sub_8107674(struct Sprite *sprite)
 {
-    if (TranslateAnimLinear(sprite))
+    if (AnimTranslateLinear(sprite))
         DestroyAnimSprite(sprite);
     sprite->pos2.y += Sin(sprite->data[6] >> 8, sprite->data[7]);
     if ((sprite->data[6] + sprite->data[5]) >> 8 > 127)
@@ -833,7 +833,7 @@ void sub_81077C0(struct Sprite *sprite)
         coordType = 3;
     else
         coordType = 1;
-    InitAnimSpritePos(sprite, animType);
+    InitSpritePosToAnimAttacker(sprite, animType);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
@@ -845,7 +845,7 @@ void sub_81077C0(struct Sprite *sprite)
 
 void sub_8107894(struct Sprite *sprite)
 {
-    sub_80A6980(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[4];
@@ -856,9 +856,9 @@ void sub_8107894(struct Sprite *sprite)
 void sub_81078D0(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3])
-        sub_80A6980(sprite, TRUE);
+        InitSpritePosToAnimTarget(sprite, TRUE);
     else
-        InitAnimSpritePos(sprite, TRUE);
+        InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[7] = gBattleAnimArgs[2];
     sprite->callback = sub_810790C;
 }
@@ -1887,7 +1887,7 @@ void sub_8108034(struct Sprite *sprite)
     s16 randData2;
     
     sprite->oam.tileNum += 8;
-    sub_80A6980(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     randData = (Random2() & 0xFF) | 256;
     randData2 = (Random2() & 0x1FF);
     if (randData2 > 255)
@@ -2387,7 +2387,7 @@ void sub_8108C54(struct Sprite *sprite)
 
 void sub_8108C94(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, TRUE);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[1] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     sprite->data[3] = gBattleAnimArgs[2];

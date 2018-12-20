@@ -556,7 +556,7 @@ static void sub_810A308(struct Sprite *sprite)
     sprite->pos2.y = (gSineTable[gBattleAnimArgs[0] + 64] * gBattleAnimArgs[1]) >> 8;
 
     if (gBattleAnimArgs[6] & 1)
-        sprite->oam.priority = sub_80A8328(battler) + 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
 
     matrixNum = sprite->oam.matrixNum;
     sineVal = gSineTable[gBattleAnimArgs[2]];
@@ -571,7 +571,7 @@ static void sub_810A308(struct Sprite *sprite)
 
 static void sub_810A46C(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
@@ -588,7 +588,7 @@ static void sub_810A46C(struct Sprite *sprite)
 
 static void sub_810A4F4(struct Sprite *sprite)
 {
-    if (!TranslateAnimLinear(sprite))
+    if (!AnimTranslateLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[7], sprite->data[5]);
         sprite->pos2.y += Cos(sprite->data[7], sprite->data[5]);
@@ -665,7 +665,7 @@ static void sub_810A6EC(struct Sprite *sprite)
 
 static void sub_810A75C(struct Sprite *sprite)
 {
-    sub_80A6980(sprite, FALSE);
+    InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.tileNum += gBattleAnimArgs[3] * 4;
 
     if (gBattleAnimArgs[3] == 1)
@@ -1073,7 +1073,7 @@ void sub_810AB78(u8 taskId)
 
 static void sub_810AC8C(struct Sprite *sprite)
 {
-    if (TranslateAnimLinear(sprite))
+    if (AnimTranslateLinear(sprite))
     {
         gTasks[sprite->data[5]].data[7]--;
         DestroySprite(sprite);

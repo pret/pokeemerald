@@ -25,7 +25,7 @@ sub_81136E8: @ 81136E8
 	movs r0, 0x52
 	bl SetGpuReg
 	adds r0, r4, 0
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -208,7 +208,7 @@ sub_8113888: @ 8113888
 	bl SetGpuReg
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -643,7 +643,7 @@ _08113C1E:
 	strh r0, [r5, 0x18]
 	ldr r0, =gBattleAnimAttacker
 	ldrb r0, [r0]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
@@ -962,7 +962,7 @@ _08113EBC:
 _08113EF8:
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
@@ -1561,7 +1561,7 @@ sub_81143C0: @ 81143C0
 	mov r10, r0
 	ldr r6, =gBattleAnimAttacker
 	ldrb r0, [r6]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -1638,7 +1638,7 @@ sub_8114470: @ 8114470
 	lsrs r6, r0, 24
 	ldr r4, =gBattleAnimAttacker
 	ldrb r0, [r4]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

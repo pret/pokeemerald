@@ -217,7 +217,7 @@ const struct SpriteTemplate gUnknown_08596E48 =
 
 static void sub_811160C(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
@@ -235,7 +235,7 @@ static void sub_8111674(struct Sprite *sprite)
     s16 r0;
     s16 r2;
     sub_8111764(sprite);
-    if (TranslateAnimLinear(sprite))
+    if (AnimTranslateLinear(sprite))
     {
         sprite->callback = sub_81116E8;
         return;
@@ -258,7 +258,7 @@ static void sub_81116E8(struct Sprite *sprite)
     s16 r2;
     s16 r0;
     sprite->data[0] = 1;
-    TranslateAnimLinear(sprite);
+    AnimTranslateLinear(sprite);
     sprite->pos2.x += Sin(sprite->data[5], 10);
     sprite->pos2.y += Cos(sprite->data[5], 15);
     
@@ -313,7 +313,7 @@ static void sub_8111764(struct Sprite *sprite)
 
 static void sub_81117F4(struct Sprite *sprite)
 {
-    sub_80A6980(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->callback = sub_8111814;
     sprite->callback(sprite);
 }
@@ -461,7 +461,7 @@ static void AnimShadowBallStep(struct Sprite *sprite)
 
 static void sub_8111B9C(struct Sprite *sprite)
 {
-    sub_80A6980(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     sprite->callback = sub_8111BB4;
 }
 
@@ -536,7 +536,7 @@ void sub_8111C50(u8 taskId)
     gSprites[task->data[0]].data[3] = 0;
     gSprites[task->data[0]].data[4] = 0;
     StoreSpriteCallbackInData6(&gSprites[task->data[0]], SpriteCallbackDummy);
-    gSprites[task->data[0]].callback = TranslateAnimLinearSimple;
+    gSprites[task->data[0]].callback = AnimTranslateLinearSimple;
     task->func = sub_8111D78;
 }
 
@@ -590,7 +590,7 @@ static void sub_8111E78(u8 taskId)
 {
     s16 startLine;
     struct Task *task = &gTasks[taskId];
-    u8 position = sub_80A8364(gBattleAnimTarget);
+    u8 position = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
 
     switch (task->data[15])
     {
@@ -698,7 +698,7 @@ static void sub_81120DC(u8 taskId)
 static void sub_8112170(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u8 position = sub_80A8364(gBattleAnimTarget);
+    u8 position = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
 
     switch (task->data[15])
     {
@@ -1026,7 +1026,7 @@ static void sub_81129F0(struct Sprite *sprite)
     s16 xDelta;
     s16 xDelta2;
 
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         xDelta = 24;
@@ -1170,7 +1170,7 @@ void sub_8112C6C(u8 taskId)
     task->data[10] = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
     task->data[11] = (sub_80A861C(gBattleAnimAttacker, 1) / 2) + 8;
     task->data[7] = 0;
-    task->data[5] = sub_80A8328(gBattleAnimAttacker);
+    task->data[5] = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
     task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 2;
     task->data[3] = 0;
     task->data[4] = 16;
