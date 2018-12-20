@@ -1464,6 +1464,23 @@ Move_DARK_PULSE:
 	end
 	
 Move_NIGHT_SLASH:
+	loadspritegfx ANIM_TAG_SLASH
+	createvisualtask AnimTask_BlendNightSlash, 2, ANIM_TARGET, 2, 0, 8, 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 3, 0, 12, RGB_BLACK
+	waitforvisualfinish
+	createsprite gNightSlashLeftSpriteTemplate, ANIM_TARGET, 2, 1, -8, 0
+	playsewithpan SE_W013, SOUND_PAN_TARGET
+	delay 4
+	createsprite gNightSlashLeftSpriteTemplate, ANIM_TARGET, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 8, 1
+	delay 40
+	createsprite gNightSlashRightSpriteTemplate, ANIM_TARGET, 2, 1, -8, 0
+	createsprite gNightSlashRightSpriteTemplate, ANIM_TARGET, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	playsewithpan SE_W013, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 3, 12, 0, RGB_BLACK
+	waitforvisualfinish
 	end
 	
 Move_AQUA_TAIL:

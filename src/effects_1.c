@@ -2104,10 +2104,12 @@ const struct SpriteTemplate gPowerOrbs_Float =
 };
 
 #include "random.h"
+#include "util.h"
 
 void AnimRockPolishStreak(struct Sprite *);
 void AnimRockPolishSparkle(struct Sprite *);
 void AnimPoisonJabProjectile(struct Sprite *);
+void AnimNightSlash(struct Sprite *);
 
 const union AnimCmd gRockPolishStreak_AnimCmd[] =
 {
@@ -2332,4 +2334,81 @@ void AnimPoisonJabProjectile(struct Sprite *sprite)
     sprite->data[4] = targetYPos;
     sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+const union AnimCmd gNightSlashLeftAnimCmd0[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(48, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gNightSlashLeftAnimCmd1[] =
+{
+    ANIMCMD_FRAME(48, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gNightSlashLeftAnimTable[] =
+{
+    gNightSlashLeftAnimCmd0,
+    gNightSlashLeftAnimCmd1,
+};
+
+const struct SpriteTemplate gNightSlashLeftSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SLASH,
+    .paletteTag = ANIM_TAG_SLASH,
+    .oam = &gUnknown_08524914,
+    .anims = gNightSlashLeftAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimNightSlash,
+};
+
+const union AnimCmd gNightSlashRightAnimCmd0[] =
+{
+    ANIMCMD_FRAME(0, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(48, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gNightSlashRightAnimCmd1[] =
+{
+    ANIMCMD_FRAME(48, 4, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gNightSlashRightAnimTable[] =
+{
+    gNightSlashRightAnimCmd0,
+    gNightSlashRightAnimCmd1,
+};
+
+const struct SpriteTemplate gNightSlashRightSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SLASH,
+    .paletteTag = ANIM_TAG_SLASH,
+    .oam = &gUnknown_08524914,
+    .anims = gNightSlashRightAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimNightSlash,
+};
+
+void AnimTask_BlendNightSlash(u8 taskId)
+{
+    int paletteOffset = IndexOfSpritePaletteTag(ANIM_TAG_SLASH) * 16 + 256;
+    BlendPalette(paletteOffset, 16, 6, RGB_RED);
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimNightSlash(struct Sprite *sprite)
+{
+    sprite->callback = sub_8101F40;
+    sprite->callback(sprite);
 }
