@@ -2721,7 +2721,9 @@ void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, struct Stru
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
     
-    if (species == SPECIES_NONE || ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, gSpeciesNames[species]) == 0))
+    if (species == SPECIES_NONE)
+        return;
+    if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, gSpeciesNames[species]) == 0)
         return;
     switch (gender)
     {
