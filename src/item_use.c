@@ -38,7 +38,7 @@
 #include "constants/vars.h"
 
 extern void(*gUnknown_0203A0F4)(u8 taskId);
-extern void (*gUnknown_03006328)(u8, u16, TaskFunc);
+extern void (*gUnknown_03006328)(u8, TaskFunc);
 extern void unknown_ItemMenu_Confirm(u8 taskId);
 extern void sub_81C5B14(u8 taskId);
 extern void ScriptUnfreezeEventObjects(void);
@@ -52,7 +52,7 @@ extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
 extern int sub_80247BC(void);
 extern struct MapHeader* mapconnection_get_mapheader(struct MapConnection *connection);
 extern void SetUpItemUseCallback(u8 taskId);
-extern void ItemUseCB_Medicine(u8, u16, TaskFunc);
+extern void ItemUseCB_Medicine(u8, TaskFunc);
 extern void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
 extern void sub_81C5924(void);
 extern void sub_81C59BC(void);
