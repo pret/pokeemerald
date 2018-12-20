@@ -1127,7 +1127,7 @@ u8 GetPartyBoxPalBitfield(u8 slot, u8 b)
 {
     u8 returnVar = 0;
     if (b == 1)
-        returnVar = 1;
+        returnVar |= 1;
     if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
         returnVar |= 2;
     if (PartyBoxPal_ParnterOrDisqualifiedInArena(slot) == TRUE)
@@ -2547,15 +2547,15 @@ void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
     
-    if (0x40 & bitfield)
+    if (bitfield & 0x40)
     {
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[0]), gUnknown_08615AC0[0] + palNum, 2);
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[1]), gUnknown_08615AC0[1] + palNum, 2);
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[2]), gUnknown_08615AC0[2] + palNum, 2);
     }
-    else if (0x20 & bitfield)
+    else if (bitfield & 0x20)
     {
-        if (1 & bitfield)
+        if (bitfield & 1)
         {
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
@@ -2574,7 +2574,7 @@ void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
         }
     }
-    else if (0x10 & bitfield)
+    else if (bitfield & 0x10)
     {
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
@@ -2583,9 +2583,9 @@ void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[1]), gUnknown_08615ABD[1] + palNum, 2);
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
     }
-    else if (4 & bitfield)
+    else if (bitfield & 4)
     {
-        if (1 & bitfield)
+        if (bitfield & 1)
         {
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[0]), gUnknown_08615ABA[0] + palNum, 2);
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADF[1]), gUnknown_08615ABA[1] + palNum, 2);
@@ -2604,9 +2604,9 @@ void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AEE[2]), gUnknown_08615ABD[2] + palNum, 2);
         }
     }
-    else if (2 & bitfield)
+    else if (bitfield & 2)
     {
-        if (1 & bitfield)
+        if (bitfield & 1)
         {
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADC[0]), gUnknown_08615ABA[0] + palNum, 2);
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ADC[1]), gUnknown_08615ABA[1] + palNum, 2);
@@ -2625,9 +2625,9 @@ void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE8[2]), gUnknown_08615ABD[2] + palNum, 2);
         }
     }
-    else if (8 & bitfield)
+    else if (bitfield & 8)
     {
-        if (1 & bitfield)
+        if (bitfield & 1)
         {
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD9[0]), gUnknown_08615ABA[0] + palNum, 2);
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD9[1]), gUnknown_08615ABA[1] + palNum, 2);
@@ -2646,7 +2646,7 @@ void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AE5[2]), gUnknown_08615ABD[2] + palNum, 2);
         }
     }
-    else if (1 & bitfield)
+    else if (bitfield & 1)
     {
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD6[0]), gUnknown_08615ABA[0] + palNum, 2);
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AD6[1]), gUnknown_08615ABA[1] + palNum, 2);
@@ -4959,21 +4959,21 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
 
 u16 sub_81B691C(struct Pokemon *mon, u8 effectType)
 {
-    switch (effectType - 12)
+    switch (effectType)
     {
-        case 1:
+        case 13:
             if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_SHEDINJA)
                 return GetMonData(mon, MON_DATA_HP_EV);
             break;
-        case 0:
+        case 12:
             return GetMonData(mon, MON_DATA_ATK_EV);
-        case 5:
+        case 17:
             return GetMonData(mon, MON_DATA_DEF_EV);
-        case 4:
+        case 16:
             return GetMonData(mon, MON_DATA_SPEED_EV);
-        case 2:
+        case 14:
             return GetMonData(mon, MON_DATA_SPATK_EV);
-        case 3:
+        case 15:
             return GetMonData(mon, MON_DATA_SPDEF_EV);
     }
     return 0;
@@ -4981,24 +4981,24 @@ u16 sub_81B691C(struct Pokemon *mon, u8 effectType)
 
 void option_menu_get_string(u8 effectType, u8 *dest)
 {
-    switch (effectType - 12)
+    switch (effectType)
     {
-        case 1:
+        case 13:
             StringCopy(dest, gText_HP3);
             break;
-        case 0:
+        case 12:
             StringCopy(dest, gText_Attack3);
             break;
-        case 5:
+        case 17:
             StringCopy(dest, gText_Defense3);
             break;
-        case 4:
+        case 16:
             StringCopy(dest, gText_Speed2);
             break;
-        case 2:
+        case 14:
             StringCopy(dest, gText_SpAtk3);
             break;
-        case 3:
+        case 15:
             StringCopy(dest, gText_SpDef3);
             break;
     }
@@ -5399,7 +5399,7 @@ void dp05_rare_candy(u8 taskId, TaskFunc task)
         cannotUseEffect = TRUE;
     }
     PlaySE(SE_SELECT);
-    if (cannotUseEffect != FALSE)
+    if (cannotUseEffect)
     {
         gUnknown_0203CEE8 = 0;
         sub_81B1B5C(gText_WontHaveEffect, 1);
@@ -5436,7 +5436,7 @@ void sub_81B754C(u8 slot, struct Pokemon *mon)
 
 void sub_81B75D4(u8 taskId)
 {
-    if (WaitFanfare(0) != FALSE && sub_81B1BD4() != TRUE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
+    if (WaitFanfare(FALSE) != FALSE && sub_81B1BD4() != TRUE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         PlaySE(SE_SELECT);
         sub_81B767C(taskId);
@@ -6207,7 +6207,10 @@ bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
     
-    if (GetMonData(mon, MON_DATA_IS_EGG) != FALSE || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && gSaveBlock1Ptr->location.mapNum /* possibly dirty cast */ == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
+    if (GetMonData(mon, MON_DATA_IS_EGG) != FALSE || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() || 
+    (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && 
+    gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && 
+    GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
         return FALSE;
     switch (VarGet(VAR_FRONTIER_FACILITY)) // oddly the specific cases are beyond 6, turns out case 9 is apparently related to link battles
     {
