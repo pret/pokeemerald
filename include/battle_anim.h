@@ -183,6 +183,9 @@ u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 #define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
+// ground.c
+void sub_81152DC(u8 taskId);
+
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);

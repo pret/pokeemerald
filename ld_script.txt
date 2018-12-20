@@ -159,7 +159,7 @@ SECTIONS {
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
         src/battle_anim_effects_2.o(.text);
-        asm/water.o(.text);
+        src/water.o(.text);
         src/fire.o(.text);
         src/electric.o(.text);
         asm/ice.o(.text);
