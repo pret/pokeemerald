@@ -1412,6 +1412,7 @@ Move_ROCK_POLISH:
 Move_POISON_JAB:
 	loadspritegfx ANIM_TAG_PURPLE_JAB
 	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_POISON_BUBBLE
 	setalpha 12, 8
 	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, 3, -31, 10
 	delay 2
@@ -1456,6 +1457,8 @@ Move_POISON_JAB:
 	delay 2
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -7, -5, 1, 3
 	playsewithpan SE_W004, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call PoisonBubblesEffect
 	waitforvisualfinish
 	blendoff
 	end
