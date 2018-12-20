@@ -217,27 +217,6 @@ static void sub_80C7128(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, 
     }
 }
 
-#define MAX_DMA_BLOCK_SIZE 0x1000
-#define Dma3FillLarge_(value, dest, size, bit)             \
-{                                                          \
-    void *_dest = dest;                                    \
-    u32 _size = size;                                      \
-    while (1)                                              \
-    {                                                      \
-        if (_size <= MAX_DMA_BLOCK_SIZE)                   \
-        {                                                  \
-            DmaFill##bit(3, value, _dest, _size);          \
-            break;                                         \
-        }                                                  \
-        DmaFill##bit(3, value, _dest, MAX_DMA_BLOCK_SIZE); \
-        _dest += MAX_DMA_BLOCK_SIZE;                       \
-        _size -= MAX_DMA_BLOCK_SIZE;                       \
-    }                                                      \
-}
-
-#define Dma3FillLarge16_(value, dest, size) Dma3FillLarge_(value, dest, size, 16)
-#define Dma3FillLarge32_(value, dest, size) Dma3FillLarge_(value, dest, size, 32)
-
 void sub_80C71A4(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
 {
     u16 i;
