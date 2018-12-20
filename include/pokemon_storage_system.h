@@ -6,6 +6,15 @@
 #define IN_BOX_COLUMS           5
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMS)
 
+/*
+            ROWS
+COLUMNS     0   1   2   3   4   5
+            6   7   8   9   10  11
+            12  13  14  15  16  17
+            18  19  20  21  22  23
+            24  25  26  27  28  29
+*/
+
 struct PokemonStorage
 {
     /*0x0000*/ u8 currentBox;

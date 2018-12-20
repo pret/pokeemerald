@@ -4,6 +4,7 @@
 extern const u8 gMonIconPaletteIndices[];
 
 const u8 *GetMonIconTiles(u16 species, bool32);
+void sub_80D304C(u16 offset);
 u8 GetValidMonIconPalIndex(u16 species);
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);
 const u16 *GetValidMonIconPalettePtr(u16 speciesId);
