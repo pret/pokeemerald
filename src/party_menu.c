@@ -783,7 +783,7 @@ void PartyMenuInitHelperStructs(u8 a)
     gUnknown_0203CEDC[0].unk0 = &gUnknown_086156C4[0];
     if (a == 3)
         gUnknown_0203CEDC[3].unk0 = &gUnknown_086156C4[0];
-    else if (a)
+    else if (a != 0)
         gUnknown_0203CEDC[1].unk0 = &gUnknown_086156C4[0];
 }
 
@@ -881,15 +881,13 @@ void DisplayPartyPokemonSelectForBattle(u8 slot)
     }
     else
     {
-        i = 0;
-        while (i < sub_81B8830())
+        for (i = 0; i < sub_81B8830(); i++)
         {
             if (ptr[i] != 0 && (ptr[i] - 1) == slot)
             {
                 DisplayPartyPokemonSelectData(slot, i + 2);
                 return;
             }
-            i++;
         }
         DisplayPartyPokemonSelectData(slot, 1);
     }
