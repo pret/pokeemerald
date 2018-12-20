@@ -153,7 +153,7 @@ void sub_80DE12C(void);
 void sub_80DD45C(u8, u8);
 void sub_80DD720(u8);
 void sub_80DE008(bool8);
-void sub_80DC028(s16, s16, u8);
+u8 sub_80DC028(s16, s16, u8);
 bool8 sub_80DB5B8(u8, u8);
 bool8 sub_80DB798(u8);
 void sub_80DB884(void);
@@ -173,6 +173,7 @@ void Contest_PrintTextToBg0WindowStd(u8, const u8 *);
 s16 sub_80DBD34(u8);
 void DetermineFinalStandings(void);
 bool8 sub_80DBF30(s32, s32, struct UnknownContestStruct6 *);
+void sub_80DC0F4(u8);
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gContestMonConditions[4] = {0};
@@ -3034,11 +3035,379 @@ void sub_80DBF68(void)
 
 void sub_80DBF90(void)
 {
-	u16 temp = BGCNT_WRAP;
-	s32 i;
-	for(i = 3; i >= 0; i--)
-	{
-	    ContestBG_FillBoxWithIncrementingTile(0, temp, 0, 0x16, 0, 0, 0, 0);
-	}
+	int i;
+    
+    for(i = 0; i < 4; i++)
+    {
+        ContestBG_FillBoxWithTile(0, 0, 0x16, 2 + i * 5, 8, 2, 0x11);
+    }
 }
 
+u16 sub_80DBFC8(u8 a)
+{
+    u16 var;
+
+    if (a == 0)
+        var = 0x5011;
+    else if (a == 1)
+        var = 0x6011;
+    else if (a == 2)
+        var = 0x7011;
+    else
+        var = 0x8011;
+    return var + 1;
+}
+
+s8 sub_80DBFFC(s16 a)
+{
+    s8 retVal = a / 10;
+
+    if (retVal > 16)
+        retVal = 16;
+    else if (retVal < -16)
+        retVal = -16;
+    return retVal;
+}
+
+u8 sub_80DC028(s16 a, s16 b, u8 c)
+{
+    u8 taskId;
+    s8 r4;
+    s8 r5;
+
+    gContestResources->field_14[c].unk2_2 = 1;
+    taskId = CreateTask(sub_80DC0F4, 20);
+    r4 = sub_80DBFFC(a);
+    r5 = sub_80DBFFC(a + b) - r4;
+    sub_80DBFC8(c);  // unused return value
+    gTasks[taskId].data[0] = abs(r4);
+    gTasks[taskId].data[1] = r5;
+    if (r4 > 0 || (r4 == 0 && r5 > 0))
+        gTasks[taskId].data[2] = 1;
+    else
+        gTasks[taskId].data[2] = -1;
+    gTasks[taskId].data[3] = c;
+	return taskId;
+}
+
+#ifdef NONMATCHING
+
+void sub_80DC0F4(u8 taskId)
+{
+    u8 r7 = gTasks[taskId].data[3];
+    s16 r3 = gTasks[taskId].data[0];
+    s16 r1 = gTasks[taskId].data[1];
+
+    if (++gTasks[taskId].data[10] > 14)
+    {
+        u16 r6;
+        u8 r5;
+        u8 r10;
+
+        gTasks[taskId].data[10] = 0;
+        if (gTasks[taskId].data[1] == 0)
+        {
+            DestroyTask(taskId);
+            gContestResources->field_14[r7].unk2_2 = 0;
+            return;
+        }
+        else if (r3 == 0)
+        {
+            if (r1 < 0)
+            {
+                r6 = sub_80DBFC8(r7) + 2;
+                gTasks[taskId].data[1]++;
+            }
+            else
+            {
+                r6 = sub_80DBFC8(r7);
+                gTasks[taskId].data[1]--;
+            }
+            r5 = gTasks[taskId].data[0]++;
+        }
+        else
+        {
+            if (gTasks[taskId].data[2] < 0)
+            {
+                if (r1 < 0)
+                {
+                    r5 = gTasks[taskId].data[0]++;
+                    gTasks[taskId].data[1]++;
+                    r6 = sub_80DBFC8(r7) + 2;
+                }
+                else
+                {
+                    r5 = --gTasks[taskId].data[0];
+                    r6 = 0;
+                    gTasks[taskId].data[1]--;
+                }
+            }
+            else
+            {
+                if (r1 < 0)
+                {
+                    r5 = --gTasks[taskId].data[0];
+                    r6 = 0;
+                    gTasks[taskId].data[1]++;
+                }
+                else
+                {
+                    r5 = gTasks[taskId].data[0]++;
+                    gTasks[taskId].data[1]--;
+                    r6 = sub_80DBFC8(r7);
+                }
+            }
+        }
+		
+		r10 = r5;
+		r1 = 0;
+        if (r5 > 7)
+		{	
+			r1 = 1;
+            r5 -= 8;
+        }
+		
+        ContestBG_FillBoxWithTile(0, r6, r5 + 0x16, (gUnknown_02039F26[r7] * 5) + 2 + r3, 1, 1, 0x11);
+        if (r1 > 0)
+        {
+            PlaySE(SE_C_GAJI);
+            m4aMPlayImmInit(&gMPlayInfo_SE1);
+            m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
+        }
+        else
+        {
+            PlaySE(SE_BOO);
+        }
+			
+        if (r10 == 0 && r5 == 0 && r6 == 0)
+            gTasks[taskId].data[2] = -gTasks[taskId].data[2];
+    }
+}
+#else
+NAKED
+void sub_80DC0F4(u8 taskId)
+{
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x10\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	ldr r1, =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r4, r0, r1\n\
+	ldrb r0, [r4, 0xE]\n\
+	mov r9, r0\n\
+	ldrh r3, [r4, 0x8]\n\
+	ldrh r1, [r4, 0xA]\n\
+	ldrh r0, [r4, 0x1C]\n\
+	adds r0, 0x1\n\
+	strh r0, [r4, 0x1C]\n\
+	lsls r0, 16\n\
+	asrs r0, 16\n\
+	cmp r0, 0xE\n\
+	bgt _080DC126\n\
+	b _080DC2A8\n\
+_080DC126:\n\
+	movs r0, 0\n\
+	strh r0, [r4, 0x1C]\n\
+	ldrh r2, [r4, 0xA]\n\
+	movs r5, 0xA\n\
+	ldrsh r0, [r4, r5]\n\
+	cmp r0, 0\n\
+	bne _080DC15C\n\
+	adds r0, r7, 0\n\
+	bl DestroyTask\n\
+	ldr r0, =gContestResources\n\
+	ldr r0, [r0]\n\
+	ldr r0, [r0, 0x14]\n\
+	mov r2, r9\n\
+	lsls r1, r2, 2\n\
+	adds r1, r0\n\
+	ldrb r2, [r1, 0x2]\n\
+	movs r0, 0x5\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	strb r0, [r1, 0x2]\n\
+	b _080DC2A8\n\
+	.pool\n\
+_080DC15C:\n\
+	cmp r3, 0\n\
+	bne _080DC1A4\n\
+	lsls r0, r1, 16\n\
+	mov r8, r0\n\
+	cmp r0, 0\n\
+	bge _080DC17A\n\
+	mov r0, r9\n\
+	bl sub_80DBFC8\n\
+	adds r0, 0x2\n\
+	lsls r0, 16\n\
+	lsrs r6, r0, 16\n\
+	ldrh r0, [r4, 0xA]\n\
+	adds r0, 0x1\n\
+	b _080DC188\n\
+_080DC17A:\n\
+	mov r0, r9\n\
+	bl sub_80DBFC8\n\
+	lsls r0, 16\n\
+	lsrs r6, r0, 16\n\
+	ldrh r0, [r4, 0xA]\n\
+	subs r0, 0x1\n\
+_080DC188:\n\
+	strh r0, [r4, 0xA]\n\
+	ldr r1, =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	ldrh r1, [r0, 0x8]\n\
+	adds r2, r1, 0x1\n\
+	strh r2, [r0, 0x8]\n\
+	lsls r1, 24\n\
+	lsrs r5, r1, 24\n\
+	b _080DC210\n\
+	.pool\n\
+_080DC1A4:\n\
+	movs r3, 0xC\n\
+	ldrsh r0, [r4, r3]\n\
+	cmp r0, 0\n\
+	bge _080DC1DE\n\
+	lsls r0, r1, 16\n\
+	mov r8, r0\n\
+	cmp r0, 0\n\
+	bge _080DC1CC\n\
+	ldrh r0, [r4, 0x8]\n\
+	adds r1, r0, 0x1\n\
+	strh r1, [r4, 0x8]\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	adds r0, r2, 0x1\n\
+	strh r0, [r4, 0xA]\n\
+	mov r0, r9\n\
+	bl sub_80DBFC8\n\
+	adds r0, 0x2\n\
+	b _080DC20C\n\
+_080DC1CC:\n\
+	ldrh r0, [r4, 0x8]\n\
+	subs r0, 0x1\n\
+	strh r0, [r4, 0x8]\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	movs r6, 0\n\
+	subs r0, r2, 0x1\n\
+	strh r0, [r4, 0xA]\n\
+	b _080DC210\n\
+_080DC1DE:\n\
+	lsls r0, r1, 16\n\
+	mov r8, r0\n\
+	cmp r0, 0\n\
+	bge _080DC1F8\n\
+	ldrh r0, [r4, 0x8]\n\
+	subs r0, 0x1\n\
+	strh r0, [r4, 0x8]\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	movs r6, 0\n\
+	adds r0, r2, 0x1\n\
+	strh r0, [r4, 0xA]\n\
+	b _080DC210\n\
+_080DC1F8:\n\
+	ldrh r0, [r4, 0x8]\n\
+	adds r1, r0, 0x1\n\
+	strh r1, [r4, 0x8]\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	subs r0, r2, 0x1\n\
+	strh r0, [r4, 0xA]\n\
+	mov r0, r9\n\
+	bl sub_80DBFC8\n\
+_080DC20C:\n\
+	lsls r0, 16\n\
+	lsrs r6, r0, 16\n\
+_080DC210:\n\
+	str r5, [sp, 0xC]\n\
+	movs r0, 0\n\
+	mov r10, r0\n\
+	cmp r5, 0x7\n\
+	bls _080DC226\n\
+	movs r2, 0x1\n\
+	mov r10, r2\n\
+	adds r0, r5, 0\n\
+	subs r0, 0x8\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+_080DC226:\n\
+	adds r2, r5, 0\n\
+	adds r2, 0x16\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	ldr r0, =gUnknown_02039F26\n\
+	add r0, r9\n\
+	ldrb r0, [r0]\n\
+	lsls r3, r0, 2\n\
+	adds r3, r0\n\
+	adds r3, 0x2\n\
+	add r3, r10\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0x1\n\
+	str r0, [sp]\n\
+	str r0, [sp, 0x4]\n\
+	movs r0, 0x11\n\
+	str r0, [sp, 0x8]\n\
+	movs r0, 0\n\
+	adds r1, r6, 0\n\
+	bl ContestBG_FillBoxWithTile\n\
+	mov r3, r8\n\
+	cmp r3, 0\n\
+	ble _080DC284\n\
+	movs r0, 0x60\n\
+	bl PlaySE\n\
+	ldr r4, =gMPlayInfo_SE1\n\
+	adds r0, r4, 0\n\
+	bl m4aMPlayImmInit\n\
+	ldr r1, =0x0000ffff\n\
+	ldr r0, [sp, 0xC]\n\
+	lsls r2, r0, 24\n\
+	asrs r2, 16\n\
+	adds r0, r4, 0\n\
+	bl m4aMPlayPitchControl\n\
+	b _080DC28A\n\
+	.pool\n\
+_080DC284:\n\
+	movs r0, 0x16\n\
+	bl PlaySE\n\
+_080DC28A:\n\
+	mov r2, r10\n\
+	cmp r2, 0\n\
+	bne _080DC2A8\n\
+	cmp r5, 0\n\
+	bne _080DC2A8\n\
+	cmp r6, 0\n\
+	bne _080DC2A8\n\
+	ldr r0, =gTasks\n\
+	lsls r1, r7, 2\n\
+	adds r1, r7\n\
+	lsls r1, 3\n\
+	adds r1, r0\n\
+	ldrh r0, [r1, 0xC]\n\
+	negs r0, r0\n\
+	strh r0, [r1, 0xC]\n\
+_080DC2A8:\n\
+	add sp, 0x10\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
