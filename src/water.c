@@ -2172,7 +2172,7 @@ void sub_810871C(struct Task *task, u8 taskId)
     }
     task->data[11]++;
     task->data[8] = (task->data[8] + 39) & 0xFF;
-    task->data[7] = ((task->data[7] * 0x41c64e6d /* EXCUSE ME WHAT */ + 0x3039) % task->data[5]) + task->data[4];
+    task->data[7] = ((task->data[7] * 0x41c64e6d + 0x3039) % task->data[5]) + task->data[4];
 }
 
 void sub_81087C0(struct Sprite *sprite)
