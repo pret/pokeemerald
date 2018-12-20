@@ -2107,6 +2107,7 @@ const struct SpriteTemplate gPowerOrbs_Float =
 
 void AnimRockPolishStreak(struct Sprite *);
 void AnimRockPolishSparkle(struct Sprite *);
+void AnimPoisonJabProjectile(struct Sprite *);
 
 const union AnimCmd gRockPolishStreak_AnimCmd[] =
 {
@@ -2297,4 +2298,38 @@ void AnimRockPolishSparkle(struct Sprite *sprite)
     InitAnimSpritePos(sprite, TRUE);
     StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
     sprite->callback = sub_80A67D8;
+}
+
+const struct SpriteTemplate gPoisonJabProjectileSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_PURPLE_JAB,
+    .paletteTag = ANIM_TAG_PURPLE_JAB,
+    .oam = &gUnknown_08524B14,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPoisonJabProjectile,
+};
+
+// Moves a projectile towards the center of the target mon.  The sprite is rotated to look
+// like it's traveling along that path.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: duration
+void AnimPoisonJabProjectile(struct Sprite *sprite)
+{
+    s16 targetXPos;
+    s16 targetYPos;
+    u16 rotation;
+
+    sub_80A6980(sprite, TRUE);
+    targetXPos = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    targetYPos = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_3);
+    rotation = ArcTan2Neg(targetXPos - sprite->pos1.x, targetYPos - sprite->pos1.y);
+    sub_80A73E0(sprite, FALSE, 0x100, 0x100, rotation);
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[2] = targetXPos;
+    sprite->data[4] = targetYPos;
+    sprite->callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }

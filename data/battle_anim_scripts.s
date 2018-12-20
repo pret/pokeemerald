@@ -1386,6 +1386,7 @@ Move_ROCK_POLISH:
 	createsprite gRockPolishStreakSpriteTemplate, ANIM_ATTACKER, 2, -21, -16
 	delay 2
 	waitforvisualfinish
+	playsewithpan SE_W213, SOUND_PAN_ATTACKER
 	createsprite gRockPolishSparkleSpriteTemplate, ANIM_ATTACKER, 2, -20, 9
 	createsprite gRockPolishSparkleSpriteTemplate, ANIM_ATTACKER, 2, -10, -15
 	createsprite gRockPolishSparkleSpriteTemplate, ANIM_ATTACKER, 2, 1, 17
@@ -1409,6 +1410,54 @@ Move_ROCK_POLISH:
 	end
 	
 Move_POISON_JAB:
+	loadspritegfx ANIM_TAG_PURPLE_JAB
+	loadspritegfx ANIM_TAG_IMPACT
+	setalpha 12, 8
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, 3, -31, 10
+	delay 2
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, -18, -25, 10
+	delay 2
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, 27, 17, 10
+	delay 2
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, -26, 18, 10
+	delay 2
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, 10, 30, 10
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -7, 4, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, -17, -27, 10
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -4, -6, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, 2, 31, 10
+	createvisualtask AnimTask_SwayMon, 5, 0, 3, 0x2000, 6, ANIM_TARGET
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_TARGET, RGB(16, 0, 16), 12, 0, 1
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 6, 4, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, 15, -27, 10
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -6, 8, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, -31, -2, 10
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 12, 6, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	createsprite gPoisonJabProjectileSpriteTemplate, ANIM_TARGET, 2, -26, -18, 10
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -6, -8, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 8, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -8, 0, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	delay 2
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, -7, -5, 1, 3
+	playsewithpan SE_W004, SOUND_PAN_TARGET
+	waitforvisualfinish
+	blendoff
 	end
 	
 Move_DARK_PULSE:
