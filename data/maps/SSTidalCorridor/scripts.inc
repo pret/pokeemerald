@@ -204,11 +204,11 @@ SSTidalCorridor_EventScript_23C219:: @ 823C219
 	lockall
 	applymovement 5, SSTidalCorridor_Movement_23C26D
 	waitmovement 0
-	applymovement 255, SSTidalCorridor_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, SSTidalCorridor_Movement_2725A8
 	waitmovement 0
 	msgbox SSTidalCorridor_Text_23C28F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, SSTidalCorridor_Movement_23C27D
+	applymovement EVENT_OBJ_ID_PLAYER, SSTidalCorridor_Movement_23C27D
 	applymovement 1, SSTidalCorridor_Movement_23C284
 	applymovement 5, SSTidalCorridor_Movement_23C275
 	waitmovement 0

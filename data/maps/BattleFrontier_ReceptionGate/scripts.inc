@@ -21,7 +21,7 @@ BattleFrontier_ReceptionGate_EventScript_2661F3:: @ 82661F3
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_266580, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, BattleFrontier_ReceptionGate_Movement_2662D2
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_2662D2
 	waitmovement 0
 	goto BattleFrontier_ReceptionGate_EventScript_266229
 	end
@@ -40,18 +40,18 @@ BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
 	closemessage
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_2725A6
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_2725A6
-	applymovement 255, BattleFrontier_ReceptionGate_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_2725A6
 	waitmovement 0
 	playse SE_PIN
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_272598
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_272598
-	applymovement 255, BattleFrontier_ReceptionGate_Movement_272598
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_272598
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_266733, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, BattleFrontier_ReceptionGate_Movement_2662F0
 	applymovement 2, BattleFrontier_ReceptionGate_Movement_2662F6
-	applymovement 255, BattleFrontier_ReceptionGate_Movement_2662D7
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_2662D7
 	applymovement 4, BattleFrontier_ReceptionGate_Movement_2662E0
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_266764, MSGBOX_DEFAULT

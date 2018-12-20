@@ -32,16 +32,16 @@ MossdeepCity_SpaceCenter_2F_MapScript2_223DB5: @ 8223DB5
 
 MossdeepCity_SpaceCenter_2F_EventScript_223DBF:: @ 8223DBF
 	playse SE_PIN
-	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_272598
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_272598
 	waitmovement 0
-	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_27259A
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_27259A
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2243A4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223E09
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2243FE, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_223E07
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_223E07
 	waitmovement 0
 	warp MAP_MOSSDEEP_CITY_SPACE_CENTER_1F, 255, 13, 1
 	waitstate
@@ -57,13 +57,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	trainerbattle_no_intro TRAINER_GRUNT_34, MossdeepCity_SpaceCenter_2F_Text_224461
 	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_223E85
 	waitmovement 0
-	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_2725A4
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_22446E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_35, MossdeepCity_SpaceCenter_2F_Text_224499
 	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_223E81
 	waitmovement 0
-	applymovement 255, MossdeepCity_SpaceCenter_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_2725A8
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2244AB, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_36, MossdeepCity_SpaceCenter_2F_Text_2244F1

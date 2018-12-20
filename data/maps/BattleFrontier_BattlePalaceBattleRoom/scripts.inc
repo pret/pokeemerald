@@ -357,7 +357,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE3E:: @ 824FE3E
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833
 	setvar VAR_TEMP_1, 1
-	applymovement 255, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
 	removeobject 2
 	applymovement 4, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90
 	applymovement 5, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE90

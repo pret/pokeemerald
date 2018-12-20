@@ -674,7 +674,7 @@ void BlitBitmapRectToWindow4BitTo8Bit(u8 windowId, const u8 *pixels, u16 srcX, u
     struct Bitmap sourceRect;
     struct Bitmap destRect;
 
-    sourceRect.pixels = pixels;
+    sourceRect.pixels = (u8*) pixels;
     sourceRect.width = srcWidth;
     sourceRect.height = srcHeight;
 

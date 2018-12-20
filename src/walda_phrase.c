@@ -8,7 +8,7 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "pokemon_storage_system.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 
 extern const u8 gText_Peekaboo[];
 

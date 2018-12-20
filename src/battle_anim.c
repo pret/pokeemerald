@@ -26,8 +26,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
 extern const u16 gMovesWithQuietBGM[];
 extern const u8 *const gBattleAnims_Moves[];
-extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
-extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
 
 // this file's functions
@@ -1658,7 +1656,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_80A82E4(gBattleAnimTarget) + (s8)(argVar);
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (s8)(argVar);
     }
     else
     {
@@ -1667,13 +1665,17 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_80A82E4(gBattleAnimAttacker) + (s8)(argVar);
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + (s8)(argVar);
     }
 
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(template, GetBattlerSpriteCoord(gBattleAnimTarget, 2), GetBattlerSpriteCoord(gBattleAnimTarget, 3), subpriority);
+    CreateSpriteAndAnimate(
+        template,
+        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
+        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
+        subpriority);
     gAnimVisualTaskCount++;
 }
 
@@ -3031,12 +3033,12 @@ static void ScriptCmd_doublebattle_2D(void)
     {
         if (wantedBattler == ANIM_ATTACKER)
         {
-            r4 = sub_80A8364(gBattleAnimAttacker);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = sub_80A8364(gBattleAnimTarget);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
@@ -3066,12 +3068,12 @@ static void ScriptCmd_doublebattle_2E(void)
     {
         if (wantedBattler == ANIM_ATTACKER)
         {
-            r4 = sub_80A8364(gBattleAnimAttacker);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = sub_80A8364(gBattleAnimTarget);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
 

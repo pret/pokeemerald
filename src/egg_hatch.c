@@ -30,8 +30,8 @@
 #include "field_weather.h"
 #include "international_string_util.h"
 #include "naming_screen.h"
-#include "field_screen.h"
 #include "pokemon_storage_system.h"
+#include "field_screen_effect.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData
@@ -60,8 +60,6 @@ extern const u32 gTradeGba_Gfx[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
-
-extern void play_some_sound(void);
 
 static void Task_EggHatch(u8 taskID);
 static void CB2_EggHatch_0(void);
@@ -580,7 +578,7 @@ static void Task_EggHatchPlayBGM(u8 taskID)
     if (gTasks[taskID].data[0] == 0)
     {
         StopMapMusic();
-        play_some_sound();
+        PlayRainSoundEffect();
     }
     if (gTasks[taskID].data[0] == 1)
         PlayBGM(MUS_ME_SHINKA);

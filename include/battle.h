@@ -599,8 +599,7 @@ struct BattleAnimationInfo
     u8 field_9_x80:1;
     u8 field_A;
     u8 field_B;
-    u8 field_C;
-    u8 field_D;
+    s16 field_C;
     u8 field_E;
     u8 field_F;
 };
@@ -624,7 +623,7 @@ struct BattleHealthboxInfo
     u8 battlerBounceSpriteId;
     u8 animationState;
     u8 field_5;
-    u8 field_6;
+    u8 matrixNum;
     u8 shadowSpriteId;
     u8 field_8;
     u8 field_9;

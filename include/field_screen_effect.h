@@ -1,8 +1,44 @@
 #ifndef GUARD_FIELD_SCREEN_EFFECT_H
 #define GUARD_FIELD_SCREEN_EFFECT_H
 
+void pal_fill_for_maplights(void);
+void pal_fill_black(void);
+void WarpFadeScreen(void);
+void sub_80AF128(void);
+void sub_80AF168(void);
+void sub_80AF188(void);
+void sub_80AF214(void);
+void sub_80AF2B4(u8 taskId);
+void sub_80AF314(void);
+void mapldr_default(void);
+void sub_80AF3B0(void);
+void sub_80AF3C8(void);
+void sub_80AF3E8(void);
+void sub_80AF40C(void);
+void sub_80AF688(void);
+bool8 sub_80AF6A4(void);
+void sub_80AF6D4(void);
+void sub_80AF6F0(void);
+void sub_80AF734(void);
+void sp13E_warp_to_last_warp(void);
 void sub_80AF79C(void);
-void sub_80B009C(u8);
+void sub_80AF7D0(void);
+void sp13F_fall_to_last_warp(void);
+void sub_80AF80C(u8 metatileBehavior);
+void sub_80AF828(void);
+void sub_80AF838(void);
+void sub_80AF848(void);
+void sub_80AF87C(void);
+void sub_80AF8B8(void);
+void sub_80AF948(void);
+void sub_80AF9F8(void);
+void sub_80AFC60(void);
+void sub_80B009C(u8 flashLevel);
+void door_upload_tiles(void);
 void sub_80B0244(void);
+void sub_80B0268(void);
+void sub_80B0534(void);
+void sub_80B058C(void);
+void sub_80B05B4(void);
 
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

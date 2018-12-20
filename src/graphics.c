@@ -897,9 +897,9 @@ const u32 gBattleStatMask6_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat6
 const u32 gBattleStatMask7_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat7.gbapal.lz");
 const u32 gBattleStatMask8_Pal[] = INCBIN_U32("graphics/battle_anims/masks/stat8.gbapal.lz");
 
-const u32 gUnknown_08C2DC68[] = INCBIN_U32("graphics/battle_anims/masks/cure_bubbles.4bpp.lz");
-const u32 gUnknown_08C2DDA4[] = INCBIN_U32("graphics/battle_anims/masks/cure_bubbles.gbapal.lz");
-const u32 gUnknown_08C2DDC4[] = INCBIN_U32("graphics/battle_anims/masks/cure_bubbles.bin.lz");
+const u8 gUnknown_08C2DC68[] = INCBIN_U8("graphics/battle_anims/masks/cure_bubbles.4bpp.lz");
+const u16 gUnknown_08C2DDA4[] = INCBIN_U16("graphics/battle_anims/masks/cure_bubbles.gbapal.lz");
+const u8 gUnknown_08C2DDC4[] = INCBIN_U8("graphics/battle_anims/masks/cure_bubbles.bin.lz");
 
 const u32 gBattleAnimSpritePalette_245[] = INCBIN_U32("graphics/battle_anims/sprites/245.gbapal.lz");
 const u32 gBattleAnimSpriteSheet_245[] = INCBIN_U32("graphics/battle_anims/sprites/245.4bpp.lz");

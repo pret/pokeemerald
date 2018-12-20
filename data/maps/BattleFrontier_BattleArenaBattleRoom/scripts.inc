@@ -536,7 +536,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257C16:: @ 8257C16
 	hideobjectat 8, MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
 	removeobject 7
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_24BCDC
-	applymovement 255, BattleFrontier_BattleArenaBattleRoom_Movement_24C773
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaBattleRoom_Movement_24C773
 	setvar VAR_TEMP_1, 1
 	end
 

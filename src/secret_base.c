@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "constants/bg_event_constants.h"
 #include "constants/decorations.h"
@@ -19,11 +17,11 @@
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "metatile_behavior.h"
 #include "map_name_popup.h"
 #include "string_util.h"
@@ -190,7 +188,7 @@ void sub_80E8B6C(void)
             continue;
         }
         gSpecialVar_Result = TRUE;
-        VarSet(VAR_0x4054, i);
+        VarSet(VAR_CURRENT_SECRET_BASE, i);
         break;
     }
 }
@@ -320,7 +318,7 @@ void sub_80E8E18(void)
     {
         gSaveBlock1Ptr->secretBases[0].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
     }
-    VarSet(VAR_0x4054, 0);
+    VarSet(VAR_CURRENT_SECRET_BASE, 0);
     StringCopyN(gSaveBlock1Ptr->secretBases[0].trainerName, gSaveBlock2Ptr->playerName, sub_80E8DF4(gSaveBlock2Ptr->playerName));
     gSaveBlock1Ptr->secretBases[0].gender = gSaveBlock2Ptr->playerGender;
     gSaveBlock1Ptr->secretBases[0].language = GAME_LANGUAGE;
@@ -383,7 +381,7 @@ void sub_80E8FD0(u8 taskId)
             }
             break;
         case 1:
-            secretBaseRecordId = VarGet(VAR_0x4054);
+            secretBaseRecordId = VarGet(VAR_CURRENT_SECRET_BASE);
             if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_10 < 255)
             {
                 gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_10 ++;
@@ -479,7 +477,7 @@ void sub_80E9238(u8 flagIn)
 
     if (CurrentMapIsSecretBase())
     {
-        curBaseId = VarGet(VAR_0x4054);
+        curBaseId = VarGet(VAR_CURRENT_SECRET_BASE);
         decorations = gSaveBlock1Ptr->secretBases[curBaseId].decorations;
         decorPos = gSaveBlock1Ptr->secretBases[curBaseId].decorationPos;
         for (x = 0; x < 16; x ++)
@@ -522,7 +520,7 @@ void sub_80E933C(void)
     }
     else
     {
-        curBase = VarGet(VAR_0x4054);
+        curBase = VarGet(VAR_CURRENT_SECRET_BASE);
         roomDecor = gSaveBlock1Ptr->secretBases[curBase].decorations;
         roomDecorPos = gSaveBlock1Ptr->secretBases[curBase].decorationPos;
         nDecor = 16;
@@ -558,7 +556,7 @@ void sub_80E933C(void)
                     show_sprite(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                     sub_808EBA8(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
                     sub_808F254(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-                    if (CurrentMapIsSecretBase() == TRUE && VarGet(VAR_0x4054) != 0)
+                    if (CurrentMapIsSecretBase() == TRUE && VarGet(VAR_CURRENT_SECRET_BASE) != 0)
                     {
                         if (category == DECORCAT_DOLL)
                         {
@@ -594,7 +592,7 @@ void sub_80E9578(void)
 
 void sub_80E95D4(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_F, gUnknown_0858D060[sub_80EA20C(VarGet(VAR_0x4054))]);
+    VarSet(VAR_OBJ_GFX_ID_F, gUnknown_0858D060[sub_80EA20C(VarGet(VAR_CURRENT_SECRET_BASE))]);
 }
 
 void sub_80E9608(const struct MapPosition *position, const struct MapEvents *events)
@@ -681,7 +679,7 @@ u8 *sub_80E9780(u8 *dest, u8 secretBaseRecordId)
 
 u8 *GetSecretBaseMapName(u8 *dest)
 {
-    return sub_80E9780(dest, VarGet(VAR_0x4054));
+    return sub_80E9780(dest, VarGet(VAR_CURRENT_SECRET_BASE));
 }
 
 void sub_80E980C(void)
@@ -689,7 +687,7 @@ void sub_80E980C(void)
     u8 secretBaseRecordId;
     const u8 *src;
 
-    secretBaseRecordId = VarGet(VAR_0x4054);
+    secretBaseRecordId = VarGet(VAR_CURRENT_SECRET_BASE);
     src = gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName;
     *StringCopyN(gStringVar1, src, sub_80E8DF4(src)) = EOS;
     ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[secretBaseRecordId].language);
@@ -829,7 +827,7 @@ u8 sub_80E9BA8(void)
 
 void sub_80E9BDC(void)
 {
-    if (sub_80E9878(VarGet(VAR_0x4054)) == TRUE)
+    if (sub_80E9878(VarGet(VAR_CURRENT_SECRET_BASE)) == TRUE)
     {
         gSpecialVar_Result = 1;
     }
@@ -845,7 +843,7 @@ void sub_80E9BDC(void)
 
 void sub_80E9C2C(void)
 {
-    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_6 ^= 1;
+    gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].sbr_field_1_6 ^= 1;
     FlagSet(0x10C);
 }
 
@@ -1081,7 +1079,7 @@ void sub_80EA18C(u8 taskId)
 
 void task_pc_turn_off(u8 taskId)
 {
-    if (VarGet(VAR_0x4054) == 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) == 0)
     {
         ScriptContext1_SetupScript(gUnknown_0823B4E8);
     }
@@ -1101,7 +1099,7 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 {
     u8 param;
 
-    param = sub_80EA20C(VarGet(VAR_0x4054));
+    param = sub_80EA20C(VarGet(VAR_CURRENT_SECRET_BASE));
     if (param == 0)
     {
         return SecretBase_RedCave1_Text_274966;
@@ -1150,7 +1148,7 @@ void sub_80EA2E4(void)
 
 void sub_80EA30C(void)
 {
-    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gSpecialVar_Result;
+    gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].sbr_field_1_5 = gSpecialVar_Result;
 }
 
 void sub_80EA354(void)
@@ -1158,7 +1156,7 @@ void sub_80EA354(void)
     u16 secretBaseRecordId;
     u8 i;
 
-    secretBaseRecordId = VarGet(VAR_0x4054);
+    secretBaseRecordId = VarGet(VAR_CURRENT_SECRET_BASE);
     if (!FlagGet(0x922))
     {
         for (i = 0; i < 20; i ++)
@@ -1183,7 +1181,7 @@ void sub_80EA3E4(u8 taskId)
     switch (data[1])
     {
         case 0:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 gUnknown_0203A01D = TRUE;
             }
@@ -1256,7 +1254,7 @@ void sub_80EA3E4(u8 taskId)
                 }
                 else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
                 {
-                    sub_80FA5E4(MapGridGetMetatileIdAt(x, y), x, y);
+                    PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
                     if (gUnknown_0203A01D == TRUE)
                     {
                         switch ((int)MapGridGetMetatileIdAt(x, y))
@@ -1278,7 +1276,7 @@ void sub_80EA3E4(u8 taskId)
                     {
                         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x400);
                     }
-                    sub_80FA794(x, y);
+                    ShatterSecretBaseBreakableDoor(x, y);
                 }
                 else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
                     if (gUnknown_0203A01D == TRUE) {
@@ -1783,7 +1781,7 @@ void sub_80EB1AC(void)
     VarSet(VAR_0x40ED, 0);
     VarSet(VAR_0x40EE, 0);
     VarSet(VAR_0x40EF, 0);
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40F0, TRUE);
     }
@@ -1811,7 +1809,7 @@ void sub_80EB218(void)
 
 void sub_80EB290(void)
 {
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x800);
     }
@@ -1819,7 +1817,7 @@ void sub_80EB290(void)
 
 void sub_80EB2C8(void)
 {
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x400);
     }
@@ -1827,7 +1825,7 @@ void sub_80EB2C8(void)
 
 void sub_80EB300(void)
 {
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
@@ -1837,7 +1835,7 @@ void sub_80EB300(void)
 
 void sub_80EB368(void)
 {
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
@@ -1847,7 +1845,7 @@ void sub_80EB368(void)
 
 void sub_80EB3D0(void)
 {
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
@@ -1857,7 +1855,7 @@ void sub_80EB3D0(void)
 
 void sub_80EB438(void)
 {
-    if (VarGet(VAR_0x4054) != 0)
+    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
     {
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
@@ -1888,7 +1886,7 @@ void sub_80EB498(void)
         case 0x332:
         case 0x333:
         case 0x334:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x4000);
             }
@@ -1906,7 +1904,7 @@ void sub_80EB56C(void)
     {
         case 0x28a:
         case 0x28b:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x40);
             }
@@ -1929,21 +1927,21 @@ void sub_80EB56C(void)
         case 0x2f9:
         case 0x2fa:
         case 0x2fb:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x8);
             }
             break;
         case 0x22c:
         case 0x233:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x40);
             }
             break;
         case 0x288:
         case 0x289:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x100);
             }
@@ -1951,7 +1949,7 @@ void sub_80EB56C(void)
         case 0x22d:
         case 0x22e:
         case 0x22f:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x10);
             }
@@ -1979,7 +1977,7 @@ void sub_80EB56C(void)
         case 0x2cd:
         case 0x2ce:
         case 0x2cf:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
             }
@@ -2006,7 +2004,7 @@ void sub_80EB9E0(void)
         case 0x2be:
         case 0x2c3:
         case 0x2c6:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
             }
@@ -2044,14 +2042,14 @@ void sub_80EBB28(void)
         case 0x2c4:
         case 0x2c5:
         case 0x2c7:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
             }
             break;
         case 0x280:
         case 0x281:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x100);
             }
@@ -2059,7 +2057,7 @@ void sub_80EBB28(void)
         case 0x225:
         case 0x226:
         case 0x227:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x10);
             }
@@ -2077,7 +2075,7 @@ void sub_80EBE7C(void)
     {
         case 0x28d:
         case 0x28e:
-            if (VarGet(VAR_0x4054) != 0)
+            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x4);
             }

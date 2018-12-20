@@ -36,6 +36,7 @@ u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);
 void sub_81978B0(u16 arg0);
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16));
+void sub_8199DF0(u32 bg, u8 a1, int a2, int a3);
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);
 void sub_8198070(u8 windowId, bool8 copyToVram);
 void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
@@ -91,5 +92,8 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 void sub_8197AE8(bool8 copyToVram);
 void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs);
 s8 Menu_ProcessInputGridLayout(void);
+u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted);
+s8 Menu_ProcessInputNoWrapAround_other(void);
+void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
 
 #endif // GUARD_MENU_H

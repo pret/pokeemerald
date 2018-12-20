@@ -27,7 +27,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5
 	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1AC
-	applymovement 255, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A
 	waitmovement 0
 	compare VAR_0x8006, 2
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69
@@ -448,12 +448,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A146:: @ 825A146
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A17C:: @ 825A17C
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1B3
-	applymovement 255, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1A0
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1A0
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B:: @ 825A18B
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1B9
-	applymovement 255, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1A6
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1A6
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A: @ 825A19A

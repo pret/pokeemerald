@@ -175,7 +175,7 @@ static void sub_80A9E78(struct Sprite *sprite)
 void sub_80A9EF4(u8 taskId)
 {
     s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - 32;
-    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_3) - 36;
+    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
     u8 spriteId;
 
     if (IsContest())

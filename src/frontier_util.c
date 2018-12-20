@@ -48,8 +48,6 @@ struct FrontierBrainMon
     u16 moves[4];
 };
 
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
-
 extern void sub_81B8558(void);
 
 // This file's functions.

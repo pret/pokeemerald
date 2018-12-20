@@ -23,7 +23,7 @@ TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
 	compare VAR_RESULT, 0
 	goto_eq TrainerHill_Entrance_EventScript_2680FF
 	setobjectxy 255, 9, 6
-	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	end
 
 TrainerHill_Entrance_EventScript_2680FF:: @ 82680FF
@@ -31,7 +31,7 @@ TrainerHill_Entrance_EventScript_2680FF:: @ 82680FF
 	special sp194_trainer_tower
 	compare VAR_RESULT, 1
 	goto_eq TrainerHill_Entrance_EventScript_26811A
-	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	end
 
 TrainerHill_Entrance_EventScript_26811A:: @ 826811A
@@ -62,7 +62,7 @@ TrainerHill_Entrance_MapScript2_26813E: @ 826813E
 
 TrainerHill_Entrance_EventScript_268160:: @ 8268160
 	lockall
-	applymovement 255, TrainerHill_Entrance_Movement_268385
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_268385
 	waitmovement 0
 	setmetatile 17, 10, 820, 1
 	special DrawWholeMapView
@@ -83,18 +83,18 @@ TrainerHill_Entrance_EventScript_268182:: @ 8268182
 
 TrainerHill_Entrance_EventScript_2681B5:: @ 82681B5
 	lockall
-	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	msgbox TrainerHill_Entrance_Text_268689, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_2681DA
 
 TrainerHill_Entrance_EventScript_2681CA:: @ 82681CA
 	lockall
-	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	msgbox TrainerHill_Entrance_Text_268712, MSGBOX_DEFAULT
 
 TrainerHill_Entrance_EventScript_2681DA:: @ 82681DA
 	closemessage
-	applymovement 255, TrainerHill_Entrance_Movement_268381
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
 	setvar VAR_0x40D6, 0
 	special HealPlayerParty
@@ -130,7 +130,7 @@ TrainerHill_Entrance_EventScript_268227:: @ 8268227
 
 TrainerHill_Entrance_EventScript_268229:: @ 8268229
 	lockall
-	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, TrainerHill_Entrance_EventScript_26836A
 	msgbox TrainerHill_Entrance_Text_2684C6, MSGBOX_DEFAULT
@@ -185,7 +185,7 @@ TrainerHill_Entrance_EventScript_268314:: @ 8268314
 	setvar VAR_TEMP_5, 0
 	msgbox TrainerHill_Entrance_Text_26866F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, TrainerHill_Entrance_Movement_268381
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
 	releaseall
 	end
@@ -211,7 +211,7 @@ TrainerHill_Entrance_EventScript_26835C:: @ 826835C
 TrainerHill_Entrance_EventScript_26836A:: @ 826836A
 	msgbox TrainerHill_Entrance_Text_268430, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, TrainerHill_Entrance_Movement_268381
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
 	releaseall
 	end

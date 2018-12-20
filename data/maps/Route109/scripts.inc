@@ -15,19 +15,19 @@ Route109_EventScript_1EE760:: @ 81EE760
 	end
 
 Route109_EventScript_1EE7A5:: @ 81EE7A5
-	applymovement 255, Route109_Movement_1EE8FD
+	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE8FD
 	waitmovement 0
 	goto Route109_EventScript_1EE7D5
 	end
 
 Route109_EventScript_1EE7B5:: @ 81EE7B5
-	applymovement 255, Route109_Movement_1EE905
+	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE905
 	waitmovement 0
 	goto Route109_EventScript_1EE7D5
 	end
 
 Route109_EventScript_1EE7C5:: @ 81EE7C5
-	applymovement 255, Route109_Movement_1EE908
+	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE908
 	waitmovement 0
 	goto Route109_EventScript_1EE7D5
 	end
@@ -36,12 +36,12 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	hideobjectat 255, MAP_ROUTE109
 	call Route109_EventScript_2720A0
 	applymovement 1, Route109_Movement_1EE84F
-	applymovement 255, Route109_Movement_1EE84F
+	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE84F
 	waitmovement 0
 	delay 50
 	call Route109_EventScript_2720A8
 	showobjectat 255, MAP_DEWFORD_TOWN
-	applymovement 255, Route109_Movement_1EE900
+	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE900
 	waitmovement 0
 	addobject 4
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN

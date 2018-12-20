@@ -259,12 +259,12 @@ BattleFrontier_BattleArenaLobby_EventScript_256003:: @ 8256003
 
 BattleFrontier_BattleArenaLobby_EventScript_256005:: @ 8256005
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_256034
-	applymovement 255, BattleFrontier_BattleArenaLobby_Movement_256041
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_256041
 	waitmovement 0
 	opendoor 2, 2
 	waitdooranim
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_25603E
-	applymovement 255, BattleFrontier_BattleArenaLobby_Movement_25604C
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_25604C
 	waitmovement 0
 	closedoor 2, 2
 	waitdooranim
@@ -308,12 +308,12 @@ BattleFrontier_BattleArenaLobby_Movement_25604C: @ 825604C
 
 BattleFrontier_BattleArenaLobby_EventScript_256050:: @ 8256050
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_25607F
-	applymovement 255, BattleFrontier_BattleArenaLobby_Movement_256088
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_256088
 	waitmovement 0
 	opendoor 11, 2
 	waitdooranim
 	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_25603E
-	applymovement 255, BattleFrontier_BattleArenaLobby_Movement_25604C
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_25604C
 	waitmovement 0
 	closedoor 11, 2
 	waitdooranim

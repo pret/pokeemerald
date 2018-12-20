@@ -118,7 +118,7 @@ gFieldEffectScript_GroundImpactDust:: @ 82DBB28
 	field_eff_end
 
 gFieldEffectScript_Unknown11:: @ 82DBB32
-	field_eff_callnative oei_sweet_scent
+	field_eff_callnative FldEff_UseSecretPowerCave
 	field_eff_end
 
 gFieldEffectScript_BikeHopTallGrass:: @ 82DBB38
@@ -179,11 +179,11 @@ gFieldEffectScript_Unknown25:: @ 82DBBB6
 	field_eff_end
 
 gFieldEffectScript_Unknown26:: @ 82DBBC5
-	field_eff_callnative sub_80FA208
+	field_eff_callnative FldEff_UseSecretPowerTree
 	field_eff_end
 
 gFieldEffectScript_Unknown27:: @ 82DBBCB
-	field_eff_callnative sub_80FA36C
+	field_eff_callnative FldEff_UseSecretPowerShrub
 	field_eff_end
 
 gFieldEffectScript_TreeDisguise:: @ 82DBBD1
@@ -264,11 +264,11 @@ gFieldEffectScript_HeartIcon:: @ 82DBC56
 	field_eff_end
 
 gFieldEffectScript_Unknown47:: @ 82DBC60
-	field_eff_callnative sub_80FA6FC
+	field_eff_callnative FldEff_NopA6FC
 	field_eff_end
 
 gFieldEffectScript_Unknown48:: @ 82DBC66
-	field_eff_callnative sub_80FA700
+	field_eff_callnative FldEff_NopA700
 	field_eff_end
 
 gFieldEffectScript_JumpOutOfAsh:: @ 82DBC6C
@@ -284,7 +284,7 @@ gFieldEffectScript_Unknown51:: @ 82DBC80
 	field_eff_end
 
 gFieldEffectScript_Unknown52:: @ 82DBC86
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo9, sub_80FAA7C
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo9, FldEff_SandPillar
 	field_eff_end
 
 gFieldEffectScript_Bubbles:: @ 82DBC90
@@ -296,15 +296,15 @@ gFieldEffectScript_Unknown54:: @ 82DBC9A
 	field_eff_end
 
 gFieldEffectScript_Unknown55:: @ 82DBCA4
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo7, sub_80FA13C
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo7, FldEff_SecretPowerCave
 	field_eff_end
 
 gFieldEffectScript_Unknown56:: @ 82DBCAE
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo8, sub_80FA248
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo8, FldEff_SecretPowerTree
 	field_eff_end
 
 gFieldEffectScript_Unknown57:: @ 82DBCB8
-	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo8, sub_80FA3AC
+	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo8, FldEff_SecretPowerShrub
 	field_eff_end
 
 gFieldEffectScript_Unknown58:: @ 82DBCC2
@@ -320,7 +320,7 @@ gFieldEffectScript_Unknown60:: @ 82DBCD2
 	field_eff_end
 
 gFieldEffectScript_Unknown61:: @ 82DBCD8
-	field_eff_callnative sub_80FA458
+	field_eff_callnative FldEff_SecretBasePCTurnOn
 	field_eff_end
 
 gFieldEffectScript_Unknown62:: @ 82DBCDE

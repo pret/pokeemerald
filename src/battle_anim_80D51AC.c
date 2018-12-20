@@ -441,14 +441,14 @@ static void DoHorizontalLunge(struct Sprite *sprite)
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseHorizontalLungeDirection);
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
 }
 
 static void ReverseHorizontalLungeDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[1] = -sprite->data[1];
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -468,14 +468,14 @@ static void DoVerticalDip(struct Sprite *sprite)
     sprite->data[3] = spriteId;
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData6(sprite, ReverseVerticalDipDirection);
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
 }
 
 static void ReverseVerticalDipDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[2] = -sprite->data[2];
-    sprite->callback = sub_80A6630;
+    sprite->callback = TranslateMonBGUntil;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -834,7 +834,7 @@ void AnimTask_ScaleMonAndRestore(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[3]);
-    sub_80A7270(spriteId, gBattleAnimArgs[4]);
+    PrepareBattlerSpriteForRotScale(spriteId, gBattleAnimArgs[4]);
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
@@ -851,7 +851,7 @@ void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
     gTasks[taskId].data[11] += gTasks[taskId].data[1];
     spriteId = gTasks[taskId].data[4];
-    obj_id_set_rotscale(spriteId, gTasks[taskId].data[10], gTasks[taskId].data[11], 0);
+    SetSpriteRotScale(spriteId, gTasks[taskId].data[10], gTasks[taskId].data[11], 0);
     if (--gTasks[taskId].data[2] == 0)
     {
         if (gTasks[taskId].data[3] > 0)
@@ -863,7 +863,7 @@ void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
         }
         else
         {
-            sub_80A7344(spriteId);
+            ResetSpriteRotScale(spriteId);
             DestroyAnimVisualTask(taskId);
             return;
         }
@@ -874,7 +874,7 @@ void sub_80D6134(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
-    sub_80A7270(spriteId, 0);
+    PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[3] != 1)
@@ -918,7 +918,7 @@ void sub_80D622C(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[2]);
-    sub_80A7270(spriteId, 0);
+    PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[2] == 0)
@@ -955,17 +955,17 @@ void sub_80D622C(u8 taskId)
 void sub_80D6308(u8 taskId)
 {
     gTasks[taskId].data[3] += gTasks[taskId].data[4];
-    obj_id_set_rotscale(gTasks[taskId].data[5], 0x100, 0x100, gTasks[taskId].data[3]);
+    SetSpriteRotScale(gTasks[taskId].data[5], 0x100, 0x100, gTasks[taskId].data[3]);
     if (gTasks[taskId].data[7])
     {
-        sub_80A73A0(gTasks[taskId].data[5]);
+        SetBattlerSpriteYOffsetFromRotation(gTasks[taskId].data[5]);
     }
     if (++gTasks[taskId].data[1] >= gTasks[taskId].data[2])
     {
         switch (gTasks[taskId].data[6])
         {
         case 1:
-            sub_80A7344(gTasks[taskId].data[5]);
+            ResetSpriteRotScale(gTasks[taskId].data[5]);
         case 0:
         default:
             DestroyAnimVisualTask(taskId);

@@ -3,6 +3,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "alloc.h"
 #include "item.h"

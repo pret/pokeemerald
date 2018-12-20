@@ -240,7 +240,7 @@ Route120_EventScript_1F571C:: @ 81F571C
 
 Route120_EventScript_1F572C:: @ 81F572C
 	applymovement 31, Route120_Movement_2725AA
-	applymovement 255, Route120_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_2725A6
 	waitmovement 0
 	msgbox Route120_Text_1F5BAF, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_SCOPE
@@ -264,12 +264,12 @@ Route120_EventScript_1F572C:: @ 81F572C
 	end
 
 Route120_EventScript_1F57A3:: @ 81F57A3
-	applymovement 255, Route120_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_2725A4
 	waitmovement 0
 	return
 
 Route120_EventScript_1F57AE:: @ 81F57AE
-	applymovement 255, Route120_Movement_1F57B9
+	applymovement EVENT_OBJ_ID_PLAYER, Route120_Movement_1F57B9
 	waitmovement 0
 	return
 

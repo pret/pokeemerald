@@ -4,7 +4,7 @@
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_poison.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "frontier_util.h"
 #include "party_menu.h"
 #include "pokenav.h"
@@ -136,7 +136,7 @@ s32 DoPoisonFieldEffect(void)
     }
     if (numFainted != 0 || numPoisoned != 0)
     {
-        FldeffPoison_Start();
+        FldEffPoison_Start();
     }
     if (numFainted != 0)
     {

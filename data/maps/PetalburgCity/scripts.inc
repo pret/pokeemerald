@@ -33,7 +33,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	special SavePlayerParty
 	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_1DC451
-	applymovement 255, PetalburgCity_Movement_1DC430
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC430
 	waitmovement 0
 	msgbox PetalburgCity_Text_1EC1F8, MSGBOX_DEFAULT
 	special StartWallyTutorialBattle
@@ -58,14 +58,14 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 	lockall
 	setflag FLAG_SPECIAL_FLAG_0x4000
 	applymovement 5, PetalburgCity_Movement_1DC41B
-	applymovement 255, PetalburgCity_Movement_1DC406
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC406
 	waitmovement 0
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 5
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	applymovement 5, PetalburgCity_Movement_1DC42D
-	applymovement 255, PetalburgCity_Movement_1DC418
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC418
 	waitmovement 0
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
 	hideobjectat 255, MAP_PETALBURG_CITY
@@ -286,7 +286,7 @@ PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 	call_if 1, PetalburgCity_EventScript_1DC5FF
 	msgbox PetalburgCity_Text_1DC91B, MSGBOX_DEFAULT
 	applymovement 8, PetalburgCity_Movement_2725A8
-	applymovement 255, PetalburgCity_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A8
 	waitmovement 0
 	msgbox PetalburgCity_Text_1DC93E, MSGBOX_DEFAULT
 	closemessage
@@ -299,7 +299,7 @@ PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 PetalburgCity_EventScript_1DC57F:: @ 81DC57F
 	applymovement 8, PetalburgCity_Movement_1DC615
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725AA
 	waitmovement 0
 	return
 
@@ -311,38 +311,38 @@ PetalburgCity_EventScript_1DC594:: @ 81DC594
 PetalburgCity_EventScript_1DC59F:: @ 81DC59F
 	applymovement 8, PetalburgCity_Movement_1DC61D
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A6
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC5B4:: @ 81DC5B4
 	applymovement 8, PetalburgCity_Movement_1DC622
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A6
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC5C9:: @ 81DC5C9
 	applymovement 8, PetalburgCity_Movement_1DC628
-	applymovement 255, PetalburgCity_Movement_1DC665
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC665
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC5DB:: @ 81DC5DB
 	applymovement 8, PetalburgCity_Movement_1DC633
-	applymovement 255, PetalburgCity_Movement_1DC66F
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC66F
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC5ED:: @ 81DC5ED
 	applymovement 8, PetalburgCity_Movement_1DC641
-	applymovement 255, PetalburgCity_Movement_1DC67C
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC67C
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC5FF:: @ 81DC5FF
 	applymovement 8, PetalburgCity_Movement_1DC64C
-	applymovement 255, PetalburgCity_Movement_1DC686
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC686
 	waitmovement 0
 	return
 
@@ -544,7 +544,7 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1DC7DB
 	waitmovement 0
-	applymovement 255, PetalburgCity_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A8
 	waitmovement 0
 	setvar VAR_0x40D1, 1
 	msgbox PetalburgCity_Text_1DCB31, MSGBOX_DEFAULT
@@ -573,25 +573,25 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	end
 
 PetalburgCity_EventScript_1DC78E:: @ 81DC78E
-	applymovement 255, PetalburgCity_Movement_1DC7EE
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC7EE
 	applymovement 9, PetalburgCity_Movement_1DC7E0
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC7A0:: @ 81DC7A0
-	applymovement 255, PetalburgCity_Movement_1DC802
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC802
 	applymovement 9, PetalburgCity_Movement_1DC7F5
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC7B2:: @ 81DC7B2
-	applymovement 255, PetalburgCity_Movement_1DC815
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC815
 	applymovement 9, PetalburgCity_Movement_1DC808
 	waitmovement 0
 	return
 
 PetalburgCity_EventScript_1DC7C4:: @ 81DC7C4
-	applymovement 255, PetalburgCity_Movement_1DC828
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC828
 	applymovement 9, PetalburgCity_Movement_1DC81B
 	waitmovement 0
 	return

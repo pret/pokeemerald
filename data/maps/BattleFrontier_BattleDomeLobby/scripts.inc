@@ -313,7 +313,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C6E:: @ 8249C6E
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CDD
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CE5
-	applymovement 255, BattleFrontier_BattleDomeLobby_Movement_249D45
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D45
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D2D
@@ -324,7 +324,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249C6E:: @ 8249C6E
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CED
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CF5
-	applymovement 255, BattleFrontier_BattleDomeLobby_Movement_249D4E
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D4E
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D39

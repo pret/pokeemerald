@@ -63,7 +63,7 @@ gUnknown_030061A0: @ 30061A0
 gUnknown_030061C0: @ 30061C0
 	.space 0x4
 
-gUnknown_030061C4: @ 30061C4
+gContestPaintingMonPalette: @ 30061C4
 	.space 0xC
 
 	.include "field_specials.o"
@@ -77,16 +77,7 @@ gDexCryScreenState: @ 30061EC
 	.include "save.o"
 	.include "battle_tower.o"
 	.include "intro.o"
-
-gUnknown_030062DC: @ 30062DC
-	.space 0x4
-
-gUnknown_030062E0: @ 30062E0
-	.space 0x4
-
-gUnknown_030062E4: @ 30062E4
-	.space 0x4
-
+	.include "battle_anim_8170478.o"
 	.include "battle_factory_screen.o"
 	.include "apprentice.o"
 	

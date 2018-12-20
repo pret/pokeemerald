@@ -55,12 +55,12 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	setflag FLAG_HIDE_RUSBORO_CITY_RIVAL
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
-	applymovement 255, Route104_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_2725A6
 	waitmovement 0
 	delay 10
 	addobject 34
 	clearflag FLAG_HIDE_ROUTE_104_RIVAL
-	applymovement 255, Route104_Movement_1ECF86
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ECF86
 	waitmovement 0
 	applymovement 34, Route104_Movement_1ECF8A
 	waitmovement 0
@@ -113,7 +113,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	closemessage
 	delay 30
 	setflag FLAG_0x0FD
-	applymovement 255, Route104_Movement_1ECDCD
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ECDCD
 	applymovement 34, Route104_Movement_1ECDC8
 	msgbox Route104_Text_1EDCB1, MSGBOX_DEFAULT
 	closemessage
@@ -204,7 +204,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	closemessage
 	delay 30
 	setflag FLAG_0x0FD
-	applymovement 255, Route104_Movement_1ECDCD
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ECDCD
 	applymovement 34, Route104_Movement_1ECDC8
 	msgbox Route104_Text_1EDFC6, MSGBOX_DEFAULT
 	closemessage
@@ -372,7 +372,7 @@ Route104_EventScript_1ED099:: @ 81ED099
 	applymovement 8, Route104_Movement_1ED359
 	waitmovement 0
 	removeobject 8
-	applymovement 255, Route104_Movement_1ED34F
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED34F
 	waitmovement 0
 	hideobjectat 255, MAP_ROUTE104
 	call Route104_EventScript_2720A0
@@ -384,13 +384,13 @@ Route104_EventScript_1ED099:: @ 81ED099
 
 Route104_EventScript_1ED0D9:: @ 81ED0D9
 	applymovement 7, Route104_Movement_1ED28C
-	applymovement 255, Route104_Movement_1ED28C
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED28C
 	waitmovement 0
 	goto Route104_EventScript_1ED139
 
 Route104_EventScript_1ED0EF:: @ 81ED0EF
 	applymovement 7, Route104_Movement_1ED1C8
-	applymovement 255, Route104_Movement_1ED1C8
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED1C8
 	waitmovement 0
 	pokenavcall Route104_Text_1EE336
 	waitmessage
@@ -401,7 +401,7 @@ Route104_EventScript_1ED0EF:: @ 81ED0EF
 	closemessage
 	delay 30
 	setflag FLAG_0x132
-	applymovement 255, Route104_Movement_1ED22A
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED22A
 	applymovement 7, Route104_Movement_1ED22A, MAP_ROUTE104
 	waitmovement 7, MAP_ROUTE104
 	waitmovement 0
@@ -409,11 +409,11 @@ Route104_EventScript_1ED0EF:: @ 81ED0EF
 
 Route104_EventScript_1ED139:: @ 81ED139
 	delay 50
-	applymovement 255, Route104_Movement_1ED353
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED353
 	waitmovement 0
 	call Route104_EventScript_2720A8
 	showobjectat 255, MAP_DEWFORD_TOWN
-	applymovement 255, Route104_Movement_1ED355
+	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED355
 	waitmovement 0
 	setobjectxyperm 2, 12, 8
 	addobject 2

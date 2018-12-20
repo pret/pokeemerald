@@ -243,9 +243,9 @@ Route110_TrickHouseEntrance_EventScript_269D3B:: @ 8269D3B
 
 Route110_TrickHouseEntrance_EventScript_269D6E:: @ 8269D6E
 	playse SE_PIN
-	applymovement 255, Route110_TrickHouseEntrance_Movement_272598
+	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_272598
 	waitmovement 0
-	applymovement 255, Route110_TrickHouseEntrance_Movement_27259A
+	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_27259A
 	waitmovement 0
 	compare VAR_0x4044, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_269DEE
@@ -513,9 +513,9 @@ Route110_TrickHouseEntrance_EventScript_26A126:: @ 826A126
 	setmetatile 5, 1, 537, 0
 	special DrawWholeMapView
 	delay 20
-	applymovement 255, Route110_TrickHouseEntrance_Movement_2725C9
+	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_2725C9
 	waitmovement 0
-	applymovement 255, Route110_TrickHouseEntrance_Movement_26A1A7
+	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_26A1A7
 	waitmovement 0
 	switch VAR_0x4044
 	case 0, Route110_TrickHouseEntrance_EventScript_26A1A9

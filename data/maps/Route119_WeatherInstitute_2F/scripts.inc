@@ -51,7 +51,7 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	closemessage
 	addobject 7
 	applymovement 7, Route119_WeatherInstitute_2F_Movement_270170
-	applymovement 255, Route119_WeatherInstitute_2F_Movement_27017C
+	applymovement EVENT_OBJ_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_27017C
 	waitmovement 0
 	msgbox Route119_WeatherInstitute_2F_Text_270568, MSGBOX_DEFAULT
 	closemessage
@@ -73,7 +73,7 @@ Route119_WeatherInstitute_2F_EventScript_26FFC8:: @ 826FFC8
 	removeobject 3
 	removeobject 8
 	removeobject 7
-	applymovement 255, Route119_WeatherInstitute_2F_Movement_270184
+	applymovement EVENT_OBJ_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_270184
 	waitmovement 0
 	fadescreen 0
 	applymovement 5, Route119_WeatherInstitute_2F_Movement_270187

@@ -37,9 +37,6 @@ extern void door_upload_tiles(void);
 
 extern const struct MapLayout *const gMapLayouts[];
 extern const u16 gUnknown_08D856C8[][16];
-extern const u16 gBattleFrontierHeldItems[];
-extern const struct FacilityMon gBattleFrontierMons[];
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 
 #define TOTAL_ROUNDS 20
 #define PICKUP_ITEMS_PER_ROUND 10

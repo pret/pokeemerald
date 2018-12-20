@@ -6,7 +6,7 @@
 #include "dma3.h"
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -10198,7 +10198,7 @@ void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
         gPokemonStoragePtr->boxWallpapers[boxId] = wallpaperId;
 }
 
-s16 sub_80D214C(struct BoxPokemon *boxMons, s8 currIndex, u8 maxIndex, u8 arg3)
+s16 sub_80D214C(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3)
 {
     s16 i;
     s16 adder = -1;
@@ -10208,7 +10208,7 @@ s16 sub_80D214C(struct BoxPokemon *boxMons, s8 currIndex, u8 maxIndex, u8 arg3)
 
     if (arg3 == 1 || arg3 == 3)
     {
-        for (i = currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
+        for (i = (s8)currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE)
                 return i;
@@ -10216,7 +10216,7 @@ s16 sub_80D214C(struct BoxPokemon *boxMons, s8 currIndex, u8 maxIndex, u8 arg3)
     }
     else
     {
-        for (i = currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
+        for (i = (s8)currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE
                 && !GetBoxMonData(&boxMons[i], MON_DATA_IS_EGG))
