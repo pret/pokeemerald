@@ -3041,7 +3041,7 @@ gUnknown_08272A52:: @ 8272A52
 gUnknown_08272A78:: @ 8272A78
 	.string "Obtained the {STR_VAR_2}!$"
 
-gUnknown_08272A89:: @ 8272A89
+gText_BagIsFull:: @ 8272A89
 	.string "The BAG is full…$"
 
 gUnknown_08272A9A:: @ 8272A9A
