@@ -537,7 +537,7 @@ EventScript_23B5F0:: @ 823B5F0
 	goto_eq EventScript_23B5A1
 	msgbox Text_2767D1, MSGBOX_SIGN
 	special sub_80E9C2C
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
@@ -547,13 +547,13 @@ EventScript_23B62F:: @ 823B62F
 	goto_eq EventScript_23B5A1
 	msgbox Text_2767E9, MSGBOX_SIGN
 	special sub_80E9C2C
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
 EventScript_23B652:: @ 823B652
 	msgbox Text_27676F, MSGBOX_SIGN
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
 	end
@@ -564,7 +564,7 @@ EventScript_23B660:: @ 823B660
 	end
 
 EventScript_23B66E:: @ 823B66E
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
 	end
@@ -592,7 +592,7 @@ EventScript_SecretBaseSandOrnament:: @ 823B684
 	end
 
 EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
-	special sub_80FAC78
+	special GetShieldToyTVDecorationInfo
 	compare VAR_RESULT, 0
 	goto_eq EventScript_23B6BC
 	compare VAR_RESULT, 1

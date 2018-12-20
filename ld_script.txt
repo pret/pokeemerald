@@ -151,7 +151,7 @@ SECTIONS {
         src/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
-        asm/fldeff_80F9BCC.o(.text);
+        src/fldeff_misc.o(.text);
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
@@ -480,7 +480,7 @@ SECTIONS {
         data/contest_link_80F57C4.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
-        data/field_effect_misc.o(.rodata);
+        src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);

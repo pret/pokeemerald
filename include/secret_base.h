@@ -23,4 +23,12 @@ void sub_80EB9E0(void);
 void sub_80EBB28(void);
 void sub_80E9668(const struct MapPosition *position, const struct MapEvents *events);
 
+// SetCurrentSecretBaseFromPosition
+void sub_80E9608(const struct MapPosition *position, const struct MapEvents *events);
+// SetCurrentSecretBaseVar
+void sub_80E8B6C(void);
+void sub_80E8BC8(void);
+void sub_80E8D4C(void);
+void EnableBothScriptContexts(void);
+
 #endif //GUARD_SECRET_BASE_H
