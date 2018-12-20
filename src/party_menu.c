@@ -1065,7 +1065,7 @@ void sub_81B0F28(void)
     }
     else
     {
-        if (gUnknown_0203CEC4->unk8_0 != FALSE)
+        if (gUnknown_0203CEC4->unk8_0)
         {
             gUnknown_0203CEC4->unk8_2 = sub_81B5F74(0xBF, 0x88);
             sub_81B120C();
@@ -2311,7 +2311,7 @@ void sub_81B209C(void)
 
 bool16 sub_81B2134(struct Pokemon *mon)
 {
-    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && sub_802C908(GetMonData(mon, MON_DATA_SPECIES)) != FALSE)
+    if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && sub_802C908(GetMonData(mon, MON_DATA_SPECIES)))
         return TRUE;
     return FALSE;
 }
@@ -2385,11 +2385,11 @@ u8 CanPartyPokemonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
 {
     u16 move;
     
-    if (GetMonData(mon, MON_DATA_IS_EGG) != FALSE)
+    if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
     if (item >= ITEM_TM01_FOCUS_PUNCH)
     {
-        if (CanMonLearnTMHM(mon, item - 33) != FALSE)
+        if (CanMonLearnTMHM(mon, item - 33))
             move = ItemIdToBattleMoveId(item);
         else
             return CANNOT_LEARN_MOVE;
@@ -2689,7 +2689,7 @@ void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct Struct203CEDC *pt
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         u8 ailment = sub_81B205C(mon);
-        if (ailment == AILMENT_NONE ||  ailment == AILMENT_PKRS)
+        if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
         {
             if (c != 0)
                 ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk4[4] >> 3, (ptr->unk0->unk4[5] >> 3) + 1, ptr->unk0->unk4[6] >> 3, ptr->unk0->unk4[7] >> 3, 0);
@@ -2721,13 +2721,8 @@ void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, struct Stru
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
     
-    if (species == SPECIES_NONE)
+    if (species == SPECIES_NONE || ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, gSpeciesNames[species]) == 0))
         return;
-    if (species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F)
-    {
-        if (StringCompare(nickname, gSpeciesNames[species]) == 0)
-            return;
-    }
     switch (gender)
     {
         case MON_MALE:
@@ -2924,22 +2919,22 @@ void display_pokemon_menu_message(u32 stringID)
     
     if (stringID != 0x7F)
     {
-        switch (stringID - 21)
+        switch (stringID)
         {
-            case 0:
+            case 21:
                 *windowPtr = AddWindow(&gUnknown_08615928);
                 break;
-            case 3:
+            case 24:
                 *windowPtr = AddWindow(&gUnknown_08615930);
                 break;
-            case 4:
+            case 25:
                 *windowPtr = AddWindow(&gUnknown_08615938);
                 break;
-            case 1:
-            case 2:
+            case 22:
+            case 23:
                 *windowPtr = AddWindow(&gUnknown_08615940);
                 break;
-            case 5:
+            case 26:
                 *windowPtr = AddWindow(&gUnknown_08615948);
                 break;
             default:
@@ -2948,12 +2943,12 @@ void display_pokemon_menu_message(u32 stringID)
         }
         if (stringID == 0)
         {
-            if (gUnknown_0203CEC4->unk8_0 != FALSE)
+            if (gUnknown_0203CEC4->unk8_0)
                 stringID = 2;
             else if (sub_81B314C() == FALSE)
                 stringID = 1;
         }
-        SetWindowBorderStyle(*windowPtr, 0, 0x4F, 0xD);
+        SetWindowBorderStyle(*windowPtr, FALSE, 0x4F, 0xD);
         StringExpandPlaceholders(gStringVar4, gUnknown_08615AF4[stringID]);
         AddTextPrinterParameterized(*windowPtr, 1, gStringVar4, 0, 1, 0, 0);
         schedule_bg_copy_tilemap_to_vram(2);
@@ -2971,7 +2966,7 @@ bool8 sub_81B314C(void)
     
     for (i = 0; i < 6; i++)
     {
-        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG) != FALSE))
+        if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG)))
             j++;
         if (j > 1)
             return TRUE;
@@ -3003,7 +2998,7 @@ u8 sub_81B31B0(u8 a)
     }
     
     gUnknown_0203CEC4->unkC[0] = AddWindow(&window);
-    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], 0, 0x4F, 13);
+    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
     if (a == 3)
         return gUnknown_0203CEC4->unkC[0];
     cursorDimension = GetMenuCursorDimensionByFont(1, 0);
@@ -3023,7 +3018,7 @@ u8 sub_81B31B0(u8 a)
 
 void sub_81B3300(const u8 *text)
 {
-    SetWindowBorderStyle(6, 0, 0x4F, 13);
+    SetWindowBorderStyle(6, FALSE, 0x4F, 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(6, 1, text, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
 }
@@ -3036,7 +3031,7 @@ void sub_81B334C(void)
 u8 sub_81B3364(void)
 {
     gUnknown_0203CEC4->unkC[0] = AddWindow(&gUnknown_08615970);
-    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], 0, 0x4F, 13);
+    SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
     return gUnknown_0203CEC4->unkC[0];
 }
 
@@ -3098,7 +3093,7 @@ u8 sub_81B353C(struct Pokemon *mon)
     switch (gUnknown_0203CEC8.unk8_0)
     {
         case 0:
-            if (InMultiBattleRoom() == TRUE || GetMonData(mon, MON_DATA_IS_EGG) != FALSE)
+            if (InMultiBattleRoom() == TRUE || GetMonData(mon, MON_DATA_IS_EGG))
                 returnVar = 1;
             else
                 returnVar = 0;
@@ -3121,7 +3116,7 @@ u8 sub_81B353C(struct Pokemon *mon)
             }
             break;
         case 6:
-            returnVar = (GetMonData(mon, MON_DATA_IS_EGG) != FALSE) ? 7 : 6;
+            returnVar = (GetMonData(mon, MON_DATA_IS_EGG)) ? 7 : 6;
             break;
         case 8:
             returnVar = 10;
@@ -3179,7 +3174,7 @@ bool8 sub_81B3608(u8 taskId)
 
 void sub_81B36FC(u8 taskId)
 {
-    if (sub_81B3608(taskId) != FALSE)
+    if (sub_81B3608(taskId))
     {
         gTasks[taskId].data[0] = 0xFF;
         gTasks[taskId].func = sub_81B3730;
@@ -3395,10 +3390,10 @@ void sub_81B3B40(const void *rectSrc, s16 a, s16 b, s16 c, s16 d, s16 e)
 {
     u8 f, g, h;
     
-    if (sub_81B3AD8(a, c, &f, &g, &h) != FALSE)
+    if (sub_81B3AD8(a, c, &f, &g, &h))
     {
         FillBgTilemapBufferRect_Palette0(0, 0, g, b, h, d);
-        if (sub_81B3AD8(a + e, c, &f, &g, &h) != FALSE)
+        if (sub_81B3AD8(a + e, c, &f, &g, &h))
             CopyRectToBgTilemapBufferRect(0, rectSrc, f, 0, c, d, g, b, h, d, 17, 0, 0);
     }
 }
@@ -3591,7 +3586,7 @@ void c2_8123744(void)
         {
             InitPartyMenu(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 0x7F, sub_81B4350, gUnknown_0203CEC8.exitCallback);
         }
-        else if (ItemIsMail(gSpecialVar_ItemId) != FALSE)
+        else if (ItemIsMail(gSpecialVar_ItemId))
         {
             RemoveBagItem(gSpecialVar_ItemId, 1);
             sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
@@ -3649,7 +3644,7 @@ void sub_81B43DC(u8 taskId)
                 sub_81B1B5C(gStringVar4, 0);
                 gTasks[taskId].func = sub_81B1C1C;
             }
-            else if (ItemIsMail(gSpecialVar_ItemId) != FALSE)
+            else if (ItemIsMail(gSpecialVar_ItemId))
             {
                 sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
                 gTasks[taskId].func = sub_81B44FC;
@@ -4321,7 +4316,7 @@ bool8 sub_81B5820(void)
 
 void sub_81B5864(void)
 {
-    if (TestPlayerAvatarFlags(8) != FALSE)
+    if (TestPlayerAvatarFlags(8))
         display_pokemon_menu_message(9);
     else
         display_pokemon_menu_message(8);
@@ -4382,7 +4377,7 @@ void party_menu_icon_anim(struct Pokemon *mon, struct Struct203CEDC *ptr, u32 a)
     u32 bit = 1;
     u16 species2;
     
-    if (IsMultiBattle() == TRUE && gMain.inBattle != FALSE)
+    if (IsMultiBattle() == TRUE && gMain.inBattle)
         bit = (gUnknown_08616020[a] ^ bit) ? 1 : 0;
     species2 = GetMonData(mon, MON_DATA_SPECIES2);
     party_menu_link_mon_icon_anim(species2, GetMonData(mon, MON_DATA_PERSONALITY), ptr, 1, bit);
@@ -4500,7 +4495,7 @@ void sub_81B5CB0(u16 item, struct Struct203CEDC *ptr)
     }
     else
     {
-        if (ItemIsMail(item) != FALSE)
+        if (ItemIsMail(item))
             StartSpriteAnim(&gSprites[ptr->unkA], 1);
         else
             StartSpriteAnim(&gSprites[ptr->unkA], 0);
@@ -4557,7 +4552,7 @@ void sub_81B5E74(struct Sprite *sprite)
 {
     u8 otherSpriteId = sprite->data[7];
     
-    if (gSprites[otherSpriteId].invisible != FALSE)
+    if (gSprites[otherSpriteId].invisible)
     {
         sprite->invisible = TRUE;
     }
@@ -4681,7 +4676,7 @@ void sub_81B617C(void)
     u8 msgIDMaybe;
     register TaskFunc task asm("r0");
     
-    if (gMain.inBattle != FALSE)
+    if (gMain.inBattle)
     {
         inBattle = TRUE;
         doubleBattleStatus = sub_81B8984();
@@ -4825,7 +4820,7 @@ bool8 IsBlueYellowRedFlute(u16 item)
 
 bool8 ExecuteTableBasedItemEffect__(u8 partyMonIndex, u16 item, u8 monMoveIndex)
 {    
-    if (gMain.inBattle != FALSE)
+    if (gMain.inBattle)
         return ExecuteTableBasedItemEffect(&gPlayerParty[partyMonIndex], item, sub_81B8F38(partyMonIndex), monMoveIndex);
     else
         return ExecuteTableBasedItemEffect(&gPlayerParty[partyMonIndex], item, partyMonIndex, monMoveIndex);
@@ -4838,7 +4833,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal;
     
-    if (UsingHPEVItemOnShedinja(mon, item) != FALSE)
+    if (UsingHPEVItemOnShedinja(mon, item))
     {
         canHeal = IsHPRecoveryItem(item);
         if (canHeal == TRUE)
@@ -4847,7 +4842,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             if (hp == GetMonData(mon, MON_DATA_MAX_HP))
                 canHeal = FALSE;
         }
-        if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, item, 0) != FALSE)
+        if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, item, 0))
         {
             iTriedHonestlyIDid:
             gUnknown_0203CEE8 = 0;
@@ -4874,7 +4869,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         PlaySE(SE_BIDORO);
     }
     party_menu_get_status_condition_and_update_object(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
-    if (gSprites[gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unkC].invisible != FALSE)
+    if (gSprites[gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unkC].invisible)
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
     if (canHeal == TRUE)
     {
@@ -4925,7 +4920,7 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
     u16 newFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
     u16 newRelevantEV = sub_81B691C(mon, effectType);
     
-    if (cannotUseEffect != FALSE || (friendship == newFriendship && relevantEV == newRelevantEV))
+    if (cannotUseEffect || (friendship == newFriendship && relevantEV == newRelevantEV))
     {
         gUnknown_0203CEE8 = 0;
         PlaySE(SE_SELECT);
@@ -5088,7 +5083,7 @@ void ether_effect_related(u8 taskId)
     struct Struct203CEC8 *ptr = &gUnknown_0203CEC8;
     struct Pokemon *mon;
     
-    if (ExecuteTableBasedItemEffect__(ptr->unk9, item, *moveslot) != FALSE)
+    if (ExecuteTableBasedItemEffect__(ptr->unk9, item, *moveslot))
     {
         gUnknown_0203CEE8 = 0;
         PlaySE(SE_SELECT);
@@ -5229,7 +5224,7 @@ void sub_81B6F60(u8 taskId)
 
 void sub_81B6F98(u8 taskId)
 {
-    if (IsFanfareTaskInactive() != FALSE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
+    if (IsFanfareTaskInactive() && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         if (gUnknown_0203CEC8.unk10 == 1)
             sub_81B77AC(taskId);
@@ -5424,7 +5419,7 @@ void dp05_rare_candy(u8 taskId, TaskFunc task)
 void sub_81B754C(u8 slot, struct Pokemon *mon)
 {
     party_menu_get_status_condition_and_update_object(mon, &gUnknown_0203CEDC[slot]);
-    if (gSprites[gUnknown_0203CEDC[slot].unkC].invisible != FALSE)
+    if (gSprites[gUnknown_0203CEDC[slot].unkC].invisible)
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[slot], 1);
     DisplayPartyPokemonHPCheck(mon, &gUnknown_0203CEDC[slot], 1);
     DisplayPartyPokemonMaxHPCheck(mon, &gUnknown_0203CEDC[slot], 1);
@@ -5436,7 +5431,7 @@ void sub_81B754C(u8 slot, struct Pokemon *mon)
 
 void sub_81B75D4(u8 taskId)
 {
-    if (WaitFanfare(FALSE) != FALSE && sub_81B1BD4() != TRUE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
+    if (WaitFanfare(FALSE) && sub_81B1BD4() != TRUE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         PlaySE(SE_SELECT);
         sub_81B767C(taskId);
@@ -5477,7 +5472,7 @@ void sub_81B7704(u8 taskId)
 {
     u16 result;
     
-    if (WaitFanfare(0) != FALSE && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
+    if (WaitFanfare(0) && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         sub_81B3394();
         result = MonTryLearningNewMove(&gPlayerParty[gUnknown_0203CEC8.unk9], 1);
@@ -5587,7 +5582,7 @@ void sub_81B7A28(u8 taskId)
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         hp = GetMonData(mon, MON_DATA_HP);
-        if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0) != FALSE)
+        if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0))
         {
             gTasks[taskId].func = task_sacred_ash_party_loop;
             return;
@@ -5600,7 +5595,7 @@ void sub_81B7A28(u8 taskId)
     }
     PlaySE(SE_KAIFUKU);
     party_menu_get_status_condition_and_update_object(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
-    if (gSprites[gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unkC].invisible != FALSE)
+    if (gSprites[gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unkC].invisible)
         DisplayPartyPokemonLevelCheck(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
     sub_81B0FCC(gUnknown_0203CEC4->data[2], 0);
     sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
@@ -5780,7 +5775,7 @@ void sub_81B7C74(u8 taskId, TaskFunc task)
 {
     PlaySE(SE_SELECT);
     gCB2_AfterEvolution = gUnknown_0203CEC8.exitCallback;
-    if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0) != FALSE)
+    if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0))
     {
         gUnknown_0203CEE8 = 0;
         sub_81B1B5C(gText_WontHaveEffect, 1);
@@ -5997,7 +5992,7 @@ void sub_81B7FAC(u8 taskId)
     {
         sub_81B8044(taskId);
     }
-    else if (ItemIsMail(gUnknown_0203CEFC) != FALSE)
+    else if (ItemIsMail(gUnknown_0203CEFC))
     {
         sub_81B83B8(taskId);
     }
@@ -6010,7 +6005,7 @@ void sub_81B7FAC(u8 taskId)
 
 void sub_81B8044(u8 taskId)
 {
-    if (ItemIsMail(gUnknown_0203CEC8.unkC) != FALSE)
+    if (ItemIsMail(gUnknown_0203CEC8.unkC))
     {
         sub_81B83F0(gUnknown_0203CEC8.unkC);
         gUnknown_0203CEC4->exitCallback = sub_81B814C;
@@ -6112,7 +6107,7 @@ void sub_81B82D4(u8 taskId)
                 sub_81B1B5C(gStringVar4, 0);
                 gTasks[taskId].func = sub_81B8104;
             }
-            else if (ItemIsMail(item) != FALSE)
+            else if (ItemIsMail(item))
             {
                 gUnknown_0203CEC4->exitCallback = sub_81B814C;
                 sub_81B12C0(taskId);
@@ -6207,7 +6202,7 @@ bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
     
-    if (GetMonData(mon, MON_DATA_IS_EGG) != FALSE || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() || 
+    if (GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() || 
     (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && 
     gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && 
     GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
@@ -6576,7 +6571,7 @@ bool8 sub_81B8A7C(void)
             return FALSE;
         }
     }
-    if (GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG) != FALSE)
+    if (GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
     {
         StringExpandPlaceholders(gStringVar4, gText_EggCantBattle);
         return FALSE;
@@ -6619,7 +6614,7 @@ void sub_81B8C88(u8 *ptr, bool8 multiplayerFlag)
     
     if (IsMultiBattle() == TRUE)
     {
-        if (multiplayerFlag != FALSE)
+        if (multiplayerFlag)
         {
             ptr[0] = 0 | (3 << 4);
             ptr[1] = 5 | (4 << 4);
@@ -6688,7 +6683,7 @@ void sub_81B8D88(u8 *ptr, bool8 multiplayerFlag, u8 battlerPosition)
     }
     if (IsMultiBattle() == TRUE)
     {
-        if (multiplayerFlag != FALSE)
+        if (multiplayerFlag)
         {
             ptr[0] = 0 | (3 << 4);
             ptr[1] = 5 | (4 << 4);
@@ -6741,7 +6736,7 @@ void sub_81B8E80(u8 battlerPosition, u8 unk, u8 arrayIndex)
     u8 *battleStructRelated;
     u8 possiblePartyIndexBuffer;
     
-    if (IsMultiBattle() != FALSE)
+    if (IsMultiBattle())
     {
         battleStructRelated = gBattleStruct->field_60[battlerPosition];
         for (i = j = 0; i < 3; j++, i++)
@@ -6963,7 +6958,7 @@ bool8 hm_add_c3_without_phase_2(void) // might not be bool
 
 void task_hm_without_phase_2(u8 taskId)
 {
-    if (IsWeatherNotFadingIn() != FALSE)
+    if (IsWeatherNotFadingIn())
     {
         DestroyTask(taskId);
         ScriptContext2_Disable();
@@ -7135,7 +7130,7 @@ void sub_81B97DC(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
 
 void sub_81B98DC(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_EGG) != FALSE)
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_EGG))
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
