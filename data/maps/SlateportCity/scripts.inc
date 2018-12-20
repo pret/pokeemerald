@@ -880,7 +880,7 @@ SlateportCity_EventScript_1DD557:: @ 81DD557
 	end
 
 SlateportCity_EventScript_1DD5C1:: @ 81DD5C1
-	msgbox gText_BagIsFull, MSGBOX_DEFAULT
+	msgbox gText_MartBagIsFull, MSGBOX_DEFAULT
 	special sub_8024918
 	release
 	end

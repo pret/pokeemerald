@@ -36,7 +36,7 @@ TrainerHill_Roof_EventScript_269020:: @ 8269020
 
 TrainerHill_Roof_EventScript_269037:: @ 8269037
 	msgbox TrainerHill_Roof_Text_268AC5, MSGBOX_DEFAULT
-	msgbox gText_BagIsFull, MSGBOX_DEFAULT
+	msgbox gText_MartBagIsFull, MSGBOX_DEFAULT
 	msgbox TrainerHill_Roof_Text_268B07, MSGBOX_DEFAULT
 	goto TrainerHill_Roof_EventScript_269054
 

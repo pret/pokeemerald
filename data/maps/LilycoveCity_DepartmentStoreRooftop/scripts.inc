@@ -191,7 +191,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220442:: @ 8220442
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_220450:: @ 8220450
-	msgbox gText_BagIsFull, MSGBOX_DEFAULT
+	msgbox gText_MartBagIsFull, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_22045E
 	end
 
