@@ -251,7 +251,7 @@ void sub_81131B4(struct Sprite *sprite)
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
     }
 
-    sub_80A6864(sprite, gBattleAnimArgs[1]);
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[1]);
     sprite->pos1.y += gBattleAnimArgs[2];
     sprite->callback = RunStoredCallbackWhenAnimEnds;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
@@ -329,7 +329,7 @@ void sub_81133E8(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u16 i;
     u8 r1;
-    if (sub_80A8364(gBattleAnimAttacker) == 1)
+    if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
     {
         sp.dmaDest = &REG_BG1HOFS;
         task->data[2] = gBattle_BG1_X;

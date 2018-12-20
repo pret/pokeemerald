@@ -46,7 +46,7 @@ _0810F22E:
 	lsrs r4, r0, 24
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -423,7 +423,7 @@ sub_810F524: @ 810F524
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -514,13 +514,13 @@ _0810F5EE:
 	bne _0810F608
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl InitAnimSpritePos
+	bl InitSpritePosToAnimAttacker
 	b _0810F610
 	.pool
 _0810F608:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80A6980
+	bl InitSpritePosToAnimTarget
 _0810F610:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -1572,7 +1572,7 @@ _0810FE86:
 _0810FE92:
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
