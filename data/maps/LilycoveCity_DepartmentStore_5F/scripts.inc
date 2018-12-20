@@ -16,10 +16,10 @@ LilycoveCity_DepartmentStore_5F_EventScript_21FF9A:: @ 821FF9A
 LilycoveCity_DepartmentStore_5F_EventScript_21FFA6:: @ 821FFA6
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_21FFC0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -44,10 +44,10 @@ LilycoveCity_DepartmentStore_5F_Pokemart_21FFC0: @ 821FFC0
 LilycoveCity_DepartmentStore_5F_EventScript_21FFDC:: @ 821FFDC
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_21FFF4
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -69,10 +69,10 @@ LilycoveCity_DepartmentStore_5F_Pokemart_21FFF4: @ 821FFF4
 LilycoveCity_DepartmentStore_5F_EventScript_22000A:: @ 822000A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_220024
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -94,10 +94,10 @@ LilycoveCity_DepartmentStore_5F_Pokemart_220024: @ 8220024
 LilycoveCity_DepartmentStore_5F_EventScript_22003A:: @ 822003A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration2 LilycoveCity_DepartmentStore_5F_Pokemart_220054
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 

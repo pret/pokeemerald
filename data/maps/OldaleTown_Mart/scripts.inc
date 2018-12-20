@@ -4,16 +4,16 @@ OldaleTown_Mart_MapScripts:: @ 81FC23F
 OldaleTown_Mart_EventScript_1FC240:: @ 81FC240
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	checkflag FLAG_0x074
 	goto_eq OldaleTown_Mart_EventScript_1FC26C
-	pokemart OldaleTown_Mart_Pokemart_1FC260
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart OldaleTown_Mart_PokemartWithoutPokeballs
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
-OldaleTown_Mart_Pokemart_1FC260: @ 81FC260
+OldaleTown_Mart_PokemartWithoutPokeballs: @ 81FC260
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
@@ -23,13 +23,13 @@ OldaleTown_Mart_Pokemart_1FC260: @ 81FC260
 	end
 
 OldaleTown_Mart_EventScript_1FC26C:: @ 81FC26C
-	pokemart OldaleTown_Mart_Pokemart_1FC27C
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart OldaleTown_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-OldaleTown_Mart_Pokemart_1FC27C: @ 81FC27C
+OldaleTown_Mart_Pokemart: @ 81FC27C
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE

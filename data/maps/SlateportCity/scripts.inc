@@ -122,7 +122,7 @@ SlateportCity_EventScript_1DCDBD:: @ 81DCDBD
 	message SlateportCity_Text_1DD64A
 	waitmessage
 	pokemart SlateportCity_Pokemart_1DCDD4
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -494,10 +494,10 @@ SlateportCity_EventScript_1DD153:: @ 81DD153
 SlateportCity_EventScript_1DD16A:: @ 81DD16A
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration SlateportCity_PokemartDecor_1DD184
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -520,10 +520,10 @@ SlateportCity_EventScript_1DD198:: @ 81DD198
 	faceplayer
 	checkflag FLAG_0x060
 	goto_if 0, SlateportCity_EventScript_1DD18E
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration SlateportCity_PokemartDecor_1DD1B8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -549,10 +549,10 @@ SlateportCity_PokemartDecor_1DD1B8: @ 81DD1B8
 SlateportCity_EventScript_1DD1D8:: @ 81DD1D8
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemart SlateportCity_Pokemart_1DD1F0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 

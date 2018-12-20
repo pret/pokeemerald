@@ -12,10 +12,10 @@ FortreeCity_DecorationShop_EventScript_218017:: @ 8218017
 FortreeCity_DecorationShop_EventScript_218020:: @ 8218020
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_218038
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -36,10 +36,10 @@ FortreeCity_DecorationShop_PokemartDecor_218038: @ 8218038
 FortreeCity_DecorationShop_EventScript_21804C:: @ 821804C
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	pokemartdecoration FortreeCity_DecorationShop_PokemartDecor_218064
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 

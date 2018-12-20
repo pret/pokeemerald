@@ -3029,10 +3029,10 @@ gUnknown_082729F0:: @ 82729F0
 gUnknown_08272A07:: @ 8272A07
 	.string "We hope to see you again!$"
 
-gUnknown_08272A21:: @ 8272A21
+gText_MartWelcome:: @ 8272A21
 	.string "Welcome!\pHow may I serve you?$"
 
-gUnknown_08272A3F:: @ 8272A3F
+gText_MartEnd:: @ 8272A3F
 	.string "Please come again!$"
 
 gUnknown_08272A52:: @ 8272A52

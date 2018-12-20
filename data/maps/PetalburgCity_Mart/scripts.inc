@@ -4,12 +4,12 @@ PetalburgCity_Mart_MapScripts:: @ 8207D68
 PetalburgCity_Mart_EventScript_207D69:: @ 8207D69
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
 	checkflag FLAG_0x128
 	goto_eq PetalburgCity_Mart_EventScript_207DA6
 	pokemart PetalburgCity_Mart_Pokemart_207D8C
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
@@ -32,7 +32,7 @@ PetalburgCity_Mart_Pokemart_207D8C: @ 8207D8C
 
 PetalburgCity_Mart_EventScript_207DA6:: @ 8207DA6
 	pokemart PetalburgCity_Mart_Pokemart_207DB8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 

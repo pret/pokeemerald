@@ -4,14 +4,14 @@ SlateportCity_Mart_MapScripts:: @ 820DC48
 SlateportCity_Mart_EventScript_20DC49:: @ 820DC49
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart SlateportCity_Mart_Pokemart_20DC60
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart SlateportCity_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_Mart_Pokemart_20DC60: @ 820DC60
+SlateportCity_Mart_Pokemart: @ 820DC60
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION

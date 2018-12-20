@@ -4,15 +4,15 @@ FallarborTown_Mart_MapScripts:: @ 81FFCBE
 FallarborTown_Mart_EventScript_1FFCBF:: @ 81FFCBF
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart FallarborTown_Mart_Pokemart_1FFCD8
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart FallarborTown_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-FallarborTown_Mart_Pokemart_1FFCD8: @ 81FFCD8
+FallarborTown_Mart_Pokemart: @ 81FFCD8
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE

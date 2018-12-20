@@ -4,15 +4,15 @@ FortreeCity_Mart_MapScripts:: @ 8217665
 FortreeCity_Mart_EventScript_217666:: @ 8217666
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart FortreeCity_Mart_Pokemart_217680
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart FortreeCity_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-FortreeCity_Mart_Pokemart_217680: @ 8217680
+FortreeCity_Mart_Pokemart: @ 8217680
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_SUPER_POTION

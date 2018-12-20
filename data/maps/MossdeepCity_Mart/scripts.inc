@@ -4,15 +4,15 @@ MossdeepCity_Mart_MapScripts:: @ 82223C7
 MossdeepCity_Mart_EventScript_2223C8:: @ 82223C8
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart MossdeepCity_Mart_Pokemart_2223E0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart MossdeepCity_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-MossdeepCity_Mart_Pokemart_2223E0: @ 82223E0
+MossdeepCity_Mart_Pokemart: @ 82223E0
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_NET_BALL
 	.2byte ITEM_DIVE_BALL

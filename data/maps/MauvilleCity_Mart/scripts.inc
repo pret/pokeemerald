@@ -4,15 +4,15 @@ MauvilleCity_Mart_MapScripts:: @ 82110E5
 MauvilleCity_Mart_EventScript_2110E6:: @ 82110E6
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart MauvilleCity_Mart_Pokemart_211100
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart MauvilleCity_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-MauvilleCity_Mart_Pokemart_211100: @ 8211100
+MauvilleCity_Mart_Pokemart: @ 8211100
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION

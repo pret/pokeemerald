@@ -4,14 +4,14 @@ SootopolisCity_Mart_MapScripts:: @ 8226794
 SootopolisCity_Mart_EventScript_226795:: @ 8226795
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart SootopolisCity_Mart_Pokemart_2267AC
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart SootopolisCity_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Mart_Pokemart_2267AC: @ 82267AC
+SootopolisCity_Mart_Pokemart: @ 82267AC
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION

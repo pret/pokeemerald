@@ -53,7 +53,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A3E4:: @ 822A3E4
 	message gUnknown_08272A52
 	waitmessage
 	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_22A3FC
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 

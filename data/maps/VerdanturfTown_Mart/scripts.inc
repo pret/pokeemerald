@@ -4,15 +4,15 @@ VerdanturfTown_Mart_MapScripts:: @ 8202586
 VerdanturfTown_Mart_EventScript_202587:: @ 8202587
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart VerdanturfTown_Mart_Pokemart_2025A0
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart VerdanturfTown_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-VerdanturfTown_Mart_Pokemart_2025A0: @ 82025A0
+VerdanturfTown_Mart_Pokemart: @ 82025A0
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_NEST_BALL
 	.2byte ITEM_SUPER_POTION

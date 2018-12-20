@@ -4,15 +4,15 @@ BattleFrontier_Mart_MapScripts:: @ 8267ACB
 BattleFrontier_Mart_EventScript_267ACC:: @ 8267ACC
 	lock
 	faceplayer
-	message gUnknown_08272A21
+	message gText_MartWelcome
 	waitmessage
-	pokemart BattleFrontier_Mart_Pokemart_267AE4
-	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
+	pokemart BattleFrontier_Mart_Pokemart
+	msgbox gText_MartEnd, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-BattleFrontier_Mart_Pokemart_267AE4: @ 8267AE4
+BattleFrontier_Mart_Pokemart: @ 8267AE4
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
