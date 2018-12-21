@@ -5,6 +5,8 @@
 
 	.text
 
+	@ firered: unk_814B6F0.o
+
 	thumb_func_start sub_8020C00
 sub_8020C00: @ 8020C00
 	ldr r0, =gUnknown_02022C90
@@ -537,6 +539,8 @@ _08021046:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8020FC4
+
+	@ firered: unk_814D5C8.o
 
 	thumb_func_start sub_802104C
 sub_802104C: @ 802104C
@@ -3811,6 +3815,8 @@ _08022BA6:
 	bx r0
 	.pool
 	thumb_func_end sub_8022B28
+
+	@ firered: unk_814BB4C.o
 
 	thumb_func_start sub_8022BEC
 sub_8022BEC: @ 8022BEC
@@ -7230,6 +7236,8 @@ sub_8024644: @ 8024644
 	bx r0
 	thumb_func_end sub_8024644
 
+	@ firered: unk_815EDDC.
+
 	thumb_func_start sub_8024668
 sub_8024668: @ 8024668
 	ldr r1, =gSaveBlock2Ptr
@@ -7595,6 +7603,8 @@ sub_8024918: @ 8024918
 	bx r0
 	.pool
 	thumb_func_end sub_8024918
+
+	@ firered: unk_81507FC.o
 
 	thumb_func_start sub_802493C
 sub_802493C: @ 802493C
@@ -19394,6 +19404,8 @@ _0802A99A:
 	.pool
 	thumb_func_end sub_802A8E8
 
+	@ firered: unk_8147AA8.o
+
 	thumb_func_start sub_802A9A8
 sub_802A9A8: @ 802A9A8
 	push {r4-r7,lr}
@@ -27103,6 +27115,8 @@ _0802E636:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_802E620
+
+	@ firered: partway through unk_8147500.o
 
 	thumb_func_start sub_802E63C
 sub_802E63C: @ 802E63C
