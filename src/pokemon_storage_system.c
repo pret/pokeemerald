@@ -426,6 +426,8 @@ enum
 #define TAG_PAL_DACE        0xDACE
 #define TAG_PAL_DAC7        0xDAC7
 #define TAG_PAL_DAC9        0xDAC9
+#define TAG_PAL_DAC0        0xDAC0
+#define TAG_PAL_DACB        0xDACB
 
 #define TAG_TILE_WAVEFORM   0x5
 #define TAG_TILE_10         0x10
@@ -434,6 +436,10 @@ enum
 #define TAG_TILE_A          0xA
 #define TAG_TILE_3          0x3
 #define TAG_TILE_4          0x4
+#define TAG_TILE_12         0x12
+#define TAG_TILE_7          0x7
+#define TAG_TILE_0          0x0
+#define TAG_TILE_1          0x1
 
 // IWRAM bss
 IWRAM_DATA static u32 gUnknown_03000F78[98];
@@ -804,8 +810,8 @@ static const u16 gUnknown_0857243C[] = INCBIN_U16("graphics/unknown/unknown_5724
 static const u16 gUnknown_0857245C[] =
 {
     0x014c, 0x014d, 0x014e, 0x014f, 0x0170, 0x0171, 0x0172, 0x0173, 0x0174, 0x015c, 0x015d, 0x015e, 0x015f, 0x0180, 0x0181, 0x0182,
-	0x0183, 0x0184, 0x0175, 0x0176, 0x0177, 0x0178, 0x0179, 0x017a, 0x017b, 0x017c, 0x017d, 0x0185, 0x0186, 0x0187, 0x0188, 0x0189,
-	0x018a, 0x018b, 0x018c, 0x018d
+    0x0183, 0x0184, 0x0175, 0x0176, 0x0177, 0x0178, 0x0179, 0x017a, 0x017b, 0x017c, 0x017d, 0x0185, 0x0186, 0x0187, 0x0188, 0x0189,
+    0x018a, 0x018b, 0x018c, 0x018d
 };
 static const u16 gUnknown_085724A4[] =
 {
@@ -1031,10 +1037,10 @@ static const union AnimCmd *const sSpriteAnimTable_85728AC[] =
     sSpriteAnim_857289C
 };
 
-static const struct SpriteTemplate gUnknown_085728BC =
+static const struct SpriteTemplate sSpriteTemplate_Waveform =
 {
-    .tileTag = 5,
-    .paletteTag = 0xDACA,
+    .tileTag = TAG_TILE_WAVEFORM,
+    .paletteTag = TAG_PAL_WAVEFORM,
     .oam = &sOamData_8572874,
     .anims = sSpriteAnimTable_85728AC,
     .images = NULL,
@@ -1045,8 +1051,8 @@ static const struct SpriteTemplate gUnknown_085728BC =
 static const struct OamData sOamData_85728EC;
 static const struct SpriteTemplate gUnknown_085728D4 =
 {
-    .tileTag = 18,
-    .paletteTag = 0xDAC0,
+    .tileTag = TAG_TILE_12,
+    .paletteTag = TAG_PAL_DAC0,
     .oam = &sOamData_85728EC,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -1092,127 +1098,127 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_857291C[] =
 
 static const u16 gWallpaperPalettes_Forest[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/forest_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/forest_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/forest_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/forest_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Forest[] = INCBIN_U32("graphics/pokemon_storage/forest.4bpp.lz");
 static const u32 gWallpaperTilemap_Forest[] = INCBIN_U32("graphics/pokemon_storage/forest.bin.lz");
 
 static const u16 gWallpaperPalettes_City[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/city_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/city_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/city_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/city_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_City[] = INCBIN_U32("graphics/pokemon_storage/city.4bpp.lz");
 static const u32 gWallpaperTilemap_City[] = INCBIN_U32("graphics/pokemon_storage/city.bin.lz");
 
 static const u16 gWallpaperPalettes_Desert[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/desert_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/desert_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/desert_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/desert_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Desert[] = INCBIN_U32("graphics/pokemon_storage/desert.4bpp.lz");
 static const u32 gWallpaperTilemap_Desert[] = INCBIN_U32("graphics/pokemon_storage/desert.bin.lz");
 
 static const u16 gWallpaperPalettes_Savanna[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/savanna_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/savanna_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/savanna_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/savanna_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Savanna[] = INCBIN_U32("graphics/pokemon_storage/savanna.4bpp.lz");
 static const u32 gWallpaperTilemap_Savanna[] = INCBIN_U32("graphics/pokemon_storage/savanna.bin.lz");
 
 static const u16 gWallpaperPalettes_Crag[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/crag_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/crag_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/crag_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/crag_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Crag[] = INCBIN_U32("graphics/pokemon_storage/crag.4bpp.lz");
 static const u32 gWallpaperTilemap_Crag[] = INCBIN_U32("graphics/pokemon_storage/crag.bin.lz");
 
 static const u16 gWallpaperPalettes_Volcano[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/volcano_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/volcano_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/volcano_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/volcano_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Volcano[] = INCBIN_U32("graphics/pokemon_storage/volcano.4bpp.lz");
 static const u32 gWallpaperTilemap_Volcano[] = INCBIN_U32("graphics/pokemon_storage/volcano.bin.lz");
 
 static const u16 gWallpaperPalettes_Snow[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/snow_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/snow_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/snow_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/snow_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Snow[] = INCBIN_U32("graphics/pokemon_storage/snow.4bpp.lz");
 static const u32 gWallpaperTilemap_Snow[] = INCBIN_U32("graphics/pokemon_storage/snow.bin.lz");
 
 static const u16 gWallpaperPalettes_Cave[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/cave_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/cave_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/cave_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/cave_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Cave[] = INCBIN_U32("graphics/pokemon_storage/cave.4bpp.lz");
 static const u32 gWallpaperTilemap_Cave[] = INCBIN_U32("graphics/pokemon_storage/cave.bin.lz");
 
 static const u16 gWallpaperPalettes_Beach[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/beach_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/beach_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/beach_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/beach_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Beach[] = INCBIN_U32("graphics/pokemon_storage/beach.4bpp.lz");
 static const u32 gWallpaperTilemap_Beach[] = INCBIN_U32("graphics/pokemon_storage/beach.bin.lz");
 
 static const u16 gWallpaperPalettes_Seafloor[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/seafloor_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/seafloor_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/seafloor_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/seafloor_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Seafloor[] = INCBIN_U32("graphics/pokemon_storage/seafloor.4bpp.lz");
 static const u32 gWallpaperTilemap_Seafloor[] = INCBIN_U32("graphics/pokemon_storage/seafloor.bin.lz");
 
 static const u16 gWallpaperPalettes_River[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/river_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/river_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/river_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/river_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_River[] = INCBIN_U32("graphics/pokemon_storage/river.4bpp.lz");
 static const u32 gWallpaperTilemap_River[] = INCBIN_U32("graphics/pokemon_storage/river.bin.lz");
 static const u16 gWallpaperPalettes_Sky[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/sky_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/sky_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/sky_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/sky_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Sky[] = INCBIN_U32("graphics/pokemon_storage/sky.4bpp.lz");
 static const u32 gWallpaperTilemap_Sky[] = INCBIN_U32("graphics/pokemon_storage/sky.bin.lz");
 
 static const u16 gWallpaperPalettes_PolkaDot[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/polkadot_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/polkadot_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/polkadot_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/polkadot_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_PolkaDot[] = INCBIN_U32("graphics/pokemon_storage/polkadot.4bpp.lz");
 static const u32 gWallpaperTilemap_PolkaDot[] = INCBIN_U32("graphics/pokemon_storage/polkadot.bin.lz");
 
 static const u16 gWallpaperPalettes_Pokecenter[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/pokecenter_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/pokecenter_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/pokecenter_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/pokecenter_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Pokecenter[] = INCBIN_U32("graphics/pokemon_storage/pokecenter.4bpp.lz");
 static const u32 gWallpaperTilemap_Pokecenter[] = INCBIN_U32("graphics/pokemon_storage/pokecenter.bin.lz");
 
 static const u16 gWallpaperPalettes_Machine[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/machine_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/machine_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/machine_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/machine_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Machine[] = INCBIN_U32("graphics/pokemon_storage/machine.4bpp.lz");
 static const u32 gWallpaperTilemap_Machine[] = INCBIN_U32("graphics/pokemon_storage/machine.bin.lz");
 
 static const u16 gWallpaperPalettes_Plain[][16] =
 {
-	INCBIN_U16("graphics/pokemon_storage/plain_frame.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/plain_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/plain_frame.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/plain_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.4bpp.lz");
 static const u32 gWallpaperTilemap_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.bin.lz");
@@ -1268,7 +1274,7 @@ static const u8 gPCGfx_Arrow[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp"
 static const u16 gWallpaperPalettes_Zigzagoon[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/zigzagoon_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/zigzagoon_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Zigzagoon[] = INCBIN_U32("graphics/pokemon_storage/zigzagoon.4bpp.lz");
 static const u32 gWallpaperTilemap_Zigzagoon[] = INCBIN_U32("graphics/pokemon_storage/zigzagoon.bin.lz");
@@ -1276,7 +1282,7 @@ static const u32 gWallpaperTilemap_Zigzagoon[] = INCBIN_U32("graphics/pokemon_st
 static const u16 gWallpaperPalettes_Screen[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/screen_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/screen_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Screen[] = INCBIN_U32("graphics/pokemon_storage/screen.4bpp.lz");
 static const u32 gWallpaperTilemap_Screen[] = INCBIN_U32("graphics/pokemon_storage/screen.bin.lz");
@@ -1284,7 +1290,7 @@ static const u32 gWallpaperTilemap_Screen[] = INCBIN_U32("graphics/pokemon_stora
 static const u16 gWallpaperPalettes_Diagonal[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/diagonal_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/diagonal_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Diagonal[] = INCBIN_U32("graphics/pokemon_storage/diagonal.4bpp.lz");
 static const u32 gWallpaperTilemap_Diagonal[] = INCBIN_U32("graphics/pokemon_storage/diagonal.bin.lz");
@@ -1292,7 +1298,7 @@ static const u32 gWallpaperTilemap_Diagonal[] = INCBIN_U32("graphics/pokemon_sto
 static const u16 gWallpaperPalettes_Block[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/block_bg.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/block_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/block_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Block[] = INCBIN_U32("graphics/pokemon_storage/block.4bpp.lz");
 static const u32 gWallpaperTilemap_Block[] = INCBIN_U32("graphics/pokemon_storage/block.bin.lz");
@@ -1300,7 +1306,7 @@ static const u32 gWallpaperTilemap_Block[] = INCBIN_U32("graphics/pokemon_storag
 static const u16 gWallpaperPalettes_Pokecenter2[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/pokecenter2_bg.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/pokecenter2_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/pokecenter2_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Pokecenter2[] = INCBIN_U32("graphics/pokemon_storage/pokecenter2.4bpp.lz");
 static const u32 gWallpaperTilemap_Pokecenter2[] = INCBIN_U32("graphics/pokemon_storage/pokecenter2.bin.lz");
@@ -1308,7 +1314,7 @@ static const u32 gWallpaperTilemap_Pokecenter2[] = INCBIN_U32("graphics/pokemon_
 static const u16 gWallpaperPalettes_Frame[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/frame_bg.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/frame_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/frame_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Frame[] = INCBIN_U32("graphics/pokemon_storage/frame.4bpp.lz");
 static const u32 gWallpaperTilemap_Frame[] = INCBIN_U32("graphics/pokemon_storage/frame.bin.lz");
@@ -1316,7 +1322,7 @@ static const u32 gWallpaperTilemap_Frame[] = INCBIN_U32("graphics/pokemon_storag
 static const u16 gWallpaperPalettes_Blank[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame1.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/zigzagoon_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/zigzagoon_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Blank[] = INCBIN_U32("graphics/pokemon_storage/blank.4bpp.lz");
 static const u32 gWallpaperTilemap_Blank[] = INCBIN_U32("graphics/pokemon_storage/blank.bin.lz");
@@ -1324,7 +1330,7 @@ static const u32 gWallpaperTilemap_Blank[] = INCBIN_U32("graphics/pokemon_storag
 static const u16 gWallpaperPalettes_Circles[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/circles_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/circles_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Circles[] = INCBIN_U32("graphics/pokemon_storage/circles.4bpp.lz");
 static const u32 gWallpaperTilemap_Circles[] = INCBIN_U32("graphics/pokemon_storage/circles.bin.lz");
@@ -1332,7 +1338,7 @@ static const u32 gWallpaperTilemap_Circles[] = INCBIN_U32("graphics/pokemon_stor
 static const u16 gWallpaperPalettes_Azumarill[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/azumarill_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/azumarill_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Azumarill[] = INCBIN_U32("graphics/pokemon_storage/azumarill.4bpp.lz");
 static const u32 gWallpaperTilemap_Azumarill[] = INCBIN_U32("graphics/pokemon_storage/azumarill.bin.lz");
@@ -1340,7 +1346,7 @@ static const u32 gWallpaperTilemap_Azumarill[] = INCBIN_U32("graphics/pokemon_st
 static const u16 gWallpaperPalettes_Pikachu[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/pikachu_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/pikachu_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Pikachu[] = INCBIN_U32("graphics/pokemon_storage/pikachu.4bpp.lz");
 static const u32 gWallpaperTilemap_Pikachu[] = INCBIN_U32("graphics/pokemon_storage/pikachu.bin.lz");
@@ -1348,7 +1354,7 @@ static const u32 gWallpaperTilemap_Pikachu[] = INCBIN_U32("graphics/pokemon_stor
 static const u16 gWallpaperPalettes_Legendary[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/legendary_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/legendary_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Legendary[] = INCBIN_U32("graphics/pokemon_storage/legendary.4bpp.lz");
 static const u32 gWallpaperTilemap_Legendary[] = INCBIN_U32("graphics/pokemon_storage/legendary.bin.lz");
@@ -1356,7 +1362,7 @@ static const u32 gWallpaperTilemap_Legendary[] = INCBIN_U32("graphics/pokemon_st
 static const u16 gWallpaperPalettes_Dusclops[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/dusclops_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/dusclops_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Dusclops[] = INCBIN_U32("graphics/pokemon_storage/dusclops.4bpp.lz");
 static const u32 gWallpaperTilemap_Dusclops[] = INCBIN_U32("graphics/pokemon_storage/dusclops.bin.lz");
@@ -1364,7 +1370,7 @@ static const u32 gWallpaperTilemap_Dusclops[] = INCBIN_U32("graphics/pokemon_sto
 static const u16 gWallpaperPalettes_Ludicolo[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/ludicolo_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/ludicolo_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Ludicolo[] = INCBIN_U32("graphics/pokemon_storage/ludicolo.4bpp.lz");
 static const u32 gWallpaperTilemap_Ludicolo[] = INCBIN_U32("graphics/pokemon_storage/ludicolo.bin.lz");
@@ -1372,7 +1378,7 @@ static const u32 gWallpaperTilemap_Ludicolo[] = INCBIN_U32("graphics/pokemon_sto
 static const u16 gWallpaperPalettes_Whiscash[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/friends_frame2.gbapal"),
-	INCBIN_U16("graphics/pokemon_storage/whiscash_bg.gbapal"),
+    INCBIN_U16("graphics/pokemon_storage/whiscash_bg.gbapal"),
 };
 static const u32 gWallpaperTiles_Whiscash[] = INCBIN_U32("graphics/pokemon_storage/whiscash.4bpp.lz");
 static const u32 gWallpaperTilemap_Whiscash[] = INCBIN_U32("graphics/pokemon_storage/whiscash.bin.lz");
@@ -1527,7 +1533,7 @@ static const union AnimCmd *const gSpriteAnimTable_83BB2E8[] =
 static const struct SpriteTemplate gUnknown_0857B0E0 =
 {
     6,
-    0xDACA,
+    TAG_PAL_WAVEFORM,
     &gOamData_83BB2D0,
     gSpriteAnimTable_83BB2E8,
     NULL,
@@ -2286,12 +2292,12 @@ static void Cb_InitPSS(u8 taskId)
         sub_80C7F4C();
         if (!sPSSData->isReshowingPSS)
         {
-            BlendPalettes(0xFFFFFFFF, 0x10, 0);
+            BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
             SetPSSCallback(Cb_ShowPSS);
         }
         else
         {
-            BlendPalettes(0xFFFFFFFF, 0x10, 0);
+            BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
             SetPSSCallback(Cb_ReshowPSS);
         }
         SetVBlankCallback(VblankCb_PSS);
@@ -3946,7 +3952,7 @@ static void sub_80CA1C4(void)
     LoadSpriteSheet(&sheet);
     for (i = 0; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(&gUnknown_085728BC, i * 63 + 8, 9, 2);
+        u8 spriteId = CreateSprite(&sSpriteTemplate_Waveform, i * 63 + 8, 9, 2);
         sPSSData->field_D98[i] = &gSprites[spriteId];
     }
 }
@@ -5497,7 +5503,7 @@ static void sub_80CCCFC(u8 boxId, s8 direction)
     {
         spriteSheet.tag = TAG_TILE_4;
         r8 = sPSSData->field_71C;
-        template.tileTag = 4;
+        template.tileTag = TAG_TILE_4;
         template.paletteTag = TAG_PAL_DAC9;
     }
 
@@ -7009,302 +7015,302 @@ NAKED
 static u8 InBoxInput_Normal(void)
 {
     asm_unified("\n\
-                	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	ldr r0, =sBoxCursorArea\n\
-	ldrb r0, [r0]\n\
-	mov r8, r0\n\
-	ldr r2, =sBoxCursorPosition\n\
-	ldrb r4, [r2]\n\
-	ldr r5, =sPSSData\n\
-	ldr r0, [r5]\n\
-	ldr r1, =0x00000cd2\n\
-	mov r10, r1\n\
-	add r0, r10\n\
-	movs r1, 0\n\
-	strb r1, [r0]\n\
-	ldr r0, [r5]\n\
-	ldr r7, =0x00000cd3\n\
-	adds r0, r7\n\
-	strb r1, [r0]\n\
-	ldr r0, [r5]\n\
-	ldr r3, =0x00000cd7\n\
-	mov r9, r3\n\
-	add r0, r9\n\
-	strb r1, [r0]\n\
-	ldr r6, =gMain\n\
-	ldrh r1, [r6, 0x30]\n\
-	movs r0, 0x40\n\
-	ands r0, r1\n\
-	adds r3, r2, 0\n\
-	cmp r0, 0\n\
-	beq _080CF14C\n\
-	b _080CF33C\n\
+                    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    ldr r0, =sBoxCursorArea\n\
+    ldrb r0, [r0]\n\
+    mov r8, r0\n\
+    ldr r2, =sBoxCursorPosition\n\
+    ldrb r4, [r2]\n\
+    ldr r5, =sPSSData\n\
+    ldr r0, [r5]\n\
+    ldr r1, =0x00000cd2\n\
+    mov r10, r1\n\
+    add r0, r10\n\
+    movs r1, 0\n\
+    strb r1, [r0]\n\
+    ldr r0, [r5]\n\
+    ldr r7, =0x00000cd3\n\
+    adds r0, r7\n\
+    strb r1, [r0]\n\
+    ldr r0, [r5]\n\
+    ldr r3, =0x00000cd7\n\
+    mov r9, r3\n\
+    add r0, r9\n\
+    strb r1, [r0]\n\
+    ldr r6, =gMain\n\
+    ldrh r1, [r6, 0x30]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    adds r3, r2, 0\n\
+    cmp r0, 0\n\
+    beq _080CF14C\n\
+    b _080CF33C\n\
 _080CF14C:\n\
-	movs r0, 0x80\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF1A8\n\
-	movs r6, 0x1\n\
-	lsls r0, r4, 24\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	adds r0, r1\n\
-	lsrs r4, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0x1D\n\
-	bgt _080CF168\n\
-	b _080CF358\n\
+    movs r0, 0x80\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF1A8\n\
+    movs r6, 0x1\n\
+    lsls r0, r4, 24\n\
+    movs r1, 0xC0\n\
+    lsls r1, 19\n\
+    adds r0, r1\n\
+    lsrs r4, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x1D\n\
+    bgt _080CF168\n\
+    b _080CF358\n\
 _080CF168:\n\
-	movs r2, 0x3\n\
-	mov r8, r2\n\
-	subs r0, 0x1E\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0x3\n\
-	bl __divsi3\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	ldr r0, [r5]\n\
-	add r0, r10\n\
-	strb r6, [r0]\n\
-	ldr r0, [r5]\n\
-	add r0, r9\n\
-	strb r6, [r0]\n\
-	b _080CF358\n\
-	.pool\n\
+    movs r2, 0x3\n\
+    mov r8, r2\n\
+    subs r0, 0x1E\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0x3\n\
+    bl __divsi3\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    ldr r0, [r5]\n\
+    add r0, r10\n\
+    strb r6, [r0]\n\
+    ldr r0, [r5]\n\
+    add r0, r9\n\
+    strb r6, [r0]\n\
+    b _080CF358\n\
+    .pool\n\
 _080CF1A8:\n\
-	movs r0, 0x20\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF1DE\n\
-	movs r6, 0x1\n\
-	movs r0, 0\n\
-	ldrsb r0, [r3, r0]\n\
-	movs r1, 0x6\n\
-	bl __modsi3\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080CF1CA\n\
-	lsls r0, r4, 24\n\
-	movs r3, 0xFF\n\
-	lsls r3, 24\n\
-	b _080CF34C\n\
+    movs r0, 0x20\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF1DE\n\
+    movs r6, 0x1\n\
+    movs r0, 0\n\
+    ldrsb r0, [r3, r0]\n\
+    movs r1, 0x6\n\
+    bl __modsi3\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _080CF1CA\n\
+    lsls r0, r4, 24\n\
+    movs r3, 0xFF\n\
+    lsls r3, 24\n\
+    b _080CF34C\n\
 _080CF1CA:\n\
-	ldr r0, [r5]\n\
-	adds r0, r7\n\
-	movs r1, 0xFF\n\
-	strb r1, [r0]\n\
-	lsls r0, r4, 24\n\
-	movs r1, 0xA0\n\
-	lsls r1, 19\n\
-	adds r0, r1\n\
-	lsrs r4, r0, 24\n\
-	b _080CF358\n\
+    ldr r0, [r5]\n\
+    adds r0, r7\n\
+    movs r1, 0xFF\n\
+    strb r1, [r0]\n\
+    lsls r0, r4, 24\n\
+    movs r1, 0xA0\n\
+    lsls r1, 19\n\
+    adds r0, r1\n\
+    lsrs r4, r0, 24\n\
+    b _080CF358\n\
 _080CF1DE:\n\
-	movs r0, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF212\n\
-	movs r6, 0x1\n\
-	movs r0, 0\n\
-	ldrsb r0, [r3, r0]\n\
-	adds r0, 0x1\n\
-	movs r1, 0x6\n\
-	bl __modsi3\n\
-	cmp r0, 0\n\
-	beq _080CF204\n\
-	lsls r0, r4, 24\n\
-	movs r2, 0x80\n\
-	lsls r2, 17\n\
-	adds r0, r2\n\
-	lsrs r4, r0, 24\n\
-	b _080CF358\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF212\n\
+    movs r6, 0x1\n\
+    movs r0, 0\n\
+    ldrsb r0, [r3, r0]\n\
+    adds r0, 0x1\n\
+    movs r1, 0x6\n\
+    bl __modsi3\n\
+    cmp r0, 0\n\
+    beq _080CF204\n\
+    lsls r0, r4, 24\n\
+    movs r2, 0x80\n\
+    lsls r2, 17\n\
+    adds r0, r2\n\
+    lsrs r4, r0, 24\n\
+    b _080CF358\n\
 _080CF204:\n\
-	ldr r0, [r5]\n\
-	adds r0, r7\n\
-	strb r6, [r0]\n\
-	lsls r0, r4, 24\n\
-	movs r3, 0xFB\n\
-	lsls r3, 24\n\
-	b _080CF34C\n\
+    ldr r0, [r5]\n\
+    adds r0, r7\n\
+    strb r6, [r0]\n\
+    lsls r0, r4, 24\n\
+    movs r3, 0xFB\n\
+    lsls r3, 24\n\
+    b _080CF34C\n\
 _080CF212:\n\
-	ldrh r1, [r6, 0x2E]\n\
-	movs r0, 0x8\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF220\n\
-	movs r6, 0x1\n\
-	b _080CF352\n\
+    ldrh r1, [r6, 0x2E]\n\
+    movs r0, 0x8\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF220\n\
+    movs r6, 0x1\n\
+    b _080CF352\n\
 _080CF220:\n\
-	movs r4, 0x1\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF2E4\n\
-	bl sub_80CFA5C\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080CF2E4\n\
-	ldr r0, =sCanOnlyMove\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080CF244\n\
-	movs r0, 0x8\n\
-	b _080CF366\n\
-	.pool\n\
+    movs r4, 0x1\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF2E4\n\
+    bl sub_80CFA5C\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _080CF2E4\n\
+    ldr r0, =sCanOnlyMove\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080CF244\n\
+    movs r0, 0x8\n\
+    b _080CF366\n\
+    .pool\n\
 _080CF244:\n\
-	ldr r1, [r5]\n\
-	ldrb r0, [r1, 0x1]\n\
-	cmp r0, 0x2\n\
-	bne _080CF254\n\
-	ldr r0, =sIsMonBeingMoved\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x1\n\
-	bne _080CF2D4\n\
+    ldr r1, [r5]\n\
+    ldrb r0, [r1, 0x1]\n\
+    cmp r0, 0x2\n\
+    bne _080CF254\n\
+    ldr r0, =sIsMonBeingMoved\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x1\n\
+    bne _080CF2D4\n\
 _080CF254:\n\
-	movs r0, 0\n\
-	bl sub_80CFF98\n\
-	subs r0, 0x1\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0xE\n\
-	bhi _080CF2E4\n\
-	lsls r0, 2\n\
-	ldr r1, =_080CF278\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
+    movs r0, 0\n\
+    bl sub_80CFF98\n\
+    subs r0, 0x1\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0xE\n\
+    bhi _080CF2E4\n\
+    lsls r0, 2\n\
+    ldr r1, =_080CF278\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .pool\n\
+    .align 2, 0\n\
 _080CF278:\n\
-	.4byte _080CF2B4\n\
-	.4byte _080CF2B8\n\
-	.4byte _080CF2BC\n\
-	.4byte _080CF2C0\n\
-	.4byte _080CF2C4\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2C8\n\
-	.4byte _080CF2CC\n\
-	.4byte _080CF2E4\n\
-	.4byte _080CF2D0\n\
+    .4byte _080CF2B4\n\
+    .4byte _080CF2B8\n\
+    .4byte _080CF2BC\n\
+    .4byte _080CF2C0\n\
+    .4byte _080CF2C4\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2C8\n\
+    .4byte _080CF2CC\n\
+    .4byte _080CF2E4\n\
+    .4byte _080CF2D0\n\
 _080CF2B4:\n\
-	movs r0, 0xB\n\
-	b _080CF366\n\
+    movs r0, 0xB\n\
+    b _080CF366\n\
 _080CF2B8:\n\
-	movs r0, 0xC\n\
-	b _080CF366\n\
+    movs r0, 0xC\n\
+    b _080CF366\n\
 _080CF2BC:\n\
-	movs r0, 0xD\n\
-	b _080CF366\n\
+    movs r0, 0xD\n\
+    b _080CF366\n\
 _080CF2C0:\n\
-	movs r0, 0xE\n\
-	b _080CF366\n\
+    movs r0, 0xE\n\
+    b _080CF366\n\
 _080CF2C4:\n\
-	movs r0, 0xF\n\
-	b _080CF366\n\
+    movs r0, 0xF\n\
+    b _080CF366\n\
 _080CF2C8:\n\
-	movs r0, 0x10\n\
-	b _080CF366\n\
+    movs r0, 0x10\n\
+    b _080CF366\n\
 _080CF2CC:\n\
-	movs r0, 0x11\n\
-	b _080CF366\n\
+    movs r0, 0x11\n\
+    b _080CF366\n\
 _080CF2D0:\n\
-	movs r0, 0x12\n\
-	b _080CF366\n\
+    movs r0, 0x12\n\
+    b _080CF366\n\
 _080CF2D4:\n\
-	ldr r2, =0x000021ff\n\
-	adds r0, r1, r2\n\
-	strb r4, [r0]\n\
-	movs r0, 0x14\n\
-	b _080CF366\n\
-	.pool\n\
+    ldr r2, =0x000021ff\n\
+    adds r0, r1, r2\n\
+    strb r4, [r0]\n\
+    movs r0, 0x14\n\
+    b _080CF366\n\
+    .pool\n\
 _080CF2E4:\n\
-	ldr r2, =gMain\n\
-	ldrh r1, [r2, 0x2E]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF2F8\n\
-	movs r0, 0x13\n\
-	b _080CF366\n\
-	.pool\n\
+    ldr r2, =gMain\n\
+    ldrh r1, [r2, 0x2E]\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF2F8\n\
+    movs r0, 0x13\n\
+    b _080CF366\n\
+    .pool\n\
 _080CF2F8:\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x13]\n\
-	cmp r0, 0x1\n\
-	bne _080CF326\n\
-	ldrh r1, [r2, 0x2C]\n\
-	movs r0, 0x80\n\
-	lsls r0, 2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF318\n\
-	movs r0, 0xA\n\
-	b _080CF366\n\
-	.pool\n\
+    ldr r0, =gSaveBlock2Ptr\n\
+    ldr r0, [r0]\n\
+    ldrb r0, [r0, 0x13]\n\
+    cmp r0, 0x1\n\
+    bne _080CF326\n\
+    ldrh r1, [r2, 0x2C]\n\
+    movs r0, 0x80\n\
+    lsls r0, 2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF318\n\
+    movs r0, 0xA\n\
+    b _080CF366\n\
+    .pool\n\
 _080CF318:\n\
-	movs r0, 0x80\n\
-	lsls r0, 1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF326\n\
-	movs r0, 0x9\n\
-	b _080CF366\n\
+    movs r0, 0x80\n\
+    lsls r0, 1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF326\n\
+    movs r0, 0x9\n\
+    b _080CF366\n\
 _080CF326:\n\
-	ldrh r1, [r2, 0x2E]\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF338\n\
-	bl sub_80CFDC4\n\
-	movs r0, 0\n\
-	b _080CF366\n\
+    ldrh r1, [r2, 0x2E]\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF338\n\
+    bl sub_80CFDC4\n\
+    movs r0, 0\n\
+    b _080CF366\n\
 _080CF338:\n\
-	movs r6, 0\n\
-	b _080CF364\n\
+    movs r6, 0\n\
+    b _080CF364\n\
 _080CF33C:\n\
-	movs r6, 0x1\n\
-	movs r0, 0\n\
-	ldrsb r0, [r2, r0]\n\
-	cmp r0, 0x5\n\
-	ble _080CF352\n\
-	lsls r0, r4, 24\n\
-	movs r3, 0xFA\n\
-	lsls r3, 24\n\
+    movs r6, 0x1\n\
+    movs r0, 0\n\
+    ldrsb r0, [r2, r0]\n\
+    cmp r0, 0x5\n\
+    ble _080CF352\n\
+    lsls r0, r4, 24\n\
+    movs r3, 0xFA\n\
+    lsls r3, 24\n\
 _080CF34C:\n\
-	adds r0, r3\n\
-	lsrs r4, r0, 24\n\
-	b _080CF358\n\
+    adds r0, r3\n\
+    lsrs r4, r0, 24\n\
+    b _080CF358\n\
 _080CF352:\n\
-	movs r0, 0x2\n\
-	mov r8, r0\n\
-	movs r4, 0\n\
+    movs r0, 0x2\n\
+    mov r8, r0\n\
+    movs r4, 0\n\
 _080CF358:\n\
-	cmp r6, 0\n\
-	beq _080CF364\n\
-	mov r0, r8\n\
-	adds r1, r4, 0\n\
-	bl sub_80CD894\n\
+    cmp r6, 0\n\
+    beq _080CF364\n\
+    mov r0, r8\n\
+    adds r1, r4, 0\n\
+    bl sub_80CD894\n\
 _080CF364:\n\
-	adds r0, r6, 0\n\
+    adds r0, r6, 0\n\
 _080CF366:\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
                 ");
 }
 #endif
@@ -7574,282 +7580,282 @@ static u8 HandleInput_InParty(void)
         if (cursorPosition != sBoxCursorPosition)
             retVal = 1;
     }
-	if (retVal != 0)
+    if (retVal != 0)
     {
         if (retVal != 6)
             sub_80CD894(cursorArea, cursorPosition);
     }
 
-	return retVal;
+    return retVal;
 }
 #else
 NAKED
 static u8 HandleInput_InParty(void)
 {
     asm_unified("\n\
-                	push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	ldr r0, =sBoxCursorArea\n\
-	ldrb r0, [r0]\n\
-	mov r9, r0\n\
-	ldr r6, =sBoxCursorPosition\n\
-	ldrb r4, [r6]\n\
-	ldr r2, =sPSSData\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0x00000cd3\n\
-	adds r0, r1\n\
-	movs r1, 0\n\
-	strb r1, [r0]\n\
-	ldr r0, [r2]\n\
-	ldr r3, =0x00000cd2\n\
-	adds r0, r3\n\
-	strb r1, [r0]\n\
-	ldr r0, [r2]\n\
-	adds r3, 0x5\n\
-	adds r0, r3\n\
-	strb r1, [r0]\n\
-	mov r8, r1\n\
-	movs r7, 0\n\
-	ldr r1, =gMain\n\
-	ldrh r3, [r1, 0x30]\n\
-	movs r0, 0x40\n\
-	ands r0, r3\n\
-	adds r5, r6, 0\n\
-	mov r12, r1\n\
-	cmp r0, 0\n\
-	beq _080CF608\n\
-	b _080CF7A8\n\
+                    push {r4-r7,lr}\n\
+    mov r7, r9\n\
+    mov r6, r8\n\
+    push {r6,r7}\n\
+    ldr r0, =sBoxCursorArea\n\
+    ldrb r0, [r0]\n\
+    mov r9, r0\n\
+    ldr r6, =sBoxCursorPosition\n\
+    ldrb r4, [r6]\n\
+    ldr r2, =sPSSData\n\
+    ldr r0, [r2]\n\
+    ldr r1, =0x00000cd3\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strb r1, [r0]\n\
+    ldr r0, [r2]\n\
+    ldr r3, =0x00000cd2\n\
+    adds r0, r3\n\
+    strb r1, [r0]\n\
+    ldr r0, [r2]\n\
+    adds r3, 0x5\n\
+    adds r0, r3\n\
+    strb r1, [r0]\n\
+    mov r8, r1\n\
+    movs r7, 0\n\
+    ldr r1, =gMain\n\
+    ldrh r3, [r1, 0x30]\n\
+    movs r0, 0x40\n\
+    ands r0, r3\n\
+    adds r5, r6, 0\n\
+    mov r12, r1\n\
+    cmp r0, 0\n\
+    beq _080CF608\n\
+    b _080CF7A8\n\
 _080CF608:\n\
-	movs r0, 0x80\n\
-	ands r0, r3\n\
-	cmp r0, 0\n\
-	beq _080CF64C\n\
-	lsls r0, r4, 24\n\
-	movs r1, 0x80\n\
-	lsls r1, 17\n\
-	adds r0, r1\n\
-	lsrs r4, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0x6\n\
-	ble _080CF622\n\
-	movs r4, 0\n\
+    movs r0, 0x80\n\
+    ands r0, r3\n\
+    cmp r0, 0\n\
+    beq _080CF64C\n\
+    lsls r0, r4, 24\n\
+    movs r1, 0x80\n\
+    lsls r1, 17\n\
+    adds r0, r1\n\
+    lsrs r4, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x6\n\
+    ble _080CF622\n\
+    movs r4, 0\n\
 _080CF622:\n\
-	lsls r0, r4, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0\n\
-	ldrsb r1, [r5, r1]\n\
-	cmp r0, r1\n\
-	bne _080CF630\n\
-	b _080CF7C6\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0\n\
+    ldrsb r1, [r5, r1]\n\
+    cmp r0, r1\n\
+    bne _080CF630\n\
+    b _080CF7C6\n\
 _080CF630:\n\
-	movs r7, 0x1\n\
-	b _080CF7CA\n\
-	.pool\n\
+    movs r7, 0x1\n\
+    b _080CF7CA\n\
+    .pool\n\
 _080CF64C:\n\
-	movs r0, 0x20\n\
-	ands r0, r3\n\
-	cmp r0, 0\n\
-	beq _080CF670\n\
-	ldrb r1, [r5]\n\
-	movs r0, 0\n\
-	ldrsb r0, [r5, r0]\n\
-	cmp r0, 0\n\
-	beq _080CF670\n\
-	movs r7, 0x1\n\
-	ldr r0, [r2]\n\
-	ldr r2, =0x00000cd6\n\
-	adds r0, r2\n\
-	strb r1, [r0]\n\
-	movs r4, 0\n\
-	b _080CF7C6\n\
-	.pool\n\
+    movs r0, 0x20\n\
+    ands r0, r3\n\
+    cmp r0, 0\n\
+    beq _080CF670\n\
+    ldrb r1, [r5]\n\
+    movs r0, 0\n\
+    ldrsb r0, [r5, r0]\n\
+    cmp r0, 0\n\
+    beq _080CF670\n\
+    movs r7, 0x1\n\
+    ldr r0, [r2]\n\
+    ldr r2, =0x00000cd6\n\
+    adds r0, r2\n\
+    strb r1, [r0]\n\
+    movs r4, 0\n\
+    b _080CF7C6\n\
+    .pool\n\
 _080CF670:\n\
-	mov r3, r12\n\
-	ldrh r1, [r3, 0x30]\n\
-	movs r0, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF69E\n\
-	movs r0, 0\n\
-	ldrsb r0, [r5, r0]\n\
-	cmp r0, 0\n\
-	bne _080CF694\n\
-	movs r7, 0x1\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0x00000cd6\n\
-	adds r0, r1\n\
-	ldrb r4, [r0]\n\
-	b _080CF7C6\n\
-	.pool\n\
+    mov r3, r12\n\
+    ldrh r1, [r3, 0x30]\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF69E\n\
+    movs r0, 0\n\
+    ldrsb r0, [r5, r0]\n\
+    cmp r0, 0\n\
+    bne _080CF694\n\
+    movs r7, 0x1\n\
+    ldr r0, [r2]\n\
+    ldr r1, =0x00000cd6\n\
+    adds r0, r1\n\
+    ldrb r4, [r0]\n\
+    b _080CF7C6\n\
+    .pool\n\
 _080CF694:\n\
-	movs r7, 0x6\n\
-	movs r2, 0\n\
-	mov r9, r2\n\
-	movs r4, 0\n\
-	b _080CF7C6\n\
+    movs r7, 0x6\n\
+    movs r2, 0\n\
+    mov r9, r2\n\
+    movs r4, 0\n\
+    b _080CF7C6\n\
 _080CF69E:\n\
-	mov r3, r12\n\
-	ldrh r1, [r3, 0x2E]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF75C\n\
-	movs r0, 0\n\
-	ldrsb r0, [r5, r0]\n\
-	cmp r0, 0x6\n\
-	bne _080CF6C4\n\
-	ldr r0, [r2]\n\
-	ldrb r0, [r0, 0x1]\n\
-	cmp r0, 0x1\n\
-	bne _080CF6BE\n\
-	movs r0, 0x4\n\
-	b _080CF7D8\n\
+    mov r3, r12\n\
+    ldrh r1, [r3, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF75C\n\
+    movs r0, 0\n\
+    ldrsb r0, [r5, r0]\n\
+    cmp r0, 0x6\n\
+    bne _080CF6C4\n\
+    ldr r0, [r2]\n\
+    ldrb r0, [r0, 0x1]\n\
+    cmp r0, 0x1\n\
+    bne _080CF6BE\n\
+    movs r0, 0x4\n\
+    b _080CF7D8\n\
 _080CF6BE:\n\
-	movs r0, 0x1\n\
-	mov r8, r0\n\
-	b _080CF75C\n\
+    movs r0, 0x1\n\
+    mov r8, r0\n\
+    b _080CF75C\n\
 _080CF6C4:\n\
-	bl sub_80CFA5C\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _080CF75C\n\
-	ldr r0, =sCanOnlyMove\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080CF6E0\n\
-	movs r0, 0x8\n\
-	b _080CF7D8\n\
-	.pool\n\
+    bl sub_80CFA5C\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _080CF75C\n\
+    ldr r0, =sCanOnlyMove\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _080CF6E0\n\
+    movs r0, 0x8\n\
+    b _080CF7D8\n\
+    .pool\n\
 _080CF6E0:\n\
-	movs r0, 0\n\
-	bl sub_80CFF98\n\
-	subs r0, 0x1\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0xE\n\
-	bhi _080CF75C\n\
-	lsls r0, 2\n\
-	ldr r1, =_080CF700\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
+    movs r0, 0\n\
+    bl sub_80CFF98\n\
+    subs r0, 0x1\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0xE\n\
+    bhi _080CF75C\n\
+    lsls r0, 2\n\
+    ldr r1, =_080CF700\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .pool\n\
+    .align 2, 0\n\
 _080CF700:\n\
-	.4byte _080CF73C\n\
-	.4byte _080CF740\n\
-	.4byte _080CF744\n\
-	.4byte _080CF748\n\
-	.4byte _080CF74C\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF750\n\
-	.4byte _080CF754\n\
-	.4byte _080CF75C\n\
-	.4byte _080CF758\n\
+    .4byte _080CF73C\n\
+    .4byte _080CF740\n\
+    .4byte _080CF744\n\
+    .4byte _080CF748\n\
+    .4byte _080CF74C\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF750\n\
+    .4byte _080CF754\n\
+    .4byte _080CF75C\n\
+    .4byte _080CF758\n\
 _080CF73C:\n\
-	movs r0, 0xB\n\
-	b _080CF7D8\n\
+    movs r0, 0xB\n\
+    b _080CF7D8\n\
 _080CF740:\n\
-	movs r0, 0xC\n\
-	b _080CF7D8\n\
+    movs r0, 0xC\n\
+    b _080CF7D8\n\
 _080CF744:\n\
-	movs r0, 0xD\n\
-	b _080CF7D8\n\
+    movs r0, 0xD\n\
+    b _080CF7D8\n\
 _080CF748:\n\
-	movs r0, 0xE\n\
-	b _080CF7D8\n\
+    movs r0, 0xE\n\
+    b _080CF7D8\n\
 _080CF74C:\n\
-	movs r0, 0xF\n\
-	b _080CF7D8\n\
+    movs r0, 0xF\n\
+    b _080CF7D8\n\
 _080CF750:\n\
-	movs r0, 0x10\n\
-	b _080CF7D8\n\
+    movs r0, 0x10\n\
+    b _080CF7D8\n\
 _080CF754:\n\
-	movs r0, 0x11\n\
-	b _080CF7D8\n\
+    movs r0, 0x11\n\
+    b _080CF7D8\n\
 _080CF758:\n\
-	movs r0, 0x12\n\
-	b _080CF7D8\n\
+    movs r0, 0x12\n\
+    b _080CF7D8\n\
 _080CF75C:\n\
-	ldr r2, =gMain\n\
-	ldrh r1, [r2, 0x2E]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	mov r12, r2\n\
-	cmp r0, 0\n\
-	beq _080CF784\n\
-	ldr r0, =sPSSData\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x1]\n\
-	cmp r0, 0x1\n\
-	bne _080CF780\n\
-	movs r0, 0x13\n\
-	b _080CF7D8\n\
-	.pool\n\
+    ldr r2, =gMain\n\
+    ldrh r1, [r2, 0x2E]\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    mov r12, r2\n\
+    cmp r0, 0\n\
+    beq _080CF784\n\
+    ldr r0, =sPSSData\n\
+    ldr r0, [r0]\n\
+    ldrb r0, [r0, 0x1]\n\
+    cmp r0, 0x1\n\
+    bne _080CF780\n\
+    movs r0, 0x13\n\
+    b _080CF7D8\n\
+    .pool\n\
 _080CF780:\n\
-	movs r1, 0x1\n\
-	mov r8, r1\n\
+    movs r1, 0x1\n\
+    mov r8, r1\n\
 _080CF784:\n\
-	mov r2, r8\n\
-	cmp r2, 0\n\
-	beq _080CF794\n\
-	movs r7, 0x6\n\
-	movs r3, 0\n\
-	mov r9, r3\n\
-	movs r4, 0\n\
-	b _080CF7C6\n\
+    mov r2, r8\n\
+    cmp r2, 0\n\
+    beq _080CF794\n\
+    movs r7, 0x6\n\
+    movs r3, 0\n\
+    mov r9, r3\n\
+    movs r4, 0\n\
+    b _080CF7C6\n\
 _080CF794:\n\
-	mov r0, r12\n\
-	ldrh r1, [r0, 0x2E]\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF7C6\n\
-	bl sub_80CFDC4\n\
-	movs r0, 0\n\
-	b _080CF7D8\n\
+    mov r0, r12\n\
+    ldrh r1, [r0, 0x2E]\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF7C6\n\
+    bl sub_80CFDC4\n\
+    movs r0, 0\n\
+    b _080CF7D8\n\
 _080CF7A8:\n\
-	lsls r0, r4, 24\n\
-	movs r1, 0xFF\n\
-	lsls r1, 24\n\
-	adds r0, r1\n\
-	lsrs r4, r0, 24\n\
-	cmp r0, 0\n\
-	bge _080CF7B8\n\
-	movs r4, 0x6\n\
+    lsls r0, r4, 24\n\
+    movs r1, 0xFF\n\
+    lsls r1, 24\n\
+    adds r0, r1\n\
+    lsrs r4, r0, 24\n\
+    cmp r0, 0\n\
+    bge _080CF7B8\n\
+    movs r4, 0x6\n\
 _080CF7B8:\n\
-	lsls r0, r4, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0\n\
-	ldrsb r1, [r6, r1]\n\
-	cmp r0, r1\n\
-	beq _080CF7C6\n\
-	movs r7, 0x1\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0\n\
+    ldrsb r1, [r6, r1]\n\
+    cmp r0, r1\n\
+    beq _080CF7C6\n\
+    movs r7, 0x1\n\
 _080CF7C6:\n\
-	cmp r7, 0\n\
-	beq _080CF7D6\n\
+    cmp r7, 0\n\
+    beq _080CF7D6\n\
 _080CF7CA:\n\
-	cmp r7, 0x6\n\
-	beq _080CF7D6\n\
-	mov r0, r9\n\
-	adds r1, r4, 0\n\
-	bl sub_80CD894\n\
+    cmp r7, 0x6\n\
+    beq _080CF7D6\n\
+    mov r0, r9\n\
+    adds r1, r4, 0\n\
+    bl sub_80CD894\n\
 _080CF7D6:\n\
-	adds r0, r7, 0\n\
+    adds r0, r7, 0\n\
 _080CF7D8:\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1");
+    pop {r3,r4}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1");
 }
 #endif
 
@@ -7929,124 +7935,124 @@ NAKED
 static u8 HandleInput_OnBox(void)
 {
     asm_unified("\n\
-                	push {r4-r6,lr}\n\
-	ldr r3, =sPSSData\n\
-	ldr r0, [r3]\n\
-	ldr r1, =0x00000cd3\n\
-	adds r0, r1\n\
-	movs r1, 0\n\
-	strb r1, [r0]\n\
-	ldr r0, [r3]\n\
-	ldr r2, =0x00000cd2\n\
-	adds r0, r2\n\
-	strb r1, [r0]\n\
-	ldr r0, [r3]\n\
-	ldr r5, =0x00000cd7\n\
-	adds r0, r5\n\
-	strb r1, [r0]\n\
-	ldr r1, =gMain\n\
-	ldrh r2, [r1, 0x30]\n\
-	movs r0, 0x40\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	bne _080CF8AA\n\
-	movs r0, 0x80\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _080CF834\n\
-	movs r4, 0x1\n\
-	movs r1, 0\n\
-	movs r6, 0x2\n\
-	b _080CF8B6\n\
-	.pool\n\
+                    push {r4-r6,lr}\n\
+    ldr r3, =sPSSData\n\
+    ldr r0, [r3]\n\
+    ldr r1, =0x00000cd3\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strb r1, [r0]\n\
+    ldr r0, [r3]\n\
+    ldr r2, =0x00000cd2\n\
+    adds r0, r2\n\
+    strb r1, [r0]\n\
+    ldr r0, [r3]\n\
+    ldr r5, =0x00000cd7\n\
+    adds r0, r5\n\
+    strb r1, [r0]\n\
+    ldr r1, =gMain\n\
+    ldrh r2, [r1, 0x30]\n\
+    movs r0, 0x40\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    bne _080CF8AA\n\
+    movs r0, 0x80\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _080CF834\n\
+    movs r4, 0x1\n\
+    movs r1, 0\n\
+    movs r6, 0x2\n\
+    b _080CF8B6\n\
+    .pool\n\
 _080CF834:\n\
-	ldrh r2, [r1, 0x2C]\n\
-	movs r0, 0x20\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	bne _080CF85A\n\
-	movs r0, 0x10\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	bne _080CF86E\n\
-	ldr r0, =gSaveBlock2Ptr\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x13]\n\
-	cmp r0, 0x1\n\
-	bne _080CF872\n\
-	movs r0, 0x80\n\
-	lsls r0, 2\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _080CF864\n\
+    ldrh r2, [r1, 0x2C]\n\
+    movs r0, 0x20\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    bne _080CF85A\n\
+    movs r0, 0x10\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    bne _080CF86E\n\
+    ldr r0, =gSaveBlock2Ptr\n\
+    ldr r0, [r0]\n\
+    ldrb r0, [r0, 0x13]\n\
+    cmp r0, 0x1\n\
+    bne _080CF872\n\
+    movs r0, 0x80\n\
+    lsls r0, 2\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _080CF864\n\
 _080CF85A:\n\
-	movs r0, 0xA\n\
-	b _080CF8D2\n\
-	.pool\n\
+    movs r0, 0xA\n\
+    b _080CF8D2\n\
+    .pool\n\
 _080CF864:\n\
-	movs r0, 0x80\n\
-	lsls r0, 1\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _080CF872\n\
+    movs r0, 0x80\n\
+    lsls r0, 1\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _080CF872\n\
 _080CF86E:\n\
-	movs r0, 0x9\n\
-	b _080CF8D2\n\
+    movs r0, 0x9\n\
+    b _080CF8D2\n\
 _080CF872:\n\
-	ldrh r1, [r1, 0x2E]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF88A\n\
-	movs r0, 0\n\
-	bl sub_80CD1A8\n\
-	bl AddBoxMenu\n\
-	movs r0, 0x7\n\
-	b _080CF8D2\n\
+    ldrh r1, [r1, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF88A\n\
+    movs r0, 0\n\
+    bl sub_80CD1A8\n\
+    bl AddBoxMenu\n\
+    movs r0, 0x7\n\
+    b _080CF8D2\n\
 _080CF88A:\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF896\n\
-	movs r0, 0x13\n\
-	b _080CF8D2\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF896\n\
+    movs r0, 0x13\n\
+    b _080CF8D2\n\
 _080CF896:\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF8A6\n\
-	bl sub_80CFDC4\n\
-	movs r0, 0\n\
-	b _080CF8D2\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF8A6\n\
+    bl sub_80CFDC4\n\
+    movs r0, 0\n\
+    b _080CF8D2\n\
 _080CF8A6:\n\
-	movs r4, 0\n\
-	b _080CF8D0\n\
+    movs r4, 0\n\
+    b _080CF8D0\n\
 _080CF8AA:\n\
-	movs r4, 0x1\n\
-	movs r1, 0x3\n\
-	movs r6, 0\n\
-	ldr r0, [r3]\n\
-	adds r0, r5\n\
-	strb r4, [r0]\n\
+    movs r4, 0x1\n\
+    movs r1, 0x3\n\
+    movs r6, 0\n\
+    ldr r0, [r3]\n\
+    adds r0, r5\n\
+    strb r4, [r0]\n\
 _080CF8B6:\n\
-	cmp r4, 0\n\
-	beq _080CF8D0\n\
-	lsls r5, r1, 24\n\
-	cmp r1, 0x2\n\
-	beq _080CF8C6\n\
-	movs r0, 0\n\
-	bl sub_80CD1A8\n\
+    cmp r4, 0\n\
+    beq _080CF8D0\n\
+    lsls r5, r1, 24\n\
+    cmp r1, 0x2\n\
+    beq _080CF8C6\n\
+    movs r0, 0\n\
+    bl sub_80CD1A8\n\
 _080CF8C6:\n\
-	lsrs r0, r5, 24\n\
-	lsls r1, r6, 24\n\
-	lsrs r1, 24\n\
-	bl sub_80CD894\n\
+    lsrs r0, r5, 24\n\
+    lsls r1, r6, 24\n\
+    lsrs r1, 24\n\
+    bl sub_80CD894\n\
 _080CF8D0:\n\
-	adds r0, r4, 0\n\
+    adds r0, r4, 0\n\
 _080CF8D2:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
                 ");
 }
 #endif
@@ -8126,141 +8132,141 @@ NAKED
 static u8 HandleInput_OnButtons(void)
 {
     asm_unified("\n\
-                	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldr r0, =sBoxCursorArea\n\
-	ldrb r0, [r0]\n\
-	mov r8, r0\n\
-	ldr r0, =sBoxCursorPosition\n\
-	mov r12, r0\n\
-	ldrb r2, [r0]\n\
-	ldr r3, =sPSSData\n\
-	ldr r0, [r3]\n\
-	ldr r1, =0x00000cd3\n\
-	adds r0, r1\n\
-	movs r1, 0\n\
-	strb r1, [r0]\n\
-	ldr r0, [r3]\n\
-	ldr r6, =0x00000cd2\n\
-	adds r0, r6\n\
-	strb r1, [r0]\n\
-	ldr r0, [r3]\n\
-	ldr r5, =0x00000cd7\n\
-	adds r0, r5\n\
-	strb r1, [r0]\n\
-	ldr r7, =gMain\n\
-	ldrh r1, [r7, 0x30]\n\
-	movs r0, 0x40\n\
-	ands r0, r1\n\
-	adds r4, r3, 0\n\
-	cmp r0, 0\n\
-	bne _080CF9B2\n\
-	movs r0, 0x88\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF944\n\
-	movs r7, 0x1\n\
-	movs r0, 0x2\n\
-	mov r8, r0\n\
-	movs r2, 0\n\
-	ldr r0, [r4]\n\
-	b _080CF9D0\n\
-	.pool\n\
+                    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    ldr r0, =sBoxCursorArea\n\
+    ldrb r0, [r0]\n\
+    mov r8, r0\n\
+    ldr r0, =sBoxCursorPosition\n\
+    mov r12, r0\n\
+    ldrb r2, [r0]\n\
+    ldr r3, =sPSSData\n\
+    ldr r0, [r3]\n\
+    ldr r1, =0x00000cd3\n\
+    adds r0, r1\n\
+    movs r1, 0\n\
+    strb r1, [r0]\n\
+    ldr r0, [r3]\n\
+    ldr r6, =0x00000cd2\n\
+    adds r0, r6\n\
+    strb r1, [r0]\n\
+    ldr r0, [r3]\n\
+    ldr r5, =0x00000cd7\n\
+    adds r0, r5\n\
+    strb r1, [r0]\n\
+    ldr r7, =gMain\n\
+    ldrh r1, [r7, 0x30]\n\
+    movs r0, 0x40\n\
+    ands r0, r1\n\
+    adds r4, r3, 0\n\
+    cmp r0, 0\n\
+    bne _080CF9B2\n\
+    movs r0, 0x88\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF944\n\
+    movs r7, 0x1\n\
+    movs r0, 0x2\n\
+    mov r8, r0\n\
+    movs r2, 0\n\
+    ldr r0, [r4]\n\
+    b _080CF9D0\n\
+    .pool\n\
 _080CF944:\n\
-	movs r0, 0x20\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF960\n\
-	movs r7, 0x1\n\
-	lsls r0, r2, 24\n\
-	movs r1, 0xFF\n\
-	lsls r1, 24\n\
-	adds r0, r1\n\
-	lsrs r2, r0, 24\n\
-	cmp r0, 0\n\
-	bge _080CF9D4\n\
-	movs r2, 0x1\n\
-	b _080CF9D4\n\
+    movs r0, 0x20\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF960\n\
+    movs r7, 0x1\n\
+    lsls r0, r2, 24\n\
+    movs r1, 0xFF\n\
+    lsls r1, 24\n\
+    adds r0, r1\n\
+    lsrs r2, r0, 24\n\
+    cmp r0, 0\n\
+    bge _080CF9D4\n\
+    movs r2, 0x1\n\
+    b _080CF9D4\n\
 _080CF960:\n\
-	movs r0, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF97E\n\
-	movs r7, 0x1\n\
-	lsls r0, r2, 24\n\
-	movs r1, 0x80\n\
-	lsls r1, 17\n\
-	adds r0, r1\n\
-	lsrs r2, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, 0x1\n\
-	ble _080CF9D4\n\
-	movs r2, 0\n\
-	b _080CF9D4\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF97E\n\
+    movs r7, 0x1\n\
+    lsls r0, r2, 24\n\
+    movs r1, 0x80\n\
+    lsls r1, 17\n\
+    adds r0, r1\n\
+    lsrs r2, r0, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x1\n\
+    ble _080CF9D4\n\
+    movs r2, 0\n\
+    b _080CF9D4\n\
 _080CF97E:\n\
-	ldrh r1, [r7, 0x2E]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF992\n\
-	movs r0, 0x4\n\
-	cmp r2, 0\n\
-	bne _080CF9E2\n\
-	movs r0, 0x5\n\
-	b _080CF9E2\n\
+    ldrh r1, [r7, 0x2E]\n\
+    movs r0, 0x1\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF992\n\
+    movs r0, 0x4\n\
+    cmp r2, 0\n\
+    bne _080CF9E2\n\
+    movs r0, 0x5\n\
+    b _080CF9E2\n\
 _080CF992:\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF99E\n\
-	movs r0, 0x13\n\
-	b _080CF9E2\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF99E\n\
+    movs r0, 0x13\n\
+    b _080CF9E2\n\
 _080CF99E:\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080CF9AE\n\
-	bl sub_80CFDC4\n\
-	movs r0, 0\n\
-	b _080CF9E2\n\
+    movs r0, 0x4\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080CF9AE\n\
+    bl sub_80CFDC4\n\
+    movs r0, 0\n\
+    b _080CF9E2\n\
 _080CF9AE:\n\
-	movs r7, 0\n\
-	b _080CF9E0\n\
+    movs r7, 0\n\
+    b _080CF9E0\n\
 _080CF9B2:\n\
-	movs r7, 0x1\n\
-	movs r0, 0\n\
-	mov r8, r0\n\
-	ldr r0, [r3]\n\
-	adds r0, r6\n\
-	movs r1, 0xFF\n\
-	strb r1, [r0]\n\
-	mov r1, r12\n\
-	movs r0, 0\n\
-	ldrsb r0, [r1, r0]\n\
-	movs r2, 0x1D\n\
-	cmp r0, 0\n\
-	bne _080CF9CE\n\
-	movs r2, 0x18\n\
+    movs r7, 0x1\n\
+    movs r0, 0\n\
+    mov r8, r0\n\
+    ldr r0, [r3]\n\
+    adds r0, r6\n\
+    movs r1, 0xFF\n\
+    strb r1, [r0]\n\
+    mov r1, r12\n\
+    movs r0, 0\n\
+    ldrsb r0, [r1, r0]\n\
+    movs r2, 0x1D\n\
+    cmp r0, 0\n\
+    bne _080CF9CE\n\
+    movs r2, 0x18\n\
 _080CF9CE:\n\
-	ldr r0, [r3]\n\
+    ldr r0, [r3]\n\
 _080CF9D0:\n\
-	adds r0, r5\n\
-	strb r7, [r0]\n\
+    adds r0, r5\n\
+    strb r7, [r0]\n\
 _080CF9D4:\n\
-	cmp r7, 0\n\
-	beq _080CF9E0\n\
-	mov r0, r8\n\
-	adds r1, r2, 0\n\
-	bl sub_80CD894\n\
+    cmp r7, 0\n\
+    beq _080CF9E0\n\
+    mov r0, r8\n\
+    adds r1, r2, 0\n\
+    bl sub_80CD894\n\
 _080CF9E0:\n\
-	adds r0, r7, 0\n\
+    adds r0, r7, 0\n\
 _080CF9E2:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1");
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1");
 }
 #endif
 
@@ -8429,7 +8435,7 @@ static void sub_80CFC14(void)
 
     struct SpritePalette spritePalettes[] =
     {
-        {gHandCursorPalette, 0xDAC7},
+        {gHandCursorPalette, TAG_PAL_DAC7},
         {}
     };
 
@@ -8476,8 +8482,8 @@ static const union AnimCmd *const sSpriteAnimTable_857BA40[] =
 
 static const struct SpriteTemplate gSpriteTemplate_857BA50 =
 {
-    .tileTag = 0,
-    .paletteTag = 0xDACA,
+    .tileTag = TAG_TILE_0,
+    .paletteTag = TAG_PAL_WAVEFORM,
     .oam = &sOamData_857BA0C,
     .anims = sSpriteAnimTable_857BA40,
     .images = NULL,
@@ -8487,8 +8493,8 @@ static const struct SpriteTemplate gSpriteTemplate_857BA50 =
 
 static const struct SpriteTemplate gSpriteTemplate_857BA68 =
 {
-    .tileTag = 1,
-    .paletteTag = 0xDACA,
+    .tileTag = TAG_TILE_1,
+    .paletteTag = TAG_PAL_WAVEFORM,
     .oam = &sOamData_857BA14,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -8498,8 +8504,8 @@ static const struct SpriteTemplate gSpriteTemplate_857BA68 =
 
     LoadSpriteSheets(spriteSheets);
     LoadSpritePalettes(spritePalettes);
-    sPSSData->field_CD8[0] = IndexOfSpritePaletteTag(0xDACA);
-    sPSSData->field_CD8[1] = IndexOfSpritePaletteTag(0xDAC7);
+    sPSSData->field_CD8[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
+    sPSSData->field_CD8[1] = IndexOfSpritePaletteTag(TAG_PAL_DAC7);
 
     sub_80CD444(sBoxCursorArea, sBoxCursorPosition, &x, &y);
     spriteId = CreateSprite(&gSpriteTemplate_857BA50, x, y, 6);
@@ -8842,7 +8848,7 @@ static bool8 sub_80D024C(void)
         SetBgAttribute(0, 4, 1);
         PutWindowTilemap(sPSSData->field_2200);
         CopyWindowToVram8Bit(sPSSData->field_2200, 3);
-        BlendPalettes(0x3F00, 8, 0x7FFF);
+        BlendPalettes(0x3F00, 8, RGB_WHITE);
         sub_80CFE54(2);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
         sMoveMonsPtr->state++;
@@ -9375,8 +9381,8 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_857BC44[] =
 
 static const struct SpriteTemplate gSpriteTemplate_857BC70 =
 {
-    .tileTag = 7,
-    .paletteTag = 0xdacb,
+    .tileTag = TAG_TILE_7,
+    .paletteTag = TAG_PAL_DACB,
     .oam = &sOamData_857BBA4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -9399,14 +9405,14 @@ static void sub_80D0C60(void)
 
         for (i = 0; i < 3; i++)
         {
-            spriteSheet.tag = 7 + i;
+            spriteSheet.tag = TAG_TILE_7 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
             sPSSData->field_2204[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
-            sPSSData->field_2204[i].palIndex = AllocSpritePalette(0xDACB + i);
+            sPSSData->field_2204[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
             sPSSData->field_2204[i].palIndex *= 16;
             sPSSData->field_2204[i].palIndex += 0x100;
-            spriteTemplate.tileTag = 7 + i;
-            spriteTemplate.paletteTag = 0xDACB + i;
+            spriteTemplate.tileTag = TAG_TILE_7 + i;
+            spriteTemplate.paletteTag = TAG_PAL_DACB + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
             sPSSData->field_2204[i].sprite = &gSprites[spriteId];
             sPSSData->field_2204[i].sprite->invisible = TRUE;
@@ -10108,7 +10114,7 @@ u32 GetBoxMonLevelAt(u8 boxId, u8 boxPosition)
 {
     u32 lvl;
 
-    // LMAO. Obvious bug there.
+    // BUG: Missed 'else' statement.
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT && GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
         lvl = GetLevelFromBoxMonExp(&gPokemonStoragePtr->boxes[boxId][boxPosition]);
     // else
@@ -10315,8 +10321,8 @@ void ResetWaldaWallpaper(void)
     gSaveBlock1Ptr->waldaPhrase.iconId = 0;
     gSaveBlock1Ptr->waldaPhrase.patternId = 0;
     gSaveBlock1Ptr->waldaPhrase.patternUnlocked = FALSE;
-    gSaveBlock1Ptr->waldaPhrase.colors[0] = 0x7B35;
-    gSaveBlock1Ptr->waldaPhrase.colors[1] = 0x6186;
+    gSaveBlock1Ptr->waldaPhrase.colors[0] = RGB(21, 25, 30);
+    gSaveBlock1Ptr->waldaPhrase.colors[1] = RGB(6, 12, 24);
     gSaveBlock1Ptr->waldaPhrase.text[0] = EOS;
 }
 

@@ -1123,7 +1123,7 @@ u16 sub_80D2E84(u16 species)
     else
     {
         if (species > (SPECIES_UNOWN_B - 1))
-            species = 260;
+            species = SPECIES_OLD_UNOWN_J; // That's an oddly specific species.
         return GetIconSpecies(species, 0);
     }
 }
