@@ -149,6 +149,7 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
 void sub_80A749C(struct Sprite *sprite);
 void sub_80A6814(u8 taskId);
 void sub_80A8610(struct Sprite *sprite);
+void sub_80A6DEC(struct Sprite *sprite);
 
 enum
 {
