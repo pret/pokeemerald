@@ -55,7 +55,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B:: @ 825AE3B
 	closemessage
 	applymovement 2, BattleFrontier_BattleFactoryBattleRoom_Movement_25B18B
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
-	applymovement 255, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_25AEA7
@@ -65,7 +65,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE67:: @ 825AE67
 	compare VAR_TEMP_F, 0
 	goto_if 5, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE3B
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
-	applymovement 255, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_25B17B
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4
 	setvar VAR_0x8004, 11

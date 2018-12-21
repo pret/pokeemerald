@@ -90,7 +90,11 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
             if (ctx->scriptPtr == gNullScriptPtr)
             {
                 while (1)
+#ifdef __thumb__
                     asm("svc 2"); // HALT
+#else
+                    asm("svc 2 << 16"); // HALT
+#endif
             }
 
             cmdCode = *(ctx->scriptPtr);

@@ -439,12 +439,12 @@ LilycoveCity_Harbor_EventScript_21E5CC:: @ 821E5CC
 	return
 
 LilycoveCity_Harbor_EventScript_21E610:: @ 821E610
-	applymovement 255, LilycoveCity_Harbor_Movement_21E630
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_21E630
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_21E61B:: @ 821E61B
-	applymovement 255, LilycoveCity_Harbor_Movement_21E633
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_21E633
 	waitmovement 0
 	return
 
@@ -525,14 +525,14 @@ LilycoveCity_Harbor_EventScript_21E696:: @ 821E696
 
 LilycoveCity_Harbor_EventScript_21E6A1:: @ 821E6A1
 	applymovement 5, LilycoveCity_Harbor_Movement_21E6D3
-	applymovement 255, LilycoveCity_Harbor_Movement_21E6D7
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_21E6D7
 	applymovement 4, LilycoveCity_Harbor_Movement_21E6DC
 	waitmovement 0
 	return
 
 LilycoveCity_Harbor_EventScript_21E6BA:: @ 821E6BA
 	applymovement 5, LilycoveCity_Harbor_Movement_21E6D3
-	applymovement 255, LilycoveCity_Harbor_Movement_21E6E4
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_Harbor_Movement_21E6E4
 	applymovement 4, LilycoveCity_Harbor_Movement_21E6EA
 	waitmovement 0
 	return

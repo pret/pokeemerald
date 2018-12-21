@@ -227,22 +227,22 @@ Route111_EventScript_1F0F45:: @ 81F0F45
 	end
 
 Route111_EventScript_1F0F7C:: @ 81F0F7C
-	applymovement 255, Route111_Movement_1F0FA8
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FA8
 	waitmovement 0
 	return
 
 Route111_EventScript_1F0F87:: @ 81F0F87
-	applymovement 255, Route111_Movement_1F0FAA
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FAA
 	waitmovement 0
 	return
 
 Route111_EventScript_1F0F92:: @ 81F0F92
-	applymovement 255, Route111_Movement_1F0FAC
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FAC
 	waitmovement 0
 	return
 
 Route111_EventScript_1F0F9D:: @ 81F0F9D
-	applymovement 255, Route111_Movement_1F0FAE
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FAE
 	waitmovement 0
 	return
 
@@ -298,7 +298,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	waitmovement 0
 	removeobject 1
 	call Route111_EventScript_1F1143
-	applymovement 255, Route111_Movement_1F114F
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F114F
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	addobject 2
@@ -316,7 +316,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	waitmovement 0
 	removeobject 2
 	call Route111_EventScript_1F1143
-	applymovement 255, Route111_Movement_1F114F
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F114F
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	addobject 3
@@ -334,7 +334,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	waitmovement 0
 	removeobject 3
 	call Route111_EventScript_1F1143
-	applymovement 255, Route111_Movement_1F114F
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F114F
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	addobject 4

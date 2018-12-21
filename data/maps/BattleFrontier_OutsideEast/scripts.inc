@@ -117,7 +117,7 @@ BattleFrontier_OutsideEast_EventScript_242CEA:: @ 8242CEA
 BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	lock
 	faceplayer
-	special sub_80FAFF8
+	special DoWateringBerryTreeAnim
 	waitstate
 	waitse
 	playse 269

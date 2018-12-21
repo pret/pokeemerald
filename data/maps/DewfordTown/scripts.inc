@@ -123,16 +123,16 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 	applymovement 2, DewfordTown_Movement_1E991D
 	waitmovement 0
 	removeobject 2
-	applymovement 255, DewfordTown_Movement_1E9911
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9911
 	waitmovement 0
 	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_2720A0
 	applymovement 4, DewfordTown_Movement_1E97A2
-	applymovement 255, DewfordTown_Movement_1E97A2
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E97A2
 	waitmovement 0
 	showobjectat 255, MAP_ROUTE104
 	call DewfordTown_EventScript_2720A8
-	applymovement 255, DewfordTown_Movement_1E9914
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9914
 	waitmovement 0
 	showobjectat 255, MAP_ROUTE104
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
@@ -155,16 +155,16 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	applymovement 2, DewfordTown_Movement_1E991D
 	waitmovement 0
 	removeobject 2
-	applymovement 255, DewfordTown_Movement_1E9911
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9911
 	waitmovement 0
 	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_2720A0
 	applymovement 4, DewfordTown_Movement_1E9865
-	applymovement 255, DewfordTown_Movement_1E9865
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9865
 	waitmovement 0
 	call DewfordTown_EventScript_2720A8
 	showobjectat 255, MAP_ROUTE109
-	applymovement 255, DewfordTown_Movement_1E9918
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9918
 	waitmovement 0
 	setobjectxyperm 2, 21, 26
 	addobject 2

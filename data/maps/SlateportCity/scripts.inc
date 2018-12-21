@@ -56,7 +56,7 @@ SlateportCity_MapScript2_1DCD12: @ 81DCD12
 SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	lockall
 	addobject 35
-	applymovement 255, SlateportCity_Movement_1DCDA8
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Movement_1DCDA8
 	applymovement 35, SlateportCity_Movement_1DCDAC
 	waitmovement 0
 	msgbox SlateportCity_Text_1DF032, MSGBOX_DEFAULT
@@ -576,7 +576,7 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	waitmovement 0
 	delay 25
 	applymovement 11, SlateportCity_Movement_1DD33C
-	applymovement 255, SlateportCity_Movement_1DD34A
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Movement_1DD34A
 	applymovement 10, SlateportCity_Movement_1DD319
 	applymovement 9, SlateportCity_Movement_1DD326
 	waitmovement 0
@@ -608,7 +608,7 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	msgbox SlateportCity_Text_1DE8A0, MSGBOX_DEFAULT
 	closemessage
 	applymovement 11, SlateportCity_Movement_1DD337
-	applymovement 255, SlateportCity_Movement_1DD344
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Movement_1DD344
 	waitmovement 0
 	removeobject 11
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN
@@ -892,19 +892,19 @@ SlateportCity_EventScript_1DD5CE:: @ 81DD5CE
 
 SlateportCity_EventScript_1DD5DC:: @ 81DD5DC
 	lockall
-	applymovement 255, SlateportCity_Movement_2725B2
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Movement_2725B2
 	waitmovement 0
 	opendoor 10, 12
 	waitdooranim
 	addobject 35
-	applymovement 255, SlateportCity_Movement_1DD630
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Movement_1DD630
 	applymovement 35, SlateportCity_Movement_1DD637
 	waitmovement 0
 	closedoor 10, 12
 	waitdooranim
 	msgbox SlateportCity_Text_1DF28C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, SlateportCity_Movement_1DD634
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Movement_1DD634
 	applymovement 35, SlateportCity_Movement_1DD63A
 	waitmovement 0
 	removeobject 35

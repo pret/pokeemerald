@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
+#include "constants/species.h"
 
 // This file's functions.
 static void sub_81B99D4(void);
@@ -292,7 +293,7 @@ static void sub_81B9EC0(void)
         heldItems[i] = 0;
     }
     gFacilityTrainerMons = gSlateportBattleTentMons;
-    currSpecies = 0;
+    currSpecies = SPECIES_NONE;
     i = 0;
     while (i != PARTY_SIZE)
     {
@@ -305,7 +306,7 @@ static void sub_81B9EC0(void)
                 break;
             if (species[j] == gFacilityTrainerMons[monSetId].species)
             {
-                if (currSpecies == 0)
+                if (currSpecies == SPECIES_NONE)
                     currSpecies = gFacilityTrainerMons[monSetId].species;
                 else
                     break;
@@ -320,7 +321,7 @@ static void sub_81B9EC0(void)
             if (heldItems[j] != 0 && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
             {
                 if (gFacilityTrainerMons[monSetId].species == currSpecies)
-                    currSpecies = 0;
+                    currSpecies = SPECIES_NONE;
                 break;
             }
         }

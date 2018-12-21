@@ -200,7 +200,7 @@ DewfordTown_Hall_EventScript_1FD73A:: @ 81FD73A
 DewfordTown_Hall_EventScript_1FD75B:: @ 81FD75B
 	compare VAR_FACING, 4
 	goto_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement 255, DewfordTown_Hall_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A8
 	waitmovement 0
 	return
 
@@ -224,19 +224,19 @@ DewfordTown_Hall_EventScript_1FD793:: @ 81FD793
 	return
 
 DewfordTown_Hall_EventScript_1FD7AA:: @ 81FD7AA
-	applymovement 255, DewfordTown_Hall_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A6
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_1FD7B5:: @ 81FD7B5
-	applymovement 255, DewfordTown_Hall_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725AA
 	waitmovement 0
 	return
 
 DewfordTown_Hall_EventScript_1FD7C0:: @ 81FD7C0
 	compare VAR_FACING, 3
 	goto_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement 255, DewfordTown_Hall_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A4
 	waitmovement 0
 	return
 

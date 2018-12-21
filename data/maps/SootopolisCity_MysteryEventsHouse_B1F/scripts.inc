@@ -13,7 +13,7 @@ SootopolisCity_MysteryEventsHouse_B1F_MapScript2_227E5E: @ 8227E5E
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	lockall
-	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF3
 	waitmovement 0
 	special CopyEReaderTrainerGreeting
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -30,7 +30,7 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8
 	closemessage
 	special HealPlayerParty
-	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1

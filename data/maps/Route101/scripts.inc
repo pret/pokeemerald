@@ -23,7 +23,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	closemessage
 	setobjectxy 2, 0, 15
 	setobjectxy 4, 0, 16
-	applymovement 255, Route101_Movement_1EBDC2
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBDC2
 	applymovement 2, Route101_Movement_1EBDE7
 	applymovement 4, Route101_Movement_1EBDB5
 	waitmovement 0
@@ -45,7 +45,7 @@ Route101_EventScript_1EBD4E:: @ 81EBD4E
 	lockall
 	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route101_Movement_1EBD90
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBD90
 	waitmovement 0
 	releaseall
 	end
@@ -54,7 +54,7 @@ Route101_EventScript_1EBD64:: @ 81EBD64
 	lockall
 	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route101_Movement_1EBD92
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBD92
 	waitmovement 0
 	releaseall
 	end
@@ -63,7 +63,7 @@ Route101_EventScript_1EBD7A:: @ 81EBD7A
 	lockall
 	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route101_Movement_1EBD94
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBD94
 	waitmovement 0
 	releaseall
 	end
@@ -223,7 +223,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	fadescreen 1
 	removeobject 4
 	setobjectxy 255, 6, 13
-	applymovement 255, Route101_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_2725A4
 	waitmovement 0
 	special ChooseStarter
 	waitstate

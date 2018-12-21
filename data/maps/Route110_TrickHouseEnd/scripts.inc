@@ -241,11 +241,11 @@ Route110_TrickHouseEnd_EventScript_26B041:: @ 826B041
 	applymovement 1, Route110_TrickHouseEnd_Movement_26B08B
 	waitmovement 0
 	playse SE_W153
-	applymovement 255, Route110_TrickHouseEnd_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEnd_Movement_2725AA
 	waitmovement 0
 	msgbox Route110_TrickHouseEnd_Text_26B8BD, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route110_TrickHouseEnd_Movement_26B089
+	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEnd_Movement_26B089
 	waitmovement 0
 	delay 4
 	turnobject 1, 4

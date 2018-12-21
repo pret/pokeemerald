@@ -159,15 +159,15 @@ SECTIONS {
         src/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
-        asm/fldeff_80F9BCC.o(.text);
+        src/fldeff_misc.o(.text);
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
-        asm/battle_anim_effects_2.o(.text);
-        asm/water.o(.text);
+        src/battle_anim_effects_2.o(.text);
+        src/water.o(.text);
         src/fire.o(.text);
         src/electric.o(.text);
         asm/ice.o(.text);
@@ -232,7 +232,8 @@ SECTIONS {
         src/battle_anim_sound_tasks.o(.text);
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
-        asm/battle_anim_815A0D4.o(.text);
+        src/battle_anim_effects_3.o(.text);
+        asm/battle_anim_effects_3.o(.text);
         src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
@@ -284,7 +285,7 @@ SECTIONS {
         src/dynamic_placeholder_text_util.o(.text);
         src/save_location.o(.text);
         src/item_icon.o(.text);
-        asm/party_menu.o(.text);
+        src/party_menu.o(.text);
         src/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
@@ -515,12 +516,12 @@ SECTIONS {
         data/contest_link_80F57C4.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
-        data/field_effect_misc.o(.rodata);
+        src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
-        src/effects_2.o(.rodata);
+        src/battle_anim_effects_2.o(.rodata);
         src/water.o(.rodata);
         src/fire.o(.rodata);
         src/electric.o(.rodata);
@@ -576,7 +577,7 @@ SECTIONS {
         src/contest_ai.o(.rodata);
         src/battle_anim_sound_tasks.o(.rodata);
         src/battle_controller_safari.o(.rodata);
-        data/battle_anim_815A0D4.o(.rodata);
+        src/battle_anim_effects_3.o(.rodata);
         src/learn_move.o(.rodata);
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);

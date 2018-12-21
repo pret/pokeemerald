@@ -174,7 +174,7 @@ Route102_EventScript_2744C4:: @ 82744C4
 	message Route102_Text_274710
 	waitmessage
 	special EventObjectInteractionWaterBerryTree
-	special sub_80FAFF8
+	special DoWateringBerryTreeAnim
 	waitstate
 	message Route102_Text_274723
 	waitmessage

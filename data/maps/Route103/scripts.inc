@@ -111,7 +111,7 @@ Route103_EventScript_1EC50A:: @ 81EC50A
 	end
 
 Route103_EventScript_1EC53D:: @ 81EC53D
-	applymovement 255, Route103_Movement_1EC5C8
+	applymovement EVENT_OBJ_ID_PLAYER, Route103_Movement_1EC5C8
 	applymovement 2, Route103_Movement_1EC5BE
 	waitmovement 0
 	playse SE_DANSA
@@ -121,7 +121,7 @@ Route103_EventScript_1EC53D:: @ 81EC53D
 	end
 
 Route103_EventScript_1EC561:: @ 81EC561
-	applymovement 255, Route103_Movement_1EC5D6
+	applymovement EVENT_OBJ_ID_PLAYER, Route103_Movement_1EC5D6
 	applymovement 2, Route103_Movement_1EC5CE
 	waitmovement 0
 	playse SE_DANSA

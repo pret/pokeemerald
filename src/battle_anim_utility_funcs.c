@@ -236,7 +236,7 @@ static void sub_81169F8(u8 taskId)
         }
         else
         {
-            task->data[6] = duplicate_obj_of_side_rel2move_in_transparent_mode(task->data[0]);
+            task->data[6] = CloneBattlerSpriteWithBlend(task->data[0]);
             if (task->data[6] >= 0)
             {
                 gSprites[task->data[6]].oam.priority = task->data[0] ? 1 : 2;

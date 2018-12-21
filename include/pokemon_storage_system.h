@@ -86,5 +86,6 @@ u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
 bool8 CheckFreePokemonStorageSpace(void);
 u8 StorageGetCurrentBox(void);
 u8 sub_80D214C(struct BoxPokemon *a, u8 b, u8 c, u8 d);
+bool32 sub_80D23A8(u16 move);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

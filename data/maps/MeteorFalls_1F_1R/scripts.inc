@@ -17,7 +17,7 @@ MeteorFalls_1F_1R_EventScript_22BD3A:: @ 822BD3A
 MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	lockall
 	playbgm MUS_MGM0, 0
-	applymovement 255, MeteorFalls_1F_1R_Movement_2725B0
+	applymovement EVENT_OBJ_ID_PLAYER, MeteorFalls_1F_1R_Movement_2725B0
 	waitmovement 0
 	delay 30
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725B4
@@ -38,7 +38,7 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22BFE4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MeteorFalls_1F_1R_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, MeteorFalls_1F_1R_Movement_2725A4
 	applymovement 5, MeteorFalls_1F_1R_Movement_2725A4
 	applymovement 6, MeteorFalls_1F_1R_Movement_2725A4
 	waitmovement 0
@@ -55,7 +55,7 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_22C04E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MeteorFalls_1F_1R_Movement_22BF1D
+	applymovement EVENT_OBJ_ID_PLAYER, MeteorFalls_1F_1R_Movement_22BF1D
 	applymovement 5, MeteorFalls_1F_1R_Movement_22BEC4
 	applymovement 6, MeteorFalls_1F_1R_Movement_22BECE
 	waitmovement 0

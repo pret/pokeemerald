@@ -60,12 +60,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E35:: @ 8243E35
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	lockall
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E77
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -119,19 +119,19 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EB5:: @ 8243EB5
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EE4:: @ 8243EE4
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EF6: @ 8243EF6
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F08: @ 8243F08
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22
 	waitmovement 0
 	return
 

@@ -269,13 +269,13 @@ MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	end
 
 MossdeepCity_EventScript_1E4CB0:: @ 81E4CB0
-	applymovement 255, MossdeepCity_Movement_1E4CD4
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Movement_1E4CD4
 	applymovement 16, MossdeepCity_Movement_1E4CD8
 	waitmovement 0
 	return
 
 MossdeepCity_EventScript_1E4CC2:: @ 81E4CC2
-	applymovement 255, MossdeepCity_Movement_1E4CD4
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Movement_1E4CD4
 	applymovement 16, MossdeepCity_Movement_1E4CE2
 	waitmovement 0
 	return

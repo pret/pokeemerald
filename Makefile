@@ -19,17 +19,19 @@ REVISION    := 0
 SHELL := /bin/bash -o pipefail
 
 CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef
+WARNINGS := -Wimplicit -Wparentheses
 
 ifeq ($(MODERN),)
 ROM := pokeemerald.gba
 OBJ_DIR := build/emerald
 CC1             := tools/agbcc/bin/agbcc$(EXE)
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+override CFLAGS += -mthumb-interwork $(WARNINGS) -O2 -Werror -fhex-asm
+CPPFLAGS += -D__thumb__
 else
 ROM := pokeemerald-modern.gba
 OBJ_DIR := build/emerald-modern
 CC1 := $(PREFIX)gcc -S -xc -
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -mthumb -mabi=apcs-gnu
+override CFLAGS += -mthumb-interwork $(WARNINGS) -O2 -mthumb -mabi=apcs-gnu
 CPPFLAGS += -DMODERN=1
 endif
 

@@ -69,11 +69,11 @@ gUnknown_086156B8:: @ 86156B8
 
 	.align 2
 gUnknown_086156C4:: @ 86156C4
-	.4byte sub_81B2658, 0x0d280b18, 0x08201420, 0x08081440, 0x08182526, 0x08182535, 0x03302318, 0x1040220c
+	.4byte BlitBitmapToPartyWindow_Default1, 0x0d280b18, 0x08201420, 0x08081440, 0x08182526, 0x08182535, 0x03302318, 0x1040220c
 
 	.align 2
 gUnknown_086156E4:: @ 86156E4
-	.4byte sub_81B26BC, 0x0d280316, 0x08200c1e, 0x08080c3e, 0x08180c66, 0x08180c75, 0x03300a58, 0x1040044d
+	.4byte BlitBitmapToPartyWindow_Default2, 0x0d280316, 0x08200c1e, 0x08080c3e, 0x08180c66, 0x08180c75, 0x03300a58, 0x1040044d
 
 	.align 2
 gUnknown_08615704:: @ 8615704
@@ -441,7 +441,7 @@ gUnknown_08615D9C:: @ 8615D9C
 	.4byte hm_prepare_waterfall, 0x0000000d
 	.4byte SetUpFieldMove_Teleport, 0x0000000d
 	.4byte SetUpFieldMove_Dig, 0x0000000d
-	.4byte sub_80FA004, 0x0000000d
+	.4byte SetUpFieldMove_SecretPower, 0x0000000d
 	.4byte SetUpFieldMove_SoftBoiled, 0x00000010
 	.4byte SetUpFieldMove_SoftBoiled, 0x00000010
 	.4byte SetUpFieldMove_SweetScent, 0x0000000d

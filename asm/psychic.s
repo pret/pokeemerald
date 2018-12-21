@@ -46,7 +46,7 @@ _0810F22E:
 	lsrs r4, r0, 24
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -423,7 +423,7 @@ sub_810F524: @ 810F524
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -514,13 +514,13 @@ _0810F5EE:
 	bne _0810F608
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl InitAnimSpritePos
+	bl InitSpritePosToAnimAttacker
 	b _0810F610
 	.pool
 _0810F608:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80A6980
+	bl InitSpritePosToAnimTarget
 _0810F610:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -535,7 +535,7 @@ _0810F618:
 	cmp r0, 0
 	beq _0810F62C
 	adds r0, r4, 0
-	bl move_anim_8074EE0
+	bl DestroySpriteAndMatrix
 _0810F62C:
 	pop {r4-r6}
 	pop {r0}
@@ -589,7 +589,7 @@ _0810F692:
 	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, =sub_80A67D8
+	ldr r0, =RunStoredCallbackWhenAnimEnds
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -656,7 +656,7 @@ _0810F722:
 	ldr r1, =sub_810F740
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
-	ldr r0, =sub_80A67D8
+	ldr r0, =RunStoredCallbackWhenAnimEnds
 	str r0, [r5, 0x1C]
 	pop {r4-r7}
 	pop {r0}
@@ -760,7 +760,7 @@ sub_810F7D4: @ 810F7D4
 	strh r1, [r4, 0x8]
 	ldr r2, =gUnknown_0859675C
 	adds r0, r4, 0
-	bl sub_80A7CFC
+	bl PrepareAffineAnimInTaskData
 	ldr r0, =sub_810F810
 	str r0, [r4]
 	pop {r4}
@@ -779,7 +779,7 @@ sub_810F810: @ 810F810
 	lsls r0, 3
 	ldr r1, =gTasks
 	adds r0, r1
-	bl sub_80A7D34
+	bl RunAffineAnimFromTaskData
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810F830
@@ -823,7 +823,7 @@ _0810F870:
 	ldrb r1, [r4, 0x8]
 	ldr r2, =gUnknown_0859677C
 	adds r0, r4, 0
-	bl sub_80A7CFC
+	bl PrepareAffineAnimInTaskData
 	ldr r0, =sub_810F898
 	str r0, [r4]
 	pop {r4}
@@ -852,7 +852,7 @@ sub_810F898: @ 810F898
 	.pool
 _0810F8BC:
 	adds r0, r4, 0
-	bl sub_80A7D34
+	bl RunAffineAnimFromTaskData
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -907,7 +907,7 @@ _0810F900:
 	lsls r1, 1
 	strh r1, [r0, 0x20]
 	ldrb r0, [r4, 0x8]
-	bl sub_80A7344
+	bl ResetSpriteRotScale
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask
 _0810F936:
@@ -1572,7 +1572,7 @@ _0810FE86:
 _0810FE92:
 	ldr r0, =gBattleAnimTarget
 	ldrb r0, [r0]
-	bl sub_80A8364
+	bl GetBattlerSpriteBGPriorityRank
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1805,7 +1805,7 @@ sub_8110034: @ 8110034
 _0811006C:
 	ldr r1, =gBattleAnimArgs
 	ldrb r0, [r1]
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
+	bl CloneBattlerSpriteWithBlend
 	lsls r0, 16
 	lsrs r1, r0, 16
 	mov r9, r1
@@ -1860,7 +1860,7 @@ _08110094:
 	lsls r2, 1
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrb r3, [r4, 0x1]
 	lsrs r1, r3, 6
 	ldrb r2, [r4, 0x3]
@@ -1942,14 +1942,14 @@ _08110166:
 	ldrsh r2, [r4, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x22]
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_80A7EC0
+	bl SetBattlerSpriteYOffsetFromOtherYScale
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x30
@@ -1980,14 +1980,14 @@ _081101B8:
 	ldrsh r2, [r4, r1]
 	adds r1, r2, 0
 	movs r3, 0
-	bl obj_id_set_rotscale
+	bl SetSpriteRotScale
 	ldrh r0, [r4, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x22]
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_80A7EC0
+	bl SetBattlerSpriteYOffsetFromOtherYScale
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	cmp r0, 0

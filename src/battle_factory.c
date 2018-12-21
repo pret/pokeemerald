@@ -526,7 +526,7 @@ static void sub_81A67EC(void)
     }
     var_40 = sub_81A6F70(factoryBattleMode, factoryLvlMode);
 
-    currSpecies = 0;
+    currSpecies = SPECIES_NONE;
     i = 0;
     while (i != PARTY_SIZE)
     {
@@ -546,7 +546,7 @@ static void sub_81A67EC(void)
                 break;
             if (species[j] == gFacilityTrainerMons[monSetId].species)
             {
-                if (currSpecies == 0)
+                if (currSpecies == SPECIES_NONE)
                     currSpecies = gFacilityTrainerMons[monSetId].species;
                 else
                     break;
@@ -561,7 +561,7 @@ static void sub_81A67EC(void)
             if (heldItems[j] != 0 && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
             {
                 if (gFacilityTrainerMons[monSetId].species == currSpecies)
-                    currSpecies = 0;
+                    currSpecies = SPECIES_NONE;
                 break;
             }
         }
@@ -579,7 +579,7 @@ static void sub_81A67EC(void)
 static void sub_81A6A08(void)
 {
     u8 i;
-    u8 typesCount[18];
+    u8 typesCount[NUMBER_OF_MON_TYPES];
     u8 usedType[2];
 
     gFacilityTrainerMons = gBattleFrontierMons;
