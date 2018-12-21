@@ -213,7 +213,7 @@ Route111_EventScript_1F0F2E:: @ 81F0F2E
 	end
 
 Route111_EventScript_1F0F45:: @ 81F0F45
-	msgbox gUnknown_08272C5F, MSGBOX_DEFAULT
+	msgbox gText_SandstormIsVicious, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
 	call_if 1, Route111_EventScript_1F0F7C

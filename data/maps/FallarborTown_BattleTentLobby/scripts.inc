@@ -135,10 +135,10 @@ FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
 	compare VAR_RESULT, 0
 	goto_if 5, FallarborTown_BattleTentLobby_EventScript_1FFF84
 	special SavePlayerParty
-	msgbox FallarborTown_BattleTentLobby_Text_2C47EB, MSGBOX_DEFAULT
+	msgbox FallarborTown_BattleTentLobby_Text_GreeterWelcome, MSGBOX_DEFAULT
 
 FallarborTown_BattleTentLobby_EventScript_200021:: @ 8200021
-	message FallarborTown_BattleTentLobby_Text_2C4843
+	message FallarborTown_BattleTentLobby_Text_GreeterTakeChallenge
 	waitmessage
 	multichoice 17, 6, 23, 0
 	switch VAR_RESULT
@@ -159,7 +159,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
 	special CallFrontierUtilFunc
-	msgbox FallarborTown_BattleTentLobby_Text_2C4BC8, MSGBOX_DEFAULT
+	msgbox FallarborTown_BattleTentLobby_Text_GreeterSelectThreePkmn, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 3
@@ -167,7 +167,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	waitstate
 	compare VAR_RESULT, 0
 	goto_eq FallarborTown_BattleTentLobby_EventScript_2001C2
-	msgbox FallarborTown_BattleTentLobby_Text_2C4B35, MSGBOX_YESNO
+	msgbox FallarborTown_BattleTentLobby_Text_GreeterSaveBeforeEntry, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_2001C2
 	case 1, FallarborTown_BattleTentLobby_EventScript_2000E2
@@ -210,7 +210,7 @@ FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
 	end
 
 FallarborTown_BattleTentLobby_EventScript_200169:: @ 8200169
-	msgbox FallarborTown_BattleTentLobby_Text_2C48AC, MSGBOX_DEFAULT
+	msgbox FallarborTown_BattleTentLobby_Text_GreeterSetKOExplain, MSGBOX_DEFAULT
 	goto FallarborTown_BattleTentLobby_EventScript_200021
 
 FallarborTown_BattleTentLobby_EventScript_200176:: @ 8200176
@@ -237,7 +237,7 @@ FallarborTown_BattleTentLobby_EventScript_2001C2:: @ 82001C2
 	special LoadPlayerParty
 
 FallarborTown_BattleTentLobby_EventScript_2001C5:: @ 82001C5
-	msgbox FallarborTown_BattleTentLobby_Text_2C487F, MSGBOX_DEFAULT
+	msgbox FallarborTown_BattleTentLobby_Text_GreeterOnAnotherOccasion, MSGBOX_DEFAULT
 
 FallarborTown_BattleTentLobby_EventScript_2001CD:: @ 82001CD
 	release

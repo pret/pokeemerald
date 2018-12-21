@@ -2947,27 +2947,27 @@ Movement_2725CB:: @ 82725CB
 	step_end
 
 EventScript_PictureBookShelf:: @ 82725CE
-	msgbox Text_2A81E5, MSGBOX_SIGN
+	msgbox gText_PictureBookshelf, MSGBOX_SIGN
 	end
 
 EventScript_BookShelf:: @ 82725D7
-	msgbox Text_2A820D, MSGBOX_SIGN
+	msgbox gText_Bookshelf, MSGBOX_SIGN
 	end
 
 EventScript_PokemonCenterBookshelf:: @ 82725E0
-	msgbox Text_2A8232, MSGBOX_SIGN
+	msgbox gText_PkmnCenterBookshelf, MSGBOX_SIGN
 	end
 
 EventScript_Vase:: @ 82725E9
-	msgbox Text_2A8276, MSGBOX_SIGN
+	msgbox gText_VaseIsEmpty, MSGBOX_SIGN
 	end
 
 EventScript_TrashCan:: @ 82725F2
-	msgbox Text_2A82B3, MSGBOX_SIGN
+	msgbox gText_TrashCanIsEmpty, MSGBOX_SIGN
 	end
 
 EventScript_ShopShelf:: @ 82725FB
-	msgbox Text_2A82BF, MSGBOX_SIGN
+	msgbox gText_MartShelf, MSGBOX_SIGN
 	end
 
 EventScript_Blueprint:: @ 8272604
@@ -3077,10 +3077,10 @@ gUnknown_08272BCF:: @ 8272BCF
 gText_LilycoveDeptStoreElevator:: @ 8272C1D
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
 
-gUnknown_08272C5F:: @ 8272C5F
+gText_SandstormIsVicious:: @ 8272C5F
 	.string "The sandstorm is vicious.\nIt's impossible to keep going.$"
 
-gUnknown_08272C98:: @ 8272C98
+gText_ItemCanBeRegisteredToSelect:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
 gText_PkmnTrainerSchoolEmail:: @ 8272CD5
@@ -3092,7 +3092,7 @@ gText_PlayerBootedUpOwnPC:: @ 8272D87
 gUnknown_08272D9C:: @ 8272D9C
 	.string "The link was canceled.$"
 
-gUnknown_08272DB3:: @ 8272DB3
+gText_GiveNicknameToPkmnReceived:: @ 8272DB3
 	.string "Want to give a nickname to\nthe {STR_VAR_2} you received?$"
 
 gText_PlayerWhitedOut:: @ 8272DE3
@@ -3160,10 +3160,10 @@ gText_AllPkmnBoxesFull:: @ 827331C
 gText_GiveNicknameToPkmn:: @ 8273374
 	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
 
-gUnknown_0827339F:: @ 827339F
+gText_FillOutQuestionnaire:: @ 827339F
 	.string "There is a questionnaire.\nWould you like to fill it out?$"
 
-gUnknown_082733D8:: @ 82733D8
+gText_FilledOutQuestionnaire:: @ 82733D8
 	.string "Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.$"
 
 gUnknown_08273446:: @ 8273446
@@ -3191,7 +3191,7 @@ gUnknown_08273684:: @ 8273684
 	.string "The intense sunshine appears to\nhave subsided…$"
 
 EventScript_2736B3:: @ 82736B3
-	msgbox gUnknown_08272C98, MSGBOX_SIGN
+	msgbox gText_ItemCanBeRegisteredToSelect, MSGBOX_SIGN
 	end
 
 EventScript_Poison:: @ 82736BC
@@ -3439,7 +3439,7 @@ RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
 
 EventScript_Questionnaire:: @ 827381B
 	lockall
-	msgbox gUnknown_0827339F, MSGBOX_YESNO
+	msgbox gText_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq EventScript_2738FD
 	setvar VAR_0x8004, 20
@@ -3500,7 +3500,7 @@ EventScript_2738FD:: @ 82738FD
 EventScript_2738FF:: @ 82738FF
 	applymovement VAR_0x8008, BattleFrontier_Mart_Movement_2725B0
 	waitmovement 0
-	msgbox gUnknown_082733D8, MSGBOX_DEFAULT
+	msgbox gText_FilledOutQuestionnaire, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -4020,7 +4020,7 @@ gUnknown_0827EA0C:: @ 827EA0C
 	.string "{STR_VAR_1}\n"
 	.string "{STR_VAR_2}'s {STR_VAR_3}$"
 
-gUnknown_0827EA17:: @ 827EA17
+gContestSuffix:: @ 827EA17
 	.string "CONTEST$"
 
 gContestRankNormal::
@@ -4732,27 +4732,27 @@ MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 
-Text_2A81E5: @ 82A81E5
+gText_PictureBookshelf: @ 82A81E5
 	.string "There's a set of POKéMON picture books.$"
 
-Text_2A820D: @ 82A820D
+gText_Bookshelf: @ 82A820D
 	.string "It's filled with all sorts of books.$"
 
-Text_2A8232: @ 82A8232
+gText_PkmnCenterBookshelf: @ 82A8232
 	.string "POKéMON magazines!\n"
 	.string "POKéMON PAL…\p"
 	.string "POKéMON HANDBOOK…\n"
 	.string "ADORABLE POKéMON…$"
 
-Text_2A8276: @ 82A8276
+gText_VaseIsEmpty: @ 82A8276
 	.string "This vase looks expensive…\n"
 	.string "Peered inside…\p"
 	.string "But, it was empty.$"
 
-Text_2A82B3: @ 82A82B3
+gText_TrashCanIsEmpty: @ 82A82B3
 	.string "It's empty.$"
 
-Text_2A82BF: @ 82A82BF
+gText_MartShelf: @ 82A82BF
 	.string "The shelves brim with all sorts of\n"
 	.string "POKéMON merchandise.$"
 
@@ -9352,20 +9352,20 @@ LilycoveCity_ContestLobby_Text_2C4763: @ 82C4763
 	.string "Sometimes, he comes to LILYCOVE\n"
 	.string "to blend BERRIES all day long.$"
 
-FallarborTown_BattleTentLobby_Text_2C47EB: @ 82C47EB
+FallarborTown_BattleTentLobby_Text_GreeterWelcome: @ 82C47EB
 	.string "I welcome you to the BATTLE TENT\n"
 	.string "FALLARBOR SITE!\p"
 	.string "I am your guide to the Set KO Tourney!$"
 
-FallarborTown_BattleTentLobby_Text_2C4843: @ 82C4843
+FallarborTown_BattleTentLobby_Text_GreeterTakeChallenge: @ 82C4843
 	.string "Now, do you wish to take the challenge\n"
 	.string "of a Set KO Tourney?$"
 
-FallarborTown_BattleTentLobby_Text_2C487F: @ 82C487F
+FallarborTown_BattleTentLobby_Text_GreeterOnAnotherOccasion: @ 82C487F
 	.string "We await your challenge on\n"
 	.string "another occasion!$"
 
-FallarborTown_BattleTentLobby_Text_2C48AC: @ 82C48AC
+FallarborTown_BattleTentLobby_Text_GreeterSetKOExplain: @ 82C48AC
 	.string "In the FALLARBOR BATTLE TENT,\n"
 	.string "we undertake the Set KO Tourney.\p"
 	.string "All participants enter with a team of\n"
@@ -9386,7 +9386,7 @@ FallarborTown_BattleTentLobby_Text_2C48AC: @ 82C48AC
 	.string "three TRAINERS in succession,\l"
 	.string "we will present you with a fine prize.$"
 
-FallarborTown_BattleTentLobby_Text_2C4B35: @ 82C4B35
+FallarborTown_BattleTentLobby_Text_GreeterSaveBeforeEntry: @ 82C4B35
 	.string "Before showing you to the BATTLE\n"
 	.string "TENT, I must save. Is that okay?$"
 
@@ -9395,7 +9395,7 @@ FallarborTown_BattleTentLobby_Text_2C4B77: @ 82C4B77
 	.string "Level 50 and Open Level.\l"
 	.string "Which is your choice?$"
 
-FallarborTown_BattleTentLobby_Text_2C4BC8: @ 82C4BC8
+FallarborTown_BattleTentLobby_Text_GreeterSelectThreePkmn: @ 82C4BC8
 	.string "Very well, now select your\n"
 	.string "three POKéMON, please.$"
 
