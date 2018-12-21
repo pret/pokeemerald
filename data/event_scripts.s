@@ -1271,7 +1271,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
 	specialvar VAR_RESULT, sub_80C2E40
 	compare VAR_RESULT, 4
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
-	msgbox gUnknown_082726EB, MSGBOX_YESNO
+	msgbox gText_PokeCenterWelcome, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_27195A
 	compare VAR_RESULT, 0
@@ -1372,13 +1372,13 @@ OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
 	checkflag FLAG_0x159
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AAC
 	setflag FLAG_0x159
-	msgbox gUnknown_082727F5, MSGBOX_DEFAULT
+	msgbox gText_PokeCenterWelcomeGoldCard, MSGBOX_DEFAULT
 	playse SE_PIN
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_272598
 	waitmovement 0
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_27259A
 	waitmovement 0
-	msgbox gUnknown_08272860, MSGBOX_YESNO
+	msgbox gText_PokeCenterGoldCard, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
 	message gUnknown_08272A07
@@ -1553,7 +1553,7 @@ EventScript_271C9B:: @ 8271C9B
 
 EventScript_271CA1:: @ 8271CA1
 	msgbox gUnknown_08272A78, MSGBOX_DEFAULT
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
 
@@ -1605,7 +1605,7 @@ EventScript_271D2A:: @ 8271D2A
 
 EventScript_271D47:: @ 8271D47
 	msgbox gUnknown_08272ABF, MSGBOX_DEFAULT
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	releaseall
 	end
@@ -1638,7 +1638,7 @@ EventScript_PC:: @ 8271D92
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox Text_27265A, MSGBOX_DEFAULT
+	msgbox gText_PlayerBootedUpPC, MSGBOX_DEFAULT
 	goto EventScript_271DAC
 	end
 
@@ -1661,7 +1661,7 @@ EventScript_271DBC:: @ 8271DBC
 
 EventScript_271DF9:: @ 8271DF9
 	playse SE_PC_LOGIN
-	msgbox gUnknown_082726C2, MSGBOX_DEFAULT
+	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
 	special PlayerPC
 	waitstate
 	goto EventScript_271DAC
@@ -1673,18 +1673,18 @@ EventScript_271E0E:: @ 8271E0E
 	call_if 0, EventScript_271E35
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 1, EventScript_271E3E
-	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
+	msgbox gText_PkmnStorageSystemOpened, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystem
 	waitstate
 	goto EventScript_271DAC
 	end
 
 EventScript_271E35:: @ 8271E35
-	msgbox gUnknown_0827268C, MSGBOX_DEFAULT
+	msgbox gText_AccessedSomeonesPC, MSGBOX_DEFAULT
 	return
 
 EventScript_271E3E:: @ 8271E3E
-	msgbox gUnknown_082726D4, MSGBOX_DEFAULT
+	msgbox gText_AccessedLanettesPC, MSGBOX_DEFAULT
 	return
 
 EventScript_271E47:: @ 8271E47
@@ -1999,7 +1999,7 @@ SootopolisCity_EventScript_272054:: @ 8272054
 SootopolisCity_Gym_1F_EventScript_272054:: @ 8272054
 SootopolisCity_House1_EventScript_272054:: @ 8272054
 VerdanturfTown_BattleTentLobby_EventScript_272054:: @ 8272054
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	release
 	end
 
@@ -2016,7 +2016,7 @@ Route110_TrickHouseEnd_EventScript_27205E:: @ 827205E
 Route110_TrickHouseEntrance_EventScript_27205E:: @ 827205E
 Route113_GlassWorkshop_EventScript_27205E:: @ 827205E
 SootopolisCity_Gym_1F_EventScript_27205E:: @ 827205E
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	return
 
 Route114_LanettesHouse_EventScript_272067:: @ 8272067
@@ -2981,25 +2981,25 @@ Text_27260D: @ 827260D
 Text_272640: @ 8272640
 	.string "We hope to see you again!$"
 
-Text_27265A: @ 827265A
+gText_PlayerBootedUpPC: @ 827265A
 	.string "{PLAYER} booted up the PC.$"
 
 gText_WhichPCShouldBeAccessed:: @ 827266F
 	.string "Which PC should be accessed?$"
 
-gUnknown_0827268C:: @ 827268C
+gText_AccessedSomeonesPC:: @ 827268C
 	.string "Accessed SOMEONE'S PC.$"
 
-gUnknown_082726A3:: @ 82726A3
+gText_PkmnStorageSystemOpened:: @ 82726A3
 	.string "POKéMON Storage System opened.$"
 
-gUnknown_082726C2:: @ 82726C2
+gText_AccessedPlayersPC:: @ 82726C2
 	.string "Accessed {PLAYER}'s PC.$"
 
-gUnknown_082726D4:: @ 82726D4
+gText_AccessedLanettesPC:: @ 82726D4
 	.string "Accessed LANETTE's PC.$"
 
-gUnknown_082726EB:: @ 82726EB
+gText_PokeCenterWelcome:: @ 82726EB
 	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?$"
 
 gUnknown_08272768:: @ 8272768
@@ -3011,10 +3011,10 @@ gUnknown_08272798:: @ 8272798
 gUnknown_082727DB:: @ 82727DB
 	.string "We hope to see you again!$"
 
-gUnknown_082727F5:: @ 82727F5
+gText_PokeCenterWelcomeGoldCard:: @ 82727F5
 	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…$"
 
-gUnknown_08272860:: @ 8272860
+gText_PokeCenterGoldCard:: @ 8272860
 	.string "Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI've seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou're the first TRAINER I've ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!$"
 
 gUnknown_08272982:: @ 8272982
@@ -3050,7 +3050,7 @@ gUnknown_08272A9A:: @ 8272A9A
 gUnknown_08272ABF:: @ 8272ABF
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
-gUnknown_08272AD0:: @ 8272AD0
+gText_TooBadBagIsFull:: @ 8272AD0
 	.string "Too bad!\nThe BAG is full…$"
 
 gUnknown_08272AEA:: @ 8272AEA
@@ -3074,7 +3074,7 @@ gUnknown_08272B9E:: @ 8272B9E
 gUnknown_08272BCF:: @ 8272BCF
 	.string "{STR_VAR_1} might like this program.\n… … … … … … … … … … … … … … … …\pBetter get going!$"
 
-gUnknown_08272C1D:: @ 8272C1D
+gText_LilycoveDeptStoreElevator:: @ 8272C1D
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
 
 gUnknown_08272C5F:: @ 8272C5F
@@ -3083,10 +3083,10 @@ gUnknown_08272C5F:: @ 8272C5F
 gUnknown_08272C98:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
-gUnknown_08272CD5:: @ 8272CD5
+gText_PkmnTrainerSchoolEmail:: @ 8272CD5
 	.string "There's an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER's expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
 
-gUnknown_08272D87:: @ 8272D87
+gText_PlayerBootedUpOwnPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
 gUnknown_08272D9C:: @ 8272D9C

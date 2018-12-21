@@ -90,7 +90,7 @@ OldaleTown_EventScript_1E8FB9:: @ 81E8FB9
 	end
 
 OldaleTown_EventScript_1E8FC3:: @ 81E8FC3
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	fadedefaultbgm
 	release
 	end

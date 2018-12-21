@@ -123,7 +123,7 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	end
 
 MtChimney_EventScript_22EF51:: @ 822EF51
-	msgbox gUnknown_08272AD0, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
 	nop

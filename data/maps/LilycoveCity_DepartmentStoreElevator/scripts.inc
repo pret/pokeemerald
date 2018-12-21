@@ -9,7 +9,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220624:: @ 8220624
 	call_if 0, LilycoveCity_DepartmentStoreElevator_EventScript_2207FC
 	copyvar VAR_0x8005, VAR_DEPT_STORE_FLOOR
 	special sub_8139B60
-	message gUnknown_08272C1D
+	message gText_LilycoveDeptStoreElevator
 	waitmessage
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_81399F4

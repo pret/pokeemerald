@@ -258,7 +258,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
 	setvar VAR_0x8004, 1
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox gUnknown_08272D87, MSGBOX_DEFAULT
+	msgbox gText_PlayerBootedUpOwnPC, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall
@@ -272,7 +272,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F863F:: @ 81F863F
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F864C:: @ 81F864C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+	msgbox gText_PkmnTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 

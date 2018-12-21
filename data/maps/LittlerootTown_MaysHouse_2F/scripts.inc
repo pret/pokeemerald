@@ -311,7 +311,7 @@ EventScript_PlayerPCFemale:: @ 81F9553
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C
-	msgbox gUnknown_08272CD5, MSGBOX_DEFAULT
+	msgbox gText_PkmnTrainerSchoolEmail, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -319,7 +319,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	setvar VAR_0x8004, 2
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
-	msgbox gUnknown_08272D87, MSGBOX_DEFAULT
+	msgbox gText_PlayerBootedUpOwnPC, MSGBOX_DEFAULT
 	special BedroomPC
 	waitstate
 	releaseall
