@@ -95,7 +95,7 @@ Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 
 Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
@@ -105,7 +105,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 
 Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700D0
 	call Route119_WeatherInstitute_2F_EventScript_273797

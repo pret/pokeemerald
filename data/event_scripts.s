@@ -3095,10 +3095,10 @@ gUnknown_08272D9C:: @ 8272D9C
 gUnknown_08272DB3:: @ 8272DB3
 	.string "Want to give a nickname to\nthe {STR_VAR_2} you received?$"
 
-gUnknown_08272DE3:: @ 8272DE3
+gText_PlayerWhitedOut:: @ 8272DE3
 	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
 
-gUnknown_08272E0F:: @ 8272E0F
+gText_RegisteredTrainerInPokenav:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
 
 gUnknown_08272E30:: @ 8272E30
@@ -3115,16 +3115,16 @@ gUnknown_0827301B:: @ 827301B
 gUnknown_0827304E:: @ 827304E
 	.string "There is a big hole in the wall.$"
 
-gUnknown_0827306F:: @ 827306F
+gText_CableClubUndergoingAdjustments:: @ 827306F
 	.string "I'm terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
 
-gUnknown_082730BC:: @ 82730BC
+gText_AppearsToBeUndergoingAdjustments:: @ 82730BC
 	.string "It appears to be undergoing\nadjustments…$"
 
-gUnknown_082730E5:: @ 82730E5
+gText_TradeCenterUndergoingInspection:: @ 82730E5
 	.string "I'm terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
 
-gUnknown_08273125:: @ 8273125
+gText_RecordCornerUnderPreparation:: @ 8273125
 	.string "I'm terribly sorry. The RECORD CORNER\nis under preparation.$"
 
 gUnknown_08273161:: @ 8273161
@@ -3136,10 +3136,10 @@ gUnknown_08273178:: @ 8273178
 gUnknown_082731A9:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
 
-gUnknown_082731BD:: @ 82731BD
+gText_WeirdTreeAttacked:: @ 82731BD
 	.string "The weird tree doesn't like the\nWAILMER PAIL!\pThe weird tree attacked!$"
 
-gUnknown_08273204:: @ 8273204
+gText_RayquazaFlewAway:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 gText_PkmnTransferredSomeonesPC:: @ 8273216
@@ -3154,10 +3154,10 @@ gText_PkmnBoxSomeonesPCFull:: @ 8273296
 gText_PkmnBoxLanettesPCFull:: @ 82732D9
 	.string "BOX “{STR_VAR_3}” on\nLANETTE'S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
 
-gUnknown_0827331C:: @ 827331C
+gText_AllPkmnBoxesFull:: @ 827331C
 	.string "There's no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan't accept any more!$"
 
-gUnknown_08273374:: @ 8273374
+gText_GiveNicknameToPkmn:: @ 8273374
 	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
 
 gUnknown_0827339F:: @ 827339F
@@ -3169,13 +3169,13 @@ gUnknown_082733D8:: @ 82733D8
 gUnknown_08273446:: @ 8273446
 	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!$"
 
-gUnknown_082734CC:: @ 82734CC
+gText_SaveToAccessMysteryGift:: @ 82734CC
 	.string "Once you save your game, you can\naccess the MYSTERY GIFT.$"
 
 gUnknown_08273506:: @ 8273506
 	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.$"
 
-gUnknown_08273559:: @ 8273559
+gText_SaveToAccessMysteryEvent:: @ 8273559
 	.string "Once you save your game, you can\naccess the MYSTERY EVENT.$"
 
 gUnknown_08273594:: @ 8273594
@@ -3206,7 +3206,7 @@ EventScript_Poison:: @ 82736BC
 	end
 
 EventScript_2736D9:: @ 82736D9
-	message gUnknown_08272DE3
+	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	special sub_80B05B4
@@ -3223,7 +3223,7 @@ EventScript_2736F4:: @ 82736F4
 	return
 
 EventScript_2736F8:: @ 82736F8
-	message gUnknown_08272DE3
+	message gText_PlayerWhitedOut
 	waitmessage
 	waitbuttonpress
 	setvar VAR_0x8004, 16
@@ -3367,7 +3367,7 @@ TerraCave_End_EventScript_273776:: @ 8273776
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	bufferspeciesname 0, VAR_0x8004
-	msgbox gUnknown_08273204, MSGBOX_DEFAULT
+	msgbox gText_RayquazaFlewAway, MSGBOX_DEFAULT
 	release
 	end
 
@@ -3433,7 +3433,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_273811:: @ 8273811
 MossdeepCity_StevensHouse_EventScript_273811:: @ 8273811
 Route119_WeatherInstitute_2F_EventScript_273811:: @ 8273811
 RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
-	msgbox gUnknown_0827331C, MSGBOX_DEFAULT
+	msgbox gText_AllPkmnBoxesFull, MSGBOX_DEFAULT
 	release
 	end
 
@@ -3471,7 +3471,7 @@ EventScript_27386D:: @ 827386D
 	waitmovement 0
 	msgbox gUnknown_08273506, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_EVENT_ENABLE
-	msgbox gUnknown_08273559, MSGBOX_DEFAULT
+	msgbox gText_SaveToAccessMysteryEvent, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -3489,7 +3489,7 @@ EventScript_2738B5:: @ 82738B5
 	waitmovement 0
 	msgbox gUnknown_08273446, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLE
-	msgbox gUnknown_082734CC, MSGBOX_DEFAULT
+	msgbox gText_SaveToAccessMysteryGift, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -3955,7 +3955,7 @@ Std_RegisteredInMatchCall:: @ 82742C9
 	closemessage
 	delay 30
 	playfanfare MUS_ME_TORE_EYE
-	msgbox gUnknown_08272E0F, MSGBOX_DEFAULT
+	msgbox gText_RegisteredTrainerInPokenav, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30

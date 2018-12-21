@@ -726,12 +726,12 @@ OldaleTown_PokemonCenter_2F_EventScript_277328:: @ 8277328
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277335:: @ 8277335
-	msgbox gUnknown_0827306F, MSGBOX_DEFAULT
+	msgbox gText_CableClubUndergoingAdjustments, MSGBOX_DEFAULT
 	release
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27733F:: @ 827733F
-	msgbox gUnknown_082730BC, MSGBOX_DEFAULT
+	msgbox gText_AppearsToBeUndergoingAdjustments, MSGBOX_DEFAULT
 	releaseall
 	end
 

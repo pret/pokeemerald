@@ -169,7 +169,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
 
 RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
@@ -179,7 +179,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 
 RustboroCity_DevonCorp_2F_EventScript_211A96:: @ 8211A96
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AB9
 	call RustboroCity_DevonCorp_2F_EventScript_273797
@@ -218,7 +218,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
 
 RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
@@ -228,7 +228,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 
 RustboroCity_DevonCorp_2F_EventScript_211B39:: @ 8211B39
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B5C
 	call RustboroCity_DevonCorp_2F_EventScript_273797

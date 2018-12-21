@@ -123,7 +123,7 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	playse 269
 	applymovement 14, BattleFrontier_OutsideEast_Movement_242D69
 	waitmovement 0
-	msgbox gUnknown_082731BD, MSGBOX_DEFAULT
+	msgbox gText_WeirdTreeAttacked, MSGBOX_DEFAULT
 	closemessage
 	waitse
 	playmoncry SPECIES_SUDOWOODO, 2

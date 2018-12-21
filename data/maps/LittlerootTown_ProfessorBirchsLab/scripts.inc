@@ -348,7 +348,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA06C:: @ 81FA06C
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 4
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0FD
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
@@ -359,7 +359,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA0A1:: @ 81FA0A1
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA0CC:: @ 81FA0CC
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 4
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA0F2
 	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
@@ -393,7 +393,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA10D:: @ 81FA10D
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 5
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA19E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
@@ -404,7 +404,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA142:: @ 81FA142
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA16D:: @ 81FA16D
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 5
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA193
 	call LittlerootTown_ProfessorBirchsLab_EventScript_273797
@@ -438,7 +438,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1AE:: @ 81FA1AE
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 6
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F
 	call LittlerootTown_ProfessorBirchsLab_EventScript_27378B
@@ -449,7 +449,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA1E3:: @ 81FA1E3
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA20E:: @ 81FA20E
 	call LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F
 	removeobject 6
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA234
 	call LittlerootTown_ProfessorBirchsLab_EventScript_273797

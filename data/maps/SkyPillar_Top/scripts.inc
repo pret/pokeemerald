@@ -89,7 +89,7 @@ SkyPillar_Top_EventScript_239785:: @ 8239785
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers 0
 	bufferspeciesname 0, VAR_0x8004
-	msgbox gUnknown_08273204, MSGBOX_DEFAULT
+	msgbox gText_RayquazaFlewAway, MSGBOX_DEFAULT
 	releaseall
 	end
 

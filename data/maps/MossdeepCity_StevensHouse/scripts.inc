@@ -96,7 +96,7 @@ MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 
 MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	call MossdeepCity_StevensHouse_EventScript_2228EB
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
@@ -106,7 +106,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 
 MossdeepCity_StevensHouse_EventScript_2228BD:: @ 82228BD
 	call MossdeepCity_StevensHouse_EventScript_2228EB
-	msgbox gUnknown_08273374, MSGBOX_YESNO
+	msgbox gText_GiveNicknameToPkmn, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_2228E0
 	call MossdeepCity_StevensHouse_EventScript_273797
