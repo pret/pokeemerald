@@ -20,8 +20,7 @@ struct HailStruct {
     s32 unk3:4;
 };
 
-extern void sub_810B684(struct Sprite *);
-extern void sub_810B6C4(struct Sprite *);
+static void sub_810B6C4(struct Sprite *);
 extern void sub_810B848(struct Sprite *);
 extern void AnimIcePunchSwirlingParticle(struct Sprite *);
 extern void AnimIceBeamParticle(struct Sprite *);
@@ -524,37 +523,10 @@ const struct SpriteTemplate gUnknown_08595DFC =
     .callback = InitIceBallParticle,
 };
 
-extern const struct SpriteTemplate gUnknown_085956C0;
-
-bool8 sub_810B614(struct Task *task, u8 taskId)
-{
-    u8 spriteId = CreateSprite(&gUnknown_085956C0, task->data[13], task->data[14], task->data[12]);
-    
-    if (spriteId != MAX_SPRITES)
-    {
-        gSprites[spriteId].callback = sub_810B684;
-        gSprites[spriteId].data[6] = taskId;
-        gSprites[spriteId].data[7] = 10;
-        task->data[10]++;
-    }
-    if (task->data[14] >= task->data[15])
-        return TRUE;
-    task->data[14] += 32;
-    return FALSE;
-}
-
-void sub_810B684(struct Sprite *sprite)
-{
-    if (sprite->animEnded)
-    {
-        gTasks[sprite->data[6]].data[sprite->data[7]]--;
-        DestroySprite(sprite);
-    }
-}
 
 // probably unused
 #ifdef NONMATCHING
-void sub_810B6C4(struct Sprite *sprite)
+static void sub_810B6C4(struct Sprite *sprite)
 {
     s16 targetX, targetY, attackerX, attackerY;
     s16 i;
@@ -596,7 +568,7 @@ void sub_810B6C4(struct Sprite *sprite)
 }
 #else
 NAKED
-void sub_810B6C4(struct Sprite *sprite)
+static void sub_810B6C4(struct Sprite *sprite)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -783,7 +755,6 @@ _0810B80A:\n\
 	.pool\n");
 }
 #endif
-
 void sub_810B848(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
