@@ -231,6 +231,7 @@ extern u8 gContestPlayerMonIndex;
 extern s16 gUnknown_02039F08[4];
 extern s16 gContestMonConditions[4];
 extern u8 gIsLinkContest;
+extern struct ContestWinner gUnknown_02039F3C;
 
 struct Shared18000
 {
@@ -415,7 +416,6 @@ extern struct ContestResources *gContestResources;
 #define eContestAI (gContestResources->field_C)
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
-#define shared19348 (*gContestResources->field_18)
 
 #define shared15800 (gHeap + 0x18000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
@@ -432,6 +432,7 @@ bool8 Contest_IsMonsTurnDisabled(u8 a);
 bool8 sub_80DE1E8(u8 a);
 void SetStartledString(u8 a, u8 b);
 s8 Contest_GetMoveExcitement(u16);
+u8 sub_80DAE0C(struct Pokemon *);
 void sub_80DEDA8(u8);
 
 #endif //GUARD_CONTEST_H

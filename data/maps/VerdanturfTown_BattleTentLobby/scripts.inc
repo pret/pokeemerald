@@ -246,12 +246,12 @@ VerdanturfTown_BattleTentLobby_EventScript_201A3F:: @ 8201A3F
 
 VerdanturfTown_BattleTentLobby_EventScript_201A41:: @ 8201A41
 	applymovement 1, VerdanturfTown_BattleTentLobby_Movement_201A70
-	applymovement 255, VerdanturfTown_BattleTentLobby_Movement_201A70
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_201A70
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, VerdanturfTown_BattleTentLobby_Movement_201A74
-	applymovement 255, VerdanturfTown_BattleTentLobby_Movement_201A77
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentLobby_Movement_201A77
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

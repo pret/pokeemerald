@@ -136,7 +136,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E48:: @ 81F9E48
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E67:: @ 81F9E67
 	lockall
-	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_1F9E78
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_1F9E78
 	waitmovement 0
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8
 	end
@@ -168,7 +168,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	playse SE_TK_KASYA
 	delay 20
 	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
-	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A4
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0
@@ -181,7 +181,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_1F9F58
 	waitmovement 0
 	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
-	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB419, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
@@ -244,7 +244,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_1F9F58: @ 81F9F58
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62:: @ 81F9F62
 	lockall
-	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_1F9F7C
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_1F9F7C
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB5F9, MSGBOX_DEFAULT
 	setvar VAR_0x40D3, 5
@@ -534,7 +534,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	closemessage
 	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_1FA3E0
 	waitmovement 0
-	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0

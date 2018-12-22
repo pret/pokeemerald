@@ -1100,14 +1100,14 @@ void sub_805EB9C(u8 affineMode)
         if (IsBattlerSpritePresent(i))
         {
             gSprites[gBattlerSpriteIds[i]].oam.affineMode = affineMode;
-            if (affineMode == 0)
+            if (affineMode == ST_OAM_AFFINE_OFF)
             {
-                gBattleSpritesDataPtr->healthBoxesData[i].field_6 = gSprites[gBattlerSpriteIds[i]].oam.matrixNum;
+                gBattleSpritesDataPtr->healthBoxesData[i].matrixNum = gSprites[gBattlerSpriteIds[i]].oam.matrixNum;
                 gSprites[gBattlerSpriteIds[i]].oam.matrixNum = 0;
             }
             else
             {
-                gSprites[gBattlerSpriteIds[i]].oam.matrixNum = gBattleSpritesDataPtr->healthBoxesData[i].field_6;
+                gSprites[gBattlerSpriteIds[i]].oam.matrixNum = gBattleSpritesDataPtr->healthBoxesData[i].matrixNum;
             }
         }
     }

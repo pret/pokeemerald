@@ -769,12 +769,12 @@ BattleFrontier_BattleTowerLobby_EventScript_23F15B:: @ 823F15B
 	call BattleFrontier_BattleTowerLobby_EventScript_23F1E8
 	call BattleFrontier_BattleTowerLobby_EventScript_23F22D
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerLobby_Movement_23F195
-	applymovement 255, BattleFrontier_BattleTowerLobby_Movement_23F195
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_23F195
 	waitmovement 0
 	opendoor VAR_0x8004, 1
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerLobby_Movement_23F199
-	applymovement 255, BattleFrontier_BattleTowerLobby_Movement_23F19C
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerLobby_Movement_23F19C
 	waitmovement 0
 	closedoor VAR_0x8004, 1
 	waitdooranim

@@ -543,7 +543,7 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
             VarSet(VAR_0x40ED, itemId);
         }
 
-        var = sub_81ABB2C(pocket);
+        var = GetItemListPosition(pocket);
         if (itemPocket->capacity > var
          && itemPocket->itemSlots[var].itemId == itemId)
         {

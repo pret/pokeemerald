@@ -40,10 +40,10 @@ static void sub_8117FD0(u8);
 
 const u16 gUnknown_08597418 = RGB(31, 31, 31);
 
-// no clue what these are...
-// possibly some register offsets
-const u8 gUnknown_0859741A[] = {0x08, 0x0a, 0x0c, 0x0e};
-const u8 gUnknown_0859741E[] = {0x08, 0x0a, 0x0c, 0x0e};
+// These belong in battle_intro.c, but there putting them there causes 2 bytes of alignment padding
+// between the two .rodata segments. Perhaps battle_intro.c actually belongs in this file, too.
+const u8 gUnknown_0859741A[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
+const u8 gUnknown_0859741E[] = {REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT};
 
 void sub_8116620(u8 taskId)
 {
@@ -236,7 +236,7 @@ static void sub_81169F8(u8 taskId)
         }
         else
         {
-            task->data[6] = duplicate_obj_of_side_rel2move_in_transparent_mode(task->data[0]);
+            task->data[6] = CloneBattlerSpriteWithBlend(task->data[0]);
             if (task->data[6] >= 0)
             {
                 gSprites[task->data[6]].oam.priority = task->data[0] ? 1 : 2;

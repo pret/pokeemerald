@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "pokedex.h"
 
 #define TEMP_FLAGS_SIZE 0x4
 #define TEMP_UPPER_FLAGS_SIZE 0x8
@@ -67,7 +68,7 @@ void EnableNationalPokedex(void)
     gSaveBlock2Ptr->pokedex.nationalMagic = 0xDA;
     *nationalDexVar = 0x302;
     FlagSet(FLAG_SYS_NATIONAL_DEX);
-    gSaveBlock2Ptr->pokedex.unknown1 = 1;
+    gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
     gSaveBlock2Ptr->pokedex.order = 0;
     sub_80BB358();
 }

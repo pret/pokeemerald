@@ -3,7 +3,8 @@
 #include "event_scripts.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
+#include "field_weather.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "rom6.h"
@@ -40,7 +41,7 @@ bool8 FldEff_SweetScent(void)
 {
     u8 taskId;
 
-    sub_80AC3D0();
+    SetWeatherScreenFadeOut();
     taskId = oei_task_add();
     gTasks[taskId].data[8] = (u32)StartSweetScentFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartSweetScentFieldEffect;

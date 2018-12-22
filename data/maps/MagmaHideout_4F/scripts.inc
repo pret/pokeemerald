@@ -18,7 +18,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80B0534
-	applymovement 255, MagmaHideout_4F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, MagmaHideout_4F_Movement_2725A6
 	waitmovement 0
 	delay 150
 	removeobject 7
@@ -50,7 +50,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_23AADA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MagmaHideout_4F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, MagmaHideout_4F_Movement_2725A8
 	waitmovement 0
 	delay 30
 	applymovement 6, MagmaHideout_4F_Movement_27259E

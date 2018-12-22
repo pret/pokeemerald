@@ -9,7 +9,7 @@ BattleFrontier_BattlePalaceCorridor_MapScript2_24F4A9: @ 824F4A9
 BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	delay 16
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5B8
-	applymovement 255, BattleFrontier_BattlePalaceCorridor_Movement_24F5B8
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5B8
 	waitmovement 0
 	lockall
 	setvar VAR_0x8004, 3
@@ -31,12 +31,12 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F553
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5BD
-	applymovement 255, BattleFrontier_BattlePalaceCorridor_Movement_24F5C4
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5C4
 	waitmovement 0
 	opendoor 6, 3
 	waitdooranim
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5DA
-	applymovement 255, BattleFrontier_BattlePalaceCorridor_Movement_24F5D9
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5D9
 	waitmovement 0
 	closedoor 6, 3
 	waitdooranim
@@ -44,12 +44,12 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 
 BattleFrontier_BattlePalaceCorridor_EventScript_24F553:: @ 824F553
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5CB
-	applymovement 255, BattleFrontier_BattlePalaceCorridor_Movement_24F5D2
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5D2
 	waitmovement 0
 	opendoor 10, 3
 	waitdooranim
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5DA
-	applymovement 255, BattleFrontier_BattlePalaceCorridor_Movement_24F5D9
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceCorridor_Movement_24F5D9
 	waitmovement 0
 	closedoor 10, 3
 	waitdooranim

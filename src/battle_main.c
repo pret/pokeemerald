@@ -4,6 +4,7 @@
 #include "battle_arena.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_main.h"
 #include "battle_message.h"
 #include "battle_pyramid.h"
 #include "battle_scripts.h"
@@ -56,20 +57,6 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 
-struct UnknownPokemonStruct4
-{
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
-    /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x0F*/ u8 level;
-    /*0x10*/ u16 hp;
-    /*0x12*/ u16 maxhp;
-    /*0x14*/ u32 status;
-    /*0x18*/ u32 personality;
-    /*0x1C*/ u8 gender;
-    /*0x1D*/ u8 language;
-};
-
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gUnknown_0203CF00[];
@@ -82,7 +69,7 @@ extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
-extern const struct ScanlineEffectParams gUnknown_0831AC70;
+extern const struct ScanlineEffectParams gBattleIntroSlideScanlineEffectParams;
 
 // strings
 extern const u8 gText_LinkStandby3[];
@@ -639,7 +626,7 @@ static void CB2_InitBattleInternal(void)
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
         }
 
-        ScanlineEffect_SetParams(gUnknown_0831AC70);
+        ScanlineEffect_SetParams(gBattleIntroSlideScanlineEffectParams);
     }
 
     ResetPaletteFade();
@@ -2128,12 +2115,12 @@ static void sub_8038B94(u8 taskId)
         if (species != SPECIES_EGG && hp != 0 && status == 0)
             r7 |= 1 << i * 2;
 
-        if (species == 0)
+        if (species == SPECIES_NONE)
             continue;
         if (hp != 0 && (species == SPECIES_EGG || status != 0))
             r7 |= 2 << i * 2;
 
-        if (species == 0)
+        if (species == SPECIES_NONE)
             continue;
         if (species != SPECIES_EGG && hp == 0)
             r7 |= 3 << i * 2;

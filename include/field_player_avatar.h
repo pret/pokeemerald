@@ -58,5 +58,7 @@ u8 GetJumpSpecialMovementAction(u32);
 bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 bool8 IsPlayerSurfingNorth(void);
+void sub_808C228(u8 direction);
+u8 sub_808BCD0(void);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

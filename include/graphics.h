@@ -3911,6 +3911,11 @@ extern const u16 gIntro2BrendanNoTurnPal[];
 extern const u16 gIntro2FlygonPal[];
 extern const u32 gIntro2FlygonGfx[];
 
+// party menu graphics
+extern const u32 gPartyMenuMisc_Gfx[];
+extern const u32 gPartyMenuMisc_Tilemap[];
+extern const u8 gPartyMenuMisc_Pal[];
+
 // berry pics
 extern const u32 gBerryPic_Cheri[];
 extern const u32 gBerryPalette_Cheri[];
@@ -4154,6 +4159,8 @@ extern const u32 gBattleAnimSpriteSheet_050[];
 extern const u32 gBattleAnimSpriteSheet_051[];
 extern const u32 gBattleAnimSpriteSheet_052[];
 extern const u32 gBattleAnimSpriteSheet_053[];
+extern const u32 gUnknown_08C2EA50[];
+extern const u32 gUnknown_08C2EA9C[];
 extern const u32 gBattleAnimSpriteSheet_054[];
 extern const u32 gBattleAnimSpriteSheet_055[];
 extern const u32 gBattleAnimSpriteSheet_056[];
@@ -4233,6 +4240,7 @@ extern const u32 gBattleAnimSpriteSheet_132[];
 extern const u32 gBattleAnimSpriteSheet_133[];
 extern const u32 gBattleAnimSpriteSheet_134[];
 extern const u32 gBattleAnimSpriteSheet_135[];
+extern const u32 gBattleAnimSpriteSheet_Particles[];
 extern const u32 gBattleAnimSpriteSheet_136[];
 extern const u32 gBattleAnimSpriteSheet_137[];
 extern const u32 gBattleAnimSpriteSheet_138[];
@@ -4371,6 +4379,9 @@ extern const u32 gBattleAnimSpriteSheet_280[];
 extern const u32 gBattleAnimSpriteSheet_281[];
 extern const u32 gBattleAnimSpriteSheet_282[];
 extern const u32 gBattleAnimSpriteSheet_283[];
+extern const u32 gBattleAnimBackgroundTilemap_ScaryFacePlayer[];
+extern const u32 gBattleAnimBackgroundTilemap_ScaryFaceOpponent[];
+extern const u32 gBattleAnimBackgroundTilemap_ScaryFaceContest[];
 extern const u32 gBattleAnimSpriteSheet_284[];
 extern const u32 gBattleAnimSpriteSheet_285[];
 
@@ -4583,10 +4594,15 @@ extern const u32 gBattleAnimSpritePalette_209[];
 extern const u32 gBattleAnimSpritePalette_210[];
 extern const u32 gBattleAnimSpritePalette_211[];
 extern const u32 gBattleAnimSpritePalette_215[];
+extern const u32 gUnknown_08C249D0[];
+extern const u32 gUnknown_08C249F8[];
 extern const u32 gBattleAnimSpritePalette_216[];
 extern const u32 gBattleAnimSpritePalette_217[];
 extern const u32 gBattleAnimSpritePalette_218[];
 extern const u32 gBattleAnimSpritePalette_219[];
+extern const u32 gUnknown_08C232E0;
+extern const u32 gUnknown_08C23D50;
+extern const u32 gUnknown_08C23D78;
 extern const u32 gBattleAnimSpritePalette_220[];
 extern const u32 gBattleAnimSpritePalette_221[];
 extern const u32 gBattleAnimSpritePalette_222[];
@@ -4610,6 +4626,9 @@ extern const u32 gBattleAnimSpritePalette_241[];
 extern const u32 gBattleAnimSpritePalette_242[];
 extern const u32 gBattleAnimSpritePalette_243[];
 extern const u32 gBattleAnimSpritePalette_244[];
+extern const u8 gUnknown_08C2DC68[];
+extern const u16 gUnknown_08C2DDA4[];
+extern const u8 gUnknown_08C2DDC4[];
 extern const u32 gBattleAnimSpritePalette_245[];
 extern const u32 gBattleAnimSpritePalette_248[];
 extern const u32 gBattleAnimSpritePalette_249[];
@@ -4688,6 +4707,9 @@ extern const u32 gBattleAnimBackgroundTilemap_07[];
 extern const u32 gBattleAnimBackgroundTilemap_08[];
 extern const u32 gBattleAnimBackgroundTilemap_09[];
 extern const u32 gBattleAnimBackgroundTilemap_10[];
+extern const u32 gUnknown_08C2A634[];
+extern const u32 gUnknown_08C2A6D4[];
+extern const u32 gUnknown_08C2A6EC[];
 extern const u32 gBattleAnimBackgroundTilemap_11[];
 extern const u32 gBattleAnimBackgroundTilemap_12[];
 extern const u32 gBattleAnimBackgroundTilemap_13[];
@@ -4719,6 +4741,15 @@ extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
 
+extern const u32 gUnknown_08D95E00[];
+extern const u32 gUnknown_08D960D0[];
+extern const u32 gUnknown_08D963A4[];
+extern const u32 gBattleAnimBackgroundImage_Surf[];
+extern const u32 gBattleAnimBackgroundPalette_Surf[];
+extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
+
+extern const u32 gBattleAnimFogTilemap[];
+
 // Berry blender
 extern const u32 gBerryBlenderArrowTiles[];
 extern const u32 gBerryBlenderStartTiles[];
@@ -4739,5 +4770,13 @@ extern const u32 gUnknown_08D8D58C[];
 // Pokedex Area Screen
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
+
+// Cable Car
+extern const u32 gUnknown_08DBA5B8[];
+extern const u16 gUnknown_08DBA518[];
+extern const u32 gCableCar_Gfx[];
+extern const u32 gCableCarDoor_Gfx[];
+extern const u32 gCableCarCord_Gfx[];
+extern const u16 gCableCar_Pal[];
 
 #endif //GUARD_GRAPHICS_H

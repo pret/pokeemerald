@@ -73,7 +73,7 @@ SootopolisCity_Gym_1F_EventScript_224F15:: @ 8224F15
 SootopolisCity_Gym_1F_EventScript_224F29:: @ 8224F29
 	lockall
 	delay 20
-	applymovement 255, SootopolisCity_Gym_1F_Movement_224F42
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Gym_1F_Movement_224F42
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60

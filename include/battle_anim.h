@@ -9,11 +9,11 @@ enum
 {
     BG_ANIM_SCREEN_SIZE,
     BG_ANIM_AREA_OVERFLOW_MODE,
-    BG_ANIM2,
+    BG_ANIM_MOSAIC,
     BG_ANIM_CHAR_BASE_BLOCK,
     BG_ANIM_PRIORITY,
-    BG_ANIM_5,
-    BG_ANIM_6
+    BG_ANIM_PALETTES_MODE,
+    BG_ANIM_SCREEN_BASE_BLOCK,
 };
 
 struct UnknownAnimStruct2
@@ -67,77 +67,96 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 void sub_80A4720(u16 a, u16 *b, u32 c, u8 d);
 void sub_80A477C(bool8);
 
-// battle_anim_80FE840.s
+// battle_intro.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
-void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
+void sub_8118FBC(int bgId, u8 arg1, u8 arg2, u8 battlerPosition, u8 arg4, u8 *arg5, u16 *arg6, u16 arg7);
 void HandleIntroSlide(u8 terrainId);
-u32 GetAnimBgAttribute(u8 bgId, u8 attributeId);
+int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6450(struct Sprite *sprite);
-void SetAverageBattlerPositions(u8 battlerId, bool8 a2, s16 *x, s16 *y);
-void move_anim_8074EE0(struct Sprite *sprite);
-void sub_80A656C(struct Sprite *sprite);
-void InitAnimSpritePos(struct Sprite *sprite, u8 a2);
-void sub_80A6980(struct Sprite *sprite, bool8 a2);
+void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x, s16 *y);
+void DestroySpriteAndMatrix(struct Sprite *sprite);
+void AnimTranslateLinearSimple(struct Sprite *sprite);
+void InitSpritePosToAnimAttacker(struct Sprite *sprite, u8 a2);
+void InitSpritePosToAnimTarget(struct Sprite *sprite, bool8 a2);
 void StartAnimLinearTranslation(struct Sprite *sprite);
 void InitAnimArcTranslation(struct Sprite *sprite);
-bool8 TranslateAnimLinear(struct Sprite *sprite);
+bool8 AnimTranslateLinear(struct Sprite *sprite);
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
 void sub_80A8EE4(struct Sprite *sprite);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 attributeId);
 void sub_80A6FD4(struct Sprite *sprite);
 u16 ArcTan2Neg(s16 a, s16 b);
-void sub_80A73E0(struct Sprite *sprite, bool8 a2, s16 xScale, s16 yScale, u16 rotation);
-void sub_80A67BC(struct Sprite *sprite);
+void TrySetSpriteRotScale(struct Sprite *sprite, bool8 a2, s16 xScale, s16 yScale, u16 rotation);
+void RunStoredCallbackWhenAffineAnimEnds(struct Sprite *sprite);
 void sub_80A66DC(struct Sprite *sprite);
-void sub_80A6838(struct Sprite *sprite);
-void sub_80A67D8(struct Sprite *sprite);
-void sub_80A6864(struct Sprite *sprite, s16 a2);
+void SetSpriteCoordsToAnimAttackerCoords(struct Sprite *sprite);
+void RunStoredCallbackWhenAnimEnds(struct Sprite *sprite);
+void SetAnimSpriteInitialXOffset(struct Sprite *sprite, s16 a2);
 s16 sub_80A861C(u8 battlerId, u8 a2);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
 void WaitAnimForDuration(struct Sprite *sprite);
 void sub_80A7938(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void sub_80A6F98(struct Sprite *sprite);
-u8 sub_80A8328(u8 battlerId);
-void *sub_80A8050(s16 bottom, s16 top);
-void sub_80A8048(s16 *bottom, s16 *top, const void *ptr);
+u8 GetBattlerSpriteBGPriority(u8 battlerId);
+void *LoadPointerFromVars(s16 bottom, s16 top);
+void StorePointerInVars(s16 *bottom, s16 *top, const void *ptr);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
-u8 sub_80A82E4(u8 battlerId);
+u8 GetBattlerSpriteSubpriority(u8 battlerId);
 bool8 TranslateAnimArc(struct Sprite *sprite);
 void sub_80A6630(struct Sprite *sprite);
 void sub_80A6680(struct Sprite *sprite);
-void sub_80A7344(u8 spriteId);
-void obj_id_set_rotscale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
+void ResetSpriteRotScale(u8 spriteId);
+void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
-void sub_80A7270(u8 spriteId, u8 objMode);
-void sub_80A73A0(u8 spriteId);
+void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode);
+void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
 u32 sub_80A75AC(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7);
 u32 sub_80A76C4(u8 a1, u8 a2, u8 a3, u8 a4);
 u8 sub_80A77AC(u8 a1);
-s16 duplicate_obj_of_side_rel2move_in_transparent_mode(u8);
+s16 CloneBattlerSpriteWithBlend(u8);
 void obj_delete_but_dont_free_vram(struct Sprite*);
 u8 sub_80A89C8(int, u8, int);
 void sub_80A6D60(struct UnknownAnimStruct2*, const void*, u32);
 void sub_80A6CC0(u32, const void*, u32);
 void sub_80A6DAC(bool8);
-void sub_80A634C(struct Sprite *);
+void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *);
 void sub_80A653C(struct Sprite *);
-void sub_80A7E6C(u8 spriteId);
+void SetBattlerSpriteYOffsetFromYScale(u8 spriteId);
 void sub_80A805C(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
 u8 sub_80A80C8(struct Task *task);
 void sub_80A8EE4(struct Sprite *);
+void sub_80A67F4(struct Sprite *);
+void sub_80A6D48(u32 bgId, const void *src);
+void InitAnimFastLinearTranslationWithSpeed(struct Sprite *sprite);
+bool8 AnimFastTranslateLinear(struct Sprite *sprite);
+void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite);
+void TranslateMonBGUntil(struct Sprite *sprite);
+void TranslateSpriteOverDuration(struct Sprite *sprite);
+void sub_80A77C8(struct Sprite *sprite);
+void sub_80A7000(struct Sprite *sprite);
+void TranslateSpriteInCircleOverDuration(struct Sprite *sprite);
+void SetGreyscaleOrOriginalPalette(u16 a1, bool8 a2);
+void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union AffineAnimCmd *affineAnimCmds);
+bool8 RunAffineAnimFromTaskData(struct Task *task);
+void sub_80A78AC(struct Sprite *sprite);
+void sub_80A6BFC(struct UnknownAnimStruct2 *unk, u8 unused);
+u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10);
+void sub_80A749C(struct Sprite *sprite);
+void sub_80A6814(u8 taskId);
+void sub_80A8610(struct Sprite *sprite);
 
 enum
 {
     BATTLER_COORD_X,
     BATTLER_COORD_Y,
     BATTLER_COORD_X_2,
-    BATTLER_COORD_3,
-    BATTLER_COORD_4,
+    BATTLER_COORD_Y_PIC_OFFSET,
+    BATTLER_COORD_Y_PIC_OFFSET_DEFAULT,
 };
 
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
@@ -147,12 +166,15 @@ void sub_80A6C68(u32 arg0);
 u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
-u8 sub_80A8364(u8 battlerId);
+u8 GetBattlerSpriteBGPriorityRank(u8 battlerId);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
-u8 sub_80A82E4(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
+
+// battle_anim_80A64EC.c
+void sub_80A64EC(struct Sprite *sprite);
+void sub_80A718C(struct Sprite *sprite);
 
 // battle_anim_80A9C70.s
 #define STAT_ANIM_PLUS1  15
@@ -165,13 +187,17 @@ u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 #define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
+// ground.c
+void sub_81152DC(u8 taskId);
+
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);
-u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
+u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);
 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
+void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u8 *arg8, const u8 *arg9, const u16 *palette);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);
 
@@ -221,5 +247,8 @@ extern const struct OamData gUnknown_085249F4;
 extern const struct OamData gUnknown_0852493C;
 extern const struct OamData gUnknown_08524A5C;
 extern const struct OamData gUnknown_08524A74;
+
+extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
+extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 
 #endif // GUARD_BATTLE_ANIM_H

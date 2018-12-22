@@ -10,7 +10,7 @@
 #include "fieldmap.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "item.h"
 #include "item_menu.h"
@@ -38,7 +38,7 @@
 #include "constants/vars.h"
 
 extern void(*gUnknown_0203A0F4)(u8 taskId);
-extern void (*gUnknown_03006328)(u8, u16, TaskFunc);
+extern void (*gUnknown_03006328)(u8, TaskFunc);
 extern void unknown_ItemMenu_Confirm(u8 taskId);
 extern void sub_81C5B14(u8 taskId);
 extern void ScriptUnfreezeEventObjects(void);
@@ -52,12 +52,11 @@ extern u8 BattleFrontier_OutsideEast_EventScript_242CFC[];
 extern int sub_80247BC(void);
 extern struct MapHeader* mapconnection_get_mapheader(struct MapConnection *connection);
 extern void SetUpItemUseCallback(u8 taskId);
-extern void ItemUseCB_Medicine(u8, u16, TaskFunc);
+extern void ItemUseCB_Medicine(u8, TaskFunc);
 extern void bag_menu_yes_no(u8, u8, const struct YesNoFuncTable*);
 extern void sub_81C5924(void);
 extern void sub_81C59BC(void);
 extern void sub_81AB9A8(u8);
-extern void sub_81ABA88(u8);
 extern void StartEscapeRopeFieldEffect(void);
 extern u8* sub_806CF78(u16);
 extern void sub_81B89F0(void);
@@ -128,7 +127,7 @@ void SetUpItemUseCallback(u8 taskId)
         type = ItemId_GetType(gSpecialVar_ItemId) - 1;
     if (!InBattlePyramid())
     {
-        gUnknown_0203CE54->unk0 = gUnknown_085920D8[type];
+        gUnknown_0203CE54->mainCallback2 = gUnknown_085920D8[type];
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -212,7 +211,7 @@ void sub_80FD254(void)
 
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
-    gUnknown_0203CE54->unk0 = sub_80FD254;
+    gUnknown_0203CE54->mainCallback2 = sub_80FD254;
     unknown_ItemMenu_Confirm(taskId);
 }
 
@@ -608,7 +607,7 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
     }
     else if (gTasks[taskId].data[3] != TRUE)
     {
-        gUnknown_0203CE54->unk0 = sub_80FDBEC;
+        gUnknown_0203CE54->mainCallback2 = sub_80FDBEC;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -670,7 +669,7 @@ void sub_80FDD10(u8 taskId)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;
-        gUnknown_0203CE54->unk0 = CB2_ReturnToField;
+        gUnknown_0203CE54->mainCallback2 = CB2_ReturnToField;
         unknown_ItemMenu_Confirm(taskId);
     }
     else
@@ -812,7 +811,7 @@ void sub_80FE058(void)
     if (!InBattlePyramid())
     {
         sub_81AB9A8(ItemId_GetPocket(gSpecialVar_ItemId));
-        sub_81ABA88(ItemId_GetPocket(gSpecialVar_ItemId));
+        SetInitialScrollAndCursorPositions(ItemId_GetPocket(gSpecialVar_ItemId));
     }
     else
     {
@@ -1014,7 +1013,7 @@ void sub_80FE54C(u8 taskId)
 {
     if (!InBattlePyramid())
     {
-        gUnknown_0203CE54->unk0 = sub_81B89F0;
+        gUnknown_0203CE54->mainCallback2 = sub_81B89F0;
         unknown_ItemMenu_Confirm(taskId);
     }
     else

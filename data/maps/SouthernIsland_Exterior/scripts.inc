@@ -31,12 +31,12 @@ SouthernIsland_Exterior_EventScript_242A17:: @ 8242A17
 	end
 
 BattleFrontier_OutsideWest_EventScript_242A21:: @ 8242A21
-	applymovement 255, BattleFrontier_OutsideWest_Movement_242A37
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_OutsideWest_Movement_242A37
 	waitmovement 0
 	return
 
 BattleFrontier_OutsideWest_EventScript_242A2C:: @ 8242A2C
-	applymovement 255, BattleFrontier_OutsideWest_Movement_242A39
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_OutsideWest_Movement_242A39
 	waitmovement 0
 	return
 

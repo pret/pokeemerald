@@ -26,7 +26,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF53:: @ 822AF53
 Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 	lockall
 	applymovement 1, Route114_FossilManiacsTunnel_Movement_2725A6
-	applymovement 255, Route114_FossilManiacsTunnel_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Route114_FossilManiacsTunnel_Movement_2725AA
 	waitmovement 0
 	msgbox Route114_FossilManiacsTunnel_Text_22B1F7, MSGBOX_DEFAULT
 	setvar VAR_0x40CC, 2

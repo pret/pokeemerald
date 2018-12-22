@@ -245,12 +245,12 @@ FallarborTown_BattleTentLobby_EventScript_2001CD:: @ 82001CD
 
 FallarborTown_BattleTentLobby_EventScript_2001CF:: @ 82001CF
 	applymovement 1, FallarborTown_BattleTentLobby_Movement_2001FE
-	applymovement 255, FallarborTown_BattleTentLobby_Movement_200205
+	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_200205
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, FallarborTown_BattleTentLobby_Movement_200202
-	applymovement 255, FallarborTown_BattleTentLobby_Movement_200209
+	applymovement EVENT_OBJ_ID_PLAYER, FallarborTown_BattleTentLobby_Movement_200209
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim

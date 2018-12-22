@@ -30,7 +30,7 @@
 #include "field_weather.h"
 #include "international_string_util.h"
 #include "naming_screen.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData
@@ -60,7 +60,7 @@ extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
 
-extern void play_some_sound(void);
+extern void PlayRainSoundEffect(void);
 extern u16 sub_80D22D0(void);
 extern u8 CountPartyAliveNonEggMonsExcept(u8);
 
@@ -581,7 +581,7 @@ static void Task_EggHatchPlayBGM(u8 taskID)
     if (gTasks[taskID].data[0] == 0)
     {
         StopMapMusic();
-        play_some_sound();
+        PlayRainSoundEffect();
     }
     if (gTasks[taskID].data[0] == 1)
         PlayBGM(MUS_ME_SHINKA);

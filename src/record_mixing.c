@@ -22,8 +22,8 @@
 #include "constants/songs.h"
 #include "menu.h"
 #include "overworld.h"
-#include "field_screen.h"
-#include "fldeff_80F9BCC.h"
+#include "field_screen_effect.h"
+#include "fldeff_misc.h"
 #include "script.h"
 #include "event_data.h"
 #include "lilycove_lady.h"
@@ -647,7 +647,7 @@ static void ReceiveOldManData(OldMan *oldMan, size_t recordSize, u8 which)
 static void ReceiveBattleTowerData(void *battleTowerRecord, size_t recordSize, u8 which)
 {
     struct EmeraldBattleTowerRecord *dest;
-    struct UnknownPokemonStruct *btPokemon;
+    struct BattleTowerPokemon *btPokemon;
     u32 mixIndices[4];
     s32 i;
 
@@ -1866,7 +1866,7 @@ static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *ds
 
     for (i = 0; i < 4; i++)
     {
-        struct UnknownPokemonStruct *towerMon = &dst->party[i];
+        struct BattleTowerPokemon *towerMon = &dst->party[i];
         if (towerMon->species != 0)
             StripExtCtrlCodes(towerMon->nickname);
     }

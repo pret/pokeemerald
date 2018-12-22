@@ -68,17 +68,17 @@ LilycoveCity_LilycoveMuseum_2F_MapScript2_2197FE: @ 82197FE
 LilycoveCity_LilycoveMuseum_2F_EventScript_219808:: @ 8219808
 	lockall
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
-	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219861
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_2199EB, MSGBOX_SIGN
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
-	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219863
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219A0D, MSGBOX_SIGN
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
 	waitmovement 0
-	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219861
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219BC4, MSGBOX_SIGN
 	copyvar VAR_0x4094, 0x1
