@@ -903,7 +903,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return FALSE;
     else if (gProtectStructs[battlerId].protected)
         return TRUE;
-    else if ((gProtectStructs[battlerId].wideGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].wideGuarded)
+    else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD
              && gBattleMoves[move].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
         return TRUE;
     else if (gProtectStructs[battlerId].banefulBunkered)
@@ -912,8 +912,8 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return TRUE;
     else if (gProtectStructs[battlerId].kingsShielded && gBattleMoves[move].power != 0)
         return TRUE;
-    else if ((gProtectStructs[battlerId].quickGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].quickGuarded)
-             && gBattleStruct->movePriorities[battlerId] > 0)
+    else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD
+             && GetMovePriority(gBattlerAttacker) > 0)
         return TRUE;
     else
         return FALSE;
@@ -2732,15 +2732,15 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             case MOVE_EFFECT_FEINT:
                 if (gProtectStructs[gBattlerTarget].protected
-                    || gProtectStructs[gBattlerTarget].wideGuarded
-                    || gProtectStructs[gBattlerTarget].quickGuarded
+                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_WIDE_GUARD
+                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_QUICK_GUARD
                     || gProtectStructs[gBattlerTarget].spikyShielded
                     || gProtectStructs[gBattlerTarget].kingsShielded
                     || gProtectStructs[gBattlerTarget].banefulBunkered)
                 {
                     gProtectStructs[gBattlerTarget].protected = 0;
-                    gProtectStructs[gBattlerTarget].wideGuarded = 0;
-                    gProtectStructs[gBattlerTarget].quickGuarded = 0;
+                    gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_WIDE_GUARD);
+                    gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_QUICK_GUARD);
                     gProtectStructs[gBattlerTarget].spikyShielded = 0;
                     gProtectStructs[gBattlerTarget].kingsShielded = 0;
                     gProtectStructs[gBattlerTarget].banefulBunkered = 0;
@@ -7202,8 +7202,9 @@ static void atk76_various(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk77_setprotectlike(void) // protect and endure
+static void atk77_setprotectlike(void)
 {
+    bool32 fail = TRUE;
     bool32 notLastTurn = TRUE;
 
     if (!(gBattleMoves[gLastResultingMoves[gBattlerAttacker]].flags & FLAG_PROTECTION_MOVE))
@@ -7214,44 +7215,58 @@ static void atk77_setprotectlike(void) // protect and endure
 
     if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random() && notLastTurn)
     {
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
+        if (!gBattleMoves[gCurrentMove].argument) // Protects one mon only.
         {
-            gProtectStructs[gBattlerAttacker].endured = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
+            {
+                gProtectStructs[gBattlerAttacker].endured = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            }
+            else if (gCurrentMove == MOVE_DETECT || gCurrentMove == MOVE_PROTECT)
+            {
+                gProtectStructs[gBattlerAttacker].protected = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_SPIKY_SHIELD)
+            {
+                gProtectStructs[gBattlerAttacker].spikyShielded = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_KING_S_SHIELD)
+            {
+                gProtectStructs[gBattlerAttacker].kingsShielded = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_BANEFUL_BUNKER)
+            {
+                gProtectStructs[gBattlerAttacker].banefulBunkered = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+
+            gDisableStructs[gBattlerAttacker].protectUses++;
+            fail = FALSE;
         }
-        else if (gCurrentMove == MOVE_DETECT || gCurrentMove == MOVE_PROTECT)
+        else // Protects the whole side.
         {
-            gProtectStructs[gBattlerAttacker].protected = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            u8 side = GetBattlerSide(gBattlerAttacker);
+            if (gCurrentMove == MOVE_WIDE_GUARD && !(gSideStatuses[side] & SIDE_STATUS_WIDE_GUARD))
+            {
+                gSideStatuses[side] |= SIDE_STATUS_WIDE_GUARD;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gDisableStructs[gBattlerAttacker].protectUses++;
+                fail = FALSE;
+            }
+            else if (gCurrentMove == MOVE_QUICK_GUARD && !(gSideStatuses[side] & SIDE_STATUS_QUICK_GUARD))
+            {
+                gSideStatuses[side] |= SIDE_STATUS_QUICK_GUARD;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gDisableStructs[gBattlerAttacker].protectUses++;
+                fail = FALSE;
+            }
         }
-        else if (gCurrentMove == MOVE_SPIKY_SHIELD)
-        {
-            gProtectStructs[gBattlerAttacker].spikyShielded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
-        else if (gCurrentMove == MOVE_KING_S_SHIELD)
-        {
-            gProtectStructs[gBattlerAttacker].kingsShielded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
-        else if (gCurrentMove == MOVE_BANEFUL_BUNKER)
-        {
-            gProtectStructs[gBattlerAttacker].banefulBunkered = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
-        else if (gCurrentMove == MOVE_WIDE_GUARD)
-        {
-            gProtectStructs[gBattlerAttacker].wideGuarded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-        }
-        else if (gCurrentMove == MOVE_QUICK_GUARD)
-        {
-            gProtectStructs[gBattlerAttacker].quickGuarded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-        }
-        gDisableStructs[gBattlerAttacker].protectUses++;
     }
-    else
+
+    if (fail)
     {
         gDisableStructs[gBattlerAttacker].protectUses = 0;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;

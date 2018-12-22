@@ -177,8 +177,6 @@ struct DisableStruct
 struct ProtectStruct
 {
     u32 protected:1;
-    u32 wideGuarded:1;
-    u32 quickGuarded:1;
     u32 spikyShielded:1;
     u32 kingsShielded:1;
     u32 banefulBunkered:1;
@@ -589,7 +587,6 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
-    s8 movePriorities[MAX_BATTLERS_COUNT];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

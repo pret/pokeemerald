@@ -3238,8 +3238,6 @@ void FaintClearSetData(void)
         ptr[i] = 0;
 
     gProtectStructs[gActiveBattler].protected = 0;
-    gProtectStructs[gActiveBattler].wideGuarded = 0;
-    gProtectStructs[gActiveBattler].quickGuarded = 0;
     gProtectStructs[gActiveBattler].spikyShielded = 0;
     gProtectStructs[gActiveBattler].kingsShielded = 0;
     gProtectStructs[gActiveBattler].banefulBunkered = 0;
@@ -4711,8 +4709,9 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     return speed;
 }
 
-static s8 GetMovePriority(u8 battlerId)
+s8 GetMovePriority(u8 battlerId)
 {
+    s8 priority;
     u16 move;
 
     if (gProtectStructs[battlerId].noValidMoves)
@@ -4720,17 +4719,17 @@ static s8 GetMovePriority(u8 battlerId)
     else
         move = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
 
-    gBattleStruct->movePriorities[battlerId] = gBattleMoves[move].priority;
+    priority = gBattleMoves[move].priority;
     if (GetBattlerAbility(battlerId) == ABILITY_GALE_WINGS
         && gBattleMoves[move].type == TYPE_FLYING
         && (B_GALE_WINGS == GEN_6 || BATTLER_MAX_HP(battlerId)))
     {
-        gBattleStruct->movePriorities[battlerId]++;
+        priority++;
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_PRANKSTER
         && gBattleMoves[move].split == SPLIT_STATUS)
     {
-        gBattleStruct->movePriorities[battlerId]++;
+        priority++;
     }
     else if (GetBattlerAbility(battlerId) == ABILITY_TRIAGE)
     {
@@ -4748,12 +4747,12 @@ static s8 GetMovePriority(u8 battlerId)
         case EFFECT_SOFTBOILED:
         case EFFECT_ABSORB:
         case EFFECT_ROOST:
-            gBattleStruct->movePriorities[battlerId] += 3;
+            priority += 3;
             break;
         }
     }
 
-    return gBattleStruct->movePriorities[battlerId];
+    return priority;
 }
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
@@ -4949,9 +4948,6 @@ static void TurnValuesCleanUp(bool8 var0)
         if (var0)
         {
             gProtectStructs[gActiveBattler].protected = 0;
-            gProtectStructs[gActiveBattler].endured = 0;
-            gProtectStructs[gActiveBattler].wideGuarded = 0;
-            gProtectStructs[gActiveBattler].quickGuarded = 0;
             gProtectStructs[gActiveBattler].spikyShielded = 0;
             gProtectStructs[gActiveBattler].kingsShielded = 0;
             gProtectStructs[gActiveBattler].banefulBunkered = 0;
@@ -4977,6 +4973,8 @@ static void TurnValuesCleanUp(bool8 var0)
             gBattleMons[gActiveBattler].status2 &= ~(STATUS2_SUBSTITUTE);
     }
 
+    gSideStatuses[0] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD);
+    gSideStatuses[1] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD);
     gSideTimers[0].followmeTimer = 0;
     gSideTimers[1].followmeTimer = 0;
 }
