@@ -461,9 +461,9 @@ static void ItemStorageMenuProcessInput(u8 taskId)
     s8 r2;
     s8 inputOptionId;
 
-    r5 = GetMenuCursorPos();
+    r5 = Menu_GetCursorPos();
     inputOptionId = Menu_ProcessInput();
-    r2 = GetMenuCursorPos();
+    r2 = Menu_GetCursorPos();
     switch(inputOptionId)
     {
         case -2:

@@ -3196,7 +3196,7 @@ void sub_81B3730(u8 taskId)
             input = Menu_ProcessInputNoWrapAround_other();
         else
             input = ProcessMenuInput_other();
-        data[0] = GetMenuCursorPos();
+        data[0] = Menu_GetCursorPos();
         if (input != MENU_NOTHING_CHOSEN)
         {
             if (input == MENU_B_PRESSED)
@@ -4154,7 +4154,7 @@ void sub_81B5430(u8 taskId)
 
 void sub_81B5470(u8 taskId)
 {
-    u8 fieldMove = gUnknown_0203CEC4->unkF[GetMenuCursorPos()] - 19;
+    u8 fieldMove = gUnknown_0203CEC4->unkF[Menu_GetCursorPos()] - 19;
     struct MapHeader const *mapHeader;
     u8 fieldMove2;
 
@@ -4620,9 +4620,9 @@ void sub_81B5FBC(u8 spriteId, u8 spriteId2, u8 a)
 
 void LoadPartyMenuPokeballGfx(void)
 {
-    LoadCompressedObjectPic(&gUnknown_08615EF8);
-    LoadCompressedObjectPic(&gUnknown_08615F70);
-    LoadCompressedObjectPalette(&gUnknown_08615F00);
+    LoadCompressedSpriteSheet(&gUnknown_08615EF8);
+    LoadCompressedSpriteSheet(&gUnknown_08615F70);
+    LoadCompressedSpritePalette(&gUnknown_08615F00);
 }
 
 void party_menu_status_condition_object(struct Pokemon *mon, struct Struct203CEDC *ptr)
@@ -4666,8 +4666,8 @@ void party_menu_update_status_condition_object(u8 status, struct Struct203CEDC *
 
 void LoadPartyMenuAilmentGfx(void)
 {
-    LoadCompressedObjectPic(&gUnknown_08615FF8);
-    LoadCompressedObjectPalette(&gUnknown_08616000);
+    LoadCompressedSpriteSheet(&gUnknown_08615FF8);
+    LoadCompressedSpritePalette(&gUnknown_08616000);
 }
 
 void sub_81B617C(void)
@@ -5066,7 +5066,7 @@ void dp05_ether(u8 taskId, TaskFunc unused)
 void ether_effect_related_2(u8 taskId)
 {
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
-    gUnknown_0203CEC8.unkE = GetMenuCursorPos();
+    gUnknown_0203CEC8.unkE = Menu_GetCursorPos();
     ether_effect_related(taskId);
 }
 
@@ -7159,7 +7159,7 @@ void sub_81B9918(void)
                 }
             }
         }
-        if (sub_80D23A8(move) != TRUE)
+        if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
     }
 }

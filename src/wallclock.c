@@ -623,7 +623,7 @@ static void LoadWallClockGraphics(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadCompressedObjectPic(&gUnknown_085B2208);
+    LoadCompressedSpriteSheet(&gUnknown_085B2208);
     LoadSpritePalettes(gUnknown_085B2218);
 }
 

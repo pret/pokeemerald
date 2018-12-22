@@ -518,9 +518,9 @@ void CB2_InitTitleScreen(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 9;
-        LoadCompressedObjectPic(&sSpriteSheet_EmeraldVersion[0]);
-        LoadCompressedObjectPic(&sSpriteSheet_PressStart[0]);
-        LoadCompressedObjectPic(&sPokemonLogoShineSpriteSheet[0]);
+        LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
+        LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
+        LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
         LoadPalette(gTitleScreenEmeraldVersionPal, 0x100, 0x20);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;

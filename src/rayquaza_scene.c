@@ -1528,14 +1528,14 @@ static void sub_81D706C(void)
     LZDecompressWram(gRaySceneClouds1_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneClouds3_Tilemap, sRayScene->tilemapBuffers[2]);
     LoadCompressedPalette(gRaySceneClouds_Pal, 0, 0x40);
-    LoadCompressedObjectPic(&sUnknown_0862A8C4);
-    LoadCompressedObjectPic(&sUnknown_0862A8F8);
-    LoadCompressedObjectPic(&sUnknown_0862A924);
-    LoadCompressedObjectPic(&sUnknown_0862A9D4);
-    LoadCompressedObjectPic(&sUnknown_0862AA14);
-    LoadCompressedObjectPic(&sUnknown_0862AA34);
-    LoadCompressedObjectPalette(&sUnknown_0862A8CC);
-    LoadCompressedObjectPalette(&sUnknown_0862A9DC);
+    LoadCompressedSpriteSheet(&sUnknown_0862A8C4);
+    LoadCompressedSpriteSheet(&sUnknown_0862A8F8);
+    LoadCompressedSpriteSheet(&sUnknown_0862A924);
+    LoadCompressedSpriteSheet(&sUnknown_0862A9D4);
+    LoadCompressedSpriteSheet(&sUnknown_0862AA14);
+    LoadCompressedSpriteSheet(&sUnknown_0862AA34);
+    LoadCompressedSpritePalette(&sUnknown_0862A8CC);
+    LoadCompressedSpritePalette(&sUnknown_0862A9DC);
 }
 
 static void Task_DuoFightAnim(u8 taskId)
@@ -1943,8 +1943,8 @@ static void sub_81D7E9C(void)
     LZDecompressWram(gRaySceneOvercast_Tilemap, sRayScene->tilemapBuffers[1]);
     LZDecompressWram(gRaySceneRayquaza_Tilemap, sRayScene->tilemapBuffers[2]);
     LoadCompressedPalette(gRaySceneRayquaza_Pal, 0, 0x40);
-    LoadCompressedObjectPic(&sUnknown_0862AA90);
-    LoadCompressedObjectPalette(&sUnknown_0862AA98);
+    LoadCompressedSpriteSheet(&sUnknown_0862AA90);
+    LoadCompressedSpritePalette(&sUnknown_0862AA98);
 }
 
 static void Task_RayTakesFlightAnim(u8 taskId)
@@ -2118,9 +2118,9 @@ static void sub_81D8358(void)
     LoadCompressedPalette(gRaySceneOvercast2_Pal, 0, 0x40);
     gPlttBufferUnfaded[0] = RGB_WHITE;
     gPlttBufferFaded[0] = RGB_WHITE;
-    LoadCompressedObjectPic(&sUnknown_0862AAFC);
-    LoadCompressedObjectPic(&sUnknown_0862AB04);
-    LoadCompressedObjectPalette(&sUnknown_0862AB0C);
+    LoadCompressedSpriteSheet(&sUnknown_0862AAFC);
+    LoadCompressedSpriteSheet(&sUnknown_0862AB04);
+    LoadCompressedSpritePalette(&sUnknown_0862AB0C);
 }
 
 static void sub_81D844C(void)
@@ -2489,16 +2489,16 @@ static void sub_81D8CC4(void)
     LZDecompressWram(gRaySceneHushBg_Tilemap, sRayScene->tilemapBuffers[0]);
     LZDecompressWram(gRaySceneHushRing_Map, sRayScene->tilemapBuffers[2]);
     LoadCompressedPalette(gRaySceneHushBg_Pal, 0, 0x60);
-    LoadCompressedObjectPic(&sUnknown_0862AC28);
-    LoadCompressedObjectPic(&sUnknown_0862AC30);
-    LoadCompressedObjectPic(&sUnknown_0862AC38);
-    LoadCompressedObjectPic(&sUnknown_0862AC40);
-    LoadCompressedObjectPic(&sUnknown_0862AC48);
-    LoadCompressedObjectPic(&sUnknown_0862AC50);
-    LoadCompressedObjectPalette(&sUnknown_0862AC58);
-    LoadCompressedObjectPalette(&sUnknown_0862AC60);
-    LoadCompressedObjectPalette(&sUnknown_0862AC68);
-    LoadCompressedObjectPalette(&sUnknown_0862AC70);
+    LoadCompressedSpriteSheet(&sUnknown_0862AC28);
+    LoadCompressedSpriteSheet(&sUnknown_0862AC30);
+    LoadCompressedSpriteSheet(&sUnknown_0862AC38);
+    LoadCompressedSpriteSheet(&sUnknown_0862AC40);
+    LoadCompressedSpriteSheet(&sUnknown_0862AC48);
+    LoadCompressedSpriteSheet(&sUnknown_0862AC50);
+    LoadCompressedSpritePalette(&sUnknown_0862AC58);
+    LoadCompressedSpritePalette(&sUnknown_0862AC60);
+    LoadCompressedSpritePalette(&sUnknown_0862AC68);
+    LoadCompressedSpritePalette(&sUnknown_0862AC70);
 }
 
 static void Task_RayChasesAwayAnim(u8 taskId)

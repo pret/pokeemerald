@@ -1708,7 +1708,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         bar_data0 = 5;
     }
 
-    LoadCompressedObjectPicUsingHeap(&sStatusSummaryBarSpriteSheet);
+    LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
     LoadSpriteSheet(&sStatusSummaryBallsSpriteSheet);
     LoadSpritePalette(&sStatusSummaryBarSpritePal);
     LoadSpritePalette(&sStatusSummaryBallsSpritePal);

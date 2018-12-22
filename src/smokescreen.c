@@ -14,8 +14,8 @@ u8 sub_807521C(s16 x, s16 y, u8 a3)
 
     if (GetSpriteTileStartByTag(gUnknown_0831C620.tag) == 0xFFFF)
     {
-        LoadCompressedObjectPicUsingHeap(&gUnknown_0831C620);
-        LoadCompressedObjectPaletteUsingHeap(&gUnknown_0831C628);
+        LoadCompressedSpriteSheetUsingHeap(&gUnknown_0831C620);
+        LoadCompressedSpritePaletteUsingHeap(&gUnknown_0831C628);
     }
 
     mainSpriteId = CreateInvisibleSpriteWithCallback(sub_8075370);
