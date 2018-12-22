@@ -3484,7 +3484,7 @@ Move_HAIL:
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
 	createvisualtask sub_8116620, 10, 1, 3, 0, 6, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask sub_810C918, 5
+	createvisualtask AnimTask_Hail1, 5
 	loopsewithpan SE_W258, 0, 8, 10
 	waitforvisualfinish
 	createvisualtask sub_8116620, 10, 1, 3, 6, 0, RGB_BLACK
@@ -3956,7 +3956,7 @@ Move_MIST_BALL:
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 1, 1, RGB(23, 16, 31), 16, 0x7FFF, 16
 	delay 0
 	playsewithpan SE_W114, 0
-	createvisualtask sub_810C324, 5
+	createvisualtask AnimTask_LoadMistTiles, 5
 	createvisualtask sub_8116620, 10, 4, 3, 0, 16, RGB_WHITE
 	delay 8
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 70, 0
@@ -6937,7 +6937,7 @@ Mist1:
 Move_HAZE:
 	waitforvisualfinish
 	playsewithpan SE_W114, 0
-	createvisualtask sub_810C0A0, 5
+	createvisualtask AnimTask_Haze1, 5
 	delay 30
 	createvisualtask sub_8116620, 10, 0x780, 2, 0, 16, RGB_BLACK
 	delay 0x5A

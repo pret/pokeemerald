@@ -174,6 +174,10 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 
+// battle_anim_80A64EC.c
+void sub_80A64EC(struct Sprite *sprite);
+void sub_80A718C(struct Sprite *sprite);
+
 // battle_anim_80A9C70.s
 #define STAT_ANIM_PLUS1  15
 #define STAT_ANIM_PLUS2  39

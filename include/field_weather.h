@@ -136,6 +136,10 @@ struct Weather
 // field_weather.c
 extern struct Weather gWeather;
 extern struct Weather *const gWeatherPtr;
+extern const u16 gUnknown_083970E8[];
+
+// field_weather_effect.c
+extern const u8 gWeatherFog1Tiles[];
 
 void StartWeather(void);
 void ChangeWeather(u8 weather);

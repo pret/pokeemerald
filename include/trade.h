@@ -1,6 +1,7 @@
 #ifndef GUARD_TRADE_H
 #define GUARD_TRADE_H
 
+#include "global.h"
 #include "link_rfu.h"
 
 // Exported type declarations

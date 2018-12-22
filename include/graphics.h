@@ -4747,6 +4747,8 @@ extern const u32 gBattleAnimBackgroundImage_Surf[];
 extern const u32 gBattleAnimBackgroundPalette_Surf[];
 extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
 
+extern const u32 gBattleAnimFogTilemap[];
+
 // Berry blender
 extern const u32 gBerryBlenderArrowTiles[];
 extern const u32 gBerryBlenderStartTiles[];
