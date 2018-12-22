@@ -3,8 +3,8 @@
 
 #define TOTAL_BOXES_COUNT       14
 #define IN_BOX_ROWS             6
-#define IN_BOX_COLUMS           5
-#define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMS)
+#define IN_BOX_COLUMNS          5
+#define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
 
 /*
             ROWS
@@ -23,7 +23,7 @@ struct PokemonStorage
     /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
 };
 
-extern struct PokemonStorage* gPokemonStoragePtr;
+extern struct PokemonStorage *gPokemonStoragePtr;
 
 u8 CountMonsInBox(u8 boxId);
 s16 GetFirstFreeBoxSpot(u8 boxId);
@@ -54,7 +54,7 @@ u8 GetBoxWallpaper(u8 boxId);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
 s16 sub_80D214C(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3);
 bool8 CheckFreePokemonStorageSpace(void);
-bool32 CheckBoxedMonSanity(u32 boxId, u32 boxPosition);
+bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition);
 u32 CountStorageNonEggMons(void);
 u32 CountAllStorageMons(void);
 bool32 AnyStorageMonWithMove(u16 moveId);

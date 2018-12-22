@@ -409,7 +409,7 @@ _081C73C2:
 _081C73C6:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl CheckBoxedMonSanity
+	bl CheckBoxMonSanityAt
 	cmp r0, 0
 	beq _081C73EC
 	lsls r1, r5, 24
@@ -16376,7 +16376,7 @@ _081CF1F4:
 _081CF1FC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl CheckBoxedMonSanity
+	bl CheckBoxMonSanityAt
 	cmp r0, 0
 	beq _081CF23A
 	ldr r1, =0xffffff00
@@ -17735,7 +17735,7 @@ sub_81CFC40: @ 81CFC40
 _081CFC60:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl CheckBoxedMonSanity
+	bl CheckBoxMonSanityAt
 	cmp r0, 0
 	beq _081CFCA6
 	lsls r0, r7, 24
@@ -17900,7 +17900,7 @@ _081CFD92:
 _081CFD96:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl CheckBoxedMonSanity
+	bl CheckBoxMonSanityAt
 	cmp r0, 0
 	beq _081CFDBC
 	lsls r1, r4, 24
