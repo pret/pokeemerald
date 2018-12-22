@@ -107,7 +107,7 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
 
         spritePalette.data = GetItemIconPicOrPalette(itemId, 1);
         spritePalette.tag = paletteTag;
-        LoadCompressedObjectPalette(&spritePalette);
+        LoadCompressedSpritePalette(&spritePalette);
 
         spriteTemplate = Alloc(sizeof(*spriteTemplate));
         CpuCopy16(&gItemIconSpriteTemplate, spriteTemplate, sizeof(*spriteTemplate));
@@ -144,7 +144,7 @@ u8 AddCustomItemIconSprite(struct SpriteTemplate *customSpriteTemplate, u16 tile
 
         spritePalette.data = GetItemIconPicOrPalette(itemId, 1);
         spritePalette.tag = paletteTag;
-        LoadCompressedObjectPalette(&spritePalette);
+        LoadCompressedSpritePalette(&spritePalette);
 
         spriteTemplate = Alloc(sizeof(*spriteTemplate));
         CpuCopy16(customSpriteTemplate, spriteTemplate, sizeof(*spriteTemplate));

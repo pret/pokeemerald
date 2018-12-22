@@ -29,9 +29,9 @@ void DoWateringBerryTreeAnim(void);
 u8 CreateRecordMixingSprite(void);
 void DestroyRecordMixingSprite(void);
 
-const struct SpritePalette gFieldEffectObjectPaletteInfo7;
-const struct SpritePalette gFieldEffectObjectPaletteInfo8;
-const struct SpritePalette gFieldEffectObjectPaletteInfo9;
+extern const struct SpritePalette gFieldEffectObjectPaletteInfo7;
+extern const struct SpritePalette gFieldEffectObjectPaletteInfo8;
+extern const struct SpritePalette gFieldEffectObjectPaletteInfo9;
 extern const u16 gTilesetPalettes_SecretBase[][16];
 
 #endif //GUARD_FLDEFF_MISC_H

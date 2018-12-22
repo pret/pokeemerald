@@ -1376,8 +1376,8 @@ static void sub_8171D60(u8 ballId)
 
     if (GetSpriteTileStartByTag(gBallOpenParticleSpritesheets[ballId].tag) == 0xFFFF)
     {
-        LoadCompressedObjectPicUsingHeap(&gBallOpenParticleSpritesheets[ballId]);
-        LoadCompressedObjectPaletteUsingHeap(&gBallOpenParticlePalettes[ballId]);
+        LoadCompressedSpriteSheetUsingHeap(&gBallOpenParticleSpritesheets[ballId]);
+        LoadCompressedSpritePaletteUsingHeap(&gBallOpenParticlePalettes[ballId]);
     }
 }
 
@@ -2032,8 +2032,8 @@ void sub_8172EF0(u8 battler, struct Pokemon *mon)
         {
             if (GetSpriteTileStartByTag(0x27F9) == 0xFFFF)
             {
-                LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[233]);
-                LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[233]);
+                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[233]);
+                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[233]);
             }
 
             taskId1 = CreateTask(sub_8172FEC, 10);
@@ -2173,8 +2173,8 @@ void sub_81732B0(u8 taskId)
 {
     u8 paletteIndex;
 
-    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[269]);
-    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[269]);
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[269]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[269]);
     paletteIndex = IndexOfSpritePaletteTag(0x281D); // unused
     DestroyAnimVisualTask(taskId);
 }

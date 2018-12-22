@@ -251,7 +251,7 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     rand = Random() % range;
 
     // check ability for max level mon
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u8 ability = GetMonAbility(&gPlayerParty[0]);
         if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
@@ -332,7 +332,7 @@ static u8 PickWildMonNature(void)
         }
     }
     // check synchronize for a pokemon with the same ability
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3)
+    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
         && Random() % 2 == 0)
     {
@@ -360,7 +360,7 @@ static void CreateWildMon(u16 species, u8 level)
     }
 
     if (checkCuteCharm
-        && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3)
+        && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_CUTE_CHARM
         && Random() % 3 != 0)
     {
@@ -478,7 +478,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
         encounterRate = encounterRate * 80 / 100;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
-    if (!ignoreAbility && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+    if (!ignoreAbility && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u32 ability = GetMonAbility(&gPlayerParty[0]);
 
@@ -868,7 +868,7 @@ static bool8 IsAbilityAllowingEncounter(u8 level)
 {
     u8 ability;
 
-    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return TRUE;
 
     ability = GetMonAbility(&gPlayerParty[0]);
@@ -905,7 +905,7 @@ static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u
 
 static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u8 ability, u8 *monIndex)
 {
-    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return FALSE;
     else if (GetMonAbility(&gPlayerParty[0]) != ability)
         return FALSE;

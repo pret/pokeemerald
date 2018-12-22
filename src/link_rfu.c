@@ -2244,7 +2244,7 @@ void sub_800E0E8(void)
 {
     if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == 0xFFFF)
     {
-        LoadCompressedObjectPic(&sWirelessStatusIndicatorSpriteSheet);
+        LoadCompressedSpriteSheet(&sWirelessStatusIndicatorSpriteSheet);
     }
     LoadSpritePalette(&sWirelessStatusIndicatorSpritePalette);
     gWirelessStatusIndicatorSpriteId = 0xFF;

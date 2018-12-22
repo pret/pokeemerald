@@ -133,7 +133,7 @@ bool32 sub_8034D14(u32 id, s32 arg1, const struct UnkStruct3 *arg2)
 
             compSpriteSheet = *(struct CompressedSpriteSheet*)(arg2->spriteSheet);
             compSpriteSheet.size = GetDecompressedDataSize(arg2->spriteSheet->data);
-            gUnknown_02022E10->array[id].tileStart = LoadCompressedObjectPic(&compSpriteSheet);
+            gUnknown_02022E10->array[id].tileStart = LoadCompressedSpriteSheet(&compSpriteSheet);
         }
 
         if (gUnknown_02022E10->array[id].tileStart == 0xFFFF)
