@@ -25,6 +25,7 @@
 #include "trainer_card.h"
 #include "trade.h"
 #include "window.h"
+#include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
@@ -42,8 +43,7 @@ extern struct {
     u8 unk_38[12];
     u8 unk_44;
     u8 unk_45[12];
-    u8 filler_51[0x57 - 0x51];
-    u8 unk_57[PARTY_SIZE];
+    u8 unk_51[2][PARTY_SIZE];
     u8 filler_5D[0x69 - 0x5D];
     u8 unk_69;
     u8 filler_6A[0x6F - 0x6A];
@@ -91,6 +91,9 @@ extern const u16 gTradePartyBoxTilemap[];
 extern const u16 gTradeMovesBoxTilemap[];
 extern const u8 gUnknown_0832DEE0[];
 extern const u8 gUnknown_0832DF99[][2];
+extern const u8 gText_EmptyString7[];
+extern const u8 gText_NewLine3[];
+extern const u8 gText_FourQuestionMarks[];
 
 bool32 sub_8077260(void);
 void sub_80773D0(void);
@@ -118,7 +121,7 @@ void sub_8079F74(void);
 u32 sub_807A5F4(struct Pokemon *, u8, u8);
 void sub_8079F88(u8);
 u32 sub_807A09C(void);
-u8 sub_8079A3C(u8 *, u8, u8);
+u8 sub_8079A3C(u8 *, bool8, u8);
 void sub_8079AA4(u8 *, u8, u8);
 void sub_8079C4C(u8, u8, u8, u8, u8, u8);
 
@@ -1656,7 +1659,7 @@ u8 sub_80790D4(u8 *a0, u8 a1, u8 a2, u8 a3)
 
     if (!IsNationalPokedexEnabled())
     {
-        if (gUnknown_0203229C->unk_57[a3] || !IsSpeciesInHoennDex(species))
+        if (gUnknown_0203229C->unk_51[1][a3] || !IsSpeciesInHoennDex(species))
         {
             return 2;
         }
@@ -1940,6 +1943,8 @@ void sub_807967C(u8 a0)
     }
 }
 
+// Brain hurty
+#ifdef NONMATCHING
 void sub_80796B4(u8 a0)
 {
     s8 test;
@@ -2010,4 +2015,497 @@ void sub_80796B4(u8 a0)
             gUnknown_0203229C->unk_74[a0]++;
             break;
     }
+}
+#else
+NAKED
+void sub_80796B4(u8 a0)
+{
+    asm_unified("push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x68\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	ldr r0, =gUnknown_0203229C\n\
+	ldr r4, [r0]\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x76\n\
+	adds r0, r7\n\
+	ldrb r0, [r0]\n\
+	movs r1, 0x1\n\
+	str r1, [sp, 0x60]\n\
+	cmp r0, 0x5\n\
+	bhi _080796DC\n\
+	movs r2, 0\n\
+	str r2, [sp, 0x60]\n\
+_080796DC:\n\
+	movs r1, 0x6\n\
+	bl __umodsi3\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r10, r0\n\
+	movs r0, 0\n\
+	mov r8, r0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x74\n\
+	adds r3, r0, r7\n\
+	ldrb r0, [r3]\n\
+	cmp r0, 0x2\n\
+	bne _080796FA\n\
+	b _08079884\n\
+_080796FA:\n\
+	cmp r0, 0x2\n\
+	bgt _08079708\n\
+	cmp r0, 0x1\n\
+	beq _08079716\n\
+	b _08079A24\n\
+	.pool\n\
+_08079708:\n\
+	cmp r0, 0x3\n\
+	bne _0807970E\n\
+	b _080798BC\n\
+_0807970E:\n\
+	cmp r0, 0x4\n\
+	bne _08079714\n\
+	b _080799EC\n\
+_08079714:\n\
+	b _08079A24\n\
+_08079716:\n\
+	movs r5, 0\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x36\n\
+	adds r0, r7\n\
+	ldr r1, [sp, 0x60]\n\
+	lsls r1, 1\n\
+	mov r9, r1\n\
+	lsls r6, r7, 1\n\
+	lsls r2, r7, 4\n\
+	str r2, [sp, 0x64]\n\
+	ldrb r0, [r0]\n\
+	cmp r8, r0\n\
+	bcs _0807976A\n\
+	ldr r0, =gSprites\n\
+	mov r8, r0\n\
+	ldr r4, =gUnknown_0203229C\n\
+	ldr r0, [sp, 0x60]\n\
+	add r0, r9\n\
+	lsls r2, r0, 1\n\
+	movs r3, 0x4\n\
+_0807973E:\n\
+	ldr r0, [r4]\n\
+	adds r1, r5, r2\n\
+	adds r0, 0x28\n\
+	adds r0, r1\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	add r0, r8\n\
+	adds r0, 0x3E\n\
+	ldrb r1, [r0]\n\
+	orrs r1, r3\n\
+	strb r1, [r0]\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	ldr r0, [r4]\n\
+	adds r0, 0x36\n\
+	adds r0, r7\n\
+	ldrb r0, [r0]\n\
+	cmp r5, r0\n\
+	bcc _0807973E\n\
+_0807976A:\n\
+	movs r5, 0\n\
+	adds r0, r6, r7\n\
+	lsls r0, 1\n\
+	adds r4, r0, 0x2\n\
+_08079772:\n\
+	lsls r0, r5, 24\n\
+	asrs r0, 24\n\
+	adds r0, r4\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	bl ClearWindowTilemap\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0x5\n\
+	bls _08079772\n\
+	ldr r1, =gSprites\n\
+	mov r8, r1\n\
+	ldr r2, =gUnknown_0203229C\n\
+	ldr r0, [r2]\n\
+	ldr r6, [sp, 0x60]\n\
+	add r6, r9\n\
+	lsls r3, r6, 1\n\
+	add r10, r3\n\
+	adds r0, 0x28\n\
+	add r0, r10\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	add r0, r8\n\
+	adds r0, 0x3E\n\
+	ldrb r2, [r0]\n\
+	movs r1, 0x5\n\
+	negs r1, r1\n\
+	ands r1, r2\n\
+	strb r1, [r0]\n\
+	ldr r0, =gUnknown_0203229C\n\
+	ldr r4, [r0]\n\
+	adds r4, 0x28\n\
+	add r4, r10\n\
+	ldrb r1, [r4]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	add r0, r8\n\
+	movs r1, 0x14\n\
+	strh r1, [r0, 0x2E]\n\
+	ldrb r0, [r4]\n\
+	lsls r2, r0, 4\n\
+	adds r2, r0\n\
+	lsls r2, 2\n\
+	add r2, r8\n\
+	ldr r5, =gUnknown_0832DE24\n\
+	lsls r6, 2\n\
+	adds r0, r6, r5\n\
+	ldrb r0, [r0]\n\
+	adds r3, 0x1\n\
+	lsls r3, 1\n\
+	adds r3, r5\n\
+	ldrb r1, [r3]\n\
+	adds r0, r1\n\
+	asrs r0, 1\n\
+	lsls r0, 3\n\
+	adds r0, 0xE\n\
+	strh r0, [r2, 0x32]\n\
+	ldrb r0, [r4]\n\
+	lsls r1, r0, 4\n\
+	adds r1, r0\n\
+	lsls r1, 2\n\
+	add r1, r8\n\
+	adds r5, 0x1\n\
+	adds r6, r5\n\
+	ldrb r0, [r6]\n\
+	lsls r0, 3\n\
+	subs r0, 0xC\n\
+	strh r0, [r1, 0x36]\n\
+	ldrb r1, [r4]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	add r0, r8\n\
+	ldr r1, =sub_80D3014\n\
+	bl StoreSpriteCallbackInData6\n\
+	ldr r2, =gUnknown_0203229C\n\
+	ldr r1, [r2]\n\
+	adds r1, 0x74\n\
+	adds r1, r7\n\
+	ldrb r0, [r1]\n\
+	adds r0, 0x1\n\
+	strb r0, [r1]\n\
+	ldr r0, [r2]\n\
+	adds r0, 0x28\n\
+	add r0, r10\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	add r0, r8\n\
+	bl sub_80A6DEC\n\
+	ldr r1, =gTradePartyBoxTilemap\n\
+	ldr r0, [sp, 0x64]\n\
+	subs r2, r0, r7\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	movs r0, 0xF\n\
+	str r0, [sp]\n\
+	movs r0, 0x11\n\
+	str r0, [sp, 0x4]\n\
+	movs r0, 0\n\
+	str r0, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	movs r3, 0\n\
+	bl CopyToBgTilemapBufferRect_ChangePalette\n\
+	movs r0, 0x1\n\
+	bl CopyBgTilemapBufferToVram\n\
+	movs r0, 0\n\
+	bl CopyBgTilemapBufferToVram\n\
+	ldr r1, [sp, 0x60]\n\
+	cmp r1, 0\n\
+	beq _08079868\n\
+	b _08079A24\n\
+_08079868:\n\
+	bl sub_8079F74\n\
+	b _08079A24\n\
+	.pool\n\
+_08079884:\n\
+	ldr r2, =gSprites\n\
+	ldr r1, [sp, 0x60]\n\
+	lsls r0, r1, 1\n\
+	adds r0, r1\n\
+	lsls r0, 1\n\
+	add r0, r10\n\
+	adds r1, r4, 0\n\
+	adds r1, 0x28\n\
+	adds r1, r0\n\
+	ldrb r1, [r1]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r2, 0x1C\n\
+	adds r0, r2\n\
+	ldr r1, [r0]\n\
+	ldr r0, =sub_80D3014\n\
+	cmp r1, r0\n\
+	beq _080798AC\n\
+	b _08079A24\n\
+_080798AC:\n\
+	movs r0, 0x3\n\
+	strb r0, [r3]\n\
+	b _08079A24\n\
+	.pool\n\
+_080798BC:\n\
+	ldr r1, =gTradeMovesBoxTilemap\n\
+	ldr r0, [sp, 0x60]\n\
+	lsls r2, r0, 4\n\
+	subs r2, r0\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	movs r0, 0xF\n\
+	str r0, [sp]\n\
+	movs r0, 0x11\n\
+	str r0, [sp, 0x4]\n\
+	mov r0, r8\n\
+	str r0, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	movs r3, 0\n\
+	bl CopyToBgTilemapBufferRect_ChangePalette\n\
+	movs r0, 0x1\n\
+	bl CopyBgTilemapBufferToVram\n\
+	ldr r6, =gSprites\n\
+	ldr r1, =gUnknown_0203229C\n\
+	ldr r4, [r1]\n\
+	ldr r2, [sp, 0x60]\n\
+	lsls r3, r2, 1\n\
+	adds r3, r2\n\
+	lsls r1, r3, 1\n\
+	mov r2, r10\n\
+	adds r0, r2, r1\n\
+	adds r4, 0x28\n\
+	adds r4, r0\n\
+	ldrb r0, [r4]\n\
+	lsls r2, r0, 4\n\
+	adds r2, r0\n\
+	lsls r2, 2\n\
+	adds r2, r6\n\
+	ldr r5, =gUnknown_0832DE24\n\
+	lsls r3, 2\n\
+	adds r0, r3, r5\n\
+	ldrb r0, [r0]\n\
+	adds r1, 0x1\n\
+	lsls r1, 1\n\
+	adds r1, r5\n\
+	ldrb r1, [r1]\n\
+	adds r0, r1\n\
+	asrs r0, 1\n\
+	lsls r0, 3\n\
+	adds r0, 0xE\n\
+	strh r0, [r2, 0x20]\n\
+	ldrb r0, [r4]\n\
+	lsls r1, r0, 4\n\
+	adds r1, r0\n\
+	lsls r1, 2\n\
+	adds r1, r6\n\
+	adds r5, 0x1\n\
+	adds r3, r5\n\
+	ldrb r0, [r3]\n\
+	lsls r0, 3\n\
+	subs r0, 0xC\n\
+	strh r0, [r1, 0x22]\n\
+	ldrb r1, [r4]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r6\n\
+	mov r1, r8\n\
+	strh r1, [r0, 0x24]\n\
+	ldrb r1, [r4]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r6\n\
+	mov r2, r8\n\
+	strh r2, [r0, 0x26]\n\
+	add r0, sp, 0x14\n\
+	ldr r1, [sp, 0x60]\n\
+	mov r2, r10\n\
+	bl sub_8079A3C\n\
+	lsls r4, r7, 1\n\
+	adds r5, r4, 0\n\
+	adds r5, 0xE\n\
+	lsls r5, 24\n\
+	lsrs r5, 24\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	movs r2, 0x50\n\
+	subs r2, r0\n\
+	lsrs r0, r2, 31\n\
+	adds r2, r0\n\
+	asrs r2, 1\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	ldr r0, =gUnknown_0832DEE0\n\
+	mov r8, r0\n\
+	str r0, [sp]\n\
+	movs r1, 0\n\
+	str r1, [sp, 0x4]\n\
+	add r0, sp, 0x14\n\
+	str r0, [sp, 0x8]\n\
+	adds r0, r5, 0\n\
+	movs r3, 0x4\n\
+	bl AddTextPrinterParameterized3\n\
+	add r6, sp, 0x28\n\
+	adds r0, r6, 0\n\
+	ldr r1, [sp, 0x60]\n\
+	mov r2, r10\n\
+	bl sub_8079AA4\n\
+	adds r4, 0xF\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	movs r1, 0\n\
+	str r1, [sp]\n\
+	str r1, [sp, 0x4]\n\
+	mov r2, r8\n\
+	str r2, [sp, 0x8]\n\
+	str r1, [sp, 0xC]\n\
+	str r6, [sp, 0x10]\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x1\n\
+	movs r2, 0\n\
+	movs r3, 0\n\
+	bl AddTextPrinterParameterized4\n\
+	adds r0, r5, 0\n\
+	bl PutWindowTilemap\n\
+	adds r0, r5, 0\n\
+	movs r1, 0x3\n\
+	bl CopyWindowToVram\n\
+	adds r0, r4, 0\n\
+	bl PutWindowTilemap\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x3\n\
+	bl CopyWindowToVram\n\
+	ldr r0, =gUnknown_0203229C\n\
+	ldr r1, [r0]\n\
+	b _08079A1A\n\
+	.pool\n\
+_080799EC:\n\
+	ldr r0, =gUnknown_0832DF99\n\
+	lsls r1, r7, 1\n\
+	adds r4, r1, r0\n\
+	ldrb r2, [r4]\n\
+	adds r2, 0x4\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	adds r0, 0x1\n\
+	adds r1, r0\n\
+	ldrb r3, [r1]\n\
+	adds r3, 0x1\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	ldrb r0, [r4]\n\
+	str r0, [sp]\n\
+	ldrb r0, [r1]\n\
+	str r0, [sp, 0x4]\n\
+	adds r0, r7, 0\n\
+	mov r1, r10\n\
+	bl sub_8079C4C\n\
+	ldr r2, =gUnknown_0203229C\n\
+	ldr r1, [r2]\n\
+_08079A1A:\n\
+	adds r1, 0x74\n\
+	adds r1, r7\n\
+	ldrb r0, [r1]\n\
+	adds r0, 0x1\n\
+	strb r0, [r1]\n\
+_08079A24:\n\
+	add sp, 0x68\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool");
+}
+#endif // NONMATCHING
+
+u8 sub_8079A3C(u8 *a0, bool8 a1, u8 a2)
+{
+    u8 name[12];
+
+    if (!a1)
+    {
+        GetMonData(&gPlayerParty[a2], MON_DATA_NICKNAME, name);
+    }
+    else
+    {
+        GetMonData(&gEnemyParty[a2], MON_DATA_NICKNAME, name);
+    }
+
+    StringCopy10(a0, name);
+    return GetStringWidth(0, a0, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
+}
+
+void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
+{
+    u16 arr[4];
+    u16 i;
+
+    if (!gUnknown_0203229C->unk_51[a1][a2])
+    {
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (!a1)
+            {
+                arr[i] = GetMonData(&gPlayerParty[a2], i + MON_DATA_MOVE1, NULL);
+            }
+            else
+            {
+                arr[i] = GetMonData(&gEnemyParty[a2], i + MON_DATA_MOVE1, NULL);
+            }
+        }
+
+        StringCopy(a0, gText_EmptyString7);
+
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (arr[i] != MOVE_NONE)
+            {
+                StringAppend(a0, gMoveNames[arr[i]]);
+            }
+
+            StringAppend(a0, gText_NewLine3);
+        }
+    }
+    else
+    {
+        StringCopy(a0, gText_EmptyString7);
+        StringAppend(a0, gText_FourQuestionMarks);
+    }
+}
+
+void sub_8079B84(u8 a0, u8 a1, u8 *a2)
+{
+    u8 xPos;
+    a1 += (a0 * 6) + 2;
+    xPos = GetStringCenterAlignXOffset(0, a2, 64);
+    AddTextPrinterParameterized3(a1, 0, xPos, 4, gUnknown_0832DEE0, 0, a2);
+    PutWindowTilemap(a1);
+    CopyWindowToVram(a1, 3);
 }
