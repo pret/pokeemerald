@@ -7156,7 +7156,7 @@ _0807AD94:
 _0807ADB2:
 	mov r0, r8
 	bl GetMonSpritePalStruct
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	ldr r0, =gUnknown_020322A0
 	ldr r1, [r0]
 	adds r0, r1, 0

@@ -11006,7 +11006,7 @@ _0801C52C:
 	cmp r0, 0x1
 	bne _0801C5EE
 	ldr r0, =gUnknown_082F1D00
-	bl LoadCompressedObjectPicUsingHeap
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, [r4]
 	movs r2, 0xB8
 	lsls r2, 1
@@ -14596,7 +14596,7 @@ _0801E1B4:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0801E23A
 	.pool
 _0801E1D4:
@@ -19425,7 +19425,7 @@ sub_8020890: @ 8020890
 	ldr r4, =gUnknown_082F3134
 _08020896:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x4
@@ -23100,7 +23100,7 @@ sub_8022730: @ 8022730
 _08022746:
 	lsls r0, r5, 3
 	adds r0, r4
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -43324,7 +43324,7 @@ sub_802C974: @ 802C974
 	ldr r5, =gUnknown_082FBE08
 _0802C97C:
 	adds r0, r5, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r5, 0x8
 	adds r4, 0x1
 	cmp r4, 0x4
@@ -43447,7 +43447,7 @@ _0802CA32:
 	ands r1, r5
 	orrs r1, r4
 	str r1, [r0, 0x4]
-	bl LoadCompressedObjectPalette
+	bl LoadCompressedSpritePalette
 	mov r0, r8
 	bl Free
 	mov r0, r10
@@ -47113,7 +47113,7 @@ sub_802E75C: @ 802E75C
 	lsls r0, 3
 	ldr r1, =gUnknown_082FE6C8
 	adds r0, r1
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	movs r2, 0x8
 	ldrsh r0, [r4, r2]
 	lsls r0, 3
@@ -48126,7 +48126,7 @@ sub_802EF50: @ 802EF50
 	orrs r0, r1
 	str r0, [r4, 0x4]
 	mov r0, sp
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r0, r4, 0
 	bl LoadSpritePalette
 	add sp, 0x10

@@ -519,7 +519,7 @@ void sub_8126B80(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        menuPos = GetMenuCursorPos();
+        menuPos = Menu_GetCursorPos();
         switch (Menu_ProcessInput())
         {
             default:
@@ -527,7 +527,7 @@ void sub_8126B80(u8 taskId)
                 sSecretBasePCMenuActions[sSecretBasePCMenuCursorPos].func.void_u8(taskId);
                 break;
             case -2:
-                sSecretBasePCMenuCursorPos = GetMenuCursorPos();
+                sSecretBasePCMenuCursorPos = Menu_GetCursorPos();
                 if ((s8)menuPos != sSecretBasePCMenuCursorPos)
                 {
                     sub_8126C08();
@@ -2065,7 +2065,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     LoadSpriteSheet(&sheet);
     palette.data = GetDecorationIconPicOrPalette(decor, 1);
     palette.tag = paletteTag;
-    LoadCompressedObjectPalette(&palette);
+    LoadCompressedSpritePalette(&palette);
     template = malloc(sizeof(struct SpriteTemplate));
     *template = gItemIconSpriteTemplate;
     template->tileTag = tilesTag;

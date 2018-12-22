@@ -547,7 +547,7 @@ static bool8 sub_81C5238(void)
         gPyramidBagResources->state++;
         break;
     case 3:
-        LoadCompressedObjectPic(&gUnknown_0861F3CC);
+        LoadCompressedSpriteSheet(&gUnknown_0861F3CC);
         gPyramidBagResources->state++;
         break;
     case 4:
@@ -964,7 +964,7 @@ static void HandleMenuActionInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE)
     {
-        s8 id = GetMenuCursorPos();
+        s8 id = Menu_GetCursorPos();
         if (gMain.newKeys & DPAD_UP)
         {
             if (id > 0 && IsValidMenuAction(id - 2))

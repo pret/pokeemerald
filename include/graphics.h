@@ -4771,6 +4771,20 @@ extern const u32 gUnknown_08D8D58C[];
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
 
+// Pokemon Storage System
+extern const u32 gPSSMenu_Gfx[];
+extern const u16 gPSSMenu_Pal[];
+extern const u32 gWallpaperIcon_Plusle[];
+extern const u32 gWallpaperIcon_Cross[];
+extern const u32 gWallpaperIcon_Bolt[];
+extern const u32 gUnknown_08DD36C8[];
+extern const u32 gWallpaperTiles_Ribbon[];
+extern const u32 gWallpaperTilemap_Ribbon[];
+extern const u16 gWallpaperPalettes_Ribbon[][16];
+extern const u32 gWallpaperTiles_Horizontal[];
+extern const u32 gWallpaperTilemap_Horizontal[];
+extern const u16 gWallpaperPalettes_Horizontal[][16];
+
 // Cable Car
 extern const u32 gUnknown_08DBA5B8[];
 extern const u16 gUnknown_08DBA518[];

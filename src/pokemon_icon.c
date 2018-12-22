@@ -1076,7 +1076,7 @@ u8 sub_80D2D78(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 
     return spriteId;
 }
 
-u16 mon_icon_convert_unown_species_id(u16 species, u32 personality)
+u16 GetIconSpecies(u16 species, u32 personality)
 {
     u16 result;
 
@@ -1104,7 +1104,8 @@ u16 GetUnownLetterByPersonality(u32 personality)
 {
     if (!personality)
         return 0;
-    return (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 0x1C;
+    else
+        return (((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | (personality & 0x3)) % 0x1C;
 }
 
 u16 sub_80D2E84(u16 species)
@@ -1121,18 +1122,16 @@ u16 sub_80D2E84(u16 species)
     }
     else
     {
-        if(species > (SPECIES_UNOWN_B - 1))
-            species = 260;
-        return mon_icon_convert_unown_species_id(species, 0);
+        if (species > (SPECIES_UNOWN_B - 1))
+            species = SPECIES_OLD_UNOWN_J; // That's an oddly specific species.
+        return GetIconSpecies(species, 0);
     }
 }
 
 const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 extra)
 {
-    return GetMonIconTiles(mon_icon_convert_unown_species_id(species, personality), extra);
+    return GetMonIconTiles(GetIconSpecies(species, personality), extra);
 }
-
-
 
 void sub_80D2EF8(struct Sprite *sprite)
 {
@@ -1220,7 +1219,7 @@ void sub_80D304C(u16 offset)
     }
 }
 
-u8 sub_80D3080(u16 species)
+u8 GetValidMonIconPalIndex(u16 species)
 {
     if (species > SPECIES_EGG)
         species = 260;

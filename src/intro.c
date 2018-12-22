@@ -1044,10 +1044,10 @@ static void Task_IntroLoadPart1Graphics(u8 taskId)
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(20) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(18) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(16) | BGCNT_16COLOR | BGCNT_TXT256x512);
-    LoadCompressedObjectPic(gUnknown_085E4FDC);
-    LoadCompressedObjectPic(gUnknown_085E4FEC);
+    LoadCompressedSpriteSheet(gUnknown_085E4FDC);
+    LoadCompressedSpriteSheet(gUnknown_085E4FEC);
     LoadSpritePalettes(gUnknown_085E4FFC);
-    LoadCompressedObjectPic(gUnknown_085E4A74);
+    LoadCompressedSpriteSheet(gUnknown_085E4A74);
     LoadSpritePalettes(gUnknown_085E4A84);
     CpuCopy16(gPlttBufferUnfaded + 0x100, gPlttBufferUnfaded + 0x1F0, 0x20);
     CpuCopy16(gPlttBufferUnfaded + 0x100, gPlttBufferUnfaded + 0x1E1, 0x1E);
@@ -1204,16 +1204,16 @@ static void Task_IntroStartBikeRide(u8 taskId)
     u8 spriteId;
 
     if (gUnknown_0203BCC8 == 0)
-        LoadCompressedObjectPic(gIntro2BrendanSpriteSheet);
+        LoadCompressedSpriteSheet(gIntro2BrendanSpriteSheet);
     else
-        LoadCompressedObjectPic(gIntro2MaySpriteSheet);
+        LoadCompressedSpriteSheet(gIntro2MaySpriteSheet);
 
-    LoadCompressedObjectPic(gIntro2BicycleSpriteSheet);
-    LoadCompressedObjectPic(gIntro2FlygonSpriteSheet);
+    LoadCompressedSpriteSheet(gIntro2BicycleSpriteSheet);
+    LoadCompressedSpriteSheet(gIntro2FlygonSpriteSheet);
 
     for (spriteId = 0; spriteId < 3; spriteId++)
     {
-        LoadCompressedObjectPic(&gUnknown_085E4AE8[spriteId]);
+        LoadCompressedSpriteSheet(&gUnknown_085E4AE8[spriteId]);
     }
 
     LoadSpritePalettes(gUnknown_085F530C);
@@ -1542,8 +1542,8 @@ static void Task_IntroLoadPart1Graphics3(u8 taskId)
         LZDecompressVram(gIntro3GroudonTilemap, (void *)(VRAM + 0xC000));
         LZDecompressVram(gIntro3LegendBgGfx, (void *)(VRAM + 0x4000));
         LZDecompressVram(gIntro3GroudonBgTilemap, (void *)(VRAM + 0xE000));
-        LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
-        LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
+        LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
+        LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
         CpuCopy16(gIntro3BgPal, gPlttBufferUnfaded, sizeof(gIntro3BgPal));
         gTasks[taskId].func = Task_IntroLoadPart1Graphics4;
     }
@@ -1764,7 +1764,7 @@ static void Task_IntroLoadPart1Graphics9(u8 taskId)
     LZDecompressVram(gIntro3KyogreGfx, (void *)VRAM);
     LZDecompressVram(gIntro3KyogreTilemap, (void *)(VRAM + 0xC000));
     LZDecompressVram(gIntro3KyogreBgTilemap, (void *)(VRAM + 0xE000));
-    LoadCompressedObjectPic(gUnknown_085E4C88);
+    LoadCompressedSpriteSheet(gUnknown_085E4C88);
     LoadSpritePalette(gUnknown_085E4C98);
     BeginNormalPaletteFade(0xFFFFFFFE, 0, 0x10, 0, RGB_WHITEALPHA);
     gTasks[taskId].func = Task_IntroFadeIn0;
@@ -2092,7 +2092,7 @@ static void Task_IntroFadeIn5(u8 taskId)
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[6] = 1;
     gTasks[taskId].data[7] = 0;
-    LoadCompressedObjectPicUsingHeap(gUnknown_085E4BF4);
+    LoadCompressedSpriteSheetUsingHeap(gUnknown_085E4BF4);
     LoadSpritePalettes(gUnknown_085E4C04);
 }
 
@@ -2169,7 +2169,7 @@ static void Task_IntroFadeIn7(u8 taskId)
 {
     u8 newTaskId;
 
-    LoadCompressedObjectPic(gUnknown_085E5048);
+    LoadCompressedSpriteSheet(gUnknown_085E5048);
     LoadSpritePalettes(gUnknown_085E5058);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP

@@ -872,15 +872,15 @@ typedef union // 3b58
 
 struct WaldaPhrase
 {
-    u16 field_0;
-    u16 field_2;
+    u16 colors[2]; // Background, foreground.
     u8 text[16];
     u8 iconId;
     u8 patternId;
     bool8 patternUnlocked;
 };
 
-struct UnkSaveSubstruct_3b98 {
+struct UnkSaveSubstruct_3b98
+{
     u32 trainerId;
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
