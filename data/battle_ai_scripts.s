@@ -3015,70 +3015,90 @@ AI_SetupFirstTurn:
 	get_turn_count
 	if_not_equal 0, AI_SetupFirstTurn_End
 	get_considered_move_effect
-	if_not_in_bytes AI_SetupFirstTurn_SetupEffectsToEncourage, AI_SetupFirstTurn_End
+	if_not_in_hwords AI_SetupFirstTurn_SetupEffectsToEncourage, AI_SetupFirstTurn_End
 	if_random_less_than 80, AI_SetupFirstTurn_End
 	score +2
 
 AI_SetupFirstTurn_End:
 	end
 
+.align 1
 AI_SetupFirstTurn_SetupEffectsToEncourage:
-    .byte EFFECT_ATTACK_UP
-    .byte EFFECT_DEFENSE_UP
-    .byte EFFECT_SPEED_UP
-    .byte EFFECT_SPECIAL_ATTACK_UP
-    .byte EFFECT_SPECIAL_DEFENSE_UP
-    .byte EFFECT_ACCURACY_UP
-    .byte EFFECT_EVASION_UP
-    .byte EFFECT_ATTACK_DOWN
-    .byte EFFECT_DEFENSE_DOWN
-    .byte EFFECT_SPEED_DOWN
-    .byte EFFECT_SPECIAL_ATTACK_DOWN
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN
-    .byte EFFECT_ACCURACY_DOWN
-    .byte EFFECT_EVASION_DOWN
-    .byte EFFECT_CONVERSION
-    .byte EFFECT_LIGHT_SCREEN
-    .byte EFFECT_SPECIAL_DEFENSE_UP_2
-    .byte EFFECT_FOCUS_ENERGY
-    .byte EFFECT_CONFUSE
-    .byte EFFECT_ATTACK_UP_2
-    .byte EFFECT_DEFENSE_UP_2
-    .byte EFFECT_SPEED_UP_2
-    .byte EFFECT_SPECIAL_ATTACK_UP_2
-    .byte EFFECT_SPECIAL_DEFENSE_UP_2
-    .byte EFFECT_ACCURACY_UP_2
-    .byte EFFECT_EVASION_UP_2
-    .byte EFFECT_ATTACK_DOWN_2
-    .byte EFFECT_DEFENSE_DOWN_2
-    .byte EFFECT_SPEED_DOWN_2
-    .byte EFFECT_SPECIAL_ATTACK_DOWN_2
-    .byte EFFECT_SPECIAL_DEFENSE_DOWN_2
-    .byte EFFECT_ACCURACY_DOWN_2
-    .byte EFFECT_EVASION_DOWN_2
-    .byte EFFECT_REFLECT
-    .byte EFFECT_POISON
-    .byte EFFECT_PARALYZE
-    .byte EFFECT_SUBSTITUTE
-    .byte EFFECT_LEECH_SEED
-    .byte EFFECT_MINIMIZE
-    .byte EFFECT_CURSE
-    .byte EFFECT_SWAGGER
-    .byte EFFECT_CAMOUFLAGE
-    .byte EFFECT_YAWN
-    .byte EFFECT_DEFENSE_CURL
-    .byte EFFECT_TORMENT
-    .byte EFFECT_FLATTER
-    .byte EFFECT_WILL_O_WISP
-    .byte EFFECT_INGRAIN
-    .byte EFFECT_IMPRISON
-    .byte EFFECT_TEETER_DANCE
-    .byte EFFECT_TICKLE
-    .byte EFFECT_COSMIC_POWER
-    .byte EFFECT_BULK_UP
-    .byte EFFECT_CALM_MIND
-    .byte EFFECT_CAMOUFLAGE
-    .byte -1
+    .2byte EFFECT_ATTACK_UP
+    .2byte EFFECT_DEFENSE_UP
+    .2byte EFFECT_SPEED_UP
+    .2byte EFFECT_SPECIAL_ATTACK_UP
+    .2byte EFFECT_SPECIAL_DEFENSE_UP
+    .2byte EFFECT_ACCURACY_UP
+    .2byte EFFECT_EVASION_UP
+    .2byte EFFECT_ATTACK_DOWN
+    .2byte EFFECT_DEFENSE_DOWN
+    .2byte EFFECT_SPEED_DOWN
+    .2byte EFFECT_SPECIAL_ATTACK_DOWN
+    .2byte EFFECT_SPECIAL_DEFENSE_DOWN
+    .2byte EFFECT_ACCURACY_DOWN
+    .2byte EFFECT_EVASION_DOWN
+    .2byte EFFECT_CONVERSION
+    .2byte EFFECT_LIGHT_SCREEN
+    .2byte EFFECT_SPECIAL_DEFENSE_UP_2
+    .2byte EFFECT_FOCUS_ENERGY
+    .2byte EFFECT_CONFUSE
+    .2byte EFFECT_ATTACK_UP_2
+    .2byte EFFECT_DEFENSE_UP_2
+    .2byte EFFECT_SPEED_UP_2
+    .2byte EFFECT_SPECIAL_ATTACK_UP_2
+    .2byte EFFECT_SPECIAL_DEFENSE_UP_2
+    .2byte EFFECT_ACCURACY_UP_2
+    .2byte EFFECT_EVASION_UP_2
+    .2byte EFFECT_ATTACK_DOWN_2
+    .2byte EFFECT_DEFENSE_DOWN_2
+    .2byte EFFECT_SPEED_DOWN_2
+    .2byte EFFECT_SPECIAL_ATTACK_DOWN_2
+    .2byte EFFECT_SPECIAL_DEFENSE_DOWN_2
+    .2byte EFFECT_ACCURACY_DOWN_2
+    .2byte EFFECT_EVASION_DOWN_2
+    .2byte EFFECT_REFLECT
+    .2byte EFFECT_POISON
+    .2byte EFFECT_PARALYZE
+    .2byte EFFECT_SUBSTITUTE
+    .2byte EFFECT_LEECH_SEED
+    .2byte EFFECT_MINIMIZE
+    .2byte EFFECT_CURSE
+    .2byte EFFECT_SWAGGER
+    .2byte EFFECT_CAMOUFLAGE
+    .2byte EFFECT_YAWN
+    .2byte EFFECT_DEFENSE_CURL
+    .2byte EFFECT_TORMENT
+    .2byte EFFECT_FLATTER
+    .2byte EFFECT_WILL_O_WISP
+    .2byte EFFECT_INGRAIN
+    .2byte EFFECT_IMPRISON
+    .2byte EFFECT_TEETER_DANCE
+    .2byte EFFECT_TICKLE
+    .2byte EFFECT_COSMIC_POWER
+    .2byte EFFECT_BULK_UP
+    .2byte EFFECT_CALM_MIND
+    .2byte EFFECT_ACUPRESSURE
+    .2byte EFFECT_AUTONOMIZE
+    .2byte EFFECT_SHIFT_GEAR
+    .2byte EFFECT_SHELL_SMASH
+    .2byte EFFECT_GROWTH
+    .2byte EFFECT_QUIVER_DANCE
+    .2byte EFFECT_ATTACK_SPATK_UP
+    .2byte EFFECT_ATTACK_ACCURACY_UP
+    .2byte EFFECT_PSYCHIC_TERRAIN
+    .2byte EFFECT_GRASSY_TERRAIN
+    .2byte EFFECT_ELECTRIC_TERRAIN
+    .2byte EFFECT_MISTY_TERRAIN
+    .2byte EFFECT_STEALTH_ROCK
+    .2byte EFFECT_TOXIC_SPIKES
+    .2byte EFFECT_TRICK_ROOM
+    .2byte EFFECT_WONDER_ROOM
+    .2byte EFFECT_MAGIC_ROOM
+    .2byte EFFECT_TAILWIND
+    .2byte EFFECT_DRAGON_DANCE
+    .2byte EFFECT_STICKY_WEB
+    .2byte -1
 
 AI_PreferStrongestMove:
 	if_target_is_ally AI_Ret
@@ -3133,9 +3153,8 @@ AI_PreferBatonPass:
 	if_random_less_than 80, AI_Risky_End
 
 AI_PreferBatonPass_GoForBatonPass:
-	if_move MOVE_SWORDS_DANCE, AI_PreferBatonPass2
-	if_move MOVE_DRAGON_DANCE, AI_PreferBatonPass2
-	if_move MOVE_CALM_MIND, AI_PreferBatonPass2
+	get_considered_move_effect
+	if_in_hwords sEffectsStatRaise, AI_PreferBatonPass2
 	if_effect EFFECT_PROTECT, AI_PreferBatonPass_End
 	if_move MOVE_BATON_PASS, AI_PreferBatonPass_EncourageIfHighStats
 	if_random_less_than 20, AI_Risky_End
@@ -3153,10 +3172,29 @@ AI_PreferBatonPass_End:
 	score +2
 	end
 
+.align 1
 sMovesTable_ProtectMoves:
     .2byte MOVE_PROTECT
     .2byte MOVE_DETECT
     .2byte -1
+
+sEffectsStatRaise:
+	.2byte EFFECT_ATTACK_UP_2
+	.2byte EFFECT_DEFENSE_UP_2
+	.2byte EFFECT_SPEED_UP_2
+	.2byte EFFECT_SPECIAL_ATTACK_UP_2
+	.2byte EFFECT_SPECIAL_DEFENSE_UP_2
+	.2byte EFFECT_CALM_MIND
+	.2byte EFFECT_DRAGON_DANCE
+	.2byte EFFECT_ACUPRESSURE
+	.2byte EFFECT_SHELL_SMASH
+	.2byte EFFECT_SHIFT_GEAR
+	.2byte EFFECT_ATTACK_ACCURACY_UP
+	.2byte EFFECT_ATTACK_SPATK_UP
+	.2byte EFFECT_GROWTH
+	.2byte EFFECT_COIL
+	.2byte EFFECT_QUIVER_DANCE
+	.2byte -1
 
 AI_PreferBatonPass_EncourageIfHighStats:
 	get_turn_count
@@ -3284,7 +3322,7 @@ AI_TryStatusMoveOnAlly:
 	if_move MOVE_TOXIC, AI_TryStatusOnAlly
 	if_move MOVE_HELPING_HAND, AI_TryHelpingHandOnAlly
 	if_move MOVE_SWAGGER, AI_TrySwaggerOnAlly
-	goto Score_Minus30_
+	goto Score_Minus30
 
 AI_TrySkillSwapOnAlly:
 	get_ability AI_TARGET
@@ -3292,7 +3330,7 @@ AI_TrySkillSwapOnAlly:
 	get_ability AI_USER
 	if_not_equal ABILITY_LEVITATE, AI_TrySkillSwapOnAlly2
 	get_ability AI_TARGET
-	if_equal ABILITY_LEVITATE, Score_Minus30_
+	if_equal ABILITY_LEVITATE, Score_Minus30
 	get_target_type1
 	if_not_equal TYPE_ELECTRIC, AI_TrySkillSwapOnAlly2
 	score +1
@@ -3302,7 +3340,7 @@ AI_TrySkillSwapOnAlly:
 	end
 
 AI_TrySkillSwapOnAlly2:
-	if_not_equal ABILITY_COMPOUND_EYES, Score_Minus30_
+	if_not_equal ABILITY_COMPOUND_EYES, Score_Minus30
 	if_has_move AI_USER_PARTNER, MOVE_FIRE_BLAST, AI_TrySkillSwapOnAllyPlus3
 	if_has_move AI_USER_PARTNER, MOVE_THUNDER, AI_TrySkillSwapOnAllyPlus3
 	if_has_move AI_USER_PARTNER, MOVE_CROSS_CHOP, AI_TrySkillSwapOnAllyPlus3
@@ -3310,16 +3348,16 @@ AI_TrySkillSwapOnAlly2:
 	if_has_move AI_USER_PARTNER, MOVE_DYNAMIC_PUNCH, AI_TrySkillSwapOnAllyPlus3
 	if_has_move AI_USER_PARTNER, MOVE_BLIZZARD, AI_TrySkillSwapOnAllyPlus3
 	if_has_move AI_USER_PARTNER, MOVE_MEGAHORN, AI_TrySkillSwapOnAllyPlus3
-	goto Score_Minus30_
+	goto Score_Minus30
 
 AI_TrySkillSwapOnAllyPlus3:
 	goto Score_Plus3
 
 AI_TryStatusOnAlly:
 	get_ability AI_TARGET
-	if_not_equal ABILITY_GUTS, Score_Minus30_
-	if_status AI_TARGET, STATUS1_ANY, Score_Minus30_
-	if_hp_less_than AI_USER, 91, Score_Minus30_
+	if_not_equal ABILITY_GUTS, Score_Minus30
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus30
+	if_hp_less_than AI_USER, 91, Score_Minus30
 	goto Score_Plus5
 
 AI_TryHelpingHandOnAlly:
@@ -3328,17 +3366,13 @@ AI_TryHelpingHandOnAlly:
 
 AI_TrySwaggerOnAlly:
 	if_holds_item AI_TARGET, ITEM_PERSIM_BERRY, AI_TrySwaggerOnAlly2
-	goto Score_Minus30_
+	goto Score_Minus30
 
 AI_TrySwaggerOnAlly2:
 	if_stat_level_more_than AI_TARGET, STAT_ATK, 7, AI_TrySwaggerOnAlly_End
 	score +3
 
 AI_TrySwaggerOnAlly_End:
-	end
-
-Score_Minus30_:
-	score -30
 	end
 
 AI_HPAware:
