@@ -5,6 +5,7 @@
 #include "decompress.h"
 #include "load_save.h"
 #include "overworld.h"
+#include "pokemon_storage_system.h"
 #include "main.h"
 #include "constants/game_stat.h"
 

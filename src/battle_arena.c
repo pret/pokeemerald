@@ -499,7 +499,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
     case 0:
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 0, 8, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
-        LoadCompressedObjectPic(gUnknown_08611F74);
+        LoadCompressedSpriteSheet(gUnknown_08611F74);
         LoadCompressedPalette(gUnknown_08D855E8, 0x1F0, 0x20);
         gBattle_WIN0H = 0xFF;
         gBattle_WIN0V = 0x70;

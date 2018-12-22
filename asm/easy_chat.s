@@ -6455,7 +6455,7 @@ sub_811DE90: @ 811DE90
 	ldr r4, =gUnknown_08597CE8
 _0811DEA2:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x3

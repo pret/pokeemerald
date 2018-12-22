@@ -1289,7 +1289,7 @@ _0801C52C:
 	cmp r0, 0x1
 	bne _0801C5EE
 	ldr r0, =gUnknown_082F1D00
-	bl LoadCompressedObjectPicUsingHeap
+	bl LoadCompressedSpriteSheetUsingHeap
 	ldr r0, [r4]
 	movs r2, 0xB8
 	lsls r2, 1

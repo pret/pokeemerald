@@ -3466,7 +3466,7 @@ void ChangeBoxPokemonNickname(void)
 
 void ChangeBoxPokemonNickname_CB(void)
 {
-    SetBoxMonNickFromAnyBox(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
+    SetBoxMonNickAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 

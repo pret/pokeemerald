@@ -3,6 +3,20 @@
 
 #include <gba/gba.h>
 
+#ifndef PARTY_SIZE
+#define PARTY_SIZE           6
+#endif
+#ifndef PLAYER_NAME_LENGTH
+#define PLAYER_NAME_LENGTH   8
+#endif
+#ifndef POKEMON_NAME_LENGTH
+#define POKEMON_NAME_LENGTH 11
+#endif
+
+struct BattleTowerPokemon;
+struct Apprentice;
+struct SecretBaseRecord;
+
 #include "constants/pokemon.h"
 #include "sprite.h"
 
@@ -10,9 +24,9 @@
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
 #define MON_DATA_LANGUAGE           3
-#define MON_DATA_SANITY_BIT1        4
-#define MON_DATA_SANITY_BIT2        5
-#define MON_DATA_SANITY_BIT3        6
+#define MON_DATA_SANITY_IS_BAD_EGG  4
+#define MON_DATA_SANITY_HAS_SPECIES 5
+#define MON_DATA_SANITY_IS_EGG      6
 #define MON_DATA_OT_NAME            7
 #define MON_DATA_MARKINGS           8
 #define MON_DATA_CHECKSUM           9
@@ -253,14 +267,6 @@ struct Pokemon
     u16 spDefense;
 };
 
-struct PokemonStorage
-{
-    /*0x0000*/ u8 currentBox;
-    /*0x0001*/ struct BoxPokemon boxes[14][30];
-    /*0x8344*/ u8 boxNames[14][9];
-    /*0x83C2*/ u8 boxWallpapers[14];
-};
-
 struct Unknown_806F160_Struct
 {
     u8 field_0_0:4;
@@ -432,7 +438,6 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
-extern struct PokemonStorage* gPokemonStoragePtr;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gFacilityClassToPicIndex[];

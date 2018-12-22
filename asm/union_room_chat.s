@@ -507,7 +507,7 @@ _0801E1B4:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0801E23A
 	.pool
 _0801E1D4:
@@ -5336,7 +5336,7 @@ sub_8020890: @ 8020890
 	ldr r4, =gUnknown_082F3134
 _08020896:
 	adds r0, r4, 0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	adds r4, 0x8
 	adds r5, 0x1
 	cmp r5, 0x4
