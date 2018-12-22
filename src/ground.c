@@ -183,7 +183,7 @@ static void AnimBonemerangProjectileEnd(struct Sprite *sprite)
 // arg 4: duration
 void AnimBoneHitProjectile(struct Sprite *sprite)
 {
-    sub_80A6980(sprite, TRUE);
+    InitSpritePosToAnimTarget(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     
@@ -205,7 +205,7 @@ void AnimDirtScatter(struct Sprite *sprite)
     u8 targetXPos, targetYPos;
     s16 xOffset, yOffset;
 
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
 
     targetXPos = GetBattlerSpriteCoord2(gBattleAnimTarget, 2);
     targetYPos = GetBattlerSpriteCoord2(gBattleAnimTarget, 3);
@@ -221,7 +221,7 @@ void AnimDirtScatter(struct Sprite *sprite)
     sprite->data[2] = targetXPos + xOffset;
     sprite->data[4] = targetYPos + yOffset;
     sprite->callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(sprite, move_anim_8074EE0);
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 // Moves a particle of dirt in the Mud Sport animation.
@@ -306,7 +306,7 @@ static void sub_8114CFC(u8 taskId)
     {
     case 0:
         task->data[10] = GetAnimBattlerSpriteId(0);
-        task->data[11] = sub_80A8364(gBattleAnimAttacker);
+        task->data[11] = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
         if (task->data[11] == 1)
         {
             task->data[12] = gBattle_BG1_X;
@@ -375,7 +375,7 @@ static void sub_8114EB4(u8 taskId)
     gSprites[spriteId].pos2.x = 0;
     gSprites[spriteId].pos2.y = 0;
 
-    if (sub_80A8364(gBattleAnimAttacker) == 1)
+    if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
         gBattle_BG1_Y = 0;
     else
         gBattle_BG2_Y = 0;
@@ -422,7 +422,7 @@ static void sub_8114FD8(u8 taskId)
     {
     case 0:
         task->data[10] = GetAnimBattlerSpriteId(0);
-        task->data[11] = sub_80A8364(gBattleAnimAttacker);
+        task->data[11] = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
         if (task->data[11] == 1)
             task->data[12] = gBattle_BG1_X;
         else

@@ -27,7 +27,7 @@ SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EEE
 	setvar VAR_TEMP_0, 1
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_209062
-	applymovement 255, SlateportCity_BattleTentCorridor_Movement_209059
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_209059
 	waitmovement 0
 	compare VAR_0x8006, 2
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_209044
@@ -49,7 +49,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EB4:: @ 8208EB4
 	opendoor 2, 1
 	waitdooranim
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_209068
-	applymovement 255, SlateportCity_BattleTentCorridor_Movement_20905E
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_20905E
 	waitmovement 0
 	closedoor 2, 1
 	waitdooranim

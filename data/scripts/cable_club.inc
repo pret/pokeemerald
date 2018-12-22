@@ -237,7 +237,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276CB5:: @ 8276CB5
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27734F
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27734F
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_277349
 	waitmovement 0
@@ -258,7 +258,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276CFF:: @ 8276CFF
 	setvar VAR_0x4087, 0
 	compare VAR_0x8007, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735E
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735E
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
@@ -278,7 +278,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276D2C:: @ 8276D2C
 OldaleTown_PokemonCenter_2F_EventScript_276D44:: @ 8276D44
 	special CloseLink
 	setvar VAR_0x4087, 0
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27734F
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27734F
 	waitmovement 0
 	compare VAR_0x8007, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276D6B
@@ -302,7 +302,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276D84:: @ 8276D84
 	setvar VAR_0x4087, 0
 	compare VAR_0x8007, 0
 	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735E
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735E
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
@@ -316,24 +316,24 @@ OldaleTown_PokemonCenter_2F_EventScript_276DAE:: @ 8276DAE
 	delay 60
 	message OldaleTown_PokemonCenter_2F_Text_27854C
 	waitmessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27734F
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27734F
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_277349
 	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_276DD5:: @ 8276DD5
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27734F
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27734F
 	waitmovement 0
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_276DE0:: @ 8276DE0
 	lockall
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_2725A6
 	waitmovement 0
 	msgbox OldaleTown_PokemonCenter_2F_Text_27964A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_276E10
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_276E10
 	waitmovement 0
 	delay 30
 	msgbox OldaleTown_PokemonCenter_2F_Text_279718, MSGBOX_DEFAULT
@@ -462,11 +462,11 @@ OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_277356
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_277356
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
@@ -481,7 +481,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27702B:: @ 827702B
-	applymovement 255, Movement_277352
+	applymovement EVENT_OBJ_ID_PLAYER, Movement_277352
 	waitmovement 0
 	return
 
@@ -566,11 +566,11 @@ OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_277356
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_277356
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
@@ -641,11 +641,11 @@ OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_277356
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_277356
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
@@ -1040,11 +1040,11 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	delay 60
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_277356
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_277356
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 5, 1
@@ -1379,11 +1379,11 @@ OldaleTown_PokemonCenter_2F_EventScript_277B3A:: @ 8277B3A
 	applymovement VAR_LAST_TALKED, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
 	closemessage
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_277356
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_277356
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_27735A
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
 	hideobjectat 255, MAP_PETALBURG_CITY
 	closedoor 9, 1
@@ -1593,7 +1593,7 @@ MossdeepCity_GameCorner_1F_EventScript_277E0E:: @ 8277E0E
 	applymovement VAR_LAST_TALKED, MossdeepCity_GameCorner_1F_Movement_27734D
 	waitmovement 0
 	closemessage
-	applymovement 255, MossdeepCity_GameCorner_1F_Movement_277360
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_GameCorner_1F_Movement_277360
 	waitmovement 0
 	hideobjectat 255, MAP_PETALBURG_CITY
 	release

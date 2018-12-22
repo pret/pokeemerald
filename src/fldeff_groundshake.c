@@ -73,7 +73,13 @@ static const struct OamData gUnknown_08617E2C =
 };
 
 static const struct SpriteTemplate gUnknown_08617E34 = {
-    0x0FA0, 0xFFFF, &gUnknown_08617E2C, gSpriteAnimTable_8617E28, NULL, gDummySpriteAffineAnimTable, sub_81BEAD8
+    .tileTag = 0x0FA0,
+    .paletteTag = 0xFFFF,
+    .oam = &gUnknown_08617E2C,
+    .anims = gSpriteAnimTable_8617E28,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81BEAD8
 };
 
 static const union AnimCmd gSpriteAnim_8617E4C[] =
@@ -105,7 +111,13 @@ static const struct OamData gSpriteAnim_8617E58 =
 };
 
 static const struct SpriteTemplate gUnknown_08617E60 = {
-    0x0FA0, 0xFFFF, &gSpriteAnim_8617E58, gSpriteAnim_8617E54, NULL, gDummySpriteAffineAnimTable, sub_81BEAD8
+    .tileTag = 0x0FA0,
+    .paletteTag = 0xFFFF,
+    .oam = &gSpriteAnim_8617E58,
+    .anims = gSpriteAnim_8617E54,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81BEAD8
 };
 
 // ewram

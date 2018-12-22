@@ -136,7 +136,7 @@ LavaridgeTown_EventScript_1EA65C:: @ 81EA65C
 	waitmovement 0
 	applymovement 8, LavaridgeTown_Movement_27259A
 	waitmovement 0
-	applymovement 255, LavaridgeTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, LavaridgeTown_Movement_2725A8
 	waitmovement 0
 	return
 
@@ -151,7 +151,7 @@ LavaridgeTown_EventScript_1EA6AC:: @ 81EA6AC
 	return
 
 LavaridgeTown_EventScript_1EA6B7:: @ 81EA6B7
-	applymovement 255, LavaridgeTown_Movement_1EA6DF
+	applymovement EVENT_OBJ_ID_PLAYER, LavaridgeTown_Movement_1EA6DF
 	applymovement 7, LavaridgeTown_Movement_1EA6E3
 	waitmovement 0
 	return

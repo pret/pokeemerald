@@ -303,7 +303,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DBBC:: @ 824DBBC
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattlePalaceLobby_EventScript_24DC29
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_24DC47
-	applymovement 255, BattleFrontier_BattlePalaceLobby_Movement_24DC47
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC47
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattlePalaceLobby_EventScript_24DC2F
@@ -311,7 +311,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_24DBBC:: @ 824DBBC
 	call_if 1, BattleFrontier_BattlePalaceLobby_EventScript_24DC35
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_24DC49
-	applymovement 255, BattleFrontier_BattlePalaceLobby_Movement_24DC4C
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_24DC4C
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
 	call_if 1, BattleFrontier_BattlePalaceLobby_EventScript_24DC3B

@@ -157,7 +157,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20254B:: @ 820254B
 	hideobjectat 1, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_202310
 	setvar VAR_TEMP_1, 1
-	applymovement 255, VerdanturfTown_BattleTentBattleRoom_Movement_202573
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_202573
 	removeobject 2
 	end
 

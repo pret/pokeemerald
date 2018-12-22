@@ -31,12 +31,12 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	closemessage
 	applymovement 5, Route128_Movement_1F6CBB
 	waitmovement 0
-	applymovement 255, Route128_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Route128_Movement_2725A6
 	waitmovement 0
 	msgbox Route128_Text_1F6F1E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, Route128_Movement_1F6C96
-	applymovement 255, Route128_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Route128_Movement_2725A4
 	applymovement 5, Route128_Movement_1F6CA8
 	waitmovement 0
 	msgbox Route128_Text_1F704F, MSGBOX_DEFAULT
@@ -54,12 +54,12 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	addobject 3
 	applymovement 3, Route128_Movement_1F6C87
 	waitmovement 0
-	applymovement 255, Route128_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Route128_Movement_2725A8
 	waitmovement 0
 	msgbox Route128_Text_1F70C9, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, Route128_Movement_1F6C85
-	applymovement 255, Route128_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Route128_Movement_2725A6
 	waitmovement 0
 	msgbox Route128_Text_1F70EA, MSGBOX_DEFAULT
 	applymovement 3, Route128_Movement_2725AA

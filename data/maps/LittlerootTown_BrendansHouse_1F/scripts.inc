@@ -62,7 +62,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
 	lockall
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F783A
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F783A
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_1F783A
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 255, 7, 1
@@ -95,7 +95,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	waitmovement 0
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_27259A
 	waitmovement 0
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_2725A4
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1F789C
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -182,7 +182,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7981:: @ 81F7981
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_2725AA
 	waitmovement 0
 	return
 
@@ -228,19 +228,19 @@ LittlerootTown_BrendansHouse_1F_Movement_1F79B9: @ 81F79B9
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F79C1:: @ 81F79C1
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F79F7
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F79F7
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_1F7A06
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F79D3:: @ 81F79D3
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F79FB
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F79FB
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_1F7A0C
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F79E5:: @ 81F79E5
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F7A02
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F7A02
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_1F7A16
 	waitmovement 0
 	return

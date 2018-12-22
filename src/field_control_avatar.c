@@ -12,7 +12,7 @@
 #include "field_poison.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "item_menu.h"
 #include "link.h"
 #include "metatile_behavior.h"
@@ -521,13 +521,13 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
     }
     else if (MetatileBehavior_IsSecretBaseGlitterMat(metatileBehavior) == TRUE)
     {
-        sub_80FA9D0();
+        DoSecretBaseGlitterMatSparkle();
         return FALSE;
     }
     else if (MetatileBehavior_IsSecretBaseSoundMat(metatileBehavior) == TRUE)
     {
         PlayerGetDestCoords(&x, &y);
-        sub_80FA970(MapGridGetMetatileIdAt(x, y));
+        PlaySecretBaseMusicNoteMatSound(MapGridGetMetatileIdAt(x, y));
         return FALSE;
     }
     return FALSE;

@@ -93,5 +93,8 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 void sub_8197AE8(bool8 copyToVram);
 void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs);
 s8 Menu_ProcessInputGridLayout(void);
+u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted);
+s8 Menu_ProcessInputNoWrapAround_other(void);
+void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
 
 #endif // GUARD_MENU_H

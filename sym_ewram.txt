@@ -362,49 +362,7 @@ gUnknown_0203CD88: @ 203CD88
 	.include "src/list_menu.o"
 	.include "src/dynamic_placeholder_text_util.o"
 	.include "src/item_icon.o"
-
-gUnknown_0203CEC4: @ 203CEC4
-	.space 0x4
-
-gUnknown_0203CEC8: @ 203CEC8
-	.space 0xE
-
-gUnknown_0203CED6: @ 203CED6
-	.space 0x6
-
-gUnknown_0203CEDC: @ 203CEDC
-	.space 0x4
-
-gUnknown_0203CEE0: @ 203CEE0
-	.space 0x4
-
-gUnknown_0203CEE4: @ 203CEE4
-	.space 0x4
-
-gUnknown_0203CEE8: @ 203CEE8
-	.space 0x1
-
-gUnknown_0203CEE9: @ 203CEE9
-	.space 0x3
-
-gPostMenuFieldCallback: @ 203CEEC
-	.space 0x4
-
-gUnknown_0203CEF0: @ 203CEF0
-	.space 0x4
-
-gUnknown_0203CEF4: @ 203CEF4
-	.space 0x4
-
-gSelectedOrderFromParty: @ 203CEF8
-	.space 0x4
-
-gUnknown_0203CEFC: @ 203CEFC
-	.space 0x4
-
-gUnknown_0203CF00: @ 203CF00
-	.space 0x4
-
+	.include "src/party_menu.o"
 	.include "src/fossil_specials.o"
 	.include "src/fldeff_groundshake.o"
 	.include "src/pokemon_summary_screen.o"

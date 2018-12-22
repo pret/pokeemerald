@@ -32,12 +32,12 @@ SootopolisCity_MysteryEventsHouse_1F_MapScript2_22799D: @ 822799D
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	lockall
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227A1F
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227A1F
 	waitmovement 0
 	applymovement 1, SootopolisCity_MysteryEventsHouse_1F_Movement_227A21
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6
 	waitmovement 0
 	compare VAR_0x40C0, 1
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04
@@ -135,19 +135,19 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF:: @ 8227AEF
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227AFE:: @ 8227AFE
 	applymovement VAR_LAST_TALKED, SootopolisCity_MysteryEventsHouse_1F_Movement_227B40
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227B34
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227B34
 	waitmovement 0
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10:: @ 8227B10
 	applymovement VAR_LAST_TALKED, SootopolisCity_MysteryEventsHouse_1F_Movement_227B43
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227B38
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227B38
 	waitmovement 0
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22:: @ 8227B22
 	applymovement VAR_LAST_TALKED, SootopolisCity_MysteryEventsHouse_1F_Movement_227B40
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227B3C
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227B3C
 	waitmovement 0
 	return
 

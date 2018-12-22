@@ -10,12 +10,12 @@ VerdanturfTown_BattleTentCorridor_EventScript_20209A:: @ 820209A
 	lockall
 	setvar VAR_TEMP_0, 1
 	applymovement 1, VerdanturfTown_BattleTentCorridor_Movement_2020DE
-	applymovement 255, VerdanturfTown_BattleTentCorridor_Movement_2020DE
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentCorridor_Movement_2020DE
 	waitmovement 0
 	opendoor 2, 1
 	waitdooranim
 	applymovement 1, VerdanturfTown_BattleTentCorridor_Movement_2020E4
-	applymovement 255, VerdanturfTown_BattleTentCorridor_Movement_2020E3
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentCorridor_Movement_2020E3
 	waitmovement 0
 	closedoor 2, 1
 	waitdooranim

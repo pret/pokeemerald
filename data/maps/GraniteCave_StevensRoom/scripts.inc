@@ -42,13 +42,13 @@ GraniteCave_StevensRoom_EventScript_22DD0D:: @ 822DD0D
 	return
 
 GraniteCave_StevensRoom_EventScript_22DD18:: @ 822DD18
-	applymovement 255, GraniteCave_StevensRoom_Movement_22DD4C
+	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_22DD4C
 	applymovement 1, GraniteCave_StevensRoom_Movement_22DD45
 	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_22DD2A:: @ 822DD2A
-	applymovement 255, GraniteCave_StevensRoom_Movement_22DD4C
+	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_22DD4C
 	applymovement 1, GraniteCave_StevensRoom_Movement_22DD51
 	waitmovement 0
 	return

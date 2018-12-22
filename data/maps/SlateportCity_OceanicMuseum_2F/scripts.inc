@@ -68,7 +68,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	fadescreen 0
 	delay 30
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_2725A8
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 269
@@ -96,7 +96,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BC8C:: @ 820BC8C
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BC92:: @ 820BC92
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_2725A4
 	waitmovement 0
 	return
 
@@ -106,12 +106,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BC9D:: @ 820BC9D
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BCA8:: @ 820BCA8
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_20BCBE
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_20BCBE
 	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BCB3:: @ 820BCB3
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_20BCC2
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_20BCC2
 	waitmovement 0
 	return
 

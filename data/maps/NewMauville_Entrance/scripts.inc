@@ -23,7 +23,7 @@ NewMauville_Entrance_MapScript1_2372FB: @ 82372FB
 
 NewMauville_Entrance_EventScript_2372FF:: @ 82372FF
 	lockall
-	applymovement 255, NewMauville_Entrance_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, NewMauville_Entrance_Movement_2725A6
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_237382, MSGBOX_DEFAULT
 	checkitem ITEM_BASEMENT_KEY, 1

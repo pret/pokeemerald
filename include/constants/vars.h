@@ -100,7 +100,7 @@
 #define VAR_0x4051                 0x4051
 #define VAR_0x4052                 0x4052
 #define VAR_0x4053                 0x4053
-#define VAR_0x4054                 0x4054
+#define VAR_CURRENT_SECRET_BASE    0x4054
 #define VAR_0x4055                 0x4055
 #define VAR_0x4056                 0x4056
 #define VAR_0x4057                 0x4057

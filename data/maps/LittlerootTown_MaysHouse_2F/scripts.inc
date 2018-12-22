@@ -95,11 +95,11 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9473
 	waitmovement 0
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A4
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_1F9483
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_1F9483
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9479
 	waitmovement 0
 	return
@@ -107,11 +107,11 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948B
 	waitmovement 0
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A4
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_1F9497
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_1F9497
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948F
 	waitmovement 0
 	return
@@ -119,7 +119,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F949D
 	waitmovement 0
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A6
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -130,11 +130,11 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 LittlerootTown_MaysHouse_2F_EventScript_1F9440:: @ 81F9440
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94AD
 	waitmovement 0
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A4
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_MaysHouse_2F_Movement_1F94BB
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_1F94BB
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94B2
 	waitmovement 0
 	return
