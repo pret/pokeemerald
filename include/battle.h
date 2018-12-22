@@ -298,7 +298,6 @@ struct AI_ThinkingStruct
     u32 aiFlags;
     u8 aiAction;
     u8 aiLogicId;
-    u8 filler12[6];
     u8 simulatedRNG[4];
     struct AI_SavedBattleMon saved[4];
 };
@@ -580,8 +579,6 @@ struct BattleStruct
     u8 roostTypes[MAX_BATTLERS_COUNT][3];
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
-    u32 debugAIFlags;
-    bool8 notfirstTimeAIFlags;
     u8 activeAbilityPopUps; // as bits for each battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
