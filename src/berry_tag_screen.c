@@ -349,11 +349,11 @@ static bool8 LoadBerryTagGfx(void)
         sBerryTag->gfxState++;
         break;
     case 5:
-        LoadCompressedObjectPic(&gUnknown_0857FDEC);
+        LoadCompressedSpriteSheet(&gUnknown_0857FDEC);
         sBerryTag->gfxState++;
         break;
     default:
-        LoadCompressedObjectPalette(&gUnknown_0857FDF4);
+        LoadCompressedSpritePalette(&gUnknown_0857FDF4);
         return TRUE; // done
     }
 

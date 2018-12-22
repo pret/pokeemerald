@@ -1674,7 +1674,7 @@ EventScript_271E0E:: @ 8271E0E
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 1, EventScript_271E3E
 	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
-	special ShowPokemonStorageSystem
+	special ShowPokemonStorageSystemPC
 	waitstate
 	goto EventScript_271DAC
 	end

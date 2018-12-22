@@ -1803,7 +1803,7 @@ bool8 sub_80BC514(u8 a)
             ResetSpriteData();
             FreeAllSpritePalettes();
             gReservedSpritePaletteCount = 8;
-            LoadCompressedObjectPic(&sInterfaceSpriteSheet[0]);
+            LoadCompressedSpriteSheet(&sInterfaceSpriteSheet[0]);
             LoadSpritePalettes(sInterfaceSpritePalette);
             CreateInterfaceSprites(a);
             gMain.state++;
@@ -4815,7 +4815,7 @@ void sub_80C12E0(u8 taskId)
             }
             break;
         case 1:
-            LoadCompressedObjectPic(sInterfaceSpriteSheet);
+            LoadCompressedSpriteSheet(sInterfaceSpriteSheet);
             LoadSpritePalettes(sInterfaceSpritePalette);
             sub_80C2594(taskId);
             for (i = 0; i < 16; i++)

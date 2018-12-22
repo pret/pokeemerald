@@ -1964,9 +1964,9 @@ static bool8 sub_8176AB0(u8 data, u8 taskIdA)
     case 2:
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
-            LoadCompressedObjectPic(gUnknown_085F5334);
-            LoadCompressedObjectPic(gUnknown_085F53BC);
-            LoadCompressedObjectPic(gUnknown_085F5354);
+            LoadCompressedSpriteSheet(gUnknown_085F5334);
+            LoadCompressedSpriteSheet(gUnknown_085F53BC);
+            LoadCompressedSpriteSheet(gUnknown_085F5354);
             LoadSpritePalettes(gUnknown_085F5384);
 
             spriteId = intro_create_brendan_sprite(120, 46);
@@ -1981,9 +1981,9 @@ static bool8 sub_8176AB0(u8 data, u8 taskIdA)
         }
         else
         {
-            LoadCompressedObjectPic(gUnknown_085F5344);
-            LoadCompressedObjectPic(gUnknown_085F53AC);
-            LoadCompressedObjectPic(gUnknown_085F5354);
+            LoadCompressedSpriteSheet(gUnknown_085F5344);
+            LoadCompressedSpriteSheet(gUnknown_085F53AC);
+            LoadCompressedSpriteSheet(gUnknown_085F5354);
             LoadSpritePalettes(gUnknown_085F5384);
 
             spriteId = intro_create_may_sprite(120, 46);

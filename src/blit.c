@@ -1,12 +1,12 @@
 #include "global.h"
 #include "blit.h"
 
-void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
+void BlitBitmapRect4BitWithoutColorKey(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
     BlitBitmapRect4Bit(src, dst, srcX, srcY, dstX, dstY, width, height, 0xFF);
 }
 
-void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey)
+void BlitBitmapRect4Bit(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey)
 {
     s32 xEnd;
     s32 yEnd;
@@ -14,7 +14,7 @@ void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 sr
     s32 multiplierDstY;
     s32 loopSrcY, loopDstY;
     s32 loopSrcX, loopDstX;
-    u8 *pixelsSrc;
+    const u8 *pixelsSrc;
     u8 *pixelsDst;
     s32 toOrr;
     s32 toAnd;
@@ -103,7 +103,7 @@ void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 hei
     }
 }
 
-void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
+void BlitBitmapRect4BitTo8Bit(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
 {
     s32 palOffsetBits;
     s32 xEnd;
@@ -112,7 +112,7 @@ void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dst, u16 srcX, 
     s32 multiplierDstY;
     s32 loopSrcY, loopDstY;
     s32 loopSrcX, loopDstX;
-    u8 *pixelsSrc;
+    const u8 *pixelsSrc;
     u8 *pixelsDst;
     s32 colorKeyBits;
 

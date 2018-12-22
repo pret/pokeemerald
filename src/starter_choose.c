@@ -412,8 +412,8 @@ void CB2_ChooseStarter(void)
 
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
     LoadPalette(gBirchBagGrassPal, 0, 0x40);
-    LoadCompressedObjectPic(&gUnknown_085B1ED8[0]);
-    LoadCompressedObjectPic(&gUnknown_085B1EE8[0]);
+    LoadCompressedSpriteSheet(&gUnknown_085B1ED8[0]);
+    LoadCompressedSpriteSheet(&gUnknown_085B1EE8[0]);
     LoadSpritePalettes(gUnknown_085B1EF8);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
 

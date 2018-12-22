@@ -458,7 +458,7 @@ void sub_81B97DC(struct Pokemon*, u8, u8);
 void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc task, MainCallback callback)
 {
     u16 i;
-    
+
     reset_brm();
     gUnknown_0203CEC4 = Alloc(sizeof(struct Struct203CEC4));
     if (gUnknown_0203CEC4 == NULL)
@@ -476,25 +476,25 @@ void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc task, MainCallback cal
         gUnknown_0203CEC4->unk8_1 = 0;
         gUnknown_0203CEC4->unk8_2 = 0xFF;
         gUnknown_0203CEC4->unk9_0 = 0xFF;
-        
+
         if (a == 4)
             gUnknown_0203CEC4->unk8_0 = TRUE;
         else
             gUnknown_0203CEC4->unk8_0 = FALSE;
-        
+
         if (b != 0xFF)
             gUnknown_0203CEC8.mode = b;
-        
+
         for (i = 0; i <= 15; i++)
             gUnknown_0203CEC4->data[i] = 0;
         for (i = 0; i < 3; i++)
             gUnknown_0203CEC4->unkC[i] |= 0xFF;
-        
+
         if (d == 0)
             gUnknown_0203CEC8.unk9 = 0;
         else if (gUnknown_0203CEC8.unk9 > 5 || GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES) == SPECIES_NONE)
             gUnknown_0203CEC8.unk9 = 0; // wut why is this else if?
-        
+
         gTextFlags.autoScroll = 0;
         CalculatePlayerPartyCount();
         SetMainCallback2(PartyMenuInitCallback);
@@ -698,7 +698,7 @@ bool8 AllocPartyMenuBg(void)
 bool8 AllocPartyMiscGfx(void)
 {
     int sizeout;
-    
+
     switch (gUnknown_0203CEC4->data[0])
     {
         case 0:
@@ -767,9 +767,9 @@ void FreePartyPointers(void)
 void PartyMenuInitHelperStructs(u8 a)
 {
     u8 i;
-    
+
     gUnknown_0203CEDC = Alloc(sizeof(struct Struct203CEDC[PARTY_SIZE]));
-    
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         gUnknown_0203CEDC[i].unk0 = &gUnknown_086156C4[1];
@@ -822,7 +822,7 @@ void RenderPartyMenuBox(u8 slot)
                 DisplayPartyPokemonSelectHeldItemRelated(slot);
             else if (!sub_81B0BFC(slot))
                 DisplayPartyPokemonData(slot);
-            
+
             if (gUnknown_0203CEC8.unk8_0 == 5)
                 sub_81B0FCC(slot, 0);
             else if (gUnknown_0203CEC8.unk9 == slot)
@@ -857,7 +857,7 @@ void DisplayPartyPokemonData(u8 slot)
 void DisplayPartyPokemonSelectData(u8 slot, u8 stringID)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
-    
+
     gUnknown_0203CEDC[slot].unk0->unk0(gUnknown_0203CEDC[slot].windowId, 0, 0, 0, 0, 1);
     DisplayPartyPokemonNickname(mon, &gUnknown_0203CEDC[slot], 0);
     if (!GetMonData(mon, MON_DATA_IS_EGG))
@@ -873,7 +873,7 @@ void DisplayPartyPokemonSelectForBattle(u8 slot)
     u8 i;
     struct Pokemon *mon = &gPlayerParty[slot];
     u8 *ptr = gSelectedOrderFromParty;
-    
+
     if (!GetBattleEntryEligibility(mon))
     {
         DisplayPartyPokemonSelectData(slot, 7);
@@ -937,7 +937,7 @@ bool8 sub_81B0BFC(u8 slot)
 {
     struct Pokemon *currentPokemon = &gPlayerParty[slot];
     u16 item = gSpecialVar_ItemId;
-    
+
     if (gUnknown_0203CEC8.unkB == 12)
     {
         gSpecialVar_Result = FALSE;
@@ -947,7 +947,7 @@ bool8 sub_81B0BFC(u8 slot)
     {
         if (gUnknown_0203CEC8.unkB != 3)
             return FALSE;
-        
+
         switch (CheckIfItemIsTMHMOrEvolutionStone(item))
         {
             default:
@@ -986,7 +986,7 @@ void sub_81B0CEC(u8 slot)
 {
     struct Struct203CEDC *structPtr = &gUnknown_0203CEDC[slot];
     u8 actualSlot = slot - 3;
-    
+
     if (gUnknown_02022FF8[actualSlot].species == SPECIES_NONE)
     {
         sub_81B2720(structPtr->windowId);
@@ -1022,12 +1022,12 @@ u8* GetPartyMiscGraphicsTile(u16 tileId)
 void party_menu_add_per_mon_objects_internal(u8 slot)
 {
     u8 actualSlot;
-    
+
     if (gUnknown_0203CEC8.unk8_0 == 5 && slot > 2)
     {
         u8 status;
         actualSlot = slot - 3;
-        
+
         if (gUnknown_02022FF8[actualSlot].species != SPECIES_NONE)
         {
             party_menu_link_mon_icon_anim(gUnknown_02022FF8[actualSlot].species, gUnknown_02022FF8[actualSlot].personality, &gUnknown_0203CEDC[slot], 0, 0);
@@ -1082,7 +1082,7 @@ void sub_81B0F28(void)
 void sub_81B0FCC(u8 slot, u8 b)
 {
     u8 spriteId;
-    
+
     switch (slot)
     {
         default:
@@ -1141,7 +1141,7 @@ u8 GetPartyBoxPalBitfield(u8 slot, u8 b)
     }
     if (gUnknown_0203CEC8.unkB == 10 && slot == gUnknown_0203CEC8.unk9 )
         returnVar |= 32;
-    
+
     return returnVar;
 }
 
@@ -1149,10 +1149,10 @@ bool8 PartyBoxPal_ParnterOrDisqualifiedInArena(u8 slot)
 {
     if (gUnknown_0203CEC8.mode == 2 && (slot == 1 || slot == 4 || slot == 5))
         return TRUE;
-    
+
     if (slot < 3 && (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gMain.inBattle && (gBattleStruct->arenaLostPlayerMons >> sub_81B8F38(slot) & 1))
         return TRUE;
-    
+
     return FALSE;
 }
 
@@ -1173,11 +1173,11 @@ bool8 IsMultiBattle(void)
 void sub_81B1288(struct Pokemon *partySlot, struct Pokemon *pokemon)
 {
     struct Pokemon *temp = Alloc(sizeof(struct Pokemon));
-    
+
     *temp = *partySlot;
     *partySlot = *pokemon;
     *pokemon = *temp;
-    
+
     Free(temp);
 }
 
@@ -1193,12 +1193,12 @@ void c3_0811FAB4(u8 taskId)
     {
         if (gUnknown_0203CEC8.unk8_0 == 1)
             sub_81B9080();
-        
+
         if  (gUnknown_0203CEC4->exitCallback != NULL)
             SetMainCallback2(gUnknown_0203CEC4->exitCallback);
         else
             SetMainCallback2(gUnknown_0203CEC8.exitCallback);
-        
+
         ResetSpriteData();
         FreePartyPointers();
         DestroyTask(taskId);
@@ -1220,7 +1220,7 @@ void sub_81B1370(u8 taskId)
     if (!gPaletteFade.active && sub_81221EC() != TRUE)
     {
         s8 *ptr = sub_81B13EC();
-        
+
         switch (PartyMenuButtonHandler(ptr))
         {
             case 1:
@@ -1268,7 +1268,7 @@ void sub_81B140C(u8 taskId, s8 *ptr)
                 {
                     if (gUnknown_0203CEC8.unk8_0 == 1)
                         gUnknown_0203CEC4->exitCallback = sub_81B9140;
-                    
+
                     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
                     gUnknown_03006328(taskId, sub_81B6794);
                 }
@@ -1360,20 +1360,20 @@ void sub_81B15D0(u8 taskId, s8 *ptr)
             }
             break;
     }
-}    
+}
 
 bool8 sub_81B1660(u8 taskId)
 {
     const u8* stringPtr = NULL;
-    
+
     if (gUnknown_0203CEC8.unk8_0 == 2)
         stringPtr = gText_CancelParticipation;
     else if (gUnknown_0203CEC8.unk8_0 == 4)
         stringPtr = sub_81B88BC();
-    
+
     if (stringPtr == NULL)
         return FALSE;
-    
+
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     StringExpandPlaceholders(gStringVar4, stringPtr);
     sub_81B1B5C(gStringVar4, 1);
@@ -1411,7 +1411,7 @@ void sub_81B1708(u8 taskId)
 u16 PartyMenuButtonHandler(s8 *ptr)
 {
     s8 movementDir;
-    
+
     switch (gMain.newAndRepeatedKeys)
     {
         case DPAD_UP:
@@ -1440,19 +1440,19 @@ u16 PartyMenuButtonHandler(s8 *ptr)
                     break;
             }
     }
-    
+
     if (gMain.newKeys & START_BUTTON)
         return 8;
-    
+
     if (movementDir)
     {
         UpdateCurrentPartySelection(ptr, movementDir);
         return 0;
     }
-    
+
     if ((gMain.newKeys & A_BUTTON) && *ptr == 7)
         return 2;
-    
+
     return gMain.newKeys & (A_BUTTON | B_BUTTON);
 }
 
@@ -1460,12 +1460,12 @@ u16 PartyMenuButtonHandler(s8 *ptr)
 void UpdateCurrentPartySelection(s8 *ptr, s8 movementDir)
 {
     s8 slot = *ptr;
-    
+
     if (gUnknown_0203CEC8.mode == 0)
         SetNewPartySelectTarget1(ptr, movementDir);
     else
         SetNewPartySelectTarget2(ptr, movementDir);
-    
+
     if (*ptr != slot)
     {
         PlaySE(SE_SELECT);
@@ -1525,7 +1525,7 @@ _081B184C:\n\
 void SetNewPartySelectTarget1(s8 *ptr, s8 b)
 {
     u8 r0r2;
-    
+
     switch (b)
     {
         case -1:
@@ -1737,7 +1737,7 @@ void SetNewPartySelectTarget2(s8 *ptr, s8 b)
     u8 unk;
     s8 unk2 = b;
     u8 unk3;
-    
+
     switch (b)
     {
         case -1:
@@ -1829,7 +1829,7 @@ void SetNewPartySelectTarget2(s8 *ptr, s8 b)
                 gUnknown_0203CEC4->unk8_1 = *ptr;
                 *ptr = 0;
             }
-            else 
+            else
             {
                 unk3 = *ptr - 4;
                 if (unk3 <= 1)
@@ -2077,7 +2077,7 @@ u8* GetMonNickname(struct Pokemon *mon, u8 *dest)
 u8 sub_81B1B5C(const u8* str, u8 b)
 {
     u8 taskId;
-    
+
     sub_81B3300(str);
     taskId = CreateTask(sub_81B1B8C, 1);
     gTasks[taskId].data[0] = b;
@@ -2168,7 +2168,7 @@ void sub_81B1D68(u16 item, u16 item2, u8 c)
 void sub_81B1DB8(struct Pokemon *mon, u16 item)
 {
     u8 itemBytes[2];
-    
+
     if (ItemIsMail(item) == TRUE)
     {
         if (GiveMailToMon(mon, item) == 0xFF)
@@ -2182,12 +2182,12 @@ void sub_81B1DB8(struct Pokemon *mon, u16 item)
 u8 sub_81B1E00(struct Pokemon* mon)
 {
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-    
+
     if (item == ITEM_NONE)
         return 0;
     if (AddBagItem(item, 1) == FALSE)
         return 1;
-    
+
     item = ITEM_NONE;
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
     return 2;
@@ -2201,7 +2201,7 @@ void pokemon_item_not_removed(u16 itemUnused)
 void sub_81B1E60(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     data[0] += data[2];
     data[3]--;
     SetMonData(&gPlayerParty[data[4]], MON_DATA_HP, &data[0]);
@@ -2219,7 +2219,7 @@ void sub_81B1F18(u8 taskId, u8 slot, s8 c, s16 HPDifference, TaskFunc func)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
     s16 *data = gTasks[taskId].data;
-    
+
     data[0] = GetMonData(mon, MON_DATA_HP);
     data[1] = GetMonData(mon, MON_DATA_MAX_HP);
     data[2] = c;
@@ -2232,7 +2232,7 @@ void sub_81B1F18(u8 taskId, u8 slot, s8 c, s16 HPDifference, TaskFunc func)
 void sub_81B1FA8(u8 taskId, u8 b, u32 hp)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     switch (b) // only case 0 is used
     {
         case 0:
@@ -2275,7 +2275,7 @@ u8 pokemon_ailments_get_primary(u32 status)
 u8 sub_81B205C(struct Pokemon *mon)
 {
     u8 ailment;
-    
+
     if (GetMonData(mon, MON_DATA_HP) == 0)
         return AILMENT_FNT;
     ailment = pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS));
@@ -2289,11 +2289,11 @@ u8 sub_81B205C(struct Pokemon *mon)
 void sub_81B209C(void)
 {
     u16 *ptr;
-    
+
     if (gUnknown_0203CEC8.unk8_0 == 11)
     {
         u8 i;
-        
+
         ptr = &gUnknown_0203CEC8.unkE;
         gUnknown_0203CEC8.unkE = 0;
         if (gSpecialVar_0x8005 == 0)
@@ -2384,7 +2384,7 @@ void sub_81B227C(u8 taskId)
 u8 CanPartyPokemonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
 {
     u16 move;
-    
+
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
     if (item >= ITEM_TM01_FOCUS_PUNCH)
@@ -2403,7 +2403,7 @@ u8 CanPartyPokemonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
     {
         move = sub_81B2360(tutor);
     }
-    
+
     if (pokemon_has_move(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
     return CAN_LEARN_MOVE;
@@ -2424,7 +2424,7 @@ bool8 sub_81B2370(u16 species, u8 tutor)
 void sub_81B239C(u8 a)
 {
     u8 i;
-    
+
     switch (a)
     {
         case 0:
@@ -2454,7 +2454,7 @@ void sub_81B2428(bool8 a)
     u8 windowId;
     u8 offset;
     u8 mainOffset;
-    
+
     if (gUnknown_0203CEC8.unk8_0 != 5)
     {
         if (a == TRUE)
@@ -2499,7 +2499,7 @@ void BlitBitmapToPartyWindow(u8 windowId, u8 *b, u8 c, u8 x, u8 y, u8 width, u8 
 {
     u8 *pixels = AllocZeroed(height * width * 32);
     u8 i, j;
-    
+
     if (pixels != NULL)
     {
         for (i = 0; i < height; i++)
@@ -2546,7 +2546,7 @@ void sub_81B2720(u8 windowId)
 void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
-    
+
     if (bitfield & 0x40)
     {
         LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AF1[0]), gUnknown_08615AC0[0] + palNum, 2);
@@ -2674,7 +2674,7 @@ void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, u8 *alig
 void DisplayPartyPokemonNickname(struct Pokemon *mon, struct Struct203CEDC *ptr, u8 c)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
-    
+
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         if (c == 1)
@@ -2710,7 +2710,7 @@ void DisplayPartyPokemonLevel(u8 level, struct Struct203CEDC *ptr)
 void DisplayPartyPokemonGenderNidoranCheck(struct Pokemon *mon, struct Struct203CEDC *ptr, u8 c)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
-    
+
     if (c == 1)
         ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk4[8] >> 3, (ptr->unk0->unk4[9] >> 3) + 1, ptr->unk0->unk4[10] >> 3, ptr->unk0->unk4[11] >> 3, 0);
     GetMonNickname(mon, nickname);
@@ -2720,7 +2720,7 @@ void DisplayPartyPokemonGenderNidoranCheck(struct Pokemon *mon, struct Struct203
 void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, struct Struct203CEDC *ptr)
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
-    
+
     if (species == SPECIES_NONE)
         return;
     if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, gSpeciesNames[species]) == 0)
@@ -2754,10 +2754,10 @@ void DisplayPartyPokemonHPCheck(struct Pokemon *mon, struct Struct203CEDC *ptr, 
 void DisplayPartyPokemonHP(u16 hp, struct Struct203CEDC *ptr)
 {
     u8 *strOut = ConvertIntToDecimalStringN(gStringVar1, hp, 1, 3);
-    
+
     strOut[0] = CHAR_SLASH;
     strOut[1] = EOS;
-    
+
     DisplayPartyPokemonBarDetail(ptr->windowId, gStringVar1, 0, &ptr->unk0->unk4[12]);
 }
 
@@ -2790,7 +2790,7 @@ void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *ptr)
 {
     u8 palNum = GetWindowAttribute(ptr->windowId, WINDOW_PALETTE_NUM) * 16;
     u8 hpFraction;
-    
+
     switch (GetHPBarLevel(hp, maxhp))
     {
         case HP_BAR_GREEN:
@@ -2807,7 +2807,7 @@ void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *ptr)
             LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[1]), gUnknown_08615AB8[1] + palNum, 2);
             break;
     }
-    
+
     hpFraction = GetScaledHPFraction(hp, maxhp, ptr->unk0->unk4[22]);
     FillWindowPixelRect(ptr->windowId, gUnknown_08615AB8[1], ptr->unk0->unk4[20], ptr->unk0->unk4[21], hpFraction, 1);
     FillWindowPixelRect(ptr->windowId, gUnknown_08615AB8[0], ptr->unk0->unk4[20], ptr->unk0->unk4[21] + 1, hpFraction, 2);
@@ -2915,10 +2915,10 @@ void sub_81B302C(u8 *ptr)
 void display_pokemon_menu_message(u32 stringID)
 {
     u8 *windowPtr = &gUnknown_0203CEC4->unkC[1];
-    
+
     if (*windowPtr != 0xFF)
         sub_81B302C(windowPtr);
-    
+
     if (stringID != 0x7F)
     {
         switch (stringID)
@@ -2962,10 +2962,10 @@ bool8 sub_81B314C(void)
     struct Pokemon *party = gPlayerParty;
     u8 i;
     u8 j = 0;
-    
+
     if (gUnknown_0203CEC8.unkB == 1)
         return TRUE;
-    
+
     for (i = 0; i < 6; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE && (GetMonData(&party[i], MON_DATA_HP) != 0 || GetMonData(&party[i], MON_DATA_IS_EGG)))
@@ -2982,7 +2982,7 @@ u8 sub_81B31B0(u8 a)
     u8 cursorDimension;
     u8 fontAttribute;
     u8 i;
-    
+
     switch (a)
     {
         case 0:
@@ -2998,23 +2998,23 @@ u8 sub_81B31B0(u8 a)
             window = gUnknown_08615960;
             break;
     }
-    
+
     gUnknown_0203CEC4->unkC[0] = AddWindow(&window);
     SetWindowBorderStyle(gUnknown_0203CEC4->unkC[0], FALSE, 0x4F, 13);
     if (a == 3)
         return gUnknown_0203CEC4->unkC[0];
     cursorDimension = GetMenuCursorDimensionByFont(1, 0);
     fontAttribute = GetFontAttribute(1, 2);
-    
+
     for (i = 0; i < gUnknown_0203CEC4->unk17; i++)
     {
         u8 unk = (gUnknown_0203CEC4->unkF[i] > 18) ? 4 : 3;
         AddTextPrinterParameterized4(gUnknown_0203CEC4->unkC[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, gUnknown_086157FC[unk], 0, gUnknown_08615C08[gUnknown_0203CEC4->unkF[i]].textPtr);
     }
-    
+
     InitMenuInUpperLeftCorner(gUnknown_0203CEC4->unkC[0], gUnknown_0203CEC4->unk17, 0, 1);
     schedule_bg_copy_tilemap_to_vram(2);
-    
+
     return gUnknown_0203CEC4->unkC[0];
 }
 
@@ -3046,7 +3046,7 @@ void sub_81B3394(void)
 void sub_81B33B4(struct Pokemon *mons, u8 a, u8 b)
 {
     u8 i;
-    
+
     if (b == 0)
     {
         sub_81B3414(mons, a);
@@ -3062,7 +3062,7 @@ void sub_81B33B4(struct Pokemon *mons, u8 a, u8 b)
 void sub_81B3414(struct Pokemon *mons, u8 a)
 {
     u8 i, j;
-    
+
     gUnknown_0203CEC4->unk17 = 0;
     AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 0);
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -3091,7 +3091,7 @@ void sub_81B3414(struct Pokemon *mons, u8 a)
 u8 sub_81B353C(struct Pokemon *mon)
 {
     u32 returnVar;
-    
+
     switch (gUnknown_0203CEC8.unk8_0)
     {
         case 0:
@@ -3143,7 +3143,7 @@ bool8 sub_81B3608(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item;
-    
+
     GetMonNickname(mon, gStringVar1);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     if (gUnknown_0203CEC8.unk8_0 != 12)
@@ -3187,7 +3187,7 @@ void sub_81B3730(u8 taskId)
 {
     s16 *data;
     s8 input;
-    
+
     if (gPaletteFade.active == FALSE && sub_81221EC() != TRUE)
     {
         data = gTasks[taskId].data;
@@ -3195,7 +3195,7 @@ void sub_81B3730(u8 taskId)
             input = Menu_ProcessInputNoWrapAround_other();
         else
             input = ProcessMenuInput_other();
-        data[0] = GetMenuCursorPos();
+        data[0] = Menu_GetCursorPos();
         if (input != MENU_NOTHING_CHOSEN)
         {
             if (input == MENU_B_PRESSED)
@@ -3256,7 +3256,7 @@ void sub_81B3938(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 windowIds[2];
-    
+
     if (gUnknown_0203CEC8.unkA == gUnknown_0203CEC8.unk9)
     {
         sub_81B407C(taskId);
@@ -3300,7 +3300,7 @@ void sub_81B3938(u8 taskId)
 #ifdef NONMATCHING
 bool8 sub_81B3AD8(s16 a, s16 b, u8 *c, u8 *d, u8 *e)
 {
-    
+
     if ((a + b) < 0 || a > 31)
     {
         return FALSE;
@@ -3391,7 +3391,7 @@ _081B3B34:\n\
 void sub_81B3B40(const void *rectSrc, s16 a, s16 b, s16 c, s16 d, s16 e)
 {
     u8 f, g, h;
-    
+
     if (sub_81B3AD8(a, c, &f, &g, &h))
     {
         FillBgTilemapBufferRect_Palette0(0, 0, g, b, h, d);
@@ -3411,7 +3411,7 @@ void sub_81B3C0C(struct Struct203CEDC *ptr, s16 a)
 void sub_81B3C60(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     if (data[10] != 0)
         sub_81B3C0C(&gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], data[10]);
     if (data[11] != 0)
@@ -3421,7 +3421,7 @@ void sub_81B3C60(u8 taskId)
 void sub_81B3CC0(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     if (data[10] != 0)
         sub_81B3B40(gUnknown_0203CEF0, data[0] + data[8], data[1], data[2], data[3], data[10]);
     if (data[11] != 0)
@@ -3433,7 +3433,7 @@ void sub_81B3D48(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 tilemapRelatedMaybe[2];
-    
+
     sub_81B3CC0(taskId);
     sub_81B3C60(taskId);
     data[8] += data[10];
@@ -3460,7 +3460,7 @@ void sub_81B3D48(u8 taskId)
 void sub_81B3E60(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     sub_81B3CC0(taskId);
     sub_81B3C60(taskId);
     if (data[10] == 0 && data[11] == 0)
@@ -3487,7 +3487,7 @@ void oamt_swap_pos(u8 *spriteIdPtr1, u8 *spriteIdPtr2)
 {
     u8 spriteIdBuffer = *spriteIdPtr1;
     u16 xBuffer1, yBuffer1, xBuffer2, yBuffer2;
-    
+
     *spriteIdPtr1 = *spriteIdPtr2;
     *spriteIdPtr2 = spriteIdBuffer;
     xBuffer1 = gSprites[*spriteIdPtr1].pos1.x;
@@ -3501,7 +3501,7 @@ void oamt_swap_pos(u8 *spriteIdPtr1, u8 *spriteIdPtr2)
     gSprites[*spriteIdPtr2].pos1.x = xBuffer1;
     gSprites[*spriteIdPtr2].pos1.y = yBuffer1;
     gSprites[*spriteIdPtr2].pos2.x = xBuffer2;
-    gSprites[*spriteIdPtr2].pos2.y = yBuffer2;  
+    gSprites[*spriteIdPtr2].pos2.y = yBuffer2;
 }
 
 void swap_pokemon_and_oams(void)
@@ -3509,7 +3509,7 @@ void swap_pokemon_and_oams(void)
     struct Struct203CEDC *structPtrs[2];
     struct Pokemon *mon1, *mon2;
     struct Pokemon *monBuffer;
-    
+
     structPtrs[0] = &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9];
     structPtrs[1] = &gUnknown_0203CEDC[gUnknown_0203CEC8.unkA];
     mon1 = &gPlayerParty[gUnknown_0203CEC8.unk9];
@@ -3604,7 +3604,7 @@ void c2_8123744(void)
 void sub_81B42D0(u8 taskId)
 {
     u16 item;
-    
+
     if (!gPaletteFade.active)
     {
         item = gSpecialVar_ItemId;
@@ -3678,7 +3678,7 @@ void sub_81B44FC(u8 taskId)
 void sub_81B452C(void)
 {
     u8 mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
-    
+
     sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B4578, 3);
 }
 
@@ -3686,7 +3686,7 @@ void sub_81B4578(void)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-    
+
     if (gSpecialVar_Result == FALSE)
     {
         TakeMailFromMon(mon);
@@ -3716,7 +3716,7 @@ void sub_81B4624(u8 taskId)
 void sub_81B469C(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    
+
     if (sub_81B1BD4() != TRUE)
     {
         sub_81B5C94(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
@@ -3735,7 +3735,7 @@ void sub_81B4724(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-    
+
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
@@ -3762,7 +3762,7 @@ void sub_81B47E0(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-    
+
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
@@ -3794,7 +3794,7 @@ void sub_81B48A8(u8 taskId)
 void sub_81B48DC(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    
+
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
@@ -3815,7 +3815,7 @@ void sub_81B4988(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 itemClear;
-    
+
     if (sub_81B1BD4() != TRUE)
     {
         itemClear = ITEM_NONE;
@@ -3911,7 +3911,7 @@ void sub_81B4C60(u8 taskId)
 void sub_81B4C94(u8 taskId)
 {
     u16 item;
-    
+
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
@@ -3940,7 +3940,7 @@ void sub_81B4C94(u8 taskId)
 void sub_81B4D78(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    
+
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
@@ -3980,7 +3980,7 @@ void sub_81B4E8C(u8 taskId)
 {
     u8 unk;
     u8 i;
-    
+
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     unk = sub_81B8830();
@@ -4016,7 +4016,7 @@ void sub_81B4FA8(u8 taskId)
 {
     u8 unk;
     u8 i, j;
-    
+
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
@@ -4052,7 +4052,7 @@ void sub_81B50C8(u8 taskId)
     u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
-    
+
     switch (sub_807A8D0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, species2, species, obedience))
     {
         case 1:
@@ -4080,7 +4080,7 @@ void brm_trade_1(u8 taskId)
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
     u32 stringId = sub_807A7E0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, *(u32 *)&gUnknown_02022C38 /* dirty cast, probably needs to be changed */, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
-    
+
     if (stringId != 0)
     {
         StringExpandPlaceholders(gStringVar4, gUnknown_08615E0C[stringId - 1]);
@@ -4153,10 +4153,10 @@ void sub_81B5430(u8 taskId)
 
 void sub_81B5470(u8 taskId)
 {
-    u8 fieldMove = gUnknown_0203CEC4->unkF[GetMenuCursorPos()] - 19;
+    u8 fieldMove = gUnknown_0203CEC4->unkF[Menu_GetCursorPos()] - 19;
     struct MapHeader const *mapHeader;
     u8 fieldMove2;
-    
+
     PlaySE(SE_SELECT);
     if (gUnknown_08615D9C[fieldMove].fieldMoveFunc != NULL)
     {
@@ -4345,7 +4345,7 @@ void hm2_waterfall(void)
 bool8 hm_prepare_waterfall(void)
 {
     s16 x, y;
-    
+
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE && IsPlayerSurfingNorth() == TRUE)
     {
@@ -4378,7 +4378,7 @@ void party_menu_icon_anim(struct Pokemon *mon, struct Struct203CEDC *ptr, u32 a)
 {
     u32 bit = 1;
     u16 species2;
-    
+
     if (IsMultiBattle() == TRUE && gMain.inBattle)
         bit = (gUnknown_08616020[a] ^ bit) ? 1 : 0;
     species2 = GetMonData(mon, MON_DATA_SPECIES2);
@@ -4423,7 +4423,7 @@ void sub_81B5B38(u8 spriteId, struct Pokemon *mon)
 }
 
 void AnimateSelectedPartyIcon(u8 spriteId, u8 a)
-{   
+{
     gSprites[spriteId].data[0] = 0;
     if (a == 0)
     {
@@ -4450,7 +4450,7 @@ void AnimateSelectedPartyIcon(u8 spriteId, u8 a)
 void UpdatePartyMonIconFrameAndBounce(struct Sprite *sprite)
 {
     u8 unk = UpdateMonIconFrame(sprite);
-    
+
     if (unk != 0)
     {
         if (unk & 1)
@@ -4515,7 +4515,7 @@ void sub_81B5D4C(u8 *a, u8 *b, u8 c)
 {
     u16 i;
     u16 item;
-    
+
     switch (c)
     {
         case 0:
@@ -4541,7 +4541,7 @@ void sub_81B5DF0(u8 spriteId, u8 isMail)
 {
     u8 subpriority = gSprites[spriteId].subpriority;
     u8 newSpriteId = CreateSprite(&gSpriteTemplate_8615EC0, 250, 170, subpriority - 1);
-    
+
     gSprites[newSpriteId].pos2.x = 4;
     gSprites[newSpriteId].pos2.y = 10;
     gSprites[newSpriteId].callback = sub_81B5E74;
@@ -4553,7 +4553,7 @@ void sub_81B5DF0(u8 spriteId, u8 isMail)
 void sub_81B5E74(struct Sprite *sprite)
 {
     u8 otherSpriteId = sprite->data[7];
-    
+
     if (gSprites[otherSpriteId].invisible)
     {
         sprite->invisible = TRUE;
@@ -4584,7 +4584,7 @@ void party_menu_link_mon_pokeball_object(u16 species, struct Struct203CEDC *ptr)
 u8 sub_81B5F34(u8 x, u8 y)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_8615F08, x, y, 8);
-    
+
     gSprites[spriteId].oam.priority = 2;
     return spriteId;
 }
@@ -4619,9 +4619,9 @@ void sub_81B5FBC(u8 spriteId, u8 spriteId2, u8 a)
 
 void LoadPartyMenuPokeballGfx(void)
 {
-    LoadCompressedObjectPic(&gUnknown_08615EF8);
-    LoadCompressedObjectPic(&gUnknown_08615F70);
-    LoadCompressedObjectPalette(&gUnknown_08615F00);
+    LoadCompressedSpriteSheet(&gUnknown_08615EF8);
+    LoadCompressedSpriteSheet(&gUnknown_08615F70);
+    LoadCompressedSpritePalette(&gUnknown_08615F00);
 }
 
 void party_menu_status_condition_object(struct Pokemon *mon, struct Struct203CEDC *ptr)
@@ -4665,8 +4665,8 @@ void party_menu_update_status_condition_object(u8 status, struct Struct203CEDC *
 
 void LoadPartyMenuAilmentGfx(void)
 {
-    LoadCompressedObjectPic(&gUnknown_08615FF8);
-    LoadCompressedObjectPalette(&gUnknown_08616000);
+    LoadCompressedSpriteSheet(&gUnknown_08615FF8);
+    LoadCompressedSpritePalette(&gUnknown_08616000);
 }
 
 void sub_81B617C(void)
@@ -4677,7 +4677,7 @@ void sub_81B617C(void)
     u8 i;
     u8 msgIDMaybe;
     register TaskFunc task asm("r0");
-    
+
     if (gMain.inBattle)
     {
         inBattle = TRUE;
@@ -4731,7 +4731,7 @@ void sub_81B6280(u8 taskId)
 bool8 IsHPRecoveryItem(u16 item)
 {
     const u8 *effect;
-    
+
     if (item == ITEM_ENIGMA_BERRY)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
@@ -4821,7 +4821,7 @@ bool8 IsBlueYellowRedFlute(u16 item)
 }
 
 bool8 ExecuteTableBasedItemEffect__(u8 partyMonIndex, u16 item, u8 monMoveIndex)
-{    
+{
     if (gMain.inBattle)
         return ExecuteTableBasedItemEffect(&gPlayerParty[partyMonIndex], item, sub_81B8F38(partyMonIndex), monMoveIndex);
     else
@@ -4834,7 +4834,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal;
-    
+
     if (UsingHPEVItemOnShedinja(mon, item))
     {
         canHeal = IsHPRecoveryItem(item);
@@ -4921,7 +4921,7 @@ void sub_81B67C8(u8 taskId, TaskFunc task)
     bool8 cannotUseEffect = ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, item, 0);
     u16 newFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
     u16 newRelevantEV = sub_81B691C(mon, effectType);
-    
+
     if (cannotUseEffect || (friendship == newFriendship && relevantEV == newRelevantEV))
     {
         gUnknown_0203CEE8 = 0;
@@ -5008,7 +5008,7 @@ void sub_81B6A10(u8 slot)
     u8 fontId = 1;
     u8 windowId = sub_81B31B0(3);
     u16 move;
-    
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
@@ -5023,7 +5023,7 @@ void sub_81B6A10(u8 slot)
 void ether_effect_related_3(u8 taskId)
 {
     s8 input = Menu_ProcessInput();
-    
+
     if (input != MENU_NOTHING_CHOSEN)
     {
         if (input == MENU_B_PRESSED)
@@ -5043,7 +5043,7 @@ void dp05_ether(u8 taskId, TaskFunc unused)
 {
     const u8 *effect;
     u16 item = gSpecialVar_ItemId;
-    
+
     if (item == ITEM_ENIGMA_BERRY)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
@@ -5065,7 +5065,7 @@ void dp05_ether(u8 taskId, TaskFunc unused)
 void ether_effect_related_2(u8 taskId)
 {
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
-    gUnknown_0203CEC8.unkE = GetMenuCursorPos();
+    gUnknown_0203CEC8.unkE = Menu_GetCursorPos();
     ether_effect_related(taskId);
 }
 
@@ -5084,7 +5084,7 @@ void ether_effect_related(u8 taskId)
     u16 item = gSpecialVar_ItemId;
     struct Struct203CEC8 *ptr = &gUnknown_0203CEC8;
     struct Pokemon *mon;
-    
+
     if (ExecuteTableBasedItemEffect__(ptr->unk9, item, *moveslot))
     {
         gUnknown_0203CEE8 = 0;
@@ -5125,7 +5125,7 @@ u16 ItemIdToBattleMoveId(u16 item)
 bool8 sub_81B6D14(u16 move)
 {
     u8 i;
-    
+
     for (i = 0; i < NUM_HIDDEN_MACHINES; i++)
     {
         if (gUnknown_08616040[i + NUM_TECHNICAL_MACHINES] == move)
@@ -5137,7 +5137,7 @@ bool8 sub_81B6D14(u16 move)
 bool8 pokemon_has_move(struct Pokemon *mon, u16 move)
 {
     u8 i;
-    
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (GetMonData(mon, MON_DATA_MOVE1 + i) == move)
@@ -5166,7 +5166,7 @@ void sub_81B6DC4(u8 taskId, TaskFunc unused)
     struct Pokemon *mon;
     s16 *move;
     u16 item;
-    
+
     PlaySE(SE_SELECT);
     mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     move = &gUnknown_0203CEC8.unkE;
@@ -5200,7 +5200,7 @@ void sub_81B6EB4(u8 taskId)
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     s16 *move = &gUnknown_0203CEC8.unkE;
     u16 item = gSpecialVar_ItemId;
-    
+
     if (move[1] == 0)
     {
         AdjustFriendship(mon, 4);
@@ -5231,7 +5231,7 @@ void sub_81B6F98(u8 taskId)
         if (gUnknown_0203CEC8.unk10 == 1)
             sub_81B77AC(taskId);
         else
-        {            
+        {
             if (gUnknown_0203CEC8.unk10 == 2)
                 gSpecialVar_Result = TRUE;
             sub_81B12C0(taskId);
@@ -5298,7 +5298,7 @@ void sub_81B7154(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 move = GetMonData(mon, MON_DATA_MOVE1 + sub_81C1B94());
-    
+
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move]);
     sub_81B6D74(gText_12PoofForgotMove);
@@ -5309,7 +5309,7 @@ void sub_81B71D4(u8 taskId)
 {
     struct Pokemon *mon;
     u16 move;
-    
+
     if (sub_81B1BD4() != TRUE)
     {
         mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
@@ -5341,7 +5341,7 @@ void sub_81B7294(u8 taskId)
 void sub_81B72C8(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    
+
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
@@ -5384,7 +5384,7 @@ void dp05_rare_candy(u8 taskId, TaskFunc task)
     s16 *arrayPtr = ptr->data;
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
-    
+
     if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
         sub_81B79A0(mon, arrayPtr);
@@ -5454,7 +5454,7 @@ void sub_81B7634(u8 taskId)
 void sub_81B767C(u8 taskId)
 {
     s16 *arrayPtr = gUnknown_0203CEC4->data;
-    
+
     arrayPtr[12] = sub_81B3364();
     sub_81D3640(arrayPtr[12], arrayPtr, &arrayPtr[6], 1, 2, 3);
     CopyWindowToVram(arrayPtr[12], 2);
@@ -5464,7 +5464,7 @@ void sub_81B767C(u8 taskId)
 void sub_81B76C8(u8 taskIdUnused)
 {
     s16 *arrayPtr = gUnknown_0203CEC4->data;
-    
+
     sub_81D3784(arrayPtr[12], &arrayPtr[6], 1, 2, 3);
     CopyWindowToVram(arrayPtr[12], 2);
     schedule_bg_copy_tilemap_to_vram(2);
@@ -5473,7 +5473,7 @@ void sub_81B76C8(u8 taskIdUnused)
 void sub_81B7704(u8 taskId)
 {
     u16 result;
-    
+
     if (WaitFanfare(0) && ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON)))
     {
         sub_81B3394();
@@ -5500,7 +5500,7 @@ void sub_81B7704(u8 taskId)
 void sub_81B77AC(u8 taskId)
 {
     u16 result = MonTryLearningNewMove(&gPlayerParty[gUnknown_0203CEC8.unk9], 0);
-    
+
     switch (result)
     {
         case 0:
@@ -5521,7 +5521,7 @@ void sub_81B7810(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 targetSpecies = GetEvolutionTargetSpecies(mon, 0, 0);
-    
+
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();
@@ -5580,7 +5580,7 @@ void sub_81B7A28(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 hp;
-    
+
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         hp = GetMonData(mon, MON_DATA_HP);
@@ -5945,7 +5945,7 @@ void sub_81B7E4C(u8 taskId)
 {
     struct Pokemon *mon;
     s16 *move;
-    
+
     if (!gPaletteFade.active)
     {
         mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
@@ -6022,7 +6022,7 @@ void sub_81B8044(u8 taskId)
 void sub_81B8088(u8 taskId)
 {
     u16 item;
-    
+
     if (!gPaletteFade.active)
     {
         item = gUnknown_0203CEC8.unkC;
@@ -6036,7 +6036,7 @@ void sub_81B8088(u8 taskId)
 void sub_81B8104(u8 taskId)
 {
     s8 slot = gUnknown_0203CEC8.unk9;
-    
+
     if (sub_81B1BD4() != TRUE)
     {
         sub_81B5C94(&gPlayerParty[slot], &gUnknown_0203CEDC[slot]);
@@ -6047,7 +6047,7 @@ void sub_81B8104(u8 taskId)
 void sub_81B814C(void)
 {
     u8 mail;
-    
+
     sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gUnknown_0203CEC8.unkC);
     mail = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_MAIL);
     sub_811A20C(4, gSaveBlock1Ptr->mail[mail].words, sub_81B81A8, 3);
@@ -6057,7 +6057,7 @@ void sub_81B81A8(void)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-    
+
     if (gSpecialVar_Result == FALSE)
     {
         TakeMailFromMon(mon);
@@ -6096,7 +6096,7 @@ void sub_81B82A0(u8 taskId)
 void sub_81B82D4(u8 taskId)
 {
     u16 item;
-    
+
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
         case 0:
@@ -6161,7 +6161,7 @@ void sub_81B8474(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     struct MailStruct *mail;
-    
+
     gUnknown_0203CEE8 = 0;
     mail = &gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + 6 + playerPCItemPageInfo.cursorPos];
     if (GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE)
@@ -6203,10 +6203,10 @@ bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 {
     u16 i = 0;
     u16 species;
-    
-    if (GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() || 
-    (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && 
-    gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) && 
+
+    if (GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() ||
+    (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) &&
+    gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) &&
     GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
         return FALSE;
     switch (VarGet(VAR_FRONTIER_FACILITY)) // oddly the specific cases are beyond 6, turns out case 9 is apparently related to link battles
@@ -6237,7 +6237,7 @@ u8 sub_81B865C(void)
     u16 species;
     u16 item;
     u8 facilityNum;
-    
+
     if (gSelectedOrderFromParty[unk - 1] == 0)
     {
         if (unk == 1)
@@ -6407,7 +6407,7 @@ _081B8758:\n\
 bool8 sub_81B8770(u8 slot)
 {
     u8 i;
-    
+
     for (i = 0; i < 4; i++)
     {
         if (gSelectedOrderFromParty[i] == slot)
@@ -6419,7 +6419,7 @@ bool8 sub_81B8770(u8 slot)
 void sub_81B879C(u8 taskId)
 {
     u8 msgID = sub_81B865C();
-    
+
     if (msgID != 0xFF)
     {
         PlaySE(SE_HAZURE);
@@ -6487,7 +6487,7 @@ u8 sub_81B8888(void)
 const u8* sub_81B88BC(void)
 {
     u8 facilityNum = VarGet(VAR_FRONTIER_FACILITY);
-    
+
     if (!(facilityNum != 8 && facilityNum != 9))
         return gText_CancelBattle;
     if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
@@ -6551,7 +6551,7 @@ bool8 sub_81B8A7C(void)
     u8 newSlot;
     u8 i;
     u8 neededToMatch;
-    
+
     if (IsMultiBattle() == TRUE && (slot == 1 || slot == 4 || slot == 5))
     {
         StringCopy(gStringVar1, GetTrainerPartnerName());
@@ -6613,7 +6613,7 @@ void sub_81B8C88(u8 *ptr, bool8 multiplayerFlag)
 {
     u8 partyIndexes[6];
     int i, j;
-    
+
     if (IsMultiBattle() == TRUE)
     {
         if (multiplayerFlag)
@@ -6672,7 +6672,7 @@ void sub_81B8D88(u8 *ptr, bool8 multiplayerFlag, u8 battlerPosition)
     int i, j;
     u8 leftBattler;
     u8 rightBattler;
-    
+
     if (GetBattlerSide(battlerPosition) == B_SIDE_PLAYER)
     {
         leftBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
@@ -6737,7 +6737,7 @@ void sub_81B8E80(u8 battlerPosition, u8 unk, u8 arrayIndex)
     int i, j;
     u8 *battleStructRelated;
     u8 possiblePartyIndexBuffer;
-    
+
     if (IsMultiBattle())
     {
         battleStructRelated = gBattleStruct->field_60[battlerPosition];
@@ -6771,7 +6771,7 @@ u8 sub_81B8F38(u8 slot)
 {
     u8 modResult = slot & 1;
     u8 retVal;
-    
+
     slot /= 2;
     if (modResult != 0)
         retVal = gUnknown_0203CF00[slot] & 0xF;
@@ -6783,7 +6783,7 @@ u8 sub_81B8F38(u8 slot)
 void sub_81B8F6C(u8 slot, u8 setVal)
 {
     bool32 modResult = slot & 1;
-    
+
     slot /= 2;
     if (modResult != 0)
         gUnknown_0203CF00[slot] = (gUnknown_0203CF00[slot] & 0xF0) | setVal;
@@ -6801,7 +6801,7 @@ void sub_81B8FB0(u8 slot, u8 slot2)
 u8 pokemon_order_func(u8 slot)
 {
     u8 i, j;
-    
+
     for (j = i = 0; i < 3; j++, i++)
     {
         if ((gUnknown_0203CF00[i] >> 4) != slot)
@@ -6822,7 +6822,7 @@ void pokemon_change_order(void)
 {
     struct Pokemon *partyBuffer = Alloc(sizeof(gPlayerParty));
     u8 i;
-    
+
     memcpy(partyBuffer, gPlayerParty, sizeof(gPlayerParty));
     for (i = 0; i < PARTY_SIZE; i++)
         memcpy(&gPlayerParty[pokemon_order_func(i)], &partyBuffer[i], sizeof(struct Pokemon));
@@ -6833,7 +6833,7 @@ void sub_81B9080(void)
 {
     struct Pokemon *partyBuffer = Alloc(sizeof(gPlayerParty));
     u8 i;
-    
+
     memcpy(partyBuffer, gPlayerParty, sizeof(gPlayerParty));
     for (i = 0; i < PARTY_SIZE; i++)
         memcpy(&gPlayerParty[sub_81B8F38(i)], &partyBuffer[i], sizeof(struct Pokemon));
@@ -6845,7 +6845,7 @@ void sub_81B90D0(void)
     u8 i;
     struct Pokemon *mon;
     u8 leadVal;
-    
+
     for (i = 1; i < PARTY_SIZE; i++)
     {
         mon = &gPlayerParty[sub_81B8F38(i)];
@@ -6881,7 +6881,7 @@ void sub_81B91B4(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 i;
-    
+
     if (!gPaletteFade.active)
     {
         data[0] -= 8;
@@ -6902,7 +6902,7 @@ void sub_81B91B4(u8 taskId)
 void sub_81B9240(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     if (++data[0] == 0x100)
         sub_81B12C0(taskId);
 }
@@ -6917,7 +6917,7 @@ void sub_81B9294(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 i;
-    
+
     for (i = 3; i < PARTY_SIZE; i++)
     {
         if (gUnknown_02022FF8[i - 3].species != SPECIES_NONE)
@@ -7043,7 +7043,7 @@ void sub_81B9588(void)
 void sub_81B95E0(void)
 {
     u8 i;
-    
+
     gSpecialVar_Result = FALSE;
     for (i = 0; i < 3; i++)
     {
@@ -7081,7 +7081,7 @@ void sub_81B968C(void)
 void sub_81B96D0(void)
 {
     u8 i;
-    
+
     gSpecialVar_Result = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -7094,7 +7094,7 @@ void sub_81B9718(void)
 {
     struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
     u16 move = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
-    
+
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move]);
 }
@@ -7102,7 +7102,7 @@ void sub_81B9718(void)
 void sub_81B9770(void)
 {
     u16 i;
-    
+
     SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], MOVE_NONE, gSpecialVar_0x8005);
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
     for (i = gSpecialVar_0x8005; i < MAX_MON_MOVES - 1; i++)
@@ -7142,7 +7142,7 @@ void sub_81B9918(void)
 {
     u16 move;
     u32 i, j;
-    
+
     gSpecialVar_Result = FALSE;
     move = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
     if (move == MOVE_SURF)
@@ -7158,7 +7158,7 @@ void sub_81B9918(void)
                 }
             }
         }
-        if (sub_80D23A8(move) != TRUE)
+        if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
     }
 }

@@ -3273,7 +3273,7 @@ sub_8168248: @ 8168248
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	add r0, sp, 0x8
 	bl LoadSpritePalette
 	add sp, 0x10

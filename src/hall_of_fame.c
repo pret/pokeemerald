@@ -1283,8 +1283,8 @@ static void sub_8174F70(void)
     ResetAllPicSprites();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
-    LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
+    LoadCompressedSpriteSheet(sHallOfFame_ConfettiSpriteSheet);
+    LoadCompressedSpritePalette(sHallOfFame_ConfettiSpritePalette);
 }
 
 static void sub_8174FAC(void)
@@ -1475,8 +1475,8 @@ static void sub_8175364(u8 taskId)
             gSpecialVar_0x8004 = var;
             gSpecialVar_0x8005 = 0xFFFF;
         }
-        LoadCompressedObjectPic(sHallOfFame_ConfettiSpriteSheet);
-        LoadCompressedObjectPalette(sHallOfFame_ConfettiSpritePalette);
+        LoadCompressedSpriteSheet(sHallOfFame_ConfettiSpriteSheet);
+        LoadCompressedSpritePalette(sHallOfFame_ConfettiSpritePalette);
         data[0]++;
         break;
     case 1:

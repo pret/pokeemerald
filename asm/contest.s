@@ -1657,7 +1657,7 @@ _080DC506:
 	lsls r0, r5, 3
 	ldr r1, =gUnknown_08587AE8
 	adds r0, r1
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gSpriteTemplate_8587B18
 	adds r0, r6, r0
 	ldr r2, =gUnknown_08587A70
@@ -1713,7 +1713,7 @@ _080DC506:
 sub_80DC594: @ 80DC594
 	push {lr}
 	ldr r0, =gUnknown_08587BB0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08587BB8
 	bl LoadSpritePalette
 	ldr r0, =gSpriteTemplate_8587BC8
@@ -2286,7 +2286,7 @@ sub_80DC9EC: @ 80DC9EC
 	lsls r4, r1, 3
 	ldr r0, =gUnknown_08589904
 	adds r0, r4, r0
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_08589924
 	adds r4, r0
 	adds r0, r4, 0

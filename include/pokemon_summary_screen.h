@@ -8,6 +8,7 @@ extern u8 gUnknown_0203CF20;
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void sub_81C4F98(u8, void(*)(void));
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
+void ShowPokemonSummaryScreenSet40EF(u8 mode, struct BoxPokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 u8 sub_81C1B94(void);
 
 // The Pokemon Summary Screen can operate in different modes. Certain features,
@@ -16,7 +17,7 @@ enum PokemonSummaryScreenMode
 {
     PSS_MODE_NORMAL,
     PSS_MODE_UNK1,
-    PSS_MODE_UNK2,
+    PSS_MODE_BOX,
     PSS_MODE_SELECT_MOVE,
 };
 
