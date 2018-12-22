@@ -5,8 +5,7 @@ DesertRuins_MapScripts:: @ 822D95B
 	.byte 0
 
 DesertRuins_MapScript1_22D96B: @ 822D96B
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, DesertRuins_EventScript_22D975
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, DesertRuins_EventScript_22D975
 	end
 
 DesertRuins_EventScript_22D975:: @ 822D975
@@ -17,8 +16,7 @@ DesertRuins_EventScript_22D975:: @ 822D975
 	return
 
 DesertRuins_MapScript1_22D989: @ 822D989
-	checkflag FLAG_SYS_BRAILLE_STRENGTH
-	call_if 0, DesertRuins_EventScript_22D993
+	call_if_unset FLAG_SYS_BRAILLE_STRENGTH, DesertRuins_EventScript_22D993
 	end
 
 DesertRuins_EventScript_22D993:: @ 822D993
@@ -32,8 +30,7 @@ DesertRuins_EventScript_22D993:: @ 822D993
 
 DesertRuins_MapScript1_22D9CA: @ 822D9CA
 	setflag FLAG_LANDMARK_DESERT_RUINS
-	checkflag FLAG_0x1BB
-	call_if 0, DesertRuins_EventScript_22D9D7
+	call_if_unset FLAG_0x1BB, DesertRuins_EventScript_22D9D7
 	end
 
 DesertRuins_EventScript_22D9D7:: @ 822D9D7

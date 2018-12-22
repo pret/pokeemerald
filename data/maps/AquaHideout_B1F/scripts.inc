@@ -4,8 +4,7 @@ AquaHideout_B1F_MapScripts:: @ 82339A7
 	.byte 0
 
 AquaHideout_B1F_MapScript1_2339B2: @ 82339B2
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, AquaHideout_B1F_EventScript_2339BC
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AquaHideout_B1F_EventScript_2339BC
 	end
 
 AquaHideout_B1F_EventScript_2339BC:: @ 82339BC
@@ -16,10 +15,8 @@ AquaHideout_B1F_EventScript_2339BC:: @ 82339BC
 	return
 
 AquaHideout_B1F_MapScript1_2339D0: @ 82339D0
-	checkflag FLAG_0x1C4
-	call_if 0, AquaHideout_B1F_EventScript_2339E3
-	checkflag FLAG_0x1C5
-	call_if 0, AquaHideout_B1F_EventScript_2339E7
+	call_if_unset FLAG_0x1C4, AquaHideout_B1F_EventScript_2339E3
+	call_if_unset FLAG_0x1C5, AquaHideout_B1F_EventScript_2339E7
 	end
 
 AquaHideout_B1F_EventScript_2339E3:: @ 82339E3

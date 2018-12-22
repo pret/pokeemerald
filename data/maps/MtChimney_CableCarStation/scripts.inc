@@ -5,7 +5,7 @@ MtChimney_CableCarStation_MapScripts:: @ 822ABFA
 
 MtChimney_CableCarStation_MapScript1_22AC05: @ 822AC05
 	compare VAR_0x40A3, 1
-	call_if 1, MtChimney_CableCarStation_EventScript_22AC11
+	call_if_eq MtChimney_CableCarStation_EventScript_22AC11
 	end
 
 MtChimney_CableCarStation_EventScript_22AC11:: @ 822AC11

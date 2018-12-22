@@ -23,7 +23,7 @@ RustboroCity_Gym_EventScript_212F66:: @ 8212F66
 	setvar VAR_0x8008, 1
 	call RustboroCity_Gym_EventScript_271F43
 	compare VAR_0x4085, 6
-	call_if 1, RustboroCity_Gym_EventScript_271E84
+	call_if_eq RustboroCity_Gym_EventScript_271E84
 	goto RustboroCity_Gym_EventScript_212FA4
 	end
 

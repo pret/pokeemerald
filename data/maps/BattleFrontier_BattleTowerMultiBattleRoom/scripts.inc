@@ -191,9 +191,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	waitbuttonpress
 	closemessage
 	compare VAR_FACING, 1
-	call_if 5, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
+	call_if_ne BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
+	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_0x152
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 3

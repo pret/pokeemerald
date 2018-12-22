@@ -10,16 +10,11 @@ Route110_TrickHousePuzzle7_MapScript1_26E0A6: @ 826E0A6
 	end
 
 Route110_TrickHousePuzzle7_EventScript_26E0AC:: @ 826E0AC
-	checkflag FLAG_0x0C2
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E0DA
-	checkflag FLAG_0x0C3
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E0ED
-	checkflag FLAG_0x0C4
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E100
-	checkflag FLAG_0x0C5
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E113
-	checkflag FLAG_0x0C6
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E126
+	call_if_set FLAG_0x0C2, Route110_TrickHousePuzzle7_EventScript_26E0DA
+	call_if_set FLAG_0x0C3, Route110_TrickHousePuzzle7_EventScript_26E0ED
+	call_if_set FLAG_0x0C4, Route110_TrickHousePuzzle7_EventScript_26E100
+	call_if_set FLAG_0x0C5, Route110_TrickHousePuzzle7_EventScript_26E113
+	call_if_set FLAG_0x0C6, Route110_TrickHousePuzzle7_EventScript_26E126
 	return
 
 Route110_TrickHousePuzzle7_EventScript_26E0DA:: @ 826E0DA
@@ -87,7 +82,7 @@ Route110_TrickHousePuzzle7_EventScript_26E1B3:: @ 826E1B3
 
 Route110_TrickHousePuzzle7_MapScript1_26E1B4: @ 826E1B4
 	compare VAR_0x40B6, 1
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E0AC
+	call_if_eq Route110_TrickHousePuzzle7_EventScript_26E0AC
 	end
 
 Route110_TrickHousePuzzle7_MapScript2_26E1C0: @ 826E1C0
@@ -121,10 +116,8 @@ Route110_TrickHousePuzzle7_EventScript_26E1ED:: @ 826E1ED
 Route110_TrickHousePuzzle7_EventScript_26E1FE:: @ 826E1FE
 	lockall
 	delay 32
-	checkflag FLAG_0x0C2
-	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E0DA
-	checkflag FLAG_0x0C2
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E139
+	call_if_unset FLAG_0x0C2, Route110_TrickHousePuzzle7_EventScript_26E0DA
+	call_if_set FLAG_0x0C2, Route110_TrickHousePuzzle7_EventScript_26E139
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	goto_if_unset FLAG_0x0C2, Route110_TrickHousePuzzle7_EventScript_26E2E9
@@ -134,10 +127,8 @@ Route110_TrickHousePuzzle7_EventScript_26E1FE:: @ 826E1FE
 Route110_TrickHousePuzzle7_EventScript_26E22D:: @ 826E22D
 	lockall
 	delay 32
-	checkflag FLAG_0x0C3
-	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E0ED
-	checkflag FLAG_0x0C3
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E14C
+	call_if_unset FLAG_0x0C3, Route110_TrickHousePuzzle7_EventScript_26E0ED
+	call_if_set FLAG_0x0C3, Route110_TrickHousePuzzle7_EventScript_26E14C
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	goto_if_unset FLAG_0x0C3, Route110_TrickHousePuzzle7_EventScript_26E2F3
@@ -147,10 +138,8 @@ Route110_TrickHousePuzzle7_EventScript_26E22D:: @ 826E22D
 Route110_TrickHousePuzzle7_EventScript_26E25C:: @ 826E25C
 	lockall
 	delay 32
-	checkflag FLAG_0x0C4
-	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E100
-	checkflag FLAG_0x0C4
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E15F
+	call_if_unset FLAG_0x0C4, Route110_TrickHousePuzzle7_EventScript_26E100
+	call_if_set FLAG_0x0C4, Route110_TrickHousePuzzle7_EventScript_26E15F
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	goto_if_unset FLAG_0x0C4, Route110_TrickHousePuzzle7_EventScript_26E2FD
@@ -160,10 +149,8 @@ Route110_TrickHousePuzzle7_EventScript_26E25C:: @ 826E25C
 Route110_TrickHousePuzzle7_EventScript_26E28B:: @ 826E28B
 	lockall
 	delay 32
-	checkflag FLAG_0x0C5
-	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E113
-	checkflag FLAG_0x0C5
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E172
+	call_if_unset FLAG_0x0C5, Route110_TrickHousePuzzle7_EventScript_26E113
+	call_if_set FLAG_0x0C5, Route110_TrickHousePuzzle7_EventScript_26E172
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	goto_if_unset FLAG_0x0C5, Route110_TrickHousePuzzle7_EventScript_26E307
@@ -173,10 +160,8 @@ Route110_TrickHousePuzzle7_EventScript_26E28B:: @ 826E28B
 Route110_TrickHousePuzzle7_EventScript_26E2BA:: @ 826E2BA
 	lockall
 	delay 32
-	checkflag FLAG_0x0C6
-	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E126
-	checkflag FLAG_0x0C6
-	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E185
+	call_if_unset FLAG_0x0C6, Route110_TrickHousePuzzle7_EventScript_26E126
+	call_if_set FLAG_0x0C6, Route110_TrickHousePuzzle7_EventScript_26E185
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	goto_if_unset FLAG_0x0C6, Route110_TrickHousePuzzle7_EventScript_26E311

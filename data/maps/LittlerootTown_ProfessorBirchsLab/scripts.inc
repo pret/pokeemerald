@@ -172,9 +172,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9F32
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9F32
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9F3C
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9F3C
 	playse SE_PC_ON
 	waitse
 	delay 20
@@ -534,9 +534,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA352
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA352
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F
 	setvar VAR_0x4084, 5
 	setflag FLAG_0x074
 	setvar VAR_0x4051, 1
@@ -549,7 +549,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA352:: @ 81FA352
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FADD7, MSGBOX_DEFAULT
 	giveitem_std ITEM_POKE_BALL, 5
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA3CE
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA3CE
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FAE40, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
@@ -558,7 +558,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F:: @ 81FA37F
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FAF3F, MSGBOX_DEFAULT
 	giveitem_std ITEM_POKE_BALL, 5
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA3D7
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA3D7
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FAF8E, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 1
 	return
@@ -606,9 +606,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA3EC:: @ 81FA3EC
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA490
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA428
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA428
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA431
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA431
 	release
 	end
 
@@ -623,9 +623,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA431:: @ 81FA431
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA43A:: @ 81FA43A
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA453
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA453
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA45C
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA45C
 	release
 	end
 
@@ -640,9 +640,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA45C:: @ 81FA45C
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA465:: @ 81FA465
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA47E
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA47E
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA487
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA487
 	release
 	end
 
@@ -657,9 +657,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA487:: @ 81FA487
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA490:: @ 81FA490
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA4A9
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA4A9
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_1FA4B2
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA4B2
 	release
 	end
 

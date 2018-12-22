@@ -6,9 +6,9 @@ BattleFrontier_BattleTowerCorridor2_MapScripts:: @ 8248D4A
 
 BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A: @ 8248D5A
 	compare VAR_FRONTIER_BATTLE_MODE, 2
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248D71
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D71
 	compare VAR_FRONTIER_BATTLE_MODE, 3
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248D91
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D91
 	end
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D71:: @ 8248D71
@@ -88,13 +88,13 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248E71:: @ 8248E71
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
 	compare VAR_FRONTIER_BATTLE_MODE, 2
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248EA8
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248EA8
 	compare VAR_FRONTIER_BATTLE_MODE, 3
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248EB2
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248EB2
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248E9E:: @ 8248E9E

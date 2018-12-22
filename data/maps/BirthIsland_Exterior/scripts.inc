@@ -13,10 +13,8 @@ BirthIsland_Exterior_MapScript1_267F29: @ 8267F29
 	setvar VAR_OBJ_GFX_ID_0, 100
 	setvar VAR_0x4034, 0
 	setvar VAR_0x4035, 0
-	checkflag FLAG_0x1AD
-	call_if 1, BirthIsland_Exterior_EventScript_267F4E
-	checkflag FLAG_0x1AD
-	call_if 0, BirthIsland_Exterior_EventScript_267F55
+	call_if_set FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F4E
+	call_if_unset FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F55
 	end
 
 BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
@@ -31,8 +29,7 @@ BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
 	return
 
 BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, BirthIsland_Exterior_EventScript_267F6F
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, BirthIsland_Exterior_EventScript_267F6F
 	end
 
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F

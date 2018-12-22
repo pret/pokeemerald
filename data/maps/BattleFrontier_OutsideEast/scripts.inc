@@ -4,8 +4,7 @@ BattleFrontier_OutsideEast_MapScripts:: @ 8242C04
 	.byte 0
 
 BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, BattleFrontier_OutsideEast_EventScript_242C19
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, BattleFrontier_OutsideEast_EventScript_242C19
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
@@ -18,8 +17,7 @@ BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
 	setvar VAR_0x40BC, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
-	checkflag FLAG_0x1C6
-	call_if 0, BattleFrontier_OutsideEast_EventScript_242C3F
+	call_if_unset FLAG_0x1C6, BattleFrontier_OutsideEast_EventScript_242C3F
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C3F:: @ 8242C3F

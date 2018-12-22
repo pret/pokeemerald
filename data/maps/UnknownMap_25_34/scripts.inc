@@ -20,15 +20,15 @@ LinkContestRoom1_EventScript_23B7AF:: @ 823B7AF
 	call LinkContestRoom1_EventScript_27A133
 	special ScriptGetMultiplayerId
 	compare VAR_RESULT, 0
-	call_if 1, LinkContestRoom1_EventScript_23B7EF
+	call_if_eq LinkContestRoom1_EventScript_23B7EF
 	compare VAR_RESULT, 1
-	call_if 1, LinkContestRoom1_EventScript_23B7F3
+	call_if_eq LinkContestRoom1_EventScript_23B7F3
 	compare VAR_RESULT, 2
-	call_if 1, LinkContestRoom1_EventScript_23B7F7
+	call_if_eq LinkContestRoom1_EventScript_23B7F7
 	compare VAR_RESULT, 3
-	call_if 1, LinkContestRoom1_EventScript_23B7FB
+	call_if_eq LinkContestRoom1_EventScript_23B7FB
 	compare VAR_RESULT, 4
-	call_if 1, LinkContestRoom1_EventScript_23B7FF
+	call_if_eq LinkContestRoom1_EventScript_23B7FF
 	return
 
 LinkContestRoom1_EventScript_23B7EF:: @ 823B7EF
@@ -53,7 +53,7 @@ LinkContestRoom1_EventScript_23B7FF:: @ 823B7FF
 
 LinkContestRoom1_MapScript1_23B803: @ 823B803
 	compare VAR_TEMP_9, 1
-	call_if 1, LinkContestRoom1_EventScript_23B80F
+	call_if_eq LinkContestRoom1_EventScript_23B80F
 	end
 
 LinkContestRoom1_EventScript_23B80F:: @ 823B80F

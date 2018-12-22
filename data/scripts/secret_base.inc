@@ -1016,11 +1016,11 @@ SecretBase_RedCave1_EventScript_276286:: @ 8276286
 	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
-	call_if 1, SecretBase_RedCave1_EventScript_2762BD
+	call_if_eq SecretBase_RedCave1_EventScript_2762BD
 	compare VAR_RESULT, 1
-	call_if 1, SecretBase_RedCave1_EventScript_2762C1
+	call_if_eq SecretBase_RedCave1_EventScript_2762C1
 	compare VAR_RESULT, 2
-	call_if 1, SecretBase_RedCave1_EventScript_2762C5
+	call_if_eq SecretBase_RedCave1_EventScript_2762C5
 	special HealPlayerParty
 	release
 	end

@@ -56,9 +56,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 	closemessage
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23F2B7
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A17C
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A17C
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM, 255, 6, 11
 	waitstate
@@ -104,17 +104,17 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E1D
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E1D
 	compare VAR_RESULT, 2
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E24
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E24
 	compare VAR_RESULT, 3
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E2B
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E2B
 	compare VAR_RESULT, 4
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E32
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E32
 	compare VAR_RESULT, 5
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E39
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E39
 	compare VAR_RESULT, 6
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E40
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E40
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259CC6
@@ -250,41 +250,41 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93:: @ 8259E93
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4, MSGBOX_DEFAULT
 	compare VAR_0x8005, 0
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62
 	compare VAR_0x8005, 1
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F6B
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F6B
 	compare VAR_0x8005, 2
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F74
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F74
 	compare VAR_0x8005, 3
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F7D
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F7D
 	compare VAR_0x8005, 4
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F86
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F86
 	compare VAR_0x8005, 5
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F8F
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F8F
 	compare VAR_0x8005, 6
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F98
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F98
 	compare VAR_0x8005, 7
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FA1
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FA1
 	compare VAR_0x8005, 8
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FAA
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FAA
 	compare VAR_0x8005, 10
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FB3
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FB3
 	compare VAR_0x8005, 11
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FBC
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FBC
 	compare VAR_0x8005, 12
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FC5
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FC5
 	compare VAR_0x8005, 13
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FCE
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FCE
 	compare VAR_0x8005, 14
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FD7
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FD7
 	compare VAR_0x8005, 15
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE0
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE0
 	compare VAR_0x8005, 16
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE9
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE9
 	compare VAR_0x8005, 17
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FF2
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FF2
 	compare VAR_0x8005, 18
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62:: @ 8259F62
@@ -361,23 +361,23 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB:: @ 8259FFB
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004:: @ 825A004
 	compare VAR_0x8006, 0
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068
 	compare VAR_0x8006, 1
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A071
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A071
 	compare VAR_0x8006, 2
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A07A
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A07A
 	compare VAR_0x8006, 3
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A083
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A083
 	compare VAR_0x8006, 4
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A08C
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A08C
 	compare VAR_0x8006, 5
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A095
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A095
 	compare VAR_0x8006, 6
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A09E
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A09E
 	compare VAR_0x8006, 7
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0A7
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0A7
 	compare VAR_0x8006, 8
-	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B0
+	call_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B0
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068:: @ 825A068

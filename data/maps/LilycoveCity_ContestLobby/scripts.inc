@@ -58,7 +58,7 @@ LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
 	setvar VAR_0x4099, 0
 	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, 1
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21A314
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21A314
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A40F
 	waitmovement 0
 	removeobject 4
@@ -230,7 +230,7 @@ LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
 	setvar VAR_0x4099, 0
 	specialvar VAR_RESULT, GiveMonArtistRibbon
 	compare VAR_RESULT, 1
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21A4E4
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21A4E4
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A53C
 	waitmovement 0
 	removeobject 11
@@ -760,9 +760,9 @@ LilycoveCity_ContestLobby_EventScript_21AA15:: @ 821AA15
 	waitmessage
 	copyvar VAR_0x8004, VAR_RESULT
 	compare VAR_TEMP_C, 0
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21AABB
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21AABB
 	compare VAR_TEMP_C, 1
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21AAC0
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21AAC0
 	compare VAR_TEMP_C, 2
 	goto_if_ge LilycoveCity_ContestLobby_EventScript_21A97F
 	compare VAR_RESULT, 4
@@ -842,15 +842,15 @@ LilycoveCity_ContestLobby_EventScript_21AB17:: @ 821AB17
 
 LilycoveCity_ContestLobby_EventScript_21AB4B:: @ 821AB4B
 	compare VAR_CONTEST_CATEGORY, 0
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB88
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21AB88
 	compare VAR_CONTEST_CATEGORY, 1
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB8E
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21AB8E
 	compare VAR_CONTEST_CATEGORY, 2
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB94
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21AB94
 	compare VAR_CONTEST_CATEGORY, 3
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB9A
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21AB9A
 	compare VAR_CONTEST_CATEGORY, 4
-	call_if 1, LilycoveCity_ContestLobby_EventScript_21ABA0
+	call_if_eq LilycoveCity_ContestLobby_EventScript_21ABA0
 	goto LilycoveCity_ContestLobby_EventScript_21ABA6
 	end
 

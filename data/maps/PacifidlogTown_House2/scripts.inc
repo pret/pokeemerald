@@ -7,10 +7,8 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	dodailyevents
 	call PacifidlogTown_House2_EventScript_2037DE
 	goto_if_set FLAG_0x12B, PacifidlogTown_House2_EventScript_20387E
-	checkflag FLAG_0x12C
-	call_if 1, PacifidlogTown_House2_EventScript_2037F8
-	checkflag FLAG_0x12C
-	call_if 0, PacifidlogTown_House2_EventScript_203801
+	call_if_set FLAG_0x12C, PacifidlogTown_House2_EventScript_2037F8
+	call_if_unset FLAG_0x12C, PacifidlogTown_House2_EventScript_203801
 	setflag FLAG_0x12C
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
@@ -25,7 +23,7 @@ PacifidlogTown_House2_EventScript_2037DE:: @ 82037DE
 	goto_if_unset FLAG_0x12B, PacifidlogTown_House2_EventScript_27374E
 	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare VAR_RESULT, 0
-	call_if 1, PacifidlogTown_House2_EventScript_203812
+	call_if_eq PacifidlogTown_House2_EventScript_203812
 	return
 
 PacifidlogTown_House2_EventScript_2037F8:: @ 82037F8

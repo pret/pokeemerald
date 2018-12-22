@@ -117,9 +117,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, FallarborTown_BattleTentBattleRoom_EventScript_200B43
+	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B43
 	compare VAR_RESULT, 2
-	call_if 1, FallarborTown_BattleTentBattleRoom_EventScript_200B4A
+	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B4A
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_200AD8

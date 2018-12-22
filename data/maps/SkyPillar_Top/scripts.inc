@@ -5,8 +5,7 @@ SkyPillar_Top_MapScripts:: @ 82396B8
 	.byte 0
 
 SkyPillar_Top_MapScript1_2396C8: @ 82396C8
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, SkyPillar_Top_EventScript_2396D2
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SkyPillar_Top_EventScript_2396D2
 	end
 
 SkyPillar_Top_EventScript_2396D2:: @ 82396D2
@@ -18,9 +17,9 @@ SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 
 SkyPillar_Top_MapScript1_2396E6: @ 82396E6
 	compare VAR_0x40CA, 2
-	call_if 0, SkyPillar_Top_EventScript_2396FD
+	call_if_lt SkyPillar_Top_EventScript_2396FD
 	compare VAR_0x40CA, 2
-	call_if 4, SkyPillar_Top_EventScript_239705
+	call_if_ge SkyPillar_Top_EventScript_239705
 	end
 
 SkyPillar_Top_EventScript_2396FD:: @ 82396FD
@@ -29,8 +28,7 @@ SkyPillar_Top_EventScript_2396FD:: @ 82396FD
 	return
 
 SkyPillar_Top_EventScript_239705:: @ 8239705
-	checkflag FLAG_0x1C0
-	call_if 0, SkyPillar_Top_EventScript_23970F
+	call_if_unset FLAG_0x1C0, SkyPillar_Top_EventScript_23970F
 	return
 
 SkyPillar_Top_EventScript_23970F:: @ 823970F

@@ -3,8 +3,7 @@ MeteorFalls_1F_1R_MapScripts:: @ 822BD2A
 	.byte 0
 
 MeteorFalls_1F_1R_MapScript1_22BD30: @ 822BD30
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, MeteorFalls_1F_1R_EventScript_22BD3A
+	call_if_set FLAG_SYS_GAME_CLEAR, MeteorFalls_1F_1R_EventScript_22BD3A
 	end
 
 MeteorFalls_1F_1R_EventScript_22BD3A:: @ 822BD3A

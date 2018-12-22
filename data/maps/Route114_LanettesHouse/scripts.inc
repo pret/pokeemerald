@@ -36,7 +36,7 @@ Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 Route114_LanettesHouse_EventScript_22B327:: @ 822B327
 	msgbox Route114_LanettesHouse_Text_22B53C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, Route114_LanettesHouse_EventScript_22B33C
+	call_if_eq Route114_LanettesHouse_EventScript_22B33C
 	releaseall
 	end
 

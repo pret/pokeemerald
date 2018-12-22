@@ -74,35 +74,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C829:: @ 821C829
 	setvar VAR_0x8004, 8
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9B8
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9B8
 	setvar VAR_0x8004, 9
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9C0
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9C0
 	setvar VAR_0x8004, 10
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9C8
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9C8
 	setvar VAR_0x8004, 11
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9D0
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9D0
 	setvar VAR_0x8004, 12
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9D8
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9D8
 	setvar VAR_0x8004, 13
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9E0
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9E0
 	setvar VAR_0x8004, 14
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9E8
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9E8
 	setvar VAR_0x8004, 15
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9F0
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9F0
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21C8DA:: @ 821C8DA
@@ -122,35 +122,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F5:: @ 821C8F5
 	setvar VAR_0x8004, 8
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 9
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 10
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 11
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 12
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 13
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 14
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 15
 	specialvar VAR_RESULT, ShouldMoveLilycoveFanClubMember
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
+	call_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	compare VAR_0x8005, 5
 	goto_if_ge LilycoveCity_PokemonTrainerFanClub_EventScript_21C9B4
 	return

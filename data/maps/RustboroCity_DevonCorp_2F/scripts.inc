@@ -4,7 +4,7 @@ RustboroCity_DevonCorp_2F_MapScripts:: @ 8211857
 
 RustboroCity_DevonCorp_2F_MapScript1_21185D: @ 821185D
 	compare VAR_0x40C4, 1
-	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
+	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211869:: @ 8211869
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_2F_EventScript_21186F:: @ 821186F
 	lock
 	faceplayer
 	compare VAR_0x40C4, 1
-	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
+	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	msgbox RustboroCity_DevonCorp_2F_Text_211BFB, MSGBOX_DEFAULT
 	release
 	end
@@ -24,7 +24,7 @@ RustboroCity_DevonCorp_2F_EventScript_211886:: @ 8211886
 	lock
 	faceplayer
 	compare VAR_0x40C4, 1
-	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
+	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	goto_if_set FLAG_0x11F, RustboroCity_DevonCorp_2F_EventScript_2118A6
 	msgbox RustboroCity_DevonCorp_2F_Text_211C50, MSGBOX_DEFAULT
 	release
@@ -39,7 +39,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118B0:: @ 82118B0
 	lock
 	faceplayer
 	compare VAR_0x40C4, 1
-	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
+	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	goto_if_set FLAG_0x0BC, RustboroCity_DevonCorp_2F_EventScript_2118D0
 	msgbox RustboroCity_DevonCorp_2F_Text_211D9F, MSGBOX_DEFAULT
 	release
@@ -54,7 +54,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118DA:: @ 82118DA
 	lock
 	faceplayer
 	compare VAR_0x40C4, 1
-	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
+	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	msgbox RustboroCity_DevonCorp_2F_Text_211EE0, MSGBOX_DEFAULT
 	release
 	end
@@ -280,7 +280,7 @@ RustboroCity_DevonCorp_2F_EventScript_211BCF:: @ 8211BCF
 	lock
 	faceplayer
 	compare VAR_0x40C4, 1
-	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
+	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
 	compare VAR_0x405A, 6
 	goto_if_ge RustboroCity_DevonCorp_2F_EventScript_211BF1
 	msgbox RustboroCity_DevonCorp_2F_Text_212338, MSGBOX_DEFAULT

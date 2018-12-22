@@ -7,7 +7,7 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	goto_if_set FLAG_0x0F5, SootopolisCity_House6_EventScript_226FA3
 	msgbox SootopolisCity_House6_Text_226FC3, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	call_if 1, SootopolisCity_House6_EventScript_226F99
+	call_if_eq SootopolisCity_House6_EventScript_226F99
 	msgbox SootopolisCity_House6_Text_227034, MSGBOX_DEFAULT
 	givedecoration_std 117
 	compare VAR_RESULT, 0

@@ -5,8 +5,7 @@ AncientTomb_MapScripts:: @ 8238FB3
 	.byte 0
 
 AncientTomb_MapScript1_238FC3: @ 8238FC3
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, AncientTomb_EventScript_238FCD
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AncientTomb_EventScript_238FCD
 	end
 
 AncientTomb_EventScript_238FCD:: @ 8238FCD
@@ -18,8 +17,7 @@ AncientTomb_EventScript_238FCD:: @ 8238FCD
 
 AncientTomb_MapScript1_238FE1: @ 8238FE1
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
-	checkflag FLAG_0x1BD
-	call_if 0, AncientTomb_EventScript_238FEE
+	call_if_unset FLAG_0x1BD, AncientTomb_EventScript_238FEE
 	end
 
 AncientTomb_EventScript_238FEE:: @ 8238FEE
@@ -27,8 +25,7 @@ AncientTomb_EventScript_238FEE:: @ 8238FEE
 	return
 
 AncientTomb_MapScript1_238FF2: @ 8238FF2
-	checkflag FLAG_SYS_BRAILLE_FLY
-	call_if 0, AncientTomb_EventScript_238FFC
+	call_if_unset FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_238FFC
 	end
 
 AncientTomb_EventScript_238FFC:: @ 8238FFC

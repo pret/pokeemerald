@@ -8,23 +8,22 @@ LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	call LittlerootTown_EventScript_271ED7
 	compare VAR_0x4092, 2
-	call_if 1, LittlerootTown_EventScript_1E7E67
-	checkflag FLAG_0x052
-	call_if 0, LittlerootTown_EventScript_1E7E6F
+	call_if_eq LittlerootTown_EventScript_1E7E67
+	call_if_unset FLAG_0x052, LittlerootTown_EventScript_1E7E6F
 	compare VAR_0x4050, 3
-	call_if 1, LittlerootTown_EventScript_1E7E92
+	call_if_eq LittlerootTown_EventScript_1E7E92
 	compare VAR_0x4082, 4
-	call_if 1, LittlerootTown_EventScript_1E7E5C
+	call_if_eq LittlerootTown_EventScript_1E7E5C
 	compare VAR_0x408C, 4
-	call_if 1, LittlerootTown_EventScript_1E7E5C
+	call_if_eq LittlerootTown_EventScript_1E7E5C
 	compare VAR_0x40C7, 1
-	call_if 1, LittlerootTown_EventScript_1E7E53
+	call_if_eq LittlerootTown_EventScript_1E7E53
 	compare VAR_0x408D, 3
-	call_if 1, LittlerootTown_EventScript_1E7E4F
+	call_if_eq LittlerootTown_EventScript_1E7E4F
 	compare VAR_0x40D3, 1
-	call_if 1, LittlerootTown_EventScript_1E7E4B
+	call_if_eq LittlerootTown_EventScript_1E7E4B
 	compare VAR_0x40D3, 2
-	call_if 1, LittlerootTown_EventScript_1E7E45
+	call_if_eq LittlerootTown_EventScript_1E7E45
 	end
 
 LittlerootTown_EventScript_1E7E45:: @ 81E7E45
@@ -70,9 +69,9 @@ LittlerootTown_EventScript_1E7E92:: @ 81E7E92
 	setobjectmovementtype 4, 8
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E7EB1
+	call_if_eq LittlerootTown_EventScript_1E7EB1
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E7EB9
+	call_if_eq LittlerootTown_EventScript_1E7EB9
 	return
 
 LittlerootTown_EventScript_1E7EB1:: @ 81E7EB1
@@ -383,9 +382,9 @@ LittlerootTown_EventScript_1E8163:: @ 81E8163
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E817D
+	call_if_eq LittlerootTown_EventScript_1E817D
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E8186
+	call_if_eq LittlerootTown_EventScript_1E8186
 	releaseall
 	end
 
@@ -401,9 +400,9 @@ LittlerootTown_EventScript_1E818F:: @ 81E818F
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E81A9
+	call_if_eq LittlerootTown_EventScript_1E81A9
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E81B2
+	call_if_eq LittlerootTown_EventScript_1E81B2
 	releaseall
 	end
 
@@ -456,27 +455,27 @@ LittlerootTown_EventScript_1E8205:: @ 81E8205
 LittlerootTown_EventScript_1E8211:: @ 81E8211
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E8297
+	call_if_eq LittlerootTown_EventScript_1E8297
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E82A2
+	call_if_eq LittlerootTown_EventScript_1E82A2
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E8281
+	call_if_eq LittlerootTown_EventScript_1E8281
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E828C
+	call_if_eq LittlerootTown_EventScript_1E828C
 	msgbox LittlerootTown_Text_1E87E1, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E82AD
+	call_if_eq LittlerootTown_EventScript_1E82AD
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E82F0
+	call_if_eq LittlerootTown_EventScript_1E82F0
 	call LittlerootTown_EventScript_1E8693
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E8405
+	call_if_eq LittlerootTown_EventScript_1E8405
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E8448
+	call_if_eq LittlerootTown_EventScript_1E8448
 	goto LittlerootTown_EventScript_1E8686
 	end
 
@@ -502,32 +501,32 @@ LittlerootTown_EventScript_1E82A2:: @ 81E82A2
 
 LittlerootTown_EventScript_1E82AD:: @ 81E82AD
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_EventScript_1E8333
+	call_if_eq LittlerootTown_EventScript_1E8333
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_EventScript_1E8348
+	call_if_eq LittlerootTown_EventScript_1E8348
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_EventScript_1E835D
+	call_if_eq LittlerootTown_EventScript_1E835D
 	compare VAR_0x8008, 3
-	call_if 1, LittlerootTown_EventScript_1E8372
+	call_if_eq LittlerootTown_EventScript_1E8372
 	compare VAR_0x8008, 4
-	call_if 1, LittlerootTown_EventScript_1E8387
+	call_if_eq LittlerootTown_EventScript_1E8387
 	compare VAR_0x8008, 5
-	call_if 1, LittlerootTown_EventScript_1E839C
+	call_if_eq LittlerootTown_EventScript_1E839C
 	return
 
 LittlerootTown_EventScript_1E82F0:: @ 81E82F0
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_EventScript_1E8333
+	call_if_eq LittlerootTown_EventScript_1E8333
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_EventScript_1E8348
+	call_if_eq LittlerootTown_EventScript_1E8348
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_EventScript_1E83B1
+	call_if_eq LittlerootTown_EventScript_1E83B1
 	compare VAR_0x8008, 3
-	call_if 1, LittlerootTown_EventScript_1E83C6
+	call_if_eq LittlerootTown_EventScript_1E83C6
 	compare VAR_0x8008, 4
-	call_if 1, LittlerootTown_EventScript_1E83DB
+	call_if_eq LittlerootTown_EventScript_1E83DB
 	compare VAR_0x8008, 5
-	call_if 1, LittlerootTown_EventScript_1E83F0
+	call_if_eq LittlerootTown_EventScript_1E83F0
 	return
 
 LittlerootTown_EventScript_1E8333:: @ 81E8333
@@ -602,32 +601,32 @@ LittlerootTown_EventScript_1E83F0:: @ 81E83F0
 
 LittlerootTown_EventScript_1E8405:: @ 81E8405
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_EventScript_1E848B
+	call_if_eq LittlerootTown_EventScript_1E848B
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_EventScript_1E8496
+	call_if_eq LittlerootTown_EventScript_1E8496
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_EventScript_1E84A1
+	call_if_eq LittlerootTown_EventScript_1E84A1
 	compare VAR_0x8008, 3
-	call_if 1, LittlerootTown_EventScript_1E84C7
+	call_if_eq LittlerootTown_EventScript_1E84C7
 	compare VAR_0x8008, 4
-	call_if 1, LittlerootTown_EventScript_1E84ED
+	call_if_eq LittlerootTown_EventScript_1E84ED
 	compare VAR_0x8008, 5
-	call_if 1, LittlerootTown_EventScript_1E8513
+	call_if_eq LittlerootTown_EventScript_1E8513
 	return
 
 LittlerootTown_EventScript_1E8448:: @ 81E8448
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_EventScript_1E848B
+	call_if_eq LittlerootTown_EventScript_1E848B
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_EventScript_1E8496
+	call_if_eq LittlerootTown_EventScript_1E8496
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_EventScript_1E8539
+	call_if_eq LittlerootTown_EventScript_1E8539
 	compare VAR_0x8008, 3
-	call_if 1, LittlerootTown_EventScript_1E855F
+	call_if_eq LittlerootTown_EventScript_1E855F
 	compare VAR_0x8008, 4
-	call_if 1, LittlerootTown_EventScript_1E8585
+	call_if_eq LittlerootTown_EventScript_1E8585
 	compare VAR_0x8008, 5
-	call_if 1, LittlerootTown_EventScript_1E85AB
+	call_if_eq LittlerootTown_EventScript_1E85AB
 	return
 
 LittlerootTown_EventScript_1E848B:: @ 81E848B
@@ -891,9 +890,9 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 	faceplayer
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_EventScript_1E8281
+	call_if_eq LittlerootTown_EventScript_1E8281
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_EventScript_1E828C
+	call_if_eq LittlerootTown_EventScript_1E828C
 	call LittlerootTown_EventScript_1E8693
 	applymovement 4, LittlerootTown_Movement_2725A6
 	waitmovement 0

@@ -5,9 +5,9 @@ MossdeepCity_SpaceCenter_2F_MapScripts:: @ 8223D58
 
 MossdeepCity_SpaceCenter_2F_MapScript1_223D63: @ 8223D63
 	compare VAR_0x405D, 2
-	call_if 1, MossdeepCity_SpaceCenter_2F_EventScript_223D7A
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_223D7A
 	compare VAR_0x409F, 2
-	call_if 1, MossdeepCity_SpaceCenter_2F_EventScript_223D9F
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_223D9F
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223D7A:: @ 8223D7A
@@ -350,9 +350,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_224175:: @ 8224175
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, MossdeepCity_SpaceCenter_2F_EventScript_224193
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_224193
 	compare VAR_RESULT, 1
-	call_if 1, MossdeepCity_SpaceCenter_2F_EventScript_22419A
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_22419A
 	closemessage
 	clearflag FLAG_0x075
 	releaseall

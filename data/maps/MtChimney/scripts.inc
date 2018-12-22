@@ -14,10 +14,8 @@ MtChimney_MapScript1_22EDD2: @ 822EDD2
 MtChimney_EventScript_22EDD5:: @ 822EDD5
 	lock
 	faceplayer
-	checkflag FLAG_0x0DB
-	call_if 0, MtChimney_EventScript_22EDF9
-	checkflag FLAG_0x0DB
-	call_if 1, MtChimney_EventScript_22EE02
+	call_if_unset FLAG_0x0DB, MtChimney_EventScript_22EDF9
+	call_if_set FLAG_0x0DB, MtChimney_EventScript_22EE02
 	closemessage
 	applymovement 1, MtChimney_Movement_2725A2
 	waitmovement 0
@@ -59,17 +57,17 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	setobjectxyperm 1, 10, 12
 	addobject 1
 	compare VAR_FACING, 4
-	call_if 1, MtChimney_EventScript_22EEC7
+	call_if_eq MtChimney_EventScript_22EEC7
 	compare VAR_FACING, 2
-	call_if 1, MtChimney_EventScript_22EED2
+	call_if_eq MtChimney_EventScript_22EED2
 	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_Movement_2725A4
 	waitmovement 0
 	msgbox MtChimney_Text_22FC3D, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 4
-	call_if 1, MtChimney_EventScript_22EEDD
+	call_if_eq MtChimney_EventScript_22EEDD
 	compare VAR_FACING, 2
-	call_if 1, MtChimney_EventScript_22EEE8
+	call_if_eq MtChimney_EventScript_22EEE8
 	removeobject 1
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
 	setflag FLAG_0x08B
@@ -112,7 +110,7 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	msgbox MtChimney_Text_22FE4D, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare VAR_RESULT, 1
-	call_if 1, MtChimney_EventScript_22EF5E
+	call_if_eq MtChimney_EventScript_22EF5E
 	giveitem_std ITEM_LAVA_COOKIE
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22EF51

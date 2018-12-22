@@ -6,11 +6,10 @@ NewMauville_Inside_MapScripts:: @ 82373D7
 
 NewMauville_Inside_MapScript1_2373E7: @ 82373E7
 	compare VAR_TEMP_1, 1
-	call_if 1, NewMauville_Inside_EventScript_237489
+	call_if_eq NewMauville_Inside_EventScript_237489
 	compare VAR_TEMP_2, 1
-	call_if 1, NewMauville_Inside_EventScript_2375D7
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, NewMauville_Inside_EventScript_237407
+	call_if_eq NewMauville_Inside_EventScript_2375D7
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NewMauville_Inside_EventScript_237407
 	end
 
 NewMauville_Inside_EventScript_237407:: @ 8237407
@@ -23,12 +22,9 @@ NewMauville_Inside_EventScript_237407:: @ 8237407
 NewMauville_Inside_MapScript1_23741B: @ 823741B
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
-	checkflag FLAG_0x1C1
-	call_if 0, NewMauville_Inside_EventScript_237441
-	checkflag FLAG_0x1C2
-	call_if 0, NewMauville_Inside_EventScript_237445
-	checkflag FLAG_0x1C3
-	call_if 0, NewMauville_Inside_EventScript_237449
+	call_if_unset FLAG_0x1C1, NewMauville_Inside_EventScript_237441
+	call_if_unset FLAG_0x1C2, NewMauville_Inside_EventScript_237445
+	call_if_unset FLAG_0x1C3, NewMauville_Inside_EventScript_237449
 	end
 
 NewMauville_Inside_EventScript_237441:: @ 8237441
@@ -45,7 +41,7 @@ NewMauville_Inside_EventScript_237449:: @ 8237449
 
 NewMauville_Inside_MapScript1_23744D: @ 823744D
 	compare VAR_0x40BA, 2
-	call_if 1, NewMauville_Inside_EventScript_23773A
+	call_if_eq NewMauville_Inside_EventScript_23773A
 	end
 
 NewMauville_Inside_EventScript_237459:: @ 8237459

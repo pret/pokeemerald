@@ -9,8 +9,7 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_0x063
 	setvar VAR_0x4093, 0
-	checkflag FLAG_GOT_TM24_FROM_WATTSON
-	call_if 1, MauvilleCity_EventScript_1DF3A9
+	call_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_1DF3A9
 	end
 
 MauvilleCity_EventScript_1DF3A9:: @ 81DF3A9
@@ -105,7 +104,7 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 
 MauvilleCity_EventScript_1DF4AD:: @ 81DF4AD
 	compare VAR_RESULT, 1
-	call_if 1, MauvilleCity_EventScript_1DF63A
+	call_if_eq MauvilleCity_EventScript_1DF63A
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1DF683
 	closemessage
@@ -162,18 +161,18 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	setvar VAR_0x40F2, 0
 	setflag FLAG_0x088
 	compare VAR_FACING, 2
-	call_if 1, MauvilleCity_EventScript_1DF5F3
+	call_if_eq MauvilleCity_EventScript_1DF5F3
 	compare VAR_FACING, 4
-	call_if 1, MauvilleCity_EventScript_1DF601
+	call_if_eq MauvilleCity_EventScript_1DF601
 	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_2725AA
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage
 	addvar VAR_0x40D1, 1
 	compare VAR_FACING, 2
-	call_if 1, MauvilleCity_EventScript_1DF616
+	call_if_eq MauvilleCity_EventScript_1DF616
 	compare VAR_FACING, 4
-	call_if 1, MauvilleCity_EventScript_1DF628
+	call_if_eq MauvilleCity_EventScript_1DF628
 	removeobject 11
 	releaseall
 	end

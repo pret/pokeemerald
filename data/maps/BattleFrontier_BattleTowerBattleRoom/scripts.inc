@@ -76,7 +76,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241C2F:: @ 8241C2F
 	setvar VAR_0x8004, 9
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	call_if 5, BattleFrontier_BattleTowerBattleRoom_EventScript_241EC3
+	call_if_ne BattleFrontier_BattleTowerBattleRoom_EventScript_241EC3
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_24218D
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_24217E

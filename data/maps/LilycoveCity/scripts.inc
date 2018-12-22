@@ -7,14 +7,12 @@ LilycoveCity_MapScript1_1E2B47: @ 81E2B47
 	setflag FLAG_VISITED_LILYCOVE_CITY
 	setvar VAR_0x4086, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, LilycoveCity_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_27207A
 	call LilycoveCity_EventScript_271ED7
 	end
 
 LilycoveCity_MapScript1_1E2B61: @ 81E2B61
-	checkflag FLAG_0x070
-	call_if 0, LilycoveCity_EventScript_1E2B6B
+	call_if_unset FLAG_0x070, LilycoveCity_EventScript_1E2B6B
 	end
 
 LilycoveCity_EventScript_1E2B6B:: @ 81E2B6B
@@ -241,10 +239,8 @@ LilycoveCity_EventScript_1E2DDE:: @ 81E2DDE
 
 LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
 	playbgm MUS_GIRL_SUP, 1
-	checkflag FLAG_0x11E
-	call_if 1, LilycoveCity_EventScript_1E2E48
-	checkflag FLAG_0x11E
-	call_if 0, LilycoveCity_EventScript_1E2E51
+	call_if_set FLAG_0x11E, LilycoveCity_EventScript_1E2E48
+	call_if_unset FLAG_0x11E, LilycoveCity_EventScript_1E2E51
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1E2E5A
 	msgbox LilycoveCity_Text_1E3234, MSGBOX_DEFAULT
@@ -272,10 +268,8 @@ LilycoveCity_EventScript_1E2E5A:: @ 81E2E5A
 
 LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
 	playbgm MUS_BOY_SUP, 1
-	checkflag FLAG_0x11E
-	call_if 1, LilycoveCity_EventScript_1E2EBB
-	checkflag FLAG_0x11E
-	call_if 0, LilycoveCity_EventScript_1E2EC4
+	call_if_set FLAG_0x11E, LilycoveCity_EventScript_1E2EBB
+	call_if_unset FLAG_0x11E, LilycoveCity_EventScript_1E2EC4
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1E2ECD
 	msgbox LilycoveCity_Text_1E373C, MSGBOX_DEFAULT
@@ -334,12 +328,11 @@ LilycoveCity_EventScript_1E2F2E:: @ 81E2F2E
 LilycoveCity_EventScript_1E2F3E:: @ 81E2F3E
 	msgbox LilycoveCity_Text_1E32FB, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
-	checkflag FLAG_BADGE06_GET
-	call_if 1, LilycoveCity_EventScript_1E2F76
+	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_1E2F76
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_EventScript_1E2F86
+	call_if_eq LilycoveCity_EventScript_1E2F86
 	compare VAR_RESULT, 1
-	call_if 1, LilycoveCity_EventScript_1E2F8F
+	call_if_eq LilycoveCity_EventScript_1E2F8F
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
 	goto LilycoveCity_EventScript_1E3006
@@ -369,12 +362,11 @@ LilycoveCity_EventScript_1E2FA1:: @ 81E2FA1
 LilycoveCity_EventScript_1E2FAA:: @ 81E2FAA
 	msgbox LilycoveCity_Text_1E37D7, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
-	checkflag FLAG_BADGE06_GET
-	call_if 1, LilycoveCity_EventScript_1E2F76
+	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_1E2F76
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_EventScript_1E2FE2
+	call_if_eq LilycoveCity_EventScript_1E2FE2
 	compare VAR_RESULT, 1
-	call_if 1, LilycoveCity_EventScript_1E2FEB
+	call_if_eq LilycoveCity_EventScript_1E2FEB
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	goto LilycoveCity_EventScript_1E3006
@@ -414,9 +406,9 @@ LilycoveCity_EventScript_1E302D:: @ 81E302D
 	faceplayer
 	msgbox LilycoveCity_Text_1E4774, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, LilycoveCity_EventScript_1E304F
+	call_if_eq LilycoveCity_EventScript_1E304F
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_EventScript_1E3058
+	call_if_eq LilycoveCity_EventScript_1E3058
 	release
 	end
 

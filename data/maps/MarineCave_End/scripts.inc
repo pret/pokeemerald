@@ -4,8 +4,7 @@ MarineCave_End_MapScripts:: @ 823AFDF
 	.byte 0
 
 MarineCave_End_MapScript1_23AFEA: @ 823AFEA
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, MarineCave_End_EventScript_23AFF4
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, MarineCave_End_EventScript_23AFF4
 	end
 
 MarineCave_End_EventScript_23AFF4:: @ 823AFF4
@@ -16,8 +15,7 @@ MarineCave_End_EventScript_23AFF4:: @ 823AFF4
 	return
 
 MarineCave_End_MapScript1_23B008: @ 823B008
-	checkflag FLAG_0x1BE
-	call_if 0, MarineCave_End_EventScript_23B012
+	call_if_unset FLAG_0x1BE, MarineCave_End_EventScript_23B012
 	end
 
 MarineCave_End_EventScript_23B012:: @ 823B012

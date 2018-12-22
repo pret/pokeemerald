@@ -5,8 +5,7 @@ FortreeCity_House2_EventScript_2177CB:: @ 82177CB
 	lock
 	faceplayer
 	goto_if_set FLAG_0x108, FortreeCity_House2_EventScript_21786E
-	checkflag FLAG_0x076
-	call_if 0, FortreeCity_House2_EventScript_217862
+	call_if_unset FLAG_0x076, FortreeCity_House2_EventScript_217862
 	msgbox FortreeCity_House2_Text_2178D6, MSGBOX_DEFAULT
 	multichoice 21, 8, 54, 1
 	switch VAR_RESULT

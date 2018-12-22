@@ -4,8 +4,7 @@ TerraCave_End_MapScripts:: @ 823B0B0
 	.byte 0
 
 TerraCave_End_MapScript1_23B0BB: @ 823B0BB
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, TerraCave_End_EventScript_23B0C5
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, TerraCave_End_EventScript_23B0C5
 	end
 
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
@@ -16,8 +15,7 @@ TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	return
 
 TerraCave_End_MapScript1_23B0D9: @ 823B0D9
-	checkflag FLAG_0x1BF
-	call_if 0, TerraCave_End_EventScript_23B0E3
+	call_if_unset FLAG_0x1BF, TerraCave_End_EventScript_23B0E3
 	end
 
 TerraCave_End_EventScript_23B0E3:: @ 823B0E3

@@ -4,8 +4,7 @@ Route119_MapScripts:: @ 81F4424
 	.byte 0
 
 Route119_MapScript1_1F442F: @ 81F442F
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, Route119_EventScript_1F4439
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route119_EventScript_1F4439
 	end
 
 Route119_EventScript_1F4439:: @ 81F4439
@@ -19,7 +18,7 @@ Route119_MapScript1_1F444D: @ 81F444D
 	call Route119_EventScript_271ED7
 	call Route119_EventScript_271EFB
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
-	call_if 1, Route119_EventScript_1F4466
+	call_if_eq Route119_EventScript_1F4466
 	special SetRoute119Weather
 	end
 
@@ -44,21 +43,21 @@ Route119_EventScript_1F4488:: @ 81F4488
 	addobject 25
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, Route119_EventScript_1F4501
+	call_if_eq Route119_EventScript_1F4501
 	compare VAR_RESULT, 1
-	call_if 1, Route119_EventScript_1F4506
+	call_if_eq Route119_EventScript_1F4506
 	delay 65
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1F46C6
+	call_if_eq Route119_EventScript_1F46C6
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1F46D1
+	call_if_eq Route119_EventScript_1F46D1
 	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_2725AA
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1F4700
+	call_if_eq Route119_EventScript_1F4700
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1F470F
+	call_if_eq Route119_EventScript_1F470F
 	removeobject 25
 	addobject 16
 	delay 30
@@ -146,25 +145,25 @@ Route119_EventScript_1F45FF:: @ 81F45FF
 Route119_EventScript_1F460F:: @ 81F460F
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1F4700
+	call_if_eq Route119_EventScript_1F4700
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1F470F
+	call_if_eq Route119_EventScript_1F470F
 	removeobject 16
 	addobject 25
 	delay 30
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1F46DC
+	call_if_eq Route119_EventScript_1F46DC
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1F46EE
+	call_if_eq Route119_EventScript_1F46EE
 	removeobject 25
 	setvar VAR_0x4072, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1F46A0
+	call_if_eq Route119_EventScript_1F46A0
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1F46A8
+	call_if_eq Route119_EventScript_1F46A8
 	addobject 43
 	applymovement 43, Route119_Movement_1F4752
 	waitmovement 0
@@ -172,9 +171,9 @@ Route119_EventScript_1F460F:: @ 81F460F
 	msgbox Route119_Text_1F4E60, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, Route119_EventScript_1F46B0
+	call_if_eq Route119_EventScript_1F46B0
 	compare VAR_TEMP_1, 2
-	call_if 1, Route119_EventScript_1F46BB
+	call_if_eq Route119_EventScript_1F46BB
 	removeobject 43
 	releaseall
 	end

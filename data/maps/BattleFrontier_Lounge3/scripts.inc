@@ -85,20 +85,13 @@ BattleFrontier_Lounge3_EventScript_261E96:: @ 8261E96
 
 BattleFrontier_Lounge3_EventScript_261EA0:: @ 8261EA0
 	setvar VAR_0x8004, 0
-	checkflag FLAG_SYS_TOWER_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_DOME_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_PALACE_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_ARENA_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_FACTORY_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_PIKE_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_PYRAMID_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_TOWER_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_DOME_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_PALACE_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_ARENA_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_FACTORY_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_PIKE_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_PYRAMID_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
 	return
 
 BattleFrontier_Lounge3_EventScript_261EE5:: @ 8261EE5
@@ -128,11 +121,11 @@ BattleFrontier_Lounge3_EventScript_261F12:: @ 8261F12
 BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
 	msgbox BattleFrontier_Lounge3_Text_263334, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 0
-	call_if 1, BattleFrontier_Lounge3_EventScript_261F80
+	call_if_eq BattleFrontier_Lounge3_EventScript_261F80
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 1
-	call_if 1, BattleFrontier_Lounge3_EventScript_261F8A
+	call_if_eq BattleFrontier_Lounge3_EventScript_261F8A
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 2
-	call_if 1, BattleFrontier_Lounge3_EventScript_261F94
+	call_if_eq BattleFrontier_Lounge3_EventScript_261F94
 	msgbox BattleFrontier_Lounge3_Text_2633D4, 9
 	special sub_813A9D0
 	msgbox BattleFrontier_Lounge3_Text_2633F2, MSGBOX_DEFAULT

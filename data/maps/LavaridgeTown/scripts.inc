@@ -5,16 +5,14 @@ LavaridgeTown_MapScripts:: @ 81EA4D3
 
 LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
-	checkflag FLAG_0x06C
-	call_if 1, LavaridgeTown_EventScript_1EA514
-	checkflag FLAG_0x08B
-	call_if 1, LavaridgeTown_EventScript_1EA53F
+	call_if_set FLAG_0x06C, LavaridgeTown_EventScript_1EA514
+	call_if_set FLAG_0x08B, LavaridgeTown_EventScript_1EA53F
 	call LavaridgeTown_EventScript_271ED7
 	call LavaridgeTown_EventScript_271EFB
 	compare VAR_0x4053, 1
-	call_if 1, LavaridgeTown_EventScript_1EA518
+	call_if_eq LavaridgeTown_EventScript_1EA518
 	compare VAR_0x4053, 1
-	call_if 1, LavaridgeTown_EventScript_1EA543
+	call_if_eq LavaridgeTown_EventScript_1EA543
 	end
 
 LavaridgeTown_EventScript_1EA514:: @ 81EA514
@@ -50,19 +48,19 @@ LavaridgeTown_EventScript_1EA551:: @ 81EA551
 	lockall
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare VAR_0x8008, 9
-	call_if 1, LavaridgeTown_EventScript_1EA63A
+	call_if_eq LavaridgeTown_EventScript_1EA63A
 	compare VAR_0x8008, 9
-	call_if 5, LavaridgeTown_EventScript_1EA65C
+	call_if_ne LavaridgeTown_EventScript_1EA65C
 	delay 20
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LavaridgeTown_EventScript_1EA630
+	call_if_eq LavaridgeTown_EventScript_1EA630
 	compare VAR_RESULT, 1
-	call_if 1, LavaridgeTown_EventScript_1EA635
+	call_if_eq LavaridgeTown_EventScript_1EA635
 	compare VAR_0x8008, 9
-	call_if 1, LavaridgeTown_EventScript_1EA6A1
+	call_if_eq LavaridgeTown_EventScript_1EA6A1
 	compare VAR_0x8008, 9
-	call_if 5, LavaridgeTown_EventScript_1EA6AC
+	call_if_ne LavaridgeTown_EventScript_1EA6AC
 	checkplayergender
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_1EA5B5
@@ -92,9 +90,9 @@ LavaridgeTown_EventScript_1EA5FF:: @ 81EA5FF
 	addobject 7
 	delay 30
 	compare VAR_0x8008, 9
-	call_if 1, LavaridgeTown_EventScript_1EA6B7
+	call_if_eq LavaridgeTown_EventScript_1EA6B7
 	compare VAR_0x8008, 9
-	call_if 5, LavaridgeTown_EventScript_1EA6C9
+	call_if_ne LavaridgeTown_EventScript_1EA6C9
 	removeobject 7
 	setvar VAR_0x4053, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000

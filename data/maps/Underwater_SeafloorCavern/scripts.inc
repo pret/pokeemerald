@@ -14,8 +14,7 @@ Underwater_SeafloorCavern_EventScript_234358:: @ 8234358
 	end
 
 Underwater_SeafloorCavern_MapScript1_23435C: @ 823435C
-	checkflag FLAG_0x081
-	call_if 1, Underwater_SeafloorCavern_EventScript_234366
+	call_if_set FLAG_0x081, Underwater_SeafloorCavern_EventScript_234366
 	end
 
 Underwater_SeafloorCavern_EventScript_234366:: @ 8234366

@@ -1108,7 +1108,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	setflag FLAG_0x87F
 	call EverGrandeCity_HallOfFame_EventScript_271829
 	compare VAR_0x40CC, 0
-	call_if 1, EverGrandeCity_HallOfFame_EventScript_271839
+	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
 	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
@@ -1123,14 +1123,12 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
 	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
 	special sub_813BA60
-	checkflag FLAG_0x123
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_271843
-	checkflag FLAG_0x12A
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_27183F
+	call_if_unset FLAG_0x123, EverGrandeCity_HallOfFame_EventScript_271843
+	call_if_unset FLAG_0x12A, EverGrandeCity_HallOfFame_EventScript_27183F
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	compare VAR_0x40D3, 0
-	call_if 1, EverGrandeCity_HallOfFame_EventScript_271851
+	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
@@ -1279,9 +1277,9 @@ OldaleTown_PokemonCenter_1F_EventScript_271954:: @ 8271954
 OldaleTown_PokemonCenter_1F_EventScript_27195A:: @ 827195A
 	incrementgamestat 15
 	compare VAR_0x8004, 0
-	call_if 1, OldaleTown_PokemonCenter_1F_EventScript_271987
+	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_271987
 	compare VAR_0x8004, 1
-	call_if 1, OldaleTown_PokemonCenter_1F_EventScript_27198D
+	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_27198D
 	waitmessage
 	call OldaleTown_PokemonCenter_1F_EventScript_271993
 	goto_if_unset FLAG_0x111, OldaleTown_PokemonCenter_1F_EventScript_271A43
@@ -1403,9 +1401,9 @@ EventScript_271AE3:: @ 8271AE3
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271B95
+	call_if_eq EventScript_271B95
 	compare VAR_0x8007, 0
-	call_if 1, EventScript_271BA9
+	call_if_eq EventScript_271BA9
 	return
 
 EventScript_271B08:: @ 8271B08
@@ -1420,31 +1418,31 @@ EventScript_271B08:: @ 8271B08
 EventScript_271B45:: @ 8271B45
 	bufferstdstring 2, 14
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B55:: @ 8271B55
 	bufferstdstring 2, 15
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B65:: @ 8271B65
 	bufferstdstring 2, 16
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B75:: @ 8271B75
 	bufferstdstring 2, 17
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BB3
+	call_if_eq EventScript_271BB3
 	return
 
 EventScript_271B85:: @ 8271B85
 	bufferstdstring 2, 18
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B95:: @ 8271B95
@@ -1475,9 +1473,9 @@ Std_ObtainDecoration:: @ 8271BB7
 EventScript_271BC5:: @ 8271BC5
 	bufferdecorationname 1, VAR_0x8000
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BE0
+	call_if_eq EventScript_271BE0
 	compare VAR_0x8007, 0
-	call_if 1, EventScript_271BF7
+	call_if_eq EventScript_271BF7
 	return
 
 EventScript_271BE0:: @ 8271BE0
@@ -1504,9 +1502,9 @@ Std_FindItem:: @ 8271BFD
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271C3A
+	call_if_eq EventScript_271C3A
 	compare VAR_0x8007, 0
-	call_if 1, EventScript_271CA1
+	call_if_eq EventScript_271CA1
 	release
 	return
 
@@ -1516,9 +1514,9 @@ EventScript_271C3A:: @ 8271C3A
 	specialvar VAR_RESULT, sub_81398C0
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 1
-	call_if 1, EventScript_271C8F
+	call_if_eq EventScript_271C8F
 	compare VAR_0x8008, 0
-	call_if 1, EventScript_271C9B
+	call_if_eq EventScript_271C9B
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, 32773
@@ -1660,10 +1658,8 @@ EventScript_271DF9:: @ 8271DF9
 
 EventScript_271E0E:: @ 8271E0E
 	playse SE_PC_LOGIN
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 0, EventScript_271E35
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 1, EventScript_271E3E
+	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_271E35
+	call_if_set FLAG_SYS_PC_LANETTE, EventScript_271E3E
 	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystem
 	waitstate
@@ -2093,21 +2089,21 @@ Route103_EventScript_2720AD:: @ 82720AD
 	goto_if_eq Route101_EventScript_27374E
 	goto_if_set FLAG_SYS_GAME_CLEAR, Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 0
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 1
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 2
-	call_if 1, Route101_EventScript_272127
+	call_if_eq Route101_EventScript_272127
 	compare VAR_BIRCH_STATE, 3
-	call_if 1, Route101_EventScript_272127
+	call_if_eq Route101_EventScript_272127
 	compare VAR_BIRCH_STATE, 4
-	call_if 1, Route101_EventScript_272134
+	call_if_eq Route101_EventScript_272134
 	compare VAR_BIRCH_STATE, 5
-	call_if 1, Route101_EventScript_272134
+	call_if_eq Route101_EventScript_272134
 	compare VAR_BIRCH_STATE, 6
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 7
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	return
 
 Route101_EventScript_27211A:: @ 827211A
@@ -2241,9 +2237,9 @@ FarawayIsland_Entrance_EventScript_272250:: @ 8272250
 NavelRock_Harbor_EventScript_272250:: @ 8272250
 SouthernIsland_Exterior_EventScript_272250:: @ 8272250
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_OutsideWest_EventScript_242A21
+	call_if_eq BattleFrontier_OutsideWest_EventScript_242A21
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_OutsideWest_EventScript_242A2C
+	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	call BattleFrontier_OutsideWest_EventScript_2721E2
@@ -3199,8 +3195,7 @@ EventScript_2736D9:: @ 82736D9
 	special sub_80B05B4
 	waitstate
 	fadescreen 1
-	checkflag FLAG_0x06C
-	call_if 1, EventScript_2736F4
+	call_if_set FLAG_0x06C, EventScript_2736F4
 	special sp0C8_whiteout_maybe
 	waitstate
 	end
@@ -3384,10 +3379,8 @@ Route119_WeatherInstitute_2F_EventScript_2737A0:: @ 82737A0
 RustboroCity_DevonCorp_2F_EventScript_2737A0:: @ 82737A0
 	bufferboxname 0, 16438
 	bufferspeciesname 1, VAR_TEMP_1
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_2737E6
+	call_if_unset FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
+	call_if_set FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737E6
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737BB:: @ 82737BB
@@ -4518,9 +4511,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	multichoice 20, 8, 45, 1
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC38
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC38
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC41
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC41
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F97A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	copyvar VAR_0x8005, VAR_0x8009
@@ -9105,9 +9098,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8004, 25
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128
+	call_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128
 	compare VAR_RESULT, 1
-	call_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136
+	call_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
@@ -9127,9 +9120,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8004, 3
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
+	call_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C
+	call_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C
 	waitstate
 	end
 
@@ -9169,9 +9162,9 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	setvar VAR_0x8004, 25
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128
+	call_if_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128
 	compare VAR_RESULT, 1
-	call_if 5, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136
+	call_if_ne BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
@@ -9191,9 +9184,9 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	setvar VAR_0x8004, 3
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144
+	call_if_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C
+	call_if_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C
 	waitstate
 	end
 

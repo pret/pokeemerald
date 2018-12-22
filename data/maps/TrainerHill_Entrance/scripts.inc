@@ -46,7 +46,7 @@ TrainerHill_Entrance_MapScript1_26811B: @ 826811B
 
 TrainerHill_Entrance_MapScript1_268128: @ 8268128
 	compare VAR_TEMP_D, 17
-	call_if 1, TrainerHill_Entrance_EventScript_268134
+	call_if_eq TrainerHill_Entrance_EventScript_268134
 	end
 
 TrainerHill_Entrance_EventScript_268134:: @ 8268134
@@ -136,7 +136,7 @@ TrainerHill_Entrance_EventScript_268229:: @ 8268229
 	setvar VAR_0x8004, 13
 	special sp194_trainer_tower
 	compare VAR_RESULT, 0
-	call_if 1, TrainerHill_Entrance_EventScript_26832E
+	call_if_eq TrainerHill_Entrance_EventScript_26832E
 	setvar VAR_0x8004, 8
 	special sp194_trainer_tower
 	compare VAR_RESULT, 1

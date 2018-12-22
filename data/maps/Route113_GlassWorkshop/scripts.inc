@@ -5,7 +5,7 @@ Route113_GlassWorkshop_MapScripts:: @ 826ED03
 Route113_GlassWorkshop_MapScript1_26ED09: @ 826ED09
 	setflag FLAG_LANDMARK_GLASS_WORKSHOP
 	compare VAR_0x40BE, 1
-	call_if 1, Route113_GlassWorkshop_EventScript_26ED18
+	call_if_eq Route113_GlassWorkshop_EventScript_26ED18
 	end
 
 Route113_GlassWorkshop_EventScript_26ED18:: @ 826ED18
@@ -203,9 +203,9 @@ Route113_GlassWorkshop_EventScript_26F00F:: @ 826F00F
 	fadescreen 0
 	msgbox Route113_GlassWorkshop_Text_26F688, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
-	call_if 1, Route113_GlassWorkshop_EventScript_26F047
+	call_if_eq Route113_GlassWorkshop_EventScript_26F047
 	compare VAR_0x8009, 1
-	call_if 1, Route113_GlassWorkshop_EventScript_26F05F
+	call_if_eq Route113_GlassWorkshop_EventScript_26F05F
 	setvar VAR_0x40BE, 2
 	release
 	end
@@ -297,9 +297,9 @@ Route113_GlassWorkshop_EventScript_26F15B:: @ 826F15B
 Route113_GlassWorkshop_EventScript_26F16F:: @ 826F16F
 	msgbox Route113_GlassWorkshop_Text_26F688, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
-	call_if 1, Route113_GlassWorkshop_EventScript_26F047
+	call_if_eq Route113_GlassWorkshop_EventScript_26F047
 	compare VAR_0x8009, 1
-	call_if 1, Route113_GlassWorkshop_EventScript_26F05F
+	call_if_eq Route113_GlassWorkshop_EventScript_26F05F
 	setvar VAR_0x40BE, 2
 	release
 	end

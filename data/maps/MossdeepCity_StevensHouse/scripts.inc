@@ -5,8 +5,7 @@ MossdeepCity_StevensHouse_MapScripts:: @ 8222784
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_222794: @ 8222794
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, MossdeepCity_StevensHouse_EventScript_22279E
+	call_if_unset FLAG_SYS_GAME_CLEAR, MossdeepCity_StevensHouse_EventScript_22279E
 	end
 
 MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
@@ -15,7 +14,7 @@ MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
 
 MossdeepCity_StevensHouse_MapScript1_2227A8: @ 82227A8
 	compare VAR_0x40C6, 2
-	call_if 1, MossdeepCity_StevensHouse_EventScript_2227B4
+	call_if_eq MossdeepCity_StevensHouse_EventScript_2227B4
 	end
 
 MossdeepCity_StevensHouse_EventScript_2227B4:: @ 82227B4

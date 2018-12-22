@@ -92,9 +92,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	apprentice_menu APPRENTICE_ASK_2SPECIES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6ABA
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6ABA
 	compare VAR_0x8005, 1
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6AC0
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6AC0
 	setvar VAR_0x8004, 12
 	special CallApprenticeFunction
 	copyvar VAR_0x8006, VAR_RESULT
@@ -105,7 +105,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:
 	setvar VAR_0x8004, 12
 	special CallApprenticeFunction
 	compare VAR_RESULT, 3
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6AC6
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6AC6
 	setvar VAR_0x8004, 16
 	setvar VAR_0x8005, 0
 	copyvar VAR_0x8006, VAR_0x8007
@@ -217,9 +217,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:
 	apprentice_menu APPRENTICE_ASK_MOVES
 	copyvar VAR_0x8005, VAR_RESULT
 	compare VAR_0x8005, 0
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6D50
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6D50
 	compare VAR_0x8005, 1
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6D56
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6D56
 	setvar VAR_0x8004, 17
 	special CallApprenticeFunction
 	setvar VAR_0x8004, 5

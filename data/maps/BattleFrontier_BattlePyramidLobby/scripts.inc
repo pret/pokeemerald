@@ -63,7 +63,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507D2:: @ 82507D2
 BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special sub_81B95E0
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePyramidLobby_EventScript_250DDB
+	call_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250DDB
 	clearflag FLAG_SPECIAL_FLAG_0x4004
 	setvar VAR_0x8004, 8
 	special CallFrontierUtilFunc

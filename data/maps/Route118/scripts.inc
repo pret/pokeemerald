@@ -7,18 +7,18 @@ Route118_MapScripts:: @ 81F3DBC
 Route118_MapScript1_1F3DCC: @ 81F3DCC
 	call Route118_EventScript_28CCC7
 	compare VAR_0x4039, 1
-	call_if 1, Route118_EventScript_273D13
+	call_if_eq Route118_EventScript_273D13
 	compare VAR_0x4037, 7
-	call_if 1, Route118_EventScript_273D1B
+	call_if_eq Route118_EventScript_273D1B
 	compare VAR_0x4037, 8
-	call_if 1, Route118_EventScript_273D1B
+	call_if_eq Route118_EventScript_273D1B
 	end
 
 Route118_MapScript1_1F3DF3: @ 81F3DF3
 	compare VAR_0x4037, 7
-	call_if 1, Route118_EventScript_273985
+	call_if_eq Route118_EventScript_273985
 	compare VAR_0x4037, 8
-	call_if 1, Route118_EventScript_273998
+	call_if_eq Route118_EventScript_273998
 	end
 
 Route118_MapScript2_1F3E0A: @ 81F3E0A
@@ -102,11 +102,11 @@ Route118_EventScript_1F3EE4:: @ 81F3EE4
 	msgbox Route118_Text_1F40BE, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
-	call_if 1, Route118_EventScript_1F3F28
+	call_if_eq Route118_EventScript_1F3F28
 	compare VAR_0x8008, 1
-	call_if 1, Route118_EventScript_1F3F3A
+	call_if_eq Route118_EventScript_1F3F3A
 	compare VAR_0x8008, 2
-	call_if 1, Route118_EventScript_1F3F4C
+	call_if_eq Route118_EventScript_1F3F4C
 	setvar VAR_0x4071, 1
 	removeobject 19
 	releaseall

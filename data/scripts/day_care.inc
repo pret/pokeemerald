@@ -48,7 +48,7 @@ Route117_EventScript_291C9D:: @ 8291C9D
 Route117_EventScript_291CB7:: @ 8291CB7
 	specialvar VAR_RESULT, sub_8071614
 	compare VAR_RESULT, 1
-	call_if 1, Route117_EventScript_291CC8
+	call_if_eq Route117_EventScript_291CC8
 	return
 
 Route117_EventScript_291CC8:: @ 8291CC8
@@ -162,7 +162,7 @@ Route117_PokemonDayCare_EventScript_291E15:: @ 8291E15
 Route117_PokemonDayCare_EventScript_291E1E:: @ 8291E1E
 	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
 	compare VAR_RESULT, 0
-	call_if 5, Route117_PokemonDayCare_EventScript_291E15
+	call_if_ne Route117_PokemonDayCare_EventScript_291E15
 	return
 
 Route117_PokemonDayCare_EventScript_291E2F:: @ 8291E2F

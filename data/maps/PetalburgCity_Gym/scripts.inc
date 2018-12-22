@@ -9,26 +9,26 @@ PetalburgCity_Gym_MapScript1_20489E: @ 820489E
 	compare VAR_0x4085, 6
 	goto_if_eq PetalburgCity_Gym_EventScript_2048B5
 	compare VAR_0x4085, 7
-	call_if 4, PetalburgCity_Gym_EventScript_2048FF
+	call_if_ge PetalburgCity_Gym_EventScript_2048FF
 	end
 
 PetalburgCity_Gym_EventScript_2048B5:: @ 82048B5
 	setvar VAR_0x8005, 1
 	call PetalburgCity_Gym_EventScript_20555E
 	checktrainerflag TRAINER_RANDALL
-	call_if 1, PetalburgCity_Gym_EventScript_20557F
+	call_if_eq PetalburgCity_Gym_EventScript_20557F
 	checktrainerflag TRAINER_MARY
-	call_if 1, PetalburgCity_Gym_EventScript_2055A0
+	call_if_eq PetalburgCity_Gym_EventScript_2055A0
 	checktrainerflag TRAINER_PARKER
-	call_if 1, PetalburgCity_Gym_EventScript_2055C1
+	call_if_eq PetalburgCity_Gym_EventScript_2055C1
 	checktrainerflag TRAINER_ALEXIA
-	call_if 1, PetalburgCity_Gym_EventScript_2055E2
+	call_if_eq PetalburgCity_Gym_EventScript_2055E2
 	checktrainerflag TRAINER_GEORGE
-	call_if 1, PetalburgCity_Gym_EventScript_205603
+	call_if_eq PetalburgCity_Gym_EventScript_205603
 	checktrainerflag TRAINER_JODY
-	call_if 1, PetalburgCity_Gym_EventScript_205624
+	call_if_eq PetalburgCity_Gym_EventScript_205624
 	checktrainerflag TRAINER_BERKE
-	call_if 1, PetalburgCity_Gym_EventScript_205645
+	call_if_eq PetalburgCity_Gym_EventScript_205645
 	end
 
 PetalburgCity_Gym_EventScript_2048FF:: @ 82048FF
@@ -45,11 +45,10 @@ PetalburgCity_Gym_EventScript_2048FF:: @ 82048FF
 
 PetalburgCity_Gym_MapScript1_20492D: @ 820492D
 	compare VAR_0x4085, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20494D
+	call_if_eq PetalburgCity_Gym_EventScript_20494D
 	compare VAR_0x4085, 6
-	call_if 0, PetalburgCity_Gym_EventScript_204955
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, PetalburgCity_Gym_EventScript_20495D
+	call_if_lt PetalburgCity_Gym_EventScript_204955
+	call_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_20495D
 	end
 
 PetalburgCity_Gym_EventScript_20494D:: @ 820494D
@@ -156,65 +155,65 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	addobject 10
 	playse SE_DOOR
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_Gym_EventScript_204C31
+	call_if_eq PetalburgCity_Gym_EventScript_204C31
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204C43
+	call_if_eq PetalburgCity_Gym_EventScript_204C43
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204C5F
+	call_if_eq PetalburgCity_Gym_EventScript_204C5F
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204C5F
+	call_if_eq PetalburgCity_Gym_EventScript_204C5F
 	msgbox PetalburgCity_Gym_Text_2058B1, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_2058DB, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_205910, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_2059D8, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_Gym_EventScript_204CC7
+	call_if_eq PetalburgCity_Gym_EventScript_204CC7
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204CD2
+	call_if_eq PetalburgCity_Gym_EventScript_204CD2
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204CE4
+	call_if_eq PetalburgCity_Gym_EventScript_204CE4
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204CF6
+	call_if_eq PetalburgCity_Gym_EventScript_204CF6
 	msgbox PetalburgCity_Gym_Text_2059E8, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_Gym_EventScript_204D08
+	call_if_eq PetalburgCity_Gym_EventScript_204D08
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204D13
+	call_if_eq PetalburgCity_Gym_EventScript_204D13
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204D1E
+	call_if_eq PetalburgCity_Gym_EventScript_204D1E
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204D29
+	call_if_eq PetalburgCity_Gym_EventScript_204D29
 	msgbox PetalburgCity_Gym_Text_205A46, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_205A89, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_205AF4, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_Gym_EventScript_204D72
+	call_if_eq PetalburgCity_Gym_EventScript_204D72
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204D73
+	call_if_eq PetalburgCity_Gym_EventScript_204D73
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204D7E
+	call_if_eq PetalburgCity_Gym_EventScript_204D7E
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204D7F
+	call_if_eq PetalburgCity_Gym_EventScript_204D7F
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_Gym_EventScript_204D34
+	call_if_eq PetalburgCity_Gym_EventScript_204D34
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204D3F
+	call_if_eq PetalburgCity_Gym_EventScript_204D3F
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204D34
+	call_if_eq PetalburgCity_Gym_EventScript_204D34
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204D34
+	call_if_eq PetalburgCity_Gym_EventScript_204D34
 	msgbox PetalburgCity_Gym_Text_205B0F, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	playbgm MUS_TSURETEK, 0
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_Gym_EventScript_204C78
+	call_if_eq PetalburgCity_Gym_EventScript_204C78
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204C91
+	call_if_eq PetalburgCity_Gym_EventScript_204C91
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204CA3
+	call_if_eq PetalburgCity_Gym_EventScript_204CA3
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204CB5
+	call_if_eq PetalburgCity_Gym_EventScript_204CB5
 	removeobject 10
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_AUNT
 	setvar VAR_0x4085, 1
@@ -472,30 +471,30 @@ PetalburgCity_Gym_EventScript_204F13:: @ 8204F13
 	waitmovement 0
 	delay 10
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204FED
+	call_if_eq PetalburgCity_Gym_EventScript_204FED
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_205009
+	call_if_eq PetalburgCity_Gym_EventScript_205009
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_205025
+	call_if_eq PetalburgCity_Gym_EventScript_205025
 	msgbox PetalburgCity_Gym_Text_206377, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_204FCC
+	call_if_eq PetalburgCity_Gym_EventScript_204FCC
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_204FD7
+	call_if_eq PetalburgCity_Gym_EventScript_204FD7
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_204FE2
+	call_if_eq PetalburgCity_Gym_EventScript_204FE2
 	msgbox PetalburgCity_Gym_Text_2063CA, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	playbgm MUS_TSURETEK, 0
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_Gym_EventScript_205041
+	call_if_eq PetalburgCity_Gym_EventScript_205041
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_Gym_EventScript_20505A
+	call_if_eq PetalburgCity_Gym_EventScript_20505A
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_Gym_EventScript_20506C
+	call_if_eq PetalburgCity_Gym_EventScript_20506C
 	removeobject 11
 	setvar VAR_0x4057, 4
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
@@ -1077,72 +1076,72 @@ PetalburgCity_Gym_EventScript_205555:: @ 8205555
 PetalburgCity_Gym_EventScript_20555E:: @ 820555E
 	setvar VAR_0x8004, 1
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_205666
 	return
 
 PetalburgCity_Gym_EventScript_20557F:: @ 820557F
 	setvar VAR_0x8004, 2
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_20568B
 	return
 
 PetalburgCity_Gym_EventScript_2055A0:: @ 82055A0
 	setvar VAR_0x8004, 3
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_2056B0
 	return
 
 PetalburgCity_Gym_EventScript_2055C1:: @ 82055C1
 	setvar VAR_0x8004, 4
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_2056D5
 	return
 
 PetalburgCity_Gym_EventScript_2055E2:: @ 82055E2
 	setvar VAR_0x8004, 5
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_2056E8
 	return
 
 PetalburgCity_Gym_EventScript_205603:: @ 8205603
 	setvar VAR_0x8004, 6
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_20570D
 	return
 
 PetalburgCity_Gym_EventScript_205624:: @ 8205624
 	setvar VAR_0x8004, 7
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_205720
 	return
 
 PetalburgCity_Gym_EventScript_205645:: @ 8205645
 	setvar VAR_0x8004, 8
 	compare VAR_0x8005, 0
-	call_if 1, PetalburgCity_Gym_EventScript_205746
+	call_if_eq PetalburgCity_Gym_EventScript_205746
 	compare VAR_0x8005, 1
-	call_if 1, PetalburgCity_Gym_EventScript_20574B
+	call_if_eq PetalburgCity_Gym_EventScript_20574B
 	call PetalburgCity_Gym_EventScript_205733
 	return
 

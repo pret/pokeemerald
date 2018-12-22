@@ -22,18 +22,18 @@ Route104_PrettyPetalFlowerShop_EventScript_22A373:: @ 822A373
 	setflag FLAG_0x07F
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7706, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3D2
+	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_22A3D2
 	compare VAR_RESULT, 0
-	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3DB
+	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_22A3DB
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3B2:: @ 822A3B2
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A76D9, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3D2
+	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_22A3D2
 	compare VAR_RESULT, 0
-	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3DB
+	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_22A3DB
 	release
 	end
 

@@ -31,16 +31,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_270A72:: @ 8270A72
 	setvar VAR_TEMP_1, 0
 	checkitem ITEM_RED_SHARD, 1
 	compare VAR_RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270AB8
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270AB8
 	checkitem ITEM_YELLOW_SHARD, 1
 	compare VAR_RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270ABE
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270ABE
 	checkitem ITEM_BLUE_SHARD, 1
 	compare VAR_RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270AC4
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270AC4
 	checkitem ITEM_GREEN_SHARD, 1
 	compare VAR_RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270ACA
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270ACA
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_270AB8:: @ 8270AB8

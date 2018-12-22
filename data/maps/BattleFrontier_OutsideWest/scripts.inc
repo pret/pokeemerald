@@ -145,13 +145,13 @@ BattleFrontier_OutsideWest_EventScript_23D57F:: @ 823D57F
 	faceplayer
 	delay 20
 	compare VAR_FACING, 2
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5C5
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5C5
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	compare VAR_FACING, 4
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	msgbox BattleFrontier_OutsideWest_Text_23DC36, MSGBOX_DEFAULT
 	release
 	end
@@ -170,13 +170,13 @@ BattleFrontier_OutsideWest_EventScript_23D5C6:: @ 823D5C6
 	message BattleFrontier_OutsideWest_Text_23DCB0
 	waitmessage
 	compare VAR_FACING, 2
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5FD
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5FD
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D608
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D608
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D613
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D613
 	compare VAR_FACING, 4
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D61E
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D61E
 	waitbuttonpress
 	release
 	end

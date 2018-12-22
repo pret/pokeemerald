@@ -175,7 +175,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	setflag FLAG_BADGE02_GET
 	addvar VAR_0x4085, 1
 	compare VAR_0x4085, 6
-	call_if 1, DewfordTown_Gym_EventScript_271E84
+	call_if_eq DewfordTown_Gym_EventScript_271E84
 	setvar VAR_0x8008, 2
 	call DewfordTown_Gym_EventScript_271F43
 	call DewfordTown_Gym_EventScript_1FC855

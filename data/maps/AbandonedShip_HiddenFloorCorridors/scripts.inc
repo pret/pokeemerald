@@ -8,22 +8,14 @@ AbandonedShip_HiddenFloorCorridors_MapScript1_238977: @ 8238977
 	end
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_238980: @ 8238980
-	checkflag FLAG_0x0F0
-	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_2389F1
-	checkflag FLAG_0x0F1
-	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_2389FB
-	checkflag FLAG_0x0F2
-	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_238A05
-	checkflag FLAG_0x0F3
-	call_if 0, AbandonedShip_HiddenFloorCorridors_EventScript_238A0F
-	checkflag FLAG_0x0F0
-	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_2389C9
-	checkflag FLAG_0x0F1
-	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_2389D3
-	checkflag FLAG_0x0F2
-	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_2389DD
-	checkflag FLAG_0x0F3
-	call_if 1, AbandonedShip_HiddenFloorCorridors_EventScript_2389E7
+	call_if_unset FLAG_0x0F0, AbandonedShip_HiddenFloorCorridors_EventScript_2389F1
+	call_if_unset FLAG_0x0F1, AbandonedShip_HiddenFloorCorridors_EventScript_2389FB
+	call_if_unset FLAG_0x0F2, AbandonedShip_HiddenFloorCorridors_EventScript_238A05
+	call_if_unset FLAG_0x0F3, AbandonedShip_HiddenFloorCorridors_EventScript_238A0F
+	call_if_set FLAG_0x0F0, AbandonedShip_HiddenFloorCorridors_EventScript_2389C9
+	call_if_set FLAG_0x0F1, AbandonedShip_HiddenFloorCorridors_EventScript_2389D3
+	call_if_set FLAG_0x0F2, AbandonedShip_HiddenFloorCorridors_EventScript_2389DD
+	call_if_set FLAG_0x0F3, AbandonedShip_HiddenFloorCorridors_EventScript_2389E7
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389C9:: @ 82389C9

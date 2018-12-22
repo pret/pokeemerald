@@ -5,12 +5,9 @@ OldaleTown_MapScripts:: @ 81E8EA2
 OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
 	call OldaleTown_EventScript_271ED7
 	setflag FLAG_VISITED_OLDALE_TOWN
-	checkflag FLAG_0x074
-	call_if 0, OldaleTown_EventScript_1E8ED2
-	checkflag FLAG_0x084
-	call_if 0, OldaleTown_EventScript_1E8EDE
-	checkflag FLAG_0x074
-	call_if 1, OldaleTown_EventScript_1E8ECC
+	call_if_unset FLAG_0x074, OldaleTown_EventScript_1E8ED2
+	call_if_unset FLAG_0x084, OldaleTown_EventScript_1E8EDE
+	call_if_set FLAG_0x074, OldaleTown_EventScript_1E8ECC
 	end
 
 OldaleTown_EventScript_1E8ECC:: @ 81E8ECC
@@ -277,9 +274,9 @@ OldaleTown_EventScript_1E910C:: @ 81E910C
 OldaleTown_EventScript_1E911A:: @ 81E911A
 	closemessage
 	compare VAR_0x8009, 0
-	call_if 1, OldaleTown_EventScript_1E9148
+	call_if_eq OldaleTown_EventScript_1E9148
 	compare VAR_0x8009, 1
-	call_if 1, OldaleTown_EventScript_1E915E
+	call_if_eq OldaleTown_EventScript_1E915E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0
 	removeobject 4

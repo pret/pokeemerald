@@ -7,9 +7,9 @@ SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
 	setvar VAR_0x40AA, 0
 	call SlateportCity_EventScript_1DCC8D
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCC99
+	call_if_eq SlateportCity_EventScript_1DCC99
 	compare VAR_0x40D2, 1
-	call_if 1, SlateportCity_EventScript_1DCCE7
+	call_if_eq SlateportCity_EventScript_1DCCE7
 	end
 
 SlateportCity_EventScript_1DCC8D:: @ 81DCC8D
@@ -144,10 +144,10 @@ SlateportCity_EventScript_1DCDE4:: @ 81DCDE4
 	msgbox SlateportCity_Text_1DD68A, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, LeadMonHasEffortRibbon
 	compare VAR_RESULT, 1
-	call_if 1, SlateportCity_EventScript_1DCE38
+	call_if_eq SlateportCity_EventScript_1DCE38
 	specialvar VAR_RESULT, Special_AreLeadMonEVsMaxedOut
 	compare VAR_RESULT, 0
-	call_if 1, SlateportCity_EventScript_1DCE2E
+	call_if_eq SlateportCity_EventScript_1DCE2E
 	msgbox SlateportCity_Text_1DD697, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4
 	message SlateportCity_Text_1DD6E3
@@ -171,7 +171,7 @@ SlateportCity_EventScript_1DCE42:: @ 81DCE42
 	lock
 	faceplayer
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCE59
+	call_if_eq SlateportCity_EventScript_1DCE59
 	msgbox SlateportCity_Text_1DD81A, MSGBOX_DEFAULT
 	release
 	end
@@ -185,7 +185,7 @@ SlateportCity_EventScript_1DCE63:: @ 81DCE63
 	lock
 	faceplayer
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCE7A
+	call_if_eq SlateportCity_EventScript_1DCE7A
 	msgbox SlateportCity_Text_1DD8A6, MSGBOX_DEFAULT
 	release
 	end
@@ -199,7 +199,7 @@ SlateportCity_EventScript_1DCE84:: @ 81DCE84
 	lock
 	faceplayer
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCEA4
+	call_if_eq SlateportCity_EventScript_1DCEA4
 	goto_if_set FLAG_0x060, SlateportCity_EventScript_1DCEAE
 	msgbox SlateportCity_Text_1DD93D, MSGBOX_DEFAULT
 	release
@@ -219,7 +219,7 @@ SlateportCity_EventScript_1DCEB8:: @ 81DCEB8
 	lock
 	faceplayer
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCECF
+	call_if_eq SlateportCity_EventScript_1DCECF
 	msgbox SlateportCity_Text_1DDA34, MSGBOX_DEFAULT
 	release
 	end
@@ -243,7 +243,7 @@ SlateportCity_EventScript_1DCEF6:: @ 81DCEF6
 	lock
 	faceplayer
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCF0D
+	call_if_eq SlateportCity_EventScript_1DCF0D
 	msgbox SlateportCity_Text_1DDB21, MSGBOX_DEFAULT
 	release
 	end
@@ -324,7 +324,7 @@ SlateportCity_EventScript_1DCFBB:: @ 81DCFBB
 	lock
 	faceplayer
 	compare VAR_0x4058, 1
-	call_if 1, SlateportCity_EventScript_1DCFD2
+	call_if_eq SlateportCity_EventScript_1DCFD2
 	msgbox SlateportCity_Text_1DE10E, MSGBOX_DEFAULT
 	release
 	end

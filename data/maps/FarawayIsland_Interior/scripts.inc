@@ -6,8 +6,7 @@ FarawayIsland_Interior_MapScripts:: @ 8267CFA
 	.byte 0
 
 FarawayIsland_Interior_MapScript1_267D0F: @ 8267D0F
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, FarawayIsland_Interior_EventScript_267D19
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_EventScript_267D19
 	end
 
 FarawayIsland_Interior_EventScript_267D19:: @ 8267D19
@@ -28,8 +27,7 @@ FarawayIsland_Interior_EventScript_267D4B:: @ 8267D4B
 	return
 
 FarawayIsland_Interior_MapScript1_267D54: @ 8267D54
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, FarawayIsland_Interior_EventScript_267D5E
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, FarawayIsland_Interior_EventScript_267D5E
 	end
 
 FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
@@ -42,8 +40,7 @@ FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
 	setvar VAR_0x403A, 0
 	setvar VAR_TEMP_1, 1
-	checkflag FLAG_0x1CA
-	call_if 0, FarawayIsland_Interior_EventScript_267D86
+	call_if_unset FLAG_0x1CA, FarawayIsland_Interior_EventScript_267D86
 	end
 
 FarawayIsland_Interior_EventScript_267D86:: @ 8267D86
@@ -129,13 +126,13 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	waitse
 	playmoncry SPECIES_MEW, 2
 	compare VAR_FACING, 2
-	call_if 1, FarawayIsland_Interior_EventScript_267EAF
+	call_if_eq FarawayIsland_Interior_EventScript_267EAF
 	compare VAR_FACING, 1
-	call_if 1, FarawayIsland_Interior_EventScript_267EBA
+	call_if_eq FarawayIsland_Interior_EventScript_267EBA
 	compare VAR_FACING, 3
-	call_if 1, FarawayIsland_Interior_EventScript_267EC5
+	call_if_eq FarawayIsland_Interior_EventScript_267EC5
 	compare VAR_FACING, 4
-	call_if 1, FarawayIsland_Interior_EventScript_267ED0
+	call_if_eq FarawayIsland_Interior_EventScript_267ED0
 	special sub_81D4BEC
 	delay 40
 	waitmoncry

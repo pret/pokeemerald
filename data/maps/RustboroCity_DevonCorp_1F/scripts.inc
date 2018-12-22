@@ -3,8 +3,7 @@ RustboroCity_DevonCorp_1F_MapScripts:: @ 8211245
 	.byte 0
 
 RustboroCity_DevonCorp_1F_MapScript1_21124B: @ 821124B
-	checkflag FLAG_0x090
-	call_if 0, RustboroCity_DevonCorp_1F_EventScript_211255
+	call_if_unset FLAG_0x090, RustboroCity_DevonCorp_1F_EventScript_211255
 	end
 
 RustboroCity_DevonCorp_1F_EventScript_211255:: @ 8211255

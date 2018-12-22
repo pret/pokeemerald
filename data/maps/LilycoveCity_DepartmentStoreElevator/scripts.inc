@@ -5,8 +5,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220624:: @ 8220624
 	lock
 	faceplayer
 	setvar VAR_0x8004, 0
-	checkflag FLAG_TEMP_2
-	call_if 0, LilycoveCity_DepartmentStoreElevator_EventScript_2207FC
+	call_if_unset FLAG_TEMP_2, LilycoveCity_DepartmentStoreElevator_EventScript_2207FC
 	copyvar VAR_0x8005, VAR_DEPT_STORE_FLOOR
 	special sub_8139B60
 	message gUnknown_08272C1D

@@ -52,11 +52,11 @@ Route111_EventScript_27661E:: @ 827661E
 	setflag FLAG_0x060
 	clearflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
 	compare VAR_FACING, 3
-	call_if 1, Route111_EventScript_27666A
+	call_if_eq Route111_EventScript_27666A
 	compare VAR_FACING, 4
-	call_if 1, Route111_EventScript_27666A
+	call_if_eq Route111_EventScript_27666A
 	compare VAR_FACING, 2
-	call_if 1, Route111_EventScript_276675
+	call_if_eq Route111_EventScript_276675
 	removeobject VAR_LAST_TALKED
 	release
 	end

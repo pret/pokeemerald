@@ -6,7 +6,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D
 	compare VAR_0x408F, 0
-	call_if 1, RustboroCity_DevonCorp_3F_EventScript_212449
+	call_if_eq RustboroCity_DevonCorp_3F_EventScript_212449
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_212449:: @ 8212449

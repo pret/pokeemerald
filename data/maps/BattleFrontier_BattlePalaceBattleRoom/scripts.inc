@@ -112,17 +112,17 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A:: @ 824F98A
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE66
+	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE66
 	compare VAR_RESULT, 2
-	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE6D
+	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE6D
 	compare VAR_RESULT, 3
-	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE74
+	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE74
 	compare VAR_RESULT, 4
-	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE7B
+	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE7B
 	compare VAR_RESULT, 5
-	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE82
+	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE82
 	compare VAR_RESULT, 6
-	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE89
+	call_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE89
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA42

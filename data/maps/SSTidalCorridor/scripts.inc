@@ -125,8 +125,7 @@ SSTidalCorridor_EventScript_23C119:: @ 823C119
 SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
-	checkflag FLAG_0x104
-	call_if 1, SSTidalCorridor_EventScript_23C179
+	call_if_set FLAG_0x104, SSTidalCorridor_EventScript_23C179
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -135,8 +134,7 @@ SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 SSTidalCorridor_EventScript_23C15A:: @ 823C15A
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
-	checkflag FLAG_0x104
-	call_if 1, SSTidalCorridor_EventScript_23C179
+	call_if_set FLAG_0x104, SSTidalCorridor_EventScript_23C179
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release

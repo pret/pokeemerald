@@ -4,10 +4,8 @@ NavelRock_Bottom_MapScripts:: @ 8269255
 	.byte 0
 
 NavelRock_Bottom_MapScript1_269260: @ 8269260
-	checkflag FLAG_0x091
-	call_if 1, NavelRock_Bottom_EventScript_269273
-	checkflag FLAG_0x091
-	call_if 0, NavelRock_Bottom_EventScript_269277
+	call_if_set FLAG_0x091, NavelRock_Bottom_EventScript_269273
+	call_if_unset FLAG_0x091, NavelRock_Bottom_EventScript_269277
 	end
 
 NavelRock_Bottom_EventScript_269273:: @ 8269273
@@ -20,8 +18,7 @@ NavelRock_Bottom_EventScript_269277:: @ 8269277
 	return
 
 NavelRock_Bottom_MapScript1_269284: @ 8269284
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, NavelRock_Bottom_EventScript_26928E
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Bottom_EventScript_26928E
 	end
 
 NavelRock_Bottom_EventScript_26928E:: @ 826928E

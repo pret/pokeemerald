@@ -7,7 +7,7 @@ JaggedPass_MapScripts:: @ 8230656
 JaggedPass_MapScript1_230666: @ 8230666
 	setstepcallback 1
 	compare VAR_0x40C8, 0
-	call_if 1, JaggedPass_EventScript_230674
+	call_if_eq JaggedPass_EventScript_230674
 	end
 
 JaggedPass_EventScript_230674:: @ 8230674
@@ -22,7 +22,7 @@ JaggedPass_EventScript_230685:: @ 8230685
 
 JaggedPass_MapScript1_23068B: @ 823068B
 	compare VAR_0x40BD, 1
-	call_if 1, JaggedPass_EventScript_230697
+	call_if_eq JaggedPass_EventScript_230697
 	end
 
 JaggedPass_EventScript_230697:: @ 8230697

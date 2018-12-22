@@ -218,9 +218,9 @@ DewfordTown_Hall_EventScript_1FD772:: @ 81FD772
 
 DewfordTown_Hall_EventScript_1FD793:: @ 81FD793
 	compare VAR_FACING, 2
-	call_if 1, DewfordTown_Hall_EventScript_1FD7AA
+	call_if_eq DewfordTown_Hall_EventScript_1FD7AA
 	compare VAR_FACING, 1
-	call_if 1, DewfordTown_Hall_EventScript_1FD7B5
+	call_if_eq DewfordTown_Hall_EventScript_1FD7B5
 	return
 
 DewfordTown_Hall_EventScript_1FD7AA:: @ 81FD7AA

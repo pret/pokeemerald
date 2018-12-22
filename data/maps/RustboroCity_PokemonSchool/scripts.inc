@@ -79,9 +79,9 @@ RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
 	faceplayer
 	goto_if_set FLAG_0x113, RustboroCity_PokemonSchool_EventScript_213FFB
 	compare VAR_FACING, 4
-	call_if 1, RustboroCity_PokemonSchool_EventScript_213FE5
+	call_if_eq RustboroCity_PokemonSchool_EventScript_213FE5
 	compare VAR_FACING, 3
-	call_if 1, RustboroCity_PokemonSchool_EventScript_213FF0
+	call_if_eq RustboroCity_PokemonSchool_EventScript_213FF0
 	msgbox RustboroCity_PokemonSchool_Text_214433, MSGBOX_DEFAULT
 	giveitem_std ITEM_QUICK_CLAW
 	compare VAR_RESULT, 0

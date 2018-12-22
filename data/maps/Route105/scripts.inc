@@ -5,12 +5,11 @@ Route105_MapScripts:: @ 81EE1DB
 	.byte 0
 
 Route105_MapScript1_1EE1EB: @ 81EE1EB
-	checkflag FLAG_0x0E4
-	call_if 0, Route105_EventScript_1EE20B
+	call_if_unset FLAG_0x0E4, Route105_EventScript_1EE20B
 	compare VAR_0x4037, 9
-	call_if 1, Route105_EventScript_2739AB
+	call_if_eq Route105_EventScript_2739AB
 	compare VAR_0x4037, 10
-	call_if 1, Route105_EventScript_273A18
+	call_if_eq Route105_EventScript_273A18
 	end
 
 Route105_EventScript_1EE20B:: @ 81EE20B
@@ -20,11 +19,11 @@ Route105_EventScript_1EE20B:: @ 81EE20B
 
 Route105_MapScript1_1EE21E: @ 81EE21E
 	compare VAR_0x4039, 1
-	call_if 1, Route105_EventScript_273D13
+	call_if_eq Route105_EventScript_273D13
 	compare VAR_0x4037, 9
-	call_if 1, Route105_EventScript_273D17
+	call_if_eq Route105_EventScript_273D17
 	compare VAR_0x4037, 10
-	call_if 1, Route105_EventScript_273D17
+	call_if_eq Route105_EventScript_273D17
 	end
 
 Route105_MapScript2_1EE240: @ 81EE240

@@ -7,8 +7,7 @@ MossdeepCity_MapScript1_1E4A9C: @ 81E4A9C
 	clearflag FLAG_0x065
 	clearflag FLAG_0x066
 	clearflag FLAG_0x067
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, MossdeepCity_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, MossdeepCity_EventScript_27207A
 	end
 
 MossdeepCity_EventScript_1E4AB2:: @ 81E4AB2
@@ -257,9 +256,9 @@ MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	msgbox MossdeepCity_Text_1E5453, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, MossdeepCity_EventScript_1E4CB0
+	call_if_eq MossdeepCity_EventScript_1E4CB0
 	compare VAR_FACING, 4
-	call_if 1, MossdeepCity_EventScript_1E4CC2
+	call_if_eq MossdeepCity_EventScript_1E4CC2
 	addvar VAR_0x40D1, 1
 	removeobject 16
 	release

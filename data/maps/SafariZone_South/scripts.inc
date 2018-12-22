@@ -20,7 +20,7 @@ SafariZone_South_EventScript_23D28E:: @ 823D28E
 
 SafariZone_South_MapScript1_23D2B1: @ 823D2B1
 	compare VAR_0x40A4, 2
-	call_if 1, SafariZone_South_EventScript_23D2BD
+	call_if_eq SafariZone_South_EventScript_23D2BD
 	end
 
 SafariZone_South_EventScript_23D2BD:: @ 823D2BD

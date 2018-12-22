@@ -4,8 +4,7 @@ SouthernIsland_Interior_MapScripts:: @ 8242A45
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, SouthernIsland_Interior_EventScript_242A5A
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_242A5A
 	end
 
 SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
@@ -17,9 +16,9 @@ SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 
 SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
 	compare VAR_0x40D5, 0
-	call_if 1, SouthernIsland_Interior_EventScript_242A8A
+	call_if_eq SouthernIsland_Interior_EventScript_242A8A
 	compare VAR_0x40D5, 0
-	call_if 5, SouthernIsland_Interior_EventScript_242A95
+	call_if_ne SouthernIsland_Interior_EventScript_242A95
 	call SouthernIsland_Interior_EventScript_242AA0
 	end
 
@@ -79,9 +78,9 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	special RemoveCameraObject
 	setvar VAR_LAST_TALKED, 2
 	compare VAR_0x40D5, 0
-	call_if 1, SouthernIsland_Interior_EventScript_242BA4
+	call_if_eq SouthernIsland_Interior_EventScript_242BA4
 	compare VAR_0x40D5, 0
-	call_if 5, SouthernIsland_Interior_EventScript_242BB7
+	call_if_ne SouthernIsland_Interior_EventScript_242BB7
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLatiBattle
 	waitstate

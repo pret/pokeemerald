@@ -11,10 +11,9 @@ EverGrandeCity_SidneysRoom_MapScript1_227F16: @ 8227F16
 	end
 
 EverGrandeCity_SidneysRoom_MapScript1_227F1D: @ 8227F1D
-	checkflag FLAG_0x4FB
-	call_if 1, EverGrandeCity_SidneysRoom_EventScript_227F32
+	call_if_set FLAG_0x4FB, EverGrandeCity_SidneysRoom_EventScript_227F32
 	compare VAR_0x409C, 1
-	call_if 1, EverGrandeCity_SidneysRoom_EventScript_227F38
+	call_if_eq EverGrandeCity_SidneysRoom_EventScript_227F38
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_227F32:: @ 8227F32

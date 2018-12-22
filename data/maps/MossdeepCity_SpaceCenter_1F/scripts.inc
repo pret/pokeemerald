@@ -56,9 +56,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_223012
+	call_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223012
 	compare VAR_RESULT, 1
-	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_22301B
+	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22301B
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
 	waitmovement 0
@@ -78,9 +78,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_223051
+	call_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223051
 	compare VAR_RESULT, 1
-	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_22305A
+	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22305A
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
 	waitmovement 0

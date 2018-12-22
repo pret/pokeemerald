@@ -4,10 +4,8 @@ BattleFrontier_Lounge1_MapScripts:: @ 825E774
 BattleFrontier_Lounge1_EventScript_25E775:: @ 825E775
 	lock
 	faceplayer
-	checkflag FLAG_0x153
-	call_if 0, BattleFrontier_Lounge1_EventScript_25E7AD
-	checkflag FLAG_0x153
-	call_if 1, BattleFrontier_Lounge1_EventScript_25E7B6
+	call_if_unset FLAG_0x153, BattleFrontier_Lounge1_EventScript_25E7AD
+	call_if_set FLAG_0x153, BattleFrontier_Lounge1_EventScript_25E7B6
 	setflag FLAG_0x153
 	goto BattleFrontier_Lounge1_EventScript_25E792
 	end

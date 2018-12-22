@@ -4,8 +4,7 @@ Route114_FossilManiacsTunnel_MapScripts:: @ 822AF28
 	.byte 0
 
 Route114_FossilManiacsTunnel_MapScript1_22AF33: @ 822AF33
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, Route114_FossilManiacsTunnel_EventScript_22AF3D
+	call_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_22AF3D
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AF3D:: @ 822AF3D
@@ -14,8 +13,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF3D:: @ 822AF3D
 	return
 
 Route114_FossilManiacsTunnel_MapScript1_22AF49: @ 822AF49
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, Route114_FossilManiacsTunnel_EventScript_22AF53
+	call_if_unset FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_22AF53
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AF53:: @ 822AF53

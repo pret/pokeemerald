@@ -5,11 +5,11 @@ LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
 
 LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 	compare VAR_0x408D, 2
-	call_if 0, LittlerootTown_BrendansHouse_2F_EventScript_1F8457
+	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_1F8457
 	compare VAR_0x408D, 3
-	call_if 4, LittlerootTown_BrendansHouse_2F_EventScript_1F841A
+	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
 	compare VAR_0x4092, 4
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_2926FE
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2926FE
 	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
 	end
@@ -74,13 +74,13 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	delay 10
 	playbgm MUS_BOY_SUP, 1
 	compare VAR_FACING, 2
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F8507
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8507
 	compare VAR_FACING, 1
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F8536
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8536
 	compare VAR_FACING, 3
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F8565
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8565
 	compare VAR_FACING, 4
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F8594
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8594
 	setvar VAR_0x408D, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM

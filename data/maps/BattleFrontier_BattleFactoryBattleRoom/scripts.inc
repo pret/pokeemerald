@@ -9,9 +9,9 @@ BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB: @ 825ADBB
 	special CallFrontierUtilFunc
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25
+	call_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B
+	call_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B
 	setvar VAR_0x8004, 9
 	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_F, VAR_RESULT

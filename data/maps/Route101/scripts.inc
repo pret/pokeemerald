@@ -239,9 +239,9 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, Route101_EventScript_1EBE85
+	call_if_eq Route101_EventScript_1EBE85
 	compare VAR_RESULT, 1
-	call_if 1, Route101_EventScript_1EBE89
+	call_if_eq Route101_EventScript_1EBE89
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release

@@ -36,18 +36,18 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7A1
 	incrementgamestat 46
 	compare VAR_0x8006, 0
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F77B
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F77B
 	compare VAR_0x8006, 1
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F784
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F784
 	bufferitemname 0, VAR_0x8005
 	compare VAR_0x8004, 1
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7B9
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7B9
 	compare VAR_0x8004, 2
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7C2
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7C2
 	compare VAR_0x8004, 3
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7CB
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7CB
 	compare VAR_0x8004, 4
-	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7D4
+	call_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7D4
 	giveitem_std VAR_0x8005
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7DD

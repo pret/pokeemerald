@@ -4,7 +4,7 @@ Route119_WeatherInstitute_1F_MapScripts:: @ 826FA86
 
 Route119_WeatherInstitute_1F_MapScript1_26FA8C: @ 826FA8C
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FA98
+	call_if_eq Route119_WeatherInstitute_1F_EventScript_26FA98
 	end
 
 Route119_WeatherInstitute_1F_EventScript_26FA98:: @ 826FA98
@@ -32,10 +32,8 @@ Route119_WeatherInstitute_1F_EventScript_26FAC8:: @ 826FAC8
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_1F_EventScript_26FB05
 	setvar VAR_0x8004, 0
-	checkflag FLAG_0x1BE
-	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FAFF
-	checkflag FLAG_0x1BF
-	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FAFF
+	call_if_set FLAG_0x1BE, Route119_WeatherInstitute_1F_EventScript_26FAFF
+	call_if_set FLAG_0x1BF, Route119_WeatherInstitute_1F_EventScript_26FAFF
 	compare VAR_0x8004, 2
 	goto_if_eq Route119_WeatherInstitute_1F_EventScript_26FB05
 	msgbox Route119_WeatherInstitute_1F_Text_26FDE8, MSGBOX_DEFAULT

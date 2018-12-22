@@ -5,7 +5,7 @@ NewMauville_Entrance_MapScripts:: @ 82372AD
 
 NewMauville_Entrance_MapScript1_2372B8: @ 82372B8
 	compare VAR_0x40BA, 0
-	call_if 1, NewMauville_Entrance_EventScript_2372C4
+	call_if_eq NewMauville_Entrance_EventScript_2372C4
 	end
 
 NewMauville_Entrance_EventScript_2372C4:: @ 82372C4

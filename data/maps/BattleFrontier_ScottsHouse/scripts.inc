@@ -173,13 +173,13 @@ BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
 	closemessage
 	delay 30
 	compare VAR_FACING, 2
-	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A13
+	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A13
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A1E
+	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A1E
 	compare VAR_FACING, 4
-	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A29
+	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A29
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A34
+	call_if_eq BattleFrontier_ScottsHouse_EventScript_263A34
 	msgbox BattleFrontier_ScottsHouse_Text_263B29, MSGBOX_DEFAULT
 	applymovement 1, BattleFrontier_ScottsHouse_Movement_27259E
 	waitmovement 0

@@ -6,9 +6,9 @@ BattleFrontier_BattleTowerBattleRoom2_MapScripts:: @ 8248EE8
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript1_248EF8: @ 8248EF8
 	compare VAR_FRONTIER_BATTLE_MODE, 2
-	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F
+	call_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F
 	compare VAR_FRONTIER_BATTLE_MODE, 3
-	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F
+	call_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F:: @ 8248F0F
@@ -158,7 +158,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_FRONTIER_BATTLE_MODE, 3
-	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249514
+	call_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249514
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty

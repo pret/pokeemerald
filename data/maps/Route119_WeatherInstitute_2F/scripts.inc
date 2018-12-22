@@ -4,11 +4,10 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
 
 Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF44
+	call_if_eq Route119_WeatherInstitute_2F_EventScript_26FF44
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF50
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF5C
+	call_if_eq Route119_WeatherInstitute_2F_EventScript_26FF50
+	call_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_26FF5C
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FF44:: @ 826FF44
@@ -139,14 +138,11 @@ Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
 
 Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	setvar VAR_0x8004, 0
-	checkflag FLAG_0x1BE
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
-	checkflag FLAG_0x1BF
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_0x1BE, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_0x1BF, Route119_WeatherInstitute_2F_EventScript_270160
 	compare VAR_0x8004, 2
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270166
-	checkflag FLAG_TEMP_2
-	call_if 0, Route119_WeatherInstitute_2F_EventScript_270159
+	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_270159
 	specialvar VAR_RESULT, sub_813B374
 	compare VAR_RESULT, 1
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_27014F

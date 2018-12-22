@@ -5,11 +5,11 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 81F9296
 
 LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	compare VAR_0x408D, 2
-	call_if 0, LittlerootTown_MaysHouse_2F_EventScript_1F930A
+	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_1F930A
 	compare VAR_0x408D, 3
-	call_if 4, LittlerootTown_MaysHouse_2F_EventScript_1F92CD
+	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
 	compare VAR_0x4092, 4
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_2926FE
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
 	end
@@ -75,13 +75,13 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	delay 10
 	playbgm MUS_GIRL_SUP, 1
 	compare VAR_FACING, 2
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F93BA
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93BA
 	compare VAR_FACING, 1
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F93E9
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93E9
 	compare VAR_FACING, 3
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F9418
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9418
 	compare VAR_FACING, 4
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F9440
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9440
 	setvar VAR_0x408D, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
@@ -272,9 +272,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F951D
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F951D
 	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F952F
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F952F
 	setflag FLAG_0x125
 	releaseall
 	end

@@ -19,8 +19,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_SYS_SHOAL_ITEM
-	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_236ED9
+	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_236ED9
 	checkitem ITEM_SHOAL_SALT, 4
 	compare VAR_RESULT, 0
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E9B
@@ -32,7 +31,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236ECF
 	checkitemspace ITEM_SHELL_BELL, 1
 	compare VAR_RESULT, 0
-	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_236E69
+	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E69
 	compare VAR_RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_236E91
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7FAC, MSGBOX_DEFAULT

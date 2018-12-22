@@ -5,23 +5,22 @@ Route120_MapScripts:: @ 81F53EC
 	.byte 0
 
 Route120_MapScript1_1F53FC: @ 81F53FC
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, Route120_EventScript_1F5406
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_1F5406
 	end
 
 Route120_EventScript_1F5406:: @ 81F5406
 	compare VAR_0x8009, 0
-	call_if 1, Route120_EventScript_1F5449
+	call_if_eq Route120_EventScript_1F5449
 	compare VAR_0x8009, 1
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 2
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 3
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 4
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 5
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	return
 
 Route120_EventScript_1F5449:: @ 81F5449
@@ -40,12 +39,9 @@ Route120_EventScript_1F5460:: @ 81F5460
 	return
 
 Route120_MapScript1_1F5474: @ 81F5474
-	checkflag FLAG_0x0E4
-	call_if 0, Route120_EventScript_1F5490
-	checkflag FLAG_0x11D
-	call_if 1, Route120_EventScript_1F54A3
-	checkflag FLAG_0x11D
-	call_if 0, Route120_EventScript_1F54C8
+	call_if_unset FLAG_0x0E4, Route120_EventScript_1F5490
+	call_if_set FLAG_0x11D, Route120_EventScript_1F54A3
+	call_if_unset FLAG_0x11D, Route120_EventScript_1F54C8
 	end
 
 Route120_EventScript_1F5490:: @ 81F5490
@@ -106,9 +102,9 @@ Route120_EventScript_1F5527:: @ 81F5527
 	goto_if_set FLAG_0x92E, Route120_EventScript_1F5625
 	msgbox Route120_Text_2A70C7, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, Route120_EventScript_1F562F
+	call_if_eq Route120_EventScript_1F562F
 	compare VAR_RESULT, 0
-	call_if 1, Route120_EventScript_1F5638
+	call_if_eq Route120_EventScript_1F5638
 	specialvar VAR_RESULT, GetPlayerTrainerIdOnesDigit
 	switch VAR_RESULT
 	case 0, Route120_EventScript_1F55CA
@@ -197,9 +193,9 @@ Route120_EventScript_1F568B:: @ 81F568B
 	msgbox Route120_Text_1F5B0F, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, Route120_EventScript_1F57A3
+	call_if_eq Route120_EventScript_1F57A3
 	compare VAR_FACING, 3
-	call_if 1, Route120_EventScript_1F57AE
+	call_if_eq Route120_EventScript_1F57AE
 	applymovement 31, Route120_Movement_2725A4
 	waitmovement 0
 	delay 20

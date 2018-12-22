@@ -215,9 +215,9 @@ BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	setvar VAR_0x8005, 1
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256005
+	call_if_eq BattleFrontier_BattleArenaLobby_EventScript_256005
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256050
+	call_if_eq BattleFrontier_BattleArenaLobby_EventScript_256050
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 255, 9, 13
 	setvar VAR_TEMP_0, 0
 	waitstate

@@ -1603,9 +1603,9 @@ MossdeepCity_GameCorner_1F_EventScript_277E55:: @ 8277E55
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	compare VAR_0x8005, 0
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_277E84
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_277E84
 	compare VAR_0x8005, 1
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_277E8D
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_277E8D
 	goto MossdeepCity_GameCorner_1F_EventScript_2772F9
 	end
 

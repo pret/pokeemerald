@@ -13,10 +13,8 @@ FallarborTown_House1_EventScript_200F13:: @ 8200F13
 	end
 
 FallarborTown_House1_EventScript_200F38:: @ 8200F38
-	checkflag FLAG_TEMP_2
-	call_if 0, FallarborTown_House1_EventScript_200F8B
-	checkflag FLAG_TEMP_2
-	call_if 1, FallarborTown_House1_EventScript_200F9C
+	call_if_unset FLAG_TEMP_2, FallarborTown_House1_EventScript_200F8B
+	call_if_set FLAG_TEMP_2, FallarborTown_House1_EventScript_200F9C
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_House1_EventScript_200FA5
 	msgbox FallarborTown_House1_Text_201159, MSGBOX_DEFAULT

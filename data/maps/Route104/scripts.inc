@@ -156,7 +156,7 @@ Route104_EventScript_1ECDED:: @ 81ECDED
 Route104_EventScript_1ECE1C:: @ 81ECE1C
 	msgbox Route104_Text_1EDE3E, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, Route104_EventScript_1ECE31
+	call_if_eq Route104_EventScript_1ECE31
 	releaseall
 	end
 
@@ -231,7 +231,7 @@ Route104_EventScript_1ECF09:: @ 81ECF09
 Route104_EventScript_1ECF38:: @ 81ECF38
 	msgbox Route104_Text_1EE120, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, Route104_EventScript_1ECE31
+	call_if_eq Route104_EventScript_1ECE31
 	releaseall
 	end
 

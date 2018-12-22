@@ -12,7 +12,7 @@ Route110_MapScript1_1EF27D: @ 81EF27D
 	call Route110_EventScript_271ED7
 	call Route110_EventScript_271EFB
 	compare VAR_CYCLING_CHALLENGE_STATE, 1
-	call_if 1, Route110_EventScript_1EF293
+	call_if_eq Route110_EventScript_1EF293
 	end
 
 Route110_EventScript_1EF293:: @ 81EF293
@@ -380,9 +380,9 @@ Route110_EventScript_1EF76E:: @ 81EF76E
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, Route110_EventScript_1EF7E1
+	call_if_eq Route110_EventScript_1EF7E1
 	compare VAR_RESULT, 1
-	call_if 1, Route110_EventScript_1EF7E6
+	call_if_eq Route110_EventScript_1EF7E6
 	applymovement 28, Route110_Movement_2725AA
 	waitmovement 0
 	applymovement 28, Route110_Movement_272598
@@ -391,11 +391,11 @@ Route110_EventScript_1EF76E:: @ 81EF76E
 	waitmovement 0
 	delay 30
 	compare VAR_0x8008, 1
-	call_if 1, Route110_EventScript_1EF94E
+	call_if_eq Route110_EventScript_1EF94E
 	compare VAR_0x8008, 2
-	call_if 1, Route110_EventScript_1EF959
+	call_if_eq Route110_EventScript_1EF959
 	compare VAR_0x8008, 3
-	call_if 1, Route110_EventScript_1EF964
+	call_if_eq Route110_EventScript_1EF964
 	checkplayergender
 	compare VAR_RESULT, 0
 	goto_if_eq Route110_EventScript_1EF7EB
@@ -479,22 +479,22 @@ Route110_EventScript_1EF8DF:: @ 81EF8DF
 Route110_EventScript_1EF8EC:: @ 81EF8EC
 	closemessage
 	compare VAR_0x8008, 1
-	call_if 1, Route110_EventScript_1EF990
+	call_if_eq Route110_EventScript_1EF990
 	compare VAR_0x8008, 2
-	call_if 1, Route110_EventScript_1EF998
+	call_if_eq Route110_EventScript_1EF998
 	compare VAR_0x8008, 3
-	call_if 1, Route110_EventScript_1EF9A0
+	call_if_eq Route110_EventScript_1EF9A0
 	setobjectmovementtype 28, 10
 	setobjectmovementtype 29, 10
 	removeobject 28
 	addobject 29
 	delay 45
 	compare VAR_0x8008, 1
-	call_if 1, Route110_EventScript_1EF96F
+	call_if_eq Route110_EventScript_1EF96F
 	compare VAR_0x8008, 2
-	call_if 1, Route110_EventScript_1EF97A
+	call_if_eq Route110_EventScript_1EF97A
 	compare VAR_0x8008, 3
-	call_if 1, Route110_EventScript_1EF985
+	call_if_eq Route110_EventScript_1EF985
 	removeobject 29
 	setvar VAR_0x4069, 1
 	savebgm MUS_DUMMY
@@ -621,13 +621,13 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	applymovement 36, Route110_Movement_27259A
 	waitmovement 0
 	compare VAR_0x8008, 1
-	call_if 1, Route110_EventScript_1EFAD8
+	call_if_eq Route110_EventScript_1EFAD8
 	compare VAR_0x8008, 2
-	call_if 1, Route110_EventScript_1EFAE3
+	call_if_eq Route110_EventScript_1EFAE3
 	compare VAR_0x8008, 3
-	call_if 1, Route110_EventScript_1EFAEE
+	call_if_eq Route110_EventScript_1EFAEE
 	compare VAR_0x8008, 4
-	call_if 1, Route110_EventScript_1EFAF9
+	call_if_eq Route110_EventScript_1EFAF9
 	msgbox Route110_Text_1F0AB5, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -652,13 +652,13 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	msgbox Route110_Text_1F0C33, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 1
-	call_if 1, Route110_EventScript_1EFB04
+	call_if_eq Route110_EventScript_1EFB04
 	compare VAR_0x8008, 2
-	call_if 1, Route110_EventScript_1EFB0F
+	call_if_eq Route110_EventScript_1EFB0F
 	compare VAR_0x8008, 3
-	call_if 1, Route110_EventScript_1EFB1A
+	call_if_eq Route110_EventScript_1EFB1A
 	compare VAR_0x8008, 4
-	call_if 1, Route110_EventScript_1EFB25
+	call_if_eq Route110_EventScript_1EFB25
 	removeobject 36
 	setvar VAR_0x40DA, 2
 	releaseall

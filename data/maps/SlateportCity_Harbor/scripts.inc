@@ -6,9 +6,8 @@ SlateportCity_Harbor_MapScript1_20C983: @ 820C983
 	setescapewarp MAP_SLATEPORT_CITY, 255, 28, 13
 	setvar VAR_TEMP_1, 0
 	compare VAR_0x40A0, 1
-	call_if 1, SlateportCity_Harbor_EventScript_20C9A9
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, SlateportCity_Harbor_EventScript_20C9A5
+	call_if_eq SlateportCity_Harbor_EventScript_20C9A9
+	call_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_20C9A5
 	end
 
 SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
@@ -67,13 +66,13 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	setflag FLAG_0x061
 	setflag FLAG_HIDE_LILCOVE_MOTEL_SCOTT
 	compare VAR_0x8008, 0
-	call_if 1, SlateportCity_Harbor_EventScript_20CA89
+	call_if_eq SlateportCity_Harbor_EventScript_20CA89
 	compare VAR_0x8008, 1
-	call_if 1, SlateportCity_Harbor_EventScript_20CA9E
+	call_if_eq SlateportCity_Harbor_EventScript_20CA9E
 	compare VAR_0x8008, 2
-	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
+	call_if_eq SlateportCity_Harbor_EventScript_20CAB3
 	compare VAR_0x8008, 3
-	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
+	call_if_eq SlateportCity_Harbor_EventScript_20CAB3
 	msgbox SlateportCity_Harbor_Text_20D35A, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
@@ -232,9 +231,9 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	delay 30
 	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
 	compare VAR_FACING, 2
-	call_if 1, SlateportCity_Harbor_EventScript_20CC42
+	call_if_eq SlateportCity_Harbor_EventScript_20CC42
 	compare VAR_FACING, 4
-	call_if 1, SlateportCity_Harbor_EventScript_20CC37
+	call_if_eq SlateportCity_Harbor_EventScript_20CC37
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 5
@@ -270,10 +269,8 @@ SlateportCity_Harbor_EventScript_20CC52:: @ 820CC52
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_20CC89
 	setvar VAR_0x8004, 0
-	checkflag FLAG_0x1BE
-	call_if 1, SlateportCity_Harbor_EventScript_20CC93
-	checkflag FLAG_0x1BF
-	call_if 1, SlateportCity_Harbor_EventScript_20CC93
+	call_if_set FLAG_0x1BE, SlateportCity_Harbor_EventScript_20CC93
+	call_if_set FLAG_0x1BF, SlateportCity_Harbor_EventScript_20CC93
 	compare VAR_0x8004, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_20CC89
 	msgbox SlateportCity_Harbor_Text_20D08E, MSGBOX_DEFAULT

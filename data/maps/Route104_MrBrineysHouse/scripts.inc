@@ -5,9 +5,8 @@ Route104_MrBrineysHouse_MapScripts:: @ 8229D2E
 Route104_MrBrineysHouse_MapScript1_229D34: @ 8229D34
 	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
 	compare VAR_0x4090, 1
-	call_if 1, Route104_MrBrineysHouse_EventScript_229D50
-	checkflag FLAG_0x0BC
-	call_if 1, Route104_MrBrineysHouse_EventScript_229D4C
+	call_if_eq Route104_MrBrineysHouse_EventScript_229D50
+	call_if_set FLAG_0x0BC, Route104_MrBrineysHouse_EventScript_229D4C
 	end
 
 Route104_MrBrineysHouse_EventScript_229D4C:: @ 8229D4C
@@ -24,8 +23,7 @@ Route104_MrBrineysHouse_EventScript_229D50:: @ 8229D50
 Route104_MrBrineysHouse_EventScript_229D67:: @ 8229D67
 	lock
 	faceplayer
-	checkflag FLAG_0x093
-	call_if 0, Route104_MrBrineysHouse_EventScript_229D8A
+	call_if_unset FLAG_0x093, Route104_MrBrineysHouse_EventScript_229D8A
 	goto_if_unset FLAG_0x0BD, Route104_MrBrineysHouse_EventScript_229DE1
 	goto_if_unset FLAG_0x095, Route104_MrBrineysHouse_EventScript_229DFA
 	goto Route104_MrBrineysHouse_EventScript_229DAE

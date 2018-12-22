@@ -96,7 +96,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	setflag FLAG_BADGE03_GET
 	addvar VAR_0x4085, 1
 	compare VAR_0x4085, 6
-	call_if 1, MauvilleCity_Gym_EventScript_271E84
+	call_if_eq MauvilleCity_Gym_EventScript_271E84
 	setvar VAR_0x8008, 3
 	call MauvilleCity_Gym_EventScript_271F43
 	special MauvilleGymSpecial3

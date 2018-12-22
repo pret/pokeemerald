@@ -7,7 +7,7 @@ RustboroCity_MapScript1_1E06C8: @ 81E06C8
 	setflag FLAG_VISITED_RUSTBORO_CITY
 	call RustboroCity_EventScript_271ED7
 	compare VAR_0x405A, 6
-	call_if 1, RustboroCity_EventScript_1E0707
+	call_if_eq RustboroCity_EventScript_1E0707
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_0x405A, 6
 	goto_if_eq RustboroCity_EventScript_1E06EC
@@ -485,13 +485,13 @@ RustboroCity_EventScript_1E0B22:: @ 81E0B22
 
 RustboroCity_EventScript_1E0B2E:: @ 81E0B2E
 	compare VAR_TEMP_1, 0
-	call_if 1, RustboroCity_EventScript_1E0B6F
+	call_if_eq RustboroCity_EventScript_1E0B6F
 	compare VAR_TEMP_1, 1
-	call_if 1, RustboroCity_EventScript_1E0B9B
+	call_if_eq RustboroCity_EventScript_1E0B9B
 	compare VAR_TEMP_1, 2
-	call_if 1, RustboroCity_EventScript_1E0BC7
+	call_if_eq RustboroCity_EventScript_1E0BC7
 	compare VAR_TEMP_1, 3
-	call_if 1, RustboroCity_EventScript_1E0BF3
+	call_if_eq RustboroCity_EventScript_1E0BF3
 	setflag FLAG_0x09F
 	setvar VAR_0x405A, 3
 	moveobjectoffscreen 9
@@ -579,19 +579,19 @@ RustboroCity_EventScript_1E0C4F:: @ 81E0C4F
 
 RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	compare VAR_TEMP_1, 0
-	call_if 1, RustboroCity_EventScript_1E0CDC
+	call_if_eq RustboroCity_EventScript_1E0CDC
 	compare VAR_TEMP_1, 1
-	call_if 1, RustboroCity_EventScript_1E0D08
+	call_if_eq RustboroCity_EventScript_1E0D08
 	compare VAR_TEMP_1, 2
-	call_if 1, RustboroCity_EventScript_1E0D34
+	call_if_eq RustboroCity_EventScript_1E0D34
 	compare VAR_TEMP_1, 3
-	call_if 1, RustboroCity_EventScript_1E0D60
+	call_if_eq RustboroCity_EventScript_1E0D60
 	compare VAR_TEMP_1, 4
-	call_if 1, RustboroCity_EventScript_1E0D96
+	call_if_eq RustboroCity_EventScript_1E0D96
 	msgbox RustboroCity_Text_1E194D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
-	call_if 1, RustboroCity_EventScript_1E0CD3
+	call_if_eq RustboroCity_EventScript_1E0CD3
 	msgbox RustboroCity_Text_1E1A21, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_0x090
@@ -669,8 +669,7 @@ RustboroCity_EventScript_1E0D96:: @ 81E0D96
 
 RustboroCity_EventScript_1E0DB8:: @ 81E0DB8
 	lockall
-	checkflag FLAG_0x120
-	call_if 0, RustboroCity_EventScript_1E0DD1
+	call_if_unset FLAG_0x120, RustboroCity_EventScript_1E0DD1
 	applymovement 14, RustboroCity_Movement_27259E
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
@@ -872,7 +871,7 @@ RustboroCity_EventScript_1E1092:: @ 81E1092
 RustboroCity_EventScript_1E10C1:: @ 81E10C1
 	msgbox RustboroCity_Text_1E1CE7, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, RustboroCity_EventScript_1E10D6
+	call_if_eq RustboroCity_EventScript_1E10D6
 	releaseall
 	end
 
@@ -941,7 +940,7 @@ RustboroCity_EventScript_1E1191:: @ 81E1191
 RustboroCity_EventScript_1E11C0:: @ 81E11C0
 	msgbox RustboroCity_Text_1E2002, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
-	call_if 1, RustboroCity_EventScript_1E10D6
+	call_if_eq RustboroCity_EventScript_1E10D6
 	releaseall
 	end
 

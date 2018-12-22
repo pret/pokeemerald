@@ -9,8 +9,7 @@ Route103_MapScript1_1EC399: @ 81EC399
 	end
 
 Route103_MapScript1_1EC3A4: @ 81EC3A4
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, Route103_EventScript_1EC3AE
+	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_1EC3AE
 	end
 
 Route103_EventScript_1EC3AE:: @ 81EC3AE

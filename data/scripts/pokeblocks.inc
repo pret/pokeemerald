@@ -492,7 +492,7 @@ LilycoveCity_ContestLobby_EventScript_293F28: @ 8293F28
 LilycoveCity_ContestLobby_EventScript_293F64: @ 8293F64
 	msgbox LilycoveCity_ContestLobby_Text_2C43FA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_ContestLobby_EventScript_293F85
+	call_if_eq LilycoveCity_ContestLobby_EventScript_293F85
 	msgbox LilycoveCity_ContestLobby_Text_2C451B, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end

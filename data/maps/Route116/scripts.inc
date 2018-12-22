@@ -5,14 +5,13 @@ Route116_MapScripts:: @ 81F2C0C
 	.byte 0
 
 Route116_MapScript1_1F2C1C: @ 81F2C1C
-	checkflag FLAG_0x08F
-	call_if 1, Route116_EventScript_1F2C47
+	call_if_set FLAG_0x08F, Route116_EventScript_1F2C47
 	compare VAR_0x4039, 1
-	call_if 1, Route116_EventScript_273D13
+	call_if_eq Route116_EventScript_273D13
 	compare VAR_0x4037, 5
-	call_if 1, Route116_EventScript_273D1B
+	call_if_eq Route116_EventScript_273D1B
 	compare VAR_0x4037, 6
-	call_if 1, Route116_EventScript_273D1B
+	call_if_eq Route116_EventScript_273D1B
 	end
 
 Route116_EventScript_1F2C47:: @ 81F2C47
@@ -21,9 +20,9 @@ Route116_EventScript_1F2C47:: @ 81F2C47
 
 Route116_MapScript1_1F2C4F: @ 81F2C4F
 	compare VAR_0x4037, 5
-	call_if 1, Route116_EventScript_27395F
+	call_if_eq Route116_EventScript_27395F
 	compare VAR_0x4037, 6
-	call_if 1, Route116_EventScript_273972
+	call_if_eq Route116_EventScript_273972
 	end
 
 Route116_MapScript2_1F2C66: @ 81F2C66
@@ -65,13 +64,13 @@ Route116_EventScript_1F2CBB:: @ 81F2CBB
 	msgbox Route116_Text_1F3521, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, Route116_EventScript_1F2D15
+	call_if_eq Route116_EventScript_1F2D15
 	compare VAR_FACING, 1
-	call_if 1, Route116_EventScript_1F2D15
+	call_if_eq Route116_EventScript_1F2D15
 	compare VAR_FACING, 3
-	call_if 1, Route116_EventScript_1F2D15
+	call_if_eq Route116_EventScript_1F2D15
 	compare VAR_FACING, 4
-	call_if 1, Route116_EventScript_1F2D20
+	call_if_eq Route116_EventScript_1F2D20
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setflag FLAG_0x100
@@ -198,13 +197,13 @@ Route116_EventScript_1F2E1B:: @ 81F2E1B
 Route116_EventScript_1F2E2A:: @ 81F2E2A
 	delay 20
 	compare VAR_FACING, 2
-	call_if 1, Route116_EventScript_1F2E5E
+	call_if_eq Route116_EventScript_1F2E5E
 	compare VAR_FACING, 1
-	call_if 1, Route116_EventScript_1F2E5E
+	call_if_eq Route116_EventScript_1F2E5E
 	compare VAR_FACING, 3
-	call_if 1, Route116_EventScript_1F2E5E
+	call_if_eq Route116_EventScript_1F2E5E
 	compare VAR_FACING, 4
-	call_if 1, Route116_EventScript_1F2E69
+	call_if_eq Route116_EventScript_1F2E69
 	removeobject VAR_LAST_TALKED
 	release
 	end

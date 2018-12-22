@@ -8,10 +8,8 @@ AbandonedShip_Corridors_B1F_MapScript1_237D8F: @ 8237D8F
 	end
 
 AbandonedShip_Corridors_B1F_MapScript1_237D98: @ 8237D98
-	checkflag FLAG_0x0EF
-	call_if 0, AbandonedShip_Corridors_B1F_EventScript_237DAB
-	checkflag FLAG_0x0EF
-	call_if 1, AbandonedShip_Corridors_B1F_EventScript_237DB5
+	call_if_unset FLAG_0x0EF, AbandonedShip_Corridors_B1F_EventScript_237DAB
+	call_if_set FLAG_0x0EF, AbandonedShip_Corridors_B1F_EventScript_237DB5
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_237DAB:: @ 8237DAB

@@ -174,10 +174,8 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
-	checkflag FLAG_0x095
-	call_if 0, DewfordTown_EventScript_1E9790
-	checkflag FLAG_0x095
-	call_if 1, DewfordTown_EventScript_1E9799
+	call_if_unset FLAG_0x095, DewfordTown_EventScript_1E9790
+	call_if_set FLAG_0x095, DewfordTown_EventScript_1E9799
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
 	resetobjectpriority 255, MAP_DEWFORD_TOWN

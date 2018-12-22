@@ -6,10 +6,9 @@ Route111_MapScripts:: @ 81F0CA7
 	.byte 0
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC
-	checkflag FLAG_0x0E4
-	call_if 0, Route111_EventScript_1F0CD1
+	call_if_unset FLAG_0x0E4, Route111_EventScript_1F0CD1
 	compare VAR_0x40CB, 1
-	call_if 1, Route111_EventScript_1F0CE4
+	call_if_eq Route111_EventScript_1F0CE4
 	end
 
 Route111_EventScript_1F0CD1:: @ 81F0CD1
@@ -41,12 +40,11 @@ Route111_EventScript_1F0CE4:: @ 81F0CE4
 Route111_MapScript1_1F0D87: @ 81F0D87
 	setvar VAR_0x40D6, 0
 	special sub_81BE79C
-	checkflag FLAG_0x14E
-	call_if 0, Route111_EventScript_1F0E3C
+	call_if_unset FLAG_0x14E, Route111_EventScript_1F0E3C
 	compare VAR_0x40CB, 1
-	call_if 1, Route111_EventScript_1F0DC2
+	call_if_eq Route111_EventScript_1F0DC2
 	compare VAR_0x40CB, 2
-	call_if 1, Route111_EventScript_1F0E40
+	call_if_eq Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
 	call Route111_EventScript_28CCC7
 	checktrainerflag TRAINER_VICKY
@@ -214,13 +212,13 @@ Route111_EventScript_1F0F45:: @ 81F0F45
 	msgbox gUnknown_08272C5F, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
-	call_if 1, Route111_EventScript_1F0F7C
+	call_if_eq Route111_EventScript_1F0F7C
 	compare VAR_0x8004, 1
-	call_if 1, Route111_EventScript_1F0F87
+	call_if_eq Route111_EventScript_1F0F87
 	compare VAR_0x8004, 2
-	call_if 1, Route111_EventScript_1F0F92
+	call_if_eq Route111_EventScript_1F0F92
 	compare VAR_0x8004, 3
-	call_if 1, Route111_EventScript_1F0F9D
+	call_if_eq Route111_EventScript_1F0F9D
 	releaseall
 	end
 

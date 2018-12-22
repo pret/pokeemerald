@@ -95,9 +95,9 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_202565
+	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202565
 	compare VAR_RESULT, 2
-	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20256C
+	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_20256C
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA

@@ -13,7 +13,7 @@ BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
 	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C919
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C919
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC
 	end
 
@@ -42,7 +42,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BD0A:: @ 824BD0A
 	lockall
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C1BD
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C938
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C938
 	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BFD5
@@ -119,11 +119,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BE4F:: @ 824BE4F
 	setvar VAR_0x8004, 4
 	special CallBattleDomeFunction
 	compare VAR_TEMP_2, 0
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BEB1
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BEB1
 	compare VAR_TEMP_2, 1
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BEC5
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BEC5
 	compare VAR_TEMP_2, 2
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BED9
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BED9
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	delay 60
@@ -166,9 +166,9 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BEE0:: @ 824BEE0
 	applymovement 1, BattleFrontier_BattleDomeBattleRoom_Movement_2725B4
 	waitmovement 0
 	compare VAR_TEMP_2, 0
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BFC3
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BFC3
 	compare VAR_TEMP_2, 1
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24BFCC
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BFCC
 	playse SE_W227B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E
 	delay 60
@@ -573,7 +573,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C4EF:: @ 824C4EF
 
 BattleFrontier_BattleDomeBattleRoom_MapScript1_24C4F0: @ 824C4F0
 	compare VAR_TEMP_9, 1
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C4FC
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C4FC
 	end
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C4FC:: @ 824C4FC
@@ -582,13 +582,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C4FC:: @ 824C4FC
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C502:: @ 824C502
 	compare VAR_TEMP_F, 0
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C52F
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C52F
 	compare VAR_TEMP_F, 1
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C530
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C530
 	compare VAR_TEMP_F, 2
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C594
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C594
 	compare VAR_TEMP_F, 3
-	call_if 1, BattleFrontier_BattleDomeBattleRoom_EventScript_24C652
+	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24C652
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24C52F:: @ 824C52F

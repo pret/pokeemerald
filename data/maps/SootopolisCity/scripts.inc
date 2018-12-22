@@ -7,11 +7,9 @@ SootopolisCity_MapScripts:: @ 81E565C
 	.byte 0
 
 SootopolisCity_MapScript1_1E5676: @ 81E5676
-	checkflag FLAG_0x09E
-	call_if 0, SootopolisCity_EventScript_1E56E5
+	call_if_unset FLAG_0x09E, SootopolisCity_EventScript_1E56E5
 	goto_if_unset FLAG_0x081, SootopolisCity_EventScript_1E5692
-	checkflag FLAG_0x09E
-	call_if 0, SootopolisCity_EventScript_1E5693
+	call_if_unset FLAG_0x09E, SootopolisCity_EventScript_1E5693
 	end
 
 SootopolisCity_EventScript_1E5692:: @ 81E5692
@@ -36,31 +34,31 @@ SootopolisCity_EventScript_1E56E5:: @ 81E56E5
 SootopolisCity_MapScript1_1E56EF: @ 81E56EF
 	setflag FLAG_VISITED_SOOTOPOLIS_CITY
 	compare VAR_0x405E, 1
-	call_if 1, SootopolisCity_EventScript_1E5781
+	call_if_eq SootopolisCity_EventScript_1E5781
 	compare VAR_0x40CA, 1
-	call_if 1, SootopolisCity_EventScript_1E5781
+	call_if_eq SootopolisCity_EventScript_1E5781
 	call SootopolisCity_EventScript_1E5805
 	call SootopolisCity_EventScript_1E57B2
 	compare VAR_0x405E, 1
-	call_if 1, SootopolisCity_EventScript_1E5785
+	call_if_eq SootopolisCity_EventScript_1E5785
 	compare VAR_0x405E, 2
-	call_if 1, SootopolisCity_EventScript_1E5785
+	call_if_eq SootopolisCity_EventScript_1E5785
 	compare VAR_0x405E, 3
-	call_if 1, SootopolisCity_EventScript_1E5785
+	call_if_eq SootopolisCity_EventScript_1E5785
 	compare VAR_0x405E, 4
-	call_if 1, SootopolisCity_EventScript_1E5785
+	call_if_eq SootopolisCity_EventScript_1E5785
 	compare VAR_0x405E, 5
-	call_if 1, SootopolisCity_EventScript_1E5785
+	call_if_eq SootopolisCity_EventScript_1E5785
 	compare VAR_0x405E, 2
-	call_if 1, SootopolisCity_EventScript_1E5842
+	call_if_eq SootopolisCity_EventScript_1E5842
 	compare VAR_0x405E, 3
-	call_if 1, SootopolisCity_EventScript_1E5842
+	call_if_eq SootopolisCity_EventScript_1E5842
 	compare VAR_0x405E, 4
-	call_if 1, SootopolisCity_EventScript_1E585B
+	call_if_eq SootopolisCity_EventScript_1E585B
 	compare VAR_0x405E, 5
-	call_if 1, SootopolisCity_EventScript_1E5871
+	call_if_eq SootopolisCity_EventScript_1E5871
 	compare VAR_0x405E, 6
-	call_if 1, SootopolisCity_EventScript_1E58D3
+	call_if_eq SootopolisCity_EventScript_1E58D3
 	end
 
 SootopolisCity_EventScript_1E5781:: @ 81E5781
@@ -143,11 +141,11 @@ SootopolisCity_EventScript_1E5871:: @ 81E5871
 	setobjectxyperm 16, 33, 35
 	setobjectxyperm 17, 34, 35
 	compare VAR_0x40D8, 0
-	call_if 1, SootopolisCity_EventScript_1E58AF
+	call_if_eq SootopolisCity_EventScript_1E58AF
 	compare VAR_0x40D8, 1
-	call_if 1, SootopolisCity_EventScript_1E58BB
+	call_if_eq SootopolisCity_EventScript_1E58BB
 	compare VAR_0x40D8, 2
-	call_if 1, SootopolisCity_EventScript_1E58C7
+	call_if_eq SootopolisCity_EventScript_1E58C7
 	return
 
 SootopolisCity_EventScript_1E58AF:: @ 81E58AF
@@ -175,9 +173,9 @@ SootopolisCity_MapScript2_1E58DB: @ 81E58DB
 
 SootopolisCity_EventScript_1E58E5:: @ 81E58E5
 	compare VAR_0x40CA, 1
-	call_if 1, SootopolisCity_EventScript_1E58FC
+	call_if_eq SootopolisCity_EventScript_1E58FC
 	compare VAR_0x40CA, 2
-	call_if 1, SootopolisCity_EventScript_1E5901
+	call_if_eq SootopolisCity_EventScript_1E5901
 	end
 
 SootopolisCity_EventScript_1E58FC:: @ 81E58FC
@@ -931,8 +929,7 @@ SootopolisCity_EventScript_1E6166:: @ 81E6166
 	lockall
 	applymovement 7, SootopolisCity_Movement_27259E
 	waitmovement 0
-	checkflag FLAG_0x133
-	call_if 0, SootopolisCity_EventScript_1E61CC
+	call_if_unset FLAG_0x133, SootopolisCity_EventScript_1E61CC
 	compare VAR_0x405E, 2
 	goto_if_eq SootopolisCity_EventScript_1E61AE
 	compare VAR_0x405E, 3
@@ -963,9 +960,9 @@ SootopolisCity_EventScript_1E61CC:: @ 81E61CC
 	msgbox SootopolisCity_Text_1E75CB, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 3
-	call_if 1, SootopolisCity_EventScript_1E6243
+	call_if_eq SootopolisCity_EventScript_1E6243
 	compare VAR_FACING, 2
-	call_if 1, SootopolisCity_EventScript_1E6255
+	call_if_eq SootopolisCity_EventScript_1E6255
 	msgbox SootopolisCity_Text_1E7737, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, SootopolisCity_Movement_1E62D4
@@ -1358,11 +1355,11 @@ SootopolisCity_EventScript_1E646F:: @ 81E646F
 	msgbox SootopolisCity_Text_1E7B86, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, SootopolisCity_EventScript_1E64B2
+	call_if_eq SootopolisCity_EventScript_1E64B2
 	compare VAR_FACING, 4
-	call_if 1, SootopolisCity_EventScript_1E64B2
+	call_if_eq SootopolisCity_EventScript_1E64B2
 	compare VAR_FACING, 3
-	call_if 1, SootopolisCity_EventScript_1E64C5
+	call_if_eq SootopolisCity_EventScript_1E64C5
 	release
 	end
 
