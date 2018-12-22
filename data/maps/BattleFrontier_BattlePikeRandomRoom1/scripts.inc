@@ -146,7 +146,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
+	goto_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
@@ -156,14 +156,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	setvar VAR_0x8004, 12
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
+	goto_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_ME_SYMBOLGET
@@ -181,7 +181,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
+	goto_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 7
@@ -191,14 +191,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	setvar VAR_0x8004, 12
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, MSGBOX_DEFAULT
 	waitmessage
 	playfanfare MUS_ME_SYMBOLGET

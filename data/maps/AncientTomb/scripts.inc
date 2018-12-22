@@ -12,7 +12,7 @@ AncientTomb_MapScript1_238FC3: @ 8238FC3
 AncientTomb_EventScript_238FCD:: @ 8238FCD
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, AncientTomb_EventScript_27374E
+	goto_if_ne AncientTomb_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -42,8 +42,7 @@ AncientTomb_EventScript_238FFC:: @ 8238FFC
 
 AncientTomb_EventScript_239033:: @ 8239033
 	lockall
-	checkflag FLAG_SYS_BRAILLE_FLY
-	goto_eq AncientTomb_EventScript_239046
+	goto_if_set FLAG_SYS_BRAILLE_FLY, AncientTomb_EventScript_239046
 	braillemessage AncientTomb_Braille_2A6D06
 	waitbuttonpress
 	hidebox2
@@ -77,11 +76,11 @@ AncientTomb_EventScript_23905A:: @ 823905A
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq AncientTomb_EventScript_2390A1
+	goto_if_eq AncientTomb_EventScript_2390A1
 	compare VAR_RESULT, 4
-	goto_eq AncientTomb_EventScript_2390AA
+	goto_if_eq AncientTomb_EventScript_2390AA
 	compare VAR_RESULT, 5
-	goto_eq AncientTomb_EventScript_2390AA
+	goto_if_eq AncientTomb_EventScript_2390AA
 	setflag FLAG_0x1BD
 	release
 	end

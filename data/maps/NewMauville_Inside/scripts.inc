@@ -16,7 +16,7 @@ NewMauville_Inside_MapScript1_2373E7: @ 82373E7
 NewMauville_Inside_EventScript_237407:: @ 8237407
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, NewMauville_Inside_EventScript_27374E
+	goto_if_ne NewMauville_Inside_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -172,7 +172,7 @@ NewMauville_Inside_EventScript_23773A:: @ 823773A
 NewMauville_Inside_EventScript_23778F:: @ 823778F
 	lockall
 	compare VAR_0x40BA, 2
-	goto_eq NewMauville_Inside_EventScript_2377A5
+	goto_if_eq NewMauville_Inside_EventScript_2377A5
 	msgbox NewMauville_Inside_Text_237896, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -195,11 +195,11 @@ NewMauville_Inside_EventScript_2377AF:: @ 82377AF
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq NewMauville_Inside_EventScript_2377F3
+	goto_if_eq NewMauville_Inside_EventScript_2377F3
 	compare VAR_RESULT, 4
-	goto_eq NewMauville_Inside_EventScript_2377F3
+	goto_if_eq NewMauville_Inside_EventScript_2377F3
 	compare VAR_RESULT, 5
-	goto_eq NewMauville_Inside_EventScript_2377F3
+	goto_if_eq NewMauville_Inside_EventScript_2377F3
 	setflag FLAG_0x1C1
 	release
 	end
@@ -222,11 +222,11 @@ NewMauville_Inside_EventScript_2377FC:: @ 82377FC
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq NewMauville_Inside_EventScript_237840
+	goto_if_eq NewMauville_Inside_EventScript_237840
 	compare VAR_RESULT, 4
-	goto_eq NewMauville_Inside_EventScript_237840
+	goto_if_eq NewMauville_Inside_EventScript_237840
 	compare VAR_RESULT, 5
-	goto_eq NewMauville_Inside_EventScript_237840
+	goto_if_eq NewMauville_Inside_EventScript_237840
 	setflag FLAG_0x1C2
 	release
 	end
@@ -249,11 +249,11 @@ NewMauville_Inside_EventScript_237849:: @ 8237849
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq NewMauville_Inside_EventScript_23788D
+	goto_if_eq NewMauville_Inside_EventScript_23788D
 	compare VAR_RESULT, 4
-	goto_eq NewMauville_Inside_EventScript_23788D
+	goto_if_eq NewMauville_Inside_EventScript_23788D
 	compare VAR_RESULT, 5
-	goto_eq NewMauville_Inside_EventScript_23788D
+	goto_if_eq NewMauville_Inside_EventScript_23788D
 	setflag FLAG_0x1C3
 	release
 	end

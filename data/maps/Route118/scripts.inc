@@ -28,13 +28,12 @@ Route118_MapScript2_1F3E0A: @ 81F3E0A
 Route118_EventScript_1F3E14:: @ 81F3E14
 	lock
 	faceplayer
-	checkflag FLAG_0x0E3
-	goto_eq Route118_EventScript_1F3E69
+	goto_if_set FLAG_0x0E3, Route118_EventScript_1F3E69
 	msgbox Route118_Text_1F427B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route118_EventScript_1F3E3E
+	goto_if_eq Route118_EventScript_1F3E3E
 	compare VAR_RESULT, 0
-	goto_eq Route118_EventScript_1F3E5F
+	goto_if_eq Route118_EventScript_1F3E5F
 	end
 
 Route118_EventScript_1F3E3E:: @ 81F3E3E
@@ -190,7 +189,7 @@ Route118_EventScript_1F3F87:: @ 81F3F87
 	trainerbattle_single TRAINER_ROSE_1, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route118_EventScript_1F3FD2
+	goto_if_eq Route118_EventScript_1F3FD2
 	msgbox Route118_Text_29D2FA, MSGBOX_DEFAULT
 	release
 	end
@@ -222,7 +221,7 @@ Route118_EventScript_1F4017:: @ 81F4017
 	trainerbattle_single TRAINER_DALTON_1, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route118_EventScript_1F4062
+	goto_if_eq Route118_EventScript_1F4062
 	msgbox Route118_Text_29D6D8, MSGBOX_DEFAULT
 	release
 	end

@@ -6,9 +6,9 @@ SlateportCity_House1_EventScript_209AA5:: @ 8209AA5
 	faceplayer
 	msgbox SlateportCity_House1_Text_209B8E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_House1_EventScript_209AC6
+	goto_if_eq SlateportCity_House1_EventScript_209AC6
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_House1_EventScript_209AE9
+	goto_if_eq SlateportCity_House1_EventScript_209AE9
 	end
 
 SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
@@ -16,9 +16,9 @@ SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
 	special sub_81B94B0
 	waitstate
 	compare VAR_0x8004, 255
-	goto_if 5, SlateportCity_House1_EventScript_209AF3
+	goto_if_ne SlateportCity_House1_EventScript_209AF3
 	compare VAR_0x8004, 255
-	goto_eq SlateportCity_House1_EventScript_209AE9
+	goto_if_eq SlateportCity_House1_EventScript_209AE9
 	end
 
 SlateportCity_House1_EventScript_209AE9:: @ 8209AE9
@@ -29,20 +29,20 @@ SlateportCity_House1_EventScript_209AE9:: @ 8209AE9
 SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, 412
-	goto_eq SlateportCity_House1_EventScript_209B46
+	goto_if_eq SlateportCity_House1_EventScript_209B46
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_House1_EventScript_209B50
+	goto_if_eq SlateportCity_House1_EventScript_209B50
 	specialvar VAR_RESULT, MonOTNameMatchesPlayer
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_House1_EventScript_209B50
+	goto_if_eq SlateportCity_House1_EventScript_209B50
 	msgbox SlateportCity_House1_Text_209C2B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_House1_EventScript_209B5A
+	goto_if_eq SlateportCity_House1_EventScript_209B5A
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_House1_EventScript_209AE9
+	goto_if_eq SlateportCity_House1_EventScript_209AE9
 	end
 
 SlateportCity_House1_EventScript_209B46:: @ 8209B46
@@ -61,7 +61,7 @@ SlateportCity_House1_EventScript_209B5A:: @ 8209B5A
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_House1_EventScript_209B84
+	goto_if_eq SlateportCity_House1_EventScript_209B84
 	msgbox SlateportCity_House1_Text_209D5E, MSGBOX_DEFAULT
 	release
 	end

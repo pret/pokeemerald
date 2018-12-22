@@ -7,7 +7,7 @@ Route130_MapScript1_1F7365: @ 81F7365
 	call_if 4, Route130_EventScript_1F73B5
 	specialvar VAR_RESULT, IsMirageIslandPresent
 	compare VAR_RESULT, 1
-	goto_eq Route130_EventScript_1F73B1
+	goto_if_eq Route130_EventScript_1F73B1
 	setflag FLAG_TEMP_11
 	setflag FLAG_TEMP_12
 	setflag FLAG_TEMP_13

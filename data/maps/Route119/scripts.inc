@@ -11,7 +11,7 @@ Route119_MapScript1_1F442F: @ 81F442F
 Route119_EventScript_1F4439:: @ 81F4439
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, Route119_EventScript_27374E
+	goto_if_ne Route119_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -64,9 +64,9 @@ Route119_EventScript_1F4488:: @ 81F4488
 	delay 30
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq Route119_EventScript_1F450B
+	goto_if_eq Route119_EventScript_1F450B
 	compare VAR_RESULT, 1
-	goto_eq Route119_EventScript_1F4585
+	goto_if_eq Route119_EventScript_1F4585
 	releaseall
 	end
 
@@ -370,7 +370,7 @@ Route119_EventScript_1F4810:: @ 81F4810
 	trainerbattle_single TRAINER_JACKSON_1, Route119_Text_29DC4C, Route119_Text_29DC9F, Route119_EventScript_1F483C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route119_EventScript_1F485B
+	goto_if_eq Route119_EventScript_1F485B
 	msgbox Route119_Text_29DCC6, MSGBOX_DEFAULT
 	release
 	end
@@ -392,7 +392,7 @@ Route119_EventScript_1F4872:: @ 81F4872
 	trainerbattle_single TRAINER_CATHERINE_1, Route119_Text_29DE0F, Route119_Text_29DE5D, Route119_EventScript_1F489E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route119_EventScript_1F48BD
+	goto_if_eq Route119_EventScript_1F48BD
 	msgbox Route119_Text_29DE88, MSGBOX_DEFAULT
 	release
 	end

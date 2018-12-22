@@ -59,8 +59,7 @@ LittlerootTown_MaysHouse_2F_EventScript_29278D:: @ 829278D
 
 LittlerootTown_BrendansHouse_2F_EventScript_292799:: @ 8292799
 LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
-	checkflag FLAG_0x051
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_29283F
+	goto_if_set FLAG_0x051, LittlerootTown_BrendansHouse_2F_EventScript_29283F
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8668, MSGBOX_DEFAULT
 	call LittlerootTown_BrendansHouse_2F_EventScript_292849
 	delay 30
@@ -315,17 +314,15 @@ LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
 	lock
 	faceplayer
 	compare VAR_0x4082, 4
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
 	compare VAR_0x408C, 4
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
-	checkflag FLAG_HAS_MATCH_CALL
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A19
-	checkflag FLAG_0x052
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
+	goto_if_set FLAG_HAS_MATCH_CALL, LittlerootTown_BrendansHouse_1F_EventScript_292A19
+	goto_if_set FLAG_0x052, LittlerootTown_BrendansHouse_1F_EventScript_292A86
 	compare VAR_TEMP_1, 1
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
 	compare VAR_0x4092, 7
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292AB0
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292AB0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A1C, MSGBOX_DEFAULT
 	release
 	end
@@ -336,8 +333,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A0F:: @ 8292A0F
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292A19:: @ 8292A19
-	checkflag FLAG_0x0D8
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A43
+	goto_if_set FLAG_0x0D8, LittlerootTown_BrendansHouse_1F_EventScript_292A43
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7E0E, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -351,17 +347,15 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A19:: @ 8292A19
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292A43:: @ 8292A43
-	checkflag FLAG_BADGE05_GET
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A51
+	goto_if_set FLAG_BADGE05_GET, LittlerootTown_BrendansHouse_1F_EventScript_292A51
 	goto LittlerootTown_BrendansHouse_1F_EventScript_292A86
 
 LittlerootTown_BrendansHouse_1F_EventScript_292A51:: @ 8292A51
-	checkflag FLAG_0x085
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
+	goto_if_set FLAG_0x085, LittlerootTown_BrendansHouse_1F_EventScript_292A86
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D73, MSGBOX_DEFAULT
 	giveitem_std ITEM_AMULET_COIN
 	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_272054
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_272054
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7DBE, MSGBOX_DEFAULT
 	setflag FLAG_0x085
 	release

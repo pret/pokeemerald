@@ -33,9 +33,9 @@ MtChimney_CableCarStation_EventScript_22AC4B:: @ 822AC4B
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_22ACB9, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MtChimney_CableCarStation_EventScript_22AC6C
+	goto_if_eq MtChimney_CableCarStation_EventScript_22AC6C
 	compare VAR_RESULT, 0
-	goto_eq MtChimney_CableCarStation_EventScript_22AC9B
+	goto_if_eq MtChimney_CableCarStation_EventScript_22AC9B
 	end
 
 MtChimney_CableCarStation_EventScript_22AC6C:: @ 822AC6C

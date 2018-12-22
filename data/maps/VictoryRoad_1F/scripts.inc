@@ -85,7 +85,7 @@ VictoryRoad_1F_EventScript_235E35:: @ 8235E35
 	trainerbattle_single TRAINER_WALLY_3, VictoryRoad_1F_Text_236073, VictoryRoad_1F_Text_2360DA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq VictoryRoad_1F_EventScript_235E5C
+	goto_if_eq VictoryRoad_1F_EventScript_235E5C
 	msgbox VictoryRoad_1F_Text_2360FE, MSGBOX_AUTOCLOSE
 	end
 

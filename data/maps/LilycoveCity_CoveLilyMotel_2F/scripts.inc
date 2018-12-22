@@ -10,7 +10,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
 	specialvar VAR_RESULT, sub_80C08E4
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_CoveLilyMotel_2F_EventScript_218702
+	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_218702
 	release
 	end
 
@@ -57,8 +57,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_218744:: @ 8218744
 LilycoveCity_CoveLilyMotel_2F_EventScript_21874D:: @ 821874D
 	lock
 	faceplayer
-	checkflag FLAG_0x1CE
-	goto_eq LilycoveCity_CoveLilyMotel_2F_EventScript_21876A
+	goto_if_set FLAG_0x1CE, LilycoveCity_CoveLilyMotel_2F_EventScript_21876A
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218ACF, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x1CE

@@ -179,7 +179,7 @@ Route128_EventScript_1F6CBE:: @ 81F6CBE
 	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_2A287F, Route128_Text_2A28AB, Route128_EventScript_1F6CEA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route128_EventScript_1F6D09
+	goto_if_eq Route128_EventScript_1F6D09
 	msgbox Route128_Text_2A28D7, MSGBOX_DEFAULT
 	release
 	end
@@ -201,7 +201,7 @@ Route128_EventScript_1F6D20:: @ 81F6D20
 	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_2A2A1F, Route128_Text_2A2A94, Route128_EventScript_1F6D4C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route128_EventScript_1F6D6B
+	goto_if_eq Route128_EventScript_1F6D6B
 	msgbox Route128_Text_2A2AB7, MSGBOX_DEFAULT
 	release
 	end

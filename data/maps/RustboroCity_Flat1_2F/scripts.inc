@@ -6,35 +6,35 @@ RustboroCity_Flat1_2F_EventScript_21513A:: @ 821513A
 	faceplayer
 	specialvar VAR_RESULT, TryBufferWaldaPhrase
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_Flat1_2F_EventScript_21518D
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_21518D
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_Flat1_2F_EventScript_2151AD
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151AD
 
 RustboroCity_Flat1_2F_EventScript_215157:: @ 8215157
 	special DoWaldaNamingScreen
 	waitstate
 	compare VAR_0x8004, 1
-	goto_eq RustboroCity_Flat1_2F_EventScript_2151D7
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151D7
 	compare VAR_0x8004, 2
-	goto_eq RustboroCity_Flat1_2F_EventScript_2151E1
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151E1
 	specialvar VAR_RESULT, TryGetWallpaperWithWaldaPhrase
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_Flat1_2F_EventScript_2151F8
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151F8
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_Flat1_2F_EventScript_215221
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_215221
 	end
 
 RustboroCity_Flat1_2F_EventScript_21518D:: @ 821518D
 	msgbox RustboroCity_Flat1_2F_Text_2152FA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_Flat1_2F_EventScript_2151CD
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151CD
 	msgbox RustboroCity_Flat1_2F_Text_2154AD, MSGBOX_DEFAULT
 	goto RustboroCity_Flat1_2F_EventScript_215157
 
 RustboroCity_Flat1_2F_EventScript_2151AD:: @ 82151AD
 	msgbox RustboroCity_Flat1_2F_Text_215448, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_Flat1_2F_EventScript_2151CD
+	goto_if_eq RustboroCity_Flat1_2F_EventScript_2151CD
 	msgbox RustboroCity_Flat1_2F_Text_2154AD, MSGBOX_DEFAULT
 	goto RustboroCity_Flat1_2F_EventScript_215157
 

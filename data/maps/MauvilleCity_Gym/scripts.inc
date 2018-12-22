@@ -3,8 +3,7 @@ MauvilleCity_Gym_MapScripts:: @ 820DD6E
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_20DD74: @ 820DD74
-	checkflag FLAG_0x4F2
-	goto_eq MauvilleCity_Gym_EventScript_20DEE7
+	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20DEE7
 	switch VAR_0x4093
 	case 0, MauvilleCity_Gym_EventScript_20DDBA
 	case 1, MauvilleCity_Gym_EventScript_20DEAF
@@ -14,8 +13,7 @@ MauvilleCity_Gym_MapScript1_20DD74: @ 820DD74
 	end
 
 MauvilleCity_Gym_EventScript_20DDBA:: @ 820DDBA
-	checkflag FLAG_0x063
-	goto_eq MauvilleCity_Gym_EventScript_20DDC4
+	goto_if_set FLAG_0x063, MauvilleCity_Gym_EventScript_20DDC4
 	end
 
 MauvilleCity_Gym_EventScript_20DDC4:: @ 820DDC4
@@ -79,11 +77,10 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_20E602, MauvilleCity_Gym_Text_20E734, MauvilleCity_Gym_EventScript_20DF2B, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq MauvilleCity_Gym_EventScript_20DFDE
-	checkflag FLAG_0x0A7
-	goto_if 0, MauvilleCity_Gym_EventScript_20DF8D
+	goto_if_eq MauvilleCity_Gym_EventScript_20DFDE
+	goto_if_unset FLAG_0x0A7, MauvilleCity_Gym_EventScript_20DF8D
 	compare VAR_0x40BA, 2
-	goto_eq MauvilleCity_Gym_EventScript_20DFD4
+	goto_if_eq MauvilleCity_Gym_EventScript_20DFD4
 	msgbox MauvilleCity_Gym_Text_20E8E3, MSGBOX_DEFAULT
 	release
 	end
@@ -120,7 +117,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_Gym_EventScript_272054
+	goto_if_eq MauvilleCity_Gym_EventScript_272054
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_0x0A7
 	release
@@ -129,7 +126,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_Gym_EventScript_27205E
+	goto_if_eq MauvilleCity_Gym_EventScript_27205E
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_0x0A7
 	return
@@ -146,10 +143,9 @@ MauvilleCity_Gym_EventScript_20DFDE:: @ 820DFDE
 
 MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 	lockall
-	checkflag FLAG_0x4F2
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 1
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 1
 	setvar VAR_0x8004, 0
 	goto MauvilleCity_Gym_EventScript_20E08D
@@ -157,10 +153,9 @@ MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 
 MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 	lockall
-	checkflag FLAG_0x4F2
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 2
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 2
 	setvar VAR_0x8004, 1
 	goto MauvilleCity_Gym_EventScript_20E08D
@@ -168,10 +163,9 @@ MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 
 MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 	lockall
-	checkflag FLAG_0x4F2
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 3
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 3
 	setvar VAR_0x8004, 2
 	goto MauvilleCity_Gym_EventScript_20E08D
@@ -179,10 +173,9 @@ MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 
 MauvilleCity_Gym_EventScript_20E068:: @ 820E068
 	lockall
-	checkflag FLAG_0x4F2
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 4
-	goto_eq MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 4
 	setvar VAR_0x8004, 3
 	goto MauvilleCity_Gym_EventScript_20E08D
@@ -193,10 +186,8 @@ MauvilleCity_Gym_EventScript_20E08D:: @ 820E08D
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
-	checkflag FLAG_0x063
-	goto_eq MauvilleCity_Gym_EventScript_20E0B4
-	checkflag FLAG_0x063
-	goto_if 0, MauvilleCity_Gym_EventScript_20E0AF
+	goto_if_set FLAG_0x063, MauvilleCity_Gym_EventScript_20E0B4
+	goto_if_unset FLAG_0x063, MauvilleCity_Gym_EventScript_20E0AF
 	releaseall
 	end
 
@@ -242,8 +233,7 @@ MauvilleCity_Gym_EventScript_20E115:: @ 820E115
 MauvilleCity_Gym_EventScript_20E12C:: @ 820E12C
 	lock
 	faceplayer
-	checkflag FLAG_0x4F2
-	goto_eq MauvilleCity_Gym_EventScript_20E141
+	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E141
 	msgbox MauvilleCity_Gym_Text_20E17F, MSGBOX_DEFAULT
 	release
 	end
@@ -255,15 +245,13 @@ MauvilleCity_Gym_EventScript_20E141:: @ 820E141
 
 MauvilleCity_Gym_EventScript_20E14B:: @ 820E14B
 	lockall
-	checkflag FLAG_BADGE03_GET
-	goto_eq MauvilleCity_Gym_EventScript_20E16B
+	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_20E16B
 	goto MauvilleCity_Gym_EventScript_20E175
 	end
 
 MauvilleCity_Gym_EventScript_20E15B:: @ 820E15B
 	lockall
-	checkflag FLAG_BADGE03_GET
-	goto_eq MauvilleCity_Gym_EventScript_20E16B
+	goto_if_set FLAG_BADGE03_GET, MauvilleCity_Gym_EventScript_20E16B
 	goto MauvilleCity_Gym_EventScript_20E175
 	end
 

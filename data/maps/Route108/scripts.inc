@@ -30,7 +30,7 @@ Route108_EventScript_1EE6FD:: @ 81EE6FD
 	trainerbattle_single TRAINER_CORY_1, Route108_Text_296F5D, Route108_Text_296F93, Route108_EventScript_1EE729
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route108_EventScript_1EE748
+	goto_if_eq Route108_EventScript_1EE748
 	msgbox Route108_Text_296FB0, MSGBOX_DEFAULT
 	release
 	end

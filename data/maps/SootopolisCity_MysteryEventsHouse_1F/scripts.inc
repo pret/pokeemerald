@@ -77,9 +77,9 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24:: @ 8227A24
 	setvar VAR_0x8004, 16
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
 	compare VAR_TEMP_1, 1
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227B46, MSGBOX_DEFAULT
 	release
 	end
@@ -94,17 +94,17 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	special BufferEReaderTrainerName
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227BFC, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227CEB, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special LoadPlayerParty
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special SavePlayerParty
 	special ReducePlayerPartyToSelectedMons
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227D21, MSGBOX_DEFAULT

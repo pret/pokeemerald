@@ -11,9 +11,9 @@ VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A: @ 820230A
 VerdanturfTown_BattleTentBattleRoom_EventScript_202310:: @ 8202310
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202328
+	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202328
 	compare VAR_RESULT, 1
-	goto_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202333
+	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202333
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202328:: @ 8202328
@@ -38,7 +38,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	goto_if_ne VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	setvar VAR_0x8004, 3

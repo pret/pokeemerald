@@ -74,7 +74,7 @@ Route121_EventScript_1F5E8B:: @ 81F5E8B
 	trainerbattle_single TRAINER_WALTER_1, Route121_Text_29F199, Route121_Text_29F20D, Route121_EventScript_1F5EB7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route121_EventScript_1F5ED6
+	goto_if_eq Route121_EventScript_1F5ED6
 	msgbox Route121_Text_29F21E, MSGBOX_DEFAULT
 	release
 	end
@@ -111,7 +111,7 @@ Route121_EventScript_1F5F3A:: @ 81F5F3A
 	trainerbattle_single TRAINER_JESSICA_1, Route121_Text_29F612, Route121_Text_29F641, Route121_EventScript_1F5F66
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route121_EventScript_1F5F85
+	goto_if_eq Route121_EventScript_1F5F85
 	msgbox Route121_Text_29F66F, MSGBOX_DEFAULT
 	release
 	end
@@ -153,7 +153,7 @@ Route121_EventScript_1F5FF8:: @ 81F5FF8
 	trainerbattle_single TRAINER_CRISTIN_1, Route121_Text_29F770, Route121_Text_29F7C1, Route121_EventScript_1F6024
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route121_EventScript_1F6043
+	goto_if_eq Route121_EventScript_1F6043
 	msgbox Route121_Text_29F7D4, MSGBOX_DEFAULT
 	release
 	end

@@ -51,11 +51,10 @@ SafariZone_South_EventScript_23D2DC:: @ 823D2DC
 SafariZone_South_EventScript_23D2E5:: @ 823D2E5
 	lock
 	faceplayer
-	checkflag FLAG_0x05D
-	goto_if 0, SafariZone_South_EventScript_23D30D
+	goto_if_unset FLAG_0x05D, SafariZone_South_EventScript_23D30D
 	msgbox SafariZone_South_Text_2A51D4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SafariZone_South_EventScript_23D31A
+	goto_if_eq SafariZone_South_EventScript_23D31A
 	msgbox SafariZone_South_Text_2A521A, MSGBOX_DEFAULT
 	release
 	end

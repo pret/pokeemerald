@@ -62,7 +62,7 @@ BattleFrontier_BattleDomeLobby_EventScript_24989B:: @ 824989B
 	setvar VAR_0x8004, 10
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2498C1
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_2498C1
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A4E9, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_2498C9
 
@@ -128,7 +128,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
 	waitse
 	call BattleFrontier_BattleDomeLobby_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
 	message BattleFrontier_BattleDomeLobby_Text_24AE17
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
@@ -210,7 +210,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
@@ -223,7 +223,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C61
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C61
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A1C6, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_249C61
@@ -251,7 +251,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	call BattleFrontier_BattleDomeLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C4A
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C4A
 	setvar VAR_0x8004, 22
 	special CallBattleDomeFunction
 

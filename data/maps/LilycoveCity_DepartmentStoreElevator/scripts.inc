@@ -61,7 +61,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220718:: @ 8220718
 	setvar VAR_0x8006, 4
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F, 255, 2, 1
 	compare VAR_DEPT_STORE_FLOOR, 4
-	goto_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
+	goto_if_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
 	call LilycoveCity_DepartmentStoreElevator_EventScript_2207E5
 	setvar VAR_DEPT_STORE_FLOOR, 4
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
@@ -71,7 +71,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220740:: @ 8220740
 	setvar VAR_0x8006, 5
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F, 255, 2, 1
 	compare VAR_DEPT_STORE_FLOOR, 5
-	goto_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
+	goto_if_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
 	call LilycoveCity_DepartmentStoreElevator_EventScript_2207E5
 	setvar VAR_DEPT_STORE_FLOOR, 5
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
@@ -81,7 +81,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220768:: @ 8220768
 	setvar VAR_0x8006, 6
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F, 255, 2, 1
 	compare VAR_DEPT_STORE_FLOOR, 6
-	goto_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
+	goto_if_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
 	call LilycoveCity_DepartmentStoreElevator_EventScript_2207E5
 	setvar VAR_DEPT_STORE_FLOOR, 6
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
@@ -91,7 +91,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_220790:: @ 8220790
 	setvar VAR_0x8006, 7
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F, 255, 2, 1
 	compare VAR_DEPT_STORE_FLOOR, 7
-	goto_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
+	goto_if_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
 	call LilycoveCity_DepartmentStoreElevator_EventScript_2207E5
 	setvar VAR_DEPT_STORE_FLOOR, 7
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
@@ -101,7 +101,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2207B8:: @ 82207B8
 	setvar VAR_0x8006, 8
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F, 255, 2, 1
 	compare VAR_DEPT_STORE_FLOOR, 8
-	goto_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
+	goto_if_eq LilycoveCity_DepartmentStoreElevator_EventScript_2207E0
 	call LilycoveCity_DepartmentStoreElevator_EventScript_2207E5
 	setvar VAR_DEPT_STORE_FLOOR, 8
 	goto LilycoveCity_DepartmentStoreElevator_EventScript_2207E0

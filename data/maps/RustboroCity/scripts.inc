@@ -10,12 +10,12 @@ RustboroCity_MapScript1_1E06C8: @ 81E06C8
 	call_if 1, RustboroCity_EventScript_1E0707
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_0x405A, 6
-	goto_eq RustboroCity_EventScript_1E06EC
+	goto_if_eq RustboroCity_EventScript_1E06EC
 	end
 
 RustboroCity_EventScript_1E06EC:: @ 81E06EC
 	compare VAR_TEMP_0, 11
-	goto_eq RustboroCity_EventScript_1E06FF
+	goto_if_eq RustboroCity_EventScript_1E06FF
 	setobjectxyperm 15, 12, 15
 	end
 
@@ -134,8 +134,7 @@ RustboroCity_Movement_1E085D: @ 81E085D
 RustboroCity_EventScript_1E085F:: @ 81E085F
 	lock
 	faceplayer
-	checkflag FLAG_0x08E
-	goto_eq RustboroCity_EventScript_1E0874
+	goto_if_set FLAG_0x08E, RustboroCity_EventScript_1E0874
 	msgbox RustboroCity_Text_1E123F, MSGBOX_DEFAULT
 	release
 	end
@@ -159,8 +158,7 @@ RustboroCity_EventScript_1E088A:: @ 81E088A
 RustboroCity_EventScript_1E0893:: @ 81E0893
 	lock
 	faceplayer
-	checkflag FLAG_BADGE01_GET
-	goto_eq RustboroCity_EventScript_1E08A8
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_EventScript_1E08A8
 	msgbox RustboroCity_Text_1E130D, MSGBOX_DEFAULT
 	release
 	end
@@ -173,8 +171,7 @@ RustboroCity_EventScript_1E08A8:: @ 81E08A8
 RustboroCity_EventScript_1E08B2:: @ 81E08B2
 	lock
 	faceplayer
-	checkflag FLAG_0x0BC
-	goto_eq RustboroCity_EventScript_1E08C7
+	goto_if_set FLAG_0x0BC, RustboroCity_EventScript_1E08C7
 	msgbox RustboroCity_Text_1E1520, MSGBOX_DEFAULT
 	release
 	end
@@ -451,8 +448,7 @@ RustboroCity_Movement_1E0AD5: @ 81E0AD5
 RustboroCity_EventScript_1E0ADD:: @ 81E0ADD
 	lock
 	faceplayer
-	checkflag FLAG_0x08F
-	goto_eq RustboroCity_EventScript_1E0AF2
+	goto_if_set FLAG_0x08F, RustboroCity_EventScript_1E0AF2
 	msgbox RustboroCity_Text_1E1904, MSGBOX_DEFAULT
 	release
 	end
@@ -683,9 +679,9 @@ Route104_EventScript_1E0DD1:: @ 81E0DD1
 RustboroCity_EventScript_1E0DD1:: @ 81E0DD1
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_EventScript_1E0DE9
+	goto_if_eq RustboroCity_EventScript_1E0DE9
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_1E0DEE
+	goto_if_eq RustboroCity_EventScript_1E0DEE
 	return
 
 RustboroCity_EventScript_1E0DE9:: @ 81E0DE9
@@ -827,16 +823,14 @@ RustboroCity_EventScript_1E0FB3:: @ 81E0FB3
 RustboroCity_EventScript_1E0FF3:: @ 81E0FF3
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_EventScript_1E100B
+	goto_if_eq RustboroCity_EventScript_1E100B
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_1E1114
+	goto_if_eq RustboroCity_EventScript_1E1114
 	end
 
 RustboroCity_EventScript_1E100B:: @ 81E100B
-	checkflag FLAG_0x0D3
-	goto_eq RustboroCity_EventScript_1E10C1
-	checkflag FLAG_0x120
-	goto_eq RustboroCity_EventScript_1E1070
+	goto_if_set FLAG_0x0D3, RustboroCity_EventScript_1E10C1
+	goto_if_set FLAG_0x120, RustboroCity_EventScript_1E1070
 	setflag FLAG_0x120
 	msgbox RustboroCity_Text_1E1A49, MSGBOX_DEFAULT
 	closemessage
@@ -852,7 +846,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	setvar VAR_0x8008, 0
 	msgbox RustboroCity_Text_1E1AFA, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_1E1092
+	goto_if_eq RustboroCity_EventScript_1E1092
 	msgbox RustboroCity_Text_1E1BD3, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_1E10D6
 	releaseall
@@ -862,7 +856,7 @@ RustboroCity_EventScript_1E1070:: @ 81E1070
 	setvar VAR_0x8008, 1
 	msgbox RustboroCity_Text_1E1C48, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_1E1092
+	goto_if_eq RustboroCity_EventScript_1E1092
 	msgbox RustboroCity_Text_1E1BD3, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -906,10 +900,8 @@ RustboroCity_EventScript_1E1101:: @ 81E1101
 	end
 
 RustboroCity_EventScript_1E1114:: @ 81E1114
-	checkflag FLAG_0x0D3
-	goto_eq RustboroCity_EventScript_1E11C0
-	checkflag FLAG_0x120
-	goto_eq RustboroCity_EventScript_1E1174
+	goto_if_set FLAG_0x0D3, RustboroCity_EventScript_1E11C0
+	goto_if_set FLAG_0x120, RustboroCity_EventScript_1E1174
 	setflag FLAG_0x120
 	msgbox RustboroCity_Text_1E1D7D, MSGBOX_DEFAULT
 	closemessage
@@ -924,7 +916,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	setvar VAR_0x4063, 2
 	msgbox RustboroCity_Text_1E1E34, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_1E1191
+	goto_if_eq RustboroCity_EventScript_1E1191
 	msgbox RustboroCity_Text_1E1F2F, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_1E10D6
 	releaseall
@@ -933,7 +925,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 RustboroCity_EventScript_1E1174:: @ 81E1174
 	msgbox RustboroCity_Text_1E1F76, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_1E1191
+	goto_if_eq RustboroCity_EventScript_1E1191
 	msgbox RustboroCity_Text_1E1F2F, MSGBOX_DEFAULT
 	releaseall
 	end

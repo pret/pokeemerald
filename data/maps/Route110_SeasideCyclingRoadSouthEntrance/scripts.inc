@@ -26,7 +26,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBD0:: @ 826EBD0
 	compare VAR_RESULT, 2
 	call_if 1, Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBF6
 	compare VAR_RESULT, 0
-	goto_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBFC
+	goto_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBFC
 	setflag FLAG_SYS_CYCLING_ROAD
 	setvar VAR_TEMP_1, 1
 	releaseall

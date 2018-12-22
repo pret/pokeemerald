@@ -56,7 +56,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25849B:: @ 825849B
 	setvar VAR_0x8004, 10
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_2584BD
+	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_2584BD
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattleFactoryLobby_EventScript_2584C6
@@ -103,7 +103,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258506:: @ 8258506
 BattleFrontier_BattleFactoryLobby_EventScript_25853B:: @ 825853B
 	call BattleFrontier_BattleFactoryLobby_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_258582
+	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_258582
 	message BattleFrontier_BattleFactoryLobby_Text_259388
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
@@ -211,7 +211,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	call BattleFrontier_BattleFactoryLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_258783
+	goto_if_eq BattleFrontier_BattleFactoryLobby_EventScript_258783
 	setvar VAR_0x8006, 0
 
 BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A

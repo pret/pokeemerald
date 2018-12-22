@@ -134,7 +134,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 	setvar VAR_0x8004, 1
 	special sub_81B99B4
 	compare VAR_RESULT, 0
-	goto_if 5, VerdanturfTown_BattleTentLobby_EventScript_2017EE
+	goto_if_ne VerdanturfTown_BattleTentLobby_EventScript_2017EE
 	special SavePlayerParty
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C50C3, MSGBOX_DEFAULT
 
@@ -155,7 +155,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq VerdanturfTown_BattleTentLobby_EventScript_2019E8
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_2019E8
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
@@ -167,7 +167,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201A34
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_201A34
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5662, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_201A34
@@ -195,7 +195,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	call VerdanturfTown_BattleTentLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
 
 VerdanturfTown_BattleTentLobby_EventScript_2019AE:: @ 82019AE
 	special SavePlayerParty
@@ -277,12 +277,11 @@ VerdanturfTown_BattleTentLobby_Movement_201A77: @ 8201A77
 VerdanturfTown_BattleTentLobby_EventScript_201A7B:: @ 8201A7B
 	lock
 	faceplayer
-	checkflag FLAG_0x0EB
-	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201AB2
+	goto_if_set FLAG_0x0EB, VerdanturfTown_BattleTentLobby_EventScript_201AB2
 	msgbox VerdanturfTown_BattleTentLobby_Text_201D9E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM45
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_BattleTentLobby_EventScript_272054
+	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_272054
 	setflag FLAG_0x0EB
 	msgbox VerdanturfTown_BattleTentLobby_Text_201E43, MSGBOX_DEFAULT
 	release
@@ -306,8 +305,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201AC5:: @ 8201AC5
 VerdanturfTown_BattleTentLobby_EventScript_201AD0:: @ 8201AD0
 	lock
 	faceplayer
-	checkflag FLAG_0x1CC
-	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201AED
+	goto_if_set FLAG_0x1CC, VerdanturfTown_BattleTentLobby_EventScript_201AED
 	msgbox VerdanturfTown_BattleTentLobby_Text_201F3F, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x1CC

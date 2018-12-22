@@ -19,7 +19,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
 LittlerootTown_MaysHouse_1F_EventScript_1F88DD:: @ 81F88DD
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
+	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
@@ -118,12 +118,10 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F89F3:: @ 81F89F3
 LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	lock
 	faceplayer
-	checkflag FLAG_0x082
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
-	checkflag FLAG_SYS_POKEMON_GET
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
+	goto_if_set FLAG_0x082, LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
+	goto_if_set FLAG_SYS_POKEMON_GET, LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
 	compare VAR_0x408D, 3
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, MSGBOX_DEFAULT
 	release

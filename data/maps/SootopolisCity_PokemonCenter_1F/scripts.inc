@@ -19,9 +19,8 @@ SootopolisCity_PokemonCenter_1F_EventScript_22650E:: @ 822650E
 	lock
 	faceplayer
 	compare VAR_0x40CA, 2
-	goto_if 4, SootopolisCity_PokemonCenter_1F_EventScript_22652E
-	checkflag FLAG_0x081
-	goto_if 0, SootopolisCity_PokemonCenter_1F_EventScript_22652E
+	goto_if_ge SootopolisCity_PokemonCenter_1F_EventScript_22652E
+	goto_if_unset FLAG_0x081, SootopolisCity_PokemonCenter_1F_EventScript_22652E
 	msgbox SootopolisCity_PokemonCenter_1F_Text_22664B, MSGBOX_DEFAULT
 	release
 	end
@@ -35,9 +34,8 @@ SootopolisCity_PokemonCenter_1F_EventScript_226538:: @ 8226538
 	lock
 	faceplayer
 	compare VAR_0x40CA, 2
-	goto_if 4, SootopolisCity_PokemonCenter_1F_EventScript_226558
-	checkflag FLAG_0x081
-	goto_if 0, SootopolisCity_PokemonCenter_1F_EventScript_226558
+	goto_if_ge SootopolisCity_PokemonCenter_1F_EventScript_226558
+	goto_if_unset FLAG_0x081, SootopolisCity_PokemonCenter_1F_EventScript_226558
 	msgbox SootopolisCity_PokemonCenter_1F_Text_22672F, MSGBOX_DEFAULT
 	release
 	end

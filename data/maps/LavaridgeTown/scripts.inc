@@ -24,7 +24,7 @@ LavaridgeTown_EventScript_1EA514:: @ 81EA514
 LavaridgeTown_EventScript_1EA518:: @ 81EA518
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 9
-	goto_eq LavaridgeTown_EventScript_1EA529
+	goto_if_eq LavaridgeTown_EventScript_1EA529
 	return
 
 LavaridgeTown_EventScript_1EA529:: @ 81EA529
@@ -65,9 +65,9 @@ LavaridgeTown_EventScript_1EA551:: @ 81EA551
 	call_if 5, LavaridgeTown_EventScript_1EA6AC
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_EventScript_1EA5B5
+	goto_if_eq LavaridgeTown_EventScript_1EA5B5
 	compare VAR_RESULT, 1
-	goto_eq LavaridgeTown_EventScript_1EA5DA
+	goto_if_eq LavaridgeTown_EventScript_1EA5DA
 	end
 
 LavaridgeTown_EventScript_1EA5B5:: @ 81EA5B5
@@ -214,7 +214,7 @@ LavaridgeTown_Movement_1EA6F8: @ 81EA6F8
 LavaridgeTown_EventScript_1EA6FA:: @ 81EA6FA
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 	compare VAR_RESULT, 1
-	goto_eq LavaridgeTown_EventScript_1EA70B
+	goto_if_eq LavaridgeTown_EventScript_1EA70B
 	end
 
 LavaridgeTown_EventScript_1EA70B:: @ 81EA70B
@@ -248,14 +248,13 @@ LavaridgeTown_EventScript_1EA73B:: @ 81EA73B
 LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	lock
 	faceplayer
-	checkflag FLAG_0x10A
-	goto_eq LavaridgeTown_EventScript_1EA787
+	goto_if_set FLAG_0x10A, LavaridgeTown_EventScript_1EA787
 	msgbox LavaridgeTown_Text_1EAB80, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_EventScript_1EA79B
+	goto_if_eq LavaridgeTown_EventScript_1EA79B
 	getpartysize
 	compare VAR_RESULT, 6
-	goto_eq LavaridgeTown_EventScript_1EA791
+	goto_if_eq LavaridgeTown_EventScript_1EA791
 	msgbox LavaridgeTown_Text_1EACC0, MSGBOX_DEFAULT
 	setflag FLAG_0x10A
 	playfanfare MUS_FANFA4

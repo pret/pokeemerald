@@ -38,7 +38,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223DBF:: @ 8223DBF
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2243A4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223E09
+	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_223E09
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2243FE, MSGBOX_DEFAULT
 	closemessage
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_223E07
@@ -97,12 +97,11 @@ MossdeepCity_SpaceCenter_2F_Movement_223E89: @ 8223E89
 MossdeepCity_SpaceCenter_2F_EventScript_223E8D:: @ 8223E8D
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223EB4
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_223EB4
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223EBE
+	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_223EBE
 	compare VAR_0x405D, 2
-	goto_if 0, MossdeepCity_SpaceCenter_2F_EventScript_223EB4
+	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_223EB4
 	goto MossdeepCity_SpaceCenter_2F_EventScript_223EBE
 	end
 
@@ -119,12 +118,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_223EBE:: @ 8223EBE
 MossdeepCity_SpaceCenter_2F_EventScript_223EC8:: @ 8223EC8
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223EEF
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_223EEF
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223EF9
+	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_223EF9
 	compare VAR_0x405D, 2
-	goto_if 0, MossdeepCity_SpaceCenter_2F_EventScript_223EEF
+	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_223EEF
 	goto MossdeepCity_SpaceCenter_2F_EventScript_223EF9
 	end
 
@@ -141,12 +139,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_223EF9:: @ 8223EF9
 MossdeepCity_SpaceCenter_2F_EventScript_223F03:: @ 8223F03
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223F2A
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_223F2A
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223F34
+	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_223F34
 	compare VAR_0x405D, 2
-	goto_if 0, MossdeepCity_SpaceCenter_2F_EventScript_223F2A
+	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_223F2A
 	goto MossdeepCity_SpaceCenter_2F_EventScript_223F34
 	end
 
@@ -189,8 +186,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F6F:: @ 8223F6F
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F7A:: @ 8223F7A
 	lockall
-	checkflag FLAG_0x0CD
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_223FDA
+	goto_if_set FLAG_0x0CD, MossdeepCity_SpaceCenter_2F_EventScript_223FDA
 	setflag FLAG_0x0CD
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2246B2, MSGBOX_DEFAULT
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2246F0, MSGBOX_DEFAULT
@@ -239,7 +235,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2247FF, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MossdeepCity_SpaceCenter_2F_EventScript_22400C
+	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_22400C
 	msgbox MossdeepCity_SpaceCenter_2F_Text_224854, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725AA
@@ -255,7 +251,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_22400C:: @ 822400C
 	special sub_80F9438
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if 5, MossdeepCity_SpaceCenter_2F_EventScript_224032
+	goto_if_ne MossdeepCity_SpaceCenter_2F_EventScript_224032
 	special LoadPlayerParty
 	goto MossdeepCity_SpaceCenter_2F_EventScript_223FDA
 

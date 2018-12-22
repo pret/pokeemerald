@@ -221,8 +221,7 @@ MeteorFalls_1F_1R_Movement_22BF1D: @ 822BF1D
 MeteorFalls_1F_1R_EventScript_22BF25:: @ 822BF25
 	lock
 	faceplayer
-	checkflag FLAG_0x0F4
-	goto_eq MeteorFalls_1F_1R_EventScript_22BF3D
+	goto_if_set FLAG_0x0F4, MeteorFalls_1F_1R_EventScript_22BF3D
 	setflag FLAG_0x0F4
 	msgbox MeteorFalls_1F_1R_Text_22C342, MSGBOX_DEFAULT
 	release

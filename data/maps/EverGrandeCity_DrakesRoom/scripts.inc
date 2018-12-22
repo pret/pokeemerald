@@ -41,8 +41,7 @@ EverGrandeCity_DrakesRoom_EventScript_2286ED:: @ 82286ED
 EverGrandeCity_DrakesRoom_EventScript_2286F3:: @ 82286F3
 	lock
 	faceplayer
-	checkflag FLAG_0x4FE
-	goto_eq EverGrandeCity_DrakesRoom_EventScript_22871A
+	goto_if_set FLAG_0x4FE, EverGrandeCity_DrakesRoom_EventScript_22871A
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_22873E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_228895

@@ -28,27 +28,26 @@ EventScript_Apprentice:: @ 82B688D
 	setvar VAR_0x8004, 0
 	special CallApprenticeFunction
 	compare VAR_RESULT, 0
-	goto_eq Script_Apprentice_FirstMeeting
+	goto_if_eq Script_Apprentice_FirstMeeting
 	setvar VAR_0x8004, 10
 	special CallApprenticeFunction
 	compare VAR_0x8004, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B68BE
-	checkflag FLAG_0x934
-	goto_eq Script_Apprentice_ReleaseAndEnd
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B68BE
+	goto_if_set FLAG_0x934, Script_Apprentice_ReleaseAndEnd
 
 BattleFrontier_BattleTowerLobby_EventScript_2B68BE:
 	setvar VAR_0x8004, 11
 	special CallApprenticeFunction
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B69D3
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B69D3
 	compare VAR_RESULT, 4
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6ACF
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6ACF
 	compare VAR_RESULT, 3
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C77
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C77
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6D5C
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6D5C
 	compare VAR_RESULT, 5
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6DD4
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6DD4
 	release
 	releaseall
 	end
@@ -60,7 +59,7 @@ Script_Apprentice_FirstMeeting:
 Script_Apprentice_FirstMeetingNag:
 	apprentice_menu APPRENTICE_ASK_YES_NO
 	compare VAR_RESULT, 1
-	goto_eq Script_Apprentice_FirstMeetingAskAgain
+	goto_if_eq Script_Apprentice_FirstMeetingAskAgain
 	apprentice_msg FALSE, 2
 	apprentice_menu APPRENTICE_ASK_WHICH_LEVEL
 	setvar VAR_0x8004, 1
@@ -151,11 +150,11 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B09:
 	special CallApprenticeFunction
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B81
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B81
 	setvar VAR_0x8004, 20
 	special CallApprenticeFunction
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C0C
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C0C
 	apprentice_buff 0, APPRENTICE_BUFF_ITEM
 	apprentice_msg TRUE, 12
 	setvar VAR_0x8004, 5
@@ -178,7 +177,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B81:
 	setvar VAR_0x8004, 15
 	special CallApprenticeFunction
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6BD4:
 	apprentice_msg TRUE, 14
@@ -203,7 +202,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C0C:
 	setvar VAR_0x8004, 15
 	special CallApprenticeFunction
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
 	goto BattleFrontier_BattleTowerLobby_EventScript_2B6BD4
 	end
 
@@ -297,7 +296,7 @@ Script_Apprentice_LeaveGoRight:
 	setvar VAR_0x8004, 24
 	special CallApprenticeFunction
 	compare VAR_0x8004, 0
-	goto_eq Script_Apprentice_End
+	goto_if_eq Script_Apprentice_End
 	applymovement 6, BattleFrontier_BattleTowerLobby_Movement_2B6E94
 	waitmovement 0
 	end
@@ -306,7 +305,7 @@ Script_Apprentice_Leave:
 	setvar VAR_0x8004, 24
 	special CallApprenticeFunction
 	compare VAR_0x8004, 0
-	goto_eq Script_Apprentice_End
+	goto_if_eq Script_Apprentice_End
 	applymovement 6, BattleFrontier_BattleTowerLobby_Movement_2B6E95
 	waitmovement 0
 	end

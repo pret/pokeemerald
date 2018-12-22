@@ -36,14 +36,13 @@ Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 Route114_FossilManiacsTunnel_EventScript_22AF87:: @ 822AF87
 	lock
 	faceplayer
-	checkflag FLAG_0x10B
-	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFC6
+	goto_if_set FLAG_0x10B, Route114_FossilManiacsTunnel_EventScript_22AFC6
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
+	goto_if_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
 	checkitem ITEM_CLAW_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
+	goto_if_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
 	msgbox Route114_FossilManiacsTunnel_Text_22AFD0, MSGBOX_DEFAULT
 	release
 	end

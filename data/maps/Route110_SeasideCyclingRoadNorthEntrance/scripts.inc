@@ -12,7 +12,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_26EA84:: @ 826EA84
 	lockall
 	specialvar VAR_RESULT, GetPlayerAvatarBike
 	compare VAR_RESULT, 0
-	goto_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_26EA9F
+	goto_if_eq Route110_SeasideCyclingRoadNorthEntrance_EventScript_26EA9F
 	setflag FLAG_SYS_CYCLING_ROAD
 	setvar VAR_TEMP_1, 1
 	releaseall

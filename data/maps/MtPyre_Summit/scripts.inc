@@ -131,8 +131,7 @@ MtPyre_Summit_Movement_232139: @ 8232139
 MtPyre_Summit_EventScript_23213C:: @ 823213C
 	lock
 	faceplayer
-	checkflag FLAG_0x09E
-	goto_eq MtPyre_Summit_EventScript_232167
+	goto_if_set FLAG_0x09E, MtPyre_Summit_EventScript_232167
 	msgbox MtPyre_Summit_Text_232E0C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if 1, MtPyre_Summit_EventScript_232187
@@ -165,12 +164,10 @@ MtPyre_Summit_EventScript_232199:: @ 8232199
 MtPyre_Summit_EventScript_2321A2:: @ 82321A2
 	lock
 	faceplayer
-	checkflag FLAG_0x103
-	goto_eq MtPyre_Summit_EventScript_2321E2
+	goto_if_set FLAG_0x103, MtPyre_Summit_EventScript_2321E2
 	compare VAR_0x40B9, 3
 	call_if 4, MtPyre_Summit_EventScript_2321CB
-	checkflag FLAG_0x081
-	goto_eq MtPyre_Summit_EventScript_2321D8
+	goto_if_set FLAG_0x081, MtPyre_Summit_EventScript_2321D8
 	msgbox MtPyre_Summit_Text_232AD8, MSGBOX_DEFAULT
 	release
 	end

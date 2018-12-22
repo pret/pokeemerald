@@ -56,7 +56,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D0C:: @ 8238D0C
 AbandonedShip_HiddenFloorRooms_EventScript_238D0D:: @ 8238D0D
 	specialvar VAR_RESULT, FoundAbandonedShipRoom1Key
 	compare VAR_RESULT, 1
-	goto_eq AbandonedShip_HiddenFloorRooms_EventScript_238D32
+	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238D32
 	delay 20
 	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DB3

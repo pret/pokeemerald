@@ -83,7 +83,7 @@ LinkContestRoom1_EventScript_23B842:: @ 823B842
 	call LinkContestRoom1_EventScript_23B8F8
 	call LinkContestRoom1_EventScript_23B858
 	compare VAR_TEMP_0, 8
-	goto_if 0, LinkContestRoom1_EventScript_23B842
+	goto_if_lt LinkContestRoom1_EventScript_23B842
 	return
 
 LinkContestRoom1_EventScript_23B858:: @ 823B858
@@ -302,7 +302,7 @@ LinkContestRoom1_EventScript_23BB25:: @ 823BB25
 LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
 	specialvar VAR_RESULT, sub_80F9160
 	compare VAR_RESULT, 1
-	goto_eq LinkContestRoom1_EventScript_23BD86
+	goto_if_eq LinkContestRoom1_EventScript_23BD86
 	switch VAR_0x4088
 	case 1, LinkContestRoom1_EventScript_23BB78
 	case 2, LinkContestRoom1_EventScript_23BB8B
@@ -443,9 +443,9 @@ LinkContestRoom1_EventScript_23BEAC:: @ 823BEAC
 LilycoveCity_ContestLobby_EventScript_23BEB6:: @ 823BEB6
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_23BECE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_23BECE
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_23BED4
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_23BED4
 	return
 
 LilycoveCity_ContestLobby_EventScript_23BECE:: @ 823BECE

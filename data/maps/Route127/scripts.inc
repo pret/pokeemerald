@@ -65,7 +65,7 @@ Route127_EventScript_1F6AD6:: @ 81F6AD6
 	trainerbattle_single TRAINER_KOJI_1, Route127_Text_2A264D, Route127_Text_2A2685, Route127_EventScript_1F6B02
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route127_EventScript_1F6B21
+	goto_if_eq Route127_EventScript_1F6B21
 	msgbox Route127_Text_2A26AC, MSGBOX_DEFAULT
 	release
 	end

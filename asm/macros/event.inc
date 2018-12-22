@@ -1557,8 +1557,38 @@
 
 @ Supplementary
 
-	.macro goto_eq dest:req
+	.macro goto_if_unset flag, dest
+	checkflag \flag
+	goto_if 0, \dest
+	.endm
+
+	.macro goto_if_set flag, dest
+	checkflag \flag
 	goto_if 1, \dest
+	.endm
+
+	.macro goto_if_lt dest @ LESS THAN
+	goto_if 0, \dest
+	.endm	
+
+	.macro goto_if_eq dest @ EQUAL
+	goto_if 1, \dest
+	.endm
+
+	.macro goto_if_gt dest @ GREATER THAN
+	goto_if 2, \dest
+	.endm
+
+	.macro goto_if_le dest @ LESS THAN OR EQUAL
+	goto_if 3, \dest
+	.endm
+
+	.macro goto_if_ge dest @ GREATER THAN OR EQUAL
+	goto_if 4, \dest
+	.endm
+
+	.macro goto_if_ne dest @ NOT EQUAL
+	goto_if 5, \dest
 	.endm
 
 	.macro switch var:req
@@ -1567,7 +1597,7 @@
 
 	.macro case condition:req, dest:req
 	compare 0x8000, \condition
-	goto_eq \dest
+	goto_if_eq \dest
 	.endm
 
 	@ Message box types

@@ -12,7 +12,7 @@ IslandCave_MapScript1_238E3A: @ 8238E3A
 IslandCave_EventScript_238E44:: @ 8238E44
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, IslandCave_EventScript_27374E
+	goto_if_ne IslandCave_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -57,8 +57,7 @@ IslandCave_EventScript_238EEF:: @ 8238EEF
 	lockall
 	checkflag FLAG_TEMP_3
 	call_if 1, IslandCave_EventScript_238F45
-	checkflag FLAG_SYS_BRAILLE_WAIT
-	goto_eq IslandCave_EventScript_238F13
+	goto_if_set FLAG_SYS_BRAILLE_WAIT, IslandCave_EventScript_238F13
 	braillemessage IslandCave_Braille_2A6CD4
 	setflag FLAG_TEMP_2
 	special ShouldDoBrailleRegicePuzzle
@@ -75,8 +74,7 @@ IslandCave_EventScript_238F1D:: @ 8238F1D
 	checkflag FLAG_TEMP_3
 	call_if 1, IslandCave_EventScript_238F45
 	braillemessage IslandCave_Braille_2A6CD4
-	checkflag FLAG_SYS_BRAILLE_WAIT
-	goto_eq IslandCave_EventScript_238F41
+	goto_if_set FLAG_SYS_BRAILLE_WAIT, IslandCave_EventScript_238F41
 	setflag FLAG_TEMP_2
 	special ShouldDoBrailleRegicePuzzle
 	goto IslandCave_EventScript_238F41
@@ -109,11 +107,11 @@ IslandCave_EventScript_238F58:: @ 8238F58
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq IslandCave_EventScript_238F9F
+	goto_if_eq IslandCave_EventScript_238F9F
 	compare VAR_RESULT, 4
-	goto_eq IslandCave_EventScript_238FA8
+	goto_if_eq IslandCave_EventScript_238FA8
 	compare VAR_RESULT, 5
-	goto_eq IslandCave_EventScript_238FA8
+	goto_if_eq IslandCave_EventScript_238FA8
 	setflag FLAG_0x1BC
 	release
 	end

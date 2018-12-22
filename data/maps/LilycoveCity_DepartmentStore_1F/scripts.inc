@@ -10,12 +10,11 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	faceplayer
 	dodailyevents
 	compare VAR_POKELOT_PRIZE, 0
-	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_21F7F7
-	checkflag FLAG_0x92A
-	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F78D
+	goto_if_ne LilycoveCity_DepartmentStore_1F_EventScript_21F7F7
+	goto_if_set FLAG_0x92A, LilycoveCity_DepartmentStore_1F_EventScript_21F78D
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6390, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F797
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F797
 	setflag FLAG_0x92A
 	message LilycoveCity_DepartmentStore_1F_Text_2A64C8
 	waitmessage
@@ -34,7 +33,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_27259E
 	waitmovement 0
 	compare VAR_0x8004, 0
-	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7A1
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7A1
 	incrementgamestat 46
 	compare VAR_0x8006, 0
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F77B
@@ -51,7 +50,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7D4
 	giveitem_std VAR_0x8005
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7DD
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7DD
 	special sub_80EE2CC
 	goto LilycoveCity_DepartmentStore_1F_EventScript_21F7AF
 	end
@@ -115,7 +114,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F7F7:: @ 821F7F7
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A67E1, MSGBOX_DEFAULT
 	giveitem_std VAR_POKELOT_PRIZE
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7ED
+	goto_if_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7ED
 	copyvar VAR_0x8004, VAR_0x404D
 	copyvar VAR_0x8005, VAR_POKELOT_PRIZE
 	special sub_80EE2CC

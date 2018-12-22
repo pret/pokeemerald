@@ -25,8 +25,7 @@ RustboroCity_DevonCorp_2F_EventScript_211886:: @ 8211886
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
-	checkflag FLAG_0x11F
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_2118A6
+	goto_if_set FLAG_0x11F, RustboroCity_DevonCorp_2F_EventScript_2118A6
 	msgbox RustboroCity_DevonCorp_2F_Text_211C50, MSGBOX_DEFAULT
 	release
 	end
@@ -41,8 +40,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118B0:: @ 82118B0
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
-	checkflag FLAG_0x0BC
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_2118D0
+	goto_if_set FLAG_0x0BC, RustboroCity_DevonCorp_2F_EventScript_2118D0
 	msgbox RustboroCity_DevonCorp_2F_Text_211D9F, MSGBOX_DEFAULT
 	release
 	end
@@ -65,16 +63,16 @@ RustboroCity_DevonCorp_2F_EventScript_2118F1:: @ 82118F1
 	lock
 	faceplayer
 	compare VAR_0x40C4, 2
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A03
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A03
 	compare VAR_0x40C4, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119F9
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_2119F9
 	msgbox RustboroCity_DevonCorp_2F_Text_211F48, MSGBOX_DEFAULT
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211933
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211933
 	checkitem ITEM_CLAW_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211991
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211991
 	release
 	end
 
@@ -87,10 +85,10 @@ RustboroCity_DevonCorp_2F_EventScript_211933:: @ 8211933
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
 	checkitem ITEM_CLAW_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B84
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B84
 	goto RustboroCity_DevonCorp_2F_EventScript_211974
 	end
 
@@ -112,10 +110,10 @@ RustboroCity_DevonCorp_2F_EventScript_211991:: @ 8211991
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B84
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B84
 	goto RustboroCity_DevonCorp_2F_EventScript_2119D2
 	end
 
@@ -140,9 +138,9 @@ RustboroCity_DevonCorp_2F_EventScript_2119F9:: @ 82119F9
 
 RustboroCity_DevonCorp_2F_EventScript_211A03:: @ 8211A03
 	compare VAR_0x40C5, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A1A
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A1A
 	compare VAR_0x40C5, 2
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A2C
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A2C
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211A1A:: @ 8211A1A
@@ -161,9 +159,9 @@ RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
 	setvar VAR_TEMP_1, 388
 	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A6E
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A6E
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A96
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211A96
 	goto RustboroCity_DevonCorp_2F_EventScript_273811
 	end
 
@@ -171,7 +169,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
 	call RustboroCity_DevonCorp_2F_EventScript_2723DD
 	goto RustboroCity_DevonCorp_2F_EventScript_211AD7
@@ -181,7 +179,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A96:: @ 8211A96
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AB9
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211AB9
 	call RustboroCity_DevonCorp_2F_EventScript_273797
 	goto RustboroCity_DevonCorp_2F_EventScript_211AB9
 	end
@@ -210,9 +208,9 @@ RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
 	setvar VAR_TEMP_1, 390
 	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B11
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B11
 	compare VAR_RESULT, 1
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B39
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B39
 	goto RustboroCity_DevonCorp_2F_EventScript_273811
 	end
 
@@ -220,7 +218,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
 	call RustboroCity_DevonCorp_2F_EventScript_2723DD
 	goto RustboroCity_DevonCorp_2F_EventScript_211B7A
@@ -230,7 +228,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B39:: @ 8211B39
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B5C
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_211B5C
 	call RustboroCity_DevonCorp_2F_EventScript_273797
 	goto RustboroCity_DevonCorp_2F_EventScript_211B5C
 	end
@@ -284,7 +282,7 @@ RustboroCity_DevonCorp_2F_EventScript_211BCF:: @ 8211BCF
 	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	compare VAR_0x405A, 6
-	goto_if 4, RustboroCity_DevonCorp_2F_EventScript_211BF1
+	goto_if_ge RustboroCity_DevonCorp_2F_EventScript_211BF1
 	msgbox RustboroCity_DevonCorp_2F_Text_212338, MSGBOX_DEFAULT
 	release
 	end

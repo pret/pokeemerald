@@ -45,9 +45,9 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	call EverGrandeCity_HallOfFame_EventScript_2717C1
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2298E9
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2298E9
 	compare VAR_RESULT, 1
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2298F5
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2298F5
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9

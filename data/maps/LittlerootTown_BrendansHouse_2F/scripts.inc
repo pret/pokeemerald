@@ -15,18 +15,17 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F841A:: @ 81F841A
-	checkflag FLAG_0x124
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8433
+	goto_if_set FLAG_0x124, LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 	compare VAR_0x4084, 2
-	goto_if 4, LittlerootTown_BrendansHouse_2F_EventScript_1F8456
+	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F8456
 	goto LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8433:: @ 81F8433
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8456
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8456
 	compare VAR_0x40D3, 2
-	goto_if 4, LittlerootTown_BrendansHouse_2F_EventScript_1F9309
+	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F9309
 	setobjectxyperm 1, 0, 2
 	setobjectmovementtype 1, 7
 	return
@@ -37,7 +36,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8456:: @ 81F8456
 LittlerootTown_BrendansHouse_2F_EventScript_1F8457:: @ 81F8457
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8464
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8464
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8464:: @ 81F8464
@@ -51,13 +50,13 @@ LittlerootTown_BrendansHouse_2F_MapScript2_1F846A: @ 81F846A
 LittlerootTown_BrendansHouse_2F_EventScript_1F8474:: @ 81F8474
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275D0C
+	goto_if_eq EventScript_275D0C
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8481:: @ 81F8481
 	lockall
 	compare VAR_0x408D, 2
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8497
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8497
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9991, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -249,9 +248,9 @@ EventScript_PlayerPCMale:: @ 81F860D
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8626
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8626
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F864C
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F864C
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626

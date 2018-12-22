@@ -9,8 +9,7 @@ LilycoveCity_Harbor_MapScript1_21E006: @ 821E006
 LilycoveCity_Harbor_EventScript_21E00F:: @ 821E00F
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, LilycoveCity_Harbor_EventScript_21E54D
+	goto_if_unset FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_21E54D
 	call LilycoveCity_Harbor_EventScript_21E194
 	call LilycoveCity_Harbor_EventScript_21E1C6
 	call LilycoveCity_Harbor_EventScript_21E1F8
@@ -18,23 +17,23 @@ LilycoveCity_Harbor_EventScript_21E00F:: @ 821E00F
 	call LilycoveCity_Harbor_EventScript_21E25C
 	call LilycoveCity_Harbor_EventScript_21E2A6
 	compare VAR_TEMP_C, 2
-	goto_eq LilycoveCity_Harbor_EventScript_21E350
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E350
 	compare VAR_TEMP_B, 1
-	goto_eq LilycoveCity_Harbor_EventScript_21E2F0
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E2F0
 	compare VAR_TEMP_B, 2
-	goto_eq LilycoveCity_Harbor_EventScript_21E320
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E320
 	compare VAR_TEMP_B, 4
-	goto_eq LilycoveCity_Harbor_EventScript_21E350
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E350
 	compare VAR_TEMP_B, 8
-	goto_eq LilycoveCity_Harbor_EventScript_21E41D
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E41D
 	compare VAR_TEMP_B, 0
-	goto_if 5, LilycoveCity_Harbor_EventScript_21E44D
+	goto_if_ne LilycoveCity_Harbor_EventScript_21E44D
 	goto LilycoveCity_Harbor_EventScript_21E080
 	end
 
 LilycoveCity_Harbor_EventScript_21E080:: @ 821E080
 	compare VAR_TEMP_A, 0
-	goto_eq LilycoveCity_Harbor_EventScript_21E557
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E557
 	msgbox LilycoveCity_Harbor_Text_21E758, MSGBOX_DEFAULT
 	message LilycoveCity_Harbor_Text_21E7ED
 	waitmessage
@@ -88,7 +87,7 @@ LilycoveCity_Harbor_EventScript_21E139:: @ 821E139
 LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 	msgbox LilycoveCity_Harbor_Text_21E864, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
@@ -99,7 +98,7 @@ LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
 	msgbox LilycoveCity_Harbor_Text_21E880, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
 	waitstate
@@ -108,53 +107,45 @@ LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
 
 LilycoveCity_Harbor_EventScript_21E194:: @ 821E194
 	setvar VAR_TEMP_E, 0
-	checkflag FLAG_SYS_HAS_EON_TICKET
-	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_EON_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_E, 1
-	checkflag FLAG_0x1AE
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_0x1AE, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_E, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1C6:: @ 821E1C6
 	setvar VAR_TEMP_D, 0
-	checkflag FLAG_0x8D5
-	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_0x8D5, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_D, 1
-	checkflag FLAG_0x1AF
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_0x1AF, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_D, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1F8:: @ 821E1F8
 	setvar VAR_TEMP_C, 0
-	checkflag FLAG_0x8D6
-	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_0x8D6, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_OLD_SEA_MAP, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_C, 1
-	checkflag FLAG_0x1B0
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_0x1B0, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_C, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E22A:: @ 821E22A
 	setvar VAR_TEMP_9, 0
-	checkflag FLAG_0x8E0
-	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_0x8E0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_9, 1
-	checkflag FLAG_0x1DB
-	goto_eq LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_0x1DB, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_9, 2
 	return
 
@@ -397,7 +388,7 @@ LilycoveCity_Harbor_EventScript_21E56B:: @ 821E56B
 LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 	msgbox LilycoveCity_Harbor_Text_21E864, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE_STATE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
@@ -408,7 +399,7 @@ LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 LilycoveCity_Harbor_EventScript_21E59D:: @ 821E59D
 	msgbox LilycoveCity_Harbor_Text_21E880, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
+	goto_if_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
 	waitstate
@@ -469,8 +460,7 @@ LilycoveCity_Harbor_Movement_21E635: @ 821E635
 LilycoveCity_Harbor_EventScript_21E637:: @ 821E637
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq LilycoveCity_Harbor_EventScript_21E64C
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_21E64C
 	msgbox LilycoveCity_Harbor_Text_21E8EE, MSGBOX_DEFAULT
 	release
 	end

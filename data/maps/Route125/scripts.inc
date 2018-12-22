@@ -50,7 +50,7 @@ Route125_EventScript_1F6800:: @ 81F6800
 	trainerbattle_single TRAINER_ERNEST_1, Route125_Text_2A16FC, Route125_Text_2A173A, Route125_EventScript_1F682C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route125_EventScript_1F684B
+	goto_if_eq Route125_EventScript_1F684B
 	msgbox Route125_Text_2A1755, MSGBOX_DEFAULT
 	release
 	end

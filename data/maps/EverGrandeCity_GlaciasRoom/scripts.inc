@@ -41,8 +41,7 @@ EverGrandeCity_GlaciasRoom_EventScript_228463:: @ 8228463
 EverGrandeCity_GlaciasRoom_EventScript_228469:: @ 8228469
 	lock
 	faceplayer
-	checkflag FLAG_0x4FD
-	goto_eq EverGrandeCity_GlaciasRoom_EventScript_228490
+	goto_if_set FLAG_0x4FD, EverGrandeCity_GlaciasRoom_EventScript_228490
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_2285B4

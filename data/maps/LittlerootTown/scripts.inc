@@ -55,7 +55,7 @@ LittlerootTown_EventScript_1E7E67:: @ 81E7E67
 
 LittlerootTown_EventScript_1E7E6F:: @ 81E7E6F
 	compare VAR_0x4050, 0
-	goto_eq LittlerootTown_EventScript_1E7E86
+	goto_if_eq LittlerootTown_EventScript_1E7E86
 	setobjectxyperm 1, 10, 1
 	setobjectmovementtype 1, 7
 	return
@@ -210,7 +210,7 @@ LittlerootTown_EventScript_1E7FEC:: @ 81E7FEC
 	addobject 7
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_EventScript_1E8004
+	goto_if_eq LittlerootTown_EventScript_1E8004
 	goto LittlerootTown_EventScript_1E8013
 	end
 
@@ -235,12 +235,10 @@ LittlerootTown_EventScript_1E802B:: @ 81E802B
 LittlerootTown_EventScript_1E8034:: @ 81E8034
 	lock
 	faceplayer
-	checkflag FLAG_0x074
-	goto_eq LittlerootTown_EventScript_1E8087
-	checkflag FLAG_0x052
-	goto_eq LittlerootTown_EventScript_1E807A
+	goto_if_set FLAG_0x074, LittlerootTown_EventScript_1E8087
+	goto_if_set FLAG_0x052, LittlerootTown_EventScript_1E807A
 	compare VAR_0x4050, 0
-	goto_if 5, LittlerootTown_EventScript_1E805D
+	goto_if_ne LittlerootTown_EventScript_1E805D
 	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	release
 	end

@@ -6,8 +6,7 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	faceplayer
 	dodailyevents
 	call PacifidlogTown_House2_EventScript_2037DE
-	checkflag FLAG_0x12B
-	goto_eq PacifidlogTown_House2_EventScript_20387E
+	goto_if_set FLAG_0x12B, PacifidlogTown_House2_EventScript_20387E
 	checkflag FLAG_0x12C
 	call_if 1, PacifidlogTown_House2_EventScript_2037F8
 	checkflag FLAG_0x12C
@@ -15,16 +14,15 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	setflag FLAG_0x12C
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
-	goto_if 4, PacifidlogTown_House2_EventScript_203816
+	goto_if_ge PacifidlogTown_House2_EventScript_203816
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 2
-	goto_if 4, PacifidlogTown_House2_EventScript_203845
+	goto_if_ge PacifidlogTown_House2_EventScript_203845
 	goto PacifidlogTown_House2_EventScript_20384F
 	end
 
 PacifidlogTown_House2_EventScript_2037DE:: @ 82037DE
-	checkflag FLAG_0x12B
-	goto_if 0, PacifidlogTown_House2_EventScript_27374E
+	goto_if_unset FLAG_0x12B, PacifidlogTown_House2_EventScript_27374E
 	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare VAR_RESULT, 0
 	call_if 1, PacifidlogTown_House2_EventScript_203812
@@ -47,7 +45,7 @@ PacifidlogTown_House2_EventScript_203816:: @ 8203816
 	msgbox PacifidlogTown_House2_Text_20396D, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM27
 	compare VAR_RESULT, 0
-	goto_eq PacifidlogTown_House2_EventScript_272054
+	goto_if_eq PacifidlogTown_House2_EventScript_272054
 	setflag FLAG_0x12B
 	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, MSGBOX_DEFAULT
@@ -63,7 +61,7 @@ PacifidlogTown_House2_EventScript_20384F:: @ 820384F
 	msgbox PacifidlogTown_House2_Text_203A2F, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM21
 	compare VAR_RESULT, 0
-	goto_eq PacifidlogTown_House2_EventScript_272054
+	goto_if_eq PacifidlogTown_House2_EventScript_272054
 	setflag FLAG_0x12B
 	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, MSGBOX_DEFAULT

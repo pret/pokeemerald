@@ -36,14 +36,13 @@ LilycoveCity_EventScript_1E2BD8:: @ 81E2BD8
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_0x92F
-	goto_eq LilycoveCity_EventScript_1E2C18
+	goto_if_set FLAG_0x92F, LilycoveCity_EventScript_1E2C18
 	msgbox LilycoveCity_Text_2A7244, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_EventScript_272054
+	goto_if_eq LilycoveCity_EventScript_272054
 	setflag FLAG_0x92F
 	msgbox LilycoveCity_Text_2A72E3, MSGBOX_DEFAULT
 	release
@@ -61,8 +60,7 @@ LilycoveCity_EventScript_1E2C22:: @ 81E2C22
 LilycoveCity_EventScript_1E2C2B:: @ 81E2C2B
 	lock
 	faceplayer
-	checkflag FLAG_BADGE07_GET
-	goto_eq LilycoveCity_EventScript_1E2C40
+	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_1E2C40
 	msgbox LilycoveCity_Text_1E3E3C, MSGBOX_DEFAULT
 	release
 	end
@@ -79,8 +77,7 @@ LilycoveCity_EventScript_1E2C4A:: @ 81E2C4A
 LilycoveCity_EventScript_1E2C53:: @ 81E2C53
 	lock
 	faceplayer
-	checkflag FLAG_0x070
-	goto_eq LilycoveCity_EventScript_1E2C68
+	goto_if_set FLAG_0x070, LilycoveCity_EventScript_1E2C68
 	msgbox LilycoveCity_Text_1E3FAB, MSGBOX_DEFAULT
 	release
 	end
@@ -93,8 +90,7 @@ LilycoveCity_EventScript_1E2C68:: @ 81E2C68
 LilycoveCity_EventScript_1E2C72:: @ 81E2C72
 	lock
 	faceplayer
-	checkflag FLAG_0x070
-	goto_eq LilycoveCity_EventScript_1E2C87
+	goto_if_set FLAG_0x070, LilycoveCity_EventScript_1E2C87
 	msgbox LilycoveCity_Text_1E40AD, MSGBOX_DEFAULT
 	release
 	end
@@ -119,8 +115,7 @@ LilycoveCity_EventScript_1E2CA3:: @ 81E2CA3
 LilycoveCity_EventScript_1E2CAC:: @ 81E2CAC
 	lock
 	faceplayer
-	checkflag FLAG_BADGE07_GET
-	goto_eq LilycoveCity_EventScript_1E2CC1
+	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_1E2CC1
 	msgbox LilycoveCity_Text_1E42FC, MSGBOX_DEFAULT
 	release
 	end
@@ -178,8 +173,7 @@ LilycoveCity_EventScript_1E2D3A:: @ 81E2D3A
 
 LilycoveCity_EventScript_1E2D44:: @ 81E2D44
 	lockall
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq LilycoveCity_EventScript_1E2D58
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_1E2D58
 	msgbox LilycoveCity_Text_1E45A7, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -203,8 +197,7 @@ LilycoveCity_EventScript_1E2D74:: @ 81E2D74
 
 LilycoveCity_EventScript_1E2D7D:: @ 81E2D7D
 	lockall
-	checkflag FLAG_0x0DA
-	goto_eq LilycoveCity_EventScript_1E2DB0
+	goto_if_set FLAG_0x0DA, LilycoveCity_EventScript_1E2DB0
 	msgbox LilycoveCity_Text_1E3D1F, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_27259E
 	waitmovement 0
@@ -241,9 +234,9 @@ LilycoveCity_EventScript_1E2DDE:: @ 81E2DDE
 	faceplayer
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_EventScript_1E2DF8
+	goto_if_eq LilycoveCity_EventScript_1E2DF8
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_EventScript_1E2E6B
+	goto_if_eq LilycoveCity_EventScript_1E2E6B
 	end
 
 LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
@@ -253,7 +246,7 @@ LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
 	checkflag FLAG_0x11E
 	call_if 0, LilycoveCity_EventScript_1E2E51
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_EventScript_1E2E5A
+	goto_if_eq LilycoveCity_EventScript_1E2E5A
 	msgbox LilycoveCity_Text_1E3234, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_1E2EDE
@@ -284,7 +277,7 @@ LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
 	checkflag FLAG_0x11E
 	call_if 0, LilycoveCity_EventScript_1E2EC4
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_EventScript_1E2ECD
+	goto_if_eq LilycoveCity_EventScript_1E2ECD
 	msgbox LilycoveCity_Text_1E373C, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_1E2F0E
@@ -353,8 +346,7 @@ LilycoveCity_EventScript_1E2F3E:: @ 81E2F3E
 	end
 
 LilycoveCity_EventScript_1E2F76:: @ 81E2F76
-	checkflag FLAG_BADGE08_GET
-	goto_eq LilycoveCity_EventScript_1E2F80
+	goto_if_set FLAG_BADGE08_GET, LilycoveCity_EventScript_1E2F80
 	return
 
 LilycoveCity_EventScript_1E2F80:: @ 81E2F80
@@ -366,8 +358,7 @@ LilycoveCity_EventScript_1E2F86:: @ 81E2F86
 	return
 
 LilycoveCity_EventScript_1E2F8F:: @ 81E2F8F
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq LilycoveCity_EventScript_1E2FA1
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_1E2FA1
 	msgbox LilycoveCity_Text_1E346D, MSGBOX_DEFAULT
 	return
 
@@ -394,8 +385,7 @@ LilycoveCity_EventScript_1E2FE2:: @ 81E2FE2
 	return
 
 LilycoveCity_EventScript_1E2FEB:: @ 81E2FEB
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq LilycoveCity_EventScript_1E2FFD
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_1E2FFD
 	msgbox LilycoveCity_Text_1E390C, MSGBOX_DEFAULT
 	return
 

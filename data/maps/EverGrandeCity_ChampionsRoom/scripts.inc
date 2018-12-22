@@ -61,9 +61,9 @@ EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
 	call EverGrandeCity_ChampionsRoom_EventScript_228BFD
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AC6
+	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_228AC6
 	compare VAR_RESULT, 1
-	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AFB
+	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_228AFB
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228ABC:: @ 8228ABC

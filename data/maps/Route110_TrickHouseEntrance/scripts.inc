@@ -7,11 +7,11 @@ Route110_TrickHouseEntrance_MapScripts:: @ 8269A50
 Route110_TrickHouseEntrance_MapScript1_269A60: @ 8269A60
 	setflag FLAG_LANDMARK_TRICK_HOUSE
 	compare VAR_0x40B5, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_269AF3
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269AF3
 	compare VAR_0x40C1, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_269AD7
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269AD7
 	compare VAR_0x40A6, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_269BB3
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269BB3
 	compare VAR_0x40A7, 5
 	call_if 1, Route110_TrickHouseEntrance_EventScript_269B03
 	compare VAR_0x40A7, 3
@@ -28,7 +28,7 @@ Route110_TrickHouseEntrance_MapScript1_269A60: @ 8269A60
 Route110_TrickHouseEntrance_EventScript_269AD7:: @ 8269AD7
 	setvar VAR_0x40A5, 1
 	compare VAR_0x4044, 8
-	goto_eq Route110_TrickHouseEntrance_EventScript_269AED
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269AED
 	setvar VAR_0x40A7, 2
 	end
 
@@ -351,25 +351,25 @@ Route110_TrickHouseEntrance_EventScript_269E8F:: @ 8269E8F
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26AA82, MSGBOX_DEFAULT
 	compare VAR_0x4044, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_269EEF
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269EEF
 	compare VAR_0x4044, 2
-	goto_eq Route110_TrickHouseEntrance_EventScript_269F1B
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F1B
 	compare VAR_0x4044, 3
-	goto_eq Route110_TrickHouseEntrance_EventScript_269F47
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F47
 	compare VAR_0x4044, 4
-	goto_eq Route110_TrickHouseEntrance_EventScript_269F73
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F73
 	compare VAR_0x4044, 5
-	goto_eq Route110_TrickHouseEntrance_EventScript_269F9F
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269F9F
 	compare VAR_0x4044, 6
-	goto_eq Route110_TrickHouseEntrance_EventScript_269FCB
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269FCB
 	compare VAR_0x4044, 7
-	goto_eq Route110_TrickHouseEntrance_EventScript_269FF7
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_269FF7
 	end
 
 Route110_TrickHouseEntrance_EventScript_269EEF:: @ 8269EEF
 	giveitem_std ITEM_RARE_CANDY
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -379,7 +379,7 @@ Route110_TrickHouseEntrance_EventScript_269EEF:: @ 8269EEF
 Route110_TrickHouseEntrance_EventScript_269F1B:: @ 8269F1B
 	giveitem_std ITEM_TIMER_BALL
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -389,7 +389,7 @@ Route110_TrickHouseEntrance_EventScript_269F1B:: @ 8269F1B
 Route110_TrickHouseEntrance_EventScript_269F47:: @ 8269F47
 	giveitem_std ITEM_HARD_STONE
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -399,7 +399,7 @@ Route110_TrickHouseEntrance_EventScript_269F47:: @ 8269F47
 Route110_TrickHouseEntrance_EventScript_269F73:: @ 8269F73
 	giveitem_std ITEM_SMOKE_BALL
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -409,7 +409,7 @@ Route110_TrickHouseEntrance_EventScript_269F73:: @ 8269F73
 Route110_TrickHouseEntrance_EventScript_269F9F:: @ 8269F9F
 	giveitem_std ITEM_TM12
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -419,7 +419,7 @@ Route110_TrickHouseEntrance_EventScript_269F9F:: @ 8269F9F
 Route110_TrickHouseEntrance_EventScript_269FCB:: @ 8269FCB
 	giveitem_std ITEM_MAGNET
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -429,7 +429,7 @@ Route110_TrickHouseEntrance_EventScript_269FCB:: @ 8269FCB
 Route110_TrickHouseEntrance_EventScript_269FF7:: @ 8269FF7
 	giveitem_std ITEM_PP_MAX
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A023
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_27205E
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
@@ -450,7 +450,7 @@ Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
 	msgbox Route110_TrickHouseEntrance_Text_26AB2C, MSGBOX_DEFAULT
 	call Route110_TrickHouseEntrance_EventScript_26A070
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A09A
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A09A
 	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEntrance_EventScript_272071
 	msgbox Route110_TrickHouseEntrance_Text_26ABBD, MSGBOX_DEFAULT
@@ -505,7 +505,7 @@ Route110_TrickHouseEntrance_EventScript_26A110:: @ 826A110
 	msgbox Route110_TrickHouseEntrance_Text_26A887, MSGBOX_YESNO
 	closemessage
 	compare VAR_RESULT, 1
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A126
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A126
 	releaseall
 	end
 
@@ -587,7 +587,7 @@ Route110_TrickHouseEntrance_EventScript_26A201:: @ 826A201
 
 Route110_TrickHouseEntrance_EventScript_26A20B:: @ 826A20B
 	compare VAR_0x4044, 8
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A220
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A220
 	msgbox Route110_TrickHouseEntrance_Text_26A878, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -612,7 +612,7 @@ Route110_TrickHouseEntrance_EventScript_26A22A:: @ 826A22A
 
 Route110_TrickHouseEntrance_EventScript_26A289:: @ 826A289
 	compare VAR_0x40AB, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle1_Text_26B98D, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40AB, 2
@@ -623,7 +623,7 @@ Route110_TrickHouseEntrance_EventScript_26A289:: @ 826A289
 
 Route110_TrickHouseEntrance_EventScript_26A2B2:: @ 826A2B2
 	compare VAR_0x40AC, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle2_Text_26BCBA, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40AC, 2
@@ -634,7 +634,7 @@ Route110_TrickHouseEntrance_EventScript_26A2B2:: @ 826A2B2
 
 Route110_TrickHouseEntrance_EventScript_26A2DB:: @ 826A2DB
 	compare VAR_0x40AD, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle3_Text_26C609, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40AD, 2
@@ -645,7 +645,7 @@ Route110_TrickHouseEntrance_EventScript_26A2DB:: @ 826A2DB
 
 Route110_TrickHouseEntrance_EventScript_26A304:: @ 826A304
 	compare VAR_0x40AE, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle4_Text_26C8C3, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40AE, 2
@@ -656,7 +656,7 @@ Route110_TrickHouseEntrance_EventScript_26A304:: @ 826A304
 
 Route110_TrickHouseEntrance_EventScript_26A32D:: @ 826A32D
 	compare VAR_0x40AF, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle5_Text_26D660, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40AF, 2
@@ -667,7 +667,7 @@ Route110_TrickHouseEntrance_EventScript_26A32D:: @ 826A32D
 
 Route110_TrickHouseEntrance_EventScript_26A356:: @ 826A356
 	compare VAR_0x40B0, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle6_Text_26DE26, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40B0, 2
@@ -678,7 +678,7 @@ Route110_TrickHouseEntrance_EventScript_26A356:: @ 826A356
 
 Route110_TrickHouseEntrance_EventScript_26A37F:: @ 826A37F
 	compare VAR_0x40B1, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle7_EventScript_26E413, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40B1, 2
@@ -689,7 +689,7 @@ Route110_TrickHouseEntrance_EventScript_26A37F:: @ 826A37F
 
 Route110_TrickHouseEntrance_EventScript_26A3A8:: @ 826A3A8
 	compare VAR_0x40B2, 0
-	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A3D1
 	msgbox Route110_TrickHousePuzzle8_EventScript_26E864, MSGBOX_DEFAULT
 	playse SE_PIN
 	setvar VAR_0x40B2, 2

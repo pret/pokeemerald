@@ -29,9 +29,8 @@ SootopolisCity_Mart_EventScript_2267C2:: @ 82267C2
 	lock
 	faceplayer
 	compare VAR_0x40CA, 2
-	goto_if 4, SootopolisCity_Mart_EventScript_2267E2
-	checkflag FLAG_0x081
-	goto_if 0, SootopolisCity_Mart_EventScript_2267E2
+	goto_if_ge SootopolisCity_Mart_EventScript_2267E2
+	goto_if_unset FLAG_0x081, SootopolisCity_Mart_EventScript_2267E2
 	msgbox SootopolisCity_Mart_Text_22685D, MSGBOX_DEFAULT
 	release
 	end
@@ -45,9 +44,8 @@ SootopolisCity_Mart_EventScript_2267EC:: @ 82267EC
 	lock
 	faceplayer
 	compare VAR_0x40CA, 2
-	goto_if 4, SootopolisCity_Mart_EventScript_22680C
-	checkflag FLAG_0x081
-	goto_if 0, SootopolisCity_Mart_EventScript_22680C
+	goto_if_ge SootopolisCity_Mart_EventScript_22680C
+	goto_if_unset FLAG_0x081, SootopolisCity_Mart_EventScript_22680C
 	msgbox SootopolisCity_Mart_Text_226928, MSGBOX_DEFAULT
 	release
 	end

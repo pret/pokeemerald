@@ -132,7 +132,7 @@ Route110_EventScript_1EF392:: @ 81EF392
 	lockall
 	specialvar VAR_RESULT, GetRecordedCyclingRoadResults
 	compare VAR_RESULT, 0
-	goto_eq Route110_EventScript_1EF3AD
+	goto_if_eq Route110_EventScript_1EF3AD
 	msgbox Route110_Text_1F0A1E, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -147,9 +147,9 @@ Route110_EventScript_1EF3B7:: @ 81EF3B7
 	faceplayer
 	specialvar VAR_RESULT, GetPlayerAvatarBike
 	compare VAR_RESULT, 1
-	goto_eq Route110_EventScript_1EF3E8
+	goto_if_eq Route110_EventScript_1EF3E8
 	compare VAR_CYCLING_CHALLENGE_STATE, 0
-	goto_eq Route110_EventScript_1EF3DE
+	goto_if_eq Route110_EventScript_1EF3DE
 	msgbox Route110_Text_1F06FB, MSGBOX_DEFAULT
 	release
 	end
@@ -178,7 +178,7 @@ Route110_EventScript_1EF420:: @ 81EF420
 	trainerbattle_single TRAINER_EDWIN_1, Route110_Text_29815E, Route110_Text_29818F, Route110_EventScript_1EF44C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route110_EventScript_1EF46B
+	goto_if_eq Route110_EventScript_1EF46B
 	msgbox Route110_Text_2981B3, MSGBOX_DEFAULT
 	release
 	end
@@ -215,7 +215,7 @@ Route110_EventScript_1EF4C7:: @ 81EF4C7
 	trainerbattle_single TRAINER_BENJAMIN_1, Route110_Text_297C63, Route110_Text_297C8A, Route110_EventScript_1EF4F3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route110_EventScript_1EF512
+	goto_if_eq Route110_EventScript_1EF512
 	msgbox Route110_Text_297CB4, MSGBOX_DEFAULT
 	release
 	end
@@ -242,7 +242,7 @@ Route110_EventScript_1EF540:: @ 81EF540
 	trainerbattle_single TRAINER_ABIGAIL_1, Route110_Text_297DFA, Route110_Text_297E69, Route110_EventScript_1EF56C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route110_EventScript_1EF58B
+	goto_if_eq Route110_EventScript_1EF58B
 	msgbox Route110_Text_297E88, MSGBOX_DEFAULT
 	release
 	end
@@ -264,7 +264,7 @@ Route110_EventScript_1EF5A2:: @ 81EF5A2
 	trainerbattle_single TRAINER_ISABEL_1, Route110_Text_298349, Route110_Text_298389, Route110_EventScript_1EF5CE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route110_EventScript_1EF5ED
+	goto_if_eq Route110_EventScript_1EF5ED
 	msgbox Route110_Text_2983A2, MSGBOX_DEFAULT
 	release
 	end
@@ -398,9 +398,9 @@ Route110_EventScript_1EF76E:: @ 81EF76E
 	call_if 1, Route110_EventScript_1EF964
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq Route110_EventScript_1EF7EB
+	goto_if_eq Route110_EventScript_1EF7EB
 	compare VAR_RESULT, 1
-	goto_eq Route110_EventScript_1EF865
+	goto_if_eq Route110_EventScript_1EF865
 	releaseall
 	end
 

@@ -11,7 +11,7 @@ AquaHideout_B1F_MapScript1_2339B2: @ 82339B2
 AquaHideout_B1F_EventScript_2339BC:: @ 82339BC
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, AquaHideout_B1F_EventScript_27374E
+	goto_if_ne AquaHideout_B1F_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -43,11 +43,11 @@ AquaHideout_B1F_EventScript_2339EB:: @ 82339EB
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq AquaHideout_B1F_EventScript_233A2F
+	goto_if_eq AquaHideout_B1F_EventScript_233A2F
 	compare VAR_RESULT, 4
-	goto_eq AquaHideout_B1F_EventScript_233A2F
+	goto_if_eq AquaHideout_B1F_EventScript_233A2F
 	compare VAR_RESULT, 5
-	goto_eq AquaHideout_B1F_EventScript_233A2F
+	goto_if_eq AquaHideout_B1F_EventScript_233A2F
 	setflag FLAG_0x1C4
 	release
 	end
@@ -70,11 +70,11 @@ AquaHideout_B1F_EventScript_233A38:: @ 8233A38
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq AquaHideout_B1F_EventScript_233A7C
+	goto_if_eq AquaHideout_B1F_EventScript_233A7C
 	compare VAR_RESULT, 4
-	goto_eq AquaHideout_B1F_EventScript_233A7C
+	goto_if_eq AquaHideout_B1F_EventScript_233A7C
 	compare VAR_RESULT, 5
-	goto_eq AquaHideout_B1F_EventScript_233A7C
+	goto_if_eq AquaHideout_B1F_EventScript_233A7C
 	setflag FLAG_0x1C5
 	release
 	end

@@ -14,7 +14,7 @@ Route110_TrickHousePuzzle5_MapScript1_26CAF6: @ 826CAF6
 Route110_TrickHousePuzzle5_EventScript_26CB15:: @ 826CB15
 	lockall
 	compare VAR_0x40AF, 0
-	goto_eq Route110_TrickHousePuzzle5_EventScript_26CB27
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26CB27
 	goto Route110_TrickHousePuzzle5_EventScript_26A3DB
 	end
 
@@ -28,7 +28,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB32:: @ 826CB32
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
 	compare VAR_TEMP_1, 1
-	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_TEMP_9, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CCEB
 	end
@@ -38,7 +38,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB53:: @ 826CB53
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
 	compare VAR_TEMP_2, 1
-	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_TEMP_9, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CD6A
 	end
@@ -48,7 +48,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB74:: @ 826CB74
 	applymovement 3, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
 	compare VAR_TEMP_3, 1
-	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_TEMP_9, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CDF4
 	end
@@ -58,7 +58,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB95:: @ 826CB95
 	applymovement 4, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
 	compare VAR_TEMP_4, 1
-	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_TEMP_9, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CE73
 	end
@@ -68,7 +68,7 @@ Route110_TrickHousePuzzle5_EventScript_26CBB6:: @ 826CBB6
 	applymovement 5, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
 	compare VAR_TEMP_5, 1
-	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
+	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_TEMP_9, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CEF2
 	end

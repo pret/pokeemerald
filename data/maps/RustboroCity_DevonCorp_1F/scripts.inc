@@ -15,10 +15,8 @@ RustboroCity_DevonCorp_1F_EventScript_211255:: @ 8211255
 RustboroCity_DevonCorp_1F_EventScript_211261:: @ 8211261
 	lock
 	faceplayer
-	checkflag FLAG_0x090
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_211289
-	checkflag FLAG_0x08E
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_21127F
+	goto_if_set FLAG_0x090, RustboroCity_DevonCorp_1F_EventScript_211289
+	goto_if_set FLAG_0x08E, RustboroCity_DevonCorp_1F_EventScript_21127F
 	msgbox RustboroCity_DevonCorp_1F_Text_2113D1, MSGBOX_DEFAULT
 	release
 	end
@@ -36,12 +34,9 @@ RustboroCity_DevonCorp_1F_EventScript_211289:: @ 8211289
 RustboroCity_DevonCorp_1F_EventScript_211293:: @ 8211293
 	lock
 	faceplayer
-	checkflag FLAG_0x090
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112BA
-	checkflag FLAG_0x08F
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112C4
-	checkflag FLAG_0x08E
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112C4
+	goto_if_set FLAG_0x090, RustboroCity_DevonCorp_1F_EventScript_2112BA
+	goto_if_set FLAG_0x08F, RustboroCity_DevonCorp_1F_EventScript_2112C4
+	goto_if_set FLAG_0x08E, RustboroCity_DevonCorp_1F_EventScript_2112C4
 	msgbox RustboroCity_DevonCorp_1F_Text_21151B, MSGBOX_DEFAULT
 	release
 	end
@@ -59,12 +54,9 @@ RustboroCity_DevonCorp_1F_EventScript_2112C4:: @ 82112C4
 RustboroCity_DevonCorp_1F_EventScript_2112CE:: @ 82112CE
 	lock
 	faceplayer
-	checkflag FLAG_0x090
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112F5
-	checkflag FLAG_0x08F
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112FF
-	checkflag FLAG_0x08E
-	goto_eq RustboroCity_DevonCorp_1F_EventScript_2112FF
+	goto_if_set FLAG_0x090, RustboroCity_DevonCorp_1F_EventScript_2112F5
+	goto_if_set FLAG_0x08F, RustboroCity_DevonCorp_1F_EventScript_2112FF
+	goto_if_set FLAG_0x08E, RustboroCity_DevonCorp_1F_EventScript_2112FF
 	msgbox RustboroCity_DevonCorp_1F_Text_21131B, MSGBOX_DEFAULT
 	release
 	end

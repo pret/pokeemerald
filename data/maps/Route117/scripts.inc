@@ -7,8 +7,7 @@ Route117_MapScript1_1F3983: @ 81F3983
 	end
 
 Route117_EventScript_1F3989:: @ 81F3989
-	checkflag FLAG_PENDING_DAYCARE_EGG
-	goto_if 0, Route117_EventScript_1F3999
+	goto_if_unset FLAG_PENDING_DAYCARE_EGG, Route117_EventScript_1F3999
 	setobjectxyperm 3, 47, 6
 
 Route117_EventScript_1F3999:: @ 81F3999
@@ -42,7 +41,7 @@ Route117_EventScript_1F39D0:: @ 81F39D0
 	trainerbattle_single TRAINER_ISAAC_1, Route117_Text_29C43F, Route117_Text_29C47A, Route117_EventScript_1F39FC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route117_EventScript_1F3A1B
+	goto_if_eq Route117_EventScript_1F3A1B
 	msgbox Route117_Text_29C498, MSGBOX_DEFAULT
 	release
 	end
@@ -64,7 +63,7 @@ Route117_EventScript_1F3A32:: @ 81F3A32
 	trainerbattle_single TRAINER_LYDIA_1, Route117_Text_29C612, Route117_Text_29C659, Route117_EventScript_1F3A5E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route117_EventScript_1F3A7D
+	goto_if_eq Route117_EventScript_1F3A7D
 	msgbox Route117_Text_29C679, MSGBOX_DEFAULT
 	release
 	end
@@ -86,7 +85,7 @@ Route117_EventScript_1F3A94:: @ 81F3A94
 	trainerbattle_single TRAINER_DYLAN_1, Route117_Text_29C7A5, Route117_Text_29C7EB, Route117_EventScript_1F3AC0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route117_EventScript_1F3ADF
+	goto_if_eq Route117_EventScript_1F3ADF
 	msgbox Route117_Text_29C800, MSGBOX_DEFAULT
 	release
 	end
@@ -108,7 +107,7 @@ Route117_EventScript_1F3AF6:: @ 81F3AF6
 	trainerbattle_single TRAINER_MARIA_1, Route117_Text_29C955, Route117_Text_29C9A6, Route117_EventScript_1F3B22
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route117_EventScript_1F3B41
+	goto_if_eq Route117_EventScript_1F3B41
 	msgbox Route117_Text_29C9D0, MSGBOX_DEFAULT
 	release
 	end
@@ -135,7 +134,7 @@ Route117_EventScript_1F3B6F:: @ 81F3B6F
 	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_29CC4A, Route117_Text_29CC8E, Route117_Text_29CD61, Route117_EventScript_1F3B9F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route117_EventScript_1F3BB8
+	goto_if_eq Route117_EventScript_1F3BB8
 	msgbox Route117_Text_29CCCB, MSGBOX_DEFAULT
 	release
 	end
@@ -155,7 +154,7 @@ Route117_EventScript_1F3BD3:: @ 81F3BD3
 	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_29CD9D, Route117_Text_29CDE9, Route117_Text_29CE52, Route117_EventScript_1F3C03
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route117_EventScript_1F3C1C
+	goto_if_eq Route117_EventScript_1F3C1C
 	msgbox Route117_Text_29CE17, MSGBOX_DEFAULT
 	release
 	end

@@ -46,7 +46,7 @@ Route126_EventScript_1F6977:: @ 81F6977
 	trainerbattle_single TRAINER_PABLO_1, Route126_Text_2A1EA5, Route126_Text_2A1EE3, Route126_EventScript_1F69A3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route126_EventScript_1F69C2
+	goto_if_eq Route126_EventScript_1F69C2
 	msgbox Route126_Text_2A1F10, MSGBOX_DEFAULT
 	release
 	end

@@ -13,7 +13,7 @@ JaggedPass_MapScript1_230666: @ 8230666
 JaggedPass_EventScript_230674:: @ 8230674
 	checkitem ITEM_MAGMA_EMBLEM, 1
 	compare VAR_RESULT, 1
-	goto_eq JaggedPass_EventScript_230685
+	goto_if_eq JaggedPass_EventScript_230685
 	return
 
 JaggedPass_EventScript_230685:: @ 8230685
@@ -32,7 +32,7 @@ JaggedPass_EventScript_230697:: @ 8230697
 
 JaggedPass_MapScript1_23069C: @ 823069C
 	compare VAR_0x40C8, 1
-	goto_if 3, JaggedPass_EventScript_2306A8
+	goto_if_le JaggedPass_EventScript_2306A8
 	end
 
 JaggedPass_EventScript_2306A8:: @ 82306A8
@@ -68,8 +68,7 @@ JaggedPass_EventScript_2306BB:: @ 82306BB
 
 JaggedPass_EventScript_230718:: @ 8230718
 	lockall
-	checkflag FLAG_0x139
-	goto_eq JaggedPass_EventScript_230766
+	goto_if_set FLAG_0x139, JaggedPass_EventScript_230766
 	waitse
 	playse SE_PIN
 	applymovement 5, JaggedPass_Movement_272598
@@ -106,7 +105,7 @@ JaggedPass_EventScript_23079C:: @ 823079C
 	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_230974, JaggedPass_Text_2309B5, JaggedPass_EventScript_2307C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq JaggedPass_EventScript_2307E4
+	goto_if_eq JaggedPass_EventScript_2307E4
 	msgbox JaggedPass_Text_2309D8, MSGBOX_DEFAULT
 	release
 	end
@@ -127,7 +126,7 @@ JaggedPass_EventScript_2307FB:: @ 82307FB
 	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_230B10, JaggedPass_Text_230B50, JaggedPass_EventScript_230827
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq JaggedPass_EventScript_230843
+	goto_if_eq JaggedPass_EventScript_230843
 	msgbox JaggedPass_Text_230B93, MSGBOX_DEFAULT
 	release
 	end

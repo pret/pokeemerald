@@ -34,9 +34,9 @@ Route112_CableCarStation_EventScript_22AB17:: @ 822AB17
 	faceplayer
 	msgbox Route112_CableCarStation_Text_22AB85, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route112_CableCarStation_EventScript_22AB38
+	goto_if_eq Route112_CableCarStation_EventScript_22AB38
 	compare VAR_RESULT, 0
-	goto_eq Route112_CableCarStation_EventScript_22AB67
+	goto_if_eq Route112_CableCarStation_EventScript_22AB67
 	end
 
 Route112_CableCarStation_EventScript_22AB38:: @ 822AB38

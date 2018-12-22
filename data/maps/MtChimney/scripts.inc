@@ -105,17 +105,17 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	showmoneybox 0, 0, 0
 	msgbox MtChimney_Text_22FE04, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MtChimney_EventScript_22EF69
+	goto_if_eq MtChimney_EventScript_22EF69
 	checkmoney 0xc8, 0
 	compare VAR_RESULT, 0
-	goto_eq MtChimney_EventScript_22EF76
+	goto_if_eq MtChimney_EventScript_22EF76
 	msgbox MtChimney_Text_22FE4D, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare VAR_RESULT, 1
 	call_if 1, MtChimney_EventScript_22EF5E
 	giveitem_std ITEM_LAVA_COOKIE
 	compare VAR_RESULT, 0
-	goto_eq MtChimney_EventScript_22EF51
+	goto_if_eq MtChimney_EventScript_22EF51
 	hidemoneybox
 	nop
 	nop
@@ -454,13 +454,11 @@ MtChimney_EventScript_22F0DB:: @ 822F0DB
 
 MtChimney_EventScript_22F0E4:: @ 822F0E4
 	lockall
-	checkflag FLAG_0x08B
-	goto_if 0, MtChimney_EventScript_22F137
-	checkflag FLAG_0x073
-	goto_eq MtChimney_EventScript_22F12D
+	goto_if_unset FLAG_0x08B, MtChimney_EventScript_22F137
+	goto_if_set FLAG_0x073, MtChimney_EventScript_22F12D
 	msgbox MtChimney_Text_22FF12, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MtChimney_EventScript_22F123
+	goto_if_eq MtChimney_EventScript_22F123
 	msgbox MtChimney_Text_22FF66, MSGBOX_DEFAULT
 	giveitem_std ITEM_METEORITE
 	setflag FLAG_0x073
@@ -490,7 +488,7 @@ MtChimney_EventScript_22F14A:: @ 822F14A
 	trainerbattle_single TRAINER_SHELBY_1, MtChimney_Text_23001D, MtChimney_Text_230076, MtChimney_EventScript_22F176
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq MtChimney_EventScript_22F195
+	goto_if_eq MtChimney_EventScript_22F195
 	msgbox MtChimney_Text_2300A2, MSGBOX_DEFAULT
 	release
 	end
@@ -532,7 +530,7 @@ MtChimney_EventScript_22F208:: @ 822F208
 	trainerbattle_single TRAINER_SAWYER_1, MtChimney_Text_2304B3, MtChimney_Text_2304F7, MtChimney_EventScript_22F234
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq MtChimney_EventScript_22F253
+	goto_if_eq MtChimney_EventScript_22F253
 	msgbox MtChimney_Text_230519, MSGBOX_DEFAULT
 	release
 	end

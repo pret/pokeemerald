@@ -4,76 +4,54 @@ BattleFrontier_ScottsHouse_MapScripts:: @ 82636A7
 BattleFrontier_ScottsHouse_EventScript_2636A8:: @ 82636A8
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_4
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2637DA
-	checkflag FLAG_TEMP_3
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2638AA
-	checkflag FLAG_TEMP_2
-	goto_eq BattleFrontier_ScottsHouse_EventScript_263939
+	goto_if_set FLAG_TEMP_4, BattleFrontier_ScottsHouse_EventScript_2637DA
+	goto_if_set FLAG_TEMP_3, BattleFrontier_ScottsHouse_EventScript_2638AA
+	goto_if_set FLAG_TEMP_2, BattleFrontier_ScottsHouse_EventScript_263939
 	goto BattleFrontier_ScottsHouse_EventScript_2636CB
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2636CB:: @ 82636CB
-	checkflag FLAG_0x1D1
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_263943
-	checkflag FLAG_0x05C
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_263704
-	checkflag FLAG_0x1D2
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_26376A
+	goto_if_unset FLAG_0x1D1, BattleFrontier_ScottsHouse_EventScript_263943
+	goto_if_unset FLAG_0x05C, BattleFrontier_ScottsHouse_EventScript_263704
+	goto_if_unset FLAG_0x1D2, BattleFrontier_ScottsHouse_EventScript_26376A
 	goto BattleFrontier_ScottsHouse_EventScript_2636EC
 	end
 
 BattleFrontier_ScottsHouse_EventScript_2636EC:: @ 82636EC
-	checkflag FLAG_0x0ED
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_26381B
-	checkflag FLAG_0x0EE
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2638B4
+	goto_if_unset FLAG_0x0ED, BattleFrontier_ScottsHouse_EventScript_26381B
+	goto_if_unset FLAG_0x0EE, BattleFrontier_ScottsHouse_EventScript_2638B4
 	goto BattleFrontier_ScottsHouse_EventScript_2637E4
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263704:: @ 8263704
-	checkflag FLAG_SYS_TOWER_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_DOME_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_PALACE_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_ARENA_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_FACTORY_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_PIKE_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_PYRAMID_SILVER
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_TOWER_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_DOME_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_PALACE_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_ARENA_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_FACTORY_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_PIKE_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_PYRAMID_SILVER, BattleFrontier_ScottsHouse_EventScript_2636EC
 	msgbox BattleFrontier_ScottsHouse_Text_2640BC, MSGBOX_DEFAULT
 	giveitem_std ITEM_LANSAT_BERRY
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2637D0
 	setflag FLAG_0x05C
 	setflag FLAG_TEMP_4
 	release
 	end
 
 BattleFrontier_ScottsHouse_EventScript_26376A:: @ 826376A
-	checkflag FLAG_SYS_TOWER_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_DOME_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_PALACE_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_ARENA_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_FACTORY_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_PIKE_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
-	checkflag FLAG_SYS_PYRAMID_GOLD
-	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_TOWER_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_DOME_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_PALACE_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_ARENA_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_FACTORY_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_PIKE_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
+	goto_if_unset FLAG_SYS_PYRAMID_GOLD, BattleFrontier_ScottsHouse_EventScript_2636EC
 	msgbox BattleFrontier_ScottsHouse_Text_264216, MSGBOX_DEFAULT
 	giveitem_std ITEM_STARF_BERRY
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2637D0
 	setflag FLAG_0x1D2
 	setflag FLAG_TEMP_4
 	release
@@ -92,9 +70,9 @@ BattleFrontier_ScottsHouse_EventScript_2637DA:: @ 82637DA
 BattleFrontier_ScottsHouse_EventScript_2637E4:: @ 82637E4
 	random 3
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_ScottsHouse_EventScript_263807
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_263807
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_ScottsHouse_EventScript_263811
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_263811
 	msgbox BattleFrontier_ScottsHouse_Text_263DDD, MSGBOX_DEFAULT
 	release
 	end
@@ -119,7 +97,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	setvar VAR_0x8005, 1
 	special sub_8161F74
 	compare VAR_RESULT, 50
-	goto_if 4, BattleFrontier_ScottsHouse_EventScript_26387A
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_26387A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 1
@@ -128,7 +106,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	setvar VAR_0x8005, 1
 	special sub_8161F74
 	compare VAR_RESULT, 50
-	goto_if 4, BattleFrontier_ScottsHouse_EventScript_26387A
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_26387A
 	goto BattleFrontier_ScottsHouse_EventScript_2637E4
 	end
 
@@ -136,7 +114,7 @@ BattleFrontier_ScottsHouse_EventScript_26387A:: @ 826387A
 	msgbox BattleFrontier_ScottsHouse_Text_264412, MSGBOX_DEFAULT
 	givedecoration_std 42
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_0x0ED
 	setflag FLAG_TEMP_3
 	goto BattleFrontier_ScottsHouse_EventScript_2638AA
@@ -162,7 +140,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	setvar VAR_0x8005, 1
 	special sub_8161F74
 	compare VAR_RESULT, 100
-	goto_if 4, BattleFrontier_ScottsHouse_EventScript_263913
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_263913
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 1
@@ -171,7 +149,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	setvar VAR_0x8005, 1
 	special sub_8161F74
 	compare VAR_RESULT, 100
-	goto_if 4, BattleFrontier_ScottsHouse_EventScript_263913
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_263913
 	goto BattleFrontier_ScottsHouse_EventScript_2637E4
 	end
 
@@ -179,7 +157,7 @@ BattleFrontier_ScottsHouse_EventScript_263913:: @ 8263913
 	msgbox BattleFrontier_ScottsHouse_Text_26449F, MSGBOX_DEFAULT
 	givedecoration_std 43
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_0x0EE
 	setflag FLAG_TEMP_3
 	goto BattleFrontier_ScottsHouse_EventScript_2638AA
@@ -207,11 +185,11 @@ BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
 	waitmovement 0
 	msgbox BattleFrontier_ScottsHouse_Text_263BD4, MSGBOX_DEFAULT
 	compare VAR_0x40D1, 13
-	goto_eq BattleFrontier_ScottsHouse_EventScript_2639BC
+	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2639BC
 	compare VAR_0x40D1, 9
-	goto_if 4, BattleFrontier_ScottsHouse_EventScript_2639CB
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_2639CB
 	compare VAR_0x40D1, 6
-	goto_if 4, BattleFrontier_ScottsHouse_EventScript_2639DA
+	goto_if_ge BattleFrontier_ScottsHouse_EventScript_2639DA
 	goto BattleFrontier_ScottsHouse_EventScript_2639E9
 	end
 

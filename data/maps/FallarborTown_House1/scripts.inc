@@ -4,11 +4,10 @@ FallarborTown_House1_MapScripts:: @ 8200F12
 FallarborTown_House1_EventScript_200F13:: @ 8200F13
 	lock
 	faceplayer
-	checkflag FLAG_0x0E5
-	goto_eq FallarborTown_House1_EventScript_200FB2
+	goto_if_set FLAG_0x0E5, FallarborTown_House1_EventScript_200FB2
 	checkitem ITEM_METEORITE, 1
 	compare VAR_RESULT, 1
-	goto_eq FallarborTown_House1_EventScript_200F38
+	goto_if_eq FallarborTown_House1_EventScript_200F38
 	msgbox FallarborTown_House1_Text_200FEE, MSGBOX_DEFAULT
 	release
 	end
@@ -19,11 +18,11 @@ FallarborTown_House1_EventScript_200F38:: @ 8200F38
 	checkflag FLAG_TEMP_2
 	call_if 1, FallarborTown_House1_EventScript_200F9C
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_House1_EventScript_200FA5
+	goto_if_eq FallarborTown_House1_EventScript_200FA5
 	msgbox FallarborTown_House1_Text_201159, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM27
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_House1_EventScript_272054
+	goto_if_eq FallarborTown_House1_EventScript_272054
 	setvar VAR_0x8004, 280
 	call FallarborTown_House1_EventScript_2723E4
 	setflag FLAG_0x0E5
@@ -54,10 +53,8 @@ FallarborTown_House1_EventScript_200FB2:: @ 8200FB2
 FallarborTown_House1_EventScript_200FBC:: @ 8200FBC
 	lock
 	faceplayer
-	checkflag FLAG_0x0E5
-	goto_eq FallarborTown_House1_EventScript_200FE4
-	checkflag FLAG_0x08B
-	goto_eq FallarborTown_House1_EventScript_200FDA
+	goto_if_set FLAG_0x0E5, FallarborTown_House1_EventScript_200FE4
+	goto_if_set FLAG_0x08B, FallarborTown_House1_EventScript_200FDA
 	msgbox FallarborTown_House1_Text_2012BC, MSGBOX_DEFAULT
 	release
 	end

@@ -11,7 +11,7 @@ TerraCave_End_MapScript1_23B0BB: @ 823B0BB
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, TerraCave_End_EventScript_27374E
+	goto_if_ne TerraCave_End_EventScript_27374E
 	removeobject 1
 	return
 
@@ -44,11 +44,11 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq TerraCave_End_EventScript_23B155
+	goto_if_eq TerraCave_End_EventScript_23B155
 	compare VAR_RESULT, 4
-	goto_eq TerraCave_End_EventScript_23B163
+	goto_if_eq TerraCave_End_EventScript_23B163
 	compare VAR_RESULT, 5
-	goto_eq TerraCave_End_EventScript_23B163
+	goto_if_eq TerraCave_End_EventScript_23B163
 	setvar VAR_0x4039, 1
 	setflag FLAG_0x1BF
 	releaseall

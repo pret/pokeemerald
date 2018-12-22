@@ -48,8 +48,7 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	lockall
-	checkflag FLAG_0x107
-	goto_eq EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
+	goto_if_set FLAG_0x107, EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 11
 	call_if 4, EverGrandeCity_PokemonLeague_1F_EventScript_229698
@@ -58,8 +57,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	message EverGrandeCity_PokemonLeague_1F_Text_2296E8
 	waitmessage
 	delay 120
-	checkflag FLAG_BADGE06_GET
-	goto_if 0, EverGrandeCity_PokemonLeague_1F_EventScript_2296AE
+	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonLeague_1F_EventScript_2296AE
 	closemessage
 	applymovement 3, EverGrandeCity_PokemonLeague_1F_Movement_2296E2
 	applymovement 4, EverGrandeCity_PokemonLeague_1F_Movement_2296E5

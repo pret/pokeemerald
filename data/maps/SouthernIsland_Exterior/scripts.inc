@@ -11,7 +11,7 @@ SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2
 	faceplayer
 	msgbox SouthernIsland_Exterior_Text_2A69F1, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SouthernIsland_Exterior_EventScript_242A17
+	goto_if_eq SouthernIsland_Exterior_EventScript_242A17
 	msgbox SouthernIsland_Exterior_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, SouthernIsland_Exterior_Movement_2725AA

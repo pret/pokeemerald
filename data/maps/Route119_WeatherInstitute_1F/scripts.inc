@@ -17,7 +17,7 @@ Route119_WeatherInstitute_1F_EventScript_26FAA4:: @ 826FAA4
 	faceplayer
 	special GetPlayerBigGuyGirlString
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	goto_eq Route119_WeatherInstitute_1F_EventScript_26FABE
+	goto_if_eq Route119_WeatherInstitute_1F_EventScript_26FABE
 	msgbox Route119_WeatherInstitute_1F_Text_26FCE5, MSGBOX_DEFAULT
 	release
 	end
@@ -30,15 +30,14 @@ Route119_WeatherInstitute_1F_EventScript_26FABE:: @ 826FABE
 Route119_WeatherInstitute_1F_EventScript_26FAC8:: @ 826FAC8
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, Route119_WeatherInstitute_1F_EventScript_26FB05
+	goto_if_unset FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_1F_EventScript_26FB05
 	setvar VAR_0x8004, 0
 	checkflag FLAG_0x1BE
 	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FAFF
 	checkflag FLAG_0x1BF
 	call_if 1, Route119_WeatherInstitute_1F_EventScript_26FAFF
 	compare VAR_0x8004, 2
-	goto_eq Route119_WeatherInstitute_1F_EventScript_26FB05
+	goto_if_eq Route119_WeatherInstitute_1F_EventScript_26FB05
 	msgbox Route119_WeatherInstitute_1F_Text_26FDE8, MSGBOX_DEFAULT
 	release
 	end

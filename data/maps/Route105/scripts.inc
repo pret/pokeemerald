@@ -65,7 +65,7 @@ Route105_EventScript_1EE2D4:: @ 81EE2D4
 	trainerbattle_single TRAINER_ANDRES_1, Route105_Text_2960A9, Route105_Text_2960DB, Route105_EventScript_1EE300
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route105_EventScript_1EE31F
+	goto_if_eq Route105_EventScript_1EE31F
 	msgbox Route105_Text_2960FA, MSGBOX_DEFAULT
 	release
 	end

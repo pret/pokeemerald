@@ -9,12 +9,9 @@ Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA
 Route109_SeashoreHouse_EventScript_2693FE:: @ 82693FE
 	lock
 	faceplayer
-	checkflag FLAG_0x08C
-	goto_eq Route109_SeashoreHouse_EventScript_269460
-	checkflag FLAG_0x08D
-	goto_eq Route109_SeashoreHouse_EventScript_269432
-	checkflag FLAG_TEMP_2
-	goto_eq Route109_SeashoreHouse_EventScript_269428
+	goto_if_set FLAG_0x08C, Route109_SeashoreHouse_EventScript_269460
+	goto_if_set FLAG_0x08D, Route109_SeashoreHouse_EventScript_269432
+	goto_if_set FLAG_TEMP_2, Route109_SeashoreHouse_EventScript_269428
 	msgbox Route109_SeashoreHouse_Text_269555, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	release
@@ -29,7 +26,7 @@ Route109_SeashoreHouse_EventScript_269432:: @ 8269432
 	msgbox Route109_SeashoreHouse_Text_269685, MSGBOX_DEFAULT
 	giveitem_std ITEM_SODA_POP, 6
 	compare VAR_RESULT, 0
-	goto_eq Route109_SeashoreHouse_EventScript_269456
+	goto_if_eq Route109_SeashoreHouse_EventScript_269456
 	setflag FLAG_0x08C
 	release
 	end
@@ -43,7 +40,7 @@ Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 	showmoneybox 0, 0, 0
 	msgbox Route109_SeashoreHouse_Text_26977E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route109_SeashoreHouse_EventScript_269484
+	goto_if_eq Route109_SeashoreHouse_EventScript_269484
 	msgbox Route109_SeashoreHouse_Text_2697EF, MSGBOX_DEFAULT
 	hidemoneybox
 	nop
@@ -54,10 +51,10 @@ Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 Route109_SeashoreHouse_EventScript_269484:: @ 8269484
 	checkmoney 0x12c, 0
 	compare VAR_RESULT, 0
-	goto_eq Route109_SeashoreHouse_EventScript_2694C8
+	goto_if_eq Route109_SeashoreHouse_EventScript_2694C8
 	checkitemspace ITEM_SODA_POP, 1
 	compare VAR_RESULT, 0
-	goto_eq Route109_SeashoreHouse_EventScript_2694D5
+	goto_if_eq Route109_SeashoreHouse_EventScript_2694D5
 	msgbox Route109_SeashoreHouse_Text_2697C8, MSGBOX_DEFAULT
 	takemoney 0x12c, 0
 	updatemoneybox 0, 0
@@ -102,11 +99,11 @@ Route109_SeashoreHouse_EventScript_269518:: @ 8269518
 
 Route109_SeashoreHouse_EventScript_269533:: @ 8269533
 	checktrainerflag TRAINER_DWAYNE
-	goto_if 0, Route109_SeashoreHouse_EventScript_269553
+	goto_if_lt Route109_SeashoreHouse_EventScript_269553
 	checktrainerflag TRAINER_JOHANNA
-	goto_if 0, Route109_SeashoreHouse_EventScript_269553
+	goto_if_lt Route109_SeashoreHouse_EventScript_269553
 	checktrainerflag TRAINER_SIMON
-	goto_if 0, Route109_SeashoreHouse_EventScript_269553
+	goto_if_lt Route109_SeashoreHouse_EventScript_269553
 	setflag FLAG_0x08D
 	release
 	end

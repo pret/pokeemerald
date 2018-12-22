@@ -87,7 +87,7 @@ BattleFrontier_RankingHall_EventScript_25E54A:: @ 825E54A
 	faceplayer
 	msgbox BattleFrontier_RankingHall_Text_25E666, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_RankingHall_EventScript_25E569
+	goto_if_eq BattleFrontier_RankingHall_EventScript_25E569
 	msgbox BattleFrontier_RankingHall_Text_25E6B6, MSGBOX_DEFAULT
 	release
 	end

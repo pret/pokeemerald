@@ -10,7 +10,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AC5: @ 8259AC5
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF:: @ 8259ACF
 	setvar VAR_TEMP_1, 1
 	compare VAR_0x8006, 1
-	goto_if 5, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA
+	goto_if_ne BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA
 	setobjectxy 1, 8, 7
 	turnobject 1, 1
 
@@ -24,13 +24,13 @@ BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF: @ 8259AEF
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
 	compare VAR_0x8006, 1
-	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5
+	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5
 	setvar VAR_TEMP_0, 1
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1AC
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A
 	waitmovement 0
 	compare VAR_0x8006, 2
-	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69
+	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69
 	setvar VAR_0x8004, 13
 	special CallBattleFactoryFunction
 	setvar VAR_0x8004, 12
@@ -76,7 +76,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	setvar VAR_0x8004, 9
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26
+	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26
 	playse 263
 	waitse
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC15, MSGBOX_DEFAULT
@@ -97,7 +97,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13:: @ 8259C13
 	setvar VAR_0x8004, 9
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
+	goto_if_ne BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
 	setvar VAR_0x8004, 1
@@ -117,7 +117,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E40
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259CC6
+	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259CC6
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259D98
@@ -186,7 +186,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2:: @ 8259DF2
 	special CallBattleFactoryFunction
 	waitstate
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
+	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 	setvar VAR_0x8004, 8
 	special CallBattleFactoryFunction
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB6C, MSGBOX_DEFAULT
@@ -421,7 +421,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9:: @ 825A0B9
 	waitmessage
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A110
+	goto_if_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A110
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A146

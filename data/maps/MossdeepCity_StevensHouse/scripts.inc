@@ -75,7 +75,7 @@ MossdeepCity_StevensHouse_EventScript_222841:: @ 8222841
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_222B9E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_StevensHouse_EventScript_22285B
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_22285B
 	goto MossdeepCity_StevensHouse_EventScript_222865
 	end
 
@@ -88,9 +88,9 @@ MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 	setvar VAR_TEMP_1, 398
 	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_StevensHouse_EventScript_222895
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_222895
 	compare VAR_RESULT, 1
-	goto_eq MossdeepCity_StevensHouse_EventScript_2228BD
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_2228BD
 	goto MossdeepCity_StevensHouse_EventScript_273811
 	end
 
@@ -98,7 +98,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	call MossdeepCity_StevensHouse_EventScript_2228EB
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_StevensHouse_EventScript_222901
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
 	call MossdeepCity_StevensHouse_EventScript_2723DD
 	goto MossdeepCity_StevensHouse_EventScript_222901
@@ -108,7 +108,7 @@ MossdeepCity_StevensHouse_EventScript_2228BD:: @ 82228BD
 	call MossdeepCity_StevensHouse_EventScript_2228EB
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_StevensHouse_EventScript_2228E0
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_2228E0
 	call MossdeepCity_StevensHouse_EventScript_273797
 	goto MossdeepCity_StevensHouse_EventScript_2228E0
 	end

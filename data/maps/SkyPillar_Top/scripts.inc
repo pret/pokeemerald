@@ -12,7 +12,7 @@ SkyPillar_Top_MapScript1_2396C8: @ 82396C8
 SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, SkyPillar_Top_EventScript_27374E
+	goto_if_ne SkyPillar_Top_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
@@ -58,11 +58,11 @@ SkyPillar_Top_EventScript_239722:: @ 8239722
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq SkyPillar_Top_EventScript_239768
+	goto_if_eq SkyPillar_Top_EventScript_239768
 	compare VAR_RESULT, 4
-	goto_eq SkyPillar_Top_EventScript_239771
+	goto_if_eq SkyPillar_Top_EventScript_239771
 	compare VAR_RESULT, 5
-	goto_eq SkyPillar_Top_EventScript_239771
+	goto_if_eq SkyPillar_Top_EventScript_239771
 	setflag FLAG_0x1C0
 	releaseall
 	end

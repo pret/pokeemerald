@@ -26,10 +26,8 @@ Route104_MrBrineysHouse_EventScript_229D67:: @ 8229D67
 	faceplayer
 	checkflag FLAG_0x093
 	call_if 0, Route104_MrBrineysHouse_EventScript_229D8A
-	checkflag FLAG_0x0BD
-	goto_if 0, Route104_MrBrineysHouse_EventScript_229DE1
-	checkflag FLAG_0x095
-	goto_if 0, Route104_MrBrineysHouse_EventScript_229DFA
+	goto_if_unset FLAG_0x0BD, Route104_MrBrineysHouse_EventScript_229DE1
+	goto_if_unset FLAG_0x095, Route104_MrBrineysHouse_EventScript_229DFA
 	goto Route104_MrBrineysHouse_EventScript_229DAE
 	end
 
@@ -38,7 +36,7 @@ Route104_MrBrineysHouse_EventScript_229D8A:: @ 8229D8A
 	msgbox Route104_MrBrineysHouse_Text_229E70, MSGBOX_DEFAULT
 	msgbox Route104_MrBrineysHouse_Text_229E9B, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route104_MrBrineysHouse_EventScript_229E13
+	goto_if_eq Route104_MrBrineysHouse_EventScript_229E13
 	goto Route104_MrBrineysHouse_EventScript_229E27
 	end
 
@@ -55,14 +53,14 @@ Route104_MrBrineysHouse_EventScript_229DAE:: @ 8229DAE
 Route104_MrBrineysHouse_EventScript_229DE1:: @ 8229DE1
 	msgbox Route104_MrBrineysHouse_Text_22A0AD, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route104_MrBrineysHouse_EventScript_229E13
+	goto_if_eq Route104_MrBrineysHouse_EventScript_229E13
 	goto Route104_MrBrineysHouse_EventScript_229E27
 	end
 
 Route104_MrBrineysHouse_EventScript_229DFA:: @ 8229DFA
 	msgbox Route104_MrBrineysHouse_Text_22A18F, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route104_MrBrineysHouse_EventScript_229E13
+	goto_if_eq Route104_MrBrineysHouse_EventScript_229E13
 	goto Route104_MrBrineysHouse_EventScript_229E27
 	end
 

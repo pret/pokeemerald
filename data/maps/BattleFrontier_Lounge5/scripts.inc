@@ -6,16 +6,16 @@ BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
 	faceplayer
 	msgbox BattleFrontier_Lounge5_Text_264632, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_Lounge5_EventScript_26460D
+	goto_if_eq BattleFrontier_Lounge5_EventScript_26460D
 	special sub_81B94B0
 	waitstate
 	lock
 	faceplayer
 	compare VAR_0x8004, 255
-	goto_eq BattleFrontier_Lounge5_EventScript_26460D
+	goto_if_eq BattleFrontier_Lounge5_EventScript_26460D
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, 412
-	goto_eq BattleFrontier_Lounge5_EventScript_264603
+	goto_if_eq BattleFrontier_Lounge5_EventScript_264603
 	special sub_813A7B8
 	waitmessage
 	waitbuttonpress

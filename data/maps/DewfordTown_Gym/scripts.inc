@@ -8,21 +8,21 @@ DewfordTown_Gym_MapScript1_1FC642: @ 81FC642
 
 DewfordTown_Gym_EventScript_1FC648:: @ 81FC648
 	checktrainerflag TRAINER_BRAWLY_1
-	goto_eq DewfordTown_Gym_EventScript_1FC6A2
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6A2
 	call DewfordTown_Gym_EventScript_1FC768
 	copyvar VAR_0x8001, VAR_0x8000
 	compare VAR_0x8000, 0
-	goto_eq DewfordTown_Gym_EventScript_1FC6BE
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6BE
 	compare VAR_0x8000, 1
-	goto_eq DewfordTown_Gym_EventScript_1FC6BA
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6BA
 	compare VAR_0x8000, 2
-	goto_eq DewfordTown_Gym_EventScript_1FC6B6
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6B6
 	compare VAR_0x8000, 3
-	goto_eq DewfordTown_Gym_EventScript_1FC6B2
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6B2
 	compare VAR_0x8000, 4
-	goto_eq DewfordTown_Gym_EventScript_1FC6AE
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6AE
 	compare VAR_0x8000, 5
-	goto_eq DewfordTown_Gym_EventScript_1FC6AA
+	goto_if_eq DewfordTown_Gym_EventScript_1FC6AA
 	goto DewfordTown_Gym_EventScript_1FC6A6
 
 DewfordTown_Gym_EventScript_1FC6A2:: @ 81FC6A2
@@ -61,20 +61,20 @@ DewfordTown_Gym_EventScript_1FC6C2:: @ 81FC6C2
 	call DewfordTown_Gym_EventScript_1FC768
 	nop1
 	compare VAR_0x8000, VAR_0x8001
-	goto_eq DewfordTown_Gym_EventScript_1FC71A
+	goto_if_eq DewfordTown_Gym_EventScript_1FC71A
 	copyvar VAR_0x8001, VAR_0x8000
 	compare VAR_0x8000, 1
-	goto_eq DewfordTown_Gym_EventScript_1FC71B
+	goto_if_eq DewfordTown_Gym_EventScript_1FC71B
 	compare VAR_0x8000, 2
-	goto_eq DewfordTown_Gym_EventScript_1FC726
+	goto_if_eq DewfordTown_Gym_EventScript_1FC726
 	compare VAR_0x8000, 3
-	goto_eq DewfordTown_Gym_EventScript_1FC731
+	goto_if_eq DewfordTown_Gym_EventScript_1FC731
 	compare VAR_0x8000, 4
-	goto_eq DewfordTown_Gym_EventScript_1FC73C
+	goto_if_eq DewfordTown_Gym_EventScript_1FC73C
 	compare VAR_0x8000, 5
-	goto_eq DewfordTown_Gym_EventScript_1FC747
+	goto_if_eq DewfordTown_Gym_EventScript_1FC747
 	compare VAR_0x8000, 6
-	goto_eq DewfordTown_Gym_EventScript_1FC752
+	goto_if_eq DewfordTown_Gym_EventScript_1FC752
 
 DewfordTown_Gym_EventScript_1FC71A:: @ 81FC71A
 	return
@@ -124,32 +124,32 @@ DewfordTown_Gym_EventScript_1FC75D:: @ 81FC75D
 DewfordTown_Gym_EventScript_1FC768:: @ 81FC768
 	setvar VAR_0x8000, 0
 	checktrainerflag TRAINER_TAKAO
-	goto_if 0, DewfordTown_Gym_EventScript_1FC77B
+	goto_if_lt DewfordTown_Gym_EventScript_1FC77B
 	addvar VAR_0x8000, 1
 
 DewfordTown_Gym_EventScript_1FC77B:: @ 81FC77B
 	checktrainerflag TRAINER_JOCELYN
-	goto_if 0, DewfordTown_Gym_EventScript_1FC789
+	goto_if_lt DewfordTown_Gym_EventScript_1FC789
 	addvar VAR_0x8000, 1
 
 DewfordTown_Gym_EventScript_1FC789:: @ 81FC789
 	checktrainerflag TRAINER_LAURA
-	goto_if 0, DewfordTown_Gym_EventScript_1FC797
+	goto_if_lt DewfordTown_Gym_EventScript_1FC797
 	addvar VAR_0x8000, 1
 
 DewfordTown_Gym_EventScript_1FC797:: @ 81FC797
 	checktrainerflag TRAINER_BRENDEN
-	goto_if 0, DewfordTown_Gym_EventScript_1FC7A5
+	goto_if_lt DewfordTown_Gym_EventScript_1FC7A5
 	addvar VAR_0x8000, 1
 
 DewfordTown_Gym_EventScript_1FC7A5:: @ 81FC7A5
 	checktrainerflag TRAINER_CRISTIAN
-	goto_if 0, DewfordTown_Gym_EventScript_1FC7B3
+	goto_if_lt DewfordTown_Gym_EventScript_1FC7B3
 	addvar VAR_0x8000, 1
 
 DewfordTown_Gym_EventScript_1FC7B3:: @ 81FC7B3
 	checktrainerflag TRAINER_LILITH
-	goto_if 0, DewfordTown_Gym_EventScript_1FC7C1
+	goto_if_lt DewfordTown_Gym_EventScript_1FC7C1
 	addvar VAR_0x8000, 1
 
 DewfordTown_Gym_EventScript_1FC7C1:: @ 81FC7C1
@@ -159,9 +159,8 @@ DewfordTown_Gym_EventScript_1FC7C2:: @ 81FC7C2
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_1FCF44, DewfordTown_Gym_Text_1FD008, DewfordTown_Gym_EventScript_1FC7F7, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_Gym_EventScript_1FC89C
-	checkflag FLAG_0x0A6
-	goto_if 0, DewfordTown_Gym_EventScript_1FC878
+	goto_if_eq DewfordTown_Gym_EventScript_1FC89C
+	goto_if_unset FLAG_0x0A6, DewfordTown_Gym_EventScript_1FC878
 	msgbox DewfordTown_Gym_Text_1FD20D, MSGBOX_DEFAULT
 	release
 	end
@@ -196,7 +195,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_Gym_EventScript_27205E
+	goto_if_eq DewfordTown_Gym_EventScript_27205E
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_0x0A6
 	return
@@ -204,7 +203,7 @@ DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 DewfordTown_Gym_EventScript_1FC878:: @ 81FC878
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_Gym_EventScript_272054
+	goto_if_eq DewfordTown_Gym_EventScript_272054
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_0x0A6
 	release
@@ -278,8 +277,7 @@ DewfordTown_Gym_EventScript_1FC97C:: @ 81FC97C
 DewfordTown_Gym_EventScript_1FC983:: @ 81FC983
 	lock
 	faceplayer
-	checkflag FLAG_0x4F1
-	goto_eq DewfordTown_Gym_EventScript_1FC998
+	goto_if_set FLAG_0x4F1, DewfordTown_Gym_EventScript_1FC998
 	msgbox DewfordTown_Gym_Text_1FC9D6, MSGBOX_DEFAULT
 	release
 	end
@@ -291,15 +289,13 @@ DewfordTown_Gym_EventScript_1FC998:: @ 81FC998
 
 DewfordTown_Gym_EventScript_1FC9A2:: @ 81FC9A2
 	lockall
-	checkflag FLAG_BADGE02_GET
-	goto_eq DewfordTown_Gym_EventScript_1FC9C2
+	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_1FC9C2
 	goto DewfordTown_Gym_EventScript_1FC9CC
 	end
 
 DewfordTown_Gym_EventScript_1FC9B2:: @ 81FC9B2
 	lockall
-	checkflag FLAG_BADGE02_GET
-	goto_eq DewfordTown_Gym_EventScript_1FC9C2
+	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_1FC9C2
 	goto DewfordTown_Gym_EventScript_1FC9CC
 	end
 

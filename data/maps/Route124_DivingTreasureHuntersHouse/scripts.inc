@@ -9,8 +9,7 @@ Route124_DivingTreasureHuntersHouse_MapScript1_270A2E: @ 8270A2E
 Route124_DivingTreasureHuntersHouse_EventScript_270A32:: @ 8270A32
 	lock
 	faceplayer
-	checkflag FLAG_0x0D9
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270A4E
+	goto_if_set FLAG_0x0D9, Route124_DivingTreasureHuntersHouse_EventScript_270A4E
 	msgbox Route124_DivingTreasureHuntersHouse_Text_270F6C, MSGBOX_DEFAULT
 	setflag FLAG_0x0D9
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270A5C
@@ -24,7 +23,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270A4E:: @ 8270A4E
 Route124_DivingTreasureHuntersHouse_EventScript_270A5C:: @ 8270A5C
 	call Route124_DivingTreasureHuntersHouse_EventScript_270A72
 	compare VAR_TEMP_1, 0
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F57
+	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270F57
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270AD0
 	end
 
@@ -248,13 +247,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0
 	bufferitemname 1, VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_271132, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F4D
+	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	checkitemspace VAR_0x8009, 1
 	compare VAR_RESULT, 1
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F01
+	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270F01
 	checkitem VAR_0x8008, 2
 	compare VAR_RESULT, 0
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F01
+	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270F01
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270F43
 	end
 
@@ -264,10 +263,10 @@ Route124_DivingTreasureHuntersHouse_EventScript_270F01:: @ 8270F01
 	msgbox Route124_DivingTreasureHuntersHouse_Text_271158, MSGBOX_DEFAULT
 	call Route124_DivingTreasureHuntersHouse_EventScript_270A72
 	compare VAR_TEMP_1, 0
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F61
+	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270F61
 	msgbox Route124_DivingTreasureHuntersHouse_Text_27117B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270ADE
+	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_270ADE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	end
 

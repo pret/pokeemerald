@@ -24,7 +24,7 @@ Route110_TrickHousePuzzle2_MapScript1_26BBAB: @ 826BBAB
 Route110_TrickHousePuzzle2_EventScript_26BBC0:: @ 826BBC0
 	lockall
 	compare VAR_0x40AC, 0
-	goto_eq Route110_TrickHousePuzzle2_EventScript_26BBD2
+	goto_if_eq Route110_TrickHousePuzzle2_EventScript_26BBD2
 	goto Route110_TrickHousePuzzle2_EventScript_26A3DB
 	end
 

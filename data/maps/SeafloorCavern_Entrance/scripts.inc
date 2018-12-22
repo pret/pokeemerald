@@ -10,7 +10,7 @@ SeafloorCavern_Entrance_MapScript1_234474: @ 8234474
 SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	lockall
 	compare VAR_0x40D9, 1
-	goto_eq SeafloorCavern_Entrance_EventScript_2344ED
+	goto_if_eq SeafloorCavern_Entrance_EventScript_2344ED
 	waitse
 	playse SE_PIN
 	applymovement 1, SeafloorCavern_Entrance_Movement_272598

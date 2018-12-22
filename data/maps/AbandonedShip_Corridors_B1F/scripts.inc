@@ -28,11 +28,10 @@ AbandonedShip_Corridors_B1F_EventScript_237DBF:: @ 8237DBF
 
 AbandonedShip_Corridors_B1F_EventScript_237DC8:: @ 8237DC8
 	lockall
-	checkflag FLAG_0x0EF
-	goto_eq AbandonedShip_Corridors_B1F_EventScript_237E09
+	goto_if_set FLAG_0x0EF, AbandonedShip_Corridors_B1F_EventScript_237E09
 	checkitem ITEM_STORAGE_KEY, 1
 	compare VAR_RESULT, 0
-	goto_eq AbandonedShip_Corridors_B1F_EventScript_237DFF
+	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_237DFF
 	msgbox AbandonedShip_Corridors_B1F_Text_237F4B, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_STORAGE_KEY, 1

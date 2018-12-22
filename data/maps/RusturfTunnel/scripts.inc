@@ -31,8 +31,7 @@ RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_1
-	goto_eq RusturfTunnel_EventScript_22CE99
+	goto_if_set FLAG_TEMP_1, RusturfTunnel_EventScript_22CE99
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_22D510, MSGBOX_DEFAULT
 	closemessage

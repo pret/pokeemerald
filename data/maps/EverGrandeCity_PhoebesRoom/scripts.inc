@@ -41,8 +41,7 @@ EverGrandeCity_PhoebesRoom_EventScript_2281C5:: @ 82281C5
 EverGrandeCity_PhoebesRoom_EventScript_2281CB:: @ 82281CB
 	lock
 	faceplayer
-	checkflag FLAG_0x4FC
-	goto_eq EverGrandeCity_PhoebesRoom_EventScript_2281F2
+	goto_if_set FLAG_0x4FC, EverGrandeCity_PhoebesRoom_EventScript_2281F2
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_22820E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_228325
