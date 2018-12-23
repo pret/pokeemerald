@@ -755,6 +755,7 @@ _0810B80A:\n\
 	.pool\n");
 }
 #endif
+
 void sub_810B848(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
