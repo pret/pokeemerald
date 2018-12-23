@@ -10,7 +10,7 @@ RusturfTunnel_MapScript2_22CE32: @ 822CE32
 
 RusturfTunnel_MapScript1_22CE44: @ 822CE44
 	compare VAR_RUSTURF_TUNNEL_STATE, 2
-	call_if 1, RusturfTunnel_EventScript_22CE50
+	call_if_eq RusturfTunnel_EventScript_22CE50
 	end
 
 RusturfTunnel_EventScript_22CE50:: @ 822CE50
@@ -31,8 +31,7 @@ RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_1
-	goto_eq RusturfTunnel_EventScript_22CE99
+	goto_if_set FLAG_TEMP_1, RusturfTunnel_EventScript_22CE99
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_22D510, MSGBOX_DEFAULT
 	closemessage
@@ -52,35 +51,35 @@ RusturfTunnel_EventScript_22CE99:: @ 822CE99
 RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	lockall
 	compare VAR_TEMP_1, 1
-	call_if 1, RusturfTunnel_EventScript_22CFA7
+	call_if_eq RusturfTunnel_EventScript_22CFA7
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_22CFBC
+	call_if_eq RusturfTunnel_EventScript_22CFBC
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_22CFC7
+	call_if_eq RusturfTunnel_EventScript_22CFC7
 	call RusturfTunnel_EventScript_22CFFF
 	msgbox RusturfTunnel_Text_22D65C, MSGBOX_DEFAULT
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_22CFC8
+	call_if_eq RusturfTunnel_EventScript_22CFC8
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_22CFC8
+	call_if_eq RusturfTunnel_EventScript_22CFC8
 	giveitem_std ITEM_HM04
 	setflag FLAG_0x06A
 	msgbox RusturfTunnel_Text_22D6D2, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, RusturfTunnel_EventScript_22CF5D
+	call_if_eq RusturfTunnel_EventScript_22CF5D
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_22CF6F
+	call_if_eq RusturfTunnel_EventScript_22CF6F
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_22CF8B
+	call_if_eq RusturfTunnel_EventScript_22CF8B
 	msgbox RusturfTunnel_Text_22D745, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, RusturfTunnel_EventScript_22CFD4
+	call_if_eq RusturfTunnel_EventScript_22CFD4
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_22CFE6
+	call_if_eq RusturfTunnel_EventScript_22CFE6
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_22CFE6
+	call_if_eq RusturfTunnel_EventScript_22CFE6
 	call RusturfTunnel_EventScript_272216
 	releaseall
 	end

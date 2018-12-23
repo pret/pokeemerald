@@ -15,7 +15,7 @@ EventScript_2A4B6F:: @ 82A4B6F
 	lockall
 	msgbox Text_2A4BF4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq EventScript_2A4B85
+	goto_if_eq EventScript_2A4B85
 	releaseall
 	end
 
@@ -44,10 +44,10 @@ EventScript_2A4BAC:: @ 82A4BAC
 	lockall
 	special GetPokeblockFeederInFront
 	compare VAR_RESULT, 65535
-	goto_if 5, EventScript_2A4BEB
+	goto_if_ne EventScript_2A4BEB
 	msgbox Text_2A4C90, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq EventScript_2A4BD0
+	goto_if_eq EventScript_2A4BD0
 	releaseall
 	end
 
@@ -56,7 +56,7 @@ EventScript_2A4BD0:: @ 82A4BD0
 	special OpenPokeblockCaseOnFeeder
 	waitstate
 	compare VAR_RESULT, 65535
-	goto_if 5, EventScript_2A4BE2
+	goto_if_ne EventScript_2A4BE2
 	end
 
 EventScript_2A4BE2:: @ 82A4BE2

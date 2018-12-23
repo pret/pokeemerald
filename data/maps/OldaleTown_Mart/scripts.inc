@@ -6,8 +6,7 @@ OldaleTown_Mart_EventScript_1FC240:: @ 81FC240
 	faceplayer
 	message gUnknown_08272A21
 	waitmessage
-	checkflag FLAG_0x074
-	goto_eq OldaleTown_Mart_EventScript_1FC26C
+	goto_if_set FLAG_0x074, OldaleTown_Mart_EventScript_1FC26C
 	pokemart OldaleTown_Mart_Pokemart_1FC260
 	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release
@@ -42,8 +41,7 @@ OldaleTown_Mart_Pokemart_1FC27C: @ 81FC27C
 OldaleTown_Mart_EventScript_1FC28A:: @ 81FC28A
 	lock
 	faceplayer
-	checkflag FLAG_0x074
-	goto_eq OldaleTown_Mart_EventScript_1FC29F
+	goto_if_set FLAG_0x074, OldaleTown_Mart_EventScript_1FC29F
 	msgbox OldaleTown_Mart_Text_1FC2B2, MSGBOX_DEFAULT
 	release
 	end

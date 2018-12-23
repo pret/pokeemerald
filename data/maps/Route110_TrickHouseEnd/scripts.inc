@@ -7,7 +7,7 @@ Route110_TrickHouseEnd_MapScripts:: @ 826ACAF
 
 Route110_TrickHouseEnd_MapScript1_26ACC4: @ 826ACC4
 	compare VAR_TEMP_1, 1
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AD0D
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AD0D
 	end
 
 Route110_TrickHouseEnd_MapScript1_26ACD0: @ 826ACD0
@@ -62,7 +62,7 @@ Route110_TrickHouseEnd_EventScript_26AD84:: @ 826AD84
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_RARE_CANDY
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -75,7 +75,7 @@ Route110_TrickHouseEnd_EventScript_26ADC0:: @ 826ADC0
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_TIMER_BALL
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -88,7 +88,7 @@ Route110_TrickHouseEnd_EventScript_26ADFC:: @ 826ADFC
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_HARD_STONE
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -101,7 +101,7 @@ Route110_TrickHouseEnd_EventScript_26AE38:: @ 826AE38
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_SMOKE_BALL
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -114,7 +114,7 @@ Route110_TrickHouseEnd_EventScript_26AE74:: @ 826AE74
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_TM12
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -127,7 +127,7 @@ Route110_TrickHouseEnd_EventScript_26AEB0:: @ 826AEB0
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_MAGNET
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -140,7 +140,7 @@ Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_PP_MAX
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
+	call_if_eq Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_26AFCF
@@ -151,13 +151,13 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	msgbox Route110_TrickHouseEnd_Text_26B3AB, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 1
-	call_if 1, Route110_TrickHouseEnd_EventScript_26B015
+	call_if_eq Route110_TrickHouseEnd_EventScript_26B015
 	compare VAR_FACING, 2
-	call_if 1, Route110_TrickHouseEnd_EventScript_26B020
+	call_if_eq Route110_TrickHouseEnd_EventScript_26B020
 	compare VAR_FACING, 3
-	call_if 1, Route110_TrickHouseEnd_EventScript_26B02B
+	call_if_eq Route110_TrickHouseEnd_EventScript_26B02B
 	compare VAR_FACING, 4
-	call_if 1, Route110_TrickHouseEnd_EventScript_26B036
+	call_if_eq Route110_TrickHouseEnd_EventScript_26B036
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
 	closemessage
@@ -168,7 +168,7 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	setvar VAR_0x40C1, 0
 	call Route110_TrickHouseEnd_EventScript_26AFA5
 	compare VAR_RESULT, 0
-	call_if 1, Route110_TrickHouseEnd_EventScript_26B002
+	call_if_eq Route110_TrickHouseEnd_EventScript_26B002
 	msgbox Route110_TrickHouseEnd_Text_26B69A, MSGBOX_DEFAULT
 	call Route110_TrickHouseEnd_EventScript_26AFCF
 	special ResetTrickHouseEndRoomFlag

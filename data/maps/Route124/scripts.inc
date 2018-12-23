@@ -3,8 +3,7 @@ Route124_MapScripts:: @ 81F656C
 	.byte 0
 
 Route124_MapScript1_1F6572: @ 81F6572
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, Route124_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Route124_EventScript_27207A
 	end
 
 Route124_EventScript_1F657C:: @ 81F657C
@@ -25,7 +24,7 @@ Route124_EventScript_1F65B3:: @ 81F65B3
 	trainerbattle_single TRAINER_JENNY_1, Route124_Text_2A0B37, Route124_Text_2A0B7C, Route124_EventScript_1F65DF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route124_EventScript_1F65FE
+	goto_if_eq Route124_EventScript_1F65FE
 	msgbox Route124_Text_2A0B9A, MSGBOX_DEFAULT
 	release
 	end
@@ -57,7 +56,7 @@ Route124_EventScript_1F6643:: @ 81F6643
 	trainerbattle_double TRAINER_LILA_AND_ROY_1, Route124_Text_2A0E87, Route124_Text_2A0EFE, Route124_Text_2A0F8C, Route124_EventScript_1F6673
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route124_EventScript_1F668C
+	goto_if_eq Route124_EventScript_1F668C
 	msgbox Route124_Text_2A0F3A, MSGBOX_DEFAULT
 	release
 	end
@@ -77,7 +76,7 @@ Route124_EventScript_1F66A7:: @ 81F66A7
 	trainerbattle_double TRAINER_LILA_AND_ROY_1, Route124_Text_2A0FD1, Route124_Text_2A1012, Route124_Text_2A10E5, Route124_EventScript_1F66D7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route124_EventScript_1F66F0
+	goto_if_eq Route124_EventScript_1F66F0
 	msgbox Route124_Text_2A103E, MSGBOX_DEFAULT
 	release
 	end

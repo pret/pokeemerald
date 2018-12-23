@@ -4,7 +4,7 @@ Route110_TrickHousePuzzle8_MapScripts:: @ 826E801
 Route110_TrickHousePuzzle8_EventScript_26E802:: @ 826E802
 	lockall
 	compare VAR_0x40B2, 0
-	goto_eq Route110_TrickHousePuzzle8_EventScript_26E814
+	goto_if_eq Route110_TrickHousePuzzle8_EventScript_26E814
 	goto Route110_TrickHousePuzzle8_EventScript_26A3DB
 	end
 

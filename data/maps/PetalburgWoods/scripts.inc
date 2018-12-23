@@ -90,7 +90,7 @@ PetalburgWoods_EventScript_22E138:: @ 822E138
 	msgbox PetalburgWoods_Text_22E63D, MSGBOX_DEFAULT
 	giveitem_std ITEM_GREAT_BALL
 	compare VAR_RESULT, 0
-	goto_eq PetalburgWoods_EventScript_22E17D
+	goto_if_eq PetalburgWoods_EventScript_22E17D
 	goto PetalburgWoods_EventScript_22E18B
 	end
 
@@ -249,12 +249,11 @@ PetalburgWoods_EventScript_22E219:: @ 822E219
 PetalburgWoods_EventScript_22E222:: @ 822E222
 	lock
 	faceplayer
-	checkflag FLAG_0x129
-	goto_eq PetalburgWoods_EventScript_22E251
+	goto_if_set FLAG_0x129, PetalburgWoods_EventScript_22E251
 	msgbox PetalburgWoods_Text_22EAFE, MSGBOX_DEFAULT
 	giveitem_std ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
-	goto_eq PetalburgWoods_EventScript_272054
+	goto_if_eq PetalburgWoods_EventScript_272054
 	setflag FLAG_0x129
 	release
 	end
@@ -281,11 +280,11 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq PetalburgWoods_EventScript_22E31B
+	goto_if_eq PetalburgWoods_EventScript_22E31B
 	setvar VAR_0x8004, 621
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
-	goto_eq PetalburgWoods_EventScript_22E2EF
+	goto_if_eq PetalburgWoods_EventScript_22E2EF
 	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT
 	release
 	end
@@ -293,8 +292,7 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 PetalburgWoods_EventScript_22E2C5:: @ 822E2C5
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_HAS_MATCH_CALL
-	goto_eq PetalburgWoods_EventScript_22E2D6
+	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_22E2D6
 	release
 	end
 
@@ -305,8 +303,7 @@ PetalburgWoods_EventScript_22E2D6:: @ 822E2D6
 	end
 
 PetalburgWoods_EventScript_22E2EF:: @ 822E2EF
-	checkflag FLAG_HAS_MATCH_CALL
-	goto_eq PetalburgWoods_EventScript_22E302
+	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_22E302
 	msgbox PetalburgWoods_Text_22E889, MSGBOX_DEFAULT
 	release
 	end

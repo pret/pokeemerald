@@ -5,7 +5,7 @@ MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
 
 MossdeepCity_SpaceCenter_1F_MapScript1_222F4C: @ 8222F4C
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_222F58
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222F58
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_222F58:: @ 8222F58
@@ -19,11 +19,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_222F58:: @ 8222F58
 	setobjectmovementtype 1, 10
 	setobjectmovementtype 2, 10
 	compare VAR_0x409E, 1
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_222FAA
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FAA
 	compare VAR_0x409E, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_222FB2
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FB2
 	compare VAR_0x409E, 3
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_222FBA
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FBA
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_222FAA:: @ 8222FAA
@@ -40,7 +40,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FBA:: @ 8222FBA
 
 MossdeepCity_SpaceCenter_1F_MapScript1_222FC2: @ 8222FC2
 	compare VAR_0x405D, 2
-	goto_if 3, MossdeepCity_SpaceCenter_1F_EventScript_222FCE
+	goto_if_le MossdeepCity_SpaceCenter_1F_EventScript_222FCE
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_222FCE:: @ 8222FCE
@@ -51,14 +51,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	lock
 	faceplayer
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_223024
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223024
 	dodailyevents
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_223012
+	call_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223012
 	compare VAR_RESULT, 1
-	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_22301B
+	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22301B
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A2
 	waitmovement 0
@@ -78,9 +78,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_223051
+	call_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223051
 	compare VAR_RESULT, 1
-	call_if 4, MossdeepCity_SpaceCenter_1F_EventScript_22305A
+	call_if_ge MossdeepCity_SpaceCenter_1F_EventScript_22305A
 	closemessage
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
 	waitmovement 0
@@ -99,7 +99,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223063:: @ 8223063
 	lock
 	faceplayer
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_22307A
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_22307A
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2233D3, MSGBOX_DEFAULT
 	release
 	end
@@ -115,13 +115,12 @@ MossdeepCity_SpaceCenter_1F_EventScript_22308E:: @ 822308E
 	lock
 	faceplayer
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_2230DA
-	checkflag FLAG_0x0C0
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_2230D0
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_2230DA
+	goto_if_set FLAG_0x0C0, MossdeepCity_SpaceCenter_1F_EventScript_2230D0
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223540, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
 	setflag FLAG_0x0C0
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2235A6, MSGBOX_DEFAULT
 	release
@@ -133,12 +132,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_2230D0:: @ 82230D0
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_2230DA:: @ 82230DA
-	checkflag FLAG_0x0C0
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_223119
+	goto_if_set FLAG_0x0C0, MossdeepCity_SpaceCenter_1F_EventScript_223119
 	msgbox MossdeepCity_SpaceCenter_1F_Text_2235F0, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUN_STONE
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_272054
 	setflag FLAG_0x0C0
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223664, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_2725A8
@@ -156,12 +154,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_223119:: @ 8223119
 MossdeepCity_SpaceCenter_1F_EventScript_22312D:: @ 822312D
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_223154
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_223154
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_22315E
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_22315E
 	compare VAR_0x405D, 2
-	goto_if 0, MossdeepCity_SpaceCenter_1F_EventScript_223154
+	goto_if_lt MossdeepCity_SpaceCenter_1F_EventScript_223154
 	goto MossdeepCity_SpaceCenter_1F_EventScript_22315E
 	end
 
@@ -178,12 +175,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_22315E:: @ 822315E
 MossdeepCity_SpaceCenter_1F_EventScript_223168:: @ 8223168
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_22318F
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_22318F
 	compare VAR_0x405D, 2
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_2231A4
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_2231A4
 	compare VAR_0x405D, 2
-	goto_if 0, MossdeepCity_SpaceCenter_1F_EventScript_22318F
+	goto_if_lt MossdeepCity_SpaceCenter_1F_EventScript_22318F
 	goto MossdeepCity_SpaceCenter_1F_EventScript_2231A4
 	end
 
@@ -236,8 +232,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_223208:: @ 8223208
 MossdeepCity_SpaceCenter_1F_EventScript_22321F:: @ 822321F
 	lock
 	faceplayer
-	checkflag FLAG_0x0BF
-	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_22326E
+	goto_if_set FLAG_0x0BF, MossdeepCity_SpaceCenter_1F_EventScript_22326E
 	msgbox MossdeepCity_SpaceCenter_1F_Text_223B90, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_23, MossdeepCity_SpaceCenter_1F_Text_223BC2
 	setflag FLAG_0x0BF

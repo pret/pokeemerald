@@ -6,25 +6,24 @@ Route129_MapScripts:: @ 81F7284
 
 Route129_MapScript1_1F7294: @ 81F7294
 	compare VAR_0x4037, 15
-	call_if 1, Route129_EventScript_273C39
+	call_if_eq Route129_EventScript_273C39
 	compare VAR_0x4037, 16
-	call_if 1, Route129_EventScript_273CA6
+	call_if_eq Route129_EventScript_273CA6
 	end
 
 Route129_MapScript1_1F72AB: @ 81F72AB
 	compare VAR_0x4039, 1
-	call_if 1, Route129_EventScript_273D13
+	call_if_eq Route129_EventScript_273D13
 	compare VAR_0x405E, 4
-	call_if 4, Route129_EventScript_1F72D8
+	call_if_ge Route129_EventScript_1F72D8
 	compare VAR_0x4037, 15
-	call_if 1, Route129_EventScript_273D17
+	call_if_eq Route129_EventScript_273D17
 	compare VAR_0x4037, 16
-	call_if 1, Route129_EventScript_273D17
+	call_if_eq Route129_EventScript_273D17
 	end
 
 Route129_EventScript_1F72D8:: @ 81F72D8
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, Route129_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Route129_EventScript_27207A
 	return
 
 Route129_MapScript2_1F72E2: @ 81F72E2

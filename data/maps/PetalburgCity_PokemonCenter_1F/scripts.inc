@@ -30,17 +30,17 @@ PetalburgCity_PokemonCenter_1F_EventScript_207A1C:: @ 8207A1C
 	msgbox PetalburgCity_PokemonCenter_1F_Text_207B09, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, IsStarterInParty
 	compare VAR_RESULT, 1
-	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_207A38
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_207A38
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A38:: @ 8207A38
 	compare VAR_STARTER_MON, 0
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A5B
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_207A5B
 	compare VAR_STARTER_MON, 1
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A64
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_207A64
 	compare VAR_STARTER_MON, 2
-	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A6D
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_207A6D
 	release
 	end
 

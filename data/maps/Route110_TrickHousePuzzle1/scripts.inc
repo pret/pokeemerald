@@ -4,7 +4,7 @@ Route110_TrickHousePuzzle1_MapScripts:: @ 826B90F
 
 Route110_TrickHousePuzzle1_MapScript1_26B915: @ 826B915
 	compare VAR_0x40AB, 2
-	goto_eq Route110_TrickHousePuzzle1_EventScript_26B921
+	goto_if_eq Route110_TrickHousePuzzle1_EventScript_26B921
 	end
 
 Route110_TrickHousePuzzle1_EventScript_26B921:: @ 826B921
@@ -14,7 +14,7 @@ Route110_TrickHousePuzzle1_EventScript_26B921:: @ 826B921
 Route110_TrickHousePuzzle1_EventScript_26B92B:: @ 826B92B
 	lockall
 	compare VAR_0x40AB, 0
-	goto_eq Route110_TrickHousePuzzle1_EventScript_26B93D
+	goto_if_eq Route110_TrickHousePuzzle1_EventScript_26B93D
 	goto Route110_TrickHousePuzzle1_EventScript_26A3DB
 	end
 

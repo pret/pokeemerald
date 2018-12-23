@@ -5,13 +5,13 @@ Route110_TrickHousePuzzle2_MapScripts:: @ 826BB73
 
 Route110_TrickHousePuzzle2_MapScript1_26BB7E: @ 826BB7E
 	compare VAR_TEMP_1, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC29
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_26BC29
 	compare VAR_TEMP_2, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC3C
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_26BC3C
 	compare VAR_TEMP_3, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC4F
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_26BC4F
 	compare VAR_TEMP_4, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_26BC62
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_26BC62
 	end
 
 Route110_TrickHousePuzzle2_MapScript1_26BBAB: @ 826BBAB
@@ -24,7 +24,7 @@ Route110_TrickHousePuzzle2_MapScript1_26BBAB: @ 826BBAB
 Route110_TrickHousePuzzle2_EventScript_26BBC0:: @ 826BBC0
 	lockall
 	compare VAR_0x40AC, 0
-	goto_eq Route110_TrickHousePuzzle2_EventScript_26BBD2
+	goto_if_eq Route110_TrickHousePuzzle2_EventScript_26BBD2
 	goto Route110_TrickHousePuzzle2_EventScript_26A3DB
 	end
 

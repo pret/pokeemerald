@@ -4,22 +4,20 @@ BattleFrontier_OutsideEast_MapScripts:: @ 8242C04
 	.byte 0
 
 BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, BattleFrontier_OutsideEast_EventScript_242C19
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, BattleFrontier_OutsideEast_EventScript_242C19
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, BattleFrontier_OutsideEast_EventScript_27374E
+	goto_if_ne BattleFrontier_OutsideEast_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
 BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
 	setvar VAR_0x40BC, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
-	checkflag FLAG_0x1C6
-	call_if 0, BattleFrontier_OutsideEast_EventScript_242C3F
+	call_if_unset FLAG_0x1C6, BattleFrontier_OutsideEast_EventScript_242C3F
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C3F:: @ 8242C3F
@@ -136,11 +134,11 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
+	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
 	compare VAR_RESULT, 4
-	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
+	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
 	compare VAR_RESULT, 5
-	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
+	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
 	setflag FLAG_0x1C6
 	release
 	end
@@ -223,8 +221,7 @@ BattleFrontier_OutsideEast_EventScript_242DE0:: @ 8242DE0
 BattleFrontier_OutsideEast_EventScript_242DE9:: @ 8242DE9
 	lock
 	faceplayer
-	checkflag FLAG_0x1C6
-	goto_eq BattleFrontier_OutsideEast_EventScript_242DFE
+	goto_if_set FLAG_0x1C6, BattleFrontier_OutsideEast_EventScript_242DFE
 	msgbox BattleFrontier_OutsideEast_Text_243C2C, MSGBOX_DEFAULT
 	release
 	end

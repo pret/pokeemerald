@@ -133,7 +133,7 @@ FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
 	setvar VAR_0x8004, 1
 	special sub_81B9B80
 	compare VAR_RESULT, 0
-	goto_if 5, FallarborTown_BattleTentLobby_EventScript_1FFF84
+	goto_if_ne FallarborTown_BattleTentLobby_EventScript_1FFF84
 	special SavePlayerParty
 	msgbox FallarborTown_BattleTentLobby_Text_2C47EB, MSGBOX_DEFAULT
 
@@ -154,7 +154,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq FallarborTown_BattleTentLobby_EventScript_200176
+	goto_if_eq FallarborTown_BattleTentLobby_EventScript_200176
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 2
@@ -166,7 +166,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_BattleTentLobby_EventScript_2001C2
+	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001C2
 	msgbox FallarborTown_BattleTentLobby_Text_2C4B35, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_2001C2
@@ -194,7 +194,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	call FallarborTown_BattleTentLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_BattleTentLobby_EventScript_2001AB
+	goto_if_eq FallarborTown_BattleTentLobby_EventScript_2001AB
 
 FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C
 	special SavePlayerParty
@@ -294,8 +294,7 @@ FallarborTown_BattleTentLobby_EventScript_20021F:: @ 820021F
 FallarborTown_BattleTentLobby_EventScript_200228:: @ 8200228
 	lock
 	faceplayer
-	checkflag FLAG_0x1CD
-	goto_eq FallarborTown_BattleTentLobby_EventScript_200245
+	goto_if_set FLAG_0x1CD, FallarborTown_BattleTentLobby_EventScript_200245
 	msgbox FallarborTown_BattleTentLobby_Text_200501, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x1CD

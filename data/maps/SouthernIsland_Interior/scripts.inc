@@ -4,22 +4,21 @@ SouthernIsland_Interior_MapScripts:: @ 8242A45
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, SouthernIsland_Interior_EventScript_242A5A
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_242A5A
 	end
 
 SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, SouthernIsland_Interior_EventScript_27374E
+	goto_if_ne SouthernIsland_Interior_EventScript_27374E
 	removeobject 2
 	return
 
 SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
 	compare VAR_0x40D5, 0
-	call_if 1, SouthernIsland_Interior_EventScript_242A8A
+	call_if_eq SouthernIsland_Interior_EventScript_242A8A
 	compare VAR_0x40D5, 0
-	call_if 5, SouthernIsland_Interior_EventScript_242A95
+	call_if_ne SouthernIsland_Interior_EventScript_242A95
 	call SouthernIsland_Interior_EventScript_242AA0
 	end
 
@@ -36,9 +35,9 @@ SouthernIsland_Interior_EventScript_242A95:: @ 8242A95
 SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq SouthernIsland_Interior_EventScript_242AB8
+	goto_if_eq SouthernIsland_Interior_EventScript_242AB8
 	compare VAR_RESULT, 1
-	goto_eq SouthernIsland_Interior_EventScript_242ABE
+	goto_if_eq SouthernIsland_Interior_EventScript_242ABE
 	end
 
 SouthernIsland_Interior_EventScript_242AB8:: @ 8242AB8
@@ -56,14 +55,10 @@ SouthernIsland_Interior_EventScript_242AC4:: @ 8242AC4
 	end
 
 SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
-	checkflag FLAG_TEMP_2
-	goto_eq SouthernIsland_Interior_EventScript_242B9A
-	checkflag FLAG_0x1C8
-	goto_eq SouthernIsland_Interior_EventScript_242B9A
-	checkflag FLAG_0x1C9
-	goto_eq SouthernIsland_Interior_EventScript_242B9A
-	checkflag FLAG_SYS_HAS_EON_TICKET
-	goto_if 0, SouthernIsland_Interior_EventScript_242B9A
+	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_242B9A
+	goto_if_set FLAG_0x1C8, SouthernIsland_Interior_EventScript_242B9A
+	goto_if_set FLAG_0x1C9, SouthernIsland_Interior_EventScript_242B9A
+	goto_if_unset FLAG_SYS_HAS_EON_TICKET, SouthernIsland_Interior_EventScript_242B9A
 	setflag FLAG_0x0CE
 	setflag FLAG_TEMP_2
 	special SpawnCameraObject
@@ -83,20 +78,20 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	special RemoveCameraObject
 	setvar VAR_LAST_TALKED, 2
 	compare VAR_0x40D5, 0
-	call_if 1, SouthernIsland_Interior_EventScript_242BA4
+	call_if_eq SouthernIsland_Interior_EventScript_242BA4
 	compare VAR_0x40D5, 0
-	call_if 5, SouthernIsland_Interior_EventScript_242BB7
+	call_if_ne SouthernIsland_Interior_EventScript_242BB7
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLatiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq SouthernIsland_Interior_EventScript_242B81
+	goto_if_eq SouthernIsland_Interior_EventScript_242B81
 	compare VAR_RESULT, 4
-	goto_eq SouthernIsland_Interior_EventScript_242B8F
+	goto_if_eq SouthernIsland_Interior_EventScript_242B8F
 	compare VAR_RESULT, 5
-	goto_eq SouthernIsland_Interior_EventScript_242B8F
+	goto_if_eq SouthernIsland_Interior_EventScript_242B8F
 	setflag FLAG_0x1C9
 	releaseall
 	end
