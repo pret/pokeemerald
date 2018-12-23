@@ -609,6 +609,7 @@ SECTIONS {
         src/list_menu.o(.rodata);
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
+        src/party_menu.o(.rodata);
         data/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);

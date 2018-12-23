@@ -41,6 +41,10 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
+// gcc-8 does not like it when inline asm references
+// a static symbol, even if it's in the same file.
+#define static
+
 struct WallpaperTable
 {
     const u32 *tiles;
