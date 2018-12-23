@@ -584,6 +584,7 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
+    u8 introState;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

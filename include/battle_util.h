@@ -43,6 +43,7 @@ void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
 void MarkAllBattlersForControllerExec(void); // unused
+bool32 IsBattlerMarkedForControllerExec(u8 battlerId);
 void MarkBattlerForControllerExec(u8 battlerId);
 void sub_803F850(u8 arg0);
 void CancelMultiTurnMoves(u8 battlerId);

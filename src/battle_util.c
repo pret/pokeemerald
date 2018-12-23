@@ -440,6 +440,14 @@ void MarkAllBattlersForControllerExec(void) // unused
     }
 }
 
+bool32 IsBattlerMarkedForControllerExec(u8 battlerId)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return (gBattleControllerExecFlags & (gBitTable[battlerId] << 0x1C)) != 0;
+    else
+        return (gBattleControllerExecFlags & (gBitTable[battlerId])) != 0;
+}
+
 void MarkBattlerForControllerExec(u8 battlerId)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
