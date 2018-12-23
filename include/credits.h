@@ -7,5 +7,6 @@
 extern EWRAM_DATA bool8 gHasHallOfFameRecords;
 
 // Exported ROM declarations
+void sub_8175620(void);
 
-#endif //GUARD_CREDITS_H
+#endif // GUARD_CREDITS_H

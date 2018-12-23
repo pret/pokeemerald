@@ -15,6 +15,7 @@
 #include "task.h"
 #include "sprite.h"
 #include "sound.h"
+#include "party_menu.h"
 #include "m4a.h"
 #include "constants/species.h"
 #include "decompress.h"
@@ -41,10 +42,6 @@ extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const u8 gEnemyMonElevation[];
-
-extern u8 sub_80688F8(u8, u8 battlerId);
-extern u8 pokemon_order_func(u8); // party menu
-extern void sub_81B8C68(void);
 
 // this file's functions
 static u8 sub_805D4A8(u16 move);

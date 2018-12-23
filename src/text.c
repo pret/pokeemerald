@@ -9,12 +9,12 @@
 #include "window.h"
 #include "text.h"
 #include "blit.h"
+#include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern int GetPlayerTextSpeed();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};

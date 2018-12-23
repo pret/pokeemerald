@@ -19,6 +19,7 @@
 #include "window.h"
 #include "palette.h"
 #include "decompress.h"
+#include "party_menu.h"
 #include "menu.h"
 #include "sound.h"
 #include "pokemon_icon.h"
@@ -56,12 +57,6 @@ struct UnkStruct_860DD10
     u8 y;
     u16 src;
 };
-
-extern void sub_81B8558(void);
-
-extern u8 gSelectedOrderFromParty[];
-
-extern const struct SpriteTemplate gUnknown_0860CFA8;
 
 // text
 extern const u8 gTrainerClassNames[][0xD];

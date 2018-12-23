@@ -5,6 +5,7 @@
 #include "frontier_util.h"
 #include "battle_message.h"
 #include "battle_tent.h"
+#include "battle_factory.h"
 #include "bg.h"
 #include "contest.h"
 #include "contest_effect.h"
@@ -44,8 +45,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-
-extern bool8 sub_81A6BF4(void);
 
 static EWRAM_DATA struct UnkSummaryStruct
 {
@@ -129,7 +128,6 @@ struct UnkStruct_61CC04
 };
 
 // forward declarations
-bool8 IsMultiBattle(void);
 static bool8 SummaryScreen_LoadGraphics(void);
 static void SummaryScreen_LoadingCB2(void);
 static void InitBGs(void);
@@ -238,8 +236,6 @@ static void sub_81C4568(u8 a, u8 b);
 static u8 sub_81C45F4(struct Pokemon *a, s16 *b);
 static u8 sub_81C47B4(struct Pokemon *unused);
 static void sub_81C4844(struct Sprite *);
-void SummaryScreen_SetUnknownTaskId(u8 a);
-void SummaryScreen_DestroyUnknownTask(void);
 static void sub_81C48F0(void);
 static void CreateMonMarkingsSprite(struct Pokemon *mon);
 static void RemoveAndCreateMonMarkingsSprite(struct Pokemon *mon);

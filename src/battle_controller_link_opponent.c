@@ -6,6 +6,7 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
+#include "battle_tower.h"
 #include "battle_tv.h"
 #include "bg.h"
 #include "data2.h"
@@ -33,7 +34,6 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern void sub_8172EF0(u8 battlerId, struct Pokemon *mon);
 extern void sub_81851A8(u8 *);
 extern u16 sub_8068B48(void);
-extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 
 // this file's functions
 static void LinkOpponentHandleGetMonData(void);

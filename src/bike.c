@@ -19,8 +19,6 @@ extern u8 sub_808B9BC(u8 direction);
 extern u8 sub_808B9A4(u8 direction);
 extern u8 sub_808C1B4(u8 direction);
 extern u8 sub_808B9D4(u8 direction);
-extern void Overworld_ClearSavedMusic(void);
-extern void Overworld_PlaySpecialMapMusic(void);
 
 // this file's functions
 static void MovePlayerOnMachBike(u8, u16, u16);
