@@ -61,6 +61,8 @@ struct LockedAnimEventObjects
 };
 
 extern const struct SpriteFrameImage gEventObjectPicTable_PechaBerryTree[];
+extern const struct OamData gEventObjectBaseOam_32x8;
+extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const u8 gReflectionEffectPaletteMap[];
 
 void ResetEventObjects(void);
