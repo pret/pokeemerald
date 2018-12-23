@@ -283,6 +283,13 @@ u8 gNumberOfMovesToChoose;
 u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 
 // rom const data
+
+// Unknown and unused data. Feel free to remove.
+static const u16 gUnknown_0831ACB8[] = {0, 5, 0xfffe, 0};
+static const u16 *const gUnknown_0831ACC0 = gUnknown_0831ACB8;
+static const u16 gUnknown_0831ACC4[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0x7ffe, 1, 0, 0};
+static const u16 *const gUnknown_0831ACDC = gUnknown_0831ACC4;
+
 static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
 
 // format: attacking type, defending type, damage multiplier

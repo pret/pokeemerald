@@ -601,7 +601,6 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);
-        data/unk_transition.o(.rodata);
         src/unk_transition.o(.rodata);
         data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);

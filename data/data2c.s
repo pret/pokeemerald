@@ -38,19 +38,3 @@ gUnknown_0831ACB0:: @ 831ACB0
 	.2byte 0x0100
 	.2byte 0xC000
 	.2byte 0x2800
-
-	.align 2
-gUnknown_0831ACB8:: @ 831ACB8
-	.2byte 0x0000, 0x0005, 0xfffe, 0x0000
-
-	.align 2
-gUnknown_0831ACC0:: @ 831ACC0
-	.4byte gUnknown_0831ACB8
-
-	.align 2
-gUnknown_0831ACC4:: @ 831ACC4
-	.2byte 0xfff0, 0x0000, 0x0400, 0x0000, 0x0000, 0x0000, 0x3c00, 0x0000, 0x7ffe, 0x0001, 0x0000, 0x0000
-
-	.align 2
-gUnknown_0831ACDC:: @ 831ACDC
-	.4byte gUnknown_0831ACC4
