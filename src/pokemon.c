@@ -45,8 +45,6 @@ struct SpeciesItem
     u16 item;
 };
 
-extern const struct OamData gUnknown_0831ACB0;
-extern const struct OamData gUnknown_0831ACA8;
 extern const struct SpriteFrameImage gUnknown_082FF3A8[];
 extern const struct SpriteFrameImage gUnknown_082FF3C8[];
 extern const struct SpriteFrameImage gUnknown_082FF3E8[];
@@ -2298,7 +2296,7 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     {   // B_POSITION_PLAYER_LEFT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF3A8,
         .affineAnims = gUnknown_082FF618,
@@ -2307,16 +2305,16 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     {   // B_POSITION_OPPONENT_LEFT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACA8,
+        .oam = &gOamData_831ACA8,
         .anims = NULL,
         .images = gUnknown_082FF3C8,
         .affineAnims = gUnknown_082FF694,
-        .callback = oac_poke_opponent,
+        .callback = SpriteCb_WildMon,
     },
     {   // B_POSITION_PLAYER_RIGHT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF3E8,
         .affineAnims = gUnknown_082FF618,
@@ -2325,11 +2323,11 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     {   // B_POSITION_OPPONENT_RIGHT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACA8,
+        .oam = &gOamData_831ACA8,
         .anims = NULL,
         .images = gUnknown_082FF408,
         .affineAnims = gUnknown_082FF694,
-        .callback = oac_poke_opponent
+        .callback = SpriteCb_WildMon
     },
 };
 
@@ -2338,7 +2336,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF428,
         .affineAnims = gUnknown_082FF618,
@@ -2347,7 +2345,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF448,
         .affineAnims = gUnknown_082FF618,
@@ -2356,7 +2354,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF468,
         .affineAnims = gUnknown_082FF618,
@@ -2365,7 +2363,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF490,
         .affineAnims = gUnknown_082FF618,
@@ -2374,7 +2372,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF4B8,
         .affineAnims = gUnknown_082FF618,
@@ -2383,7 +2381,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF4D8,
         .affineAnims = gUnknown_082FF618,
@@ -2392,7 +2390,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF4F8,
         .affineAnims = gUnknown_082FF618,
@@ -2401,7 +2399,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF518,
         .affineAnims = gUnknown_082FF618,
