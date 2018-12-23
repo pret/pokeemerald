@@ -530,122 +530,122 @@ bool8 PartyMenuSetup(void)
 {
     switch (gMain.state)
     {
-        case 0:
-            SetVBlankHBlankCallbacksToNull();
-            ResetVramOamAndBgCntRegs();
-            clear_scheduled_bg_copies_to_vram();
-            gMain.state++;
-            break;
-        case 1:
-            ScanlineEffect_Stop();
-            gMain.state++;
-            break;
-        case 2:
-            ResetPaletteFade();
-            gPaletteFade.bufferTransferDisabled = TRUE;
-            gMain.state++;
-            break;
-        case 3:
-            ResetSpriteData();
-            gMain.state++;
-            break;
-        case 4:
-            FreeAllSpritePalettes();
-            gMain.state++;
-            break;
-        case 5:
-            if (!sub_81221AC())
-                ResetTasks();
-            gMain.state++;
-            break;
-        case 6:
-            sub_81B209C();
-            gMain.state++;
-            break;
-        case 7:
-            if (!AllocPartyMenuBg())
-            {
-                PartyMenuExit();
-                return TRUE;
-            }
-            else
-            {
-                gUnknown_0203CEC4->data[0] = 0;
-                gMain.state++;
-            }
-            break;
-        case 8:
-            if (AllocPartyMiscGfx())
-                gMain.state++;
-            break;
-        case 9:
-            sub_81B239C(gUnknown_0203CEC8.mode);
-            gMain.state++;
-            break;
-        case 10:
-            PartyMenuInitHelperStructs(gUnknown_0203CEC8.mode);
+    case 0:
+        SetVBlankHBlankCallbacksToNull();
+        ResetVramOamAndBgCntRegs();
+        clear_scheduled_bg_copies_to_vram();
+        gMain.state++;
+        break;
+    case 1:
+        ScanlineEffect_Stop();
+        gMain.state++;
+        break;
+    case 2:
+        ResetPaletteFade();
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        gMain.state++;
+        break;
+    case 3:
+        ResetSpriteData();
+        gMain.state++;
+        break;
+    case 4:
+        FreeAllSpritePalettes();
+        gMain.state++;
+        break;
+    case 5:
+        if (!sub_81221AC())
+            ResetTasks();
+        gMain.state++;
+        break;
+    case 6:
+        sub_81B209C();
+        gMain.state++;
+        break;
+    case 7:
+        if (!AllocPartyMenuBg())
+        {
+            PartyMenuExit();
+            return TRUE;
+        }
+        else
+        {
             gUnknown_0203CEC4->data[0] = 0;
             gMain.state++;
-            break;
-        case 11:
-            LoadHeldItemIcons();
+        }
+        break;
+    case 8:
+        if (AllocPartyMiscGfx())
             gMain.state++;
-            break;
-        case 12:
-            LoadPartyMenuPokeballGfx();
+        break;
+    case 9:
+        sub_81B239C(gUnknown_0203CEC8.mode);
+        gMain.state++;
+        break;
+    case 10:
+        PartyMenuInitHelperStructs(gUnknown_0203CEC8.mode);
+        gUnknown_0203CEC4->data[0] = 0;
+        gMain.state++;
+        break;
+    case 11:
+        LoadHeldItemIcons();
+        gMain.state++;
+        break;
+    case 12:
+        LoadPartyMenuPokeballGfx();
+        gMain.state++;
+        break;
+    case 13:
+        LoadPartyMenuAilmentGfx();
+        gMain.state++;
+        break;
+    case 14:
+        LoadMonIconPalettes();
+        gMain.state++;
+        break;
+    case 15:
+        if (party_menu_add_per_mon_objects())
+        {
+            gUnknown_0203CEC4->data[0] = 0;
             gMain.state++;
-            break;
-        case 13:
-            LoadPartyMenuAilmentGfx();
+        }
+        break;
+    case 16:
+        if (RenderPartyMenuBoxes())
+        {
+            gUnknown_0203CEC4->data[0] = 0;
             gMain.state++;
-            break;
-        case 14:
-            LoadMonIconPalettes();
-            gMain.state++;
-            break;
-        case 15:
-            if (party_menu_add_per_mon_objects())
-            {
-                gUnknown_0203CEC4->data[0] = 0;
-                gMain.state++;
-            }
-            break;
-        case 16:
-            if (RenderPartyMenuBoxes())
-            {
-                gUnknown_0203CEC4->data[0] = 0;
-                gMain.state++;
-            }
-            break;
-        case 17:
-            sub_81B0F28();
-            gMain.state++;
-            break;
-        case 18:
-            sub_81B2428(gUnknown_0203CEC4->unk8_0);
-            gMain.state++;
-            break;
-        case 19:
-            gMain.state++;
-            break;
-        case 20:
-            CreateTask(gUnknown_0203CEC4->unk0, 0);
-            display_pokemon_menu_message(gUnknown_0203CEC4->unkA_0);
-            gMain.state++;
-            break;
-        case 21:
-            BlendPalettes(0xFFFFFFFF, 16, 0);
-            gPaletteFade.bufferTransferDisabled = FALSE;
-            gMain.state++;
-            break;
-        case 22:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-            gMain.state++;
-            break;
-        default:
-            SetVBlankCallback(PartyMenuVBlankCallback);
-            SetMainCallback2(PartyMenuCallback);
-            return TRUE;
+        }
+        break;
+    case 17:
+        sub_81B0F28();
+        gMain.state++;
+        break;
+    case 18:
+        sub_81B2428(gUnknown_0203CEC4->unk8_0);
+        gMain.state++;
+        break;
+    case 19:
+        gMain.state++;
+        break;
+    case 20:
+        CreateTask(gUnknown_0203CEC4->unk0, 0);
+        display_pokemon_menu_message(gUnknown_0203CEC4->unkA_0);
+        gMain.state++;
+        break;
+    case 21:
+        BlendPalettes(0xFFFFFFFF, 16, 0);
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        gMain.state++;
+        break;
+    case 22:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        gMain.state++;
+        break;
+    default:
+        SetVBlankCallback(PartyMenuVBlankCallback);
+        SetMainCallback2(PartyMenuCallback);
+        return TRUE;
     }
     return FALSE;
 }
@@ -701,45 +701,45 @@ bool8 AllocPartyMiscGfx(void)
 
     switch (gUnknown_0203CEC4->data[0])
     {
-        case 0:
-            gUnknown_0203CEE0 = malloc_and_decompress(gPartyMenuMisc_Gfx, &sizeout);
-            LoadBgTiles(1, gUnknown_0203CEE0, sizeout, 0);
+    case 0:
+        gUnknown_0203CEE0 = malloc_and_decompress(gPartyMenuMisc_Gfx, &sizeout);
+        LoadBgTiles(1, gUnknown_0203CEE0, sizeout, 0);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            LZDecompressWram(gPartyMenuMisc_Tilemap, gUnknown_0203CEE4);
             gUnknown_0203CEC4->data[0]++;
-            break;
-        case 1:
-            if (!IsDma3ManagerBusyWithBgCopy())
-            {
-                LZDecompressWram(gPartyMenuMisc_Tilemap, gUnknown_0203CEE4);
-                gUnknown_0203CEC4->data[0]++;
-            }
-            break;
-        case 2:
-            LoadCompressedPalette(gPartyMenuMisc_Pal, 0, 0x160);
-            CpuCopy16(gPlttBufferUnfaded, gUnknown_0203CEC4->palBuffer, 0x160);
-            gUnknown_0203CEC4->data[0]++;
-            break;
-        case 3:
-            PartyPaletteBufferCopy(4);
-            gUnknown_0203CEC4->data[0]++;
-            break;
-        case 4:
-            PartyPaletteBufferCopy(5);
-            gUnknown_0203CEC4->data[0]++;
-            break;
-        case 5:
-            PartyPaletteBufferCopy(6);
-            gUnknown_0203CEC4->data[0]++;
-            break;
-        case 6:
-            PartyPaletteBufferCopy(7);
-            gUnknown_0203CEC4->data[0]++;
-            break;
-        case 7:
-            PartyPaletteBufferCopy(8);
-            gUnknown_0203CEC4->data[0]++;
-            break;
-        default:
-            return TRUE;
+        }
+        break;
+    case 2:
+        LoadCompressedPalette(gPartyMenuMisc_Pal, 0, 0x160);
+        CpuCopy16(gPlttBufferUnfaded, gUnknown_0203CEC4->palBuffer, 0x160);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    case 3:
+        PartyPaletteBufferCopy(4);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    case 4:
+        PartyPaletteBufferCopy(5);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    case 5:
+        PartyPaletteBufferCopy(6);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    case 6:
+        PartyPaletteBufferCopy(7);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    case 7:
+        PartyPaletteBufferCopy(8);
+        gUnknown_0203CEC4->data[0]++;
+        break;
+    default:
+        return TRUE;
     }
     return FALSE;
 }
@@ -897,15 +897,15 @@ void DisplayPartyPokemonSelectForContest(u8 slot)
 {
     switch (sub_80DAE0C(&gPlayerParty[slot]))
     {
-        case 0:
-        case 3:
-        case 4:
-            DisplayPartyPokemonSelectData(slot, 7);
-            break;
-        case 1:
-        case 2:
-            DisplayPartyPokemonSelectData(slot, 6);
-            break;
+    case 0:
+    case 3:
+    case 4:
+        DisplayPartyPokemonSelectData(slot, 7);
+        break;
+    case 1:
+    case 2:
+        DisplayPartyPokemonSelectData(slot, 6);
+        break;
     }
 }
 
@@ -950,16 +950,16 @@ bool8 sub_81B0BFC(u8 slot)
 
         switch (CheckIfItemIsTMHMOrEvolutionStone(item))
         {
-            default:
+        default:
+            return FALSE;
+        case 1:
+            DisplayPartyPokemonSelectToTeachMove(slot, item, 0);
+            break;
+        case 2:
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, 3, item) != SPECIES_NONE)
                 return FALSE;
-            case 1:
-                DisplayPartyPokemonSelectToTeachMove(slot, item, 0);
-                break;
-            case 2:
-                if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, 3, item) != SPECIES_NONE)
-                    return FALSE;
-                DisplayPartyPokemonSelectData(slot, 0);
-                break;
+            DisplayPartyPokemonSelectData(slot, 0);
+            break;
         }
     }
     return TRUE;
@@ -969,16 +969,16 @@ void DisplayPartyPokemonSelectToTeachMove(u8 slot, u16 item, u8 tutor)
 {
     switch (CanPartyPokemonLearnTMTutor(&gPlayerParty[slot], item, tutor))
     {
-        case CANNOT_LEARN_MOVE:
-        case CANNOT_LEARN_MOVE_IS_EGG:
-            DisplayPartyPokemonSelectData(slot, 9);
-            break;
-        case ALREADY_KNOWS_MOVE:
-            DisplayPartyPokemonSelectData(slot, 10);
-            break;
-        default:
-            DisplayPartyPokemonSelectData(slot, 8);
-            break;
+    case CANNOT_LEARN_MOVE:
+    case CANNOT_LEARN_MOVE_IS_EGG:
+        DisplayPartyPokemonSelectData(slot, 9);
+        break;
+    case ALREADY_KNOWS_MOVE:
+        DisplayPartyPokemonSelectData(slot, 10);
+        break;
+    default:
+        DisplayPartyPokemonSelectData(slot, 8);
+        break;
     }
 }
 
@@ -1085,39 +1085,39 @@ void sub_81B0FCC(u8 slot, u8 b)
 
     switch (slot)
     {
-        default:
-            if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
-            {
-                UpdateSelectedPartyBox(&gUnknown_0203CEDC[slot], GetPartyBoxPalBitfield(slot, b));
-                AnimateSelectedPartyIcon(gUnknown_0203CEDC[slot].unk9, b);
-                sub_81B5F98(gUnknown_0203CEDC[slot].unkB, b);
-            }
-            return;
-        case 6:
+    default:
+        if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            UpdateSelectedPartyBox(&gUnknown_0203CEDC[slot], GetPartyBoxPalBitfield(slot, b));
+            AnimateSelectedPartyIcon(gUnknown_0203CEDC[slot].unk9, b);
+            sub_81B5F98(gUnknown_0203CEDC[slot].unkB, b);
+        }
+        return;
+    case 6:
+        if (b == 0)
+            sub_8199C30(1, 23, 16, 7, 2, 1);
+        else
+            sub_8199C30(1, 23, 16, 7, 2, 2);
+        spriteId = gUnknown_0203CEC4->unk8_2;
+        break;
+    case 7:
+        if (!gUnknown_0203CEC4->unk8_0)
+        {
             if (b == 0)
-                sub_8199C30(1, 23, 16, 7, 2, 1);
+                sub_8199C30(1, 23, 17, 7, 2, 1);
             else
-                sub_8199C30(1, 23, 16, 7, 2, 2);
-            spriteId = gUnknown_0203CEC4->unk8_2;
-            break;
-        case 7:
-            if (!gUnknown_0203CEC4->unk8_0)
-            {
-                if (b == 0)
-                    sub_8199C30(1, 23, 17, 7, 2, 1);
-                else
-                    sub_8199C30(1, 23, 17, 7, 2, 2);
-            }
-            else if (b == 0)
-            {
-                sub_8199C30(1, 23, 18, 7, 2, 1);
-            }
-            else
-            {
-                sub_8199C30(1, 23, 18, 7, 2, 2);
-            }
-            spriteId = gUnknown_0203CEC4->unk9_0;
-            break;
+                sub_8199C30(1, 23, 17, 7, 2, 2);
+        }
+        else if (b == 0)
+        {
+            sub_8199C30(1, 23, 18, 7, 2, 1);
+        }
+        else
+        {
+            sub_8199C30(1, 23, 18, 7, 2, 2);
+        }
+        spriteId = gUnknown_0203CEC4->unk9_0;
+        break;
     }
     sub_81B5F98(spriteId, b);
     schedule_bg_copy_tilemap_to_vram(1);
@@ -1165,9 +1165,10 @@ void sub_81B120C(void)
 
 bool8 IsMultiBattle(void)
 {
-    if ((gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TRAINER | BATTLE_TYPE_MULTI)) == (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TRAINER | BATTLE_TYPE_MULTI) && gMain.inBattle)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleTypeFlags & BATTLE_TYPE_TRAINER && gMain.inBattle)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 void sub_81B1288(struct Pokemon *partySlot, struct Pokemon *pokemon)
@@ -1223,18 +1224,19 @@ void sub_81B1370(u8 taskId)
 
         switch (PartyMenuButtonHandler(ptr))
         {
-            case 1:
-                sub_81B140C(taskId, ptr);
-                break;
-            case 2:
-                sub_81B15D0(taskId, ptr);
-                break;
-            case 8:
-                if (gUnknown_0203CEC4->unk8_0)
-                {
-                    PlaySE(SE_SELECT);
-                    sub_81B4F88();
-                }
+        case 1:
+            sub_81B140C(taskId, ptr);
+            break;
+        case 2:
+            sub_81B15D0(taskId, ptr);
+            break;
+        case 8:
+            if (gUnknown_0203CEC4->unk8_0)
+            {
+                PlaySE(SE_SELECT);
+                sub_81B4F88();
+            }
+            break;
         }
     }
 }
@@ -1256,68 +1258,68 @@ void sub_81B140C(u8 taskId, s8 *ptr)
     {
         switch (gUnknown_0203CEC8.unkB - 3)
         {
-            case 7:
-                if (sub_81B15A4((u8*)ptr))
-                {
-                    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-                    sub_81615A8(taskId);
-                }
-                break;
-            case 0:
-                if (sub_81B15A4((u8*)ptr))
-                {
-                    if (gUnknown_0203CEC8.unk8_0 == 1)
-                        gUnknown_0203CEC4->exitCallback = sub_81B9140;
+        case 7:
+            if (sub_81B15A4((u8*)ptr))
+            {
+                sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+                sub_81615A8(taskId);
+            }
+            break;
+        case 0:
+            if (sub_81B15A4((u8*)ptr))
+            {
+                if (gUnknown_0203CEC8.unk8_0 == 1)
+                    gUnknown_0203CEC4->exitCallback = sub_81B9140;
 
-                    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-                    gUnknown_03006328(taskId, sub_81B6794);
-                }
-                break;
-            case 9:
-                if (sub_81B15A4((u8*)ptr))
-                {
-                    PlaySE(SE_SELECT);
-                    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-                    sub_81B7E4C(taskId);
-                }
-                break;
-            case 4:
-                if (sub_81B15A4((u8*)ptr))
-                {
-                    PlaySE(SE_SELECT);
-                    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-                    sub_81B8474(taskId);
-                }
-                break;
-            case 2:
-            case 3:
-                if (sub_81B15A4((u8*)ptr))
-                {
-                    PlaySE(SE_SELECT);
-                    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-                    sub_81B7FAC(taskId);
-                }
-                break;
-            case 5:
+                sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+                gUnknown_03006328(taskId, sub_81B6794);
+            }
+            break;
+        case 9:
+            if (sub_81B15A4((u8*)ptr))
+            {
                 PlaySE(SE_SELECT);
-                sub_81B3938(taskId);
-                break;
-            case 8:
+                sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+                sub_81B7E4C(taskId);
+            }
+            break;
+        case 4:
+            if (sub_81B15A4((u8*)ptr))
+            {
                 PlaySE(SE_SELECT);
-                sub_81B12C0(taskId);
-                break;
-            case 10:
-                if (sub_81B15A4((u8*)ptr))
-                {
-                    sub_81B21AC(taskId, (u8)*ptr);
-                }
-                break;
-            default:
-            case 1:
-            case 6:
+                sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+                sub_81B8474(taskId);
+            }
+            break;
+        case 2:
+        case 3:
+            if (sub_81B15A4((u8*)ptr))
+            {
                 PlaySE(SE_SELECT);
-                sub_81B36FC(taskId);
-                break;
+                sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+                sub_81B7FAC(taskId);
+            }
+            break;
+        case 5:
+            PlaySE(SE_SELECT);
+            sub_81B3938(taskId);
+            break;
+        case 8:
+            PlaySE(SE_SELECT);
+            sub_81B12C0(taskId);
+            break;
+        case 10:
+            if (sub_81B15A4((u8*)ptr))
+            {
+                sub_81B21AC(taskId, (u8)*ptr);
+            }
+            break;
+        default:
+        case 1:
+        case 6:
+            PlaySE(SE_SELECT);
+            sub_81B36FC(taskId);
+            break;
         }
     }
 }
@@ -1336,29 +1338,29 @@ void sub_81B15D0(u8 taskId, s8 *ptr)
 {
     switch (gUnknown_0203CEC8.unkB)
     {
-        case 1:
-            PlaySE(SE_HAZURE);
-            break;
-        case 8:
-        case 10:
-            PlaySE(SE_SELECT);
-            sub_81B407C(taskId);
-            break;
-        case 13:
-            PlaySE(SE_SELECT);
-            sub_81B2210(taskId);
-            break;
-        default:
-            PlaySE(SE_SELECT);
-            if (sub_81B1660(taskId) != TRUE)
-            {
-                if (!sub_81221AC())
-                    gSpecialVar_0x8004 = 7;
-                gUnknown_0203CEE8 = 0;
-                *ptr = 7;
-                sub_81B12C0(taskId);
-            }
-            break;
+    case 1:
+        PlaySE(SE_HAZURE);
+        break;
+    case 8:
+    case 10:
+        PlaySE(SE_SELECT);
+        sub_81B407C(taskId);
+        break;
+    case 13:
+        PlaySE(SE_SELECT);
+        sub_81B2210(taskId);
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        if (sub_81B1660(taskId) != TRUE)
+        {
+            if (!sub_81221AC())
+                gSpecialVar_0x8004 = 7;
+            gUnknown_0203CEE8 = 0;
+            *ptr = 7;
+            sub_81B12C0(taskId);
+        }
+        break;
     }
 }
 
@@ -1394,17 +1396,17 @@ void sub_81B1708(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            gUnknown_0203CEE8 = 0;
-            gUnknown_0203CEC8.unk9 = 7;
-            sub_81B8558();
-            sub_81B12C0(taskId);
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            sub_81B1C1C(taskId);
-            break;
+    case 0:
+        gUnknown_0203CEE8 = 0;
+        gUnknown_0203CEC8.unk9 = 7;
+        sub_81B8558();
+        sub_81B12C0(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        sub_81B1C1C(taskId);
+        break;
     }
 }
 
@@ -1414,31 +1416,32 @@ u16 PartyMenuButtonHandler(s8 *ptr)
 
     switch (gMain.newAndRepeatedKeys)
     {
-        case DPAD_UP:
+    case DPAD_UP:
+        movementDir = -1;
+        break;
+    case DPAD_DOWN:
+        movementDir = 1;
+        break;
+    case DPAD_LEFT:
+        movementDir = -2;
+        break;
+    case DPAD_RIGHT:
+        movementDir = 2;
+        break;
+    default:
+        switch (sub_812210C())
+        {
+        case 1:
             movementDir = -1;
             break;
-        case DPAD_DOWN:
+        case 2:
             movementDir = 1;
             break;
-        case DPAD_LEFT:
-            movementDir = -2;
-            break;
-        case DPAD_RIGHT:
-            movementDir = 2;
-            break;
         default:
-            switch (sub_812210C())
-            {
-                case 1:
-                    movementDir = -1;
-                    break;
-                case 2:
-                    movementDir = 1;
-                    break;
-                default:
-                    movementDir = 0;
-                    break;
-            }
+            movementDir = 0;
+            break;
+        }
+        break;
     }
 
     if (gMain.newKeys & START_BUTTON)
@@ -1456,12 +1459,12 @@ u16 PartyMenuButtonHandler(s8 *ptr)
     return gMain.newKeys & (A_BUTTON | B_BUTTON);
 }
 
-#ifdef NONMATCHING
 void UpdateCurrentPartySelection(s8 *ptr, s8 movementDir)
 {
     s8 slot = *ptr;
+    u8 mode = gUnknown_0203CEC8.mode;
 
-    if (gUnknown_0203CEC8.mode == 0)
+    if (mode == 0)
         SetNewPartySelectTarget1(ptr, movementDir);
     else
         SetNewPartySelectTarget2(ptr, movementDir);
@@ -1473,588 +1476,166 @@ void UpdateCurrentPartySelection(s8 *ptr, s8 movementDir)
         sub_81B0FCC(*ptr, 1);
     }
 }
-#else
-NAKED
-void UpdateCurrentPartySelection(s8 *ptr, s8 b)
-{
-    asm_unified("push {r4,r5,lr}\n\
-	adds r5, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	ldrb r4, [r5]\n\
-	ldr r0, =gUnknown_0203CEC8\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 26\n\
-	lsrs r0, 30\n\
-	cmp r0, 0\n\
-	bne _081B1820\n\
-	lsls r1, 24\n\
-	asrs r1, 24\n\
-	adds r0, r5, 0\n\
-	bl SetNewPartySelectTarget1\n\
-	b _081B182A\n\
-	.pool\n\
-_081B1820:\n\
-	lsls r1, 24\n\
-	asrs r1, 24\n\
-	adds r0, r5, 0\n\
-	bl SetNewPartySelectTarget2\n\
-_081B182A:\n\
-	movs r1, 0\n\
-	ldrsb r1, [r5, r1]\n\
-	lsls r4, 24\n\
-	asrs r0, r4, 24\n\
-	cmp r1, r0\n\
-	beq _081B184C\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	lsrs r0, r4, 24\n\
-	movs r1, 0\n\
-	bl sub_81B0FCC\n\
-	ldrb r0, [r5]\n\
-	movs r1, 0x1\n\
-	bl sub_81B0FCC\n\
-_081B184C:\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n");
-}
-#endif
 
-#ifdef NONMATCHING
 void SetNewPartySelectTarget1(s8 *ptr, s8 b)
 {
-    u8 r0r2;
-
     switch (b)
     {
-        case -1:
-            r0r2 = *ptr;
-            if (*ptr == 0)
-            {
-                *ptr = 7;
-            }
-            else if (*ptr == 6)
-            {
+    case -1:
+        if (*ptr == 0)
+        {
+            *ptr = 7;
+        }
+        else if (*ptr == 6)
+        {
+            *ptr = gPlayerPartyCount - 1;
+        }
+        else if (*ptr == 7)
+        {
+            if (gUnknown_0203CEC4->unk8_0)
+                *ptr = 6;
+            else
                 *ptr = gPlayerPartyCount - 1;
-            }
-            else if (*ptr == 7)
+        }
+        else
+        {
+            (*ptr)--;
+        }
+        break;
+    case 1:
+        if (*ptr == 7)
+        {
+            *ptr = 0;
+        }
+        else
+        {
+            if (*ptr == gPlayerPartyCount - 1)
             {
                 if (gUnknown_0203CEC4->unk8_0)
                     *ptr = 6;
                 else
-                    *ptr = gPlayerPartyCount - 1;
+                    *ptr = 7;
             }
             else
             {
-                *ptr = r0r2 - 1;
+                (*ptr)++;
             }
-            break;
-        case 1:
-            r0r2 = *ptr;
-            if (*ptr != 7)
-            {
-                if ((u32)*ptr == gPlayerPartyCount - 1)
-                {
-                    if (gUnknown_0203CEC4->unk8_0)
-                        *ptr = 6;
-                    else
-                        *ptr = 7;
-                }
-                else
-                {
-                    *ptr = r0r2 + 1;
-                }
-            }
+        }
+        break;
+    case 2:
+        if (gPlayerPartyCount != 1 && *ptr == 0)
+        {
+            if (gUnknown_0203CEC4->unk8_1 == 0)
+                *ptr = 1;
             else
-            {
-                *ptr = 0;
-            }
-            break;
-        case 2:
-            if (gPlayerPartyCount != 1 && *ptr == 0)
-            {
-                if (gUnknown_0203CEC4->unk8_1 == 0)
-                    *ptr = 1;
-                else
-                    *ptr = gUnknown_0203CEC4->unk8_1;
-            }
-            break;
-        case -2:
-            if (*ptr != 0 && *ptr != 6 && *ptr != 7)
-            {
-                gUnknown_0203CEC4->unk8_1 = *ptr;
-                *ptr = 0;
-            }
-            break;
+                *ptr = gUnknown_0203CEC4->unk8_1;
+        }
+        break;
+    case -2:
+        if (*ptr != 0 && *ptr != 6 && *ptr != 7)
+        {
+            gUnknown_0203CEC4->unk8_1 = *ptr;
+            *ptr = 0;
+        }
+        break;
     }
 }
-#else
-NAKED
-void SetNewPartySelectTarget1(s8 *ptr, s8 b)
-{
-    asm_unified("push {r4,lr}\n\
-	adds r4, r0, 0\n\
-	lsls r1, 24\n\
-	asrs r1, 24\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	cmp r1, r0\n\
-	beq _081B187A\n\
-	cmp r1, r0\n\
-	bgt _081B1870\n\
-	subs r0, 0x1\n\
-	cmp r1, r0\n\
-	beq _081B1924\n\
-	b _081B1952\n\
-_081B1870:\n\
-	cmp r1, 0x1\n\
-	beq _081B18C0\n\
-	cmp r1, 0x2\n\
-	beq _081B18F8\n\
-	b _081B1952\n\
-_081B187A:\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0\n\
-	ldrsb r1, [r4, r1]\n\
-	cmp r1, 0\n\
-	bne _081B1888\n\
-	movs r0, 0x7\n\
-	b _081B1950\n\
-_081B1888:\n\
-	cmp r1, 0x6\n\
-	bne _081B1898\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	b _081B1950\n\
-	.pool\n\
-_081B1898:\n\
-	cmp r1, 0x7\n\
-	bne _081B18BC\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _081B18B0\n\
-	movs r0, 0x6\n\
-	b _081B1950\n\
-	.pool\n\
-_081B18B0:\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	b _081B1950\n\
-	.pool\n\
-_081B18BC:\n\
-	subs r0, 0x1\n\
-	b _081B1950\n\
-_081B18C0:\n\
-	ldrb r2, [r4]\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0x7\n\
-	beq _081B194E\n\
-	movs r1, 0\n\
-	ldrsb r1, [r4, r1]\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r1, r0\n\
-	bne _081B18F4\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _081B18F0\n\
-	movs r0, 0x6\n\
-	b _081B1950\n\
-	.pool\n\
-_081B18F0:\n\
-	movs r0, 0x7\n\
-	b _081B1950\n\
-_081B18F4:\n\
-	adds r0, r2, 0x1\n\
-	b _081B1950\n\
-_081B18F8:\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x1\n\
-	beq _081B1952\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0\n\
-	bne _081B1952\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 28\n\
-	lsrs r0, 29\n\
-	cmp r0, 0\n\
-	bne _081B1950\n\
-	movs r0, 0x1\n\
-	b _081B1950\n\
-	.pool\n\
-_081B1924:\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0\n\
-	beq _081B1952\n\
-	cmp r0, 0x6\n\
-	beq _081B1952\n\
-	cmp r0, 0x7\n\
-	beq _081B1952\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r3, [r0]\n\
-	movs r1, 0\n\
-	ldrsb r1, [r4, r1]\n\
-	movs r0, 0x7\n\
-	ands r1, r0\n\
-	lsls r1, 1\n\
-	ldrb r2, [r3, 0x8]\n\
-	movs r0, 0xF\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	strb r0, [r3, 0x8]\n\
-_081B194E:\n\
-	movs r0, 0\n\
-_081B1950:\n\
-	strb r0, [r4]\n\
-_081B1952:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .pool\n");
-}
-#endif
 
-#ifdef NONMATCHING
 void SetNewPartySelectTarget2(s8 *ptr, s8 b)
 {
-    u8 unk;
     s8 unk2 = b;
-    u8 unk3;
 
     switch (b)
     {
-        case -1:
-            unk = *ptr;
-            if (*ptr == 0)
+    case -1:
+        if (*ptr == 0)
+        {
+            *ptr = 7;
+            break;
+        }
+        else if (*ptr == 6)
+        {
+            *ptr = gPlayerPartyCount - 1;
+            break;
+        }
+        else if (*ptr == 7)
+        {
+            if (gUnknown_0203CEC4->unk8_0)
             {
-                *ptr = 7;
+                *ptr = 6;
+                break;
             }
-            else if (*ptr == 6)
-            {
-                *ptr = gPlayerPartyCount - 1;
-            }
-            else if (*ptr == 7)
+            (*ptr)--;
+        }
+        unk2 = sub_81B1B00(*ptr, unk2);
+        if (unk2 != -1)
+            *ptr = unk2;
+        break;
+    case 1:
+        if (*ptr == 6)
+        {
+            *ptr = 7;
+        }
+        else if (*ptr == 7)
+        {
+            *ptr = 0;
+        }
+        else
+        {
+            unk2 = sub_81B1B00(*ptr, 1);
+            if (unk2 == -1)
             {
                 if (gUnknown_0203CEC4->unk8_0)
-                {
                     *ptr = 6;
-                }
                 else
-                {
-                    *ptr = unk - 1;
-                    unk2 = sub_81B1B00(*ptr, unk2);
-                    if (unk2 != -1)
-                        *ptr = unk2;
-                }
+                    *ptr = 7;
             }
             else
             {
-                unk2 = sub_81B1B00(*ptr, unk2);
-                if (unk2 != -1)
-                    *ptr = unk2;
+                *ptr = unk2;
             }
-            break;
-        case 1:
-            if (*ptr == 6)
+        }
+        break;
+    case 2:
+        if (*ptr == 0)
+        {
+            if (gUnknown_0203CEC4->unk8_1 == 3)
             {
-                *ptr = 7;
+                if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE)
+                    *ptr = 3;
             }
-            else if (*ptr == 7)
+            else if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE)
             {
-                *ptr = 0;
+                *ptr = 2;
             }
-            else
+        }
+        else if (*ptr == 1)
+        {
+            if (gUnknown_0203CEC4->unk8_1 == 5)
             {
-                unk2 = sub_81B1B00(*ptr, 1);
-                if (unk2 == -1)
-                {
-                    if (gUnknown_0203CEC4->unk8_0)
-                        *ptr = 6;
-                    else
-                        *ptr = 7;
-                }
-                else
-                {
-                    *ptr = unk2;
-                }
+                if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
+                    *ptr = 5;
             }
-            break;
-        case 2:
-            if (*ptr == 0)
+            else if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE)
             {
-                if (gUnknown_0203CEC4->unk8_1 == 3)
-                {
-                    if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE)
-                        *ptr = 3;
-                }
-                else if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE)
-                {
-                    *ptr = 2;
-                }
+                *ptr = 4;
             }
-            else if (*ptr == 1)
-            {
-                if (gUnknown_0203CEC4->unk8_1 == 5)
-                {
-                    if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
-                        *ptr = 5;
-                }
-                else if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE)
-                {
-                    *ptr = 4;
-                }
-            }
-            break;
-        case -2:
-            unk3 = *ptr - 2;
-            if (unk3 <= 1)
-            {
-                gUnknown_0203CEC4->unk8_1 = *ptr;
-                *ptr = 0;
-            }
-            else
-            {
-                unk3 = *ptr - 4;
-                if (unk3 <= 1)
-                {
-                    gUnknown_0203CEC4->unk8_1 = *ptr;
-                    *ptr = 1;
-                }
-            }
-            break;
+        }
+        break;
+    case -2:
+        if (*ptr == 2 || *ptr == 3)
+        {
+            gUnknown_0203CEC4->unk8_1 = *ptr;
+            *ptr = 0;
+        }
+        else if (*ptr == 4 || *ptr == 5)
+        {
+            gUnknown_0203CEC4->unk8_1 = *ptr;
+            *ptr = 1;
+        }
+        break;
     }
 }
-#else
-NAKED
-void SetNewPartySelectTarget2(s8 *ptr, s8 b)
-{
-    asm_unified("push {r4-r6,lr}\n\
-	adds r4, r0, 0\n\
-	lsls r1, 24\n\
-	lsrs r2, r1, 24\n\
-	asrs r5, r1, 24\n\
-	movs r6, 0x1\n\
-	negs r6, r6\n\
-	cmp r5, r6\n\
-	beq _081B1988\n\
-	cmp r5, r6\n\
-	bgt _081B197E\n\
-	movs r0, 0x2\n\
-	negs r0, r0\n\
-	cmp r5, r0\n\
-	bne _081B197C\n\
-	b _081B1A9C\n\
-_081B197C:\n\
-	b _081B1AF4\n\
-_081B197E:\n\
-	cmp r5, 0x1\n\
-	beq _081B19E4\n\
-	cmp r5, 0x2\n\
-	beq _081B1A24\n\
-	b _081B1AF4\n\
-_081B1988:\n\
-	ldrb r1, [r4]\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0\n\
-	bne _081B1996\n\
-	movs r0, 0x7\n\
-	b _081B1AF2\n\
-_081B1996:\n\
-	cmp r0, 0x6\n\
-	bne _081B19A8\n\
-	ldr r0, =gPlayerPartyCount\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x1\n\
-	b _081B1AF2\n\
-	.pool\n\
-_081B19A8:\n\
-	cmp r0, 0x7\n\
-	bne _081B19C4\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _081B19C0\n\
-	movs r0, 0x6\n\
-	b _081B1AF2\n\
-	.pool\n\
-_081B19C0:\n\
-	subs r0, r1, 0x1\n\
-	strb r0, [r4]\n\
-_081B19C4:\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	lsls r1, r2, 24\n\
-	asrs r1, 24\n\
-	bl sub_81B1B00\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0x1\n\
-	negs r1, r1\n\
-	cmp r0, r1\n\
-	bne _081B19E0\n\
-	b _081B1AF4\n\
-_081B19E0:\n\
-	strb r2, [r4]\n\
-	b _081B1AF4\n\
-_081B19E4:\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0x6\n\
-	bne _081B19F0\n\
-	movs r0, 0x7\n\
-	b _081B1AF2\n\
-_081B19F0:\n\
-	cmp r0, 0x7\n\
-	bne _081B19F8\n\
-	movs r0, 0\n\
-	b _081B1AF2\n\
-_081B19F8:\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	movs r1, 0x1\n\
-	bl sub_81B1B00\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	asrs r0, 24\n\
-	cmp r0, r6\n\
-	bne _081B19E0\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _081B1A20\n\
-	movs r0, 0x6\n\
-	b _081B1AF2\n\
-	.pool\n\
-_081B1A20:\n\
-	movs r0, 0x7\n\
-	b _081B1AF2\n\
-_081B1A24:\n\
-	movs r0, 0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0\n\
-	bne _081B1A5C\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 28\n\
-	lsrs r6, r0, 29\n\
-	cmp r6, 0x3\n\
-	bne _081B1A54\n\
-	ldr r0, =gPlayerParty + 300\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	beq _081B1AF4\n\
-	strb r6, [r4]\n\
-	b _081B1AF4\n\
-	.pool\n\
-_081B1A54:\n\
-	ldr r0, =gPlayerParty + 200\n\
-	b _081B1A70\n\
-	.pool\n\
-_081B1A5C:\n\
-	cmp r0, 0x1\n\
-	bne _081B1AF4\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0x8]\n\
-	lsls r0, 28\n\
-	lsrs r5, r0, 29\n\
-	cmp r5, 0x5\n\
-	bne _081B1A88\n\
-	ldr r0, =gPlayerParty + 500\n\
-_081B1A70:\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	beq _081B1AF4\n\
-	strb r5, [r4]\n\
-	b _081B1AF4\n\
-	.pool\n\
-_081B1A88:\n\
-	ldr r0, =gPlayerParty + 400\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	beq _081B1AF4\n\
-	movs r0, 0x4\n\
-	b _081B1AF2\n\
-	.pool\n\
-_081B1A9C:\n\
-	ldrb r1, [r4]\n\
-	subs r0, r1, 0x2\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bhi _081B1ACC\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r3, [r0]\n\
-	movs r1, 0\n\
-	ldrsb r1, [r4, r1]\n\
-	movs r0, 0x7\n\
-	ands r1, r0\n\
-	lsls r1, 1\n\
-	ldrb r2, [r3, 0x8]\n\
-	movs r0, 0xF\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	strb r0, [r3, 0x8]\n\
-	movs r0, 0\n\
-	b _081B1AF2\n\
-	.pool\n\
-_081B1ACC:\n\
-	subs r0, r1, 0x4\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bhi _081B1AF4\n\
-	ldr r0, =gUnknown_0203CEC4\n\
-	ldr r3, [r0]\n\
-	movs r1, 0\n\
-	ldrsb r1, [r4, r1]\n\
-	movs r0, 0x7\n\
-	ands r1, r0\n\
-	lsls r1, 1\n\
-	ldrb r2, [r3, 0x8]\n\
-	movs r0, 0xF\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	strb r0, [r3, 0x8]\n\
-	movs r0, 0x1\n\
-_081B1AF2:\n\
-	strb r0, [r4]\n\
-_081B1AF4:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
 s8 sub_81B1B00(s8 a, s8 b)
 {
@@ -2369,15 +1950,15 @@ void sub_81B227C(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            gSpecialVar_0x8004 = 7;
-            sub_81B12C0(taskId);
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            gTasks[taskId].func = sub_81B1C1C;
-            break;
+    case 0:
+        gSpecialVar_0x8004 = 7;
+        sub_81B12C0(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        gTasks[taskId].func = sub_81B1C1C;
+        break;
     }
 }
 
@@ -2427,18 +2008,18 @@ void sub_81B239C(u8 a)
 
     switch (a)
     {
-        case 0:
-            InitWindows(gUnknown_08615810);
-            break;
-        case 1:
-            InitWindows(gUnknown_08615850);
-            break;
-        case 2:
-            InitWindows(gUnknown_08615890);
-            break;
-        default:
-            InitWindows(gUnknown_086158D0);
-            break;
+    case 0:
+        InitWindows(gUnknown_08615810);
+        break;
+    case 1:
+        InitWindows(gUnknown_08615850);
+        break;
+    case 2:
+        InitWindows(gUnknown_08615890);
+        break;
+    default:
+        InitWindows(gUnknown_086158D0);
+        break;
     }
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
@@ -2727,16 +2308,16 @@ void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, struct Stru
         return;
     switch (gender)
     {
-        case MON_MALE:
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC3[0]), gUnknown_08615AB6[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC3[1]), gUnknown_08615AB6[1] + palNum, 2);
-            DisplayPartyPokemonBarDetail(ptr->windowId, gText_MaleSymbol, 2, &ptr->unk0->unk4[8]);
-            break;
-        case MON_FEMALE:
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC5[0]), gUnknown_08615AB6[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC5[1]), gUnknown_08615AB6[1] + palNum, 2);
-            DisplayPartyPokemonBarDetail(ptr->windowId, gText_FemaleSymbol, 2, &ptr->unk0->unk4[8]);
-            break;
+    case MON_MALE:
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC3[0]), gUnknown_08615AB6[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC3[1]), gUnknown_08615AB6[1] + palNum, 2);
+        DisplayPartyPokemonBarDetail(ptr->windowId, gText_MaleSymbol, 2, &ptr->unk0->unk4[8]);
+        break;
+    case MON_FEMALE:
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC5[0]), gUnknown_08615AB6[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC5[1]), gUnknown_08615AB6[1] + palNum, 2);
+        DisplayPartyPokemonBarDetail(ptr->windowId, gText_FemaleSymbol, 2, &ptr->unk0->unk4[8]);
+        break;
     }
 }
 
@@ -2793,19 +2374,19 @@ void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *ptr)
 
     switch (GetHPBarLevel(hp, maxhp))
     {
-        case HP_BAR_GREEN:
-        case HP_BAR_FULL:
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC7[0]), gUnknown_08615AB8[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC7[1]), gUnknown_08615AB8[1] + palNum, 2);
-            break;
-        case HP_BAR_YELLOW:
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC9[0]), gUnknown_08615AB8[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC9[1]), gUnknown_08615AB8[1] + palNum, 2);
-            break;
-        default:
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[0]), gUnknown_08615AB8[0] + palNum, 2);
-            LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[1]), gUnknown_08615AB8[1] + palNum, 2);
-            break;
+    case HP_BAR_GREEN:
+    case HP_BAR_FULL:
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC7[0]), gUnknown_08615AB8[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC7[1]), gUnknown_08615AB8[1] + palNum, 2);
+        break;
+    case HP_BAR_YELLOW:
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC9[0]), gUnknown_08615AB8[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615AC9[1]), gUnknown_08615AB8[1] + palNum, 2);
+        break;
+    default:
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[0]), gUnknown_08615AB8[0] + palNum, 2);
+        LoadPalette(GetPartyMenuPaletteFromBuffer(gUnknown_08615ACB[1]), gUnknown_08615AB8[1] + palNum, 2);
+        break;
     }
 
     hpFraction = GetScaledHPFraction(hp, maxhp, ptr->unk0->unk4[22]);
@@ -2819,87 +2400,17 @@ void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct Struct203CEDC *ptr)
     CopyWindowToVram(ptr->windowId, 2);
 }
 
-#ifdef NONMATCHING
 void DisplayPartyPokemonOtherText(u8 stringID, struct Struct203CEDC *ptr, u8 c)
 {
     if (c != 0)
     {
-        int unk = ((ptr->unk0->unk1C & 7) + ptr->unk0->unk1E + 7) / 8;
-        int unk2 = ((ptr->unk0->unk1D & 7) + ptr->unk0->unk1F + 7) / 8;
+        int unk = ((ptr->unk0->unk1C % 8) + ptr->unk0->unk1E + 7) / 8;
+        int unk2 = ((ptr->unk0->unk1D % 8) + ptr->unk0->unk1F + 7) / 8;
         ptr->unk0->unk0(ptr->windowId, ptr->unk0->unk1C >> 3, ptr->unk0->unk1D >> 3, unk, unk2, 1);
     }
     if (c != 2)
         AddTextPrinterParameterized3(ptr->windowId, 1, ptr->unk0->unk1C, ptr->unk0->unk1D, gUnknown_086157FC[0], 0, gUnknown_08615B60[stringID]);
 }
-#else
-NAKED
-void DisplayPartyPokemonOtherText(u8 stringID, struct Struct203CEDC *ptr, u8 c)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0xC\n\
-	adds r6, r1, 0\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	lsls r2, 24\n\
-	lsrs r7, r2, 24\n\
-	cmp r7, 0\n\
-	beq _081B2FF2\n\
-	ldr r5, [r6]\n\
-	ldrb r1, [r5, 0x1C]\n\
-	movs r4, 0x7\n\
-	adds r0, r1, 0\n\
-	ands r0, r4\n\
-	ldrb r2, [r5, 0x1E]\n\
-	adds r0, r2\n\
-	adds r3, r0, 0x7\n\
-	asrs r3, 3\n\
-	ldrb r2, [r5, 0x1D]\n\
-	adds r0, r2, 0\n\
-	ands r0, r4\n\
-	ldrb r4, [r5, 0x1F]\n\
-	adds r0, r4\n\
-	adds r4, r0, 0x7\n\
-	ldrb r0, [r6, 0x8]\n\
-	lsrs r1, 3\n\
-	lsrs r2, 3\n\
-	lsrs r4, 3\n\
-	str r4, [sp]\n\
-	movs r4, 0x1\n\
-	str r4, [sp, 0x4]\n\
-	ldr r4, [r5]\n\
-	bl _call_via_r4\n\
-_081B2FF2:\n\
-	cmp r7, 0x2\n\
-	beq _081B3018\n\
-	ldrb r0, [r6, 0x8]\n\
-	ldr r1, [r6]\n\
-	ldrb r2, [r1, 0x1C]\n\
-	ldrb r3, [r1, 0x1D]\n\
-	ldr r1, =gUnknown_086157FC\n\
-	str r1, [sp]\n\
-	movs r1, 0\n\
-	str r1, [sp, 0x4]\n\
-	ldr r4, =gUnknown_08615B60\n\
-	mov r5, r8\n\
-	lsls r1, r5, 2\n\
-	adds r1, r4\n\
-	ldr r1, [r1]\n\
-	str r1, [sp, 0x8]\n\
-	movs r1, 0x1\n\
-	bl AddTextPrinterParameterized3\n\
-_081B3018:\n\
-	add sp, 0xC\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
 void sub_81B302C(u8 *ptr)
 {
@@ -2923,25 +2434,25 @@ void display_pokemon_menu_message(u32 stringID)
     {
         switch (stringID)
         {
-            case 21:
-                *windowPtr = AddWindow(&gUnknown_08615928);
-                break;
-            case 24:
-                *windowPtr = AddWindow(&gUnknown_08615930);
-                break;
-            case 25:
-                *windowPtr = AddWindow(&gUnknown_08615938);
-                break;
-            case 22:
-            case 23:
-                *windowPtr = AddWindow(&gUnknown_08615940);
-                break;
-            case 26:
-                *windowPtr = AddWindow(&gUnknown_08615948);
-                break;
-            default:
-                *windowPtr = AddWindow(&gUnknown_08615920);
-                break;
+        case 21:
+            *windowPtr = AddWindow(&gUnknown_08615928);
+            break;
+        case 24:
+            *windowPtr = AddWindow(&gUnknown_08615930);
+            break;
+        case 25:
+            *windowPtr = AddWindow(&gUnknown_08615938);
+            break;
+        case 22:
+        case 23:
+            *windowPtr = AddWindow(&gUnknown_08615940);
+            break;
+        case 26:
+            *windowPtr = AddWindow(&gUnknown_08615948);
+            break;
+        default:
+            *windowPtr = AddWindow(&gUnknown_08615920);
+            break;
         }
         if (stringID == 0)
         {
@@ -2985,18 +2496,18 @@ u8 sub_81B31B0(u8 a)
 
     switch (a)
     {
-        case 0:
-            SetWindowTemplateFields(&window, 2, 19, 19 - (gUnknown_0203CEC4->unk17 * 2), 10, gUnknown_0203CEC4->unk17 * 2, 14, 0x2E9);
-            break;
-        case 1:
-            window = gUnknown_08615950;
-            break;
-        case 2:
-            window = gUnknown_08615958;
-            break;
-        default:
-            window = gUnknown_08615960;
-            break;
+    case 0:
+        SetWindowTemplateFields(&window, 2, 19, 19 - (gUnknown_0203CEC4->unk17 * 2), 10, gUnknown_0203CEC4->unk17 * 2, 14, 0x2E9);
+        break;
+    case 1:
+        window = gUnknown_08615950;
+        break;
+    case 2:
+        window = gUnknown_08615958;
+        break;
+    default:
+        window = gUnknown_08615960;
+        break;
     }
 
     gUnknown_0203CEC4->unkC[0] = AddWindow(&window);
@@ -3094,47 +2605,47 @@ u8 sub_81B353C(struct Pokemon *mon)
 
     switch (gUnknown_0203CEC8.unk8_0)
     {
+    case 0:
+        if (InMultiBattleRoom() == TRUE || GetMonData(mon, MON_DATA_IS_EGG))
+            returnVar = 1;
+        else
+            returnVar = 0;
+        break;
+    case 1:
+        returnVar = sub_81B8A2C(mon);
+        break;
+    case 4:
+        switch (sub_81B856C(gUnknown_0203CEC8.unk9))
+        {
+        default:
+            returnVar = 7;
+            break;
         case 0:
-            if (InMultiBattleRoom() == TRUE || GetMonData(mon, MON_DATA_IS_EGG))
-                returnVar = 1;
-            else
-                returnVar = 0;
+            returnVar = 4;
             break;
         case 1:
-            returnVar = sub_81B8A2C(mon);
+            returnVar = 5;
             break;
-        case 4:
-            switch (sub_81B856C(gUnknown_0203CEC8.unk9))
-            {
-                default:
-                    returnVar = 7;
-                    break;
-                case 0:
-                    returnVar = 4;
-                    break;
-                case 1:
-                    returnVar = 5;
-                    break;
-            }
-            break;
-        case 6:
-            returnVar = (GetMonData(mon, MON_DATA_IS_EGG)) ? 7 : 6;
-            break;
-        case 8:
-            returnVar = 10;
-            break;
-        case 9:
-            returnVar = 11;
-            break;
-        case 10:
-            returnVar = 12;
-            break;
-        case 12:
-            returnVar = 13;
-            break;
-        default:
-            returnVar = 0;
-            break;
+        }
+        break;
+    case 6:
+        returnVar = (GetMonData(mon, MON_DATA_IS_EGG)) ? 7 : 6;
+        break;
+    case 8:
+        returnVar = 10;
+        break;
+    case 9:
+        returnVar = 11;
+        break;
+    case 10:
+        returnVar = 12;
+        break;
+    case 12:
+        returnVar = 13;
+        break;
+    default:
+        returnVar = 0;
+        break;
     }
     return returnVar;
 }
@@ -3297,20 +2808,18 @@ void sub_81B3938(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 bool8 sub_81B3AD8(s16 a, s16 b, u8 *c, u8 *d, u8 *e)
 {
-
-    if ((a + b) < 0 || a > 31)
-    {
+    if ((a + b) < 0)
         return FALSE;
-    }
+    if (a > 31)
+        return FALSE;
+
     if (a < 0)
     {
-        *c = -a;
+        *c = a * -1;
         *d = 0;
-        *e = a + b;
-        return TRUE;
+        *e = b + a;
     }
     else
     {
@@ -3320,73 +2829,10 @@ bool8 sub_81B3AD8(s16 a, s16 b, u8 *c, u8 *d, u8 *e)
             *e = 32 - a;
         else
             *e = b;
-        return TRUE;
-    }
 
+    }
+    return TRUE;
 }
-#else
-NAKED
-bool8 sub_81B3AD8(s16 a, s16 b, u8 *c, u8 *d, u8 *e)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	adds r6, r2, 0\n\
-	mov r12, r3\n\
-	ldr r7, [sp, 0x18]\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	adds r5, r3, 0\n\
-	lsls r1, 16\n\
-	lsrs r2, r1, 16\n\
-	mov r8, r2\n\
-	lsls r0, r3, 16\n\
-	asrs r1, r0, 16\n\
-	lsls r0, r2, 16\n\
-	asrs r0, 16\n\
-	adds r4, r1, r0\n\
-	cmp r4, 0\n\
-	blt _081B3B02\n\
-	cmp r1, 0x1F\n\
-	ble _081B3B06\n\
-_081B3B02:\n\
-	movs r0, 0\n\
-	b _081B3B34\n\
-_081B3B06:\n\
-	cmp r1, 0\n\
-	bge _081B3B1A\n\
-	negs r0, r1\n\
-	strb r0, [r6]\n\
-	movs r0, 0\n\
-	mov r1, r12\n\
-	strb r0, [r1]\n\
-	adds r0, r2, r3\n\
-	strb r0, [r7]\n\
-	b _081B3B32\n\
-_081B3B1A:\n\
-	movs r0, 0\n\
-	strb r0, [r6]\n\
-	mov r0, r12\n\
-	strb r5, [r0]\n\
-	cmp r4, 0x1F\n\
-	ble _081B3B2E\n\
-	movs r0, 0x20\n\
-	subs r0, r5\n\
-	strb r0, [r7]\n\
-	b _081B3B32\n\
-_081B3B2E:\n\
-	mov r1, r8\n\
-	strb r1, [r7]\n\
-_081B3B32:\n\
-	movs r0, 0x1\n\
-_081B3B34:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n");
-}
-#endif
 
 void sub_81B3B40(const void *rectSrc, s16 a, s16 b, s16 c, s16 d, s16 e)
 {
@@ -3637,32 +3083,32 @@ void sub_81B43DC(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            RemoveBagItem(gSpecialVar_ItemId, 1);
-            if (AddBagItem(gUnknown_0203CEFC, 1) == FALSE)
-            {
-                AddBagItem(gSpecialVar_ItemId, 1);
-                pokemon_item_not_removed(gUnknown_0203CEFC);
-                sub_81B1B5C(gStringVar4, 0);
-                gTasks[taskId].func = sub_81B1C1C;
-            }
-            else if (ItemIsMail(gSpecialVar_ItemId))
-            {
-                sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
-                gTasks[taskId].func = sub_81B44FC;
-            }
-            else
-            {
-                sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
-                sub_81B1D68(gSpecialVar_ItemId, gUnknown_0203CEFC, 1);
-                gTasks[taskId].func = sub_81B469C;
-            }
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
+    case 0:
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        if (AddBagItem(gUnknown_0203CEFC, 1) == FALSE)
+        {
+            AddBagItem(gSpecialVar_ItemId, 1);
+            pokemon_item_not_removed(gUnknown_0203CEFC);
+            sub_81B1B5C(gStringVar4, 0);
             gTasks[taskId].func = sub_81B1C1C;
-            break;
+        }
+        else if (ItemIsMail(gSpecialVar_ItemId))
+        {
+            sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
+            gTasks[taskId].func = sub_81B44FC;
+        }
+        else
+        {
+            sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], gSpecialVar_ItemId);
+            sub_81B1D68(gSpecialVar_ItemId, gUnknown_0203CEFC, 1);
+            gTasks[taskId].func = sub_81B469C;
+        }
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        gTasks[taskId].func = sub_81B1C1C;
+        break;
     }
 }
 
@@ -3741,18 +3187,18 @@ void sub_81B4724(u8 taskId)
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     switch (sub_81B1E00(mon))
     {
-        case 0:
-            GetMonNickname(mon, gStringVar1);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnNotHolding);
-            sub_81B1B5C(gStringVar4, 1);
-            break;
-        case 1:
-            pokemon_item_not_removed(item);
-            sub_81B1B5C(gStringVar4, 1);
-            break;
-        default:
-            sub_81B1CD0(mon, item, 1);
-            break;
+    case 0:
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnNotHolding);
+        sub_81B1B5C(gStringVar4, 1);
+        break;
+    case 1:
+        pokemon_item_not_removed(item);
+        sub_81B1B5C(gStringVar4, 1);
+        break;
+    default:
+        sub_81B1CD0(mon, item, 1);
+        break;
     }
     schedule_bg_copy_tilemap_to_vram(2);
     gTasks[taskId].func = sub_81B469C;
@@ -3797,17 +3243,17 @@ void sub_81B48DC(u8 taskId)
 
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            CopyItemName(GetMonData(mon, MON_DATA_HELD_ITEM), gStringVar1);
-            StringExpandPlaceholders(gStringVar4, gText_ItemThrownAway);
-            sub_81B1B5C(gStringVar4, 0);
-            gTasks[taskId].func = sub_81B4988;
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            gTasks[taskId].func = sub_81B1C1C;
-            break;
+    case 0:
+        CopyItemName(GetMonData(mon, MON_DATA_HELD_ITEM), gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_ItemThrownAway);
+        sub_81B1B5C(gStringVar4, 0);
+        gTasks[taskId].func = sub_81B4988;
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        gTasks[taskId].func = sub_81B1C1C;
+        break;
     }
 }
 
@@ -3878,24 +3324,24 @@ void sub_81B4BA0(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            if (TakeMailFromMon2(&gPlayerParty[gUnknown_0203CEC8.unk9]) != 0xFF)
-            {
-                sub_81B1B5C(gText_MailSentToPC, 0);
-                gTasks[taskId].func = sub_81B469C;
-            }
-            else
-            {
-                sub_81B1B5C(gText_PCMailboxFull, 0);
-                gTasks[taskId].func = sub_81B1C1C;
-            }
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            sub_81B1B5C(gText_MailMessageWillBeLost, 1);
-            gTasks[taskId].func = sub_81B4C60;
-            break;
+    case 0:
+        if (TakeMailFromMon2(&gPlayerParty[gUnknown_0203CEC8.unk9]) != 0xFF)
+        {
+            sub_81B1B5C(gText_MailSentToPC, 0);
+            gTasks[taskId].func = sub_81B469C;
+        }
+        else
+        {
+            sub_81B1B5C(gText_PCMailboxFull, 0);
+            gTasks[taskId].func = sub_81B1C1C;
+        }
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        sub_81B1B5C(gText_MailMessageWillBeLost, 1);
+        gTasks[taskId].func = sub_81B4C60;
+        break;
     }
 }
 
@@ -3914,26 +3360,26 @@ void sub_81B4C94(u8 taskId)
 
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            item = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
-            if (AddBagItem(item, 1) == TRUE)
-            {
-                TakeMailFromMon(&gPlayerParty[gUnknown_0203CEC8.unk9]);
-                sub_81B1B5C(gText_MailTakenFromPkmn, 0);
-                gTasks[taskId].func = sub_81B469C;
-            }
-            else
-            {
-                pokemon_item_not_removed(item);
-                sub_81B1B5C(gStringVar4, 0);
-                gTasks[taskId].func = sub_81B1C1C;
-            }
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
+    case 0:
+        item = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_HELD_ITEM);
+        if (AddBagItem(item, 1) == TRUE)
+        {
+            TakeMailFromMon(&gPlayerParty[gUnknown_0203CEC8.unk9]);
+            sub_81B1B5C(gText_MailTakenFromPkmn, 0);
+            gTasks[taskId].func = sub_81B469C;
+        }
+        else
+        {
+            pokemon_item_not_removed(item);
+            sub_81B1B5C(gStringVar4, 0);
             gTasks[taskId].func = sub_81B1C1C;
-            break;
+        }
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        gTasks[taskId].func = sub_81B1C1C;
+        break;
     }
 }
 
@@ -4055,16 +3501,16 @@ void sub_81B50C8(u8 taskId)
 
     switch (sub_807A8D0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, species2, species, obedience))
     {
-        case 1:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
-            break;
-        case 2:
-            StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
-            break;
-        default:
-            PlaySE(SE_SELECT);
-            sub_81B12C0(taskId);
-            return;
+    case 1:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
+        break;
+    case 2:
+        StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        sub_81B12C0(taskId);
+        return;
     }
     PlaySE(SE_HAZURE);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -4104,22 +3550,22 @@ void sub_81B52E4(u8 taskId)
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
     switch (sub_807A918(gPlayerParty, gUnknown_0203CEC8.unk9))
     {
-        case 1:
-            StringExpandPlaceholders(gStringVar4, gText_OnlyPkmnForBattle);
-            break;
-        case 2:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
-            break;
-        case 3:
-            StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
-            break;
-        default:
-            PlaySE(SE_SELECT);
-            GetMonNickname(&gPlayerParty[gUnknown_0203CEC8.unk9], gStringVar1);
-            StringExpandPlaceholders(gStringVar4, gJPText_PutVar1IntoSpinner);
-            sub_81B1B5C(gStringVar4, 1);
-            gTasks[taskId].func = sub_81B53FC;
-            return;
+    case 1:
+        StringExpandPlaceholders(gStringVar4, gText_OnlyPkmnForBattle);
+        break;
+    case 2:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
+        break;
+    case 3:
+        StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        GetMonNickname(&gPlayerParty[gUnknown_0203CEC8.unk9], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gJPText_PutVar1IntoSpinner);
+        sub_81B1B5C(gStringVar4, 1);
+        gTasks[taskId].func = sub_81B53FC;
+        return;
     }
     PlaySE(SE_HAZURE);
     StringAppend(gStringVar4, gText_PauseUntilPress);
@@ -4140,22 +3586,21 @@ void sub_81B5430(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            sub_81B12C0(taskId);
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            sub_81B1C1C(taskId);
-            break;
+    case 0:
+        sub_81B12C0(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        sub_81B1C1C(taskId);
+        break;
     }
 }
 
 void sub_81B5470(u8 taskId)
 {
     u8 fieldMove = gUnknown_0203CEC4->unkF[Menu_GetCursorPos()] - 19;
-    struct MapHeader const *mapHeader;
-    u8 fieldMove2;
+    const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
     if (gUnknown_08615D9C[fieldMove].fieldMoveFunc != NULL)
@@ -4164,8 +3609,7 @@ void sub_81B5470(u8 taskId)
         sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
         if (sub_81221AC() == TRUE || InUnionRoom() == TRUE)
         {
-            fieldMove2 = fieldMove - 11;
-            if (fieldMove2 <= 1)
+            if (fieldMove == 11 || fieldMove == 12)
                 display_pokemon_menu_message(13);
             else
                 display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
@@ -4180,49 +3624,49 @@ void sub_81B5470(u8 taskId)
             }
             else if (gUnknown_08615D9C[fieldMove].fieldMoveFunc() == TRUE)
             {
-                switch (fieldMove - 5)
+                switch (fieldMove)
                 {
-                    case 6:
-                    case 7:
-                        sub_8161560(taskId);
-                        break;
-                    case 3:
-                        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
-                        sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
-                        StringExpandPlaceholders(gStringVar4, gText_ReturnToHealingSpot);
-                        sub_81B5674(taskId);
-                        gUnknown_0203CEC4->data[0] = fieldMove;
-                        break;
-                    case 4:
-                        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
-                        sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
-                        StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
-                        sub_81B5674(taskId);
-                        gUnknown_0203CEC4->data[0] = fieldMove;
-                        break;
-                    case 0:
-                        gUnknown_0203CEC8.exitCallback = MCB2_FlyMap;
-                        sub_81B12C0(taskId);
-                        break;
-                    default:
-                        gUnknown_0203CEC8.exitCallback = CB2_ReturnToField;
-                        sub_81B12C0(taskId);
-                        break;
+                case 11:
+                case 12:
+                    sub_8161560(taskId);
+                    break;
+                case 8:
+                    mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
+                    sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
+                    StringExpandPlaceholders(gStringVar4, gText_ReturnToHealingSpot);
+                    sub_81B5674(taskId);
+                    gUnknown_0203CEC4->data[0] = fieldMove;
+                    break;
+                case 9:
+                    mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                    sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
+                    StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+                    sub_81B5674(taskId);
+                    gUnknown_0203CEC4->data[0] = fieldMove;
+                    break;
+                case 5:
+                    gUnknown_0203CEC8.exitCallback = MCB2_FlyMap;
+                    sub_81B12C0(taskId);
+                    break;
+                default:
+                    gUnknown_0203CEC8.exitCallback = CB2_ReturnToField;
+                    sub_81B12C0(taskId);
+                    break;
                 }
             }
             else
             {
                 switch (fieldMove)
                 {
-                    case 4:
-                        sub_81B5864();
-                        break;
-                    case 1:
-                        sub_81B57DC();
-                        break;
-                    default:
-                        display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
-                        break;
+                case 4:
+                    sub_81B5864();
+                    break;
+                case 1:
+                    sub_81B57DC();
+                    break;
+                default:
+                    display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
+                    break;
                 }
                 gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
             }
@@ -4249,17 +3693,17 @@ void sub_81B56D8(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            gUnknown_0203CEC8.exitCallback = CB2_ReturnToField;
-            sub_81B12C0(taskId);
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            gFieldCallback2 = NULL;
-            gPostMenuFieldCallback = NULL;
-            sub_81B1C1C(taskId);
-            break;
+    case 0:
+        gUnknown_0203CEC8.exitCallback = CB2_ReturnToField;
+        sub_81B12C0(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        gFieldCallback2 = NULL;
+        gPostMenuFieldCallback = NULL;
+        sub_81B1C1C(taskId);
+        break;
     }
 }
 
@@ -4399,21 +3843,21 @@ void sub_81B5A8C(u8 spriteId, u16 hp, u16 maxhp)
 {
     switch (GetHPBarLevel(hp, maxhp))
     {
-        case HP_BAR_FULL:
-            sub_80D32C8(&gSprites[spriteId], 0);
-            break;
-        case HP_BAR_GREEN:
-            sub_80D32C8(&gSprites[spriteId], 1);
-            break;
-        case HP_BAR_YELLOW:
-            sub_80D32C8(&gSprites[spriteId], 2);
-            break;
-        case HP_BAR_RED:
-            sub_80D32C8(&gSprites[spriteId], 3);
-            break;
-        default:
-            sub_80D32C8(&gSprites[spriteId], 4);
-            break;
+    case HP_BAR_FULL:
+        sub_80D32C8(&gSprites[spriteId], 0);
+        break;
+    case HP_BAR_GREEN:
+        sub_80D32C8(&gSprites[spriteId], 1);
+        break;
+    case HP_BAR_YELLOW:
+        sub_80D32C8(&gSprites[spriteId], 2);
+        break;
+    case HP_BAR_RED:
+        sub_80D32C8(&gSprites[spriteId], 3);
+        break;
+    default:
+        sub_80D32C8(&gSprites[spriteId], 4);
+        break;
     }
 }
 
@@ -4518,22 +3962,22 @@ void sub_81B5D4C(u8 *a, u8 *b, u8 c)
 
     switch (c)
     {
-        case 0:
-            for (i = 0; i < a[0]; i++)
-            {
-                item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-                if (item != ITEM_NONE)
-                    sub_81B5DF0(b[i], ItemIsMail(item));
-            }
-            break;
-        case 1:
-            for (i = 0; i < a[1]; i++)
-            {
-                item = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
-                if (item != ITEM_NONE)
-                    sub_81B5DF0(b[i + 6], ItemIsMail(item));
-            }
-            break;
+    case 0:
+        for (i = 0; i < a[0]; i++)
+        {
+            item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            if (item != ITEM_NONE)
+                sub_81B5DF0(b[i], ItemIsMail(item));
+        }
+        break;
+    case 1:
+        for (i = 0; i < a[1]; i++)
+        {
+            item = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+            if (item != ITEM_NONE)
+                sub_81B5DF0(b[i + 6], ItemIsMail(item));
+        }
+        break;
     }
 }
 
@@ -4652,14 +4096,14 @@ void party_menu_update_status_condition_object(u8 status, struct Struct203CEDC *
 {
     switch (status)
     {
-        case AILMENT_NONE:
-        case AILMENT_PKRS:
-            gSprites[ptr->unkC].invisible = TRUE;
-            break;
-        default:
-            StartSpriteAnim(&gSprites[ptr->unkC], status - 1);
-            gSprites[ptr->unkC].invisible = FALSE;
-            break;
+    case AILMENT_NONE:
+    case AILMENT_PKRS:
+        gSprites[ptr->unkC].invisible = TRUE;
+        break;
+    default:
+        StartSpriteAnim(&gSprites[ptr->unkC], status - 1);
+        gSprites[ptr->unkC].invisible = FALSE;
+        break;
     }
 }
 
@@ -4743,66 +4187,66 @@ bool8 IsHPRecoveryItem(u16 item)
 
 void GetMedicineItemEffectMessage(u16 item)
 {
-    switch (GetItemEffectType(item) - 3)
+    switch (GetItemEffectType(item))
     {
-        case 0:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfPoison);
-            break;
-        case 1:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnWokeUp2);
-            break;
-        case 2:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBurnHealed);
-            break;
-        case 3:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
-            break;
-        case 4:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
-            break;
-        case 5:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnSnappedOutOfConfusion);
-            break;
-        case 6:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnGotOverInfatuation);
-            break;
-        case 8:
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
-            break;
-        case 10:
-            StringCopy(gStringVar2, gText_HP3);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-            break;
-        case 9:
-            StringCopy(gStringVar2, gText_Attack3);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-            break;
-        case 14:
-            StringCopy(gStringVar2, gText_Defense3);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-            break;
-        case 13:
-            StringCopy(gStringVar2, gText_Speed2);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-            break;
-        case 11:
-            StringCopy(gStringVar2, gText_SpAtk3);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-            break;
-        case 12:
-            StringCopy(gStringVar2, gText_SpDef3);
-            StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-            break;
-        case 16:
-        case 17:
-            StringExpandPlaceholders(gStringVar4, gText_MovesPPIncreased);
-            break;
-        case 18:
-            StringExpandPlaceholders(gStringVar4, gText_PPWasRestored);
-            break;
-        default:
-            StringExpandPlaceholders(gStringVar4, gText_WontHaveEffect);
-            break;
+    case 3:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfPoison);
+        break;
+    case 4:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnWokeUp2);
+        break;
+    case 5:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBurnHealed);
+        break;
+    case 6:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
+        break;
+    case 7:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
+        break;
+    case 8:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnSnappedOutOfConfusion);
+        break;
+    case 9:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnGotOverInfatuation);
+        break;
+    case 11:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
+        break;
+    case 13:
+        StringCopy(gStringVar2, gText_HP3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case 12:
+        StringCopy(gStringVar2, gText_Attack3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case 17:
+        StringCopy(gStringVar2, gText_Defense3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case 16:
+        StringCopy(gStringVar2, gText_Speed2);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case 14:
+        StringCopy(gStringVar2, gText_SpAtk3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case 15:
+        StringCopy(gStringVar2, gText_SpDef3);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        break;
+    case 19:
+    case 20:
+        StringExpandPlaceholders(gStringVar4, gText_MovesPPIncreased);
+        break;
+    case 21:
+        StringExpandPlaceholders(gStringVar4, gText_PPWasRestored);
+        break;
+    default:
+        StringExpandPlaceholders(gStringVar4, gText_WontHaveEffect);
+        break;
     }
 }
 
@@ -4958,20 +4402,20 @@ u16 sub_81B691C(struct Pokemon *mon, u8 effectType)
 {
     switch (effectType)
     {
-        case 13:
-            if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_SHEDINJA)
-                return GetMonData(mon, MON_DATA_HP_EV);
-            break;
-        case 12:
-            return GetMonData(mon, MON_DATA_ATK_EV);
-        case 17:
-            return GetMonData(mon, MON_DATA_DEF_EV);
-        case 16:
-            return GetMonData(mon, MON_DATA_SPEED_EV);
-        case 14:
-            return GetMonData(mon, MON_DATA_SPATK_EV);
-        case 15:
-            return GetMonData(mon, MON_DATA_SPDEF_EV);
+    case 13:
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_SHEDINJA)
+            return GetMonData(mon, MON_DATA_HP_EV);
+        break;
+    case 12:
+        return GetMonData(mon, MON_DATA_ATK_EV);
+    case 17:
+        return GetMonData(mon, MON_DATA_DEF_EV);
+    case 16:
+        return GetMonData(mon, MON_DATA_SPEED_EV);
+    case 14:
+        return GetMonData(mon, MON_DATA_SPATK_EV);
+    case 15:
+        return GetMonData(mon, MON_DATA_SPDEF_EV);
     }
     return 0;
 }
@@ -4980,24 +4424,24 @@ void option_menu_get_string(u8 effectType, u8 *dest)
 {
     switch (effectType)
     {
-        case 13:
-            StringCopy(dest, gText_HP3);
-            break;
-        case 12:
-            StringCopy(dest, gText_Attack3);
-            break;
-        case 17:
-            StringCopy(dest, gText_Defense3);
-            break;
-        case 16:
-            StringCopy(dest, gText_Speed2);
-            break;
-        case 14:
-            StringCopy(dest, gText_SpAtk3);
-            break;
-        case 15:
-            StringCopy(dest, gText_SpDef3);
-            break;
+    case 13:
+        StringCopy(dest, gText_HP3);
+        break;
+    case 12:
+        StringCopy(dest, gText_Attack3);
+        break;
+    case 17:
+        StringCopy(dest, gText_Defense3);
+        break;
+    case 16:
+        StringCopy(dest, gText_Speed2);
+        break;
+    case 14:
+        StringCopy(dest, gText_SpAtk3);
+        break;
+    case 15:
+        StringCopy(dest, gText_SpDef3);
+        break;
     }
 }
 
@@ -5177,12 +4621,12 @@ void sub_81B6DC4(u8 taskId, TaskFunc unused)
     move[1] = 0;
     switch (CanPartyPokemonLearnTMTutor(mon, item, 0))
     {
-        case CANNOT_LEARN_MOVE:
-            sub_81B6D98(taskId, gText_PkmnCantLearnMove);
-            return;
-        case ALREADY_KNOWS_MOVE:
-            sub_81B6D98(taskId, gText_PkmnAlreadyKnows);
-            return;
+    case CANNOT_LEARN_MOVE:
+        sub_81B6D98(taskId, gText_PkmnCantLearnMove);
+        return;
+    case ALREADY_KNOWS_MOVE:
+        sub_81B6D98(taskId, gText_PkmnAlreadyKnows);
+        return;
     }
     if (GiveMoveToMon(mon, move[0]) != 0xFFFF)
     {
@@ -5252,15 +4696,15 @@ void sub_81B7028(u8 taskId)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            sub_81B1B5C(gText_WhichMoveToForget, 1);
-            gTasks[taskId].func = sub_81B7088;
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            sub_81B7230(taskId);
-            break;
+    case 0:
+        sub_81B1B5C(gText_WhichMoveToForget, 1);
+        gTasks[taskId].func = sub_81B7088;
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        sub_81B7230(taskId);
+        break;
     }
 }
 
@@ -5344,30 +4788,30 @@ void sub_81B72C8(u8 taskId)
 
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            GetMonNickname(mon, gStringVar1);
-            StringCopy(gStringVar2, gMoveNames[gUnknown_0203CEC8.unkE]);
-            StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
-            sub_81B1B5C(gStringVar4, 1);
-            if (gUnknown_0203CEC8.unk10 == 1)
-            {
-                gTasks[taskId].func = sub_81B73E4;
-            }
-            else
-            {
-                if (gUnknown_0203CEC8.unk10 == 2)
-                    gSpecialVar_Result = FALSE;
-                gTasks[taskId].func = sub_81B6794;
-            }
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
-            GetMonNickname(mon, gStringVar1);
-            StringCopy(gStringVar2, gMoveNames[gUnknown_0203CEC8.unkE]);
-            sub_81B6D74(gText_PkmnNeedsToReplaceMove);
-            gTasks[taskId].func = sub_81B6FF4;
-            break;
+    case 0:
+        GetMonNickname(mon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[gUnknown_0203CEC8.unkE]);
+        StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
+        sub_81B1B5C(gStringVar4, 1);
+        if (gUnknown_0203CEC8.unk10 == 1)
+        {
+            gTasks[taskId].func = sub_81B73E4;
+        }
+        else
+        {
+            if (gUnknown_0203CEC8.unk10 == 2)
+                gSpecialVar_Result = FALSE;
+            gTasks[taskId].func = sub_81B6794;
+        }
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        GetMonNickname(mon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[gUnknown_0203CEC8.unkE]);
+        sub_81B6D74(gText_PkmnNeedsToReplaceMove);
+        gTasks[taskId].func = sub_81B6FF4;
+        break;
     }
 }
 
@@ -5481,18 +4925,18 @@ void sub_81B7704(u8 taskId)
         gUnknown_0203CEC8.unk10 = 1;
         switch (result)
         {
-            case 0:
-                sub_81B7810(taskId);
-                break;
-            case 0xFFFF:
-                sub_81B787C(taskId);
-                break;
-            case 0xFFFE:
-                gTasks[taskId].func = sub_81B77AC;
-                break;
-            default:
-                sub_81B7910(taskId, result);
-                break;
+        case 0:
+            sub_81B7810(taskId);
+            break;
+        case 0xFFFF:
+            sub_81B787C(taskId);
+            break;
+        case 0xFFFE:
+            gTasks[taskId].func = sub_81B77AC;
+            break;
+        default:
+            sub_81B7910(taskId, result);
+            break;
         }
     }
 }
@@ -5503,17 +4947,17 @@ void sub_81B77AC(u8 taskId)
 
     switch (result)
     {
-        case 0:
-            sub_81B7810(taskId);
-            break;
-        case 0xFFFF:
-            sub_81B787C(taskId);
-            break;
-        case 0xFFFE:
-            return;
-        default:
-            sub_81B7910(taskId, result);
-            break;
+    case 0:
+        sub_81B7810(taskId);
+        break;
+    case 0xFFFF:
+        sub_81B787C(taskId);
+        break;
+    case 0xFFFE:
+        return;
+    default:
+        sub_81B7910(taskId, result);
+        break;
     }
 }
 
@@ -5575,26 +5019,24 @@ void sub_81B79E8(u8 taskId, TaskFunc unused)
     sub_81B7A28(taskId);
 }
 
-#ifdef NONMATCHING
 void sub_81B7A28(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 hp;
 
-    if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
-    {
-        hp = GetMonData(mon, MON_DATA_HP);
-        if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0))
-        {
-            gTasks[taskId].func = task_sacred_ash_party_loop;
-            return;
-        }
-    }
-    else
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
     {
         gTasks[taskId].func = task_sacred_ash_party_loop;
         return;
     }
+
+    hp = GetMonData(mon, MON_DATA_HP);
+    if (ExecuteTableBasedItemEffect__(gUnknown_0203CEC8.unk9, gSpecialVar_ItemId, 0))
+    {
+        gTasks[taskId].func = task_sacred_ash_party_loop;
+        return;
+    }
+
     PlaySE(SE_KAIFUKU);
     party_menu_get_status_condition_and_update_object(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
     if (gSprites[gUnknown_0203CEDC[gUnknown_0203CEC8.unk9].unkC].invisible)
@@ -5606,131 +5048,6 @@ void sub_81B7A28(u8 taskId)
     gUnknown_0203CEC4->data[0] = 1;
     gUnknown_0203CEC4->data[1] = 1;
 }
-#else
-NAKED
-void sub_81B7A28(u8 taskId)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0x4\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	mov r8, r4\n\
-	ldr r6, =gUnknown_0203CEC8\n\
-	movs r1, 0x9\n\
-	ldrsb r1, [r6, r1]\n\
-	movs r0, 0x64\n\
-	muls r1, r0\n\
-	ldr r0, =gPlayerParty\n\
-	adds r5, r1, r0\n\
-	adds r0, r5, 0\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	beq _081B7A6E\n\
-	adds r0, r5, 0\n\
-	movs r1, 0x39\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r7, r0, 16\n\
-	ldrb r0, [r6, 0x9]\n\
-	ldr r1, =gSpecialVar_ItemId\n\
-	ldrh r1, [r1]\n\
-	movs r2, 0\n\
-	bl ExecuteTableBasedItemEffect__\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _081B7A94\n\
-_081B7A6E:\n\
-	ldr r0, =gTasks\n\
-	lsls r1, r4, 2\n\
-	adds r1, r4\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	ldr r0, =task_sacred_ash_party_loop\n\
-	str r0, [r1]\n\
-	b _081B7B2A\n\
-	.pool\n\
-_081B7A94:\n\
-	movs r0, 0x1\n\
-	bl PlaySE\n\
-	ldr r4, =gUnknown_0203CEDC\n\
-	movs r0, 0x9\n\
-	ldrsb r0, [r6, r0]\n\
-	lsls r0, 4\n\
-	ldr r1, [r4]\n\
-	adds r1, r0\n\
-	adds r0, r5, 0\n\
-	bl party_menu_get_status_condition_and_update_object\n\
-	ldr r2, =gSprites\n\
-	movs r0, 0x9\n\
-	ldrsb r0, [r6, r0]\n\
-	ldr r1, [r4]\n\
-	lsls r0, 4\n\
-	adds r3, r0, r1\n\
-	ldrb r1, [r3, 0xC]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	adds r0, 0x3E\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 29\n\
-	cmp r0, 0\n\
-	bge _081B7AD6\n\
-	adds r0, r5, 0\n\
-	adds r1, r3, 0\n\
-	movs r2, 0x1\n\
-	bl DisplayPartyPokemonLevelCheck\n\
-_081B7AD6:\n\
-	ldr r4, =gUnknown_0203CEC4\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x87\n\
-	lsls r1, 2\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl sub_81B0FCC\n\
-	ldrb r0, [r6, 0x9]\n\
-	movs r1, 0x1\n\
-	bl sub_81B0FCC\n\
-	adds r0, r5, 0\n\
-	movs r1, 0x39\n\
-	bl GetMonData\n\
-	adds r3, r0, 0\n\
-	subs r3, r7\n\
-	lsls r3, 16\n\
-	asrs r3, 16\n\
-	ldrb r1, [r6, 0x9]\n\
-	ldr r0, =sub_81B7C10\n\
-	str r0, [sp]\n\
-	mov r0, r8\n\
-	movs r2, 0x1\n\
-	bl sub_81B1F18\n\
-	mov r0, r8\n\
-	movs r1, 0\n\
-	adds r2, r7, 0\n\
-	bl sub_81B1FA8\n\
-	ldr r0, [r4]\n\
-	movs r2, 0x86\n\
-	lsls r2, 2\n\
-	adds r1, r0, r2\n\
-	movs r2, 0x1\n\
-	strh r2, [r1]\n\
-	ldr r1, =0x0000021a\n\
-	adds r0, r1\n\
-	strh r2, [r0]\n\
-_081B7B2A:\n\
-	add sp, 0x4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n");
-}
-#endif
 
 void task_sacred_ash_party_loop(u8 taskId)
 {
@@ -5956,19 +5273,19 @@ void sub_81B7E4C(u8 taskId)
         move[1] = 2;
         switch (CanPartyPokemonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
         {
-            case CANNOT_LEARN_MOVE:
-                sub_81B6D98(taskId, gText_PkmnCantLearnMove);
+        case CANNOT_LEARN_MOVE:
+            sub_81B6D98(taskId, gText_PkmnCantLearnMove);
+            return;
+        case ALREADY_KNOWS_MOVE:
+            sub_81B6D98(taskId, gText_PkmnAlreadyKnows);
+            return;
+        default:
+            if (GiveMoveToMon(mon, gUnknown_0203CEC8.unkE) != 0xFFFF)
+            {
+                sub_81B6EB4(taskId);
                 return;
-            case ALREADY_KNOWS_MOVE:
-                sub_81B6D98(taskId, gText_PkmnAlreadyKnows);
-                return;
-            default:
-                if (GiveMoveToMon(mon, gUnknown_0203CEC8.unkE) != 0xFFFF)
-                {
-                    sub_81B6EB4(taskId);
-                    return;
-                }
-                break;
+            }
+            break;
         }
         sub_81B6D74(gText_PkmnNeedsToReplaceMove);
         gTasks[taskId].func = sub_81B6FF4;
@@ -6099,33 +5416,33 @@ void sub_81B82D4(u8 taskId)
 
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
-        case 0:
-            item = gUnknown_0203CEC8.unkC;
-            sub_81B83F0(item);
-            if (AddBagItem(gUnknown_0203CEFC, 1) == FALSE)
-            {
-                sub_81B841C(item);
-                pokemon_item_not_removed(gUnknown_0203CEFC);
-                sub_81B1B5C(gStringVar4, 0);
-                gTasks[taskId].func = sub_81B8104;
-            }
-            else if (ItemIsMail(item))
-            {
-                gUnknown_0203CEC4->exitCallback = sub_81B814C;
-                sub_81B12C0(taskId);
-            }
-            else
-            {
-                sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], item);
-                sub_81B1D68(item, gUnknown_0203CEFC, 1);
-                gTasks[taskId].func = sub_81B8104;
-            }
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-        case 1:
+    case 0:
+        item = gUnknown_0203CEC8.unkC;
+        sub_81B83F0(item);
+        if (AddBagItem(gUnknown_0203CEFC, 1) == FALSE)
+        {
+            sub_81B841C(item);
+            pokemon_item_not_removed(gUnknown_0203CEFC);
+            sub_81B1B5C(gStringVar4, 0);
             gTasks[taskId].func = sub_81B8104;
-            break;
+        }
+        else if (ItemIsMail(item))
+        {
+            gUnknown_0203CEC4->exitCallback = sub_81B814C;
+            sub_81B12C0(taskId);
+        }
+        else
+        {
+            sub_81B1DB8(&gPlayerParty[gUnknown_0203CEC8.unk9], item);
+            sub_81B1D68(item, gUnknown_0203CEFC, 1);
+            gTasks[taskId].func = sub_81B8104;
+        }
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+    case 1:
+        gTasks[taskId].func = sub_81B8104;
+        break;
     }
 }
 
@@ -6204,205 +5521,71 @@ bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
 
-    if (GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888() ||
-    (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) &&
-    gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY) &&
-    GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
+    if (GetMonData(mon, MON_DATA_IS_EGG)
+        || GetMonData(mon, MON_DATA_LEVEL) > sub_81B8888()
+        || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+            && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
+    {
         return FALSE;
+    }
+
     switch (VarGet(VAR_FRONTIER_FACILITY)) // oddly the specific cases are beyond 6, turns out case 9 is apparently related to link battles
     {
-        case 9:
-            if (GetMonData(mon, MON_DATA_HP) != 0)
-                return TRUE;
-            return FALSE;
-        case 8:
+    case 9:
+        if (GetMonData(mon, MON_DATA_HP) != 0)
             return TRUE;
-        default:
-            species = GetMonData(mon, MON_DATA_SPECIES);
-            for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-            {
-                if (gFrontierBannedSpecies[i] == species)
-                    return FALSE;
-            }
-            return TRUE;
+        return FALSE;
+    case 8:
+        return TRUE;
+    default:
+        species = GetMonData(mon, MON_DATA_SPECIES);
+        for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+        {
+            if (gFrontierBannedSpecies[i] == species)
+                return FALSE;
+        }
+        return TRUE;
     }
 }
 
-#ifdef NONMATCHING
 u8 sub_81B865C(void)
 {
-    u8 unk = sub_81B885C();
     u8 unk2;
     u8 i, j;
-    u16 species;
-    u16 item;
-    u8 facilityNum;
+    u8 facility;
+    struct Pokemon *party = gPlayerParty;
+    u8 unk = sub_81B885C();
+    u8 *order = gSelectedOrderFromParty;
 
-    if (gSelectedOrderFromParty[unk - 1] == 0)
+    if (order[unk - 1] == 0)
     {
         if (unk == 1)
             return 14;
         ConvertIntToDecimalStringN(gStringVar1, unk, 0, 1);
         return 17;
     }
-    facilityNum = VarGet(VAR_FRONTIER_FACILITY);
-    if (facilityNum != 8 && facilityNum != 9)
+
+    facility = VarGet(VAR_FRONTIER_FACILITY);
+    if (facility == 8 || facility == 9)
+        return 0xFF;
+
+    unk2 = sub_81B8830();
+    for (i = 0; i < unk2 - 1; i++)
     {
-        unk2 = sub_81B8830();
-        for (i = 0; i < (unk2 - 1); i++)
+        u16 species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
+        u16 item = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
+        for (j = i + 1; j < unk2; j++)
         {
-            species = GetMonData(&gPlayerParty[gSelectedOrderFromParty[i - 1]], MON_DATA_SPECIES);
-            item = GetMonData(&gPlayerParty[gSelectedOrderFromParty[i - 1]], MON_DATA_HELD_ITEM);
-            for (j = i + 1; j < unk2; j++)
-            {
-                if (species == GetMonData(&gPlayerParty[gSelectedOrderFromParty[j - 1]], MON_DATA_SPECIES))
-                    return 18;
-                if (item != ITEM_NONE && item == GetMonData(&gPlayerParty[gSelectedOrderFromParty[j - 1]], MON_DATA_HELD_ITEM))
-                    return 19;
-            }
+            if (species == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
+                return 18;
+            if (item != ITEM_NONE && item == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
+                return 19;
         }
     }
+
     return 0xFF;
 }
-#else
-NAKED
-u8 sub_81B865C(void)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	bl sub_81B885C\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	adds r1, r2, 0\n\
-	ldr r3, =gSelectedOrderFromParty\n\
-	adds r0, r2, r3\n\
-	subs r0, 0x1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _081B869C\n\
-	cmp r2, 0x1\n\
-	bne _081B8688\n\
-	movs r0, 0xE\n\
-	b _081B8758\n\
-	.pool\n\
-_081B8688:\n\
-	ldr r0, =gStringVar1\n\
-	movs r2, 0\n\
-	movs r3, 0x1\n\
-	bl ConvertIntToDecimalStringN\n\
-	movs r0, 0x11\n\
-	b _081B8758\n\
-	.pool\n\
-_081B869C:\n\
-	ldr r0, =0x000040cf\n\
-	bl VarGet\n\
-	lsls r0, 24\n\
-	movs r1, 0xF8\n\
-	lsls r1, 24\n\
-	adds r0, r1\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bhi _081B86C0\n\
-	b _081B8756\n\
-	.pool\n\
-_081B86B8:\n\
-	movs r0, 0x12\n\
-	b _081B8758\n\
-_081B86BC:\n\
-	movs r0, 0x13\n\
-	b _081B8758\n\
-_081B86C0:\n\
-	bl sub_81B8830\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	movs r5, 0\n\
-	b _081B8750\n\
-_081B86CE:\n\
-	ldr r3, =gSelectedOrderFromParty\n\
-	adds r4, r3, r5\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0x64\n\
-	muls r0, r1\n\
-	subs r0, 0x64\n\
-	ldr r3, =gPlayerParty\n\
-	adds r0, r3, r0\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	mov r10, r0\n\
-	ldrb r0, [r4]\n\
-	movs r1, 0x64\n\
-	muls r0, r1\n\
-	subs r0, 0x64\n\
-	ldr r3, =gPlayerParty\n\
-	adds r0, r3, r0\n\
-	movs r1, 0xC\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	adds r1, r5, 0x1\n\
-	lsls r0, r1, 24\n\
-	lsrs r4, r0, 24\n\
-	mov r9, r1\n\
-	cmp r4, r8\n\
-	bcs _081B8748\n\
-	movs r7, 0x64\n\
-_081B870E:\n\
-	ldr r0, =gSelectedOrderFromParty\n\
-	adds r5, r0, r4\n\
-	ldrb r0, [r5]\n\
-	muls r0, r7\n\
-	subs r0, 0x64\n\
-	ldr r1, =gPlayerParty\n\
-	adds r0, r1, r0\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	cmp r10, r0\n\
-	beq _081B86B8\n\
-	cmp r6, 0\n\
-	beq _081B873E\n\
-	ldrb r0, [r5]\n\
-	muls r0, r7\n\
-	subs r0, 0x64\n\
-	ldr r3, =gPlayerParty\n\
-	adds r0, r3, r0\n\
-	movs r1, 0xC\n\
-	bl GetMonData\n\
-	cmp r6, r0\n\
-	beq _081B86BC\n\
-_081B873E:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, r8\n\
-	bcc _081B870E\n\
-_081B8748:\n\
-	mov r1, r9\n\
-	lsls r0, r1, 24\n\
-	lsrs r5, r0, 24\n\
-	mov r0, r8\n\
-_081B8750:\n\
-	subs r0, 0x1\n\
-	cmp r5, r0\n\
-	blt _081B86CE\n\
-_081B8756:\n\
-	movs r0, 0xFF\n\
-_081B8758:\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.pool\n");
-}
-#endif
 
 bool8 sub_81B8770(u8 slot)
 {
@@ -6447,12 +5630,12 @@ u8 sub_81B8830(void)
 {
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
-        case 9:
-            return 3;
-        case 8:
-            return 2;
-        default:
-            return gSpecialVar_0x8005;
+    case 9:
+        return 3;
+    case 8:
+        return 2;
+    default:
+        return gSpecialVar_0x8005;
     }
 }
 
@@ -6460,12 +5643,12 @@ u8 sub_81B885C(void)
 {
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
-        case 9:
-            return 1;
-        case 8:
-            return 2;
-        default:
-            return gSpecialVar_0x8005;
+    case 9:
+        return 1;
+    case 8:
+        return 2;
+    default:
+        return gSpecialVar_0x8005;
     }
 }
 
@@ -6473,14 +5656,14 @@ u8 sub_81B8888(void)
 {
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
-        case 9:
-            return 100;
-        case 8:
-            return 30;
-        default:
-            if (gSpecialVar_0x8004 == 0)
-                return 50;
-            return 100;
+    case 9:
+        return 100;
+    case 8:
+        return 30;
+    default:
+        if (gSpecialVar_0x8004 == 0)
+            return 50;
+        return 100;
     }
 }
 
