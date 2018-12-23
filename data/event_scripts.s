@@ -1,5 +1,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
+#include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -536,7 +537,7 @@ EventScript_23B5F0:: @ 823B5F0
 	goto_eq EventScript_23B5A1
 	msgbox Text_2767D1, MSGBOX_SIGN
 	special sub_80E9C2C
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
@@ -546,13 +547,13 @@ EventScript_23B62F:: @ 823B62F
 	goto_eq EventScript_23B5A1
 	msgbox Text_2767E9, MSGBOX_SIGN
 	special sub_80E9C2C
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	releaseall
 	end
 
 EventScript_23B652:: @ 823B652
 	msgbox Text_27676F, MSGBOX_SIGN
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
 	end
@@ -563,7 +564,7 @@ EventScript_23B660:: @ 823B660
 	end
 
 EventScript_23B66E:: @ 823B66E
-	special sub_80FA57C
+	special DoSecretBasePCTurnOffEffect
 	closemessage
 	releaseall
 	end
@@ -591,7 +592,7 @@ EventScript_SecretBaseSandOrnament:: @ 823B684
 	end
 
 EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
-	special sub_80FAC78
+	special GetShieldToyTVDecorationInfo
 	compare VAR_RESULT, 0
 	goto_eq EventScript_23B6BC
 	compare VAR_RESULT, 1
@@ -847,9 +848,9 @@ VerdanturfTown_BattleTentLobby_EventScript_27134F:: @ 827134F
 	EventScript_271354:: @ 8271354
 	cmdD8
 	cmdD9
-	
+
 	.include "data/scripts/trainer_battle.inc"
-	
+
 Std_MsgboxAutoclose:: @ 8271494
 	message 0x0
 	waitmessage
@@ -1673,7 +1674,7 @@ EventScript_271E0E:: @ 8271E0E
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 1, EventScript_271E3E
 	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
-	special ShowPokemonStorageSystem
+	special ShowPokemonStorageSystemPC
 	waitstate
 	goto EventScript_271DAC
 	end
@@ -2234,11 +2235,11 @@ RusturfTunnel_EventScript_272216:: @ 8272216
 
 EventScript_27222B:: @ 827222B
 	delay 30
-	applymovement 255, PetalburgCity_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A6
 	waitmovement 0
 	showobjectat 255, MAP_PETALBURG_CITY
 	delay 30
-	applymovement 255, Movement_27224E
+	applymovement EVENT_OBJ_ID_PLAYER, Movement_27224E
 	waitmovement 0
 	delay 30
 	return
@@ -2454,7 +2455,7 @@ EverGrandeCity_DrakesRoom_EventScript_2723F8:: @ 82723F8
 EverGrandeCity_GlaciasRoom_EventScript_2723F8:: @ 82723F8
 EverGrandeCity_PhoebesRoom_EventScript_2723F8:: @ 82723F8
 EverGrandeCity_SidneysRoom_EventScript_2723F8:: @ 82723F8
-	applymovement 255, EverGrandeCity_SidneysRoom_Movement_2725C6
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_SidneysRoom_Movement_2725C6
 	waitmovement 0
 	playse SE_DOOR
 	setmetatile 6, 1, 836, 0
@@ -2476,7 +2477,7 @@ EverGrandeCity_DrakesRoom_EventScript_272475:: @ 8272475
 EverGrandeCity_GlaciasRoom_EventScript_272475:: @ 8272475
 EverGrandeCity_PhoebesRoom_EventScript_272475:: @ 8272475
 EverGrandeCity_SidneysRoom_EventScript_272475:: @ 8272475
-	applymovement 255, EverGrandeCity_SidneysRoom_Movement_2725BA
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_SidneysRoom_Movement_2725BA
 	waitmovement 0
 	playse SE_TRACK_DOOR
 	setmetatile 5, 12, 518, 1
@@ -4245,7 +4246,7 @@ gUnknown_0827EE07:: @ 27EE07
 
 gUnknown_0827EE09:: @ 27EE09
 	.string "8$"
-	
+
 	.include "data/scripts/tv.inc"
 	.include "data/text/tv.inc"
 
@@ -4651,35 +4652,35 @@ gOtherText_DontYouAgree:: @ 8294301
 	.string "\n"
 	.string "Don't you agree?$"
 
-gUnknown_08294313:: @ 8294313
+gMauvilleManText_ISoWantToGoOnAVacation:: @ 8294313
 	.string "I so want to go on a vacation.\n"
 	.string "Would you happen to know a nice place?$"
 
-gUnknown_08294359:: @ 8294359
+gMauvilleManText_IBoughtCrayonsWith120Colors:: @ 8294359
 	.string "I bought crayons with 120 colors!\n"
 	.string "Don't you think that's nice?$"
 
-gUnknown_08294398:: @ 8294398
+gMauvilleManText_WouldntItBeNiceIfWeCouldFloat:: @ 8294398
 	.string "Wouldn't it be nice if we could float\n"
 	.string "away on a cloud of bubbles?$"
 
-gUnknown_082943DA:: @ 82943DA
+gMauvilleManText_WhenYouWriteOnASandyBeach:: @ 82943DA
 	.string "When you write on a sandy beach,\n"
 	.string "they wash away. It makes me sad.$"
 
-gUnknown_0829441C:: @ 829441C
+gMauvilleManText_WhatsTheBottomOfTheSeaLike:: @ 829441C
 	.string "What's the bottom of the sea like?\n"
 	.string "Just once I would so love to go!$"
 
-gUnknown_08294460:: @ 8294460
+gMauvilleManText_WhenYouSeeTheSettingSunDoesIt:: @ 8294460
 	.string "When you see the setting sun, does it\n"
 	.string "make you want to go home?$"
 
-gUnknown_082944A0:: @ 82944A0
+gMauvilleManText_LyingBackInTheGreenGrass:: @ 82944A0
 	.string "Lying back in the green grass…\n"
 	.string "Oh, it's so, so nice!$"
 
-gUnknown_082944D5:: @ 82944D5
+gMauvilleManText_SecretBasesAreSoWonderful:: @ 82944D5
 	.string "SECRET BASES are so wonderful!\n"
 	.string "Can't you feel the excitement?$"
 
@@ -4778,7 +4779,7 @@ MtPyre_2F_MapScript1_2A8331: @ 82A8331
 EventScript_FallDownHole:: @ 82A8337
 	lockall
 	delay 20
-	applymovement 255, GraniteCave_B1F_Movement_2A8369
+	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_B1F_Movement_2A8369
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
@@ -4789,7 +4790,7 @@ EventScript_FallDownHole:: @ 82A8337
 gUnknown_082A8350:: @ 82A8350
 	lockall
 	delay 20
-	applymovement 255, GraniteCave_B1F_Movement_2A8369
+	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_B1F_Movement_2A8369
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
@@ -9079,7 +9080,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C3F6F:: @ 82C3F6F
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030:: @ 82C4030
-	applymovement 255, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1, 255, 4, 7
@@ -9087,7 +9088,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4030:: @ 82C4030
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4049:: @ 82C4049
-	applymovement 255, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeThreePathRoom_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3, 255, 4, 19
@@ -9168,7 +9169,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136:: @ 82C4136
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144:: @ 82C4144
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144:: @ 82C4144
-	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2, 255, 2, 7
@@ -9176,7 +9177,7 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144:: @ 82C4144
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C:: @ 82C415C
 BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C:: @ 82C415C
-	applymovement 255, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeRandomRoom1_Movement_2C427A
 	waitmovement 0
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10

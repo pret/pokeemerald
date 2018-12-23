@@ -118,7 +118,7 @@ MossdeepCity_Gym_EventScript_220999:: @ 8220999
 	checkflag FLAG_0x064
 	goto_eq MossdeepCity_Gym_EventScript_2209D0
 	setflag FLAG_0x064
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 5, 5, 516, 0
 	setmetatile 2, 7, 569, 1
@@ -133,7 +133,7 @@ MossdeepCity_Gym_EventScript_2209C8:: @ 82209C8
 
 MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
 	clearflag FLAG_0x064
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 5, 5, 524, 0
 	setmetatile 2, 7, 568, 1
@@ -145,7 +145,7 @@ MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
 	checkflag FLAG_0x065
 	goto_eq MossdeepCity_Gym_EventScript_220A24
 	setflag FLAG_0x065
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 8, 14, 516, 0
 	setmetatile 8, 10, 569, 1
@@ -154,7 +154,7 @@ MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
 
 MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
 	clearflag FLAG_0x065
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 8, 14, 517, 0
 	setmetatile 8, 10, 568, 1
@@ -166,7 +166,7 @@ MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
 	checkflag FLAG_0x066
 	goto_eq MossdeepCity_Gym_EventScript_220A78
 	setflag FLAG_0x066
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 15, 17, 524, 0
 	setmetatile 17, 15, 569, 1
@@ -175,7 +175,7 @@ MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
 
 MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
 	clearflag FLAG_0x066
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 15, 17, 516, 0
 	setmetatile 17, 15, 568, 1
@@ -187,7 +187,7 @@ MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
 	checkflag FLAG_0x067
 	goto_eq MossdeepCity_Gym_EventScript_220ACC
 	setflag FLAG_0x067
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 1, 23, 525, 0
 	setmetatile 5, 24, 569, 1
@@ -196,7 +196,7 @@ MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
 
 MossdeepCity_Gym_EventScript_220ACC:: @ 8220ACC
 	clearflag FLAG_0x067
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 1, 23, 516, 0
 	setmetatile 5, 24, 568, 1

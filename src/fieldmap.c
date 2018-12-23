@@ -1,7 +1,7 @@
 #include "global.h"
 #include "bg.h"
 #include "fieldmap.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "fldeff_cut.h"
 #include "fldeff_groundshake.h"
 #include "frontier_util.h"

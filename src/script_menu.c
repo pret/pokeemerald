@@ -1640,27 +1640,27 @@ static void sub_80E2A94(u8 multichoiceId)
     {
         case 77:
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBAC[GetMenuCursorPos()], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBAC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 76:
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized2(0, 1, gUnknown_0858BB9C[GetMenuCursorPos()], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_0858BB9C[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 78:
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBBC[GetMenuCursorPos()], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBBC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 79:
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBCC[GetMenuCursorPos()], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBCC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 75:
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBEC[GetMenuCursorPos()], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBEC[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
         case 74:
             FillWindowPixelBuffer(0, 0x11);
-            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBE0[GetMenuCursorPos()], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 1, gUnknown_0858BBE0[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
             break;
     }
 }

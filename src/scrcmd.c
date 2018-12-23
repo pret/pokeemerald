@@ -13,7 +13,6 @@
 #include "event_data.h"
 #include "field_door.h"
 #include "field_effect.h"
-#include "field_fadetransition.h"
 #include "event_object_movement.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
@@ -1486,7 +1485,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 
     StringExpandPlaceholders(gStringVar4, ptr + 6);
 
-    width = GetStringWidth(6, gStringVar4, -1) / 8;
+    width = GetStringWidth(6, gStringVar4, -1) / 8u;
 
     if (width > 0x1C)
         width = 0x1C;

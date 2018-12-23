@@ -2484,7 +2484,7 @@ u8 sub_80DB0C4(void)
 {
     u8 spriteId;
 
-    LoadCompressedObjectPic(&gUnknown_08587C00);
+    LoadCompressedSpriteSheet(&gUnknown_08587C00);
     LoadCompressedPalette(gContest2Pal, 0x110, 32);
     spriteId = CreateSprite(&gSpriteTemplate_8587BE8, 112, 36, 30);
     gSprites[spriteId].oam.paletteNum = 1;
@@ -2496,8 +2496,8 @@ u8 sub_80DB120(void)
 {
     u8 spriteId;
 
-    LoadCompressedObjectPic(&gUnknown_08587C08);
-    LoadCompressedObjectPalette(&gUnknown_08587C10);
+    LoadCompressedSpriteSheet(&gUnknown_08587C08);
+    LoadCompressedSpritePalette(&gUnknown_08587C10);
     spriteId = CreateSprite(&gSpriteTemplate_8587C18, 96, 10, 29);
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.tileNum;
@@ -2520,7 +2520,7 @@ u8 sub_80DB174(u16 species, u32 otId, u32 personality, u32 index)
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x70, GetBattlerSpriteFinal_Y(2, species, FALSE), 30);
     gSprites[spriteId].oam.paletteNum = 2;
     gSprites[spriteId].oam.priority = 2;
-    gSprites[spriteId].subpriority = sub_80A82E4(2);
+    gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(2);
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;

@@ -56,11 +56,11 @@ extern const u8* const gBattleScriptsForMoveEffects[];
 extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon* party, u8 monPartyId, u8 monCount, void (*callback)(void), u16 move); // pokemon summary screen
 extern u8 sub_81C1B94(void); // pokemon summary screen
 extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
-extern void sub_81D3640(u8 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
-extern void sub_81D3784(u8 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
+extern void sub_81D3640(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
+extern void sub_81D3784(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
 extern u8* GetMonNickname(struct Pokemon* mon, u8* dst); // party_menu
 extern void sub_81B8E80(u8 battlerId, u8, u8); // party menu
-extern bool8 sub_81B1250(void); // ?
+extern bool8 IsMultiBattle(void); // ?
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 
@@ -705,13 +705,6 @@ static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 
 static const u16 sUnknown_0831C2C8[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
 static const u32 sUnknown_0831C2E8[] = INCBIN_U32("graphics/battle_interface/unk_battlebox.4bpp.lz");
 
-// unused
-static const u8 sRubyLevelUpStatBoxStats[] =
-{
-    MON_DATA_MAX_HP, MON_DATA_SPATK, MON_DATA_ATK,
-    MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPEED
-};
-
 #define MON_ICON_LVLUP_BOX_TAG      0xD75A
 
 static const struct OamData sOamData_MonIconOnLvlUpBox =
@@ -903,7 +896,7 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return FALSE;
     else if (gProtectStructs[battlerId].protected)
         return TRUE;
-    else if ((gProtectStructs[battlerId].wideGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].wideGuarded)
+    else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD
              && gBattleMoves[move].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
         return TRUE;
     else if (gProtectStructs[battlerId].banefulBunkered)
@@ -912,8 +905,8 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
         return TRUE;
     else if (gProtectStructs[battlerId].kingsShielded && gBattleMoves[move].power != 0)
         return TRUE;
-    else if ((gProtectStructs[battlerId].quickGuarded || gProtectStructs[BATTLE_PARTNER(battlerId)].quickGuarded)
-             && gBattleStruct->movePriorities[battlerId] > 0)
+    else if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD
+             && GetMovePriority(gBattlerAttacker) > 0)
         return TRUE;
     else
         return FALSE;
@@ -2732,15 +2725,15 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 break;
             case MOVE_EFFECT_FEINT:
                 if (gProtectStructs[gBattlerTarget].protected
-                    || gProtectStructs[gBattlerTarget].wideGuarded
-                    || gProtectStructs[gBattlerTarget].quickGuarded
+                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_WIDE_GUARD
+                    || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_QUICK_GUARD
                     || gProtectStructs[gBattlerTarget].spikyShielded
                     || gProtectStructs[gBattlerTarget].kingsShielded
                     || gProtectStructs[gBattlerTarget].banefulBunkered)
                 {
                     gProtectStructs[gBattlerTarget].protected = 0;
-                    gProtectStructs[gBattlerTarget].wideGuarded = 0;
-                    gProtectStructs[gBattlerTarget].quickGuarded = 0;
+                    gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_WIDE_GUARD);
+                    gSideStatuses[GetBattlerSide(gBattlerTarget)] &= ~(SIDE_STATUS_QUICK_GUARD);
                     gProtectStructs[gBattlerTarget].spikyShielded = 0;
                     gProtectStructs[gBattlerTarget].kingsShielded = 0;
                     gProtectStructs[gBattlerTarget].banefulBunkered = 0;
@@ -7202,8 +7195,9 @@ static void atk76_various(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk77_setprotectlike(void) // protect and endure
+static void atk77_setprotectlike(void)
 {
+    bool32 fail = TRUE;
     bool32 notLastTurn = TRUE;
 
     if (!(gBattleMoves[gLastResultingMoves[gBattlerAttacker]].flags & FLAG_PROTECTION_MOVE))
@@ -7214,44 +7208,58 @@ static void atk77_setprotectlike(void) // protect and endure
 
     if (sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random() && notLastTurn)
     {
-        if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
+        if (!gBattleMoves[gCurrentMove].argument) // Protects one mon only.
         {
-            gProtectStructs[gBattlerAttacker].endured = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            if (gBattleMoves[gCurrentMove].effect == EFFECT_ENDURE)
+            {
+                gProtectStructs[gBattlerAttacker].endured = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            }
+            else if (gCurrentMove == MOVE_DETECT || gCurrentMove == MOVE_PROTECT)
+            {
+                gProtectStructs[gBattlerAttacker].protected = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_SPIKY_SHIELD)
+            {
+                gProtectStructs[gBattlerAttacker].spikyShielded = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_KING_S_SHIELD)
+            {
+                gProtectStructs[gBattlerAttacker].kingsShielded = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+            else if (gCurrentMove == MOVE_BANEFUL_BUNKER)
+            {
+                gProtectStructs[gBattlerAttacker].banefulBunkered = 1;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            }
+
+            gDisableStructs[gBattlerAttacker].protectUses++;
+            fail = FALSE;
         }
-        else if (gCurrentMove == MOVE_DETECT || gCurrentMove == MOVE_PROTECT)
+        else // Protects the whole side.
         {
-            gProtectStructs[gBattlerAttacker].protected = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            u8 side = GetBattlerSide(gBattlerAttacker);
+            if (gCurrentMove == MOVE_WIDE_GUARD && !(gSideStatuses[side] & SIDE_STATUS_WIDE_GUARD))
+            {
+                gSideStatuses[side] |= SIDE_STATUS_WIDE_GUARD;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gDisableStructs[gBattlerAttacker].protectUses++;
+                fail = FALSE;
+            }
+            else if (gCurrentMove == MOVE_QUICK_GUARD && !(gSideStatuses[side] & SIDE_STATUS_QUICK_GUARD))
+            {
+                gSideStatuses[side] |= SIDE_STATUS_QUICK_GUARD;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gDisableStructs[gBattlerAttacker].protectUses++;
+                fail = FALSE;
+            }
         }
-        else if (gCurrentMove == MOVE_SPIKY_SHIELD)
-        {
-            gProtectStructs[gBattlerAttacker].spikyShielded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
-        else if (gCurrentMove == MOVE_KING_S_SHIELD)
-        {
-            gProtectStructs[gBattlerAttacker].kingsShielded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
-        else if (gCurrentMove == MOVE_BANEFUL_BUNKER)
-        {
-            gProtectStructs[gBattlerAttacker].banefulBunkered = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        }
-        else if (gCurrentMove == MOVE_WIDE_GUARD)
-        {
-            gProtectStructs[gBattlerAttacker].wideGuarded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-        }
-        else if (gCurrentMove == MOVE_QUICK_GUARD)
-        {
-            gProtectStructs[gBattlerAttacker].quickGuarded = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-        }
-        gDisableStructs[gBattlerAttacker].protectUses++;
     }
-    else
+
+    if (fail)
     {
         gDisableStructs[gBattlerAttacker].protectUses = 0;
         gBattleCommunication[MULTISTRING_CHOOSER] = 2;
@@ -8069,7 +8077,7 @@ static void atk8F_forcerandomswitch(void)
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
-            if (!sub_81B1250())
+            if (!IsMultiBattle())
                 sub_803BDA0(gBattlerTarget);
 
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
@@ -9124,7 +9132,7 @@ static void atkAE_healpartystatus(void)
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityBit = GetMonData(&party[i], MON_DATA_ALT_ABILITY);
 
-            if (species != 0 && species != SPECIES_EGG)
+            if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
                 u8 ability;
 

@@ -177,8 +177,6 @@ struct DisableStruct
 struct ProtectStruct
 {
     u32 protected:1;
-    u32 wideGuarded:1;
-    u32 quickGuarded:1;
     u32 spikyShielded:1;
     u32 kingsShielded:1;
     u32 banefulBunkered:1;
@@ -300,7 +298,6 @@ struct AI_ThinkingStruct
     u32 aiFlags;
     u8 aiAction;
     u8 aiLogicId;
-    u8 filler12[6];
     u8 simulatedRNG[4];
     struct AI_SavedBattleMon saved[4];
 };
@@ -582,14 +579,12 @@ struct BattleStruct
     u8 roostTypes[MAX_BATTLERS_COUNT][3];
     u8 savedBattlerTarget;
     bool8 ateBoost[MAX_BATTLERS_COUNT];
-    u32 debugAIFlags;
-    bool8 notfirstTimeAIFlags;
     u8 activeAbilityPopUps; // as bits for each battler
     bool8 throwingPokeBall;
     struct MegaEvolutionData mega;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
-    s8 movePriorities[MAX_BATTLERS_COUNT];
+    u8 introState;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -690,8 +685,7 @@ struct BattleAnimationInfo
     u8 field_9_x80:1;
     u8 field_A;
     u8 field_B;
-    u8 field_C;
-    u8 field_D;
+    s16 field_C;
     u8 field_E;
     u8 field_F;
 };
@@ -715,7 +709,7 @@ struct BattleHealthboxInfo
     u8 battlerBounceSpriteId;
     u8 animationState;
     u8 field_5;
-    u8 field_6;
+    u8 matrixNum;
     u8 shadowSpriteId;
     u8 field_8;
     u8 field_9;

@@ -551,7 +551,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C48B:: @ 824C48B
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24C502
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC
 	setvar VAR_TEMP_1, 1
-	applymovement 255, BattleFrontier_BattleDomeBattleRoom_Movement_24C773
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_24C773
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc

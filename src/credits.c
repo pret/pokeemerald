@@ -135,7 +135,7 @@ struct Unk201C000
     u16 unk90;
     u16 unk92;
     u16 unk94;
-    u16 unk96[386];
+    u16 unk96[NATIONAL_DEX_COUNT];
     u16 unk39A;
     u16 unk39C[7];
 };
@@ -1964,9 +1964,9 @@ static bool8 sub_8176AB0(u8 data, u8 taskIdA)
     case 2:
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
-            LoadCompressedObjectPic(gUnknown_085F5334);
-            LoadCompressedObjectPic(gUnknown_085F53BC);
-            LoadCompressedObjectPic(gUnknown_085F5354);
+            LoadCompressedSpriteSheet(gUnknown_085F5334);
+            LoadCompressedSpriteSheet(gUnknown_085F53BC);
+            LoadCompressedSpriteSheet(gUnknown_085F5354);
             LoadSpritePalettes(gUnknown_085F5384);
 
             spriteId = intro_create_brendan_sprite(120, 46);
@@ -1981,9 +1981,9 @@ static bool8 sub_8176AB0(u8 data, u8 taskIdA)
         }
         else
         {
-            LoadCompressedObjectPic(gUnknown_085F5344);
-            LoadCompressedObjectPic(gUnknown_085F53AC);
-            LoadCompressedObjectPic(gUnknown_085F5354);
+            LoadCompressedSpriteSheet(gUnknown_085F5344);
+            LoadCompressedSpriteSheet(gUnknown_085F53AC);
+            LoadCompressedSpriteSheet(gUnknown_085F5354);
             LoadSpritePalettes(gUnknown_085F5384);
 
             spriteId = intro_create_may_sprite(120, 46);
@@ -2254,12 +2254,12 @@ static void sub_8177050(struct Sprite *sprite)
     }
 }
 
-static u8 sub_8177224(u16 species, s16 x, s16 y, u16 position)
+static u8 sub_8177224(u16 nationalDexNum, s16 x, s16 y, u16 position)
 {
     u8 spriteId;
     u8 spriteId2;
 
-    spriteId = sub_80C0E9C(species, x, y, position);
+    spriteId = CreateMonSpriteFromNationalDexNumber(nationalDexNum, x, y, position);
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].data[1] = position + 1;
     gSprites[spriteId].invisible = TRUE;
@@ -2297,16 +2297,16 @@ static void sub_8177388(void)
     u16 dexNum;
     u16 j;
 
-    for (dexNum = 1, j = 0; dexNum < 386; dexNum++)
+    for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
     {
-        if (GetSetPokedexFlag(dexNum, 1))
+        if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {
             gUnknown_0203BCE8->unk96[j] = dexNum;
             j++;
         }
     }
 
-    for (dexNum = j; dexNum < 386; dexNum++)
+    for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
         gUnknown_0203BCE8->unk96[dexNum] = 0;
 
     gUnknown_0203BCE8->unk39A = j;

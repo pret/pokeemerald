@@ -92,12 +92,12 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_229698:: @ 8229698
-	applymovement 255, EverGrandeCity_PokemonLeague_1F_Movement_2296DA
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_2296DA
 	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_2296A3:: @ 82296A3
-	applymovement 255, EverGrandeCity_PokemonLeague_1F_Movement_2296DE
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_2296DE
 	waitmovement 0
 	return
 

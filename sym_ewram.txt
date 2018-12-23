@@ -154,24 +154,8 @@ gUnknown_020375C0: @ 20375C0
 	.include "src/battle_anim_80A5C6C.o"
 	
 	.space 0xC
-gUnknown_02038454: @ 2038454
-	.space 0x200
-
-gUnknown_02038654: @ 2038654
-	.space 0x260
-
-gUnknown_020388B4: @ 20388B4
-	.space 0x2F0
-
-gUnknown_02038BA4: @ 2038BA4
-	.space 0x20
-
-gUnknown_02038BC4: @ 2038BC4
-	.space 0x2
-
-gUnknown_02038BC6: @ 2038BC6
-	.space 0x2
-
+	.include "src/field_weather.o"
+	.include "src/field_weather_effect.o"
 	.include "src/battle_setup.o"
 	.include "src/trainer_see.o"
 	.include "src/wild_encounter.o"
@@ -207,69 +191,7 @@ gUnknown_02039CF4: @ 2039CF4
 gUnknown_02039CF8: @ 2039CF8
 	.space 0x8
 
-gUnknown_02039D00: @ 2039D00
-	.space 0x4
-
-gUnknown_02039D04: @ 2039D04
-	.space 0x4
-
-gUnknown_02039D08: @ 2039D08
-	.space 0x4
-
-gUnknown_02039D0C: @ 2039D0C
-	.space 0x1
-
-gUnknown_02039D0D: @ 2039D0D
-	.space 0x1
-
-gUnknown_02039D0E: @ 2039D0E
-	.space 0x1
-
-gUnknown_02039D0F: @ 2039D0F
-	.space 0x1
-
-gUnknown_02039D10: @ 2039D10
-	.space 0x2
-
-gUnknown_02039D12: @ 2039D12
-	.space 0x2
-
-gUnknown_02039D14: @ 2039D14
-	.space 0x64
-
-gUnknown_02039D78: @ 2039D78
-	.space 0x1
-
-gUnknown_02039D79: @ 2039D79
-	.space 0x1
-
-gUnknown_02039D7A: @ 2039D7A
-	.space 0x1
-
-gUnknown_02039D7B: @ 2039D7B
-	.space 0x1
-
-gUnknown_02039D7C: @ 2039D7C
-	.space 0x1
-
-gUnknown_02039D7D: @ 2039D7D
-	.space 0x1
-
-gUnknown_02039D7E: @ 2039D7E
-	.space 0x2
-
-gUnknown_02039D80: @ 2039D80
-	.space 0x4
-
-gUnknown_02039D84: @ 2039D84
-	.space 0x4
-
-gUnknown_02039D88: @ 2039D88
-	.space 0x4
-
-gUnknown_02039D8C: @ 2039D8C
-	.space 0x4
-
+	.include "src/pokemon_storage_system.o"
 	.include "src/script_movement.o"
 	.include "src/fldeff_cut.o"
 	.include "src/map_name_popup.o"
@@ -301,26 +223,14 @@ gUnknown_0203A034: @ 203A034
 gUnknown_0203A0F4: @ 203A0F4
 	.space 0x4
 
-gUnknown_0203A0F8: @ 203A0F8
-	.space 0x8
+	.include "src/battle_anim_effects_1.o"
 
 gUnknown_0203A100: @ 203A100
 	.space 0x10
 
 	.include "src/battle_anim_utility_funcs.o"
-
-gUnknown_0203A114: @ 203A114
-	.space 0x4
-
-gUnknown_0203A118: @ 203A118
-	.space 0x4
-
-gUnknown_0203A11C: @ 203A11C
-	.space 0x4
-
-gUnknown_0203A120: @ 203A120
-	.space 0x4
-	
+	.include "src/battle_intro.o"
+	.include "src/easy_chat.o"
 	.include "src/mon_markings.o"
 	.include "src/mauville_old_man.o"
 	.include "src/mail.o"
@@ -350,28 +260,7 @@ gUnknown_0203AB8C: @ 203AB8C
 	.include "src/coins.o"
 	.include "src/battle_transition.o"
 	.include "src/battle_message.o"
-
-gUnknown_0203ABAC: @ 203ABAC
-	.space 0x4
-
-gUnknown_0203ABB0: @ 203ABB0
-	.space 0x1
-
-gUnknown_0203ABB1: @ 203ABB1
-	.space 0x1
-
-gUnknown_0203ABB2: @ 203ABB2
-	.space 0x1
-
-gUnknown_0203ABB3: @ 203ABB3
-	.space 0x1
-
-gUnknown_0203ABB4: @ 203ABB4
-	.space 0x1
-
-gUnknown_0203ABB5: @ 203ABB5
-	.space 0x3
-
+	.include "src/cable_car.o"
 	.include "src/rom_81520A8.o"
 	.include "src/save.o"
 	.include "src/mystery_event_script.o"
@@ -411,49 +300,7 @@ gUnknown_0203CD88: @ 203CD88
 	.include "src/list_menu.o"
 	.include "src/dynamic_placeholder_text_util.o"
 	.include "src/item_icon.o"
-
-gUnknown_0203CEC4: @ 203CEC4
-	.space 0x4
-
-gUnknown_0203CEC8: @ 203CEC8
-	.space 0xE
-
-gUnknown_0203CED6: @ 203CED6
-	.space 0x6
-
-gUnknown_0203CEDC: @ 203CEDC
-	.space 0x4
-
-gUnknown_0203CEE0: @ 203CEE0
-	.space 0x4
-
-gUnknown_0203CEE4: @ 203CEE4
-	.space 0x4
-
-gUnknown_0203CEE8: @ 203CEE8
-	.space 0x1
-
-gUnknown_0203CEE9: @ 203CEE9
-	.space 0x3
-
-gPostMenuFieldCallback: @ 203CEEC
-	.space 0x4
-
-gUnknown_0203CEF0: @ 203CEF0
-	.space 0x4
-
-gUnknown_0203CEF4: @ 203CEF4
-	.space 0x4
-
-gSelectedOrderFromParty: @ 203CEF8
-	.space 0x4
-
-gUnknown_0203CEFC: @ 203CEFC
-	.space 0x4
-
-gUnknown_0203CF00: @ 203CF00
-	.space 0x4
-
+	.include "src/party_menu.o"
 	.include "src/fossil_specials.o"
 	.include "src/fldeff_groundshake.o"
 	.include "src/pokemon_summary_screen.o"

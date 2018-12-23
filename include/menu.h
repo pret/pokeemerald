@@ -36,6 +36,7 @@ u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);
 void sub_81978B0(u16 arg0);
 void AddTextPrinterWithCallbackForMessage(bool8 a1, void (*callback)(struct TextPrinterTemplate *, u16));
+void sub_8199DF0(u32 bg, u8 a1, int a2, int a3);
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str);
 void sub_8198070(u8 windowId, bool8 copyToVram);
 void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 palNum, u16 baseBlock);
@@ -43,16 +44,16 @@ void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palet
 void schedule_bg_copy_tilemap_to_vram(u8 bgNum);
 void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs);
 u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 numItems, u8 initialCursorPos);
-u8 GetMenuCursorPos(void);
+u8 Menu_GetCursorPos(void);
 s8 Menu_ProcessInput(void);
 s8 Menu_ProcessInputNoWrap(void);
 void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void reset_temp_tile_data_buffers(void);
-void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, int size, u16 offset, u8 mode);
+void *decompress_and_copy_tile_data_to_vram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
 struct WindowTemplate CreateWindowTemplate(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
-void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, int size, u16 offset, u8 mode);
+void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 s8 Menu_ProcessInputNoWrapClearOnChoose(void);
 s8 ProcessMenuInput_other(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
@@ -62,7 +63,7 @@ void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u8 a3);
 void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
 void sub_8197DF8(u8 windowId, bool8 copyToVram);
 u16 sub_8198AA4(u8, u8, u8, u8, u8, u8, u16);
-void *malloc_and_decompress(const void *src, int *sizeOut);
+void *malloc_and_decompress(const void *src, u32 *sizeOut);
 u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8);
@@ -71,7 +72,8 @@ u8 sub_8199944(u8 windowId, u8 optionWidth, u8 horizontalCount, u8 verticalCount
 u8 sub_8199134(s8, s8);
 u8 GetStartMenuWindowId(void);
 void sub_819A2BC(u8, u8);
-u8 MoveMenuCursor(s8 cursorDelta);
+u8 Menu_MoveCursor(s8 cursorDelta);
+u8 Menu_MoveCursorNoWrapAround(s8 cursorDelta);
 void NewMenuHelpers_DrawStdWindowFrame(u8 windowId, bool8 CopyToVram);
 u8 sub_81979C4(u8 a1);
 u8 sub_81983AC(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);
@@ -90,5 +92,8 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 void sub_8197AE8(bool8 copyToVram);
 void sub_81997AC(u8 windowId, u8 a4, u8 a6, u8 a7, const struct MenuAction *strs);
 s8 Menu_ProcessInputGridLayout(void);
+u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted);
+s8 Menu_ProcessInputNoWrapAround_other(void);
+void sub_8199CBC(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
 
 #endif // GUARD_MENU_H

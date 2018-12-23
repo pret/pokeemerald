@@ -4,7 +4,7 @@
 #include "event_data.h"
 #include "field_message_box.h"
 #include "field_poison.h"
-#include "fldeff_80F9BCC.h"
+#include "fldeff_misc.h"
 #include "frontier_util.h"
 #include "party_menu.h"
 #include "pokenav.h"
@@ -122,7 +122,7 @@ s32 DoPoisonFieldEffect(void)
     u32 numFainted = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(pokemon, MON_DATA_SANITY_BIT2) && pokemon_ailments_get_primary(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && pokemon_ailments_get_primary(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
         {
             hp = GetMonData(pokemon, MON_DATA_HP);
             if (hp == 0 || --hp == 0)
@@ -136,7 +136,7 @@ s32 DoPoisonFieldEffect(void)
     }
     if (numFainted != 0 || numPoisoned != 0)
     {
-        FldeffPoison_Start();
+        FldEffPoison_Start();
     }
     if (numFainted != 0)
     {

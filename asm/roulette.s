@@ -4865,11 +4865,11 @@ sub_8142C0C: @ 8142C0C
 	ldr r0, =gUnknown_085B7384
 	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085B7864
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_085B7978
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	ldr r0, =gUnknown_085B7A40
-	bl LoadCompressedObjectPic
+	bl LoadCompressedSpriteSheet
 	b _08142C5A
 	.pool
 _08142C44:

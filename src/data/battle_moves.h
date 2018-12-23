@@ -6587,6 +6587,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 3,
         .flags = FLAG_PROTECTION_MOVE,
         .split = SPLIT_STATUS,
+        .argument = TRUE, // Protects the whole side.
     },
 
     [MOVE_GUARD_SPLIT] =
@@ -7035,6 +7036,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 3,
         .flags = FLAG_PROTECTION_MOVE,
         .split = SPLIT_STATUS,
+        .argument = TRUE, // Protects the whole side.
     },
 
     [MOVE_ALLY_SWITCH] =

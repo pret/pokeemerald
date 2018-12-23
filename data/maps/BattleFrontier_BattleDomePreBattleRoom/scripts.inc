@@ -24,7 +24,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	setvar VAR_0x8006, 1
 	special CallFrontierUtilFunc
 	setvar VAR_TEMP_0, 1
-	applymovement 255, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B652
 	waitmovement 0
 	lockall
 
@@ -171,11 +171,11 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	closemessage
 	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_24B64F
 	waitmovement 0
-	applymovement 255, BattleFrontier_BattleDomePreBattleRoom_Movement_24B657
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B657
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement 255, BattleFrontier_BattleDomePreBattleRoom_Movement_24B659
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_24B659
 	waitmovement 0
 	closedoor 5, 1
 	waitdooranim

@@ -28,15 +28,6 @@
 #include "battle_debug.h"
 #include "constants/battle_config.h"
 
-struct TestingBar
-{
-    s32 maxValue;
-    s32 oldValue;
-    s32 receivedValue;
-    u32 unkC_0:5;
-    u32 unk10;
-};
-
 enum
 {
     HEALTHBOX_GFX_0,
@@ -201,7 +192,6 @@ static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *
 static u8 GetScaledExpFraction(s32 currValue, s32 receivedValue, s32 maxValue, u8 scale);
 static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar);
 static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale);
-static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2);
 
 static void SpriteCb_AbilityPopUp(struct Sprite *sprite);
 static void Task_FreeAbilityPopUpGfx(u8 taskId);
@@ -336,36 +326,6 @@ static const struct SpriteTemplate sHealthbarSpriteTemplates[MAX_BATTLERS_COUNT]
     }
 };
 
-static const struct Subsprite sUnknown_0832C220[] =
-{
-    {240,   0,  1,  3,  0,      1},
-    {48,    0,  0,  2,  32,     1},
-    {240,   32, 1,  1,  48,     1},
-    {16,    32, 1,  1,  52,     1},
-    {48,    32, 1,  1,  56,     1}
-};
-
-static const struct Subsprite sUnknown_0832C234[] =
-{
-    {240,   0,  1,  3,  64,     1},
-    {48,    0,  0,  2,  96,     1},
-    {240,   32, 1,  1,  112,    1},
-    {16,    32, 1,  1,  116,    1},
-    {48,    32, 1,  1,  120,    1}
-};
-
-static const struct Subsprite sUnknown_0832C248[] =
-{
-    {240,   0,  1,  3,  0,      1},
-    {48,    0,  0,  2,  32,     1}
-};
-
-static const struct Subsprite sUnknown_0832C250[] =
-{
-    {240,   0,  1,  3,  0,      1},
-    {48,    0,  0,  2,  32,     1}
-};
-
 static const struct Subsprite sUnknown_0832C258[] =
 {
     {240,   0,  1,  1,  0,      1},
@@ -377,15 +337,6 @@ static const struct Subsprite sUnknown_0832C260[] =
     {240,   0,  1,  1,  0,      1},
     {16,    0,  1,  1,  4,      1},
     {224,   0,  0,  0,  8,      1}
-};
-
-// unused subsprite table
-static const struct SubspriteTable sUnknown_0832C26C[] =
-{
-    {ARRAY_COUNT(sUnknown_0832C220), sUnknown_0832C220},
-    {ARRAY_COUNT(sUnknown_0832C248), sUnknown_0832C248},
-    {ARRAY_COUNT(sUnknown_0832C234), sUnknown_0832C234},
-    {ARRAY_COUNT(sUnknown_0832C250), sUnknown_0832C250}
 };
 
 static const struct SubspriteTable sUnknown_0832C28C[] =
@@ -422,9 +373,6 @@ static const struct SubspriteTable sUnknown_0832C2CC[] =
     {ARRAY_COUNT(sUnknown_0832C2AC), sUnknown_0832C2AC}
 };
 
-// unused unknown image
-static const u8 sUnknown_0832C2D4[] = INCBIN_U8("graphics/battle_interface/unknown_32C2D4.4bpp");
-
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
 {
     gBattleInterface_BallStatusBarGfx, 0x200, TAG_STATUS_SUMMARY_BAR_TILE
@@ -443,24 +391,6 @@ static const struct SpritePalette sStatusSummaryBallsSpritePal =
 static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 {
     gBattleInterface_BallDisplayGfx, 0x80, TAG_STATUS_SUMMARY_BALLS_TILE
-};
-
-// unused oam data
-static const struct OamData sUnknown_0832C354 =
-{
-    .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
-    .size = 3,
-    .tileNum = 0,
-    .priority = 1,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 static const struct OamData sOamData_StatusSummaryBalls =
@@ -619,330 +549,6 @@ static const struct SpriteTemplate sSpriteTemplate_MegaTrigger =
 };
 
 // code
-
-static s32 DummiedOutFunction(s16 unused1, s16 unused2, s32 unused3)
-{
-    return 9;
-}
-
-#ifdef NONMATCHING
-static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
-{
-    s8 i, j;
-    u8 array[4];
-    u8 *arrayPtr;
-    s32 r9, vaaa;
-
-    for (i = 0; i < 4; i++)
-        array[i] = 0;
-
-    i = 3;
-    r9 = -1;
-    arrayPtr = array;
-    while (1)
-    {
-        if (arg0 > 0)
-        {
-            array[i] = arg0 % 10;
-            arg0 = arg0 / 10;
-            i--;
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    for (; i > -1; i--)
-    {
-        array[i] = 0xFF;
-    }
-
-    if (arrayPtr[3] == 0xFF)
-        arrayPtr[3] = 0;
-
-    if (arg2 == 0)
-    {
-        for (i = 0, j = 0; i < 4; i++)
-        {
-            if (array[j] == 0xFF)
-            {
-                arg1[j] &= 0xFC00;
-                arg1[j] |= 0x1E;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= 0x1E;
-            }
-            else
-            {
-                arg1[j] &= 0xFC00;
-                arg1[j] |= array[j] + 0x14;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= array[i] + 0x34;
-            }
-            j++;
-        }
-    }
-    else
-    {
-        for (i = 0; i < 4; i++)
-        {
-            if (array[i] == 0xFF)
-            {
-                arg1[i] &= 0xFC00;
-                arg1[i] |= 0x1E;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= 0x1E;
-            }
-            else
-            {
-                arg1[i] &= 0xFC00;
-                arg1[i] |= array[i] + 0x14;
-
-                arg1[i + 0x20] &= 0xFC00;
-                arg1[i + 0x20] |= array[i] + 0x34;
-            }
-        }
-    }
-}
-
-#else
-NAKED
-static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
-{
-    asm(".syntax unified\n\
-            push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    adds r7, r1, 0\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    mov r10, r2\n\
-    movs r3, 0\n\
-    movs r2, 0\n\
-_08072324:\n\
-    lsls r0, r3, 24\n\
-    asrs r0, 24\n\
-    mov r3, sp\n\
-    adds r1, r3, r0\n\
-    strb r2, [r1]\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _08072324\n\
-    movs r3, 0x3\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    mov r9, r0\n\
-    mov r8, sp\n\
-_08072344:\n\
-    lsls r0, r5, 16\n\
-    asrs r6, r0, 16\n\
-    cmp r6, 0\n\
-    ble _08072372\n\
-    lsls r4, r3, 24\n\
-    asrs r4, 24\n\
-    mov r1, sp\n\
-    adds r5, r1, r4\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xA\n\
-    bl __modsi3\n\
-    strb r0, [r5]\n\
-    adds r0, r6, 0\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    subs r4, 0x1\n\
-    lsls r4, 24\n\
-    lsrs r3, r4, 24\n\
-    b _08072344\n\
-_08072372:\n\
-    lsls r1, r3, 24\n\
-    asrs r0, r1, 24\n\
-    cmp r0, r9\n\
-    ble _08072396\n\
-    movs r4, 0xFF\n\
-    movs r3, 0x1\n\
-    negs r3, r3\n\
-_08072380:\n\
-    asrs r2, r1, 24\n\
-    mov r5, sp\n\
-    adds r1, r5, r2\n\
-    ldrb r0, [r1]\n\
-    orrs r0, r4\n\
-    strb r0, [r1]\n\
-    subs r2, 0x1\n\
-    lsls r1, r2, 24\n\
-    asrs r0, r1, 24\n\
-    cmp r0, r3\n\
-    bgt _08072380\n\
-_08072396:\n\
-    mov r1, r8\n\
-    ldrb r0, [r1, 0x3]\n\
-    cmp r0, 0xFF\n\
-    bne _080723A2\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x3]\n\
-_080723A2:\n\
-    mov r2, r10\n\
-    cmp r2, 0\n\
-    bne _08072432\n\
-    movs r3, 0\n\
-    movs r1, 0\n\
-    movs r6, 0xFC\n\
-    lsls r6, 8\n\
-    movs r5, 0x1E\n\
-    mov r12, r5\n\
-_080723B4:\n\
-    lsls r1, 24\n\
-    asrs r2, r1, 24\n\
-    mov r0, sp\n\
-    adds r5, r0, r2\n\
-    ldrb r0, [r5]\n\
-    mov r8, r1\n\
-    cmp r0, 0xFF\n\
-    bne _080723EA\n\
-    lsls r1, r2, 1\n\
-    adds r1, r7\n\
-    ldrh r2, [r1]\n\
-    adds r0, r6, 0\n\
-    ands r0, r2\n\
-    mov r2, r12\n\
-    orrs r0, r2\n\
-    strh r0, [r1]\n\
-    lsls r3, 24\n\
-    asrs r1, r3, 23\n\
-    adds r1, r7\n\
-    adds r1, 0x40\n\
-    ldrh r2, [r1]\n\
-    adds r0, r6, 0\n\
-    ands r0, r2\n\
-    mov r5, r12\n\
-    orrs r0, r5\n\
-    strh r0, [r1]\n\
-    b _0807241A\n\
-_080723EA:\n\
-    lsls r2, 1\n\
-    adds r2, r7\n\
-    ldrh r0, [r2]\n\
-    adds r1, r6, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x14\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    lsls r4, r3, 24\n\
-    asrs r3, r4, 24\n\
-    lsls r2, r3, 1\n\
-    adds r2, r7\n\
-    adds r2, 0x40\n\
-    ldrh r0, [r2]\n\
-    adds r1, r6, 0\n\
-    ands r1, r0\n\
-    mov r5, sp\n\
-    adds r0, r5, r3\n\
-    ldrb r0, [r0]\n\
-    adds r0, 0x34\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    adds r3, r4, 0\n\
-_0807241A:\n\
-    movs r0, 0x80\n\
-    lsls r0, 17\n\
-    add r0, r8\n\
-    lsrs r1, r0, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r3, r2\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _080723B4\n\
-    b _08072496\n\
-_08072432:\n\
-    movs r3, 0\n\
-    movs r4, 0xFC\n\
-    lsls r4, 8\n\
-    movs r6, 0x1E\n\
-_0807243A:\n\
-    lsls r1, r3, 24\n\
-    asrs r2, r1, 24\n\
-    mov r3, sp\n\
-    adds r5, r3, r2\n\
-    ldrb r0, [r5]\n\
-    adds r3, r1, 0\n\
-    cmp r0, 0xFF\n\
-    bne _08072466\n\
-    lsls r1, r2, 1\n\
-    adds r1, r7\n\
-    ldrh r2, [r1]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    adds r1, 0x40\n\
-    ldrh r2, [r1]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strh r0, [r1]\n\
-    b _08072488\n\
-_08072466:\n\
-    lsls r2, 1\n\
-    adds r2, r7\n\
-    ldrh r0, [r2]\n\
-    adds r1, r4, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x14\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-    adds r2, 0x40\n\
-    ldrh r0, [r2]\n\
-    adds r1, r4, 0\n\
-    ands r1, r0\n\
-    ldrb r0, [r5]\n\
-    adds r0, 0x34\n\
-    orrs r1, r0\n\
-    strh r1, [r2]\n\
-_08072488:\n\
-    movs r5, 0x80\n\
-    lsls r5, 17\n\
-    adds r0, r3, r5\n\
-    lsrs r3, r0, 24\n\
-    asrs r0, 24\n\
-    cmp r0, 0x3\n\
-    ble _0807243A\n\
-_08072496:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
-
-void sub_80724A8(s16 arg0, s16 arg1, u16 *arg2)
-{
-    arg2[4] = 0x1E;
-    sub_8072308(arg1, arg2, 0);
-    sub_8072308(arg0, arg2 + 5, 1);
-}
 
 // Because the healthbox is too large to fit into one sprite, it is divided into two sprites.
 // healthboxLeft  or healthboxMain  is the left part that is used as the 'main' sprite.
@@ -1708,7 +1314,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         bar_data0 = 5;
     }
 
-    LoadCompressedObjectPicUsingHeap(&sStatusSummaryBarSpriteSheet);
+    LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
     LoadSpriteSheet(&sStatusSummaryBallsSpriteSheet);
     LoadSpritePalette(&sStatusSummaryBarSpritePal);
     LoadSpritePalette(&sStatusSummaryBallsSpritePal);
@@ -2665,42 +2271,6 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     }
 
     return filledPixels;
-}
-
-// These two functions seem as if they were made for testing the health bar.
-static s16 sub_8074F28(struct TestingBar *barInfo, s32 *currValue, u16 *arg2, s32 arg3)
-{
-    s16 ret, var;
-
-    ret = CalcNewBarValue(barInfo->maxValue,
-                    barInfo->oldValue,
-                    barInfo->receivedValue,
-                    currValue, B_HEALTHBAR_PIXELS / 8, 1);
-    sub_8074F88(barInfo, currValue, arg2);
-
-    if (barInfo->maxValue < B_HEALTHBAR_PIXELS)
-        var = *currValue >> 8;
-    else
-        var = *currValue;
-
-    DummiedOutFunction(barInfo->maxValue, var, arg3);
-
-    return ret;
-}
-
-static void sub_8074F88(struct TestingBar *barInfo, s32 *currValue, u16 *arg2)
-{
-    u8 sp8[6];
-    u16 sp10[6];
-    u8 i;
-
-    CalcBarFilledPixels(barInfo->maxValue, barInfo->oldValue,
-                barInfo->receivedValue, currValue, sp8, B_HEALTHBAR_PIXELS / 8);
-
-    for (i = 0; i < 6; i++)
-        sp10[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + sp8[i]);
-
-    CpuCopy16(sp10, arg2, sizeof(sp10));
 }
 
 static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale)

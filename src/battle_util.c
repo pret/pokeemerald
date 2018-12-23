@@ -19,6 +19,7 @@
 #include "string_util.h"
 #include "battle_message.h"
 #include "constants/battle_string_ids.h"
+#include "constants/weather.h"
 #include "battle_ai_script_commands.h"
 #include "event_data.h"
 #include "link.h"
@@ -26,8 +27,7 @@
 #include "pokedex.h"
 #include "mail.h"
 #include "constants/battle_config.h"
-
-extern u8 weather_get_current(void);
+#include "field_weather.h"
 
 // rom const data
 
@@ -438,6 +438,14 @@ void MarkAllBattlersForControllerExec(void) // unused
         for (i = 0; i < gBattlersCount; i++)
             gBattleControllerExecFlags |= gBitTable[i];
     }
+}
+
+bool32 IsBattlerMarkedForControllerExec(u8 battlerId)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return (gBattleControllerExecFlags & (gBitTable[battlerId] << 0x1C)) != 0;
+    else
+        return (gBattleControllerExecFlags & (gBitTable[battlerId])) != 0;
 }
 
 void MarkBattlerForControllerExec(u8 battlerId)
@@ -2319,7 +2327,7 @@ u8 AtkCanceller_UnableToUseMove2(void)
         case CANCELLER_PSYCHIC_TERRAIN:
             if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN
                 && IsBattlerGrounded(gBattlerAttacker)
-                && gBattleStruct->movePriorities[gBattlerAttacker] > 0
+                && GetMovePriority(gBattlerAttacker) > 0
                 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget))
             {
                 CancelMultiTurnMoves(gBattlerAttacker);
@@ -2583,11 +2591,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITYEFFECT_SWITCH_IN_WEATHER:
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
             {
-                switch (weather_get_current())
+                switch (GetCurrentWeather())
                 {
-                case 3:
-                case 5:
-                case 13:
+                case WEATHER_RAIN_LIGHT:
+                case WEATHER_RAIN_MED:
+                case WEATHER_RAIN_HEAVY:
                     if (!(gBattleWeather & WEATHER_RAIN_ANY))
                     {
                         gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
@@ -2596,7 +2604,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect++;
                     }
                     break;
-                case 8:
+                case WEATHER_SANDSTORM:
                     if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                     {
                         gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
@@ -2605,7 +2613,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect++;
                     }
                     break;
-                case 12:
+                case WEATHER_DROUGHT:
                     if (!(gBattleWeather & WEATHER_SUN_ANY))
                     {
                         gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
@@ -2618,7 +2626,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             }
             if (effect)
             {
-                gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
+                gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
                 BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
             }
             break;
@@ -2899,7 +2907,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         else if ((gLastUsedAbility == ABILITY_DAZZLING
                    || (IsBattlerAlive(battler ^= BIT_FLANK) && GetBattlerAbility(battler) == ABILITY_DAZZLING)
                    )
-                 && gBattleStruct->movePriorities[gBattlerAttacker] > 0
+                 && GetMovePriority(battler) > 0
                  && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
         {
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)

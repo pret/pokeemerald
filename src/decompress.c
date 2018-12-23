@@ -22,7 +22,7 @@ void LZDecompressVram(const u32 *src, void *dest)
     LZ77UnCompVram(src, dest);
 }
 
-u16 LoadCompressedObjectPic(const struct CompressedSpriteSheet *src)
+u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 {
     struct SpriteSheet dest;
 
@@ -33,7 +33,7 @@ u16 LoadCompressedObjectPic(const struct CompressedSpriteSheet *src)
     return LoadSpriteSheet(&dest);
 }
 
-void LoadCompressedObjectPicOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer)
+void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer)
 {
     struct SpriteSheet dest;
 
@@ -44,7 +44,7 @@ void LoadCompressedObjectPicOverrideBuffer(const struct CompressedSpriteSheet *s
     LoadSpriteSheet(&dest);
 }
 
-void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src)
+void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
 {
     struct SpritePalette dest;
 
@@ -54,7 +54,7 @@ void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src)
     LoadSpritePalette(&dest);
 }
 
-void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer)
+void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer)
 {
     struct SpritePalette dest;
 
@@ -465,7 +465,7 @@ u32 GetDecompressedDataSize(const u32 *ptr)
     return (ptr8[3] << 16) | (ptr8[2] << 8) | (ptr8[1]);
 }
 
-bool8 LoadCompressedObjectPicUsingHeap(const struct CompressedSpriteSheet* src)
+bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet* src)
 {
     struct SpriteSheet dest;
     void* buffer;
@@ -482,7 +482,7 @@ bool8 LoadCompressedObjectPicUsingHeap(const struct CompressedSpriteSheet* src)
     return FALSE;
 }
 
-bool8 LoadCompressedObjectPaletteUsingHeap(const struct CompressedSpritePalette *src)
+bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette *src)
 {
     struct SpritePalette dest;
     void* buffer;

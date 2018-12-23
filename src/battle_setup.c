@@ -57,7 +57,7 @@ struct TrainerBattleParameter
 };
 
 extern bool32 InTrainerHill(void);
-extern bool32 FieldPoisonEffectIsRunning(void);
+extern bool32 FldEffPoison_IsActive(void);
 extern void RestartWildEncounterImmunitySteps(void);
 extern void ClearPoisonStepCounter(void);
 extern void sub_81BE72C(void);
@@ -336,7 +336,7 @@ static void Task_BattleStart(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (!FieldPoisonEffectIsRunning()) // is poison not active?
+        if (!FldEffPoison_IsActive()) // is poison not active?
         {
             BattleTransition_StartOnField(tTransition);
             sub_81BE72C();

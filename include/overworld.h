@@ -91,7 +91,7 @@ void Overworld_ClearSavedMusic(void);
 void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16 newMusic);
 u8 GetMapMusicFadeoutSpeed(void);
-void music_something(void);
+void TryFadeOutOldMapMusic(void);
 bool8 BGMusicStopped(void);
 void Overworld_FadeOutMapMusic(void);
 void UpdateAmbientCry(s16 *state, u16 *delayCounter);

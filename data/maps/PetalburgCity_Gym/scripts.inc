@@ -91,14 +91,14 @@ PetalburgCity_Gym_EventScript_2049A4:: @ 82049A4
 	msgbox PetalburgCity_Gym_Text_205B32, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_205B4C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
 	applymovement 10, PetalburgCity_Gym_Movement_2049EC
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 10
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	delay 30
-	applymovement 255, PetalburgCity_Gym_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A6
 	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_205C40, MSGBOX_DEFAULT
 	setvar VAR_0x4085, 2
@@ -238,13 +238,13 @@ PetalburgCity_Gym_EventScript_204C43:: @ 8204C43
 	applymovement 10, PetalburgCity_Gym_Movement_2050E1
 	waitmovement 0
 	applymovement 1, PetalburgCity_Gym_Movement_2725A8
-	applymovement 255, PetalburgCity_Gym_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A8
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204C5F:: @ 8204C5F
 	applymovement 1, PetalburgCity_Gym_Movement_2725AA
-	applymovement 255, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
 	applymovement 10, PetalburgCity_Gym_Movement_2050EB
 	waitmovement 0
 	return
@@ -252,25 +252,25 @@ PetalburgCity_Gym_EventScript_204C5F:: @ 8204C5F
 PetalburgCity_Gym_EventScript_204C78:: @ 8204C78
 	applymovement 1, PetalburgCity_Gym_Movement_2725AA
 	applymovement 10, PetalburgCity_Gym_Movement_205102
-	applymovement 255, PetalburgCity_Gym_Movement_205111
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_205111
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204C91:: @ 8204C91
 	applymovement 10, PetalburgCity_Gym_Movement_2050F2
-	applymovement 255, PetalburgCity_Gym_Movement_205109
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_205109
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CA3:: @ 8204CA3
 	applymovement 10, PetalburgCity_Gym_Movement_205102
-	applymovement 255, PetalburgCity_Gym_Movement_20511B
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_20511B
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CB5:: @ 8204CB5
 	applymovement 10, PetalburgCity_Gym_Movement_2050FA
-	applymovement 255, PetalburgCity_Gym_Movement_205123
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_205123
 	waitmovement 0
 	return
 
@@ -281,19 +281,19 @@ PetalburgCity_Gym_EventScript_204CC7:: @ 8204CC7
 
 PetalburgCity_Gym_EventScript_204CD2:: @ 8204CD2
 	applymovement 1, PetalburgCity_Gym_Movement_2725AA
-	applymovement 255, PetalburgCity_Gym_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A6
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CE4:: @ 8204CE4
 	applymovement 1, PetalburgCity_Gym_Movement_2725A8
-	applymovement 255, PetalburgCity_Gym_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A4
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_204CF6:: @ 8204CF6
 	applymovement 1, PetalburgCity_Gym_Movement_2725A4
-	applymovement 255, PetalburgCity_Gym_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A8
 	waitmovement 0
 	return
 
@@ -524,7 +524,7 @@ PetalburgCity_Gym_EventScript_204FE2:: @ 8204FE2
 PetalburgCity_Gym_EventScript_204FED:: @ 8204FED
 	applymovement 11, PetalburgCity_Gym_Movement_2050C3
 	waitmovement 0
-	applymovement 255, PetalburgCity_Gym_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725A4
 	applymovement 1, PetalburgCity_Gym_Movement_2725A4
 	waitmovement 0
 	return
@@ -532,7 +532,7 @@ PetalburgCity_Gym_EventScript_204FED:: @ 8204FED
 PetalburgCity_Gym_EventScript_205009:: @ 8205009
 	applymovement 11, PetalburgCity_Gym_Movement_2050CA
 	waitmovement 0
-	applymovement 255, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
 	applymovement 1, PetalburgCity_Gym_Movement_2725AA
 	waitmovement 0
 	return
@@ -540,7 +540,7 @@ PetalburgCity_Gym_EventScript_205009:: @ 8205009
 PetalburgCity_Gym_EventScript_205025:: @ 8205025
 	applymovement 11, PetalburgCity_Gym_Movement_2050D0
 	waitmovement 0
-	applymovement 255, PetalburgCity_Gym_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2725AA
 	applymovement 1, PetalburgCity_Gym_Movement_2725AA
 	waitmovement 0
 	return
@@ -548,19 +548,19 @@ PetalburgCity_Gym_EventScript_205025:: @ 8205025
 PetalburgCity_Gym_EventScript_205041:: @ 8205041
 	applymovement 11, PetalburgCity_Gym_Movement_20507E
 	applymovement 1, PetalburgCity_Gym_Movement_2725AA
-	applymovement 255, PetalburgCity_Gym_Movement_2050A1
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2050A1
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_20505A:: @ 820505A
 	applymovement 11, PetalburgCity_Gym_Movement_205089
-	applymovement 255, PetalburgCity_Gym_Movement_2050A9
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2050A9
 	waitmovement 0
 	return
 
 PetalburgCity_Gym_EventScript_20506C:: @ 820506C
 	applymovement 11, PetalburgCity_Gym_Movement_205094
-	applymovement 255, PetalburgCity_Gym_Movement_2050B1
+	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Gym_Movement_2050B1
 	waitmovement 0
 	return
 

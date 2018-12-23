@@ -109,6 +109,7 @@ enum
     VAR_SHOW_HP,
     VAR_SUBSTITUTE,
     VAR_IN_LOVE,
+    VAR_U16_4_ENTRIES,
 };
 
 enum
@@ -855,6 +856,8 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         itemsCount = 3;
         break;
     case LIST_ITEM_MOVES:
+        itemsCount = 5;
+        break;
     case LIST_ITEM_PP:
         itemsCount = 4;
         break;
@@ -958,6 +961,15 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
             printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
             AddTextPrinter(&printer, 0, NULL);
         }
+        // Allow changing all moves at once. Useful for testing in wild doubles.
+        if (data->currentMainListItemId == LIST_ITEM_MOVES)
+        {
+            u8 textAll[] = _("All");
+
+            PadString(textAll, text);
+            printer.currentY = printer.y = (i * yMultiplier) + sSecondaryListTemplate.upText_Y;
+            AddTextPrinter(&printer, 0, NULL);
+        }
         break;
     case LIST_ITEM_ABILITY:
         PadString(gAbilityNames[gBattleMons[data->battlerId].ability], text);
@@ -1051,6 +1063,12 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         break;
     case VAL_U16:
         *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        break;
+    case VAR_U16_4_ENTRIES:
+        ((u16*)(data->modifyArrows.modifiedValPtr))[0] = data->modifyArrows.currValue;
+        ((u16*)(data->modifyArrows.modifiedValPtr))[1] = data->modifyArrows.currValue;
+        ((u16*)(data->modifyArrows.modifiedValPtr))[2] = data->modifyArrows.currValue;
+        ((u16*)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
         break;
     case VAL_U32:
         *(u32*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
@@ -1273,9 +1291,18 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.minValue = 0;
         data->modifyArrows.maxValue = MOVES_COUNT_GEN7 - 1;
         data->modifyArrows.maxDigits = 3;
-        data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
-        data->modifyArrows.typeOfVal = VAL_U16;
-        data->modifyArrows.currValue = gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
+        if (data->currentSecondaryListItemId == 4)
+        {
+            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].moves[0];
+            data->modifyArrows.currValue = gBattleMons[data->battlerId].moves[0];
+            data->modifyArrows.typeOfVal = VAR_U16_4_ENTRIES;
+        }
+        else
+        {
+            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
+            data->modifyArrows.currValue = gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId];
+            data->modifyArrows.typeOfVal = VAL_U16;
+        }
         break;
     case LIST_ITEM_PP:
         data->modifyArrows.minValue = 0;
@@ -1378,8 +1405,8 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.typeOfVal = VAL_BITFIELD_32;
         goto CASE_ITEM_STATUS;
     case LIST_ITEM_AI:
-        data->modifyArrows.modifiedValPtr = &gBattleStruct->debugAIFlags;
-        data->modifyArrows.currValue = GetBitfieldValue(gBattleStruct->debugAIFlags, data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount);
+        data->modifyArrows.modifiedValPtr = &gBattleResources->ai->aiFlags;
+        data->modifyArrows.currValue = GetBitfieldValue(gBattleResources->ai->aiFlags, data->bitfield[data->currentSecondaryListItemId].currBit, data->bitfield[data->currentSecondaryListItemId].bitsCount);
         data->modifyArrows.typeOfVal = VAL_BITFIELD_32;
         goto CASE_ITEM_STATUS;
     CASE_ITEM_STATUS:

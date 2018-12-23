@@ -18,7 +18,7 @@ BattleFrontier_BattleTowerBattleRoom_MapScript2_241B62: @ 8241B62
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241B6C:: @ 8241B6C
 	setvar VAR_TEMP_0, 1
-	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_242179
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_242179
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
@@ -27,7 +27,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241B6C:: @ 8241B6C
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_241BC3
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_24218D
 	waitmovement 0
-	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
 	waitmovement 0
 	setvar VAR_TEMP_2, 1
 	setvar VAR_0x8004, 2
@@ -79,7 +79,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241C2F:: @ 8241C2F
 	call_if 5, BattleFrontier_BattleTowerBattleRoom_EventScript_241EC3
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_24218D
 	waitmovement 0
-	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242217, MSGBOX_DEFAULT
 	playfanfare MUS_ME_ASA
@@ -146,7 +146,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241DAA:: @ 8241DAA
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241DDC:: @ 8241DDC
 	closemessage
-	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_242180
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_242180
 	waitmovement 0
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_242192
 	waitmovement 0
@@ -275,7 +275,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241F79:: @ 8241F79
 BattleFrontier_BattleTowerBattleRoom_EventScript_241FAF:: @ 8241FAF
 	call BattleFrontier_BattleTowerBattleRoom_EventScript_242170
 	closemessage
-	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_242180
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_242180
 	waitmovement 0
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom_Movement_242192
 	waitmovement 0

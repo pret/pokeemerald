@@ -18,14 +18,14 @@ BattleFrontier_BattlePikeCorridor_EventScript_25C786:: @ 825C786
 	setvar VAR_0x8004, 24
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
-	applymovement 255, BattleFrontier_BattlePikeCorridor_Movement_25C80B
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80B
 	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_25C812
 	waitmovement 0
 	lockall
 	msgbox BattleFrontier_BattlePikeCorridor_Text_25C817, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	applymovement 255, BattleFrontier_BattlePikeCorridor_Movement_25C80E
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_25C80E
 	waitmovement 0
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 0

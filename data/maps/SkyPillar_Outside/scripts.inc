@@ -38,7 +38,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	lockall
 	applymovement 1, SkyPillar_Outside_Movement_2393D3
 	waitmovement 0
-	applymovement 255, SkyPillar_Outside_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Outside_Movement_2725A4
 	waitmovement 0
 	msgbox SkyPillar_Outside_Text_239416, MSGBOX_DEFAULT
 	closemessage
@@ -52,7 +52,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	delay 40
 	msgbox SkyPillar_Outside_Text_2394BC, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, SkyPillar_Outside_Movement_2393EB
+	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Outside_Movement_2393EB
 	applymovement 1, SkyPillar_Outside_Movement_2393DE
 	waitmovement 0
 	setvar VAR_0x8004, 1

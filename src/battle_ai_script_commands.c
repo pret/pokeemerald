@@ -291,7 +291,7 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
 };
 
 // code
-void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
+void BattleAI_SetupItems(void)
 {
     s32 i;
     u8 *data = (u8 *)BATTLE_HISTORY;
@@ -316,19 +316,40 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
             }
         }
     }
+}
 
-    BattleAI_SetupAIData(defaultScoreMoves);
+void BattleAI_SetupFlags(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+        AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
+    else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+        AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_SAFARI;
+    else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
+        AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_ROAMING;
+    else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_FIRST_BATTLE;
+    else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
+        AI_THINKING_STRUCT->aiFlags = GetAiScriptsInBattleFactory();
+    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
+        AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_TRY_TO_FAINT;
+    else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags | gTrainers[gTrainerBattleOpponent_B].aiFlags;
+    else
+        AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
+
+    if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS) || gTrainers[gTrainerBattleOpponent_A].doubleBattle)
+        AI_THINKING_STRUCT->aiFlags |= AI_SCRIPT_DOUBLE_BATTLE; // Act smart in doubles and don't attack your partner.
 }
 
 void BattleAI_SetupAIData(u8 defaultScoreMoves)
 {
     s32 i;
-    u8 *data = (u8 *)AI_THINKING_STRUCT;
     u8 moveLimitations;
 
-    // Clear AI data.
-    for (i = 0; i < sizeof(struct AI_ThinkingStruct); i++)
-        data[i] = 0;
+    // Clear AI data but preserve the flags.
+    u32 flags = AI_THINKING_STRUCT->aiFlags;
+    memset(AI_THINKING_STRUCT, 0, sizeof(struct AI_ThinkingStruct));
+    AI_THINKING_STRUCT->aiFlags = flags;
 
     // Conditional score reset, unlike Ruby.
     for (i = 0; i < 4; i++)
@@ -367,37 +388,6 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     {
         gBattlerTarget = sBattler_AI ^ BIT_SIDE;
     }
-
-    // Choose proper trainer ai scripts.
-    if (!gBattleStruct->notfirstTimeAIFlags || !USE_BATTLE_DEBUG)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_SAFARI;
-        else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
-            AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_ROAMING;
-        else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-            AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_FIRST_BATTLE;
-        else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
-            AI_THINKING_STRUCT->aiFlags = GetAiScriptsInBattleFactory();
-        else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
-            AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_TRY_TO_FAINT;
-        else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags | gTrainers[gTrainerBattleOpponent_B].aiFlags;
-        else
-           AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
-
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE || gTrainers[gTrainerBattleOpponent_A].doubleBattle)
-            AI_THINKING_STRUCT->aiFlags |= AI_SCRIPT_DOUBLE_BATTLE; // Act smart in doubles and don't attack your partner.
-
-        gBattleStruct->debugAIFlags = AI_THINKING_STRUCT->aiFlags;
-        gBattleStruct->notfirstTimeAIFlags = TRUE;
-    }
-    else
-    {
-        AI_THINKING_STRUCT->aiFlags = gBattleStruct->debugAIFlags;
-    }
 }
 
 u8 BattleAI_ChooseMoveOrAction(void)
@@ -420,17 +410,18 @@ static u8 ChooseMoveOrAction_Singles(void)
     u8 consideredMoveArray[4];
     u8 numOfBestMoves;
     s32 i;
+    u32 flags = AI_THINKING_STRUCT->aiFlags;
 
     RecordLastUsedMoveByTarget();
 
-    while (AI_THINKING_STRUCT->aiFlags != 0)
+    while (flags != 0)
     {
-        if (AI_THINKING_STRUCT->aiFlags & 1)
+        if (flags & 1)
         {
             AI_THINKING_STRUCT->aiState = AIState_SettingUp;
             BattleAI_DoAIProcessing();
         }
-        AI_THINKING_STRUCT->aiFlags >>= 1;
+        flags >>= 1;
         AI_THINKING_STRUCT->aiLogicId++;
         AI_THINKING_STRUCT->movesetIndex = 0;
     }
@@ -470,7 +461,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
 {
     s32 i;
     s32 j;
-    s32 scriptsToRun;
+    u32 flags;
     s16 bestMovePointsForTarget[4];
     s8 mostViableTargetsArray[4];
     u8 actionOrMoveIndex[4];
@@ -501,15 +492,15 @@ static u8 ChooseMoveOrAction_Doubles(void)
 
             AI_THINKING_STRUCT->aiLogicId = 0;
             AI_THINKING_STRUCT->movesetIndex = 0;
-            scriptsToRun = AI_THINKING_STRUCT->aiFlags;
-            while (scriptsToRun != 0)
+            flags = AI_THINKING_STRUCT->aiFlags;
+            while (flags != 0)
             {
-                if (scriptsToRun & 1)
+                if (flags & 1)
                 {
                     AI_THINKING_STRUCT->aiState = AIState_SettingUp;
                     BattleAI_DoAIProcessing();
                 }
-                scriptsToRun >>= 1;
+                flags >>= 1;
                 AI_THINKING_STRUCT->aiLogicId++;
                 AI_THINKING_STRUCT->movesetIndex = 0;
             }

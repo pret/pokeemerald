@@ -223,7 +223,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	compare VAR_FRONTIER_BATTLE_MODE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_258762
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_2587A7
-	applymovement 255, BattleFrontier_BattleFactoryLobby_Movement_2587AC
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_2587AC
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
 	setvar VAR_TEMP_0, 0

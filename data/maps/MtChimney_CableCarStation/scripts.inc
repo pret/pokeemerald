@@ -19,7 +19,7 @@ MtChimney_CableCarStation_MapScript2_22AC1D: @ 822AC1D
 
 MtChimney_CableCarStation_EventScript_22AC27:: @ 822AC27
 	lockall
-	applymovement 255, MtChimney_CableCarStation_Movement_22ACB4
+	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_CableCarStation_Movement_22ACB4
 	applymovement 1, MtChimney_CableCarStation_Movement_22ACAA
 	waitmovement 0
 	setvar VAR_0x40A3, 0
@@ -42,13 +42,13 @@ MtChimney_CableCarStation_EventScript_22AC6C:: @ 822AC6C
 	msgbox MtChimney_CableCarStation_Text_22ACF8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, MtChimney_CableCarStation_Movement_22ACA5
-	applymovement 255, MtChimney_CableCarStation_Movement_22ACAF
+	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_CableCarStation_Movement_22ACAF
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x40A3, 2
 	incrementgamestat 48
 	special CableCarWarp
-	special sub_814FC9C
+	special CableCar
 	waitstate
 	release
 	end

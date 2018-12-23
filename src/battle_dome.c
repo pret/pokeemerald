@@ -26,6 +26,7 @@
 #include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
+#include "script_pokemon_util_80F87D8.h"
 #include "graphics.h"
 #include "constants/species.h"
 #include "constants/moves.h"
@@ -57,19 +58,9 @@ struct UnkStruct_860DD10
 };
 
 extern void sub_81B8558(void);
-extern u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
-extern u8 GetFrontierBrainMonEvs(u8, u8);
-extern u8 GetFrontierBrainMonNature(u8);
-extern void sub_81A4C30(void);
-extern u8 sub_81A3610(void);
-extern u16 GetFrontierBrainMonSpecies(u8);
-extern void ReducePlayerPartyToSelectedMons(void);
 
 extern u8 gSelectedOrderFromParty[];
 
-extern const u16 gBattleFrontierHeldItems[];
-extern const struct FacilityMon gBattleFrontierMons[];
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const struct SpriteTemplate gUnknown_0860CFA8;
 
 // text
@@ -3545,7 +3536,7 @@ static void sub_8190400(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D83D50, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D84970, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gUnknown_08D84F00, 0x800, 0, 1);
-        LoadCompressedObjectPic(gUnknown_0860CF50);
+        LoadCompressedSpriteSheet(gUnknown_0860CF50);
         LoadCompressedPalette(gUnknown_08D85358, 0, 0x200);
         LoadCompressedPalette(gUnknown_08D85444, 0x100, 0x200);
         LoadCompressedPalette(gUnknown_08D85600, 0xF0, 0x20);
@@ -5715,7 +5706,7 @@ static void sub_8194220(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 3:
-        LoadCompressedObjectPic(gUnknown_0860CF50);
+        LoadCompressedSpriteSheet(gUnknown_0860CF50);
         if (r10 == 0)
         {
             for (i = 0; i < (unsigned) 31; i++)

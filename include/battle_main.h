@@ -7,6 +7,20 @@ struct TrainerMoney
     u8 value;
 };
 
+struct UnknownPokemonStruct4
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 #define TYPE_NAME_LENGTH 6
 #define ABILITY_NAME_LENGTH 12
 
@@ -66,11 +80,14 @@ u8 IsRunningFromBattleImpossible(void);
 void sub_803BDA0(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 u32 GetBattlerTotalSpeedStat(u8 battlerId);
+s8 GetMovePriority(u8 battlerId);
 u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
+
+extern struct UnknownPokemonStruct4 gUnknown_02022FF8[3];
 
 extern const u8 gTypeEffectiveness[336];
 extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];

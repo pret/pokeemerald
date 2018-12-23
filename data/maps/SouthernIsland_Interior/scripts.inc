@@ -66,8 +66,8 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	goto_if 0, SouthernIsland_Interior_EventScript_242B9A
 	setflag FLAG_0x0CE
 	setflag FLAG_TEMP_2
-	special SpawnScriptEventObject
-	applymovement 127, SouthernIsland_Interior_Movement_242BCA
+	special SpawnCameraObject
+	applymovement EVENT_OBJ_ID_CAMERA, SouthernIsland_Interior_Movement_242BCA
 	waitmovement 0
 	delay 50
 	waitse
@@ -76,11 +76,11 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	waitmoncry
 	addobject 2
 	delay 30
-	applymovement 127, SouthernIsland_Interior_Movement_242BCE
+	applymovement EVENT_OBJ_ID_CAMERA, SouthernIsland_Interior_Movement_242BCE
 	applymovement 2, SouthernIsland_Interior_Movement_242BDA
 	waitmovement 0
 	delay 50
-	special RemoveScriptEventObject
+	special RemoveCameraObject
 	setvar VAR_LAST_TALKED, 2
 	compare VAR_0x40D5, 0
 	call_if 1, SouthernIsland_Interior_EventScript_242BA4

@@ -6,7 +6,7 @@
 #include "decoration_inventory.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "gpu_regs.h"

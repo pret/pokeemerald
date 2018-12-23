@@ -52,7 +52,7 @@ Route119_EventScript_1F4488:: @ 81F4488
 	call_if 1, Route119_EventScript_1F46C6
 	compare VAR_TEMP_1, 2
 	call_if 1, Route119_EventScript_1F46D1
-	applymovement 255, Route119_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_2725AA
 	waitmovement 0
 	delay 30
 	compare VAR_TEMP_1, 1
@@ -208,13 +208,13 @@ Route119_EventScript_1F46D1:: @ 81F46D1
 	return
 
 Route119_EventScript_1F46DC:: @ 81F46DC
-	applymovement 255, Route119_Movement_1F471E
+	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_1F471E
 	applymovement 25, Route119_Movement_1F473D
 	waitmovement 0
 	return
 
 Route119_EventScript_1F46EE:: @ 81F46EE
-	applymovement 255, Route119_Movement_1F4723
+	applymovement EVENT_OBJ_ID_PLAYER, Route119_Movement_1F4723
 	applymovement 25, Route119_Movement_1F4747
 	waitmovement 0
 	return

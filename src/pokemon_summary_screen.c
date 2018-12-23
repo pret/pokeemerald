@@ -130,7 +130,7 @@ struct UnkStruct_61CC04
 };
 
 // forward declarations
-bool8 sub_81B1250(void);
+bool8 IsMultiBattle(void);
 static bool8 SummaryScreen_LoadGraphics(void);
 static void SummaryScreen_LoadingCB2(void);
 static void InitBGs(void);
@@ -1108,7 +1108,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     pssData->callback = callback;
     pssData->splitIconSpriteId = 0xFF;
 
-    if (mode == PSS_MODE_UNK2)
+    if (mode == PSS_MODE_BOX)
         pssData->isBoxMon = TRUE;
     else
         pssData->isBoxMon = FALSE;
@@ -1116,7 +1116,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     switch (mode)
     {
     case PSS_MODE_NORMAL:
-    case PSS_MODE_UNK2:
+    case PSS_MODE_BOX:
         pssData->minPageIndex = 0;
         pssData->maxPageIndex = 3;
         break;
@@ -1358,23 +1358,23 @@ static bool8 SummaryScreen_DecompressGraphics(void)
         pssData->unk40F0++;
         break;
     case 7:
-        LoadCompressedObjectPic(&sSpriteSheet_MoveTypes);
+        LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypes);
         pssData->unk40F0++;
         break;
     case 8:
-        LoadCompressedObjectPic(&gUnknown_0861D074);
+        LoadCompressedSpriteSheet(&gUnknown_0861D074);
         pssData->unk40F0++;
         break;
     case 9:
-        LoadCompressedObjectPic(&gUnknown_0861D0F8);
+        LoadCompressedSpriteSheet(&gUnknown_0861D0F8);
         pssData->unk40F0++;
         break;
     case 10:
-        LoadCompressedObjectPalette(&gUnknown_0861D100);
+        LoadCompressedSpritePalette(&gUnknown_0861D100);
         pssData->unk40F0++;
         break;
     case 11:
-        LoadCompressedObjectPalette(&gUnknown_0861D07C);
+        LoadCompressedSpritePalette(&gUnknown_0861D07C);
         pssData->unk40F0++;
         break;
     case 12:
@@ -1413,7 +1413,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
         sum->altAbility = GetMonData(a, MON_DATA_ALT_ABILITY);
         sum->item = GetMonData(a, MON_DATA_HELD_ITEM);
         sum->pid = GetMonData(a, MON_DATA_PERSONALITY);
-        sum->sanity = GetMonData(a, MON_DATA_SANITY_BIT1);
+        sum->sanity = GetMonData(a, MON_DATA_SANITY_IS_BAD_EGG);
 
         if (sum->sanity)
             sum->isEgg = TRUE;
@@ -1430,7 +1430,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
         sum->ppBonuses = GetMonData(a, MON_DATA_PP_BONUSES);
         break;
     case 2:
-        if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_UNK2 || pssData->unk40EF == TRUE)
+        if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_BOX || pssData->unk40EF == TRUE)
         {
             sum->nature = GetNature(a);
             sum->currentHP = GetMonData(a, MON_DATA_HP);
@@ -1603,7 +1603,7 @@ static void sub_81C0604(u8 taskId, s8 a)
             }
             r4_2 = sub_80D214C(pssData->monList.boxMons, pssData->curMonIndex, pssData->maxMonIndex, a);
         }
-        else if (sub_81B1250() == 1)
+        else if (IsMultiBattle() == TRUE)
         {
             r4_2 = sub_81C09B4(a);
         }
@@ -3360,7 +3360,7 @@ static void PrintHeldItemName(void)
     const u8 *text;
     int offset;
 
-    if (pssData->summary.item == ITEM_ENIGMA_BERRY && sub_81B1250() == TRUE && (pssData->curMonIndex == 1 || pssData->curMonIndex == 4 || pssData->curMonIndex == 5))
+    if (pssData->summary.item == ITEM_ENIGMA_BERRY && IsMultiBattle() == TRUE && (pssData->curMonIndex == 1 || pssData->curMonIndex == 4 || pssData->curMonIndex == 5))
     {
         text = ItemId_GetName(ITEM_ENIGMA_BERRY);
     }
@@ -3937,7 +3937,7 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
             {
                 if (gMonSpritesGfxPtr != NULL)
                 {
-                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_UNK2 || pssData->unk40EF == TRUE)
+                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_BOX || pssData->unk40EF == TRUE)
                     {
                         HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], gMonSpritesGfxPtr->sprites[1], summary->species2, summary->pid);
                     }
@@ -3948,7 +3948,7 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
                 }
                 else
                 {
-                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_UNK2 || pssData->unk40EF == TRUE)
+                    if (pssData->monList.mons == gPlayerParty || pssData->mode == PSS_MODE_BOX || pssData->unk40EF == TRUE)
                     {
                         HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], sub_806F4F8(0, 1), summary->species2, summary->pid);
                     }
@@ -3962,7 +3962,7 @@ static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
             return -1;
         case 1:
             pal = GetMonSpritePalStructFromOtIdPersonality(summary->species2, summary->OTID, summary->pid);
-            LoadCompressedObjectPalette(pal);
+            LoadCompressedSpritePalette(pal);
             SetMultiuseSpriteTemplateToPokemon(pal->tag, 1);
             (*a1)++;
             return -1;

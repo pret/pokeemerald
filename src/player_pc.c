@@ -3,9 +3,8 @@
 #include "bg.h"
 #include "decoration.h"
 #include "event_scripts.h"
-#include "field_fadetransition.h"
 #include "event_object_movement.h"
-#include "field_screen.h"
+#include "field_screen_effect.h"
 #include "field_weather.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -462,9 +461,9 @@ static void ItemStorageMenuProcessInput(u8 taskId)
     s8 r2;
     s8 inputOptionId;
 
-    r5 = GetMenuCursorPos();
+    r5 = Menu_GetCursorPos();
     inputOptionId = Menu_ProcessInput();
-    r2 = GetMenuCursorPos();
+    r2 = Menu_GetCursorPos();
     switch(inputOptionId)
     {
         case -2:

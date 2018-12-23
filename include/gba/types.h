@@ -32,7 +32,9 @@ struct BgCnt
 {
     u16 priority:2;
     u16 charBaseBlock:2;
-    u16 dummy:4;
+    u16 dummy:2;
+    u16 mosaic:1;
+    u16 palettes:1;
     u16 screenBaseBlock:5;
     u16 areaOverflowMode:1;
     u16 screenSize:2;
