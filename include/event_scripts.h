@@ -581,4 +581,9 @@ extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F[];
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A[];
 
+// fldeff misc
+extern const u8 EventScript_275A86[];
+extern const u8 EventScript_275ADF[];
+extern const u8 EventScript_275B38[];
+
 #endif // GUARD_EVENT_SCRIPTS_H
