@@ -165,7 +165,7 @@ SECTIONS {
         src/fight.o(.text);
         src/poison.o(.text);
         asm/flying.o(.text);
-        asm/psychic.o(.text);
+        src/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
         src/ghost.o(.text);
