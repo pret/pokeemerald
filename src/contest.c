@@ -113,7 +113,7 @@ void sub_80DBF90(void);
 void sub_80DC2BC(void);
 void sub_80DC490(bool8);
 void sub_80DC4F0(void);
-void sub_80DC594(void);
+void CreateApplauseMeterSprite(void);
 void sub_80DC5E8(void);
 void sub_80DC7EC(void);
 void sub_80DCD48(void);
@@ -174,6 +174,14 @@ s16 sub_80DBD34(u8);
 void DetermineFinalStandings(void);
 bool8 sub_80DBF30(s32, s32, struct UnknownContestStruct6 *);
 void sub_80DC0F4(u8);
+void sub_80DC408(struct Sprite *);
+void sub_80DC728(u8);
+void sub_80DC6A4(u8);
+void sub_80DC8D0(u8);
+void sub_80DC81C(u8);
+void sub_80DC87C(u8);
+
+
 
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gContestMonConditions[4] = {0};
@@ -230,6 +238,17 @@ extern const struct SpriteTemplate gSpriteTemplate_8587C18;
 extern const union AffineAnimCmd *const gUnknown_082FF6C0[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const u8 *const gContestEffectDescriptionPointers[];
+extern const struct SpriteSheet gUnknown_08587A74;
+extern const u8 gUnknown_08587A6C[];
+extern const struct SpriteTemplate gSpriteTemplate_8587AD0;
+extern const struct SpritePalette gUnknown_08587B08;
+extern const struct CompressedSpriteSheet gUnknown_08587AE8[];
+extern const struct SpriteTemplate gSpriteTemplate_8587B18[];
+extern const u8 gUnknown_08587A70[];
+extern const struct SubspriteTable gSubspriteTables_8587B80[];
+extern const struct CompressedSpriteSheet gUnknown_08587BB0;
+extern const struct SpritePalette gUnknown_08587BB8;
+extern const struct SpriteTemplate gSpriteTemplate_8587BC8;
 
 void TaskDummy1(u8 taskId)
 {
@@ -577,7 +596,7 @@ u8 sub_80D7E44(u8 *a)
             gContestResources->field_0->unk19216 = sub_80DB120();
             sub_80DC2BC();
             sub_80DC4F0();
-            sub_80DC594();
+            CreateApplauseMeterSprite();
             sub_80DC5E8();
             sub_80DC7EC();
             gBattlerPositions[0] = 0;
@@ -3090,8 +3109,6 @@ u8 sub_80DC028(s16 a, s16 b, u8 c)
 	return taskId;
 }
 
-#ifdef NONMATCHING
-
 void sub_80DC0F4(u8 taskId)
 {
     u8 r7 = gTasks[taskId].data[3];
@@ -3103,7 +3120,8 @@ void sub_80DC0F4(u8 taskId)
         u16 r6;
         u8 r5;
         u8 r10;
-
+        u8 r11;
+        
         gTasks[taskId].data[10] = 0;
         if (gTasks[taskId].data[1] == 0)
         {
@@ -3158,16 +3176,15 @@ void sub_80DC0F4(u8 taskId)
                 }
             }
         }
-		
-		r10 = r5;
-		r1 = 0;
+        r10 = r5;
+        r11 = 0;
+        
         if (r5 > 7)
-		{	
-			r1 = 1;
-            r5 -= 8;
+        {
+            r11 = 1;
+            r5-= 8;
         }
-		
-        ContestBG_FillBoxWithTile(0, r6, r5 + 0x16, (gUnknown_02039F26[r7] * 5) + 2 + r3, 1, 1, 0x11);
+        ContestBG_FillBoxWithTile(0, r6, r5 + 22, gUnknown_02039F26[r7] * 5 + 2 + r11,  1, 1, 17);
         if (r1 > 0)
         {
             PlaySE(SE_C_GAJI);
@@ -3175,239 +3192,318 @@ void sub_80DC0F4(u8 taskId)
             m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
         }
         else
-        {
             PlaySE(SE_BOO);
-        }
-			
-        if (r10 == 0 && r5 == 0 && r6 == 0)
+        
+        if (!r11 && !r5 && !r6)
             gTasks[taskId].data[2] = -gTasks[taskId].data[2];
     }
 }
-#else
-NAKED
-void sub_80DC0F4(u8 taskId)
+
+void sub_80DC2BC(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x10\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	ldr r1, =gTasks\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	adds r4, r0, r1\n\
-	ldrb r0, [r4, 0xE]\n\
-	mov r9, r0\n\
-	ldrh r3, [r4, 0x8]\n\
-	ldrh r1, [r4, 0xA]\n\
-	ldrh r0, [r4, 0x1C]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x1C]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0xE\n\
-	bgt _080DC126\n\
-	b _080DC2A8\n\
-_080DC126:\n\
-	movs r0, 0\n\
-	strh r0, [r4, 0x1C]\n\
-	ldrh r2, [r4, 0xA]\n\
-	movs r5, 0xA\n\
-	ldrsh r0, [r4, r5]\n\
-	cmp r0, 0\n\
-	bne _080DC15C\n\
-	adds r0, r7, 0\n\
-	bl DestroyTask\n\
-	ldr r0, =gContestResources\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0, 0x14]\n\
-	mov r2, r9\n\
-	lsls r1, r2, 2\n\
-	adds r1, r0\n\
-	ldrb r2, [r1, 0x2]\n\
-	movs r0, 0x5\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	strb r0, [r1, 0x2]\n\
-	b _080DC2A8\n\
-	.pool\n\
-_080DC15C:\n\
-	cmp r3, 0\n\
-	bne _080DC1A4\n\
-	lsls r0, r1, 16\n\
-	mov r8, r0\n\
-	cmp r0, 0\n\
-	bge _080DC17A\n\
-	mov r0, r9\n\
-	bl sub_80DBFC8\n\
-	adds r0, 0x2\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	ldrh r0, [r4, 0xA]\n\
-	adds r0, 0x1\n\
-	b _080DC188\n\
-_080DC17A:\n\
-	mov r0, r9\n\
-	bl sub_80DBFC8\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	ldrh r0, [r4, 0xA]\n\
-	subs r0, 0x1\n\
-_080DC188:\n\
-	strh r0, [r4, 0xA]\n\
-	ldr r1, =gTasks\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	ldrh r1, [r0, 0x8]\n\
-	adds r2, r1, 0x1\n\
-	strh r2, [r0, 0x8]\n\
-	lsls r1, 24\n\
-	lsrs r5, r1, 24\n\
-	b _080DC210\n\
-	.pool\n\
-_080DC1A4:\n\
-	movs r3, 0xC\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r0, 0\n\
-	bge _080DC1DE\n\
-	lsls r0, r1, 16\n\
-	mov r8, r0\n\
-	cmp r0, 0\n\
-	bge _080DC1CC\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r1, r0, 0x1\n\
-	strh r1, [r4, 0x8]\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	adds r0, r2, 0x1\n\
-	strh r0, [r4, 0xA]\n\
-	mov r0, r9\n\
-	bl sub_80DBFC8\n\
-	adds r0, 0x2\n\
-	b _080DC20C\n\
-_080DC1CC:\n\
-	ldrh r0, [r4, 0x8]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r6, 0\n\
-	subs r0, r2, 0x1\n\
-	strh r0, [r4, 0xA]\n\
-	b _080DC210\n\
-_080DC1DE:\n\
-	lsls r0, r1, 16\n\
-	mov r8, r0\n\
-	cmp r0, 0\n\
-	bge _080DC1F8\n\
-	ldrh r0, [r4, 0x8]\n\
-	subs r0, 0x1\n\
-	strh r0, [r4, 0x8]\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r6, 0\n\
-	adds r0, r2, 0x1\n\
-	strh r0, [r4, 0xA]\n\
-	b _080DC210\n\
-_080DC1F8:\n\
-	ldrh r0, [r4, 0x8]\n\
-	adds r1, r0, 0x1\n\
-	strh r1, [r4, 0x8]\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	subs r0, r2, 0x1\n\
-	strh r0, [r4, 0xA]\n\
-	mov r0, r9\n\
-	bl sub_80DBFC8\n\
-_080DC20C:\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-_080DC210:\n\
-	str r5, [sp, 0xC]\n\
-	movs r0, 0\n\
-	mov r10, r0\n\
-	cmp r5, 0x7\n\
-	bls _080DC226\n\
-	movs r2, 0x1\n\
-	mov r10, r2\n\
-	adds r0, r5, 0\n\
-	subs r0, 0x8\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-_080DC226:\n\
-	adds r2, r5, 0\n\
-	adds r2, 0x16\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	ldr r0, =gUnknown_02039F26\n\
-	add r0, r9\n\
-	ldrb r0, [r0]\n\
-	lsls r3, r0, 2\n\
-	adds r3, r0\n\
-	adds r3, 0x2\n\
-	add r3, r10\n\
-	lsls r3, 24\n\
-	lsrs r3, 24\n\
-	movs r0, 0x1\n\
-	str r0, [sp]\n\
-	str r0, [sp, 0x4]\n\
-	movs r0, 0x11\n\
-	str r0, [sp, 0x8]\n\
-	movs r0, 0\n\
-	adds r1, r6, 0\n\
-	bl ContestBG_FillBoxWithTile\n\
-	mov r3, r8\n\
-	cmp r3, 0\n\
-	ble _080DC284\n\
-	movs r0, 0x60\n\
-	bl PlaySE\n\
-	ldr r4, =gMPlayInfo_SE1\n\
-	adds r0, r4, 0\n\
-	bl m4aMPlayImmInit\n\
-	ldr r1, =0x0000ffff\n\
-	ldr r0, [sp, 0xC]\n\
-	lsls r2, r0, 24\n\
-	asrs r2, 16\n\
-	adds r0, r4, 0\n\
-	bl m4aMPlayPitchControl\n\
-	b _080DC28A\n\
-	.pool\n\
-_080DC284:\n\
-	movs r0, 0x16\n\
-	bl PlaySE\n\
-_080DC28A:\n\
-	mov r2, r10\n\
-	cmp r2, 0\n\
-	bne _080DC2A8\n\
-	cmp r5, 0\n\
-	bne _080DC2A8\n\
-	cmp r6, 0\n\
-	bne _080DC2A8\n\
-	ldr r0, =gTasks\n\
-	lsls r1, r7, 2\n\
-	adds r1, r7\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	ldrh r0, [r1, 0xC]\n\
-	negs r0, r0\n\
-	strh r0, [r1, 0xC]\n\
-_080DC2A8:\n\
-	add sp, 0x10\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided\n");
+    s32 i;
+
+    LoadSpriteSheet(&gUnknown_08587A74);
+    for (i = 0; i < 4; i++)
+    {
+        u8 y = gUnknown_08587A6C[gUnknown_02039F26[i]];
+
+        gContestResources->field_14[i].unk0 = CreateSprite(&gSpriteTemplate_8587AD0, 180, y, 1);
+    }
 }
-#endif
+
+void sub_80DC308(u8 a)
+{
+    u8 spriteId;
+    s16 r5;
+
+    gContestResources->field_14[a].unk2_0 = 1;
+    spriteId = gContestResources->field_14[a].unk0;
+    r5 = sContestantStatus[a].unk4 / 10 * 2;
+    if (r5 > 56)
+        r5 = 56;
+    else if (r5 < 0)
+        r5 = 0;
+    gSprites[spriteId].invisible = FALSE;
+    gSprites[spriteId].data[0] = a;
+    gSprites[spriteId].data[1] = r5;
+    if (gSprites[spriteId].data[1] > gSprites[spriteId].pos2.x)
+        gSprites[spriteId].data[2] = 1;
+    else
+        gSprites[spriteId].data[2] = -1;
+    gSprites[spriteId].callback = sub_80DC408;
+}
+
+void sub_80DC3AC(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80DC308(i);
+}
+
+bool8 sub_80DC3C4(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gContestResources->field_14[i].unk2_0)
+            break;
+    }
+    if (i == 4)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_80DC408(struct Sprite *sprite)
+{
+    if (sprite->pos2.x == sprite->data[1])
+    {
+        gContestResources->field_14[sprite->data[0]].unk2_0 = 0;
+        sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        sprite->pos2.x += sprite->data[2];
+    }
+}
+
+void sub_80DC44C(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        gSprites[gContestResources->field_14[i].unk0].pos1.y = gUnknown_08587A6C[gUnknown_02039F26[i]];
+}
+
+void sub_80DC490(bool8 a)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_02039F26[i] > 1)
+        {
+            if (!a)
+                gSprites[gContestResources->field_14[i].unk0].pos1.x = 180;
+            else
+                gSprites[gContestResources->field_14[i].unk0].pos1.x = 256;
+        }
+    }
+}
+
+void sub_80DC4F0(void)
+{
+    s32 i;
+
+    LoadSpritePalette(&gUnknown_08587B08);
+    for (i = 0; i < 4; i++)
+    {
+        LoadCompressedObjectPic(&gUnknown_08587AE8[i]);
+        gContestResources->field_14[i].unk1 = CreateSprite(
+          &gSpriteTemplate_8587B18[i],
+          204, gUnknown_08587A70[gUnknown_02039F26[i]],
+          0);
+        SetSubspriteTables(&gSprites[gContestResources->field_14[i].unk1], gSubspriteTables_8587B80);
+        gSprites[gContestResources->field_14[i].unk1].invisible = TRUE;
+    }
+}
+
+void CreateApplauseMeterSprite(void)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPic(&gUnknown_08587BB0);
+    LoadSpritePalette(&gUnknown_08587BB8);
+    spriteId = CreateSprite(&gSpriteTemplate_8587BC8, 30, 44, 1);
+    gSprites[spriteId].invisible = TRUE;
+    sContest.applauseMeterSpriteId = spriteId;
+}
+
+void sub_80DC5E8(void)
+{
+    u8 i;
+    u8 taskId = CreateTask(sub_80DC728, 30);
+
+    sContest.unk19211 = taskId;
+    for (i = 0; i < 4; i++)
+        gTasks[taskId].data[i * 4] = 0xFF;
+}
+
+void sub_80DC630(u8 a)
+{
+    gTasks[sContest.unk19211].data[a * 4 + 0] = 0;
+    gTasks[sContest.unk19211].data[a * 4 + 1] = 0;
+}
+
+void sub_80DC674(u8 a)
+{
+    u8 taskId = CreateTask(sub_80DC6A4, 31);
+
+    gTasks[taskId].data[0] = a;
+}
+
+void sub_80DC6A4(u8 taskId)
+{
+    u8 r4 = gTasks[taskId].data[0];
+
+    if (gTasks[sContest.unk19211].data[r4 * 4 + 0] == 0
+     || gTasks[sContest.unk19211].data[r4 * 4 + 0] == 0xFF)
+    {
+        gTasks[sContest.unk19211].data[r4 * 4 + 0] = 0xFF;
+        gTasks[sContest.unk19211].data[r4 * 4 + 1] = 0;
+        BlendPalette((sContest.unk19218[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80DC728(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 r3 = i * 4;
+
+        if (gTasks[taskId].data[r3 + 0] != 0xFF)
+        {
+            if (gTasks[taskId].data[r3 + 1] == 0)
+                gTasks[taskId].data[r3 + 0]++;
+            else
+                gTasks[taskId].data[r3 + 0]--;
+
+            if (gTasks[taskId].data[r3 + 0] == 16
+             || gTasks[taskId].data[r3 + 0] == 0)
+                gTasks[taskId].data[r3 + 1] ^= 1;
+
+            BlendPalette(
+              (sContest.unk19218[i] + 5) * 16 + 6,
+              2,
+              gTasks[taskId].data[r3 + 0],
+              RGB(31, 31, 18));
+        }
+    }
+}
+
+void sub_80DC7EC(void)
+{
+    s32 i;
+
+    sContest.unk19212 = CreateTask(sub_80DC8D0, 30);
+    for (i = 0; i < 4; i++)
+        sub_80DC81C(i);
+}
+
+void sub_80DC81C(u8 a)
+{
+    gTasks[sContest.unk19212].data[a * 4 + 0] = 0xFF;
+    gTasks[sContest.unk19212].data[a * 4 + 1] = 0;
+}
+
+void sub_80DC864(void)
+{
+    s32 i;
+
+    for (i = 0; i < 4; i++)
+        sub_80DC87C(i);
+}
+
+void sub_80DC87C(u8 a)
+{
+    u32 var;
+    u32 r0;
+
+    sub_80DC81C(a);
+
+    r0 = a + 5;
+    DmaCopy16Defvars(
+      3,
+      gPlttBufferUnfaded + r0 * 16 + 10,
+      gPlttBufferFaded   + r0 * 16 + 10,
+      2);
+
+    var = (a + 5) * 16 + 12 + a;
+    DmaCopy16Defvars(
+      3,
+      gPlttBufferUnfaded + var,
+      gPlttBufferFaded + var,
+      2);
+}
+
+void sub_80DC8D0(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 r3 = i * 4;
+
+        if (gTasks[taskId].data[r3 + 0] != 0xFF)
+        {
+            if (++gTasks[taskId].data[r3 + 2] > 2)
+            {
+                gTasks[taskId].data[r3 + 2] = 0;
+
+                if (gTasks[taskId].data[r3 + 1] == 0)
+                    gTasks[taskId].data[r3 + 0]++;
+                else
+                    gTasks[taskId].data[r3 + 0]--;
+
+                if (gTasks[taskId].data[r3 + 0] == 16
+                 || gTasks[taskId].data[r3 + 0] == 0)
+                    gTasks[taskId].data[r3 + 1] ^= 1;
+
+                BlendPalette((i + 5) * 16 + 10, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
+                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
+            }
+        }
+    }
+}
+
+void sub_80DC9B4(u8 a)
+{
+    if (sContestantStatus[a].hasJudgesAttention)
+        sub_80DC630(a);
+    else
+        sub_80DC674(a);
+}
+
+extern const struct CompressedSpriteSheet gUnknown_08589904[];
+extern const struct SpritePalette gUnknown_08589924[];
+extern const struct SpriteTemplate gSpriteTemplate_858998C[];
+
+u8 sub_80DC9EC(u8 a)
+{
+	u8 r5 = gUnknown_02039F26[a] * 40 + 32;
+    u8 r8;
+    u8 r6;
+    volatile u8 zero;
+	
+
+    LoadCompressedObjectPic(&gUnknown_08589904[a]);
+    LoadSpritePalette(&gUnknown_08589924[a]);
+    r6 = CreateSprite(&gSpriteTemplate_858998C[a], 184, r5, 29);
+	gSprites[r8].oam.tileNum += 64;
+    r8 = CreateSprite(&gSpriteTemplate_858998C[a], 248, r5, 29);
+    
+
+    CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x26), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32));
+    CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x36), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32));
+	CpuSet(&r8, (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x36), 0x050000c0);
+
+    RequestDma3Copy((void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32), 0x80, 1);
+
+    // What is this?
+    zero = 0;
+    zero = 0;
+
+    RequestDma3Copy((void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32), 0x80, 1);
+
+
+    gSprites[r6].data[0] = r8;
+    gSprites[r8].data[0] = r6;
+    
+    return r6;
+}
