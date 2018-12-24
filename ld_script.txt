@@ -170,7 +170,7 @@ SECTIONS {
         src/rock.o(.text);
         src/ghost.o(.text);
         src/dragon.o(.text);
-        asm/dark.o(.text);
+        src/dark.o(.text);
         src/ground.o(.text);
         src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);

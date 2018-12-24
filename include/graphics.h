@@ -4720,6 +4720,10 @@ extern const u32 gBattleAnimBackgroundTilemap_17[];
 extern const u32 gBattleAnimBackgroundTilemap_20[];
 extern const u32 gBattleAnimBackgroundTilemap_21[];
 
+extern const u32 gUnknown_08C1D0AC[];
+extern const u32 gUnknown_08C1D1E8[];
+extern const u32 gUnknown_08C1D210[];
+
 extern const u32 gUnknown_08C20668[];
 extern const u32 gUnknown_08C20684[];
 extern const u32 gBattleStatMask_Gfx[];

@@ -62,7 +62,7 @@ _0810F22E:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80A438C
+	bl MoveBattlerSpriteToBG
 _0810F264:
 	movs r0, 0x2
 	adds r4, r0, 0
@@ -77,7 +77,7 @@ _0810F264:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_80A438C
+	bl MoveBattlerSpriteToBG
 _0810F284:
 	mov r0, r8
 	cmp r0, 0
