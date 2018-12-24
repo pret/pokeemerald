@@ -3193,7 +3193,7 @@ void sub_813AEB4(void)
         i = 0;
         do
         {
-            if (gUnknown_0861500C[i] == gUnknown_085B320C[temp2])
+            if (gTutorMoves[i] == gUnknown_085B320C[temp2])
             {
                 gSpecialVar_0x8005 = i;
                 break;
@@ -3206,7 +3206,7 @@ void sub_813AEB4(void)
         i = 0;
         do
         {
-            if (gUnknown_0861500C[i] == gUnknown_085B31F8[temp2])
+            if (gTutorMoves[i] == gUnknown_085B31F8[temp2])
             {
                 gSpecialVar_0x8005 = i;
                 break;
@@ -3817,7 +3817,7 @@ void sub_813B9A0(void)
     }
 }
 
-bool32 sub_813B9C0(void)
+bool8 sub_813B9C0(void)
 {
     static const u16 gUnknown_085B3444[] = {
         MAP_OLDALE_TOWN_POKEMON_CENTER_1F,

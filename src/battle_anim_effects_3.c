@@ -589,9 +589,9 @@ const union AffineAnimCmd gUnknown_085CE430[] =
 
 const s8 gUnknown_085CE460[] =
 {
-    0xE8, 
-    0x18, 
-    0xFC, 
+    0xE8,
+    0x18,
+    0xFC,
     0x00,
 };
 
@@ -1846,7 +1846,7 @@ static void sub_815AED8(u8 taskId)
         if (task->data[7])
             task->data[12] = task->data[8];
         else
-            task->data[12] = task->data[9];        
+            task->data[12] = task->data[9];
     }
 
     i = task->data[0];
@@ -2403,7 +2403,7 @@ void sub_815BB84(u8 taskId)
             gTasks[taskId].data[4] = 0;
             if (++gTasks[taskId].data[1] > 12)
                 gTasks[taskId].data[1] = 12;
-            
+
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[1], 16 - gTasks[taskId].data[1]));
 
             if (gTasks[taskId].data[1] == 12)
@@ -2459,7 +2459,7 @@ void sub_815BE04(struct Sprite *sprite)
     xOffset &= 0x3F;
     if (xOffset > 31)
         xOffset = 32 - xOffset;
-    
+
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + xOffset;
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 32;
     sprite->data[1] = gBattleAnimArgs[0];
@@ -2490,7 +2490,7 @@ static void sub_815BF44(struct Sprite *sprite)
 {
     int var0;
     s8 var1;
-    
+
     var0 = (u16)sprite->data[2] + (u16)sprite->data[3];
     var1 = var0 >> 8;
     sprite->pos2.y -= var1;
@@ -2531,7 +2531,7 @@ static void sub_815C050(struct Sprite *sprite)
     register u16 d3 asm("r1");
     int var0;
     s8 var1;
-    
+
     if (!sprite->invisible)
     {
         d2 = sprite->data[2];
@@ -2637,7 +2637,7 @@ void sub_815C0A4(u8 taskId)
         sub_80A6C68(unknownStruct.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
-        
+
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
@@ -2893,7 +2893,7 @@ static void sub_815C7C4(u8 taskId)
     SetSpriteRotScale(task->data[15], 0x100, 0x100, task->data[2]);
     SetBattlerSpriteYOffsetFromRotation(task->data[15]);
     gSprites[task->data[15]].pos2.x = -(((temp = task->data[2]) >= 0 ? task->data[2] : temp + 63) >> 6);
-    
+
     if (++task->data[1] > 8)
     {
         if (task->data[12])
@@ -3679,7 +3679,7 @@ void sub_815DCA4(u8 taskId)
 
     if (!gBattleAnimArgs[1])
         DestroyAnimVisualTask(taskId);
-    
+
     task->data[0] = 0;
     task->data[1] = 0;
     task->data[2] = 0;
@@ -3801,7 +3801,7 @@ static void sub_815DF64(u8 taskId)
         BlendPalette(gTasks[taskId].data[2], 16, 8, gUnknown_085CE784[gTasks[taskId].data[0]]);
         if (++gTasks[taskId].data[0] > 23)
             gTasks[taskId].data[0] = 0;
-        
+
         gTasks[taskId].data[1]--;
     }
     else
@@ -3831,7 +3831,7 @@ void sub_815E01C(struct Sprite *sprite)
 {
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
-    
+
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[0];
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + gBattleAnimArgs[1];
     if (gBattleAnimArgs[2] == 0)
@@ -4030,7 +4030,7 @@ void sub_815E47C(u8 taskId)
         InitAnimArcTranslation(&gSprites[task->data[15]]);
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
             StartSpriteAffineAnim(&gSprites[task->data[15]], 1);
-        
+
         task->func = sub_815E5CC;
     }
     else
@@ -4303,7 +4303,7 @@ static void sub_815EA60(struct Sprite *sprite)
         sprite->pos2.x = sprite->data[7] * (gSineTable[sprite->data[1] * 10] >> 3);
         if (sprite->data[1] == 15)
             sprite->oam.tileNum += 16;
-        
+
         if (sprite->data[1] == 18)
         {
             sprite->data[1] = 0;
@@ -4581,7 +4581,7 @@ static void sub_815F10C(struct Sprite *sprite)
             sprite->pos1.x + sprite->pos2.x,
             sprite->pos1.y + sprite->pos2.y, 5);
     }
-    
+
     if (sprite->data[5] == sprite->data[4])
         DestroyAnimSprite(sprite);
 
@@ -4648,7 +4648,7 @@ void AnimTask_MonToSubstitute(u8 taskId)
 
         for (i = 0; i < 16; i++)
             gTasks[taskId].data[i] = 0;
-        
+
         gTasks[taskId].func = sub_815F330;
     }
 }
@@ -4837,7 +4837,7 @@ void sub_815F620(u8 taskId)
         gSprites[spriteId1].invisible = 1;
     }
 
-    
+
     gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_NORMAL;
     gSprites[spriteId1].oam.objMode = ST_OAM_OBJ_NORMAL;
     gSprites[spriteId2].callback = sub_815F7C4;
@@ -4886,4 +4886,19 @@ static void sub_815F7C4(struct Sprite *sprite)
         }
         break;
     }
+}
+
+void AnimTask_GetReturnPowerLevel(u8 taskId)
+{
+    gBattleAnimArgs[7] = 0;
+    if (gAnimFriendship < 60)
+        gBattleAnimArgs[7] = 0;
+    if (gAnimFriendship > 60 && gAnimFriendship < 92)
+        gBattleAnimArgs[7] = 1;
+    if (gAnimFriendship > 91 && gAnimFriendship < 201)
+        gBattleAnimArgs[7] = 2;
+    if (gAnimFriendship > 200)
+        gBattleAnimArgs[7] = 3;
+
+    DestroyAnimVisualTask(taskId);
 }

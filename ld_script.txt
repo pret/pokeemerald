@@ -193,7 +193,8 @@ SECTIONS {
         src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
-        src/rom6.o(.text);
+        src/fldeff_rocksmash.o(.text);
+        src/fldeff_dig.o(.text);
         src/pokeblock.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
@@ -582,7 +583,7 @@ SECTIONS {
         src/list_menu.o(.rodata);
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
-        data/party_menu.o(.rodata);
+        src/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         src/unk_81BAD84.o(.rodata);

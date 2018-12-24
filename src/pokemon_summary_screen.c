@@ -2143,7 +2143,7 @@ static void sub_81C174C(u8 taskId)
 
 static bool8 sub_81C18A8(void)
 {
-    if (pssData->firstMoveIndex == MAX_MON_MOVES || pssData->newMove == MOVE_NONE || sub_81B6D14(pssData->summary.moves[pssData->firstMoveIndex]) != 1)
+    if (pssData->firstMoveIndex == MAX_MON_MOVES || pssData->newMove == MOVE_NONE || IsMoveHm(pssData->summary.moves[pssData->firstMoveIndex]) != 1)
         return TRUE;
     else
         return FALSE;

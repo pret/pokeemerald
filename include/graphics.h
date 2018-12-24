@@ -4797,4 +4797,11 @@ extern const u32 gCableCarDoor_Gfx[];
 extern const u32 gCableCarCord_Gfx[];
 extern const u16 gCableCar_Pal[];
 
+// Party menu
+extern const u32 gPartyMenuPokeball_Gfx[];
+extern const u32 gPartyMenuPokeballSmall_Gfx[];
+extern const u32 gStatusPal_Icons[];
+extern const u32 gPartyMenuPokeball_Pal[];
+extern const u32 gStatusPal_Icons[];
+
 #endif //GUARD_GRAPHICS_H
