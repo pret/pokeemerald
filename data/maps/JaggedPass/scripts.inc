@@ -26,7 +26,7 @@ JaggedPass_MapScript1_23068B: @ 823068B
 	end
 
 JaggedPass_EventScript_230697:: @ 8230697
-	setweather 7
+	setweather WEATHER_ASH
 	doweather
 	return
 

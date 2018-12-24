@@ -81,7 +81,7 @@ Route111_EventScript_1F0DE6:: @ 81F0DE6
 	goto_if_lt Route111_EventScript_1F0E25
 
 Route111_EventScript_1F0E22:: @ 81F0E22
-	setweather 8
+	setweather WEATHER_SANDSTORM
 
 Route111_EventScript_1F0E25:: @ 81F0E25
 	return
@@ -259,14 +259,14 @@ Route111_Movement_1F0FAE: @ 81F0FAE
 	step_end
 
 Route111_EventScript_1F0FB0:: @ 81F0FB0
-	setweather 2
+	setweather WEATHER_SUNNY
 	fadenewbgm MUS_DOORO_X1
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1F0FBD:: @ 81F0FBD
-	setweather 8
+	setweather WEATHER_SANDSTORM
 	fadenewbgm MUS_ASHROAD
 	doweather
 	end

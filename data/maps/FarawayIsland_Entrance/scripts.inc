@@ -7,12 +7,12 @@ FarawayIsland_Entrance_MapScript1_267C94: @ 8267C94
 	end
 
 FarawayIsland_Entrance_EventScript_267C98:: @ 8267C98
-	setweather 1
+	setweather WEATHER_CLOUDS
 	doweather
 	end
 
 FarawayIsland_Entrance_EventScript_267C9D:: @ 8267C9D
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	end
 

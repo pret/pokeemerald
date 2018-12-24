@@ -72,7 +72,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	msgbox SkyPillar_Outside_Text_23950C, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SYS_WEATHER_CTRL
-	setweather 15
+	setweather WEATHER_15
 	doweather
 	special WaitWeather
 	waitstate

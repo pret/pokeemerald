@@ -18,7 +18,7 @@ Route113_EventScript_1F216A:: @ 81F216A
 	goto_if_lt Route113_EventScript_1F2189
 	compare VAR_TEMP_0, 84
 	goto_if_gt Route113_EventScript_1F2189
-	setweather 7
+	setweather WEATHER_ASH
 	return
 
 Route113_EventScript_1F2189:: @ 81F2189
