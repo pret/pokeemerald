@@ -69,7 +69,7 @@ Route112_EventScript_1F1E81:: @ 81F1E81
 	trainerbattle_single TRAINER_TRENT_1, Route112_Text_299815, Route112_Text_29987C, Route112_EventScript_1F1EAD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route112_EventScript_1F1ECC
+	goto_if_eq Route112_EventScript_1F1ECC
 	msgbox Route112_Text_299896, MSGBOX_DEFAULT
 	release
 	end

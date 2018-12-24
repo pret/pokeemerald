@@ -13,7 +13,7 @@ BattleFrontier_OutsideWest_EventScript_23D3F0:: @ 823D3F0
 	msgbox BattleFrontier_OutsideWest_Text_23D808, MSGBOX_DEFAULT
 	checkitem ITEM_SS_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_OutsideWest_EventScript_23D44E
+	goto_if_eq BattleFrontier_OutsideWest_EventScript_23D44E
 	message BattleFrontier_OutsideWest_Text_23D89D
 	waitmessage
 	goto BattleFrontier_OutsideWest_EventScript_23D416
@@ -36,7 +36,7 @@ BattleFrontier_OutsideWest_EventScript_23D44E:: @ 823D44E
 BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 	msgbox BattleFrontier_OutsideWest_Text_23D8F2, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
+	goto_if_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
@@ -47,7 +47,7 @@ BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 BattleFrontier_OutsideWest_EventScript_23D483:: @ 823D483
 	msgbox BattleFrontier_OutsideWest_Text_23D90E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
+	goto_if_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, MSGBOX_DEFAULT
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
@@ -145,13 +145,13 @@ BattleFrontier_OutsideWest_EventScript_23D57F:: @ 823D57F
 	faceplayer
 	delay 20
 	compare VAR_FACING, 2
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5C5
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5C5
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	compare VAR_FACING, 4
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5BA
 	msgbox BattleFrontier_OutsideWest_Text_23DC36, MSGBOX_DEFAULT
 	release
 	end
@@ -170,13 +170,13 @@ BattleFrontier_OutsideWest_EventScript_23D5C6:: @ 823D5C6
 	message BattleFrontier_OutsideWest_Text_23DCB0
 	waitmessage
 	compare VAR_FACING, 2
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5FD
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D5FD
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D608
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D608
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D613
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D613
 	compare VAR_FACING, 4
-	call_if 1, BattleFrontier_OutsideWest_EventScript_23D61E
+	call_if_eq BattleFrontier_OutsideWest_EventScript_23D61E
 	waitbuttonpress
 	release
 	end
@@ -227,7 +227,7 @@ BattleFrontier_OutsideWest_EventScript_23D635:: @ 823D635
 	msgbox BattleFrontier_OutsideWest_Text_23DD3B, MSGBOX_DEFAULT
 	random 2
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_OutsideWest_EventScript_23D653
+	goto_if_eq BattleFrontier_OutsideWest_EventScript_23D653
 	goto BattleFrontier_OutsideWest_EventScript_23D65D
 	end
 

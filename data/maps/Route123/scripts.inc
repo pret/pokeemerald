@@ -9,16 +9,15 @@ Route123_MapScript1_1F614D: @ 81F614D
 Route123_EventScript_1F6151:: @ 81F6151
 	lock
 	faceplayer
-	checkflag FLAG_0x0E8
-	goto_eq Route123_EventScript_1F61A0
+	goto_if_set FLAG_0x0E8, Route123_EventScript_1F61A0
 	msgbox Route123_Text_1F641E, MSGBOX_DEFAULT
 	special IsGrassTypeInParty
 	compare VAR_RESULT, 0
-	goto_eq Route123_EventScript_1F619E
+	goto_if_eq Route123_EventScript_1F619E
 	msgbox Route123_Text_1F645D, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM19
 	compare VAR_RESULT, 0
-	goto_eq Route123_EventScript_272054
+	goto_if_eq Route123_EventScript_272054
 	setflag FLAG_0x0E8
 	msgbox Route123_Text_1F64CF, MSGBOX_DEFAULT
 	release
@@ -64,7 +63,7 @@ Route123_EventScript_1F620A:: @ 81F620A
 	trainerbattle_single TRAINER_CAMERON_1, Route123_Text_29FDBA, Route123_Text_29FE1E, Route123_EventScript_1F6236
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route123_EventScript_1F6255
+	goto_if_eq Route123_EventScript_1F6255
 	msgbox Route123_Text_29FE2A, MSGBOX_DEFAULT
 	release
 	end
@@ -86,7 +85,7 @@ Route123_EventScript_1F626C:: @ 81F626C
 	trainerbattle_single TRAINER_JACKI_1, Route123_Text_29FF61, Route123_Text_29FFD8, Route123_EventScript_1F6298
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route123_EventScript_1F62B7
+	goto_if_eq Route123_EventScript_1F62B7
 	msgbox Route123_Text_29FFE5, MSGBOX_DEFAULT
 	release
 	end
@@ -158,7 +157,7 @@ Route123_EventScript_1F63BC:: @ 81F63BC
 	trainerbattle_single TRAINER_FERNANDO_1, Route123_Text_2A0323, Route123_Text_2A035C, Route123_EventScript_1F63E8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route123_EventScript_1F6407
+	goto_if_eq Route123_EventScript_1F6407
 	msgbox Route123_Text_2A0389, MSGBOX_DEFAULT
 	release
 	end

@@ -5,8 +5,7 @@ FallarborTown_House2_EventScript_201383:: @ 8201383
 	lockall
 	applymovement 1, FallarborTown_House2_Movement_27259E
 	waitmovement 0
-	checkflag FLAG_TEMP_1
-	goto_eq FallarborTown_House2_EventScript_2013A8
+	goto_if_set FLAG_TEMP_1, FallarborTown_House2_EventScript_2013A8
 	msgbox FallarborTown_House2_Text_20145C, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
 	goto FallarborTown_House2_EventScript_2013A8
@@ -15,7 +14,7 @@ FallarborTown_House2_EventScript_201383:: @ 8201383
 FallarborTown_House2_EventScript_2013A8:: @ 82013A8
 	checkitem ITEM_HEART_SCALE, 1
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_House2_EventScript_201452
+	goto_if_eq FallarborTown_House2_EventScript_201452
 	msgbox FallarborTown_House2_Text_201541, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, FallarborTown_House2_EventScript_201452
@@ -27,12 +26,12 @@ FallarborTown_House2_EventScript_2013D6:: @ 82013D6
 	special sub_81B951C
 	waitstate
 	compare VAR_0x8004, 255
-	goto_eq FallarborTown_House2_EventScript_201452
+	goto_if_eq FallarborTown_House2_EventScript_201452
 	special sub_81B98DC
 	compare VAR_RESULT, 1
-	goto_eq FallarborTown_House2_EventScript_201444
+	goto_if_eq FallarborTown_House2_EventScript_201444
 	compare VAR_0x8005, 0
-	goto_eq FallarborTown_House2_EventScript_201436
+	goto_if_eq FallarborTown_House2_EventScript_201436
 	goto FallarborTown_House2_EventScript_20140C
 	end
 
@@ -41,7 +40,7 @@ FallarborTown_House2_EventScript_20140C:: @ 820140C
 	special TeachMoveTutorMove
 	waitstate
 	compare VAR_0x8004, 0
-	goto_eq FallarborTown_House2_EventScript_2013D6
+	goto_if_eq FallarborTown_House2_EventScript_2013D6
 	msgbox FallarborTown_House2_Text_201627, MSGBOX_DEFAULT
 	takeitem ITEM_HEART_SCALE, 1
 	goto FallarborTown_House2_EventScript_201452

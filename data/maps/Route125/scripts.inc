@@ -5,21 +5,20 @@ Route125_MapScripts:: @ 81F6748
 	.byte 0
 
 Route125_MapScript1_1F6758: @ 81F6758
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, Route125_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Route125_EventScript_27207A
 	compare VAR_0x4039, 1
-	call_if 1, Route125_EventScript_273D13
+	call_if_eq Route125_EventScript_273D13
 	compare VAR_0x4037, 11
-	call_if 1, Route125_EventScript_273D17
+	call_if_eq Route125_EventScript_273D17
 	compare VAR_0x4037, 12
-	call_if 1, Route125_EventScript_273D17
+	call_if_eq Route125_EventScript_273D17
 	end
 
 Route125_MapScript1_1F6783: @ 81F6783
 	compare VAR_0x4037, 11
-	call_if 1, Route125_EventScript_273A85
+	call_if_eq Route125_EventScript_273A85
 	compare VAR_0x4037, 12
-	call_if 1, Route125_EventScript_273AF2
+	call_if_eq Route125_EventScript_273AF2
 	end
 
 Route125_MapScript2_1F679A: @ 81F679A
@@ -50,7 +49,7 @@ Route125_EventScript_1F6800:: @ 81F6800
 	trainerbattle_single TRAINER_ERNEST_1, Route125_Text_2A16FC, Route125_Text_2A173A, Route125_EventScript_1F682C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route125_EventScript_1F684B
+	goto_if_eq Route125_EventScript_1F684B
 	msgbox Route125_Text_2A1755, MSGBOX_DEFAULT
 	release
 	end

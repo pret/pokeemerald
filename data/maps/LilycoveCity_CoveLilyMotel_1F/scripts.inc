@@ -3,10 +3,8 @@ LilycoveCity_CoveLilyMotel_1F_MapScripts:: @ 8218188
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 	lockall
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA
-	checkflag FLAG_BADGE07_GET
-	goto_eq LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3
+	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA
+	goto_if_set FLAG_BADGE07_GET, LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218264, MSGBOX_DEFAULT
 	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
 	waitmovement 0

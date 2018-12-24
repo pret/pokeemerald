@@ -19,7 +19,7 @@ Route106_EventScript_1EE4C1:: @ 81EE4C1
 	trainerbattle_single TRAINER_ELLIOT_1, Route106_Text_296327, Route106_Text_29635C, Route106_EventScript_1EE4ED
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route106_EventScript_1EE50C
+	goto_if_eq Route106_EventScript_1EE50C
 	msgbox Route106_Text_29638C, MSGBOX_DEFAULT
 	release
 	end

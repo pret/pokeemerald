@@ -11,11 +11,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_238C59:: @ 8238C59
 	getplayerxy VAR_TEMP_2, VAR_TEMP_3
 	setvar VAR_TEMP_4, 1
 	compare VAR_TEMP_2, 21
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CD1
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238CD1
 	compare VAR_TEMP_2, 36
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CD7
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238CD7
 	compare VAR_TEMP_3, 2
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CDD
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238CDD
 	switch VAR_TEMP_4
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_238CE3
 	case 2, AbandonedShip_HiddenFloorRooms_EventScript_238D0C
@@ -45,7 +45,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238CE3:: @ 8238CE3
 	dofieldeffect 54
 	specialvar VAR_RESULT, FoundAbandonedShipRoom4Key
 	compare VAR_RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DD3
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DD3
 	waitfieldeffect 54
 	delay 10
 	end
@@ -56,10 +56,10 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D0C:: @ 8238D0C
 AbandonedShip_HiddenFloorRooms_EventScript_238D0D:: @ 8238D0D
 	specialvar VAR_RESULT, FoundAbandonedShipRoom1Key
 	compare VAR_RESULT, 1
-	goto_eq AbandonedShip_HiddenFloorRooms_EventScript_238D32
+	goto_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238D32
 	delay 20
 	compare VAR_RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DB3
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DB3
 	waitfieldeffect 54
 	delay 10
 	end
@@ -79,7 +79,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D33:: @ 8238D33
 	dofieldeffect 54
 	specialvar VAR_RESULT, FoundAbandonedShipRoom6Key
 	compare VAR_RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DE3
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DE3
 	waitfieldeffect 54
 	delay 10
 	end
@@ -100,7 +100,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D6B:: @ 8238D6B
 	dofieldeffect 54
 	specialvar VAR_RESULT, FoundAbandonedShipRoom2Key
 	compare VAR_RESULT, 0
-	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DC3
+	call_if_eq AbandonedShip_HiddenFloorRooms_EventScript_238DC3
 	waitfieldeffect 54
 	delay 10
 	end

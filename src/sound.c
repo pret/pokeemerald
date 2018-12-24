@@ -28,7 +28,6 @@ IWRAM_DATA static u16 sFanfareCounter;
 // iwram common
 bool8 gDisableMusic;
 
-extern u32 gBattleTypeFlags;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
@@ -36,8 +35,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE3;
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable2[];
 extern const struct Fanfare sFanfares[];
-
-extern u16 SpeciesToCryId(u16);
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);

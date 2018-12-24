@@ -25,7 +25,7 @@ TrainerHill_Elevator_EventScript_269375:: @ 8269375
 	lockall
 	msgbox TrainerHill_Elevator_Text_268F3E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq TrainerHill_Elevator_EventScript_269360
+	goto_if_eq TrainerHill_Elevator_EventScript_269360
 	releaseall
 	applymovement 1, TrainerHill_Elevator_Movement_2693F0
 	waitmovement 0

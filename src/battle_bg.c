@@ -11,6 +11,7 @@
 #include "link.h"
 #include "main.h"
 #include "menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"
@@ -30,8 +31,6 @@ struct BattleBackground
     const void *entryTilemap;
     const void *palette;
 };
-
-extern u8 GetCurrentMapBattleScene(void);
 
 // .rodata
 static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?

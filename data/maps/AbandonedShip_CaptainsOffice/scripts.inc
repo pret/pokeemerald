@@ -4,13 +4,11 @@ AbandonedShip_CaptainsOffice_MapScripts:: @ 82387E1
 AbandonedShip_CaptainsOffice_EventScript_2387E2:: @ 82387E2
 	lock
 	faceplayer
-	checkflag FLAG_TRADED_SCANNER_TO_STERN
-	goto_eq AbandonedShip_CaptainsOffice_EventScript_23881A
+	goto_if_set FLAG_TRADED_SCANNER_TO_STERN, AbandonedShip_CaptainsOffice_EventScript_23881A
 	checkitem ITEM_SCANNER, 1
 	compare VAR_RESULT, 1
-	goto_eq AbandonedShip_CaptainsOffice_EventScript_238810
-	checkflag FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER
-	goto_eq AbandonedShip_CaptainsOffice_EventScript_23881A
+	goto_if_eq AbandonedShip_CaptainsOffice_EventScript_238810
+	goto_if_set FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER, AbandonedShip_CaptainsOffice_EventScript_23881A
 	msgbox AbandonedShip_CaptainsOffice_Text_238824, MSGBOX_DEFAULT
 	release
 	end

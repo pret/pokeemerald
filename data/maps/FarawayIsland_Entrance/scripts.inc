@@ -21,7 +21,7 @@ FarawayIsland_Entrance_EventScript_267CA2:: @ 8267CA2
 	faceplayer
 	msgbox FarawayIsland_Entrance_Text_2C6B42, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq FarawayIsland_Entrance_EventScript_267CE7
+	goto_if_eq FarawayIsland_Entrance_EventScript_267CE7
 	msgbox FarawayIsland_Entrance_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, FarawayIsland_Entrance_Movement_2725AA

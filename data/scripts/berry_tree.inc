@@ -23,7 +23,7 @@ Route102_EventScript_274359:: @ 8274359
 	faceplayer
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 1
-	goto_eq Route102_EventScript_274374
+	goto_if_eq Route102_EventScript_274374
 	message Route102_Text_2744F0
 	waitmessage
 	waitbuttonpress
@@ -33,9 +33,9 @@ Route102_EventScript_274359:: @ 8274359
 Route102_EventScript_274374:: @ 8274374
 	msgbox Route102_Text_274507, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route102_EventScript_274393
+	goto_if_eq Route102_EventScript_274393
 	compare VAR_RESULT, 0
-	goto_eq Route102_EventScript_2743AF
+	goto_if_eq Route102_EventScript_2743AF
 	end
 
 Route102_EventScript_274393:: @ 8274393
@@ -44,7 +44,7 @@ Route102_EventScript_274393:: @ 8274393
 	special Bag_ChooseBerry
 	waitstate
 	compare VAR_ITEM_ID, 0
-	goto_eq Route102_EventScript_2743AF
+	goto_if_eq Route102_EventScript_2743AF
 	takeitem VAR_ITEM_ID, 1
 	call Route102_EventScript_2744DD
 
@@ -87,9 +87,9 @@ Route102_EventScript_2743E1:: @ 82743E1
 
 Route102_EventScript_2743F6:: @ 82743F6
 	compare VAR_0x8005, 0
-	goto_eq Route102_EventScript_27441A
+	goto_if_eq Route102_EventScript_27441A
 	compare VAR_0x8005, 4
-	goto_eq Route102_EventScript_274413
+	goto_if_eq Route102_EventScript_274413
 	bufferstring 1, Route102_Text_2745E5
 	return
 
@@ -108,14 +108,14 @@ Route102_EventScript_274421:: @ 8274421
 	special EventObjectInteractionGetBerryCountString
 	msgbox Route102_Text_2745EE, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route102_EventScript_274448
+	goto_if_eq Route102_EventScript_274448
 	compare VAR_RESULT, 0
-	goto_eq Route102_EventScript_274479
+	goto_if_eq Route102_EventScript_274479
 
 Route102_EventScript_274448:: @ 8274448
 	special EventObjectInteractionPickBerryTree
 	compare VAR_0x8004, 0
-	goto_eq Route102_EventScript_274470
+	goto_if_eq Route102_EventScript_274470
 	special sub_80EED34
 	special EventObjectInteractionRemoveBerryTree
 	message Route102_Text_27461B
@@ -153,13 +153,13 @@ Route102_EventScript_274482:: @ 8274482
 Route102_EventScript_27448D:: @ 827448D
 	checkitem ITEM_WAILMER_PAIL, 1
 	compare VAR_RESULT, 0
-	goto_eq Route102_EventScript_2744BE
+	goto_if_eq Route102_EventScript_2744BE
 	special EventObjectInteractionGetBerryName
 	msgbox Route102_Text_2746E4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route102_EventScript_2744C4
+	goto_if_eq Route102_EventScript_2744C4
 	compare VAR_RESULT, 0
-	goto_eq Route102_EventScript_2744BE
+	goto_if_eq Route102_EventScript_2744BE
 
 Route102_EventScript_2744BE:: @ 82744BE
 	releaseall

@@ -3,8 +3,7 @@ MeteorFalls_1F_1R_MapScripts:: @ 822BD2A
 	.byte 0
 
 MeteorFalls_1F_1R_MapScript1_22BD30: @ 822BD30
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, MeteorFalls_1F_1R_EventScript_22BD3A
+	call_if_set FLAG_SYS_GAME_CLEAR, MeteorFalls_1F_1R_EventScript_22BD3A
 	end
 
 MeteorFalls_1F_1R_EventScript_22BD3A:: @ 822BD3A
@@ -221,8 +220,7 @@ MeteorFalls_1F_1R_Movement_22BF1D: @ 822BF1D
 MeteorFalls_1F_1R_EventScript_22BF25:: @ 822BF25
 	lock
 	faceplayer
-	checkflag FLAG_0x0F4
-	goto_eq MeteorFalls_1F_1R_EventScript_22BF3D
+	goto_if_set FLAG_0x0F4, MeteorFalls_1F_1R_EventScript_22BF3D
 	setflag FLAG_0x0F4
 	msgbox MeteorFalls_1F_1R_Text_22C342, MSGBOX_DEFAULT
 	release

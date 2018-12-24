@@ -7,8 +7,7 @@ ShoalCave_LowTideLowerRoom_MapScript1_23715C: @ 823715C
 	end
 
 ShoalCave_LowTideLowerRoom_EventScript_237162:: @ 8237162
-	checkflag FLAG_0x3BB
-	goto_eq ShoalCave_LowTideLowerRoom_EventScript_237175
+	goto_if_set FLAG_0x3BB, ShoalCave_LowTideLowerRoom_EventScript_237175
 	setmetatile 18, 2, 856, 1
 	return
 
@@ -17,11 +16,10 @@ ShoalCave_LowTideLowerRoom_EventScript_237175:: @ 8237175
 
 ShoalCave_LowTideLowerRoom_EventScript_237176:: @ 8237176
 	lockall
-	checkflag FLAG_0x3BB
-	goto_eq ShoalCave_LowTideLowerRoom_EventScript_2371A8
+	goto_if_set FLAG_0x3BB, ShoalCave_LowTideLowerRoom_EventScript_2371A8
 	giveitem_std ITEM_SHOAL_SALT
 	compare VAR_RESULT, 0
-	goto_eq ShoalCave_LowTideLowerRoom_EventScript_272054
+	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_272054
 	setmetatile 18, 2, 858, 0
 	special DrawWholeMapView
 	setflag FLAG_0x3BB
@@ -36,12 +34,11 @@ ShoalCave_LowTideLowerRoom_EventScript_2371A8:: @ 82371A8
 ShoalCave_LowTideLowerRoom_EventScript_2371B2:: @ 82371B2
 	lock
 	faceplayer
-	checkflag FLAG_0x11B
-	goto_eq ShoalCave_LowTideLowerRoom_EventScript_2371E1
+	goto_if_set FLAG_0x11B, ShoalCave_LowTideLowerRoom_EventScript_2371E1
 	msgbox ShoalCave_LowTideLowerRoom_Text_2371EB, MSGBOX_DEFAULT
 	giveitem_std ITEM_FOCUS_BAND
 	compare VAR_RESULT, 0
-	goto_eq ShoalCave_LowTideLowerRoom_EventScript_272054
+	goto_if_eq ShoalCave_LowTideLowerRoom_EventScript_272054
 	setflag FLAG_0x11B
 	release
 	end

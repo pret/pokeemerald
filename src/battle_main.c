@@ -39,6 +39,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "trig.h"
@@ -59,7 +60,6 @@
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
-extern u8 gUnknown_0203CF00[];
 
 extern const u16 gBattleTextboxPalette[];
 extern const struct BgTemplate gBattleBgTemplates[];
@@ -69,25 +69,9 @@ extern const u8 *const gBattlescriptsForBallThrow[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
-extern const struct ScanlineEffectParams gBattleIntroSlideScanlineEffectParams;
-
-// strings
-extern const u8 gText_LinkStandby3[];
-extern const u8 gText_BattleRecordCouldntBeSaved[];
-extern const u8 gText_ShedinjaJapaneseName[];
-extern const u8 gText_Poison[];
-extern const u8 gText_Sleep[];
-extern const u8 gText_Paralysis[];
-extern const u8 gText_Burn[];
-extern const u8 gText_Ice[];
-extern const u8 gText_Confusion[];
-extern const u8 gText_Love[];
 
 // functions
-extern void sub_81B9150(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
-extern void sub_81B8FB0(u8, u8); // party menu
-extern u8 pokemon_order_func(u8); // party menu
 
 // this file's functions
 static void CB2_InitBattleInternal(void);
@@ -105,9 +89,9 @@ static void sub_8038F34(void);
 static void sub_80392A8(void);
 static void sub_803937C(void);
 static void sub_803939C(void);
-static void sub_803980C(struct Sprite *sprite);
-static void sub_8039838(struct Sprite *sprite);
-static void sub_8039894(struct Sprite *sprite);
+static void SpriteCb_MoveWildMonToRight(struct Sprite *sprite);
+static void SpriteCb_WildMonShowHealthbox(struct Sprite *sprite);
+static void SpriteCb_WildMonAnimate(struct Sprite *sprite);
 static void sub_80398D0(struct Sprite *sprite);
 static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
 static void sub_8039AF4(struct Sprite *sprite);
@@ -277,6 +261,70 @@ u8 gNumberOfMovesToChoose;
 u8 gUnknown_03005D7C[MAX_BATTLERS_COUNT];
 
 // rom const data
+static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
+{
+    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
+};
+
+// unused
+static const struct ScanlineEffectParams sIntroScanlineParams32Bit =
+{
+    (void *)REG_ADDR_BG3HOFS, SCANLINE_EFFECT_DMACNT_32BIT, 1
+};
+
+const struct SpriteTemplate gUnknown_0831AC88 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8038528,
+};
+
+static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
+
+const struct OamData gOamData_831ACA8 =
+{
+    .y = 0,
+    .affineMode = 1,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_831ACB0 =
+{
+    .y = 0,
+    .affineMode = 1,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 2,
+    .affineParam = 0
+};
+
+// Unknown and unused data. Feel free to remove.
+static const u16 gUnknown_0831ACB8[] = {0, 5, 0xfffe, 0};
+static const u16 *const gUnknown_0831ACC0 = gUnknown_0831ACB8;
+static const u16 gUnknown_0831ACC4[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0x7ffe, 1, 0, 0};
+static const u16 *const gUnknown_0831ACDC = gUnknown_0831ACC4;
+
 static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
 
 // format: attacking type, defending type, damage multiplier
@@ -615,7 +663,7 @@ static void CB2_InitBattleInternal(void)
             gScanlineEffectRegBuffers[1][i] = 0xFF10;
         }
 
-        ScanlineEffect_SetParams(gBattleIntroSlideScanlineEffectParams);
+        ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
     }
 
     ResetPaletteFade();
@@ -2581,7 +2629,7 @@ static void TryCorrectShedinjaLanguage(struct Pokemon *mon)
      && GetMonData(mon, MON_DATA_LANGUAGE) != language)
     {
         GetMonData(mon, MON_DATA_NICKNAME, nickname);
-        if (StringCompareWithoutExtCtrlCodes(nickname, gText_ShedinjaJapaneseName) == 0)
+        if (StringCompareWithoutExtCtrlCodes(nickname, sText_ShedinjaJpnName) == 0)
             SetMonData(mon, MON_DATA_LANGUAGE, &language);
     }
 }
@@ -2594,9 +2642,9 @@ u32 sub_80397C4(u32 setId, u32 tableId)
 #define sBattler            data[0]
 #define sSpeciesId          data[2]
 
-void oac_poke_opponent(struct Sprite *sprite)
+void SpriteCb_WildMon(struct Sprite *sprite)
 {
-    sprite->callback = sub_803980C;
+    sprite->callback = SpriteCb_MoveWildMonToRight;
     StartSpriteAnimIfDifferent(sprite, 0);
     if (WILD_DOUBLE_BATTLE)
         BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 10, RGB(8, 8, 8));
@@ -2604,25 +2652,25 @@ void oac_poke_opponent(struct Sprite *sprite)
         BeginNormalPaletteFade((0x10000 << sprite->sBattler), 0, 10, 10, RGB(8, 8, 8));
 }
 
-static void sub_803980C(struct Sprite *sprite)
+static void SpriteCb_MoveWildMonToRight(struct Sprite *sprite)
 {
     if ((gIntroSlideFlags & 1) == 0)
     {
         sprite->pos2.x += 2;
         if (sprite->pos2.x == 0)
         {
-            sprite->callback = sub_8039838;
+            sprite->callback = SpriteCb_WildMonShowHealthbox;
         }
     }
 }
 
-static void sub_8039838(struct Sprite *sprite)
+static void SpriteCb_WildMonShowHealthbox(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
         sub_8076918(sprite->sBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
-        sprite->callback = sub_8039894;
+        sprite->callback = SpriteCb_WildMonAnimate;
         StartSpriteAnimIfDifferent(sprite, 0);
         if (WILD_DOUBLE_BATTLE)
             BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 0, RGB(8, 8, 8));
@@ -2631,7 +2679,7 @@ static void sub_8039838(struct Sprite *sprite)
     }
 }
 
-static void sub_8039894(struct Sprite *sprite)
+static void SpriteCb_WildMonAnimate(struct Sprite *sprite)
 {
     if (!gPaletteFade.active)
     {

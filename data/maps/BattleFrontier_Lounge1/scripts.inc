@@ -4,10 +4,8 @@ BattleFrontier_Lounge1_MapScripts:: @ 825E774
 BattleFrontier_Lounge1_EventScript_25E775:: @ 825E775
 	lock
 	faceplayer
-	checkflag FLAG_0x153
-	call_if 0, BattleFrontier_Lounge1_EventScript_25E7AD
-	checkflag FLAG_0x153
-	call_if 1, BattleFrontier_Lounge1_EventScript_25E7B6
+	call_if_unset FLAG_0x153, BattleFrontier_Lounge1_EventScript_25E7AD
+	call_if_set FLAG_0x153, BattleFrontier_Lounge1_EventScript_25E7B6
 	setflag FLAG_0x153
 	goto BattleFrontier_Lounge1_EventScript_25E792
 	end
@@ -16,9 +14,9 @@ BattleFrontier_Lounge1_EventScript_25E792:: @ 825E792
 	special sub_81B94B0
 	waitstate
 	compare VAR_0x8004, 255
-	goto_if 5, BattleFrontier_Lounge1_EventScript_25E7BF
+	goto_if_ne BattleFrontier_Lounge1_EventScript_25E7BF
 	compare VAR_0x8004, 255
-	goto_eq BattleFrontier_Lounge1_EventScript_25E943
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E943
 	end
 
 BattleFrontier_Lounge1_EventScript_25E7AD:: @ 825E7AD
@@ -32,16 +30,16 @@ BattleFrontier_Lounge1_EventScript_25E7B6:: @ 825E7B6
 BattleFrontier_Lounge1_EventScript_25E7BF:: @ 825E7BF
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, 412
-	goto_eq BattleFrontier_Lounge1_EventScript_25E7FF
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E7FF
 	special sub_8139D98
 	compare VAR_0x8005, 90
-	goto_if 3, BattleFrontier_Lounge1_EventScript_25E87F
+	goto_if_le BattleFrontier_Lounge1_EventScript_25E87F
 	compare VAR_0x8005, 120
-	goto_if 3, BattleFrontier_Lounge1_EventScript_25E88D
+	goto_if_le BattleFrontier_Lounge1_EventScript_25E88D
 	compare VAR_0x8005, 150
-	goto_if 3, BattleFrontier_Lounge1_EventScript_25E89B
+	goto_if_le BattleFrontier_Lounge1_EventScript_25E89B
 	compare VAR_0x8005, 151
-	goto_if 4, BattleFrontier_Lounge1_EventScript_25E8A9
+	goto_if_ge BattleFrontier_Lounge1_EventScript_25E8A9
 	end
 
 BattleFrontier_Lounge1_EventScript_25E7FF:: @ 825E7FF
@@ -51,28 +49,28 @@ BattleFrontier_Lounge1_EventScript_25E7FF:: @ 825E7FF
 
 BattleFrontier_Lounge1_EventScript_25E80D:: @ 825E80D
 	compare VAR_0x8006, 0
-	goto_eq BattleFrontier_Lounge1_EventScript_25E8B7
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E8B7
 	compare VAR_0x8006, 1
-	goto_eq BattleFrontier_Lounge1_EventScript_25E8C5
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E8C5
 	compare VAR_0x8006, 2
-	goto_eq BattleFrontier_Lounge1_EventScript_25E8D3
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E8D3
 	compare VAR_0x8006, 3
-	goto_eq BattleFrontier_Lounge1_EventScript_25E8E1
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E8E1
 	compare VAR_0x8006, 4
-	goto_eq BattleFrontier_Lounge1_EventScript_25E8EF
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E8EF
 	compare VAR_0x8006, 5
-	goto_eq BattleFrontier_Lounge1_EventScript_25E8FD
+	goto_if_eq BattleFrontier_Lounge1_EventScript_25E8FD
 	end
 
 BattleFrontier_Lounge1_EventScript_25E850:: @ 825E850
 	compare VAR_0x8007, 15
-	goto_if 3, BattleFrontier_Lounge1_EventScript_25E90B
+	goto_if_le BattleFrontier_Lounge1_EventScript_25E90B
 	compare VAR_0x8007, 25
-	goto_if 3, BattleFrontier_Lounge1_EventScript_25E919
+	goto_if_le BattleFrontier_Lounge1_EventScript_25E919
 	compare VAR_0x8007, 30
-	goto_if 3, BattleFrontier_Lounge1_EventScript_25E927
+	goto_if_le BattleFrontier_Lounge1_EventScript_25E927
 	compare VAR_0x8007, 31
-	goto_if 4, BattleFrontier_Lounge1_EventScript_25E935
+	goto_if_ge BattleFrontier_Lounge1_EventScript_25E935
 	end
 
 BattleFrontier_Lounge1_EventScript_25E87D:: @ 825E87D

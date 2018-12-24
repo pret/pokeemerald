@@ -11,9 +11,9 @@ Route111_OldLadysRestStop_EventScript_22A920:: @ 822A920
 	faceplayer
 	msgbox Route111_OldLadysRestStop_Text_22A978, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route111_OldLadysRestStop_EventScript_22A941
+	goto_if_eq Route111_OldLadysRestStop_EventScript_22A941
 	compare VAR_RESULT, 0
-	goto_eq Route111_OldLadysRestStop_EventScript_22A96E
+	goto_if_eq Route111_OldLadysRestStop_EventScript_22A96E
 	end
 
 Route111_OldLadysRestStop_EventScript_22A941:: @ 822A941
@@ -22,9 +22,9 @@ Route111_OldLadysRestStop_EventScript_22A941:: @ 822A941
 	call Route111_OldLadysRestStop_EventScript_272083
 	msgbox Route111_OldLadysRestStop_Text_22AA16, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route111_OldLadysRestStop_EventScript_22A941
+	goto_if_eq Route111_OldLadysRestStop_EventScript_22A941
 	compare VAR_RESULT, 0
-	goto_eq Route111_OldLadysRestStop_EventScript_22A96E
+	goto_if_eq Route111_OldLadysRestStop_EventScript_22A96E
 	end
 
 Route111_OldLadysRestStop_EventScript_22A96E:: @ 822A96E

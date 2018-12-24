@@ -131,10 +131,6 @@ struct FactorySwapMonsStruct
     bool8 unk30;
 };
 
-extern const u16 gBattleFrontierHeldItems[];
-extern const struct FacilityMon gBattleFrontierMons[];
-extern const struct FacilityMon gSlateportBattleTentMons[];
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const u32 gUnknown_085B18AC[];
 
 // This file's functions.

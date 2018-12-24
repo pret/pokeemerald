@@ -14,9 +14,9 @@ PacifidlogTown_House4_EventScript_203F5E:: @ 8203F5E
 	faceplayer
 	msgbox PacifidlogTown_House4_Text_204035, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq PacifidlogTown_House4_EventScript_203F7F
+	goto_if_eq PacifidlogTown_House4_EventScript_203F7F
 	compare VAR_RESULT, 0
-	goto_eq PacifidlogTown_House4_EventScript_203F89
+	goto_if_eq PacifidlogTown_House4_EventScript_203F89
 	end
 
 PacifidlogTown_House4_EventScript_203F7F:: @ 8203F7F

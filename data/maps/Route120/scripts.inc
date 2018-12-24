@@ -5,29 +5,28 @@ Route120_MapScripts:: @ 81F53EC
 	.byte 0
 
 Route120_MapScript1_1F53FC: @ 81F53FC
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, Route120_EventScript_1F5406
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route120_EventScript_1F5406
 	end
 
 Route120_EventScript_1F5406:: @ 81F5406
 	compare VAR_0x8009, 0
-	call_if 1, Route120_EventScript_1F5449
+	call_if_eq Route120_EventScript_1F5449
 	compare VAR_0x8009, 1
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 2
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 3
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 4
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	compare VAR_0x8009, 5
-	call_if 1, Route120_EventScript_1F5460
+	call_if_eq Route120_EventScript_1F5460
 	return
 
 Route120_EventScript_1F5449:: @ 81F5449
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, Route120_EventScript_27374E
+	goto_if_ne Route120_EventScript_27374E
 	removeobject 30
 	removeobject 36
 	return
@@ -35,17 +34,14 @@ Route120_EventScript_1F5449:: @ 81F5449
 Route120_EventScript_1F5460:: @ 81F5460
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, Route120_EventScript_27374E
+	goto_if_ne Route120_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
 Route120_MapScript1_1F5474: @ 81F5474
-	checkflag FLAG_0x0E4
-	call_if 0, Route120_EventScript_1F5490
-	checkflag FLAG_0x11D
-	call_if 1, Route120_EventScript_1F54A3
-	checkflag FLAG_0x11D
-	call_if 0, Route120_EventScript_1F54C8
+	call_if_unset FLAG_0x0E4, Route120_EventScript_1F5490
+	call_if_set FLAG_0x11D, Route120_EventScript_1F54A3
+	call_if_unset FLAG_0x11D, Route120_EventScript_1F54C8
 	end
 
 Route120_EventScript_1F5490:: @ 81F5490
@@ -72,11 +68,11 @@ Route120_MapScript1_1F54CD: @ 81F54CD
 Route120_EventScript_1F54D8:: @ 81F54D8
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_1, 14
-	goto_if 3, Route120_EventScript_1F5503
+	goto_if_le Route120_EventScript_1F5503
 	compare VAR_TEMP_1, 60
-	goto_if 3, Route120_EventScript_1F5507
+	goto_if_le Route120_EventScript_1F5507
 	compare VAR_TEMP_1, 61
-	goto_if 4, Route120_EventScript_1F54FF
+	goto_if_ge Route120_EventScript_1F54FF
 	return
 
 Route120_EventScript_1F54FF:: @ 81F54FF
@@ -89,9 +85,9 @@ Route120_EventScript_1F5503:: @ 81F5503
 
 Route120_EventScript_1F5507:: @ 81F5507
 	compare VAR_TEMP_0, 7
-	goto_if 3, Route120_EventScript_1F5523
+	goto_if_le Route120_EventScript_1F5523
 	compare VAR_TEMP_0, 19
-	goto_if 3, Route120_EventScript_1F5503
+	goto_if_le Route120_EventScript_1F5503
 	goto Route120_EventScript_1F5523
 	end
 
@@ -103,13 +99,12 @@ Route120_EventScript_1F5527:: @ 81F5527
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_0x92E
-	goto_eq Route120_EventScript_1F5625
+	goto_if_set FLAG_0x92E, Route120_EventScript_1F5625
 	msgbox Route120_Text_2A70C7, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, Route120_EventScript_1F562F
+	call_if_eq Route120_EventScript_1F562F
 	compare VAR_RESULT, 0
-	call_if 1, Route120_EventScript_1F5638
+	call_if_eq Route120_EventScript_1F5638
 	specialvar VAR_RESULT, GetPlayerTrainerIdOnesDigit
 	switch VAR_RESULT
 	case 0, Route120_EventScript_1F55CA
@@ -152,7 +147,7 @@ Route120_EventScript_1F55F6:: @ 81F55F6
 Route120_EventScript_1F5601:: @ 81F5601
 	giveitem_std VAR_0x8004
 	compare VAR_RESULT, 0
-	goto_eq Route120_EventScript_272054
+	goto_if_eq Route120_EventScript_272054
 	setflag FLAG_0x92E
 	msgbox Route120_Text_2A71D5, MSGBOX_DEFAULT
 	release
@@ -174,11 +169,10 @@ Route120_EventScript_1F5638:: @ 81F5638
 Route120_EventScript_1F5641:: @ 81F5641
 	lock
 	faceplayer
-	checkflag FLAG_0x122
-	goto_eq Route120_EventScript_1F5672
+	goto_if_set FLAG_0x122, Route120_EventScript_1F5672
 	msgbox Route120_Text_1F5998, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route120_EventScript_1F5665
+	goto_if_eq Route120_EventScript_1F5665
 	goto Route120_EventScript_1F568B
 	end
 
@@ -191,7 +185,7 @@ Route120_EventScript_1F5665:: @ 81F5665
 Route120_EventScript_1F5672:: @ 81F5672
 	msgbox Route120_Text_1F5ADE, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route120_EventScript_1F5665
+	goto_if_eq Route120_EventScript_1F5665
 	goto Route120_EventScript_1F568B
 	end
 
@@ -199,9 +193,9 @@ Route120_EventScript_1F568B:: @ 81F568B
 	msgbox Route120_Text_1F5B0F, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, Route120_EventScript_1F57A3
+	call_if_eq Route120_EventScript_1F57A3
 	compare VAR_FACING, 3
-	call_if 1, Route120_EventScript_1F57AE
+	call_if_eq Route120_EventScript_1F57AE
 	applymovement 31, Route120_Movement_2725A4
 	waitmovement 0
 	delay 20
@@ -222,11 +216,11 @@ Route120_EventScript_1F568B:: @ 81F568B
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq Route120_EventScript_1F571C
+	goto_if_eq Route120_EventScript_1F571C
 	compare VAR_RESULT, 4
-	goto_eq Route120_EventScript_1F571C
+	goto_if_eq Route120_EventScript_1F571C
 	compare VAR_RESULT, 5
-	goto_eq Route120_EventScript_1F571C
+	goto_if_eq Route120_EventScript_1F571C
 	goto Route120_EventScript_1F572C
 	end
 
@@ -299,7 +293,7 @@ Route120_EventScript_1F57EE:: @ 81F57EE
 	trainerbattle_single TRAINER_ROBERT_1, Route120_Text_29E6E3, Route120_Text_29E70A, Route120_EventScript_1F581A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route120_EventScript_1F5839
+	goto_if_eq Route120_EventScript_1F5839
 	msgbox Route120_Text_29E726, MSGBOX_DEFAULT
 	release
 	end
@@ -331,7 +325,7 @@ Route120_EventScript_1F587E:: @ 81F587E
 	trainerbattle_single TRAINER_JEFFREY_1, Route120_Text_29E9D7, Route120_Text_29E9FF, Route120_EventScript_1F58AA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route120_EventScript_1F58C9
+	goto_if_eq Route120_EventScript_1F58C9
 	msgbox Route120_Text_29EA08, MSGBOX_DEFAULT
 	release
 	end

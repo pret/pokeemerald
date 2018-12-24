@@ -18,8 +18,7 @@ FortreeCity_EventScript_1E25B6:: @ 81E25B6
 FortreeCity_EventScript_1E25BF:: @ 81E25BF
 	lock
 	faceplayer
-	checkflag FLAG_0x127
-	goto_eq FortreeCity_EventScript_1E25D4
+	goto_if_set FLAG_0x127, FortreeCity_EventScript_1E25D4
 	msgbox FortreeCity_Text_1E2738, MSGBOX_DEFAULT
 	release
 	end
@@ -58,7 +57,7 @@ FortreeCity_EventScript_1E2614:: @ 81E2614
 	faceplayer
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare VAR_RESULT, 1
-	goto_eq FortreeCity_EventScript_1E2630
+	goto_if_eq FortreeCity_EventScript_1E2630
 	msgbox FortreeCity_Text_1E29E5, MSGBOX_DEFAULT
 	release
 	end
@@ -66,7 +65,7 @@ FortreeCity_EventScript_1E2614:: @ 81E2614
 FortreeCity_EventScript_1E2630:: @ 81E2630
 	msgbox FortreeCity_Text_1E2A08, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq FortreeCity_EventScript_1E2645
+	goto_if_eq FortreeCity_EventScript_1E2645
 	release
 	end
 
