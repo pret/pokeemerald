@@ -9,7 +9,7 @@
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-#include "fldeff_groundshake.h"
+#include "fldeff.h"
 #include "gpu_regs.h"
 #include "main.h"
 #include "menu.h"

@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
+#include "fldeff.h"
 #include "alloc.h"
 #include "random.h"
 #include "roulette_util.h"
@@ -128,10 +129,11 @@ bool8 sub_81BE66C(void)
 {
     if (!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A))
         return 0;
-    return FlagGet(FLAG_0x14E);
+    else
+        return FlagGet(FLAG_0x14E);
 }
 
-void sub_81BE698(u8 taskId)
+static void sub_81BE698(u8 taskId)
 {
     sub_8151E50(&(gUnknown_0203CF18->unk4));
 }
@@ -143,11 +145,12 @@ void sub_81BE6AC(void)
 
 void sub_81BE6B8(void)
 {
-    if(gUnknown_0203CF18 != NULL)
+    if (gUnknown_0203CF18 != NULL)
     {
         gUnknown_0203CF18 = NULL;
         return;
     }
+
     if(!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A) || !FlagGet(FLAG_0x14E))
         return;
 

@@ -37,9 +37,9 @@
 #include "gym_leader_rematch.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "fldeff.h"
 #include "fldeff_misc.h"
 #include "field_control_avatar.h"
-#include "fldeff_groundshake.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
 

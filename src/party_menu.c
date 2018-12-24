@@ -22,7 +22,8 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-#include "fldeff_softboiled.h"
+#include "fldeff.h"
+#include "fldeff_misc.h"
 #include "frontier_util.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -72,14 +73,16 @@
 #include "constants/species.h"
 #include "constants/vars.h"
 
-enum {
+enum
+{
     CAN_LEARN_MOVE,
     CANNOT_LEARN_MOVE,
     ALREADY_KNOWS_MOVE,
     CANNOT_LEARN_MOVE_IS_EGG
 };
 
-struct Unk_Rodata1 {
+struct Unk_Rodata1
+{
     void (*unk0)(u8, u8, u8, u8, u8, u8);
     u8 unk4[24];
     u8 unk1C;
@@ -88,7 +91,8 @@ struct Unk_Rodata1 {
     u8 unk1F;
 };
 
-struct Struct203CEC4 {
+struct Struct203CEC4
+{
     TaskFunc unk0;
     MainCallback exitCallback;
     u32 unk8_0:1;
@@ -104,24 +108,15 @@ struct Struct203CEC4 {
     s16 data[16];
 };
 
-struct Struct203CEDC {
-    struct Unk_Rodata1 *unk0;
-    u8 *unk4;
+struct Struct203CEDC
+{
+    const struct Unk_Rodata1 *unk0;
+    const u8 *unk4;
     u8 windowId;
     u8 unk9;
     u8 unkA;
     u8 unkB;
     u8 unkC;
-};
-
-struct Struct8615C08 {
-    const u8 *textPtr;
-    TaskFunc func;
-};
-
-struct Struct8615D9C {
-    bool8 (*fieldMoveFunc)(void);
-    u8 msgID;
 };
 
 static EWRAM_DATA struct Struct203CEC4 *gUnknown_0203CEC4 = NULL;
@@ -138,86 +133,6 @@ EWRAM_DATA u8 gSelectedOrderFromParty[4] = {0};
 static EWRAM_DATA u16 gUnknown_0203CEFC = 0;
 static EWRAM_DATA u16 gUnknown_0203CEFE = 0; // unused
 EWRAM_DATA u8 gUnknown_0203CF00[3] = {0};
-
-// BELOW TO BE CONVERTED TO C
-
-extern u32 gUnknown_08615048[]; // tutor compatibility table
-extern struct BgTemplate gUnknown_086156B8[];
-extern struct Unk_Rodata1 gUnknown_086156C4[2];
-// extern struct Unk_Rodata1 gUnknown_086156E4;
-extern u8 gUnknown_08615704[][6][8];
-extern u8 gUnknown_086157C4[];
-extern u8 gUnknown_086157E0[];
-extern const u8 gUnknown_086157FC[][3];
-extern struct WindowTemplate gUnknown_08615810[];
-extern struct WindowTemplate gUnknown_08615850[];
-extern struct WindowTemplate gUnknown_086158D0[];
-extern struct WindowTemplate gUnknown_08615890[];
-extern struct WindowTemplate gUnknown_08615908;
-extern struct WindowTemplate gUnknown_08615910;
-extern struct WindowTemplate gUnknown_08615918;
-extern struct WindowTemplate gUnknown_08615920;
-extern struct WindowTemplate gUnknown_08615928;
-extern struct WindowTemplate gUnknown_08615930;
-extern struct WindowTemplate gUnknown_08615938;
-extern struct WindowTemplate gUnknown_08615940;
-extern struct WindowTemplate gUnknown_08615948;
-extern struct WindowTemplate gUnknown_08615950;
-extern struct WindowTemplate gUnknown_08615958;
-extern struct WindowTemplate gUnknown_08615960;
-extern struct WindowTemplate gUnknown_08615968;
-extern struct WindowTemplate gUnknown_08615970;
-extern u8 gUnknown_08615988[];
-extern u8 gUnknown_086159CE[];
-extern u8 gUnknown_08615A14[];
-extern u8 gUnknown_08615A4A[];
-extern u8 gUnknown_08615A80[];
-extern u8 gUnknown_08615AB6[];
-extern u8 gUnknown_08615AB8[];
-extern u8 gUnknown_08615ABA[];
-extern u8 gUnknown_08615ABD[];
-extern u8 gUnknown_08615AC0[];
-extern u8 gUnknown_08615AC3[];
-extern u8 gUnknown_08615AC5[];
-extern u8 gUnknown_08615AC7[];
-extern u8 gUnknown_08615AC9[];
-extern u8 gUnknown_08615ACB[];
-extern u8 gUnknown_08615ACD[];
-extern u8 gUnknown_08615AD0[];
-extern u8 gUnknown_08615AD3[];
-extern u8 gUnknown_08615AD6[];
-extern u8 gUnknown_08615AD9[];
-extern u8 gUnknown_08615ADC[];
-extern u8 gUnknown_08615ADF[];
-extern u8 gUnknown_08615AE2[];
-extern u8 gUnknown_08615AE5[];
-extern u8 gUnknown_08615AE8[];
-extern u8 gUnknown_08615AEB[];
-extern u8 gUnknown_08615AEE[];
-extern u8 gUnknown_08615AF1[];
-extern const u8 *gUnknown_08615AF4[];
-extern const u8 *gUnknown_08615B60[];
-extern struct Struct8615C08 gUnknown_08615C08[];
-extern u8 *gUnknown_08615D38[];
-extern u8 gUnknown_08615D70[];
-extern const u16 gUnknown_08615D7E[];
-extern const struct Struct8615D9C gUnknown_08615D9C[];
-extern const u8 *gUnknown_08615E0C[];
-extern const struct SpriteSheet gUnknown_08615EB0;
-extern const struct SpritePalette gUnknown_08615EB8;
-extern struct SpriteTemplate gSpriteTemplate_8615EC0;
-extern const struct CompressedSpriteSheet gUnknown_08615EF8;
-extern const struct CompressedSpritePalette gUnknown_08615F00;
-extern struct SpriteTemplate gSpriteTemplate_8615F08;
-extern const struct CompressedSpriteSheet gUnknown_08615F70;
-extern struct SpriteTemplate gSpriteTemplate_8615F78;
-extern const struct CompressedSpriteSheet gUnknown_08615FF8;
-extern const struct CompressedSpritePalette gUnknown_08616000;
-extern struct SpriteTemplate gSpriteTemplate_8616008;
-extern u8 gUnknown_08616020[];
-extern u16 gUnknown_08616040[];
-
-// ABOVE TO BE CONVERTED TO C
 
 extern void (*gUnknown_03006328)(u8, TaskFunc);
 
@@ -260,8 +175,8 @@ static u8 sub_81B8830(void);
 static bool8 GetBattleEntryEligibility(struct Pokemon *);
 static bool8 sub_81B218C(u8);
 static void DisplayPartyPokemonSelectToTeachMove(u8, u16, u8);
-static u8 CanPartyPokemonLearnTMTutor(struct Pokemon *, u16, u8);
-static void DisplayPartyPokemonBarDetail(u8, const u8*, u8, u8*);
+static u8 CanMonLearnTMTutor(struct Pokemon *, u16, u8);
+static void DisplayPartyPokemonBarDetail(u8, const u8*, u8, const u8*);
 static void DisplayPartyPokemonLevel(u8, struct Struct203CEDC *);
 static void DisplayPartyPokemonGender(u8, u16, u8*, struct Struct203CEDC *);
 static void DisplayPartyPokemonHP(u16, struct Struct203CEDC *);
@@ -320,14 +235,14 @@ static bool16 sub_81B2134(struct Pokemon*);
 static bool16 sub_81B2164(struct Pokemon*);
 static void sub_81B2248(u8);
 static void sub_81B227C(u8);
-static bool8 sub_81B2370(u16, u8);
-static u16 sub_81B2360(u8);
+static bool8 CanLearnTutorMove(u16, u8);
+static u16 GetTutorMove(u8);
 static bool8 sub_81B314C(void);
 static void sub_81B3414(struct Pokemon*, u8);
 static u8 sub_81B8A2C(struct Pokemon*);
 static u8 sub_81B856C(s8);
 static void sub_81B469C(u8);
-static void sub_81B3730(u8);
+static void HandleMenuInput(u8);
 static void sub_81B3828(void);
 static void pokemon_change_order(void);
 static void sub_81B3894(void);
@@ -444,7 +359,1177 @@ static void sub_81B953C(u8);
 static void sub_81B9588(void);
 static void sub_81B9640(u8);
 static void sub_81B97DC(struct Pokemon*, u8, u8);
+static void BlitBitmapToPartyWindow_Default1(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f);
+static void BlitBitmapToPartyWindow_Default2(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f);
+static void CursorCb_Summary(u8 taskId);
+static void CursorCb_Switch(u8 taskId);
+static void CursorCb_Cancel1(u8 taskId);
+static void CursorCb_Item(u8 taskId);
+static void CursorCb_Give(u8 taskId);
+static void CursorCb_TakeItem(u8 taskId);
+static void CursorCb_Mail(u8 taskId);
+static void CursorCb_Read(u8 taskId);
+static void CursorCb_TakeMail(u8 taskId);
+static void CursorCb_Cancel2(u8 taskId);
+static void CursorCb_SendMon(u8 taskId);
+static void CursorCb_Enter(u8 taskId);
+static void CursorCb_NoEntry(u8 taskId);
+static void CursorCb_Store(u8 taskId);
+static void CursorCb_Register(u8 taskId);
+static void CursorCb_Trade1(u8 taskId);
+static void CursorCb_Trade2(u8 taskId);
+static void CursorCb_Toss(u8 taskId);
+static void CursorCb_FieldMove(u8 taskId);
+static bool8 SetUpFieldMove_Surf(void);
+static bool8 SetUpFieldMove_Fly(void);
+static bool8 SetUpFieldMove_Waterfall(void);
+static bool8 SetUpFieldMove_Dive(void);
 
+// static const data
+#include "data/pokemon/tutor_learnsets.h"
+
+static const struct BgTemplate gUnknown_086156B8[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+};
+
+static const struct Unk_Rodata1 gUnknown_086156C4[] =
+{
+    {BlitBitmapToPartyWindow_Default1, {0x18, 0xB, 0x28, 0xD, 0x20, 0x14, 0x20, 8, 0x40, 0x14, 8, 8, 0x26, 0x25, 0x18, 8, 0x35, 0x25, 0x18, 8, 0x18, 0x23, 0x30, 3}, 0xC, 0x22, 0x40, 0x10},
+    {BlitBitmapToPartyWindow_Default2, {0x16, 3, 0x28, 0xD, 0x1E, 0xC, 0x20, 8, 0x3E, 0xC, 8, 8, 0x66, 0xC, 0x18, 8, 0x75, 0xC, 0x18, 8, 0x58, 0xA, 0x30, 3}, 0x4D, 4, 0x40, 0x10},
+};
+
+static const u8 gUnknown_08615704[][6][8] =
+{
+	{
+		{16, 40, 20, 50, 50, 52, 16, 34},
+		{104, 18, 108, 28, 136, 27, 102, 25},
+		{104, 42, 108, 52, 136, 51, 102, 49},
+		{104, 66, 108, 76, 136, 75, 102, 73},
+		{104, 90, 108, 100, 136, 99, 102, 97},
+		{104, 114, 108, 124, 136, 123, 102, 121},
+	},
+	{
+		{16, 24, 20, 34, 50, 36, 16, 18},
+		{16, 80, 20, 90, 50, 92, 16, 74},
+		{104, 18, 108, 28, 136, 27, 102, 25},
+		{104, 50, 108, 60, 136, 59, 102, 57},
+		{104, 82, 108, 92, 136, 91, 102, 89},
+		{104, 114, 108, 124, 136, 123, 102, 121},
+	},
+	{
+		{16, 24, 20, 34, 50, 36, 16, 18},
+		{16, 80, 20, 90, 50, 92, 16, 74},
+		{104, 26, 106, 36, 136, 35, 102, 33},
+		{104, 50, 106, 60, 136, 59, 102, 57},
+		{104, 82, 106, 92, 136, 91, 102, 89},
+		{104, 106, 106, 116, 136, 115, 102, 113},
+	},
+	{
+		{16, 32, 20, 42, 50, 44, 16, 26},
+		{104, 34, 106, 44, 136, 43, 102, 41},
+		{104, 58, 106, 68, 136, 67, 102, 65},
+		{16, 104, 20, 114, 50, 116, 16, 98},
+		{104, 106, 106, 116, 136, 115, 102, 113},
+		{104, 130, 106, 140, 136, 139, 102, 137},
+	},
+};
+
+static const u32 gUnknown_086157C4[] = INCBIN_U32("graphics/interface/unknown_6157C4.bin");
+static const u32 gUnknown_086157E0[] = INCBIN_U32("graphics/interface/unknown_6157E0.bin");
+
+static const u8 gUnknown_086157FC[][3] =
+{
+	{0, 3, 2},
+	{0, 1, 6},
+	{0, 11, 12},
+	{1, 2, 3},
+	{1, 8, 9},
+	{0, 1, 2},
+};
+
+static const struct WindowTemplate gUnknown_08615810[] =
+{
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 3,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 3,
+		.baseBlock = 0x63,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 1,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 4,
+		.baseBlock = 0xA9,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 4,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 5,
+		.baseBlock = 0xDF,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 7,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 6,
+		.baseBlock = 0x115,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 10,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 7,
+		.baseBlock = 0x14B,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 13,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 8,
+		.baseBlock = 0x181,
+	},
+	{
+		.bg = 2,
+		.tilemapLeft = 1,
+		.tilemapTop = 15,
+		.width = 28,
+		.height = 4,
+		.paletteNum = 14,
+		.baseBlock = 0x1DF,
+	},
+	DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_08615850[] =
+{
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 1,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 3,
+		.baseBlock = 0x63,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 8,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 4,
+		.baseBlock = 0xA9,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 1,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 5,
+		.baseBlock = 0xEF,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 5,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 6,
+		.baseBlock = 0x125,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 9,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 7,
+		.baseBlock = 0x15B,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 13,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 8,
+		.baseBlock = 0x191,
+	},
+	{
+		.bg = 2,
+		.tilemapLeft = 1,
+		.tilemapTop = 15,
+		.width = 28,
+		.height = 4,
+		.paletteNum = 14,
+		.baseBlock = 0x1DF,
+	},
+	DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_08615890[] =
+{
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 1,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 3,
+		.baseBlock = 0x63,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 8,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 4,
+		.baseBlock = 0xA9,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 2,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 5,
+		.baseBlock = 0xEF,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 5,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 6,
+		.baseBlock = 0x125,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 9,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 7,
+		.baseBlock = 0x15B,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 12,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 8,
+		.baseBlock = 0x191,
+	},
+	{
+		.bg = 2,
+		.tilemapLeft = 1,
+		.tilemapTop = 15,
+		.width = 28,
+		.height = 4,
+		.paletteNum = 14,
+		.baseBlock = 0x1DF,
+	},
+	DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_086158D0[] =
+{
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 2,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 3,
+		.baseBlock = 0x63,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 3,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 5,
+		.baseBlock = 0xA9,
+	},
+	{
+		.bg = 0,
+		.tilemapLeft = 12,
+		.tilemapTop = 6,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 6,
+		.baseBlock = 0xDF,
+	},
+	{
+		.bg = 2,
+		.tilemapLeft = 1,
+		.tilemapTop = 11,
+		.width = 10,
+		.height = 7,
+		.paletteNum = 4,
+		.baseBlock = 0x115,
+	},
+	{
+		.bg = 2,
+		.tilemapLeft = 12,
+		.tilemapTop = 12,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 7,
+		.baseBlock = 0x16B,
+	},
+	{
+		.bg = 2,
+		.tilemapLeft = 12,
+		.tilemapTop = 15,
+		.width = 18,
+		.height = 3,
+		.paletteNum = 8,
+		.baseBlock = 0x1A1,
+	},
+	DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate gUnknown_08615908 =
+{
+	.bg = 0,
+	.tilemapLeft = 24,
+	.tilemapTop = 17,
+	.width = 6,
+	.height = 2,
+	.paletteNum = 3,
+	.baseBlock = 0x1C7,
+};
+
+static const struct WindowTemplate gUnknown_08615910 =
+{
+	.bg = 0,
+	.tilemapLeft = 24,
+	.tilemapTop = 18,
+	.width = 6,
+	.height = 2,
+	.paletteNum = 3,
+	.baseBlock = 0x1C7,
+};
+
+static const struct WindowTemplate gUnknown_08615918 =
+{
+	.bg = 0,
+	.tilemapLeft = 24,
+	.tilemapTop = 16,
+	.width = 6,
+	.height = 2,
+	.paletteNum = 3,
+	.baseBlock = 0x1D3,
+};
+
+static const struct WindowTemplate gUnknown_08615920 =
+{
+	.bg = 2,
+	.tilemapLeft = 1,
+	.tilemapTop = 17,
+	.width = 21,
+	.height = 2,
+	.paletteNum = 15,
+	.baseBlock = 0x24F,
+};
+
+static const struct WindowTemplate gUnknown_08615928 =
+{
+	.bg = 2,
+	.tilemapLeft = 1,
+	.tilemapTop = 17,
+	.width = 16,
+	.height = 2,
+	.paletteNum = 15,
+	.baseBlock = 0x279,
+};
+
+static const struct WindowTemplate gUnknown_08615930 =
+{
+	.bg = 2,
+	.tilemapLeft = 1,
+	.tilemapTop = 17,
+	.width = 20,
+	.height = 2,
+	.paletteNum = 15,
+	.baseBlock = 0x299,
+};
+
+static const struct WindowTemplate gUnknown_08615938 =
+{
+	.bg = 2,
+	.tilemapLeft = 1,
+	.tilemapTop = 17,
+	.width = 18,
+	.height = 2,
+	.paletteNum = 15,
+	.baseBlock = 0x299,
+};
+
+static const struct WindowTemplate gUnknown_08615940 =
+{
+	.bg = 2,
+	.tilemapLeft = 1,
+	.tilemapTop = 17,
+	.width = 16,
+	.height = 2,
+	.paletteNum = 15,
+	.baseBlock = 0x299,
+};
+
+static const struct WindowTemplate gUnknown_08615948 =
+{
+	.bg = 2,
+	.tilemapLeft = 1,
+	.tilemapTop = 15,
+	.width = 20,
+	.height = 4,
+	.paletteNum = 15,
+	.baseBlock = 0x299,
+};
+
+static const struct WindowTemplate gUnknown_08615950 =
+{
+	.bg = 2,
+	.tilemapLeft = 23,
+	.tilemapTop = 13,
+	.width = 6,
+	.height = 6,
+	.paletteNum = 14,
+	.baseBlock = 0x39D,
+};
+
+static const struct WindowTemplate gUnknown_08615958 =
+{
+	.bg = 2,
+	.tilemapLeft = 21,
+	.tilemapTop = 13,
+	.width = 8,
+	.height = 6,
+	.paletteNum = 14,
+	.baseBlock = 0x39D,
+};
+
+static const struct WindowTemplate gUnknown_08615960 =
+{
+	.bg = 2,
+	.tilemapLeft = 19,
+	.tilemapTop = 11,
+	.width = 10,
+	.height = 8,
+	.paletteNum = 14,
+	.baseBlock = 0x2E9,
+};
+
+static const struct WindowTemplate gUnknown_08615968 =
+{
+	.bg = 2,
+	.tilemapLeft = 21,
+	.tilemapTop = 9,
+	.width = 5,
+	.height = 4,
+	.paletteNum = 14,
+	.baseBlock = 0x2E9,
+};
+
+static const struct WindowTemplate gUnknown_08615970 =
+{
+	.bg = 2,
+	.tilemapLeft = 19,
+	.tilemapTop = 1,
+	.width = 10,
+	.height = 11,
+	.paletteNum = 14,
+	.baseBlock = 0x2E9,
+};
+
+// Unused.
+static const struct WindowTemplate gUnknown_08615978 =
+{
+	.bg = 2,
+	.tilemapLeft = 2,
+	.tilemapTop = 15,
+	.width = 27,
+	.height = 4,
+	.paletteNum = 14,
+	.baseBlock = 0x1DF,
+};
+
+// Unused.
+static const struct WindowTemplate gUnknown_08615980 =
+{
+	.bg = 2,
+	.tilemapLeft = 0,
+	.tilemapTop = 13,
+	.width = 18,
+	.height = 3,
+	.paletteNum = 12,
+	.baseBlock = 0x39D,
+};
+
+static const u8 gUnknown_08615988[] = {24, 25, 25, 25, 25, 25, 25, 25, 25, 26, 32, 33, 33, 33, 33, 33, 33, 33, 33, 34, 32, 33, 33, 33, 33, 33, 33, 33, 33, 34, 32, 33, 33, 33, 33, 33, 33, 33, 33, 34, 40, 59, 60, 58, 58, 58, 58, 58, 58, 61, 15, 16, 16, 16, 16, 16, 16, 16, 16, 17, 46, 47, 47, 47, 47, 47, 47, 47, 47, 48};
+static const u8 gUnknown_086159CE[] = {24, 25, 25, 25, 25, 25, 25, 25, 25, 26, 32, 33, 33, 33, 33, 33, 33, 33, 33, 34, 32, 33, 33, 33, 33, 33, 33, 33, 33, 34, 32, 33, 33, 33, 33, 33, 33, 33, 33, 34, 40, 41, 41, 41, 41, 41, 41, 41, 41, 42, 15, 16, 16, 16, 16, 16, 16, 16, 16, 17, 46, 47, 47, 47, 47, 47, 47, 47, 47, 48};
+static const u8 gUnknown_08615A14[] = {43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45, 49, 33, 33, 33, 33, 33, 33, 33, 33, 52, 53, 51, 51, 51, 51, 51, 51, 54, 55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57};
+static const u8 gUnknown_08615A4A[] = {43, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 44, 45, 49, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 50, 55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57};
+static const u8 gUnknown_08615A80[] = {21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 37, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 39};
+static const u8 gUnknown_08615AB6[] = {11, 12};
+static const u8 gUnknown_08615AB8[] = {9, 10};
+static const u8 gUnknown_08615ABA[] = {4, 5, 6};
+static const u8 gUnknown_08615ABD[] = {1, 7, 8};
+static const u8 gUnknown_08615AC0[] = {1, 11, 12};
+static const u8 gUnknown_08615AC3[] = {59, 60};
+static const u8 gUnknown_08615AC5[] = {75, 76};
+static const u8 gUnknown_08615AC7[] = {57, 58};
+static const u8 gUnknown_08615AC9[] = {73, 74};
+static const u8 gUnknown_08615ACB[] = {89, 90};
+static const u8 gUnknown_08615ACD[] = {52, 53, 54};
+static const u8 gUnknown_08615AD0[] = {68, 69, 70};
+static const u8 gUnknown_08615AD3[] = {84, 85, 86};
+static const u8 gUnknown_08615AD6[] = {116, 117, 118};
+static const u8 gUnknown_08615AD9[] = {132, 133, 134};
+static const u8 gUnknown_08615ADC[] = {148, 149, 150};
+static const u8 gUnknown_08615ADF[] = {100, 101, 102};
+static const u8 gUnknown_08615AE2[] = {49, 55, 56};
+static const u8 gUnknown_08615AE5[] = {65, 71, 72};
+static const u8 gUnknown_08615AE8[] = {81, 87, 88};
+static const u8 gUnknown_08615AEB[] = {97, 103, 104};
+static const u8 gUnknown_08615AEE[] = {161, 167, 168};
+static const u8 gUnknown_08615AF1[] = {17, 27, 28};
+
+static const u8 *const gUnknown_08615AF4[] =
+{
+    gUnknown_085E9E43,
+    gUnknown_085EA010,
+    gUnknown_085EA02A,
+    gUnknown_085E9E55,
+    gUnknown_085E9E64,
+    gUnknown_085E9E79,
+    gUnknown_085E9E8F,
+    gUnknown_085E9EBC,
+    gUnknown_085E9ED4,
+    gUnknown_085E9EE9,
+    gUnknown_085E9FDB,
+    gUnknown_085EA046,
+    gUnknown_085EA05B,
+    gUnknown_085E9F01,
+    gUnknown_085E9F58,
+    gUnknown_085E9F6F,
+    gUnknown_085E9F81,
+    gUnknown_085E9F90,
+    gUnknown_085E9FA7,
+    gUnknown_085E9FC2,
+    gText_EmptyString2,
+    gUnknown_085E9EA6,
+    gUnknown_085E9F16,
+    gUnknown_085E9F2A,
+    gUnknown_085E9F42,
+    gUnknown_085E9FF9,
+    gUnknown_085EA073,
+};
+
+static const u8 *const gUnknown_08615B60[] =
+{
+    gUnknown_085EA091,
+    gUnknown_085EA099,
+    gUnknown_085EA09E,
+    gUnknown_085EA0A4,
+    gUnknown_085EA0AB,
+    gUnknown_085EA0E7,
+    gUnknown_085EA0B1,
+    gUnknown_085EA0B6,
+    gUnknown_085EA0BF,
+    gUnknown_085EA0C5,
+    gUnknown_085EA0CF,
+    gUnknown_085EA0D7,
+    gUnknown_085EA0DC,
+};
+
+// Unknown unused data. Feel free to remove.
+static const u16 gUnknown_08615B94[] =
+{
+    0x0108, 0x0151, 0x0160, 0x015b, 0x002e, 0x005c, 0x0102, 0x0153, 0x014b, 0x00ed, 0x00f1, 0x010d, 0x003a, 0x003b, 0x003f, 0x0071,
+    0x00b6, 0x00f0, 0x00ca, 0x00db, 0x00da, 0x004c, 0x00e7, 0x0055, 0x0057, 0x0059, 0x00d8, 0x005b, 0x005e, 0x00f7, 0x0118, 0x0068,
+    0x0073, 0x015f, 0x0035, 0x00bc, 0x00c9, 0x007e, 0x013d, 0x014c, 0x0103, 0x0107, 0x0122, 0x009c, 0x00d5, 0x00a8, 0x00d3, 0x011d,
+    0x0121, 0x013b, 0x000f, 0x0013, 0x0039, 0x0046, 0x0094, 0x00f9, 0x007f, 0x0123,
+};
+
+enum
+{
+    MENU_SUMMARY,
+    MENU_SWITCH,
+    MENU_CANCEL1,
+    MENU_ITEM,
+    MENU_GIVE,
+    MENU_TAKE_ITEM,
+    MENU_MAIL,
+    MENU_TAKE_MAIL,
+    MENU_READ,
+    MENU_CANCEL2,
+    MENU_SHIFT,
+    MENU_SEND_OUT,
+    MENU_ENTER,
+    MENU_NO_ENTRY,
+    MENU_STORE,
+    MENU_REGISTER,
+    MENU_TRADE1,
+    MENU_TRADE2,
+    MENU_TOSS,
+    MENU_FIELD_MOVES,
+};
+
+enum
+{
+    FIELD_MOVE_CUT,
+    FIELD_MOVE_FLASH,
+    FIELD_MOVE_ROCK_SMASH,
+    FIELD_MOVE_STRENGTH,
+    FIELD_MOVE_SURF,
+    FIELD_MOVE_FLY,
+    FIELD_MOVE_DIVE,
+    FIELD_MOVE_WATERFALL,
+    FIELD_MOVE_TELEPORT,
+    FIELD_MOVE_DIG,
+    FIELD_MOVE_SECRET_POWER,
+    FIELD_MOVE_MILK_DRINK,
+    FIELD_MOVE_SOFT_BOILED,
+    FIELD_MOVE_SWEET_SCENT,
+};
+
+// What a weird choice of table termination;
+#define FIELD_MOVE_TERMINATOR MOVE_SWORDS_DANCE
+
+struct
+{
+    const u8 *text;
+    TaskFunc func;
+} static const sCursorOptions[] =
+{
+    [MENU_SUMMARY] = {gText_Summary5, CursorCb_Summary},
+    [MENU_SWITCH] = {gText_Switch2, CursorCb_Switch},
+    [MENU_CANCEL1] = {gText_Cancel2, CursorCb_Cancel1},
+    [MENU_ITEM] = {gText_Item, CursorCb_Item},
+    [MENU_GIVE] = {gMenuText_Give, CursorCb_Give},
+    [MENU_TAKE_ITEM] = {gText_Take, CursorCb_TakeItem},
+    [MENU_MAIL] = {gText_Mail, CursorCb_Mail},
+    [MENU_TAKE_MAIL] = {gText_Take2, CursorCb_TakeMail},
+    [MENU_READ] = {gText_Read2, CursorCb_Read},
+    [MENU_CANCEL2] = {gText_Cancel2, CursorCb_Cancel2},
+    [MENU_SHIFT] = {gText_Shift, CursorCb_SendMon},
+    [MENU_SEND_OUT] = {gText_SendOut, CursorCb_SendMon},
+    [MENU_ENTER] = {gText_Enter, CursorCb_Enter},
+    [MENU_NO_ENTRY] = {gText_NoEntry, CursorCb_NoEntry},
+    [MENU_STORE] = {gText_Store, CursorCb_Store},
+    [MENU_REGISTER] = {gText_Register, CursorCb_Register},
+    [MENU_TRADE1] = {gText_Trade4, CursorCb_Trade1},
+    [MENU_TRADE2] = {gText_Trade4, CursorCb_Trade2},
+    [MENU_TOSS] = {gMenuText_Toss, CursorCb_Toss},
+    [MENU_FIELD_MOVES + FIELD_MOVE_CUT] = {gMoveNames[MOVE_CUT], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_FLASH] = {gMoveNames[MOVE_FLASH], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_ROCK_SMASH] = {gMoveNames[MOVE_ROCK_SMASH], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_STRENGTH] = {gMoveNames[MOVE_STRENGTH], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SURF] = {gMoveNames[MOVE_SURF], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_FLY] = {gMoveNames[MOVE_FLY], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_DIVE] = {gMoveNames[MOVE_DIVE], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_WATERFALL] = {gMoveNames[MOVE_WATERFALL], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_TELEPORT] = {gMoveNames[MOVE_TELEPORT], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_DIG] = {gMoveNames[MOVE_DIG], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SECRET_POWER] = {gMoveNames[MOVE_SECRET_POWER], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_MILK_DRINK] = {gMoveNames[MOVE_MILK_DRINK], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gMoveNames[MOVE_SOFT_BOILED], CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCb_FieldMove},
+};
+
+static const u8 gUnknown_08615D10[] = {0, 1, 2};
+static const u8 gUnknown_08615D13[] = {10, 0, 2};
+static const u8 gUnknown_08615D16[] = {11, 0, 2};
+static const u8 gUnknown_08615D19[] = {0, 2};
+static const u8 gUnknown_08615D1B[] = {12, 0, 2};
+static const u8 gUnknown_08615D1E[] = {13, 0, 2};
+static const u8 gUnknown_08615D21[] = {14, 0, 2};
+static const u8 gUnknown_08615D24[] = {4, 5, 9};
+static const u8 gUnknown_08615D27[] = {8, 7, 9};
+static const u8 gUnknown_08615D2A[] = {15, 0, 2};
+static const u8 gUnknown_08615D2D[] = {16, 0, 2};
+static const u8 gUnknown_08615D30[] = {17, 0, 2};
+static const u8 gUnknown_08615D33[] = {5, 18, 2};
+
+static const u8 *const gUnknown_08615D38[] =
+{
+    NULL,
+    gUnknown_08615D10,
+    gUnknown_08615D13,
+    gUnknown_08615D16,
+    gUnknown_08615D1B,
+    gUnknown_08615D1E,
+    gUnknown_08615D21,
+    gUnknown_08615D19,
+    gUnknown_08615D24,
+    gUnknown_08615D27,
+    gUnknown_08615D2A,
+    gUnknown_08615D2D,
+    gUnknown_08615D30,
+    gUnknown_08615D33,
+};
+
+static const u8 gUnknown_08615D70[] = {0x00, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x02, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03};
+
+static const u16 sFieldMoves[] =
+{
+    MOVE_CUT, MOVE_FLASH, MOVE_ROCK_SMASH, MOVE_STRENGTH, MOVE_SURF, MOVE_FLY, MOVE_DIVE, MOVE_WATERFALL, MOVE_TELEPORT,
+    MOVE_DIG, MOVE_SECRET_POWER, MOVE_MILK_DRINK, MOVE_SOFT_BOILED, MOVE_SWEET_SCENT, FIELD_MOVE_TERMINATOR
+};
+
+struct
+{
+    bool8 (*fieldMoveFunc)(void);
+    u8 msgId;
+} static const sFieldMoveCursorCallbacks[] =
+{
+    [FIELD_MOVE_CUT] = {SetUpFieldMove_Cut, 0x07},
+    [FIELD_MOVE_FLASH] = {SetUpFieldMove_Flash, 0x0d},
+    [FIELD_MOVE_ROCK_SMASH] = {SetUpFieldMove_RockSmash, 0x0d},
+    [FIELD_MOVE_STRENGTH] = {SetUpFieldMove_Strength, 0x0d},
+    [FIELD_MOVE_SURF] = {SetUpFieldMove_Surf, 0x08},
+    [FIELD_MOVE_FLY] = {SetUpFieldMove_Fly, 0x0d},
+    [FIELD_MOVE_DIVE] = {SetUpFieldMove_Dive, 0x0d},
+    [FIELD_MOVE_WATERFALL] = {SetUpFieldMove_Waterfall, 0x0d},
+    [FIELD_MOVE_TELEPORT] = {SetUpFieldMove_Teleport, 0x0d},
+    [FIELD_MOVE_DIG] = {SetUpFieldMove_Dig, 0x0d},
+    [FIELD_MOVE_SECRET_POWER] = {SetUpFieldMove_SecretPower, 0x0d},
+    [FIELD_MOVE_MILK_DRINK] = {SetUpFieldMove_SoftBoiled, 0x10},
+    [FIELD_MOVE_SOFT_BOILED] = {SetUpFieldMove_SoftBoiled, 0x10},
+    [FIELD_MOVE_SWEET_SCENT] = {SetUpFieldMove_SweetScent, 0x0d},
+};
+
+static const u8 *const gUnknown_08615E0C[] =
+{
+    gText_NotPkmnOtherTrainerWants,
+    gText_ThatIsntAnEgg,
+    gText_PkmnCantBeTradedNow,
+    gText_PkmnCantBeTradedNow,
+    gText_OtherTrainersPkmnCantBeTraded,
+    gText_EggCantBeTradedNow,
+    gText_OtherTrainerCantAcceptPkmn,
+    gText_CantTradeWithTrainer,
+    gText_CantTradeWithTrainer,
+};
+
+static const u32 gUnknown_08615E30[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");
+static const u16 gUnknown_08615E70[] = INCBIN_U16("graphics/interface/hold_icons.gbapal");
+
+static const struct OamData gOamData_83765EC =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd gSpriteAnim_83765F4[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gSpriteAnim_83765FC[] =
+{
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const gSpriteAnimTable_8376604[] =
+{
+    gSpriteAnim_83765F4,
+    gSpriteAnim_83765FC,
+};
+
+static const struct SpriteSheet gUnknown_08615EB0 =
+{
+    gUnknown_08615E30, sizeof(gUnknown_08615E30), 0xd750
+};
+
+static const struct SpritePalette gUnknown_08615EB8 =
+{
+    gUnknown_08615E70, 0xd750
+};
+
+static const struct SpriteTemplate gSpriteTemplate_8615EC0 =
+{
+    0xd750,
+    0xd750,
+    &gOamData_83765EC,
+    gSpriteAnimTable_8376604,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+static const struct OamData sOamData_8615ED8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8615EE0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615EE8[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8615EF0[] =
+{
+    sSpriteAnim_8615EE0,
+    sSpriteAnim_8615EE8
+};
+
+static const struct CompressedSpriteSheet gUnknown_08615EF8 =
+{
+    gPartyMenuPokeball_Gfx, 0x400, 0x04b0
+};
+
+static const struct CompressedSpritePalette gUnknown_08615F00 =
+{
+    gPartyMenuPokeball_Pal, 0x04b0
+};
+
+static const struct SpriteTemplate gSpriteTemplate_8615F08 =
+{
+    .tileTag = 0x04b0,
+    .paletteTag = 0x04b0,
+    .oam = &sOamData_8615ED8,
+    .anims = sSpriteAnimTable_8615EF0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sOamData_8615F20 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8615F28[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615F30[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615F38[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615F40[] =
+{
+    ANIMCMD_FRAME(12, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615F48[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615F50[] =
+{
+    ANIMCMD_FRAME(20, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8615F58[] =
+{
+    sSpriteAnim_8615F28,
+    sSpriteAnim_8615F30,
+    sSpriteAnim_8615F38,
+    sSpriteAnim_8615F40,
+    sSpriteAnim_8615F48,
+    sSpriteAnim_8615F50
+};
+
+static const struct CompressedSpriteSheet gUnknown_08615F70 =
+{
+    gPartyMenuPokeballSmall_Gfx, 0x0300, 0x04b1
+};
+
+static const struct SpriteTemplate gSpriteTemplate_8615F78 =
+{
+    .tileTag = 1201,
+    .paletteTag = 1200,
+    .oam = &sOamData_8615F20,
+    .anims = sSpriteAnimTable_8615F58,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const struct OamData sOamData_8615F90 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AnimCmd sSpriteAnim_8615F98[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FA0[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FA8[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FB0[] =
+{
+    ANIMCMD_FRAME(12, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FB8[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FC0[] =
+{
+    ANIMCMD_FRAME(20, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FC8[] =
+{
+    ANIMCMD_FRAME(24, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8615FD0[] =
+{
+    ANIMCMD_FRAME(28, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_8615FD8[] =
+{
+    sSpriteAnim_8615F98,
+    sSpriteAnim_8615FA0,
+    sSpriteAnim_8615FA8,
+    sSpriteAnim_8615FB0,
+    sSpriteAnim_8615FB8,
+    sSpriteAnim_8615FC0,
+    sSpriteAnim_8615FC8,
+    sSpriteAnim_8615FD0
+};
+
+static const struct CompressedSpriteSheet gUnknown_08615FF8 =
+{
+    gStatusGfx_Icons, 0x400, 1202
+};
+
+static const struct CompressedSpritePalette gUnknown_08616000 =
+{
+    gStatusPal_Icons, 1202
+};
+
+static const struct SpriteTemplate gSpriteTemplate_8616008 =
+{
+    .tileTag = 1202,
+    .paletteTag = 1202,
+    .oam = &sOamData_8615F90,
+    .anims = sSpriteAnimTable_8615FD8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+static const u8 gUnknown_08616020[] = {0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00};
+
+// Unused table of pointers to strings of statistics.
+static const u8 *const gUnknown_08616028[] =
+{
+    gText_HP4,
+    gText_Attack3,
+    gText_Defense3,
+    gText_SpAtk4,
+    gText_SpDef4,
+    gText_Speed2
+};
+
+static const u16 gTMHMMoves[] =
+{
+    MOVE_FOCUS_PUNCH,
+    MOVE_DRAGON_CLAW,
+    MOVE_WATER_PULSE,
+    MOVE_CALM_MIND,
+    MOVE_ROAR,
+    MOVE_TOXIC,
+    MOVE_HAIL,
+    MOVE_BULK_UP,
+    MOVE_BULLET_SEED,
+    MOVE_HIDDEN_POWER,
+    MOVE_SUNNY_DAY,
+    MOVE_TAUNT,
+    MOVE_ICE_BEAM,
+    MOVE_BLIZZARD,
+    MOVE_HYPER_BEAM,
+    MOVE_LIGHT_SCREEN,
+    MOVE_PROTECT,
+    MOVE_RAIN_DANCE,
+    MOVE_GIGA_DRAIN,
+    MOVE_SAFEGUARD,
+    MOVE_FRUSTRATION,
+    MOVE_SOLAR_BEAM,
+    MOVE_IRON_TAIL,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER,
+    MOVE_EARTHQUAKE,
+    MOVE_RETURN,
+    MOVE_DIG,
+    MOVE_PSYCHIC,
+    MOVE_SHADOW_BALL,
+    MOVE_BRICK_BREAK,
+    MOVE_DOUBLE_TEAM,
+    MOVE_REFLECT,
+    MOVE_SHOCK_WAVE,
+    MOVE_FLAMETHROWER,
+    MOVE_SLUDGE_BOMB,
+    MOVE_SANDSTORM,
+    MOVE_FIRE_BLAST,
+    MOVE_ROCK_TOMB,
+    MOVE_AERIAL_ACE,
+    MOVE_TORMENT,
+    MOVE_FACADE,
+    MOVE_SECRET_POWER,
+    MOVE_REST,
+    MOVE_ATTRACT,
+    MOVE_THIEF,
+    MOVE_STEEL_WING,
+    MOVE_SKILL_SWAP,
+    MOVE_SNATCH,
+    MOVE_OVERHEAT,
+    MOVE_CUT,
+    MOVE_FLY,
+    MOVE_SURF,
+    MOVE_STRENGTH,
+    MOVE_FLASH,
+    MOVE_ROCK_SMASH,
+    MOVE_WATERFALL,
+    MOVE_DIVE,
+};
+
+// code
 static void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc task, MainCallback callback)
 {
     u16 i;
@@ -671,9 +1756,10 @@ static bool8 AllocPartyMenuBg(void)
     gUnknown_0203CEE4 = Alloc(0x800);
     if (gUnknown_0203CEE4 == NULL)
         return FALSE;
+
     memset(gUnknown_0203CEE4, 0, 0x800);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_086156B8, 3);
+    InitBgsFromTemplates(0, gUnknown_086156B8, ARRAY_COUNT(gUnknown_086156B8));
     SetBgTilemapBuffer(1, gUnknown_0203CEE4);
     ResetAllBgsCoordinates();
     schedule_bg_copy_tilemap_to_vram(1);
@@ -957,7 +2043,7 @@ static bool8 sub_81B0BFC(u8 slot)
 
 static void DisplayPartyPokemonSelectToTeachMove(u8 slot, u16 item, u8 tutor)
 {
-    switch (CanPartyPokemonLearnTMTutor(&gPlayerParty[slot], item, tutor))
+    switch (CanMonLearnTMTutor(&gPlayerParty[slot], item, tutor))
     {
     case CANNOT_LEARN_MOVE:
     case CANNOT_LEARN_MOVE_IS_EGG:
@@ -1952,12 +3038,13 @@ static void sub_81B227C(u8 taskId)
     }
 }
 
-static u8 CanPartyPokemonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
+static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
 {
     u16 move;
 
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
+
     if (item >= ITEM_TM01_FOCUS_PUNCH)
     {
         if (CanMonLearnTMHM(mon, item - ITEM_TM01_FOCUS_PUNCH))
@@ -1966,30 +3053,32 @@ static u8 CanPartyPokemonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
             return CANNOT_LEARN_MOVE;
         do {} while (0); // :morphon:
     }
-    else if (sub_81B2370(GetMonData(mon, MON_DATA_SPECIES), tutor) == FALSE)
+    else if (CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), tutor) == FALSE)
     {
         return CANNOT_LEARN_MOVE;
     }
     else
     {
-        move = sub_81B2360(tutor);
+        move = GetTutorMove(tutor);
     }
 
-    if (pokemon_has_move(mon, move) == TRUE)
+    if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
-    return CAN_LEARN_MOVE;
+    else
+        return CAN_LEARN_MOVE;
 }
 
-static u16 sub_81B2360(u8 tutor)
+static u16 GetTutorMove(u8 tutor)
 {
-    return gUnknown_0861500C[tutor];
+    return gTutorMoves[tutor];
 }
 
-static bool8 sub_81B2370(u16 species, u8 tutor)
+static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 {
-    if (gUnknown_08615048[species] & (1 << tutor))
+    if (sTutorLearnsets[species] & (1 << tutor))
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static void sub_81B239C(u8 a)
@@ -2066,7 +3155,7 @@ static u16* GetPartyMenuPaletteFromBuffer(u8 paletteId)
     return &gUnknown_0203CEC4->palBuffer[paletteId];
 }
 
-static void BlitBitmapToPartyWindow(u8 windowId, u8 *b, u8 c, u8 x, u8 y, u8 width, u8 height)
+static void BlitBitmapToPartyWindow(u8 windowId, const u8 *b, u8 c, u8 x, u8 y, u8 width, u8 height)
 {
     u8 *pixels = AllocZeroed(height * width * 32);
     u8 i, j;
@@ -2083,7 +3172,7 @@ static void BlitBitmapToPartyWindow(u8 windowId, u8 *b, u8 c, u8 x, u8 y, u8 wid
     }
 }
 
-/*static*/ void BlitBitmapToPartyWindow_Default1(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f)
+static void BlitBitmapToPartyWindow_Default1(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f)
 {
     if (width == 0 && height == 0)
     {
@@ -2096,7 +3185,7 @@ static void BlitBitmapToPartyWindow(u8 windowId, u8 *b, u8 c, u8 x, u8 y, u8 wid
         BlitBitmapToPartyWindow(windowId, gUnknown_086159CE, 10, x, y, width, height);
 }
 
-/*static*/ void BlitBitmapToPartyWindow_Default2(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f)
+static void BlitBitmapToPartyWindow_Default2(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 f)
 {
     if (width == 0 && height == 0)
     {
@@ -2237,7 +3326,7 @@ static void UpdateSelectedPartyBox(struct Struct203CEDC *ptr, u8 bitfield)
     }
 }
 
-static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, u8 *align)
+static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, const u8 *align)
 {
     AddTextPrinterParameterized3(windowId, 0, align[0], align[1], gUnknown_086157FC[color], 0, str);
 }
@@ -2510,7 +3599,7 @@ static u8 sub_81B31B0(u8 a)
     for (i = 0; i < gUnknown_0203CEC4->unk17; i++)
     {
         u8 unk = (gUnknown_0203CEC4->unkF[i] > 18) ? 4 : 3;
-        AddTextPrinterParameterized4(gUnknown_0203CEC4->unkC[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, gUnknown_086157FC[unk], 0, gUnknown_08615C08[gUnknown_0203CEC4->unkF[i]].textPtr);
+        AddTextPrinterParameterized4(gUnknown_0203CEC4->unkC[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, gUnknown_086157FC[unk], 0, sCursorOptions[gUnknown_0203CEC4->unkF[i]].text);
     }
 
     InitMenuInUpperLeftCorner(gUnknown_0203CEC4->unkC[0], gUnknown_0203CEC4->unk17, 0, 1);
@@ -2568,15 +3657,16 @@ static void sub_81B3414(struct Pokemon *mons, u8 a)
     AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, 0);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        for (j = 0; gUnknown_08615D7E[j] != MOVE_SWORDS_DANCE; j++)
+        for (j = 0; sFieldMoves[j] != FIELD_MOVE_TERMINATOR; j++)
         {
-            if (GetMonData(&mons[a], i + MON_DATA_MOVE1) == gUnknown_08615D7E[j])
+            if (GetMonData(&mons[a], i + MON_DATA_MOVE1) == sFieldMoves[j])
             {
                 AppendToList(gUnknown_0203CEC4->unkF, &gUnknown_0203CEC4->unk17, j + 19);
                 break;
             }
         }
     }
+
     if (!InBattlePike())
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
@@ -2680,41 +3770,41 @@ static void sub_81B36FC(u8 taskId)
     if (sub_81B3608(taskId))
     {
         gTasks[taskId].data[0] = 0xFF;
-        gTasks[taskId].func = sub_81B3730;
+        gTasks[taskId].func = HandleMenuInput;
     }
 }
 
-static void sub_81B3730(u8 taskId)
+static void HandleMenuInput(u8 taskId)
 {
-    s16 *data;
-    s8 input;
-
-    if (gPaletteFade.active == FALSE && sub_81221EC() != TRUE)
+    if (!gPaletteFade.active && sub_81221EC() != TRUE)
     {
-        data = gTasks[taskId].data;
+        s8 input;
+        s16 *data = gTasks[taskId].data;
+
         if (gUnknown_0203CEC4->unk17 <= 3)
             input = Menu_ProcessInputNoWrapAround_other();
         else
             input = ProcessMenuInput_other();
+
         data[0] = Menu_GetCursorPos();
-        if (input != MENU_NOTHING_CHOSEN)
+        switch (input)
         {
-            if (input == MENU_B_PRESSED)
-            {
-                PlaySE(SE_SELECT);
-                sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
-                gUnknown_08615C08[gUnknown_0203CEC4->unkF[gUnknown_0203CEC4->unk17 - 1]].func(taskId);
-            }
-            else
-            {
-                sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
-                gUnknown_08615C08[gUnknown_0203CEC4->unkF[input]].func(taskId);
-            }
+        case MENU_NOTHING_CHOSEN:
+            break;
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+            sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
+            sCursorOptions[gUnknown_0203CEC4->unkF[gUnknown_0203CEC4->unk17 - 1]].func(taskId);
+            break;
+        default:
+            sub_81B302C(&gUnknown_0203CEC4->unkC[2]);
+            sCursorOptions[gUnknown_0203CEC4->unkF[input]].func(taskId);
+            break;
         }
     }
 }
 
-/*static*/ void sub_81B37FC(u8 taskId)
+static void CursorCb_Summary(u8 taskId)
 {
     PlaySE(SE_SELECT);
     gUnknown_0203CEC4->exitCallback = sub_81B3828;
@@ -2741,7 +3831,7 @@ static void sub_81B3894(void)
     InitPartyMenu(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 21, sub_81B36FC, gUnknown_0203CEC8.exitCallback);
 }
 
-/*static*/ void brm_switch(u8 taskId)
+static void CursorCb_Switch(u8 taskId)
 {
     PlaySE(SE_SELECT);
     gUnknown_0203CEC8.unkB = 8;
@@ -2972,7 +4062,7 @@ static void sub_81B407C(u8 taskId)
     gTasks[taskId].func = sub_81B1370;
 }
 
-/*static*/ void brm_cancel_1(u8 taskId)
+static void CursorCb_Cancel1(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -2984,7 +4074,7 @@ static void sub_81B407C(u8 taskId)
     gTasks[taskId].func = sub_81B1370;
 }
 
-/*static*/ void sub_81B4134(u8 taskId)
+static void CursorCb_Item(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -2993,10 +4083,10 @@ static void sub_81B407C(u8 taskId)
     sub_81B31B0(1);
     display_pokemon_menu_message(24);
     gTasks[taskId].data[0] = 0xFF;
-    gTasks[taskId].func = sub_81B3730;
+    gTasks[taskId].func = HandleMenuInput;
 }
 
-/*static*/ void sub_81B4198(u8 taskId)
+static void CursorCb_Give(u8 taskId)
 {
     PlaySE(SE_SELECT);
     gUnknown_0203CEC4->exitCallback = sub_81B41C4;
@@ -3167,7 +4257,7 @@ static void sub_81B469C(u8 taskId)
     }
 }
 
-/*static*/ void sub_81B4724(u8 taskId)
+static void CursorCb_TakeItem(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
@@ -3194,7 +4284,7 @@ static void sub_81B469C(u8 taskId)
     gTasks[taskId].func = sub_81B469C;
 }
 
-void sub_81B47E0(u8 taskId)
+static void CursorCb_Toss(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
@@ -3250,19 +4340,19 @@ static void sub_81B48DC(u8 taskId)
 static void sub_81B4988(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
-    u16 itemClear;
 
     if (sub_81B1BD4() != TRUE)
     {
-        itemClear = ITEM_NONE;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &itemClear);
+        u16 item = ITEM_NONE;
+
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
         sub_81B5C94(mon, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9]);
         DisplayPartyPokemonOtherText(12, &gUnknown_0203CEDC[gUnknown_0203CEC8.unk9], 1);
         gTasks[taskId].func = sub_81B1C1C;
     }
 }
 
-/*static*/ void sub_81B4A08(u8 taskId)
+static void CursorCb_Mail(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -3271,10 +4361,10 @@ static void sub_81B4988(u8 taskId)
     sub_81B31B0(2);
     display_pokemon_menu_message(25);
     gTasks[taskId].data[0] = 0xFF;
-    gTasks[taskId].func = sub_81B3730;
+    gTasks[taskId].func = HandleMenuInput;
 }
 
-/*static*/ void sub_81B4A6C(u8 taskId)
+static void CursorCb_Read(u8 taskId)
 {
     PlaySE(SE_SELECT);
     gUnknown_0203CEC4->exitCallback = sub_81B4A98;
@@ -3292,7 +4382,7 @@ static void sub_81B4AE0(void)
     InitPartyMenu(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 21, sub_81B36FC, gUnknown_0203CEC8.exitCallback);
 }
 
-/*static*/ void brm_take_2(u8 taskId)
+static void CursorCb_TakeMail(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
@@ -3373,7 +4463,7 @@ static void sub_81B4C94(u8 taskId)
     }
 }
 
-/*static*/ void sub_81B4D78(u8 taskId)
+static void CursorCb_Cancel2(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
 
@@ -3393,10 +4483,10 @@ static void sub_81B4C94(u8 taskId)
         display_pokemon_menu_message(26);
     }
     gTasks[taskId].data[0] = 0xFF;
-    gTasks[taskId].func = sub_81B3730;
+    gTasks[taskId].func = HandleMenuInput;
 }
 
-/*static*/ void brm_shift_sendout(u8 taskId)
+static void CursorCb_SendMon(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
@@ -3412,7 +4502,7 @@ static void sub_81B4C94(u8 taskId)
     }
 }
 
-/*static*/ void sub_81B4E8C(u8 taskId)
+static void CursorCb_Enter(u8 taskId)
 {
     u8 unk;
     u8 i;
@@ -3448,7 +4538,7 @@ static void sub_81B4F88(void)
     sub_81B0FCC(gUnknown_0203CEC8.unk9, 1);
 }
 
-/*static*/ void sub_81B4FA8(u8 taskId)
+static void CursorCb_NoEntry(u8 taskId)
 {
     u8 unk;
     u8 i, j;
@@ -3477,13 +4567,13 @@ static void sub_81B4F88(void)
     gTasks[taskId].func = sub_81B1370;
 }
 
-/*static*/ void sub_81B50AC(u8 taskId)
+static void CursorCb_Store(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sub_81B12C0(taskId);
 }
 
-/*static*/ void sub_81B50C8(u8 taskId)
+static void CursorCb_Register(u8 taskId)
 {
     u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
@@ -3510,7 +4600,7 @@ static void sub_81B4F88(void)
     gTasks[taskId].func = sub_81B1C1C;
 }
 
-/*static*/ void brm_trade_1(u8 taskId)
+static void CursorCb_Trade1(u8 taskId)
 {
     u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
@@ -3534,7 +4624,7 @@ static void sub_81B4F88(void)
     }
 }
 
-/*static*/ void sub_81B52E4(u8 taskId)
+static void CursorCb_Trade2(u8 taskId)
 {
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
@@ -3587,79 +4677,81 @@ static void sub_81B5430(u8 taskId)
     }
 }
 
-/*static*/ void sub_81B5470(u8 taskId)
+static void CursorCb_FieldMove(u8 taskId)
 {
-    u8 fieldMove = gUnknown_0203CEC4->unkF[Menu_GetCursorPos()] - 19;
+    u8 fieldMove = gUnknown_0203CEC4->unkF[Menu_GetCursorPos()] - MENU_FIELD_MOVES;
     const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
-    if (gUnknown_08615D9C[fieldMove].fieldMoveFunc != NULL)
+    if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc == NULL)
+        return;
+
+    sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
+    sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
+    if (sub_81221AC() == TRUE || InUnionRoom() == TRUE)
     {
-        sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
-        sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-        if (sub_81221AC() == TRUE || InUnionRoom() == TRUE)
+        if (fieldMove == FIELD_MOVE_MILK_DRINK || fieldMove == FIELD_MOVE_SOFT_BOILED)
+            display_pokemon_menu_message(13);
+        else
+            display_pokemon_menu_message(sFieldMoveCursorCallbacks[fieldMove].msgId);
+
+        gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
+    }
+    else
+    {
+        // All field moves before WATERFALL are HMs.
+        if (fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
         {
-            if (fieldMove == 11 || fieldMove == 12)
-                display_pokemon_menu_message(13);
-            else
-                display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
-            gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
+            sub_81B1B5C(gText_CantUseUntilNewBadge, 1);
+            gTasks[taskId].func = sub_81B1C1C;
+        }
+        else if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc() == TRUE)
+        {
+            switch (fieldMove)
+            {
+            case FIELD_MOVE_MILK_DRINK:
+            case FIELD_MOVE_SOFT_BOILED:
+                sub_8161560(taskId);
+                break;
+            case FIELD_MOVE_TELEPORT:
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
+                sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
+                StringExpandPlaceholders(gStringVar4, gText_ReturnToHealingSpot);
+                sub_81B5674(taskId);
+                gUnknown_0203CEC4->data[0] = fieldMove;
+                break;
+            case FIELD_MOVE_DIG:
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
+                StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+                sub_81B5674(taskId);
+                gUnknown_0203CEC4->data[0] = fieldMove;
+                break;
+            case FIELD_MOVE_FLY:
+                gUnknown_0203CEC8.exitCallback = MCB2_FlyMap;
+                sub_81B12C0(taskId);
+                break;
+            default:
+                gUnknown_0203CEC8.exitCallback = CB2_ReturnToField;
+                sub_81B12C0(taskId);
+                break;
+            }
         }
         else
         {
-            if (fieldMove <= 7 && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
+            switch (fieldMove)
             {
-                sub_81B1B5C(gText_CantUseUntilNewBadge, 1);
-                gTasks[taskId].func = sub_81B1C1C;
+            case FIELD_MOVE_SURF:
+                sub_81B5864();
+                break;
+            case FIELD_MOVE_FLASH:
+                sub_81B57DC();
+                break;
+            default:
+                display_pokemon_menu_message(sFieldMoveCursorCallbacks[fieldMove].msgId);
+                break;
             }
-            else if (gUnknown_08615D9C[fieldMove].fieldMoveFunc() == TRUE)
-            {
-                switch (fieldMove)
-                {
-                case 11:
-                case 12:
-                    sub_8161560(taskId);
-                    break;
-                case 8:
-                    mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
-                    sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
-                    StringExpandPlaceholders(gStringVar4, gText_ReturnToHealingSpot);
-                    sub_81B5674(taskId);
-                    gUnknown_0203CEC4->data[0] = fieldMove;
-                    break;
-                case 9:
-                    mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
-                    sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
-                    StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
-                    sub_81B5674(taskId);
-                    gUnknown_0203CEC4->data[0] = fieldMove;
-                    break;
-                case 5:
-                    gUnknown_0203CEC8.exitCallback = MCB2_FlyMap;
-                    sub_81B12C0(taskId);
-                    break;
-                default:
-                    gUnknown_0203CEC8.exitCallback = CB2_ReturnToField;
-                    sub_81B12C0(taskId);
-                    break;
-                }
-            }
-            else
-            {
-                switch (fieldMove)
-                {
-                case 4:
-                    sub_81B5864();
-                    break;
-                case 1:
-                    sub_81B57DC();
-                    break;
-                default:
-                    display_pokemon_menu_message(gUnknown_08615D9C[fieldMove].msgID);
-                    break;
-                }
-                gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
-            }
+            gTasks[taskId].func = task_brm_cancel_1_on_keypad_a_or_b;
         }
     }
 }
@@ -3722,7 +4814,7 @@ static u16 brm_get_selected_species(void)
 static void task_brm_cancel_1_on_keypad_a_or_b(u8 taskId)
 {
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
-        brm_cancel_1(taskId);
+        CursorCb_Cancel1(taskId);
 }
 
 static void sub_81B57DC(void)
@@ -3739,7 +4831,7 @@ static void hm_surf_run_dp02scr(void)
     FieldEffectStart(FLDEFF_USE_SURF);
 }
 
-bool8 sub_81B5820(void)
+static bool8 SetUpFieldMove_Surf(void)
 {
     if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
@@ -3752,17 +4844,18 @@ bool8 sub_81B5820(void)
 
 static void sub_81B5864(void)
 {
-    if (TestPlayerAvatarFlags(8))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         display_pokemon_menu_message(9);
     else
         display_pokemon_menu_message(8);
 }
 
-bool8 sub_81B5884(void)
+static bool8 SetUpFieldMove_Fly(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 void sub_81B58A8(void)
@@ -3776,7 +4869,7 @@ static void hm2_waterfall(void)
     FieldEffectStart(FLDEFF_USE_WATERFALL);
 }
 
-bool8 hm_prepare_waterfall(void)
+static bool8 SetUpFieldMove_Waterfall(void)
 {
     s16 x, y;
 
@@ -3796,7 +4889,7 @@ static void sub_81B5958(void)
     FieldEffectStart(FLDEFF_USE_DIVE);
 }
 
-bool8 sub_81B5974(void)
+static bool8 SetUpFieldMove_Dive(void)
 {
     gFieldEffectArguments[1] = TrySetDiveWarp();
     if (gFieldEffectArguments[1] != 0)
@@ -4109,7 +5202,7 @@ void sub_81B617C(void)
     u8 doubleBattleStatus;
     bool8 inBattle;
     u8 i;
-    u8 msgIDMaybe;
+    u8 msgIdMaybe;
     register TaskFunc task asm("r0");
 
     if (gMain.inBattle)
@@ -4134,14 +5227,14 @@ void sub_81B617C(void)
             }
         }
         task = sub_81B6280;
-        msgIDMaybe = 0x7F;
+        msgIdMaybe = 0x7F;
     }
     else
     {
-        msgIDMaybe = (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_TM_HM) ? 4 : 5;
+        msgIdMaybe = (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_TM_HM) ? 4 : 5;
         task = sub_81B1370;
     }
-    InitPartyMenu(inBattle, doubleBattleStatus, 3, 1, msgIDMaybe, task, callback);
+    InitPartyMenu(inBattle, doubleBattleStatus, 3, 1, msgIdMaybe, task, callback);
 }
 
 static void c2_815ABFC(void)
@@ -4553,22 +5646,22 @@ void dp05_pp_up(u8 taskId, TaskFunc task)
 u16 ItemIdToBattleMoveId(u16 item)
 {
     u16 tmNumber = item - ITEM_TM01_FOCUS_PUNCH;
-    return gUnknown_08616040[tmNumber];
+    return gTMHMMoves[tmNumber];
 }
 
-bool8 sub_81B6D14(u16 move)
+bool8 IsMoveHm(u16 move)
 {
     u8 i;
 
     for (i = 0; i < NUM_HIDDEN_MACHINES; i++)
     {
-        if (gUnknown_08616040[i + NUM_TECHNICAL_MACHINES] == move)
+        if (gTMHMMoves[i + NUM_TECHNICAL_MACHINES] == move)
             return TRUE;
     }
     return FALSE;
 }
 
-bool8 pokemon_has_move(struct Pokemon *mon, u16 move)
+bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
 {
     u8 i;
 
@@ -4609,7 +5702,8 @@ void sub_81B6DC4(u8 taskId, TaskFunc task)
     move[0] = ItemIdToBattleMoveId(item);
     StringCopy(gStringVar2, gMoveNames[move[0]]);
     move[1] = 0;
-    switch (CanPartyPokemonLearnTMTutor(mon, item, 0))
+
+    switch (CanMonLearnTMTutor(mon, item, 0))
     {
     case CANNOT_LEARN_MOVE:
         sub_81B6D98(taskId, gText_PkmnCantLearnMove);
@@ -4618,6 +5712,7 @@ void sub_81B6DC4(u8 taskId, TaskFunc task)
         sub_81B6D98(taskId, gText_PkmnAlreadyKnows);
         return;
     }
+
     if (GiveMoveToMon(mon, move[0]) != 0xFFFF)
     {
         gTasks[taskId].func = sub_81B6EB4;
@@ -4895,7 +5990,7 @@ static void sub_81B767C(u8 taskId)
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
-static void sub_81B76C8(u8 taskIdUnused)
+static void sub_81B76C8(u8 taskId)
 {
     s16 *arrayPtr = gUnknown_0203CEC4->data;
 
@@ -5258,10 +6353,10 @@ static void sub_81B7E4C(u8 taskId)
         mon = &gPlayerParty[gUnknown_0203CEC8.unk9];
         move = &gUnknown_0203CEC8.unkE;
         GetMonNickname(mon, gStringVar1);
-        gUnknown_0203CEC8.unkE = sub_81B2360(gSpecialVar_0x8005);
+        gUnknown_0203CEC8.unkE = GetTutorMove(gSpecialVar_0x8005);
         StringCopy(gStringVar2, gMoveNames[gUnknown_0203CEC8.unkE]);
         move[1] = 2;
-        switch (CanPartyPokemonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
+        switch (CanMonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
         {
         case CANNOT_LEARN_MOVE:
             sub_81B6D98(taskId, gText_PkmnCantLearnMove);
@@ -5591,12 +6686,12 @@ static bool8 sub_81B8770(u8 slot)
 
 static void sub_81B879C(u8 taskId)
 {
-    u8 msgID = sub_81B865C();
+    u8 msgId = sub_81B865C();
 
-    if (msgID != 0xFF)
+    if (msgId != 0xFF)
     {
         PlaySE(SE_HAZURE);
-        display_pokemon_menu_message(msgID);
+        display_pokemon_menu_message(msgId);
         gTasks[taskId].func = sub_81B87E8;
     }
     else
@@ -5663,9 +6758,10 @@ static const u8* sub_81B88BC(void)
 
     if (!(facilityNum != 8 && facilityNum != 9))
         return gText_CancelBattle;
-    if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
+    else if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
         return gText_ReturnToWaitingRoom;
-    return gText_CancelChallenge;
+    else
+        return gText_CancelChallenge;
 }
 
 void sub_81B8904(u8 initArg, MainCallback callback)
@@ -5723,7 +6819,6 @@ static bool8 sub_81B8A7C(void)
     u8 slot = GetCursorSelectionMonId();
     u8 newSlot;
     u8 i;
-    u8 neededToMatch;
 
     if (IsMultiBattle() == TRUE && (slot == 1 || slot == 4 || slot == 5))
     {
@@ -5764,8 +6859,8 @@ static bool8 sub_81B8A7C(void)
     }
     if (gUnknown_0203CEC8.unkB == 2)
     {
-        neededToMatch = gBattlerInMenuId;
-        GetMonNickname(&gPlayerParty[pokemon_order_func(gBattlerPartyIndexes[neededToMatch])], gStringVar1);
+        u8 currBattler = gBattlerInMenuId;
+        GetMonNickname(&gPlayerParty[pokemon_order_func(gBattlerPartyIndexes[currBattler])], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantSwitchOut);
         return FALSE;
     }

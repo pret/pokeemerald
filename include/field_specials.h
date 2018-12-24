@@ -15,7 +15,9 @@ bool32 sub_8138168(void);
 bool32 sub_81381B0(void);
 bool32 sub_81381F8(void);
 bool32 CountSSTidalStep(u16 delta);
+u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y);
 void sub_813A128(void);
 void sub_813A878(u8 a0);
+u8 sub_813BADC(u8 a0);
 
 #endif // GUARD_FIELD_SPECIALS_H

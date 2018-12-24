@@ -48,7 +48,7 @@ extern MainCallback gPostMenuFieldCallback;
 extern u8 gSelectedOrderFromParty[4];
 extern u8 gUnknown_0203CF00[3];
 
-extern const u16 gUnknown_0861500C[]; // tutor table
+extern const u16 gTutorMoves[];
 
 void sub_81B0FCC(u8 slot, u8 b);
 bool8 IsMultiBattle(void);
@@ -64,11 +64,7 @@ u8 sub_81B205C(struct Pokemon *mon);
 void display_pokemon_menu_message(u32 stringID);
 void sub_81B47E0(u8 taskId);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
-bool8 sub_81B5820(void);
-bool8 sub_81B5884(void);
 void sub_81B58A8(void);
-bool8 hm_prepare_waterfall(void);
-bool8 sub_81B5974(void);
 void LoadHeldItemIcons(void);
 void sub_81B5D4C(u8 *a, u8 *b, u8 c);
 void sub_81B617C(void);
@@ -77,8 +73,8 @@ void sub_81B67C8(u8 taskId, TaskFunc task);
 void dp05_ether(u8 taskId, TaskFunc task);
 void dp05_pp_up(u8 taskId, TaskFunc task);
 u16 ItemIdToBattleMoveId(u16 item);
-bool8 sub_81B6D14(u16 move);
-bool8 pokemon_has_move(struct Pokemon *mon, u16 move);
+bool8 IsMoveHm(u16 move);
+bool8 MonKnowsMove(struct Pokemon *mon, u16 move);
 void sub_81B6DC4(u8 taskId, TaskFunc task);
 void dp05_rare_candy(u8 taskId, TaskFunc task);
 void sub_81B79E8(u8 taskId, TaskFunc task);
