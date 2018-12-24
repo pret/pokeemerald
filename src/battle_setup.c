@@ -24,6 +24,7 @@
 #include "window.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
+#include "tv.h"
 #include "trainer_see.h"
 #include "field_message_box.h"
 #include "sound.h"
@@ -36,6 +37,9 @@
 #include "gym_leader_rematch.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "fldeff_misc.h"
+#include "field_control_avatar.h"
+#include "fldeff_groundshake.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
 
@@ -57,12 +61,8 @@ struct TrainerBattleParameter
 };
 
 extern bool32 InTrainerHill(void);
-extern bool32 FldEffPoison_IsActive(void);
-extern void RestartWildEncounterImmunitySteps(void);
 extern void ClearPoisonStepCounter(void);
-extern void sub_81BE72C(void);
 extern void sub_808BCF4(void);
-extern void sub_80EECC8(void);
 extern void sub_80AF6F0(void);
 extern u16 sub_81D6180(u8 localId);
 extern bool8 GetTrainerHillTrainerFlag(u8 eventObjId);

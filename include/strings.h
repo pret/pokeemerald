@@ -1875,4 +1875,50 @@ extern const u8 gText_PartyFull[];
 extern const u8 gText_Box[];
 extern const u8 gText_JustOnePkmn[];
 
+// battle main
+extern const u8 gText_LinkStandby3[];
+extern const u8 gText_BattleRecordCouldntBeSaved[];
+extern const u8 gText_Poison[];
+extern const u8 gText_Sleep[];
+extern const u8 gText_Paralysis[];
+extern const u8 gText_Burn[];
+extern const u8 gText_Ice[];
+extern const u8 gText_Confusion[];
+extern const u8 gText_Love[];
+
+// battle message
+extern const u8 gText_PkmnBoxSomeonesPCFull[];
+extern const u8 gText_PkmnBoxLanettesPCFull[];
+extern const u8 gText_PkmnTransferredSomeonesPC[];
+extern const u8 gText_PkmnTransferredLanettesPC[];
+
+// hall of fame
+extern const u8 gText_SavingDontTurnOffPower[];
+extern const u8 gText_LeagueChamp[];
+extern const u8 gText_HOFNumber[];
+extern const u8 gText_PickNextCancel[];
+extern const u8 gText_PickCancel[];
+extern const u8 gText_UnkCtrlF800Exit[];
+extern const u8 gText_HOFCorrupted[];
+extern const u8 gText_WelcomeToHOF[];
+extern const u8 gText_Number[];
+extern const u8 gText_Level[];
+extern const u8 gText_IDNumber[];
+extern const u8 gText_Name[];
+extern const u8 gText_MainMenuTime[];
+
+// daycare
+extern const u8 gText_MaleSymbol4[];
+extern const u8 gText_FemaleSymbol4[];
+extern const u8 gText_GenderlessSymbol[];
+extern const u8 gText_NewLine2[];
+extern const u8 gText_Exit4[];
+extern const u8 gText_Lv[];
+extern const u8 gExpandedPlaceholder_Empty[];
+extern const u8 gText_Exit[];
+extern const u8 gDaycareText_GetAlongVeryWell[];
+extern const u8 gDaycareText_GetAlong[];
+extern const u8 gDaycareText_DontLikeOther[];
+extern const u8 gDaycareText_PlayOther[];
+
 #endif //GUARD_STRINGS_H

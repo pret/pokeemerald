@@ -1102,7 +1102,6 @@ static const struct SpriteTemplate gUnknown_085E7068 =
     .callback = sub_81772B8,
 };
 
-void sub_8175620(void);
 static void sub_8175744(u8 taskIdA);
 static void sub_8175774(u8 taskIdA);
 static void sub_8175808(u8 taskIdA);

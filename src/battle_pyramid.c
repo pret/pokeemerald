@@ -8,7 +8,9 @@
 #include "save.h"
 #include "strings.h"
 #include "fieldmap.h"
+#include "party_menu.h"
 #include "palette.h"
+#include "field_screen_effect.h"
 #include "field_message_box.h"
 #include "random.h"
 #include "item.h"
@@ -31,9 +33,6 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/species.h"
-
-extern u8 gSelectedOrderFromParty[3];
-extern void door_upload_tiles(void);
 
 extern const struct MapLayout *const gMapLayouts[];
 extern const u16 gUnknown_08D856C8[][16];

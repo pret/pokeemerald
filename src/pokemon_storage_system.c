@@ -8,6 +8,7 @@
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "fldeff_misc.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -462,10 +463,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
-extern void sub_80F9BCC(u16, u16, u8);
-extern void sub_80F9BF4(u16, u16, u8);
-extern bool8 sub_80F9C1C(void);
-extern bool8 sub_80F9C30(void);
 extern void sub_80C6D80(u8 *arg0, void *arg1, u8 arg2, u8 arg3, s32 arg4);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];

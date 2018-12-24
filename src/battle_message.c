@@ -14,6 +14,7 @@
 #include "palette.h"
 #include "recorded_battle.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
 #include "window.h"
 #include "constants/battle_string_ids.h"
@@ -40,15 +41,7 @@ extern u8 gUnknown_0203C7B4;
 extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
 
-// strings
-extern const u8 gText_PkmnBoxSomeonesPCFull[];
-extern const u8 gText_PkmnBoxLanettesPCFull[];
-extern const u8 gText_PkmnTransferredSomeonesPC[];
-extern const u8 gText_PkmnTransferredLanettesPC[];
-
-extern u8 GetFrontierBrainTrainerClass(void); // battle_frontier_2
 extern u8 GetTrainerHillOpponentClass(u16 trainerId); // pokenav
-extern void CopyFrontierBrainTrainerName(u8 *txtPtr); // battle_frontier_2
 extern void GetTrainerHillTrainerName(u8 *txtPtr, u16 trainerId); // pokenav
 extern void CopyTrainerHillTrainerText(u8 arg0, u16 trainerId); // pokenav
 
