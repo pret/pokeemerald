@@ -179,11 +179,11 @@ SootopolisCity_EventScript_1E58E5:: @ 81E58E5
 	end
 
 SootopolisCity_EventScript_1E58FC:: @ 81E58FC
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	return
 
 SootopolisCity_EventScript_1E5901:: @ 81E5901
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	setvar VAR_0x40CA, 3
 	return
 

@@ -15,7 +15,7 @@ SlateportCity_BattleTentCorridor_EventScript_208E3B:: @ 8208E3B
 	turnobject 1, 1
 
 SlateportCity_BattleTentCorridor_EventScript_208E56:: @ 8208E56
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 SlateportCity_BattleTentCorridor_MapScript2_208E5B: @ 8208E5B

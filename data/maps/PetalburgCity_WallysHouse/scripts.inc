@@ -8,7 +8,7 @@ PetalburgCity_WallysHouse_MapScript2_204234: @ 8204234
 	.2byte 0
 
 PetalburgCity_WallysHouse_EventScript_20423E:: @ 820423E
-	turnobject 255, 4
+	turnobject EVENT_OBJ_ID_PLAYER, 4
 	turnobject 1, 3
 	end
 

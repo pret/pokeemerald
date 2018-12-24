@@ -357,13 +357,13 @@ Route104_EventScript_1ED090:: @ 81ED090
 
 Route104_EventScript_1ED099:: @ 81ED099
 	setobjectpriority 8, MAP_ROUTE104, 0
-	setobjectpriority 255, MAP_ROUTE104, 0
+	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104, 0
 	applymovement 8, Route104_Movement_1ED359
 	waitmovement 0
 	removeobject 8
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED34F
 	waitmovement 0
-	hideobjectat 255, MAP_ROUTE104
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	call Route104_EventScript_2720A0
 	goto_if_set FLAG_0x132, Route104_EventScript_1ED0D9
 	goto_if_unset FLAG_0x132, Route104_EventScript_1ED0EF
@@ -399,7 +399,7 @@ Route104_EventScript_1ED139:: @ 81ED139
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED353
 	waitmovement 0
 	call Route104_EventScript_2720A8
-	showobjectat 255, MAP_DEWFORD_TOWN
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED355
 	waitmovement 0
 	setobjectxyperm 2, 12, 8
@@ -414,7 +414,7 @@ Route104_EventScript_1ED139:: @ 81ED139
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	hideobjectat 7, MAP_ROUTE104
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, MAP_ROUTE104
+	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	setvar VAR_0x408E, 0

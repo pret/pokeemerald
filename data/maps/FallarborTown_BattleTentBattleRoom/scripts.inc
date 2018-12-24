@@ -260,7 +260,7 @@ FallarborTown_BattleTentBattleRoom_MapScript2_200BB0: @ 8200BB0
 	.2byte 0
 
 FallarborTown_BattleTentBattleRoom_EventScript_200BBA:: @ 8200BBA
-	hideobjectat 255, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	removeobject 3
 	setvar VAR_TEMP_1, 1

@@ -9,7 +9,7 @@ SlateportCity_BattleTentLobby_MapScript2_20873B: @ 820873B
 
 SlateportCity_BattleTentLobby_EventScript_208745:: @ 8208745
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 SlateportCity_BattleTentLobby_MapScript2_20874F: @ 820874F

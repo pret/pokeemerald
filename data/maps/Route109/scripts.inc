@@ -4,7 +4,7 @@ Route109_MapScripts:: @ 81EE75F
 Route109_EventScript_1EE760:: @ 81EE760
 	call Route109_EventScript_271E95
 	setobjectpriority 2, MAP_ROUTE109, 0
-	setobjectpriority 255, MAP_ROUTE109, 0
+	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE109, 0
 	applymovement 2, Route109_Movement_1EE90B
 	waitmovement 0
 	removeobject 2
@@ -33,14 +33,14 @@ Route109_EventScript_1EE7C5:: @ 81EE7C5
 	end
 
 Route109_EventScript_1EE7D5:: @ 81EE7D5
-	hideobjectat 255, MAP_ROUTE109
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	call Route109_EventScript_2720A0
 	applymovement 1, Route109_Movement_1EE84F
 	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE84F
 	waitmovement 0
 	delay 50
 	call Route109_EventScript_2720A8
-	showobjectat 255, MAP_DEWFORD_TOWN
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE900
 	waitmovement 0
 	addobject 4
@@ -56,7 +56,7 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	msgbox Route109_Text_1E9C1D, MSGBOX_DEFAULT
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, MAP_ROUTE109
+	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	release

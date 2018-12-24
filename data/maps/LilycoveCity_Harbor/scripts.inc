@@ -363,7 +363,7 @@ LilycoveCity_Harbor_EventScript_21E514:: @ 821E514
 	compare VAR_FACING, 4
 	call_if_eq LilycoveCity_Harbor_EventScript_21E610
 	delay 30
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_2721E2
 	return
@@ -424,7 +424,7 @@ LilycoveCity_Harbor_EventScript_21E5CC:: @ 821E5CC
 	compare VAR_FACING, 4
 	call_if_eq LilycoveCity_Harbor_EventScript_21E610
 	delay 30
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_2721E2
 	return

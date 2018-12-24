@@ -235,7 +235,7 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	compare VAR_FACING, 4
 	call_if_eq SlateportCity_Harbor_EventScript_20CC37
 	delay 30
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	setvar VAR_0x8004, 5
 	call SlateportCity_Harbor_EventScript_2721E2
 	return

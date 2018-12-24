@@ -18,7 +18,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C87D: @ 825C87D
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
 	setvar VAR_TEMP_4, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891:: @ 825C891

@@ -9,7 +9,7 @@ BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721
 
 BattleFrontier_BattlePyramidLobby_EventScript_25072B: @ 825072B
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250735: @ 8250735

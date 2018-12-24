@@ -15,7 +15,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF:: @ 8259ACF
 	turnobject 1, 1
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA:: @ 8259AEA
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF: @ 8259AEF
