@@ -64,7 +64,7 @@ const u16 gTutorMoves[] =
 };
 
 #define TUTOR_LEARNSET(moves) ((u32)(moves))
-#define TUTOR(move)((u64)1 << (TUTOR_##move))
+#define TUTOR(move) ((u64)1 << (TUTOR_##move))
 
 static const u32 sTutorLearnsets[] =
 {
