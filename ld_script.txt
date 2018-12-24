@@ -165,12 +165,12 @@ SECTIONS {
         src/fight.o(.text);
         src/poison.o(.text);
         asm/flying.o(.text);
-        asm/psychic.o(.text);
+        src/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
         src/ghost.o(.text);
         src/dragon.o(.text);
-        asm/dark.o(.text);
+        src/dark.o(.text);
         src/ground.o(.text);
         src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
