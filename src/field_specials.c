@@ -3817,7 +3817,7 @@ void sub_813B9A0(void)
     }
 }
 
-bool32 sub_813B9C0(void)
+bool8 sub_813B9C0(void)
 {
     static const u16 gUnknown_085B3444[] = {
         MAP_OLDALE_TOWN_POKEMON_CENTER_1F,
