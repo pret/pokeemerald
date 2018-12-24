@@ -3195,3 +3195,50 @@ u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
         return 1;
     }
 }
+
+s32 sub_807A728(void)
+{
+    int val;
+    u8 version;
+    
+    if (gReceivedRemoteLinkPlayers != 0)
+    {
+        val = 0;
+        version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);
+        if (version == VERSION_RUBY ||
+            version == VERSION_SAPPHIRE ||
+            version == VERSION_EMERALD)
+        {
+            // this value could actually be anything 0 or less
+            val = 0;
+        }
+        else if (version == VERSION_FIRE_RED ||
+                 version == VERSION_LEAF_GREEN)
+        {
+            val = 2;
+        }
+
+        if (val > 0)
+        {
+            if (gLinkPlayers[GetMultiplayerId()].name[10] & 0xF0)
+            {
+                if (val == 2)
+                {
+                    if (gLinkPlayers[GetMultiplayerId() ^ 1].name[10] & 0xF0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+                }
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
