@@ -222,7 +222,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setflag FLAG_0x052
 	fadescreen 1
 	removeobject 4
-	setobjectxy 255, 6, 13
+	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
 	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_2725A4
 	waitmovement 0
 	special ChooseStarter

@@ -30,7 +30,7 @@ SlateportCity_BattleTentBattleRoom_MapScript2_20999A: @ 820999A
 
 SlateportCity_BattleTentBattleRoom_EventScript_2099A4:: @ 82099A4
 	setvar VAR_TEMP_1, 1
-	hideobjectat 255, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat 2, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
 	end
 

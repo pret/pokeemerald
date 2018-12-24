@@ -85,6 +85,6 @@ BattleFrontier_BattleTowerElevator_MapScript2_241A96: @ 8241A96
 
 BattleFrontier_BattleTowerElevator_EventScript_241AA0:: @ 8241AA0
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 

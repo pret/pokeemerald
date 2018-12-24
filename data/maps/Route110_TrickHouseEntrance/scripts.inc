@@ -133,7 +133,7 @@ Route110_TrickHouseEntrance_EventScript_269C15:: @ 8269C15
 	addobject 1
 	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	turnobject 1, 4
-	turnobject 255, 3
+	turnobject EVENT_OBJ_ID_PLAYER, 3
 	end
 
 Route110_TrickHouseEntrance_EventScript_269C26:: @ 8269C26

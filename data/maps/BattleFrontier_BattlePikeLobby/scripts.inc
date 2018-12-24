@@ -16,7 +16,7 @@ BattleFrontier_BattlePikeLobby_MapScript2_25B6F3: @ 825B6F3
 
 BattleFrontier_BattlePikeLobby_EventScript_25B6FD:: @ 825B6FD
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
