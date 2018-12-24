@@ -13,16 +13,16 @@ MtPyre_Exterior_EventScript_231FD8:: @ 8231FD8
 	return
 
 MtPyre_Exterior_EventScript_231FE9:: @ 8231FE9
-	setweather 6
+	setweather WEATHER_FOG_1
 	return
 
 MtPyre_Exterior_EventScript_231FED:: @ 8231FED
-	setweather 6
+	setweather WEATHER_FOG_1
 	doweather
 	end
 
 MtPyre_Exterior_EventScript_231FF2:: @ 8231FF2
-	setweather 2
+	setweather WEATHER_SUNNY
 	doweather
 	end
 
