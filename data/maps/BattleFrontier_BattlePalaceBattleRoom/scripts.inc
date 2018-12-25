@@ -19,13 +19,13 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833:: @ 824F833
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F84B:: @ 824F84B
-	setvar VAR_OBJ_GFX_ID_1, 100
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F856:: @ 824F856
-	setvar VAR_OBJ_GFX_ID_1, 105
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861: @ 824F861

@@ -17,11 +17,11 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F:: @ 8248F0F
 	checkplayergender
 	compare VAR_RESULT, 1
 	goto_if_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29
-	setvar VAR_OBJ_GFX_ID_F, 0
+	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29:: @ 8248F29
-	setvar VAR_OBJ_GFX_ID_F, 89
+	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_MAY_NORMAL
 	return
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F:: @ 8248F2F

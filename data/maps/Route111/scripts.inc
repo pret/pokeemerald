@@ -60,11 +60,11 @@ Route111_EventScript_1F0DC2:: @ 81F0DC2
 	return
 
 Route111_EventScript_1F0DDA:: @ 81F0DDA
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 Route111_EventScript_1F0DE0:: @ 81F0DE0
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 Route111_EventScript_1F0DE6:: @ 81F0DE6

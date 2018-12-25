@@ -1799,11 +1799,11 @@ RustboroCity_EventScript_271ED7:: @ 8271ED7
 	end
 
 RustboroCity_EventScript_271EEF:: @ 8271EEF
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 RustboroCity_EventScript_271EF5:: @ 8271EF5
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 LavaridgeTown_EventScript_271EFB:: @ 8271EFB
@@ -1817,11 +1817,11 @@ Route119_EventScript_271EFB:: @ 8271EFB
 	end
 
 LavaridgeTown_EventScript_271F13:: @ 8271F13
-	setvar VAR_OBJ_GFX_ID_3, 106
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
 LavaridgeTown_EventScript_271F19:: @ 8271F19
-	setvar VAR_OBJ_GFX_ID_3, 101
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
 EventScript_271F1F:: @ 8271F1F
@@ -1833,11 +1833,11 @@ EventScript_271F1F:: @ 8271F1F
 	end
 
 EventScript_271F37:: @ 8271F37
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 EventScript_271F3D:: @ 8271F3D
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 DewfordTown_Gym_EventScript_271F43:: @ 8271F43
@@ -8977,8 +8977,8 @@ BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE: @ 82C3EDE
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
-	setvar VAR_OBJ_GFX_ID_1, 28
-	setvar VAR_OBJ_GFX_ID_0, 28
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LINK_RECEPTIONIST
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_LINK_RECEPTIONIST
 	setvar VAR_0x8004, 5
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 3

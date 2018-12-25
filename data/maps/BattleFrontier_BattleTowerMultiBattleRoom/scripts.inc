@@ -25,14 +25,14 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA:: @ 8243DDA
-	setvar VAR_OBJ_GFX_ID_0, 7
-	setvar VAR_OBJ_GFX_ID_1, 7
-	setvar VAR_OBJ_GFX_ID_2, 7
-	setvar VAR_OBJ_GFX_ID_3, 7
-	setvar VAR_OBJ_GFX_ID_4, 7
-	setvar VAR_OBJ_GFX_ID_5, 7
-	setvar VAR_OBJ_GFX_ID_6, 7
-	setvar VAR_OBJ_GFX_ID_7, 7
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_2, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_4, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_5, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_6, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_7, EVENT_OBJ_GFX_BOY_1
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_3, 1
 	setobjectxyperm 1, 10, 2
