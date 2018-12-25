@@ -251,7 +251,7 @@ static void CreatePostEvoSparkleSet2(u8 arg0)
 
 void LoadEvoSparkleSpriteAndPal(void)
 {
-    LoadCompressedObjectPicUsingHeap(&sEvoSparkleSpriteSheets[0]);
+    LoadCompressedSpriteSheetUsingHeap(&sEvoSparkleSpriteSheets[0]);
     LoadSpritePalettes(sEvoSparkleSpritePals);
 }
 

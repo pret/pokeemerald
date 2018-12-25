@@ -11,8 +11,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
-	checkflag FLAG_0x152
-	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
+	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3
@@ -44,7 +43,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14: @ 8243E14
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23: @ 8243E23
@@ -60,12 +59,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E35:: @ 8243E35
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	lockall
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E75
 	waitmovement 0
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243E77
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -89,7 +88,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E7A:: @ 8243E7A
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D
+	goto_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_24410C, MSGBOX_DEFAULT
 	release
 	end
@@ -119,19 +118,19 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EB5:: @ 8243EB5
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EE4:: @ 8243EE4
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1A
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243EF6: @ 8243EF6
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F1E
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F08: @ 8243F08
 	applymovement 1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F26
-	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22
+	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiBattleRoom_Movement_243F22
 	waitmovement 0
 	return
 
@@ -166,8 +165,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F29:: @ 8243F29
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
-	checkflag FLAG_0x152
-	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
+	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 0
 	special sub_8161F74
@@ -193,9 +191,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	waitbuttonpress
 	closemessage
 	compare VAR_FACING, 1
-	call_if 5, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
+	call_if_ne BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
+	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_0x152
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 3

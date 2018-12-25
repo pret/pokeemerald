@@ -5,9 +5,9 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "fldeff.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "rom6.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -21,8 +21,6 @@ static void FieldCallback_SweetScent(void);
 static void StartSweetScentFieldEffect(void);
 static void TrySweetScentEncounter(u8 taskId);
 static void FailSweetScentEncounter(u8 taskId);
-void sub_81BE6B8(void);
-void sub_81BE72C(void);
 
 bool8 SetUpFieldMove_SweetScent(void)
 {

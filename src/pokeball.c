@@ -922,7 +922,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 4);
         }
         r4 = sprite->data[0];
-        TranslateAnimLinear(sprite);
+        AnimTranslateLinear(sprite);
         sprite->data[7] += sprite->sBattler / 3;
         sprite->pos2.y += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
         sprite->oam.affineParam += 0x100;
@@ -999,8 +999,8 @@ void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 battlerId, u8 x, u8 y, 
 {
     u8 spriteId;
 
-    LoadCompressedObjectPicUsingHeap(&gBallSpriteSheets[0]);
-    LoadCompressedObjectPaletteUsingHeap(&gBallSpritePalettes[0]);
+    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[0]);
+    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[0]);
     spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subpriortiy);
 
     gSprites[spriteId].data[0] = monSpriteId;
@@ -1101,8 +1101,8 @@ u8 sub_807671C(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32
 {
     u8 spriteId;
 
-    LoadCompressedObjectPicUsingHeap(&gBallSpriteSheets[0]);
-    LoadCompressedObjectPaletteUsingHeap(&gBallSpritePalettes[0]);
+    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[0]);
+    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[0]);
     spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subPriority);
     gSprites[spriteId].data[0] = a;
     gSprites[spriteId].data[1] = g;
@@ -1245,8 +1245,8 @@ void LoadBallGfx(u8 ballId)
 
     if (GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag) == 0xFFFF)
     {
-        LoadCompressedObjectPicUsingHeap(&gBallSpriteSheets[ballId]);
-        LoadCompressedObjectPaletteUsingHeap(&gBallSpritePalettes[ballId]);
+        LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
+        LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);
     }
     switch (ballId)
     {

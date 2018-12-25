@@ -7,6 +7,20 @@ struct TrainerMoney
     u8 value;
 };
 
+struct UnknownPokemonStruct4
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 heldItem;
+    /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x0F*/ u8 level;
+    /*0x10*/ u16 hp;
+    /*0x12*/ u16 maxhp;
+    /*0x14*/ u32 status;
+    /*0x18*/ u32 personality;
+    /*0x1C*/ u8 gender;
+    /*0x1D*/ u8 language;
+};
+
 #define TYPE_NAME_LENGTH 6
 #define ABILITY_NAME_LENGTH 12
 
@@ -40,7 +54,7 @@ void sub_8038B74(struct Sprite *sprite);
 void sub_8038D64(void);
 u32 sub_80391E0(u8 arrayId, u8 caseId);
 u32 sub_80397C4(u32 setId, u32 tableId);
-void oac_poke_opponent(struct Sprite *sprite);
+void SpriteCb_WildMon(struct Sprite *sprite);
 void SpriteCallbackDummy_2(struct Sprite *sprite);
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
 void sub_8039AD8(struct Sprite *sprite);
@@ -70,6 +84,11 @@ void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 
+extern struct UnknownPokemonStruct4 gUnknown_02022FF8[3];
+
+extern const struct SpriteTemplate gUnknown_0831AC88;
+extern const struct OamData gOamData_831ACA8;
+extern const struct OamData gOamData_831ACB0;
 extern const u8 gTypeEffectiveness[336];
 extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];
 extern const struct TrainerMoney gTrainerMoneyTable[];

@@ -3,8 +3,7 @@ AquaHideout_B2F_MapScripts:: @ 8233DCF
 	.byte 0
 
 AquaHideout_B2F_MapScript1_233DD5: @ 8233DD5
-	checkflag FLAG_0x070
-	call_if 1, AquaHideout_B2F_EventScript_233DDF
+	call_if_set FLAG_0x070, AquaHideout_B2F_EventScript_233DDF
 	end
 
 AquaHideout_B2F_EventScript_233DDF:: @ 8233DDF

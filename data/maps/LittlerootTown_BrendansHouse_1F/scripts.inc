@@ -6,9 +6,8 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
 	compare VAR_0x4092, 6
-	call_if 0, LittlerootTown_BrendansHouse_1F_EventScript_1F777A
-	checkflag FLAG_0x112
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
+	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_1F777A
+	call_if_set FLAG_0x112, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
@@ -19,7 +18,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
 LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F779A
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F779A
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
@@ -28,11 +27,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4
 	compare VAR_0x4092, 3
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
 	compare VAR_0x4092, 5
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
 	compare VAR_0x4092, 6
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F77C6:: @ 81F77C6
@@ -62,7 +61,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F7814:: @ 81F7814
 	lockall
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7B67, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F783A
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F783A
 	applymovement 1, LittlerootTown_BrendansHouse_1F_Movement_1F783A
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 255, 7, 1
@@ -95,7 +94,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	waitmovement 0
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_27259A
 	waitmovement 0
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_2725A4
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1F789C
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -152,22 +151,22 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_27259A
 	waitmovement 0
 	compare VAR_0x8008, 1
-	call_if 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7981
+	call_if_ne LittlerootTown_BrendansHouse_1F_EventScript_1F7981
 	playbgm MUS_BOY_SUP, 1
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F798C
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F798C
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F7997
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F7997
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79A2
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F79A2
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F90B4, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79C1
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F79C1
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79D3
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F79D3
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79E5
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F79E5
 	playse SE_KAIDAN
 	removeobject 7
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
@@ -182,7 +181,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7981:: @ 81F7981
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_2725AA
 	waitmovement 0
 	return
 
@@ -228,19 +227,19 @@ LittlerootTown_BrendansHouse_1F_Movement_1F79B9: @ 81F79B9
 	step_end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F79C1:: @ 81F79C1
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F79F7
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F79F7
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_1F7A06
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F79D3:: @ 81F79D3
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F79FB
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F79FB
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_1F7A0C
 	waitmovement 0
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F79E5:: @ 81F79E5
-	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_1F7A02
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_1F7A02
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_1F7A16
 	waitmovement 0
 	return

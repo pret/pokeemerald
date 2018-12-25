@@ -11,6 +11,7 @@
 #include "link.h"
 #include "main.h"
 #include "menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"
@@ -30,8 +31,6 @@ struct BattleBackground
     const void *entryTilemap;
     const void *palette;
 };
-
-extern u8 GetCurrentMapBattleScene(void);
 
 // .rodata
 static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?
@@ -1103,7 +1102,7 @@ void DrawBattleEntryBackground(void)
         SetGpuReg(REG_OFFSET_WINOUT, 0x36);
         gBattle_BG1_Y = 0xFF5C;
         gBattle_BG2_Y = 0xFF5C;
-        LoadCompressedObjectPicUsingHeap(&gUnknown_0831AA00);
+        LoadCompressedSpriteSheetUsingHeap(&gUnknown_0831AA00);
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_EREADER_TRAINER))
     {

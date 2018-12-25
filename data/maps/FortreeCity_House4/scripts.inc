@@ -7,12 +7,9 @@ FortreeCity_House4_EventScript_217C81:: @ 8217C81
 
 FortreeCity_House4_EventScript_217C8A:: @ 8217C8A
 	lockall
-	checkflag FLAG_0x0DF
-	goto_eq FortreeCity_House4_EventScript_217D06
-	checkflag FLAG_0x0E0
-	goto_eq FortreeCity_House4_EventScript_217CD8
-	checkflag FLAG_0x0DE
-	goto_eq FortreeCity_House4_EventScript_217CC4
+	goto_if_set FLAG_0x0DF, FortreeCity_House4_EventScript_217D06
+	goto_if_set FLAG_0x0E0, FortreeCity_House4_EventScript_217CD8
+	goto_if_set FLAG_0x0DE, FortreeCity_House4_EventScript_217CC4
 	msgbox FortreeCity_House4_Text_217DB9, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_0x0DE
@@ -36,7 +33,7 @@ FortreeCity_House4_EventScript_217CD8:: @ 8217CD8
 	msgbox FortreeCity_House4_Text_217E05, MSGBOX_DEFAULT
 	giveitem_std ITEM_MENTAL_HERB
 	compare VAR_RESULT, 0
-	goto_eq FortreeCity_House4_EventScript_272054
+	goto_if_eq FortreeCity_House4_EventScript_272054
 	setflag FLAG_0x0DF
 	releaseall
 	end

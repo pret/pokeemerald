@@ -5,12 +5,9 @@ OldaleTown_MapScripts:: @ 81E8EA2
 OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
 	call OldaleTown_EventScript_271ED7
 	setflag FLAG_VISITED_OLDALE_TOWN
-	checkflag FLAG_0x074
-	call_if 0, OldaleTown_EventScript_1E8ED2
-	checkflag FLAG_0x084
-	call_if 0, OldaleTown_EventScript_1E8EDE
-	checkflag FLAG_0x074
-	call_if 1, OldaleTown_EventScript_1E8ECC
+	call_if_unset FLAG_0x074, OldaleTown_EventScript_1E8ED2
+	call_if_unset FLAG_0x084, OldaleTown_EventScript_1E8EDE
+	call_if_set FLAG_0x074, OldaleTown_EventScript_1E8ECC
 	end
 
 OldaleTown_EventScript_1E8ECC:: @ 81E8ECC
@@ -38,10 +35,8 @@ OldaleTown_EventScript_1E8EF3:: @ 81E8EF3
 OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 	lock
 	faceplayer
-	checkflag FLAG_0x084
-	goto_eq OldaleTown_EventScript_1E8FB9
-	checkflag FLAG_TEMP_1
-	goto_eq OldaleTown_EventScript_1E8FB9
+	goto_if_set FLAG_0x084, OldaleTown_EventScript_1E8FB9
+	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_1E8FB9
 	setflag FLAG_TEMP_1
 	playbgm MUS_TSURETEK, 0
 	msgbox OldaleTown_Text_1E91C0, MSGBOX_DEFAULT
@@ -54,20 +49,20 @@ OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 
 OldaleTown_EventScript_1E8F47:: @ 81E8F47
 	applymovement 2, OldaleTown_Movement_1E8FD7
-	applymovement 255, OldaleTown_Movement_1E9001
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_1E9001
 	waitmovement 0
 	goto OldaleTown_EventScript_1E8F8C
 	end
 
 OldaleTown_EventScript_1E8F5E:: @ 81E8F5E
 	applymovement 2, OldaleTown_Movement_1E8FE2
-	applymovement 255, OldaleTown_Movement_1E900B
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_1E900B
 	waitmovement 0
 	goto OldaleTown_EventScript_1E8F8C
 	end
 
 OldaleTown_EventScript_1E8F75:: @ 81E8F75
-	applymovement 255, OldaleTown_Movement_1E8FF9
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_1E8FF9
 	applymovement 2, OldaleTown_Movement_1E8FCE
 	waitmovement 0
 	goto OldaleTown_EventScript_1E8F8C
@@ -77,7 +72,7 @@ OldaleTown_EventScript_1E8F8C:: @ 81E8F8C
 	msgbox OldaleTown_Text_1E91FD, MSGBOX_DEFAULT
 	giveitem_std ITEM_POTION
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_EventScript_1E8FC3
+	goto_if_eq OldaleTown_EventScript_1E8FC3
 	msgbox OldaleTown_Text_1E92AF, MSGBOX_DEFAULT
 	setflag FLAG_0x084
 	fadedefaultbgm
@@ -195,8 +190,7 @@ OldaleTown_Movement_1E9013: @ 81E9013
 OldaleTown_EventScript_1E901F:: @ 81E901F
 	lock
 	faceplayer
-	checkflag FLAG_0x074
-	goto_eq OldaleTown_EventScript_1E9066
+	goto_if_set FLAG_0x074, OldaleTown_EventScript_1E9066
 	msgbox OldaleTown_Text_1E939A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, OldaleTown_Movement_2725A2
@@ -206,7 +200,7 @@ OldaleTown_EventScript_1E901F:: @ 81E901F
 
 OldaleTown_EventScript_1E903F:: @ 81E903F
 	lockall
-	applymovement 255, OldaleTown_Movement_1E9182
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_1E9182
 	applymovement 3, OldaleTown_Movement_1E9185
 	waitmovement 0
 	msgbox OldaleTown_Text_1E9313, MSGBOX_DEFAULT
@@ -233,7 +227,7 @@ OldaleTown_EventScript_1E9086:: @ 81E9086
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9170
 	waitmovement 0
-	applymovement 255, OldaleTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_2725A8
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -243,7 +237,7 @@ OldaleTown_EventScript_1E90A6:: @ 81E90A6
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9173
 	waitmovement 0
-	applymovement 255, OldaleTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_2725A8
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -253,7 +247,7 @@ OldaleTown_EventScript_1E90C6:: @ 81E90C6
 	lockall
 	applymovement 4, OldaleTown_Movement_1E9175
 	waitmovement 0
-	applymovement 255, OldaleTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_2725A8
 	waitmovement 0
 	setvar VAR_0x8009, 1
 	goto OldaleTown_EventScript_1E90E6
@@ -262,9 +256,9 @@ OldaleTown_EventScript_1E90C6:: @ 81E90C6
 OldaleTown_EventScript_1E90E6:: @ 81E90E6
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_EventScript_1E90FE
+	goto_if_eq OldaleTown_EventScript_1E90FE
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_EventScript_1E910C
+	goto_if_eq OldaleTown_EventScript_1E910C
 	end
 
 OldaleTown_EventScript_1E90FE:: @ 81E90FE
@@ -280,9 +274,9 @@ OldaleTown_EventScript_1E910C:: @ 81E910C
 OldaleTown_EventScript_1E911A:: @ 81E911A
 	closemessage
 	compare VAR_0x8009, 0
-	call_if 1, OldaleTown_EventScript_1E9148
+	call_if_eq OldaleTown_EventScript_1E9148
 	compare VAR_0x8009, 1
-	call_if 1, OldaleTown_EventScript_1E915E
+	call_if_eq OldaleTown_EventScript_1E915E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0
 	removeobject 4
@@ -293,13 +287,13 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 
 OldaleTown_EventScript_1E9148:: @ 81E9148
 	compare VAR_FACING, 1
-	goto_if 5, OldaleTown_EventScript_1E915E
+	goto_if_ne OldaleTown_EventScript_1E915E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0
 	return
 
 OldaleTown_EventScript_1E915E:: @ 81E915E
-	applymovement 255, OldaleTown_Movement_1E917E
+	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_Movement_1E917E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0
 	return

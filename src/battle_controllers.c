@@ -6,6 +6,7 @@
 #include "battle_message.h"
 #include "cable_club.h"
 #include "link.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "recorded_battle.h"
 #include "task.h"
@@ -18,8 +19,6 @@ static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
 static EWRAM_DATA u8 sUnknown_02022D0A = 0;
 EWRAM_DATA struct UnusedControllerStruct gUnknown_02022D0C = {};
 static EWRAM_DATA u8 sBattleBuffersTransferData[0x100] = {};
-
-extern void sub_81B8D64(u8 battlerId, u8 arg1); // party_menu
 
 // this file's funcionts
 static void CreateTasksForSendRecvLinkBuffers(void);

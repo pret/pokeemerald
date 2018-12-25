@@ -1,8 +1,7 @@
 PetalburgCity_PokemonCenter_1F_EventScript_291539:: @ 8291539
 	lock
 	faceplayer
-	checkflag FLAG_SYS_CHAT_USED
-	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915F5
+	goto_if_set FLAG_SYS_CHAT_USED, PetalburgCity_PokemonCenter_1F_EventScript_2915F5
 	msgbox PetalburgCity_PokemonCenter_1F_Text_291687, MSGBOX_DEFAULT
 	goto PetalburgCity_PokemonCenter_1F_EventScript_291552
 	end
@@ -30,9 +29,9 @@ PetalburgCity_PokemonCenter_1F_EventScript_29159F:: @ 829159F
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
-	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915CB
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_2915CB
 	compare VAR_RESULT, 1
-	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915D5
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_2915D5
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_2915CB:: @ 82915CB
@@ -82,9 +81,9 @@ PetalburgCity_PokemonCenter_1F_EventScript_291650:: @ 8291650
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
-	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915CB
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_2915CB
 	compare VAR_RESULT, 1
-	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915D5
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_2915D5
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_29167C:: @ 829167C

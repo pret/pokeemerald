@@ -4,32 +4,27 @@ LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 821973A
 	.byte 0
 
 LilycoveCity_LilycoveMuseum_2F_MapScript1_219745: @ 8219745
-	checkflag FLAG_0x0A0
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_21978B
+	goto_if_set FLAG_0x0A0, LilycoveCity_LilycoveMuseum_2F_EventScript_21978B
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219754
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219754:: @ 8219754
-	checkflag FLAG_0x0A1
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2197A3
+	goto_if_set FLAG_0x0A1, LilycoveCity_LilycoveMuseum_2F_EventScript_2197A3
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219763
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219763:: @ 8219763
-	checkflag FLAG_0x0A2
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2197BB
+	goto_if_set FLAG_0x0A2, LilycoveCity_LilycoveMuseum_2F_EventScript_2197BB
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219772
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219772:: @ 8219772
-	checkflag FLAG_0x0A3
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2197D3
+	goto_if_set FLAG_0x0A3, LilycoveCity_LilycoveMuseum_2F_EventScript_2197D3
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219781
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219781:: @ 8219781
-	checkflag FLAG_0x0A4
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2197EB
+	goto_if_set FLAG_0x0A4, LilycoveCity_LilycoveMuseum_2F_EventScript_2197EB
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21978B:: @ 821978B
@@ -68,17 +63,17 @@ LilycoveCity_LilycoveMuseum_2F_MapScript2_2197FE: @ 82197FE
 LilycoveCity_LilycoveMuseum_2F_EventScript_219808:: @ 8219808
 	lockall
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
-	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219861
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_2199EB, MSGBOX_SIGN
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
-	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219863
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219A0D, MSGBOX_SIGN
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
 	waitmovement 0
-	applymovement 255, LilycoveCity_LilycoveMuseum_2F_Movement_219861
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219BC4, MSGBOX_SIGN
 	copyvar VAR_0x4094, 0x1
@@ -96,8 +91,7 @@ LilycoveCity_LilycoveMuseum_2F_Movement_219863: @ 8219863
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219866:: @ 8219866
 	lockall
-	checkflag FLAG_0x0EC
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219921
+	goto_if_set FLAG_0x0EC, LilycoveCity_LilycoveMuseum_2F_EventScript_219921
 	specialvar VAR_0x8004, sub_80F8940
 	switch VAR_0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA
@@ -126,7 +120,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EC5, MSGBOX_DEFAULT
 	givedecoration_std 44
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219911
+	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219911
 	setflag FLAG_0x0EC
 	closemessage
 	releaseall
@@ -146,36 +140,31 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_219921:: @ 8219921
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21992B:: @ 821992B
 	lockall
-	checkflag FLAG_0x0A2
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199C1
+	goto_if_set FLAG_0x0A2, LilycoveCity_LilycoveMuseum_2F_EventScript_2199C1
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FA0, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21993E:: @ 821993E
 	lockall
-	checkflag FLAG_0x0A4
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199DD
+	goto_if_set FLAG_0x0A4, LilycoveCity_LilycoveMuseum_2F_EventScript_2199DD
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FD3, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219951:: @ 8219951
 	lockall
-	checkflag FLAG_0x0A0
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199A5
+	goto_if_set FLAG_0x0A0, LilycoveCity_LilycoveMuseum_2F_EventScript_2199A5
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A03B, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219964:: @ 8219964
 	lockall
-	checkflag FLAG_0x0A1
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199B3
+	goto_if_set FLAG_0x0A1, LilycoveCity_LilycoveMuseum_2F_EventScript_2199B3
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A008, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219977:: @ 8219977
 	lockall
-	checkflag FLAG_0x0A3
-	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_2199CF
+	goto_if_set FLAG_0x0A3, LilycoveCity_LilycoveMuseum_2F_EventScript_2199CF
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A06D, MSGBOX_SIGN
 	end
 

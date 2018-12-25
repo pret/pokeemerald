@@ -23,7 +23,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	closemessage
 	setobjectxy 2, 0, 15
 	setobjectxy 4, 0, 16
-	applymovement 255, Route101_Movement_1EBDC2
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBDC2
 	applymovement 2, Route101_Movement_1EBDE7
 	applymovement 4, Route101_Movement_1EBDB5
 	waitmovement 0
@@ -45,7 +45,7 @@ Route101_EventScript_1EBD4E:: @ 81EBD4E
 	lockall
 	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route101_Movement_1EBD90
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBD90
 	waitmovement 0
 	releaseall
 	end
@@ -54,7 +54,7 @@ Route101_EventScript_1EBD64:: @ 81EBD64
 	lockall
 	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route101_Movement_1EBD92
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBD92
 	waitmovement 0
 	releaseall
 	end
@@ -63,7 +63,7 @@ Route101_EventScript_1EBD7A:: @ 81EBD7A
 	lockall
 	msgbox Route101_Text_1EBEDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, Route101_Movement_1EBD94
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_1EBD94
 	waitmovement 0
 	releaseall
 	end
@@ -222,8 +222,8 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setflag FLAG_0x052
 	fadescreen 1
 	removeobject 4
-	setobjectxy 255, 6, 13
-	applymovement 255, Route101_Movement_2725A4
+	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
+	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_2725A4
 	waitmovement 0
 	special ChooseStarter
 	waitstate
@@ -239,9 +239,9 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if 1, Route101_EventScript_1EBE85
+	call_if_eq Route101_EventScript_1EBE85
 	compare VAR_RESULT, 1
-	call_if 1, Route101_EventScript_1EBE89
+	call_if_eq Route101_EventScript_1EBE89
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release

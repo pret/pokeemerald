@@ -6,10 +6,9 @@ Route111_MapScripts:: @ 81F0CA7
 	.byte 0
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC
-	checkflag FLAG_0x0E4
-	call_if 0, Route111_EventScript_1F0CD1
+	call_if_unset FLAG_0x0E4, Route111_EventScript_1F0CD1
 	compare VAR_0x40CB, 1
-	call_if 1, Route111_EventScript_1F0CE4
+	call_if_eq Route111_EventScript_1F0CE4
 	end
 
 Route111_EventScript_1F0CD1:: @ 81F0CD1
@@ -41,24 +40,23 @@ Route111_EventScript_1F0CE4:: @ 81F0CE4
 Route111_MapScript1_1F0D87: @ 81F0D87
 	setvar VAR_0x40D6, 0
 	special sub_81BE79C
-	checkflag FLAG_0x14E
-	call_if 0, Route111_EventScript_1F0E3C
+	call_if_unset FLAG_0x14E, Route111_EventScript_1F0E3C
 	compare VAR_0x40CB, 1
-	call_if 1, Route111_EventScript_1F0DC2
+	call_if_eq Route111_EventScript_1F0DC2
 	compare VAR_0x40CB, 2
-	call_if 1, Route111_EventScript_1F0E40
+	call_if_eq Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
 	call Route111_EventScript_28CCC7
 	checktrainerflag TRAINER_VICKY
-	goto_if 0, Route111_EventScript_1F0E26
+	goto_if_lt Route111_EventScript_1F0E26
 	end
 
 Route111_EventScript_1F0DC2:: @ 81F0DC2
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq Route111_EventScript_1F0DDA
+	goto_if_eq Route111_EventScript_1F0DDA
 	compare VAR_RESULT, 1
-	goto_eq Route111_EventScript_1F0DE0
+	goto_if_eq Route111_EventScript_1F0DE0
 	return
 
 Route111_EventScript_1F0DDA:: @ 81F0DDA
@@ -72,18 +70,18 @@ Route111_EventScript_1F0DE0:: @ 81F0DE0
 Route111_EventScript_1F0DE6:: @ 81F0DE6
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_1, 34
-	goto_if 0, Route111_EventScript_1F0E25
+	goto_if_lt Route111_EventScript_1F0E25
 	compare VAR_TEMP_1, 107
-	goto_if 2, Route111_EventScript_1F0E25
+	goto_if_gt Route111_EventScript_1F0E25
 	compare VAR_TEMP_1, 72
-	goto_if 2, Route111_EventScript_1F0E22
+	goto_if_gt Route111_EventScript_1F0E22
 	compare VAR_TEMP_0, 2000
-	goto_if 2, Route111_EventScript_1F0E25
+	goto_if_gt Route111_EventScript_1F0E25
 	compare VAR_TEMP_0, 8
-	goto_if 0, Route111_EventScript_1F0E25
+	goto_if_lt Route111_EventScript_1F0E25
 
 Route111_EventScript_1F0E22:: @ 81F0E22
-	setweather 8
+	setweather WEATHER_SANDSTORM
 
 Route111_EventScript_1F0E25:: @ 81F0E25
 	return
@@ -111,7 +109,7 @@ Route111_MapScript2_1F0E46: @ 81F0E46
 	.2byte 0
 
 Route111_EventScript_1F0E50:: @ 81F0E50
-	hideobjectat 255, MAP_LITTLEROOT_TOWN
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	end
 
 Route111_MapScript2_1F0E56: @ 81F0E56
@@ -127,10 +125,10 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	addobject 45
 	special sub_81BE7F4
 	waitstate
-	showobjectat 255, MAP_LITTLEROOT_TOWN
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	removeobject 45
 	delay 16
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	delay 16
 	special sub_81BEB54
 	waitstate
@@ -138,8 +136,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	waitstate
 	setvar VAR_0x40CB, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
-	checkflag FLAG_0x150
-	goto_eq Route111_EventScript_1F0EA7
+	goto_if_set FLAG_0x150, Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -163,12 +160,11 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_0x92C
-	goto_eq Route111_EventScript_1F0EF4
+	goto_if_set FLAG_0x92C, Route111_EventScript_1F0EF4
 	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
-	goto_eq Route111_EventScript_272054
+	goto_if_eq Route111_EventScript_272054
 	setflag FLAG_0x92C
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_2A6F3D, MSGBOX_DEFAULT
@@ -207,7 +203,7 @@ Route111_EventScript_1F0F22:: @ 81F0F22
 Route111_EventScript_1F0F2E:: @ 81F0F2E
 	checkitem ITEM_GO_GOGGLES, 1
 	compare VAR_RESULT, 0
-	goto_eq Route111_EventScript_1F0F45
+	goto_if_eq Route111_EventScript_1F0F45
 	setvar VAR_TEMP_3, 1
 	releaseall
 	end
@@ -216,33 +212,33 @@ Route111_EventScript_1F0F45:: @ 81F0F45
 	msgbox gUnknown_08272C5F, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8004, 0
-	call_if 1, Route111_EventScript_1F0F7C
+	call_if_eq Route111_EventScript_1F0F7C
 	compare VAR_0x8004, 1
-	call_if 1, Route111_EventScript_1F0F87
+	call_if_eq Route111_EventScript_1F0F87
 	compare VAR_0x8004, 2
-	call_if 1, Route111_EventScript_1F0F92
+	call_if_eq Route111_EventScript_1F0F92
 	compare VAR_0x8004, 3
-	call_if 1, Route111_EventScript_1F0F9D
+	call_if_eq Route111_EventScript_1F0F9D
 	releaseall
 	end
 
 Route111_EventScript_1F0F7C:: @ 81F0F7C
-	applymovement 255, Route111_Movement_1F0FA8
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FA8
 	waitmovement 0
 	return
 
 Route111_EventScript_1F0F87:: @ 81F0F87
-	applymovement 255, Route111_Movement_1F0FAA
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FAA
 	waitmovement 0
 	return
 
 Route111_EventScript_1F0F92:: @ 81F0F92
-	applymovement 255, Route111_Movement_1F0FAC
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FAC
 	waitmovement 0
 	return
 
 Route111_EventScript_1F0F9D:: @ 81F0F9D
-	applymovement 255, Route111_Movement_1F0FAE
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F0FAE
 	waitmovement 0
 	return
 
@@ -263,14 +259,14 @@ Route111_Movement_1F0FAE: @ 81F0FAE
 	step_end
 
 Route111_EventScript_1F0FB0:: @ 81F0FB0
-	setweather 2
+	setweather WEATHER_SUNNY
 	fadenewbgm MUS_DOORO_X1
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1F0FBD:: @ 81F0FBD
-	setweather 8
+	setweather WEATHER_SANDSTORM
 	fadenewbgm MUS_ASHROAD
 	doweather
 	end
@@ -281,7 +277,7 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_1F1475, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route111_EventScript_1F0FE7
+	goto_if_eq Route111_EventScript_1F0FE7
 	msgbox Route111_Text_1F14F5, MSGBOX_DEFAULT
 	release
 	end
@@ -298,7 +294,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	waitmovement 0
 	removeobject 1
 	call Route111_EventScript_1F1143
-	applymovement 255, Route111_Movement_1F114F
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F114F
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	addobject 2
@@ -316,7 +312,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	waitmovement 0
 	removeobject 2
 	call Route111_EventScript_1F1143
-	applymovement 255, Route111_Movement_1F114F
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F114F
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	addobject 3
@@ -334,7 +330,7 @@ Route111_EventScript_1F0FE7:: @ 81F0FE7
 	waitmovement 0
 	removeobject 3
 	call Route111_EventScript_1F1143
-	applymovement 255, Route111_Movement_1F114F
+	applymovement EVENT_OBJ_ID_PLAYER, Route111_Movement_1F114F
 	waitmovement 0
 	call Route111_EventScript_1F113C
 	addobject 4
@@ -416,11 +412,10 @@ Route111_EventScript_1F119B:: @ 81F119B
 	lock
 	faceplayer
 	compare VAR_0x40CB, 3
-	goto_eq Route111_EventScript_1F11C6
+	goto_if_eq Route111_EventScript_1F11C6
 	compare VAR_0x40CB, 2
-	goto_eq Route111_EventScript_1F11D0
-	checkflag FLAG_0x14E
-	goto_eq Route111_EventScript_1F11DA
+	goto_if_eq Route111_EventScript_1F11D0
+	goto_if_set FLAG_0x14E, Route111_EventScript_1F11DA
 	msgbox Route111_Text_1F1A22, MSGBOX_DEFAULT
 	release
 	end
@@ -475,7 +470,7 @@ Route111_EventScript_1F1260:: @ 81F1260
 	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_298B08, Route111_Text_298B53, Route111_EventScript_1F128C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route111_EventScript_1F12AB
+	goto_if_eq Route111_EventScript_1F12AB
 	msgbox Route111_Text_298B9A, MSGBOX_DEFAULT
 	release
 	end
@@ -512,7 +507,7 @@ Route111_EventScript_1F1307:: @ 81F1307
 	trainerbattle_single TRAINER_WILTON_1, Route111_Text_298F79, Route111_Text_298FA9, Route111_EventScript_1F1333
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route111_EventScript_1F1352
+	goto_if_eq Route111_EventScript_1F1352
 	msgbox Route111_Text_298FD4, MSGBOX_DEFAULT
 	release
 	end
@@ -534,7 +529,7 @@ Route111_EventScript_1F1369:: @ 81F1369
 	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_299143, Route111_Text_299193, Route111_EventScript_1F1395
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route111_EventScript_1F13B4
+	goto_if_eq Route111_EventScript_1F13B4
 	msgbox Route111_Text_2991C2, MSGBOX_DEFAULT
 	release
 	end

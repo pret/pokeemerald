@@ -4,10 +4,8 @@ NavelRock_Bottom_MapScripts:: @ 8269255
 	.byte 0
 
 NavelRock_Bottom_MapScript1_269260: @ 8269260
-	checkflag FLAG_0x091
-	call_if 1, NavelRock_Bottom_EventScript_269273
-	checkflag FLAG_0x091
-	call_if 0, NavelRock_Bottom_EventScript_269277
+	call_if_set FLAG_0x091, NavelRock_Bottom_EventScript_269273
+	call_if_unset FLAG_0x091, NavelRock_Bottom_EventScript_269277
 	end
 
 NavelRock_Bottom_EventScript_269273:: @ 8269273
@@ -15,20 +13,18 @@ NavelRock_Bottom_EventScript_269273:: @ 8269273
 	return
 
 NavelRock_Bottom_EventScript_269277:: @ 8269277
-	checkflag FLAG_0x1DD
-	goto_eq NavelRock_Bottom_EventScript_27374E
+	goto_if_set FLAG_0x1DD, NavelRock_Bottom_EventScript_27374E
 	clearflag FLAG_HIDE_LUGIA
 	return
 
 NavelRock_Bottom_MapScript1_269284: @ 8269284
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, NavelRock_Bottom_EventScript_26928E
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Bottom_EventScript_26928E
 	end
 
 NavelRock_Bottom_EventScript_26928E:: @ 826928E
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, NavelRock_Bottom_EventScript_27374E
+	goto_if_ne NavelRock_Bottom_EventScript_27374E
 	removeobject 1
 	return
 
@@ -66,11 +62,11 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq NavelRock_Bottom_EventScript_269336
+	goto_if_eq NavelRock_Bottom_EventScript_269336
 	compare VAR_RESULT, 4
-	goto_eq NavelRock_Bottom_EventScript_269344
+	goto_if_eq NavelRock_Bottom_EventScript_269344
 	compare VAR_RESULT, 5
-	goto_eq NavelRock_Bottom_EventScript_269344
+	goto_if_eq NavelRock_Bottom_EventScript_269344
 	setflag FLAG_0x091
 	release
 	end

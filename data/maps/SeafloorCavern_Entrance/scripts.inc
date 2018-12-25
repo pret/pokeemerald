@@ -10,7 +10,7 @@ SeafloorCavern_Entrance_MapScript1_234474: @ 8234474
 SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	lockall
 	compare VAR_0x40D9, 1
-	goto_eq SeafloorCavern_Entrance_EventScript_2344ED
+	goto_if_eq SeafloorCavern_Entrance_EventScript_2344ED
 	waitse
 	playse SE_PIN
 	applymovement 1, SeafloorCavern_Entrance_Movement_272598
@@ -19,11 +19,11 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	waitmovement 0
 	delay 20
 	compare VAR_FACING, 3
-	call_if 1, SeafloorCavern_Entrance_EventScript_23452E
+	call_if_eq SeafloorCavern_Entrance_EventScript_23452E
 	compare VAR_FACING, 4
-	call_if 1, SeafloorCavern_Entrance_EventScript_234523
+	call_if_eq SeafloorCavern_Entrance_EventScript_234523
 	compare VAR_FACING, 2
-	call_if 1, SeafloorCavern_Entrance_EventScript_234539
+	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	delay 30
 	setvar VAR_0x40D9, 1
 	moveobjectoffscreen 1
@@ -36,11 +36,11 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 
 SeafloorCavern_Entrance_EventScript_2344ED:: @ 82344ED
 	compare VAR_FACING, 3
-	call_if 1, SeafloorCavern_Entrance_EventScript_23452E
+	call_if_eq SeafloorCavern_Entrance_EventScript_23452E
 	compare VAR_FACING, 4
-	call_if 1, SeafloorCavern_Entrance_EventScript_234523
+	call_if_eq SeafloorCavern_Entrance_EventScript_234523
 	compare VAR_FACING, 2
-	call_if 1, SeafloorCavern_Entrance_EventScript_234539
+	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	msgbox SeafloorCavern_Entrance_Text_2346C8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, SeafloorCavern_Entrance_Movement_2725A6

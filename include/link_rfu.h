@@ -2,6 +2,7 @@
 #define GUARD_LINK_RFU_H
 
 #include "librfu.h"
+#include "link.h"
 
 // Exported type declarations
 

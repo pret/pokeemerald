@@ -58,7 +58,7 @@ void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
 bool8 IsBattlerSpriteVisible(u8 battlerId);
-void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible);
+void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible);
 bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
@@ -75,14 +75,14 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6450(struct Sprite *sprite);
-void SetAverageBattlerPositions(u8 battlerId, bool8 a2, s16 *x, s16 *y);
+void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x, s16 *y);
 void DestroySpriteAndMatrix(struct Sprite *sprite);
-void TranslateAnimLinearSimple(struct Sprite *sprite);
-void InitAnimSpritePos(struct Sprite *sprite, u8 a2);
-void sub_80A6980(struct Sprite *sprite, bool8 a2);
+void AnimTranslateLinearSimple(struct Sprite *sprite);
+void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffsets);
+void InitSpritePosToAnimTarget(struct Sprite *sprite, bool8 respectMonPicOffsets);
 void StartAnimLinearTranslation(struct Sprite *sprite);
 void InitAnimArcTranslation(struct Sprite *sprite);
-bool8 TranslateAnimLinear(struct Sprite *sprite);
+bool8 AnimTranslateLinear(struct Sprite *sprite);
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
 void sub_80A8EE4(struct Sprite *sprite);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 attributeId);
@@ -93,14 +93,14 @@ void RunStoredCallbackWhenAffineAnimEnds(struct Sprite *sprite);
 void sub_80A66DC(struct Sprite *sprite);
 void SetSpriteCoordsToAnimAttackerCoords(struct Sprite *sprite);
 void RunStoredCallbackWhenAnimEnds(struct Sprite *sprite);
-void sub_80A6864(struct Sprite *sprite, s16 a2);
+void SetAnimSpriteInitialXOffset(struct Sprite *sprite, s16 a2);
 s16 sub_80A861C(u8 battlerId, u8 a2);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
 void WaitAnimForDuration(struct Sprite *sprite);
 void sub_80A7938(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);
 void sub_80A6F98(struct Sprite *sprite);
-u8 sub_80A8328(u8 battlerId);
+u8 GetBattlerSpriteBGPriority(u8 battlerId);
 void *LoadPointerFromVars(s16 bottom, s16 top);
 void StorePointerInVars(s16 *bottom, s16 *top, const void *ptr);
 void sub_80A8278(void);
@@ -132,9 +132,9 @@ u8 sub_80A80C8(struct Task *task);
 void sub_80A8EE4(struct Sprite *);
 void sub_80A67F4(struct Sprite *);
 void sub_80A6D48(u32 bgId, const void *src);
-void sub_80A7160(struct Sprite *sprite);
-bool8 sub_80A70E8(struct Sprite *sprite);
-void sub_80A70C0(struct Sprite *sprite);
+void InitAnimFastLinearTranslationWithSpeed(struct Sprite *sprite);
+bool8 AnimFastTranslateLinear(struct Sprite *sprite);
+void InitAndRunAnimFastLinearTranslation(struct Sprite *sprite);
 void TranslateMonBGUntil(struct Sprite *sprite);
 void TranslateSpriteOverDuration(struct Sprite *sprite);
 void sub_80A77C8(struct Sprite *sprite);
@@ -150,6 +150,7 @@ void sub_80A749C(struct Sprite *sprite);
 void sub_80A6814(u8 taskId);
 void sub_80A8610(struct Sprite *sprite);
 void sub_80A6DEC(struct Sprite *sprite);
+void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 
 enum
 {
@@ -167,11 +168,15 @@ void sub_80A6C68(u32 arg0);
 u8 GetAnimBattlerSpriteId(u8 wantedBattler);
 bool8 IsDoubleBattle(void);
 u8 sub_80A6D94(void);
-u8 sub_80A8364(u8 battlerId);
+u8 GetBattlerSpriteBGPriorityRank(u8 battlerId);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 u8 GetBattlerSpriteDefault_Y(u8 battlerId);
 u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
+
+// battle_anim_80A64EC.c
+void sub_80A64EC(struct Sprite *sprite);
+void sub_80A718C(struct Sprite *sprite);
 
 // battle_anim_80A9C70.s
 #define STAT_ANIM_PLUS1  15
@@ -183,6 +188,9 @@ u8 GetSubstituteSpriteDefault_Y(u8 battlerId);
 #define STAT_ANIM_MULTIPLE_MINUS1 57
 #define STAT_ANIM_MULTIPLE_MINUS2 58
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
+
+// ground.c
+void sub_81152DC(u8 taskId);
 
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);

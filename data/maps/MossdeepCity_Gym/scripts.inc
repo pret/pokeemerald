@@ -3,26 +3,22 @@ MossdeepCity_Gym_MapScripts:: @ 8220800
 	.byte 0
 
 MossdeepCity_Gym_MapScript1_220806: @ 8220806
-	checkflag FLAG_0x064
-	goto_eq MossdeepCity_Gym_EventScript_22083D
+	goto_if_set FLAG_0x064, MossdeepCity_Gym_EventScript_22083D
 	goto MossdeepCity_Gym_EventScript_220815
 	end
 
 MossdeepCity_Gym_EventScript_220815:: @ 8220815
-	checkflag FLAG_0x065
-	goto_eq MossdeepCity_Gym_EventScript_220855
+	goto_if_set FLAG_0x065, MossdeepCity_Gym_EventScript_220855
 	goto MossdeepCity_Gym_EventScript_220824
 	end
 
 MossdeepCity_Gym_EventScript_220824:: @ 8220824
-	checkflag FLAG_0x066
-	goto_eq MossdeepCity_Gym_EventScript_22086D
+	goto_if_set FLAG_0x066, MossdeepCity_Gym_EventScript_22086D
 	goto MossdeepCity_Gym_EventScript_220833
 	end
 
 MossdeepCity_Gym_EventScript_220833:: @ 8220833
-	checkflag FLAG_0x067
-	goto_eq MossdeepCity_Gym_EventScript_220885
+	goto_if_set FLAG_0x067, MossdeepCity_Gym_EventScript_220885
 	end
 
 MossdeepCity_Gym_EventScript_22083D:: @ 822083D
@@ -52,9 +48,8 @@ MossdeepCity_Gym_EventScript_220898:: @ 8220898
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_221783, MossdeepCity_Gym_Text_2218EC, MossdeepCity_Gym_Text_221BCE, MossdeepCity_Gym_EventScript_2208D1, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq MossdeepCity_Gym_EventScript_22097E
-	checkflag FLAG_0x0AB
-	goto_if 0, MossdeepCity_Gym_EventScript_220937
+	goto_if_eq MossdeepCity_Gym_EventScript_22097E
+	goto_if_unset FLAG_0x0AB, MossdeepCity_Gym_EventScript_220937
 	msgbox MossdeepCity_Gym_Text_221B1D, MSGBOX_DEFAULT
 	release
 	end
@@ -94,7 +89,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 MossdeepCity_Gym_EventScript_220937:: @ 8220937
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_Gym_EventScript_272054
+	goto_if_eq MossdeepCity_Gym_EventScript_272054
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
 	setflag FLAG_0x0AB
 	release
@@ -103,7 +98,7 @@ MossdeepCity_Gym_EventScript_220937:: @ 8220937
 MossdeepCity_Gym_EventScript_22095B:: @ 822095B
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_Gym_EventScript_27205E
+	goto_if_eq MossdeepCity_Gym_EventScript_27205E
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
 	setflag FLAG_0x0AB
 	return
@@ -115,10 +110,9 @@ MossdeepCity_Gym_EventScript_22097E:: @ 822097E
 
 MossdeepCity_Gym_EventScript_220999:: @ 8220999
 	lockall
-	checkflag FLAG_0x064
-	goto_eq MossdeepCity_Gym_EventScript_2209D0
+	goto_if_set FLAG_0x064, MossdeepCity_Gym_EventScript_2209D0
 	setflag FLAG_0x064
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 5, 5, 516, 0
 	setmetatile 2, 7, 569, 1
@@ -133,7 +127,7 @@ MossdeepCity_Gym_EventScript_2209C8:: @ 82209C8
 
 MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
 	clearflag FLAG_0x064
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 5, 5, 524, 0
 	setmetatile 2, 7, 568, 1
@@ -142,10 +136,9 @@ MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
 
 MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
 	lockall
-	checkflag FLAG_0x065
-	goto_eq MossdeepCity_Gym_EventScript_220A24
+	goto_if_set FLAG_0x065, MossdeepCity_Gym_EventScript_220A24
 	setflag FLAG_0x065
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 8, 14, 516, 0
 	setmetatile 8, 10, 569, 1
@@ -154,7 +147,7 @@ MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
 
 MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
 	clearflag FLAG_0x065
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 8, 14, 517, 0
 	setmetatile 8, 10, 568, 1
@@ -163,10 +156,9 @@ MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
 
 MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
 	lockall
-	checkflag FLAG_0x066
-	goto_eq MossdeepCity_Gym_EventScript_220A78
+	goto_if_set FLAG_0x066, MossdeepCity_Gym_EventScript_220A78
 	setflag FLAG_0x066
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 15, 17, 524, 0
 	setmetatile 17, 15, 569, 1
@@ -175,7 +167,7 @@ MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
 
 MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
 	clearflag FLAG_0x066
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 15, 17, 516, 0
 	setmetatile 17, 15, 568, 1
@@ -184,10 +176,9 @@ MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
 
 MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
 	lockall
-	checkflag FLAG_0x067
-	goto_eq MossdeepCity_Gym_EventScript_220ACC
+	goto_if_set FLAG_0x067, MossdeepCity_Gym_EventScript_220ACC
 	setflag FLAG_0x067
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 1, 23, 525, 0
 	setmetatile 5, 24, 569, 1
@@ -196,7 +187,7 @@ MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
 
 MossdeepCity_Gym_EventScript_220ACC:: @ 8220ACC
 	clearflag FLAG_0x067
-	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 1, 23, 516, 0
 	setmetatile 5, 24, 568, 1
@@ -273,8 +264,7 @@ MossdeepCity_Gym_EventScript_220BFA:: @ 8220BFA
 MossdeepCity_Gym_EventScript_220C11:: @ 8220C11
 	lock
 	faceplayer
-	checkflag FLAG_0x4F6
-	goto_eq MossdeepCity_Gym_EventScript_220C26
+	goto_if_set FLAG_0x4F6, MossdeepCity_Gym_EventScript_220C26
 	msgbox MossdeepCity_Gym_Text_220CD5, MSGBOX_DEFAULT
 	release
 	end
@@ -291,15 +281,13 @@ MossdeepCity_Gym_Movement_220C30: @ 8220C30
 
 MossdeepCity_Gym_EventScript_220C33:: @ 8220C33
 	lockall
-	checkflag FLAG_BADGE07_GET
-	goto_eq MossdeepCity_Gym_EventScript_220C53
+	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_220C53
 	goto MossdeepCity_Gym_EventScript_220C5D
 	end
 
 MossdeepCity_Gym_EventScript_220C43:: @ 8220C43
 	lockall
-	checkflag FLAG_BADGE07_GET
-	goto_eq MossdeepCity_Gym_EventScript_220C53
+	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_220C53
 	goto MossdeepCity_Gym_EventScript_220C5D
 	end
 

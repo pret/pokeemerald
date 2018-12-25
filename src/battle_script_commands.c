@@ -46,22 +46,18 @@
 #include "battle_arena.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "field_specials.h"
+#include "pokemon_summary_screen.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const u8* const gBattleScriptsForMoveEffects[];
 
 // functions
-extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon* party, u8 monPartyId, u8 monCount, void (*callback)(void), u16 move); // pokemon summary screen
-extern u8 sub_81C1B94(void); // pokemon summary screen
 extern void sub_81D388C(struct Pokemon* mon, void* statStoreLocation); // pokenav.s
-extern void sub_81D3640(u8 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
-extern void sub_81D3784(u8 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
-extern u8* GetMonNickname(struct Pokemon* mon, u8* dst); // party_menu
-extern void sub_81B8E80(u8 battlerId, u8, u8); // party menu
-extern bool8 sub_81B1250(void); // ?
+extern void sub_81D3640(u16 arg0, void* statStoreLocation1, void* statStoreLocation2, u8 arg3, u8 arg4, u8 arg5); // pokenav.s
+extern void sub_81D3784(u16 arg0, void* statStoreLocation1, u8 arg2, u8 arg3, u8 arg4); // pokenav.s
 extern u8 sub_813B21C(void);
-extern u16 get_unknown_box_id(void);
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -7609,7 +7605,7 @@ static void atk8F_forcerandomswitch(void)
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
 
-            if (!sub_81B1250())
+            if (!IsMultiBattle())
                 sub_803BDA0(gBattlerTarget);
 
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)

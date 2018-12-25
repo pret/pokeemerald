@@ -6,7 +6,6 @@
 #include "sound.h"
 
 extern void sub_810E2C8(struct Sprite *);
-extern bool8 sub_810B614(struct Task *task, u8 taskId);
 extern void TranslateAnimSpriteToTargetMonLocation(struct Sprite *);
 
 static void sub_810A1A8(struct Sprite *);
@@ -38,6 +37,8 @@ static void sub_810B1F0(struct Sprite *);
 static void sub_810B23C(struct Sprite *);
 static bool8 sub_810B430(struct Task *task, u8 taskId);
 static void sub_810B51C(struct Sprite *);
+static bool8 sub_810B614(struct Task *task, u8 taskId);
+static void sub_810B684(struct Sprite *sprite);
 
 const union AnimCmd gUnknown_085956A4[] =
 {
@@ -462,7 +463,7 @@ static void sub_810A1A8(struct Sprite *sprite)
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];
-    
+
     sprite->pos1.y += gBattleAnimArgs[1];
     sprite->callback = sub_810A1F8;
 }
@@ -479,7 +480,7 @@ static void sub_810A214(struct Sprite *sprite)
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];
-    
+
     sprite->callback = sub_810A258;
 }
 
@@ -493,7 +494,7 @@ static void sub_810A274(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-    
+
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
@@ -556,7 +557,7 @@ static void sub_810A308(struct Sprite *sprite)
     sprite->pos2.y = (gSineTable[gBattleAnimArgs[0] + 64] * gBattleAnimArgs[1]) >> 8;
 
     if (gBattleAnimArgs[6] & 1)
-        sprite->oam.priority = sub_80A8328(battler) + 1;
+        sprite->oam.priority = GetBattlerSpriteBGPriority(battler) + 1;
 
     matrixNum = sprite->oam.matrixNum;
     sineVal = gSineTable[gBattleAnimArgs[2]];
@@ -571,7 +572,7 @@ static void sub_810A308(struct Sprite *sprite)
 
 static void sub_810A46C(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
@@ -588,7 +589,7 @@ static void sub_810A46C(struct Sprite *sprite)
 
 static void sub_810A4F4(struct Sprite *sprite)
 {
-    if (!TranslateAnimLinear(sprite))
+    if (!AnimTranslateLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[7], sprite->data[5]);
         sprite->pos2.y += Cos(sprite->data[7], sprite->data[5]);
@@ -615,7 +616,7 @@ static void sub_810A5BC(struct Sprite *sprite)
 {
     if (IsContest() || GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    
+
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[2];
     sprite->data[3] = gBattleAnimArgs[0];
@@ -665,7 +666,7 @@ static void sub_810A6EC(struct Sprite *sprite)
 
 static void sub_810A75C(struct Sprite *sprite)
 {
-    sub_80A6980(sprite, FALSE);
+    InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.tileNum += gBattleAnimArgs[3] * 4;
 
     if (gBattleAnimArgs[3] == 1)
@@ -686,17 +687,16 @@ void sub_810A7DC(u8 taskId)
     gTasks[taskId].func = sub_810A834;
 }
 
-#ifdef NONMATCHING // couldn't get the proper tail merging in the "CreateSprite" switch cases.(ported from ruby)
 static void sub_810A834(u8 taskId)
 {
     u16 r8;
+    u16 r2;
     s16 r12;
-    s16 r2;
     u8 spriteId = 0;
     u8 r7 = 0;
     u8 sp = gTasks[taskId].data[2];
-    s16 r4 = gTasks[taskId].data[0];
-    s16 r6 = gTasks[taskId].data[1];
+    s16 x = gTasks[taskId].data[0];
+    s16 y = gTasks[taskId].data[1];
 
     if (!gTasks[taskId].data[2])
     {
@@ -714,27 +714,31 @@ static void sub_810A834(u8 taskId)
     switch (gTasks[taskId].data[10])
     {
     case 0:
-        r8 += r2 * 0;
-        spriteId = CreateSprite(&gUnknown_08595828, r4, r6 + (r12 * 1), 2);
+        r12 *= 1;
+        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
         r7++;
         break;
     case 2:
+        r12 *= 2;
         r8 += r2;
-        spriteId = CreateSprite(&gUnknown_08595828, r4, r6 + (r12 * 2), 2);
+        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
         r7++;
         break;
     case 4:
+        r12 *= 3;
         r8 += r2 * 2;
-        spriteId = CreateSprite(&gUnknown_08595828, r4, r6 + (r12 * 3), 2);
+        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
         r7++;
         break;
     case 6:
+        r12 *= 4;
         r8 += r2 * 3;
-        spriteId = CreateSprite(&gUnknown_08595828, r4, r6 + (r12 * 4), 2);
+        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
         r7++;
         break;
     case 8:
-        spriteId = CreateSprite(&gUnknown_08595828, r4, r6 + (r12 * 5), 2);
+        r12 *= 5;
+        spriteId = CreateSprite(&gUnknown_08595828, x, y + r12, 2);
         r7++;
         break;
     case 10:
@@ -751,211 +755,6 @@ static void sub_810A834(u8 taskId)
 
     gTasks[taskId].data[10]++;
 }
-#else
-NAKED
-static void sub_810A834(u8 taskId)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r9, r0\n\
-    movs r5, 0\n\
-    movs r7, 0\n\
-    ldr r1, =gTasks\n\
-    lsls r0, 2\n\
-    add r0, r9\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldrb r2, [r0, 0xC]\n\
-    str r2, [sp]\n\
-    ldrh r4, [r0, 0x8]\n\
-    ldrh r6, [r0, 0xA]\n\
-    movs r3, 0xC\n\
-    ldrsh r0, [r0, r3]\n\
-    mov r10, r1\n\
-    cmp r0, 0\n\
-    bne _0810A878\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    movs r2, 0x1\n\
-    movs r1, 0x10\n\
-    mov r12, r1\n\
-    b _0810A882\n\
-    .pool\n\
-_0810A878:\n\
-    movs r2, 0x10\n\
-    mov r12, r2\n\
-    movs r3, 0x8\n\
-    mov r8, r3\n\
-    movs r2, 0x4\n\
-_0810A882:\n\
-    mov r0, r9\n\
-    lsls r1, r0, 2\n\
-    adds r0, r1, r0\n\
-    lsls r0, 3\n\
-    add r0, r10\n\
-    movs r3, 0x1C\n\
-    ldrsh r0, [r0, r3]\n\
-    mov r10, r1\n\
-    cmp r0, 0xA\n\
-    bhi _0810A978\n\
-    lsls r0, 2\n\
-    ldr r1, =_0810A8A4\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    mov pc, r0\n\
-    .pool\n\
-    .align 2, 0\n\
-_0810A8A4:\n\
-    .4byte _0810A8D0\n\
-    .4byte _0810A978\n\
-    .4byte _0810A8E4\n\
-    .4byte _0810A978\n\
-    .4byte _0810A904\n\
-    .4byte _0810A978\n\
-    .4byte _0810A91A\n\
-    .4byte _0810A978\n\
-    .4byte _0810A93C\n\
-    .4byte _0810A978\n\
-    .4byte _0810A970\n\
-_0810A8D0:\n\
-    ldr r0, =gUnknown_08595828\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    mov r4, r12\n\
-    lsls r3, r4, 16\n\
-    b _0810A952\n\
-    .pool\n\
-_0810A8E4:\n\
-    mov r0, r12\n\
-    lsls r3, r0, 17\n\
-    mov r1, r8\n\
-    adds r0, r1, r2\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    ldr r0, =gUnknown_08595828\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    b _0810A952\n\
-    .pool\n\
-_0810A904:\n\
-    mov r3, r12\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    lsls r3, r0, 1\n\
-    adds r3, r0\n\
-    lsls r0, r2, 1\n\
-    add r0, r8\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    b _0810A946\n\
-_0810A91A:\n\
-    mov r0, r12\n\
-    lsls r3, r0, 18\n\
-    lsls r0, r2, 1\n\
-    adds r0, r2\n\
-    add r0, r8\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r8, r0\n\
-    ldr r0, =gUnknown_08595828\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    b _0810A952\n\
-    .pool\n\
-_0810A93C:\n\
-    mov r1, r12\n\
-    lsls r0, r1, 16\n\
-    asrs r0, 16\n\
-    lsls r3, r0, 2\n\
-    adds r3, r0\n\
-_0810A946:\n\
-    ldr r0, =gUnknown_08595828\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    lsls r3, 16\n\
-_0810A952:\n\
-    asrs r3, 16\n\
-    adds r2, r3\n\
-    lsls r2, 16\n\
-    asrs r2, 16\n\
-    movs r3, 0x2\n\
-    bl CreateSprite\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    b _0810A978\n\
-    .pool\n\
-_0810A970:\n\
-    mov r0, r9\n\
-    bl DestroyAnimVisualTask\n\
-    b _0810A9BC\n\
-_0810A978:\n\
-    cmp r7, 0\n\
-    beq _0810A9AC\n\
-    ldr r4, =gSprites\n\
-    lsls r3, r5, 4\n\
-    adds r3, r5\n\
-    lsls r3, 2\n\
-    adds r0, r3, r4\n\
-    ldrh r5, [r0, 0x4]\n\
-    lsls r2, r5, 22\n\
-    lsrs r2, 22\n\
-    add r2, r8\n\
-    ldr r6, =0x000003ff\n\
-    adds r1, r6, 0\n\
-    ands r2, r1\n\
-    ldr r1, =0xfffffc00\n\
-    ands r1, r5\n\
-    orrs r1, r2\n\
-    strh r1, [r0, 0x4]\n\
-    mov r1, sp\n\
-    ldrh r1, [r1]\n\
-    strh r1, [r0, 0x2E]\n\
-    adds r4, 0x1C\n\
-    adds r3, r4\n\
-    ldr r1, [r3]\n\
-    bl _call_via_r1\n\
-_0810A9AC:\n\
-    ldr r0, =gTasks\n\
-    mov r1, r10\n\
-    add r1, r9\n\
-    lsls r1, 3\n\
-    adds r1, r0\n\
-    ldrh r0, [r1, 0x1C]\n\
-    adds r0, 0x1\n\
-    strh r0, [r1, 0x1C]\n\
-_0810A9BC:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    ");
-}
-#endif
 
 static void sub_810A9DC(struct Sprite *sprite)
 {
@@ -1002,7 +801,7 @@ void sub_810AAFC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (!gBattleAnimArgs[0]) 
+    if (!gBattleAnimArgs[0])
     {
         task->data[14] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         task->data[15] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
@@ -1073,7 +872,7 @@ void sub_810AB78(u8 taskId)
 
 static void sub_810AC8C(struct Sprite *sprite)
 {
-    if (TranslateAnimLinear(sprite))
+    if (AnimTranslateLinear(sprite))
     {
         gTasks[sprite->data[5]].data[7]--;
         DestroySprite(sprite);
@@ -1188,7 +987,7 @@ void sub_810AE5C(u8 taskId)
             }
             else
                 task->data[0]++;
-            
+
         }
         break;
     case 2:
@@ -1334,6 +1133,7 @@ static void sub_810B23C(struct Sprite *sprite)
     case 1:
         if (sprite->affineAnimEnded)
             DestroySpriteAndMatrix(sprite);
+        break;
     }
 }
 
@@ -1491,5 +1291,31 @@ void sub_810B55C(u8 taskId)
         if (task->data[10] == 0)
             DestroyAnimVisualTask(taskId);
         break;
+    }
+}
+
+bool8 sub_810B614(struct Task *task, u8 taskId)
+{
+    u8 spriteId = CreateSprite(&gUnknown_085956C0, task->data[13], task->data[14], task->data[12]);
+    
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].callback = sub_810B684;
+        gSprites[spriteId].data[6] = taskId;
+        gSprites[spriteId].data[7] = 10;
+        task->data[10]++;
+    }
+    if (task->data[14] >= task->data[15])
+        return TRUE;
+    task->data[14] += 32;
+    return FALSE;
+}
+
+static void sub_810B684(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        gTasks[sprite->data[6]].data[sprite->data[7]]--;
+        DestroySprite(sprite);
     }
 }

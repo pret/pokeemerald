@@ -35,11 +35,13 @@ static bool8 sub_81DB290(struct Task *task);
 static bool8 sub_81DB328(struct Task *task);
 
 // const rom data
-// TODO: move those from .s file to .c
-extern const u32 gUnknown_0862AD54[];
-extern const u32 gUnknown_0862AF30[];
-extern const u32 gUnknown_0862B0DC[];
-extern const u16 gUnknown_0862B53C[];
+static const u32 gUnknown_0862AD54[] = INCBIN_U32("graphics/battle_transitions/frontier_transition.4bpp.lz");
+static const u32 gUnknown_0862AF30[] = INCBIN_U32("graphics/battle_transitions/frontier_transition.bin");
+static const u32 gUnknown_0862B0DC[] = INCBIN_U32("graphics/battle_transitions/frontier_transition_circles.4bpp.lz");
+static const u16 gUnknown_0862B53C[] = INCBIN_U16("graphics/battle_transitions/frontier_transition.gbapal");
+
+// Unused Empty data. Feel free to delete.
+static const u8 sFiller[0x1C0] = {0};
 
 static const struct OamData sOamData_862B71C =
 {
@@ -185,7 +187,7 @@ static void sub_81DA700(void)
     LZ77UnCompVram(gUnknown_0862AD54, dst2);
     LZ77UnCompVram(gUnknown_0862AF30, dst1);
     LoadPalette(gUnknown_0862B53C, 0xF0, 0x20);
-    LoadCompressedObjectPic(&sUnknown_0862B724);
+    LoadCompressedSpriteSheet(&sUnknown_0862B724);
     LoadSpritePalette(&sUnknown_0862B72C);
 }
 

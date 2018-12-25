@@ -4,10 +4,8 @@ NavelRock_Top_MapScripts:: @ 8269113
 	.byte 0
 
 NavelRock_Top_MapScript1_26911E: @ 826911E
-	checkflag FLAG_0x092
-	call_if 1, NavelRock_Top_EventScript_269131
-	checkflag FLAG_0x092
-	call_if 0, NavelRock_Top_EventScript_26913A
+	call_if_set FLAG_0x092, NavelRock_Top_EventScript_269131
+	call_if_unset FLAG_0x092, NavelRock_Top_EventScript_26913A
 	end
 
 NavelRock_Top_EventScript_269131:: @ 8269131
@@ -17,36 +15,34 @@ NavelRock_Top_EventScript_269131:: @ 8269131
 
 NavelRock_Top_EventScript_26913A:: @ 826913A
 	setvar VAR_TEMP_1, 1
-	checkflag FLAG_0x1DC
-	goto_eq NavelRock_Top_EventScript_27374E
+	goto_if_set FLAG_0x1DC, NavelRock_Top_EventScript_27374E
 	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HOOH
 	return
 
 NavelRock_Top_MapScript1_269151: @ 8269151
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, NavelRock_Top_EventScript_26915B
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, NavelRock_Top_EventScript_26915B
 	end
 
 NavelRock_Top_EventScript_26915B:: @ 826915B
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, NavelRock_Top_EventScript_27374E
+	goto_if_ne NavelRock_Top_EventScript_27374E
 	removeobject 1
 	return
 
 NavelRock_Top_EventScript_26916F:: @ 826916F
 	lockall
 	setvar VAR_TEMP_1, 1
-	special SpawnScriptEventObject
+	special SpawnCameraObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special sub_813B80C
 	applymovement 1, NavelRock_Top_Movement_269243
-	applymovement 127, NavelRock_Top_Movement_269230
+	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269230
 	waitmovement 0
 	delay 50
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	waitse
 	playmoncry SPECIES_HO_OH, 2
@@ -56,10 +52,10 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special sub_813B80C
-	applymovement 127, NavelRock_Top_Movement_269234
+	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269234
 	applymovement 1, NavelRock_Top_Movement_26923A
 	waitmovement 0
-	special RemoveScriptEventObject
+	special RemoveCameraObject
 	setvar VAR_0x8004, 250
 	setvar VAR_0x8005, 70
 	setvar VAR_0x8006, 0
@@ -71,11 +67,11 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq NavelRock_Top_EventScript_269217
+	goto_if_eq NavelRock_Top_EventScript_269217
 	compare VAR_RESULT, 4
-	goto_eq NavelRock_Top_EventScript_269225
+	goto_if_eq NavelRock_Top_EventScript_269225
 	compare VAR_RESULT, 5
-	goto_eq NavelRock_Top_EventScript_269225
+	goto_if_eq NavelRock_Top_EventScript_269225
 	setflag FLAG_0x092
 	releaseall
 	end

@@ -34,9 +34,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern u8 gUnknown_0203CEE8;
-extern u8 gUnknown_0203CEE9;
-extern u8 gUnknown_0203CF00[];
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];

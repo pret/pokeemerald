@@ -11,9 +11,9 @@ VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A: @ 820230A
 VerdanturfTown_BattleTentBattleRoom_EventScript_202310:: @ 8202310
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202328
+	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202328
 	compare VAR_RESULT, 1
-	goto_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202333
+	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202333
 	return
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202328:: @ 8202328
@@ -38,7 +38,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
+	goto_if_ne VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
 	setvar VAR_0x8004, 3
@@ -95,9 +95,9 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_202565
+	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202565
 	compare VAR_RESULT, 2
-	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20256C
+	call_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_20256C
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA
@@ -157,7 +157,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_20254B:: @ 820254B
 	hideobjectat 1, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	call VerdanturfTown_BattleTentBattleRoom_EventScript_202310
 	setvar VAR_TEMP_1, 1
-	applymovement 255, VerdanturfTown_BattleTentBattleRoom_Movement_202573
+	applymovement EVENT_OBJ_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_202573
 	removeobject 2
 	end
 

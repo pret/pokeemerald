@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
+#include "fldeff.h"
 #include "alloc.h"
 #include "random.h"
 #include "roulette_util.h"
@@ -10,6 +11,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "constants/flags.h"
+#include "constants/maps.h"
 #include "constants/songs.h"
 
 // structures
@@ -73,7 +75,13 @@ static const struct OamData gUnknown_08617E2C =
 };
 
 static const struct SpriteTemplate gUnknown_08617E34 = {
-    0x0FA0, 0xFFFF, &gUnknown_08617E2C, gSpriteAnimTable_8617E28, NULL, gDummySpriteAffineAnimTable, sub_81BEAD8
+    .tileTag = 0x0FA0,
+    .paletteTag = 0xFFFF,
+    .oam = &gUnknown_08617E2C,
+    .anims = gSpriteAnimTable_8617E28,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81BEAD8
 };
 
 static const union AnimCmd gSpriteAnim_8617E4C[] =
@@ -105,7 +113,13 @@ static const struct OamData gSpriteAnim_8617E58 =
 };
 
 static const struct SpriteTemplate gUnknown_08617E60 = {
-    0x0FA0, 0xFFFF, &gSpriteAnim_8617E58, gSpriteAnim_8617E54, NULL, gDummySpriteAffineAnimTable, sub_81BEAD8
+    .tileTag = 0x0FA0,
+    .paletteTag = 0xFFFF,
+    .oam = &gSpriteAnim_8617E58,
+    .anims = gSpriteAnim_8617E54,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81BEAD8
 };
 
 // ewram
@@ -114,12 +128,13 @@ EWRAM_DATA struct Struct203CF18 *gUnknown_0203CF18 = NULL;
 // text
 bool8 sub_81BE66C(void)
 {
-    if (!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A))
-        return 0;
-    return FlagGet(FLAG_0x14E);
+    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)))
+        return FALSE;
+    else
+        return FlagGet(FLAG_0x14E);
 }
 
-void sub_81BE698(u8 taskId)
+static void sub_81BE698(u8 taskId)
 {
     sub_8151E50(&(gUnknown_0203CF18->unk4));
 }
@@ -131,12 +146,13 @@ void sub_81BE6AC(void)
 
 void sub_81BE6B8(void)
 {
-    if(gUnknown_0203CF18 != NULL)
+    if (gUnknown_0203CF18 != NULL)
     {
         gUnknown_0203CF18 = NULL;
         return;
     }
-    if(!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A) || !FlagGet(FLAG_0x14E))
+
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(ROUTE111) || gSaveBlock1Ptr->location.mapNum != MAP_NUM(ROUTE111) || !FlagGet(FLAG_0x14E))
         return;
 
     gUnknown_0203CF18 = (struct Struct203CF18 *)AllocZeroed(sizeof(struct Struct203CF18));
@@ -148,10 +164,13 @@ void sub_81BE6B8(void)
 
 void sub_81BE72C(void)
 {
-    if(!(gSaveBlock1Ptr->location.mapGroup == 0x0 && gSaveBlock1Ptr->location.mapNum == 0x1A) || !FlagGet(FLAG_0x14E) || gUnknown_0203CF18 == NULL)
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(ROUTE111) || gSaveBlock1Ptr->location.mapNum != MAP_NUM(ROUTE111)
+        || !FlagGet(FLAG_0x14E) || gUnknown_0203CF18 == NULL)
         return;
-    if(FuncIsActiveTask(sub_81BE698))
+
+    if( FuncIsActiveTask(sub_81BE698))
         DestroyTask(gUnknown_0203CF18->taskId);
+
     sub_8151D28(&(gUnknown_0203CF18->unk4), 1, 1);
     sub_8151C50(&(gUnknown_0203CF18->unk4), 1, 1);
     Free(gUnknown_0203CF18);
@@ -163,16 +182,16 @@ void sub_81BE79C(void)
     u16 rand;
     bool8 chance;
 
-    if(VarGet(VAR_0x40CB) != 0)
+    if (VarGet(VAR_0x40CB) != 0)
     {
         FlagClear(FLAG_0x14E);
         return;
     }
     rand = Random();
     chance = rand & 1;
-    if(FlagGet(FLAG_0x09D) == TRUE)
+    if (FlagGet(FLAG_0x09D) == TRUE)
         chance = TRUE;
-    if(chance)
+    if (chance)
     {
         FlagSet(FLAG_0x14E);
         sub_81BE6B8();
@@ -221,18 +240,17 @@ static void sp136_strengh_sound(u8 a, u8 b, u8 c, u8 d)
 
 static void sub_81BE900(u8 taskId)
 {
-    s16 *data;
+    s16 *data = gTasks[taskId].data;
 
-    data = gTasks[taskId].data;
     data[1]++;
-    if((data[1] % data[3]) == 0)
+    if ((data[1] % data[3]) == 0)
     {
         data[1] = 0;
         data[2]--;
         data[0] = -data[0];
         data[4] = -data[4];
         SetCameraPanning(data[0], data[4]);
-        if(!data[2])
+        if (!data[2])
         {
             sub_81BE968();
             DestroyTask(taskId);
@@ -243,10 +261,8 @@ static void sub_81BE900(u8 taskId)
 
 static void sub_81BE968(void)
 {
-    u8 taskId;
-
-    taskId = FindTaskIdByFunc(sub_81BE9C0);
-    if(taskId != 0xFF)
+    u8 taskId = FindTaskIdByFunc(sub_81BE9C0);
+    if (taskId != 0xFF)
         gTasks[taskId].data[0]++;
 }
 
@@ -260,11 +276,9 @@ void sub_81BE994(void)
 
 static void sub_81BE9C0(u8 taskId)
 {
-    u16 *data;
+    u16 *data = gTasks[taskId].data;
 
-    data = gTasks[taskId].data;
-    data[1]++;
-    if(data[1] == 1000 || data[0] == 17)
+    if (++data[1] == 1000 || data[0] == 17)
         gTasks[taskId].func = sub_81BEA00;
 }
 
@@ -280,14 +294,14 @@ static void sub_81BEA20(void)
     u8 i;
     u8 spriteId;
 
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
         spriteId = CreateSprite(&gUnknown_08617E60, gUnknown_08617D64[i][0] + 120, gUnknown_08617D64[i][1], 8);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].oam.paletteNum = 0;
         gSprites[spriteId].data[0] = i;
     }
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
         spriteId = CreateSprite(&gUnknown_08617E34, gUnknown_08617D64[i][0] + 115, gUnknown_08617D64[i][1] - 3, 8);
         gSprites[spriteId].oam.priority = 0;
@@ -300,7 +314,7 @@ static void sub_81BEAD8(struct Sprite* sprite)
 {
     sprite->data[1] += 2;
     sprite->pos2.y = (sprite->data[1] / 2);
-    if(((sprite->pos1.y) + (sprite->pos2.y)) >  gUnknown_08617D64[sprite->data[0]][2])
+    if (((sprite->pos1.y) + (sprite->pos2.y)) >  gUnknown_08617D64[sprite->data[0]][2])
     {
         DestroySprite(sprite);
         sub_81BE968();

@@ -6,6 +6,8 @@
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_camera.h"
+#include "field_specials.h"
+#include "fldeff.h"
 #include "strings.h"
 #include "string_util.h"
 #include "international_string_util.h"
@@ -24,7 +26,6 @@
 #include "event_scripts.h"
 #include "shop.h"
 #include "lilycove_lady.h"
-#include "rom6.h"
 #include "pokedex.h"
 #include "event_object_movement.h"
 #include "text.h"
@@ -2572,13 +2573,13 @@ void sub_80EEA70(void)
             show->secretBaseSecrets.flags = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
             tv_store_id_3x(show);
             show->secretBaseSecrets.language = gGameLanguage;
-            if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language == LANGUAGE_JAPANESE)
+            if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language == LANGUAGE_JAPANESE)
             {
                 show->secretBaseSecrets.baseOwnersNameLanguage = LANGUAGE_JAPANESE;
             }
             else
             {
-                show->secretBaseSecrets.baseOwnersNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language;
+                show->secretBaseSecrets.baseOwnersNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language;
             }
         }
     }
@@ -3469,7 +3470,7 @@ void ChangeBoxPokemonNickname(void)
 
 void ChangeBoxPokemonNickname_CB(void)
 {
-    SetBoxMonNickFromAnyBox(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
+    SetBoxMonNickAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 

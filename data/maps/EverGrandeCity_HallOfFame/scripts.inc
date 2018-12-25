@@ -8,7 +8,7 @@ EverGrandeCity_HallOfFame_MapScript2_229837: @ 8229837
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_229841:: @ 8229841
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 EverGrandeCity_HallOfFame_MapScript2_229846: @ 8229846
@@ -18,24 +18,24 @@ EverGrandeCity_HallOfFame_MapScript2_229846: @ 8229846
 EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	lockall
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_229901
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_229901
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_229901
 	waitmovement 0
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A8
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A4
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_22990E, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_229908
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_229908
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_229908
 	waitmovement 0
 	delay 20
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A8
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A4
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_2299A3, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, EverGrandeCity_HallOfFame_Movement_2725A6
-	applymovement 255, EverGrandeCity_HallOfFame_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_2725A6
 	waitmovement 0
 	delay 20
 	dofieldeffect 62
@@ -45,9 +45,9 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	call EverGrandeCity_HallOfFame_EventScript_2717C1
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2298E9
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2298E9
 	compare VAR_RESULT, 1
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2298F5
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2298F5
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9

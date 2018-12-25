@@ -9,8 +9,7 @@ Route103_MapScript1_1EC399: @ 81EC399
 	end
 
 Route103_MapScript1_1EC3A4: @ 81EC3A4
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, Route103_EventScript_1EC3AE
+	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_1EC3AE
 	end
 
 Route103_EventScript_1EC3AE:: @ 81EC3AE
@@ -22,9 +21,9 @@ Route103_EventScript_1EC3C1:: @ 81EC3C1
 	lockall
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq Route103_EventScript_1EC3DA
+	goto_if_eq Route103_EventScript_1EC3DA
 	compare VAR_RESULT, 1
-	goto_eq Route103_EventScript_1EC434
+	goto_if_eq Route103_EventScript_1EC434
 	end
 
 Route103_EventScript_1EC3DA:: @ 81EC3DA
@@ -111,7 +110,7 @@ Route103_EventScript_1EC50A:: @ 81EC50A
 	end
 
 Route103_EventScript_1EC53D:: @ 81EC53D
-	applymovement 255, Route103_Movement_1EC5C8
+	applymovement EVENT_OBJ_ID_PLAYER, Route103_Movement_1EC5C8
 	applymovement 2, Route103_Movement_1EC5BE
 	waitmovement 0
 	playse SE_DANSA
@@ -121,7 +120,7 @@ Route103_EventScript_1EC53D:: @ 81EC53D
 	end
 
 Route103_EventScript_1EC561:: @ 81EC561
-	applymovement 255, Route103_Movement_1EC5D6
+	applymovement EVENT_OBJ_ID_PLAYER, Route103_Movement_1EC5D6
 	applymovement 2, Route103_Movement_1EC5CE
 	waitmovement 0
 	playse SE_DANSA
@@ -211,7 +210,7 @@ Route103_EventScript_1EC60B:: @ 81EC60B
 	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_2949F9, Route103_Text_294A3D, Route103_Text_294AAE, Route103_EventScript_1EC63A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route103_EventScript_1EC653
+	goto_if_eq Route103_EventScript_1EC653
 	msgbox Route103_Text_294A52, MSGBOX_AUTOCLOSE
 	end
 
@@ -230,7 +229,7 @@ Route103_EventScript_1EC66E:: @ 81EC66E
 	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_294AFD, Route103_Text_294B22, Route103_Text_294BD0, Route103_EventScript_1EC69D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route103_EventScript_1EC6B6
+	goto_if_eq Route103_EventScript_1EC6B6
 	msgbox Route103_Text_294B40, MSGBOX_AUTOCLOSE
 	end
 
@@ -254,7 +253,7 @@ Route103_EventScript_1EC6E8:: @ 81EC6E8
 	trainerbattle_single TRAINER_MIGUEL_1, Route103_Text_294EDF, Route103_Text_294F21, Route103_EventScript_1EC714
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route103_EventScript_1EC733
+	goto_if_eq Route103_EventScript_1EC733
 	msgbox Route103_Text_294F42, MSGBOX_DEFAULT
 	release
 	end

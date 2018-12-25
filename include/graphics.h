@@ -3911,6 +3911,11 @@ extern const u16 gIntro2BrendanNoTurnPal[];
 extern const u16 gIntro2FlygonPal[];
 extern const u32 gIntro2FlygonGfx[];
 
+// party menu graphics
+extern const u32 gPartyMenuMisc_Gfx[];
+extern const u32 gPartyMenuMisc_Tilemap[];
+extern const u32 gPartyMenuMisc_Pal[];
+
 // berry pics
 extern const u32 gBerryPic_Cheri[];
 extern const u32 gBerryPalette_Cheri[];
@@ -4719,6 +4724,10 @@ extern const u32 gBattleAnimBackgroundTilemap_17[];
 extern const u32 gBattleAnimBackgroundTilemap_20[];
 extern const u32 gBattleAnimBackgroundTilemap_21[];
 
+extern const u32 gUnknown_08C1D0AC[];
+extern const u32 gUnknown_08C1D1E8[];
+extern const u32 gUnknown_08C1D210[];
+
 extern const u32 gUnknown_08C20668[];
 extern const u32 gUnknown_08C20684[];
 extern const u32 gBattleStatMask_Gfx[];
@@ -4739,6 +4748,15 @@ extern const u32 gContestAudienceGfx[];
 extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
+
+extern const u32 gUnknown_08D95E00[];
+extern const u32 gUnknown_08D960D0[];
+extern const u32 gUnknown_08D963A4[];
+extern const u32 gBattleAnimBackgroundImage_Surf[];
+extern const u32 gBattleAnimBackgroundPalette_Surf[];
+extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
+
+extern const u32 gBattleAnimFogTilemap[];
 
 // Berry blender
 extern const u32 gBerryBlenderArrowTiles[];
@@ -4761,6 +4779,20 @@ extern const u32 gUnknown_08D8D58C[];
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
 
+// Pokemon Storage System
+extern const u32 gPSSMenu_Gfx[];
+extern const u16 gPSSMenu_Pal[];
+extern const u32 gWallpaperIcon_Plusle[];
+extern const u32 gWallpaperIcon_Cross[];
+extern const u32 gWallpaperIcon_Bolt[];
+extern const u32 gUnknown_08DD36C8[];
+extern const u32 gWallpaperTiles_Ribbon[];
+extern const u32 gWallpaperTilemap_Ribbon[];
+extern const u16 gWallpaperPalettes_Ribbon[][16];
+extern const u32 gWallpaperTiles_Horizontal[];
+extern const u32 gWallpaperTilemap_Horizontal[];
+extern const u16 gWallpaperPalettes_Horizontal[][16];
+
 // Cable Car
 extern const u32 gUnknown_08DBA5B8[];
 extern const u16 gUnknown_08DBA518[];
@@ -4776,5 +4808,12 @@ extern const u16 gUnknown_08DDCF04[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
 extern const u16 gUnknown_08DDD704[];
+
+// Party menu
+extern const u32 gPartyMenuPokeball_Gfx[];
+extern const u32 gPartyMenuPokeballSmall_Gfx[];
+extern const u32 gStatusPal_Icons[];
+extern const u32 gPartyMenuPokeball_Pal[];
+extern const u32 gStatusPal_Icons[];
 
 #endif //GUARD_GRAPHICS_H

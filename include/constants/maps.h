@@ -587,6 +587,7 @@
 // Map Group 33
 #define MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE (0 | (33 << 8))
 
+#define MAP_GROUPS_COUNT 34
 
 #define MAP_NONE (0x7F | (0x7F << 8))
 #define MAP_UNDEFINED (0xFF | (0xFF << 8))

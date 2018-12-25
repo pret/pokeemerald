@@ -12,9 +12,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2:: @ 8218CC2
 	waitmessage
 	multichoice 20, 8, 16, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC:: @ 8218CEC
@@ -24,9 +24,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC:: @ 8218CEC
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5:: @ 8218CF5
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F98, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D14
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D14
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D14:: @ 8218D14
@@ -47,7 +47,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E:: @ 8218D1E
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D5A:: @ 8218D5A
 	lockall
-	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_218DA1
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_218DA1
 	waitmovement 0
 	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
@@ -55,7 +55,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D5A:: @ 8218D5A
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D6F:: @ 8218D6F
 	lockall
-	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_218D9B
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_218D9B
 	waitmovement 0
 	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
@@ -63,7 +63,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218D6F:: @ 8218D6F
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218D84:: @ 8218D84
 	lockall
-	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_218D9E
+	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_1F_Movement_218D9E
 	waitmovement 0
 	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate

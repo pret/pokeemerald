@@ -20,11 +20,11 @@ SootopolisCity_Gym_1F_MapScript1_224E6A: @ 8224E6A
 
 SootopolisCity_Gym_1F_EventScript_224E73:: @ 8224E73
 	compare VAR_ICE_STEP_COUNT, 8
-	goto_if 0, SootopolisCity_Gym_1F_EventScript_224ECA
+	goto_if_lt SootopolisCity_Gym_1F_EventScript_224ECA
 	compare VAR_ICE_STEP_COUNT, 28
-	goto_if 0, SootopolisCity_Gym_1F_EventScript_224EB8
+	goto_if_lt SootopolisCity_Gym_1F_EventScript_224EB8
 	compare VAR_ICE_STEP_COUNT, 67
-	goto_if 0, SootopolisCity_Gym_1F_EventScript_224EA6
+	goto_if_lt SootopolisCity_Gym_1F_EventScript_224EA6
 	setmetatile 8, 4, 519, 0
 	setmetatile 8, 5, 519, 0
 
@@ -73,7 +73,7 @@ SootopolisCity_Gym_1F_EventScript_224F15:: @ 8224F15
 SootopolisCity_Gym_1F_EventScript_224F29:: @ 8224F29
 	lockall
 	delay 20
-	applymovement 255, SootopolisCity_Gym_1F_Movement_224F42
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Gym_1F_Movement_224F42
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
@@ -89,11 +89,9 @@ SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
 	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_225268, SootopolisCity_Gym_1F_Text_225432, SootopolisCity_Gym_1F_EventScript_224F82, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq SootopolisCity_Gym_1F_EventScript_225025
-	checkflag FLAG_0x0AC
-	goto_if 0, SootopolisCity_Gym_1F_EventScript_224FF7
-	checkflag FLAG_BADGE06_GET
-	goto_if 0, SootopolisCity_Gym_1F_EventScript_22501B
+	goto_if_eq SootopolisCity_Gym_1F_EventScript_225025
+	goto_if_unset FLAG_0x0AC, SootopolisCity_Gym_1F_EventScript_224FF7
+	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_22501B
 	msgbox SootopolisCity_Gym_1F_Text_225778, MSGBOX_DEFAULT
 	release
 	end
@@ -127,7 +125,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_Gym_1F_EventScript_27205E
+	goto_if_eq SootopolisCity_Gym_1F_EventScript_27205E
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_0x0AC
 	return
@@ -135,7 +133,7 @@ SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 SootopolisCity_Gym_1F_EventScript_224FF7:: @ 8224FF7
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_Gym_1F_EventScript_272054
+	goto_if_eq SootopolisCity_Gym_1F_EventScript_272054
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_0x0AC
 	release
@@ -154,8 +152,7 @@ SootopolisCity_Gym_1F_EventScript_225025:: @ 8225025
 SootopolisCity_Gym_1F_EventScript_225040:: @ 8225040
 	lock
 	faceplayer
-	checkflag FLAG_0x4F7
-	goto_eq SootopolisCity_Gym_1F_EventScript_225055
+	goto_if_set FLAG_0x4F7, SootopolisCity_Gym_1F_EventScript_225055
 	msgbox SootopolisCity_Gym_1F_Text_225093, MSGBOX_DEFAULT
 	release
 	end
@@ -167,15 +164,13 @@ SootopolisCity_Gym_1F_EventScript_225055:: @ 8225055
 
 SootopolisCity_Gym_1F_EventScript_22505F:: @ 822505F
 	lockall
-	checkflag FLAG_BADGE08_GET
-	goto_eq SootopolisCity_Gym_1F_EventScript_22507F
+	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_22507F
 	goto SootopolisCity_Gym_1F_EventScript_225089
 	end
 
 SootopolisCity_Gym_1F_EventScript_22506F:: @ 822506F
 	lockall
-	checkflag FLAG_BADGE08_GET
-	goto_eq SootopolisCity_Gym_1F_EventScript_22507F
+	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_22507F
 	goto SootopolisCity_Gym_1F_EventScript_225089
 	end
 

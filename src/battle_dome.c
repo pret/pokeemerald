@@ -19,6 +19,7 @@
 #include "window.h"
 #include "palette.h"
 #include "decompress.h"
+#include "party_menu.h"
 #include "menu.h"
 #include "sound.h"
 #include "pokemon_icon.h"
@@ -56,12 +57,6 @@ struct UnkStruct_860DD10
     u8 y;
     u16 src;
 };
-
-extern void sub_81B8558(void);
-
-extern u8 gSelectedOrderFromParty[];
-
-extern const struct SpriteTemplate gUnknown_0860CFA8;
 
 // text
 extern const u8 gTrainerClassNames[][0xD];
@@ -3536,7 +3531,7 @@ static void sub_8190400(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D83D50, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D84970, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gUnknown_08D84F00, 0x800, 0, 1);
-        LoadCompressedObjectPic(gUnknown_0860CF50);
+        LoadCompressedSpriteSheet(gUnknown_0860CF50);
         LoadCompressedPalette(gUnknown_08D85358, 0, 0x200);
         LoadCompressedPalette(gUnknown_08D85444, 0x100, 0x200);
         LoadCompressedPalette(gUnknown_08D85600, 0xF0, 0x20);
@@ -5707,7 +5702,7 @@ static void sub_8194220(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 3:
-        LoadCompressedObjectPic(gUnknown_0860CF50);
+        LoadCompressedSpriteSheet(gUnknown_0860CF50);
         if (r10 == 0)
         {
             for (i = 0; i < (unsigned) 31; i++)

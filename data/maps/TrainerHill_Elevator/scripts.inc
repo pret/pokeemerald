@@ -10,7 +10,7 @@ TrainerHill_Elevator_EventScript_26935F:: @ 826935F
 	end
 
 TrainerHill_Elevator_EventScript_269360:: @ 8269360
-	applymovement 255, TrainerHill_Elevator_Movement_2693EB
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Elevator_Movement_2693EB
 	waitmovement 0
 	releaseall
 	warp MAP_TRAINER_HILL_ROOF, 255, 15, 5
@@ -18,22 +18,22 @@ TrainerHill_Elevator_EventScript_269360:: @ 8269360
 	end
 
 TrainerHill_Elevator_EventScript_269375:: @ 8269375
-	applymovement 255, TrainerHill_Elevator_Movement_2693E4
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Elevator_Movement_2693E4
 	waitmovement 0
 	applymovement 1, TrainerHill_Elevator_Movement_2693EE
 	waitmovement 0
 	lockall
 	msgbox TrainerHill_Elevator_Text_268F3E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq TrainerHill_Elevator_EventScript_269360
+	goto_if_eq TrainerHill_Elevator_EventScript_269360
 	releaseall
 	applymovement 1, TrainerHill_Elevator_Movement_2693F0
 	waitmovement 0
-	applymovement 255, TrainerHill_Elevator_Movement_2693DF
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Elevator_Movement_2693DF
 	waitmovement 0
 	call TrainerHill_Elevator_EventScript_2693D9
 	delay 25
-	applymovement 255, TrainerHill_Elevator_Movement_2693E7
+	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Elevator_Movement_2693E7
 	waitmovement 0
 	warp MAP_TRAINER_HILL_ENTRANCE, 255, 17, 8
 	waitstate

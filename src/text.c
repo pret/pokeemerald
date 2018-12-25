@@ -9,12 +9,12 @@
 #include "window.h"
 #include "text.h"
 #include "blit.h"
+#include "menu.h"
 #include "dynamic_placeholder_text_util.h"
 
 extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern int GetPlayerTextSpeed();
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -1858,7 +1858,7 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
     return NULL;
 }
 
-u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
+s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
     int minGlyphWidth;
@@ -1868,7 +1868,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     u32 lineWidth;
     const u8 *bufferPointer;
     int glyphWidth;
-    u32 width;
+    s32 width;
 
     isJapanese = 0;
     minGlyphWidth = 0;
@@ -2028,7 +2028,8 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 
     if (lineWidth > width)
         return lineWidth;
-    return width;
+    else
+        return width;
 }
 
 u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)

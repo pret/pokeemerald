@@ -9,8 +9,7 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_0x063
 	setvar VAR_0x4093, 0
-	checkflag FLAG_GOT_TM24_FROM_WATTSON
-	call_if 1, MauvilleCity_EventScript_1DF3A9
+	call_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_1DF3A9
 	end
 
 MauvilleCity_EventScript_1DF3A9:: @ 81DF3A9
@@ -54,8 +53,7 @@ MauvilleCity_EventScript_1DF3F2:: @ 81DF3F2
 MauvilleCity_EventScript_1DF3FB:: @ 81DF3FB
 	lock
 	faceplayer
-	checkflag FLAG_0x062
-	goto_eq MauvilleCity_EventScript_1DF413
+	goto_if_set FLAG_0x062, MauvilleCity_EventScript_1DF413
 	msgbox MauvilleCity_Text_1E056A, MSGBOX_DEFAULT
 	setflag FLAG_0x062
 	release
@@ -69,8 +67,7 @@ MauvilleCity_EventScript_1DF413:: @ 81DF413
 MauvilleCity_EventScript_1DF41D:: @ 81DF41D
 	lock
 	faceplayer
-	checkflag FLAG_0x11C
-	goto_eq MauvilleCity_EventScript_1DF43D
+	goto_if_set FLAG_0x11C, MauvilleCity_EventScript_1DF43D
 	msgbox MauvilleCity_Text_1DF7DC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, MauvilleCity_Movement_2725A2
@@ -88,8 +85,7 @@ MauvilleCity_EventScript_1DF43D:: @ 81DF43D
 
 MauvilleCity_EventScript_1DF452:: @ 81DF452
 	lockall
-	checkflag FLAG_0x11C
-	goto_eq MauvilleCity_EventScript_1DF690
+	goto_if_set FLAG_0x11C, MauvilleCity_EventScript_1DF690
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DF845, MSGBOX_DEFAULT
@@ -108,9 +104,9 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 
 MauvilleCity_EventScript_1DF4AD:: @ 81DF4AD
 	compare VAR_RESULT, 1
-	call_if 1, MauvilleCity_EventScript_1DF63A
+	call_if_eq MauvilleCity_EventScript_1DF63A
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_EventScript_1DF683
+	goto_if_eq MauvilleCity_EventScript_1DF683
 	closemessage
 	switch VAR_FACING
 	case 2, MauvilleCity_EventScript_1DF4E0
@@ -118,19 +114,19 @@ MauvilleCity_EventScript_1DF4AD:: @ 81DF4AD
 	end
 
 MauvilleCity_EventScript_1DF4E0:: @ 81DF4E0
-	applymovement 255, MauvilleCity_Movement_1DF6DF
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6DF
 	applymovement 6, MauvilleCity_Movement_1DF6A8
 	applymovement 7, MauvilleCity_Movement_1DF6E2
 	waitmovement 0
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
 	delay 30
-	applymovement 255, MauvilleCity_Movement_1DF6EE
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6EE
 	applymovement 7, MauvilleCity_Movement_1DF6F3
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFD34, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MauvilleCity_Movement_1DF6CC
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6CC
 	applymovement 7, MauvilleCity_Movement_1DF6FA
 	applymovement 6, MauvilleCity_Movement_1DF6B4
 	waitmovement 0
@@ -138,7 +134,7 @@ MauvilleCity_EventScript_1DF4E0:: @ 81DF4E0
 	end
 
 MauvilleCity_EventScript_1DF53D:: @ 81DF53D
-	applymovement 255, MauvilleCity_Movement_1DF6DC
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6DC
 	applymovement 6, MauvilleCity_Movement_1DF6AE
 	applymovement 7, MauvilleCity_Movement_1DF6E8
 	waitmovement 0
@@ -149,7 +145,7 @@ MauvilleCity_EventScript_1DF53D:: @ 81DF53D
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFD34, MSGBOX_DEFAULT
 	closemessage
-	applymovement 255, MauvilleCity_Movement_1DF6D0
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6D0
 	applymovement 7, MauvilleCity_Movement_1DF703
 	applymovement 6, MauvilleCity_Movement_1DF6C0
 	waitmovement 0
@@ -165,18 +161,18 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	setvar VAR_0x40F2, 0
 	setflag FLAG_0x088
 	compare VAR_FACING, 2
-	call_if 1, MauvilleCity_EventScript_1DF5F3
+	call_if_eq MauvilleCity_EventScript_1DF5F3
 	compare VAR_FACING, 4
-	call_if 1, MauvilleCity_EventScript_1DF601
-	applymovement 255, MauvilleCity_Movement_2725AA
+	call_if_eq MauvilleCity_EventScript_1DF601
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_2725AA
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage
 	addvar VAR_0x40D1, 1
 	compare VAR_FACING, 2
-	call_if 1, MauvilleCity_EventScript_1DF616
+	call_if_eq MauvilleCity_EventScript_1DF616
 	compare VAR_FACING, 4
-	call_if 1, MauvilleCity_EventScript_1DF628
+	call_if_eq MauvilleCity_EventScript_1DF628
 	removeobject 11
 	releaseall
 	end
@@ -195,13 +191,13 @@ MauvilleCity_EventScript_1DF601:: @ 81DF601
 	return
 
 MauvilleCity_EventScript_1DF616:: @ 81DF616
-	applymovement 255, MauvilleCity_Movement_1DF6D5
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6D5
 	applymovement 11, MauvilleCity_Movement_1DF725
 	waitmovement 0
 	return
 
 MauvilleCity_EventScript_1DF628:: @ 81DF628
-	applymovement 255, MauvilleCity_Movement_1DF6D8
+	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6D8
 	applymovement 11, MauvilleCity_Movement_1DF72F
 	waitmovement 0
 	return
@@ -424,12 +420,10 @@ MauvilleCity_Movement_1DF72F: @ 81DF72F
 MauvilleCity_EventScript_1DF73A:: @ 81DF73A
 	lock
 	faceplayer
-	checkflag FLAG_GOT_TM24_FROM_WATTSON
-	goto_eq MauvilleCity_EventScript_1DF7B0
+	goto_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_1DF7B0
 	compare VAR_0x40BA, 2
-	goto_eq MauvilleCity_EventScript_1DF784
-	checkflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
-	goto_eq MauvilleCity_EventScript_1DF77A
+	goto_if_eq MauvilleCity_EventScript_1DF784
+	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_1DF77A
 	msgbox MauvilleCity_Text_1DFFE4, MSGBOX_DEFAULT
 	giveitem_std ITEM_BASEMENT_KEY
 	setflag FLAG_GOT_BASEMENT_KEY_FROM_WATTSON
@@ -446,7 +440,7 @@ MauvilleCity_EventScript_1DF784:: @ 81DF784
 	msgbox MauvilleCity_Text_1E020E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM24
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_EventScript_272054
+	goto_if_eq MauvilleCity_EventScript_272054
 	setflag FLAG_GOT_TM24_FROM_WATTSON
 	msgbox MauvilleCity_Text_1E02AA, MSGBOX_DEFAULT
 	release

@@ -7,9 +7,9 @@ SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E
 	setvar VAR_0x8004, 16
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D
 	compare VAR_0x40C0, 0
-	call_if 5, SootopolisCity_MysteryEventsHouse_1F_EventScript_227991
+	call_if_ne SootopolisCity_MysteryEventsHouse_1F_EventScript_227991
 	end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D:: @ 822797D
@@ -32,19 +32,19 @@ SootopolisCity_MysteryEventsHouse_1F_MapScript2_22799D: @ 822799D
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	lockall
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227A1F
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227A1F
 	waitmovement 0
 	applymovement 1, SootopolisCity_MysteryEventsHouse_1F_Movement_227A21
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6
 	waitmovement 0
 	compare VAR_0x40C0, 1
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04
 	compare VAR_0x40C0, 2
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A0D
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A0D
 	compare VAR_0x40C0, 3
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A16
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A16
 	special LoadPlayerParty
 	setvar VAR_0x40C0, 0
 	releaseall
@@ -77,9 +77,9 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24:: @ 8227A24
 	setvar VAR_0x8004, 16
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
 	compare VAR_TEMP_1, 1
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227B46, MSGBOX_DEFAULT
 	release
 	end
@@ -94,27 +94,27 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	special BufferEReaderTrainerName
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227BFC, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227CEB, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special LoadPlayerParty
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
+	goto_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special SavePlayerParty
 	special ReducePlayerPartyToSelectedMons
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227D21, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227AFE
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AFE
 	compare VAR_FACING, 4
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10
 	compare VAR_FACING, 3
-	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22
+	call_if_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22
 	warp MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 255, 3, 1
 	waitstate
 	release
@@ -135,19 +135,19 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF:: @ 8227AEF
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227AFE:: @ 8227AFE
 	applymovement VAR_LAST_TALKED, SootopolisCity_MysteryEventsHouse_1F_Movement_227B40
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227B34
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227B34
 	waitmovement 0
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10:: @ 8227B10
 	applymovement VAR_LAST_TALKED, SootopolisCity_MysteryEventsHouse_1F_Movement_227B43
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227B38
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227B38
 	waitmovement 0
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22:: @ 8227B22
 	applymovement VAR_LAST_TALKED, SootopolisCity_MysteryEventsHouse_1F_Movement_227B40
-	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_227B3C
+	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_227B3C
 	waitmovement 0
 	return
 

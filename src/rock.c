@@ -367,16 +367,16 @@ void sub_8110AB4(struct Sprite *sprite)
     sprite->data[3] = 0;
     sprite->data[4] = 0;
 
-    sprite->callback = TranslateAnimLinearSimple;
+    sprite->callback = AnimTranslateLinearSimple;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 void sub_8110B38(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[6] == 0)
-        InitAnimSpritePos(sprite, 0);
+        InitSpritePosToAnimAttacker(sprite, 0);
     else
-        sub_80A6980(sprite, FALSE);
+        InitSpritePosToAnimTarget(sprite, FALSE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = gBattleAnimArgs[2];
@@ -555,7 +555,7 @@ void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
 void AnimRaiseSprite(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
-    InitAnimSpritePos(sprite, 0);
+    InitSpritePosToAnimAttacker(sprite, 0);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[2] = sprite->pos1.x;

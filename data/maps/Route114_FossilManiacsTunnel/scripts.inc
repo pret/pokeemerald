@@ -4,8 +4,7 @@ Route114_FossilManiacsTunnel_MapScripts:: @ 822AF28
 	.byte 0
 
 Route114_FossilManiacsTunnel_MapScript1_22AF33: @ 822AF33
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, Route114_FossilManiacsTunnel_EventScript_22AF3D
+	call_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_22AF3D
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AF3D:: @ 822AF3D
@@ -14,8 +13,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF3D:: @ 822AF3D
 	return
 
 Route114_FossilManiacsTunnel_MapScript1_22AF49: @ 822AF49
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 0, Route114_FossilManiacsTunnel_EventScript_22AF53
+	call_if_unset FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_22AF53
 	end
 
 Route114_FossilManiacsTunnel_EventScript_22AF53:: @ 822AF53
@@ -26,7 +24,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF53:: @ 822AF53
 Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 	lockall
 	applymovement 1, Route114_FossilManiacsTunnel_Movement_2725A6
-	applymovement 255, Route114_FossilManiacsTunnel_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Route114_FossilManiacsTunnel_Movement_2725AA
 	waitmovement 0
 	msgbox Route114_FossilManiacsTunnel_Text_22B1F7, MSGBOX_DEFAULT
 	setvar VAR_0x40CC, 2
@@ -36,14 +34,13 @@ Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 Route114_FossilManiacsTunnel_EventScript_22AF87:: @ 822AF87
 	lock
 	faceplayer
-	checkflag FLAG_0x10B
-	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFC6
+	goto_if_set FLAG_0x10B, Route114_FossilManiacsTunnel_EventScript_22AFC6
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
+	goto_if_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
 	checkitem ITEM_CLAW_FOSSIL, 1
 	compare VAR_RESULT, 1
-	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
+	goto_if_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
 	msgbox Route114_FossilManiacsTunnel_Text_22AFD0, MSGBOX_DEFAULT
 	release
 	end

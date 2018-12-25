@@ -3,6 +3,7 @@
 #include "alloc.h"
 #include "decompress.h"
 #include "main.h"
+#include "battle_main.h"
 
 struct UnkStruct2
 {
@@ -30,8 +31,6 @@ struct UnkStruct1
     u32 count;
     struct UnkStruct2 *array;
 };
-
-extern const struct SpriteTemplate gUnknown_0831AC88;
 
 // this file's functions
 static u8 sub_8035518(u8 arg0);;
@@ -133,7 +132,7 @@ bool32 sub_8034D14(u32 id, s32 arg1, const struct UnkStruct3 *arg2)
 
             compSpriteSheet = *(struct CompressedSpriteSheet*)(arg2->spriteSheet);
             compSpriteSheet.size = GetDecompressedDataSize(arg2->spriteSheet->data);
-            gUnknown_02022E10->array[id].tileStart = LoadCompressedObjectPic(&compSpriteSheet);
+            gUnknown_02022E10->array[id].tileStart = LoadCompressedSpriteSheet(&compSpriteSheet);
         }
 
         if (gUnknown_02022E10->array[id].tileStart == 0xFFFF)

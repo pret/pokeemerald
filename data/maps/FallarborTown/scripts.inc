@@ -11,8 +11,7 @@ FallarborTown_MapScript1_1EB200: @ 81EB200
 FallarborTown_EventScript_1EB20C:: @ 81EB20C
 	lock
 	faceplayer
-	checkflag FLAG_0x08B
-	goto_eq FallarborTown_EventScript_1EB221
+	goto_if_set FLAG_0x08B, FallarborTown_EventScript_1EB221
 	msgbox FallarborTown_Text_1EB26B, MSGBOX_DEFAULT
 	release
 	end

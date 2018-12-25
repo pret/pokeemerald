@@ -9,7 +9,7 @@ SlateportCity_BattleTentLobby_MapScript2_20873B: @ 820873B
 
 SlateportCity_BattleTentLobby_EventScript_208745:: @ 8208745
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 SlateportCity_BattleTentLobby_MapScript2_20874F: @ 820874F
@@ -121,7 +121,7 @@ SlateportCity_BattleTentLobby_EventScript_2088AA:: @ 82088AA
 	setvar VAR_0x8004, 1
 	special sub_81B9D08
 	compare VAR_RESULT, 0
-	goto_if 5, SlateportCity_BattleTentLobby_EventScript_2087E9
+	goto_if_ne SlateportCity_BattleTentLobby_EventScript_2087E9
 	special SavePlayerParty
 	msgbox SlateportCity_BattleTentLobby_Text_2C5810, MSGBOX_DEFAULT
 
@@ -168,7 +168,7 @@ SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	call SlateportCity_BattleTentLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_BattleTentLobby_EventScript_208A14
+	goto_if_eq SlateportCity_BattleTentLobby_EventScript_208A14
 	setvar VAR_0x8006, 0
 
 SlateportCity_BattleTentLobby_EventScript_2089AC:: @ 82089AC
@@ -182,12 +182,12 @@ SlateportCity_BattleTentLobby_EventScript_2089AC:: @ 82089AC
 
 SlateportCity_BattleTentLobby_EventScript_2089C9:: @ 82089C9
 	applymovement 1, SlateportCity_BattleTentLobby_Movement_2089F8
-	applymovement 255, SlateportCity_BattleTentLobby_Movement_2089FF
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_2089FF
 	waitmovement 0
 	opendoor 6, 1
 	waitdooranim
 	applymovement 1, SlateportCity_BattleTentLobby_Movement_2089FC
-	applymovement 255, SlateportCity_BattleTentLobby_Movement_208A03
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentLobby_Movement_208A03
 	waitmovement 0
 	closedoor 6, 1
 	waitdooranim
@@ -245,12 +245,11 @@ SlateportCity_BattleTentLobby_Movement_208A38:: @ 8208A38
 SlateportCity_BattleTentLobby_EventScript_208A3D:: @ 8208A3D
 	lock
 	faceplayer
-	checkflag FLAG_0x109
-	goto_eq SlateportCity_BattleTentLobby_EventScript_208A74
+	goto_if_set FLAG_0x109, SlateportCity_BattleTentLobby_EventScript_208A74
 	msgbox SlateportCity_BattleTentLobby_Text_208B4E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM41
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_BattleTentLobby_EventScript_272054
+	goto_if_eq SlateportCity_BattleTentLobby_EventScript_272054
 	setflag FLAG_0x109
 	msgbox SlateportCity_BattleTentLobby_Text_208C5C, MSGBOX_DEFAULT
 	release

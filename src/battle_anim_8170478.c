@@ -1376,8 +1376,8 @@ static void sub_8171D60(u8 ballId)
 
     if (GetSpriteTileStartByTag(gBallOpenParticleSpritesheets[ballId].tag) == 0xFFFF)
     {
-        LoadCompressedObjectPicUsingHeap(&gBallOpenParticleSpritesheets[ballId]);
-        LoadCompressedObjectPaletteUsingHeap(&gBallOpenParticlePalettes[ballId]);
+        LoadCompressedSpriteSheetUsingHeap(&gBallOpenParticleSpritesheets[ballId]);
+        LoadCompressedSpritePaletteUsingHeap(&gBallOpenParticlePalettes[ballId]);
     }
 }
 
@@ -1971,7 +1971,7 @@ void sub_8172D98(u8 taskId)
     switch (gTasks[taskId].data[15])
     {
     case 0:
-        if (sub_80A8364(gBattleAnimAttacker) == B_POSITION_OPPONENT_LEFT)
+        if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == B_POSITION_OPPONENT_LEFT)
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         else
             SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
@@ -2032,8 +2032,8 @@ void sub_8172EF0(u8 battler, struct Pokemon *mon)
         {
             if (GetSpriteTileStartByTag(0x27F9) == 0xFFFF)
             {
-                LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[233]);
-                LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[233]);
+                LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[233]);
+                LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[233]);
             }
 
             taskId1 = CreateTask(sub_8172FEC, 10);
@@ -2173,8 +2173,8 @@ void sub_81732B0(u8 taskId)
 {
     u8 paletteIndex;
 
-    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[269]);
-    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[269]);
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[269]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[269]);
     paletteIndex = IndexOfSpritePaletteTag(0x281D); // unused
     DestroyAnimVisualTask(taskId);
 }
@@ -2188,7 +2188,7 @@ void sub_81732E4(u8 taskId)
 
 static void sub_817330C(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, 0);
+    InitSpritePosToAnimAttacker(sprite, 0);
     sprite->data[0] = 30;
     sprite->data[2] = GetBattlerSpriteCoord(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), 0) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), 1) + gBattleAnimArgs[3];

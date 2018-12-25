@@ -11,7 +11,7 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	msgbox GraniteCave_StevensRoom_Text_22DDBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM47
 	compare VAR_RESULT, 0
-	call_if 1, GraniteCave_StevensRoom_EventScript_22DD3C
+	call_if_eq GraniteCave_StevensRoom_EventScript_22DD3C
 	msgbox GraniteCave_StevensRoom_Text_22DE6B, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -24,13 +24,13 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	msgbox GraniteCave_StevensRoom_Text_22DF8C, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, GraniteCave_StevensRoom_EventScript_22DD0D
+	call_if_eq GraniteCave_StevensRoom_EventScript_22DD0D
 	compare VAR_FACING, 1
-	call_if 1, GraniteCave_StevensRoom_EventScript_22DD2A
+	call_if_eq GraniteCave_StevensRoom_EventScript_22DD2A
 	compare VAR_FACING, 3
-	call_if 1, GraniteCave_StevensRoom_EventScript_22DD18
+	call_if_eq GraniteCave_StevensRoom_EventScript_22DD18
 	compare VAR_FACING, 4
-	call_if 1, GraniteCave_StevensRoom_EventScript_22DD18
+	call_if_eq GraniteCave_StevensRoom_EventScript_22DD18
 	playse SE_KAIDAN
 	removeobject 1
 	release
@@ -42,13 +42,13 @@ GraniteCave_StevensRoom_EventScript_22DD0D:: @ 822DD0D
 	return
 
 GraniteCave_StevensRoom_EventScript_22DD18:: @ 822DD18
-	applymovement 255, GraniteCave_StevensRoom_Movement_22DD4C
+	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_22DD4C
 	applymovement 1, GraniteCave_StevensRoom_Movement_22DD45
 	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_22DD2A:: @ 822DD2A
-	applymovement 255, GraniteCave_StevensRoom_Movement_22DD4C
+	applymovement EVENT_OBJ_ID_PLAYER, GraniteCave_StevensRoom_Movement_22DD4C
 	applymovement 1, GraniteCave_StevensRoom_Movement_22DD51
 	waitmovement 0
 	return

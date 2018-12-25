@@ -425,7 +425,7 @@ void sub_80773D0(void)
         gMain.state++;
         break;
     case 8:
-        sub_81B5D30();
+        LoadHeldItemIcons();
         sub_81B5D4C(&gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_28[0], 0);
         gMain.state++;
         break;
@@ -611,7 +611,7 @@ void sub_8077B74(void)
         gMain.state++;
         break;
     case 8:
-        sub_81B5D30();
+        LoadHeldItemIcons();
         sub_81B5D4C(&gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_28[0], 0);
         gMain.state++;
         break;
@@ -3333,7 +3333,7 @@ bool32 sub_807A7BC(u16 a0, u8 a1)
     return FALSE;
 }
 
-u32 sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6)
+int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6)
 {
     u8 r9 = a0.unk_01_0;
     u8 r2 = a0.unk_00_7;

@@ -36,8 +36,6 @@ extern const u16 gEventObjectPalette33[];
 extern const u16 gEventObjectPalette34[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-extern u8 gSelectedOrderFromParty[];
-
 static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
 static void sub_80F8EE8(u8 taskId);
@@ -335,7 +333,7 @@ void ShowContestEntryMonPic(void)
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-        LoadCompressedObjectPalette(palette);
+        LoadCompressedSpritePalette(palette);
         SetMultiuseSpriteTemplateToPokemon(species, 1);
         gMultiuseSpriteTemplate.paletteTag = palette->tag;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);

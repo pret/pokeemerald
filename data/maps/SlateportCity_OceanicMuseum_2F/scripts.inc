@@ -17,21 +17,21 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCF5
 	waitmovement 0
 	compare VAR_FACING, 1
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC92
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC92
 	compare VAR_FACING, 4
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC92
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC92
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE40, MSGBOX_DEFAULT
 	compare VAR_FACING, 4
-	call_if 5, SlateportCity_OceanicMuseum_2F_EventScript_20BC9D
+	call_if_ne SlateportCity_OceanicMuseum_2F_EventScript_20BC9D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE69, MSGBOX_DEFAULT
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE93, MSGBOX_DEFAULT
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCE2
 	waitmovement 0
 	compare VAR_FACING, 1
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCA8
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BCA8
 	compare VAR_FACING, 3
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCB3
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BCB3
 	trainerbattle_no_intro TRAINER_GRUNT_14, SlateportCity_OceanicMuseum_2F_Text_20BEE2
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BEFA, MSGBOX_DEFAULT
 	closemessage
@@ -68,7 +68,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	fadescreen 0
 	delay 30
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_2725A8
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C2BE, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 269
@@ -82,7 +82,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	removeobject 1
 	setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
 	compare VAR_0x40DA, 0
-	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
+	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
 	setflag FLAG_0x095
 	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
@@ -96,7 +96,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BC8C:: @ 820BC8C
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BC92:: @ 820BC92
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_2725A4
 	waitmovement 0
 	return
 
@@ -106,12 +106,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BC9D:: @ 820BC9D
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BCA8:: @ 820BCA8
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_20BCBE
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_20BCBE
 	waitmovement 0
 	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_20BCB3:: @ 820BCB3
-	applymovement 255, SlateportCity_OceanicMuseum_2F_Movement_20BCC2
+	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_20BCC2
 	waitmovement 0
 	return
 

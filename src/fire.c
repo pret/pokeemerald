@@ -472,14 +472,14 @@ static void sub_8108EC8(struct Sprite *sprite)
 
 static void sub_8108F08(struct Sprite *sprite)
 {
-    sub_80A6864(sprite, gBattleAnimArgs[0]);
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
 
     sprite->pos1.y += gBattleAnimArgs[1];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[2] = gBattleAnimArgs[3];
 
-    sprite->callback = TranslateAnimLinearSimple;
+    sprite->callback = AnimTranslateLinearSimple;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -644,7 +644,7 @@ static void sub_8109200(struct Sprite *sprite)
 //void AnimFireRing(struct Sprite *sprite)
 void AnimFireRing(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
 
     sprite->data[7] = gBattleAnimArgs[2];
     sprite->data[0] = 0;
@@ -672,7 +672,7 @@ static void AnimFireRingStep1(struct Sprite *sprite)
 
 static void AnimFireRingStep2(struct Sprite *sprite)
 {
-    if (TranslateAnimLinear(sprite))
+    if (AnimTranslateLinear(sprite))
     {
         sprite->data[0] = 0;
 
@@ -731,7 +731,7 @@ static void AnimFireCross(struct Sprite *sprite)
 
 static void sub_81093A4(struct Sprite *sprite)
 {
-    InitAnimSpritePos(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, 1);
 
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[3];
@@ -1054,7 +1054,7 @@ static void sub_8109AFC(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        InitAnimSpritePos(sprite, 0);
+        InitSpritePosToAnimAttacker(sprite, 0);
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[7] = gBattleAnimArgs[2];
 
@@ -1067,7 +1067,7 @@ static void sub_8109AFC(struct Sprite *sprite)
             sprite->data[4] = -4;
         }
 
-        sprite->oam.priority = sub_80A8328(gBattleAnimTarget);
+        sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
         sprite->data[0]++;
         break;
     case 1:
@@ -1119,7 +1119,7 @@ static void sub_8109C4C(struct Sprite *sprite)
     s16 initialData5;
     s16 newData5;
 
-    if (!TranslateAnimLinear(sprite))
+    if (!AnimTranslateLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 16);
         initialData5 = sprite->data[5];
@@ -1157,9 +1157,9 @@ void sub_8109CB0(struct Sprite *sprite)
     if (!IsContest())
     {
         if (sprite->data[1] < 64 || sprite->data[1] > 195)
-            sprite->oam.priority = sub_80A8328(gBattleAnimTarget);
+            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
         else
-            sprite->oam.priority = sub_80A8328(gBattleAnimTarget) + 1;
+            sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget) + 1;
     }
     else
     {

@@ -127,7 +127,6 @@ SECTIONS {
         src/pokedex.o(.text);
         asm/trainer_card.o(.text);
         src/pokemon_storage_system.o(.text);
-        asm/pokemon_storage_system.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
@@ -152,7 +151,7 @@ SECTIONS {
         src/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
-        asm/fldeff_80F9BCC.o(.text);
+        src/fldeff_misc.o(.text);
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
@@ -160,19 +159,19 @@ SECTIONS {
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
         src/battle_anim_effects_2.o(.text);
-        asm/water.o(.text);
+        src/water.o(.text);
         src/fire.o(.text);
         src/electric.o(.text);
-        asm/ice.o(.text);
+        src/ice.o(.text);
         src/fight.o(.text);
         src/poison.o(.text);
         asm/flying.o(.text);
-        asm/psychic.o(.text);
+        src/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
         src/ghost.o(.text);
         src/dragon.o(.text);
-        asm/dark.o(.text);
+        src/dark.o(.text);
         src/ground.o(.text);
         src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
@@ -195,7 +194,8 @@ SECTIONS {
         src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
-        src/rom6.o(.text);
+        src/fldeff_rocksmash.o(.text);
+        src/fldeff_dig.o(.text);
         src/pokeblock.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
@@ -278,7 +278,7 @@ SECTIONS {
         src/dynamic_placeholder_text_util.o(.text);
         src/save_location.o(.text);
         src/item_icon.o(.text);
-        asm/party_menu.o(.text);
+        src/party_menu.o(.text);
         src/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
@@ -405,7 +405,6 @@ SECTIONS {
         src/data2b.o(.rodata);
         src/battle_data.o(.rodata);
         src/battle_bg.o(.rodata);
-        data/data2c.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
@@ -460,7 +459,6 @@ SECTIONS {
         src/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
         src/pokemon_storage_system.o(.rodata);
-        data/pokemon_storage_system.o(.rodata);
         src/pokemon_icon.o(.rodata);
         src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);
@@ -481,7 +479,7 @@ SECTIONS {
         data/contest_link_80F57C4.o(.rodata);
         src/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
-        data/field_effect_misc.o(.rodata);
+        src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
         src/item_use.o(.rodata);
@@ -537,7 +535,6 @@ SECTIONS {
         src/cable_car.o(.rodata);
         src/save.o(.rodata);
         src/field_effect_helpers.o(.rodata);
-        data/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle_controller_safari.o(.rodata);
         src/battle_anim_effects_3.o(.rodata);
@@ -587,7 +584,7 @@ SECTIONS {
         src/list_menu.o(.rodata);
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
-        data/party_menu.o(.rodata);
+        src/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         src/unk_81BAD84.o(.rodata);
@@ -604,7 +601,6 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);
-        data/unk_transition.o(.rodata);
         src/unk_transition.o(.rodata);
         data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);

@@ -9,8 +9,7 @@ DewfordTown_MapScript1_1E950D: @ 81E950D
 DewfordTown_EventScript_1E9511:: @ 81E9511
 	lock
 	faceplayer
-	checkflag FLAG_0x0BD
-	goto_if 0, DewfordTown_EventScript_1E9585
+	goto_if_unset FLAG_0x0BD, DewfordTown_EventScript_1E9585
 	message DewfordTown_Text_1E9C8A
 	waitmessage
 	multichoicedefault 21, 6, 0, 2, 0
@@ -44,7 +43,7 @@ DewfordTown_EventScript_1E957A:: @ 81E957A
 DewfordTown_EventScript_1E9585:: @ 81E9585
 	msgbox DewfordTown_Text_1E9B24, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_EventScript_1E95A2
+	goto_if_eq DewfordTown_EventScript_1E95A2
 	msgbox DewfordTown_Text_1E9BD9, MSGBOX_DEFAULT
 	release
 	end
@@ -74,13 +73,12 @@ DewfordTown_EventScript_1E95CC:: @ 81E95CC
 DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	lock
 	faceplayer
-	checkflag FLAG_0x101
-	goto_eq DewfordTown_EventScript_1E962A
+	goto_if_set FLAG_0x101, DewfordTown_EventScript_1E962A
 	msgbox DewfordTown_Text_1E9DD1, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_EventScript_1E95FF
+	goto_if_eq DewfordTown_EventScript_1E95FF
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_EventScript_1E9620
+	goto_if_eq DewfordTown_EventScript_1E9620
 	end
 
 DewfordTown_EventScript_1E95FF:: @ 81E95FF
@@ -101,9 +99,9 @@ DewfordTown_EventScript_1E962A:: @ 81E962A
 	waitmessage
 	multichoice 20, 8, 50, 1
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_EventScript_1E964C
+	goto_if_eq DewfordTown_EventScript_1E964C
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_EventScript_1E9656
+	goto_if_eq DewfordTown_EventScript_1E9656
 	end
 
 DewfordTown_EventScript_1E964C:: @ 81E964C
@@ -119,29 +117,29 @@ DewfordTown_EventScript_1E9656:: @ 81E9656
 DewfordTown_EventScript_1E9660:: @ 81E9660
 	call DewfordTown_EventScript_271E95
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
-	setobjectpriority 255, MAP_DEWFORD_TOWN, 0
+	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN, 0
 	applymovement 2, DewfordTown_Movement_1E991D
 	waitmovement 0
 	removeobject 2
-	applymovement 255, DewfordTown_Movement_1E9911
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9911
 	waitmovement 0
-	hideobjectat 255, MAP_DEWFORD_TOWN
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_2720A0
 	applymovement 4, DewfordTown_Movement_1E97A2
-	applymovement 255, DewfordTown_Movement_1E97A2
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E97A2
 	waitmovement 0
-	showobjectat 255, MAP_ROUTE104
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	call DewfordTown_EventScript_2720A8
-	applymovement 255, DewfordTown_Movement_1E9914
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9914
 	waitmovement 0
-	showobjectat 255, MAP_ROUTE104
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
 	setvar VAR_0x408E, 2
-	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
 	copyvar VAR_0x4096, VAR_0x8008
 	waitstate
@@ -151,20 +149,20 @@ DewfordTown_EventScript_1E9660:: @ 81E9660
 DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	call DewfordTown_EventScript_271E95
 	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
-	setobjectpriority 255, MAP_DEWFORD_TOWN, 1
+	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN, 1
 	applymovement 2, DewfordTown_Movement_1E991D
 	waitmovement 0
 	removeobject 2
-	applymovement 255, DewfordTown_Movement_1E9911
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9911
 	waitmovement 0
-	hideobjectat 255, MAP_DEWFORD_TOWN
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_2720A0
 	applymovement 4, DewfordTown_Movement_1E9865
-	applymovement 255, DewfordTown_Movement_1E9865
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9865
 	waitmovement 0
 	call DewfordTown_EventScript_2720A8
-	showobjectat 255, MAP_ROUTE109
-	applymovement 255, DewfordTown_Movement_1E9918
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
+	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Movement_1E9918
 	waitmovement 0
 	setobjectxyperm 2, 21, 26
 	addobject 2
@@ -176,13 +174,11 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
-	checkflag FLAG_0x095
-	call_if 0, DewfordTown_EventScript_1E9790
-	checkflag FLAG_0x095
-	call_if 1, DewfordTown_EventScript_1E9799
+	call_if_unset FLAG_0x095, DewfordTown_EventScript_1E9790
+	call_if_set FLAG_0x095, DewfordTown_EventScript_1E9799
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	resetobjectpriority 2, MAP_ROUTE109
 	moveobjectoffscreen 2
 	release
@@ -600,9 +596,9 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	call DewfordTown_EventScript_271E8B
 	msgbox DewfordTown_Text_1EA136, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_EventScript_1E9948
+	goto_if_eq DewfordTown_EventScript_1E9948
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_EventScript_1E9952
+	goto_if_eq DewfordTown_EventScript_1E9952
 	end
 
 DewfordTown_EventScript_1E9948:: @ 81E9948
@@ -617,15 +613,15 @@ DewfordTown_EventScript_1E9952:: @ 81E9952
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_EventScript_1E997D
+	goto_if_eq DewfordTown_EventScript_1E997D
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_EventScript_1E9994
+	goto_if_eq DewfordTown_EventScript_1E9994
 	end
 
 DewfordTown_EventScript_1E997D:: @ 81E997D
 	incrementgamestat 2
 	compare VAR_0x8004, 0
-	goto_eq DewfordTown_EventScript_1E999E
+	goto_if_eq DewfordTown_EventScript_1E999E
 	msgbox DewfordTown_Text_1EA2AA, MSGBOX_DEFAULT
 	release
 	end

@@ -6,9 +6,9 @@ SootopolisCity_House2_EventScript_226A77:: @ 8226A77
 	faceplayer
 	msgbox SootopolisCity_House2_Text_226AAB, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, SootopolisCity_House2_EventScript_226A99
+	call_if_eq SootopolisCity_House2_EventScript_226A99
 	compare VAR_RESULT, 0
-	call_if 1, SootopolisCity_House2_EventScript_226AA2
+	call_if_eq SootopolisCity_House2_EventScript_226AA2
 	release
 	end
 

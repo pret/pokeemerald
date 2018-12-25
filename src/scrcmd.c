@@ -1485,7 +1485,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 
     StringExpandPlaceholders(gStringVar4, ptr + 6);
 
-    width = GetStringWidth(6, gStringVar4, -1) / 8;
+    width = GetStringWidth(6, gStringVar4, -1) / 8u;
 
     if (width > 0x1C)
         width = 0x1C;
@@ -1713,8 +1713,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
         if (!species)
             break;
-        // UB: GetMonData() arguments don't match function definition
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && pokemon_has_move(&gPlayerParty[i], moveId) == TRUE)
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && MonKnowsMove(&gPlayerParty[i], moveId) == TRUE)
         {
             gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;

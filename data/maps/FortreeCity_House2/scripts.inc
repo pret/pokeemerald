@@ -4,10 +4,8 @@ FortreeCity_House2_MapScripts:: @ 82177CA
 FortreeCity_House2_EventScript_2177CB:: @ 82177CB
 	lock
 	faceplayer
-	checkflag FLAG_0x108
-	goto_eq FortreeCity_House2_EventScript_21786E
-	checkflag FLAG_0x076
-	call_if 0, FortreeCity_House2_EventScript_217862
+	goto_if_set FLAG_0x108, FortreeCity_House2_EventScript_21786E
+	call_if_unset FLAG_0x076, FortreeCity_House2_EventScript_217862
 	msgbox FortreeCity_House2_Text_2178D6, MSGBOX_DEFAULT
 	multichoice 21, 8, 54, 1
 	switch VAR_RESULT
@@ -23,7 +21,7 @@ FortreeCity_House2_EventScript_2177CB:: @ 82177CB
 	msgbox FortreeCity_House2_Text_217A28, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM10
 	compare VAR_RESULT, 0
-	goto_eq FortreeCity_House2_EventScript_272054
+	goto_if_eq FortreeCity_House2_EventScript_272054
 	setflag FLAG_0x108
 	msgbox FortreeCity_House2_Text_217A91, MSGBOX_DEFAULT
 	release

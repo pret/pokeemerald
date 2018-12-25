@@ -8,7 +8,7 @@ Route121_SafariZoneEntrance_MapScript2_22BBC1: @ 822BBC1
 
 Route121_SafariZoneEntrance_EventScript_22BBCB:: @ 822BBCB
 	lockall
-	applymovement 255, Route121_SafariZoneEntrance_Movement_22BBDD
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BBDD
 	waitmovement 0
 	setvar VAR_0x40A4, 0
 	releaseall
@@ -34,7 +34,7 @@ Route121_SafariZoneEntrance_EventScript_22BBEF:: @ 822BBEF
 	faceplayer
 	msgbox Route121_SafariZoneEntrance_Text_2A4E46, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route121_SafariZoneEntrance_EventScript_22BC0E
+	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BC0E
 	msgbox Route121_SafariZoneEntrance_Text_2A4E7E, MSGBOX_DEFAULT
 	release
 	end
@@ -46,12 +46,12 @@ Route121_SafariZoneEntrance_EventScript_22BC0E:: @ 822BC0E
 
 Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 	lockall
-	applymovement 255, Route121_SafariZoneEntrance_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_2725A6
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_2A4F74, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route121_SafariZoneEntrance_EventScript_22BC48
+	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BC48
 	msgbox Route121_SafariZoneEntrance_Text_2A4FD7, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_22BD06
 	end
@@ -59,11 +59,11 @@ Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq Route121_SafariZoneEntrance_EventScript_22BCEA
+	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BCEA
 	call Route121_SafariZoneEntrance_EventScript_22BCBF
 	checkmoney 0x1f4, 0
 	compare VAR_RESULT, 0
-	goto_eq Route121_SafariZoneEntrance_EventScript_22BCF8
+	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BCF8
 	playse SE_REGI
 	msgbox Route121_SafariZoneEntrance_Text_2A501B, MSGBOX_DEFAULT
 	takemoney 0x1f4, 0
@@ -78,7 +78,7 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	hidemoneybox
 	nop
 	nop
-	applymovement 255, Route121_SafariZoneEntrance_Movement_22BD18
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BD18
 	waitmovement 0
 	special EnterSafariMode
 	setvar VAR_0x40A4, 2
@@ -90,10 +90,10 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 Route121_SafariZoneEntrance_EventScript_22BCBF:: @ 822BCBF
 	getpartysize
 	compare VAR_RESULT, 6
-	goto_if 5, Route121_SafariZoneEntrance_EventScript_22BCE9
+	goto_if_ne Route121_SafariZoneEntrance_EventScript_22BCE9
 	specialvar VAR_RESULT, ScriptCheckFreePokemonStorageSpace
 	compare VAR_RESULT, 1
-	goto_eq Route121_SafariZoneEntrance_EventScript_22BCE9
+	goto_if_eq Route121_SafariZoneEntrance_EventScript_22BCE9
 	msgbox Route121_SafariZoneEntrance_Text_2A50E5, MSGBOX_DEFAULT
 	goto Route121_SafariZoneEntrance_EventScript_22BD06
 	end
@@ -116,7 +116,7 @@ Route121_SafariZoneEntrance_EventScript_22BD06:: @ 822BD06
 	hidemoneybox
 	nop
 	nop
-	applymovement 255, Route121_SafariZoneEntrance_Movement_22BD16
+	applymovement EVENT_OBJ_ID_PLAYER, Route121_SafariZoneEntrance_Movement_22BD16
 	waitmovement 0
 	releaseall
 	end

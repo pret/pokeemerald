@@ -390,7 +390,6 @@ void sub_811FAF8(void)
     }
 }
 
-
 bool8 sub_811FBA4(void)
 {
     u16 i;

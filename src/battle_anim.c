@@ -1605,8 +1605,8 @@ static void ScriptCmd_loadspritegfx(void)
 
     sBattleAnimScriptPtr++;
     index = T1_READ_16(sBattleAnimScriptPtr);
-    LoadCompressedObjectPicUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)]);
-    LoadCompressedObjectPaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
     sBattleAnimScriptPtr += 2;
     AddSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
     gAnimFramesToWait = 1;
@@ -1671,7 +1671,11 @@ static void ScriptCmd_createsprite(void)
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(template, GetBattlerSpriteCoord(gBattleAnimTarget, 2), GetBattlerSpriteCoord(gBattleAnimTarget, 3), subpriority);
+    CreateSpriteAndAnimate(
+        template,
+        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
+        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
+        subpriority);
     gAnimVisualTaskCount++;
 }
 
@@ -1866,7 +1870,7 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
         gAnimVisualTaskCount++;
         gTasks[taskId].data[t1_MONBG_BATTLER] = battlerId;
@@ -1885,7 +1889,7 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
         gAnimVisualTaskCount++;
         gTasks[taskId].data[0] = battlerId;
@@ -1918,7 +1922,7 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
     return FALSE;
 }
 
-void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
+void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 {
     struct UnknownAnimStruct2 unknownStruct;
     u8 battlerSpriteId;
@@ -2190,7 +2194,7 @@ static void ScriptCmd_monbg_22(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
     }
 
     battlerId ^= BIT_FLANK;
@@ -2202,7 +2206,7 @@ static void ScriptCmd_monbg_22(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
     }
 
     sBattleAnimScriptPtr++;
@@ -3029,12 +3033,12 @@ static void ScriptCmd_doublebattle_2D(void)
     {
         if (wantedBattler == ANIM_ATTACKER)
         {
-            r4 = sub_80A8364(gBattleAnimAttacker);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = sub_80A8364(gBattleAnimTarget);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
@@ -3064,12 +3068,12 @@ static void ScriptCmd_doublebattle_2E(void)
     {
         if (wantedBattler == ANIM_ATTACKER)
         {
-            r4 = sub_80A8364(gBattleAnimAttacker);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = sub_80A8364(gBattleAnimTarget);
+            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
 

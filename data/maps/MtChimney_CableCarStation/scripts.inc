@@ -5,7 +5,7 @@ MtChimney_CableCarStation_MapScripts:: @ 822ABFA
 
 MtChimney_CableCarStation_MapScript1_22AC05: @ 822AC05
 	compare VAR_0x40A3, 1
-	call_if 1, MtChimney_CableCarStation_EventScript_22AC11
+	call_if_eq MtChimney_CableCarStation_EventScript_22AC11
 	end
 
 MtChimney_CableCarStation_EventScript_22AC11:: @ 822AC11
@@ -19,7 +19,7 @@ MtChimney_CableCarStation_MapScript2_22AC1D: @ 822AC1D
 
 MtChimney_CableCarStation_EventScript_22AC27:: @ 822AC27
 	lockall
-	applymovement 255, MtChimney_CableCarStation_Movement_22ACB4
+	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_CableCarStation_Movement_22ACB4
 	applymovement 1, MtChimney_CableCarStation_Movement_22ACAA
 	waitmovement 0
 	setvar VAR_0x40A3, 0
@@ -33,16 +33,16 @@ MtChimney_CableCarStation_EventScript_22AC4B:: @ 822AC4B
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_22ACB9, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MtChimney_CableCarStation_EventScript_22AC6C
+	goto_if_eq MtChimney_CableCarStation_EventScript_22AC6C
 	compare VAR_RESULT, 0
-	goto_eq MtChimney_CableCarStation_EventScript_22AC9B
+	goto_if_eq MtChimney_CableCarStation_EventScript_22AC9B
 	end
 
 MtChimney_CableCarStation_EventScript_22AC6C:: @ 822AC6C
 	msgbox MtChimney_CableCarStation_Text_22ACF8, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, MtChimney_CableCarStation_Movement_22ACA5
-	applymovement 255, MtChimney_CableCarStation_Movement_22ACAF
+	applymovement EVENT_OBJ_ID_PLAYER, MtChimney_CableCarStation_Movement_22ACAF
 	waitmovement 0
 	setvar VAR_0x8004, 1
 	setvar VAR_0x40A3, 2
