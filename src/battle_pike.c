@@ -793,7 +793,7 @@ static void HealMon(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_HP, data);
 
     ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         u16 move = GetMonData(mon, MON_DATA_MOVE1 + i);
         data[0] = CalculatePPWithBonus(move, ppBonuses, i);
@@ -1137,7 +1137,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
     else
         abilityBit = 0;
     SetMonData(&gEnemyParty[0], MON_DATA_ALT_ABILITY, &abilityBit);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(&gEnemyParty[0], wildMons[headerId][pikeMonId].moves[i], i);
 
     CalculateMonStats(&gEnemyParty[0]);
@@ -1285,7 +1285,7 @@ static void TryHealMons(u8 healCount)
         else
         {
             u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
                 max = CalculatePPWithBonus(move, ppBonuses, j);
@@ -1546,7 +1546,7 @@ static void sub_81A86C0(void)
         if (curr >= max && pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS)) == 0)
         {
             u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
                 max = CalculatePPWithBonus(move, ppBonuses, j);
