@@ -3196,6 +3196,7 @@ u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
     }
 }
 
+#ifdef NONMATCHING
 s32 sub_807A728(void)
 {
     int val;
@@ -3240,5 +3241,165 @@ s32 sub_807A728(void)
             }
         }
     }
+    return 0;
+}
+#else
+NAKED
+s32 sub_807A728(void)
+{
+    asm_unified("push {r4-r7,lr}\n\
+    ldr r0, =gReceivedRemoteLinkPlayers\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    beq _0807A7B4\n\
+    movs r4, 0\n\
+    bl GetMultiplayerId\n\
+    ldr r5, =gLinkPlayers\n\
+    movs r7, 0x1\n\
+    eors r0, r7\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, r0, 3\n\
+    subs r1, r0\n\
+    lsls r1, 2\n\
+    adds r1, r5\n\
+    ldrb r1, [r1]\n\
+    subs r0, r1, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x2\n\
+    bls _0807A7B4\n\
+    subs r0, r1, 0x4\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    cmp r0, 0x1\n\
+    bhi _0807A762\n\
+    movs r4, 0x2\n\
+_0807A762:\n\
+    cmp r4, 0\n\
+    ble _0807A7B4\n\
+    bl GetMultiplayerId\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, r0, 3\n\
+    subs r1, r0\n\
+    lsls r1, 2\n\
+    adds r1, r5\n\
+    ldrb r1, [r1, 0x12]\n\
+    movs r6, 0xF0\n\
+    adds r0, r6, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0807A7B0\n\
+    cmp r4, 0x2\n\
+    bne _0807A7B4\n\
+    bl GetMultiplayerId\n\
+    eors r0, r7\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, r0, 3\n\
+    subs r1, r0\n\
+    lsls r1, 2\n\
+    adds r1, r5\n\
+    ldrb r1, [r1, 0x12]\n\
+    adds r0, r6, 0\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _0807A7B4\n\
+    movs r0, 0x2\n\
+    b _0807A7B6\n\
+    .pool\n\
+_0807A7B0:\n\
+    movs r0, 0x1\n\
+    b _0807A7B6\n\
+_0807A7B4:\n\
+    movs r0, 0\n\
+_0807A7B6:\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1");
+}
+#endif // NONMATCHING
+
+bool32 sub_807A7BC(u16 a0, u8 a1)
+{
+    if (a0 == SPECIES_DEOXYS || a0 == SPECIES_MEW)
+    {
+        if (!a1)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+u32 sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6)
+{
+    u8 r9 = a0.unk_01_0;
+    u8 r2 = a0.unk_00_7;
+    u8 r10 = a1.unk_01_0;
+    u8 r0 = a1.unk_00_7;
+    u8 r1 = a1.unk_01_2;
+
+    if (r1 != 3)
+    {
+        if (!r2)
+        {
+            return 8;
+        }
+        else if (!r0)
+        {
+            return 9;
+        }
+    }
+
+    if (sub_807A7BC(a5, a6))
+    {
+        return 4;
+    }
+
+    if (a3 == SPECIES_EGG)
+    {
+        if (a2 != a3)
+        {
+            return 2;
+        }
+    }
+    else
+    {
+        if (gBaseStats[a2].type1 != a4 && gBaseStats[a2].type2 != a4)
+        {
+            return 1;
+        }
+    }
+
+    if (a2 == SPECIES_EGG && a2 != a3)
+    {
+        return 3;
+    }
+
+    if (!r9)
+    {
+        if (a2 == SPECIES_EGG)
+        {
+            return 6;
+        }
+        
+        if (!IsSpeciesInHoennDex(a2))
+        {
+            return 4;
+        }
+
+        if (!IsSpeciesInHoennDex(a3))
+        {
+            return 5;
+        }
+    }
+
+    if (!r10 && !IsSpeciesInHoennDex(a2))
+    {
+        return 7;
+    }
+
     return 0;
 }
