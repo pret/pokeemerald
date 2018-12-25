@@ -283,8 +283,7 @@ SECTIONS {
         src/multiboot.o(.text);
         src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
-        src/fldeff_groundshake.o(.text);
-        src/fossil_specials.o(.text);
+        src/mirage_tower.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
@@ -588,8 +587,7 @@ SECTIONS {
         src/unk_text_util_2.o(.rodata);
         src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
-        src/fossil_specials.o(.rodata);
-        src/fldeff_groundshake.o(.rodata);
+        src/mirage_tower.o(.rodata);
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);

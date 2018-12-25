@@ -389,7 +389,7 @@
 	.include "data/layouts/DesertUnderpass/layout.inc"
 	.include "data/layouts/BattleFrontier_BattleTowerMultiBattleRoom/layout.inc"
 	.include "data/layouts/BattleFrontier_BattleTowerCorridor2/layout.inc"
-	.include "data/layouts/UnknownMap_08470BD8/layout.inc"
+	.include "data/layouts/Route111_NoMirageTower/layout.inc"
 	.include "data/layouts/UnionRoom/layout.inc"
 	.include "data/layouts/SafariZone_Northeast/layout.inc"
 	.include "data/layouts/SafariZone_Southeast/layout.inc"
