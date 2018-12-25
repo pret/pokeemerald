@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_factory_screen.h"
 #include "battle_factory.h"
 #include "sprite.h"
@@ -1691,7 +1692,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
                                              gFacilityTrainerMons[monSetId].evSpread,
                                              otId);
         happiness = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
             SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monSetId].moves[j], j);
         SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_FRIENDSHIP, &happiness);
         SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
@@ -1721,7 +1722,7 @@ static void CreateTentFactorySelectableMons(u8 firstMonId)
                                              gFacilityTrainerMons[monSetId].evSpread,
                                              otId);
         happiness = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
             SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monSetId].moves[j], j);
         SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_FRIENDSHIP, &happiness);
         SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);

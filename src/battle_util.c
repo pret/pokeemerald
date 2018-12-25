@@ -85,13 +85,13 @@ void PressurePPLose(u8 defender, u8 attacker, u16 move)
     if (gBattleMons[defender].ability != ABILITY_PRESSURE)
         return;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[attacker].moves[i] == move)
             break;
     }
 
-    if (i == 4) // mons don't share any moves
+    if (i == MAX_MON_MOVES) // mons don't share any moves
         return;
 
     if (gBattleMons[attacker].pp[i] != 0)
@@ -116,12 +116,12 @@ void PressurePPLoseOnUsingImprision(u8 attacker)
     {
         if (atkSide != GetBattlerSide(i) && gBattleMons[i].ability == ABILITY_PRESSURE)
         {
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (gBattleMons[attacker].moves[j] == MOVE_IMPRISON)
                     break;
             }
-            if (j != 4)
+            if (j != MAX_MON_MOVES)
             {
                 imprisionPos = j;
                 if (gBattleMons[attacker].pp[j] != 0)
@@ -149,12 +149,12 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
     {
         if (gBattleMons[i].ability == ABILITY_PRESSURE && i != attacker)
         {
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (gBattleMons[attacker].moves[j] == MOVE_PERISH_SONG)
                     break;
             }
-            if (j != 4)
+            if (j != MAX_MON_MOVES)
             {
                 perishSongPos = j;
                 if (gBattleMons[attacker].pp[j] != 0)
@@ -163,7 +163,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
         }
     }
 
-    if (perishSongPos != 4
+    if (perishSongPos != MAX_MON_MOVES
         && !(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
         && !(gDisableStructs[attacker].unk18_b & gBitTable[perishSongPos]))
     {
@@ -426,7 +426,7 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
 
     gPotentialItemEffectBattler = battlerId;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[battlerId].moves[i] == 0 && check & MOVE_LIMITATION_ZEROMOVE)
             unusableMoves |= gBitTable[i];
@@ -477,12 +477,12 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
         if (battlerSide != GetBattlerSide(i) && gStatuses3[i] & STATUS3_IMPRISONED_OTHERS)
         {
             s32 j;
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (move == gBattleMons[i].moves[j])
                     break;
             }
-            if (j < 4)
+            if (j < MAX_MON_MOVES)
                 imprisionedMoves++;
         }
     }
@@ -1021,12 +1021,12 @@ u8 DoBattlerEndTurnEffects(void)
                 if (gDisableStructs[gActiveBattler].disableTimer != 0)
                 {
                     s32 i;
-                    for (i = 0; i < 4; i++)
+                    for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         if (gDisableStructs[gActiveBattler].disabledMove == gBattleMons[gActiveBattler].moves[i])
                             break;
                     }
-                    if (i == 4)  // pokemon does not have the disabled move anymore
+                    if (i == MAX_MON_MOVES)  // pokemon does not have the disabled move anymore
                     {
                         gDisableStructs[gActiveBattler].disabledMove = 0;
                         gDisableStructs[gActiveBattler].disableTimer = 0;
@@ -2661,7 +2661,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
                     else
                         mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
-                    for (i = 0; i < 4; i++)
+                    for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         move = GetMonData(mon, MON_DATA_MOVE1 + i);
                         changedPP = GetMonData(mon, MON_DATA_PP1 + i);
@@ -2669,7 +2669,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         if (move && changedPP == 0)
                             break;
                     }
-                    if (i != 4)
+                    if (i != MAX_MON_MOVES)
                     {
                         u8 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
                         if (changedPP + battlerHoldEffectParam > maxPP)
