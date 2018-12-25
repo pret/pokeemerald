@@ -171,9 +171,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A4
 	waitmovement 0
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9F32
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9F3C
 	playse SE_PC_ON
 	waitse
@@ -533,9 +533,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A8
 	waitmovement 0
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA352
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F
 	setvar VAR_0x4084, 5
 	setflag FLAG_0x074
@@ -605,9 +605,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA3EC:: @ 81FA3EC
 	compare VAR_0x40D3, 2
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1FA490
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA428
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA431
 	release
 	end
@@ -622,9 +622,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA431:: @ 81FA431
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA43A:: @ 81FA43A
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA453
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA45C
 	release
 	end
@@ -639,9 +639,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA45C:: @ 81FA45C
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA465:: @ 81FA465
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA47E
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA487
 	release
 	end
@@ -656,9 +656,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA487:: @ 81FA487
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA490:: @ 81FA490
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA4A9
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA4B2
 	release
 	end

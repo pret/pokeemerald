@@ -10,9 +10,9 @@ VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A: @ 820230A
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202310:: @ 8202310
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202328
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202333
 	return
 
