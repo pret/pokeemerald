@@ -459,7 +459,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     s32 mostViableMovesNo;
     s16 mostMovePoints;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (i == sBattler_AI || gBattleMons[i].hp == 0)
         {
@@ -1773,7 +1773,7 @@ static void BattleAICmd_if_has_move(void)
         if (i == MAX_MON_MOVES)
             gAIScriptPtr += 8;
         else
-            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + MAX_MON_MOVES);
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
         break;
     case AI_USER_PARTNER:
         if (gBattleMons[sBattler_AI ^ BIT_FLANK].hp == 0)
