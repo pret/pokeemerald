@@ -43,7 +43,7 @@ extern struct {
     u8 unk_36[2];
     u8 unk_38[12];
     u8 unk_44;
-    u8 unk_45[12];
+    u8 unk_45[2][PARTY_SIZE];
     u8 unk_51[2][PARTY_SIZE];
     u8 unk_5D[PARTY_SIZE];
     u8 unk_63[PARTY_SIZE];
@@ -101,8 +101,6 @@ extern const u8 gUnknown_0832DF99[][2];
 extern const u8 gText_EmptyString7[];
 extern const u8 gText_NewLine3[];
 extern const u8 gText_FourQuestionMarks[];
-extern const u8 gUnknown_0832DE3E[][6][2];
-extern const u8 gUnknown_0832DE56[][6][2];
 extern const u8 *gUnknown_0832DEBC[];
 extern const struct SpritePalette gSpritePalette_TradeScreenText;
 extern const struct SpritePalette gUnknown_0832DC44;
@@ -289,7 +287,7 @@ void sub_80773D0(void)
         gUnknown_0203229C = AllocZeroed(sizeof(*gUnknown_0203229C));
         sub_80772A4();
         gUnknown_02032184 = AllocZeroed(0xE00);
-        
+
         for (i = 0; i < 14; i++)
         {
             gUnknown_02032188[i] = &gUnknown_02032184[i * 256];
@@ -792,7 +790,7 @@ void sub_807825C(void)
     sub_807A0C4();
     sub_80796B4(0);
     sub_80796B4(1);
-    
+
     SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_0203229C->unk_0++);
     SetGpuReg(REG_OFFSET_BG3HOFS, gUnknown_0203229C->unk_1--);
 
@@ -849,7 +847,7 @@ void sub_8078388(void)
         {
             gUnknown_0203229C->unk_38[i] = FALSE;
         }
-        
+
         if (i < gUnknown_0203229C->unk_36[1])
         {
             gSprites[gUnknown_0203229C->unk_28[1][i]].invisible = FALSE;
@@ -1116,8 +1114,6 @@ void sub_8078900(u8 a0, u8 a1)
     }
 }
 
-// Can't get some weird loading behavior for unk_78/79/7A/7B for parts of this
-#ifdef NONMATCHING
 void sub_80789FC(void)
 {
     if (gUnknown_0203229C->unk_78 && gUnknown_0203229C->unk_79)
@@ -1128,8 +1124,7 @@ void sub_80789FC(void)
             gUnknown_0203229C->unk_80[0] = 0xDDDD;
             gUnknown_0203229C->unk_80[1] = gUnknown_0203229C->unk_35;
             sub_807A048(5, 0);
-            gUnknown_0203229C->unk_79 = 0;
-            gUnknown_0203229C->unk_78 = 0;
+            gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
         }
         else if (gUnknown_0203229C->unk_78 == 1 && gUnknown_0203229C->unk_79 == 2)
         {
@@ -1137,10 +1132,8 @@ void sub_80789FC(void)
             gUnknown_0203229C->unk_80[0] = 0xEECC;
             gUnknown_0203229C->unk_80[1] = 0;
             sub_807A048(5, 0);
-            gUnknown_0203229C->unk_7B = 0;
-            gUnknown_0203229C->unk_7A = 0;
-            gUnknown_0203229C->unk_79 = 0;
-            gUnknown_0203229C->unk_78 = 0;
+            gUnknown_0203229C->unk_7A = gUnknown_0203229C->unk_7B = 0;
+            gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
             gUnknown_0203229C->unk_6F = 8;
         }
         else if (gUnknown_0203229C->unk_78 == 2 && gUnknown_0203229C->unk_79 == 1)
@@ -1149,10 +1142,8 @@ void sub_80789FC(void)
             gUnknown_0203229C->unk_80[0] = 0xDDEE;
             gUnknown_0203229C->unk_80[1] = 0;
             sub_807A048(5, 0);
-            gUnknown_0203229C->unk_7B = 0;
-            gUnknown_0203229C->unk_7A = 0;
-            gUnknown_0203229C->unk_79 = 0;
-            gUnknown_0203229C->unk_78 = 0;
+            gUnknown_0203229C->unk_7A = gUnknown_0203229C->unk_7B = 0;
+            gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
             gUnknown_0203229C->unk_6F = 8;
         }
         else if (gUnknown_0203229C->unk_78 == 2 && gUnknown_0203229C->unk_79 == 2)
@@ -1161,8 +1152,7 @@ void sub_80789FC(void)
             gUnknown_0203229C->unk_80[1] = 0;
             sub_807A048(5, 0);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-            gUnknown_0203229C->unk_79 = 0;
-            gUnknown_0203229C->unk_78 = 0;
+            gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
             gUnknown_0203229C->unk_6F = 11;
         }
     }
@@ -1191,247 +1181,6 @@ void sub_80789FC(void)
         }
     }
 }
-#else
-NAKED
-void sub_80789FC(void)
-{
-    asm_unified("push {r4-r6,lr}\n\
-    sub sp, 0x4\n\
-    ldr r6, =gUnknown_0203229C\n\
-    ldr r2, [r6]\n\
-    adds r1, r2, 0\n\
-    adds r1, 0x78\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0\n\
-    bne _08078A10\n\
-    b _08078B44\n\
-_08078A10:\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x79\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08078A1C\n\
-    b _08078B44\n\
-_08078A1C:\n\
-    ldrh r1, [r1]\n\
-    ldr r0, =0x00000101\n\
-    cmp r1, r0\n\
-    bne _08078A64\n\
-    adds r1, r2, 0\n\
-    adds r1, 0x6F\n\
-    movs r0, 0x6\n\
-    strb r0, [r1]\n\
-    ldr r2, [r6]\n\
-    adds r1, r2, 0\n\
-    adds r1, 0x80\n\
-    movs r4, 0\n\
-    ldr r0, =0x0000dddd\n\
-    strh r0, [r1]\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x35\n\
-    ldrb r1, [r0]\n\
-    adds r0, 0x4D\n\
-    strh r1, [r0]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    bl sub_807A048\n\
-    ldr r0, [r6]\n\
-    adds r2, r0, 0\n\
-    adds r2, 0x79\n\
-    strb r4, [r2]\n\
-    adds r0, 0x78\n\
-    strb r4, [r0]\n\
-    b _08078B44\n\
-    .pool\n\
-_08078A64:\n\
-    ldr r0, =0x00000201\n\
-    cmp r1, r0\n\
-    bne _08078AB4\n\
-    movs r0, 0x1\n\
-    bl sub_807A19C\n\
-    ldr r1, [r6]\n\
-    adds r2, r1, 0\n\
-    adds r2, 0x80\n\
-    movs r4, 0\n\
-    movs r3, 0\n\
-    ldr r0, =0x0000eecc\n\
-    strh r0, [r2]\n\
-    adds r1, 0x82\n\
-    strh r3, [r1]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    bl sub_807A048\n\
-    ldr r0, [r6]\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x7B\n\
-    strb r4, [r1]\n\
-    adds r0, 0x7A\n\
-    strb r4, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x79\n\
-    strb r4, [r1]\n\
-    adds r0, 0x78\n\
-    strb r4, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x6F\n\
-    movs r1, 0x8\n\
-    b _08078B42\n\
-    .pool\n\
-_08078AB4:\n\
-    movs r0, 0x81\n\
-    lsls r0, 1\n\
-    cmp r1, r0\n\
-    bne _08078B00\n\
-    movs r0, 0x5\n\
-    bl sub_807A19C\n\
-    ldr r1, [r6]\n\
-    adds r2, r1, 0\n\
-    adds r2, 0x80\n\
-    movs r4, 0\n\
-    movs r3, 0\n\
-    ldr r0, =0x0000ddee\n\
-    strh r0, [r2]\n\
-    adds r1, 0x82\n\
-    strh r3, [r1]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    bl sub_807A048\n\
-    ldr r0, [r6]\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x7B\n\
-    strb r4, [r1]\n\
-    adds r0, 0x7A\n\
-    strb r4, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x79\n\
-    strb r4, [r1]\n\
-    adds r0, 0x78\n\
-    strb r4, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x6F\n\
-    movs r1, 0x8\n\
-    b _08078B42\n\
-    .pool\n\
-_08078B00:\n\
-    ldr r0, =0x00000202\n\
-    cmp r1, r0\n\
-    bne _08078B44\n\
-    adds r1, r2, 0\n\
-    adds r1, 0x80\n\
-    movs r5, 0\n\
-    movs r4, 0\n\
-    ldr r0, =0x0000eebb\n\
-    strh r0, [r1]\n\
-    adds r0, r2, 0\n\
-    adds r0, 0x82\n\
-    strh r4, [r0]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    bl sub_807A048\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    str r4, [sp]\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    movs r3, 0x10\n\
-    bl BeginNormalPaletteFade\n\
-    ldr r0, [r6]\n\
-    adds r1, r0, 0\n\
-    adds r1, 0x79\n\
-    strb r5, [r1]\n\
-    adds r0, 0x78\n\
-    strb r5, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x6F\n\
-    movs r1, 0xB\n\
-_08078B42:\n\
-    strb r1, [r0]\n\
-_08078B44:\n\
-    ldr r5, =gUnknown_0203229C\n\
-    ldr r3, [r5]\n\
-    adds r1, r3, 0\n\
-    adds r1, 0x7A\n\
-    ldrb r0, [r1]\n\
-    cmp r0, 0\n\
-    beq _08078BDC\n\
-    adds r0, r3, 0\n\
-    adds r0, 0x7B\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _08078BDC\n\
-    ldrh r1, [r1]\n\
-    ldr r0, =0x00000101\n\
-    cmp r1, r0\n\
-    bne _08078B92\n\
-    adds r1, r3, 0\n\
-    adds r1, 0x80\n\
-    movs r4, 0\n\
-    movs r2, 0\n\
-    ldr r0, =0x0000ccdd\n\
-    strh r0, [r1]\n\
-    adds r0, r3, 0\n\
-    adds r0, 0x82\n\
-    strh r2, [r0]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    bl sub_807A048\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x7A\n\
-    strb r4, [r0]\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x7B\n\
-    strb r4, [r0]\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x6F\n\
-    movs r1, 0x9\n\
-    strb r1, [r0]\n\
-_08078B92:\n\
-    ldr r1, [r5]\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x7A\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    beq _08078BA8\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x7B\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x2\n\
-    bne _08078BDC\n\
-_08078BA8:\n\
-    movs r0, 0x1\n\
-    bl sub_807A19C\n\
-    ldr r1, [r5]\n\
-    adds r2, r1, 0\n\
-    adds r2, 0x80\n\
-    movs r4, 0\n\
-    movs r3, 0\n\
-    ldr r0, =0x0000ddee\n\
-    strh r0, [r2]\n\
-    adds r1, 0x82\n\
-    strh r3, [r1]\n\
-    movs r0, 0x5\n\
-    movs r1, 0\n\
-    bl sub_807A048\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x7A\n\
-    strb r4, [r0]\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x7B\n\
-    strb r4, [r0]\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x6F\n\
-    movs r1, 0x8\n\
-    strb r1, [r0]\n\
-_08078BDC:\n\
-    add sp, 0x4\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n");
-}
-#endif // NONMATCHING
 
 void sub_8078BFC(u16 *a0, u16 a1, u16 a2)
 {
@@ -1677,7 +1426,7 @@ u8 sub_80790D4(u8 *a0, u8 a1, u8 a2, u8 a3)
             return 2;
         }
     }
-    
+
     if (res)
     {
         res = 1;
@@ -1693,7 +1442,7 @@ bool32 sub_8079174(void)
 
     for (i = 0; i < gUnknown_0203229C->unk_36[0]; i++)
     {
-        arr[i] = gUnknown_0203229C->unk_45[i];
+        arr[i] = gUnknown_0203229C->unk_45[0][i];
     }
 
     switch (sub_80790D4(arr, gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_35, gUnknown_0203229C->unk_7E))
@@ -1795,7 +1544,7 @@ void sub_8079398(void)
 void sub_80793C4(void)
 {
     gUnknown_0203229C->unk_A8++;
-    
+
     if (gUnknown_0203229C->unk_A8 > 120)
     {
         CreateYesNoMenu(&gUnknown_0832DF8C, 1, 14, 0);
@@ -1956,507 +1705,81 @@ void sub_807967C(u8 a0)
     }
 }
 
-// Brain hurty
-#ifdef NONMATCHING
 void sub_80796B4(u8 a0)
 {
     s8 test;
     u8 sp14[20];
-    u8 sp28[48];
+    u8 sp28[56];
     u8 i;
-    u8 r10 = gUnknown_0203229C->unk_76[a0];
-    u32 sp60;
+    u8 r8;
+    u8 r10;
+    u8 sp60;
+    u8 var = gUnknown_0203229C->unk_76[a0];
+
     sp60 = 1;
     if (gUnknown_0203229C->unk_76[a0] < 6)
         sp60 = 0;
-    r10 %= 6;
-    
+    r10 = var % 6;
+    test = 0;
+
     switch (gUnknown_0203229C->unk_74[a0])
     {
-        case 1:
-            for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
-            {
-                gSprites[gUnknown_0203229C->unk_28[0][i + (sp60 * 6)]].invisible = TRUE;
-            }
+    case 1:
+        for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+        {
+            gSprites[gUnknown_0203229C->unk_28[0][i + (sp60 * 6)]].invisible = TRUE;
+        }
 
-            for (i = 0; i < 6; i++)
-            {
-                ClearWindowTilemap(i + (a0 * 6 + 2));
-            }
-            
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].invisible = FALSE;
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].data[0] = 20;
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].data[2] = (gUnknown_0832DE24[sp60 * 6][0] + gUnknown_0832DE24[sp60 * 6 + 1][0]) / 2 * 8 + 14;
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].data[4] = (gUnknown_0832DE24[sp60 * 6][1] * 8) - 12;
-            StoreSpriteCallbackInData6(&gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]], sub_80D3014);
-            gUnknown_0203229C->unk_74[a0]++;
-            sub_80A6DEC(&gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]]);
-            CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, a0 * 15, 0, 15, 17, 0);
-            CopyBgTilemapBufferToVram(1);
-            CopyBgTilemapBufferToVram(0);
+        for (i = 0; i < 6; i++)
+        {
+            ClearWindowTilemap(i + (a0 * 6 + 2));
+        }
 
-            if (!sp60)
-            {
-                sub_8079F74();
-            }
-            break;
-        case 2:
-            if (gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].callback == sub_80D3014)
-            {
-                gUnknown_0203229C->unk_74[a0] = 3;
-            }
-            break;
-        case 3:
-            CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMovesBoxTilemap, sp60 * 15, 0, 15, 17, 0);
-            CopyBgTilemapBufferToVram(1);
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos1.x = (gUnknown_0832DE24[sp60 * 6][0] + gUnknown_0832DE24[sp60 * 6 + 1][0]) / 2 * 8 + 14;
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos1.y = (gUnknown_0832DE24[sp60 * 6][1] * 8) - 12;
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos2.x = 0;
-            gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos2.y = 0;
-            test = sub_8079A3C(sp14, sp60, r10);
-            AddTextPrinterParameterized3((a0 * 2) + 14, 0, (80 - test) / 2, 4, gUnknown_0832DEE0, 0, sp14);
-            sub_8079AA4(sp28, sp60, r10);
-            AddTextPrinterParameterized4((a0 * 2) + 15, 1, 0, 0, 0, 0, gUnknown_0832DEE0, 0, sp28);
-            PutWindowTilemap((a0 * 2) + 14);
-            CopyWindowToVram((a0 * 2) + 14, 3);
-            PutWindowTilemap((a0 * 2) + 15);
-            CopyWindowToVram((a0 * 2) + 15, 3);
-            gUnknown_0203229C->unk_74[a0]++;
-            break;
-        case 4:
-            sub_8079C4C(a0, r10, gUnknown_0832DF99[a0][0] + 4, gUnknown_0832DF99[a0][1] + 1, gUnknown_0832DF99[a0][0], gUnknown_0832DF99[a0][1]);
-            gUnknown_0203229C->unk_74[a0]++;
-            break;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].invisible = FALSE;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].data[0] = 20;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].data[2] = (gUnknown_0832DE24[sp60 * 6][0] + gUnknown_0832DE24[sp60 * 6 + 1][0]) / 2 * 8 + 14;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].data[4] = (gUnknown_0832DE24[sp60 * 6][1] * 8) - 12;
+        StoreSpriteCallbackInData6(&gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]], sub_80D3014);
+        gUnknown_0203229C->unk_74[a0]++;
+        sub_80A6DEC(&gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]]);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, a0 * 15, 0, 15, 17, 0);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+
+        if (!sp60)
+        {
+            sub_8079F74();
+        }
+        break;
+    case 2:
+        if (gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].callback == sub_80D3014)
+        {
+            gUnknown_0203229C->unk_74[a0] = 3;
+        }
+        break;
+    case 3:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMovesBoxTilemap, sp60 * 15, 0, 15, 17, 0);
+        CopyBgTilemapBufferToVram(1);
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos1.x = (gUnknown_0832DE24[sp60 * 6][0] + gUnknown_0832DE24[sp60 * 6 + 1][0]) / 2 * 8 + 14;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos1.y = (gUnknown_0832DE24[sp60 * 6][1] * 8) - 12;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos2.x = 0;
+        gSprites[gUnknown_0203229C->unk_28[0][r10 + (sp60 * 6)]].pos2.y = 0;
+        test = sub_8079A3C(sp14, sp60, r10);
+        AddTextPrinterParameterized3((a0 * 2) + 14, 0, (80 - test) / 2, 4, gUnknown_0832DEE0, 0, sp14);
+        sub_8079AA4(sp28, sp60, r10);
+        AddTextPrinterParameterized4((a0 * 2) + 15, 1, 0, 0, 0, 0, gUnknown_0832DEE0, 0, sp28);
+        PutWindowTilemap((a0 * 2) + 14);
+        CopyWindowToVram((a0 * 2) + 14, 3);
+        PutWindowTilemap((a0 * 2) + 15);
+        CopyWindowToVram((a0 * 2) + 15, 3);
+        gUnknown_0203229C->unk_74[a0]++;
+        break;
+    case 4:
+        sub_8079C4C(a0, r10, gUnknown_0832DF99[a0][0] + 4, gUnknown_0832DF99[a0][1] + 1, gUnknown_0832DF99[a0][0], gUnknown_0832DF99[a0][1]);
+        gUnknown_0203229C->unk_74[a0]++;
+        break;
     }
 }
-#else
-NAKED
-void sub_80796B4(u8 a0)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x68\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    ldr r0, =gUnknown_0203229C\n\
-    ldr r4, [r0]\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x76\n\
-    adds r0, r7\n\
-    ldrb r0, [r0]\n\
-    movs r1, 0x1\n\
-    str r1, [sp, 0x60]\n\
-    cmp r0, 0x5\n\
-    bhi _080796DC\n\
-    movs r2, 0\n\
-    str r2, [sp, 0x60]\n\
-_080796DC:\n\
-    movs r1, 0x6\n\
-    bl __umodsi3\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x74\n\
-    adds r3, r0, r7\n\
-    ldrb r0, [r3]\n\
-    cmp r0, 0x2\n\
-    bne _080796FA\n\
-    b _08079884\n\
-_080796FA:\n\
-    cmp r0, 0x2\n\
-    bgt _08079708\n\
-    cmp r0, 0x1\n\
-    beq _08079716\n\
-    b _08079A24\n\
-    .pool\n\
-_08079708:\n\
-    cmp r0, 0x3\n\
-    bne _0807970E\n\
-    b _080798BC\n\
-_0807970E:\n\
-    cmp r0, 0x4\n\
-    bne _08079714\n\
-    b _080799EC\n\
-_08079714:\n\
-    b _08079A24\n\
-_08079716:\n\
-    movs r5, 0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x36\n\
-    adds r0, r7\n\
-    ldr r1, [sp, 0x60]\n\
-    lsls r1, 1\n\
-    mov r9, r1\n\
-    lsls r6, r7, 1\n\
-    lsls r2, r7, 4\n\
-    str r2, [sp, 0x64]\n\
-    ldrb r0, [r0]\n\
-    cmp r8, r0\n\
-    bcs _0807976A\n\
-    ldr r0, =gSprites\n\
-    mov r8, r0\n\
-    ldr r4, =gUnknown_0203229C\n\
-    ldr r0, [sp, 0x60]\n\
-    add r0, r9\n\
-    lsls r2, r0, 1\n\
-    movs r3, 0x4\n\
-_0807973E:\n\
-    ldr r0, [r4]\n\
-    adds r1, r5, r2\n\
-    adds r0, 0x28\n\
-    adds r0, r1\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    adds r0, 0x3E\n\
-    ldrb r1, [r0]\n\
-    orrs r1, r3\n\
-    strb r1, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    ldr r0, [r4]\n\
-    adds r0, 0x36\n\
-    adds r0, r7\n\
-    ldrb r0, [r0]\n\
-    cmp r5, r0\n\
-    bcc _0807973E\n\
-_0807976A:\n\
-    movs r5, 0\n\
-    adds r0, r6, r7\n\
-    lsls r0, 1\n\
-    adds r4, r0, 0x2\n\
-_08079772:\n\
-    lsls r0, r5, 24\n\
-    asrs r0, 24\n\
-    adds r0, r4\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl ClearWindowTilemap\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x5\n\
-    bls _08079772\n\
-    ldr r1, =gSprites\n\
-    mov r8, r1\n\
-    ldr r2, =gUnknown_0203229C\n\
-    ldr r0, [r2]\n\
-    ldr r6, [sp, 0x60]\n\
-    add r6, r9\n\
-    lsls r3, r6, 1\n\
-    add r10, r3\n\
-    adds r0, 0x28\n\
-    add r0, r10\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    adds r0, 0x3E\n\
-    ldrb r2, [r0]\n\
-    movs r1, 0x5\n\
-    negs r1, r1\n\
-    ands r1, r2\n\
-    strb r1, [r0]\n\
-    ldr r0, =gUnknown_0203229C\n\
-    ldr r4, [r0]\n\
-    adds r4, 0x28\n\
-    add r4, r10\n\
-    ldrb r1, [r4]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    movs r1, 0x14\n\
-    strh r1, [r0, 0x2E]\n\
-    ldrb r0, [r4]\n\
-    lsls r2, r0, 4\n\
-    adds r2, r0\n\
-    lsls r2, 2\n\
-    add r2, r8\n\
-    ldr r5, =gUnknown_0832DE24\n\
-    lsls r6, 2\n\
-    adds r0, r6, r5\n\
-    ldrb r0, [r0]\n\
-    adds r3, 0x1\n\
-    lsls r3, 1\n\
-    adds r3, r5\n\
-    ldrb r1, [r3]\n\
-    adds r0, r1\n\
-    asrs r0, 1\n\
-    lsls r0, 3\n\
-    adds r0, 0xE\n\
-    strh r0, [r2, 0x32]\n\
-    ldrb r0, [r4]\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    add r1, r8\n\
-    adds r5, 0x1\n\
-    adds r6, r5\n\
-    ldrb r0, [r6]\n\
-    lsls r0, 3\n\
-    subs r0, 0xC\n\
-    strh r0, [r1, 0x36]\n\
-    ldrb r1, [r4]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    ldr r1, =sub_80D3014\n\
-    bl StoreSpriteCallbackInData6\n\
-    ldr r2, =gUnknown_0203229C\n\
-    ldr r1, [r2]\n\
-    adds r1, 0x74\n\
-    adds r1, r7\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-    ldr r0, [r2]\n\
-    adds r0, 0x28\n\
-    add r0, r10\n\
-    ldrb r1, [r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    add r0, r8\n\
-    bl sub_80A6DEC\n\
-    ldr r1, =gTradePartyBoxTilemap\n\
-    ldr r0, [sp, 0x64]\n\
-    subs r2, r0, r7\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    movs r0, 0xF\n\
-    str r0, [sp]\n\
-    movs r0, 0x11\n\
-    str r0, [sp, 0x4]\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x8]\n\
-    movs r0, 0x1\n\
-    movs r3, 0\n\
-    bl CopyToBgTilemapBufferRect_ChangePalette\n\
-    movs r0, 0x1\n\
-    bl CopyBgTilemapBufferToVram\n\
-    movs r0, 0\n\
-    bl CopyBgTilemapBufferToVram\n\
-    ldr r1, [sp, 0x60]\n\
-    cmp r1, 0\n\
-    beq _08079868\n\
-    b _08079A24\n\
-_08079868:\n\
-    bl sub_8079F74\n\
-    b _08079A24\n\
-    .pool\n\
-_08079884:\n\
-    ldr r2, =gSprites\n\
-    ldr r1, [sp, 0x60]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 1\n\
-    add r0, r10\n\
-    adds r1, r4, 0\n\
-    adds r1, 0x28\n\
-    adds r1, r0\n\
-    ldrb r1, [r1]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r2, 0x1C\n\
-    adds r0, r2\n\
-    ldr r1, [r0]\n\
-    ldr r0, =sub_80D3014\n\
-    cmp r1, r0\n\
-    beq _080798AC\n\
-    b _08079A24\n\
-_080798AC:\n\
-    movs r0, 0x3\n\
-    strb r0, [r3]\n\
-    b _08079A24\n\
-    .pool\n\
-_080798BC:\n\
-    ldr r1, =gTradeMovesBoxTilemap\n\
-    ldr r0, [sp, 0x60]\n\
-    lsls r2, r0, 4\n\
-    subs r2, r0\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    movs r0, 0xF\n\
-    str r0, [sp]\n\
-    movs r0, 0x11\n\
-    str r0, [sp, 0x4]\n\
-    mov r0, r8\n\
-    str r0, [sp, 0x8]\n\
-    movs r0, 0x1\n\
-    movs r3, 0\n\
-    bl CopyToBgTilemapBufferRect_ChangePalette\n\
-    movs r0, 0x1\n\
-    bl CopyBgTilemapBufferToVram\n\
-    ldr r6, =gSprites\n\
-    ldr r1, =gUnknown_0203229C\n\
-    ldr r4, [r1]\n\
-    ldr r2, [sp, 0x60]\n\
-    lsls r3, r2, 1\n\
-    adds r3, r2\n\
-    lsls r1, r3, 1\n\
-    mov r2, r10\n\
-    adds r0, r2, r1\n\
-    adds r4, 0x28\n\
-    adds r4, r0\n\
-    ldrb r0, [r4]\n\
-    lsls r2, r0, 4\n\
-    adds r2, r0\n\
-    lsls r2, 2\n\
-    adds r2, r6\n\
-    ldr r5, =gUnknown_0832DE24\n\
-    lsls r3, 2\n\
-    adds r0, r3, r5\n\
-    ldrb r0, [r0]\n\
-    adds r1, 0x1\n\
-    lsls r1, 1\n\
-    adds r1, r5\n\
-    ldrb r1, [r1]\n\
-    adds r0, r1\n\
-    asrs r0, 1\n\
-    lsls r0, 3\n\
-    adds r0, 0xE\n\
-    strh r0, [r2, 0x20]\n\
-    ldrb r0, [r4]\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r6\n\
-    adds r5, 0x1\n\
-    adds r3, r5\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 3\n\
-    subs r0, 0xC\n\
-    strh r0, [r1, 0x22]\n\
-    ldrb r1, [r4]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    mov r1, r8\n\
-    strh r1, [r0, 0x24]\n\
-    ldrb r1, [r4]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    mov r2, r8\n\
-    strh r2, [r0, 0x26]\n\
-    add r0, sp, 0x14\n\
-    ldr r1, [sp, 0x60]\n\
-    mov r2, r10\n\
-    bl sub_8079A3C\n\
-    lsls r4, r7, 1\n\
-    adds r5, r4, 0\n\
-    adds r5, 0xE\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    movs r2, 0x50\n\
-    subs r2, r0\n\
-    lsrs r0, r2, 31\n\
-    adds r2, r0\n\
-    asrs r2, 1\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    ldr r0, =gUnknown_0832DEE0\n\
-    mov r8, r0\n\
-    str r0, [sp]\n\
-    movs r1, 0\n\
-    str r1, [sp, 0x4]\n\
-    add r0, sp, 0x14\n\
-    str r0, [sp, 0x8]\n\
-    adds r0, r5, 0\n\
-    movs r3, 0x4\n\
-    bl AddTextPrinterParameterized3\n\
-    add r6, sp, 0x28\n\
-    adds r0, r6, 0\n\
-    ldr r1, [sp, 0x60]\n\
-    mov r2, r10\n\
-    bl sub_8079AA4\n\
-    adds r4, 0xF\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    movs r1, 0\n\
-    str r1, [sp]\n\
-    str r1, [sp, 0x4]\n\
-    mov r2, r8\n\
-    str r2, [sp, 0x8]\n\
-    str r1, [sp, 0xC]\n\
-    str r6, [sp, 0x10]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl AddTextPrinterParameterized4\n\
-    adds r0, r5, 0\n\
-    bl PutWindowTilemap\n\
-    adds r0, r5, 0\n\
-    movs r1, 0x3\n\
-    bl CopyWindowToVram\n\
-    adds r0, r4, 0\n\
-    bl PutWindowTilemap\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x3\n\
-    bl CopyWindowToVram\n\
-    ldr r0, =gUnknown_0203229C\n\
-    ldr r1, [r0]\n\
-    b _08079A1A\n\
-    .pool\n\
-_080799EC:\n\
-    ldr r0, =gUnknown_0832DF99\n\
-    lsls r1, r7, 1\n\
-    adds r4, r1, r0\n\
-    ldrb r2, [r4]\n\
-    adds r2, 0x4\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    adds r0, 0x1\n\
-    adds r1, r0\n\
-    ldrb r3, [r1]\n\
-    adds r3, 0x1\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    ldrb r0, [r4]\n\
-    str r0, [sp]\n\
-    ldrb r0, [r1]\n\
-    str r0, [sp, 0x4]\n\
-    adds r0, r7, 0\n\
-    mov r1, r10\n\
-    bl sub_8079C4C\n\
-    ldr r2, =gUnknown_0203229C\n\
-    ldr r1, [r2]\n\
-_08079A1A:\n\
-    adds r1, 0x74\n\
-    adds r1, r7\n\
-    ldrb r0, [r1]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1]\n\
-_08079A24:\n\
-    add sp, 0x68\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 u8 sub_8079A3C(u8 *a0, bool8 a1, u8 a2)
 {
@@ -2604,6 +1927,8 @@ void sub_8079C4C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
     gUnknown_0203229C->tilemapBuffer[(a3 - 1) * 32 + a2 + 1] = r2;
 }
 
+extern const u8 gUnknown_0832DE3E[][6][2];
+extern const u8 gUnknown_0832DE56[][6][2];
 // Very close but loop preamble not working.
 #ifdef NONMATCHING
 void sub_8079E44(u8 a0)
@@ -2731,7 +2056,7 @@ u32 sub_807A09C(void)
 {
     u32 acc = 0;
     int i;
-    
+
     for (i = 0; i < 4; i++)
     {
         acc += gUnknown_0203229C->unk_8D0[i].unk_0;
@@ -2845,7 +2170,6 @@ void sub_807A308(const u8 *a0, u8 *a1, u8 unused)
     sub_80C6D80(a0, a1, 0, 0, 6);
 }
 
-#ifdef NONMATCHING
 void sub_807A320(u8 a0)
 {
     int i;
@@ -2857,18 +2181,18 @@ void sub_807A320(u8 a0)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) == TRUE)
                 {
-                    gUnknown_0203229C->unk_45[i] = 0;
-                    gUnknown_0203229C->unk_51[0][i] = 1;
+                    gUnknown_0203229C->unk_45[a0][i] = 0;
+                    gUnknown_0203229C->unk_51[a0][i] = 1;
                 }
                 else if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                 {
-                    gUnknown_0203229C->unk_45[i] = 0;
-                    gUnknown_0203229C->unk_51[0][i] = 0;
+                    gUnknown_0203229C->unk_45[a0][i] = 0;
+                    gUnknown_0203229C->unk_51[a0][i] = 0;
                 }
                 else
                 {
-                    gUnknown_0203229C->unk_45[i] = 1;
-                    gUnknown_0203229C->unk_51[0][i] = 0;
+                    gUnknown_0203229C->unk_45[a0][i] = 1;
+                    gUnknown_0203229C->unk_51[a0][i] = 0;
                 }
             }
             break;
@@ -2877,192 +2201,23 @@ void sub_807A320(u8 a0)
             {
                 if (GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG) == TRUE)
                 {
-                    gUnknown_0203229C->unk_45[i + 6] = 0;
-                    gUnknown_0203229C->unk_51[1][i] = 1;
+                    gUnknown_0203229C->unk_45[a0][i] = 0;
+                    gUnknown_0203229C->unk_51[a0][i] = 1;
                 }
                 else if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
                 {
-                    gUnknown_0203229C->unk_45[i + 6] = 0;
-                    gUnknown_0203229C->unk_51[1][i] = 0;
+                    gUnknown_0203229C->unk_45[a0][i] = 0;
+                    gUnknown_0203229C->unk_51[a0][i] = 0;
                 }
                 else
                 {
-                    gUnknown_0203229C->unk_45[i + 6] = 1;
-                    gUnknown_0203229C->unk_51[1][i] = 0;
+                    gUnknown_0203229C->unk_45[a0][i] = 1;
+                    gUnknown_0203229C->unk_51[a0][i] = 0;
                 }
             }
             break;
     }
 }
-#else
-NAKED
-void sub_807A320(u8 a0)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    cmp r0, 0\n\
-    beq _0807A338\n\
-    cmp r0, 0x1\n\
-    beq _0807A3CC\n\
-    b _0807A458\n\
-_0807A338:\n\
-    movs r7, 0\n\
-    ldr r1, =gUnknown_0203229C\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x36\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    blt _0807A348\n\
-    b _0807A458\n\
-_0807A348:\n\
-    adds r6, r1, 0\n\
-    movs r5, 0\n\
-    mov r9, r5\n\
-_0807A34E:\n\
-    movs r0, 0x64\n\
-    adds r1, r7, 0\n\
-    muls r1, r0\n\
-    ldr r0, =gPlayerParty\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0x1\n\
-    bne _0807A380\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x45\n\
-    adds r0, r5\n\
-    mov r2, r9\n\
-    strb r2, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x51\n\
-    adds r0, r5\n\
-    b _0807A3B0\n\
-    .pool\n\
-_0807A380:\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0\n\
-    bne _0807A39E\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x45\n\
-    adds r0, r5\n\
-    strb r1, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x51\n\
-    adds r0, r5\n\
-    b _0807A3B0\n\
-_0807A39E:\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x45\n\
-    adds r0, r5\n\
-    movs r1, 0x1\n\
-    strb r1, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x51\n\
-    adds r0, r5\n\
-    mov r1, r9\n\
-_0807A3B0:\n\
-    strb r1, [r0]\n\
-    ldr r0, =gUnknown_0203229C\n\
-    adds r5, 0x1\n\
-    adds r7, 0x1\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x36\n\
-    add r0, r8\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    blt _0807A34E\n\
-    b _0807A458\n\
-    .pool\n\
-_0807A3CC:\n\
-    movs r7, 0\n\
-    ldr r1, =gUnknown_0203229C\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x37\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    bge _0807A458\n\
-    adds r6, r1, 0\n\
-    movs r5, 0x6\n\
-    movs r2, 0\n\
-    mov r9, r2\n\
-_0807A3E2:\n\
-    movs r0, 0x64\n\
-    adds r1, r7, 0\n\
-    muls r1, r0\n\
-    ldr r0, =gEnemyParty\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0x1\n\
-    bne _0807A414\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x45\n\
-    adds r0, r5\n\
-    mov r2, r9\n\
-    strb r2, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x51\n\
-    adds r0, r5\n\
-    b _0807A444\n\
-    .pool\n\
-_0807A414:\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0\n\
-    bne _0807A432\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x45\n\
-    adds r0, r5\n\
-    strb r1, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x51\n\
-    adds r0, r5\n\
-    b _0807A444\n\
-_0807A432:\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x45\n\
-    adds r0, r5\n\
-    movs r1, 0x1\n\
-    strb r1, [r0]\n\
-    ldr r0, [r6]\n\
-    adds r0, 0x51\n\
-    adds r0, r5\n\
-    mov r1, r9\n\
-_0807A444:\n\
-    strb r1, [r0]\n\
-    ldr r0, =gUnknown_0203229C\n\
-    adds r5, 0x1\n\
-    adds r7, 0x1\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x36\n\
-    add r0, r8\n\
-    ldrb r0, [r0]\n\
-    cmp r7, r0\n\
-    blt _0807A3E2\n\
-_0807A458:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif // NONMATCHING
 
 void sub_807A468(u8 a0)
 {
@@ -3092,7 +2247,7 @@ void sub_807A468(u8 a0)
 void sub_807A53C(void)
 {
     int i, j;
-    
+
     for (i = 0; i < 2; i++)
     {
         for (j = 0; j < gUnknown_0203229C->unk_36[i]; j++)
@@ -3154,7 +2309,7 @@ u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
             {
                 return 5;
             }
-            
+
             if (!IsSpeciesInHoennDex(species2[a2]))
             {
                 return 4;
@@ -3198,22 +2353,20 @@ u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
 
 s32 sub_807A728(void)
 {
-    int val;
-    u8 version;
-    
+    s32 val;
+    u16 version;
+
     if (gReceivedRemoteLinkPlayers != 0)
     {
         val = 0;
         version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);
-        if (version == VERSION_RUBY ||
-            version == VERSION_SAPPHIRE ||
-            version == VERSION_EMERALD)
+
+        if (version == VERSION_RUBY || version == VERSION_SAPPHIRE || version == VERSION_EMERALD)
         {
             // this value could actually be anything 0 or less
             val = 0;
         }
-        else if (version == VERSION_FIRE_RED ||
-                 version == VERSION_LEAF_GREEN)
+        else if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
         {
             val = 2;
         }
