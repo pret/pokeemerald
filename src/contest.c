@@ -2635,7 +2635,7 @@ void sub_80DB584(void)
 {
     s32 i;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < 4; i++)
         sub_80DB4E0(gContestResources->field_4[i].currMove, i);
 }
 
