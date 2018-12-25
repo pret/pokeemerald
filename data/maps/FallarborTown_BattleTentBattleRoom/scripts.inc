@@ -10,9 +10,9 @@ FallarborTown_BattleTentBattleRoom_MapScript1_2008A9: @ 82008A9
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008AF:: @ 82008AF
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2008C7
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2008D2
 	return
 

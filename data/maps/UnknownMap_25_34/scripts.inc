@@ -442,9 +442,9 @@ LinkContestRoom1_EventScript_23BEAC:: @ 823BEAC
 
 LilycoveCity_ContestLobby_EventScript_23BEB6:: @ 823BEB6
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_23BECE
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_23BED4
 	return
 

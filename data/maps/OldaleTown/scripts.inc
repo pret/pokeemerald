@@ -255,9 +255,9 @@ OldaleTown_EventScript_1E90C6:: @ 81E90C6
 
 OldaleTown_EventScript_1E90E6:: @ 81E90E6
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq OldaleTown_EventScript_1E90FE
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq OldaleTown_EventScript_1E910C
 	end
 

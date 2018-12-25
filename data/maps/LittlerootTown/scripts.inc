@@ -68,9 +68,9 @@ LittlerootTown_EventScript_1E7E92:: @ 81E7E92
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
 	setobjectmovementtype 4, 8
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E7EB1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E7EB9
 	return
 
@@ -381,9 +381,9 @@ LittlerootTown_EventScript_1E815A:: @ 81E815A
 LittlerootTown_EventScript_1E8163:: @ 81E8163
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E817D
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E8186
 	releaseall
 	end
@@ -399,9 +399,9 @@ LittlerootTown_EventScript_1E8186:: @ 81E8186
 LittlerootTown_EventScript_1E818F:: @ 81E818F
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E81A9
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E81B2
 	releaseall
 	end
@@ -454,27 +454,27 @@ LittlerootTown_EventScript_1E8205:: @ 81E8205
 
 LittlerootTown_EventScript_1E8211:: @ 81E8211
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E8297
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E82A2
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E8281
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E828C
 	msgbox LittlerootTown_Text_1E87E1, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E82AD
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E82F0
 	call LittlerootTown_EventScript_1E8693
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E8405
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E8448
 	goto LittlerootTown_EventScript_1E8686
 	end
@@ -889,9 +889,9 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 	lock
 	faceplayer
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E8281
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_EventScript_1E828C
 	call LittlerootTown_EventScript_1E8693
 	applymovement 4, LittlerootTown_Movement_2725A6
