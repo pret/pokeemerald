@@ -6,6 +6,7 @@
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fldeff.h"
+#include "mirage_tower.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "script.h"
@@ -63,7 +64,7 @@ static void TrySweetScentEncounter(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        sub_81BE72C();
+        ClearMirageTowerPulseBlendEffect();
         BlendPalettes(0x00000040, 8, RGB_RED);
         if (gTasks[taskId].data[0] == 64)
         {
@@ -76,7 +77,7 @@ static void TrySweetScentEncounter(u8 taskId)
             {
                 gTasks[taskId].func = FailSweetScentEncounter;
                 BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 8, 0, RGB_RED);
-                sub_81BE6B8();
+                TryStartMirageTowerPulseBlendEffect();
             }
         }
         else

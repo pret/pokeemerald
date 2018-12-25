@@ -43,7 +43,7 @@
 	.include "src/battle_pike.o"
 	.include "src/battle_tent.o"
 	.include "src/multiboot.o"
-	.include "src/fossil_specials.o"
+	.include "src/mirage_tower.o"
 	.include "src/berry_fix_program.o"
 
 gUnknown_030012BC: @ 30012BC

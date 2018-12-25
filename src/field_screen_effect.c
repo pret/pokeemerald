@@ -17,6 +17,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "mirage_tower.h"
 #include "event_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
@@ -34,7 +35,6 @@
 extern bool32 sub_81D6534(void);
 extern bool8 walkrun_is_standing_still(void);
 extern void ScriptUnfreezeEventObjects(void);
-extern void sub_81BE72C(void);
 extern void sub_80FB768(void);
 extern void sub_808D194(void);
 extern void sub_808D1C8(void);
@@ -673,7 +673,7 @@ static void sub_80AFA0C(u8 taskId)
         {
             if (task->data[1] == 0)
             {
-                sub_81BE72C();
+                ClearMirageTowerPulseBlendEffect();
                 task->data[1] = 1;
             }
             if (BGMusicStopped())

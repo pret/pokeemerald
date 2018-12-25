@@ -419,9 +419,9 @@ gSpecials:: @ 81DBA64
 	def_special ShouldTryGetTrainerScript
 	def_special ShowMapNamePopup
 	def_special ShowMapNamePopup
-	def_special sub_81BE994
-	def_special sub_81BE79C
-	def_special sub_81BE7F4
+	def_special DoMirageTowerCeilingCrumble
+	def_special SetMirageTowerVisibility
+	def_special StartPlayerDescendMirageTower
 	def_special sub_81398C0
 	def_special IsWirelessAdapterConnected
 	def_special BerryBlenderLinkBecomeLeader
@@ -491,9 +491,9 @@ gSpecials:: @ 81DBA64
 	def_special sub_813AFC8
 	def_special sub_813B1D0
 	def_special CreateObedientEnemyMon
-	def_special sub_81BEB54
-	def_special sub_81BEB68
-	def_special sub_81BEB7C
+	def_special StartMirageTowerDisintegration
+	def_special StartMirageTowerShake
+	def_special StartMirageTowerFossilFallAndSink
 	def_special ChangeBoxPokemonNickname
 	def_special get_unknown_box_id
 	def_special sub_813B21C
