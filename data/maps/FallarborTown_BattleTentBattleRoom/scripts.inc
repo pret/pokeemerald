@@ -17,13 +17,13 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008AF:: @ 82008AF
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008C7:: @ 82008C7
-	setvar VAR_OBJ_GFX_ID_1, 100
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008D2:: @ 82008D2
-	setvar VAR_OBJ_GFX_ID_1, 105
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_MapScript2_2008DD: @ 82008DD

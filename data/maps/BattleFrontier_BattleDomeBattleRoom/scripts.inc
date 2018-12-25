@@ -27,11 +27,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC:: @ 824BCDC
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BCF4:: @ 824BCF4
-	setvar VAR_OBJ_GFX_ID_1, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BCFA:: @ 824BCFA
-	setvar VAR_OBJ_GFX_ID_1, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattleDomeBattleRoom_MapScript2_24BD00: @ 824BD00

@@ -10,7 +10,7 @@ BirthIsland_Exterior_MapScript1_267F25: @ 8267F25
 
 BirthIsland_Exterior_MapScript1_267F29: @ 8267F29
 	setflag FLAG_0x8D3
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_0x4034, 0
 	setvar VAR_0x4035, 0
 	call_if_set FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F4E
