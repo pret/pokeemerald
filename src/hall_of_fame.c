@@ -355,7 +355,7 @@ static bool8 InitHallOfFameScreen(void)
         gMain.state++;
         break;
     case 2:
-        SetGpuReg(REG_OFFSET_BLDCNT, 0x3F42);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0x710);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         sub_8174FAC();
@@ -817,7 +817,7 @@ void CB2_DoHallOfFamePC(void)
         {
             u8 taskId, i;
 
-            SetGpuReg(REG_OFFSET_BLDCNT, 0x3F42);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
             SetGpuReg(REG_OFFSET_BLDALPHA, 0x710);
             SetGpuReg(REG_OFFSET_BLDY, 0);
             taskId = CreateTask(Task_HofPC_CopySaveData, 0);

@@ -337,7 +337,7 @@ static bool8 sub_81DAACC(struct Task *task)
     else
     {
         sub_81DA700();
-        SetGpuReg(REG_OFFSET_BLDCNT, 0x3F41);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);

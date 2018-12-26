@@ -3134,7 +3134,7 @@ void sub_8105EB0(u8 taskId)
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
     SetGpuReg(REG_OFFSET_WININ, 0x3F1F);
     SetGpuReg(REG_OFFSET_WINOUT, 0x3F3F);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0xC8);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN);
     SetGpuReg(REG_OFFSET_BLDY, 0x10);
     gTasks[taskId].data[0] = win0v;
     gTasks[taskId].data[1] = win0h;
