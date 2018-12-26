@@ -338,7 +338,7 @@ static bool8 sub_81DAACC(struct Task *task)
     {
         sub_81DA700();
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0x1000);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
         ChangeBgY(0, 0x500, 2);
@@ -368,11 +368,11 @@ static bool8 sub_81DAB4C(struct Task *task)
     }
     else
     {
-        u16 var;
+        u16 blnd;
 
         task->data[2]++;
-        var = task->data[2];
-        SetGpuReg(REG_OFFSET_BLDALPHA, (var) | ((16 - var) << 8));
+        blnd = task->data[2];
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(blnd, 16 - blnd));
     }
 
     return FALSE;

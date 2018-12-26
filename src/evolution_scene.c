@@ -1480,7 +1480,7 @@ static void InitMovingBackgroundTask(bool8 isLink)
     if (!isLink)
     {
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
 
         SetBgAttribute(innerBgId, BG_ATTR_PRIORITY, 2);
@@ -1492,7 +1492,7 @@ static void InitMovingBackgroundTask(bool8 isLink)
     else
     {
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     }
 
