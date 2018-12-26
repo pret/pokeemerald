@@ -3220,7 +3220,7 @@ void sub_815CED8(u8 taskId)
     gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
     FillPalette(RGB(31, 31, 31), (gSprites[spriteId].oam.paletteNum << 4) + 0x100, 32);
     gSprites[spriteId].oam.priority = priority;
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[1], 16 - gTasks[taskId].data[1]));
 
     gTasks[taskId].data[0] = spriteId;

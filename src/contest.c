@@ -285,7 +285,7 @@ void sub_80D779C(void)
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_08587F34, ARRAY_COUNT(gUnknown_08587F34));
-    SetBgAttribute(3, BG_CTRL_ATTR_PRIORITY, 1);
+    SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
     for (i = 0; i < 4; i++)
     {
         SetBgTilemapBuffer(i, gContestResources->field_24[i]);

@@ -63,7 +63,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
 
         if (gUnknown_03002F70[bgLayer] == NULL)
         {
-            attrib = GetBgAttribute(bgLayer, 0x8);
+            attrib = GetBgAttribute(bgLayer, BG_ATTR_METRIC);
 
             if (attrib != 0xFFFF)
             {
@@ -141,7 +141,7 @@ u16 AddWindow(const struct WindowTemplate *template)
 
     if (gUnknown_03002F70[bgLayer] == NULL)
     {
-        attrib = GetBgAttribute(bgLayer, 0x8);
+        attrib = GetBgAttribute(bgLayer, BG_ATTR_METRIC);
 
         if (attrib != 0xFFFF)
         {
@@ -328,7 +328,7 @@ void PutWindowTilemap(u8 windowId)
 
     WriteSequenceToBgTilemapBuffer(
         windowLocal.window.bg,
-        GetBgAttribute(windowLocal.window.bg, 0xA) + windowLocal.window.baseBlock,
+        GetBgAttribute(windowLocal.window.bg, BG_ATTR_BASETILE) + windowLocal.window.baseBlock,
         windowLocal.window.tilemapLeft,
         windowLocal.window.tilemapTop,
         windowLocal.window.width,
@@ -340,7 +340,7 @@ void PutWindowTilemap(u8 windowId)
 void PutWindowRectTilemapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette)
 {
     struct Window windowLocal = gWindows[windowId];
-    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, 0xA);
+    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, BG_ATTR_BASETILE);
     int i;
 
     for (i = 0; i < height; ++i)
@@ -376,7 +376,7 @@ void ClearWindowTilemap(u8 windowId)
 void PutWindowRectTilemap(u8 windowId, u8 x, u8 y, u8 width, u8 height)
 {
     struct Window windowLocal = gWindows[windowId];
-    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, 0xA);
+    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, BG_ATTR_BASETILE);
     int i;
 
     for (i = 0; i < height; ++i)
@@ -617,7 +617,7 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
     bgLayer = template->bg;
     if (gUnknown_03002F70[bgLayer] == 0)
     {
-        u16 attribute = GetBgAttribute(bgLayer, 8);
+        u16 attribute = GetBgAttribute(bgLayer, BG_ATTR_METRIC);
         if (attribute != 0xFFFF)
         {
             s32 i;
