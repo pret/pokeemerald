@@ -10,6 +10,6 @@ Route104_Prototype: @ 8485AF8
 	.byte WEATHER_SUNNY
 	.byte MAP_TYPE_ROUTE
 	.2byte 0
-	.byte 8
+	map_header_flags allow_bike=0, allow_escape_rope=0, allow_run=0, show_map_name=1
 	.byte MAP_BATTLE_SCENE_NORMAL
 
