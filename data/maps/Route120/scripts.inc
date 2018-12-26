@@ -76,11 +76,11 @@ Route120_EventScript_1F54D8:: @ 81F54D8
 	return
 
 Route120_EventScript_1F54FF:: @ 81F54FF
-	setweather 1
+	setweather WEATHER_CLOUDS
 	return
 
 Route120_EventScript_1F5503:: @ 81F5503
-	setweather 2
+	setweather WEATHER_SUNNY
 	return
 
 Route120_EventScript_1F5507:: @ 81F5507
@@ -92,7 +92,7 @@ Route120_EventScript_1F5507:: @ 81F5507
 	end
 
 Route120_EventScript_1F5523:: @ 81F5523
-	setweather 3
+	setweather WEATHER_RAIN_LIGHT
 	return
 
 Route120_EventScript_1F5527:: @ 81F5527

@@ -9,7 +9,7 @@ FallarborTown_BattleTentLobby_MapScript2_1FFE71: @ 81FFE71
 
 FallarborTown_BattleTentLobby_EventScript_1FFE7B:: @ 81FFE7B
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE85: @ 81FFE85

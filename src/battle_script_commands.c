@@ -4197,12 +4197,12 @@ static void atk49_moveend(void)
             *choicedMoveAtk = gChosenMove;
             LOOP:
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < MAX_MON_MOVES; i++)
                 {
                     if (gBattleMons[gBattlerAttacker].moves[i] == *choicedMoveAtk)
                         break;
                 }
-                if (i == 4)
+                if (i == MAX_MON_MOVES)
                     *choicedMoveAtk = 0;
 
                 gBattleScripting.atk49_state++;
@@ -5555,7 +5555,7 @@ static void atk5E(void)
          {
             s32 i;
             struct BattlePokemon *bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 gBattleMons[gActiveBattler].moves[i] = bufferPoke->moves[i];
                 gBattleMons[gActiveBattler].pp[i] = bufferPoke->pp[i];
@@ -5808,7 +5808,7 @@ static void atk6C_drawlvlupbox(void)
     {
     case 1:
         gBattle_BG2_Y = 0x60;
-        SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, 0);
+        SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
         ShowBg(2);
         sub_804F17C();
         gBattleScripting.atk6C_state = 2;
@@ -5820,8 +5820,8 @@ static void atk6C_drawlvlupbox(void)
     case 3:
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0x100;
-        SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 1);
-        SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 0);
+        SetBgAttribute(0, BG_ATTR_PRIORITY, 1);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 0);
         ShowBg(0);
         ShowBg(1);
         HandleBattleWindow(0x12, 7, 0x1D, 0x13, WINDOW_x80);
@@ -5867,7 +5867,7 @@ static void atk6C_drawlvlupbox(void)
             ClearWindowTilemap(13);
             CopyWindowToVram(13, 1);
 
-            SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, 2);
+            SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             ShowBg(2);
 
             gBattleScripting.atk6C_state = 10;
@@ -5876,8 +5876,8 @@ static void atk6C_drawlvlupbox(void)
     case 10:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 0);
-            SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 1);
+            SetBgAttribute(0, BG_ATTR_PRIORITY, 0);
+            SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
             ShowBg(0);
             ShowBg(1);
             gBattlescriptCurrInstr++;
@@ -6377,12 +6377,12 @@ static void atk76_various(void)
 
             choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (gBattleMons[gActiveBattler].moves[i] == *choicedMove)
                     break;
             }
-            if (i == 4)
+            if (i == MAX_MON_MOVES)
                 *choicedMove = 0;
         }
         break;
@@ -8101,7 +8101,7 @@ static void atk90_tryconversiontypechange(void) // randomly changes user's type 
     u8 moveChecked;
     u8 moveType;
 
-    while (validMoves < 4)
+    while (validMoves < MAX_MON_MOVES)
     {
         if (gBattleMons[gBattlerAttacker].moves[validMoves] == 0)
             break;
@@ -8517,7 +8517,7 @@ static void atk9B_transformdataexecution(void)
         for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
             battleMonAttacker[i] = battleMonTarget[i];
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].pp < 5)
                 gBattleMons[gBattlerAttacker].pp[i] = gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].pp;
@@ -8583,13 +8583,13 @@ static void atk9D_mimicattackcopy(void)
     {
         s32 i;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMons[gBattlerAttacker].moves[i] == gLastMoves[gBattlerTarget])
                 break;
         }
 
-        if (i == 4)
+        if (i == MAX_MON_MOVES)
         {
             gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
             if (gBattleMoves[gLastMoves[gBattlerTarget]].pp < 5)
@@ -8709,13 +8709,13 @@ static void atkA3_disablelastusedattack(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
     }
     if (gDisableStructs[gBattlerTarget].disabledMove == 0
-        && i != 4 && gBattleMons[gBattlerTarget].pp[i] != 0)
+        && i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] != 0)
     {
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].moves[i])
 
@@ -8734,7 +8734,7 @@ static void atkA4_trysetencore(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
@@ -8866,7 +8866,7 @@ static void atkA8_copymovepermanently(void) // sketch
     {
         s32 i;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMons[gBattlerAttacker].moves[i] == MOVE_SKETCH)
                 continue;
@@ -8874,7 +8874,7 @@ static void atkA8_copymovepermanently(void) // sketch
                 break;
         }
 
-        if (i != 4)
+        if (i != MAX_MON_MOVES)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         }
@@ -8886,7 +8886,7 @@ static void atkA8_copymovepermanently(void) // sketch
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastPrintedMoves[gBattlerTarget]].pp;
             gActiveBattler = gBattlerAttacker;
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 movePpData.moves[i] = gBattleMons[gBattlerAttacker].moves[i];
                 movePpData.pp[i] = gBattleMons[gBattlerAttacker].pp[i];
@@ -8952,7 +8952,7 @@ static void atkA9_trychoosesleeptalkmove(void)
     s32 i;
     u8 unusableMovesBits = 0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (IsInvalidForSleepTalkOrAssist(gBattleMons[gBattlerAttacker].moves[i])
             || gBattleMons[gBattlerAttacker].moves[i] == MOVE_FOCUS_PUNCH
@@ -9034,13 +9034,13 @@ static void atkAD_tryspiteppreduce(void)
     {
         s32 i;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
                 break;
         }
 
-        if (i != 4 && gBattleMons[gBattlerTarget].pp[i] > 1)
+        if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
         {
             s32 ppToDeduct = (Random() & 3) + 2;
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
@@ -10133,19 +10133,19 @@ static void atkDB_tryimprision(void)
             if (sideAttacker != GetBattlerSide(battlerId))
             {
                 s32 attackerMoveId;
-                for (attackerMoveId = 0; attackerMoveId < 4; attackerMoveId++)
+                for (attackerMoveId = 0; attackerMoveId < MAX_MON_MOVES; attackerMoveId++)
                 {
                     s32 i;
-                    for (i = 0; i < 4; i++)
+                    for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         if (gBattleMons[gBattlerAttacker].moves[attackerMoveId] == gBattleMons[battlerId].moves[i]
                             && gBattleMons[gBattlerAttacker].moves[attackerMoveId] != MOVE_NONE)
                             break;
                     }
-                    if (i != 4)
+                    if (i != MAX_MON_MOVES)
                         break;
                 }
-                if (attackerMoveId != 4)
+                if (attackerMoveId != MAX_MON_MOVES)
                 {
                     gStatuses3[gBattlerAttacker] |= STATUS3_IMPRISONED_OTHERS;
                     gBattlescriptCurrInstr += 5;
@@ -10209,7 +10209,7 @@ static void atkDE_asistattackselect(void)
         if (GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
 
-        for (moveId = 0; moveId < 4; moveId++)
+        for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
         {
             s32 i = 0;
             u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);

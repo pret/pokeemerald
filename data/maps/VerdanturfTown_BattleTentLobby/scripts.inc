@@ -9,7 +9,7 @@ VerdanturfTown_BattleTentLobby_MapScript2_2016DB: @ 82016DB
 
 VerdanturfTown_BattleTentLobby_EventScript_2016E5:: @ 82016E5
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016EF: @ 82016EF

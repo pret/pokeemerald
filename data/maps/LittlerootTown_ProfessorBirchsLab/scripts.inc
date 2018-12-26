@@ -48,11 +48,11 @@ LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06: @ 81F9D06
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9D40:: @ 81F9D40
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45:: @ 81F9D45
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	addobject 2
 	addobject 3
 	turnobject 3, 2

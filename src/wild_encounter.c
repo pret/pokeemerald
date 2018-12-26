@@ -89,20 +89,12 @@ static bool8 CheckFeebas(void)
         x -= 7;
         y -= 7;
 
-#ifdef NONMATCHING
+        if (y >= gRoute119WaterTileData[3 * 0 + 0] && y <= gRoute119WaterTileData[3 * 0 + 1])
+            route119Section = 0;
         if (y >= gRoute119WaterTileData[3 * 1 + 0] && y <= gRoute119WaterTileData[3 * 1 + 1])
             route119Section = 1;
         if (y >= gRoute119WaterTileData[3 * 2 + 0] && y <= gRoute119WaterTileData[3 * 2 + 1])
             route119Section = 2;
-#else
-        {
-            register const u16 *arr asm("r0");
-            if (y >= (arr = gRoute119WaterTileData)[3 * 1 + 0] && y <= arr[3 * 1 + 1])
-                route119Section = 1;
-            if (y >= arr[3 * 2 + 0] && y <= arr[3 * 2 + 1])
-                route119Section = 2;
-        }
-#endif
 
         if (Random() % 100 > 49) // 50% chance of encountering Feebas
             return FALSE;

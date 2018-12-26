@@ -23,12 +23,12 @@ SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
 	end
 
 SouthernIsland_Interior_EventScript_242A8A:: @ 8242A8A
-	setvar VAR_OBJ_GFX_ID_1, 188
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LATIOS
 	setvar VAR_TEMP_4, 408
 	return
 
 SouthernIsland_Interior_EventScript_242A95:: @ 8242A95
-	setvar VAR_OBJ_GFX_ID_1, 187
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LATIAS
 	setvar VAR_TEMP_4, 407
 	return
 
@@ -41,11 +41,11 @@ SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
 	end
 
 SouthernIsland_Interior_EventScript_242AB8:: @ 8242AB8
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_242ABE:: @ 8242ABE
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_242AC4:: @ 8242AC4

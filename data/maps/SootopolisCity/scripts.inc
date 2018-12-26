@@ -117,7 +117,7 @@ SootopolisCity_EventScript_1E583D:: @ 81E583D
 	return
 
 SootopolisCity_EventScript_1E583E:: @ 81E583E
-	setweather 13
+	setweather WEATHER_RAIN_HEAVY
 	return
 
 SootopolisCity_EventScript_1E5842:: @ 81E5842
@@ -179,11 +179,11 @@ SootopolisCity_EventScript_1E58E5:: @ 81E58E5
 	end
 
 SootopolisCity_EventScript_1E58FC:: @ 81E58FC
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	return
 
 SootopolisCity_EventScript_1E5901:: @ 81E5901
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	setvar VAR_0x40CA, 3
 	return
 
@@ -214,7 +214,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	special RemoveCameraObject
 	delay 60
 	fadescreenspeed 1, 8
-	setweather 15
+	setweather WEATHER_15
 	doweather
 	setvar VAR_0x8004, 0
 	special sub_813B7D8
@@ -314,7 +314,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	special RemoveCameraObject
 	delay 60
 	fadescreenspeed 1, 8
-	setweather 15
+	setweather WEATHER_15
 	doweather
 	setvar VAR_0x8004, 0
 	special sub_813B7D8
@@ -532,7 +532,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	special sub_8139560
 	waitstate
 	waitmoncry
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	applymovement 11, SootopolisCity_Movement_1E5E5B
 	waitmovement 0
@@ -585,7 +585,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	special sub_8139560
 	waitstate
 	waitmoncry
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	applymovement 11, SootopolisCity_Movement_1E5E5B
 	waitmovement 0

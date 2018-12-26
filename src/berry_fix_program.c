@@ -67,7 +67,7 @@ static const u16 sUnknown_08618138[] = {
     0x7fff, 0x7fff, 0x318c, 0x675a,
     0x043c, 0x3aff, 0x0664, 0x4bd2,
     0x6546, 0x7b14, 0x7fff, 0x318c,
-    0x675a, 0x0000, 0x0000, 0x0000
+    0x675a, 0, 0, 0
 };
 
 static const u8 sUnknown_08618158[] = {10, 11, 12};
@@ -124,7 +124,7 @@ void CB2_InitBerryFixProgram(void)
     ResetSpriteData();
     ResetTasks();
     ScanlineEffect_Stop();
-    SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
     berry_fix_mb_manager = AllocZeroed(0x50);
     berry_fix_mb_manager->state = 0;
     berry_fix_mb_manager->unk1 = 6;
@@ -203,13 +203,13 @@ static void berry_fix_gpu_set(void)
 {
     s32 width, left;
 
-    SetGpuReg(REG_OFFSET_BG0CNT, 0x0000);
-    SetGpuReg(REG_OFFSET_BG1CNT, 0x0000);
-    SetGpuReg(REG_OFFSET_BG0HOFS, 0x0000);
-    SetGpuReg(REG_OFFSET_BG0VOFS, 0x0000);
-    SetGpuReg(REG_OFFSET_BG1HOFS, 0x0000);
-    SetGpuReg(REG_OFFSET_BG1VOFS, 0x0000);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x0000);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
 
     DmaFill32(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);

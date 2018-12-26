@@ -746,7 +746,7 @@ void TryPutLinkBattleTvShowOnAir(void)
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
         if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
         {
-            for (sum = 0, j = 0; j < 4; j++)
+            for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
                 sum += movePoints->points[0][i * 4 + j];
 
             if (playerBestSum < sum)
@@ -760,7 +760,7 @@ void TryPutLinkBattleTvShowOnAir(void)
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
         if (species != SPECIES_NONE && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG, NULL))
         {
-            for (sum = 0, j = 0; j < 4; j++)
+            for (sum = 0, j = 0; j < MAX_MON_MOVES; j++)
                 sum += movePoints->points[1][i * 4 + j];
 
             if (opponentBestSum == sum)
@@ -781,7 +781,7 @@ void TryPutLinkBattleTvShowOnAir(void)
         }
     }
 
-    for (sum = 0, i = 0, j = 0; j < 4; j++)
+    for (sum = 0, i = 0, j = 0; j < MAX_MON_MOVES; j++)
     {
         if (sum < movePoints->points[0][playerBestMonId * 4 + j])
         {
@@ -1422,7 +1422,7 @@ static void TrySetBattleSeminarShow(void)
 
     dmgByMove[gMoveSelectionCursor[gBattlerAttacker]] = gBattleMoveDamage;
     currMoveSaved = gCurrentMove;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         gCurrentMove = gBattleMons[gBattlerAttacker].moves[i];
         powerOverride = 0;
@@ -1435,7 +1435,7 @@ static void TrySetBattleSeminarShow(void)
         }
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[gMoveSelectionCursor[gBattlerAttacker]])
         {
@@ -1447,7 +1447,7 @@ static void TrySetBattleSeminarShow(void)
             else
                 bestMoveId = 1;
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[bestMoveId])
                     bestMoveId = i;
@@ -1540,7 +1540,7 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
     i = 0;
     while (1)
     {
-        if (i >= 4)
+        if (i >= MAX_MON_MOVES)
             break;
         if (GetMonData(&party[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + i, NULL) == moveId)
             break;

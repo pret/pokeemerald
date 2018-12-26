@@ -144,7 +144,7 @@ static void InitSinglePlayerBtlControllers(void)
             gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
         }
 
-        gBattlersCount = 4;
+        gBattlersCount = MAX_BATTLERS_COUNT;
 
         sub_81B8D64(0, 0);
         sub_81B8D64(1, 0);
@@ -227,7 +227,7 @@ static void InitSinglePlayerBtlControllers(void)
         gBattlerControllerFuncs[3] = SetControllerToOpponent;
         gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-        gBattlersCount = 4;
+        gBattlersCount = MAX_BATTLERS_COUNT;
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
@@ -247,7 +247,7 @@ static void InitSinglePlayerBtlControllers(void)
                 gBattlerControllerFuncs[3] = SetControllerToOpponent;
                 gBattlerPositions[3] = 3;
 
-                gBattlersCount = 4;
+                gBattlersCount = MAX_BATTLERS_COUNT;
 
                 sub_81B8D64(0, 0);
                 sub_81B8D64(1, 0);
@@ -433,7 +433,7 @@ static void InitLinkBtlControllers(void)
             gBattlerControllerFuncs[3] = SetControllerToLinkOpponent;
             gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-            gBattlersCount = 4;
+            gBattlersCount = MAX_BATTLERS_COUNT;
         }
         else
         {
@@ -449,7 +449,7 @@ static void InitLinkBtlControllers(void)
             gBattlerControllerFuncs[2] = SetControllerToLinkOpponent;
             gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
 
-            gBattlersCount = 4;
+            gBattlersCount = MAX_BATTLERS_COUNT;
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
@@ -470,7 +470,7 @@ static void InitLinkBtlControllers(void)
             gBattlerControllerFuncs[3] = SetControllerToOpponent;
             gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-            gBattlersCount = 4;
+            gBattlersCount = MAX_BATTLERS_COUNT;
         }
         else
         {
@@ -486,7 +486,7 @@ static void InitLinkBtlControllers(void)
             gBattlerControllerFuncs[3] = SetControllerToLinkOpponent;
             gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-            gBattlersCount = 4;
+            gBattlersCount = MAX_BATTLERS_COUNT;
         }
 
         sub_81B8D64(0, 0);
@@ -576,7 +576,7 @@ static void InitLinkBtlControllers(void)
             }
         }
 
-        gBattlersCount = 4;
+        gBattlersCount = MAX_BATTLERS_COUNT;
     }
 }
 

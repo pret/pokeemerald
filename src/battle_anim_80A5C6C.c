@@ -788,7 +788,7 @@ void InitSpritePosToAnimTarget(struct Sprite *sprite, bool8 respectMonPicOffsets
     sprite->pos1.y += gBattleAnimArgs[1];
 }
 
-void InitSpritePosToAnimAttacker(struct Sprite *sprite, u8 respectMonPicOffsets)
+void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffsets)
 {
     if (!respectMonPicOffsets)
     {

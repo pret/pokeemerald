@@ -39,8 +39,8 @@ Route111_EventScript_1F0CE4:: @ 81F0CE4
 
 Route111_MapScript1_1F0D87: @ 81F0D87
 	setvar VAR_0x40D6, 0
-	special sub_81BE79C
-	call_if_unset FLAG_0x14E, Route111_EventScript_1F0E3C
+	special SetMirageTowerVisibility
+	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F0E3C
 	compare VAR_0x40CB, 1
 	call_if_eq Route111_EventScript_1F0DC2
 	compare VAR_0x40CB, 2
@@ -60,11 +60,11 @@ Route111_EventScript_1F0DC2:: @ 81F0DC2
 	return
 
 Route111_EventScript_1F0DDA:: @ 81F0DDA
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 Route111_EventScript_1F0DE0:: @ 81F0DE0
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 Route111_EventScript_1F0DE6:: @ 81F0DE6
@@ -81,7 +81,7 @@ Route111_EventScript_1F0DE6:: @ 81F0DE6
 	goto_if_lt Route111_EventScript_1F0E25
 
 Route111_EventScript_1F0E22:: @ 81F0E22
-	setweather 8
+	setweather WEATHER_SANDSTORM
 
 Route111_EventScript_1F0E25:: @ 81F0E25
 	return
@@ -109,7 +109,7 @@ Route111_MapScript2_1F0E46: @ 81F0E46
 	.2byte 0
 
 Route111_EventScript_1F0E50:: @ 81F0E50
-	hideobjectat 255, MAP_LITTLEROOT_TOWN
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	end
 
 Route111_MapScript2_1F0E56: @ 81F0E56
@@ -118,21 +118,21 @@ Route111_MapScript2_1F0E56: @ 81F0E56
 
 Route111_EventScript_1F0E60:: @ 81F0E60
 	lockall
-	special sub_81BEB68
+	special StartMirageTowerShake
 	waitstate
 	delay 24
 	playse SE_RU_HYUU
 	addobject 45
-	special sub_81BE7F4
+	special StartPlayerDescendMirageTower
 	waitstate
-	showobjectat 255, MAP_LITTLEROOT_TOWN
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	removeobject 45
 	delay 16
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	delay 16
-	special sub_81BEB54
+	special StartMirageTowerDisintegration
 	waitstate
-	special sub_81BEB7C
+	special StartMirageTowerFossilFallAndSink
 	waitstate
 	setvar VAR_0x40CB, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
@@ -259,14 +259,14 @@ Route111_Movement_1F0FAE: @ 81F0FAE
 	step_end
 
 Route111_EventScript_1F0FB0:: @ 81F0FB0
-	setweather 2
+	setweather WEATHER_SUNNY
 	fadenewbgm MUS_DOORO_X1
 	doweather
 	setvar VAR_TEMP_3, 0
 	end
 
 Route111_EventScript_1F0FBD:: @ 81F0FBD
-	setweather 8
+	setweather WEATHER_SANDSTORM
 	fadenewbgm MUS_ASHROAD
 	doweather
 	end
@@ -415,7 +415,7 @@ Route111_EventScript_1F119B:: @ 81F119B
 	goto_if_eq Route111_EventScript_1F11C6
 	compare VAR_0x40CB, 2
 	goto_if_eq Route111_EventScript_1F11D0
-	goto_if_set FLAG_0x14E, Route111_EventScript_1F11DA
+	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_1F11DA
 	msgbox Route111_Text_1F1A22, MSGBOX_DEFAULT
 	release
 	end

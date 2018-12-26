@@ -49,7 +49,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
         return FALSE;
 
     // Check if Pokemon has a super effective move.
-    for (opposingBattler = GetBattlerAtPosition(opposingPosition), i = 0; i < 4; i++)
+    for (opposingBattler = GetBattlerAtPosition(opposingPosition), i = 0; i < MAX_MON_MOVES; i++)
     {
         move = gBattleMons[gActiveBattler].moves[i];
         if (move != MOVE_NONE)
@@ -89,7 +89,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
         if (i == gBattlerPartyIndexes[gActiveBattler])
             continue;
 
-        for (opposingBattler = GetBattlerAtPosition(opposingPosition), j = 0; j < 4; j++)
+        for (opposingBattler = GetBattlerAtPosition(opposingPosition), j = 0; j < MAX_MON_MOVES; j++)
         {
             move = GetMonData(&party[i], MON_DATA_MOVE1 + j);
             if (move != MOVE_NONE)
@@ -256,7 +256,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 
     if (!(gAbsentBattlerFlags & gBitTable[opposingBattler]))
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
@@ -278,7 +278,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 
     if (!(gAbsentBattlerFlags & gBitTable[opposingBattler]))
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             move = gBattleMons[gActiveBattler].moves[i];
             if (move == MOVE_NONE)
@@ -391,7 +391,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
         {
             battlerIn1 = gLastHitBy[gActiveBattler];
 
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 move = GetMonData(&party[i], MON_DATA_MOVE1 + j);
                 if (move == 0)
@@ -692,14 +692,14 @@ u8 GetMostSuitableMonToSwitchInto(void)
         // Ok, we know the mon has the right typing but does it have at least one super effective move?
         if (bestMonId != PARTY_SIZE)
         {
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 move = GetMonData(&party[bestMonId], MON_DATA_MOVE1 + i);
                 if (move != MOVE_NONE && AI_GetTypeEffectiveness(move, gActiveBattler, opposingBattler) >= UQ_4_12(2.0))
                     break;
             }
 
-            if (i != 4)
+            if (i != MAX_MON_MOVES)
                 return bestMonId; // Has both the typing and at least one super effective move.
 
             invalidMons |= gBitTable[bestMonId]; // Sorry buddy, we want something better.
@@ -731,7 +731,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         if (i == *(gBattleStruct->monToSwitchIntoId + battlerIn2))
             continue;
 
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             s32 dmg = 0;
             move = GetMonData(&party[i], MON_DATA_MOVE1 + j);

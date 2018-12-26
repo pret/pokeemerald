@@ -271,7 +271,7 @@ void LoadContestBgAfterMoveAnim(void)
     CopyBgTilemapBufferToVram(3);
     LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
     sub_80D782C();
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         u32 var = 5 + i;
 
@@ -285,7 +285,7 @@ void sub_80D779C(void)
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_08587F34, ARRAY_COUNT(gUnknown_08587F34));
-    SetBgAttribute(3, BG_CTRL_ATTR_PRIORITY, 1);
+    SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
     for (i = 0; i < 4; i++)
     {
         SetBgTilemapBuffer(i, gContestResources->field_24[i]);
@@ -747,7 +747,7 @@ void sub_80D8490(u8 taskId)
     gBattle_BG0_Y = 0xA0;
     gBattle_BG2_Y = 0xA0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         u16 move = gContestMons[gContestPlayerMonIndex].moves[i];
         u8 *r5 = sp8;
@@ -782,7 +782,7 @@ void sub_80D8610(u8 taskId)
     u8 numMoves = 0;
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gContestMons[gContestPlayerMonIndex].moves[i] != MOVE_NONE)
             numMoves++;

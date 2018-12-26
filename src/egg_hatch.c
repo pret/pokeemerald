@@ -502,7 +502,7 @@ static void CB2_EggHatch_0(void)
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
 
-        SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 2);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
         SetBgTilemapBuffer(1, Alloc(0x1000));
         SetBgTilemapBuffer(0, Alloc(0x2000));
 

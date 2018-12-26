@@ -1544,7 +1544,7 @@ static void sub_8073E08(u8 taskId)
         if (--gTasks[taskId].tData15 < 0)
             return;
 
-        SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[15]) | ((16 - gTasks[taskId].data[15]) << 8));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[15], 16 - gTasks[taskId].data[15]));
     }
     if (gTasks[taskId].tData15 == 0)
         gTasks[taskId].func = sub_8073E64;
@@ -1597,7 +1597,7 @@ static void sub_8073F98(u8 taskId)
 
     if (--gTasks[taskId].tData15 >= 0)
     {
-        SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].tData15) | ((16 - gTasks[taskId].tData15) << 8));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[15], 16 - gTasks[taskId].data[15]));
     }
     else if (gTasks[taskId].tData15 == -1)
     {

@@ -42,7 +42,7 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	applymovement EVENT_OBJ_ID_CAMERA, NavelRock_Top_Movement_269230
 	waitmovement 0
 	delay 50
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	waitse
 	playmoncry SPECIES_HO_OH, 2

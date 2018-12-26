@@ -31,6 +31,7 @@
 #include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"
+#include "mirage_tower.h"
 #include "money.h"
 #include "new_game.h"
 #include "palette.h"
@@ -112,7 +113,6 @@ extern void sub_81AA1D8(void);
 extern void c2_change_map(void);
 extern void sub_81D5DF8(void);
 extern void sub_80EB218(void);
-extern void sub_81BE72C(void);
 extern void sub_80AF3C8(void);
 extern void sub_81971F4(void);
 extern void sub_808B578(void);
@@ -134,7 +134,6 @@ extern void sub_81AA2F8(void);
 extern void sub_8195E10(void);
 extern void sub_80EDB44(void);
 extern void sub_81D64C0(void);
-extern void sub_81BE6AC(void);
 extern void sub_8098128(void);
 extern void copy_map_tileset1_to_vram(const struct MapLayout *);
 extern void copy_map_tileset2_to_vram(const struct MapLayout *);
@@ -146,7 +145,6 @@ extern bool8 warp0_in_pokecenter(void);
 extern void ResetAllPicSprites(void);
 extern void FieldEffectActiveListClear(void);
 extern void SetUpFieldTasks(void);
-extern void sub_81BE6B8(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
@@ -1450,9 +1448,9 @@ u8 GetCurrentMapBattleScene(void)
 static void overworld_bg_setup(void)
 {
     InitBgsFromTemplates(0, gUnknown_08339DAC, ARRAY_COUNT(gUnknown_08339DAC));
-    SetBgAttribute(1, BG_CTRL_ATTR_PALETTEMODE, 1);
-    SetBgAttribute(2, BG_CTRL_ATTR_PALETTEMODE, 1);
-    SetBgAttribute(3, BG_CTRL_ATTR_PALETTEMODE, 1);
+    SetBgAttribute(1, BG_ATTR_MOSAIC, 1);
+    SetBgAttribute(2, BG_ATTR_MOSAIC, 1);
+    SetBgAttribute(3, BG_ATTR_MOSAIC, 1);
     gBGTilemapBuffers2 = AllocZeroed(0x800);
     gBGTilemapBuffers1 = AllocZeroed(0x800);
     gBGTilemapBuffers3 = AllocZeroed(0x800);
@@ -1464,7 +1462,7 @@ static void overworld_bg_setup(void)
 
 void overworld_free_bg_tilemaps(void)
 {
-    sub_81BE72C();
+    ClearMirageTowerPulseBlendEffect();
     sub_81971F4();
     if (gBGTilemapBuffers3 != NULL)
         FREE_AND_SET_NULL(gBGTilemapBuffers3);
@@ -2121,7 +2119,7 @@ static void do_load_map_stuff_loop(u8 *state)
 
 static void sub_80867C8(void)
 {
-    sub_81BE6AC();
+    ClearMirageTowerPulseBlend();
     MoveSaveBlocks_ResetHeap();
 }
 
@@ -2199,7 +2197,7 @@ static void sub_8086988(u32 a1)
     if (!a1)
         SetUpFieldTasks();
     mapheader_run_script_with_tag_x5();
-    sub_81BE6B8();
+    TryStartMirageTowerPulseBlendEffect();
 }
 
 static void sub_80869DC(void)

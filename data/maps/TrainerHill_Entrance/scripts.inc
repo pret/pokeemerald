@@ -22,7 +22,7 @@ TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
 	special sp194_trainer_tower
 	compare VAR_RESULT, 0
 	goto_if_eq TrainerHill_Entrance_EventScript_2680FF
-	setobjectxy 255, 9, 6
+	setobjectxy EVENT_OBJ_ID_PLAYER, 9, 6
 	applymovement EVENT_OBJ_ID_PLAYER, TrainerHill_Entrance_Movement_26837F
 	end
 

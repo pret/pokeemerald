@@ -30,7 +30,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00: @ 825AE00
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE0A:: @ 825AE0A
 	setvar VAR_TEMP_1, 1
-	hideobjectat 255, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 	compare VAR_TEMP_F, 0
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24
 	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
@@ -39,11 +39,11 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE24:: @ 825AE24
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE25:: @ 825AE25
-	setvar VAR_OBJ_GFX_ID_F, 100
+	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25AE2B:: @ 825AE2B
-	setvar VAR_OBJ_GFX_ID_F, 105
+	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31: @ 825AE31

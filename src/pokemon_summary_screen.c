@@ -1418,7 +1418,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
 
         break;
     case 1:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             sum->moves[i] = GetMonData(a, MON_DATA_MOVE1+i);
             sum->pp[i] = GetMonData(a, MON_DATA_PP1+i);
@@ -1791,15 +1791,15 @@ static void sub_81C0B8C(u8 taskId)
         if (pssData->unk40C9 == 0)
         {
             data[1] = 1;
-            SetBgAttribute(1, 7, 1);
-            SetBgAttribute(2, 7, 2);
+            SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
+            SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             schedule_bg_copy_tilemap_to_vram(1);
         }
         else
         {
             data[1] = 2;
-            SetBgAttribute(2, 7, 1);
-            SetBgAttribute(1, 7, 2);
+            SetBgAttribute(2, BG_ATTR_PRIORITY, 1);
+            SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
             schedule_bg_copy_tilemap_to_vram(2);
         }
         ChangeBgX(data[1], 0, 0);
@@ -1848,14 +1848,14 @@ static void sub_81C0D44(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (pssData->unk40C9 == 0)
     {
-        SetBgAttribute(1, 7, 1);
-        SetBgAttribute(2, 7, 2);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
+        SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
         schedule_bg_copy_tilemap_to_vram(2);
     }
     else
     {
-        SetBgAttribute(2, 7, 1);
-        SetBgAttribute(1, 7, 2);
+        SetBgAttribute(2, BG_ATTR_PRIORITY, 1);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     if (pssData->currPageIndex > 1)
@@ -1954,7 +1954,7 @@ static void sub_81C0F44(u8 taskId)
 static bool8 sub_81C1040(void)
 {
     u8 i;
-    for (i = 1; i < 4; i++)
+    for (i = 1; i < MAX_MON_MOVES; i++)
     {
         if (pssData->summary.moves[i] != 0)
             return TRUE;
@@ -1970,14 +1970,14 @@ static void sub_81C1070(s16 *a, s8 b, u8 *c)
 
     PlaySE(SE_SELECT);
     moveIndex = *c;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         moveIndex += b;
         if (moveIndex > a[0])
             moveIndex = 0;
         else if (moveIndex < 0)
             moveIndex = a[0];
-        if (moveIndex == 4)
+        if (moveIndex == MAX_MON_MOVES)
         {
             move = pssData->newMove;
             break;
@@ -2248,7 +2248,7 @@ static void sub_81C174C(u8 taskId)
 
 static bool8 sub_81C18A8(void)
 {
-    if (pssData->firstMoveIndex == MAX_MON_MOVES || pssData->newMove == MOVE_NONE || sub_81B6D14(pssData->summary.moves[pssData->firstMoveIndex]) != 1)
+    if (pssData->firstMoveIndex == MAX_MON_MOVES || pssData->newMove == MOVE_NONE || IsMoveHm(pssData->summary.moves[pssData->firstMoveIndex]) != 1)
         return TRUE;
     else
         return FALSE;
@@ -3654,7 +3654,7 @@ static void PrintContestMoveDescription(u8 moveSlot)
 {
     u16 move;
 
-    if (moveSlot == 4)
+    if (moveSlot == MAX_MON_MOVES)
         move = pssData->newMove;
     else
         move = pssData->summary.moves[moveSlot];
@@ -3852,7 +3852,7 @@ static void sub_81C4420(void)
 {
     u8 i;
     struct PokeSummary *summary = &pssData->summary;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
             SetMoveTypeSpritePosAndType(gBattleMoves[summary->moves[i]].type, 0x55, 0x20 + (i * 0x10), i + 3);
@@ -3865,7 +3865,7 @@ static void sub_81C4484(void)
 {
     u8 i;
     struct PokeSummary *summary = &pssData->summary;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
             SetMoveTypeSpritePosAndType(NUMBER_OF_MON_TYPES + gContestMoves[summary->moves[i]].contestCategory, 0x55, 0x20 + (i * 0x10), i + 3);
