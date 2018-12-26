@@ -1483,8 +1483,8 @@ static void InitMovingBackgroundTask(bool8 isLink)
         SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
 
-        SetBgAttribute(innerBgId, BG_CTRL_ATTR_MOSAIC, 2);
-        SetBgAttribute(outerBgId, BG_CTRL_ATTR_MOSAIC, 2);
+        SetBgAttribute(innerBgId, BG_ATTR_PRIORITY, 2);
+        SetBgAttribute(outerBgId, BG_ATTR_PRIORITY, 2);
 
         ShowBg(1);
         ShowBg(2);
@@ -1529,8 +1529,8 @@ static void sub_8140174(void)
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
-    SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, sub_80391E0(1, 5));
-    SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, sub_80391E0(2, 5));
+    SetBgAttribute(1, BG_ATTR_PRIORITY, sub_80391E0(1, 5));
+    SetBgAttribute(2, BG_ATTR_PRIORITY, sub_80391E0(2, 5));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     Free(sEvoMovingBgPtr);
 }

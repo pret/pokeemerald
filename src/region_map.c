@@ -427,82 +427,82 @@ bool8 sub_8122DB0(void)
 {
     switch (gRegionMap->initStep)
     {
-        case 0:
-            if (gRegionMap->bgManaged)
-            {
-                decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBkgnd_GfxLZ, 0, 0, 0);
-            }
-            else
-            {
-                LZ77UnCompVram(sRegionMapBkgnd_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
-            }
-            break;
-        case 1:
-            if (gRegionMap->bgManaged)
-            {
-                if (!free_temp_tile_data_buffers_if_possible())
-                {
-                    decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBkgnd_TilemapLZ, 0, 0, 1);
-                }
-            }
-            else
-            {
-                LZ77UnCompVram(sRegionMapBkgnd_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
-            }
-            break;
-        case 2:
-            if (!free_temp_tile_data_buffers_if_possible())
-            {
-                LoadPalette(sRegionMapBkgnd_Pal, 0x70, 0x60);
-            }
-            break;
-        case 3:
-            LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, gRegionMap->cursorSmallImage);
-            break;
-        case 4:
-            LZ77UnCompWram(sRegionMapCursorLargeGfxLZ, gRegionMap->cursorLargeImage);
-            break;
-        case 5:
-            RegionMap_InitializeStateBasedOnPlayerLocation();
-            gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
-            gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
-            gRegionMap->mapSecId = CorrectSpecialMapSecId_Internal(gRegionMap->mapSecId);
-            gRegionMap->iconDrawType = get_flagnr_blue_points(gRegionMap->mapSecId);
-            GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
-            break;
-        case 6:
-            if (gRegionMap->zoomed == FALSE)
-            {
-                CalcZoomScrollParams(0, 0, 0, 0, 0x100, 0x100, 0);
-            }
-            else
-            {
-                gRegionMap->scrollX = gRegionMap->cursorPosX * 8 - 0x34;
-                gRegionMap->scrollY = gRegionMap->cursorPosY * 8 - 0x44;
-                gRegionMap->zoomedCursorPosX = gRegionMap->cursorPosX;
-                gRegionMap->zoomedCursorPosY = gRegionMap->cursorPosY;
-                CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, 0x80, 0x80, 0);
-            }
-            break;
-        case 7:
-            RegionMap_GetPositionOfCursorWithinMapSection();
-            UpdateRegionMapVideoRegs();
-            gRegionMap->cursorSprite = NULL;
-            gRegionMap->playerIconSprite = NULL;
-            gRegionMap->cursorMovementFrameCounter = 0;
-            gRegionMap->blinkPlayerIcon = FALSE;
-            if (gRegionMap->bgManaged)
-            {
-                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_MAPBASEINDEX, 2);
-                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_VISIBLE, gRegionMap->charBaseIdx);
-                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_CHARBASEINDEX, gRegionMap->mapBaseIdx);
-                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_PRIORITY, 1);
-                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_SCREENSIZE, 1);
-            }
-            gRegionMap->initStep++;
-            return FALSE;
-        default:
-            return FALSE;
+	case 0:
+		if (gRegionMap->bgManaged)
+		{
+			decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBkgnd_GfxLZ, 0, 0, 0);
+		}
+		else
+		{
+			LZ77UnCompVram(sRegionMapBkgnd_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
+		}
+		break;
+	case 1:
+		if (gRegionMap->bgManaged)
+		{
+			if (!free_temp_tile_data_buffers_if_possible())
+			{
+				decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBkgnd_TilemapLZ, 0, 0, 1);
+			}
+		}
+		else
+		{
+			LZ77UnCompVram(sRegionMapBkgnd_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
+		}
+		break;
+	case 2:
+		if (!free_temp_tile_data_buffers_if_possible())
+		{
+			LoadPalette(sRegionMapBkgnd_Pal, 0x70, 0x60);
+		}
+		break;
+	case 3:
+		LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, gRegionMap->cursorSmallImage);
+		break;
+	case 4:
+		LZ77UnCompWram(sRegionMapCursorLargeGfxLZ, gRegionMap->cursorLargeImage);
+		break;
+	case 5:
+		RegionMap_InitializeStateBasedOnPlayerLocation();
+		gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
+		gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
+		gRegionMap->mapSecId = CorrectSpecialMapSecId_Internal(gRegionMap->mapSecId);
+		gRegionMap->iconDrawType = get_flagnr_blue_points(gRegionMap->mapSecId);
+		GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
+		break;
+	case 6:
+		if (gRegionMap->zoomed == FALSE)
+		{
+			CalcZoomScrollParams(0, 0, 0, 0, 0x100, 0x100, 0);
+		}
+		else
+		{
+			gRegionMap->scrollX = gRegionMap->cursorPosX * 8 - 0x34;
+			gRegionMap->scrollY = gRegionMap->cursorPosY * 8 - 0x44;
+			gRegionMap->zoomedCursorPosX = gRegionMap->cursorPosX;
+			gRegionMap->zoomedCursorPosY = gRegionMap->cursorPosY;
+			CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, 0x80, 0x80, 0);
+		}
+		break;
+	case 7:
+		RegionMap_GetPositionOfCursorWithinMapSection();
+		UpdateRegionMapVideoRegs();
+		gRegionMap->cursorSprite = NULL;
+		gRegionMap->playerIconSprite = NULL;
+		gRegionMap->cursorMovementFrameCounter = 0;
+		gRegionMap->blinkPlayerIcon = FALSE;
+		if (gRegionMap->bgManaged)
+		{
+			SetBgAttribute(gRegionMap->bgNum, BG_ATTR_SCREENSIZE, 2);
+			SetBgAttribute(gRegionMap->bgNum, BG_ATTR_CHARBASEINDEX, gRegionMap->charBaseIdx);
+			SetBgAttribute(gRegionMap->bgNum, BG_ATTR_MAPBASEINDEX, gRegionMap->mapBaseIdx);
+			SetBgAttribute(gRegionMap->bgNum, BG_ATTR_WRAPAROUND, 1);
+			SetBgAttribute(gRegionMap->bgNum, BG_ATTR_PALETTEMODE, 1);
+		}
+		gRegionMap->initStep++;
+		return FALSE;
+	default:
+		return FALSE;
     }
     gRegionMap->initStep++;
     return TRUE;

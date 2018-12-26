@@ -1688,15 +1688,15 @@ static void sub_81C0B8C(u8 taskId)
         if (pssData->unk40C9 == 0)
         {
             data[1] = 1;
-            SetBgAttribute(1, 7, 1);
-            SetBgAttribute(2, 7, 2);
+            SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
+            SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             schedule_bg_copy_tilemap_to_vram(1);
         }
         else
         {
             data[1] = 2;
-            SetBgAttribute(2, 7, 1);
-            SetBgAttribute(1, 7, 2);
+            SetBgAttribute(2, BG_ATTR_PRIORITY, 1);
+            SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
             schedule_bg_copy_tilemap_to_vram(2);
         }
         ChangeBgX(data[1], 0, 0);
@@ -1745,14 +1745,14 @@ static void sub_81C0D44(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (pssData->unk40C9 == 0)
     {
-        SetBgAttribute(1, 7, 1);
-        SetBgAttribute(2, 7, 2);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
+        SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
         schedule_bg_copy_tilemap_to_vram(2);
     }
     else
     {
-        SetBgAttribute(2, 7, 1);
-        SetBgAttribute(1, 7, 2);
+        SetBgAttribute(2, BG_ATTR_PRIORITY, 1);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     if (pssData->currPageIndex > 1)

@@ -1934,8 +1934,8 @@ void sub_8199D98(void)
 
 void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
 {
-    int temp = (!GetBgAttribute(bg, 4)) ? 0x20 : 0x40;
-    void *addr = (void *)((GetBgAttribute(bg, 1) * 0x4000) + (GetBgAttribute(bg, 10) + a2) * temp);
+    int temp = (!GetBgAttribute(bg, BG_ATTR_PALETTEMODE)) ? 0x20 : 0x40;
+    void *addr = (void *)((GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX) * 0x4000) + (GetBgAttribute(bg, BG_ATTR_BASETILE) + a2) * temp);
     RequestDma3Fill(a1 << 24 | a1 << 16 | a1 << 8 | a1, addr + VRAM, a3 * temp, 1);
 }
 

@@ -6237,7 +6237,7 @@ static void atk6C_drawlvlupbox(void)
     {
     case 1:
         gBattle_BG2_Y = 0x60;
-        SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, 0);
+        SetBgAttribute(2, BG_ATTR_PRIORITY, 0);
         ShowBg(2);
         sub_804F17C();
         gBattleScripting.atk6C_state = 2;
@@ -6249,8 +6249,8 @@ static void atk6C_drawlvlupbox(void)
     case 3:
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0x100;
-        SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 1);
-        SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 0);
+        SetBgAttribute(0, BG_ATTR_PRIORITY, 1);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 0);
         ShowBg(0);
         ShowBg(1);
         HandleBattleWindow(0x12, 7, 0x1D, 0x13, WINDOW_x80);
@@ -6296,7 +6296,7 @@ static void atk6C_drawlvlupbox(void)
             ClearWindowTilemap(13);
             CopyWindowToVram(13, 1);
 
-            SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, 2);
+            SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
             ShowBg(2);
 
             gBattleScripting.atk6C_state = 10;
@@ -6305,8 +6305,8 @@ static void atk6C_drawlvlupbox(void)
     case 10:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 0);
-            SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 1);
+            SetBgAttribute(0, BG_ATTR_PRIORITY, 0);
+            SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
             ShowBg(0);
             ShowBg(1);
             gBattlescriptCurrInstr++;

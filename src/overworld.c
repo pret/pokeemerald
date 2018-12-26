@@ -1448,9 +1448,9 @@ u8 GetCurrentMapBattleScene(void)
 static void overworld_bg_setup(void)
 {
     InitBgsFromTemplates(0, gUnknown_08339DAC, ARRAY_COUNT(gUnknown_08339DAC));
-    SetBgAttribute(1, BG_CTRL_ATTR_PALETTEMODE, 1);
-    SetBgAttribute(2, BG_CTRL_ATTR_PALETTEMODE, 1);
-    SetBgAttribute(3, BG_CTRL_ATTR_PALETTEMODE, 1);
+    SetBgAttribute(1, BG_ATTR_MOSAIC, 1);
+    SetBgAttribute(2, BG_ATTR_MOSAIC, 1);
+    SetBgAttribute(3, BG_ATTR_MOSAIC, 1);
     gBGTilemapBuffers2 = AllocZeroed(0x800);
     gBGTilemapBuffers1 = AllocZeroed(0x800);
     gBGTilemapBuffers3 = AllocZeroed(0x800);
