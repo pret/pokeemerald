@@ -12,3 +12,4 @@ Route111_NoMirageTower_Layout::
 	.4byte Route111_NoMirageTower_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Mauville
+
