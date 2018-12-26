@@ -3013,34 +3013,51 @@ static void atk1F_jumpifsideaffecting(void)
 
 static void atk20_jumpifstat(void)
 {
-    u8 ret = 0;
+    bool32 ret = 0;
     u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    u8 value = gBattleMons[battlerId].statStages[gBattlescriptCurrInstr[3]];
+    u8 statValue = gBattleMons[battlerId].statStages[gBattlescriptCurrInstr[3]];
+    u8 cmpTo = gBattlescriptCurrInstr[4];
+    u8 cmpKind = gBattlescriptCurrInstr[2];
 
-    switch (gBattlescriptCurrInstr[2])
+    // Because this command is used as a way of checking if a stat can be lowered/raised,
+    // we need to do some modification at run-time.
+    if (GetBattlerAbility(battlerId) == ABILITY_CONTRARY)
+    {
+        if (cmpKind == CMP_GREATER_THAN)
+            cmpKind = CMP_LESS_THAN;
+        else if (cmpKind == CMP_LESS_THAN)
+            cmpKind = CMP_GREATER_THAN;
+
+        if (cmpTo == 0)
+            cmpTo = 0xC;
+        else if (cmpTo == 0xC)
+            cmpTo = 0;
+    }
+
+    switch (cmpKind)
     {
     case CMP_EQUAL:
-        if (value == gBattlescriptCurrInstr[4])
+        if (statValue == cmpTo)
             ret++;
         break;
     case CMP_NOT_EQUAL:
-        if (value != gBattlescriptCurrInstr[4])
+        if (statValue != cmpTo)
             ret++;
         break;
     case CMP_GREATER_THAN:
-        if (value > gBattlescriptCurrInstr[4])
+        if (statValue > cmpTo)
             ret++;
         break;
     case CMP_LESS_THAN:
-        if (value < gBattlescriptCurrInstr[4])
+        if (statValue < cmpTo)
             ret++;
         break;
     case CMP_COMMON_BITS:
-        if (value & gBattlescriptCurrInstr[4])
+        if (statValue & cmpTo)
             ret++;
         break;
     case CMP_NO_COMMON_BITS:
-        if (!(value & gBattlescriptCurrInstr[4]))
+        if (!(statValue & cmpTo))
             ret++;
         break;
     }
@@ -7690,7 +7707,13 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
         notProtectAffected++;
     flags &= ~(STAT_CHANGE_NOT_PROTECT_AFFECTED);
 
-    PREPARE_STAT_BUFFER(gBattleTextBuff1, statId)
+    if (GetBattlerAbility(gActiveBattler) == ABILITY_CONTRARY)
+    {
+        statValue ^= STAT_BUFF_NEGATIVE;
+        gBattleScripting.statChanger ^= STAT_BUFF_NEGATIVE;
+    }
+
+    PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
 
     if (statValue <= -1) // Stat decrease.
     {

@@ -500,6 +500,19 @@ bool8 WasUnableToUseMove(u8 battler)
 
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
+    // Support for Contrary ability.
+    // If a move attempted to raise stat - print "won't increase".
+    // If a move attempted to lower stat - print "won't decrease".
+    if (stringId == STRINGID_STATSWONTDECREASE && !(gBattleScripting.statChanger & STAT_BUFF_NEGATIVE))
+        stringId = STRINGID_STATSWONTINCREASE;
+    else if (stringId == STRINGID_STATSWONTINCREASE && gBattleScripting.statChanger & STAT_BUFF_NEGATIVE)
+        stringId = STRINGID_STATSWONTDECREASE;
+
+    if (stringId == STRINGID_STATSWONTDECREASE2 && GetBattlerAbility(battler) == ABILITY_CONTRARY)
+        stringId = STRINGID_STATSWONTINCREASE2;
+    else if (stringId == STRINGID_STATSWONTINCREASE2 && GetBattlerAbility(battler) == ABILITY_CONTRARY)
+        stringId = STRINGID_STATSWONTDECREASE2;
+
     gActiveBattler = battler;
     BtlController_EmitPrintString(0, stringId);
     MarkBattlerForControllerExec(gActiveBattler);
