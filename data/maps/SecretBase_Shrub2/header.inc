@@ -10,6 +10,6 @@ SecretBase_Shrub2: @ 8484BC4
 	.byte WEATHER_NONE
 	.byte MAP_TYPE_SECRET_BASE
 	.2byte 0
-	.byte 12
+	map_header_flags allow_bike=0, allow_escape_rope=0, allow_run=1, show_map_name=1
 	.byte MAP_BATTLE_SCENE_FRONTIER
 
