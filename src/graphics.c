@@ -564,6 +564,13 @@ const u32 gBattleAnimSpriteSheet_163[] = INCBIN_U32("graphics/battle_anims/sprit
 const u32 gBattleAnimSpritePalette_163[] = INCBIN_U32("graphics/battle_anims/sprites/163.gbapal.lz");
 
 const u32 gBattleAnimSpritePalette_288[] = INCBIN_U32("graphics/battle_anims/sprites/288.gbapal.lz");
+
+const u32 gBattleAnimSpriteSheet_289[] = INCBIN_U32("graphics/battle_anims/sprites/289.4bpp.lz");
+const u32 gBattleAnimSpritePalette_289[] = INCBIN_U32("graphics/battle_anims/sprites/289.gbapal.lz");
+
+const u32 gBattleAnimSpriteSheet_290[] = INCBIN_U32("graphics/battle_anims/sprites/290.4bpp.lz");
+const u32 gBattleAnimSpritePalette_290[] = INCBIN_U32("graphics/battle_anims/sprites/290.gbapal.lz");
+
 const u32 gBattleAnimSpritePalette_164[] = INCBIN_U32("graphics/battle_anims/sprites/164.gbapal.lz");
 const u32 gBattleAnimSpritePalette_165[] = INCBIN_U32("graphics/battle_anims/sprites/165.gbapal.lz");
 
