@@ -2407,9 +2407,9 @@ void sub_81A4C30(void)
 
     i = gPlayerPartyCount;
     LoadPlayerParty();
-    sub_8076D5C();
+    SetContinueGameWarpStatusToDynamicWarp();
     TrySavingData(SAVE_LINK);
-    sav2_gender2_inplace_and_xFE();
+    ClearContinueGameWarpStatus2();
     gPlayerPartyCount = i;
 
     for (i = 0; i < PARTY_SIZE; i++)

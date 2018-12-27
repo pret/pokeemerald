@@ -1299,7 +1299,7 @@ static bool8 sub_8175024(void)
         CopyBgTilemapBufferToVram(3);
         break;
     case 3:
-        sub_81971D0();
+        InitStandardTextBoxWindows();
         sub_8197200();
         break;
     case 4:

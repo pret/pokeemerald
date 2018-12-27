@@ -69,7 +69,7 @@ static void sub_8195980(void)
     if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860DE98[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = 0;
 
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 

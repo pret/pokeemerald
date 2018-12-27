@@ -1163,7 +1163,7 @@ static void sub_8161F94(void)
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
 
     ValidateBattleTowerRecordChecksums();
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 

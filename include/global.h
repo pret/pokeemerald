@@ -521,7 +521,7 @@ struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
-    /*0x09*/ u8 specialSaveWarp;
+    /*0x09*/ u8 specialSaveWarpFlags;
     /*0x0A*/ u8 playerTrainerId[4];
     /*0x0E*/ u16 playTimeHours;
     /*0x10*/ u8 playTimeMinutes;
@@ -889,10 +889,10 @@ struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
     /*0x04*/ struct WarpData location;
-    /*0x0C*/ struct WarpData warp1;
-    /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData lastHealLocation;
-    /*0x24*/ struct WarpData warp4;
+    /*0x0C*/ struct WarpData continueGameWarp;
+    /*0x14*/ struct WarpData dynamicWarp;
+    /*0x1C*/ struct WarpData lastHealLocation; // used by white-out and teleport
+    /*0x24*/ struct WarpData escapeWarp; // used by Dig and Escape Rope
     /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 weatherCycleStage;

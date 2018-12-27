@@ -25,6 +25,7 @@
 #include "constants/region_map_sections.h"
 #include "heal_location.h"
 #include "constants/heal_locations.h"
+#include "constants/map_types.h"
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15
@@ -864,7 +865,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
     u16 y;
     u16 dimensionScale;
     u16 xOnMap;
-    struct WarpData *storedWarp;
+    struct WarpData *warp;
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SS_TIDAL_CORRIDOR)
         && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SS_TIDAL_CORRIDOR)
@@ -878,11 +879,11 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
     switch (GetMapTypeByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
     {
         default:
-        case 1:
-        case 2:
-        case 3:
-        case 5:
-        case 6:
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_UNDERWATER:
+        case MAP_TYPE_6:
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             gRegionMap->playerIsInCave = FALSE;
             mapWidth = gMapHeader.mapLayout->width;
@@ -894,17 +895,17 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
                 gRegionMap->playerIsInCave = TRUE;
             }
             break;
-        case 4:
-        case 7:
+        case MAP_TYPE_UNDERGROUND:
+        case MAP_TYPE_7:
             if (gMapHeader.flags & 0x02)
             {
-                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
                 gRegionMap->playerIsInCave = TRUE;
                 mapWidth = mapHeader->mapLayout->width;
                 mapHeight = mapHeader->mapLayout->height;
-                x = gSaveBlock1Ptr->warp4.x;
-                y = gSaveBlock1Ptr->warp4.y;
+                x = gSaveBlock1Ptr->escapeWarp.x;
+                y = gSaveBlock1Ptr->escapeWarp.y;
             }
             else
             {
@@ -916,27 +917,26 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
                 y = 1;
             }
             break;
-        case 9:
-            mapHeader = Overworld_GetMapHeaderByGroupAndId((u16)gSaveBlock1Ptr->warp2.mapGroup, (u16)gSaveBlock1Ptr->warp2.mapNum);
+        case MAP_TYPE_SECRET_BASE:
+            mapHeader = Overworld_GetMapHeaderByGroupAndId((u16)gSaveBlock1Ptr->dynamicWarp.mapGroup, (u16)gSaveBlock1Ptr->dynamicWarp.mapNum);
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             gRegionMap->playerIsInCave = TRUE;
             mapWidth = mapHeader->mapLayout->width;
             mapHeight = mapHeader->mapLayout->height;
-            x = gSaveBlock1Ptr->warp2.x;
-            y = gSaveBlock1Ptr->warp2.y;
+            x = gSaveBlock1Ptr->dynamicWarp.x;
+            y = gSaveBlock1Ptr->dynamicWarp.y;
             break;
-        case 8:
-
+        case MAP_TYPE_INDOOR:
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             if (gRegionMap->mapSecId != MAPSEC_DYNAMIC)
             {
-                storedWarp = &gSaveBlock1Ptr->warp4;
-                mapHeader = Overworld_GetMapHeaderByGroupAndId(storedWarp->mapGroup, storedWarp->mapNum);
+                warp = &gSaveBlock1Ptr->escapeWarp;
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
             }
             else
             {
-                storedWarp = &gSaveBlock1Ptr->warp2;
-                mapHeader = Overworld_GetMapHeaderByGroupAndId(storedWarp->mapGroup, storedWarp->mapNum);
+                warp = &gSaveBlock1Ptr->dynamicWarp;
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             }
             if (RegionMap_IsPlayerInCave(gRegionMap->mapSecId))
@@ -949,8 +949,8 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             }
             mapWidth = mapHeader->mapLayout->width;
             mapHeight = mapHeader->mapLayout->height;
-            x = storedWarp->x;
-            y = storedWarp->y;
+            x = warp->x;
+            y = warp->y;
             break;
     }
 
@@ -1902,25 +1902,25 @@ static void sub_8124E0C(void)
                     switch (sFlyMap->regionMap.mapSecId)
                     {
                         case MAPSEC_SOUTHERN_ISLAND:
-                            sub_8084CCC(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
+                            SetWarpDestinationToHealLocation(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
                             break;
                         case MAPSEC_BATTLE_FRONTIER:
-                            sub_8084CCC(HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST);
+                            SetWarpDestinationToHealLocation(HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST);
                             break;
                         case MAPSEC_LITTLEROOT_TOWN:
-                            sub_8084CCC(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_1 : HEAL_LOCATION_LITTLEROOT_TOWN_2);
+                            SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_1 : HEAL_LOCATION_LITTLEROOT_TOWN_2);
                             break;
                         case MAPSEC_EVER_GRANDE_CITY:
-                            sub_8084CCC(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
+                            SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
                             break;
                         default:
                             if (sMapHealLocations[sFlyMap->regionMap.mapSecId][2] != 0)
                             {
-                                sub_8084CCC(sMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+                                SetWarpDestinationToHealLocation(sMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
                             }
                             else
                             {
-                                warp1_set_2(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], -1);
+                                SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], -1);
                             }
                             break;
                     }

@@ -89,7 +89,7 @@ static void palette_bg_faded_fill_black(void)
 void pal_fill_for_maplights(void)
 {
     u8 previousMapType = GetLastUsedWarpMapType();
-    switch (GetMapPairFadeFromType(previousMapType, Overworld_GetMapTypeOfSaveblockLocation()))
+    switch (GetMapPairFadeFromType(previousMapType, GetCurrentMapType()))
     {
     case 0:
         palette_bg_faded_fill_black();
@@ -115,7 +115,7 @@ void pal_fill_black(void)
 
 void WarpFadeScreen(void)
 {
-    u8 currentMapType = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 currentMapType = GetCurrentMapType();
     switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
     {
     case 0:

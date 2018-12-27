@@ -366,7 +366,7 @@ void sub_80E8F9C(void)
     s8 idx;
 
     idx = sCurSecretBaseId / 10 * 4;
-    warp1_set_2(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
+    SetWarpDestinationToMapWarp(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
 }
 
 void sub_80E8FD0(u8 taskId)
@@ -400,7 +400,7 @@ void sub_80E9068(void)
 {
     CreateTask(sub_80E8FD0, 0);
     FadeScreen(1, 0);
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
 bool8 sub_80E909C(void)
@@ -445,7 +445,7 @@ void sub_80E916C(u8 taskId)
     if (!gPaletteFade.active)
     {
         idx = sCurSecretBaseId / 10 * 4;
-        Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gUnknown_0858CFE8[idx + 2], gUnknown_0858CFE8[idx + 3]);
+        SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gUnknown_0858CFE8[idx + 2], gUnknown_0858CFE8[idx + 3]);
         WarpIntoMap();
         gFieldCallback = sub_80E9108;
         SetMainCallback2(CB2_LoadMap);
@@ -643,7 +643,7 @@ void sub_80E96A4(u8 taskId)
             }
             break;
         case 2:
-            copy_saved_warp2_bank_and_enter_x_to_warp1(0x7e);
+            SetWarpDestinationToDynamicWarp(0x7e);
             WarpIntoMap();
             gFieldCallback = mapldr_default;
             SetMainCallback2(CB2_LoadMap);

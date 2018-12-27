@@ -156,7 +156,7 @@ static bool8 sub_8137304(void)
 {
     u8 i;
     u8 v0 = GetLastUsedWarpMapType();
-    u8 v1 = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 v1 = GetCurrentMapType();
 
     for (i = 0; gUnknown_085B27C8[i].unk0; i++)
     {
