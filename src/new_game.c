@@ -27,6 +27,7 @@
 #include "pokedex.h"
 #include "apprentice.h"
 #include "frontier_util.h"
+#include "constants/maps.h"
 
 extern u16 gSaveFileStatus;
 extern u8 gUnknown_030060B0;
@@ -135,7 +136,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    Overworld_SetWarpDestination(25, 40, -1, -1, -1); // inside of truck
+    Overworld_SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
     WarpIntoMap();
 }
 
