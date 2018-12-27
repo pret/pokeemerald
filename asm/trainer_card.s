@@ -4971,7 +4971,7 @@ _080C5204:
 	b _080C52C8
 _080C5214:
 	str r4, [r0]
-	bl sav1_map_get_name
+	bl GetCurrentRegionMapSectionId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3A
@@ -7780,7 +7780,7 @@ sub_80C6974: @ 80C6974
 	adds r1, r6
 	ldrb r1, [r1, 0xC]
 	bl StartSpriteAnim
-	bl sav1_map_get_name
+	bl GetCurrentRegionMapSectionId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x3A

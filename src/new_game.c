@@ -136,7 +136,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    Overworld_SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
+    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
     WarpIntoMap();
 }
 
@@ -169,7 +169,7 @@ void NewGameInitData(void)
     ClearFrontierRecord();
     ClearSav1();
     ClearMailData();
-    gSaveBlock2Ptr->specialSaveWarp = 0;
+    gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->field_A8 = 0;
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();

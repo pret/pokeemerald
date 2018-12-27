@@ -13851,7 +13851,7 @@ _0807EDCE:
 	movs r0, 0x2
 	bl sub_801B990
 _0807EDF6:
-	bl sub_8076D5C
+	bl SetContinueGameWarpStatusToDynamicWarp
 	bl sub_8153380
 	ldr r1, =gMain
 	movs r2, 0x87
@@ -13884,7 +13884,7 @@ _0807EE38:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _0807EE5C
-	bl sav2_gender2_inplace_and_xFE
+	bl ClearContinueGameWarpStatus2
 	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3

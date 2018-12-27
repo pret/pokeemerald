@@ -625,7 +625,7 @@ static void DoMirageTowerDisintegration(u8 taskId)
         SetGpuRegBits(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2));
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0));
         SetBgAttribute(0, BG_ATTR_PRIORITY, 0);
-        sub_81971D0();
+        InitStandardTextBoxWindows();
         break;
     case 7:
         ShowBg(0);
