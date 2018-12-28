@@ -1202,8 +1202,8 @@ static u8 sub_81A9998(s32 *arg0, u8 arg1, u8 arg2)
 {
     s32 i, j;
     u8 ret = 0;
-    u16 *map = gUnknown_03005DC0.map;
-    map += gUnknown_03005DC0.width * 7 + 7;
+    u16 *map = gBackupMapLayout.map;
+    map += gBackupMapLayout.width * 7 + 7;
 
     for (i = 0; i < 32; map += 47, i++)
     {
@@ -1493,11 +1493,11 @@ void sub_81AA078(u16 *mapArg, u8 arg1)
         const struct MapLayout *mapLayout = gMapLayouts[allocated[i] + 0x169];
         const u16 *layoutMap = mapLayout->map;
 
-        gUnknown_03005DC0.map = mapArg;
-        gUnknown_03005DC0.width = mapLayout->width * 4 + 15;
-        gUnknown_03005DC0.height = mapLayout->height * 4 + 14;
+        gBackupMapLayout.map = mapArg;
+        gBackupMapLayout.width = mapLayout->width * 4 + 15;
+        gBackupMapLayout.height = mapLayout->height * 4 + 14;
         map = mapArg;
-        heightAdd = (((i / 4 * mapLayout->height) + 7) * (gUnknown_03005DC0.width));
+        heightAdd = (((i / 4 * mapLayout->height) + 7) * (gBackupMapLayout.width));
         widthAdd = ((i % 4 * mapLayout->width) + 7);
         map += heightAdd + widthAdd;
         for (j = 0; j < mapLayout->height; j++)

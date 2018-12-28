@@ -102,7 +102,6 @@ extern void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
 extern void mapheader_run_script_with_tag_x5(void);
 extern void ResetFieldTasksArgs(void);
 extern void sub_80A0A2C(void);
-extern void not_trainer_hill_battle_pyramid(void);
 extern void apply_map_tileset2_palette(const struct MapLayout *);
 extern void copy_map_tileset2_to_vram_2(const struct MapLayout *);
 extern void RestartWildEncounterImmunitySteps(void);
@@ -126,11 +125,7 @@ extern void sub_80AF168(void);
 extern void sub_80AF3C8(void);
 extern void ExecuteTruckSequence(void);
 extern void sub_80A0A38(void);
-extern void trainer_hill_map_load_related(void);
-extern void sub_8087D74(void);
-extern void battle_pyramid_map_load_related(u8);
 extern void WriteFlashScanlineEffectBuffer(u8);
-extern void sub_80E9238(u8);
 extern void sub_81AA2F8(void);
 extern void sub_8195E10(void);
 extern void sub_80EDB44(void);
@@ -149,7 +144,6 @@ extern void SetUpFieldTasks(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
-extern void sub_8088B3C(u16, u16);
 extern bool32 sub_800F0B8(void);
 extern bool32 sub_8009F3C(void);
 extern void sub_8010198(void);
@@ -870,7 +864,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
-    not_trainer_hill_battle_pyramid();
+    InitMap();
     copy_map_tileset2_to_vram_2(gMapHeader.mapLayout);
     apply_map_tileset2_palette(gMapHeader.mapLayout);
 
@@ -925,15 +919,15 @@ static void mli0_load_map(u32 a1)
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == 0x169)
-        battle_pyramid_map_load_related(0);
+        InitBattlePyramidMap(0);
     else if (InTrainerHill())
-        trainer_hill_map_load_related();
+        InitTrainerHillMap();
     else
-        not_trainer_hill_battle_pyramid();
+        InitMap();
 
     if (a1 != 1 && indoors)
     {
-        UpdateTVScreensOnMap(gUnknown_03005DC0.width, gUnknown_03005DC0.height);
+        UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         sub_80E9238(1);
     }
 }
@@ -1774,11 +1768,11 @@ void CB2_ContinueSavedGame(void)
     DoTimeBasedEvents();
     sub_8084788();
     if (gMapHeader.mapLayoutId == 0x169)
-        battle_pyramid_map_load_related(1);
+        InitBattlePyramidMap(1);
     else if (trainerHillMapId != 0)
-        trainer_hill_map_load_related();
+        InitTrainerHillMap();
     else
-        sub_8087D74();
+        InitMapFromSavedGame();
 
     PlayTimeCounter_Start();
     ScriptContext1_Init();
@@ -2216,7 +2210,7 @@ static void mli4_mapscripts_and_other(void)
     gTotalCameraPixelOffsetX = 0;
     gTotalCameraPixelOffsetY = 0;
     ResetEventObjects();
-    sav1_camera_get_focus_coords(&x, &y);
+    GetCameraFocusCoords(&x, &y);
     player = GetInitialPlayerAvatarState();
     InitPlayerAvatar(x, y, player->direction, gSaveBlock2Ptr->playerGender);
     SetPlayerAvatarTransitionFlags(player->transitionFlags);
@@ -2251,7 +2245,7 @@ static void sub_8086AC8(void)
 static void sub_8086AE4(void)
 {
     u16 x, y;
-    sav1_camera_get_focus_coords(&x, &y);
+    GetCameraFocusCoords(&x, &y);
     sub_8088B3C(x + gUnknown_03005DB4, y);
 }
 
@@ -2260,7 +2254,7 @@ static void sub_8086B14(void)
     u16 i;
     u16 x, y;
 
-    sav1_camera_get_focus_coords(&x, &y);
+    GetCameraFocusCoords(&x, &y);
     x -= gUnknown_03005DB4;
 
     for (i = 0; i < gFieldLinkPlayerCount; i++)

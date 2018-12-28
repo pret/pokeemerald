@@ -1166,23 +1166,23 @@ void GetShieldToyTVDecorationInfo(void)
     }
 }
 
-bool8 sub_80FADE4(u16 arg0, u8 arg1)
+bool8 sub_80FADE4(u16 metatileId, u8 arg1)
 {
     if (!CurrentMapIsSecretBase())
         return FALSE;
 
     if (!arg1)
     {
-        if (arg0 == 0x285 || arg0 == 0x286)
+        if (metatileId == 0x285 || metatileId == 0x286)
             return TRUE;
-        if (arg0 == 0x237)
+        if (metatileId == 0x237)
             return TRUE;
     }
     else
     {
-        if (arg0 == 0x28d)
+        if (metatileId == 0x28d)
             return TRUE;
-        if (arg0 == 0x23F)
+        if (metatileId == 0x23F)
             return TRUE;
     }
 
