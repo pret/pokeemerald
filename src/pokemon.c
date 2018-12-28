@@ -1,4 +1,5 @@
 #include "global.h"
+#include "alloc.h"
 #include "apprentice.h"
 #include "battle.h"
 #include "battle_controllers.h"
@@ -14,10 +15,13 @@
 #include "main.h"
 #include "alloc.h"
 #include <m4a.h>
+#include "overworld.h"
+#include "party_menu.h"
 #include "pokedex.h"
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
+#include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "pokenav.h"
 #include "random.h"
@@ -45,8 +49,6 @@ struct SpeciesItem
     u16 item;
 };
 
-extern const struct OamData gUnknown_0831ACB0;
-extern const struct OamData gUnknown_0831ACA8;
 extern const struct SpriteFrameImage gUnknown_082FF3A8[];
 extern const struct SpriteFrameImage gUnknown_082FF3C8[];
 extern const struct SpriteFrameImage gUnknown_082FF3E8[];
@@ -70,15 +72,10 @@ extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u8 gTrainerClassNames[][13];
 
-extern u8 pokemon_order_func(u8);
 extern u16 get_unknown_box_id(void);
-extern u8 StorageGetCurrentBox(void);
 extern void set_unknown_box_id(u8);
-extern void sub_803FA70(u8 battlerId);
-extern u8 sav1_map_get_name(void);
 extern bool8 sub_806F104(void);
 extern u8 sub_81D63C8(u16 trainerOpponentId);
-extern void SummaryScreen_SetUnknownTaskId(u8);
 
 // this file's functions
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -935,7 +932,7 @@ const u16 gSpeciesToNationalPokedexNum[] = // Assigns all species to the Nationa
     SPECIES_TO_NATIONAL(CHIMECHO),
 };
 
-const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pok�mon (Using National Dex Index)
+const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pokémon (Using National Dex Index)
 {
     HOENN_TO_NATIONAL(TREECKO),
     HOENN_TO_NATIONAL(GROVYLE),
@@ -1139,7 +1136,7 @@ const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pok�mon (Using Nation
     HOENN_TO_NATIONAL(RAYQUAZA),
     HOENN_TO_NATIONAL(JIRACHI),
     HOENN_TO_NATIONAL(DEOXYS),
-    HOENN_TO_NATIONAL(BULBASAUR), // Pok�mon from here onwards are UNSEEN in the HoennDex.
+    HOENN_TO_NATIONAL(BULBASAUR), // Pokémon from here onwards are UNSEEN in the HoennDex.
     HOENN_TO_NATIONAL(IVYSAUR),
     HOENN_TO_NATIONAL(VENUSAUR),
     HOENN_TO_NATIONAL(CHARMANDER),
@@ -2298,7 +2295,7 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     {   // B_POSITION_PLAYER_LEFT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF3A8,
         .affineAnims = gUnknown_082FF618,
@@ -2307,16 +2304,16 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     {   // B_POSITION_OPPONENT_LEFT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACA8,
+        .oam = &gOamData_831ACA8,
         .anims = NULL,
         .images = gUnknown_082FF3C8,
         .affineAnims = gUnknown_082FF694,
-        .callback = oac_poke_opponent,
+        .callback = SpriteCb_WildMon,
     },
     {   // B_POSITION_PLAYER_RIGHT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF3E8,
         .affineAnims = gUnknown_082FF618,
@@ -2325,11 +2322,11 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     {   // B_POSITION_OPPONENT_RIGHT
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACA8,
+        .oam = &gOamData_831ACA8,
         .anims = NULL,
         .images = gUnknown_082FF408,
         .affineAnims = gUnknown_082FF694,
-        .callback = oac_poke_opponent
+        .callback = SpriteCb_WildMon
     },
 };
 
@@ -2338,7 +2335,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF428,
         .affineAnims = gUnknown_082FF618,
@@ -2347,7 +2344,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF448,
         .affineAnims = gUnknown_082FF618,
@@ -2356,7 +2353,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF468,
         .affineAnims = gUnknown_082FF618,
@@ -2365,7 +2362,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF490,
         .affineAnims = gUnknown_082FF618,
@@ -2374,7 +2371,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF4B8,
         .affineAnims = gUnknown_082FF618,
@@ -2383,7 +2380,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF4D8,
         .affineAnims = gUnknown_082FF618,
@@ -2392,7 +2389,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF4F8,
         .affineAnims = gUnknown_082FF618,
@@ -2401,7 +2398,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
-        .oam = &gUnknown_0831ACB0,
+        .oam = &gOamData_831ACB0,
         .anims = NULL,
         .images = gUnknown_082FF518,
         .affineAnims = gUnknown_082FF618,
@@ -2592,7 +2589,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gBaseStats[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gBaseStats[species].friendship);
-    value = sav1_map_get_name();
+    value = GetCurrentRegionMapSectionId();
     SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
     SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
@@ -2758,7 +2755,7 @@ void sub_806819C(struct Pokemon *mon, struct BattleTowerPokemon *src)
 
     CreateMon(mon, src->species, src->level, 0, 1, src->personality, 1, src->otId);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, src->moves[i], i);
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &src->ppBonuses);
@@ -2820,7 +2817,7 @@ void sub_8068338(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl5
 
     CreateMon(mon, src->species, level, 0, 1, src->personality, 1, src->otId);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, src->moves[i], i);
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &src->ppBonuses);
@@ -2884,7 +2881,7 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
               otId);
 
     SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, src->party[monId].moves[i], i);
 
     evAmount = MAX_TOTAL_EVS / NUM_STATS;
@@ -2944,7 +2941,7 @@ void sub_80686FC(struct Pokemon *mon, struct BattleTowerPokemon *dest)
 
     dest->heldItem = heldItem;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         dest->moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
 
     dest->level = GetMonData(mon, MON_DATA_LEVEL, NULL);
@@ -3270,7 +3267,7 @@ u16 GiveMoveToMon(struct Pokemon *mon, u16 move)
 u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 {
     s32 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         u16 existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, NULL);
         if (!existingMove)
@@ -3289,7 +3286,7 @@ u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (!mon->moves[i])
         {
@@ -3392,7 +3389,7 @@ void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)
     moves[3] = move;
     pp[3] = gBattleMoves[move].pp;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         SetMonData(mon, MON_DATA_MOVE1 + i, &moves[i]);
         SetMonData(mon, MON_DATA_PP1 + i, &pp[i]);
@@ -3419,7 +3416,7 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     moves[3] = move;
     pp[3] = gBattleMoves[move].pp;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, &moves[i]);
         SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp[i]);
@@ -4853,7 +4850,7 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
             for (j = 0; j < 6; j++)
                 SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gBattleResources->secretBase->party.EVs[i]);
 
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, &gBattleResources->secretBase->party.moves[i * 4 + j]);
                 SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gBattleResources->secretBase->party.moves[i * 4 + j]].pp);
@@ -4942,7 +4939,7 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
     gBattleMons[battlerId].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battlerId].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         gBattleMons[battlerId].moves[i] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1 + i, NULL);
         gBattleMons[battlerId].pp[i] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PP1 + i, NULL);
@@ -5461,7 +5458,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             {
                                 if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -5487,7 +5484,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             {
                                 if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -5512,7 +5509,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             {
                                 if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == 11)
                                     friendship++;
-                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
                                     friendship++;
                             }
                             if (friendship < 0)
@@ -6160,7 +6157,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             {
                 if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
                     friendship++;
-                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == sav1_map_get_name())
+                if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == GetCurrentRegionMapSectionId())
                     friendship++;
             }
             if (friendship < 0)
@@ -6484,7 +6481,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     int i, j, k;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
 
     for (i = 0; i < 20; i++)
@@ -6498,10 +6495,10 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 
         if (moveLevel <= (level << 9))
         {
-            for (j = 0; j < 4 && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
                 ;
 
-            if (j == 4)
+            if (j == MAX_MON_MOVES)
             {
                 for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & 0x1FF); k++)
                     ;
@@ -6538,7 +6535,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     if (species == SPECIES_EGG)
         return 0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
 
     for (i = 0; i < 20; i++)
@@ -6552,10 +6549,10 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
         if (moveLevel <= (level << 9))
         {
-            for (j = 0; j < 4 && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
                 ;
 
-            if (j == 4)
+            if (j == MAX_MON_MOVES)
             {
                 for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & 0x1FF); k++)
                     ;
@@ -6799,7 +6796,7 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
 {
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0))
         {

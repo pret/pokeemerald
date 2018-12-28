@@ -4,8 +4,7 @@ BattleFrontier_Lounge2_MapScripts:: @ 8260642
 BattleFrontier_Lounge2_EventScript_260643:: @ 8260643
 	lock
 	faceplayer
-	checkflag FLAG_0x154
-	goto_eq BattleFrontier_Lounge2_EventScript_26065F
+	goto_if_set FLAG_0x154, BattleFrontier_Lounge2_EventScript_26065F
 	setflag FLAG_0x154
 	msgbox BattleFrontier_Lounge2_Text_260766, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge2_EventScript_26066D
@@ -18,29 +17,29 @@ BattleFrontier_Lounge2_EventScript_26065F:: @ 826065F
 
 BattleFrontier_Lounge2_EventScript_26066D:: @ 826066D
 	compare VAR_FRONTIER_MANIAC_FACILITY, 0
-	call_if 1, BattleFrontier_Lounge2_EventScript_26070A
+	call_if_eq BattleFrontier_Lounge2_EventScript_26070A
 	compare VAR_FRONTIER_MANIAC_FACILITY, 1
-	call_if 1, BattleFrontier_Lounge2_EventScript_26070F
+	call_if_eq BattleFrontier_Lounge2_EventScript_26070F
 	compare VAR_FRONTIER_MANIAC_FACILITY, 2
-	call_if 1, BattleFrontier_Lounge2_EventScript_260714
+	call_if_eq BattleFrontier_Lounge2_EventScript_260714
 	compare VAR_FRONTIER_MANIAC_FACILITY, 3
-	call_if 1, BattleFrontier_Lounge2_EventScript_260719
+	call_if_eq BattleFrontier_Lounge2_EventScript_260719
 	compare VAR_FRONTIER_MANIAC_FACILITY, 4
-	call_if 1, BattleFrontier_Lounge2_EventScript_26071E
+	call_if_eq BattleFrontier_Lounge2_EventScript_26071E
 	compare VAR_FRONTIER_MANIAC_FACILITY, 5
-	call_if 1, BattleFrontier_Lounge2_EventScript_260723
+	call_if_eq BattleFrontier_Lounge2_EventScript_260723
 	compare VAR_FRONTIER_MANIAC_FACILITY, 6
-	call_if 1, BattleFrontier_Lounge2_EventScript_260728
+	call_if_eq BattleFrontier_Lounge2_EventScript_260728
 	compare VAR_FRONTIER_MANIAC_FACILITY, 7
-	call_if 1, BattleFrontier_Lounge2_EventScript_26072D
+	call_if_eq BattleFrontier_Lounge2_EventScript_26072D
 	compare VAR_FRONTIER_MANIAC_FACILITY, 8
-	call_if 1, BattleFrontier_Lounge2_EventScript_260732
+	call_if_eq BattleFrontier_Lounge2_EventScript_260732
 	compare VAR_FRONTIER_MANIAC_FACILITY, 9
-	call_if 1, BattleFrontier_Lounge2_EventScript_260737
+	call_if_eq BattleFrontier_Lounge2_EventScript_260737
 	compare VAR_FRONTIER_MANIAC_FACILITY, 3
-	call_if 3, BattleFrontier_Lounge2_EventScript_2606F8
+	call_if_le BattleFrontier_Lounge2_EventScript_2606F8
 	compare VAR_FRONTIER_MANIAC_FACILITY, 4
-	call_if 4, BattleFrontier_Lounge2_EventScript_260701
+	call_if_ge BattleFrontier_Lounge2_EventScript_260701
 	special sub_8139F20
 	waitmessage
 	waitbuttonpress

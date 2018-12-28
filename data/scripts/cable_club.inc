@@ -21,10 +21,10 @@ VerdanturfTown_PokemonCenter_2F_MapScript1_276ACF: @ 8276ACF
 OldaleTown_PokemonCenter_2F_EventScript_276AD5:: @ 8276AD5
 	specialvar VAR_RESULT, sub_813B514
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276AFB
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276AFB
 	specialvar VAR_RESULT, sub_801B27C
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276AFF
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276AFF
 	goto OldaleTown_PokemonCenter_2F_EventScript_276AFB
 	end
 
@@ -55,7 +55,7 @@ SootopolisCity_PokemonCenter_2F_EventScript_276B03:: @ 8276B03
 VerdanturfTown_PokemonCenter_2F_EventScript_276B03:: @ 8276B03
 	specialvar VAR_RESULT, sub_813B514
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276B23
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276B23
 	goto OldaleTown_PokemonCenter_2F_EventScript_276B19
 	end
 
@@ -69,9 +69,8 @@ OldaleTown_PokemonCenter_2F_EventScript_276B1A:: @ 8276B1A
 OldaleTown_PokemonCenter_2F_EventScript_276B23:: @ 8276B23
 	checkitem ITEM_EON_TICKET, 1
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276B19
-	checkflag FLAG_SYS_HAS_EON_TICKET
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276B19
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276B19
+	goto_if_set FLAG_SYS_HAS_EON_TICKET, OldaleTown_PokemonCenter_2F_EventScript_276B19
 	msgbox gUnknown_08273594, MSGBOX_DEFAULT
 	giveitem_std ITEM_EON_TICKET
 	setflag FLAG_SYS_HAS_EON_TICKET
@@ -115,7 +114,7 @@ VerdanturfTown_PokemonCenter_2F_MapScript2_276B6C: @ 8276B6C
 MossdeepCity_GameCorner_1F_EventScript_276BAE:: @ 8276BAE
 OldaleTown_PokemonCenter_2F_EventScript_276BAE:: @ 8276BAE
 	compare VAR_0x8007, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276BBD
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276BBD
 	turnobject VAR_0x8007, 3
 
 OldaleTown_PokemonCenter_2F_EventScript_276BBD:: @ 8276BBD
@@ -140,21 +139,21 @@ SlateportCity_PokemonCenter_2F_MapScript1_276BBE: @ 8276BBE
 SootopolisCity_PokemonCenter_2F_MapScript1_276BBE: @ 8276BBE
 VerdanturfTown_PokemonCenter_2F_MapScript1_276BBE: @ 8276BBE
 	compare VAR_0x4087, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C17
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C17
 	compare VAR_0x4087, 2
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C17
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C17
 	compare VAR_0x4087, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C17
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C17
 	compare VAR_0x4087, 3
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C1D
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C1D
 	compare VAR_0x4087, 4
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C23
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C23
 	compare VAR_0x4087, 6
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C29
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C29
 	compare VAR_0x4087, 7
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C2F
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C2F
 	compare VAR_0x4087, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276C35
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276C35
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276C17:: @ 8276C17
@@ -234,7 +233,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276CB5:: @ 8276CB5
 	special CloseLink
 	setvar VAR_0x4087, 0
 	compare VAR_0x8007, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_27734D
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27734F
@@ -257,7 +256,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276CFF:: @ 8276CFF
 	special CloseLink
 	setvar VAR_0x4087, 0
 	compare VAR_0x8007, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735E
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_27734D
@@ -281,7 +280,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276D44:: @ 8276D44
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27734F
 	waitmovement 0
 	compare VAR_0x8007, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276D6B
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276D6B
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_277349
 	waitmovement 0
 
@@ -301,7 +300,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276D6C:: @ 8276D6C
 OldaleTown_PokemonCenter_2F_EventScript_276D84:: @ 8276D84
 	setvar VAR_0x4087, 0
 	compare VAR_0x8007, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276DD5
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735E
 	waitmovement 0
 	applymovement VAR_0x8007, OldaleTown_PokemonCenter_2F_Movement_27734D
@@ -360,8 +359,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276E22:: @ 8276E22
 
 OldaleTown_PokemonCenter_2F_EventScript_276E30:: @ 8276E30
 	setvar VAR_0x8004, 0
-	checkflag FLAG_VISITED_MAUVILLE_CITY
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276E75
+	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_276E75
 	multichoice 0, 0, 74, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_2770B2
@@ -411,7 +409,7 @@ OldaleTown_PokemonCenter_2F_EventScript_276F23:: @ 8276F23
 OldaleTown_PokemonCenter_2F_EventScript_276F2E:: @ 8276F2E
 	special HasEnoughMonsForDoubleBattle
 	compare VAR_RESULT, 0
-	goto_if 5, OldaleTown_PokemonCenter_2F_EventScript_276F47
+	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_276F47
 	setvar VAR_0x8004, 2
 	goto OldaleTown_PokemonCenter_2F_EventScript_276F60
 	end
@@ -429,23 +427,23 @@ OldaleTown_PokemonCenter_2F_EventScript_276F55:: @ 8276F55
 OldaleTown_PokemonCenter_2F_EventScript_276F60:: @ 8276F60
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2DA4
 	waitstate
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276FBD
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276FBD
 	compare VAR_RESULT, 2
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772D2
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772D2
 	compare VAR_RESULT, 3
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772DF
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772DF
 	compare VAR_RESULT, 4
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277046
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277046
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	compare VAR_RESULT, 6
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772C5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772C5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
@@ -468,12 +466,12 @@ OldaleTown_PokemonCenter_2F_EventScript_276FBD:: @ 8276FBD
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
 	compare VAR_0x8004, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277036
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277036
 	special SetCableClubWarp
 	warp MAP_SINGLE_BATTLE_COLOSSEUM, 255, 6, 8
 	special sub_80AF948
@@ -528,30 +526,30 @@ OldaleTown_PokemonCenter_2F_EventScript_2770B2:: @ 82770B2
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call OldaleTown_PokemonCenter_2F_EventScript_277199
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2E4C
 	waitstate
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27713A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27713A
 	compare VAR_RESULT, 2
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772D2
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772D2
 	compare VAR_RESULT, 3
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772DF
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772DF
 	compare VAR_RESULT, 4
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27730E
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27730E
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	compare VAR_RESULT, 6
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772C5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772C5
 	compare VAR_RESULT, 7
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772AB
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772AB
 	compare VAR_RESULT, 9
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772B8
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772B8
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
@@ -572,7 +570,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -585,10 +583,10 @@ OldaleTown_PokemonCenter_2F_EventScript_27713A:: @ 827713A
 OldaleTown_PokemonCenter_2F_EventScript_277199:: @ 8277199
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, 2
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_2771BF
+	goto_if_lt OldaleTown_PokemonCenter_2F_EventScript_2771BF
 	specialvar VAR_RESULT, sub_80F9370
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2771CD
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2771CD
 	setvar VAR_RESULT, 1
 	return
 
@@ -606,7 +604,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2771DB:: @ 82771DB
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	message gText_PleaseWaitForLink
 	waitmessage
 	special sub_80B2E74
@@ -614,19 +612,19 @@ OldaleTown_PokemonCenter_2F_EventScript_2771DB:: @ 82771DB
 	special sub_80B2EA8
 	waitstate
 	compare VAR_RESULT, 12
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277328
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277328
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27724C
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27724C
 	compare VAR_RESULT, 2
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772D2
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772D2
 	compare VAR_RESULT, 3
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772DF
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772DF
 	compare VAR_RESULT, 4
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27730E
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27730E
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	compare VAR_RESULT, 6
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772C5
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772C5
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
@@ -647,7 +645,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27724C:: @ 827724C
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -810,7 +808,7 @@ gUnknown_08277388:: @ 8277388
 	special sub_80F9438
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
 	setvar VAR_0x8005, 0
 	special sub_80B3968
 	waitstate
@@ -821,7 +819,7 @@ gUnknown_082773A3:: @ 82773A3
 	special sub_80F9438
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
 	setvar VAR_0x8005, 1
 	special sub_80B3968
 	waitstate
@@ -832,7 +830,7 @@ gUnknown_082773BE:: @ 82773BE
 	special sub_80F9438
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
 	setvar VAR_0x8005, 2
 	special sub_80B3968
 	waitstate
@@ -843,7 +841,7 @@ gUnknown_082773D9:: @ 82773D9
 	special sub_80F9438
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
 	setvar VAR_0x8005, 3
 	special sub_80B3968
 	waitstate
@@ -881,7 +879,7 @@ gUnknown_0827741D:: @ 827741D
 	special sub_80E6BE8
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_277471
+	goto_if_ne RecordCorner_EventScript_277471
 	end
 
 gUnknown_08277432:: @ 8277432
@@ -889,7 +887,7 @@ gUnknown_08277432:: @ 8277432
 	special sub_80E6BE8
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_277471
+	goto_if_ne RecordCorner_EventScript_277471
 	end
 
 gUnknown_08277447:: @ 8277447
@@ -897,7 +895,7 @@ gUnknown_08277447:: @ 8277447
 	special sub_80E6BE8
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_277471
+	goto_if_ne RecordCorner_EventScript_277471
 	end
 
 gUnknown_0827745C:: @ 827745C
@@ -905,7 +903,7 @@ gUnknown_0827745C:: @ 827745C
 	special sub_80E6BE8
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_277471
+	goto_if_ne RecordCorner_EventScript_277471
 	end
 
 RecordCorner_EventScript_277471:: @ 8277471
@@ -951,7 +949,7 @@ TradeCenter_EventScript_2774B6:: @ 82774B6
 
 RecordCorner_EventScript_2774C6:: @ 82774C6
 	compare VAR_TEMP_0, 0
-	goto_if 5, RecordCorner_EventScript_2774E0
+	goto_if_ne RecordCorner_EventScript_2774E0
 	special sub_8098574
 	message RecordCorner_Text_27861C
 	waitmessage
@@ -972,7 +970,7 @@ RecordCorner_EventScript_2774E0:: @ 82774E0
 gUnknown_082774EF:: @ 82774EF
 	msgbox Text_2783A8, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq gUnknown_08277509
+	goto_if_eq gUnknown_08277509
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -993,15 +991,14 @@ OldaleTown_PokemonCenter_2F_EventScript_27751B:: @ 827751B
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 8
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_277335
+	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
 	specialvar VAR_RESULT, sub_813990C
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277668
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277668
 	message OldaleTown_PokemonCenter_2F_Text_27940D
 	waitmessage
 	goto OldaleTown_PokemonCenter_2F_EventScript_27755C
@@ -1025,10 +1022,10 @@ OldaleTown_PokemonCenter_2F_EventScript_277593:: @ 8277593
 OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	call OldaleTown_PokemonCenter_2F_EventScript_277626
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	msgbox OldaleTown_PokemonCenter_2F_Text_27961C, MSGBOX_DEFAULT
 	closemessage
 	special HealPlayerParty
@@ -1046,7 +1043,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 5, 1
 	waitdooranim
 	special sub_8018090
@@ -1060,10 +1057,10 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 OldaleTown_PokemonCenter_2F_EventScript_277626:: @ 8277626
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 2
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27764C
+	goto_if_lt OldaleTown_PokemonCenter_2F_EventScript_27764C
 	specialvar VAR_RESULT, sub_80F9370
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27765A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27765A
 	setvar VAR_RESULT, 1
 	return
 
@@ -1085,11 +1082,10 @@ OldaleTown_PokemonCenter_2F_EventScript_277668:: @ 8277668
 OldaleTown_PokemonCenter_2F_EventScript_277672:: @ 8277672
 	lock
 	faceplayer
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_277335
+	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
 	msgbox OldaleTown_PokemonCenter_2F_Text_279937, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27769A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27769A
 	msgbox OldaleTown_PokemonCenter_2F_Text_2799AA, MSGBOX_DEFAULT
 	release
 	return
@@ -1103,14 +1099,13 @@ OldaleTown_PokemonCenter_2F_EventScript_2776A4:: @ 82776A4
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 9
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_277335
+	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_277335
 	specialvar VAR_RESULT, sub_813990C
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27731B
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_276E13
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_276E13
 	message OldaleTown_PokemonCenter_2F_Text_279013
 	waitmessage
 	delay 28
@@ -1120,9 +1115,8 @@ OldaleTown_PokemonCenter_2F_EventScript_2776A4:: @ 82776A4
 OldaleTown_PokemonCenter_2F_EventScript_2776E3:: @ 82776E3
 	checkitem ITEM_POWDER_JAR, 1
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27778B
-	checkflag FLAG_VISITED_MAUVILLE_CITY
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_27773E
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_27778B
+	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_27773E
 	multichoice 0, 0, 78, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
@@ -1144,8 +1138,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27773E:: @ 827773E
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_27778B:: @ 827778B
-	checkflag FLAG_VISITED_MAUVILLE_CITY
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2777CB
+	goto_if_set FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_2777CB
 	multichoice 0, 0, 75, 0
 	switch VAR_RESULT
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_27780D
@@ -1167,10 +1160,10 @@ OldaleTown_PokemonCenter_2F_EventScript_2777CB:: @ 82777CB
 OldaleTown_PokemonCenter_2F_EventScript_27780D:: @ 827780D
 	msgbox OldaleTown_PokemonCenter_2F_Text_27909D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	call OldaleTown_PokemonCenter_2F_EventScript_277199
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	setvar VAR_0x8004, 3
 	goto OldaleTown_PokemonCenter_2F_EventScript_277931
 	end
@@ -1196,7 +1189,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27788E:: @ 827788E
 OldaleTown_PokemonCenter_2F_EventScript_277899:: @ 8277899
 	special HasEnoughMonsForDoubleBattle
 	compare VAR_RESULT, 0
-	goto_if 5, OldaleTown_PokemonCenter_2F_EventScript_2778B2
+	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_2778B2
 	setvar VAR_0x8004, 1
 	goto OldaleTown_PokemonCenter_2F_EventScript_277931
 	end
@@ -1219,7 +1212,7 @@ OldaleTown_PokemonCenter_2F_EventScript_2778CB:: @ 82778CB
 OldaleTown_PokemonCenter_2F_EventScript_2778D9:: @ 82778D9
 	msgbox OldaleTown_PokemonCenter_2F_Text_2790E8, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	setvar VAR_0x8004, 12
 	goto OldaleTown_PokemonCenter_2F_EventScript_277931
 	end
@@ -1227,10 +1220,10 @@ OldaleTown_PokemonCenter_2F_EventScript_2778D9:: @ 82778D9
 OldaleTown_PokemonCenter_2F_EventScript_2778F7:: @ 82778F7
 	msgbox OldaleTown_PokemonCenter_2F_Text_279114, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	special HasAtLeastOneBerry
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277923
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277923
 	setvar VAR_0x8004, 5
 	goto OldaleTown_PokemonCenter_2F_EventScript_277931
 	end
@@ -1243,7 +1236,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277923:: @ 8277923
 OldaleTown_PokemonCenter_2F_EventScript_277931:: @ 8277931
 	call OldaleTown_PokemonCenter_2F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2772EC
 	switch VAR_0x8004
 	case 3, OldaleTown_PokemonCenter_2F_EventScript_277989
 	case 0, OldaleTown_PokemonCenter_2F_EventScript_277989
@@ -1267,22 +1260,22 @@ OldaleTown_PokemonCenter_2F_EventScript_277989:: @ 8277989
 OldaleTown_PokemonCenter_2F_EventScript_2779C6:: @ 82779C6
 	call OldaleTown_PokemonCenter_2F_EventScript_277B30
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277989
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277989
 	compare VAR_RESULT, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2779C6
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2779C6
 	release
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_2779EE:: @ 82779EE
 	call OldaleTown_PokemonCenter_2F_EventScript_277B35
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277989
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277989
 	compare VAR_RESULT, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_2779EE
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_2779EE
 	release
 	return
 
@@ -1300,22 +1293,22 @@ OldaleTown_PokemonCenter_2F_EventScript_277A16:: @ 8277A16
 OldaleTown_PokemonCenter_2F_EventScript_277A53:: @ 8277A53
 	call OldaleTown_PokemonCenter_2F_EventScript_277B30
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277A16
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277A16
 	compare VAR_RESULT, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277A53
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277A53
 	release
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_277A7B:: @ 8277A7B
 	call OldaleTown_PokemonCenter_2F_EventScript_277B35
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277A16
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277A16
 	compare VAR_RESULT, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277A7B
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277A7B
 	release
 	return
 
@@ -1333,22 +1326,22 @@ OldaleTown_PokemonCenter_2F_EventScript_277AA3:: @ 8277AA3
 OldaleTown_PokemonCenter_2F_EventScript_277AE0:: @ 8277AE0
 	call OldaleTown_PokemonCenter_2F_EventScript_277B30
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277AA3
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277AA3
 	compare VAR_RESULT, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277AE0
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277AE0
 	release
 	return
 
 OldaleTown_PokemonCenter_2F_EventScript_277B08:: @ 8277B08
 	call OldaleTown_PokemonCenter_2F_EventScript_277B35
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B3A
 	compare VAR_RESULT, 5
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277AA3
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277AA3
 	compare VAR_RESULT, 8
-	goto_eq OldaleTown_PokemonCenter_2F_EventScript_277B08
+	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_277B08
 	release
 	return
 
@@ -1385,7 +1378,7 @@ OldaleTown_PokemonCenter_2F_EventScript_277B3A:: @ 8277B3A
 	waitdooranim
 	applymovement EVENT_OBJ_ID_PLAYER, OldaleTown_PokemonCenter_2F_Movement_27735A
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1394,11 +1387,10 @@ OldaleTown_PokemonCenter_2F_EventScript_277B3A:: @ 8277B3A
 
 EventScript_WirelessBoxResults:: @ 8277B8A
 	lockall
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27733F
+	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_27733F
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_eq EventScript_277BB4
+	goto_if_eq EventScript_277BB4
 	fadescreen 1
 	special sub_801A42C
 	waitstate
@@ -1497,7 +1489,7 @@ MossdeepCity_GameCorner_1F_EventScript_277C91:: @ 8277C91
 	waitmessage
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E48
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277E48
 	delay 60
 	message MossdeepCity_GameCorner_1F_Text_278DAD
 	waitmessage
@@ -1513,17 +1505,17 @@ MossdeepCity_GameCorner_1F_EventScript_277CE9:: @ 8277CE9
 	setvar VAR_0x8005, 0
 	special sub_802C920
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E55
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277E55
 	msgbox MossdeepCity_GameCorner_1F_Text_278DD9, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8005, 0
 	special sub_81B8958
 	waitstate
 	compare VAR_0x8004, 6
-	goto_if 4, MossdeepCity_GameCorner_1F_EventScript_2772F9
+	goto_if_ge MossdeepCity_GameCorner_1F_EventScript_2772F9
 	call MossdeepCity_GameCorner_1F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	setvar VAR_0x8004, 4
 	goto MossdeepCity_GameCorner_1F_EventScript_277D81
 	end
@@ -1532,17 +1524,17 @@ MossdeepCity_GameCorner_1F_EventScript_277D35:: @ 8277D35
 	setvar VAR_0x8005, 1
 	special sub_8027A5C
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E55
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277E55
 	msgbox MossdeepCity_GameCorner_1F_Text_278DD9, MSGBOX_DEFAULT
 	fadescreen 1
 	setvar VAR_0x8005, 1
 	special sub_81B8958
 	waitstate
 	compare VAR_0x8004, 6
-	goto_if 4, MossdeepCity_GameCorner_1F_EventScript_2772F9
+	goto_if_ge MossdeepCity_GameCorner_1F_EventScript_2772F9
 	call MossdeepCity_GameCorner_1F_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	setvar VAR_0x8004, 6
 	goto MossdeepCity_GameCorner_1F_EventScript_277D81
 	end
@@ -1561,22 +1553,22 @@ MossdeepCity_GameCorner_1F_EventScript_277D81:: @ 8277D81
 MossdeepCity_GameCorner_1F_EventScript_277DBE:: @ 8277DBE
 	call MossdeepCity_GameCorner_1F_EventScript_277B30
 	compare VAR_RESULT, 1
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E0E
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277E0E
 	compare VAR_RESULT, 5
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277D81
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277D81
 	compare VAR_RESULT, 8
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277DBE
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277DBE
 	release
 	return
 
 MossdeepCity_GameCorner_1F_EventScript_277DE6:: @ 8277DE6
 	call MossdeepCity_GameCorner_1F_EventScript_277B35
 	compare VAR_RESULT, 1
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277E0E
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277E0E
 	compare VAR_RESULT, 5
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277D81
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277D81
 	compare VAR_RESULT, 8
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_277DE6
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_277DE6
 	release
 	return
 
@@ -1595,7 +1587,7 @@ MossdeepCity_GameCorner_1F_EventScript_277E0E:: @ 8277E0E
 	closemessage
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_GameCorner_1F_Movement_277360
 	waitmovement 0
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	release
 	waitstate
 	end
@@ -1609,11 +1601,11 @@ MossdeepCity_GameCorner_1F_EventScript_277E48:: @ 8277E48
 MossdeepCity_GameCorner_1F_EventScript_277E55:: @ 8277E55
 	msgbox MossdeepCity_GameCorner_1F_Text_278E60, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
+	goto_if_eq MossdeepCity_GameCorner_1F_EventScript_2772F9
 	compare VAR_0x8005, 0
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_277E84
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_277E84
 	compare VAR_0x8005, 1
-	call_if 1, MossdeepCity_GameCorner_1F_EventScript_277E8D
+	call_if_eq MossdeepCity_GameCorner_1F_EventScript_277E8D
 	goto MossdeepCity_GameCorner_1F_EventScript_2772F9
 	end
 

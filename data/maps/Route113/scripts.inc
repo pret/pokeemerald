@@ -8,17 +8,17 @@ Route113_MapScript1_1F215E: @ 81F215E
 	end
 
 Route113_MapScript1_1F2161: @ 81F2161
-	clearflag FLAG_0x09D
+	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	call Route113_EventScript_1F216A
 	end
 
 Route113_EventScript_1F216A:: @ 81F216A
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 19
-	goto_if 0, Route113_EventScript_1F2189
+	goto_if_lt Route113_EventScript_1F2189
 	compare VAR_TEMP_0, 84
-	goto_if 2, Route113_EventScript_1F2189
-	setweather 7
+	goto_if_gt Route113_EventScript_1F2189
+	setweather WEATHER_ASH
 	return
 
 Route113_EventScript_1F2189:: @ 81F2189
@@ -62,7 +62,7 @@ Route113_EventScript_1F21EE:: @ 81F21EE
 	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_299EA6, Route113_Text_299EF9, Route113_EventScript_1F221A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route113_EventScript_1F2239
+	goto_if_eq Route113_EventScript_1F2239
 	msgbox Route113_Text_299F15, MSGBOX_DEFAULT
 	release
 	end
@@ -84,7 +84,7 @@ Route113_EventScript_1F2250:: @ 81F2250
 	trainerbattle_single TRAINER_LAO_1, Route113_Text_29A015, Route113_Text_29A04C, Route113_EventScript_1F227C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route113_EventScript_1F229B
+	goto_if_eq Route113_EventScript_1F229B
 	msgbox Route113_Text_29A067, MSGBOX_DEFAULT
 	release
 	end

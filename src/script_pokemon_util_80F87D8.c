@@ -36,8 +36,6 @@ extern const u16 gEventObjectPalette33[];
 extern const u16 gEventObjectPalette34[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
-extern u8 gSelectedOrderFromParty[];
-
 static const u8 gUnknown_0858D8EC[] = { 3, 4, 5, 14 };
 
 static void sub_80F8EE8(u8 taskId);
@@ -530,7 +528,7 @@ void HealPlayerParty(void)
         ppBonuses = GetMonData(&gPlayerParty[i], MON_DATA_PP_BONUSES);
 
         // restore PP.
-        for(j = 0; j < 4; j++)
+        for(j = 0; j < MAX_MON_MOVES; j++)
         {
             arg[0] = CalculatePPWithBonus(GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j), ppBonuses, j);
             SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, arg);

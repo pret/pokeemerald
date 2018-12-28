@@ -7,7 +7,7 @@ DewfordTown_Hall_EventScript_1FD4D0:: @ 81FD4D0
 	call DewfordTown_Hall_EventScript_271E8B
 	special TrendyPhraseIsOld
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_Hall_EventScript_1FD4EF
+	goto_if_eq DewfordTown_Hall_EventScript_1FD4EF
 	msgbox DewfordTown_Hall_Text_1FD818, MSGBOX_DEFAULT
 	release
 	end
@@ -32,9 +32,9 @@ DewfordTown_Hall_EventScript_1FD50A:: @ 81FD50A
 	special sub_811EF6C
 	msgbox DewfordTown_Hall_Text_1FD948, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq DewfordTown_Hall_EventScript_1FD533
+	goto_if_eq DewfordTown_Hall_EventScript_1FD533
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_Hall_EventScript_1FD53D
+	goto_if_eq DewfordTown_Hall_EventScript_1FD53D
 	end
 
 DewfordTown_Hall_EventScript_1FD533:: @ 81FD533
@@ -192,14 +192,14 @@ DewfordTown_Hall_EventScript_1FD73A:: @ 81FD73A
 	applymovement 8, DewfordTown_Hall_Movement_1FD7D6
 	waitmovement 0
 	compare VAR_0x8008, 0
-	goto_eq DewfordTown_Hall_EventScript_1FD75B
+	goto_if_eq DewfordTown_Hall_EventScript_1FD75B
 	compare VAR_0x8008, 1
-	goto_eq DewfordTown_Hall_EventScript_1FD771
+	goto_if_eq DewfordTown_Hall_EventScript_1FD771
 	end
 
 DewfordTown_Hall_EventScript_1FD75B:: @ 81FD75B
 	compare VAR_FACING, 4
-	goto_eq DewfordTown_Hall_EventScript_1FD739
+	goto_if_eq DewfordTown_Hall_EventScript_1FD739
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A8
 	waitmovement 0
 	return
@@ -211,16 +211,16 @@ DewfordTown_Hall_EventScript_1FD772:: @ 81FD772
 	applymovement 7, DewfordTown_Hall_Movement_1FD7D8
 	waitmovement 0
 	compare VAR_0x8008, 0
-	goto_eq DewfordTown_Hall_EventScript_1FD793
+	goto_if_eq DewfordTown_Hall_EventScript_1FD793
 	compare VAR_0x8008, 1
-	goto_eq DewfordTown_Hall_EventScript_1FD7C0
+	goto_if_eq DewfordTown_Hall_EventScript_1FD7C0
 	end
 
 DewfordTown_Hall_EventScript_1FD793:: @ 81FD793
 	compare VAR_FACING, 2
-	call_if 1, DewfordTown_Hall_EventScript_1FD7AA
+	call_if_eq DewfordTown_Hall_EventScript_1FD7AA
 	compare VAR_FACING, 1
-	call_if 1, DewfordTown_Hall_EventScript_1FD7B5
+	call_if_eq DewfordTown_Hall_EventScript_1FD7B5
 	return
 
 DewfordTown_Hall_EventScript_1FD7AA:: @ 81FD7AA
@@ -235,7 +235,7 @@ DewfordTown_Hall_EventScript_1FD7B5:: @ 81FD7B5
 
 DewfordTown_Hall_EventScript_1FD7C0:: @ 81FD7C0
 	compare VAR_FACING, 3
-	goto_eq DewfordTown_Hall_EventScript_1FD739
+	goto_if_eq DewfordTown_Hall_EventScript_1FD739
 	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A4
 	waitmovement 0
 	return
@@ -252,12 +252,11 @@ DewfordTown_Hall_EventScript_1FD7DA:: @ 81FD7DA
 	lock
 	faceplayer
 	call DewfordTown_Hall_EventScript_271E8B
-	checkflag FLAG_RECEIVED_TM_36
-	goto_eq DewfordTown_Hall_EventScript_1FD80E
+	goto_if_set FLAG_RECEIVED_TM_36, DewfordTown_Hall_EventScript_1FD80E
 	msgbox DewfordTown_Hall_Text_1FE142, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM36
 	compare VAR_RESULT, 0
-	goto_eq DewfordTown_Hall_EventScript_272054
+	goto_if_eq DewfordTown_Hall_EventScript_272054
 	setflag FLAG_RECEIVED_TM_36
 	release
 	end

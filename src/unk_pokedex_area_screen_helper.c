@@ -22,21 +22,21 @@ void sub_81C4D70(const struct UnkStruct_1C4D70 *template)
 
     if (unk == 0)
     {
-        SetBgAttribute(template->bg, BG_CTRL_ATTR_WRAPAROUND, 0);
+        SetBgAttribute(template->bg, BG_ATTR_METRIC, 0);
         decompress_and_copy_tile_data_to_vram(template->bg, gUnknown_0861D1A0, 0, template->unk2, unk);
         sub_8199D3C(decompress_and_copy_tile_data_to_vram(template->bg, gUnknown_0861DEF4, 0, 0, 1), template->unk2, 32, 32, unk);
     }
     else
     {
-        SetBgAttribute(template->bg, BG_CTRL_ATTR_WRAPAROUND, 2);
-        SetBgAttribute(template->bg, 9, 1);
+        SetBgAttribute(template->bg, BG_ATTR_METRIC, 2);
+        SetBgAttribute(template->bg, BG_ATTR_TYPE, 1);
         decompress_and_copy_tile_data_to_vram(template->bg, gUnknown_0861E208, 0, template->unk2, 0);
         sub_8199D3C(decompress_and_copy_tile_data_to_vram(template->bg, gUnknown_0861EF64, 0, 0, 1), template->unk2, 64, 64, 1);
     }
 
     ChangeBgX(template->bg, 0, 0);
     ChangeBgY(template->bg, 0, 0);
-    SetBgAttribute(template->bg, BG_CTRL_ATTR_SCREENSIZE, 1);
+    SetBgAttribute(template->bg, BG_ATTR_PALETTEMODE, 1);
     CpuCopy32(gUnknown_0861D140, &gPlttBufferUnfaded[0x70], 0x60);
     *gUnknown_0203CF28 = template->bg;
 }

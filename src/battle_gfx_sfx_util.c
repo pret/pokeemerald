@@ -16,6 +16,7 @@
 #include "sprite.h"
 #include "sound.h"
 #include <m4a.h>
+#include "party_menu.h"
 #include "constants/species.h"
 #include "decompress.h"
 #include "data2.h"
@@ -41,10 +42,6 @@ extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const u8 gEnemyMonElevation[];
-
-extern u8 sub_80688F8(u8, u8 battlerId);
-extern u8 pokemon_order_func(u8); // party menu
-extern void sub_81B8C68(void);
 
 // this file's functions
 static u8 sub_805D4A8(u16 move);
@@ -141,7 +138,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     if (i == var1)
         percent = 2;
 
-    for (var2 = 0, i = 0; i < 4; i++)
+    for (var2 = 0, i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moveInfo->moves[i] == MOVE_NONE)
             break;
@@ -163,7 +160,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
         {
             var1 = 0, var2 = 0;
 
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (sub_805D4A8(moveInfo->moves[i]) == 0 && !(gBitTable[i] & unusableMovesBits))
                     var1 += 0x1;
@@ -184,7 +181,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
             {
                 do
                 {
-                    i = Random() % 4;
+                    i = Random() % MAX_MON_MOVES;
                     if (!(gBitTable[i] & unusableMovesBits))
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
@@ -200,7 +197,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 
                 do
                 {
-                    i = Random() % 4;
+                    i = Random() % MAX_MON_MOVES;
                     if (!(gBitTable[i] & unusableMovesBits) && var2 == sub_805D4A8(moveInfo->moves[i]))
                         chosenMoveId = i;
                 } while (chosenMoveId == -1);
@@ -685,7 +682,7 @@ void BattleLoadAllHealthBoxesGfxAtOnce(void)
         LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[1]);
         LoadCompressedSpriteSheet(&sSpriteSheets_DoublesOpponentHealthbox[0]);
         LoadCompressedSpriteSheet(&sSpriteSheets_DoublesOpponentHealthbox[1]);
-        numberOfBattlers = 4;
+        numberOfBattlers = MAX_BATTLERS_COUNT;
     }
     for (i = 0; i < numberOfBattlers; i++)
         LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[gBattlerPositions[i]]);

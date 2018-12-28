@@ -9,7 +9,7 @@ BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721
 
 BattleFrontier_BattlePyramidLobby_EventScript_25072B: @ 825072B
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250735: @ 8250735
@@ -53,7 +53,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507B1:: @ 82507B1
 	setvar VAR_0x8004, 10
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_2507D2
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_2507D2
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2517B5, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_2507DA
 
@@ -63,7 +63,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507D2:: @ 82507D2
 BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special sub_81B95E0
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePyramidLobby_EventScript_250DDB
+	call_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250DDB
 	clearflag FLAG_SPECIAL_FLAG_0x4004
 	setvar VAR_0x8004, 8
 	special CallFrontierUtilFunc
@@ -154,7 +154,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250A75
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250A75
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
@@ -167,7 +167,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AC1
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250AC1
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2514E6, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePyramidLobby_EventScript_250AC1
@@ -203,7 +203,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	call BattleFrontier_BattlePyramidLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AAA
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250AAA
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	special SavePlayerParty
@@ -286,7 +286,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B28:: @ 8250B28
 	setvar VAR_0x8005, 5
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattlePyramidLobby_EventScript_250B53
+	goto_if_ne BattleFrontier_BattlePyramidLobby_EventScript_250B53
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
 	return
@@ -304,7 +304,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B66:: @ 8250B66
 	setvar VAR_0x8005, 6
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattlePyramidLobby_EventScript_250B91
+	goto_if_ne BattleFrontier_BattlePyramidLobby_EventScript_250B91
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
 	return
@@ -441,7 +441,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D56:: @ 8250D56
 	setvar VAR_0x8005, 1
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250D94
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250D94
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2515AD, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250D9C
 
@@ -497,7 +497,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250DDB:: @ 8250DDB
 	setflag FLAG_SPECIAL_FLAG_0x4004
 	special sub_81C6A94
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250E00
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250E00
 	message BattleFrontier_BattlePyramidLobby_Text_2518C6
 	waitmessage
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250E09
@@ -535,7 +535,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E50:: @ 8250E50
 BattleFrontier_BattlePyramidLobby_EventScript_250E60:: @ 8250E60
 	special sub_81B95E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250E6F
+	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_250E6F
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E6F:: @ 8250E6F

@@ -1131,7 +1131,7 @@ void sub_8127ACC(u8 taskId)
 void sub_8127B04(u8 taskId)
 {
     DrawWholeMapView();
-    Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
+    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
     WarpIntoMap();
 }
 

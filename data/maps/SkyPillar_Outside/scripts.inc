@@ -6,9 +6,9 @@ SkyPillar_Outside_MapScripts:: @ 82392A8
 
 SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
 	compare VAR_0x405E, 3
-	call_if 1, SkyPillar_Outside_EventScript_2392CF
+	call_if_eq SkyPillar_Outside_EventScript_2392CF
 	compare VAR_0x405E, 4
-	call_if 4, SkyPillar_Outside_EventScript_2392D3
+	call_if_ge SkyPillar_Outside_EventScript_2392D3
 	end
 
 SkyPillar_Outside_EventScript_2392CF:: @ 82392CF
@@ -16,13 +16,11 @@ SkyPillar_Outside_EventScript_2392CF:: @ 82392CF
 	return
 
 SkyPillar_Outside_EventScript_2392D3:: @ 82392D3
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, SkyPillar_Outside_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, SkyPillar_Outside_EventScript_27207A
 	return
 
 SkyPillar_Outside_MapScript1_2392DD: @ 82392DD
-	checkflag FLAG_0x137
-	call_if 1, SkyPillar_Outside_EventScript_2392E7
+	call_if_set FLAG_0x137, SkyPillar_Outside_EventScript_2392E7
 	end
 
 SkyPillar_Outside_EventScript_2392E7:: @ 82392E7
@@ -74,7 +72,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	msgbox SkyPillar_Outside_Text_23950C, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SYS_WEATHER_CTRL
-	setweather 15
+	setweather WEATHER_15
 	doweather
 	special WaitWeather
 	waitstate

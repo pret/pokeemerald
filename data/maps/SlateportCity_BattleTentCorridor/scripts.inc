@@ -10,12 +10,12 @@ SlateportCity_BattleTentCorridor_MapScript2_208E31: @ 8208E31
 SlateportCity_BattleTentCorridor_EventScript_208E3B:: @ 8208E3B
 	setvar VAR_TEMP_1, 1
 	compare VAR_0x8006, 1
-	goto_if 5, SlateportCity_BattleTentCorridor_EventScript_208E56
+	goto_if_ne SlateportCity_BattleTentCorridor_EventScript_208E56
 	setobjectxy 1, 2, 2
 	turnobject 1, 1
 
 SlateportCity_BattleTentCorridor_EventScript_208E56:: @ 8208E56
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 SlateportCity_BattleTentCorridor_MapScript2_208E5B: @ 8208E5B
@@ -24,13 +24,13 @@ SlateportCity_BattleTentCorridor_MapScript2_208E5B: @ 8208E5B
 
 SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
 	compare VAR_0x8006, 1
-	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EEE
+	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_208EEE
 	setvar VAR_TEMP_0, 1
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_209062
 	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_BattleTentCorridor_Movement_209059
 	waitmovement 0
 	compare VAR_0x8006, 2
-	goto_eq SlateportCity_BattleTentCorridor_EventScript_209044
+	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_209044
 	setvar VAR_0x8004, 9
 	special sub_81B9D08
 	setvar VAR_0x8004, 8
@@ -72,9 +72,9 @@ SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, SlateportCity_BattleTentCorridor_EventScript_209014
+	call_if_eq SlateportCity_BattleTentCorridor_EventScript_209014
 	compare VAR_RESULT, 2
-	call_if 1, SlateportCity_BattleTentCorridor_EventScript_20901B
+	call_if_eq SlateportCity_BattleTentCorridor_EventScript_20901B
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
 	case 0, SlateportCity_BattleTentCorridor_EventScript_208FBB
@@ -112,7 +112,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	special sub_81B9D08
 	waitstate
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
+	goto_if_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB6C, MSGBOX_DEFAULT
 	goto SlateportCity_BattleTentCorridor_EventScript_208EB4
 

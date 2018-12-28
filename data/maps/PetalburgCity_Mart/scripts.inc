@@ -6,8 +6,7 @@ PetalburgCity_Mart_EventScript_207D69:: @ 8207D69
 	faceplayer
 	message gUnknown_08272A21
 	waitmessage
-	checkflag FLAG_0x128
-	goto_eq PetalburgCity_Mart_EventScript_207DA6
+	goto_if_set FLAG_0x128, PetalburgCity_Mart_EventScript_207DA6
 	pokemart PetalburgCity_Mart_Pokemart_207D8C
 	msgbox gUnknown_08272A3F, MSGBOX_DEFAULT
 	release

@@ -6,7 +6,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D
 	compare VAR_0x408F, 0
-	call_if 1, RustboroCity_DevonCorp_3F_EventScript_212449
+	call_if_eq RustboroCity_DevonCorp_3F_EventScript_212449
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_212449:: @ 8212449
@@ -19,7 +19,7 @@ RustboroCity_DevonCorp_3F_MapScript2_212455: @ 8212455
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_21245F:: @ 821245F
-	turnobject 255, 4
+	turnobject EVENT_OBJ_ID_PLAYER, 4
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_212464: @ 8212464
@@ -150,10 +150,8 @@ RustboroCity_DevonCorp_3F_Movement_212566: @ 8212566
 RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 	lock
 	faceplayer
-	checkflag FLAG_0x110
-	goto_eq RustboroCity_DevonCorp_3F_EventScript_2125CC
-	checkflag FLAG_0x0BD
-	goto_eq RustboroCity_DevonCorp_3F_EventScript_212595
+	goto_if_set FLAG_0x110, RustboroCity_DevonCorp_3F_EventScript_2125CC
+	goto_if_set FLAG_0x0BD, RustboroCity_DevonCorp_3F_EventScript_212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A09, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
@@ -165,7 +163,7 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A29, MSGBOX_DEFAULT
 	giveitem_std ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
-	goto_eq RustboroCity_DevonCorp_3F_EventScript_272054
+	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_272054
 	setflag FLAG_0x110
 	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, MSGBOX_DEFAULT
 	closemessage
@@ -185,8 +183,7 @@ RustboroCity_DevonCorp_3F_EventScript_2125CC:: @ 82125CC
 RustboroCity_DevonCorp_3F_EventScript_2125E1:: @ 82125E1
 	lock
 	faceplayer
-	checkflag FLAG_0x100
-	goto_eq RustboroCity_DevonCorp_3F_EventScript_2125F6
+	goto_if_set FLAG_0x100, RustboroCity_DevonCorp_3F_EventScript_2125F6
 	msgbox RustboroCity_DevonCorp_3F_Text_212E41, MSGBOX_DEFAULT
 	release
 	end

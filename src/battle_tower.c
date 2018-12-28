@@ -31,8 +31,6 @@
 #include "constants/species.h"
 #include "constants/easy_chat.h"
 
-extern void sub_81A4C30(void);
-
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224157[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_224166[];
 
@@ -942,55 +940,55 @@ struct
     const u8 *const *strings;
 } const gUnknown_085DD500[] =
 {
-    {FACILITY_CLASS_LASS,                  gUnknown_085DD118}, 
-    {FACILITY_CLASS_YOUNGSTER,             gUnknown_085DD12C}, 
-    {FACILITY_CLASS_HIKER,                 gUnknown_085DD140}, 
-    {FACILITY_CLASS_BEAUTY,                gUnknown_085DD154}, 
-    {FACILITY_CLASS_FISHERMAN,             gUnknown_085DD168}, 
-    {FACILITY_CLASS_LADY,                  gUnknown_085DD17C}, 
-    {FACILITY_CLASS_CYCLING_TRIATHLETE_F,  gUnknown_085DD190}, 
-    {FACILITY_CLASS_BUG_CATCHER,           gUnknown_085DD1A4}, 
-    {FACILITY_CLASS_SCHOOL_KID_M,          gUnknown_085DD1B8}, 
-    {FACILITY_CLASS_RICH_BOY,              gUnknown_085DD1CC}, 
-    {FACILITY_CLASS_BLACK_BELT,            gUnknown_085DD1E0}, 
-    {FACILITY_CLASS_TUBER_F,               gUnknown_085DD1F4}, 
-    {FACILITY_CLASS_HEX_MANIAC,            gUnknown_085DD208}, 
-    {FACILITY_CLASS_PKMN_BREEDER_M,        gUnknown_085DD21C}, 
-    {FACILITY_CLASS_RUNNING_TRIATHLETE_F,  gUnknown_085DD230}, 
-    {FACILITY_CLASS_RUNNING_TRIATHLETE_M,  gUnknown_085DD244}, 
-    {FACILITY_CLASS_BATTLE_GIRL,           gUnknown_085DD258}, 
-    {FACILITY_CLASS_CYCLING_TRIATHLETE_M,  gUnknown_085DD26C}, 
-    {FACILITY_CLASS_TUBER_M,               gUnknown_085DD280}, 
-    {FACILITY_CLASS_GUITARIST,             gUnknown_085DD294}, 
-    {FACILITY_CLASS_GENTLEMAN,             gUnknown_085DD2A8}, 
-    {FACILITY_CLASS_POKEFAN_M,             gUnknown_085DD2BC}, 
-    {FACILITY_CLASS_EXPERT_M,              gUnknown_085DD2D0}, 
-    {FACILITY_CLASS_EXPERT_F,              gUnknown_085DD2E4}, 
-    {FACILITY_CLASS_DRAGON_TAMER,          gUnknown_085DD2F8}, 
-    {FACILITY_CLASS_BIRD_KEEPER,           gUnknown_085DD30C}, 
-    {FACILITY_CLASS_NINJA_BOY,             gUnknown_085DD320}, 
-    {FACILITY_CLASS_PARASOL_LADY,          gUnknown_085DD334}, 
-    {FACILITY_CLASS_BUG_MANIAC,            gUnknown_085DD348}, 
-    {FACILITY_CLASS_SAILOR,                gUnknown_085DD35C}, 
-    {FACILITY_CLASS_COLLECTOR,             gUnknown_085DD370}, 
-    {FACILITY_CLASS_PKMN_RANGER_M,         gUnknown_085DD384}, 
-    {FACILITY_CLASS_PKMN_RANGER_F,         gUnknown_085DD398}, 
-    {FACILITY_CLASS_AROMA_LADY,            gUnknown_085DD3AC}, 
-    {FACILITY_CLASS_RUIN_MANIAC,           gUnknown_085DD3C0}, 
-    {FACILITY_CLASS_COOLTRAINER_M,         gUnknown_085DD3D4}, 
-    {FACILITY_CLASS_COOLTRAINER_F,         gUnknown_085DD3E8}, 
-    {FACILITY_CLASS_POKEMANIAC,            gUnknown_085DD3FC}, 
-    {FACILITY_CLASS_KINDLER,               gUnknown_085DD410}, 
-    {FACILITY_CLASS_CAMPER,                gUnknown_085DD424}, 
-    {FACILITY_CLASS_PICNICKER,             gUnknown_085DD438}, 
-    {FACILITY_CLASS_PSYCHIC_M,             gUnknown_085DD44C}, 
-    {FACILITY_CLASS_PSYCHIC_F,             gUnknown_085DD460}, 
-    {FACILITY_CLASS_SCHOOL_KID_F,          gUnknown_085DD474}, 
-    {FACILITY_CLASS_POKEMON_BREEDER_F,     gUnknown_085DD488}, 
-    {FACILITY_CLASS_POKEFAN_F,             gUnknown_085DD49C}, 
-    {FACILITY_CLASS_SWIMMER_F,             gUnknown_085DD4B0}, 
-    {FACILITY_CLASS_SWIMMING_TRIATHLETE_M, gUnknown_085DD4C4}, 
-    {FACILITY_CLASS_SWIMMING_TRIATHLETE_F, gUnknown_085DD4D8}, 
+    {FACILITY_CLASS_LASS,                  gUnknown_085DD118},
+    {FACILITY_CLASS_YOUNGSTER,             gUnknown_085DD12C},
+    {FACILITY_CLASS_HIKER,                 gUnknown_085DD140},
+    {FACILITY_CLASS_BEAUTY,                gUnknown_085DD154},
+    {FACILITY_CLASS_FISHERMAN,             gUnknown_085DD168},
+    {FACILITY_CLASS_LADY,                  gUnknown_085DD17C},
+    {FACILITY_CLASS_CYCLING_TRIATHLETE_F,  gUnknown_085DD190},
+    {FACILITY_CLASS_BUG_CATCHER,           gUnknown_085DD1A4},
+    {FACILITY_CLASS_SCHOOL_KID_M,          gUnknown_085DD1B8},
+    {FACILITY_CLASS_RICH_BOY,              gUnknown_085DD1CC},
+    {FACILITY_CLASS_BLACK_BELT,            gUnknown_085DD1E0},
+    {FACILITY_CLASS_TUBER_F,               gUnknown_085DD1F4},
+    {FACILITY_CLASS_HEX_MANIAC,            gUnknown_085DD208},
+    {FACILITY_CLASS_PKMN_BREEDER_M,        gUnknown_085DD21C},
+    {FACILITY_CLASS_RUNNING_TRIATHLETE_F,  gUnknown_085DD230},
+    {FACILITY_CLASS_RUNNING_TRIATHLETE_M,  gUnknown_085DD244},
+    {FACILITY_CLASS_BATTLE_GIRL,           gUnknown_085DD258},
+    {FACILITY_CLASS_CYCLING_TRIATHLETE_M,  gUnknown_085DD26C},
+    {FACILITY_CLASS_TUBER_M,               gUnknown_085DD280},
+    {FACILITY_CLASS_GUITARIST,             gUnknown_085DD294},
+    {FACILITY_CLASS_GENTLEMAN,             gUnknown_085DD2A8},
+    {FACILITY_CLASS_POKEFAN_M,             gUnknown_085DD2BC},
+    {FACILITY_CLASS_EXPERT_M,              gUnknown_085DD2D0},
+    {FACILITY_CLASS_EXPERT_F,              gUnknown_085DD2E4},
+    {FACILITY_CLASS_DRAGON_TAMER,          gUnknown_085DD2F8},
+    {FACILITY_CLASS_BIRD_KEEPER,           gUnknown_085DD30C},
+    {FACILITY_CLASS_NINJA_BOY,             gUnknown_085DD320},
+    {FACILITY_CLASS_PARASOL_LADY,          gUnknown_085DD334},
+    {FACILITY_CLASS_BUG_MANIAC,            gUnknown_085DD348},
+    {FACILITY_CLASS_SAILOR,                gUnknown_085DD35C},
+    {FACILITY_CLASS_COLLECTOR,             gUnknown_085DD370},
+    {FACILITY_CLASS_PKMN_RANGER_M,         gUnknown_085DD384},
+    {FACILITY_CLASS_PKMN_RANGER_F,         gUnknown_085DD398},
+    {FACILITY_CLASS_AROMA_LADY,            gUnknown_085DD3AC},
+    {FACILITY_CLASS_RUIN_MANIAC,           gUnknown_085DD3C0},
+    {FACILITY_CLASS_COOLTRAINER_M,         gUnknown_085DD3D4},
+    {FACILITY_CLASS_COOLTRAINER_F,         gUnknown_085DD3E8},
+    {FACILITY_CLASS_POKEMANIAC,            gUnknown_085DD3FC},
+    {FACILITY_CLASS_KINDLER,               gUnknown_085DD410},
+    {FACILITY_CLASS_CAMPER,                gUnknown_085DD424},
+    {FACILITY_CLASS_PICNICKER,             gUnknown_085DD438},
+    {FACILITY_CLASS_PSYCHIC_M,             gUnknown_085DD44C},
+    {FACILITY_CLASS_PSYCHIC_F,             gUnknown_085DD460},
+    {FACILITY_CLASS_SCHOOL_KID_F,          gUnknown_085DD474},
+    {FACILITY_CLASS_POKEMON_BREEDER_F,     gUnknown_085DD488},
+    {FACILITY_CLASS_POKEFAN_F,             gUnknown_085DD49C},
+    {FACILITY_CLASS_SWIMMER_F,             gUnknown_085DD4B0},
+    {FACILITY_CLASS_SWIMMING_TRIATHLETE_M, gUnknown_085DD4C4},
+    {FACILITY_CLASS_SWIMMING_TRIATHLETE_F, gUnknown_085DD4D8},
     {FACILITY_CLASS_SWIMMER_M,             gUnknown_085DD4EC}
 };
 
@@ -1165,7 +1163,7 @@ static void sub_8161F94(void)
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
 
     ValidateBattleTowerRecordChecksums();
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 
@@ -1975,7 +1973,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
         friendship = 255;
         // Give the chosen pokemon its specified moves.
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monSetId].moves[j], j);
             if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
@@ -2014,7 +2012,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     {
         CreateMonWithEVSpread(&gEnemyParty[firstMonId + i], apprentice->party[i].species, level, fixedIV, 8);
         friendship = 0xFF;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             if (apprentice->party[i].moves[j] == MOVE_FRUSTRATION)
                 friendship = 0;
@@ -2104,7 +2102,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
                                              otID);
 
         friendship = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
             SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monSetId].moves[j], j);
 
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
@@ -2132,7 +2130,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
                                              otID);
 
         friendship = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monSetId].moves[j], j);
             if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
@@ -3195,7 +3193,7 @@ static void FillPartnerParty(u16 trainerId)
                       TRUE, STEVEN_OTID);
             for (j = 0; j < 6; j++)
                 SetMonData(&gPlayerParty[3 + i], MON_DATA_HP_EV + j, &sStevenMons[i].evs[j]);
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
                 SetMonMoveSlot(&gPlayerParty[3 + i], sStevenMons[i].moves[j], j);
             SetMonData(&gPlayerParty[3 + i], MON_DATA_OT_NAME, gTrainers[TRAINER_STEVEN].trainerName);
             j = MALE;
@@ -3224,7 +3222,7 @@ static void FillPartnerParty(u16 trainerId)
                                                  gFacilityTrainerMons[monSetId].evSpread,
                                                  otID);
             friendship = 0xFF;
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 SetMonMoveSlot(&gPlayerParty[3 + i], gFacilityTrainerMons[monSetId].moves[j], j);
                 if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
@@ -3649,7 +3647,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
         friendship = 255;
         // Give the chosen pokemon its specified moves.
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monSetId].moves[j], j);
             if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)

@@ -6,7 +6,7 @@ PacifidlogTown_House5_EventScript_204111:: @ 8204111
 	faceplayer
 	specialvar VAR_RESULT, IsMirageIslandPresent
 	compare VAR_RESULT, 1
-	goto_eq PacifidlogTown_House5_EventScript_20412D
+	goto_if_eq PacifidlogTown_House5_EventScript_20412D
 	msgbox PacifidlogTown_House5_Text_204140, MSGBOX_DEFAULT
 	release
 	end

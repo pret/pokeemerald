@@ -3,7 +3,6 @@ CaveOfOrigin_UnusedRubySapphireMap3_MapScripts:: @ 8235798
 	.byte 0
 
 CaveOfOrigin_UnusedRubySapphireMap3_MapScript1_23579E: @ 823579E
-	checkflag FLAG_0x071
-	call_if 1, CaveOfOrigin_UnusedRubySapphireMap3_EventScript_2722C1
+	call_if_set FLAG_0x071, CaveOfOrigin_UnusedRubySapphireMap3_EventScript_2722C1
 	end
 

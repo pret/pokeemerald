@@ -3,14 +3,10 @@ SlateportCity_SternsShipyard_1F_MapScripts:: @ 8207F3F
 
 SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 	lockall
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq SlateportCity_SternsShipyard_1F_EventScript_207F92
-	checkflag FLAG_BADGE07_GET
-	goto_eq SlateportCity_SternsShipyard_1F_EventScript_207FA6
-	checkflag FLAG_0x095
-	goto_eq SlateportCity_SternsShipyard_1F_EventScript_207FD9
-	checkflag FLAG_0x094
-	goto_eq SlateportCity_SternsShipyard_1F_EventScript_207FBA
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_SternsShipyard_1F_EventScript_207F92
+	goto_if_set FLAG_BADGE07_GET, SlateportCity_SternsShipyard_1F_EventScript_207FA6
+	goto_if_set FLAG_0x095, SlateportCity_SternsShipyard_1F_EventScript_207FD9
+	goto_if_set FLAG_0x094, SlateportCity_SternsShipyard_1F_EventScript_207FBA
 	msgbox SlateportCity_SternsShipyard_1F_Text_208008, MSGBOX_DEFAULT
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0

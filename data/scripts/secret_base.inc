@@ -313,32 +313,32 @@ EventScript_2759F1:: @ 82759F1
 	special sub_80E8C98
 	special sub_80E8BC8
 	compare VAR_RESULT, 1
-	goto_eq EventScript_275BE8
+	goto_if_eq EventScript_275BE8
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, VAR_RESULT
 	buffermovename 1, MOVE_SECRET_POWER
 	compare VAR_0x8007, 1
-	goto_eq EventScript_275A50
+	goto_if_eq EventScript_275A50
 	compare VAR_0x8007, 2
-	goto_eq EventScript_275A50
+	goto_if_eq EventScript_275A50
 	compare VAR_0x8007, 3
-	goto_eq EventScript_275A50
+	goto_if_eq EventScript_275A50
 	compare VAR_0x8007, 4
-	goto_eq EventScript_275A50
+	goto_if_eq EventScript_275A50
 	compare VAR_0x8007, 5
-	goto_eq EventScript_275AA9
+	goto_if_eq EventScript_275AA9
 	compare VAR_0x8007, 6
-	goto_eq EventScript_275B02
+	goto_if_eq EventScript_275B02
 	end
 
 EventScript_275A50:: @ 8275A50
 	lockall
 	compare VAR_RESULT, 6
-	goto_eq EventScript_275A91
+	goto_if_eq EventScript_275A91
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox gText_23B704, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
+	goto_if_eq EventScript_275CDE
 	msgbox Route103_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
@@ -366,11 +366,11 @@ EventScript_275A9B:: @ 8275A9B
 EventScript_275AA9:: @ 8275AA9
 	lockall
 	compare VAR_RESULT, 6
-	goto_eq EventScript_275AEA
+	goto_if_eq EventScript_275AEA
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox Text_274779, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
+	goto_if_eq EventScript_275CDE
 	msgbox Route103_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
@@ -398,11 +398,11 @@ EventScript_275AF4:: @ 8275AF4
 EventScript_275B02:: @ 8275B02
 	lockall
 	compare VAR_RESULT, 6
-	goto_eq EventScript_275B43
+	goto_if_eq EventScript_275B43
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox Text_274825, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
+	goto_if_eq EventScript_275CDE
 	msgbox Route103_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
@@ -447,7 +447,7 @@ SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
 	setvar VAR_0x4097, 1
 	msgbox SecretBase_RedCave1_Text_23B759, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275BAB
+	goto_if_eq SecretBase_RedCave1_EventScript_275BAB
 	closemessage
 	playse SE_KAIDAN
 	special sub_80E9A90
@@ -471,7 +471,7 @@ EventScript_275BB7:: @ 8275BB7
 	playse SE_KAIDAN
 	special sub_80E9744
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275BDB
+	goto_if_eq EventScript_275BDB
 	clearflag FLAG_DECORATION_0
 	special sub_80E9068
 	setvar VAR_0x4089, 0
@@ -488,58 +488,58 @@ EventScript_275BDB:: @ 8275BDB
 EventScript_275BE8:: @ 8275BE8
 	checkpartymove MOVE_SECRET_POWER
 	compare VAR_RESULT, 6
-	goto_eq EventScript_275C9A
+	goto_if_eq EventScript_275C9A
 	setfieldeffectargument 0, VAR_RESULT
 	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
 	special GetSecretBaseNearbyMapName
 	msgbox Text_276A3D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
+	goto_if_eq EventScript_275CDE
 	msgbox Text_2766AA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
+	goto_if_eq EventScript_275CDE
 	fadescreenswapbuffers 1
 	special sub_80E9B70
 	closemessage
 	fadescreenswapbuffers 0
 	msgbox Text_276A95, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_275CDE
+	goto_if_eq EventScript_275CDE
 	bufferpartymonnick 0, VAR_0x8004
 	buffermovename 1, MOVE_SECRET_POWER
 	msgbox Route103_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	closemessage
 	compare VAR_0x8007, 1
-	goto_eq EventScript_275A86
+	goto_if_eq EventScript_275A86
 	compare VAR_0x8007, 2
-	goto_eq EventScript_275A86
+	goto_if_eq EventScript_275A86
 	compare VAR_0x8007, 3
-	goto_eq EventScript_275A86
+	goto_if_eq EventScript_275A86
 	compare VAR_0x8007, 4
-	goto_eq EventScript_275A86
+	goto_if_eq EventScript_275A86
 	compare VAR_0x8007, 5
-	goto_eq EventScript_275ADF
+	goto_if_eq EventScript_275ADF
 	compare VAR_0x8007, 6
-	goto_eq EventScript_275B38
+	goto_if_eq EventScript_275B38
 	releaseall
 	end
 
 EventScript_275C9A:: @ 8275C9A
 	lockall
 	compare VAR_0x8007, 1
-	goto_eq EventScript_275A91
+	goto_if_eq EventScript_275A91
 	compare VAR_0x8007, 2
-	goto_eq EventScript_275A91
+	goto_if_eq EventScript_275A91
 	compare VAR_0x8007, 3
-	goto_eq EventScript_275A91
+	goto_if_eq EventScript_275A91
 	compare VAR_0x8007, 4
-	goto_eq EventScript_275A91
+	goto_if_eq EventScript_275A91
 	compare VAR_0x8007, 5
-	goto_eq EventScript_275AEA
+	goto_if_eq EventScript_275AEA
 	compare VAR_0x8007, 6
-	goto_eq EventScript_275B43
+	goto_if_eq EventScript_275B43
 	end
 
 EventScript_275CDE:: @ 8275CDE
@@ -590,10 +590,10 @@ EventScript_275D2E:: @ 8275D2E
 EventScript_275D39:: @ 8275D39
 	special sub_8129708
 	compare VAR_RESULT, 1
-	goto_eq EventScript_275D63
+	goto_if_eq EventScript_275D63
 	addvar VAR_0x8004, 1
 	compare VAR_0x8005, 0
-	goto_eq EventScript_275D39
+	goto_if_eq EventScript_275D39
 	removeobject VAR_0x8006
 	setflag 0x8005
 	goto EventScript_275D39
@@ -628,42 +628,41 @@ SecretBase_YellowCave3_EventScript_275D64:: @ 8275D64
 SecretBase_YellowCave4_EventScript_275D64:: @ 8275D64
 	special sub_80EA354
 	compare VAR_0x8004, 0
-	goto_eq SecretBase_RedCave1_EventScript_275DD6
+	goto_if_eq SecretBase_RedCave1_EventScript_275DD6
 	compare VAR_0x8004, 1
-	goto_eq SecretBase_RedCave1_EventScript_275E4E
+	goto_if_eq SecretBase_RedCave1_EventScript_275E4E
 	compare VAR_0x8004, 2
-	goto_eq SecretBase_RedCave1_EventScript_275EC6
+	goto_if_eq SecretBase_RedCave1_EventScript_275EC6
 	compare VAR_0x8004, 3
-	goto_eq SecretBase_RedCave1_EventScript_275F3E
+	goto_if_eq SecretBase_RedCave1_EventScript_275F3E
 	compare VAR_0x8004, 4
-	goto_eq SecretBase_RedCave1_EventScript_275FB6
+	goto_if_eq SecretBase_RedCave1_EventScript_275FB6
 	compare VAR_0x8004, 5
-	goto_eq SecretBase_RedCave1_EventScript_27602E
+	goto_if_eq SecretBase_RedCave1_EventScript_27602E
 	compare VAR_0x8004, 6
-	goto_eq SecretBase_RedCave1_EventScript_2760A6
+	goto_if_eq SecretBase_RedCave1_EventScript_2760A6
 	compare VAR_0x8004, 7
-	goto_eq SecretBase_RedCave1_EventScript_27611E
+	goto_if_eq SecretBase_RedCave1_EventScript_27611E
 	compare VAR_0x8004, 8
-	goto_eq SecretBase_RedCave1_EventScript_276196
+	goto_if_eq SecretBase_RedCave1_EventScript_276196
 	compare VAR_0x8004, 9
-	goto_eq SecretBase_RedCave1_EventScript_27620E
+	goto_if_eq SecretBase_RedCave1_EventScript_27620E
 	end
 
 SecretBase_RedCave1_EventScript_275DD6:: @ 8275DD6
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275E25
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_275E25
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275E44
+	goto_if_eq SecretBase_RedCave1_EventScript_275E44
 	msgbox SecretBase_RedCave1_Text_2748A0, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275E2F
+	goto_if_eq SecretBase_RedCave1_EventScript_275E2F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275E2F
+	goto_if_eq SecretBase_RedCave1_EventScript_275E2F
 	msgbox SecretBase_RedCave1_Text_274939, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -689,18 +688,17 @@ SecretBase_RedCave1_EventScript_275E44:: @ 8275E44
 SecretBase_RedCave1_EventScript_275E4E:: @ 8275E4E
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275E9D
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_275E9D
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275EBC
+	goto_if_eq SecretBase_RedCave1_EventScript_275EBC
 	msgbox SecretBase_RedCave1_Text_274C13, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275EA7
+	goto_if_eq SecretBase_RedCave1_EventScript_275EA7
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275EA7
+	goto_if_eq SecretBase_RedCave1_EventScript_275EA7
 	msgbox SecretBase_RedCave1_Text_274CB0, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -726,18 +724,17 @@ SecretBase_RedCave1_EventScript_275EBC:: @ 8275EBC
 SecretBase_RedCave1_EventScript_275EC6:: @ 8275EC6
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275F15
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_275F15
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275F34
+	goto_if_eq SecretBase_RedCave1_EventScript_275F34
 	msgbox SecretBase_RedCave1_Text_274F39, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F1F
+	goto_if_eq SecretBase_RedCave1_EventScript_275F1F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F1F
+	goto_if_eq SecretBase_RedCave1_EventScript_275F1F
 	msgbox SecretBase_RedCave1_Text_274FCA, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -763,18 +760,17 @@ SecretBase_RedCave1_EventScript_275F34:: @ 8275F34
 SecretBase_RedCave1_EventScript_275F3E:: @ 8275F3E
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_275F8D
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_275F8D
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_275FAC
+	goto_if_eq SecretBase_RedCave1_EventScript_275FAC
 	msgbox SecretBase_RedCave1_Text_275287, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F97
+	goto_if_eq SecretBase_RedCave1_EventScript_275F97
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_275F97
+	goto_if_eq SecretBase_RedCave1_EventScript_275F97
 	msgbox SecretBase_RedCave1_Text_275315, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -800,18 +796,17 @@ SecretBase_RedCave1_EventScript_275FAC:: @ 8275FAC
 SecretBase_RedCave1_EventScript_275FB6:: @ 8275FB6
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_276005
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_276005
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_276024
+	goto_if_eq SecretBase_RedCave1_EventScript_276024
 	msgbox SecretBase_RedCave1_Text_2755D2, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_27600F
+	goto_if_eq SecretBase_RedCave1_EventScript_27600F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_27600F
+	goto_if_eq SecretBase_RedCave1_EventScript_27600F
 	msgbox SecretBase_RedCave1_Text_275679, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -837,18 +832,17 @@ SecretBase_RedCave1_EventScript_276024:: @ 8276024
 SecretBase_RedCave1_EventScript_27602E:: @ 827602E
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_27607D
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_27607D
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_27609C
+	goto_if_eq SecretBase_RedCave1_EventScript_27609C
 	msgbox SecretBase_RedCave1_Text_274A64, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276087
+	goto_if_eq SecretBase_RedCave1_EventScript_276087
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276087
+	goto_if_eq SecretBase_RedCave1_EventScript_276087
 	msgbox SecretBase_RedCave1_Text_274AFA, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -874,18 +868,17 @@ SecretBase_RedCave1_EventScript_27609C:: @ 827609C
 SecretBase_RedCave1_EventScript_2760A6:: @ 82760A6
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_2760F5
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_2760F5
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_276114
+	goto_if_eq SecretBase_RedCave1_EventScript_276114
 	msgbox SecretBase_RedCave1_Text_274DD2, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2760FF
+	goto_if_eq SecretBase_RedCave1_EventScript_2760FF
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2760FF
+	goto_if_eq SecretBase_RedCave1_EventScript_2760FF
 	msgbox SecretBase_RedCave1_Text_274E41, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -911,18 +904,17 @@ SecretBase_RedCave1_EventScript_276114:: @ 8276114
 SecretBase_RedCave1_EventScript_27611E:: @ 827611E
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_27616D
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_27616D
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_27618C
+	goto_if_eq SecretBase_RedCave1_EventScript_27618C
 	msgbox SecretBase_RedCave1_Text_275114, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276177
+	goto_if_eq SecretBase_RedCave1_EventScript_276177
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276177
+	goto_if_eq SecretBase_RedCave1_EventScript_276177
 	msgbox SecretBase_RedCave1_Text_2751AF, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -948,18 +940,17 @@ SecretBase_RedCave1_EventScript_27618C:: @ 827618C
 SecretBase_RedCave1_EventScript_276196:: @ 8276196
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_2761E5
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_2761E5
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_276204
+	goto_if_eq SecretBase_RedCave1_EventScript_276204
 	msgbox SecretBase_RedCave1_Text_275405, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2761EF
+	goto_if_eq SecretBase_RedCave1_EventScript_2761EF
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_2761EF
+	goto_if_eq SecretBase_RedCave1_EventScript_2761EF
 	msgbox SecretBase_RedCave1_Text_2754B2, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -985,18 +976,17 @@ SecretBase_RedCave1_EventScript_276204:: @ 8276204
 SecretBase_RedCave1_EventScript_27620E:: @ 827620E
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, SecretBase_RedCave1_EventScript_27625D
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_RedCave1_EventScript_27625D
 	compare VAR_RESULT, 1
-	goto_eq SecretBase_RedCave1_EventScript_27627C
+	goto_if_eq SecretBase_RedCave1_EventScript_27627C
 	msgbox SecretBase_RedCave1_Text_2757B5, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276267
+	goto_if_eq SecretBase_RedCave1_EventScript_276267
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq SecretBase_RedCave1_EventScript_276267
+	goto_if_eq SecretBase_RedCave1_EventScript_276267
 	msgbox SecretBase_RedCave1_Text_275884, MSGBOX_DEFAULT
 	goto SecretBase_RedCave1_EventScript_276286
 	end
@@ -1026,11 +1016,11 @@ SecretBase_RedCave1_EventScript_276286:: @ 8276286
 	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
-	call_if 1, SecretBase_RedCave1_EventScript_2762BD
+	call_if_eq SecretBase_RedCave1_EventScript_2762BD
 	compare VAR_RESULT, 1
-	call_if 1, SecretBase_RedCave1_EventScript_2762C1
+	call_if_eq SecretBase_RedCave1_EventScript_2762C1
 	compare VAR_RESULT, 2
-	call_if 1, SecretBase_RedCave1_EventScript_2762C5
+	call_if_eq SecretBase_RedCave1_EventScript_2762C5
 	special HealPlayerParty
 	release
 	end

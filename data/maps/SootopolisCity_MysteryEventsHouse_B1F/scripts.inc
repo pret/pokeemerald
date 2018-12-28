@@ -23,11 +23,11 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	special DoSpecialTrainerBattle
 	waitstate
 	compare VAR_RESULT, 3
-	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF
+	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF
 	compare VAR_RESULT, 1
-	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD
+	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD
 	compare VAR_RESULT, 2
-	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8
+	call_if_eq SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8
 	closemessage
 	special HealPlayerParty
 	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9

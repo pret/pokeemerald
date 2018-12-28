@@ -4,12 +4,11 @@ SSTidalRooms_MapScripts:: @ 823C9F1
 SSTidalRooms_EventScript_23C9F2:: @ 823C9F2
 	lock
 	faceplayer
-	checkflag FLAG_0x104
-	goto_eq SSTidalRooms_EventScript_23CA29
+	goto_if_set FLAG_0x104, SSTidalRooms_EventScript_23CA29
 	msgbox SSTidalRooms_Text_23D098, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM49
 	compare VAR_RESULT, 0
-	goto_eq SSTidalRooms_EventScript_272054
+	goto_if_eq SSTidalRooms_EventScript_272054
 	setflag FLAG_0x104
 	msgbox SSTidalRooms_Text_23D145, MSGBOX_DEFAULT
 	release

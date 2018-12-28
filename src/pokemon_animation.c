@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
 #include "sprite.h"
@@ -17,8 +18,6 @@ struct UnkAnimStruct
     s16 field_6;
     s16 field_8;
 };
-
-extern u16 gBattlerPartyIndexes[];
 
 // this file's functions
 static void pokemonanimfunc_00(struct Sprite *sprite);

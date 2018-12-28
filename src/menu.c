@@ -48,8 +48,8 @@ struct Menu
     bool8 APressMuted;
 };
 
-static EWRAM_DATA u8 gStartMenuWindowId = 0;
-static EWRAM_DATA u8 gUnknown_0203CD8D = 0;
+static EWRAM_DATA u8 sStartMenuWindowId = 0;
+static EWRAM_DATA u8 sMapNamePopupWindowId = 0;
 static EWRAM_DATA struct Menu gUnknown_0203CD90 = {0};
 static EWRAM_DATA u16 gUnknown_0203CD9C = 0;
 static EWRAM_DATA u8 gUnknown_0203CD9E = 0;
@@ -63,7 +63,7 @@ static EWRAM_DATA void *gUnknown_0203CDAC[0x20] = {NULL};
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
 static const u8 gUnknown_0860F094[] = { 8, 4, 1 };
 
-static const struct WindowTemplate gUnknown_0860F098[] =
+static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
 {
     {
         .bg = 0,
@@ -77,7 +77,7 @@ static const struct WindowTemplate gUnknown_0860F098[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gUnknown_0860F0A8 =
+static const struct WindowTemplate sYesNo_WindowTemplates =
 {
     .bg = 0,
     .tilemapLeft = 21,
@@ -137,14 +137,14 @@ extern u8 sub_8199134(s8, s8);
 extern void sub_8198C78(void);
 extern void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 
-void sub_81971D0(void)
+void InitStandardTextBoxWindows(void)
 {
-    InitWindows(gUnknown_0860F098);
-    gStartMenuWindowId = 0xFF;
-    gUnknown_0203CD8D = 0xFF;
+    InitWindows(sStandardTextBox_WindowTemplates);
+    sStartMenuWindowId = 0xFF;
+    sMapNamePopupWindowId = 0xFF;
 }
 
-void sub_81971F4(void)
+void FreeAllOverworldWindowBuffers(void)
 {
     FreeAllWindowBuffers();
 }
@@ -460,12 +460,12 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
 
 void DisplayYesNoMenu(void)
 {
-    CreateYesNoMenu(&gUnknown_0860F0A8, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
+    CreateYesNoMenu(&sYesNo_WindowTemplates, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
 }
 
 void sub_8197948(u8 initialCursorPos)
 {
-    CreateYesNoMenu(&gUnknown_0860F0A8, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, initialCursorPos);
+    CreateYesNoMenu(&sYesNo_WindowTemplates, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, initialCursorPos);
 }
 
 u32 GetPlayerTextSpeed(void)
@@ -486,22 +486,22 @@ u8 GetPlayerTextSpeedDelay(void)
 
 u8 sub_81979C4(u8 a1)
 {
-    if (gStartMenuWindowId == 0xFF)
-        gStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
-    return gStartMenuWindowId;
+    if (sStartMenuWindowId == 0xFF)
+        sStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
+    return sStartMenuWindowId;
 }
 
 u8 GetStartMenuWindowId(void)
 {
-    return gStartMenuWindowId;
+    return sStartMenuWindowId;
 }
 
 void RemoveStartMenuWindow(void)
 {
-    if (gStartMenuWindowId != 0xFF)
+    if (sStartMenuWindowId != 0xFF)
     {
-        RemoveWindow(gStartMenuWindowId);
-        gStartMenuWindowId = 0xFF;
+        RemoveWindow(sStartMenuWindowId);
+        sStartMenuWindowId = 0xFF;
     }
 }
 
@@ -517,22 +517,22 @@ u16 sub_8197A38(void)
 
 u8 AddMapNamePopUpWindow(void)
 {
-    if (gUnknown_0203CD8D == 0xFF)
-        gUnknown_0203CD8D = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
-    return gUnknown_0203CD8D;
+    if (sMapNamePopupWindowId == 0xFF)
+        sMapNamePopupWindowId = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
+    return sMapNamePopupWindowId;
 }
 
 u8 GetMapNamePopUpWindowId(void)
 {
-    return gUnknown_0203CD8D;
+    return sMapNamePopupWindowId;
 }
 
 void RemoveMapNamePopUpWindow(void)
 {
-    if (gUnknown_0203CD8D != 0xFF)
+    if (sMapNamePopupWindowId != 0xFF)
     {
-        RemoveWindow(gUnknown_0203CD8D);
-        gUnknown_0203CD8D = 0xFF;
+        RemoveWindow(sMapNamePopupWindowId);
+        sMapNamePopupWindowId = 0xFF;
     }
 }
 
@@ -1934,8 +1934,8 @@ void sub_8199D98(void)
 
 void sub_8199DF0(u32 bg, u8 a1, int a2, int a3)
 {
-    int temp = (!GetBgAttribute(bg, 4)) ? 0x20 : 0x40;
-    void *addr = (void *)((GetBgAttribute(bg, 1) * 0x4000) + (GetBgAttribute(bg, 10) + a2) * temp);
+    int temp = (!GetBgAttribute(bg, BG_ATTR_PALETTEMODE)) ? 0x20 : 0x40;
+    void *addr = (void *)((GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX) * 0x4000) + (GetBgAttribute(bg, BG_ATTR_BASETILE) + a2) * temp);
     RequestDma3Fill(a1 << 24 | a1 << 16 | a1 << 8 | a1, addr + VRAM, a3 * temp, 1);
 }
 

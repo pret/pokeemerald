@@ -10,20 +10,20 @@ FallarborTown_BattleTentBattleRoom_MapScript1_2008A9: @ 82008A9
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008AF:: @ 82008AF
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2008C7
-	compare VAR_RESULT, 1
-	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2008D2
+	compare VAR_RESULT, MALE
+	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2008C7
+	compare VAR_RESULT, FEMALE
+	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2008D2
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008C7:: @ 82008C7
-	setvar VAR_OBJ_GFX_ID_1, 100
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008D2:: @ 82008D2
-	setvar VAR_OBJ_GFX_ID_1, 105
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_MapScript2_2008DD: @ 82008DD
@@ -39,7 +39,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, FallarborTown_BattleTentBattleRoom_EventScript_200B73
+	goto_if_ne FallarborTown_BattleTentBattleRoom_EventScript_200B73
 
 FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
 	setvar VAR_0x8004, 3
@@ -117,9 +117,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, FallarborTown_BattleTentBattleRoom_EventScript_200B43
+	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B43
 	compare VAR_RESULT, 2
-	call_if 1, FallarborTown_BattleTentBattleRoom_EventScript_200B4A
+	call_if_eq FallarborTown_BattleTentBattleRoom_EventScript_200B4A
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_200AD8
@@ -164,7 +164,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	setvar VAR_0x8005, 1
 	special CallBattleArenaFunction
 	compare VAR_RESULT, 9999
-	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2009B3
+	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2009B3
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -260,7 +260,7 @@ FallarborTown_BattleTentBattleRoom_MapScript2_200BB0: @ 8200BB0
 	.2byte 0
 
 FallarborTown_BattleTentBattleRoom_EventScript_200BBA:: @ 8200BBA
-	hideobjectat 255, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat 1, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	removeobject 3
 	setvar VAR_TEMP_1, 1

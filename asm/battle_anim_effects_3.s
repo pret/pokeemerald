@@ -5,50 +5,6 @@
 
 	.text
 
-	thumb_func_start AnimTask_GetReturnPowerLevel
-AnimTask_GetReturnPowerLevel: @ 815F8A0
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r3, =gBattleAnimArgs
-	movs r2, 0
-	strh r2, [r3, 0xE]
-	ldr r1, =gAnimFriendship
-	ldrb r0, [r1]
-	ldrb r1, [r1]
-	adds r0, r1, 0
-	subs r0, 0x3D
-	lsls r0, 24
-	lsrs r0, 24
-	adds r2, r1, 0
-	cmp r0, 0x1E
-	bhi _0815F8C4
-	movs r0, 0x1
-	strh r0, [r3, 0xE]
-_0815F8C4:
-	adds r0, r2, 0
-	subs r0, 0x5C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x6C
-	bhi _0815F8D4
-	movs r0, 0x2
-	strh r0, [r3, 0xE]
-_0815F8D4:
-	lsls r0, r1, 24
-	lsrs r0, 24
-	cmp r0, 0xC8
-	bls _0815F8E0
-	movs r0, 0x3
-	strh r0, [r3, 0xE]
-_0815F8E0:
-	adds r0, r4, 0
-	bl DestroyAnimVisualTask
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end AnimTask_GetReturnPowerLevel
 
 	thumb_func_start sub_815F8F4
 sub_815F8F4: @ 815F8F4

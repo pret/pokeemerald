@@ -11,8 +11,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
-	checkflag FLAG_0x152
-	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
+	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3
@@ -26,14 +25,14 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA:: @ 8243DDA
-	setvar VAR_OBJ_GFX_ID_0, 7
-	setvar VAR_OBJ_GFX_ID_1, 7
-	setvar VAR_OBJ_GFX_ID_2, 7
-	setvar VAR_OBJ_GFX_ID_3, 7
-	setvar VAR_OBJ_GFX_ID_4, 7
-	setvar VAR_OBJ_GFX_ID_5, 7
-	setvar VAR_OBJ_GFX_ID_6, 7
-	setvar VAR_OBJ_GFX_ID_7, 7
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_2, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_4, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_5, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_6, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_7, EVENT_OBJ_GFX_BOY_1
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_3, 1
 	setobjectxyperm 1, 10, 2
@@ -44,7 +43,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E14: @ 8243E14
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E1E:: @ 8243E1E
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript2_243E23: @ 8243E23
@@ -89,7 +88,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E7A:: @ 8243E7A
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D
+	goto_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_24410C, MSGBOX_DEFAULT
 	release
 	end
@@ -166,8 +165,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F29:: @ 8243F29
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
-	checkflag FLAG_0x152
-	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
+	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 0
 	special sub_8161F74
@@ -193,9 +191,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	waitbuttonpress
 	closemessage
 	compare VAR_FACING, 1
-	call_if 5, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
+	call_if_ne BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
+	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_0x152
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 3

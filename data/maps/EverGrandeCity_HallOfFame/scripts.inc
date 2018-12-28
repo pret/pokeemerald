@@ -8,7 +8,7 @@ EverGrandeCity_HallOfFame_MapScript2_229837: @ 8229837
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_229841:: @ 8229841
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 EverGrandeCity_HallOfFame_MapScript2_229846: @ 8229846
@@ -44,10 +44,10 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	setvar VAR_TEMP_1, 1
 	call EverGrandeCity_HallOfFame_EventScript_2717C1
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2298E9
-	compare VAR_RESULT, 1
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2298F5
+	compare VAR_RESULT, MALE
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2298E9
+	compare VAR_RESULT, FEMALE
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2298F5
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9

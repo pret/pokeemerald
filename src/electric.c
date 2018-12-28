@@ -6,7 +6,6 @@
 #include "sound.h"
 
 extern void sub_810E2C8(struct Sprite *);
-extern bool8 sub_810B614(struct Task *task, u8 taskId);
 extern void TranslateAnimSpriteToTargetMonLocation(struct Sprite *);
 
 static void sub_810A1A8(struct Sprite *);
@@ -38,6 +37,8 @@ static void sub_810B1F0(struct Sprite *);
 static void sub_810B23C(struct Sprite *);
 static bool8 sub_810B430(struct Task *task, u8 taskId);
 static void sub_810B51C(struct Sprite *);
+static bool8 sub_810B614(struct Task *task, u8 taskId);
+static void sub_810B684(struct Sprite *sprite);
 
 const union AnimCmd gUnknown_085956A4[] =
 {
@@ -1290,5 +1291,31 @@ void sub_810B55C(u8 taskId)
         if (task->data[10] == 0)
             DestroyAnimVisualTask(taskId);
         break;
+    }
+}
+
+bool8 sub_810B614(struct Task *task, u8 taskId)
+{
+    u8 spriteId = CreateSprite(&gUnknown_085956C0, task->data[13], task->data[14], task->data[12]);
+    
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].callback = sub_810B684;
+        gSprites[spriteId].data[6] = taskId;
+        gSprites[spriteId].data[7] = 10;
+        task->data[10]++;
+    }
+    if (task->data[14] >= task->data[15])
+        return TRUE;
+    task->data[14] += 32;
+    return FALSE;
+}
+
+static void sub_810B684(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        gTasks[sprite->data[6]].data[sprite->data[7]]--;
+        DestroySprite(sprite);
     }
 }

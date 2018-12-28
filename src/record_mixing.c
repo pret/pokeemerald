@@ -1481,14 +1481,14 @@ static void sub_80E7FF8(u8 taskId)
             task->data[0] = 6;
         break;
     case 2:
-        sub_8076D5C();
+        SetContinueGameWarpStatusToDynamicWarp();
         sub_8153430();
         task->data[0] ++;
         break;
     case 3:
         if (sub_8153474())
         {
-            sav2_gender2_inplace_and_xFE();
+            ClearContinueGameWarpStatus2();
             task->data[0] = 4;
             task->data[1] = 0;
         }

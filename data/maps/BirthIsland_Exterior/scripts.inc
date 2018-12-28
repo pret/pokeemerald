@@ -10,13 +10,11 @@ BirthIsland_Exterior_MapScript1_267F25: @ 8267F25
 
 BirthIsland_Exterior_MapScript1_267F29: @ 8267F29
 	setflag FLAG_0x8D3
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_0x4034, 0
 	setvar VAR_0x4035, 0
-	checkflag FLAG_0x1AD
-	call_if 1, BirthIsland_Exterior_EventScript_267F4E
-	checkflag FLAG_0x1AD
-	call_if 0, BirthIsland_Exterior_EventScript_267F55
+	call_if_set FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F4E
+	call_if_unset FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F55
 	end
 
 BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
@@ -25,21 +23,19 @@ BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
 	return
 
 BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
-	checkflag FLAG_0x1AC
-	goto_eq BirthIsland_Exterior_EventScript_27374E
+	goto_if_set FLAG_0x1AC, BirthIsland_Exterior_EventScript_27374E
 	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	clearflag FLAG_0x8D4
 	return
 
 BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, BirthIsland_Exterior_EventScript_267F6F
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, BirthIsland_Exterior_EventScript_267F6F
 	end
 
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, BirthIsland_Exterior_EventScript_27374E
+	goto_if_ne BirthIsland_Exterior_EventScript_27374E
 	removeobject 2
 	return
 
@@ -93,11 +89,11 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq BirthIsland_Exterior_EventScript_26803B
+	goto_if_eq BirthIsland_Exterior_EventScript_26803B
 	compare VAR_RESULT, 4
-	goto_eq BirthIsland_Exterior_EventScript_268049
+	goto_if_eq BirthIsland_Exterior_EventScript_268049
 	compare VAR_RESULT, 5
-	goto_eq BirthIsland_Exterior_EventScript_268049
+	goto_if_eq BirthIsland_Exterior_EventScript_268049
 	setflag FLAG_0x1AD
 	release
 	end

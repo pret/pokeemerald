@@ -31,6 +31,7 @@
 #include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"
+#include "mirage_tower.h"
 #include "money.h"
 #include "new_game.h"
 #include "palette.h"
@@ -56,8 +57,10 @@
 #include "constants/abilities.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "constants/weather.h"
 
 // event scripts
 extern const u8 EventScript_WhiteOut[];
@@ -112,9 +115,7 @@ extern void sub_81AA1D8(void);
 extern void c2_change_map(void);
 extern void sub_81D5DF8(void);
 extern void sub_80EB218(void);
-extern void sub_81BE72C(void);
 extern void sub_80AF3C8(void);
-extern void sub_81971F4(void);
 extern void sub_808B578(void);
 extern void sub_80AF314(void);
 extern void sub_80AF214(void);
@@ -134,8 +135,7 @@ extern void sub_81AA2F8(void);
 extern void sub_8195E10(void);
 extern void sub_80EDB44(void);
 extern void sub_81D64C0(void);
-extern void sub_81BE6AC(void);
-extern void sub_8098128(void);
+extern void InitFieldMessageBox(void);
 extern void copy_map_tileset1_to_vram(const struct MapLayout *);
 extern void copy_map_tileset2_to_vram(const struct MapLayout *);
 extern void FieldUpdateBgTilemapScroll(void);
@@ -146,7 +146,6 @@ extern bool8 warp0_in_pokecenter(void);
 extern void ResetAllPicSprites(void);
 extern void FieldEffectActiveListClear(void);
 extern void SetUpFieldTasks(void);
-extern void sub_81BE6B8(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
@@ -341,7 +340,7 @@ const struct UCoords32 gDirectionToVectors[] =
     },
 };
 
-static const struct BgTemplate gUnknown_08339DAC[] =
+static const struct BgTemplate sOverworldBgTemplates[] =
 {
     {
         .bg = 0,
@@ -435,7 +434,7 @@ void DoWhiteOut(void)
     SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
-    Overworld_SetWarpDestToLastHealLoc();
+    SetWarpDestinationToLastHealLocation();
     WarpIntoMap();
 }
 
@@ -617,7 +616,7 @@ void ApplyCurrentWarp(void)
     gFixedHoleWarp = sDummyWarpData;
 }
 
-void set_warp2_warp3_to_neg_1(void)
+static void ClearDiveAndHoleWarps(void)
 {
     gFixedDiveWarp = sDummyWarpData;
     gFixedHoleWarp = sDummyWarpData;
@@ -698,68 +697,66 @@ void WarpIntoMap(void)
     SetPlayerCoordsFromWarp();
 }
 
-void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     SetWarpData(&sWarpDestination, mapGroup, mapNum, warpId, x, y);
 }
 
-void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId)
+void SetWarpDestinationToMapWarp(s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
+    SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
 }
 
-void saved_warp2_set(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId)
+void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
-    SetWarpData(&gSaveBlock1Ptr->warp2, mapGroup, mapNum, warpId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+    SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
 }
 
-void saved_warp2_set_2(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gSaveBlock1Ptr->warp2, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, x, y);
 }
 
-void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
+void SetWarpDestinationToDynamicWarp(u8 unusedWarpId)
 {
-    sWarpDestination = gSaveBlock1Ptr->warp2;
+    sWarpDestination = gSaveBlock1Ptr->dynamicWarp;
 }
 
-void sub_8084CCC(u8 a1)
+void SetWarpDestinationToHealLocation(u8 healLocationId)
 {
-    const struct HealLocation *warp = GetHealLocation(a1);
-
+    const struct HealLocation *warp = GetHealLocation(healLocationId);
     if (warp)
-        Overworld_SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void Overworld_SetWarpDestToLastHealLoc(void)
+void SetWarpDestinationToLastHealLocation(void)
 {
     sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
 }
 
-void Overworld_SetHealLocationWarp(u8 healLocationId)
+void SetLastHealLocationWarp(u8 healLocationId)
 {
     const struct HealLocation *healLocation = GetHealLocation(healLocationId);
-
-    if (healLocation != NULL)
+    if (healLocation)
         SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
 }
 
-void sub_8084D5C(s16 a1, s16 a2)
+void sub_8084D5C(s16 x, s16 y)
 {
-    u8 currMapType = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 currMapType = GetCurrentMapType();
     u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
     if (is_map_type_1_2_3_5_or_6(currMapType) && is_map_type_1_2_3_5_or_6(destMapType) != TRUE)
-        sub_8084DD4(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, a1 - 7, a2 - 6);
+        SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x - 7, y - 6);
 }
 
-void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gSaveBlock1Ptr->warp4, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1Ptr->escapeWarp, mapGroup, mapNum, warpId, x, y);
 }
 
-void sub_8084E14(void)
+void SetWarpDestinationToEscapeWarp(void)
 {
-    sWarpDestination = gSaveBlock1Ptr->warp4;
+    sWarpDestination = gSaveBlock1Ptr->escapeWarp;
 }
 
 void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
@@ -767,7 +764,7 @@ void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
     SetWarpData(&gFixedDiveWarp, mapGroup, mapNum, warpId, x, y);
 }
 
-static void SetFixedDiveWarpAsDestination(void)
+static void SetWarpDestinationToDiveWarp(void)
 {
     sWarpDestination = gFixedDiveWarp;
 }
@@ -777,34 +774,34 @@ void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
     SetWarpData(&gFixedHoleWarp, mapGroup, mapNum, warpId, x, y);
 }
 
-void SetFixedHoleWarpAsDestination(s16 x, s16 y)
+void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y)
 {
     if (IsDummyWarp(&gFixedHoleWarp) == TRUE)
         sWarpDestination = gLastUsedWarp;
     else
-        Overworld_SetWarpDestination(gFixedHoleWarp.mapGroup, gFixedHoleWarp.mapNum, -1, x, y);
+        SetWarpDestination(gFixedHoleWarp.mapGroup, gFixedHoleWarp.mapNum, -1, x, y);
 }
 
-void warp1_set_to_sav1w(void)
+static void SetWarpDestinationToContinueGameWarp(void)
 {
-    sWarpDestination = gSaveBlock1Ptr->warp1;
+    sWarpDestination = gSaveBlock1Ptr->continueGameWarp;
 }
 
-void sub_8084F2C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetContinueGameWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gSaveBlock1Ptr->warp1, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&gSaveBlock1Ptr->continueGameWarp, mapGroup, mapNum, warpId, x, y);
 }
 
-void sub_8084F6C(u8 a1)
+void SetContinueGameWarpToHealLocation(u8 healLocationId)
 {
-    const struct HealLocation *warp = GetHealLocation(a1);
+    const struct HealLocation *warp = GetHealLocation(healLocationId);
     if (warp)
-        SetWarpData(&gSaveBlock1Ptr->warp1, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_8084FAC(int unused)
+void SetContinueGameWarpToDynamicWarp(int unused)
 {
-    gSaveBlock1Ptr->warp1 = gSaveBlock1Ptr->warp2;
+    gSaveBlock1Ptr->continueGameWarp = gSaveBlock1Ptr->dynamicWarp;
 }
 
 const struct MapConnection *GetMapConnection(u8 dir)
@@ -829,14 +826,14 @@ static bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
 
     if (connection != NULL)
     {
-        Overworld_SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
+        SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
     }
     else
     {
         mapheader_run_script_with_tag_x6();
         if (IsDummyWarp(&gFixedDiveWarp))
             return FALSE;
-        SetFixedDiveWarpAsDestination();
+        SetWarpDestinationToDiveWarp();
     }
     return TRUE;
 }
@@ -855,7 +852,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
 {
     s32 paletteIndex;
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
+    SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     if (gMapHeader.regionMapSectionId != 0x3A)
         sub_8085810();
 
@@ -887,7 +884,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
 
-    if (gMapHeader.regionMapSectionId != 0x3A || gMapHeader.regionMapSectionId != sLastMapSectionId)
+    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
 }
 
@@ -966,7 +963,7 @@ void StoreInitialPlayerAvatarState(void)
 static struct InitialPlayerAvatarState *GetInitialPlayerAvatarState(void)
 {
     struct InitialPlayerAvatarState playerStruct;
-    u8 mapType = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 mapType = GetCurrentMapType();
     u16 metatileBehavior = GetCenterScreenMetatileBehavior();
     u8 transitionFlags = GetAdjustedInitialTransitionFlags(&gInitialPlayerAvatarState, metatileBehavior, mapType);
     playerStruct.transitionFlags = transitionFlags;
@@ -1053,7 +1050,7 @@ u8 Overworld_GetFlashLevel(void)
     return gSaveBlock1Ptr->flashLevel;
 }
 
-void sub_8085524(u16 mapLayoutId)
+void SetCurrentMapLayout(u16 mapLayoutId)
 {
     gSaveBlock1Ptr->mapLayoutId = mapLayoutId;
     gMapHeader.mapLayout = GetMapLayout();
@@ -1162,11 +1159,11 @@ u16 GetCurrLocationDefaultMusic(void)
     // Play the desert music only when the sandstorm is active on Route 111.
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)
-     && GetSav1Weather() == 8)
+     && GetSav1Weather() == WEATHER_SANDSTORM)
         return MUS_ASHROAD;
 
     music = GetLocationMusic(&gSaveBlock1Ptr->location);
-    if (music != 0x7FFF)
+    if (music != MUS_ROUTE_118)
     {
         return music;
     }
@@ -1182,7 +1179,7 @@ u16 GetCurrLocationDefaultMusic(void)
 u16 GetWarpDestinationMusic(void)
 {
     u16 music = GetLocationMusic(&sWarpDestination);
-    if (music != 0x7FFF)
+    if (music != MUS_ROUTE_118)
     {
         return music;
     }
@@ -1209,7 +1206,7 @@ void Overworld_PlaySpecialMapMusic(void)
     {
         if (gSaveBlock1Ptr->savedMusic)
             music = gSaveBlock1Ptr->savedMusic;
-        else if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
+        else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
             music = MUS_DEEPDEEP;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
             music = MUS_NAMINORI;
@@ -1287,8 +1284,8 @@ void TryFadeOutOldMapMusic(void)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
             && sWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
             && sWarpDestination.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
-            && sWarpDestination.x == 0x1D
-            && sWarpDestination.y == 0x35)
+            && sWarpDestination.x == 29
+            && sWarpDestination.y == 53)
             return;
         FadeOutMapMusic(GetMapMusicFadeoutSpeed());
     }
@@ -1390,7 +1387,7 @@ u8 GetMapTypeByWarpData(struct WarpData *warp)
     return GetMapTypeByGroupAndId(warp->mapGroup, warp->mapNum);
 }
 
-u8 Overworld_GetMapTypeOfSaveblockLocation(void)
+u8 GetCurrentMapType(void)
 {
     return GetMapTypeByWarpData(&gSaveBlock1Ptr->location);
 }
@@ -1432,12 +1429,12 @@ bool8 Overworld_MapTypeIsIndoors(u8 mapType)
         return FALSE;
 }
 
-u8 sav1_saved_warp2_map_get_name(void)
+u8 GetSavedWarpRegionMapSectionId(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp2.mapGroup, gSaveBlock1Ptr->warp2.mapNum)->regionMapSectionId;
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->dynamicWarp.mapGroup, gSaveBlock1Ptr->dynamicWarp.mapNum)->regionMapSectionId;
 }
 
-u8 sav1_map_get_name(void)
+u8 GetCurrentRegionMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
 }
@@ -1447,30 +1444,30 @@ u8 GetCurrentMapBattleScene(void)
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->battleType;
 }
 
-static void overworld_bg_setup(void)
+static void InitOverworldBgs(void)
 {
-    InitBgsFromTemplates(0, gUnknown_08339DAC, ARRAY_COUNT(gUnknown_08339DAC));
-    SetBgAttribute(1, BG_CTRL_ATTR_PALETTEMODE, 1);
-    SetBgAttribute(2, BG_CTRL_ATTR_PALETTEMODE, 1);
-    SetBgAttribute(3, BG_CTRL_ATTR_PALETTEMODE, 1);
-    gBGTilemapBuffers2 = AllocZeroed(0x800);
-    gBGTilemapBuffers1 = AllocZeroed(0x800);
-    gBGTilemapBuffers3 = AllocZeroed(0x800);
+    InitBgsFromTemplates(0, sOverworldBgTemplates, ARRAY_COUNT(sOverworldBgTemplates));
+    SetBgAttribute(1, BG_ATTR_MOSAIC, 1);
+    SetBgAttribute(2, BG_ATTR_MOSAIC, 1);
+    SetBgAttribute(3, BG_ATTR_MOSAIC, 1);
+    gBGTilemapBuffers2 = AllocZeroed(BG_SCREEN_SIZE);
+    gBGTilemapBuffers1 = AllocZeroed(BG_SCREEN_SIZE);
+    gBGTilemapBuffers3 = AllocZeroed(BG_SCREEN_SIZE);
     SetBgTilemapBuffer(1, gBGTilemapBuffers2);
     SetBgTilemapBuffer(2, gBGTilemapBuffers1);
     SetBgTilemapBuffer(3, gBGTilemapBuffers3);
-    sub_81971D0();
+    InitStandardTextBoxWindows();
 }
 
-void overworld_free_bg_tilemaps(void)
+void CleanupOverworldWindowsAndTilemaps(void)
 {
-    sub_81BE72C();
-    sub_81971F4();
-    if (gBGTilemapBuffers3 != NULL)
+    ClearMirageTowerPulseBlendEffect();
+    FreeAllOverworldWindowBuffers();
+    if (gBGTilemapBuffers3)
         FREE_AND_SET_NULL(gBGTilemapBuffers3);
-    if (gBGTilemapBuffers1 != NULL)
+    if (gBGTilemapBuffers1)
         FREE_AND_SET_NULL(gBGTilemapBuffers1);
-    if (gBGTilemapBuffers2 != NULL)
+    if (gBGTilemapBuffers2)
         FREE_AND_SET_NULL(gBGTilemapBuffers2);
 }
 
@@ -1764,7 +1761,7 @@ void CB2_ContinueSavedGame(void)
         sub_81A3908();
 
     LoadSaveblockMapHeader();
-    set_warp2_warp3_to_neg_1();
+    ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
     if (gMapHeader.mapLayoutId == 0x169)
         sub_81AA2F8();
@@ -1787,10 +1784,10 @@ void CB2_ContinueSavedGame(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
     sub_8195E10();
-    if (GetSecretBase2Field_9() == 1)
+    if (UseContinueGameWarp() == TRUE)
     {
-        ClearSecretBase2Field_9();
-        warp1_set_to_sav1w();
+        ClearContinueGameWarpStatus();
+        SetWarpDestinationToContinueGameWarp();
         WarpIntoMap();
         sub_80EDB44();
         SetMainCallback2(CB2_LoadMap);
@@ -1863,7 +1860,7 @@ static bool32 map_loading_iteration_3(u8 *state)
     switch (*state)
     {
     case 0:
-        overworld_bg_setup();
+        InitOverworldBgs();
         ScriptContext1_Init();
         ScriptContext2_Disable();
         sub_80867C8();
@@ -2121,7 +2118,7 @@ static void do_load_map_stuff_loop(u8 *state)
 
 static void sub_80867C8(void)
 {
-    sub_81BE6AC();
+    ClearMirageTowerPulseBlend();
     MoveSaveBlocks_ResetHeap();
 }
 
@@ -2149,8 +2146,8 @@ static void InitOverworldGraphicsRegisters(void)
     clear_scheduled_bg_copies_to_vram();
     reset_temp_tile_data_buffers();
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0x1F1F);
-    SetGpuReg(REG_OFFSET_WINOUT, 0x101);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0);
     SetGpuReg(REG_OFFSET_WIN0H, 0xFF);
     SetGpuReg(REG_OFFSET_WIN0V, 0xFF);
     SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
@@ -2158,7 +2155,7 @@ static void InitOverworldGraphicsRegisters(void)
     SetGpuReg(REG_OFFSET_BLDCNT, gUnknown_82EC7C4[1] | gUnknown_82EC7C4[2] | gUnknown_82EC7C4[3]
                                | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
-    overworld_bg_setup();
+    InitOverworldBgs();
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     schedule_bg_copy_tilemap_to_vram(3);
@@ -2176,7 +2173,7 @@ static void InitOverworldGraphicsRegisters(void)
     ShowBg(1);
     ShowBg(2);
     ShowBg(3);
-    sub_8098128();
+    InitFieldMessageBox();
 }
 
 static void sub_8086988(u32 a1)
@@ -2199,7 +2196,7 @@ static void sub_8086988(u32 a1)
     if (!a1)
         SetUpFieldTasks();
     mapheader_run_script_with_tag_x5();
-    sub_81BE6B8();
+    TryStartMirageTowerPulseBlendEffect();
 }
 
 static void sub_80869DC(void)

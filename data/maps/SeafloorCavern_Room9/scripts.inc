@@ -28,7 +28,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	msgbox SeafloorCavern_Room9_Text_23512C, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_ARCHIE, SeafloorCavern_Room9_Text_2351BC
 	msgbox SeafloorCavern_Room9_Text_2351E5, MSGBOX_DEFAULT
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	special sub_80B05B4
 	waitstate

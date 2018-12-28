@@ -1,4 +1,5 @@
 #include "global.h"
+#include "alloc.h"
 #include "battle.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
@@ -6,14 +7,15 @@
 #include "bg.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "field_screen_effect.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
+#include "item_menu.h"
 #include "lilycove_lady.h"
 #include "list_menu.h"
 #include "main.h"
-#include "alloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "overworld.h"
@@ -70,13 +72,8 @@ enum
     PKBL_GIVE_TO_LADY
 };
 
-extern u16 gSpecialVar_ItemId;
 
 extern const u16 gUnknown_0860F074[];
-
-extern void CB2_ReturnToField(void);
-extern bool8 sub_81221EC(void);
-extern void sub_80AF168(void);
 
 // this file's functions
 static void CB2_InitPokeblockMenu(void);

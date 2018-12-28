@@ -8,7 +8,7 @@ MossdeepCity_House1_EventScript_221FD6:: @ 8221FD6
 	msgbox MossdeepCity_House1_Text_22200F, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetPokeblockNameByMonNature
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_House1_EventScript_221FFC
+	goto_if_eq MossdeepCity_House1_EventScript_221FFC
 	msgbox MossdeepCity_House1_Text_22201D, MSGBOX_DEFAULT
 	release
 	end

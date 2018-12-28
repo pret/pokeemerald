@@ -4,10 +4,10 @@ Route130_MapScripts:: @ 81F735F
 
 Route130_MapScript1_1F7365: @ 81F7365
 	compare VAR_0x405E, 4
-	call_if 4, Route130_EventScript_1F73B5
+	call_if_ge Route130_EventScript_1F73B5
 	specialvar VAR_RESULT, IsMirageIslandPresent
 	compare VAR_RESULT, 1
-	goto_eq Route130_EventScript_1F73B1
+	goto_if_eq Route130_EventScript_1F73B1
 	setflag FLAG_TEMP_11
 	setflag FLAG_TEMP_12
 	setflag FLAG_TEMP_13
@@ -31,8 +31,7 @@ Route130_EventScript_1F73B1:: @ 81F73B1
 	end
 
 Route130_EventScript_1F73B5:: @ 81F73B5
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, Route130_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Route130_EventScript_27207A
 	return
 
 Route130_EventScript_1F73BF:: @ 81F73BF

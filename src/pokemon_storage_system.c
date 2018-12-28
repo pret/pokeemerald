@@ -8,6 +8,7 @@
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "fldeff_misc.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -43,7 +44,6 @@
 
 // gcc-8 does not like it when inline asm references
 // a static symbol, even if it's in the same file.
-#define static
 
 struct WallpaperTable
 {
@@ -466,10 +466,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
-extern void sub_80F9BCC(u16, u16, u8);
-extern void sub_80F9BF4(u16, u16, u8);
-extern bool8 sub_80F9C1C(void);
-extern bool8 sub_80F9C30(void);
 extern void sub_80C6D80(u8 *arg0, void *arg1, u8 arg2, u8 arg3, s32 arg4);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -494,7 +490,7 @@ static void ScrollBackground(void);
 static void sub_80C7B80(void);
 static void sub_80C7BE4(void);
 static void sub_80CAA14(void);
-static void sub_80CFDC4(void);
+/*static*/ void sub_80CFDC4(void);
 static void sub_80CE790(void);
 static void sub_80CE8E4(void);
 static void GiveChosenBagItem(void);
@@ -551,7 +547,7 @@ static void sub_80CE7E8(void);
 static void sub_80CFECC(void);
 static void sub_80CA9EC(void);
 static void FreePSSData(void);
-static void AddBoxMenu(void);
+/*static*/ void AddBoxMenu(void);
 static void sub_80CCF9C(void);
 static void MoveMon(void);
 static void PlaceMon(void);
@@ -635,7 +631,7 @@ static void SetMonMarkings(u8 markings);
 static void ShowYesNoWindow(s8 cursorPos);
 static void sub_80CDBF8(u8 cursorBoxPosition);
 static void sub_80D01D0(u8 arg0);
-static void sub_80CD1A8(bool8 arg0);
+/*static*/ void sub_80CD1A8(bool8 arg0);
 static void sub_80CA984(bool8 arg0);
 static void CreatePartyMonsSprites(bool8 arg0);
 static void PrintStorageActionText(u8 id);
@@ -686,8 +682,8 @@ static bool32 AtLeastThreeUsableMons(void);
 static u8 InBoxInput_Normal(void);
 static u8 InBoxInput_MovingMultiple(void);
 static u8 InBoxInput_GrabbingMultiple(void);
-static s8 sub_80CFF98(u8 arg0);
-static u8 sub_80CFA5C(void);
+/*static*/ s8 sub_80CFF98(u8 arg0);
+/*static*/ u8 sub_80CFA5C(void);
 static u8 sub_80D0BA4(void);
 static bool8 sub_80CFA84(void);
 static bool8 sub_80CFB44(void);
@@ -1766,7 +1762,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 4:
         if (!gPaletteFade.active)
         {
-            overworld_free_bg_tilemaps();
+            CleanupOverworldWindowsAndTilemaps();
             Cb2_EnterPSS(task->data[2]);
             RemoveWindow(task->data[15]);
             DestroyTask(taskId);
@@ -5627,7 +5623,7 @@ static void sub_80CD158(void)
     sub_80CD1A8(TRUE);
 }
 
-static void sub_80CD1A8(bool8 a0)
+/*static*/ void sub_80CD1A8(bool8 a0)
 {
     u16 i;
 
@@ -8285,7 +8281,7 @@ static u8 HandleInput(void)
     return 0;
 }
 
-static void AddBoxMenu(void)
+/*static*/ void AddBoxMenu(void)
 {
     InitMenu();
     SetMenuText(9);
@@ -8294,7 +8290,7 @@ static void AddBoxMenu(void)
     SetMenuText(0);
 }
 
-static u8 sub_80CFA5C(void)
+/*static*/ u8 sub_80CFA5C(void)
 {
     InitMenu();
     if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
@@ -8535,7 +8531,7 @@ static void sub_80CFC14(void)
     }
 }
 
-static void sub_80CFDC4(void)
+/*static*/ void sub_80CFDC4(void)
 {
     sCanOnlyMove = !sCanOnlyMove;
     sPSSData->field_CB4->oam.paletteNum = sPSSData->field_CD8[sCanOnlyMove];
@@ -8656,7 +8652,7 @@ static void SetMenuText(u8 textId)
     }
 }
 
-static s8 sub_80CFF98(u8 arg0)
+/*static*/ s8 sub_80CFF98(u8 arg0)
 {
     if (arg0 >= sPSSData->menuItemsCount)
         return -1;
@@ -8833,7 +8829,7 @@ static bool8 sub_80D024C(void)
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillWindowPixelBuffer8Bit(sPSSData->field_2200, 0);
         sub_80D07B0(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
-        SetBgAttribute(0, 4, 1);
+        SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sPSSData->field_2200);
         CopyWindowToVram8Bit(sPSSData->field_2200, 3);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
@@ -9253,7 +9249,7 @@ static void sub_80D0B5C(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
-    SetBgAttribute(0, 4, 0);
+    SetBgAttribute(0, BG_ATTR_PALETTEMODE, 0);
     ClearGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
@@ -9872,7 +9868,7 @@ static bool8 sub_80D184C(void)
     var = 0x15 - sPSSData->field_2236;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, 10) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
     }
 
     sub_80D19B4(var);
@@ -9893,7 +9889,7 @@ static bool8 sub_80D18E4(void)
     var = 0x15 - sPSSData->field_2236;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, 10) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
     }
 
     if (var >= 0)
@@ -10430,7 +10426,7 @@ static const sUnkVars[][4] =
 
 static void sub_80D2644(u8 id, u8 bg, const void *arg2, u16 arg3, u16 arg4)
 {
-    u16 attribute1, attribute2;
+    u16 bgScreenSize, bgType;
 
     if (id >= gUnknown_02039D88)
         return;
@@ -10441,11 +10437,11 @@ static void sub_80D2644(u8 id, u8 bg, const void *arg2, u16 arg3, u16 arg4)
     gUnknown_02039D84[id].field_24 = arg3;
     gUnknown_02039D84[id].field_26 = arg4;
 
-    attribute1 = GetBgAttribute(bg, 3);
-    attribute2 = GetBgAttribute(bg, 9);
-    gUnknown_02039D84[id].field_20 = sUnkVars[attribute2][attribute1].a;
-    gUnknown_02039D84[id].field_22 = sUnkVars[attribute2][attribute1].b;
-    if (attribute2 != 0)
+    bgScreenSize = GetBgAttribute(bg, BG_ATTR_SCREENSIZE);
+    bgType = GetBgAttribute(bg, BG_ATTR_TYPE);
+    gUnknown_02039D84[id].field_20 = sUnkVars[bgType][bgScreenSize].a;
+    gUnknown_02039D84[id].field_22 = sUnkVars[bgType][bgScreenSize].b;
+    if (bgType != 0)
         gUnknown_02039D84[id].field_2A = 1;
     else
         gUnknown_02039D84[id].field_2A = 2;
