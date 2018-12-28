@@ -11,8 +11,8 @@ BirthIsland_Exterior_MapScript1_267F25: @ 8267F25
 BirthIsland_Exterior_MapScript1_267F29: @ 8267F29
 	setflag FLAG_0x8D3
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_0x4034, 0
-	setvar VAR_0x4035, 0
+	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
+	setvar VAR_DEOXYS_ROCK_LEVEL, 0
 	call_if_set FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F4E
 	call_if_unset FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F55
 	end
@@ -25,7 +25,7 @@ BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
 BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
 	goto_if_set FLAG_0x1AC, BirthIsland_Exterior_EventScript_27374E
 	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
-	clearflag FLAG_0x8D4
+	clearflag FLAG_DEOXYS_ROCK_COMPLETE
 	return
 
 BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
@@ -42,7 +42,7 @@ BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
 BirthIsland_Exterior_EventScript_267F83:: @ 8267F83
 	lock
 	faceplayer
-	special sub_813AFC8
+	special DoDeoxysRockInteraction
 	waitstate
 	switch VAR_RESULT
 	case 0, BirthIsland_Exterior_EventScript_267FBB
