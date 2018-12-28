@@ -791,7 +791,7 @@ bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
     playerY = object->currentCoords.y;
 
     MoveCoords(direction, &playerX, &playerY);
-    mewObjectId = GetEventObjectIdByLocalIdAndMap(1, 0x39, 0x1A);
+    mewObjectId = GetEventObjectIdByLocalIdAndMap(1, MAP_NUM(FARAWAY_ISLAND_INTERIOR), MAP_GROUP(FARAWAY_ISLAND_INTERIOR));
 
     if (mewObjectId == 16)
     {
@@ -1389,7 +1389,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     u8 eventObjectId;
     struct EventObject *eventObject;
 
-    playerEventObjTemplate.localId = 0xFF;
+    playerEventObjTemplate.localId = EVENT_OBJ_ID_PLAYER;
     playerEventObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
     playerEventObjTemplate.x = x - 7;
     playerEventObjTemplate.y = y - 7;

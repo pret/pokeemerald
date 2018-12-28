@@ -49,6 +49,7 @@
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
+#include "constants/event_objects.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -1239,11 +1240,11 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
 
 bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 {
-    u8 objectId;
+    u8 playerObjectId;
 
     HideFieldMessageBox();
-    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80D338C();
     UnfreezeEventObjects();
     return FALSE;
@@ -1251,13 +1252,13 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 
 bool8 ScrCmd_release(struct ScriptContext *ctx)
 {
-    u8 objectId;
+    u8 playerObjectId;
 
     HideFieldMessageBox();
     if (gEventObjects[gSelectedEventObject].active)
         EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
-    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80D338C();
     UnfreezeEventObjects();
     return FALSE;
