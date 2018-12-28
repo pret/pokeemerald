@@ -749,7 +749,7 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF734();
+    DoWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -763,7 +763,7 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sp13E_warp_to_last_warp();
+    DoDiveWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -777,7 +777,7 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF7D0();
+    DoDoorWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -794,7 +794,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
         SetWarpDestinationToFixedHoleWarp(x - 7, y - 7);
     else
         SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
-    sp13F_fall_to_last_warp();
+    DoFallWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
