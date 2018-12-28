@@ -56,8 +56,8 @@ static bool8 TryArrowWarp(struct MapPosition *, u16, u8);
 static bool8 IsWarpMetatileBehavior(u16);
 static bool8 IsArrowWarpMetatileBehavior(u16, u8);
 static s8 GetWarpEventAtMapPosition(struct MapHeader *, struct MapPosition *);
-static void sub_809CEB0(struct MapHeader *, s8, struct MapPosition *);
-static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
+static void SetupWarp(struct MapHeader *, s8, struct MapPosition *);
+static bool8 TryDoorWarp(struct MapPosition *, u16, u8);
 static s8 GetWarpEventAtPosition(struct MapHeader *, u16, u16, u8);
 static u8 *GetCoordEventScriptAtPosition(struct MapHeader *, u16, u16, u8);
 static struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *, u16, u16, u8);
@@ -74,8 +74,8 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->checkStandardWildEncounter = FALSE;
     input->pressedStartButton = FALSE;
     input->pressedSelectButton = FALSE;
-    input->input_field_0_4 = FALSE;
-    input->input_field_0_5 = FALSE;
+    input->heldDirection = FALSE;
+    input->heldDirection2 = FALSE;
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
     input->input_field_1_0 = FALSE;
@@ -107,8 +107,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
         {
-            input->input_field_0_4 = TRUE;
-            input->input_field_0_5 = TRUE;
+            input->heldDirection = TRUE;
+            input->heldDirection2 = TRUE;
         }
     }
 
@@ -160,7 +160,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileBehavior) == TRUE)
         return TRUE;
-    if (input->input_field_0_4 && input->dpadDirection == playerDirection)
+    if (input->heldDirection && input->dpadDirection == playerDirection)
     {
         if (TryArrowWarp(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
@@ -171,9 +171,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedAButton && TryStartInteractionScript(&position, metatileBehavior, playerDirection) == TRUE)
         return TRUE;
 
-    if (input->input_field_0_5 && input->dpadDirection == playerDirection)
+    if (input->heldDirection2 && input->dpadDirection == playerDirection)
     {
-        if (map_warp_consider_2_to_inside(&position, metatileBehavior, playerDirection) == TRUE)
+        if (TryDoorWarp(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
@@ -304,13 +304,10 @@ static const u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8
     gSpecialVar_Facing = direction;
 
     if (InTrainerHill() == TRUE)
-    {
         script = sub_81D62AC();
-    }
     else
-    {
         script = GetEventObjectScriptPointerByEventObjectId(eventObjectId);
-    }
+
     script = GetRamScript(gSpecialVar_LastTalked, script);
     return script;
 }
@@ -381,7 +378,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (MetatileBehavior_IsCableBoxResults1(metatileBehavior) == TRUE)
         return EventScript_CableBoxResults;
     if (MetatileBehavior_IsPokeblockFeeder(metatileBehavior) == TRUE)
-        return EventScript_2A4BAC;
+        return EventScript_PokeBlockFeeder;
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
         return Route110_TrickHouseEntrance_EventScript_26A22A;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
@@ -694,8 +691,8 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8
     if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE && warpEventId != -1)
     {
         StoreInitialPlayerAvatarState();
-        sub_809CEB0(&gMapHeader, warpEventId, position);
-        sub_80AF734();
+        SetupWarp(&gMapHeader, warpEventId, position);
+        DoWarp();
         return TRUE;
     }
     return FALSE;
@@ -708,7 +705,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
     if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
     {
         StoreInitialPlayerAvatarState();
-        sub_809CEB0(&gMapHeader, warpEventId, position);
+        SetupWarp(&gMapHeader, warpEventId, position);
         if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
         {
             sub_80AF80C(metatileBehavior);
@@ -744,7 +741,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
             sub_80AF87C();
             return TRUE;
         }
-        sub_80AF734();
+        DoWarp();
         return TRUE;
     }
     return FALSE;
@@ -787,7 +784,7 @@ static s8 GetWarpEventAtMapPosition(struct MapHeader *mapHeader, struct MapPosit
     return GetWarpEventAtPosition(mapHeader, position->x - 7, position->y - 7, position->height);
 }
 
-static void sub_809CEB0(struct MapHeader *unused, s8 warpEventId, struct MapPosition *position)
+static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPosition *position)
 {
     const struct WarpEvent *warpEvent;
 
@@ -829,14 +826,14 @@ static void sub_809CEB0(struct MapHeader *unused, s8 warpEventId, struct MapPosi
         const struct MapHeader *mapHeader;
 
         SetWarpDestinationToMapWarp(warpEvent->mapGroup, warpEvent->mapNum, warpEvent->warpId);
-        sub_8084D5C(position->x, position->y);
+        UpdateEscapeWarp(position->x, position->y);
         mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->mapGroup, warpEvent->mapNum);
         if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(NONE))
             SetDynamicWarp(mapHeader->events->warps[warpEventId].warpId, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, warpEventId);
     }
 }
 
-static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 metatileBehavior, u8 direction)
+static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
     s8 warpEventId;
 
@@ -844,17 +841,18 @@ static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 met
     {
         if (MetatileBehavior_IsOpenSecretBaseDoor(metatileBehavior) == TRUE)
         {
-            sub_80E9668(position, gMapHeader.events);
+            WarpIntoSecretBase(position, gMapHeader.events);
             return TRUE;
         }
+
         if (MetatileBehavior_IsWarpDoor(metatileBehavior) == TRUE)
         {
             warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
             if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
             {
                 StoreInitialPlayerAvatarState();
-                sub_809CEB0(&gMapHeader, warpEventId, position);
-                sub_80AF7D0();
+                SetupWarp(&gMapHeader, warpEventId, position);
+                DoDoorWarp();
                 return TRUE;
             }
         }
@@ -949,7 +947,7 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
         if (SetDiveWarpEmerge(position->x - 7, position->y - 7))
         {
             StoreInitialPlayerAvatarState();
-            sp13E_warp_to_last_warp();
+            DoDiveWarp();
             PlaySE(SE_W291);
             return TRUE;
         }
@@ -959,7 +957,7 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
         if (SetDiveWarpDive(position->x - 7, position->y - 7))
         {
             StoreInitialPlayerAvatarState();
-            sp13E_warp_to_last_warp();
+            DoDiveWarp();
             PlaySE(SE_W291);
             return TRUE;
         }
@@ -1004,6 +1002,6 @@ int SetCableClubWarp(void)
     GetPlayerMovementDirection();  //unnecessary
     GetPlayerPosition(&position);
     MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
-    sub_809CEB0(&gMapHeader, GetWarpEventAtMapPosition(&gMapHeader, &position), &position);
+    SetupWarp(&gMapHeader, GetWarpEventAtMapPosition(&gMapHeader, &position), &position);
     return 0;
 }

@@ -328,8 +328,8 @@ gSpecials:: @ 81DBA64
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
 	def_special sub_80AC81C
-	def_special sp13E_warp_to_last_warp
-	def_special sp13F_fall_to_last_warp
+	def_special DoDiveWarp
+	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
 	def_special sub_80F8EB8
 	def_special SetEReaderTrainerGfxId
