@@ -488,7 +488,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B892C
 	def_special sub_813AEB4
 	def_special sub_813AF48
-	def_special sub_813AFC8
+	def_special DoDeoxysRockInteraction
 	def_special sub_813B1D0
 	def_special CreateObedientEnemyMon
 	def_special StartMirageTowerDisintegration
