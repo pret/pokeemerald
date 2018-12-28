@@ -1,6 +1,6 @@
 BattleFrontier_BattlePalaceBattleRoom_EventObjects: @ 853C4FC
-	object_event 1, EVENT_OBJ_GFX_TRADER, 0, 1, 9, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 0
-	object_event 2, EVENT_OBJ_GFX_HIPSTER, 0, 13, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
+	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 1, 9, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, 0x0, 0
+	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 13, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_EXPERT_M, 0, 1, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, 0x0, 0
 	object_event 4, EVENT_OBJ_GFX_DUSCLOPS, 0, 13, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 5, EVENT_OBJ_GFX_AZURILL, 0, 13, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
