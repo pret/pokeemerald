@@ -600,7 +600,7 @@
 #define BLDCNT_TGT2_ALL      (BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD)
 
 // BLDALPHA
-#define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
+#define BLDALPHA_BLEND(target1, target2) ((target1)) | ((target2) << 8)
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000

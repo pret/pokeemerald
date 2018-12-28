@@ -1984,4 +1984,10 @@ extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OtherTrainerCantAcceptPkmn[];
 extern const u8 gText_CantTradeWithTrainer[];
 
+// trade
+extern const u8 gText_XWillBeSentToY[];
+extern const u8 gText_ByeByeVar1[];
+extern const u8 gText_XSentOverY[];
+extern const u8 gText_TakeGoodCareOfX[];
+
 #endif //GUARD_STRINGS_H

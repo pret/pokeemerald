@@ -8,6 +8,7 @@
 #include "daycare.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "evolution_scene.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -19,11 +20,13 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokeball.h"
 #include "pokedex.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
@@ -31,92 +34,113 @@
 #include "trade.h"
 #include "util.h"
 #include "window.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+struct InGameTrade {
+    /*0x00*/ u8 name[11];
+    /*0x0C*/ u16 species;
+    /*0x0E*/ u8 ivs[6];
+    /*0x14*/ bool8 secondAbility;
+    /*0x18*/ u32 otId;
+    /*0x1C*/ u8 stats[5];
+    /*0x24*/ u32 personality;
+    /*0x28*/ u16 heldItem;
+    /*0x2A*/ u8 mailNum;
+    /*0x2B*/ u8 otName[11];
+    /*0x36*/ u8 otGender;
+    /*0x37*/ u8 sheen;
+    /*0x38*/ u16 playerSpecies;
+};
+
 extern u8 gUnknown_02022C2C;
 extern struct {
-    u8 unk_0;
-    u8 unk_1;
-    u8 filler_2[0x28 - 2];
-    u8 unk_28[2][PARTY_SIZE];
-    u8 unk_34;
-    u8 unk_35;
-    u8 unk_36[2];
-    u8 unk_38[12];
-    u8 unk_44;
-    u8 unk_45[2][PARTY_SIZE];
-    u8 unk_51[2][PARTY_SIZE];
-    u8 unk_5D[PARTY_SIZE];
-    u8 unk_63[PARTY_SIZE];
-    u8 unk_69;
-    u8 filler_6A[0x6F - 0x6A];
-    u8 unk_6F;
-    u8 unk_70;
-    u8 filler_71;
-    u16 unk_72;
-    u8 unk_74[2];
-    u8 unk_76[2];
-    u8 unk_78;
-    u8 unk_79;
-    u8 unk_7A;
-    u8 unk_7B;
-    u8 filler_7C[0x7E - 0x7C];
-    u8 unk_7E;
-    u8 filler_7F;
-    u16 unk_80[2];
-    u8 filler_84[0xA8 - 0x84];
-    u8 unk_A8;
-    u8 unk_A9[11];
-    u8 filler_B4[0x8D0-0xB4];
-    struct {
+    /*0x0000*/ u8 unk_0;
+    /*0x0001*/ u8 unk_1;
+    /*0x0002*/ u8 filler_2[0x28 - 2];
+    /*0x0028*/ u8 unk_28[2][PARTY_SIZE];
+    /*0x0034*/ u8 unk_34;
+    /*0x0035*/ u8 unk_35;
+    /*0x0036*/ u8 partyCounts[2];
+    /*0x0038*/ u8 unk_38[12];
+    /*0x0044*/ u8 unk_44;
+    /*0x0045*/ u8 unk_45[2][PARTY_SIZE];
+    /*0x0051*/ u8 unk_51[2][PARTY_SIZE];
+    /*0x005D*/ u8 unk_5D[2][PARTY_SIZE];
+    /*0x0069*/ u8 unk_69;
+    /*0x006A*/ u8 filler_6A[0x6F - 0x6A];
+    /*0x006F*/ u8 unk_6F;
+    /*0x0070*/ u8 unk_70;
+    /*0x0071*/ u8 filler_71;
+    /*0x0072*/ u16 unk_72;
+    /*0x0074*/ u8 unk_74[2];
+    /*0x0076*/ u8 unk_76[2];
+    /*0x0078*/ u8 unk_78;
+    /*0x0079*/ u8 unk_79;
+    /*0x007A*/ u8 unk_7A;
+    /*0x007B*/ u8 unk_7B;
+    /*0x007C*/ u8 filler_7C[0x7E - 0x7C];
+    /*0x007E*/ u8 unk_7E;
+    /*0x007F*/ u8 filler_7F;
+    /*0x0080*/ u16 unk_80[2];
+    /*0x0084*/ u8 filler_84[0xA8 - 0x84];
+    /*0x00A8*/ u8 unk_A8;
+    /*0x00A9*/ u8 unk_A9[11];
+    /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
+    /*0x08D0*/ struct {
         bool8 unk_0;
         u16 unk_2;
         u8 unk_4;
     } unk_8D0[4];
-    u16 tilemapBuffer[0x400];    // 8F0
+    /*0x08F0*/ u16 tilemapBuffer[0x400];
 } *gUnknown_0203229C;
 extern u8 *gUnknown_02032184;
 extern u8 *gUnknown_02032188[14];
 extern u8 gUnknown_02032298[2];
 extern struct {
-    struct Pokemon mon;
-    u32 unk_64;
-    u32 unk_68[2];
-    u8 filler_70[2];
-    u8 unk_72;
-    u8 unk_73;
-    u8 unk_74[20];
-    u8 unk_88;
-    u8 unk_89;
-    u16 unk_8A;
-    u16 unk_8C;
-    u8 unk_8E[2];
-    u8 filler_90[3];
-    u8 unk_93;
-    u16 unk_94;
-    u8 filler_96[0xD4 - 0x96];
-    u16 unk_D4;
-    u16 unk_D6;
-    u16 unk_D8;
-    u16 unk_DA;
-    s16 unk_DC;
-    s16 unk_DE;
-    u16 unk_E0;
-    u16 unk_E2;
-    u16 unk_E4;
-    u16 unk_E6;
-    s16 unk_E8;
-    u16 unk_EA;
-    u16 unk_EC;
-    u8 unk_EE;
-    u8 filler_EF;
-    u16 unk_F0[2];
-    u8 filler_F4[0xFA - 0xF4];
-    u8 unk_FA;
-    u8 filler_FB[0x100 - 0xFB];
+    /*0x00*/ struct Pokemon mon;
+    /*0x64*/ u32 unk_64;
+    /*0x68*/ u32 unk_68[2];
+    /*0x70*/ u8 filler_70[2];
+    /*0x72*/ u8 unk_72;
+    /*0x73*/ u8 unk_73;
+    /*0x74*/ u8 unk_74[20];
+    /*0x88*/ u8 unk_88;
+    /*0x89*/ u8 unk_89;
+    /*0x8A*/ u16 unk_8A;
+    /*0x8C*/ u16 unk_8C;
+    /*0x8E*/ u8 pokePicSpriteIdxs[2];
+    /*0x90*/ u8 unk_90;
+    /*0x91*/ u8 unk_91;
+    /*0x92*/ u8 unk_92;
+    /*0x93*/ u8 unk_93;
+    /*0x94*/ u16 unk_94;
+    /*0x96*/ u8 filler_96[0xD2 - 0x96];
+    /*0xD2*/ u8 unk_D2;
+    /*0xD3*/ u8 unk_D3;
+    /*0xD4*/ u16 unk_D4;
+    /*0xD6*/ u16 unk_D6;
+    /*0xD8*/ u16 unk_D8;
+    /*0xDA*/ u16 unk_DA;
+    /*0xDC*/ s16 unk_DC;
+    /*0xDE*/ s16 unk_DE;
+    /*0xE0*/ s16 bg1vofs;
+    /*0xE2*/ s16 bg1hofs;
+    /*0xE4*/ s16 bg2vofs;
+    /*0xE6*/ s16 bg2hofs;
+    /*0xE8*/ s16 unk_E8;
+    /*0xEA*/ u16 unk_EA;
+    /*0xEC*/ u16 unk_EC;
+    /*0xEE*/ bool8 isLinkTrade;
+    /*0xEF*/ u8 filler_EF;
+    /*0xF0*/ u16 tradeSpecies[2];
+    /*0xF4*/ u16 unk_F4;
+    /*0xF6*/ u8 filler_F6[0xFA - 0xF6];
+    /*0xFA*/ u8 unk_FA;
+    /*0xFB*/ u8 filler_FB[0x100 - 0xFB];
 } *gUnknown_020322A0;
 
 extern u8 gUnknown_0203CF20;
@@ -162,8 +186,24 @@ extern const u32 gUnknown_08338550[];
 extern const u8 gUnknown_08332F60[];
 extern const u8 gUnknown_083357A0[];
 extern const u8 gUnknown_083358A0[];
+extern const struct SpriteSheet gUnknown_08338D70;
+extern const struct SpriteSheet gUnknown_08338DC0;
+extern const struct SpriteSheet gUnknown_08338DF4;
+extern const struct SpriteSheet gUnknown_08338E6C;
+extern const struct SpritePalette gUnknown_08338D78;
+extern const struct SpritePalette gUnknown_08338D80;
+extern const struct InGameTrade gIngameTrades[];
+extern const struct SpriteTemplate gSpriteTemplate_8338D28;
+extern const struct SpriteTemplate gSpriteTemplate_8338E74;
+extern const struct SpriteTemplate gSpriteTemplate_8338DFC;
+extern const struct SpriteTemplate gUnknown_08338D88;
+extern const struct SpriteTemplate gSpriteTemplate_8338DC8;
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_8338ECC[];
+extern const struct SpriteTemplate gSpriteTemplate_8338E74;
 
+// external to this file
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const struct MonCoords gMonFrontPicCoords[];
 
 bool32 sub_8077260(void);
 void sub_80773D0(void);
@@ -202,7 +242,16 @@ void sub_807BAD8(void);
 void sub_807EA2C(void);
 void sub_807B62C(u8);
 void sub_807B60C(void);
-void sub_807BBC8(void);
+u8 sub_807BBC8(void);
+u8 sub_807CFC8(void);
+u8 sub_807BBEC(void);
+void sub_807F1A8(u8, u8 *, u8);
+void sub_807E5D8(struct Sprite *);
+void sub_807AAE0(struct Sprite *);
+void sub_807E6AC(struct Sprite *);
+void sub_807F14C(void);
+void sub_807E784(void);
+void c3_0805465C(u8);
 
 bool8 sub_8077170(const void *a0, u32 a1)
 {
@@ -462,10 +511,10 @@ void sub_80773D0(void)
         CalculateEnemyPartyCount();
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        gUnknown_0203229C->unk_36[0] = gPlayerPartyCount;
-        gUnknown_0203229C->unk_36[1] = gEnemyPartyCount;
+        gUnknown_0203229C->partyCounts[0] = gPlayerPartyCount;
+        gUnknown_0203229C->partyCounts[1] = gEnemyPartyCount;
 
-        for (i = 0; i < gUnknown_0203229C->unk_36[0]; i++)
+        for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
             gUnknown_0203229C->unk_28[0][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
@@ -477,7 +526,7 @@ void sub_80773D0(void)
                                                          TRUE);
         }
 
-        for (i = 0; i < gUnknown_0203229C->unk_36[1]; i++)
+        for (i = 0; i < gUnknown_0203229C->partyCounts[1]; i++)
         {
             struct Pokemon *mon = &gEnemyParty[i];
             gUnknown_0203229C->unk_28[1][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
@@ -492,11 +541,11 @@ void sub_80773D0(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_81B5D4C(&gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_28[0], 0);
+        sub_81B5D4C(&gUnknown_0203229C->partyCounts[0], gUnknown_0203229C->unk_28[0], 0);
         gMain.state++;
         break;
     case 9:
-        sub_81B5D4C(&gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_28[0], 1);
+        sub_81B5D4C(&gUnknown_0203229C->partyCounts[0], gUnknown_0203229C->unk_28[0], 1);
         gMain.state++;
         break;
     case 10:
@@ -645,13 +694,13 @@ void sub_8077B74(void)
         break;
     case 7:
         CalculateEnemyPartyCount();
-        gUnknown_0203229C->unk_36[0] = gPlayerPartyCount;
-        gUnknown_0203229C->unk_36[1] = gEnemyPartyCount;
+        gUnknown_0203229C->partyCounts[0] = gPlayerPartyCount;
+        gUnknown_0203229C->partyCounts[1] = gEnemyPartyCount;
         ClearWindowTilemap(0);
         sub_8079BE0(0);
         sub_8079BE0(1);
 
-        for (i = 0; i < gUnknown_0203229C->unk_36[0]; i++)
+        for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
             gUnknown_0203229C->unk_28[0][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
@@ -663,7 +712,7 @@ void sub_8077B74(void)
                                                          TRUE);
         }
 
-        for (i = 0; i < gUnknown_0203229C->unk_36[1]; i++)
+        for (i = 0; i < gUnknown_0203229C->partyCounts[1]; i++)
         {
             struct Pokemon *mon = &gEnemyParty[i];
             gUnknown_0203229C->unk_28[1][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
@@ -678,11 +727,11 @@ void sub_8077B74(void)
         break;
     case 8:
         LoadHeldItemIcons();
-        sub_81B5D4C(&gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_28[0], 0);
+        sub_81B5D4C(&gUnknown_0203229C->partyCounts[0], gUnknown_0203229C->unk_28[0], 0);
         gMain.state++;
         break;
     case 9:
-        sub_81B5D4C(&gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_28[0], 1);
+        sub_81B5D4C(&gUnknown_0203229C->partyCounts[0], gUnknown_0203229C->unk_28[0], 1);
         gMain.state++;
         break;
     case 10:
@@ -906,7 +955,7 @@ void sub_8078388(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (i < gUnknown_0203229C->unk_36[0])
+        if (i < gUnknown_0203229C->partyCounts[0])
         {
             gSprites[gUnknown_0203229C->unk_28[0][i]].invisible = FALSE;
             gUnknown_0203229C->unk_38[i] = TRUE;
@@ -916,7 +965,7 @@ void sub_8078388(void)
             gUnknown_0203229C->unk_38[i] = FALSE;
         }
 
-        if (i < gUnknown_0203229C->unk_36[1])
+        if (i < gUnknown_0203229C->partyCounts[1])
         {
             gSprites[gUnknown_0203229C->unk_28[1][i]].invisible = FALSE;
             gUnknown_0203229C->unk_38[i + PARTY_SIZE] = TRUE;
@@ -1452,11 +1501,11 @@ void sub_807905C(void)
     {
         if (gUnknown_0203229C->unk_35 < PARTY_SIZE)
         {
-            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gPlayerParty, gUnknown_0203229C->unk_35, gUnknown_0203229C->unk_36[0] - 1, sub_8077B74);
+            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gPlayerParty, gUnknown_0203229C->unk_35, gUnknown_0203229C->partyCounts[0] - 1, sub_8077B74);
         }
         else
         {
-            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gEnemyParty, gUnknown_0203229C->unk_35 - PARTY_SIZE, gUnknown_0203229C->unk_36[1] - 1, sub_8077B74);
+            ShowPokemonSummaryScreen(PSS_MODE_UNK1, gEnemyParty, gUnknown_0203229C->unk_35 - PARTY_SIZE, gUnknown_0203229C->partyCounts[1] - 1, sub_8077B74);
         }
         FreeAllWindowBuffers();
     }
@@ -1508,12 +1557,12 @@ bool32 sub_8079174(void)
     int i;
     u8 arr[12];
 
-    for (i = 0; i < gUnknown_0203229C->unk_36[0]; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
     {
         arr[i] = gUnknown_0203229C->unk_45[0][i];
     }
 
-    switch (sub_80790D4(arr, gUnknown_0203229C->unk_36[0], gUnknown_0203229C->unk_35, gUnknown_0203229C->unk_7E))
+    switch (sub_80790D4(arr, gUnknown_0203229C->partyCounts[0], gUnknown_0203229C->unk_35, gUnknown_0203229C->unk_7E))
     {
         case 0:
             sub_807A048(3, 3);
@@ -1563,7 +1612,7 @@ void sub_807929C(void)
 {
     int i;
 
-    for (i = 0; i < gUnknown_0203229C->unk_36[1] - 4; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[1] - 4; i++)
     {
         PutWindowTilemap(i + 12);
         CopyWindowToVram(i + 12, 1);
@@ -1793,7 +1842,7 @@ void sub_80796B4(u8 a0)
     switch (gUnknown_0203229C->unk_74[a0])
     {
     case 1:
-        for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+        for (i = 0; i < gUnknown_0203229C->partyCounts[a0]; i++)
         {
             gSprites[gUnknown_0203229C->unk_28[0][i + (sp60 * 6)]].invisible = TRUE;
         }
@@ -1921,7 +1970,7 @@ void sub_8079BE0(u8 a0)
     u8 sp14[32];
     struct Pokemon *mons = a0 == 0 ? gPlayerParty : gEnemyParty;
 
-    for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[a0]; i++)
     {
         GetMonData(&mons[i], MON_DATA_NICKNAME, sp);
         StringCopy10(sp14, sp);
@@ -1999,18 +2048,18 @@ extern const u8 gUnknown_0832DE3E[][6][2];
 extern const u8 gUnknown_0832DE56[][6][2];
 // Very close but loop preamble not working.
 #ifdef NONMATCHING
-void sub_8079E44(u8 a0)
+void sub_8079E44(u8 whichParty)
 {
     int i;
 
-    for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[whichParty]; i++)
     {
-        sub_8079C4C(a0, i, gUnknown_0832DE3E[a0][i][0], gUnknown_0832DE3E[a0][i][1], gUnknown_0832DE56[a0][i][0], gUnknown_0832DE56[a0][i][1]);
+        sub_8079C4C(whichParty, i, gUnknown_0832DE3E[whichParty][i][0], gUnknown_0832DE3E[whichParty][i][1], gUnknown_0832DE56[whichParty][i][0], gUnknown_0832DE56[whichParty][i][1]);
     }
 }
 #else
 NAKED
-void sub_8079E44(u8 a0)
+void sub_8079E44(u8 whichParty)
 {
     asm_unified("push {r4-r7,lr}\n\
     sub sp, 0x8\n\
@@ -2065,7 +2114,7 @@ void sub_8079EA8(u8 a0)
 {
     int i;
 
-    for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[a0]; i++)
     {
         gSprites[gUnknown_0203229C->unk_28[a0][i]].invisible = FALSE;
         gSprites[gUnknown_0203229C->unk_28[a0][i]].pos1.x = gUnknown_0832DE24[(a0 * 6) + i][0] * 8 + 14;
@@ -2238,75 +2287,75 @@ void sub_807A308(const u8 *a0, u8 *a1, u8 unused)
     sub_80C6D80(a0, a1, 0, 0, 6);
 }
 
-void sub_807A320(u8 a0)
+void sub_807A320(u8 who)
 {
     int i;
 
-    switch (a0)
+    switch (who)
     {
         case 0:
-            for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+            for (i = 0; i < gUnknown_0203229C->partyCounts[who]; i++)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) == TRUE)
                 {
-                    gUnknown_0203229C->unk_45[a0][i] = 0;
-                    gUnknown_0203229C->unk_51[a0][i] = 1;
+                    gUnknown_0203229C->unk_45[who][i] = 0;
+                    gUnknown_0203229C->unk_51[who][i] = 1;
                 }
                 else if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                 {
-                    gUnknown_0203229C->unk_45[a0][i] = 0;
-                    gUnknown_0203229C->unk_51[a0][i] = 0;
+                    gUnknown_0203229C->unk_45[who][i] = 0;
+                    gUnknown_0203229C->unk_51[who][i] = 0;
                 }
                 else
                 {
-                    gUnknown_0203229C->unk_45[a0][i] = 1;
-                    gUnknown_0203229C->unk_51[a0][i] = 0;
+                    gUnknown_0203229C->unk_45[who][i] = 1;
+                    gUnknown_0203229C->unk_51[who][i] = 0;
                 }
             }
             break;
         case 1:
-            for (i = 0; i < gUnknown_0203229C->unk_36[a0]; i++)
+            for (i = 0; i < gUnknown_0203229C->partyCounts[who]; i++)
             {
                 if (GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG) == TRUE)
                 {
-                    gUnknown_0203229C->unk_45[a0][i] = 0;
-                    gUnknown_0203229C->unk_51[a0][i] = 1;
+                    gUnknown_0203229C->unk_45[who][i] = 0;
+                    gUnknown_0203229C->unk_51[who][i] = 1;
                 }
                 else if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
                 {
-                    gUnknown_0203229C->unk_45[a0][i] = 0;
-                    gUnknown_0203229C->unk_51[a0][i] = 0;
+                    gUnknown_0203229C->unk_45[who][i] = 0;
+                    gUnknown_0203229C->unk_51[who][i] = 0;
                 }
                 else
                 {
-                    gUnknown_0203229C->unk_45[a0][i] = 1;
-                    gUnknown_0203229C->unk_51[a0][i] = 0;
+                    gUnknown_0203229C->unk_45[who][i] = 1;
+                    gUnknown_0203229C->unk_51[who][i] = 0;
                 }
             }
             break;
     }
 }
 
-void sub_807A468(u8 a0)
+void sub_807A468(u8 who)
 {
-    u16 i, hp, maxHp;
+    u16 i, curHp, maxHp;
 
-    switch (a0)
+    switch (who)
     {
         case 0:
-            for (i = 0; i < gUnknown_0203229C->unk_36[0]; i++)
+            for (i = 0; i < gUnknown_0203229C->partyCounts[0]; i++)
             {
-                hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+                curHp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
                 maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-                gUnknown_0203229C->unk_5D[i] = GetHPBarLevel(hp, maxHp);
+                gUnknown_0203229C->unk_5D[0][i] = GetHPBarLevel(curHp, maxHp);
             }
             break;
         case 1:
-            for (i = 0; i < gUnknown_0203229C->unk_36[1]; i++)
+            for (i = 0; i < gUnknown_0203229C->partyCounts[1]; i++)
             {
-                hp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
+                curHp = GetMonData(&gEnemyParty[i], MON_DATA_HP);
                 maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
-                gUnknown_0203229C->unk_63[i] = GetHPBarLevel(hp, maxHp);
+                gUnknown_0203229C->unk_5D[1][i] = GetHPBarLevel(curHp, maxHp);
             }
             break;
     }
@@ -2318,9 +2367,9 @@ void sub_807A53C(void)
 
     for (i = 0; i < 2; i++)
     {
-        for (j = 0; j < gUnknown_0203229C->unk_36[i]; j++)
+        for (j = 0; j < gUnknown_0203229C->partyCounts[i]; j++)
         {
-            sub_80D32C8(&gSprites[gUnknown_0203229C->unk_28[i][j]], 4 - gUnknown_0203229C->unk_5D[i * 6 + j]);
+            sub_80D32C8(&gSprites[gUnknown_0203229C->unk_28[i][j]], 4 - gUnknown_0203229C->unk_5D[i][j]);
         }
     }
 }
@@ -2959,14 +3008,14 @@ void sub_807ABCC(void)
 {
     u16 dispcnt;
 
-    SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_020322A0->unk_E0);
-    SetGpuReg(REG_OFFSET_BG1HOFS, gUnknown_020322A0->unk_E2);
+    SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_020322A0->bg1vofs);
+    SetGpuReg(REG_OFFSET_BG1HOFS, gUnknown_020322A0->bg1hofs);
 
     dispcnt = GetGpuReg(REG_OFFSET_DISPCNT);
     if (!(dispcnt & (DISPCNT_MODE_1 | DISPCNT_MODE_2 | DISPCNT_MODE_3 | DISPCNT_MODE_4 | DISPCNT_MODE_5)))
     {
-        SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_020322A0->unk_E4);
-        SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_020322A0->unk_E6);
+        SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_020322A0->bg2vofs);
+        SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_020322A0->bg2hofs);
     }
     else
     {
@@ -3055,15 +3104,16 @@ void sub_807ACFC(u8 a0, u8 a1)
             {
                 HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[a0 * 2 + 1], species, personality);
             }
+
             LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
-            gUnknown_020322A0->unk_F0[a0] = species;
+            gUnknown_020322A0->tradeSpecies[a0] = species;
             gUnknown_020322A0->unk_68[a0] = personality;
             break;
         case 1:
             SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, unk);
-            gUnknown_020322A0->unk_8E[a0] = CreateSprite(&gMultiuseSpriteTemplate, 120, 60, 6);
-            gSprites[gUnknown_020322A0->unk_8E[a0]].invisible = TRUE;
-            gSprites[gUnknown_020322A0->unk_8E[a0]].callback = SpriteCallbackDummy;
+            gUnknown_020322A0->pokePicSpriteIdxs[a0] = CreateSprite(&gMultiuseSpriteTemplate, 120, 60, 6);
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[a0]].invisible = TRUE;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[a0]].callback = SpriteCallbackDummy;
             break;
     }
 }
@@ -3089,7 +3139,7 @@ void sub_807AE50(void)
             gMain.state++;
             gUnknown_020322A0->unk_8C = 0;
             gUnknown_020322A0->unk_94 = 0;
-            gUnknown_020322A0->unk_EE = 1;
+            gUnknown_020322A0->isLinkTrade = TRUE;
             gUnknown_020322A0->unk_D4 = 64;
             gUnknown_020322A0->unk_D6 = 64;
             gUnknown_020322A0->unk_D8 = 0;
@@ -3237,9 +3287,10 @@ void sub_807B170(void)
     LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
 }
 
+// In-game trade init
 void sub_807B270(void)
 {
-    u8 name[12];
+    u8 name[11];
 
     switch (gMain.state)
     {
@@ -3258,7 +3309,7 @@ void sub_807B270(void)
             FreeAllSpritePalettes();
             SetVBlankCallback(sub_807AC24);
             sub_807B170();
-            gUnknown_020322A0->unk_EE = 0;
+            gUnknown_020322A0->isLinkTrade = FALSE;
             gUnknown_020322A0->unk_8C = 0;
             gUnknown_020322A0->unk_94 = 0;
             gUnknown_020322A0->unk_D4 = 64;
@@ -3322,14 +3373,12 @@ void sub_807B270(void)
 
 void sub_807B464(u8 a0)
 {
-    u16 species;
-    u32 personality;
     struct Pokemon *mon = &gPlayerParty[a0];
-    
+
     if (!GetMonData(mon, MON_DATA_IS_EGG))
     {
-        species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-        personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+        u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+        u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
         species = SpeciesToNationalPokedexNum(species);
         GetSetPokedexFlag(species, FLAG_SET_SEEN);
         HandleSetPokedexFlag(species, FLAG_SET_CAUGHT, personality);
@@ -3338,7 +3387,10 @@ void sub_807B464(u8 a0)
 
 void sub_807B4C4(void)
 {
-    GetMultiplayerId();
+    u8 mpId = GetMultiplayerId();
+    // Originally in Ruby but commented out
+    /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
+        EnableNationalPokedex();*/
 }
 
 void sub_807B4D0(u8 a0, u8 a1)
@@ -3358,9 +3410,9 @@ void sub_807B4D0(u8 a0, u8 a1)
         ClearMailStruct(&gSaveBlock1Ptr->mail[mailId1]);
     }
 
-    memcpy(&gUnknown_020322A0->mon, mon1, sizeof(struct Pokemon));
-    memcpy(mon1, mon2, sizeof(struct Pokemon));
-    memcpy(mon2, &gUnknown_020322A0->mon, sizeof(struct Pokemon));
+    gUnknown_020322A0->mon = *mon1;
+    *mon1 = *mon2;
+    *mon2 = gUnknown_020322A0->mon;
 
     friendship = 70;
     if (!GetMonData(mon1, MON_DATA_IS_EGG))
@@ -3407,14 +3459,13 @@ void sub_807B60C(void)
     UpdatePaletteFade();
 }
 
-// DmaCopy16Defvars in cases 4 and 6 tail merge, when they shouldn't
 void sub_807B62C(u8 a0)
 {
     switch (a0)
     {
         case 0:
-            gUnknown_020322A0->unk_E4 = 0;
-            gUnknown_020322A0->unk_E6 = 180;
+            gUnknown_020322A0->bg2vofs = 0;
+            gUnknown_020322A0->bg2hofs = 180;
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
                                           DISPCNT_OBJ_1D_MAP |
                                           DISPCNT_BG0_ON |
@@ -3427,11 +3478,11 @@ void sub_807B62C(u8 a0)
                                          BGCNT_TXT512x256);
             LoadPalette(gTradeGba2_Pal, 16, 0x60);
             DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
-            DmaCopy16(3, gUnknown_08331F60, (void *) BG_SCREEN_ADDR(18), 0x1000);
+            DmaCopy16Defvars(3, gUnknown_08331F60, (void *) BG_SCREEN_ADDR(18), 0x1000);
             break;
         case 1:
-            gUnknown_020322A0->unk_E2 = 0;
-            gUnknown_020322A0->unk_E0 = 348;
+            gUnknown_020322A0->bg1hofs = 0;
+            gUnknown_020322A0->bg1vofs = 348;
             SetGpuReg(REG_OFFSET_BG1VOFS, 348);
             SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(2) |
                                          BGCNT_CHARBASE(0) |
@@ -3460,8 +3511,8 @@ void sub_807B62C(u8 a0)
                                           DISPCNT_OBJ_ON);
             break;
         case 2:
-            gUnknown_020322A0->unk_E0 = 0;
-            gUnknown_020322A0->unk_E2 = 0;
+            gUnknown_020322A0->bg1vofs = 0;
+            gUnknown_020322A0->bg1hofs = 0;
             if (!gUnknown_020322A0->unk_FA)
             {
                 SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 |
@@ -3485,7 +3536,7 @@ void sub_807B62C(u8 a0)
             LoadPalette(gUnknown_08337EA0, 48, 0x20);
             LZ77UnCompVram(gUnknown_08337EC0, (void *) BG_CHAR_ADDR(1));
             LZ77UnCompVram(gUnknown_08338550, (void *) BG_SCREEN_ADDR(18));
-            gUnknown_020322A0->unk_E4 = 80;
+            gUnknown_020322A0->bg2vofs = 80;
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
                                           DISPCNT_OBJ_1D_MAP |
                                           DISPCNT_BG1_ON |
@@ -3520,8 +3571,8 @@ void sub_807B62C(u8 a0)
             }
             break;
         case 5:
-            gUnknown_020322A0->unk_E0 = 0;
-            gUnknown_020322A0->unk_E2 = 0;
+            gUnknown_020322A0->bg1vofs = 0;
+            gUnknown_020322A0->bg1hofs = 0;
             break;
         case 6:
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 |
@@ -3553,8 +3604,8 @@ void sub_807B62C(u8 a0)
             }
             break;
         case 7:
-            gUnknown_020322A0->unk_E4 = 0;
-            gUnknown_020322A0->unk_E6 = 0;
+            gUnknown_020322A0->bg2vofs = 0;
+            gUnknown_020322A0->bg2hofs = 0;
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
             SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) |
                                          BGCNT_CHARBASE(1) |
@@ -3563,7 +3614,551 @@ void sub_807B62C(u8 a0)
                                          BGCNT_TXT512x256);
             LoadPalette(gTradeGba2_Pal, 16, 0x60);
             DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(1), 0x1420, 0x1000);
-            DmaCopy16(3, gUnknown_08331F60, (void *) BG_SCREEN_ADDR(18), 0x1000);
+            DmaCopy16Defvars(3, gUnknown_08331F60, (void *) BG_SCREEN_ADDR(18), 0x1000);
             break;
     }
+}
+
+void sub_807BA94(void)
+{
+    LoadSpriteSheet(&gUnknown_08338D70);
+    LoadSpriteSheet(&gUnknown_08338DC0);
+    LoadSpriteSheet(&gUnknown_08338DF4);
+    LoadSpriteSheet(&gUnknown_08338E6C);
+    LoadSpritePalette(&gUnknown_08338D78);
+    LoadSpritePalette(&gUnknown_08338D80);
+}
+
+void sub_807BAD8(void)
+{
+    /*Sets the variable strings printed on the
+     *actual trading screen. For use in strings
+     *like "[Pokemon] will be sent to [Trainer]."
+     */
+    u8 mpId;
+    u8 name[20];
+    const struct InGameTrade *ingameTrade;
+
+    if (gUnknown_020322A0->isLinkTrade)
+    {
+        mpId = GetMultiplayerId();
+        StringCopy(gStringVar1, gLinkPlayers[mpId ^ 1].name);
+        GetMonData(&gEnemyParty[gUnknown_02032298[1] % PARTY_SIZE], MON_DATA_NICKNAME, name);
+        StringCopy10(gStringVar3, name);
+        GetMonData(&gPlayerParty[gUnknown_02032298[0]], MON_DATA_NICKNAME, name);
+        StringCopy10(gStringVar2, name);
+    }
+    else
+    {
+        ingameTrade = &gIngameTrades[gSpecialVar_0x8004];
+        StringCopy(gStringVar1, ingameTrade->otName);
+        StringCopy10(gStringVar3, ingameTrade->name);
+        GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, name);
+        StringCopy10(gStringVar2, name);
+    }
+}
+
+u8 sub_807BBC8(void)
+{
+    if (gUnknown_020322A0->unk_FA)
+    {
+        return sub_807BBEC();
+    }
+    else
+    {
+        return sub_807CFC8();
+    }
+}
+
+bool8 sub_807BBEC(void)
+{
+    u16 evoTarget;
+
+    switch (gUnknown_020322A0->unk_94)
+    {
+        case 0:
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].invisible = FALSE;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.x = -180;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.y = gMonFrontPicCoords[gUnknown_020322A0->tradeSpecies[0]].y_offset;
+            gUnknown_020322A0->unk_94++;
+            gUnknown_020322A0->unk_F4 = GetCurrentMapMusic();
+            PlayNewMapMusic(MUS_SHINKA);
+            break;
+        case 1:
+            if (gUnknown_020322A0->bg2hofs > 0)
+            {
+                gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.x += 3;
+                gUnknown_020322A0->bg2hofs -= 3;
+            }
+            else
+            {
+                gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.x = 0;
+                gUnknown_020322A0->bg2hofs = 0;
+                gUnknown_020322A0->unk_94 = 10;
+            }
+            break;
+        case 10:
+            StringExpandPlaceholders(gStringVar4, gText_XWillBeSentToY);
+            sub_807F1A8(0, gStringVar4, 0);
+
+            if (gUnknown_020322A0->tradeSpecies[0] != SPECIES_EGG)
+            {
+                PlayCry1(gUnknown_020322A0->tradeSpecies[0], 0);
+            }
+
+            gUnknown_020322A0->unk_94 = 11;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 11:
+            if (++gUnknown_020322A0->unk_64 == 80)
+            {
+                gUnknown_020322A0->unk_D2 = sub_807671C(gUnknown_020322A0->pokePicSpriteIdxs[0], gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].oam.paletteNum, 120, 32, 2, 1, 0x14, 0xfffff);
+                gUnknown_020322A0->unk_94++;
+                StringExpandPlaceholders(gStringVar4, gText_ByeByeVar1);
+                sub_807F1A8(0, gStringVar4, 0);
+            }
+            break;
+        case 12:
+            if (gSprites[gUnknown_020322A0->unk_D2].callback == SpriteCallbackDummy)
+            {
+                gUnknown_020322A0->unk_D3 = CreateSprite(&gSpriteTemplate_8338D28, 120, 32, 0);
+                gSprites[gUnknown_020322A0->unk_D3].callback = sub_807E5D8;
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_D2]);
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        /*case 13:
+            // The game waits here for the sprite to finish its animation sequence.
+            break;*/
+        case 14:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            gUnknown_020322A0->unk_94 = 20;
+            break;
+
+        case 20:
+            if (!gPaletteFade.active)
+            {
+                sub_807B62C(4);
+                FillWindowPixelBuffer(0, 0xFF);
+                CopyWindowToVram(0, 3);
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 21:
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 22:
+            if (!gPaletteFade.active)
+            {
+                gUnknown_020322A0->unk_94 = 23;
+            }
+            break;
+        case 23:
+            if (gUnknown_020322A0->unk_EA > 0x100)
+            {
+                gUnknown_020322A0->unk_EA -= 0x34;
+            }
+            else
+            {
+                sub_807B62C(1);
+                gUnknown_020322A0->unk_EA = 0x80;
+                gUnknown_020322A0->unk_94++;
+                gUnknown_020322A0->unk_64 = 0;
+            }
+            gUnknown_020322A0->unk_E8 = 0x8000 / gUnknown_020322A0->unk_EA;
+            break;
+        case 24:
+            if (++gUnknown_020322A0->unk_64 > 20)
+            {
+                sub_807AB28();
+                gUnknown_020322A0->unk_91 = CreateSprite(&gSpriteTemplate_8338E74, 120, 80, 0);
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 25:
+            if (gSprites[gUnknown_020322A0->unk_91].animEnded)
+            {
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_91]);
+                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND |
+                                             BLDCNT_TGT2_BG1 |
+                                             BLDCNT_TGT2_BG2);
+                SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 4));
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 26:
+            if (--gUnknown_020322A0->bg1vofs == 316)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            if (gUnknown_020322A0->bg1vofs == 328)
+            {
+                gUnknown_020322A0->unk_92 = CreateSprite(&gSpriteTemplate_8338DFC, 128, 65, 0);
+            }
+            break;
+        case 27:
+            gUnknown_020322A0->unk_90 = CreateSprite(&gUnknown_08338D88, 128, 80, 3);
+            gUnknown_020322A0->unk_91 = CreateSprite(&gSpriteTemplate_8338DC8, 128, 80, 0);
+            StartSpriteAnim(&gSprites[gUnknown_020322A0->unk_91], 1);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 28:
+            if ((gUnknown_020322A0->bg1vofs -= 2) == 166)
+            {
+                gUnknown_020322A0->unk_94 = 200;
+            }
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 |
+                                          DISPCNT_OBJ_1D_MAP |
+                                          DISPCNT_BG1_ON |
+                                          DISPCNT_OBJ_ON);
+            break;
+        case 200:
+            gSprites[gUnknown_020322A0->unk_90].pos1.y -= 2;
+            gSprites[gUnknown_020322A0->unk_91].pos1.y -= 2;
+            if (gSprites[gUnknown_020322A0->unk_90].pos1.y < -8)
+            {
+                gUnknown_020322A0->unk_94 = 29;
+            }
+            break;
+        case 29:
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            gUnknown_020322A0->unk_94 = 30;
+            break;
+        case 30:
+            if (!gPaletteFade.active)
+            {
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_90]);
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_91]);
+                sub_807B62C(2);
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 31:
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            gUnknown_020322A0->unk_90 = CreateSprite(&gSpriteTemplate_8338DC8, 111, 170, 0);
+            gUnknown_020322A0->unk_91 = CreateSprite(&gSpriteTemplate_8338DC8, 129, -10, 0);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 32:
+            if (!gPaletteFade.active)
+            {
+                PlaySE(SE_TK_WARPOUT);
+                gUnknown_020322A0->unk_94++;
+            }
+            gSprites[gUnknown_020322A0->unk_90].pos2.y -= 3;
+            gSprites[gUnknown_020322A0->unk_91].pos2.y += 3;
+            break;
+        case 33:
+            gSprites[gUnknown_020322A0->unk_90].pos2.y -= 3;
+            gSprites[gUnknown_020322A0->unk_91].pos2.y += 3;
+            if (gSprites[gUnknown_020322A0->unk_90].pos2.y <= -90)
+            {
+                gSprites[gUnknown_020322A0->unk_90].data[1] = 1;
+                gSprites[gUnknown_020322A0->unk_91].data[1] = 1;
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 34:
+            BlendPalettes(0x1, 16, RGB_WHITEALPHA);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 35:
+            BlendPalettes(0x1, 0, RGB_WHITEALPHA);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 36:
+            BlendPalettes(0x1, 16, RGB_WHITEALPHA);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 37:
+            if (!IsMonSpriteNotFlipped(gUnknown_020322A0->tradeSpecies[0]))
+            {
+                gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].affineAnims = gSpriteAffineAnimTable_8338ECC;
+                gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].oam.affineMode = 3;
+                CalcCenterToCornerVec(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]], 0, 3, 3);
+                StartSpriteAffineAnim(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]], 0);
+            }
+            else
+            {
+                StartSpriteAffineAnim(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]], 0);
+            }
+            StartSpriteAffineAnim(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]], 0);
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos1.x = 60;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos1.x = 180;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos1.y = 192;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos1.y = -32;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].invisible = FALSE;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].invisible = FALSE;
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 38:
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.y -= 3;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos2.y += 3;
+            if (gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.y < -160 && gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.y >= -163)
+            {
+                PlaySE(SE_TK_WARPIN);
+            }
+            if (gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].pos2.y < -222)
+            {
+                gSprites[gUnknown_020322A0->unk_90].data[1] = 0;
+                gSprites[gUnknown_020322A0->unk_91].data[1] = 0;
+                gUnknown_020322A0->unk_94++;
+                gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]].invisible = TRUE;
+                gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].invisible = TRUE;
+                BlendPalettes(0x1, 0, RGB_WHITEALPHA);
+            }
+            break;
+        case 39:
+            gSprites[gUnknown_020322A0->unk_90].pos2.y -= 3;
+            gSprites[gUnknown_020322A0->unk_91].pos2.y += 3;
+            if (gSprites[gUnknown_020322A0->unk_90].pos2.y <= -222)
+            {
+                BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+                gUnknown_020322A0->unk_94++;
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_90]);
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_91]);
+            }
+            break;
+        case 40:
+            if (!gPaletteFade.active)
+            {
+                gUnknown_020322A0->unk_94++;
+                sub_807B62C(1);
+                gUnknown_020322A0->bg1vofs = 166;
+                gUnknown_020322A0->unk_90 = CreateSprite(&gUnknown_08338D88, 128, -20, 3);
+                gUnknown_020322A0->unk_91 = CreateSprite(&gSpriteTemplate_8338DC8, 128, -20, 0);
+                StartSpriteAnim(&gSprites[gUnknown_020322A0->unk_91], 1);
+            }
+            break;
+        case 41:
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 42:
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
+                                          DISPCNT_OBJ_1D_MAP |
+                                          DISPCNT_BG1_ON |
+                                          DISPCNT_OBJ_ON);
+            if (!gPaletteFade.active)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 43:
+            gSprites[gUnknown_020322A0->unk_90].pos2.y += 3;
+            gSprites[gUnknown_020322A0->unk_91].pos2.y += 3;
+            if (gSprites[gUnknown_020322A0->unk_90].pos2.y + gSprites[gUnknown_020322A0->unk_90].pos1.y == 64)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 44:
+            if ((gUnknown_020322A0->bg1vofs += 2) > 316)
+            {
+                gUnknown_020322A0->bg1vofs = 316;
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 45:
+            DestroySprite(&gSprites[gUnknown_020322A0->unk_90]);
+            DestroySprite(&gSprites[gUnknown_020322A0->unk_91]);
+            gUnknown_020322A0->unk_94++;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 46:
+            if (++gUnknown_020322A0->unk_64 == 10)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 47:
+            if (++gUnknown_020322A0->bg1vofs > 348)
+            {
+                gUnknown_020322A0->bg1vofs = 348;
+                gUnknown_020322A0->unk_94++;
+            }
+            if (gUnknown_020322A0->bg1vofs == 328 && gUnknown_020322A0->unk_FA)
+            {
+                gUnknown_020322A0->unk_92 = CreateSprite(&gSpriteTemplate_8338DFC, 128, 65, 0);
+                gSprites[gUnknown_020322A0->unk_92].callback = sub_807AAE0;
+            }
+            break;
+        case 48:
+            gUnknown_020322A0->unk_91 = CreateSprite(&gSpriteTemplate_8338E74, 120, 80, 0);
+            gUnknown_020322A0->unk_94 = 50;
+            break;
+        case 50:
+            if (gSprites[gUnknown_020322A0->unk_91].animEnded)
+            {
+                DestroySprite(&gSprites[gUnknown_020322A0->unk_91]);
+                sub_807B62C(6);
+                gUnknown_020322A0->unk_94++;
+                PlaySE(SE_W028);
+            }
+            break;
+        case 51:
+            if (gUnknown_020322A0->unk_EA < 0x400)
+            {
+                gUnknown_020322A0->unk_EA += 0x34;
+            }
+            else
+            {
+                gUnknown_020322A0->unk_EA = 0x400;
+                gUnknown_020322A0->unk_94++;
+            }
+            gUnknown_020322A0->unk_E8 = 0x8000 / gUnknown_020322A0->unk_EA;
+            break;
+        case 52:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            gUnknown_020322A0->unk_94 = 60;
+            break;
+
+        case 60:
+            if (!gPaletteFade.active)
+            {
+                sub_807B62C(5);
+                sub_807B62C(7);
+                gPaletteFade.bufferTransferDisabled = TRUE;
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 61:
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 62:
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
+                                          DISPCNT_OBJ_1D_MAP |
+                                          DISPCNT_BG2_ON |
+                                          DISPCNT_OBJ_ON);
+            if (!gPaletteFade.active)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 63:
+            gUnknown_020322A0->unk_D3 = CreateSprite(&gSpriteTemplate_8338D28, 120, -8, 0);
+            gSprites[gUnknown_020322A0->unk_D3].data[3] = 74;
+            gSprites[gUnknown_020322A0->unk_D3].callback = sub_807E6AC;
+            StartSpriteAnim(&gSprites[gUnknown_020322A0->unk_D3], 1);
+            StartSpriteAffineAnim(&gSprites[gUnknown_020322A0->unk_D3], 2);
+            BlendPalettes(1 << (16 + gSprites[gUnknown_020322A0->unk_D3].oam.paletteNum), 16, RGB_WHITEALPHA);
+            gUnknown_020322A0->unk_94++;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 64:
+            BeginNormalPaletteFade(1 << (16 + gSprites[gUnknown_020322A0->unk_D3].oam.paletteNum), 1, 16, 0, RGB_WHITEALPHA);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 65:
+            if (gSprites[gUnknown_020322A0->unk_D3].callback == SpriteCallbackDummy)
+            {
+                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[gUnknown_020322A0->tradeSpecies[1]], gMonSpritesGfxPtr->sprites[3], gUnknown_020322A0->tradeSpecies[1], gUnknown_020322A0->unk_68[1]);
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 66:
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos1.x = 120;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos1.y = gMonFrontPicCoords[gUnknown_020322A0->tradeSpecies[1]].y_offset + 60;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos2.x = 0;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].pos2.y = 0;
+            StartSpriteAnim(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]], 0);
+            CreatePokeballSpriteToReleaseMon(gUnknown_020322A0->pokePicSpriteIdxs[1], gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF, gUnknown_020322A0->tradeSpecies[1]);
+            FreeSpriteOamMatrix(&gSprites[gUnknown_020322A0->unk_D3]);
+            DestroySprite(&gSprites[gUnknown_020322A0->unk_D3]);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 67:
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
+                                          DISPCNT_OBJ_1D_MAP |
+                                          DISPCNT_BG0_ON |
+                                          DISPCNT_BG2_ON |
+                                          DISPCNT_OBJ_ON);
+            StringExpandPlaceholders(gStringVar4, gText_XSentOverY);
+            sub_807F1A8(0, gStringVar4, 0);
+            gUnknown_020322A0->unk_94 = 167;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        // 167 and 267 are extra cases added in for animations
+        case 167:
+            if (++gUnknown_020322A0->unk_64 > 60)
+            {
+                gUnknown_020322A0->unk_94 = 267;
+                gUnknown_020322A0->unk_64 = 0;
+            }
+            break;
+        case 267:
+            if (IsCryFinished())
+            {
+                gUnknown_020322A0->unk_94 = 68;
+            }
+            break;
+        case 68:
+            if (++gUnknown_020322A0->unk_64 == 10)
+            {
+                PlayFanfare(MUS_FANFA5);
+            }
+            if (gUnknown_020322A0->unk_64 == 250)
+            {
+                gUnknown_020322A0->unk_94++;
+                StringExpandPlaceholders(gStringVar4, gText_TakeGoodCareOfX);
+                sub_807F1A8(0, gStringVar4, 0);
+                gUnknown_020322A0->unk_64 = 0;
+            }
+            break;
+        case 69:
+            if (++gUnknown_020322A0->unk_64 == 60)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 70:
+            sub_807F14C();
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 71:
+            if (gUnknown_020322A0->isLinkTrade)
+            {
+                return TRUE;
+            }
+            else if (gMain.newKeys & A_BUTTON)
+            {
+                gUnknown_020322A0->unk_94++;
+            }
+            break;
+        case 72: // Only if in-game trade
+            sub_807B4D0(gSpecialVar_0x8005, 0);
+            gCB2_AfterEvolution = sub_807B60C;
+            evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_02032298[0]], TRUE, ITEM_NONE);
+            if (evoTarget != SPECIES_NONE)
+            {
+                TradeEvolutionScene(&gPlayerParty[gUnknown_02032298[0]], evoTarget, gUnknown_020322A0->pokePicSpriteIdxs[1], gUnknown_02032298[0]);
+            }
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 73:
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+            gUnknown_020322A0->unk_94++;
+            break;
+        case 74:
+            if (!gPaletteFade.active)
+            {
+                PlayNewMapMusic(gUnknown_020322A0->unk_F4);
+                if (gUnknown_020322A0)
+                {
+                    FreeAllWindowBuffers();
+                    Free(GetBgTilemapBuffer(3));
+                    Free(GetBgTilemapBuffer(1));
+                    Free(GetBgTilemapBuffer(0));
+                    FreeMonSpritesGfx();
+                    FREE_AND_SET_NULL(gUnknown_020322A0);
+                }
+                SetMainCallback2(CB2_ReturnToField);
+                sub_807E784();
+            }
+            break;
+    }
+    return FALSE;
 }
