@@ -5320,15 +5320,15 @@ static void sub_81603F4(struct Sprite *sprite)
 
 void AnimTask_GetWeather(u8 taskId)
 {
-    gBattleAnimArgs[7] = 0;
+    gBattleAnimArgs[7] = ANIM_WEATHER_NONE;
     if (gWeatherMoveAnim & WEATHER_SUN_ANY)
-        gBattleAnimArgs[7] = 1;
+        gBattleAnimArgs[7] = ANIM_WEATHER_SUN;
     else if (gWeatherMoveAnim & WEATHER_RAIN_ANY)
-        gBattleAnimArgs[7] = 2;
+        gBattleAnimArgs[7] = ANIM_WEATHER_RAIN;
     else if (gWeatherMoveAnim & WEATHER_SANDSTORM_ANY)
-        gBattleAnimArgs[7] = 3;
+        gBattleAnimArgs[7] = ANIM_WEATHER_SANDSTORM;
     else if (gWeatherMoveAnim & WEATHER_HAIL_ANY)
-        gBattleAnimArgs[7] = 4;
+        gBattleAnimArgs[7] = ANIM_WEATHER_HAIL;
 
     DestroyAnimVisualTask(taskId);
 }
