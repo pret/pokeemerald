@@ -4,13 +4,13 @@
 #include "script.h"
 #include "sound.h"
 #include "task.h"
-#include "rom6.h"
 #include "strings.h"
 #include "party_menu.h"
 #include "fieldmap.h"
 #include "field_effect.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
+#include "fldeff.h"
 #include "fldeff_misc.h"
 #include "secret_base.h"
 #include "event_data.h"
@@ -376,7 +376,7 @@ static void sub_80F9C90(u8 taskId)
         task->data[7] = GetGpuReg(REG_OFFSET_BLDCNT);
         task->data[8] = GetGpuReg(REG_OFFSET_BLDY);
 
-        SetGpuReg(REG_OFFSET_BLDCNT, 0xBF);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN);
         SetGpuReg(REG_OFFSET_BLDY, 0x10);
 
         break;
@@ -452,7 +452,7 @@ static void sub_80F9DFC(u8 taskId)
         {
             task->data[5] = 0x50;
             task->data[6] = 0x51;
-            SetGpuReg(REG_OFFSET_BLDCNT, 0xBF);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN);
             SetGpuReg(REG_OFFSET_BLDY, 0x10);
         }
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[6]));

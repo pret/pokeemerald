@@ -13,7 +13,7 @@ BattleFrontier_BattleDomeCorridor_EventScript_24B10E:: @ 824B10E
 	setvar VAR_0x8005, 1
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleDomeCorridor_EventScript_24B161
+	goto_if_eq BattleFrontier_BattleDomeCorridor_EventScript_24B161
 	applymovement 1, BattleFrontier_BattleDomeCorridor_Movement_24B1B2
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeCorridor_Movement_24B1A1
 	waitmovement 0

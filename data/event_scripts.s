@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
@@ -11,6 +12,7 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
+#include "constants/weather.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -450,8 +452,7 @@ EventScript_SecretBasePC:: @ 823B4BB
 EventScript_23B4D3:: @ 823B4D3
 	message Text_27681A
 	waitmessage
-	checkflag FLAG_0x10C
-	goto_eq EventScript_23B4EF
+	goto_if_set FLAG_0x10C, EventScript_23B4EF
 	goto EventScript_23B531
 	end
 
@@ -482,7 +483,7 @@ EventScript_23B531:: @ 823B531
 EventScript_23B568:: @ 823B568
 	msgbox Text_2766AA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_23B4D3
+	goto_if_eq EventScript_23B4D3
 	closemessage
 	special sub_80E9AC0
 	releaseall
@@ -528,13 +529,13 @@ gUnknown_0823B5E9:: @ 823B5E9
 EventScript_23B5F0:: @ 823B5F0
 	special sub_80E9BDC
 	compare VAR_RESULT, 1
-	goto_eq EventScript_23B62F
+	goto_if_eq EventScript_23B62F
 	compare VAR_RESULT, 2
-	goto_eq EventScript_23B652
+	goto_if_eq EventScript_23B652
 	special sub_80E980C
 	msgbox Text_276707, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_23B5A1
+	goto_if_eq EventScript_23B5A1
 	msgbox Text_2767D1, MSGBOX_SIGN
 	special sub_80E9C2C
 	special DoSecretBasePCTurnOffEffect
@@ -544,7 +545,7 @@ EventScript_23B5F0:: @ 823B5F0
 EventScript_23B62F:: @ 823B62F
 	msgbox Text_276731, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_23B5A1
+	goto_if_eq EventScript_23B5A1
 	msgbox Text_2767E9, MSGBOX_SIGN
 	special sub_80E9C2C
 	special DoSecretBasePCTurnOffEffect
@@ -594,13 +595,13 @@ EventScript_SecretBaseSandOrnament:: @ 823B684
 EventScript_SecretBaseShieldOrToyTV:: @ 823B68C
 	special GetShieldToyTVDecorationInfo
 	compare VAR_RESULT, 0
-	goto_eq EventScript_23B6BC
+	goto_if_eq EventScript_23B6BC
 	compare VAR_RESULT, 1
-	goto_eq EventScript_23B6C5
+	goto_if_eq EventScript_23B6C5
 	compare VAR_RESULT, 2
-	goto_eq EventScript_23B6CE
+	goto_if_eq EventScript_23B6CE
 	compare VAR_RESULT, 3
-	goto_eq EventScript_23B6D7
+	goto_if_eq EventScript_23B6D7
 	end
 
 EventScript_23B6BC:: @ 823B6BC
@@ -1088,7 +1089,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
 	setflag FLAG_HIDE_ROUTE_111_DESERT_FOSSIL
-	setflag FLAG_HIDE_ROUTE_111_DESERT_RIVAL
+	setflag FLAG_HIDE_ROUTE_111_PLAYER_DESCENT
 	setflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
@@ -1109,7 +1110,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	setflag FLAG_0x87F
 	call EverGrandeCity_HallOfFame_EventScript_271829
 	compare VAR_0x40CC, 0
-	call_if 1, EverGrandeCity_HallOfFame_EventScript_271839
+	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_HIDE_LILCOVE_MOTEL_GAME_DESIGNERS
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
 	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
@@ -1124,14 +1125,12 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
 	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
 	special sub_813BA60
-	checkflag FLAG_0x123
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_271843
-	checkflag FLAG_0x12A
-	call_if 0, EverGrandeCity_HallOfFame_EventScript_27183F
+	call_if_unset FLAG_0x123, EverGrandeCity_HallOfFame_EventScript_271843
+	call_if_unset FLAG_0x12A, EverGrandeCity_HallOfFame_EventScript_27183F
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	compare VAR_0x40D3, 0
-	call_if 1, EverGrandeCity_HallOfFame_EventScript_271851
+	call_if_eq EverGrandeCity_HallOfFame_EventScript_271851
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
@@ -1167,11 +1166,11 @@ EventScript_WhiteOut:: @ 8271857
 
 EventScript_271862:: @ 8271862
 	compare VAR_0x4096, 1
-	goto_eq EverGrandeCity_HallOfFame_EventScript_271884
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_271884
 	compare VAR_0x4096, 2
-	goto_eq EverGrandeCity_HallOfFame_EventScript_27189A
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_27189A
 	compare VAR_0x4096, 3
-	goto_eq EverGrandeCity_HallOfFame_EventScript_2718B3
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2718B3
 	end
 
 EverGrandeCity_HallOfFame_EventScript_271884:: @ 8271884
@@ -1223,16 +1222,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 RustboroCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 SlateportCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-	checkflag FLAG_0x0BC
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_27374E
-	checkflag FLAG_0x4F4
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_27374E
-	checkflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_27190C
-	checkflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271912
-	checkflag FLAG_HIDE_ROUTE_108_MR_BRINEY
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271918
+	goto_if_unset FLAG_0x0BC, OldaleTown_PokemonCenter_1F_EventScript_27374E
+	goto_if_set FLAG_0x4F4, OldaleTown_PokemonCenter_1F_EventScript_27374E
+	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, OldaleTown_PokemonCenter_1F_EventScript_27190C
+	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_271912
+	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, OldaleTown_PokemonCenter_1F_EventScript_271918
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_27190C:: @ 827190C
@@ -1270,12 +1264,12 @@ VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_80C2E40
 	compare VAR_RESULT, 4
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
 	msgbox gUnknown_082726EB, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_27195A
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_27195A
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271954
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271954
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_271954:: @ 8271954
@@ -1285,13 +1279,12 @@ OldaleTown_PokemonCenter_1F_EventScript_271954:: @ 8271954
 OldaleTown_PokemonCenter_1F_EventScript_27195A:: @ 827195A
 	incrementgamestat 15
 	compare VAR_0x8004, 0
-	call_if 1, OldaleTown_PokemonCenter_1F_EventScript_271987
+	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_271987
 	compare VAR_0x8004, 1
-	call_if 1, OldaleTown_PokemonCenter_1F_EventScript_27198D
+	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_27198D
 	waitmessage
 	call OldaleTown_PokemonCenter_1F_EventScript_271993
-	checkflag FLAG_0x111
-	goto_if 0, OldaleTown_PokemonCenter_1F_EventScript_271A43
+	goto_if_unset FLAG_0x111, OldaleTown_PokemonCenter_1F_EventScript_271A43
 	goto OldaleTown_PokemonCenter_1F_EventScript_2719B1
 	end
 
@@ -1316,18 +1309,18 @@ OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
 OldaleTown_PokemonCenter_1F_EventScript_2719B1:: @ 82719B1
 	specialvar VAR_RESULT, sub_8139ED0
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
 	specialvar VAR_RESULT, sp182_move_string
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 0
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
 	compare VAR_0x8008, 1
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A19
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A19
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_2719E2:: @ 82719E2
 	compare VAR_0x8004, 1
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A03
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A03
 	message gUnknown_08272798
 	waitmessage
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
@@ -1344,8 +1337,7 @@ OldaleTown_PokemonCenter_1F_EventScript_271A03:: @ 8271A03
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
-	checkflag FLAG_0x880
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
+	goto_if_set FLAG_0x880, OldaleTown_PokemonCenter_1F_EventScript_2719E2
 	msgbox gUnknown_08272798, MSGBOX_DEFAULT
 	setflag FLAG_0x880
 	message OldaleTown_PokemonCenter_1F_Text_278A48
@@ -1358,9 +1350,9 @@ OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
 OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
 	specialvar VAR_RESULT, IsPokerusInParty
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
 	compare VAR_RESULT, 0
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_271A5F:: @ 8271A5F
@@ -1369,8 +1361,7 @@ OldaleTown_PokemonCenter_1F_EventScript_271A5F:: @ 8271A5F
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
-	checkflag FLAG_0x159
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AAC
+	goto_if_set FLAG_0x159, OldaleTown_PokemonCenter_1F_EventScript_271AAC
 	setflag FLAG_0x159
 	msgbox gUnknown_082727F5, MSGBOX_DEFAULT
 	playse SE_PIN
@@ -1380,14 +1371,14 @@ OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
 	waitmovement 0
 	msgbox gUnknown_08272860, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
 	message gUnknown_08272A07
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271AAC:: @ 8271AAC
 	msgbox gUnknown_08272982, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
+	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
 	message gUnknown_08272A07
 	return
 
@@ -1412,9 +1403,9 @@ EventScript_271AE3:: @ 8271AE3
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271B95
+	call_if_eq EventScript_271B95
 	compare VAR_0x8007, 0
-	call_if 1, EventScript_271BA9
+	call_if_eq EventScript_271BA9
 	return
 
 EventScript_271B08:: @ 8271B08
@@ -1429,31 +1420,31 @@ EventScript_271B08:: @ 8271B08
 EventScript_271B45:: @ 8271B45
 	bufferstdstring 2, 14
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B55:: @ 8271B55
 	bufferstdstring 2, 15
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B65:: @ 8271B65
 	bufferstdstring 2, 16
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B75:: @ 8271B75
 	bufferstdstring 2, 17
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BB3
+	call_if_eq EventScript_271BB3
 	return
 
 EventScript_271B85:: @ 8271B85
 	bufferstdstring 2, 18
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BAF
+	call_if_eq EventScript_271BAF
 	return
 
 EventScript_271B95:: @ 8271B95
@@ -1484,9 +1475,9 @@ Std_ObtainDecoration:: @ 8271BB7
 EventScript_271BC5:: @ 8271BC5
 	bufferdecorationname 1, VAR_0x8000
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271BE0
+	call_if_eq EventScript_271BE0
 	compare VAR_0x8007, 0
-	call_if 1, EventScript_271BF7
+	call_if_eq EventScript_271BF7
 	return
 
 EventScript_271BE0:: @ 8271BE0
@@ -1513,9 +1504,9 @@ Std_FindItem:: @ 8271BFD
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	call_if 1, EventScript_271C3A
+	call_if_eq EventScript_271C3A
 	compare VAR_0x8007, 0
-	call_if 1, EventScript_271CA1
+	call_if_eq EventScript_271CA1
 	release
 	return
 
@@ -1525,16 +1516,16 @@ EventScript_271C3A:: @ 8271C3A
 	specialvar VAR_RESULT, sub_81398C0
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 1
-	call_if 1, EventScript_271C8F
+	call_if_eq EventScript_271C8F
 	compare VAR_0x8008, 0
-	call_if 1, EventScript_271C9B
+	call_if_eq EventScript_271C9B
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, 32773
 	setvar VAR_0x8004, 12
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
-	goto_eq EventScript_271C86
+	goto_if_eq EventScript_271C86
 	msgbox gUnknown_08272A9A, MSGBOX_DEFAULT
 	return
 
@@ -1566,9 +1557,9 @@ EventScript_HiddenItemScript:: @ 8271CB7
 	checkitemtype VAR_0x8005
 	call EventScript_271B08
 	compare VAR_0x8007, 1
-	goto_eq EventScript_271CE8
+	goto_if_eq EventScript_271CE8
 	compare VAR_0x8007, 0
-	goto_eq EventScript_271D47
+	goto_if_eq EventScript_271D47
 	end
 
 EventScript_271CE8:: @ 8271CE8
@@ -1576,9 +1567,9 @@ EventScript_271CE8:: @ 8271CE8
 	copyvar VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, sub_81398C0
 	compare VAR_RESULT, 1
-	goto_eq EventScript_271D0E
+	goto_if_eq EventScript_271D0E
 	compare VAR_RESULT, 0
-	goto_eq EventScript_271D1F
+	goto_if_eq EventScript_271D1F
 	end
 
 EventScript_271D0E:: @ 8271D0E
@@ -1615,9 +1606,9 @@ EventScript_271D5E:: @ 8271D5E
 	faceplayer
 	msgbox Text_27260D, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq EventScript_271D83
+	goto_if_eq EventScript_271D83
 	compare VAR_RESULT, 0
-	goto_eq EventScript_271D89
+	goto_if_eq EventScript_271D89
 	goto EventScript_271D89
 
 EventScript_271D83:: @ 8271D83
@@ -1669,10 +1660,8 @@ EventScript_271DF9:: @ 8271DF9
 
 EventScript_271E0E:: @ 8271E0E
 	playse SE_PC_LOGIN
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 0, EventScript_271E35
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 1, EventScript_271E3E
+	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_271E35
+	call_if_set FLAG_SYS_PC_LANETTE, EventScript_271E3E
 	msgbox gUnknown_082726A3, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystemPC
 	waitstate
@@ -1695,8 +1684,7 @@ EventScript_271E47:: @ 8271E47
 	end
 
 EventScript_271E54:: @ 8271E54
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if 0, EventScript_271E47
+	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_271E47
 	playse SE_PC_LOGIN
 	special AccessHallOfFamePC
 	waitstate
@@ -1777,13 +1765,13 @@ Route109_EventScript_271E95:: @ 8271E95
 EventScript_UseSurf:: @ 8271EA0
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, 6
-	goto_eq EventScript_271ED6
+	goto_if_eq EventScript_271ED6
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
 	msgbox gUnknown_08272FD6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_271ED5
+	goto_if_eq EventScript_271ED5
 	msgbox gUnknown_0827300D, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
 
@@ -1805,52 +1793,52 @@ Route110_EventScript_271ED7:: @ 8271ED7
 Route119_EventScript_271ED7:: @ 8271ED7
 RustboroCity_EventScript_271ED7:: @ 8271ED7
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq RustboroCity_EventScript_271EEF
-	compare VAR_RESULT, 1
-	goto_eq RustboroCity_EventScript_271EF5
+	compare VAR_RESULT, MALE
+	goto_if_eq RustboroCity_EventScript_271EEF
+	compare VAR_RESULT, FEMALE
+	goto_if_eq RustboroCity_EventScript_271EF5
 	end
 
 RustboroCity_EventScript_271EEF:: @ 8271EEF
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 RustboroCity_EventScript_271EF5:: @ 8271EF5
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 LavaridgeTown_EventScript_271EFB:: @ 8271EFB
 Route110_EventScript_271EFB:: @ 8271EFB
 Route119_EventScript_271EFB:: @ 8271EFB
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_EventScript_271F13
-	compare VAR_RESULT, 1
-	goto_eq LavaridgeTown_EventScript_271F19
+	compare VAR_RESULT, MALE
+	goto_if_eq LavaridgeTown_EventScript_271F13
+	compare VAR_RESULT, FEMALE
+	goto_if_eq LavaridgeTown_EventScript_271F19
 	end
 
 LavaridgeTown_EventScript_271F13:: @ 8271F13
-	setvar VAR_OBJ_GFX_ID_3, 106
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
 LavaridgeTown_EventScript_271F19:: @ 8271F19
-	setvar VAR_OBJ_GFX_ID_3, 101
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
 EventScript_271F1F:: @ 8271F1F
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq EventScript_271F37
-	compare VAR_RESULT, 1
-	goto_eq EventScript_271F3D
+	compare VAR_RESULT, MALE
+	goto_if_eq EventScript_271F37
+	compare VAR_RESULT, FEMALE
+	goto_if_eq EventScript_271F3D
 	end
 
 EventScript_271F37:: @ 8271F37
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 EventScript_271F3D:: @ 8271F3D
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 DewfordTown_Gym_EventScript_271F43:: @ 8271F43
@@ -2100,25 +2088,24 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2720AD:: @ 82720AD
 Route101_EventScript_2720AD:: @ 82720AD
 Route103_EventScript_2720AD:: @ 82720AD
 	compare VAR_0x4085, 0
-	goto_eq Route101_EventScript_27374E
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq Route101_EventScript_27211A
+	goto_if_eq Route101_EventScript_27374E
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 0
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 1
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 2
-	call_if 1, Route101_EventScript_272127
+	call_if_eq Route101_EventScript_272127
 	compare VAR_BIRCH_STATE, 3
-	call_if 1, Route101_EventScript_272127
+	call_if_eq Route101_EventScript_272127
 	compare VAR_BIRCH_STATE, 4
-	call_if 1, Route101_EventScript_272134
+	call_if_eq Route101_EventScript_272134
 	compare VAR_BIRCH_STATE, 5
-	call_if 1, Route101_EventScript_272134
+	call_if_eq Route101_EventScript_272134
 	compare VAR_BIRCH_STATE, 6
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 7
-	call_if 1, Route101_EventScript_27211A
+	call_if_eq Route101_EventScript_27211A
 	return
 
 Route101_EventScript_27211A:: @ 827211A
@@ -2147,15 +2134,13 @@ Route101_EventScript_272141:: @ 8272141
 Route103_EventScript_272141:: @ 8272141
 	lock
 	faceplayer
-	checkflag FLAG_HAS_MATCH_CALL
-	goto_if 0, Route101_EventScript_272155
-	checkflag FLAG_0x119
-	goto_if 0, Route101_EventScript_1FA2D2
+	goto_if_unset FLAG_HAS_MATCH_CALL, Route101_EventScript_272155
+	goto_if_unset FLAG_0x119, Route101_EventScript_1FA2D2
 
 Route101_EventScript_272155:: @ 8272155
 	msgbox gUnknown_082A5C9C, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route101_EventScript_27216F
+	goto_if_eq Route101_EventScript_27216F
 	call Route101_EventScript_272184
 	release
 	end
@@ -2184,7 +2169,7 @@ Route101_EventScript_272184:: @ 8272184
 	msgbox gUnknown_082A5D2C, MSGBOX_DEFAULT
 	call Route101_EventScript_272179
 	compare VAR_0x800A, 0
-	goto_eq Route101_EventScript_27374E
+	goto_if_eq Route101_EventScript_27374E
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
@@ -2254,9 +2239,9 @@ FarawayIsland_Entrance_EventScript_272250:: @ 8272250
 NavelRock_Harbor_EventScript_272250:: @ 8272250
 SouthernIsland_Exterior_EventScript_272250:: @ 8272250
 	compare VAR_FACING, 1
-	call_if 1, BattleFrontier_OutsideWest_EventScript_242A21
+	call_if_eq BattleFrontier_OutsideWest_EventScript_242A21
 	compare VAR_FACING, 3
-	call_if 1, BattleFrontier_OutsideWest_EventScript_242A2C
+	call_if_eq BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, MAP_PETALBURG_CITY
 	call BattleFrontier_OutsideWest_EventScript_2721E2
@@ -2363,7 +2348,7 @@ Route119_EventScript_272336:: @ 8272336
 Route120_EventScript_272336:: @ 8272336
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare VAR_RESULT, 1
-	goto_eq Route119_EventScript_272350
+	goto_if_eq Route119_EventScript_272350
 	msgbox Route119_Text_1F5D00, MSGBOX_DEFAULT
 	release
 	end
@@ -2371,7 +2356,7 @@ Route120_EventScript_272336:: @ 8272336
 Route119_EventScript_272350:: @ 8272350
 	msgbox Route119_Text_1F5D23, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route119_EventScript_272365
+	goto_if_eq Route119_EventScript_272365
 	release
 	end
 
@@ -2392,11 +2377,11 @@ Route119_EventScript_272365:: @ 8272365
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq Route119_EventScript_2723C1
+	goto_if_eq Route119_EventScript_2723C1
 	compare VAR_RESULT, 4
-	goto_eq Route119_EventScript_2723C1
+	goto_if_eq Route119_EventScript_2723C1
 	compare VAR_RESULT, 5
-	goto_eq Route119_EventScript_2723C1
+	goto_if_eq Route119_EventScript_2723C1
 	release
 	end
 
@@ -3199,9 +3184,9 @@ EventScript_Poison:: @ 82736BC
 	special ExecuteWhiteOut
 	waitstate
 	compare VAR_RESULT, 1
-	goto_eq EventScript_2736D9
+	goto_if_eq EventScript_2736D9
 	compare VAR_RESULT, 2
-	goto_eq EventScript_2736F8
+	goto_if_eq EventScript_2736F8
 	releaseall
 	end
 
@@ -3212,8 +3197,7 @@ EventScript_2736D9:: @ 82736D9
 	special sub_80B05B4
 	waitstate
 	fadescreen 1
-	checkflag FLAG_0x06C
-	call_if 1, EventScript_2736F4
+	call_if_set FLAG_0x06C, EventScript_2736F4
 	special sp0C8_whiteout_maybe
 	waitstate
 	end
@@ -3229,17 +3213,17 @@ EventScript_2736F8:: @ 82736F8
 	setvar VAR_0x8004, 16
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
+	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
 	setvar VAR_0x8004, 12
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
+	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
+	goto_if_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	setvar VAR_0x8004, 10
 	special sp194_trainer_tower
 	compare VAR_RESULT, 1
-	goto_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_2C83C9
 	special sub_80B05B4
 	waitstate
 	fadescreen 1
@@ -3397,16 +3381,14 @@ Route119_WeatherInstitute_2F_EventScript_2737A0:: @ 82737A0
 RustboroCity_DevonCorp_2F_EventScript_2737A0:: @ 82737A0
 	bufferboxname 0, 16438
 	bufferspeciesname 1, VAR_TEMP_1
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
-	checkflag FLAG_SYS_PC_LANETTE
-	call_if 1, LittlerootTown_ProfessorBirchsLab_EventScript_2737E6
+	call_if_unset FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
+	call_if_set FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737E6
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737BB:: @ 82737BB
 	specialvar VAR_RESULT, sub_813B21C
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737D4
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737D4
 	msgbox gText_PkmnTransferredSomeonesPC, MSGBOX_DEFAULT
 	return
 
@@ -3419,7 +3401,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737D4:: @ 82737D4
 LittlerootTown_ProfessorBirchsLab_EventScript_2737E6:: @ 82737E6
 	specialvar VAR_RESULT, sub_813B21C
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737FF
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737FF
 	msgbox gText_PkmnTransferredLanettesPC, MSGBOX_DEFAULT
 	return
 
@@ -3441,27 +3423,25 @@ EventScript_Questionnaire:: @ 827381B
 	lockall
 	msgbox gUnknown_0827339F, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_2738FD
+	goto_if_eq EventScript_2738FD
 	setvar VAR_0x8004, 20
 	call MauvilleCity_PokemonCenter_1F_EventScript_271E7C
 	lock
 	faceplayer
 	specialvar VAR_0x8008, sub_813B490
 	compare VAR_0x8004, 1
-	goto_eq EventScript_27386D
+	goto_if_eq EventScript_27386D
 	compare VAR_0x8004, 2
-	goto_eq EventScript_2738B5
+	goto_if_eq EventScript_2738B5
 	compare VAR_RESULT, 0
-	goto_eq EventScript_2738FD
+	goto_if_eq EventScript_2738FD
 	compare VAR_RESULT, 1
-	goto_eq EventScript_2738FF
+	goto_if_eq EventScript_2738FF
 	end
 
 EventScript_27386D:: @ 827386D
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, EventScript_2738FF
-	checkflag FLAG_SYS_MYSTERY_EVENT_ENABLE
-	goto_eq EventScript_2738FF
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_2738FF
+	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, EventScript_2738FF
 	applymovement VAR_0x8008, BattleFrontier_Mart_Movement_2725B0
 	waitmovement 0
 	playse SE_PIN
@@ -3476,10 +3456,8 @@ EventScript_27386D:: @ 827386D
 	end
 
 EventScript_2738B5:: @ 82738B5
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, EventScript_2738FF
-	checkflag FLAG_SYS_MYSTERY_GIFT_ENABLE
-	goto_eq EventScript_2738FF
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_2738FF
+	goto_if_set FLAG_SYS_MYSTERY_GIFT_ENABLE, EventScript_2738FF
 	applymovement VAR_0x8008, BattleFrontier_Mart_Movement_2725B0
 	waitmovement 0
 	playse SE_PIN
@@ -3694,7 +3672,7 @@ gUnknown_08273D1F:: @ 8273D1F
 gUnknown_08273D1F:: @ 8273D1F
 	lockall
 	compare VAR_0x4037, 9
-	goto_if 4, Route105_EventScript_273D51
+	goto_if_ge Route105_EventScript_273D51
 	goto Route105_EventScript_273D5F
 	end
 
@@ -3964,7 +3942,7 @@ Std_RegisteredInMatchCall:: @ 82742C9
 EventScript_TryGetTrainerScript:: @ 82742E6
 	special ShouldTryGetTrainerScript
 	compare VAR_RESULT, 1
-	goto_eq EventScript_GotoTrainerScript
+	goto_if_eq EventScript_GotoTrainerScript
 	releaseall
 	end
 
@@ -4263,13 +4241,13 @@ SlateportCity_PokemonFanClub_EventScript_28C7F0:: @ 828C7F0
 	setvar VAR_0x8005, 1
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C879
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C879
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_280674, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C827
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C827
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C85C
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C85C
 	end
 
 SlateportCity_PokemonFanClub_EventScript_28C827:: @ 828C827
@@ -4281,9 +4259,9 @@ SlateportCity_PokemonFanClub_EventScript_28C827:: @ 828C827
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C866
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C866
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C85C
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C85C
 	end
 
 SlateportCity_PokemonFanClub_EventScript_28C85C:: @ 828C85C
@@ -4308,24 +4286,23 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C883:: @ 828C883
 	setvar VAR_0x8005, 2
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C939
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C939
 	copyvar VAR_0x8009, VAR_0x8006
-	checkflag FLAG_0x069
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8C8
+	goto_if_set FLAG_0x069, SlateportCity_OceanicMuseum_1F_EventScript_28C8C8
 	setflag FLAG_0x069
 	msgbox SlateportCity_OceanicMuseum_1F_Text_2811A0, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_28C8C8:: @ 828C8C8
 	msgbox SlateportCity_OceanicMuseum_1F_Text_28126D, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_28C8E7:: @ 828C8E7
@@ -4337,9 +4314,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C8E7:: @ 828C8E7
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C926
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C926
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_28C91C:: @ 828C91C
@@ -4363,17 +4340,17 @@ SlateportCity_PokemonFanClub_EventScript_28C943:: @ 828C943
 	faceplayer
 	specialvar VAR_RESULT, sub_80EF8F8
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C7F0
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C7F0
 	setvar VAR_0x8005, 3
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA4F
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA4F
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_280270, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28C98C
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28C98C
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA45
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	end
 
 SlateportCity_PokemonFanClub_EventScript_28C98C:: @ 828C98C
@@ -4409,14 +4386,14 @@ SlateportCity_PokemonFanClub_EventScript_28C9ED:: @ 828C9ED
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA45
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	msgbox SlateportCity_PokemonFanClub_Text_2804AC, MSGBOX_DEFAULT
 	setvar VAR_0x8006, 1
 	call SlateportCity_PokemonFanClub_EventScript_271E7C
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA45
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	msgbox SlateportCity_PokemonFanClub_Text_280523, MSGBOX_DEFAULT
 	copyvar VAR_0x8007, VAR_0x800A
 	setvar VAR_0x8005, 3
@@ -4436,18 +4413,17 @@ SlateportCity_PokemonFanClub_EventScript_28CA4F:: @ 828CA4F
 LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CB21
+	goto_if_set FLAG_TEMP_2, LilycoveCity_ContestLobby_EventScript_28CB21
 	setvar VAR_0x8005, 6
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CB21
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CB21
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox LilycoveCity_ContestLobby_Text_27EF15, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CA9B
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CA9B
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	end
 
 LilycoveCity_ContestLobby_EventScript_28CA9B:: @ 828CA9B
@@ -4459,9 +4435,9 @@ LilycoveCity_ContestLobby_EventScript_28CA9B:: @ 828CA9B
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CADA
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CADA
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	end
 
 LilycoveCity_ContestLobby_EventScript_28CAD0:: @ 828CAD0
@@ -4480,7 +4456,7 @@ LilycoveCity_ContestLobby_EventScript_28CADA:: @ 828CADA
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	msgbox LilycoveCity_ContestLobby_Text_27F0EC, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	setvar VAR_0x8005, 6
@@ -4494,11 +4470,11 @@ LilycoveCity_ContestLobby_EventScript_28CB21:: @ 828CB21
 
 LilycoveCity_ContestLobby_EventScript_28CB2B:: @ 828CB2B
 	compare VAR_0x4086, 2
-	goto_if 5, LilycoveCity_ContestLobby_EventScript_28CB95
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_28CB95
 	setvar VAR_0x8005, 6
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_28CB95
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CB95
 	switch VAR_0x4088
 	case 0, LilycoveCity_ContestLobby_EventScript_28CB95
 	case 2, LilycoveCity_ContestLobby_EventScript_28CB91
@@ -4518,18 +4494,17 @@ LilycoveCity_ContestLobby_EventScript_28CB95:: @ 828CB95
 BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
+	goto_if_set FLAG_TEMP_2, BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	setvar VAR_0x8005, 7
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F704, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CBD8
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CBD8
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC2E
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC2E
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
@@ -4538,9 +4513,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	multichoice 20, 8, 45, 1
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC38
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC38
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC41
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC41
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F97A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 12
 	copyvar VAR_0x8005, VAR_0x8009
@@ -4548,9 +4523,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	lock
 	faceplayer
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC4A
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC4A
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC2E:: @ 828CC2E
@@ -4568,7 +4543,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC41:: @ 828CC41
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC4A:: @ 828CC4A
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F9FD, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
 	copyvar VAR_0x8004, VAR_0x8008
@@ -4588,11 +4563,11 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC7A:: @ 828CC7A
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC84:: @ 828CC84
 	compare VAR_0x40BC, 0
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
 	setvar VAR_0x8005, 7
 	special InterviewBefore
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
 	clearflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	return
 
@@ -4698,11 +4673,11 @@ Text_RepelWoreOff: @ 82A4B33
 MauvilleCity_GameCorner_EventScript_2A5AB1:: @ 82A5AB1
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_GameCorner_EventScript_210456
+	goto_if_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 0
 	getpricereduction 2
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_GameCorner_EventScript_2A5B0D
+	goto_if_eq MauvilleCity_GameCorner_EventScript_2A5B0D
 	addvar VAR_0x8004, 128
 	goto MauvilleCity_GameCorner_EventScript_2A5B0D
 	end
@@ -4710,11 +4685,11 @@ MauvilleCity_GameCorner_EventScript_2A5AB1:: @ 82A5AB1
 MauvilleCity_GameCorner_EventScript_2A5ADF:: @ 82A5ADF
 	checkitem ITEM_COIN_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_GameCorner_EventScript_210456
+	goto_if_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 1
 	getpricereduction 2
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_GameCorner_EventScript_2A5B0D
+	goto_if_eq MauvilleCity_GameCorner_EventScript_2A5B0D
 	addvar VAR_0x8004, 128
 	goto MauvilleCity_GameCorner_EventScript_2A5B0D
 	end
@@ -4816,11 +4791,11 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8395:: @ 82A8395
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A69, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818DBE8
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83D0
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83D0
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83C6
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83C6
 	compare VAR_RESULT, 2
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8510
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8510
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A83C6:: @ 82A83C6
@@ -4833,9 +4808,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83D0:: @ 82A83D0
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A7D, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818DC60
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8435
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8435
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83F7
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83F7
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A83F7:: @ 82A83F7
@@ -4843,9 +4818,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83F7:: @ 82A83F7
 	special sub_818DD14
 	specialvar VAR_RESULT, sub_818DD54
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8419
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8419
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8427
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8427
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8419:: @ 82A8419
@@ -4861,9 +4836,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8427:: @ 82A8427
 LilycoveCity_PokemonCenter_1F_EventScript_2A8435:: @ 82A8435
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8B69, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A845E
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A845E
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8454:: @ 82A8454
@@ -4882,25 +4857,25 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A846C:: @ 82A846C
 	special sub_818DD78
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A848E
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A848E
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84AD
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84AD
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A848E:: @ 82A848E
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8BEE, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A846C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A846C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84AD:: @ 82A84AD
 	specialvar VAR_RESULT, sub_818DE44
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84C9
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84C9
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84D6
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84D6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84C9:: @ 82A84C9
@@ -4912,9 +4887,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A84C9:: @ 82A84C9
 LilycoveCity_PokemonCenter_1F_EventScript_2A84D6:: @ 82A84D6
 	specialvar VAR_RESULT, sub_818DE5C
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84F2
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84F2
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84FF
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84FF
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84F2:: @ 82A84F2
@@ -4935,9 +4910,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8510:: @ 82A8510
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8D5D, MSGBOX_DEFAULT
 	giveitem_std VAR_0x8004
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8545
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8545
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A854F
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A854F
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8545:: @ 82A8545
@@ -4956,29 +4931,29 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8554:: @ 82A8554
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8E2B, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818E038
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8585
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8585
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85AC
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85AC
 	compare VAR_RESULT, 2
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86EC
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86EC
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8585:: @ 82A8585
 	specialvar VAR_RESULT, sub_818E06C
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85D2
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85D2
 	compare VAR_RESULT, 2
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85E0
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85E0
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A85AC:: @ 82A85AC
 	specialvar VAR_RESULT, sub_818E2D8
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8759
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A85C8:: @ 82A85C8
@@ -5000,9 +4975,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A85EE:: @ 82A85EE
 	setvar VAR_0x8004, 0
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8EEC, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8612
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8612
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8612:: @ 82A8612
@@ -5013,15 +4988,15 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8612:: @ 82A8612
 LilycoveCity_PokemonCenter_1F_EventScript_2A861C:: @ 82A861C
 	special sub_818E3BC
 	compare VAR_0x8004, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
 	compare VAR_0x8004, 15
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8656
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8656
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8635:: @ 82A8635
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8660
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8660
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8689
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8689
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A864C:: @ 82A864C
@@ -5039,9 +5014,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8656:: @ 82A8656
 LilycoveCity_PokemonCenter_1F_EventScript_2A8660:: @ 82A8660
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F7E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A867F
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A867F
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A867F:: @ 82A867F
@@ -5054,9 +5029,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8689:: @ 82A8689
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F4D, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818E308
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86C7
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86C7
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86B0
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86B0
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A86B0:: @ 82A86B0
@@ -5081,9 +5056,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A86C7:: @ 82A86C7
 LilycoveCity_PokemonCenter_1F_EventScript_2A86EC:: @ 82A86EC
 	specialvar VAR_RESULT, sub_818E298
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8708
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8708
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8716
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8716
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8708:: @ 82A8708
@@ -5102,7 +5077,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
 	special sub_818E37C
 	giveitem_std VAR_0x8005
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A874C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A874C
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	end
 
@@ -5115,9 +5090,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A874C:: @ 82A874C
 LilycoveCity_PokemonCenter_1F_EventScript_2A8759:: @ 82A8759
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A90FB, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8785
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8785
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8778:: @ 82A8778
@@ -5135,17 +5110,17 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A878D:: @ 82A878D
 	special sub_818E3E0
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87AF
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87AF
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87CE
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87CE
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87AF:: @ 82A87AF
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9212, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A878D
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A878D
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87CE:: @ 82A87CE
@@ -5159,16 +5134,16 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A87E1:: @ 82A87E1
 	special sub_818E47C
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87F8
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87F8
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8817
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87F8:: @ 82A87F8
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A92D3, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87E1
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87E1
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8817:: @ 82A8817
@@ -5185,17 +5160,17 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A882A:: @ 82A882A
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93A7, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, sub_818E8B4
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8850
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8850
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8850:: @ 82A8850
 	specialvar VAR_RESULT, sub_818E8E0
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8876
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8876
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A886C:: @ 82A886C
@@ -5208,12 +5183,12 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8876:: @ 82A8876
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93F4, MSGBOX_DEFAULT
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89AE
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89AE
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A94E8, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88B0:: @ 82A88B0
@@ -5226,17 +5201,17 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88BA:: @ 82A88BA
 	special sub_818E92C
 	waitstate
 	compare VAR_RESULT, 65535
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
 	compare VAR_RESULT, 65535
-	goto_if 5, LilycoveCity_PokemonCenter_1F_EventScript_2A88F6
+	goto_if_ne LilycoveCity_PokemonCenter_1F_EventScript_2A88F6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88D7:: @ 82A88D7
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9537, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88F6:: @ 82A88F6
@@ -5258,7 +5233,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A890A:: @ 82A890A
 	delay 120
 	waitmoncry
 	compare VAR_0x8004, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A893F
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A893F
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A894C
 	end
 
@@ -5272,9 +5247,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A894C:: @ 82A894C
 	waitmovement 0
 	delay 60
 	compare VAR_0x8004, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8970
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8970
 	compare VAR_0x8004, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A897E
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A897E
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8970:: @ 82A8970
@@ -5291,7 +5266,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A897E:: @ 82A897E
 LilycoveCity_PokemonCenter_1F_EventScript_2A898F:: @ 82A898F
 	specialvar VAR_RESULT, sub_818E8E0
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89A1
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89A1
 	release
 	end
 
@@ -5336,15 +5311,15 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
 	special sub_818E914
 	special sub_818E960
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
 	compare VAR_RESULT, 2
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
 	compare VAR_RESULT, 3
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
 	compare VAR_RESULT, 4
-	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
+	goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A:: @ 82A8A0A
@@ -9003,18 +8978,18 @@ BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE: @ 82C3EDE
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
-	setvar VAR_OBJ_GFX_ID_1, 28
-	setvar VAR_OBJ_GFX_ID_0, 28
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LINK_RECEPTIONIST
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_LINK_RECEPTIONIST
 	setvar VAR_0x8004, 5
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 3
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
 	compare VAR_RESULT, 6
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
 	compare VAR_RESULT, 7
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
 	compare VAR_RESULT, 8
-	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
+	goto_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
 	hideobjectat 2, MAP_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
 	setvar VAR_TEMP_4, 1
 	turnobject 255, 2
@@ -9125,9 +9100,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8004, 25
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128
+	call_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128
 	compare VAR_RESULT, 1
-	call_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136
+	call_if_ne BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
@@ -9147,9 +9122,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8004, 3
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
+	call_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C
+	call_if_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C
 	waitstate
 	end
 
@@ -9189,9 +9164,9 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	setvar VAR_0x8004, 25
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128
+	call_if_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128
 	compare VAR_RESULT, 1
-	call_if 5, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136
+	call_if_ne BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special CallBattlePikeFunction
@@ -9211,9 +9186,9 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	setvar VAR_0x8004, 3
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144
+	call_if_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C
+	call_if_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C
 	waitstate
 	end
 
@@ -9246,9 +9221,9 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E: @ 82C423E
 	setvar VAR_0x8005, 0
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
+	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
+	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4271
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B:: @ 82C426B
@@ -10084,19 +10059,18 @@ PacifidlogTown_PokemonCenter_1F_Text_2C7E7A: @ 82C7E7A
 SlateportCity_PokemonFanClub_EventScript_2C7F16:: @ 82C7F16
 	lock
 	faceplayer
-	checkflag FLAG_0x1B1
-	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F74
+	goto_if_set FLAG_0x1B1, SlateportCity_PokemonFanClub_EventScript_2C7F74
 	msgbox SlateportCity_PokemonFanClub_Text_2C6E37, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	call SlateportCity_PokemonFanClub_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	msgbox SlateportCity_PokemonFanClub_Text_2C6F66, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 23
 	call SlateportCity_PokemonFanClub_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
+	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	setflag FLAG_0x1B1
 	goto SlateportCity_PokemonFanClub_EventScript_2C7F74
 	end
@@ -10114,19 +10088,18 @@ SlateportCity_PokemonFanClub_EventScript_2C7F74:: @ 82C7F74
 MauvilleCity_EventScript_2C7F7E:: @ 82C7F7E
 	lock
 	faceplayer
-	checkflag FLAG_0x1B2
-	goto_eq MauvilleCity_EventScript_2C7FDC
+	goto_if_set FLAG_0x1B2, MauvilleCity_EventScript_2C7FDC
 	msgbox MauvilleCity_Text_2C6FDB, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_EventScript_2C7FD2
+	goto_if_eq MauvilleCity_EventScript_2C7FD2
 	call MauvilleCity_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_EventScript_2C7FD2
+	goto_if_eq MauvilleCity_EventScript_2C7FD2
 	msgbox MauvilleCity_Text_2C70F3, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 16
 	call MauvilleCity_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_EventScript_2C7FD2
+	goto_if_eq MauvilleCity_EventScript_2C7FD2
 	setflag FLAG_0x1B2
 	goto MauvilleCity_EventScript_2C7FDC
 	end
@@ -10144,19 +10117,18 @@ MauvilleCity_EventScript_2C7FDC:: @ 82C7FDC
 VerdanturfTown_PokemonCenter_1F_EventScript_2C7FE6:: @ 82C7FE6
 	lock
 	faceplayer
-	checkflag FLAG_0x1B3
-	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
+	goto_if_set FLAG_0x1B3, VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_2C7174, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
+	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	call VerdanturfTown_PokemonCenter_1F_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
+	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_2C7243, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 29
 	call VerdanturfTown_PokemonCenter_1F_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
+	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	setflag FLAG_0x1B3
 	goto VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
 	end
@@ -10174,19 +10146,18 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2C8044:: @ 82C8044
 LavaridgeTown_House_EventScript_2C804E:: @ 82C804E
 	lock
 	faceplayer
-	checkflag FLAG_0x1B4
-	goto_eq LavaridgeTown_House_EventScript_2C80AC
+	goto_if_set FLAG_0x1B4, LavaridgeTown_House_EventScript_2C80AC
 	msgbox LavaridgeTown_House_Text_2C72B6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_House_EventScript_2C80A2
+	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
 	call LavaridgeTown_House_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_House_EventScript_2C80A2
+	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
 	msgbox LavaridgeTown_House_Text_2C73B1, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 7
 	call LavaridgeTown_House_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_House_EventScript_2C80A2
+	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
 	setflag FLAG_0x1B4
 	goto LavaridgeTown_House_EventScript_2C80AC
 	end
@@ -10204,19 +10175,18 @@ LavaridgeTown_House_EventScript_2C80AC:: @ 82C80AC
 FallarborTown_Mart_EventScript_2C80B6:: @ 82C80B6
 	lock
 	faceplayer
-	checkflag FLAG_0x1B5
-	goto_eq FallarborTown_Mart_EventScript_2C8114
+	goto_if_set FLAG_0x1B5, FallarborTown_Mart_EventScript_2C8114
 	msgbox FallarborTown_Mart_Text_2C7449, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_Mart_EventScript_2C810A
+	goto_if_eq FallarborTown_Mart_EventScript_2C810A
 	call FallarborTown_Mart_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_Mart_EventScript_2C810A
+	goto_if_eq FallarborTown_Mart_EventScript_2C810A
 	msgbox FallarborTown_Mart_Text_2C7582, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 8
 	call FallarborTown_Mart_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq FallarborTown_Mart_EventScript_2C810A
+	goto_if_eq FallarborTown_Mart_EventScript_2C810A
 	setflag FLAG_0x1B5
 	goto FallarborTown_Mart_EventScript_2C8114
 	end
@@ -10234,19 +10204,18 @@ FallarborTown_Mart_EventScript_2C8114:: @ 82C8114
 FortreeCity_House2_EventScript_2C811E:: @ 82C811E
 	lock
 	faceplayer
-	checkflag FLAG_0x1B6
-	goto_eq FortreeCity_House2_EventScript_2C817C
+	goto_if_set FLAG_0x1B6, FortreeCity_House2_EventScript_2C817C
 	msgbox FortreeCity_House2_Text_2C7637, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq FortreeCity_House2_EventScript_2C8172
+	goto_if_eq FortreeCity_House2_EventScript_2C8172
 	call FortreeCity_House2_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq FortreeCity_House2_EventScript_2C8172
+	goto_if_eq FortreeCity_House2_EventScript_2C8172
 	msgbox FortreeCity_House2_Text_2C7721, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 24
 	call FortreeCity_House2_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq FortreeCity_House2_EventScript_2C8172
+	goto_if_eq FortreeCity_House2_EventScript_2C8172
 	setflag FLAG_0x1B6
 	goto FortreeCity_House2_EventScript_2C817C
 	end
@@ -10264,19 +10233,18 @@ FortreeCity_House2_EventScript_2C817C:: @ 82C817C
 LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186:: @ 82C8186
 	lock
 	faceplayer
-	checkflag FLAG_0x1B7
-	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
+	goto_if_set FLAG_0x1B7, LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2C77C6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	call LilycoveCity_DepartmentStoreRooftop_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2C7911, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 14
 	call LilycoveCity_DepartmentStoreRooftop_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
+	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	setflag FLAG_0x1B7
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
 	end
@@ -10294,19 +10262,18 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4:: @ 82C81E4
 MossdeepCity_EventScript_2C81EE:: @ 82C81EE
 	lock
 	faceplayer
-	checkflag FLAG_0x1B8
-	goto_eq MossdeepCity_EventScript_2C824C
+	goto_if_set FLAG_0x1B8, MossdeepCity_EventScript_2C824C
 	msgbox MossdeepCity_Text_2C79A6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_EventScript_2C8242
+	goto_if_eq MossdeepCity_EventScript_2C8242
 	call MossdeepCity_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_EventScript_2C8242
+	goto_if_eq MossdeepCity_EventScript_2C8242
 	msgbox MossdeepCity_Text_2C7B0D, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 15
 	call MossdeepCity_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq MossdeepCity_EventScript_2C8242
+	goto_if_eq MossdeepCity_EventScript_2C8242
 	setflag FLAG_0x1B8
 	goto MossdeepCity_EventScript_2C824C
 	end
@@ -10324,19 +10291,18 @@ MossdeepCity_EventScript_2C824C:: @ 82C824C
 SootopolisCity_PokemonCenter_1F_EventScript_2C8256:: @ 82C8256
 	lock
 	faceplayer
-	checkflag FLAG_0x1B9
-	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
+	goto_if_set FLAG_0x1B9, SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
 	msgbox SootopolisCity_PokemonCenter_1F_Text_2C7B8E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
+	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	call SootopolisCity_PokemonCenter_1F_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
+	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	msgbox SootopolisCity_PokemonCenter_1F_Text_2C7C98, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 4
 	call SootopolisCity_PokemonCenter_1F_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
+	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	setflag FLAG_0x1B9
 	goto SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
 	end
@@ -10354,19 +10320,18 @@ SootopolisCity_PokemonCenter_1F_EventScript_2C82B4:: @ 82C82B4
 PacifidlogTown_PokemonCenter_1F_EventScript_2C82BE:: @ 82C82BE
 	lock
 	faceplayer
-	checkflag FLAG_0x1BA
-	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
+	goto_if_set FLAG_0x1BA, PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_2C7CFA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
+	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	call PacifidlogTown_PokemonCenter_1F_EventScript_2C832D
 	compare VAR_RESULT, 0
-	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
+	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_2C7E40, MSGBOX_DEFAULT
 	setvar VAR_0x8005, 12
 	call PacifidlogTown_PokemonCenter_1F_EventScript_2C8326
 	compare VAR_RESULT, 0
-	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
+	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	setflag FLAG_0x1BA
 	goto PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
 	end
@@ -10422,11 +10387,11 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
-	goto_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_2C83C9
 	compare VAR_RESULT, 3
-	goto_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_2C83C9
 	compare VAR_RESULT, 9
-	goto_eq TrainerHill_1F_EventScript_2C83C9
+	goto_if_eq TrainerHill_1F_EventScript_2C83C9
 	end
 
 TrainerHill_1F_MapScript2_2C8372: @ 82C8372
@@ -10460,7 +10425,7 @@ TrainerHill_1F_EventScript_2C83A6:: @ 82C83A6
 	setvar VAR_0x8004, 9
 	special sp194_trainer_tower
 	compare VAR_RESULT, 1
-	goto_eq TrainerHill_1F_EventScript_2C83BF
+	goto_if_eq TrainerHill_1F_EventScript_2C83BF
 	end
 
 TrainerHill_1F_EventScript_2C83BF:: @ 82C83BF

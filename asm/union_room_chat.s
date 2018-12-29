@@ -1597,7 +1597,7 @@ _0801EB04:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801EBC2
-	bl sub_8076D5C
+	bl SetContinueGameWarpStatusToDynamicWarp
 	movs r0, 0
 	bl TrySavingData
 	ldr r0, =gUnknown_02022C84
@@ -1624,7 +1624,7 @@ _0801EB40:
 	bne _0801EBC2
 	movs r0, 0x37
 	bl PlaySE
-	bl sav2_gender2_inplace_and_xFE
+	bl ClearContinueGameWarpStatus2
 	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0xA

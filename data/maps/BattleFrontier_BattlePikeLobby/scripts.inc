@@ -16,7 +16,7 @@ BattleFrontier_BattlePikeLobby_MapScript2_25B6F3: @ 825B6F3
 
 BattleFrontier_BattlePikeLobby_EventScript_25B6FD:: @ 825B6FD
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
@@ -52,7 +52,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B762:: @ 825B762
 	setvar VAR_0x8004, 10
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25B784
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25B784
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C18A, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattlePikeLobby_EventScript_25B78D
@@ -150,7 +150,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA27
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA27
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
@@ -163,7 +163,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C0D8, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BA73
@@ -200,7 +200,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8004, 26
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
+	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
 	special SavePlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3

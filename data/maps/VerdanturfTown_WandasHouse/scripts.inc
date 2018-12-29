@@ -4,8 +4,7 @@ VerdanturfTown_WandasHouse_MapScripts:: @ 82028BE
 VerdanturfTown_WandasHouse_EventScript_2028BF:: @ 82028BF
 	lock
 	faceplayer
-	checkflag FLAG_0x0C1
-	goto_eq VerdanturfTown_WandasHouse_EventScript_2028D7
+	goto_if_set FLAG_0x0C1, VerdanturfTown_WandasHouse_EventScript_2028D7
 	msgbox VerdanturfTown_WandasHouse_Text_202993, MSGBOX_DEFAULT
 	setflag FLAG_0x0C1
 	release
@@ -19,10 +18,8 @@ VerdanturfTown_WandasHouse_EventScript_2028D7:: @ 82028D7
 VerdanturfTown_WandasHouse_EventScript_2028E1:: @ 82028E1
 	lock
 	faceplayer
-	checkflag FLAG_0x07E
-	goto_eq VerdanturfTown_WandasHouse_EventScript_202909
-	checkflag FLAG_0x4F3
-	goto_eq VerdanturfTown_WandasHouse_EventScript_2028FF
+	goto_if_set FLAG_0x07E, VerdanturfTown_WandasHouse_EventScript_202909
+	goto_if_set FLAG_0x4F3, VerdanturfTown_WandasHouse_EventScript_2028FF
 	msgbox VerdanturfTown_WandasHouse_Text_202B37, MSGBOX_DEFAULT
 	release
 	end
@@ -44,10 +41,8 @@ VerdanturfTown_WandasHouse_EventScript_202913:: @ 8202913
 VerdanturfTown_WandasHouse_EventScript_20291C:: @ 820291C
 	lock
 	faceplayer
-	checkflag FLAG_0x4F3
-	goto_eq VerdanturfTown_WandasHouse_EventScript_202944
-	checkflag FLAG_0x0BE
-	goto_eq VerdanturfTown_WandasHouse_EventScript_20293A
+	goto_if_set FLAG_0x4F3, VerdanturfTown_WandasHouse_EventScript_202944
+	goto_if_set FLAG_0x0BE, VerdanturfTown_WandasHouse_EventScript_20293A
 	msgbox VerdanturfTown_WandasHouse_Text_202D91, MSGBOX_DEFAULT
 	release
 	end
@@ -65,12 +60,9 @@ VerdanturfTown_WandasHouse_EventScript_202944:: @ 8202944
 VerdanturfTown_WandasHouse_EventScript_20294E:: @ 820294E
 	lock
 	faceplayer
-	checkflag FLAG_0x07E
-	goto_eq VerdanturfTown_WandasHouse_EventScript_202989
-	checkflag FLAG_0x4F3
-	goto_eq VerdanturfTown_WandasHouse_EventScript_20297F
-	checkflag FLAG_RUSTURF_TUNNEL_OPENED
-	goto_eq VerdanturfTown_WandasHouse_EventScript_202975
+	goto_if_set FLAG_0x07E, VerdanturfTown_WandasHouse_EventScript_202989
+	goto_if_set FLAG_0x4F3, VerdanturfTown_WandasHouse_EventScript_20297F
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_WandasHouse_EventScript_202975
 	msgbox VerdanturfTown_WandasHouse_Text_202E47, MSGBOX_DEFAULT
 	release
 	end

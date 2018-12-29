@@ -222,7 +222,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setflag FLAG_0x052
 	fadescreen 1
 	removeobject 4
-	setobjectxy 255, 6, 13
+	setobjectxy EVENT_OBJ_ID_PLAYER, 6, 13
 	applymovement EVENT_OBJ_ID_PLAYER, Route101_Movement_2725A4
 	waitmovement 0
 	special ChooseStarter
@@ -238,10 +238,10 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setvar VAR_0x4060, 3
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	checkplayergender
-	compare VAR_RESULT, 0
-	call_if 1, Route101_EventScript_1EBE85
-	compare VAR_RESULT, 1
-	call_if 1, Route101_EventScript_1EBE89
+	compare VAR_RESULT, MALE
+	call_if_eq Route101_EventScript_1EBE85
+	compare VAR_RESULT, FEMALE
+	call_if_eq Route101_EventScript_1EBE89
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	release

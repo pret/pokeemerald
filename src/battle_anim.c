@@ -1870,7 +1870,7 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
         gAnimVisualTaskCount++;
         gTasks[taskId].data[t1_MONBG_BATTLER] = battlerId;
@@ -1889,7 +1889,7 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
         gAnimVisualTaskCount++;
         gTasks[taskId].data[0] = battlerId;
@@ -1922,7 +1922,7 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
     return FALSE;
 }
 
-void sub_80A438C(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
+void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 {
     struct UnknownAnimStruct2 unknownStruct;
     u8 battlerSpriteId;
@@ -2194,7 +2194,7 @@ static void ScriptCmd_monbg_22(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
     }
 
     battlerId ^= BIT_FLANK;
@@ -2206,7 +2206,7 @@ static void ScriptCmd_monbg_22(void)
         else
             toBG_2 = TRUE;
 
-        sub_80A438C(battlerId, toBG_2, FALSE);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
     }
 
     sBattleAnimScriptPtr++;
@@ -2283,7 +2283,7 @@ static void ScriptCmd_setalpha(void)
     sBattleAnimScriptPtr++;
     half1 = *(sBattleAnimScriptPtr++);
     half2 = *(sBattleAnimScriptPtr++) << 8;
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, half1 | half2);
 }
 

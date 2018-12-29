@@ -3,7 +3,7 @@ Route112_MapScripts:: @ 81F1DA8
 	.byte 0
 
 Route112_MapScript1_1F1DAE: @ 81F1DAE
-	clearflag FLAG_0x09D
+	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	setvar VAR_0x40BD, 0
 	end
 
@@ -69,7 +69,7 @@ Route112_EventScript_1F1E81:: @ 81F1E81
 	trainerbattle_single TRAINER_TRENT_1, Route112_Text_299815, Route112_Text_29987C, Route112_EventScript_1F1EAD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route112_EventScript_1F1ECC
+	goto_if_eq Route112_EventScript_1F1ECC
 	msgbox Route112_Text_299896, MSGBOX_DEFAULT
 	release
 	end

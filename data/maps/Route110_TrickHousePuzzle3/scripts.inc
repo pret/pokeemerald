@@ -6,9 +6,9 @@ Route110_TrickHousePuzzle3_MapScripts:: @ 826BED8
 Route110_TrickHousePuzzle3_MapScript1_26BEE3: @ 826BEE3
 	call Route110_TrickHousePuzzle3_EventScript_26BF1E
 	compare VAR_TEMP_9, 0
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF97
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26BF97
 	compare VAR_TEMP_9, 1
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C232
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26C232
 	end
 
 Route110_TrickHousePuzzle3_MapScript1_26BEFF: @ 826BEFF
@@ -26,13 +26,13 @@ Route110_TrickHousePuzzle3_EventScript_26BF1E:: @ 826BF1E
 	setmetatile 12, 5, 600, 0
 	setmetatile 8, 2, 600, 0
 	compare VAR_TEMP_8, 1
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF6F
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26BF6F
 	compare VAR_TEMP_8, 2
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF79
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26BF79
 	compare VAR_TEMP_8, 3
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF83
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26BF83
 	compare VAR_TEMP_8, 4
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF8D
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26BF8D
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26BF6F:: @ 826BF6F
@@ -242,13 +242,13 @@ Route110_TrickHousePuzzle3_EventScript_26C510:: @ 826C510
 	setvar VAR_TEMP_3, 0
 	setvar VAR_TEMP_4, 0
 	compare VAR_TEMP_8, 1
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C551
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26C551
 	compare VAR_TEMP_8, 2
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C557
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26C557
 	compare VAR_TEMP_8, 3
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C55D
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26C55D
 	compare VAR_TEMP_8, 4
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C563
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26C563
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C551:: @ 826C551
@@ -269,14 +269,14 @@ Route110_TrickHousePuzzle3_EventScript_26C563:: @ 826C563
 
 Route110_TrickHousePuzzle3_EventScript_26C569:: @ 826C569
 	compare VAR_TEMP_9, 1
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF97
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26BF97
 	compare VAR_TEMP_9, 0
-	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C232
+	call_if_eq Route110_TrickHousePuzzle3_EventScript_26C232
 	special DrawWholeMapView
 	compare VAR_TEMP_9, 1
-	goto_eq Route110_TrickHousePuzzle3_EventScript_26C599
+	goto_if_eq Route110_TrickHousePuzzle3_EventScript_26C599
 	compare VAR_TEMP_9, 0
-	goto_eq Route110_TrickHousePuzzle3_EventScript_26C5A0
+	goto_if_eq Route110_TrickHousePuzzle3_EventScript_26C5A0
 	end
 
 Route110_TrickHousePuzzle3_EventScript_26C599:: @ 826C599
@@ -292,7 +292,7 @@ Route110_TrickHousePuzzle3_EventScript_26C5A0:: @ 826C5A0
 Route110_TrickHousePuzzle3_EventScript_26C5A7:: @ 826C5A7
 	lockall
 	compare VAR_0x40AD, 0
-	goto_eq Route110_TrickHousePuzzle3_EventScript_26C5B9
+	goto_if_eq Route110_TrickHousePuzzle3_EventScript_26C5B9
 	goto Route110_TrickHousePuzzle3_EventScript_26A3DB
 	end
 

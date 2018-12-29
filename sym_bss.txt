@@ -43,7 +43,8 @@
 	.include "src/battle_pike.o"
 	.include "src/battle_tent.o"
 	.include "src/multiboot.o"
-	.include "src/fossil_specials.o"
+	.align 3  @ necessary until the nonmatching in mirage_tower is fixed
+	.include "src/mirage_tower.o"
 	.include "src/berry_fix_program.o"
 
 	@ pokenav

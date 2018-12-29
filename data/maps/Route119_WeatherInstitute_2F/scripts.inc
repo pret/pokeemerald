@@ -4,11 +4,10 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
 
 Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF44
+	call_if_eq Route119_WeatherInstitute_2F_EventScript_26FF44
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF50
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF5C
+	call_if_eq Route119_WeatherInstitute_2F_EventScript_26FF50
+	call_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_26FF5C
 	end
 
 Route119_WeatherInstitute_2F_EventScript_26FF44:: @ 826FF44
@@ -87,9 +86,9 @@ Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 	setvar VAR_TEMP_1, 385
 	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
 	compare VAR_RESULT, 0
-	goto_eq Route119_WeatherInstitute_2F_EventScript_270085
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270085
 	compare VAR_RESULT, 1
-	goto_eq Route119_WeatherInstitute_2F_EventScript_2700AD
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700AD
 	goto Route119_WeatherInstitute_2F_EventScript_273811
 	end
 
@@ -97,7 +96,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route119_WeatherInstitute_2F_EventScript_2700EA
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
 	call Route119_WeatherInstitute_2F_EventScript_2723DD
 	goto Route119_WeatherInstitute_2F_EventScript_2700EA
@@ -107,7 +106,7 @@ Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
 	msgbox gUnknown_08273374, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route119_WeatherInstitute_2F_EventScript_2700D0
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_2700D0
 	call Route119_WeatherInstitute_2F_EventScript_273797
 	goto Route119_WeatherInstitute_2F_EventScript_2700D0
 	end
@@ -132,25 +131,21 @@ Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
 	end
 
 Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_eq Route119_WeatherInstitute_2F_EventScript_27010A
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_27010A
 	msgbox Route119_WeatherInstitute_2F_Text_27077E, MSGBOX_DEFAULT
 	release
 	end
 
 Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	setvar VAR_0x8004, 0
-	checkflag FLAG_0x1BE
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
-	checkflag FLAG_0x1BF
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_0x1BE, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_0x1BF, Route119_WeatherInstitute_2F_EventScript_270160
 	compare VAR_0x8004, 2
-	goto_eq Route119_WeatherInstitute_2F_EventScript_270166
-	checkflag FLAG_TEMP_2
-	call_if 0, Route119_WeatherInstitute_2F_EventScript_270159
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270166
+	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_270159
 	specialvar VAR_RESULT, sub_813B374
 	compare VAR_RESULT, 1
-	goto_eq Route119_WeatherInstitute_2F_EventScript_27014F
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_27014F
 	msgbox Route119_WeatherInstitute_2F_Text_2707F1, MSGBOX_DEFAULT
 	release
 	end
@@ -212,8 +207,7 @@ Route119_WeatherInstitute_2F_Movement_270187: @ 8270187
 Route119_WeatherInstitute_2F_EventScript_27018B:: @ 827018B
 	lock
 	faceplayer
-	checkflag FLAG_0x097
-	goto_eq Route119_WeatherInstitute_2F_EventScript_2700F7
+	goto_if_set FLAG_0x097, Route119_WeatherInstitute_2F_EventScript_2700F7
 	goto Route119_WeatherInstitute_2F_EventScript_27004D
 	end
 

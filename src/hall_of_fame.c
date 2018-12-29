@@ -14,7 +14,9 @@
 #include "constants/songs.h"
 #include "decompress.h"
 #include "save.h"
+#include "strings.h"
 #include "window.h"
+#include "credits.h"
 #include "bg.h"
 #include "constants/species.h"
 #include "constants/game_stat.h"
@@ -28,6 +30,7 @@
 #include "event_data.h"
 #include "overworld.h"
 #include "menu.h"
+#include "fldeff_misc.h"
 #include "trainer_pokemon_sprites.h"
 #include "data2.h"
 #include "rom_81520A8.h"
@@ -59,37 +62,11 @@ static EWRAM_DATA u32 sUnknown_0203BCD4 = 0;
 static EWRAM_DATA struct HallofFameTeam *sHofMonPtr = NULL;
 static EWRAM_DATA struct HofGfx *sHofGfxPtr = NULL;
 
-extern bool8 gHasHallOfFameRecords;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 
-// strings
-extern const u8 gText_SavingDontTurnOffPower[];
-extern const u8 gText_LeagueChamp[];
-extern const u8 gText_HOFNumber[];
-extern const u8 gText_PickNextCancel[];
-extern const u8 gText_PickCancel[];
-extern const u8 gText_UnkCtrlF800Exit[];
-extern const u8 gText_HOFCorrupted[];
-extern const u8 gText_WelcomeToHOF[];
-extern const u8 gText_Number[];
-extern const u8 gText_Level[];
-extern const u8 gText_IDNumber[];
-extern const u8 gText_Name[];
-extern const u8 gText_MainMenuTime[];
-
-extern void sub_8175620(void);
-extern bool8 sub_80F9C30(void);
-extern void sub_8198314(void);
 extern void ReturnFromHallOfFamePC(void);
-extern void sub_8198180(const u8 *src, u8, u8);
-extern void sub_80F9BF4(u16, u16, u8);
-extern void sub_81980F0(u8, u8, u8, u8, u16);
-extern void sub_80F9BCC(u16, u16, u8);
-extern bool8 sub_80F9C1C(void);
-extern void sub_81971D0(void);
-extern void sub_8197200(void);
 
 // this file's functions
 static void ClearVramOamPltt_LoadHofPal(void);
@@ -378,8 +355,8 @@ static bool8 InitHallOfFameScreen(void)
         gMain.state++;
         break;
     case 2:
-        SetGpuReg(REG_OFFSET_BLDCNT, 0x3F42);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0x710);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 7));
         SetGpuReg(REG_OFFSET_BLDY, 0);
         sub_8174FAC();
         sHofGfxPtr->state = 0;
@@ -840,8 +817,8 @@ void CB2_DoHallOfFamePC(void)
         {
             u8 taskId, i;
 
-            SetGpuReg(REG_OFFSET_BLDCNT, 0x3F42);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0x710);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 7));
             SetGpuReg(REG_OFFSET_BLDY, 0);
             taskId = CreateTask(Task_HofPC_CopySaveData, 0);
 
@@ -1088,7 +1065,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
 
 static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
-    sub_8198180(gText_UnkCtrlF800Exit, 8, 1);
+    sub_8198180(gText_UnkCtrlF800Exit, 8, TRUE);
     NewMenuHelpers_DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, 1, gText_HOFCorrupted, 0, NULL, 2, 1, 3);
     CopyWindowToVram(0, 3);
@@ -1322,7 +1299,7 @@ static bool8 sub_8175024(void)
         CopyBgTilemapBufferToVram(3);
         break;
     case 3:
-        sub_81971D0();
+        InitStandardTextBoxWindows();
         sub_8197200();
         break;
     case 4:

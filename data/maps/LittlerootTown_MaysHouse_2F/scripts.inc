@@ -5,28 +5,27 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 81F9296
 
 LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	compare VAR_0x408D, 2
-	call_if 0, LittlerootTown_MaysHouse_2F_EventScript_1F930A
+	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_1F930A
 	compare VAR_0x408D, 3
-	call_if 4, LittlerootTown_MaysHouse_2F_EventScript_1F92CD
+	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
 	compare VAR_0x4092, 4
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_2926FE
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F92CD:: @ 81F92CD
-	checkflag FLAG_0x124
-	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F92E6
+	goto_if_set FLAG_0x124, LittlerootTown_MaysHouse_2F_EventScript_1F92E6
 	compare VAR_0x4084, 2
-	goto_if 4, LittlerootTown_MaysHouse_2F_EventScript_1F9309
+	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	goto LittlerootTown_MaysHouse_2F_EventScript_1F92E6
 
 LittlerootTown_MaysHouse_2F_EventScript_1F92E6:: @ 81F92E6
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F9309
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	compare VAR_0x40D3, 2
-	goto_if 4, LittlerootTown_MaysHouse_2F_EventScript_1F9309
+	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	setobjectxyperm 1, 8, 2
 	setobjectmovementtype 1, 7
 	return
@@ -38,7 +37,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9309:: @ 81F9309
 LittlerootTown_MaysHouse_2F_EventScript_1F930A:: @ 81F930A
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F9317
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9317
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9317:: @ 81F9317
@@ -52,13 +51,13 @@ LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
 LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_eq EventScript_275D0C
+	goto_if_eq EventScript_275D0C
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334
 	lockall
 	compare VAR_0x408D, 2
-	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F934A
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F934A
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F9991, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -76,13 +75,13 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	delay 10
 	playbgm MUS_GIRL_SUP, 1
 	compare VAR_FACING, 2
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F93BA
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93BA
 	compare VAR_FACING, 1
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F93E9
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F93E9
 	compare VAR_FACING, 3
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F9418
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9418
 	compare VAR_FACING, 4
-	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F9440
+	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9440
 	setvar VAR_0x408D, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
@@ -250,13 +249,12 @@ LittlerootTown_MaysHouse_2F_Movement_1F94BB: @ 81F94BB
 LittlerootTown_BrendansHouse_2F_EventScript_1F94C1:: @ 81F94C1
 LittlerootTown_MaysHouse_2F_EventScript_1F94C1:: @ 81F94C1
 	lockall
-	checkflag FLAG_0x124
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
+	goto_if_set FLAG_0x124, LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94E3
-	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94ED
+	compare VAR_RESULT, MALE
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94E3
+	compare VAR_RESULT, FEMALE
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94ED
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F94E3:: @ 81F94E3
@@ -273,23 +271,21 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
 	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_27259E
 	waitmovement 0
 	checkplayergender
-	compare VAR_RESULT, 0
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F951D
-	compare VAR_RESULT, 1
-	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F952F
+	compare VAR_RESULT, MALE
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F951D
+	compare VAR_RESULT, FEMALE
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F952F
 	setflag FLAG_0x125
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F951D:: @ 81F951D
-	checkflag FLAG_0x125
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F9541
+	goto_if_set FLAG_0x125, LittlerootTown_BrendansHouse_2F_EventScript_1F9541
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F99C9, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F952F:: @ 81F952F
-	checkflag FLAG_0x125
-	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F954A
+	goto_if_set FLAG_0x125, LittlerootTown_BrendansHouse_2F_EventScript_1F954A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9B0D, MSGBOX_DEFAULT
 	return
 
@@ -304,10 +300,10 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F954A:: @ 81F954A
 EventScript_PlayerPCFemale:: @ 81F9553
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F956C
-	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_MaysHouse_2F_EventScript_1F9576
+	compare VAR_RESULT, MALE
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F956C
+	compare VAR_RESULT, FEMALE
+	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9576
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C

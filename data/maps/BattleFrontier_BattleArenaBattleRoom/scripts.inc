@@ -17,18 +17,18 @@ BattleFrontier_BattleArenaBattleRoom_MapScript1_2574A0: @ 82574A0
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574AE:: @ 82574AE
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2574C6
-	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2574CC
+	compare VAR_RESULT, MALE
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2574C6
+	compare VAR_RESULT, FEMALE
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2574CC
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574C6:: @ 82574C6
-	setvar VAR_OBJ_GFX_ID_1, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2574CC:: @ 82574CC
-	setvar VAR_OBJ_GFX_ID_1, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 BattleFrontier_BattleArenaBattleRoom_MapScript2_2574D2: @ 82574D2
@@ -44,7 +44,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25752E
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25752E
 	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257C08
 	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
 	setvar VAR_TEMP_2, 1
@@ -150,25 +150,25 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0:: @ 82576B0
 	special CallFrontierUtilFunc
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC
+	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257870
+	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257870
 	compare VAR_RESULT, 2
-	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257877
+	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257877
 	compare VAR_RESULT, 3
-	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25787E
+	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25787E
 	compare VAR_RESULT, 4
-	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257885
+	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257885
 	compare VAR_RESULT, 5
-	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25788C
+	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25788C
 	compare VAR_RESULT, 6
-	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257893
+	call_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257893
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257768
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257768
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_25783A
@@ -276,7 +276,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_25789A:: @ 825789A
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC:: @ 82578BC
 	compare VAR_TEMP_2, 1
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257F45, MSGBOX_DEFAULT
 	setvar VAR_TEMP_2, 1
 
@@ -285,7 +285,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4:: @ 82578D4
 	waitmessage
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25792B
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25792B
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257961
@@ -334,7 +334,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257961:: @ 8257961
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
+	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25801C, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 2
@@ -352,7 +352,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F:: @ 8257A3F
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25810D, MSGBOX_DEFAULT
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B5E
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C:: @ 8257A5C
@@ -360,7 +360,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C:: @ 8257A5C
 	setvar VAR_0x8004, 12
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_257852
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF1
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25813F, MSGBOX_DEFAULT
@@ -378,7 +378,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5:: @ 8257AA5
 	setvar VAR_0x8005, 7
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
+	goto_if_ne BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258213, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_0x8004, 2
@@ -396,7 +396,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8:: @ 8257AF8
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_2582F9, MSGBOX_DEFAULT
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B5E
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257B15
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257B15
 	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_257B15:: @ 8257B15
@@ -404,7 +404,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257B15:: @ 8257B15
 	setvar VAR_0x8004, 12
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257852
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF1
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258323, MSGBOX_DEFAULT

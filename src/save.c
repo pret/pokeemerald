@@ -924,7 +924,7 @@ void sub_8153688(u8 taskId)
         break;
     case 3:
         if (taskData[2] == 0)
-            sub_8076D5C();
+            SetContinueGameWarpStatusToDynamicWarp();
         sub_8153380();
         taskData[0] = 4;
         break;
@@ -947,7 +947,7 @@ void sub_8153688(u8 taskId)
         break;
     case 7:
         if (taskData[2] == 0)
-            sav2_gender2_inplace_and_xFE();
+            ClearContinueGameWarpStatus2();
         sub_800ADF8();
         taskData[0] = 8;
         break;

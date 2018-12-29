@@ -18,7 +18,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C87D: @ 825C87D
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C887:: @ 825C887
 	setvar VAR_TEMP_4, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25C891:: @ 825C891
@@ -169,7 +169,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
 	setvar VAR_0x8004, 17
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
+	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
 	setvar VAR_TEMP_5, 255
 	end
 
@@ -192,7 +192,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB
 	setvar VAR_0x8004, 19
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 4
-	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2
+	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2
 	lock
 	faceplayer
 	msgbox BattleFrontier_BattlePikeThreePathRoom_Text_25CE69, MSGBOX_YESNO

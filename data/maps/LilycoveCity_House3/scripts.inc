@@ -12,7 +12,7 @@ LilycoveCity_House3_EventScript_21EE4B:: @ 821EE4B
 	faceplayer
 	msgbox LilycoveCity_House3_Text_21EF99, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_House3_EventScript_21EE75
+	goto_if_eq LilycoveCity_House3_EventScript_21EE75
 	msgbox LilycoveCity_House3_Text_21F0F8, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, LilycoveCity_House3_Movement_2725A2

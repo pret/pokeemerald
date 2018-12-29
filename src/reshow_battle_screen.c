@@ -50,8 +50,8 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     case 0:
         ScanlineEffect_Clear();
         BattleInitBgsAndWindows();
-        SetBgAttribute(1, BG_CTRL_ATTR_VISIBLE, 0);
-        SetBgAttribute(2, BG_CTRL_ATTR_VISIBLE, 0);
+        SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+        SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);

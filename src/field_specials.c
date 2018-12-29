@@ -945,11 +945,11 @@ void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
     {
-        Overworld_SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
+        SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
     }
     else
     {
-        Overworld_SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
+        SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
     }
 }
 
@@ -1725,7 +1725,7 @@ const u16 gUnknown_085B2C06[][3] =
 void SetDepartmentStoreFloorVar(void)
 {
     u8 deptStoreFloor;
-    switch (gSaveBlock1Ptr->warp2.mapNum)
+    switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
     {
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
             deptStoreFloor = 4;
@@ -1757,9 +1757,9 @@ u16 sub_81399F4(void)
     gUnknown_0203AB60 = 0;
     gUnknown_0203AB62 = 0;
 
-    if (gSaveBlock1Ptr->warp2.mapGroup == 13)
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
             case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
                 gUnknown_0203AB60 = 0;
@@ -3193,7 +3193,7 @@ void sub_813AEB4(void)
         i = 0;
         do
         {
-            if (gUnknown_0861500C[i] == gUnknown_085B320C[temp2])
+            if (gTutorMoves[i] == gUnknown_085B320C[temp2])
             {
                 gSpecialVar_0x8005 = i;
                 break;
@@ -3206,7 +3206,7 @@ void sub_813AEB4(void)
         i = 0;
         do
         {
-            if (gUnknown_0861500C[i] == gUnknown_085B31F8[temp2])
+            if (gTutorMoves[i] == gUnknown_085B31F8[temp2])
             {
                 gSpecialVar_0x8005 = i;
                 break;
@@ -3813,11 +3813,11 @@ void sub_813B9A0(void)
 {
     if (gSaveBlock1Ptr->lastHealLocation.mapGroup == MAP_GROUP(DEWFORD_TOWN) && gSaveBlock1Ptr->lastHealLocation.mapNum == MAP_NUM(DEWFORD_TOWN))
     {
-        Overworld_SetHealLocationWarp(3);
+        SetLastHealLocationWarp(3);
     }
 }
 
-bool32 sub_813B9C0(void)
+bool8 sub_813B9C0(void)
 {
     static const u16 gUnknown_085B3444[] = {
         MAP_OLDALE_TOWN_POKEMON_CENTER_1F,

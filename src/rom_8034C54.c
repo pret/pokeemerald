@@ -3,6 +3,7 @@
 #include "alloc.h"
 #include "decompress.h"
 #include "main.h"
+#include "battle_main.h"
 
 struct UnkStruct2
 {
@@ -30,8 +31,6 @@ struct UnkStruct1
     u32 count;
     struct UnkStruct2 *array;
 };
-
-extern const struct SpriteTemplate gUnknown_0831AC88;
 
 // this file's functions
 static u8 sub_8035518(u8 arg0);;

@@ -162,7 +162,7 @@
 #define FLAG_0x09A               0x9A
 #define FLAG_0x09B               0x9B
 #define FLAG_0x09C               0x9C
-#define FLAG_0x09D               0x9D
+#define FLAG_FORCE_MIRAGE_TOWER_VISIBLE               0x9D
 #define FLAG_0x09E               0x9E
 #define FLAG_0x09F               0x9F
 #define FLAG_0x0A0               0xA0
@@ -344,7 +344,7 @@
 #define FLAG_0x14B               0x14B
 #define FLAG_0x14C               0x14C
 #define FLAG_0x14D               0x14D
-#define FLAG_0x14E               0x14E
+#define FLAG_MIRAGE_TOWER_VISIBLE               0x14E
 #define FLAG_0x14F               0x14F// PLAYER CHOSE CLAW FOSSIL
 #define FLAG_0x150               0x150// PLAYER CHOSE ROOT FOSSIL
 #define FLAG_0x151               0x151
@@ -804,7 +804,7 @@
 #define FLAG_HIDE_TRICK_HOUSE_ENTRANCE_MAN                          0x368 
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_POKEBLOCK_EXPERT            0x369 
 #define FLAG_HIDE_DESERT_UNDERPASS_FOSSIL                           0x36A 
-#define FLAG_HIDE_ROUTE_111_DESERT_RIVAL                            0x36B 
+#define FLAG_HIDE_ROUTE_111_PLAYER_DESCENT                            0x36B 
 #define FLAG_HIDE_ROUTE_111_DESERT_FOSSIL                           0x36C 
 #define FLAG_HIDE_MT_CHIMNEY_TRAINERS                               0x36D 
 #define FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT                         0x36E 

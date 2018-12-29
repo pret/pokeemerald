@@ -10,6 +10,6 @@ RusturfTunnel: @ 8483F30
 	.byte WEATHER_FOG_1
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
-	.byte 15
+	map_header_flags allow_bike=1, allow_escape_rope=1, allow_run=1, show_map_name=1
 	.byte MAP_BATTLE_SCENE_NORMAL
 

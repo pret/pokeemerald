@@ -5,13 +5,11 @@ EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 8229A34
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_1
-	checkflag FLAG_0x1CF
-	call_if 0, EverGrandeCity_PokemonCenter_1F_EventScript_229A4C
+	call_if_unset FLAG_0x1CF, EverGrandeCity_PokemonCenter_1F_EventScript_229A4C
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_229A4C:: @ 8229A4C
-	checkflag FLAG_BADGE06_GET
-	goto_if 0, EverGrandeCity_PokemonCenter_1F_EventScript_27374E
+	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonCenter_1F_EventScript_27374E
 	clearflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	return
 
@@ -37,11 +35,11 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A79:: @ 8229A79
 	msgbox EverGrandeCity_PokemonCenter_1F_Text_229BF1, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AB6
+	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AB6
 	compare VAR_FACING, 4
-	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
+	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
 	compare VAR_FACING, 3
-	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
+	call_if_eq EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x1CF
 	playse SE_KAIDAN

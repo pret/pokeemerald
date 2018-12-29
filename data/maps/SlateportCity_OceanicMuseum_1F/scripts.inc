@@ -23,7 +23,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	showmoneybox 0, 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20AFD5, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20ADE8
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20ADE8
 	closemessage
 	hidemoneybox
 	nop
@@ -36,7 +36,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	checkmoney 0x32, 0
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AE18
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AE18
 	playse SE_REGI
 	takemoney 0x32, 0
 	updatemoneybox 0, 0
@@ -50,8 +50,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
-	checkflag FLAG_0x095
-	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE39
+	goto_if_unset FLAG_0x095, SlateportCity_OceanicMuseum_1F_EventScript_20AE39
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
@@ -163,18 +162,18 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B3AB, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM46
 	compare VAR_RESULT, 0
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AFB5
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AFB5
 	setflag FLAG_0x10D
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
 	compare VAR_FACING, 1
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF83
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF83
 	compare VAR_FACING, 3
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
 	compare VAR_FACING, 4
-	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AF6C:: @ 820AF6C

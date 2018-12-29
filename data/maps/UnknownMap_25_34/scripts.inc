@@ -20,15 +20,15 @@ LinkContestRoom1_EventScript_23B7AF:: @ 823B7AF
 	call LinkContestRoom1_EventScript_27A133
 	special ScriptGetMultiplayerId
 	compare VAR_RESULT, 0
-	call_if 1, LinkContestRoom1_EventScript_23B7EF
+	call_if_eq LinkContestRoom1_EventScript_23B7EF
 	compare VAR_RESULT, 1
-	call_if 1, LinkContestRoom1_EventScript_23B7F3
+	call_if_eq LinkContestRoom1_EventScript_23B7F3
 	compare VAR_RESULT, 2
-	call_if 1, LinkContestRoom1_EventScript_23B7F7
+	call_if_eq LinkContestRoom1_EventScript_23B7F7
 	compare VAR_RESULT, 3
-	call_if 1, LinkContestRoom1_EventScript_23B7FB
+	call_if_eq LinkContestRoom1_EventScript_23B7FB
 	compare VAR_RESULT, 4
-	call_if 1, LinkContestRoom1_EventScript_23B7FF
+	call_if_eq LinkContestRoom1_EventScript_23B7FF
 	return
 
 LinkContestRoom1_EventScript_23B7EF:: @ 823B7EF
@@ -53,7 +53,7 @@ LinkContestRoom1_EventScript_23B7FF:: @ 823B7FF
 
 LinkContestRoom1_MapScript1_23B803: @ 823B803
 	compare VAR_TEMP_9, 1
-	call_if 1, LinkContestRoom1_EventScript_23B80F
+	call_if_eq LinkContestRoom1_EventScript_23B80F
 	end
 
 LinkContestRoom1_EventScript_23B80F:: @ 823B80F
@@ -75,7 +75,7 @@ LinkContestRoom1_EventScript_23B829:: @ 823B829
 
 LinkContestRoom1_EventScript_23B834:: @ 823B834
 	special sub_80F8B94
-	hideobjectat 255, MAP_LITTLEROOT_TOWN
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	call LinkContestRoom1_EventScript_23BB2B
 	end
 
@@ -83,7 +83,7 @@ LinkContestRoom1_EventScript_23B842:: @ 823B842
 	call LinkContestRoom1_EventScript_23B8F8
 	call LinkContestRoom1_EventScript_23B858
 	compare VAR_TEMP_0, 8
-	goto_if 0, LinkContestRoom1_EventScript_23B842
+	goto_if_lt LinkContestRoom1_EventScript_23B842
 	return
 
 LinkContestRoom1_EventScript_23B858:: @ 823B858
@@ -302,7 +302,7 @@ LinkContestRoom1_EventScript_23BB25:: @ 823BB25
 LinkContestRoom1_EventScript_23BB2B:: @ 823BB2B
 	specialvar VAR_RESULT, sub_80F9160
 	compare VAR_RESULT, 1
-	goto_eq LinkContestRoom1_EventScript_23BD86
+	goto_if_eq LinkContestRoom1_EventScript_23BD86
 	switch VAR_0x4088
 	case 1, LinkContestRoom1_EventScript_23BB78
 	case 2, LinkContestRoom1_EventScript_23BB8B
@@ -442,17 +442,17 @@ LinkContestRoom1_EventScript_23BEAC:: @ 823BEAC
 
 LilycoveCity_ContestLobby_EventScript_23BEB6:: @ 823BEB6
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_23BECE
-	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_23BED4
+	compare VAR_RESULT, MALE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_23BECE
+	compare VAR_RESULT, FEMALE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_23BED4
 	return
 
 LilycoveCity_ContestLobby_EventScript_23BECE:: @ 823BECE
-	setvar VAR_OBJ_GFX_ID_3, 100
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 LilycoveCity_ContestLobby_EventScript_23BED4:: @ 823BED4
-	setvar VAR_OBJ_GFX_ID_3, 105
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 

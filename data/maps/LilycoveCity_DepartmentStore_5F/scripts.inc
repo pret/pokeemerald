@@ -126,9 +126,9 @@ LilycoveCity_DepartmentStore_5F_EventScript_220075:: @ 8220075
 	applymovement 7, LilycoveCity_DepartmentStore_5F_Movement_27259E
 	waitmovement 0
 	compare VAR_0x405E, 0
-	goto_eq LilycoveCity_DepartmentStore_5F_EventScript_22009C
+	goto_if_eq LilycoveCity_DepartmentStore_5F_EventScript_22009C
 	compare VAR_0x405E, 4
-	goto_if 4, LilycoveCity_DepartmentStore_5F_EventScript_22009C
+	goto_if_ge LilycoveCity_DepartmentStore_5F_EventScript_22009C
 	goto LilycoveCity_DepartmentStore_5F_EventScript_2200A7
 	end
 

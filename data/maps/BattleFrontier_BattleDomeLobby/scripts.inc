@@ -16,7 +16,7 @@ BattleFrontier_BattlePyramidLobby_MapScript2_2497FB: @ 82497FB
 
 BattleFrontier_BattleDomeLobby_EventScript_249805:: @ 8249805
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattleDomeLobby_MapScript2_24980F: @ 824980F
@@ -62,7 +62,7 @@ BattleFrontier_BattleDomeLobby_EventScript_24989B:: @ 824989B
 	setvar VAR_0x8004, 10
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2498C1
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_2498C1
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A4E9, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_2498C9
 
@@ -128,7 +128,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
 	waitse
 	call BattleFrontier_BattleDomeLobby_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
 	message BattleFrontier_BattleDomeLobby_Text_24AE17
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
@@ -183,15 +183,15 @@ BattleFrontier_BattleDomeLobby_EventScript_249A47:: @ 8249A47
 BattleFrontier_BattleDomeLobby_EventScript_249A59:: @ 8249A59
 	special SavePlayerParty
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CFD
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CFD
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D06
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D06
 
 BattleFrontier_BattleDomeLobby_EventScript_249A72:: @ 8249A72
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D0F
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D0F
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D15
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D15
 	waitmessage
 	multichoice 17, 6, 23, 0
 	switch VAR_RESULT
@@ -210,7 +210,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
@@ -223,7 +223,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C61
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C61
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A1C6, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_249C61
@@ -251,7 +251,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	call BattleFrontier_BattleDomeLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C4A
+	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_249C4A
 	setvar VAR_0x8004, 22
 	special CallBattleDomeFunction
 
@@ -273,9 +273,9 @@ BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 
 BattleFrontier_BattleDomeLobby_EventScript_249BFA:: @ 8249BFA
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D1B
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D1B
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D24
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D24
 	goto BattleFrontier_BattleDomeLobby_EventScript_249A72
 
 BattleFrontier_BattleDomeLobby_EventScript_249C15:: @ 8249C15
@@ -310,26 +310,26 @@ BattleFrontier_BattleDomeLobby_EventScript_249C6C:: @ 8249C6C
 
 BattleFrontier_BattleDomeLobby_EventScript_249C6E:: @ 8249C6E
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CDD
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CDD
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CE5
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CE5
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D45
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D2D
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D2D
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D33
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D33
 	waitdooranim
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CED
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CED
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CF5
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249CF5
 	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_249D4E
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D39
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D39
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D3F
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249D3F
 	waitdooranim
 	return
 
@@ -435,13 +435,13 @@ BattleFrontier_BattleDomeLobby_EventScript_249D84:: @ 8249D84
 	setvar VAR_0x8005, 9
 	special CallBattleDomeFunction
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DC9
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DC9
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DD2
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DD2
 	compare VAR_RESULT, 2
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DDB
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DDB
 	compare VAR_RESULT, 3
-	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DE4
+	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_249DE4
 	fadescreen 1
 	setvar VAR_0x8004, 8
 	special CallBattleDomeFunction

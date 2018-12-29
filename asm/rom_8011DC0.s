@@ -718,7 +718,7 @@ _080211EC:
 	beq _080211F8
 	b _08021302
 _080211F8:
-	bl sub_81971D0
+	bl InitStandardTextBoxWindows
 	bl sub_8197200
 	adds r0, r5, 0
 	bl sub_8022588
@@ -19284,7 +19284,7 @@ _0802A7CE:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_81971D0
+	bl InitStandardTextBoxWindows
 	bl sub_8197200
 	movs r1, 0x82
 	lsls r1, 5

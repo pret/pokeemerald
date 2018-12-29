@@ -5,9 +5,9 @@ Underwater_SealedChamber_MapScripts:: @ 82390C4
 Underwater_SealedChamber_MapScript1_2390CA: @ 82390CA
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 12
-	goto_if 5, Underwater_SealedChamber_EventScript_2390EA
+	goto_if_ne Underwater_SealedChamber_EventScript_2390EA
 	compare VAR_0x8005, 44
-	goto_if 5, Underwater_SealedChamber_EventScript_2390EA
+	goto_if_ne Underwater_SealedChamber_EventScript_2390EA
 	goto Underwater_SealedChamber_EventScript_2390F3
 
 Underwater_SealedChamber_EventScript_2390EA:: @ 82390EA

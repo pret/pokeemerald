@@ -9,13 +9,12 @@ Route114_LanettesHouse_MapScript1_22B2CE: @ 822B2CE
 Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	lock
 	faceplayer
-	checkflag FLAG_0x083
-	goto_eq Route114_LanettesHouse_EventScript_22B2FF
+	goto_if_set FLAG_0x083, Route114_LanettesHouse_EventScript_22B2FF
 	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_22B34E, MSGBOX_DEFAULT
 	givedecoration_std 99
 	compare VAR_RESULT, 0
-	goto_eq Route114_LanettesHouse_EventScript_272067
+	goto_if_eq Route114_LanettesHouse_EventScript_272067
 	setflag FLAG_0x083
 	release
 	end
@@ -29,7 +28,7 @@ Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 	lockall
 	msgbox Route114_LanettesHouse_Text_22B485, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route114_LanettesHouse_EventScript_22B327
+	goto_if_eq Route114_LanettesHouse_EventScript_22B327
 	msgbox Route114_LanettesHouse_Text_22B6E4, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -37,7 +36,7 @@ Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 Route114_LanettesHouse_EventScript_22B327:: @ 822B327
 	msgbox Route114_LanettesHouse_Text_22B53C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	call_if 1, Route114_LanettesHouse_EventScript_22B33C
+	call_if_eq Route114_LanettesHouse_EventScript_22B33C
 	releaseall
 	end
 

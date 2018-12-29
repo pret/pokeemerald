@@ -4,7 +4,7 @@ Route131_MapScripts:: @ 81F7404
 
 Route131_MapScript1_1F740A: @ 81F740A
 	compare VAR_0x405E, 4
-	call_if 4, Route131_EventScript_1F741F
+	call_if_ge Route131_EventScript_1F741F
 	call Route131_EventScript_1F741B
 	end
 
@@ -13,8 +13,7 @@ Route131_EventScript_1F741B:: @ 81F741B
 	return
 
 Route131_EventScript_1F741F:: @ 81F741F
-	checkflag FLAG_SYS_WEATHER_CTRL
-	call_if 1, Route131_EventScript_27207A
+	call_if_set FLAG_SYS_WEATHER_CTRL, Route131_EventScript_27207A
 	return
 
 Route131_EventScript_1F7429:: @ 81F7429
