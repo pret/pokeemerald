@@ -5271,3 +5271,153 @@ void c3_0805465C(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void sub_807F39C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (data[0] == 0)
+    {
+        gUnknown_020322A0->unk_FB = 80;
+        gUnknown_020322A0->unk_FD = 160;
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |
+                                    WININ_WIN0_BG1 |
+                                    WININ_WIN0_OBJ);
+    }
+
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(gUnknown_020322A0->unk_FB, gUnknown_020322A0->unk_FD));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(gUnknown_020322A0->unk_FC, gUnknown_020322A0->unk_FE));
+    
+    if (gUnknown_020322A0->unk_FB != 120)
+    {
+        data[0]++;
+        gUnknown_020322A0->unk_FB += 5;
+        gUnknown_020322A0->unk_FD -= 5;
+
+        if (gUnknown_020322A0->unk_FB >= 116)
+            BlendPalettes(0x8, 0, RGB_WHITEALPHA);
+    }
+    else
+    {
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_807F464(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            gMain.state = 1;
+            StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby5);
+            sub_807F1A8(0, gStringVar4, 0);
+            break;
+        case 1:
+            sub_8077288(0);
+            gMain.state = 2;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 2:
+            if (IsLinkTaskFinished())
+            {
+                gMain.state = 3;
+                StringExpandPlaceholders(gStringVar4, gText_SavingDontTurnOffPower);
+                sub_807F1A8(0, gStringVar4, 0);
+                IncrementGameStat(GAME_STAT_POKEMON_TRADES);
+                sub_8153380();
+                gUnknown_020322A0->unk_64 = 0;
+            }
+            break;
+        case 3:
+            if (++gUnknown_020322A0->unk_64 == 5)
+            {
+                gMain.state = 4;
+            }
+            break;
+        case 4:
+            if (sub_81533AC())
+            {
+                gMain.state = 5;
+            }
+            else
+            {
+                gUnknown_020322A0->unk_64 = 0;
+                gMain.state = 3;
+            }
+            break;
+        case 5:
+            sub_81533E0();
+            gMain.state = 6;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 6:
+            if (++gUnknown_020322A0->unk_64 > 10)
+            {
+                if (GetMultiplayerId() == 0)
+                {
+                    gUnknown_020322A0->unk_64 = Random() % 30;
+                }
+                else
+                {
+                    gUnknown_020322A0->unk_64 = 0;
+                }
+                gMain.state = 7;
+            }
+            break;
+        case 7:
+            if (gUnknown_020322A0->unk_64 == 0)
+            {
+                sub_8077288(1);
+                gMain.state = 8;
+            }
+            else
+            {
+                gUnknown_020322A0->unk_64--;
+            }
+            break;
+        case 8:
+            if (IsLinkTaskFinished())
+            {
+                sub_8153408();
+                gMain.state = 9;
+            }
+            break;
+        case 9:
+            if (++gUnknown_020322A0->unk_64 > 60)
+            {
+                gMain.state++;
+                sub_8077288(2);
+            }
+            break;
+        case 10:
+            if (IsLinkTaskFinished())
+            {
+                FadeOutBGM(3);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                gMain.state = 11;
+            }
+            break;
+        case 11:
+            if (!gPaletteFade.active && IsBGMStopped() == TRUE)
+            {
+                sub_8077288(3);
+                gMain.state = 12;
+            }
+            break;
+        case 12:
+            if (IsLinkTaskFinished())
+            {
+                gSoftResetDisabled = FALSE;
+                SetMainCallback2(c2_080543C4);
+            }
+            break;
+    }
+
+    if (!HasLinkErrorOccurred())
+        RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
