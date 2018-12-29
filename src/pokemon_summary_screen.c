@@ -311,7 +311,7 @@ static const struct UnkStruct_61CC04 gUnknown_0861CC10 =
 static const s8 gUnknown_0861CC1C[] = {0, 2, 3, 1, 4, 5};
 static const struct WindowTemplate gUnknown_0861CC24[] =
 {
-    {
+    {//Text for Pokemon Info
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -320,7 +320,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 1,
     },
-    {
+    {//Text for Pokemon Skills
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -329,7 +329,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 23,
     },
-    {
+    {//Text for Battle Moves
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -338,7 +338,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 45,
     },
-    {
+    {//Text for Contest Moves
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
@@ -347,7 +347,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 67,
     },
-    {
+    { //Text on Pokemon Info: Button prompt: Cancel
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 0,
@@ -356,7 +356,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 7,
         .baseBlock = 89,
     },
-    {
+    {//Info button found under moves
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 0,
@@ -365,7 +365,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 7,
         .baseBlock = 105,
     },
-    {
+    {//Switch button under moves when viewing moves
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 0,
@@ -374,7 +374,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 7,
         .baseBlock = 121,
     },
-    {
+    {//Unknown
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 4,
@@ -383,7 +383,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 137,
     },
-    {
+    {//Unknown
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 4,
@@ -392,7 +392,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 137,
     },
-    {
+    {//Type on pokemon info page
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 6,
@@ -401,7 +401,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 173,
     },
-    {
+    {//HP, Attack and Defense text
         .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 7,
@@ -410,7 +410,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 209,
     },
-    {
+    {//Sp. atk, Sp. Def and Speed texxt
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 7,
@@ -419,7 +419,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 245,
     },
-    {
+    {//EXP and next lvl.
         .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 14,
@@ -428,7 +428,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 275,
     },
-    {
+    {//Unknown
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 18,
@@ -437,7 +437,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 319,
     },
-    {
+    {//move text: Power, Accuracy and their numeric values.
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -446,7 +446,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 331,
     },
-    {
+    {//contest text: appeal and jam
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -455,7 +455,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 367,
     },
-    {
+    {//Unknown
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 4,
@@ -464,7 +464,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 387,
     },
-    {
+    {//No.
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 2,
@@ -473,7 +473,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 7,
         .baseBlock = 387,
     },
-    {
+    {//Upper name
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 12,
@@ -482,7 +482,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
         .paletteNum = 6,
         .baseBlock = 395,
     },
-    {
+    {//Lower name
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 14,
@@ -495,7 +495,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
 };
 static const struct WindowTemplate gUnknown_0861CCCC[] =
 {
-    {
+    {//Original Trainer
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 4,
@@ -504,7 +504,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .paletteNum = 6,
         .baseBlock = 449,
     },
-    {
+    {//ID numbers
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 4,
@@ -513,7 +513,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .paletteNum = 6,
         .baseBlock = 471,
     },
-    {
+    {//Ability
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 9,
@@ -522,7 +522,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .paletteNum = 6,
         .baseBlock = 485,
     },
-    {
+    {//Trainer Memo
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 14,
@@ -534,7 +534,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
 };
 static const struct WindowTemplate gUnknown_0861CCEC[] =
 {
-    {
+    {//Held Item string
         .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 4,
@@ -543,7 +543,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .paletteNum = 6,
         .baseBlock = 449,
     },
-    {
+    {//Ribbon string
         .bg = 0,
         .tilemapLeft = 20,
         .tilemapTop = 4,
@@ -552,7 +552,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .paletteNum = 6,
         .baseBlock = 469,
     },
-    {
+    {//Stat numbers left (HP, ATK & DEF)
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 7,
@@ -561,7 +561,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .paletteNum = 6,
         .baseBlock = 489,
     },
-    {
+    {//Stat numbers right (SP.ATK, SP.DEF & SPEED)
         .bg = 0,
         .tilemapLeft = 27,
         .tilemapTop = 7,
@@ -570,7 +570,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .paletteNum = 6,
         .baseBlock = 525,
     },
-    {
+    {//Exp numbers
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 14,
@@ -582,7 +582,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
 };
 static const struct WindowTemplate gUnknown_0861CD14[] =
 {
-    {
+    {//Move names?
         .bg = 0,
         .tilemapLeft = 15,
         .tilemapTop = 4,
@@ -591,7 +591,7 @@ static const struct WindowTemplate gUnknown_0861CD14[] =
         .paletteNum = 6,
         .baseBlock = 449,
     },
-    {
+    {//PP Numbers
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 4,
@@ -600,7 +600,7 @@ static const struct WindowTemplate gUnknown_0861CD14[] =
         .paletteNum = 8,
         .baseBlock = 539,
     },
-    {
+    {//Move description text
         .bg = 0,
         .tilemapLeft = 10,
         .tilemapTop = 15,
