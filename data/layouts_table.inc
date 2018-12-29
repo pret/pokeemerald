@@ -391,7 +391,7 @@ gMapLayouts::
 	.4byte DesertUnderpass_Layout
 	.4byte BattleFrontier_BattleTowerMultiBattleRoom_Layout
 	.4byte BattleFrontier_BattleTowerCorridor2_Layout
-	.4byte UnknownMap_08470BD8_Layout
+	.4byte Route111_NoMirageTower_Layout
 	.4byte UnionRoom_Layout
 	.4byte SafariZone_Northeast_Layout
 	.4byte SafariZone_Southeast_Layout

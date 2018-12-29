@@ -7,6 +7,6 @@ EverGrandeCity_Hall3_MapScript2_229599: @ 8229599
 	.2byte 0
 
 EverGrandeCity_Hall3_EventScript_2295A3:: @ 82295A3
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 

@@ -9,7 +9,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204: @ 824B204
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B20E:: @ 824B20E
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
@@ -18,7 +18,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
 	compare VAR_0x8006, 1
-	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
+	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 1
@@ -34,7 +34,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F:: @ 824B24F
 	switch VAR_RESULT
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1
+	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1
 	multichoice 16, 0, 73, 1
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B3DD
@@ -159,7 +159,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	setvar VAR_0x8004, 21
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
+	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 8
 	special CallBattleDomeFunction
@@ -219,15 +219,13 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B54C:: @ 824B54C
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B58B:: @ 824B58B
-	checkflag FLAG_TEMP_1
-	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5B5
+	goto_if_set FLAG_TEMP_1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5B5
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BB2E, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
 	return
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5A0:: @ 824B5A0
-	checkflag FLAG_TEMP_1
-	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE
+	goto_if_set FLAG_TEMP_1, BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5BE
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_24BBAC, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
 	return

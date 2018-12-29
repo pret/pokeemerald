@@ -28,12 +28,11 @@ LavaridgeTown_HerbShop_EventScript_1FE4FC:: @ 81FE4FC
 LavaridgeTown_HerbShop_EventScript_1FE505:: @ 81FE505
 	lock
 	faceplayer
-	checkflag FLAG_0x0FE
-	goto_eq LavaridgeTown_HerbShop_EventScript_1FE534
+	goto_if_set FLAG_0x0FE, LavaridgeTown_HerbShop_EventScript_1FE534
 	msgbox LavaridgeTown_HerbShop_Text_1FE584, MSGBOX_DEFAULT
 	giveitem_std ITEM_CHARCOAL
 	compare VAR_RESULT, 0
-	goto_eq LavaridgeTown_HerbShop_EventScript_272054
+	goto_if_eq LavaridgeTown_HerbShop_EventScript_272054
 	setflag FLAG_0x0FE
 	release
 	end

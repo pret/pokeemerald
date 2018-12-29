@@ -21,11 +21,11 @@ Route102_EventScript_1EC105:: @ 81EC105
 	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_294513, Route102_Text_29457C, Route102_EventScript_1EC146
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route102_EventScript_1EC19C
+	goto_if_eq Route102_EventScript_1EC19C
 	setvar VAR_0x8004, 318
 	specialvar VAR_RESULT, sub_813B4E0
 	compare VAR_RESULT, 0
-	goto_eq Route102_EventScript_1EC170
+	goto_if_eq Route102_EventScript_1EC170
 	msgbox Route102_Text_2945AC, MSGBOX_DEFAULT
 	release
 	end
@@ -33,8 +33,7 @@ Route102_EventScript_1EC105:: @ 81EC105
 Route102_EventScript_1EC146:: @ 81EC146
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_HAS_MATCH_CALL
-	goto_eq Route102_EventScript_1EC157
+	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_1EC157
 	release
 	end
 
@@ -45,8 +44,7 @@ Route102_EventScript_1EC157:: @ 81EC157
 	end
 
 Route102_EventScript_1EC170:: @ 81EC170
-	checkflag FLAG_HAS_MATCH_CALL
-	goto_eq Route102_EventScript_1EC183
+	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_1EC183
 	msgbox Route102_Text_2945AC, MSGBOX_DEFAULT
 	release
 	end

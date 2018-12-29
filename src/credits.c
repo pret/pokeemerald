@@ -1102,7 +1102,6 @@ static const struct SpriteTemplate gUnknown_085E7068 =
     .callback = sub_81772B8,
 };
 
-void sub_8175620(void);
 static void sub_8175744(u8 taskIdA);
 static void sub_8175774(u8 taskIdA);
 static void sub_8175808(u8 taskIdA);
@@ -2220,8 +2219,8 @@ static void sub_8177050(struct Sprite *sprite)
         }
         else
         {
-            SetGpuReg(REG_OFFSET_BLDCNT, 0xF40);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0x10);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
             sprite->oam.objMode = 1;
             sprite->data[3] = 16;
             sprite->data[0] += 1;

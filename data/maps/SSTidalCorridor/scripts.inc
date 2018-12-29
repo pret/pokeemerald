@@ -43,9 +43,9 @@ SSTidalRooms_EventScript_23C03C:: @ 823C03C
 
 SSTidalCorridor_EventScript_23C050:: @ 823C050
 	compare VAR_PORTHOLE_STATE, 2
-	goto_eq SSTidalCorridor_EventScript_23C067
+	goto_if_eq SSTidalCorridor_EventScript_23C067
 	compare VAR_PORTHOLE_STATE, 7
-	goto_eq SSTidalCorridor_EventScript_23C07D
+	goto_if_eq SSTidalCorridor_EventScript_23C07D
 	end
 
 SSTidalCorridor_EventScript_23C067:: @ 823C067
@@ -115,9 +115,9 @@ SSTidalCorridor_EventScript_23C119:: @ 823C119
 	lock
 	faceplayer
 	compare VAR_PORTHOLE_STATE, 4
-	goto_eq SSTidalCorridor_EventScript_23C13B
+	goto_if_eq SSTidalCorridor_EventScript_23C13B
 	compare VAR_PORTHOLE_STATE, 8
-	goto_eq SSTidalCorridor_EventScript_23C15A
+	goto_if_eq SSTidalCorridor_EventScript_23C15A
 	msgbox SSTidalCorridor_Text_23C596, MSGBOX_DEFAULT
 	release
 	end
@@ -125,8 +125,7 @@ SSTidalCorridor_EventScript_23C119:: @ 823C119
 SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
-	checkflag FLAG_0x104
-	call_if 1, SSTidalCorridor_EventScript_23C179
+	call_if_set FLAG_0x104, SSTidalCorridor_EventScript_23C179
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -135,8 +134,7 @@ SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 SSTidalCorridor_EventScript_23C15A:: @ 823C15A
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
-	checkflag FLAG_0x104
-	call_if 1, SSTidalCorridor_EventScript_23C179
+	call_if_set FLAG_0x104, SSTidalCorridor_EventScript_23C179
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -149,9 +147,9 @@ SSTidalCorridor_EventScript_23C179:: @ 823C179
 SSTidalCorridor_EventScript_23C17D:: @ 823C17D
 	lockall
 	compare VAR_PORTHOLE_STATE, 2
-	goto_eq SSTidalCorridor_EventScript_23C19E
+	goto_if_eq SSTidalCorridor_EventScript_23C19E
 	compare VAR_PORTHOLE_STATE, 7
-	goto_eq SSTidalCorridor_EventScript_23C19E
+	goto_if_eq SSTidalCorridor_EventScript_23C19E
 	msgbox SSTidalCorridor_Text_23C6C3, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -164,8 +162,7 @@ SSTidalCorridor_EventScript_23C19E:: @ 823C19E
 SSTidalCorridor_EventScript_23C1A3:: @ 823C1A3
 	lock
 	faceplayer
-	checkflag FLAG_0x0F7
-	goto_eq SSTidalCorridor_EventScript_23C1BD
+	goto_if_set FLAG_0x0F7, SSTidalCorridor_EventScript_23C1BD
 	call SSTidalCorridor_EventScript_23C1C7
 	msgbox SSTidalCorridor_Text_23C65E, MSGBOX_DEFAULT
 	release
@@ -178,21 +175,21 @@ SSTidalCorridor_EventScript_23C1BD:: @ 823C1BD
 
 SSTidalCorridor_EventScript_23C1C7:: @ 823C1C7
 	checktrainerflag TRAINER_PHILLIP
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_LEONARD
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_COLTON
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_MICAH
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_THOMAS
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_LEA_AND_JED
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_GARRET
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_NAOMI
-	goto_if 0, SSTidalCorridor_EventScript_23C218
+	goto_if_lt SSTidalCorridor_EventScript_23C218
 	setflag FLAG_0x0F7
 	goto SSTidalCorridor_EventScript_23C1BD
 	return

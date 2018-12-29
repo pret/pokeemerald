@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_factory.h"
 #include "battle_factory_screen.h"
 #include "event_data.h"
@@ -201,7 +202,7 @@ static void sub_81A5E94(void)
     for (i = 0; i < 3; i++)
         gUnknown_03006298[i] |= 0xFFFF;
 
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 
@@ -433,7 +434,7 @@ static void sub_81A64C4(void)
 
             CalculateMonStats(&gPlayerParty[i]);
             friendship = 0;
-            for (k = 0; k < 4; k++)
+            for (k = 0; k < MAX_MON_MOVES; k++)
                 SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monSetId].moves[k], k);
             SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
@@ -473,7 +474,7 @@ static void sub_81A64C4(void)
             }
 
             CalculateMonStats(&gEnemyParty[i]);
-            for (k = 0; k < 4; k++)
+            for (k = 0; k < MAX_MON_MOVES; k++)
                 SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monSetId].moves[k], k);
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);
             SetMonData(&gEnemyParty[i], MON_DATA_ALT_ABILITY, &gSaveBlock2Ptr->frontier.field_E70[i + 3].abilityBit);
@@ -623,7 +624,7 @@ static void sub_81A6AEC(void)
     for (i = 0; i < 3; i++)
     {
         u16 monSetId = gUnknown_03006298[i];
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             u8 id = GetStyleForMove(gFacilityTrainerMons[monSetId].moves[j]);
             stylePoints[id]++;
@@ -756,7 +757,7 @@ void FillFactoryBrainParty(void)
                                              otId);
 
         friendship = 0;
-        for (k = 0; k < 4; k++)
+        for (k = 0; k < MAX_MON_MOVES; k++)
             SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monSetId].moves[k], k);
         SetMonData(&gEnemyParty[i], MON_DATA_FRIENDSHIP, &friendship);
         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId]);

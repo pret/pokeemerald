@@ -10,6 +10,6 @@ NavelRock_Up2: @ 848591C
 	.byte WEATHER_NONE
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
-	.byte 12
+	map_header_flags allow_bike=0, allow_escape_rope=0, allow_run=1, show_map_name=1
 	.byte MAP_BATTLE_SCENE_NORMAL
 

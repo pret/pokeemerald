@@ -9,7 +9,7 @@ EverGrandeCity_GlaciasRoom_MapScript2_228422: @ 8228422
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_22842C:: @ 822842C
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript2_228431: @ 8228431
@@ -24,10 +24,9 @@ EverGrandeCity_GlaciasRoom_EventScript_22843B:: @ 822843B
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript1_228448: @ 8228448
-	checkflag FLAG_0x4FD
-	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_22845D
+	call_if_set FLAG_0x4FD, EverGrandeCity_GlaciasRoom_EventScript_22845D
 	compare VAR_0x409C, 3
-	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_228463
+	call_if_eq EverGrandeCity_GlaciasRoom_EventScript_228463
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_22845D:: @ 822845D
@@ -41,8 +40,7 @@ EverGrandeCity_GlaciasRoom_EventScript_228463:: @ 8228463
 EverGrandeCity_GlaciasRoom_EventScript_228469:: @ 8228469
 	lock
 	faceplayer
-	checkflag FLAG_0x4FD
-	goto_eq EverGrandeCity_GlaciasRoom_EventScript_228490
+	goto_if_set FLAG_0x4FD, EverGrandeCity_GlaciasRoom_EventScript_228490
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_2285B4

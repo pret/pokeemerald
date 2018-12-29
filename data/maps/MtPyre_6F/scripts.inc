@@ -5,7 +5,7 @@ MtPyre_6F_EventScript_231D3B:: @ 8231D3B
 	trainerbattle_single TRAINER_VALERIE_1, MtPyre_6F_Text_231DB4, MtPyre_6F_Text_231DE2, MtPyre_6F_EventScript_231D67
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq MtPyre_6F_EventScript_231D86
+	goto_if_eq MtPyre_6F_EventScript_231D86
 	msgbox MtPyre_6F_Text_231DFC, MSGBOX_DEFAULT
 	release
 	end

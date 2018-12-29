@@ -17,19 +17,19 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA3B:: @ 821EA3B
 	special sub_81B94B0
 	waitstate
 	compare VAR_0x8004, 255
-	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAE6
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAE6
 	special sub_81B98DC
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EADC
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_21EADC
 	special sub_81B96D0
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EACF
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_21EACF
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB89, MSGBOX_DEFAULT
 	fadescreen 1
 	special sub_81B968C
 	fadescreen 0
 	compare VAR_0x8005, 4
-	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EA3B
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_21EA3B
 	special sub_81B9718
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EBDA, MSGBOX_YESNO
 	switch VAR_RESULT
@@ -41,7 +41,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA3B:: @ 821EA3B
 LilycoveCity_MoveDeletersHouse_EventScript_21EAB0:: @ 821EAB0
 	special sub_81B9918
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAF0
+	goto_if_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAF0
 	special sub_81B9770
 	playfanfare MUS_ME_WASURE
 	waitfanfare

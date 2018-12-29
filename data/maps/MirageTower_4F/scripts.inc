@@ -6,7 +6,7 @@ MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	faceplayer
 	msgbox MirageTower_4F_Text_23ADF9, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MirageTower_4F_EventScript_23AD7F
+	goto_if_eq MirageTower_4F_EventScript_23AD7F
 	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
@@ -27,7 +27,7 @@ MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	faceplayer
 	msgbox MirageTower_4F_Text_23AE98, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq MirageTower_4F_EventScript_23ADC0
+	goto_if_eq MirageTower_4F_EventScript_23ADC0
 	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
@@ -50,7 +50,7 @@ MirageTower_4F_EventScript_23ADCA:: @ 823ADCA
 	setvar VAR_0x8007, 2
 	special sub_8139560
 	waitstate
-	special sub_81BE994
+	special DoMirageTowerCeilingCrumble
 	waitstate
 	setvar VAR_0x40CB, 1
 	clearflag FLAG_LANDMARK_MIRAGE_TOWER

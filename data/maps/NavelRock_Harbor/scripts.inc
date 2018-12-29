@@ -6,7 +6,7 @@ NavelRock_Harbor_EventScript_2690BD:: @ 82690BD
 	faceplayer
 	msgbox NavelRock_Harbor_Text_2C6CE6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq NavelRock_Harbor_EventScript_269102
+	goto_if_eq NavelRock_Harbor_EventScript_269102
 	msgbox NavelRock_Harbor_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, NavelRock_Harbor_Movement_2725AA

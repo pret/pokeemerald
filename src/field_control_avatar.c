@@ -28,6 +28,7 @@
 #include "wild_encounter.h"
 #include "constants/bg_event_constants.h"
 #include "constants/map_types.h"
+#include "constants/maps.h"
 #include "constants/songs.h"
 
 extern bool32 sub_8196034(void);
@@ -818,19 +819,19 @@ static void sub_809CEB0(struct MapHeader *unused, s8 warpEventId, struct MapPosi
         warpEvent = &gMapHeader.events->warps[warpEventId];
     }
 
-    if (warpEvent->mapNum == 0x7F)
+    if (warpEvent->mapNum == MAP_NUM(NONE))
     {
-        copy_saved_warp2_bank_and_enter_x_to_warp1(warpEvent->warpId);
+        SetWarpDestinationToDynamicWarp(warpEvent->warpId);
     }
     else
     {
         const struct MapHeader *mapHeader;
 
-        warp1_set_2(warpEvent->mapGroup, warpEvent->mapNum, warpEvent->warpId);
+        SetWarpDestinationToMapWarp(warpEvent->mapGroup, warpEvent->mapNum, warpEvent->warpId);
         sub_8084D5C(position->x, position->y);
         mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->mapGroup, warpEvent->mapNum);
-        if (mapHeader->events->warps[warpEvent->warpId].mapNum == 0x7F)
-            saved_warp2_set(mapHeader->events->warps[warpEventId].warpId, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, warpEventId);
+        if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(NONE))
+            SetDynamicWarp(mapHeader->events->warps[warpEventId].warpId, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, warpEventId);
     }
 }
 

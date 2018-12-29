@@ -4,7 +4,7 @@ Route109_MapScripts:: @ 81EE75F
 Route109_EventScript_1EE760:: @ 81EE760
 	call Route109_EventScript_271E95
 	setobjectpriority 2, MAP_ROUTE109, 0
-	setobjectpriority 255, MAP_ROUTE109, 0
+	setobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE109, 0
 	applymovement 2, Route109_Movement_1EE90B
 	waitmovement 0
 	removeobject 2
@@ -33,14 +33,14 @@ Route109_EventScript_1EE7C5:: @ 81EE7C5
 	end
 
 Route109_EventScript_1EE7D5:: @ 81EE7D5
-	hideobjectat 255, MAP_ROUTE109
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	call Route109_EventScript_2720A0
 	applymovement 1, Route109_Movement_1EE84F
 	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE84F
 	waitmovement 0
 	delay 50
 	call Route109_EventScript_2720A8
-	showobjectat 255, MAP_DEWFORD_TOWN
+	showobjectat EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN
 	applymovement EVENT_OBJ_ID_PLAYER, Route109_Movement_1EE900
 	waitmovement 0
 	addobject 4
@@ -56,7 +56,7 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	msgbox Route109_Text_1E9C1D, MSGBOX_DEFAULT
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
-	resetobjectpriority 255, MAP_ROUTE109
+	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	release
@@ -272,8 +272,7 @@ Route109_Movement_1EE90D: @ 81EE90D
 Route109_EventScript_1EE910:: @ 81EE910
 	lock
 	faceplayer
-	checkflag FLAG_0x095
-	goto_if 0, Route109_EventScript_1EE921
+	goto_if_unset FLAG_0x095, Route109_EventScript_1EE921
 	goto Route109_EventScript_1EE93F
 	end
 
@@ -281,7 +280,7 @@ Route109_EventScript_1EE921:: @ 81EE921
 	message Route109_Text_1EEC96
 	msgbox Route109_Text_1EEC96, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route109_EventScript_1EE981
+	goto_if_eq Route109_EventScript_1EE981
 	goto Route109_EventScript_1EE972
 	end
 
@@ -329,12 +328,11 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	checkflag FLAG_0x118
-	goto_eq Route109_EventScript_1EE9F2
+	goto_if_set FLAG_0x118, Route109_EventScript_1EE9F2
 	msgbox Route109_Text_1EEFDE, MSGBOX_DEFAULT
 	giveitem_std ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
-	goto_eq Route109_EventScript_272054
+	goto_if_eq Route109_EventScript_272054
 	closemessage
 	applymovement VAR_LAST_TALKED, Route109_Movement_2725A2
 	waitmovement 0
@@ -399,7 +397,7 @@ Route109_EventScript_1EEA99:: @ 81EEA99
 	trainerbattle_single TRAINER_RICKY_1, Route109_Text_29733B, Route109_Text_297379, Route109_EventScript_1EEAC5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route109_EventScript_1EEAE4
+	goto_if_eq Route109_EventScript_1EEAE4
 	msgbox Route109_Text_297380, MSGBOX_DEFAULT
 	release
 	end
@@ -421,7 +419,7 @@ Route109_EventScript_1EEAFB:: @ 81EEAFB
 	trainerbattle_single TRAINER_LOLA_1, Route109_Text_29749C, Route109_Text_2974CF, Route109_EventScript_1EEB27
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route109_EventScript_1EEB46
+	goto_if_eq Route109_EventScript_1EEB46
 	msgbox Route109_Text_2974D6, MSGBOX_DEFAULT
 	release
 	end

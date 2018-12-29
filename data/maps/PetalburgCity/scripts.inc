@@ -1,13 +1,13 @@
 PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7
 	setflag FLAG_VISITED_PETALBURG_CITY
 	compare VAR_0x4057, 0
-	call_if 1, PetalburgCity_EventScript_1DC307
+	call_if_eq PetalburgCity_EventScript_1DC307
 	compare VAR_0x4057, 2
-	call_if 1, PetalburgCity_EventScript_1DC30F
+	call_if_eq PetalburgCity_EventScript_1DC30F
 	compare VAR_0x4057, 4
-	call_if 1, PetalburgCity_EventScript_1DC30F
+	call_if_eq PetalburgCity_EventScript_1DC30F
 	compare VAR_0x4085, 8
-	call_if 1, PetalburgCity_EventScript_1DC316
+	call_if_eq PetalburgCity_EventScript_1DC316
 	end
 
 PetalburgCity_EventScript_1DC307:: @ 81DC307
@@ -68,7 +68,7 @@ PetalburgCity_EventScript_1DC390:: @ 81DC390
 	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_1DC418
 	waitmovement 0
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_UNCLE
-	hideobjectat 255, MAP_PETALBURG_CITY
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_SPECIAL_FLAG_0x4000
@@ -267,23 +267,23 @@ PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 	applymovement 8, PetalburgCity_Movement_27259A
 	waitmovement 0
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_EventScript_1DC57F
+	call_if_eq PetalburgCity_EventScript_1DC57F
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_EventScript_1DC594
+	call_if_eq PetalburgCity_EventScript_1DC594
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_EventScript_1DC59F
+	call_if_eq PetalburgCity_EventScript_1DC59F
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_EventScript_1DC5B4
+	call_if_eq PetalburgCity_EventScript_1DC5B4
 	msgbox PetalburgCity_Text_1DC881, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_EventScript_1DC5C9
+	call_if_eq PetalburgCity_EventScript_1DC5C9
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_EventScript_1DC5DB
+	call_if_eq PetalburgCity_EventScript_1DC5DB
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_EventScript_1DC5ED
+	call_if_eq PetalburgCity_EventScript_1DC5ED
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_EventScript_1DC5FF
+	call_if_eq PetalburgCity_EventScript_1DC5FF
 	msgbox PetalburgCity_Text_1DC91B, MSGBOX_DEFAULT
 	applymovement 8, PetalburgCity_Movement_2725A8
 	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A8
@@ -560,13 +560,13 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	msgbox PetalburgCity_Text_1DCC09, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
-	call_if 1, PetalburgCity_EventScript_1DC78E
+	call_if_eq PetalburgCity_EventScript_1DC78E
 	compare VAR_0x8008, 1
-	call_if 1, PetalburgCity_EventScript_1DC7A0
+	call_if_eq PetalburgCity_EventScript_1DC7A0
 	compare VAR_0x8008, 2
-	call_if 1, PetalburgCity_EventScript_1DC7B2
+	call_if_eq PetalburgCity_EventScript_1DC7B2
 	compare VAR_0x8008, 3
-	call_if 1, PetalburgCity_EventScript_1DC7C4
+	call_if_eq PetalburgCity_EventScript_1DC7C4
 	setvar VAR_0x40C9, 1
 	removeobject 9
 	releaseall

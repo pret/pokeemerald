@@ -247,14 +247,13 @@ LilycoveCity_ContestLobby_Text_293BB4: @ 8293BB4
 
 EventScript_Pblock1_Ask:: @ 8293C3E
 	lockall
-	checkflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
-	goto_if 0, LilycoveCity_ContestLobby_EventScript_293EFB
+	goto_if_unset FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS, LilycoveCity_ContestLobby_EventScript_293EFB
 	setvar VAR_0x8009, 1
 	applymovement 16, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox Text_Pblock1_Ask, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq EventScript_Pblock1_Yes
+	goto_if_eq EventScript_Pblock1_Yes
 	goto EventScript_Pblock1_No
 	end
 
@@ -266,8 +265,7 @@ EventScript_Pblock1_No: @ 8293C70
 EventScript_Pblock1_NoBerries: @ 8293C7A
 	msgbox Text_Pblock1_NoBerries, MSGBOX_DEFAULT
 	dodailyevents
-	checkflag FLAG_0x921
-	goto_eq LilycoveCity_ContestLobby_EventScript_293C92
+	goto_if_set FLAG_0x921, LilycoveCity_ContestLobby_EventScript_293C92
 	goto LilycoveCity_ContestLobby_EventScript_293C9C
 	end
 
@@ -286,7 +284,7 @@ LilycoveCity_ContestLobby_EventScript_293C9C: @ 8293C9C
 EventScript_Pblock1_KnowHow: @ 8293CB9
 	msgbox Text_Pblock1_KnowHow, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq EventScript_Pblock1_Start
+	goto_if_eq EventScript_Pblock1_Start
 	goto EventScript_Pblock1_Explain
 	end
 
@@ -303,13 +301,13 @@ EventScript_Pblock1_Explain: @ 8293CE0
 EventScript_Pblock1_Yes: @ 8293CEE
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq EventScript_Pblock1_NoPokeblock
+	goto_if_eq EventScript_Pblock1_NoPokeblock
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
-	goto_eq EventScript_Pblock1_FullPokeblock
+	goto_if_eq EventScript_Pblock1_FullPokeblock
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
-	goto_eq EventScript_Pblock1_NoBerries
+	goto_if_eq EventScript_Pblock1_NoBerries
 	msgbox Text_Pblock1_Yes, MSGBOX_DEFAULT
 	goto EventScript_Pblock1_KnowHow
 	end
@@ -340,7 +338,7 @@ LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293201, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_293DC6
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293DC6
 	goto LilycoveCity_ContestLobby_EventScript_293D7D
 	end
 
@@ -357,7 +355,7 @@ LilycoveCity_ContestLobby_EventScript_293D87: @ 8293D87
 LilycoveCity_ContestLobby_EventScript_293D91: @ 8293D91
 	msgbox LilycoveCity_ContestLobby_Text_29328C, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_293DAA
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293DAA
 	goto LilycoveCity_ContestLobby_EventScript_293DB8
 	end
 
@@ -374,16 +372,16 @@ LilycoveCity_ContestLobby_EventScript_293DB8: @ 8293DB8
 LilycoveCity_ContestLobby_EventScript_293DC6: @ 8293DC6
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293D87
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293D87
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293E14
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293E14
 	msgbox LilycoveCity_ContestLobby_Text_293237, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
-	goto_if 5, LilycoveCity_ContestLobby_EventScript_293D91
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_293D91
 	compare VAR_RESULT, 65535
-	goto_eq LilycoveCity_ContestLobby_EventScript_293E0A
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293E0A
 	end
 
 LilycoveCity_ContestLobby_EventScript_293E0A: @ 8293E0A
@@ -406,7 +404,7 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293842, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_293EA3
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293EA3
 	goto LilycoveCity_ContestLobby_EventScript_293E5A
 	end
 
@@ -423,7 +421,7 @@ LilycoveCity_ContestLobby_EventScript_293E64: @ 8293E64
 LilycoveCity_ContestLobby_EventScript_293E6E: @ 8293E6E
 	msgbox LilycoveCity_ContestLobby_Text_29357E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_293E87
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293E87
 	goto LilycoveCity_ContestLobby_EventScript_293E95
 	end
 
@@ -440,16 +438,16 @@ LilycoveCity_ContestLobby_EventScript_293E95: @ 8293E95
 LilycoveCity_ContestLobby_EventScript_293EA3: @ 8293EA3
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293E64
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293E64
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293EF1
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293EF1
 	msgbox LilycoveCity_ContestLobby_Text_29354E, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
-	goto_if 5, LilycoveCity_ContestLobby_EventScript_293E6E
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_293E6E
 	compare VAR_RESULT, 65535
-	goto_eq LilycoveCity_ContestLobby_EventScript_293EE7
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293EE7
 	end
 
 LilycoveCity_ContestLobby_EventScript_293EE7: @ 8293EE7
@@ -467,7 +465,7 @@ LilycoveCity_ContestLobby_EventScript_293EFB: @ 8293EFB
 	setvar VAR_0x8009, 1
 	msgbox LilycoveCity_ContestLobby_Text_2C42F4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_293F28
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293F28
 	msgbox LilycoveCity_ContestLobby_Text_2C4332, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -480,21 +478,21 @@ LilycoveCity_ContestLobby_EventScript_293F1E: @ 8293F1E
 LilycoveCity_ContestLobby_EventScript_293F28: @ 8293F28
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293F8E
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293F8E
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293F1E
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293F1E
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
-	goto_if 5, LilycoveCity_ContestLobby_EventScript_293F64
+	goto_if_ne LilycoveCity_ContestLobby_EventScript_293F64
 	compare VAR_RESULT, 65535
-	goto_eq LilycoveCity_ContestLobby_EventScript_293F98
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293F98
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F64: @ 8293F64
 	msgbox LilycoveCity_ContestLobby_Text_2C43FA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	call_if 1, LilycoveCity_ContestLobby_EventScript_293F85
+	call_if_eq LilycoveCity_ContestLobby_EventScript_293F85
 	msgbox LilycoveCity_ContestLobby_Text_2C451B, MSGBOX_DEFAULT
 	goto EventScript_StartBlending
 	end
@@ -536,9 +534,9 @@ LilycoveCity_ContestLobby_EventScript_293FC8: @ 8293FC8
 	msgbox Text_Pblock1_Talk_0, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_293FEE
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293FEE
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_293FF8
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_293FF8
 	end
 
 LilycoveCity_ContestLobby_EventScript_293FEE: @ 8293FEE
@@ -549,13 +547,12 @@ LilycoveCity_ContestLobby_EventScript_293FEE: @ 8293FEE
 LilycoveCity_ContestLobby_EventScript_293FF8: @ 8293FF8
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq LilycoveCity_ContestLobby_EventScript_294028
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_294028
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
-	goto_eq LilycoveCity_ContestLobby_EventScript_294028
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_294028
 	dodailyevents
-	checkflag FLAG_0x921
-	goto_eq LilycoveCity_ContestLobby_EventScript_294028
+	goto_if_set FLAG_0x921, LilycoveCity_ContestLobby_EventScript_294028
 	goto LilycoveCity_ContestLobby_EventScript_294032
 	end
 
@@ -580,23 +577,23 @@ EventScript_PblockLink:: @ 8294055
 	lockall
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare VAR_RESULT, 0
-	goto_eq EventScript_PblocLink_NoBerries
+	goto_if_eq EventScript_PblocLink_NoBerries
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare VAR_RESULT, 0
-	goto_eq EventScript_PblocLink_NoPokeblock
+	goto_if_eq EventScript_PblocLink_NoPokeblock
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
-	goto_if 5, EventScript_PblocLink_Ask
+	goto_if_ne EventScript_PblocLink_Ask
 	compare VAR_RESULT, 65535
-	goto_eq EventScript_PblocLink_FullPokeblock
+	goto_if_eq EventScript_PblocLink_FullPokeblock
 	end
 
 EventScript_PblocLink_Ask: @ 8294092
 	msgbox Text_PblockLink_Ask, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq EventScript_PblocLink_TryConnect
+	goto_if_eq EventScript_PblocLink_TryConnect
 	compare VAR_RESULT, 0
-	goto_eq EventScript_PblocLink_End
+	goto_if_eq EventScript_PblocLink_End
 	end
 
 EventScript_PblocLink_NoBerries: @ 82940B1
@@ -607,24 +604,24 @@ EventScript_PblocLink_NoBerries: @ 82940B1
 EventScript_PblocLink_TryConnect: @ 82940BB
 	call LilycoveCity_ContestLobby_EventScript_27134F
 	compare VAR_RESULT, 0
-	goto_eq EventScript_PblocLink_End
+	goto_if_eq EventScript_PblocLink_End
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 1
-	goto_eq LilycoveCity_ContestLobby_EventScript_2941ED
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_2941ED
 	message Text_PblockLink_Searching
 	waitmessage
 	special sub_80B2FD8
 	waitstate
 	compare VAR_RESULT, 1
-	goto_eq EventScript_PblocLink_SpawnPartners
+	goto_if_eq EventScript_PblocLink_SpawnPartners
 	compare VAR_RESULT, 2
-	goto_eq EventScript_PblocLink_SomeoneNotReady
+	goto_if_eq EventScript_PblocLink_SomeoneNotReady
 	compare VAR_RESULT, 3
-	goto_eq EventScript_PblocLink_DifferentSelections
+	goto_if_eq EventScript_PblocLink_DifferentSelections
 	compare VAR_RESULT, 5
-	goto_eq EventScript_PblocLink_CloseLink
+	goto_if_eq EventScript_PblocLink_CloseLink
 	compare VAR_RESULT, 6
-	goto_eq EventScript_PblocLink_LinkError
+	goto_if_eq EventScript_PblocLink_LinkError
 	end
 
 EventScript_PblocLink_1Arrived: @ 829411D
@@ -728,22 +725,22 @@ EventScript_PblocLink_DecideLeader: @ 82941F8
 EventScript_PblocLink_TryBecomeLeader: @ 8294235
 	call EventScript_PblocLink_BecomeLeader
 	compare VAR_RESULT, 1
-	goto_eq EventScript_PblocLink_SpawnPartners_
+	goto_if_eq EventScript_PblocLink_SpawnPartners_
 	compare VAR_RESULT, 5
-	goto_eq EventScript_PblocLink_DecideLeader
+	goto_if_eq EventScript_PblocLink_DecideLeader
 	compare VAR_RESULT, 8
-	goto_eq EventScript_PblocLink_TryBecomeLeader
+	goto_if_eq EventScript_PblocLink_TryBecomeLeader
 	release
 	end
 
 EventScript_PblocLink_TryJoinGroup: @ 829425D
 	call EventScript_PblocLink_JoinGroup
 	compare VAR_RESULT, 1
-	goto_eq EventScript_PblocLink_SpawnPartners_
+	goto_if_eq EventScript_PblocLink_SpawnPartners_
 	compare VAR_RESULT, 5
-	goto_eq EventScript_PblocLink_DecideLeader
+	goto_if_eq EventScript_PblocLink_DecideLeader
 	compare VAR_RESULT, 8
-	goto_eq EventScript_PblocLink_TryJoinGroup
+	goto_if_eq EventScript_PblocLink_TryJoinGroup
 	release
 	end
 

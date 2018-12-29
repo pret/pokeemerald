@@ -10,6 +10,6 @@ MarineCave_Entrance: @ 84849E8
 	.byte WEATHER_NONE
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
-	.byte 14
+	map_header_flags allow_bike=0, allow_escape_rope=1, allow_run=1, show_map_name=1
 	.byte MAP_BATTLE_SCENE_NORMAL
 

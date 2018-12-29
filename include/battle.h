@@ -304,11 +304,10 @@ struct BattleResults
     u8 playerSwitchesCounter; // 0x2
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
-    u8 playerMonWasDamaged:1;              // 0x5
+    u8 playerMonWasDamaged:1; // 0x5
     u8 usedMasterBall:1;      // 0x5
     u8 caughtMonBall:4;       // 0x5
     u8 shinyWildMon:1;        // 0x5
-    u8 unk5_7:1;              // 0x5
     u16 playerMon1Species;    // 0x6
     u8 playerMon1Name[POKEMON_NAME_LENGTH + 1];    // 0x8
     u8 battleTurnCounter;     // 0x13
@@ -413,16 +412,16 @@ struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
-    u8 filler2;
+    u8 unused_0;
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 field_11;
+    u8 unused_1;
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
-    u16 assistPossibleMoves[PARTY_SIZE * 4]; // Each of mons can know max 4 moves.
+    u16 assistPossibleMoves[PARTY_SIZE * MAX_MON_MOVES]; // Each of mons can know max 4 moves.
     u8 focusPunchBattlerId;
     u8 battlerPreventingSwitchout;
     u8 moneyMultiplier;
@@ -439,28 +438,25 @@ struct BattleStruct
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
-    u8 field_78;
+    u8 unused_2;
     u8 safariGoNearCounter;
     u8 safariPkblThrowCounter;
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
-    u8 field_7D;
-    u8 field_7E;
+    u8 field_7D; // unknown spriteId
+    u8 field_7E; // unknown spriteId
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
-    u8 field_88;
-    u8 field_89;
-    u8 field_8A;
-    u8 field_8B;
-    u8 field_8C;
-    u8 field_8D;
+    u8 unused_3[3];
+    u8 field_8B; // related to player's pokemon switching
+    u8 unused_4[2];
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 field_90;
-    u8 field_91;
-    u8 field_92;
-    u8 field_93;
+    u8 unused_5;
+    u8 field_91; // related to gAbsentBattlerFlags, possibly absent flags turn ago?
+    u8 field_92; // battle palace related
+    u8 field_93; // related to choosing pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;
     u8 wallyWaitFrames;
@@ -483,11 +479,11 @@ struct BattleStruct
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;
     u8 turnSideTracker;
-    u8 fillerDC[0xDF-0xDC];
+    u8 unused_6[3];
     u8 givenExpMons; // Bits for enemy party's pokemon that gave exp to player's party.
     u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2]; // a 3-D array [target][attacker][byte]
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
-    u8 field_180;
+    u8 field_180; // weird field, used in battle_main.c, once accessed as an array of u32 overwriting the field below
     u8 field_181;
     u8 field_182;
     u8 field_183;
@@ -498,7 +494,7 @@ struct BattleStruct
     u8 atkCancellerTracker;
     struct BattleTvMovePoints tvMovePoints;
     struct BattleTv tv;
-    u8 notSureWhatFieldLol[0x28];
+    u8 unused_7[0x28];
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     s8 arenaMindPoints[2];
     s8 arenaSkillPoints[2];

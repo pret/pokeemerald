@@ -4,9 +4,9 @@ VictoryRoad_1F_MapScripts:: @ 8235D7A
 
 VictoryRoad_1F_MapScript1_235D80: @ 8235D80
 	compare VAR_0x40C3, 1
-	call_if 1, VictoryRoad_1F_EventScript_235D97
+	call_if_eq VictoryRoad_1F_EventScript_235D97
 	compare VAR_0x40C3, 2
-	call_if 1, VictoryRoad_1F_EventScript_235DA3
+	call_if_eq VictoryRoad_1F_EventScript_235DA3
 	end
 
 VictoryRoad_1F_EventScript_235D97:: @ 8235D97
@@ -85,7 +85,7 @@ VictoryRoad_1F_EventScript_235E35:: @ 8235E35
 	trainerbattle_single TRAINER_WALLY_3, VictoryRoad_1F_Text_236073, VictoryRoad_1F_Text_2360DA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq VictoryRoad_1F_EventScript_235E5C
+	goto_if_eq VictoryRoad_1F_EventScript_235E5C
 	msgbox VictoryRoad_1F_Text_2360FE, MSGBOX_AUTOCLOSE
 	end
 

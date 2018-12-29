@@ -1,6 +1,6 @@
 	.include "asm/macros.inc"
 	.include "constants/gba_constants.inc"
-	.include "constants/misc_constants.inc"
+	.include "constants/global.inc"
 
 	.syntax unified
 
@@ -2399,7 +2399,7 @@ _08078726:
 	bne _08078766
 	adds r0, r4, 0
 	movs r1, 0x2
-	ldr r2, =gSpeciesNames + 303 * POKEMON_NAME_LENGTH @ SPECIES_SHEDINJA
+	ldr r2, =gSpeciesNames + 303 * 11 @ SPECIES_SHEDINJA * POKEMON_NAME_LENGTH + 1
 	bl SetMonData
 _08078766:
 	adds r4, 0x64
@@ -13851,7 +13851,7 @@ _0807EDCE:
 	movs r0, 0x2
 	bl sub_801B990
 _0807EDF6:
-	bl sub_8076D5C
+	bl SetContinueGameWarpStatusToDynamicWarp
 	bl sub_8153380
 	ldr r1, =gMain
 	movs r2, 0x87
@@ -13884,7 +13884,7 @@ _0807EE38:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _0807EE5C
-	bl sav2_gender2_inplace_and_xFE
+	bl ClearContinueGameWarpStatus2
 	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3

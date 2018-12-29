@@ -9,9 +9,10 @@
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-#include "fldeff_groundshake.h"
+#include "fldeff.h"
 #include "gpu_regs.h"
 #include "main.h"
+#include "mirage_tower.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -2170,7 +2171,7 @@ static void EscapeRopeFieldEffect_Step1(struct Task *task)
         if (task->data[14] == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
         {
             SetEventObjectDirection(eventObject, task->data[15]);
-            sub_8084E14();
+            SetWarpDestinationToEscapeWarp();
             WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
@@ -2325,13 +2326,13 @@ static void TeleportFieldEffectTask4(struct Task *task)
     {
         if (task->data[5] == FALSE)
         {
-            sub_81BE72C();
+            ClearMirageTowerPulseBlendEffect();
             task->data[5] = TRUE;
         }
 
         if (BGMusicStopped() == TRUE)
         {
-            Overworld_SetWarpDestToLastHealLoc();
+            SetWarpDestinationToLastHealLocation();
             WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = mapldr_08085D88;
@@ -2442,7 +2443,7 @@ static void sub_80B8410(struct Task *task)
 bool8 FldEff_FieldMoveShowMon(void)
 {
     u8 taskId;
-    if (is_map_type_1_2_3_5_or_6(Overworld_GetMapTypeOfSaveblockLocation()) == TRUE)
+    if (is_map_type_1_2_3_5_or_6(GetCurrentMapType()) == TRUE)
     {
         taskId = CreateTask(sub_80B8554, 0xff);
     } else

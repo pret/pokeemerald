@@ -6,9 +6,8 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5
 	compare VAR_0x4092, 6
-	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_1F88CA
-	checkflag FLAG_0x112
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
+	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_1F88CA
+	call_if_set FLAG_0x112, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
@@ -19,7 +18,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
 LittlerootTown_MaysHouse_1F_EventScript_1F88DD:: @ 81F88DD
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
+	goto_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
@@ -28,11 +27,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
 	compare VAR_0x4092, 3
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F892E
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F892E
 	compare VAR_0x4092, 5
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8916
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8916
 	compare VAR_0x4092, 6
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8922
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8922
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8916:: @ 81F8916
@@ -118,12 +117,10 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F89F3:: @ 81F89F3
 LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	lock
 	faceplayer
-	checkflag FLAG_0x082
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
-	checkflag FLAG_SYS_POKEMON_GET
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
+	goto_if_set FLAG_0x082, LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
+	goto_if_set FLAG_SYS_POKEMON_GET, LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
 	compare VAR_0x408D, 3
-	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, MSGBOX_DEFAULT
 	release
@@ -191,22 +188,22 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_27259A
 	waitmovement 0
 	compare VAR_0x8008, 1
-	call_if 5, LittlerootTown_MaysHouse_1F_EventScript_1F8B2A
+	call_if_ne LittlerootTown_MaysHouse_1F_EventScript_1F8B2A
 	playbgm MUS_GIRL_SUP, 1
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B35
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B35
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B40
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B40
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B4B
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B4B
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F8EC6, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B6A
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B6A
 	compare VAR_0x8008, 1
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B7C
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B7C
 	compare VAR_0x8008, 2
-	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B8E
+	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8B8E
 	playse SE_KAIDAN
 	removeobject 7
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_BRENDAN

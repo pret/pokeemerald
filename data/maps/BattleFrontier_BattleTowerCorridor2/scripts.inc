@@ -6,9 +6,9 @@ BattleFrontier_BattleTowerCorridor2_MapScripts:: @ 8248D4A
 
 BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A: @ 8248D5A
 	compare VAR_FRONTIER_BATTLE_MODE, 2
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248D71
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D71
 	compare VAR_FRONTIER_BATTLE_MODE, 3
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248D91
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D91
 	end
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D71:: @ 8248D71
@@ -16,12 +16,12 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248D71:: @ 8248D71
 	special sub_8161F74
 	checkplayergender
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D8B
-	setvar VAR_OBJ_GFX_ID_F, 0
+	goto_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248D8B
+	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_BRENDAN_NORMAL
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D8B:: @ 8248D8B
-	setvar VAR_OBJ_GFX_ID_F, 89
+	setvar VAR_OBJ_GFX_ID_F, EVENT_OBJ_GFX_MAY_NORMAL
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D91:: @ 8248D91
@@ -33,7 +33,7 @@ BattleFrontier_BattleTowerCorridor2_MapScript2_248D95: @ 8248D95
 	.2byte 0
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248D9F:: @ 8248D9F
-	hideobjectat 255, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
+	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	hideobjectat 1, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	hideobjectat 4, MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2
 	special sub_8139980
@@ -88,13 +88,13 @@ BattleFrontier_BattleTowerCorridor2_EventScript_248DBC:: @ 8248DBC
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248E71:: @ 8248E71
 	compare VAR_FRONTIER_BATTLE_MODE, 0
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
 	compare VAR_FRONTIER_BATTLE_MODE, 1
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248E9E
 	compare VAR_FRONTIER_BATTLE_MODE, 2
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248EA8
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248EA8
 	compare VAR_FRONTIER_BATTLE_MODE, 3
-	call_if 1, BattleFrontier_BattleTowerCorridor2_EventScript_248EB2
+	call_if_eq BattleFrontier_BattleTowerCorridor2_EventScript_248EB2
 	return
 
 BattleFrontier_BattleTowerCorridor2_EventScript_248E9E:: @ 8248E9E

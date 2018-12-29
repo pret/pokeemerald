@@ -8,6 +8,7 @@
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "fldeff_misc.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
@@ -462,10 +463,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
-extern void sub_80F9BCC(u16, u16, u8);
-extern void sub_80F9BF4(u16, u16, u8);
-extern bool8 sub_80F9C1C(void);
-extern bool8 sub_80F9C30(void);
 extern void sub_80C6D80(u8 *arg0, void *arg1, u8 arg2, u8 arg3, s32 arg4);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -1762,7 +1759,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 4:
         if (!gPaletteFade.active)
         {
-            overworld_free_bg_tilemaps();
+            CleanupOverworldWindowsAndTilemaps();
             Cb2_EnterPSS(task->data[2]);
             RemoveWindow(task->data[15]);
             DestroyTask(taskId);
@@ -8829,7 +8826,7 @@ static bool8 sub_80D024C(void)
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillWindowPixelBuffer8Bit(sPSSData->field_2200, 0);
         sub_80D07B0(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
-        SetBgAttribute(0, 4, 1);
+        SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sPSSData->field_2200);
         CopyWindowToVram8Bit(sPSSData->field_2200, 3);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
@@ -9249,7 +9246,7 @@ static void sub_80D0B5C(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
-    SetBgAttribute(0, 4, 0);
+    SetBgAttribute(0, BG_ATTR_PALETTEMODE, 0);
     ClearGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
@@ -9868,7 +9865,7 @@ static bool8 sub_80D184C(void)
     var = 0x15 - sPSSData->field_2236;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, 10) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
     }
 
     sub_80D19B4(var);
@@ -9889,7 +9886,7 @@ static bool8 sub_80D18E4(void)
     var = 0x15 - sPSSData->field_2236;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, 10) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sPSSData->field_2236 + i, i, 13, 1, 7, 15, 21);
     }
 
     if (var >= 0)
@@ -10426,7 +10423,7 @@ static const sUnkVars[][4] =
 
 static void sub_80D2644(u8 id, u8 bg, const void *arg2, u16 arg3, u16 arg4)
 {
-    u16 attribute1, attribute2;
+    u16 bgScreenSize, bgType;
 
     if (id >= gUnknown_02039D88)
         return;
@@ -10437,11 +10434,11 @@ static void sub_80D2644(u8 id, u8 bg, const void *arg2, u16 arg3, u16 arg4)
     gUnknown_02039D84[id].field_24 = arg3;
     gUnknown_02039D84[id].field_26 = arg4;
 
-    attribute1 = GetBgAttribute(bg, 3);
-    attribute2 = GetBgAttribute(bg, 9);
-    gUnknown_02039D84[id].field_20 = sUnkVars[attribute2][attribute1].a;
-    gUnknown_02039D84[id].field_22 = sUnkVars[attribute2][attribute1].b;
-    if (attribute2 != 0)
+    bgScreenSize = GetBgAttribute(bg, BG_ATTR_SCREENSIZE);
+    bgType = GetBgAttribute(bg, BG_ATTR_TYPE);
+    gUnknown_02039D84[id].field_20 = sUnkVars[bgType][bgScreenSize].a;
+    gUnknown_02039D84[id].field_22 = sUnkVars[bgType][bgScreenSize].b;
+    if (bgType != 0)
         gUnknown_02039D84[id].field_2A = 1;
     else
         gUnknown_02039D84[id].field_2A = 2;

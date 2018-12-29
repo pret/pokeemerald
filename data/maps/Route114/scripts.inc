@@ -6,18 +6,18 @@ Route114_MapScripts:: @ 81F252F
 
 Route114_MapScript1_1F253F: @ 81F253F
 	compare VAR_0x4039, 1
-	call_if 1, Route114_EventScript_273D13
+	call_if_eq Route114_EventScript_273D13
 	compare VAR_0x4037, 1
-	call_if 1, Route114_EventScript_273D1B
+	call_if_eq Route114_EventScript_273D1B
 	compare VAR_0x4037, 2
-	call_if 1, Route114_EventScript_273D1B
+	call_if_eq Route114_EventScript_273D1B
 	end
 
 Route114_MapScript1_1F2561: @ 81F2561
 	compare VAR_0x4037, 1
-	call_if 1, Route114_EventScript_273913
+	call_if_eq Route114_EventScript_273913
 	compare VAR_0x4037, 2
-	call_if 1, Route114_EventScript_273926
+	call_if_eq Route114_EventScript_273926
 	end
 
 Route114_MapScript2_1F2578: @ 81F2578
@@ -28,15 +28,14 @@ Route114_EventScript_1F2582:: @ 81F2582
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_0x92B
-	goto_eq Route114_EventScript_1F25C7
+	goto_if_set FLAG_0x92B, Route114_EventScript_1F25C7
 	msgbox Route114_Text_2A6FCB, MSGBOX_DEFAULT
 	random 5
 	addvar VAR_RESULT, 15
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
-	goto_eq Route114_EventScript_272054
+	goto_if_eq Route114_EventScript_272054
 	setflag FLAG_0x92B
 	msgbox Route114_Text_2A7034, MSGBOX_DEFAULT
 	release
@@ -50,12 +49,11 @@ Route114_EventScript_1F25C7:: @ 81F25C7
 Route114_EventScript_1F25D1:: @ 81F25D1
 	lock
 	faceplayer
-	checkflag FLAG_0x0E7
-	goto_eq Route114_EventScript_1F2608
+	goto_if_set FLAG_0x0E7, Route114_EventScript_1F2608
 	msgbox Route114_Text_1F2809, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM05
 	compare VAR_RESULT, 0
-	goto_eq Route114_EventScript_272054
+	goto_if_eq Route114_EventScript_272054
 	setflag FLAG_0x0E7
 	msgbox Route114_Text_1F2872, MSGBOX_DEFAULT
 	release
@@ -112,7 +110,7 @@ Route114_EventScript_1F269C:: @ 81F269C
 	trainerbattle_single TRAINER_STEVE_1, Route114_Text_29A943, Route114_Text_29A973, Route114_EventScript_1F26C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route114_EventScript_1F26E7
+	goto_if_eq Route114_EventScript_1F26E7
 	msgbox Route114_Text_29A981, MSGBOX_DEFAULT
 	release
 	end
@@ -134,7 +132,7 @@ Route114_EventScript_1F26FE:: @ 81F26FE
 	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_29AADB, Route114_Text_29AB1A, Route114_EventScript_1F272A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
-	goto_eq Route114_EventScript_1F2749
+	goto_if_eq Route114_EventScript_1F2749
 	msgbox Route114_Text_29AB36, MSGBOX_DEFAULT
 	release
 	end

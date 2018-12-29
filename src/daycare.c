@@ -16,32 +16,15 @@
 #include "menu.h"
 #include "international_string_util.h"
 #include "script.h"
+#include "strings.h"
 #include "task.h"
 #include "window.h"
+#include "party_menu.h"
 #include "list_menu.h"
 #include "overworld.h"
 
 #define EGG_MOVES_ARRAY_COUNT           10
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    50
-
-// text
-extern const u8 gText_MaleSymbol4[];
-extern const u8 gText_FemaleSymbol4[];
-extern const u8 gText_GenderlessSymbol[];
-extern const u8 gText_NewLine2[];
-extern const u8 gText_Exit4[];
-extern const u8 gText_Lv[];
-extern const u8 gExpandedPlaceholder_Empty[];
-extern const u8 gText_Exit[];
-extern const u8 gDaycareText_GetAlongVeryWell[];
-extern const u8 gDaycareText_GetAlong[];
-extern const u8 gDaycareText_DontLikeOther[];
-extern const u8 gDaycareText_PlayOther[];
-
-extern u8 GetCursorSelectionMonId(void);
-extern u16 ItemIdToBattleMoveId(u16);
-extern void sub_819746C(u8, bool8);
-extern void sub_81B9328(void);
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);
@@ -653,7 +636,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
     u16 i, j;
 
     numSharedParentMoves = 0;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         sHatchedEggMotherMoves[i] = 0;
         sHatchedEggFatherMoves[i] = 0;
@@ -665,7 +648,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         sHatchedEggLevelUpMoves[i] = 0;
 
     numLevelUpMoves = GetLevelUpMovesBySpecies(GetMonData(egg, MON_DATA_SPECIES), sHatchedEggLevelUpMoves);
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         sHatchedEggFatherMoves[i] = GetBoxMonData(father, MON_DATA_MOVE1 + i);
         sHatchedEggMotherMoves[i] = GetBoxMonData(mother, MON_DATA_MOVE1 + i);
@@ -673,7 +656,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
 
     numEggMoves = GetEggMoves(egg, sHatchedEggEggMoves);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (sHatchedEggFatherMoves[i] != MOVE_NONE)
         {
@@ -692,7 +675,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             break;
         }
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (sHatchedEggFatherMoves[i] != MOVE_NONE)
         {
@@ -706,18 +689,18 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
             }
         }
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (sHatchedEggFatherMoves[i] == MOVE_NONE)
             break;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             if (sHatchedEggFatherMoves[i] == sHatchedEggMotherMoves[j] && sHatchedEggFatherMoves[i] != MOVE_NONE)
                 sHatchedEggFinalMoves[numSharedParentMoves++] = sHatchedEggFatherMoves[i];
         }
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (sHatchedEggFinalMoves[i] == MOVE_NONE)
             break;

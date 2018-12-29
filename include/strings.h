@@ -1876,4 +1876,113 @@ extern const u8 gText_PartyFull[];
 extern const u8 gText_Box[];
 extern const u8 gText_JustOnePkmn[];
 
+// battle main
+extern const u8 gText_LinkStandby3[];
+extern const u8 gText_BattleRecordCouldntBeSaved[];
+extern const u8 gText_Poison[];
+extern const u8 gText_Sleep[];
+extern const u8 gText_Paralysis[];
+extern const u8 gText_Burn[];
+extern const u8 gText_Ice[];
+extern const u8 gText_Confusion[];
+extern const u8 gText_Love[];
+
+// battle message
+extern const u8 gText_PkmnBoxSomeonesPCFull[];
+extern const u8 gText_PkmnBoxLanettesPCFull[];
+extern const u8 gText_PkmnTransferredSomeonesPC[];
+extern const u8 gText_PkmnTransferredLanettesPC[];
+
+// hall of fame
+extern const u8 gText_SavingDontTurnOffPower[];
+extern const u8 gText_LeagueChamp[];
+extern const u8 gText_HOFNumber[];
+extern const u8 gText_PickNextCancel[];
+extern const u8 gText_PickCancel[];
+extern const u8 gText_UnkCtrlF800Exit[];
+extern const u8 gText_HOFCorrupted[];
+extern const u8 gText_WelcomeToHOF[];
+extern const u8 gText_Number[];
+extern const u8 gText_Level[];
+extern const u8 gText_IDNumber[];
+extern const u8 gText_Name[];
+extern const u8 gText_MainMenuTime[];
+
+// daycare
+extern const u8 gText_MaleSymbol4[];
+extern const u8 gText_FemaleSymbol4[];
+extern const u8 gText_GenderlessSymbol[];
+extern const u8 gText_NewLine2[];
+extern const u8 gText_Exit4[];
+extern const u8 gText_Lv[];
+extern const u8 gExpandedPlaceholder_Empty[];
+extern const u8 gText_Exit[];
+extern const u8 gDaycareText_GetAlongVeryWell[];
+extern const u8 gDaycareText_GetAlong[];
+extern const u8 gDaycareText_DontLikeOther[];
+extern const u8 gDaycareText_PlayOther[];
+
+// party menu
+extern const u8 gUnknown_085E9E43[];
+extern const u8 gUnknown_085EA010[];
+extern const u8 gUnknown_085EA02A[];
+extern const u8 gUnknown_085E9E55[];
+extern const u8 gUnknown_085E9E64[];
+extern const u8 gUnknown_085E9E79[];
+extern const u8 gUnknown_085E9E8F[];
+extern const u8 gUnknown_085E9EBC[];
+extern const u8 gUnknown_085E9ED4[];
+extern const u8 gUnknown_085E9EE9[];
+extern const u8 gUnknown_085E9FDB[];
+extern const u8 gUnknown_085EA046[];
+extern const u8 gUnknown_085EA05B[];
+extern const u8 gUnknown_085E9F01[];
+extern const u8 gUnknown_085E9F58[];
+extern const u8 gUnknown_085E9F6F[];
+extern const u8 gUnknown_085E9F81[];
+extern const u8 gUnknown_085E9F90[];
+extern const u8 gUnknown_085E9FA7[];
+extern const u8 gUnknown_085E9FC2[];
+extern const u8 gUnknown_085E9EA6[];
+extern const u8 gUnknown_085E9F16[];
+extern const u8 gUnknown_085E9F2A[];
+extern const u8 gUnknown_085E9F42[];
+extern const u8 gUnknown_085E9FF9[];
+extern const u8 gUnknown_085EA073[];
+extern const u8 gUnknown_085EA091[];
+extern const u8 gUnknown_085EA099[];
+extern const u8 gUnknown_085EA09E[];
+extern const u8 gUnknown_085EA0A4[];
+extern const u8 gUnknown_085EA0AB[];
+extern const u8 gUnknown_085EA0E7[];
+extern const u8 gUnknown_085EA0B1[];
+extern const u8 gUnknown_085EA0B6[];
+extern const u8 gUnknown_085EA0BF[];
+extern const u8 gUnknown_085EA0C5[];
+extern const u8 gUnknown_085EA0CF[];
+extern const u8 gUnknown_085EA0D7[];
+extern const u8 gUnknown_085EA0DC[];
+extern const u8 gText_Take[];
+extern const u8 gText_Mail[];
+extern const u8 gText_Take2[];
+extern const u8 gText_Read2[];
+extern const u8 gText_Cancel2[];
+extern const u8 gText_Shift[];
+extern const u8 gText_SendOut[];
+extern const u8 gText_Enter[];
+extern const u8 gText_NoEntry[];
+extern const u8 gText_Store[];
+extern const u8 gText_Register[];
+extern const u8 gText_Trade4[];
+extern const u8 gText_Summary5[];
+extern const u8 gText_Switch2[];
+extern const u8 gText_Item[];
+extern const u8 gText_NotPkmnOtherTrainerWants[];
+extern const u8 gText_ThatIsntAnEgg[];
+extern const u8 gText_PkmnCantBeTradedNow[];
+extern const u8 gText_OtherTrainersPkmnCantBeTraded[];
+extern const u8 gText_EggCantBeTradedNow[];
+extern const u8 gText_OtherTrainerCantAcceptPkmn[];
+extern const u8 gText_CantTradeWithTrainer[];
+
 #endif //GUARD_STRINGS_H

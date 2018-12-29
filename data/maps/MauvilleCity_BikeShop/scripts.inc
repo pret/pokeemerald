@@ -4,24 +4,22 @@ MauvilleCity_BikeShop_MapScripts:: @ 820EBBB
 MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	lock
 	faceplayer
-	checkflag FLAG_0x05A
-	goto_eq MauvilleCity_BikeShop_EventScript_20EC94
-	checkflag FLAG_0x059
-	goto_eq MauvilleCity_BikeShop_EventScript_20EBF7
+	goto_if_set FLAG_0x05A, MauvilleCity_BikeShop_EventScript_20EC94
+	goto_if_set FLAG_0x059, MauvilleCity_BikeShop_EventScript_20EBF7
 	msgbox MauvilleCity_BikeShop_Text_20EE22, MSGBOX_DEFAULT
 	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20EC4A
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_BikeShop_EventScript_20EC3D
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20EC3D
 	end
 
 MauvilleCity_BikeShop_EventScript_20EBF7:: @ 820EBF7
 	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20EC4A
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_BikeShop_EventScript_20EC3D
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20EC3D
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC16:: @ 820EC16
@@ -65,19 +63,19 @@ MauvilleCity_BikeShop_EventScript_20EC87:: @ 820EC87
 MauvilleCity_BikeShop_EventScript_20EC94:: @ 820EC94
 	msgbox MauvilleCity_BikeShop_Text_20F1FB, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq MauvilleCity_BikeShop_EventScript_20ECB3
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20ECB3
 	compare VAR_RESULT, 0
-	goto_eq MauvilleCity_BikeShop_EventScript_20ECE5
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20ECE5
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECB3:: @ 820ECB3
 	msgbox MauvilleCity_BikeShop_Text_20F22F, MSGBOX_DEFAULT
 	checkitem ITEM_ACRO_BIKE, 1
 	compare VAR_RESULT, 1
-	goto_eq MauvilleCity_BikeShop_EventScript_20ECEF
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20ECEF
 	checkitem ITEM_MACH_BIKE, 1
 	compare VAR_RESULT, 1
-	goto_eq MauvilleCity_BikeShop_EventScript_20ED10
+	goto_if_eq MauvilleCity_BikeShop_EventScript_20ED10
 	msgbox MauvilleCity_BikeShop_Text_20F2F3, MSGBOX_DEFAULT
 	release
 	end

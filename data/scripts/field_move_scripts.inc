@@ -10,17 +10,16 @@ Route120_EventScript_2906BB:: @ 82906BB
 Route121_EventScript_2906BB:: @ 82906BB
 Route123_EventScript_2906BB:: @ 82906BB
 	lockall
-	checkflag FLAG_BADGE01_GET
-	goto_if 0, Route103_EventScript_290721
+	goto_if_unset FLAG_BADGE01_GET, Route103_EventScript_290721
 	checkpartymove MOVE_CUT
 	compare VAR_RESULT, 6
-	goto_eq Route103_EventScript_290721
+	goto_if_eq Route103_EventScript_290721
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
 	msgbox Route103_Text_29072E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route103_EventScript_29072B
+	goto_if_eq Route103_EventScript_29072B
 	msgbox Route103_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect 2
@@ -84,17 +83,16 @@ SeafloorCavern_Room2_EventScript_2907A6:: @ 82907A6
 SeafloorCavern_Room5_EventScript_2907A6:: @ 82907A6
 VictoryRoad_B1F_EventScript_2907A6:: @ 82907A6
 	lockall
-	checkflag FLAG_BADGE03_GET
-	goto_if 0, Route111_EventScript_29082D
+	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_29082D
 	checkpartymove MOVE_ROCK_SMASH
 	compare VAR_RESULT, 6
-	goto_eq Route111_EventScript_29082D
+	goto_if_eq Route111_EventScript_29082D
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox Route111_Text_29083A, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq Route111_EventScript_290837
+	goto_if_eq Route111_EventScript_290837
 	msgbox Route111_Text_290771, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect 37
@@ -115,10 +113,10 @@ Route111_EventScript_2907FB:: @ 82907FB
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	compare VAR_RESULT, 1
-	goto_eq Route111_EventScript_290829
+	goto_if_eq Route111_EventScript_290829
 	special RockSmashWildEncounter
 	compare VAR_RESULT, 0
-	goto_eq Route111_EventScript_290829
+	goto_if_eq Route111_EventScript_290829
 	waitstate
 	releaseall
 	end
@@ -160,17 +158,15 @@ SeafloorCavern_Room8_EventScript_2908BA:: @ 82908BA
 ShoalCave_LowTideLowerRoom_EventScript_2908BA:: @ 82908BA
 VictoryRoad_B1F_EventScript_2908BA:: @ 82908BA
 	lockall
-	checkflag FLAG_BADGE04_GET
-	goto_if 0, FieryPath_EventScript_290915
-	checkflag FLAG_SYS_USE_STRENGTH
-	goto_eq FieryPath_EventScript_29091F
+	goto_if_unset FLAG_BADGE04_GET, FieryPath_EventScript_290915
+	goto_if_set FLAG_SYS_USE_STRENGTH, FieryPath_EventScript_29091F
 	checkpartymove MOVE_STRENGTH
 	compare VAR_RESULT, 6
-	goto_eq FieryPath_EventScript_290915
+	goto_if_eq FieryPath_EventScript_290915
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox FieryPath_Text_29092C, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq FieryPath_EventScript_290929
+	goto_if_eq FieryPath_EventScript_290929
 	closemessage
 	dofieldeffect 40
 	waitstate
@@ -227,12 +223,12 @@ EventScript_UseWaterfall:: @ 8290A49
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, 6
-	goto_eq EventScript_290A84
+	goto_if_eq EventScript_290A84
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_290AC3, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_290A8C
+	goto_if_eq EventScript_290A8C
 	msgbox Text_290AFC, MSGBOX_DEFAULT
 	dofieldeffect 43
 	goto EventScript_290A8C
@@ -262,13 +258,13 @@ EventScript_UseDive:: @ 8290B0F
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, 6
-	goto_eq EventScript_290B4E
+	goto_if_eq EventScript_290B4E
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_290BE8, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_290B58
+	goto_if_eq EventScript_290B58
 	msgbox Text_290C1A, MSGBOX_DEFAULT
 	dofieldeffect 44
 	goto EventScript_290B58
@@ -287,13 +283,13 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, 6
-	goto_eq EventScript_290B99
+	goto_if_eq EventScript_290B99
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_290C6E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq EventScript_290BA8
+	goto_if_eq EventScript_290BA8
 	msgbox Text_290C1A, MSGBOX_DEFAULT
 	dofieldeffect 44
 	goto EventScript_290BA8

@@ -4,11 +4,10 @@ BattleFrontier_Lounge3_MapScripts:: @ 8261D82
 BattleFrontier_Lounge3_EventScript_261D83:: @ 8261D83
 	lock
 	faceplayer
-	checkflag FLAG_0x157
-	goto_eq BattleFrontier_Lounge3_EventScript_261EF9
+	goto_if_set FLAG_0x157, BattleFrontier_Lounge3_EventScript_261EF9
 	call BattleFrontier_Lounge3_EventScript_261EA0
 	compare VAR_0x8004, 2
-	goto_if 3, BattleFrontier_Lounge3_EventScript_261EEB
+	goto_if_le BattleFrontier_Lounge3_EventScript_261EEB
 	setflag FLAG_0x157
 	msgbox BattleFrontier_Lounge3_Text_262061, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261DAF
@@ -20,10 +19,10 @@ BattleFrontier_Lounge3_EventScript_261DAF:: @ 8261DAF
 	waitbuttonpress
 	msgbox BattleFrontier_Lounge3_Text_262A60, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_Lounge3_EventScript_261FA5
+	goto_if_eq BattleFrontier_Lounge3_EventScript_261FA5
 	msgbox BattleFrontier_Lounge3_Text_262ABD, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_Lounge3_EventScript_261FA5
+	goto_if_eq BattleFrontier_Lounge3_EventScript_261FA5
 	message BattleFrontier_Lounge3_Text_262B42
 	waitmessage
 	special sub_813A958
@@ -59,7 +58,7 @@ BattleFrontier_Lounge3_EventScript_261E46:: @ 8261E46
 BattleFrontier_Lounge3_EventScript_261E51:: @ 8261E51
 	specialvar VAR_TEMP_1, sub_813AA04
 	compare VAR_TEMP_1, VAR_0x8008
-	goto_if 4, BattleFrontier_Lounge3_EventScript_261E75
+	goto_if_ge BattleFrontier_Lounge3_EventScript_261E75
 	msgbox BattleFrontier_Lounge3_Text_262B6E, MSGBOX_DEFAULT
 	message BattleFrontier_Lounge3_Text_262B42
 	waitmessage
@@ -86,20 +85,13 @@ BattleFrontier_Lounge3_EventScript_261E96:: @ 8261E96
 
 BattleFrontier_Lounge3_EventScript_261EA0:: @ 8261EA0
 	setvar VAR_0x8004, 0
-	checkflag FLAG_SYS_TOWER_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_DOME_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_PALACE_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_ARENA_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_FACTORY_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_PIKE_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
-	checkflag FLAG_SYS_PYRAMID_SILVER
-	call_if 1, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_TOWER_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_DOME_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_PALACE_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_ARENA_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_FACTORY_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_PIKE_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
+	call_if_set FLAG_SYS_PYRAMID_SILVER, BattleFrontier_Lounge3_EventScript_261EE5
 	return
 
 BattleFrontier_Lounge3_EventScript_261EE5:: @ 8261EE5
@@ -114,26 +106,26 @@ BattleFrontier_Lounge3_EventScript_261EEB:: @ 8261EEB
 BattleFrontier_Lounge3_EventScript_261EF9:: @ 8261EF9
 	msgbox BattleFrontier_Lounge3_Text_26346B, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
-	goto_if 4, BattleFrontier_Lounge3_EventScript_261F12
+	goto_if_ge BattleFrontier_Lounge3_EventScript_261F12
 	goto BattleFrontier_Lounge3_EventScript_261DAF
 	end
 
 BattleFrontier_Lounge3_EventScript_261F12:: @ 8261F12
 	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 1
-	goto_eq BattleFrontier_Lounge3_EventScript_261F9E
+	goto_if_eq BattleFrontier_Lounge3_EventScript_261F9E
 	compare VAR_FRONTIER_GAMBLER_PLACED_BET_F, 2
-	goto_eq BattleFrontier_Lounge3_EventScript_261F2E
+	goto_if_eq BattleFrontier_Lounge3_EventScript_261F2E
 	goto BattleFrontier_Lounge3_EventScript_261F71
 	end
 
 BattleFrontier_Lounge3_EventScript_261F2E:: @ 8261F2E
 	msgbox BattleFrontier_Lounge3_Text_263334, MSGBOX_DEFAULT
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 0
-	call_if 1, BattleFrontier_Lounge3_EventScript_261F80
+	call_if_eq BattleFrontier_Lounge3_EventScript_261F80
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 1
-	call_if 1, BattleFrontier_Lounge3_EventScript_261F8A
+	call_if_eq BattleFrontier_Lounge3_EventScript_261F8A
 	compare VAR_FRONTIER_GAMBLER_AMOUNT_BET, 2
-	call_if 1, BattleFrontier_Lounge3_EventScript_261F94
+	call_if_eq BattleFrontier_Lounge3_EventScript_261F94
 	msgbox BattleFrontier_Lounge3_Text_2633D4, 9
 	special sub_813A9D0
 	msgbox BattleFrontier_Lounge3_Text_2633F2, MSGBOX_DEFAULT

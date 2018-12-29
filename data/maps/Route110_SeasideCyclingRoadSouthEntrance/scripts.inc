@@ -4,9 +4,9 @@ Route110_SeasideCyclingRoadSouthEntrance_MapScripts:: @ 826EBA1
 
 Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7: @ 826EBA7
 	compare VAR_CYCLING_CHALLENGE_STATE, 3
-	call_if 1, Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
+	call_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
 	compare VAR_CYCLING_CHALLENGE_STATE, 2
-	call_if 1, Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
+	call_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE
 	end
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBBE:: @ 826EBBE
@@ -24,9 +24,9 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBD0:: @ 826EBD0
 	lockall
 	specialvar VAR_RESULT, GetPlayerAvatarBike
 	compare VAR_RESULT, 2
-	call_if 1, Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBF6
+	call_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBF6
 	compare VAR_RESULT, 0
-	goto_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBFC
+	goto_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_26EBFC
 	setflag FLAG_SYS_CYCLING_ROAD
 	setvar VAR_TEMP_1, 1
 	releaseall

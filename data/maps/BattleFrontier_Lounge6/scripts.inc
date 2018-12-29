@@ -4,25 +4,24 @@ BattleFrontier_Lounge6_MapScripts:: @ 8264FEC
 BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	lock
 	faceplayer
-	checkflag FLAG_0x09C
-	goto_eq BattleFrontier_Lounge6_EventScript_265083
+	goto_if_set FLAG_0x09C, BattleFrontier_Lounge6_EventScript_265083
 	setvar VAR_0x8008, 3
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, sub_807E73C
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox BattleFrontier_Lounge6_Text_26508D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_Lounge6_EventScript_26506B
+	goto_if_eq BattleFrontier_Lounge6_EventScript_26506B
 	special sub_81B94B0
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255
-	goto_eq BattleFrontier_Lounge6_EventScript_26506B
+	goto_if_eq BattleFrontier_Lounge6_EventScript_26506B
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, sub_807E9D4
 	copyvar VAR_0x800B, VAR_RESULT
 	compare VAR_RESULT, VAR_0x8009
-	goto_if 5, BattleFrontier_Lounge6_EventScript_265075
+	goto_if_ne BattleFrontier_Lounge6_EventScript_265075
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
 	special sub_807EA10

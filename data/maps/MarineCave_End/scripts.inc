@@ -4,20 +4,18 @@ MarineCave_End_MapScripts:: @ 823AFDF
 	.byte 0
 
 MarineCave_End_MapScript1_23AFEA: @ 823AFEA
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, MarineCave_End_EventScript_23AFF4
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, MarineCave_End_EventScript_23AFF4
 	end
 
 MarineCave_End_EventScript_23AFF4:: @ 823AFF4
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 7
-	goto_if 5, MarineCave_End_EventScript_27374E
+	goto_if_ne MarineCave_End_EventScript_27374E
 	removeobject 1
 	return
 
 MarineCave_End_MapScript1_23B008: @ 823B008
-	checkflag FLAG_0x1BE
-	call_if 0, MarineCave_End_EventScript_23B012
+	call_if_unset FLAG_0x1BE, MarineCave_End_EventScript_23B012
 	end
 
 MarineCave_End_EventScript_23B012:: @ 823B012
@@ -44,11 +42,11 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, 1
-	goto_eq MarineCave_End_EventScript_23B084
+	goto_if_eq MarineCave_End_EventScript_23B084
 	compare VAR_RESULT, 4
-	goto_eq MarineCave_End_EventScript_23B092
+	goto_if_eq MarineCave_End_EventScript_23B092
 	compare VAR_RESULT, 5
-	goto_eq MarineCave_End_EventScript_23B092
+	goto_if_eq MarineCave_End_EventScript_23B092
 	setvar VAR_0x4039, 1
 	setflag FLAG_0x1BE
 	releaseall

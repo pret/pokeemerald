@@ -165,12 +165,12 @@ SECTIONS {
         src/fight.o(.text);
         src/poison.o(.text);
         asm/flying.o(.text);
-        asm/psychic.o(.text);
+        src/psychic.o(.text);
         src/bug.o(.text);
         src/rock.o(.text);
         src/ghost.o(.text);
         src/dragon.o(.text);
-        asm/dark.o(.text);
+        src/dark.o(.text);
         src/ground.o(.text);
         src/normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
@@ -193,7 +193,8 @@ SECTIONS {
         src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
-        src/rom6.o(.text);
+        src/fldeff_rocksmash.o(.text);
+        src/fldeff_dig.o(.text);
         src/pokeblock.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
@@ -282,8 +283,7 @@ SECTIONS {
         src/multiboot.o(.text);
         src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
-        src/fldeff_groundshake.o(.text);
-        src/fossil_specials.o(.text);
+        src/mirage_tower.o(.text);
         src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
@@ -419,7 +419,6 @@ SECTIONS {
         src/data2b.o(.rodata);
         src/battle_data.o(.rodata);
         src/battle_bg.o(.rodata);
-        data/data2c.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
@@ -557,7 +556,6 @@ SECTIONS {
         src/cable_car.o(.rodata);
         src/save.o(.rodata);
         src/field_effect_helpers.o(.rodata);
-        data/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle_anim_sound_tasks.o(.rodata);
         src/battle_controller_safari.o(.rodata);
@@ -610,14 +608,12 @@ SECTIONS {
         src/save_location.o(.rodata);
         src/item_icon.o(.rodata);
         src/party_menu.o(.rodata);
-        data/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         src/multiboot.o(.rodata);
         src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
-        src/fossil_specials.o(.rodata);
-        src/fldeff_groundshake.o(.rodata);
+        src/mirage_tower.o(.rodata);
         src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
@@ -628,7 +624,6 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);
-        data/unk_transition.o(.rodata);
         src/unk_transition.o(.rodata);
         data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);

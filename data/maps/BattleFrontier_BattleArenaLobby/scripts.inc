@@ -9,7 +9,7 @@ BattleFrontier_BattleArenaLobby_MapScript2_255C41: @ 8255C41
 
 BattleFrontier_BattleArenaLobby_EventScript_255C4B:: @ 8255C4B
 	setvar VAR_TEMP_1, 1
-	turnobject 255, 2
+	turnobject EVENT_OBJ_ID_PLAYER, 2
 	end
 
 BattleFrontier_BattleArenaLobby_MapScript2_255C55: @ 8255C55
@@ -50,7 +50,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255CCF:: @ 8255CCF
 	setvar VAR_0x8004, 10
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255CF0
+	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255CF0
 	msgbox BattleFrontier_BattleArenaLobby_Text_2568E7, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_255CF8
 
@@ -98,7 +98,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
 	waitse
 	call BattleFrontier_BattleArenaLobby_EventScript_23E8E0
 	compare VAR_RESULT, 1
-	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255DBF
+	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255DBF
 	message BattleFrontier_BattleArenaLobby_Text_256B19
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
@@ -157,7 +157,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	setvar VAR_0x8004, 15
 	special CallFrontierUtilFunc
 	compare VAR_0x8004, 1
-	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FAC
+	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FAC
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
 	copyvar VAR_0x8006, VAR_RESULT
@@ -170,7 +170,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	special sub_80F9490
 	waitstate
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FF8
+	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FF8
 	msgbox BattleFrontier_BattleArenaLobby_Text_2564CE, MSGBOX_YESNO
 	switch VAR_RESULT
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_255FF8
@@ -202,7 +202,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	call BattleFrontier_BattleArenaLobby_EventScript_27134F
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FE1
+	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_255FE1
 
 BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	special SavePlayerParty
@@ -215,9 +215,9 @@ BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	setvar VAR_0x8005, 1
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 0
-	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256005
+	call_if_eq BattleFrontier_BattleArenaLobby_EventScript_256005
 	compare VAR_RESULT, 1
-	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256050
+	call_if_eq BattleFrontier_BattleArenaLobby_EventScript_256050
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 255, 9, 13
 	setvar VAR_TEMP_0, 0
 	waitstate

@@ -10,8 +10,7 @@ VerdanturfTown_MapScript1_1EB56C: @ 81EB56C
 VerdanturfTown_EventScript_1EB575:: @ 81EB575
 	lock
 	faceplayer
-	checkflag FLAG_RUSTURF_TUNNEL_OPENED
-	goto_eq VerdanturfTown_EventScript_1EB594
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_1EB594
 	msgbox VerdanturfTown_Text_1EB5FD, MSGBOX_DEFAULT
 	applymovement 2, VerdanturfTown_Movement_2725A2
 	waitmovement 0
@@ -36,8 +35,7 @@ VerdanturfTown_EventScript_1EB5B1:: @ 81EB5B1
 VerdanturfTown_EventScript_1EB5BA:: @ 81EB5BA
 	lock
 	faceplayer
-	checkflag FLAG_RUSTURF_TUNNEL_OPENED
-	goto_eq VerdanturfTown_EventScript_1EB5CF
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_1EB5CF
 	msgbox VerdanturfTown_Text_1EB854, MSGBOX_DEFAULT
 	release
 	end

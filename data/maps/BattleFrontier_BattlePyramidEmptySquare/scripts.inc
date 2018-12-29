@@ -22,7 +22,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77:: @ 8252A77
 	special CallBattlePyramidFunction
 	delay 2
 	compare VAR_RESULT, 2
-	goto_if 5, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77
+	goto_if_ne BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77
 	setvar VAR_TEMP_D, 0
 	releaseall
 	end
@@ -50,17 +50,17 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8005, 5
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 4
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
 	compare VAR_RESULT, 5
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
 	compare VAR_RESULT, 0
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
 	compare VAR_RESULT, 2
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	compare VAR_RESULT, 3
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	compare VAR_RESULT, 9
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
 	special CallFrontierUtilFunc
@@ -135,7 +135,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	copyvar VAR_0x8006, VAR_RESULT
 	special CallFrontierUtilFunc
 	compare VAR_RESULT, 7
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
 	setvar VAR_0x8004, 6
 	special CallBattlePyramidFunction
 	setvar VAR_0x8004, 2
@@ -167,7 +167,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A:: @ 8252C6A
 	special CallBattlePyramidFunction
 	callstd STD_FIND_ITEM
 	compare VAR_0x8007, 0
-	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
+	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
 	setvar VAR_0x8004, 8
 	special CallBattlePyramidFunction
 

@@ -101,3 +101,7 @@
 	map \map
 	.space 2
 	.endm
+
+	.macro map_header_flags allow_bike:req, allow_escape_rope:req, allow_run:req, show_map_name:req
+	.byte ((\show_map_name & 1) << 3) | ((\allow_run & 1) << 2) | ((\allow_escape_rope & 1) << 1) | \allow_bike
+	.endm

@@ -784,7 +784,7 @@ static void sub_81A58B4(void)
     if (!isCurrent)
         gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = 0;
 
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 

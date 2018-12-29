@@ -14,8 +14,7 @@ SealedChamber_OuterRoom_MapScript1_239127: @ 8239127
 	end
 
 SealedChamber_OuterRoom_MapScript1_23912B: @ 823912B
-	checkflag FLAG_SYS_BRAILLE_DIG
-	call_if 0, SealedChamber_OuterRoom_EventScript_239135
+	call_if_unset FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_239135
 	end
 
 SealedChamber_OuterRoom_EventScript_239135:: @ 8239135
@@ -109,8 +108,7 @@ SealedChamber_OuterRoom_EventScript_2391C6:: @ 82391C6
 
 SealedChamber_OuterRoom_EventScript_2391D0:: @ 82391D0
 	lockall
-	checkflag FLAG_SYS_BRAILLE_DIG
-	goto_eq SealedChamber_OuterRoom_EventScript_2391E3
+	goto_if_set FLAG_SYS_BRAILLE_DIG, SealedChamber_OuterRoom_EventScript_2391E3
 	braillemessage SealedChamber_OuterRoom_Braille_2A6B89
 	waitbuttonpress
 	hidebox2

@@ -6,7 +6,7 @@ Route112_CableCarStation_MapScripts:: @ 822AABE
 Route112_CableCarStation_MapScript1_22AAC9: @ 822AAC9
 	setescapewarp MAP_ROUTE112, 255, 28, 28
 	compare VAR_0x40A3, 2
-	call_if 1, Route112_CableCarStation_EventScript_22AADD
+	call_if_eq Route112_CableCarStation_EventScript_22AADD
 	end
 
 Route112_CableCarStation_EventScript_22AADD:: @ 822AADD
@@ -34,9 +34,9 @@ Route112_CableCarStation_EventScript_22AB17:: @ 822AB17
 	faceplayer
 	msgbox Route112_CableCarStation_Text_22AB85, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_eq Route112_CableCarStation_EventScript_22AB38
+	goto_if_eq Route112_CableCarStation_EventScript_22AB38
 	compare VAR_RESULT, 0
-	goto_eq Route112_CableCarStation_EventScript_22AB67
+	goto_if_eq Route112_CableCarStation_EventScript_22AB67
 	end
 
 Route112_CableCarStation_EventScript_22AB38:: @ 822AB38
