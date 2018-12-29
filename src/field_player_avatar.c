@@ -723,7 +723,7 @@ static bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetZCoordAt(x, y) == 3
-     && GetEventObjectIdByXYZ(x, y, 3) == 16)
+     && GetEventObjectIdByXYZ(x, y, 3) == EVENT_OBJECTS_COUNT)
     {
         sub_808C750(direction);
         return TRUE;
@@ -792,11 +792,8 @@ bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
 
     MoveCoords(direction, &playerX, &playerY);
     mewObjectId = GetEventObjectIdByLocalIdAndMap(1, MAP_NUM(FARAWAY_ISLAND_INTERIOR), MAP_GROUP(FARAWAY_ISLAND_INTERIOR));
-
-    if (mewObjectId == 16)
-    {
+    if (mewObjectId == EVENT_OBJECTS_COUNT)
         return FALSE;
-    }
 
     object = &gEventObjects[mewObjectId];
     mewPrevX = object->previousCoords.x;
