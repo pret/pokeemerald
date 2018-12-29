@@ -9,12 +9,14 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "evolution_scene.h"
+#include "field_screen_effect.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "librfu.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "load_save.h"
 #include "mail.h"
 #include "main.h"
 #include "overworld.h"
@@ -24,6 +26,10 @@
 #include "pokedex.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
+#include "random.h"
+#include "rom_8011DC0.h"
+#include "save.h"
+#include "script.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
@@ -39,6 +45,8 @@
 #include "constants/species.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+
+#define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];
@@ -107,7 +115,7 @@ extern struct {
     /*0x70*/ u8 filler_70[2];
     /*0x72*/ u8 unk_72;
     /*0x73*/ u8 unk_73;
-    /*0x74*/ u8 unk_74[20];
+    /*0x74*/ u16 linkData[10];
     /*0x88*/ u8 unk_88;
     /*0x89*/ u8 unk_89;
     /*0x8A*/ u16 unk_8A;
@@ -138,9 +146,13 @@ extern struct {
     /*0xEF*/ u8 filler_EF;
     /*0xF0*/ u16 tradeSpecies[2];
     /*0xF4*/ u16 unk_F4;
-    /*0xF6*/ u8 filler_F6[0xFA - 0xF6];
+    /*0xF6*/ u8 unk_F6[3];
+    /*0xF9*/ u8 filler_F9;
     /*0xFA*/ u8 unk_FA;
-    /*0xFB*/ u8 filler_FB[0x100 - 0xFB];
+    /*0xFB*/ u8 unk_FB;
+    /*0xFC*/ u8 unk_FC;
+    /*0xFD*/ u8 unk_FD;
+    /*0xFE*/ u8 unk_FE;
 } *gUnknown_020322A0;
 
 extern u8 gUnknown_0203CF20;
@@ -201,6 +213,11 @@ extern const struct SpriteTemplate gSpriteTemplate_8338DC8;
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_8338ECC[];
 extern const struct SpriteTemplate gSpriteTemplate_8338E74;
 extern const struct SpriteTemplate gSpriteTemplate_8338E8C;
+extern const s8 gTradeBallVerticalVelocityTable[];
+extern const u16 gIngameTradeMail[][10];
+extern const u8 gUnknown_08339090[][2];
+extern const u16 gUnknown_08337AA0[];
+extern const u16 gUnknown_08337CA0[];
 
 // external to this file
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
@@ -246,7 +263,7 @@ void sub_807B60C(void);
 u8 sub_807BBC8(void);
 u8 sub_807CFC8(void);
 u8 sub_807BBEC(void);
-void sub_807F1A8(u8, u8 *, u8);
+void sub_807F1A8(u8, const u8 *, u8);
 void sub_807E5D8(struct Sprite *);
 void sub_807AAE0(struct Sprite *);
 void sub_807E6AC(struct Sprite *);
@@ -255,6 +272,13 @@ void sub_807E784(void);
 void c3_08054588(u8);
 void c3_0805465C(u8);
 void sub_807F39C(u8);
+void sub_807EB50(void);
+void sub_807F464(void);
+void sub_807E64C(struct Sprite *);
+void sub_807E974(struct MailStruct *mail, const struct InGameTrade *trade);
+void sub_807EACC(void);
+void c2_080543C4(void);
+void sub_807F110(u8);
 
 bool8 sub_8077170(const void *a0, u32 a1)
 {
@@ -334,12 +358,12 @@ bool32 sub_8077260(void)
     }
 }
 
-void sub_8077288(void)
+void sub_8077288(u8 unused)
 {
     sub_800ADF8();
 }
 
-bool8 sub_8077294(void)
+bool32 IsLinkTaskFinished(void)
 {
     return sub_800A520();
 }
@@ -3443,7 +3467,7 @@ void sub_807B5B8(void)
         case 1:
             if (sub_800A520())
             {
-                SendBlock(bitmask_all_link_players_but_self(), gUnknown_020322A0->unk_74, sizeof(gUnknown_020322A0->unk_74));
+                Trade_SendData(gUnknown_020322A0);
                 gUnknown_020322A0->unk_93++;
             }
         case 2:
@@ -4678,4 +4702,572 @@ bool8 sub_807CFC8(void)
             break;
     }
     return FALSE;
+}
+
+void c2_08053788(void)
+{
+    u16 evoTarget;
+    switch (gMain.state)
+    {
+        case 0:
+            gMain.state = 4;
+            gSoftResetDisabled = TRUE;
+            break;
+        case 4:
+            gCB2_AfterEvolution = sub_807EB50;
+            evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gUnknown_02032298[0]], TRUE, ITEM_NONE);
+            if (evoTarget != SPECIES_NONE)
+                TradeEvolutionScene(&gPlayerParty[gUnknown_02032298[0]], evoTarget, gUnknown_020322A0->pokePicSpriteIdxs[1], gUnknown_02032298[0]);
+            else if (sub_8077260())
+                SetMainCallback2(sub_807F464);
+            else
+                SetMainCallback2(sub_807EB50);
+            gUnknown_02032298[0] = 255;
+            break;
+    }
+    if (!HasLinkErrorOccurred())
+        RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_807E4DC(void)
+{
+    u8 blockReceivedStatus;
+    sub_807ACDC();
+    blockReceivedStatus = GetBlockReceivedStatus();
+    if (blockReceivedStatus & 0x01)
+    {
+        if (gBlockRecvBuffer[0][0] == 0xDCBA)
+        {
+            SetMainCallback2(c2_08053788);
+        }
+        if (gBlockRecvBuffer[0][0] == 0xABCD)
+        {
+            gUnknown_020322A0->unk_72 = 1;
+        }
+        ResetBlockReceivedFlag(0);
+    }
+    if (blockReceivedStatus & 0x02)
+    {
+        if (gBlockRecvBuffer[1][0] == 0xABCD)
+        {
+            gUnknown_020322A0->unk_73 = 1;
+        }
+        ResetBlockReceivedFlag(1);
+    }
+}
+
+void sub_807E55C(struct Sprite *sprite)
+{
+    sprite->pos1.y += sprite->data[0] / 10;
+    sprite->data[5] += sprite->data[1];
+    sprite->pos1.x = sprite->data[5] / 10;
+    if (sprite->pos1.y > 0x4c)
+    {
+        sprite->pos1.y = 0x4c;
+        sprite->data[0] = -(sprite->data[0] * sprite->data[2]) / 100;
+        sprite->data[3] ++;
+    }
+    if (sprite->pos1.x == 0x78)
+        sprite->data[1] = 0;
+    sprite->data[0] += sprite->data[4];
+    if (sprite->data[3] == 4)
+    {
+        sprite->data[7] = 1;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void sub_807E5D8(struct Sprite *sprite)
+{
+    sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
+    if (sprite->data[0] == 22)
+        PlaySE(SE_KON);
+    if (++ sprite->data[0] == 44)
+    {
+        PlaySE(SE_W025);
+        sprite->callback = sub_807E64C;
+        sprite->data[0] = 0;
+        BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, RGB_WHITEALPHA);
+    }
+}
+
+void sub_807E64C(struct Sprite *sprite)
+{
+    if (sprite->data[1] == 20)
+        StartSpriteAffineAnim(sprite, 1);
+    if (++ sprite->data[1] > 20)
+    {
+        sprite->pos2.y -= gTradeBallVerticalVelocityTable[sprite->data[0]];
+        if (++ sprite->data[0] == 23)
+        {
+            DestroySprite(sprite);
+            gUnknown_020322A0->unk_94 = 14; // Resume the master trade animation
+        }
+    }
+}
+
+void sub_807E6AC(struct Sprite *sprite)
+{
+    if (sprite->data[2] == 0)
+    {
+        if ((sprite->pos1.y += 4) > sprite->data[3])
+        {
+            sprite->data[2] ++;
+            sprite->data[0] = 0x16;
+            PlaySE(SE_KON);
+        }
+    }
+    else
+    {
+        if (sprite->data[0] == 0x42)
+            PlaySE(SE_KON2);
+        if (sprite->data[0] == 0x5c)
+            PlaySE(SE_KON3);
+        if (sprite->data[0] == 0x6b)
+            PlaySE(SE_KON4);
+        sprite->pos2.y += gTradeBallVerticalVelocityTable[sprite->data[0]];
+        if (++sprite->data[0] == 0x6c)
+            sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+u16 GetInGameTradeSpeciesInfo(void)
+{
+    const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
+    StringCopy(gStringVar1, gSpeciesNames[inGameTrade->playerSpecies]);
+    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+    return inGameTrade->playerSpecies;
+}
+
+void sub_807E784(void)
+{
+    u8 nickname[32];
+    const struct InGameTrade *inGameTrade = &gIngameTrades[gSpecialVar_0x8004];
+    GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+    StringCopy10(gStringVar1, nickname);
+    StringCopy(gStringVar2, gSpeciesNames[inGameTrade->species]);
+}
+
+void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
+{
+    const struct InGameTrade *inGameTrade = &gIngameTrades[whichInGameTrade];
+    u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
+
+    struct MailStruct mail;
+    u8 metLocation = 0xFE;
+    u8 isMail;
+    struct Pokemon *pokemon = &gEnemyParty[0];
+
+    CreateMon(pokemon, inGameTrade->species, level, 32, TRUE, inGameTrade->personality, TRUE, inGameTrade->otId);
+
+    SetMonData(pokemon, MON_DATA_HP_IV, &inGameTrade->ivs[0]);
+    SetMonData(pokemon, MON_DATA_ATK_IV, &inGameTrade->ivs[1]);
+    SetMonData(pokemon, MON_DATA_DEF_IV, &inGameTrade->ivs[2]);
+    SetMonData(pokemon, MON_DATA_SPEED_IV, &inGameTrade->ivs[3]);
+    SetMonData(pokemon, MON_DATA_SPATK_IV, &inGameTrade->ivs[4]);
+    SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
+    SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->name);
+    SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
+    SetMonData(pokemon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
+    SetMonData(pokemon, MON_DATA_ALT_ABILITY, &inGameTrade->secondAbility);
+    SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->stats[1]);
+    SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->stats[2]);
+    SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->stats[0]);
+    SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->stats[3]);
+    SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->stats[4]);
+    SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
+    SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
+
+    isMail = FALSE;
+    if (inGameTrade->heldItem != ITEM_NONE)
+    {
+        if (ItemIsMail(inGameTrade->heldItem))
+        {
+            sub_807E974(&mail, inGameTrade);
+            gUnknown_020321C0[0] = mail;
+            SetMonData(pokemon, MON_DATA_MAIL, &isMail);
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
+        }
+        else
+        {
+            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
+        }
+    }
+    CalculateMonStats(&gEnemyParty[0]);
+}
+
+void sub_807E974(struct MailStruct *mail, const struct InGameTrade *trade) {
+    s32 i;
+
+    for (i = 0; i < 9; i++)
+    {
+        mail->words[i] = gIngameTradeMail[trade->mailNum][i];
+    }
+
+    StringCopy(mail->playerName, trade->otName);
+    PadNameString(mail->playerName, CHAR_SPACE);
+
+    mail->trainerId[0] = trade->otId >> 24;
+    mail->trainerId[1] = trade->otId >> 16;
+    mail->trainerId[2] = trade->otId >> 8;
+    mail->trainerId[3] = trade->otId;
+    mail->species = trade->species;
+    mail->itemId = trade->heldItem;
+}
+
+u16 GetTradeSpecies(void)
+{
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
+        return SPECIES_NONE;
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
+}
+
+void CreateInGameTradePokemon(void)
+{
+    _CreateInGameTradePokemon(gSpecialVar_0x8005, gSpecialVar_0x8004);
+}
+
+void sub_807EA2C(void)
+{
+    if (sub_807BBC8() == TRUE)
+    {
+        DestroySprite(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[0]]);
+        FreeSpriteOamMatrix(&gSprites[gUnknown_020322A0->pokePicSpriteIdxs[1]]);
+        sub_807B4D0(gUnknown_02032298[0], gUnknown_02032298[1] % 6);
+        if (!sub_8077260())
+        {
+            gUnknown_020322A0->linkData[0] = 0xABCD;
+            gUnknown_020322A0->unk_93 = 1;
+        }
+        SetMainCallback2(sub_807EACC);
+    }
+    sub_807B5B8();
+    sub_807E4DC();
+    RunTasks();
+    RunTextPrinters();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_807EACC(void)
+{
+    u8 mpId = sub_807ACDC();
+    if (sub_8077260())
+    {
+        SetMainCallback2(c2_08053788);
+    }
+    else
+    {
+        sub_807E4DC();
+        if (mpId == 0 && gUnknown_020322A0->unk_72 == 1 && gUnknown_020322A0->unk_73 == 1)
+        {
+            gUnknown_020322A0->linkData[0] = 0xDCBA;
+            Trade_SendData(gUnknown_020322A0);
+            gUnknown_020322A0->unk_72 = 2;
+            gUnknown_020322A0->unk_73 = 2;
+        }
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_807EB50(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            gMain.state++;
+            StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby5);
+            sub_807F1A8(0, gStringVar4, 0);
+            break;
+        case 1:
+            sub_8077288(0);
+            gMain.state = 100;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 100:
+            if (++gUnknown_020322A0->unk_64 > 180)
+            {
+                gMain.state = 101;
+                gUnknown_020322A0->unk_64 = 0;
+            }
+            if (IsLinkTaskFinished())
+            {
+                gMain.state = 2;
+            }
+            break;
+        case 101:
+            if (IsLinkTaskFinished())
+            {
+                gMain.state = 2;
+            }
+            break;
+        case 2:
+            gMain.state = 50;
+            StringExpandPlaceholders(gStringVar4, gText_SavingDontTurnOffPower);
+            sub_807F1A8(0, gStringVar4, 0);
+            break;
+        case 50:
+            if (!InUnionRoom())
+                IncrementGameStat(GAME_STAT_POKEMON_TRADES);
+            if (gWirelessCommType)
+            {
+                sub_801B990(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+            }
+            sub_8076D5C();
+            sub_8153380();
+            gMain.state++;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 51:
+            if (++gUnknown_020322A0->unk_64 == 5)
+            {
+                gMain.state++;
+            }
+            break;
+        case 52:
+            if (sub_81533AC())
+            {
+                sav2_gender2_inplace_and_xFE();
+                gMain.state = 4;
+            }
+            else
+            {
+                gUnknown_020322A0->unk_64 = 0;
+                gMain.state = 51;
+            }
+            break;
+        case 4:
+            sub_81533E0();
+            gMain.state = 40;
+            gUnknown_020322A0->unk_64 = 0;
+            break;
+        case 40:
+            if (++gUnknown_020322A0->unk_64 > 50)
+            {
+                if (GetMultiplayerId() == 0)
+                {
+                    gUnknown_020322A0->unk_64 = Random() % 30;
+                }
+                else
+                {
+                    gUnknown_020322A0->unk_64 = 0;
+                }
+                gMain.state = 41;
+            }
+            break;
+        case 41:
+            if (gUnknown_020322A0->unk_64 == 0)
+            {
+                sub_8077288(1);
+                gMain.state = 42;
+            }
+            else
+            {
+                gUnknown_020322A0->unk_64--;
+            }
+            break;
+        case 42:
+            if (IsLinkTaskFinished())
+            {
+                sub_8153408();
+                gMain.state = 5;
+            }
+            break;
+        case 5:
+            if (++gUnknown_020322A0->unk_64 > 60)
+            {
+                gMain.state++;
+                sub_8077288(2);
+            }
+            break;
+        case 6:
+            if (IsLinkTaskFinished())
+            {
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+                gMain.state ++;
+            }
+            break;
+        case 7:
+            if (!gPaletteFade.active)
+            {
+                FadeOutBGM(3);
+                gMain.state++;
+            }
+            break;
+        case 8:
+            if (IsBGMStopped() == TRUE)
+            {
+                if (gWirelessCommType && gMain.savedCallback == sub_80773AC)
+                {
+                    sub_8077288(3);
+                }
+                else
+                {
+                    sub_800AC34();
+                }
+                gMain.state++;
+            }
+            break;
+        case 9:
+            if (gWirelessCommType && gMain.savedCallback == sub_80773AC)
+            {
+                if (IsLinkTaskFinished())
+                {
+                    gSoftResetDisabled = FALSE;
+                    SetMainCallback2(c2_080543C4);
+                }
+            }
+            else if (!gReceivedRemoteLinkPlayers)
+            {
+                gSoftResetDisabled = FALSE;
+                SetMainCallback2(c2_080543C4);
+            }
+            break;
+    }
+    if (!HasLinkErrorOccurred())
+    {
+        RunTasks();
+    }
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void c2_080543C4(void)
+{
+    if (!gPaletteFade.active)
+    {
+        FreeAllWindowBuffers();
+        Free(GetBgTilemapBuffer(3));
+        Free(GetBgTilemapBuffer(1));
+        Free(GetBgTilemapBuffer(0));
+        FreeMonSpritesGfx();
+        FREE_AND_SET_NULL(gUnknown_020322A0);
+        if (gWirelessCommType)
+            sub_800E084();
+        SetMainCallback2(gMain.savedCallback);
+    }
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void DoInGameTradeScene(void)
+{
+    ScriptContext2_Enable();
+    CreateTask(sub_807F110, 10);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+}
+
+void sub_807F110(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetMainCallback2(sub_807B270);
+        gFieldCallback = sub_80AF168;
+        DestroyTask(taskId);
+    }
+}
+
+void sub_807F14C(void)
+{
+    u8 i;
+    u8 numRibbons = 0;
+    for (i = 0; i < 12; i ++)
+    {
+        numRibbons += GetMonData(&gEnemyParty[gUnknown_02032298[1] % 6], MON_DATA_CHAMPION_RIBBON + i);
+    }
+    if (numRibbons != 0)
+        FlagSet(FLAG_SYS_RIBBON_GET);
+}
+
+void sub_807F19C(void)
+{
+    sub_807B170();
+}
+
+void sub_807F1A8(u8 windowId, const u8 *str, u8 speed)
+{
+    FillWindowPixelBuffer(windowId, 0xFF);
+    gUnknown_020322A0->unk_F6[0] = 15;
+    gUnknown_020322A0->unk_F6[1] = 1;
+    gUnknown_020322A0->unk_F6[2] = 6;
+    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, gUnknown_020322A0->unk_F6, speed, str);
+    CopyWindowToVram(windowId, 3);
+}
+
+void c3_08054588(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    u16 unk = gUnknown_08339090[data[0]][0] * 16;
+
+    if (!data[2])
+    {
+        if (unk == 0x100)
+            LoadPalette(gUnknown_08337EA0, 0x30, 32);
+        else
+            LoadPalette(&gUnknown_08337AA0[unk], 0x30, 32);
+    }
+    else
+    {
+        if (unk == 0x100)
+            LoadPalette(gUnknown_08337EA0, 0x30, 32);
+        else
+            LoadPalette(&gUnknown_08337CA0[unk], 0x30, 32);
+    }
+
+    if (gUnknown_08339090[data[0]][0] == 0 && data[1] == 0)
+        PlaySE(SE_W215);
+
+    if (data[1] == gUnknown_08339090[data[0]][1])
+    {
+        data[0]++;
+        data[1] = 0;
+        if (gUnknown_08339090[data[0]][1] == 0xFF)
+        {
+            DestroyTask(taskId);
+        }
+    }
+    else
+    {
+        data[1]++;
+    }
+}
+
+void c3_0805465C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (data[0] == 0)
+    {
+        gUnknown_020322A0->unk_FB = gUnknown_020322A0->unk_FD = 120;
+        gUnknown_020322A0->unk_FC = 0;
+        gUnknown_020322A0->unk_FE = 160;
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_OBJ);
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 |
+                                    WININ_WIN0_BG1 |
+                                    WININ_WIN0_OBJ);
+    }
+
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(gUnknown_020322A0->unk_FB, gUnknown_020322A0->unk_FD));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(gUnknown_020322A0->unk_FC, gUnknown_020322A0->unk_FE));
+    
+    data[0]++;
+    gUnknown_020322A0->unk_FB -= 5;
+    gUnknown_020322A0->unk_FD += 5;
+
+    if (gUnknown_020322A0->unk_FB < 80)
+    {
+        DestroyTask(taskId);
+    }
 }

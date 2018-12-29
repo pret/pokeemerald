@@ -576,6 +576,9 @@
 #define WINOUT_WINOBJ_OBJ   (1 << 12)
 #define WINOUT_WINOBJ_CLR   (1 << 13)
 
+#define WIN_RANGE(a, b) (((a) << 8) | (b))
+#define WIN_RANGE2(a, b) ((b) | ((a) << 8))
+
 // BLDCNT
 // Bits 0-5 select layers for the 1st target
 #define BLDCNT_TGT1_BG0      (1 << 0)
