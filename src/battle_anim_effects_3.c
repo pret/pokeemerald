@@ -1454,11 +1454,9 @@ void sub_815A7B0(struct Sprite *sprite)
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
-// This is likely fakematching due to some strange type casting behavior.
 void sub_815A7EC(struct Sprite *sprite)
 {
     int var0;
-    int var1;
     if (sprite->data[0] == 0)
     {
         SetSpriteCoordsToAnimAttackerCoords(sprite);
@@ -1472,16 +1470,13 @@ void sub_815A7EC(struct Sprite *sprite)
             }
             else
             {
-                var1 = -gBattleAnimArgs[2];
-                sprite->data[1] = var1;
-                var1 = -gBattleAnimArgs[3];
-                sprite->data[2] = var1;
+                sprite->data[1] = -1 * gBattleAnimArgs[2];
+                sprite->data[2] = -1 * gBattleAnimArgs[3];
             }
         }
         else
         {
-            var1 = -gBattleAnimArgs[2];
-            sprite->data[1] = var1;
+            sprite->data[1] = -1 * gBattleAnimArgs[2];
             sprite->data[2] = gBattleAnimArgs[3];
         }
     }
@@ -1490,8 +1485,8 @@ void sub_815A7EC(struct Sprite *sprite)
     var0 = (sprite->data[0] * 20) & 0xFF;
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
-    sprite->pos2.x = (sprite->data[3] + (s32)((u32)sprite->data[3] >> 31)) >> 1;
-    sprite->pos2.y = Sin(var0 & 0xFF, 5) + ((s32)(sprite->data[4] + ((u32)sprite->data[4] >> 31)) >> 1);
+    sprite->pos2.x = sprite->data[3] / 2;
+    sprite->pos2.y = Sin(var0 & 0xFF, 5) + (sprite->data[4] / 2);
 
     if ((u16)(sprite->pos1.x + sprite->pos2.x) > 240)
         DestroyAnimSprite(sprite);
@@ -1692,7 +1687,6 @@ void sub_815AC8C(u8 taskId)
 
 void sub_815ACD0(struct Sprite *sprite)
 {
-    int var0;
     if (gBattleAnimArgs[0] == 0)
     {
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[1];
@@ -1705,11 +1699,8 @@ void sub_815ACD0(struct Sprite *sprite)
     }
 
     sprite->pos2.y = gBattleAnimArgs[2];
-    var0 = 0;
-    if (sprite->pos2.y > gBattleAnimArgs[3])
-        var0 = 1;
 
-    sprite->data[0] = var0;
+    sprite->data[0] = (sprite->pos2.y > gBattleAnimArgs[3]);
     sprite->data[1] = 0;
     sprite->data[2] = gBattleAnimArgs[4];
     sprite->data[3] = gBattleAnimArgs[5];
@@ -3146,8 +3137,6 @@ static void sub_815CDFC(struct Sprite *sprite)
             DestroyAnimSprite(sprite);
     }
 }
-
-
 
 extern void sub_815D160(u8);
 
@@ -4927,8 +4916,8 @@ void sub_815F8F4(u8 taskId)
         else
             gSprites[spriteId].pos2.x -= (gTasks[taskId].data[1] >> 8);
 
-        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1];
-        x = (u16)gSprites[spriteId].pos1.x + (u16)gSprites[spriteId].pos2.x;
+        gTasks[taskId].data[1] &= 0xFF;
+        x = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
         if ((u16)(x + 32) > 304)
         {
             gTasks[taskId].data[1] = 0;
@@ -4978,7 +4967,7 @@ void sub_815F8F4(u8 taskId)
         spriteId2 = sub_80A8394(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies != SPECIES_NONE)
             BlendPalette((gSprites[spriteId2].oam.paletteNum * 16) | 0x100, 16, 6, RGB_WHITE);
-        
+
         gTasks[taskId].data[15] = spriteId2;
         gTasks[taskId].data[0]++;
         break;
@@ -4990,7 +4979,7 @@ void sub_815F8F4(u8 taskId)
         else
             gSprites[spriteId2].pos2.x += (gTasks[taskId].data[1] >> 8);
 
-        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1];
+        gTasks[taskId].data[1] &= 0xFF;
         x = gSprites[spriteId2].pos1.x + gSprites[spriteId2].pos2.x;
         if (gTasks[taskId].data[14] == 0)
         {
@@ -5215,7 +5204,7 @@ static void sub_81602E0(struct Sprite *sprite)
         sprite->data[1] += sprite->data[0];
         sprite->data[1] &= 0xFF;
     }
-    
+
     sprite->pos2.x = Cos(sprite->data[1], 20);
     sprite->pos2.y = Sin(sprite->data[1], 20);
     if (sprite->animEnded)
@@ -5342,17 +5331,18 @@ void sub_8160544(u8 taskId)
     task->func = sub_816058C;
 }
 
-#ifdef NONMATCHING
 static void sub_816058C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    u16 var0 = gTasks[taskId].data[0]++ - 16;
-    if (var0 < 23)
+
+    gTasks[taskId].data[0]++;
+    if (gTasks[taskId].data[0] > 16 && gTasks[taskId].data[0] < 40)
     {
         if (++task->data[1] > 2)
         {
             task->data[1] = 0;
-            if (!(++task->data[2] & 1))
+            task->data[2]++;
+            if (!(task->data[2] & 1))
             {
                 gSprites[task->data[15]].pos2.x = -1;
             }
@@ -5370,79 +5360,3 @@ static void sub_816058C(u8 taskId)
     if (!RunAffineAnimFromTaskData(&gTasks[taskId]))
         DestroyAnimVisualTask(taskId);
 }
-#else
-NAKED
-static void sub_816058C(u8 taskId)
-{
-    asm_unified("\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    ldr r2, =gTasks\n\
-    adds r3, r0, r2\n\
-    ldrh r0, [r3, 0x8]\n\
-    adds r1, r0, 0x1\n\
-    movs r5, 0\n\
-    strh r1, [r3, 0x8]\n\
-    subs r0, 0x10\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    adds r6, r2, 0\n\
-    cmp r0, 0x16\n\
-    bhi _081605F0\n\
-    ldrh r0, [r3, 0xA]\n\
-    adds r0, 0x1\n\
-    strh r0, [r3, 0xA]\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0x2\n\
-    ble _08160600\n\
-    strh r5, [r3, 0xA]\n\
-    ldrh r0, [r3, 0xC]\n\
-    adds r0, 0x1\n\
-    strh r0, [r3, 0xC]\n\
-    movs r5, 0x1\n\
-    ands r0, r5\n\
-    cmp r0, 0\n\
-    bne _081605F0\n\
-    ldr r2, =gSprites\n\
-    movs r0, 0x26\n\
-    ldrsh r1, [r3, r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldr r1, =0x0000ffff\n\
-    strh r1, [r0, 0x24]\n\
-    b _08160600\n\
-    .pool\n\
-_081605F0:\n\
-    ldr r2, =gSprites\n\
-    movs r0, 0x26\n\
-    ldrsh r1, [r3, r0]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    strh r5, [r0, 0x24]\n\
-_08160600:\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r6\n\
-    bl RunAffineAnimFromTaskData\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _08160618\n\
-    adds r0, r4, 0\n\
-    bl DestroyAnimVisualTask\n\
-_08160618:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool");
-}
-#endif
