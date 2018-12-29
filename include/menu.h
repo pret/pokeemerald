@@ -20,7 +20,8 @@ struct MenuAction
 
 extern const u16 gUnknown_0860F074[];
 
-void sub_81971D0(void);
+void FreeAllOverworldWindowBuffers(void);
+void InitStandardTextBoxWindows(void);
 void sub_8197200(void);
 u16 RunTextPrintersAndIsPrinter0Active(void);
 void sub_81973A4(void);

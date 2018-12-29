@@ -42,9 +42,9 @@ Route119_EventScript_1F4488:: @ 81F4488
 	lockall
 	addobject 25
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq Route119_EventScript_1F4501
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq Route119_EventScript_1F4506
 	delay 65
 	compare VAR_TEMP_1, 1
@@ -62,9 +62,9 @@ Route119_EventScript_1F4488:: @ 81F4488
 	addobject 16
 	delay 30
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq Route119_EventScript_1F450B
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq Route119_EventScript_1F4585
 	releaseall
 	end

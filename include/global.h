@@ -4,6 +4,7 @@
 #include <string.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
+#include "constants/global.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -98,100 +99,6 @@
     if(v < 0) f += 65536.0f; \
     f;                       \
 })
-
-// Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
-// In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
-// In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
-// Gen 5 and up read Diamond, Pearl, or Platinum's ID as "Sinnoh".
-// In Gen 4 and up, migrated Pokemon with HeartGold or SoulSilver's ID show the otherwise unused "Johto" string.
-enum
-{
-    VERSION_SAPPHIRE = 1,
-    VERSION_RUBY = 2,
-    VERSION_EMERALD = 3,
-    VERSION_FIRE_RED = 4,
-    VERSION_LEAF_GREEN = 5,
-    VERSION_HEART_GOLD = 7,
-    VERSION_SOUL_SILVER = 8,
-    VERSION_DIAMOND = 10,
-    VERSION_PEARL = 11,
-    VERSION_PLATINUM = 12,
-    VERSION_GAMECUBE = 15,
-};
-
-enum LanguageId
-{
-    LANGUAGE_JAPANESE = 1,
-    LANGUAGE_ENGLISH = 2,
-    LANGUAGE_FRENCH = 3,
-    LANGUAGE_ITALIAN = 4,
-    LANGUAGE_GERMAN = 5,
-    // 6 goes unused but the theory is it was meant to be Korean
-    LANGUAGE_SPANISH = 7,
-};
-
-#define GAME_VERSION (VERSION_EMERALD)
-#define GAME_LANGUAGE (LANGUAGE_ENGLISH)
-
-// capacities of various saveblock objects
-#define DAYCARE_MON_COUNT     2
-#define POKEBLOCKS_COUNT     40
-#define EVENT_OBJECTS_COUNT  16
-#define BERRY_TREES_COUNT   128
-#define FLAGS_COUNT         300
-#define VARS_COUNT          256
-#define MAIL_COUNT           16
-#define SECRET_BASES_COUNT   20
-#define TV_SHOWS_COUNT       25
-#define POKE_NEWS_COUNT      16
-#define PC_ITEMS_COUNT       50
-#define BAG_ITEMS_COUNT      30
-#define BAG_KEYITEMS_COUNT   30
-#define BAG_POKEBALLS_COUNT  16
-#define BAG_TMHM_COUNT       64
-#define BAG_BERRIES_COUNT    46
-#define EVENT_OBJECT_TEMPLATES_COUNT 64
-
-#define PYRAMID_BAG_ITEMS_COUNT 10
-#define HALL_FACILITIES_COUNT 9 // 7 facilities for single mode + tower double mode + tower multi mode.
-
-// string lengths
-#define ITEM_NAME_LENGTH    14
-#define POKEMON_NAME_LENGTH 10
-#define PLAYER_NAME_LENGTH  7
-#define MAIL_WORDS_COUNT    9
-
-enum
-{
-    MALE,
-    FEMALE
-};
-
-enum
-{
-    OPTIONS_BUTTON_MODE_NORMAL,
-    OPTIONS_BUTTON_MODE_LR,
-    OPTIONS_BUTTON_MODE_L_EQUALS_A
-};
-
-enum
-{
-    OPTIONS_TEXT_SPEED_SLOW,
-    OPTIONS_TEXT_SPEED_MID,
-    OPTIONS_TEXT_SPEED_FAST
-};
-
-enum
-{
-    OPTIONS_SOUND_MONO,
-    OPTIONS_SOUND_STEREO
-};
-
-enum
-{
-    OPTIONS_BATTLE_STYLE_SHIFT,
-    OPTIONS_BATTLE_STYLE_SET
-};
 
 struct Coords8
 {
@@ -527,7 +434,7 @@ struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
-    /*0x09*/ u8 specialSaveWarp;
+    /*0x09*/ u8 specialSaveWarpFlags;
     /*0x0A*/ u8 playerTrainerId[4];
     /*0x0E*/ u16 playTimeHours;
     /*0x10*/ u8 playTimeMinutes;
@@ -895,10 +802,10 @@ struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
     /*0x04*/ struct WarpData location;
-    /*0x0C*/ struct WarpData warp1;
-    /*0x14*/ struct WarpData warp2;
-    /*0x1C*/ struct WarpData lastHealLocation;
-    /*0x24*/ struct WarpData warp4;
+    /*0x0C*/ struct WarpData continueGameWarp;
+    /*0x14*/ struct WarpData dynamicWarp;
+    /*0x1C*/ struct WarpData lastHealLocation; // used by white-out and teleport
+    /*0x24*/ struct WarpData escapeWarp; // used by Dig and Escape Rope
     /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 weatherCycleStage;

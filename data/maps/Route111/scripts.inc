@@ -53,9 +53,9 @@ Route111_MapScript1_1F0D87: @ 81F0D87
 
 Route111_EventScript_1F0DC2:: @ 81F0DC2
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq Route111_EventScript_1F0DDA
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq Route111_EventScript_1F0DE0
 	return
 

@@ -20,9 +20,9 @@ BattleFrontier_BattleDomeBattleRoom_MapScript1_24BCB1: @ 824BCB1
 BattleFrontier_BattleArenaBattleRoom_EventScript_24BCDC:: @ 824BCDC
 BattleFrontier_BattleDomeBattleRoom_EventScript_24BCDC:: @ 824BCDC
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BCF4
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_24BCFA
 	return
 

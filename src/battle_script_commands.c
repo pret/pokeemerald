@@ -10685,7 +10685,7 @@ static void atkEF_handleballthrow(void)
                     ballMultiplier = 10;
                 break;
             case ITEM_DIVE_BALL:
-                if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
+                if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
                     ballMultiplier = 35;
                 else
                     ballMultiplier = 10;

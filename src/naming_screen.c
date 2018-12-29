@@ -362,7 +362,7 @@ static void NamingScreen_InitBGs(void)
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
 
-    sub_81971D0();
+    InitStandardTextBoxWindows();
     sub_8197200();
 
     for (i = 0; i < 5; i++)

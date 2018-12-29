@@ -578,10 +578,10 @@ _080F5D58:
 	adds r0, r5, 0
 	movs r1, 0
 	bl VarSet
-	bl sub_8076D5C
+	bl SetContinueGameWarpStatusToDynamicWarp
 	movs r0, 0x1
 	bl TrySavingData
-	bl sav2_gender2_inplace_and_xFE
+	bl ClearContinueGameWarpStatus2
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl VarSet
@@ -5598,7 +5598,7 @@ _080F874C:
 	movs r3, 0x1
 	negs r3, r3
 	movs r0, 0
-	bl saved_warp2_set
+	bl SetDynamicWarp
 	bl ScriptContext2_Disable
 	bl EnableBothScriptContexts
 _080F877E:

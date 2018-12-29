@@ -365,7 +365,7 @@ static void sub_81C4F44(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         gFieldCallback2 = hm_add_c3_without_phase_2;
         sub_81C4F98(3, CB2_ReturnToField);
         DestroyTask(taskId);

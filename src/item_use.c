@@ -627,7 +627,7 @@ void sub_80FDC00(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         OpenPokeblockCase(0, CB2_ReturnToField);
         DestroyTask(taskId);
     }

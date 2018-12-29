@@ -623,7 +623,7 @@ static bool8 StartMenuPokedexCallback(void)
         IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_Pokedex);
 
         return TRUE;
@@ -638,7 +638,7 @@ static bool8 StartMenuPokemonCallback(void)
     {
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
 
         return TRUE;
@@ -653,7 +653,7 @@ static bool8 StartMenuBagCallback(void)
     {
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_BagMenuFromStartMenu); // Display bag menu
 
         return TRUE;
@@ -668,7 +668,7 @@ static bool8 StartMenuPokeNavCallback(void)
     {
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_PokeNav);  // Display PokeNav
 
         return TRUE;
@@ -683,7 +683,7 @@ static bool8 StartMenuPlayerNameCallback(void)
     {
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
 
         if (is_c1_link_related_active() || InUnionRoom())
         {
@@ -722,7 +722,7 @@ static bool8 StartMenuOptionCallback(void)
     {
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_InitOptionMenu); // Display option menu
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
 
@@ -754,7 +754,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         TrainerCard_ShowLinkCard(gUnknown_03005DB4, CB2_ReturnToFieldWithOpenMenu);
 
         return TRUE;
@@ -784,7 +784,7 @@ static bool8 StartMenuBattlePyramidBagCallback(void)
     {
         PlayRainSoundEffect();
         RemoveExtraStartMenuWindows();
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_PyramidBagMenuFromStartMenu);
 
         return TRUE;
@@ -1285,14 +1285,14 @@ static void sub_80A0550(u8 taskId)
             }
             break;
         case 1:
-            sub_8076D5C();
+            SetContinueGameWarpStatusToDynamicWarp();
             sub_8153430();
             *step = 2;
             break;
         case 2:
             if (sub_8153474())
             {
-                sav2_gender2_inplace_and_xFE();
+                ClearContinueGameWarpStatus2();
                 *step = 3;
                 gSoftResetDisabled = 0;
             }

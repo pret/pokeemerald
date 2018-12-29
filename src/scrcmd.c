@@ -735,7 +735,7 @@ bool8 ScrCmd_setmaplayoutindex(struct ScriptContext *ctx)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
 
-    sub_8085524(value);
+    SetCurrentMapLayout(value);
     return FALSE;
 }
 
@@ -747,7 +747,7 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF734();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -761,7 +761,7 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sp13E_warp_to_last_warp();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -775,7 +775,7 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF7D0();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -790,9 +790,9 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
 
     PlayerGetDestCoords(&x, &y);
     if (mapGroup == 0xFF && mapNum == 0xFF)
-        SetFixedHoleWarpAsDestination(x - 7, y - 7);
+        SetWarpDestinationToFixedHoleWarp(x - 7, y - 7);
     else
-        Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
+        SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
     sp13F_fall_to_last_warp();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -806,7 +806,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF848();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -820,7 +820,7 @@ bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF87C();
     ResetInitialPlayerAvatarState();
     return TRUE;
@@ -834,7 +834,7 @@ bool8 ScrCmd_setwarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -846,7 +846,7 @@ bool8 ScrCmd_setdynamicwarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    saved_warp2_set_2(0, mapGroup, mapNum, warpId, x, y);
+    SetDynamicWarpWithCoords(0, mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -882,7 +882,7 @@ bool8 ScrCmd_setescapewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_8084DD4(mapGroup, mapNum, warpId, x, y);
+    SetEscapeWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -1998,7 +1998,7 @@ bool8 ScrCmd_setrespawn(struct ScriptContext *ctx)
 {
     u16 healLocationId = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetHealLocationWarp(healLocationId);
+    SetLastHealLocationWarp(healLocationId);
     return FALSE;
 }
 
@@ -2235,7 +2235,7 @@ bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_808D074(GetPlayerFacingDirection());
     sub_80B0244();
     ResetInitialPlayerAvatarState();
@@ -2289,7 +2289,7 @@ bool8 ScrCmd_warpE0(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
+    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_80AF79C();
     ResetInitialPlayerAvatarState();
     return TRUE;

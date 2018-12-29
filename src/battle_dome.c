@@ -2388,7 +2388,7 @@ static void sub_818E9CC(void)
     if (!(gSaveBlock2Ptr->frontier.field_CDC & gUnknown_0860D0EC[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = 0;
 
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 

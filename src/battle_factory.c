@@ -202,7 +202,7 @@ static void sub_81A5E94(void)
     for (i = 0; i < 3; i++)
         gUnknown_03006298[i] |= 0xFFFF;
 
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 
