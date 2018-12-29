@@ -1,7 +1,7 @@
 #ifndef GUARD_CONTEST_PAINTING_EFFECTS_H
 #define GUARD_CONTEST_PAINTING_EFFECTS_H
 
-struct Unk030061A0
+struct Unk03005E20
 {
     u8 var_0;
     u8 pad1[3];
@@ -21,8 +21,8 @@ struct Unk030061A0
     u8 var_1F;
 };
 
-void sub_8124F2C(struct Unk030061A0 *);
-void sub_81261A4(struct Unk030061A0 *);
-void sub_8126058(struct Unk030061A0 *);
+void sub_8124F2C(struct Unk03005E20 *);
+void sub_81261A4(struct Unk03005E20 *);
+void sub_8126058(struct Unk03005E20 *);
 
 #endif

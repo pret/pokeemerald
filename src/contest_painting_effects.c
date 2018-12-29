@@ -600,3 +600,172 @@ u16 InvertColor(u16 *color)
 
     return RGB2(red, green, blue);
 }
+
+u16 sub_8125CF4(u16 *a0, u16 *a1)
+{
+    u16 sp0[2][3];
+    u16 spC[3];
+    u8 r4;
+    u16 r2;
+    u16 r, g, b;
+
+    if (*a0 == *a1)
+        return *a1;
+
+    sp0[0][0] = (*a0 >> 0) & 0x1F;
+    sp0[0][1] = (*a0 >> 5) & 0x1F;
+    sp0[0][2] = (*a0 >> 10) & 0x1F;
+    sp0[1][0] = (*a1 >> 0) & 0x1F;
+    sp0[1][1] = (*a1 >> 5) & 0x1F;
+    sp0[1][2] = (*a1 >> 10) & 0x1F;
+
+    if (sp0[0][0] > 25 && sp0[0][1] > 25 && sp0[0][2] > 25)
+        return *a1;
+    if (sp0[1][0] > 25 && sp0[1][1] > 25 && sp0[1][2] > 25)
+        return *a1;
+
+    for (r4 = 0; r4 < 3; r4++)
+    {
+        if (sp0[0][r4] > sp0[1][r4])
+            spC[r4] = sp0[0][r4] - sp0[1][r4];
+        else
+            spC[r4] = sp0[1][r4] - sp0[0][r4];
+    }
+
+    if (spC[0] >= spC[1])
+    {
+        if (spC[0] >= spC[2])
+            r2 = spC[0];
+        else if (spC[1] >= spC[2])
+            r2 = spC[1];
+        else
+            r2 = spC[2];
+    }
+    else
+    {
+        if (spC[1] >= spC[2])
+            r2 = spC[1];
+        else if (spC[2] >= spC[0])
+            r2 = spC[2];
+        else
+            r2 = spC[0];
+    }
+
+    r = (sp0[1][0] * (31 - r2 / 2)) / 31;
+    g = (sp0[1][1] * (31 - r2 / 2)) / 31;
+    b = (sp0[1][2] * (31 - r2 / 2)) / 31;
+    return RGB2(r, g, b);
+}
+
+u16 sub_8125E18(u16 * a0, u16 * a1, u16 * a2)
+{
+    u16 red, green, blue;
+    u16 avg0, avg1, avg2;
+    u16 diff1, diff2;
+    u32 minimum;
+    u16 factor;
+
+    if (*a0 == *a1 && *a2 == *a1)
+        return *a1;
+
+    red = (*a1 >> 0) & 0x1F;
+    green = (*a1 >> 5) & 0x1F;
+    blue = (*a1 >> 10) & 0x1F;
+
+    avg0 = (((*a0 >> 0) & 0x1F) + ((*a0 >> 5) & 0x1F) + ((*a0 >> 10) & 0x1F)) / 3;
+    avg1 = (((*a1 >> 0) & 0x1F) + ((*a1 >> 5) & 0x1F) + ((*a1 >> 10) & 0x1F)) / 3;
+    avg2 = (((*a2 >> 0) & 0x1F) + ((*a2 >> 5) & 0x1F) + ((*a2 >> 10) & 0x1F)) / 3;
+
+    if (avg0 == avg1 && avg2 == avg1)
+        return *a1;
+
+    if (avg0 > avg1)
+        diff1 = avg0 - avg1;
+    else
+        diff1 = avg1 - avg0;
+
+    if (avg2 > avg1)
+        diff2 = avg2 - avg1;
+    else
+        diff2 = avg1 - avg2;
+
+    if (diff1 >= diff2)
+        minimum = diff1;
+    else
+        minimum = diff2;
+
+    factor = 31 - minimum / 2;
+    red = red * factor / 31;
+    green = green * factor / 31;
+    blue = blue * factor / 31;
+    return RGB2(red, green, blue);
+}
+
+u16 sub_8125F38(u16 *a0, u16 *a1, u16 *a2)
+{
+    u16 red, green, blue;
+    u16 avg0, avg1, avg2;
+    u16 diff1, diff2;
+    u32 minimum;
+    u16 factor;
+
+    if (*a0 == *a1 && *a2 == *a1)
+        return *a1;
+
+    red = (*a1 >> 0) & 0x1F;
+    green = (*a1 >> 5) & 0x1F;
+    blue = (*a1 >> 10) & 0x1F;
+
+    avg0 = (((*a0 >> 0) & 0x1F) + ((*a0 >> 5) & 0x1F) + ((*a0 >> 10) & 0x1F)) / 3;
+    avg1 = (((*a1 >> 0) & 0x1F) + ((*a1 >> 5) & 0x1F) + ((*a1 >> 10) & 0x1F)) / 3;
+    avg2 = (((*a2 >> 0) & 0x1F) + ((*a2 >> 5) & 0x1F) + ((*a2 >> 10) & 0x1F)) / 3;
+
+    if (avg0 == avg1 && avg2 == avg1)
+        return *a1;
+
+    if (avg0 > avg1)
+        diff1 = avg0 - avg1;
+    else
+        diff1 = avg1 - avg0;
+
+    if (avg2 > avg1)
+        diff2 = avg2 - avg1;
+    else
+        diff2 = avg1 - avg2;
+
+    if (diff1 >= diff2)
+        minimum = diff1;
+    else
+        minimum = diff2;
+
+    factor = 31 - minimum;
+    red = red * factor / 31;
+    green = green * factor / 31;
+    blue = blue * factor / 31;
+    return RGB2(red, green, blue);
+}
+
+/*
+void sub_8126058(struct Unk03005E20 *arg0)
+{
+    u16 i, j, k;
+    u8 r5 = arg0->var_1D >> 3;
+    u8 var_24 = arg0->var_1E >> 3;
+    u16 (*var_2C)[][32] = arg0->var_4;
+    u32 var_28 = arg0->var_10;
+
+    if (arg0->var_16 == 2)
+    {
+        for (i = 0; i < var_24; i++)
+        {
+            for (j = 0; j < r5; j++)
+            {
+                for (k = 0; k < 8; k++)
+                {
+                    (*var_2C)[][];
+                }
+            }
+        }
+    }
+}
+*/
