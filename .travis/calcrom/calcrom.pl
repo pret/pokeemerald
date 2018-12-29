@@ -43,4 +43,4 @@ my $asmPct = sprintf("%.4f", 100 * $asm / $total);
 print "$total total bytes of code\n";
 print "$src bytes of code in src ($srcPct%)\n";
 print "$asm bytes of code in asm ($asmPct%)\n";
-print "$undocumented global names undocumented\n";
+print "$undocumented global symbols undocumented\n";
