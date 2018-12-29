@@ -36,7 +36,7 @@ u16 sub_8125F38(u16*, u16*, u16*);
 u16 sub_8125CF4(u16*, u16*);
 u16 GetCoolColorFromPersonality(u8);
 
-void sub_8124F2C(struct Unk03005E20 *info)
+void sub_8124F2C(struct Unk030061A0 *info)
 {
     gUnknown_03006168 = info->var_4;
     gUnknown_0300617C = info->var_1F;
@@ -746,7 +746,7 @@ u16 sub_8125F38(u16 *a0, u16 *a1, u16 *a2)
 }
 
 /*
-void sub_8126058(struct Unk03005E20 *arg0)
+void sub_8126058(struct Unk030061A0 *arg0)
 {
     u16 i, j, k;
     u8 r5 = arg0->var_1D >> 3;
