@@ -4769,7 +4769,7 @@ gUnknown_082A8350:: @ 82A8350
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
-	special sp13F_fall_to_last_warp
+	special DoFallWarp
 	waitstate
 	end
 

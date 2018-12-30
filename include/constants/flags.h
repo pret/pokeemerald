@@ -1355,10 +1355,10 @@
 #define FLAG_SYS_PYRAMID_GOLD    (SYSTEM_FLAGS + 0x71)
 #define FLAG_SYS_FRONTIER_PASS   (SYSTEM_FLAGS + 0x72)
 
-#define FLAG_0x8D3               (SYSTEM_FLAGS + 0x73)
-#define FLAG_0x8D4               (SYSTEM_FLAGS + 0x74)
-#define FLAG_0x8D5               (SYSTEM_FLAGS + 0x75)
-#define FLAG_0x8D6               (SYSTEM_FLAGS + 0x76)
+#define FLAG_0x8D3                (SYSTEM_FLAGS + 0x73)
+#define FLAG_DEOXYS_ROCK_COMPLETE (SYSTEM_FLAGS + 0x74)
+#define FLAG_0x8D5                (SYSTEM_FLAGS + 0x75)
+#define FLAG_0x8D6                (SYSTEM_FLAGS + 0x76)
 
 #define FLAG_SYS_STORAGE_UNKNOWN_FLAG   (SYSTEM_FLAGS + 0x77)
 

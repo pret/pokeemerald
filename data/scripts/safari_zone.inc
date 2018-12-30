@@ -40,7 +40,7 @@ EventScript_2A4B9B:: @ 82A4B9B
 	releaseall
 	goto EventScript_2A4B5D
 
-EventScript_2A4BAC:: @ 82A4BAC
+EventScript_PokeBlockFeeder:: @ 82A4BAC
 	lockall
 	special GetPokeblockFeederInFront
 	compare VAR_RESULT, 65535

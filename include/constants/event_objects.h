@@ -241,12 +241,26 @@
 #define EVENT_OBJ_GFX_LUGIA                      237
 #define EVENT_OBJ_GFX_HOOH                       238
 #define EVENT_OBJ_GFX_BARD_2                     239
-#define EVENT_OBJ_GFX_HIPSTER                    240
-#define EVENT_OBJ_GFX_TRADER                     241
-#define EVENT_OBJ_GFX_STORYTELLER                242
-#define EVENT_OBJ_GFX_GIDDY                      243
-#define EVENT_OBJ_GFX_PLACEHOLDER_1              244
-#define EVENT_OBJ_GFX_PLACEHOLDER_2              245
+
+// These are dynamic object gfx ids.
+// They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
+// More info about them in include/constants/vars.h
+#define EVENT_OBJ_GFX_VAR_0 240
+#define EVENT_OBJ_GFX_VAR_1 241
+#define EVENT_OBJ_GFX_VAR_2 242
+#define EVENT_OBJ_GFX_VAR_3 243
+#define EVENT_OBJ_GFX_VAR_4 244
+#define EVENT_OBJ_GFX_VAR_5 245
+#define EVENT_OBJ_GFX_VAR_6 246
+#define EVENT_OBJ_GFX_VAR_7 247
+#define EVENT_OBJ_GFX_VAR_8 248
+#define EVENT_OBJ_GFX_VAR_9 249
+#define EVENT_OBJ_GFX_VAR_A 250
+#define EVENT_OBJ_GFX_VAR_B 251
+#define EVENT_OBJ_GFX_VAR_C 252
+#define EVENT_OBJ_GFX_VAR_D 253
+#define EVENT_OBJ_GFX_VAR_E 254
+#define EVENT_OBJ_GFX_VAR_F 255
 
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1

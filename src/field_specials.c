@@ -47,6 +47,7 @@
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
+#include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -115,9 +116,9 @@ static void sub_813A738(u8 taskId);
 static void sub_813A600(u8 taskId);
 static void sub_813A664(u8 taskId);
 static void sub_813ABD4(u16 a0);
-static void task_deoxys_sound(u8 taskId);
-static void sub_813B0B4(u8 a0);
-static void sub_813B160(u8 taskId);
+static void Task_DeoxysRockInteraction(u8 taskId);
+static void ChangeDeoxysRockLevel(u8 a0);
+static void WaitForDeoxysRockMovement(u8 taskId);
 static void sub_813B57C(u8 taskId);
 static void sub_813B824(u8 taskId);
 static void _fwalk(u8 taskId);
@@ -391,11 +392,11 @@ bool32 sub_8138120(void)
     {
         switch (gMapHeader.mapType)
         {
-            case 1:
-            case 2:
-            case 3:
-            case 6:
-                if (++(*GetVarPointer(VAR_0x40F3)) < 0xA)
+            case MAP_TYPE_TOWN:
+            case MAP_TYPE_CITY:
+            case MAP_TYPE_ROUTE:
+            case MAP_TYPE_6:
+                if (++(*GetVarPointer(VAR_0x40F3)) < 10)
                 {
                     return FALSE;
                 }
@@ -3233,12 +3234,12 @@ void sub_813AF48(void)
     }
 }
 
-void sub_813AFC8(void)
+void DoDeoxysRockInteraction(void)
 {
-    CreateTask(task_deoxys_sound, 8);
+    CreateTask(Task_DeoxysRockInteraction, 8);
 }
 
-static const u16 gUnknown_085B3280[][16] = {
+static const u16 sDeoxysRockPalettes[][16] = {
     INCBIN_U16("graphics/misc/deoxys1.gbapal"),
     INCBIN_U16("graphics/misc/deoxys2.gbapal"),
     INCBIN_U16("graphics/misc/deoxys3.gbapal"),
@@ -3252,25 +3253,25 @@ static const u16 gUnknown_085B3280[][16] = {
     INCBIN_U16("graphics/misc/deoxys11.gbapal"),
 };
 
-static const u8 gUnknown_085B33E0[][2] = {
-    { 0x0f, 0x0c },
-    { 0x0b, 0x0e },
-    { 0x0f, 0x08 },
-    { 0x13, 0x0e },
-    { 0x0c, 0x0b },
-    { 0x12, 0x0b },
-    { 0x0f, 0x0e },
-    { 0x0b, 0x0e },
-    { 0x13, 0x0e },
-    { 0x0f, 0x0f },
-    { 0x0f, 0x0a },
+static const u8 sDeoxysRockCoords[][2] = {
+    { 15, 12 },
+    { 11, 14 },
+    { 15,  8 },
+    { 19, 14 },
+    { 12, 11 },
+    { 18, 11 },
+    { 15, 14 },
+    { 11, 14 },
+    { 19, 14 },
+    { 15, 15 },
+    { 15, 10 },
 };
 
-static void task_deoxys_sound(u8 taskId)
+static void Task_DeoxysRockInteraction(u8 taskId)
 {
-    static const u8 gUnknown_085B33F6[] = { 0x04, 0x08, 0x08, 0x08, 0x04, 0x04, 0x04, 0x06, 0x03, 0x03 };
+    static const u8 sStoneMaxStepCounts[] = { 4, 8, 8, 8, 4, 4, 4, 6, 3, 3 };
 
-    if (FlagGet(FLAG_0x8D4) == TRUE)
+    if (FlagGet(FLAG_DEOXYS_ROCK_COMPLETE) == TRUE)
     {
         gSpecialVar_Result = 3;
         EnableBothScriptContexts();
@@ -3278,100 +3279,92 @@ static void task_deoxys_sound(u8 taskId)
     }
     else
     {
-        u16 temp1 = VarGet(VAR_0x4035);
-        u16 temp2 = VarGet(VAR_0x4034);
+        u16 rockLevel = VarGet(VAR_DEOXYS_ROCK_LEVEL);
+        u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
 
-        VarSet(VAR_0x4034, 0);
-        if (temp1 != 0 && gUnknown_085B33F6[temp1 - 1] < temp2)
+        VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
+        if (rockLevel != 0 && sStoneMaxStepCounts[rockLevel - 1] < stepCount)
         {
-            sub_813B0B4(0);
-            VarSet(VAR_0x4035, 0);
+            // Player failed to take the shortest path to the stone, so it resets.
+            ChangeDeoxysRockLevel(0);
+            VarSet(VAR_DEOXYS_ROCK_LEVEL, 0);
             gSpecialVar_Result = 0;
             DestroyTask(taskId);
         }
-        else if (temp1 == 10)
+        else if (rockLevel == 10)
         {
-            FlagSet(FLAG_0x8D4);
+            FlagSet(FLAG_DEOXYS_ROCK_COMPLETE);
             gSpecialVar_Result = 2;
             EnableBothScriptContexts();
             DestroyTask(taskId);
         }
         else
         {
-            temp1++;
-            sub_813B0B4(temp1);
-            VarSet(VAR_0x4035, temp1);
+            rockLevel++;
+            ChangeDeoxysRockLevel(rockLevel);
+            VarSet(VAR_DEOXYS_ROCK_LEVEL, rockLevel);
             gSpecialVar_Result = 1;
             DestroyTask(taskId);
         }
     }
 }
 
-static void sub_813B0B4(u8 a0)
+static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 eventObjectId;
-    LoadPalette(&gUnknown_085B3280[a0], 0x1A0, 8);
+    LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
     TryGetEventObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &eventObjectId);
 
-    if (a0 == 0)
-    {
+    if (rockLevel == 0)
         PlaySE(SE_W109);
-    }
     else
-    {
         PlaySE(SE_RG_DEOMOV);
-    }
 
-    CreateTask(sub_813B160, 8);
-
+    CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = 1;
     gFieldEffectArguments[1] = 58;
     gFieldEffectArguments[2] = 26;
-    gFieldEffectArguments[3] = gUnknown_085B33E0[a0][0];
-    gFieldEffectArguments[4] = gUnknown_085B33E0[a0][1];
+    gFieldEffectArguments[3] = sDeoxysRockCoords[rockLevel][0];
+    gFieldEffectArguments[4] = sDeoxysRockCoords[rockLevel][1];
 
-    if (a0 == 0)
-    {
+    if (rockLevel == 0)
         gFieldEffectArguments[5] = 60;
-    }
     else
-    {
         gFieldEffectArguments[5] = 5;
-    }
 
-    FieldEffectStart(FLDEFF_66);
-    Overworld_SetEventObjTemplateCoords(1, gUnknown_085B33E0[a0][0], gUnknown_085B33E0[a0][1]);
+    FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
+    Overworld_SetEventObjTemplateCoords(1, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
 }
 
-static void sub_813B160(u8 taskId)
+static void WaitForDeoxysRockMovement(u8 taskId)
 {
-    if (FieldEffectActiveListContains(FLDEFF_66) == FALSE)
+    if (FieldEffectActiveListContains(FLDEFF_MOVE_DEOXYS_ROCK) == FALSE)
     {
         EnableBothScriptContexts();
         DestroyTask(taskId);
     }
 }
 
-void increment_var_x4026_on_birth_island_modulo_100(void)
+void IncrementBirthIslandRockStepCount(void)
 {
-    u16 var = VarGet(VAR_0x4034);
+    u16 var = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
     if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR))
     {
         var++;
         if (var > 99)
         {
-            VarSet(VAR_0x4034, 0);
+            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
         }
         else
         {
-            VarSet(VAR_0x4034, var);
+            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, var);
         }
     }
 }
 
 void sub_813B1D0(void)
 {
-    LoadPalette(&gUnknown_085B3280[(u8)VarGet(VAR_0x4035)], 0x1A0, 8);
+    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
     BlendPalettes(0x04000000, 16, 0);
 }
 

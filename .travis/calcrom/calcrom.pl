@@ -7,6 +7,7 @@ open(my $file, $ARGV[0])
 
 my $src = 0;
 my $asm = 0;
+my $undocumented = 0;
 while (my $line = <$file>)
 {
     if ($line =~ /^ \.(\w+)\s+0x[0-9a-f]+\s+(0x[0-9a-f]+) (\w+)\/.+\.o/)
@@ -27,6 +28,13 @@ while (my $line = <$file>)
             }
         }
     }
+    if($line =~ /^\s+0x([0-9A-f]+)\s+[A-z_]+([0-9A-f]+)/) {
+        my $thing1 = sprintf("%08X", hex($1));
+        my $thing2 = sprintf("%08X", hex($2));
+        if($thing1 eq $thing2) {
+            $undocumented += 1;
+        }
+    }
 }
 
 my $total = $src + $asm;
@@ -35,3 +43,4 @@ my $asmPct = sprintf("%.4f", 100 * $asm / $total);
 print "$total total bytes of code\n";
 print "$src bytes of code in src ($srcPct%)\n";
 print "$asm bytes of code in asm ($asmPct%)\n";
+print "$undocumented global symbols undocumented\n";
