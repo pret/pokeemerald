@@ -1,8 +1,8 @@
 PetalburgCity_Gym_MapScripts:: @ 8204889
-	map_script 1, PetalburgCity_Gym_MapScript1_20489E
-	map_script 3, PetalburgCity_Gym_MapScript1_20492D
-	map_script 4, PetalburgCity_Gym_MapScript2_20498B
-	map_script 2, PetalburgCity_Gym_MapScript2_20499A
+	map_script MAP_SCRIPT_SET_METATILES, PetalburgCity_Gym_MapScript1_20489E
+	map_script MAP_SCRIPT_SET_DATA, PetalburgCity_Gym_MapScript1_20492D
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, PetalburgCity_Gym_MapScript2_20498B
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, PetalburgCity_Gym_MapScript2_20499A
 	.byte 0
 
 PetalburgCity_Gym_MapScript1_20489E: @ 820489E

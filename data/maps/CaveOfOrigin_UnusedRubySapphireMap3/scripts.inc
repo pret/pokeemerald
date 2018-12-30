@@ -1,5 +1,5 @@
 CaveOfOrigin_UnusedRubySapphireMap3_MapScripts:: @ 8235798
-	map_script 3, CaveOfOrigin_UnusedRubySapphireMap3_MapScript1_23579E
+	map_script MAP_SCRIPT_SET_DATA, CaveOfOrigin_UnusedRubySapphireMap3_MapScript1_23579E
 	.byte 0
 
 CaveOfOrigin_UnusedRubySapphireMap3_MapScript1_23579E: @ 823579E

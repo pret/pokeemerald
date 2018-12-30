@@ -1,8 +1,8 @@
 FortreeCity_PokemonCenter_2F_MapScripts:: @ 821763E
-	map_script 2, FortreeCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, FortreeCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, FortreeCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, FortreeCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, FortreeCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, FortreeCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_SET_METATILES, FortreeCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_SET_DATA, FortreeCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 FortreeCity_PokemonCenter_2F_EventScript_217653:: @ 8217653

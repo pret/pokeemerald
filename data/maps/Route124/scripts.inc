@@ -1,5 +1,5 @@
 Route124_MapScripts:: @ 81F656C
-	map_script 3, Route124_MapScript1_1F6572
+	map_script MAP_SCRIPT_SET_DATA, Route124_MapScript1_1F6572
 	.byte 0
 
 Route124_MapScript1_1F6572: @ 81F6572

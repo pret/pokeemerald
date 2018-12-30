@@ -1,8 +1,8 @@
 BattleFrontier_BattlePyramidTop_MapScripts:: @ 82550A1
-	map_script 5, BattleFrontier_BattlePyramidTop_MapScript1_2550F4
-	map_script 2, BattleFrontier_BattlePyramidTop_MapScript2_25516E
-	map_script 3, BattleFrontier_BattlePyramidTop_MapScript1_2550B6
-	map_script 4, BattleFrontier_BattlePyramidTop_MapScript2_2550CE
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, BattleFrontier_BattlePyramidTop_MapScript1_2550F4
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, BattleFrontier_BattlePyramidTop_MapScript2_25516E
+	map_script MAP_SCRIPT_SET_DATA, BattleFrontier_BattlePyramidTop_MapScript1_2550B6
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattlePyramidTop_MapScript2_2550CE
 	.byte 0
 
 BattleFrontier_BattlePyramidTop_MapScript1_2550B6: @ 82550B6

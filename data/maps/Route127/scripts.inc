@@ -1,7 +1,7 @@
 Route127_MapScripts:: @ 81F69D9
-	map_script 3, Route127_MapScript1_1F69E9
-	map_script 1, Route127_MapScript1_1F6A14
-	map_script 2, Route127_MapScript2_1F6A2B
+	map_script MAP_SCRIPT_SET_DATA, Route127_MapScript1_1F69E9
+	map_script MAP_SCRIPT_SET_METATILES, Route127_MapScript1_1F6A14
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route127_MapScript2_1F6A2B
 	.byte 0
 
 Route127_MapScript1_1F69E9: @ 81F69E9

@@ -1,7 +1,7 @@
 BattleFrontier_BattlePalaceBattleRoom_MapScripts:: @ 824F815
-	map_script 3, BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825
-	map_script 2, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861
-	map_script 4, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24FE34
+	map_script MAP_SCRIPT_SET_DATA, BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24F861
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattlePalaceBattleRoom_MapScript2_24FE34
 	.byte 0
 
 BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825: @ 824F825

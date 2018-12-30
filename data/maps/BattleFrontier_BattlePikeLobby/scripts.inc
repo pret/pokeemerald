@@ -1,6 +1,6 @@
 BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
-	map_script 2, BattleFrontier_BattlePikeLobby_MapScript2_25B6D1
-	map_script 4, BattleFrontier_BattlePikeLobby_MapScript2_25B6F3
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, BattleFrontier_BattlePikeLobby_MapScript2_25B6D1
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattlePikeLobby_MapScript2_25B6F3
 	.byte 0
 
 BattleFrontier_BattlePikeLobby_MapScript2_25B6D1: @ 825B6D1

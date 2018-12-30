@@ -1,7 +1,7 @@
 NewMauville_Inside_MapScripts:: @ 82373D7
-	map_script 5, NewMauville_Inside_MapScript1_2373E7
-	map_script 3, NewMauville_Inside_MapScript1_23741B
-	map_script 1, NewMauville_Inside_MapScript1_23744D
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, NewMauville_Inside_MapScript1_2373E7
+	map_script MAP_SCRIPT_SET_DATA, NewMauville_Inside_MapScript1_23741B
+	map_script MAP_SCRIPT_SET_METATILES, NewMauville_Inside_MapScript1_23744D
 	.byte 0
 
 NewMauville_Inside_MapScript1_2373E7: @ 82373E7

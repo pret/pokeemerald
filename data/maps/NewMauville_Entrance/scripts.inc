@@ -1,6 +1,6 @@
 NewMauville_Entrance_MapScripts:: @ 82372AD
-	map_script 1, NewMauville_Entrance_MapScript1_2372B8
-	map_script 3, NewMauville_Entrance_MapScript1_2372FB
+	map_script MAP_SCRIPT_SET_METATILES, NewMauville_Entrance_MapScript1_2372B8
+	map_script MAP_SCRIPT_SET_DATA, NewMauville_Entrance_MapScript1_2372FB
 	.byte 0
 
 NewMauville_Entrance_MapScript1_2372B8: @ 82372B8

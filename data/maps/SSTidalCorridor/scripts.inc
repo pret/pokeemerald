@@ -1,5 +1,5 @@
 SSTidalCorridor_MapScripts:: @ 823BFCF
-	map_script 2, SSTidalCorridor_MapScript2_23BFD5
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SSTidalCorridor_MapScript2_23BFD5
 	.byte 0
 
 SSTidalCorridor_MapScript2_23BFD5: @ 823BFD5

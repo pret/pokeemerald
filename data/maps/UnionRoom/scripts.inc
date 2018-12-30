@@ -1,6 +1,6 @@
 UnionRoom_MapScripts:: @ 823D1A6
-	map_script 5, UnionRoom_MapScript1_23D1B1
-	map_script 3, UnionRoom_MapScript1_23D1E5
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, UnionRoom_MapScript1_23D1B1
+	map_script MAP_SCRIPT_SET_DATA, UnionRoom_MapScript1_23D1E5
 	.byte 0
 
 UnionRoom_MapScript1_23D1B1: @ 823D1B1

@@ -1,8 +1,8 @@
 SecretBase_YellowCave4_MapScripts:: @ 823B483
-	map_script 4, SecretBase_RedCave1_MapScript2_23B498
-	map_script 3, SecretBase_RedCave1_MapScript1_23B4A2
-	map_script 2, SecretBase_RedCave1_MapScript2_23B4AE
-	map_script 5, SecretBase_RedCave1_MapScript1_23B4B8
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, SecretBase_RedCave1_MapScript2_23B498
+	map_script MAP_SCRIPT_SET_DATA, SecretBase_RedCave1_MapScript1_23B4A2
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SecretBase_RedCave1_MapScript2_23B4AE
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, SecretBase_RedCave1_MapScript1_23B4B8
 	.byte 0
 
 SecretBase_RedCave1_MapScript2_23B498: @ 823B498

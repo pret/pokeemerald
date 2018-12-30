@@ -1,6 +1,6 @@
 Route112_CableCarStation_MapScripts:: @ 822AABE
-	map_script 3, Route112_CableCarStation_MapScript1_22AAC9
-	map_script 2, Route112_CableCarStation_MapScript2_22AAE9
+	map_script MAP_SCRIPT_SET_DATA, Route112_CableCarStation_MapScript1_22AAC9
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route112_CableCarStation_MapScript2_22AAE9
 	.byte 0
 
 Route112_CableCarStation_MapScript1_22AAC9: @ 822AAC9

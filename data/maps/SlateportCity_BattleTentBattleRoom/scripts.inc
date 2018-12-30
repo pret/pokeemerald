@@ -1,7 +1,7 @@
 SlateportCity_BattleTentBattleRoom_MapScripts:: @ 8209960
-	map_script 3, SlateportCity_BattleTentBattleRoom_MapScript1_209970
-	map_script 4, SlateportCity_BattleTentBattleRoom_MapScript2_20999A
-	map_script 2, SlateportCity_BattleTentBattleRoom_MapScript2_2099B4
+	map_script MAP_SCRIPT_SET_DATA, SlateportCity_BattleTentBattleRoom_MapScript1_209970
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, SlateportCity_BattleTentBattleRoom_MapScript2_20999A
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SlateportCity_BattleTentBattleRoom_MapScript2_2099B4
 	.byte 0
 
 SlateportCity_BattleTentBattleRoom_MapScript1_209970: @ 8209970

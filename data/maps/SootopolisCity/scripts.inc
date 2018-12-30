@@ -1,9 +1,9 @@
 SootopolisCity_MapScripts:: @ 81E565C
-	map_script 1, SootopolisCity_MapScript1_1E5676
-	map_script 3, SootopolisCity_MapScript1_1E56EF
-	map_script 5, SootopolisCity_MapScript1_1E590B
-	map_script 2, SootopolisCity_MapScript2_1E5914
-	map_script 4, SootopolisCity_MapScript2_1E58DB
+	map_script MAP_SCRIPT_SET_METATILES, SootopolisCity_MapScript1_1E5676
+	map_script MAP_SCRIPT_SET_DATA, SootopolisCity_MapScript1_1E56EF
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, SootopolisCity_MapScript1_1E590B
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SootopolisCity_MapScript2_1E5914
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, SootopolisCity_MapScript2_1E58DB
 	.byte 0
 
 SootopolisCity_MapScript1_1E5676: @ 81E5676

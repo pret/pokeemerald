@@ -1,6 +1,6 @@
 ShoalCave_LowTideInnerRoom_MapScripts:: @ 8236EF5
-	map_script 1, ShoalCave_LowTideInnerRoom_MapScript1_236F16
-	map_script 3, ShoalCave_LowTideInnerRoom_MapScript1_236F00
+	map_script MAP_SCRIPT_SET_METATILES, ShoalCave_LowTideInnerRoom_MapScript1_236F16
+	map_script MAP_SCRIPT_SET_DATA, ShoalCave_LowTideInnerRoom_MapScript1_236F00
 	.byte 0
 
 ShoalCave_LowTideInnerRoom_MapScript1_236F00: @ 8236F00

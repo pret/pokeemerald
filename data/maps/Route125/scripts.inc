@@ -1,7 +1,7 @@
 Route125_MapScripts:: @ 81F6748
-	map_script 3, Route125_MapScript1_1F6758
-	map_script 1, Route125_MapScript1_1F6783
-	map_script 2, Route125_MapScript2_1F679A
+	map_script MAP_SCRIPT_SET_DATA, Route125_MapScript1_1F6758
+	map_script MAP_SCRIPT_SET_METATILES, Route125_MapScript1_1F6783
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route125_MapScript2_1F679A
 	.byte 0
 
 Route125_MapScript1_1F6758: @ 81F6758

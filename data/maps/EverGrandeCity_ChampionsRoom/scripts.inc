@@ -1,7 +1,7 @@
 EverGrandeCity_ChampionsRoom_MapScripts:: @ 82289EF
-	map_script 3, EverGrandeCity_ChampionsRoom_MapScript1_2289FF
-	map_script 4, EverGrandeCity_ChampionsRoom_MapScript2_228A05
-	map_script 2, EverGrandeCity_ChampionsRoom_MapScript2_228A14
+	map_script MAP_SCRIPT_SET_DATA, EverGrandeCity_ChampionsRoom_MapScript1_2289FF
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, EverGrandeCity_ChampionsRoom_MapScript2_228A05
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, EverGrandeCity_ChampionsRoom_MapScript2_228A14
 	.byte 0
 
 EverGrandeCity_ChampionsRoom_MapScript1_2289FF: @ 82289FF

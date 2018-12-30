@@ -1,7 +1,7 @@
 RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
-	map_script 3, RustboroCity_DevonCorp_3F_MapScript1_21243D
-	map_script 4, RustboroCity_DevonCorp_3F_MapScript2_212455
-	map_script 2, RustboroCity_DevonCorp_3F_MapScript2_212464
+	map_script MAP_SCRIPT_SET_DATA, RustboroCity_DevonCorp_3F_MapScript1_21243D
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, RustboroCity_DevonCorp_3F_MapScript2_212455
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, RustboroCity_DevonCorp_3F_MapScript2_212464
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D

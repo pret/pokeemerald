@@ -1,5 +1,5 @@
 VerdanturfTown_BattleTentCorridor_MapScripts:: @ 820208A
-	map_script 2, VerdanturfTown_BattleTentCorridor_MapScript2_202090
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, VerdanturfTown_BattleTentCorridor_MapScript2_202090
 	.byte 0
 
 VerdanturfTown_BattleTentCorridor_MapScript2_202090: @ 8202090

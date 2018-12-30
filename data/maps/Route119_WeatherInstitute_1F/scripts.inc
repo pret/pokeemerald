@@ -1,5 +1,5 @@
 Route119_WeatherInstitute_1F_MapScripts:: @ 826FA86
-	map_script 3, Route119_WeatherInstitute_1F_MapScript1_26FA8C
+	map_script MAP_SCRIPT_SET_DATA, Route119_WeatherInstitute_1F_MapScript1_26FA8C
 	.byte 0
 
 Route119_WeatherInstitute_1F_MapScript1_26FA8C: @ 826FA8C

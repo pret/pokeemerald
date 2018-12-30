@@ -1,5 +1,5 @@
 SouthernIsland_Exterior_MapScripts:: @ 82429C8
-	map_script 3, SouthernIsland_Exterior_MapScript1_2429CE
+	map_script MAP_SCRIPT_SET_DATA, SouthernIsland_Exterior_MapScript1_2429CE
 	.byte 0
 
 SouthernIsland_Exterior_MapScript1_2429CE: @ 82429CE

@@ -1,7 +1,7 @@
 AncientTomb_MapScripts:: @ 8238FB3
-	map_script 5, AncientTomb_MapScript1_238FC3
-	map_script 1, AncientTomb_MapScript1_238FF2
-	map_script 3, AncientTomb_MapScript1_238FE1
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, AncientTomb_MapScript1_238FC3
+	map_script MAP_SCRIPT_SET_METATILES, AncientTomb_MapScript1_238FF2
+	map_script MAP_SCRIPT_SET_DATA, AncientTomb_MapScript1_238FE1
 	.byte 0
 
 AncientTomb_MapScript1_238FC3: @ 8238FC3

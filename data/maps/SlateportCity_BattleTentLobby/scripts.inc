@@ -1,6 +1,6 @@
 SlateportCity_BattleTentLobby_MapScripts:: @ 8208730
-	map_script 2, SlateportCity_BattleTentLobby_MapScript2_20874F
-	map_script 4, SlateportCity_BattleTentLobby_MapScript2_20873B
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SlateportCity_BattleTentLobby_MapScript2_20874F
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, SlateportCity_BattleTentLobby_MapScript2_20873B
 	.byte 0
 
 SlateportCity_BattleTentLobby_MapScript2_20873B: @ 820873B

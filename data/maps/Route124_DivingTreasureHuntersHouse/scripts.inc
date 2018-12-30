@@ -1,5 +1,5 @@
 Route124_DivingTreasureHuntersHouse_MapScripts:: @ 8270A28
-	map_script 3, Route124_DivingTreasureHuntersHouse_MapScript1_270A2E
+	map_script MAP_SCRIPT_SET_DATA, Route124_DivingTreasureHuntersHouse_MapScript1_270A2E
 	.byte 0
 
 Route124_DivingTreasureHuntersHouse_MapScript1_270A2E: @ 8270A2E

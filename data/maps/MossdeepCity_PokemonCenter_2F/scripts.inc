@@ -1,8 +1,8 @@
 MossdeepCity_PokemonCenter_2F_MapScripts:: @ 8222334
-	map_script 2, MossdeepCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, MossdeepCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, MossdeepCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, MossdeepCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, MossdeepCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, MossdeepCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_SET_METATILES, MossdeepCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_SET_DATA, MossdeepCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 MossdeepCity_PokemonCenter_2F_EventScript_222349:: @ 8222349

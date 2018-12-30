@@ -1,7 +1,7 @@
 LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
-	map_script 3, LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1
-	map_script 4, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06
-	map_script 2, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9DB9
+	map_script MAP_SCRIPT_SET_DATA, LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9DB9
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1

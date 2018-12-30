@@ -1,5 +1,5 @@
 Route114_LanettesHouse_MapScripts:: @ 822B2C8
-	map_script 3, Route114_LanettesHouse_MapScript1_22B2CE
+	map_script MAP_SCRIPT_SET_DATA, Route114_LanettesHouse_MapScript1_22B2CE
 	.byte 0
 
 Route114_LanettesHouse_MapScript1_22B2CE: @ 822B2CE

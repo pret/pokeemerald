@@ -1,8 +1,8 @@
 LilycoveCity_PokemonCenter_2F_MapScripts:: @ 821C75D
-	map_script 2, LilycoveCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, LilycoveCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, LilycoveCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, LilycoveCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, LilycoveCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, LilycoveCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_SET_METATILES, LilycoveCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_SET_DATA, LilycoveCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 LilycoveCity_PokemonCenter_2F_EventScript_21C772:: @ 821C772

@@ -1,7 +1,7 @@
 VerdanturfTown_BattleTentBattleRoom_MapScripts:: @ 82022FA
-	map_script 3, VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A
-	map_script 2, VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E
-	map_script 4, VerdanturfTown_BattleTentBattleRoom_MapScript2_202541
+	map_script MAP_SCRIPT_SET_DATA, VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, VerdanturfTown_BattleTentBattleRoom_MapScript2_202541
 	.byte 0
 
 VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A: @ 820230A

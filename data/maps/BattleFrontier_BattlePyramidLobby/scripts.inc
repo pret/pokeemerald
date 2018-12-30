@@ -1,6 +1,6 @@
 BattleFrontier_BattlePyramidLobby_MapScripts:: @ 8250716
-	map_script 2, BattleFrontier_BattlePyramidLobby_MapScript2_250735
-	map_script 4, BattleFrontier_BattlePyramidLobby_MapScript2_2497FB
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, BattleFrontier_BattlePyramidLobby_MapScript2_250735
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattlePyramidLobby_MapScript2_2497FB
 	.byte 0
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721

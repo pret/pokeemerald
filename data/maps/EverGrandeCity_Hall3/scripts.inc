@@ -1,5 +1,5 @@
 EverGrandeCity_Hall3_MapScripts:: @ 8229593
-	map_script 4, EverGrandeCity_Hall3_MapScript2_229599
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, EverGrandeCity_Hall3_MapScript2_229599
 	.byte 0
 
 EverGrandeCity_Hall3_MapScript2_229599: @ 8229599

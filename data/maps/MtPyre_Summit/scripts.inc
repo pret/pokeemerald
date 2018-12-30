@@ -1,5 +1,5 @@
 MtPyre_Summit_MapScripts:: @ 8231FF7
-	map_script 3, MtPyre_Summit_MapScript1_231FFD
+	map_script MAP_SCRIPT_SET_DATA, MtPyre_Summit_MapScript1_231FFD
 	.byte 0
 
 MtPyre_Summit_MapScript1_231FFD: @ 8231FFD

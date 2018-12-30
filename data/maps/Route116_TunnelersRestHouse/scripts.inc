@@ -1,5 +1,5 @@
 Route116_TunnelersRestHouse_MapScripts:: @ 822B850
-	map_script 3, Route116_TunnelersRestHouse_MapScript1_22B856
+	map_script MAP_SCRIPT_SET_DATA, Route116_TunnelersRestHouse_MapScript1_22B856
 	.byte 0
 
 Route116_TunnelersRestHouse_MapScript1_22B856: @ 822B856

@@ -1,7 +1,7 @@
 Underwater_SeafloorCavern_MapScripts:: @ 823433B
-	map_script 5, Underwater_SeafloorCavern_MapScript1_2343D3
-	map_script 3, Underwater_SeafloorCavern_MapScript1_23434B
-	map_script 1, Underwater_SeafloorCavern_MapScript1_23435C
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, Underwater_SeafloorCavern_MapScript1_2343D3
+	map_script MAP_SCRIPT_SET_DATA, Underwater_SeafloorCavern_MapScript1_23434B
+	map_script MAP_SCRIPT_SET_METATILES, Underwater_SeafloorCavern_MapScript1_23435C
 	.byte 0
 
 Underwater_SeafloorCavern_MapScript1_23434B: @ 823434B

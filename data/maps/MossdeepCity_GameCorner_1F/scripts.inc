@@ -1,7 +1,7 @@
 MossdeepCity_GameCorner_1F_MapScripts:: @ 8224B27
-	map_script 2, MossdeepCity_GameCorner_1F_MapScript2_224B41
-	map_script 4, MossdeepCity_GameCorner_1F_MapScript2_224B37
-	map_script 1, MossdeepCity_GameCorner_1F_MapScript1_276BBE
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, MossdeepCity_GameCorner_1F_MapScript2_224B41
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, MossdeepCity_GameCorner_1F_MapScript2_224B37
+	map_script MAP_SCRIPT_SET_METATILES, MossdeepCity_GameCorner_1F_MapScript1_276BBE
 	.byte 0
 
 MossdeepCity_GameCorner_1F_MapScript2_224B37: @ 8224B37

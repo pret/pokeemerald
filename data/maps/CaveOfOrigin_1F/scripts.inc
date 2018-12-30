@@ -1,5 +1,5 @@
 CaveOfOrigin_1F_MapScripts:: @ 8235768
-	map_script 3, CaveOfOrigin_1F_MapScript1_23576E
+	map_script MAP_SCRIPT_SET_DATA, CaveOfOrigin_1F_MapScript1_23576E
 	.byte 0
 
 CaveOfOrigin_1F_MapScript1_23576E: @ 823576E

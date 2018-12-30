@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStore_5F_MapScripts:: @ 821FF7A
-	map_script 4, LilycoveCity_DepartmentStore_5F_MapScript2_21FF80
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, LilycoveCity_DepartmentStore_5F_MapScript2_21FF80
 	.byte 0
 
 LilycoveCity_DepartmentStore_5F_MapScript2_21FF80: @ 821FF80

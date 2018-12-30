@@ -1,5 +1,5 @@
 FarawayIsland_Entrance_MapScripts:: @ 8267C8E
-	map_script 3, FarawayIsland_Entrance_MapScript1_267C94
+	map_script MAP_SCRIPT_SET_DATA, FarawayIsland_Entrance_MapScript1_267C94
 	.byte 0
 
 FarawayIsland_Entrance_MapScript1_267C94: @ 8267C94

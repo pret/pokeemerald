@@ -1,9 +1,9 @@
 UnknownMap_25_34_MapScripts:: @ 823B781
-	map_script 4, LinkContestRoom1_MapScript2_23B81F
-	map_script 2, LinkContestRoom1_MapScript2_23B815
-	map_script 3, LinkContestRoom1_MapScript1_23B79F
-	map_script 5, LinkContestRoom1_MapScript1_23B803
-	map_script 7, LinkContestRoom1_MapScript1_23B79B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, LinkContestRoom1_MapScript2_23B81F
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, LinkContestRoom1_MapScript2_23B815
+	map_script MAP_SCRIPT_SET_DATA, LinkContestRoom1_MapScript1_23B79F
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, LinkContestRoom1_MapScript1_23B803
+	map_script MAP_SCRIPT_TYPE_7, LinkContestRoom1_MapScript1_23B79B
 	.byte 0
 
 LinkContestRoom1_MapScript1_23B79B: @ 823B79B

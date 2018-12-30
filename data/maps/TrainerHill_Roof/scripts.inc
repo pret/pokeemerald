@@ -1,6 +1,6 @@
 TrainerHill_Roof_MapScripts:: @ 8268FA7
-	map_script 5, TrainerHill_Roof_MapScript1_2C8336
-	map_script 2, TrainerHill_Roof_MapScript2_2C8381
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, TrainerHill_Roof_MapScript1_2C8336
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, TrainerHill_Roof_MapScript2_2C8381
 	.byte 0
 
 TrainerHill_Roof_EventScript_268FB2:: @ 8268FB2

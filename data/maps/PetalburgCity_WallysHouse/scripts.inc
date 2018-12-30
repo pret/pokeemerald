@@ -1,6 +1,6 @@
 PetalburgCity_WallysHouse_MapScripts:: @ 8204229
-	map_script 2, PetalburgCity_WallysHouse_MapScript2_204247
-	map_script 4, PetalburgCity_WallysHouse_MapScript2_204234
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, PetalburgCity_WallysHouse_MapScript2_204247
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, PetalburgCity_WallysHouse_MapScript2_204234
 	.byte 0
 
 PetalburgCity_WallysHouse_MapScript2_204234: @ 8204234

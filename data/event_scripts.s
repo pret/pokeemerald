@@ -7,6 +7,7 @@
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/maps.h"
+#include "constants/map_types.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -62,8 +63,8 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_10
 
 gStdScripts_End:: @ 81DC2CC
-	map_script 3, PetalburgCity_MapScript1_1DC2D7
-	map_script 2, PetalburgCity_MapScript2_1DC31C
+	map_script MAP_SCRIPT_SET_DATA, PetalburgCity_MapScript1_1DC2D7
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, PetalburgCity_MapScript2_1DC31C
 	.byte 0
 
 	.include "data/maps/PetalburgCity/scripts.inc"
@@ -8929,8 +8930,8 @@ gBattleDomeMatchNumber15::
 	.string "Final Match$"
 
 BattleFrontier_BattlePikeRandomRoom1_MapScripts_2C3E1B: @ 82C3E1B
-	map_script 3, BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25
-	map_script 4, BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE
+	map_script MAP_SCRIPT_SET_DATA, BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE
 
 BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25: @ 82C3E25
 	setvar VAR_0x8004, 4

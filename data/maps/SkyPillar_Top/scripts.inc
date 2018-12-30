@@ -1,7 +1,7 @@
 SkyPillar_Top_MapScripts:: @ 82396B8
-	map_script 5, SkyPillar_Top_MapScript1_2396C8
-	map_script 3, SkyPillar_Top_MapScript1_2396E6
-	map_script 4, SkyPillar_Top_MapScript2_239713
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, SkyPillar_Top_MapScript1_2396C8
+	map_script MAP_SCRIPT_SET_DATA, SkyPillar_Top_MapScript1_2396E6
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, SkyPillar_Top_MapScript2_239713
 	.byte 0
 
 SkyPillar_Top_MapScript1_2396C8: @ 82396C8

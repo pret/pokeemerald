@@ -1,8 +1,8 @@
 PacifidlogTown_PokemonCenter_2F_MapScripts:: @ 8203635
-	map_script 2, PacifidlogTown_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, PacifidlogTown_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, PacifidlogTown_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, PacifidlogTown_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, PacifidlogTown_PokemonCenter_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, PacifidlogTown_PokemonCenter_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_SET_METATILES, PacifidlogTown_PokemonCenter_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_SET_DATA, PacifidlogTown_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 PacifidlogTown_PokemonCenter_2F_EventScript_20364A:: @ 820364A

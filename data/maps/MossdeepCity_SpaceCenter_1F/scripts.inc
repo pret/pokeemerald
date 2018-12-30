@@ -1,6 +1,6 @@
 MossdeepCity_SpaceCenter_1F_MapScripts:: @ 8222F41
-	map_script 1, MossdeepCity_SpaceCenter_1F_MapScript1_222FC2
-	map_script 3, MossdeepCity_SpaceCenter_1F_MapScript1_222F4C
+	map_script MAP_SCRIPT_SET_METATILES, MossdeepCity_SpaceCenter_1F_MapScript1_222FC2
+	map_script MAP_SCRIPT_SET_DATA, MossdeepCity_SpaceCenter_1F_MapScript1_222F4C
 	.byte 0
 
 MossdeepCity_SpaceCenter_1F_MapScript1_222F4C: @ 8222F4C

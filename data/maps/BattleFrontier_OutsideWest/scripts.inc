@@ -1,5 +1,5 @@
 BattleFrontier_OutsideWest_MapScripts:: @ 823D3E1
-	map_script 3, BattleFrontier_OutsideWest_MapScript1_23D3E7
+	map_script MAP_SCRIPT_SET_DATA, BattleFrontier_OutsideWest_MapScript1_23D3E7
 	.byte 0
 
 BattleFrontier_OutsideWest_MapScript1_23D3E7: @ 823D3E7

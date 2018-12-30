@@ -1,7 +1,7 @@
 Route110_TrickHouseEntrance_MapScripts:: @ 8269A50
-	map_script 3, Route110_TrickHouseEntrance_MapScript1_269A60
-	map_script 2, Route110_TrickHouseEntrance_MapScript2_269CEE
-	map_script 4, Route110_TrickHouseEntrance_MapScript2_269BD3
+	map_script MAP_SCRIPT_SET_DATA, Route110_TrickHouseEntrance_MapScript1_269A60
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route110_TrickHouseEntrance_MapScript2_269CEE
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, Route110_TrickHouseEntrance_MapScript2_269BD3
 	.byte 0
 
 Route110_TrickHouseEntrance_MapScript1_269A60: @ 8269A60

@@ -1,8 +1,8 @@
 SootopolisCity_PokemonCenter_2F_MapScripts:: @ 822676D
-	map_script 2, SootopolisCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, SootopolisCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, SootopolisCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, SootopolisCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SootopolisCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, SootopolisCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_SET_METATILES, SootopolisCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_SET_DATA, SootopolisCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 SootopolisCity_PokemonCenter_2F_EventScript_226782:: @ 8226782

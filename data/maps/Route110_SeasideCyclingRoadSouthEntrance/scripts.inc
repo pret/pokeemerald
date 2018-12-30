@@ -1,5 +1,5 @@
 Route110_SeasideCyclingRoadSouthEntrance_MapScripts:: @ 826EBA1
-	map_script 3, Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7
+	map_script MAP_SCRIPT_SET_DATA, Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7
 	.byte 0
 
 Route110_SeasideCyclingRoadSouthEntrance_MapScript1_26EBA7: @ 826EBA7

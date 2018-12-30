@@ -1,5 +1,5 @@
 ShoalCave_LowTideLowerRoom_MapScripts:: @ 8237156
-	map_script 1, ShoalCave_LowTideLowerRoom_MapScript1_23715C
+	map_script MAP_SCRIPT_SET_METATILES, ShoalCave_LowTideLowerRoom_MapScript1_23715C
 	.byte 0
 
 ShoalCave_LowTideLowerRoom_MapScript1_23715C: @ 823715C

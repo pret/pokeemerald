@@ -1,6 +1,6 @@
 EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
-	map_script 3, EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD
-	map_script 5, EverGrandeCity_PokemonLeague_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_SET_DATA, EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, EverGrandeCity_PokemonLeague_1F_MapScript1_277C30
 	.byte 0
 
 EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD: @ 82295DD

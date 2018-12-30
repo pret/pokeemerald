@@ -1,5 +1,5 @@
 DesertUnderpass_MapScripts:: @ 823AF37
-	map_script 3, DesertUnderpass_MapScript1_23AF3D
+	map_script MAP_SCRIPT_SET_DATA, DesertUnderpass_MapScript1_23AF3D
 	.byte 0
 
 DesertUnderpass_MapScript1_23AF3D: @ 823AF3D

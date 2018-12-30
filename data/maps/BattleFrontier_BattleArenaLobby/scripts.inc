@@ -1,6 +1,6 @@
 BattleFrontier_BattleArenaLobby_MapScripts:: @ 8255C36
-	map_script 2, BattleFrontier_BattleArenaLobby_MapScript2_255C55
-	map_script 4, BattleFrontier_BattleArenaLobby_MapScript2_255C41
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, BattleFrontier_BattleArenaLobby_MapScript2_255C55
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattleArenaLobby_MapScript2_255C41
 	.byte 0
 
 BattleFrontier_BattleArenaLobby_MapScript2_255C41: @ 8255C41

@@ -1,8 +1,8 @@
 Route110_TrickHouseEnd_MapScripts:: @ 826ACAF
-	map_script 5, Route110_TrickHouseEnd_MapScript1_26ACC4
-	map_script 3, Route110_TrickHouseEnd_MapScript1_26ACD0
-	map_script 2, Route110_TrickHouseEnd_MapScript2_26ACF5
-	map_script 4, Route110_TrickHouseEnd_MapScript2_26ACDE
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, Route110_TrickHouseEnd_MapScript1_26ACC4
+	map_script MAP_SCRIPT_SET_DATA, Route110_TrickHouseEnd_MapScript1_26ACD0
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route110_TrickHouseEnd_MapScript2_26ACF5
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, Route110_TrickHouseEnd_MapScript2_26ACDE
 	.byte 0
 
 Route110_TrickHouseEnd_MapScript1_26ACC4: @ 826ACC4

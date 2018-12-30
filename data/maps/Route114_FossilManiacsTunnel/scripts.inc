@@ -1,6 +1,6 @@
 Route114_FossilManiacsTunnel_MapScripts:: @ 822AF28
-	map_script 3, Route114_FossilManiacsTunnel_MapScript1_22AF33
-	map_script 1, Route114_FossilManiacsTunnel_MapScript1_22AF49
+	map_script MAP_SCRIPT_SET_DATA, Route114_FossilManiacsTunnel_MapScript1_22AF33
+	map_script MAP_SCRIPT_SET_METATILES, Route114_FossilManiacsTunnel_MapScript1_22AF49
 	.byte 0
 
 Route114_FossilManiacsTunnel_MapScript1_22AF33: @ 822AF33

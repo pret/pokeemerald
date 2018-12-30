@@ -1,5 +1,5 @@
 Route130_MapScripts:: @ 81F735F
-	map_script 3, Route130_MapScript1_1F7365
+	map_script MAP_SCRIPT_SET_DATA, Route130_MapScript1_1F7365
 	.byte 0
 
 Route130_MapScript1_1F7365: @ 81F7365

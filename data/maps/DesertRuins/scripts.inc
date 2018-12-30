@@ -1,7 +1,7 @@
 DesertRuins_MapScripts:: @ 822D95B
-	map_script 5, DesertRuins_MapScript1_22D96B
-	map_script 1, DesertRuins_MapScript1_22D989
-	map_script 3, DesertRuins_MapScript1_22D9CA
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, DesertRuins_MapScript1_22D96B
+	map_script MAP_SCRIPT_SET_METATILES, DesertRuins_MapScript1_22D989
+	map_script MAP_SCRIPT_SET_DATA, DesertRuins_MapScript1_22D9CA
 	.byte 0
 
 DesertRuins_MapScript1_22D96B: @ 822D96B

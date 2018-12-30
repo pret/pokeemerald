@@ -1,6 +1,6 @@
 BattleFrontier_BattleTowerBattleRoom_MapScripts:: @ 8241B40
-	map_script 2, BattleFrontier_BattleTowerBattleRoom_MapScript2_241B62
-	map_script 4, BattleFrontier_BattleTowerBattleRoom_MapScript2_241B4B
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, BattleFrontier_BattleTowerBattleRoom_MapScript2_241B62
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, BattleFrontier_BattleTowerBattleRoom_MapScript2_241B4B
 	.byte 0
 
 BattleFrontier_BattleTowerBattleRoom_MapScript2_241B4B: @ 8241B4B

@@ -1,9 +1,9 @@
 TrainerHill_Entrance_MapScripts:: @ 82680AC
-	map_script 5, TrainerHill_Entrance_MapScript1_2680D0
-	map_script 7, TrainerHill_Entrance_MapScript1_26811B
-	map_script 3, TrainerHill_Entrance_MapScript1_2680C6
-	map_script 1, TrainerHill_Entrance_MapScript1_268128
-	map_script 2, TrainerHill_Entrance_MapScript2_26813E
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, TrainerHill_Entrance_MapScript1_2680D0
+	map_script MAP_SCRIPT_TYPE_7, TrainerHill_Entrance_MapScript1_26811B
+	map_script MAP_SCRIPT_SET_DATA, TrainerHill_Entrance_MapScript1_2680C6
+	map_script MAP_SCRIPT_SET_METATILES, TrainerHill_Entrance_MapScript1_268128
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, TrainerHill_Entrance_MapScript2_26813E
 	.byte 0
 
 TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6

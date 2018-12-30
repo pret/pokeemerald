@@ -1,8 +1,8 @@
 Route111_MapScripts:: @ 81F0CA7
-	map_script 1, Route111_MapScript1_1F0CBC
-	map_script 3, Route111_MapScript1_1F0D87
-	map_script 4, Route111_MapScript2_1F0E46
-	map_script 2, Route111_MapScript2_1F0E56
+	map_script MAP_SCRIPT_SET_METATILES, Route111_MapScript1_1F0CBC
+	map_script MAP_SCRIPT_SET_DATA, Route111_MapScript1_1F0D87
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, Route111_MapScript2_1F0E46
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route111_MapScript2_1F0E56
 	.byte 0
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC

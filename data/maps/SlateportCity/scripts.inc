@@ -1,6 +1,6 @@
 SlateportCity_MapScripts:: @ 81DCC61
-	map_script 3, SlateportCity_MapScript1_1DCC6C
-	map_script 2, SlateportCity_MapScript2_1DCD12
+	map_script MAP_SCRIPT_SET_DATA, SlateportCity_MapScript1_1DCC6C
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SlateportCity_MapScript2_1DCD12
 	.byte 0
 
 SlateportCity_MapScript1_1DCC6C: @ 81DCC6C

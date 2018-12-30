@@ -1,8 +1,8 @@
 FarawayIsland_Interior_MapScripts:: @ 8267CFA
-	map_script 5, FarawayIsland_Interior_MapScript1_267D54
-	map_script 3, FarawayIsland_Interior_MapScript1_267D72
-	map_script 2, FarawayIsland_Interior_MapScript2_267D98
-	map_script 7, FarawayIsland_Interior_MapScript1_267D0F
+	map_script MAP_SCRIPT_TRIGGER_SPECIALS, FarawayIsland_Interior_MapScript1_267D54
+	map_script MAP_SCRIPT_SET_DATA, FarawayIsland_Interior_MapScript1_267D72
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, FarawayIsland_Interior_MapScript2_267D98
+	map_script MAP_SCRIPT_TYPE_7, FarawayIsland_Interior_MapScript1_267D0F
 	.byte 0
 
 FarawayIsland_Interior_MapScript1_267D0F: @ 8267D0F

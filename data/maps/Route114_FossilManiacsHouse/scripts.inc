@@ -1,5 +1,5 @@
 Route114_FossilManiacsHouse_MapScripts:: @ 822AD30
-	map_script 3, Route114_FossilManiacsHouse_MapScript1_22AD36
+	map_script MAP_SCRIPT_SET_DATA, Route114_FossilManiacsHouse_MapScript1_22AD36
 	.byte 0
 
 Route114_FossilManiacsHouse_MapScript1_22AD36: @ 822AD36

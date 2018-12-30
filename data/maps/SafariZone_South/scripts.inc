@@ -1,6 +1,6 @@
 SafariZone_South_MapScripts:: @ 823D279
-	map_script 3, SafariZone_South_MapScript1_23D2B1
-	map_script 2, SafariZone_South_MapScript2_23D284
+	map_script MAP_SCRIPT_SET_DATA, SafariZone_South_MapScript1_23D2B1
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, SafariZone_South_MapScript2_23D284
 	.byte 0
 
 SafariZone_South_MapScript2_23D284: @ 823D284

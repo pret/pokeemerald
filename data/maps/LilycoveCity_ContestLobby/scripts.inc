@@ -1,6 +1,6 @@
 LilycoveCity_ContestLobby_MapScripts:: @ 821A211
-	map_script 3, LilycoveCity_ContestLobby_MapScript1_21A21C
-	map_script 2, LilycoveCity_ContestLobby_MapScript2_21A243
+	map_script MAP_SCRIPT_SET_DATA, LilycoveCity_ContestLobby_MapScript1_21A21C
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, LilycoveCity_ContestLobby_MapScript2_21A243
 	.byte 0
 
 LilycoveCity_ContestLobby_MapScript1_21A21C: @ 821A21C

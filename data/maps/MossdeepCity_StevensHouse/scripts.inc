@@ -1,7 +1,7 @@
 MossdeepCity_StevensHouse_MapScripts:: @ 8222784
-	map_script 1, MossdeepCity_StevensHouse_MapScript1_222794
-	map_script 3, MossdeepCity_StevensHouse_MapScript1_2227A8
-	map_script 2, MossdeepCity_StevensHouse_MapScript2_2227C0
+	map_script MAP_SCRIPT_SET_METATILES, MossdeepCity_StevensHouse_MapScript1_222794
+	map_script MAP_SCRIPT_SET_DATA, MossdeepCity_StevensHouse_MapScript1_2227A8
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, MossdeepCity_StevensHouse_MapScript2_2227C0
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_222794: @ 8222794

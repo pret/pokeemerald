@@ -1,8 +1,8 @@
 PetalburgCity_PokemonCenter_2F_MapScripts:: @ 8207D41
-	map_script 2, PetalburgCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, PetalburgCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, PetalburgCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, PetalburgCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, PetalburgCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script MAP_SCRIPT_TRIGGER_MAP_SCRIPTS, PetalburgCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script MAP_SCRIPT_SET_METATILES, PetalburgCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script MAP_SCRIPT_SET_DATA, PetalburgCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 PetalburgCity_PokemonCenter_2F_EventScript_207D56:: @ 8207D56

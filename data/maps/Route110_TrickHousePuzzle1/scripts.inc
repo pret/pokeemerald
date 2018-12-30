@@ -1,5 +1,5 @@
 Route110_TrickHousePuzzle1_MapScripts:: @ 826B90F
-	map_script 1, Route110_TrickHousePuzzle1_MapScript1_26B915
+	map_script MAP_SCRIPT_SET_METATILES, Route110_TrickHousePuzzle1_MapScript1_26B915
 	.byte 0
 
 Route110_TrickHousePuzzle1_MapScript1_26B915: @ 826B915

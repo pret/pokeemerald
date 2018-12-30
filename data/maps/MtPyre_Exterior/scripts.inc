@@ -1,5 +1,5 @@
 MtPyre_Exterior_MapScripts:: @ 8231FCC
-	map_script 3, MtPyre_Exterior_MapScript1_231FD2
+	map_script MAP_SCRIPT_SET_DATA, MtPyre_Exterior_MapScript1_231FD2
 	.byte 0
 
 MtPyre_Exterior_MapScript1_231FD2: @ 8231FD2

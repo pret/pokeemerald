@@ -22,4 +22,23 @@
 #define MAP_BATTLE_SCENE_DRAKE        7
 #define MAP_BATTLE_SCENE_FRONTIER     8
 
+/* Map Script Types
+ * 
+ * MAP_SCRIPT_SET_METATILES - Set metatiles
+ * MAP_SCRIPT_TRIGGER_EVENTS - Trigger scripted events
+ * MAP_SCRIPT_SET_DATA - Set flags, vars, and objects
+ * MAP_SCRIPT_TRIGGER_MAP_SCRIPTS - Trigger other map scripts
+ * MAP_SCRIPT_TRIGGER_SPECIALS - Trigger specials and set step callbacks
+ * MAP_SCRIPT_TYPE_SET_DIVE_WARP - Set dive warp
+ * MAP_SCRIPT_TYPE_7 - Load special sprites and/or palettes?
+*/
+#define MAP_SCRIPT_SET_METATILES 1
+#define MAP_SCRIPT_TRIGGER_EVENTS 2
+#define MAP_SCRIPT_SET_DATA 3
+#define MAP_SCRIPT_TRIGGER_MAP_SCRIPTS 4
+#define MAP_SCRIPT_TRIGGER_SPECIALS 5
+#define MAP_SCRIPT_SET_DIVE_WARP 6
+#define MAP_SCRIPT_TYPE_7 7
+
+
 #endif  // GUARD_CONSTANTS_MAP_TYPES_H

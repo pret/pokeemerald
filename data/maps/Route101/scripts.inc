@@ -1,6 +1,6 @@
 Route101_MapScripts:: @ 81EBCBA
-	map_script 3, Route101_MapScript1_1EBCC5
-	map_script 2, Route101_MapScript2_1EBCCB
+	map_script MAP_SCRIPT_SET_DATA, Route101_MapScript1_1EBCC5
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, Route101_MapScript2_1EBCCB
 	.byte 0
 
 Route101_MapScript1_1EBCC5: @ 81EBCC5

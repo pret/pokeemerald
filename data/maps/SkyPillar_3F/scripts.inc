@@ -1,5 +1,5 @@
 SkyPillar_3F_MapScripts:: @ 823965B
-	map_script 3, SkyPillar_3F_MapScript1_239661
+	map_script MAP_SCRIPT_SET_DATA, SkyPillar_3F_MapScript1_239661
 	.byte 0
 
 SkyPillar_3F_MapScript1_239661: @ 8239661

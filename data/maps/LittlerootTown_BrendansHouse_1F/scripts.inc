@@ -1,7 +1,7 @@
 LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
-	map_script 1, LittlerootTown_BrendansHouse_1F_MapScript1_1F7765
-	map_script 3, LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4
-	map_script 2, LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA
+	map_script MAP_SCRIPT_SET_METATILES, LittlerootTown_BrendansHouse_1F_MapScript1_1F7765
+	map_script MAP_SCRIPT_SET_DATA, LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765

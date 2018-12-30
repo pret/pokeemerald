@@ -1,6 +1,6 @@
 MossdeepCity_SpaceCenter_2F_MapScripts:: @ 8223D58
-	map_script 3, MossdeepCity_SpaceCenter_2F_MapScript1_223D63
-	map_script 2, MossdeepCity_SpaceCenter_2F_MapScript2_223DB5
+	map_script MAP_SCRIPT_SET_DATA, MossdeepCity_SpaceCenter_2F_MapScript1_223D63
+	map_script MAP_SCRIPT_TRIGGER_EVENTS, MossdeepCity_SpaceCenter_2F_MapScript2_223DB5
 	.byte 0
 
 MossdeepCity_SpaceCenter_2F_MapScript1_223D63: @ 8223D63
