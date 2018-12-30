@@ -94,7 +94,7 @@ void sub_80A66DC(struct Sprite *sprite);
 void SetSpriteCoordsToAnimAttackerCoords(struct Sprite *sprite);
 void RunStoredCallbackWhenAnimEnds(struct Sprite *sprite);
 void SetAnimSpriteInitialXOffset(struct Sprite *sprite, s16 a2);
-s16 sub_80A861C(u8 battlerId, u8 a2);
+s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 a2);
 u8 GetBattlerYCoordWithElevation(u8 battlerId);
 void WaitAnimForDuration(struct Sprite *sprite);
 void sub_80A7938(struct Sprite *sprite);
@@ -148,7 +148,7 @@ void sub_80A6BFC(struct UnknownAnimStruct2 *unk, u8 unused);
 u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10);
 void sub_80A749C(struct Sprite *sprite);
 void sub_80A6814(u8 taskId);
-void sub_80A8610(struct Sprite *sprite);
+void DestroySpriteAndFreeResources_(struct Sprite *sprite);
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 
 enum
@@ -158,6 +158,17 @@ enum
     BATTLER_COORD_X_2,
     BATTLER_COORD_Y_PIC_OFFSET,
     BATTLER_COORD_Y_PIC_OFFSET_DEFAULT,
+};
+
+enum
+{
+    BATTLER_COORD_ATTR_HEIGHT,
+    BATTLER_COORD_ATTR_WIDTH,
+    BATTLER_COORD_ATTR_TOP,
+    BATTLER_COORD_ATTR_BOTTOM,
+    BATTLER_COORD_ATTR_LEFT,
+    BATTLER_COORD_ATTR_RIGHT,
+    BATTLER_COORD_ATTR_RAW_BOTTOM,
 };
 
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 attributeId);
