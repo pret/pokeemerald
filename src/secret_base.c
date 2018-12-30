@@ -610,7 +610,7 @@ void sub_80E9608(const struct MapPosition *position, const struct MapEvents *eve
     }
 }
 
-void sub_80E9668(const struct MapPosition *position, const struct MapEvents *events)
+void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEvents *events)
 {
     sub_80E9608(position, events);
     sub_80E8B6C();

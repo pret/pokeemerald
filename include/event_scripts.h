@@ -540,7 +540,7 @@ extern const u8 EventScript_TV[];
 extern const u8 EventScript_ClosedSootopolisDoor[];
 extern const u8 SkyPillar_Outside_EventScript_2393F9[];
 extern const u8 EventScript_CableBoxResults[];
-extern const u8 EventScript_2A4BAC[];
+extern const u8 EventScript_PokeBlockFeeder[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_26A22A[];
 extern const u8 EventScript_RegionMap[];
 extern const u8 EventScript_RunningShoesManual[];

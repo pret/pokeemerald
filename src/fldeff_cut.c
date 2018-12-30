@@ -624,7 +624,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
         ScriptContext1_SetupScript(FarawayIsland_Interior_EventScript_267EDB);
 }
 
-void sub_80D423C(s16 x, s16 y)
+void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
 {
     u8 metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
     if (MetatileBehavior_IsLongGrass_Duplicate(metatileBehavior))
@@ -647,7 +647,7 @@ void sub_80D423C(s16 x, s16 y)
     }
 }
 
-void sub_80D42B8(s16 x, s16 y)
+void FixLongGrassMetatilesWindowBottom(s16 x, s16 y)
 {
     if (MapGridGetMetatileIdAt(x, y) == METATILE_ID_GRASS)
     {

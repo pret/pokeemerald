@@ -30,7 +30,7 @@ else
 ROM := pokeemerald-modern.gba
 OBJ_DIR := build/emerald-modern
 CC1 := $(PREFIX)gcc -S -xc -
-override CFLAGS += -mthumb -mthumb-interwork $(WARNINGS) -O2 -mabi=apcs-gnu
+override CFLAGS += -mthumb-interwork $(WARNINGS) -O2 -mthumb -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t
 CPPFLAGS += -DMODERN=1
 endif
 

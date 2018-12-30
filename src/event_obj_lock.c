@@ -6,6 +6,7 @@
 #include "script_movement.h"
 #include "task.h"
 #include "trainer_see.h"
+#include "constants/event_objects.h"
 
 bool8 walkrun_is_standing_still(void)
 {
@@ -89,20 +90,20 @@ void LockSelectedEventObject(void)
 
 void ScriptUnfreezeEventObjects(void)
 {
-    u8 objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    u8 playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80D338C();
     UnfreezeEventObjects();
 }
 
 void sub_8098524(void)
 {
-    u8 objectId;
+    u8 playerObjectId;
 
     if (gEventObjects[gSelectedEventObject].active)
         EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
-    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80D338C();
     UnfreezeEventObjects();
 }

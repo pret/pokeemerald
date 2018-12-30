@@ -1321,14 +1321,14 @@ sub_81D5FB4: @ 81D5FB4
 	mov r9, r0
 	cmp r0, 0x6
 	bne _081D5FD2
-	bl sub_8087D74
+	bl InitMapFromSavedGame
 	b _081D605E
 _081D5FD2:
 	bl sub_81D56B0
 	mov r0, r9
 	cmp r0, 0x5
 	bne _081D5FE6
-	bl sub_8087D74
+	bl InitMapFromSavedGame
 	bl sub_81D5710
 	b _081D605E
 _081D5FE6:
@@ -1339,7 +1339,7 @@ _081D5FE6:
 	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r1, =gUnknown_03005DC0
+	ldr r1, =gBackupMapLayout
 	str r4, [r1, 0x8]
 	movs r0, 0x1F
 	str r0, [r1]
