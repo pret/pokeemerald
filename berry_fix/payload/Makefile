@@ -1,6 +1,8 @@
-include $(DEVKITARM)/base_tools
-export CPP := $(PREFIX)cpp
-export LD := $(PREFIX)ld
+export CPP := $(CC) -E
+export LD := ../../../tools/binutils/bin/arm-none-eabi-ld
+export AS := ../../tools/binutils/bin/arm-none-eabi-as
+export OBJCOPY := ../../tools/binutils/bin/arm-none-eabi-objcopy
+
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -91,7 +93,7 @@ clean: tidy
 
 tidy:
 	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r build/*
+	rm -r $(OBJ_DIR)/*
 
 %.s: ;
 %.png: ;
@@ -149,10 +151,10 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
 $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
-	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../$< | sed "s#tools/#../tools/#g" > ld_script.ld
+	sed "s#tools/#../tools/#g" $< > $@
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../$@ $(LIB)
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T $(<F) -o ../$@ $(LIB)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@

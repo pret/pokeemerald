@@ -64,7 +64,7 @@ SECTIONS {
 	ewram (NOLOAD) :
 	ALIGN(4)
 	{
-<EWRAM>
+		INCLUDE "sym_ewram.ld";
 	}
 
 	. = 0x3001000;
@@ -72,9 +72,9 @@ SECTIONS {
 	iwram (NOLOAD) :
 	ALIGN(4)
 	{
-<BSS>
-    . = 0x40;
-<COMMON>
+		INCLUDE "sym_bss.ld"
+    	. = 0x40;
+		INCLUDE "sym_common.ld"
 		end = .;
 	}
 

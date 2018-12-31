@@ -1,6 +1,7 @@
-include $(DEVKITARM)/base_tools
-export CPP := $(PREFIX)cpp
-export LD := $(PREFIX)ld
+export CPP := $(CC) -E
+export LD := ../../tools/binutils/bin/arm-none-eabi-ld
+export AS := ../tools/binutils/bin/arm-none-eabi-as
+export OBJCOPY := ../tools/binutils/bin/arm-none-eabi-objcopy
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -142,17 +143,20 @@ payload: data/payload.gba.lz
 payload/payload.gba:
 	$(MAKE) -C payload/
 
-data/payload.gba.lz: payload/payload.gba
+$(OBJ_DIR)/payload.gba.lz: payload/payload.gba
 	$(GFX) $< $@ -search 1
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
-$(ELF): ld_script.txt $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../ld_script.txt -o ../$@
+$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) $(OBJ_DIR)/payload.gba.lz
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T $(<F) -o ../$@
+
+$(OBJ_DIR)/ld_script.ld: ld_script.txt
+	sed "s#tools/#../tools/#g" $< > $@
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
