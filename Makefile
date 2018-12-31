@@ -1,6 +1,7 @@
-include $(DEVKITARM)/base_tools
-export CPP := $(PREFIX)cpp
-export LD := $(PREFIX)ld
+export CPP := $(CC) -E
+export LD := ../../tools/binutils/bin/arm-none-eabi-ld
+export AS := tools/binutils/bin/arm-none-eabi-as
+export OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -26,6 +27,8 @@ OBJ_DIR := build/emerald
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 else
+# Compilation with modern GCC still requires devkitPro's GCC
+include $(DEVKITARM)/base_tools
 ROM := pokeemerald-modern.gba
 OBJ_DIR := build/emerald-modern
 CC1 := $(PREFIX)gcc -S -xc -
@@ -166,7 +169,7 @@ $(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) $(DATA_ASM_SUBDIR)/$*.s)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
 
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
