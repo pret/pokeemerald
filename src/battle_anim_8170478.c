@@ -428,7 +428,7 @@ void unref_sub_8170478(u8 taskId)
     sub_80A6B30(&unknownStruct);
     sub_80A6D48(unknownStruct.bgId, gUnknown_08C2EA9C);
     sub_80A6CC0(unknownStruct.bgId, gUnknown_08C2EA50, unknownStruct.tilesOffset);
-    LoadCompressedPalette(gUnknown_08C2DDA4, unknownStruct.unk8 << 4, 32);
+    LoadCompressedPalette(gCureBubblesPal, unknownStruct.unk8 << 4, 32);
 
     gBattle_BG1_X = -gSprites[spriteId3].pos1.x + 32;
     gBattle_BG1_Y = -gSprites[spriteId3].pos1.y - 32;
