@@ -767,7 +767,8 @@ void sub_81177E4(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette)
+
+void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u8 *gfx, const u8 *tilemap, const u16 *palette)
 {
     u16 species;
     u8 spriteId, spriteId2;
@@ -818,8 +819,8 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
         spriteId2 = sub_80A89C8(battler2, gBattlerSpriteIds[battler2], species);
 
     sub_80A6B30(&unknownStruct);
-    sub_80A6D60(&unknownStruct, arg9, 0);
-    sub_80A6CC0(unknownStruct.bgId, arg8, unknownStruct.tilesOffset);
+    sub_80A6D60(&unknownStruct, tilemap, 0);
+    sub_80A6CC0(unknownStruct.bgId, gfx, unknownStruct.tilesOffset);
     LoadCompressedPalette(palette, unknownStruct.unk8 << 4, 32);
 
     gBattle_BG1_X = 0;

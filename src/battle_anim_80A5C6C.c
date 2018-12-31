@@ -703,7 +703,7 @@ void sub_80A67F4(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_80A6814(u8 taskId)
+void DestroyAnimVisualTaskAndDisableBlend(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
