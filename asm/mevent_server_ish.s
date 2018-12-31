@@ -570,3 +570,4 @@ mevent_srv_ish_exec: @ 801D894
 	thumb_func_end mevent_srv_ish_exec
 
 	.align 2, 0 @ don't pad with nop
+
