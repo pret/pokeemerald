@@ -46,7 +46,7 @@ bool32 IsEnigmaBerryValid(void);
 const struct Berry *GetBerryInfo(u8 berry);
 struct BerryTree *GetBerryTreeInfo(u8 id);
 bool32 EventObjectInteractionWaterBerryTree(void);
-bool8 IsPlayerFacingPlantedBerryTree(void);
+bool8 IsPlayerFacingEmptyBerryTreePatch(void);
 bool8 TryToWaterBerryTree(void);
 void ClearBerryTrees(void);
 void BerryTreeTimeUpdate(s32 minutes);
