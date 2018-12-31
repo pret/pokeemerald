@@ -641,8 +641,8 @@ void sub_810F634(struct Sprite *sprite)
 
 void sub_810F6B0(struct Sprite *sprite)
 {
-    s16 x = sub_80A861C(gBattleAnimAttacker, 1) /  2;
-    s16 y = sub_80A861C(gBattleAnimAttacker, 0) / -2;
+    s16 x = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) /  2;
+    s16 y = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_HEIGHT) / -2;
 
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
         x = -x;
@@ -753,8 +753,8 @@ void sub_810F940(u8 taskId)
     task->data[13] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     task->data[14] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
 
-    var0 = sub_80A861C(gBattleAnimAttacker, 1) / 3;
-    var1 = sub_80A861C(gBattleAnimAttacker, 0) / 3;
+    var0 = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) / 3;
+    var1 = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_HEIGHT) / 3;
     task->data[12] = var0 > var1 ? var0 : var1;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
@@ -865,18 +865,18 @@ void sub_810FBF0(u8 taskId)
         if (gBattleAnimArgs[0] == 1)
         {
             task->data[10] = -10;
-            task->data[11] = sub_80A861C(gBattleAnimTarget, 5) - 8;
-            task->data[12] = sub_80A861C(gBattleAnimTarget, 2) + 8;
-            task->data[13] = sub_80A861C(gBattleAnimAttacker, 5) - 8;
-            task->data[14] = sub_80A861C(gBattleAnimAttacker, 2) + 8;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_TOP) + 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP) + 8;
         }
         else
         {
             task->data[10] = 10;
-            task->data[11] = sub_80A861C(gBattleAnimAttacker, 4) + 8;
-            task->data[12] = sub_80A861C(gBattleAnimAttacker, 3) - 8;
-            task->data[13] = sub_80A861C(gBattleAnimTarget, 4) + 8;
-            task->data[14] = sub_80A861C(gBattleAnimTarget, 3) - 8;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM) - 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_BOTTOM) - 8;
         }
     }
     else
@@ -884,18 +884,18 @@ void sub_810FBF0(u8 taskId)
         if (gBattleAnimArgs[0] == 1)
         {
             task->data[10] = -10;
-            task->data[11] = sub_80A861C(gBattleAnimTarget, 4) + 8;
-            task->data[12] = sub_80A861C(gBattleAnimTarget, 2) + 8;
-            task->data[13] = sub_80A861C(gBattleAnimAttacker, 4) + 8;
-            task->data[14] = sub_80A861C(gBattleAnimAttacker, 2) + 8;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_TOP) + 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP) + 8;
         }
         else
         {
             task->data[10] = 10;
-            task->data[11] = sub_80A861C(gBattleAnimAttacker, 5) - 8;
-            task->data[12] = sub_80A861C(gBattleAnimAttacker, 3) - 8;
-            task->data[13] = sub_80A861C(gBattleAnimTarget, 5) - 8;
-            task->data[14] = sub_80A861C(gBattleAnimTarget, 3) - 8;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM) - 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_BOTTOM) - 8;
         }
     }
 

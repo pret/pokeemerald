@@ -718,7 +718,7 @@ void RecordedBattle_CopyBattlerMoves(void)
     if (sUnknown_0203C7AC == 2)
         return;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         sPlayerMonMoves[gActiveBattler / 2][i] = gBattleMons[gActiveBattler].moves[i];
     }
@@ -739,17 +739,17 @@ void sub_818603C(u8 arg0)
         {
             if (arg0 == 1)
             {
-                for (j = 0; j < 4; j++)
+                for (j = 0; j < MAX_MON_MOVES; j++)
                 {
                     if (gBattleMons[battlerId].moves[j] != sPlayerMonMoves[battlerId / 2][j])
                         break;
                 }
-                if (j != 4) // player's mon's move has been changed
+                if (j != MAX_MON_MOVES) // player's mon's move has been changed
                 {
                     RecordedBattle_SetBattlerAction(battlerId, ACTION_MOVE_CHANGE);
-                    for (j = 0; j < 4; j++)
+                    for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        for (k = 0; k < 4; k++)
+                        for (k = 0; k < MAX_MON_MOVES; k++)
                         {
                             if (gBattleMons[battlerId].moves[j] == sPlayerMonMoves[battlerId / 2][k])
                             {
@@ -772,11 +772,11 @@ void sub_818603C(u8 arg0)
                     u8 var;
 
                     RecordedBattle_GetBattlerAction(battlerId);
-                    for (j = 0; j < 4; j++)
+                    for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         ppBonuses[j] = ((gBattleMons[battlerId].ppBonuses & ((3 << (j << 1)))) >> (j << 1));
                     }
-                    for (j = 0; j < 4; j++)
+                    for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         array1[j] = RecordedBattle_GetBattlerAction(battlerId);
                         movePp.moves[j] = gBattleMons[battlerId].moves[array1[j]];
@@ -784,14 +784,14 @@ void sub_818603C(u8 arg0)
                         array3[j] = ppBonuses[array1[j]];
                         array2[j] = (gDisableStructs[battlerId].unk18_b & gBitTable[j]) >> j;
                     }
-                    for (j = 0; j < 4; j++)
+                    for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         gBattleMons[battlerId].moves[j] = movePp.moves[j];
                         gBattleMons[battlerId].pp[j] = movePp.pp[j];
                     }
                     gBattleMons[battlerId].ppBonuses = 0;
                     gDisableStructs[battlerId].unk18_b = 0;
-                    for (j = 0; j < 4; j++)
+                    for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         gBattleMons[battlerId].ppBonuses |= (array3[j]) << (j << 1);
                         gDisableStructs[battlerId].unk18_b |= (array2[j]) << (j);
@@ -799,23 +799,23 @@ void sub_818603C(u8 arg0)
 
                     if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED))
                     {
-                        for (j = 0; j < 4; j++)
+                        for (j = 0; j < MAX_MON_MOVES; j++)
                         {
                             ppBonuses[j] = ((GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1));
                         }
-                        for (j = 0; j < 4; j++)
+                        for (j = 0; j < MAX_MON_MOVES; j++)
                         {
                             movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + array1[j], NULL);
                             movePp.pp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + array1[j], NULL);
                             array3[j] = ppBonuses[array1[j]];
                         }
-                        for (j = 0; j < 4; j++)
+                        for (j = 0; j < MAX_MON_MOVES; j++)
                         {
                             SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
                             SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + j, &movePp.pp[j]);
                         }
                         var = 0;
-                        for (j = 0; j < 4; j++)
+                        for (j = 0; j < MAX_MON_MOVES; j++)
                         {
                             var |= (array3[j]) << (j << 1);
                         }

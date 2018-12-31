@@ -68,8 +68,8 @@
 #define VAR_FRONTIER_GAMBLER_AMOUNT_BET     0x4032
 #define VAR_FRONTIER_GAMBLER_PLACED_BET_F   0x4033
 
-#define VAR_0x4034                 0x4034
-#define VAR_0x4035                 0x4035
+#define VAR_DEOXYS_ROCK_STEP_COUNT 0x4034
+#define VAR_DEOXYS_ROCK_LEVEL      0x4035
 #define VAR_STORAGE_UNKNOWN        0x4036
 #define VAR_0x4037                 0x4037
 #define VAR_0x4038                 0x4038
@@ -81,8 +81,8 @@
 #define VAR_ALTERING_CAVE_WILD_SET 0x403E
 #define VAR_0x403F                 0x403F
 #define VAR_DAYS                   0x4040
-#define VAR_FANCLUB_UNKNOWN_1                 0x4041
-#define VAR_FANCLUB_UNKNOWN_2                 0x4042
+#define VAR_FANCLUB_UNKNOWN_1      0x4041
+#define VAR_FANCLUB_UNKNOWN_2      0x4042
 #define VAR_DEPT_STORE_FLOOR       0x4043
 #define VAR_0x4044                 0x4044
 #define VAR_POKELOT_PRIZE          0x4045

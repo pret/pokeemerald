@@ -376,7 +376,7 @@ static void sub_80F9C90(u8 taskId)
         task->data[7] = GetGpuReg(REG_OFFSET_BLDCNT);
         task->data[8] = GetGpuReg(REG_OFFSET_BLDY);
 
-        SetGpuReg(REG_OFFSET_BLDCNT, 0xBF);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN);
         SetGpuReg(REG_OFFSET_BLDY, 0x10);
 
         break;
@@ -452,7 +452,7 @@ static void sub_80F9DFC(u8 taskId)
         {
             task->data[5] = 0x50;
             task->data[6] = 0x51;
-            SetGpuReg(REG_OFFSET_BLDCNT, 0xBF);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN);
             SetGpuReg(REG_OFFSET_BLDY, 0x10);
         }
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(task->data[5], task->data[6]));
@@ -1166,23 +1166,23 @@ void GetShieldToyTVDecorationInfo(void)
     }
 }
 
-bool8 sub_80FADE4(u16 arg0, u8 arg1)
+bool8 sub_80FADE4(u16 metatileId, u8 arg1)
 {
     if (!CurrentMapIsSecretBase())
         return FALSE;
 
     if (!arg1)
     {
-        if (arg0 == 0x285 || arg0 == 0x286)
+        if (metatileId == 0x285 || metatileId == 0x286)
             return TRUE;
-        if (arg0 == 0x237)
+        if (metatileId == 0x237)
             return TRUE;
     }
     else
     {
-        if (arg0 == 0x28d)
+        if (metatileId == 0x28d)
             return TRUE;
-        if (arg0 == 0x23F)
+        if (metatileId == 0x23F)
             return TRUE;
     }
 

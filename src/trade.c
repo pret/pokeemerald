@@ -5986,7 +5986,7 @@ static void sub_807EB50(void)
             {
                 sub_801B990(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
             }
-            sub_8076D5C();
+            SetContinueGameWarpStatusToDynamicWarp();
             sub_8153380();
             gMain.state++;
             gUnknown_020322A0->timer = 0;
@@ -6000,7 +6000,7 @@ static void sub_807EB50(void)
         case 52:
             if (sub_81533AC())
             {
-                sav2_gender2_inplace_and_xFE();
+                ClearContinueGameWarpStatus2();
                 gMain.state = 4;
             }
             else

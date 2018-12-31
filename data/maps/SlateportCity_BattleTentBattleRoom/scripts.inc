@@ -10,18 +10,18 @@ SlateportCity_BattleTentBattleRoom_MapScript1_209970: @ 8209970
 
 SlateportCity_BattleTentBattleRoom_EventScript_209976:: @ 8209976
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq SlateportCity_BattleTentBattleRoom_EventScript_20998E
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq SlateportCity_BattleTentBattleRoom_EventScript_209994
 	return
 
 SlateportCity_BattleTentBattleRoom_EventScript_20998E:: @ 820998E
-	setvar VAR_OBJ_GFX_ID_1, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 SlateportCity_BattleTentBattleRoom_EventScript_209994:: @ 8209994
-	setvar VAR_OBJ_GFX_ID_1, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 SlateportCity_BattleTentBattleRoom_MapScript2_20999A: @ 820999A

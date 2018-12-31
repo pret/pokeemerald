@@ -5,6 +5,7 @@
 #include "mossdeep_gym.h"
 #include "script_movement.h"
 #include "constants/event_object_movement_constants.h"
+#include "constants/event_objects.h"
 
 // Movement scripts.
 extern const u8 gUnknown_08612698[];
@@ -52,7 +53,7 @@ void FinishMossdeepGymTiles(void)
     if (gUnknown_0203CE50 != NULL)
         FREE_AND_SET_NULL(gUnknown_0203CE50);
 
-    id = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    id = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
     EventObjectClearHeldMovementIfFinished(&gEventObjects[id]);
     sub_80D338C();
 }

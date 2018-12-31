@@ -800,7 +800,7 @@ void sub_81123C4(u8 taskId)
     task->data[10] = gBattleAnimArgs[0];
 
     baseX = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    baseY = sub_80A861C(gBattleAnimAttacker, 3);
+    baseY = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM);
     if (!IsContest())
     {
         for (battler = 0; battler < 4; battler++)
@@ -813,7 +813,7 @@ void sub_81123C4(u8 taskId)
                 if (spriteId != MAX_SPRITES)
                 {
                     x = GetBattlerSpriteCoord(battler, 2);
-                    y = sub_80A861C(battler, 3);
+                    y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_BOTTOM);
                     gSprites[spriteId].data[0] = baseX << 4;
                     gSprites[spriteId].data[1] = baseY << 4;
                     gSprites[spriteId].data[2] = ((x - baseX) << 4) / gBattleAnimArgs[1];
@@ -1168,7 +1168,7 @@ void sub_8112C6C(u8 taskId)
     task->data[1] = 16;
     task->data[9] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
     task->data[10] = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
-    task->data[11] = (sub_80A861C(gBattleAnimAttacker, 1) / 2) + 8;
+    task->data[11] = (GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_WIDTH) / 2) + 8;
     task->data[7] = 0;
     task->data[5] = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
     task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 2;

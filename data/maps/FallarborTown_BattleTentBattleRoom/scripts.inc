@@ -10,20 +10,20 @@ FallarborTown_BattleTentBattleRoom_MapScript1_2008A9: @ 82008A9
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008AF:: @ 82008AF
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2008C7
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq FallarborTown_BattleTentBattleRoom_EventScript_2008D2
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008C7:: @ 82008C7
-	setvar VAR_OBJ_GFX_ID_1, 100
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008D2:: @ 82008D2
-	setvar VAR_OBJ_GFX_ID_1, 105
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 FallarborTown_BattleTentBattleRoom_MapScript2_2008DD: @ 82008DD

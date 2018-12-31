@@ -1092,7 +1092,7 @@ void DrawBattleEntryBackground(void)
         LZDecompressVram(gUnknown_08D778F0, (void*)(VRAM + 0x4000));
         LZDecompressVram(gUnknown_08D77B0C, (void*)(VRAM + 0x10000));
         LoadCompressedPalette(gUnknown_08D77AE4, 0x60, 0x20);
-        SetBgAttribute(1, BG_CTRL_ATTR_MAPBASEINDEX, 1);
+        SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
         SetGpuReg(REG_OFFSET_BG1CNT, 0x5C04);
         CopyToBgTilemapBuffer(1, gUnknown_08D779D8, 0, 0);
         CopyToBgTilemapBuffer(2, gUnknown_08D779D8, 0, 0);
@@ -1113,8 +1113,8 @@ void DrawBattleEntryBackground(void)
         }
         else
         {
-            SetBgAttribute(1, BG_CTRL_ATTR_VISIBLE, 2);
-            SetBgAttribute(2, BG_CTRL_ATTR_VISIBLE, 2);
+            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 2);
+            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 2);
             CopyToBgTilemapBuffer(1, gUnknown_08D857A8, 0, 0);
             CopyToBgTilemapBuffer(2, gUnknown_08D85A1C, 0, 0);
             CopyBgTilemapBufferToVram(1);

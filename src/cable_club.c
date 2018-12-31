@@ -845,7 +845,7 @@ static void sub_80B32B4(u8 taskId)
             PlayMapChosenOrBattleBGM(MUS_BATTLE20);
 
         sub_80B3260(gSpecialVar_0x8004);
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         gTrainerBattleOpponent_A = 0x800;
         SetMainCallback2(CB2_InitBattle);
         gMain.savedCallback = sub_80B360C;
@@ -911,7 +911,7 @@ static void sub_80B33BC(u8 taskId)
 
         gLinkPlayers[0].linkType = 0x2211;
         sub_80B3260(gSpecialVar_0x8004);
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         gTrainerBattleOpponent_A = 0x800;
         SetMainCallback2(CB2_InitBattle);
         gMain.savedCallback = sub_80B360C;
@@ -1008,7 +1008,7 @@ void sub_80B36EC(void)
         LoadPlayerParty();
         SavePlayerBag();
     }
-    copy_saved_warp2_bank_and_enter_x_to_warp1(0x7F);
+    SetWarpDestinationToDynamicWarp(0x7F);
 }
 
 void sub_80B371C(void)

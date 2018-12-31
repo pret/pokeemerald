@@ -17,6 +17,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "mirage_tower.h"
 #include "event_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
@@ -34,7 +35,6 @@
 extern bool32 sub_81D6534(void);
 extern bool8 walkrun_is_standing_still(void);
 extern void ScriptUnfreezeEventObjects(void);
-extern void sub_81BE72C(void);
 extern void sub_80FB768(void);
 extern void sub_808D194(void);
 extern void sub_808D1C8(void);
@@ -89,7 +89,7 @@ static void palette_bg_faded_fill_black(void)
 void pal_fill_for_maplights(void)
 {
     u8 previousMapType = GetLastUsedWarpMapType();
-    switch (GetMapPairFadeFromType(previousMapType, Overworld_GetMapTypeOfSaveblockLocation()))
+    switch (GetMapPairFadeFromType(previousMapType, GetCurrentMapType()))
     {
     case 0:
         palette_bg_faded_fill_black();
@@ -115,7 +115,7 @@ void pal_fill_black(void)
 
 void WarpFadeScreen(void)
 {
-    u8 currentMapType = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 currentMapType = GetCurrentMapType();
     switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
     {
     case 0:
@@ -498,7 +498,7 @@ static bool32 sub_80AF71C(void)
         return FALSE;
 }
 
-void sub_80AF734(void)
+void DoWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -509,7 +509,7 @@ void sub_80AF734(void)
     CreateTask(sub_80AFA0C, 10);
 }
 
-void sp13E_warp_to_last_warp(void)
+void DoDiveWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -529,16 +529,16 @@ void sub_80AF79C(void)
     CreateTask(sub_80AFA0C, 10);
 }
 
-void sub_80AF7D0(void)
+void DoDoorWarp(void)
 {
     ScriptContext2_Enable();
     gFieldCallback = mapldr_default;
     CreateTask(sub_80AFA88, 10);
 }
 
-void sp13F_fall_to_last_warp(void)
+void DoFallWarp(void)
 {
-    sp13E_warp_to_last_warp();
+    DoDiveWarp();
     gFieldCallback = sub_80B6B68;
 }
 
@@ -673,7 +673,7 @@ static void sub_80AFA0C(u8 taskId)
         {
             if (task->data[1] == 0)
             {
-                sub_81BE72C();
+                ClearMirageTowerPulseBlendEffect();
                 task->data[1] = 1;
             }
             if (BGMusicStopped())

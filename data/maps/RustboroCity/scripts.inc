@@ -677,9 +677,9 @@ RustboroCity_EventScript_1E0DB8:: @ 81E0DB8
 Route104_EventScript_1E0DD1:: @ 81E0DD1
 RustboroCity_EventScript_1E0DD1:: @ 81E0DD1
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq RustboroCity_EventScript_1E0DE9
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq RustboroCity_EventScript_1E0DEE
 	return
 
@@ -821,9 +821,9 @@ RustboroCity_EventScript_1E0FB3:: @ 81E0FB3
 
 RustboroCity_EventScript_1E0FF3:: @ 81E0FF3
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq RustboroCity_EventScript_1E100B
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq RustboroCity_EventScript_1E1114
 	end
 

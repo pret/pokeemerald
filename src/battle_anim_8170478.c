@@ -388,7 +388,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_085E535C =
 };
 
 extern const struct SpriteTemplate gUnknown_085CE388;
-extern const struct SpriteTemplate gUnknown_085CE3A0;
+extern const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate;
 
 void unref_sub_8170478(u8 taskId)
 {
@@ -2081,12 +2081,12 @@ static void sub_8172FEC(u8 taskId)
     }
     else if (state >= 0 && gTasks[taskId].data[11] < 4)
     {
-        spriteId = CreateSprite(&gUnknown_085CE3A0, x, y, 5);
+        spriteId = CreateSprite(&gMiniTwinklingStarSpriteTemplate, x, y, 5);
         gSprites[spriteId].oam.tileNum += 4;
     }
     else
     {
-        spriteId = CreateSprite(&gUnknown_085CE3A0, x, y, 5);
+        spriteId = CreateSprite(&gMiniTwinklingStarSpriteTemplate, x, y, 5);
         gSprites[spriteId].oam.tileNum += 5;
     }
 

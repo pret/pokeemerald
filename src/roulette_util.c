@@ -206,463 +206,227 @@ void sub_8151A9C(struct UnkStruct0 *r0, u16 r1)
     }
 }
 
-void sub_8151B3C(struct InnerStruct203CF18 *arg0)
+void InitPulseBlend(struct PulseBlend *pulseBlend)
 {
     u8 i = 0;
-    arg0->unk0 = 0;
-    memset(&arg0->unk4, 0, sizeof(arg0->unk4));
+    pulseBlend->usedPulseBlendPalettes = 0;
+    memset(&pulseBlend->pulseBlendPalettes, 0, sizeof(pulseBlend->pulseBlendPalettes));
     for (; i < 16; i++)
-    {
-        arg0->unk4[i].unk0 = i;
-    }
+        pulseBlend->pulseBlendPalettes[i].paletteSelector = i;
 }
 
-int sub_8151B68(struct InnerStruct203CF18 *arg0, const struct InnerStruct203CF18_3 *arg1)
+int InitPulseBlendPaletteSettings(struct PulseBlend *pulseBlend, const struct PulseBlendSettings *settings)
 {
     u8 i = 0;
-    struct InnerStruct203CF18_2 *r4 = NULL;
+    struct PulseBlendPalette *pulseBlendPalette = NULL;
 
-    if (!arg0->unk4[0].unk1_7)
+    if (!pulseBlend->pulseBlendPalettes[0].inUse)
     {
-        r4 = &arg0->unk4[0];
+        pulseBlendPalette = &pulseBlend->pulseBlendPalettes[0];
     }
     else
     {
         while (++i < 16)
         {
-            if (!arg0->unk4[i].unk1_7)
+            if (!pulseBlend->pulseBlendPalettes[i].inUse)
             {
-                r4 = &arg0->unk4[i];
+                pulseBlendPalette = &pulseBlend->pulseBlendPalettes[i];
                 break;
             }
         }
     }
 
-    if (r4 == 0)
+    if (pulseBlendPalette == NULL)
         return 0xFF;
     
-    r4->unk1_0 = 0;
-    r4->unk1_4 = 0;
-    r4->unk1_6 = 1;
-    r4->unk1_7 = 1;
-    r4->unk2 = 0;
-    r4->unk3 = 0;
-    memcpy(&r4->unk4, arg1, sizeof(*arg1));
+    pulseBlendPalette->blendCoeff = 0;
+    pulseBlendPalette->fadeDirection = 0;
+    pulseBlendPalette->available = 1;
+    pulseBlendPalette->inUse = 1;
+    pulseBlendPalette->delayCounter = 0;
+    pulseBlendPalette->fadeCycleCounter = 0;
+    memcpy(&pulseBlendPalette->pulseBlendSettings, settings, sizeof(*settings));
     return i;
 }
 
-void sub_8151BD4(struct InnerStruct203CF18_2 *arg0)
+static void ClearPulseBlendPalettesSettings(struct PulseBlendPalette *pulseBlendPalette)
 {
     u16 i;
 
-    if (!arg0->unk1_6 && arg0->unk4.unk7_6)
+    if (!pulseBlendPalette->available && pulseBlendPalette->pulseBlendSettings.restorePaletteOnUnload)
     {
-        for (i = arg0->unk4.unk2; i < arg0->unk4.unk2 + arg0->unk4.unk4; i++)
+        for (i = pulseBlendPalette->pulseBlendSettings.paletteOffset; i < pulseBlendPalette->pulseBlendSettings.paletteOffset + pulseBlendPalette->pulseBlendSettings.numColors; i++)
             gPlttBufferFaded[i] = gPlttBufferUnfaded[i];
     }
 
-    memset(&arg0->unk4, 0, sizeof(arg0->unk4));
-    arg0->unk1_0 = 0;
-    arg0->unk1_4 = 0;
-    arg0->unk1_5 = 0;
-    arg0->unk1_6 = 1;
-    arg0->unk1_7 = 0;
-    arg0->unk3 = 0;
-    arg0->unk2 = 0;
+    memset(&pulseBlendPalette->pulseBlendSettings, 0, sizeof(pulseBlendPalette->pulseBlendSettings));
+    pulseBlendPalette->blendCoeff = 0;
+    pulseBlendPalette->fadeDirection = 0;
+    pulseBlendPalette->unk1_5 = 0;
+    pulseBlendPalette->available = 1;
+    pulseBlendPalette->inUse = 0;
+    pulseBlendPalette->fadeCycleCounter = 0;
+    pulseBlendPalette->delayCounter = 0;
 }
 
-void sub_8151C50(struct InnerStruct203CF18 *arg0, u16 arg1, u8 arg2)
+void UnloadUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection)
 {
     u16 i = 0;
 
-    if (!arg2)
+    if (!multiSelection)
     {
-        sub_8151BD4(&arg0->unk4[arg1 & 0xF]);
+        ClearPulseBlendPalettesSettings(&pulseBlend->pulseBlendPalettes[pulseBlendPaletteSelector & 0xF]);
     }
     else
     {
         for (i = 0; i < 16; i++)
         {
-            if ((arg1 & 1) && arg0->unk4[i].unk1_7)
-                sub_8151BD4(&arg0->unk4[i]);
+            if ((pulseBlendPaletteSelector & 1) && pulseBlend->pulseBlendPalettes[i].inUse)
+                ClearPulseBlendPalettesSettings(&pulseBlend->pulseBlendPalettes[i]);
 
-            arg1 >>= 1;
+            pulseBlendPaletteSelector >>= 1;
         }
     }
 }
 
-// there seems to be a temp var involved inside the first if block
-void sub_8151CA8(struct InnerStruct203CF18 *arg0, u16 arg1, u8 arg2)
+void MarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection)
 {
     u8 i = 0;
 
-    if (!arg2)
+    if (!multiSelection)
     {
-        i = arg1 & 0xF;
-        arg0->unk4[i].unk1_6 = 0;
-        arg0->unk0 |= 1 << i;
+        i = pulseBlendPaletteSelector & 0xF;
+        pulseBlend->pulseBlendPalettes[i].available = 0;
+        pulseBlend->usedPulseBlendPalettes |= 1 << i;
     }
     else
     {
         for (i = 0; i < 16; i++)
         {
-            if (!(arg1 & 1) || !arg0->unk4[i].unk1_7 || !arg0->unk4[i].unk1_6)
+            if (!(pulseBlendPaletteSelector & 1) || !pulseBlend->pulseBlendPalettes[i].inUse || !pulseBlend->pulseBlendPalettes[i].available)
             {
-                arg1 <<= 1;
+                pulseBlendPaletteSelector <<= 1;
             }
             else
             {
-                arg0->unk4[i].unk1_6 = 0;
-                arg0->unk0 |= 1 << i;
+                pulseBlend->pulseBlendPalettes[i].available = 0;
+                pulseBlend->usedPulseBlendPalettes |= 1 << i;
             }
         }
     }    
 }
 
-void sub_8151D28(struct InnerStruct203CF18 *arg0, u16 arg1, u8 arg2)
+void UnmarkUsedPulseBlendPalettes(struct PulseBlend *pulseBlend, u16 pulseBlendPaletteSelector, u8 multiSelection)
 {
     u16 i;
-    struct InnerStruct203CF18_2 *var0;
+    struct PulseBlendPalette *pulseBlendPalette;
     u8 j = 0;
 
-    if (!arg2)
+    if (!multiSelection)
     {
-        var0 = &arg0->unk4[arg1 & 0xF];
-        if (!var0->unk1_6 && var0->unk1_7)
+        pulseBlendPalette = &pulseBlend->pulseBlendPalettes[pulseBlendPaletteSelector & 0xF];
+        if (!pulseBlendPalette->available && pulseBlendPalette->inUse)
         {
-            if (var0->unk4.unk7_6)
+            if (pulseBlendPalette->pulseBlendSettings.restorePaletteOnUnload)
             {
-                for (i = var0->unk4.unk2; i < var0->unk4.unk2 + var0->unk4.unk4; i++)
+                for (i = pulseBlendPalette->pulseBlendSettings.paletteOffset; i < pulseBlendPalette->pulseBlendSettings.paletteOffset + pulseBlendPalette->pulseBlendSettings.numColors; i++)
                     gPlttBufferFaded[i] = gPlttBufferUnfaded[i];
             }
 
-            var0->unk1_6 = 1;
-            arg0->unk0 &= ~(1 << j);
+            pulseBlendPalette->available = 1;
+            pulseBlend->usedPulseBlendPalettes &= ~(1 << j);
         }
     }
     else
     {
         for (j = 0; j < 16; j++)
         {
-            var0 = &arg0->unk4[j];
-            if (!(arg1 & 1) || var0->unk1_6 || !var0->unk1_7)
+            pulseBlendPalette = &pulseBlend->pulseBlendPalettes[j];
+            if (!(pulseBlendPaletteSelector & 1) || pulseBlendPalette->available || !pulseBlendPalette->inUse)
             {
-                arg1 <<= 1;
+                pulseBlendPaletteSelector <<= 1;
             }
             else
             {
-                if (var0->unk4.unk7_6)
+                if (pulseBlendPalette->pulseBlendSettings.restorePaletteOnUnload)
                 {
-                    for (i = var0->unk4.unk2; i < var0->unk4.unk2 + var0->unk4.unk4; i++)
+                    for (i = pulseBlendPalette->pulseBlendSettings.paletteOffset; i < pulseBlendPalette->pulseBlendSettings.paletteOffset + pulseBlendPalette->pulseBlendSettings.numColors; i++)
                         gPlttBufferFaded[i] = gPlttBufferUnfaded[i];
                 }
 
-                var0->unk1_6 = 1;
-                arg0->unk0 &= ~(1 << j);
+                pulseBlendPalette->available = 1;
+                pulseBlend->usedPulseBlendPalettes &= ~(1 << j);
             }
         }
     }
 }
 
-#ifdef NONMATCHING
-void sub_8151E50(struct InnerStruct203CF18 *arg0)
+void UpdatePulseBlend(struct PulseBlend *pulseBlend)
 {
-    struct InnerStruct203CF18_2 *var0;
+    struct PulseBlendPalette *pulseBlendPalette;
     u8 i = 0;
 
-    if (arg0->unk0)
+    if (pulseBlend->usedPulseBlendPalettes)
     {
         for (i = 0; i < 16; i++)
         {
-            var0 = &arg0->unk4[i];
-            if ((!var0->unk1_6 && var0->unk1_7) && (!gPaletteFade.active || !var0->unk4.unk7_7))
+            pulseBlendPalette = &pulseBlend->pulseBlendPalettes[i];
+            if ((!pulseBlendPalette->available && pulseBlendPalette->inUse) && (!gPaletteFade.active || !pulseBlendPalette->pulseBlendSettings.unk7_7))
             {
-                if (--var0->unk2 == 0xFF)
+                if (--pulseBlendPalette->delayCounter == 0xFF)
                 {
-                    var0->unk2 = var0->unk4.unk5;
-                    BlendPalette(var0->unk4.unk2, var0->unk4.unk4, var0->unk1_0, var0->unk4.unk0);
-                    switch (var0->unk4.unk7_4)
+                    pulseBlendPalette->delayCounter = pulseBlendPalette->pulseBlendSettings.delay;
+                    BlendPalette(pulseBlendPalette->pulseBlendSettings.paletteOffset, pulseBlendPalette->pulseBlendSettings.numColors, pulseBlendPalette->blendCoeff, pulseBlendPalette->pulseBlendSettings.blendColor);
+                    switch (pulseBlendPalette->pulseBlendSettings.fadeType)
                     {
-                    case 0:
-                        if (var0->unk1_0++ == var0->unk4.unk7_0)
+                    case 0: // Fade all the way to the max blend amount, then wrap around
+                        // BUG: This comparison will never be true for maxBlendCoeff values that are >= 8. This is because
+                        // maxBlendCoeff is a signed 4-bit field, but blendCoeff is an unsigned 4-bit field. This code is never
+                        // reached, anyway, so the bug is not observable in vanilla gameplay.
+                        if (pulseBlendPalette->blendCoeff++ == pulseBlendPalette->pulseBlendSettings.maxBlendCoeff)
                         {
-                            var0->unk3++;
-                            var0->unk1_0 = 0;
+                            pulseBlendPalette->fadeCycleCounter++;
+                            pulseBlendPalette->blendCoeff = 0;
                         }
                         break;
-                    case 1:
-                        if (var0->unk1_4)
+                    case 1: // Fade in and out
+                        if (pulseBlendPalette->fadeDirection)
                         {
-                            if (--var0->unk1_0 == 0)
+                            if (--pulseBlendPalette->blendCoeff == 0)
                             {
-                                var0->unk3++;
-                                var0->unk1_4 ^= 1;
+                                pulseBlendPalette->fadeCycleCounter++;
+                                pulseBlendPalette->fadeDirection ^= 1;
                             }
                         }
                         else
                         {
-                            if (var0->unk1_0++ == var0->unk4.unk7_0 - 1)
+                            u8 max = (pulseBlendPalette->pulseBlendSettings.maxBlendCoeff - 1) & 0xF;
+                            if (pulseBlendPalette->blendCoeff++ == max)
                             {
-                                var0->unk3++;
-                                var0->unk1_4 ^= 1;
+                                pulseBlendPalette->fadeCycleCounter++;
+                                pulseBlendPalette->fadeDirection ^= 1;
                             }
                         }
                         break;
-                    case 2:
-                        if (var0->unk1_4)
-                            var0->unk1_0 = 0;
+                    case 2: // Flip back and forth
+                        if (pulseBlendPalette->fadeDirection)
+                            pulseBlendPalette->blendCoeff = 0;
                         else
-                            var0->unk1_0 = var0->unk4.unk7_0;
+                            pulseBlendPalette->blendCoeff = pulseBlendPalette->pulseBlendSettings.maxBlendCoeff & 0xF;
                         
-                        var0->unk1_4 ^= 1;
-                        var0->unk3++;
+                        pulseBlendPalette->fadeDirection ^= 1;
+                        pulseBlendPalette->fadeCycleCounter++;
                         break;
                     }
 
-                    if (var0->unk4.unk6 != 0xFF && var0->unk3 == 0xFF)
-                        sub_8151D28(arg0, var0->unk0, 0);
+                    if (pulseBlendPalette->pulseBlendSettings.numFadeCycles != 0xFF
+                     && pulseBlendPalette->fadeCycleCounter == pulseBlendPalette->pulseBlendSettings.numFadeCycles)
+                        UnmarkUsedPulseBlendPalettes(pulseBlend, pulseBlendPalette->paletteSelector, FALSE);
                 }
             }
         }
     }
 }
-#else
-NAKED
-void sub_8151E50(struct InnerStruct203CF18 *arg0)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    ldr r1, [sp]\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0\n\
-    bne _08151E6C\n\
-    b _08151FF6\n\
-_08151E6C:\n\
-    movs r2, 0xF\n\
-    mov r9, r2\n\
-    movs r3, 0x10\n\
-    negs r3, r3\n\
-    mov r8, r3\n\
-    movs r7, 0x1\n\
-_08151E78:\n\
-    mov r5, r10\n\
-    lsls r0, r5, 1\n\
-    add r0, r10\n\
-    lsls r0, 2\n\
-    adds r0, 0x4\n\
-    ldr r1, [sp]\n\
-    adds r4, r1, r0\n\
-    ldrb r2, [r4, 0x1]\n\
-    movs r3, 0xC0\n\
-    ands r3, r2\n\
-    cmp r3, 0x80\n\
-    beq _08151E92\n\
-    b _08151FE6\n\
-_08151E92:\n\
-    ldr r0, =gPaletteFade\n\
-    ldrb r1, [r0, 0x7]\n\
-    adds r0, r3, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08151EA8\n\
-    ldrb r0, [r4, 0xB]\n\
-    ands r3, r0\n\
-    cmp r3, 0\n\
-    beq _08151EA8\n\
-    b _08151FE6\n\
-_08151EA8:\n\
-    ldrb r0, [r4, 0x2]\n\
-    subs r0, 0x1\n\
-    strb r0, [r4, 0x2]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0xFF\n\
-    beq _08151EB8\n\
-    b _08151FE6\n\
-_08151EB8:\n\
-    ldrb r0, [r4, 0x9]\n\
-    strb r0, [r4, 0x2]\n\
-    ldrh r0, [r4, 0x6]\n\
-    ldrb r1, [r4, 0x8]\n\
-    lsls r2, 28\n\
-    lsrs r2, 28\n\
-    ldrh r3, [r4, 0x4]\n\
-    bl BlendPalette\n\
-    ldrb r5, [r4, 0xB]\n\
-    lsls r0, r5, 26\n\
-    asrs r0, 30\n\
-    cmp r0, 0x1\n\
-    beq _08151F16\n\
-    cmp r0, 0x1\n\
-    bgt _08151EE4\n\
-    cmp r0, 0\n\
-    beq _08151EEA\n\
-    b _08151FD0\n\
-    .pool\n\
-_08151EE4:\n\
-    cmp r0, 0x2\n\
-    beq _08151F92\n\
-    b _08151FD0\n\
-_08151EEA:\n\
-    ldrb r2, [r4, 0x1]\n\
-    lsls r1, r2, 28\n\
-    lsrs r0, r1, 28\n\
-    adds r0, 0x1\n\
-    mov r3, r9\n\
-    ands r0, r3\n\
-    mov r6, r8\n\
-    adds r3, r6, 0\n\
-    ands r3, r2\n\
-    orrs r3, r0\n\
-    strb r3, [r4, 0x1]\n\
-    lsrs r1, 28\n\
-    lsls r0, r5, 28\n\
-    asrs r0, 28\n\
-    cmp r1, r0\n\
-    bne _08151FD0\n\
-    ldrb r0, [r4, 0x3]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4, 0x3]\n\
-    ands r3, r6\n\
-    strb r3, [r4, 0x1]\n\
-    b _08151FD0\n\
-_08151F16:\n\
-    ldrb r3, [r4, 0x1]\n\
-    movs r0, 0x10\n\
-    ands r0, r3\n\
-    cmp r0, 0\n\
-    beq _08151F54\n\
-    lsls r0, r3, 28\n\
-    lsrs r0, 28\n\
-    subs r0, 0x1\n\
-    mov r5, r9\n\
-    ands r0, r5\n\
-    mov r2, r8\n\
-    ands r2, r3\n\
-    orrs r2, r0\n\
-    strb r2, [r4, 0x1]\n\
-    cmp r0, 0\n\
-    bne _08151FD0\n\
-    ldrb r0, [r4, 0x3]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4, 0x3]\n\
-    lsls r0, r2, 27\n\
-    lsrs r0, 31\n\
-    eors r0, r7\n\
-    ands r0, r7\n\
-    lsls r0, 4\n\
-    movs r3, 0x11\n\
-    negs r3, r3\n\
-    adds r1, r3, 0\n\
-    ands r2, r1\n\
-    orrs r2, r0\n\
-    strb r2, [r4, 0x1]\n\
-    b _08151FD0\n\
-_08151F54:\n\
-    lsls r0, r5, 28\n\
-    asrs r0, 28\n\
-    subs r0, 0x1\n\
-    mov r5, r9\n\
-    ands r0, r5\n\
-    lsls r2, r3, 28\n\
-    lsrs r1, r2, 28\n\
-    adds r1, 0x1\n\
-    ands r1, r5\n\
-    mov r5, r8\n\
-    ands r3, r5\n\
-    orrs r3, r1\n\
-    strb r3, [r4, 0x1]\n\
-    lsrs r2, 28\n\
-    cmp r2, r0\n\
-    bne _08151FD0\n\
-    ldrb r0, [r4, 0x3]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4, 0x3]\n\
-    lsls r0, r3, 27\n\
-    lsrs r0, 31\n\
-    eors r0, r7\n\
-    ands r0, r7\n\
-    lsls r0, 4\n\
-    movs r2, 0x11\n\
-    negs r2, r2\n\
-    adds r1, r2, 0\n\
-    ands r3, r1\n\
-    orrs r3, r0\n\
-    strb r3, [r4, 0x1]\n\
-    b _08151FD0\n\
-_08151F92:\n\
-    ldrb r2, [r4, 0x1]\n\
-    movs r0, 0x10\n\
-    ands r0, r2\n\
-    cmp r0, 0\n\
-    beq _08151FA2\n\
-    mov r0, r8\n\
-    ands r0, r2\n\
-    b _08151FB0\n\
-_08151FA2:\n\
-    lsls r1, r5, 28\n\
-    asrs r1, 28\n\
-    mov r3, r9\n\
-    ands r1, r3\n\
-    mov r0, r8\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-_08151FB0:\n\
-    strb r0, [r4, 0x1]\n\
-    ldrb r2, [r4, 0x1]\n\
-    lsls r0, r2, 27\n\
-    lsrs r0, 31\n\
-    eors r0, r7\n\
-    ands r0, r7\n\
-    lsls r0, 4\n\
-    movs r5, 0x11\n\
-    negs r5, r5\n\
-    adds r1, r5, 0\n\
-    ands r2, r1\n\
-    orrs r2, r0\n\
-    strb r2, [r4, 0x1]\n\
-    ldrb r0, [r4, 0x3]\n\
-    adds r0, 0x1\n\
-    strb r0, [r4, 0x3]\n\
-_08151FD0:\n\
-    ldrb r1, [r4, 0xA]\n\
-    cmp r1, 0xFF\n\
-    beq _08151FE6\n\
-    ldrb r0, [r4, 0x3]\n\
-    cmp r0, r1\n\
-    bne _08151FE6\n\
-    ldrb r1, [r4]\n\
-    ldr r0, [sp]\n\
-    movs r2, 0\n\
-    bl sub_8151D28\n\
-_08151FE6:\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    cmp r0, 0xF\n\
-    bhi _08151FF6\n\
-    b _08151E78\n\
-_08151FF6:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0");
-}
-#endif // NONMATCHING
 
 void sub_8152008(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height)
 {

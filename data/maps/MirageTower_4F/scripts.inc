@@ -50,7 +50,7 @@ MirageTower_4F_EventScript_23ADCA:: @ 823ADCA
 	setvar VAR_0x8007, 2
 	special sub_8139560
 	waitstate
-	special sub_81BE994
+	special DoMirageTowerCeilingCrumble
 	waitstate
 	setvar VAR_0x40CB, 1
 	clearflag FLAG_LANDMARK_MIRAGE_TOWER

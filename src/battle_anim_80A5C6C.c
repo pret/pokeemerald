@@ -2092,17 +2092,17 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
     return spriteId;
 }
 
-void sub_80A8610(struct Sprite *sprite)
+void DestroySpriteAndFreeResources_(struct Sprite *sprite)
 {
     DestroySpriteAndFreeResources(sprite);
 }
 
-s16 sub_80A861C(u8 battlerId, u8 a2)
+s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
 {
     u16 species;
     u32 personality;
     u16 letter;
-    u16 var;
+    u16 unownSpecies;
     int ret;
     const struct MonCoords *coords;
     struct BattleSpriteInfo *spriteInfo;
@@ -2123,10 +2123,10 @@ s16 sub_80A861C(u8 battlerId, u8 a2)
         {
             letter = GET_UNOWN_LETTER(personality);
             if (!letter)
-                var = SPECIES_UNOWN;
+                unownSpecies = SPECIES_UNOWN;
             else
-                var = letter + SPECIES_UNOWN_B - 1;
-            coords = &gMonBackPicCoords[var];
+                unownSpecies = letter + SPECIES_UNOWN_B - 1;
+            coords = &gMonBackPicCoords[unownSpecies];
         }
         else if (species == SPECIES_CASTFORM)
         {
@@ -2156,16 +2156,17 @@ s16 sub_80A861C(u8 battlerId, u8 a2)
                 species = spriteInfo[battlerId].transformSpecies;
                 personality = gTransformedPersonalities[battlerId];
             }
+
             if (species == SPECIES_UNOWN)
             {
                 letter = GET_UNOWN_LETTER(personality);
                 if (!letter)
-                    var = SPECIES_UNOWN;
+                    unownSpecies = SPECIES_UNOWN;
                 else
-                    var = letter + SPECIES_UNOWN_B - 1;
-                coords = &gMonBackPicCoords[var];
+                    unownSpecies = letter + SPECIES_UNOWN_B - 1;
+                coords = &gMonBackPicCoords[unownSpecies];
             }
-            else if (species > SPECIES_EGG)
+            else if (species > NUM_SPECIES)
             {
                 coords = &gMonBackPicCoords[0];
             }
@@ -2187,20 +2188,21 @@ s16 sub_80A861C(u8 battlerId, u8 a2)
                 species = spriteInfo[battlerId].transformSpecies;
                 personality = gTransformedPersonalities[battlerId];
             }
+
             if (species == SPECIES_UNOWN)
             {
                 letter = GET_UNOWN_LETTER(personality);
                 if (!letter)
-                    var = SPECIES_UNOWN;
+                    unownSpecies = SPECIES_UNOWN;
                 else
-                    var = letter + SPECIES_UNOWN_B - 1;
-                coords = &gMonFrontPicCoords[var];
+                    unownSpecies = letter + SPECIES_UNOWN_B - 1;
+                coords = &gMonFrontPicCoords[unownSpecies];
             }
             else if (species == SPECIES_CASTFORM)
             {
                 coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
             }
-            else if (species > SPECIES_EGG)
+            else if (species > NUM_SPECIES)
             {
                 coords = &gMonFrontPicCoords[0];
             }
@@ -2211,22 +2213,22 @@ s16 sub_80A861C(u8 battlerId, u8 a2)
         }
     }
 
-    switch (a2)
+    switch (attr)
     {
-    case 0:
+    case BATTLER_COORD_ATTR_HEIGHT:
         return (coords->coords & 0xf) * 8;
-    case 1:
+    case BATTLER_COORD_ATTR_WIDTH:
         return (coords->coords >> 4) * 8;
-    case 4:
-        return GetBattlerSpriteCoord(battlerId, 2) - ((coords->coords >> 4) * 4);
-    case 5:
-        return GetBattlerSpriteCoord(battlerId, 2) + ((coords->coords >> 4) * 4);
-    case 2:
-        return GetBattlerSpriteCoord(battlerId, 3) - ((coords->coords & 0xf) * 4);
-    case 3:
-        return GetBattlerSpriteCoord(battlerId, 3) + ((coords->coords & 0xf) * 4);
-    case 6:
-        ret = GetBattlerSpriteCoord(battlerId, 1) + 0x1f;
+    case BATTLER_COORD_ATTR_LEFT:
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - ((coords->coords >> 4) * 4);
+    case BATTLER_COORD_ATTR_RIGHT:
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + ((coords->coords >> 4) * 4);
+    case BATTLER_COORD_ATTR_TOP:
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - ((coords->coords & 0xf) * 4);
+    case BATTLER_COORD_ATTR_BOTTOM:
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + ((coords->coords & 0xf) * 4);
+    case BATTLER_COORD_ATTR_RAW_BOTTOM:
+        ret = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 31;
         return ret - coords->y_offset;
     default:
         return 0;

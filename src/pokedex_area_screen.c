@@ -533,7 +533,7 @@ static void Task_PokedexAreaScreen_0(u8 taskId)
             HideBg(0);
             break;
         case 1:
-            SetBgAttribute(3, BG_CTRL_ATTR_VISIBLE, 3);
+            SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 3);
             sub_81C4D70(&sUnknown_085B4018);
             StringFill(sPokedexAreaScreen->charBuffer, CHAR_SPACE, 16);
             break;
@@ -628,8 +628,8 @@ static void Task_PokedexAreaScreen_1(u8 taskId)
 
 static void sub_813D6B4(void)
 {
-    SetBgAttribute(3, BG_CTRL_ATTR_VISIBLE, 0);
-    SetBgAttribute(3, BG_CTRL_ATTR_SCREENSIZE, 0);
+    SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 0);
+    SetBgAttribute(3, BG_ATTR_PALETTEMODE, 0);
 }
 
 static void CreateAreaMarkerSprites(void)

@@ -15686,7 +15686,7 @@ _0801EB04:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801EBC2
-	bl sub_8076D5C
+	bl SetContinueGameWarpStatusToDynamicWarp
 	movs r0, 0
 	bl TrySavingData
 	ldr r0, =gUnknown_02022C84
@@ -15713,7 +15713,7 @@ _0801EB40:
 	bne _0801EBC2
 	movs r0, 0x37
 	bl PlaySE
-	bl sav2_gender2_inplace_and_xFE
+	bl ClearContinueGameWarpStatus2
 	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0xA
@@ -20568,7 +20568,7 @@ _080211EC:
 	beq _080211F8
 	b _08021302
 _080211F8:
-	bl sub_81971D0
+	bl InitStandardTextBoxWindows
 	bl sub_8197200
 	adds r0, r5, 0
 	bl sub_8022588
@@ -39128,7 +39128,7 @@ _0802A7CE:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	bl sub_81971D0
+	bl InitStandardTextBoxWindows
 	bl sub_8197200
 	movs r1, 0x82
 	lsls r1, 5

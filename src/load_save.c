@@ -1,13 +1,14 @@
 #include "global.h"
-#include "gba/flash_internal.h"
+#include "alloc.h"
+#include "item.h"
 #include "load_save.h"
 #include "main.h"
+#include "overworld.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
-#include "alloc.h"
-#include "item.h"
-#include "overworld.h"
+#include "save_location.h"
+#include "gba/flash_internal.h"
 #include "decoration_inventory.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
@@ -136,30 +137,30 @@ void MoveSaveBlocks_ResetHeap(void)
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
 }
 
-u32 GetSecretBase2Field_9(void)
+u32 UseContinueGameWarp(void)
 {
-    return gSaveBlock2Ptr->specialSaveWarp & 1;
+    return gSaveBlock2Ptr->specialSaveWarpFlags & CONTINUE_GAME_WARP;
 }
 
-void ClearSecretBase2Field_9(void)
+void ClearContinueGameWarpStatus(void)
 {
-    gSaveBlock2Ptr->specialSaveWarp &= ~1;
+    gSaveBlock2Ptr->specialSaveWarpFlags &= ~CONTINUE_GAME_WARP;
 }
 
-void SetSecretBase2Field_9(void)
+void SetContinueGameWarpStatus(void)
 {
-    gSaveBlock2Ptr->specialSaveWarp |= 1;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 
-void sub_8076D5C(void)
+void SetContinueGameWarpStatusToDynamicWarp(void)
 {
-    sub_8084FAC(0);
-    gSaveBlock2Ptr->specialSaveWarp |= 1;
+    SetContinueGameWarpToDynamicWarp(0);
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 
-void sav2_gender2_inplace_and_xFE(void)
+void ClearContinueGameWarpStatus2(void)
 {
-    gSaveBlock2Ptr->specialSaveWarp &= ~1;
+    gSaveBlock2Ptr->specialSaveWarpFlags &= ~CONTINUE_GAME_WARP;
 }
 
 void SavePlayerParty(void)

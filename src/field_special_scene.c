@@ -1,7 +1,12 @@
 #include "global.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_camera.h"
+#include "field_screen_effect.h"
+#include "field_specials.h"
+#include "fieldmap.h"
 #include "main.h"
+#include "overworld.h"
 #include "palette.h"
 #include "script.h"
 #include "script_movement.h"
@@ -13,14 +18,6 @@
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
 
-extern u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *); // should be in field_specials.h
-extern void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-extern bool32 CountSSTidalStep(u16);
-extern void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
-extern void sp13E_warp_to_last_warp(void);
-extern void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
-extern void sub_80AF8B8(void);
-
 // porthole states
 enum
 {
@@ -30,20 +27,13 @@ enum
     EXIT_PORTHOLE,
 };
 
-extern void SetCameraPanning(s16 x, s16 y);
-extern void SetCameraPanningCallback(void ( *callback)());
-extern void InstallCameraPanAheadCallback();
-extern void pal_fill_black(void);
-extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId);
-extern void DrawWholeMapView();
-
 //. rodata
 static const s8 gTruckCamera_HorizontalTable[] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, 0};
 const u8 gUnknown_0858E8AB[] = {0x18, 0xFE};
 const u8 gUnknown_0858E8AD[] = {0x17, 0xFE};
 
 // .text
-void Task_Truck3(u8);
+static void Task_Truck3(u8);
 
 s16 GetTruckCameraBobbingY(int a1)
 {
@@ -121,7 +111,7 @@ void Task_Truck2(u8 taskId)
     }
 }
 
-void Task_Truck3(u8 taskId)
+static void Task_Truck3(u8 taskId)
 {
    s16 *data = gTasks[taskId].data;
    s16 cameraXpan;
@@ -256,7 +246,7 @@ bool8 sub_80FB59C(void)
     }
     else
     {
-        Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
+        SetWarpDestination(mapGroup, mapNum, -1, x, y);
         return TRUE;
     }
 }
@@ -312,8 +302,8 @@ void Task_HandlePorthole(u8 taskId)
     case EXIT_PORTHOLE: // exit porthole.
         FlagClear(0x4001);
         FlagClear(0x4000);
-        copy_saved_warp2_bank_and_enter_x_to_warp1(0);
-        sp13E_warp_to_last_warp();
+        SetWarpDestinationToDynamicWarp(0);
+        DoDiveWarp();
         DestroyTask(taskId);
         break;
     }
@@ -349,7 +339,7 @@ void sub_80FB7A4(void)
     FlagSet(FLAG_SYS_CRUISE_MODE);
     FlagSet(0x4001);
     FlagSet(0x4000);
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     sub_80FB59C();
     sub_80AF8B8();
 }

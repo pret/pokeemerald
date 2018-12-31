@@ -1163,7 +1163,7 @@ static void sub_8161F94(void)
         gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = 0;
 
     ValidateBattleTowerRecordChecksums();
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 
@@ -1973,7 +1973,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
         friendship = 255;
         // Give the chosen pokemon its specified moves.
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monSetId].moves[j], j);
             if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
@@ -2012,7 +2012,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
     {
         CreateMonWithEVSpread(&gEnemyParty[firstMonId + i], apprentice->party[i].species, level, fixedIV, 8);
         friendship = 0xFF;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             if (apprentice->party[i].moves[j] == MOVE_FRUSTRATION)
                 friendship = 0;
@@ -2102,7 +2102,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
                                              otID);
 
         friendship = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
             SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monSetId].moves[j], j);
 
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
@@ -2130,7 +2130,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
                                              otID);
 
         friendship = 0;
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveAvoidReturn(&gEnemyParty[firstMonId + i], gFacilityTrainerMons[monSetId].moves[j], j);
             if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
@@ -3193,7 +3193,7 @@ static void FillPartnerParty(u16 trainerId)
                       TRUE, STEVEN_OTID);
             for (j = 0; j < 6; j++)
                 SetMonData(&gPlayerParty[3 + i], MON_DATA_HP_EV + j, &sStevenMons[i].evs[j]);
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
                 SetMonMoveSlot(&gPlayerParty[3 + i], sStevenMons[i].moves[j], j);
             SetMonData(&gPlayerParty[3 + i], MON_DATA_OT_NAME, gTrainers[TRAINER_STEVEN].trainerName);
             j = MALE;
@@ -3222,7 +3222,7 @@ static void FillPartnerParty(u16 trainerId)
                                                  gFacilityTrainerMons[monSetId].evSpread,
                                                  otID);
             friendship = 0xFF;
-            for (j = 0; j < 4; j++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 SetMonMoveSlot(&gPlayerParty[3 + i], gFacilityTrainerMons[monSetId].moves[j], j);
                 if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)
@@ -3647,7 +3647,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
         friendship = 255;
         // Give the chosen pokemon its specified moves.
-        for (j = 0; j < 4; j++)
+        for (j = 0; j < MAX_MON_MOVES; j++)
         {
             SetMonMoveSlot(&gEnemyParty[i + firstMonId], gFacilityTrainerMons[monSetId].moves[j], j);
             if (gFacilityTrainerMons[monSetId].moves[j] == MOVE_FRUSTRATION)

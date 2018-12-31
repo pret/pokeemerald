@@ -8,7 +8,7 @@ Route113_MapScript1_1F215E: @ 81F215E
 	end
 
 Route113_MapScript1_1F2161: @ 81F2161
-	clearflag FLAG_0x09D
+	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	call Route113_EventScript_1F216A
 	end
 

@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
@@ -1088,7 +1089,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
 	setflag FLAG_HIDE_ROUTE_111_DESERT_FOSSIL
-	setflag FLAG_HIDE_ROUTE_111_DESERT_RIVAL
+	setflag FLAG_HIDE_ROUTE_111_PLAYER_DESCENT
 	setflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
 	setflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
@@ -1792,52 +1793,52 @@ Route110_EventScript_271ED7:: @ 8271ED7
 Route119_EventScript_271ED7:: @ 8271ED7
 RustboroCity_EventScript_271ED7:: @ 8271ED7
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq RustboroCity_EventScript_271EEF
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq RustboroCity_EventScript_271EF5
 	end
 
 RustboroCity_EventScript_271EEF:: @ 8271EEF
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 RustboroCity_EventScript_271EF5:: @ 8271EF5
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 LavaridgeTown_EventScript_271EFB:: @ 8271EFB
 Route110_EventScript_271EFB:: @ 8271EFB
 Route119_EventScript_271EFB:: @ 8271EFB
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LavaridgeTown_EventScript_271F13
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LavaridgeTown_EventScript_271F19
 	end
 
 LavaridgeTown_EventScript_271F13:: @ 8271F13
-	setvar VAR_OBJ_GFX_ID_3, 106
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_MACH_BIKE
 	return
 
 LavaridgeTown_EventScript_271F19:: @ 8271F19
-	setvar VAR_OBJ_GFX_ID_3, 101
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE
 	return
 
 EventScript_271F1F:: @ 8271F1F
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq EventScript_271F37
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq EventScript_271F3D
 	end
 
 EventScript_271F37:: @ 8271F37
-	setvar VAR_OBJ_GFX_ID_0, 100
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 EventScript_271F3D:: @ 8271F3D
-	setvar VAR_OBJ_GFX_ID_0, 105
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 DewfordTown_Gym_EventScript_271F43:: @ 8271F43
@@ -4768,7 +4769,7 @@ gUnknown_082A8350:: @ 82A8350
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
-	special sp13F_fall_to_last_warp
+	special DoFallWarp
 	waitstate
 	end
 
@@ -8977,8 +8978,8 @@ BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE: @ 82C3EDE
 	.2byte 0
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
-	setvar VAR_OBJ_GFX_ID_1, 28
-	setvar VAR_OBJ_GFX_ID_0, 28
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_LINK_RECEPTIONIST
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_LINK_RECEPTIONIST
 	setvar VAR_0x8004, 5
 	special CallBattlePikeFunction
 	compare VAR_RESULT, 3

@@ -2857,7 +2857,7 @@ static void ChooseMoveUsedParticle(u8* textBuff)
     s32 counter = 0;
     u32 i = 0;
 
-    while (counter != 4)
+    while (counter != MAX_MON_MOVES)
     {
         if (sGrammarMoveUsedTable[i] == 0)
             counter++;
@@ -2869,7 +2869,7 @@ static void ChooseMoveUsedParticle(u8* textBuff)
     {
         if (counter <= 2)
             StringCopy(textBuff, sText_SpaceIs); // is
-        else if (counter <= 4)
+        else if (counter <= MAX_MON_MOVES)
             StringCopy(textBuff, sText_ApostropheS); // 's
     }
 }
@@ -2900,7 +2900,7 @@ static void ChooseTypeOfMoveUsedString(u8* dst)
     while (*dst != EOS)
         dst++;
 
-    while (counter != 4)
+    while (counter != MAX_MON_MOVES)
     {
         if (sGrammarMoveUsedTable[i] == MOVE_NONE)
             counter++;

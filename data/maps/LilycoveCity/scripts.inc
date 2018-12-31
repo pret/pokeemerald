@@ -231,9 +231,9 @@ LilycoveCity_EventScript_1E2DDE:: @ 81E2DDE
 	lock
 	faceplayer
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LilycoveCity_EventScript_1E2DF8
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LilycoveCity_EventScript_1E2E6B
 	end
 

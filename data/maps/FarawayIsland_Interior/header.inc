@@ -10,6 +10,6 @@ FarawayIsland_Interior: @ 8485778
 	.byte WEATHER_SHADE
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
-	.byte 13
+	map_header_flags allow_bike=1, allow_escape_rope=0, allow_run=1, show_map_name=1
 	.byte MAP_BATTLE_SCENE_NORMAL
 

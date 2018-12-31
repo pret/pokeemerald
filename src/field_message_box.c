@@ -8,21 +8,21 @@
 extern bool32 sub_8196094(void);
 extern void sub_8196080(u8*);
 
-EWRAM_DATA u8 gUnknown_020375BC = 0;
+static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 
-void textbox_fdecode_auto_and_task_add(u8*, int);
-void textbox_auto_and_task_add(void);
+static void textbox_fdecode_auto_and_task_add(u8*, bool32);
+static void textbox_auto_and_task_add(void);
 
-void sub_8098128(void)
+void InitFieldMessageBox(void)
 {
-    gUnknown_020375BC = 0;
+    sFieldMessageBoxMode = 0;
     gTextFlags.canABSpeedUpPrint = 0;
     gTextFlags.useAlternateDownArrow = 0;
     gTextFlags.autoScroll = 0;
     gTextFlags.forceMidTextSpeed = 0;
 }
 
-void sub_8098154(u8 taskId)
+static void sub_8098154(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -39,18 +39,18 @@ void sub_8098154(u8 taskId)
         case 2:
             if (RunTextPrintersAndIsPrinter0Active() != 1)
             {
-                gUnknown_020375BC = 0;
+                sFieldMessageBoxMode = 0;
                 DestroyTask(taskId);
             }
     }
 }
 
-void task_add_textbox(void)
+static void task_add_textbox(void)
 {
     CreateTask(sub_8098154, 0x50);
 }
 
-void task_del_textbox(void)
+static void task_del_textbox(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_8098154);
     if (taskId != 0xFF)
@@ -59,10 +59,10 @@ void task_del_textbox(void)
 
 bool8 ShowFieldMessage(u8 *str)
 {
-    if (gUnknown_020375BC != 0)
+    if (sFieldMessageBoxMode != 0)
         return FALSE;
     textbox_fdecode_auto_and_task_add(str, 1);
-    gUnknown_020375BC = 2;
+    sFieldMessageBoxMode = 2;
     return TRUE;
 }
 
@@ -70,57 +70,57 @@ void sub_8098214(u8 taskId)
 {
     if (!sub_8196094())
     {
-        gUnknown_020375BC = 0;
+        sFieldMessageBoxMode = 0;
         DestroyTask(taskId);
     }
 }
 
 bool8 sub_8098238(u8 *str)
 {
-    if (gUnknown_020375BC != 0)
+    if (sFieldMessageBoxMode != 0)
         return FALSE;
     StringExpandPlaceholders(gStringVar4, str);
     CreateTask(sub_8098214, 0);
     sub_8196080(str);
-    gUnknown_020375BC = 2;
+    sFieldMessageBoxMode = 2;
     return TRUE;
 }
 
 bool8 ShowFieldAutoScrollMessage(u8 *str)
 {
-    if (gUnknown_020375BC != 0)
+    if (sFieldMessageBoxMode != 0)
         return FALSE;
-    gUnknown_020375BC = 3;
+    sFieldMessageBoxMode = 3;
     textbox_fdecode_auto_and_task_add(str, 0);
     return TRUE;
 }
 
 bool8 sub_80982A0(u8 *str)
 {
-    gUnknown_020375BC = 3;
+    sFieldMessageBoxMode = 3;
     textbox_fdecode_auto_and_task_add(str, 1);
     return TRUE;
 }
 
 bool8 sub_80982B8(void)
 {
-    if (gUnknown_020375BC != 0)
+    if (sFieldMessageBoxMode != 0)
         return FALSE;
-    gUnknown_020375BC = 2;
+    sFieldMessageBoxMode = 2;
     textbox_auto_and_task_add();
     return TRUE;
 }
 
-void textbox_fdecode_auto_and_task_add(u8* str, int a)
+static void textbox_fdecode_auto_and_task_add(u8* str, bool32 allowSkippingDelayWithButtonPress)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    AddTextPrinterForMessage(a);
+    AddTextPrinterForMessage(allowSkippingDelayWithButtonPress);
     task_add_textbox();
 }
 
-void textbox_auto_and_task_add(void)
+static void textbox_auto_and_task_add(void)
 {
-    AddTextPrinterForMessage(1);
+    AddTextPrinterForMessage(TRUE);
     task_add_textbox();
 }
 
@@ -128,17 +128,17 @@ void HideFieldMessageBox(void)
 {
     task_del_textbox();
     sub_8197434(0, 1);
-    gUnknown_020375BC = 0;
+    sFieldMessageBoxMode = 0;
 }
 
 u8 GetFieldMessageBoxMode(void)
 {
-    return gUnknown_020375BC;
+    return sFieldMessageBoxMode;
 }
 
 bool8 IsFieldMessageBoxHidden(void)
 {
-    if (gUnknown_020375BC == 0)
+    if (sFieldMessageBoxMode == 0)
         return TRUE;
     return FALSE;
 }
@@ -147,11 +147,11 @@ void sub_8098358(void)
 {
     task_del_textbox();
     NewMenuHelpers_DrawStdWindowFrame(0, 1);
-    gUnknown_020375BC = 0;
+    sFieldMessageBoxMode = 0;
 }
 
 void sub_8098374(void)
 {
     task_del_textbox();
-    gUnknown_020375BC = 0;
+    sFieldMessageBoxMode = 0;
 }

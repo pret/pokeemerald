@@ -72,9 +72,9 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 
 Route104_EventScript_1ECD11:: @ 81ECD11
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq Route104_EventScript_1ECD29
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq Route104_EventScript_1ECD2E
 	return
 
@@ -88,9 +88,9 @@ Route104_EventScript_1ECD2E:: @ 81ECD2E
 
 Route104_EventScript_1ECD33:: @ 81ECD33
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq Route104_EventScript_1ECD4B
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq Route104_EventScript_1ECE6F
 	end
 

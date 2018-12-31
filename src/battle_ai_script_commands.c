@@ -320,7 +320,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
         data[i] = 0;
 
     // Conditional score reset, unlike Ruby.
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (defaultScoreMoves & 1)
             AI_THINKING_STRUCT->score[i] = 100;
@@ -333,7 +333,7 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves)
     moveLimitations = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
 
     // Ignore moves that aren't possible to use.
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBitTable[i] & moveLimitations)
             AI_THINKING_STRUCT->score[i] = 0;
@@ -424,7 +424,7 @@ static u8 ChooseMoveOrAction_Singles(void)
     currentMoveArray[0] = AI_THINKING_STRUCT->score[0];
     consideredMoveArray[0] = 0;
 
-    for (i = 1; i < 4; i++)
+    for (i = 1; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[sBattler_AI].moves[i] != MOVE_NONE)
         {
@@ -459,7 +459,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     s32 mostViableMovesNo;
     s16 mostMovePoints;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (i == sBattler_AI || gBattleMons[i].hp == 0)
         {
@@ -506,7 +506,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
                 mostViableMovesScores[0] = AI_THINKING_STRUCT->score[0];
                 mostViableMovesIndices[0] = 0;
                 mostViableMovesNo = 1;
-                for (j = 1; j < 4; j++)
+                for (j = 1; j < MAX_MON_MOVES; j++)
                 {
                     if (gBattleMons[sBattler_AI].moves[j] != 0)
                     {
@@ -541,7 +541,7 @@ static u8 ChooseMoveOrAction_Doubles(void)
     mostViableTargetsArray[0] = 0;
     mostViableTargetsNo = 1;
 
-    for (i = 1; i < 4; i++)
+    for (i = 1; i < MAX_MON_MOVES; i++)
     {
         if (mostMovePoints == bestMovePointsForTarget[i])
         {
@@ -594,7 +594,7 @@ static void BattleAI_DoAIProcessing(void)
                 {
                    AI_THINKING_STRUCT->movesetIndex++;
 
-                    if (AI_THINKING_STRUCT->movesetIndex < 4 && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK))
+                    if (AI_THINKING_STRUCT->movesetIndex < MAX_MON_MOVES && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK))
                         AI_THINKING_STRUCT->aiState = AIState_SettingUp;
                     else
                         AI_THINKING_STRUCT->aiState++;
@@ -610,7 +610,7 @@ static void RecordLastUsedMoveByTarget(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
@@ -627,7 +627,7 @@ void ClearBattlerMoveHistory(u8 battlerId)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
         BATTLE_HISTORY->usedMoves[battlerId].moves[i] = MOVE_NONE;
 }
 
@@ -1067,14 +1067,14 @@ static void BattleAICmd_if_user_has_attacking_move(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[sBattler_AI].moves[i] != 0
             && gBattleMoves[gBattleMons[sBattler_AI].moves[i]].power != 0)
             break;
     }
 
-    if (i == 4)
+    if (i == MAX_MON_MOVES)
         gAIScriptPtr += 5;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -1084,14 +1084,14 @@ static void BattleAICmd_if_user_has_no_attacking_moves(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[sBattler_AI].moves[i] != 0
          && gBattleMoves[gBattleMons[sBattler_AI].moves[i]].power != 0)
             break;
     }
 
-    if (i != 4)
+    if (i != MAX_MON_MOVES)
         gAIScriptPtr += 5;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -1182,7 +1182,7 @@ static void BattleAICmd_get_how_powerful_move_is(void)
         gMoveResultFlags = 0;
         gCritMultiplier = 1;
 
-        for (checkedMove = 0; checkedMove < 4; checkedMove++)
+        for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
             for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
             {
@@ -1207,13 +1207,13 @@ static void BattleAICmd_get_how_powerful_move_is(void)
             }
         }
 
-        for (checkedMove = 0; checkedMove < 4; checkedMove++)
+        for (checkedMove = 0; checkedMove < MAX_MON_MOVES; checkedMove++)
         {
             if (moveDmgs[checkedMove] > moveDmgs[AI_THINKING_STRUCT->movesetIndex])
                 break;
         }
 
-        if (checkedMove == 4)
+        if (checkedMove == MAX_MON_MOVES)
             AI_THINKING_STRUCT->funcResult = MOVE_MOST_POWERFUL; // Is the most powerful.
         else
             AI_THINKING_STRUCT->funcResult = MOVE_NOT_MOST_POWERFUL; // Not the most powerful.
@@ -1464,7 +1464,7 @@ static void BattleAICmd_get_highest_type_effectiveness(void)
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         gBattleMoveDamage = 40;
         gCurrentMove = gBattleMons[sBattler_AI].moves[i];
@@ -1765,12 +1765,12 @@ static void BattleAICmd_if_has_move(void)
     switch (gAIScriptPtr[1])
     {
     case AI_USER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMons[sBattler_AI].moves[i] == *movePtr)
                 break;
         }
-        if (i == 4)
+        if (i == MAX_MON_MOVES)
             gAIScriptPtr += 8;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
@@ -1783,25 +1783,25 @@ static void BattleAICmd_if_has_move(void)
         }
         else
         {
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (gBattleMons[sBattler_AI ^ BIT_FLANK].moves[i] == *movePtr)
                     break;
             }
         }
-        if (i == 4)
+        if (i == MAX_MON_MOVES)
             gAIScriptPtr += 8;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == *movePtr)
                 break;
         }
-        if (i == 4)
+        if (i == MAX_MON_MOVES)
             gAIScriptPtr += 8;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
@@ -1818,24 +1818,24 @@ static void BattleAICmd_if_doesnt_have_move(void)
     {
     case AI_USER:
     case AI_USER_PARTNER: // UB: no separate check for user partner.
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMons[sBattler_AI].moves[i] == *movePtr)
                 break;
         }
-        if (i != 4)
+        if (i != MAX_MON_MOVES)
             gAIScriptPtr += 8;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] == *movePtr)
                 break;
         }
-        if (i != 4)
+        if (i != MAX_MON_MOVES)
             gAIScriptPtr += 8;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
@@ -1851,25 +1851,25 @@ static void BattleAICmd_if_has_move_with_effect(void)
     {
     case AI_USER:
     case AI_USER_PARTNER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[gBattleMons[sBattler_AI].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
-        if (i == 4)
+        if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             // UB: checks sBattler_AI instead of gBattlerTarget.
             if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
-        if (i == 4)
+        if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
@@ -1885,24 +1885,24 @@ static void BattleAICmd_if_doesnt_have_move_with_effect(void)
     {
     case AI_USER:
     case AI_USER_PARTNER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if(gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[gBattleMons[sBattler_AI].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
-        if (i != 4)
+        if (i != MAX_MON_MOVES)
             gAIScriptPtr += 7;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i] && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
-        if (i != 4)
+        if (i != MAX_MON_MOVES)
             gAIScriptPtr += 7;
         else
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);

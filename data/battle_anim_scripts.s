@@ -3158,7 +3158,7 @@ Move_FORESIGHT:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 16, 0
-	createsprite gUnknown_085CE8C4, ANIM_TARGET, 2, 1
+	createsprite gForesightMagnifyingGlassSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET
 	delay 17
 	loopsewithpan SE_W166, SOUND_PAN_TARGET, 16, 4
 	delay 48
@@ -3540,12 +3540,12 @@ Move_SMELLING_SALT:
 	createsprite gUnknown_085CE864, ANIM_TARGET, 2, 1, 0, 2
 	createsprite gUnknown_085CE864, ANIM_TARGET, 2, 1, 1, 2
 	delay 32
-	createvisualtask sub_815E840, 3, 1, 2
+	createvisualtask AnimTask_SmellingSaltSquish, 3, ANIM_TARGET, 2
 	loopsewithpan SE_W003, SOUND_PAN_TARGET, 12, 2
 	waitforvisualfinish
 	delay 4
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 6, 2
-	createsprite gUnknown_085CE894, ANIM_TARGET, 2, 1, 8, 3
+	createsprite gSmellingSaltExclamationSpriteTemplate, ANIM_TARGET, 2, ANIM_TARGET, 8, 3
 	loopsewithpan SE_W207B, SOUND_PAN_TARGET, 16, 3
 	end
 
@@ -3616,9 +3616,9 @@ Move_TAUNT:
 
 Move_HELPING_HAND:
 	loadspritegfx ANIM_TAG_TAG_HAND
-	createvisualtask sub_815EC48, 5
-	createsprite gUnknown_085CE8AC, ANIM_ATTACKER, 40, 0
-	createsprite gUnknown_085CE8AC, ANIM_ATTACKER, 40, 1
+	createvisualtask AnimTask_HelpingHandAttackerMovement, 5
+	createsprite gHelpingHandClapSpriteTemplate, ANIM_ATTACKER, 40, 0
+	createsprite gHelpingHandClapSpriteTemplate, ANIM_ATTACKER, 40, 1
 	delay 19
 	playsewithpan SE_W227, 0
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATK_PARTNER, 2, 0, 5, 1
@@ -3687,7 +3687,7 @@ Move_RECYCLE:
 	monbg ANIM_ATTACKER
 	setalpha 0, 16
 	delay 1
-	createsprite gUnknown_085CE9B0, ANIM_ATTACKER, 2
+	createsprite gRecycleSpriteTemplate, ANIM_ATTACKER, 2
 	loopsewithpan SE_W036, SOUND_PAN_ATTACKER, 24, 3
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB_WHITE, 12, 2, 1
@@ -3989,7 +3989,7 @@ Move_FEATHER_DANCE:
 Move_TEETER_DANCE:
 	loadspritegfx ANIM_TAG_MUSIC_NOTES
 	loadspritegfx ANIM_TAG_DUCK
-	createvisualtask sub_8160164, 5
+	createvisualtask AnimTask_TeeterDanceMovement, 5
 	createsprite gUnknown_08593050, ANIM_ATTACKER, 2, 0, 16, -2
 	playsewithpan SE_W298, SOUND_PAN_ATTACKER
 	delay 24
@@ -4098,7 +4098,7 @@ Move_NEEDLE_ARM:
 
 Move_SLACK_OFF:
 	loadspritegfx ANIM_TAG_BLUE_STAR
-	createvisualtask sub_8160544, 2, 0
+	createvisualtask AnimTask_SlackOffSquish, 2, ANIM_ATTACKER
 	playsewithpan SE_W281, SOUND_PAN_ATTACKER
 	waitforvisualfinish
 	call HealingEffect
@@ -4211,7 +4211,7 @@ Move_AIR_CUTTER:
 
 Move_ODOR_SLEUTH:
 	monbg ANIM_TARGET
-	createvisualtask sub_815F620, 5
+	createvisualtask AnimTask_OdorSleuthMovement, 5
 	delay 24
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 3, 4
 	playsewithpan SE_W207, SOUND_PAN_ATTACKER
@@ -4365,7 +4365,7 @@ Move_IRON_DEFENSE:
 
 Move_BLOCK:
 	loadspritegfx ANIM_TAG_X_SIGN
-	createsprite gUnknown_085CE90C, ANIM_TARGET, 66
+	createsprite gBlockXSpriteTemplate, ANIM_TARGET, 66
 	playsewithpan SE_W207, SOUND_PAN_TARGET
 	end
 
@@ -8718,12 +8718,12 @@ Move_METEOR_MASH:
 	fadetobg BG_COSMIC
 	waitbgfadein
 	waitforvisualfinish
-	createsprite gUnknown_085CE8DC, ANIM_TARGET, 3, -48, SOUND_PAN_ATTACKER, 72, 32, 30
+	createsprite gMeteorMashStarSpriteTemplate, ANIM_TARGET, 3, -48, -64, 72, 32, 30
 	delay 10
-	createsprite gUnknown_085CE8DC, ANIM_TARGET, 3, -112, SOUND_PAN_ATTACKER, 8, 32, 30
+	createsprite gMeteorMashStarSpriteTemplate, ANIM_TARGET, 3, -112, -64, 8, 32, 30
 	delay 40
 	createsprite gUnknown_08595F14, ANIM_TARGET, 3, 0, 0, 0, 30
-	createsprite gUnknown_085CE8DC, ANIM_TARGET, 3, -80, SOUND_PAN_ATTACKER, 40, 32, 30
+	createsprite gMeteorMashStarSpriteTemplate, ANIM_TARGET, 3, -80, -64, 40, 32, 30
 	delay 20
 	playsewithpan SE_W233B, SOUND_PAN_TARGET
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
@@ -9551,7 +9551,7 @@ Move_KNOCK_OFF:
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 4, 6
 	delay 4
 	playsewithpan SE_W233, SOUND_PAN_TARGET
-	createsprite gUnknown_085CE984, ANIM_TARGET, 2, -16, -16
+	createsprite gKnockOffStrikeSpriteTemplate, ANIM_TARGET, 2, -16, -16
 	delay 8
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 5, 1, RGB_WHITE, 10, 0, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 2
@@ -10556,11 +10556,11 @@ SnatchMoveContinue:
 	end
 SnatchOpposingMonMove:
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
-	createvisualtask sub_815F8F4, 2
+	createvisualtask AnimTask_SnatchOpposingMonMove, 2
 	goto SnatchMoveContinue
 SnatchPartnerMonMove:
 	playsewithpan SE_W104, SOUND_PAN_ATTACKER
-	createvisualtask sub_815FFC4, 2
+	createvisualtask AnimTask_SnatchPartnerMove, 2
 	goto SnatchMoveContinue
 
 General_FutureSightHit:

@@ -12,16 +12,8 @@
 #include "overworld.h"
 #include "wallclock.h"
 
-// static types
-
-// static declarations
-
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
-
-// rodata
-
-// text
 
 static void InitTimeBasedEvents(void)
 {

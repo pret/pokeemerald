@@ -20,9 +20,9 @@ Route103_EventScript_1EC3AE:: @ 81EC3AE
 Route103_EventScript_1EC3C1:: @ 81EC3C1
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq Route103_EventScript_1EC3DA
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq Route103_EventScript_1EC434
 	end
 

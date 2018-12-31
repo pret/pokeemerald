@@ -40,6 +40,7 @@
 #include "fldeff.h"
 #include "fldeff_misc.h"
 #include "field_control_avatar.h"
+#include "mirage_tower.h"
 #include "constants/map_types.h"
 #include "constants/battle_frontier.h"
 
@@ -341,14 +342,14 @@ static void Task_BattleStart(u8 taskId)
         if (!FldEffPoison_IsActive()) // is poison not active?
         {
             BattleTransition_StartOnField(tTransition);
-            sub_81BE72C();
+            ClearMirageTowerPulseBlendEffect();
             tState++; // go to case 1.
         }
         break;
     case 1:
         if (IsBattleTransitionDone() == TRUE)
         {
-            overworld_free_bg_tilemaps();
+            CleanupOverworldWindowsAndTilemaps();
             SetMainCallback2(CB2_InitBattle);
             RestartWildEncounterImmunitySteps();
             ClearPoisonStepCounter();
