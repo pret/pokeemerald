@@ -1170,7 +1170,7 @@ void sub_80EA354(void)
     gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
 }
 
-void sub_80EA3E4(u8 taskId)
+void SecretBasePerStepCallback(u8 taskId)
 {
     s16 x;
     s16 y;

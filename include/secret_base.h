@@ -15,7 +15,7 @@ const u8 *GetSecretBaseTrainerLoseText(void);
 void sub_80E8EE0(struct MapEvents const *events);
 void sub_80E9238(u8 flagIn);
 bool8 CurrentMapIsSecretBase(void);
-void sub_80EA3E4(u8 taskId);
+void SecretBasePerStepCallback(u8 taskId);
 bool8 sub_80E9680(void);
 void sub_80EB498(void);
 void sub_80EB56C(void);
