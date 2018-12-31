@@ -473,14 +473,14 @@ void sub_80D7CB4(u8 taskId)
                     gTasks[taskId].data[0]++;
                     // fallthrough
                 case 1:
-                    if (sub_800A520())
+                    if (IsLinkTaskFinished())
                     {
                         sub_800ADF8();
                         gTasks[taskId].data[0]++;
                     }
                     return;
                 case 2:
-                    if (sub_800A520() != TRUE)
+                    if (IsLinkTaskFinished() != TRUE)
                         return;
                     gTasks[taskId].data[0]++;
                     break;

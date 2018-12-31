@@ -77,7 +77,7 @@ static EWRAM_DATA struct {
     /*0x0034*/ u8 tradeMenuCursorSpriteIdx;
     /*0x0035*/ u8 tradeMenuCursorPosition;
     /*0x0036*/ u8 partyCounts[2];
-    /*0x0038*/ u8 unk_38[12];
+    /*0x0038*/ bool8 tradeMenuOptionsActive[12];
     /*0x0044*/ u8 unk_44;
     /*0x0045*/ u8 unk_45[2][PARTY_SIZE];
     /*0x0051*/ u8 unk_51[2][PARTY_SIZE];
@@ -97,8 +97,7 @@ static EWRAM_DATA struct {
     /*0x007C*/ u8 filler_7C[0x7E - 0x7C];
     /*0x007E*/ u8 unk_7E;
     /*0x007F*/ u8 filler_7F;
-    /*0x0080*/ u16 unk_80[2];
-    /*0x0084*/ u8 filler_84[0xA8 - 0x84];
+    /*0x0080*/ u16 linkData[20];
     /*0x00A8*/ u8 unk_A8;
     /*0x00A9*/ u8 unk_A9[11];
     /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
@@ -166,7 +165,7 @@ static void sub_8078C34(void);
 static void sub_80795AC(void);
 static void sub_807967C(u8);
 static void sub_80796B4(u8);
-static u8 sub_8079A3C(u8 *, bool8, u8);
+static u8 sub_8079A3C(u8 *, u8, u8);
 static void sub_8079AA4(u8 *, u8, u8);
 static void sub_8079BE0(u8);
 static void sub_8079C4C(u8, u8, u8, u8, u8, u8);
@@ -195,7 +194,7 @@ static void sub_807B170(void);
 static void sub_807B60C(void);
 static void sub_807B62C(u8);
 static void sub_807BA94(void);
-static void sub_807BAD8(void);
+static void SetTradeSceneStrings(void);
 static u8 sub_807BBC8(void);
 static u8 sub_807BBEC(void);
 static u8 sub_807CFC8(void);
@@ -1338,11 +1337,11 @@ static bool32 sub_80771BC(void)
     }
     else
     {
-        return sub_800A520();
+        return IsLinkTaskFinished();
     }
 }
 
-static u32 sub_8077200(void)
+static u32 _GetBlockReceivedStatus(void)
 {
     return GetBlockReceivedStatus();
 }
@@ -1373,7 +1372,7 @@ static void sub_8077234(u32 a0)
 
 static bool32 sub_8077260(void)
 {
-    if (gWirelessCommType != 0 && gUnknown_02022C2C == 29)
+    if (gWirelessCommType && gUnknown_02022C2C == 29)
     {
         return TRUE;
     }
@@ -1388,9 +1387,9 @@ static void sub_8077288(u8 unused)
     sub_800ADF8();
 }
 
-static bool32 IsLinkTaskFinished(void)
+static bool32 _IsLinkTaskFinished(void)
 {
-    return sub_800A520();
+    return IsLinkTaskFinished();
 }
 
 static void sub_80772A4(void)
@@ -1475,12 +1474,12 @@ static void sub_80773D0(void)
         sub_807A19C(0);
         ShowBg(0);
 
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gLinkType = 0x1122;
             gUnknown_0203229C->unk_A8 = 0;
 
-            if (gWirelessCommType != 0)
+            if (gWirelessCommType)
             {
                 sub_800B488();
                 OpenLink();
@@ -1524,13 +1523,13 @@ static void sub_80773D0(void)
         }
         break;
     case 4:
-        if (gReceivedRemoteLinkPlayers == 1 && IsLinkPlayerDataExchangeComplete() == 1)
+        if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
             sub_8011BD0();
             CalculatePlayerPartyCount();
             gMain.state++;
             gUnknown_0203229C->unk_A8 = 0;
-            if (gWirelessCommType != 0)
+            if (gWirelessCommType)
             {
                 sub_801048C(TRUE);
                 sub_800ADF8();
@@ -1538,7 +1537,7 @@ static void sub_80773D0(void)
         }
         break;
     case 5:
-        if (gWirelessCommType != 0)
+        if (gWirelessCommType)
         {
             if (sub_8010500())
             {
@@ -1735,7 +1734,7 @@ static void sub_8077B74(void)
         gMain.state++;
         break;
     case 5:
-        if (gWirelessCommType != 0)
+        if (gWirelessCommType)
         {
             sub_800E0E8();
             CreateWirelessStatusIndicatorSprite(0, 0);
@@ -1834,13 +1833,9 @@ static void sub_8077B74(void)
         }
 
         if (gUnknown_0203229C->tradeMenuCursorPosition < PARTY_SIZE)
-        {
             gUnknown_0203229C->tradeMenuCursorPosition = gUnknown_0203CF20;
-        }
         else
-        {
             gUnknown_0203229C->tradeMenuCursorPosition = gUnknown_0203CF20 + PARTY_SIZE;
-        }
 
         gUnknown_0203229C->tradeMenuCursorSpriteIdx = CreateSprite(&gSpriteTemplate_832DC94, gTradeMonSpriteCoords[gUnknown_0203229C->tradeMenuCursorPosition][0] * 8 + 32, gTradeMonSpriteCoords[gUnknown_0203229C->tradeMenuCursorPosition][1] * 8, 2);
         gMain.state = 16;
@@ -1911,7 +1906,7 @@ static void sub_807816C(void)
         gUnknown_02032298[0] = gUnknown_0203229C->tradeMenuCursorPosition;
         gUnknown_02032298[1] = gUnknown_0203229C->unk_7E;
 
-        if (gWirelessCommType != 0)
+        if (gWirelessCommType)
         {
             gUnknown_0203229C->unk_6F = 16;
         }
@@ -1927,7 +1922,7 @@ static void sub_80781C8(void)
 {
     gMain.savedCallback = sub_80773AC;
 
-    if (gWirelessCommType != 0)
+    if (gWirelessCommType)
     {
         if (sub_8010500())
         {
@@ -1941,7 +1936,7 @@ static void sub_80781C8(void)
     }
     else
     {
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             Free(gUnknown_02032184);
             FreeAllWindowBuffers();
@@ -2011,29 +2006,32 @@ static void sub_8078388(void)
         if (i < gUnknown_0203229C->partyCounts[0])
         {
             gSprites[gUnknown_0203229C->partyIcons[0][i]].invisible = FALSE;
-            gUnknown_0203229C->unk_38[i] = TRUE;
+            gUnknown_0203229C->tradeMenuOptionsActive[i] = TRUE;
         }
         else
         {
-            gUnknown_0203229C->unk_38[i] = FALSE;
+            gUnknown_0203229C->tradeMenuOptionsActive[i] = FALSE;
         }
 
         if (i < gUnknown_0203229C->partyCounts[1])
         {
             gSprites[gUnknown_0203229C->partyIcons[1][i]].invisible = FALSE;
-            gUnknown_0203229C->unk_38[i + PARTY_SIZE] = TRUE;
+            gUnknown_0203229C->tradeMenuOptionsActive[i + PARTY_SIZE] = TRUE;
         }
         else
         {
-            gUnknown_0203229C->unk_38[i + PARTY_SIZE] = FALSE;
+            gUnknown_0203229C->tradeMenuOptionsActive[i + PARTY_SIZE] = FALSE;
         }
     }
 
     gUnknown_0203229C->unk_44 = 1;
 }
 
-static void sub_8078438(u8 *dest, const u8 *src, u32 count)
+// why not just use memcpy?
+static void Trade_Memcpy(void *dataDest, const void *dataSrc, u32 count)
 {
+    u8 *dest = dataDest;
+    const u8 *src = dataSrc;
     u32 i;
 
     for (i = 0; i < count; i++)
@@ -2051,14 +2049,14 @@ static bool8 shedinja_maker_maybe(void)
     switch (gUnknown_0203229C->unk_69)
     {
     case 0:
-        sub_8078438(gBlockSendBuffer, (void *)&gPlayerParty[0], 200);
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[0], 2 * sizeof(struct Pokemon));
         gUnknown_0203229C->unk_69++;
         gUnknown_0203229C->unk_A8 = 0;
         break;
     case 1:
         if (sub_80771BC())
         {
-            if (!sub_8077200())
+            if (_GetBlockReceivedStatus() == 0)
             {
                 gUnknown_0203229C->unk_69++;
             }
@@ -2077,15 +2075,15 @@ static bool8 shedinja_maker_maybe(void)
         gUnknown_0203229C->unk_69++;
         break;
     case 4:
-        if (sub_8077200() == 3)
+        if (_GetBlockReceivedStatus() == 3)
         {
-            sub_8078438((void *)&gEnemyParty[0], (void *)gBlockRecvBuffer[id ^ 1], 200);
+            Trade_Memcpy(&gEnemyParty[0], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
             sub_8077210();
             gUnknown_0203229C->unk_69++;
         }
         break;
     case 5:
-        sub_8078438(gBlockSendBuffer, (void *)&gPlayerParty[2], 200);
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[2], 2 * sizeof(struct Pokemon));
         gUnknown_0203229C->unk_69++;
         break;
     case 7:
@@ -2096,15 +2094,15 @@ static bool8 shedinja_maker_maybe(void)
         gUnknown_0203229C->unk_69++;
         break;
     case 8:
-        if (sub_8077200() == 3)
+        if (_GetBlockReceivedStatus() == 3)
         {
-            sub_8078438((void *)&gEnemyParty[2], (void *)gBlockRecvBuffer[id ^ 1], 200);
+            Trade_Memcpy(&gEnemyParty[2], gBlockRecvBuffer[id ^ 1], 200);
             sub_8077210();
             gUnknown_0203229C->unk_69++;
         }
         break;
     case 9:
-        sub_8078438(gBlockSendBuffer, (void *)&gPlayerParty[4], 200);
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[4], 200);
         gUnknown_0203229C->unk_69++;
         break;
     case 11:
@@ -2115,15 +2113,15 @@ static bool8 shedinja_maker_maybe(void)
         gUnknown_0203229C->unk_69++;
         break;
     case 12:
-        if (sub_8077200() == 3)
+        if (_GetBlockReceivedStatus() == 3)
         {
-            sub_8078438((void *)&gEnemyParty[4], (void *)gBlockRecvBuffer[id ^ 1], 200);
+            Trade_Memcpy(&gEnemyParty[4], gBlockRecvBuffer[id ^ 1], 200);
             sub_8077210();
             gUnknown_0203229C->unk_69++;
         }
         break;
     case 13:
-        sub_8078438(gBlockSendBuffer, (void *)gSaveBlock1Ptr->mail, 220);
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, 220);
         gUnknown_0203229C->unk_69++;
         break;
     case 15:
@@ -2134,15 +2132,15 @@ static bool8 shedinja_maker_maybe(void)
         gUnknown_0203229C->unk_69++;
         break;
     case 16:
-        if (sub_8077200() == 3)
+        if (_GetBlockReceivedStatus() == 3)
         {
-            sub_8078438((void *)gUnknown_020321C0, (void *)gBlockRecvBuffer[id ^ 1], 216);
+            Trade_Memcpy(gUnknown_020321C0, gBlockRecvBuffer[id ^ 1], 216);
             sub_8077210();
             gUnknown_0203229C->unk_69++;
         }
         break;
     case 17:
-        sub_8078438(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, 11);
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, 11);
         gUnknown_0203229C->unk_69++;
         break;
     case 19:
@@ -2153,9 +2151,9 @@ static bool8 shedinja_maker_maybe(void)
         gUnknown_0203229C->unk_69++;
         break;
     case 20:
-        if (sub_8077200() == 3)
+        if (_GetBlockReceivedStatus() == 3)
         {
-            sub_8078438(gUnknown_0203229C->unk_A9, (void *)gBlockRecvBuffer[id ^ 1], 11);
+            Trade_Memcpy(gUnknown_0203229C->unk_A9, gBlockRecvBuffer[id ^ 1], 11);
             sub_8077210();
             gUnknown_0203229C->unk_69++;
         }
@@ -2279,9 +2277,7 @@ static void sub_8078900(u8 a0, u8 a1)
     }
 
     if (a1 & 2)
-    {
         sub_8077234(1);
-    }
 }
 
 static void sub_80789FC(void)
@@ -2291,16 +2287,16 @@ static void sub_80789FC(void)
         if (gUnknown_0203229C->unk_78 == 1 && gUnknown_0203229C->unk_79 == 1)
         {
             gUnknown_0203229C->unk_6F = 6;
-            gUnknown_0203229C->unk_80[0] = 0xDDDD;
-            gUnknown_0203229C->unk_80[1] = gUnknown_0203229C->tradeMenuCursorPosition;
+            gUnknown_0203229C->linkData[0] = 0xDDDD;
+            gUnknown_0203229C->linkData[1] = gUnknown_0203229C->tradeMenuCursorPosition;
             sub_807A048(5, 0);
             gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
         }
         else if (gUnknown_0203229C->unk_78 == 1 && gUnknown_0203229C->unk_79 == 2)
         {
             sub_807A19C(1);
-            gUnknown_0203229C->unk_80[0] = 0xEECC;
-            gUnknown_0203229C->unk_80[1] = 0;
+            gUnknown_0203229C->linkData[0] = 0xEECC;
+            gUnknown_0203229C->linkData[1] = 0;
             sub_807A048(5, 0);
             gUnknown_0203229C->unk_7A = gUnknown_0203229C->unk_7B = 0;
             gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
@@ -2309,8 +2305,8 @@ static void sub_80789FC(void)
         else if (gUnknown_0203229C->unk_78 == 2 && gUnknown_0203229C->unk_79 == 1)
         {
             sub_807A19C(5);
-            gUnknown_0203229C->unk_80[0] = 0xDDEE;
-            gUnknown_0203229C->unk_80[1] = 0;
+            gUnknown_0203229C->linkData[0] = 0xDDEE;
+            gUnknown_0203229C->linkData[1] = 0;
             sub_807A048(5, 0);
             gUnknown_0203229C->unk_7A = gUnknown_0203229C->unk_7B = 0;
             gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
@@ -2318,8 +2314,8 @@ static void sub_80789FC(void)
         }
         else if (gUnknown_0203229C->unk_78 == 2 && gUnknown_0203229C->unk_79 == 2)
         {
-            gUnknown_0203229C->unk_80[0] = 0xEEBB;
-            gUnknown_0203229C->unk_80[1] = 0;
+            gUnknown_0203229C->linkData[0] = 0xEEBB;
+            gUnknown_0203229C->linkData[1] = 0;
             sub_807A048(5, 0);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gUnknown_0203229C->unk_78 = gUnknown_0203229C->unk_79 = 0;
@@ -2331,8 +2327,8 @@ static void sub_80789FC(void)
     {
         if (gUnknown_0203229C->unk_7A == 1 && gUnknown_0203229C->unk_7B == 1)
         {
-            gUnknown_0203229C->unk_80[0] = 0xCCDD;
-            gUnknown_0203229C->unk_80[1] = 0;
+            gUnknown_0203229C->linkData[0] = 0xCCDD;
+            gUnknown_0203229C->linkData[1] = 0;
             sub_807A048(5, 0);
             gUnknown_0203229C->unk_7A = 0;
             gUnknown_0203229C->unk_7B = 0;
@@ -2342,8 +2338,8 @@ static void sub_80789FC(void)
         if (gUnknown_0203229C->unk_7A == 2 || gUnknown_0203229C->unk_7B == 2)
         {
             sub_807A19C(1);
-            gUnknown_0203229C->unk_80[0] = 0xDDEE;
-            gUnknown_0203229C->unk_80[1] = 0;
+            gUnknown_0203229C->linkData[0] = 0xDDEE;
+            gUnknown_0203229C->linkData[1] = 0;
             sub_807A048(5, 0);
             gUnknown_0203229C->unk_7A = 0;
             gUnknown_0203229C->unk_7B = 0;
@@ -2361,54 +2357,48 @@ static void sub_8078BFC(u16 *a0, u16 a1, u16 a2)
 
 static void sub_8078C10(u16 a0, u16 a1)
 {
-    sub_8078BFC(gUnknown_0203229C->unk_80, a0, a1);
+    sub_8078BFC(gUnknown_0203229C->linkData, a0, a1);
 }
 
 static void sub_8078C34(void)
 {
-    u8 id = GetMultiplayerId();
-    u8 unk;
+    u8 mpId = GetMultiplayerId();
+    u8 status;
 
-    if ((unk = sub_8077200()))
+    if ((status = _GetBlockReceivedStatus()))
     {
-        if (id == 0)
-        {
-            sub_80787E0(id, unk);
-        }
+        if (mpId == 0)
+            sub_80787E0(mpId, status);
         else
-        {
-            sub_8078900(id, unk);
-        }
+            sub_8078900(mpId, status);
     }
 
-    if (id == 0)
-    {
+    if (mpId == 0)
         sub_80789FC();
-    }
 }
 
-static u8 sub_8078C6C(u8 a0, u8 a1)
+static u8 sub_8078C6C(u8 oldPosition, u8 direction)
 {
     int i;
-    u8 ret = 0;
+    u8 newPosition = 0;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (gUnknown_0203229C->unk_38[gTradeNextSelectedMonTable[a0][a1][i]] == 1)
+        if (gUnknown_0203229C->tradeMenuOptionsActive[gTradeNextSelectedMonTable[oldPosition][direction][i]] == TRUE)
         {
-            ret = gTradeNextSelectedMonTable[a0][a1][i];
+            newPosition = gTradeNextSelectedMonTable[oldPosition][direction][i];
             break;
         }
     }
 
-    return ret;
+    return newPosition;
 }
 
-static void sub_8078CB8(u8 *a0, u8 a1)
+static void TradeMenuMoveCursor(u8 *tradeMenuCursorPosition, u8 direction)
 {
-    u8 unk = sub_8078C6C(*a0, a1);
+    u8 newPosition = sub_8078C6C(*tradeMenuCursorPosition, direction);
 
-    if (unk == 12)
+    if (newPosition == 12) // CANCEL
     {
         StartSpriteAnim(&gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx], 1);
         gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx].pos1.x = 224;
@@ -2417,16 +2407,16 @@ static void sub_8078CB8(u8 *a0, u8 a1)
     else
     {
         StartSpriteAnim(&gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx], 0);
-        gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx].pos1.x = gTradeMonSpriteCoords[unk][0] * 8 + 32;
-        gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx].pos1.y = gTradeMonSpriteCoords[unk][1] * 8;
+        gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx].pos1.x = gTradeMonSpriteCoords[newPosition][0] * 8 + 32;
+        gSprites[gUnknown_0203229C->tradeMenuCursorSpriteIdx].pos1.y = gTradeMonSpriteCoords[newPosition][1] * 8;
     }
 
-    if (*a0 != unk)
+    if (*tradeMenuCursorPosition != newPosition)
     {
         PlaySE(SE_SELECT);
     }
 
-    *a0 = unk;
+    *tradeMenuCursorPosition = newPosition;
 }
 
 static void sub_8078D78(void)
@@ -2448,19 +2438,19 @@ static void sub_8078DBC(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        sub_8078CB8(&gUnknown_0203229C->tradeMenuCursorPosition, 0);
+        TradeMenuMoveCursor(&gUnknown_0203229C->tradeMenuCursorPosition, 0);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        sub_8078CB8(&gUnknown_0203229C->tradeMenuCursorPosition, 1);
+        TradeMenuMoveCursor(&gUnknown_0203229C->tradeMenuCursorPosition, 1);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        sub_8078CB8(&gUnknown_0203229C->tradeMenuCursorPosition, 2);
+        TradeMenuMoveCursor(&gUnknown_0203229C->tradeMenuCursorPosition, 2);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        sub_8078CB8(&gUnknown_0203229C->tradeMenuCursorPosition, 3);
+        TradeMenuMoveCursor(&gUnknown_0203229C->tradeMenuCursorPosition, 3);
     }
 
     if (gMain.newKeys & A_BUTTON)
@@ -2652,9 +2642,7 @@ static void sub_8079218(void)
         case MENU_B_PRESSED:
             sub_807A048(3, 1);
             if (sub_80771BC())
-            {
                 sub_8078C10(0xBBCC, 0);
-            }
             gUnknown_0203229C->unk_6F = 100;
             PutWindowTilemap(17);
             break;
@@ -2711,7 +2699,7 @@ static void sub_8079398(void)
     }
 }
 
-static void sub_80793C4(void)
+static void DisplayMessageAndContinueTask(void)
 {
     gUnknown_0203229C->unk_A8++;
 
@@ -2778,7 +2766,7 @@ static void sub_80794CC(void)
     }
     else
     {
-        if (gReceivedRemoteLinkPlayers == 0)
+        if (!gReceivedRemoteLinkPlayers)
         {
             Free(gUnknown_02032184);
             Free(gUnknown_0203229C);
@@ -2850,7 +2838,7 @@ static void sub_80795AC(void)
             sub_80781C8();
             break;
         case 14:
-            sub_80793C4();
+            DisplayMessageAndContinueTask();
             break;
         case 15:
             sub_8079034();
@@ -2866,38 +2854,37 @@ static void sub_80795AC(void)
 
 static void sub_807967C(u8 a0)
 {
-    u8 whichTeam = a0 / PARTY_SIZE;
+    u8 whichParty = a0 / PARTY_SIZE;
 
-    if (gUnknown_0203229C->unk_74[whichTeam] == 0)
+    if (gUnknown_0203229C->unk_74[whichParty] == 0)
     {
-        gUnknown_0203229C->unk_74[whichTeam] = 1;
-        gUnknown_0203229C->unk_76[whichTeam] = a0;
+        gUnknown_0203229C->unk_74[whichParty] = 1;
+        gUnknown_0203229C->unk_76[whichParty] = a0;
     }
 }
 
 static void sub_80796B4(u8 a0)
 {
-    s8 test;
-    u8 sp14[20];
-    u8 sp28[56];
+    s8 nameStringWidth;
+    u8 nickname[20];
+    u8 movesString[56];
     u8 i;
-    u8 r8;
-    u8 r10;
-    u8 sp60;
-    u8 var = gUnknown_0203229C->unk_76[a0];
+    u8 partyIdx;
+    u8 whichParty;
+    u8 monIdx = gUnknown_0203229C->unk_76[a0];
 
-    sp60 = 1;
-    if (gUnknown_0203229C->unk_76[a0] < 6)
-        sp60 = 0;
-    r10 = var % 6;
-    test = 0;
+    whichParty = 1;
+    if (gUnknown_0203229C->unk_76[a0] < PARTY_SIZE)
+        whichParty = 0;
+    partyIdx = monIdx % PARTY_SIZE;
+    nameStringWidth = 0;
 
     switch (gUnknown_0203229C->unk_74[a0])
     {
     case 1:
         for (i = 0; i < gUnknown_0203229C->partyCounts[a0]; i++)
         {
-            gSprites[gUnknown_0203229C->partyIcons[0][i + (sp60 * 6)]].invisible = TRUE;
+            gSprites[gUnknown_0203229C->partyIcons[0][i + (whichParty * PARTY_SIZE)]].invisible = TRUE;
         }
 
         for (i = 0; i < 6; i++)
@@ -2905,39 +2892,35 @@ static void sub_80796B4(u8 a0)
             ClearWindowTilemap(i + (a0 * 6 + 2));
         }
 
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].invisible = FALSE;
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].data[0] = 20;
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].data[2] = (gTradeMonSpriteCoords[sp60 * 6][0] + gTradeMonSpriteCoords[sp60 * 6 + 1][0]) / 2 * 8 + 14;
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].data[4] = (gTradeMonSpriteCoords[sp60 * 6][1] * 8) - 12;
-        StoreSpriteCallbackInData6(&gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]], sub_80D3014);
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].invisible = FALSE;
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[0] = 20;
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[2] = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + gTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].data[4] = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        StoreSpriteCallbackInData6(&gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]], sub_80D3014);
         gUnknown_0203229C->unk_74[a0]++;
-        sub_80A6DEC(&gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]]);
+        sub_80A6DEC(&gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]]);
         CopyToBgTilemapBufferRect_ChangePalette(1, gTradePartyBoxTilemap, a0 * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(0);
 
-        if (!sp60)
-        {
+        if (whichParty == 0)
             sub_8079F74();
-        }
         break;
     case 2:
-        if (gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].callback == sub_80D3014)
-        {
+        if (gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].callback == sub_80D3014)
             gUnknown_0203229C->unk_74[a0] = 3;
-        }
         break;
     case 3:
-        CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMovesBoxTilemap, sp60 * 15, 0, 15, 17, 0);
+        CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMovesBoxTilemap, whichParty * 15, 0, 15, 17, 0);
         CopyBgTilemapBufferToVram(1);
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].pos1.x = (gTradeMonSpriteCoords[sp60 * 6][0] + gTradeMonSpriteCoords[sp60 * 6 + 1][0]) / 2 * 8 + 14;
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].pos1.y = (gTradeMonSpriteCoords[sp60 * 6][1] * 8) - 12;
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].pos2.x = 0;
-        gSprites[gUnknown_0203229C->partyIcons[0][r10 + (sp60 * 6)]].pos2.y = 0;
-        test = sub_8079A3C(sp14, sp60, r10);
-        AddTextPrinterParameterized3((a0 * 2) + 14, 0, (80 - test) / 2, 4, gUnknown_0832DEE0, 0, sp14);
-        sub_8079AA4(sp28, sp60, r10);
-        AddTextPrinterParameterized4((a0 * 2) + 15, 1, 0, 0, 0, 0, gUnknown_0832DEE0, 0, sp28);
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.x = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][0] + gTradeMonSpriteCoords[whichParty * PARTY_SIZE + 1][0]) / 2 * 8 + 14;
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos1.y = (gTradeMonSpriteCoords[whichParty * PARTY_SIZE][1] * 8) - 12;
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.x = 0;
+        gSprites[gUnknown_0203229C->partyIcons[0][partyIdx + (whichParty * PARTY_SIZE)]].pos2.y = 0;
+        nameStringWidth = sub_8079A3C(nickname, whichParty, partyIdx);
+        AddTextPrinterParameterized3((a0 * 2) + 14, 0, (80 - nameStringWidth) / 2, 4, gUnknown_0832DEE0, 0, nickname);
+        sub_8079AA4(movesString, whichParty, partyIdx);
+        AddTextPrinterParameterized4((a0 * 2) + 15, 1, 0, 0, 0, 0, gUnknown_0832DEE0, 0, movesString);
         PutWindowTilemap((a0 * 2) + 14);
         CopyWindowToVram((a0 * 2) + 14, 3);
         PutWindowTilemap((a0 * 2) + 15);
@@ -2945,27 +2928,23 @@ static void sub_80796B4(u8 a0)
         gUnknown_0203229C->unk_74[a0]++;
         break;
     case 4:
-        sub_8079C4C(a0, r10, gUnknown_0832DF99[a0][0] + 4, gUnknown_0832DF99[a0][1] + 1, gUnknown_0832DF99[a0][0], gUnknown_0832DF99[a0][1]);
+        sub_8079C4C(a0, partyIdx, gUnknown_0832DF99[a0][0] + 4, gUnknown_0832DF99[a0][1] + 1, gUnknown_0832DF99[a0][0], gUnknown_0832DF99[a0][1]);
         gUnknown_0203229C->unk_74[a0]++;
         break;
     }
 }
 
-static u8 sub_8079A3C(u8 *a0, bool8 a1, u8 a2)
+static u8 sub_8079A3C(u8 *str, u8 whichParty, u8 monIdx)
 {
-    u8 name[12];
+    u8 nickname[12];
 
-    if (!a1)
-    {
-        GetMonData(&gPlayerParty[a2], MON_DATA_NICKNAME, name);
-    }
+    if (whichParty == 0)
+        GetMonData(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
     else
-    {
-        GetMonData(&gEnemyParty[a2], MON_DATA_NICKNAME, name);
-    }
+        GetMonData(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
 
-    StringCopy10(a0, name);
-    return GetStringWidth(0, a0, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
+    StringCopy10(str, nickname);
+    return GetStringWidth(0, str, GetFontAttribute(0, FONTATTR_LETTER_SPACING));
 }
 
 static void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
@@ -3006,57 +2985,52 @@ static void sub_8079AA4(u8 *a0, u8 a1, u8 a2)
     }
 }
 
-static void sub_8079B84(u8 a0, u8 a1, u8 *a2)
+static void sub_8079B84(u8 whichParty, u8 windowId, u8 *str)
 {
     u8 xPos;
-    a1 += (a0 * 6) + 2;
-    xPos = GetStringCenterAlignXOffset(0, a2, 64);
-    AddTextPrinterParameterized3(a1, 0, xPos, 4, gUnknown_0832DEE0, 0, a2);
-    PutWindowTilemap(a1);
-    CopyWindowToVram(a1, 3);
+    windowId += (whichParty * PARTY_SIZE) + 2;
+    xPos = GetStringCenterAlignXOffset(0, str, 64);
+    AddTextPrinterParameterized3(windowId, 0, xPos, 4, gUnknown_0832DEE0, 0, str);
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
 }
 
-static void sub_8079BE0(u8 a0)
+static void sub_8079BE0(u8 whichParty)
 {
     u8 i;
     u8 sp[20];
     u8 sp14[32];
-    struct Pokemon *mons = a0 == 0 ? gPlayerParty : gEnemyParty;
+    struct Pokemon *mons = whichParty == 0 ? gPlayerParty : gEnemyParty;
 
-    for (i = 0; i < gUnknown_0203229C->partyCounts[a0]; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[whichParty]; i++)
     {
         GetMonData(&mons[i], MON_DATA_NICKNAME, sp);
         StringCopy10(sp14, sp);
-        sub_8079B84(a0, i, sp14);
+        sub_8079B84(whichParty, i, sp14);
     }
 }
 
-static void sub_8079C4C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
+static void sub_8079C4C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
 {
-    u8 r6;
+    u8 level;
     u32 r2;
     u8 gender;
-    u8 name[12];
+    u8 nickname[12];
 
     CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DDD704, a4, a5, 6, 3, 0);
     CopyBgTilemapBufferToVram(1);
 
-    if (a0 == 0)
-    {
-        r6 = GetMonData(&gPlayerParty[a1], MON_DATA_LEVEL, NULL);
-    }
+    if (whichParty == 0)
+        level = GetMonData(&gPlayerParty[monIdx], MON_DATA_LEVEL, NULL);
     else
-    {
-        r6 = GetMonData(&gEnemyParty[a1], MON_DATA_LEVEL, NULL);
-    }
+        level = GetMonData(&gEnemyParty[monIdx], MON_DATA_LEVEL, NULL);
 
-    if (gUnknown_0203229C->unk_51[a0][a1] == 0)
+    if (gUnknown_0203229C->unk_51[whichParty][monIdx] == 0)
     {
-        if (r6 / 10 != 0)
-        {
-            gUnknown_0203229C->tilemapBuffer[a2 + (a3 * 32)] = (r6 / 10) + 0x60;
-        }
-        gUnknown_0203229C->tilemapBuffer[a2 + (a3 * 32) + 1] = (r6 % 10) + 0x70;
+        if (level / 10 != 0)
+            gUnknown_0203229C->tilemapBuffer[a2 + (a3 * 32)] = (level / 10) + 0x60;
+
+        gUnknown_0203229C->tilemapBuffer[a2 + (a3 * 32) + 1] = (level % 10) + 0x70;
     }
     else
     {
@@ -3064,30 +3038,30 @@ static void sub_8079C4C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
         gUnknown_0203229C->tilemapBuffer[a2 + (a3 * 32) - 31] = gUnknown_0203229C->tilemapBuffer[a2 + (a3 * 32) - 36] | 0x400;
     }
 
-    if (gUnknown_0203229C->unk_51[a0][a1] != 0)
+    if (gUnknown_0203229C->unk_51[whichParty][monIdx] != 0)
     {
         r2 = 0x480;
     }
     else
     {
-        if (a0 == 0)
+        if (whichParty == 0)
         {
-            gender = GetMonGender(&gPlayerParty[a1]);
-            GetMonData(&gPlayerParty[a1], MON_DATA_NICKNAME, name);
+            gender = GetMonGender(&gPlayerParty[monIdx]);
+            GetMonData(&gPlayerParty[monIdx], MON_DATA_NICKNAME, nickname);
         }
         else
         {
-            gender = GetMonGender(&gEnemyParty[a1]);
-            GetMonData(&gEnemyParty[a1], MON_DATA_NICKNAME, name);
+            gender = GetMonGender(&gEnemyParty[monIdx]);
+            GetMonData(&gEnemyParty[monIdx], MON_DATA_NICKNAME, nickname);
         }
 
         switch (gender)
         {
             case MON_MALE:
-                r2 = !NameHasGenderSymbol(name, MON_MALE) ? 0x84 : 0x83;
+                r2 = !NameHasGenderSymbol(nickname, MON_MALE) ? 0x84 : 0x83;
                 break;
             case MON_FEMALE:
-                r2 = !NameHasGenderSymbol(name, MON_FEMALE) ? 0x85 : 0x83;
+                r2 = !NameHasGenderSymbol(nickname, MON_FEMALE) ? 0x85 : 0x83;
                 break;
             default:
                 r2 = 0x83;
@@ -3161,17 +3135,17 @@ _08079E94:\n\
 }
 #endif // NONMATCHING
 
-static void sub_8079EA8(u8 a0)
+static void sub_8079EA8(u8 whichParty)
 {
     int i;
 
-    for (i = 0; i < gUnknown_0203229C->partyCounts[a0]; i++)
+    for (i = 0; i < gUnknown_0203229C->partyCounts[whichParty]; i++)
     {
-        gSprites[gUnknown_0203229C->partyIcons[a0][i]].invisible = FALSE;
-        gSprites[gUnknown_0203229C->partyIcons[a0][i]].pos1.x = gTradeMonSpriteCoords[(a0 * 6) + i][0] * 8 + 14;
-        gSprites[gUnknown_0203229C->partyIcons[a0][i]].pos1.y = gTradeMonSpriteCoords[(a0 * 6) + i][1] * 8 - 12;
-        gSprites[gUnknown_0203229C->partyIcons[a0][i]].pos2.x = 0;
-        gSprites[gUnknown_0203229C->partyIcons[a0][i]].pos2.y = 0;
+        gSprites[gUnknown_0203229C->partyIcons[whichParty][i]].invisible = FALSE;
+        gSprites[gUnknown_0203229C->partyIcons[whichParty][i]].pos1.x = gTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][0] * 8 + 14;
+        gSprites[gUnknown_0203229C->partyIcons[whichParty][i]].pos1.y = gTradeMonSpriteCoords[(whichParty * PARTY_SIZE) + i][1] * 8 - 12;
+        gSprites[gUnknown_0203229C->partyIcons[whichParty][i]].pos2.x = 0;
+        gSprites[gUnknown_0203229C->partyIcons[whichParty][i]].pos2.y = 0;
     }
 }
 
@@ -3250,7 +3224,7 @@ static void sub_807A0C4(void)
                 switch (gUnknown_0203229C->unk_8D0[i].unk_4)
                 {
                     case 0:
-                        sub_8077170(gUnknown_0203229C->unk_80, 20);
+                        sub_8077170(gUnknown_0203229C->linkData, 20);
                         break;
                     case 1:
                         sub_807A19C(0);
@@ -3434,14 +3408,12 @@ static void sub_807A5B0(void)
         if (gSaveBlock1Ptr->giftRibbons[i] == 0 && gUnknown_0203229C->unk_A9[i] != 0)
         {
             if (gUnknown_0203229C->unk_A9[i] < 64)
-            {
                 gSaveBlock1Ptr->giftRibbons[i] = gUnknown_0203229C->unk_A9[i];
-            }
         }
     }
 }
 
-static u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
+static u32 sub_807A5F4(struct Pokemon *monList, int a1, int monIdx)
 {
     int i, sum;
     struct LinkPlayer *player;
@@ -3450,18 +3422,18 @@ static u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
 
     for (i = 0; i < a1; i++)
     {
-        species2[i] = GetMonData(&a0[i], MON_DATA_SPECIES2);
-        species[i] = GetMonData(&a0[i], MON_DATA_SPECIES);
+        species2[i] = GetMonData(&monList[i], MON_DATA_SPECIES2);
+        species[i] = GetMonData(&monList[i], MON_DATA_SPECIES);
     }
 
     if (!IsNationalPokedexEnabled())
     {
-        if (species2[a2] == SPECIES_EGG)
+        if (species2[monIdx] == SPECIES_EGG)
         {
             return 3;
         }
 
-        if (!IsSpeciesInHoennDex(species2[a2]))
+        if (!IsSpeciesInHoennDex(species2[monIdx]))
         {
             return 2;
         }
@@ -3473,21 +3445,21 @@ static u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
     {
         if ((player->name[10] & 0xF) == 0)
         {
-            if (species2[a2] == SPECIES_EGG)
+            if (species2[monIdx] == SPECIES_EGG)
             {
                 return 5;
             }
 
-            if (!IsSpeciesInHoennDex(species2[a2]))
+            if (!IsSpeciesInHoennDex(species2[monIdx]))
             {
                 return 4;
             }
         }
     }
 
-    if (species[a2] == SPECIES_DEOXYS || species[a2] == SPECIES_MEW)
+    if (species[monIdx] == SPECIES_DEOXYS || species[monIdx] == SPECIES_MEW)
     {
-        if (!GetMonData(&a0[a2], MON_DATA_OBEDIENCE))
+        if (!GetMonData(&monList[monIdx], MON_DATA_OBEDIENCE))
         {
             return 4;
         }
@@ -3503,7 +3475,7 @@ static u32 sub_807A5F4(struct Pokemon *a0, int a1, int a2)
 
     for (sum = 0, i = 0; i < a1; i++)
     {
-        if (i != a2)
+        if (i != monIdx)
         {
             sum += species2[i];
         }
@@ -3525,7 +3497,7 @@ s32 sub_807A728(void)
     s32 val;
     u16 version;
 
-    if (gReceivedRemoteLinkPlayers != 0)
+    if (gReceivedRemoteLinkPlayers)
     {
         val = 0;
         version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);
@@ -3642,19 +3614,17 @@ _0807A7B6:\n\
 }
 #endif // NONMATCHING
 
-static bool32 sub_807A7BC(u16 a0, u8 a1)
+static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
 {
-    if (a0 == SPECIES_DEOXYS || a0 == SPECIES_MEW)
+    if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
     {
-        if (!a1)
-        {
+        if (!isObedientBitSet)
             return TRUE;
-        }
     }
     return FALSE;
 }
 
-int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6)
+int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
 {
     u8 r9 = a0.unk_01_0;
     u8 r2 = a0.unk_00_7;
@@ -3674,50 +3644,50 @@ int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuS
         }
     }
 
-    if (sub_807A7BC(a5, a6))
+    if (IsDeoxysOrMewUntradable(species3, isObedientBitSet))
     {
         return 4;
     }
 
-    if (a3 == SPECIES_EGG)
+    if (species2 == SPECIES_EGG)
     {
-        if (a2 != a3)
+        if (species1 != species2)
         {
             return 2;
         }
     }
     else
     {
-        if (gBaseStats[a2].type1 != a4 && gBaseStats[a2].type2 != a4)
+        if (gBaseStats[species1].type1 != type && gBaseStats[species1].type2 != type)
         {
             return 1;
         }
     }
 
-    if (a2 == SPECIES_EGG && a2 != a3)
+    if (species1 == SPECIES_EGG && species1 != species2)
     {
         return 3;
     }
 
     if (!r9)
     {
-        if (a2 == SPECIES_EGG)
+        if (species1 == SPECIES_EGG)
         {
             return 6;
         }
         
-        if (!IsSpeciesInHoennDex(a2))
+        if (!IsSpeciesInHoennDex(species1))
         {
             return 4;
         }
 
-        if (!IsSpeciesInHoennDex(a3))
+        if (!IsSpeciesInHoennDex(species2))
         {
             return 5;
         }
     }
 
-    if (!r10 && !IsSpeciesInHoennDex(a2))
+    if (!r10 && !IsSpeciesInHoennDex(species1))
     {
         return 7;
     }
@@ -3725,11 +3695,11 @@ int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuS
     return 0;
 }
 
-int sub_807A8D0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 a1, u16 a2, u8 a3)
+int sub_807A8D0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
 {
     u8 unk = a0.unk_01_0;
 
-    if (sub_807A7BC(a2, a3))
+    if (IsDeoxysOrMewUntradable(a2, a3))
     {
         return 1;
     }
@@ -3739,12 +3709,12 @@ int sub_807A8D0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 a1, u16 a2, u8
         return 0;
     }
 
-    if (a1 == SPECIES_EGG)
+    if (species == SPECIES_EGG)
     {
         return 2;
     }
 
-    if (IsSpeciesInHoennDex(a1))
+    if (IsSpeciesInHoennDex(species))
     {
         return 0;
     }
@@ -3754,17 +3724,17 @@ int sub_807A8D0(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 a1, u16 a2, u8
 
 // r6/r7 flip. Ugh.
 #ifdef NONMATCHING
-int sub_807A918(struct Pokemon *a0, u16 a1)
+int sub_807A918(struct Pokemon *mon, u16 monIdx)
 {
     int i, version, versions, unk, unk2;
-    int arr[PARTY_SIZE];
+    int speciesArray[PARTY_SIZE];
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        arr[i] = GetMonData(&a0[i], MON_DATA_SPECIES2);
-        if (arr[i] == SPECIES_EGG)
+        speciesArray[i] = GetMonData(&mon[i], MON_DATA_SPECIES2);
+        if (speciesArray[i] == SPECIES_EGG)
         {
-            arr[i] = 0;
+            speciesArray[i] = 0;
         }
     }
 
@@ -3800,12 +3770,12 @@ int sub_807A918(struct Pokemon *a0, u16 a1)
 
     if (unk == 0)
     {
-        if (!IsSpeciesInHoennDex(arr[a1]))
+        if (!IsSpeciesInHoennDex(speciesArray[monIdx]))
         {
             return 2;
         }
         
-        if (arr[a1] == SPECIES_NONE)
+        if (speciesArray[monIdx] == SPECIES_NONE)
         {
             return 3;
         }
@@ -3814,9 +3784,9 @@ int sub_807A918(struct Pokemon *a0, u16 a1)
     unk2 = 0;
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (a1 != i)
+        if (monIdx != i)
         {
-            unk2 += arr[i];
+            unk2 += speciesArray[i];
         }
     }
 
@@ -3831,7 +3801,7 @@ int sub_807A918(struct Pokemon *a0, u16 a1)
 }
 #else
 NAKED
-int sub_807A918(struct Pokemon *a0, u16 a1)
+int sub_807A918(struct Pokemon *mon, u16 a1)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r8\n\
@@ -4001,9 +3971,7 @@ static void sub_807AA7C(struct Sprite *sprite)
     if (!sprite->data[1])
     {
         if (++sprite->data[0] == 12)
-        {
             sprite->data[0] = 0;
-        }
 
         LoadPalette(&gUnknown_08338EA4[sprite->data[0]], (sprite->oam.paletteNum + 16) * 16 + 4, 2);
     }
@@ -4015,9 +3983,7 @@ static void sub_807AABC(struct Sprite *sprite)
     sprite->pos2.y++;
 
     if (sprite->data[0] == 10)
-    {
         DestroySprite(sprite);
-    }
 }
 
 static void sub_807AAE0(struct Sprite *sprite)
@@ -4026,9 +3992,7 @@ static void sub_807AAE0(struct Sprite *sprite)
     sprite->pos2.y--;
 
     if (sprite->data[0] == 10)
-    {
         DestroySprite(sprite);
-    }
 }
 
 static void sub_807AB04(struct Sprite *sprite)
@@ -4063,7 +4027,7 @@ static void sub_807ABCC(void)
     SetGpuReg(REG_OFFSET_BG1HOFS, gUnknown_020322A0->bg1hofs);
 
     dispcnt = GetGpuReg(REG_OFFSET_DISPCNT);
-    if (!(dispcnt & (DISPCNT_MODE_1 | DISPCNT_MODE_2 | DISPCNT_MODE_3 | DISPCNT_MODE_4 | DISPCNT_MODE_5)))
+    if ((dispcnt & 7) == DISPCNT_MODE_0)
     {
         SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_020322A0->bg2vofs);
         SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_020322A0->bg2hofs);
@@ -4092,13 +4056,9 @@ static void sub_807AC3C(void)
 static void sub_807AC64(void)
 {
     if (gUnknown_020322A0->unk_88 == gUnknown_020322A0->unk_89)
-    {
         gUnknown_020322A0->unk_8A++;
-    }
     else
-    {
         gUnknown_020322A0->unk_8A = 0;
-    }
 
     if (gUnknown_020322A0->unk_8A > 300)
     {
@@ -4114,31 +4074,28 @@ static void sub_807AC64(void)
 
 static u32 sub_807ACDC(void)
 {
-    if (gReceivedRemoteLinkPlayers != 0)
-    {
+    if (gReceivedRemoteLinkPlayers)
         return GetMultiplayerId();
-    }
-
     return 0;
 }
 
-static void sub_807ACFC(u8 a0, u8 a1)
+static void sub_807ACFC(u8 whichParty, u8 a1)
 {
-    int unk = 0;
+    int pos = 0;
     struct Pokemon *mon = NULL;
     u16 species;
     u32 personality;
 
-    if (a0 == 0)
+    if (whichParty == 0)
     {
         mon = &gPlayerParty[gUnknown_02032298[0]];
-        unk = 1;
+        pos = 1;
     }
 
-    if (a0 == 1)
+    if (whichParty == 1)
     {
         mon = &gEnemyParty[gUnknown_02032298[1] % PARTY_SIZE];
-        unk = 3;
+        pos = 3;
     }
 
     switch (a1)
@@ -4147,24 +4104,20 @@ static void sub_807ACFC(u8 a0, u8 a1)
             species = GetMonData(mon, MON_DATA_SPECIES2);
             personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-            if (a0 == 0)
-            {
+            if (whichParty == 0)
                 HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
-            }
             else
-            {
-                HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[a0 * 2 + 1], species, personality);
-            }
+                HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[whichParty * 2 + 1], species, personality);
 
             LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
-            gUnknown_020322A0->tradeSpecies[a0] = species;
-            gUnknown_020322A0->unk_68[a0] = personality;
+            gUnknown_020322A0->tradeSpecies[whichParty] = species;
+            gUnknown_020322A0->unk_68[whichParty] = personality;
             break;
         case 1:
-            SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, unk);
-            gUnknown_020322A0->pokePicSpriteIdxs[a0] = CreateSprite(&gMultiuseSpriteTemplate, 120, 60, 6);
-            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[a0]].invisible = TRUE;
-            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[a0]].callback = SpriteCallbackDummy;
+            SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, pos);
+            gUnknown_020322A0->pokePicSpriteIdxs[whichParty] = CreateSprite(&gMultiuseSpriteTemplate, 120, 60, 6);
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[whichParty]].invisible = TRUE;
+            gSprites[gUnknown_020322A0->pokePicSpriteIdxs[whichParty]].callback = SpriteCallbackDummy;
             break;
     }
 }
@@ -4174,7 +4127,7 @@ void sub_807AE50(void)
     switch (gMain.state)
     {
         case 0:
-            if (gReceivedRemoteLinkPlayers == 0)
+            if (!gReceivedRemoteLinkPlayers)
             {
                 gLinkType = 0x1144;
                 CloseLink();
@@ -4201,7 +4154,7 @@ void sub_807AE50(void)
             gUnknown_020322A0->unk_EC = 0;
             break;
         case 1:
-            if (gReceivedRemoteLinkPlayers == 0)
+            if (!gReceivedRemoteLinkPlayers)
             {
                 gUnknown_020322A0->unk_FA = 1;
                 OpenLink();
@@ -4243,10 +4196,8 @@ void sub_807AE50(void)
             break;
         case 4:
             sub_807AC64();
-            if (gReceivedRemoteLinkPlayers == 1 && IsLinkPlayerDataExchangeComplete() == TRUE)
-            {
+            if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
                 gMain.state++;
-            }
             break;
         case 5:
             gUnknown_020322A0->unk_72 = 0;
@@ -4281,7 +4232,7 @@ void sub_807AE50(void)
             break;
         case 11:
             sub_807B140();
-            sub_807BAD8();
+            SetTradeSceneStrings();
             gMain.state++;
             break;
         case 12:
@@ -4341,7 +4292,7 @@ static void sub_807B170(void)
 // In-game trade init
 static void sub_807B270(void)
 {
-    u8 name[11];
+    u8 otName[11];
 
     switch (gMain.state)
     {
@@ -4349,8 +4300,8 @@ static void sub_807B270(void)
             gUnknown_02032298[0] = gSpecialVar_0x8005;
             gUnknown_02032298[1] = 6;
             StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
-            GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, name);
-            StringCopy(gLinkPlayers[1].name, name);
+            GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
+            StringCopy(gLinkPlayers[1].name, otName);
             gLinkPlayers[0].language = LANGUAGE_ENGLISH;
             gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
             gUnknown_020322A0 = AllocZeroed(sizeof(*gUnknown_020322A0));
@@ -4407,7 +4358,7 @@ static void sub_807B270(void)
         case 11:
             sub_807B62C(5);
             sub_807B62C(0);
-            sub_807BAD8();
+            SetTradeSceneStrings();
             gMain.state++;
             break;
         case 12:
@@ -4422,9 +4373,9 @@ static void sub_807B270(void)
     UpdatePaletteFade();
 }
 
-static void sub_807B464(u8 a0)
+static void sub_807B464(u8 partyIdx)
 {
-    struct Pokemon *mon = &gPlayerParty[a0];
+    struct Pokemon *mon = &gPlayerParty[partyIdx];
 
     if (!GetMonData(mon, MON_DATA_IS_EGG))
     {
@@ -4447,41 +4398,31 @@ static void sub_807B4C4(void)
 static void sub_807B4D0(u8 a0, u8 a1)
 {
     u8 friendship;
-    u16 mailId1;
-    u16 mailId2;
-    struct Pokemon *mon1 = &gPlayerParty[a0];
-    struct Pokemon *mon2;
 
-    mailId1 = GetMonData(mon1, MON_DATA_MAIL);
-    mon2 = &gEnemyParty[a1];
-    mailId2 = GetMonData(mon2, MON_DATA_MAIL);
+    struct Pokemon *playerMon = &gPlayerParty[a0];
+    u16 playerMail = GetMonData(playerMon, MON_DATA_MAIL);
 
-    if (mailId1 != 0xFF)
-    {
-        ClearMailStruct(&gSaveBlock1Ptr->mail[mailId1]);
-    }
+    struct Pokemon *partnerMon = &gEnemyParty[a1];
+    u16 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
 
-    gUnknown_020322A0->mon = *mon1;
-    *mon1 = *mon2;
-    *mon2 = gUnknown_020322A0->mon;
+    if (playerMail != 0xFF)
+        ClearMailStruct(&gSaveBlock1Ptr->mail[playerMail]);
+
+    // This is where the actual trade happens!!
+    gUnknown_020322A0->mon = *playerMon;
+    *playerMon = *partnerMon;
+    *partnerMon = gUnknown_020322A0->mon;
 
     friendship = 70;
-    if (!GetMonData(mon1, MON_DATA_IS_EGG))
-    {
-        SetMonData(mon1, MON_DATA_FRIENDSHIP, &friendship);
-    }
+    if (!GetMonData(playerMon, MON_DATA_IS_EGG))
+        SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
 
-    if (mailId2 != 0xFF)
-    {
-        GiveMailToMon2(mon1, &gUnknown_020321C0[mailId2]);
-    }
+    if (partnerMail != 0xFF)
+        GiveMailToMon2(playerMon, &gUnknown_020321C0[partnerMail]);
 
     sub_807B464(a0);
-
-    if (gReceivedRemoteLinkPlayers != 0)
-    {
+    if (gReceivedRemoteLinkPlayers)
         sub_807B4C4();
-    }
 }
 
 static void sub_807B5B8(void)
@@ -4489,11 +4430,12 @@ static void sub_807B5B8(void)
     switch (gUnknown_020322A0->unk_93)
     {
         case 1:
-            if (sub_800A520())
+            if (IsLinkTaskFinished())
             {
                 Trade_SendData(gUnknown_020322A0);
                 gUnknown_020322A0->unk_93++;
             }
+            // fallthrough
         case 2:
             gUnknown_020322A0->unk_93 = 0;
             break;
@@ -4680,7 +4622,7 @@ static void sub_807BA94(void)
     LoadSpritePalette(&gUnknown_08338D80);
 }
 
-static void sub_807BAD8(void)
+static void SetTradeSceneStrings(void)
 {
     /*Sets the variable strings printed on the
      *actual trading screen. For use in strings
@@ -6021,13 +5963,13 @@ static void sub_807EB50(void)
                 gMain.state = 101;
                 gUnknown_020322A0->timer = 0;
             }
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 gMain.state = 2;
             }
             break;
         case 101:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 gMain.state = 2;
             }
@@ -6098,7 +6040,7 @@ static void sub_807EB50(void)
             }
             break;
         case 42:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 sub_8153408();
                 gMain.state = 5;
@@ -6112,7 +6054,7 @@ static void sub_807EB50(void)
             }
             break;
         case 6:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gMain.state ++;
@@ -6142,7 +6084,7 @@ static void sub_807EB50(void)
         case 9:
             if (gWirelessCommType && gMain.savedCallback == sub_80773AC)
             {
-                if (IsLinkTaskFinished())
+                if (_IsLinkTaskFinished())
                 {
                     gSoftResetDisabled = FALSE;
                     SetMainCallback2(c2_080543C4);
@@ -6344,7 +6286,7 @@ static void sub_807F464(void)
             gUnknown_020322A0->timer = 0;
             break;
         case 2:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 gMain.state = 3;
                 StringExpandPlaceholders(gStringVar4, gText_SavingDontTurnOffPower);
@@ -6402,7 +6344,7 @@ static void sub_807F464(void)
             }
             break;
         case 8:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 sub_8153408();
                 gMain.state = 9;
@@ -6416,7 +6358,7 @@ static void sub_807F464(void)
             }
             break;
         case 10:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 FadeOutBGM(3);
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -6431,7 +6373,7 @@ static void sub_807F464(void)
             }
             break;
         case 12:
-            if (IsLinkTaskFinished())
+            if (_IsLinkTaskFinished())
             {
                 gSoftResetDisabled = FALSE;
                 SetMainCallback2(c2_080543C4);

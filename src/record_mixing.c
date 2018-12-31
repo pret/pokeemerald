@@ -1530,7 +1530,7 @@ static void sub_80E7FF8(u8 taskId)
         task->data[0] ++;
         break;
     case 9:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }

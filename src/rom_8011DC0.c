@@ -1838,7 +1838,7 @@ void sub_8014790(u8 taskId)
         }
         break;
     case 3:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             DestroyTask(taskId);
             sub_80149D8();
@@ -2095,7 +2095,7 @@ void sub_8014A40(u8 taskId)
         data->state++;
         break;
     case 17:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }
@@ -2264,7 +2264,7 @@ void sub_8014F48(u8 taskId)
         sub_800ADF8();
         break;
     case 12:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }
@@ -2443,7 +2443,7 @@ void sub_80152F4(u8 taskId)
         sub_800ADF8();
         break;
     case 14:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }
@@ -2836,7 +2836,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 41:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             if (GetMultiplayerId() == 0)
             {
@@ -3033,7 +3033,7 @@ void sub_80156E0(u8 taskId)
         data->state = 15;
         break;
     case 15:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             data->state = 16;
         break;
     case 16:
