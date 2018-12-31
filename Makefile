@@ -28,10 +28,9 @@ CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 else
 # Compilation with modern GCC still requires devkitPro's GCC
-include $(DEVKITARM)/base_tools
 ROM := pokeemerald-modern.gba
 OBJ_DIR := build/emerald-modern
-CC1 := $(PREFIX)gcc -S -xc -
+CC1 := $(DEVKITARM)/bin/arm-none-eabi-gcc -S -xc -
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -mthumb -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t
 CPPFLAGS += -DMODERN=1
 endif
