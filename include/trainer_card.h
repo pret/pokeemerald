@@ -38,5 +38,6 @@ void sub_80C3120(struct TrainerCard *arg0, u16 *arg1, u8 gameVersion);
 void TrainerCard_ShowLinkCard(u8 arg0, void (*callback)(void));
 void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
 u8 sub_80C4904(u8);
+void sub_80C6D80(const u8 *, u8 *, u8, u8, u8);
 
 #endif // GUARD_TRAINER_CARD_H

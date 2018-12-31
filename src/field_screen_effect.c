@@ -215,7 +215,7 @@ static void sub_80AF234(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_800A520())
+        if (!IsLinkTaskFinished())
         {
             if (++task->data[1] > 1800)
                 sub_8011170(0x6000);
@@ -248,7 +248,7 @@ void sub_80AF2B4(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             task->data[0]++;
         }

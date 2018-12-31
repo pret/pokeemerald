@@ -122,7 +122,7 @@ s16 CloneBattlerSpriteWithBlend(u8);
 void obj_delete_but_dont_free_vram(struct Sprite*);
 u8 sub_80A89C8(int, u8, int);
 void sub_80A6D60(struct UnknownAnimStruct2*, const void*, u32);
-void sub_80A6CC0(u32, const void*, u32);
+void sub_80A6CC0(u32, const u32*, u32);
 void sub_80A6DAC(bool8);
 void TranslateSpriteInGrowingCircleOverDuration(struct Sprite *);
 void sub_80A653C(struct Sprite *);
@@ -148,6 +148,7 @@ void sub_80A6BFC(struct UnknownAnimStruct2 *unk, u8 unused);
 u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10);
 void sub_80A749C(struct Sprite *sprite);
 void sub_80A6814(u8 taskId);
+void sub_80A6DEC(struct Sprite *sprite);
 void DestroySpriteAndFreeResources_(struct Sprite *sprite);
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId);
 
@@ -209,7 +210,7 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, 
 
 // battle_anim_utility_funcs.s
 void sub_8116EB4(u8);
-void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u8 *arg8, const u8 *arg9, const u16 *palette);
+void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette);
 
 u32 UnpackSelectedBattleAnimPalettes(s16);
 

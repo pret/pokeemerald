@@ -213,7 +213,7 @@ sub_80FC670: @ 80FC670
 	beq _080FC6A0
 	cmp r0, 0x1
 	beq _080FC6AE
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -223,7 +223,7 @@ _080FC698:
 	b _080FC6B6
 	.pool
 _080FC6A0:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC6B4
@@ -280,7 +280,7 @@ _080FC6FE:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FC738
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC7F4
@@ -412,7 +412,7 @@ _080FC830:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FC87A
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC880
@@ -494,7 +494,7 @@ _080FC8DE:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FC904
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC986
@@ -599,7 +599,7 @@ sub_80FC998: @ 80FC998
 	b _080FC9F0
 	.pool
 _080FC9C4:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC9F0
@@ -653,7 +653,7 @@ sub_80FC9F8: @ 80FC9F8
 	b _080FCAB2
 	.pool
 _080FCA30:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCAB2
@@ -763,7 +763,7 @@ _080FCAFC:
 	.4byte _080FCC38
 	.4byte _080FCB6C
 _080FCB2C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FCB38
@@ -810,7 +810,7 @@ _080FCB84:
 	strh r0, [r2, 0x8]
 	b _080FCC82
 _080FCB90:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCC82
@@ -833,7 +833,7 @@ _080FCBA4:
 	b _080FCC50
 	.pool
 _080FCBCC:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCC82
@@ -856,7 +856,7 @@ _080FCBE0:
 	b _080FCC50
 	.pool
 _080FCC08:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCC82
@@ -949,7 +949,7 @@ _080FCCB8:
 	.4byte _080FCDF8
 	.4byte _080FCD30
 _080FCCE8:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FCCF4
@@ -1000,7 +1000,7 @@ _080FCD48:
 	strh r0, [r2, 0x8]
 	b _080FCE42
 _080FCD54:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
@@ -1027,7 +1027,7 @@ _080FCD6C:
 	b _080FCE10
 	.pool
 _080FCD98:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
@@ -1047,7 +1047,7 @@ _080FCDB0:
 	b _080FCE04
 	.pool
 _080FCDC8:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
@@ -1149,7 +1149,7 @@ _080FCE92:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FCEB8
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCF2E
@@ -1258,7 +1258,7 @@ sub_80FCF40: @ 80FCF40
 	b _080FCFBE
 	.pool
 _080FCF80:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCFBE
@@ -1324,7 +1324,7 @@ sub_80FCFD0: @ 80FCFD0
 	b _080FD04E
 	.pool
 _080FD010:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FD04E

@@ -2383,8 +2383,8 @@ void sub_815BB84(u8 taskId)
             gBattle_BG1_Y = 0;
         }
 
-        sub_80A6CC0(unknownStruct.bgId, &gUnknown_08C2A634, unknownStruct.tilesOffset);
-        LoadCompressedPalette(&gUnknown_08C2A6D4, unknownStruct.unk8 << 4, 32);
+        sub_80A6CC0(unknownStruct.bgId, gUnknown_08C2A634, unknownStruct.tilesOffset);
+        LoadCompressedPalette(gUnknown_08C2A6D4, unknownStruct.unk8 << 4, 32);
 
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
@@ -2589,8 +2589,8 @@ void sub_815C0A4(u8 taskId)
             gBattle_BG1_Y = 0;
         }
 
-        sub_80A6CC0(unknownStruct.bgId, &gUnknown_08C2A634, unknownStruct.tilesOffset);
-        LoadCompressedPalette(&gUnknown_08C2A6D4, unknownStruct.unk8 << 4, 32);
+        sub_80A6CC0(unknownStruct.bgId, gUnknown_08C2A634, unknownStruct.tilesOffset);
+        LoadCompressedPalette(gUnknown_08C2A6D4, unknownStruct.unk8 << 4, 32);
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
         gTasks[taskId].data[0]++;

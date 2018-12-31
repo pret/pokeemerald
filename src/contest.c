@@ -217,7 +217,6 @@ extern const u8 gText_0827D597[];
 extern const struct ContestPokemon gContestOpponents[96];
 extern const u8 gUnknown_085898A4[96];
 extern const struct CompressedSpriteSheet gUnknown_08587C00;
-extern const u8 gContest2Pal[];
 extern const struct SpriteTemplate gSpriteTemplate_8587BE8;
 extern const struct CompressedSpriteSheet gUnknown_08587C08;
 extern const struct CompressedSpritePalette gUnknown_08587C10;
@@ -474,14 +473,14 @@ void sub_80D7CB4(u8 taskId)
                     gTasks[taskId].data[0]++;
                     // fallthrough
                 case 1:
-                    if (sub_800A520())
+                    if (IsLinkTaskFinished())
                     {
                         sub_800ADF8();
                         gTasks[taskId].data[0]++;
                     }
                     return;
                 case 2:
-                    if (sub_800A520() != TRUE)
+                    if (IsLinkTaskFinished() != TRUE)
                         return;
                     gTasks[taskId].data[0]++;
                     break;

@@ -1080,7 +1080,7 @@ bool8 sub_800A4D8(u8 a0)
     return FALSE;
 }
 
-bool8 sub_800A520(void)
+bool8 IsLinkTaskFinished(void)
 {
     if (gWirelessCommType == TRUE)
     {

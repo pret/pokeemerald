@@ -993,7 +993,7 @@ void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u1
         }
         else
         {
-            LoadCompressedPalette((u16*)tileset->palettes, destOffset, size);
+            LoadCompressedPalette((u32*)tileset->palettes, destOffset, size);
             nullsub_3(destOffset, size >> 1);
         }
     }

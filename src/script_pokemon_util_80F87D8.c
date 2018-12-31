@@ -451,7 +451,7 @@ static void sub_80F9088(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sub_800ADF8();
             gTasks[taskId].data[0]++;
@@ -461,7 +461,7 @@ static void sub_80F9088(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     default:
-        if (sub_800A520() == 1)
+        if (IsLinkTaskFinished() == 1)
         {
             EnableBothScriptContexts();
             DestroyTask(taskId);

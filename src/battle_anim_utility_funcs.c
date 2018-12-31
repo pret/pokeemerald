@@ -767,7 +767,7 @@ void sub_81177E4(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u8 *arg8, const u8 *arg9, const u16 *palette)
+void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *arg8, const u32 *arg9, const u32 *palette)
 {
     u16 species;
     u8 spriteId, spriteId2;

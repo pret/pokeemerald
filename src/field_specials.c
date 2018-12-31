@@ -3609,7 +3609,7 @@ static void sub_813B57C(u8 taskId)
             }
             break;
         case 1:
-            if (sub_800A520() == TRUE)
+            if (IsLinkTaskFinished() == TRUE)
             {
                 if (GetMultiplayerId() == 0)
                 {
@@ -3650,7 +3650,7 @@ static void sub_813B57C(u8 taskId)
             }
             break;
         case 3:
-            if (sub_800A520() == TRUE)
+            if (IsLinkTaskFinished() == TRUE)
             {
                 if (GetMultiplayerId() != 0)
                 {
@@ -3702,14 +3702,14 @@ static void sub_813B57C(u8 taskId)
             }
             break;
         case 7:
-            if (sub_800A520() == 1)
+            if (IsLinkTaskFinished() == 1)
             {
                 sub_800ADF8();
                 gTasks[taskId].data[0]++;
             }
             break;
         case 8:
-            if (sub_800A520() == 1)
+            if (IsLinkTaskFinished() == 1)
             {
                 gTasks[taskId].data[0]++;
             }

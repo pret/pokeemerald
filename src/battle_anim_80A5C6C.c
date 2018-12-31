@@ -948,7 +948,7 @@ void sub_80A6C68(u32 bgId)
     CopyBgTilemapBufferToVram(unkStruct.bgId);
 }
 
-void sub_80A6CC0(u32 bgId, const void *src, u32 tilesOffset)
+void sub_80A6CC0(u32 bgId, const u32 *src, u32 tilesOffset)
 {
     CpuFill32(0, gUnknown_0202305C, 0x2000);
     LZDecompressWram(src, gUnknown_0202305C);

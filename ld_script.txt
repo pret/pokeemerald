@@ -81,7 +81,7 @@ SECTIONS {
         src/smokescreen.o(.text);
         src/pokeball.o(.text);
         src/load_save.o(.text);
-        asm/trade.o(.text);
+        src/trade.o(.text);
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
@@ -418,7 +418,7 @@ SECTIONS {
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
-        data/trade.o(.rodata);
+        src/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);

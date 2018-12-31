@@ -4123,7 +4123,7 @@ void sub_8010AAC(u8 taskId)
                 gTasks[taskId].data[0]++;
             break;
         case 5:
-            if (sub_800A520() && GetBlockReceivedStatus() & 1)
+            if (IsLinkTaskFinished() && GetBlockReceivedStatus() & 1)
             {
                 CpuFill16(0, gBlockRecvBuffer, sizeof(struct UnkRfuStruct_8010A14));
                 ResetBlockReceivedFlag(0);
@@ -4162,7 +4162,7 @@ void sub_8010D0C(u8 taskId)
             }
             break;
         case 1:
-            if (sub_800A520())
+            if (IsLinkTaskFinished())
                 gTasks[taskId].data[0]++;
             break;
         case 2:
