@@ -4808,6 +4808,8 @@ extern const u16 gUnknown_08DDCF04[];
 extern const u16 gTradeGba2_Pal[];
 extern const u8 gTradeGba_Gfx[];
 extern const u16 gUnknown_08DDD704[];
+extern const u8 gUnknown_08DDC6E4[];
+extern const u16 gUnknown_08DDB444[];
 
 // Party menu
 extern const u32 gPartyMenuPokeball_Gfx[];
