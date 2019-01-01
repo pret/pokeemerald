@@ -1,44 +1,45 @@
 #include "global.h"
-#include "constants/bg_event_constants.h"
-#include "constants/decorations.h"
 #include "alloc.h"
-#include "main.h"
-#include "task.h"
-#include "palette.h"
-#include "window.h"
-#include "list_menu.h"
-#include "menu.h"
-#include "menu_helpers.h"
-#include "constants/maps.h"
-#include "constants/songs.h"
-#include "constants/species.h"
-#include "sound.h"
-#include "overworld.h"
-#include "fieldmap.h"
-#include "field_camera.h"
-#include "field_specials.h"
-#include "field_player_avatar.h"
-#include "field_screen_effect.h"
-#include "field_weather.h"
-#include "event_object_movement.h"
-#include "field_effect.h"
-#include "fldeff.h"
-#include "fldeff_misc.h"
-#include "metatile_behavior.h"
-#include "map_name_popup.h"
-#include "string_util.h"
-#include "script.h"
-#include "event_scripts.h"
-#include "strings.h"
-#include "international_string_util.h"
-#include "event_data.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "decoration.h"
+#include "event_data.h"
+#include "event_object_movement.h"
+#include "event_scripts.h"
+#include "field_camera.h"
+#include "field_effect.h"
+#include "field_player_avatar.h"
+#include "field_screen_effect.h"
+#include "field_specials.h"
+#include "field_weather.h"
+#include "fieldmap.h"
+#include "fldeff.h"
+#include "fldeff_misc.h"
+#include "international_string_util.h"
 #include "link.h"
-#include "tv.h"
+#include "list_menu.h"
+#include "main.h"
+#include "map_name_popup.h"
+#include "menu.h"
+#include "menu_helpers.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
+#include "palette.h"
+#include "script.h"
 #include "secret_base.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
+#include "tv.h"
+#include "window.h"
+#include "constants/bg_event_constants.h"
+#include "constants/decorations.h"
+#include "constants/maps.h"
 #include "constants/map_types.h"
+#include "constants/metatile_behaviors.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 #include "constants/trainers.h"
 
 extern void mapldr_default(void);
@@ -166,7 +167,7 @@ void ResetSecretBases(void)
 {
     u16 i;
 
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         ClearSecretBase(&gSaveBlock1Ptr->secretBases[i]);
     }
@@ -182,7 +183,7 @@ void sub_80E8B6C(void)
     u16 i;
 
     gSpecialVar_Result = FALSE;
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (sCurSecretBaseId != gSaveBlock1Ptr->secretBases[i].secretBaseId)
         {
@@ -214,27 +215,27 @@ u8 sub_80E8BF8(void)
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y) & 0xFFF;
-    if (behavior == 0x90 || behavior == 0x91)
+    if (behavior == MB_SECRET_BASE_SPOT_RED_CAVE || behavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN)
     {
         return 1;
     }
-    if (behavior == 0x92 || behavior == 0x93)
+    if (behavior == MB_SECRET_BASE_SPOT_BROWN_CAVE || behavior == MB_SECRET_BASE_SPOT_BROWN_CAVE_OPEN)
     {
         return 2;
     }
-    if (behavior == 0x9a || behavior == 0x9b)
+    if (behavior == MB_SECRET_BASE_SPOT_BLUE_CAVE || behavior == MB_SECRET_BASE_SPOT_BLUE_CAVE_OPEN)
     {
         return 3;
     }
-    if (behavior == 0x94 || behavior == 0x95)
+    if (behavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE || behavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE_OPEN)
     {
         return 4;
     }
-    if (behavior == 0x96 || behavior == 0x97 || behavior == 0x9c || behavior == 0x9d)
+    if (behavior == MB_SECRET_BASE_SPOT_TREE_LEFT || behavior == MB_SECRET_BASE_SPOT_TREE_LEFT_OPEN || behavior == MB_SECRET_BASE_SPOT_TREE_RIGHT || behavior == MB_SECRET_BASE_SPOT_TREE_RIGHT_OPEN)
     {
         return 5;
     }
-    if (behavior == 0x98 || behavior == 0x99)
+    if (behavior == MB_SECRET_BASE_SPOT_SHRUB || behavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN)
     {
         return 6;
     }
@@ -339,7 +340,7 @@ void sub_80E8EE0(struct MapEvents const *events)
     {
         if (events->bgEvents[bgEventIndex].kind == BG_EVENT_SECRET_BASE)
         {
-            for (j = 0; j < 20; j ++)
+            for (j = 0; j < SECRET_BASES_COUNT; j ++)
             {
                 if (gSaveBlock1Ptr->secretBases[j].secretBaseId == events->bgEvents[bgEventIndex].bgUnion.secretBaseId)
                 {
@@ -583,7 +584,7 @@ void sub_80E9578(void)
     for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->eventObjectCount; objectEventIdx ++)
     {
         flagId = gMapHeader.events->eventObjects[objectEventIdx].flagId;
-        if (flagId >= 0xAE && flagId <= 0xBB)
+        if (flagId >= FLAG_DECORATION_1 && flagId <= FLAG_DECORATION_14)
         {
             RemoveEventObjectByLocalIdAndMap(gMapHeader.events->eventObjects[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             FlagSet(flagId);
@@ -816,7 +817,7 @@ u8 sub_80E9BA8(void)
     s16 i;
 
     sum = 0;
-    for (i = 1; i < 20; i ++)
+    for (i = 1; i < SECRET_BASES_COUNT; i ++)
     {
         if (sub_80E9878(i) == TRUE)
         {
@@ -845,7 +846,7 @@ void sub_80E9BDC(void)
 void sub_80E9C2C(void)
 {
     gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].sbr_field_1_6 ^= 1;
-    FlagSet(0x10C);
+    FlagSet(FLAG_0x10C);
 }
 
 void sub_80E9C74(void)
@@ -890,7 +891,7 @@ void game_continue(u8 taskId)
 
     data = gTasks[taskId].data;
     count = 0;
-    for (i = 1; i < 20; i ++)
+    for (i = 1; i < SECRET_BASES_COUNT; i ++)
     {
         if (sub_80E9878(i))
         {
@@ -1158,13 +1159,13 @@ void sub_80EA354(void)
     u8 i;
 
     secretBaseRecordId = VarGet(VAR_CURRENT_SECRET_BASE);
-    if (!FlagGet(0x922))
+    if (!FlagGet(FLAG_0x922))
     {
-        for (i = 0; i < 20; i ++)
+        for (i = 0; i < SECRET_BASES_COUNT; i ++)
         {
             gSaveBlock1Ptr->secretBases[i].sbr_field_1_5 = FALSE;
         }
-        FlagSet(0x922);
+        FlagSet(FLAG_0x922);
     }
     gSpecialVar_0x8004 = sub_80EA20C(secretBaseRecordId);
     gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
@@ -1377,7 +1378,7 @@ s16 sub_80EA990(u8 secretBaseRecordId)
 {
     s16 i;
 
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (gSaveBlock1Ptr->secretBases[i].secretBaseId == secretBaseRecordId)
         {
@@ -1391,7 +1392,7 @@ u8 sub_80EA9D8(void)
 {
     s16 i;
 
-    for (i = 1; i < 20; i ++)
+    for (i = 1; i < SECRET_BASES_COUNT; i ++)
     {
         if (gSaveBlock1Ptr->secretBases[i].secretBaseId == 0)
         {
@@ -1405,7 +1406,7 @@ u8 sub_80EAA18(void)
 {
     s16 i;
 
-    for (i = 1; i < 20; i ++)
+    for (i = 1; i < SECRET_BASES_COUNT; i ++)
     {
         if (gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 == 0 && gSaveBlock1Ptr->secretBases[i].sbr_field_1_0 == 0)
         {
@@ -1467,7 +1468,7 @@ void sub_80EAAF4(void)
     secretBases = gSaveBlock1Ptr->secretBases;
     for (i = 1; i < 19; i ++)
     {
-        for (j = i + 1; j < 20; j ++)
+        for (j = i + 1; j < SECRET_BASES_COUNT; j ++)
         {
             if ((secretBases[i].sbr_field_1_6 == 0 && secretBases[j].sbr_field_1_6 == 1) || (secretBases[i].sbr_field_1_6 == 2 && secretBases[j].sbr_field_1_6 != 2))
             {
@@ -1483,7 +1484,7 @@ void sub_80EABA4(struct SecretBaseRecordMixer *mixer, u8 b)
 {
     u16 i;
 
-    for (i = 1; i < 20; i ++)
+    for (i = 1; i < SECRET_BASES_COUNT; i ++)
     {
         if (mixer->records[i].sbr_field_1_6 == b)
         {
@@ -1523,7 +1524,7 @@ void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct SecretBaseR
     u8 i;
     u8 sbFlags = 0x0;
 
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (!(sbFlags & 0x1)) // 001
         {
@@ -1563,7 +1564,7 @@ bool8 sub_80EAD14(struct SecretBaseRecord *base, struct SecretBaseRecord *secret
 {
     u8 i;
 
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (secretBases[i].secretBaseId != 0)
         {
@@ -1596,7 +1597,7 @@ void sub_80EAD94(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
 {
     u8 i;
 
-    for (i = 1; i < 20; i ++)
+    for (i = 1; i < SECRET_BASES_COUNT; i ++)
     {
         if (basesA[i].secretBaseId)
         {
@@ -1613,7 +1614,7 @@ void sub_80EAD94(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
             }
         }
     }
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (basesB[i].secretBaseId)
         {
@@ -1624,7 +1625,7 @@ void sub_80EAD94(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
             }
         }
     }
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (basesC[i].secretBaseId)
         {
@@ -1651,7 +1652,7 @@ void sub_80EAEB4(struct SecretBaseRecordMixer *mixers)
 {
     u16 i;
 
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         sub_80EAE90(&mixers[0].records[i], mixers[0].version, mixers[0].language);
         sub_80EAE90(&mixers[1].records[i], mixers[1].version, mixers[1].language);
@@ -1680,7 +1681,7 @@ void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
     struct SecretBaseRecordMixer mixers[3];
     u16 i;
 
-    if (FlagGet(0x60))
+    if (FlagGet(FLAG_0x060))
     {
         switch (GetLinkPlayerCount())
         {
@@ -1740,7 +1741,7 @@ void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
                 break;
         }
         sub_80EAEF4(mixers);
-        for (i = 1; i < 20; i ++)
+        for (i = 1; i < SECRET_BASES_COUNT; i ++)
         {
             if (gSaveBlock1Ptr->secretBases[i].sbr_field_1_0 == 1)
             {
@@ -1749,7 +1750,7 @@ void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
             }
         }
         sub_80EAAF4();
-        for (i = 1; i < 20; i ++)
+        for (i = 1; i < SECRET_BASES_COUNT; i ++)
         {
             if (gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 == 2)
             {
@@ -1767,7 +1768,7 @@ void sub_80EB18C(struct SecretBaseRecord *bases)
 {
     u32 i;
 
-    for (i = 0; i < 20; i ++)
+    for (i = 0; i < SECRET_BASES_COUNT; i ++)
     {
         if (bases[i].language == LANGUAGE_JAPANESE)
         {
