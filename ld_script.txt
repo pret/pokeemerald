@@ -207,7 +207,6 @@ SECTIONS {
         src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         src/roulette.o(.text);
-        asm/roulette.o(.text);
         src/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);

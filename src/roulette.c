@@ -238,8 +238,16 @@ extern const u8 gUnknown_085B7B04[];
 extern const struct CompressedSpriteSheet gUnknown_085B7948;
 extern const struct SpriteTemplate gSpriteTemplate_85B7950;
 extern const u16 gUnknown_085B7B0A[][2];
+extern const u16 gUnknown_085B7B12[][2];
 extern const struct SpriteTemplate gSpriteTemplate_85B79F8;
 extern const struct SpriteTemplate gSpriteTemplate_85B7ABC[];
+extern const struct SpriteTemplate gSpriteTemplate_85B7A10;
+extern const struct SpriteTemplate gUnknown_085B7AEC;
+extern const u16 gUnknown_085B7B1A[];
+extern const u16 gUnknown_085B7B2E[];
+extern const s8 gUnknown_085B7B46[];
+extern const s8 gUnknown_085B7B48[];
+extern const s8 gUnknown_085B7B46[];
 
 void sub_8140238(void)
 {
@@ -2698,7 +2706,7 @@ void sub_81446DC(struct Sprite *sprite)
     s16 s[2][2];
     struct Roulette *p;
 
-    memcpy(s, gUnknown_085B7B0A, 8);
+    memcpy(s, gUnknown_085B7B0A, sizeof(s));
     t = sprite->data[7] - 2;
     p = gUnknown_0203AB88;  // why???
     gUnknown_0203AB88->var3C[55] = CreateSprite(&gSpriteTemplate_85B79F8, 36, -12, 50);
@@ -2720,4 +2728,711 @@ void sub_81446DC(struct Sprite *sprite)
     }
     gSprites[gUnknown_0203AB88->var3C[56]].coordOffsetEnabled = TRUE;
     gUnknown_0203AB88->var38 = sprite;
+}
+
+void sub_81448B8(struct Sprite *sprite)
+{
+    u8 i = 0;
+    s16 t;
+    s16 s[2][2];
+
+    memcpy(s, &gUnknown_085B7B12, sizeof(s));
+    t = sprite->data[7] - 2;
+    gUnknown_0203AB88->var3C[55] = CreateSprite(&gSpriteTemplate_85B7A10, s[sprite->data[0]][0], s[sprite->data[0]][1], 50);
+    StartSpriteAnim(&gSprites[gUnknown_0203AB88->var3C[55]], sprite->data[0]);
+    gUnknown_0203AB88->var3C[56] = CreateSprite(&gUnknown_085B7AEC, s[sprite->data[0]][0], s[sprite->data[0]][1], 51);
+    gSprites[gUnknown_0203AB88->var3C[56]].affineAnimPaused = TRUE;
+    gSprites[gUnknown_0203AB88->var3C[56]].animPaused = TRUE;
+    sprite->data[7] = (t * gUnknown_085B6348[gUnknown_0203AB88->var04_0].var01) + (gUnknown_085B6348[gUnknown_0203AB88->var04_0].var10 + 45);
+    for (; i < 2; i++)
+    {
+        gSprites[gUnknown_0203AB88->var3C[55 + i]].data[4] = gUnknown_0203AB88->var3C[55];
+        gSprites[gUnknown_0203AB88->var3C[55 + i]].data[5] = gUnknown_0203AB88->var3C[56];
+        gSprites[gUnknown_0203AB88->var3C[55 + i]].data[6] = gUnknown_0203AB88->var3C[56];
+        gSprites[gUnknown_0203AB88->var3C[55 + i]].data[2] = t;
+        gSprites[gUnknown_0203AB88->var3C[55 + i]].data[3] = sprite->data[7] - 45;
+    }
+    gUnknown_0203AB88->var38 = sprite;
+}
+
+#ifdef NONMATCHING
+void sub_8144A24(struct Sprite *sprite)
+{
+    u8 z;
+    u16 o;
+    u8 h = 0; // r10 (sp+0xc)
+    u8 j = 5; // r9 (r9)
+    u8 p = 0; // sp+0xc (sp+0x10)
+    u8 i;
+    u8 s[10] = {}; // sp+0 (sp+0)
+    u16 t = Random(); // sp+0x10 (r10)
+
+    gUnknown_0203AB88->var7D = 1;
+    gUnknown_0203AB88->var03_5 = TRUE;
+    gUnknown_0203AB88->var03_6 = FALSE;
+    gUnknown_0203AB88->var7E = 0xFF;
+    gUnknown_0203AB88->var88 = sprite->data[3];
+    gUnknown_0203AB88->var98 = 0.0f;
+    gUnknown_0203AB88->var8C = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var1C;
+    o = (gUnknown_0203AB88->var04_0 * 30 + 33) + (0x1 - gUnknown_0203AB88->var03_0) * 15;
+    for (i = 0; i < 4; i++)
+    {
+        if (o < sprite->data[3] && sprite->data[3] <= o + 90)
+        {
+            sprite->data[0] = i / 2;
+            gUnknown_0203AB88->var03_0 = i & 1;
+            break;
+        }
+        if (i == 3)
+        {
+            sprite->data[0] = 1;
+            gUnknown_0203AB88->var03_0 = 1;
+            break;
+        }
+        o += 90;
+    }
+    if (gUnknown_0203AB88->var03_0)
+    {
+        if (sprite->data[0])
+        {
+            PlayCry1(SPECIES_TAILLOW, -63);
+        }
+        else
+        {
+            PlayCry1(SPECIES_TAILLOW, 63);
+        }
+    }
+    else
+    {
+        PlayCry1(SPECIES_SHROOMISH, -63);
+    }
+    i = 2;
+    z = (gUnknown_0203AB88->var7F + 2) % 12;
+    if (gUnknown_0203AB88->var03_0 == 1 && gUnknown_0203AB88->var04_0 == 1)
+        j += 6;
+    else
+        j += i;
+    for (; i < j; i++)
+    {
+        if (!(gUnknown_0203AB88->var08 & gUnknown_085B62E4[z].var04))
+        {
+            s[h++] = i;
+            if (!p && (gUnknown_085B62E4[z].var04 & gUnknown_085B6154[gUnknown_0203AB88->var1B[gUnknown_0203AB88->var1A_0]].var00))
+            {
+                p = i;
+            }
+        }
+        z = (z + 1) % 0xC;
+    }
+    if ((gUnknown_0203AB88->var03_0 + 1) & gUnknown_0203AB88->var02)
+    {
+        if (p && (t & 0xFF) < 0xc0)
+        {
+            sprite->data[7] = p;
+        }
+        else
+        {
+            sprite->data[7] = s[t % h];
+        }
+    }
+    else
+    {
+        sprite->data[7] = s[t % h];
+    }
+    sprite->callback = sub_8144168;
+}
+#else
+NAKED
+void sub_8144A24(struct Sprite *sprite)
+{
+    asm_unified("push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x14\n\
+	adds r7, r0, 0\n\
+	movs r0, 0\n\
+	mov r9, r0\n\
+	movs r1, 0x5\n\
+	mov r8, r1\n\
+	str r0, [sp, 0xC]\n\
+	mov r0, sp\n\
+	movs r1, 0\n\
+	movs r2, 0xA\n\
+	bl memset\n\
+	bl Random\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	str r0, [sp, 0x10]\n\
+	ldr r3, _08144B10  @ =gUnknown_0203AB88\n\
+	ldr r0, [r3]\n\
+	adds r0, 0x7D\n\
+	movs r5, 0x1\n\
+	strb r5, [r0]\n\
+	ldr r2, [r3]\n\
+	ldrb r0, [r2, 0x3]\n\
+	movs r1, 0x20\n\
+	orrs r0, r1\n\
+	strb r0, [r2, 0x3]\n\
+	ldr r2, [r3]\n\
+	ldrb r1, [r2, 0x3]\n\
+	movs r0, 0x41\n\
+	negs r0, r0\n\
+	ands r0, r1\n\
+	strb r0, [r2, 0x3]\n\
+	ldr r0, [r3]\n\
+	adds r0, 0x7E\n\
+	movs r1, 0xFF\n\
+	strb r1, [r0]\n\
+	ldr r6, [r3]\n\
+	adds r4, r6, 0\n\
+	adds r4, 0x88\n\
+	movs r1, 0x34\n\
+	ldrsh r0, [r7, r1]\n\
+	bl __floatsisf\n\
+	str r0, [r4]\n\
+	adds r1, r6, 0\n\
+	adds r1, 0x98\n\
+	ldr r0, _08144B14  @ =0x00000000\n\
+	str r0, [r1]\n\
+	adds r2, r6, 0\n\
+	adds r2, 0x8C\n\
+	ldr r1, _08144B18  @ =gUnknown_085B6348\n\
+	ldrb r0, [r6, 0x4]\n\
+	lsls r0, 30\n\
+	lsrs r0, 25\n\
+	adds r1, 0x1C\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	str r0, [r2]\n\
+	ldrb r0, [r6, 0x4]\n\
+	lsls r0, 30\n\
+	lsrs r0, 30\n\
+	lsls r1, r0, 4\n\
+	subs r1, r0\n\
+	lsls r1, 1\n\
+	adds r1, 0x21\n\
+	ldrb r0, [r6, 0x3]\n\
+	lsls r0, 27\n\
+	lsrs r0, 27\n\
+	subs r5, r0\n\
+	lsls r0, r5, 4\n\
+	subs r0, r5\n\
+	adds r1, r0\n\
+	lsls r1, 16\n\
+	lsrs r1, 16\n\
+	mov r5, r9\n\
+	movs r0, 0x34\n\
+	ldrsh r2, [r7, r0]\n\
+_08144ACA:\n\
+	cmp r1, r2\n\
+	bge _08144AD6\n\
+	adds r0, r1, 0\n\
+	adds r0, 0x5A\n\
+	cmp r2, r0\n\
+	ble _08144B38\n\
+_08144AD6:\n\
+	cmp r5, 0x3\n\
+	beq _08144B1C\n\
+	adds r0, r1, 0\n\
+	adds r0, 0x5A\n\
+	lsls r0, 16\n\
+	lsrs r1, r0, 16\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, 0x3\n\
+	bls _08144ACA\n\
+_08144AEC:\n\
+	ldr r0, _08144B10  @ =gUnknown_0203AB88\n\
+	ldr r0, [r0]\n\
+	ldrb r1, [r0, 0x3]\n\
+	movs r0, 0x1F\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _08144B64\n\
+	movs r1, 0x2E\n\
+	ldrsh r0, [r7, r1]\n\
+	cmp r0, 0\n\
+	beq _08144B58\n\
+	movs r0, 0x98\n\
+	lsls r0, 1\n\
+	movs r1, 0x3F\n\
+	negs r1, r1\n\
+	bl PlayCry1\n\
+	b _08144B70\n\
+	.align 2, 0\n\
+_08144B10:\n\
+	.4byte gUnknown_0203AB88\n\
+_08144B14:\n\
+	.4byte 0x00000000\n\
+_08144B18:\n\
+	.4byte gUnknown_085B6348\n\
+_08144B1C:\n\
+	movs r0, 0x1\n\
+	strh r0, [r7, 0x2E]\n\
+	ldr r0, =gUnknown_0203AB88\n\
+	ldr r2, [r0]\n\
+	ldrb r1, [r2, 0x3]\n\
+	movs r0, 0x20\n\
+	negs r0, r0\n\
+	ands r0, r1\n\
+	movs r1, 0x1\n\
+	orrs r0, r1\n\
+	strb r0, [r2, 0x3]\n\
+	b _08144AEC\n\
+	.pool\n\
+_08144B38:\n\
+	lsrs r0, r5, 1\n\
+	strh r0, [r7, 0x2E]\n\
+	ldr r0, =gUnknown_0203AB88\n\
+	ldr r3, [r0]\n\
+	movs r1, 0x1\n\
+	ands r1, r5\n\
+	ldrb r2, [r3, 0x3]\n\
+	movs r0, 0x20\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	orrs r0, r1\n\
+	strb r0, [r3, 0x3]\n\
+	b _08144AEC\n\
+	.pool\n\
+_08144B58:\n\
+	movs r0, 0x98\n\
+	lsls r0, 1\n\
+	movs r1, 0x3F\n\
+	bl PlayCry1\n\
+	b _08144B70\n\
+_08144B64:\n\
+	movs r0, 0x99\n\
+	lsls r0, 1\n\
+	movs r1, 0x3F\n\
+	negs r1, r1\n\
+	bl PlayCry1\n\
+_08144B70:\n\
+	movs r0, 0x2\n\
+	mov r10, r0\n\
+	ldr r4, =gUnknown_0203AB88\n\
+	ldr r5, [r4]\n\
+	adds r0, r5, 0\n\
+	adds r0, 0x7F\n\
+	ldrb r0, [r0]\n\
+	adds r0, 0x2\n\
+	movs r1, 0xC\n\
+	bl __modsi3\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	ldrb r1, [r5, 0x3]\n\
+	movs r0, 0x1F\n\
+	ands r0, r1\n\
+	cmp r0, 0x1\n\
+	bne _08144BA8\n\
+	ldrb r1, [r5, 0x4]\n\
+	movs r0, 0x3\n\
+	ands r0, r1\n\
+	cmp r0, 0x1\n\
+	bne _08144BA8\n\
+	mov r0, r8\n\
+	adds r0, 0x6\n\
+	b _08144BAC\n\
+	.pool\n\
+_08144BA8:\n\
+	mov r0, r8\n\
+	add r0, r10\n\
+_08144BAC:\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r8, r0\n\
+	mov r5, r10\n\
+	cmp r5, r8\n\
+	bcs _08144C18\n\
+	ldr r1, =gUnknown_085B6154+0xC\n\
+	mov r10, r1\n\
+_08144BBC:\n\
+	ldr r3, [r4]\n\
+	lsls r0, r6, 3\n\
+	ldr r1, =gUnknown_085B62E4+0x4\n\
+	adds r0, r1\n\
+	ldr r1, [r3, 0x8]\n\
+	ldr r2, [r0]\n\
+	ands r1, r2\n\
+	cmp r1, 0\n\
+	bne _08144C02\n\
+	mov r0, r9\n\
+	adds r1, r0, 0x1\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	mov r9, r1\n\
+	add r0, sp\n\
+	strb r5, [r0]\n\
+	ldr r0, [sp, 0xC]\n\
+	cmp r0, 0\n\
+	bne _08144C02\n\
+	ldrb r1, [r3, 0x1A]\n\
+	lsls r1, 28\n\
+	lsrs r1, 28\n\
+	adds r0, r3, 0\n\
+	adds r0, 0x1B\n\
+	adds r0, r1\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 2\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	add r0, r10\n\
+	ldr r0, [r0]\n\
+	ands r2, r0\n\
+	cmp r2, 0\n\
+	beq _08144C02\n\
+	str r5, [sp, 0xC]\n\
+_08144C02:\n\
+	adds r0, r6, 0x1\n\
+	movs r1, 0xC\n\
+	bl __modsi3\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	cmp r5, r8\n\
+	bcc _08144BBC\n\
+_08144C18:\n\
+	ldr r0, [r4]\n\
+	ldrb r1, [r0, 0x3]\n\
+	lsls r1, 27\n\
+	lsrs r1, 27\n\
+	adds r1, 0x1\n\
+	ldrb r0, [r0, 0x2]\n\
+	ands r1, r0\n\
+	cmp r1, 0\n\
+	beq _08144C48\n\
+	ldr r1, [sp, 0xC]\n\
+	cmp r1, 0\n\
+	beq _08144C48\n\
+	movs r0, 0xFF\n\
+	ldr r1, [sp, 0x10]\n\
+	ands r0, r1\n\
+	cmp r0, 0xBF\n\
+	bhi _08144C48\n\
+	mov r0, sp\n\
+	ldrh r0, [r0, 0xC]\n\
+	b _08144C54\n\
+	.pool\n\
+_08144C48:\n\
+	ldr r0, [sp, 0x10]\n\
+	mov r1, r9\n\
+	bl __modsi3\n\
+	add r0, sp\n\
+	ldrb r0, [r0]\n\
+_08144C54:\n\
+	strh r0, [r7, 0x3C]\n\
+	ldr r1, =sub_8144168\n\
+	str r1, [r7, 0x1C]\n\
+	add sp, 0x14\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool");
+}
+#endif // NONMATCHING
+
+void sub_8144C70(struct Sprite *sprite)
+{
+    if (sprite->data[1]++ >= sprite->data[3])
+    {
+	    sprite->pos1.x -= 2;
+        if (sprite->pos1.x < -16)
+        {
+            if (!gUnknown_0203AB88->var03_6)
+                gUnknown_0203AB88->var03_6 = TRUE;
+            DestroySprite(sprite);
+            gUnknown_0203AB88->var01 = 0;
+            gUnknown_0203AB88->var34 = gUnknown_085B7B1A[0];
+        }
+    }
+}
+
+void sub_8144CD0(struct Sprite *sprite)
+{
+    u16 t[3][4];
+    int p;
+
+    memcpy(t, gUnknown_085B7B2E, 24);
+    if (sprite->data[1]++ < sprite->data[3])
+    {
+        if (sprite->data[1] & 1)
+        {
+            gSpriteCoordOffsetY = t[sprite->data[2] / 2][sprite->data[7]];
+            p = sprite->data[7] + 1;
+            sprite->data[7] = p - ((p / 4) * 4);
+        }
+        sprite->invisible ^= 1;
+    }
+    else
+    {
+        gSpriteCoordOffsetY = 0;
+        gSprites[gUnknown_0203AB88->var3C[55]].animPaused = FALSE;
+        DestroySprite(sprite);
+    }
+}
+
+void sub_8144D94(struct Sprite *sprite)
+{
+    float t;
+    sprite->data[1]++;
+    t = sprite->data[1];
+    sprite->pos2.y = t * 0.039f * t;
+    gUnknown_0203AB88->var34 = gUnknown_085B7B1A[(gUnknown_0203AB88->var01 - 1) / 2];
+    if (gUnknown_0203AB88->var01 < 19)
+        gUnknown_0203AB88->var01++;
+    if (sprite->data[1] > 60)
+    {
+        sprite->data[1] = 0;
+        sprite->callback = sub_8144C70;
+        gSprites[sprite->data[6]].callback  = sub_8144C70;
+        gSprites[sprite->data[6]].data[1] = -2;
+        gSprites[sprite->data[5]].invisible = FALSE;
+        gSprites[sprite->data[5]].callback  = sub_8144CD0;
+        m4aSongNumStart(SE_W070);
+    }
+}
+
+/*void sub_8144E60(struct Sprite *sprite)
+{
+    register u32 t asm("r2");
+    u32 z;
+    if (sprite->data[7] == 0)
+    {
+        if (gUnknown_0203AB88->var38->data[0] == 0)
+        {
+            t = gUnknown_0203AB88->var38->data[3];
+            z = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var08;
+        }
+        else
+        {
+            t = gUnknown_0203AB88->var38->data[3];
+            z = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var08;
+            z += 180;
+        }
+        if (t == z)
+        {
+            sprite->invisible = FALSE;
+            sprite->data[7]++;
+            m4aSongNumStart(SE_RU_HYUU);
+            gUnknown_0203AB88->var01 = 1;
+            gUnknown_0203AB88->var34 = gUnknown_085B7B1A[0];
+        }
+    }
+    else
+    {
+        gUnknown_0203AB88->var34 = gUnknown_085B7B1A[(gUnknown_0203AB88->var01 - 1) / 2];
+        if (gUnknown_0203AB88->var01 < 19)
+            gUnknown_0203AB88->var01++;
+        if (gUnknown_0203AB88->var38->data[0] == 0)
+        {
+            t = gUnknown_0203AB88->var38->data[3];
+            z = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var0A;
+        }
+        else
+        {
+            t = gUnknown_0203AB88->var38->data[3];
+            z = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var0A;
+            z += 180;
+        }
+        if (t == z)
+        {
+            gSprites[sprite->data[4]].callback  = sub_8144D94;
+            gSprites[sprite->data[4]].invisible = FALSE;
+            sprite->callback  = &SpriteCallbackDummy;
+            sprite->data[7] = 0;
+        }
+    }
+}*/
+
+void sub_8144E60(struct Sprite *sprite)
+{
+    if (sprite->data[7] == 0)
+    {
+        if (gUnknown_0203AB88->var38->data[0] == 0)
+        {
+            if (gUnknown_0203AB88->var38->data[3] != gUnknown_085B6348[gUnknown_0203AB88->var04_0].var08)
+                return;
+        }
+        else
+        {
+            if (gUnknown_0203AB88->var38->data[3] != gUnknown_085B6348[gUnknown_0203AB88->var04_0].var08 + 180)
+                return;
+        }
+
+        sprite->invisible = FALSE;
+        sprite->data[7]++;
+        m4aSongNumStart(SE_RU_HYUU);
+        gUnknown_0203AB88->var01 = 1;
+        gUnknown_0203AB88->var34 = gUnknown_085B7B1A[0];
+    }
+    else
+    {
+        gUnknown_0203AB88->var34 = gUnknown_085B7B1A[(gUnknown_0203AB88->var01 - 1) / 2];
+        if (gUnknown_0203AB88->var01 < 19)
+            gUnknown_0203AB88->var01++;
+
+        if (gUnknown_0203AB88->var38->data[0] == 0)
+        {
+            if (gUnknown_0203AB88->var38->data[3] != gUnknown_085B6348[gUnknown_0203AB88->var04_0].var0A)
+                return;
+        }
+        else
+        {
+            if (gUnknown_0203AB88->var38->data[3] != gUnknown_085B6348[gUnknown_0203AB88->var04_0].var0A + 180)
+                return;
+        }
+
+        gSprites[sprite->data[4]].callback  = sub_8144D94;
+        gSprites[sprite->data[4]].invisible = FALSE;
+        sprite->callback  = &SpriteCallbackDummy;
+        sprite->data[7] = 0;
+    }
+}
+
+void sub_8144F94(struct Sprite *sprite)
+{
+    sprite->invisible ^= 1;
+}
+
+void sub_8144FB0(struct Sprite *sprite)
+{
+    if (sprite->pos1.y > -16)
+    {
+        sprite->pos1.y--;
+    }
+    else
+    {
+        sprite->callback = SpriteCallbackDummy;
+        sprite->invisible = TRUE;
+        sprite->animPaused = TRUE;
+        m4aSongNumStop(SE_BASABASA);
+        DestroySprite(sprite);
+        FreeOamMatrix(gSprites[gUnknown_0203AB88->var3C[56]].oam.matrixNum);
+        DestroySprite(&gSprites[gUnknown_0203AB88->var3C[56]]);
+    }
+}
+
+void sub_8145030(struct Sprite *sprite)
+{
+    if (sprite->data[1] >= 0)
+    {
+        sprite->data[1]--;
+        sprite->pos1.y--;
+        if (sprite->data[1] == 0 && sprite->animCmdIndex == 1)
+            sprite->pos2.y++;
+    }
+    else
+    {
+        if (sprite->data[3] >= 0)
+        {
+            sprite->data[3]--;
+            if (sprite->animDelayCounter == 0)
+            {
+                if (sprite->animCmdIndex == 1)
+                    sprite->pos2.y++;
+                else
+                    sprite->pos2.y--;
+            }
+        }
+        else
+        {
+            m4aSongNumStart(SE_RU_HYUU);
+            StartSpriteAnim(sprite, gUnknown_0203AB88->var38->data[0] + 4);
+            sprite->callback = sub_8144FB0;
+            gSprites[sprite->data[6]].affineAnimPaused = FALSE;
+        }
+    }
+}
+
+void sub_81450D8(struct Sprite *sprite)
+{
+    s8 t[2]; //sign
+    s8 z[8][2];
+
+    memcpy(t, gUnknown_085B7B46, sizeof(t));
+    memcpy(z, gUnknown_085B7B48, sizeof(z));
+    if (sprite->data[1]-- > 7)
+    {
+        sprite->pos1.x += t[gUnknown_0203AB88->var38->data[0]] * 2;
+        if (IsSEPlaying())
+        {
+            s8 pan = -((116 - sprite->pos1.x) / 2);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, pan);
+            m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, pan);
+        }
+    }
+    else
+    {
+        if (sprite->data[1] >= 0)
+        {
+            sprite->pos1.x += t[gUnknown_0203AB88->var38->data[0]] * z[7 - sprite->data[1]][0];
+            sprite->pos1.y += z[7 - sprite->data[1]][1];
+        }
+        else
+        {
+            m4aSongNumStartOrChange(SE_BASABASA);
+            if (gUnknown_0203AB88->var38->data[0] == 0)
+                PlayCry1(SPECIES_TAILLOW, 63);
+            else
+                PlayCry1(SPECIES_TAILLOW, -63);
+            StartSpriteAnim(sprite, gUnknown_0203AB88->var38->data[0] + 2);
+            sprite->data[1] = 45;
+            sprite->callback = sub_8145030;
+        }
+    }
+}
+
+void sub_8145218(struct Sprite *sprite)
+{
+    s8 t[2]; //sign
+    memcpy(t, gUnknown_085B7B46, sizeof(t));
+    if (sprite->data[1]-- >= 0)
+    {
+        sprite->pos1.x += t[gUnknown_0203AB88->var38->data[0]] * 2;
+        gSprites[sprite->data[6]].invisible ^= 1;
+    }
+    else
+    {
+        sprite->callback = sub_8144F94;
+    }
+}
+
+void sub_8145294(struct Sprite *sprite)
+{
+    if (gUnknown_0203AB88->var38->data[0] == 0)
+    {
+        if (gUnknown_0203AB88->var38->data[3] == gUnknown_085B6348[gUnknown_0203AB88->var04_0].var12 + 90)
+        {
+            gSprites[sprite->data[6]].data[1] = 52;
+            gSprites[sprite->data[4]].data[1] = 52;
+        }
+        else
+        {
+            return;
+        }
+    }
+    else
+    {
+        if (gUnknown_0203AB88->var38->data[3] == gUnknown_085B6348[gUnknown_0203AB88->var04_0].var14 + 270)
+        {
+            gSprites[sprite->data[6]].data[1] = 46;
+            gSprites[sprite->data[4]].data[1] = 46;
+        }
+        else
+        {
+            return;
+        }
+    }
+    gSprites[sprite->data[6]].callback = sub_8145218;
+    gSprites[sprite->data[4]].callback = sub_81450D8;
+    m4aSongNumStart(SE_RU_HYUU);
 }
