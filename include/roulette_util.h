@@ -47,5 +47,6 @@ void task_tutorial_controls_fadein(struct UnkStruct0 *r0);
 void sub_8151678(struct UnkStruct0 *r0);
 u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, const struct UnkStruct1 *r2);
 void sub_8151A9C(struct UnkStruct0 *r0, u16 r1);
+void sub_8151A48(struct UnkStruct0 *r0, u16 r1);
 
 #endif // GUARD_ROULETTE_UTIL_H

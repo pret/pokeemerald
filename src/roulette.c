@@ -2,24 +2,30 @@
 #include "alloc.h"
 #include "bg.h"
 #include "coins.h"
+#include "decompress.h"
 #include "event_data.h"
+#include "field_screen_effect.h"
 #include "gpu_regs.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "overworld.h"
 #include "palette.h"
 #include "random.h"
 #include "roulette.h"
 #include "roulette_util.h"
 #include "rtc.h"
 #include "scanline_effect.h"
+#include "script.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "task.h"
 #include "trig.h"
 #include "tv.h"
 #include "window.h"
+#include "constants/rgb.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 
@@ -44,7 +50,7 @@ struct StructgUnknown_083F8DF4
     float var1C;
 };
 
-struct StructgUnknown_083F8C00
+struct StructgUnknown_085B6154
 {
     u8 var00;
     u8 var01_0:4;
@@ -59,6 +65,15 @@ struct StructgUnknown_083F8C00
     u32 var0C;
     u16 var10;
     u16 var12;
+};
+
+struct StructgUnknown_083F8D90
+{
+    u8 var00;
+    u8 var01;
+    u8 var02;
+    u8 var03;
+    u32 var04;
 };
 
 extern struct Roulette
@@ -129,10 +144,21 @@ extern u8 gUnknown_0203AB8C;
 /*static*/ void sub_81410FC(u8);
 /*static*/ void sub_8141344(u8);
 /*static*/ void sub_814155C(u8);
+/*static*/ void sub_81415D4(u8);
+/*static*/ void sub_81416D4(u8);
+/*static*/ void sub_8141778(u8);
+/*static*/ void sub_814189C(u8);
+/*static*/ void sub_8141A18(u8);
+/*static*/ void sub_8141AC0(u8);
+/*static*/ void sub_8141B58(u8);
+/*static*/ void dp01t_12_3_battle_menu(u8);
 /*static*/ void sub_8141DE4(u8);
+/*static*/ void sub_8141E7C(u8);
 /*static*/ void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3);
 /*static*/ void sub_8141FF4(u8);
 /*static*/ void sub_8142070(void);
+/*static*/ u8 sub_81420D0(u8, u8);
+/*static*/ bool8 sub_81421E8(u8, u8);
 /*static*/ void sub_8142284(u8);
 /*static*/ void sub_81424FC(u8);
 /*static*/ u8 sub_8142758(u8);
@@ -142,14 +168,17 @@ extern u8 gUnknown_0203AB8C;
 /*static*/ void sub_8142E70(u8, u8);
 /*static*/ void sub_8142F7C(void);
 /*static*/ void sub_8143038(u8, u8);
+/*static*/ void sub_8143150(u8);
 /*static*/ void sub_81431E4(void);
 /*static*/ void sub_8143314(void);
 /*static*/ void sub_8143514(u16);
 /*static*/ void sub_81436D0(u8);
 /*static*/ void sub_814372C(u8);
+/*static*/ void sub_814390C(struct Sprite *);
 /*static*/ void sub_814391C(void);
 /*static*/ void sub_81439C8(void);
 /*static*/ void sub_8143A40(void);
+/*static*/ void sub_81446AC(struct Sprite *);
 
 extern const struct BgTemplate gUnknown_085B6140[3];
 extern const struct WindowTemplate gUnknown_085B614C[];
@@ -164,10 +193,45 @@ extern const u32 gRouletteWheelTiles[];
 extern const u32 gUnknown_085B5FA0[];
 extern const u8 gUnknown_082A5B89[];
 extern const u8 gUnknown_082A5C13[];
+extern const u8 gUnknown_082A5BD7[];
+extern const u8 gUnknown_082A5BCB[];
+extern const u8 gUnknown_082A5BE0[];
+extern const u8 gUnknown_082A5BEF[];
+extern const u8 gUnknown_082A5C21[];
+extern const u8 gUnknown_082A5C61[];
+extern const u8 gUnknown_082A5C04[];
+extern const u8 gUnknown_082A5B12[];
+extern const u8 gUnknown_082A5B6B[];
+extern const u8 gUnknown_082A5B4E[];
 extern const struct YesNoFuncTable gUnknown_085B6410;
-extern const struct StructgUnknown_083F8C00 gUnknown_085B6154[];
+extern const struct StructgUnknown_085B6154 gUnknown_085B6154[];
 extern const u8 gUnknown_085B641E[];
 extern const u16 gUnknown_085B6422;
+extern const u32 gUnknown_085B642C[];
+extern const u32 gUnknown_085B643C[];
+extern const struct StructgUnknown_083F8D90 gUnknown_085B62E4[];
+extern const struct UnkStruct1 gUnknown_085B63F0[];
+extern const u8 gUnknown_085B6448[];
+extern const struct YesNoFuncTable gUnknown_085B6408;
+extern const struct SpritePalette gUnknown_085B7384[];
+extern const struct CompressedSpriteSheet gUnknown_085B7864;
+extern const struct CompressedSpriteSheet gUnknown_085B7978;
+extern const struct CompressedSpriteSheet gUnknown_085B7A40;
+extern const struct CompressedSpriteSheet gUnknown_085B7488;
+extern const struct CompressedSpriteSheet gUnknown_085B7490;
+extern const struct SpriteTemplate gSpriteTemplate_85B75B0[];
+extern const struct SpriteTemplate gSpriteTemplate_85B7508[];
+extern const struct SpriteTemplate gSpriteTemplate_85B7568[];
+extern const struct SpriteTemplate gSpriteTemplate_85B7928;
+extern const struct CompressedSpriteSheet gUnknown_085B741C;
+extern const struct SpriteTemplate gSpriteTemplate_85B7610[];
+extern const struct CompressedSpriteSheet gUnknown_085B7750[];
+extern const struct SpriteTemplate gSpriteTemplate_85B77E4;
+extern const struct SpriteTemplate gUnknown_085B77FC;
+extern const struct SpriteTemplate gUnknown_085B7814;
+extern const struct SpriteTemplate gUnknown_085B782C;
+extern const struct SpriteTemplate gUnknown_085B7844;
+extern const u8 gUnknown_085B7B04[];
 
 void sub_8140238(void)
 {
@@ -557,16 +621,12 @@ void sub_8140D6C(u8 r0)
                     if (var0)
                     {
                         u8 i;
-                        struct Roulette *roulette;
                         sub_81424FC(gTasks[r0].data[4]);
                         sub_8140B64(r0);
                         gTasks[r0].data[1] = z;
                         PlaySE(SE_SELECT);
                         sub_8151A9C(&gUnknown_0203AB88->varB8, 0xFFFF);
-                        roulette = gUnknown_0203AB88;
-                        roulette->varB8.var04[15].var00_7 = 0;
-                        roulette->varB8.var04[14].var00_7 = 0;
-                        roulette->varB8.var04[13].var00_7 = 0;
+                        gUnknown_0203AB88->varB8.var04[13].var00_7 = gUnknown_0203AB88->varB8.var04[14].var00_7 = gUnknown_0203AB88->varB8.var04[15].var00_7 = 0;
                         sub_8142284(gTasks[r0].data[4]);
                         for (i = 0; i < 4; i++)
                         {
@@ -605,33 +665,33 @@ void sub_8140FC4(u8 taskId)
     if ((gTasks[taskId].data[13] -= gUnknown_0203AB88->var19) < 0)
         gTasks[taskId].data[13] = 0;
     sub_8143514(gTasks[taskId].data[13]);
-    gTasks[taskId].func = &sub_8140F6C;
+    gTasks[taskId].func = sub_8140F6C;
 }
 
 void sub_8141040(u8 taskId)
 {
     sub_8140D6C(taskId);
 
-    switch (gTasks[taskId].data[0x1])
+    switch (gTasks[taskId].data[1])
     {
     case 0:
-        sub_81409B8(gTasks[taskId].data[0x4]);
-        gTasks[taskId].data[0x1]+= 1;
+        sub_81409B8(gTasks[taskId].data[4]);
+        gTasks[taskId].data[1]+= 1;
         break;
     case 30:
         sub_81409B8(0);
-        gTasks[taskId].data[0x1]+= 1;
+        gTasks[taskId].data[1]+= 1;
         break;
     case 59:
-        gTasks[taskId].data[0x1] = 0;
+        gTasks[taskId].data[1] = 0;
         break;
     default:
-        gTasks[taskId].data[0x1]++;
+        gTasks[taskId].data[1]++;
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
-        if ((gUnknown_0203AB88->var08 & gUnknown_085B6154[gTasks[taskId].data[0x4]].var08))
+        if ((gUnknown_0203AB88->var08 & gUnknown_085B6154[gTasks[taskId].data[4]].var08))
             PlaySE(SE_BOO);
         else
         {
@@ -643,19 +703,19 @@ void sub_8141040(u8 taskId)
 
 void sub_81410FC(u8 taskId)
 {
-    if (gTasks[taskId].data[0x1]-- > 0)
+    if (gTasks[taskId].data[1]-- > 0)
     {
-        if (gTasks[taskId].data[0x1] > 0x2)
-            gSpriteCoordOffsetX += 0x2;
-        if ((gUnknown_0203AB88->var26 += 0x4) == 0x68)
-            gSprites[gUnknown_0203AB88->var3C[0x19]].callback = &SpriteCallbackDummy;
+        if (gTasks[taskId].data[1] > 2)
+            gSpriteCoordOffsetX += 2;
+        if ((gUnknown_0203AB88->var26 += 4) == 104)
+            gSprites[gUnknown_0203AB88->var3C[25]].callback = &SpriteCallbackDummy;
     }
     else
     {
-        sub_8142E70(1, 0xFF);
-        sub_8143038(1, 0xFF);
+        sub_8142E70(1, -1);
+        sub_8143038(1, -1);
         gTasks[taskId].func = sub_8141344;
-        gTasks[taskId].data[0x1] = 0;
+        gTasks[taskId].data[1] = 0;
     }
 }
 
@@ -1051,3 +1111,1076 @@ _08141558:\n\
 	.4byte sub_814155C");
 }
 #endif // NONMATCHING
+
+void sub_814155C(u8 taskId)
+{
+    u8 index;
+    gUnknown_0203AB88->var03_7 = 1;
+    index = gUnknown_0203AB88->var3C[gUnknown_0203AB88->var7C];
+    gUnknown_0203AB88->var38 = &gSprites[index];
+    gUnknown_0203AB88->var38->callback = sub_81446AC;
+    gTasks[taskId].data[6]++;
+    gTasks[taskId].data[0x8]++;
+    sub_814372C(6 - gTasks[taskId].data[6]);
+    m4aSongNumStart(SE_TAMAKORO);
+    gTasks[taskId].func = sub_81415D4;
+}
+
+void sub_81415D4(u8 taskId)
+{
+    if (gUnknown_0203AB88->var7D)
+    {
+        if (gUnknown_0203AB88->var03_5)
+        {
+            if (gUnknown_0203AB88->var03_6)
+            {
+                gUnknown_0203AB88->var03_6 = FALSE;
+                gUnknown_0203AB88->var03_5 = FALSE;
+            }
+        }
+        else
+        {
+            if (!gTasks[taskId].data[1])
+            {
+                bool8 temp = sub_81421E8(sub_81420D0(taskId, gUnknown_0203AB88->var7E), gUnknown_0203AB88->var1B[gUnknown_0203AB88->var1A_0]);
+                gTasks[taskId].data[5] = temp;
+                if (temp == TRUE)
+                    sub_8151A48(&gUnknown_0203AB88->varB8, 0x1000);
+            }
+            if (gTasks[taskId].data[1] <= 60)
+            {
+                if (gMain.newKeys & A_BUTTON)
+                    gTasks[taskId].data[1] = 60;
+                gTasks[taskId].data[1]++;
+            }
+            else
+            {
+                sub_81424FC(gUnknown_0203AB88->var1B[gUnknown_0203AB88->var1A_0]);
+                sub_8142E70(0, gTasks[taskId].data[12]);
+                sub_8143038(0, gTasks[taskId].data[6] - 1);
+                gTasks[taskId].data[1] = 32;
+                gTasks[taskId].func = sub_81416D4;
+            }
+        }
+    }
+}
+
+void sub_81416D4(u8 taskId)
+{
+    if (gTasks[taskId].data[1]-- > 0)
+    {
+        if (gTasks[taskId].data[1] > 2)
+            gSpriteCoordOffsetX -= 2;
+        if ((gUnknown_0203AB88->var26 -= 4) == 104)
+            gSprites[gUnknown_0203AB88->var3C[25]].callback = sub_814390C;
+    }
+    else
+    {
+        sub_8143150(gTasks[taskId].data[12]);
+        if (gTasks[taskId].data[5] == 1)
+            gTasks[taskId].data[1] = 121;
+        else
+            gTasks[taskId].data[1] = 61;
+        gTasks[taskId].func = sub_8141778;
+    }
+}
+
+void sub_8141778(u8 taskId)
+{
+    if (gTasks[taskId].data[1]-- > 1)
+    {
+        switch (gTasks[taskId].data[1] % 16)
+        {
+        case 8:
+            sub_8142E70(0, -1);
+            sub_8143038(0, -1);
+            break;
+        case 0:
+            sub_8142E70(0, gTasks[taskId].data[12]);
+            sub_8143038(0, gTasks[taskId].data[6] - 1);
+            break;
+        }
+    }
+    else
+    {
+        sub_8141F7C(taskId, sub_814189C, 30, 0);
+    }
+}
+
+void sub_8141800(u8 taskId)
+{
+    switch (gTasks[taskId].data[0x5])
+    {
+    case 1:
+    case 2:
+        if (IsFanfareTaskInactive())
+        {
+            u32 wins = GetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS);
+            if (wins < ++gTasks[taskId].data[11])
+                SetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS, gTasks[taskId].data[11]);
+            sub_8141F7C(taskId, sub_8141A18, 0xFFFF, 3);
+        }
+        break;
+    case 0:
+    default:
+        if (!IsSEPlaying())
+        {
+            gTasks[taskId].data[11] = FALSE;
+            sub_8141F7C(taskId, sub_8141AC0, 0xFFFF, 3);
+        }
+        break;
+    }
+}
+
+void sub_814189C(u8 taskId)
+{
+    switch (gTasks[taskId].data[5])
+    {
+    case 1:
+    case 2:
+        if (gTasks[taskId].data[2] == 12)
+        {
+            PlayFanfare(MUS_ME_B_BIG);
+            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BD7, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(gUnknown_0203AB8C, 3);
+        }
+        else
+        {
+            PlayFanfare(MUS_ME_B_SMALL);
+            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BCB, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(gUnknown_0203AB8C, 3);
+        }
+        break;
+    case 0:
+    default:
+        m4aSongNumStart(SE_HAZURE);
+        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BE0, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_0203AB8C, 3);
+        break;
+    }
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].func = sub_8141800;
+}
+
+void sub_8141984(u8 taskId)
+{
+    s32 r0 = gTasks[taskId].data[7];
+    switch (r0)
+    {
+    case 0:
+        gTasks[taskId].data[13]++;
+        m4aSongNumStart(SE_PIN);
+        sub_8143514(gTasks[taskId].data[13]);
+        if (gTasks[taskId].data[13] >= 9999)
+        {
+            gTasks[taskId].data[1] = r0;
+        }
+        else
+        {
+            gTasks[taskId].data[1]--;
+            gTasks[taskId].data[7]++;
+        }
+        break;
+    case 3:
+        m4aSongNumStop(SE_PIN);
+        gTasks[taskId].data[7] = 0;
+        break;
+    default:
+        gTasks[taskId].data[7]++;
+        break;
+    }
+    if (gTasks[taskId].data[1] == 0)
+        sub_8141F7C(taskId, sub_8141AC0, 0xFFFF, 3);
+}
+
+void sub_8141A18(u8 taskId)
+{
+    ConvertIntToDecimalStringN(gStringVar1, (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]), STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringExpandPlaceholders(gStringVar4, gUnknown_082A5BEF);
+    NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+    AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+    CopyWindowToVram(gUnknown_0203AB8C, 3);
+    gTasks[taskId].data[1] = (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]);
+    gTasks[taskId].data[7] = 0;
+    gTasks[taskId].func = sub_8141984;
+}
+
+void sub_8141AC0(u8 taskId)
+{
+    sub_8151A9C(&gUnknown_0203AB88->varB8, 0xFFFF);
+    gUnknown_0203AB88->varB8.var04[13].var00_7 = gUnknown_0203AB88->varB8.var04[14].var00_7 = gUnknown_0203AB88->varB8.var04[15].var00_7 = 0;
+    gSprites[gUnknown_0203AB88->var3C[7 + gUnknown_085B6154[gTasks[taskId].data[12]].var00]].invisible = TRUE;
+    gTasks[taskId].func = sub_8141B58;
+}
+
+void sub_8141B58(u8 taskId)
+{
+    u8 i = 0;
+    gTasks[taskId].data[4] = i;
+    gUnknown_0203AB88->var1B[gUnknown_0203AB88->var1A_0] = 0;
+    sub_81424FC(0);
+    gSprites[gUnknown_0203AB88->var3C[48]].invisible = TRUE;
+    for (i = 0; i < 4; i++)
+    {
+        gSprites[gUnknown_0203AB88->var3C[i + 41]].oam.tileNum =
+            gSprites[gUnknown_0203AB88->var3C[i + 41]].sheetTileStart
+            + (*gSprites[gUnknown_0203AB88->var3C[i + 41]].anims)->type;
+    }
+    if (gTasks[taskId].data[13] >= gUnknown_0203AB88->var19)
+    {
+        if (gTasks[taskId].data[6] == 6)
+        {
+            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C21, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(gUnknown_0203AB8C, 3);
+            sub_8141F7C(taskId, dp01t_12_3_battle_menu, 0xFFFF, 3);
+        }
+        else if (gTasks[taskId].data[13] == 9999)
+        {
+            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(gUnknown_0203AB8C, 3);
+            sub_8141F7C(taskId, sub_8140914, 0xFFFF, 0x3);
+        }
+        else
+        {
+            gTasks[taskId].func = sub_8140914;
+        }
+    }
+    else
+    {
+        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C04, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_0203AB8C, 3);
+        sub_8141F7C(taskId, sub_8140994, 0x3C, 0x3);
+    }
+}
+
+void dp01t_12_3_battle_menu(u8 taskId)
+{
+    u8 i = 0;
+
+    gTasks[taskId].data[6] = 0;
+    sub_8141FF4(taskId);
+    sub_8142070();
+    sub_8143A40();
+    sub_81424FC(0);
+    sub_814372C(6);
+
+    for (i = 0; i < 12; i++)
+    {
+        gSprites[gUnknown_0203AB88->var3C[i + 7]].invisible = FALSE;
+    }
+
+    if (gTasks[taskId].data[13] == 9999)
+    {
+        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_0203AB8C, 3);
+        sub_8141F7C(taskId, sub_8140914, 0xFFFF, 3);
+    }
+    else
+    {
+        gTasks[taskId].func = sub_8140914;
+    }
+}
+
+void sub_8141DE4(u8 taskId)
+{
+    sub_8151A9C(&gUnknown_0203AB88->varB8, 0xFFFF);
+    sub_8151678(&gUnknown_0203AB88->varB8);
+    SetCoins(gTasks[taskId].data[13]);
+    if (GetCoins() < gUnknown_0203AB88->var19)
+        gSpecialVar_0x8004 = TRUE;
+    else
+        gSpecialVar_0x8004 = FALSE;
+    sub_80EDD78(GetCoins());
+    BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_8141E7C;
+}
+
+void sub_8141E7C(u8 taskId) // end roulette ?
+{
+    if (UpdatePaletteFade() == 0)
+    {
+        SetVBlankCallback(NULL);
+        gSpriteCoordOffsetX = gSpriteCoordOffsetY = 0;
+        ResetVramOamAndBgCntRegs();
+        ResetAllBgsCoordinates();
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        FreeAllSpritePalettes();
+        ResetPaletteFade();
+        ResetSpriteData();
+        sub_8140418();
+        gFieldCallback = sub_80AF168;
+        SetMainCallback2(CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8141EF8(u8 taskId)
+{
+    if (gUnknown_0203AB88->varA8 == 0 || gMain.newKeys & gUnknown_0203AB88->varAA)
+    {
+        gTasks[taskId].func = gUnknown_0203AB88->varAC;
+        if (gUnknown_0203AB88->varAA > 0)
+            PlaySE(SE_SELECT);
+        gUnknown_0203AB88->varAC = NULL;
+        gUnknown_0203AB88->varAA = 0;
+        gUnknown_0203AB88->varA8 = 0;
+    }
+    if (gUnknown_0203AB88->varA8 != 0xFFFF)
+        gUnknown_0203AB88->varA8--;
+}
+
+void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3)
+{
+    gUnknown_0203AB88->varB4 = gTasks[taskId].func;
+    if (r1 == NULL)
+        r1 = gUnknown_0203AB88->varB4;
+    gUnknown_0203AB88->varAC = r1;
+    gUnknown_0203AB88->varA8 = r2;
+    if (r2 == 0xFFFF && r3 == 0)
+        gUnknown_0203AB88->varAA = 0xFFFF;
+    else
+        gUnknown_0203AB88->varAA = r3;
+    gTasks[taskId].func = sub_8141EF8;
+}
+
+void sub_8141FF4(u8 taskId)
+{
+    u8 i = 0;
+    gUnknown_0203AB88->var00 = i;
+    gUnknown_0203AB88->var03_7 = 0;
+    gUnknown_0203AB88->var03_5 = 0;
+    gUnknown_0203AB88->var03_6 = 0;
+    gUnknown_0203AB88->var03_0 = 0;
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_0203AB88->var1B[i] = 0;
+    }
+    gUnknown_0203AB88->var1A_0 = 0;
+    gTasks[taskId].data[1] = 0;
+}
+
+void sub_8142070(void)
+{
+    u8 i;
+    gUnknown_0203AB88->var08 = 0;
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_0203AB88->var0C[i] = 0;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        gUnknown_0203AB88->var12[i] = 0;
+    }
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_0203AB88->var16[i] = 0;
+    }
+    sub_8143038(1, -1);
+}
+
+u8 sub_81420D0(u8 taskId, u8 r1)
+{
+    u8 i;
+    u8 z;
+    u32 t0[4];
+    u32 t1[3];
+
+    memcpy(t0, gUnknown_085B642C, sizeof(t0));
+    memcpy(t1, gUnknown_085B643C, sizeof(t1));
+    
+    if (r1 > 11)
+        return 0;
+
+    gUnknown_0203AB88->var0C[gTasks[taskId].data[6] - 1] = gUnknown_085B62E4[r1].var02;
+    gTasks[taskId].data[12] = gUnknown_085B62E4[r1].var02;
+    gUnknown_0203AB88->var08 |= gUnknown_085B62E4[r1].var04;
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_085B62E4[r1].var04 & t0[i])
+            gUnknown_0203AB88->var12[i]++;
+        if (gUnknown_0203AB88->var12[i] > 2)
+            gUnknown_0203AB88->var08 |= t0[i];
+    }
+    for (z = 0; z < 3; z++)
+    {
+        if (gUnknown_085B62E4[r1].var04 & t1[z])
+            gUnknown_0203AB88->var16[z]++;
+        if (gUnknown_0203AB88->var16[z] > 3)
+            gUnknown_0203AB88->var08 |= t1[z];
+    }
+    return gUnknown_085B62E4[r1].var02;
+}
+
+bool8 sub_81421E8(u8 r0, u8 r1)
+{
+    u8 t = r0;
+    if (--r0 < 19)
+    {
+        switch (r1)
+        {
+        case 0:
+            return 3;
+        case 1 ... 4:
+            if (t == r1 + 5 || t == r1 + 10 || t == r1 + 15)
+                return TRUE;
+            break;
+        case 5:
+        case 10:
+        case 15:
+            if (t >= (r1 + 1) && t <= (r1 + 4))
+                return TRUE;
+            break;
+        default:
+            if (t == r1)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_8142284(u8 r0)
+{
+
+    u16 var0 = 0x0;
+    u8 var2;
+    u16 var3;
+    u8 i;
+
+    switch (r0)
+    {
+    case 5:
+    case 10:
+    case 15:
+        for (i = (r0 + 1); i < (r0 + 5); i++)
+        {
+            if (!(gUnknown_0203AB88->var08 & gUnknown_085B6154[i].var08))
+                var0 |= gUnknown_085B6154[i].var10;
+        }
+        sub_8151A48(&gUnknown_0203AB88->varB8, var0 &= 0xDFFF);
+        break;
+    default:
+    {
+        struct UnkStruct1 var1[3];
+        memcpy(var1, gUnknown_085B63F0, sizeof(var1));
+        if (r0 > 0 && r0 < 5)
+            var2 = 3;
+        else
+            var2 = 1;
+        var3 = r0 / 5 - 1;
+        switch (r0 % 5)
+        {
+            case 1:
+                var3 = gSprites[gUnknown_0203AB88->var3C[7]].oam.paletteNum * 16;
+                break;
+            case 2:
+                var3 = gSprites[gUnknown_0203AB88->var3C[8]].oam.paletteNum * 16;
+                break;
+            case 3:
+                var3 = gSprites[gUnknown_0203AB88->var3C[9]].oam.paletteNum * 16;
+                break;
+            case 4:
+                var3 = gSprites[gUnknown_0203AB88->var3C[10]].oam.paletteNum * 16;
+                break;
+        }
+        if (var2 == 1)
+        {
+            if (!(gUnknown_0203AB88->var08 & gUnknown_085B6154[r0].var08))
+            {
+                var1[r0 / 5 - 1].var02 += var3;
+                sub_815168C(&gUnknown_0203AB88->varB8, 13, &var1[r0 / 5 - 1]);
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            for (i = 0; i < 3; i++)
+            {
+                u8 var4 = i * 5 + r0 + 5;
+                if (!(gUnknown_0203AB88->var08 & gUnknown_085B6154[var4].var08))
+                {
+                    var1[var4 / 5 - 1].var02 += var3;
+                    sub_815168C(&gUnknown_0203AB88->varB8, i + 13, &var1[var4 / 5 - 1]);
+                    if (var2 == 3)
+                        var0 = gUnknown_085B6154[var4].var10;
+                    var2--;
+                }
+            }
+            if (var2 != 2)
+                var0 = 0;
+        }
+        sub_8151A48(&gUnknown_0203AB88->varB8, var0 |= gUnknown_085B6154[r0].var10);
+        break;
+    }
+    }
+}
+
+void sub_81424FC(u8 r0)
+{
+    vu8 i;
+    vu8 z;
+    vu16 var1;
+    vu16 var2;
+    vu8 var0;
+    u8 v[5];
+    u8 l;
+    gUnknown_0203AB88->var2A = 1;
+    sub_8142E70(0, 0);
+    sub_8152058(gUnknown_0203AB88->tilemapBuffers[2], gUnknown_0203AB88->unk_397C, 14, 7, 16, 13);
+    switch (r0)
+    {
+    case 0:
+        return;
+    case 1 ... 4:
+        l = 4;
+        for (i = 0; i < l; i++)
+        {
+            v[i] = i * 5 + r0;
+        }
+        break;
+    case 5:
+    case 10:
+    case 15:
+        l = 5;
+        for (i = 0; i < l; i++)
+        {
+            v[i] = i + r0;
+        }
+        break;
+    default:
+        l = 1;
+        v[0] = r0;
+    }
+    for (i = 0; i < l; i++)
+    {
+        var0 = gUnknown_085B6154[v[i]].var06;
+        var1 = gUnknown_085B6154[v[i]].var03;
+        for (z = 0; z < 3; z++)
+        {
+            var2 = (gUnknown_085B6154[v[i]].var04 + z) * 32;
+            gUnknown_0203AB88->tilemapBuffers[2][var1 + var2 + 0] = gUnknown_0203AB88->unk_397C[(var0 + z) * 3 + 208];
+            gUnknown_0203AB88->tilemapBuffers[2][var1 + var2 + 1] = gUnknown_0203AB88->unk_397C[(var0 + z) * 3 + 209];
+            gUnknown_0203AB88->tilemapBuffers[2][var1 + var2 + 2] = gUnknown_0203AB88->unk_397C[(var0 + z) * 3 + 210];
+        }
+    }
+}
+
+u8 sub_8142758(u8 r0)
+{
+    u8 var0[5];
+    memcpy(var0, gUnknown_085B6448, sizeof(var0));
+
+    if (r0 > 19)
+        r0 = 0;
+    switch (gUnknown_085B6154[r0].var01_0)
+    {
+    case 3:
+        r0 = r0 / 5 - 1;
+        if (gUnknown_0203AB88->var16[r0] > 3)
+            return 0;
+        return var0[gUnknown_0203AB88->var16[r0] + 1];
+    case 4:
+        r0--;
+        if (gUnknown_0203AB88->var12[r0] > 2)
+            return 0;
+        return var0[gUnknown_0203AB88->var12[r0] + 2];
+    case 12:
+        if (gUnknown_0203AB88->var08 & gUnknown_085B6154[r0].var08)
+            return 0;
+        return var0[4];
+    }
+    return 0;
+}
+
+void sub_8142814(void)
+{
+    s32 x1;
+    s32 x2;
+    SetGpuReg(REG_OFFSET_BG2PA, gUnknown_0203AB88->var2C.a);
+    SetGpuReg(REG_OFFSET_BG2PB, gUnknown_0203AB88->var2C.b);
+    SetGpuReg(REG_OFFSET_BG2PC, gUnknown_0203AB88->var2C.c);
+    SetGpuReg(REG_OFFSET_BG2PD, gUnknown_0203AB88->var2C.d);
+    x1 = 0x7400 - gUnknown_0203AB88->var2C.a * (gSpriteCoordOffsetX + 116)
+                - gUnknown_0203AB88->var2C.b * (gSpriteCoordOffsetY + 80);
+    x2 = 0x5400 - gUnknown_0203AB88->var2C.c * (gSpriteCoordOffsetX + 116)
+                - gUnknown_0203AB88->var2C.d * (gSpriteCoordOffsetY + 80);
+    SetGpuReg(REG_OFFSET_BG2X_L, x1);
+    SetGpuReg(REG_OFFSET_BG2X_H, (x1 & 0x0fff0000) >> 16);
+    SetGpuReg(REG_OFFSET_BG2Y_L, x2);
+    SetGpuReg(REG_OFFSET_BG2Y_H, (x2 & 0x0fff0000) >> 16);
+}
+
+void sub_81428C4(u8 r0)
+{
+    DisplayYesNoMenu();
+    DoYesNoFuncWithChoice(r0, &gUnknown_085B6408);
+}
+
+void sub_81428E4(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetVBlankCallback(NULL);
+        SetMainCallback2(sub_81405CC);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8142918(u8 taskId)
+{
+    sub_819746C(0, TRUE);
+    HideCoinsWindow();
+    FreeAllWindowBuffers();
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
+    UpdatePaletteFade();
+    gTasks[taskId].func = sub_81428E4;
+}
+
+void sub_814297C(u8 taskId)
+{
+    sub_819746C(0, FALSE);
+    HideCoinsWindow();
+    ScriptContext2_Disable();
+    DestroyTask(taskId);
+}
+
+void sub_81429A0(u8 taskId)
+{
+    gTasks[taskId].data[0]++;
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        gSpecialVar_0x8004 = 1;
+        HideCoinsWindow();
+        sub_819746C(0, TRUE);
+        ScriptContext2_Disable();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_81429F0(u8 taskId)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        u32 temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
+        ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
+        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
+        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(0, 3);
+        gTasks[taskId].func = sub_81428C4;
+    }
+}
+
+void Task_Roulette_0(u8 taskId)
+{
+    s32 temp;
+    PrintCoinsString(gTasks[taskId].data[13]);
+    temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
+    ConvertIntToDecimalStringN(gStringVar1, temp, 2, 1);
+    if (gTasks[taskId].data[13] >= temp)
+    {
+        if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
+        {
+            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            AddTextPrinterParameterized(0, 1, gUnknown_082A5B6B, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(0, 3);
+            gTasks[taskId].func = sub_81429F0;
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
+            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(0, 3);
+            gTasks[taskId].func = sub_81428C4;
+        }
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B4E);
+        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(0, 3);
+        gTasks[taskId].func = sub_81429A0;
+        gTasks[taskId].data[13] = 0;
+        gTasks[taskId].data[0] = 0;
+    }
+}
+
+void PlayRoulette(void)
+{
+    u8 taskId;
+
+    ScriptContext2_Enable();
+    ShowCoinsWindow(GetCoins(), 1, 1);
+    taskId = CreateTask(Task_Roulette_0, 0);
+    gTasks[taskId].data[13] = GetCoins();
+}
+
+void sub_8142C0C(u8 r0)
+{
+    if (!r0)
+    {
+        FreeAllSpritePalettes();
+        LoadSpritePalettes(gUnknown_085B7384);
+        LoadCompressedSpriteSheet(&gUnknown_085B7864);
+        LoadCompressedSpriteSheet(&gUnknown_085B7978);
+        LoadCompressedSpriteSheet(&gUnknown_085B7A40);
+    }
+    else
+    {
+        FreeSpriteTilesByTag(14);
+        FreeSpriteTilesByTag(13);
+        FreeSpriteTilesByTag(12);
+        FreeAllSpritePalettes();
+    }
+}
+
+u8 sub_8142C60(const struct SpriteTemplate *r0, u8 r1, u16 *r2)
+{
+    u16 temp;
+    u8 spriteId = CreateSprite(r0, 116, 80, r0->oam->y);
+    gSprites[spriteId].data[0]            = *r2;
+    gSprites[spriteId].data[1]            = r1;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+    gSprites[spriteId].animPaused         = TRUE;
+    gSprites[spriteId].affineAnimPaused   = TRUE;
+    temp = *r2;
+    *r2 += 30;
+    if (*r2 >= 360)
+        *r2 = temp - 330;
+    return spriteId;
+}
+
+void sub_8142CD0(void)
+{
+    u8 i, j;
+    u8 spriteId;
+    struct SpriteSheet s;
+    LZ77UnCompWram(gUnknown_085B7488.data, gDecompressionBuffer);
+    s.data = gDecompressionBuffer;
+    s.size = gUnknown_085B7488.size;
+    s.tag  = gUnknown_085B7488.tag;
+    LoadSpriteSheet(&s);
+    LZ77UnCompWram(gUnknown_085B7490.data, gDecompressionBuffer);
+    s.data = gDecompressionBuffer;
+    s.size = gUnknown_085B7490.size;
+    s.tag  = gUnknown_085B7490.tag;
+    LoadSpriteSheet(&s);
+    for (i = 0; i < 3; i++)
+    {
+        u8 o = i * 24;
+        for (j = 0; j < 4; j++)
+        {
+            spriteId = gUnknown_0203AB88->var3C[(i * 4) + 29 + j] = CreateSprite(&gSpriteTemplate_85B75B0[j], (j * 24) + 148, o + 92, 30);
+            gSprites[spriteId].animPaused = TRUE;
+            o += 24;
+            if (o >= 72)
+                o = 0;
+        }
+    }
+    for (i = 0; i < 4; i++)
+    {
+        spriteId = gUnknown_0203AB88->var3C[i + 41] = CreateSprite(&gSpriteTemplate_85B7508[i], (i * 24) + 148, 70, 30);
+        gSprites[spriteId].animPaused = TRUE;
+    }
+    for (i = 0; i < 3; i++)
+    {
+        spriteId = gUnknown_0203AB88->var3C[i + 45] = CreateSprite(&gSpriteTemplate_85B7568[i], 126, (i * 24) + 92, 30);
+        gSprites[spriteId].animPaused = TRUE;
+    }
+}
+
+void unref_sub_8142E3C(void)
+{
+    u8 i;
+    for (i = 0; i < 12; i++)
+    {
+        DestroySprite(&gSprites[gUnknown_0203AB88->var3C[i + 29]]);
+    }
+}
+
+void sub_8142E70(u8 r0, u8 r1)
+{
+    u8 i;
+    switch (r0)
+    {
+    case 1:
+        for (i = 0; i < 19; i++)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i + 29]].invisible = TRUE;
+        }
+        break;
+    case 0:
+        for (i = 0; i < 12; i++)
+        {
+            if (!(gUnknown_0203AB88->var08 & gUnknown_085B62E4[i].var04))
+                gSprites[gUnknown_0203AB88->var3C[i + 29]].invisible = FALSE;
+            else if (gUnknown_085B62E4[i].var02 != r1)
+                gSprites[gUnknown_0203AB88->var3C[i + 29]].invisible = TRUE;
+            else
+                gSprites[gUnknown_0203AB88->var3C[i + 29]].invisible = FALSE;
+        }
+        for (; i < 19; i++)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i + 29]].invisible = FALSE;
+        }
+        break;
+    }
+}
+
+void sub_8142F7C(void)
+{
+    u8 i;
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_0203AB88->var3C[i + 49] = CreateSprite(&gSpriteTemplate_85B7928, 116, 20, 10);
+        gSprites[gUnknown_0203AB88->var3C[i + 49]].invisible = TRUE;
+        gSprites[gUnknown_0203AB88->var3C[i + 49]].data[0] = 1;
+        gSprites[gUnknown_0203AB88->var3C[i + 49]].callback = sub_814390C;
+        gSprites[gUnknown_0203AB88->var3C[i + 49]].oam.priority = 1;
+        StartSpriteAnim(&gSprites[gUnknown_0203AB88->var3C[i + 49]], 8);
+    }
+}
+
+void sub_8143038(u8 r0, u8 r1)
+{
+    u8 i = 0;
+    if (r0)
+    {
+        for ( ; i < 6; i++)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i + 49]].invisible = TRUE;
+        }
+    }
+    else
+    {
+        for ( ; i < 6; i++)
+        {
+            if (!gUnknown_0203AB88->var0C[i] || i == r1)
+            {
+                gSprites[gUnknown_0203AB88->var3C[i + 49]].invisible = TRUE;
+            }
+            else
+            {
+                gSprites[gUnknown_0203AB88->var3C[i + 49]].invisible = FALSE;
+                gSprites[gUnknown_0203AB88->var3C[i + 49]].pos1.x = (gUnknown_085B6154[gUnknown_0203AB88->var0C[i]].var03 + 1) * 8 + 4;
+                gSprites[gUnknown_0203AB88->var3C[i + 49]].pos1.y = (gUnknown_085B6154[gUnknown_0203AB88->var0C[i]].var04 + 1) * 8 + 3;
+            }
+        }
+    }
+}
+
+void sub_8143150(u8 r0)
+{
+    if (!r0)
+    {
+        gSprites[gUnknown_0203AB88->var3C[48]].invisible = TRUE;
+    }
+    else
+    {
+        gSprites[gUnknown_0203AB88->var3C[48]].invisible = FALSE;
+        gSprites[gUnknown_0203AB88->var3C[48]].pos1.x = (gUnknown_085B6154[r0].var03 + 2) * 8;
+        gSprites[gUnknown_0203AB88->var3C[48]].pos1.y = (gUnknown_085B6154[r0].var04 + 2) * 8;
+    }
+}
+
+void sub_81431E4(void)
+{
+    u8 i, j;
+    u16 k;
+    struct SpriteSheet s;
+
+    LZ77UnCompWram(gUnknown_085B741C.data, gDecompressionBuffer);
+    s.data = gDecompressionBuffer;
+    s.size = gUnknown_085B741C.size;
+    s.tag  = gUnknown_085B741C.tag;
+    LoadSpriteSheet(&s);
+
+    k = 15;
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            u8 spriteId;
+            spriteId = gUnknown_0203AB88->var3C[(i * 4) + 7 + j] = sub_8142C60(&gSpriteTemplate_85B7610[i * 4 + j], 40, &k);
+            gSprites[spriteId].animPaused = TRUE;
+            gSprites[spriteId].affineAnimPaused = TRUE;
+        }
+    }
+}
+
+void sub_8143280(struct Sprite *sprite)
+{
+    s16 cos;
+    s16 sin;
+    u32 matrixNum;
+    s16 angle = gUnknown_0203AB88->var24 + sprite->data[0];
+    if (angle >= 360)
+        angle -= 360;
+    sin = Sin2(angle);
+    cos = Cos2(angle);
+    sprite->pos2.x =  sin * sprite->data[1] >> 12;
+    sprite->pos2.y = -cos * sprite->data[1] >> 12;
+    matrixNum = sprite->oam.matrixNum;
+    sin /= 16;
+    gOamMatrices[matrixNum].d = cos /= 16;
+    gOamMatrices[matrixNum].a = cos;
+    gOamMatrices[matrixNum].b = sin;
+    gOamMatrices[matrixNum].c = -sin;
+}
+
+void sub_8143314(void)
+{
+    u8 i;
+    for (i = 0; i < 5; i++)
+    {
+        struct SpriteSheet s;
+        LZ77UnCompWram(gUnknown_085B7750[i].data, gDecompressionBuffer);
+        s.data = gDecompressionBuffer;
+        s.size = gUnknown_085B7750[i].size;
+        s.tag  = gUnknown_085B7750[i].tag;
+        LoadSpriteSheet(&s);
+    }
+    gUnknown_0203AB88->var3C[20] = CreateSprite(&gSpriteTemplate_85B77E4, 208, 16, 4);
+    gSprites[gUnknown_0203AB88->var3C[20]].animPaused = TRUE;
+    for (i = 0; i < 4; i++)
+    {
+        gUnknown_0203AB88->var3C[i + 21] = CreateSprite(&gUnknown_085B77FC, i * 8 + 196, 24, 0);
+        gSprites[gUnknown_0203AB88->var3C[i + 21]].invisible = TRUE;
+        gSprites[gUnknown_0203AB88->var3C[i + 21]].animPaused = TRUE;
+    }
+    gUnknown_0203AB88->var3C[25] = CreateSprite(&gUnknown_085B7814, 120, 68, 4);
+    gSprites[gUnknown_0203AB88->var3C[25]].animPaused = TRUE;
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_0203AB88->var3C[i + 26] = CreateSprite(&gUnknown_085B782C, i * 16 + 192, 36, 4);
+        gSprites[gUnknown_0203AB88->var3C[i + 26]].invisible = TRUE;
+        gSprites[gUnknown_0203AB88->var3C[i + 26]].animPaused = TRUE;
+    }
+    gUnknown_0203AB88->var3C[48] = CreateSprite(&gUnknown_085B7844, 152, 96, 9);
+    gSprites[gUnknown_0203AB88->var3C[48]].oam.priority = 1;
+    gSprites[gUnknown_0203AB88->var3C[48]].animPaused = TRUE;
+    gSprites[gUnknown_0203AB88->var3C[48]].invisible = TRUE;
+}
+
+void sub_8143514(u16 r0)
+{
+    u8 i;
+    u16 d = 1000;
+    bool8 v = FALSE;
+    for (i = 0; i < 4; i++)
+    {
+        u8 t = r0 / d;
+        gSprites[gUnknown_0203AB88->var3C[i + 21]].invisible = TRUE;
+        if (t > 0 || v || i == 3)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i + 21]].invisible = FALSE;
+            gSprites[gUnknown_0203AB88->var3C[i + 21]].oam.tileNum =
+                gSprites[gUnknown_0203AB88->var3C[i + 21]].sheetTileStart
+                + (*gSprites[gUnknown_0203AB88->var3C[i + 21]].anims + t)->type;
+            v = TRUE;
+        }
+        r0 = r0 % d;
+        d = d / 10;
+    }
+}
+
+u8 sub_8143614(u8 r0)
+{
+    u8 t[5];
+    memcpy(t, gUnknown_085B7B04, sizeof(t));
+    
+    if (r0 >= 20)
+        r0 = 0;
+    switch (gUnknown_085B6154[r0].var01_0)
+    {
+    case 3:
+        r0 = r0 / 5 - 1;
+        if (gUnknown_0203AB88->var16[r0] > 3)
+            return 0;
+        return t[gUnknown_0203AB88->var16[r0] + 1];
+    case 4:
+        r0--;
+        if (gUnknown_0203AB88->var12[r0] > 2)
+            return 0;
+        return t[gUnknown_0203AB88->var12[r0] + 2];
+    case 12:
+        if (gUnknown_0203AB88->var08 & gUnknown_085B6154[r0].var08)
+            return 0;
+        return t[4];
+    }
+    return 0;
+}
+
+void sub_81436D0(u8 r0)
+{
+    struct Sprite *s = &gSprites[gUnknown_0203AB88->var3C[25]];
+    s->animCmdIndex = sub_8143614(r0);
+    s->oam.tileNum = s->sheetTileStart + (*s->anims + s->animCmdIndex)->type;
+}
+
+void sub_814372C(u8 r0)
+{
+    u8 i;
+    u8 t = 0;
+    if (gUnknown_0203AB88->var19 == 1)
+        t = 2;
+    switch (r0)
+    {
+    case 6:
+        for (i = 0; i < 3; i++)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i + 26]].invisible = FALSE;
+            gSprites[gUnknown_0203AB88->var3C[i + 26]].oam.tileNum =
+                gSprites[gUnknown_0203AB88->var3C[i + 26]].sheetTileStart
+                + (*gSprites[gUnknown_0203AB88->var3C[i + 26]].anims)->type;
+        }
+        break;
+    case 5:
+        gSprites[gUnknown_0203AB88->var3C[28]].oam.tileNum =
+            gSprites[gUnknown_0203AB88->var3C[28]].sheetTileStart
+            + (*gSprites[gUnknown_0203AB88->var3C[28]].anims + t + 1)->type;
+        break;
+    case 4:
+        gSprites[gUnknown_0203AB88->var3C[28]].oam.tileNum =
+            gSprites[gUnknown_0203AB88->var3C[28]].sheetTileStart
+            + (*gSprites[gUnknown_0203AB88->var3C[28]].anims + t + 2)->type;
+        break;
+    case 3:
+        gSprites[gUnknown_0203AB88->var3C[27]].oam.tileNum =
+            gSprites[gUnknown_0203AB88->var3C[27]].sheetTileStart
+            + (*gSprites[gUnknown_0203AB88->var3C[27]].anims + t + 1)->type;
+        break;
+    case 2:
+        gSprites[gUnknown_0203AB88->var3C[27]].oam.tileNum =
+            gSprites[gUnknown_0203AB88->var3C[27]].sheetTileStart
+            + (*gSprites[gUnknown_0203AB88->var3C[27]].anims + t + 2)->type;
+        break;
+    case 1:
+        gSprites[gUnknown_0203AB88->var3C[26]].oam.tileNum =
+            gSprites[gUnknown_0203AB88->var3C[26]].sheetTileStart
+            + (*gSprites[gUnknown_0203AB88->var3C[26]].anims + t + 1)->type;
+        break;
+    case 0:
+    default:
+        for (i = 0; i < 3; i++)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i + 26]].oam.tileNum =
+                gSprites[gUnknown_0203AB88->var3C[i + 26]].sheetTileStart
+                + (*gSprites[gUnknown_0203AB88->var3C[i + 26]].anims + t + 2)->type;
+        }
+    }
+}

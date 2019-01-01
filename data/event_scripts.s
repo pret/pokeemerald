@@ -4695,7 +4695,7 @@ MauvilleCity_GameCorner_EventScript_2A5ADF:: @ 82A5ADF
 	end
 
 MauvilleCity_GameCorner_EventScript_2A5B0D:: @ 82A5B0D
-	special sub_8142BC8
+	special PlayRoulette
 	waitstate
 	end
 
