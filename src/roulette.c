@@ -113,8 +113,8 @@ extern struct Roulette
     u8 var7F;
     s16 var80;
     s16 var82;
-    s16 var84;
-    s16 var86;
+    u16 var84;
+    u16 var86;
     float var88;
     float var8C;
     float var90;
@@ -179,6 +179,9 @@ extern u8 gUnknown_0203AB8C;
 /*static*/ void sub_81439C8(void);
 /*static*/ void sub_8143A40(void);
 /*static*/ void sub_81446AC(struct Sprite *);
+/*static*/ void sub_81446DC(struct Sprite *);
+/*static*/ void sub_81448B8(struct Sprite *);
+/*static*/ void sub_8144A24(struct Sprite *);
 
 extern const struct BgTemplate gUnknown_085B6140[3];
 extern const struct WindowTemplate gUnknown_085B614C[];
@@ -232,6 +235,11 @@ extern const struct SpriteTemplate gUnknown_085B7814;
 extern const struct SpriteTemplate gUnknown_085B782C;
 extern const struct SpriteTemplate gUnknown_085B7844;
 extern const u8 gUnknown_085B7B04[];
+extern const struct CompressedSpriteSheet gUnknown_085B7948;
+extern const struct SpriteTemplate gSpriteTemplate_85B7950;
+extern const u16 gUnknown_085B7B0A[][2];
+extern const struct SpriteTemplate gSpriteTemplate_85B79F8;
+extern const struct SpriteTemplate gSpriteTemplate_85B7ABC[];
 
 void sub_8140238(void)
 {
@@ -406,8 +414,8 @@ void sub_81405CC(void)
         NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5B89, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
-        gSpriteCoordOffsetX = -0x3C;
-        gSpriteCoordOffsetY = 0x0;
+        gSpriteCoordOffsetX = -60;
+        gSpriteCoordOffsetY = 0;
         break;
     case 7:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
@@ -1550,7 +1558,7 @@ bool8 sub_81421E8(u8 r0, u8 r1)
 void sub_8142284(u8 r0)
 {
 
-    u16 var0 = 0x0;
+    u16 var0 = 0;
     u8 var2;
     u16 var3;
     u8 i;
@@ -2183,4 +2191,533 @@ void sub_814372C(u8 r0)
                 + (*gSprites[gUnknown_0203AB88->var3C[i + 26]].anims + t + 2)->type;
         }
     }
+}
+
+void sub_814390C(struct Sprite *sprite)
+{
+    sprite->pos2.x = gUnknown_0203AB88->var26;
+}
+
+void sub_814391C(void)
+{
+    u8 spriteId;
+    struct SpriteSheet s;
+    LZ77UnCompWram(gUnknown_085B7948.data, gDecompressionBuffer);
+    s.data = gDecompressionBuffer;
+    s.size = gUnknown_085B7948.size;
+    s.tag = gUnknown_085B7948.tag;
+    LoadSpriteSheet(&s);
+    spriteId = CreateSprite(&gSpriteTemplate_85B7950, 116, 80, 81);
+    gSprites[spriteId].data[0] = gUnknown_0203AB88->var24;
+    gSprites[spriteId].data[1] = 0;
+    gSprites[spriteId].animPaused = TRUE;
+    gSprites[spriteId].affineAnimPaused = TRUE;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+}
+
+void sub_814399C(struct Sprite *sprite)
+{
+    u32 t = sprite->oam.matrixNum;
+    struct OamMatrix *m = &gOamMatrices[0];
+    m[t].d = gUnknown_0203AB88->var2C.a;
+    m[t].a = gUnknown_0203AB88->var2C.a;
+    m[t].b = gUnknown_0203AB88->var2C.b;
+    m[t].c = gUnknown_0203AB88->var2C.c;
+}
+
+void sub_81439C8(void)
+{
+    u8 i;
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_0203AB88->var3C[i] = CreateSprite(&gSpriteTemplate_85B7928, 116, 80, 57 - i);
+        if (gUnknown_0203AB88->var3C[i] != MAX_SPRITES)
+        {
+            gSprites[gUnknown_0203AB88->var3C[i]].invisible = TRUE;
+            gSprites[gUnknown_0203AB88->var3C[i]].coordOffsetEnabled = TRUE;
+        }
+    }
+}
+
+void sub_8143A40(void)
+{
+    u8 t = gUnknown_0203AB88->var3C[0];
+    u8 i;
+    for (i = 0; i < 6; i++)
+    {
+        u8 j;
+        gSprites[t].invisible = TRUE;
+        gSprites[t].callback = &SpriteCallbackDummy;
+        StartSpriteAnim(&gSprites[t], 0);
+        for (j = 0; j < 8; j++)
+        {
+            gSprites[t].data[j] = 0;
+        }
+        t++;
+    }
+}
+
+s16 sub_8143AC8(struct Sprite *sprite)
+{
+    if (gUnknown_0203AB88->var24 > sprite->data[3])
+    {
+        sprite->data[6] = 360 - gUnknown_0203AB88->var24 + sprite->data[3];
+        if (sprite->data[6] >= 360)
+            sprite->data[6] -= 360;
+    }
+    else
+    {
+        sprite->data[6] = sprite->data[3] - gUnknown_0203AB88->var24;
+    }
+
+    return sprite->data[6];
+}
+
+u8 sub_8143B14(struct Sprite *sprite)
+{
+    gUnknown_0203AB88->var7E = sub_8143AC8(sprite) / 30.0f;
+    return gUnknown_0203AB88->var7E;
+}
+
+s16 sub_8143B48(struct Sprite *sprite)
+{
+    s16 t = sub_8143AC8(sprite) % 30;
+    u16 z;
+    if (t == 14)
+    {
+        z = 0;
+        return sprite->data[2] = z;
+    }
+    else if (t > 13)
+    {
+        z = 43 - t;
+        return sprite->data[2] = z;
+    }
+    else
+    {
+        z = 14 - t;
+        return sprite->data[2] = z;
+    }
+}
+
+void sub_8143B84(struct Sprite *sprite)
+{
+    s16 sin, cos;
+
+    gUnknown_0203AB88->var8C += gUnknown_0203AB88->var90;
+    gUnknown_0203AB88->var88 += gUnknown_0203AB88->var8C;
+
+    if (gUnknown_0203AB88->var88 >= 360)
+        gUnknown_0203AB88->var88 -= 360.0f;
+    else if (gUnknown_0203AB88->var88 < 0.0f)
+        gUnknown_0203AB88->var88 += 360.0f;
+
+    sprite->data[3] = gUnknown_0203AB88->var88;
+    gUnknown_0203AB88->var98 += gUnknown_0203AB88->var9C;
+    gUnknown_0203AB88->var94 += gUnknown_0203AB88->var98;
+    sprite->data[4] = gUnknown_0203AB88->var94;
+    sin = Sin2(sprite->data[3]);
+    cos = Cos2(sprite->data[3]);
+    sprite->pos2.x =  sin * sprite->data[4] >> 12;
+    sprite->pos2.y = -cos * sprite->data[4] >> 12;
+    if (IsSEPlaying())
+    {
+        m4aMPlayPanpotControl(&gMPlayInfo_SE1, 0xFFFF, sprite->pos2.x);
+        m4aMPlayPanpotControl(&gMPlayInfo_SE2, 0xFFFF, sprite->pos2.x);
+    }
+}
+
+void sub_8143C90(struct Sprite *sprite)
+{
+    s16 sin, cos;
+    sprite->data[3] = gUnknown_0203AB88->var24 + sprite->data[6];
+    if (sprite->data[3] >= 360)
+        sprite->data[3] -= 360;
+    sin = Sin2(sprite->data[3]);
+    cos = Cos2(sprite->data[3]);
+    sprite->pos2.x =  sin * sprite->data[4] >> 12;
+    sprite->pos2.y = -cos * sprite->data[4] >> 12;
+    sprite->pos2.y += gSpriteCoordOffsetY;
+}
+
+void sub_8143CFC(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    sprite->data[2]++;
+    if (sprite->data[4] < -132 || sprite->data[4] > 80)
+        sprite->invisible = TRUE;
+    else
+        sprite->invisible = FALSE;
+
+    if (sprite->data[2] >= 30)
+    {
+        if (!sprite->data[0])
+        {
+            if (gUnknown_0203AB88->var94 <= gUnknown_0203AB88->varA0 - 2.0f)
+            {
+                gUnknown_0203AB88->var7D = 0xFF;
+                gUnknown_0203AB88->var03_7 = 0;
+                StartSpriteAnim(sprite, sprite->animCmdIndex + 0x3);
+                sub_8143B14(sprite);
+                sprite->data[4] = 30;
+                sub_8143AC8(sprite);
+                sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
+                sprite->callback = sub_8143C90;
+                m4aSongNumStartOrChange(SE_HASHI);
+                gUnknown_0203AB88->var9C = gUnknown_0203AB88->var98 = 0.0f;
+                gUnknown_0203AB88->var8C = -1.0f;
+            }
+        }
+        else
+        {
+            if (gUnknown_0203AB88->var94 >= gUnknown_0203AB88->varA0 - 2.0f)
+            {
+                gUnknown_0203AB88->var7D = 0xFF;
+                gUnknown_0203AB88->var03_7 = 0;
+                StartSpriteAnim(sprite, sprite->animCmdIndex + 3);
+                sub_8143B14(sprite);
+                sprite->data[4] = 30;
+                sub_8143AC8(sprite);
+                sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
+                sprite->callback = sub_8143C90;
+                m4aSongNumStartOrChange(SE_HASHI);
+                gUnknown_0203AB88->var9C = gUnknown_0203AB88->var98 = 0.0f;
+                gUnknown_0203AB88->var8C = -1.0f;
+            }
+        }
+    }
+}
+
+void sub_8143E14(struct Sprite *sprite)
+{
+    float f0, f1, f2;
+    sub_8143B84(sprite);
+
+    switch (sprite->data[3])
+    {
+    case 0:
+        if (sprite->data[0] != 1)
+        {
+            f0 = sprite->data[7];
+            f1 = (f0 * gUnknown_085B6348[gUnknown_0203AB88->var04_0].var01 + (gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 - 1));
+            f2 = (f0 / gUnknown_085B6348[gUnknown_0203AB88->var04_0].var0C);
+        }
+        else
+        {
+            return;
+        }
+        break;
+    case 180:
+        if (sprite->data[0] != 0)
+        {
+            f0 = sprite->data[7];
+            f1 = (f0 * gUnknown_085B6348[gUnknown_0203AB88->var04_0].var01 + (gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 - 1));
+            f2 = -(f0 / gUnknown_085B6348[gUnknown_0203AB88->var04_0].var0C);
+        }
+        else
+        {
+            return;
+        }
+        break;
+    default:
+        return;
+    }
+    gUnknown_0203AB88->varA0 = gUnknown_0203AB88->var94;
+    gUnknown_0203AB88->var98 = f2;
+    gUnknown_0203AB88->var9C = -((f2 * 2.0f) / f1 + (2.0f / (f1 * f1)));
+    gUnknown_0203AB88->var8C = 0.0f;
+    sprite->animPaused = FALSE;
+    sprite->animNum = 0;
+    sprite->animBeginning = TRUE;
+    sprite->animEnded = FALSE;
+    sprite->callback = sub_8143CFC;
+    sprite->data[2] = 0;
+}
+
+void sub_8143FA4(struct Sprite *sprite)
+{
+    sprite->pos2.y = (s16)(sprite->data[2] * 0.05f * sprite->data[2]) - 45;
+    sprite->data[2]++;
+    if (sprite->data[2] > 29 && sprite->pos2.y >= 0)
+    {
+        gUnknown_0203AB88->var7D = 0xFF;
+        gUnknown_0203AB88->var03_7 = FALSE;
+        StartSpriteAnim(sprite, sprite->animCmdIndex + 3);
+        sub_8143B14(sprite);
+        sprite->data[4] = 30;
+        sub_8143AC8(sprite);
+        sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
+        sprite->callback = sub_8143C90;
+        m4aSongNumStartOrChange(SE_HASHI);
+        gUnknown_0203AB88->var03_6 = TRUE;
+    }
+}
+
+void sub_8144050(struct Sprite *sprite)
+{
+    if (sprite->data[2]++ < 45)
+    {
+        sprite->pos2.y--;
+        if (sprite->data[2] == 45)
+        {
+            if (gSprites[gUnknown_0203AB88->var3C[55]].animCmdIndex == 1)
+                sprite->pos2.y++;
+        }
+    }
+    else
+    {
+        if (sprite->data[2] < sprite->data[7])
+        {
+            if (gSprites[gUnknown_0203AB88->var3C[55]].animDelayCounter == 0)
+            {
+                if (gSprites[gUnknown_0203AB88->var3C[55]].animCmdIndex == 1)
+                    sprite->pos2.y++;
+                else
+                    sprite->pos2.y--;
+            }
+        }
+        else
+        {
+            sprite->animPaused = FALSE;
+            sprite->animNum = 1;
+            sprite->animBeginning = TRUE;
+            sprite->animEnded = FALSE;
+            sprite->data[2] = 0;
+            sprite->callback = sub_8143FA4;
+            m4aSongNumStart(SE_NAGERU);
+        }
+    }
+}
+
+void sub_8144128(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    switch (sprite->data[3])
+    {
+    case 90:
+        if (sprite->data[0] != 1)
+        {
+            sprite->callback  = &sub_8144050;
+            sprite->data[2] = 0;
+        }
+        break;
+    case 270:
+        if (sprite->data[0] != 0)
+        {
+            sprite->callback  = &sub_8144050;
+            sprite->data[2] = 0;
+        }
+        break;
+    }
+}
+
+void sub_8144168(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    switch (gUnknown_0203AB88->var03_0)
+    {
+    default:
+    case 0:
+        sub_81446DC(sprite);
+        sprite->callback = sub_8143E14;
+        break;
+    case 1:
+        sub_81448B8(sprite);
+        sprite->callback = sub_8144128;
+        break;
+    }
+}
+
+void prev_quest_read_x24_hm_usage(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    if (sprite->data[2]-- == 16)
+        gUnknown_0203AB88->var98 *= -1.0f;
+    if (sprite->data[2] == 0)
+    {
+        if (!sprite->data[0])
+        {
+            gUnknown_0203AB88->var7D = 0xFF;
+            gUnknown_0203AB88->var03_7 = 0;
+            StartSpriteAnim(sprite, sprite->animCmdIndex + 3);
+            sub_8143B14(sprite);
+            sprite->data[4] = 30;
+            sub_8143AC8(sprite);
+            sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
+            sprite->callback = sub_8143C90;
+            m4aSongNumStartOrChange(SE_HASHI);
+        }
+        else
+        {
+            sprite->animPaused = TRUE;
+            m4aSongNumStart(SE_KON);
+            sub_8144A24(sprite);
+        }
+    }
+}
+
+void sub_8144264(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    sprite->data[2] = 0;
+    sub_8143B14(sprite);
+    if (!(gUnknown_085B62E4[gUnknown_0203AB88->var7E].var04 & gUnknown_0203AB88->var08))
+    {
+        gUnknown_0203AB88->var7D = 0xFF;
+        gUnknown_0203AB88->var03_7 = 0;
+        StartSpriteAnim(sprite, sprite->animCmdIndex + 3);
+        sub_8143B14(sprite);
+        sprite->data[4] = 30;
+        sub_8143AC8(sprite);
+        sprite->data[6] = (sprite->data[6] / 30) * 30 + 15;
+        sprite->callback = sub_8143C90;
+        m4aSongNumStartOrChange(SE_HASHI);
+    }
+    else
+    {
+        u8 t;
+        u32 z;
+        m4aSongNumStart(SE_KON);
+        z = Random() & 1;
+        if (z)
+        {
+            gUnknown_0203AB88->var8C = 0.0f;
+            gUnknown_0203AB88->var7F = t = (gUnknown_0203AB88->var7E + 1) % 12;
+        }
+        else
+        {
+            float temp;
+            gUnknown_0203AB88->var8C = (temp = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var1C) * 2.0f;
+            t = (gUnknown_0203AB88->var7E + 11) % 12;
+            gUnknown_0203AB88->var7F = gUnknown_0203AB88->var7E;
+        }
+        if (gUnknown_085B62E4[t].var04 & gUnknown_0203AB88->var08)
+        {
+            sprite->data[0] = 1;
+            sprite->data[2] = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02;
+        }
+        else
+        {
+            sprite->data[0] = gUnknown_085B62E4[t].var04 & gUnknown_0203AB88->var08;
+            if (gUnknown_0203AB88->var04_0)
+            {
+                sprite->data[2] = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var01;
+            }
+            else
+            {
+                sprite->data[2] = gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02;
+                if (z)
+                {
+                    gUnknown_0203AB88->var8C = 0.5f;
+                }
+                else
+                {
+                    gUnknown_0203AB88->var8C = -1.5f;
+                }
+            }
+        }
+        gUnknown_0203AB88->var98 = 0.085f;
+        sprite->callback = prev_quest_read_x24_hm_usage;
+        sprite->data[1] = 5;
+    }
+}
+
+void sub_8144410(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    if (gUnknown_0203AB88->var8C > 0.5f)
+        return;
+
+    sub_8143B14(sprite);
+    if (!sub_8143B48(sprite))
+    {
+        gUnknown_0203AB88->var90 = 0.0f;
+        gUnknown_0203AB88->var8C -= (float)(gUnknown_085B6348[gUnknown_0203AB88->var04_0].var03)
+            / (gUnknown_085B6348[gUnknown_0203AB88->var04_0].var04 + 1);
+        sprite->data[1] = 4;
+        sprite->callback = sub_8144264;
+    }
+    else
+    {
+        if (gUnknown_0203AB88->var90 != 0.0f)
+        {
+            if (gUnknown_0203AB88->var8C < 0.0f)
+            {
+                gUnknown_0203AB88->var90 = 0.0f;
+                gUnknown_0203AB88->var8C = 0.0f;
+                gUnknown_0203AB88->var98 /= 1.2;
+            }
+        }
+    }
+}
+
+void sub_8144514(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    if (gUnknown_0203AB88->var94 > 40.f)
+        return;
+
+    gUnknown_0203AB88->var98 = -(4.0f / (float)gUnknown_0203AB88->var86);
+    gUnknown_0203AB88->var90 = -(gUnknown_0203AB88->var8C / (float)gUnknown_0203AB88->var86);
+    sprite->animNum = 2;
+    sprite->animBeginning = TRUE;
+    sprite->animEnded = FALSE;
+    sprite->data[1] = 3;
+    sprite->callback = sub_8144410;
+}
+
+void sub_81445D8(struct Sprite *sprite)
+{
+    sub_8143B84(sprite);
+    if (gUnknown_0203AB88->var94 > 60.0f)
+        return;
+
+    m4aSongNumStartOrChange(SE_TAMAKORO_E);
+    gUnknown_0203AB88->var98 = -(20.0f / (float)gUnknown_0203AB88->var84);
+    gUnknown_0203AB88->var90 = ((1.0f - gUnknown_0203AB88->var8C) / (float)gUnknown_0203AB88->var84);
+    sprite->animNum = 1;
+    sprite->animBeginning = TRUE;
+    sprite->animEnded = FALSE;
+    sprite->data[1] = 2;
+    sprite->callback = sub_8144514;
+}
+
+void sub_81446AC(struct Sprite *sprite)
+{
+    sprite->data[1] = 1;
+    sprite->data[2] = 0;
+    sub_8143B84(sprite);
+    sprite->invisible = FALSE;
+    sprite->callback = sub_81445D8;
+}
+
+void sub_81446DC(struct Sprite *sprite)
+{
+    u16 t;
+    u8 i;
+    s16 s[2][2];
+    struct Roulette *p;
+
+    memcpy(s, gUnknown_085B7B0A, 8);
+    t = sprite->data[7] - 2;
+    p = gUnknown_0203AB88;  // why???
+    gUnknown_0203AB88->var3C[55] = CreateSprite(&gSpriteTemplate_85B79F8, 36, -12, 50);
+    gUnknown_0203AB88->var3C[56] = CreateSprite(&gSpriteTemplate_85B7ABC[0], s[sprite->data[0]][0], s[sprite->data[0]][1], 59);
+    gUnknown_0203AB88->var3C[57] = CreateSprite(&gSpriteTemplate_85B7ABC[1], 36, 140, 51);
+    gSprites[gUnknown_0203AB88->var3C[57]].oam.objMode = 1;
+    for (i = 0; i < 3; i++)
+    {
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].coordOffsetEnabled = FALSE;
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].invisible = TRUE;
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].animPaused = TRUE;
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].affineAnimPaused = TRUE;
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].data[4] = gUnknown_0203AB88->var3C[55];
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].data[5] = gUnknown_0203AB88->var3C[56];
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].data[6] = gUnknown_0203AB88->var3C[57];
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].data[2] = t;
+        gSprites[gUnknown_0203AB88->var3C[i + 55]].data[3] = (sprite->data[7] * gUnknown_085B6348[gUnknown_0203AB88->var04_0].var01) +
+                                                                (gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 + 0xFFFF);
+    }
+    gSprites[gUnknown_0203AB88->var3C[56]].coordOffsetEnabled = TRUE;
+    gUnknown_0203AB88->var38 = sprite;
 }
