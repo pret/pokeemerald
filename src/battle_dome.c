@@ -35,7 +35,6 @@
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
-#include "constants/rgb.h"
 
 #define DOME_ROUND1 0
 #define DOME_ROUND2 1

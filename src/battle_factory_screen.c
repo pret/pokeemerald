@@ -26,7 +26,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "constants/battle_frontier.h"
 #include "constants/songs.h"
-#include "constants/rgb.h"
 
 // Select_ refers to the first Pokemon selection screen where you choose 3 Pokemon.
 // Swap_   refers to the consecutive selection screen where you can keep your Pokemon or swap one with beaten trainer's.

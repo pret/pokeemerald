@@ -1,7 +1,6 @@
 #include "global.h"
 #include "contest_painting_effects.h"
 #include "contest_painting.h"
-#include "constants/rgb.h"
 
 extern u8 gUnknown_03006164;
 extern u16 (*gUnknown_03006168)[][32];

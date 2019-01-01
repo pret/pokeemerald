@@ -263,7 +263,7 @@ _0801DA72:
 	beq _0801DB46
 	b _0801DB5E
 _0801DA7C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DB5E
@@ -296,7 +296,7 @@ _0801DA7C:
 	b _0801DB3E
 	.pool
 _0801DAC8:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DB5E
@@ -335,7 +335,7 @@ _0801DB08:
 	strh r0, [r4, 0x10]
 	b _0801DB5E
 _0801DB1C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801DB5E

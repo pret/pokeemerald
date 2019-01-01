@@ -35,7 +35,6 @@
 #include "tv.h"
 #include "constants/items.h"
 #include "constants/metatile_behaviors.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 EWRAM_DATA struct MartInfo gMartInfo = {0};

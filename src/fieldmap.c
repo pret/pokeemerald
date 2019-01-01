@@ -12,7 +12,6 @@
 #include "script.h"
 #include "secret_base.h"
 #include "tv.h"
-#include "constants/rgb.h"
 
 extern void sub_81AA078(u16*, u8);
 
@@ -993,7 +992,7 @@ void apply_map_tileset_palette(struct Tileset const *tileset, u16 destOffset, u1
         }
         else
         {
-            LoadCompressedPalette((u16*)tileset->palettes, destOffset, size);
+            LoadCompressedPalette((u32*)tileset->palettes, destOffset, size);
             nullsub_3(destOffset, size >> 1);
         }
     }

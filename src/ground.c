@@ -4,7 +4,6 @@
 #include "scanline_effect.h"
 #include "task.h"
 #include "trig.h"
-#include "constants/rgb.h"
 
 void AnimBonemerangProjectile(struct Sprite *);
 void AnimBoneHitProjectile(struct Sprite *);

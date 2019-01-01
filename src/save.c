@@ -76,7 +76,7 @@ const struct SaveSectionOffsets gSaveSectionOffsets[] =
 extern void DoSaveFailedScreen(u8); // save_failed_screen
 extern void save_serialize_map(void);
 extern void sub_800ADF8(void);
-extern bool8 sub_800A520(void);
+extern bool8 IsLinkTaskFinished(void);
 
 // iwram common
 u16 gLastWrittenSector;
@@ -915,7 +915,7 @@ void sub_8153688(u8 taskId)
         taskData[0] = 2;
         break;
     case 2:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             if (taskData[2] == 0)
                 save_serialize_map();
@@ -952,7 +952,7 @@ void sub_8153688(u8 taskId)
         taskData[0] = 8;
         break;
     case 8:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sub_8153408();
             taskData[0] = 9;
@@ -963,7 +963,7 @@ void sub_8153688(u8 taskId)
         taskData[0] = 10;
         break;
     case 10:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             taskData[0]++;
         break;
     case 11:

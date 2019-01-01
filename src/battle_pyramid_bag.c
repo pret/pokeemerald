@@ -31,7 +31,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "constants/items.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 EWRAM_DATA struct PyramidBagResources *gPyramidBagResources = NULL;

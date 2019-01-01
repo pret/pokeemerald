@@ -865,7 +865,7 @@ _08021358:
 	bl sub_8010434
 	b _0802143E
 _0802135E:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08021444
@@ -3956,7 +3956,7 @@ _08022CE4:
 	bl sub_8010434
 	b _08022D06
 _08022CEA:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08022D06
@@ -4168,7 +4168,7 @@ _08022E6C:
 	bl sub_8010434
 	b _08022E9C
 _08022E72:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08022EA2
@@ -4300,7 +4300,7 @@ _08022F74:
 	bl sub_8010434
 	b _08023060
 _08022F7A:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023066
@@ -4322,7 +4322,7 @@ _08022F7A:
 	bl SendBlock
 	b _08023060
 _08022FAA:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023066
@@ -4452,7 +4452,7 @@ _080230A8:
 	bl sub_8010434
 	b _080231A8
 _080230BA:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080231AE
@@ -4521,7 +4521,7 @@ _08023120:
 	b _080231A8
 	.pool
 _08023150:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080231AE
@@ -4547,7 +4547,7 @@ _08023172:
 	bl sub_8010434
 	b _080231A8
 _08023184:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080231AE
@@ -4699,7 +4699,7 @@ _0802329C:
 	bl sub_8010434
 	b _080232DC
 _080232BE:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080232E2
@@ -4743,7 +4743,7 @@ _08023302:
 	beq _08023338
 	b _0802338C
 _0802330C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023392
@@ -4764,7 +4764,7 @@ _08023332:
 	bl sub_8010434
 	b _0802338C
 _08023338:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023392
@@ -5835,7 +5835,7 @@ _08023B7A:
 	strh r0, [r4, 0x10]
 	b _08023BB2
 _08023B94:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023BB8
@@ -5937,7 +5937,7 @@ _08023C2A:
 	bl SetGpuReg
 	b _08023C9C
 _08023C5C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023CA2
@@ -6036,7 +6036,7 @@ _08023D12:
 	bl SendBlock
 	b _0802402E
 _08023D2A:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _08023D36
@@ -6379,7 +6379,7 @@ _08023FC4:
 	bl SendBlock
 	b _0802402E
 _08023FD0:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024034
@@ -6603,7 +6603,7 @@ _080241A0:
 	bl sub_8010434
 	b _08024218
 _080241A6:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802421E
@@ -6782,7 +6782,7 @@ _08024300:
 	bl sub_8010434
 	b _080243AC
 _08024306:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080243B2
@@ -6798,7 +6798,7 @@ _08024306:
 	bl SendBlock
 	b _080243AC
 _08024328:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080243B2
@@ -7066,7 +7066,7 @@ _08024522:
 	bl sub_8010434
 	b _08024558
 _08024528:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802455E
@@ -7970,7 +7970,7 @@ _08024C4C:
 	bl sub_8010434
 	b _08024D20
 _08024C5A:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024D40
@@ -8231,7 +8231,7 @@ _08024E90:
 	b _08024EF0
 	.pool
 _08024EA0:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024F08
@@ -8272,7 +8272,7 @@ _08024EF0:
 	strb r0, [r1, 0x10]
 	b _08024F08
 _08024EF8:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024F08
@@ -8631,7 +8631,7 @@ _080251BA:
 	strb r4, [r0, 0x8]
 	b _08025202
 _080251D0:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025226
@@ -8716,7 +8716,7 @@ _08025252:
 	ldr r1, [r5]
 	b _080252CC
 _08025274:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025316
@@ -8866,7 +8866,7 @@ _0802539C:
 	b _08025448
 	.pool
 _080253BC:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025466
@@ -9056,7 +9056,7 @@ _0802553C:
 	b _080255E8
 	.pool
 _08025564:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802563C
@@ -9547,7 +9547,7 @@ _0802593E:
 	b _08025976
 	.pool
 _0802596C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080259E8
@@ -19841,7 +19841,7 @@ _0802AD3C:
 	b _0802ADC0
 	.pool
 _0802AD68:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802AE08

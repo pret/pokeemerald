@@ -1,7 +1,6 @@
 #include "global.h"
 #include "battle_anim.h"
 #include "trig.h"
-#include "constants/rgb.h"
 
 extern void sub_80A77C8(struct Sprite *);
 

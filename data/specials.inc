@@ -263,10 +263,10 @@ gSpecials:: @ 81DBA64
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special FieldShowRegionMap
-	def_special sub_807E73C
-	def_special sub_807EA10
-	def_special sub_807F0E4
-	def_special sub_807E9D4
+	def_special GetInGameTradeSpeciesInfo
+	def_special CreateInGameTradePokemon
+	def_special DoInGameTradeScene
+	def_special GetTradeSpecies
 	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket

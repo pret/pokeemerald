@@ -8255,7 +8255,7 @@ _0801AF24:
 	b _0801AF8A
 	.pool
 _0801AF40:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801AFAE

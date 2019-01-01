@@ -22,7 +22,6 @@
 #include "safari_zone.h"
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
-#include "constants/rgb.h"
 #include "data2.h"
 
 struct TestingBar

@@ -7,7 +7,6 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/battle_anim.h"
-#include "constants/rgb.h"
 #include "constants/species.h"
 
 struct UnkAnimStruct

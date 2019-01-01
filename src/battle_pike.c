@@ -16,7 +16,6 @@
 #include "constants/event_objects.h"
 #include "constants/battle_frontier.h"
 #include "constants/abilities.h"
-#include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
 #include "constants/moves.h"

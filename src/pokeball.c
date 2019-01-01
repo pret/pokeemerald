@@ -1170,7 +1170,7 @@ static void sub_80768F0(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
 }
 
-static void DestroySpriteAndFreeResources_(struct Sprite *sprite)
+static void Unref_DestroySpriteAndFreeResources(struct Sprite *sprite)
 {
     DestroySpriteAndFreeResources(sprite);
 }

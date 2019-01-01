@@ -2,7 +2,6 @@
 #include "battle_anim.h"
 #include "gpu_regs.h"
 #include "trig.h"
-#include "constants/rgb.h"
 
 void sub_8110368(struct Sprite *);
 void sub_8110438(struct Sprite *);

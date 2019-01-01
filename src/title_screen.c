@@ -20,7 +20,6 @@
 #include "gpu_regs.h"
 #include "trig.h"
 #include "graphics.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 #define VERSION_BANNER_SHAPE 1

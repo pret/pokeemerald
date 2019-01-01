@@ -18,7 +18,6 @@
 #include "strings.h"
 #include "text.h"
 #include "window.h"
-#include "constants/rgb.h"
 
 extern u8 gUnknown_02039F5C;
 extern u8 gUnknown_02039F5D;

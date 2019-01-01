@@ -6702,7 +6702,7 @@ const u32 *GetFrontSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32
 {
     u32 shinyValue;
 
-    if (species > SPECIES_EGG)
+    if (species > NUM_SPECIES)
         return gMonPaletteTable[0].data;
 
     shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);

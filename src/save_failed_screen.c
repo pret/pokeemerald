@@ -13,7 +13,6 @@
 #include "starter_choose.h"
 #include <gba/flash_internal.h>
 #include "text_window.h"
-#include "constants/rgb.h"
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)

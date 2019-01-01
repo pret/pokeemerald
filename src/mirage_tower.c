@@ -16,7 +16,6 @@
 #include "window.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 struct MirageTowerPulseBlend {

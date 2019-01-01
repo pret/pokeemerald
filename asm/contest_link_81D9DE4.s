@@ -434,7 +434,7 @@ sub_81DA160: @ 81DA160
 	b _081DA224
 	.pool
 _081DA1A4:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA224
@@ -536,7 +536,7 @@ _081DA284:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA2CE
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA2D4
@@ -613,7 +613,7 @@ sub_81DA2E8: @ 81DA2E8
 	b _081DA39E
 	.pool
 _081DA338:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA39E
@@ -716,7 +716,7 @@ sub_81DA3B8: @ 81DA3B8
 	b _081DA46E
 	.pool
 _081DA408:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA46E
@@ -816,7 +816,7 @@ _081DA4CC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA4FA
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA55C

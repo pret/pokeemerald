@@ -666,7 +666,7 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
 
 void sub_80FDD10(u8 taskId)
 {
-    if (IsPlayerFacingPlantedBerryTree() == TRUE)
+    if (IsPlayerFacingEmptyBerryTreePatch() == TRUE)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;

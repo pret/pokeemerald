@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle_anim.h"
-#include "constants/rgb.h"
 
 extern void sub_810DE70(struct Sprite *);
 extern void sub_810DFA8(struct Sprite *);

@@ -275,7 +275,7 @@ _0801DFCE:
 	adds r0, 0x1
 	strh r0, [r1, 0x6]
 _0801DFE0:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E028
@@ -300,7 +300,7 @@ _0801DFE0:
 	b _0801E028
 	.pool
 _0801E018:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E028
@@ -749,7 +749,7 @@ _0801E3AC:
 	b _0801E458
 	.pool
 _0801E3D4:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E414
@@ -889,7 +889,7 @@ _0801E4E8:
 	b _0801E59A
 	.pool
 _0801E50C:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E5BC
@@ -924,7 +924,7 @@ _0801E540:
 	b _0801E59A
 	.pool
 _0801E560:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E5BC
@@ -1011,7 +1011,7 @@ _0801E604:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E662
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E662
@@ -1123,7 +1123,7 @@ _0801E6F0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0801E75C
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E75C
@@ -1215,7 +1215,7 @@ _0801E7AC:
 	adds r0, 0x1
 	strh r0, [r1, 0x6]
 _0801E7C0:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1259,7 +1259,7 @@ _0801E812:
 	b _0801E830
 	.pool
 _0801E820:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E830

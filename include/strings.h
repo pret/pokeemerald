@@ -1911,7 +1911,6 @@ extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 
 // hall of fame
-extern const u8 gText_SavingDontTurnOffPower[];
 extern const u8 gText_LeagueChamp[];
 extern const u8 gText_HOFNumber[];
 extern const u8 gText_PickNextCancel[];
@@ -2001,5 +2000,12 @@ extern const u8 gText_OtherTrainersPkmnCantBeTraded[];
 extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OtherTrainerCantAcceptPkmn[];
 extern const u8 gText_CantTradeWithTrainer[];
+
+// trade
+extern const u8 gText_XWillBeSentToY[];
+extern const u8 gText_ByeByeVar1[];
+extern const u8 gText_XSentOverY[];
+extern const u8 gText_TakeGoodCareOfX[];
+extern const u8 gText_CommunicationStandby5[];
 
 #endif //GUARD_STRINGS_H

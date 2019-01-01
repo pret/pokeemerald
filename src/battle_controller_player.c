@@ -869,7 +869,7 @@ static void sub_80586F8(void)
     }
     else
     {
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             m4aSongNumStop(SE_HINSI);
             gMain.inBattle = 0;
@@ -888,7 +888,7 @@ void sub_80587B0(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (sub_800A520())
+            if (IsLinkTaskFinished())
             {
                 if (gWirelessCommType == 0)
                     sub_800AC34();
