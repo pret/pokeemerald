@@ -11,7 +11,6 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/battle.h"
-#include "constants/rgb.h"
 
 extern void sub_810721C(struct Sprite *);
 extern void sub_8107228(struct Sprite *);

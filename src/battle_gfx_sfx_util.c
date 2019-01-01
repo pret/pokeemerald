@@ -23,7 +23,6 @@
 #include "palette.h"
 #include "contest.h"
 #include "constants/songs.h"
-#include "constants/rgb.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;

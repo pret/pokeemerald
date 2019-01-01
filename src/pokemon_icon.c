@@ -1045,7 +1045,7 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
         .paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species],
     };
 
-    if (species > SPECIES_EGG)
+    if (species > NUM_SPECIES)
         iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
@@ -1091,7 +1091,7 @@ u16 GetIconSpecies(u16 species, u32 personality)
     }
     else
     {
-        if (species > SPECIES_EGG)
+        if (species > NUM_SPECIES)
             result = 260;
         else
             result = species;
@@ -1149,7 +1149,7 @@ void LoadMonIconPalettes(void)
 void SafeLoadMonIconPalette(u16 species)
 {
     u8 palIndex;
-    if (species > SPECIES_EGG)
+    if (species > NUM_SPECIES)
         species = 260;
     palIndex = gMonIconPaletteIndices[species];
     if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
@@ -1174,7 +1174,7 @@ void FreeMonIconPalettes(void)
 void SafeFreeMonIconPalette(u16 species)
 {
     u8 palIndex;
-    if (species > SPECIES_EGG)
+    if (species > NUM_SPECIES)
         species = 260;
     palIndex = gMonIconPaletteIndices[species];
     FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
@@ -1207,7 +1207,7 @@ void sub_80D304C(u16 offset)
     s32 i;
     const struct SpritePalette* monIconPalettePtr;
 
-    if(offset <= 0xA0)
+    if (offset <= 0xA0)
     {
         monIconPalettePtr = gMonIconPaletteTable;
         for(i = 5; i >= 0; i--)
@@ -1221,7 +1221,7 @@ void sub_80D304C(u16 offset)
 
 u8 GetValidMonIconPalIndex(u16 species)
 {
-    if (species > SPECIES_EGG)
+    if (species > NUM_SPECIES)
         species = 260;
     return gMonIconPaletteIndices[species];
 }
@@ -1233,7 +1233,7 @@ u8 sub_80D30A0(u16 species)
 
 const u16* GetValidMonIconPalettePtr(u16 species)
 {
-    if (species > SPECIES_EGG)
+    if (species > NUM_SPECIES)
         species = 260;
     return gMonIconPaletteTable[gMonIconPaletteIndices[species]].data;
 }

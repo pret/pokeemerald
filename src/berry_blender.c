@@ -1240,7 +1240,7 @@ static void sub_8080018(void)
         sBerryBlenderData->framesToWait = 0;
         break;
     case 9:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
@@ -1297,7 +1297,7 @@ static void sub_8080018(void)
         }
         break;
     case 13:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sBerryBlenderData->mainState++;
             sub_8082CB4(&sBerryBlenderData->bgAffineSrc);
@@ -1342,7 +1342,7 @@ static void sub_8080018(void)
         sBerryBlenderData->mainState++;
         break;
     case 20:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sub_800A418();
             sBerryBlenderData->mainState++;
@@ -2412,7 +2412,7 @@ static void CB2_HandleBlenderEndGame(void)
         {
             sBerryBlenderData->gameEndState++;
         }
-        else if (sub_800A520())
+        else if (IsLinkTaskFinished())
         {
             if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
             {
@@ -2593,7 +2593,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
         sBerryBlenderData->framesToWait = 0;
         break;
     case 1:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sBerryBlenderData->field_1A0++;
             gSoftResetDisabled = TRUE;
@@ -2612,7 +2612,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
         }
         break;
     case 4:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             if (sub_8153474())
             {
@@ -2687,7 +2687,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 6:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sBerryBlenderData->framesToWait = 0;
             sBerryBlenderData->gameEndState++;
@@ -2706,7 +2706,7 @@ static void CB2_HandlePlayerLinkPlayAgainChoice(void)
         sub_800ADF8();
         break;
     case 9:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
             sBerryBlenderData->gameEndState++;

@@ -28,7 +28,6 @@
 #include "util.h"
 #include "constants/field_effects.h"
 #include "constants/event_object_movement_constants.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}

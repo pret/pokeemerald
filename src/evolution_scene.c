@@ -1,33 +1,34 @@
 #include "global.h"
-#include "evolution_scene.h"
-#include "evolution_graphics.h"
-#include "sprite.h"
 #include "alloc.h"
-#include "task.h"
-#include "palette.h"
-#include "main.h"
-#include "text.h"
-#include "text_window.h"
-#include "pokemon.h"
-#include "string_util.h"
 #include "battle.h"
-#include "scanline_effect.h"
+#include "battle_message.h"
+#include "bg.h"
+#include "data2.h"
 #include "decompress.h"
 #include <m4a.h>
-#include "menu.h"
-#include "pokedex.h"
-#include "constants/species.h"
-#include "sound.h"
-#include "constants/songs.h"
-#include "overworld.h"
-#include "battle_message.h"
-#include "constants/battle_string_ids.h"
+#include "evolution_scene.h"
+#include "evolution_graphics.h"
 #include "gpu_regs.h"
-#include "bg.h"
 #include "link.h"
-#include "util.h"
+#include "main.h"
+#include "menu.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "task.h"
+#include "text.h"
+#include "text_window.h"
 #include "trig.h"
-#include "data2.h"
+#include "trade.h"
+#include "util.h"
+#include "constants/battle_string_ids.h"
+#include "constants/species.h"
+#include "constants/songs.h"
 
 struct EvoInfo
 {
@@ -50,12 +51,8 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 // strings
 extern const u8 gText_CommunicationStandby5[];
 
-extern void sub_807B154(void);
-extern void sub_807F19C(void);
-extern void sub_807B140(void);
 extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
 extern u8 sub_81C1B94(void);
-extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);
 extern void sub_800E084(void);
 
 // this file's functions

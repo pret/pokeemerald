@@ -22,7 +22,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 static EWRAM_DATA struct

@@ -898,7 +898,7 @@ static void sub_80B33BC(u8 taskId)
         data[0] = 6;
         break;
     case 6:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             data[0] = 7;
         }
@@ -1123,7 +1123,7 @@ static void sub_80B3894(u8 taskId)
         data[0]++;
         break;
     case 3:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sub_8013F78();
             DestroyTask(taskId);

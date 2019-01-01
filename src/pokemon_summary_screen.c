@@ -1271,7 +1271,7 @@ static bool8 SummaryScreen_DecompressGraphics(void)
         pssData->unk40F0++;
         break;
     case 12:
-        LoadCompressedPalette(&gMoveTypes_Pal, 0x1D0, 0x60);
+        LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60);
         pssData->unk40F0 = 0;
         return TRUE;
     }

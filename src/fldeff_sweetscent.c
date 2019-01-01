@@ -15,7 +15,6 @@
 #include "task.h"
 #include "wild_encounter.h"
 #include "constants/field_effects.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 
 static void FieldCallback_SweetScent(void);

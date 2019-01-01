@@ -24,7 +24,6 @@
 #include "constants/species.h"
 #include "util.h"
 #include "title_screen.h"
-#include "constants/rgb.h"
 #include "constants/battle_anim.h"
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];

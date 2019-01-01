@@ -30,7 +30,6 @@
 #include "text.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/songs.h"
-#include "constants/rgb.h"
 
 extern bool32 sub_81D6534(void);
 extern bool8 walkrun_is_standing_still(void);
@@ -215,7 +214,7 @@ static void sub_80AF234(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_800A520())
+        if (!IsLinkTaskFinished())
         {
             if (++task->data[1] > 1800)
                 sub_8011170(0x6000);
@@ -248,7 +247,7 @@ void sub_80AF2B4(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             task->data[0]++;
         }

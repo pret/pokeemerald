@@ -4,7 +4,6 @@
 #include "random.h"
 #include "task.h"
 #include "trig.h"
-#include "constants/rgb.h"
 
 void AnimConfusionDuck(struct Sprite *);
 void AnimSimplePaletteBlend(struct Sprite *);

@@ -10,7 +10,6 @@
 #include "bg.h"
 #include "text_window.h"
 #include "constants/songs.h"
-#include "constants/rgb.h"
 
 extern const u8 gText_ClearAllSaveData[];
 extern const u8 gText_ClearingData[];

@@ -20,7 +20,6 @@
 #include "coins.h"
 #include "tv.h"
 #include "text_window.h"
-#include "constants/rgb.h"
 #include "main_menu.h"
 #include "bg.h"
 #include "window.h"

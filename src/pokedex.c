@@ -26,7 +26,6 @@
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "window.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 

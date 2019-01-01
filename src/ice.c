@@ -11,7 +11,6 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/battle_anim.h"
-#include "constants/rgb.h"
 
 struct HailStruct {
     s32 unk0:10;
@@ -1599,12 +1598,12 @@ bool8 GenerateHailParticle(u8 a, u8 b, u8 taskId, u8 c)
             switch (unk)
             {
                 case 0:
-                    battlerX -= sub_80A861C(battler, 1) / 6;
-                    battlerY -= sub_80A861C(battler, 0) / 6;
+                    battlerX -= GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_WIDTH) / 6;
+                    battlerY -= GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 6;
                     break;
                 case 1:
-                    battlerX += sub_80A861C(battler, 1) / 6;
-                    battlerY += sub_80A861C(battler, 0) / 6;
+                    battlerX += GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_WIDTH) / 6;
+                    battlerY += GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 6;
                     break;
             }
         }
@@ -1692,7 +1691,7 @@ bool8 GenerateHailParticle(u8 a, u8 b, u8 taskId, u8 c)
 _0810CA60:\n\
 	adds r0, r5, 0\n\
 	movs r1, 0x1\n\
-	bl sub_80A861C\n\
+	bl GetBattlerSpriteCoordAttr\n\
 	lsls r0, 16\n\
 	asrs r0, 16\n\
 	movs r1, 0x6\n\
@@ -1704,7 +1703,7 @@ _0810CA60:\n\
 	lsrs r7, r1, 16\n\
 	adds r0, r5, 0\n\
 	movs r1, 0\n\
-	bl sub_80A861C\n\
+	bl GetBattlerSpriteCoordAttr\n\
 	lsls r0, 16\n\
 	asrs r0, 16\n\
 	movs r1, 0x6\n\
@@ -1716,7 +1715,7 @@ _0810CA60:\n\
 _0810CA96:\n\
 	adds r0, r5, 0\n\
 	movs r1, 0x1\n\
-	bl sub_80A861C\n\
+	bl GetBattlerSpriteCoordAttr\n\
 	lsls r0, 16\n\
 	asrs r0, 16\n\
 	movs r1, 0x6\n\
@@ -1728,7 +1727,7 @@ _0810CA96:\n\
 	lsrs r7, r1, 16\n\
 	adds r0, r5, 0\n\
 	movs r1, 0\n\
-	bl sub_80A861C\n\
+	bl GetBattlerSpriteCoordAttr\n\
 	lsls r0, 16\n\
 	asrs r0, 16\n\
 	movs r1, 0x6\n\
