@@ -7,7 +7,7 @@ RustboroCity_House1_EventScript_21593F:: @ 821593F
 	goto_if_set FLAG_RUSTBORO_NPC_TRADE_COMPLETED, RustboroCity_House1_EventScript_2159D5
 	setvar VAR_0x8008, 0
 	copyvar VAR_0x8004, VAR_0x8008
-	specialvar VAR_RESULT, sub_807E73C
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox RustboroCity_House1_Text_2159E8, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -18,14 +18,14 @@ RustboroCity_House1_EventScript_21593F:: @ 821593F
 	compare VAR_0x8004, 255
 	goto_if_eq RustboroCity_House1_EventScript_2159BD
 	copyvar VAR_0x8005, VAR_0x800A
-	specialvar VAR_RESULT, sub_807E9D4
+	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne RustboroCity_House1_EventScript_2159C7
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
-	special sub_807EA10
-	special sub_807F0E4
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	msgbox RustboroCity_House1_Text_215A77, MSGBOX_DEFAULT
 	setflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED

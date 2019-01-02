@@ -34,12 +34,12 @@ int GameClear(void)
     if (GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME) == 0)
         SetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME, (gSaveBlock2Ptr->playTimeHours << 16) | (gSaveBlock2Ptr->playTimeMinutes << 8) | gSaveBlock2Ptr->playTimeSeconds);
 
-    SetSecretBase2Field_9();
+    SetContinueGameWarpStatus();
 
     if (gSaveBlock2Ptr->playerGender == MALE)
-        sub_8084F6C(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
+        SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
     else
-        sub_8084F6C(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
+        SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
 
     ribbonGet = FALSE;
 

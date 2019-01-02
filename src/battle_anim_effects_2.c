@@ -2446,7 +2446,7 @@ void sub_8104E74(u8 taskId)
     task->data[3] = 0;
     task->data[4] = 0;
     task->data[5] = 0;
-    task->data[15] = sub_80A861C(gBattleAnimTarget, 0);
+    task->data[15] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT);
 
     if (GetBattlerSpriteBGPriorityRank(gBattleAnimTarget) == 1)
     {
@@ -2531,7 +2531,7 @@ void sub_810501C(struct Sprite *sprite)
     sprite->data[2] = 0;
     sprite->data[3] = 16;
     sprite->data[4] = 0;
-    sprite->data[5] = sub_80A861C(gBattleAnimTarget, 0) + 2;
+    sprite->data[5] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) + 2;
     sprite->data[6] = BattleAnimAdjustPanning(63);
     sprite->callback = sub_8105078;
 }
@@ -3134,7 +3134,7 @@ void sub_8105EB0(u8 taskId)
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
     SetGpuReg(REG_OFFSET_WININ, 0x3F1F);
     SetGpuReg(REG_OFFSET_WINOUT, 0x3F3F);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0xC8);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN);
     SetGpuReg(REG_OFFSET_BLDY, 0x10);
     gTasks[taskId].data[0] = win0v;
     gTasks[taskId].data[1] = win0h;
@@ -3390,8 +3390,8 @@ void sub_81064F8(u8 taskId)
     else
         sub_80A6D60(&unknownStruct, &gBattleAnimBackgroundTilemap_ScaryFaceOpponent, 0);
 
-    sub_80A6CC0(unknownStruct.bgId, &gUnknown_08C249F8, unknownStruct.tilesOffset);
-    LoadCompressedPalette(&gUnknown_08C249D0, unknownStruct.unk8 << 4, 32);
+    sub_80A6CC0(unknownStruct.bgId, gUnknown_08C249F8, unknownStruct.tilesOffset);
+    LoadCompressedPalette(gUnknown_08C249D0, unknownStruct.unk8 << 4, 32);
     gTasks[taskId].func = sub_81065EC;
 }
 

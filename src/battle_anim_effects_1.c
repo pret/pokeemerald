@@ -3297,8 +3297,8 @@ void sub_80FFFC0(u8 taskId)
     task->data[4] = GetBattlerSpriteSubpriority(gBattleAnimTarget) - 1;
     task->data[6] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
     task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
-    task->data[10] = sub_80A861C(gBattleAnimTarget, 1);
-    task->data[11] = sub_80A861C(gBattleAnimTarget, 0);
+    task->data[10] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH);
+    task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT);
     task->data[5] = (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT) ? 1 : -1;
     task->data[9] = 56 - (task->data[5] * 64);
     task->data[8] = task->data[7] - task->data[9] + task->data[6];
@@ -5452,11 +5452,11 @@ static void sub_81030B0(struct Sprite* sprite)
 void sub_810310C(u8 battler, struct Sprite* sprite)
 {
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-        sprite->pos1.x = sub_80A861C(battler, 5) + 8;
+        sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_RIGHT) + 8;
     else
-        sprite->pos1.x = sub_80A861C(battler, 4) - 8;
+        sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_LEFT) - 8;
 
-    sprite->pos1.y = GetBattlerSpriteCoord(battler, 3) - (s16)sub_80A861C(battler, 0) / 4;
+    sprite->pos1.y = GetBattlerSpriteCoord(battler, 3) - (s16)GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 4;
 }
 
 void sub_8103164(struct Sprite* sprite)
@@ -5520,7 +5520,7 @@ void sub_8103284(struct Sprite* sprite)
         battler = gBattleAnimTarget;
 
     sprite->pos1.x = GetBattlerSpriteCoord(battler, 0);
-    sprite->pos1.y = sub_80A861C(battler, 2);
+    sprite->pos1.y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_TOP);
     if (sprite->pos1.y <= 9)
         sprite->pos1.y = 10;
 

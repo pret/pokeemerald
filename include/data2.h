@@ -1,8 +1,6 @@
 #ifndef GUARD_DATA2_H
 #define GUARD_DATA2_H
 
-#define MOVE_NAME_LENGTH 12
-
 struct MonCoords
 {
     // This would use a bitfield, but some function

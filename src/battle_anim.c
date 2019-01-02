@@ -2283,7 +2283,7 @@ static void ScriptCmd_setalpha(void)
     sBattleAnimScriptPtr++;
     half1 = *(sBattleAnimScriptPtr++);
     half2 = *(sBattleAnimScriptPtr++) << 8;
-    SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, half1 | half2);
 }
 

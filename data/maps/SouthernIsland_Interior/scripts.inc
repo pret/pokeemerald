@@ -34,9 +34,9 @@ SouthernIsland_Interior_EventScript_242A95:: @ 8242A95
 
 SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq SouthernIsland_Interior_EventScript_242AB8
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq SouthernIsland_Interior_EventScript_242ABE
 	end
 

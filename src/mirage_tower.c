@@ -509,7 +509,7 @@ static void InitMirageTowerShake(u8 taskId)
     {
     case 0:
         FreeAllWindowBuffers();
-        SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 2);
+        SetBgAttribute(0, BG_ATTR_PRIORITY, 2);
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -624,8 +624,8 @@ static void DoMirageTowerDisintegration(u8 taskId)
     case 6:
         SetGpuRegBits(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2));
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0));
-        SetBgAttribute(0, BG_CTRL_ATTR_MOSAIC, 0);
-        sub_81971D0();
+        SetBgAttribute(0, BG_ATTR_PRIORITY, 0);
+        InitStandardTextBoxWindows();
         break;
     case 7:
         ShowBg(0);

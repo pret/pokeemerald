@@ -1,33 +1,34 @@
 #include "global.h"
+#include "alloc.h"
+#include "battle.h"
+#include "battle_message.h"
+#include "bg.h"
+#include "data2.h"
+#include "decompress.h"
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
-#include "sprite.h"
-#include "alloc.h"
-#include "task.h"
-#include "palette.h"
+#include "gpu_regs.h"
+#include "link.h"
+#include "m4a.h"
 #include "main.h"
+#include "menu.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "sprite.h"
+#include "string_util.h"
+#include "task.h"
 #include "text.h"
 #include "text_window.h"
-#include "pokemon.h"
-#include "string_util.h"
-#include "battle.h"
-#include "scanline_effect.h"
-#include "decompress.h"
-#include "m4a.h"
-#include "menu.h"
-#include "pokedex.h"
-#include "constants/species.h"
-#include "sound.h"
-#include "constants/songs.h"
-#include "overworld.h"
-#include "battle_message.h"
-#include "constants/battle_string_ids.h"
-#include "gpu_regs.h"
-#include "bg.h"
-#include "link.h"
-#include "util.h"
 #include "trig.h"
-#include "data2.h"
+#include "trade.h"
+#include "util.h"
+#include "constants/battle_string_ids.h"
+#include "constants/species.h"
+#include "constants/songs.h"
 
 struct EvoInfo
 {
@@ -50,12 +51,8 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 // strings
 extern const u8 gText_CommunicationStandby5[];
 
-extern void sub_807B154(void);
-extern void sub_807F19C(void);
-extern void sub_807B140(void);
 extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
 extern u8 sub_81C1B94(void);
-extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);
 extern void sub_800E084(void);
 
 // this file's functions
@@ -1479,20 +1476,20 @@ static void InitMovingBackgroundTask(bool8 isLink)
 
     if (!isLink)
     {
-        SetGpuReg(REG_OFFSET_BLDCNT, 0x442);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG2);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
 
-        SetBgAttribute(innerBgId, BG_CTRL_ATTR_MOSAIC, 2);
-        SetBgAttribute(outerBgId, BG_CTRL_ATTR_MOSAIC, 2);
+        SetBgAttribute(innerBgId, BG_ATTR_PRIORITY, 2);
+        SetBgAttribute(outerBgId, BG_ATTR_PRIORITY, 2);
 
         ShowBg(1);
         ShowBg(2);
     }
     else
     {
-        SetGpuReg(REG_OFFSET_BLDCNT, 0x842);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     }
 
@@ -1529,8 +1526,8 @@ static void sub_8140174(void)
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
-    SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, sub_80391E0(1, 5));
-    SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, sub_80391E0(2, 5));
+    SetBgAttribute(1, BG_ATTR_PRIORITY, sub_80391E0(1, 5));
+    SetBgAttribute(2, BG_ATTR_PRIORITY, sub_80391E0(2, 5));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     Free(sEvoMovingBgPtr);
 }

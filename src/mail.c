@@ -170,29 +170,29 @@ static const u16 sUnknown_0859F2B0[][2] = {
 
 static const struct MailGraphics sUnknown_0859F2B8[] = {
     {
-        gMailPalette_Orange, gMailTiles_Orange, gMailTilemap_Orange, 0x02c0, 0x0000, 0x294a, 0x6739
+        gMailPalette_Orange, gMailTiles_Orange, gMailTilemap_Orange, 0x02c0, 0, 0x294a, 0x6739
     }, {
-        gMailPalette_Harbor, gMailTiles_Harbor, gMailTilemap_Harbor, 0x02e0, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Harbor, gMailTiles_Harbor, gMailTilemap_Harbor, 0x02e0, 0, 0x7fff, 0x4631
     }, {
-        gMailPalette_Glitter, gMailTiles_Glitter, gMailTilemap_Glitter, 0x0400, 0x0000, 0x294a, 0x6739
+        gMailPalette_Glitter, gMailTiles_Glitter, gMailTilemap_Glitter, 0x0400, 0, 0x294a, 0x6739
     }, {
-        gMailPalette_Mech, gMailTiles_Mech, gMailTilemap_Mech, 0x01e0, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Mech, gMailTiles_Mech, gMailTilemap_Mech, 0x01e0, 0, 0x7fff, 0x4631
     }, {
-        gMailPalette_Wood, gMailTiles_Wood, gMailTilemap_Wood, 0x02e0, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Wood, gMailTiles_Wood, gMailTilemap_Wood, 0x02e0, 0, 0x7fff, 0x4631
     }, {
-        gMailPalette_Wave, gMailTiles_Wave, gMailTilemap_Wave, 0x0300, 0x0000, 0x294a, 0x6739
+        gMailPalette_Wave, gMailTiles_Wave, gMailTilemap_Wave, 0x0300, 0, 0x294a, 0x6739
     }, {
-        gMailPalette_Bead, gMailTiles_Bead, gMailTilemap_Bead, 0x0140, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Bead, gMailTiles_Bead, gMailTilemap_Bead, 0x0140, 0, 0x7fff, 0x4631
     }, {
-        gMailPalette_Shadow, gMailTiles_Shadow, gMailTilemap_Shadow, 0x0300, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Shadow, gMailTiles_Shadow, gMailTilemap_Shadow, 0x0300, 0, 0x7fff, 0x4631
     }, {
-        gMailPalette_Tropic, gMailTiles_Tropic, gMailTilemap_Tropic, 0x0220, 0x0000, 0x294a, 0x6739
+        gMailPalette_Tropic, gMailTiles_Tropic, gMailTilemap_Tropic, 0x0220, 0, 0x294a, 0x6739
     }, {
-        gMailPalette_Dream, gMailTiles_Dream, gMailTilemap_Dream, 0x0340, 0x0000, 0x294a, 0x6739
+        gMailPalette_Dream, gMailTiles_Dream, gMailTilemap_Dream, 0x0340, 0, 0x294a, 0x6739
     }, {
-        gMailPalette_Fab, gMailTiles_Fab, gMailTilemap_Fab, 0x02a0, 0x0000, 0x294a, 0x6739
+        gMailPalette_Fab, gMailTiles_Fab, gMailTilemap_Fab, 0x02a0, 0, 0x294a, 0x6739
     }, {
-        gMailPalette_Retro, gMailTiles_Retro, gMailTilemap_Retro, 0x0520, 0x0000, 0x294a, 0x6739
+        gMailPalette_Retro, gMailTiles_Retro, gMailTilemap_Retro, 0x0520, 0, 0x294a, 0x6739
     }
 };
 
@@ -306,7 +306,7 @@ static bool8 MailReadBuildGraphics(void)
         case 0:
             SetVBlankCallback(NULL);
             ScanlineEffect_Stop();
-            SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
+            SetGpuReg(REG_OFFSET_DISPCNT, 0);
             break;
         case 1:
             CpuFill16(0, (void *)OAM, OAM_SIZE);
@@ -323,16 +323,16 @@ static bool8 MailReadBuildGraphics(void)
         case 5:
             FreeAllSpritePalettes();
             reset_temp_tile_data_buffers();
-            SetGpuReg(REG_OFFSET_BG0HOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG0VOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG1HOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG1VOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG2VOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG2HOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG3HOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BG3VOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BLDCNT,  0x0000);
-            SetGpuReg(REG_OFFSET_BLDALPHA, 0x0000);
+            SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+            SetGpuReg(REG_OFFSET_BLDCNT,  0);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
             break;
         case 6:
             ResetBgsAndClearDma3BusyFlags(0);

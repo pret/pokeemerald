@@ -1315,7 +1315,7 @@ u32 sub_8013B8C(struct UnkStruct_Group *arg0, s32 id)
 
     if (gUnknown_02022C2C == 4 && structPtr->unk.field_0.unk_00.unk_01_2 != 3)
     {
-        if (!(gSaveBlock2Ptr->specialSaveWarp & 0x80))
+        if (!(gSaveBlock2Ptr->specialSaveWarpFlags & 0x80))
             return 1;
         else if (structPtr->unk.field_0.unk_00.unk_00_7)
             return 0;
@@ -1633,8 +1633,8 @@ void sub_8014210(u16 battleFlags)
 void sub_8014290(u16 arg0, u16 x, u16 y)
 {
     VarSet(VAR_0x4087, arg0);
-    Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
-    saved_warp2_set_2(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
+    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
+    SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
     WarpIntoMap();
 }
 
@@ -1645,7 +1645,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gUnknown_03005DB4 = GetMultiplayerId();
     SetCableClubWarp();
-    Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
+    SetWarpDestination(mapGroup, mapNum, -1, x, y);
     WarpIntoMap();
 }
 
@@ -1697,12 +1697,12 @@ void sub_801440C(u8 taskId)
     {
     case 65:
     case 81:
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         gMain.savedCallback = sub_801AC54;
         sub_81B8518(3);
         break;
     case 1:
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         sub_80143E4(gBlockSendBuffer, TRUE);
         HealPlayerParty();
         SavePlayerParty();
@@ -1711,7 +1711,7 @@ void sub_801440C(u8 taskId)
         SetMainCallback2(sub_8014384);
         break;
     case 2:
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
@@ -1720,7 +1720,7 @@ void sub_801440C(u8 taskId)
         SetMainCallback2(sub_8014384);
         break;
     case 3:
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         HealPlayerParty();
         SavePlayerParty();
         LoadPlayerBag();
@@ -1730,18 +1730,18 @@ void sub_801440C(u8 taskId)
         break;
     case 4:
         sub_80143E4(gBlockSendBuffer, TRUE);
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         sub_8014304(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, 3);
         SetMainCallback2(sub_8014384);
         break;
     case 15:
         sub_80143E4(gBlockSendBuffer, TRUE);
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         sub_8014304(MAP_GROUP(RECORD_CORNER), MAP_NUM(RECORD_CORNER), 8, 9, 4);
         SetMainCallback2(sub_8014384);
         break;
     case 68:
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         CreateTask(sub_8013F90, 0);
         break;
     case 5:
@@ -1838,7 +1838,7 @@ void sub_8014790(u8 taskId)
         }
         break;
     case 3:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             DestroyTask(taskId);
             sub_80149D8();
@@ -2095,7 +2095,7 @@ void sub_8014A40(u8 taskId)
         data->state++;
         break;
     case 17:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }
@@ -2264,7 +2264,7 @@ void sub_8014F48(u8 taskId)
         sub_800ADF8();
         break;
     case 12:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }
@@ -2443,7 +2443,7 @@ void sub_80152F4(u8 taskId)
         sub_800ADF8();
         break;
     case 14:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             DestroyTask(taskId);
         break;
     }
@@ -2836,7 +2836,7 @@ void sub_80156E0(u8 taskId)
         }
         break;
     case 41:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             if (GetMultiplayerId() == 0)
             {
@@ -3033,7 +3033,7 @@ void sub_80156E0(u8 taskId)
         data->state = 15;
         break;
     case 15:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             data->state = 16;
         break;
     case 16:

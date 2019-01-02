@@ -251,9 +251,9 @@ LittlerootTown_MaysHouse_2F_EventScript_1F94C1:: @ 81F94C1
 	lockall
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94E3
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94ED
 	end
 
@@ -271,9 +271,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
 	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_27259E
 	waitmovement 0
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F951D
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F952F
 	setflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	releaseall
@@ -300,9 +300,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F954A:: @ 81F954A
 EventScript_PlayerPCFemale:: @ 81F9553
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F956C
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9576
 	end
 

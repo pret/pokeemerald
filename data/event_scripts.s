@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
@@ -1792,9 +1793,9 @@ Route110_EventScript_271ED7:: @ 8271ED7
 Route119_EventScript_271ED7:: @ 8271ED7
 RustboroCity_EventScript_271ED7:: @ 8271ED7
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq RustboroCity_EventScript_271EEF
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq RustboroCity_EventScript_271EF5
 	end
 
@@ -1810,9 +1811,9 @@ LavaridgeTown_EventScript_271EFB:: @ 8271EFB
 Route110_EventScript_271EFB:: @ 8271EFB
 Route119_EventScript_271EFB:: @ 8271EFB
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LavaridgeTown_EventScript_271F13
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LavaridgeTown_EventScript_271F19
 	end
 
@@ -1826,9 +1827,9 @@ LavaridgeTown_EventScript_271F19:: @ 8271F19
 
 EventScript_271F1F:: @ 8271F1F
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq EventScript_271F37
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq EventScript_271F3D
 	end
 
@@ -4768,7 +4769,7 @@ gUnknown_082A8350:: @ 82A8350
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
-	special sp13F_fall_to_last_warp
+	special DoFallWarp
 	waitstate
 	end
 

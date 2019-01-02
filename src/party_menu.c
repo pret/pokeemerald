@@ -4579,7 +4579,7 @@ static void CursorCb_Register(u8 taskId)
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
 
-    switch (sub_807A8D0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, species2, species, obedience))
+    switch (sub_807A8D0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), species2, species, obedience))
     {
     case 1:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
@@ -4605,7 +4605,7 @@ static void CursorCb_Trade1(u8 taskId)
     u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
-    u32 stringId = sub_807A7E0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, *(u32 *)&gUnknown_02022C38 /* dirty cast, probably needs to be changed */, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
+    u32 stringId = sub_807A7E0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), gUnknown_02022C38, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
 
     if (stringId != 0)
     {
@@ -4721,7 +4721,7 @@ static void CursorCb_FieldMove(u8 taskId)
                 gUnknown_0203CEC4->data[0] = fieldMove;
                 break;
             case FIELD_MOVE_DIG:
-                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
                 sub_81245DC(gStringVar1, mapHeader->regionMapSectionId);
                 StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
                 sub_81B5674(taskId);
@@ -7249,7 +7249,7 @@ static void sub_81B9424(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         InitPartyMenu(2, 0, 11, 0, 0, sub_81B1370, sub_81B9470);
         DestroyTask(taskId);
     }
@@ -7276,7 +7276,7 @@ static void sub_81B94D0(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         InitPartyMenu(3, 0, 11, 0, 0, sub_81B1370, sub_81B9390);
         DestroyTask(taskId);
     }
@@ -7293,7 +7293,7 @@ static void sub_81B953C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         InitPartyMenu(7, 0, 11, 0, 0, sub_81B1370, sub_81B9588);
         DestroyTask(taskId);
     }
@@ -7336,7 +7336,7 @@ static void sub_81B9640(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         InitPartyMenu(12, 0, 0, 0, 0, sub_81B1370, sub_81B9390);
         DestroyTask(taskId);
     }

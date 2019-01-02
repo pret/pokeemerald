@@ -10,9 +10,9 @@ SlateportCity_BattleTentBattleRoom_MapScript1_209970: @ 8209970
 
 SlateportCity_BattleTentBattleRoom_EventScript_209976:: @ 8209976
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq SlateportCity_BattleTentBattleRoom_EventScript_20998E
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq SlateportCity_BattleTentBattleRoom_EventScript_209994
 	return
 

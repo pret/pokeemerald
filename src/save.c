@@ -77,7 +77,7 @@ extern void DoSaveFailedScreen(u8); // save_failed_screen
 extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
 extern void save_serialize_map(void);
 extern void sub_800ADF8(void);
-extern bool8 sub_800A520(void);
+extern bool8 IsLinkTaskFinished(void);
 
 // iwram common
 u16 gLastWrittenSector;
@@ -914,7 +914,7 @@ void sub_8153688(u8 taskId)
         taskData[0] = 2;
         break;
     case 2:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             if (taskData[2] == 0)
                 save_serialize_map();
@@ -923,7 +923,7 @@ void sub_8153688(u8 taskId)
         break;
     case 3:
         if (taskData[2] == 0)
-            sub_8076D5C();
+            SetContinueGameWarpStatusToDynamicWarp();
         sub_8153380();
         taskData[0] = 4;
         break;
@@ -946,12 +946,12 @@ void sub_8153688(u8 taskId)
         break;
     case 7:
         if (taskData[2] == 0)
-            sav2_gender2_inplace_and_xFE();
+            ClearContinueGameWarpStatus2();
         sub_800ADF8();
         taskData[0] = 8;
         break;
     case 8:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             sub_8153408();
             taskData[0] = 9;
@@ -962,7 +962,7 @@ void sub_8153688(u8 taskId)
         taskData[0] = 10;
         break;
     case 10:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
             taskData[0]++;
         break;
     case 11:

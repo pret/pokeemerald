@@ -32,6 +32,7 @@
 #include "task.h"
 #include "text.h"
 #include "constants/bg_event_constants.h"
+#include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -570,15 +571,15 @@ u8 sub_80FD9B0(s16 itemX, s16 itemY)
 
 void sub_80FDA24(u8 direction)
 {
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    EventObjectClearHeldMovement(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    UnfreezeEventObject(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0)]);
+    EventObjectClearHeldMovement(&gEventObjects[GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0)]);
+    UnfreezeEventObject(&gEventObjects[GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0)]);
     PlayerTurnInPlace(direction);
 }
 
 void sub_80FDA94(u8 taskId)
 {
-    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0)]) == TRUE)
         DisplayItemMessageOnField(taskId, gText_ItemFinderNearby, sub_80FD5CC);
 }
 
@@ -586,7 +587,7 @@ void sub_80FDADC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    if (EventObjectCheckHeldMovementStatus(&gEventObjects[GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
         sub_80FDA24(gUnknown_085920E4[data[5]]);
@@ -627,7 +628,7 @@ void sub_80FDC00(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         OpenPokeblockCase(0, CB2_ReturnToField);
         DestroyTask(taskId);
     }
@@ -665,7 +666,7 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
 
 void sub_80FDD10(u8 taskId)
 {
-    if (IsPlayerFacingPlantedBerryTree() == TRUE)
+    if (IsPlayerFacingEmptyBerryTreePatch() == TRUE)
     {
         gUnknown_0203A0F4 = sub_80FDD74;
         gFieldCallback = MapPostLoadHook_UseItem;

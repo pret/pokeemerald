@@ -349,9 +349,9 @@ MossdeepCity_SpaceCenter_2F_EventScript_224166:: @ 8224166
 MossdeepCity_SpaceCenter_2F_EventScript_224175:: @ 8224175
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_224193
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_22419A
 	closemessage
 	clearflag FLAG_DEFEATED_MAGMA_SPACE_CENTER

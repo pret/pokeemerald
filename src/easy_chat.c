@@ -364,7 +364,7 @@ void easy_chat_input_maybe(void)
     default:
         return;
     }
-    overworld_free_bg_tilemaps();
+    CleanupOverworldWindowsAndTilemaps();
     sub_811A20C(gSpecialVar_0x8004, words, CB2_ReturnToFieldContinueScript, sizeParam);
 }
 
@@ -383,7 +383,7 @@ static void sub_811A7E4(void)
         {
             lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
             lilycoveLady->quiz.unk_016 = -1;
-            overworld_free_bg_tilemaps();
+            CleanupOverworldWindowsAndTilemaps();
             sub_811A8F0();
         }
         return;

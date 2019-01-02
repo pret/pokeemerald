@@ -13,7 +13,7 @@ SECTIONS {
 
         . = 0x1C000;
 
-<EWRAM>
+        INCLUDE "sym_ewram.ld"
 
         . = 0x40000;
 }
@@ -24,13 +24,13 @@ SECTIONS {
     ALIGN(4)
     {
         /* .bss starts at 0x3000000 */
-<BSS>
+        INCLUDE "sym_bss.ld"
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a_2.o(.bss.code);
 
         /* COMMON starts at 0x30022A8 */
-<COMMON>
+        INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
         end = .;
         . = 0x8000;
@@ -81,7 +81,7 @@ SECTIONS {
         src/smokescreen.o(.text);
         src/pokeball.o(.text);
         src/load_save.o(.text);
-        asm/trade.o(.text);
+        src/trade.o(.text);
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
@@ -185,6 +185,7 @@ SECTIONS {
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
+        src/contest_painting_effects.o(.text);
         asm/contest_painting_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
@@ -225,7 +226,6 @@ SECTIONS {
         src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         src/battle_anim_effects_3.o(.text);
-        asm/battle_anim_effects_3.o(.text);
         src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
@@ -418,7 +418,7 @@ SECTIONS {
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
-        data/trade.o(.rodata);
+        src/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);

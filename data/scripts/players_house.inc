@@ -68,9 +68,9 @@ LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2927DF
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_29280F
 	playse SE_KAIDAN
 	removeobject VAR_0x8008
@@ -438,9 +438,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_292AF2:: @ 8292AF2
 LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292C76
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292C86
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292D08

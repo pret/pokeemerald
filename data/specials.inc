@@ -263,10 +263,10 @@ gSpecials:: @ 81DBA64
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special FieldShowRegionMap
-	def_special sub_807E73C
-	def_special sub_807EA10
-	def_special sub_807F0E4
-	def_special sub_807E9D4
+	def_special GetInGameTradeSpeciesInfo
+	def_special CreateInGameTradePokemon
+	def_special DoInGameTradeScene
+	def_special GetTradeSpecies
 	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
@@ -328,8 +328,8 @@ gSpecials:: @ 81DBA64
 	def_special DoSealedChamberShakingEffect2
 	def_special FoundBlackGlasses
 	def_special sub_80AC81C
-	def_special sp13E_warp_to_last_warp
-	def_special sp13F_fall_to_last_warp
+	def_special DoDiveWarp
+	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
 	def_special sub_80F8EB8
 	def_special SetEReaderTrainerGfxId
@@ -488,7 +488,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_81B892C
 	def_special sub_813AEB4
 	def_special sub_813AF48
-	def_special sub_813AFC8
+	def_special DoDeoxysRockInteraction
 	def_special sub_813B1D0
 	def_special CreateObedientEnemyMon
 	def_special StartMirageTowerDisintegration

@@ -357,22 +357,22 @@ void sub_8113A90(struct Sprite *sprite)
     switch (gBattleAnimArgs[1])
     {
     case 0:
-        sprite->pos1.x = sub_80A861C(battler, 5) - 8;
-        sprite->pos1.y = sub_80A861C(battler, 2) + 8;
+        sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_RIGHT) - 8;
+        sprite->pos1.y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_TOP) + 8;
         break;
     case 1:
-        sprite->pos1.x = sub_80A861C(battler, 5) - 14;
-        sprite->pos1.y = sub_80A861C(battler, 2) + 16;
+        sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_RIGHT) - 14;
+        sprite->pos1.y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_TOP) + 16;
         break;
     case 2:
-        sprite->pos1.x = sub_80A861C(battler, 4) + 8;
-        sprite->pos1.y = sub_80A861C(battler, 2) + 8;
+        sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_LEFT) + 8;
+        sprite->pos1.y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_TOP) + 8;
         StartSpriteAffineAnim(sprite, 1);
         xOffset = -20;
         break;
     case 3:
-        sprite->pos1.x = sub_80A861C(battler, 4) + 14;
-        sprite->pos1.y = sub_80A861C(battler, 2) + 16;
+        sprite->pos1.x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_LEFT) + 14;
+        sprite->pos1.y = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_TOP) + 16;
         StartSpriteAffineAnim(sprite, 1);
         xOffset = -20;
         break;
@@ -403,7 +403,7 @@ void sub_8113BAC(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->data[7] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 31;
-    task->data[6] = sub_80A861C(gBattleAnimAttacker, 2) - 7;
+    task->data[6] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP) - 7;
     task->data[5] = task->data[7];
     task->data[4] = task->data[6];
     task->data[13] = (task->data[7] - task->data[6]) << 8;
@@ -576,7 +576,7 @@ void sub_8113E78(u8 taskId)
         break;
     case 2:
         task->data[7] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 31;
-        task->data[6] = sub_80A861C(gBattleAnimTarget, 2) - 7;
+        task->data[6] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_TOP) - 7;
         task->data[13] = (task->data[7] - task->data[6]) << 8;
         x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
         task->data[14] = x - 4;

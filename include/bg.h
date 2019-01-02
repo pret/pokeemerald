@@ -13,14 +13,16 @@ struct BGCntrlBitfield // for the I/O registers
 
 enum
 {
-    BG_CTRL_ATTR_VISIBLE = 1,
-    BG_CTRL_ATTR_CHARBASEINDEX = 2,
-    BG_CTRL_ATTR_MAPBASEINDEX = 3,
-    BG_CTRL_ATTR_SCREENSIZE = 4,
-    BG_CTRL_ATTR_PALETTEMODE = 5,
-    BG_CTRL_ATTR_PRIORITY = 6,
-    BG_CTRL_ATTR_MOSAIC = 7,
-    BG_CTRL_ATTR_WRAPAROUND = 8,
+	BG_ATTR_CHARBASEINDEX = 1,
+	BG_ATTR_MAPBASEINDEX,
+	BG_ATTR_SCREENSIZE,
+	BG_ATTR_PALETTEMODE,
+	BG_ATTR_MOSAIC,
+	BG_ATTR_WRAPAROUND,
+	BG_ATTR_PRIORITY,
+	BG_ATTR_METRIC,
+	BG_ATTR_TYPE,
+	BG_ATTR_BASETILE,
 };
 
 struct BgTemplate
@@ -38,8 +40,6 @@ void ResetBgs(void);
 u8 GetBgMode(void);
 void ResetBgControlStructs(void);
 void Unused_ResetBgControlStruct(u8 bg);
-void SetBgControlAttributes(u8 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound);
-u16 GetBgControlAttribute(u8 bg, u8 attributeId);
 u8 LoadBgVram(u8 bg, const void *src, u16 size, u16 destOffset, u8 mode);
 void SetTextModeAndHideBgs(void);
 bool8 IsInvalidBg(u8 bg);

@@ -723,7 +723,7 @@ static bool8 sub_808B1BC(s16 x, s16 y, u8 direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetZCoordAt(x, y) == 3
-     && GetEventObjectIdByXYZ(x, y, 3) == 16)
+     && GetEventObjectIdByXYZ(x, y, 3) == EVENT_OBJECTS_COUNT)
     {
         sub_808C750(direction);
         return TRUE;
@@ -791,12 +791,9 @@ bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
     playerY = object->currentCoords.y;
 
     MoveCoords(direction, &playerX, &playerY);
-    mewObjectId = GetEventObjectIdByLocalIdAndMap(1, 0x39, 0x1A);
-
-    if (mewObjectId == 16)
-    {
+    mewObjectId = GetEventObjectIdByLocalIdAndMap(1, MAP_NUM(FARAWAY_ISLAND_INTERIOR), MAP_GROUP(FARAWAY_ISLAND_INTERIOR));
+    if (mewObjectId == EVENT_OBJECTS_COUNT)
         return FALSE;
-    }
 
     object = &gEventObjects[mewObjectId];
     mewPrevX = object->previousCoords.x;
@@ -1389,7 +1386,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     u8 eventObjectId;
     struct EventObject *eventObject;
 
-    playerEventObjTemplate.localId = 0xFF;
+    playerEventObjTemplate.localId = EVENT_OBJ_ID_PLAYER;
     playerEventObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
     playerEventObjTemplate.x = x - 7;
     playerEventObjTemplate.y = y - 7;

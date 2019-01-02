@@ -247,9 +247,9 @@ LittlerootTown_BrendansHouse_2F_Movement_1F8609: @ 81F8609
 EventScript_PlayerPCMale:: @ 81F860D
 	lockall
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8626
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F864C
 	end
 

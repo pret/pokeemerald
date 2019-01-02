@@ -23,6 +23,7 @@
 #include "bg.h"
 #include "m4a.h"
 #include "window.h"
+#include "graphics.h"
 #include "constants/abilities.h"
 #include "daycare.h"
 #include "overworld.h"
@@ -52,11 +53,6 @@ struct EggHatchData
 };
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const u8 gBattleTextboxTiles[];
-extern const u8 gBattleTextboxTilemap[];
-extern const u8 gBattleTextboxPalette[];
-extern const u16 gTradeGba2_Pal[]; // palette, gameboy advance
-extern const u32 gTradeGba_Gfx[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
@@ -379,7 +375,7 @@ static void AddHatchedMonToParty(u8 id)
     caughtLvl = 0;
     SetMonData(mon, MON_DATA_MET_LEVEL, &caughtLvl);
 
-    mapNameID = sav1_map_get_name();
+    mapNameID = GetCurrentRegionMapSectionId();
     SetMonData(mon, MON_DATA_MET_LOCATION, &mapNameID);
 
     MonRestorePP(mon);
@@ -471,7 +467,7 @@ static void Task_EggHatch(u8 taskID)
 {
     if (!gPaletteFade.active)
     {
-        overworld_free_bg_tilemaps();
+        CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_EggHatch_0);
         gFieldCallback = sub_80AF168;
         DestroyTask(taskID);
@@ -502,7 +498,7 @@ static void CB2_EggHatch_0(void)
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
 
-        SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 2);
+        SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
         SetBgTilemapBuffer(1, Alloc(0x1000));
         SetBgTilemapBuffer(0, Alloc(0x2000));
 

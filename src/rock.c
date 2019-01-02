@@ -421,7 +421,7 @@ void AnimTask_LoadSandstormBackground(u8 taskId)
     sub_80A6B30(&unknownStruct);
     sub_80A6CC0(unknownStruct.bgId, gUnknown_08D8D58C, unknownStruct.tilesOffset);
     sub_80A6D60(&unknownStruct, gUnknown_08D8D410, 0);
-    LoadCompressedPalette(&gBattleAnimSpritePalette_261, unknownStruct.unk8 * 16, 32);
+    LoadCompressedPalette(gBattleAnimSpritePalette_261, unknownStruct.unk8 * 16, 32);
 
     if (gBattleAnimArgs[0] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         var0 = 1;

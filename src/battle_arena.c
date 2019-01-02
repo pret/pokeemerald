@@ -8,6 +8,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "frontier_util.h"
+#include "graphics.h"
 #include "gpu_regs.h"
 #include "item.h"
 #include "m4a.h"
@@ -22,9 +23,6 @@
 #include "constants/battle_string_ids.h"
 #include "constants/battle_frontier.h"
 #include "constants/moves.h"
-
-extern const u32 gUnknown_08D854E8[];
-extern const u16 gUnknown_08D855E8[];
 
 // This file's functions.
 static void sub_81A58B4(void);
@@ -784,7 +782,7 @@ static void sub_81A58B4(void)
     if (!isCurrent)
         gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = 0;
 
-    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
     gTrainerBattleOpponent_A = 0;
 }
 

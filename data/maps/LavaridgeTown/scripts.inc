@@ -53,18 +53,18 @@ LavaridgeTown_EventScript_1EA551:: @ 81EA551
 	call_if_ne LavaridgeTown_EventScript_1EA65C
 	delay 20
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq LavaridgeTown_EventScript_1EA630
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq LavaridgeTown_EventScript_1EA635
 	compare VAR_0x8008, 9
 	call_if_eq LavaridgeTown_EventScript_1EA6A1
 	compare VAR_0x8008, 9
 	call_if_ne LavaridgeTown_EventScript_1EA6AC
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq LavaridgeTown_EventScript_1EA5B5
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq LavaridgeTown_EventScript_1EA5DA
 	end
 

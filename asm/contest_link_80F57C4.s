@@ -578,10 +578,10 @@ _080F5D58:
 	adds r0, r5, 0
 	movs r1, 0
 	bl VarSet
-	bl sub_8076D5C
+	bl SetContinueGameWarpStatusToDynamicWarp
 	movs r0, 0x1
 	bl TrySavingData
-	bl sav2_gender2_inplace_and_xFE
+	bl ClearContinueGameWarpStatus2
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl VarSet
@@ -606,7 +606,7 @@ _080F5DE0:
 	movs r0, 0x64
 	b _080F5E2C
 _080F5DF4:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F5EBA
@@ -616,7 +616,7 @@ _080F5DF4:
 	strh r0, [r4, 0x8]
 	b _080F5EBA
 _080F5E0A:
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -741,7 +741,7 @@ sub_80F5F30: @ 80F5F30
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F5F60
@@ -5564,7 +5564,7 @@ sub_80F8714: @ 80F8714
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080F8748
-	bl sub_800A520
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F877E
@@ -5598,7 +5598,7 @@ _080F874C:
 	movs r3, 0x1
 	negs r3, r3
 	movs r0, 0
-	bl saved_warp2_set
+	bl SetDynamicWarp
 	bl ScriptContext2_Disable
 	bl EnableBothScriptContexts
 _080F877E:
