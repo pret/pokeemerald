@@ -524,7 +524,7 @@ SECTIONS {
         src/battle_records.o(.rodata);
         src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
-        data/roulette.o(.rodata);
+        src/roulette.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);
         src/landmark.o(.rodata);
         src/battle_transition.o(.rodata);
