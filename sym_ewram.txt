@@ -226,13 +226,7 @@ gPlayerFacingPosition: @ 203AB40
     .include "src/battle_records.o"
     .include "src/pokedex_area_screen.o"
     .include "src/evolution_scene.o"
-
-gUnknown_0203AB88: @ 203AB88
-	.space 0x4
-
-gUnknown_0203AB8C: @ 203AB8C
-	.space 0x4
-
+    .include "src/roulette.o"
 	.include "src/pokedex_cry_screen.o"
 	.include "src/coins.o"
 	.include "src/battle_transition.o"

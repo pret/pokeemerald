@@ -6,6 +6,7 @@
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "gpu_regs.h"
+#include "graphics.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -73,7 +74,7 @@ struct StructgUnknown_083F8D90
     u32 var04;
 };
 
-extern struct Roulette
+EWRAM_DATA struct Roulette
 {
     u8 var00;
     u8 var01;
@@ -86,13 +87,13 @@ extern struct Roulette
     u8 var04_2:5;
     u8 var04_7:1;
     u32 var08;
-    u8 var0C[0x6];
-    u8 var12[0x4];
-    u8 var16[0x3];
+    u8 var0C[6];
+    u8 var12[4];
+    u8 var16[3];
     u8 var19;
     u8 var1A_0:4;
     u8 var1A_4:4;
-    u8 var1B[0x6];
+    u8 var1B[6];
     u8 var21;
     u8 var22;
     u8 var23;
@@ -103,7 +104,7 @@ extern struct Roulette
     struct OamMatrix var2C;
     u16 var34;
     struct Sprite *var38;
-    u8 var3C[0x40]; // Sprite IDs
+    u8 var3C[MAX_SPRITES]; // Sprite IDs
     u8 var7C;
     u8 var7D;
     u8 var7E;
@@ -121,83 +122,72 @@ extern struct Roulette
     float varA0;
     u8 varA4;
     u8 varA5;
-    u8 v51[0x2];
+    u8 v51[2];
     u16 varA8;
     u16 varAA;
     TaskFunc varAC;
-    u8 v46[0x4];
+    u8 v46[4];
     TaskFunc varB4;
     struct UnkStruct0 varB8;
     u16 tilemapBuffers[7][0x400];
     u16 *unk_397C;
-} *gUnknown_0203AB88;
-extern u8 gUnknown_0203AB8C;
+} *gUnknown_0203AB88 = NULL;
+EWRAM_DATA u8 gUnknown_0203AB8C = 0;
 
-/*static*/ void sub_8140814(u8);
-/*static*/ void sub_81408A8(u8);
-/*static*/ void sub_8140968(u8);
-/*static*/ void sub_8140994(u8);
-/*static*/ void sub_8140BD0(u8);
-/*static*/ void sub_8141040(u8);
-/*static*/ void sub_81410FC(u8);
-/*static*/ void sub_8141344(u8);
-/*static*/ void sub_814155C(u8);
-/*static*/ void sub_81415D4(u8);
-/*static*/ void sub_81416D4(u8);
-/*static*/ void sub_8141778(u8);
-/*static*/ void sub_814189C(u8);
-/*static*/ void sub_8141A18(u8);
-/*static*/ void sub_8141AC0(u8);
-/*static*/ void sub_8141B58(u8);
-/*static*/ void dp01t_12_3_battle_menu(u8);
-/*static*/ void sub_8141DE4(u8);
-/*static*/ void sub_8141E7C(u8);
-/*static*/ void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3);
-/*static*/ void sub_8141FF4(u8);
-/*static*/ void sub_8142070(void);
-/*static*/ void sub_8142918(u8);
-/*static*/ void sub_814297C(u8);
-/*static*/ u8 sub_81420D0(u8, u8);
-/*static*/ bool8 sub_81421E8(u8, u8);
-/*static*/ void sub_8142284(u8);
-/*static*/ void sub_81424FC(u8);
-/*static*/ u8 sub_8142758(u8);
-/*static*/ void sub_8142814(void);
-/*static*/ void sub_8142C0C(u8);
-/*static*/ void sub_8142CD0(void);
-/*static*/ void sub_8142E70(u8, u8);
-/*static*/ void sub_8142F7C(void);
-/*static*/ void sub_8143038(u8, u8);
-/*static*/ void sub_8143150(u8);
-/*static*/ void sub_81431E4(void);
-/*static*/ void sub_8143280(struct Sprite *);
-/*static*/ void sub_8143314(void);
-/*static*/ void sub_8143514(u16);
-/*static*/ void sub_81436D0(u8);
-/*static*/ void sub_814372C(u8);
-/*static*/ void sub_814390C(struct Sprite *);
-/*static*/ void sub_814391C(void);
-/*static*/ void sub_814399C(struct Sprite *);
-/*static*/ void sub_81439C8(void);
-/*static*/ void sub_8143A40(void);
-/*static*/ void sub_81446AC(struct Sprite *);
-/*static*/ void sub_81446DC(struct Sprite *);
-/*static*/ void sub_81448B8(struct Sprite *);
-/*static*/ void sub_8144A24(struct Sprite *);
-/*static*/ void sub_8144E60(struct Sprite *);
-/*static*/ void sub_8145294(struct Sprite *);
+static void sub_8140814(u8);
+static void sub_81408A8(u8);
+static void sub_8140968(u8);
+static void sub_8140994(u8);
+static void sub_8140BD0(u8);
+static void sub_8141040(u8);
+static void sub_81410FC(u8);
+static void sub_8141344(u8);
+static void sub_814155C(u8);
+static void sub_81415D4(u8);
+static void sub_81416D4(u8);
+static void sub_8141778(u8);
+static void sub_814189C(u8);
+static void sub_8141A18(u8);
+static void sub_8141AC0(u8);
+static void sub_8141B58(u8);
+static void dp01t_12_3_battle_menu(u8);
+static void sub_8141DE4(u8);
+static void sub_8141E7C(u8);
+static void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3);
+static void sub_8141FF4(u8);
+static void sub_8142070(void);
+static void sub_8142918(u8);
+static void sub_814297C(u8);
+static u8 sub_81420D0(u8, u8);
+static bool8 sub_81421E8(u8, u8);
+static void sub_8142284(u8);
+static void sub_81424FC(u8);
+static u8 sub_8142758(u8);
+static void sub_8142814(void);
+static void sub_8142C0C(u8);
+static void sub_8142CD0(void);
+static void sub_8142E70(u8, u8);
+static void sub_8142F7C(void);
+static void sub_8143038(u8, u8);
+static void sub_8143150(u8);
+static void sub_81431E4(void);
+static void sub_8143280(struct Sprite *);
+static void sub_8143314(void);
+static void sub_8143514(u16);
+static void sub_81436D0(u8);
+static void sub_814372C(u8);
+static void sub_814390C(struct Sprite *);
+static void sub_814391C(void);
+static void sub_814399C(struct Sprite *);
+static void sub_81439C8(void);
+static void sub_8143A40(void);
+static void sub_81446AC(struct Sprite *);
+static void sub_81446DC(struct Sprite *);
+static void sub_81448B8(struct Sprite *);
+static void sub_8144A24(struct Sprite *);
+static void sub_8144E60(struct Sprite *);
+static void sub_8145294(struct Sprite *);
 
-extern const struct BgTemplate gUnknown_085B6140[3];
-extern const struct WindowTemplate gUnknown_085B614C[];
-extern const u32 gUnknown_085B5DFC[];
-extern const u16 gUnknown_085B6418[];
-extern const struct StructgUnknown_083F8DF4 gUnknown_085B6348[];
-extern const u8 gUnknown_085B6344[];
-extern const struct UnkStruct1 gUnknown_085B6388[];
-extern const u16 gUnknown_085B5BFC[];
-extern const u32 gRouletteMenuTiles[];
-extern const u32 gRouletteWheelTiles[];
-extern const u32 gUnknown_085B5FA0[];
 extern const u8 gUnknown_082A5B89[];
 extern const u8 gUnknown_082A5C13[];
 extern const u8 gUnknown_082A5BD7[];
@@ -210,48 +200,6 @@ extern const u8 gUnknown_082A5C04[];
 extern const u8 gUnknown_082A5B12[];
 extern const u8 gUnknown_082A5B6B[];
 extern const u8 gUnknown_082A5B4E[];
-extern const struct YesNoFuncTable gUnknown_085B6410;
-extern const struct StructgUnknown_085B6154 gUnknown_085B6154[];
-extern const u8 gUnknown_085B641E[];
-extern const u16 gUnknown_085B6422[];
-extern const u32 gUnknown_085B642C[];
-extern const u32 gUnknown_085B643C[];
-extern const struct StructgUnknown_083F8D90 gUnknown_085B62E4[];
-extern const struct UnkStruct1 gUnknown_085B63F0[];
-extern const u8 gUnknown_085B6448[];
-extern const struct YesNoFuncTable gUnknown_085B6408;
-extern const struct SpritePalette gUnknown_085B7384[];
-extern const struct CompressedSpriteSheet gUnknown_085B7864;
-extern const struct CompressedSpriteSheet gUnknown_085B7978;
-extern const struct CompressedSpriteSheet gUnknown_085B7A40;
-extern const struct CompressedSpriteSheet gUnknown_085B7488;
-extern const struct CompressedSpriteSheet gUnknown_085B7490;
-extern const struct SpriteTemplate gSpriteTemplate_85B75B0[];
-extern const struct SpriteTemplate gSpriteTemplate_85B7508[];
-extern const struct SpriteTemplate gSpriteTemplate_85B7568[];
-extern const struct SpriteTemplate gSpriteTemplate_85B7928;
-extern const struct CompressedSpriteSheet gUnknown_085B741C;
-extern const struct SpriteTemplate gSpriteTemplate_85B7610[];
-extern const struct CompressedSpriteSheet gUnknown_085B7750[];
-extern const struct SpriteTemplate gSpriteTemplate_85B77E4;
-extern const struct SpriteTemplate gUnknown_085B77FC;
-extern const struct SpriteTemplate gUnknown_085B7814;
-extern const struct SpriteTemplate gUnknown_085B782C;
-extern const struct SpriteTemplate gUnknown_085B7844;
-extern const u8 gUnknown_085B7B04[];
-extern const struct CompressedSpriteSheet gUnknown_085B7948;
-extern const struct SpriteTemplate gSpriteTemplate_85B7950;
-extern const u16 gUnknown_085B7B0A[][2];
-extern const u16 gUnknown_085B7B12[][2];
-extern const struct SpriteTemplate gSpriteTemplate_85B79F8;
-extern const struct SpriteTemplate gSpriteTemplate_85B7ABC[];
-extern const struct SpriteTemplate gSpriteTemplate_85B7A10;
-extern const struct SpriteTemplate gUnknown_085B7AEC;
-extern const u16 gUnknown_085B7B1A[];
-extern const u16 gUnknown_085B7B2E[];
-extern const s8 gUnknown_085B7B46[];
-extern const s8 gUnknown_085B7B48[];
-extern const s8 gUnknown_085B7B46[];
 
 static const u16 gUnknown_085B5BFC[] = INCBIN_U16("graphics/roulette/85B5BFC.gbapal");
 static const u32 gUnknown_085B5DFC[] = INCBIN_U32("graphics/roulette/85B5DFC.bin.lz");
@@ -856,7 +804,7 @@ static const struct YesNoFuncTable gUnknown_085B6410 =
     sub_8140994
 };
 
-void sub_8140238(void)
+static void sub_8140238(void)
 {
 	RunTasks();
 	AnimateSprites();
@@ -865,7 +813,7 @@ void sub_8140238(void)
 	   task_tutorial_controls_fadein(&gUnknown_0203AB88->varB8);
 }
 
-void sub_8140264(void)
+static void sub_8140264(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -900,7 +848,7 @@ void sub_8140264(void)
     }
 }
 
-void sub_8140388(void)
+static void sub_8140388(void)
 {
     u32 size = 0;
 
@@ -916,7 +864,7 @@ void sub_8140388(void)
     gUnknown_0203AB88->unk_397C = malloc_and_decompress(gUnknown_085B5DFC, &size);
 }
 
-void sub_8140418(void)
+static void sub_8140418(void)
 {
     FREE_AND_SET_NULL(gUnknown_0203AB88->unk_397C);
     FreeAllWindowBuffers();
@@ -928,7 +876,7 @@ void sub_8140418(void)
     FREE_AND_SET_NULL(gUnknown_0203AB88);
 }
 
-void sub_8140470(void)
+static void sub_8140470(void)
 {
     u8 i;
     u16 arr[3] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)}; // the third is never used ?
@@ -970,7 +918,7 @@ void sub_8140470(void)
     RtcCalcLocalTime();
 }
 
-void sub_81405CC(void)
+static void sub_81405CC(void)
 {
     u8 taskId;
 
@@ -1056,7 +1004,7 @@ void sub_81405CC(void)
     gMain.state++;
 }
 
-void sub_8140814(u8 unused)
+static void sub_8140814(u8 unused)
 {
     s16 sin;
     s16 cos;
@@ -1075,7 +1023,7 @@ void sub_8140814(u8 unused)
     gUnknown_0203AB88->var2C.c = -sin;
 }
 
-void sub_81408A8(u8 taskId)
+static void sub_81408A8(u8 taskId)
 {
     if (UpdatePaletteFade() == 0)
     {
@@ -1093,7 +1041,7 @@ void sub_81408A8(u8 taskId)
     }
 }
 
-void sub_8140914(u8 taskId)
+static void sub_8140914(u8 taskId)
 {
     DisplayYesNoMenu();
     NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, 0);
@@ -1102,19 +1050,19 @@ void sub_8140914(u8 taskId)
     DoYesNoFuncWithChoice(taskId, &gUnknown_085B6410);
 }
 
-void sub_8140968(u8 taskId)
+static void sub_8140968(u8 taskId)
 {
     sub_819746C(0, TRUE);
     gTasks[taskId].func = sub_8140BD0;
 }
 
-void sub_8140994(u8 taskId)
+static void sub_8140994(u8 taskId)
 {
     DestroyTask(gUnknown_0203AB88->varA5);
     sub_8141DE4(taskId);
 }
 
-void sub_81409B8(u8 r0)
+static void sub_81409B8(u8 r0)
 {
     u8 temp0, temp1;
     switch (r0)
@@ -1146,13 +1094,13 @@ void sub_81409B8(u8 r0)
     }
 }
 
-void sub_8140B64(u8 taskId)
+static void sub_8140B64(u8 taskId)
 {
     sub_81436D0(gTasks[taskId].data[4]);
     sub_81409B8(gTasks[taskId].data[4]);
 }
 
-void sub_8140B8C(u8 taskId)
+static void sub_8140B8C(u8 taskId)
 {
     gUnknown_0203AB88->var28 = 1;
     sub_81409B8(gTasks[taskId].data[4]);
@@ -1161,7 +1109,7 @@ void sub_8140B8C(u8 taskId)
     gTasks[taskId].func = sub_8141040;
 }
 
-void sub_8140BD0(u8 taskId)
+static void sub_8140BD0(u8 taskId)
 {
     s16 i;
 
@@ -1190,14 +1138,12 @@ void sub_8140BD0(u8 taskId)
     gTasks[taskId].func = sub_8140B8C;
 }
 
-u8 sub_8140CA8(s16 *r0, u8 r1)
+static u8 sub_8140CA8(s16 *r0, u8 r1)
 {
     s8 temp1 = 0;
     s8 temp = 0;
     s8 arr[4] = {-5, 5, -1, 1};
-    s8 t;
-
-    t = *r0;
+    s8 t = *r0;
 
     switch (r1)
     {
@@ -1231,7 +1177,7 @@ u8 sub_8140CA8(s16 *r0, u8 r1)
     return FALSE;
 }
 
-void sub_8140D6C(u8 r0)
+static void sub_8140D6C(u8 r0)
 {
     u8 z = 0;
     bool8 var0 = FALSE;
@@ -1265,7 +1211,7 @@ void sub_8140D6C(u8 r0)
                     }
 }
 
-void sub_8140F6C(u8 r0)
+static void sub_8140F6C(u8 r0)
 {
     sub_80EECA4();
     gUnknown_0203AB88->var28 = 0xFF;
@@ -1278,7 +1224,7 @@ void sub_8140F6C(u8 r0)
     gTasks[r0].func = sub_81410FC;
 }
 
-void sub_8140FC4(u8 taskId)
+static void sub_8140FC4(u8 taskId)
 {
     gUnknown_0203AB88->var1B[gUnknown_0203AB88->var1A_0] = gTasks[taskId].data[4];
     gTasks[taskId].data[2] = sub_8142758(gUnknown_0203AB88->var1B[gUnknown_0203AB88->var1A_0]);
@@ -1289,7 +1235,7 @@ void sub_8140FC4(u8 taskId)
     gTasks[taskId].func = sub_8140F6C;
 }
 
-void sub_8141040(u8 taskId)
+static void sub_8141040(u8 taskId)
 {
     sub_8140D6C(taskId);
 
@@ -1297,11 +1243,11 @@ void sub_8141040(u8 taskId)
     {
     case 0:
         sub_81409B8(gTasks[taskId].data[4]);
-        gTasks[taskId].data[1]+= 1;
+        gTasks[taskId].data[1]++;
         break;
     case 30:
         sub_81409B8(0);
-        gTasks[taskId].data[1]+= 1;
+        gTasks[taskId].data[1]++;
         break;
     case 59:
         gTasks[taskId].data[1] = 0;
@@ -1322,7 +1268,7 @@ void sub_8141040(u8 taskId)
     }
 }
 
-void sub_81410FC(u8 taskId)
+static void sub_81410FC(u8 taskId)
 {
     if (gTasks[taskId].data[1]-- > 0)
     {
@@ -1340,7 +1286,7 @@ void sub_81410FC(u8 taskId)
     }
 }
 
-u8 sub_814118C(u16 r0, u16 r1)
+static u8 sub_814118C(u16 r0, u16 r1)
 {
     switch (gUnknown_0203AB88->var02)
     {
@@ -1349,13 +1295,13 @@ u8 sub_814118C(u16 r0, u16 r1)
         // one of the two is in party
         if (gLocalTime.hours > 3 && gLocalTime.hours < 10)
         {
-            if (r0 < 0xC || (r1 & 0x1))
+            if (r0 < 12 || (r1 & 1))
             {
                 return gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 / 2;
             }
             else
             {
-                return 0x1;
+                return 1;
             }
         }
         else if (!(r1 & 0x3))
@@ -1371,16 +1317,16 @@ u8 sub_814118C(u16 r0, u16 r1)
         // both are in party
         if (gLocalTime.hours > 3 && gLocalTime.hours < 11)
         {
-            if (r0 < 0x6 || (r1 & 0x1))
+            if (r0 < 6 || (r1 & 1))
             {
                 return gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 / 2;
             }
             else
             {
-                return 0x1;
+                return 1;
             }
         }
-        else if ((r1 & 0x1) && r0 > 6)
+        else if ((r1 & 1) && r0 > 6)
         {
             return gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 / 4;
         }
@@ -1394,16 +1340,16 @@ u8 sub_814118C(u16 r0, u16 r1)
         // neither is in party
         if (gLocalTime.hours > 3 && gLocalTime.hours < 10)
         {
-            if (!(r1 & 0x3))
+            if (!(r1 & 3))
             {
-                return 0x1;
+                return 1;
             }
             else
             {
                 return gUnknown_085B6348[gUnknown_0203AB88->var04_0].var02 / 2;
             }
         }
-        else if (!(r1 & 0x3))
+        else if (!(r1 & 3))
         {
             if (r0 > 12)
             {
@@ -1435,7 +1381,7 @@ u8 sub_814118C(u16 r0, u16 r1)
 
 // r7/r8 swap
 #ifdef NONMATCHING
-void sub_8141344(u8 taskId)
+static void sub_8141344(u8 taskId)
 {
     u8 randf;
     s8 randfinal;
@@ -1481,7 +1427,7 @@ void sub_8141344(u8 taskId)
 #else
 static const u16 gUnknown_085B6422[4] = {0, 180, 90, 270};
 NAKED
-void sub_8141344(u8 taskId)
+static void sub_8141344(u8 taskId)
 {
     asm_unified("	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -1733,7 +1679,7 @@ _08141558:\n\
 }
 #endif // NONMATCHING
 
-void sub_814155C(u8 taskId)
+static void sub_814155C(u8 taskId)
 {
     u8 index;
     gUnknown_0203AB88->var03_7 = 1;
@@ -1747,7 +1693,7 @@ void sub_814155C(u8 taskId)
     gTasks[taskId].func = sub_81415D4;
 }
 
-void sub_81415D4(u8 taskId)
+static void sub_81415D4(u8 taskId)
 {
     if (gUnknown_0203AB88->var7D)
     {
@@ -1786,7 +1732,7 @@ void sub_81415D4(u8 taskId)
     }
 }
 
-void sub_81416D4(u8 taskId)
+static void sub_81416D4(u8 taskId)
 {
     if (gTasks[taskId].data[1]-- > 0)
     {
@@ -1806,7 +1752,7 @@ void sub_81416D4(u8 taskId)
     }
 }
 
-void sub_8141778(u8 taskId)
+static void sub_8141778(u8 taskId)
 {
     if (gTasks[taskId].data[1]-- > 1)
     {
@@ -1828,7 +1774,7 @@ void sub_8141778(u8 taskId)
     }
 }
 
-void sub_8141800(u8 taskId)
+static void sub_8141800(u8 taskId)
 {
     switch (gTasks[taskId].data[0x5])
     {
@@ -1853,7 +1799,7 @@ void sub_8141800(u8 taskId)
     }
 }
 
-void sub_814189C(u8 taskId)
+static void sub_814189C(u8 taskId)
 {
     switch (gTasks[taskId].data[5])
     {
@@ -1886,7 +1832,7 @@ void sub_814189C(u8 taskId)
     gTasks[taskId].func = sub_8141800;
 }
 
-void sub_8141984(u8 taskId)
+static void sub_8141984(u8 taskId)
 {
     s32 r0 = gTasks[taskId].data[7];
     switch (r0)
@@ -1917,7 +1863,7 @@ void sub_8141984(u8 taskId)
         sub_8141F7C(taskId, sub_8141AC0, 0xFFFF, 3);
 }
 
-void sub_8141A18(u8 taskId)
+static void sub_8141A18(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]), STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gUnknown_082A5BEF);
@@ -1929,7 +1875,7 @@ void sub_8141A18(u8 taskId)
     gTasks[taskId].func = sub_8141984;
 }
 
-void sub_8141AC0(u8 taskId)
+static void sub_8141AC0(u8 taskId)
 {
     sub_8151A9C(&gUnknown_0203AB88->varB8, 0xFFFF);
     gUnknown_0203AB88->varB8.var04[13].var00_7 = gUnknown_0203AB88->varB8.var04[14].var00_7 = gUnknown_0203AB88->varB8.var04[15].var00_7 = 0;
@@ -1937,7 +1883,7 @@ void sub_8141AC0(u8 taskId)
     gTasks[taskId].func = sub_8141B58;
 }
 
-void sub_8141B58(u8 taskId)
+static void sub_8141B58(u8 taskId)
 {
     u8 i = 0;
     gTasks[taskId].data[4] = i;
@@ -1980,7 +1926,7 @@ void sub_8141B58(u8 taskId)
     }
 }
 
-void dp01t_12_3_battle_menu(u8 taskId)
+static void dp01t_12_3_battle_menu(u8 taskId)
 {
     u8 i = 0;
 
@@ -2009,7 +1955,7 @@ void dp01t_12_3_battle_menu(u8 taskId)
     }
 }
 
-void sub_8141DE4(u8 taskId)
+static void sub_8141DE4(u8 taskId)
 {
     sub_8151A9C(&gUnknown_0203AB88->varB8, 0xFFFF);
     sub_8151678(&gUnknown_0203AB88->varB8);
@@ -2023,7 +1969,7 @@ void sub_8141DE4(u8 taskId)
     gTasks[taskId].func = sub_8141E7C;
 }
 
-void sub_8141E7C(u8 taskId) // end roulette ?
+static void sub_8141E7C(u8 taskId) // end roulette ?
 {
     if (UpdatePaletteFade() == 0)
     {
@@ -2044,7 +1990,7 @@ void sub_8141E7C(u8 taskId) // end roulette ?
     }
 }
 
-void sub_8141EF8(u8 taskId)
+static void sub_8141EF8(u8 taskId)
 {
     if (gUnknown_0203AB88->varA8 == 0 || gMain.newKeys & gUnknown_0203AB88->varAA)
     {
@@ -2059,7 +2005,7 @@ void sub_8141EF8(u8 taskId)
         gUnknown_0203AB88->varA8--;
 }
 
-void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3)
+static void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3)
 {
     gUnknown_0203AB88->varB4 = gTasks[taskId].func;
     if (r1 == NULL)
@@ -2073,7 +2019,7 @@ void sub_8141F7C(u8 taskId, TaskFunc r1, u16 r2, u16 r3)
     gTasks[taskId].func = sub_8141EF8;
 }
 
-void sub_8141FF4(u8 taskId)
+static void sub_8141FF4(u8 taskId)
 {
     u8 i = 0;
     gUnknown_0203AB88->var00 = i;
@@ -2089,7 +2035,7 @@ void sub_8141FF4(u8 taskId)
     gTasks[taskId].data[1] = 0;
 }
 
-void sub_8142070(void)
+static void sub_8142070(void)
 {
     u8 i;
     gUnknown_0203AB88->var08 = 0;
@@ -2108,7 +2054,7 @@ void sub_8142070(void)
     sub_8143038(1, -1);
 }
 
-u8 sub_81420D0(u8 taskId, u8 r1)
+static u8 sub_81420D0(u8 taskId, u8 r1)
 {
     u8 i;
     u8 z;
@@ -2138,7 +2084,7 @@ u8 sub_81420D0(u8 taskId, u8 r1)
     return gUnknown_085B62E4[r1].var02;
 }
 
-bool8 sub_81421E8(u8 r0, u8 r1)
+static bool8 sub_81421E8(u8 r0, u8 r1)
 {
     u8 t = r0;
     if (--r0 < 19)
@@ -2165,7 +2111,7 @@ bool8 sub_81421E8(u8 r0, u8 r1)
     return FALSE;
 }
 
-void sub_8142284(u8 r0)
+static void sub_8142284(u8 r0)
 {
 
     u16 var0 = 0;
@@ -2244,7 +2190,7 @@ void sub_8142284(u8 r0)
     }
 }
 
-void sub_81424FC(u8 r0)
+static void sub_81424FC(u8 r0)
 {
     vu8 i;
     vu8 z;
@@ -2294,7 +2240,7 @@ void sub_81424FC(u8 r0)
     }
 }
 
-u8 sub_8142758(u8 r0)
+static u8 sub_8142758(u8 r0)
 {
     u8 var0[5] = {0, 3, 4, 6, 12};
 
@@ -2320,7 +2266,7 @@ u8 sub_8142758(u8 r0)
     return 0;
 }
 
-void sub_8142814(void)
+static void sub_8142814(void)
 {
     s32 x1;
     s32 x2;
@@ -2336,114 +2282,6 @@ void sub_8142814(void)
     SetGpuReg(REG_OFFSET_BG2X_H, (x1 & 0x0fff0000) >> 16);
     SetGpuReg(REG_OFFSET_BG2Y_L, x2);
     SetGpuReg(REG_OFFSET_BG2Y_H, (x2 & 0x0fff0000) >> 16);
-}
-
-void sub_81428C4(u8 r0)
-{
-    DisplayYesNoMenu();
-    DoYesNoFuncWithChoice(r0, &gUnknown_085B6408);
-}
-
-void sub_81428E4(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        SetVBlankCallback(NULL);
-        SetMainCallback2(sub_81405CC);
-        DestroyTask(taskId);
-    }
-}
-
-void sub_8142918(u8 taskId)
-{
-    sub_819746C(0, TRUE);
-    HideCoinsWindow();
-    FreeAllWindowBuffers();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
-    UpdatePaletteFade();
-    gTasks[taskId].func = sub_81428E4;
-}
-
-void sub_814297C(u8 taskId)
-{
-    sub_819746C(0, FALSE);
-    HideCoinsWindow();
-    ScriptContext2_Disable();
-    DestroyTask(taskId);
-}
-
-void sub_81429A0(u8 taskId)
-{
-    gTasks[taskId].data[0]++;
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
-    {
-        gSpecialVar_0x8004 = 1;
-        HideCoinsWindow();
-        sub_819746C(0, TRUE);
-        ScriptContext2_Disable();
-        DestroyTask(taskId);
-    }
-}
-
-void sub_81429F0(u8 taskId)
-{
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
-    {
-        u32 temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
-        ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
-        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
-        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
-        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(0, 3);
-        gTasks[taskId].func = sub_81428C4;
-    }
-}
-
-void Task_Roulette_0(u8 taskId)
-{
-    s32 temp;
-    PrintCoinsString(gTasks[taskId].data[13]);
-    temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
-    ConvertIntToDecimalStringN(gStringVar1, temp, 2, 1);
-    if (gTasks[taskId].data[13] >= temp)
-    {
-        if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
-        {
-            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
-            AddTextPrinterParameterized(0, 1, gUnknown_082A5B6B, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(0, 3);
-            gTasks[taskId].func = sub_81429F0;
-        }
-        else
-        {
-            StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
-            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
-            AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-            CopyWindowToVram(0, 3);
-            gTasks[taskId].func = sub_81428C4;
-        }
-    }
-    else
-    {
-        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B4E);
-        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
-        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
-        CopyWindowToVram(0, 3);
-        gTasks[taskId].func = sub_81429A0;
-        gTasks[taskId].data[13] = 0;
-        gTasks[taskId].data[0] = 0;
-    }
-}
-
-void PlayRoulette(void)
-{
-    u8 taskId;
-
-    ScriptContext2_Enable();
-    ShowCoinsWindow(GetCoins(), 1, 1);
-    taskId = CreateTask(Task_Roulette_0, 0);
-    gTasks[taskId].data[13] = GetCoins();
 }
 
 static const u8 sFiller_085B644D[3] = {};
@@ -2533,7 +2371,6 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_85B7418[] = {
     gSpriteAffineAnim_85B7410
 };
 
-extern const u32 RoulettePokeIcons2Tiles[];
 static const struct CompressedSpriteSheet gUnknown_085B741C = {
     .data = RoulettePokeIcons2Tiles,
     .size = 0xC00,
@@ -2604,14 +2441,12 @@ static const union AnimCmd *const gSpriteAnimTable_85B7484[] = {
     &gSpriteAnim_85B7420[11]
 };
 
-extern const u32 gRouletteHeadersTiles[];
 static const struct CompressedSpriteSheet gUnknown_085B7488 = {
     .data = gRouletteHeadersTiles,
     .size = 0x1600,
     .tag = 4
 };
 
-extern const u32 RoulettePokeIconsTiles[];
 static const struct CompressedSpriteSheet gUnknown_085B7490 = {
     .data = RoulettePokeIconsTiles,
     .size = 0x400,
@@ -2908,7 +2743,6 @@ static const struct SpriteTemplate gSpriteTemplate_85B7610[] =
     }
 };
 
-extern const struct OamData gOamData_85B73EC;
 static const struct OamData gOamData_85B7730 =
 {
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -2945,11 +2779,6 @@ static const struct OamData gOamData_85B7748 =
     .priority = 1,
 };
 
-extern const u32 gRouletteCreditTiles[];
-extern const u32 gRouletteNumbersTiles[];
-extern const u32 gRouletteMultiplierTiles[];
-extern const u32 RouletteBallCounterTiles[];
-extern const u32 RouletteCursorTiles[];
 static const struct CompressedSpriteSheet gUnknown_085B7750[] =
 {
     {
@@ -3089,7 +2918,6 @@ static const struct OamData gOamData_85B785C =
     .priority = 2,
 };
 
-extern const u32 gUnknown_085B6650[];
 static const struct CompressedSpriteSheet gUnknown_085B7864 = {
     .data = gUnknown_085B6650,
     .size = 0x200,
@@ -3191,7 +3019,6 @@ static const struct OamData gOamData_85B7940 =
     .priority = 2,
 };
 
-extern const u32 gRouletteCenter_Gfx[];
 static const struct CompressedSpriteSheet gUnknown_085B7948 = {
     .data = gRouletteCenter_Gfx,
     .size = 0x800,
@@ -3227,7 +3054,6 @@ static const struct OamData gOamData_85B7970 =
     .priority = 2,
 };
 
-extern const u32 gUnknown_085B67FC[];
 static const struct CompressedSpriteSheet gUnknown_085B7978 = {
     .data = gUnknown_085B67FC,
     .size = 0xE00,
@@ -3339,7 +3165,7 @@ static const struct OamData gOamData_85B7A38 =
     .size = 2,
     .priority = 2,
 };
-extern const u32 gUnknown_085B7290[];
+
 static const struct CompressedSpriteSheet gUnknown_085B7A40 = {
     .data = gUnknown_085B7290,
     .size = 0x180,
@@ -3428,7 +3254,115 @@ static const struct SpriteTemplate gUnknown_085B7AEC =
     .callback = sub_8145294
 };
 
-void sub_8142C0C(u8 r0)
+static void sub_81428C4(u8 r0)
+{
+    DisplayYesNoMenu();
+    DoYesNoFuncWithChoice(r0, &gUnknown_085B6408);
+}
+
+static void sub_81428E4(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        SetVBlankCallback(NULL);
+        SetMainCallback2(sub_81405CC);
+        DestroyTask(taskId);
+    }
+}
+
+static void sub_8142918(u8 taskId)
+{
+    sub_819746C(0, TRUE);
+    HideCoinsWindow();
+    FreeAllWindowBuffers();
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
+    UpdatePaletteFade();
+    gTasks[taskId].func = sub_81428E4;
+}
+
+static void sub_814297C(u8 taskId)
+{
+    sub_819746C(0, FALSE);
+    HideCoinsWindow();
+    ScriptContext2_Disable();
+    DestroyTask(taskId);
+}
+
+static void sub_81429A0(u8 taskId)
+{
+    gTasks[taskId].data[0]++;
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        gSpecialVar_0x8004 = 1;
+        HideCoinsWindow();
+        sub_819746C(0, TRUE);
+        ScriptContext2_Disable();
+        DestroyTask(taskId);
+    }
+}
+
+static void sub_81429F0(u8 taskId)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        u32 temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
+        ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
+        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
+        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(0, 3);
+        gTasks[taskId].func = sub_81428C4;
+    }
+}
+
+static void Task_Roulette_0(u8 taskId)
+{
+    s32 temp;
+    PrintCoinsString(gTasks[taskId].data[13]);
+    temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
+    ConvertIntToDecimalStringN(gStringVar1, temp, 2, 1);
+    if (gTasks[taskId].data[13] >= temp)
+    {
+        if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
+        {
+            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            AddTextPrinterParameterized(0, 1, gUnknown_082A5B6B, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(0, 3);
+            gTasks[taskId].func = sub_81429F0;
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
+            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+            CopyWindowToVram(0, 3);
+            gTasks[taskId].func = sub_81428C4;
+        }
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, gUnknown_082A5B4E);
+        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(0, 3);
+        gTasks[taskId].func = sub_81429A0;
+        gTasks[taskId].data[13] = 0;
+        gTasks[taskId].data[0] = 0;
+    }
+}
+
+void PlayRoulette(void)
+{
+    u8 taskId;
+
+    ScriptContext2_Enable();
+    ShowCoinsWindow(GetCoins(), 1, 1);
+    taskId = CreateTask(Task_Roulette_0, 0);
+    gTasks[taskId].data[13] = GetCoins();
+}
+
+static void sub_8142C0C(u8 r0)
 {
     if (!r0)
     {
@@ -3447,7 +3381,7 @@ void sub_8142C0C(u8 r0)
     }
 }
 
-u8 sub_8142C60(const struct SpriteTemplate *r0, u8 r1, u16 *r2)
+static u8 sub_8142C60(const struct SpriteTemplate *r0, u8 r1, u16 *r2)
 {
     u16 temp;
     u8 spriteId = CreateSprite(r0, 116, 80, r0->oam->y);
@@ -3463,7 +3397,7 @@ u8 sub_8142C60(const struct SpriteTemplate *r0, u8 r1, u16 *r2)
     return spriteId;
 }
 
-void sub_8142CD0(void)
+static void sub_8142CD0(void)
 {
     u8 i, j;
     u8 spriteId;
@@ -3502,7 +3436,7 @@ void sub_8142CD0(void)
     }
 }
 
-void unref_sub_8142E3C(void)
+static void unref_sub_8142E3C(void)
 {
     u8 i;
     for (i = 0; i < 12; i++)
@@ -3511,7 +3445,7 @@ void unref_sub_8142E3C(void)
     }
 }
 
-void sub_8142E70(u8 r0, u8 r1)
+static void sub_8142E70(u8 r0, u8 r1)
 {
     u8 i;
     switch (r0)
@@ -3540,7 +3474,7 @@ void sub_8142E70(u8 r0, u8 r1)
     }
 }
 
-void sub_8142F7C(void)
+static void sub_8142F7C(void)
 {
     u8 i;
     for (i = 0; i < 6; i++)
@@ -3554,7 +3488,7 @@ void sub_8142F7C(void)
     }
 }
 
-void sub_8143038(u8 r0, u8 r1)
+static void sub_8143038(u8 r0, u8 r1)
 {
     u8 i = 0;
     if (r0)
@@ -3582,7 +3516,7 @@ void sub_8143038(u8 r0, u8 r1)
     }
 }
 
-void sub_8143150(u8 r0)
+static void sub_8143150(u8 r0)
 {
     if (!r0)
     {
@@ -3596,7 +3530,7 @@ void sub_8143150(u8 r0)
     }
 }
 
-void sub_81431E4(void)
+static void sub_81431E4(void)
 {
     u8 i, j;
     u16 k;
@@ -3621,7 +3555,7 @@ void sub_81431E4(void)
     }
 }
 
-void sub_8143280(struct Sprite *sprite)
+static void sub_8143280(struct Sprite *sprite)
 {
     s16 cos;
     s16 sin;
@@ -3641,7 +3575,7 @@ void sub_8143280(struct Sprite *sprite)
     gOamMatrices[matrixNum].c = -sin;
 }
 
-void sub_8143314(void)
+static void sub_8143314(void)
 {
     u8 i;
     for (i = 0; i < 5; i++)
@@ -3675,7 +3609,7 @@ void sub_8143314(void)
     gSprites[gUnknown_0203AB88->var3C[48]].invisible = TRUE;
 }
 
-void sub_8143514(u16 r0)
+static void sub_8143514(u16 r0)
 {
     u8 i;
     u16 d = 1000;
@@ -3697,7 +3631,7 @@ void sub_8143514(u16 r0)
     }
 }
 
-u8 sub_8143614(u8 r0)
+static u8 sub_8143614(u8 r0)
 {
     u8 t[5] = {0, 1, 2, 3, 4};
 
@@ -3723,14 +3657,14 @@ u8 sub_8143614(u8 r0)
     return 0;
 }
 
-void sub_81436D0(u8 r0)
+static void sub_81436D0(u8 r0)
 {
     struct Sprite *s = &gSprites[gUnknown_0203AB88->var3C[25]];
     s->animCmdIndex = sub_8143614(r0);
     s->oam.tileNum = s->sheetTileStart + (*s->anims + s->animCmdIndex)->type;
 }
 
-void sub_814372C(u8 r0)
+static void sub_814372C(u8 r0)
 {
     u8 i;
     u8 t = 0;
@@ -3783,12 +3717,12 @@ void sub_814372C(u8 r0)
     }
 }
 
-void sub_814390C(struct Sprite *sprite)
+static void sub_814390C(struct Sprite *sprite)
 {
     sprite->pos2.x = gUnknown_0203AB88->var26;
 }
 
-void sub_814391C(void)
+static void sub_814391C(void)
 {
     u8 spriteId;
     struct SpriteSheet s;
@@ -3805,7 +3739,7 @@ void sub_814391C(void)
     gSprites[spriteId].coordOffsetEnabled = TRUE;
 }
 
-void sub_814399C(struct Sprite *sprite)
+static void sub_814399C(struct Sprite *sprite)
 {
     u32 t = sprite->oam.matrixNum;
     struct OamMatrix *m = &gOamMatrices[0];
@@ -3815,7 +3749,7 @@ void sub_814399C(struct Sprite *sprite)
     m[t].c = gUnknown_0203AB88->var2C.c;
 }
 
-void sub_81439C8(void)
+static void sub_81439C8(void)
 {
     u8 i;
     for (i = 0; i < 6; i++)
@@ -3829,7 +3763,7 @@ void sub_81439C8(void)
     }
 }
 
-void sub_8143A40(void)
+static void sub_8143A40(void)
 {
     u8 t = gUnknown_0203AB88->var3C[0];
     u8 i;
@@ -3847,7 +3781,7 @@ void sub_8143A40(void)
     }
 }
 
-s16 sub_8143AC8(struct Sprite *sprite)
+static s16 sub_8143AC8(struct Sprite *sprite)
 {
     if (gUnknown_0203AB88->var24 > sprite->data[3])
     {
@@ -3863,13 +3797,13 @@ s16 sub_8143AC8(struct Sprite *sprite)
     return sprite->data[6];
 }
 
-u8 sub_8143B14(struct Sprite *sprite)
+static u8 sub_8143B14(struct Sprite *sprite)
 {
     gUnknown_0203AB88->var7E = sub_8143AC8(sprite) / 30.0f;
     return gUnknown_0203AB88->var7E;
 }
 
-s16 sub_8143B48(struct Sprite *sprite)
+static s16 sub_8143B48(struct Sprite *sprite)
 {
     s16 t = sub_8143AC8(sprite) % 30;
     u16 z;
@@ -3890,7 +3824,7 @@ s16 sub_8143B48(struct Sprite *sprite)
     }
 }
 
-void sub_8143B84(struct Sprite *sprite)
+static void sub_8143B84(struct Sprite *sprite)
 {
     s16 sin, cos;
 
@@ -3917,7 +3851,7 @@ void sub_8143B84(struct Sprite *sprite)
     }
 }
 
-void sub_8143C90(struct Sprite *sprite)
+static void sub_8143C90(struct Sprite *sprite)
 {
     s16 sin, cos;
     sprite->data[3] = gUnknown_0203AB88->var24 + sprite->data[6];
@@ -3930,7 +3864,7 @@ void sub_8143C90(struct Sprite *sprite)
     sprite->pos2.y += gSpriteCoordOffsetY;
 }
 
-void sub_8143CFC(struct Sprite *sprite)
+static void sub_8143CFC(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     sprite->data[2]++;
@@ -3978,7 +3912,7 @@ void sub_8143CFC(struct Sprite *sprite)
     }
 }
 
-void sub_8143E14(struct Sprite *sprite)
+static void sub_8143E14(struct Sprite *sprite)
 {
     float f0, f1, f2;
     sub_8143B84(sprite);
@@ -4024,7 +3958,7 @@ void sub_8143E14(struct Sprite *sprite)
     sprite->data[2] = 0;
 }
 
-void sub_8143FA4(struct Sprite *sprite)
+static void sub_8143FA4(struct Sprite *sprite)
 {
     sprite->pos2.y = (s16)(sprite->data[2] * 0.05f * sprite->data[2]) - 45;
     sprite->data[2]++;
@@ -4043,7 +3977,7 @@ void sub_8143FA4(struct Sprite *sprite)
     }
 }
 
-void sub_8144050(struct Sprite *sprite)
+static void sub_8144050(struct Sprite *sprite)
 {
     if (sprite->data[2]++ < 45)
     {
@@ -4079,7 +4013,7 @@ void sub_8144050(struct Sprite *sprite)
     }
 }
 
-void sub_8144128(struct Sprite *sprite)
+static void sub_8144128(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     switch (sprite->data[3])
@@ -4101,7 +4035,7 @@ void sub_8144128(struct Sprite *sprite)
     }
 }
 
-void sub_8144168(struct Sprite *sprite)
+static void sub_8144168(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     switch (gUnknown_0203AB88->var03_0)
@@ -4118,7 +4052,7 @@ void sub_8144168(struct Sprite *sprite)
     }
 }
 
-void prev_quest_read_x24_hm_usage(struct Sprite *sprite)
+static void prev_quest_read_x24_hm_usage(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     if (sprite->data[2]-- == 16)
@@ -4146,7 +4080,7 @@ void prev_quest_read_x24_hm_usage(struct Sprite *sprite)
     }
 }
 
-void sub_8144264(struct Sprite *sprite)
+static void sub_8144264(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     sprite->data[2] = 0;
@@ -4212,7 +4146,7 @@ void sub_8144264(struct Sprite *sprite)
     }
 }
 
-void sub_8144410(struct Sprite *sprite)
+static void sub_8144410(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     if (gUnknown_0203AB88->var8C > 0.5f)
@@ -4241,7 +4175,7 @@ void sub_8144410(struct Sprite *sprite)
     }
 }
 
-void sub_8144514(struct Sprite *sprite)
+static void sub_8144514(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     if (gUnknown_0203AB88->var94 > 40.f)
@@ -4256,7 +4190,7 @@ void sub_8144514(struct Sprite *sprite)
     sprite->callback = sub_8144410;
 }
 
-void sub_81445D8(struct Sprite *sprite)
+static void sub_81445D8(struct Sprite *sprite)
 {
     sub_8143B84(sprite);
     if (gUnknown_0203AB88->var94 > 60.0f)
@@ -4272,7 +4206,7 @@ void sub_81445D8(struct Sprite *sprite)
     sprite->callback = sub_8144514;
 }
 
-void sub_81446AC(struct Sprite *sprite)
+static void sub_81446AC(struct Sprite *sprite)
 {
     sprite->data[1] = 1;
     sprite->data[2] = 0;
@@ -4281,7 +4215,7 @@ void sub_81446AC(struct Sprite *sprite)
     sprite->callback = sub_81445D8;
 }
 
-void sub_81446DC(struct Sprite *sprite)
+static void sub_81446DC(struct Sprite *sprite)
 {
     u16 t;
     u8 i;
@@ -4314,7 +4248,7 @@ void sub_81446DC(struct Sprite *sprite)
     gUnknown_0203AB88->var38 = sprite;
 }
 
-void sub_81448B8(struct Sprite *sprite)
+static void sub_81448B8(struct Sprite *sprite)
 {
     u8 i = 0;
     s16 t;
@@ -4342,7 +4276,7 @@ void sub_81448B8(struct Sprite *sprite)
 }
 
 #ifdef NONMATCHING
-void sub_8144A24(struct Sprite *sprite)
+static void sub_8144A24(struct Sprite *sprite)
 {
     u8 z;
     u16 o;
@@ -4429,7 +4363,7 @@ void sub_8144A24(struct Sprite *sprite)
 }
 #else
 NAKED
-void sub_8144A24(struct Sprite *sprite)
+static void sub_8144A24(struct Sprite *sprite)
 {
     asm_unified("push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -4726,7 +4660,7 @@ _08144C54:\n\
 }
 #endif // NONMATCHING
 
-const u16 gUnknown_085B7B1A[] = {
+static const u16 gUnknown_085B7B1A[] = {
     0x907,
     0x808,
     0x709,
@@ -4739,7 +4673,7 @@ const u16 gUnknown_085B7B1A[] = {
     0x010,
 };
 
-void sub_8144C70(struct Sprite *sprite)
+static void sub_8144C70(struct Sprite *sprite)
 {
     if (sprite->data[1]++ >= sprite->data[3])
     {
@@ -4755,7 +4689,7 @@ void sub_8144C70(struct Sprite *sprite)
     }
 }
 
-void sub_8144CD0(struct Sprite *sprite)
+static void sub_8144CD0(struct Sprite *sprite)
 {
     int p;
     u16 t[][4] = {
@@ -4782,7 +4716,7 @@ void sub_8144CD0(struct Sprite *sprite)
     }
 }
 
-void sub_8144D94(struct Sprite *sprite)
+static void sub_8144D94(struct Sprite *sprite)
 {
     float t;
     sprite->data[1]++;
@@ -4803,7 +4737,7 @@ void sub_8144D94(struct Sprite *sprite)
     }
 }
 
-void sub_8144E60(struct Sprite *sprite)
+static void sub_8144E60(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
     {
@@ -4848,12 +4782,12 @@ void sub_8144E60(struct Sprite *sprite)
     }
 }
 
-void sub_8144F94(struct Sprite *sprite)
+static void sub_8144F94(struct Sprite *sprite)
 {
     sprite->invisible ^= 1;
 }
 
-void sub_8144FB0(struct Sprite *sprite)
+static void sub_8144FB0(struct Sprite *sprite)
 {
     if (sprite->pos1.y > -16)
     {
@@ -4871,7 +4805,7 @@ void sub_8144FB0(struct Sprite *sprite)
     }
 }
 
-void sub_8145030(struct Sprite *sprite)
+static void sub_8145030(struct Sprite *sprite)
 {
     if (sprite->data[1] >= 0)
     {
@@ -4903,7 +4837,7 @@ void sub_8145030(struct Sprite *sprite)
     }
 }
 
-void sub_81450D8(struct Sprite *sprite)
+static void sub_81450D8(struct Sprite *sprite)
 {
     s8 t[2] = {-1, 1};
     s8 z[][2] = {
@@ -4948,7 +4882,7 @@ void sub_81450D8(struct Sprite *sprite)
     }
 }
 
-void sub_8145218(struct Sprite *sprite)
+static void sub_8145218(struct Sprite *sprite)
 {
     s8 t[2] = {-1, 1};
     
@@ -4963,7 +4897,7 @@ void sub_8145218(struct Sprite *sprite)
     }
 }
 
-void sub_8145294(struct Sprite *sprite)
+static void sub_8145294(struct Sprite *sprite)
 {
     if (gUnknown_0203AB88->var38->data[0] == 0)
     {
