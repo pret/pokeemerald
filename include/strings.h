@@ -1990,4 +1990,7 @@ extern const u8 gText_XSentOverY[];
 extern const u8 gText_TakeGoodCareOfX[];
 extern const u8 gText_CommunicationStandby5[];
 
+// roulette
+extern const u8 gUnknown_082A5B89[];
+
 #endif //GUARD_STRINGS_H
