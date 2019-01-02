@@ -63,7 +63,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
 	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
 	setvar VAR_0x4058, 1
-	setflag FLAG_0x06F
+	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setvar VAR_0x40A0, 1
 	fadescreen 1
 	removeobject 6
@@ -225,4 +225,3 @@ MagmaHideout_4F_Text_23ABE2: @ 823ABE2
 	.string "any need for this blasted volcano.\p"
 	.string "I am going after GROUDON, so this\n"
 	.string "is where we part!$"
-

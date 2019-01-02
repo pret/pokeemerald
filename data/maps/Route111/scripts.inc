@@ -6,7 +6,7 @@ Route111_MapScripts:: @ 81F0CA7
 	.byte 0
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC
-	call_if_unset FLAG_0x0E4, Route111_EventScript_1F0CD1
+	call_if_unset FLAG_REGI_DOORS_OPENED, Route111_EventScript_1F0CD1
 	compare VAR_0x40CB, 1
 	call_if_eq Route111_EventScript_1F0CE4
 	end
@@ -136,7 +136,7 @@ Route111_EventScript_1F0E60:: @ 81F0E60
 	waitstate
 	setvar VAR_0x40CB, 2
 	clearflag FLAG_HIDE_DESERT_UNDERPASS_FOSSIL
-	goto_if_set FLAG_0x150, Route111_EventScript_1F0EA7
+	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, Route111_EventScript_1F0EA7
 	msgbox Route111_Text_1F1C74, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -160,12 +160,12 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_0x92C, Route111_EventScript_1F0EF4
+	goto_if_set FLAG_DAILY_ROUTE_111_RECIEVED_BERRY, Route111_EventScript_1F0EF4
 	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_272054
-	setflag FLAG_0x92C
+	setflag FLAG_DAILY_ROUTE_111_RECIEVED_BERRY
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_2A6F3D, MSGBOX_DEFAULT
 	release

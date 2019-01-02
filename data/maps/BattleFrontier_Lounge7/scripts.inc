@@ -5,9 +5,9 @@ BattleFrontier_Lounge7_EventScript_265255:: @ 8265255
 	lock
 	faceplayer
 	setvar VAR_TEMP_C, 9
-	goto_if_set FLAG_0x15A, BattleFrontier_Lounge7_EventScript_265276
+	goto_if_set FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR, BattleFrontier_Lounge7_EventScript_265276
 	msgbox BattleFrontier_Lounge7_Text_2656ED, MSGBOX_DEFAULT
-	setflag FLAG_0x15A
+	setflag FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR
 	goto BattleFrontier_Lounge7_EventScript_265284
 	end
 
@@ -119,9 +119,9 @@ BattleFrontier_Lounge7_EventScript_265445:: @ 8265445
 	lock
 	faceplayer
 	setvar VAR_TEMP_C, 10
-	goto_if_set FLAG_0x15B, BattleFrontier_Lounge7_EventScript_265466
+	goto_if_set FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR, BattleFrontier_Lounge7_EventScript_265466
 	msgbox BattleFrontier_Lounge7_Text_265A6C, MSGBOX_DEFAULT
-	setflag FLAG_0x15B
+	setflag FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR
 	goto BattleFrontier_Lounge7_EventScript_265474
 	end
 
@@ -477,4 +477,3 @@ BattleFrontier_Lounge7_Text_2661B5:: @ 82661B5
 	.string "A fiery punch\n"
 	.string "that may burn\n"
 	.string "the foe.$"
-

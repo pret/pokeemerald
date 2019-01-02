@@ -17,7 +17,7 @@ BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 BattleFrontier_OutsideEast_MapScript1_242C2D: @ 8242C2D
 	setvar VAR_0x40BC, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
-	call_if_unset FLAG_0x1C6, BattleFrontier_OutsideEast_EventScript_242C3F
+	call_if_unset FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_242C3F
 	end
 
 BattleFrontier_OutsideEast_EventScript_242C3F:: @ 8242C3F
@@ -139,12 +139,12 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
 	compare VAR_RESULT, 5
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_242D60
-	setflag FLAG_0x1C6
+	setflag FLAG_DEFEATED_SUDOWOODO
 	release
 	end
 
 BattleFrontier_OutsideEast_EventScript_242D60:: @ 8242D60
-	setflag FLAG_0x1C6
+	setflag FLAG_DEFEATED_SUDOWOODO
 	goto IslandCave_EventScript_27376D
 	end
 
@@ -221,7 +221,7 @@ BattleFrontier_OutsideEast_EventScript_242DE0:: @ 8242DE0
 BattleFrontier_OutsideEast_EventScript_242DE9:: @ 8242DE9
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1C6, BattleFrontier_OutsideEast_EventScript_242DFE
+	goto_if_set FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_242DFE
 	msgbox BattleFrontier_OutsideEast_Text_243C2C, MSGBOX_DEFAULT
 	release
 	end

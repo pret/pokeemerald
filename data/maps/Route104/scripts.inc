@@ -19,7 +19,7 @@ Route104_MapScript1_1ECC4E: @ 81ECC4E
 	end
 
 Route104_EventScript_1ECC5E:: @ 81ECC5E
-	goto_if_unset FLAG_0x07F, Route104_EventScript_1ECC74
+	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_EventScript_1ECC74
 	goto_if_unset FLAG_BADGE03_GET, Route104_EventScript_1ECC74
 	clearflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
@@ -31,8 +31,8 @@ Route104_EventScript_1ECC74:: @ 81ECC74
 Route104_EventScript_1ECC78:: @ 81ECC78
 	compare VAR_0x408E, 1
 	goto_if_ge Route104_EventScript_1ECC9D
-	goto_if_set FLAG_0x120, Route104_EventScript_1ECC9D
-	goto_if_unset FLAG_0x07C, Route104_EventScript_1ECC9D
+	goto_if_set FLAG_MET_RIVAL_RUSTBORO, Route104_EventScript_1ECC9D
+	goto_if_unset FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_1ECC9D
 	setobjectxyperm 34, 17, 52
 	return
 
@@ -95,9 +95,9 @@ Route104_EventScript_1ECD33:: @ 81ECD33
 	end
 
 Route104_EventScript_1ECD4B:: @ 81ECD4B
-	goto_if_set FLAG_0x07D, Route104_EventScript_1ECE1C
-	goto_if_set FLAG_0x07C, Route104_EventScript_1ECDD0
-	setflag FLAG_0x07C
+	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, Route104_EventScript_1ECE1C
+	goto_if_set FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_1ECDD0
+	setflag FLAG_REGISTER_RIVAL_POKENAV
 	msgbox Route104_Text_1EDBFF, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -106,7 +106,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0FD
+	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ECDCD
 	applymovement 34, Route104_Movement_1ECDC8
 	msgbox Route104_Text_1EDCB1, MSGBOX_DEFAULT
@@ -167,26 +167,26 @@ Route104_EventScript_1ECE31:: @ 81ECE31
 
 Route104_EventScript_1ECE36:: @ 81ECE36
 	trainerbattle_no_intro TRAINER_MAY_14, Route104_Text_1EDE18
-	setflag FLAG_0x07D
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_1ECE1C
 	end
 
 Route104_EventScript_1ECE49:: @ 81ECE49
 	trainerbattle_no_intro TRAINER_MAY_15, Route104_Text_1EDE18
-	setflag FLAG_0x07D
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_1ECE1C
 	end
 
 Route104_EventScript_1ECE5C:: @ 81ECE5C
 	trainerbattle_no_intro TRAINER_MAY_10, Route104_Text_1EDE18
-	setflag FLAG_0x07D
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_1ECE1C
 	end
 
 Route104_EventScript_1ECE6F:: @ 81ECE6F
-	goto_if_set FLAG_0x07D, Route104_EventScript_1ECF38
-	goto_if_set FLAG_0x07C, Route104_EventScript_1ECEEC
-	setflag FLAG_0x07C
+	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, Route104_EventScript_1ECF38
+	goto_if_set FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_1ECEEC
+	setflag FLAG_REGISTER_RIVAL_POKENAV
 	msgbox Route104_Text_1EDF04, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -195,7 +195,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0FD
+	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ECDCD
 	applymovement 34, Route104_Movement_1ECDC8
 	msgbox Route104_Text_1EDFC6, MSGBOX_DEFAULT
@@ -237,19 +237,19 @@ Route104_EventScript_1ECF38:: @ 81ECF38
 
 Route104_EventScript_1ECF4D:: @ 81ECF4D
 	trainerbattle_no_intro TRAINER_BRENDAN_10, Route104_Text_1EE107
-	setflag FLAG_0x07D
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_1ECF38
 	end
 
 Route104_EventScript_1ECF60:: @ 81ECF60
 	trainerbattle_no_intro TRAINER_BRENDAN_12, Route104_Text_1EE107
-	setflag FLAG_0x07D
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_1ECF38
 	end
 
 Route104_EventScript_1ECF73:: @ 81ECF73
 	trainerbattle_no_intro TRAINER_BRENDAN_11, Route104_Text_1EE107
-	setflag FLAG_0x07D
+	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_1ECF38
 	end
 
@@ -266,12 +266,12 @@ Route104_Movement_1ECF8A: @ 81ECF8A
 Route104_EventScript_1ECF8C:: @ 81ECF8C
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0F6, Route104_EventScript_1ECFC3
+	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_1ECFC3
 	msgbox Route104_Text_2A6D86, MSGBOX_DEFAULT
 	giveitem_std ITEM_CHESTO_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_272054
-	setflag FLAG_0x0F6
+	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 	msgbox Route104_Text_2A6E32, MSGBOX_DEFAULT
 	release
 	end
@@ -284,12 +284,12 @@ Route104_EventScript_1ECFC3:: @ 81ECFC3
 Route104_EventScript_1ECFCD:: @ 81ECFCD
 	lock
 	faceplayer
-	goto_if_set FLAG_0x117, Route104_EventScript_1ECFFC
+	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_1ECFFC
 	msgbox Route104_Text_1ED96A, MSGBOX_DEFAULT
 	giveitem_std ITEM_WHITE_HERB
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_272054
-	setflag FLAG_0x117
+	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
 
@@ -337,12 +337,12 @@ Route104_EventScript_1ED04E:: @ 81ED04E
 Route104_EventScript_1ED057:: @ 81ED057
 	lock
 	faceplayer
-	goto_if_set FLAG_0x106, Route104_EventScript_1ED086
+	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_1ED086
 	msgbox Route104_Text_1ED838, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM09
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_EventScript_272054
-	setflag FLAG_0x106
+	setflag FLAG_RECEIVED_TM09
 	release
 	end
 
@@ -365,8 +365,8 @@ Route104_EventScript_1ED099:: @ 81ED099
 	waitmovement 0
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_ROUTE104
 	call Route104_EventScript_2720A0
-	goto_if_set FLAG_0x132, Route104_EventScript_1ED0D9
-	goto_if_unset FLAG_0x132, Route104_EventScript_1ED0EF
+	goto_if_set FLAG_ENABLE_NORMAN_MATCH_CALL, Route104_EventScript_1ED0D9
+	goto_if_unset FLAG_ENABLE_NORMAN_MATCH_CALL, Route104_EventScript_1ED0EF
 	end
 
 Route104_EventScript_1ED0D9:: @ 81ED0D9
@@ -387,7 +387,7 @@ Route104_EventScript_1ED0EF:: @ 81ED0EF
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x132
+	setflag FLAG_ENABLE_NORMAN_MATCH_CALL
 	applymovement EVENT_OBJ_ID_PLAYER, Route104_Movement_1ED22A
 	applymovement 7, Route104_Movement_1ED22A, MAP_ROUTE104
 	waitmovement 7, MAP_ROUTE104
@@ -418,8 +418,8 @@ Route104_EventScript_1ED139:: @ 81ED139
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2
 	setvar VAR_0x408E, 0
-	goto_if_unset FLAG_0x0BD, Route104_EventScript_1ED1B4
-	goto_if_set FLAG_0x0BD, Route104_EventScript_1ED1BE
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1B4
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_1ED1BE
 	end
 
 Route104_EventScript_1ED1B4:: @ 81ED1B4
@@ -1185,4 +1185,3 @@ Route104_Text_1EE120: @ 81EE120
 	.string "making POKéMON battle.\p"
 	.string "Like MR. BRINEY, it's important to\n"
 	.string "become friends with your POKéMON.$"
-

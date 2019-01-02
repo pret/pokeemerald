@@ -7,9 +7,9 @@ SootopolisCity_MapScripts:: @ 81E565C
 	.byte 0
 
 SootopolisCity_MapScript1_1E5676: @ 81E5676
-	call_if_unset FLAG_0x09E, SootopolisCity_EventScript_1E56E5
-	goto_if_unset FLAG_0x081, SootopolisCity_EventScript_1E5692
-	call_if_unset FLAG_0x09E, SootopolisCity_EventScript_1E5693
+	call_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_1E56E5
+	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_EventScript_1E5692
+	call_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_1E5693
 	end
 
 SootopolisCity_EventScript_1E5692:: @ 81E5692
@@ -121,7 +121,7 @@ SootopolisCity_EventScript_1E583E:: @ 81E583E
 	return
 
 SootopolisCity_EventScript_1E5842:: @ 81E5842
-	goto_if_set FLAG_0x133, SootopolisCity_EventScript_1E584C
+	goto_if_set FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN, SootopolisCity_EventScript_1E584C
 	return
 
 SootopolisCity_EventScript_1E584C:: @ 81E584C
@@ -744,7 +744,7 @@ SootopolisCity_EventScript_1E5F10:: @ 81E5F10
 SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	dodailyevents
 	special GetPlayerBigGuyGirlString
-	goto_if_set FLAG_0x932, SootopolisCity_EventScript_1E5FBB
+	goto_if_set FLAG_DAILY_SOOTOPOLIS_RECIEVED_BERRY, SootopolisCity_EventScript_1E5FBB
 	msgbox SootopolisCity_Text_2A7BB0, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
@@ -752,7 +752,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_272054
-	setflag FLAG_0x932
+	setflag FLAG_DAILY_SOOTOPOLIS_RECIEVED_BERRY
 	msgbox SootopolisCity_Text_2A7C7C, MSGBOX_DEFAULT
 	random 2
 	compare VAR_RESULT, 0
@@ -929,14 +929,14 @@ SootopolisCity_EventScript_1E6166:: @ 81E6166
 	lockall
 	applymovement 7, SootopolisCity_Movement_27259E
 	waitmovement 0
-	call_if_unset FLAG_0x133, SootopolisCity_EventScript_1E61CC
+	call_if_unset FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN, SootopolisCity_EventScript_1E61CC
 	compare VAR_0x405E, 2
 	goto_if_eq SootopolisCity_EventScript_1E61AE
 	compare VAR_0x405E, 3
 	goto_if_eq SootopolisCity_EventScript_1E61C2
 	compare VAR_0x405E, 4
 	goto_if_eq SootopolisCity_EventScript_1E61C2
-	goto_if_set FLAG_0x09E, SootopolisCity_EventScript_1E61B8
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_1E61B8
 	msgbox SootopolisCity_Text_1E78E5, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -976,7 +976,7 @@ SootopolisCity_EventScript_1E61CC:: @ 81E61CC
 	waitmovement 0
 	msgbox SootopolisCity_Text_1E77F0, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_0x133
+	setflag FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN
 	applymovement EVENT_OBJ_ID_PLAYER, SootopolisCity_Movement_1E635A
 	waitmovement 0
 	warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 255, 9, 20
@@ -1342,8 +1342,8 @@ SootopolisCity_EventScript_1E6446:: @ 81E6446
 	faceplayer
 	compare VAR_0x405E, 4
 	goto_if_eq SootopolisCity_EventScript_1E64D8
-	goto_if_set FLAG_0x138, SootopolisCity_EventScript_1E64E2
-	goto_if_set FLAG_0x09E, SootopolisCity_EventScript_1E646F
+	goto_if_set FLAG_RECEIVED_HM07, SootopolisCity_EventScript_1E64E2
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_1E646F
 	msgbox SootopolisCity_Text_1E7A3E, MSGBOX_DEFAULT
 	release
 	end
@@ -1351,7 +1351,7 @@ SootopolisCity_EventScript_1E6446:: @ 81E6446
 SootopolisCity_EventScript_1E646F:: @ 81E646F
 	msgbox SootopolisCity_Text_1E7ACF, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM07
-	setflag FLAG_0x138
+	setflag FLAG_RECEIVED_HM07
 	msgbox SootopolisCity_Text_1E7B86, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2
@@ -1408,8 +1408,8 @@ SootopolisCity_EventScript_1E64F2:: @ 81E64F2
 
 SootopolisCity_EventScript_1E6509:: @ 81E6509
 	msgbox SootopolisCity_Text_1E737E, MSGBOX_DEFAULT
-	setflag FLAG_0x135
-	goto_if_set FLAG_0x134, SootopolisCity_EventScript_1E654C
+	setflag FLAG_MET_MAXIE_SOOTOPOLIS
+	goto_if_set FLAG_MET_ARCHIE_SOOTOPOLIS, SootopolisCity_EventScript_1E654C
 	releaseall
 	end
 
@@ -1424,15 +1424,15 @@ SootopolisCity_EventScript_1E651F:: @ 81E651F
 
 SootopolisCity_EventScript_1E6536:: @ 81E6536
 	msgbox SootopolisCity_Text_1E74F6, MSGBOX_DEFAULT
-	setflag FLAG_0x134
-	goto_if_set FLAG_0x135, SootopolisCity_EventScript_1E654C
+	setflag FLAG_MET_ARCHIE_SOOTOPOLIS
+	goto_if_set FLAG_MET_MAXIE_SOOTOPOLIS, SootopolisCity_EventScript_1E654C
 	releaseall
 	end
 
 SootopolisCity_EventScript_1E654C:: @ 81E654C
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
-	setflag FLAG_0x09E
+	setflag FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setvar VAR_0x40B9, 2

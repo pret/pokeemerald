@@ -4,13 +4,13 @@ MossdeepCity_House3_MapScripts:: @ 82225C2
 MossdeepCity_House3_EventScript_2225C3:: @ 82225C3
 	lock
 	faceplayer
-	goto_if_set FLAG_0x098, MossdeepCity_House3_EventScript_222602
+	goto_if_set FLAG_RECEIVED_SUPER_ROD, MossdeepCity_House3_EventScript_222602
 	msgbox MossdeepCity_House3_Text_222616, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_House3_EventScript_22260C
 	msgbox MossdeepCity_House3_Text_2226B6, MSGBOX_DEFAULT
 	giveitem_std ITEM_SUPER_ROD
-	setflag FLAG_0x098
+	setflag FLAG_RECEIVED_SUPER_ROD
 	msgbox MossdeepCity_House3_Text_2226F0, MSGBOX_DEFAULT
 	release
 	end

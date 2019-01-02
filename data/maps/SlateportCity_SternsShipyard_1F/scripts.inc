@@ -5,8 +5,8 @@ SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 	lockall
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_SternsShipyard_1F_EventScript_207F92
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_SternsShipyard_1F_EventScript_207FA6
-	goto_if_set FLAG_0x095, SlateportCity_SternsShipyard_1F_EventScript_207FD9
-	goto_if_set FLAG_0x094, SlateportCity_SternsShipyard_1F_EventScript_207FBA
+	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_207FD9
+	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_207FBA
 	msgbox SlateportCity_SternsShipyard_1F_Text_208008, MSGBOX_DEFAULT
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_27259E
 	waitmovement 0
@@ -14,7 +14,7 @@ SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 	closemessage
 	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_2725A2
 	waitmovement 0
-	setflag FLAG_0x094
+	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
 	releaseall
 	end

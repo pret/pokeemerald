@@ -272,7 +272,7 @@ Route109_Movement_1EE90D: @ 81EE90D
 Route109_EventScript_1EE910:: @ 81EE910
 	lock
 	faceplayer
-	goto_if_unset FLAG_0x095, Route109_EventScript_1EE921
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, Route109_EventScript_1EE921
 	goto Route109_EventScript_1EE93F
 	end
 
@@ -328,7 +328,7 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	goto_if_set FLAG_0x118, Route109_EventScript_1EE9F2
+	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_1EE9F2
 	msgbox Route109_Text_1EEFDE, MSGBOX_DEFAULT
 	giveitem_std ITEM_SOFT_SAND
 	compare VAR_RESULT, 0
@@ -336,7 +336,7 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	closemessage
 	applymovement VAR_LAST_TALKED, Route109_Movement_2725A2
 	waitmovement 0
-	setflag FLAG_0x118
+	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 

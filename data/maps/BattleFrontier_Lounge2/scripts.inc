@@ -4,8 +4,8 @@ BattleFrontier_Lounge2_MapScripts:: @ 8260642
 BattleFrontier_Lounge2_EventScript_260643:: @ 8260643
 	lock
 	faceplayer
-	goto_if_set FLAG_0x154, BattleFrontier_Lounge2_EventScript_26065F
-	setflag FLAG_0x154
+	goto_if_set FLAG_MET_BATTLE_FRONTIER_MANIAC, BattleFrontier_Lounge2_EventScript_26065F
+	setflag FLAG_MET_BATTLE_FRONTIER_MANIAC
 	msgbox BattleFrontier_Lounge2_Text_260766, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge2_EventScript_26066D
 	end

@@ -131,7 +131,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	clearflag FLAG_HIDE_ROUTE_128_ARCHIE
 	clearflag FLAG_HIDE_ROUTE_128_MAXIE
 	setflag FLAG_SYS_WEATHER_CTRL
-	setflag FLAG_0x081
+	setflag FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN
 	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
 	setvar VAR_0x40C6, 2
 	setvar VAR_0x40A2, 1
@@ -320,4 +320,3 @@ SeafloorCavern_Room9_Text_235692: @ 8235692
 SeafloorCavern_Room9_Text_235723: @ 8235723
 	.string "MAXIE: {PLAYER}, come on, you have\n"
 	.string "to get out of here, too!$"
-

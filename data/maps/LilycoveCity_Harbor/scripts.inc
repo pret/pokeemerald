@@ -112,40 +112,40 @@ LilycoveCity_Harbor_EventScript_21E194:: @ 821E194
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_E, 1
-	goto_if_set FLAG_0x1AE, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_E, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1C6:: @ 821E1C6
 	setvar VAR_TEMP_D, 0
-	goto_if_unset FLAG_0x8D5, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_D, 1
-	goto_if_set FLAG_0x1AF, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_AURORA_TICKET, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_D, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E1F8:: @ 821E1F8
 	setvar VAR_TEMP_C, 0
-	goto_if_unset FLAG_0x8D6, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_ENABLE_SHIP_FARAWAY_ISLAND, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_OLD_SEA_MAP, 1
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_C, 1
-	goto_if_set FLAG_0x1B0, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_OLD_SEA_MAP, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_C, 2
 	return
 
 LilycoveCity_Harbor_EventScript_21E22A:: @ 821E22A
 	setvar VAR_TEMP_9, 0
-	goto_if_unset FLAG_0x8E0, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_9, 1
-	goto_if_set FLAG_0x1DB, LilycoveCity_Harbor_EventScript_27374E
+	goto_if_set FLAG_HAS_MYSTIC_TICKET, LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_TEMP_9, 2
 	return
 
@@ -206,7 +206,7 @@ LilycoveCity_Harbor_EventScript_21E2EA:: @ 821E2EA
 	return
 
 LilycoveCity_Harbor_EventScript_21E2F0:: @ 821E2F0
-	setflag FLAG_0x1AE
+	setflag FLAG_HAS_EON_TICKET
 	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
@@ -223,7 +223,7 @@ LilycoveCity_Harbor_EventScript_21E30F:: @ 821E30F
 	end
 
 LilycoveCity_Harbor_EventScript_21E320:: @ 821E320
-	setflag FLAG_0x1AF
+	setflag FLAG_HAS_AURORA_TICKET
 	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
@@ -240,7 +240,7 @@ LilycoveCity_Harbor_EventScript_21E33F:: @ 821E33F
 	end
 
 LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
-	setflag FLAG_0x1B0
+	setflag FLAG_HAS_OLD_SEA_MAP
 	msgbox LilycoveCity_Harbor_Text_2A6848, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
@@ -289,7 +289,7 @@ LilycoveCity_Harbor_EventScript_21E40C:: @ 821E40C
 	end
 
 LilycoveCity_Harbor_EventScript_21E41D:: @ 821E41D
-	setflag FLAG_0x1DB
+	setflag FLAG_HAS_MYSTIC_TICKET
 	msgbox LilycoveCity_Harbor_Text_2A68D2, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_21E4EE
@@ -617,4 +617,3 @@ LilycoveCity_Harbor_Text_21E976: @ 821E976
 	.string "The folks at the SHIPYARD in SLATEPORT\n"
 	.string "must've worked extra hard.\p"
 	.string "Well, it's my turn to get busy now!$"
-

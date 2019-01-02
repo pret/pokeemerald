@@ -88,14 +88,13 @@ ShoalCave_LowTideEntranceRoom_EventScript_236ECF:: @ 8236ECF
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236ED9:: @ 8236ED9
-	clearflag FLAG_0x3B8
-	clearflag FLAG_0x3B9
-	clearflag FLAG_0x3BA
-	clearflag FLAG_0x3BB
-	clearflag FLAG_0x3BC
-	clearflag FLAG_0x3BD
-	clearflag FLAG_0x3BE
-	clearflag FLAG_0x3BF
+	clearflag FLAG_RECIEVED_SHOAL_SALT_1
+	clearflag FLAG_RECIEVED_SHOAL_SALT_2
+	clearflag FLAG_RECIEVED_SHOAL_SALT_3
+	clearflag FLAG_RECIEVED_SHOAL_SALT_4
+	clearflag FLAG_RECIEVED_SHOAL_SHELL_1
+	clearflag FLAG_RECIEVED_SHOAL_SHELL_2
+	clearflag FLAG_RECIEVED_SHOAL_SHELL_3
+	clearflag FLAG_RECIEVED_SHOAL_SHELL_4
 	clearflag FLAG_SYS_SHOAL_ITEM
 	return
-

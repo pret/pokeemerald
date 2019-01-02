@@ -11,7 +11,7 @@ MossdeepCity_SpaceCenter_2F_MapScript1_223D63: @ 8223D63
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223D7A:: @ 8223D7A
-	clearflag FLAG_0x0CD
+	clearflag FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER
 	setobjectxyperm 3, 5, 3
 	setobjectmovementtype 3, 10
 	setobjectxyperm 1, 3, 2
@@ -186,8 +186,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F6F:: @ 8223F6F
 
 MossdeepCity_SpaceCenter_2F_EventScript_223F7A:: @ 8223F7A
 	lockall
-	goto_if_set FLAG_0x0CD, MossdeepCity_SpaceCenter_2F_EventScript_223FDA
-	setflag FLAG_0x0CD
+	goto_if_set FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER, MossdeepCity_SpaceCenter_2F_EventScript_223FDA
+	setflag FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2246B2, MSGBOX_DEFAULT
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2246F0, MSGBOX_DEFAULT
 	closemessage
@@ -310,7 +310,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	msgbox MossdeepCity_SpaceCenter_2F_Text_224A4A, MSGBOX_DEFAULT
 	closemessage
 	fadescreen 1
-	setflag FLAG_0x075
+	setflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
 	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
 	removeobject 4
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_INVISIBLE_NINJA_BOY
@@ -354,7 +354,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224175:: @ 8224175
 	compare VAR_RESULT, 1
 	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_22419A
 	closemessage
-	clearflag FLAG_0x075
+	clearflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
 	releaseall
 	end
 
@@ -517,4 +517,3 @@ MossdeepCity_SpaceCenter_2F_Text_224A4A: @ 8224A4A
 	.string "after this.\p"
 	.string "Oh, yes, I don't live in RUSTBORO CITY.\n"
 	.string "I live right here on this island.$"
-

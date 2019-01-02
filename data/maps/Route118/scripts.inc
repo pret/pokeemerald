@@ -28,7 +28,7 @@ Route118_MapScript2_1F3E0A: @ 81F3E0A
 Route118_EventScript_1F3E14:: @ 81F3E14
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0E3, Route118_EventScript_1F3E69
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_1F3E69
 	msgbox Route118_Text_1F427B, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq Route118_EventScript_1F3E3E
@@ -39,7 +39,7 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 Route118_EventScript_1F3E3E:: @ 81F3E3E
 	msgbox Route118_Text_1F42AF, MSGBOX_DEFAULT
 	giveitem_std ITEM_GOOD_ROD
-	setflag FLAG_0x0E3
+	setflag FLAG_RECEIVED_GOOD_ROD
 	msgbox Route118_Text_1F42E7, MSGBOX_DEFAULT
 	release
 	end

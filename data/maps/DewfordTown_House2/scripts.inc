@@ -4,12 +4,12 @@ DewfordTown_House2_MapScripts:: @ 81FE22D
 DewfordTown_House2_EventScript_1FE22E:: @ 81FE22E
 	lock
 	faceplayer
-	goto_if_set FLAG_0x121, DewfordTown_House2_EventScript_1FE267
+	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_1FE267
 	msgbox DewfordTown_House2_Text_1FE27A, MSGBOX_DEFAULT
 	giveitem_std ITEM_SILK_SCARF
 	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_House2_EventScript_1FE25D
-	setflag FLAG_0x121
+	setflag FLAG_RECEIVED_SILK_SCARF
 	release
 	end
 

@@ -4,27 +4,27 @@ LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 821973A
 	.byte 0
 
 LilycoveCity_LilycoveMuseum_2F_MapScript1_219745: @ 8219745
-	goto_if_set FLAG_0x0A0, LilycoveCity_LilycoveMuseum_2F_EventScript_21978B
+	goto_if_set FLAG_COOL_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_21978B
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219754
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219754:: @ 8219754
-	goto_if_set FLAG_0x0A1, LilycoveCity_LilycoveMuseum_2F_EventScript_2197A3
+	goto_if_set FLAG_BEAUTY_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2197A3
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219763
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219763:: @ 8219763
-	goto_if_set FLAG_0x0A2, LilycoveCity_LilycoveMuseum_2F_EventScript_2197BB
+	goto_if_set FLAG_CUTE_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2197BB
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219772
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219772:: @ 8219772
-	goto_if_set FLAG_0x0A3, LilycoveCity_LilycoveMuseum_2F_EventScript_2197D3
+	goto_if_set FLAG_SMART_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2197D3
 	goto LilycoveCity_LilycoveMuseum_2F_EventScript_219781
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219781:: @ 8219781
-	goto_if_set FLAG_0x0A4, LilycoveCity_LilycoveMuseum_2F_EventScript_2197EB
+	goto_if_set FLAG_TOUGH_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2197EB
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21978B:: @ 821978B
@@ -91,7 +91,7 @@ LilycoveCity_LilycoveMuseum_2F_Movement_219863: @ 8219863
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219866:: @ 8219866
 	lockall
-	goto_if_set FLAG_0x0EC, LilycoveCity_LilycoveMuseum_2F_EventScript_219921
+	goto_if_set FLAG_RECEIVED_GLASS_ORNAMENT, LilycoveCity_LilycoveMuseum_2F_EventScript_219921
 	specialvar VAR_0x8004, sub_80F8940
 	switch VAR_0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA
@@ -121,7 +121,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 	givedecoration_std 44
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219911
-	setflag FLAG_0x0EC
+	setflag FLAG_RECEIVED_GLASS_ORNAMENT
 	closemessage
 	releaseall
 	end
@@ -140,31 +140,31 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_219921:: @ 8219921
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21992B:: @ 821992B
 	lockall
-	goto_if_set FLAG_0x0A2, LilycoveCity_LilycoveMuseum_2F_EventScript_2199C1
+	goto_if_set FLAG_CUTE_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2199C1
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FA0, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_21993E:: @ 821993E
 	lockall
-	goto_if_set FLAG_0x0A4, LilycoveCity_LilycoveMuseum_2F_EventScript_2199DD
+	goto_if_set FLAG_TOUGH_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2199DD
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219FD3, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219951:: @ 8219951
 	lockall
-	goto_if_set FLAG_0x0A0, LilycoveCity_LilycoveMuseum_2F_EventScript_2199A5
+	goto_if_set FLAG_COOL_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2199A5
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A03B, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219964:: @ 8219964
 	lockall
-	goto_if_set FLAG_0x0A1, LilycoveCity_LilycoveMuseum_2F_EventScript_2199B3
+	goto_if_set FLAG_BEAUTY_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2199B3
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A008, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219977:: @ 8219977
 	lockall
-	goto_if_set FLAG_0x0A3, LilycoveCity_LilycoveMuseum_2F_EventScript_2199CF
+	goto_if_set FLAG_SMART_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_2199CF
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_21A06D, MSGBOX_SIGN
 	end
 

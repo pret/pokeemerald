@@ -17,7 +17,7 @@ AncientTomb_EventScript_238FCD:: @ 8238FCD
 
 AncientTomb_MapScript1_238FE1: @ 8238FE1
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
-	call_if_unset FLAG_0x1BD, AncientTomb_EventScript_238FEE
+	call_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_EventScript_238FEE
 	end
 
 AncientTomb_EventScript_238FEE:: @ 8238FEE
@@ -78,12 +78,12 @@ AncientTomb_EventScript_23905A:: @ 823905A
 	goto_if_eq AncientTomb_EventScript_2390AA
 	compare VAR_RESULT, 5
 	goto_if_eq AncientTomb_EventScript_2390AA
-	setflag FLAG_0x1BD
+	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end
 
 AncientTomb_EventScript_2390A1:: @ 82390A1
-	setflag FLAG_0x1BD
+	setflag FLAG_DEFEATED_REGISTEEL
 	goto AncientTomb_EventScript_27376D
 	end
 

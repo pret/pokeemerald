@@ -5,9 +5,9 @@ OldaleTown_MapScripts:: @ 81E8EA2
 OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
 	call OldaleTown_EventScript_271ED7
 	setflag FLAG_VISITED_OLDALE_TOWN
-	call_if_unset FLAG_0x074, OldaleTown_EventScript_1E8ED2
-	call_if_unset FLAG_0x084, OldaleTown_EventScript_1E8EDE
-	call_if_set FLAG_0x074, OldaleTown_EventScript_1E8ECC
+	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E8ED2
+	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_1E8EDE
+	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E8ECC
 	end
 
 OldaleTown_EventScript_1E8ECC:: @ 81E8ECC
@@ -35,7 +35,7 @@ OldaleTown_EventScript_1E8EF3:: @ 81E8EF3
 OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 	lock
 	faceplayer
-	goto_if_set FLAG_0x084, OldaleTown_EventScript_1E8FB9
+	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_1E8FB9
 	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_1E8FB9
 	setflag FLAG_TEMP_1
 	playbgm MUS_TSURETEK, 0
@@ -74,7 +74,7 @@ OldaleTown_EventScript_1E8F8C:: @ 81E8F8C
 	compare VAR_RESULT, 0
 	goto_if_eq OldaleTown_EventScript_1E8FC3
 	msgbox OldaleTown_Text_1E92AF, MSGBOX_DEFAULT
-	setflag FLAG_0x084
+	setflag FLAG_RECEIVED_POTION_OLDALE
 	fadedefaultbgm
 	release
 	end
@@ -190,7 +190,7 @@ OldaleTown_Movement_1E9013: @ 81E9013
 OldaleTown_EventScript_1E901F:: @ 81E901F
 	lock
 	faceplayer
-	goto_if_set FLAG_0x074, OldaleTown_EventScript_1E9066
+	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E9066
 	msgbox OldaleTown_Text_1E939A, MSGBOX_DEFAULT
 	closemessage
 	applymovement 3, OldaleTown_Movement_2725A2

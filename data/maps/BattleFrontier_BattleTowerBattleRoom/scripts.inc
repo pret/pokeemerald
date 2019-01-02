@@ -513,7 +513,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_2421FC:: @ 82421FC
 	end
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_24220E:: @ 824220E
-	setflag FLAG_0x077
+	setflag FLAG_CANCEL_BATTLE_ROOM_CHALLENGE
 	goto BattleFrontier_BattleTowerBattleRoom_EventScript_241C03
 	end
 

@@ -9,8 +9,8 @@ DesertUnderpass_MapScript1_23AF3D: @ 823AF3D
 DesertUnderpass_EventScript_23AF41:: @ 823AF41
 	lock
 	faceplayer
-	goto_if_set FLAG_0x14F, DesertUnderpass_EventScript_23AF57
-	goto_if_set FLAG_0x150, DesertUnderpass_EventScript_23AF68
+	goto_if_set FLAG_CHOSE_CLAW_FOSSIL, DesertUnderpass_EventScript_23AF57
+	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, DesertUnderpass_EventScript_23AF68
 	release
 	end
 

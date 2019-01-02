@@ -6,8 +6,8 @@ RustboroCity_Mart_EventScript_214F06:: @ 8214F06
 	faceplayer
 	message gUnknown_08272A21
 	waitmessage
-	goto_if_unset FLAG_0x11F, RustboroCity_Mart_EventScript_214F21
-	goto_if_set FLAG_0x11F, RustboroCity_Mart_EventScript_214F48
+	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_214F21
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_214F48
 	end
 
 RustboroCity_Mart_EventScript_214F21:: @ 8214F21

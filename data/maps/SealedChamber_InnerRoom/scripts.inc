@@ -6,7 +6,7 @@ SealedChamber_InnerRoom_EventScript_2391F8:: @ 82391F8
 	braillemessage SealedChamber_InnerRoom_Braille_2A6B99
 	waitbuttonpress
 	hidebox2
-	goto_if_set FLAG_0x0E4, SealedChamber_InnerRoom_EventScript_239253
+	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_239253
 	specialvar VAR_RESULT, CheckRelicanthWailord
 	compare VAR_RESULT, 0
 	goto_if_eq SealedChamber_InnerRoom_EventScript_239253
@@ -30,7 +30,7 @@ SealedChamber_InnerRoom_EventScript_2391F8:: @ 82391F8
 	msgbox gUnknown_0827301B, MSGBOX_DEFAULT
 	closemessage
 	fadeinbgm 0
-	setflag FLAG_0x0E4
+	setflag FLAG_REGI_DOORS_OPENED
 	releaseall
 	end
 

@@ -4,7 +4,7 @@ RustboroCity_House1_MapScripts:: @ 821593E
 RustboroCity_House1_EventScript_21593F:: @ 821593F
 	lock
 	faceplayer
-	goto_if_set FLAG_0x099, RustboroCity_House1_EventScript_2159D5
+	goto_if_set FLAG_RUSTBORO_NPC_TRADE_COMPLETED, RustboroCity_House1_EventScript_2159D5
 	setvar VAR_0x8008, 0
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, sub_807E73C
@@ -28,7 +28,7 @@ RustboroCity_House1_EventScript_21593F:: @ 821593F
 	special sub_807F0E4
 	waitstate
 	msgbox RustboroCity_House1_Text_215A77, MSGBOX_DEFAULT
-	setflag FLAG_0x099
+	setflag FLAG_RUSTBORO_NPC_TRADE_COMPLETED
 	release
 	end
 

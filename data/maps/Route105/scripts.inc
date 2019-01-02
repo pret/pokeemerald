@@ -5,7 +5,7 @@ Route105_MapScripts:: @ 81EE1DB
 	.byte 0
 
 Route105_MapScript1_1EE1EB: @ 81EE1EB
-	call_if_unset FLAG_0x0E4, Route105_EventScript_1EE20B
+	call_if_unset FLAG_REGI_DOORS_OPENED, Route105_EventScript_1EE20B
 	compare VAR_0x4037, 9
 	call_if_eq Route105_EventScript_2739AB
 	compare VAR_0x4037, 10

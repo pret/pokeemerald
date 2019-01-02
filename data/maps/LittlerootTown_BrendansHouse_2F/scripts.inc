@@ -15,7 +15,7 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F841A:: @ 81F841A
-	goto_if_set FLAG_0x124, LittlerootTown_BrendansHouse_2F_EventScript_1F8433
+	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F8433
 	compare VAR_0x4084, 2
 	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F8456
 	goto LittlerootTown_BrendansHouse_2F_EventScript_1F8433

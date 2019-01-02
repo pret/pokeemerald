@@ -3,7 +3,7 @@ MauvilleCity_Gym_MapScripts:: @ 820DD6E
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_20DD74: @ 820DD74
-	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20DEE7
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20DEE7
 	switch VAR_0x4093
 	case 0, MauvilleCity_Gym_EventScript_20DDBA
 	case 1, MauvilleCity_Gym_EventScript_20DEAF
@@ -13,7 +13,7 @@ MauvilleCity_Gym_MapScript1_20DD74: @ 820DD74
 	end
 
 MauvilleCity_Gym_EventScript_20DDBA:: @ 820DDBA
-	goto_if_set FLAG_0x063, MauvilleCity_Gym_EventScript_20DDC4
+	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_20DDC4
 	end
 
 MauvilleCity_Gym_EventScript_20DDC4:: @ 820DDC4
@@ -78,7 +78,7 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_20DFDE
-	goto_if_unset FLAG_0x0A7, MauvilleCity_Gym_EventScript_20DF8D
+	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_20DF8D
 	compare VAR_0x40BA, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_20DFD4
 	msgbox MauvilleCity_Gym_Text_20E8E3, MSGBOX_DEFAULT
@@ -92,7 +92,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	msgbox MauvilleCity_Gym_Text_20E7AA, MSGBOX_DEFAULT
 	setvar VAR_0x40D2, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
-	setflag FLAG_0x4F2
+	setflag FLAG_DEFEATED_MAUVILLE_GYM
 	setflag FLAG_BADGE03_GET
 	addvar VAR_0x4085, 1
 	compare VAR_0x4085, 6
@@ -110,7 +110,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x1D5
+	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
 	release
 	end
 
@@ -119,7 +119,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_272054
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
-	setflag FLAG_0x0A7
+	setflag FLAG_RECEIVED_TM34
 	release
 	end
 
@@ -128,7 +128,7 @@ MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_27205E
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
-	setflag FLAG_0x0A7
+	setflag FLAG_RECEIVED_TM34
 	return
 
 MauvilleCity_Gym_EventScript_20DFD4:: @ 820DFD4
@@ -143,7 +143,7 @@ MauvilleCity_Gym_EventScript_20DFDE:: @ 820DFDE
 
 MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 	lockall
-	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 1
@@ -153,7 +153,7 @@ MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 
 MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 	lockall
-	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 2
@@ -163,7 +163,7 @@ MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 
 MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 	lockall
-	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 3
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 3
@@ -173,7 +173,7 @@ MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 
 MauvilleCity_Gym_EventScript_20E068:: @ 820E068
 	lockall
-	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E0AD
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E0AD
 	compare VAR_0x4093, 4
 	goto_if_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 4
@@ -186,8 +186,8 @@ MauvilleCity_Gym_EventScript_20E08D:: @ 820E08D
 	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
-	goto_if_set FLAG_0x063, MauvilleCity_Gym_EventScript_20E0B4
-	goto_if_unset FLAG_0x063, MauvilleCity_Gym_EventScript_20E0AF
+	goto_if_set FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_20E0B4
+	goto_if_unset FLAG_MAUVILLE_GYM_BARRIERS_STATE, MauvilleCity_Gym_EventScript_20E0AF
 	releaseall
 	end
 
@@ -196,12 +196,12 @@ MauvilleCity_Gym_EventScript_20E0AD:: @ 820E0AD
 	end
 
 MauvilleCity_Gym_EventScript_20E0AF:: @ 820E0AF
-	setflag FLAG_0x063
+	setflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
 MauvilleCity_Gym_EventScript_20E0B4:: @ 820E0B4
-	clearflag FLAG_0x063
+	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	releaseall
 	end
 
@@ -233,7 +233,7 @@ MauvilleCity_Gym_EventScript_20E115:: @ 820E115
 MauvilleCity_Gym_EventScript_20E12C:: @ 820E12C
 	lock
 	faceplayer
-	goto_if_set FLAG_0x4F2, MauvilleCity_Gym_EventScript_20E141
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_20E141
 	msgbox MauvilleCity_Gym_Text_20E17F, MSGBOX_DEFAULT
 	release
 	end

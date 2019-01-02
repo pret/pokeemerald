@@ -40,11 +40,11 @@ FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 FarawayIsland_Interior_MapScript1_267D72: @ 8267D72
 	setvar VAR_0x403A, 0
 	setvar VAR_TEMP_1, 1
-	call_if_unset FLAG_0x1CA, FarawayIsland_Interior_EventScript_267D86
+	call_if_unset FLAG_CAUGHT_MEW, FarawayIsland_Interior_EventScript_267D86
 	end
 
 FarawayIsland_Interior_EventScript_267D86:: @ 8267D86
-	goto_if_set FLAG_0x1C7, FarawayIsland_Interior_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_MEW, FarawayIsland_Interior_EventScript_27374E
 	clearflag FLAG_HIDE_MEW
 	setvar VAR_TEMP_1, 0
 	return
@@ -153,12 +153,12 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	goto_if_eq FarawayIsland_Interior_EventScript_267EA4
 	compare VAR_RESULT, 10
 	goto_if_eq FarawayIsland_Interior_EventScript_267EA4
-	setflag FLAG_0x1CA
+	setflag FLAG_CAUGHT_MEW
 	release
 	end
 
 FarawayIsland_Interior_EventScript_267E96:: @ 8267E96
-	setflag FLAG_0x1C7
+	setflag FLAG_DEFEATED_MEW
 	setvar VAR_0x8004, 151
 	goto FarawayIsland_Interior_EventScript_273776
 	end

@@ -4,7 +4,7 @@ FortreeCity_House1_MapScripts:: @ 82162BA
 FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	lock
 	faceplayer
-	goto_if_set FLAG_0x09B, FortreeCity_House1_EventScript_216355
+	goto_if_set FLAG_FORTREE_NPC_TRADE_COMPLETED, FortreeCity_House1_EventScript_216355
 	setvar VAR_0x8008, 1
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, sub_807E73C
@@ -29,7 +29,7 @@ FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	waitstate
 	bufferspeciesname 0, VAR_0x8009
 	msgbox FortreeCity_House1_Text_216440, MSGBOX_DEFAULT
-	setflag FLAG_0x09B
+	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
 	end
 

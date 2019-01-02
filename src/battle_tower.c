@@ -3158,10 +3158,10 @@ void sub_81653CC(void)
 {
     if (gSaveBlock2Ptr->frontier.field_CA8 == 1)
         sub_80F01B8();
-    if (FlagGet(FLAG_0x077) == TRUE)
+    if (FlagGet(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE) == TRUE)
     {
         sub_80F01B8();
-        FlagClear(FLAG_0x077);
+        FlagClear(FLAG_CANCEL_BATTLE_ROOM_CHALLENGE);
     }
 }
 

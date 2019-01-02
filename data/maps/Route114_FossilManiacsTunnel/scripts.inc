@@ -34,7 +34,7 @@ Route114_FossilManiacsTunnel_EventScript_22AF66:: @ 822AF66
 Route114_FossilManiacsTunnel_EventScript_22AF87:: @ 822AF87
 	lock
 	faceplayer
-	goto_if_set FLAG_0x10B, Route114_FossilManiacsTunnel_EventScript_22AFC6
+	goto_if_set FLAG_RECEIVED_REVIVED_FOSSIL_MON, Route114_FossilManiacsTunnel_EventScript_22AFC6
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, 1
 	goto_if_eq Route114_FossilManiacsTunnel_EventScript_22AFBC

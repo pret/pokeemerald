@@ -3,22 +3,22 @@ MossdeepCity_Gym_MapScripts:: @ 8220800
 	.byte 0
 
 MossdeepCity_Gym_MapScript1_220806: @ 8220806
-	goto_if_set FLAG_0x064, MossdeepCity_Gym_EventScript_22083D
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_22083D
 	goto MossdeepCity_Gym_EventScript_220815
 	end
 
 MossdeepCity_Gym_EventScript_220815:: @ 8220815
-	goto_if_set FLAG_0x065, MossdeepCity_Gym_EventScript_220855
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_220855
 	goto MossdeepCity_Gym_EventScript_220824
 	end
 
 MossdeepCity_Gym_EventScript_220824:: @ 8220824
-	goto_if_set FLAG_0x066, MossdeepCity_Gym_EventScript_22086D
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_22086D
 	goto MossdeepCity_Gym_EventScript_220833
 	end
 
 MossdeepCity_Gym_EventScript_220833:: @ 8220833
-	goto_if_set FLAG_0x067, MossdeepCity_Gym_EventScript_220885
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_220885
 	end
 
 MossdeepCity_Gym_EventScript_22083D:: @ 822083D
@@ -49,7 +49,7 @@ MossdeepCity_Gym_EventScript_220898:: @ 8220898
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq MossdeepCity_Gym_EventScript_22097E
-	goto_if_unset FLAG_0x0AB, MossdeepCity_Gym_EventScript_220937
+	goto_if_unset FLAG_RECEIVED_TM04, MossdeepCity_Gym_EventScript_220937
 	msgbox MossdeepCity_Gym_Text_221B1D, MSGBOX_DEFAULT
 	release
 	end
@@ -59,11 +59,11 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	waitmessage
 	call MossdeepCity_Gym_EventScript_27207E
 	msgbox MossdeepCity_Gym_Text_221999, MSGBOX_DEFAULT
-	setflag FLAG_0x4F6
+	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
-	clearflag FLAG_0x393
+	clearflag FLAG_UNKNOWN_0x393
 	setvar VAR_0x8008, 7
 	call MossdeepCity_Gym_EventScript_271F43
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
@@ -82,7 +82,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x1D8
+	setflag FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL
 	release
 	end
 
@@ -91,7 +91,7 @@ MossdeepCity_Gym_EventScript_220937:: @ 8220937
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_272054
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
-	setflag FLAG_0x0AB
+	setflag FLAG_RECEIVED_TM04
 	release
 	end
 
@@ -100,7 +100,7 @@ MossdeepCity_Gym_EventScript_22095B:: @ 822095B
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_27205E
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
-	setflag FLAG_0x0AB
+	setflag FLAG_RECEIVED_TM04
 	return
 
 MossdeepCity_Gym_EventScript_22097E:: @ 822097E
@@ -110,8 +110,8 @@ MossdeepCity_Gym_EventScript_22097E:: @ 822097E
 
 MossdeepCity_Gym_EventScript_220999:: @ 8220999
 	lockall
-	goto_if_set FLAG_0x064, MossdeepCity_Gym_EventScript_2209D0
-	setflag FLAG_0x064
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_2209D0
+	setflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 5, 5, 516, 0
@@ -126,7 +126,7 @@ MossdeepCity_Gym_EventScript_2209C8:: @ 82209C8
 	end
 
 MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
-	clearflag FLAG_0x064
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 5, 5, 524, 0
@@ -136,8 +136,8 @@ MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
 
 MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
 	lockall
-	goto_if_set FLAG_0x065, MossdeepCity_Gym_EventScript_220A24
-	setflag FLAG_0x065
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_220A24
+	setflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 8, 14, 516, 0
@@ -146,7 +146,7 @@ MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
 	end
 
 MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
-	clearflag FLAG_0x065
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 8, 14, 517, 0
@@ -156,8 +156,8 @@ MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
 
 MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
 	lockall
-	goto_if_set FLAG_0x066, MossdeepCity_Gym_EventScript_220A78
-	setflag FLAG_0x066
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_220A78
+	setflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 15, 17, 524, 0
@@ -166,7 +166,7 @@ MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
 	end
 
 MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
-	clearflag FLAG_0x066
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 15, 17, 516, 0
@@ -176,8 +176,8 @@ MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
 
 MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
 	lockall
-	goto_if_set FLAG_0x067, MossdeepCity_Gym_EventScript_220ACC
-	setflag FLAG_0x067
+	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_220ACC
+	setflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 1, 23, 525, 0
@@ -186,7 +186,7 @@ MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
 	end
 
 MossdeepCity_Gym_EventScript_220ACC:: @ 8220ACC
-	clearflag FLAG_0x067
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
 	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_Gym_Movement_220C30
 	waitmovement 0
 	setmetatile 1, 23, 516, 0
@@ -264,7 +264,7 @@ MossdeepCity_Gym_EventScript_220BFA:: @ 8220BFA
 MossdeepCity_Gym_EventScript_220C11:: @ 8220C11
 	lock
 	faceplayer
-	goto_if_set FLAG_0x4F6, MossdeepCity_Gym_EventScript_220C26
+	goto_if_set FLAG_DEFEATED_MOSSDEEP_GYM, MossdeepCity_Gym_EventScript_220C26
 	msgbox MossdeepCity_Gym_Text_220CD5, MSGBOX_DEFAULT
 	release
 	end
@@ -643,4 +643,3 @@ MossdeepCity_Gym_Text_221EB8: @ 8221EB8
 	.string "LIZA: You brought just one POKéMON!\p"
 	.string "TATE: We need you to bring at least…\n"
 	.string "LIZA: Two POKéMON when you come back.$"
-

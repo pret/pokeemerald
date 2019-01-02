@@ -50,7 +50,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
-	goto_if_unset FLAG_0x095, SlateportCity_OceanicMuseum_1F_EventScript_20AE39
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, SlateportCity_OceanicMuseum_1F_EventScript_20AE39
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B03D, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
@@ -163,7 +163,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	giveitem_std ITEM_TM46
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_20AFB5
-	setflag FLAG_0x10D
+	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2

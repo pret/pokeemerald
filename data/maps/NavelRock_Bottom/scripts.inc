@@ -4,8 +4,8 @@ NavelRock_Bottom_MapScripts:: @ 8269255
 	.byte 0
 
 NavelRock_Bottom_MapScript1_269260: @ 8269260
-	call_if_set FLAG_0x091, NavelRock_Bottom_EventScript_269273
-	call_if_unset FLAG_0x091, NavelRock_Bottom_EventScript_269277
+	call_if_set FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_269273
+	call_if_unset FLAG_CAUGHT_LUGIA, NavelRock_Bottom_EventScript_269277
 	end
 
 NavelRock_Bottom_EventScript_269273:: @ 8269273
@@ -13,7 +13,7 @@ NavelRock_Bottom_EventScript_269273:: @ 8269273
 	return
 
 NavelRock_Bottom_EventScript_269277:: @ 8269277
-	goto_if_set FLAG_0x1DD, NavelRock_Bottom_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_LUGIA, NavelRock_Bottom_EventScript_27374E
 	clearflag FLAG_HIDE_LUGIA
 	return
 
@@ -67,12 +67,12 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	goto_if_eq NavelRock_Bottom_EventScript_269344
 	compare VAR_RESULT, 5
 	goto_if_eq NavelRock_Bottom_EventScript_269344
-	setflag FLAG_0x091
+	setflag FLAG_CAUGHT_LUGIA
 	release
 	end
 
 NavelRock_Bottom_EventScript_269336:: @ 8269336
-	setflag FLAG_0x1DD
+	setflag FLAG_DEFEATED_LUGIA
 	setvar VAR_0x8004, 249
 	goto NavelRock_Bottom_EventScript_273776
 	end
@@ -81,4 +81,3 @@ NavelRock_Bottom_EventScript_269344:: @ 8269344
 	setvar VAR_0x8004, 249
 	goto NavelRock_Bottom_EventScript_273776
 	end
-

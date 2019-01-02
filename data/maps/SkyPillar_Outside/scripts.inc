@@ -20,7 +20,7 @@ SkyPillar_Outside_EventScript_2392D3:: @ 82392D3
 	return
 
 SkyPillar_Outside_MapScript1_2392DD: @ 82392DD
-	call_if_set FLAG_0x137, SkyPillar_Outside_EventScript_2392E7
+	call_if_set FLAG_WALLACE_GOES_TO_SKY_PILLAR, SkyPillar_Outside_EventScript_2392E7
 	end
 
 SkyPillar_Outside_EventScript_2392E7:: @ 82392E7

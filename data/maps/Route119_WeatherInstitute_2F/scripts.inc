@@ -126,7 +126,7 @@ Route119_WeatherInstitute_2F_EventScript_2700DB:: @ 82700DB
 
 Route119_WeatherInstitute_2F_EventScript_2700EA:: @ 82700EA
 	msgbox Route119_WeatherInstitute_2F_Text_2706FE, MSGBOX_DEFAULT
-	setflag FLAG_0x097
+	setflag FLAG_RECEIVED_CASTFORM
 	release
 	end
 
@@ -138,8 +138,8 @@ Route119_WeatherInstitute_2F_EventScript_2700F7:: @ 82700F7
 
 Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	setvar VAR_0x8004, 0
-	call_if_set FLAG_0x1BE, Route119_WeatherInstitute_2F_EventScript_270160
-	call_if_set FLAG_0x1BF, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_270160
+	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_270160
 	compare VAR_0x8004, 2
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_270166
 	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_270159
@@ -207,7 +207,7 @@ Route119_WeatherInstitute_2F_Movement_270187: @ 8270187
 Route119_WeatherInstitute_2F_EventScript_27018B:: @ 827018B
 	lock
 	faceplayer
-	goto_if_set FLAG_0x097, Route119_WeatherInstitute_2F_EventScript_2700F7
+	goto_if_set FLAG_RECEIVED_CASTFORM, Route119_WeatherInstitute_2F_EventScript_2700F7
 	goto Route119_WeatherInstitute_2F_EventScript_27004D
 	end
 

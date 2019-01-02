@@ -13,7 +13,7 @@ MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
 	removeobject 1
 	delay 30
-	setflag FLAG_0x14F
+	setflag FLAG_CHOSE_CLAW_FOSSIL
 	goto MirageTower_4F_EventScript_23ADCA
 	end
 
@@ -34,7 +34,7 @@ MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
 	removeobject 2
 	delay 30
-	setflag FLAG_0x150
+	setflag FLAG_CHOSE_ROOT_FOSSIL
 	goto MirageTower_4F_EventScript_23ADCA
 	end
 

@@ -277,12 +277,12 @@ VerdanturfTown_BattleTentLobby_Movement_201A77: @ 8201A77
 VerdanturfTown_BattleTentLobby_EventScript_201A7B:: @ 8201A7B
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0EB, VerdanturfTown_BattleTentLobby_EventScript_201AB2
+	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_BattleTentLobby_EventScript_201AB2
 	msgbox VerdanturfTown_BattleTentLobby_Text_201D9E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM45
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_272054
-	setflag FLAG_0x0EB
+	setflag FLAG_RECEIVED_TM45
 	msgbox VerdanturfTown_BattleTentLobby_Text_201E43, MSGBOX_DEFAULT
 	release
 	end
@@ -305,10 +305,10 @@ VerdanturfTown_BattleTentLobby_EventScript_201AC5:: @ 8201AC5
 VerdanturfTown_BattleTentLobby_EventScript_201AD0:: @ 8201AD0
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1CC, VerdanturfTown_BattleTentLobby_EventScript_201AED
+	goto_if_set FLAG_MET_SCOTT_IN_VERDANTURF, VerdanturfTown_BattleTentLobby_EventScript_201AED
 	msgbox VerdanturfTown_BattleTentLobby_Text_201F3F, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
-	setflag FLAG_0x1CC
+	setflag FLAG_MET_SCOTT_IN_VERDANTURF
 	release
 	end
 
@@ -434,4 +434,3 @@ VerdanturfTown_BattleTentLobby_Text_202025: @ 8202025
 	.string "SCOTT: I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"
-

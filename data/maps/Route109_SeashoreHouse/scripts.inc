@@ -9,8 +9,8 @@ Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA
 Route109_SeashoreHouse_EventScript_2693FE:: @ 82693FE
 	lock
 	faceplayer
-	goto_if_set FLAG_0x08C, Route109_SeashoreHouse_EventScript_269460
-	goto_if_set FLAG_0x08D, Route109_SeashoreHouse_EventScript_269432
+	goto_if_set FLAG_RECEIVED_6_SODA_POP, Route109_SeashoreHouse_EventScript_269460
+	goto_if_set FLAG_DEFEATED_SEASHORE_HOUSE, Route109_SeashoreHouse_EventScript_269432
 	goto_if_set FLAG_TEMP_2, Route109_SeashoreHouse_EventScript_269428
 	msgbox Route109_SeashoreHouse_Text_269555, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_2
@@ -27,7 +27,7 @@ Route109_SeashoreHouse_EventScript_269432:: @ 8269432
 	giveitem_std ITEM_SODA_POP, 6
 	compare VAR_RESULT, 0
 	goto_if_eq Route109_SeashoreHouse_EventScript_269456
-	setflag FLAG_0x08C
+	setflag FLAG_RECEIVED_6_SODA_POP
 	release
 	end
 
@@ -104,7 +104,7 @@ Route109_SeashoreHouse_EventScript_269533:: @ 8269533
 	goto_if_lt Route109_SeashoreHouse_EventScript_269553
 	checktrainerflag TRAINER_SIMON
 	goto_if_lt Route109_SeashoreHouse_EventScript_269553
-	setflag FLAG_0x08D
+	setflag FLAG_DEFEATED_SEASHORE_HOUSE
 	release
 	end
 

@@ -125,7 +125,7 @@ SSTidalCorridor_EventScript_23C119:: @ 823C119
 SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
-	call_if_set FLAG_0x104, SSTidalCorridor_EventScript_23C179
+	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_23C179
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -134,7 +134,7 @@ SSTidalCorridor_EventScript_23C13B:: @ 823C13B
 SSTidalCorridor_EventScript_23C15A:: @ 823C15A
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_23C64F, MSGBOX_DEFAULT
-	call_if_set FLAG_0x104, SSTidalCorridor_EventScript_23C179
+	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_23C179
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
@@ -162,7 +162,7 @@ SSTidalCorridor_EventScript_23C19E:: @ 823C19E
 SSTidalCorridor_EventScript_23C1A3:: @ 823C1A3
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0F7, SSTidalCorridor_EventScript_23C1BD
+	goto_if_set FLAG_DEFEATED_SS_TIDAL_TRAINERS, SSTidalCorridor_EventScript_23C1BD
 	call SSTidalCorridor_EventScript_23C1C7
 	msgbox SSTidalCorridor_Text_23C65E, MSGBOX_DEFAULT
 	release
@@ -190,7 +190,7 @@ SSTidalCorridor_EventScript_23C1C7:: @ 823C1C7
 	goto_if_lt SSTidalCorridor_EventScript_23C218
 	checktrainerflag TRAINER_NAOMI
 	goto_if_lt SSTidalCorridor_EventScript_23C218
-	setflag FLAG_0x0F7
+	setflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
 	goto SSTidalCorridor_EventScript_23C1BD
 	return
 
@@ -215,7 +215,7 @@ SSTidalCorridor_EventScript_23C219:: @ 823C219
 	applymovement 1, SSTidalCorridor_Movement_23C28B
 	waitmovement 0
 	delay 30
-	setflag FLAG_0x1D0
+	setflag FLAG_MET_SCOTT_ON_SS_TIDAL
 	setvar VAR_0x40D4, 1
 	releaseall
 	end

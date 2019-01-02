@@ -11,7 +11,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DA7: @ 8243DA7
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_MapScript1_243DB0: @ 8243DB0
-	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
+	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243DDA
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2
 	clearflag FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3
@@ -165,7 +165,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F29:: @ 8243F29
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
-	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
+	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FC3
 	setvar VAR_0x8004, 11
 	setvar VAR_0x8005, 0
 	special sub_8161F74
@@ -195,7 +195,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	compare VAR_FACING, 1
 	call_if_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
-	setflag FLAG_0x152
+	setflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 10, 3
 	waitstate
 	release

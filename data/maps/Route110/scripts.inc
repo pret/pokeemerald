@@ -648,7 +648,7 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x119
+	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
 	msgbox Route110_Text_1F0C33, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 1

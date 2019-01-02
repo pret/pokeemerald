@@ -56,10 +56,10 @@ SouthernIsland_Interior_EventScript_242AC4:: @ 8242AC4
 
 SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	goto_if_set FLAG_TEMP_2, SouthernIsland_Interior_EventScript_242B9A
-	goto_if_set FLAG_0x1C8, SouthernIsland_Interior_EventScript_242B9A
-	goto_if_set FLAG_0x1C9, SouthernIsland_Interior_EventScript_242B9A
+	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_242B9A
+	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_242B9A
 	goto_if_unset FLAG_SYS_HAS_EON_TICKET, SouthernIsland_Interior_EventScript_242B9A
-	setflag FLAG_0x0CE
+	setflag FLAG_ENCOUNTERED_LATIAS_OR_LATIOS
 	setflag FLAG_TEMP_2
 	special SpawnCameraObject
 	applymovement EVENT_OBJ_ID_CAMERA, SouthernIsland_Interior_Movement_242BCA
@@ -92,12 +92,12 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	goto_if_eq SouthernIsland_Interior_EventScript_242B8F
 	compare VAR_RESULT, 5
 	goto_if_eq SouthernIsland_Interior_EventScript_242B8F
-	setflag FLAG_0x1C9
+	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_242B81:: @ 8242B81
-	setflag FLAG_0x1C8
+	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
 	copyvar VAR_0x8004, VAR_TEMP_4
 	goto SouthernIsland_Interior_EventScript_273776
 	end
@@ -159,4 +159,3 @@ SouthernIsland_Interior_Movement_242BDA: @ 8242BDA
 	walk_down
 	walk_down
 	step_end
-

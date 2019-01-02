@@ -4,7 +4,7 @@ BattleFrontier_Lounge6_MapScripts:: @ 8264FEC
 BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	lock
 	faceplayer
-	goto_if_set FLAG_0x09C, BattleFrontier_Lounge6_EventScript_265083
+	goto_if_set FLAG_BATTLE_FRONTIER_TRADE_DONE, BattleFrontier_Lounge6_EventScript_265083
 	setvar VAR_0x8008, 3
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, sub_807E73C
@@ -28,7 +28,7 @@ BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	special sub_807F0E4
 	waitstate
 	msgbox BattleFrontier_Lounge6_Text_265128, MSGBOX_DEFAULT
-	setflag FLAG_0x09C
+	setflag FLAG_BATTLE_FRONTIER_TRADE_DONE
 	release
 	end
 
@@ -78,4 +78,3 @@ BattleFrontier_Lounge6_Text_26520E: @ 826520E
 	.string "Giggle!\n"
 	.string "A SKITTY is so much cuter than I had\l"
 	.string "imagined. I'm delighted!$"
-
