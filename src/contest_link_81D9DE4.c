@@ -2,10 +2,8 @@
 #include "contest.h"
 #include "event_data.h"
 #include "link.h"
-#include "pokemon.h"
 #include "random.h"
 #include "task.h"
-#include "constants/flags.h"
 
 static void sub_81D9F14(u8);
 static void sub_81D9F30(u8);
