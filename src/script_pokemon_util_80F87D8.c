@@ -228,7 +228,7 @@ void sub_80F8AFC(void)
 
     if (gIsLinkContest & 1)
     {
-        for (i = 0; i < gUnknown_02039F30; i++)
+        for (i = 0; i < gNumLinkContestPlayers; i++)
         {
             int version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
@@ -257,7 +257,7 @@ void sub_80F8B94(void)
     gReservedSpritePaletteCount = 12;
     if (gIsLinkContest & 1)
     {
-        for (i = 0; i < gUnknown_02039F30; i++)
+        for (i = 0; i < gNumLinkContestPlayers; i++)
         {
             eventObjectId = GetEventObjectIdByLocalIdAndMap(gUnknown_0858D8EC[i], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             sprite = &gSprites[gEventObjects[eventObjectId].spriteId];
@@ -285,14 +285,14 @@ u8 GiveMonArtistRibbon(void)
 {
     u8 hasArtistRibbon;
 
-    hasArtistRibbon = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON);
+    hasArtistRibbon = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
     if (!hasArtistRibbon && gContestFinalStandings[gContestPlayerMonIndex] == 0 && gSpecialVar_ContestRank == 3
      && gUnknown_02039F08[gContestPlayerMonIndex] >= 800)
     {
         hasArtistRibbon = 1;
-        SetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
-        if (GetRibbonCount(&gPlayerParty[gUnknown_02039F24]) > 4)
-            sub_80EE4DC(&gPlayerParty[gUnknown_02039F24], MON_DATA_ARTIST_RIBBON);
+        SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
+        if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > 4)
+            sub_80EE4DC(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
 
         return 1;
     }
@@ -402,7 +402,7 @@ static void sub_80F8EE8(u8 taskId)
 
 void ScriptGetMultiplayerId(void)
 {
-    if ((gIsLinkContest & 1) && gUnknown_02039F30 == 4 && !(gIsLinkContest & 2))
+    if ((gIsLinkContest & 1) && gNumLinkContestPlayers == 4 && !(gIsLinkContest & 2))
         gSpecialVar_Result = GetMultiplayerId();
     else
         gSpecialVar_Result = 4;

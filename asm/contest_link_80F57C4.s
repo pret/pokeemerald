@@ -4628,7 +4628,7 @@ sub_80F7ED0: @ 80F7ED0
 	thumb_func_start sub_80F7F30
 sub_80F7F30: @ 80F7F30
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02039F24
+	ldr r0, =gContestMonPartyIndex
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -4660,7 +4660,7 @@ _080F7F5E:
 sub_80F7F7C: @ 80F7F7C
 	push {r4,lr}
 	movs r4, 0
-	ldr r0, =gUnknown_02039F24
+	ldr r0, =gContestMonPartyIndex
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
@@ -4750,7 +4750,7 @@ _080F8034:
 	.4byte _080F8190
 	.4byte _080F81F8
 _080F8048:
-	ldr r6, =gUnknown_02039F24
+	ldr r6, =gContestMonPartyIndex
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -4801,7 +4801,7 @@ _080F809C:
 	.pool
 _080F80B8:
 	mov r4, sp
-	ldr r7, =gUnknown_02039F24
+	ldr r7, =gContestMonPartyIndex
 	ldrb r0, [r7]
 	movs r6, 0x64
 	muls r0, r6
@@ -4850,7 +4850,7 @@ _080F810A:
 	.pool
 _080F8124:
 	mov r4, sp
-	ldr r7, =gUnknown_02039F24
+	ldr r7, =gContestMonPartyIndex
 	ldrb r0, [r7]
 	movs r6, 0x64
 	muls r0, r6
@@ -4897,7 +4897,7 @@ _080F814E:
 	.pool
 _080F8190:
 	mov r4, sp
-	ldr r7, =gUnknown_02039F24
+	ldr r7, =gContestMonPartyIndex
 	ldrb r0, [r7]
 	movs r6, 0x64
 	muls r0, r6
@@ -4940,7 +4940,7 @@ _080F8190:
 	.pool
 _080F81F8:
 	mov r4, sp
-	ldr r7, =gUnknown_02039F24
+	ldr r7, =gContestMonPartyIndex
 	ldrb r0, [r7]
 	movs r6, 0x64
 	muls r0, r6
@@ -5320,7 +5320,7 @@ sub_80F8508: @ 80F8508
 	ands r0, r1
 	cmp r0, 0
 	beq _080F8540
-	ldr r0, =gUnknown_02039F24
+	ldr r0, =gContestMonPartyIndex
 	ldrb r0, [r0]
 	bl sub_80DA8C8
 	ldr r1, =sub_80FC6BC
@@ -5330,7 +5330,7 @@ sub_80F8508: @ 80F8508
 	b _080F8556
 	.pool
 _080F8540:
-	ldr r0, =gUnknown_02039F24
+	ldr r0, =gContestMonPartyIndex
 	ldrb r0, [r0]
 	bl sub_80DA8C8
 	ldr r1, =gTasks
@@ -5399,7 +5399,7 @@ sub_80F85BC: @ 80F85BC
 	str r0, [sp]
 	str r0, [sp, 0x4]
 	movs r3, 0
-	ldr r5, =gUnknown_02039F30
+	ldr r5, =gNumLinkContestPlayers
 	mov r12, r5
 	ldr r0, =gSpecialVar_0x8004
 	mov r9, r0
@@ -5529,7 +5529,7 @@ sub_80F86E0: @ 80F86E0
 	adds r3, r0, 0
 	movs r4, 0
 	movs r2, 0x1
-	ldr r0, =gUnknown_02039F30
+	ldr r0, =gNumLinkContestPlayers
 	ldrb r0, [r0]
 	cmp r2, r0
 	bge _080F8708

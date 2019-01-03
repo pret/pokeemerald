@@ -142,7 +142,7 @@ sub_80FC5DC: @ 80FC5DC
 	ldr r1, =gContestPlayerMonIndex
 	strb r0, [r1]
 	bl GetLinkPlayerCount
-	ldr r4, =gUnknown_02039F30
+	ldr r4, =gNumLinkContestPlayers
 	strb r0, [r4]
 	ldr r1, =gIsLinkContest
 	movs r0, 0x1
@@ -313,7 +313,7 @@ _080FC758:
 	cmp r0, 0
 	beq _080FC7F4
 	movs r5, 0
-	ldr r0, =gUnknown_02039F30
+	ldr r0, =gNumLinkContestPlayers
 	mov r8, r6
 	ldrb r0, [r0]
 	cmp r5, r0
@@ -334,7 +334,7 @@ _080FC770:
 	bl sub_80DFA08
 	adds r6, 0x1C
 	adds r5, 0x1
-	ldr r0, =gUnknown_02039F30
+	ldr r0, =gNumLinkContestPlayers
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _080FC770
@@ -513,7 +513,7 @@ _080FC90C:
 	cmp r0, 0
 	beq _080FC986
 	movs r3, 0
-	ldr r1, =gUnknown_02039F30
+	ldr r1, =gNumLinkContestPlayers
 	ldrb r0, [r1]
 	cmp r3, r0
 	bge _080FC93A
@@ -682,7 +682,7 @@ _080FCA68:
 	cmp r0, 0
 	beq _080FCAB2
 	movs r2, 0
-	ldr r6, =gUnknown_02039F30
+	ldr r6, =gNumLinkContestPlayers
 	mov r9, r8
 	mov r12, r7
 	ldrb r0, [r6]
