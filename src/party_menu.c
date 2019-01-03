@@ -7257,10 +7257,10 @@ static void sub_81B9424(u8 taskId)
 
 static void sub_81B9470(void)
 {
-    gUnknown_02039F24 = GetCursorSelectionMonId();
-    if (gUnknown_02039F24 >= PARTY_SIZE)
-        gUnknown_02039F24 = 0xFF;
-    gSpecialVar_0x8004 = gUnknown_02039F24;
+    gContestMonPartyIndex = GetCursorSelectionMonId();
+    if (gContestMonPartyIndex >= PARTY_SIZE)
+        gContestMonPartyIndex = 0xFF;
+    gSpecialVar_0x8004 = gContestMonPartyIndex;
     gFieldCallback2 = hm_add_c3_without_phase_2;
     SetMainCallback2(CB2_ReturnToField);
 }
