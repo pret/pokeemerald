@@ -154,7 +154,7 @@ SECTIONS {
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
-        asm/contest_link_80FC4F4.o(.text);
+        src/contest_link_80FC4F4.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
         src/battle_anim_effects_2.o(.text);

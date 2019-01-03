@@ -231,6 +231,8 @@ extern u8 gHighestRibbonRank;
 extern u8 gContestFinalStandings[4];
 extern u8 gContestPlayerMonIndex;
 extern s16 gUnknown_02039F08[4];
+extern s16 gUnknown_02039F10[4];
+extern s16 gUnknown_02039F18[4];
 extern s16 gContestMonConditions[4];
 extern u8 gIsLinkContest;
 extern struct ContestWinner gUnknown_02039F3C;
@@ -446,10 +448,10 @@ void sub_81D9DE4(u8 taskId);
 void sub_80FCF40(u8);
 void sub_80FCFD0(u8);
 void sub_80F8714(u8);
-int sub_80FC670(s16 *);
-int sub_80FC4F4(void *, u16);
-u8 sub_80FC55C(void);
-u8 sub_80FC530(u8);
+bool32 sub_80FC670(s16 *);
+bool32 sub_80FC4F4(void *, u16);
+bool8 sub_80FC55C(void);
+bool8 sub_80FC530(u8);
 u8 sub_80F86E0(u8 *);
 
 #endif //GUARD_CONTEST_H
