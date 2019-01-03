@@ -1,6 +1,8 @@
 #ifndef GUARD_ROULETTE_UTIL_H
 #define GUARD_ROULETTE_UTIL_H
 
+#include "roulette.h"
+
 struct PulseBlendSettings
 {
     u16 blendColor;
@@ -41,5 +43,10 @@ void UnmarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
 void UpdatePulseBlend(struct PulseBlend *);
 void sub_8152008(u16 *dest, u16 src, u8 left, u8 top, u8 width, u8 height);
 void sub_8152058(u16 *dest, u16 *src, u8 left, u8 top, u8 width, u8 height);
+void task_tutorial_controls_fadein(struct UnkStruct0 *r0);
+void sub_8151678(struct UnkStruct0 *r0);
+u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, const struct UnkStruct1 *r2);
+void sub_8151A9C(struct UnkStruct0 *r0, u16 r1);
+void sub_8151A48(struct UnkStruct0 *r0, u16 r1);
 
 #endif // GUARD_ROULETTE_UTIL_H

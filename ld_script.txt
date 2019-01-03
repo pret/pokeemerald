@@ -206,7 +206,7 @@ SECTIONS {
         src/battle_records.o(.text);
         src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
-        asm/roulette.o(.text);
+        src/roulette.o(.text);
         src/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);
@@ -262,7 +262,7 @@ SECTIONS {
         src/lilycove_lady.o(.text);
         src/battle_dome.o(.text);
         src/battle_palace.o(.text);
-        asm/battle_frontier_1.o(.text);
+        src/match_call.o(.text);
         src/menu.o(.text);
         src/battle_factory_screen.o(.text);
         src/apprentice.o(.text);
@@ -289,7 +289,7 @@ SECTIONS {
         src/unk_pokedex_area_screen_helper.o(.text);
         src/battle_pyramid_bag.o(.text);
         asm/pokenav.o(.text);
-        src/match_call.o(.text);
+        src/pokenav_match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
@@ -524,7 +524,7 @@ SECTIONS {
         src/battle_records.o(.rodata);
         src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
-        data/roulette.o(.rodata);
+        src/roulette.o(.rodata);
         src/pokedex_cry_screen.o(.rodata);
         src/landmark.o(.rodata);
         src/battle_transition.o(.rodata);
@@ -568,7 +568,7 @@ SECTIONS {
         src/lilycove_lady.o(.rodata);
         src/battle_dome.o(.rodata);
         src/battle_palace.o(.rodata);
-        data/battle_frontier_1.o(.rodata);
+        src/match_call.o(.rodata);
         src/menu.o(.rodata);
         src/battle_factory_screen.o(.rodata);
         src/apprentice.o(.rodata);
@@ -593,7 +593,7 @@ SECTIONS {
         src/unk_pokedex_area_screen_helper.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
-        src/match_call.o(.rodata);
+        src/pokenav_match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);

@@ -152,7 +152,7 @@ static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
         gUnknown_0300117C(taskId);
 }
 
-void sub_8121F68(u8 taskId, const struct YesNoFuncTable *data)
+void DoYesNoFuncWithChoice(u8 taskId, const struct YesNoFuncTable *data)
 {
     gUnknown_0203A138 = *data;
     gTasks[taskId].func = Task_CallYesOrNoCallback;

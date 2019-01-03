@@ -4818,4 +4818,13 @@ extern const u32 gStatusPal_Icons[];
 extern const u32 gPartyMenuPokeball_Pal[];
 extern const u32 gStatusPal_Icons[];
 
+// Roulette
+extern const u32 gRouletteMenuTiles[];
+extern const u32 gRouletteWheelTiles[];
+extern const u32 gRouletteCenter_Gfx[];
+extern const u32 gRouletteHeadersTiles[];
+extern const u32 gRouletteCreditTiles[];
+extern const u32 gRouletteNumbersTiles[];
+extern const u32 gRouletteMultiplierTiles[];
+
 #endif //GUARD_GRAPHICS_H
