@@ -13,7 +13,7 @@ BattleFrontier_ScottsHouse_EventScript_2636A8:: @ 82636A8
 BattleFrontier_ScottsHouse_EventScript_2636CB:: @ 82636CB
 	goto_if_unset FLAG_SCOTT_GIVES_BATTLE_POINTS, BattleFrontier_ScottsHouse_EventScript_263943
 	goto_if_unset FLAG_COLLECTED_ALL_SILVER_SYMBOLS, BattleFrontier_ScottsHouse_EventScript_263704
-	goto_if_unset FLAG_RECIEVED_STARF_BERRY_FROM_SCOTT, BattleFrontier_ScottsHouse_EventScript_26376A
+	goto_if_unset FLAG_RECEIVED_STARF_BERRY_FROM_SCOTT, BattleFrontier_ScottsHouse_EventScript_26376A
 	goto BattleFrontier_ScottsHouse_EventScript_2636EC
 	end
 
@@ -52,7 +52,7 @@ BattleFrontier_ScottsHouse_EventScript_26376A:: @ 826376A
 	giveitem_std ITEM_STARF_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_ScottsHouse_EventScript_2637D0
-	setflag FLAG_RECIEVED_STARF_BERRY_FROM_SCOTT
+	setflag FLAG_RECEIVED_STARF_BERRY_FROM_SCOTT
 	setflag FLAG_TEMP_4
 	release
 	end

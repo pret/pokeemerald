@@ -2799,7 +2799,7 @@ static void sub_81B1CD0(struct Pokemon *mon, u16 item, u8 c)
 {
     GetMonNickname(mon, gStringVar1);
     CopyItemName(item, gStringVar2);
-    StringExpandPlaceholders(gStringVar4, gText_RecievedItemFromPkmn);
+    StringExpandPlaceholders(gStringVar4, gText_ReceivedItemFromPkmn);
     sub_81B1B5C(gStringVar4, c);
     schedule_bg_copy_tilemap_to_vram(2);
 }

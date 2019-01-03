@@ -160,12 +160,12 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_DAILY_ROUTE_111_RECIEVED_BERRY, Route111_EventScript_1F0EF4
+	goto_if_set FLAG_DAILY_ROUTE_111_RECEIVED_BERRY, Route111_EventScript_1F0EF4
 	msgbox Route111_Text_2A6EBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_RAZZ_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route111_EventScript_272054
-	setflag FLAG_DAILY_ROUTE_111_RECIEVED_BERRY
+	setflag FLAG_DAILY_ROUTE_111_RECEIVED_BERRY
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_2A6F3D, MSGBOX_DEFAULT
 	release

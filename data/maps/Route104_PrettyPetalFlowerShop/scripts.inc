@@ -85,14 +85,14 @@ Route104_PrettyPetalFlowerShop_EventScript_22A442:: @ 822A442
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_DAILY_FLOWER_SHOP_RECIEVED_BERRY, Route104_PrettyPetalFlowerShop_EventScript_22A482
+	goto_if_set FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY, Route104_PrettyPetalFlowerShop_EventScript_22A482
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7A98, MSGBOX_DEFAULT
 	random 8
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Route104_PrettyPetalFlowerShop_EventScript_272054
-	setflag FLAG_DAILY_FLOWER_SHOP_RECIEVED_BERRY
+	setflag FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, MSGBOX_DEFAULT
 	release
 	end

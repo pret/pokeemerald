@@ -265,7 +265,7 @@ EventScript_Pblock1_No: @ 8293C70
 EventScript_Pblock1_NoBerries: @ 8293C7A
 	msgbox Text_Pblock1_NoBerries, MSGBOX_DEFAULT
 	dodailyevents
-	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECIEVED_BERRY, LilycoveCity_ContestLobby_EventScript_293C92
+	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, LilycoveCity_ContestLobby_EventScript_293C92
 	goto LilycoveCity_ContestLobby_EventScript_293C9C
 	end
 
@@ -277,7 +277,7 @@ LilycoveCity_ContestLobby_EventScript_293C92: @ 8293C92
 LilycoveCity_ContestLobby_EventScript_293C9C: @ 8293C9C
 	msgbox LilycoveCity_ContestLobby_Text_292FD1, MSGBOX_DEFAULT
 	giveitem_std ITEM_PECHA_BERRY
-	setflag FLAG_DAILY_CONTEST_LOBBY_RECIEVED_BERRY
+	setflag FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY
 	goto EventScript_Pblock1_KnowHow
 	end
 
@@ -552,7 +552,7 @@ LilycoveCity_ContestLobby_EventScript_293FF8: @ 8293FF8
 	compare VAR_RESULT, 65535
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_294028
 	dodailyevents
-	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECIEVED_BERRY, LilycoveCity_ContestLobby_EventScript_294028
+	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, LilycoveCity_ContestLobby_EventScript_294028
 	goto LilycoveCity_ContestLobby_EventScript_294032
 	end
 
@@ -564,7 +564,7 @@ LilycoveCity_ContestLobby_EventScript_294028: @ 8294028
 LilycoveCity_ContestLobby_EventScript_294032: @ 8294032
 	msgbox LilycoveCity_ContestLobby_Text_293AF0, MSGBOX_DEFAULT
 	giveitem_std ITEM_PECHA_BERRY
-	setflag FLAG_DAILY_CONTEST_LOBBY_RECIEVED_BERRY
+	setflag FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY
 	msgbox LilycoveCity_ContestLobby_Text_293B76, MSGBOX_DEFAULT
 	release
 	end

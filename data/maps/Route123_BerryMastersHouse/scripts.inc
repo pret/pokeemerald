@@ -10,7 +10,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_DAILY_BERRY_MASTER_RECIEVED_BERRY, Route123_BerryMastersHouse_EventScript_26F8B6
+	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_26F8B6
 	msgbox Route123_BerryMastersHouse_Text_2A7386, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
@@ -18,7 +18,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_DAILY_BERRY_MASTER_RECIEVED_BERRY
+	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
 	msgbox Route123_BerryMastersHouse_Text_2A7428, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20

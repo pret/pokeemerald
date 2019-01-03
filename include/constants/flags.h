@@ -127,7 +127,7 @@
 #define FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE 0x71 // Unused Flag. Used in R/S to indicate whether player defeated or caught Groudon/Kyogre in Cave of Origin.
 #define FLAG_SCOTT_CALL_NATIONAL_DEX         0x72 // Used in order to activate a phone call from Scott, inviting the player to the SS Tidal.
 #define FLAG_RECEIVED_METEORITE              0x73
-#define FLAG_ADVENTURE_STARTED               0x74 // Recieved Pokédex.
+#define FLAG_ADVENTURE_STARTED               0x74 // RECEIVED Pokédex.
 #define FLAG_DEFEATED_MAGMA_SPACE_CENTER     0x75 // Set when Team Magma is defeated at Mossdeep's Space Center.
 #define FLAG_MET_HIDDEN_POWER_GIVER          0x76
 
@@ -333,9 +333,9 @@
 #define FLAG_WALLACE_GOES_TO_SKY_PILLAR      0x137 // Set after speaking to Wallace within the Cave of Origin.
 #define FLAG_RECEIVED_HM07                   0x138
 #define FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS    0x139 // Beat Magma Grunt blocking Magma Hideout entrance.
-#define FLAG_RECIEVED_AURORA_TICKET          0x13A // Recieved Aurora Ticket in Mystery Gift
-#define FLAG_RECIEVED_MYSTIC_TICKET          0x13B // Recieved Mystic Ticket in Mystery Gift
-#define FLAG_RECIEVED_OLD_SEA_MAP            0x13C // Recieved Old Sea Map in Mystery Gift
+#define FLAG_RECEIVED_AURORA_TICKET          0x13A // RECEIVED Aurora Ticket in Mystery Gift
+#define FLAG_RECEIVED_MYSTIC_TICKET          0x13B // RECEIVED Mystic Ticket in Mystery Gift
+#define FLAG_RECEIVED_OLD_SEA_MAP            0x13C // RECEIVED Old Sea Map in Mystery Gift
 
 #define FLAG_UNUSED_0x13D                    0x13D // Unused Flag
 #define FLAG_UNUSED_0x13E                    0x13E // Unused Flag
@@ -358,7 +358,7 @@
 #define FLAG_MIRAGE_TOWER_VISIBLE            0x14E
 #define FLAG_CHOSE_CLAW_FOSSIL               0x14F // Player chose Claw Fossil
 #define FLAG_CHOSE_ROOT_FOSSIL               0x150 // Player chose Root Fossil
-#define FLAG_RECIEVED_POWDER_JAR             0x151
+#define FLAG_RECEIVED_POWDER_JAR             0x151
 
 #define FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER 0x152
 
@@ -493,7 +493,7 @@
 #define FLAG_MET_SCOTT_IN_EVERGRANDE         0x1CF
 #define FLAG_MET_SCOTT_ON_SS_TIDAL           0x1D0
 #define FLAG_SCOTT_GIVES_BATTLE_POINTS       0x1D1
-#define FLAG_RECIEVED_STARF_BERRY_FROM_SCOTT 0x1D2
+#define FLAG_RECEIVED_STARF_BERRY_FROM_SCOTT 0x1D2
 #define FLAG_ENABLE_ROXANNE_MATCH_CALL       0x1D3
 #define FLAG_ENABLE_BRAWLY_MATCH_CALL        0x1D4
 #define FLAG_ENABLE_WATTSON_MATCH_CALL       0x1D5
@@ -907,14 +907,14 @@
 #define FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE              0x3B5
 #define FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY                       0x3B6
 #define FLAG_HIDE_SS_TIDAL_ROOMS_SNATCH_GIVER                       0x3B7
-#define FLAG_RECIEVED_SHOAL_SALT_1                                  0x3B8
-#define FLAG_RECIEVED_SHOAL_SALT_2                                  0x3B9
-#define FLAG_RECIEVED_SHOAL_SALT_3                                  0x3BA
-#define FLAG_RECIEVED_SHOAL_SALT_4                                  0x3BB
-#define FLAG_RECIEVED_SHOAL_SHELL_1                                 0x3BC
-#define FLAG_RECIEVED_SHOAL_SHELL_2                                 0x3BD
-#define FLAG_RECIEVED_SHOAL_SHELL_3                                 0x3BE
-#define FLAG_RECIEVED_SHOAL_SHELL_4                                 0x3BF
+#define FLAG_RECEIVED_SHOAL_SALT_1                                  0x3B8
+#define FLAG_RECEIVED_SHOAL_SALT_2                                  0x3B9
+#define FLAG_RECEIVED_SHOAL_SALT_3                                  0x3BA
+#define FLAG_RECEIVED_SHOAL_SALT_4                                  0x3BB
+#define FLAG_RECEIVED_SHOAL_SHELL_1                                 0x3BC
+#define FLAG_RECEIVED_SHOAL_SHELL_2                                 0x3BD
+#define FLAG_RECEIVED_SHOAL_SHELL_3                                 0x3BE
+#define FLAG_RECEIVED_SHOAL_SHELL_4                                 0x3BF
 #define FLAG_HIDE_ROUTE_111_SECRET_POWER_MAN                        0x3C0
 #define FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION                       0x3C1
 #define FLAG_HIDE_LILYCOVE_DEPARTMENT_STORE_ROOFTOP_SALE_WOMAN      0x3C2
@@ -1373,7 +1373,7 @@
 #define FLAG_LANDMARK_SKY_PILLAR                    (SYSTEM_FLAGS + 0x5E)
 
 #define FLAG_SYS_SHOAL_ITEM                         (SYSTEM_FLAGS + 0x5F)
-#define FLAG_SYS_B_DASH                             (SYSTEM_FLAGS + 0x60) // Recieved Running Shoes
+#define FLAG_SYS_B_DASH                             (SYSTEM_FLAGS + 0x60) // RECEIVED Running Shoes
 #define FLAG_SYS_CTRL_OBJ_DELETE                    (SYSTEM_FLAGS + 0x61)
 #define FLAG_SYS_RESET_RTC_ENABLE                   (SYSTEM_FLAGS + 0x62)
 
@@ -1418,7 +1418,7 @@
 
 #define FLAG_UNUSED_0x8E3                           (SYSTEM_FLAGS + 0x83) // Unused Flag
 
-#define FLAG_RECIEVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
+#define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
 #define FLAG_UNUSED_0x8E5                           (SYSTEM_FLAGS + 0x85) // Unused Flag
 #define FLAG_UNUSED_0x8E6                           (SYSTEM_FLAGS + 0x86) // Unused Flag
@@ -1482,7 +1482,7 @@
 
 // Daily Flags
 #define FLAG_DAILY_0x920                            (SYSTEM_FLAGS + 0xC0)
-#define FLAG_DAILY_CONTEST_LOBBY_RECIEVED_BERRY     (SYSTEM_FLAGS + 0xC1)
+#define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (SYSTEM_FLAGS + 0xC1)
 #define FLAG_DAILY_SECRET_BASE                      (SYSTEM_FLAGS + 0xC2)
 #define FLAG_DAILY_0x923                            (SYSTEM_FLAGS + 0xC3)
 #define FLAG_DAILY_0x924                            (SYSTEM_FLAGS + 0xC4)
@@ -1492,14 +1492,14 @@
 #define FLAG_DAILY_0x928                            (SYSTEM_FLAGS + 0xC8)
 #define FLAG_DAILY_0x929                            (SYSTEM_FLAGS + 0xC9)
 #define FLAG_DAILY_PICKED_LOTO_TICKET               (SYSTEM_FLAGS + 0xCA)
-#define FLAG_DAILY_ROUTE_114_RECIEVED_BERRY         (SYSTEM_FLAGS + 0xCB)
-#define FLAG_DAILY_ROUTE_111_RECIEVED_BERRY         (SYSTEM_FLAGS + 0xCC)
-#define FLAG_DAILY_BERRY_MASTER_RECIEVED_BERRY      (SYSTEM_FLAGS + 0xCD)
-#define FLAG_DAILY_ROUTE_120_RECIEVED_BERRY         (SYSTEM_FLAGS + 0xCE)
-#define FLAG_DAILY_LILYCOVE_RECIEVED_BERRY          (SYSTEM_FLAGS + 0xCF)
-#define FLAG_DAILY_FLOWER_SHOP_RECIEVED_BERRY       (SYSTEM_FLAGS + 0xD0)
+#define FLAG_DAILY_ROUTE_114_RECEIVED_BERRY         (SYSTEM_FLAGS + 0xCB)
+#define FLAG_DAILY_ROUTE_111_RECEIVED_BERRY         (SYSTEM_FLAGS + 0xCC)
+#define FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY      (SYSTEM_FLAGS + 0xCD)
+#define FLAG_DAILY_ROUTE_120_RECEIVED_BERRY         (SYSTEM_FLAGS + 0xCE)
+#define FLAG_DAILY_LILYCOVE_RECEIVED_BERRY          (SYSTEM_FLAGS + 0xCF)
+#define FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY       (SYSTEM_FLAGS + 0xD0)
 #define FLAG_DAILY_BERRY_MASTERS_WIFE               (SYSTEM_FLAGS + 0xD1)
-#define FLAG_DAILY_SOOTOPOLIS_RECIEVED_BERRY        (SYSTEM_FLAGS + 0xD2)
+#define FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY        (SYSTEM_FLAGS + 0xD2)
 #define FLAG_DAILY_0x933                            (SYSTEM_FLAGS + 0xD3)
 #define FLAG_DAILY_APPRENTICE_LEAVES                (SYSTEM_FLAGS + 0xD4)
 #define FLAG_0x935                                  (SYSTEM_FLAGS + 0xD5)

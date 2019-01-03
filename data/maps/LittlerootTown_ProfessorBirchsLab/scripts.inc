@@ -569,7 +569,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA3AC:: @ 81FA3AC
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET
 	special sub_81AFDA0
-	setflag FLAG_RECIEVED_POKEDEX_FROM_BIRCH
+	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_0x40CD, 1
 	return
 

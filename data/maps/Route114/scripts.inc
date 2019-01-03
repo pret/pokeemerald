@@ -28,7 +28,7 @@ Route114_EventScript_1F2582:: @ 81F2582
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_DAILY_ROUTE_114_RECIEVED_BERRY, Route114_EventScript_1F25C7
+	goto_if_set FLAG_DAILY_ROUTE_114_RECEIVED_BERRY, Route114_EventScript_1F25C7
 	msgbox Route114_Text_2A6FCB, MSGBOX_DEFAULT
 	random 5
 	addvar VAR_RESULT, 15
@@ -36,7 +36,7 @@ Route114_EventScript_1F2582:: @ 81F2582
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_EventScript_272054
-	setflag FLAG_DAILY_ROUTE_114_RECIEVED_BERRY
+	setflag FLAG_DAILY_ROUTE_114_RECEIVED_BERRY
 	msgbox Route114_Text_2A7034, MSGBOX_DEFAULT
 	release
 	end

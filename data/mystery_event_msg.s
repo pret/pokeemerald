@@ -169,7 +169,7 @@ MysteryEventScript_AuroraTicket:: @ 867533C
 	setvaddress MysteryEventScript_AuroraTicket
 	lock
 	faceplayer
-	checkflag FLAG_RECIEVED_AURORA_TICKET
+	checkflag FLAG_RECEIVED_AURORA_TICKET
 	vgoto_if 1, AuroraTicket_Obtained
 	checkflag FLAG_BATTLED_DEOXYS
 	vgoto_if 1, AuroraTicket_Obtained
@@ -184,7 +184,7 @@ MysteryEventScript_AuroraTicket:: @ 867533C
 	vgoto_if 1, AuroraTicket_NoBagSpace
 	giveitem_std ITEM_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
-	setflag FLAG_RECIEVED_AURORA_TICKET
+	setflag FLAG_RECEIVED_AURORA_TICKET
 	vmessage sText_AuroraTicket2
 	waitmessage
 	waitbuttonpress
@@ -221,7 +221,7 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	setvaddress MysteryEventScript_MysticTicket
 	lock
 	faceplayer
-	checkflag FLAG_RECIEVED_MYSTIC_TICKET
+	checkflag FLAG_RECEIVED_MYSTIC_TICKET
 	vgoto_if 1, MysticTicket_Obtained
 	checkflag FLAG_CAUGHT_LUGIA
 	vgoto_if 1, MysticTicket_Obtained
@@ -238,7 +238,7 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	vgoto_if 1, MysticTicket_NoBagSpace
 	giveitem_std ITEM_MYSTIC_TICKET
 	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
-	setflag FLAG_RECIEVED_MYSTIC_TICKET
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
 	vmessage sText_MysticTicket1
 	waitmessage
 	waitbuttonpress
@@ -293,7 +293,7 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	setvaddress MysteryEventScript_OldSeaMap
 	lock
 	faceplayer
-	checkflag FLAG_RECIEVED_OLD_SEA_MAP
+	checkflag FLAG_RECEIVED_OLD_SEA_MAP
 	vgoto_if 1, OldSeaMap_Obtained
 	checkflag FLAG_CAUGHT_MEW
 	vgoto_if 1, OldSeaMap_Obtained
@@ -308,7 +308,7 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	vgoto_if 1, OldSeaMap_NoBagSpace
 	giveitem_std ITEM_OLD_SEA_MAP
 	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
-	setflag FLAG_RECIEVED_OLD_SEA_MAP
+	setflag FLAG_RECEIVED_OLD_SEA_MAP
 	vmessage sText_MysteryGiftOldSeaMap_1
 	waitmessage
 	waitbuttonpress

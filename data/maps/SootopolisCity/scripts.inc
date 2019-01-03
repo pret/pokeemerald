@@ -744,7 +744,7 @@ SootopolisCity_EventScript_1E5F10:: @ 81E5F10
 SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	dodailyevents
 	special GetPlayerBigGuyGirlString
-	goto_if_set FLAG_DAILY_SOOTOPOLIS_RECIEVED_BERRY, SootopolisCity_EventScript_1E5FBB
+	goto_if_set FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY, SootopolisCity_EventScript_1E5FBB
 	msgbox SootopolisCity_Text_2A7BB0, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
@@ -752,7 +752,7 @@ SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_EventScript_272054
-	setflag FLAG_DAILY_SOOTOPOLIS_RECIEVED_BERRY
+	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
 	msgbox SootopolisCity_Text_2A7C7C, MSGBOX_DEFAULT
 	random 2
 	compare VAR_RESULT, 0

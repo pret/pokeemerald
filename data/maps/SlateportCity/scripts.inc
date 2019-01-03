@@ -722,10 +722,10 @@ SlateportCity_EventScript_1DD365:: @ 81DD365
 SlateportCity_EventScript_1DD36E:: @ 81DD36E
 	lock
 	faceplayer
-	goto_if_set FLAG_RECIEVED_POWDER_JAR, SlateportCity_EventScript_1DD39A
+	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_1DD39A
 	msgbox SlateportCity_Text_1DEBCE, MSGBOX_DEFAULT
 	giveitem_std ITEM_POWDER_JAR
-	setflag FLAG_RECIEVED_POWDER_JAR
+	setflag FLAG_RECEIVED_POWDER_JAR
 	msgbox SlateportCity_Text_1DED27, MSGBOX_DEFAULT
 	release
 	end
