@@ -5,8 +5,8 @@
 #include "task.h"
 #include "text.h"
 
-extern bool32 sub_8196094(void);
-extern void sub_8196080(u8*);
+extern bool32 IsMatchCallTaskActive(void);
+extern void StartMatchCallFromScript(u8*);
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
 
@@ -68,7 +68,7 @@ bool8 ShowFieldMessage(u8 *str)
 
 void sub_8098214(u8 taskId)
 {
-    if (!sub_8196094())
+    if (!IsMatchCallTaskActive())
     {
         sFieldMessageBoxMode = 0;
         DestroyTask(taskId);
@@ -81,7 +81,7 @@ bool8 sub_8098238(u8 *str)
         return FALSE;
     StringExpandPlaceholders(gStringVar4, str);
     CreateTask(sub_8098214, 0);
-    sub_8196080(str);
+    StartMatchCallFromScript(str);
     sFieldMessageBoxMode = 2;
     return TRUE;
 }

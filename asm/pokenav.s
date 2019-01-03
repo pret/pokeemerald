@@ -8173,7 +8173,7 @@ _081CAFA4:
 	ldrh r0, [r1, 0x1E]
 	bl GetTrainerIdxByRematchIdx
 	ldr r1, =gStringVar4
-	bl sub_81967AC
+	bl SelectMatchCallMessage
 	strb r0, [r6]
 	b _081CAFCC
 	.pool

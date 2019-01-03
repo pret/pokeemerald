@@ -257,13 +257,7 @@ gPlayerFacingPosition: @ 203AB40
 	.include "src/trainer_pokemon_sprites.o"
 	.include "src/lilycove_lady.o"
 	.include "src/battle_dome.o"
-
-gUnknown_0203CD80: @ 203CD80
-	.space 0x8
-
-gUnknown_0203CD88: @ 203CD88
-	.space 0x4
-
+	.include "src/match_call.o"
 	.include "src/menu.o"
 	.include "src/battle_factory_screen.o"
 	.include "src/mossdeep_gym.o"
