@@ -1,4 +1,4 @@
-BattleFrontier_PokeNav_2A971C:: @ 82A971C
+MatchCall_WildBattleText1:: @ 82A971C
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I saw this {STR_VAR_2} a while back\n"
@@ -6,7 +6,7 @@ BattleFrontier_PokeNav_2A971C:: @ 82A971C
 	.string "It was so close, too!\n"
 	.string "Well, see you again!$"
 
-BattleFrontier_PokeNav_2A9798:: @ 82A9798
+MatchCall_WildBattleText2:: @ 82A9798
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "I tried to catch a nice {STR_VAR_2}\n"
@@ -15,7 +15,7 @@ BattleFrontier_PokeNav_2A9798:: @ 82A9798
 	.string "I was sure disappointed!\p"
 	.string "Okay, bye!$"
 
-BattleFrontier_PokeNav_2A9813:: @ 82A9813
+MatchCall_WildBattleText3:: @ 82A9813
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I just took a shot at catching\n"
@@ -24,7 +24,7 @@ BattleFrontier_PokeNav_2A9813:: @ 82A9813
 	.string "It spoiled my day…\n"
 	.string "All right, see you!$"
 
-BattleFrontier_PokeNav_2A98A8:: @ 82A98A8
+MatchCall_WildBattleText4:: @ 82A98A8
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You know the POKéMON {STR_VAR_2}?\n"
@@ -35,7 +35,7 @@ BattleFrontier_PokeNav_2A98A8:: @ 82A98A8
 	.string "sure, though.\p"
 	.string "Okay, catch you later.$"
 
-BattleFrontier_PokeNav_2A9977:: @ 82A9977
+MatchCall_WildBattleText5:: @ 82A9977
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\l"
 	.string "Catching any POKéMON lately?\p"
@@ -43,7 +43,7 @@ BattleFrontier_PokeNav_2A9977:: @ 82A9977
 	.string "nabbing one, but it got loose.\p"
 	.string "Right, take care!$"
 
-BattleFrontier_PokeNav_2A99FD:: @ 82A99FD
+MatchCall_WildBattleText6:: @ 82A99FD
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "Caught any POKéMON lately?\p"
@@ -51,7 +51,7 @@ BattleFrontier_PokeNav_2A99FD:: @ 82A99FD
 	.string "But it evaded me somehow.\p"
 	.string "You take care.$"
 
-BattleFrontier_PokeNav_2A9A78:: @ 82A9A78
+MatchCall_WildBattleText7:: @ 82A9A78
 	.string "…Uh, {PLAYER}{STRING 5}?\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "Oh, wait! Wait!\n"
@@ -59,7 +59,7 @@ BattleFrontier_PokeNav_2A9A78:: @ 82A9A78
 	.string "Aaarrrgh! It bolted loose!\n"
 	.string "That wasn't just close!$"
 
-BattleFrontier_PokeNav_2A9AE8:: @ 82A9AE8
+MatchCall_WildBattleText8:: @ 82A9AE8
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "Have you had success catching\n"
@@ -69,7 +69,7 @@ BattleFrontier_PokeNav_2A9AE8:: @ 82A9AE8
 	.string "I need to try harder!\n"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2A9BA7:: @ 82A9BA7
+MatchCall_WildBattleText9:: @ 82A9BA7
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "So? Are you getting more POKéMON\n"
@@ -78,7 +78,7 @@ BattleFrontier_PokeNav_2A9BA7:: @ 82A9BA7
 	.string "They all get away from me!\p"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2A9C36:: @ 82A9C36
+MatchCall_WildBattleText10:: @ 82A9C36
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Listen, I came within a whisker of\n"
@@ -87,7 +87,7 @@ BattleFrontier_PokeNav_2A9C36:: @ 82A9C36
 	.string "I need to try harder.\n"
 	.string "See you around.$"
 
-BattleFrontier_PokeNav_2A9CC8:: @ 82A9CC8
+MatchCall_WildBattleText11:: @ 82A9CC8
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "How are things with you?\p"
@@ -95,7 +95,7 @@ BattleFrontier_PokeNav_2A9CC8:: @ 82A9CC8
 	.string "earlier, but it managed to flee.\p"
 	.string "I feel defeated…$"
 
-BattleFrontier_PokeNav_2A9D44:: @ 82A9D44
+MatchCall_WildBattleText12:: @ 82A9D44
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you still catching POKéMON?\p"
@@ -103,7 +103,7 @@ BattleFrontier_PokeNav_2A9D44:: @ 82A9D44
 	.string "myself, but it's not so easy.\p"
 	.string "The way of POKéMON is deep!$"
 
-BattleFrontier_PokeNav_2A9DD7:: @ 82A9DD7
+MatchCall_WildBattleText13:: @ 82A9DD7
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "Have you been catching POKéMON?\p"
@@ -111,7 +111,7 @@ BattleFrontier_PokeNav_2A9DD7:: @ 82A9DD7
 	.string "myself, but with little success.\p"
 	.string "The way of POKéMON is deep!$"
 
-BattleFrontier_PokeNav_2A9E70:: @ 82A9E70
+MatchCall_WildBattleText14:: @ 82A9E70
 	.string "Oh, hi, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Just now, I tried to catch a cute\n"
@@ -120,7 +120,7 @@ BattleFrontier_PokeNav_2A9E70:: @ 82A9E70
 	.string "Oh, you bet I was disappointed!\p"
 	.string "Bye-bye!$"
 
-BattleFrontier_PokeNav_2A9EFD:: @ 82A9EFD
+MatchCall_WildBattleText15:: @ 82A9EFD
 	.string "Hey, {PLAYER}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I've been thinking about trying\n"
@@ -130,7 +130,7 @@ BattleFrontier_PokeNav_2A9EFD:: @ 82A9EFD
 	.string "I'm at my wit's end!\n"
 	.string "See you around!$"
 
-BattleFrontier_PokeNav_2A9FAB:: @ 82A9FAB
+MatchCall_NegativeBattleText1:: @ 82A9FAB
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I tried battling another TRAINER,\n"
@@ -138,7 +138,7 @@ BattleFrontier_PokeNav_2A9FAB:: @ 82A9FAB
 	.string "It was really disappointing.\n"
 	.string "Well, see you again!$"
 
-BattleFrontier_PokeNav_2AA028:: @ 82AA028
+MatchCall_NegativeBattleText2:: @ 82AA028
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "I challenged someone else after\n"
@@ -146,14 +146,14 @@ BattleFrontier_PokeNav_2AA028:: @ 82AA028
 	.string "I came close, but I ended up\n"
 	.string "losing. Oh, well!$"
 
-BattleFrontier_PokeNav_2AA099:: @ 82AA099
+MatchCall_NegativeBattleText3:: @ 82AA099
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I just got cleaned in a battle.\p"
 	.string "I guess I need to raise my team\n"
 	.string "some more!$"
 
-BattleFrontier_PokeNav_2AA100:: @ 82AA100
+MatchCall_NegativeBattleText4:: @ 82AA100
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I tried another battle yesterday,\n"
@@ -161,7 +161,7 @@ BattleFrontier_PokeNav_2AA100:: @ 82AA100
 	.string "My team needs more raising.\n"
 	.string "Okay, catch you later.$"
 
-BattleFrontier_PokeNav_2AA188:: @ 82AA188
+MatchCall_NegativeBattleText5:: @ 82AA188
 	.string "Hiya, {PLAYER}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "How are things with you?\p"
@@ -170,7 +170,7 @@ BattleFrontier_PokeNav_2AA188:: @ 82AA188
 	.string "I can't get it together.\n"
 	.string "Right, take care!$"
 
-BattleFrontier_PokeNav_2AA214:: @ 82AA214
+MatchCall_NegativeBattleText6:: @ 82AA214
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How's it going for you?\p"
@@ -179,7 +179,7 @@ BattleFrontier_PokeNav_2AA214:: @ 82AA214
 	.string "I can't get into the groove.\n"
 	.string "You take care.$"
 
-BattleFrontier_PokeNav_2AA2A1:: @ 82AA2A1
+MatchCall_NegativeBattleText7:: @ 82AA2A1
 	.string "{STR_VAR_1} here.\n"
 	.string "How's it going lately?\p"
 	.string "I lost a battle yesterday,\n"
@@ -187,7 +187,7 @@ BattleFrontier_PokeNav_2AA2A1:: @ 82AA2A1
 	.string "I have to devise a plan…\n"
 	.string "See you.$"
 
-BattleFrontier_PokeNav_2AA31B:: @ 82AA31B
+MatchCall_NegativeBattleText8:: @ 82AA31B
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "How are your POKéMON doing?\n"
@@ -195,7 +195,7 @@ BattleFrontier_PokeNav_2AA31B:: @ 82AA31B
 	.string "I need to try harder!\n"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2AA3A8:: @ 82AA3A8
+MatchCall_NegativeBattleText9:: @ 82AA3A8
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "Listen, listen, you have to hear\n"
@@ -204,7 +204,7 @@ BattleFrontier_PokeNav_2AA3A8:: @ 82AA3A8
 	.string "but I lost at the last second.\p"
 	.string "Oh, it burns me up!$"
 
-BattleFrontier_PokeNav_2AA442:: @ 82AA442
+MatchCall_NegativeBattleText10:: @ 82AA442
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "A little earlier, I was in a battle.\n"
@@ -212,14 +212,14 @@ BattleFrontier_PokeNav_2AA442:: @ 82AA442
 	.string "I need to raise my POKéMON more.\n"
 	.string "See you around.$"
 
-BattleFrontier_PokeNav_2AA4C5:: @ 82AA4C5
+MatchCall_NegativeBattleText11:: @ 82AA4C5
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "How are your POKéMON?\p"
 	.string "I just lost yet another battle.\p"
 	.string "Well, see you!$"
 
-BattleFrontier_PokeNav_2AA520:: @ 82AA520
+MatchCall_NegativeBattleText12:: @ 82AA520
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you still battling hard?\p"
@@ -227,7 +227,7 @@ BattleFrontier_PokeNav_2AA520:: @ 82AA520
 	.string "been training my team all over.\p"
 	.string "Let's meet again.$"
 
-BattleFrontier_PokeNav_2AA5AD:: @ 82AA5AD
+MatchCall_NegativeBattleText13:: @ 82AA5AD
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I hope you've been keeping well.\p"
@@ -236,7 +236,7 @@ BattleFrontier_PokeNav_2AA5AD:: @ 82AA5AD
 	.string "{PLAYER}{STRING 5}, try to be active like me.\n"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2AA64D:: @ 82AA64D
+MatchCall_NegativeBattleText14:: @ 82AA64D
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Are you doing good?\p"
@@ -244,7 +244,7 @@ BattleFrontier_PokeNav_2AA64D:: @ 82AA64D
 	.string "though.\p"
 	.string "Bye-bye!$"
 
-BattleFrontier_PokeNav_2AA6AF:: @ 82AA6AF
+MatchCall_PositiveBattleText1:: @ 82AA6AF
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I battled another TRAINER earlier.\n"
@@ -252,13 +252,13 @@ BattleFrontier_PokeNav_2AA6AF:: @ 82AA6AF
 	.string "My {STR_VAR_2} really worked hard\n"
 	.string "for me. This is so great!$"
 
-BattleFrontier_PokeNav_2AA730:: @ 82AA730
+MatchCall_PositiveBattleText2:: @ 82AA730
 	.string "Hello, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}!\p"
 	.string "I had a battle yesterday and\n"
 	.string "I won! It's fantastic!$"
 
-BattleFrontier_PokeNav_2AA77A:: @ 82AA77A
+MatchCall_PositiveBattleText3:: @ 82AA77A
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}!\l"
 	.string "How's your battling?\p"
@@ -267,7 +267,7 @@ BattleFrontier_PokeNav_2AA77A:: @ 82AA77A
 	.string "The next time I battle you,\n"
 	.string "{PLAYER}, it won't be me losing!$"
 
-BattleFrontier_PokeNav_2AA81C:: @ 82AA81C
+MatchCall_PositiveBattleText4:: @ 82AA81C
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I had a match earlier.\n"
@@ -275,7 +275,7 @@ BattleFrontier_PokeNav_2AA81C:: @ 82AA81C
 	.string "My {STR_VAR_2} put on one\n"
 	.string "inspired showing.$"
 
-BattleFrontier_PokeNav_2AA88C:: @ 82AA88C
+MatchCall_PositiveBattleText5:: @ 82AA88C
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "How are things with you?\n"
@@ -285,7 +285,7 @@ BattleFrontier_PokeNav_2AA88C:: @ 82AA88C
 	.string "You wait. I'm going to beat you\n"
 	.string "next time! Right, take care!$"
 
-BattleFrontier_PokeNav_2AA934:: @ 82AA934
+MatchCall_PositiveBattleText6:: @ 82AA934
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How's it going for you?\p"
@@ -294,7 +294,7 @@ BattleFrontier_PokeNav_2AA934:: @ 82AA934
 	.string "When we have our next battle,\n"
 	.string "I'm sure not going to lose!$"
 
-BattleFrontier_PokeNav_2AA9D3:: @ 82AA9D3
+MatchCall_PositiveBattleText7:: @ 82AA9D3
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} is a force!\n"
@@ -302,7 +302,7 @@ BattleFrontier_PokeNav_2AA9D3:: @ 82AA9D3
 	.string "I can't wait to have a rematch\n"
 	.string "with you.$"
 
-BattleFrontier_PokeNav_2AAA40:: @ 82AAA40
+MatchCall_PositiveBattleText8:: @ 82AAA40
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "I hope you've been well.\n"
@@ -311,7 +311,7 @@ BattleFrontier_PokeNav_2AAA40:: @ 82AAA40
 	.string "hard to get the win.\p"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2AAAE4:: @ 82AAAE4
+MatchCall_PositiveBattleText9:: @ 82AAAE4
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "How are your POKéMON holding up?\n"
@@ -321,7 +321,7 @@ BattleFrontier_PokeNav_2AAAE4:: @ 82AAAE4
 	.string "I wish I could've shown you!\n"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2AAB8C:: @ 82AAB8C
+MatchCall_PositiveBattleText10:: @ 82AAB8C
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "How has life been treating you?\p"
@@ -330,7 +330,7 @@ BattleFrontier_PokeNav_2AAB8C:: @ 82AAB8C
 	.string "I just won a battle with them.\n"
 	.string "See you around.$"
 
-BattleFrontier_PokeNav_2AAC25:: @ 82AAC25
+MatchCall_PositiveBattleText11:: @ 82AAC25
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Been in any battles lately?\n"
@@ -338,7 +338,7 @@ BattleFrontier_PokeNav_2AAC25:: @ 82AAC25
 	.string "I'm on a roll! Gahahaha!\n"
 	.string "Well, see you!$"
 
-BattleFrontier_PokeNav_2AAC9D:: @ 82AAC9D
+MatchCall_PositiveBattleText12:: @ 82AAC9D
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I trust you've been well?\n"
@@ -347,7 +347,7 @@ BattleFrontier_PokeNav_2AAC9D:: @ 82AAC9D
 	.string "I'm not stepping aside to you\l"
 	.string "youngsters yet!$"
 
-BattleFrontier_PokeNav_2AAD41:: @ 82AAD41
+MatchCall_PositiveBattleText13:: @ 82AAD41
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I hope you've been keeping well.\n"
@@ -357,7 +357,7 @@ BattleFrontier_PokeNav_2AAD41:: @ 82AAD41
 	.string "quite yet!\p"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2AAE00:: @ 82AAE00
+MatchCall_PositiveBattleText14:: @ 82AAE00
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I was in a battle recently, and my\n"
@@ -365,7 +365,7 @@ BattleFrontier_PokeNav_2AAE00:: @ 82AAE00
 	.string "I wish you could have seen it,\n"
 	.string "{PLAYER}{STRING 5}. Bye-bye!$"
 
-BattleFrontier_PokeNav_2AAE7F:: @ 82AAE7F
+MatchCall_SameRouteBattleRequestText1:: @ 82AAE7F
 	.string "Hi! {PLAYER}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Huh? Wait, you're near\n"
@@ -373,7 +373,7 @@ BattleFrontier_PokeNav_2AAE7F:: @ 82AAE7F
 	.string "Oh, wow, we have to battle, then!\n"
 	.string "I'll be waiting! See you!$"
 
-BattleFrontier_PokeNav_2AAEF1:: @ 82AAEF1
+MatchCall_SameRouteBattleRequestText2:: @ 82AAEF1
 	.string "Hello, {PLAYER}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "Oh? You happen to be around\n"
@@ -381,7 +381,7 @@ BattleFrontier_PokeNav_2AAEF1:: @ 82AAEF1
 	.string "Would you like to battle now?\n"
 	.string "I'll wait for you! See you!$"
 
-BattleFrontier_PokeNav_2AAF69:: @ 82AAF69
+MatchCall_SameRouteBattleRequestText3:: @ 82AAF69
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "Oh, hey, are you near\n"
@@ -391,7 +391,7 @@ BattleFrontier_PokeNav_2AAF69:: @ 82AAF69
 	.string "I'm not losing again!\n"
 	.string "I'll be waiting! Catch you soon!$"
 
-BattleFrontier_PokeNav_2AB010:: @ 82AB010
+MatchCall_SameRouteBattleRequestText4:: @ 82AB010
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "Whereabouts are you now?\n"
@@ -399,7 +399,7 @@ BattleFrontier_PokeNav_2AB010:: @ 82AB010
 	.string "Want to battle now?\n"
 	.string "I'll wait for you. See you!$"
 
-BattleFrontier_PokeNav_2AB076:: @ 82AB076
+MatchCall_SameRouteBattleRequestText5:: @ 82AB076
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\l"
 	.string "How are things with you?\p"
@@ -410,7 +410,7 @@ BattleFrontier_PokeNav_2AB076:: @ 82AB076
 	.string "I'll keep an eye out for you.\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2AB11A:: @ 82AB11A
+MatchCall_SameRouteBattleRequestText6:: @ 82AB11A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "How are your POKéMON keeping?\p"
@@ -421,7 +421,7 @@ BattleFrontier_PokeNav_2AB11A:: @ 82AB11A
 	.string "I can wait, sure.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AB1B4:: @ 82AB1B4
+MatchCall_SameRouteBattleRequestText7:: @ 82AB1B4
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, you happen to be around\n"
@@ -431,7 +431,7 @@ BattleFrontier_PokeNav_2AB1B4:: @ 82AB1B4
 	.string "I'll show you my POKéMON.\n"
 	.string "I'll wait for you.$"
 
-BattleFrontier_PokeNav_2AB23D:: @ 82AB23D
+MatchCall_SameRouteBattleRequestText8:: @ 82AB23D
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "I hope you're doing well.\n"
@@ -441,7 +441,7 @@ BattleFrontier_PokeNav_2AB23D:: @ 82AB23D
 	.string "I'll wait for you.\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2AB2E9:: @ 82AB2E9
+MatchCall_SameRouteBattleRequestText9:: @ 82AB2E9
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "Are you keeping up?\n"
@@ -450,7 +450,7 @@ BattleFrontier_PokeNav_2AB2E9:: @ 82AB2E9
 	.string "should battle?\p"
 	.string "Don't keep me waiting too long!$"
 
-BattleFrontier_PokeNav_2AB382:: @ 82AB382
+MatchCall_SameRouteBattleRequestText10:: @ 82AB382
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "How are things with you?\n"
@@ -459,7 +459,7 @@ BattleFrontier_PokeNav_2AB382:: @ 82AB382
 	.string "I'm ready and waiting.\n"
 	.string "Be quick!$"
 
-BattleFrontier_PokeNav_2AB410:: @ 82AB410
+MatchCall_SameRouteBattleRequestText11:: @ 82AB410
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Ah, so where you are now is\n"
@@ -469,7 +469,7 @@ BattleFrontier_PokeNav_2AB410:: @ 82AB410
 	.string "I'll wait around for you!\n"
 	.string "See you real quick!$"
 
-BattleFrontier_PokeNav_2AB4B0:: @ 82AB4B0
+MatchCall_SameRouteBattleRequestText12:: @ 82AB4B0
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Where might you be now?\p"
@@ -480,7 +480,7 @@ BattleFrontier_PokeNav_2AB4B0:: @ 82AB4B0
 	.string "I can wait.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AB538:: @ 82AB538
+MatchCall_SameRouteBattleRequestText13:: @ 82AB538
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I hope you've been keeping well.\n"
@@ -490,7 +490,7 @@ BattleFrontier_PokeNav_2AB538:: @ 82AB538
 	.string "I'll wait for you.\n"
 	.string "Bye for now.$"
 
-BattleFrontier_PokeNav_2AB5E4:: @ 82AB5E4
+MatchCall_SameRouteBattleRequestText14:: @ 82AB5E4
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You're what? …{STR_VAR_2}?\n"
@@ -500,14 +500,14 @@ BattleFrontier_PokeNav_2AB5E4:: @ 82AB5E4
 	.string "I'll be looking for you!\n"
 	.string "Bye-bye!$"
 
-BattleFrontier_PokeNav_2AB670:: @ 82AB670
+MatchCall_DifferentRouteBattleRequestText1:: @ 82AB670
 	.string "Hi! {PLAYER}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Want to have a battle with me?\p"
 	.string "I'll be waiting for you around\n"
 	.string "{STR_VAR_2}!$"
 
-BattleFrontier_PokeNav_2AB6CD:: @ 82AB6CD
+MatchCall_DifferentRouteBattleRequestText2:: @ 82AB6CD
 	.string "Hello, {PLAYER}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "Would you like to have a battle\n"
@@ -515,7 +515,7 @@ BattleFrontier_PokeNav_2AB6CD:: @ 82AB6CD
 	.string "You can find me around\n"
 	.string "{STR_VAR_2}. I'll be waiting!$"
 
-BattleFrontier_PokeNav_2AB73C:: @ 82AB73C
+MatchCall_DifferentRouteBattleRequestText3:: @ 82AB73C
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "My POKéMON have grown a lot\n"
@@ -526,7 +526,7 @@ BattleFrontier_PokeNav_2AB73C:: @ 82AB73C
 	.string "I'll be waiting for you around\n"
 	.string "{STR_VAR_2}.$"
 
-BattleFrontier_PokeNav_2AB808:: @ 82AB808
+MatchCall_DifferentRouteBattleRequestText4:: @ 82AB808
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "How are things with you?\p"
@@ -537,7 +537,7 @@ BattleFrontier_PokeNav_2AB808:: @ 82AB808
 	.string "Let's meet up around\n"
 	.string "{STR_VAR_2}, okay?$"
 
-BattleFrontier_PokeNav_2AB8B7:: @ 82AB8B7
+MatchCall_DifferentRouteBattleRequestText5:: @ 82AB8B7
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "My POKéMON are growing up in\n"
@@ -547,7 +547,7 @@ BattleFrontier_PokeNav_2AB8B7:: @ 82AB8B7
 	.string "I'll keep an eye out for you around\n"
 	.string "{STR_VAR_2}. See you soon!$"
 
-BattleFrontier_PokeNav_2AB95D:: @ 82AB95D
+MatchCall_DifferentRouteBattleRequestText6:: @ 82AB95D
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "I hope you're on top of things.\p"
@@ -557,7 +557,7 @@ BattleFrontier_PokeNav_2AB95D:: @ 82AB95D
 	.string "come to {STR_VAR_2}.\p"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2ABA03:: @ 82ABA03
+MatchCall_DifferentRouteBattleRequestText7:: @ 82ABA03
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\l"
 	.string "So? Are your POKéMON growing?\p"
@@ -567,7 +567,7 @@ BattleFrontier_PokeNav_2ABA03:: @ 82ABA03
 	.string "Come see me for a match.\p"
 	.string "See you around.$"
 
-BattleFrontier_PokeNav_2ABA9F:: @ 82ABA9F
+MatchCall_DifferentRouteBattleRequestText8:: @ 82ABA9F
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "I hope you're doing well.\n"
@@ -577,7 +577,7 @@ BattleFrontier_PokeNav_2ABA9F:: @ 82ABA9F
 	.string "I'll be around {STR_VAR_2}.\n"
 	.string "Until then, good-bye!$"
 
-BattleFrontier_PokeNav_2ABB62:: @ 82ABB62
+MatchCall_DifferentRouteBattleRequestText9:: @ 82ABB62
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "How are your POKéMON doing?\p"
@@ -587,7 +587,7 @@ BattleFrontier_PokeNav_2ABB62:: @ 82ABB62
 	.string "so let's battle if you're close by.\p"
 	.string "Hope I see you soon!$"
 
-BattleFrontier_PokeNav_2ABC26:: @ 82ABC26
+MatchCall_DifferentRouteBattleRequestText10:: @ 82ABC26
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "So, how are things with you?\p"
@@ -598,7 +598,7 @@ BattleFrontier_PokeNav_2ABC26:: @ 82ABC26
 	.string "I'll be around {STR_VAR_2}.\n"
 	.string "Come see me if you're close.$"
 
-BattleFrontier_PokeNav_2ABCE9:: @ 82ABCE9
+MatchCall_DifferentRouteBattleRequestText11:: @ 82ABCE9
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "Where might you be now?\p"
@@ -608,7 +608,7 @@ BattleFrontier_PokeNav_2ABCE9:: @ 82ABCE9
 	.string "I'm around {STR_VAR_2} now.\n"
 	.string "I hope you'll seek us out.$"
 
-BattleFrontier_PokeNav_2ABDA2:: @ 82ABDA2
+MatchCall_DifferentRouteBattleRequestText12:: @ 82ABDA2
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I should tell you, my POKéMON have\n"
@@ -618,7 +618,7 @@ BattleFrontier_PokeNav_2ABDA2:: @ 82ABDA2
 	.string "We'll be around {STR_VAR_2}.\n"
 	.string "Come see us anytime!$"
 
-BattleFrontier_PokeNav_2ABE5E:: @ 82ABE5E
+MatchCall_DifferentRouteBattleRequestText13:: @ 82ABE5E
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "Are your POKéMON keeping well?\p"
@@ -629,7 +629,7 @@ BattleFrontier_PokeNav_2ABE5E:: @ 82ABE5E
 	.string "If you're near {STR_VAR_2},\n"
 	.string "do come see us.$"
 
-BattleFrontier_PokeNav_2ABF36:: @ 82ABF36
+MatchCall_DifferentRouteBattleRequestText14:: @ 82ABF36
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "Keeping well, I hope.\p"
@@ -641,7 +641,7 @@ BattleFrontier_PokeNav_2ABF36:: @ 82ABF36
 	.string "{STR_VAR_2}.\p"
 	.string "Come see us anytime, okay?$"
 
-BattleFrontier_PokeNav_2AC009:: @ 82AC009
+MatchCall_PersonalizedText1:: @ 82AC009
 	.string "It's me, the mountain-loving\n"
 	.string "{STR_VAR_1}!\p"
 	.string "Well, since we met, have you grown\n"
@@ -650,7 +650,7 @@ BattleFrontier_PokeNav_2AC009:: @ 82AC009
 	.string "Next time, we'll meet somewhere\n"
 	.string "around {STR_VAR_2}.$"
 
-BattleFrontier_PokeNav_2AC0BD:: @ 82AC0BD
+MatchCall_PersonalizedText2:: @ 82AC0BD
 	.string "This is {STR_VAR_1}.\n"
 	.string "Hello.\p"
 	.string "I was just telling a new TRAINER\n"
@@ -661,7 +661,7 @@ BattleFrontier_PokeNav_2AC0BD:: @ 82AC0BD
 	.string "that everyone will admire.\p"
 	.string "I hope we meet again!$"
 
-BattleFrontier_PokeNav_2AC18C:: @ 82AC18C
+MatchCall_PersonalizedText3:: @ 82AC18C
 	.string "Hello! It's {STR_VAR_1}.\p"
 	.string "I love where I am now.\n"
 	.string "It's pleasant with sweet aromas!\p"
@@ -669,7 +669,7 @@ BattleFrontier_PokeNav_2AC18C:: @ 82AC18C
 	.string "and they burst into bloom.\p"
 	.string "See you again sometime!$"
 
-BattleFrontier_PokeNav_2AC228:: @ 82AC228
+MatchCall_PersonalizedText4:: @ 82AC228
 	.string "Hello! Thirty years of exploration,\n"
 	.string "{STR_VAR_1} at your service!\p"
 	.string "It seems that you're energetically\n"
@@ -679,7 +679,7 @@ BattleFrontier_PokeNav_2AC228:: @ 82AC228
 	.string "Now, if you'll excuse me,\n"
 	.string "I have ruins to explore.$"
 
-BattleFrontier_PokeNav_2AC30C:: @ 82AC30C
+MatchCall_PersonalizedText5:: @ 82AC30C
 	.string "It's {STR_VAR_1}!\p"
 	.string "Know what I'm doing today?\n"
 	.string "Looking at waves from the beach!\p"
@@ -687,7 +687,7 @@ BattleFrontier_PokeNav_2AC30C:: @ 82AC30C
 	.string "The sea is the prettiest from here.\l"
 	.string "I'm getting hungry, so bye-bye!$"
 
-BattleFrontier_PokeNav_2AC3B6:: @ 82AC3B6
+MatchCall_PersonalizedText6:: @ 82AC3B6
 	.string "Munch-chew…\n"
 	.string "Oh, hi, it's {STR_VAR_1}.\l"
 	.string "I love eating on the beach.\p"
@@ -695,7 +695,7 @@ BattleFrontier_PokeNav_2AC3B6:: @ 82AC3B6
 	.string "great. We're fully fueled!\l"
 	.string "I'm going for a swim. Bye!$"
 
-BattleFrontier_PokeNav_2AC446:: @ 82AC446
+MatchCall_PersonalizedText7:: @ 82AC446
 	.string "Hello, this is {STR_VAR_1}…\p"
 	.string "I've grown a little jaded with this\n"
 	.string "whole COOLTRAINER thing…\p"
@@ -711,7 +711,7 @@ BattleFrontier_PokeNav_2AC446:: @ 82AC446
 	.string "But when I see you next,\n"
 	.string "don't worry, I won't whine!$"
 
-BattleFrontier_PokeNav_2AC5C7:: @ 82AC5C7
+MatchCall_PersonalizedText8:: @ 82AC5C7
 	.string "Yahoo, it's {STR_VAR_1}!\n"
 	.string "How do you do?\p"
 	.string "I've been raising my POKéMON with\n"
@@ -721,7 +721,7 @@ BattleFrontier_PokeNav_2AC5C7:: @ 82AC5C7
 	.string "Isn't it great to have TRAINER\n"
 	.string "friends? Let's meet again!$"
 
-BattleFrontier_PokeNav_2AC682:: @ 82AC682
+MatchCall_PersonalizedText9:: @ 82AC682
 	.string "It's {STR_VAR_1}…\n"
 	.string "Right now, behind you…\l"
 	.string "Wasn't there something…?\p"
@@ -733,7 +733,7 @@ BattleFrontier_PokeNav_2AC682:: @ 82AC682
 	.string "Giggle…\n"
 	.string "Farewell…$"
 
-BattleFrontier_PokeNav_2AC755:: @ 82AC755
+MatchCall_PersonalizedText10:: @ 82AC755
 	.string "This is {STR_VAR_1}.\n"
 	.string "How do you do?\p"
 	.string "Isn't it convenient that we can\n"
@@ -744,7 +744,7 @@ BattleFrontier_PokeNav_2AC755:: @ 82AC755
 	.string "I should be going now.\n"
 	.string "I'm glad we had this chat.$"
 
-BattleFrontier_PokeNav_2AC82C:: @ 82AC82C
+MatchCall_PersonalizedText11:: @ 82AC82C
 	.string "It's {STR_VAR_1}!\n"
 	.string "Will you listen to this?\p"
 	.string "I like the SAFARI ZONE a lot,\n"
@@ -756,7 +756,7 @@ BattleFrontier_PokeNav_2AC82C:: @ 82AC82C
 	.string "I'm off to the SAFARI ZONE again!\n"
 	.string "Catch you!$"
 
-BattleFrontier_PokeNav_2AC914:: @ 82AC914
+MatchCall_PersonalizedText12:: @ 82AC914
 	.string "Hello, {STR_VAR_1} here.\n"
 	.string "Yes, correct, I am rich, yes.\p"
 	.string "I should tell you, my wealth has\n"
@@ -770,7 +770,7 @@ BattleFrontier_PokeNav_2AC914:: @ 82AC914
 	.string "Oh, you must excuse me, I have this\n"
 	.string "formal dinner to attend.$"
 
-BattleFrontier_PokeNav_2ACA59:: @ 82ACA59
+MatchCall_PersonalizedText13:: @ 82ACA59
 	.string "Ufufufufu…\n"
 	.string "It's me, {STR_VAR_1}…\p"
 	.string "Can you guess what I'm seeing?\n"
@@ -780,7 +780,7 @@ BattleFrontier_PokeNav_2ACA59:: @ 82ACA59
 	.string "I… I'm kind of busy now.\n"
 	.string "I have to go.$"
 
-BattleFrontier_PokeNav_2ACB02:: @ 82ACB02
+MatchCall_PersonalizedText14:: @ 82ACB02
 	.string "Oh, it's {STR_VAR_1}!\p"
 	.string "I was just thinking I'm getting\n"
 	.string "bored of the ABANDONED SHIP.\p"
@@ -794,7 +794,7 @@ BattleFrontier_PokeNav_2ACB02:: @ 82ACB02
 	.string "door to a match.\p"
 	.string "Be seeing you!$"
 
-BattleFrontier_PokeNav_2ACC3F:: @ 82ACC3F
+MatchCall_PersonalizedText15:: @ 82ACC3F
 	.string "I'm {STR_VAR_1}!\n"
 	.string "The man of the sea!\p"
 	.string "You know what I think?\p"
@@ -806,7 +806,7 @@ BattleFrontier_PokeNav_2ACC3F:: @ 82ACC3F
 	.string "It's a great training opportunity!\n"
 	.string "Sorry, but I have to go!$"
 
-BattleFrontier_PokeNav_2ACD2F:: @ 82ACD2F
+MatchCall_PersonalizedText16:: @ 82ACD2F
 	.string "It's {STR_VAR_1}! Listen, I've been\n"
 	.string "teaching karate to my POKéMON.\p"
 	.string "But now they're better than me!\n"
@@ -817,7 +817,7 @@ BattleFrontier_PokeNav_2ACD2F:: @ 82ACD2F
 	.string "We have to battle again!\n"
 	.string "Ugwaah!$"
 
-BattleFrontier_PokeNav_2ACE1E:: @ 82ACE1E
+MatchCall_PersonalizedText17:: @ 82ACE1E
 	.string "It's me, {STR_VAR_1}.\n"
 	.string "How're your travels unwinding?\p"
 	.string "…Whoa, is that right?\n"
@@ -829,7 +829,7 @@ BattleFrontier_PokeNav_2ACE1E:: @ 82ACE1E
 	.string "I'd better get this tune properly\n"
 	.string "written, so I've got to fly! Later!$"
 
-BattleFrontier_PokeNav_2ACF32:: @ 82ACF32
+MatchCall_PersonalizedText18:: @ 82ACF32
 	.string "This is {STR_VAR_1}…\n"
 	.string "Hear my new song.\p"
 	.string "Lalala, {STR_VAR_2}, {STR_VAR_2}!\n"
@@ -839,7 +839,7 @@ BattleFrontier_PokeNav_2ACF32:: @ 82ACF32
 	.string "{STR_VAR_1} and {STR_VAR_2}…\p"
 	.string "Repeat chorus, fade…$"
 
-BattleFrontier_PokeNav_2ACFBE:: @ 82ACFBE
+MatchCall_PersonalizedText19:: @ 82ACFBE
 	.string "I'm {STR_VAR_1}, you know,\n"
 	.string "the camping expert!\p"
 	.string "When we battled, I couldn't help\n"
@@ -851,7 +851,7 @@ BattleFrontier_PokeNav_2ACFBE:: @ 82ACFBE
 	.string "Battle with us again, okay?\n"
 	.string "Oh, and let's go camping, too!$"
 
-BattleFrontier_PokeNav_2AD0AC:: @ 82AD0AC
+MatchCall_PersonalizedText20:: @ 82AD0AC
 	.string "It's me, me, {STR_VAR_1}!\p"
 	.string "I'd like to climb other mountains\n"
 	.string "than this one, to be honest.\p"
@@ -861,7 +861,7 @@ BattleFrontier_PokeNav_2AD0AC:: @ 82AD0AC
 	.string "with ladies around, let me know!\p"
 	.string "Ehehehe, see you around!$"
 
-BattleFrontier_PokeNav_2AD194:: @ 82AD194
+MatchCall_PersonalizedText21:: @ 82AD194
 	.string "… … … … … …\n"
 	.string "… … … … … …\l"
 	.string "It's {STR_VAR_1}…\p"
@@ -869,7 +869,7 @@ BattleFrontier_PokeNav_2AD194:: @ 82AD194
 	.string "… … … … … …\l"
 	.string "That's all today…$"
 
-BattleFrontier_PokeNav_2AD1DF:: @ 82AD1DF
+MatchCall_PersonalizedText22:: @ 82AD1DF
 	.string "This is {STR_VAR_1}. Today, I had\n"
 	.string "this feeling I would chat with you.\p"
 	.string "My desire to defeat you builds\n"
@@ -879,7 +879,7 @@ BattleFrontier_PokeNav_2AD1DF:: @ 82AD1DF
 	.string "I'm glad you heard me out.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AD2A8:: @ 82AD2A8
+MatchCall_PersonalizedText23:: @ 82AD2A8
 	.string "It's {STR_VAR_1}.\p"
 	.string "When there's a strong TRAINER\n"
 	.string "nearby, I can sometimes sense that\l"
@@ -889,7 +889,7 @@ BattleFrontier_PokeNav_2AD2A8:: @ 82AD2A8
 	.string "I'll be waiting for your visit.\n"
 	.string "Bye!$"
 
-BattleFrontier_PokeNav_2AD34F:: @ 82AD34F
+MatchCall_PersonalizedText24:: @ 82AD34F
 	.string "Hello, this is {STR_VAR_1}.\n"
 	.string "You sound well, {PLAYER}{STRING 5}.\p"
 	.string "I've traveled around the world,\n"
@@ -901,7 +901,7 @@ BattleFrontier_PokeNav_2AD34F:: @ 82AD34F
 	.string "techniques.\p"
 	.string "I do hope for a rematch.$"
 
-BattleFrontier_PokeNav_2AD44E:: @ 82AD44E
+MatchCall_PersonalizedText25:: @ 82AD44E
 	.string "Snivel… It's… {STR_VAR_1}…\n"
 	.string "…Sob…\p"
 	.string "ROXANNE chewed me out in class\n"
@@ -913,7 +913,7 @@ BattleFrontier_PokeNav_2AD44E:: @ 82AD44E
 	.string "the TRAINER'S SCHOOL tomorrow!\p"
 	.string "See you later!$"
 
-BattleFrontier_PokeNav_2AD53A:: @ 82AD53A
+MatchCall_PersonalizedText26:: @ 82AD53A
 	.string "It's {STR_VAR_1}!\p"
 	.string "ROXANNE let me battle with her\n"
 	.string "yesterday.\p"
@@ -926,7 +926,7 @@ BattleFrontier_PokeNav_2AD53A:: @ 82AD53A
 	.string "I'm going to really focus and work!\n"
 	.string "I'd better go!$"
 
-BattleFrontier_PokeNav_2AD642:: @ 82AD642
+MatchCall_PersonalizedText27:: @ 82AD642
 	.string "Hi, it's ANNA! I'm with my junior\n"
 	.string "partner MEG again today.\p"
 	.string "I really love caring for MEG and\n"
@@ -944,7 +944,7 @@ BattleFrontier_PokeNav_2AD642:: @ 82AD642
 	.string "I have to go now.\n"
 	.string "It's time for our snack!$"
 
-BattleFrontier_PokeNav_2AD801:: @ 82AD801
+MatchCall_PersonalizedText28:: @ 82AD801
 	.string "I love POKéMON!\n"
 	.string "It's {STR_VAR_1} from the FAN CLUB!\p"
 	.string "You have to hear this!\n"
@@ -958,7 +958,7 @@ BattleFrontier_PokeNav_2AD801:: @ 82AD801
 	.string "Sorry, but I can't talk now!\n"
 	.string "You'll have to hear this next time!$"
 
-BattleFrontier_PokeNav_2AD92E:: @ 82AD92E
+MatchCall_PersonalizedText29:: @ 82AD92E
 	.string "Ohoho!\p"
 	.string "This is {STR_VAR_1}! I can't wait to\n"
 	.string "tell you about my darling POKéMON!\p"
@@ -974,7 +974,7 @@ BattleFrontier_PokeNav_2AD92E:: @ 82AD92E
 	.string "Well, I must be going.\n"
 	.string "Bye, now!$"
 
-BattleFrontier_PokeNav_2ADA8F:: @ 82ADA8F
+MatchCall_PersonalizedText30:: @ 82ADA8F
 	.string "I am… {STR_VAR_1}.\n"
 	.string "People call me an EXPERT.\p"
 	.string "But there is one thing I know.\n"
@@ -986,7 +986,7 @@ BattleFrontier_PokeNav_2ADA8F:: @ 82ADA8F
 	.string "something deep and profound!\p"
 	.string "I shall leave you in good spirits!$"
 
-BattleFrontier_PokeNav_2ADB9B:: @ 82ADB9B
+MatchCall_PersonalizedText31:: @ 82ADB9B
 	.string "It's {STR_VAR_1}.\n"
 	.string "I'm glad to chat with you!\p"
 	.string "I am feeling alive and refreshed\n"
@@ -997,7 +997,7 @@ BattleFrontier_PokeNav_2ADB9B:: @ 82ADB9B
 	.string "I imagine you'll become an EXPERT\n"
 	.string "in your old age! Ohohoho…$"
 
-BattleFrontier_PokeNav_2ADC92:: @ 82ADC92
+MatchCall_PersonalizedText32:: @ 82ADC92
 	.string "Yay! This is {STR_VAR_1}!\n"
 	.string "What's up?\p"
 	.string "I might be imagining this, but when\n"
@@ -1013,7 +1013,7 @@ BattleFrontier_PokeNav_2ADC92:: @ 82ADC92
 	.string "You didn't really believe that?\l"
 	.string "Ehehehe, that's all! Bye now!$"
 
-BattleFrontier_PokeNav_2ADE08:: @ 82ADE08
+MatchCall_PersonalizedText33:: @ 82ADE08
 	.string "Ahoy!\n"
 	.string "{STR_VAR_1} here!\p"
 	.string "As always, I'm fishing with wild\n"
@@ -1027,7 +1027,7 @@ BattleFrontier_PokeNav_2ADE08:: @ 82ADE08
 	.string "Gotta go!\n"
 	.string "Find me some new fishing spots!$"
 
-BattleFrontier_PokeNav_2ADF07:: @ 82ADF07
+MatchCall_PersonalizedText34:: @ 82ADF07
 	.string "Hey, there! It's {STR_VAR_1}.\n"
 	.string "Are you taking it casually?\p"
 	.string "Ever since I was a kid, you know,\n"
@@ -1045,7 +1045,7 @@ BattleFrontier_PokeNav_2ADF07:: @ 82ADF07
 	.string "But, hey, be cool. Take it casual.\n"
 	.string "See you around.$"
 
-BattleFrontier_PokeNav_2AE0D9:: @ 82AE0D9
+MatchCall_PersonalizedText35:: @ 82AE0D9
 	.string "This is {STR_VAR_1}!\n"
 	.string "I'm cycling right now.\p"
 	.string "I love swimming and running,\n"
@@ -1059,7 +1059,7 @@ BattleFrontier_PokeNav_2AE0D9:: @ 82AE0D9
 	.string "You should make the challenge, too!\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AE1FD:: @ 82AE1FD
+MatchCall_PersonalizedText36:: @ 82AE1FD
 	.string "Yo, this is {STR_VAR_1}! I'm smack\n"
 	.string "in the middle of a triathlon!\p"
 	.string "But, hey, I've always got time to\n"
@@ -1073,7 +1073,7 @@ BattleFrontier_PokeNav_2AE1FD:: @ 82AE1FD
 	.string "I'm getting run down…\l"
 	.string "Gasp… Have…to…go…$"
 
-BattleFrontier_PokeNav_2AE327:: @ 82AE327
+MatchCall_PersonalizedText37:: @ 82AE327
 	.string "Hi, it's {STR_VAR_1}.\n"
 	.string "If you want to improve endurance,\l"
 	.string "high-altitude training is it!\p"
@@ -1082,7 +1082,7 @@ BattleFrontier_PokeNav_2AE327:: @ 82AE327
 	.string "I'm getting oxygen starved, too!\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AE3DA:: @ 82AE3DA
+MatchCall_PersonalizedText38:: @ 82AE3DA
 	.string "Oh, it's {STR_VAR_1}, hello.\p"
 	.string "I've been swimming a lot but I still\n"
 	.string "can't seem to reach EVERGRANDE.\p"
@@ -1091,7 +1091,7 @@ BattleFrontier_PokeNav_2AE3DA:: @ 82AE3DA
 	.string "Wahahaha.\l"
 	.string "Take care!$"
 
-BattleFrontier_PokeNav_2AE489:: @ 82AE489
+MatchCall_PersonalizedText39:: @ 82AE489
 	.string "Hey, it's {STR_VAR_1}…\n"
 	.string "Whoops!\p"
 	.string "Splash!\p"
@@ -1107,7 +1107,7 @@ BattleFrontier_PokeNav_2AE489:: @ 82AE489
 	.string "Anyways, I'm busy sunbathing,\n"
 	.string "so let's chat another time.$"
 
-BattleFrontier_PokeNav_2AE5CD:: @ 82AE5CD
+MatchCall_PersonalizedText40:: @ 82AE5CD
 	.string "Hello, this is {STR_VAR_1}.\p"
 	.string "Out of the three triathlon events,\n"
 	.string "I like swimming best.\p"
@@ -1116,14 +1116,14 @@ BattleFrontier_PokeNav_2AE5CD:: @ 82AE5CD
 	.string "Ooh, triathlon is such a grueling\n"
 	.string "test of human endurance! Bye!$"
 
-BattleFrontier_PokeNav_2AE698:: @ 82AE698
+MatchCall_PersonalizedText41:: @ 82AE698
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How are your POKéMON doing?\p"
 	.string "My DRAGON POKéMON appear to be\n"
 	.string "in peak form. Bye for now.$"
 
-BattleFrontier_PokeNav_2AE704:: @ 82AE704
+MatchCall_PersonalizedText42:: @ 82AE704
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} has grown even more\n"
 	.string "tough than that last time.\p"
@@ -1131,7 +1131,7 @@ BattleFrontier_PokeNav_2AE704:: @ 82AE704
 	.string "You wait till next time!\p"
 	.string "See you around!$"
 
-BattleFrontier_PokeNav_2AE78F:: @ 82AE78F
+MatchCall_PersonalizedText43:: @ 82AE78F
 	.string "It is {STR_VAR_1} here.\p"
 	.string "I have continued with my studies\n"
 	.string "in the art of concealment.\p"
@@ -1141,7 +1141,7 @@ BattleFrontier_PokeNav_2AE78F:: @ 82AE78F
 	.string "Like smoke I disappear!\n"
 	.string "Farewell!$"
 
-BattleFrontier_PokeNav_2AE859:: @ 82AE859
+MatchCall_PersonalizedText44:: @ 82AE859
 	.string "This is {STR_VAR_1}.\n"
 	.string "I kept up my training since we met.\p"
 	.string "My {STR_VAR_2} is getting pretty\n"
@@ -1149,7 +1149,7 @@ BattleFrontier_PokeNav_2AE859:: @ 82AE859
 	.string "Training on a beach is effective,\n"
 	.string "just as I thought. Bye now!$"
 
-BattleFrontier_PokeNav_2AE8E6:: @ 82AE8E6
+MatchCall_PersonalizedText45:: @ 82AE8E6
 	.string "How do you do?\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I wonder when this yucky volcanic\n"
@@ -1158,7 +1158,7 @@ BattleFrontier_PokeNav_2AE8E6:: @ 82AE8E6
 	.string "up the pattern on my parasol…\p"
 	.string "Let's promise to meet again!$"
 
-BattleFrontier_PokeNav_2AE998:: @ 82AE998
+MatchCall_PersonalizedText46:: @ 82AE998
 	.string "Hi, {STR_VAR_1} here.\p"
 	.string "Did you know that it's easier to\n"
 	.string "float in the sea than a pool?\p"
@@ -1170,7 +1170,7 @@ BattleFrontier_PokeNav_2AE998:: @ 82AE998
 	.string "…Where am I, anyway?\n"
 	.string "I'd better go!$"
 
-BattleFrontier_PokeNav_2AEA8F:: @ 82AEA8F
+MatchCall_PersonalizedText47:: @ 82AEA8F
 	.string "Oh, {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I'm up in the mountains now.\p"
@@ -1182,14 +1182,14 @@ BattleFrontier_PokeNav_2AEA8F:: @ 82AEA8F
 	.string "I'm going to try that!\n"
 	.string "Bye-bye!$"
 
-BattleFrontier_PokeNav_2AEB77:: @ 82AEB77
+MatchCall_PersonalizedText48:: @ 82AEB77
 	.string "Oh, hi, hi, this is {STR_VAR_1}!\p"
 	.string "I'm raising POKéMON with LIV!\n"
 	.string "We're trying very hard!\p"
 	.string "If we try harder, can we become\n"
 	.string "number one? Bye-bye!$"
 
-BattleFrontier_PokeNav_2AEBFA:: @ 82AEBFA
+MatchCall_PersonalizedText49:: @ 82AEBFA
 	.string "{STR_VAR_1} here!\p"
 	.string "I'm a SAILOR, but I'm not on a boat\n"
 	.string "now.\p"
@@ -1199,7 +1199,7 @@ BattleFrontier_PokeNav_2AEBFA:: @ 82AEBFA
 	.string "while staring out across the waves.\p"
 	.string "All right, next time!$"
 
-BattleFrontier_PokeNav_2AECC1:: @ 82AECC1
+MatchCall_PersonalizedText50:: @ 82AECC1
 	.string "It's {STR_VAR_1}.\n"
 	.string "So? Get any more POKéMON?\p"
 	.string "If you catch a new POKéMON,\n"
@@ -1207,7 +1207,7 @@ BattleFrontier_PokeNav_2AECC1:: @ 82AECC1
 	.string "I won't whine for it, honest.\n"
 	.string "I'll be waiting. See you.$"
 
-BattleFrontier_PokeNav_2AED52:: @ 82AED52
+MatchCall_PersonalizedText51:: @ 82AED52
 	.string "This is {STR_VAR_1}.\p"
 	.string "Are you raising your POKéMON\n"
 	.string "in the optimal way?\p"
@@ -1218,7 +1218,7 @@ BattleFrontier_PokeNav_2AED52:: @ 82AED52
 	.string "POKéMON, you should come out to\l"
 	.string "{STR_VAR_2}. Take care now.$"
 
-BattleFrontier_PokeNav_2AEE35:: @ 82AEE35
+MatchCall_PersonalizedText52:: @ 82AEE35
 	.string "Hi, this is {STR_VAR_1}.\p"
 	.string "I gave a {POKEBLOCK} to my {STR_VAR_2}.\n"
 	.string "It seemed to enjoy it very much.\p"
@@ -1227,7 +1227,7 @@ BattleFrontier_PokeNav_2AEE35:: @ 82AEE35
 	.string "I find that quite fascinating.\n"
 	.string "Please do take care.$"
 
-BattleFrontier_PokeNav_2AEEF4:: @ 82AEEF4
+MatchCall_PersonalizedText53:: @ 82AEEF4
 	.string "{STR_VAR_1} here.\p"
 	.string "If you cooperate with POKéMON,\n"
 	.string "one can be comfortable in the wild.\p"
@@ -1238,7 +1238,7 @@ BattleFrontier_PokeNav_2AEEF4:: @ 82AEEF4
 	.string "I think you're on the right track!\n"
 	.string "Catch you later!$"
 
-BattleFrontier_PokeNav_2AEFDA:: @ 82AEFDA
+MatchCall_PersonalizedText54:: @ 82AEFDA
 	.string "Hi, it's {STR_VAR_1}. You know,\n"
 	.string "the TRAINER who's always prepared!\p"
 	.string "{PLAYER}{STRING 5}, do you have enough items?\n"
@@ -1249,7 +1249,7 @@ BattleFrontier_PokeNav_2AEFDA:: @ 82AEFDA
 	.string "I'd better go check my own\n"
 	.string "supplies! Be vigilant!$"
 
-BattleFrontier_PokeNav_2AF0E7:: @ 82AF0E7
+MatchCall_PersonalizedText55:: @ 82AF0E7
 	.string "It's {STR_VAR_1}!\n"
 	.string "It's {STR_VAR_1}!\p"
 	.string "{STR_VAR_2} is a very busy\n"
@@ -1260,7 +1260,7 @@ BattleFrontier_PokeNav_2AF0E7:: @ 82AF0E7
 	.string "How did you do today?\n"
 	.string "Tell me about it next time, okay?$"
 
-BattleFrontier_PokeNav_2AF1B8:: @ 82AF1B8
+MatchCall_PersonalizedText56:: @ 82AF1B8
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I'm popular because I have lots\n"
 	.string "of BUG POKéMON, right?\p"
@@ -1273,7 +1273,7 @@ BattleFrontier_PokeNav_2AF1B8:: @ 82AF1B8
 	.string "Snivel…\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AF2C4:: @ 82AF2C4
+MatchCall_PersonalizedText57:: @ 82AF2C4
 	.string "Hah! Hah! Hah! Hah!\p"
 	.string "Hi! It's {STR_VAR_1}! Hah! Hah!\p"
 	.string "Trying to chat…\n"
@@ -1284,7 +1284,7 @@ BattleFrontier_PokeNav_2AF2C4:: @ 82AF2C4
 	.string "We'll chat…another time…\l"
 	.string "Hah! Hah! Hah!$"
 
-BattleFrontier_PokeNav_2AF371:: @ 82AF371
+MatchCall_PersonalizedText58:: @ 82AF371
 	.string "Oh, hi!\p"
 	.string "I'm still searching for treasures\n"
 	.string "with KIRA!\p"
@@ -1298,7 +1298,7 @@ BattleFrontier_PokeNav_2AF371:: @ 82AF371
 	.string "You're my one and only!\p"
 	.string "…{PLAYER}, I have to go, bye!$"
 
-BattleFrontier_PokeNav_2AF480:: @ 82AF480
+MatchCall_PersonalizedText59:: @ 82AF480
 	.string "This is {STR_VAR_1}!\p"
 	.string "I went to DEWFORD's GYM again\n"
 	.string "for training.\p"
@@ -1319,7 +1319,7 @@ BattleFrontier_PokeNav_2AF480:: @ 82AF480
 	.string "Forget this chat ever happened,\n"
 	.string "how about it? So long!$"
 
-BattleFrontier_PokeNav_2AF671:: @ 82AF671
+MatchCall_PersonalizedText60:: @ 82AF671
 	.string "It's a pleasure to chat with\n"
 	.string "a young TRAINER like you.\p"
 	.string "I imagine that you will continue to\n"
@@ -1334,7 +1334,7 @@ BattleFrontier_PokeNav_2AF671:: @ 82AF671
 	.string "Hahaha!\n"
 	.string "Never be discouraged!$"
 
-BattleFrontier_PokeNav_2AF7D8:: @ 82AF7D8
+MatchCall_PersonalizedText61:: @ 82AF7D8
 	.string "Hi, this is {STR_VAR_1}!\n"
 	.string "We just won a battle!\p"
 	.string "We don't win often, but it was this\n"
@@ -1348,7 +1348,7 @@ BattleFrontier_PokeNav_2AF7D8:: @ 82AF7D8
 	.string "to her next time?\p"
 	.string "Okay, see you!$"
 
-BattleFrontier_PokeNav_2AF8F7:: @ 82AF8F7
+MatchCall_PersonalizedText62:: @ 82AF8F7
 	.string "{STR_VAR_1} here, yes.\n"
 	.string "I headed out to sea yesterday.\p"
 	.string "I had been hoping to find a new\n"
@@ -1363,7 +1363,7 @@ BattleFrontier_PokeNav_2AF8F7:: @ 82AF8F7
 	.string "That's all I have to say!\n"
 	.string "Farewell for now!$"
 
-BattleFrontier_PokeNav_2AFA39:: @ 82AFA39
+MatchCall_PersonalizedText63:: @ 82AFA39
 	.string "Ahoy there!\n"
 	.string "It's me, {STR_VAR_1}!\l"
 	.string "I'm out on ROUTE 108 now!\l"
@@ -1375,7 +1375,7 @@ BattleFrontier_PokeNav_2AFA39:: @ 82AFA39
 	.string "That's all from ROUTE 108!\n"
 	.string "Brought to you by {STR_VAR_1}!$"
 
-BattleFrontier_PokeNav_2AFB26:: @ 82AFB26
+MatchCall_PersonalizedText64:: @ 82AFB26
 	.string "It's {STR_VAR_1}!\p"
 	.string "I'm kind of busy, but I figured\n"
 	.string "I should let you know that I've\l"
@@ -1385,7 +1385,7 @@ BattleFrontier_PokeNav_2AFB26:: @ 82AFB26
 	.string "I think we'll be good rivals,\n"
 	.string "you and I. Good-bye for now!$"
 
-BattleFrontier_PokeNav_2AFC07:: @ 82AFC07
+MatchCall_BattleFrontierStreakText1:: @ 82AFC07
 	.string "Hi! This is {STR_VAR_1}.\n"
 	.string "I heard the news!\p"
 	.string "They say you did excellent at\n"
@@ -1393,7 +1393,7 @@ BattleFrontier_PokeNav_2AFC07:: @ 82AFC07
 	.string "It's awesome, {STR_VAR_3} straight wins?\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AFC78:: @ 82AFC78
+MatchCall_BattleFrontierStreakText2:: @ 82AFC78
 	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} straight\n"
@@ -1401,7 +1401,7 @@ BattleFrontier_PokeNav_2AFC78:: @ 82AFC78
 	.string "That's special! I should try\n"
 	.string "harder, too! See you!$"
 
-BattleFrontier_PokeNav_2AFCFF:: @ 82AFCFF
+MatchCall_BattleFrontierStreakText3:: @ 82AFCFF
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I heard you went on a tear at\n"
@@ -1411,7 +1411,7 @@ BattleFrontier_PokeNav_2AFCFF:: @ 82AFCFF
 	.string "I'd better get it together, too!\n"
 	.string "Catch you soon!$"
 
-BattleFrontier_PokeNav_2AFDA7:: @ 82AFDA7
+MatchCall_BattleFrontierStreakText4:: @ 82AFDA7
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. What's up?\p"
 	.string "There's a rumor going around that\n"
@@ -1420,7 +1420,7 @@ BattleFrontier_PokeNav_2AFDA7:: @ 82AFDA7
 	.string "I'd better step it up, too.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2AFE3D:: @ 82AFE3D
+MatchCall_BattleFrontierStreakText5:: @ 82AFE3D
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -1429,7 +1429,7 @@ BattleFrontier_PokeNav_2AFE3D:: @ 82AFE3D
 	.string "I'd better work on my POKéMON more.\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2AFECA:: @ 82AFECA
+MatchCall_BattleFrontierStreakText6:: @ 82AFECA
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you pulled off\n"
@@ -1438,7 +1438,7 @@ BattleFrontier_PokeNav_2AFECA:: @ 82AFECA
 	.string "That inspires me to focus on\n"
 	.string "raising my team.$"
 
-BattleFrontier_PokeNav_2AFF64:: @ 82AFF64
+MatchCall_BattleFrontierStreakText7:: @ 82AFF64
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, yeah, you were over at\n"
@@ -1447,7 +1447,7 @@ BattleFrontier_PokeNav_2AFF64:: @ 82AFF64
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "I have to go!$"
 
-BattleFrontier_PokeNav_2AFFF0:: @ 82AFFF0
+MatchCall_BattleFrontierStreakText8:: @ 82AFFF0
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you're doing well.\p"
@@ -1457,7 +1457,7 @@ BattleFrontier_PokeNav_2AFFF0:: @ 82AFFF0
 	.string "That's very impressive!\n"
 	.string "I hope you stay successful.$"
 
-BattleFrontier_PokeNav_2B00B5:: @ 82B00B5
+MatchCall_BattleFrontierStreakText9:: @ 82B00B5
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! Your {STR_VAR_3}-win streak at\n"
@@ -1465,7 +1465,7 @@ BattleFrontier_PokeNav_2B00B5:: @ 82B00B5
 	.string "That is so cool!\n"
 	.string "I'd better try harder, too!$"
 
-BattleFrontier_PokeNav_2B0129:: @ 82B0129
+MatchCall_BattleFrontierStreakText10:: @ 82B0129
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight battles at\n"
@@ -1473,7 +1473,7 @@ BattleFrontier_PokeNav_2B0129:: @ 82B0129
 	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
-BattleFrontier_PokeNav_2B01A5:: @ 82B01A5
+MatchCall_BattleFrontierStreakText11:: @ 82B01A5
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you're the terror of\n"
@@ -1483,7 +1483,7 @@ BattleFrontier_PokeNav_2B01A5:: @ 82B01A5
 	.string "You're good, you.\n"
 	.string "I wonder how many I can win?$"
 
-BattleFrontier_PokeNav_2B0232:: @ 82B0232
+MatchCall_BattleFrontierStreakText12:: @ 82B0232
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -1493,7 +1493,7 @@ BattleFrontier_PokeNav_2B0232:: @ 82B0232
 	.string "That's quite the tale.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B02D9:: @ 82B02D9
+MatchCall_BattleFrontierStreakText13:: @ 82B02D9
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you've been keeping well.\p"
@@ -1502,7 +1502,7 @@ BattleFrontier_PokeNav_2B02D9:: @ 82B02D9
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
-BattleFrontier_PokeNav_2B0366:: @ 82B0366
+MatchCall_BattleFrontierStreakText14:: @ 82B0366
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I heard about you!\n"
@@ -1511,7 +1511,7 @@ BattleFrontier_PokeNav_2B0366:: @ 82B0366
 	.string "You're an inspiration!\n"
 	.string "Bye-bye!$"
 
-BattleFrontier_PokeNav_2B03E6:: @ 82B03E6
+MatchCall_BattleFrontierRecordStreakText1:: @ 82B03E6
 	.string "Hi! This is {STR_VAR_1}.\n"
 	.string "I heard the news!\p"
 	.string "They say you did excellent at\n"
@@ -1519,7 +1519,7 @@ BattleFrontier_PokeNav_2B03E6:: @ 82B03E6
 	.string "It's awesome--{STR_VAR_3} straight wins?\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B0457:: @ 82B0457
+MatchCall_BattleFrontierRecordStreakText2:: @ 82B0457
 	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} straight\n"
@@ -1527,7 +1527,7 @@ BattleFrontier_PokeNav_2B0457:: @ 82B0457
 	.string "That's special! I should try\n"
 	.string "harder, too! See you!$"
 
-BattleFrontier_PokeNav_2B04DE:: @ 82B04DE
+MatchCall_BattleFrontierRecordStreakText3:: @ 82B04DE
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I heard you went on a tear at\n"
@@ -1537,7 +1537,7 @@ BattleFrontier_PokeNav_2B04DE:: @ 82B04DE
 	.string "I'd better get it together, too!\n"
 	.string "Catch you soon!$"
 
-BattleFrontier_PokeNav_2B0586:: @ 82B0586
+MatchCall_BattleFrontierRecordStreakText4:: @ 82B0586
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. What's up?\p"
 	.string "There's a rumor going around that\n"
@@ -1546,7 +1546,7 @@ BattleFrontier_PokeNav_2B0586:: @ 82B0586
 	.string "I'd better step it up, too.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B061C:: @ 82B061C
+MatchCall_BattleFrontierRecordStreakText5:: @ 82B061C
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -1555,7 +1555,7 @@ BattleFrontier_PokeNav_2B061C:: @ 82B061C
 	.string "Me? I'd say I'm coming along.\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2B06A3:: @ 82B06A3
+MatchCall_BattleFrontierRecordStreakText6:: @ 82B06A3
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you pulled off\n"
@@ -1564,7 +1564,7 @@ BattleFrontier_PokeNav_2B06A3:: @ 82B06A3
 	.string "I'd better try harder myself!\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2B073B:: @ 82B073B
+MatchCall_BattleFrontierRecordStreakText7:: @ 82B073B
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, yeah, you were over at\n"
@@ -1573,7 +1573,7 @@ BattleFrontier_PokeNav_2B073B:: @ 82B073B
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "I have to go!$"
 
-BattleFrontier_PokeNav_2B07C7:: @ 82B07C7
+MatchCall_BattleFrontierRecordStreakText8:: @ 82B07C7
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you're doing well.\p"
@@ -1583,7 +1583,7 @@ BattleFrontier_PokeNav_2B07C7:: @ 82B07C7
 	.string "That's very impressive!\n"
 	.string "I'd better work on my POKéMON, too!$"
 
-BattleFrontier_PokeNav_2B0894:: @ 82B0894
+MatchCall_BattleFrontierRecordStreakText9:: @ 82B0894
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! Your {STR_VAR_3}-win streak at\n"
@@ -1591,7 +1591,7 @@ BattleFrontier_PokeNav_2B0894:: @ 82B0894
 	.string "That is so cool!\n"
 	.string "I'd better try harder, too!$"
 
-BattleFrontier_PokeNav_2B0908:: @ 82B0908
+MatchCall_BattleFrontierRecordStreakText10:: @ 82B0908
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight battles at\n"
@@ -1599,7 +1599,7 @@ BattleFrontier_PokeNav_2B0908:: @ 82B0908
 	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
-BattleFrontier_PokeNav_2B0984:: @ 82B0984
+MatchCall_BattleFrontierRecordStreakText11:: @ 82B0984
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you're the terror of\n"
@@ -1609,7 +1609,7 @@ BattleFrontier_PokeNav_2B0984:: @ 82B0984
 	.string "You're good, you.\n"
 	.string "I wonder how many I can win?$"
 
-BattleFrontier_PokeNav_2B0A11:: @ 82B0A11
+MatchCall_BattleFrontierRecordStreakText12:: @ 82B0A11
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -1619,7 +1619,7 @@ BattleFrontier_PokeNav_2B0A11:: @ 82B0A11
 	.string "That's quite the tale.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B0AB8:: @ 82B0AB8
+MatchCall_BattleFrontierRecordStreakText13:: @ 82B0AB8
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you've been keeping well.\p"
@@ -1628,7 +1628,7 @@ BattleFrontier_PokeNav_2B0AB8:: @ 82B0AB8
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
-BattleFrontier_PokeNav_2B0B45:: @ 82B0B45
+MatchCall_BattleFrontierRecordStreakText14:: @ 82B0B45
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -1637,7 +1637,7 @@ BattleFrontier_PokeNav_2B0B45:: @ 82B0B45
 	.string "You're an inspiration!\n"
 	.string "Bye-bye!$"
 
-BattleFrontier_PokeNav_2B0BC5:: @ 82B0BC5
+MatchCall_BattleDomeText1:: @ 82B0BC5
 	.string "Hi! {PLAYER}?\n"
 	.string "Hello, this is {STR_VAR_1}!\l"
 	.string "I heard the news!\p"
@@ -1646,7 +1646,7 @@ BattleFrontier_PokeNav_2B0BC5:: @ 82B0BC5
 	.string "It's awesome! I have to do better!\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B0C4A:: @ 82B0C4A
+MatchCall_BattleDomeText2:: @ 82B0C4A
 	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} titles\n"
@@ -1654,7 +1654,7 @@ BattleFrontier_PokeNav_2B0C4A:: @ 82B0C4A
 	.string "That's super! I wonder if I can\n"
 	.string "become a champion?$"
 
-BattleFrontier_PokeNav_2B0CC7:: @ 82B0CC7
+MatchCall_BattleDomeText3:: @ 82B0CC7
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "How's it going?\p"
@@ -1663,7 +1663,7 @@ BattleFrontier_PokeNav_2B0CC7:: @ 82B0CC7
 	.string "Make it one more next time!\n"
 	.string "Catch you soon!$"
 
-BattleFrontier_PokeNav_2B0D4A:: @ 82B0D4A
+MatchCall_BattleDomeText4:: @ 82B0D4A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you became the champion\n"
@@ -1671,7 +1671,7 @@ BattleFrontier_PokeNav_2B0D4A:: @ 82B0D4A
 	.string "Sounds like you're working hard.\n"
 	.string "I'll try to keep up!$"
 
-BattleFrontier_PokeNav_2B0DC8:: @ 82B0DC8
+MatchCall_BattleDomeText5:: @ 82B0DC8
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "I heard you won {STR_VAR_3} times\n"
@@ -1679,7 +1679,7 @@ BattleFrontier_PokeNav_2B0DC8:: @ 82B0DC8
 	.string "I'd better get with it, too!\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2B0E35:: @ 82B0E35
+MatchCall_BattleDomeText6:: @ 82B0E35
 	.string "Hey, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you became\n"
@@ -1688,7 +1688,7 @@ BattleFrontier_PokeNav_2B0E35:: @ 82B0E35
 	.string "I'd better raise my POKéMON before\n"
 	.string "you pull farther ahead.$"
 
-BattleFrontier_PokeNav_2B0ED1:: @ 82B0ED1
+MatchCall_BattleDomeText7:: @ 82B0ED1
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -1698,7 +1698,7 @@ BattleFrontier_PokeNav_2B0ED1:: @ 82B0ED1
 	.string "Oh, is that right.\n"
 	.string "Okay, bye.$"
 
-BattleFrontier_PokeNav_2B0F72:: @ 82B0F72
+MatchCall_BattleDomeText8:: @ 82B0F72
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you're doing well.\l"
@@ -1708,7 +1708,7 @@ BattleFrontier_PokeNav_2B0F72:: @ 82B0F72
 	.string "I must raise my POKéMON like you.\n"
 	.string "See you again.$"
 
-BattleFrontier_PokeNav_2B102A:: @ 82B102A
+MatchCall_BattleDomeText9:: @ 82B102A
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! You took the title\n"
@@ -1716,7 +1716,7 @@ BattleFrontier_PokeNav_2B102A:: @ 82B102A
 	.string "That is so cool!\n"
 	.string "I'd better try harder, too!$"
 
-BattleFrontier_PokeNav_2B10A7:: @ 82B10A7
+MatchCall_BattleDomeText10:: @ 82B10A7
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight times at\n"
@@ -1724,7 +1724,7 @@ BattleFrontier_PokeNav_2B10A7:: @ 82B10A7
 	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
-BattleFrontier_PokeNav_2B1121:: @ 82B1121
+MatchCall_BattleDomeText11:: @ 82B1121
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you're the terror of\n"
@@ -1736,7 +1736,7 @@ BattleFrontier_PokeNav_2B1121:: @ 82B1121
 	.string "…Pretty well impossible?\n"
 	.string "Well, see you!$"
 
-BattleFrontier_PokeNav_2B11D3:: @ 82B11D3
+MatchCall_BattleDomeText12:: @ 82B11D3
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -1745,7 +1745,7 @@ BattleFrontier_PokeNav_2B11D3:: @ 82B11D3
 	.string "That's quite the tale.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B124D:: @ 82B124D
+MatchCall_BattleDomeText13:: @ 82B124D
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you've been keeping well.\p"
@@ -1754,7 +1754,7 @@ BattleFrontier_PokeNav_2B124D:: @ 82B124D
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
-BattleFrontier_PokeNav_2B12D0:: @ 82B12D0
+MatchCall_BattleDomeText14:: @ 82B12D0
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -1763,7 +1763,7 @@ BattleFrontier_PokeNav_2B12D0:: @ 82B12D0
 	.string "You're an inspiration!\n"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2B1347:: @ 82B1347
+MatchCall_BattlePikeText1:: @ 82B1347
 	.string "Hi! {PLAYER}?\n"
 	.string "Hello, this is {STR_VAR_1}!\l"
 	.string "I heard the news!\p"
@@ -1772,7 +1772,7 @@ BattleFrontier_PokeNav_2B1347:: @ 82B1347
 	.string "That's awesome!\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B13B1:: @ 82B13B1
+MatchCall_BattlePikeText2:: @ 82B13B1
 	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won your way through\n"
@@ -1780,7 +1780,7 @@ BattleFrontier_PokeNav_2B13B1:: @ 82B13B1
 	.string "I have to try much harder!\n"
 	.string "Bye!$"
 
-BattleFrontier_PokeNav_2B142B:: @ 82B142B
+MatchCall_BattlePikeText3:: @ 82B142B
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "How's it going?\p"
@@ -1789,7 +1789,7 @@ BattleFrontier_PokeNav_2B142B:: @ 82B142B
 	.string "Try to do even better next time!\n"
 	.string "Catch you soon!$"
 
-BattleFrontier_PokeNav_2B14B4:: @ 82B14B4
+MatchCall_BattlePikeText4:: @ 82B14B4
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you blew through {STR_VAR_3} rooms\n"
@@ -1797,7 +1797,7 @@ BattleFrontier_PokeNav_2B14B4:: @ 82B14B4
 	.string "I'd better train my POKéMON and\n"
 	.string "try to keep up!$"
 
-BattleFrontier_PokeNav_2B1525:: @ 82B1525
+MatchCall_BattlePikeText5:: @ 82B1525
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "I heard you got past {STR_VAR_3} rooms\n"
@@ -1805,7 +1805,7 @@ BattleFrontier_PokeNav_2B1525:: @ 82B1525
 	.string "I'd better get with it, too!\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2B158E:: @ 82B158E
+MatchCall_BattlePikeText6:: @ 82B158E
 	.string "Hey, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you got through\n"
@@ -1813,7 +1813,7 @@ BattleFrontier_PokeNav_2B158E:: @ 82B158E
 	.string "I'd better raise my POKéMON before\n"
 	.string "you pull further ahead.$"
 
-BattleFrontier_PokeNav_2B1622:: @ 82B1622
+MatchCall_BattlePikeText7:: @ 82B1622
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -1822,7 +1822,7 @@ BattleFrontier_PokeNav_2B1622:: @ 82B1622
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "Okay, bye.$"
 
-BattleFrontier_PokeNav_2B169D:: @ 82B169D
+MatchCall_BattlePikeText8:: @ 82B169D
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you're doing well.\l"
@@ -1833,7 +1833,7 @@ BattleFrontier_PokeNav_2B169D:: @ 82B169D
 	.string "I must raise my POKéMON like you.\l"
 	.string "See you again.$"
 
-BattleFrontier_PokeNav_2B1775:: @ 82B1775
+MatchCall_BattlePikeText9:: @ 82B1775
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! You won your way through\n"
@@ -1841,7 +1841,7 @@ BattleFrontier_PokeNav_2B1775:: @ 82B1775
 	.string "That is so cool!\n"
 	.string "I'd better try harder, too!$"
 
-BattleFrontier_PokeNav_2B17F8:: @ 82B17F8
+MatchCall_BattlePikeText10:: @ 82B17F8
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won your way past {STR_VAR_3} rooms\n"
@@ -1849,7 +1849,7 @@ BattleFrontier_PokeNav_2B17F8:: @ 82B17F8
 	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
-BattleFrontier_PokeNav_2B1877:: @ 82B1877
+MatchCall_BattlePikeText11:: @ 82B1877
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you're the terror of\n"
@@ -1861,7 +1861,7 @@ BattleFrontier_PokeNav_2B1877:: @ 82B1877
 	.string "…Pretty well impossible?\n"
 	.string "Well, see you!$"
 
-BattleFrontier_PokeNav_2B1946:: @ 82B1946
+MatchCall_BattlePikeText12:: @ 82B1946
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -1870,7 +1870,7 @@ BattleFrontier_PokeNav_2B1946:: @ 82B1946
 	.string "That's quite the tale.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B19C7:: @ 82B19C7
+MatchCall_BattlePikeText13:: @ 82B19C7
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you've been keeping well.\p"
@@ -1879,7 +1879,7 @@ BattleFrontier_PokeNav_2B19C7:: @ 82B19C7
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
-BattleFrontier_PokeNav_2B1A4C:: @ 82B1A4C
+MatchCall_BattlePikeText14:: @ 82B1A4C
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -1888,7 +1888,7 @@ BattleFrontier_PokeNav_2B1A4C:: @ 82B1A4C
 	.string "You're an inspiration!\n"
 	.string "See you again!$"
 
-BattleFrontier_PokeNav_2B1ACA:: @ 82B1ACA
+MatchCall_BattlePyramidText1:: @ 82B1ACA
 	.string "Hi! {PLAYER}?\n"
 	.string "Hello, this is {STR_VAR_1}!\l"
 	.string "I heard the news!\p"
@@ -1897,7 +1897,7 @@ BattleFrontier_PokeNav_2B1ACA:: @ 82B1ACA
 	.string "That's awesome!\n"
 	.string "I should try that challenge.$"
 
-BattleFrontier_PokeNav_2B1B50:: @ 82B1B50
+MatchCall_BattlePyramidText2:: @ 82B1B50
 	.string "Hello, it's {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won your way through\n"
@@ -1905,7 +1905,7 @@ BattleFrontier_PokeNav_2B1B50:: @ 82B1B50
 	.string "Wow, that's fantastic!\n"
 	.string "I'd better raise my POKéMON, too!$"
 
-BattleFrontier_PokeNav_2B1BE4:: @ 82B1BE4
+MatchCall_BattlePyramidText3:: @ 82B1BE4
 	.string "Hey there, {PLAYER}!\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "How's it going?\p"
@@ -1914,7 +1914,7 @@ BattleFrontier_PokeNav_2B1BE4:: @ 82B1BE4
 	.string "Try to do even better next time!\n"
 	.string "Catch you soon!$"
 
-BattleFrontier_PokeNav_2B1C6A:: @ 82B1C6A
+MatchCall_BattlePyramidText4:: @ 82B1C6A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you scaled {STR_VAR_3} floors\n"
@@ -1922,7 +1922,7 @@ BattleFrontier_PokeNav_2B1C6A:: @ 82B1C6A
 	.string "I'd better work hard and try\n"
 	.string "to keep up!$"
 
-BattleFrontier_PokeNav_2B1CCF:: @ 82B1CCF
+MatchCall_BattlePyramidText5:: @ 82B1CCF
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It's {STR_VAR_1}.\p"
 	.string "I heard you climbed {STR_VAR_3} floors\n"
@@ -1930,7 +1930,7 @@ BattleFrontier_PokeNav_2B1CCF:: @ 82B1CCF
 	.string "I'd better get with it, too!\n"
 	.string "See you soon!$"
 
-BattleFrontier_PokeNav_2B1D38:: @ 82B1D38
+MatchCall_BattlePyramidText6:: @ 82B1D38
 	.string "Hey, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you got through\n"
@@ -1938,7 +1938,7 @@ BattleFrontier_PokeNav_2B1D38:: @ 82B1D38
 	.string "I'd better raise my POKéMON before\n"
 	.string "you pull further ahead.$"
 
-BattleFrontier_PokeNav_2B1DCD:: @ 82B1DCD
+MatchCall_BattlePyramidText7:: @ 82B1DCD
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -1948,7 +1948,7 @@ BattleFrontier_PokeNav_2B1DCD:: @ 82B1DCD
 	.string "No, huh?\n"
 	.string "Okay, bye.$"
 
-BattleFrontier_PokeNav_2B1E4B:: @ 82B1E4B
+MatchCall_BattlePyramidText8:: @ 82B1E4B
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you're doing well.\l"
@@ -1959,7 +1959,7 @@ BattleFrontier_PokeNav_2B1E4B:: @ 82B1E4B
 	.string "I must raise my POKéMON like you.\l"
 	.string "See you again.$"
 
-BattleFrontier_PokeNav_2B1F24:: @ 82B1F24
+MatchCall_BattlePyramidText9:: @ 82B1F24
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! You won your way through\n"
@@ -1967,7 +1967,7 @@ BattleFrontier_PokeNav_2B1F24:: @ 82B1F24
 	.string "That is so cool!\n"
 	.string "I'd better try harder, too!$"
 
-BattleFrontier_PokeNav_2B1FA8:: @ 82B1FA8
+MatchCall_BattlePyramidText10:: @ 82B1FA8
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You climbed {STR_VAR_3} floors inside\n"
@@ -1975,7 +1975,7 @@ BattleFrontier_PokeNav_2B1FA8:: @ 82B1FA8
 	.string "That's quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
-BattleFrontier_PokeNav_2B2022:: @ 82B2022
+MatchCall_BattlePyramidText11:: @ 82B2022
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you're the terror of\n"
@@ -1987,7 +1987,7 @@ BattleFrontier_PokeNav_2B2022:: @ 82B2022
 	.string "…Pretty well impossible?\n"
 	.string "Well, see you!$"
 
-BattleFrontier_PokeNav_2B20F3:: @ 82B20F3
+MatchCall_BattlePyramidText12:: @ 82B20F3
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It's me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -1996,7 +1996,7 @@ BattleFrontier_PokeNav_2B20F3:: @ 82B20F3
 	.string "That's quite the tale.\n"
 	.string "See you!$"
 
-BattleFrontier_PokeNav_2B2175:: @ 82B2175
+MatchCall_BattlePyramidText13:: @ 82B2175
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you've been keeping well.\p"
@@ -2005,7 +2005,7 @@ BattleFrontier_PokeNav_2B2175:: @ 82B2175
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
-BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
+MatchCall_BattlePyramidText14:: @ 82B21FC
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
