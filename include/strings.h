@@ -2207,4 +2207,7 @@ extern const u8 MatchCall_BattlePyramidText12[];
 extern const u8 MatchCall_BattlePyramidText13[];
 extern const u8 MatchCall_BattlePyramidText14[];
 
+// Contest Link
+extern const u8 gText_ColorDarkGrey[];
+
 #endif //GUARD_STRINGS_H
