@@ -4827,4 +4827,12 @@ extern const u32 gRouletteCreditTiles[];
 extern const u32 gRouletteNumbersTiles[];
 extern const u32 gRouletteMultiplierTiles[];
 
+// Contest Link
+extern const u32 gUnknown_0858D6B0[];
+extern const u32 gUnknown_08C19588[];
+extern const u32 gUnknown_08C19EEC[];
+extern const u32 gUnknown_08C1A000[];
+extern const u32 gUnknown_08C1A12C[];
+extern const u32 gUnknown_08C1A2B4[];
+
 #endif //GUARD_GRAPHICS_H
