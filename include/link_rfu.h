@@ -210,6 +210,7 @@ struct UnkRfuStruct_8010A14
 
 extern struct UnkRfuStruct_1 gUnknown_03004140;
 extern struct UnkRfuStruct_2 gUnknown_03005000;
+extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
 u32 sub_800BEC0(void);

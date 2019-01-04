@@ -1516,7 +1516,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
     }
 }
 
-void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
+void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
 {
     TVShow *show;
 
@@ -1524,7 +1524,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->bravoTrainer.contestResult = a0;
+        show->bravoTrainer.contestResult = contestStandingPlace;
         show->bravoTrainer.contestCategory = gSpecialVar_ContestCategory;
         show->bravoTrainer.contestRank = gSpecialVar_ContestRank;
         show->bravoTrainer.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);

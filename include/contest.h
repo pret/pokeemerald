@@ -442,6 +442,8 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
 void sub_80DB09C(u8 contestCategory);
 void sub_80DCE58(u8);
 void sub_80DFA08(struct ContestPokemon *mon, int language);
+void sub_80DBED4(void);
+u8 sub_80DEFA8(u8, u8);
 
 // contest link
 void sub_81D9DE4(u8 taskId);
@@ -453,5 +455,6 @@ bool32 sub_80FC4F4(void *, u16);
 bool8 sub_80FC55C(void);
 bool8 sub_80FC530(u8);
 u8 sub_80F86E0(u8 *);
+
 
 #endif //GUARD_CONTEST_H
