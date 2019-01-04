@@ -4834,5 +4834,16 @@ extern const u32 gUnknown_08C19EEC[];
 extern const u32 gUnknown_08C1A000[];
 extern const u32 gUnknown_08C1A12C[];
 extern const u32 gUnknown_08C1A2B4[];
+extern const u16 gUnknown_08DC6498[];
+extern const u16 gUnknown_08DC63F8[];
+extern const u16 gUnknown_08DC6420[];
+extern const u16 gUnknown_08DC6448[];
+extern const u16 gUnknown_08DC6470[];
+extern const u16 gUnknown_08DC64AC[];
+extern const u16 gUnknown_08DC64C0[];
+extern const u16 gUnknown_08DC64D4[];
+extern const u16 gUnknown_08DC64E8[];
+extern const u16 gUnknown_08DC64FC[];
+extern const u16 gUnknown_08DC6510[];
 
 #endif //GUARD_GRAPHICS_H

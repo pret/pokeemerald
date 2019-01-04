@@ -2209,5 +2209,10 @@ extern const u8 MatchCall_BattlePyramidText14[];
 
 // Contest Link
 extern const u8 gText_ColorDarkGrey[];
+extern const u8 gText_CommunicationStandby[];
+extern const u8 gText_AnnouncingResults[];
+extern const u8 gText_PreliminaryResults[];
+extern const u8 gText_Round2Results[];
+extern const u8 gText_Var1sVar2Won[];
 
 #endif //GUARD_STRINGS_H
