@@ -361,7 +361,7 @@ u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 
 bool32 is_tile_that_overrides_player_control(void)
 {
-    if (FlagGet(FLAG_0x088))
+    if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
     {
         switch (gMapHeader.mapType)
         {
@@ -388,7 +388,7 @@ bool32 is_tile_that_overrides_player_control(void)
 
 bool32 sub_8138120(void)
 {
-    if (FlagGet(FLAG_0x08A))
+    if (FlagGet(FLAG_REGISTER_WINONA_POKENAV))
     {
         switch (gMapHeader.mapType)
         {
@@ -415,7 +415,7 @@ bool32 sub_8138120(void)
 
 bool32 sub_8138168(void)
 {
-    if (FlagGet(FLAG_0x072))
+    if (FlagGet(FLAG_SCOTT_CALL_NATIONAL_DEX))
     {
         switch (gMapHeader.mapType)
         {
@@ -442,7 +442,7 @@ bool32 sub_8138168(void)
 
 bool32 sub_81381B0(void)
 {
-    if (FlagGet(FLAG_0x080))
+    if (FlagGet(FLAG_ENABLE_ROXANNE_FIRST_CALL))
     {
         switch (gMapHeader.mapType)
         {
@@ -469,7 +469,7 @@ bool32 sub_81381B0(void)
 
 bool32 sub_81381F8(void)
 {
-    if (FlagGet(FLAG_0x075))
+    if (FlagGet(FLAG_DEFEATED_MAGMA_SPACE_CENTER))
     {
         switch (gMapHeader.mapType)
         {
@@ -1201,7 +1201,7 @@ void EndLotteryCornerComputerEffect(void)
 void SetTrickHouseEndRoomFlag(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_0x1F5;
+    u16 flag = FLAG_TRICK_HOUSE_END_ROOM;
     *specVar = flag;
     FlagSet(flag);
 }
@@ -1209,7 +1209,7 @@ void SetTrickHouseEndRoomFlag(void)
 void ResetTrickHouseEndRoomFlag(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_0x1F5;
+    u16 flag = FLAG_TRICK_HOUSE_END_ROOM;
     *specVar = flag;
     FlagClear(flag);
 }
@@ -2111,7 +2111,7 @@ void sub_813A080(void)
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_0x152))
+    if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER))
     {
         gSpecialVar_0x8005 = 5;
         gSpecialVar_0x8006 = 4;
@@ -3425,11 +3425,11 @@ void sub_813B2E4(void)
     u16 randomValue = Random();
     VarSet(VAR_0x4038, 0);
 
-    if (FlagGet(FLAG_0x1BE) == TRUE)
+    if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
     {
         VarSet(VAR_0x4037, (randomValue & 7) + 1);
     }
-    else if (FlagGet(FLAG_0x1BF) == TRUE)
+    else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
     {
         VarSet(VAR_0x4037, (randomValue & 7) + 9);
     }

@@ -9,12 +9,12 @@ BirthIsland_Exterior_MapScript1_267F25: @ 8267F25
 	end
 
 BirthIsland_Exterior_MapScript1_267F29: @ 8267F29
-	setflag FLAG_0x8D3
+	setflag FLAG_MAP_SCRIPT_CHECKED_DEOXYS
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
 	setvar VAR_DEOXYS_ROCK_LEVEL, 0
-	call_if_set FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F4E
-	call_if_unset FLAG_0x1AD, BirthIsland_Exterior_EventScript_267F55
+	call_if_set FLAG_BATTLED_DEOXYS, BirthIsland_Exterior_EventScript_267F4E
+	call_if_unset FLAG_BATTLED_DEOXYS, BirthIsland_Exterior_EventScript_267F55
 	end
 
 BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
@@ -23,7 +23,7 @@ BirthIsland_Exterior_EventScript_267F4E:: @ 8267F4E
 	return
 
 BirthIsland_Exterior_EventScript_267F55:: @ 8267F55
-	goto_if_set FLAG_0x1AC, BirthIsland_Exterior_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_DEOXYS, BirthIsland_Exterior_EventScript_27374E
 	clearflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	clearflag FLAG_DEOXYS_ROCK_COMPLETE
 	return
@@ -94,12 +94,12 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	goto_if_eq BirthIsland_Exterior_EventScript_268049
 	compare VAR_RESULT, 5
 	goto_if_eq BirthIsland_Exterior_EventScript_268049
-	setflag FLAG_0x1AD
+	setflag FLAG_BATTLED_DEOXYS
 	release
 	end
 
 BirthIsland_Exterior_EventScript_26803B:: @ 826803B
-	setflag FLAG_0x1AC
+	setflag FLAG_DEFEATED_DEOXYS
 	setvar VAR_0x8004, 410
 	goto BirthIsland_Exterior_EventScript_273776
 	end
@@ -118,4 +118,3 @@ BirthIsland_Exterior_Movement_268054: @ 8268054
 	walk_slow_down
 	walk_slow_down
 	step_end
-

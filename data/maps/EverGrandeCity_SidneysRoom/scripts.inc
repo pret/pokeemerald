@@ -6,12 +6,12 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 8227F01
 	.byte 0
 
 EverGrandeCity_SidneysRoom_MapScript1_227F16: @ 8227F16
-	setflag FLAG_0x1CF
+	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
 	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	end
 
 EverGrandeCity_SidneysRoom_MapScript1_227F1D: @ 8227F1D
-	call_if_set FLAG_0x4FB, EverGrandeCity_SidneysRoom_EventScript_227F32
+	call_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_227F32
 	compare VAR_0x409C, 1
 	call_if_eq EverGrandeCity_SidneysRoom_EventScript_227F38
 	end
@@ -47,7 +47,7 @@ EverGrandeCity_SidneysRoom_EventScript_227F57:: @ 8227F57
 EverGrandeCity_SidneysRoom_EventScript_227F64:: @ 8227F64
 	lock
 	faceplayer
-	goto_if_set FLAG_0x4FB, EverGrandeCity_SidneysRoom_EventScript_227F8B
+	goto_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_227F8B
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_227FA7, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_2280A2
@@ -60,7 +60,7 @@ EverGrandeCity_SidneysRoom_EventScript_227F8B:: @ 8227F8B
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_227F95:: @ 8227F95
-	setflag FLAG_0x4FB
+	setflag FLAG_DEFEATED_ELITE_4_SYDNEY
 	call EverGrandeCity_SidneysRoom_EventScript_2723F8
 	msgbox EverGrandeCity_SidneysRoom_Text_2280EC, MSGBOX_DEFAULT
 	release

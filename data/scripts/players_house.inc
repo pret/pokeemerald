@@ -59,12 +59,12 @@ LittlerootTown_MaysHouse_2F_EventScript_29278D:: @ 829278D
 
 LittlerootTown_BrendansHouse_2F_EventScript_292799:: @ 8292799
 LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
-	goto_if_set FLAG_0x051, LittlerootTown_BrendansHouse_2F_EventScript_29283F
+	goto_if_set FLAG_SET_WALL_CLOCK, LittlerootTown_BrendansHouse_2F_EventScript_29283F
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8668, MSGBOX_DEFAULT
 	call LittlerootTown_BrendansHouse_2F_EventScript_292849
 	delay 30
 	setvar VAR_0x4092, 6
-	setflag FLAG_0x051
+	setflag FLAG_SET_WALL_CLOCK
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	checkplayergender
@@ -318,7 +318,7 @@ LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
 	compare VAR_0x408C, 4
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
 	goto_if_set FLAG_HAS_MATCH_CALL, LittlerootTown_BrendansHouse_1F_EventScript_292A19
-	goto_if_set FLAG_0x052, LittlerootTown_BrendansHouse_1F_EventScript_292A86
+	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_BrendansHouse_1F_EventScript_292A86
 	compare VAR_TEMP_1, 1
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
 	compare VAR_0x4092, 7
@@ -333,7 +333,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A0F:: @ 8292A0F
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292A19:: @ 8292A19
-	goto_if_set FLAG_0x0D8, LittlerootTown_BrendansHouse_1F_EventScript_292A43
+	goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, LittlerootTown_BrendansHouse_1F_EventScript_292A43
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7E0E, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -342,7 +342,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A19:: @ 8292A19
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0D8
+	setflag FLAG_ENABLE_MOM_MATCH_CALL
 	release
 	end
 
@@ -351,13 +351,13 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A43:: @ 8292A43
 	goto LittlerootTown_BrendansHouse_1F_EventScript_292A86
 
 LittlerootTown_BrendansHouse_1F_EventScript_292A51:: @ 8292A51
-	goto_if_set FLAG_0x085, LittlerootTown_BrendansHouse_1F_EventScript_292A86
+	goto_if_set FLAG_MOM_SAYS_GOODBYE, LittlerootTown_BrendansHouse_1F_EventScript_292A86
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D73, MSGBOX_DEFAULT
 	giveitem_std ITEM_AMULET_COIN
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_272054
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7DBE, MSGBOX_DEFAULT
-	setflag FLAG_0x085
+	setflag FLAG_MOM_SAYS_GOODBYE
 	release
 	end
 
@@ -475,7 +475,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292CEF
 	playse SE_DOOR
 	removeobject VAR_0x8009
-	setflag FLAG_0x123
+	setflag FLAG_RECEIVED_SS_TICKET
 	delay 30
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292D48
@@ -484,7 +484,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	delay 20
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F81B9, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_SYS_TV_LATI
+	setflag FLAG_SYS_TV_LATIAS_LATIOS
 	special TurnOnTVScreen
 	delay 60
 	compare VAR_0x8008, 0
@@ -499,8 +499,8 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292D33
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT
 	closemessage
-	clearflag FLAG_SYS_TV_LATI
-	setflag FLAG_0x0FF
+	clearflag FLAG_SYS_TV_LATIAS_LATIOS
+	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	special TurnOffTVScreen
 	compare VAR_0x8008, 0
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_292D88
@@ -519,7 +519,7 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_292C72:: @ 8292C72
-	setflag FLAG_SYS_TV_LATI
+	setflag FLAG_SYS_TV_LATIAS_LATIOS
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_292C76:: @ 8292C76

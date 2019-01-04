@@ -18,7 +18,7 @@ FortreeCity_EventScript_1E25B6:: @ 81E25B6
 FortreeCity_EventScript_1E25BF:: @ 81E25BF
 	lock
 	faceplayer
-	goto_if_set FLAG_0x127, FortreeCity_EventScript_1E25D4
+	goto_if_set FLAG_KECLEON_FLED_FORTREE, FortreeCity_EventScript_1E25D4
 	msgbox FortreeCity_Text_1E2738, MSGBOX_DEFAULT
 	release
 	end
@@ -81,7 +81,7 @@ FortreeCity_EventScript_1E2645:: @ 81E2645
 	applymovement VAR_LAST_TALKED, FortreeCity_Movement_1E2674
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	setflag FLAG_0x127
+	setflag FLAG_KECLEON_FLED_FORTREE
 	release
 	end
 

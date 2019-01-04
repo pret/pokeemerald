@@ -45,7 +45,7 @@ VictoryRoad_1F_EventScript_235DE1:: @ 8235DE1
 	msgbox VictoryRoad_1F_Text_236020, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	moveobjectoffscreen 4
-	setflag FLAG_0x07E
+	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
 	copyvar VAR_0x40C3, VAR_0x8008
 	releaseall
 	end

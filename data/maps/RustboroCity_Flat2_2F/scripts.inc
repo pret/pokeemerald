@@ -8,12 +8,12 @@ RustboroCity_Flat2_2F_EventScript_215FD8:: @ 8215FD8
 RustboroCity_Flat2_2F_EventScript_215FE1:: @ 8215FE1
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0D5, RustboroCity_Flat2_2F_EventScript_216010
+	goto_if_set FLAG_RECEIVED_PREMIER_BALL_RUSTBORO, RustboroCity_Flat2_2F_EventScript_216010
 	msgbox RustboroCity_Flat2_2F_Text_21605A, MSGBOX_DEFAULT
 	giveitem_std ITEM_PREMIER_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_Flat2_2F_EventScript_272054
-	setflag FLAG_0x0D5
+	setflag FLAG_RECEIVED_PREMIER_BALL_RUSTBORO
 	release
 	end
 

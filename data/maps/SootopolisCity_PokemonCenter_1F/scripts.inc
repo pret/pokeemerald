@@ -20,7 +20,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_22650E:: @ 822650E
 	faceplayer
 	compare VAR_0x40CA, 2
 	goto_if_ge SootopolisCity_PokemonCenter_1F_EventScript_22652E
-	goto_if_unset FLAG_0x081, SootopolisCity_PokemonCenter_1F_EventScript_22652E
+	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_22652E
 	msgbox SootopolisCity_PokemonCenter_1F_Text_22664B, MSGBOX_DEFAULT
 	release
 	end
@@ -35,7 +35,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_226538:: @ 8226538
 	faceplayer
 	compare VAR_0x40CA, 2
 	goto_if_ge SootopolisCity_PokemonCenter_1F_EventScript_226558
-	goto_if_unset FLAG_0x081, SootopolisCity_PokemonCenter_1F_EventScript_226558
+	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_226558
 	msgbox SootopolisCity_PokemonCenter_1F_Text_22672F, MSGBOX_DEFAULT
 	release
 	end

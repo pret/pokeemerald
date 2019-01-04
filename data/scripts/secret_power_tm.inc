@@ -49,7 +49,7 @@ Route111_EventScript_27661E:: @ 827661E
 	goto_if_eq Route111_EventScript_276680
 	msgbox Route111_Text_27636E, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_0x060
+	setflag FLAG_RECEIVED_SECRET_POWER
 	clearflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
 	compare VAR_FACING, 3
 	call_if_eq Route111_EventScript_27666A

@@ -4,8 +4,8 @@ AquaHideout_1F_MapScripts:: @ 8233493
 AquaHideout_1F_EventScript_233494:: @ 8233494
 	lock
 	faceplayer
-	goto_if_set FLAG_0x06F, AquaHideout_1F_EventScript_2334BC
-	goto_if_set FLAG_0x0D4, AquaHideout_1F_EventScript_2334B2
+	goto_if_set FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, AquaHideout_1F_EventScript_2334BC
+	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, AquaHideout_1F_EventScript_2334B2
 	msgbox AquaHideout_1F_Text_23351D, MSGBOX_DEFAULT
 	release
 	end
@@ -23,8 +23,8 @@ AquaHideout_1F_EventScript_2334BC:: @ 82334BC
 AquaHideout_1F_EventScript_2334C6:: @ 82334C6
 	lock
 	faceplayer
-	goto_if_set FLAG_0x06F, AquaHideout_1F_EventScript_2334EE
-	goto_if_set FLAG_0x0D4, AquaHideout_1F_EventScript_2334E4
+	goto_if_set FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, AquaHideout_1F_EventScript_2334EE
+	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, AquaHideout_1F_EventScript_2334E4
 	msgbox AquaHideout_1F_Text_233739, MSGBOX_DEFAULT
 	release
 	end

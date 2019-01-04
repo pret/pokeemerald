@@ -15,7 +15,7 @@ TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	return
 
 TerraCave_End_MapScript1_23B0D9: @ 823B0D9
-	call_if_unset FLAG_0x1BF, TerraCave_End_EventScript_23B0E3
+	call_if_unset FLAG_DEFEATED_GROUDON, TerraCave_End_EventScript_23B0E3
 	end
 
 TerraCave_End_EventScript_23B0E3:: @ 823B0E3
@@ -48,13 +48,13 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	compare VAR_RESULT, 5
 	goto_if_eq TerraCave_End_EventScript_23B163
 	setvar VAR_0x4039, 1
-	setflag FLAG_0x1BF
+	setflag FLAG_DEFEATED_GROUDON
 	releaseall
 	end
 
 TerraCave_End_EventScript_23B155:: @ 823B155
 	setvar VAR_0x4039, 1
-	setflag FLAG_0x1BF
+	setflag FLAG_DEFEATED_GROUDON
 	goto TerraCave_End_EventScript_27376D
 	end
 

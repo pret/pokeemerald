@@ -1,5 +1,5 @@
 NavelRock_Top_EventObjects: @ 853DB74
-	object_event 1, EVENT_OBJ_GFX_HOOH, 0, 12, 4, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, FLAG_HIDE_HOOH
+	object_event 1, EVENT_OBJ_GFX_HOOH, 0, 12, 4, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, FLAG_HIDE_HO_OH
 
 NavelRock_Top_MapWarps: @ 853DB8C
 	warp_def 13, 20, 3, 1, MAP_NAVEL_ROCK_UP4

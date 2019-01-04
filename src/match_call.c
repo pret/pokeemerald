@@ -1016,12 +1016,12 @@ static bool32 MapAllowsMatchCall(void)
     
     if (gMapHeader.regionMapSectionId == MAPSEC_SOOTOPOLIS_CITY
      && FlagGet(FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA) == TRUE
-     && FlagGet(FLAG_0x0DC) == FALSE)
+     && FlagGet(FLAG_UNUSED_0x0DC) == FALSE)
         return FALSE;
 
     if (gMapHeader.regionMapSectionId == MAPSEC_MT_CHIMNEY
-     && FlagGet(FLAG_0x0CF) == TRUE
-     && FlagGet(FLAG_0x08B) == FALSE)
+     && FlagGet(FLAG_MET_ARCHIE_METEOR_FALLS) == TRUE
+     && FlagGet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY) == FALSE)
         return FALSE;
 
     return TRUE;

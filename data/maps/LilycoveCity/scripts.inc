@@ -12,7 +12,7 @@ LilycoveCity_MapScript1_1E2B47: @ 81E2B47
 	end
 
 LilycoveCity_MapScript1_1E2B61: @ 81E2B61
-	call_if_unset FLAG_0x070, LilycoveCity_EventScript_1E2B6B
+	call_if_unset FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_1E2B6B
 	end
 
 LilycoveCity_EventScript_1E2B6B:: @ 81E2B6B
@@ -34,14 +34,14 @@ LilycoveCity_EventScript_1E2BD8:: @ 81E2BD8
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_0x92F, LilycoveCity_EventScript_1E2C18
+	goto_if_set FLAG_DAILY_LILYCOVE_RECEIVED_BERRY, LilycoveCity_EventScript_1E2C18
 	msgbox LilycoveCity_Text_2A7244, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_272054
-	setflag FLAG_0x92F
+	setflag FLAG_DAILY_LILYCOVE_RECEIVED_BERRY
 	msgbox LilycoveCity_Text_2A72E3, MSGBOX_DEFAULT
 	release
 	end
@@ -75,7 +75,7 @@ LilycoveCity_EventScript_1E2C4A:: @ 81E2C4A
 LilycoveCity_EventScript_1E2C53:: @ 81E2C53
 	lock
 	faceplayer
-	goto_if_set FLAG_0x070, LilycoveCity_EventScript_1E2C68
+	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_1E2C68
 	msgbox LilycoveCity_Text_1E3FAB, MSGBOX_DEFAULT
 	release
 	end
@@ -88,7 +88,7 @@ LilycoveCity_EventScript_1E2C68:: @ 81E2C68
 LilycoveCity_EventScript_1E2C72:: @ 81E2C72
 	lock
 	faceplayer
-	goto_if_set FLAG_0x070, LilycoveCity_EventScript_1E2C87
+	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_1E2C87
 	msgbox LilycoveCity_Text_1E40AD, MSGBOX_DEFAULT
 	release
 	end
@@ -195,14 +195,14 @@ LilycoveCity_EventScript_1E2D74:: @ 81E2D74
 
 LilycoveCity_EventScript_1E2D7D:: @ 81E2D7D
 	lockall
-	goto_if_set FLAG_0x0DA, LilycoveCity_EventScript_1E2DB0
+	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_1E2DB0
 	msgbox LilycoveCity_Text_1E3D1F, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_27259E
 	waitmovement 0
 	msgbox LilycoveCity_Text_1E3D4A, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_2725A2
 	waitmovement 0
-	setflag FLAG_0x0DA
+	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
 	end
 
@@ -239,8 +239,8 @@ LilycoveCity_EventScript_1E2DDE:: @ 81E2DDE
 
 LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
 	playbgm MUS_GIRL_SUP, 1
-	call_if_set FLAG_0x11E, LilycoveCity_EventScript_1E2E48
-	call_if_unset FLAG_0x11E, LilycoveCity_EventScript_1E2E51
+	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2E48
+	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2E51
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1E2E5A
 	msgbox LilycoveCity_Text_1E3234, MSGBOX_DEFAULT
@@ -259,7 +259,7 @@ LilycoveCity_EventScript_1E2E51:: @ 81E2E51
 	return
 
 LilycoveCity_EventScript_1E2E5A:: @ 81E2E5A
-	setflag FLAG_0x11E
+	setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	msgbox LilycoveCity_Text_1E318D, MSGBOX_DEFAULT
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -268,8 +268,8 @@ LilycoveCity_EventScript_1E2E5A:: @ 81E2E5A
 
 LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
 	playbgm MUS_BOY_SUP, 1
-	call_if_set FLAG_0x11E, LilycoveCity_EventScript_1E2EBB
-	call_if_unset FLAG_0x11E, LilycoveCity_EventScript_1E2EC4
+	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2EBB
+	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_1E2EC4
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_EventScript_1E2ECD
 	msgbox LilycoveCity_Text_1E373C, MSGBOX_DEFAULT
@@ -288,7 +288,7 @@ LilycoveCity_EventScript_1E2EC4:: @ 81E2EC4
 	return
 
 LilycoveCity_EventScript_1E2ECD:: @ 81E2ECD
-	setflag FLAG_0x11E
+	setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
 	msgbox LilycoveCity_Text_1E36BF, MSGBOX_DEFAULT
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -397,7 +397,7 @@ LilycoveCity_EventScript_1E3006:: @ 81E3006
 	waitfieldeffect 30
 	savebgm MUS_DUMMY
 	fadedefaultbgm
-	setflag FLAG_0x124
+	setflag FLAG_MET_RIVAL_LILYCOVE
 	release
 	end
 

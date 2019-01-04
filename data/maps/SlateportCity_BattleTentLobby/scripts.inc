@@ -245,12 +245,12 @@ SlateportCity_BattleTentLobby_Movement_208A38:: @ 8208A38
 SlateportCity_BattleTentLobby_EventScript_208A3D:: @ 8208A3D
 	lock
 	faceplayer
-	goto_if_set FLAG_0x109, SlateportCity_BattleTentLobby_EventScript_208A74
+	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_BattleTentLobby_EventScript_208A74
 	msgbox SlateportCity_BattleTentLobby_Text_208B4E, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM41
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_BattleTentLobby_EventScript_272054
-	setflag FLAG_0x109
+	setflag FLAG_RECEIVED_TM41
 	msgbox SlateportCity_BattleTentLobby_Text_208C5C, MSGBOX_DEFAULT
 	release
 	end

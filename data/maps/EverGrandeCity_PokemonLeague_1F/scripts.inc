@@ -6,7 +6,7 @@ EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
 EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD: @ 82295DD
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_2
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
-	call_if_unset FLAG_0x107, EverGrandeCity_PokemonLeague_1F_EventScript_2295ED
+	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_2295ED
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_2295ED:: @ 82295ED
@@ -47,7 +47,7 @@ EverGrandeCity_PokemonLeague_1F_Pokemart_229624: @ 8229624
 
 EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	lockall
-	goto_if_set FLAG_0x107, EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
+	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 11
 	call_if_ge EverGrandeCity_PokemonLeague_1F_EventScript_229698
@@ -69,7 +69,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	closemessage
 	moveobjectoffscreen 3
 	moveobjectoffscreen 4
-	setflag FLAG_0x107
+	setflag FLAG_ENTERED_ELITE_FOUR
 	releaseall
 	end
 

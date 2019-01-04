@@ -51,7 +51,7 @@ CaveOfOrigin_B1F_EventScript_23584D:: @ 823584D
 	closemessage
 	playse SE_KAIDAN
 	fadescreenspeed 1, 4
-	setflag FLAG_0x137
+	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
 	setvar VAR_0x405E, 3
 	removeobject 1
 	clearflag FLAG_HIDE_SKY_PILLAR_WALLACE

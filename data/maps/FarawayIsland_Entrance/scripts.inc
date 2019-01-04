@@ -3,7 +3,7 @@ FarawayIsland_Entrance_MapScripts:: @ 8267C8E
 	.byte 0
 
 FarawayIsland_Entrance_MapScript1_267C94: @ 8267C94
-	setflag FLAG_0x8D8
+	setflag FLAG_ARRIVED_ON_FARAWAY_ISLAND
 	end
 
 FarawayIsland_Entrance_EventScript_267C98:: @ 8267C98

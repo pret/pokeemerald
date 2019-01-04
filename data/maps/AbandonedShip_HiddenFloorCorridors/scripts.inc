@@ -8,14 +8,14 @@ AbandonedShip_HiddenFloorCorridors_MapScript1_238977: @ 8238977
 	end
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_238980: @ 8238980
-	call_if_unset FLAG_0x0F0, AbandonedShip_HiddenFloorCorridors_EventScript_2389F1
-	call_if_unset FLAG_0x0F1, AbandonedShip_HiddenFloorCorridors_EventScript_2389FB
-	call_if_unset FLAG_0x0F2, AbandonedShip_HiddenFloorCorridors_EventScript_238A05
-	call_if_unset FLAG_0x0F3, AbandonedShip_HiddenFloorCorridors_EventScript_238A0F
-	call_if_set FLAG_0x0F0, AbandonedShip_HiddenFloorCorridors_EventScript_2389C9
-	call_if_set FLAG_0x0F1, AbandonedShip_HiddenFloorCorridors_EventScript_2389D3
-	call_if_set FLAG_0x0F2, AbandonedShip_HiddenFloorCorridors_EventScript_2389DD
-	call_if_set FLAG_0x0F3, AbandonedShip_HiddenFloorCorridors_EventScript_2389E7
+	call_if_unset FLAG_USED_ROOM_1_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_2389F1
+	call_if_unset FLAG_USED_ROOM_2_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_2389FB
+	call_if_unset FLAG_USED_ROOM_4_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_238A05
+	call_if_unset FLAG_USED_ROOM_6_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_238A0F
+	call_if_set FLAG_USED_ROOM_1_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_2389C9
+	call_if_set FLAG_USED_ROOM_2_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_2389D3
+	call_if_set FLAG_USED_ROOM_4_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_2389DD
+	call_if_set FLAG_USED_ROOM_6_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_2389E7
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_2389C9:: @ 82389C9
@@ -52,14 +52,14 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A0F:: @ 8238A0F
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238A19:: @ 8238A19
 	lockall
-	goto_if_set FLAG_0x0F0, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
+	goto_if_set FLAG_USED_ROOM_1_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_1_KEY, 1
 	compare VAR_RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_238AF5
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_1_KEY, 1
-	setflag FLAG_0x0F0
+	setflag FLAG_USED_ROOM_1_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_2389C9
 	special DrawWholeMapView
 	releaseall
@@ -67,14 +67,14 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A19:: @ 8238A19
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238A50:: @ 8238A50
 	lockall
-	goto_if_set FLAG_0x0F1, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
+	goto_if_set FLAG_USED_ROOM_2_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_2_KEY, 1
 	compare VAR_RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_238AFF
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_2_KEY, 1
-	setflag FLAG_0x0F1
+	setflag FLAG_USED_ROOM_2_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_2389D3
 	special DrawWholeMapView
 	releaseall
@@ -82,14 +82,14 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A50:: @ 8238A50
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238A87:: @ 8238A87
 	lockall
-	goto_if_set FLAG_0x0F2, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
+	goto_if_set FLAG_USED_ROOM_4_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_4_KEY, 1
 	compare VAR_RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B09
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_4_KEY, 1
-	setflag FLAG_0x0F2
+	setflag FLAG_USED_ROOM_4_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_2389DD
 	special DrawWholeMapView
 	releaseall
@@ -97,14 +97,14 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A87:: @ 8238A87
 
 AbandonedShip_HiddenFloorCorridors_EventScript_238ABE:: @ 8238ABE
 	lockall
-	goto_if_set FLAG_0x0F3, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
+	goto_if_set FLAG_USED_ROOM_6_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_6_KEY, 1
 	compare VAR_RESULT, 0
 	goto_if_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B13
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, MSGBOX_DEFAULT
 	playse SE_PIN
 	takeitem ITEM_ROOM_6_KEY, 1
-	setflag FLAG_0x0F3
+	setflag FLAG_USED_ROOM_6_KEY
 	call AbandonedShip_HiddenFloorCorridors_EventScript_2389E7
 	special DrawWholeMapView
 	releaseall

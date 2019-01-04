@@ -452,7 +452,7 @@ EventScript_SecretBasePC:: @ 823B4BB
 EventScript_23B4D3:: @ 823B4D3
 	message Text_27681A
 	waitmessage
-	goto_if_set FLAG_0x10C, EventScript_23B4EF
+	goto_if_set FLAG_DECORATION_16, EventScript_23B4EF
 	goto EventScript_23B531
 	end
 
@@ -1050,7 +1050,7 @@ EventScript_2715DE:: @ 82715DE
 	setflag FLAG_HIDE_LILYCOVE_HARBOR_EON_TICKET_TAKER
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE
 	setflag FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON
-	setflag FLAG_0x393
+	setflag FLAG_UNKNOWN_0x393
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
 	setflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
 	setflag FLAG_HIDE_MAUVILLE_CITY_SCOTT
@@ -1107,7 +1107,7 @@ EventScript_2715DE:: @ 82715DE
 
 EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	special sub_81AFDD0
-	setflag FLAG_0x87F
+	setflag FLAG_IS_CHAMPION
 	call EverGrandeCity_HallOfFame_EventScript_271829
 	compare VAR_0x40CC, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_271839
@@ -1125,8 +1125,8 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
 	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
 	special sub_813BA60
-	call_if_unset FLAG_0x123, EverGrandeCity_HallOfFame_EventScript_271843
-	call_if_unset FLAG_0x12A, EverGrandeCity_HallOfFame_EventScript_27183F
+	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_271843
+	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_27183F
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	compare VAR_0x40D3, 0
@@ -1134,11 +1134,11 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271829:: @ 8271829
-	clearflag FLAG_0x1C7
-	clearflag FLAG_0x1C8
-	clearflag FLAG_0x1AC
-	clearflag FLAG_0x1DD
-	clearflag FLAG_0x1DC
+	clearflag FLAG_DEFEATED_MEW
+	clearflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+	clearflag FLAG_DEFEATED_DEOXYS
+	clearflag FLAG_DEFEATED_LUGIA
+	clearflag FLAG_DEFEATED_HO_OH
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271839:: @ 8271839
@@ -1206,10 +1206,10 @@ EverGrandeCity_HallOfFame_EventScript_2718B3:: @ 82718B3
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2718CC:: @ 82718CC
-	clearflag FLAG_0x4FB
-	clearflag FLAG_0x4FC
-	clearflag FLAG_0x4FD
-	clearflag FLAG_0x4FE
+	clearflag FLAG_DEFEATED_ELITE_4_SYDNEY
+	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
+	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
+	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
 	setvar VAR_0x409C, 0
 	return
 
@@ -1222,8 +1222,8 @@ PetalburgCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 RustboroCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 SlateportCity_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
-	goto_if_unset FLAG_0x0BC, OldaleTown_PokemonCenter_1F_EventScript_27374E
-	goto_if_set FLAG_0x4F4, OldaleTown_PokemonCenter_1F_EventScript_27374E
+	goto_if_unset FLAG_RECEIVED_POKENAV, OldaleTown_PokemonCenter_1F_EventScript_27374E
+	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, OldaleTown_PokemonCenter_1F_EventScript_27374E
 	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, OldaleTown_PokemonCenter_1F_EventScript_27190C
 	goto_if_unset FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN, OldaleTown_PokemonCenter_1F_EventScript_271912
 	goto_if_unset FLAG_HIDE_ROUTE_108_MR_BRINEY, OldaleTown_PokemonCenter_1F_EventScript_271918
@@ -1284,7 +1284,7 @@ OldaleTown_PokemonCenter_1F_EventScript_27195A:: @ 827195A
 	call_if_eq OldaleTown_PokemonCenter_1F_EventScript_27198D
 	waitmessage
 	call OldaleTown_PokemonCenter_1F_EventScript_271993
-	goto_if_unset FLAG_0x111, OldaleTown_PokemonCenter_1F_EventScript_271A43
+	goto_if_unset FLAG_POKERUS_EXPLAINED, OldaleTown_PokemonCenter_1F_EventScript_271A43
 	goto OldaleTown_PokemonCenter_1F_EventScript_2719B1
 	end
 
@@ -1337,9 +1337,9 @@ OldaleTown_PokemonCenter_1F_EventScript_271A03:: @ 8271A03
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
-	goto_if_set FLAG_0x880, OldaleTown_PokemonCenter_1F_EventScript_2719E2
+	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, OldaleTown_PokemonCenter_1F_EventScript_2719E2
 	msgbox gUnknown_08272798, MSGBOX_DEFAULT
-	setflag FLAG_0x880
+	setflag FLAG_NURSE_UNION_ROOM_REMINDER
 	message OldaleTown_PokemonCenter_1F_Text_278A48
 	waitmessage
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_271AD0
@@ -1357,12 +1357,12 @@ OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
 
 OldaleTown_PokemonCenter_1F_EventScript_271A5F:: @ 8271A5F
 	message gUnknown_08272F07
-	setflag FLAG_0x111
+	setflag FLAG_POKERUS_EXPLAINED
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
-	goto_if_set FLAG_0x159, OldaleTown_PokemonCenter_1F_EventScript_271AAC
-	setflag FLAG_0x159
+	goto_if_set FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD, OldaleTown_PokemonCenter_1F_EventScript_271AAC
+	setflag FLAG_OLDALE_NURSE_MENTIONS_GOLD_CARD
 	msgbox gUnknown_082727F5, MSGBOX_DEFAULT
 	playse SE_PIN
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_272598
@@ -1745,7 +1745,7 @@ LavaridgeTown_Gym_1F_EventScript_271E84:: @ 8271E84
 MauvilleCity_Gym_EventScript_271E84:: @ 8271E84
 RustboroCity_Gym_EventScript_271E84:: @ 8271E84
 	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
-	setflag FLAG_0x128
+	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
 DewfordTown_EventScript_271E8B:: @ 8271E8B
@@ -2135,7 +2135,7 @@ Route103_EventScript_272141:: @ 8272141
 	lock
 	faceplayer
 	goto_if_unset FLAG_HAS_MATCH_CALL, Route101_EventScript_272155
-	goto_if_unset FLAG_0x119, Route101_EventScript_1FA2D2
+	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, Route101_EventScript_1FA2D2
 
 Route101_EventScript_272155:: @ 8272155
 	msgbox gUnknown_082A5C9C, MSGBOX_YESNO
@@ -3197,7 +3197,7 @@ EventScript_2736D9:: @ 82736D9
 	special sub_80B05B4
 	waitstate
 	fadescreen 1
-	call_if_set FLAG_0x06C, EventScript_2736F4
+	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, EventScript_2736F4
 	special sp0C8_whiteout_maybe
 	waitstate
 	end
@@ -4288,8 +4288,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C883:: @ 828C883
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C939
 	copyvar VAR_0x8009, VAR_0x8006
-	goto_if_set FLAG_0x069, SlateportCity_OceanicMuseum_1F_EventScript_28C8C8
-	setflag FLAG_0x069
+	goto_if_set FLAG_OCEANIC_MUSEUM_MET_REPORTER, SlateportCity_OceanicMuseum_1F_EventScript_28C8C8
+	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
 	msgbox SlateportCity_OceanicMuseum_1F_Text_2811A0, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
@@ -7106,7 +7106,7 @@ PacifidlogTown_PokemonCenter_1F_Text_2C7E7A: @ 82C7E7A
 SlateportCity_PokemonFanClub_EventScript_2C7F16:: @ 82C7F16
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B1, SlateportCity_PokemonFanClub_EventScript_2C7F74
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_SWAGGER, SlateportCity_PokemonFanClub_EventScript_2C7F74
 	msgbox SlateportCity_PokemonFanClub_Text_2C6E37, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
@@ -7118,7 +7118,7 @@ SlateportCity_PokemonFanClub_EventScript_2C7F16:: @ 82C7F16
 	call SlateportCity_PokemonFanClub_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
-	setflag FLAG_0x1B1
+	setflag FLAG_MOVE_TUTOR_TAUGHT_SWAGGER
 	goto SlateportCity_PokemonFanClub_EventScript_2C7F74
 	end
 
@@ -7135,7 +7135,7 @@ SlateportCity_PokemonFanClub_EventScript_2C7F74:: @ 82C7F74
 MauvilleCity_EventScript_2C7F7E:: @ 82C7F7E
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B2, MauvilleCity_EventScript_2C7FDC
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_ROLLOUT, MauvilleCity_EventScript_2C7FDC
 	msgbox MauvilleCity_Text_2C6FDB, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_2C7FD2
@@ -7147,7 +7147,7 @@ MauvilleCity_EventScript_2C7F7E:: @ 82C7F7E
 	call MauvilleCity_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_2C7FD2
-	setflag FLAG_0x1B2
+	setflag FLAG_MOVE_TUTOR_TAUGHT_ROLLOUT
 	goto MauvilleCity_EventScript_2C7FDC
 	end
 
@@ -7164,7 +7164,7 @@ MauvilleCity_EventScript_2C7FDC:: @ 82C7FDC
 VerdanturfTown_PokemonCenter_1F_EventScript_2C7FE6:: @ 82C7FE6
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B3, VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_FURY_CUTTER, VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_2C7174, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
@@ -7176,7 +7176,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2C7FE6:: @ 82C7FE6
 	call VerdanturfTown_PokemonCenter_1F_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
-	setflag FLAG_0x1B3
+	setflag FLAG_MOVE_TUTOR_TAUGHT_FURY_CUTTER
 	goto VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
 	end
 
@@ -7193,7 +7193,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2C8044:: @ 82C8044
 LavaridgeTown_House_EventScript_2C804E:: @ 82C804E
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B4, LavaridgeTown_House_EventScript_2C80AC
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_MIMIC, LavaridgeTown_House_EventScript_2C80AC
 	msgbox LavaridgeTown_House_Text_2C72B6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
@@ -7205,7 +7205,7 @@ LavaridgeTown_House_EventScript_2C804E:: @ 82C804E
 	call LavaridgeTown_House_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_House_EventScript_2C80A2
-	setflag FLAG_0x1B4
+	setflag FLAG_MOVE_TUTOR_TAUGHT_MIMIC
 	goto LavaridgeTown_House_EventScript_2C80AC
 	end
 
@@ -7222,7 +7222,7 @@ LavaridgeTown_House_EventScript_2C80AC:: @ 82C80AC
 FallarborTown_Mart_EventScript_2C80B6:: @ 82C80B6
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B5, FallarborTown_Mart_EventScript_2C8114
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_METRONOME, FallarborTown_Mart_EventScript_2C8114
 	msgbox FallarborTown_Mart_Text_2C7449, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_Mart_EventScript_2C810A
@@ -7234,7 +7234,7 @@ FallarborTown_Mart_EventScript_2C80B6:: @ 82C80B6
 	call FallarborTown_Mart_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_Mart_EventScript_2C810A
-	setflag FLAG_0x1B5
+	setflag FLAG_MOVE_TUTOR_TAUGHT_METRONOME
 	goto FallarborTown_Mart_EventScript_2C8114
 	end
 
@@ -7251,7 +7251,7 @@ FallarborTown_Mart_EventScript_2C8114:: @ 82C8114
 FortreeCity_House2_EventScript_2C811E:: @ 82C811E
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B6, FortreeCity_House2_EventScript_2C817C
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_SLEEP_TALK, FortreeCity_House2_EventScript_2C817C
 	msgbox FortreeCity_House2_Text_2C7637, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House2_EventScript_2C8172
@@ -7263,7 +7263,7 @@ FortreeCity_House2_EventScript_2C811E:: @ 82C811E
 	call FortreeCity_House2_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq FortreeCity_House2_EventScript_2C8172
-	setflag FLAG_0x1B6
+	setflag FLAG_MOVE_TUTOR_TAUGHT_SLEEP_TALK
 	goto FortreeCity_House2_EventScript_2C817C
 	end
 
@@ -7280,7 +7280,7 @@ FortreeCity_House2_EventScript_2C817C:: @ 82C817C
 LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186:: @ 82C8186
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B7, LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_SUBSTITUTE, LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2C77C6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
@@ -7292,7 +7292,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186:: @ 82C8186
 	call LilycoveCity_DepartmentStoreRooftop_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
-	setflag FLAG_0x1B7
+	setflag FLAG_MOVE_TUTOR_TAUGHT_SUBSTITUTE
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
 	end
 
@@ -7309,7 +7309,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4:: @ 82C81E4
 MossdeepCity_EventScript_2C81EE:: @ 82C81EE
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B8, MossdeepCity_EventScript_2C824C
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_DYNAMICPUNCH, MossdeepCity_EventScript_2C824C
 	msgbox MossdeepCity_Text_2C79A6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_EventScript_2C8242
@@ -7321,7 +7321,7 @@ MossdeepCity_EventScript_2C81EE:: @ 82C81EE
 	call MossdeepCity_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_EventScript_2C8242
-	setflag FLAG_0x1B8
+	setflag FLAG_MOVE_TUTOR_TAUGHT_DYNAMICPUNCH
 	goto MossdeepCity_EventScript_2C824C
 	end
 
@@ -7338,7 +7338,7 @@ MossdeepCity_EventScript_2C824C:: @ 82C824C
 SootopolisCity_PokemonCenter_1F_EventScript_2C8256:: @ 82C8256
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1B9, SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_DOUBLE_EDGE, SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
 	msgbox SootopolisCity_PokemonCenter_1F_Text_2C7B8E, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
@@ -7350,7 +7350,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_2C8256:: @ 82C8256
 	call SootopolisCity_PokemonCenter_1F_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
-	setflag FLAG_0x1B9
+	setflag FLAG_MOVE_TUTOR_TAUGHT_DOUBLE_EDGE
 	goto SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
 	end
 
@@ -7367,7 +7367,7 @@ SootopolisCity_PokemonCenter_1F_EventScript_2C82B4:: @ 82C82B4
 PacifidlogTown_PokemonCenter_1F_EventScript_2C82BE:: @ 82C82BE
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1BA, PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
+	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_EXPLOSION, PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_2C7CFA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
@@ -7379,7 +7379,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2C82BE:: @ 82C82BE
 	call PacifidlogTown_PokemonCenter_1F_EventScript_2C8326
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
-	setflag FLAG_0x1BA
+	setflag FLAG_MOVE_TUTOR_TAUGHT_EXPLOSION
 	goto PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
 	end
 

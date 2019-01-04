@@ -3538,7 +3538,7 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
             return 0;
         }
     }
-    if (FlagGet(FLAG_SYS_TV_LATI) == TRUE)
+    if (FlagGet(FLAG_SYS_TV_LATIAS_LATIOS) == TRUE)
     {
         return 1;
     }

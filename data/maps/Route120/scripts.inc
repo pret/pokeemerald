@@ -39,9 +39,9 @@ Route120_EventScript_1F5460:: @ 81F5460
 	return
 
 Route120_MapScript1_1F5474: @ 81F5474
-	call_if_unset FLAG_0x0E4, Route120_EventScript_1F5490
-	call_if_set FLAG_0x11D, Route120_EventScript_1F54A3
-	call_if_unset FLAG_0x11D, Route120_EventScript_1F54C8
+	call_if_unset FLAG_REGI_DOORS_OPENED, Route120_EventScript_1F5490
+	call_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1F54A3
+	call_if_unset FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_1F54C8
 	end
 
 Route120_EventScript_1F5490:: @ 81F5490
@@ -99,7 +99,7 @@ Route120_EventScript_1F5527:: @ 81F5527
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_0x92E, Route120_EventScript_1F5625
+	goto_if_set FLAG_DAILY_ROUTE_120_RECEIVED_BERRY, Route120_EventScript_1F5625
 	msgbox Route120_Text_2A70C7, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	call_if_eq Route120_EventScript_1F562F
@@ -148,7 +148,7 @@ Route120_EventScript_1F5601:: @ 81F5601
 	giveitem_std VAR_0x8004
 	compare VAR_RESULT, 0
 	goto_if_eq Route120_EventScript_272054
-	setflag FLAG_0x92E
+	setflag FLAG_DAILY_ROUTE_120_RECEIVED_BERRY
 	msgbox Route120_Text_2A71D5, MSGBOX_DEFAULT
 	release
 	end
@@ -169,7 +169,7 @@ Route120_EventScript_1F5638:: @ 81F5638
 Route120_EventScript_1F5641:: @ 81F5641
 	lock
 	faceplayer
-	goto_if_set FLAG_0x122, Route120_EventScript_1F5672
+	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_1F5672
 	msgbox Route120_Text_1F5998, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route120_EventScript_1F5665
@@ -178,7 +178,7 @@ Route120_EventScript_1F5641:: @ 81F5641
 
 Route120_EventScript_1F5665:: @ 81F5665
 	msgbox Route120_Text_1F5AAC, MSGBOX_DEFAULT
-	setflag FLAG_0x122
+	setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE_120
 	release
 	end
 
@@ -238,7 +238,7 @@ Route120_EventScript_1F572C:: @ 81F572C
 	waitmovement 0
 	msgbox Route120_Text_1F5BAF, MSGBOX_DEFAULT
 	giveitem_std ITEM_DEVON_SCOPE
-	setflag FLAG_0x11D
+	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_1F5C7B, MSGBOX_DEFAULT
 	closemessage
 	applymovement 31, Route120_Movement_2725AA

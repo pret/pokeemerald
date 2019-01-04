@@ -7,7 +7,7 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
 LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5
 	compare VAR_0x4092, 6
 	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_1F88CA
-	call_if_set FLAG_0x112, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
+	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
@@ -99,7 +99,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
-	setflag FLAG_0x057
+	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_0x408C, 2
 	releaseall
 	end
@@ -117,7 +117,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F89F3:: @ 81F89F3
 LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	lock
 	faceplayer
-	goto_if_set FLAG_0x082, LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
+	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
 	goto_if_set FLAG_SYS_POKEMON_GET, LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
 	compare VAR_0x408D, 3
 	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F

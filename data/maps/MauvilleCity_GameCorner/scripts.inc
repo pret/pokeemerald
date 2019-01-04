@@ -404,7 +404,7 @@ MauvilleCity_GameCorner_EventScript_21012E:: @ 821012E
 MauvilleCity_GameCorner_EventScript_210137:: @ 8210137
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0E2, MauvilleCity_GameCorner_EventScript_210213
+	goto_if_set FLAG_RECEIVED_STARTER_DOLL, MauvilleCity_GameCorner_EventScript_210213
 	msgbox MauvilleCity_GameCorner_Text_210750, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_210209
@@ -421,7 +421,7 @@ MauvilleCity_GameCorner_EventScript_21017C:: @ 821017C
 	goto_if_eq MauvilleCity_GameCorner_EventScript_2101FA
 	msgbox MauvilleCity_GameCorner_Text_21079C, MSGBOX_DEFAULT
 	givedecoration_std 88
-	setflag FLAG_0x0E2
+	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_210213
 	end
 
@@ -432,7 +432,7 @@ MauvilleCity_GameCorner_EventScript_2101A6:: @ 82101A6
 	goto_if_eq MauvilleCity_GameCorner_EventScript_2101FA
 	msgbox MauvilleCity_GameCorner_Text_21079C, MSGBOX_DEFAULT
 	givedecoration_std 89
-	setflag FLAG_0x0E2
+	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_210213
 	end
 
@@ -443,7 +443,7 @@ MauvilleCity_GameCorner_EventScript_2101D0:: @ 82101D0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_2101FA
 	msgbox MauvilleCity_GameCorner_Text_21079C, MSGBOX_DEFAULT
 	givedecoration_std 90
-	setflag FLAG_0x0E2
+	setflag FLAG_RECEIVED_STARTER_DOLL
 	goto MauvilleCity_GameCorner_EventScript_210213
 	end
 
@@ -474,11 +474,11 @@ MauvilleCity_GameCorner_EventScript_21021D:: @ 821021D
 	end
 
 MauvilleCity_GameCorner_EventScript_21023D:: @ 821023D
-	goto_if_set FLAG_0x0E1, MauvilleCity_GameCorner_EventScript_21026B
+	goto_if_set FLAG_RECEIVED_20_COINS, MauvilleCity_GameCorner_EventScript_21026B
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 1
 	goto_if_ge MauvilleCity_GameCorner_EventScript_21026B
-	setflag FLAG_0x0E1
+	setflag FLAG_RECEIVED_20_COINS
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_2108A0, MSGBOX_DEFAULT
 	playse SE_REGI

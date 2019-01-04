@@ -403,7 +403,7 @@ extern const u8 gText_PkmnHPRestoredByVar2[];
 extern const u8 gText_CantBeUsedOnPkmn[];
 extern const u8 gText_CancelParticipation[];
 extern const u8 gText_PkmnWasGivenItem[];
-extern const u8 gText_RecievedItemFromPkmn[];
+extern const u8 gText_ReceivedItemFromPkmn[];
 extern const u8 gText_SwitchPkmnItem[];
 extern const u8 gText_SwitchedPkmnItem[];
 extern const u8 gText_BagFullCouldNotRemoveItem[];

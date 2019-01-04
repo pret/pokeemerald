@@ -5,8 +5,8 @@ LavaridgeTown_MapScripts:: @ 81EA4D3
 
 LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
-	call_if_set FLAG_0x06C, LavaridgeTown_EventScript_1EA514
-	call_if_set FLAG_0x08B, LavaridgeTown_EventScript_1EA53F
+	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, LavaridgeTown_EventScript_1EA514
+	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F
 	call LavaridgeTown_EventScript_271ED7
 	call LavaridgeTown_EventScript_271EFB
 	compare VAR_0x4053, 1
@@ -16,7 +16,7 @@ LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	end
 
 LavaridgeTown_EventScript_1EA514:: @ 81EA514
-	clearflag FLAG_0x06C
+	clearflag FLAG_FLANNERY_GIVES_BADGE_INFO
 	return
 
 LavaridgeTown_EventScript_1EA518:: @ 81EA518
@@ -71,7 +71,7 @@ LavaridgeTown_EventScript_1EA551:: @ 81EA551
 LavaridgeTown_EventScript_1EA5B5:: @ 81EA5B5
 	msgbox LavaridgeTown_Text_1EA7C0, MSGBOX_DEFAULT
 	giveitem_std ITEM_GO_GOGGLES
-	setflag FLAG_0x0DD
+	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_1EA897, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_1EA5FF
 	end
@@ -79,7 +79,7 @@ LavaridgeTown_EventScript_1EA5B5:: @ 81EA5B5
 LavaridgeTown_EventScript_1EA5DA:: @ 81EA5DA
 	msgbox LavaridgeTown_Text_1EA9A2, MSGBOX_DEFAULT
 	giveitem_std ITEM_GO_GOGGLES
-	setflag FLAG_0x0DD
+	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_1EAA2E, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_1EA5FF
 	end
@@ -246,7 +246,7 @@ LavaridgeTown_EventScript_1EA73B:: @ 81EA73B
 LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	lock
 	faceplayer
-	goto_if_set FLAG_0x10A, LavaridgeTown_EventScript_1EA787
+	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_1EA787
 	msgbox LavaridgeTown_Text_1EAB80, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_EventScript_1EA79B
@@ -254,7 +254,7 @@ LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	compare VAR_RESULT, 6
 	goto_if_eq LavaridgeTown_EventScript_1EA791
 	msgbox LavaridgeTown_Text_1EACC0, MSGBOX_DEFAULT
-	setflag FLAG_0x10A
+	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare MUS_FANFA4
 	message LavaridgeTown_Text_1EACF4
 	waitfanfare

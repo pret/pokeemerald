@@ -316,16 +316,16 @@ extern const u8 gMatchCall_MaySelfIntroductionText_Line2[];
 // .rodata
 
 static const match_call_text_data_t sMrStoneTextScripts[] = {
-    { gText_MrStone_Pokenav_2B60C0, 0xFFFF,              FLAG_0x158 },
-    { gText_MrStone_Pokenav_2B61E6, FLAG_0x158,          0xFFFF },
-    { gText_MrStone_Pokenav_2B6302, FLAG_0x0BD,          0xFFFF },
-    { gText_MrStone_Pokenav_2B63A0, FLAG_0x110,          0xFFFF },
-    { gText_MrStone_Pokenav_2B64A2, FLAG_0x06A,          0xFFFF },
-    { gText_MrStone_Pokenav_2B6526, FLAG_0x4F4,          0xFFFF },
-    { gText_MrStone_Pokenav_2B65BB, FLAG_0x097,          0xFFFF },
-    { gText_MrStone_Pokenav_2B6664, FLAG_0x06F,          0xFFFF },
-    { gText_MrStone_Pokenav_2B66B1, FLAG_0x070,          0xFFFF },
-    { gText_MrStone_Pokenav_2B6703, FLAG_0x4F7,          0xFFFF },
+    { gText_MrStone_Pokenav_2B60C0, 0xFFFF,              FLAG_ENABLE_MR_STONE_POKENAV },
+    { gText_MrStone_Pokenav_2B61E6, FLAG_ENABLE_MR_STONE_POKENAV,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6302, FLAG_DELIVERED_STEVEN_LETTER,          0xFFFF },
+    { gText_MrStone_Pokenav_2B63A0, FLAG_RECEIVED_EXP_SHARE,          0xFFFF },
+    { gText_MrStone_Pokenav_2B64A2, FLAG_RECEIVED_HM04,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6526, FLAG_DEFEATED_PETALBURG_GYM,          0xFFFF },
+    { gText_MrStone_Pokenav_2B65BB, FLAG_RECEIVED_CASTFORM,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6664, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,          0xFFFF },
+    { gText_MrStone_Pokenav_2B66B1, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE,          0xFFFF },
+    { gText_MrStone_Pokenav_2B6703, FLAG_DEFEATED_SOOTOPOLIS_GYM,          0xFFFF },
     { gText_MrStone_Pokenav_2B67ED, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                         0xFFFF,              0xFFFF }
 };
@@ -333,11 +333,11 @@ static const match_call_text_data_t sMrStoneTextScripts[] = {
 MATCHCALLDEF(sMrStoneMatchCallHeader, 0, 10, 0xffff, gMrStoneMatchCallDesc, gMrStoneMatchCallName, sMrStoneTextScripts);
 
 static const match_call_text_data_t sNormanTextScripts[] = {
-    { gText_Norman_Pokenav_2B5719, FLAG_0x132,           0xFFFF },
-    { gText_Norman_Pokenav_2B5795, FLAG_0x4F1,           0xFFFF },
-    { gText_Norman_Pokenav_2B584D, FLAG_0x4F3,           0xFFFF },
-    { gText_Norman_Pokenav_2B58E3, FLAG_0x4F4,           0xFFFF },
-    { gText_Norman_Pokenav_2B5979, FLAG_0x0D4,           0xFFFF },
+    { gText_Norman_Pokenav_2B5719, FLAG_ENABLE_NORMAN_MATCH_CALL,           0xFFFF },
+    { gText_Norman_Pokenav_2B5795, FLAG_DEFEATED_DEWFORD_GYM,           0xFFFF },
+    { gText_Norman_Pokenav_2B584D, FLAG_DEFEATED_LAVARIDGE_GYM,           0xFFFF },
+    { gText_Norman_Pokenav_2B58E3, FLAG_DEFEATED_PETALBURG_GYM,           0xFFFF },
+    { gText_Norman_Pokenav_2B5979, FLAG_RECEIVED_RED_OR_BLUE_ORB,           0xFFFF },
     { gText_Norman_Pokenav_2B5A07, 0xFFFE,               0xFFFF },
     { gText_Norman_Pokenav_2B5A69, FLAG_SYS_GAME_CLEAR,  0xFFFF },
     { gText_Norman_Pokenav_2B5ACF, FLAG_SYS_GAME_CLEAR,  0xFFFF },
@@ -345,107 +345,107 @@ static const match_call_text_data_t sNormanTextScripts[] = {
     { NULL,                        0xFFFF,               0xFFFF }
 };
 
-MATCHCALLDEF(sNormanMatchCallHeader, 5, 7, FLAG_0x132, 0x45, gNormanMatchCallDesc, gNormanMatchCallName, sNormanTextScripts);
+MATCHCALLDEF(sNormanMatchCallHeader, 5, 7, FLAG_ENABLE_NORMAN_MATCH_CALL, 0x45, gNormanMatchCallDesc, gNormanMatchCallName, sNormanTextScripts);
 
-MATCHCALLDEF(sProfBirchMatchCallHeader, 3, 0, FLAG_0x119, gProfBirchMatchCallDesc, gProfBirchMatchCallName)
+MATCHCALLDEF(sProfBirchMatchCallHeader, 3, 0, FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, gProfBirchMatchCallDesc, gProfBirchMatchCallName)
 
 static const match_call_text_data_t sMomTextScripts[] = {
     { gText_Mom_Pokenav_2B227B, 0xffff,              0xffff },
-    { gText_Mom_Pokenav_2B2310, FLAG_0x4F4,          0xffff },
+    { gText_Mom_Pokenav_2B2310, FLAG_DEFEATED_PETALBURG_GYM,          0xffff },
     { gText_Mom_Pokenav_2B23F3, FLAG_SYS_GAME_CLEAR, 0xffff },
     { NULL,                     0xffff,              0xffff }
 };
 
-MATCHCALLDEF(sMomMatchCallHeader, 0, 0, FLAG_0x0D8, gMomMatchCallDesc, gMomMatchCallName, sMomTextScripts);
+MATCHCALLDEF(sMomMatchCallHeader, 0, 0, FLAG_ENABLE_MOM_MATCH_CALL, gMomMatchCallDesc, gMomMatchCallName, sMomTextScripts);
 
 static const match_call_text_data_t sStevenTextScripts[] = {
     { gText_Steven_Pokenav_2B5B95, 0xffff,              0xffff },
     { gText_Steven_Pokenav_2B5C53, FLAG_RUSTURF_TUNNEL_OPENED,          0xffff },
-    { gText_Steven_Pokenav_2B5CC9, FLAG_0x0D4,          0xffff },
-    { gText_Steven_Pokenav_2B5DB4, FLAG_0x070,          0xffff },
-    { gText_Steven_Pokenav_2B5E26, FLAG_0x4F6,          0xffff },
-    { gText_Steven_Pokenav_2B5EA2, FLAG_0x081,          0xffff },
+    { gText_Steven_Pokenav_2B5CC9, FLAG_RECEIVED_RED_OR_BLUE_ORB,          0xffff },
+    { gText_Steven_Pokenav_2B5DB4, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE,          0xffff },
+    { gText_Steven_Pokenav_2B5E26, FLAG_DEFEATED_MOSSDEEP_GYM,          0xffff },
+    { gText_Steven_Pokenav_2B5EA2, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,          0xffff },
     { gText_Steven_Pokenav_2B5ED9, FLAG_SYS_GAME_CLEAR, 0xffff },
     { NULL,                        0xffff,              0xffff },
 };
 
-MATCHCALLDEF(sStevenMatchCallHeader, 0, 0xd5, FLAG_0x131, gStevenMatchCallDesc, gStevenMatchCallName, sStevenTextScripts);
+MATCHCALLDEF(sStevenMatchCallHeader, 0, 0xd5, FLAG_REGISTERED_STEVEN_POKENAV, gStevenMatchCallDesc, gStevenMatchCallName, sStevenTextScripts);
 
 static const match_call_text_data_t sMayTextScripts[] = {
     { gText_May_Pokenav_2B3AB3, 0xFFFF,              0xFFFF },
-    { gText_May_Pokenav_2B3B3F, FLAG_0x4F1,          0xFFFF },
-    { gText_May_Pokenav_2B3C13, FLAG_0x095,          0xFFFF },
+    { gText_May_Pokenav_2B3B3F, FLAG_DEFEATED_DEWFORD_GYM,          0xFFFF },
+    { gText_May_Pokenav_2B3C13, FLAG_DELIVERED_DEVON_GOODS,          0xFFFF },
     { gText_May_Pokenav_2B3CF3, FLAG_HIDE_MAUVILLE_CITY_WALLY,          0xFFFF },
-    { gText_May_Pokenav_2B3D4B, FLAG_0x06A,          0xFFFF },
-    { gText_May_Pokenav_2B3DD1, FLAG_0x4F3,          0xFFFF },
-    { gText_May_Pokenav_2B3E69, FLAG_0x4F4,          0xFFFF },
-    { gText_May_Pokenav_2B3ECD, FLAG_0x097,          0xFFFF },
-    { gText_May_Pokenav_2B3F2B, FLAG_0x0D4,          0xFFFF },
-    { gText_May_Pokenav_2B3FFB, FLAG_0x06F,          0xFFFF },
-    { gText_May_Pokenav_2B402B, FLAG_0x061,          0xFFFF },
-    { gText_May_Pokenav_2B414B, FLAG_0x070,          0xFFFF },
-    { gText_May_Pokenav_2B4228, FLAG_0x081,          0xFFFF },
-    { gText_May_Pokenav_2B42E0, FLAG_0x4F7,          0xFFFF },
+    { gText_May_Pokenav_2B3D4B, FLAG_RECEIVED_HM04,          0xFFFF },
+    { gText_May_Pokenav_2B3DD1, FLAG_DEFEATED_LAVARIDGE_GYM,          0xFFFF },
+    { gText_May_Pokenav_2B3E69, FLAG_DEFEATED_PETALBURG_GYM,          0xFFFF },
+    { gText_May_Pokenav_2B3ECD, FLAG_RECEIVED_CASTFORM,          0xFFFF },
+    { gText_May_Pokenav_2B3F2B, FLAG_RECEIVED_RED_OR_BLUE_ORB,          0xFFFF },
+    { gText_May_Pokenav_2B3FFB, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,          0xFFFF },
+    { gText_May_Pokenav_2B402B, FLAG_MET_TEAM_AQUA_HARBOR,          0xFFFF },
+    { gText_May_Pokenav_2B414B, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE,          0xFFFF },
+    { gText_May_Pokenav_2B4228, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,          0xFFFF },
+    { gText_May_Pokenav_2B42E0, FLAG_DEFEATED_SOOTOPOLIS_GYM,          0xFFFF },
     { gText_May_Pokenav_2B4350, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                     0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sMayMatchCallHeader, 4, MALE, FLAG_0x0FD, gMayBrendanMatchCallDesc, gExpandedPlaceholder_May, sMayTextScripts);
+MATCHCALLDEF(sMayMatchCallHeader, 4, MALE, FLAG_ENABLE_RIVAL_MATCH_CALL, gMayBrendanMatchCallDesc, gExpandedPlaceholder_May, sMayTextScripts);
 
 static const match_call_text_data_t sBrendanTextScripts[] = {
     { gText_Brendan_Pokenav_2B43EF, 0xFFFF,              0xFFFF },
-    { gText_Brendan_Pokenav_2B4486, FLAG_0x4F1,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4560, FLAG_0x095,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4486, FLAG_DEFEATED_DEWFORD_GYM,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4560, FLAG_DELIVERED_DEVON_GOODS,          0xFFFF },
     { gText_Brendan_Pokenav_2B463F, FLAG_HIDE_MAUVILLE_CITY_WALLY,          0xFFFF },
-    { gText_Brendan_Pokenav_2B46B7, FLAG_0x06A,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4761, FLAG_0x4F3,          0xFFFF },
-    { gText_Brendan_Pokenav_2B47F4, FLAG_0x4F4,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4882, FLAG_0x097,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4909, FLAG_0x0D4,          0xFFFF },
-    { gText_Brendan_Pokenav_2B49C4, FLAG_0x06F,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4A44, FLAG_0x061,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4B28, FLAG_0x070,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4C15, FLAG_0x081,          0xFFFF },
-    { gText_Brendan_Pokenav_2B4CD8, FLAG_0x4F7,          0xFFFF },
+    { gText_Brendan_Pokenav_2B46B7, FLAG_RECEIVED_HM04,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4761, FLAG_DEFEATED_LAVARIDGE_GYM,          0xFFFF },
+    { gText_Brendan_Pokenav_2B47F4, FLAG_DEFEATED_PETALBURG_GYM,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4882, FLAG_RECEIVED_CASTFORM,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4909, FLAG_RECEIVED_RED_OR_BLUE_ORB,          0xFFFF },
+    { gText_Brendan_Pokenav_2B49C4, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4A44, FLAG_MET_TEAM_AQUA_HARBOR,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4B28, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4C15, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,          0xFFFF },
+    { gText_Brendan_Pokenav_2B4CD8, FLAG_DEFEATED_SOOTOPOLIS_GYM,          0xFFFF },
     { gText_Brendan_Pokenav_2B4D46, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sBrendanMatchCallHeader, 4, FEMALE, FLAG_0x0FD, gMayBrendanMatchCallDesc, gExpandedPlaceholder_Brendan, sBrendanTextScripts);
+MATCHCALLDEF(sBrendanMatchCallHeader, 4, FEMALE, FLAG_ENABLE_RIVAL_MATCH_CALL, gMayBrendanMatchCallDesc, gExpandedPlaceholder_Brendan, sBrendanTextScripts);
 
 static const match_call_text_data_t sWallyTextScripts[] = {
     { gText_Wally_Pokenav_2B4DE2, 0xFFFF,     0xFFFF },
     { gText_Wally_Pokenav_2B4E57, FLAG_RUSTURF_TUNNEL_OPENED, 0xFFFF },
-    { gText_Wally_Pokenav_2B4EA5, FLAG_0x4F3, 0xFFFF },
-    { gText_Wally_Pokenav_2B4F41, FLAG_0x097, 0xFFFF },
-    { gText_Wally_Pokenav_2B4FF3, FLAG_0x06F, 0xFFFF },
-    { gText_Wally_Pokenav_2B50B1, FLAG_0x081, 0xFFFF },
-    { gText_Wally_Pokenav_2B5100, FLAG_0x07E, 0xFFFF },
+    { gText_Wally_Pokenav_2B4EA5, FLAG_DEFEATED_LAVARIDGE_GYM, 0xFFFF },
+    { gText_Wally_Pokenav_2B4F41, FLAG_RECEIVED_CASTFORM, 0xFFFF },
+    { gText_Wally_Pokenav_2B4FF3, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 0xFFFF },
+    { gText_Wally_Pokenav_2B50B1, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, 0xFFFF },
+    { gText_Wally_Pokenav_2B5100, FLAG_DEFEATED_WALLY_VICTORY_ROAD, 0xFFFF },
     { NULL,                       0xFFFF,     0xFFFF }
 };
 
 const struct MatchCallSubstruct2 sWallyAdditionalData[] = {
     { FLAG_HIDE_MAUVILLE_CITY_WALLY, 0x05 },
-    { FLAG_0x06F, 0xD5 },
+    { FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 0xD5 },
     { FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY, 0x46 },
     { 0xFFFF,     0xD5 }
 };
 
-MATCHCALLDEF(sWallyMatchCallHeader, 2, 0, FLAG_0x0D6, REMATCH_WALLY_3, gWallyMatchCallDesc, sWallyTextScripts, sWallyAdditionalData);
+MATCHCALLDEF(sWallyMatchCallHeader, 2, 0, FLAG_ENABLE_WALLY_MATCH_CALL, REMATCH_WALLY_3, gWallyMatchCallDesc, sWallyTextScripts, sWallyAdditionalData);
 
 static const match_call_text_data_t sScottTextScripts[] = {
     { gText_Scott_Pokenav_2B5184, 0xFFFF,              0xFFFF },
-    { gText_Scott_Pokenav_2B5275, FLAG_0x08B,          0xFFFF },
-    { gText_Scott_Pokenav_2B5323, FLAG_0x097,          0xFFFF },
-    { gText_Scott_Pokenav_2B53DB, FLAG_0x0D4,          0xFFFF },
-    { gText_Scott_Pokenav_2B54A5, FLAG_0x070,          0xFFFF },
-    { gText_Scott_Pokenav_2B5541, FLAG_0x4F7,          0xFFFF },
+    { gText_Scott_Pokenav_2B5275, FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY,          0xFFFF },
+    { gText_Scott_Pokenav_2B5323, FLAG_RECEIVED_CASTFORM,          0xFFFF },
+    { gText_Scott_Pokenav_2B53DB, FLAG_RECEIVED_RED_OR_BLUE_ORB,          0xFFFF },
+    { gText_Scott_Pokenav_2B54A5, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE,          0xFFFF },
+    { gText_Scott_Pokenav_2B5541, FLAG_DEFEATED_SOOTOPOLIS_GYM,          0xFFFF },
     { gText_Scott_Pokenav_2B56CA, FLAG_SYS_GAME_CLEAR, 0xFFFF },
     { NULL,                       0xFFFF,              0xFFFF }
 };
 
 
-MATCHCALLDEF(sScottMatchCallHeader, 0, 0xD5, FLAG_0x0D7, gScottMatchCallDesc, gScottMatchCallName, sScottTextScripts);
+MATCHCALLDEF(sScottMatchCallHeader, 0, 0xD5, FLAG_ENABLE_SCOTT_MATCH_CALL, gScottMatchCallDesc, gScottMatchCallName, sScottTextScripts);
 
 static const match_call_text_data_t sRoxanneTextScripts[] = {
     { gText_Roxanne_Pokenav_2B2456, 0xFFFE,              0xFFFF },
@@ -455,7 +455,7 @@ static const match_call_text_data_t sRoxanneTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sRoxanneMatchCallHeader, 5, 10, FLAG_0x1D3, 0x41, gRoxanneMatchCallDesc, NULL, sRoxanneTextScripts);
+MATCHCALLDEF(sRoxanneMatchCallHeader, 5, 10, FLAG_ENABLE_ROXANNE_MATCH_CALL, 0x41, gRoxanneMatchCallDesc, NULL, sRoxanneTextScripts);
 
 static const match_call_text_data_t sBrawlyTextScripts[] = {
     { gText_Brawly_Pokenav_2B2659, 0xFFFE,              0xFFFF },
@@ -465,7 +465,7 @@ static const match_call_text_data_t sBrawlyTextScripts[] = {
     { NULL,                        0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sBrawlyMatchCallHeader, 5, 2, FLAG_0x1D4, 0x42, gBrawlyMatchCallDesc, NULL, sBrawlyTextScripts);
+MATCHCALLDEF(sBrawlyMatchCallHeader, 5, 2, FLAG_ENABLE_BRAWLY_MATCH_CALL, 0x42, gBrawlyMatchCallDesc, NULL, sBrawlyTextScripts);
 
 static const match_call_text_data_t sWattsonTextScripts[] = {
     { gText_Wattson_Pokenav_2B2912, 0xFFFE,              0xFFFF },
@@ -475,7 +475,7 @@ static const match_call_text_data_t sWattsonTextScripts[] = {
     { NULL,                         0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sWattsonMatchCallHeader, 5, 9, FLAG_0x1D5, 0x43, gWattsonMatchCallDesc, NULL, sWattsonTextScripts);
+MATCHCALLDEF(sWattsonMatchCallHeader, 5, 9, FLAG_ENABLE_WATTSON_MATCH_CALL, 0x43, gWattsonMatchCallDesc, NULL, sWattsonTextScripts);
 
 static const match_call_text_data_t sFlanneryTextScripts[] = {
     { gText_Flannery_Pokenav_2B2B4D, 0xFFFE,              0xFFFF },
@@ -485,7 +485,7 @@ static const match_call_text_data_t sFlanneryTextScripts[] = {
     { NULL,                          0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sFlanneryMatchCallHeader, 5, 3, FLAG_0x1D6, 0x44, gFlanneryMatchCallDesc, NULL, sFlanneryTextScripts);
+MATCHCALLDEF(sFlanneryMatchCallHeader, 5, 3, FLAG_ENABLE_FLANNERY_MATCH_CALL, 0x44, gFlanneryMatchCallDesc, NULL, sFlanneryTextScripts);
 
 static const match_call_text_data_t sWinonaTextScripts[] = {
     { gText_Winona_Pokenav_2B2DA4, 0xFFFE,              0xFFFF },
@@ -495,7 +495,7 @@ static const match_call_text_data_t sWinonaTextScripts[] = {
     { NULL,                        0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sWinonaMatchCallHeader, 5, 11, FLAG_0x1D7, 0x46, gWinonaMatchCallDesc, NULL, sWinonaTextScripts);
+MATCHCALLDEF(sWinonaMatchCallHeader, 5, 11, FLAG_ENABLE_WINONA_MATCH_CALL, 0x46, gWinonaMatchCallDesc, NULL, sWinonaTextScripts);
 
 static const match_call_text_data_t sTateLizaTextScripts[] = {
     { gText_TateLiza_Pokenav_2B2F97, 0xFFFE,              0xFFFF },
@@ -505,7 +505,7 @@ static const match_call_text_data_t sTateLizaTextScripts[] = {
     { NULL,                          0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sTateLizaMatchCallHeader, 5, 13, FLAG_0x1D8, 0x47, gTateLizaMatchCallDesc, NULL, sTateLizaTextScripts);
+MATCHCALLDEF(sTateLizaMatchCallHeader, 5, 13, FLAG_ENABLE_TATE_AND_LIZA_MATCH_CALL, 0x47, gTateLizaMatchCallDesc, NULL, sTateLizaTextScripts);
 
 static const match_call_text_data_t sJuanTextScripts[] = {
     { gText_Juan_Pokenav_2B3249, 0xFFFE,              0xFFFF },
@@ -515,42 +515,42 @@ static const match_call_text_data_t sJuanTextScripts[] = {
     { NULL,                      0xFFFF,              0xFFFF }
 };
 
-MATCHCALLDEF(sJuanMatchCallHeader, 5, 14, FLAG_0x1D9, 0x48, gJuanMatchCallDesc, NULL, sJuanTextScripts);
+MATCHCALLDEF(sJuanMatchCallHeader, 5, 14, FLAG_ENABLE_JUAN_MATCH_CALL, 0x48, gJuanMatchCallDesc, NULL, sJuanTextScripts);
 
 static const match_call_text_data_t sSidneyTextScripts[] = {
     { gText_Sidney_Pokenav_2B34CC, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sSidneyMatchCallHeader, 5, 15, FLAG_0x1A5, 0x49, gEliteFourMatchCallDesc, NULL, sSidneyTextScripts);
+MATCHCALLDEF(sSidneyMatchCallHeader, 5, 15, FLAG_REMATCH_JUAN, 0x49, gEliteFourMatchCallDesc, NULL, sSidneyTextScripts);
 
 static const match_call_text_data_t sPhoebeTextScripts[] = {
     { gText_Phoebe_Pokenav_2B3561, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sPhoebeMatchCallHeader, 5, 15, FLAG_0x1A6, 0x4A, gEliteFourMatchCallDesc, NULL, sPhoebeTextScripts);
+MATCHCALLDEF(sPhoebeMatchCallHeader, 5, 15, FLAG_REMATCH_SIDNEY, 0x4A, gEliteFourMatchCallDesc, NULL, sPhoebeTextScripts);
 
 static const match_call_text_data_t sGlaciaTextScripts[] = {
     { gText_Glacia_Pokenav_2B35E4, 0xFFFF, 0xFFFF },
     { NULL,                        0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sGlaciaMatchCallHeader, 5, 15, FLAG_0x1A7, 0x4B, gEliteFourMatchCallDesc, NULL, sGlaciaTextScripts);
+MATCHCALLDEF(sGlaciaMatchCallHeader, 5, 15, FLAG_REMATCH_PHOEBE, 0x4B, gEliteFourMatchCallDesc, NULL, sGlaciaTextScripts);
 
 static const match_call_text_data_t sDrakeTextScripts[] = {
     { gText_Drake_Pokenav_2B368B, 0xFFFF, 0xFFFF },
     { NULL,                       0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sDrakeMatchCallHeader, 5, 15, FLAG_0x1A8, 0x4C, gEliteFourMatchCallDesc, NULL, sDrakeTextScripts);
+MATCHCALLDEF(sDrakeMatchCallHeader, 5, 15, FLAG_REMATCH_GLACIA, 0x4C, gEliteFourMatchCallDesc, NULL, sDrakeTextScripts);
 
 static const match_call_text_data_t sWallaceTextScripts[] = {
     { gText_Wallace_Pokenav_2B3790, 0xFFFF, 0xFFFF },
     { NULL,                         0xFFFF, 0xFFFF }
 };
 
-MATCHCALLDEF(sWallaceMatchCallHeader, 5, 15, FLAG_0x1A9, 0x4D, gChampionMatchCallDesc, NULL, sWallaceTextScripts);
+MATCHCALLDEF(sWallaceMatchCallHeader, 5, 15, FLAG_REMATCH_DRAKE, 0x4D, gChampionMatchCallDesc, NULL, sWallaceTextScripts);
 
 static const match_call_t sMatchCallHeaders[] = {
     {.type0 = &sMrStoneMatchCallHeader},
@@ -634,7 +634,7 @@ static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u8
 
 static const struct UnkStruct_08625388 sMatchCallCheckPageOverrides[] = {
     { 7, 0x4B, 0xffff, { gMatchCallStevenStrategyText, gMatchCall_StevenTrainersPokemonText, gMatchCall_StevenSelfIntroductionText_Line1_BeforeMeteorFallsBattle, gMatchCall_StevenSelfIntroductionText_Line2_BeforeMeteorFallsBattle } }, // STEVEN
-    { 7, 0x4B, FLAG_0x4F6, { gMatchCallStevenStrategyText, gMatchCall_StevenTrainersPokemonText, gMatchCall_StevenSelfIntroductionText_Line1_AfterMeteorFallsBattle, gMatchCall_StevenSelfIntroductionText_Line2_AfterMeteorFallsBattle } }, // STEVEN
+    { 7, 0x4B, FLAG_DEFEATED_MOSSDEEP_GYM, { gMatchCallStevenStrategyText, gMatchCall_StevenTrainersPokemonText, gMatchCall_StevenSelfIntroductionText_Line1_AfterMeteorFallsBattle, gMatchCall_StevenSelfIntroductionText_Line2_AfterMeteorFallsBattle } }, // STEVEN
     { 2, 0x3c, 0xffff, { gMatchCall_BrendanStrategyText, gMatchCall_BrendanTrainersPokemonText, gMatchCall_BrendanSelfIntroductionText_Line1, gMatchCall_BrendanSelfIntroductionText_Line2 } }, // Brendan
     { 3, 0x3f, 0xffff, { gMatchCall_MayStrategyText, gMatchCall_MayTrainersPokemonText, gMatchCall_MaySelfIntroductionText_Line1, gMatchCall_MaySelfIntroductionText_Line2 } } // May
 };

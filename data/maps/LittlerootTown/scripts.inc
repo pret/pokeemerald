@@ -9,7 +9,7 @@ LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	call LittlerootTown_EventScript_271ED7
 	compare VAR_0x4092, 2
 	call_if_eq LittlerootTown_EventScript_1E7E67
-	call_if_unset FLAG_0x052, LittlerootTown_EventScript_1E7E6F
+	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E7E6F
 	compare VAR_0x4050, 3
 	call_if_eq LittlerootTown_EventScript_1E7E92
 	compare VAR_0x4082, 4
@@ -35,7 +35,7 @@ LittlerootTown_EventScript_1E7E4B:: @ 81E7E4B
 	return
 
 LittlerootTown_EventScript_1E7E4F:: @ 81E7E4F
-	setflag FLAG_0x12D
+	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
 LittlerootTown_EventScript_1E7E53:: @ 81E7E53
@@ -234,8 +234,8 @@ LittlerootTown_EventScript_1E802B:: @ 81E802B
 LittlerootTown_EventScript_1E8034:: @ 81E8034
 	lock
 	faceplayer
-	goto_if_set FLAG_0x074, LittlerootTown_EventScript_1E8087
-	goto_if_set FLAG_0x052, LittlerootTown_EventScript_1E807A
+	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_1E8087
+	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E807A
 	compare VAR_0x4050, 0
 	goto_if_ne LittlerootTown_EventScript_1E805D
 	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
@@ -918,7 +918,7 @@ LittlerootTown_EventScript_1E8693:: @ 81E8693
 	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_1E8925
 	waitfanfare
-	setflag FLAG_0x112
+	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_1E894F, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_1E8A03, MSGBOX_DEFAULT
 	closemessage

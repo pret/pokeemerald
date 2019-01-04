@@ -25,7 +25,7 @@ RustboroCity_DevonCorp_2F_EventScript_211886:: @ 8211886
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
-	goto_if_set FLAG_0x11F, RustboroCity_DevonCorp_2F_EventScript_2118A6
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_DevonCorp_2F_EventScript_2118A6
 	msgbox RustboroCity_DevonCorp_2F_Text_211C50, MSGBOX_DEFAULT
 	release
 	end
@@ -40,7 +40,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118B0:: @ 82118B0
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
-	goto_if_set FLAG_0x0BC, RustboroCity_DevonCorp_2F_EventScript_2118D0
+	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_DevonCorp_2F_EventScript_2118D0
 	msgbox RustboroCity_DevonCorp_2F_Text_211D9F, MSGBOX_DEFAULT
 	release
 	end
@@ -200,7 +200,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AC4:: @ 8211AC4
 
 RustboroCity_DevonCorp_2F_EventScript_211AD7:: @ 8211AD7
 	setvar VAR_0x40C4, 0
-	setflag FLAG_0x10B
+	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
 	release
 	end
 
@@ -249,7 +249,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B67:: @ 8211B67
 
 RustboroCity_DevonCorp_2F_EventScript_211B7A:: @ 8211B7A
 	setvar VAR_0x40C4, 0
-	setflag FLAG_0x10B
+	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
 	release
 	end
 

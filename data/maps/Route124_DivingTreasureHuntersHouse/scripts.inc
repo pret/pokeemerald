@@ -9,9 +9,9 @@ Route124_DivingTreasureHuntersHouse_MapScript1_270A2E: @ 8270A2E
 Route124_DivingTreasureHuntersHouse_EventScript_270A32:: @ 8270A32
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0D9, Route124_DivingTreasureHuntersHouse_EventScript_270A4E
+	goto_if_set FLAG_MET_DIVING_TREASURE_HUNTER, Route124_DivingTreasureHuntersHouse_EventScript_270A4E
 	msgbox Route124_DivingTreasureHuntersHouse_Text_270F6C, MSGBOX_DEFAULT
-	setflag FLAG_0x0D9
+	setflag FLAG_MET_DIVING_TREASURE_HUNTER
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270A5C
 	end
 

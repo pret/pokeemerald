@@ -63,7 +63,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE78C:: @ 81FE78C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1FE864
-	goto_if_unset FLAG_0x0A8, LavaridgeTown_Gym_1F_EventScript_1FE81D
+	goto_if_unset FLAG_RECEIVED_TM50, LavaridgeTown_Gym_1F_EventScript_1FE81D
 	msgbox LavaridgeTown_Gym_1F_Text_1FF546, MSGBOX_DEFAULT
 	release
 	end
@@ -73,8 +73,8 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	waitmessage
 	call LavaridgeTown_Gym_1F_EventScript_27207E
 	msgbox LavaridgeTown_Gym_1F_Text_1FF359, MSGBOX_DEFAULT
-	setflag FLAG_0x06C
-	setflag FLAG_0x4F3
+	setflag FLAG_FLANNERY_GIVES_BADGE_INFO
+	setflag FLAG_DEFEATED_LAVARIDGE_GYM
 	setflag FLAG_BADGE04_GET
 	addvar VAR_0x4085, 1
 	compare VAR_0x4085, 6
@@ -91,7 +91,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x1D6
+	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
 	release
 	end
 
@@ -100,7 +100,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE81D:: @ 81FE81D
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_272054
 	msgbox LavaridgeTown_Gym_1F_Text_1FF45C, MSGBOX_DEFAULT
-	setflag FLAG_0x0A8
+	setflag FLAG_RECEIVED_TM50
 	release
 	end
 
@@ -109,7 +109,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE841:: @ 81FE841
 	compare VAR_RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_27205E
 	msgbox LavaridgeTown_Gym_1F_Text_1FF45C, MSGBOX_DEFAULT
-	setflag FLAG_0x0A8
+	setflag FLAG_RECEIVED_TM50
 	return
 
 LavaridgeTown_Gym_1F_EventScript_1FE864:: @ 81FE864
@@ -169,7 +169,7 @@ LavaridgeTown_Gym_B1F_EventScript_1FE951:: @ 81FE951
 LavaridgeTown_Gym_1F_EventScript_1FE96C:: @ 81FE96C
 	lock
 	faceplayer
-	goto_if_set FLAG_0x4F3, LavaridgeTown_Gym_1F_EventScript_1FE981
+	goto_if_set FLAG_DEFEATED_LAVARIDGE_GYM, LavaridgeTown_Gym_1F_EventScript_1FE981
 	msgbox LavaridgeTown_Gym_1F_Text_1FE9BF, MSGBOX_DEFAULT
 	release
 	end

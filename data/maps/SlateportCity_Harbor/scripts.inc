@@ -63,7 +63,7 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	removeobject 7
 	removeobject 8
 	setvar VAR_0x40A0, 2
-	setflag FLAG_0x061
+	setflag FLAG_MET_TEAM_AQUA_HARBOR
 	setflag FLAG_HIDE_LILCOVE_MOTEL_SCOTT
 	compare VAR_0x8008, 0
 	call_if_eq SlateportCity_Harbor_EventScript_20CA89
@@ -174,7 +174,7 @@ SlateportCity_Harbor_EventScript_20CB06:: @ 820CB06
 	end
 
 SlateportCity_Harbor_EventScript_20CB1A:: @ 820CB1A
-	goto_if_set FLAG_0x1D0, SlateportCity_Harbor_EventScript_20CB50
+	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, SlateportCity_Harbor_EventScript_20CB50
 	multichoicedefault 18, 8, 56, 2, 0
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_20CB92
@@ -269,8 +269,8 @@ SlateportCity_Harbor_EventScript_20CC52:: @ 820CC52
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_20CC89
 	setvar VAR_0x8004, 0
-	call_if_set FLAG_0x1BE, SlateportCity_Harbor_EventScript_20CC93
-	call_if_set FLAG_0x1BF, SlateportCity_Harbor_EventScript_20CC93
+	call_if_set FLAG_DEFEATED_KYOGRE, SlateportCity_Harbor_EventScript_20CC93
+	call_if_set FLAG_DEFEATED_GROUDON, SlateportCity_Harbor_EventScript_20CC93
 	compare VAR_0x8004, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_20CC89
 	msgbox SlateportCity_Harbor_Text_20D08E, MSGBOX_DEFAULT
@@ -294,8 +294,8 @@ SlateportCity_Harbor_EventScript_20CCA2:: @ 820CCA2
 	lock
 	faceplayer
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_Harbor_EventScript_20CD00
-	goto_if_set FLAG_0x10F, SlateportCity_Harbor_EventScript_20CCF6
-	goto_if_set FLAG_0x070, SlateportCity_Harbor_EventScript_20CCE9
+	goto_if_set FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE, SlateportCity_Harbor_EventScript_20CCF6
+	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, SlateportCity_Harbor_EventScript_20CCE9
 	compare VAR_0x40A0, 2
 	goto_if_eq SlateportCity_Harbor_EventScript_20CCDF
 	msgbox SlateportCity_Harbor_Text_20D232, MSGBOX_DEFAULT
@@ -311,7 +311,7 @@ SlateportCity_Harbor_EventScript_20CCDF:: @ 820CCDF
 	end
 
 SlateportCity_Harbor_EventScript_20CCE9:: @ 820CCE9
-	setflag FLAG_0x10F
+	setflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	msgbox SlateportCity_Harbor_Text_20D42B, MSGBOX_DEFAULT
 	release
 	end
@@ -361,7 +361,7 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	goto_if_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
-	setflag FLAG_TRADED_SCANNER_TO_STERN
+	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 
@@ -374,7 +374,7 @@ SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	goto_if_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, MSGBOX_DEFAULT
-	setflag FLAG_TRADED_SCANNER_TO_STERN
+	setflag FLAG_EXCHANGED_SCANNER
 	goto SlateportCity_Harbor_EventScript_20CE11
 	end
 
@@ -554,4 +554,3 @@ SlateportCity_Harbor_Text_20D94A: @ 820D94A
 SlateportCity_Harbor_Text_20D970: @ 820D970
 	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
 	.string "This will help our research a lot!$"
-

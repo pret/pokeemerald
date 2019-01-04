@@ -3,7 +3,7 @@ AquaHideout_B2F_MapScripts:: @ 8233DCF
 	.byte 0
 
 AquaHideout_B2F_MapScript1_233DD5: @ 8233DD5
-	call_if_set FLAG_0x070, AquaHideout_B2F_EventScript_233DDF
+	call_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, AquaHideout_B2F_EventScript_233DDF
 	end
 
 AquaHideout_B2F_EventScript_233DDF:: @ 8233DDF
@@ -46,7 +46,7 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_233FF2, MSGBOX_DEFAULT
-	setflag FLAG_0x070
+	setflag FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE
 	setflag FLAG_HIDE_LILYCOVE_CITY_AQUA_GRUNTS
 	release
 	end
@@ -156,4 +156,3 @@ AquaHideout_B2F_Text_2342CC: @ 82342CC
 AquaHideout_B2F_Text_2342FF: @ 82342FF
 	.string "I'll have to learn about how I can\n"
 	.string "battle more effectively…$"
-

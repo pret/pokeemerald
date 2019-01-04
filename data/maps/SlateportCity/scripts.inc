@@ -75,7 +75,7 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0D7
+	setflag FLAG_ENABLE_SCOTT_MATCH_CALL
 	msgbox SlateportCity_Text_1DF1D3, MSGBOX_DEFAULT
 	closemessage
 	applymovement 35, SlateportCity_Movement_1DCDB4
@@ -200,7 +200,7 @@ SlateportCity_EventScript_1DCE84:: @ 81DCE84
 	faceplayer
 	compare VAR_0x4058, 1
 	call_if_eq SlateportCity_EventScript_1DCEA4
-	goto_if_set FLAG_0x060, SlateportCity_EventScript_1DCEAE
+	goto_if_set FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_1DCEAE
 	msgbox SlateportCity_Text_1DD93D, MSGBOX_DEFAULT
 	release
 	end
@@ -256,7 +256,7 @@ SlateportCity_EventScript_1DCF0D:: @ 81DCF0D
 SlateportCity_EventScript_1DCF17:: @ 81DCF17
 	lock
 	faceplayer
-	goto_if_set FLAG_0x094, SlateportCity_EventScript_1DCF2C
+	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_EventScript_1DCF2C
 	msgbox SlateportCity_Text_1DDBAC, MSGBOX_DEFAULT
 	release
 	end
@@ -513,7 +513,7 @@ SlateportCity_EventScript_1DD18E:: @ 81DD18E
 SlateportCity_EventScript_1DD198:: @ 81DD198
 	lock
 	faceplayer
-	goto_if_unset FLAG_0x060, SlateportCity_EventScript_1DD18E
+	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_1DD18E
 	message gUnknown_08272A21
 	waitmessage
 	pokemartdecoration SlateportCity_PokemartDecor_1DD1B8
@@ -722,10 +722,10 @@ SlateportCity_EventScript_1DD365:: @ 81DD365
 SlateportCity_EventScript_1DD36E:: @ 81DD36E
 	lock
 	faceplayer
-	goto_if_set FLAG_0x151, SlateportCity_EventScript_1DD39A
+	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_1DD39A
 	msgbox SlateportCity_Text_1DEBCE, MSGBOX_DEFAULT
 	giveitem_std ITEM_POWDER_JAR
-	setflag FLAG_0x151
+	setflag FLAG_RECEIVED_POWDER_JAR
 	msgbox SlateportCity_Text_1DED27, MSGBOX_DEFAULT
 	release
 	end
@@ -1373,4 +1373,3 @@ SlateportCity_Text_1DF28C: @ 81DF28C
 	.string "After all, a tough TRAINER is\n"
 	.string "the perfect fit for the BATTLE TENT!\p"
 	.string "Give it your best effort!$"
-
