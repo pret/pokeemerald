@@ -226,13 +226,7 @@ gPlayerFacingPosition: @ 203AB40
     .include "src/battle_records.o"
     .include "src/pokedex_area_screen.o"
     .include "src/evolution_scene.o"
-
-gUnknown_0203AB88: @ 203AB88
-	.space 0x4
-
-gUnknown_0203AB8C: @ 203AB8C
-	.space 0x4
-
+    .include "src/roulette.o"
 	.include "src/pokedex_cry_screen.o"
 	.include "src/coins.o"
 	.include "src/battle_transition.o"
@@ -263,13 +257,7 @@ gUnknown_0203AB8C: @ 203AB8C
 	.include "src/trainer_pokemon_sprites.o"
 	.include "src/lilycove_lady.o"
 	.include "src/battle_dome.o"
-
-gUnknown_0203CD80: @ 203CD80
-	.space 0x8
-
-gUnknown_0203CD88: @ 203CD88
-	.space 0x4
-
+	.include "src/match_call.o"
 	.include "src/menu.o"
 	.include "src/battle_factory_screen.o"
 	.include "src/mossdeep_gym.o"

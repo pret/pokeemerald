@@ -21,7 +21,7 @@ Route109_EventObjects: @ 8528A34
 	object_event 20, EVENT_OBJ_GFX_ZIGZAGOON_2, 0, 32, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route109_EventScript_1EEA18, 0
 	object_event 21, EVENT_OBJ_GFX_TUBER_F, 0, 17, 13, 3, MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT, 1, 1, 1, 6, Route109_EventScript_1EEBEF, 0
 	object_event 22, EVENT_OBJ_GFX_TUBER_M, 0, 27, 7, 3, MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT, 1, 1, 1, 4, Route109_EventScript_1EEBD8, 0
-	object_event 23, EVENT_OBJ_GFX_ITEM_BALL, 0, 25, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route109_EventScript_290D67, FLAG_0x474
+	object_event 23, EVENT_OBJ_GFX_ITEM_BALL, 0, 25, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route109_EventScript_290D67, FLAG_ITEM_ROUTE_109_POTION
 	object_event 24, EVENT_OBJ_GFX_MAN_5, 0, 17, 56, 3, MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT, 1, 1, 1, 3, Route109_EventScript_1EEC06, 0
 
 Route109_MapWarps: @ 8528C74
@@ -39,4 +39,3 @@ Route109_MapBGEvents: @ 8528C7C
 
 Route109_MapEvents:: @ 8528CDC
 	map_events Route109_EventObjects, Route109_MapWarps, 0x0, Route109_MapBGEvents
-

@@ -4,12 +4,12 @@ MtPyre_1F_MapScripts:: @ 8230F3E
 MtPyre_1F_EventScript_230F3F:: @ 8230F3F
 	lock
 	faceplayer
-	goto_if_set FLAG_0x11A, MtPyre_1F_EventScript_230F6E
+	goto_if_set FLAG_RECEIVED_CLEANSE_TAG, MtPyre_1F_EventScript_230F6E
 	msgbox MtPyre_1F_Text_230F8A, MSGBOX_DEFAULT
 	giveitem_std ITEM_CLEANSE_TAG
 	compare VAR_RESULT, 0
 	goto_if_eq MtPyre_1F_EventScript_272054
-	setflag FLAG_0x11A
+	setflag FLAG_RECEIVED_CLEANSE_TAG
 	release
 	end
 

@@ -3,6 +3,6 @@ NavelRock_Exterior_MapScripts:: @ 82690B2
 	.byte 0
 
 NavelRock_Exterior_MapScript1_2690B8: @ 82690B8
-	setflag FLAG_0x8E1
+	setflag FLAG_ARRIVED_AT_NAVEL_ROCK
 	end
 

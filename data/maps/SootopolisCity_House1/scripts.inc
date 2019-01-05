@@ -4,12 +4,12 @@ SootopolisCity_House1_MapScripts:: @ 822694C
 SootopolisCity_House1_EventScript_22694D:: @ 822694D
 	lock
 	faceplayer
-	goto_if_set FLAG_0x079, SootopolisCity_House1_EventScript_226984
+	goto_if_set FLAG_RECEIVED_TM31, SootopolisCity_House1_EventScript_226984
 	msgbox SootopolisCity_House1_Text_2269A1, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM31
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House1_EventScript_272054
-	setflag FLAG_0x079
+	setflag FLAG_RECEIVED_TM31
 	msgbox SootopolisCity_House1_Text_226A13, MSGBOX_DEFAULT
 	release
 	end

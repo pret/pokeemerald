@@ -72,10 +72,10 @@ static const struct UCoords8 sBattlerCoords[][4] =
 // One entry for each of the four Castform forms.
 const struct MonCoords gCastformFrontSpriteCoords[] =
 {
-    { 0x44, 17 }, // NORMAL
-    { 0x66, 9 }, // SUN
-    { 0x46, 9 }, // RAIN
-    { 0x86, 8 }, // HAIL
+    { .size = 0x44, .y_offset = 17 }, // NORMAL
+    { .size = 0x66, .y_offset =  9 }, // SUN
+    { .size = 0x46, .y_offset =  9 }, // RAIN
+    { .size = 0x86, .y_offset =  8 }, // HAIL
 };
 
 static const u8 sCastformElevations[] =
@@ -2216,17 +2216,17 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
     switch (attr)
     {
     case BATTLER_COORD_ATTR_HEIGHT:
-        return (coords->coords & 0xf) * 8;
+        return (coords->size & 0xf) * 8;
     case BATTLER_COORD_ATTR_WIDTH:
-        return (coords->coords >> 4) * 8;
+        return (coords->size >> 4) * 8;
     case BATTLER_COORD_ATTR_LEFT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - ((coords->coords >> 4) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - ((coords->size >> 4) * 4);
     case BATTLER_COORD_ATTR_RIGHT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + ((coords->coords >> 4) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + ((coords->size >> 4) * 4);
     case BATTLER_COORD_ATTR_TOP:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - ((coords->coords & 0xf) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - ((coords->size & 0xf) * 4);
     case BATTLER_COORD_ATTR_BOTTOM:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + ((coords->coords & 0xf) * 4);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + ((coords->size & 0xf) * 4);
     case BATTLER_COORD_ATTR_RAW_BOTTOM:
         ret = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 31;
         return ret - coords->y_offset;

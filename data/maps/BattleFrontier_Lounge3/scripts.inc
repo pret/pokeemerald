@@ -4,11 +4,11 @@ BattleFrontier_Lounge3_MapScripts:: @ 8261D82
 BattleFrontier_Lounge3_EventScript_261D83:: @ 8261D83
 	lock
 	faceplayer
-	goto_if_set FLAG_0x157, BattleFrontier_Lounge3_EventScript_261EF9
+	goto_if_set FLAG_MET_BATTLE_FRONTIER_BETTOR, BattleFrontier_Lounge3_EventScript_261EF9
 	call BattleFrontier_Lounge3_EventScript_261EA0
 	compare VAR_0x8004, 2
 	goto_if_le BattleFrontier_Lounge3_EventScript_261EEB
-	setflag FLAG_0x157
+	setflag FLAG_MET_BATTLE_FRONTIER_BETTOR
 	msgbox BattleFrontier_Lounge3_Text_262061, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_261DAF
 	end
@@ -472,4 +472,3 @@ BattleFrontier_Lounge3_Text_263545:: @ 8263545
 	.string "Those TRAINERS…\n"
 	.string "What are they doing?\l"
 	.string "They should be taking challenges.$"
-

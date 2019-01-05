@@ -40,7 +40,7 @@ BattleFrontier_BattleTowerElevator_EventScript_241A55:: @ 8241A55
 	return
 
 BattleFrontier_BattleTowerElevator_EventScript_241A5F:: @ 8241A5F
-	goto_if_unset FLAG_0x152, BattleFrontier_BattleTowerElevator_EventScript_241A7C
+	goto_if_unset FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerElevator_EventScript_241A7C
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR2, 255, 7, 2
 	waitstate
 	return

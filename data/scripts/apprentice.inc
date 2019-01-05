@@ -33,7 +33,7 @@ EventScript_Apprentice:: @ 82B688D
 	special CallApprenticeFunction
 	compare VAR_0x8004, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_2B68BE
-	goto_if_set FLAG_0x934, Script_Apprentice_ReleaseAndEnd
+	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, Script_Apprentice_ReleaseAndEnd
 
 BattleFrontier_BattleTowerLobby_EventScript_2B68BE:
 	setvar VAR_0x8004, 11
@@ -289,7 +289,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6DD4:
 
 Script_Apprentice_SetLeavingFlags:
 	setflag FLAG_HIDE_APPRENTICE
-	setflag FLAG_0x934
+	setflag FLAG_DAILY_APPRENTICE_LEAVES
 	return
 
 Script_Apprentice_LeaveGoRight:

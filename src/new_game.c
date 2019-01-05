@@ -46,7 +46,7 @@ extern void NewGameInitPCItems(void);
 extern void ClearDecorationInventories(void);
 extern void ResetFanClub(void);
 extern void copy_strings_to_sav1(void);
-extern void sub_8195E10(void);
+extern void InitMatchCallCounters(void);
 extern void sub_801AFD8(void);
 extern void sub_800E5AC(void);
 extern void sub_81D54BC(void);
@@ -209,7 +209,7 @@ void NewGameInitData(void)
     SetLilycoveLady();
     ResetAllApprenticeData();
     ClearRankingHallRecords();
-    sub_8195E10();
+    InitMatchCallCounters();
     sub_801AFD8();
     sub_800E5AC();
     sub_81D54BC();

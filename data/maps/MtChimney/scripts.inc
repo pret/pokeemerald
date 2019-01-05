@@ -14,12 +14,12 @@ MtChimney_MapScript1_22EDD2: @ 822EDD2
 MtChimney_EventScript_22EDD5:: @ 822EDD5
 	lock
 	faceplayer
-	call_if_unset FLAG_0x0DB, MtChimney_EventScript_22EDF9
-	call_if_set FLAG_0x0DB, MtChimney_EventScript_22EE02
+	call_if_unset FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_22EDF9
+	call_if_set FLAG_EVIL_LEADER_PLEASE_STOP, MtChimney_EventScript_22EE02
 	closemessage
 	applymovement 1, MtChimney_Movement_2725A2
 	waitmovement 0
-	setflag FLAG_0x0DB
+	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	release
 	end
 
@@ -70,7 +70,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	call_if_eq MtChimney_EventScript_22EEE8
 	removeobject 1
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
-	setflag FLAG_0x08B
+	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	clearflag FLAG_HIDE_FALLARBOR_HOUSE_1_PROF_COZMO
 	setflag FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO
 	clearflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
@@ -452,14 +452,14 @@ MtChimney_EventScript_22F0DB:: @ 822F0DB
 
 MtChimney_EventScript_22F0E4:: @ 822F0E4
 	lockall
-	goto_if_unset FLAG_0x08B, MtChimney_EventScript_22F137
-	goto_if_set FLAG_0x073, MtChimney_EventScript_22F12D
+	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MtChimney_EventScript_22F137
+	goto_if_set FLAG_RECEIVED_METEORITE, MtChimney_EventScript_22F12D
 	msgbox MtChimney_Text_22FF12, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq MtChimney_EventScript_22F123
 	msgbox MtChimney_Text_22FF66, MSGBOX_DEFAULT
 	giveitem_std ITEM_METEORITE
-	setflag FLAG_0x073
+	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end
 

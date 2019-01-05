@@ -15,7 +15,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F92CD:: @ 81F92CD
-	goto_if_set FLAG_0x124, LittlerootTown_MaysHouse_2F_EventScript_1F92E6
+	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_MaysHouse_2F_EventScript_1F92E6
 	compare VAR_0x4084, 2
 	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	goto LittlerootTown_MaysHouse_2F_EventScript_1F92E6
@@ -249,7 +249,7 @@ LittlerootTown_MaysHouse_2F_Movement_1F94BB: @ 81F94BB
 LittlerootTown_BrendansHouse_2F_EventScript_1F94C1:: @ 81F94C1
 LittlerootTown_MaysHouse_2F_EventScript_1F94C1:: @ 81F94C1
 	lockall
-	goto_if_set FLAG_0x124, LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
+	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F94F7
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F94E3
@@ -275,17 +275,17 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F951D
 	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1F952F
-	setflag FLAG_0x125
+	setflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	releaseall
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F951D:: @ 81F951D
-	goto_if_set FLAG_0x125, LittlerootTown_BrendansHouse_2F_EventScript_1F9541
+	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F9541
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F99C9, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F952F:: @ 81F952F
-	goto_if_set FLAG_0x125, LittlerootTown_BrendansHouse_2F_EventScript_1F954A
+	goto_if_set FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_1F954A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F9B0D, MSGBOX_DEFAULT
 	return
 

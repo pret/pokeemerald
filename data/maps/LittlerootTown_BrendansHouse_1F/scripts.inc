@@ -7,7 +7,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
 	compare VAR_0x4092, 6
 	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_1F777A
-	call_if_set FLAG_0x112, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
+	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
@@ -99,7 +99,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	waitmovement 0
 	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8BC5, MSGBOX_DEFAULT
-	setflag FLAG_0x057
+	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_0x4082, 2
 	releaseall
 	end

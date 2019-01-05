@@ -4818,4 +4818,32 @@ extern const u32 gStatusPal_Icons[];
 extern const u32 gPartyMenuPokeball_Pal[];
 extern const u32 gStatusPal_Icons[];
 
+// Roulette
+extern const u32 gRouletteMenuTiles[];
+extern const u32 gRouletteWheelTiles[];
+extern const u32 gRouletteCenter_Gfx[];
+extern const u32 gRouletteHeadersTiles[];
+extern const u32 gRouletteCreditTiles[];
+extern const u32 gRouletteNumbersTiles[];
+extern const u32 gRouletteMultiplierTiles[];
+
+// Contest Link
+extern const u32 gUnknown_0858D6B0[];
+extern const u32 gUnknown_08C19588[];
+extern const u32 gUnknown_08C19EEC[];
+extern const u32 gUnknown_08C1A000[];
+extern const u32 gUnknown_08C1A12C[];
+extern const u32 gUnknown_08C1A2B4[];
+extern const u16 gUnknown_08DC6498[];
+extern const u16 gUnknown_08DC63F8[];
+extern const u16 gUnknown_08DC6420[];
+extern const u16 gUnknown_08DC6448[];
+extern const u16 gUnknown_08DC6470[];
+extern const u16 gUnknown_08DC64AC[];
+extern const u16 gUnknown_08DC64C0[];
+extern const u16 gUnknown_08DC64D4[];
+extern const u16 gUnknown_08DC64E8[];
+extern const u16 gUnknown_08DC64FC[];
+extern const u16 gUnknown_08DC6510[];
+
 #endif //GUARD_GRAPHICS_H

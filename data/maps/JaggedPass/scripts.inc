@@ -68,7 +68,7 @@ JaggedPass_EventScript_2306BB:: @ 82306BB
 
 JaggedPass_EventScript_230718:: @ 8230718
 	lockall
-	goto_if_set FLAG_0x139, JaggedPass_EventScript_230766
+	goto_if_set FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS, JaggedPass_EventScript_230766
 	waitse
 	playse SE_PIN
 	applymovement 5, JaggedPass_Movement_272598
@@ -80,7 +80,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 	msgbox JaggedPass_Text_230CCB, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_no_intro TRAINER_GRUNT_30, JaggedPass_Text_230D2D
-	setflag FLAG_0x139
+	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
 	applymovement 5, JaggedPass_Movement_2725A2
 	waitmovement 0
 	releaseall

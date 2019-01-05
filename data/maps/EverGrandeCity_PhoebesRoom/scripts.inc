@@ -24,7 +24,7 @@ EverGrandeCity_PhoebesRoom_EventScript_22819D:: @ 822819D
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript1_2281AA: @ 82281AA
-	call_if_set FLAG_0x4FC, EverGrandeCity_PhoebesRoom_EventScript_2281BF
+	call_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_2281BF
 	compare VAR_0x409C, 2
 	call_if_eq EverGrandeCity_PhoebesRoom_EventScript_2281C5
 	end
@@ -40,7 +40,7 @@ EverGrandeCity_PhoebesRoom_EventScript_2281C5:: @ 82281C5
 EverGrandeCity_PhoebesRoom_EventScript_2281CB:: @ 82281CB
 	lock
 	faceplayer
-	goto_if_set FLAG_0x4FC, EverGrandeCity_PhoebesRoom_EventScript_2281F2
+	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_2281F2
 	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_22820E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_228325
@@ -53,7 +53,7 @@ EverGrandeCity_PhoebesRoom_EventScript_2281F2:: @ 82281F2
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_2281FC:: @ 82281FC
-	setflag FLAG_0x4FC
+	setflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	call EverGrandeCity_PhoebesRoom_EventScript_2723F8
 	msgbox EverGrandeCity_PhoebesRoom_Text_228343, MSGBOX_DEFAULT
 	release

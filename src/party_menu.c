@@ -2799,7 +2799,7 @@ static void sub_81B1CD0(struct Pokemon *mon, u16 item, u8 c)
 {
     GetMonNickname(mon, gStringVar1);
     CopyItemName(item, gStringVar2);
-    StringExpandPlaceholders(gStringVar4, gText_RecievedItemFromPkmn);
+    StringExpandPlaceholders(gStringVar4, gText_ReceivedItemFromPkmn);
     sub_81B1B5C(gStringVar4, c);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -7257,10 +7257,10 @@ static void sub_81B9424(u8 taskId)
 
 static void sub_81B9470(void)
 {
-    gUnknown_02039F24 = GetCursorSelectionMonId();
-    if (gUnknown_02039F24 >= PARTY_SIZE)
-        gUnknown_02039F24 = 0xFF;
-    gSpecialVar_0x8004 = gUnknown_02039F24;
+    gContestMonPartyIndex = GetCursorSelectionMonId();
+    if (gContestMonPartyIndex >= PARTY_SIZE)
+        gContestMonPartyIndex = 0xFF;
+    gSpecialVar_0x8004 = gContestMonPartyIndex;
     gFieldCallback2 = hm_add_c3_without_phase_2;
     SetMainCallback2(CB2_ReturnToField);
 }

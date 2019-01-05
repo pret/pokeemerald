@@ -32,7 +32,7 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 
-extern bool32 sub_8196034(void);
+extern bool32 TryStartMatchCall(void);
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -600,7 +600,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         ScriptContext1_SetupScript(SSTidalCorridor_EventScript_23C050);
         return TRUE;
     }
-    if (sub_8196034())
+    if (TryStartMatchCall())
         return TRUE;
     return FALSE;
 }

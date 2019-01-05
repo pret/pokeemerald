@@ -4,7 +4,7 @@ SootopolisCity_House6_MapScripts:: @ 8226F5B
 SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0F5, SootopolisCity_House6_EventScript_226FA3
+	goto_if_set FLAG_RECEIVED_WAILMER_DOLL, SootopolisCity_House6_EventScript_226FA3
 	msgbox SootopolisCity_House6_Text_226FC3, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	call_if_eq SootopolisCity_House6_EventScript_226F99
@@ -12,7 +12,7 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	givedecoration_std 117
 	compare VAR_RESULT, 0
 	goto_if_eq SootopolisCity_House6_EventScript_226FAD
-	setflag FLAG_0x0F5
+	setflag FLAG_RECEIVED_WAILMER_DOLL
 	release
 	end
 

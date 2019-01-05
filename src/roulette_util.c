@@ -11,7 +11,7 @@ void sub_8151678(struct UnkStruct0 *r0)
     memset(&r0->var04, 0, sizeof(r0->var04));
 }
 
-u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, struct UnkStruct1 *r2)
+u8 sub_815168C(struct UnkStruct0 *r0, u8 r1, const struct UnkStruct1 *r2)
 {
     if (!(r1 < 16) || (r0->var04[r1].var00_7))
         return 0xFF;

@@ -160,7 +160,7 @@ DewfordTown_Gym_EventScript_1FC7C2:: @ 81FC7C2
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, 1
 	goto_if_eq DewfordTown_Gym_EventScript_1FC89C
-	goto_if_unset FLAG_0x0A6, DewfordTown_Gym_EventScript_1FC878
+	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_1FC878
 	msgbox DewfordTown_Gym_Text_1FD20D, MSGBOX_DEFAULT
 	release
 	end
@@ -171,7 +171,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	waitmessage
 	call DewfordTown_Gym_EventScript_27207E
 	msgbox DewfordTown_Gym_Text_1FD0A8, MSGBOX_DEFAULT
-	setflag FLAG_0x4F1
+	setflag FLAG_DEFEATED_DEWFORD_GYM
 	setflag FLAG_BADGE02_GET
 	addvar VAR_0x4085, 1
 	compare VAR_0x4085, 6
@@ -186,9 +186,9 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x1D4
+	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
 	setvar VAR_0x40F4, 0
-	setflag FLAG_0x080
+	setflag FLAG_ENABLE_ROXANNE_FIRST_CALL
 	release
 	end
 
@@ -197,7 +197,7 @@ DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_27205E
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
-	setflag FLAG_0x0A6
+	setflag FLAG_RECEIVED_TM08
 	return
 
 DewfordTown_Gym_EventScript_1FC878:: @ 81FC878
@@ -205,7 +205,7 @@ DewfordTown_Gym_EventScript_1FC878:: @ 81FC878
 	compare VAR_RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_272054
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
-	setflag FLAG_0x0A6
+	setflag FLAG_RECEIVED_TM08
 	release
 	end
 
@@ -277,7 +277,7 @@ DewfordTown_Gym_EventScript_1FC97C:: @ 81FC97C
 DewfordTown_Gym_EventScript_1FC983:: @ 81FC983
 	lock
 	faceplayer
-	goto_if_set FLAG_0x4F1, DewfordTown_Gym_EventScript_1FC998
+	goto_if_set FLAG_DEFEATED_DEWFORD_GYM, DewfordTown_Gym_EventScript_1FC998
 	msgbox DewfordTown_Gym_Text_1FC9D6, MSGBOX_DEFAULT
 	release
 	end
@@ -484,4 +484,3 @@ DewfordTown_Gym_Text_1FD3DE: @ 81FD3DE
 	.string "that can battle.\p"
 	.string "I'm sorry, but I'd like you to come back\n"
 	.string "with at least two POKéMON.$"
-

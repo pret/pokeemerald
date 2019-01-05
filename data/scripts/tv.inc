@@ -43,8 +43,8 @@ EventScript_27EE9A:: @ 827EE9A
 EventScript_27EEA4:: @ 827EEA4
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, MSGBOX_DEFAULT
 	special InitRoamer
-	clearflag FLAG_SYS_TV_LATI
-	setflag FLAG_0x0FF
+	clearflag FLAG_SYS_TV_LATIAS_LATIOS
+	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	special TurnOffTVScreen
 	releaseall
 	end

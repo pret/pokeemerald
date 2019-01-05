@@ -127,7 +127,7 @@ extern void ExecuteTruckSequence(void);
 extern void sub_80A0A38(void);
 extern void WriteFlashScanlineEffectBuffer(u8);
 extern void sub_81AA2F8(void);
-extern void sub_8195E10(void);
+extern void InitMatchCallCounters(void);
 extern void sub_80EDB44(void);
 extern void sub_81D64C0(void);
 extern void InitFieldMessageBox(void);
@@ -1777,7 +1777,7 @@ void CB2_ContinueSavedGame(void)
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    sub_8195E10();
+    InitMatchCallCounters();
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();

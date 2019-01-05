@@ -6,7 +6,7 @@ Underwater_SeafloorCavern_MapScripts:: @ 823433B
 
 Underwater_SeafloorCavern_MapScript1_23434B: @ 823434B
 	setflag FLAG_LANDMARK_SEAFLOOR_CAVERN
-	goto_if_set FLAG_0x081, Underwater_SeafloorCavern_EventScript_234358
+	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, Underwater_SeafloorCavern_EventScript_234358
 	end
 
 Underwater_SeafloorCavern_EventScript_234358:: @ 8234358
@@ -14,7 +14,7 @@ Underwater_SeafloorCavern_EventScript_234358:: @ 8234358
 	end
 
 Underwater_SeafloorCavern_MapScript1_23435C: @ 823435C
-	call_if_set FLAG_0x081, Underwater_SeafloorCavern_EventScript_234366
+	call_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, Underwater_SeafloorCavern_EventScript_234366
 	end
 
 Underwater_SeafloorCavern_EventScript_234366:: @ 8234366

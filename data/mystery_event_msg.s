@@ -9,7 +9,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	
+
 	.align 2
 
 MysteryEventScript_StampCard:: @ 8674CB0
@@ -100,7 +100,7 @@ SurfPichu_Slot5: @ 8674DD8
 
 sText_MysteryGiftEgg:
 	.string "Thank you for using the MYSTERY\nGIFT System.\pFrom the POKéMON CENTER we\nhave a gift--a POKéMON EGG!\pPlease raise it with love and\nkindness.$"
-	
+
 sText_FullParty:
 	.string "Oh, your party appears to be full.\pPlease come see me after storing\na POKéMON on a PC.$"
 
@@ -161,7 +161,7 @@ MysteryEventScript_BattleCardInfo: @ 8675179
 
 sText_MysteryGiftBattleCountCard:
 	.string "Thank you for using the MYSTERY\nGIFT System.\pYour BATTLE COUNT CARD keeps\ntrack of your battle record against\lTRAINERS with the same CARD.\pLook for and battle TRAINERS who\nhave the same CARD as you.\pYou may check the overall rankings\nby reading the NEWS.\pPlease do give it a try!$"
-	
+
 sText_MysteryGiftBattleCountCard_2:
 	.string "Thank you for using the MYSTERY\nGIFT System.\pCongratulations!\pYou have won a prize for winning\nthree battles!\pWe hope you will be inspired to\nbattle some more.$"
 
@@ -169,9 +169,9 @@ MysteryEventScript_AuroraTicket:: @ 867533C
 	setvaddress MysteryEventScript_AuroraTicket
 	lock
 	faceplayer
-	checkflag FLAG_0x13A
+	checkflag FLAG_RECEIVED_AURORA_TICKET
 	vgoto_if 1, AuroraTicket_Obtained
-	checkflag FLAG_0x1AD
+	checkflag FLAG_BATTLED_DEOXYS
 	vgoto_if 1, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
 	compare_var_to_value VAR_RESULT, 1
@@ -183,8 +183,8 @@ MysteryEventScript_AuroraTicket:: @ 867533C
 	compare_var_to_value VAR_RESULT, 0
 	vgoto_if 1, AuroraTicket_NoBagSpace
 	giveitem_std ITEM_AURORA_TICKET
-	setflag FLAG_0x8D5
-	setflag FLAG_0x13A
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_RECEIVED_AURORA_TICKET
 	vmessage sText_AuroraTicket2
 	waitmessage
 	waitbuttonpress
@@ -207,13 +207,13 @@ AuroraTicket_Obtained: @ 86753A0
 
 sText_AuroraTicket1:
 	.string "Thank you for using the MYSTERY\nGIFT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
-	
+
 sText_AuroraTicket2:
 	.string "It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
-	
+
 sText_AuroraTicketGot:
 	.string "Thank you for using the MYSTERY\nGIFT System.$"
-	
+
 sText_AuroraTicketNoPlace:
 	.string "Oh, I'm sorry, {PLAYER}.\nYour BAG's KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.$"
 
@@ -221,11 +221,11 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	setvaddress MysteryEventScript_MysticTicket
 	lock
 	faceplayer
-	checkflag FLAG_0x13B
+	checkflag FLAG_RECEIVED_MYSTIC_TICKET
 	vgoto_if 1, MysticTicket_Obtained
-	checkflag FLAG_0x091
+	checkflag FLAG_CAUGHT_LUGIA
 	vgoto_if 1, MysticTicket_Obtained
-	checkflag FLAG_0x092
+	checkflag FLAG_CAUGHT_HO_OH
 	vgoto_if 1, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare_var_to_value VAR_RESULT, 1
@@ -237,8 +237,8 @@ MysteryEventScript_MysticTicket:: @ 867550B
 	compare_var_to_value VAR_RESULT, 0
 	vgoto_if 1, MysticTicket_NoBagSpace
 	giveitem_std ITEM_MYSTIC_TICKET
-	setflag FLAG_0x8E0
-	setflag FLAG_0x13B
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
 	vmessage sText_MysticTicket1
 	waitmessage
 	waitbuttonpress
@@ -261,13 +261,13 @@ MysticTicket_Obtained: @ 8675578
 
 sText_MysticTicket2:
 	.string "Thank you for using the MYSTERY\nGIFT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
-	
+
 sText_MysticTicket1:
 	.string "It appears to be for use at the\nLILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
-	
+
 sText_MysticTicketGot:
 	.string "Thank you for using the MYSTERY\nGIFT System.$"
-	
+
 sText_MysticTicketNoPlace:
 	.string "Oh, I'm sorry, {PLAYER}.\nYour BAG's KEY ITEMS POCKET is full.\pPlease store something on your PC,\nthen come back for this.$"
 
@@ -293,9 +293,9 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	setvaddress MysteryEventScript_OldSeaMap
 	lock
 	faceplayer
-	checkflag FLAG_0x13C
+	checkflag FLAG_RECEIVED_OLD_SEA_MAP
 	vgoto_if 1, OldSeaMap_Obtained
-	checkflag FLAG_0x1CA
+	checkflag FLAG_CAUGHT_MEW
 	vgoto_if 1, OldSeaMap_Obtained
 	checkitem ITEM_OLD_SEA_MAP, 1
 	compare_var_to_value VAR_RESULT, 1
@@ -307,8 +307,8 @@ MysteryEventScript_OldSeaMap:: @ 86757F4
 	compare_var_to_value VAR_RESULT, 0
 	vgoto_if 1, OldSeaMap_NoBagSpace
 	giveitem_std ITEM_OLD_SEA_MAP
-	setflag FLAG_0x8D6
-	setflag FLAG_0x13C
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	setflag FLAG_RECEIVED_OLD_SEA_MAP
 	vmessage sText_MysteryGiftOldSeaMap_1
 	waitmessage
 	waitbuttonpress

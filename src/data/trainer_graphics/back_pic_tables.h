@@ -1,13 +1,13 @@
 const struct MonCoords gTrainerBackPicCoords[] =
 {
-    {8, 4},
-    {8, 4},
-    {8, 5},
-    {8, 5},
-    {8, 4},
-    {8, 4},
-    {8, 4},
-    {8, 4},
+    {.size = 8, .y_offset = 4},
+    {.size = 8, .y_offset = 4},
+    {.size = 8, .y_offset = 5},
+    {.size = 8, .y_offset = 5},
+    {.size = 8, .y_offset = 4},
+    {.size = 8, .y_offset = 4},
+    {.size = 8, .y_offset = 4},
+    {.size = 8, .y_offset = 4},
 };
 
 // this table goes functionally unused, since none of these pics are compressed

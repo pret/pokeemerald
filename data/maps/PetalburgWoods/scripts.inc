@@ -249,12 +249,12 @@ PetalburgWoods_EventScript_22E219:: @ 822E219
 PetalburgWoods_EventScript_22E222:: @ 822E222
 	lock
 	faceplayer
-	goto_if_set FLAG_0x129, PetalburgWoods_EventScript_22E251
+	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_22E251
 	msgbox PetalburgWoods_Text_22EAFE, MSGBOX_DEFAULT
 	giveitem_std ITEM_MIRACLE_SEED
 	compare VAR_RESULT, 0
 	goto_if_eq PetalburgWoods_EventScript_272054
-	setflag FLAG_0x129
+	setflag FLAG_RECEIVED_MIRACLE_SEED
 	release
 	end
 

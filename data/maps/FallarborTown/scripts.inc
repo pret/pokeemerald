@@ -5,13 +5,13 @@ FallarborTown_MapScripts:: @ 81EB1FA
 FallarborTown_MapScript1_1EB200: @ 81EB200
 	setflag FLAG_VISITED_FALLARBOR_TOWN
 	setvar VAR_0x4086, 0
-	clearflag FLAG_0x10E
+	clearflag FLAG_CONTEST_SKETCH_CREATED
 	end
 
 FallarborTown_EventScript_1EB20C:: @ 81EB20C
 	lock
 	faceplayer
-	goto_if_set FLAG_0x08B, FallarborTown_EventScript_1EB221
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_EventScript_1EB221
 	msgbox FallarborTown_Text_1EB26B, MSGBOX_DEFAULT
 	release
 	end

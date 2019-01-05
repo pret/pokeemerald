@@ -2140,7 +2140,7 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, s32 r
     data->unk_00.unk_00_4 = 0;
     data->unk_00.unk_00_5 = 0;
     data->unk_00.unk_00_6 = 0;
-    data->unk_00.unk_00_7 = FlagGet(FLAG_0x87F);
+    data->unk_00.unk_00_7 = FlagGet(FLAG_IS_CHAMPION);
     data->unk_00.unk_01_0 = IsNationalPokedexEnabled();
     data->unk_00.unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
 }

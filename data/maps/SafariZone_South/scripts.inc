@@ -51,7 +51,7 @@ SafariZone_South_EventScript_23D2DC:: @ 823D2DC
 SafariZone_South_EventScript_23D2E5:: @ 823D2E5
 	lock
 	faceplayer
-	goto_if_unset FLAG_0x05D, SafariZone_South_EventScript_23D30D
+	goto_if_unset FLAG_GOOD_LUCK_SAFARI_ZONE, SafariZone_South_EventScript_23D30D
 	msgbox SafariZone_South_Text_2A51D4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq SafariZone_South_EventScript_23D31A
@@ -60,7 +60,7 @@ SafariZone_South_EventScript_23D2E5:: @ 823D2E5
 	end
 
 SafariZone_South_EventScript_23D30D:: @ 823D30D
-	setflag FLAG_0x05D
+	setflag FLAG_GOOD_LUCK_SAFARI_ZONE
 	msgbox SafariZone_South_Text_2A52AB, MSGBOX_DEFAULT
 	release
 	end
@@ -150,4 +150,3 @@ SafariZone_Northeast_EventScript_23D3CF:: @ 823D3CF
 SafariZone_Northeast_EventScript_23D3D8:: @ 823D3D8
 	msgbox SafariZone_Northeast_Text_2A5A44, MSGBOX_NPC
 	end
-

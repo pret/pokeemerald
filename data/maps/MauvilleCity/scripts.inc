@@ -7,7 +7,7 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	clearflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_SYS_TV_START
-	clearflag FLAG_0x063
+	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
 	setvar VAR_0x4093, 0
 	call_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_1DF3A9
 	end
@@ -53,9 +53,9 @@ MauvilleCity_EventScript_1DF3F2:: @ 81DF3F2
 MauvilleCity_EventScript_1DF3FB:: @ 81DF3FB
 	lock
 	faceplayer
-	goto_if_set FLAG_0x062, MauvilleCity_EventScript_1DF413
+	goto_if_set FLAG_TV_EXPLAINED, MauvilleCity_EventScript_1DF413
 	msgbox MauvilleCity_Text_1E056A, MSGBOX_DEFAULT
-	setflag FLAG_0x062
+	setflag FLAG_TV_EXPLAINED
 	release
 	end
 
@@ -67,7 +67,7 @@ MauvilleCity_EventScript_1DF413:: @ 81DF413
 MauvilleCity_EventScript_1DF41D:: @ 81DF41D
 	lock
 	faceplayer
-	goto_if_set FLAG_0x11C, MauvilleCity_EventScript_1DF43D
+	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_1DF43D
 	msgbox MauvilleCity_Text_1DF7DC, MSGBOX_DEFAULT
 	closemessage
 	applymovement 7, MauvilleCity_Movement_2725A2
@@ -85,7 +85,7 @@ MauvilleCity_EventScript_1DF43D:: @ 81DF43D
 
 MauvilleCity_EventScript_1DF452:: @ 81DF452
 	lockall
-	goto_if_set FLAG_0x11C, MauvilleCity_EventScript_1DF690
+	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_1DF690
 	applymovement 6, MauvilleCity_Movement_2725A8
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DF845, MSGBOX_DEFAULT
@@ -157,9 +157,9 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	removeobject 7
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
-	setflag FLAG_0x0BE
+	setflag FLAG_DEFEATED_WALLY_MAUVILLE
 	setvar VAR_0x40F2, 0
-	setflag FLAG_0x088
+	setflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL
 	compare VAR_FACING, 2
 	call_if_eq MauvilleCity_EventScript_1DF5F3
 	compare VAR_FACING, 4
@@ -217,7 +217,7 @@ MauvilleCity_EventScript_1DF63A:: @ 81DF63A
 	return
 
 MauvilleCity_EventScript_1DF683:: @ 81DF683
-	setflag FLAG_0x11C
+	setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
 	msgbox MauvilleCity_Text_1DFA4A, MSGBOX_DEFAULT
 	release
 	end
@@ -461,8 +461,8 @@ MauvilleCity_EventScript_1DF7BA:: @ 81DF7BA
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0D6
-	clearflag FLAG_0x088
+	setflag FLAG_ENABLE_WALLY_MATCH_CALL
+	clearflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL
 	releaseall
 	end
 

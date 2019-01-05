@@ -4,7 +4,7 @@ FallarborTown_House1_MapScripts:: @ 8200F12
 FallarborTown_House1_EventScript_200F13:: @ 8200F13
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0E5, FallarborTown_House1_EventScript_200FB2
+	goto_if_set FLAG_RECEIVED_TM27, FallarborTown_House1_EventScript_200FB2
 	checkitem ITEM_METEORITE, 1
 	compare VAR_RESULT, 1
 	goto_if_eq FallarborTown_House1_EventScript_200F38
@@ -23,7 +23,7 @@ FallarborTown_House1_EventScript_200F38:: @ 8200F38
 	goto_if_eq FallarborTown_House1_EventScript_272054
 	setvar VAR_0x8004, 280
 	call FallarborTown_House1_EventScript_2723E4
-	setflag FLAG_0x0E5
+	setflag FLAG_RECEIVED_TM27
 	msgbox FallarborTown_House1_Text_2011A5, MSGBOX_DEFAULT
 	release
 	end
@@ -51,8 +51,8 @@ FallarborTown_House1_EventScript_200FB2:: @ 8200FB2
 FallarborTown_House1_EventScript_200FBC:: @ 8200FBC
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0E5, FallarborTown_House1_EventScript_200FE4
-	goto_if_set FLAG_0x08B, FallarborTown_House1_EventScript_200FDA
+	goto_if_set FLAG_RECEIVED_TM27, FallarborTown_House1_EventScript_200FE4
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_House1_EventScript_200FDA
 	msgbox FallarborTown_House1_Text_2012BC, MSGBOX_DEFAULT
 	release
 	end

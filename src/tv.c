@@ -1262,7 +1262,7 @@ static void InterviewAfter_ContestLiveUpdates(void)
         show2->contestLiveUpdates.active = TRUE;
         StringCopy(show2->contestLiveUpdates.playerName, gSaveBlock2Ptr->playerName);
         show2->contestLiveUpdates.category = gSpecialVar_ContestCategory;
-        show2->contestLiveUpdates.species = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_SPECIES, NULL);
+        show2->contestLiveUpdates.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
         show2->contestLiveUpdates.winningSpecies = show->contestLiveUpdates.winningSpecies;
         show2->contestLiveUpdates.appealFlags2 = show->contestLiveUpdates.appealFlags2;
         show2->contestLiveUpdates.round1Rank = show->contestLiveUpdates.round1Rank;
@@ -1453,7 +1453,7 @@ void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
         StringCopy(show->contestLiveUpdates.winningTrainerName, gContestMons[a1].trainerName);
         StripExtCtrlCodes(show->contestLiveUpdates.winningTrainerName);
         show->contestLiveUpdates.appealFlags2 = a0;
-        if (a1 + 1 > gUnknown_02039F30)
+        if (a1 + 1 > gNumLinkContestPlayers)
         {
             show->contestLiveUpdates.winningTrainerLanguage = gLinkPlayers[0].language;
         }
@@ -1516,7 +1516,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
     }
 }
 
-void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
+void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace)
 {
     TVShow *show;
 
@@ -1524,13 +1524,13 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        show->bravoTrainer.contestResult = a0;
+        show->bravoTrainer.contestResult = contestStandingPlace;
         show->bravoTrainer.contestCategory = gSpecialVar_ContestCategory;
         show->bravoTrainer.contestRank = gSpecialVar_ContestRank;
-        show->bravoTrainer.species = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_SPECIES, NULL);
-        GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
+        show->bravoTrainer.species = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SPECIES, NULL);
+        GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
         StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
-        show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_LANGUAGE);
+        show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_LANGUAGE);
     }
 }
 
@@ -3538,7 +3538,7 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
             return 0;
         }
     }
-    if (FlagGet(FLAG_SYS_TV_LATI) == TRUE)
+    if (FlagGet(FLAG_SYS_TV_LATIAS_LATIOS) == TRUE)
     {
         return 1;
     }
