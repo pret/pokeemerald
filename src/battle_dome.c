@@ -5847,22 +5847,22 @@ static void sub_8194220(u8 taskId)
             gTasks[i].data[0] = 0;
         }
         ScanlineEffect_Clear();
-		
-		i = 0;
-		while (i < 91)
-		{
-			gScanlineEffectRegBuffers[0][i] = 0x1F0A;
-			gScanlineEffectRegBuffers[1][i] = 0x1F0A;
-			i++;
-		}
+        
+        i = 0;
+        while (i < 91)
+        {
+            gScanlineEffectRegBuffers[0][i] = 0x1F0A;
+            gScanlineEffectRegBuffers[1][i] = 0x1F0A;
+            i++;
+        }
 
-		while (i < 160)
-		{
-			gScanlineEffectRegBuffers[0][i] = 0x1F09;
-			gScanlineEffectRegBuffers[1][i] = 0x1F09;
-			i++;
-		}
-		
+        while (i < 160)
+        {
+            gScanlineEffectRegBuffers[0][i] = 0x1F09;
+            gScanlineEffectRegBuffers[1][i] = 0x1F09;
+            i++;
+        }
+        
         ScanlineEffect_SetParams(gUnknown_0860CF44);
         DestroyTask(taskId);
         break;
