@@ -1,6 +1,13 @@
 #ifndef GUARD_CONSTANTS_SECRET_BASES_H
 #define GUARD_CONSTANTS_SECRET_BASES_H
 
+#define SECRET_BASE_RED_CAVE 1
+#define SECRET_BASE_BROWN_CAVE 2
+#define SECRET_BASE_BLUE_CAVE 3
+#define SECRET_BASE_YELLOW_CAVE 4
+#define SECRET_BASE_TREE 5
+#define SECRET_BASE_SHRUB 6
+
 // Each secret base location is assigned an identifier value.
 // The secret base's map is determined by (id / 10). The ones
 // digit is used to differentiate secret bases using the same map.
