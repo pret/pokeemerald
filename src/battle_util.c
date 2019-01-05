@@ -98,32 +98,6 @@ static const u8 sAbilitiesAffectedByMoldBreaker[] =
     [ABILITY_WATER_BUBBLE] = 1,
 };
 
-static const u8 sFlailHpScaleToPowerTable[] =
-{
-    1, 200,
-    4, 150,
-    9, 100,
-    16, 80,
-    32, 40,
-    48, 20
-};
-
-// format: min. weight (hectograms), base power
-static const u16 sWeightToDamageTable[] =
-{
-    100, 20,
-    250, 40,
-    500, 60,
-    1000, 80,
-    2000, 100,
-    0xFFFF, 0xFFFF
-};
-
-static const u16 sSpeedDiffToDmgTable[] =
-{
-    40, 60, 80, 120, 150
-};
-
 static const u8 sHoldEffectToType[][2] =
 {
     {HOLD_EFFECT_BUG_POWER, TYPE_BUG},
@@ -4658,6 +4632,31 @@ static u32 ApplyModifier(u16 modifier, u32 val)
     return UQ_4_12_TO_INT((modifier * val) + UQ_4_12_ROUND);
 }
 
+static const u8 sFlailHpScaleToPowerTable[] =
+{
+    1, 200,
+    4, 150,
+    9, 100,
+    16, 80,
+    32, 40,
+    48, 20
+};
+
+// format: min. weight (hectograms), base power
+static const u16 sWeightToDamageTable[] =
+{
+    100, 20,
+    250, 40,
+    500, 60,
+    1000, 80,
+    2000, 100,
+    0xFFFF, 0xFFFF
+};
+
+static const u8 sSpeedDiffPowerTable[] = {40, 60, 80, 120, 150};
+static const u8 sHeatCrushPowerTable[] = {40, 40, 60, 80, 100, 120};
+static const u8 sTrumpCardPowerTable[] = {200, 80, 60, 50, 40};
+
 static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
 {
     u32 i;
@@ -4753,24 +4752,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         i = GetBattleMonMoveSlot(&gBattleMons[battlerAtk], move);
         if (i != 4)
         {
-            switch (gBattleMons[battlerAtk].pp[i])
-            {
-            case 0:
-                basePower = 200;
-                break;
-            case 1:
-                basePower = 80;
-                break;
-            case 2:
-                basePower = 60;
-                break;
-            case 3:
-                basePower = 50;
-                break;
-            default:
-                basePower = 40;
-                break;
-            }
+            if (gBattleMons[battlerAtk].pp[i] >= ARRAY_COUNT(sTrumpCardPowerTable))
+                basePower = sTrumpCardPowerTable[ARRAY_COUNT(sTrumpCardPowerTable) - 1];
+            else
+                basePower = sTrumpCardPowerTable[i];
         }
         break;
     case EFFECT_ACROBATICS:
@@ -4791,16 +4776,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_HEAT_CRASH:
         weight = GetBattlerWeight(battlerAtk) / GetBattlerWeight(battlerDef);
-        if (weight >= 5)
-            basePower = 120;
-        else if (weight == 4)
-            basePower = 100;
-        else if (weight == 3)
-            basePower = 80;
-        else if (weight == 2)
-            basePower = 60;
+        if (weight >= ARRAY_COUNT(sHeatCrushPowerTable))
+            basePower = sHeatCrushPowerTable[ARRAY_COUNT(sHeatCrushPowerTable) - 1];
         else
-            basePower = 40;
+            basePower = sHeatCrushPowerTable[i];
         break;
     case EFFECT_PUNISHMENT:
         basePower = 60 + (CountBattlerStatIncreases(battlerAtk, FALSE) * 20);
@@ -4812,9 +4791,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_ELECTRO_BALL:
         speed = GetBattlerTotalSpeedStat(battlerAtk) / GetBattlerTotalSpeedStat(battlerDef);
-        if (speed >= ARRAY_COUNT(sSpeedDiffToDmgTable))
-            speed = ARRAY_COUNT(sSpeedDiffToDmgTable) - 1;
-        basePower = sSpeedDiffToDmgTable[speed];
+        if (speed >= ARRAY_COUNT(sSpeedDiffPowerTable))
+            speed = ARRAY_COUNT(sSpeedDiffPowerTable) - 1;
+        basePower = sSpeedDiffPowerTable[speed];
         break;
     case EFFECT_GYRO_BALL:
         basePower = ((25 * GetBattlerTotalSpeedStat(battlerDef)) / GetBattlerTotalSpeedStat(battlerAtk)) + 1;
