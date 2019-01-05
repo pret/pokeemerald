@@ -63,7 +63,7 @@ RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	compare VAR_TEMP_1, 3
 	call_if_eq RusturfTunnel_EventScript_22CFC8
 	giveitem_std ITEM_HM04
-	setflag FLAG_0x06A
+	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_22D6D2, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_TEMP_1, 1
@@ -343,8 +343,8 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	waitmovement 0
 	removeobject 5
 	removeobject 7
-	clearflag FLAG_0x08E
-	setflag FLAG_0x08F
+	clearflag FLAG_DEVON_GOODS_STOLEN
+	setflag FLAG_RECOVERED_DEVON_GOODS
 	setvar VAR_0x405A, 4
 	setvar VAR_0x4090, 1
 	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY

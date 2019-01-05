@@ -49,12 +49,12 @@
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
+#include "constants/event_objects.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
-extern const u8 *gUnknown_020375C0;
-
+EWRAM_DATA const u8 *gUnknown_020375C0 = NULL;
 static EWRAM_DATA u32 gUnknown_020375C4 = 0;
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
@@ -748,7 +748,7 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF734();
+    DoWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -762,7 +762,7 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sp13E_warp_to_last_warp();
+    DoDiveWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -776,7 +776,7 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_80AF7D0();
+    DoDoorWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -793,7 +793,7 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
         SetWarpDestinationToFixedHoleWarp(x - 7, y - 7);
     else
         SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
-    sp13F_fall_to_last_warp();
+    DoFallWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -1239,11 +1239,11 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
 
 bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 {
-    u8 objectId;
+    u8 playerObjectId;
 
     HideFieldMessageBox();
-    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80D338C();
     UnfreezeEventObjects();
     return FALSE;
@@ -1251,13 +1251,13 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 
 bool8 ScrCmd_release(struct ScriptContext *ctx)
 {
-    u8 objectId;
+    u8 playerObjectId;
 
     HideFieldMessageBox();
     if (gEventObjects[gSelectedEventObject].active)
         EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
-    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    playerObjectId = GetEventObjectIdByLocalIdAndMap(EVENT_OBJ_ID_PLAYER, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80D338C();
     UnfreezeEventObjects();
     return FALSE;

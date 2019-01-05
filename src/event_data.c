@@ -45,7 +45,7 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_CTRL_OBJ_DELETE);
-    FlagClear(FLAG_0x880);
+    FlagClear(FLAG_NURSE_UNION_ROOM_REMINDER);
 }
 
 // Probably had different flag splits at one point.
@@ -114,21 +114,21 @@ bool32 IsMysteryGiftEnabled(void)
 void sub_809D4D8(void)
 {
     FlagClear(FLAG_MYSTERY_EVENT_DONE);
-    FlagClear(FLAG_0x1E5);
-    FlagClear(FLAG_0x1E6);
-    FlagClear(FLAG_0x1E7);
-    FlagClear(FLAG_0x1E8);
-    FlagClear(FLAG_0x1E9);
-    FlagClear(FLAG_0x1EA);
-    FlagClear(FLAG_0x1EB);
-    FlagClear(FLAG_0x1EC);
-    FlagClear(FLAG_0x1ED);
-    FlagClear(FLAG_0x1EE);
-    FlagClear(FLAG_0x1EF);
-    FlagClear(FLAG_0x1F0);
-    FlagClear(FLAG_0x1F1);
-    FlagClear(FLAG_0x1F2);
-    FlagClear(FLAG_0x1F3);
+    FlagClear(FLAG_MYSTERY_EVENT_1);
+    FlagClear(FLAG_MYSTERY_EVENT_2);
+    FlagClear(FLAG_MYSTERY_EVENT_3);
+    FlagClear(FLAG_MYSTERY_EVENT_4);
+    FlagClear(FLAG_MYSTERY_EVENT_5);
+    FlagClear(FLAG_MYSTERY_EVENT_6);
+    FlagClear(FLAG_MYSTERY_EVENT_7);
+    FlagClear(FLAG_MYSTERY_EVENT_8);
+    FlagClear(FLAG_MYSTERY_EVENT_9);
+    FlagClear(FLAG_MYSTERY_EVENT_10);
+    FlagClear(FLAG_MYSTERY_EVENT_11);
+    FlagClear(FLAG_MYSTERY_EVENT_12);
+    FlagClear(FLAG_MYSTERY_EVENT_13);
+    FlagClear(FLAG_MYSTERY_EVENT_14);
+    FlagClear(FLAG_MYSTERY_EVENT_15);
 }
 
 void sub_809D570(void)

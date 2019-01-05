@@ -9,12 +9,12 @@ Route114_FossilManiacsHouse_MapScript1_22AD36: @ 822AD36
 Route114_FossilManiacsHouse_EventScript_22AD3A:: @ 822AD3A
 	lock
 	faceplayer
-	goto_if_set FLAG_0x105, Route114_FossilManiacsHouse_EventScript_22AD69
+	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_22AD69
 	msgbox Route114_FossilManiacsHouse_Text_22AD85, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM28
 	compare VAR_RESULT, 0
 	goto_if_eq Route114_FossilManiacsHouse_EventScript_272054
-	setflag FLAG_0x105
+	setflag FLAG_RECEIVED_TM28
 	release
 	end
 

@@ -6,10 +6,10 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	faceplayer
 	dodailyevents
 	call PacifidlogTown_House2_EventScript_2037DE
-	goto_if_set FLAG_0x12B, PacifidlogTown_House2_EventScript_20387E
-	call_if_set FLAG_0x12C, PacifidlogTown_House2_EventScript_2037F8
-	call_if_unset FLAG_0x12C, PacifidlogTown_House2_EventScript_203801
-	setflag FLAG_0x12C
+	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_20387E
+	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_2037F8
+	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_203801
+	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
 	goto_if_ge PacifidlogTown_House2_EventScript_203816
@@ -20,7 +20,7 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	end
 
 PacifidlogTown_House2_EventScript_2037DE:: @ 82037DE
-	goto_if_unset FLAG_0x12B, PacifidlogTown_House2_EventScript_27374E
+	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_27374E
 	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare VAR_RESULT, 0
 	call_if_eq PacifidlogTown_House2_EventScript_203812
@@ -36,7 +36,7 @@ PacifidlogTown_House2_EventScript_203801:: @ 8203801
 	return
 
 PacifidlogTown_House2_EventScript_203812:: @ 8203812
-	clearflag FLAG_0x12B
+	clearflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	return
 
 PacifidlogTown_House2_EventScript_203816:: @ 8203816
@@ -44,7 +44,7 @@ PacifidlogTown_House2_EventScript_203816:: @ 8203816
 	giveitem_std ITEM_TM27
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_272054
-	setflag FLAG_0x12B
+	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, MSGBOX_DEFAULT
 	release
@@ -60,7 +60,7 @@ PacifidlogTown_House2_EventScript_20384F:: @ 820384F
 	giveitem_std ITEM_TM21
 	compare VAR_RESULT, 0
 	goto_if_eq PacifidlogTown_House2_EventScript_272054
-	setflag FLAG_0x12B
+	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_203A85, MSGBOX_DEFAULT
 	release

@@ -15,8 +15,8 @@ AquaHideout_B1F_EventScript_2339BC:: @ 82339BC
 	return
 
 AquaHideout_B1F_MapScript1_2339D0: @ 82339D0
-	call_if_unset FLAG_0x1C4, AquaHideout_B1F_EventScript_2339E3
-	call_if_unset FLAG_0x1C5, AquaHideout_B1F_EventScript_2339E7
+	call_if_unset FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT, AquaHideout_B1F_EventScript_2339E3
+	call_if_unset FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT, AquaHideout_B1F_EventScript_2339E7
 	end
 
 AquaHideout_B1F_EventScript_2339E3:: @ 82339E3
@@ -45,12 +45,12 @@ AquaHideout_B1F_EventScript_2339EB:: @ 82339EB
 	goto_if_eq AquaHideout_B1F_EventScript_233A2F
 	compare VAR_RESULT, 5
 	goto_if_eq AquaHideout_B1F_EventScript_233A2F
-	setflag FLAG_0x1C4
+	setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
 	release
 	end
 
 AquaHideout_B1F_EventScript_233A2F:: @ 8233A2F
-	setflag FLAG_0x1C4
+	setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
 	goto AquaHideout_B1F_EventScript_27376D
 	end
 
@@ -72,12 +72,12 @@ AquaHideout_B1F_EventScript_233A38:: @ 8233A38
 	goto_if_eq AquaHideout_B1F_EventScript_233A7C
 	compare VAR_RESULT, 5
 	goto_if_eq AquaHideout_B1F_EventScript_233A7C
-	setflag FLAG_0x1C5
+	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
 	release
 	end
 
 AquaHideout_B1F_EventScript_233A7C:: @ 8233A7C
-	setflag FLAG_0x1C5
+	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
 	goto AquaHideout_B1F_EventScript_27376D
 	end
 
@@ -165,4 +165,3 @@ AquaHideout_B1F_Text_233D6E: @ 8233D6E
 AquaHideout_B1F_Text_233D84: @ 8233D84
 	.string "If you have a cool uniform, you look\n"
 	.string "good even in a loss, don't you think?$"
-

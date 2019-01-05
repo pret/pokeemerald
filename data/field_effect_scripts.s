@@ -341,5 +341,5 @@ gFieldEffectScript_Unknown65:: @ 82DBCF9
 	field_eff_end
 
 gFieldEffectScript_Unknown66:: @ 82DBCFF
-	field_eff_callnative sub_80B9E28
+	field_eff_callnative Fldeff_MoveDeoxysRock
 	field_eff_end

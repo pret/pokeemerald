@@ -5,7 +5,7 @@ Route116_MapScripts:: @ 81F2C0C
 	.byte 0
 
 Route116_MapScript1_1F2C1C: @ 81F2C1C
-	call_if_set FLAG_0x08F, Route116_EventScript_1F2C47
+	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C47
 	compare VAR_0x4039, 1
 	call_if_eq Route116_EventScript_273D13
 	compare VAR_0x4037, 5
@@ -32,8 +32,8 @@ Route116_MapScript2_1F2C66: @ 81F2C66
 Route116_EventScript_1F2C70:: @ 81F2C70
 	lock
 	faceplayer
-	goto_if_set FLAG_0x08F, Route116_EventScript_1F2C8E
-	goto_if_set FLAG_0x08E, Route116_EventScript_1F2C98
+	goto_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_1F2C8E
+	goto_if_set FLAG_DEVON_GOODS_STOLEN, Route116_EventScript_1F2C98
 	msgbox Route116_Text_1F3140, MSGBOX_DEFAULT
 	release
 	end
@@ -51,13 +51,13 @@ Route116_EventScript_1F2C98:: @ 81F2C98
 Route116_EventScript_1F2CA2:: @ 81F2CA2
 	lock
 	faceplayer
-	goto_if_set FLAG_0x11F, Route116_EventScript_1F2D2B
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_1F2D2B
 	msgbox Route116_Text_1F3317, MSGBOX_DEFAULT
 	goto Route116_EventScript_1F2CBB
 	end
 
 Route116_EventScript_1F2CBB:: @ 81F2CBB
-	setflag FLAG_0x11F
+	setflag FLAG_MET_DEVON_EMPLOYEE
 	giveitem_std ITEM_REPEAT_BALL
 	compare VAR_RESULT, 0
 	goto_if_eq Route116_EventScript_1F2D39
@@ -73,7 +73,7 @@ Route116_EventScript_1F2CBB:: @ 81F2CBB
 	call_if_eq Route116_EventScript_1F2D20
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
-	setflag FLAG_0x100
+	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end
 

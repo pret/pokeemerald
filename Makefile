@@ -38,7 +38,7 @@ ASFLAGS := -mcpu=arm7tdmi
 CC1             := tools/agbcc/bin/agbcc$(EXE)
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include -nostdinc -undef
+CPPFLAGS := -I tools/agbcc/include -I tools/agbcc -iquote include
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -178,7 +178,7 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
 $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
-	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
+	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../ld_script.txt > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
@@ -186,4 +186,3 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
-

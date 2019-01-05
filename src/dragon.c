@@ -274,8 +274,8 @@ void sub_8113250(struct Sprite *sprite)
     sprite->data[4] = 0;
     sprite->data[5] = 1;
     sprite->data[6] = gBattleAnimArgs[0];
-    r5 = sub_80A861C(gBattlerAttacker, 0);
-    r0 = sub_80A861C(gBattlerAttacker, 1);
+    r5 = GetBattlerSpriteCoordAttr(gBattlerAttacker, BATTLER_COORD_ATTR_HEIGHT);
+    r0 = GetBattlerSpriteCoordAttr(gBattlerAttacker, BATTLER_COORD_ATTR_WIDTH);
     if (r5 > r0)
         sprite->data[7] = r5 / 2;
     else

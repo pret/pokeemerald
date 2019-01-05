@@ -139,23 +139,23 @@ LilycoveCity_ContestLobby_EventScript_21A3B6:: @ 821A3B6
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3F3:: @ 821A3F3
-	setflag FLAG_0x0A0
+	setflag FLAG_COOL_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3F7:: @ 821A3F7
-	setflag FLAG_0x0A1
+	setflag FLAG_BEAUTY_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3FB:: @ 821A3FB
-	setflag FLAG_0x0A2
+	setflag FLAG_CUTE_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A3FF:: @ 821A3FF
-	setflag FLAG_0x0A3
+	setflag FLAG_SMART_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A403:: @ 821A403
-	setflag FLAG_0x0A4
+	setflag FLAG_TOUGH_PAINTING_MADE
 	return
 
 LilycoveCity_ContestLobby_Movement_21A407: @ 821A407
@@ -364,7 +364,7 @@ LilycoveCity_ContestLobby_EventScript_21A5CF:: @ 821A5CF
 	end
 
 LilycoveCity_ContestLobby_EventScript_21A5EF:: @ 821A5EF
-	setflag FLAG_0x155
+	setflag FLAG_ENTERED_LINK_CONTEST
 	switch VAR_CONTEST_CATEGORY
 	case 0, LilycoveCity_ContestLobby_EventScript_21A62F
 	case 1, LilycoveCity_ContestLobby_EventScript_21A63C
@@ -1004,7 +1004,7 @@ LilycoveCity_ContestLobby_Movement_21ACEF: @ 821ACEF
 LilycoveCity_ContestLobby_EventScript_21ACF1:: @ 821ACF1
 	lock
 	faceplayer
-	goto_if_set FLAG_0x05F, LilycoveCity_ContestLobby_EventScript_21AD06
+	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_21AD06
 	msgbox LilycoveCity_ContestLobby_Text_21AD10, MSGBOX_DEFAULT
 	release
 	end

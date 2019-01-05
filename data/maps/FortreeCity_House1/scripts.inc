@@ -4,10 +4,10 @@ FortreeCity_House1_MapScripts:: @ 82162BA
 FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	lock
 	faceplayer
-	goto_if_set FLAG_0x09B, FortreeCity_House1_EventScript_216355
+	goto_if_set FLAG_FORTREE_NPC_TRADE_COMPLETED, FortreeCity_House1_EventScript_216355
 	setvar VAR_0x8008, 1
 	copyvar VAR_0x8004, VAR_0x8008
-	specialvar VAR_RESULT, sub_807E73C
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox FortreeCity_House1_Text_21637B, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -18,18 +18,18 @@ FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	compare VAR_0x8004, 255
 	goto_if_eq FortreeCity_House1_EventScript_21633D
 	copyvar VAR_0x8005, VAR_0x800A
-	specialvar VAR_RESULT, sub_807E9D4
+	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne FortreeCity_House1_EventScript_216347
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
-	special sub_807EA10
-	special sub_807F0E4
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	bufferspeciesname 0, VAR_0x8009
 	msgbox FortreeCity_House1_Text_216440, MSGBOX_DEFAULT
-	setflag FLAG_0x09B
+	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
 	end
 

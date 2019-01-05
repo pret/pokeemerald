@@ -48,10 +48,13 @@ void PutPokemonTodayCaughtOnAir(void);
 void TV_PutSecretBaseVisitOnTheAir(void);
 void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlayer, u16 speciesOpponent);
 void BravoTrainerPokemonProfile_BeforeInterview1(u16 move);
+void InterviewBefore(void);
+void InterviewAfter(void);
 void UpdateTVScreensOnMap(int, int);
 void TV_PrintIntToStringVar(u8 varIdx, int value);
 void SaveRecordedItemPurchasesForTVShow(void);
 bool8 sub_80EE818(void);
 void sub_80EE8C8(u16 winStreak, u8 facilityAndMode);
+void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace);
 
 #endif //GUARD_TV_H

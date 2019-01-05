@@ -83,7 +83,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	setflag FLAG_HIDE_ROUTE_110_TEAM_AQUA
 	compare VAR_0x40DA, 0
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
-	setflag FLAG_0x095
+	setflag FLAG_DELIVERED_DEVON_GOODS
 	clearflag FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setvar VAR_0x40D2, 1

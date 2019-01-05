@@ -7,8 +7,8 @@ struct FieldInput
     bool8 checkStandardWildEncounter:1;
     bool8 pressedStartButton:1;
     bool8 pressedSelectButton:1;
-    bool8 input_field_0_4:1;
-    bool8 input_field_0_5:1;
+    bool8 heldDirection:1;
+    bool8 heldDirection2:1;
     bool8 tookStep:1;
     bool8 pressedBButton:1;
     bool8 input_field_1_0:1;
@@ -20,7 +20,6 @@ struct FieldInput
     bool8 input_field_1_6:1;
     bool8 input_field_1_7:1;
     u8 dpadDirection;
-    u8 input_field_3;
 };
 
 void FieldClearPlayerInput(struct FieldInput *pStruct);

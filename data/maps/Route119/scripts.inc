@@ -139,7 +139,7 @@ Route119_EventScript_1F45E4:: @ 81F45E4
 
 Route119_EventScript_1F45FF:: @ 81F45FF
 	giveitem_std ITEM_HM02
-	setflag FLAG_0x06E
+	setflag FLAG_RECEIVED_HM02
 	return
 
 Route119_EventScript_1F460F:: @ 81F460F
@@ -490,7 +490,7 @@ Route119_EventScript_1F49EC:: @ 81F49EC
 	lockall
 	pokenavcall Route119_Text_1F4FBA
 	waitmessage
-	clearflag FLAG_0x08A
+	clearflag FLAG_REGISTER_WINONA_POKENAV
 	addvar VAR_0x40D1, 1
 	releaseall
 	end

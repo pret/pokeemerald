@@ -17,6 +17,7 @@
 #include "dma3.h"
 #include "event_data.h"
 #include "evolution_scene.h"
+#include "graphics.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -61,7 +62,6 @@
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 
-extern const u16 gBattleTextboxPalette[];
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 extern const u8 *const gBattleScriptsForMoveEffects[];
@@ -981,7 +981,7 @@ static void CB2_HandleStartBattle(void)
         {
             if (gReceivedRemoteLinkPlayers != 0)
             {
-                if (sub_800A520())
+                if (IsLinkTaskFinished())
                 {
                     *(&gBattleStruct->field_180) = 0;
                     *(&gBattleStruct->field_181) = 3;
@@ -1030,7 +1030,7 @@ static void CB2_HandleStartBattle(void)
         }
         break;
     case 3:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1045,7 +1045,7 @@ static void CB2_HandleStartBattle(void)
         }
         break;
     case 7:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty + 2, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1060,7 +1060,7 @@ static void CB2_HandleStartBattle(void)
         }
         break;
     case 11:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty + 4, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1102,7 +1102,7 @@ static void CB2_HandleStartBattle(void)
         }
         break;
     case 16:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), &gRecordedBattleRngSeed, sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1189,7 +1189,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                 GetBattleTowerTrainerLanguage(&language, gTrainerBattleOpponent_B);
                 gLinkPlayers[3].language = language;
 
-                if (sub_800A520())
+                if (IsLinkTaskFinished())
                 {
                     *(&gBattleStruct->field_180) = 0;
                     *(&gBattleStruct->field_181) = 3;
@@ -1229,7 +1229,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 3:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1253,7 +1253,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 5:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty + 2, sizeof(struct Pokemon));
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1277,7 +1277,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 7:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gEnemyParty, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1295,7 +1295,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 9:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gEnemyParty + 2, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1313,7 +1313,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 11:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gEnemyParty + 4, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1355,7 +1355,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 14:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), &gRecordedBattleRngSeed, sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1435,7 +1435,7 @@ static void CB2_PreInitMultiBattle(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        if (gReceivedRemoteLinkPlayers != 0 && sub_800A520())
+        if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
         {
             gUnknown_02023058 = Alloc(sizeof(struct UnknownPokemonStruct4) * 3);
             sub_80379F8(0);
@@ -1473,7 +1473,7 @@ static void CB2_PreInitMultiBattle(void)
         }
         break;
     case 2:
-        if (sub_800A520() && !gPaletteFade.active)
+        if (IsLinkTaskFinished() && !gPaletteFade.active)
         {
             gBattleCommunication[MULTIUSE_STATE]++;
             if (gWirelessCommType)
@@ -1576,7 +1576,7 @@ static void CB2_HandleStartMultiBattle(void)
         {
             if (gReceivedRemoteLinkPlayers != 0)
             {
-                if (sub_800A520())
+                if (IsLinkTaskFinished())
                 {
                     *(&gBattleStruct->field_180) = 0;
                     *(&gBattleStruct->field_181) = 3;
@@ -1638,7 +1638,7 @@ static void CB2_HandleStartMultiBattle(void)
             break;
         // fall through
     case 3:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty, sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1701,7 +1701,7 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 5:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty + 2, sizeof(struct Pokemon));
             gBattleCommunication[MULTIUSE_STATE]++;
@@ -1797,7 +1797,7 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 8:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             u32* ptr = (u32*)(&gBattleStruct->field_180);
             ptr[0] = gBattleTypeFlags;
@@ -2350,7 +2350,7 @@ static void sub_8038F34(void)
             gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 6:
-        if (sub_800A520() == TRUE)
+        if (IsLinkTaskFinished() == TRUE)
         {
             sub_800ADF8();
             BattlePutTextOnWindow(gText_LinkStandby3, 0);
@@ -2360,7 +2360,7 @@ static void sub_8038F34(void)
     case 7:
         if (!IsTextPrinterActive(0))
         {
-            if (sub_800A520() == TRUE)
+            if (IsLinkTaskFinished() == TRUE)
                 gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2535,7 +2535,7 @@ static void sub_803939C(void)
         }
         break;
     case 6:
-        if (sub_800A520() == TRUE)
+        if (IsLinkTaskFinished() == TRUE)
         {
             HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
             if (gMain.field_439_x4)
@@ -2585,7 +2585,7 @@ static void sub_803939C(void)
         }
         break;
     case 11:
-        if (sub_800A520() == TRUE && !IsTextPrinterActive(0) && --gBattleCommunication[1] == 0)
+        if (IsLinkTaskFinished() == TRUE && !IsTextPrinterActive(0) && --gBattleCommunication[1] == 0)
         {
             if (gMain.field_439_x4)
             {
@@ -2601,7 +2601,7 @@ static void sub_803939C(void)
         {
             if (gMain.field_439_x4)
             {
-                if (sub_800A520() == TRUE)
+                if (IsLinkTaskFinished() == TRUE)
                 {
                     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
                     gBattleCommunication[1] = 0x20;

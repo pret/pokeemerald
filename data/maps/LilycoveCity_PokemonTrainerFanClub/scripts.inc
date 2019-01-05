@@ -110,7 +110,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C8DA:: @ 821C8DA
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F1
 	clearflag FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER
-	clearflag FLAG_0x0D2
+	clearflag FLAG_FAN_CLUB_STRENGTH_SHARED
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F1:: @ 821C8F1
@@ -499,8 +499,8 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD71:: @ 821CD71
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD7B:: @ 821CD7B
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0D2, LilycoveCity_PokemonTrainerFanClub_EventScript_21CEED
-	goto_if_unset FLAG_0x0D2, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90
+	goto_if_set FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CEED
+	goto_if_unset FLAG_FAN_CLUB_STRENGTH_SHARED, LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
@@ -594,7 +594,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CED8:: @ 821CED8
 	setvar VAR_0x8004, 8
 	special BufferStreakTrainerText
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281D40, MSGBOX_DEFAULT
-	setflag FLAG_0x0D2
+	setflag FLAG_FAN_CLUB_STRENGTH_SHARED
 	release
 	end
 
@@ -859,4 +859,3 @@ LilycoveCity_PokemonTrainerFanClub_Text_21DF51: @ 821DF51
 	.string "True strength is…!\n"
 	.string "… …\p"
 	.string "Actually, I have no idea, either.$"
-

@@ -215,7 +215,7 @@ static void sub_80AF234(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_800A520())
+        if (!IsLinkTaskFinished())
         {
             if (++task->data[1] > 1800)
                 sub_8011170(0x6000);
@@ -248,7 +248,7 @@ void sub_80AF2B4(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             task->data[0]++;
         }
@@ -498,7 +498,7 @@ static bool32 sub_80AF71C(void)
         return FALSE;
 }
 
-void sub_80AF734(void)
+void DoWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -509,7 +509,7 @@ void sub_80AF734(void)
     CreateTask(sub_80AFA0C, 10);
 }
 
-void sp13E_warp_to_last_warp(void)
+void DoDiveWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
@@ -529,16 +529,16 @@ void sub_80AF79C(void)
     CreateTask(sub_80AFA0C, 10);
 }
 
-void sub_80AF7D0(void)
+void DoDoorWarp(void)
 {
     ScriptContext2_Enable();
     gFieldCallback = mapldr_default;
     CreateTask(sub_80AFA88, 10);
 }
 
-void sp13F_fall_to_last_warp(void)
+void DoFallWarp(void)
 {
-    sp13E_warp_to_last_warp();
+    DoDiveWarp();
     gFieldCallback = sub_80B6B68;
 }
 

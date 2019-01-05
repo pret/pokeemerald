@@ -1145,7 +1145,7 @@ static void LinkPartnerHandleDrawTrainerPic(void)
 
     DecompressTrainerBackPic(trainerPicId, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80, GetBattlerSpriteSubpriority(gActiveBattler));
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80, GetBattlerSpriteSubpriority(gActiveBattler));
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = 240;

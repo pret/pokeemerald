@@ -210,6 +210,7 @@ struct UnkRfuStruct_8010A14
 
 extern struct UnkRfuStruct_1 gUnknown_03004140;
 extern struct UnkRfuStruct_2 gUnknown_03005000;
+extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
 u32 sub_800BEC0(void);
@@ -279,5 +280,7 @@ void sub_8011DE0(u32 arg0);
 u8 sub_801100C(int a0);
 void sub_800EF7C(void);
 bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
+s32 sub_800E87C(u8 idx);
+void sub_8011BA4(void);
 
 #endif //GUARD_LINK_RFU_H

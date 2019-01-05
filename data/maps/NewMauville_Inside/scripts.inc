@@ -22,9 +22,9 @@ NewMauville_Inside_EventScript_237407:: @ 8237407
 NewMauville_Inside_MapScript1_23741B: @ 823741B
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
-	call_if_unset FLAG_0x1C1, NewMauville_Inside_EventScript_237441
-	call_if_unset FLAG_0x1C2, NewMauville_Inside_EventScript_237445
-	call_if_unset FLAG_0x1C3, NewMauville_Inside_EventScript_237449
+	call_if_unset FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE, NewMauville_Inside_EventScript_237441
+	call_if_unset FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE, NewMauville_Inside_EventScript_237445
+	call_if_unset FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE, NewMauville_Inside_EventScript_237449
 	end
 
 NewMauville_Inside_EventScript_237441:: @ 8237441
@@ -196,12 +196,12 @@ NewMauville_Inside_EventScript_2377AF:: @ 82377AF
 	goto_if_eq NewMauville_Inside_EventScript_2377F3
 	compare VAR_RESULT, 5
 	goto_if_eq NewMauville_Inside_EventScript_2377F3
-	setflag FLAG_0x1C1
+	setflag FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE
 	release
 	end
 
 NewMauville_Inside_EventScript_2377F3:: @ 82377F3
-	setflag FLAG_0x1C1
+	setflag FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE
 	goto NewMauville_Inside_EventScript_27376D
 	end
 
@@ -223,12 +223,12 @@ NewMauville_Inside_EventScript_2377FC:: @ 82377FC
 	goto_if_eq NewMauville_Inside_EventScript_237840
 	compare VAR_RESULT, 5
 	goto_if_eq NewMauville_Inside_EventScript_237840
-	setflag FLAG_0x1C2
+	setflag FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE
 	release
 	end
 
 NewMauville_Inside_EventScript_237840:: @ 8237840
-	setflag FLAG_0x1C2
+	setflag FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE
 	goto NewMauville_Inside_EventScript_27376D
 	end
 
@@ -250,12 +250,12 @@ NewMauville_Inside_EventScript_237849:: @ 8237849
 	goto_if_eq NewMauville_Inside_EventScript_23788D
 	compare VAR_RESULT, 5
 	goto_if_eq NewMauville_Inside_EventScript_23788D
-	setflag FLAG_0x1C3
+	setflag FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE
 	release
 	end
 
 NewMauville_Inside_EventScript_23788D:: @ 823788D
-	setflag FLAG_0x1C3
+	setflag FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE
 	goto NewMauville_Inside_EventScript_27376D
 	end
 
@@ -275,4 +275,3 @@ NewMauville_Inside_Text_237932: @ 8237932
 	.string "… … … … … … … …\p"
 	.string "The generator appears to have\n"
 	.string "stopped…$"
-

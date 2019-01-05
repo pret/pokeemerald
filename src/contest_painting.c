@@ -20,9 +20,6 @@
 #include "window.h"
 #include "constants/rgb.h"
 
-extern u8 gUnknown_02039F5C;
-extern u8 gUnknown_02039F5D;
-
 extern u16 (*gUnknown_03006190)[][32];
 extern struct ContestWinner *gUnknown_030061C0;
 extern u16 *gContestPaintingMonPalette;

@@ -255,6 +255,6 @@ void rfu_REQ_recvData(void);
 void rfu_UNI_readySendData(u8 a0);
 void rfu_UNI_clearRecvNewDataFlag(u8 a0);
 void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
-void rfu_NI_setSendData(u8, u8, u8 *, u8);
+void rfu_NI_setSendData(u8, u8, const void *, u32);
 
 #endif // GUARD_LIBRFU_H

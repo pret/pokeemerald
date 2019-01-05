@@ -7,7 +7,7 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	msgbox GraniteCave_StevensRoom_Text_22DD5A, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 274
 	call GraniteCave_StevensRoom_EventScript_2723E4
-	setflag FLAG_0x0BD
+	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_22DDBD, MSGBOX_DEFAULT
 	giveitem_std ITEM_TM47
 	compare VAR_RESULT, 0
@@ -20,7 +20,7 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x131
+	setflag FLAG_REGISTERED_STEVEN_POKENAV
 	msgbox GraniteCave_StevensRoom_Text_22DF8C, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, 2

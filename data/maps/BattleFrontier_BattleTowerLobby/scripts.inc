@@ -15,7 +15,7 @@ BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
 	special CallApprenticeFunction
 	compare VAR_0x8004, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_23E6B5
-	goto_if_set FLAG_0x934, BattleFrontier_BattleTowerLobby_EventScript_23E6C1
+	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, BattleFrontier_BattleTowerLobby_EventScript_23E6C1
 
 BattleFrontier_BattleTowerLobby_EventScript_23E6B5:: @ 823E6B5
 	clearflag FLAG_HIDE_APPRENTICE
@@ -120,7 +120,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7E2:: @ 823E7E2
 BattleFrontier_BattleTowerLobby_EventScript_23E7F2:: @ 823E7F2
 	compare VAR_FRONTIER_BATTLE_MODE, 2
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23E81E
-	goto_if_set FLAG_0x152, BattleFrontier_BattleTowerLobby_EventScript_23E81E
+	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerLobby_EventScript_23E81E
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
@@ -398,7 +398,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC08:: @ 823EC08
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, 0
-	clearflag FLAG_0x152
+	clearflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_240A8B, MSGBOX_DEFAULT
 
@@ -744,7 +744,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
 	compare VAR_RESULT, 6
 	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_23F108
 	call BattleFrontier_BattleTowerLobby_EventScript_23F135
-	clearflag FLAG_0x077
+	clearflag FLAG_CANCEL_BATTLE_ROOM_CHALLENGE
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 255, 1, 6
 	setvar VAR_TEMP_0, 0
 	waitstate

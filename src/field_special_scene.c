@@ -303,7 +303,7 @@ void Task_HandlePorthole(u8 taskId)
         FlagClear(0x4001);
         FlagClear(0x4000);
         SetWarpDestinationToDynamicWarp(0);
-        sp13E_warp_to_last_warp();
+        DoDiveWarp();
         DestroyTask(taskId);
         break;
     }

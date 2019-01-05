@@ -30,7 +30,7 @@ DesertRuins_EventScript_22D993:: @ 822D993
 
 DesertRuins_MapScript1_22D9CA: @ 822D9CA
 	setflag FLAG_LANDMARK_DESERT_RUINS
-	call_if_unset FLAG_0x1BB, DesertRuins_EventScript_22D9D7
+	call_if_unset FLAG_DEFEATED_REGIROCK, DesertRuins_EventScript_22D9D7
 	end
 
 DesertRuins_EventScript_22D9D7:: @ 822D9D7
@@ -78,12 +78,12 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 	goto_if_eq DesertRuins_EventScript_22DA52
 	compare VAR_RESULT, 5
 	goto_if_eq DesertRuins_EventScript_22DA52
-	setflag FLAG_0x1BB
+	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end
 
 DesertRuins_EventScript_22DA49:: @ 822DA49
-	setflag FLAG_0x1BB
+	setflag FLAG_DEFEATED_REGIROCK
 	goto DesertRuins_EventScript_27376D
 	end
 

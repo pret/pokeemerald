@@ -913,7 +913,7 @@ static void sub_80586F8(void)
     }
     else
     {
-        if (sub_800A520())
+        if (IsLinkTaskFinished())
         {
             m4aSongNumStop(SE_HINSI);
             gMain.inBattle = 0;
@@ -932,7 +932,7 @@ void sub_80587B0(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (sub_800A520())
+            if (IsLinkTaskFinished())
             {
                 if (gWirelessCommType == 0)
                     sub_800AC34();
@@ -2335,18 +2335,18 @@ static void PlayerHandleDrawTrainerPic(void)
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER && gPartnerTrainerId < TRAINER_CUSTOM_PARTNER)
         {
             xPos = 90;
-            yPos = (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 80;
+            yPos = (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 80;
         }
         else
         {
-            yPos = (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80;
+            yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
         }
 
     }
     else
     {
         xPos = 80;
-        yPos = (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80;
+        yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
 
     // Use front pic table for any tag battles unless your partner is Steven.
@@ -2409,7 +2409,7 @@ static void PlayerHandleTrainerSlide(void)
 
     DecompressTrainerBackPic(trainerPicId, gActiveBattler);
     SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
-    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 80, (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80, 30);
+    gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, 80, (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80, 30);
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;

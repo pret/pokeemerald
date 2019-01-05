@@ -455,7 +455,7 @@ SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
 
 SecretBase_RedCave1_EventScript_275BAB:: @ 8275BAB
 	closemessage
-	setflag FLAG_0x060
+	setflag FLAG_RECEIVED_SECRET_POWER
 	special sub_80E91F8
 	waitstate
 	end

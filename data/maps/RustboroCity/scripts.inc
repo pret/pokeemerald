@@ -77,7 +77,7 @@ RustboroCity_EventScript_1E07AC:: @ 81E07AC
 	goto RustboroCity_EventScript_1E07BD
 
 RustboroCity_EventScript_1E07BD:: @ 81E07BD
-	setflag FLAG_0x130
+	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
 	special sp106_CreateStartMenu
 	waitstate
 	switch VAR_RESULT
@@ -134,7 +134,7 @@ RustboroCity_Movement_1E085D: @ 81E085D
 RustboroCity_EventScript_1E085F:: @ 81E085F
 	lock
 	faceplayer
-	goto_if_set FLAG_0x08E, RustboroCity_EventScript_1E0874
+	goto_if_set FLAG_DEVON_GOODS_STOLEN, RustboroCity_EventScript_1E0874
 	msgbox RustboroCity_Text_1E123F, MSGBOX_DEFAULT
 	release
 	end
@@ -171,7 +171,7 @@ RustboroCity_EventScript_1E08A8:: @ 81E08A8
 RustboroCity_EventScript_1E08B2:: @ 81E08B2
 	lock
 	faceplayer
-	goto_if_set FLAG_0x0BC, RustboroCity_EventScript_1E08C7
+	goto_if_set FLAG_RECEIVED_POKENAV, RustboroCity_EventScript_1E08C7
 	msgbox RustboroCity_Text_1E1520, MSGBOX_DEFAULT
 	release
 	end
@@ -301,7 +301,7 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	removeobject 9
 	setobjectxyperm 9, 30, 10
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
-	setflag FLAG_0x08E
+	setflag FLAG_DEVON_GOODS_STOLEN
 	setvar VAR_0x405A, 2
 	setvar VAR_RUSTURF_TUNNEL_STATE, 2
 	setvar VAR_0x406F, 1
@@ -448,7 +448,7 @@ RustboroCity_Movement_1E0AD5: @ 81E0AD5
 RustboroCity_EventScript_1E0ADD:: @ 81E0ADD
 	lock
 	faceplayer
-	goto_if_set FLAG_0x08F, RustboroCity_EventScript_1E0AF2
+	goto_if_set FLAG_RECOVERED_DEVON_GOODS, RustboroCity_EventScript_1E0AF2
 	msgbox RustboroCity_Text_1E1904, MSGBOX_DEFAULT
 	release
 	end
@@ -492,7 +492,7 @@ RustboroCity_EventScript_1E0B2E:: @ 81E0B2E
 	call_if_eq RustboroCity_EventScript_1E0BC7
 	compare VAR_TEMP_1, 3
 	call_if_eq RustboroCity_EventScript_1E0BF3
-	setflag FLAG_0x09F
+	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
 	setvar VAR_0x405A, 3
 	moveobjectoffscreen 9
 	msgbox RustboroCity_Text_1E183E, MSGBOX_DEFAULT
@@ -594,7 +594,7 @@ RustboroCity_EventScript_1E0C5B:: @ 81E0C5B
 	call_if_eq RustboroCity_EventScript_1E0CD3
 	msgbox RustboroCity_Text_1E1A21, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_0x090
+	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setvar VAR_0x405A, 5
 	delay 30
@@ -669,7 +669,7 @@ RustboroCity_EventScript_1E0D96:: @ 81E0D96
 
 RustboroCity_EventScript_1E0DB8:: @ 81E0DB8
 	lockall
-	call_if_unset FLAG_0x120, RustboroCity_EventScript_1E0DD1
+	call_if_unset FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_1E0DD1
 	applymovement 14, RustboroCity_Movement_27259E
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
@@ -828,9 +828,9 @@ RustboroCity_EventScript_1E0FF3:: @ 81E0FF3
 	end
 
 RustboroCity_EventScript_1E100B:: @ 81E100B
-	goto_if_set FLAG_0x0D3, RustboroCity_EventScript_1E10C1
-	goto_if_set FLAG_0x120, RustboroCity_EventScript_1E1070
-	setflag FLAG_0x120
+	goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_1E10C1
+	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_1E1070
+	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_1E1A49, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -839,7 +839,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0FD
+	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
 	setvar VAR_0x8008, 0
@@ -882,26 +882,26 @@ RustboroCity_EventScript_1E10D6:: @ 81E10D6
 
 RustboroCity_EventScript_1E10DB:: @ 81E10DB
 	trainerbattle_no_intro TRAINER_MAY_14, RustboroCity_Text_1E1CC1
-	setflag FLAG_0x0D3
+	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E10EE:: @ 81E10EE
 	trainerbattle_no_intro TRAINER_MAY_15, RustboroCity_Text_1E1CC1
-	setflag FLAG_0x0D3
+	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E1101:: @ 81E1101
 	trainerbattle_no_intro TRAINER_MAY_10, RustboroCity_Text_1E1CC1
-	setflag FLAG_0x0D3
+	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_1E10C1
 	end
 
 RustboroCity_EventScript_1E1114:: @ 81E1114
-	goto_if_set FLAG_0x0D3, RustboroCity_EventScript_1E11C0
-	goto_if_set FLAG_0x120, RustboroCity_EventScript_1E1174
-	setflag FLAG_0x120
+	goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_1E11C0
+	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_1E1174
+	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_1E1D7D, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -910,7 +910,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	waitfanfare
 	closemessage
 	delay 30
-	setflag FLAG_0x0FD
+	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_0x405A, 8
 	setvar VAR_0x4063, 2
 	msgbox RustboroCity_Text_1E1E34, MSGBOX_YESNO
@@ -946,19 +946,19 @@ RustboroCity_EventScript_1E11C0:: @ 81E11C0
 
 RustboroCity_EventScript_1E11D5:: @ 81E11D5
 	trainerbattle_no_intro TRAINER_BRENDAN_10, RustboroCity_Text_1E1FE9
-	setflag FLAG_0x0D3
+	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_1E11C0
 	end
 
 RustboroCity_EventScript_1E11E8:: @ 81E11E8
 	trainerbattle_no_intro TRAINER_BRENDAN_12, RustboroCity_Text_1E1FE9
-	setflag FLAG_0x0D3
+	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_1E11C0
 	end
 
 RustboroCity_EventScript_1E11FB:: @ 81E11FB
 	trainerbattle_no_intro TRAINER_BRENDAN_11, RustboroCity_Text_1E1FE9
-	setflag FLAG_0x0D3
+	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_1E11C0
 	end
 
@@ -1298,4 +1298,3 @@ RustboroCity_Text_1E249D: @ 81E249D
 	.string "they'll both challenge you.\p"
 	.string "Don't you think it'd be cool if you\n"
 	.string "could beat two TRAINERS by yourself?$"
-

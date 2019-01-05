@@ -15,7 +15,7 @@ MarineCave_End_EventScript_23AFF4:: @ 823AFF4
 	return
 
 MarineCave_End_MapScript1_23B008: @ 823B008
-	call_if_unset FLAG_0x1BE, MarineCave_End_EventScript_23B012
+	call_if_unset FLAG_DEFEATED_KYOGRE, MarineCave_End_EventScript_23B012
 	end
 
 MarineCave_End_EventScript_23B012:: @ 823B012
@@ -48,13 +48,13 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	compare VAR_RESULT, 5
 	goto_if_eq MarineCave_End_EventScript_23B092
 	setvar VAR_0x4039, 1
-	setflag FLAG_0x1BE
+	setflag FLAG_DEFEATED_KYOGRE
 	releaseall
 	end
 
 MarineCave_End_EventScript_23B084:: @ 823B084
 	setvar VAR_0x4039, 1
-	setflag FLAG_0x1BE
+	setflag FLAG_DEFEATED_KYOGRE
 	goto MarineCave_End_EventScript_27376D
 	end
 

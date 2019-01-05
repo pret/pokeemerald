@@ -610,7 +610,7 @@ void sub_80E9608(const struct MapPosition *position, const struct MapEvents *eve
     }
 }
 
-void sub_80E9668(const struct MapPosition *position, const struct MapEvents *events)
+void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEvents *events)
 {
     sub_80E9608(position, events);
     sub_80E8B6C();
@@ -1032,7 +1032,7 @@ void sub_80E9FFC(u8 taskId)
 void sub_80EA06C(u8 taskId)
 {
     DisplayYesNoMenu();
-    sub_8121F68(taskId, &gUnknown_0858D058);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_0858D058);
 }
 
 void sub_80EA08C(u8 taskId)
@@ -1170,7 +1170,7 @@ void sub_80EA354(void)
     gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
 }
 
-void sub_80EA3E4(u8 taskId)
+void SecretBasePerStepCallback(u8 taskId)
 {
     s16 x;
     s16 y;

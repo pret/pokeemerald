@@ -31,7 +31,7 @@ IslandCave_EventScript_238E62:: @ 8238E62
 IslandCave_MapScript1_238E99: @ 8238E99
 	setflag FLAG_LANDMARK_ISLAND_CAVE
 	call IslandCave_EventScript_238F45
-	call_if_unset FLAG_0x1BC, IslandCave_EventScript_238EAB
+	call_if_unset FLAG_DEFEATED_REGICE, IslandCave_EventScript_238EAB
 	end
 
 IslandCave_EventScript_238EAB:: @ 8238EAB
@@ -107,12 +107,12 @@ IslandCave_EventScript_238F58:: @ 8238F58
 	goto_if_eq IslandCave_EventScript_238FA8
 	compare VAR_RESULT, 5
 	goto_if_eq IslandCave_EventScript_238FA8
-	setflag FLAG_0x1BC
+	setflag FLAG_DEFEATED_REGICE
 	release
 	end
 
 IslandCave_EventScript_238F9F:: @ 8238F9F
-	setflag FLAG_0x1BC
+	setflag FLAG_DEFEATED_REGICE
 	goto IslandCave_EventScript_27376D
 	end
 

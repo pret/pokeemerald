@@ -222,13 +222,17 @@ struct ContestPokemon
 }; // wow
 
 extern struct ContestPokemon gContestMons[4];
-extern u8 gUnknown_02039F24;
+extern u8 gContestMonPartyIndex;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
-extern u8 gUnknown_02039F30;
+extern u8 gUnknown_02039F2B;
+extern u8 gNumLinkContestPlayers;
+extern u8 gHighestRibbonRank;
 extern u8 gContestFinalStandings[4];
 extern u8 gContestPlayerMonIndex;
 extern s16 gUnknown_02039F08[4];
+extern s16 gUnknown_02039F10[4];
+extern s16 gUnknown_02039F18[4];
 extern s16 gContestMonConditions[4];
 extern u8 gIsLinkContest;
 extern struct ContestWinner gUnknown_02039F3C;
@@ -434,5 +438,23 @@ void SetStartledString(u8 a, u8 b);
 s8 Contest_GetMoveExcitement(u16);
 u8 sub_80DAE0C(struct Pokemon *);
 void sub_80DEDA8(u8);
+void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
+void sub_80DB09C(u8 contestCategory);
+void sub_80DCE58(u8);
+void sub_80DFA08(struct ContestPokemon *mon, int language);
+void sub_80DBED4(void);
+u8 sub_80DEFA8(u8, u8);
+
+// contest link
+void sub_81D9DE4(u8 taskId);
+void sub_80FCF40(u8);
+void sub_80FCFD0(u8);
+void sub_80F8714(u8);
+bool32 sub_80FC670(s16 *);
+bool32 sub_80FC4F4(void *, u16);
+bool8 sub_80FC55C(void);
+bool8 sub_80FC530(u8);
+u8 sub_80F86E0(u8 *);
+
 
 #endif //GUARD_CONTEST_H

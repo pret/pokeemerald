@@ -39,8 +39,8 @@ MossdeepCity_StevensHouse_EventScript_2227CA:: @ 82227CA
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_222936, MSGBOX_DEFAULT
 	giveitem_std ITEM_HM08
-	setflag FLAG_0x07B
-	setflag FLAG_0x12E
+	setflag FLAG_RECEIVED_HM08
+	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_222A0E, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -129,7 +129,7 @@ MossdeepCity_StevensHouse_EventScript_2228EB:: @ 82228EB
 
 MossdeepCity_StevensHouse_EventScript_222901:: @ 8222901
 	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
-	setflag FLAG_0x12A
+	setflag FLAG_RECEIVED_BELDUM
 	releaseall
 	end
 
@@ -149,7 +149,7 @@ MossdeepCity_StevensHouse_EventScript_22291B:: @ 822291B
 
 MossdeepCity_StevensHouse_EventScript_222926:: @ 8222926
 	giveitem_std ITEM_HM08, 1, 1
-	setflag FLAG_0x07B
+	setflag FLAG_RECEIVED_HM08
 	end
 
 MossdeepCity_StevensHouse_Text_222936: @ 8222936

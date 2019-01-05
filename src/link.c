@@ -317,7 +317,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
-    if (FlagGet(FLAG_0x87F))
+    if (FlagGet(FLAG_IS_CHAMPION))
     {
         gLocalLinkPlayer.name[8] |= 0x10;
     }
@@ -1080,7 +1080,7 @@ bool8 sub_800A4D8(u8 a0)
     return FALSE;
 }
 
-bool8 sub_800A520(void)
+bool8 IsLinkTaskFinished(void)
 {
     if (gWirelessCommType == TRUE)
     {

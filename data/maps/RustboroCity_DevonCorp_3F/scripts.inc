@@ -54,7 +54,7 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	message RustboroCity_DevonCorp_3F_Text_212820
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
-	setflag FLAG_0x0BC
+	setflag FLAG_RECEIVED_POKENAV
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
 	msgbox RustboroCity_DevonCorp_3F_Text_212837, MSGBOX_DEFAULT
 	closemessage
@@ -150,8 +150,8 @@ RustboroCity_DevonCorp_3F_Movement_212566: @ 8212566
 RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 	lock
 	faceplayer
-	goto_if_set FLAG_0x110, RustboroCity_DevonCorp_3F_EventScript_2125CC
-	goto_if_set FLAG_0x0BD, RustboroCity_DevonCorp_3F_EventScript_212595
+	goto_if_set FLAG_RECEIVED_EXP_SHARE, RustboroCity_DevonCorp_3F_EventScript_2125CC
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A09, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
@@ -164,7 +164,7 @@ RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 	giveitem_std ITEM_EXP_SHARE
 	compare VAR_RESULT, 0
 	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_272054
-	setflag FLAG_0x110
+	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_2725A2
@@ -183,7 +183,7 @@ RustboroCity_DevonCorp_3F_EventScript_2125CC:: @ 82125CC
 RustboroCity_DevonCorp_3F_EventScript_2125E1:: @ 82125E1
 	lock
 	faceplayer
-	goto_if_set FLAG_0x100, RustboroCity_DevonCorp_3F_EventScript_2125F6
+	goto_if_set FLAG_RECEIVED_REPEAT_BALL, RustboroCity_DevonCorp_3F_EventScript_2125F6
 	msgbox RustboroCity_DevonCorp_3F_Text_212E41, MSGBOX_DEFAULT
 	release
 	end

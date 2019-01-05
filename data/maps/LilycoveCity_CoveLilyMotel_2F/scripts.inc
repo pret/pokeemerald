@@ -55,10 +55,10 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_218744:: @ 8218744
 LilycoveCity_CoveLilyMotel_2F_EventScript_21874D:: @ 821874D
 	lock
 	faceplayer
-	goto_if_set FLAG_0x1CE, LilycoveCity_CoveLilyMotel_2F_EventScript_21876A
+	goto_if_set FLAG_MET_SCOTT_IN_LILYCOVE, LilycoveCity_CoveLilyMotel_2F_EventScript_21876A
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_218ACF, MSGBOX_DEFAULT
 	addvar VAR_0x40D1, 1
-	setflag FLAG_0x1CE
+	setflag FLAG_MET_SCOTT_IN_LILYCOVE
 	release
 	end
 

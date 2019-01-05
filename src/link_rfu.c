@@ -2140,7 +2140,7 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, s32 r
     data->unk_00.unk_00_4 = 0;
     data->unk_00.unk_00_5 = 0;
     data->unk_00.unk_00_6 = 0;
-    data->unk_00.unk_00_7 = FlagGet(FLAG_0x87F);
+    data->unk_00.unk_00_7 = FlagGet(FLAG_IS_CHAMPION);
     data->unk_00.unk_01_0 = IsNationalPokedexEnabled();
     data->unk_00.unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
@@ -4123,7 +4123,7 @@ void sub_8010AAC(u8 taskId)
                 gTasks[taskId].data[0]++;
             break;
         case 5:
-            if (sub_800A520() && GetBlockReceivedStatus() & 1)
+            if (IsLinkTaskFinished() && GetBlockReceivedStatus() & 1)
             {
                 CpuFill16(0, gBlockRecvBuffer, sizeof(struct UnkRfuStruct_8010A14));
                 ResetBlockReceivedFlag(0);
@@ -4162,7 +4162,7 @@ void sub_8010D0C(u8 taskId)
             }
             break;
         case 1:
-            if (sub_800A520())
+            if (IsLinkTaskFinished())
                 gTasks[taskId].data[0]++;
             break;
         case 2:

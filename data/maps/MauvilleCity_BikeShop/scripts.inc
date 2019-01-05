@@ -4,8 +4,8 @@ MauvilleCity_BikeShop_MapScripts:: @ 820EBBB
 MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	lock
 	faceplayer
-	goto_if_set FLAG_0x05A, MauvilleCity_BikeShop_EventScript_20EC94
-	goto_if_set FLAG_0x059, MauvilleCity_BikeShop_EventScript_20EBF7
+	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_20EC94
+	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_20EBF7
 	msgbox MauvilleCity_BikeShop_Text_20EE22, MSGBOX_DEFAULT
 	msgbox MauvilleCity_BikeShop_Text_20EE99, MSGBOX_YESNO
 	compare VAR_RESULT, 1
@@ -32,13 +32,13 @@ MauvilleCity_BikeShop_EventScript_20EC16:: @ 820EC16
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC3D:: @ 820EC3D
-	setflag FLAG_0x059
+	setflag FLAG_DECLINED_BIKE
 	msgbox MauvilleCity_BikeShop_Text_20EEE8, MSGBOX_DEFAULT
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_20EC4A:: @ 820EC4A
-	setflag FLAG_0x05A
+	setflag FLAG_RECEIVED_BIKE
 	goto MauvilleCity_BikeShop_EventScript_20EC16
 	end
 

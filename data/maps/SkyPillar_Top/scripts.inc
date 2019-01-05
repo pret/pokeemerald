@@ -28,7 +28,7 @@ SkyPillar_Top_EventScript_2396FD:: @ 82396FD
 	return
 
 SkyPillar_Top_EventScript_239705:: @ 8239705
-	call_if_unset FLAG_0x1C0, SkyPillar_Top_EventScript_23970F
+	call_if_unset FLAG_DEFEATED_RAYQUAZA, SkyPillar_Top_EventScript_23970F
 	return
 
 SkyPillar_Top_EventScript_23970F:: @ 823970F
@@ -61,12 +61,12 @@ SkyPillar_Top_EventScript_239722:: @ 8239722
 	goto_if_eq SkyPillar_Top_EventScript_239771
 	compare VAR_RESULT, 5
 	goto_if_eq SkyPillar_Top_EventScript_239771
-	setflag FLAG_0x1C0
+	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall
 	end
 
 SkyPillar_Top_EventScript_239768:: @ 8239768
-	setflag FLAG_0x1C0
+	setflag FLAG_DEFEATED_RAYQUAZA
 	goto SkyPillar_Top_EventScript_23977C
 	end
 

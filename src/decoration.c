@@ -1629,7 +1629,7 @@ void sub_8128950(u8 taskId)
 void sub_81289D0(u8 taskId)
 {
     DisplayYesNoMenu();
-    sub_8121F68(taskId, &gUnknown_085A72C4);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_085A72C4);
 }
 
 void sub_81289F0(u8 taskId)
@@ -1694,7 +1694,7 @@ void sub_8128AAC(u8 taskId)
 void sub_8128B80(u8 taskId)
 {
     DisplayYesNoMenu();
-    sub_8121F68(taskId, &gUnknown_085A72CC);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_085A72CC);
 }
 
 void sub_8128BA0(u8 taskId)
@@ -2589,7 +2589,7 @@ void sub_812A0E8(u8 taskId)
 void sub_812A1A0(u8 taskId)
 {
     DisplayYesNoMenu();
-    sub_8121F68(taskId, &gUnknown_085A7348);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_085A7348);
 }
 
 void sub_812A1C0(u8 taskId)
@@ -2602,7 +2602,7 @@ void sub_812A1C0(u8 taskId)
 void sub_812A1F0(u8 taskId)
 {
     DisplayYesNoMenu();
-    sub_8121F68(taskId, &gUnknown_085A7350);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_085A7350);
 }
 
 void sub_812A210(u8 taskId)
@@ -2726,7 +2726,7 @@ void sub_812A3D4(u8 taskId)
 void sub_812A458(u8 taskId)
 {
     DisplayYesNoMenu();
-    sub_8121F68(taskId, &gUnknown_085A741C);
+    DoYesNoFuncWithChoice(taskId, &gUnknown_085A741C);
 }
 
 void sub_812A478(u8 taskId)

@@ -9,7 +9,7 @@ DewfordTown_MapScript1_1E950D: @ 81E950D
 DewfordTown_EventScript_1E9511:: @ 81E9511
 	lock
 	faceplayer
-	goto_if_unset FLAG_0x0BD, DewfordTown_EventScript_1E9585
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_1E9585
 	message DewfordTown_Text_1E9C8A
 	waitmessage
 	multichoicedefault 21, 6, 0, 2, 0
@@ -73,7 +73,7 @@ DewfordTown_EventScript_1E95CC:: @ 81E95CC
 DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	lock
 	faceplayer
-	goto_if_set FLAG_0x101, DewfordTown_EventScript_1E962A
+	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_1E962A
 	msgbox DewfordTown_Text_1E9DD1, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq DewfordTown_EventScript_1E95FF
@@ -84,7 +84,7 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 DewfordTown_EventScript_1E95FF:: @ 81E95FF
 	msgbox DewfordTown_Text_1E9E14, MSGBOX_DEFAULT
 	giveitem_std ITEM_OLD_ROD
-	setflag FLAG_0x101
+	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_1E9E65, MSGBOX_DEFAULT
 	release
 	end
@@ -174,8 +174,8 @@ DewfordTown_EventScript_1E96E7:: @ 81E96E7
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat 4, MAP_DEWFORD_TOWN
-	call_if_unset FLAG_0x095, DewfordTown_EventScript_1E9790
-	call_if_set FLAG_0x095, DewfordTown_EventScript_1E9799
+	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_1E9790
+	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_1E9799
 	closemessage
 	copyvar VAR_0x4096, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_DEWFORD_TOWN

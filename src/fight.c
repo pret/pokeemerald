@@ -508,8 +508,8 @@ void sub_810CF30(struct Sprite *sprite)
     sprite->pos1.x = GetBattlerSpriteCoord(battler, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(battler, 3);
 
-    xMod = sub_80A861C(battler, 1) / 2;
-    yMod = sub_80A861C(battler, 0) / 4;
+    xMod = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_WIDTH) / 2;
+    yMod = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_HEIGHT) / 4;
 
     x = Random2() % xMod;
     y = Random2() % yMod;

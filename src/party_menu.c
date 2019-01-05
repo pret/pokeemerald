@@ -2799,7 +2799,7 @@ static void sub_81B1CD0(struct Pokemon *mon, u16 item, u8 c)
 {
     GetMonNickname(mon, gStringVar1);
     CopyItemName(item, gStringVar2);
-    StringExpandPlaceholders(gStringVar4, gText_RecievedItemFromPkmn);
+    StringExpandPlaceholders(gStringVar4, gText_ReceivedItemFromPkmn);
     sub_81B1B5C(gStringVar4, c);
     schedule_bg_copy_tilemap_to_vram(2);
 }
@@ -4579,7 +4579,7 @@ static void CursorCb_Register(u8 taskId)
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
 
-    switch (sub_807A8D0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, species2, species, obedience))
+    switch (sub_807A8D0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), species2, species, obedience))
     {
     case 1:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
@@ -4605,7 +4605,7 @@ static void CursorCb_Trade1(u8 taskId)
     u16 species2 = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gUnknown_0203CEC8.unk9], MON_DATA_OBEDIENCE);
-    u32 stringId = sub_807A7E0(*(u32 *)sub_800F7DC() /* dirty cast, probably needs to be changed */, *(u32 *)&gUnknown_02022C38 /* dirty cast, probably needs to be changed */, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
+    u32 stringId = sub_807A7E0(*(struct UnkLinkRfuStruct_02022B14Substruct *)sub_800F7DC(), gUnknown_02022C38, species2, gUnknown_02022C3C, gUnknown_02022C3E, species, obedience);
 
     if (stringId != 0)
     {
@@ -7257,10 +7257,10 @@ static void sub_81B9424(u8 taskId)
 
 static void sub_81B9470(void)
 {
-    gUnknown_02039F24 = GetCursorSelectionMonId();
-    if (gUnknown_02039F24 >= PARTY_SIZE)
-        gUnknown_02039F24 = 0xFF;
-    gSpecialVar_0x8004 = gUnknown_02039F24;
+    gContestMonPartyIndex = GetCursorSelectionMonId();
+    if (gContestMonPartyIndex >= PARTY_SIZE)
+        gContestMonPartyIndex = 0xFF;
+    gSpecialVar_0x8004 = gContestMonPartyIndex;
     gFieldCallback2 = hm_add_c3_without_phase_2;
     SetMainCallback2(CB2_ReturnToField);
 }

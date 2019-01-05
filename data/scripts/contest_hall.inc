@@ -3,8 +3,8 @@ LilycoveCity_ContestLobby_EventScript_279CC5:: @ 8279CC5
 	faceplayer
 	compare VAR_0x408A, 0
 	goto_if_ne LilycoveCity_ContestLobby_EventScript_279D13
-	call_if_set FLAG_0x05F, LilycoveCity_ContestLobby_EventScript_279CEA
-	call_if_unset FLAG_0x05F, LilycoveCity_ContestLobby_EventScript_279CF3
+	call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_279CEA
+	call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_279CF3
 	goto LilycoveCity_ContestLobby_EventScript_279D5A
 	end
 
@@ -15,7 +15,7 @@ LilycoveCity_ContestLobby_EventScript_279CEA:: @ 8279CEA
 LilycoveCity_ContestLobby_EventScript_279CF3:: @ 8279CF3
 	msgbox LilycoveCity_ContestLobby_Text_27ADA7, MSGBOX_DEFAULT
 	giveitem_std ITEM_POKEBLOCK_CASE
-	setflag FLAG_0x05F
+	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	msgbox LilycoveCity_ContestLobby_Text_27AE47, MSGBOX_DEFAULT
 	return
 
@@ -1131,7 +1131,7 @@ LinkContestRoom1_EventScript_27ABCD:: @ 827ABCD
 	return
 
 LinkContestRoom1_EventScript_27ABCE:: @ 827ABCE
-	setflag FLAG_0x10E
+	setflag FLAG_CONTEST_SKETCH_CREATED
 	return
 
 LinkContestRoom1_EventScript_27ABD2:: @ 827ABD2

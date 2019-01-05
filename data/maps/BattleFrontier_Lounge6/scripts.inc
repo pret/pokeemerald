@@ -4,10 +4,10 @@ BattleFrontier_Lounge6_MapScripts:: @ 8264FEC
 BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	lock
 	faceplayer
-	goto_if_set FLAG_0x09C, BattleFrontier_Lounge6_EventScript_265083
+	goto_if_set FLAG_BATTLE_FRONTIER_TRADE_DONE, BattleFrontier_Lounge6_EventScript_265083
 	setvar VAR_0x8008, 3
 	copyvar VAR_0x8004, VAR_0x8008
-	specialvar VAR_RESULT, sub_807E73C
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox BattleFrontier_Lounge6_Text_26508D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -18,17 +18,17 @@ BattleFrontier_Lounge6_EventScript_264FED:: @ 8264FED
 	compare VAR_0x8004, 255
 	goto_if_eq BattleFrontier_Lounge6_EventScript_26506B
 	copyvar VAR_0x8005, VAR_0x800A
-	specialvar VAR_RESULT, sub_807E9D4
+	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne BattleFrontier_Lounge6_EventScript_265075
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
-	special sub_807EA10
-	special sub_807F0E4
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
 	waitstate
 	msgbox BattleFrontier_Lounge6_Text_265128, MSGBOX_DEFAULT
-	setflag FLAG_0x09C
+	setflag FLAG_BATTLE_FRONTIER_TRADE_DONE
 	release
 	end
 
@@ -78,4 +78,3 @@ BattleFrontier_Lounge6_Text_26520E: @ 826520E
 	.string "Giggle!\n"
 	.string "A SKITTY is so much cuter than I had\l"
 	.string "imagined. I'm delighted!$"
-

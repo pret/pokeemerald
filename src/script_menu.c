@@ -1416,7 +1416,7 @@ static void sub_80E2578(void)
     {
         gUnknown_03001124[temp] = 0;
         temp++;
-        if (FlagGet(FLAG_0x1D0) == TRUE)
+        if (FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL) == TRUE)
         {
             gUnknown_03001124[temp] = 1;
             temp++;
@@ -1431,15 +1431,15 @@ static void sub_80E2578(void)
             temp++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_0x1AE) == FALSE)
+        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_EON_TICKET) == FALSE)
         {
             gUnknown_03001124[temp] = 2;
             temp++;
-            FlagSet(FLAG_0x1AE);
+            FlagSet(FLAG_HAS_EON_TICKET);
         }
     }
 
-    if (CheckBagHasItem(ITEM_MYSTIC_TICKET, 1) == TRUE && FlagGet(FLAG_0x8E0) == TRUE)
+    if (CheckBagHasItem(ITEM_MYSTIC_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_NAVEL_ROCK) == TRUE)
     {
         if (gSpecialVar_0x8004 == 0)
         {
@@ -1447,15 +1447,15 @@ static void sub_80E2578(void)
             temp++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_0x1DB) == FALSE)
+        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_MYSTIC_TICKET) == FALSE)
         {
             gUnknown_03001124[temp] = 3;
             temp++;
-            FlagSet(FLAG_0x1DB);
+            FlagSet(FLAG_HAS_MYSTIC_TICKET);
         }
     }
 
-    if (CheckBagHasItem(ITEM_AURORA_TICKET, 1) == TRUE && FlagGet(FLAG_0x8D5) == TRUE)
+    if (CheckBagHasItem(ITEM_AURORA_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_BIRTH_ISLAND) == TRUE)
     {
         if (gSpecialVar_0x8004 == 0)
         {
@@ -1463,15 +1463,15 @@ static void sub_80E2578(void)
             temp++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_0x1AF) == FALSE)
+        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_AURORA_TICKET) == FALSE)
         {
             gUnknown_03001124[temp] = 4;
             temp++;
-            FlagSet(FLAG_0x1AF);
+            FlagSet(FLAG_HAS_AURORA_TICKET);
         }
     }
 
-    if (CheckBagHasItem(ITEM_OLD_SEA_MAP, 1) == TRUE && FlagGet(FLAG_0x8D6) == TRUE)
+    if (CheckBagHasItem(ITEM_OLD_SEA_MAP, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND) == TRUE)
     {
         if (gSpecialVar_0x8004 == 0)
         {
@@ -1479,18 +1479,18 @@ static void sub_80E2578(void)
             temp++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_0x1B0) == FALSE)
+        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_HAS_OLD_SEA_MAP) == FALSE)
         {
             gUnknown_03001124[temp] = 5;
             temp++;
-            FlagSet(FLAG_0x1B0);
+            FlagSet(FLAG_HAS_OLD_SEA_MAP);
         }
     }
 
     gUnknown_03001124[temp] = 6;
     temp++;
 
-    if (gSpecialVar_0x8004 == 0 && FlagGet(FLAG_0x1D0) == TRUE)
+    if (gSpecialVar_0x8004 == 0 && FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL) == TRUE)
     {
         count = temp;
     }

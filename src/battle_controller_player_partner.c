@@ -1310,19 +1310,19 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
     {
         trainerPicId = TRAINER_BACK_PIC_STEVEN;
         xPos = 90;
-        yPos = (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80;
+        yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
     else if (gPartnerTrainerId >= TRAINER_CUSTOM_PARTNER)
     {
         trainerPicId = gPartnerSpriteId;
         xPos = 90;
-        yPos = (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80;
+        yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
     else
     {
         trainerPicId = GetFrontierTrainerFrontSpriteId(gPartnerTrainerId);
         xPos = 32;
-        yPos = (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 80;
+        yPos = (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 80;
     }
 
     // Use back pic only if the partner is Steven

@@ -23,6 +23,7 @@
 #include "bg.h"
 #include "m4a.h"
 #include "window.h"
+#include "graphics.h"
 #include "constants/abilities.h"
 #include "daycare.h"
 #include "overworld.h"
@@ -52,11 +53,6 @@ struct EggHatchData
 };
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const u8 gBattleTextboxTiles[];
-extern const u8 gBattleTextboxTilemap[];
-extern const u8 gBattleTextboxPalette[];
-extern const u16 gTradeGba2_Pal[]; // palette, gameboy advance
-extern const u32 gTradeGba_Gfx[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];

@@ -66,6 +66,4 @@
 
 #define TOTAL_OBJ_TILE_COUNT 1024
 
-#define WIN_RANGE(a, b) (((a) << 8) | (b))
-
 #endif // GUARD_GBA_DEFINES

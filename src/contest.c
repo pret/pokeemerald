@@ -176,7 +176,7 @@ EWRAM_DATA s16 gUnknown_02039F08[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F10[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F18[4] = {0};
 EWRAM_DATA u8 gContestFinalStandings[4] = {0};
-EWRAM_DATA u8 gUnknown_02039F24 = 0;
+EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
 EWRAM_DATA u8 gUnknown_02039F26[4] = {0};
 EWRAM_DATA u8 gIsLinkContest = 0;
@@ -185,8 +185,8 @@ EWRAM_DATA u8 gIsLinkContest = 0;
 EWRAM_DATA u8 gUnknown_02039F2B = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
-EWRAM_DATA u8 gUnknown_02039F30 = 0;
-EWRAM_DATA u8 gUnknown_02039F31 = 0;
+EWRAM_DATA u8 gNumLinkContestPlayers = 0;
+EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources * gContestResources = NULL;
 EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
@@ -217,7 +217,6 @@ extern const u8 gText_0827D597[];
 extern const struct ContestPokemon gContestOpponents[96];
 extern const u8 gUnknown_085898A4[96];
 extern const struct CompressedSpriteSheet gUnknown_08587C00;
-extern const u8 gContest2Pal[];
 extern const struct SpriteTemplate gSpriteTemplate_8587BE8;
 extern const struct CompressedSpriteSheet gUnknown_08587C08;
 extern const struct CompressedSpritePalette gUnknown_08587C10;
@@ -474,14 +473,14 @@ void sub_80D7CB4(u8 taskId)
                     gTasks[taskId].data[0]++;
                     // fallthrough
                 case 1:
-                    if (sub_800A520())
+                    if (IsLinkTaskFinished())
                     {
                         sub_800ADF8();
                         gTasks[taskId].data[0]++;
                     }
                     return;
                 case 2:
-                    if (sub_800A520() != TRUE)
+                    if (IsLinkTaskFinished() != TRUE)
                         return;
                     gTasks[taskId].data[0]++;
                     break;
@@ -933,9 +932,9 @@ void sub_80D8A88(u8 taskId)
         {
             s32 i;
 
-            for (i = 0; i + gUnknown_02039F30 < 4; i++)
+            for (i = 0; i + gNumLinkContestPlayers < 4; i++)
             {
-                gContestResources->field_4[gUnknown_02039F30 + i].currMove = sub_80DB8B8(gUnknown_02039F30 + i);
+                gContestResources->field_4[gNumLinkContestPlayers + i].currMove = sub_80DB8B8(gNumLinkContestPlayers + i);
             }
         }
         gTasks[taskId].data[0] = 0;
@@ -2111,7 +2110,7 @@ void sub_80DAB8C(u8 contestType, u8 rank)
         opponentsCount--;
     }
 
-    sub_80DA8C8(gUnknown_02039F24);
+    sub_80DA8C8(gContestMonPartyIndex);
 }
 
 #ifdef NONMATCHING
@@ -2122,7 +2121,7 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
     u8 opponents[100];
     const u8 * r6;
 
-    if (gUnknown_02039F30 == 4)
+    if (gNumLinkContestPlayers == 4)
         return;
 
     r6 = gUnknown_085898A4;
@@ -2152,14 +2151,14 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
             opponents[opponentsCount++] = i;
     }
     opponents[opponentsCount] = 0xFF;
-    for (i = 0; i < 4 - gUnknown_02039F30; i++)
+    for (i = 0; i < 4 - gNumLinkContestPlayers; i++)
     {
         u16 rnd = sub_80F903C() % opponentsCount;
         s32 j;
 
-        gContestMons[gUnknown_02039F30 + i] = gContestOpponents[opponents[rnd]];
-        sub_80DF9D4(gContestMons[gUnknown_02039F30 + i].trainerName);
-        sub_80DF9E0(gContestMons[gUnknown_02039F30 + i].nickname, GAME_LANGUAGE);
+        gContestMons[gNumLinkContestPlayers + i] = gContestOpponents[opponents[rnd]];
+        sub_80DF9D4(gContestMons[gNumLinkContestPlayers + i].trainerName);
+        sub_80DF9E0(gContestMons[gNumLinkContestPlayers + i].nickname, GAME_LANGUAGE);
         for (j = rnd; opponents[j] != 0xFF; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
@@ -2179,7 +2178,7 @@ NAKED void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
                 "\tlsls r1, 24\n"
                 "\tlsrs r2, r1, 24\n"
                 "\tmovs r7, 0\n"
-                "\tldr r0, =gUnknown_02039F30\n"
+                "\tldr r0, =gNumLinkContestPlayers\n"
                 "\tldrb r1, [r0]\n"
                 "\tmov r9, r0\n"
                 "\tcmp r1, 0x4\n"
@@ -2472,12 +2471,12 @@ u16 sub_80DAFE0(u8 who, u8 contestCategory)
     return statMain + (statSub1 + statSub2 + gContestMons[who].sheen) / 2;
 }
 
-void sub_80DB09C(u8 a0)
+void sub_80DB09C(u8 contestCategory)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
-        gContestMonConditions[i] = sub_80DAFE0(i, a0);
+        gContestMonConditions[i] = sub_80DAFE0(i, contestCategory);
 }
 
 u8 sub_80DB0C4(void)

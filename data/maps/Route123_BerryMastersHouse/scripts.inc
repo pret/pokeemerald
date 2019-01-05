@@ -10,7 +10,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_0x92D, Route123_BerryMastersHouse_EventScript_26F8B6
+	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_26F8B6
 	msgbox Route123_BerryMastersHouse_Text_2A7386, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
@@ -18,7 +18,7 @@ Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	giveitem_std VAR_RESULT
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_0x92D
+	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
 	msgbox Route123_BerryMastersHouse_Text_2A7428, MSGBOX_DEFAULT
 	random 10
 	addvar VAR_RESULT, 20
@@ -39,7 +39,7 @@ Route123_BerryMastersHouse_EventScript_26F8C0:: @ 826F8C0
 	lock
 	faceplayer
 	dodailyevents
-	goto_if_set FLAG_0x931, Route123_BerryMastersHouse_EventScript_26FA6F
+	goto_if_set FLAG_DAILY_BERRY_MASTERS_WIFE, Route123_BerryMastersHouse_EventScript_26FA6F
 	msgbox Route123_BerryMastersHouse_Text_2A74E6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 13
 	call Route123_BerryMastersHouse_EventScript_271E7C
@@ -84,52 +84,52 @@ Route123_BerryMastersHouse_EventScript_26F94C:: @ 826F94C
 	end
 
 Route123_BerryMastersHouse_EventScript_26F97A:: @ 826F97A
-	goto_if_set FLAG_0x0F8, Route123_BerryMastersHouse_EventScript_26F94C
+	goto_if_set FLAG_RECEIVED_SPELON_BERRY, Route123_BerryMastersHouse_EventScript_26F94C
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_SPELON_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_0x0F8
+	setflag FLAG_RECEIVED_SPELON_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
 
 Route123_BerryMastersHouse_EventScript_26F9AB:: @ 826F9AB
-	goto_if_set FLAG_0x0F9, Route123_BerryMastersHouse_EventScript_26F94C
+	goto_if_set FLAG_RECEIVED_PAMTRE_BERRY, Route123_BerryMastersHouse_EventScript_26F94C
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_PAMTRE_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_0x0F9
+	setflag FLAG_RECEIVED_PAMTRE_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
 
 Route123_BerryMastersHouse_EventScript_26F9DC:: @ 826F9DC
-	goto_if_set FLAG_0x0FA, Route123_BerryMastersHouse_EventScript_26F94C
+	goto_if_set FLAG_RECEIVED_WATMEL_BERRY, Route123_BerryMastersHouse_EventScript_26F94C
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_WATMEL_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_0x0FA
+	setflag FLAG_RECEIVED_WATMEL_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
 
 Route123_BerryMastersHouse_EventScript_26FA0D:: @ 826FA0D
-	goto_if_set FLAG_0x0FB, Route123_BerryMastersHouse_EventScript_26F94C
+	goto_if_set FLAG_RECEIVED_DURIN_BERRY, Route123_BerryMastersHouse_EventScript_26F94C
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_DURIN_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_0x0FB
+	setflag FLAG_RECEIVED_DURIN_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
 
 Route123_BerryMastersHouse_EventScript_26FA3E:: @ 826FA3E
-	goto_if_set FLAG_0x0FC, Route123_BerryMastersHouse_EventScript_26F94C
+	goto_if_set FLAG_RECEIVED_BELUE_BERRY, Route123_BerryMastersHouse_EventScript_26F94C
 	msgbox Route123_BerryMastersHouse_Text_2A7583, MSGBOX_DEFAULT
 	giveitem_std ITEM_BELUE_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq Route123_BerryMastersHouse_EventScript_272054
-	setflag FLAG_0x0FC
+	setflag FLAG_RECEIVED_BELUE_BERRY
 	goto Route123_BerryMastersHouse_EventScript_26FA79
 	end
 
@@ -139,7 +139,7 @@ Route123_BerryMastersHouse_EventScript_26FA6F:: @ 826FA6F
 	end
 
 Route123_BerryMastersHouse_EventScript_26FA79:: @ 826FA79
-	setflag FLAG_0x931
+	setflag FLAG_DAILY_BERRY_MASTERS_WIFE
 	msgbox Route123_BerryMastersHouse_Text_2A761B, MSGBOX_DEFAULT
 	release
 	end
