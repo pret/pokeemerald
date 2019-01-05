@@ -3491,13 +3491,12 @@ static u32 sub_807A5F4(struct Pokemon *monList, int a1, int monIdx)
     }
 }
 
-#ifdef NONMATCHING
 s32 sub_807A728(void)
 {
     s32 val;
     u16 version;
 
-    if (gReceivedRemoteLinkPlayers)
+    if (gReceivedRemoteLinkPlayers != 0)
     {
         val = 0;
         version = (gLinkPlayers[GetMultiplayerId() ^ 1].version & 0xFF);
@@ -3536,83 +3535,6 @@ s32 sub_807A728(void)
     }
     return 0;
 }
-#else
-NAKED
-s32 sub_807A728(void)
-{
-    asm_unified("push {r4-r7,lr}\n\
-    ldr r0, =gReceivedRemoteLinkPlayers\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _0807A7B4\n\
-    movs r4, 0\n\
-    bl GetMultiplayerId\n\
-    ldr r5, =gLinkPlayers\n\
-    movs r7, 0x1\n\
-    eors r0, r7\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r5\n\
-    ldrb r1, [r1]\n\
-    subs r0, r1, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x2\n\
-    bls _0807A7B4\n\
-    subs r0, r1, 0x4\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    cmp r0, 0x1\n\
-    bhi _0807A762\n\
-    movs r4, 0x2\n\
-_0807A762:\n\
-    cmp r4, 0\n\
-    ble _0807A7B4\n\
-    bl GetMultiplayerId\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r5\n\
-    ldrb r1, [r1, 0x12]\n\
-    movs r6, 0xF0\n\
-    adds r0, r6, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0807A7B0\n\
-    cmp r4, 0x2\n\
-    bne _0807A7B4\n\
-    bl GetMultiplayerId\n\
-    eors r0, r7\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r1, r0, 3\n\
-    subs r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r5\n\
-    ldrb r1, [r1, 0x12]\n\
-    adds r0, r6, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0807A7B4\n\
-    movs r0, 0x2\n\
-    b _0807A7B6\n\
-    .pool\n\
-_0807A7B0:\n\
-    movs r0, 0x1\n\
-    b _0807A7B6\n\
-_0807A7B4:\n\
-    movs r0, 0\n\
-_0807A7B6:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1");
-}
-#endif // NONMATCHING
 
 static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
 {
@@ -3675,7 +3597,7 @@ int sub_807A7E0(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuS
         {
             return 6;
         }
-        
+
         if (!IsSpeciesInHoennDex(species1))
         {
             return 4;
@@ -3745,7 +3667,7 @@ int sub_807A918(struct Pokemon *mon, u16 monIdx)
         version = gLinkPlayers[i].version & 0xFF;
         if (version == VERSION_FIRE_RED ||
             version == VERSION_LEAF_GREEN)
-        {   
+        {
             versions = 0;
         }
         else
@@ -3761,7 +3683,7 @@ int sub_807A918(struct Pokemon *mon, u16 monIdx)
         {
             unk = 0;
         }
-        
+
         if (versions && (player->name[8] / 16))
         {
             unk = 0;
@@ -3774,7 +3696,7 @@ int sub_807A918(struct Pokemon *mon, u16 monIdx)
         {
             return 2;
         }
-        
+
         if (speciesArray[monIdx] == SPECIES_NONE)
         {
             return 3;
@@ -4487,7 +4409,7 @@ static void sub_807B62C(u8 a0)
                                          BGCNT_16COLOR |
                                          BGCNT_SCREENBASE(18) |
                                          BGCNT_TXT256x512);
-    
+
             if (gUnknown_020322A0->unk_FA)
             {
                 DmaCopy16Defvars(3, gUnknown_083369A0, (void *) BG_SCREEN_ADDR(5), 0x1000);
@@ -4553,7 +4475,7 @@ static void sub_807B62C(u8 a0)
             gUnknown_020322A0->unk_EC = 0;
 
             DmaCopyLarge16(3, gUnknown_08332F60, (void *) BG_CHAR_ADDR(1), 0x2840, 0x1000);
-            
+
             if (gUnknown_020322A0->unk_FA)
             {
                 DmaCopy16Defvars(3, gUnknown_083357A0, (void *) BG_SCREEN_ADDR(18), 0x100);
@@ -4586,7 +4508,7 @@ static void sub_807B62C(u8 a0)
             gUnknown_020322A0->unk_EC = 0;
 
             DmaCopyLarge16(3, gUnknown_08332F60, (void *) BG_CHAR_ADDR(1), 0x2840, 0x1000);
-            
+
             if (gUnknown_020322A0->unk_FA)
             {
                 DmaCopy16Defvars(3, gUnknown_083357A0, (void *) BG_SCREEN_ADDR(18), 0x100);
@@ -6227,7 +6149,7 @@ static void c3_0805465C(u8 taskId)
 
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(gUnknown_020322A0->unk_FB, gUnknown_020322A0->unk_FD));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(gUnknown_020322A0->unk_FC, gUnknown_020322A0->unk_FE));
-    
+
     data[0]++;
     gUnknown_020322A0->unk_FB -= 5;
     gUnknown_020322A0->unk_FD += 5;
@@ -6254,7 +6176,7 @@ static void sub_807F39C(u8 taskId)
 
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE2(gUnknown_020322A0->unk_FB, gUnknown_020322A0->unk_FD));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE2(gUnknown_020322A0->unk_FC, gUnknown_020322A0->unk_FE));
-    
+
     if (gUnknown_020322A0->unk_FB != 120)
     {
         data[0]++;
