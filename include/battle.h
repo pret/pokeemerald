@@ -798,7 +798,6 @@ extern u8 gAbsentBattlerFlags;
 extern u8 gIsCriticalHit;
 extern u8 gMultiHitCounter;
 extern const u8 *gBattlescriptCurrInstr;
-extern u32 gUnusedBattleMainVar;
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
 extern const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];

@@ -188,7 +188,6 @@ EWRAM_DATA u8 gAbsentBattlerFlags = 0;
 EWRAM_DATA u8 gIsCriticalHit = FALSE;
 EWRAM_DATA u8 gMultiHitCounter = 0;
 EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
-EWRAM_DATA u32 gUnusedBattleMainVar = 0;
 EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
 EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
@@ -203,7 +202,6 @@ EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gMoveResultFlags = 0;
 EWRAM_DATA u32 gHitMarker = 0;
-EWRAM_DATA static u8 sUnusedBattlersArray[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gUnknown_0202428C = 0;
 EWRAM_DATA u32 gSideStatuses[2] = {0};
@@ -316,12 +314,6 @@ const struct OamData gOamData_831ACB0 =
     .paletteNum = 2,
     .affineParam = 0
 };
-
-// Unknown and unused data. Feel free to remove.
-static const u16 gUnknown_0831ACB8[] = {0, 5, 0xfffe, 0};
-static const u16 *const gUnknown_0831ACC0 = gUnknown_0831ACB8;
-static const u16 gUnknown_0831ACC4[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0x7ffe, 1, 0, 0};
-static const u16 *const gUnknown_0831ACDC = gUnknown_0831ACC4;
 
 static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
 
@@ -2888,7 +2880,6 @@ static void BattleStartClearSetData(void)
             dataPtr[j] = 0;
 
         gDisableStructs[i].isFirstTurn = 2;
-        sUnusedBattlersArray[i] = 0;
         gLastMoves[i] = 0;
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
