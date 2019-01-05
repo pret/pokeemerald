@@ -629,7 +629,7 @@ static bool32 IsHealBlockPreventingMove(u8 battler, u32 move)
 u8 TrySetCantSelectMoveBattleScript(void)
 {
     u8 limitations = 0;
-	u8 moveId = gBattleBufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
+	u8 moveId = gBattleResources->bufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
     u32 move = gBattleMons[gActiveBattler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(gActiveBattler, TRUE);
     u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
@@ -5735,7 +5735,7 @@ bool32 CanMegaEvolve(u8 battlerId)
     struct Pokemon *mon;
     u8 battlerPosition = GetBattlerPosition(battlerId);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battlerId));
-    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]))->mega);
+    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]))->mega);
 
     // Check if trainer already mega evolved a pokemon.
     if (mega->alreadyEvolved[battlerPosition])

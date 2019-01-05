@@ -120,7 +120,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 {
     s32 i, var1, var2;
     s32 chosenMoveId = -1;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
     u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
     s32 percent = Random() % 100;
 

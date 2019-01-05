@@ -3288,7 +3288,7 @@ static void atk23_getexp(void)
     case 3: // Set stats and give exp
         if (gBattleControllerExecFlags == 0)
         {
-            gBattleBufferB[gBattleStruct->expGetterBattlerId][0] = 0;
+            gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0;
             if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) != MAX_LEVEL)
             {
                 gBattleResources->statsBeforeLvlUp->hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
@@ -3309,7 +3309,7 @@ static void atk23_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             gActiveBattler = gBattleStruct->expGetterBattlerId;
-            if (gBattleBufferB[gActiveBattler][0] == CONTROLLER_TWORETURNVALUES && gBattleBufferB[gActiveBattler][1] == RET_VALUE_LEVELED_UP)
+            if (gBattleResources->bufferB[gActiveBattler][0] == CONTROLLER_TWORETURNVALUES && gBattleResources->bufferB[gActiveBattler][1] == RET_VALUE_LEVELED_UP)
             {
                 u16 temp, battlerId = 0xFF;
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gBattlerPartyIndexes[gActiveBattler] == gBattleStruct->expGetterMonId)
@@ -3322,7 +3322,7 @@ static void atk23_getexp(void)
                 BattleScriptPushCursor();
                 gLeveledUpInBattle |= gBitTable[gBattleStruct->expGetterMonId];
                 gBattlescriptCurrInstr = BattleScript_LevelUp;
-                gBattleMoveDamage = (gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8));
+                gBattleMoveDamage = (gBattleResources->bufferB[gActiveBattler][2] | (gBattleResources->bufferB[gActiveBattler][3] << 8));
                 AdjustFriendship(&gPlayerParty[gBattleStruct->expGetterMonId], 0);
 
                 // update battle mon structure after level up
@@ -4487,7 +4487,7 @@ static void atk4D_switchindataupdate(void)
 
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
     {
-        monData[i] = gBattleBufferB[gActiveBattler][4 + i];
+        monData[i] = gBattleResources->bufferB[gActiveBattler][4 + i];
     }
 
     gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
@@ -4893,7 +4893,7 @@ static void atk50_openpartyscreen(void)
                 if (gBitTable[2] & hitmarkerFaintBits && gBitTable[0] & hitmarkerFaintBits)
                 {
                     gActiveBattler = 2;
-                    if (HasNoMonsToSwitch(2, gBattleBufferB[0][1], 6))
+                    if (HasNoMonsToSwitch(2, gBattleResources->bufferB[0][1], 6))
                     {
                         gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -4909,7 +4909,7 @@ static void atk50_openpartyscreen(void)
                 if (gBitTable[3] & hitmarkerFaintBits && hitmarkerFaintBits & gBitTable[1])
                 {
                     gActiveBattler = 3;
-                    if (HasNoMonsToSwitch(3, gBattleBufferB[1][1], 6))
+                    if (HasNoMonsToSwitch(3, gBattleResources->bufferB[1][1], 6))
                     {
                         gAbsentBattlerFlags |= gBitTable[gActiveBattler];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
@@ -5020,12 +5020,12 @@ static void atk51_switchhandleorder(void)
     case 0:
         for (i = 0; i < gBattlersCount; i++)
         {
-            if (gBattleBufferB[i][0] == 0x22)
+            if (gBattleResources->bufferB[i][0] == 0x22)
             {
-                *(gBattleStruct->monToSwitchIntoId + i) = gBattleBufferB[i][1];
+                *(gBattleStruct->monToSwitchIntoId + i) = gBattleResources->bufferB[i][1];
                 if (!(gBattleStruct->field_93 & gBitTable[i]))
                 {
-                    RecordedBattle_SetBattlerAction(i, gBattleBufferB[i][1]);
+                    RecordedBattle_SetBattlerAction(i, gBattleResources->bufferB[i][1]);
                     gBattleStruct->field_93 |= gBitTable[i];
                 }
             }
@@ -5038,23 +5038,23 @@ static void atk51_switchhandleorder(void)
     case 2:
         if (!(gBattleStruct->field_93 & gBitTable[gActiveBattler]))
         {
-            RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][1]);
+            RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][1]);
             gBattleStruct->field_93 |= gBitTable[gActiveBattler];
         }
         // fall through
     case 3:
-        gBattleCommunication[0] = gBattleBufferB[gActiveBattler][1];
-        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = gBattleBufferB[gActiveBattler][1];
+        gBattleCommunication[0] = gBattleResources->bufferB[gActiveBattler][1];
+        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][1];
 
         if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 0) &= 0xF;
-            *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
-            *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 1) = gBattleBufferB[gActiveBattler][3];
+            *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleResources->bufferB[gActiveBattler][2] & 0xF0);
+            *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 1) = gBattleResources->bufferB[gActiveBattler][3];
 
             *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 0) &= (0xF0);
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 2) = gBattleBufferB[gActiveBattler][3];
+            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleResources->bufferB[gActiveBattler][2] & 0xF0) >> 4;
+            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 2) = gBattleResources->bufferB[gActiveBattler][3];
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
@@ -5066,7 +5066,7 @@ static void atk51_switchhandleorder(void)
         }
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
-        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, gActiveBattler, gBattleBufferB[gActiveBattler][1])
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, gActiveBattler, gBattleResources->bufferB[gActiveBattler][1])
         break;
     }
 
@@ -5571,7 +5571,7 @@ static void atk5E(void)
          if (gBattleControllerExecFlags == 0)
          {
             s32 i;
-            struct BattlePokemon *bufferPoke = (struct BattlePokemon*) &gBattleBufferB[gActiveBattler][4];
+            struct BattlePokemon *bufferPoke = (struct BattlePokemon*) &gBattleResources->bufferB[gActiveBattler][4];
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 gBattleMons[gActiveBattler].moves[i] = bufferPoke->moves[i];
@@ -8823,45 +8823,36 @@ static void atkA6_settypetorandomresistance(void) // conversion 2
     }
     else
     {
-        s32 i, j, rands;
+        u32 i, resistTypes = 0;
+        u32 hitByType = gLastHitByType[gBattlerAttacker];
 
-        for (rands = 0; rands < 1000; rands++)
+        for (i = 0; i < NUMBER_OF_MON_TYPES; i++) // Find all types that resist.
         {
-            while (((i = (Random() & 0x7F)) > sizeof(gTypeEffectiveness) / 3));
-
-            i *= 3;
-
-            if (TYPE_EFFECT_ATK_TYPE(i) == gLastHitByType[gBattlerAttacker]
-                && TYPE_EFFECT_MULTIPLIER(i) <= TYPE_MUL_NOT_EFFECTIVE
-                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i)))
+            switch (GetTypeModifier(hitByType, i))
             {
-                SET_BATTLER_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i));
-                PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_EFFECT_DEF_TYPE(i));
-
-                gBattlescriptCurrInstr += 5;
-                return;
+            case UQ_4_12(0):
+            case UQ_4_12(0.5):
+                resistTypes |= gBitTable[i];
+                break;
             }
         }
 
-        for (j = 0, rands = 0; rands < sizeof(gTypeEffectiveness); j += 3, rands += 3)
+        while (resistTypes != 0)
         {
-            switch (TYPE_EFFECT_ATK_TYPE(j))
+            i = Random() % NUMBER_OF_MON_TYPES;
+            if (resistTypes & gBitTable[i])
             {
-            case TYPE_ENDTABLE:
-            case TYPE_FORESIGHT:
-                break;
-            default:
-                if (TYPE_EFFECT_ATK_TYPE(j) == gLastHitByType[gBattlerAttacker]
-                 && TYPE_EFFECT_MULTIPLIER(j) <= 5
-                 && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(i)))
+                if (IS_BATTLER_OF_TYPE(gBattlerAttacker, i))
                 {
-                    SET_BATTLER_TYPE(gBattlerAttacker, TYPE_EFFECT_DEF_TYPE(rands));
-                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_EFFECT_DEF_TYPE(rands))
-
+                    resistTypes &= ~(gBitTable[i]); // Type resists, but the user is already of this type.
+                }
+                else
+                {
+                    SET_BATTLER_TYPE(gBattlerAttacker, i);
+                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, i);
                     gBattlescriptCurrInstr += 5;
                     return;
                 }
-                break;
             }
         }
 

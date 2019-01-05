@@ -665,14 +665,14 @@ static void PrepareBufferDataTransfer(u8 bufferId, u8 *data, u16 size)
         case 0:
             for (i = 0; i < size; i++)
             {
-                gBattleBufferA[gActiveBattler][i] = *data;
+                gBattleResources->bufferA[gActiveBattler][i] = *data;
                 data++;
             }
             break;
         case 1:
             for (i = 0; i < size; i++)
             {
-                gBattleBufferB[gActiveBattler][i] = *data;
+                gBattleResources->bufferB[gActiveBattler][i] = *data;
                 data++;
             }
             break;
@@ -887,7 +887,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             if (gBattleControllerExecFlags & gBitTable[battlerId])
                 return;
 
-            memcpy(gBattleBufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            memcpy(gBattleResources->bufferA[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
             sub_803F850(battlerId);
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
@@ -899,7 +899,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
+            memcpy(gBattleResources->bufferB[battlerId], &gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA], blockSize);
             break;
         case 2:
             var = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + LINK_BUFF_DATA];

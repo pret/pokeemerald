@@ -2255,7 +2255,7 @@ void BufferStringBattle(u16 stringID)
     s32 i;
     const u8 *stringPtr = NULL;
 
-    gBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleBufferA[gActiveBattler][4]);
+    gBattleMsgDataPtr = (struct BattleMsgData*)(&gBattleResources->bufferA[gActiveBattler][4]);
     gLastUsedItem = gBattleMsgDataPtr->lastItem;
     gLastUsedAbility = gBattleMsgDataPtr->lastAbility;
     gBattleScripting.battler = gBattleMsgDataPtr->scrActive;
@@ -3420,7 +3420,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
 
 void SetPpNumbersPaletteInMoveSelection(void)
 {
-    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
     const u16 *palPtr = gUnknown_08D85620;
     u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBattler]],
                          chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBattler]]);

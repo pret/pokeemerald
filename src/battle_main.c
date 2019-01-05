@@ -158,8 +158,6 @@ EWRAM_DATA struct UnknownPokemonStruct4 gUnknown_02022FF8[3] = {0}; // what is i
 EWRAM_DATA struct UnknownPokemonStruct4* gUnknown_02023058 = NULL; // what is it used for?
 EWRAM_DATA u8 *gUnknown_0202305C = NULL;
 EWRAM_DATA u8 *gUnknown_02023060 = NULL;
-EWRAM_DATA u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200] = {0};
-EWRAM_DATA u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200] = {0};
 EWRAM_DATA u8 gActiveBattler = 0;
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
 EWRAM_DATA u8 gBattlersCount = 0;
@@ -326,128 +324,6 @@ static const u16 gUnknown_0831ACC4[] = {0xfff0, 0, 0x0400, 0, 0, 0, 0x3c00, 0, 0
 static const u16 *const gUnknown_0831ACDC = gUnknown_0831ACC4;
 
 static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
-
-// format: attacking type, defending type, damage multiplier
-// the multiplier is a (decimal) fixed-point number:
-// 20 is ×2.0 TYPE_MUL_SUPER_EFFECTIVE
-// 10 is ×1.0 TYPE_MUL_NORMAL
-// 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
-// 00 is ×0.0 TYPE_MUL_NO_EFFECT
-const u8 gTypeEffectiveness[336] =
-{
-    TYPE_NORMAL, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_NORMAL, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIRE, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIRE, TYPE_BUG, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIRE, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_STEEL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_FIRE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_WATER, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_WATER, TYPE_GROUND, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_WATER, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_ELECTRIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_GROUND, TYPE_MUL_NO_EFFECT,
-    TYPE_ELECTRIC, TYPE_FLYING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_WATER, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GRASS, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_GROUND, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GRASS, TYPE_FLYING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_BUG, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GRASS, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_ICE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_GROUND, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_FLYING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_DRAGON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_NORMAL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_FLYING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_PSYCHIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_BUG, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_DARK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_STEEL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_POISON, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_POISON, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_GROUND, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_GHOST, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_STEEL, TYPE_MUL_NO_EFFECT,
-    TYPE_GROUND, TYPE_FIRE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_ELECTRIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GROUND, TYPE_POISON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_FLYING, TYPE_MUL_NO_EFFECT,
-    TYPE_GROUND, TYPE_BUG, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GROUND, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_STEEL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_ELECTRIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FLYING, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_FIGHTING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_BUG, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FLYING, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_FIGHTING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_POISON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_PSYCHIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_DARK, TYPE_MUL_NO_EFFECT,
-    TYPE_PSYCHIC, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_BUG, TYPE_FIGHTING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_FLYING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_PSYCHIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_BUG, TYPE_GHOST, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_DARK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_BUG, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ROCK, TYPE_FIRE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_FIGHTING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ROCK, TYPE_GROUND, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ROCK, TYPE_FLYING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_BUG, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GHOST, TYPE_NORMAL, TYPE_MUL_NO_EFFECT,
-    TYPE_GHOST, TYPE_PSYCHIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GHOST, TYPE_DARK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GHOST, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GHOST, TYPE_GHOST, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DRAGON, TYPE_DRAGON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DRAGON, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DARK, TYPE_FIGHTING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DARK, TYPE_PSYCHIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DARK, TYPE_GHOST, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DARK, TYPE_DARK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DARK, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_ELECTRIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_STEEL, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_STEEL, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FORESIGHT, TYPE_FORESIGHT, TYPE_MUL_NO_EFFECT,
-    TYPE_NORMAL, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
-    TYPE_FIGHTING, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
-    TYPE_ENDTABLE, TYPE_ENDTABLE, TYPE_MUL_NO_EFFECT
-};
 
 const u8 gTypeNames[][TYPE_NAME_LENGTH + 1] =
 {
@@ -3382,7 +3258,7 @@ static void DoBattleIntro(void)
             }
             else
             {
-                memcpy(&gBattleMons[gActiveBattler], &gBattleBufferB[gActiveBattler][4], sizeof(struct BattlePokemon));
+                memcpy(&gBattleMons[gActiveBattler], &gBattleResources->bufferB[gActiveBattler][4], sizeof(struct BattlePokemon));
                 gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
                 gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
                 gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
@@ -4001,7 +3877,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
-                        BtlController_EmitChooseAction(0, gChosenActionByBattler[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
+                        BtlController_EmitChooseAction(0, gChosenActionByBattler[0], gBattleResources->bufferB[0][1] | (gBattleResources->bufferB[0][2] << 8));
                         MarkBattlerForControllerExec(gActiveBattler);
                         gBattleCommunication[gActiveBattler]++;
                     }
@@ -4011,10 +3887,10 @@ static void HandleTurnActionSelectionState(void)
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.
             if (!(gBattleControllerExecFlags & ((gBitTable[gActiveBattler]) | (0xF0000000) | (gBitTable[gActiveBattler] << 4) | (gBitTable[gActiveBattler] << 8) | (gBitTable[gActiveBattler] << 0xC))))
             {
-                RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][1]);
-                gChosenActionByBattler[gActiveBattler] = gBattleBufferB[gActiveBattler][1];
+                RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][1]);
+                gChosenActionByBattler[gActiveBattler] = gBattleResources->bufferB[gActiveBattler][1];
 
-                switch (gBattleBufferB[gActiveBattler][1])
+                switch (gBattleResources->bufferB[gActiveBattler][1])
                 {
                 case B_ACTION_USE_MOVE:
                     if (AreAllMovesUnusable())
@@ -4022,7 +3898,7 @@ static void HandleTurnActionSelectionState(void)
                         gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
-                        *(gBattleStruct->moveTarget + gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                        *(gBattleStruct->moveTarget + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][3];
                         return;
                     }
                     else if (gDisableStructs[gActiveBattler].encoredMove != 0)
@@ -4165,7 +4041,7 @@ static void HandleTurnActionSelectionState(void)
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
-                    && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
+                    && gBattleResources->bufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[gActiveBattler] = BattleScript_AskIfWantsToForfeitMatch;
                     gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT_MAY_RUN;
@@ -4175,13 +4051,13 @@ static void HandleTurnActionSelectionState(void)
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
-                         && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
+                         && gBattleResources->bufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
                 else if (IsRunningFromBattleImpossible()
-                         && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
+                         && gBattleResources->bufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintCantEscapeFromBattle;
                     gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
@@ -4201,7 +4077,7 @@ static void HandleTurnActionSelectionState(void)
                 switch (gChosenActionByBattler[gActiveBattler])
                 {
                 case B_ACTION_USE_MOVE:
-                    switch (gBattleBufferB[gActiveBattler][1])
+                    switch (gBattleResources->bufferB[gActiveBattler][1])
                     {
                     case 3:
                     case 4:
@@ -4210,7 +4086,7 @@ static void HandleTurnActionSelectionState(void)
                     case 7:
                     case 8:
                     case 9:
-                        gChosenActionByBattler[gActiveBattler] = gBattleBufferB[gActiveBattler][1];
+                        gChosenActionByBattler[gActiveBattler] = gBattleResources->bufferB[gActiveBattler][1];
                         return;
                     case 15:
                         gChosenActionByBattler[gActiveBattler] = B_ACTION_SWITCH;
@@ -4218,7 +4094,7 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     default:
                         sub_818603C(2);
-                        if ((gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8)) == 0xFFFF)
+                        if ((gBattleResources->bufferB[gActiveBattler][2] | (gBattleResources->bufferB[gActiveBattler][3] << 8)) == 0xFFFF)
                         {
                             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                             RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
@@ -4228,7 +4104,7 @@ static void HandleTurnActionSelectionState(void)
                             RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                             gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
                             *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
-                            gBattleBufferB[gActiveBattler][1] = 0;
+                            gBattleResources->bufferB[gActiveBattler][1] = 0;
                             *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_WAIT_ACTION_CHOSEN;
                             return;
                         }
@@ -4236,13 +4112,13 @@ static void HandleTurnActionSelectionState(void)
                         {
                             if (!(gBattleTypeFlags & BATTLE_TYPE_PALACE))
                             {
-                                RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][2]);
-                                RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][3]);
+                                RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][2]);
+                                RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][3]);
                             }
-                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleBufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
+                            *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
                             gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[*(gBattleStruct->chosenMovePositions + gActiveBattler)];
-                            *(gBattleStruct->moveTarget + gActiveBattler) = gBattleBufferB[gActiveBattler][3];
-                            if (gBattleBufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
+                            *(gBattleStruct->moveTarget + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][3];
+                            if (gBattleResources->bufferB[gActiveBattler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->mega.toEvolve |= gBitTable[gActiveBattler];
                             gBattleCommunication[gActiveBattler]++;
                         }
@@ -4250,20 +4126,20 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if ((gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8)) == 0)
+                    if ((gBattleResources->bufferB[gActiveBattler][1] | (gBattleResources->bufferB[gActiveBattler][2] << 8)) == 0)
                     {
                         gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                     }
                     else
                     {
-                        gLastUsedItem = (gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8));
+                        gLastUsedItem = (gBattleResources->bufferB[gActiveBattler][1] | (gBattleResources->bufferB[gActiveBattler][2] << 8));
                         if (ItemId_GetPocket(gLastUsedItem) == POCKET_POKE_BALLS)
                             gBattleStruct->throwingPokeBall = TRUE;
                         gBattleCommunication[gActiveBattler]++;
                     }
                     break;
                 case B_ACTION_SWITCH:
-                    if (gBattleBufferB[gActiveBattler][1] == PARTY_SIZE)
+                    if (gBattleResources->bufferB[gActiveBattler][1] == PARTY_SIZE)
                     {
                         gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
@@ -4285,7 +4161,7 @@ static void HandleTurnActionSelectionState(void)
                     gBattleCommunication[gActiveBattler]++;
                     break;
                 case B_ACTION_SAFARI_POKEBLOCK:
-                    if ((gBattleBufferB[gActiveBattler][1] | (gBattleBufferB[gActiveBattler][2] << 8)) != 0)
+                    if ((gBattleResources->bufferB[gActiveBattler][1] | (gBattleResources->bufferB[gActiveBattler][2] << 8)) != 0)
                     {
                         gBattleCommunication[gActiveBattler]++;
                     }
@@ -4363,7 +4239,7 @@ static void HandleTurnActionSelectionState(void)
         case STATE_SELECTION_SCRIPT_MAY_RUN:
             if (*(gBattleStruct->selectionScriptFinished + gActiveBattler))
             {
-                if (gBattleBufferB[gActiveBattler][1] == 13)
+                if (gBattleResources->bufferB[gActiveBattler][1] == 13)
                 {
                     gHitMarker |= HITMARKER_RUN;
                     gChosenActionByBattler[gActiveBattler] = B_ACTION_RUN;
@@ -4424,18 +4300,18 @@ static bool8 AllAtActionConfirmed(void)
 
 static void sub_803CDF8(void)
 {
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = gBattleBufferB[gActiveBattler][1];
-    RecordedBattle_SetBattlerAction(gActiveBattler, gBattleBufferB[gActiveBattler][1]);
+    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][1];
+    RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][1]);
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 0) &= 0xF;
-        *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
-        *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 1) = gBattleBufferB[gActiveBattler][3];
+        *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleResources->bufferB[gActiveBattler][2] & 0xF0);
+        *(gActiveBattler * 3 + (u8*)(gBattleStruct->field_60) + 1) = gBattleResources->bufferB[gActiveBattler][3];
 
         *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 0) &= (0xF0);
-        *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
-        *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 2) = gBattleBufferB[gActiveBattler][3];
+        *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleResources->bufferB[gActiveBattler][2] & 0xF0) >> 4;
+        *((gActiveBattler ^ BIT_FLANK) * 3 + (u8*)(gBattleStruct->field_60) + 2) = gBattleResources->bufferB[gActiveBattler][3];
     }
 }
 
@@ -5544,7 +5420,7 @@ static void HandleAction_UseItem(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
-    gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
+    gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
 
     if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball
     {
@@ -5777,8 +5653,8 @@ static void HandleAction_ThrowPokeblock(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    gBattleCommunication[MULTISTRING_CHOOSER] = gBattleBufferB[gBattlerAttacker][1] - 1;
-    gLastUsedItem = gBattleBufferB[gBattlerAttacker][2];
+    gBattleCommunication[MULTISTRING_CHOOSER] = gBattleResources->bufferB[gBattlerAttacker][1] - 1;
+    gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][2];
 
     if (gBattleResults.pokeblockThrows < 0xFF)
         gBattleResults.pokeblockThrows++;

@@ -3010,8 +3010,6 @@ static s32 sub_818FEB4(s32 *arr, bool8 arg1)
 #define TYPE_x2     40
 #define TYPE_x4     80
 
-// Functionally equivalent, while loop is impossible to match.
-#ifdef NONMATCHING
 static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
 {
     s32 defType1, defType2, defAbility, moveType;
@@ -3033,26 +3031,15 @@ static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
     }
     else
     {
-        while (gTypeEffectiveness[i + 0] != TYPE_ENDTABLE)
-        {
-            if (gTypeEffectiveness[i + 0] == TYPE_FORESIGHT)
-            {
-                i += 3;
-            }
-            else
-            {
-                u8 val = gTypeEffectiveness[i + 0];
-                if (val == moveType)
-                {
-                    // BUG: * 2 is not necessary and makes the condition always false if the ability is wonder guard.
-                    if (gTypeEffectiveness[i + 1] == defType1 && (defAbility != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
-                        typePower = (gTypeEffectiveness[i + 2] * typePower) / 10;
-                    if (gTypeEffectiveness[i + 1] == defType2 && defType1 != defType2 && (defAbility != ABILITY_WONDER_GUARD || gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE * 2))
-                        typePower = (gTypeEffectiveness[i + 2] * typePower) / 10;
-                }
-                i += 3;
-            }
-        }
+        u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType1) * 2) * 5;
+        u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType2) * 2) * 5;
+
+        typePower = (typeEffectiveness1 * typePower) / 10;
+        if (defType2 != defType1)
+            typePower = (typeEffectiveness2 * typePower) / 10;
+
+        if (defAbility == ABILITY_WONDER_GUARD && typeEffectiveness1 != 20 && typeEffectiveness2 != 20)
+            typePower = 0;
     }
 
     switch (arg2)
@@ -3129,247 +3116,6 @@ static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
 
     return typePower;
 }
-#else
-NAKED
-static s32 GetTypeEffectivenessPoints(s32 move, s32 species, s32 arg2)
-{
-    asm_unified("\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    adds r3, r0, 0\n\
-    adds r4, r1, 0\n\
-    str r2, [sp]\n\
-    movs r6, 0\n\
-    movs r2, 0x14\n\
-    cmp r3, 0\n\
-    beq _0818FFF0\n\
-    ldr r0, =0x0000ffff\n\
-    cmp r3, r0\n\
-    beq _0818FFF0\n\
-    ldr r0, =gBattleMoves\n\
-    lsls r1, r3, 1\n\
-    adds r1, r3\n\
-    lsls r1, 2\n\
-    adds r3, r1, r0\n\
-    ldrb r0, [r3, 0x1]\n\
-    cmp r0, 0\n\
-    bne _0818FFFC\n\
-_0818FFF0:\n\
-    movs r0, 0\n\
-    b _08190156\n\
-    .pool\n\
-_0818FFFC:\n\
-    ldr r1, =gBaseStats\n\
-    lsls r0, r4, 3\n\
-    subs r0, r4\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r1, [r0, 0x6]\n\
-    mov r10, r1\n\
-    ldrb r1, [r0, 0x7]\n\
-    mov r9, r1\n\
-    ldrb r0, [r0, 0x16]\n\
-    mov r8, r0\n\
-    ldrb r3, [r3, 0x2]\n\
-    str r3, [sp, 0x4]\n\
-    cmp r0, 0x1A\n\
-    bne _0819002C\n\
-    cmp r3, 0x4\n\
-    bne _0819002C\n\
-    ldr r0, [sp]\n\
-    cmp r0, 0x1\n\
-    bne _081900AA\n\
-    movs r2, 0x8\n\
-    b _081900A4\n\
-    .pool\n\
-_0819002C:\n\
-    ldr r0, =gTypeEffectiveness\n\
-    adds r1, r6, r0\n\
-    ldrb r0, [r1]\n\
-    ldr r7, =gTypeEffectiveness\n\
-    cmp r0, 0xFF\n\
-    beq _081900A4\n\
-    adds r4, r1, 0\n\
-_0819003A:\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0xFE\n\
-    beq _08190096\n\
-    ldrb r0, [r4]\n\
-    ldr r1, [sp, 0x4]\n\
-    cmp r0, r1\n\
-    bne _08190096\n\
-    ldrb r0, [r4, 0x1]\n\
-    adds r5, r6, 0x1\n\
-    cmp r0, r10\n\
-    bne _0819006C\n\
-    adds r1, r6, 0x2\n\
-    mov r0, r8\n\
-    cmp r0, 0x19\n\
-    bne _0819005E\n\
-    ldrb r0, [r4, 0x2]\n\
-    cmp r0, 0x28\n\
-    bne _0819006C\n\
-_0819005E:\n\
-    adds r0, r1, r7\n\
-    ldrb r0, [r0]\n\
-    muls r0, r2\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    adds r2, r0, 0\n\
-_0819006C:\n\
-    adds r0, r5, r7\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r9\n\
-    bne _08190096\n\
-    cmp r10, r9\n\
-    beq _08190096\n\
-    adds r1, r6, 0x2\n\
-    mov r0, r8\n\
-    cmp r0, 0x19\n\
-    bne _08190088\n\
-    adds r0, r1, r7\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x28\n\
-    bne _08190096\n\
-_08190088:\n\
-    adds r0, r1, r7\n\
-    ldrb r0, [r0]\n\
-    muls r0, r2\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    adds r2, r0, 0\n\
-_08190096:\n\
-    adds r4, 0x3\n\
-    adds r6, 0x3\n\
-    ldr r1, =gTypeEffectiveness\n\
-    adds r0, r6, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xFF\n\
-    bne _0819003A\n\
-_081900A4:\n\
-    ldr r0, [sp]\n\
-    cmp r0, 0x1\n\
-    beq _081900E0\n\
-_081900AA:\n\
-    ldr r1, [sp]\n\
-    cmp r1, 0x1\n\
-    bgt _081900BC\n\
-    cmp r1, 0\n\
-    beq _081900C4\n\
-    b _08190154\n\
-    .pool\n\
-_081900BC:\n\
-    ldr r0, [sp]\n\
-    cmp r0, 0x2\n\
-    beq _08190114\n\
-    b _08190154\n\
-_081900C4:\n\
-    cmp r2, 0xA\n\
-    beq _08190146\n\
-    cmp r2, 0xA\n\
-    ble _08190146\n\
-    cmp r2, 0x28\n\
-    beq _0819014A\n\
-    cmp r2, 0x28\n\
-    bgt _081900DA\n\
-    cmp r2, 0x14\n\
-    beq _08190104\n\
-    b _08190146\n\
-_081900DA:\n\
-    cmp r2, 0x50\n\
-    bne _08190146\n\
-    b _08190100\n\
-_081900E0:\n\
-    cmp r2, 0xA\n\
-    beq _08190104\n\
-    cmp r2, 0xA\n\
-    bgt _081900F2\n\
-    cmp r2, 0\n\
-    beq _08190100\n\
-    cmp r2, 0x5\n\
-    beq _0819014A\n\
-    b _08190146\n\
-_081900F2:\n\
-    cmp r2, 0x28\n\
-    beq _08190108\n\
-    cmp r2, 0x28\n\
-    ble _08190146\n\
-    cmp r2, 0x50\n\
-    beq _0819010E\n\
-    b _08190146\n\
-_08190100:\n\
-    movs r2, 0x8\n\
-    b _08190154\n\
-_08190104:\n\
-    movs r2, 0x2\n\
-    b _08190154\n\
-_08190108:\n\
-    movs r2, 0x2\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_0819010E:\n\
-    movs r2, 0x4\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_08190114:\n\
-    cmp r2, 0xA\n\
-    beq _08190146\n\
-    cmp r2, 0xA\n\
-    bgt _08190126\n\
-    cmp r2, 0\n\
-    beq _0819013A\n\
-    cmp r2, 0x5\n\
-    beq _08190140\n\
-    b _08190146\n\
-_08190126:\n\
-    cmp r2, 0x28\n\
-    beq _0819014E\n\
-    cmp r2, 0x28\n\
-    bgt _08190134\n\
-    cmp r2, 0x14\n\
-    beq _0819014A\n\
-    b _08190146\n\
-_08190134:\n\
-    cmp r2, 0x50\n\
-    beq _08190152\n\
-    b _08190146\n\
-_0819013A:\n\
-    movs r2, 0x10\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_08190140:\n\
-    movs r2, 0x8\n\
-    negs r2, r2\n\
-    b _08190154\n\
-_08190146:\n\
-    movs r2, 0\n\
-    b _08190154\n\
-_0819014A:\n\
-    movs r2, 0x4\n\
-    b _08190154\n\
-_0819014E:\n\
-    movs r2, 0xC\n\
-    b _08190154\n\
-_08190152:\n\
-    movs r2, 0x14\n\
-_08190154:\n\
-    adds r0, r2, 0\n\
-_08190156:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-                ");
-}
-#endif // NONMATCHING
 
 static u8 GetDomeTrainerMonIvs(u16 trainerId)
 {
