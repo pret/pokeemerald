@@ -38,6 +38,7 @@
 #include "constants/maps.h"
 #include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
@@ -217,27 +218,27 @@ u8 sub_80E8BF8(void)
     behavior = MapGridGetMetatileBehaviorAt(x, y) & 0xFFF;
     if (behavior == MB_SECRET_BASE_SPOT_RED_CAVE || behavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN)
     {
-        return 1;
+        return SECRET_BASE_RED_CAVE;
     }
     if (behavior == MB_SECRET_BASE_SPOT_BROWN_CAVE || behavior == MB_SECRET_BASE_SPOT_BROWN_CAVE_OPEN)
     {
-        return 2;
+        return SECRET_BASE_BROWN_CAVE;
     }
     if (behavior == MB_SECRET_BASE_SPOT_BLUE_CAVE || behavior == MB_SECRET_BASE_SPOT_BLUE_CAVE_OPEN)
     {
-        return 3;
+        return SECRET_BASE_BLUE_CAVE;
     }
     if (behavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE || behavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE_OPEN)
     {
-        return 4;
+        return SECRET_BASE_YELLOW_CAVE;
     }
     if (behavior == MB_SECRET_BASE_SPOT_TREE_LEFT || behavior == MB_SECRET_BASE_SPOT_TREE_LEFT_OPEN || behavior == MB_SECRET_BASE_SPOT_TREE_RIGHT || behavior == MB_SECRET_BASE_SPOT_TREE_RIGHT_OPEN)
     {
-        return 5;
+        return SECRET_BASE_TREE;
     }
     if (behavior == MB_SECRET_BASE_SPOT_SHRUB || behavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN)
     {
-        return 6;
+        return SECRET_BASE_SHRUB;
     }
     return 0;
 }
@@ -846,7 +847,7 @@ void sub_80E9BDC(void)
 void sub_80E9C2C(void)
 {
     gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].sbr_field_1_6 ^= 1;
-    FlagSet(FLAG_0x10C);
+    FlagSet(FLAG_DECORATION_16);
 }
 
 void sub_80E9C74(void)
@@ -1159,13 +1160,13 @@ void sub_80EA354(void)
     u8 i;
 
     secretBaseRecordId = VarGet(VAR_CURRENT_SECRET_BASE);
-    if (!FlagGet(FLAG_0x922))
+    if (!FlagGet(FLAG_DAILY_SECRET_BASE))
     {
         for (i = 0; i < SECRET_BASES_COUNT; i ++)
         {
             gSaveBlock1Ptr->secretBases[i].sbr_field_1_5 = FALSE;
         }
-        FlagSet(FLAG_0x922);
+        FlagSet(FLAG_DAILY_SECRET_BASE);
     }
     gSpecialVar_0x8004 = sub_80EA20C(secretBaseRecordId);
     gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
@@ -1681,7 +1682,7 @@ void ReceiveSecretBasesData(void *records, size_t recordSize, u8 linkIdx)
     struct SecretBaseRecordMixer mixers[3];
     u16 i;
 
-    if (FlagGet(FLAG_0x060))
+    if (FlagGet(FLAG_RECEIVED_SECRET_POWER))
     {
         switch (GetLinkPlayerCount())
         {
