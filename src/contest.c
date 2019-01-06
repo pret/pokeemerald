@@ -3327,7 +3327,7 @@ void sub_80DC4F0(void)
     LoadSpritePalette(&gUnknown_08587B08);
     for (i = 0; i < 4; i++)
     {
-        LoadCompressedObjectPic(&gUnknown_08587AE8[i]);
+        LoadCompressedSpriteSheet(&gUnknown_08587AE8[i]);
         gContestResources->field_14[i].unk1 = CreateSprite(
           &gSpriteTemplate_8587B18[i],
           204, gUnknown_08587A70[gUnknown_02039F26[i]],
@@ -3341,7 +3341,7 @@ void CreateApplauseMeterSprite(void)
 {
     u8 spriteId;
 
-    LoadCompressedObjectPic(&gUnknown_08587BB0);
+    LoadCompressedSpriteSheet(&gUnknown_08587BB0);
     LoadSpritePalette(&gUnknown_08587BB8);
     spriteId = CreateSprite(&gSpriteTemplate_8587BC8, 30, 44, 1);
     gSprites[spriteId].invisible = TRUE;
@@ -3509,7 +3509,7 @@ u8 sub_80DC9EC(u8 a)
     volatile u8 zero;
     
 
-    LoadCompressedObjectPic(&gUnknown_08589904[a]);
+    LoadCompressedSpriteSheet(&gUnknown_08589904[a]);
     LoadSpritePalette(&gUnknown_08589924[a]);
     r6 = CreateSprite(&gSpriteTemplate_858998C[a], 184, r5, 29);
     gSprites[r8].oam.tileNum += 64;
@@ -3562,7 +3562,7 @@ u8 sub_80DC9EC(u8 a)
     lsls r4, r1, 3\n\
     ldr r0, =gUnknown_08589904\n\
     adds r0, r4, r0\n\
-    bl LoadCompressedObjectPic\n\
+    bl LoadCompressedSpriteSheet\n\
     ldr r0, =gUnknown_08589924\n\
     adds r4, r0\n\
     adds r0, r4, 0\n\
