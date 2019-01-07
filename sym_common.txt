@@ -92,4 +92,4 @@ gUnknown_03006370: @ 3006370
 	.space 0x10
 	.include "*libm4a.a:m4a_2.o"
 	.include "*libagb_flash.a:agb_flash.o"
-	.include "*librfu_1026.a:librfu.o"
+	.include "*librfu_1026.a:librfu_1026.o"

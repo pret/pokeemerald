@@ -324,10 +324,10 @@ SECTIONS {
         *libagb_flash.a:agb_flash_1m.o(.text);
         *libagb_flash.a:agb_flash_mx.o(.text);
         *libsiirtc.a:siirtc.o(.text);
-        *librfu_1026.a:librfu_stwi.o(.text);
-        *librfu_1026.a:librfu_intr.o(.text);
-        *librfu_1026.a:librfu_rfu.o(.text);
-        *librfu_1026.a:librfu.o(.text);
+        *librfu_1026.a:librfu_stwi_1026.o(.text);
+        *librfu_1026.a:librfu_intr_1026.o(.text);
+        *librfu_1026.a:librfu_rfu_1026.o(.text);
+        *librfu_1026.a:librfu_1026.o(.text);
         *libagbsyscall.a:ArcTan2.o(.text);
         *libagbsyscall.a:BgAffineSet.o(.text);
         *libagbsyscall.a:CpuFastSet.o(.text);
@@ -1177,7 +1177,7 @@ SECTIONS {
         *libagb_flash.a:agb_flash_mx.o(.rodata);
         *libagb_flash.a:agb_flash_le.o(.rodata);
         *libsiirtc.a:siirtc.o(.rodata);
-        *librfu_1026.a:librfu.o(.rodata);
+        *librfu_1026.a:librfu_1026.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);
         *libc.a(.rodata);
