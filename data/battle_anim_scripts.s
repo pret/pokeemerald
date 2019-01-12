@@ -1675,16 +1675,34 @@ Move_SHADOW_CLAW:
 	end
 	
 Move_THUNDER_FANG:
-	loadspritegfx ANIM_TAG_SHARP_TEETH
+
 	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_LIGHTNING
+	loadspritegfx ANIM_TAG_SHARP_TEETH
 	monbg ANIM_TARGET
 	setalpha 12, 8
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	createvisualtask sub_8115F10, 2, 257, 257, 257
+	delay 1
+	createsprite gUnknown_085956C0, ANIM_TARGET, 2, 0, -48
+	delay 1
+	createsprite gUnknown_085956C0, ANIM_ATTACKER, 2, 0, -16
+	delay 1
+	createsprite gUnknown_085956C0, ANIM_ATTACKER, 2, 0, 16
+	delay 1
 	playsewithpan SE_W044, SOUND_PAN_TARGET
 	createsprite gUnknown_08597080, ANIM_ATTACKER, 2, 0, -32, 0, 0, 819, 10
 	createsprite gUnknown_08597080, ANIM_ATTACKER, 2, 0, 32, 4, 0, -819, 10
-	delay 10
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 2
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 4, 7, 1
+	delay 1
+	playsewithpan SE_W161B, SOUND_PAN_TARGET
+	createvisualtask sub_8115F10, 2, 257, 257, 257
+	delay 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 15, 1
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 2
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 16, 0, RGB_BLACK
+	delay 20
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -1692,7 +1710,6 @@ Move_THUNDER_FANG:
 	end
 	
 Move_ICE_FANG:
-
 	monbg ANIM_TARGET
 	setalpha 12, 8
 	loadspritegfx ANIM_TAG_ICE_CRYSTALS
@@ -1711,7 +1728,6 @@ Move_ICE_FANG:
 	createsprite gUnknown_08595AD0, ANIM_ATTACKER, 2, 96
 	createsprite gUnknown_08595AD0, ANIM_ATTACKER, 2, 160
 	createsprite gUnknown_08595AD0, ANIM_ATTACKER, 2, 224
-
 	playsewithpan SE_W044, SOUND_PAN_TARGET
 	createsprite gUnknown_08597080, ANIM_ATTACKER, 2, 0, -32, 0, 0, 819, 10
 	createsprite gUnknown_08597080, ANIM_ATTACKER, 2, 0, 32, 4, 0, -819, 10
@@ -1731,16 +1747,28 @@ Move_ICE_FANG:
 	end
 	
 Move_FIRE_FANG:
+	loadspritegfx ANIM_TAG_SMALL_EMBER
 	loadspritegfx ANIM_TAG_SHARP_TEETH
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
 	setalpha 12, 8
-	playsewithpan SE_W044, SOUND_PAN_TARGET
+	createvisualtask sub_8116620, 10, 4, 2, 0, 9, RGB_RED
+	createsprite gUnknown_08595368, ANIM_TARGET, 1, 0
+	createsprite gUnknown_08595368, ANIM_TARGET, 1, 64
+	createsprite gUnknown_08595368, ANIM_TARGET, 1, 128
+	createsprite gUnknown_08595368, ANIM_TARGET, 1, 196
 	createsprite gUnknown_08597080, ANIM_ATTACKER, 2, 0, -32, 0, 0, 819, 10
 	createsprite gUnknown_08597080, ANIM_ATTACKER, 2, 0, 32, 4, 0, -819, 10
+	playsewithpan SE_W044, SOUND_PAN_TARGET
 	delay 10
+	waitforvisualfinish
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 2
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 4, 7, 1
+	call FireMoveEffect
+	delay 4
+	playsewithpan SE_W007, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask sub_8116620, 10, 4, 0, 9, 0, RGB_RED
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
