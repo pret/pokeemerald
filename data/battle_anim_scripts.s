@@ -1507,6 +1507,52 @@ Move_AQUA_TAIL:
 	end
 	
 Move_SEED_BOMB:
+	loadspritegfx ANIM_TAG_SEED
+	loadspritegfx ANIM_TAG_EXPLOSION
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	delay 5
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	delay 5
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	delay 5
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 30, 1
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 6, 5, 1, 0
+	delay 6
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, -16, -15, 1, 0
+	delay 6
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 16, -5, 1, 0
+	delay 6
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, -12, 18, 1, 0
+	delay 6
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 0, 5, 1, 0
+	delay 6
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 6, 5, 1, 0
+	delay 6
+	createsprite gUnknown_0859351C, ANIM_TARGET, 2, 20, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, -16, -15, 1, 0
+	delay 6
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 16, -5, 1, 0
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	delay 6
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, -12, 18, 1, 0
+	delay 6
+	playsewithpan SE_W120, SOUND_PAN_TARGET
+	createsprite gBattleAnimSpriteTemplate_859371C, ANIM_TARGET, 4, 0, 5, 1, 0
+	waitforvisualfinish
 	end
 	
 Move_AIR_SLASH:
