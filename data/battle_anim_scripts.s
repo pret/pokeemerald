@@ -1565,6 +1565,26 @@ Move_ENERGY_BALL:
 	end
 	
 Move_BRAVE_BIRD:
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_BIRD
+	call SetFlyingBg
+	monbg ANIM_ATTACKER
+	createvisualtask sub_8116620, 10, 2, 0, 0, 16, RGB_WHITE
+	delay 4
+	createvisualtask sub_81136E8, 5, 0
+	waitforvisualfinish
+	createvisualtask sub_8159244, 5, 238, SOUND_PAN_ATTACKER
+	createsprite gUnknown_08596514, ANIM_TARGET, 2
+	delay 14
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 10, 0, 18, 1
+	createvisualtask sub_8159210, 5, 141, SOUND_PAN_TARGET
+	delay 20
+	createvisualtask sub_81137E4, 5, 1
+	delay 2
+	createvisualtask sub_8116620, 10, 2, 0, 15, 0, RGB_WHITE
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	call UnsetFlyingBg
 	end
 	
 Move_EARTH_POWER:
