@@ -4675,6 +4675,7 @@ extern const u32 gBattleAnimSpritePalette_287[];
 extern const u32 gBattleAnimSpritePalette_288[];
 extern const u32 gBattleAnimSpritePalette_289[];
 extern const u32 gBattleAnimSpritePalette_290[];
+extern const u32 gBattleAnimSpritePalette_291[];
 
 extern const u32 gBattleAnimBackgroundImage_00[];
 extern const u32 gBattleAnimBackgroundImage_02[];

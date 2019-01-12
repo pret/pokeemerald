@@ -1222,6 +1222,23 @@ Move_SUCKER_PUNCH:
 	end
 	
 Move_TOXIC_SPIKES:
+	loadspritegfx ANIM_TAG_TOXIC_SPIKES
+	loadspritegfx ANIM_TAG_POISON_BUBBLE
+	monbg ANIM_DEF_PARTNER
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_W030, SOUND_PAN_TARGET, 28
+	createsprite gToxicSpikesSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 24, 30
+	delay 10
+	playsewithpan SE_W026, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_W030, SOUND_PAN_TARGET, 28
+	createsprite gToxicSpikesSpriteTemplate, ANIM_TARGET, 2, 20, 0, -24, 24, 30
+	delay 10
+	waitplaysewithpan SE_W030, SOUND_PAN_TARGET, 28
+	createsprite gToxicSpikesSpriteTemplate, ANIM_TARGET, 2, 20, 0, 24, 24, 30
+	delay 40
+	call PoisonBubblesEffect
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	end
 	
 Move_HEART_SWAP:
