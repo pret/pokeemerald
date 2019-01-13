@@ -1537,7 +1537,7 @@ void sub_81AA1D8(void)
     u8 var0, var1;
 
     for (i = 0; i < 8; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
 
     id = sub_81AA9E4();
     sub_81AA33C(&var0, &var1);

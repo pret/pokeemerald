@@ -1080,7 +1080,7 @@ void ResetApprenticeStruct(struct Apprentice *apprentice)
     u8 i;
 
     for (i = 0; i < 6; i++)
-        apprentice->easyChatWords[i] |= 0xFFFF;
+        apprentice->easyChatWords[i] = 0xFFFF;
 
     apprentice->playerName[0] = EOS;
     apprentice->id = 16;
@@ -1094,7 +1094,7 @@ void ResetAllApprenticeData(void)
     for (i = 0; i < 4; i++)
     {
         for (j = 0; j < 6; j++)
-            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] |= 0xFFFF;
+            gSaveBlock2Ptr->apprentices[i].easyChatWords[j] = 0xFFFF;
         gSaveBlock2Ptr->apprentices[i].id = 16;
         gSaveBlock2Ptr->apprentices[i].playerName[0] = EOS;
         gSaveBlock2Ptr->apprentices[i].lvlMode = 0;

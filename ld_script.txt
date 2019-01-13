@@ -292,6 +292,7 @@ SECTIONS {
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
         asm/pokenav.o(.text.after.match.call);
+        src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
         src/contest_link_81D9DE4.o(.text);

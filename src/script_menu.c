@@ -1407,7 +1407,7 @@ static void sub_80E2578(void)
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_03001124); i++)
     {
-        gUnknown_03001124[i] |= 0xFF;
+        gUnknown_03001124[i] = 0xFF;
     }
 
     GetFontAttribute(1, FONTATTR_MAX_LETTER_WIDTH);

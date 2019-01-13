@@ -124,7 +124,7 @@ void sub_8184DA4(u8 arg0)
         {
             for (j = 0; j < BATTLER_RECORD_SIZE; j++)
             {
-                sBattleRecords[i][j] |= 0xFF;
+                sBattleRecords[i][j] = 0xFF;
             }
             sBattleFlags = gBattleTypeFlags;
             sAI_Scripts = gBattleResources->ai->aiFlags;
@@ -206,7 +206,7 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
     for (i = 0; i < bytesToClear; i++)
     {
         sRecordedBytesNo[battlerId]--;
-        sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] |= 0xFF;
+        sBattleRecords[battlerId][sRecordedBytesNo[battlerId]] = 0xFF;
         if (sRecordedBytesNo[battlerId] == 0)
             break;
     }

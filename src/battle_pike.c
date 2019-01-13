@@ -1446,7 +1446,7 @@ static void sub_81A84B4(void)
     u8 i;
 
     for (i = 0; i < 14; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
 }
 
 static void sub_81A84EC(void)

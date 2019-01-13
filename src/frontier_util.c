@@ -1827,7 +1827,7 @@ void sub_81A3ACC(void)
     s32 i;
 
     for (i = 0; i < 20; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] |= 0xFFFF;
+        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
 }
 
 static void sub_81A3B00(void)

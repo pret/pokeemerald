@@ -4524,7 +4524,7 @@ void sub_80115EC(s32 a0)
         if ((a0 >> i) & 1)
         {
             gUnknown_03005000.unk_cea[i] = 0;
-            gUnknown_03005000.unk_cee[i] |= 0xFF;
+            gUnknown_03005000.unk_cee[i] = 0xFF;
         }
     }
 }
