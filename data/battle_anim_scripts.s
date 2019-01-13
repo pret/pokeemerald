@@ -1669,6 +1669,39 @@ Move_AVALANCHE:
 	end
 	
 Move_ICE_SHARD:
+	monbg ANIM_TARGET
+	monbgprio_28 ANIM_TARGET
+	setalpha 12, 8
+	loadspritegfx ANIM_TAG_ICE_CRYSTALS
+	fadetobg BG_ICE
+	waitbgfadein
+	createsoundtask sub_8158C58, 183, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 4, 4, 0, 10
+	createsprite gUnknown_08595B2C, ANIM_ATTACKER, 2, -20, 70,  0, 42, 35
+	createsprite gUnknown_08595B14, ANIM_ATTACKER, 2, -20, 58,  0, 30, 35
+	createsprite gUnknown_08595B2C, ANIM_ATTACKER, 2, -20, -12, 0, 22, 40
+	createsprite gUnknown_08595B14, ANIM_ATTACKER, 2, -20, 0,   0, 10, 40
+	delay 5
+	createsprite gUnknown_08595B2C, ANIM_ATTACKER, 2, -10, -30, 10, -12, 45
+	createsprite gUnknown_08595B14, ANIM_ATTACKER, 2, -10, -42, 10, -24, 45
+	createsprite gUnknown_08595B2C, ANIM_ATTACKER, 2, -10, -20, 10, -36, 45
+	createsprite gUnknown_08595B14, ANIM_ATTACKER, 2, -10, -32, 10, -24, 45
+	delay 5
+	createsprite gUnknown_08595B2C, ANIM_ATTACKER, 2, 0, 10, 20, 22, 45
+	createsprite gUnknown_08595B14, ANIM_ATTACKER, 2, 0, -2, 20, 10, 45
+	createsprite gUnknown_08595B2C, ANIM_ATTACKER, 2, 0, 20, 20, -2, 30
+	createsprite gUnknown_08595B14, ANIM_ATTACKER, 2, 0,  8, 20, 10, 30
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 4, -31, 0, 7, RGB(0, 20, 31)
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 25, 1
+	waitforvisualfinish
+	delay 20
+	call FreezeEffect1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 4, 5, 7, 0, RGB(0, 20, 31)
+	waitforvisualfinish
+	restorebg
+	waitbgfadein	
+	clearmonbg ANIM_TARGET
+	blendoff
 	end
 	
 Move_SHADOW_CLAW:
