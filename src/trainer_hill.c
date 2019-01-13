@@ -4,6 +4,7 @@
 #include "battle_tower.h"
 #include "battle_setup.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_message_box.h"
 #include "international_string_util.h"
@@ -22,7 +23,11 @@
 #include "util.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
+#include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/trainers.h"
+
+extern bool32 sub_81D3B34(void);
 
 #define HILL_TAG_NORMAL 0
 #define HILL_TAG_VARIETY 1
@@ -69,6 +74,8 @@ struct TrHillTag
     u8 unkField_2;
     u8 unused3;
     u8 unused4;
+    u8 unused5;
+    u8 unused6;
     struct TrHillFloor floors[4];
 };
 
@@ -84,55 +91,155 @@ static EWRAM_DATA struct TrHillRoomTrainers *sRoomTrainers = NULL;
 EWRAM_DATA u32 *gUnknown_0203CF5C = NULL;
 
 // This file's functions.
-void sub_81D581C(void);
-void sub_81D58D8(void);
-void sub_81D5924(void);
-void sub_81D59D0(void);
-void sub_81D5A70(void);
-void sub_81D5AB4(void);
-void sub_81D5AD0(void);
-void sub_81D5B2C(void);
-void sub_81D5BBC(void);
-void sub_81D5C00(void);
-void sub_81D5C5C(void);
-void sub_81D62B4(void);
-void sub_81D64AC(void);
-void sub_81D64DC(void);
-void sub_81D64FC(void);
-void sub_81D6518(void);
-void sub_81D6568(void);
-void sub_81D65A0(void);
-void SetUpDataStruct(void);
-void FreeDataStruct(void);
-bool32 sub_81D5F48(void);
-void nullsub_2(void);
-void SetTimerValue(u32 *dst, u32 val);
-bool32 sub_81D3B34(void);
-u16 sub_81D6640(void);
-u32 GetTimerValue(u32 *src);
-u8 GetCurrentTrainerHillMapId(void);
-u8 sub_81D6490(void);
-void sub_81D642C(struct Pokemon *mon, u8 level);
-bool32 sub_81D6534(void);
+static void sub_81D581C(void);
+static void sub_81D58D8(void);
+static void sub_81D5924(void);
+static void sub_81D59D0(void);
+static void sub_81D5A70(void);
+static void sub_81D5AB4(void);
+static void sub_81D5AD0(void);
+static void sub_81D5B2C(void);
+static void sub_81D5BBC(void);
+static void sub_81D5C00(void);
+static void sub_81D5C5C(void);
+static void sub_81D62B4(void);
+static void sub_81D64AC(void);
+static void sub_81D64DC(void);
+static void sub_81D64FC(void);
+static void sub_81D6518(void);
+static void sub_81D6568(void);
+static void sub_81D65A0(void);
+static void SetUpDataStruct(void);
+static void FreeDataStruct(void);
+static void nullsub_2(void);
+static void SetTimerValue(u32 *dst, u32 val);
+static u32 GetTimerValue(u32 *src);
+static void sub_81D642C(struct Pokemon *mon, u8 level);
+static u16 sub_81D6640(void);
 
 // const data
-extern const u8 gText_TimeBoard[];
-extern const u8 gText_TimeCleared[];
-extern const u8 gText_XMinYDotZSec[];
-
+// I will decompile these soon, no worries :)
 extern const struct TrHillTag gUnknown_08626814;
 extern const struct TrHillTag gUnknown_086276FC;
 extern const struct TrHillTag gUnknown_086285E4;
 extern const struct TrHillTag gUnknown_086294CC;
 
-extern const u16 *const *const gUnknown_0862A5CC[];
 struct
 {
     u8 trainerClass;
     u8 musicId;
-} extern const gUnknown_0862A3B4[0x36];
+} static const gUnknown_0862A3B4[] =
+{
+    {TRAINER_CLASS_TEAM_AQUA, TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {TRAINER_CLASS_AQUA_ADMIN, TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {TRAINER_CLASS_AQUA_LEADER, TRAINER_ENCOUNTER_MUSIC_AQUA},
+    {TRAINER_CLASS_AROMA_LADY, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_BATTLE_GIRL, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_SWIMMER_F, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_POKEFAN, TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {TRAINER_CLASS_DRAGON_TAMER, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_COOLTRAINER, TRAINER_ENCOUNTER_MUSIC_COOL},
+    {TRAINER_CLASS_GUITARIST, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_SAILOR, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_TWINS, TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {TRAINER_CLASS_INTERVIEWER, TRAINER_ENCOUNTER_MUSIC_INTERVIEWER},
+    {TRAINER_CLASS_RUIN_MANIAC, TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {TRAINER_CLASS_GENTLEMAN, TRAINER_ENCOUNTER_MUSIC_RICH},
+    {TRAINER_CLASS_SWIMMER_M, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_POKEMANIAC, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {TRAINER_CLASS_BLACK_BELT, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_OLD_COUPLE, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_BUG_MANIAC, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {TRAINER_CLASS_CAMPER, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_KINDLER, TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {TRAINER_CLASS_TEAM_MAGMA, TRAINER_ENCOUNTER_MUSIC_MAGMA},
+    {TRAINER_CLASS_MAGMA_ADMIN, TRAINER_ENCOUNTER_MUSIC_MAGMA},
+    {TRAINER_CLASS_MAGMA_LEADER, TRAINER_ENCOUNTER_MUSIC_MAGMA},
+    {TRAINER_CLASS_LASS, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_BUG_CATCHER, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_NINJA_BOY, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {TRAINER_CLASS_RICH_BOY, TRAINER_ENCOUNTER_MUSIC_RICH},
+    {TRAINER_CLASS_HEX_MANIAC, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {TRAINER_CLASS_BEAUTY, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_LADY, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_PARASOL_LADY, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_PICNICKER, TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {TRAINER_CLASS_PKMN_BREEDER, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_COLLECTOR, TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS},
+    {TRAINER_CLASS_PKMN_RANGER, TRAINER_ENCOUNTER_MUSIC_COOL},
+    {TRAINER_CLASS_PKMN_TRAINER_3, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_YOUNG_COUPLE, TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {TRAINER_CLASS_PSYCHIC, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_SR_AND_JR, TRAINER_ENCOUNTER_MUSIC_TWINS},
+    {TRAINER_CLASS_ELITE_FOUR, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_YOUNGSTER, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_EXPERT, TRAINER_ENCOUNTER_MUSIC_INTENSE},
+    {TRAINER_CLASS_TRIATHLETE, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_BIRD_KEEPER, TRAINER_ENCOUNTER_MUSIC_COOL},
+    {TRAINER_CLASS_FISHERMAN, TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {TRAINER_CLASS_CHAMPION, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_TUBER_M, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_TUBER_F, TRAINER_ENCOUNTER_MUSIC_GIRL},
+    {TRAINER_CLASS_SIS_AND_BRO, TRAINER_ENCOUNTER_MUSIC_SWIMMER},
+    {TRAINER_CLASS_HIKER, TRAINER_ENCOUNTER_MUSIC_HIKER},
+    {TRAINER_CLASS_LEADER, TRAINER_ENCOUNTER_MUSIC_FEMALE},
+    {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
+};
 
-extern const u8 EventScript_2C83F0[];
+static const u16 gUnknown_0862A48C[] = {ITEM_RARE_CANDY, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A498[] = {ITEM_LUXURY_BALL, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4A4[] = {ITEM_MAX_REVIVE, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4B0[] = {ITEM_MAX_ETHER, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4BC[] = {ITEM_ELIXIR, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4C8[] = {ITEM_TM05_ROAR, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4D4[] = {ITEM_TM36_SLUDGE_BOMB, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4E0[] = {ITEM_TM06_TOXIC, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4EC[] = {ITEM_TM11_SUNNY_DAY, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A4F8[] = {ITEM_TM26_EARTHQUAKE, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A504[] = {ITEM_RARE_CANDY, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A510[] = {ITEM_LUXURY_BALL, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A51C[] = {ITEM_MAX_REVIVE, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A528[] = {ITEM_MAX_ETHER, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A534[] = {ITEM_ELIXIR, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A540[] = {ITEM_TM31_BRICK_BREAK, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A54C[] = {ITEM_TM41_TORMENT, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A558[] = {ITEM_TM48_SKILL_SWAP, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A564[] = {ITEM_TM19_GIGA_DRAIN, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const u16 gUnknown_0862A570[] = {ITEM_TM45_ATTRACT, ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+
+static const u16 *const gUnknown_0862A57C[] =
+{
+	gUnknown_0862A48C,
+	gUnknown_0862A498,
+	gUnknown_0862A4A4,
+	gUnknown_0862A4B0,
+	gUnknown_0862A4BC,
+	gUnknown_0862A4C8,
+	gUnknown_0862A4D4,
+	gUnknown_0862A4E0,
+	gUnknown_0862A4EC,
+	gUnknown_0862A4F8
+};
+
+static const u16 *const gUnknown_0862A5A4[] =
+{
+	gUnknown_0862A504,
+	gUnknown_0862A510,
+	gUnknown_0862A51C,
+	gUnknown_0862A528,
+	gUnknown_0862A534,
+	gUnknown_0862A540,
+	gUnknown_0862A54C,
+	gUnknown_0862A558,
+	gUnknown_0862A564,
+	gUnknown_0862A570
+};
+
+static const u16 *const *const gUnknown_0862A5CC[] =
+{
+    gUnknown_0862A57C,
+    gUnknown_0862A5A4
+};
 
 static const u16 gUnknown_0862A5D4[] = INCBIN_U16("graphics/pokenav/862A5D4.gbapal");
 static const u8 sRecordWinColors[] = {0, 2, 3};
@@ -197,6 +304,7 @@ static const struct EventObjectTemplate gUnknown_0862A670 =
 static const u32 gUnknown_0862A688[] = {MAP_NUM(TRAINER_HILL_2F), MAP_NUM(TRAINER_HILL_3F), MAP_NUM(TRAINER_HILL_4F), MAP_NUM(TRAINER_HILL_ROOF)};
 static const u8 gUnknown_0862A698[][3] = {{0, 1, 2}, {3, 4, 5}};
 
+// code
 void CallTrainerHillFunction(void)
 {
     SetUpDataStruct();
@@ -204,7 +312,7 @@ void CallTrainerHillFunction(void)
     FreeDataStruct();
 }
 
-void sub_81D54BC(void)
+void ResetTrainerHillResults(void)
 {
     s32 i;
 
@@ -215,7 +323,7 @@ void sub_81D54BC(void)
         SetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i], HILL_MAX_TIME);
 }
 
-u8 GetFloorId(void)
+static u8 GetFloorId(void)
 {
     return gMapHeader.mapLayoutId - 159;
 }
@@ -248,7 +356,7 @@ u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
     return gFacilityClassToPicIndex[facilityClass];
 }
 
-void sub_81D55D0(void)
+void InitTrainerHillBattleStruct(void)
 {
     s32 i, j;
 
@@ -267,13 +375,13 @@ void sub_81D55D0(void)
     FreeDataStruct();
 }
 
-void sub_81D5694(void)
+void FreeTrainerHillBattleStruct(void)
 {
     if (sRoomTrainers != NULL)
         FREE_AND_SET_NULL(sRoomTrainers);
 }
 
-void SetUpDataStruct(void)
+static void SetUpDataStruct(void)
 {
     if (sHillData == NULL)
     {
@@ -284,7 +392,7 @@ void SetUpDataStruct(void)
     }
 }
 
-void FreeDataStruct(void)
+static void FreeDataStruct(void)
 {
     if (sHillData != NULL)
         FREE_AND_SET_NULL(sHillData);
@@ -317,7 +425,7 @@ void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
     FreeDataStruct();
 }
 
-void sub_81D581C(void)
+static void sub_81D581C(void)
 {
     nullsub_2();
     if (!sub_81D3B34())
@@ -336,7 +444,7 @@ void sub_81D581C(void)
     gSaveBlock1Ptr->trainerHill.field_3D6E_0a = 0;
 }
 
-void sub_81D58D8(void)
+static void sub_81D58D8(void)
 {
     sub_80008E8();
     gSpecialVar_Result = 0;
@@ -348,7 +456,7 @@ void sub_81D58D8(void)
     gSaveBlock1Ptr->trainerHill.field_3D6E_0c = 1;
 }
 
-void sub_81D5924(void)
+static void sub_81D5924(void)
 {
     u16 itemId = sub_81D6640();
 
@@ -369,7 +477,7 @@ void sub_81D5924(void)
     }
 }
 
-void sub_81D59D0(void)
+static void sub_81D59D0(void)
 {
     if (gSaveBlock1Ptr->trainerHill.field_3D6E_0b)
     {
@@ -389,7 +497,7 @@ void sub_81D59D0(void)
     gSaveBlock1Ptr->trainerHill.field_3D6E_0b = 1;
 }
 
-void sub_81D5A70(void)
+static void sub_81D5A70(void)
 {
     if (!gSaveBlock1Ptr->trainerHill.field_3D6E_0c)
     {
@@ -400,12 +508,12 @@ void sub_81D5A70(void)
     }
 }
 
-void sub_81D5AB4(void)
+static void sub_81D5AB4(void)
 {
     gSaveBlock1Ptr->trainerHill.field_3D6E_0d = 1;
 }
 
-void sub_81D5AD0(void)
+static void sub_81D5AD0(void)
 {
     if (gSaveBlock1Ptr->trainerHill.field_3D6E_0d)
     {
@@ -423,7 +531,7 @@ void sub_81D5AD0(void)
     }
 }
 
-void sub_81D5B2C(void)
+static void sub_81D5B2C(void)
 {
     s32 total, minutes, secondsWhole, secondsFraction;
 
@@ -442,7 +550,7 @@ void sub_81D5B2C(void)
     ConvertIntToDecimalStringN(gStringVar3, secondsFraction, STR_CONV_MODE_LEADING_ZEROS, 2);
 }
 
-void sub_81D5BBC(void)
+static void sub_81D5BBC(void)
 {
     SetUpDataStruct();
     if (sHillData->tag.unkField_2 != 4)
@@ -458,7 +566,7 @@ void sub_81D5BBC(void)
     FreeDataStruct();
 }
 
-void sub_81D5C00(void)
+static void sub_81D5C00(void)
 {
     SetUpDataStruct();
     gSpecialVar_Result = 0;
@@ -477,7 +585,7 @@ bool8 sub_81D5C18(void)
         return FALSE;
 }
 
-void sub_81D5C5C(void)
+static void sub_81D5C5C(void)
 {
     if (!sub_81D5C18())
         gSpecialVar_Result = 0;
@@ -490,7 +598,7 @@ void nullsub_129(void)
 
 }
 
-void nullsub_2(void)
+static void nullsub_2(void)
 {
 
 }
@@ -532,12 +640,12 @@ void PrintOnTrainerHillRecordsWindow(void)
 
 // Leftover from Fire Red / Leaf Green as in these games,
 // the timer had to be xored by the encryption key in Sav2.
-u32 GetTimerValue(u32 *src)
+static u32 GetTimerValue(u32 *src)
 {
     return *src;
 }
 
-void SetTimerValue(u32 *dst, u32 val)
+static void SetTimerValue(u32 *dst, u32 val)
 {
     *dst = val;
 }
@@ -584,7 +692,7 @@ bool32 sub_81D5F48(void)
 
 // Functionally equivalent.
 #ifdef NONMATCHING
-u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
     u32 var0, var1, var2, var3;
 
@@ -597,7 +705,7 @@ u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 }
 #else
 NAKED
-u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
+static u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
     asm_unified("\n\
     push {r4,r5,lr}\n\
@@ -729,7 +837,7 @@ u8 GetCurrentTrainerHillMapId(void)
     return ret;
 }
 
-bool32 sub_81D6100(void)
+static bool32 sub_81D6100(void)
 {
     bool32 ret;
 
@@ -764,12 +872,12 @@ const struct WarpEvent* sub_81D6134(u8 warpEventId)
     return &header->events->warps[0];
 }
 
-u16 sub_81D6180(u8 localId)
+u16 LocalIdToHillTrainerId(u8 localId)
 {
     return gSaveBlock2Ptr->frontier.field_CB4[localId - 1];
 }
 
-bool8 GetTrainerHillTrainerFlag(u8 eventObjectId)
+bool8 GetHillTrainerFlag(u8 eventObjectId)
 {
     u32 floorId = GetFloorId() * 2;
     u8 bitId = gEventObjects[eventObjectId].localId - 1 + floorId;
@@ -777,7 +885,7 @@ bool8 GetTrainerHillTrainerFlag(u8 eventObjectId)
     return gSaveBlock2Ptr->frontier.field_EE0 & gBitTable[bitId];
 }
 
-void sub_81D61E8(void)
+void SetHillTrainerFlag(void)
 {
     u8 i;
     u8 floorId = GetFloorId() * 2;
@@ -809,13 +917,13 @@ const u8 *sub_81D62AC(void)
     return EventScript_2C83F0;
 }
 
-void sub_81D62B4(void)
+static void sub_81D62B4(void)
 {
     CopyTrainerHillTrainerText(5, gSpecialVar_LastTalked);
     sub_80982B8();
 }
 
-void sub_81D62CC(u16 trainerId, u8 firstMonId)
+static void sub_81D62CC(u16 trainerId, u8 firstMonId)
 {
     u8 trId, level;
     s32 i, floorId, arrId;
@@ -839,13 +947,13 @@ void sub_81D62CC(u16 trainerId, u8 firstMonId)
     FreeDataStruct();
 }
 
-void sub_81D6384(void)
+void FillHillTrainerParty(void)
 {
     ZeroEnemyPartyMons();
     sub_81D62CC(gTrainerBattleOpponent_A, 0);
 }
 
-void sub_81D639C(void)
+void FillHillTrainersParties(void)
 {
     ZeroEnemyPartyMons();
     sub_81D62CC(gTrainerBattleOpponent_A, 0);
@@ -860,7 +968,7 @@ u32 sub_81D63C4(void)
     return 7;
 }
 
-u8 sub_81D63C8(u16 trainerId)
+u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 {
     s32 i;
     u8 trId, facilityClass;
@@ -879,7 +987,7 @@ u8 sub_81D63C8(u16 trainerId)
     return 0;
 }
 
-void sub_81D642C(struct Pokemon *mon, u8 level)
+static void sub_81D642C(struct Pokemon *mon, u8 level)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 exp = gExperienceTables[gBaseStats[species].growthRate][level];
@@ -900,7 +1008,7 @@ u8 sub_81D6490(void)
     return ret;
 }
 
-void sub_81D64AC(void)
+static void sub_81D64AC(void)
 {
     gSaveBlock2Ptr->frontier.field_EE0 = 0xFF;
 }
@@ -911,17 +1019,17 @@ void sub_81D64C0(void)
         LoadPalette(gUnknown_0862A5D4, 0x70, 0x20);
 }
 
-void sub_81D64DC(void)
+static void sub_81D64DC(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.field_EF9_1;
 }
 
-void sub_81D64FC(void)
+static void sub_81D64FC(void)
 {
     gSaveBlock2Ptr->frontier.field_EF9_1 = 1;
 }
 
-void sub_81D6518(void)
+static void sub_81D6518(void)
 {
     gSaveBlock2Ptr->frontier.field_EF9_1 = 0;
 }
@@ -938,7 +1046,7 @@ bool32 sub_81D6534(void)
         return TRUE;
 }
 
-void sub_81D6568(void)
+static void sub_81D6568(void)
 {
     if (gSaveBlock1Ptr->trainerHill.field_3D6E_0d)
         gSpecialVar_Result = 0;
@@ -946,13 +1054,13 @@ void sub_81D6568(void)
         gSpecialVar_Result = 1;
 }
 
-void sub_81D65A0(void)
+static void sub_81D65A0(void)
 {
     gSaveBlock1Ptr->trainerHill.tag = gSpecialVar_0x8005;
     gSaveBlock1Ptr->trainerHill.field_3D68 = gSaveBlock1Ptr->trainerHillTimes[gSpecialVar_0x8005];
 }
 
-u8 sub_81D65E8(u8 arg0)
+static u8 sub_81D65E8(u8 arg0)
 {
     u8 var, i, modBy;
 
@@ -972,7 +1080,7 @@ u8 sub_81D65E8(u8 arg0)
     return var;
 }
 
-u16 sub_81D6640(void)
+static u16 sub_81D6640(void)
 {
     u8 i;
     const u16 *ptr;
