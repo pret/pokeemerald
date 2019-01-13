@@ -1556,6 +1556,19 @@ Move_SEED_BOMB:
 	end
 	
 Move_AIR_SLASH:
+	loadspritegfx ANIM_TAG_CUT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	call SetFlyingBg
+	playsewithpan SE_W015, SOUND_PAN_TARGET
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
+	call UnsetFlyingBg
 	end
 	
 Move_XSCISSOR:
