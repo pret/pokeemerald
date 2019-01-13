@@ -597,6 +597,7 @@ SECTIONS {
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
         data/pokenav.o(.rodata.after.match.call);
+        src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);

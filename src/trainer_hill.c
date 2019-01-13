@@ -15,16 +15,24 @@
 #include "pokemon.h"
 #include "script.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
+#include "trainer_hill.h"
 #include "window.h"
 #include "util.h"
 #include "constants/event_object_movement_constants.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
+
+#define HILL_TAG_NORMAL 0
+#define HILL_TAG_VARIETY 1
+#define HILL_TAG_UNIQUE 2
+#define HILL_TAG_EXPERT 3
 
 #define HILL_TRAINER_NAME_LENGTH 11
 #define HILL_MAX_TIME 215999 // 60 * 60 * 60 - 1
 
-struct TrHillStruct1
+struct TrHillRoomTrainers
 {
     u8 name[2][HILL_TRAINER_NAME_LENGTH];
     u8 facilityClass[2];
@@ -34,7 +42,7 @@ struct TrainerHillTrainer
 {
     u8 name[HILL_TRAINER_NAME_LENGTH];
     u8 facilityClass;
-    u32 field_18;
+    u32 unused;
     u16 speechBefore[6];
     u16 speechWin[6];
     u16 speechLose[6];
@@ -42,67 +50,81 @@ struct TrainerHillTrainer
     struct BattleTowerPokemon mons[PARTY_SIZE];
 };
 
-struct TrHillStruct5
+struct TrHillFloor
 {
     u8 unk0;
     u8 unk1;
     struct TrainerHillTrainer trainers[2];
     u8 data[0x100];
-    u16 unk3A0[2];
-    u8 data2[0x20 - 4];
+    u16 unk3A0[16];
     u8 coords[2]; // x first 4 bits, y last 4 bites
     u8 direction; // array of 4 bites for each trainer
     u8 range; // array of 4 bites for each trainer
 };
 
-struct TrHillStruct4
+struct TrHillTag
 {
     u8 unkField_0;
-    u8 unkField_1;
+    u8 unused1;
     u8 unkField_2;
-    u8 unkField_3;
-    u8 unkField_4;
-    u8 unkField_5;
-    u8 unkField_6;
-    struct TrHillStruct5 unk0[4];
+    u8 unused3;
+    u8 unused4;
+    struct TrHillFloor floors[4];
 };
 
 struct TrHillStruct2
 {
-    u8 layoutId;
-    struct TrHillStruct4 unk4;
+    u8 floorId;
+    struct TrHillTag tag;
 };
 
-extern struct TrHillStruct2 *gUnknown_0203CF54;
-extern struct TrHillStruct1 *gUnknown_0203CF58;
+// EWRAM
+static EWRAM_DATA struct TrHillStruct2 *sHillData = NULL;
+static EWRAM_DATA struct TrHillRoomTrainers *sRoomTrainers = NULL;
+EWRAM_DATA u32 *gUnknown_0203CF5C = NULL;
 
 // This file's functions.
-void sub_81D56B0(void);
-void sub_81D5710(void);
+void sub_81D581C(void);
+void sub_81D58D8(void);
+void sub_81D5924(void);
+void sub_81D59D0(void);
+void sub_81D5A70(void);
+void sub_81D5AB4(void);
+void sub_81D5AD0(void);
+void sub_81D5B2C(void);
+void sub_81D5BBC(void);
+void sub_81D5C00(void);
+void sub_81D5C5C(void);
+void sub_81D62B4(void);
+void sub_81D64AC(void);
+void sub_81D64DC(void);
+void sub_81D64FC(void);
+void sub_81D6518(void);
+void sub_81D6568(void);
+void sub_81D65A0(void);
+void SetUpDataStruct(void);
+void FreeDataStruct(void);
 bool32 sub_81D5F48(void);
 void nullsub_2(void);
-void sub_81D5DF4(u32 *dst, u32 val);
+void SetTimerValue(u32 *dst, u32 val);
 bool32 sub_81D3B34(void);
 u16 sub_81D6640(void);
-u32 sub_81D5DF0(u32 *src);
+u32 GetTimerValue(u32 *src);
 u8 GetCurrentTrainerHillMapId(void);
 u8 sub_81D6490(void);
 void sub_81D642C(struct Pokemon *mon, u8 level);
 bool32 sub_81D6534(void);
 
 // const data
-extern void (* const gUnknown_0862A618[])(void);
-extern const struct TrHillStruct4 *const gUnknown_0862A5F8[];
-extern const u16 gUnknown_0862A5D4[];
 extern const u8 gText_TimeBoard[];
 extern const u8 gText_TimeCleared[];
 extern const u8 gText_XMinYDotZSec[];
-extern const u8 gUnknown_0862A5F4[];
 
-extern const u8 *const gUnknown_0862A660[];
-extern const struct EventObjectTemplate gUnknown_0862A670;
-extern const u32 gUnknown_0862A688[4];
-extern const u8 gUnknown_0862A698[][3];
+extern const struct TrHillTag gUnknown_08626814;
+extern const struct TrHillTag gUnknown_086276FC;
+extern const struct TrHillTag gUnknown_086285E4;
+extern const struct TrHillTag gUnknown_086294CC;
+
 extern const u16 *const *const gUnknown_0862A5CC[];
 struct
 {
@@ -112,11 +134,74 @@ struct
 
 extern const u8 EventScript_2C83F0[];
 
-void sp194_trainer_tower(void)
+static const u16 gUnknown_0862A5D4[] = INCBIN_U16("graphics/pokenav/862A5D4.gbapal");
+static const u8 sRecordWinColors[] = {0, 2, 3};
+
+static const struct TrHillTag *const sDataPerTag[] =
 {
-    sub_81D56B0();
-    gUnknown_0862A618[gSpecialVar_0x8004]();
-    sub_81D5710();
+    &gUnknown_08626814,
+    &gUnknown_086276FC,
+    &gUnknown_086285E4,
+    &gUnknown_086294CC,
+};
+
+// Unused.
+static const u8 *const sFloorStrings[] =
+{
+    gText_TrainerHill1F,
+    gText_TrainerHill2F,
+    gText_TrainerHill3F,
+    gText_TrainerHill4F,
+};
+
+static void (* const sHillFunctions[])(void) =
+{
+    sub_81D581C,
+    sub_81D58D8,
+    sub_81D5924,
+    sub_81D59D0,
+    sub_81D5A70,
+    sub_81D5AB4,
+    sub_81D5AD0,
+    sub_81D5B2C,
+    sub_81D5BBC,
+    sub_81D5C00,
+    sub_81D5C5C,
+    sub_81D62B4,
+    sub_81D64AC,
+    sub_81D64DC,
+    sub_81D64FC,
+    sub_81D6518,
+    sub_81D6568,
+    sub_81D65A0,
+};
+
+static const u8 *const sTagMatchStrings[] =
+{
+    gText_NormalTagMatch,
+    gText_VarietyTagMatch,
+    gText_UniqueTagMatch,
+    gText_ExpertTagMatch,
+};
+
+static const struct EventObjectTemplate gUnknown_0862A670 =
+{
+    .graphicsId = EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
+    .elevation = 3,
+    .movementType = MOVEMENT_TYPE_LOOK_AROUND,
+    .movementRangeX = 1,
+    .movementRangeY = 1,
+    .trainerType = 1,
+};
+
+static const u32 gUnknown_0862A688[] = {MAP_NUM(TRAINER_HILL_2F), MAP_NUM(TRAINER_HILL_3F), MAP_NUM(TRAINER_HILL_4F), MAP_NUM(TRAINER_HILL_ROOF)};
+static const u8 gUnknown_0862A698[][3] = {{0, 1, 2}, {3, 4, 5}};
+
+void CallTrainerHillFunction(void)
+{
+    SetUpDataStruct();
+    sHillFunctions[gSpecialVar_0x8004]();
+    FreeDataStruct();
 }
 
 void sub_81D54BC(void)
@@ -127,10 +212,10 @@ void sub_81D54BC(void)
     gSaveBlock2Ptr->frontier.field_EF9_0 = 0;
     gSaveBlock1Ptr->trainerHill.field_3D68 = 0;
     for (i = 0; i < 4; i++)
-        sub_81D5DF4(&gSaveBlock1Ptr->field_3718[i], HILL_MAX_TIME);
+        SetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i], HILL_MAX_TIME);
 }
 
-u8 sub_81D5520(void)
+u8 GetFloorId(void)
 {
     return gMapHeader.mapLayoutId - 159;
 }
@@ -139,7 +224,7 @@ u8 GetTrainerHillOpponentClass(u16 trainerId)
 {
     u8 id = trainerId - 1;
 
-    return gFacilityClassToTrainerClass[gUnknown_0203CF58->facilityClass[id]];
+    return gFacilityClassToTrainerClass[sRoomTrainers->facilityClass[id]];
 }
 
 void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)
@@ -148,17 +233,17 @@ void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)
     u8 id = trainerId - 1;
 
     for (i = 0; i < HILL_TRAINER_NAME_LENGTH; i++)
-        dst[i] = gUnknown_0203CF58->name[id][i];
+        dst[i] = sRoomTrainers->name[id][i];
 }
 
 u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
 {
     u8 id, facilityClass;
 
-    sub_81D56B0();
+    SetUpDataStruct();
     id = trainerId - 1;
-    facilityClass = gUnknown_0203CF54->unk4.unk0[gUnknown_0203CF54->layoutId].trainers[id].facilityClass;
-    sub_81D5710();
+    facilityClass = sHillData->tag.floors[sHillData->floorId].trainers[id].facilityClass;
+    FreeDataStruct();
 
     return gFacilityClassToPicIndex[facilityClass];
 }
@@ -167,69 +252,69 @@ void sub_81D55D0(void)
 {
     s32 i, j;
 
-    sub_81D56B0();
-    gUnknown_0203CF58 = AllocZeroed(sizeof(*gUnknown_0203CF58));
+    SetUpDataStruct();
+    sRoomTrainers = AllocZeroed(sizeof(*sRoomTrainers));
 
     for (i = 0; i < 2; i++)
     {
         for (j = 0; j < HILL_TRAINER_NAME_LENGTH; j++)
         {
-            gUnknown_0203CF58->name[i][j] = gUnknown_0203CF54->unk4.unk0[gUnknown_0203CF54->layoutId].trainers[i].name[j];
+            sRoomTrainers->name[i][j] = sHillData->tag.floors[sHillData->floorId].trainers[i].name[j];
         }
-        gUnknown_0203CF58->facilityClass[i] = gUnknown_0203CF54->unk4.unk0[gUnknown_0203CF54->layoutId].trainers[i].facilityClass;
+        sRoomTrainers->facilityClass[i] = sHillData->tag.floors[sHillData->floorId].trainers[i].facilityClass;
     }
     sub_80008DC(&gSaveBlock1Ptr->trainerHill.field_3D64);
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 void sub_81D5694(void)
 {
-    if (gUnknown_0203CF58 != NULL)
-        FREE_AND_SET_NULL(gUnknown_0203CF58);
+    if (sRoomTrainers != NULL)
+        FREE_AND_SET_NULL(sRoomTrainers);
 }
 
-void sub_81D56B0(void)
+void SetUpDataStruct(void)
 {
-    if (gUnknown_0203CF54 == NULL)
+    if (sHillData == NULL)
     {
-        gUnknown_0203CF54 = AllocZeroed(sizeof(*gUnknown_0203CF54));
-        gUnknown_0203CF54->layoutId = gMapHeader.mapLayoutId - 159;
-        CpuCopy32(gUnknown_0862A5F8[gSaveBlock1Ptr->trainerHill.field_3D6E_1], &gUnknown_0203CF54->unk4, sizeof(gUnknown_0203CF54->unk4));
+        sHillData = AllocZeroed(sizeof(*sHillData));
+        sHillData->floorId = gMapHeader.mapLayoutId - 159;
+        CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag));
         nullsub_2();
     }
 }
 
-void sub_81D5710(void)
+void FreeDataStruct(void)
 {
-    if (gUnknown_0203CF54 != NULL)
-        FREE_AND_SET_NULL(gUnknown_0203CF54);
+    if (sHillData != NULL)
+        FREE_AND_SET_NULL(sHillData);
 }
 
 void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
 {
-    u8 id, layoutId;
+    u8 id, floorId;
 
-    sub_81D56B0();
-    layoutId = sub_81D5520();
+    SetUpDataStruct();
+    floorId = GetFloorId();
     id = trainerId - 1;
 
     switch (which)
     {
     case 2:
-        FrontierSpeechToString(gUnknown_0203CF54->unk4.unk0[layoutId].trainers[id].speechBefore);
+        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechBefore);
         break;
     case 3:
-        FrontierSpeechToString(gUnknown_0203CF54->unk4.unk0[layoutId].trainers[id].speechWin);
+        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechWin);
         break;
     case 4:
-        FrontierSpeechToString(gUnknown_0203CF54->unk4.unk0[layoutId].trainers[id].speechLose);
+        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechLose);
         break;
     case 5:
-        FrontierSpeechToString(gUnknown_0203CF54->unk4.unk0[layoutId].trainers[id].speechAfter);
+        FrontierSpeechToString(sHillData->tag.floors[floorId].trainers[id].speechAfter);
         break;
     }
 
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 void sub_81D581C(void)
@@ -267,7 +352,7 @@ void sub_81D5924(void)
 {
     u16 itemId = sub_81D6640();
 
-    if (gUnknown_0203CF54->unk4.unkField_2 != 4 || gSaveBlock1Ptr->trainerHill.field_3D6E_0a)
+    if (sHillData->tag.unkField_2 != 4 || gSaveBlock1Ptr->trainerHill.field_3D6E_0a)
     {
         gSpecialVar_Result = 2;
     }
@@ -290,10 +375,10 @@ void sub_81D59D0(void)
     {
         gSpecialVar_Result = 2;
     }
-    else if (sub_81D5DF0(&gSaveBlock1Ptr->trainerHill.field_3D68) > gSaveBlock1Ptr->trainerHill.field_3D64)
+    else if (GetTimerValue(&gSaveBlock1Ptr->trainerHill.field_3D68) > gSaveBlock1Ptr->trainerHill.field_3D64)
     {
-        sub_81D5DF4(&gSaveBlock1Ptr->trainerHill.field_3D68, gSaveBlock1Ptr->trainerHill.field_3D64);
-        gSaveBlock1Ptr->field_3718[gSaveBlock1Ptr->trainerHill.field_3D6E_1] = gSaveBlock1Ptr->trainerHill.field_3D68;
+        SetTimerValue(&gSaveBlock1Ptr->trainerHill.field_3D68, gSaveBlock1Ptr->trainerHill.field_3D64);
+        gSaveBlock1Ptr->trainerHillTimes[gSaveBlock1Ptr->trainerHill.tag] = gSaveBlock1Ptr->trainerHill.field_3D68;
         gSpecialVar_Result = 0;
     }
     else
@@ -359,10 +444,10 @@ void sub_81D5B2C(void)
 
 void sub_81D5BBC(void)
 {
-    sub_81D56B0();
-    if (gUnknown_0203CF54->unk4.unkField_2 != 4)
+    SetUpDataStruct();
+    if (sHillData->tag.unkField_2 != 4)
     {
-        ConvertIntToDecimalStringN(gStringVar1, gUnknown_0203CF54->unk4.unkField_2, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sHillData->tag.unkField_2, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = 0;
     }
     else
@@ -370,14 +455,14 @@ void sub_81D5BBC(void)
         gSpecialVar_Result = 1;
     }
 
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 void sub_81D5C00(void)
 {
-    sub_81D56B0();
+    SetUpDataStruct();
     gSpecialVar_Result = 0;
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 bool8 sub_81D5C18(void)
@@ -415,17 +500,17 @@ void PrintOnTrainerHillRecordsWindow(void)
     s32 i, x, y;
     u32 total, minutes, secondsWhole, secondsFraction;
 
-    sub_81D56B0();
+    SetUpDataStruct();
     FillWindowPixelBuffer(0, 0);
     x = GetStringCenterAlignXOffset(1, gText_TimeBoard, 0xD0);
-    AddTextPrinterParameterized3(0, 1, x, 2, gUnknown_0862A5F4, TEXT_SPEED_FF, gText_TimeBoard);
+    AddTextPrinterParameterized3(0, 1, x, 2, sRecordWinColors, TEXT_SPEED_FF, gText_TimeBoard);
 
     y = 18;
     for (i = 0; i < 4; i++)
     {
-        AddTextPrinterParameterized3(0, 1, 0, y, gUnknown_0862A5F4, TEXT_SPEED_FF, gUnknown_0862A660[i]);
+        AddTextPrinterParameterized3(0, 1, 0, y, sRecordWinColors, TEXT_SPEED_FF, sTagMatchStrings[i]);
         y += 15;
-        total = sub_81D5DF0(&gSaveBlock1Ptr->field_3718[i]);
+        total = GetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i]);
         minutes = total / (60 * 60);
         total %= (60 * 60);
         ConvertIntToDecimalStringN(gStringVar1, minutes, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -436,74 +521,75 @@ void PrintOnTrainerHillRecordsWindow(void)
         ConvertIntToDecimalStringN(gStringVar3, secondsFraction, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringExpandPlaceholders(StringCopy(gStringVar4, gText_TimeCleared), gText_XMinYDotZSec);
         x = GetStringRightAlignXOffset(1, gStringVar4, 0xD0);
-        AddTextPrinterParameterized3(0, 1, x, y, gUnknown_0862A5F4, TEXT_SPEED_FF, gStringVar4);
+        AddTextPrinterParameterized3(0, 1, x, y, sRecordWinColors, TEXT_SPEED_FF, gStringVar4);
         y += 17;
     }
 
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
-    sub_81D5710();
+    FreeDataStruct();
 }
 
-// In fire red the counter had to be xored by the encryption key in Sav2.
-u32 sub_81D5DF0(u32 *src)
+// Leftover from Fire Red / Leaf Green as in these games,
+// the timer had to be xored by the encryption key in Sav2.
+u32 GetTimerValue(u32 *src)
 {
     return *src;
 }
 
-void sub_81D5DF4(u32 *dst, u32 val)
+void SetTimerValue(u32 *dst, u32 val)
 {
     *dst = val;
 }
 
 void sub_81D5DF8(void)
 {
-    u8 i, layoutId;
+    u8 i, floorId;
     struct EventObjectTemplate *eventTemplates = gSaveBlock1Ptr->eventObjectTemplates;
 
     if (!sub_81D5F48())
         return;
 
-    sub_81D56B0();
+    SetUpDataStruct();
     for (i = 0; i < 2; i++)
         gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
     CpuFill32(0, gSaveBlock1Ptr->eventObjectTemplates, sizeof(gSaveBlock1Ptr->eventObjectTemplates));
 
-    layoutId = sub_81D5520();
+    floorId = GetFloorId();
     for (i = 0; i < 2; i++)
     {
         u8 bits;
 
         eventTemplates[i] = gUnknown_0862A670;
         eventTemplates[i].localId = i + 1;
-        eventTemplates[i].graphicsId = FacilityClassToGraphicsId(gUnknown_0203CF54->unk4.unk0[layoutId].trainers[i].facilityClass);
-        eventTemplates[i].x = gUnknown_0203CF54->unk4.unk0[layoutId].coords[i] & 0xF;
-        eventTemplates[i].y = ((gUnknown_0203CF54->unk4.unk0[layoutId].coords[i] >> 4) & 0xF) + 5;
+        eventTemplates[i].graphicsId = FacilityClassToGraphicsId(sHillData->tag.floors[floorId].trainers[i].facilityClass);
+        eventTemplates[i].x = sHillData->tag.floors[floorId].coords[i] & 0xF;
+        eventTemplates[i].y = ((sHillData->tag.floors[floorId].coords[i] >> 4) & 0xF) + 5;
         bits = i << 2;
-        eventTemplates[i].movementType = ((gUnknown_0203CF54->unk4.unk0[layoutId].direction >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
-        eventTemplates[i].trainerRange_berryTreeId = (gUnknown_0203CF54->unk4.unk0[layoutId].range >> bits) & 0xF;
+        eventTemplates[i].movementType = ((sHillData->tag.floors[floorId].direction >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
+        eventTemplates[i].trainerRange_berryTreeId = (sHillData->tag.floors[floorId].range >> bits) & 0xF;
         eventTemplates[i].script = EventScript_2C83F0;
         gSaveBlock2Ptr->frontier.field_CB4[i] = i + 1;
     }
 
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 bool32 sub_81D5F48(void)
 {
-    sub_81D56B0();
-    sub_81D5710();
+    SetUpDataStruct();
+    FreeDataStruct();
     return TRUE;
 }
 
 // Functionally equivalent.
 #ifdef NONMATCHING
-u32 sub_81D5F58(u8 layoutId, u32 bit, u32 arg2, u32 arg3)
+u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
     u32 var0, var1, var2, var3;
 
-    var0 = (gUnknown_0203CF54->unk4.unk0[layoutId].unk3A0[arg2] >> (15 - bit)) & 1;
-    var1 = gUnknown_0203CF54->unk4.unk0[layoutId].data[arg2 * arg3 + bit];
+    var0 = (sHillData->tag.floors[floorId].unk3A0[arg2] >> (15 - bit)) & 1;
+    var1 = sHillData->tag.floors[floorId].data[arg2 * arg3 + bit];
     var3 = 0x200;
     var2 = 0x3000;
 
@@ -511,13 +597,13 @@ u32 sub_81D5F58(u8 layoutId, u32 bit, u32 arg2, u32 arg3)
 }
 #else
 NAKED
-u32 sub_81D5F58(u8 layoutId, u32 bit, u32 arg2, u32 arg3)
+u32 sub_81D5F58(u8 floorId, u32 bit, u32 arg2, u32 arg3)
 {
     asm_unified("\n\
     push {r4,r5,lr}\n\
 	lsls r0, 24\n\
 	lsrs r0, 24\n\
-	ldr r4, =gUnknown_0203CF54\n\
+	ldr r4, =sHillData\n\
 	ldr r4, [r4]\n\
 	mov r12, r4\n\
 	lsls r4, r2, 1\n\
@@ -565,23 +651,23 @@ void sub_81D5FB4(u16 *mapArg)
 {
     s32 i, j;
     u16 *src, *dst;
-    u8 layoutId = GetCurrentTrainerHillMapId();
+    u8 mapId = GetCurrentTrainerHillMapId();
 
-    if (layoutId == 6)
+    if (mapId == 6)
     {
         InitMapFromSavedGame();
         return;
     }
 
-    sub_81D56B0();
-    if (layoutId == 5)
+    SetUpDataStruct();
+    if (mapId == 5)
     {
         InitMapFromSavedGame();
-        sub_81D5710();
+        FreeDataStruct();
         return;
     }
 
-    layoutId = sub_81D5520();
+    mapId = GetFloorId();
     src = gMapHeader.mapLayout->map;
     gBackupMapLayout.map = mapArg;
     gBackupMapLayout.width = 31;
@@ -598,12 +684,12 @@ void sub_81D5FB4(u16 *mapArg)
     for (i = 0; i < 16; i++)
     {
         for (j = 0; j < 16; j++)
-            dst[j] = sub_81D5F58(layoutId, j, i, 0x10);
+            dst[j] = sub_81D5F58(mapId, j, i, 0x10);
         dst += 31;
     }
 
     mapheader_run_script_with_tag_x1();
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 bool32 InTrainerHill(void)
@@ -685,8 +771,8 @@ u16 sub_81D6180(u8 localId)
 
 bool8 GetTrainerHillTrainerFlag(u8 eventObjectId)
 {
-    u32 layoutId = sub_81D5520() * 2;
-    u8 bitId = gEventObjects[eventObjectId].localId - 1 + layoutId;
+    u32 floorId = GetFloorId() * 2;
+    u8 bitId = gEventObjects[eventObjectId].localId - 1 + floorId;
 
     return gSaveBlock2Ptr->frontier.field_EE0 & gBitTable[bitId];
 }
@@ -694,13 +780,13 @@ bool8 GetTrainerHillTrainerFlag(u8 eventObjectId)
 void sub_81D61E8(void)
 {
     u8 i;
-    u8 layoutId = sub_81D5520() * 2;
+    u8 floorId = GetFloorId() * 2;
 
     for (i = 0; i < 2; i++)
     {
         if (gSaveBlock2Ptr->frontier.field_CB4[i] == gTrainerBattleOpponent_A)
         {
-            gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[layoutId + i];
+            gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[floorId + i];
             break;
         }
     }
@@ -711,7 +797,7 @@ void sub_81D61E8(void)
         {
             if (gSaveBlock2Ptr->frontier.field_CB4[i] == gTrainerBattleOpponent_B)
             {
-                gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[layoutId + i];
+                gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[floorId + i];
                 break;
             }
         }
@@ -732,25 +818,25 @@ void sub_81D62B4(void)
 void sub_81D62CC(u16 trainerId, u8 firstMonId)
 {
     u8 trId, level;
-    s32 i, layoutId, arrId;
+    s32 i, floorId, arrId;
 
     if ((u16)(trainerId - 1) > 1)
         return;
 
     trId = trainerId - 1;
-    sub_81D56B0();
+    SetUpDataStruct();
     level = GetHighestLevelInPlayerParty();
-    layoutId = sub_81D5520();
+    floorId = GetFloorId();
     for (i = firstMonId, arrId = 0; i < firstMonId + 3; i++, arrId++)
     {
         u8 id = gUnknown_0862A698[trId][arrId];
         struct Pokemon *mon = &gEnemyParty[i];
 
-        CreateBattleTowerMon(mon, &gUnknown_0203CF54->unk4.unk0[layoutId].trainers[trId].mons[id]);
+        CreateBattleTowerMon(mon, &sHillData->tag.floors[floorId].trainers[trId].mons[id]);
         sub_81D642C(mon, level);
     }
 
-    sub_81D5710();
+    FreeDataStruct();
 }
 
 void sub_81D6384(void)
@@ -779,10 +865,10 @@ u8 sub_81D63C8(u16 trainerId)
     s32 i;
     u8 trId, facilityClass;
 
-    sub_81D56B0();
+    SetUpDataStruct();
     trId = trainerId - 1;
-    facilityClass = gUnknown_0203CF54->unk4.unk0[gUnknown_0203CF54->layoutId].trainers[trId].facilityClass;
-    sub_81D5710();
+    facilityClass = sHillData->tag.floors[sHillData->floorId].trainers[trId].facilityClass;
+    FreeDataStruct();
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_0862A3B4); i++)
     {
@@ -807,9 +893,9 @@ u8 sub_81D6490(void)
 {
     u8 ret;
 
-    sub_81D56B0();
-    ret = gUnknown_0203CF54->unk4.unkField_2;
-    sub_81D5710();
+    SetUpDataStruct();
+    ret = sHillData->tag.unkField_2;
+    FreeDataStruct();
 
     return ret;
 }
@@ -862,8 +948,8 @@ void sub_81D6568(void)
 
 void sub_81D65A0(void)
 {
-    gSaveBlock1Ptr->trainerHill.field_3D6E_1 = gSpecialVar_0x8005;
-    gSaveBlock1Ptr->trainerHill.field_3D68 = gSaveBlock1Ptr->field_3718[gSpecialVar_0x8005];
+    gSaveBlock1Ptr->trainerHill.tag = gSpecialVar_0x8005;
+    gSaveBlock1Ptr->trainerHill.field_3D68 = gSaveBlock1Ptr->trainerHillTimes[gSpecialVar_0x8005];
 }
 
 u8 sub_81D65E8(u8 arg0)
@@ -873,8 +959,8 @@ u8 sub_81D65E8(u8 arg0)
     var = 0;
     for (i = 0; i < 4; i++)
     {
-        var ^= gUnknown_0203CF54->unk4.unk0[i].unk0 & 0x1F;
-        var ^= gUnknown_0203CF54->unk4.unk0[i].unk1 & 0x1F;
+        var ^= sHillData->tag.floors[i].unk0 & 0x1F;
+        var ^= sHillData->tag.floors[i].unk1 & 0x1F;
     }
 
     if (arg0)
@@ -894,18 +980,18 @@ u16 sub_81D6640(void)
 
     for (i = 0; i < 4; i++)
     {
-        var += gUnknown_0203CF54->unk4.unk0[i].unk0;
-        var += gUnknown_0203CF54->unk4.unk0[i].unk1;
+        var += sHillData->tag.floors[i].unk0;
+        var += sHillData->tag.floors[i].unk1;
     }
 
     var2 = var / 256;
     var2 %= 2;
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) && gUnknown_0203CF54->unk4.unkField_0 == 8)
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) && sHillData->tag.unkField_0 == 8)
         i = sub_81D65E8(1);
     else
         i = sub_81D65E8(0);
 
-    if (gSaveBlock1Ptr->trainerHill.field_3D6E_1 == 3)
+    if (gSaveBlock1Ptr->trainerHill.tag == HILL_TAG_EXPERT)
         i = (i + 1) % 10;
 
     ptr = gUnknown_0862A5CC[var2][i];

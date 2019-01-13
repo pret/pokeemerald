@@ -805,7 +805,7 @@ struct SaveTrainerHill
     /*0x3D6E*/ u16 field_3D6E_0d:1; // 8
     /*0x3D6E*/ u16 field_3D6E_0e:1; // x10
     /*0x3D6E*/ u16 field_3D6E_0f:1; // x20
-    /*0x3D6E*/ u16 field_3D6E_1:2; // x40, x80 = xC0
+    /*0x3D6E*/ u16 tag:2; // x40, x80 = xC0
 };
 
 struct SaveBlock1
@@ -886,7 +886,7 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ u8 field_322C[1260];
-    /*0x3718*/ u32 field_3718[4];
+    /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[DEX_FLAGS_NO];
