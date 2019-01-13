@@ -1556,22 +1556,34 @@ Move_SEED_BOMB:
 	end
 	
 Move_AIR_SLASH:
-	loadspritegfx ANIM_TAG_CUT
-	monbg ANIM_TARGET
-	setalpha 12, 8
+	loadspritegfx ANIM_TAG_SLASH
 	call SetFlyingBg
-	playsewithpan SE_W015, SOUND_PAN_TARGET
-	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
-	delay 5
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	blendoff
+	createsprite gUnknown_08592D2C, ANIM_TARGET, 2, 1, -8, 0
+	playsewithpan SE_W013, SOUND_PAN_TARGET
+	delay 4
+	createsprite gUnknown_08592D2C, ANIM_TARGET, 2, 1, 8, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 18, 1
+	playsewithpan SE_W013, SOUND_PAN_TARGET
 	waitforvisualfinish
 	call UnsetFlyingBg
 	end
 	
 Move_XSCISSOR:
+	loadspritegfx ANIM_TAG_CUT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 24, 6, 1, 5
+	createvisualtask sub_81169C0, 2, 0, 4, 7, 3
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 1
+	playsewithpan SE_W013B, SOUND_PAN_ATTACKER
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, RGB_BLACK, 10, 0, 0
+	playsewithpan SE_W013, SOUND_PAN_TARGET
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
 	end
 	
 Move_BUG_BUZZ:
