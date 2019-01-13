@@ -216,10 +216,10 @@
 #define MAPSEC_TRAINER_HILL                 0xD4
 #define MAPSEC_NONE                         0xD5
 
-#define MAPSEC_SPECIAL_EGG                  0xFD
-#define MAPSEC_IN_GAME_TRADE                0xFE
-#define MAPSEC_FATEFUL_ENCOUNTER            0xFF
+#define METLOC_SPECIAL_EGG                  0xFD
+#define METLOC_IN_GAME_TRADE                0xFE
+#define METLOC_FATEFUL_ENCOUNTER            0xFF
 
-#define MAPSEC_SUBTRACT_KANTO (MAPSEC_SPECIAL_AREA - MAPSEC_DYNAMIC)
+#define KANTO_MAPSEC_COUNT (MAPSEC_SPECIAL_AREA - MAPSEC_DYNAMIC)
 
 #endif //GUARD_REGIONMAPSEC_H
