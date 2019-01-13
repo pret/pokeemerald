@@ -2251,6 +2251,41 @@ Move_ROTOTILLER:
 	end
 	
 Move_STICKY_WEB:
+	loadspritegfx ANIM_TAG_SPIDER_WEB
+	loadspritegfx ANIM_TAG_WEB_THREAD
+	monbg ANIM_DEF_PARTNER
+	delay 0
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 5, 1, 2, 0, 9, RGB_BLACK
+	waitforvisualfinish
+	monbgprio_28 ANIM_TARGET
+	loopsewithpan SE_W081, SOUND_PAN_ATTACKER, 9, 6
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	call SpiderWeb1
+	waitforvisualfinish
+	playsewithpan SE_W081B, SOUND_PAN_TARGET
+	createsprite gUnknown_08596A2C, ANIM_ATTACKER, 2, 0, 0
+	delay 50
+	playsewithpan SE_W081B, SOUND_PAN_TARGET
+	createsprite gUnknown_08596A2C, ANIM_ATTACKER, 2, -30, 30
+	delay 50
+	playsewithpan SE_W081B, SOUND_PAN_TARGET
+	createsprite gUnknown_08596A2C, ANIM_ATTACKER, 2, 30, -30
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	delay 1
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 5, 1, 2, 9, 0, RGB_BLACK
 	end
 	
 Move_FELL_STINGER:
@@ -9500,7 +9535,7 @@ Move_SPIDER_WEB:
 	call SpiderWeb1
 	waitforvisualfinish
 	playsewithpan SE_W081B, SOUND_PAN_TARGET
-	createsprite gUnknown_08596A2C, ANIM_ATTACKER, 2
+	createsprite gUnknown_08596A2C, ANIM_ATTACKER, 2, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	delay 1
