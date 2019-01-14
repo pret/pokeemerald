@@ -3548,7 +3548,7 @@ static void sub_8190400(u8 taskId)
         SetVBlankCallback(VblankCb0_BattleDome);
         sBattleDomeStruct = AllocZeroed(sizeof(*sBattleDomeStruct));
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
-            sBattleDomeStruct->arr[i] |= 0xFF;
+            sBattleDomeStruct->arr[i] = 0xFF;
         LoadMonIconPalettes();
         i = CreateTask(sub_8190CD4, 0);
         gTasks[i].data[0] = 0;

@@ -1563,7 +1563,7 @@ static void InitPartyMenu(u8 a, u8 b, u8 c, u8 d, u8 e, TaskFunc task, MainCallb
         for (i = 0; i <= 15; i++)
             gUnknown_0203CEC4->data[i] = 0;
         for (i = 0; i < 3; i++)
-            gUnknown_0203CEC4->unkC[i] |= 0xFF;
+            gUnknown_0203CEC4->unkC[i] = 0xFF;
 
         if (d == 0)
             gUnknown_0203CEC8.unk9 = 0;
@@ -1851,10 +1851,10 @@ static void PartyMenuInitHelperStructs(u8 a)
         gUnknown_0203CEDC[i].unk0 = &gUnknown_086156C4[1];
         gUnknown_0203CEDC[i].unk4 = gUnknown_08615704[a][i];
         gUnknown_0203CEDC[i].windowId = i;
-        gUnknown_0203CEDC[i].unk9 |= 0xFF;
-        gUnknown_0203CEDC[i].unkA |= 0xFF;
-        gUnknown_0203CEDC[i].unkB |= 0xFF;
-        gUnknown_0203CEDC[i].unkC |= 0xFF;
+        gUnknown_0203CEDC[i].unk9 = 0xFF;
+        gUnknown_0203CEDC[i].unkA = 0xFF;
+        gUnknown_0203CEDC[i].unkB = 0xFF;
+        gUnknown_0203CEDC[i].unkC = 0xFF;
     }
     gUnknown_0203CEDC[0].unk0 = &gUnknown_086156C4[0];
     if (a == 3)

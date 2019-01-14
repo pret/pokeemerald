@@ -6,18 +6,16 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "pokemon.h"
-#include "pokenav.h"
 #include "script.h"
 #include "script_movement.h"
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
+#include "trainer_hill.h"
 #include "util.h"
 #include "battle_pyramid.h"
 #include "constants/field_effects.h"
 
-extern bool32 InTrainerHill(void);
-extern bool8 GetTrainerHillTrainerFlag(u8 eventObjectId);
 extern void sub_809BE48(u16 npcId);
 
 // this file's functions
@@ -240,7 +238,7 @@ static u8 CheckTrainer(u8 eventObjectId)
     }
     else if (InTrainerHill() == TRUE)
     {
-        if (GetTrainerHillTrainerFlag(eventObjectId))
+        if (GetHillTrainerFlag(eventObjectId))
             return 0;
     }
     else

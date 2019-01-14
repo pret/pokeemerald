@@ -1450,7 +1450,7 @@ void ClearBattleAnimationVars(void)
 
     // Clear index array.
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
-        sAnimSpriteIndexArray[i] |= 0xFFFF;
+        sAnimSpriteIndexArray[i] = 0xFFFF;
 
     // Clear anim args.
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
@@ -1511,7 +1511,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     gAnimScriptCallback = RunAnimScriptCommand;
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
-        sAnimSpriteIndexArray[i] |= 0xFFFF;
+        sAnimSpriteIndexArray[i] = 0xFFFF;
 
     if (isMoveAnim)
     {
@@ -1572,7 +1572,7 @@ static void ClearSpriteIndex(u16 index)
     {
         if (sAnimSpriteIndexArray[i] == index)
         {
-            sAnimSpriteIndexArray[i] |= 0xFFFF;
+            sAnimSpriteIndexArray[i] = 0xFFFF;
             return;
         }
     }
@@ -1779,7 +1779,7 @@ static void ScriptCmd_end(void)
         {
             FreeSpriteTilesByTag(gBattleAnimPicTable[sAnimSpriteIndexArray[i]].tag);
             FreeSpritePaletteByTag(gBattleAnimPicTable[sAnimSpriteIndexArray[i]].tag);
-            sAnimSpriteIndexArray[i] |= 0xFFFF; // set terminator.
+            sAnimSpriteIndexArray[i] = 0xFFFF; // set terminator.
         }
     }
 

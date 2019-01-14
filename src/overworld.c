@@ -19,7 +19,6 @@
 #include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-// #include "fldeff_flash.h"
 #include "gpu_regs.h"
 #include "heal_location.h"
 #include "link.h"
@@ -50,6 +49,7 @@
 #include "task.h"
 // #include "tileset_anim.h"
 #include "time_events.h"
+#include "trainer_hill.h"
 #include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
@@ -106,7 +106,6 @@ extern void apply_map_tileset2_palette(const struct MapLayout *);
 extern void copy_map_tileset2_to_vram_2(const struct MapLayout *);
 extern void RestartWildEncounterImmunitySteps(void);
 extern void ShowMapNamePopup(void);
-extern bool32 InTrainerHill(void);
 extern bool32 sub_808651C(void);
 extern bool8 sub_80AF6A4(void);
 extern bool8 sub_80E909C(void);
@@ -129,14 +128,11 @@ extern void WriteFlashScanlineEffectBuffer(u8);
 extern void sub_81AA2F8(void);
 extern void InitMatchCallCounters(void);
 extern void sub_80EDB44(void);
-extern void sub_81D64C0(void);
 extern void InitFieldMessageBox(void);
 extern void copy_map_tileset1_to_vram(const struct MapLayout *);
 extern void copy_map_tileset2_to_vram(const struct MapLayout *);
 extern void FieldUpdateBgTilemapScroll(void);
 extern void TransferTilesetAnimsBuffer(void);
-extern bool32 sub_81D5F48(void);
-extern u8 GetCurrentTrainerHillMapId(void);
 extern bool8 warp0_in_pokecenter(void);
 extern void ResetAllPicSprites(void);
 extern void FieldEffectActiveListClear(void);

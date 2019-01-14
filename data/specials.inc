@@ -515,7 +515,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B514
 	def_special sub_813B568
 	def_special sub_813B534
-	def_special sp194_trainer_tower
+	def_special CallTrainerHillFunction
 	def_special sub_813B7D8
 	def_special sub_813B80C
 	def_special sub_81D4BEC

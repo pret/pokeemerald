@@ -584,4 +584,7 @@ extern const u8 EventScript_275A86[];
 extern const u8 EventScript_275ADF[];
 extern const u8 EventScript_275B38[];
 
+// trainer hill
+extern const u8 EventScript_2C83F0[];
+
 #endif // GUARD_EVENT_SCRIPTS_H

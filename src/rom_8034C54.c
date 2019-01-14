@@ -82,7 +82,7 @@ bool32 sub_8034C54(u32 count)
     for (i = 0; i < count; i++)
     {
         gUnknown_02022E10->array[i].isActive = FALSE;
-        gUnknown_02022E10->array[i].firstOamId |= 0xFF;
+        gUnknown_02022E10->array[i].firstOamId = 0xFF;
     }
 
     return TRUE;

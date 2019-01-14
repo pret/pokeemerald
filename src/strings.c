@@ -252,7 +252,7 @@ const u8 gText_ThePokemonList[] = _("the POKéMON LIST");
 const u8 gText_TheShop[] = _("the shop");
 const u8 gText_ThePC[] = _("the PC");
 
-const u8 *const gReturnToXStringsTable[] = 
+const u8 *const gReturnToXStringsTable[] =
 {
     gText_TheField,
     gText_TheBattle,
@@ -268,7 +268,7 @@ const u8 *const gReturnToXStringsTable[] =
     gText_ThePC
 };
 
-const u8 *const gReturnToXStringsTable2[] = 
+const u8 *const gReturnToXStringsTable2[] =
 {
     gText_TheField,
     gText_TheBattle,
@@ -283,7 +283,7 @@ const u8 gText_TMHMPocket[] = _("TMs & HMs");
 const u8 gText_BerriesPocket[] = _("BERRIES");
 const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 
-const u8 *const gPocketNamesStringsTable[] = 
+const u8 *const gPocketNamesStringsTable[] =
 {
     gText_ItemsPocket,
     gText_PokeBallsPocket,
@@ -749,10 +749,10 @@ const u8 gUnknown_085EB2FF[] = _("I'll battle now!");
 const u8 gUnknown_085EB310[] = _("I won!");
 const u8 gUnknown_085EB317[] = _("I lost!");
 const u8 gUnknown_085EB31F[] = _("I won't tell.");
-const u8 gUnknown_085EB32D[] = _("NORMAL TAG MATCH");
-const u8 gUnknown_085EB33E[] = _("VARIETY TAG MATCH");
-const u8 gUnknown_085EB350[] = _("UNIQUE TAG MATCH");
-const u8 gUnknown_085EB361[] = _("EXPERT TAG MATCH");
+const u8 gText_NormalTagMatch[] = _("NORMAL TAG MATCH");
+const u8 gText_VarietyTagMatch[] = _("VARIETY TAG MATCH");
+const u8 gText_UniqueTagMatch[] = _("UNIQUE TAG MATCH");
+const u8 gText_ExpertTagMatch[] = _("EXPERT TAG MATCH");
 const u8 gUnknown_085EB372[] = _("TRADE CENTER");
 const u8 gUnknown_085EB37F[] = _("COLOSSEUM");
 const u8 gUnknown_085EB389[] = _("RECORD CORNER");
@@ -1737,10 +1737,10 @@ const u8 gText_Lv[] = _("{LV}");
 const u8 gText_TimeBoard[] = _("TIME BOARD");
 const u8 gText_TimeCleared[] = _("TIME CLEARED ");
 const u8 gText_XMinYDotZSec[] = _("{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.");
-const u8 gUnknown_085EF8B6[] = _("1F");
-const u8 gUnknown_085EF8B9[] = _("2F");
-const u8 gUnknown_085EF8BC[] = _("3F");
-const u8 gUnknown_085EF8BF[] = _("4F");
+const u8 gText_TrainerHill1F[] = _("1F");
+const u8 gText_TrainerHill2F[] = _("2F");
+const u8 gText_TrainerHill3F[] = _("3F");
+const u8 gText_TrainerHill4F[] = _("4F");
 const u8 gText_TeachWhichMoveToPkmn[] = _("Teach which move to {STR_VAR_1}?");
 const u8 gText_TeachX[] = _("Teach {STR_VAR_2}?");
 const u8 gText_PkmnLearnedMove4[] = _("{STR_VAR_1} learned\n{STR_VAR_2}!");

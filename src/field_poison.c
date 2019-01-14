@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "trainer_hill.h"
 #include "constants/species.h"
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
