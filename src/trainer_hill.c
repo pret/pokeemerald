@@ -62,9 +62,9 @@ struct TrHillFloor
     struct TrainerHillTrainer trainers[2];
     u8 data[0x100];
     u16 unk3A0[16];
-    u8 coords[2]; // x first 4 bits, y last 4 bites
-    u8 direction; // array of 4 bites for each trainer
-    u8 range; // array of 4 bites for each trainer
+    u8 coords[2]; // x first 4 bits, y last 4 bits
+    u8 direction; // array of 4 bits for each trainer
+    u8 range; // array of 4 bits for each trainer
 };
 
 struct TrHillTag
@@ -865,7 +865,7 @@ const struct WarpEvent* sub_81D6134(u8 warpEventId)
         return &gMapHeader.events->warps[1];
 
     id = sub_81D6490();
-    if ((u8)(id - 1) >= 4)
+    if (id == 0 || id >= 5)
         id = 4;
 
     header = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(TRAINER_HILL_4F), gUnknown_0862A688[id - 1]);
@@ -928,7 +928,7 @@ static void sub_81D62CC(u16 trainerId, u8 firstMonId)
     u8 trId, level;
     s32 i, floorId, arrId;
 
-    if ((u16)(trainerId - 1) > 1)
+    if (trainerId == 0 || trainerId > 2)
         return;
 
     trId = trainerId - 1;
