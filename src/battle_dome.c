@@ -3294,7 +3294,7 @@ static void sub_8190400(u8 taskId)
         SetVBlankCallback(VblankCb0_BattleDome);
         sBattleDomeStruct = AllocZeroed(sizeof(*sBattleDomeStruct));
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
-            sBattleDomeStruct->arr[i] |= 0xFF;
+            sBattleDomeStruct->arr[i] = 0xFF;
         LoadMonIconPalettes();
         i = CreateTask(sub_8190CD4, 0);
         gTasks[i].data[0] = 0;
@@ -5592,17 +5592,22 @@ static void sub_8194220(u8 taskId)
             gTasks[i].data[0] = 0;
         }
         ScanlineEffect_Clear();
-        for (i = 0; i < 91; i++)
+        
+        i = 0;
+        while (i < 91)
         {
             gScanlineEffectRegBuffers[0][i] = 0x1F0A;
             gScanlineEffectRegBuffers[1][i] = 0x1F0A;
+            i++;
         }
-        for (i = 91; i < 160; i++)
+
+        while (i < 160)
         {
-            asm(""::"r"(i));
             gScanlineEffectRegBuffers[0][i] = 0x1F09;
             gScanlineEffectRegBuffers[1][i] = 0x1F09;
+            i++;
         }
+        
         ScanlineEffect_SetParams(gUnknown_0860CF44);
         DestroyTask(taskId);
         break;

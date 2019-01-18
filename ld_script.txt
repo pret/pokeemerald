@@ -291,7 +291,8 @@ SECTIONS {
         src/battle_pyramid_bag.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
-        asm/pokenav.o(.text.after.match.call);
+        asm/rom_81D1C44.o(.text);
+        src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
         src/contest_link_81D9DE4.o(.text);
@@ -596,7 +597,8 @@ SECTIONS {
         src/battle_pyramid_bag.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
-        data/pokenav.o(.rodata.after.match.call);
+        data/rom_81D1C44.o(.rodata);
+        src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         src/gym_leader_rematch.o(.rodata);
@@ -1195,6 +1197,31 @@ SECTIONS {
     {
         src/graphics.o(.rodata);
     } =0
+
+    /* DWARF debug sections.
+       Symbols in the DWARF debugging sections are relative to the beginning
+       of the section so we begin them at 0.  */
+
+    /* DWARF 1 */
+    .debug          0 : { *(.debug) }
+    .line           0 : { *(.line) }
+
+    /* GNU DWARF 1 extensions */
+    .debug_srcinfo  0 : { *(.debug_srcinfo) }
+    .debug_sfnames  0 : { *(.debug_sfnames) }
+
+    /* DWARF 1.1 and DWARF 2 */
+    .debug_aranges  0 : { *(.debug_aranges) }
+    .debug_pubnames 0 : { *(.debug_pubnames) }
+
+    /* DWARF 2 */
+    .debug_info     0 : { *(.debug_info .gnu.linkonce.wi.*) }
+    .debug_abbrev   0 : { *(.debug_abbrev) }
+    .debug_line     0 : { *(.debug_line) }
+    .debug_frame    0 : { *(.debug_frame) }
+    .debug_str      0 : { *(.debug_str) }
+    .debug_loc      0 : { *(.debug_loc) }
+    .debug_macinfo  0 : { *(.debug_macinfo) }
 
     /* Discard everything not specifically mentioned above. */
     /DISCARD/ :

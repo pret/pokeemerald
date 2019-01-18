@@ -16,6 +16,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "trainer_hill.h"
 #include "window.h"
 #include "constants/battle_string_ids.h"
 #include "constants/items.h"
@@ -41,10 +42,6 @@ extern u8 gUnknown_0203C7B4;
 
 extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
-
-extern u8 GetTrainerHillOpponentClass(u16 trainerId); // pokenav
-extern void GetTrainerHillTrainerName(u8 *txtPtr, u16 trainerId); // pokenav
-extern void CopyTrainerHillTrainerText(u8 arg0, u16 trainerId); // pokenav
 
 // this file's functions
 static void ChooseMoveUsedParticle(u8 *textPtr);

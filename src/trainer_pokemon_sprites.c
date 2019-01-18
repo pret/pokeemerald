@@ -109,7 +109,7 @@ static void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8
     {
         if (paletteTag == 0xFFFF)
         {
-            sCreatingSpriteTemplate.paletteTag |= 0xFFFF;
+            sCreatingSpriteTemplate.paletteTag = 0xFFFF;
             LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
@@ -122,7 +122,7 @@ static void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8
     {
         if (paletteTag == 0xFFFF)
         {
-            sCreatingSpriteTemplate.paletteTag |= 0xFFFF;
+            sCreatingSpriteTemplate.paletteTag = 0xFFFF;
             LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, 0x100 + paletteSlot * 0x10, 0x20);
         }
         else

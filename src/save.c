@@ -7,6 +7,7 @@
 #include "overworld.h"
 #include "pokemon_storage_system.h"
 #include "main.h"
+#include "trainer_hill.h"
 #include "constants/game_stat.h"
 
 static u16 CalculateChecksum(void *data, u16 size);
@@ -16,10 +17,6 @@ static u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location);
 static u8 ClearSaveData_2(u16 a1, const struct SaveSectionLocation *location);
 static u8 TryWriteSector(u8 sector, u8 *data);
 static u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
-
-// for the chunk declarations
-
-extern u32 gUnknown_0203CF5C;
 
 // Divide save blocks into individual chunks to be written to flash sectors
 
@@ -662,10 +659,10 @@ static void UpdateSaveAddresses(void)
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
-    u32 backupVar = gUnknown_0203CF5C;
+    u32 *backupVar = gUnknown_0203CF5C;
     u8 *tempAddr;
 
-    gUnknown_0203CF5C = 0;
+    gUnknown_0203CF5C = NULL;
     UpdateSaveAddresses();
     switch (saveType)
     {

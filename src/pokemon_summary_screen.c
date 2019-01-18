@@ -3154,11 +3154,11 @@ static void BufferMonTrainerMemo(void)
             else
                 text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureMetSomewhereAt : gText_XNatureMetAtYZ;
         }
-        else if (sum->metLocation == MAPSEC_FATEFUL_ENCOUNTER)
+        else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
         {
             text = gText_XNatureFatefulEncounter;
         }
-        else if (sum->metLocation != MAPSEC_IN_GAME_TRADE && DidMonComeFromGBAGames())
+        else if (sum->metLocation != METLOC_IN_GAME_TRADE && DidMonComeFromGBAGames())
         {
             text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
         }
@@ -3289,11 +3289,11 @@ static void PrintEggMemo(void)
 
     if (pssData->summary.sanity != 1)
     {
-        if (sum->metLocation == MAPSEC_FATEFUL_ENCOUNTER)
+        if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
             text = gText_PeculiarEggNicePlace;
         else if (DidMonComeFromGBAGames() == FALSE || DoesMonOTMatchOwner() == FALSE)
             text = gText_PeculiarEggTrade;
-        else if (sum->metLocation == MAPSEC_SPECIAL_EGG)
+        else if (sum->metLocation == METLOC_SPECIAL_EGG)
             text = (DidMonComeFromRSE() == TRUE) ? gText_EggFromHotSprings : gText_EggFromTraveler;
         else
             text = gText_OddEggFoundByCouple;

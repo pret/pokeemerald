@@ -17,6 +17,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "money.h"
+#include "trainer_hill.h"
 #include "tv.h"
 #include "coins.h"
 #include "text.h"
@@ -49,7 +50,6 @@ extern void copy_strings_to_sav1(void);
 extern void InitMatchCallCounters(void);
 extern void sub_801AFD8(void);
 extern void sub_800E5AC(void);
-extern void sub_81D54BC(void);
 extern void ResetContestLinkResults(void);
 extern void ResetPokeJumpResults(void);
 extern void SetBerryPowder(u32* powder, u32 newValue);
@@ -212,7 +212,7 @@ void NewGameInitData(void)
     InitMatchCallCounters();
     sub_801AFD8();
     sub_800E5AC();
-    sub_81D54BC();
+    ResetTrainerHillResults();
     ResetContestLinkResults();
 }
 

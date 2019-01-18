@@ -1264,7 +1264,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
 
     for (i = 0; i < NATIONAL_DEX_COUNT; i++)
     {
-        pokedexView->pokedexList[i].dexNum |= 0xFFFF;
+        pokedexView->pokedexList[i].dexNum = 0xFFFF;
         pokedexView->pokedexList[i].seen = 0;
         pokedexView->pokedexList[i].owned = 0;
     }
@@ -1281,7 +1281,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->seenCount = 0;
     pokedexView->ownCount = 0;
     for (i = 0; i < 4; i++)
-        pokedexView->unk61E[i] |= 0xFFFF;
+        pokedexView->unk61E[i] = 0xFFFF;
     pokedexView->unk628 = 0;
     pokedexView->unk62A = 0;
     pokedexView->unk62C = 0;
@@ -2030,7 +2030,7 @@ void sub_80BC8D4(u8 dexMode, u8 sortMode)
 
     for (i = sPokedexView->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
     {
-        sPokedexView->pokedexList[i].dexNum |= 0xFFFF;
+        sPokedexView->pokedexList[i].dexNum = 0xFFFF;
         sPokedexView->pokedexList[i].seen = FALSE;
         sPokedexView->pokedexList[i].owned = FALSE;
     }
@@ -2437,7 +2437,7 @@ u8 sub_80BDA40(void)
         if (sPokedexView->unk61E[i] != 0xFFFF)
         {
             FreeAndDestroyMonPicSprite(sPokedexView->unk61E[i]);
-            sPokedexView->unk61E[i] |= 0xFFFF;
+            sPokedexView->unk61E[i] = 0xFFFF;
         }
     }
     return FALSE;

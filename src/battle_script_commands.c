@@ -8955,7 +8955,7 @@ static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a c
         || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
         || gBattleMoves[move].effect == EFFECT_BIDE)
     {
-        if ((gHitMarker & HITMARKER_x8000000))
+        if ((gHitMarker & HITMARKER_CHARGING))
             return 1;
     }
     return 2;

@@ -11,6 +11,7 @@
 #include "pokenav.h"
 #include "script.h"
 #include "secret_base.h"
+#include "trainer_hill.h"
 #include "tv.h"
 #include "constants/rgb.h"
 

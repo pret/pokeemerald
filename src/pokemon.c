@@ -22,7 +22,6 @@
 #include "pokemon_animation.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
-#include "pokenav.h"
 #include "random.h"
 #include "recorded_battle.h"
 #include "rtc.h"
@@ -31,6 +30,7 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "trainer_hill.h"
 #include "util.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
@@ -74,7 +74,6 @@ extern const u8 gTrainerClassNames[][13];
 extern u16 get_unknown_box_id(void);
 extern void set_unknown_box_id(u8);
 extern bool8 sub_806F104(void);
-extern u8 sub_81D63C8(u16 trainerOpponentId);
 
 // this file's functions
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -2724,7 +2723,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     CalculateMonStats(mon);
 }
 
-void sub_806819C(struct Pokemon *mon, struct BattleTowerPokemon *src)
+void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
     u8 nickname[30];
@@ -2778,7 +2777,7 @@ void sub_806819C(struct Pokemon *mon, struct BattleTowerPokemon *src)
     CalculateMonStats(mon);
 }
 
-void sub_8068338(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
+void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
 {
     s32 i;
     u8 nickname[30];
@@ -5800,7 +5799,7 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
     if (InBattlePyramid())
         return GetTrainerEncounterMusicIdInBattlePyramind(trainerOpponentId);
     else if (sub_81D5C18())
-        return sub_81D63C8(trainerOpponentId);
+        return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
     else
         return TRAINER_ENCOUNTER_MUSIC(trainerOpponentId);
 }

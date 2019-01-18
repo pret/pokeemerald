@@ -29,6 +29,7 @@
 #include "field_message_box.h"
 #include "sound.h"
 #include "strings.h"
+#include "trainer_hill.h"
 #include "secret_base.h"
 #include "string_util.h"
 #include "overworld.h"
@@ -61,18 +62,9 @@ struct TrainerBattleParameter
     u8 ptrType;
 };
 
-extern bool32 InTrainerHill(void);
 extern void ClearPoisonStepCounter(void);
 extern void sub_808BCF4(void);
 extern void sub_80AF6F0(void);
-extern u16 sub_81D6180(u8 localId);
-extern bool8 GetTrainerHillTrainerFlag(u8 eventObjId);
-extern bool8 sub_81D5C18(void);
-extern void sub_81D639C(void);
-extern void sub_81D6384(void);
-extern void sub_81D61E8(void);
-extern void sub_80982B8(void);
-extern void CopyTrainerHillTrainerText(u8 a0, u16 arg1);
 
 // this file's functions
 static void DoBattlePikeWildBattle(void);
@@ -1154,12 +1146,12 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         {
             TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
             SetMapVarsToTrainer();
-            gTrainerBattleOpponent_A = sub_81D6180(gSpecialVar_LastTalked);
+            gTrainerBattleOpponent_A = LocalIdToHillTrainerId(gSpecialVar_LastTalked);
         }
         else
         {
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
-            gTrainerBattleOpponent_B = sub_81D6180(gSpecialVar_LastTalked);
+            gTrainerBattleOpponent_B = LocalIdToHillTrainerId(gSpecialVar_LastTalked);
         }
         return EventScript_TryDoNormalTrainerBattle;
     default:
@@ -1221,7 +1213,7 @@ bool8 GetTrainerFlag(void)
     if (InBattlePyramid())
         return GetBattlePyramidTrainerFlag(gSelectedEventObject);
     else if (InTrainerHill())
-        return GetTrainerHillTrainerFlag(gSelectedEventObject);
+        return GetHillTrainerFlag(gSelectedEventObject);
     else
         return FlagGet(GetTrainerAFlag());
 }
@@ -1287,11 +1279,11 @@ void BattleSetup_StartTrainerBattle(void)
         gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL;
 
         if (gNoOfApproachingTrainers == 2)
-            sub_81D639C();
+            FillHillTrainersParties();
         else
-            sub_81D6384();
+            FillHillTrainerParty();
 
-        sub_81D61E8();
+        SetHillTrainerFlag();
     }
 
     sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
@@ -1373,9 +1365,9 @@ void ShowTrainerIntroSpeech(void)
     else if (sub_81D5C18())
     {
         if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            CopyTrainerHillTrainerText(2, sub_81D6180(gSpecialVar_LastTalked));
+            CopyTrainerHillTrainerText(2, LocalIdToHillTrainerId(gSpecialVar_LastTalked));
         else
-            CopyTrainerHillTrainerText(2, sub_81D6180(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
+            CopyTrainerHillTrainerText(2, LocalIdToHillTrainerId(gEventObjects[gApproachingTrainers[gApproachingTrainerId].eventObjectId].localId));
 
         sub_80982B8();
     }

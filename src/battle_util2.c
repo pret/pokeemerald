@@ -3,19 +3,17 @@
 #include "battle_controllers.h"
 #include "alloc.h"
 #include "pokemon.h"
+#include "trainer_hill.h"
 #include "party_menu.h"
 #include "event_data.h"
 #include "constants/abilities.h"
 #include "random.h"
 #include "battle_scripts.h"
 
-extern void sub_81D55D0(void);
-extern void sub_81D5694(void);
-
 void AllocateBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        sub_81D55D0();
+        InitTrainerHillBattleStruct();
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
 
@@ -45,7 +43,7 @@ void AllocateBattleResources(void)
 void FreeBattleResources(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        sub_81D5694();
+        FreeTrainerHillBattleStruct();
 
     if (gBattleResources != NULL)
     {
