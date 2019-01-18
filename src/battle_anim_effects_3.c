@@ -263,6 +263,17 @@ const struct SpriteTemplate gUnknown_085CE11C =
     .callback = sub_815A6C4,
 };
 
+const struct SpriteTemplate gToxicSpikesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_TOXIC_SPIKES,
+    .paletteTag = ANIM_TAG_TOXIC_SPIKES,
+    .oam = &gUnknown_0852490C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_815A6C4,
+};
+
 const union AnimCmd gUnknown_085CE134[] =
 {
     ANIMCMD_FRAME(0, 3),

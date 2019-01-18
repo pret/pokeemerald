@@ -571,6 +571,8 @@ const u32 gBattleAnimSpritePalette_289[] = INCBIN_U32("graphics/battle_anims/spr
 const u32 gBattleAnimSpriteSheet_290[] = INCBIN_U32("graphics/battle_anims/sprites/290.4bpp.lz");
 const u32 gBattleAnimSpritePalette_290[] = INCBIN_U32("graphics/battle_anims/sprites/290.gbapal.lz");
 
+const u32 gBattleAnimSpritePalette_291[] = INCBIN_U32("graphics/battle_anims/sprites/toxicspike_color.gbapal.lz"); //reuse the spike image
+
 const u32 gBattleAnimSpritePalette_164[] = INCBIN_U32("graphics/battle_anims/sprites/164.gbapal.lz");
 const u32 gBattleAnimSpritePalette_165[] = INCBIN_U32("graphics/battle_anims/sprites/165.gbapal.lz");
 

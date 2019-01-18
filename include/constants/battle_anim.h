@@ -298,6 +298,7 @@
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
 #define ANIM_TAG_WHITE_STREAK               (ANIM_SPRITES_START + 289)
 #define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 290)
+#define ANIM_TAG_TOXIC_SPIKES               (ANIM_SPRITES_START + 291)
 
 // battlers
 #define ANIM_ATTACKER    0
