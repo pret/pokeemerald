@@ -205,13 +205,13 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 
             if (Random() % 100 > 49)
             {
-                gProtectStructs[gActiveBattler].flag_x10 = 1;
+                gProtectStructs[gActiveBattler].palaceAbleToUseMove = 1;
                 return 0;
             }
         }
         else
         {
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceAbleToUseMove = 1;
             return 0;
         }
     }

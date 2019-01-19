@@ -521,13 +521,13 @@ struct GabbyAndTyData
     /*2bad*/ u8 battleNum;
     /*2bae*/ u8 battleTookMoreThanOneTurn:1;
     /*2bae*/ u8 playerLostAMon:1;
-    /*2bae*/ u8 playerUsedAnItem:1;
+    /*2bae*/ u8 playerUsedHealingItem:1;
     /*2bae*/ u8 playerThrewABall:1;
     /*2bae*/ u8 onAir:1;
     /*2bae*/ u8 valA_5:3;
     /*2baf*/ u8 battleTookMoreThanOneTurn2:1;
     /*2baf*/ u8 playerLostAMon2:1;
-    /*2baf*/ u8 playerUsedAnItem2:1;
+    /*2baf*/ u8 playerUsedHealingItem2:1;
     /*2baf*/ u8 playerThrewABall2:1;
     /*2baf*/ u8 valB_4:4;
 };
