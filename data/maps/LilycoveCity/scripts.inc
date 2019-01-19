@@ -157,7 +157,7 @@ LilycoveCity_EventScript_1E2D11:: @ 81E2D11
 
 LilycoveCity_EventScript_1E2D1A:: @ 81E2D1A
 	lockall
-	specialvar VAR_0x8004, sub_80F8940
+	specialvar VAR_0x8004, CountPlayerContestPaintings
 	switch VAR_0x8004
 	case 0, LilycoveCity_EventScript_1E2D3A
 	msgbox LilycoveCity_Text_1E4571, MSGBOX_DEFAULT

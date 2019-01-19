@@ -209,13 +209,13 @@ _080C4B6C:
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _080C4B80
-	bl sub_80C34B0
+	bl PrintStringsOnCardPage2
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C4BF6
 	b _080C4C08
 _080C4B80:
-	bl sub_80C3438
+	bl PrintAllOnCardPage1
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C4BF6
