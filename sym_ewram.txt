@@ -289,13 +289,5 @@ gUnknown_0203CF4C: @ 203CF4C
 gUnknown_0203CF50: @ 203CF50
 	.space 0x4
 
-gUnknown_0203CF54: @ 203CF54
-	.space 0x4
-
-gUnknown_0203CF58: @ 203CF58
-	.space 0x4
-
-gUnknown_0203CF5C: @ 203CF5C
-	.space 0x4
-
+	.include "src/trainer_hill.o"
 	.include "src/rayquaza_scene.o"

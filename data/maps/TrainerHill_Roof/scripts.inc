@@ -5,11 +5,11 @@ TrainerHill_Roof_MapScripts:: @ 8268FA7
 
 TrainerHill_Roof_EventScript_268FB2:: @ 8268FB2
 	setvar VAR_0x8004, 12
-	special sp194_trainer_tower
+	special CallTrainerHillFunction
 	lock
 	faceplayer
 	setvar VAR_0x8004, 1
-	special sp194_trainer_tower
+	special CallTrainerHillFunction
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_268FEA
 	case 1, TrainerHill_Roof_EventScript_268FF2
@@ -20,7 +20,7 @@ TrainerHill_Roof_EventScript_268FEA:: @ 8268FEA
 
 TrainerHill_Roof_EventScript_268FF2:: @ 8268FF2
 	setvar VAR_0x8004, 2
-	special sp194_trainer_tower
+	special CallTrainerHillFunction
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_269020
 	case 1, TrainerHill_Roof_EventScript_269037
@@ -42,7 +42,7 @@ TrainerHill_Roof_EventScript_269037:: @ 8269037
 
 TrainerHill_Roof_EventScript_269054:: @ 8269054
 	setvar VAR_0x8004, 3
-	special sp194_trainer_tower
+	special CallTrainerHillFunction
 	switch VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_269082
 	case 1, TrainerHill_Roof_EventScript_269090

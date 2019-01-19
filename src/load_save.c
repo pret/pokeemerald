@@ -8,12 +8,11 @@
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "save_location.h"
+#include "trainer_hill.h"
 #include "gba/flash_internal.h"
 #include "decoration_inventory.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
-
-extern void* gUnknown_0203CF5C;
 
 extern bool16 IdentifyFlash(void);
 extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);

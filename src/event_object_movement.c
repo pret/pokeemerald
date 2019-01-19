@@ -20,6 +20,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
+#include "trainer_hill.h"
 #include "util.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"

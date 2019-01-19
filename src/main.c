@@ -22,10 +22,10 @@
 #include "text.h"
 #include "intro.h"
 #include "main.h"
+#include "trainer_hill.h"
 
 extern void sub_800B9B8(void);
 extern u8 gUnknown_03002748;
-extern u32 *gUnknown_0203CF5C;
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);

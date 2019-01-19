@@ -782,10 +782,10 @@ const struct MenuAction MultichoiceList_112[] =
 
 const struct MenuAction MultichoiceList_113[] =
 {
-    {gUnknown_085EB32D, NULL},
-    {gUnknown_085EB33E, NULL},
-    {gUnknown_085EB350, NULL},
-    {gUnknown_085EB361, NULL},
+    {gText_NormalTagMatch, NULL},
+    {gText_VarietyTagMatch, NULL},
+    {gText_UniqueTagMatch, NULL},
+    {gText_ExpertTagMatch, NULL},
     {gText_Exit, NULL},
 };
 
@@ -1407,7 +1407,7 @@ static void sub_80E2578(void)
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_03001124); i++)
     {
-        gUnknown_03001124[i] |= 0xFF;
+        gUnknown_03001124[i] = 0xFF;
     }
 
     GetFontAttribute(1, FONTATTR_MAX_LETTER_WIDTH);
