@@ -12,7 +12,7 @@ struct TrainerCard
     /*0x06*/ u16 firstHallOfFameA;
     /*0x08*/ u16 firstHallOfFameB;
     /*0x0A*/ u16 firstHallOfFameC;
-    /*0x0C*/ u16 pokedexSeen;
+    /*0x0C*/ u16 pokedexCaught;
     /*0x0E*/ u16 trainerId;
     /*0x10*/ u16 playTimeHours;
     /*0x12*/ u16 playTimeMinutes;
@@ -27,14 +27,26 @@ struct TrainerCard
     /*0x24*/ u32 money;
     /*0x28*/ u16 var_28[4];
     /*0x30*/ u8 playerName[8];
-    /*0x38*/ u8 emeraldAddedUnknownFields[0x54-0x38];
-    /*0x54*/ u16 monSpecies[2];
-    /*0x58*/ u8 emeraldAddedUnknownFields2[0x64-0x58];
+    /*0x38*/ u8 var_38;
+    /*0x39*/ u8 var_39;
+    /*0x3A*/ u16 var_3A;
+    /*0x3C*/ u32 var_3C;
+    /*0x40*/ u32 var_40;
+    /*0x44*/ u8 filler44[0x8];
+    /*0x4C*/ u8 var_4C;
+    /*0x4D*/ u8 var_4D;
+    /*0x4E*/ u8 var_4E;
+    /*0x4F*/ u8 var_4F;
+    /*0x50*/ u8 var_50[0x4];
+    /*0x54*/ u16 monSpecies[6];
+    /*0x60*/ u16 var_60;
+    /*0x62*/ u16 var_62;
 };
+
 
 extern struct TrainerCard gTrainerCards[4];
 
-void sub_80C3120(struct TrainerCard *arg0, u16 *arg1, u8 gameVersion);
+void sub_80C3120(struct TrainerCard *arg0, u16 *src, u8 gameVersion);
 void TrainerCard_ShowLinkCard(u8 arg0, void (*callback)(void));
 void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
 u8 sub_80C4904(u8);

@@ -4381,7 +4381,7 @@ u16 sub_80C089C(u8 caseID)
     return count;
 }
 
-bool8 sub_80C08E4(void)
+bool16 sub_80C08E4(void)
 {
     u16 i;
 
