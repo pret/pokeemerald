@@ -128,36 +128,36 @@ struct UnknownFlags
 
 struct DisableStruct
 {
-     u32 transformedMonPersonality;
-     u16 disabledMove;
-     u16 encoredMove;
-     u8 protectUses;
-     u8 stockpileCounter;
-     u8 substituteHP;
-     u8 disableTimer:4;
-     u8 disableTimerStartValue:4;
-     u8 encoredMovePos;
-     u8 filler_D; // Unused field.
-     u8 encoreTimer:4;
-     u8 encoreTimerStartValue:4;
-     u8 perishSongTimer:4;
-     u8 perishSongTimerStartValue:4;
-     u8 furyCutterCounter;
-     u8 rolloutTimer:4;
-     u8 rolloutTimerStartValue:4;
-     u8 chargeTimer:4;
-     u8 chargeTimerStartValue:4;
-     u8 tauntTimer:4;
-     u8 tauntTimer2:4;
-     u8 battlerPreventingEscape;
-     u8 battlerWithSureHit;
-     u8 isFirstTurn;
-     u8 unk17;
-     u8 truantCounter:1;
-     u8 truantUnknownBit:1;
-     u8 unk18_a_2:2;
-     u8 unk18_b:4;
-     u8 rechargeTimer;
+    u32 transformedMonPersonality;
+    u16 disabledMove;
+    u16 encoredMove;
+    u8 protectUses;
+    u8 stockpileCounter;
+    u8 substituteHP;
+    u8 disableTimer:4;
+    u8 disableTimerStartValue:4;
+    u8 encoredMovePos;
+    u8 filler_D; // Unused field.
+    u8 encoreTimer:4;
+    u8 encoreTimerStartValue:4;
+    u8 perishSongTimer:4;
+    u8 perishSongTimerStartValue:4;
+    u8 furyCutterCounter;
+    u8 rolloutTimer:4;
+    u8 rolloutTimerStartValue:4;
+    u8 chargeTimer:4;
+    u8 chargeTimerStartValue:4;
+    u8 tauntTimer:4;
+    u8 tauntTimer2:4;
+    u8 battlerPreventingEscape;
+    u8 battlerWithSureHit;
+    u8 isFirstTurn;
+    u8 filler_17; // Unused field.
+    u8 truantCounter:1;
+    u8 truantSwitchInHack:1;
+    u8 filler_18_2:2; // Unused field.
+    u8 mimickedMoves:4;
+    u8 rechargeTimer;
 };
 
 struct ProtectStruct
@@ -181,7 +181,7 @@ struct ProtectStruct
     u32 flag2Unknown:1;
     u32 flinchImmobility:1;
     u32 notFirstStrike:1;
-    u32 flag_x10:1;
+    u32 palaceAbleToUseMove:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -300,8 +300,8 @@ struct BattleResults
     u8 playerFaintCounter;    // 0x0
     u8 opponentFaintCounter;  // 0x1
     u8 playerSwitchesCounter; // 0x2
-    u8 unk3;                  // 0x3
-    u8 unk4;                  // 0x4
+    u8 numHealingItemsUsed;   // 0x3
+    u8 numRevivesUsed;        // 0x4
     u8 playerMonWasDamaged:1; // 0x5
     u8 usedMasterBall:1;      // 0x5
     u8 caughtMonBall:4;       // 0x5
@@ -441,8 +441,8 @@ struct BattleStruct
     u8 safariPkblThrowCounter;
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
-    u8 field_7D; // unknown spriteId
-    u8 field_7E; // unknown spriteId
+    u8 linkBattleVsSpriteId_V; // The letter "V"
+    u8 linkBattleVsSpriteId_S; // The letter "S"
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];

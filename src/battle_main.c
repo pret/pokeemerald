@@ -3196,7 +3196,7 @@ void SwitchInClearSetData(void)
 
     gMoveResultFlags = 0;
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
-    gDisableStructs[gActiveBattler].truantUnknownBit = disableStructCopy.truantUnknownBit;
+    gDisableStructs[gActiveBattler].truantSwitchInHack = disableStructCopy.truantSwitchInHack;
     gLastMoves[gActiveBattler] = 0;
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
@@ -5492,7 +5492,7 @@ static void HandleAction_UseMove(void)
 
     // choose battlescript
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
-        && gProtectStructs[gBattlerAttacker].flag_x10)
+        && gProtectStructs[gBattlerAttacker].palaceAbleToUseMove)
     {
         if (gBattleMons[gBattlerAttacker].hp == 0)
         {
