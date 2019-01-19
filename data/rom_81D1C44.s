@@ -249,15 +249,3 @@ gUnknown_0862608C:: @ 862608C
 	
 gUnknown_0862609C:: @ 862609C
 	.incbin "data/unknown_jp_62609C.bin"
-	
-gUnknown_08626814:: @ 8626814
-	.incbin "data/pokenav/unk_struct_1.bin"
-
-gUnknown_086276FC:: @ 86276FC
-	.incbin "data/pokenav/unk_struct_2.bin"
-
-gUnknown_086285E4:: @ 86285E4
-	.incbin "data/pokenav/unk_struct_3.bin"
-
-gUnknown_086294CC:: @ 86294CC
-	.incbin "data/pokenav/unk_struct_4.bin"
