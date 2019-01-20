@@ -36,17 +36,17 @@ LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F77C6:: @ 81F77C6
 	setobjectxyperm 1, 8, 4
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F77D2:: @ 81F77D2
 	setobjectxyperm 1, 4, 5
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F77DE:: @ 81F77DE
 	setobjectxyperm 1, 9, 8
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA: @ 81F77EA

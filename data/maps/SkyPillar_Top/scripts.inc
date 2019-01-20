@@ -24,7 +24,7 @@ SkyPillar_Top_MapScript1_2396E6: @ 82396E6
 
 SkyPillar_Top_EventScript_2396FD:: @ 82396FD
 	setmaplayoutindex 438
-	setobjectmovementtype 1, 8
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SkyPillar_Top_EventScript_239705:: @ 8239705

@@ -9,7 +9,7 @@ Route114_FossilManiacsTunnel_MapScript1_22AF33: @ 822AF33
 
 Route114_FossilManiacsTunnel_EventScript_22AF3D:: @ 822AF3D
 	setobjectxyperm 1, 6, 5
-	setobjectmovementtype 1, 8
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 Route114_FossilManiacsTunnel_MapScript1_22AF49: @ 822AF49

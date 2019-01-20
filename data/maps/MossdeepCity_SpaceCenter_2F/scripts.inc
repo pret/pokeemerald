@@ -13,11 +13,11 @@ MossdeepCity_SpaceCenter_2F_MapScript1_223D63: @ 8223D63
 MossdeepCity_SpaceCenter_2F_EventScript_223D7A:: @ 8223D7A
 	clearflag FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER
 	setobjectxyperm 3, 5, 3
-	setobjectmovementtype 3, 10
+	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm 1, 3, 2
-	setobjectmovementtype 1, 10
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm 2, 1, 3
-	setobjectmovementtype 2, 10
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_223D9F:: @ 8223D9F
@@ -319,7 +319,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	removeobject 3
 	setobjectxyperm 3, 5, 6
-	setobjectmovementtype 3, 2
+	setobjectmovementtype 3, MOVEMENT_TYPE_WANDER_AROUND
 	addobject 3
 	fadescreen 0
 	end

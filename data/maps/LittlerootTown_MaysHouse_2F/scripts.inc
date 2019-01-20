@@ -27,7 +27,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F92E6:: @ 81F92E6
 	compare VAR_0x40D3, 2
 	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	setobjectxyperm 1, 8, 2
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F9309:: @ 81F9309

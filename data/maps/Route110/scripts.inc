@@ -484,8 +484,8 @@ Route110_EventScript_1EF8EC:: @ 81EF8EC
 	call_if_eq Route110_EventScript_1EF998
 	compare VAR_0x8008, 3
 	call_if_eq Route110_EventScript_1EF9A0
-	setobjectmovementtype 28, 10
-	setobjectmovementtype 29, 10
+	setobjectmovementtype 28, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype 29, MOVEMENT_TYPE_FACE_RIGHT
 	removeobject 28
 	addobject 29
 	delay 45

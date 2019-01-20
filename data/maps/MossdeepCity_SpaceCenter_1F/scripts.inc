@@ -10,14 +10,14 @@ MossdeepCity_SpaceCenter_1F_MapScript1_222F4C: @ 8222F4C
 
 MossdeepCity_SpaceCenter_1F_EventScript_222F58:: @ 8222F58
 	setobjectxyperm 3, 1, 9
-	setobjectmovementtype 3, 10
+	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm 5, 0, 8
-	setobjectmovementtype 5, 10
+	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm 4, 1, 6
-	setobjectmovementtype 4, 10
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectxyperm 1, 3, 4
-	setobjectmovementtype 1, 10
-	setobjectmovementtype 2, 10
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_RIGHT
 	compare VAR_0x409E, 1
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_222FAA
 	compare VAR_0x409E, 2
