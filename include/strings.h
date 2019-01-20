@@ -2222,4 +2222,30 @@ extern const u8 gText_PreliminaryResults[];
 extern const u8 gText_Round2Results[];
 extern const u8 gText_Var1sVar2Won[];
 
+// Trainer Card
+extern const u8 gText_LinkCableBattles[];
+extern const u8 gText_LinkBattles[];
+extern const u8 gText_WaitingTrainerFinishReading[];
+extern const u8 gText_TrainerCardName[];
+extern const u8 gText_TrainerCardIDNo[];
+extern const u8 gText_TrainerCardMoney[];
+extern const u8 gText_PokedollarVar1[];
+extern const u8 gText_EmptyString6[];
+extern const u8 gText_TrainerCardPokedex[];
+extern const u8 gText_TrainerCardTime[];
+extern const u8 gText_Colon2[];
+extern const u8 gText_Var1sTrainerCard[];
+extern const u8 gText_HallOfFameDebut[];
+extern const u8 gText_WinsLosses[];
+extern const u8 gText_PokemonTrades[];
+extern const u8 gText_BerryCrush[];
+extern const u8 gText_UnionTradesAndBattles[];
+extern const u8 gText_Var1DarkGreyShadowLightGrey[];
+extern const u8 gText_PokeblocksWithFriends[];
+extern const u8 gText_WonContestsWFriends[];
+extern const u8 gText_WSlashStraightSlash[];
+extern const u8 gText_Var1DarkLightGreyBP[];
+extern const u8 gText_BattleTower[];
+extern const u8 gText_BattlePtsWon[];
+
 #endif //GUARD_STRINGS_H

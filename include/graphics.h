@@ -4846,4 +4846,18 @@ extern const u16 gUnknown_08DC64E8[];
 extern const u16 gUnknown_08DC64FC[];
 extern const u16 gUnknown_08DC6510[];
 
+// Trainer Card.
+extern const u16 gEmeraldTrainerCard0Star_Pal[];
+extern const u32 gEmeraldTrainerCard_Gfx[];
+extern const u16 gFireRedTrainerCard0Star_Pal[];
+extern const u32 gFireRedTrainerCard_Gfx[];
+extern const u32 gUnknown_08DD2AE0[];
+extern const u32 gUnknown_08DD21B0[];
+extern const u32 gUnknown_08DD2D30[];
+extern const u32 gUnknown_08DD2010[];
+extern const u32 gUnknown_08DD2B78[];
+extern const u32 gUnknown_08DD228C[];
+extern const u32 gUnknown_08DD2E5C[];
+extern const u32 gUnknown_08DD1F78[];
+
 #endif //GUARD_GRAPHICS_H

@@ -9,6 +9,7 @@
 #include "strings.h"
 #include "bg.h"
 #include "field_effect.h"
+#include "party_menu.h"
 #include "task.h"
 #include "overworld.h"
 #include "link.h"
@@ -30,6 +31,7 @@
 #include "scanline_effect.h"
 #include "text_window.h"
 #include "load_save.h"
+#include "trainer_card.h"
 #include "international_string_util.h"
 #include "constants/songs.h"
 #include "field_player_avatar.h"
@@ -89,11 +91,9 @@ extern void var_800D_set_xB(void);
 extern void sub_808B864(void);
 extern void CB2_Pokedex(void);
 extern void PlayRainSoundEffect(void);
-extern void CB2_PartyMenuFromStartMenu(void);
 extern void CB2_PokeNav(void);
-extern void sub_80C4DDC(void (*)(void));
+extern void ShowPlayerTrainerCard(void (*)(void));
 extern void sub_80C51C4(void (*)(void));
-extern void TrainerCard_ShowLinkCard(u8, void (*)(void));
 extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
@@ -468,21 +468,14 @@ static bool32 InitStartMenuStep(void)
         break;
     case 3:
         if (GetSafariZoneFlag())
-        {
             ShowSafariBallsWindow();
-        }
         if (InBattlePyramid())
-        {
             ShowPyramidFloorWindow();
-        }
         sUnknown_02037619[0]++;
         break;
     case 4:
-        if (!PrintStartMenuActions(&sUnknown_02037619[1], 2))
-        {
-            break;
-        }
-        sUnknown_02037619[0]++;
+        if (PrintStartMenuActions(&sUnknown_02037619[1], 2))
+            sUnknown_02037619[0]++;
         break;
     case 5:
         sStartMenuCursorPos = sub_81983AC(GetStartMenuWindowId(), 1, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
@@ -497,15 +490,14 @@ static void InitStartMenu(void)
 {
     sUnknown_02037619[0] = 0;
     sUnknown_02037619[1] = 0;
-    while (!InitStartMenuStep());
+    while (!InitStartMenuStep())
+        ;
 }
 
 static void StartMenuTask(u8 taskId)
 {
     if (InitStartMenuStep() == TRUE)
-    {
         SwitchTaskToFollowupFunc(taskId);
-    }
 }
 
 static void CreateStartMenuTask(TaskFunc followupFunc)
@@ -544,18 +536,14 @@ void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
     {
     case 0:
         if (InUnionRoom() == TRUE)
-        {
             var_800D_set_xB();
-        }
 
         gMenuCallback = HandleStartMenuInput;
         task->data[0]++;
         break;
     case 1:
         if (gMenuCallback() == TRUE)
-        {
             DestroyTask(taskId);
-        }
         break;
     }
 }
@@ -591,9 +579,8 @@ static bool8 HandleStartMenuInput(void)
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
-            if (GetNationalPokedexCount(0) == 0) {
+            if (GetNationalPokedexCount(0) == 0)
                 return FALSE;
-            }
         }
 
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
@@ -689,17 +676,11 @@ static bool8 StartMenuPlayerNameCallback(void)
         CleanupOverworldWindowsAndTilemaps();
 
         if (is_c1_link_related_active() || InUnionRoom())
-        {
-            sub_80C4DDC(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
-        }
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-        {
             sub_80C51C4(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
-        }
         else
-        {
-            sub_80C4DDC(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
-        }
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
 
         return TRUE;
     }
@@ -710,9 +691,7 @@ static bool8 StartMenuPlayerNameCallback(void)
 static bool8 StartMenuSaveCallback(void)
 {
     if (InBattlePyramid())
-    {
         RemoveExtraStartMenuWindows();
-    }
 
     gMenuCallback = SaveStartCallback; // Display save menu
 
@@ -758,7 +737,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     {
         PlayRainSoundEffect();
         CleanupOverworldWindowsAndTilemaps();
-        TrainerCard_ShowLinkCard(gUnknown_03005DB4, CB2_ReturnToFieldWithOpenMenu);
+        ShowTrainerCardInLink(gUnknown_03005DB4, CB2_ReturnToFieldWithOpenMenu);
 
         return TRUE;
     }

@@ -1262,7 +1262,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
 	lock
 	faceplayer
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_80C2E40
+	specialvar VAR_RESULT, CountPlayerTrainerStars
 	compare VAR_RESULT, 4
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
 	msgbox gUnknown_082726EB, MSGBOX_YESNO

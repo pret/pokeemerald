@@ -481,7 +481,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B7D8
 	def_special sub_81C72A4
 	def_special sp106_CreateStartMenu
-	def_special sub_80C2E40
+	def_special CountPlayerTrainerStars
 	def_special sub_813AC7C
 	def_special sub_813ADB8
 	def_special sub_813ADD4
