@@ -15,13 +15,13 @@ SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E
 SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D:: @ 822797D
 	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 3, 2
-	setobjectmovementtype 1, 8
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	setmaplayoutindex 441
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227991:: @ 8227991
 	setobjectxyperm 1, 2, 2
-	setobjectmovementtype 1, 10
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_MapScript2_22799D: @ 822799D

@@ -15,9 +15,9 @@ Route104_MrBrineysHouse_EventScript_229D4C:: @ 8229D4C
 
 Route104_MrBrineysHouse_EventScript_229D50:: @ 8229D50
 	setobjectxyperm 1, 9, 3
-	setobjectmovementtype 1, 50
+	setobjectmovementtype 1, MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT
 	setobjectxyperm 2, 9, 6
-	setobjectmovementtype 2, 51
+	setobjectmovementtype 2, MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN
 	return
 
 Route104_MrBrineysHouse_EventScript_229D67:: @ 8229D67

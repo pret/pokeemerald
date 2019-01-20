@@ -19,7 +19,7 @@ MossdeepCity_StevensHouse_MapScript1_2227A8: @ 82227A8
 
 MossdeepCity_StevensHouse_EventScript_2227B4:: @ 82227B4
 	setobjectxyperm 1, 6, 5
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 MossdeepCity_StevensHouse_MapScript2_2227C0: @ 82227C0

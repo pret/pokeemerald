@@ -10,7 +10,7 @@ MtChimney_CableCarStation_MapScript1_22AC05: @ 822AC05
 
 MtChimney_CableCarStation_EventScript_22AC11:: @ 822AC11
 	setobjectxyperm 1, 5, 4
-	setobjectmovementtype 1, 10
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 MtChimney_CableCarStation_MapScript2_22AC1D: @ 822AC1D
@@ -24,7 +24,7 @@ MtChimney_CableCarStation_EventScript_22AC27:: @ 822AC27
 	waitmovement 0
 	setvar VAR_0x40A3, 0
 	setobjectxyperm 1, 6, 7
-	setobjectmovementtype 1, 8
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	releaseall
 	end
 

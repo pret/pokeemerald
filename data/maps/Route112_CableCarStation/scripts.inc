@@ -11,7 +11,7 @@ Route112_CableCarStation_MapScript1_22AAC9: @ 822AAC9
 
 Route112_CableCarStation_EventScript_22AADD:: @ 822AADD
 	setobjectxyperm 1, 7, 4
-	setobjectmovementtype 1, 9
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 Route112_CableCarStation_MapScript2_22AAE9: @ 822AAE9
@@ -25,7 +25,7 @@ Route112_CableCarStation_EventScript_22AAF3:: @ 822AAF3
 	waitmovement 0
 	setvar VAR_0x40A3, 0
 	setobjectxyperm 1, 6, 7
-	setobjectmovementtype 1, 8
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	releaseall
 	end
 

@@ -70,10 +70,10 @@ SootopolisCity_EventScript_1E5785:: @ 81E5785
 	setobjectxyperm 5, 46, 32
 	setobjectxyperm 4, 48, 41
 	setobjectxyperm 8, 45, 43
-	setobjectmovementtype 3, 7
-	setobjectmovementtype 5, 9
-	setobjectmovementtype 4, 9
-	setobjectmovementtype 8, 9
+	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_UP
+	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_LEFT
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_LEFT
+	setobjectmovementtype 8, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SootopolisCity_EventScript_1E57B2:: @ 81E57B2
@@ -150,17 +150,17 @@ SootopolisCity_EventScript_1E5871:: @ 81E5871
 
 SootopolisCity_EventScript_1E58AF:: @ 81E58AF
 	setobjectxyperm 18, 31, 33
-	setobjectmovementtype 18, 8
+	setobjectmovementtype 18, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SootopolisCity_EventScript_1E58BB:: @ 81E58BB
 	setobjectxyperm 18, 32, 33
-	setobjectmovementtype 18, 8
+	setobjectmovementtype 18, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SootopolisCity_EventScript_1E58C7:: @ 81E58C7
 	setobjectxyperm 18, 30, 33
-	setobjectmovementtype 18, 8
+	setobjectmovementtype 18, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 SootopolisCity_EventScript_1E58D3:: @ 81E58D3
