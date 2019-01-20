@@ -49,6 +49,8 @@
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
+extern void sub_80C6D80(const u8 *, u8 *, u8, u8, u8);
+
 struct InGameTrade {
     /*0x00*/ u8 name[11];
     /*0x0C*/ u16 species;
