@@ -28,6 +28,7 @@
 #include "constants/maps.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
+#include "constants/easy_chat.h"
 
 extern bool32 sub_81D3B34(void);
 
