@@ -1626,11 +1626,11 @@
 	.endm
 
 	.macro switch var:req
-	copyvar 0x8000, \var
+	copyvar VAR_0x8000, \var
 	.endm
 
 	.macro case condition:req, dest:req
-	compare 0x8000, \condition
+	compare VAR_0x8000, \condition
 	goto_if_eq \dest
 	.endm
 
@@ -1650,13 +1650,13 @@
 	.endm
 
 	.macro giveitem_std item:req, amount=1, function=0
-	setorcopyvar 0x8000, \item
-	setorcopyvar 0x8001, \amount
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
 	callstd \function
 	.endm
 
 	.macro givedecoration_std decoration:req
-	setorcopyvar 0x8000, \decoration
+	setorcopyvar VAR_0x8000, \decoration
 	callstd STD_OBTAIN_DECORATION
 	.endm
 
