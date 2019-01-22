@@ -27,7 +27,7 @@ struct TrainerCard
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x38*/ u8 version;
     /*0x3A*/ u16 var_3A;
-    /*0x3C*/ u32 berruCrushPoints;
+    /*0x3C*/ u32 berryCrushPoints;
     /*0x40*/ u32 unionRoomNum;
     /*0x44*/ u8 filler44[0x8];
     /*0x4C*/ u8 var_4C;
