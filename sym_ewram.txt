@@ -153,8 +153,7 @@ gUnknown_02039B6E: @ 2039B6E
 gUnknown_02039B88: @ 2039B88
 	.space 0x160
 
-gUnknown_02039CE8: @ 2039CE8
-	.space 0x4
+	.include "src/trainer_card.o"
 
 gUnknown_02039CEC: @ 2039CEC
 	.space 0x4

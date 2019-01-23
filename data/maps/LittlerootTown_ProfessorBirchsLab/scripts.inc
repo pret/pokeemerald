@@ -16,7 +16,7 @@ LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9CCD:: @ 81F9CCD
-	specialvar VAR_RESULT, sub_80C08E4
+	specialvar VAR_RESULT, HasAllHoennMons
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9CE9
 	setobjectmovementtype 3, 3
