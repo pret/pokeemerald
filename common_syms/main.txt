@@ -1,0 +1,9 @@
+gKeyRepeatStartDelay
+gLinkTransferringData
+gMain
+gKeyRepeatContinueDelay
+gSoftResetDisabled
+gIntrTable
+gLinkVSyncDisabled
+IntrMain_Buffer
+gPcmDmaCounter

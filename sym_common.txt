@@ -1,260 +1,116 @@
-#define SYMBOL(name, size)                   \
-    . = ALIGN (((size) > 16) ? 16 : (size)); \
-    . = ALIGN(4);                            \
-    name = .;                                \
-    . += size;
+	.space 0x8
+	.include "main.o"
+	.include "bg.o"
+	.include "window.o"
+	.include "text.o"
+	.include "sprite.o"
+	.include "link.o"
+	.include "link_rfu.o"
+	.include "rtc.o"
+	.include "battle_main.o"
+	.include "random.o"
+	.include "load_save.o"
+	.include "berry_blender.o"
+	.include "overworld.o"
+	.include "fieldmap.o"
+	.include "field_camera.o"
+	.include "field_control_avatar.o"
+	.include "start_menu.o"
+	.include "sound.o"
+	.include "task.o"
+	.include "trainer_see.o"
+	.include "pokedex.o"
+	.include "contest.o"
+	.include "tv.o"
+	.include "mauville_old_man.o"
 
+gUnknown_03006164: @ 3006164
+	.space 0x4
 
+gUnknown_03006168: @ 3006168
+	.space 0x4
 
-. += 0x8;
-// main.c
-SYMBOL(gKeyRepeatStartDelay, 4)
-SYMBOL(gLinkTransferringData, 4)
-SYMBOL(gMain, 1084)
-SYMBOL(gKeyRepeatContinueDelay, 4)
-SYMBOL(gSoftResetDisabled, 4)
-SYMBOL(gIntrTable, 56)
-SYMBOL(gLinkVSyncDisabled, 4)
-SYMBOL(IntrMain_Buffer, 2048)
-SYMBOL(gPcmDmaCounter, 4)
+gUnknown_0300616C: @ 300616C
+	.space 0x4
 
-// bg.c
-SYMBOL(gUnneededFireRedVariable, 4)
+gUnknown_03006170: @ 3006170
+	.space 0x4
 
-// window.c
-SYMBOL(filler_03002F58, 4)
-SYMBOL(filler_03002F5C, 4)
-SYMBOL(gUnknown_03002F60, 4)
-SYMBOL(filler_03002F64, 4)
-SYMBOL(gUnknown_03002F70, 16)
+gUnknown_03006174: @ 3006174
+	.space 0x4
 
-// text.c
-SYMBOL(gFonts, 4)
-SYMBOL(gUnknown_03002F84, 4)
-SYMBOL(gUnknown_03002F90, 132)
-SYMBOL(gTextFlags, 4)
+gUnknown_03006178: @ 3006178
+	.space 0x4
 
-// sprite.c
-SYMBOL(gOamMatrixAllocBitmap, 4)
-SYMBOL(gReservedSpritePaletteCount, 4)
+gUnknown_0300617C: @ 300617C
+	.space 0x4
 
-// link.c
-. = ALIGN(16);
-gLinkPartnersHeldKeys = .;
-	. += 0xC;
-SYMBOL(gLinkDebugSeed, 4)
-SYMBOL(gLocalLinkPlayerBlock, 60)
-SYMBOL(gLinkErrorOccurred, 4)
-SYMBOL(gLinkDebugFlags, 4)
-SYMBOL(gFiller_03003074, 4)
-SYMBOL(gRemoteLinkPlayersNotReceived, 4)
-SYMBOL(gBlockReceivedStatus, 4)
-SYMBOL(gFiller_03003080, 4)
-SYMBOL(gLinkHeldKeys, 4)
-SYMBOL(gRecvCmds, 80)
-SYMBOL(gLinkStatus, 4)
-SYMBOL(gUnknown_030030E4, 4)
-SYMBOL(gUnknown_030030E8, 4)
-SYMBOL(gUnknown_030030EC, 4)
-SYMBOL(gUnknown_030030F0, 4)
-SYMBOL(gUnknown_030030F4, 4)
-SYMBOL(gSuppressLinkErrorMessage, 4)
-SYMBOL(gWirelessCommType, 4)
-SYMBOL(gSavedLinkPlayerCount, 4)
-SYMBOL(gSendCmd, 16)
-SYMBOL(gSavedMultiplayerId, 4)
-SYMBOL(gReceivedRemoteLinkPlayers, 4)
-SYMBOL(gLinkTestBGInfo, 16)
-SYMBOL(gLinkCallback, 4)
-SYMBOL(gShouldAdvanceLinkState, 4)
-SYMBOL(gLinkTestBlockChecksums, 8)
-SYMBOL(gBlockRequestType, 4)
-SYMBOL(gFiller_03003154, 4)
-SYMBOL(gFiller_03003158, 4)
-SYMBOL(gFiller_0300315c, 4)
-SYMBOL(gLastSendQueueCount, 4)
-SYMBOL(gLink, 4032)
-SYMBOL(gLastRecvQueueCount, 4)
-SYMBOL(gLinkSavedIme, 4)
-SYMBOL(gFiller_03004138, 4)
-SYMBOL(gFiller_0300413C, 4)
+gUnknown_03006180: @ 3006180
+	.space 0x4
 
-// link_rfu.c
-SYMBOL(gUnknown_03004140, 3776)
-SYMBOL(gUnknown_03005000, 3316)
+gUnknown_03006184: @ 3006184
+	.space 0x4
 
-// rtc.c
-SYMBOL(gLocalTime, 8)
+gUnknown_03006188: @ 3006188
+	.space 0x8
 
-// battle_main.c
-SYMBOL(gPreBattleCallback1, 4)
-SYMBOL(gBattleMainFunc, 4)
-SYMBOL(gBattleResults, 68)
-SYMBOL(gLeveledUpInBattle, 4)
-SYMBOL(gBattlerControllerFuncs, 16);
-SYMBOL(gHealthboxSpriteIds, 4)
-SYMBOL(gMultiUsePlayerCursor, 4)
-SYMBOL(gNumberOfMovesToChoose, 4)
-SYMBOL(gUnknown_03005D7C, 4)
+gUnknown_03006190: @ 3006190
+	.space 0x10
 
-// random.c
-SYMBOL(gRngValue, 4)
-SYMBOL(gRng2Value, 4)
+gUnknown_030061A0: @ 30061A0
+	.space 0x20
 
-// load_save.c
-SYMBOL(gFlashMemoryPresent, 4)
-SYMBOL(gSaveBlock1Ptr, 4)
-SYMBOL(gSaveBlock2Ptr, 4)
-SYMBOL(gPokemonStoragePtr, 4)
+gUnknown_030061C0: @ 30061C0
+	.space 0x4
 
-// berry_blender.c
-SYMBOL(gInGameOpponentsNo, 4)
+gContestPaintingMonPalette: @ 30061C4
+	.space 0xC
 
-// overworld.c
-SYMBOL(gBGTilemapBuffers1, 4)
-SYMBOL(gBGTilemapBuffers2, 4)
-SYMBOL(gBGTilemapBuffers3, 4)
-SYMBOL(gUnknown_03005DA8, 4)
-SYMBOL(gFieldCallback, 4)
-SYMBOL(gFieldCallback2, 4)
-SYMBOL(gUnknown_03005DB4, 4)
-SYMBOL(gFieldLinkPlayerCount, 4)
+	.include "field_specials.o"
 
-// fieldmap.c
-SYMBOL(gBackupMapLayout, 12)
+gCB2_AfterEvolution: @ 30061E8
+	.space 0x4
 
-// field_camera.c
-SYMBOL(gFieldCamera, 24)
-SYMBOL(gTotalCameraPixelOffsetY, 4)
-SYMBOL(gTotalCameraPixelOffsetX, 4)
+gDexCryScreenState: @ 30061EC
+	.space 0x4
 
-// field_control_avatar.c
-SYMBOL(gSelectedEventObject, 4)
-
-// start_menu.c
-SYMBOL(gMenuCallback, 4)
-
-// sound.c
-SYMBOL(gDisableMusic, 4)
-
-// task.c
-SYMBOL(gTasks, 640)
-
-// trainer_see.c
-SYMBOL(gUnknown_03006080, 4)
-SYMBOL(gUnknown_03006084, 4)
-SYMBOL(gApproachingTrainers, 24)
-SYMBOL(gNoOfApproachingTrainers, 4)
-SYMBOL(gUnknown_030060AC, 4)
-
-// pokedex.c
-SYMBOL(gUnknown_030060B0, 4)
-SYMBOL(gUnknown_030060B4, 4)
-
-// contest.c
-SYMBOL(gContestRngValue, 4)
-
-// tv.c
-SYMBOL(sCurTVShowSlot, 4)
-SYMBOL(sTV_SecretBaseVisitMovesTemp, 16)
-SYMBOL(sTV_DecorationsBuffer, 16)
-SYMBOL(sTV_SecretBaseVisitMonsTemp, 80)
-
-// mauville_old_man.c
-SYMBOL(gBardSong, 52)
-
-SYMBOL(gUnknown_03006164, 4)
-SYMBOL(gUnknown_03006168, 4)
-SYMBOL(gUnknown_0300616C, 4)
-SYMBOL(gUnknown_03006170, 4)
-SYMBOL(gUnknown_03006174, 4)
-SYMBOL(gUnknown_03006178, 4)
-SYMBOL(gUnknown_0300617C, 4)
-SYMBOL(gUnknown_03006180, 4)
-SYMBOL(gUnknown_03006184, 4)
-SYMBOL(gUnknown_03006188, 8)
-SYMBOL(gUnknown_03006190, 16)
-SYMBOL(gUnknown_030061A0, 32)
-SYMBOL(gUnknown_030061C0, 4)
-gContestPaintingMonPalette = .;
-	. += 0xC;
+	.include "save.o"
+	.include "battle_tower.o"
+	.include "intro.o"
+	.include "battle_anim_8170478.o"
+	.include "battle_factory_screen.o"
+	.include "apprentice.o"
 	
-// field_specials.c
-SYMBOL(gUnknown_030061D0, 24)
-SYMBOL(gCB2_AfterEvolution, 4)
-SYMBOL(gDexCryScreenState, 4)
+	.space 0x8
+	
+	.include "list_menu.o"
 
-// save.c
-SYMBOL(gLastWrittenSector, 4)
-SYMBOL(gLastSaveCounter, 4)
-SYMBOL(gLastKnownGoodSector, 4)
-SYMBOL(gDamagedSaveSectors, 4)
-SYMBOL(gSaveCounter, 4)
-SYMBOL(gFastSaveSection, 4)
-SYMBOL(gUnknown_03006208, 4)
-SYMBOL(gSaveUnusedVar, 4)
-SYMBOL(gSaveFileStatus, 4)
-SYMBOL(gGameContinueCallback, 4)
-SYMBOL(gRamSaveSectionLocations, 112)
-SYMBOL(gSaveUnusedVar2, 4)
-SYMBOL(gUnknown_03006294, 4)
+gUnknown_03006328: @ 3006328
+	.space 0x48
 
-// battle_tower.c
-SYMBOL(gUnknown_03006298,8)
+gUnknown_03006370: @ 3006370
+	.space 0x10
 
-// intro.c
-SYMBOL(gIntroFrameCounter, 4)
-SYMBOL(gMultibootProgramStruct, 44)
+	.include "m4a_2.o"
+	.include "agb_flash.o"
 
-// battle_anim_81470478
-SYMBOL(gUnknown_030062DC, 4)
-SYMBOL(gUnknown_030062E0, 4)
-SYMBOL(gUnknown_030062E4, 4)
+gRfuState: @ 3007868
+	.space 0x8
 
-// battle_factory_screen.c
-SYMBOL(gUnknown_030062E8, 4)
+gUnknown_03007870: @ 3007870
+	.space 0x10
 
-// apprentice.c
-SYMBOL(gUnknown_030062EC, 4)
-SYMBOL(gUnknown_030062F0, 4)
-SYMBOL(gUnknown_030062F4, 12)
+gUnknown_03007880: @ 3007880
+	.space 0x10
 
-SYMBOL(gListMenuOverride, 4)
-SYMBOL(gMultiuseListMenuTemplate, 24)
-gUnknown_03006328 = .;
-	. += 0x48;
-SYMBOL(gUnknown_03006370, 16)
+gUnknown_03007890: @ 3007890
+	.space 0x4
 
-// m4a_2
-SYMBOL(gSoundInfo, 4016)
-SYMBOL(gPokemonCrySongs, 104)
-SYMBOL(gPokemonCryMusicPlayers, 128)
-SYMBOL(gMPlayInfo_BGM, 64)
-SYMBOL(gMPlayJumpTable, 144)
-SYMBOL(gCgbChans, 256)
-SYMBOL(gMPlayInfo_SE1, 64)
-SYMBOL(gMPlayInfo_SE2, 64)
-SYMBOL(gPokemonCryTracks, 320)
-SYMBOL(gPokemonCrySong, 52)
-SYMBOL(gMPlayMemAccArea, 16)
-SYMBOL(gMPlayInfo_SE3, 64)
+gUnknown_03007894: @ 3007894
+	.space 0x4
 
-// agb_flash.c
-SYMBOL(gFlashTimeoutFlag, 4);
-SYMBOL(PollFlashStatus, 4)
-SYMBOL(WaitForFlashWrite, 4)
-SYMBOL(ProgramFlashSector, 4)
-SYMBOL(gFlash, 4)
-SYMBOL(ProgramFlashByte, 4)
-SYMBOL(gFlashNumRemainingBytes, 4)
-SYMBOL(EraseFlashChip, 4)
-SYMBOL(EraseFlashSector, 4)
-SYMBOL(gFlashMaxTime, 4)
+gUnknown_03007898: @ 3007898
+	.space 0x8
 
-SYMBOL(gRfuState, 8)
-SYMBOL(gUnknown_03007870, 16)
-SYMBOL(gUnknown_03007880, 16)
-SYMBOL(gUnknown_03007890, 4)
-SYMBOL(gUnknown_03007894, 4)
-SYMBOL(gUnknown_03007898, 8)
-SYMBOL(gUnknown_030078A0, 16)
+gUnknown_030078A0: @ 30078A0
+	.space 0xC

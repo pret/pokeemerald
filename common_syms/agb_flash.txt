@@ -1,0 +1,10 @@
+gFlashTimeoutFlag
+PollFlashStatus
+WaitForFlashWrite
+ProgramFlashSector
+gFlash
+ProgramFlashByte
+gFlashNumRemainingBytes
+EraseFlashChip
+EraseFlashSector
+gFlashMaxTime
