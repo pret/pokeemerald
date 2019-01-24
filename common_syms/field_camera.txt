@@ -1,0 +1,3 @@
+gFieldCamera
+gTotalCameraPixelOffsetY
+gTotalCameraPixelOffsetX
