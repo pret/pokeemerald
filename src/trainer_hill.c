@@ -24,8 +24,11 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "constants/maps.h"
+#include "constants/species.h"
 #include "constants/trainers.h"
+#include "constants/easy_chat.h"
 
 extern bool32 sub_81D3B34(void);
 
@@ -118,11 +121,7 @@ static void sub_81D642C(struct Pokemon *mon, u8 level);
 static u16 sub_81D6640(void);
 
 // const data
-// I will decompile these soon, no worries :)
-extern const struct TrHillTag gUnknown_08626814;
-extern const struct TrHillTag gUnknown_086276FC;
-extern const struct TrHillTag gUnknown_086285E4;
-extern const struct TrHillTag gUnknown_086294CC;
+#include "data/battle_frontier/trainer_hill.h"
 
 struct
 {
@@ -246,10 +245,10 @@ static const u8 sRecordWinColors[] = {0, 2, 3};
 
 static const struct TrHillTag *const sDataPerTag[] =
 {
-    &gUnknown_08626814,
-    &gUnknown_086276FC,
-    &gUnknown_086285E4,
-    &gUnknown_086294CC,
+    &sDataTagNormal,
+    &sDataTagVariety,
+    &sDataTagUnique,
+    &sDataTagExpert,
 };
 
 // Unused.
