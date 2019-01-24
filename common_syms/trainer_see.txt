@@ -1,5 +1,0 @@
-gUnknown_03006080
-gUnknown_03006084
-gApproachingTrainers
-gNoOfApproachingTrainers
-gUnknown_030060AC
