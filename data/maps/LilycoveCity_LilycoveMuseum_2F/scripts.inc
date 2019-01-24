@@ -92,7 +92,7 @@ LilycoveCity_LilycoveMuseum_2F_Movement_219863: @ 8219863
 LilycoveCity_LilycoveMuseum_2F_EventScript_219866:: @ 8219866
 	lockall
 	goto_if_set FLAG_RECEIVED_GLASS_ORNAMENT, LilycoveCity_LilycoveMuseum_2F_EventScript_219921
-	specialvar VAR_0x8004, sub_80F8940
+	specialvar VAR_0x8004, CountPlayerContestPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA
 	case 2, LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA

@@ -1,119 +1,118 @@
-	.include "src/main.o"
-	.include "src/alloc.o"
-	.include "src/dma3_manager.o"
-	.include "src/gpu_regs.o"
-	.include "src/bg.o"
-	.include "src/text.o"
-	.include "src/sprite.o"
-	.include "src/link.o"
-	.include "src/link_rfu.o"
-	.include "src/rom_8011DC0.o"
-	.include "src/rtc.o"
-	.include "src/main_menu.o"
-	.include "src/rom_8034C54.o"
-	.include "src/egg_hatch.o"
-	.include "src/berry_blender.o"
-	.include "src/play_time.o"
-	.include "src/overworld.o"
-	.include "src/field_camera.o"
-	.include "src/script.o"
-	.include "src/scrcmd.o"
-	.include "src/tileset_anims.o"
-	.include "src/palette.o"
-	.include "src/sound.o"
-	.include "src/field_weather.o"
-	.include "src/field_effect.o"
-	.include "src/pokemon_storage_system.o"
-	.include "src/fldeff_cut.o"
-	.include "src/script_menu.o"
-	.include "src/record_mixing.o"
-	.include "src/tv.o"
-	.include "src/mauville_old_man.o"
-	.include "src/menu_helpers.o"
-	.include "src/region_map.o"
-	.include "src/slot_machine.o"
-	.include "src/contest_painting.o"
-	.include "src/starter_choose.o"
-	.include "src/pokedex_area_screen.o"
-	.include "src/battle_transition.o"
-	.include "src/pokemon_animation.o"
-	.include "src/recorded_battle.o"
-	.include "src/battle_factory_screen.o"
-	.include "src/battle_factory.o"
-	.include "src/battle_pike.o"
-	.include "src/battle_tent.o"
-	.include "src/multiboot.o"
-	.include "src/mirage_tower.o"
-	.include "src/berry_fix_program.o"
+. = ALIGN(4); src/main.o(.bss);
+. = ALIGN(4); src/alloc.o(.bss);
+. = ALIGN(4); src/dma3_manager.o(.bss);
+. = ALIGN(4); src/gpu_regs.o(.bss);
+. = ALIGN(4); src/bg.o(.bss);
+. = ALIGN(4); src/text.o(.bss);
+. = ALIGN(4); src/sprite.o(.bss);
+. = ALIGN(4); src/link.o(.bss);
+. = ALIGN(4); src/link_rfu.o(.bss);
+. = ALIGN(4); src/rom_8011DC0.o(.bss);
+. = ALIGN(4); src/rtc.o(.bss);
+. = ALIGN(4); src/main_menu.o(.bss);
+. = ALIGN(4); src/rom_8034C54.o(.bss);
+. = ALIGN(4); src/egg_hatch.o(.bss);
+. = ALIGN(4); src/berry_blender.o(.bss);
+. = ALIGN(4); src/play_time.o(.bss);
+. = ALIGN(4); src/overworld.o(.bss);
+. = ALIGN(4); src/field_camera.o(.bss);
+. = ALIGN(4); src/script.o(.bss);
+. = ALIGN(4); src/scrcmd.o(.bss);
+. = ALIGN(4); src/tileset_anims.o(.bss);
+. = ALIGN(4); src/palette.o(.bss);
+. = ALIGN(4); src/sound.o(.bss);
+. = ALIGN(4); src/field_weather.o(.bss);
+. = ALIGN(4); src/field_effect.o(.bss);
+. = ALIGN(4); src/pokemon_storage_system.o(.bss);
+. = ALIGN(4); src/fldeff_cut.o(.bss);
+. = ALIGN(4); src/script_menu.o(.bss);
+. = ALIGN(4); src/record_mixing.o(.bss);
+. = ALIGN(4); src/tv.o(.bss);
+. = ALIGN(4); src/mauville_old_man.o(.bss);
+. = ALIGN(4); src/menu_helpers.o(.bss);
+. = ALIGN(4); src/region_map.o(.bss);
+. = ALIGN(4); src/slot_machine.o(.bss);
+. = ALIGN(4); src/contest_painting.o(.bss);
+. = ALIGN(4); src/starter_choose.o(.bss);
+. = ALIGN(4); src/pokedex_area_screen.o(.bss);
+. = ALIGN(4); src/battle_transition.o(.bss);
+. = ALIGN(4); src/pokemon_animation.o(.bss);
+. = ALIGN(4); src/recorded_battle.o(.bss);
+. = ALIGN(4); src/battle_factory_screen.o(.bss);
+. = ALIGN(4); src/battle_factory.o(.bss);
+. = ALIGN(4); src/battle_pike.o(.bss);
+. = ALIGN(4); src/battle_tent.o(.bss);
+. = ALIGN(4); src/multiboot.o(.bss);
+. = ALIGN(4); src/mirage_tower.o(.bss);
+. = ALIGN(4); src/berry_fix_program.o(.bss);
+gUnknown_030012BC = .;
+	. += 0x4;
 
-gUnknown_030012BC: @ 30012BC
-	.space 0x4
+gUnknown_030012C0 = .;
+	. += 0x4;
 
-gUnknown_030012C0: @ 30012C0
-	.space 0x4
+gUnknown_030012C4 = .;
+	. += 0x4;
 
-gUnknown_030012C4: @ 30012C4
-	.space 0x4
+gUnknown_030012C8 = .;
+	. += 0x18;
 
-gUnknown_030012C8: @ 30012C8
-	.space 0x18
+gUnknown_030012E0 = .;
+	. += 0x2;
 
-gUnknown_030012E0: @ 30012E0
-	.space 0x2
+gUnknown_030012E2 = .;
+	. += 0x2;
 
-gUnknown_030012E2: @ 30012E2
-	.space 0x2
+gUnknown_030012E4 = .;
+	. += 0x2;
 
-gUnknown_030012E4: @ 30012E4
-	.space 0x2
+gUnknown_030012E6 = .;
+	. += 0x2;
 
-gUnknown_030012E6: @ 30012E6
-	.space 0x2
+gUnknown_030012E8 = .;
+	. += 0x4;
 
-gUnknown_030012E8: @ 30012E8
-	.space 0x4
+gUnknown_030012EC = .;
+	. += 0x2;
 
-gUnknown_030012EC: @ 30012EC
-	.space 0x2
+gUnknown_030012EE = .;
+	. += 0x2;
 
-gUnknown_030012EE: @ 30012EE
-	.space 0x2
+gUnknown_030012F0 = .;
+	. += 0x2;
 
-gUnknown_030012F0: @ 30012F0
-	.space 0x2
+gUnknown_030012F2 = .;
+	. += 0x2;
 
-gUnknown_030012F2: @ 30012F2
-	.space 0x2
+gUnknown_030012F4 = .;
+	. += 0x4;
 
-gUnknown_030012F4: @ 30012F4
-	.space 0x4
+gUnknown_030012F8 = .;
+	. += 0x2;
 
-gUnknown_030012F8: @ 30012F8
-	.space 0x2
+gUnknown_030012FA = .;
+	. += 0x2;
 
-gUnknown_030012FA: @ 30012FA
-	.space 0x2
+gUnknown_030012FC = .;
+	. += 0x4;
 
-gUnknown_030012FC: @ 30012FC
-	.space 0x4
+gUnknown_03001300 = .;
+	. += 0x40;
 
-gUnknown_03001300: @ 3001300
-	.space 0x40
+gMPlayTrack_BGM = .;
+	. += 0x320;
 
-gMPlayTrack_BGM: @ 3001340
-	.space 0x320
+gMPlayTrack_SE1 = .;
+	. += 0xF0;
 
-gMPlayTrack_SE1: @ 3001660
-	.space 0xF0
+gMPlayTrack_SE2 = .;
+	. += 0x2D0;
 
-gMPlayTrack_SE2: @ 3001750
-	.space 0x2D0
+gMPlayTrack_SE3 = .;
+	. += 0x50;
 
-gMPlayTrack_SE3: @ 3001A20
-	.space 0x50
-
-	.include "src/agb_flash.o"
-	.include "src/siirtc.o"
-	.include "*libgcc.a:dp-bit.o"
-	.include "*libgcc.a:fp-bit.o"
-	.include "*libc.a:syscalls.o"
+. = ALIGN(4); src/agb_flash.o(.bss);
+. = ALIGN(4); src/siirtc.o(.bss);
+. = ALIGN(4); *libgcc.a:dp-bit.o(.bss);
+. = ALIGN(4); *libgcc.a:fp-bit.o(.bss);
+. = ALIGN(4); *libc.a:syscalls.o(.bss);
