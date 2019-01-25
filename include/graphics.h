@@ -4860,4 +4860,9 @@ extern const u32 gUnknown_08DD228C[];
 extern const u32 gUnknown_08DD2E5C[];
 extern const u32 gUnknown_08DD1F78[];
 
+// Frontier Pass
+extern const u32 gUnknown_08DE08C8[];
+extern const u32 gUnknown_08DE2084[];
+extern const u16 gUnknown_08DE07C8[][16];
+
 #endif //GUARD_GRAPHICS_H
