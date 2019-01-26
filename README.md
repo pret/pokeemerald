@@ -1,3 +1,3 @@
 # Pokémon Gnosis
 
-![title screen](https://raw.githubusercontent.com/tipsypastels/pokegnosis/master/branding/gnosis_title.png)
+<img src="https://raw.githubusercontent.com/tipsypastels/pokegnosis/master/branding/gnosis_title.png" alt="title screen" style="width:256px;height:192px;">
