@@ -4860,4 +4860,18 @@ extern const u32 gUnknown_08DD228C[];
 extern const u32 gUnknown_08DD2E5C[];
 extern const u32 gUnknown_08DD1F78[];
 
+// Frontier Pass
+extern const u32 gUnknown_08DE08C8[];
+extern const u32 gUnknown_08DE2084[];
+extern const u32 gUnknown_08DE3350[];
+extern const u32 gUnknown_08DE3374[];
+extern const u32 gUnknown_08DE3060[];
+extern const u32 gFrontierPassMedals_Gfx[];
+extern const u16 gUnknown_08DE07C8[][16];
+extern const u16 gFrontierPassCursor_Pal[];
+extern const u16 gFrontierPassMedalsGold_Pal[];
+extern const u16 gFrontierPassMedalsSilver_Pal[];
+extern const u16 gFrontierPassMapCursor_Pal[];
+
+
 #endif //GUARD_GRAPHICS_H

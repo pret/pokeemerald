@@ -26,6 +26,7 @@
 #include "pokedex.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "rom_8011DC0.h"
 #include "save.h"
@@ -48,8 +49,6 @@
 #include "constants/rgb.h"
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
-
-extern void sub_80C6D80(const u8 *, u8 *, u8, u8, u8);
 
 struct InGameTrade {
     /*0x00*/ u8 name[11];

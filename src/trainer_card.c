@@ -8,6 +8,7 @@
 #include "link.h"
 #include "bg.h"
 #include "sound.h"
+#include "frontier_pass.h"
 #include "overworld.h"
 #include "menu.h"
 #include "text.h"
@@ -90,7 +91,6 @@ struct TrainerCardData
 
 //external functions
 extern u8 sub_80D30A0(u16);
-extern void sub_80C5868(void);
 
 // EWRAM
 EWRAM_DATA static struct TrainerCardData *sData = NULL;
@@ -167,7 +167,6 @@ static bool8 sub_80C4C84(struct Task* task);
 static bool8 sub_80C4DB0(struct Task* task);
 static void sub_80C32EC(u16);
 static void sub_80C41D8(void);
-static void sub_80C6D80(const u8 *, u8 *, u8, u8, u8);
 
 // const rom data
 static const u32 gUnknown_0856F018[] = INCBIN_U32("graphics/trainer_card/stickers_fr.4bpp.lz");
@@ -1754,7 +1753,7 @@ void ShowPlayerTrainerCard(void (*callback)(void))
 {
     sData = AllocZeroed(sizeof(*sData));
     sData->callback2 = callback;
-    if (callback == sub_80C5868)
+    if (callback == CB2_ReshowFrontierPass)
         sData->var_52C = 0x7FFF;
     else
         sData->var_52C = 0;

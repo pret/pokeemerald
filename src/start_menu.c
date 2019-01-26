@@ -10,6 +10,7 @@
 #include "bg.h"
 #include "field_effect.h"
 #include "party_menu.h"
+#include "frontier_pass.h"
 #include "task.h"
 #include "overworld.h"
 #include "link.h"
@@ -92,8 +93,6 @@ extern void sub_808B864(void);
 extern void CB2_Pokedex(void);
 extern void PlayRainSoundEffect(void);
 extern void CB2_PokeNav(void);
-extern void ShowPlayerTrainerCard(void (*)(void));
-extern void sub_80C51C4(void (*)(void));
 extern void ScriptUnfreezeEventObjects(void);
 extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
@@ -678,7 +677,7 @@ static bool8 StartMenuPlayerNameCallback(void)
         if (is_c1_link_related_active() || InUnionRoom())
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-            sub_80C51C4(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
+            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
         else
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
 
