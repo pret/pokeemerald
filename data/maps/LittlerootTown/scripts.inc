@@ -974,9 +974,8 @@ LittlerootTown_Text_1E8A03: @ 81E8A03
 	.string "Go on, go get them, honey!$"
 
 LittlerootTown_Text_1E8ACF: @ 81E8ACF
-	.string "If you use a PC, you can store items\n"
-	.string "and POKéMON.\p"
-	.string "The power of science is staggering!$"
+	.string "The duck is among the most majestic\n"
+	.string "of all animals.$"
 
 LittlerootTown_Text_1E8B25: @ 81E8B25
 	.string "PROF. BIRCH spends days in his LAB\n"
@@ -1012,8 +1011,8 @@ LittlerootTown_Text_1E8D07: @ 81E8D07
 	.string "Good luck!$"
 
 LittlerootTown_Text_1E8D32: @ 81E8D32
-	.string "LITTLEROOT TOWN\n"
-	.string "“A town that can't be shaded any hue.”$"
+	.string "ANTIDAE TOWN\n"
+	.string "“A temple to the finest among the birbs.”$"
 
 LittlerootTown_Text_1E8D69: @ 81E8D69
 	.string "PROF. BIRCH'S POKéMON LAB$"
