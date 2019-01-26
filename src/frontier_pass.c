@@ -10,18 +10,35 @@
 #include "text_window.h"
 #include "task.h"
 #include "graphics.h"
+#include "strings.h"
+#include "frontier_pass.h"
+#include "international_string_util.h"
 #include "palette.h"
 #include "window.h"
+#include "decompress.h"
 #include "menu_helpers.h"
 #include "menu.h"
 #include "bg.h"
 #include "sound.h"
+#include "string_util.h"
 #include "battle_pyramid.h"
 #include "overworld.h"
+#include "math_util.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
+
+// All windows displayed in the frontier pass.
+enum
+{
+	WINDOW_EARNED_SYMBOLS,
+	WINDOW_BATTLE_RECORD,
+	WINDOW_BATTLE_POINTS,
+	WINDOW_DESCRIPTION,
+	WINDOW_4,
+	WINDOW_COUNT
+};
 
 enum
 {
@@ -41,8 +58,8 @@ struct FrontierPassData
     void (*callback)(void);
     u16 state;
     u16 battlePoints;
-    s16 x;
-    s16 y;
+    s16 cursorX;
+    s16 cursorY;
     u8 cursorArea;
     u8 previousCursorArea;
     u8 hasBattleRecord:1;
@@ -51,13 +68,14 @@ struct FrontierPassData
     u8 facilitySymbols[NUM_FRONTIER_FACILITIES];
 };
 
-struct FrontierPassUnk
+struct FrontierPassGfx
 {
-    u32 unk0[8];
+    struct Sprite *cursorSprite;
+    struct Sprite *symbolSprites[NUM_FRONTIER_FACILITIES];
     u8 *unk20;
     u8 *unk24;
     u8 *unk28;
-    bool8 unk2C;
+    bool8 setAffine;
     s16 unk2E;
     s16 unk30;
     u8 tilemapBuff1[0x1000];
@@ -68,26 +86,29 @@ struct FrontierPassUnk
 struct FrontierPassSaved
 {
     void (*callback)(void);
-    s16 x;
-    s16 y;
+    s16 cursorX;
+    s16 cursorY;
 };
 
 extern struct FrontierPassData *gUnknown_02039CEC;
-extern struct FrontierPassUnk *gUnknown_02039CF0;
+extern struct FrontierPassGfx *gUnknown_02039CF0;
 extern struct FrontierPassSaved gUnknown_02039CF8;
 
 // This file's functions.
-u32 sub_80C51F0(void (*callback)(void));
-void sub_80C544C(void);
+u32 AllocateFrontierPassData(void (*callback)(void));
+void ShowFrontierMap(void (*callback)(void));
+void CB2_InitFrontierPass(void);
 void sub_80C629C(void);
-void sub_80C63FC(void);
-void sub_80C62DC(void);
-u32 sub_80C52E4(void);
-bool32 sub_80C5484(void);
-bool32 sub_80C570C(void);
-void sub_80C5A48(u8 taskId);
-void sub_80C5BD8(u8 taskId);
+void FreeCursorAndSymbolSprites(void);
+void LoadCursorAndSymbolSprites(void);
+u32 FreeFrontierPassData(void);
+bool32 InitFrontierPass(void);
+bool32 HideFrontierPass(void);
+void Task_HandleFrontierPassInput(u8 taskId);
+void Task_DoFadeEffect(u8 taskId);
 void sub_80C6104(u8 cursorArea, u8 previousCursorArea);
+void PrintAreaDescription(u8 cursorArea);
+void sub_80C5F58(bool8 arg0, bool8 arg1);
 
 // Const rom data.
 extern const s16 gUnknown_085713E0[][2];
@@ -96,6 +117,13 @@ extern const struct WindowTemplate gUnknown_08571400[];
 extern const u32 gUnknown_085712F8[];
 extern const u32 gUnknown_085712C0[];
 extern const u32 gUnknown_08571060[];
+extern const u8 gUnknown_08571448[];
+extern const u8 gUnknown_0857144B[];
+extern const u8 *const gUnknown_08571614[];
+extern const struct SpritePalette gUnknown_085714E4[];
+extern const struct CompressedSpriteSheet gUnknown_085714BC[];
+extern const struct SpriteTemplate gUnknown_085715B4;
+extern const struct SpriteTemplate gUnknown_085715E4;
 
 // code
 void sub_80C50D0(void)
@@ -126,19 +154,19 @@ void sub_80C50D0(void)
     CpuFill32(0, (void *)OAM, OAM_SIZE);
 }
 
-void sub_80C51C4(void (*callback)(void))
+void ShowFrontierPass(void (*callback)(void))
 {
-    sub_80C51F0(callback);
-    SetMainCallback2(sub_80C544C);
+    AllocateFrontierPassData(callback);
+    SetMainCallback2(CB2_InitFrontierPass);
 }
 
-void sub_80C51D8(void)
+void LeaveFrontierPass(void)
 {
     SetMainCallback2(gUnknown_02039CEC->callback);
-    sub_80C52E4();
+    FreeFrontierPassData();
 }
 
-u32 sub_80C51F0(void (*callback)(void))
+u32 AllocateFrontierPassData(void (*callback)(void))
 {
     u8 i;
 
@@ -153,13 +181,13 @@ u32 sub_80C51F0(void (*callback)(void))
     i = GetCurrentRegionMapSectionId();
     if (i != MAPSEC_BATTLE_FRONTIER && i != MAPSEC_ARTISAN_CAVE)
     {
-        gUnknown_02039CEC->x = 176;
-        gUnknown_02039CEC->y = 104;
+        gUnknown_02039CEC->cursorX = 176;
+        gUnknown_02039CEC->cursorY = 104;
     }
     else
     {
-        gUnknown_02039CEC->x = 176;
-        gUnknown_02039CEC->y = 48;
+        gUnknown_02039CEC->cursorX = 176;
+        gUnknown_02039CEC->cursorY = 48;
     }
 
     gUnknown_02039CEC->battlePoints = gSaveBlock2Ptr->frontier.battlePoints;
@@ -177,7 +205,7 @@ u32 sub_80C51F0(void (*callback)(void))
     return 0;
 }
 
-u32 sub_80C52E4(void)
+u32 FreeFrontierPassData(void)
 {
     if (gUnknown_02039CEC == NULL)
         return 1;
@@ -187,7 +215,7 @@ u32 sub_80C52E4(void)
     return 0;
 }
 
-u32 sub_80C5310(void)
+u32 AllocateFrontierPassGfx(void)
 {
     if (gUnknown_02039CF0 != NULL)
         return 1;
@@ -199,7 +227,7 @@ u32 sub_80C5310(void)
     return 0;
 }
 
-u32 sub_80C5340(void)
+u32 FreeFrontierPassGfx(void)
 {
     FreeAllWindowBuffers();
     if (gUnknown_02039CF0 == NULL)
@@ -217,9 +245,9 @@ u32 sub_80C5340(void)
     return 0;
 }
 
-void sub_80C53AC(void)
+void VblankCb_FrontierPass(void)
 {
-    if (gUnknown_02039CF0->unk2C)
+    if (gUnknown_02039CF0->setAffine)
     {
         SetBgAffine(2,
                     gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][0] << 8,
@@ -235,31 +263,31 @@ void sub_80C53AC(void)
     TransferPlttBuffer();
 }
 
-void sub_80C5438(void)
+void CB2_FrontierPass(void)
 {
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
 }
 
-void sub_80C544C(void)
+void CB2_InitFrontierPass(void)
 {
-    if (sub_80C5484())
+    if (InitFrontierPass())
     {
-        CreateTask(sub_80C5A48, 0);
-        SetMainCallback2(sub_80C5438);
+        CreateTask(Task_HandleFrontierPassInput, 0);
+        SetMainCallback2(CB2_FrontierPass);
     }
 }
 
-void sub_80C5470(void)
+void CB2_HideFrontierPass(void)
 {
-    if (sub_80C570C())
+    if (HideFrontierPass())
     {
-        sub_80C51D8();
+        LeaveFrontierPass();
     }
 }
 
-bool32 sub_80C5484(void)
+bool32 InitFrontierPass(void)
 {
     u32 sizeOut = 0;
 
@@ -282,7 +310,7 @@ bool32 sub_80C5484(void)
         reset_temp_tile_data_buffers();
         break;
     case 3:
-        sub_80C5310();
+        AllocateFrontierPassGfx();
         break;
     case 4:
         ResetBgsAndClearDma3BusyFlags(0);
@@ -330,8 +358,8 @@ bool32 sub_80C5484(void)
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
-        sub_80C62DC();
-        SetVBlankCallback(sub_80C53AC);
+        LoadCursorAndSymbolSprites();
+        SetVBlankCallback(VblankCb_FrontierPass);
         BlendPalettes(0xFFFFFFFF, 0x10, 0);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         break;
@@ -349,7 +377,7 @@ bool32 sub_80C5484(void)
     return FALSE;
 }
 
-bool32 sub_80C570C(void)
+bool32 HideFrontierPass(void)
 {
     switch (gUnknown_02039CEC->state)
     {
@@ -378,7 +406,7 @@ bool32 sub_80C570C(void)
         SetVBlankHBlankCallbacksToNull();
         break;
     case 3:
-        sub_80C63FC();
+        FreeCursorAndSymbolSprites();
         break;
     case 4:
         sub_80C50D0();
@@ -390,7 +418,7 @@ bool32 sub_80C570C(void)
         UnsetBgTilemapBuffer(0);
         UnsetBgTilemapBuffer(1);
         UnsetBgTilemapBuffer(2);
-        sub_80C5340();
+        FreeFrontierPassGfx();
         gUnknown_02039CEC->state = 0;
         return TRUE;
     }
@@ -408,7 +436,7 @@ struct
 }
 extern const gUnknown_08571454[];
 
-u8 sub_80C57FC(s16 x, s16 y)
+u8 GetCursorAreaFromCoords(s16 x, s16 y)
 {
     u8 i;
 
@@ -428,35 +456,35 @@ u8 sub_80C57FC(s16 x, s16 y)
     return 0;
 }
 
-void sub_80C5868(void)
+void CB2_ReshowFrontierPass(void)
 {
     u8 taskId;
 
-    if (!sub_80C5484())
+    if (!InitFrontierPass())
         return;
 
     switch (gUnknown_02039CEC->unkE)
     {
     case 1:
     case 2:
-        taskId = CreateTask(sub_80C5BD8, 0);
-        gTasks[taskId].data[0] = 1;
+        taskId = CreateTask(Task_DoFadeEffect, 0);
+        gTasks[taskId].data[0] = TRUE;
         break;
     case 3:
     default:
         gUnknown_02039CEC->unkE = 0;
-        taskId = CreateTask(sub_80C5A48, 0);
+        taskId = CreateTask(Task_HandleFrontierPassInput, 0);
         break;
     }
 
-    SetMainCallback2(sub_80C5438);
+    SetMainCallback2(CB2_FrontierPass);
 }
 
-void sub_80C58D4(void)
+void CB2_ReturnFromRecord(void)
 {
-    sub_80C51F0(gUnknown_02039CF8.callback);
-    gUnknown_02039CEC->x = gUnknown_02039CF8.x;
-    gUnknown_02039CEC->y = gUnknown_02039CF8.y;
+    AllocateFrontierPassData(gUnknown_02039CF8.callback);
+    gUnknown_02039CEC->cursorX = gUnknown_02039CF8.cursorX;
+    gUnknown_02039CEC->cursorY = gUnknown_02039CF8.cursorY;
     memset(&gUnknown_02039CF8, 0, sizeof(gUnknown_02039CF8));
     switch (InBattlePyramid())
     {
@@ -471,5 +499,438 @@ void sub_80C58D4(void)
         break;
     }
 
-    SetMainCallback2(sub_80C5868);
+    SetMainCallback2(CB2_ReshowFrontierPass);
 }
+
+void CB2_ShowFrontierPassFeature(void)
+{
+    if (!HideFrontierPass())
+        return;
+
+    switch (gUnknown_02039CEC->unkE)
+    {
+    case 1:
+        ShowFrontierMap(CB2_ReshowFrontierPass);
+        break;
+    case 3:
+        gUnknown_02039CF8.callback = gUnknown_02039CEC->callback;
+        gUnknown_02039CF8.cursorX = gUnknown_02039CEC->cursorX;
+        gUnknown_02039CF8.cursorY = gUnknown_02039CEC->cursorY;
+        FreeFrontierPassData();
+        PlayRecordedBattle(CB2_ReturnFromRecord);
+        break;
+    case 2:
+        ShowPlayerTrainerCard(CB2_ReshowFrontierPass);
+        break;
+    }
+}
+
+bool32 TryCallPassAreaFunction(u8 taskId, u8 cursorArea)
+{
+    switch (cursorArea)
+    {
+    case CURSOR_AREA_RECORD:
+        if (!gUnknown_02039CEC->hasBattleRecord)
+            return FALSE;
+        gUnknown_02039CEC->unkE = 3;
+        DestroyTask(taskId);
+        SetMainCallback2(CB2_ShowFrontierPassFeature);
+        break;
+    case CURSOR_AREA_MAP:
+    case CURSOR_AREA_CARD:
+        gUnknown_02039CEC->unkE = cursorArea;
+        gTasks[taskId].func = Task_DoFadeEffect;
+        gTasks[taskId].data[0] = FALSE;
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_02039CEC->cursorX = gUnknown_02039CF0->cursorSprite->pos1.x;
+    gUnknown_02039CEC->cursorY = gUnknown_02039CF0->cursorSprite->pos1.y;
+    return TRUE;
+}
+
+void Task_HandleFrontierPassInput(u8 taskId)
+{
+    u8 var = FALSE; // Reused, first informs whether the cursor moves, then used as the new cursor area.
+
+    if (gMain.heldKeys & DPAD_UP && gUnknown_02039CF0->cursorSprite->pos1.y >= 9)
+    {
+        gUnknown_02039CF0->cursorSprite->pos1.y -= 2;
+        if (gUnknown_02039CF0->cursorSprite->pos1.y <= 7)
+            gUnknown_02039CF0->cursorSprite->pos1.y = 2;
+        var = TRUE;
+    }
+    if (gMain.heldKeys & DPAD_DOWN && gUnknown_02039CF0->cursorSprite->pos1.y <= 135)
+    {
+        gUnknown_02039CF0->cursorSprite->pos1.y += 2;
+        if (gUnknown_02039CF0->cursorSprite->pos1.y >= 137)
+            gUnknown_02039CF0->cursorSprite->pos1.y = 136;
+        var = TRUE;
+    }
+
+    if (gMain.heldKeys & DPAD_LEFT && gUnknown_02039CF0->cursorSprite->pos1.x >= 6)
+    {
+        gUnknown_02039CF0->cursorSprite->pos1.x -= 2;
+        if (gUnknown_02039CF0->cursorSprite->pos1.x <= 4)
+            gUnknown_02039CF0->cursorSprite->pos1.x = 5;
+        var = TRUE;
+    }
+    if (gMain.heldKeys & DPAD_RIGHT && gUnknown_02039CF0->cursorSprite->pos1.x <= 231)
+    {
+        gUnknown_02039CF0->cursorSprite->pos1.x += 2;
+        if (gUnknown_02039CF0->cursorSprite->pos1.x >= 233)
+            gUnknown_02039CF0->cursorSprite->pos1.x = 232;
+        var = TRUE;
+    }
+
+    if (!var) // Cursor did not change.
+    {
+        if (gUnknown_02039CEC->cursorArea != CURSOR_AREA_NOTHING && gMain.newKeys & A_BUTTON)
+        {
+            if (gUnknown_02039CEC->cursorArea <= CURSOR_AREA_RECORD) // Map, Card, Record
+            {
+                PlaySE(SE_SELECT);
+                if (TryCallPassAreaFunction(taskId, gUnknown_02039CEC->cursorArea))
+                    return;
+            }
+            else if (gUnknown_02039CEC->cursorArea == CURSOR_AREA_CANCEL)
+            {
+                PlaySE(SE_PC_OFF);
+                SetMainCallback2(CB2_HideFrontierPass);
+                DestroyTask(taskId);
+                // BUG. The function should return here. Otherwise, it can play the same sound twice and destroy the same task twice.
+            }
+        }
+
+        if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_PC_OFF);
+            SetMainCallback2(CB2_HideFrontierPass);
+            DestroyTask(taskId);
+        }
+    }
+    else
+    {
+        var = GetCursorAreaFromCoords(gUnknown_02039CF0->cursorSprite->pos1.x - 5, gUnknown_02039CF0->cursorSprite->pos1.y + 5);
+        if (gUnknown_02039CEC->cursorArea != var)
+        {
+            PrintAreaDescription(var);
+            gUnknown_02039CEC->previousCursorArea = gUnknown_02039CEC->cursorArea;
+            gUnknown_02039CEC->cursorArea = var;
+            sub_80C6104(gUnknown_02039CEC->cursorArea, gUnknown_02039CEC->previousCursorArea);
+        }
+    }
+}
+
+void Task_DoFadeEffect(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (gUnknown_02039CEC->state)
+    {
+    case 0:
+        if (!data[0])
+        {
+            sub_80C5F58(TRUE, FALSE);
+            data[1] = 0x100;
+            data[2] = 0x100;
+            data[3] = 0x15;
+            data[4] = 0x15;
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITE);
+        }
+        else
+        {
+            data[1] = 0x1FC;
+            data[2] = 0x1FC;
+            data[3] = -0x15;
+            data[4] = -0x15;
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+            ShowBg(0);
+            ShowBg(1);
+            ShowBg(2);
+            LoadCursorAndSymbolSprites();
+            SetVBlankCallback(VblankCb_FrontierPass);
+            BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITE);
+        }
+        gUnknown_02039CF0->setAffine = TRUE;
+        gUnknown_02039CF0->unk2E = sub_8151624(data[1]);
+        gUnknown_02039CF0->unk30 = sub_8151624(data[2]);
+        break;
+    case 1:
+        UpdatePaletteFade();
+        data[1] += data[3];
+        data[2] += data[4];
+        gUnknown_02039CF0->unk2E = sub_8151624(data[1]);
+        gUnknown_02039CF0->unk30 = sub_8151624(data[2]);
+        if (!data[0])
+        {
+            if (data[1] <= 0x1FC)
+                return;
+        }
+        else
+        {
+            if (data[1] != 0x100)
+                return;
+        }
+        break;
+    case 2:
+        if (gUnknown_02039CF0->setAffine) // Nonsensical check.
+            gUnknown_02039CF0->setAffine = FALSE;
+        if (UpdatePaletteFade())
+            return;
+        if (!data[0])
+        {
+            DestroyTask(taskId);
+            SetMainCallback2(CB2_ShowFrontierPassFeature);
+        }
+        else
+        {
+            sub_80C5F58(FALSE, FALSE);
+            gUnknown_02039CEC->unkE = 0;
+            gTasks[taskId].func = Task_HandleFrontierPassInput;
+        }
+        SetBgAttribute(2, BG_ATTR_WRAPAROUND, 0);
+        gUnknown_02039CEC->state = 0;
+        return;
+    }
+
+    gUnknown_02039CEC->state++;
+}
+
+void ShowAndPrintWindows(void)
+{
+    s32 x;
+    u8 i;
+
+    for (i = 0; i < WINDOW_COUNT; i++)
+    {
+        PutWindowTilemap(i);
+        FillWindowPixelBuffer(i, 0);
+    }
+
+    x = GetStringCenterAlignXOffset(1, gText_SymbolsEarned, 0x60);
+    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, 1, x, 5, gUnknown_08571448, 0, gText_SymbolsEarned);
+
+    x = GetStringCenterAlignXOffset(1, gText_BattleRecord, 0x60);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, 1, x, 5, gUnknown_08571448, 0, gText_BattleRecord);
+
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, 5, 4, gUnknown_08571448, 0, gText_BattlePoints);
+    ConvertIntToDecimalStringN(gStringVar4, gUnknown_02039CEC->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
+    x = GetStringRightAlignXOffset(8, gStringVar4, 0x5B);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, x, 16, gUnknown_08571448, 0, gStringVar4);
+
+    gUnknown_02039CEC->cursorArea = GetCursorAreaFromCoords(gUnknown_02039CEC->cursorX - 5, gUnknown_02039CEC->cursorY + 5);
+    gUnknown_02039CEC->previousCursorArea = CURSOR_AREA_NOTHING;
+    PrintAreaDescription(gUnknown_02039CEC->cursorArea);
+
+    for (i = 0; i < WINDOW_COUNT; i++)
+        CopyWindowToVram(i, 3);
+
+    CopyBgTilemapBufferToVram(0);
+}
+
+void PrintAreaDescription(u8 cursorArea)
+{
+    FillWindowPixelBuffer(WINDOW_DESCRIPTION, 0);
+    if (cursorArea == CURSOR_AREA_RECORD && !gUnknown_02039CEC->hasBattleRecord)
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, gUnknown_0857144B, 0, gUnknown_08571614[0]);
+    else if (cursorArea != CURSOR_AREA_NOTHING)
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, gUnknown_0857144B, 0, gUnknown_08571614[cursorArea]);
+
+    CopyWindowToVram(WINDOW_DESCRIPTION, 3);
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_80C5F58(bool8 arg0, bool8 arg1)
+{
+    switch (gUnknown_02039CEC->unkE)
+    {
+    case 1:
+        if (arg0)
+            CopyToBgTilemapBufferRect_ChangePalette(2, gUnknown_02039CF0->unk20, 16, 3, 12, 7, 16);
+        else
+            FillBgTilemapBufferRect(2, 0, 16, 3, 12, 7, 16);
+        break;
+    case 2:
+        if (arg0)
+            CopyToBgTilemapBufferRect_ChangePalette(2, gUnknown_02039CF0->unk20 + 84, 16, 10, 12, 7, 16);
+        else
+            FillBgTilemapBufferRect(2, 0, 16, 10, 12, 7, 16);
+        break;
+    default:
+        return;
+    }
+
+    CopyBgTilemapBufferToVram(2);
+    if (arg1)
+    {
+        SetBgAffine(2,
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][0] << 8,
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][1] << 8,
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][0],
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][1],
+                    sub_8151624(0x1FC),
+                    sub_8151624(0x1FC),
+                    0);
+    }
+    else
+    {
+        SetBgAffine(2,
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][0] << 8,
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][1] << 8,
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][0],
+                    gUnknown_085713E0[gUnknown_02039CEC->unkE - 1][1],
+                    sub_8151624(0x100),
+                    sub_8151624(0x100),
+                    0);
+    }
+}
+
+void sub_80C6104(u8 cursorArea, u8 previousCursorArea)
+{
+    bool32 var;
+
+    switch (previousCursorArea)
+    {
+    case CURSOR_AREA_MAP:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_02039CF0->unk24, 16, 3, 12, 7, 17);
+        var = TRUE;
+        break;
+    case CURSOR_AREA_CARD:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_02039CF0->unk24 + 336, 16, 10, 12, 7, 17);
+        var = TRUE;
+        break;
+    case CURSOR_AREA_RECORD:
+        if (!gUnknown_02039CEC->hasBattleRecord)
+        {
+            var = FALSE;
+        }
+        else
+        {
+            CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_02039CF0->unk28, 2, 10, 12, 3, 17);
+            var = TRUE;
+        }
+        break;
+    case CURSOR_AREA_CANCEL:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DE3350, 21, 0, 9, 2, 17);
+        var = TRUE;
+        break;
+    default:
+        var = FALSE;
+        break;
+    }
+
+    if (!var)
+    {
+        if (cursorArea == CURSOR_AREA_NOTHING || cursorArea > CURSOR_AREA_CANCEL)
+            return;
+    }
+
+    switch (cursorArea)
+    {
+    case CURSOR_AREA_MAP:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_02039CF0->unk24 + 168, 16, 3, 12, 7, 17);
+        var = TRUE;
+        break;
+    case CURSOR_AREA_CARD:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_02039CF0->unk24 + 504, 16, 10, 12, 7, 17);
+        var = TRUE;
+        break;
+    case CURSOR_AREA_RECORD:
+        if (!gUnknown_02039CEC->hasBattleRecord)
+            return;
+
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_02039CF0->unk28 + 72, 2, 10, 12, 3, 17);
+        var = TRUE;
+        break;
+    case CURSOR_AREA_CANCEL:
+        CopyToBgTilemapBufferRect_ChangePalette(1, gUnknown_08DE3374, 21, 0, 9, 2, 17);
+        var = TRUE;
+        break;
+    default:
+        var = FALSE;
+        break;
+    }
+
+    if (!var)
+    {
+        asm("":::"r4");
+        if (previousCursorArea == CURSOR_AREA_NOTHING || previousCursorArea > CURSOR_AREA_CANCEL)
+            return;
+    }
+
+    CopyBgTilemapBufferToVram(1);
+}
+
+void sub_80C629C(void)
+{
+    CopyToBgTilemapBuffer(1, gUnknown_08DE3060, 0, 0);
+    sub_80C6104(gUnknown_02039CEC->cursorArea, gUnknown_02039CEC->previousCursorArea);
+    sub_80C5F58(TRUE, gUnknown_02039CEC->unkE);
+    ShowAndPrintWindows();
+    CopyBgTilemapBufferToVram(1);
+}
+
+void LoadCursorAndSymbolSprites(void)
+{
+    u8 spriteId;
+    u8 i = 0;
+
+    FreeAllSpritePalettes();
+    ResetAffineAnimData();
+    LoadSpritePalettes(gUnknown_085714E4);
+    LoadCompressedSpriteSheet(&gUnknown_085714BC[0]);
+    LoadCompressedSpriteSheet(&gUnknown_085714BC[2]);
+    spriteId = CreateSprite(&gUnknown_085715B4, gUnknown_02039CEC->cursorX, gUnknown_02039CEC->cursorY, 0);
+    gUnknown_02039CF0->cursorSprite = &gSprites[spriteId];
+    gUnknown_02039CF0->cursorSprite->oam.priority = 0;
+
+    for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
+    {
+        if (gUnknown_02039CEC->facilitySymbols[i] != 0)
+        {
+            struct SpriteTemplate sprite = gUnknown_085715E4;
+
+            sprite.paletteTag += gUnknown_02039CEC->facilitySymbols[i] - 1;
+            spriteId = CreateSprite(&sprite, gUnknown_08571454[i + CURSOR_AREA_SYMBOL - 1].xStart + 8, gUnknown_08571454[i + CURSOR_AREA_SYMBOL - 1].yStart + 6, i + 1);
+            gUnknown_02039CF0->symbolSprites[i] = &gSprites[spriteId];
+            gUnknown_02039CF0->symbolSprites[i]->oam.priority = 2;
+            StartSpriteAnim(gUnknown_02039CF0->symbolSprites[i], i);
+        }
+    }
+}
+
+void FreeCursorAndSymbolSprites(void)
+{
+    u8 i = 0;
+
+    DestroySprite(gUnknown_02039CF0->cursorSprite);
+    gUnknown_02039CF0->cursorSprite = NULL;
+    for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
+    {
+        if (gUnknown_02039CF0->symbolSprites[i] != NULL)
+        {
+            DestroySprite(gUnknown_02039CF0->symbolSprites[i]);
+            gUnknown_02039CF0->symbolSprites[i] = NULL;
+        }
+    }
+    FreeAllSpritePalettes();
+    FreeSpriteTilesByTag(2);
+    FreeSpriteTilesByTag(0);
+}
+
+void nullsub_39(void)
+{
+
+}
+
+// Frontier Map code.
+/*
+void ShowFrontierMap(void (*callback)(void));
+{
+
+}
+*/

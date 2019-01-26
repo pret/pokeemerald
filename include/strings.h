@@ -2248,4 +2248,9 @@ extern const u8 gText_Var1DarkLightGreyBP[];
 extern const u8 gText_BattleTower[];
 extern const u8 gText_BattlePtsWon[];
 
-#endif //GUARD_STRINGS_H
+// Frontier Pass
+extern const u8 gText_SymbolsEarned[];
+extern const u8 gText_BattleRecord[];
+extern const u8 gText_BattlePoints[];
+
+#endif // GUARD_STRINGS_H
