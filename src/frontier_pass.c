@@ -34,12 +34,12 @@
 // All windows displayed in the frontier pass.
 enum
 {
-	WINDOW_EARNED_SYMBOLS,
-	WINDOW_BATTLE_RECORD,
-	WINDOW_BATTLE_POINTS,
-	WINDOW_DESCRIPTION,
-	WINDOW_4,
-	WINDOW_COUNT
+    WINDOW_EARNED_SYMBOLS,
+    WINDOW_BATTLE_RECORD,
+    WINDOW_BATTLE_POINTS,
+    WINDOW_DESCRIPTION,
+    WINDOW_4,
+    WINDOW_COUNT
 };
 
 // Windows displayed in the facilities map view.
@@ -215,75 +215,75 @@ static const struct BgTemplate sMapBgTemplates[] =
 
 static const struct WindowTemplate sPassWindowTemplates[] =
 {
-	{
-		.bg = 0,
-		.tilemapLeft = 2,
-		.tilemapTop = 3,
-		.width = 12,
-		.height = 3,
-		.paletteNum = 15,
-		.baseBlock = 0x1,
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 2,
-		.tilemapTop = 10,
-		.width = 12,
-		.height = 3,
-		.paletteNum = 15,
-		.baseBlock = 0x26,
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 2,
-		.tilemapTop = 13,
-		.width = 12,
-		.height = 4,
-		.paletteNum = 15,
-		.baseBlock = 0x4B,
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 0,
-		.tilemapTop = 18,
-		.width = 30,
-		.height = 3,
-		.paletteNum = 15,
-		.baseBlock = 0x7C,
-	},
-	DUMMY_WIN_TEMPLATE
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 12,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 0x1,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 10,
+        .width = 12,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 0x26,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 13,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0x4B,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = 30,
+        .height = 3,
+        .paletteNum = 15,
+        .baseBlock = 0x7C,
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sMapWindowTemplates[] =
 {
-	{
-		.bg = 0,
-		.tilemapLeft = 0,
-		.tilemapTop = 1,
-		.width = 15,
-		.height = 5,
-		.paletteNum = 15,
-		.baseBlock = 0x1,
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 20,
-		.tilemapTop = 1,
-		.width = 10,
-		.height = 14,
-		.paletteNum = 15,
-		.baseBlock = 0x4D,
-	},
-	{
-		.bg = 0,
-		.tilemapLeft = 2,
-		.tilemapTop = 16,
-		.width = 26,
-		.height = 4,
-		.paletteNum = 15,
-		.baseBlock = 0xDA,
-	},
-	DUMMY_WIN_TEMPLATE
+    {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 1,
+        .width = 15,
+        .height = 5,
+        .paletteNum = 15,
+        .baseBlock = 0x1,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 1,
+        .width = 10,
+        .height = 14,
+        .paletteNum = 15,
+        .baseBlock = 0x4D,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 16,
+        .width = 26,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 0xDA,
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const u8 sTextColors[][3] =
@@ -675,9 +675,7 @@ static void CB2_InitFrontierPass(void)
 static void CB2_HideFrontierPass(void)
 {
     if (HideFrontierPass())
-    {
         LeaveFrontierPass();
-    }
 }
 
 static bool32 InitFrontierPass(void)
@@ -753,7 +751,7 @@ static bool32 InitFrontierPass(void)
         ShowBg(2);
         LoadCursorAndSymbolSprites();
         SetVBlankCallback(VblankCb_FrontierPass);
-        BlendPalettes(0xFFFFFFFF, 0x10, 0);
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         break;
     case 10:
@@ -1095,15 +1093,15 @@ static void ShowAndPrintWindows(void)
         FillWindowPixelBuffer(i, 0);
     }
 
-    x = GetStringCenterAlignXOffset(1, gText_SymbolsEarned, 0x60);
+    x = GetStringCenterAlignXOffset(1, gText_SymbolsEarned, 96);
     AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, 1, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
 
-    x = GetStringCenterAlignXOffset(1, gText_BattleRecord, 0x60);
+    x = GetStringCenterAlignXOffset(1, gText_BattleRecord, 96);
     AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, 1, x, 5, sTextColors[0], 0, gText_BattleRecord);
 
     AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, 5, 4, sTextColors[0], 0, gText_BattlePoints);
     ConvertIntToDecimalStringN(gStringVar4, sPassData->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
-    x = GetStringRightAlignXOffset(8, gStringVar4, 0x5B);
+    x = GetStringRightAlignXOffset(8, gStringVar4, 91);
     AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, x, 16, sTextColors[0], 0, gStringVar4);
 
     sPassData->cursorArea = GetCursorAreaFromCoords(sPassData->cursorX - 5, sPassData->cursorY + 5);
