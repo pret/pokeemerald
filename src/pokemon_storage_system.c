@@ -463,8 +463,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
-extern void sub_80C6D80(u8 *arg0, void *arg1, u8 arg2, u8 arg3, s32 arg4);
-
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 // This file's functions.
@@ -1543,6 +1541,168 @@ static const u8 gHandCursorTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cu
 static const u8 gHandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 // code
+void sub_80C6D80(u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
+{
+    s32 i, val, val2;
+    u16 windowId;
+    u8 txtColor[3];
+    u8 *tileData1, *tileData2;
+    struct WindowTemplate winTemplate = {0};
+
+    winTemplate.width = 24;
+    winTemplate.height = 2;
+    windowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(windowId, (arg3 << 4) | arg3);
+    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData2 = (winTemplate.width * 32) + tileData1;
+
+    if (!arg2)
+        txtColor[0] = 0;
+    else
+        txtColor[0] = arg3;
+    txtColor[1] = 0xF;
+    txtColor[2] = 0xE;
+    AddTextPrinterParameterized4(windowId, 1, 0, 1, 0, 0, txtColor, -1, string);
+
+    val = arg4;
+    if (val > 6u)
+        val = 6;
+    val2 = arg4 - 6;
+    if (val > 0)
+    {
+        for (i = val; i != 0; i--)
+        {
+            CpuCopy16(tileData1, dst, 0x80);
+            CpuCopy16(tileData2, dst + 0x80, 0x80);
+            tileData1 += 0x80;
+            tileData2 += 0x80;
+            dst += 0x100;
+        }
+    }
+
+    if (val2 > 0)
+        CpuFill16((arg3 << 4) | arg3, dst, (u32)(val2) * 0x100);
+
+    RemoveWindow(windowId);
+}
+
+NAKED
+void sub_80C6EAC()
+{
+    asm_unified("\n\
+                push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x2C\n\
+	str r0, [sp, 0x20]\n\
+	str r1, [sp, 0x24]\n\
+	adds r6, r3, 0\n\
+	ldr r0, [sp, 0x4C]\n\
+	mov r9, r0\n\
+	ldr r1, [sp, 0x50]\n\
+	mov r10, r1\n\
+	lsls r2, 16\n\
+	lsrs r2, 16\n\
+	str r2, [sp, 0x28]\n\
+	lsls r6, 24\n\
+	lsrs r6, 24\n\
+	mov r2, r9\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	mov r9, r2\n\
+	mov r0, r10\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r10, r0\n\
+	movs r0, 0\n\
+	movs r1, 0\n\
+	str r0, [sp, 0x18]\n\
+	str r1, [sp, 0x1C]\n\
+	ldr r0, [sp, 0x20]\n\
+	bl StringLength_Multibyte\n\
+	lsls r0, 24\n\
+	ldr r2, =0x00ffffff\n\
+	ldr r1, [sp, 0x18]\n\
+	ands r1, r2\n\
+	orrs r1, r0\n\
+	str r1, [sp, 0x18]\n\
+	ldr r1, =0xffffff00\n\
+	add r2, sp, 0x18\n\
+	mov r8, r2\n\
+	ldr r0, [r2, 0x4]\n\
+	ands r0, r1\n\
+	movs r1, 0x2\n\
+	orrs r0, r1\n\
+	str r0, [r2, 0x4]\n\
+	ldr r5, [sp, 0x18]\n\
+	lsrs r5, 24\n\
+	lsls r5, 5\n\
+	mov r0, r8\n\
+	bl AddWindow\n\
+	adds r4, r0, 0\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	lsls r1, r6, 4\n\
+	orrs r1, r6\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	adds r0, r4, 0\n\
+	bl FillWindowPixelBuffer\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x7\n\
+	bl GetWindowAttribute\n\
+	adds r7, r0, 0\n\
+	mov r0, r8\n\
+	ldrb r0, [r0, 0x3]\n\
+	lsls r0, 5\n\
+	mov r8, r0\n\
+	add r8, r7\n\
+	add r0, sp, 0x14\n\
+	movs r1, 0\n\
+	strb r6, [r0]\n\
+	mov r2, r9\n\
+	strb r2, [r0, 0x1]\n\
+	mov r2, r10\n\
+	strb r2, [r0, 0x2]\n\
+	str r1, [sp]\n\
+	str r1, [sp, 0x4]\n\
+	str r0, [sp, 0x8]\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	str r0, [sp, 0xC]\n\
+	ldr r0, [sp, 0x20]\n\
+	str r0, [sp, 0x10]\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x1\n\
+	movs r2, 0\n\
+	movs r3, 0x2\n\
+	bl AddTextPrinterParameterized4\n\
+	lsrs r5, 1\n\
+	adds r0, r7, 0\n\
+	ldr r1, [sp, 0x24]\n\
+	adds r2, r5, 0\n\
+	bl CpuSet\n\
+	ldr r2, [sp, 0x24]\n\
+	ldr r0, [sp, 0x28]\n\
+	adds r1, r2, r0\n\
+	mov r0, r8\n\
+	adds r2, r5, 0\n\
+	bl CpuSet\n\
+	adds r0, r4, 0\n\
+	bl RemoveWindow\n\
+	add sp, 0x2C\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool");
+}
+
 u8 CountMonsInBox(u8 boxId)
 {
     u16 i, count;

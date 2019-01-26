@@ -167,7 +167,6 @@ static bool8 sub_80C4C84(struct Task* task);
 static bool8 sub_80C4DB0(struct Task* task);
 static void sub_80C32EC(u16);
 static void sub_80C41D8(void);
-static void sub_80C6D80(const u8 *, u8 *, u8, u8, u8);
 
 // const rom data
 static const u32 gUnknown_0856F018[] = INCBIN_U32("graphics/trainer_card/stickers_fr.4bpp.lz");

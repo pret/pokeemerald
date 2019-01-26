@@ -25,6 +25,7 @@
 #include "overworld.h"
 #include "math_util.h"
 #include "constants/battle_frontier.h"
+#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -117,12 +118,11 @@ extern const struct WindowTemplate gUnknown_08571400[];
 extern const u32 gUnknown_085712F8[];
 extern const u32 gUnknown_085712C0[];
 extern const u32 gUnknown_08571060[];
-extern const u8 gUnknown_08571448[];
-extern const u8 gUnknown_0857144B[];
+extern const u8 gUnknown_08571448[][3];
 extern const u8 *const gUnknown_08571614[];
 extern const struct SpritePalette gUnknown_085714E4[];
 extern const struct CompressedSpriteSheet gUnknown_085714BC[];
-extern const struct SpriteTemplate gUnknown_085715B4;
+extern const struct SpriteTemplate gUnknown_085715B4[2];
 extern const struct SpriteTemplate gUnknown_085715E4;
 
 // code
@@ -712,15 +712,15 @@ void ShowAndPrintWindows(void)
     }
 
     x = GetStringCenterAlignXOffset(1, gText_SymbolsEarned, 0x60);
-    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, 1, x, 5, gUnknown_08571448, 0, gText_SymbolsEarned);
+    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, 1, x, 5, gUnknown_08571448[0], 0, gText_SymbolsEarned);
 
     x = GetStringCenterAlignXOffset(1, gText_BattleRecord, 0x60);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, 1, x, 5, gUnknown_08571448, 0, gText_BattleRecord);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, 1, x, 5, gUnknown_08571448[0], 0, gText_BattleRecord);
 
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, 5, 4, gUnknown_08571448, 0, gText_BattlePoints);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, 5, 4, gUnknown_08571448[0], 0, gText_BattlePoints);
     ConvertIntToDecimalStringN(gStringVar4, gUnknown_02039CEC->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
     x = GetStringRightAlignXOffset(8, gStringVar4, 0x5B);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, x, 16, gUnknown_08571448, 0, gStringVar4);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, x, 16, gUnknown_08571448[0], 0, gStringVar4);
 
     gUnknown_02039CEC->cursorArea = GetCursorAreaFromCoords(gUnknown_02039CEC->cursorX - 5, gUnknown_02039CEC->cursorY + 5);
     gUnknown_02039CEC->previousCursorArea = CURSOR_AREA_NOTHING;
@@ -736,9 +736,9 @@ void PrintAreaDescription(u8 cursorArea)
 {
     FillWindowPixelBuffer(WINDOW_DESCRIPTION, 0);
     if (cursorArea == CURSOR_AREA_RECORD && !gUnknown_02039CEC->hasBattleRecord)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, gUnknown_0857144B, 0, gUnknown_08571614[0]);
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, gUnknown_08571448[1], 0, gUnknown_08571614[0]);
     else if (cursorArea != CURSOR_AREA_NOTHING)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, gUnknown_0857144B, 0, gUnknown_08571614[cursorArea]);
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, gUnknown_08571448[1], 0, gUnknown_08571614[cursorArea]);
 
     CopyWindowToVram(WINDOW_DESCRIPTION, 3);
     CopyBgTilemapBufferToVram(0);
@@ -884,7 +884,7 @@ void LoadCursorAndSymbolSprites(void)
     LoadSpritePalettes(gUnknown_085714E4);
     LoadCompressedSpriteSheet(&gUnknown_085714BC[0]);
     LoadCompressedSpriteSheet(&gUnknown_085714BC[2]);
-    spriteId = CreateSprite(&gUnknown_085715B4, gUnknown_02039CEC->cursorX, gUnknown_02039CEC->cursorY, 0);
+    spriteId = CreateSprite(&gUnknown_085715B4[0], gUnknown_02039CEC->cursorX, gUnknown_02039CEC->cursorY, 0);
     gUnknown_02039CF0->cursorSprite = &gSprites[spriteId];
     gUnknown_02039CF0->cursorSprite->oam.priority = 0;
 
@@ -928,9 +928,440 @@ void nullsub_39(void)
 }
 
 // Frontier Map code.
-/*
-void ShowFrontierMap(void (*callback)(void));
-{
 
+struct FrontierMapData
+{
+    void (*callback)(void);
+    struct Sprite *cursorSprite;
+    struct Sprite *playerHeadSprite;
+    struct Sprite *mapIndicatorSprite;
+    u8 cursorPos;
+    u8 unk11;
+    u8 tilemapBuff0[0x1000];
+    u8 tilemapBuff1[0x1000];
+    u8 tilemapBuff2[0x1000];
+};
+
+extern struct FrontierMapData *gUnknown_02039CF4;
+
+// Forward declarations.
+void sub_80C67BC(u8 taskId);
+void sub_80C6B94(void);
+void sub_80C6974(void);
+void sub_80C6C70(u8 direction);
+
+extern const struct BgTemplate gUnknown_085713F4[3];
+extern const struct WindowTemplate gUnknown_08571428[];
+extern const u32 gUnknown_0856FBBC[];
+extern const u32 gUnknown_08570E00[];
+
+void ShowFrontierMap(void (*callback)(void))
+{
+    if (gUnknown_02039CF4 != NULL)
+        SetMainCallback2(callback); // This line doesn't make sense at all, since it gets overwritten later anyway.
+
+    gUnknown_02039CF4 = AllocZeroed(sizeof(*gUnknown_02039CF4));
+    gUnknown_02039CF4->callback = callback;
+    ResetTasks();
+    CreateTask(sub_80C67BC, 0);
+    SetMainCallback2(CB2_FrontierPass);
 }
-*/
+
+void sub_80C6498(void)
+{
+    ResetTasks();
+    SetMainCallback2(gUnknown_02039CF4->callback);
+    memset(gUnknown_02039CF4, 0, sizeof(*gUnknown_02039CF4)); // Pointless memory clear.
+    FREE_AND_SET_NULL(gUnknown_02039CF4);
+}
+
+bool32 sub_80C64CC(void)
+{
+    switch (gUnknown_02039CEC->state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        ScanlineEffect_Stop();
+        SetVBlankHBlankCallbacksToNull();
+        break;
+    case 1:
+        sub_80C50D0();
+        break;
+    case 2:
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        ResetPaletteFade();
+        reset_temp_tile_data_buffers();
+        break;
+    case 3:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_085713F4, ARRAY_COUNT(gUnknown_085713F4));
+        SetBgTilemapBuffer(0, gUnknown_02039CF4->tilemapBuff0);
+        SetBgTilemapBuffer(1, gUnknown_02039CF4->tilemapBuff1);
+        SetBgTilemapBuffer(2, gUnknown_02039CF4->tilemapBuff2);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(0);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        break;
+    case 4:
+        InitWindows(gUnknown_08571428);
+        DeactivateAllTextPrinters();
+        sub_80C6B94();
+        decompress_and_copy_tile_data_to_vram(1, gUnknown_0856FBBC, 0, 0, 0);
+        break;
+    case 5:
+        if (free_temp_tile_data_buffers_if_possible())
+            return FALSE;
+        LoadPalette(gUnknown_08DE07C8[0], 0, 0x1A0);
+        LoadPalette(stdpal_get(0), 0xF0, 0x20);
+        CopyToBgTilemapBuffer(2, gUnknown_08570E00, 0, 0);
+        CopyBgTilemapBufferToVram(2);
+        break;
+    case 6:
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        sub_80C6974();
+        SetVBlankCallback(VblankCb_FrontierPass);
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITE);
+        break;
+    case 7:
+        if (UpdatePaletteFade())
+            return FALSE;
+        gUnknown_02039CEC->state = 0;
+        return TRUE;
+    }
+
+    gUnknown_02039CEC->state++;
+    return FALSE;
+}
+
+bool32 sub_80C66AC(void)
+{
+    switch (gUnknown_02039CEC->state)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_WHITE);
+        break;
+    case 1:
+        if (UpdatePaletteFade())
+            return FALSE;
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        HideBg(0);
+        HideBg(1);
+        HideBg(2);
+        break;
+    case 2:
+        SetVBlankCallback(NULL);
+        ScanlineEffect_Stop();
+        SetVBlankHBlankCallbacksToNull();
+        break;
+    case 3:
+        if (gUnknown_02039CF4->cursorSprite != NULL)
+        {
+            DestroySprite(gUnknown_02039CF4->cursorSprite);
+            FreeSpriteTilesByTag(0);
+        }
+        if (gUnknown_02039CF4->mapIndicatorSprite != NULL)
+        {
+            DestroySprite(gUnknown_02039CF4->mapIndicatorSprite);
+            FreeSpriteTilesByTag(1);
+        }
+        if (gUnknown_02039CF4->playerHeadSprite != NULL)
+        {
+            DestroySprite(gUnknown_02039CF4->playerHeadSprite);
+            FreeSpriteTilesByTag(4);
+        }
+        FreeAllWindowBuffers();
+        break;
+    case 4:
+        sub_80C50D0();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        break;
+    case 5:
+        UnsetBgTilemapBuffer(0);
+        UnsetBgTilemapBuffer(1);
+        UnsetBgTilemapBuffer(2);
+        gUnknown_02039CEC->state = 0;
+        return TRUE;
+    }
+
+    gUnknown_02039CEC->state++;
+    return FALSE;
+}
+
+void sub_80C67BC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        if (sub_80C64CC())
+            break;
+        return;
+    case 1:
+        if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_PC_OFF);
+            data[0] = 4;
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            if (gUnknown_02039CF4->cursorPos >= NUM_FRONTIER_FACILITIES - 1)
+                sub_80C6C70(0);
+            else
+                data[0] = 2;
+        }
+        else if (gMain.newKeys & DPAD_UP)
+        {
+            if (gUnknown_02039CF4->cursorPos == 0)
+                sub_80C6C70(1);
+            else
+                data[0] = 3;
+        }
+        return;
+    case 2:
+        if (data[1] > 3)
+        {
+            sub_80C6C70(0);
+            data[1] = 0;
+            data[0] = 1;
+        }
+        else
+        {
+            gUnknown_02039CF4->cursorSprite->pos1.y += 4;
+            data[1]++;
+        }
+        return;
+    case 3:
+        if (data[1] > 3)
+        {
+            sub_80C6C70(1);
+            data[1] = 0;
+            data[0] = 1;
+        }
+        else
+        {
+            gUnknown_02039CF4->cursorSprite->pos1.y -= 4;
+            data[1]++;
+        }
+        return;
+    case 4:
+        if (sub_80C66AC())
+            break;
+        return;
+    case 5:
+        DestroyTask(taskId);
+        sub_80C6498();
+        return;
+    }
+
+    data[0]++;
+}
+
+u8 sub_80C68E8(u16 mapNum) // id + 1, zero means not a frontier map number
+{
+    if ((mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_LOBBY) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM))
+        || (mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM2)))
+        return FRONTIER_FACILITY_TOWER + 1;
+    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_LOBBY)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM))
+        return FRONTIER_FACILITY_DOME + 1;
+    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PALACE_LOBBY)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM))
+        return FRONTIER_FACILITY_PALACE + 1;
+    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_ARENA_LOBBY)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM))
+        return FRONTIER_FACILITY_ARENA + 1;
+    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM))
+        return FRONTIER_FACILITY_FACTORY + 1;
+    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_LOBBY)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM2)
+             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3))
+        return FRONTIER_FACILITY_PIKE + 1;
+    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_TOP))
+        return FRONTIER_FACILITY_PYRAMID + 1;
+    else
+        return 0;
+}
+
+struct
+{
+    const u8 *name;
+    const u8 *description;
+    s16 x;
+    s16 y;
+    u8 animNum;
+} extern const gUnknown_08571650[];
+
+extern const struct CompressedSpriteSheet gUnknown_085714D4[];
+extern const struct SpriteTemplate gUnknown_085715FC;
+
+void sub_80C6974(void)
+{
+    struct SpriteTemplate sprite;
+    u8 spriteId;
+    u8 id;
+    s16 x = 0, y;
+
+    FreeAllSpritePalettes();
+    LoadSpritePalettes(gUnknown_085714E4);
+
+    LoadCompressedSpriteSheet(&gUnknown_085714BC[0]);
+    spriteId = CreateSprite(&gUnknown_085715B4[0], 155, (gUnknown_02039CF4->cursorPos * 16) + 8, 2);
+    gUnknown_02039CF4->cursorSprite = &gSprites[spriteId];
+    gUnknown_02039CF4->cursorSprite->oam.priority = 0;
+    gUnknown_02039CF4->cursorSprite->hFlip = TRUE;
+    StartSpriteAnim(gUnknown_02039CF4->cursorSprite, 1);
+
+    LoadCompressedSpriteSheet(&gUnknown_085714BC[1]);
+    spriteId = CreateSprite(&gUnknown_085715B4[1], gUnknown_08571650[gUnknown_02039CF4->cursorPos].x, gUnknown_08571650[gUnknown_02039CF4->cursorPos].y, 1);
+    gUnknown_02039CF4->mapIndicatorSprite = &gSprites[spriteId];
+    gUnknown_02039CF4->mapIndicatorSprite->oam.priority = 0;
+    StartSpriteAnim(gUnknown_02039CF4->mapIndicatorSprite, gUnknown_08571650[gUnknown_02039CF4->cursorPos].animNum);
+
+    // Create player indicator head sprite only if it's in vicinity of battle frontier.
+    id = GetCurrentRegionMapSectionId();
+    if (id == MAPSEC_BATTLE_FRONTIER || id == MAPSEC_ARTISAN_CAVE)
+    {
+        s8 mapNum = gSaveBlock1Ptr->location.mapNum;
+
+        if (mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST)
+            || (mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST) && (x = 55)))
+        {
+            x += gSaveBlock1Ptr->pos.x;
+            y = gSaveBlock1Ptr->pos.y;
+
+            x /= 8;
+            y /= 8;
+
+            id = 0;
+        }
+        else
+        {
+            id = sub_80C68E8(mapNum);
+            if (id != 0)
+            {
+                x = gUnknown_08571650[id - 1].x;
+                y = gUnknown_08571650[id - 1].y;
+            }
+            else
+            {
+                // Handle Artisan Cave.
+                if (gSaveBlock1Ptr->escapeWarp.mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST))
+                    x = gSaveBlock1Ptr->escapeWarp.x + 55;
+                else
+                    x = gSaveBlock1Ptr->escapeWarp.x;
+
+                y = gSaveBlock1Ptr->escapeWarp.y;
+
+                x /= 8;
+                y /= 8;
+            }
+        }
+
+        LoadCompressedSpriteSheet(gUnknown_085714D4);
+        sprite = gUnknown_085715FC;
+        sprite.paletteTag = gSaveBlock2Ptr->playerGender + 4;
+        if (id != 0)
+        {
+            spriteId = CreateSprite(&sprite, x, y, 0);
+        }
+        else
+        {
+            x *= 8;
+            y *= 8;
+            spriteId = CreateSprite(&sprite, x + 20, y + 36, 0);
+        }
+
+        gUnknown_02039CF4->playerHeadSprite = &gSprites[spriteId];
+        gUnknown_02039CF4->playerHeadSprite->oam.priority = 0;
+        if (gSaveBlock2Ptr->playerGender != MALE)
+            StartSpriteAnim(gUnknown_02039CF4->playerHeadSprite, 1);
+    }
+}
+
+enum
+{
+    MAP_WINDOW_0,
+    MAP_WINDOW_NAME,
+    MAP_WINDOW_DESCRIPTION,
+    MAP_WINDOW_COUNT
+};
+
+void sub_80C6B94(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAP_WINDOW_COUNT; i++)
+    {
+        PutWindowTilemap(i);
+        FillWindowPixelBuffer(i, 0);
+    }
+
+    for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
+    {
+        if (i == gUnknown_02039CF4->cursorPos)
+            AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (i * 16) + 1, gUnknown_08571448[2], 0, gUnknown_08571650[i].name);
+        else
+            AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (i * 16) + 1, gUnknown_08571448[1], 0, gUnknown_08571650[i].name);
+    }
+
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, gUnknown_08571448[0], 0, gUnknown_08571650[gUnknown_02039CF4->cursorPos].description);
+
+    for (i = 0; i < MAP_WINDOW_COUNT; i++)
+        CopyWindowToVram(i, 3);
+
+    CopyBgTilemapBufferToVram(0);
+}
+
+void sub_80C6C70(u8 direction)
+{
+    u8 oldCursorPos, i;
+
+    if (direction)
+    {
+        oldCursorPos = gUnknown_02039CF4->cursorPos;
+        gUnknown_02039CF4->cursorPos = (oldCursorPos + 6) % NUM_FRONTIER_FACILITIES;
+    }
+    else
+    {
+        oldCursorPos = gUnknown_02039CF4->cursorPos;
+        gUnknown_02039CF4->cursorPos = (oldCursorPos + 1) % NUM_FRONTIER_FACILITIES;
+    }
+
+    AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (oldCursorPos * 16) + 1, gUnknown_08571448[1], 0, gUnknown_08571650[oldCursorPos].name);
+    AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (gUnknown_02039CF4->cursorPos * 16) + 1, gUnknown_08571448[2], 0, gUnknown_08571650[gUnknown_02039CF4->cursorPos].name);
+
+    gUnknown_02039CF4->cursorSprite->pos1.y = (gUnknown_02039CF4->cursorPos * 16) + 8;
+
+    StartSpriteAnim(gUnknown_02039CF4->mapIndicatorSprite, gUnknown_08571650[gUnknown_02039CF4->cursorPos].animNum);
+    gUnknown_02039CF4->mapIndicatorSprite->pos1.x = gUnknown_08571650[gUnknown_02039CF4->cursorPos].x;
+    gUnknown_02039CF4->mapIndicatorSprite->pos1.y = gUnknown_08571650[gUnknown_02039CF4->cursorPos].y;
+    FillWindowPixelBuffer(MAP_WINDOW_DESCRIPTION, 0);
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, gUnknown_08571448[0], 0, gUnknown_08571650[gUnknown_02039CF4->cursorPos].description);
+
+    for (i = 0; i < 3; i++)
+        CopyWindowToVram(i, 3);
+
+    CopyBgTilemapBufferToVram(0);
+    PlaySE(SE_Z_SCROLL);
+}
