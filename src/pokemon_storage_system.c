@@ -1541,7 +1541,7 @@ static const u8 gHandCursorTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cu
 static const u8 gHandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 // code
-void sub_80C6D80(u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
+void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
 {
     s32 i, val, val2;
     u16 windowId;
@@ -1586,121 +1586,29 @@ void sub_80C6D80(u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
     RemoveWindow(windowId);
 }
 
-NAKED
-void sub_80C6EAC()
+// Unused
+void sub_80C6EAC(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr3)
 {
-    asm_unified("\n\
-                push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x2C\n\
-	str r0, [sp, 0x20]\n\
-	str r1, [sp, 0x24]\n\
-	adds r6, r3, 0\n\
-	ldr r0, [sp, 0x4C]\n\
-	mov r9, r0\n\
-	ldr r1, [sp, 0x50]\n\
-	mov r10, r1\n\
-	lsls r2, 16\n\
-	lsrs r2, 16\n\
-	str r2, [sp, 0x28]\n\
-	lsls r6, 24\n\
-	lsrs r6, 24\n\
-	mov r2, r9\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	mov r9, r2\n\
-	mov r0, r10\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r10, r0\n\
-	movs r0, 0\n\
-	movs r1, 0\n\
-	str r0, [sp, 0x18]\n\
-	str r1, [sp, 0x1C]\n\
-	ldr r0, [sp, 0x20]\n\
-	bl StringLength_Multibyte\n\
-	lsls r0, 24\n\
-	ldr r2, =0x00ffffff\n\
-	ldr r1, [sp, 0x18]\n\
-	ands r1, r2\n\
-	orrs r1, r0\n\
-	str r1, [sp, 0x18]\n\
-	ldr r1, =0xffffff00\n\
-	add r2, sp, 0x18\n\
-	mov r8, r2\n\
-	ldr r0, [r2, 0x4]\n\
-	ands r0, r1\n\
-	movs r1, 0x2\n\
-	orrs r0, r1\n\
-	str r0, [r2, 0x4]\n\
-	ldr r5, [sp, 0x18]\n\
-	lsrs r5, 24\n\
-	lsls r5, 5\n\
-	mov r0, r8\n\
-	bl AddWindow\n\
-	adds r4, r0, 0\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	lsls r1, r6, 4\n\
-	orrs r1, r6\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	adds r0, r4, 0\n\
-	bl FillWindowPixelBuffer\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x7\n\
-	bl GetWindowAttribute\n\
-	adds r7, r0, 0\n\
-	mov r0, r8\n\
-	ldrb r0, [r0, 0x3]\n\
-	lsls r0, 5\n\
-	mov r8, r0\n\
-	add r8, r7\n\
-	add r0, sp, 0x14\n\
-	movs r1, 0\n\
-	strb r6, [r0]\n\
-	mov r2, r9\n\
-	strb r2, [r0, 0x1]\n\
-	mov r2, r10\n\
-	strb r2, [r0, 0x2]\n\
-	str r1, [sp]\n\
-	str r1, [sp, 0x4]\n\
-	str r0, [sp, 0x8]\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	str r0, [sp, 0xC]\n\
-	ldr r0, [sp, 0x20]\n\
-	str r0, [sp, 0x10]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x1\n\
-	movs r2, 0\n\
-	movs r3, 0x2\n\
-	bl AddTextPrinterParameterized4\n\
-	lsrs r5, 1\n\
-	adds r0, r7, 0\n\
-	ldr r1, [sp, 0x24]\n\
-	adds r2, r5, 0\n\
-	bl CpuSet\n\
-	ldr r2, [sp, 0x24]\n\
-	ldr r0, [sp, 0x28]\n\
-	adds r1, r2, r0\n\
-	mov r0, r8\n\
-	adds r2, r5, 0\n\
-	bl CpuSet\n\
-	adds r0, r4, 0\n\
-	bl RemoveWindow\n\
-	add sp, 0x2C\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool");
+    u32 var;
+    u8 windowId;
+    u8 txtColor[3];
+    u8 *tileData1, *tileData2;
+    struct WindowTemplate winTemplate = {0};
+
+    winTemplate.width = StringLength_Multibyte(string);
+    winTemplate.height = 2;
+    var = winTemplate.width * 32;
+    windowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(windowId, (arg3 << 4) | arg3);
+    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData2 = (winTemplate.width * 32) + tileData1;
+    txtColor[0] = arg3;
+    txtColor[1] = clr2;
+    txtColor[2] = clr3;
+    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    CpuCopy16(tileData1, dst, var);
+    CpuCopy16(tileData2, dst + arg2, var);
+    RemoveWindow(windowId);
 }
 
 u8 CountMonsInBox(u8 boxId)
