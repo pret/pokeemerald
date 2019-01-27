@@ -128,18 +128,18 @@ void sub_80F88E8(void)
     }
 }
 
-u8 sub_80F8940(void)
+u8 CountPlayerContestPaintings(void)
 {
     int i;
-    u8 var0 = 0;
+    u8 count = 0;
 
     for (i = 0; i < 5; i++)
     {
         if (gSaveBlock1Ptr->contestWinners[8 + i].species)
-            var0++;
+            count++;
     }
 
-    return var0;
+    return count;
 }
 
 void sub_80F8970(void)

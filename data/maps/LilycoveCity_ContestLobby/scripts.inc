@@ -100,7 +100,7 @@ LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
 	return
 
 LilycoveCity_ContestLobby_EventScript_21A360:: @ 821A360
-	specialvar VAR_0x8004, sub_80F8940
+	specialvar VAR_0x8004, CountPlayerContestPaintings
 	switch VAR_0x8004
 	case 1, LilycoveCity_ContestLobby_EventScript_21A3A2
 	case 2, LilycoveCity_ContestLobby_EventScript_21A3A6

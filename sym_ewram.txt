@@ -153,21 +153,8 @@ gUnknown_02039B6E: @ 2039B6E
 gUnknown_02039B88: @ 2039B88
 	.space 0x160
 
-gUnknown_02039CE8: @ 2039CE8
-	.space 0x4
-
-gUnknown_02039CEC: @ 2039CEC
-	.space 0x4
-
-gUnknown_02039CF0: @ 2039CF0
-	.space 0x4
-
-gUnknown_02039CF4: @ 2039CF4
-	.space 0x4
-
-gUnknown_02039CF8: @ 2039CF8
-	.space 0x8
-
+	.include "src/trainer_card.o"
+	.include "src/frontier_pass.o"
 	.include "src/pokemon_storage_system.o"
 	.include "src/script_movement.o"
 	.include "src/fldeff_cut.o"

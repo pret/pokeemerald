@@ -498,7 +498,7 @@ static void sub_80B2C30(u8 taskId)
 
     for (index = 0; index < GetLinkPlayerCount(); index++)
     {
-        sub_80C3120(&gTrainerCards[index], gBlockRecvBuffer[index], gLinkPlayers[index].version);
+        CopyTrainerCardData(&gTrainerCards[index], gBlockRecvBuffer[index], gLinkPlayers[index].version);
     }
 
     SetSuppressLinkErrorMessage(FALSE);
@@ -1176,7 +1176,7 @@ static void sub_80B39A4(void)
 
 void sp02A_crash_sound(void)
 {
-    TrainerCard_ShowLinkCard(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    ShowTrainerCardInLink(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 bool32 sub_80B39D4(u8 linkPlayerIndex)

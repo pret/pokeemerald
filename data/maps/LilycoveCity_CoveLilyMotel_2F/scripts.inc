@@ -6,7 +6,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
 	faceplayer
 	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9
 	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
-	specialvar VAR_RESULT, sub_80C08E4
+	specialvar VAR_RESULT, HasAllHoennMons
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_218702
 	release

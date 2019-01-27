@@ -1262,7 +1262,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
 	lock
 	faceplayer
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_80C2E40
+	specialvar VAR_RESULT, CountPlayerTrainerStars
 	compare VAR_RESULT, 4
 	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
 	msgbox gUnknown_082726EB, MSGBOX_YESNO
@@ -1393,13 +1393,13 @@ OldaleTown_PokemonCenter_1F_Movement_271AD0: @ 8271AD0
 	step_end
 
 Std_ObtainItem:: @ 8271AD3
-	giveitem VAR_0x8000, 32769
+	giveitem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_271AE3
 	return
 
 EventScript_271AE3:: @ 8271AE3
-	bufferitemnameplural 1, VAR_0x8000, 32769
+	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
@@ -1498,9 +1498,9 @@ Std_FindItem:: @ 8271BFD
 	waitse
 	copyvar VAR_0x8004, VAR_0x8000
 	copyvar VAR_0x8005, VAR_0x8001
-	checkitemspace VAR_0x8000, 32769
+	checkitemspace VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemnameplural 1, VAR_0x8000, 32769
+	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
 	compare VAR_0x8007, 1
@@ -1512,7 +1512,7 @@ Std_FindItem:: @ 8271BFD
 
 EventScript_271C3A:: @ 8271C3A
 	removeobject VAR_LAST_TALKED
-	giveitem VAR_0x8004, 32773
+	giveitem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, sub_81398C0
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 1
@@ -1521,7 +1521,7 @@ EventScript_271C3A:: @ 8271C3A
 	call_if_eq EventScript_271C9B
 	waitfanfare
 	waitmessage
-	bufferitemnameplural 1, VAR_0x8004, 32773
+	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
 	setvar VAR_0x8004, 12
 	special CallBattlePyramidFunction
 	compare VAR_RESULT, 1
@@ -1534,7 +1534,7 @@ EventScript_271C86:: @ 8271C86
 	return
 
 EventScript_271C8F:: @ 8271C8F
-	bufferitemnameplural 0, VAR_0x8004, 32773
+	bufferitemnameplural 0, VAR_0x8004, VAR_0x8005
 	message gUnknown_082731A9
 	return
 
@@ -3379,7 +3379,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737A0:: @ 82737A0
 MossdeepCity_StevensHouse_EventScript_2737A0:: @ 82737A0
 Route119_WeatherInstitute_2F_EventScript_2737A0:: @ 82737A0
 RustboroCity_DevonCorp_2F_EventScript_2737A0:: @ 82737A0
-	bufferboxname 0, 16438
+	bufferboxname 0, VAR_STORAGE_UNKNOWN
 	bufferspeciesname 1, VAR_TEMP_1
 	call_if_unset FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737BB
 	call_if_set FLAG_SYS_PC_LANETTE, LittlerootTown_ProfessorBirchsLab_EventScript_2737E6
@@ -3394,7 +3394,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737BB:: @ 82737BB
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737D4:: @ 82737D4
 	specialvar VAR_RESULT, get_unknown_box_id
-	bufferboxname 2, 32781
+	bufferboxname 2, VAR_RESULT
 	msgbox gText_PkmnBoxSomeonesPCFull, MSGBOX_DEFAULT
 	return
 
@@ -3407,7 +3407,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737E6:: @ 82737E6
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737FF:: @ 82737FF
 	specialvar VAR_RESULT, get_unknown_box_id
-	bufferboxname 2, 32781
+	bufferboxname 2, VAR_RESULT
 	msgbox gText_PkmnBoxLanettesPCFull, MSGBOX_DEFAULT
 	return
 

@@ -60,7 +60,7 @@ PetalburgCity_Gym_EventScript_204955:: @ 8204955
 	return
 
 PetalburgCity_Gym_EventScript_20495D:: @ 820495D
-	setorcopyvar 0x8015, 269
+	setorcopyvar VAR_0x8015, 269
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare VAR_RESULT, 1
 	goto_if_eq PetalburgCity_Gym_EventScript_204985

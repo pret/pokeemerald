@@ -2222,4 +2222,65 @@ extern const u8 gText_PreliminaryResults[];
 extern const u8 gText_Round2Results[];
 extern const u8 gText_Var1sVar2Won[];
 
-#endif //GUARD_STRINGS_H
+// Trainer Card
+extern const u8 gText_LinkCableBattles[];
+extern const u8 gText_LinkBattles[];
+extern const u8 gText_WaitingTrainerFinishReading[];
+extern const u8 gText_TrainerCardName[];
+extern const u8 gText_TrainerCardIDNo[];
+extern const u8 gText_TrainerCardMoney[];
+extern const u8 gText_PokedollarVar1[];
+extern const u8 gText_EmptyString6[];
+extern const u8 gText_TrainerCardPokedex[];
+extern const u8 gText_TrainerCardTime[];
+extern const u8 gText_Colon2[];
+extern const u8 gText_Var1sTrainerCard[];
+extern const u8 gText_HallOfFameDebut[];
+extern const u8 gText_WinsLosses[];
+extern const u8 gText_PokemonTrades[];
+extern const u8 gText_BerryCrush[];
+extern const u8 gText_UnionTradesAndBattles[];
+extern const u8 gText_Var1DarkGreyShadowLightGrey[];
+extern const u8 gText_PokeblocksWithFriends[];
+extern const u8 gText_WonContestsWFriends[];
+extern const u8 gText_WSlashStraightSlash[];
+extern const u8 gText_Var1DarkLightGreyBP[];
+extern const u8 gText_BattleTower[];
+extern const u8 gText_BattlePtsWon[];
+
+// Frontier Pass
+extern const u8 gText_SymbolsEarned[];
+extern const u8 gText_BattleRecord[];
+extern const u8 gText_BattlePoints[];
+extern const u8 gUnknown_085EDA96[];
+extern const u8 gUnknown_085ED932[];
+extern const u8 gUnknown_085ED94D[];
+extern const u8 gUnknown_085ED961[];
+extern const u8 gUnknown_085ED977[];
+extern const u8 gUnknown_085ED993[];
+extern const u8 gUnknown_085ED9AF[];
+extern const u8 gUnknown_085ED9C7[];
+extern const u8 gUnknown_085ED9E5[];
+extern const u8 gUnknown_085EDA02[];
+extern const u8 gUnknown_085EDA21[];
+extern const u8 gUnknown_085EDA3C[];
+extern const u8 gUnknown_085EDA5E[];
+extern const u8 gUnknown_085EDA78[];
+extern const u8 gUnknown_085ED931[];
+extern const u8 gUnknown_085EDAB1[];
+extern const u8 gUnknown_085EDB0F[];
+extern const u8 gUnknown_085EDABE[];
+extern const u8 gUnknown_085EDB4E[];
+extern const u8 gUnknown_085EDACA[];
+extern const u8 gUnknown_085EDB8B[];
+extern const u8 gUnknown_085EDAD8[];
+extern const u8 gUnknown_085EDBC2[];
+extern const u8 gUnknown_085EDAE5[];
+extern const u8 gUnknown_085EDC00[];
+extern const u8 gUnknown_085EDAF4[];
+extern const u8 gUnknown_085EDC45[];
+extern const u8 gUnknown_085EDB00[];
+extern const u8 gUnknown_085EDC84[];
+
+
+#endif // GUARD_STRINGS_H
