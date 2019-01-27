@@ -463,8 +463,6 @@ EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sCanOnlyMove = 0;
 
-extern void sub_80C6D80(u8 *arg0, void *arg1, u8 arg2, u8 arg3, s32 arg4);
-
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 // This file's functions.
@@ -1543,6 +1541,76 @@ static const u8 gHandCursorTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cu
 static const u8 gHandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 // code
+void sub_80C6D80(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 arg4)
+{
+    s32 i, val, val2;
+    u16 windowId;
+    u8 txtColor[3];
+    u8 *tileData1, *tileData2;
+    struct WindowTemplate winTemplate = {0};
+
+    winTemplate.width = 24;
+    winTemplate.height = 2;
+    windowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(windowId, (arg3 << 4) | arg3);
+    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData2 = (winTemplate.width * 32) + tileData1;
+
+    if (!arg2)
+        txtColor[0] = 0;
+    else
+        txtColor[0] = arg3;
+    txtColor[1] = 0xF;
+    txtColor[2] = 0xE;
+    AddTextPrinterParameterized4(windowId, 1, 0, 1, 0, 0, txtColor, -1, string);
+
+    val = arg4;
+    if (val > 6u)
+        val = 6;
+    val2 = arg4 - 6;
+    if (val > 0)
+    {
+        for (i = val; i != 0; i--)
+        {
+            CpuCopy16(tileData1, dst, 0x80);
+            CpuCopy16(tileData2, dst + 0x80, 0x80);
+            tileData1 += 0x80;
+            tileData2 += 0x80;
+            dst += 0x100;
+        }
+    }
+
+    if (val2 > 0)
+        CpuFill16((arg3 << 4) | arg3, dst, (u32)(val2) * 0x100);
+
+    RemoveWindow(windowId);
+}
+
+// Unused
+void sub_80C6EAC(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr3)
+{
+    u32 var;
+    u8 windowId;
+    u8 txtColor[3];
+    u8 *tileData1, *tileData2;
+    struct WindowTemplate winTemplate = {0};
+
+    winTemplate.width = StringLength_Multibyte(string);
+    winTemplate.height = 2;
+    var = winTemplate.width * 32;
+    windowId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(windowId, (arg3 << 4) | arg3);
+    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData2 = (winTemplate.width * 32) + tileData1;
+    txtColor[0] = arg3;
+    txtColor[1] = clr2;
+    txtColor[2] = clr3;
+    AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
+    CpuCopy16(tileData1, dst, var);
+    CpuCopy16(tileData2, dst + arg2, var);
+    RemoveWindow(windowId);
+}
+
 u8 CountMonsInBox(u8 boxId)
 {
     u16 i, count;

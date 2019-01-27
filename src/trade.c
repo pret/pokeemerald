@@ -26,6 +26,7 @@
 #include "pokedex.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "rom_8011DC0.h"
 #include "save.h"

@@ -4271,46 +4271,46 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
     retVal = 0;
     switch (caseID)
     {
-        case FLAG_GET_SEEN:
-            if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+    case FLAG_GET_SEEN:
+        if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+        {
+            if ((gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+             && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                retVal = 1;
+            else
             {
-                if ((gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
-                 && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
-                    retVal = 1;
-                else
-                {
-                    gSaveBlock2Ptr->pokedex.seen[index] &= ~mask;
-                    gSaveBlock1Ptr->seen1[index] &= ~mask;
-                    gSaveBlock1Ptr->seen2[index] &= ~mask;
-                    retVal = 0;
-                }
+                gSaveBlock2Ptr->pokedex.seen[index] &= ~mask;
+                gSaveBlock1Ptr->seen1[index] &= ~mask;
+                gSaveBlock1Ptr->seen2[index] &= ~mask;
+                retVal = 0;
             }
-            break;
-        case FLAG_GET_CAUGHT:
-            if (gSaveBlock2Ptr->pokedex.owned[index] & mask)
+        }
+        break;
+    case FLAG_GET_CAUGHT:
+        if (gSaveBlock2Ptr->pokedex.owned[index] & mask)
+        {
+            if ((gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+             && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+             && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                retVal = 1;
+            else
             {
-                if ((gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock2Ptr->pokedex.seen[index] & mask)
-                 && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
-                 && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
-                    retVal = 1;
-                else
-                {
-                    gSaveBlock2Ptr->pokedex.owned[index] &= ~mask;
-                    gSaveBlock2Ptr->pokedex.seen[index] &= ~mask;
-                    gSaveBlock1Ptr->seen1[index] &= ~mask;
-                    gSaveBlock1Ptr->seen2[index] &= ~mask;
-                    retVal = 0;
-                }
+                gSaveBlock2Ptr->pokedex.owned[index] &= ~mask;
+                gSaveBlock2Ptr->pokedex.seen[index] &= ~mask;
+                gSaveBlock1Ptr->seen1[index] &= ~mask;
+                gSaveBlock1Ptr->seen2[index] &= ~mask;
+                retVal = 0;
             }
-            break;
-        case FLAG_SET_SEEN:
-            gSaveBlock2Ptr->pokedex.seen[index] |= mask;
-            gSaveBlock1Ptr->seen1[index] |= mask;
-            gSaveBlock1Ptr->seen2[index] |= mask;
-            break;
-        case FLAG_SET_CAUGHT:
-            gSaveBlock2Ptr->pokedex.owned[index] |= mask;
-            break;
+        }
+        break;
+    case FLAG_SET_SEEN:
+        gSaveBlock2Ptr->pokedex.seen[index] |= mask;
+        gSaveBlock1Ptr->seen1[index] |= mask;
+        gSaveBlock1Ptr->seen2[index] |= mask;
+        break;
+    case FLAG_SET_CAUGHT:
+        gSaveBlock2Ptr->pokedex.owned[index] |= mask;
+        break;
     }
     return retVal;
 }
@@ -4324,14 +4324,14 @@ u16 GetNationalPokedexCount(u8 caseID)
     {
         switch (caseID)
         {
-            case FLAG_GET_SEEN:
-                if (GetSetPokedexFlag(i + 1, FLAG_GET_SEEN))
-                    count++;
-                break;
-            case FLAG_GET_CAUGHT:
-                if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-                    count++;
-                break;
+        case FLAG_GET_SEEN:
+            if (GetSetPokedexFlag(i + 1, FLAG_GET_SEEN))
+                count++;
+            break;
+        case FLAG_GET_CAUGHT:
+            if (GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
+                count++;
+            break;
         }
     }
     return count;
@@ -4346,14 +4346,14 @@ u16 GetHoennPokedexCount(u8 caseID)
     {
         switch (caseID)
         {
-            case FLAG_GET_SEEN:
-                if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_SEEN))
-                    count++;
-                break;
-            case FLAG_GET_CAUGHT:
-                if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_CAUGHT))
-                    count++;
-                break;
+        case FLAG_GET_SEEN:
+            if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_SEEN))
+                count++;
+            break;
+        case FLAG_GET_CAUGHT:
+            if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_CAUGHT))
+                count++;
+            break;
         }
     }
     return count;
@@ -4381,7 +4381,7 @@ u16 sub_80C089C(u8 caseID)
     return count;
 }
 
-bool8 sub_80C08E4(void)
+bool16 HasAllHoennMons(void)
 {
     u16 i;
 

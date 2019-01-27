@@ -148,7 +148,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F88E8
 	def_special sub_80F88DC
 	def_special sub_80F8864
-	def_special sub_80F8940
+	def_special CountPlayerContestPaintings
 	def_special ShowContestWinner
 	def_special MauvilleGymSpecial2
 	def_special MauvilleGymSpecial1
@@ -345,7 +345,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80B05B4
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
-	def_special sub_80C08E4
+	def_special HasAllHoennMons
 	def_special MonOTNameMatchesPlayer
 	def_special BufferLottoTicketNumber
 	def_special sub_81653CC
@@ -481,7 +481,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813B7D8
 	def_special sub_81C72A4
 	def_special sp106_CreateStartMenu
-	def_special sub_80C2E40
+	def_special CountPlayerTrainerStars
 	def_special sub_813AC7C
 	def_special sub_813ADB8
 	def_special sub_813ADD4

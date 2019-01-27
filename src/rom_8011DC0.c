@@ -1577,7 +1577,7 @@ void sub_80140E0(u8 taskId)
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
                 recvBuff = gBlockRecvBuffer[i];
-                sub_80C3120(&gTrainerCards[i], recvBuff, gLinkPlayers[i].version);
+                CopyTrainerCardData(&gTrainerCards[i], recvBuff, gLinkPlayers[i].version);
             }
 
             if (GetLinkPlayerCount() == 2)
@@ -1607,7 +1607,7 @@ void sub_80141A4(void)
         break;
     case 1:
         if (!FuncIsActiveTask(sub_80140E0))
-            TrainerCard_ShowLinkCard(GetMultiplayerId() ^ 1, CB2_ReturnToField);
+            ShowTrainerCardInLink(GetMultiplayerId() ^ 1, CB2_ReturnToField);
         break;
     }
 
