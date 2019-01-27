@@ -573,7 +573,7 @@ static void CB2_InitBattleInternal(void)
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
             CreateNPCTrainerParty(&gEnemyParty[3], gTrainerBattleOpponent_B, FALSE);
         SetWildMonHeldItem();
     }
@@ -3245,7 +3245,7 @@ static void DoBattleIntro(void)
             case B_POSITION_OPPONENT_RIGHT:
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                 {
-                    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS)) // opponent 2 if exists
+                    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT) // opponent 2 if exists
                     {
                         BtlController_EmitDrawTrainerPic(0);
                         MarkBattlerForControllerExec(gActiveBattler);
@@ -3373,7 +3373,7 @@ static void DoBattleIntro(void)
     case 12: // nothing
         (*state)++;
     case 13: // second opponent's mon send out
-        if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS))
+        if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_x2000000 && !(gBattleTypeFlags & BATTLE_TYPE_x80000000))
                 gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);

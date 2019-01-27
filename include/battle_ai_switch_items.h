@@ -11,6 +11,7 @@ enum
     AI_ITEM_NOT_RECOGNIZABLE
 };
 
+void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId);
 void AI_TrySwitchOrUseItem(void);
 u8 GetMostSuitableMonToSwitchInto(void);
 

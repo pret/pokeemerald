@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_setup.h"
 #include "constants/battle_script_commands.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
@@ -2333,7 +2334,29 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    if (BATTLE_TWO_VS_ONE_OPPONENT && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    {
+        id2 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        id1 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        party = gEnemyParty;
+
+        if (partyIdBattlerOn1 == PARTY_SIZE)
+            partyIdBattlerOn1 = gBattlerPartyIndexes[id2];
+        if (partyIdBattlerOn2 == PARTY_SIZE)
+            partyIdBattlerOn2 = gBattlerPartyIndexes[id1];
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+             && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
+             && i != *(gBattleStruct->monToSwitchIntoId + id2) && i != id1[gBattleStruct->monToSwitchIntoId])
+                break;
+        }
+        return (i == PARTY_SIZE);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             party = gPlayerParty;

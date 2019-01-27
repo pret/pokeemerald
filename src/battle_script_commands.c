@@ -4541,6 +4541,7 @@ static void atk4F_jumpifcantswitch(void)
 {
     s32 i;
     s32 lastMonId;
+    u8 battlerIn1, battlerIn2;
     struct Pokemon *party;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~(ATK4F_DONT_CHECK_STATUSES));
@@ -4551,11 +4552,28 @@ static void atk4F_jumpifcantswitch(void)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
     }
+    else if (BATTLE_TWO_VS_ONE_OPPONENT && GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
+    {
+        battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        party = gEnemyParty;
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
+                break;
+        }
+
+        if (i == PARTY_SIZE)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+        else
+            gBattlescriptCurrInstr += 6;
+    }
     else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        #ifndef NONMATCHING
-            asm("":::"r5");
-        #endif // NONMATCHING
         if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
             party = gEnemyParty;
         else
@@ -4651,8 +4669,6 @@ static void atk4F_jumpifcantswitch(void)
     }
     else
     {
-        u8 battlerIn1, battlerIn2;
-
         if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
         {
             battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -7952,7 +7968,16 @@ static void atk8F_forcerandomswitch(void)
         else
             party = gEnemyParty;
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
+        if (BATTLE_TWO_VS_ONE_OPPONENT && (gBattlerTarget & BIT_SIDE) == B_SIDE_OPPONENT)
+        {
+            firstMonId = 0;
+            lastMonId = 6;
+            monsCount = 6;
+            minNeeded = 2;
+            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
+            battler1PartyId = gBattlerPartyIndexes[gBattlerTarget ^ BIT_FLANK];
+        }
+        else if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
             || (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_x2000000)
             || (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
         {

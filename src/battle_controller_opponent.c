@@ -234,7 +234,7 @@ static void sub_805F2F0(void)
     bool8 var = FALSE;
     bool8 var2;
 
-    if (!IsDoubleBattle() || ((IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)) || (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)))
+    if (!IsDoubleBattle() || ((IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT) || (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)))
     {
         if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
             var = TRUE;
@@ -297,13 +297,13 @@ static void sub_805F560(void)
 
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x1)
         sub_8172EF0(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI) && IsDoubleBattle() && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].field_1_x1)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT) && IsDoubleBattle() && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].field_1_x1)
         sub_8172EF0(gActiveBattler ^ BIT_FLANK, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].field_1_x80)
         {
-            if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            if (IsDoubleBattle() && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT))
             {
                 UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler ^ BIT_FLANK], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]], HEALTHBOX_ALL);
                 sub_8076918(gActiveBattler ^ BIT_FLANK);
@@ -335,7 +335,7 @@ static void sub_805F560(void)
         sp = TRUE;
     }
 
-    if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
+    if (!IsDoubleBattle() || (IsDoubleBattle() && gBattleTypeFlags & BATTLE_TYPE_MULTI && !BATTLE_TWO_VS_ONE_OPPONENT))
     {
         if (gSprites[gUnknown_03005D7C[gActiveBattler]].callback == SpriteCallbackDummy
             && gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
@@ -356,7 +356,7 @@ static void sub_805F560(void)
 
     if (sp && r10)
     {
-        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (IsDoubleBattle() && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT))
         {
             DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBattler ^ BIT_FLANK]]);
             SetBattlerShadowSpriteCallback(gActiveBattler ^ BIT_FLANK, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]], MON_DATA_SPECIES));
@@ -1278,7 +1278,7 @@ static void OpponentHandleDrawTrainerPic(void)
         trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
     }
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS))
+    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
         if ((GetBattlerPosition(gActiveBattler) & BIT_FLANK) != 0) // second mon
             xPos = 152;
@@ -1624,17 +1624,7 @@ static void OpponentHandleChoosePokemon(void)
                 battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             }
 
-            if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))
-            {
-                if (gActiveBattler == 1)
-                    firstId = 0, lastId = 3;
-                else
-                    firstId = 3, lastId = 6;
-            }
-            else
-            {
-                firstId = 0, lastId = 6;
-            }
+            GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
 
             for (chosenMonId = firstId; chosenMonId < lastId; chosenMonId++)
             {
@@ -1884,7 +1874,7 @@ static void sub_8062828(u8 taskId)
     u8 savedActiveBank = gActiveBattler;
 
     gActiveBattler = gTasks[taskId].data[0];
-    if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
+    if ((!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
         gBattleResources->bufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_80613DC(gActiveBattler, FALSE);

@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
+#include "battle_setup.h"
 #include "cable_club.h"
 #include "link.h"
 #include "party_menu.h"
@@ -153,8 +154,16 @@ static void InitSinglePlayerBtlControllers(void)
 
         gBattlerPartyIndexes[0] = 0;
         gBattlerPartyIndexes[1] = 0;
-        gBattlerPartyIndexes[2] = 3;
-        gBattlerPartyIndexes[3] = 3;
+        if (BATTLE_TWO_VS_ONE_OPPONENT)
+        {
+            gBattlerPartyIndexes[2] = 3;
+            gBattlerPartyIndexes[3] = 1;
+        }
+        else
+        {
+            gBattlerPartyIndexes[2] = 3;
+            gBattlerPartyIndexes[3] = 3;
+        }
     }
     else if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
