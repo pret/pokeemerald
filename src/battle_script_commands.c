@@ -2383,9 +2383,8 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     else
                         gDisableStructs[gEffectBattler].wrapTurns = ((Random() % 2) + 4);
 
-                    *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 0) = gCurrentMove;
-                    *(gBattleStruct->wrappedMove + gEffectBattler * 2 + 1) = gCurrentMove >> 8;
-                    *(gBattleStruct->wrappedBy + gEffectBattler) = gBattlerAttacker;
+                    gBattleStruct->wrappedMove[gEffectBattler] = gCurrentMove;
+                    gBattleStruct->wrappedBy[gEffectBattler] = gBattlerAttacker;
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
@@ -2548,8 +2547,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     }
                     else
                     {
-                        u16* changedItem = &gBattleStruct->changedItems[gBattlerAttacker];
-                        gLastUsedItem = *changedItem = gBattleMons[gBattlerTarget].item;
+                        gLastUsedItem = gBattleStruct->changedItems[gBattlerAttacker] = gBattleMons[gBattlerTarget].item;
                         gBattleMons[gBattlerTarget].item = 0;
 
                         gActiveBattler = gBattlerAttacker;
@@ -2563,8 +2561,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
-                        *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
-                        *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
+                        gBattleStruct->choicedMove[gBattlerTarget] = 0;
                     }
 
                 }
@@ -2673,8 +2670,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_KnockedOff;
 
-                    *(u8*)((u8*)(&gBattleStruct->choicedMove[gEffectBattler]) + 0) = 0;
-                    *(u8*)((u8*)(&gBattleStruct->choicedMove[gEffectBattler]) + 1) = 0;
+                    gBattleStruct->choicedMove[gEffectBattler] = 0;
                 }
                 else
                 {
@@ -4228,11 +4224,10 @@ static void atk49_moveend(void)
         case ATK49_CHANGED_ITEMS: // changed held items
             for (i = 0; i < gBattlersCount; i++)
             {
-                u16* changedItem = &gBattleStruct->changedItems[i];
-                if (*changedItem != 0)
+                if (gBattleStruct->changedItems[i] != 0)
                 {
-                    gBattleMons[i].item = *changedItem;
-                    *changedItem = 0;
+                    gBattleMons[i].item = gBattleStruct->changedItems[i];
+                    gBattleStruct->changedItems[i] = 0;
                 }
             }
             gBattleScripting.atk49_state++;
@@ -4354,18 +4349,8 @@ static void atk49_moveend(void)
                 && gBattlerAttacker != gBattlerTarget && !(gHitMarker & HITMARKER_FAINTED(gBattlerTarget))
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
             {
-                u8 target, attacker;
-
-                *(gBattleStruct->lastTakenMove + gBattlerTarget * 2 + 0) = gChosenMove;
-                *(gBattleStruct->lastTakenMove + gBattlerTarget * 2 + 1) = gChosenMove >> 8;
-
-                target = gBattlerTarget;
-                attacker = gBattlerAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0) = gChosenMove;
-
-                target = gBattlerTarget;
-                attacker = gBattlerAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) = gChosenMove >> 8;
+                gBattleStruct->lastTakenMove[gBattlerTarget] = gChosenMove;
+                gBattleStruct->lastTakenMoveFrom[gBattlerTarget][gBattlerAttacker] = gChosenMove;
             }
             gBattleScripting.atk49_state++;
             break;
@@ -5790,12 +5775,8 @@ static void atk69_setgravity(void)
 
 static void atk6A_removeitem(void)
 {
-    u16 *usedHeldItem;
-
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler];
-    *usedHeldItem = gBattleMons[gActiveBattler].item;
+    gBattleStruct->usedHeldItems[gActiveBattler] = gBattleMons[gActiveBattler].item;
     gBattleMons[gActiveBattler].item = 0;
 
     BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gActiveBattler].item);
@@ -6385,22 +6366,18 @@ static void atk76_various(void)
     case VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP:
         if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId || gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId)
         {
-            u16 *choicedMove;
-
             if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId)
                 gActiveBattler = 0;
             else
                 gActiveBattler = 2;
 
-            choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
-
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (gBattleMons[gActiveBattler].moves[i] == *choicedMove)
+                if (gBattleMons[gActiveBattler].moves[i] == gBattleStruct->choicedMove[gActiveBattler])
                     break;
             }
             if (i == MAX_MON_MOVES)
-                *choicedMove = 0;
+                gBattleStruct->choicedMove[gActiveBattler] = 0;
         }
         break;
     case 7:
@@ -7371,18 +7348,13 @@ static void atk7C_trymirrormove(void)
     s32 validMovesCount;
     s32 i;
     u16 move;
-    u16 movesArray[4];
-
-    for (i = 0; i < 3; i++)
-        movesArray[i] = 0;
+    u16 movesArray[4] = {0};
 
     for (validMovesCount = 0, i = 0; i < gBattlersCount; i++)
     {
         if (i != gBattlerAttacker)
         {
-            move = *(i * 2 + gBattlerAttacker * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 0)
-                | (*(i * 2 + gBattlerAttacker * 8 + (u8*)(gBattleStruct->lastTakenMoveFrom) + 1) << 8);
-
+            move = gBattleStruct->lastTakenMoveFrom[gBattlerAttacker][i];
             if (move != 0 && move != 0xFFFF)
             {
                 movesArray[validMovesCount] = move;
@@ -7391,9 +7363,7 @@ static void atk7C_trymirrormove(void)
         }
     }
 
-    move = *(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 0)
-        | (*(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 1) << 8);
-
+    move = gBattleStruct->lastTakenMove[gBattlerAttacker];
     if (move != 0 && move != 0xFFFF)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
@@ -9534,13 +9504,7 @@ static void atkBE_rapidspinfree(void)
         gBattleScripting.battler = gBattlerTarget;
         gBattleMons[gBattlerAttacker].status2 &= ~(STATUS2_WRAPPED);
         gBattlerTarget = *(gBattleStruct->wrappedBy + gBattlerAttacker);
-
-        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
-        gBattleTextBuff1[1] = B_BUFF_MOVE;
-        gBattleTextBuff1[2] = *(gBattleStruct->wrappedMove + gBattlerAttacker * 2 + 0);
-        gBattleTextBuff1[3] = *(gBattleStruct->wrappedMove + gBattlerAttacker * 2 + 1);
-        gBattleTextBuff1[4] = B_BUFF_EOS;
-
+        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gBattlerAttacker]);
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_WrapFree;
     }
@@ -9941,11 +9905,8 @@ static void atkD2_tryswapitems(void) // trick
             BtlController_EmitSetMonData(0, REQUEST_HELDITEM_BATTLE, 0, 2, &gBattleMons[gBattlerTarget].item);
             MarkBattlerForControllerExec(gBattlerTarget);
 
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
-
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 0) = 0;
-            *(u8*)((u8*)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 1) = 0;
+            gBattleStruct->choicedMove[gBattlerTarget] = 0;
+            gBattleStruct->choicedMove[gBattlerAttacker] = 0;
 
             gBattlescriptCurrInstr += 5;
 

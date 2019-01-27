@@ -606,7 +606,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
 	u8 moveId = gBattleResources->bufferB[gActiveBattler][2] & ~(RET_MEGA_EVOLUTION);
     u32 move = gBattleMons[gActiveBattler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(gActiveBattler, TRUE);
-    u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
+    u16 *choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
     if (gDisableStructs[gActiveBattler].disabledMove == move && move != 0)
     {
@@ -1496,14 +1496,9 @@ u8 DoBattlerEndTurnEffects(void)
                 {
                     if (--gDisableStructs[gActiveBattler].wrapTurns != 0)  // damaged by wrap
                     {
-                        // This is the only way I could get this array access to match.
-                        gBattleScripting.animArg1 = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 0);
-                        gBattleScripting.animArg2 = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 1);
-                        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
-                        gBattleTextBuff1[1] = B_BUFF_MOVE;
-                        gBattleTextBuff1[2] = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 0);
-                        gBattleTextBuff1[3] = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 1);
-                        gBattleTextBuff1[4] = EOS;
+                        gBattleScripting.animArg1 = gBattleStruct->wrappedMove[gActiveBattler];
+                        gBattleScripting.animArg2 = gBattleStruct->wrappedMove[gActiveBattler] >> 8;
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gActiveBattler]);
                         gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                         if (GetBattlerHoldEffect(gBattleStruct->wrappedBy[gActiveBattler], TRUE) == HOLD_EFFECT_BINDING_BAND)
                             gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
@@ -1516,11 +1511,7 @@ u8 DoBattlerEndTurnEffects(void)
                     else  // broke free
                     {
                         gBattleMons[gActiveBattler].status2 &= ~(STATUS2_WRAPPED);
-                        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
-                        gBattleTextBuff1[1] = B_BUFF_MOVE;
-                        gBattleTextBuff1[2] = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 0);
-                        gBattleTextBuff1[3] = *(gBattleStruct->wrappedMove + gActiveBattler * 2 + 1);
-                        gBattleTextBuff1[4] = EOS;
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[gActiveBattler]);
                         gBattlescriptCurrInstr = BattleScript_WrapEnds;
                     }
                     BattleScriptExecute(gBattlescriptCurrInstr);
