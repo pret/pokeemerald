@@ -2547,7 +2547,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     u8 target1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-        return;
+        return 0;
 
     if (gBattlerAttacker >= gBattlersCount)
         gBattlerAttacker = battler;
