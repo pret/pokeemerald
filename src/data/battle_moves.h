@@ -6325,7 +6325,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CHARGE_BEAM] =
     {
-        .effect = EFFECT_SPECIAL_ATTACK_UP,
+        .effect = EFFECT_SP_ATTACK_UP_HIT,
         .power = 50,
         .type = TYPE_ELECTRIC,
         .accuracy = 90,
@@ -7741,7 +7741,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FIERY_DANCE] =
     {
-        .effect = EFFECT_SPECIAL_ATTACK_UP,
+        .effect = EFFECT_SP_ATTACK_UP_HIT,
         .power = 80,
         .type = TYPE_FIRE,
         .accuracy = 100,

@@ -340,6 +340,11 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAcupressure
 	.4byte BattleScript_EffectAromaticMist
 	.4byte BattleScript_EffectPowder
+	.4byte BattleScript_EffectSpAtkUpHit
+	
+BattleScript_EffectSpAtkUpHit:
+	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectPowder:
 	attackcanceler
