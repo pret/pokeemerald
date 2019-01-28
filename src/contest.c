@@ -451,54 +451,54 @@ void sub_80D7B24(void)
 {
     switch (gMain.state)
     {
-        case 0:
-            sContestBgCopyFlags = 0;
-            sub_80D7988();
-            AllocateMonSpritesGfx();
-            FREE_AND_SET_NULL(gMonSpritesGfxPtr->firstDecompressed);
-            gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x4000);
-            SetVBlankCallback(NULL);
-            sub_80D779C();
-            sub_80D77E4();
-            sub_80D7678();
-            ScanlineEffect_Clear();
-            ResetPaletteFade();
-            gPaletteFade.bufferTransferDisabled = TRUE;
-            ResetSpriteData();
-            ResetTasks();
-            FreeAllSpritePalettes();
-            gReservedSpritePaletteCount = 4;
-            //shared18000.unk18000 = 0;
-            gHeap[0x1a000] = 0;
-            ClearBattleMonForms();
-            sub_80D787C();
+    case 0:
+        sContestBgCopyFlags = 0;
+        sub_80D7988();
+        AllocateMonSpritesGfx();
+        FREE_AND_SET_NULL(gMonSpritesGfxPtr->firstDecompressed);
+        gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x4000);
+        SetVBlankCallback(NULL);
+        sub_80D779C();
+        sub_80D77E4();
+        sub_80D7678();
+        ScanlineEffect_Clear();
+        ResetPaletteFade();
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        ResetSpriteData();
+        ResetTasks();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 4;
+        //shared18000.unk18000 = 0;
+        gHeap[0x1a000] = 0;
+        ClearBattleMonForms();
+        sub_80D787C();
+        gMain.state++;
+        break;
+    case 1:
+        gMain.state++;
+        break;
+    case 2:
+        if (sub_80D7E44(&gContestResources->field_0->unk1925D))
+        {
+            gContestResources->field_0->unk1925D = 0;
             gMain.state++;
-            break;
-        case 1:
-            gMain.state++;
-            break;
-        case 2:
-            if (sub_80D7E44(&gContestResources->field_0->unk1925D))
-            {
-                gContestResources->field_0->unk1925D = 0;
-                gMain.state++;
-            }
-            break;
-        case 3:
-            sub_80DE224();
-            gBattle_BG1_X = 0;
-            gBattle_BG1_Y = 0;
-            BeginFastPaletteFade(2);
-            gPaletteFade.bufferTransferDisabled = FALSE;
-            SetVBlankCallback(vblank_cb_battle);
-            gContestResources->field_0->mainTaskId = CreateTask(sub_80D7C7C, 10);
-            SetMainCallback2(sub_80D823C);
-            if (gIsLinkContest & 2)
-            {
-                sub_800E0E8();
-                CreateWirelessStatusIndicatorSprite(8, 8);
-            }
-            break;
+        }
+        break;
+    case 3:
+        sub_80DE224();
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        BeginFastPaletteFade(2);
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        SetVBlankCallback(vblank_cb_battle);
+        gContestResources->field_0->mainTaskId = CreateTask(sub_80D7C7C, 10);
+        SetMainCallback2(sub_80D823C);
+        if (gIsLinkContest & 2)
+        {
+            sub_800E0E8();
+            CreateWirelessStatusIndicatorSprite(8, 8);
+        }
+        break;
     }
 }
 
@@ -519,22 +519,22 @@ static void sub_80D7CB4(u8 taskId)
         {
             switch (gTasks[taskId].data[0])
             {
-                case 0:
-                    sub_80DBF68();
+            case 0:
+                sub_80DBF68();
+                gTasks[taskId].data[0]++;
+                // fallthrough
+            case 1:
+                if (IsLinkTaskFinished())
+                {
+                    sub_800ADF8();
                     gTasks[taskId].data[0]++;
-                    // fallthrough
-                case 1:
-                    if (IsLinkTaskFinished())
-                    {
-                        sub_800ADF8();
-                        gTasks[taskId].data[0]++;
-                    }
+                }
+                return;
+            case 2:
+                if (IsLinkTaskFinished() != TRUE)
                     return;
-                case 2:
-                    if (IsLinkTaskFinished() != TRUE)
-                        return;
-                    gTasks[taskId].data[0]++;
-                    break;
+                gTasks[taskId].data[0]++;
+                break;
             }
         }
 
@@ -584,67 +584,67 @@ static u8 sub_80D7E44(u8 *a)
 
     switch (*a)
     {
-        case 0:
-            gPaletteFade.bufferTransferDisabled = TRUE;
-            RequestDma3Fill(0, (void *)VRAM, 0x8000, 1);
-            RequestDma3Fill(0, (void *)VRAM + 0x8000, 0x8000, 1);
-            RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
-            break;
-        case 1:
-            LZDecompressVram(gContestMiscGfx, (void *)VRAM);
-            break;
-        case 2:
-            LZDecompressVram(gContestAudienceGfx, (void *)(VRAM + 0x2000));
-            DmaCopyLarge32(3, (void *)(VRAM + 0x2000), shared15800, 0x2000, 0x1000);
-            break;
-        case 3:
-            CopyToBgTilemapBuffer(3, gUnknown_08C16FA8, 0, 0);
-            CopyBgTilemapBufferToVram(3);
-            break;
-        case 4:
-            CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
-            CopyBgTilemapBufferToVram(2);
-            DmaCopy32Defvars(3, gContestResources->field_24[2], shared18000.unk18A04, 0x800);
-            break;
-        case 5:
-            LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
-            CpuCopy32(gPlttBufferUnfaded + 128, sp0, 16 * sizeof(u16));
-            CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, sp20, 16 * sizeof(u16));
-            CpuCopy32(sp20, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
-            CpuCopy32(sp0, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
-            DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18004, 0x200);
-            sub_80D782C();
-            break;
-        case 6:
-            sub_80DD04C();
-            sub_80DBF90();
-            sub_80DB2BC();
-            gContestResources->field_0->unk19216 = sub_80DB120();
-            sub_80DC2BC();
-            sub_80DC4F0();
-            CreateApplauseMeterSprite();
-            sub_80DC5E8();
-            sub_80DC7EC();
-            gBattlerPositions[0] = 0;
-            gBattlerPositions[1] = 1;
-            gBattlerPositions[2] = 3;
-            gBattlerPositions[3] = 2;
-            gBattleTypeFlags = 0;
-            gBattlerAttacker = 2;
-            gBattlerTarget = 3;
-            gBattlerSpriteIds[gBattlerAttacker] = sub_80DB0C4();
-            sub_80DEA20();
-            CopyBgTilemapBufferToVram(3);
-            CopyBgTilemapBufferToVram(2);
-            CopyBgTilemapBufferToVram(1);
-            ShowBg(3);
-            ShowBg(2);
-            ShowBg(0);
-            ShowBg(1);
-            break;
-        default:
-            *a = 0;
-            return 1;
+    case 0:
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        RequestDma3Fill(0, (void *)VRAM, 0x8000, 1);
+        RequestDma3Fill(0, (void *)VRAM + 0x8000, 0x8000, 1);
+        RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
+        break;
+    case 1:
+        LZDecompressVram(gContestMiscGfx, (void *)VRAM);
+        break;
+    case 2:
+        LZDecompressVram(gContestAudienceGfx, (void *)(VRAM + 0x2000));
+        DmaCopyLarge32(3, (void *)(VRAM + 0x2000), shared15800, 0x2000, 0x1000);
+        break;
+    case 3:
+        CopyToBgTilemapBuffer(3, gUnknown_08C16FA8, 0, 0);
+        CopyBgTilemapBufferToVram(3);
+        break;
+    case 4:
+        CopyToBgTilemapBuffer(2, gUnknown_08C17170, 0, 0);
+        CopyBgTilemapBufferToVram(2);
+        DmaCopy32Defvars(3, gContestResources->field_24[2], shared18000.unk18A04, 0x800);
+        break;
+    case 5:
+        LoadCompressedPalette(gUnknown_08C16E90, 0, 0x200);
+        CpuCopy32(gPlttBufferUnfaded + 128, sp0, 16 * sizeof(u16));
+        CpuCopy32(gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, sp20, 16 * sizeof(u16));
+        CpuCopy32(sp20, gPlttBufferUnfaded + 128, 16 * sizeof(u16));
+        CpuCopy32(sp0, gPlttBufferUnfaded + (5 + gContestPlayerMonIndex) * 16, 16 * sizeof(u16));
+        DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18004, 0x200);
+        sub_80D782C();
+        break;
+    case 6:
+        sub_80DD04C();
+        sub_80DBF90();
+        sub_80DB2BC();
+        gContestResources->field_0->unk19216 = sub_80DB120();
+        sub_80DC2BC();
+        sub_80DC4F0();
+        CreateApplauseMeterSprite();
+        sub_80DC5E8();
+        sub_80DC7EC();
+        gBattlerPositions[0] = 0;
+        gBattlerPositions[1] = 1;
+        gBattlerPositions[2] = 3;
+        gBattlerPositions[3] = 2;
+        gBattleTypeFlags = 0;
+        gBattlerAttacker = 2;
+        gBattlerTarget = 3;
+        gBattlerSpriteIds[gBattlerAttacker] = sub_80DB0C4();
+        sub_80DEA20();
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        ShowBg(3);
+        ShowBg(2);
+        ShowBg(0);
+        ShowBg(1);
+        break;
+    default:
+        *a = 0;
+        return 1;
     }
 
     (*a)++;
@@ -666,43 +666,43 @@ static void sub_80D8108(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
-        case 0:
-            if (gTasks[taskId].data[1]++ <= 60)
-                break;
-            gTasks[taskId].data[1] = 0;
-            PlaySE12WithPanning(SE_C_MAKU_U, 0);
-            gTasks[taskId].data[0]++;
+    case 0:
+        if (gTasks[taskId].data[1]++ <= 60)
             break;
-        case 1:
-            (s16)gBattle_BG1_Y += 7;
-            if ((s16)gBattle_BG1_Y <= 160)
-                break;
-            gTasks[taskId].data[0]++;
+        gTasks[taskId].data[1] = 0;
+        PlaySE12WithPanning(SE_C_MAKU_U, 0);
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        (s16)gBattle_BG1_Y += 7;
+        if ((s16)gBattle_BG1_Y <= 160)
             break;
-        case 2:
-            sub_80DE350();
-            gTasks[taskId].data[0]++;
+        gTasks[taskId].data[0]++;
+        break;
+    case 2:
+        sub_80DE350();
+        gTasks[taskId].data[0]++;
+        break;
+    case 3:
+    {
+        u16 bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
+        u16 bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
+        ((struct BgCnt *)&bg0Cnt)->priority = 0;
+        ((struct BgCnt *)&bg2Cnt)->priority = 0;
+        SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
+        SetGpuReg(REG_OFFSET_BG2CNT, bg2Cnt);
+        sub_80DDB0C();
+        gTasks[taskId].data[0]++;
+        break;
+    }
+    case 4:
+    default:
+        if (gContestResources->field_0->unk1920A_6)
             break;
-        case 3:
-        {
-            u16 bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
-            u16 bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
-            ((struct BgCnt *)&bg0Cnt)->priority = 0;
-            ((struct BgCnt *)&bg2Cnt)->priority = 0;
-            SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
-            SetGpuReg(REG_OFFSET_BG2CNT, bg2Cnt);
-            sub_80DDB0C();
-            gTasks[taskId].data[0]++;
-            break;
-        }
-        case 4:
-        default:
-            if (gContestResources->field_0->unk1920A_6)
-                break;
-            gTasks[taskId].data[0] = 0;
-            gTasks[taskId].data[1] = 0;
-            gTasks[taskId].func = sub_80D833C;
-            break;
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].func = sub_80D833C;
+        break;
     }
 }
 
@@ -846,46 +846,46 @@ static void sub_80D8610(u8 taskId)
     {
         switch (gMain.newAndRepeatedKeys)
         {
-            case B_BUTTON:
+        case B_BUTTON:
+            PlaySE(SE_SELECT);
+            sub_80DC490(FALSE);
+            ConvertIntToDecimalStringN(gStringVar1, gContestResources->field_0->turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+            if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
+                StringCopy(gDisplayedStringBattle, gText_0827D507);
+            else
+                StringCopy(gDisplayedStringBattle, gText_0827D531);
+            sub_80DB89C();
+            StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
+            Contest_StartTextPrinter(gStringVar4, 0);
+            gBattle_BG0_Y = 0;
+            gBattle_BG2_Y = 0;
+            gTasks[taskId].func = sub_80D8424;
+            break;
+        case DPAD_LEFT:
+        case DPAD_RIGHT:
+            break;
+        case DPAD_UP:
+            sub_80D883C(gContestResources->field_0->playerMoveChoice);
+            if (gContestResources->field_0->playerMoveChoice == 0)
+                gContestResources->field_0->playerMoveChoice = numMoves - 1;
+            else
+                gContestResources->field_0->playerMoveChoice--;
+            sub_80D880C(gContestResources->field_0->playerMoveChoice);
+            prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
+            if (numMoves > 1)
                 PlaySE(SE_SELECT);
-                sub_80DC490(FALSE);
-                ConvertIntToDecimalStringN(gStringVar1, gContestResources->field_0->turnNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
-                if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
-                    StringCopy(gDisplayedStringBattle, gText_0827D507);
-                else
-                    StringCopy(gDisplayedStringBattle, gText_0827D531);
-                sub_80DB89C();
-                StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
-                Contest_StartTextPrinter(gStringVar4, 0);
-                gBattle_BG0_Y = 0;
-                gBattle_BG2_Y = 0;
-                gTasks[taskId].func = sub_80D8424;
-                break;
-            case DPAD_LEFT:
-            case DPAD_RIGHT:
-                break;
-            case DPAD_UP:
-                sub_80D883C(gContestResources->field_0->playerMoveChoice);
-                if (gContestResources->field_0->playerMoveChoice == 0)
-                    gContestResources->field_0->playerMoveChoice = numMoves - 1;
-                else
-                    gContestResources->field_0->playerMoveChoice--;
-                sub_80D880C(gContestResources->field_0->playerMoveChoice);
-                prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
-                if (numMoves > 1)
-                    PlaySE(SE_SELECT);
-                break;
-            case DPAD_DOWN:
-                sub_80D883C(gContestResources->field_0->playerMoveChoice);
-                if (gContestResources->field_0->playerMoveChoice == numMoves - 1)
-                    gContestResources->field_0->playerMoveChoice = 0;
-                else
-                    gContestResources->field_0->playerMoveChoice++;
-                sub_80D880C(gContestResources->field_0->playerMoveChoice);
-                prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
-                if (numMoves > 1)
-                    PlaySE(SE_SELECT);
-                break;
+            break;
+        case DPAD_DOWN:
+            sub_80D883C(gContestResources->field_0->playerMoveChoice);
+            if (gContestResources->field_0->playerMoveChoice == numMoves - 1)
+                gContestResources->field_0->playerMoveChoice = 0;
+            else
+                gContestResources->field_0->playerMoveChoice++;
+            sub_80D880C(gContestResources->field_0->playerMoveChoice);
+            prints_contest_move_description(gContestMons[gContestPlayerMonIndex].moves[gContestResources->field_0->playerMoveChoice]);
+            if (numMoves > 1)
+                PlaySE(SE_SELECT);
+            break;
         }
     }
 }
@@ -1001,100 +1001,100 @@ static void sub_80D8B38(u8 taskId)
 
     switch (gTasks[taskId].data[0])
     {
-        case 0:
-            sub_80DCD48();
-            for (i = 0; gContestResources->field_0->unk19214 != gContestResources->field_8->turnOrder[i]; i++)
-                ;
-            gContestResources->field_0->unk19215 = i;
-            r6 = gContestResources->field_0->unk19215;
-            if (gIsLinkContest & 1)
-            {
-                u8 taskId2;
+    case 0:
+        sub_80DCD48();
+        for (i = 0; gContestResources->field_0->unk19214 != gContestResources->field_8->turnOrder[i]; i++)
+            ;
+        gContestResources->field_0->unk19215 = i;
+        r6 = gContestResources->field_0->unk19215;
+        if (gIsLinkContest & 1)
+        {
+            u8 taskId2;
 
-                gContestResources->field_0->unk1920B_2 = 1;
-                if (sub_80DA8A4())
-                    sub_80DD080(gContestResources->field_0->unk19215);
-                taskId2 = CreateTask(sub_80FCC88, 0);
-                SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, sub_80DA110);
-                sub_80DBF68();
-                gTasks[taskId].data[0] = 1;
-            }
-            else
-            {
+            gContestResources->field_0->unk1920B_2 = 1;
+            if (sub_80DA8A4())
                 sub_80DD080(gContestResources->field_0->unk19215);
-                gTasks[taskId].data[0] = 2;
-            }
-            return;
-        case 1:
-            if (!gContestResources->field_0->unk1920B_2)
-                gTasks[taskId].data[0] = 2;
-            return;
-        case 2:
-            sub_80DF080(r6);
-            sub_80DF750();
-            if (gContestResources->field_4[r6].numTurnsSkipped != 0
-                || gContestResources->field_4[r6].noMoreTurns)
-            {
-                gTasks[taskId].data[0] = 31;
-            }
+            taskId2 = CreateTask(sub_80FCC88, 0);
+            SetTaskFuncWithFollowupFunc(taskId2, sub_80FCC88, sub_80DA110);
+            sub_80DBF68();
+            gTasks[taskId].data[0] = 1;
+        }
+        else
+        {
+            sub_80DD080(gContestResources->field_0->unk19215);
+            gTasks[taskId].data[0] = 2;
+        }
+        return;
+    case 1:
+        if (!gContestResources->field_0->unk1920B_2)
+            gTasks[taskId].data[0] = 2;
+        return;
+    case 2:
+        sub_80DF080(r6);
+        sub_80DF750();
+        if (gContestResources->field_4[r6].numTurnsSkipped != 0
+            || gContestResources->field_4[r6].noMoreTurns)
+        {
+            gTasks[taskId].data[0] = 31;
+        }
+        else
+        {
+            sub_80DB89C();
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 3;
+        }
+        return;
+    case 3:
+        for (i = 0; i < 4; i++)
+            gBattleMonForms[i] = 0;
+        memset(gContestResources->field_18, 0, sizeof(*gContestResources->field_18));
+        sub_80DE9DC(gContestResources->field_0->unk19215);
+        spriteId = sub_80DB174(
+            gContestMons[gContestResources->field_0->unk19215].species,
+            gContestMons[gContestResources->field_0->unk19215].otId,
+            gContestMons[gContestResources->field_0->unk19215].personality,
+            gContestResources->field_0->unk19215);
+        gSprites[spriteId].pos2.x = 120;
+        gSprites[spriteId].callback = sub_80DA134;
+        gTasks[taskId].data[2] = spriteId;
+        gBattlerSpriteIds[gBattlerAttacker] = spriteId;
+        sub_80DCBE8(sub_80DC9EC(gContestResources->field_0->unk19215), FALSE);
+        gTasks[taskId].data[0] = 4;
+        return;
+    case 4:
+        spriteId = gTasks[taskId].data[2];
+        if (gSprites[spriteId].callback == SpriteCallbackDummy)
+        {
+            if (!gContestResources->field_14[r6].unk2_1)
+                gTasks[taskId].data[0] = 5;
+        }
+        return;
+    case 5:
+        if (gContestResources->field_4[r6].nervous)
+        {
+            gTasks[taskId].data[0] = 33;
+        }
+        else
+        {
+            sub_80DB89C();
+            StringCopy(gStringVar1, gContestMons[r6].nickname);
+            if (gContestResources->field_4[r6].currMove < MOVES_COUNT)
+                StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
             else
-            {
-                sub_80DB89C();
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 3;
-            }
-            return;
-        case 3:
-            for (i = 0; i < 4; i++)
-                gBattleMonForms[i] = 0;
-            memset(gContestResources->field_18, 0, sizeof(*gContestResources->field_18));
-            sub_80DE9DC(gContestResources->field_0->unk19215);
-            spriteId = sub_80DB174(
-                gContestMons[gContestResources->field_0->unk19215].species,
-                gContestMons[gContestResources->field_0->unk19215].otId,
-                gContestMons[gContestResources->field_0->unk19215].personality,
-                gContestResources->field_0->unk19215);
-            gSprites[spriteId].pos2.x = 120;
-            gSprites[spriteId].callback = sub_80DA134;
-            gTasks[taskId].data[2] = spriteId;
-            gBattlerSpriteIds[gBattlerAttacker] = spriteId;
-            sub_80DCBE8(sub_80DC9EC(gContestResources->field_0->unk19215), FALSE);
-            gTasks[taskId].data[0] = 4;
-            return;
-        case 4:
-            spriteId = gTasks[taskId].data[2];
-            if (gSprites[spriteId].callback == SpriteCallbackDummy)
-            {
-                if (!gContestResources->field_14[r6].unk2_1)
-                    gTasks[taskId].data[0] = 5;
-            }
-            return;
-        case 5:
-            if (gContestResources->field_4[r6].nervous)
-            {
-                gTasks[taskId].data[0] = 33;
-            }
-            else
-            {
-                sub_80DB89C();
-                StringCopy(gStringVar1, gContestMons[r6].nickname);
-                if (gContestResources->field_4[r6].currMove < MOVES_COUNT)
-                    StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
-                else
-                    StringCopy(gStringVar2, gUnknown_08587F1C[gContestResources->field_4[r6].moveCategory]);
-                StringExpandPlaceholders(gStringVar4, gText_0827D55A);
-                Contest_StartTextPrinter(gStringVar4, 1);
-                gTasks[taskId].data[0] = 6;
-            }
-            return;
-        case 6:
-            if (!Contest_RunTextPrinters())
-            {
-                gContestResources->field_0->unk1925E = 0;
-                gTasks[taskId].data[0] = 7;
-            }
-            return;
-        case 7:
+                StringCopy(gStringVar2, gUnknown_08587F1C[gContestResources->field_4[r6].moveCategory]);
+            StringExpandPlaceholders(gStringVar4, gText_0827D55A);
+            Contest_StartTextPrinter(gStringVar4, 1);
+            gTasks[taskId].data[0] = 6;
+        }
+        return;
+    case 6:
+        if (!Contest_RunTextPrinters())
+        {
+            gContestResources->field_0->unk1925E = 0;
+            gTasks[taskId].data[0] = 7;
+        }
+        return;
+    case 7:
         {
             u16 move = SanitizeMove(gContestResources->field_4[gContestResources->field_0->unk19215].currMove);
 
@@ -1104,144 +1104,144 @@ static void sub_80D8B38(u8 taskId)
             DoMoveAnim(move);
             gTasks[taskId].data[0] = 8;
         }
-            return;
-        case 8:
-            gAnimScriptCallback();
-            if (!gAnimScriptActive)
-            {
-                sub_80DE9B0(r6);
-                if (gContestResources->field_0->unk1925E != 0)
-                {
-                    gTasks[taskId].data[10] = 0;
-                    gTasks[taskId].data[0] = 9;
-                }
-                else
-                {
-                    if (!gContestResources->field_4[r6].hasJudgesAttention)
-                        sub_80DC674(r6);
-                    sub_80DE12C();
-                    gTasks[taskId].data[0] = 23;
-                }
-            }
-            return;
-        case 9:
-            if (gTasks[taskId].data[10]++ > 30)
+        return;
+    case 8:
+        gAnimScriptCallback();
+        if (!gAnimScriptActive)
+        {
+            sub_80DE9B0(r6);
+            if (gContestResources->field_0->unk1925E != 0)
             {
                 gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 7;
-            }
-            return;
-        case 23:
-            gTasks[taskId].data[1] = 0;
-            if (gContestResources->field_4[r6].effectStringId != CONTEST_STRING_NONE)
-            {
-                sub_80DD45C(r6, gContestResources->field_4[r6].effectStringId);
-                gContestResources->field_4[r6].effectStringId = CONTEST_STRING_NONE;
-                gTasks[taskId].data[0] = 24;
+                gTasks[taskId].data[0] = 9;
             }
             else
             {
-                if (gContestResources->field_4[r6].effectStringId2 != CONTEST_STRING_NONE)
+                if (!gContestResources->field_4[r6].hasJudgesAttention)
+                    sub_80DC674(r6);
+                sub_80DE12C();
+                gTasks[taskId].data[0] = 23;
+            }
+        }
+        return;
+    case 9:
+        if (gTasks[taskId].data[10]++ > 30)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 7;
+        }
+        return;
+    case 23:
+        gTasks[taskId].data[1] = 0;
+        if (gContestResources->field_4[r6].effectStringId != CONTEST_STRING_NONE)
+        {
+            sub_80DD45C(r6, gContestResources->field_4[r6].effectStringId);
+            gContestResources->field_4[r6].effectStringId = CONTEST_STRING_NONE;
+            gTasks[taskId].data[0] = 24;
+        }
+        else
+        {
+            if (gContestResources->field_4[r6].effectStringId2 != CONTEST_STRING_NONE)
+            {
+                for (i = 0; i < 4; i++)
                 {
-                    for (i = 0; i < 4; i++)
-                    {
-                        if (i != r6 && gContestResources->field_4[i].effectStringId != CONTEST_STRING_NONE)
-                            break;
-                    }
-                    if (i == 4)
-                    {
-                        sub_80DD45C(r6, gContestResources->field_4[r6].effectStringId2);
-                        gContestResources->field_4[r6].effectStringId2 = CONTEST_STRING_NONE;
-                        gTasks[taskId].data[0] = 24;
-                    }
-                    else
-                    {
-                        gTasks[taskId].data[0] = 48;
-                    }
+                    if (i != r6 && gContestResources->field_4[i].effectStringId != CONTEST_STRING_NONE)
+                        break;
+                }
+                if (i == 4)
+                {
+                    sub_80DD45C(r6, gContestResources->field_4[r6].effectStringId2);
+                    gContestResources->field_4[r6].effectStringId2 = CONTEST_STRING_NONE;
+                    gTasks[taskId].data[0] = 24;
                 }
                 else
                 {
                     gTasks[taskId].data[0] = 48;
                 }
             }
-            return;
-        case 24:
-            if (!Contest_RunTextPrinters())
-                gTasks[taskId].data[0] = 23;
-            return;
-        case 48:
-            if (gContestResources->field_4[r6].turnOrderModAction == 1)
-            {
-                sub_80DD720(5);
-            }
-            else if (gContestResources->field_4[r6].turnOrderModAction == 2)
-            {
-                sub_80DD720(6);
-            }
-            else if (gContestResources->field_4[r6].turnOrderModAction == 3)
-            {
-                sub_80DD720(7);
-            }
             else
             {
-                gTasks[taskId].data[0] = 47;
-                return;
+                gTasks[taskId].data[0] = 48;
             }
-            gTasks[taskId].data[0] = 49;
+        }
+        return;
+    case 24:
+        if (!Contest_RunTextPrinters())
+            gTasks[taskId].data[0] = 23;
+        return;
+    case 48:
+        if (gContestResources->field_4[r6].turnOrderModAction == 1)
+        {
+            sub_80DD720(5);
+        }
+        else if (gContestResources->field_4[r6].turnOrderModAction == 2)
+        {
+            sub_80DD720(6);
+        }
+        else if (gContestResources->field_4[r6].turnOrderModAction == 3)
+        {
+            sub_80DD720(7);
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 47;
             return;
-        case 49:
-            if (!gContestResources->field_0->unk1920A_4)
-                gTasks[taskId].data[0] = 47;
-            return;
-        case 47:
-            sub_80DE008(TRUE);
-            gTasks[taskId].data[0] = 12;
-            return;
-        case 12:
-            sub_80DC028(0, gContestResources->field_4[r6].appeal2, r6);
-            gTasks[taskId].data[0] = 13;
-            return;
-        case 13:
-            if (!gContestResources->field_14[gContestResources->field_0->unk19215].unk2_2)
-                gTasks[taskId].data[0] = 35;
-            return;
-        case 35:
-            if (gContestResources->field_4[r6].conditionMod == 1)
-                sub_80DD720(8);
-            gTasks[taskId].data[0] = 36;
-            return;
-        case 36:
-            if (!gContestResources->field_0->unk1920A_4)
-                gTasks[taskId].data[0] = 37;
-            return;
-        case 37:
-            if (sub_80DB5B8(r6, 1))
-            {
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 38;
-            }
-            else
-            {
-                gTasks[taskId].data[0] = 50;
-            }
-            return;
-        case 38:
-            if (++gTasks[taskId].data[10] > 20)
-            {
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 50;
-            }
-            return;
-        case 50:
-            if (sub_80DB798(r6))
-                PlaySE(SE_C_PASI);
-            gTasks[taskId].data[0] = 25;
-            return;
-        case 25:
-            gTasks[taskId].data[1] = 0;
-            gTasks[taskId].data[0] = 26;
-            return;
-        case 26:
+        }
+        gTasks[taskId].data[0] = 49;
+        return;
+    case 49:
+        if (!gContestResources->field_0->unk1920A_4)
+            gTasks[taskId].data[0] = 47;
+        return;
+    case 47:
+        sub_80DE008(TRUE);
+        gTasks[taskId].data[0] = 12;
+        return;
+    case 12:
+        sub_80DC028(0, gContestResources->field_4[r6].appeal2, r6);
+        gTasks[taskId].data[0] = 13;
+        return;
+    case 13:
+        if (!gContestResources->field_14[gContestResources->field_0->unk19215].unk2_2)
+            gTasks[taskId].data[0] = 35;
+        return;
+    case 35:
+        if (gContestResources->field_4[r6].conditionMod == 1)
+            sub_80DD720(8);
+        gTasks[taskId].data[0] = 36;
+        return;
+    case 36:
+        if (!gContestResources->field_0->unk1920A_4)
+            gTasks[taskId].data[0] = 37;
+        return;
+    case 37:
+        if (sub_80DB5B8(r6, 1))
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 38;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 50;
+        }
+        return;
+    case 38:
+        if (++gTasks[taskId].data[10] > 20)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 50;
+        }
+        return;
+    case 50:
+        if (sub_80DB798(r6))
+            PlaySE(SE_C_PASI);
+        gTasks[taskId].data[0] = 25;
+        return;
+    case 25:
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[0] = 26;
+        return;
+    case 26:
         {
             s32 r2 = 0;
 
@@ -1276,425 +1276,425 @@ static void sub_80D8B38(u8 taskId)
                 sub_80DB884();
             }
         }
-            return;
-        case 27:
-            if (!Contest_RunTextPrinters())
-                gTasks[taskId].data[0] = 28;
-            return;
-        case 28:
-            for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
-                ;
-            sub_80DC028(gContestResources->field_4[i].appeal2 + gContestResources->field_4[i].jam, -gContestResources->field_4[i].jam, i);
-            gTasks[taskId].data[0] = 29;
-            return;
-        case 29:
-            for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
-                ;
-            if (!gContestResources->field_14[i].unk2_2)
-                gTasks[taskId].data[0] = 39;
-            return;
-        case 39:
-            for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
-                ;
-            if (sub_80DB5B8(i, 1))
-            {
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 40;
-            }
-            else
-            {
-                gTasks[taskId].data[0] = 30;
-            }
-            return;
-        case 40:
-            if (++gTasks[taskId].data[10] > 20)
-            {
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 30;
-            }
-            return;
-        case 30:
-            for (i = 0; i < 4; i++)
-            {
-                if (gUnknown_02039F26[i] == gTasks[taskId].data[1])
-                    break;
-            }
-            if (sub_80DB798(i))
-                PlaySE(SE_C_PASI);
-            else
-                PlaySE(SE_C_SYU);
-            if (gContestResources->field_4[i].judgesAttentionWasRemoved)
-            {
-                sub_80DC674(i);
-                gContestResources->field_4[i].judgesAttentionWasRemoved = 0;
-            }
-            gTasks[taskId].data[1]++;
-            gTasks[taskId].data[0] = 26;
-            return;
-        case 51:
-            if (gTasks[taskId].data[10]++ > 9)
-            {
-                gTasks[taskId].data[10] = 0;
-                if (gContestResources->field_4[r6].numTurnsSkipped != 0
-                    || gContestResources->field_4[r6].turnSkipped)
-                {
-                    sub_80DB89C();
-                    StringCopy(gStringVar1, gContestMons[r6].nickname);
-                    StringExpandPlaceholders(gStringVar4, gText_0827E793);
-                    Contest_StartTextPrinter(gStringVar4, 1);
-                }
-                gTasks[taskId].data[0] = 52;
-            }
-            return;
-        case 52:
-            if (!Contest_RunTextPrinters())
-            {
-                if (!gContestResources->field_4[r6].unk15_6)
-                    gTasks[taskId].data[0] = 17;
-                else
-                    gTasks[taskId].data[0] = 14;
-            }
-            return;
-        case 14:
-            r3 = gContestResources->field_4[r6].unk16;
-            if (gContestResources->field_4[r6].unk16 != 0)
-            {
-                sub_80DB89C();
-                if (r3 == 1)
-                    Contest_StartTextPrinter(gText_0827E32E, 1);
-                else if (r3 == 2)
-                    Contest_StartTextPrinter(gText_0827E35B, 1);
-                else
-                    Contest_StartTextPrinter(gText_0827E38D, 1);
-                sub_80DD720(3);
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 45;
-            }
-            else
-            {
-                sub_80DB89C();
-                StringCopy(gStringVar1, gContestMons[r6].nickname);
-                StringExpandPlaceholders(gStringVar4, gText_0827E2FE);
-                Contest_StartTextPrinter(gStringVar4, 1);
-                sub_80DD720(2);
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 45;
-            }
-            return;
-        case 45:
-            if (!gContestResources->field_0->unk1920A_4)
-            {
-                sub_80DC9B4(gContestResources->field_0->unk19215);
-                gTasks[taskId].data[0] = 15;
-            }
-            return;
-        case 15:
-            if (!Contest_RunTextPrinters())
-            {
-                if (++gTasks[taskId].data[10] > 50)
-                {
-                    if (!gContestResources->field_4[r6].hasJudgesAttention)
-                    {
-                        sub_80DC028(
-                            gContestResources->field_4[r6].appeal2,
-                            gContestResources->field_4[r6].unk17,
-                            r6);
-                        gContestResources->field_4[r6].appeal2 += gContestResources->field_4[r6].unk17;
-                    }
-                    gTasks[taskId].data[0] = 16;
-                }
-            }
-            return;
-        case 16:
-            if (!gContestResources->field_14[r6].unk2_2)
-            {
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 17;
-            }
-            return;
-        case 17:
-            if (gContestResources->field_4[r6].disappointedRepeat)
-            {
-                sub_80DB89C();
-                StringCopy(gStringVar1, gContestMons[r6].nickname);
-                StringExpandPlaceholders(gStringVar4, gText_0827E6E3);
-                Contest_StartTextPrinter(gStringVar4, 1);
-                gTasks[taskId].data[10] = 0;
-                sub_80DD720(0);
-                gTasks[taskId].data[0] = 46;
-            }
-            else
-            {
-                gTasks[taskId].data[0] = 41;
-            }
-            return;
-        case 46:
-            if (!gContestResources->field_0->unk1920A_4)
-                gTasks[taskId].data[0] = 19;
-            return;
-        case 19:
-            if (!Contest_RunTextPrinters())
-            {
-                sub_80DC028(gContestResources->field_4[r6].appeal2, -gContestResources->field_4[r6].unk18, r6);
-                gContestResources->field_4[r6].appeal2 -= gContestResources->field_4[r6].unk18;
-                gTasks[taskId].data[0] = 18;
-            }
-            return;
-        case 18:
-            sub_80DCD48();
-            if (!gContestResources->field_14[r6].unk2_2)
-            {
-                gTasks[taskId].data[10] = 0;
-                sub_80DB89C();
-                gTasks[taskId].data[0] = 41;
-            }
-            return;
-        case 41:
-            if (gContestResources->field_10->excitementFrozen && r6 != gContestResources->field_10->excitementFreezer)
-            {
-                gTasks[taskId].data[0] = 57;
-            }
-            else
-            {
-                r3 = gContestResources->field_10->bits_0;
-                if (gContestResources->field_4[r6].overrideCategoryExcitementMod)
-                {
-                    r3 = 1;
-                    StringCopy(gStringVar3, gMoveNames[gContestResources->field_4[r6].currMove]);
-                }
-                else
-                {
-                    StringCopy(gStringVar3, gUnknown_08587F08[gContestMoves[gContestResources->field_4[r6].currMove].contestCategory]);
-                }
-                if (r3 > 0)
-                {
-                    if (gContestResources->field_4[r6].disappointedRepeat)
-                        r3 = 0;
-                }
-                sub_80DB89C();
-                StringCopy(gStringVar1, gContestMons[r6].nickname);
-                gContestResources->field_0->applauseLevel += r3;
-                if (gContestResources->field_0->applauseLevel < 0)
-                    gContestResources->field_0->applauseLevel = 0;
-                if (r3 == 0)
-                {
-                    gTasks[taskId].data[0] = 55;
-                }
-                else
-                {
-                    if (r3 < 0)
-                        StringExpandPlaceholders(gStringVar4, gText_0827E73C);
-                    else if (r3 > 0 && gContestResources->field_0->applauseLevel <= 4)
-                        StringExpandPlaceholders(gStringVar4, gText_0827E717);
-                    else
-                        StringExpandPlaceholders(gStringVar4, gText_0827E76A);
-                    Contest_StartTextPrinter(gStringVar4, 1);
-                    gTasks[taskId].data[10] = 0;
-                    gTasks[taskId].data[11] = 0;
-                    if (r3 < 0)
-                        gTasks[taskId].data[0] = 53;
-                    else
-                        gTasks[taskId].data[0] = 54;
-                }
-            }
-            return;
-        case 53:
-            switch (gTasks[taskId].data[10])
-            {
-                case 0:
-                    sub_80DDED0(-1, 1);
-                    PlayFanfare(MUS_ME_ZANNEN);
-                    gTasks[taskId].data[10]++;
-                    break;
-                case 1:
-                    if (!gContestResources->field_0->unk1920B_0 && !Contest_RunTextPrinters())
-                    {
-                        sub_80DDCDC(-1);
-                        gTasks[taskId].data[10]++;
-                    }
-                    break;
-                case 2:
-                    if (!gContestResources->field_0->unk1920A_5)
-                    {
-                        if (gTasks[taskId].data[11]++ > 29)
-                        {
-                            gTasks[taskId].data[11] = 0;
-                            sub_80DDED0(-1, -1);
-                            gTasks[taskId].data[10]++;
-                        }
-                    }
-                    break;
-                case 3:
-                    if (!gPaletteFade.active)
-                    {
-                        gTasks[taskId].data[10] = 0;
-                        gTasks[taskId].data[11] = 0;
-                        gTasks[taskId].data[0] = 43;
-                    }
-                    break;
-            }
-            return;
-        case 54:
-            switch (gTasks[taskId].data[10])
-            {
-                case 0:
-                    if (!Contest_RunTextPrinters())
-                    {
-                        sub_80DDED0(1, 1);
-                        gTasks[taskId].data[10]++;
-                    }
-                    break;
-                case 1:
-                    if (!gContestResources->field_0->unk1920B_0)
-                    {
-                        sub_80DDE0C();
-                        PlaySE(SE_W227B);
-                        sub_80DDCDC(1);
-                        gTasks[taskId].data[10]++;
-                    }
-                    break;
-                case 2:
-                    if (!gContestResources->field_0->unk1920A_5)
-                    {
-                        if (gTasks[taskId].data[11]++ > 29)
-                        {
-                            gTasks[taskId].data[11] = 0;
-                            sub_80DC028(gContestResources->field_4[r6].appeal2, gContestResources->field_10->unk2, r6);
-                            gContestResources->field_4[r6].appeal2 += gContestResources->field_10->unk2;
-                            gTasks[taskId].data[10]++;
-                        }
-                    }
-                    break;
-                case 3:
-                    if (!gContestResources->field_14[r6].unk2_2)
-                    {
-                        if (!gContestResources->field_0->unk1920A_7)
-                        {
-                            sub_80DDED0(1, -1);
-                            gTasks[taskId].data[10]++;
-                        }
-                    }
-                    break;
-                case 4:
-                    if (!gPaletteFade.active)
-                    {
-                        gTasks[taskId].data[10] = 0;
-                        gTasks[taskId].data[11] = 0;
-                        gTasks[taskId].data[0] = 43;
-                    }
-                    break;
-            }
-            return;
-        case 43:
-            if (!gContestResources->field_14[r6].unk2_2)
-            {
-                sub_80DB89C();
-                gTasks[taskId].data[0] = 55;
-            }
-            return;
-        case 57:
-            sub_80DB89C();
-            StringCopy(gStringVar3, gContestMons[gContestResources->field_10->excitementFreezer].nickname);
-            StringCopy(gStringVar1, gContestMons[r6].nickname);
-            StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
-            StringExpandPlaceholders(gStringVar4, gText_0827E7EA);
-            Contest_StartTextPrinter(gStringVar4, 1);
-            gTasks[taskId].data[0] = 58;
-            return;
-        case 58:
-            if (!Contest_RunTextPrinters())
-            {
-                sub_80DB89C();
-                StringExpandPlaceholders(gStringVar4, gText_0827E817);
-                Contest_StartTextPrinter(gStringVar4, 1);
-                gTasks[taskId].data[0] = 59;
-            }
-            return;
-        case 59:
-            if (!Contest_RunTextPrinters())
-            {
-                sub_80DB89C();
-                gTasks[taskId].data[0] = 55;
-            }
-            return;
-        case 33:
-            if (gContestResources->field_4[r6].hasJudgesAttention)
-                gContestResources->field_4[r6].hasJudgesAttention = 0;
-            sub_80DC9B4(r6);
-            StringCopy(gStringVar1, gContestMons[r6].nickname);
-            StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
-            StringExpandPlaceholders(gStringVar4, gText_0827E58A);
-            Contest_StartTextPrinter(gStringVar4, 1);
-            gTasks[taskId].data[0] = 34;
-            return;
-        case 34:
-            if (!Contest_RunTextPrinters())
-                gTasks[taskId].data[0] = 55;
-            return;
-        case 55:
-            sub_80DDBE8();
-            gTasks[taskId].data[0] = 56;
-            return;
-        case 56:
-            if (!gContestResources->field_0->unk1920A_6)
-            {
-                if (gContestResources->field_0->applauseLevel > 4)
-                {
-                    gContestResources->field_0->applauseLevel = 0;
-                    sub_80DD940();
-                }
-                gTasks[taskId].data[0] = 10;
-            }
-            return;
-        case 10:
-            spriteId = gTasks[taskId].data[2];
-            gSprites[spriteId].callback = sub_80DA164;
-            gTasks[taskId].data[0] = 11;
-            return;
-        case 11:
-            spriteId = gTasks[taskId].data[2];
-            if (gSprites[spriteId].invisible)
-            {
-                FreeSpriteOamMatrix(&gSprites[spriteId]);
-                DestroySprite(&gSprites[spriteId]);
-                gTasks[taskId].data[0] = 20;
-            }
-            return;
-        case 20:
+        return;
+    case 27:
+        if (!Contest_RunTextPrinters())
+            gTasks[taskId].data[0] = 28;
+        return;
+    case 28:
+        for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
+            ;
+        sub_80DC028(gContestResources->field_4[i].appeal2 + gContestResources->field_4[i].jam, -gContestResources->field_4[i].jam, i);
+        gTasks[taskId].data[0] = 29;
+        return;
+    case 29:
+        for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
+            ;
+        if (!gContestResources->field_14[i].unk2_2)
+            gTasks[taskId].data[0] = 39;
+        return;
+    case 39:
+        for (i = 0; gTasks[taskId].data[1] != gUnknown_02039F26[i]; i++)
+            ;
+        if (sub_80DB5B8(i, 1))
+        {
             gTasks[taskId].data[10] = 0;
-            gTasks[taskId].data[0] = 21;
-            return;
-        case 31:
+            gTasks[taskId].data[0] = 40;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 30;
+        }
+        return;
+    case 40:
+        if (++gTasks[taskId].data[10] > 20)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 30;
+        }
+        return;
+    case 30:
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_02039F26[i] == gTasks[taskId].data[1])
+                break;
+        }
+        if (sub_80DB798(i))
+            PlaySE(SE_C_PASI);
+        else
+            PlaySE(SE_C_SYU);
+        if (gContestResources->field_4[i].judgesAttentionWasRemoved)
+        {
+            sub_80DC674(i);
+            gContestResources->field_4[i].judgesAttentionWasRemoved = 0;
+        }
+        gTasks[taskId].data[1]++;
+        gTasks[taskId].data[0] = 26;
+        return;
+    case 51:
+        if (gTasks[taskId].data[10]++ > 9)
+        {
+            gTasks[taskId].data[10] = 0;
+            if (gContestResources->field_4[r6].numTurnsSkipped != 0
+                || gContestResources->field_4[r6].turnSkipped)
+            {
+                sub_80DB89C();
+                StringCopy(gStringVar1, gContestMons[r6].nickname);
+                StringExpandPlaceholders(gStringVar4, gText_0827E793);
+                Contest_StartTextPrinter(gStringVar4, 1);
+            }
+            gTasks[taskId].data[0] = 52;
+        }
+        return;
+    case 52:
+        if (!Contest_RunTextPrinters())
+        {
+            if (!gContestResources->field_4[r6].unk15_6)
+                gTasks[taskId].data[0] = 17;
+            else
+                gTasks[taskId].data[0] = 14;
+        }
+        return;
+    case 14:
+        r3 = gContestResources->field_4[r6].unk16;
+        if (gContestResources->field_4[r6].unk16 != 0)
+        {
+            sub_80DB89C();
+            if (r3 == 1)
+                Contest_StartTextPrinter(gText_0827E32E, 1);
+            else if (r3 == 2)
+                Contest_StartTextPrinter(gText_0827E35B, 1);
+            else
+                Contest_StartTextPrinter(gText_0827E38D, 1);
+            sub_80DD720(3);
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 45;
+        }
+        else
+        {
             sub_80DB89C();
             StringCopy(gStringVar1, gContestMons[r6].nickname);
-            StringExpandPlaceholders(gStringVar4, gText_0827D56F);
+            StringExpandPlaceholders(gStringVar4, gText_0827E2FE);
             Contest_StartTextPrinter(gStringVar4, 1);
-            gTasks[taskId].data[0] = 32;
-            return;
-        case 32:
-            if (!Contest_RunTextPrinters())
-                gTasks[taskId].data[0] = 21;
-            return;
-        case 21:
-            if (++gTasks[taskId].data[10] > 29)
+            sub_80DD720(2);
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 45;
+        }
+        return;
+    case 45:
+        if (!gContestResources->field_0->unk1920A_4)
+        {
+            sub_80DC9B4(gContestResources->field_0->unk19215);
+            gTasks[taskId].data[0] = 15;
+        }
+        return;
+    case 15:
+        if (!Contest_RunTextPrinters())
+        {
+            if (++gTasks[taskId].data[10] > 50)
             {
-                gTasks[taskId].data[10] = 0;
-                gTasks[taskId].data[0] = 22;
+                if (!gContestResources->field_4[r6].hasJudgesAttention)
+                {
+                    sub_80DC028(
+                        gContestResources->field_4[r6].appeal2,
+                        gContestResources->field_4[r6].unk17,
+                        r6);
+                    gContestResources->field_4[r6].appeal2 += gContestResources->field_4[r6].unk17;
+                }
+                gTasks[taskId].data[0] = 16;
             }
-            return;
-        case 22:
-            if (++gContestResources->field_0->unk19214 == 4)
+        }
+        return;
+    case 16:
+        if (!gContestResources->field_14[r6].unk2_2)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 17;
+        }
+        return;
+    case 17:
+        if (gContestResources->field_4[r6].disappointedRepeat)
+        {
+            sub_80DB89C();
+            StringCopy(gStringVar1, gContestMons[r6].nickname);
+            StringExpandPlaceholders(gStringVar4, gText_0827E6E3);
+            Contest_StartTextPrinter(gStringVar4, 1);
+            gTasks[taskId].data[10] = 0;
+            sub_80DD720(0);
+            gTasks[taskId].data[0] = 46;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 41;
+        }
+        return;
+    case 46:
+        if (!gContestResources->field_0->unk1920A_4)
+            gTasks[taskId].data[0] = 19;
+        return;
+    case 19:
+        if (!Contest_RunTextPrinters())
+        {
+            sub_80DC028(gContestResources->field_4[r6].appeal2, -gContestResources->field_4[r6].unk18, r6);
+            gContestResources->field_4[r6].appeal2 -= gContestResources->field_4[r6].unk18;
+            gTasks[taskId].data[0] = 18;
+        }
+        return;
+    case 18:
+        sub_80DCD48();
+        if (!gContestResources->field_14[r6].unk2_2)
+        {
+            gTasks[taskId].data[10] = 0;
+            sub_80DB89C();
+            gTasks[taskId].data[0] = 41;
+        }
+        return;
+    case 41:
+        if (gContestResources->field_10->excitementFrozen && r6 != gContestResources->field_10->excitementFreezer)
+        {
+            gTasks[taskId].data[0] = 57;
+        }
+        else
+        {
+            r3 = gContestResources->field_10->bits_0;
+            if (gContestResources->field_4[r6].overrideCategoryExcitementMod)
             {
-                gTasks[taskId].data[0] = 0;
-                gTasks[taskId].data[1] = 0;
-                gTasks[taskId].data[2] = 0;
-                gTasks[taskId].func = sub_80DA198;
+                r3 = 1;
+                StringCopy(gStringVar3, gMoveNames[gContestResources->field_4[r6].currMove]);
             }
             else
             {
-                gTasks[taskId].data[0] = 0;
+                StringCopy(gStringVar3, gUnknown_08587F08[gContestMoves[gContestResources->field_4[r6].currMove].contestCategory]);
             }
-            return;
+            if (r3 > 0)
+            {
+                if (gContestResources->field_4[r6].disappointedRepeat)
+                    r3 = 0;
+            }
+            sub_80DB89C();
+            StringCopy(gStringVar1, gContestMons[r6].nickname);
+            gContestResources->field_0->applauseLevel += r3;
+            if (gContestResources->field_0->applauseLevel < 0)
+                gContestResources->field_0->applauseLevel = 0;
+            if (r3 == 0)
+            {
+                gTasks[taskId].data[0] = 55;
+            }
+            else
+            {
+                if (r3 < 0)
+                    StringExpandPlaceholders(gStringVar4, gText_0827E73C);
+                else if (r3 > 0 && gContestResources->field_0->applauseLevel <= 4)
+                    StringExpandPlaceholders(gStringVar4, gText_0827E717);
+                else
+                    StringExpandPlaceholders(gStringVar4, gText_0827E76A);
+                Contest_StartTextPrinter(gStringVar4, 1);
+                gTasks[taskId].data[10] = 0;
+                gTasks[taskId].data[11] = 0;
+                if (r3 < 0)
+                    gTasks[taskId].data[0] = 53;
+                else
+                    gTasks[taskId].data[0] = 54;
+            }
+        }
+        return;
+    case 53:
+        switch (gTasks[taskId].data[10])
+        {
+        case 0:
+            sub_80DDED0(-1, 1);
+            PlayFanfare(MUS_ME_ZANNEN);
+            gTasks[taskId].data[10]++;
+            break;
+        case 1:
+            if (!gContestResources->field_0->unk1920B_0 && !Contest_RunTextPrinters())
+            {
+                sub_80DDCDC(-1);
+                gTasks[taskId].data[10]++;
+            }
+            break;
+        case 2:
+            if (!gContestResources->field_0->unk1920A_5)
+            {
+                if (gTasks[taskId].data[11]++ > 29)
+                {
+                    gTasks[taskId].data[11] = 0;
+                    sub_80DDED0(-1, -1);
+                    gTasks[taskId].data[10]++;
+                }
+            }
+            break;
+        case 3:
+            if (!gPaletteFade.active)
+            {
+                gTasks[taskId].data[10] = 0;
+                gTasks[taskId].data[11] = 0;
+                gTasks[taskId].data[0] = 43;
+            }
+            break;
+        }
+        return;
+    case 54:
+        switch (gTasks[taskId].data[10])
+        {
+        case 0:
+            if (!Contest_RunTextPrinters())
+            {
+                sub_80DDED0(1, 1);
+                gTasks[taskId].data[10]++;
+            }
+            break;
+        case 1:
+            if (!gContestResources->field_0->unk1920B_0)
+            {
+                sub_80DDE0C();
+                PlaySE(SE_W227B);
+                sub_80DDCDC(1);
+                gTasks[taskId].data[10]++;
+            }
+            break;
+        case 2:
+            if (!gContestResources->field_0->unk1920A_5)
+            {
+                if (gTasks[taskId].data[11]++ > 29)
+                {
+                    gTasks[taskId].data[11] = 0;
+                    sub_80DC028(gContestResources->field_4[r6].appeal2, gContestResources->field_10->unk2, r6);
+                    gContestResources->field_4[r6].appeal2 += gContestResources->field_10->unk2;
+                    gTasks[taskId].data[10]++;
+                }
+            }
+            break;
+        case 3:
+            if (!gContestResources->field_14[r6].unk2_2)
+            {
+                if (!gContestResources->field_0->unk1920A_7)
+                {
+                    sub_80DDED0(1, -1);
+                    gTasks[taskId].data[10]++;
+                }
+            }
+            break;
+        case 4:
+            if (!gPaletteFade.active)
+            {
+                gTasks[taskId].data[10] = 0;
+                gTasks[taskId].data[11] = 0;
+                gTasks[taskId].data[0] = 43;
+            }
+            break;
+        }
+        return;
+    case 43:
+        if (!gContestResources->field_14[r6].unk2_2)
+        {
+            sub_80DB89C();
+            gTasks[taskId].data[0] = 55;
+        }
+        return;
+    case 57:
+        sub_80DB89C();
+        StringCopy(gStringVar3, gContestMons[gContestResources->field_10->excitementFreezer].nickname);
+        StringCopy(gStringVar1, gContestMons[r6].nickname);
+        StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
+        StringExpandPlaceholders(gStringVar4, gText_0827E7EA);
+        Contest_StartTextPrinter(gStringVar4, 1);
+        gTasks[taskId].data[0] = 58;
+        return;
+    case 58:
+        if (!Contest_RunTextPrinters())
+        {
+            sub_80DB89C();
+            StringExpandPlaceholders(gStringVar4, gText_0827E817);
+            Contest_StartTextPrinter(gStringVar4, 1);
+            gTasks[taskId].data[0] = 59;
+        }
+        return;
+    case 59:
+        if (!Contest_RunTextPrinters())
+        {
+            sub_80DB89C();
+            gTasks[taskId].data[0] = 55;
+        }
+        return;
+    case 33:
+        if (gContestResources->field_4[r6].hasJudgesAttention)
+            gContestResources->field_4[r6].hasJudgesAttention = 0;
+        sub_80DC9B4(r6);
+        StringCopy(gStringVar1, gContestMons[r6].nickname);
+        StringCopy(gStringVar2, gMoveNames[gContestResources->field_4[r6].currMove]);
+        StringExpandPlaceholders(gStringVar4, gText_0827E58A);
+        Contest_StartTextPrinter(gStringVar4, 1);
+        gTasks[taskId].data[0] = 34;
+        return;
+    case 34:
+        if (!Contest_RunTextPrinters())
+            gTasks[taskId].data[0] = 55;
+        return;
+    case 55:
+        sub_80DDBE8();
+        gTasks[taskId].data[0] = 56;
+        return;
+    case 56:
+        if (!gContestResources->field_0->unk1920A_6)
+        {
+            if (gContestResources->field_0->applauseLevel > 4)
+            {
+                gContestResources->field_0->applauseLevel = 0;
+                sub_80DD940();
+            }
+            gTasks[taskId].data[0] = 10;
+        }
+        return;
+    case 10:
+        spriteId = gTasks[taskId].data[2];
+        gSprites[spriteId].callback = sub_80DA164;
+        gTasks[taskId].data[0] = 11;
+        return;
+    case 11:
+        spriteId = gTasks[taskId].data[2];
+        if (gSprites[spriteId].invisible)
+        {
+            FreeSpriteOamMatrix(&gSprites[spriteId]);
+            DestroySprite(&gSprites[spriteId]);
+            gTasks[taskId].data[0] = 20;
+        }
+        return;
+    case 20:
+        gTasks[taskId].data[10] = 0;
+        gTasks[taskId].data[0] = 21;
+        return;
+    case 31:
+        sub_80DB89C();
+        StringCopy(gStringVar1, gContestMons[r6].nickname);
+        StringExpandPlaceholders(gStringVar4, gText_0827D56F);
+        Contest_StartTextPrinter(gStringVar4, 1);
+        gTasks[taskId].data[0] = 32;
+        return;
+    case 32:
+        if (!Contest_RunTextPrinters())
+            gTasks[taskId].data[0] = 21;
+        return;
+    case 21:
+        if (++gTasks[taskId].data[10] > 29)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[0] = 22;
+        }
+        return;
+    case 22:
+        if (++gContestResources->field_0->unk19214 == 4)
+        {
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].func = sub_80DA198;
+        }
+        else
+        {
+            gTasks[taskId].data[0] = 0;
+        }
+        return;
     }
 }
 
@@ -2309,32 +2309,32 @@ static u16 sub_80DAFE0(u8 who, u8 contestCategory)
 
     switch (contestCategory)
     {
-        case CONTEST_CATEGORY_COOL:
-            statMain = gContestMons[who].cool;
-            statSub1 = gContestMons[who].tough;
-            statSub2 = gContestMons[who].beauty;
-            break;
-        case CONTEST_CATEGORY_BEAUTY:
-            statMain = gContestMons[who].beauty;
-            statSub1 = gContestMons[who].cool;
-            statSub2 = gContestMons[who].cute;
-            break;
-        case CONTEST_CATEGORY_CUTE:
-            statMain = gContestMons[who].cute;
-            statSub1 = gContestMons[who].beauty;
-            statSub2 = gContestMons[who].smart;
-            break;
-        case CONTEST_CATEGORY_SMART:
-            statMain = gContestMons[who].smart;
-            statSub1 = gContestMons[who].cute;
-            statSub2 = gContestMons[who].tough;
-            break;
-        case CONTEST_CATEGORY_TOUGH:
-        default:
-            statMain = gContestMons[who].tough;
-            statSub1 = gContestMons[who].smart;
-            statSub2 = gContestMons[who].cool;
-            break;
+    case CONTEST_CATEGORY_COOL:
+        statMain = gContestMons[who].cool;
+        statSub1 = gContestMons[who].tough;
+        statSub2 = gContestMons[who].beauty;
+        break;
+    case CONTEST_CATEGORY_BEAUTY:
+        statMain = gContestMons[who].beauty;
+        statSub1 = gContestMons[who].cool;
+        statSub2 = gContestMons[who].cute;
+        break;
+    case CONTEST_CATEGORY_CUTE:
+        statMain = gContestMons[who].cute;
+        statSub1 = gContestMons[who].beauty;
+        statSub2 = gContestMons[who].smart;
+        break;
+    case CONTEST_CATEGORY_SMART:
+        statMain = gContestMons[who].smart;
+        statSub1 = gContestMons[who].cute;
+        statSub2 = gContestMons[who].tough;
+        break;
+    case CONTEST_CATEGORY_TOUGH:
+    default:
+        statMain = gContestMons[who].tough;
+        statSub1 = gContestMons[who].smart;
+        statSub2 = gContestMons[who].cool;
+        break;
     }
     return statMain + (statSub1 + statSub2 + gContestMons[who].sheen) / 2;
 }
@@ -2420,18 +2420,18 @@ static u16 sub_80DB2EC(u16 a0, u8 a1)
 
     switch (gContestEffects[gContestMoves[a0].effect].effectType)
     {
-        case 0:
-        case 1:
-        case 8:
-            var = 0x9082;
-            break;
-        case 2:
-        case 3:
-            var = 0x9088;
-            break;
-        default:
-            var = 0x9086;
-            break;
+    case 0:
+    case 1:
+    case 8:
+        var = 0x9082;
+        break;
+    case 2:
+    case 3:
+        var = 0x9088;
+        break;
+    default:
+        var = 0x9086;
+        break;
     }
     var += 0x9000 + (a1 << 12);
     return var;
@@ -2563,21 +2563,21 @@ static u16 sub_80DB748(u8 status)
 
     switch (status)
     {
-        case 0:
-            var = 0x80;
-            break;
-        case 1:
-            var = 0x84;
-            break;
-        case 2:
-            var = 0x86;
-            break;
-        case 3:
-            var = 0x88;
-            break;
-        case 4:
-            var = 0x82;
-            break;
+    case 0:
+        var = 0x80;
+        break;
+    case 1:
+        var = 0x84;
+        break;
+    case 2:
+        var = 0x86;
+        break;
+    case 3:
+        var = 0x88;
+        break;
+    case 4:
+        var = 0x82;
+        break;
     }
     var += 0x9000;
     return var;
