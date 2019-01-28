@@ -128,9 +128,9 @@ void sub_80DE350(void);
 void sub_80DE424(u8);
 void sub_80DE69C(u8);
 void sub_80DEA20(void);
-void Contest_PrintTextToBg0WindowAt(u32, u8 *, s32, u8, u8);
+void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void Contest_StartTextPrinter(const u8 *, u32);
-void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, u8);
+void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, s16);
 bool32 Contest_RunTextPrinters(void);
 void Contest_SetBgCopyFlags(u32);
 void sub_80FC9F8(u8);
@@ -661,7 +661,6 @@ void sub_80D80C8(u8 taskId)
         gTasks[taskId].func = sub_80D8108;
     }
 }
-
 
 void sub_80D8108(u8 taskId)
 {
@@ -2028,7 +2027,6 @@ bool8 sub_80DA8A4(void)
     return FALSE;
 }
 
-
 void sub_80DA8C8(u8 partyIndex)
 {
     u8 name[20];
@@ -2164,48 +2162,41 @@ void sub_80DAB8C(u8 contestType, u8 rank)
     sub_80DA8C8(gContestMonPartyIndex);
 }
 
-#ifdef NONMATCHING
 void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
 {
-    s32 i;
+    s32 i, j;
     u8 opponentsCount = 0;
     u8 opponents[100];
-    const u8 * r6;
 
     if (gNumLinkContestPlayers == 4)
         return;
 
-    r6 = gUnknown_085898A4;
     for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
     {
         if (rank != gContestOpponents[i].whichRank)
             continue;
+
         if (isPostgame == TRUE)
         {
-            if (r6[i] == 1)
+            if (gUnknown_085898A4[i] == 1)
                 continue;
         }
         else
         {
-            if (r6[i] == 2)
+            if (gUnknown_085898A4[i] == 2)
                 continue;
         }
-        if      (contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
-            opponents[opponentsCount++] = i;
-        else if (contestType == CONTEST_CATEGORY_BEAUTY && gContestOpponents[i].aiPool_Beauty)
-            opponents[opponentsCount++] = i;
-        else if (contestType == CONTEST_CATEGORY_CUTE && gContestOpponents[i].aiPool_Cute)
-            opponents[opponentsCount++] = i;
-        else if (contestType == CONTEST_CATEGORY_SMART && gContestOpponents[i].aiPool_Smart)
-            opponents[opponentsCount++] = i;
-        else if (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough)
+        if ((contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
+            || (contestType == CONTEST_CATEGORY_BEAUTY && gContestOpponents[i].aiPool_Beauty)
+            || (contestType == CONTEST_CATEGORY_CUTE && gContestOpponents[i].aiPool_Cute)
+            || (contestType == CONTEST_CATEGORY_SMART && gContestOpponents[i].aiPool_Smart)
+            || (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough))
             opponents[opponentsCount++] = i;
     }
     opponents[opponentsCount] = 0xFF;
     for (i = 0; i < 4 - gNumLinkContestPlayers; i++)
     {
         u16 rnd = sub_80F903C() % opponentsCount;
-        s32 j;
 
         gContestMons[gNumLinkContestPlayers + i] = gContestOpponents[opponents[rnd]];
         sub_80DF9D4(gContestMons[gNumLinkContestPlayers + i].trainerName);
@@ -2215,180 +2206,6 @@ void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
         opponentsCount--;
     }
 }
-#else
-NAKED void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r9\n"
-                "\tmov r6, r8\n"
-                "\tpush {r6,r7}\n"
-                "\tsub sp, 0x64\n"
-                "\tmov r8, r2\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r4, r0, 24\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r2, r1, 24\n"
-                "\tmovs r7, 0\n"
-                "\tldr r0, =gNumLinkContestPlayers\n"
-                "\tldrb r1, [r0]\n"
-                "\tmov r9, r0\n"
-                "\tcmp r1, 0x4\n"
-                "\tbne _080DACDE\n"
-                "\tb _080DADF6\n"
-                "_080DACDE:\n"
-                "\tmovs r5, 0\n"
-                "\tldr r3, =gContestOpponents\n"
-                "\tldr r6, =gUnknown_085898A4\n"
-                "_080DACE4:\n"
-                "\tldrb r0, [r3, 0x1C]\n"
-                "\tlsls r0, 30\n"
-                "\tlsrs r0, 30\n"
-                "\tcmp r2, r0\n"
-                "\tbne _080DAD56\n"
-                "\tmov r0, r8\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _080DAD08\n"
-                "\tldrb r0, [r6]\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _080DAD56\n"
-                "\tb _080DAD0E\n"
-                "\t.pool\n"
-                "_080DAD08:\n"
-                "\tldrb r0, [r6]\n"
-                "\tcmp r0, 0x2\n"
-                "\tbeq _080DAD56\n"
-                "_080DAD0E:\n"
-                "\tcmp r4, 0\n"
-                "\tbne _080DAD1A\n"
-                "\tldrb r0, [r3, 0x1C]\n"
-                "\tlsls r0, 29\n"
-                "\tcmp r0, 0\n"
-                "\tblt _080DAD4A\n"
-                "_080DAD1A:\n"
-                "\tcmp r4, 0x1\n"
-                "\tbne _080DAD26\n"
-                "\tldrb r0, [r3, 0x1C]\n"
-                "\tlsls r0, 28\n"
-                "\tcmp r0, 0\n"
-                "\tblt _080DAD4A\n"
-                "_080DAD26:\n"
-                "\tcmp r4, 0x2\n"
-                "\tbne _080DAD32\n"
-                "\tldrb r0, [r3, 0x1C]\n"
-                "\tlsls r0, 27\n"
-                "\tcmp r0, 0\n"
-                "\tblt _080DAD4A\n"
-                "_080DAD32:\n"
-                "\tcmp r4, 0x3\n"
-                "\tbne _080DAD3E\n"
-                "\tldrb r0, [r3, 0x1C]\n"
-                "\tlsls r0, 26\n"
-                "\tcmp r0, 0\n"
-                "\tblt _080DAD4A\n"
-                "_080DAD3E:\n"
-                "\tcmp r4, 0x4\n"
-                "\tbne _080DAD56\n"
-                "\tldrb r0, [r3, 0x1C]\n"
-                "\tlsls r0, 25\n"
-                "\tcmp r0, 0\n"
-                "\tbge _080DAD56\n"
-                "_080DAD4A:\n"
-                "\tadds r0, r7, 0\n"
-                "\tadds r1, r0, 0x1\n"
-                "\tlsls r1, 24\n"
-                "\tlsrs r7, r1, 24\n"
-                "\tadd r0, sp\n"
-                "\tstrb r5, [r0]\n"
-                "_080DAD56:\n"
-                "\tadds r3, 0x40\n"
-                "\tadds r6, 0x1\n"
-                "\tadds r5, 0x1\n"
-                "\tcmp r5, 0x5F\n"
-                "\tbls _080DACE4\n"
-                "\tmov r3, sp\n"
-                "\tadds r1, r3, r7\n"
-                "\tmovs r0, 0xFF\n"
-                "\tstrb r0, [r1]\n"
-                "\tmovs r5, 0\n"
-                "\tmov r0, r9\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r0, 0x4\n"
-                "\tsubs r0, r1\n"
-                "\tcmp r5, r0\n"
-                "\tbge _080DADF6\n"
-                "\tldr r3, =gContestMons\n"
-                "\tmov r8, r3\n"
-                "\tmov r6, r9\n"
-                "\tmovs r0, 0x2\n"
-                "\tadd r0, r8\n"
-                "\tmov r9, r0\n"
-                "_080DAD82:\n"
-                "\tbl sub_80F903C\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tadds r1, r7, 0\n"
-                "\tbl __modsi3\n"
-                "\tadds r1, r0, 0\n"
-                "\tlsls r1, 16\n"
-                "\tlsrs r1, 16\n"
-                "\tldrb r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 6\n"
-                "\tadd r0, r8\n"
-                "\tldr r2, =gContestOpponents\n"
-                "\tmov r3, sp\n"
-                "\tadds r4, r3, r1\n"
-                "\tldrb r1, [r4]\n"
-                "\tlsls r1, 6\n"
-                "\tadds r1, r2\n"
-                "\tmovs r2, 0x40\n"
-                "\tbl memcpy\n"
-                "\tldrb r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 6\n"
-                "\tmov r1, r8\n"
-                "\tadds r1, 0xD\n"
-                "\tadds r0, r1\n"
-                "\tbl sub_80DF9D4\n"
-                "\tldrb r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 6\n"
-                "\tadd r0, r9\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl sub_80DF9E0\n"
-                "\tldrb r0, [r4]\n"
-                "\tadds r3, r5, 0x1\n"
-                "\tsubs r1, r7, 0x1\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbeq _080DADE6\n"
-                "\tadds r2, r4, 0\n"
-                "_080DADDA:\n"
-                "\tldrb r0, [r2, 0x1]\n"
-                "\tstrb r0, [r2]\n"
-                "\tadds r2, 0x1\n"
-                "\tldrb r0, [r2]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _080DADDA\n"
-                "_080DADE6:\n"
-                "\tlsls r0, r1, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "\tadds r5, r3, 0\n"
-                "\tldrb r1, [r6]\n"
-                "\tmovs r0, 0x4\n"
-                "\tsubs r0, r1\n"
-                "\tcmp r5, r0\n"
-                "\tblt _080DAD82\n"
-                "_080DADF6:\n"
-                "\tadd sp, 0x64\n"
-                "\tpop {r3,r4}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.pool");
-}
-#endif
 
 // GetContestAvailability?
 u8 sub_80DAE0C(struct Pokemon *pkmn)
@@ -2445,7 +2262,7 @@ void sub_80DAEA4(void)
     }
 }
 
-u8 * sub_80DAED4(const u8 * src, u8 color)
+u8 *sub_80DAED4(const u8 *src, u8 color)
 {
     u8 * ptr = StringCopy(gDisplayedStringBattle, gText_ColorTransparent);
     ptr[-1] = color;
@@ -2822,7 +2639,7 @@ u16 GetChosenMove(u8 a)
         ContestAI_ResetAI(a);
         moveChoice = ContestAI_GetActionToUse();
         return gContestMons[a].moves[moveChoice];
-    }   
+    }
 }
 
 void sub_80DB918(void)
@@ -2830,7 +2647,7 @@ void sub_80DB918(void)
     s32 i;
 
     for (i = 0; i < 4; i++)
-        sContestantStatus[i].currMove = GetChosenMove(i); 
+        sContestantStatus[i].currMove = GetChosenMove(i);
 }
 
 void sub_80DB944(void)
@@ -3044,10 +2861,10 @@ void sub_80DBED4(void)
 {
     if ((gIsLinkContest & 1))
     {
-        gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] = 
+        gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] =
         ((gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1) > 9999) ? 9999 :
         (gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1);
-        
+
     }
 }
 
@@ -3081,7 +2898,7 @@ void sub_80DBF68(void)
 void sub_80DBF90(void)
 {
     int i;
-    
+
     for(i = 0; i < 4; i++)
     {
         ContestBG_FillBoxWithTile(0, 0, 0x16, 2 + i * 5, 8, 2, 0x11);
@@ -3147,7 +2964,7 @@ void sub_80DC0F4(u8 taskId)
         u8 r5;
         u8 r10;
         u8 r11;
-        
+
         gTasks[taskId].data[10] = 0;
         if (gTasks[taskId].data[1] == 0)
         {
@@ -3204,7 +3021,7 @@ void sub_80DC0F4(u8 taskId)
         }
         r10 = r5;
         r11 = 0;
-        
+
         if (r5 > 7)
         {
             r11 = 1;
@@ -3221,7 +3038,7 @@ void sub_80DC0F4(u8 taskId)
         {
             PlaySE(SE_BOO);
         }
-        
+
         if (!r11 && !r5 && !r6)
             gTasks[taskId].data[2] = -gTasks[taskId].data[2];
     }
@@ -3330,9 +3147,9 @@ void sub_80DC4F0(void)
     for (i = 0; i < 4; i++)
     {
         LoadCompressedSpriteSheet(&gUnknown_08587AE8[i]);
-        gContestResources->field_14[i].unk1 = CreateSprite(&gSpriteTemplate_8587B18[i], 
-                                                           204, 
-                                                           gUnknown_08587A70[gUnknown_02039F26[i]], 
+        gContestResources->field_14[i].unk1 = CreateSprite(&gSpriteTemplate_8587B18[i],
+                                                           204,
+                                                           gUnknown_08587A70[gUnknown_02039F26[i]],
                                                            0);
         SetSubspriteTables(&gSprites[gContestResources->field_14[i].unk1], gSubspriteTables_8587B80);
         gSprites[gContestResources->field_14[i].unk1].invisible = TRUE;
@@ -3446,14 +3263,14 @@ void sub_80DC87C(u8 a)
     sub_80DC81C(a);
 
     r0 = a + 5;
-    DmaCopy16Defvars(3, 
-                     gPlttBufferUnfaded + r0 * 16 + 10, 
-                     gPlttBufferFaded   + r0 * 16 + 10, 
+    DmaCopy16Defvars(3,
+                     gPlttBufferUnfaded + r0 * 16 + 10,
+                     gPlttBufferFaded   + r0 * 16 + 10,
                      2);
     var = (a + 5) * 16 + 12 + a;
-    DmaCopy16Defvars(3, 
-                     gPlttBufferUnfaded + var, 
-                     gPlttBufferFaded + var, 
+    DmaCopy16Defvars(3,
+                     gPlttBufferUnfaded + var,
+                     gPlttBufferFaded + var,
                      2);
 }
 
@@ -3499,212 +3316,49 @@ extern const struct CompressedSpriteSheet gUnknown_08589904[];
 extern const struct SpritePalette gUnknown_08589924[];
 extern const struct SpriteTemplate gSpriteTemplate_858998C[];
 
-#ifdef NONMATCHING
 u8 sub_80DC9EC(u8 a)
 {
-    u8 r5 = gUnknown_02039F26[a] * 40 + 32;
-    u8 r8;
-    u8 r6;
-    volatile u8 zero;
-    
+    u8 spriteId1, spriteId2;
+    u8 x = gUnknown_02039F26[a] * 40 + 32;
 
     LoadCompressedSpriteSheet(&gUnknown_08589904[a]);
     LoadSpritePalette(&gUnknown_08589924[a]);
-    r6 = CreateSprite(&gSpriteTemplate_858998C[a], 184, r5, 29);
-    gSprites[r8].oam.tileNum += 64;
-    r8 = CreateSprite(&gSpriteTemplate_858998C[a], 248, r5, 29);
-    
+    spriteId1 = CreateSprite(&gSpriteTemplate_858998C[a], 184, x, 29);
+    spriteId2 = CreateSprite(&gSpriteTemplate_858998C[a], 248, x, 29);
+    gSprites[spriteId2].oam.tileNum += 64;
 
-    CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x26), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32));
-    CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x36), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32));
-    CpuSet(&r8, (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x36), 0x050000c0);
+    CopySpriteTiles(0,
+                    3,
+                    (void *)VRAM,
+                    (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x26),
+                    gContestResources->field_34);
 
-    RequestDma3Copy((void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32), 0x80, 1);
+    CopySpriteTiles(0,
+                    3, (void *)VRAM,
+                    (u16 *)(VRAM + 0xE000 + gUnknown_02039F26[a] * 5 * 64 + 0x36),
+                    gContestResources->field_38);
 
-    // What is this?
-    zero = 0;
-    zero = 0;
+    CpuFill32(0, gContestResources->field_34 + 0x500, 0x300);
+    CpuFill32(0, gContestResources->field_38 + 0x500, 0x300);
 
-    RequestDma3Copy((void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32), 0x80, 1);
+    RequestDma3Copy(gContestResources->field_34,
+                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId1].oam.tileNum * 32),
+                    0x800,
+                    1);
 
+    RequestDma3Copy(gContestResources->field_38,
+                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId2].oam.tileNum * 32),
+                    0x800,
+                    1);
 
-    gSprites[r6].data[0] = r8;
-    gSprites[r8].data[0] = r6;
-    
-    return r6;
+    gSprites[spriteId1].data[0] = spriteId2;
+    gSprites[spriteId2].data[0] = spriteId1;
+
+    gSprites[spriteId1].data[1] = a;
+    gSprites[spriteId2].data[1] = a;
+
+    return spriteId1;
 }
-#else
-NAKED
-u8 sub_80DC9EC(u8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x10\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0xC]\n\
-    ldr r6, =gUnknown_02039F26\n\
-    adds r6, r0, r6\n\
-    ldrb r0, [r6]\n\
-    lsls r5, r0, 2\n\
-    adds r5, r0\n\
-    lsls r5, 27\n\
-    movs r0, 0x80\n\
-    lsls r0, 22\n\
-    adds r5, r0\n\
-    lsrs r5, 24\n\
-    ldr r1, [sp, 0xC]\n\
-    lsls r4, r1, 3\n\
-    ldr r0, =gUnknown_08589904\n\
-    adds r0, r4, r0\n\
-    bl LoadCompressedSpriteSheet\n\
-    ldr r0, =gUnknown_08589924\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    bl LoadSpritePalette\n\
-    ldr r2, [sp, 0xC]\n\
-    lsls r4, r2, 1\n\
-    adds r4, r2\n\
-    lsls r4, 3\n\
-    ldr r0, =gSpriteTemplate_858998C\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB8\n\
-    adds r2, r5, 0\n\
-    movs r3, 0x1D\n\
-    bl CreateSprite\n\
-    mov r9, r0\n\
-    mov r3, r9\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    mov r9, r3\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xF8\n\
-    adds r2, r5, 0\n\
-    movs r3, 0x1D\n\
-    bl CreateSprite\n\
-    mov r8, r0\n\
-    mov r0, r8\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    lsls r5, r0, 4\n\
-    add r5, r8\n\
-    lsls r5, 2\n\
-    ldr r1, =gSprites\n\
-    adds r5, r1\n\
-    ldrh r2, [r5, 0x4]\n\
-    lsls r1, r2, 22\n\
-    lsrs r1, 22\n\
-    adds r1, 0x40\n\
-    ldr r3, =0x000003ff\n\
-    adds r0, r3, 0\n\
-    ands r1, r0\n\
-    ldr r0, =0xfffffc00\n\
-    ands r0, r2\n\
-    orrs r0, r1\n\
-    strh r0, [r5, 0x4]\n\
-    movs r4, 0xC0\n\
-    lsls r4, 19\n\
-    ldrb r0, [r6]\n\
-    lsls r3, r0, 2\n\
-    adds r3, r0\n\
-    lsls r3, 6\n\
-    ldr r0, =0x0600e026\n\
-    adds r3, r0\n\
-    ldr r7, =gContestResources\n\
-    ldr r0, [r7]\n\
-    ldr r0, [r0, 0x34]\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0x3\n\
-    adds r2, r4, 0\n\
-    bl CopySpriteTiles\n\
-    ldrb r0, [r6]\n\
-    lsls r3, r0, 2\n\
-    adds r3, r0\n\
-    lsls r3, 6\n\
-    ldr r1, =0x0600e036\n\
-    adds r3, r1\n\
-    ldr r0, [r7]\n\
-    ldr r0, [r0, 0x38]\n\
-    str r0, [sp]\n\
-    movs r0, 0\n\
-    movs r1, 0x3\n\
-    adds r2, r4, 0\n\
-    bl CopySpriteTiles\n\
-    movs r4, 0\n\
-    str r4, [sp, 0x4]\n\
-    ldr r0, [r7]\n\
-    ldr r1, [r0, 0x34]\n\
-    movs r6, 0xA0\n\
-    lsls r6, 3\n\
-    adds r1, r6\n\
-    ldr r2, =0x050000c0\n\
-    mov r10, r2\n\
-    add r0, sp, 0x4\n\
-    bl CpuSet\n\
-    str r4, [sp, 0x8]\n\
-    add r0, sp, 0x8\n\
-    ldr r1, [r7]\n\
-    ldr r1, [r1, 0x38]\n\
-    adds r1, r6\n\
-    mov r2, r10\n\
-    bl CpuSet\n\
-    ldr r0, [r7]\n\
-    ldr r0, [r0, 0x34]\n\
-    mov r3, r9\n\
-    lsls r4, r3, 4\n\
-    add r4, r9\n\
-    lsls r4, 2\n\
-    ldr r1, =gSprites\n\
-    adds r4, r1\n\
-    ldrh r1, [r4, 0x4]\n\
-    lsls r1, 22\n\
-    lsrs r1, 17\n\
-    ldr r6, =0x06010000\n\
-    adds r1, r6\n\
-    movs r2, 0x80\n\
-    lsls r2, 4\n\
-    mov r10, r2\n\
-    movs r3, 0x1\n\
-    bl RequestDma3Copy\n\
-    ldr r0, [r7]\n\
-    ldr r0, [r0, 0x38]\n\
-    ldrh r1, [r5, 0x4]\n\
-    lsls r1, 22\n\
-    lsrs r1, 17\n\
-    adds r1, r6\n\
-    mov r2, r10\n\
-    movs r3, 0x1\n\
-    bl RequestDma3Copy\n\
-    mov r3, r8\n\
-    strh r3, [r4, 0x2E]\n\
-    mov r0, r9\n\
-    strh r0, [r5, 0x2E]\n\
-    mov r1, sp\n\
-    ldrh r1, [r1, 0xC]\n\
-    strh r1, [r4, 0x30]\n\
-    mov r2, sp\n\
-    ldrh r2, [r2, 0xC]\n\
-    strh r2, [r5, 0x30]\n\
-    mov r0, r9\n\
-    add sp, 0x10\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80DCB78(u8 spriteId)
 {
@@ -3772,7 +3426,7 @@ void sub_80DCD08(void)
         gHeap[0x1A000] = 0;
     else
         gHeap[0x1A000] = 1;
-    
+
     if(gHeap[0x1A000] == 0)
     {
         sub_80DAEA4();
@@ -3784,191 +3438,55 @@ void sub_80DCD08(void)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80DCD48(void)
 {
-    u8 r5 = 0;
-    u8 sp8[8];
+    u8 i;
+    s16 value;
+    u8 *txtPtr;
+    u8 text[8];
 
-    if (gUnknown_020322D5 != 0)
+    if (gUnknown_020322D5 == 0)
+        return;
+
+    switch (gHeap[0x1A000])
     {
-        u8 i;
-        s16 r2;
-
-        
+    case 0:
+        break;
+    case 2:
+    case 3:
+        sub_80DF750();
+        break;
+    default:
+        for (i = 0; i < 4; i++)
+            FillWindowPixelBuffer(i, 0);
         for (i = 0; i < 4; i++)
         {
-            r2 = sContestantStatus[i].unk4;
-            if (r2 < 0)
+            value = sContestantStatus[i].unk4;
+            txtPtr = text;
+            if (sContestantStatus[i].unk4 < 0)
             {
-                r2 = -r2;
-                sp8[0] = CHAR_HYPHEN;
-                r5++;
+                value *= -1;
+                txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
-            ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
-            Text_InitWindowAndPrintText(
-              &gUnknown_03004210,
-              sp8,
-              592 + gUnknown_02039F26[i] * 22,
-              gUnknown_083CA310[gUnknown_02039F26[i]][0],
-              gUnknown_083CA310[gUnknown_02039F26[i]][1]);
-            r5 = 0;
+            ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text, 55, 1, 7);
         }
         for (i = 0; i < 4; i++)
         {
-            r2 = sContestantStatus[i].appeal2;
-            if (r2 < 0)
+            value = sContestantStatus[i].appeal2;
+            txtPtr = text;
+            if (sContestantStatus[i].appeal2 < 0)
             {
-                r2 = -r2;
-                sp8[0] = CHAR_HYPHEN;
-                r5++;
+                value *= -1;
+                txtPtr = StringCopy(txtPtr, gText_OneDash);
             }
-            ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
-            Text_InitWindowAndPrintText(
-              &gUnknown_03004210,
-              sp8,
-              512 + gUnknown_02039F26[i] * 20,
-              gUnknown_083CA308[gUnknown_02039F26[i]][0],
-              gUnknown_083CA308[gUnknown_02039F26[i]][1]);
-            r5 = 0;
+            ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text, 5, 1, 7);
         }
-        sub_80AEB30();
+        sub_80DB2BC();
+        break;
     }
 }
-#else
-NAKED
-void sub_80DCD48(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    sub sp, 0xC\n\
-    ldr r0, =gUnknown_020322D5\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _080DCE44\n\
-    ldr r0, =gHeap\n\
-    movs r1, 0xD0\n\
-    lsls r1, 9\n\
-    adds r0, r1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _080DCE44\n\
-    cmp r0, 0\n\
-    blt _080DCD7C\n\
-    cmp r0, 0x3\n\
-    bgt _080DCD7C\n\
-    cmp r0, 0x2\n\
-    blt _080DCD7C\n\
-    bl sub_80DF750\n\
-    b _080DCE44\n\
-    .pool\n\
-_080DCD7C:\n\
-    movs r5, 0\n\
-_080DCD7E:\n\
-    adds r0, r5, 0\n\
-    movs r1, 0\n\
-    bl FillWindowPixelBuffer\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x3\n\
-    bls _080DCD7E\n\
-    movs r5, 0\n\
-_080DCD92:\n\
-    ldr r0, =gContestResources\n\
-    ldr r0, [r0]\n\
-    ldr r1, [r0, 0x4]\n\
-    lsls r0, r5, 3\n\
-    subs r0, r5\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    add r2, sp, 0x4\n\
-    ldrh r4, [r0, 0x4]\n\
-    movs r1, 0x4\n\
-    ldrsh r0, [r0, r1]\n\
-    cmp r0, 0\n\
-    bge _080DCDBC\n\
-    negs r0, r0\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    adds r0, r2, 0\n\
-    ldr r1, =gText_OneDash\n\
-    bl StringCopy\n\
-    adds r2, r0, 0\n\
-_080DCDBC:\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    adds r0, r2, 0\n\
-    movs r2, 0\n\
-    movs r3, 0x4\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, =gUnknown_02039F26\n\
-    adds r0, r5, r0\n\
-    ldrb r0, [r0]\n\
-    movs r1, 0x7\n\
-    str r1, [sp]\n\
-    add r1, sp, 0x4\n\
-    movs r2, 0x37\n\
-    movs r3, 0x1\n\
-    bl Contest_PrintTextToBg0WindowAt\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x3\n\
-    bls _080DCD92\n\
-    movs r5, 0\n\
-_080DCDEA:\n\
-    ldr r0, =gContestResources\n\
-    ldr r0, [r0]\n\
-    ldr r1, [r0, 0x4]\n\
-    lsls r0, r5, 3\n\
-    subs r0, r5\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    add r2, sp, 0x4\n\
-    ldrh r4, [r0, 0x2]\n\
-    movs r1, 0x2\n\
-    ldrsh r0, [r0, r1]\n\
-    cmp r0, 0\n\
-    bge _080DCE14\n\
-    negs r0, r0\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    adds r0, r2, 0\n\
-    ldr r1, =gText_OneDash\n\
-    bl StringCopy\n\
-    adds r2, r0, 0\n\
-_080DCE14:\n\
-    lsls r1, r4, 16\n\
-    asrs r1, 16\n\
-    adds r0, r2, 0\n\
-    movs r2, 0\n\
-    movs r3, 0x4\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, =gUnknown_02039F26\n\
-    adds r0, r5, r0\n\
-    ldrb r0, [r0]\n\
-    movs r1, 0x7\n\
-    str r1, [sp]\n\
-    add r1, sp, 0x4\n\
-    movs r2, 0x5\n\
-    movs r3, 0x1\n\
-    bl Contest_PrintTextToBg0WindowAt\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    cmp r5, 0x3\n\
-    bls _080DCDEA\n\
-    bl sub_80DB2BC\n\
-_080DCE44:\n\
-    add sp, 0xC\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80DCE58(u8 a)
 {
@@ -4062,550 +3580,122 @@ void sub_80DD04C(void)
     sub_80DAEA4();
 }
 
-#ifdef NONMATCHING
 void sub_80DD080(u8 contestant)
 {
+    u16 move;
+    u8 effect;
+    u8 rnd;
     bool8 r8;
     s32 i;
 
     sContestantStatus[contestant].appeal2 = 0;
     sContestantStatus[contestant].appeal1 = 0;
     r8 = sub_80DBA68(contestant);
-    if (r8)
+    if (!r8)
+        return;
+
+    move = sContestantStatus[contestant].currMove;
+    effect = gContestMoves[move].effect;
+
+    sContestantStatus[contestant].moveCategory = gContestMoves[sContestantStatus[contestant].currMove].contestCategory;
+    if (sContestantStatus[contestant].currMove == sContestantStatus[contestant].prevMove && sContestantStatus[contestant].currMove != MOVE_NONE)
     {
-        u16 move = sContestantStatus[contestant].currMove;
-        u8 effect = gContestMoves[move].effect;
-        u8 rnd;
-
-        sContestantStatus[contestant].moveCategory = gContestMoves[sContestantStatus[contestant].currMove].contestCategory;
-        if (sContestantStatus[contestant].currMove == sContestantStatus[contestant].prevMove && sContestantStatus[contestant].currMove != MOVE_NONE)
-        {
-            sContestantStatus[contestant].disappointedRepeat = TRUE;
-            sContestantStatus[contestant].moveRepeatCount++;
-        }
-        else
-        {
-            sContestantStatus[contestant].moveRepeatCount = 0;
-        }
-        sContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
-        sContestantStatus[contestant].appeal2 = gContestEffects[effect].appeal;
-        shared192D0.jam = gContestEffects[effect].jam;
-        shared192D0.jam2 = shared192D0.jam;
-        shared192D0.jam2 = gContestEffects[effect].jam;
-        
-        shared192D0.contestant = contestant;
-        for (i = 0; i < 4; i++)
-        {
-            sContestantStatus[i].jam = 0;
-            shared192D0.unnervedPokes[i] = 0;
-        }
-        if (sContestantStatus[contestant].hasJudgesAttention && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)
-            sContestantStatus[contestant].hasJudgesAttention = 0;
-            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition;
-        gContestEffectFuncs[effect]();
-        if (sContestantStatus[contestant].conditionMod == 1)
-            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition - 10;
-        else if (sContestantStatus[contestant].appealTripleCondition)
-            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition * 3;
-        
-        
-        sContestantStatus[contestant].unk16 = 0;
-        sContestantStatus[contestant].unk15_6 = 0;
-        if (sub_80DE1E8(contestant))
-        {
-            u8 r2 = AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove);
-
-            if (r2 != 0 && sContestantStatus[contestant].hasJudgesAttention)
-            {
-                sContestantStatus[contestant].unk16 = r2;
-                sContestantStatus[contestant].unk15_6 = 1;
-                sContestantStatus[contestant].hasJudgesAttention = 0;
-                sContestantStatus[contestant].unk17 = sContestantStatus[contestant].appeal1 * sContestantStatus[contestant].unk16;
-                sContestantStatus[contestant].unk15_3 = 1;
-            }
-            else
-            {
-                if (gContestMoves[sContestantStatus[contestant].currMove].comboStarterId != 0)
-                {
-                    sContestantStatus[contestant].hasJudgesAttention = 1;
-                    sContestantStatus[contestant].unk15_6 = 1;
-                }
-                else
-                {
-                    sContestantStatus[contestant].hasJudgesAttention = 0;
-                }
-            }
-        }
-        if (sContestantStatus[contestant].disappointedRepeat)
-            sContestantStatus[contestant].unk18 = (sContestantStatus[contestant].moveRepeatCount + 1) * 10;
-        if (sContestantStatus[contestant].nervous)
-        {
-            sContestantStatus[contestant].hasJudgesAttention = 0;
-            sContestantStatus[contestant].appeal2 = 0;
-            sContestantStatus[contestant].appeal1 = 0;
-        }
-        shared19328.bits_0 = Contest_GetMoveExcitement(sContestantStatus[contestant].currMove);
-        if (sContestantStatus[contestant].overrideCategoryExcitementMod)
-            shared19328.bits_0 = 1;
-        if (shared19328.bits_0 > 0)
-        {
-            if (sContest.applauseLevel + shared19328.bits_0 > 4)
-                shared19328.unk2 = 60;
-            else
-                shared19328.unk2 = 10;
-        }
-        else
-        {
-            shared19328.unk2 = 0;
-        }
-
-        rnd = Random() % 3;
-        for (i = 0; i < 4; i++)
-        {
-            if (i != contestant)
-            {
-                if (rnd == 0)
-                    break;
-                rnd--;
-            }
-        }
-        sContestantStatus[contestant].unk1B = i;
+        sContestantStatus[contestant].disappointedRepeat = TRUE;
+        sContestantStatus[contestant].moveRepeatCount++;
     }
-}
+    else
+    {
+        sContestantStatus[contestant].moveRepeatCount = 0;
+    }
+    sContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
+    sContestantStatus[contestant].appeal2 = sContestantStatus[contestant].appeal1;
+    shared192D0.jam = gContestEffects[effect].jam;
+    shared192D0.jam2 = shared192D0.jam;
 
-#else
-NAKED
-void sub_80DD080(u8 contestant)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    lsls r0, 24\n\
-    lsrs r6, r0, 24\n\
-    ldr r4, =gContestResources\n\
-    ldr r3, [r4]\n\
-    ldr r1, [r3, 0x4]\n\
-    lsls r7, r6, 3\n\
-    subs r0, r7, r6\n\
-    lsls r5, r0, 2\n\
-    adds r1, r5, r1\n\
-    movs r2, 0\n\
-    strh r2, [r1, 0x2]\n\
-    ldr r0, [r3, 0x4]\n\
-    adds r0, r5, r0\n\
-    strh r2, [r0]\n\
-    adds r0, r6, 0\n\
-    bl sub_80DBA68\n\
-    lsls r0, 24\n\
-    mov r8, r4\n\
-    cmp r0, 0\n\
-    bne _080DD0B4\n\
-    b _080DD3C4\n\
-_080DD0B4:\n\
-    ldr r0, [r4]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r5, r1\n\
-    ldrh r0, [r1, 0x6]\n\
-    ldr r2, =gContestMoves\n\
-    lsls r0, 3\n\
-    adds r0, r2\n\
-    ldrb r2, [r0]\n\
-    mov r9, r2\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 29\n\
-    lsrs r0, 29\n\
-    strb r0, [r1, 0xA]\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r2, r5, r0\n\
-    ldrh r0, [r2, 0x6]\n\
-    ldrh r1, [r2, 0x8]\n\
-    cmp r0, r1\n\
-    bne _080DD110\n\
-    cmp r0, 0\n\
-    beq _080DD110\n\
-    ldrb r0, [r2, 0x15]\n\
-    movs r1, 0x1\n\
-    orrs r0, r1\n\
-    strb r0, [r2, 0x15]\n\
-    ldr r0, [r4]\n\
-    ldr r2, [r0, 0x4]\n\
-    adds r2, r5, r2\n\
-    ldrb r3, [r2, 0xB]\n\
-    lsls r1, r3, 25\n\
-    lsrs r1, 29\n\
-    adds r1, 0x1\n\
-    movs r0, 0x7\n\
-    ands r1, r0\n\
-    lsls r1, 4\n\
-    movs r0, 0x71\n\
-    negs r0, r0\n\
-    ands r0, r3\n\
-    orrs r0, r1\n\
-    strb r0, [r2, 0xB]\n\
-    b _080DD12C\n\
-    .pool\n\
-_080DD110:\n\
-    ldr r4, =gContestResources\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x4]\n\
-    lsls r3, r6, 3\n\
-    subs r1, r3, r6\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    ldrb r2, [r1, 0xB]\n\
-    movs r0, 0x71\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0xB]\n\
-    mov r8, r4\n\
-    adds r7, r3, 0\n\
-_080DD12C:\n\
-    mov r2, r8\n\
-    ldr r4, [r2]\n\
-    ldr r2, [r4, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r0, 2\n\
-    adds r2, r0, r2\n\
-    ldr r3, =gContestEffects\n\
-    mov r1, r9\n\
-    lsls r5, r1, 2\n\
-    adds r3, r5, r3\n\
-    ldrb r1, [r3, 0x1]\n\
-    strh r1, [r2]\n\
-    ldr r1, [r4, 0x4]\n\
-    adds r0, r1\n\
-    ldrh r1, [r0]\n\
-    strh r1, [r0, 0x2]\n\
-    ldr r1, [r4, 0x8]\n\
-    ldrb r0, [r3, 0x2]\n\
-    strh r0, [r1, 0x4]\n\
-    ldr r1, [r4, 0x8]\n\
-    ldrh r0, [r1, 0x4]\n\
-    strh r0, [r1, 0x6]\n\
-    ldr r0, [r4, 0x8]\n\
-    strb r6, [r0, 0x11]\n\
-    movs r2, 0\n\
-    mov r9, r5\n\
-    mov r4, r8\n\
-    movs r3, 0\n\
-    movs r1, 0\n\
-_080DD166:\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r0, r1, r0\n\
-    strb r3, [r0, 0xE]\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x8]\n\
-    adds r0, 0xD\n\
-    adds r0, r2\n\
-    strb r3, [r0]\n\
-    adds r1, 0x1C\n\
-    adds r2, 0x1\n\
-    cmp r2, 0x3\n\
-    ble _080DD166\n\
-    ldr r5, =gContestResources\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r4, r0, 2\n\
-    adds r2, r4, r1\n\
-    ldrb r1, [r2, 0x15]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DD1B4\n\
-    ldrh r0, [r2, 0x8]\n\
-    ldrh r1, [r2, 0x6]\n\
-    bl AreMovesContestCombo\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080DD1B4\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrb r2, [r1, 0x15]\n\
-    movs r0, 0x11\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0x15]\n\
-_080DD1B4:\n\
-    ldr r0, =gContestEffectFuncs\n\
-    add r0, r9\n\
-    ldr r0, [r0]\n\
-    bl _call_via_r0\n\
-    ldr r0, =gContestResources\n\
-    ldr r0, [r0]\n\
-    ldr r1, [r0, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r0, 2\n\
-    adds r2, r0, r1\n\
-    ldrb r1, [r2, 0x10]\n\
-    movs r0, 0x30\n\
-    ands r0, r1\n\
-    cmp r0, 0x10\n\
-    bne _080DD1EC\n\
-    ldrh r1, [r2, 0x2]\n\
-    subs r1, 0xA\n\
-    movs r0, 0xD\n\
-    ldrsb r0, [r2, r0]\n\
-    b _080DD206\n\
-    .pool\n\
-_080DD1EC:\n\
-    ldrb r1, [r2, 0x11]\n\
-    movs r0, 0x20\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DD200\n\
-    movs r1, 0xD\n\
-    ldrsb r1, [r2, r1]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    b _080DD204\n\
-_080DD200:\n\
-    movs r0, 0xD\n\
-    ldrsb r0, [r2, r0]\n\
-_080DD204:\n\
-    ldrh r1, [r2, 0x2]\n\
-_080DD206:\n\
-    adds r0, r1\n\
-    strh r0, [r2, 0x2]\n\
-    ldr r5, =gContestResources\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r4, r0, 2\n\
-    adds r1, r4, r1\n\
-    movs r0, 0\n\
-    strb r0, [r1, 0x16]\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrb r2, [r1, 0x15]\n\
-    movs r0, 0x41\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0x15]\n\
-    adds r0, r6, 0\n\
-    bl sub_80DE1E8\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080DD2E2\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrh r0, [r1, 0x8]\n\
-    ldrh r1, [r1, 0x6]\n\
-    bl AreMovesContestCombo\n\
-    lsls r0, 24\n\
-    lsrs r3, r0, 24\n\
-    cmp r3, 0\n\
-    beq _080DD29C\n\
-    ldr r0, [r5]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r2, r4, r0\n\
-    ldrb r1, [r2, 0x15]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DD29C\n\
-    strb r3, [r2, 0x16]\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrb r0, [r1, 0x15]\n\
-    movs r2, 0x40\n\
-    orrs r0, r2\n\
-    strb r0, [r1, 0x15]\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrb r2, [r1, 0x15]\n\
-    movs r0, 0x11\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0x15]\n\
-    ldr r0, [r5]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r0, r4, r0\n\
-    movs r1, 0\n\
-    ldrsh r2, [r0, r1]\n\
-    ldrb r1, [r0, 0x16]\n\
-    muls r1, r2\n\
-    strb r1, [r0, 0x17]\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrb r0, [r1, 0x15]\n\
-    movs r2, 0x8\n\
-    b _080DD2C8\n\
-    .pool\n\
-_080DD29C:\n\
-    ldr r2, =gContestMoves\n\
-    ldr r5, =gContestResources\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r4, r0, 2\n\
-    adds r3, r4, r1\n\
-    ldrh r0, [r3, 0x6]\n\
-    lsls r0, 3\n\
-    adds r0, r2\n\
-    ldrb r0, [r0, 0x2]\n\
-    cmp r0, 0\n\
-    beq _080DD2D8\n\
-    ldrb r0, [r3, 0x15]\n\
-    movs r1, 0x10\n\
-    orrs r0, r1\n\
-    strb r0, [r3, 0x15]\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    adds r1, r4, r1\n\
-    ldrb r0, [r1, 0x15]\n\
-    movs r2, 0x40\n\
-_080DD2C8:\n\
-    orrs r0, r2\n\
-    strb r0, [r1, 0x15]\n\
-    b _080DD2E2\n\
-    .pool\n\
-_080DD2D8:\n\
-    ldrb r1, [r3, 0x15]\n\
-    movs r0, 0x11\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r3, 0x15]\n\
-_080DD2E2:\n\
-    ldr r5, =gContestResources\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r4, r0, 2\n\
-    adds r2, r4, r1\n\
-    ldrb r1, [r2, 0x15]\n\
-    movs r0, 0x1\n\
-    mov r8, r0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DD30A\n\
-    ldrb r0, [r2, 0xB]\n\
-    lsls r0, 25\n\
-    lsrs r0, 29\n\
-    adds r0, 0x1\n\
-    lsls r1, r0, 2\n\
-    adds r1, r0\n\
-    lsls r1, 1\n\
-    strb r1, [r2, 0x18]\n\
-_080DD30A:\n\
-    ldr r0, [r5]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r2, r4, r0\n\
-    ldrb r1, [r2, 0xC]\n\
-    mov r0, r8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DD334\n\
-    ldrb r1, [r2, 0x15]\n\
-    movs r0, 0x11\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r2, 0x15]\n\
-    ldr r2, [r5]\n\
-    ldr r0, [r2, 0x4]\n\
-    adds r0, r4, r0\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0x2]\n\
-    ldr r0, [r2, 0x4]\n\
-    adds r0, r4, r0\n\
-    strh r1, [r0]\n\
-_080DD334:\n\
-    ldr r0, [r5]\n\
-    ldr r0, [r0, 0x4]\n\
-    adds r0, r4, r0\n\
-    ldrh r0, [r0, 0x6]\n\
-    bl Contest_GetMoveExcitement\n\
-    ldr r1, [r5]\n\
-    ldr r1, [r1, 0x10]\n\
-    strb r0, [r1]\n\
-    ldr r2, [r5]\n\
-    ldr r0, [r2, 0x4]\n\
-    adds r0, r4, r0\n\
-    ldrb r1, [r0, 0x11]\n\
-    movs r0, 0x10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DD35C\n\
-    ldr r0, [r2, 0x10]\n\
-    mov r1, r8\n\
-    strb r1, [r0]\n\
-_080DD35C:\n\
-    ldr r1, [r5]\n\
-    ldr r3, [r1, 0x10]\n\
-    movs r0, 0\n\
-    ldrsb r0, [r3, r0]\n\
-    cmp r0, 0\n\
-    ble _080DD388\n\
-    ldr r0, [r1]\n\
-    ldrb r0, [r0, 0x13]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    movs r1, 0\n\
-    ldrsb r1, [r3, r1]\n\
-    adds r0, r1\n\
-    cmp r0, 0x4\n\
-    ble _080DD384\n\
-    movs r0, 0x3C\n\
-    b _080DD38A\n\
-    .pool\n\
-_080DD384:\n\
-    movs r0, 0xA\n\
-    b _080DD38A\n\
-_080DD388:\n\
-    movs r0, 0\n\
-_080DD38A:\n\
-    strb r0, [r3, 0x2]\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0x3\n\
-    bl __umodsi3\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    movs r2, 0\n\
-    b _080DD3AE\n\
-_080DD3A2:\n\
-    subs r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-_080DD3A8:\n\
-    adds r2, 0x1\n\
-    cmp r2, 0x3\n\
-    bgt _080DD3B6\n\
-_080DD3AE:\n\
-    cmp r2, r6\n\
-    beq _080DD3A8\n\
-    cmp r0, 0\n\
-    bne _080DD3A2\n\
-_080DD3B6:\n\
-    ldr r0, =gContestResources\n\
-    ldr r0, [r0]\n\
-    ldr r1, [r0, 0x4]\n\
-    subs r0, r7, r6\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    strb r2, [r0, 0x1B]\n\
-_080DD3C4:\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
+    shared192D0.contestant = contestant;
+    for (i = 0; i < 4; i++)
+    {
+        sContestantStatus[i].jam = 0;
+        shared192D0.unnervedPokes[i] = 0;
+    }
+
+    if (sContestantStatus[contestant].hasJudgesAttention
+        && !AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove))
+        sContestantStatus[contestant].hasJudgesAttention = 0;
+
+    gContestEffectFuncs[effect]();
+
+    if (sContestantStatus[contestant].conditionMod == 1)
+        sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition - 10;
+    else if (sContestantStatus[contestant].appealTripleCondition)
+        sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition * 3;
+    else
+        sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition;
+
+    sContestantStatus[contestant].unk16 = 0;
+    sContestantStatus[contestant].unk15_6 = 0;
+    if (sub_80DE1E8(contestant))
+    {
+        u8 r2 = AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove);
+
+        if (r2 != 0 && sContestantStatus[contestant].hasJudgesAttention)
+        {
+            sContestantStatus[contestant].unk16 = r2;
+            sContestantStatus[contestant].unk15_6 = 1;
+            sContestantStatus[contestant].hasJudgesAttention = 0;
+            sContestantStatus[contestant].unk17 = sContestantStatus[contestant].appeal1 * sContestantStatus[contestant].unk16;
+            sContestantStatus[contestant].unk15_3 = 1;
+        }
+        else
+        {
+            if (gContestMoves[sContestantStatus[contestant].currMove].comboStarterId != 0)
+            {
+                sContestantStatus[contestant].hasJudgesAttention = 1;
+                sContestantStatus[contestant].unk15_6 = 1;
+            }
+            else
+            {
+                sContestantStatus[contestant].hasJudgesAttention = 0;
+            }
+        }
+    }
+    if (sContestantStatus[contestant].disappointedRepeat)
+        sContestantStatus[contestant].unk18 = (sContestantStatus[contestant].moveRepeatCount + 1) * 10;
+
+    if (sContestantStatus[contestant].nervous)
+    {
+        sContestantStatus[contestant].hasJudgesAttention = 0;
+        sContestantStatus[contestant].appeal2 = 0;
+        sContestantStatus[contestant].appeal1 = 0;
+    }
+    shared19328.bits_0 = Contest_GetMoveExcitement(sContestantStatus[contestant].currMove);
+    if (sContestantStatus[contestant].overrideCategoryExcitementMod)
+        shared19328.bits_0 = 1;
+
+    if (shared19328.bits_0 > 0)
+    {
+        if (sContest.applauseLevel + shared19328.bits_0 > 4)
+            shared19328.unk2 = 60;
+        else
+            shared19328.unk2 = 10;
+    }
+    else
+    {
+        shared19328.unk2 = 0;
+    }
+
+    rnd = Random() % 3;
+    for (i = 0; i < 4; i++)
+    {
+        if (i != contestant)
+        {
+            if (rnd == 0)
+                break;
+            rnd--;
+        }
+    }
+    sContestantStatus[contestant].unk1B = i;
 }
-#endif
 
 void SetContestantEffectStringID(u8 a, u8 b)
 {
@@ -4782,9 +3872,9 @@ void sub_80DD940(void)
             src = gContestApplauseMeterGfx + 64;
         else
             src = gContestApplauseMeterGfx;
-        CpuCopy32(src, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);  
-        CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32); 
-        
+        CpuCopy32(src, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
+        CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
+
         if (sContest.applauseLevel > 4)
             sub_80DDA20();
     }
@@ -5054,24 +4144,22 @@ const u8 *GetTurnOrderNumberGfx(u8 contestant)
 void sub_80DE12C(void)
 {
     s32 r7 = 0;
-    u32 r10 = 2;
-    u32 r8 = 1;
-    u32 r9 = 0x11;
-    
-    for(r7 = 0; r7 < 4; r7++)
+    u8 r10 = 2;
+    u8 r8 = 1;
+    u8 r9 = 0x11;
+
+    for (r7 = 0; r7 < 4; r7++)
     {
-        u32 r6;
-        u16 var;
-        if(shared192D0.unnervedPokes[r7] != 0)
-            if(Contest_IsMonsTurnDisabled(r7) == FALSE)
-            {
-                r6 = gUnknown_02039F26[r7] * 5 + 2;
-                var = sub_80DB748(3);
-                ContestBG_FillBoxWithIncrementingTile(0, var, 0x14, r6, r10, r8, r9, r8);   
-                var += 16;
-                ContestBG_FillBoxWithIncrementingTile(0, var, 0x14, r6 + 1, r10, r8, r9, r8);
-                PlaySE(SE_C_PASI);
-            }   
+        if (shared192D0.unnervedPokes[r7] != 0 && !Contest_IsMonsTurnDisabled(r7))
+        {
+            u32 r6 = gUnknown_02039F26[r7] * 5 + 2;
+            u16 var = sub_80DB748(3);
+
+            ContestBG_FillBoxWithIncrementingTile(0, var, 0x14, r6, r10, r8, r9, r8);
+            var += 16;
+            ContestBG_FillBoxWithIncrementingTile(0, var, 0x14, r6 + 1, r10, r8, r9, r8);
+            PlaySE(SE_C_PASI);
+        }
     }
 }
 
@@ -5083,242 +4171,58 @@ bool8 sub_80DE1E8(u8 a)
         return TRUE;
 }
 
-#ifdef NONMATCHING
 void sub_80DE224(void)
 {
     s32 i;
-    u16 bg0Cnt;
-    u16 bg1Cnt;
-    u16 bg2Cnt;
-    u16 var;
+    u16 bg0Cnt, bg1Cnt, bg2Cnt;
 
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
-    ((struct BgCnt *)&bg1Cnt)->priority = 0;
-    ((struct BgCnt *)&bg1Cnt)->screenSize = 2;
-    ((struct BgCnt *)&bg1Cnt)->areaOverflowMode = 0;
-    ((struct BgCnt *)&bg1Cnt)->charBaseBlock = 0;
-    
-    
+    ((vBgCnt *)&bg1Cnt)->priority = 0;
+    ((vBgCnt *)&bg1Cnt)->screenSize = 2;
+    ((vBgCnt *)&bg1Cnt)->areaOverflowMode = 0;
+    ((vBgCnt *)&bg1Cnt)->charBaseBlock = 0;
+
     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
-    
+
     bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
-    ((struct BgCnt *)&bg0Cnt)->priority = 0;
-    
     bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
-    ((struct BgCnt *)&bg2Cnt)->priority = 0;
-    
+    ((vBgCnt *)&bg0Cnt)->priority = 1;
+    ((vBgCnt *)&bg2Cnt)->priority = 1;
+
     SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
     SetGpuReg(REG_OFFSET_BG2CNT, bg2Cnt);
-    
+
     gBattle_BG1_X = DISPLAY_WIDTH;
     gBattle_BG1_Y = DISPLAY_HEIGHT;
-    SetGpuReg(REG_OFFSET_BG1HOFS, DISPLAY_WIDTH);
-    SetGpuReg(REG_OFFSET_BG1VOFS, DISPLAY_HEIGHT);
-    var = 0;
-    
-    CpuSet(&var, &sContest.unk19214,  0x05000400);
-    
+    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
+    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
+
+    CpuFill32(0, gContestResources->field_24[1], 0x1000);
+
     CopyToBgTilemapBuffer(1, gUnknown_08C17980, 0, 0);
     Contest_SetBgCopyFlags(1);
-    
+
     for (i = 0; i < 4; i++)
     {
         gSprites[gContestResources->field_14[i].unk0].oam.priority = 1;
         gSprites[gContestResources->field_14[i].unk1].oam.priority = 1;
     }
-
-   /* ((vBgCnt *)&REG_BG1CNT)->priority = 0;
-    ((vBgCnt *)&REG_BG1CNT)->screenSize = 1;
-    ((vBgCnt *)&REG_BG1CNT)->areaOverflowMode = 0;
-
-    
-
-    DmaClear32(3, (void *)(VRAM + 0xF000), 0x1000);
-    LZDecompressVram(gUnknown_08D17C3C, (void *)(VRAM + 0xF000));
-
-    ((vBgCnt *)&REG_BG1CNT)->charBaseBlock = 0;
-
-    for (i = 0; i < 4; i++)
-    {
-        gSprites[shared19338[i].unk0].oam.priority = 1;
-        gSprites[shared19338[i].unk1].oam.priority = 1;
-    }
-
-    ((vBgCnt *)&REG_BG2CNT)->priority = 1;
-    ((vBgCnt *)&REG_BG0CNT)->priority = 1;
-    ((vBgCnt *)&REG_BG1CNT)->screenSize = 2; */
 }
-#else
-NAKED
-void sub_80DE224(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0xC\n\
-    movs r0, 0xA\n\
-    bl GetGpuReg\n\
-    mov r1, sp\n\
-    strh r0, [r1]\n\
-    mov r2, sp\n\
-    ldrb r1, [r2]\n\
-    movs r4, 0x4\n\
-    negs r4, r4\n\
-    adds r0, r4, 0\n\
-    ands r0, r1\n\
-    strb r0, [r2]\n\
-    ldrb r1, [r2, 0x1]\n\
-    movs r0, 0x3F\n\
-    ands r0, r1\n\
-    movs r1, 0x80\n\
-    orrs r0, r1\n\
-    strb r0, [r2, 0x1]\n\
-    ldrb r1, [r2, 0x1]\n\
-    movs r0, 0x21\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r2, 0x1]\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0xD\n\
-    negs r0, r0\n\
-    mov r8, r0\n\
-    ands r0, r1\n\
-    strb r0, [r2]\n\
-    mov r0, sp\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0xA\n\
-    bl SetGpuReg\n\
-    movs r0, 0x8\n\
-    bl GetGpuReg\n\
-    mov r6, sp\n\
-    adds r6, 0x2\n\
-    strh r0, [r6]\n\
-    movs r0, 0xC\n\
-    bl GetGpuReg\n\
-    add r5, sp, 0x4\n\
-    strh r0, [r5]\n\
-    ldrb r1, [r6]\n\
-    adds r0, r4, 0\n\
-    ands r0, r1\n\
-    movs r1, 0x1\n\
-    orrs r0, r1\n\
-    strb r0, [r6]\n\
-    ldrb r0, [r5]\n\
-    ands r4, r0\n\
-    orrs r4, r1\n\
-    strb r4, [r5]\n\
-    ldrh r1, [r6]\n\
-    movs r0, 0x8\n\
-    bl SetGpuReg\n\
-    ldrh r1, [r5]\n\
-    movs r0, 0xC\n\
-    bl SetGpuReg\n\
-    ldr r1, =gBattle_BG1_X\n\
-    movs r0, 0xF0\n\
-    strh r0, [r1]\n\
-    ldr r4, =gBattle_BG1_Y\n\
-    movs r0, 0xA0\n\
-    strh r0, [r4]\n\
-    movs r0, 0x14\n\
-    movs r1, 0xF0\n\
-    bl SetGpuReg\n\
-    ldrh r1, [r4]\n\
-    movs r0, 0x16\n\
-    bl SetGpuReg\n\
-    movs r0, 0\n\
-    str r0, [sp, 0x8]\n\
-    add r0, sp, 0x8\n\
-    ldr r4, =gContestResources\n\
-    ldr r1, [r4]\n\
-    ldr r1, [r1, 0x28]\n\
-    ldr r2, =0x05000400\n\
-    bl CpuSet\n\
-    ldr r1, =gUnknown_08C17980\n\
-    movs r0, 0x1\n\
-    movs r2, 0\n\
-    movs r3, 0\n\
-    bl CopyToBgTilemapBuffer\n\
-    movs r0, 0x1\n\
-    bl Contest_SetBgCopyFlags\n\
-    movs r5, 0\n\
-    ldr r7, =gSprites\n\
-    movs r6, 0x4\n\
-_080DE2F0:\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x14]\n\
-    lsls r3, r5, 2\n\
-    adds r0, r3, r0\n\
-    ldrb r0, [r0]\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r7\n\
-    ldrb r2, [r1, 0x5]\n\
-    mov r0, r8\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strb r0, [r1, 0x5]\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x14]\n\
-    adds r3, r0\n\
-    ldrb r0, [r3, 0x1]\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r7\n\
-    ldrb r2, [r1, 0x5]\n\
-    mov r0, r8\n\
-    ands r0, r2\n\
-    orrs r0, r6\n\
-    strb r0, [r1, 0x5]\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x3\n\
-    ble _080DE2F0\n\
-    add sp, 0xC\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
-#ifdef NONMATCHING
 void sub_80DE350(void)
 {
     s32 i;
-    s16 var;
     u16 bg1Cnt;
-    u8 *spriteID;
-    u16 something;
 
     RequestDma3Fill(0,(void *)(VRAM + 0x8000), 0x2000, 0x1);
-    //DmaClearLarge32(3, (void *)(VRAM + 0x8000), 0x2000, 0x1000);
-    
-    /*bg1Cnt = 0;
-    something = 0;
-    var = bg1Cnt;
-    spriteID = (u8 *)&gContestResources;*/
-    
-    var = 0;
-    
-    
-    CpuSet(&var, &gContestResources->field_24[1], 0x05000400);
-    //CpuSet(src, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 17 + i)
+    CpuFill32(0, gContestResources->field_24[1], 0x1000);
     Contest_SetBgCopyFlags(1);
-    
-    //DmaClear32(3, (void *)(VRAM + 0xF000), 0x1000);
-    
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
-    something = bg1Cnt;
-    ((struct BgCnt *) &bg1Cnt)->priority = 1;
-    ((struct BgCnt *) &bg1Cnt)->screenSize = 1;
-    ((struct BgCnt *) &bg1Cnt)->areaOverflowMode = 0;
-    ((struct BgCnt *) &bg1Cnt)->charBaseBlock = 2;
-    
+    ((vBgCnt *) &bg1Cnt)->priority = 1;
+    ((vBgCnt *) &bg1Cnt)->screenSize = 0;
+    ((vBgCnt *) &bg1Cnt)->areaOverflowMode = 0;
+    ((vBgCnt *) &bg1Cnt)->charBaseBlock = 2;
+
     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
 
     gBattle_BG1_X = 0;
@@ -5330,104 +4234,6 @@ void sub_80DE350(void)
         gSprites[gContestResources->field_14[i].unk1].oam.priority = 0;
     }
 }
-#else
-NAKED
-void sub_80DE350(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x8\n\
-    ldr r1, =0x06008000\n\
-    movs r2, 0x80\n\
-    lsls r2, 6\n\
-    movs r0, 0\n\
-    movs r3, 0x1\n\
-    bl RequestDma3Fill\n\
-    movs r5, 0\n\
-    str r5, [sp]\n\
-    ldr r6, =gContestResources\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r0, 0x28]\n\
-    ldr r2, =0x05000400\n\
-    mov r0, sp\n\
-    bl CpuSet\n\
-    movs r0, 0x1\n\
-    bl Contest_SetBgCopyFlags\n\
-    movs r0, 0xA\n\
-    bl GetGpuReg\n\
-    add r3, sp, 0x4\n\
-    strh r0, [r3]\n\
-    ldrb r1, [r3]\n\
-    movs r0, 0x4\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    movs r1, 0x1\n\
-    orrs r0, r1\n\
-    strb r0, [r3]\n\
-    mov r1, sp\n\
-    adds r1, 0x5\n\
-    ldrb r2, [r1]\n\
-    movs r0, 0x3F\n\
-    ands r0, r2\n\
-    strb r0, [r1]\n\
-    ldrb r2, [r1]\n\
-    movs r0, 0x21\n\
-    negs r0, r0\n\
-    ands r0, r2\n\
-    strb r0, [r1]\n\
-    ldrb r1, [r3]\n\
-    movs r4, 0xD\n\
-    negs r4, r4\n\
-    adds r0, r4, 0\n\
-    ands r0, r1\n\
-    movs r1, 0x8\n\
-    orrs r0, r1\n\
-    strb r0, [r3]\n\
-    ldrh r1, [r3]\n\
-    movs r0, 0xA\n\
-    bl SetGpuReg\n\
-    ldr r0, =gBattle_BG1_X\n\
-    strh r5, [r0]\n\
-    ldr r0, =gBattle_BG1_Y\n\
-    strh r5, [r0]\n\
-    ldr r7, =gSprites\n\
-_080DE3CA:\n\
-    ldr r0, [r6]\n\
-    ldr r0, [r0, 0x14]\n\
-    lsls r3, r5, 2\n\
-    adds r0, r3, r0\n\
-    ldrb r0, [r0]\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r7\n\
-    ldrb r2, [r1, 0x5]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0x5]\n\
-    ldr r0, [r6]\n\
-    ldr r0, [r0, 0x14]\n\
-    adds r3, r0\n\
-    ldrb r0, [r3, 0x1]\n\
-    lsls r1, r0, 4\n\
-    adds r1, r0\n\
-    lsls r1, 2\n\
-    adds r1, r7\n\
-    ldrb r2, [r1, 0x5]\n\
-    adds r0, r4, 0\n\
-    ands r0, r2\n\
-    strb r0, [r1, 0x5]\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x3\n\
-    ble _080DE3CA\n\
-    add sp, 0x8\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80DE424(u8 taskId)
 {
@@ -5704,7 +4510,6 @@ void SelectContestMoveBankTarget(u16 move)
     }
 }
 
-#ifdef NONMATCHING
 void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
 {
     struct TextPrinterTemplate printerTemplate;
@@ -5718,158 +4523,46 @@ void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    
-    printerTemplate.unk = a & (1 - 0x11);
-    printerTemplate.unk = 0xF0;
-    printerTemplate.bgColor = a & (1 - 0x11) & 0x80;
-    
-    
-    
-    
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = 15;
+    printerTemplate.bgColor = 0;
+    printerTemplate.shadowColor = 8;
+
     AddTextPrinter(&printerTemplate, 0, 0);
     PutWindowTilemap(a);
     Contest_SetBgCopyFlags(0);
 }
-#else
-NAKED
-void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x10\n\
-    adds r4, r0, 0\n\
-    str r1, [sp]\n\
-    mov r0, sp\n\
-    movs r2, 0\n\
-    strb r4, [r0, 0x4]\n\
-    movs r1, 0x1\n\
-    strb r1, [r0, 0x5]\n\
-    strb r2, [r0, 0x6]\n\
-    strb r1, [r0, 0x7]\n\
-    strb r2, [r0, 0x8]\n\
-    strb r1, [r0, 0x9]\n\
-    strb r2, [r0, 0xA]\n\
-    strb r2, [r0, 0xB]\n\
-    mov r3, sp\n\
-    ldrb r2, [r3, 0xC]\n\
-    subs r1, 0x11\n\
-    adds r0, r1, 0\n\
-    ands r0, r2\n\
-    strb r0, [r3, 0xC]\n\
-    mov r2, sp\n\
-    movs r0, 0xF0\n\
-    strb r0, [r2, 0xC]\n\
-    ldrb r0, [r2, 0xD]\n\
-    ands r1, r0\n\
-    strb r1, [r2, 0xD]\n\
-    mov r1, sp\n\
-    movs r0, 0x80\n\
-    strb r0, [r1, 0xD]\n\
-    mov r0, sp\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    bl AddTextPrinter\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r0, r4, 0\n\
-    bl PutWindowTilemap\n\
-    movs r0, 0\n\
-    bl Contest_SetBgCopyFlags\n\
-    add sp, 0x10\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
-#ifdef NONMATCHING
-void Contest_PrintTextToBg0WindowAt(u32 a, u8 *b, s32 c, u8 d, u8 e)
+void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId)
 {
     struct TextPrinterTemplate printerTemplate;
 
-    printerTemplate.currentChar = b;
-    printerTemplate.windowId = a;
-    printerTemplate.fontId = 1;
-    printerTemplate.x = c;
-    printerTemplate.y = d;
-    printerTemplate.currentX = c;
-    printerTemplate.currentY = d;
+    printerTemplate.currentChar = currChar;
+    printerTemplate.windowId = windowId;
+    printerTemplate.fontId = fontId;
+    printerTemplate.x = x;
+    printerTemplate.y = y;
+    printerTemplate.currentX = x;
+    printerTemplate.currentY = y;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    
-    printerTemplate.unk = a & (1 - 0x10);
-    printerTemplate.unk = 0xF0;
-    printerTemplate.bgColor = a & (1 - 0x11) & 0x80;
-    
-    
-    
-    
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = 15;
+    printerTemplate.bgColor = 0;
+    printerTemplate.shadowColor = 8;
+
     AddTextPrinter(&printerTemplate, 0, 0);
-    PutWindowTilemap(a);
+    PutWindowTilemap(windowId);
     Contest_SetBgCopyFlags(0);
 }
-#else
-NAKED
-void Contest_PrintTextToBg0WindowAt(u32 a, u8 *b, s32 c, u8 d, u8 e)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    sub sp, 0x10\n\
-    adds r5, r0, 0\n\
-    ldr r4, [sp, 0x1C]\n\
-    str r1, [sp]\n\
-    mov r0, sp\n\
-    movs r1, 0\n\
-    strb r5, [r0, 0x4]\n\
-    strb r4, [r0, 0x5]\n\
-    strb r2, [r0, 0x6]\n\
-    strb r3, [r0, 0x7]\n\
-    strb r2, [r0, 0x8]\n\
-    strb r3, [r0, 0x9]\n\
-    strb r1, [r0, 0xA]\n\
-    strb r1, [r0, 0xB]\n\
-    mov r3, sp\n\
-    ldrb r2, [r3, 0xC]\n\
-    subs r1, 0x10\n\
-    adds r0, r1, 0\n\
-    ands r0, r2\n\
-    strb r0, [r3, 0xC]\n\
-    mov r2, sp\n\
-    movs r0, 0xF0\n\
-    strb r0, [r2, 0xC]\n\
-    ldrb r0, [r2, 0xD]\n\
-    ands r1, r0\n\
-    strb r1, [r2, 0xD]\n\
-    mov r1, sp\n\
-    movs r0, 0x80\n\
-    strb r0, [r1, 0xD]\n\
-    mov r0, sp\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    bl AddTextPrinter\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    adds r0, r5, 0\n\
-    bl PutWindowTilemap\n\
-    movs r0, 0\n\
-    bl Contest_SetBgCopyFlags\n\
-    add sp, 0x10\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
-#ifdef NONMATCHING
-void Contest_StartTextPrinter(const u8 *a, u32 b)
+void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
 {
     struct TextPrinterTemplate printerTemplate;
-    u8 var;
+    u8 speed;
 
-    printerTemplate.currentChar = a;
-    printerTemplate.windowId = b;
+    printerTemplate.currentChar = currChar;
+    printerTemplate.windowId = 4;
     printerTemplate.fontId = 1;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
@@ -5877,166 +4570,33 @@ void Contest_StartTextPrinter(const u8 *a, u32 b)
     printerTemplate.currentY = 1;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    
-    printerTemplate.unk = b & -0x10;
-    printerTemplate.unk = 0x10;
-    printerTemplate.bgColor = b & (1 - 0x10) & 0x80;
-    
-    if(!b)
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = 1;
+    printerTemplate.bgColor = 0;
+    printerTemplate.shadowColor = 8;
+
+    if (!b)
     {
-        var = 0;
-        AddTextPrinter(&printerTemplate, var, 0);
+        AddTextPrinter(&printerTemplate, 0, 0);
     }
-    else 
-    {   
-        if(gIsLinkContest & 1)
-        {
-            var = 4;
-            AddTextPrinter(&printerTemplate, var, 0);
-        }
+    else
+    {
+        if (gIsLinkContest & 1)
+            speed = 4;
         else
-        {
-            var = GetPlayerTextSpeedDelay();
-            AddTextPrinter(&printerTemplate, var, 0);
-        }
+            speed = GetPlayerTextSpeedDelay();
+        AddTextPrinter(&printerTemplate, speed, 0);
     }
-    
+
     PutWindowTilemap(4);
     Contest_SetBgCopyFlags(0);
-    
 }
-}
-#else
-NAKED
-void Contest_StartTextPrinter(const u8 *a, u32 b)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    sub sp, 0x10\n\
-    str r0, [sp]\n\
-    mov r2, sp\n\
-    movs r3, 0\n\
-    movs r0, 0x4\n\
-    strb r0, [r2, 0x4]\n\
-    mov r0, sp\n\
-    movs r5, 0x1\n\
-    strb r5, [r0, 0x5]\n\
-    strb r3, [r0, 0x6]\n\
-    strb r5, [r0, 0x7]\n\
-    strb r3, [r0, 0x8]\n\
-    strb r5, [r0, 0x9]\n\
-    strb r3, [r0, 0xA]\n\
-    strb r3, [r0, 0xB]\n\
-    mov r4, sp\n\
-    ldrb r3, [r4, 0xC]\n\
-    movs r2, 0x10\n\
-    negs r2, r2\n\
-    adds r0, r2, 0\n\
-    ands r0, r3\n\
-    strb r0, [r4, 0xC]\n\
-    mov r3, sp\n\
-    movs r0, 0x10\n\
-    strb r0, [r3, 0xC]\n\
-    ldrb r0, [r3, 0xD]\n\
-    ands r2, r0\n\
-    strb r2, [r3, 0xD]\n\
-    mov r2, sp\n\
-    movs r0, 0x80\n\
-    strb r0, [r2, 0xD]\n\
-    cmp r1, 0\n\
-    bne _080DEC80\n\
-    mov r0, sp\n\
-    movs r1, 0\n\
-    movs r2, 0\n\
-    bl AddTextPrinter\n\
-    b _080DECA4\n\
-_080DEC80:\n\
-    ldr r0, =gIsLinkContest\n\
-    ldrb r1, [r0]\n\
-    adds r0, r5, 0\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080DEC94\n\
-    movs r1, 0x4\n\
-    b _080DEC9C\n\
-    .pool\n\
-_080DEC94:\n\
-    bl GetPlayerTextSpeedDelay\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-_080DEC9C:\n\
-    mov r0, sp\n\
-    movs r2, 0\n\
-    bl AddTextPrinter\n\
-_080DECA4:\n\
-    movs r0, 0x4\n\
-    bl PutWindowTilemap\n\
-    movs r0, 0\n\
-    bl Contest_SetBgCopyFlags\n\
-    add sp, 0x10\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
-#ifdef NONMATCHING
-void ContestBG_FillBoxWithIncrementingTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g, u8 h)
+void ContestBG_FillBoxWithIncrementingTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g, s16 h)
 {
-    s16 var =  h;
-    WriteSequenceToBgTilemapBuffer(a, b, c, d, e, f, g, var);
+    WriteSequenceToBgTilemapBuffer(a, b, c, d, e, f, g, h);
     Contest_SetBgCopyFlags(a);
 }
-#else
-NAKED   
-void ContestBG_FillBoxWithIncrementingTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g, u8 h)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x10\n\
-    mov r8, r0\n\
-    ldr r0, [sp, 0x28]\n\
-    ldr r4, [sp, 0x2C]\n\
-    ldr r5, [sp, 0x30]\n\
-    ldr r6, [sp, 0x34]\n\
-    mov r7, r8\n\
-    lsls r7, 24\n\
-    lsrs r7, 24\n\
-    mov r8, r7\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r3, 24\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    str r0, [sp]\n\
-    str r4, [sp, 0x4]\n\
-    str r5, [sp, 0x8]\n\
-    lsls r6, 16\n\
-    asrs r6, 16\n\
-    str r6, [sp, 0xC]\n\
-    mov r0, r8\n\
-    bl WriteSequenceToBgTilemapBuffer\n\
-    mov r0, r8\n\
-    bl Contest_SetBgCopyFlags\n\
-    add sp, 0x10\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 void ContestBG_FillBoxWithTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g)
 {
@@ -6058,8 +4618,8 @@ void ResetContestLinkResults(void)
 {
     s32 i;
     s32 j;
-    
-    for(i = 0; i < 5; i++)  
+
+    for(i = 0; i < 5; i++)
         for(j = 0; j < 4; j++)
             gSaveBlock2Ptr->contestLinkResults[i][j] = 0;
 }
@@ -6107,7 +4667,7 @@ bool8 sub_80DEDA8(u8 a)
             gSaveBlock1Ptr->contestWinners[r4].contestRank = 4;
         else
             gSaveBlock1Ptr->contestWinners[r4].contestRank = gSpecialVar_ContestRank;
-        
+
         if (a != 0xFF)
             gSaveBlock1Ptr->contestWinners[r4].contestCategory = gSpecialVar_ContestCategory;
         else
