@@ -5106,10 +5106,10 @@ static u8 sub_80DF940(u8 *nickname)
                 || *nickname == CHAR_SLASH
                 || *nickname == CHAR_HYPHEN
                 || *nickname == CHAR_ELLIPSIS
-                || *nickname == CHAR_DOUBLE_QUOTATION_LEFT
-                || *nickname == CHAR_DOUBLE_QUOTATION_RIGHT
-                || *nickname == CHAR_SINGLE_QUOTATION_LEFT
-                || *nickname == CHAR_DOUBLE_QUOTATION_LEFT) // Most likely a typo, CHAR_SINGLE_QUOTATION_RIGHT should be here instead.
+                || *nickname == CHAR_DBL_QUOT_LEFT
+                || *nickname == CHAR_DBL_QUOT_RIGHT
+                || *nickname == CHAR_SGL_QUOT_LEFT
+                || *nickname == CHAR_DBL_QUOT_LEFT) // Most likely a typo, CHAR_SGL_QUOT_RIGHT should be here instead.
             {
                 nickname++;
             }
