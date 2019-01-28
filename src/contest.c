@@ -21,6 +21,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
+#include "new_game.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -44,161 +45,155 @@
 #include "constants/rgb.h"
 #include "contest_ai.h"
 
-extern void (*gFieldCallback)(void);
+extern void sub_80FC9F8(u8); // contest_link_80FC4F4.c
 
-void sub_80D782C(void);
-void sub_80D7C7C(u8 taskId);
-void sub_80D7CB4(u8 taskId);
-void sub_80D7DAC(u8 taskId);
-void sub_80D7DC8(u8 taskId);
-void sub_80D7DE8(u8 taskId);
-bool8 sub_80D7E44(u8 *);
-void sub_80D80C8(u8 taskId);
-void sub_80D8108(u8 taskId);
-void vblank_cb_battle(void);
-void sub_80D823C(void);
-void sub_80D833C(u8 taskId);
-void sub_80D8424(u8 taskId);
-void sub_80D8610(u8 taskId);
-void sub_80D8490(u8 taskId);
-void sub_80D880C(s8);
-void sub_80D883C(s8);
-void sub_80D8894(u8 taskId);
-void sub_80D892C(u8 taskId);
-void sub_80D895C(u8 taskId);
-void sub_80D8A04(u8 taskId);
-void sub_80D8A50(u8 taskId);
-void sub_80D8A88(u8 taskId);
-void sub_80D8B38(u8 taskId);
-void sub_80DA110(u8);
-void sub_80DA134(struct Sprite *);
-void sub_80DA164(struct Sprite *);
-void sub_80DA198(u8);
-void sub_80DA25C(u8);
-void sub_80DA28C(u8);
-void sub_80DA31C(u8);
-void sub_80DA348(u8);
-void sub_80DA38C(u8);
-void sub_80DA3CC(u8);
-void sub_80DA464(u8);
-void sub_80DA49C(u8);
-void sub_80DA4CC(u8);
-void sub_80DA51C(u8);
-void sub_80DA5B4(u8);
-void sub_80DA5E8(u8);
-void sub_80DA6B4(u8);
-void sub_80DA700(u8);
-void sub_80DA740(u8);
-void sub_80DA7A0(u8);
-void sub_80DA7EC(u8);
-void sub_80DA830(u8);
-void sub_80DA874(void);
-bool8 sub_80DA8A4(void);
-void sub_80DAF04(u8);
-void sub_80DAF1C(u8 a0, u8 a1);
-void sub_80DAF88(u8);
-void sub_80DAFA0(u8, u8);
-u8 sub_80DB0C4(void);
-u8 sub_80DB120(void);
-u8 sub_80DB174(u16, u32, u32, u32);
-void sub_80DB2BC(void);
-void prints_contest_move_description(u16);
-u16 SanitizeSpecies(u16);
-void sub_80DB89C(void);
-u16 GetChosenMove(u8);
-void sub_80DB918(void);
-bool8 Contest_IsMonsTurnDisabled(u8);
-void sub_80DBF68(void);
-void sub_80DBF90(void);
-void sub_80DC2BC(void);
-void sub_80DC490(bool8);
-void sub_80DC4F0(void);
-void CreateApplauseMeterSprite(void);
-void sub_80DC5E8(void);
-void sub_80DC7EC(void);
-void sub_80DCD48(void);
-void sub_80DCE58(u8);
-void sub_80DD04C(void);
-void sub_80DD590(void);
-void sub_80DDB0C(void);
-void sub_80DDBE8(void);
-bool8 sub_80DE1E8(u8);
-void sub_80DE224(void);
-void sub_80DE350(void);
-void sub_80DE424(u8);
-void sub_80DE69C(u8);
-void sub_80DEA20(void);
-void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
-void Contest_StartTextPrinter(const u8 *, u32);
-void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, s16);
-bool32 Contest_RunTextPrinters(void);
-void Contest_SetBgCopyFlags(u32);
-void sub_80FC9F8(u8);
-bool8 AreMovesContestCombo(u16, u16);
-void sub_80DBD18(void);
-void sub_80DF250(void);
-void sub_80DF4F8(void);
-void sub_80DD080(u8);
-void sub_80DF080(u8);
-void sub_80DF750(void);
-void sub_80DE9DC(u8);
-void sub_80DCBE8(u8, u8);
-u8 sub_80DC9EC(u8);
-u16 SanitizeMove(u16);
-void sub_80DE864(u8);
-void SelectContestMoveBankTarget(u16);
-void sub_80DE9B0(u8);
-void sub_80DC674(u8);
-void sub_80DE12C(void);
-void sub_80DD45C(u8, u8);
-void sub_80DD720(u8);
-void sub_80DE008(bool8);
-u8 sub_80DC028(s16, s16, u8);
-bool8 sub_80DB5B8(u8, u8);
-bool8 sub_80DB798(u8);
-void sub_80DB884(void);
-void sub_80DC9B4(u8);
-void sub_80DDED0(s8, s8);
-void sub_80DDCDC(s8);
-void sub_80DDE0C(void);
-void sub_80DD940(void);
-void sub_80DB944(void);
-void sub_80DBA18(void);
-void sub_80DC3AC(void);
-bool8 sub_80DC3C4(void);
-void sub_80DF9D4(u8 *);
-void sub_80DF9E0(u8 *, s32);
-void ContestBG_FillBoxWithTile(u8, u16, u8, u8, u8, u8, u8);
-void Contest_PrintTextToBg0WindowStd(u32, const u8 *);
-s16 sub_80DBD34(u8);
-void DetermineFinalStandings(void);
-bool8 sub_80DBF30(s32, s32, struct UnknownContestStruct6 *);
-void sub_80DC0F4(u8);
-void sub_80DC408(struct Sprite *);
-void sub_80DC728(u8);
-void sub_80DC6A4(u8);
-void sub_80DC8D0(u8);
-void sub_80DC81C(u8);
-void sub_80DC87C(u8);
-void sub_80DCC84(struct Sprite *);
-void sub_80DCCD8(struct Sprite *sprite);
-u8 sub_80DDA20(void);
-void c3_08130B10(u8);
-void sub_80DDB6C(u8);
-void task08_080CD1CC(u8);
-void sub_80DDD20(u8);
-void sub_80DDE30(u8);
-void sub_80DDF80(u8);
-const u8 *GetTurnOrderNumberGfx(u8);
-void sub_80DE464(u8);
-void sub_80DE4A8(u8);
-void sub_80DE5F4(u8);
-void sub_80DE65C(u8);
-void sub_80DE794(u8);
-void sub_80DEA5C(void);
-u8 sub_80DEFA8(u8, u8);
+// This file's functions.
+static void sub_80D782C(void);
+static void sub_80D7C7C(u8 taskId);
+static void sub_80D7CB4(u8 taskId);
+static void sub_80D7DAC(u8 taskId);
+static void sub_80D7DC8(u8 taskId);
+static void sub_80D7DE8(u8 taskId);
+static bool8 sub_80D7E44(u8 *);
+static void sub_80D80C8(u8 taskId);
+static void sub_80D8108(u8 taskId);
+static void vblank_cb_battle(void);
+static void sub_80D823C(void);
+static void sub_80D833C(u8 taskId);
+static void sub_80D8424(u8 taskId);
+static void sub_80D8610(u8 taskId);
+static void sub_80D8490(u8 taskId);
+static void sub_80D880C(s8);
+static void sub_80D883C(s8);
+static void sub_80D8894(u8 taskId);
+static void sub_80D892C(u8 taskId);
+static void sub_80D895C(u8 taskId);
+static void sub_80D8A04(u8 taskId);
+static void sub_80D8A50(u8 taskId);
+static void sub_80D8A88(u8 taskId);
+static void sub_80D8B38(u8 taskId);
+static void sub_80DA110(u8);
+static void sub_80DA134(struct Sprite *);
+static void sub_80DA164(struct Sprite *);
+static void sub_80DA198(u8);
+static void sub_80DA25C(u8);
+static void sub_80DA28C(u8);
+static void sub_80DA31C(u8);
+static void sub_80DA348(u8);
+static void sub_80DA38C(u8);
+static void sub_80DA3CC(u8);
+static void sub_80DA464(u8);
+static void sub_80DA49C(u8);
+static void sub_80DA4CC(u8);
+static void sub_80DA51C(u8);
+static void sub_80DA5B4(u8);
+static void sub_80DA5E8(u8);
+static void sub_80DA6B4(u8);
+static void sub_80DA700(u8);
+static void sub_80DA740(u8);
+static void sub_80DA7A0(u8);
+static void sub_80DA7EC(u8);
+static void sub_80DA830(u8);
+static void sub_80DA874(void);
+static bool8 sub_80DA8A4(void);
+static void sub_80DAF04(u8);
+static void sub_80DAF1C(u8 a0, u8 a1);
+static void sub_80DAF88(u8);
+static void sub_80DAFA0(u8, u8);
+static u8 sub_80DB0C4(void);
+static u8 sub_80DB120(void);
+static u8 sub_80DB174(u16, u32, u32, u32);
+static void prints_contest_move_description(u16);
+static u16 SanitizeSpecies(u16);
+static void sub_80DB89C(void);
+static u16 GetChosenMove(u8);
+static void sub_80DB918(void);
+static void sub_80DBF68(void);
+static void sub_80DBF90(void);
+static void sub_80DC2BC(void);
+static void sub_80DC490(bool8);
+static void sub_80DC4F0(void);
+static void CreateApplauseMeterSprite(void);
+static void sub_80DC5E8(void);
+static void sub_80DC7EC(void);
+static void sub_80DCD48(void);
+static void sub_80DD04C(void);
+static void sub_80DD590(void);
+static void sub_80DDB0C(void);
+static void sub_80DDBE8(void);
+static void sub_80DE224(void);
+static void sub_80DE350(void);
+static void sub_80DE424(u8);
+static void sub_80DE69C(u8);
+static void sub_80DEA20(void);
+static void Contest_StartTextPrinter(const u8 *, u32);
+static void ContestBG_FillBoxWithIncrementingTile(u8, u16, u8, u8, u8, u8, u8, s16);
+static bool32 Contest_RunTextPrinters(void);
+static void Contest_SetBgCopyFlags(u32);
+static void sub_80DBD18(void);
+static void sub_80DD080(u8);
+static void sub_80DE9DC(u8);
+static void sub_80DCBE8(u8, u8);
+static u8 sub_80DC9EC(u8);
+static u16 SanitizeMove(u16);
+static void sub_80DE864(u8);
+static void SelectContestMoveBankTarget(u16);
+static void sub_80DE9B0(u8);
+static void sub_80DC674(u8);
+static void sub_80DE12C(void);
+static void sub_80DD45C(u8, u8);
+static void sub_80DD720(u8);
+static void sub_80DE008(bool8);
+static u8 sub_80DC028(s16, s16, u8);
+static bool8 sub_80DB5B8(u8, u8);
+static bool8 sub_80DB798(u8);
+static void sub_80DB884(void);
+static void sub_80DC9B4(u8);
+static void sub_80DDED0(s8, s8);
+static void sub_80DDCDC(s8);
+static void sub_80DDE0C(void);
+static void sub_80DD940(void);
+static void sub_80DB944(void);
+static void sub_80DBA18(void);
+static void sub_80DC3AC(void);
+static bool8 sub_80DC3C4(void);
+static void ContestBG_FillBoxWithTile(u8, u16, u8, u8, u8, u8, u8);
+static void Contest_PrintTextToBg0WindowStd(u32, const u8 *);
+static s16 sub_80DBD34(u8);
+static void DetermineFinalStandings(void);
+static bool8 sub_80DBF30(s32, s32, struct UnknownContestStruct6 *);
+static void sub_80DC0F4(u8);
+static void sub_80DC408(struct Sprite *);
+static void sub_80DC728(u8);
+static void sub_80DC6A4(u8);
+static void sub_80DC8D0(u8);
+static void sub_80DC81C(u8);
+static void sub_80DC87C(u8);
+static void sub_80DCC84(struct Sprite *);
+static void sub_80DCCD8(struct Sprite *sprite);
+static u8 sub_80DDA20(void);
+static void c3_08130B10(u8);
+static void sub_80DDB6C(u8);
+static void task08_080CD1CC(u8);
+static void sub_80DDD20(u8);
+static void sub_80DDE30(u8);
+static void sub_80DDF80(u8);
+static const u8 *GetTurnOrderNumberGfx(u8);
+static void sub_80DE464(u8);
+static void sub_80DE4A8(u8);
+static void sub_80DE5F4(u8);
+static void sub_80DE65C(u8);
+static void sub_80DE794(u8);
+static void sub_80DEA5C(void);
+static void sub_80DF250(void);
+static void sub_80DF4F8(void);
+static void sub_80DF080(u8);
+static void sub_80DF750(void);
+static void sub_80DF9D4(u8 *);
+static void sub_80DF9E0(u8 *, s32);
+static void sub_80DB2BC(void);
 
-
+// EWRAM vars.
 EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
 EWRAM_DATA s16 gContestMonConditions[4] = {0};
 EWRAM_DATA s16 gUnknown_02039F08[4] = {0};
@@ -216,10 +211,11 @@ EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 EWRAM_DATA u8 gNumLinkContestPlayers = 0;
 EWRAM_DATA u8 gHighestRibbonRank = 0;
-EWRAM_DATA struct ContestResources * gContestResources = NULL;
+EWRAM_DATA struct ContestResources *gContestResources = NULL;
 EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
 
+// IWRAM common vars.
 u32 gContestRngValue;
 
 extern const u16 gUnknown_08587C30[];
@@ -249,6 +245,8 @@ extern const u8 gText_Contest_Anxiety[];
 extern const u8 gText_Contest_Laziness[];
 extern const u8 gText_Contest_Hesitancy[];
 extern const u8 gText_Contest_Fear[];
+extern const u8 gText_BDot[];
+extern const u8 gText_CDot[];
 extern const u8 *const gUnknown_08587E10[];
 extern const struct ContestPokemon gContestOpponents[96];
 extern const u8 gUnknown_085898A4[96];
@@ -271,12 +269,14 @@ extern const struct SubspriteTable gSubspriteTables_8587B80[];
 extern const struct CompressedSpriteSheet gUnknown_08587BB0;
 extern const struct SpritePalette gUnknown_08587BB8;
 extern const struct SpriteTemplate gSpriteTemplate_8587BC8;
-extern bool8 gUnknown_020322D5;
 extern void (*const gContestEffectFuncs[])(void);
 extern const s8 gContestExcitementTable[][5];
 extern const struct ContestWinner gUnknown_08587FA4[];
+extern const struct CompressedSpriteSheet gUnknown_08589904[];
+extern const struct SpritePalette gUnknown_08589924[];
+extern const struct SpriteTemplate gSpriteTemplate_858998C[];
 
-void TaskDummy1(u8 taskId)
+static void TaskDummy1(u8 taskId)
 {
 }
 
@@ -285,7 +285,7 @@ void ResetLinkContestBoolean(void)
     gIsLinkContest = 0;
 }
 
-void sub_80D7678(void)
+static void sub_80D7678(void)
 {
     u16 savedIme;
 
@@ -329,7 +329,7 @@ void LoadContestBgAfterMoveAnim(void)
     }
 }
 
-void sub_80D779C(void)
+static void sub_80D779C(void)
 {
     s32 i;
 
@@ -342,7 +342,7 @@ void sub_80D779C(void)
     }
 }
 
-void sub_80D77E4(void)
+static void sub_80D77E4(void)
 {
     InitWindows(gUnknown_08587F44);
     DeactivateAllTextPrinters();
@@ -356,7 +356,7 @@ void sub_80D77E4(void)
     }
 }
 
-void sub_80D782C(void)
+static void sub_80D782C(void)
 {
     s32 i;
 
@@ -367,7 +367,7 @@ void sub_80D782C(void)
     FillPalette(RGB(31, 17, 31), 0xF3, 2);
 }
 
-void sub_80D787C(void)
+static void sub_80D787C(void)
 {
     s32 i;
 
@@ -398,10 +398,10 @@ void sub_80D787C(void)
         gContestResources->field_0->unk19218[i] = gUnknown_02039F26[i];
     }
     sub_80DD590();
-    *gContestResources->field_1c = (struct ContestResourcesField1C){};
+    memset(gContestResources->field_1c, 0, sizeof(*gContestResources->field_1c) * 4);
 }
 
-void sub_80D7988(void)
+static void sub_80D7988(void)
 {
     gContestResources = AllocZeroed(sizeof(struct ContestResources));
     gContestResources->field_0 = AllocZeroed(sizeof(struct Contest));
@@ -411,7 +411,7 @@ void sub_80D7988(void)
     gContestResources->field_10 = AllocZeroed(sizeof(struct UnknownContestStruct5) * 4);
     gContestResources->field_14 = AllocZeroed(sizeof(struct UnknownContestStruct4) * 4);
     gContestResources->field_18 = AllocZeroed(sizeof(struct ContestStruct_field_18));
-    gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C));
+    gContestResources->field_1c = AllocZeroed(sizeof(struct ContestResourcesField1C) * 4);
     gContestResources->field_20 = AllocZeroed(sizeof(struct ContestResourcesField20));
     gContestResources->field_24[0] = AllocZeroed(0x1000);
     gContestResources->field_24[1] = AllocZeroed(0x1000);
@@ -424,7 +424,7 @@ void sub_80D7988(void)
     gUnknown_02023060 = gContestResources->field_24[1];
 }
 
-void sub_80D7A5C(void)
+static void sub_80D7A5C(void)
 {
     FREE_AND_SET_NULL(gContestResources->field_0);
     FREE_AND_SET_NULL(gContestResources->field_4);
@@ -502,7 +502,7 @@ void sub_80D7B24(void)
     }
 }
 
-void sub_80D7C7C(u8 taskId)
+static void sub_80D7C7C(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -511,7 +511,7 @@ void sub_80D7C7C(u8 taskId)
     }
 }
 
-void sub_80D7CB4(u8 taskId)
+static void sub_80D7CB4(u8 taskId)
 {
     if (gIsLinkContest & 1)
     {
@@ -554,18 +554,18 @@ void sub_80D7CB4(u8 taskId)
     }
 }
 
-void sub_80D7DAC(u8 taskId)
+static void sub_80D7DAC(u8 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, sub_80FC998, sub_80D7DC8);
 }
 
-void sub_80D7DC8(u8 taskId)
+static void sub_80D7DC8(u8 taskId)
 {
     gTasks[taskId].data[0] = 1;
     gTasks[taskId].func = sub_80D7DE8;
 }
 
-void sub_80D7DE8(u8 taskId)
+static void sub_80D7DE8(u8 taskId)
 {
     gTasks[taskId].data[0]--;
     if (gTasks[taskId].data[0] <= 0)
@@ -577,7 +577,7 @@ void sub_80D7DE8(u8 taskId)
     }
 }
 
-u8 sub_80D7E44(u8 *a)
+static u8 sub_80D7E44(u8 *a)
 {
     u16 sp0[16];
     u16 sp20[16];
@@ -651,7 +651,7 @@ u8 sub_80D7E44(u8 *a)
     return 0;
 }
 
-void sub_80D80C8(u8 taskId)
+static void sub_80D80C8(u8 taskId)
 {
     gPaletteFade.bufferTransferDisabled = FALSE;
     if (!gPaletteFade.active)
@@ -662,7 +662,7 @@ void sub_80D80C8(u8 taskId)
     }
 }
 
-void sub_80D8108(u8 taskId)
+static void sub_80D8108(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -706,7 +706,7 @@ void sub_80D8108(u8 taskId)
     }
 }
 
-void sub_80D823C(void)
+static void sub_80D823C(void)
 {
     s32 i;
 
@@ -723,7 +723,7 @@ void sub_80D823C(void)
     sContestBgCopyFlags = 0;
 }
 
-void vblank_cb_battle(void)
+static void vblank_cb_battle(void)
 {
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
@@ -743,7 +743,7 @@ void vblank_cb_battle(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void sub_80D833C(u8 taskId)
+static void sub_80D833C(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -771,7 +771,7 @@ void sub_80D833C(u8 taskId)
     }
 }
 
-void sub_80D8424(u8 taskId)
+static void sub_80D8424(u8 taskId)
 {
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys == B_BUTTON))
     {
@@ -788,7 +788,7 @@ void sub_80D8424(u8 taskId)
     }
 }
 
-void sub_80D8490(u8 taskId)
+static void sub_80D8490(u8 taskId)
 {
     u8 i;
     u8 sp8[32];
@@ -826,7 +826,7 @@ void sub_80D8490(u8 taskId)
     gTasks[taskId].func = sub_80D8610;
 }
 
-void sub_80D8610(u8 taskId)
+static void sub_80D8610(u8 taskId)
 {
     u8 numMoves = 0;
     s32 i;
@@ -890,18 +890,18 @@ void sub_80D8610(u8 taskId)
     }
 }
 
-void sub_80D880C(s8 a0)
+static void sub_80D880C(s8 a0)
 {
     ContestBG_FillBoxWithIncrementingTile(2, 55, 0, 31 + a0 * 2, 2, 2, 17, 1);
 }
 
-void sub_80D883C(s8 a0)
+static void sub_80D883C(s8 a0)
 {
     ContestBG_FillBoxWithIncrementingTile(2, 11, 0, 31 + a0 * 2, 2, 1, 17, 1);
     ContestBG_FillBoxWithIncrementingTile(2, 11, 0, 32 + a0 * 2, 2, 1, 17, 1);
 }
 
-void sub_80D8894(u8 taskId)
+static void sub_80D8894(u8 taskId)
 {
     if (gIsLinkContest & 1)
     {
@@ -922,13 +922,13 @@ void sub_80D8894(u8 taskId)
     }
 }
 
-void sub_80D892C(u8 taskId)
+static void sub_80D892C(u8 taskId)
 {
     DestroyTask(taskId);
     gTasks[gContestResources->field_0->mainTaskId].func = sub_80D895C;
 }
 
-void sub_80D895C(u8 taskId)
+static void sub_80D895C(u8 taskId)
 {
     s32 i;
 
@@ -952,7 +952,7 @@ void sub_80D895C(u8 taskId)
     gTasks[taskId].func = sub_80D8A04;
 }
 
-void sub_80D8A04(u8 taskId)
+static void sub_80D8A04(u8 taskId)
 {
     if (++gTasks[taskId].data[0] > 2)
     {
@@ -966,13 +966,13 @@ void sub_80D8A04(u8 taskId)
     }
 }
 
-void sub_80D8A50(u8 taskId)
+static void sub_80D8A50(u8 taskId)
 {
     if (!gContestResources->field_0->unk1920A_6 && !gContestResources->field_0->unk1920B_1)
         gTasks[taskId].func = sub_80D8A88;
 }
 
-void sub_80D8A88(u8 taskId)
+static void sub_80D8A88(u8 taskId)
 {
     if (++gTasks[taskId].data[0] > 19)
     {
@@ -992,7 +992,7 @@ void sub_80D8A88(u8 taskId)
     }
 }
 
-void sub_80D8B38(u8 taskId)
+static void sub_80D8B38(u8 taskId)
 {
     u8 spriteId;
     s32 i;
@@ -1698,13 +1698,13 @@ void sub_80D8B38(u8 taskId)
     }
 }
 
-void sub_80DA110(u8 taskId)
+static void sub_80DA110(u8 taskId)
 {
     sContest.unk1920B_2 = 0;
     DestroyTask(taskId);
 }
 
-void sub_80DA134(struct Sprite *sprite)
+static void sub_80DA134(struct Sprite *sprite)
 {
     if (sprite->pos2.x != 0)
     {
@@ -1720,7 +1720,7 @@ void sub_80DA134(struct Sprite *sprite)
     }
 }
 
-void sub_80DA164(struct Sprite *sprite)
+static void sub_80DA164(struct Sprite *sprite)
 {
     sprite->pos2.x -= 6;
     if (sprite->pos1.x + sprite->pos2.x < -32)
@@ -1730,7 +1730,7 @@ void sub_80DA164(struct Sprite *sprite)
     }
 }
 
-void sub_80DA198(u8 taskId)
+static void sub_80DA198(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -1768,7 +1768,7 @@ void sub_80DA198(u8 taskId)
     }
 }
 
-void sub_80DA25C(u8 taskId)
+static void sub_80DA25C(u8 taskId)
 {
     sub_80DE008(FALSE);
     gTasks[taskId].data[0] = 0;
@@ -1776,7 +1776,7 @@ void sub_80DA25C(u8 taskId)
     gTasks[taskId].func = sub_80DA28C;
 }
 
-void sub_80DA28C(u8 taskId)
+static void sub_80DA28C(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -1807,13 +1807,13 @@ void sub_80DA28C(u8 taskId)
     }
 }
 
-void sub_80DA31C(u8 taskId)
+static void sub_80DA31C(u8 taskId)
 {
     if (sub_80DC3C4())
         gTasks[taskId].func = sub_80DA348;
 }
 
-void sub_80DA348(u8 taskId)
+static void sub_80DA348(u8 taskId)
 {
     DmaCopy32Defvars(3, shared18000.unk18204, gPlttBufferUnfaded, 0x400);
     gTasks[taskId].data[0] = 0;
@@ -1821,7 +1821,7 @@ void sub_80DA348(u8 taskId)
     gTasks[taskId].func = sub_80DA38C;
 }
 
-void sub_80DA38C(u8 taskId)
+static void sub_80DA38C(u8 taskId)
 {
     if (++gTasks[taskId].data[0] > 2)
     {
@@ -1831,7 +1831,7 @@ void sub_80DA38C(u8 taskId)
     }
 }
 
-void sub_80DA3CC(u8 taskId)
+static void sub_80DA3CC(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -1854,7 +1854,7 @@ void sub_80DA3CC(u8 taskId)
     }
 }
 
-void sub_80DA464(u8 taskId)
+static void sub_80DA464(u8 taskId)
 {
     if (gTasks[taskId].data[0]++ > 29)
     {
@@ -1864,7 +1864,7 @@ void sub_80DA464(u8 taskId)
     }
 }
 
-void sub_80DA49C(u8 taskId)
+static void sub_80DA49C(u8 taskId)
 {
     if (sub_80DC3C4())
     {
@@ -1873,19 +1873,19 @@ void sub_80DA49C(u8 taskId)
     }
 }
 
-void sub_80DA4CC(u8 taskId)
+static void sub_80DA4CC(u8 taskId)
 {
     sub_80DE224();
     gTasks[taskId].func = sub_80DE424;
 }
 
-void sub_80DA4F4(u8 taskId)
+static void sub_80DA4F4(u8 taskId)
 {
     sub_80DE350();
     gTasks[taskId].func = sub_80DA51C;
 }
 
-void sub_80DA51C(u8 taskId)
+static void sub_80DA51C(u8 taskId)
 {
     vu16 sp0 = GetGpuReg(REG_OFFSET_BG0CNT);
     vu16 sp2 = GetGpuReg(REG_OFFSET_BG2CNT);
@@ -1905,13 +1905,13 @@ void sub_80DA51C(u8 taskId)
     }
 }
 
-void sub_80DA5B4(u8 taskId)
+static void sub_80DA5B4(u8 taskId)
 {
     if (!sContest.unk1920A_6)
         gTasks[taskId].func = sub_80D833C;
 }
 
-void sub_80DA5E8(u8 taskId)
+static void sub_80DA5E8(u8 taskId)
 {
     s32 i;
 
@@ -1936,7 +1936,7 @@ void sub_80DA5E8(u8 taskId)
     gTasks[taskId].func = sub_80DA6B4;
 }
 
-void sub_80DA6B4(u8 taskId)
+static void sub_80DA6B4(u8 taskId)
 {
     if (!Contest_RunTextPrinters())
     {
@@ -1949,7 +1949,7 @@ void sub_80DA6B4(u8 taskId)
     }
 }
 
-void sub_80DA700(u8 taskId)
+static void sub_80DA700(u8 taskId)
 {
     gBattle_BG1_Y -= 7;
     if ((s16)gBattle_BG1_Y < 0)
@@ -1961,7 +1961,7 @@ void sub_80DA700(u8 taskId)
     }
 }
 
-void sub_80DA740(u8 taskId)
+static void sub_80DA740(u8 taskId)
 {
     if (gTasks[taskId].data[0]++ >= 50)
     {
@@ -1978,7 +1978,7 @@ void sub_80DA740(u8 taskId)
     }
 }
 
-void sub_80DA7A0(u8 taskId)
+static void sub_80DA7A0(u8 taskId)
 {
     u8 taskId2 = CreateTask(sub_80FCACC, 0);
 
@@ -1988,14 +1988,14 @@ void sub_80DA7A0(u8 taskId)
     sub_80DC490(FALSE);
 }
 
-void sub_80DA7EC(u8 taskId)
+static void sub_80DA7EC(u8 taskId)
 {
     DestroyTask(taskId);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     gTasks[sContest.mainTaskId].func = sub_80DA830;
 }
 
-void sub_80DA830(u8 taskId)
+static void sub_80DA830(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -2008,19 +2008,19 @@ void sub_80DA830(u8 taskId)
     }
 }
 
-void sub_80DA874(void)
+static void sub_80DA874(void)
 {
     ScriptContext2_Disable();
     EnableBothScriptContexts();
 }
 
-void sub_80DA884(void)
+static void sub_80DA884(void)
 {
     if (!(gIsLinkContest & 1))
         gContestPlayerMonIndex = 3;
 }
 
-bool8 sub_80DA8A4(void)
+static bool8 sub_80DA8A4(void)
 {
     if (gContestPlayerMonIndex == gUnknown_02039F2B)
         return TRUE;
@@ -2250,7 +2250,7 @@ u8 sub_80DAE0C(struct Pokemon *pkmn)
     return retVal;
 }
 
-void sub_80DAEA4(void)
+static void sub_80DAEA4(void)
 {
     s32 i;
 
@@ -2262,7 +2262,7 @@ void sub_80DAEA4(void)
     }
 }
 
-u8 *sub_80DAED4(const u8 *src, u8 color)
+static u8 *sub_80DAED4(const u8 *src, u8 color)
 {
     u8 * ptr = StringCopy(gDisplayedStringBattle, gText_ColorTransparent);
     ptr[-1] = color;
@@ -2271,12 +2271,12 @@ u8 *sub_80DAED4(const u8 *src, u8 color)
     return ptr;
 }
 
-void sub_80DAF04(u8 a0)
+static void sub_80DAF04(u8 a0)
 {
     sub_80DAF1C(a0, a0 + 10);
 }
 
-void sub_80DAF1C(u8 a0, u8 a1)
+static void sub_80DAF1C(u8 a0, u8 a1)
 {
     u8 buffer[32];
     s32 offset;
@@ -2290,18 +2290,18 @@ void sub_80DAF1C(u8 a0, u8 a1)
     Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[a0], gDisplayedStringBattle, offset, 1, 7);
 }
 
-void sub_80DAF88(u8 a0)
+static void sub_80DAF88(u8 a0)
 {
     sub_80DAFA0(a0, a0 + 10);
 }
 
-void sub_80DAFA0(u8 a0, u8 a1)
+static void sub_80DAFA0(u8 a0, u8 a1)
 {
     sub_80DAED4(gContestMons[a0].nickname, a1);
     Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[a0], gDisplayedStringBattle, 5, 1, 7);
 }
 
-u16 sub_80DAFE0(u8 who, u8 contestCategory)
+static u16 sub_80DAFE0(u8 who, u8 contestCategory)
 {
     u8 statMain;
     u8 statSub1;
@@ -2347,7 +2347,7 @@ void sub_80DB09C(u8 contestCategory)
         gContestMonConditions[i] = sub_80DAFE0(i, contestCategory);
 }
 
-u8 sub_80DB0C4(void)
+static u8 sub_80DB0C4(void)
 {
     u8 spriteId;
 
@@ -2359,7 +2359,7 @@ u8 sub_80DB0C4(void)
     return spriteId;
 }
 
-u8 sub_80DB120(void)
+static u8 sub_80DB120(void)
 {
     u8 spriteId;
 
@@ -2371,7 +2371,7 @@ u8 sub_80DB120(void)
     return spriteId;
 }
 
-u8 sub_80DB174(u16 species, u32 otId, u32 personality, u32 index)
+static u8 sub_80DB174(u16 species, u32 otId, u32 personality, u32 index)
 {
     u8 spriteId;
     species = SanitizeSpecies(species);
@@ -2408,13 +2408,13 @@ bool8 IsSpeciesNotUnown(u16 species)
         return TRUE;
 }
 
-void sub_80DB2BC(void)
+static void sub_80DB2BC(void)
 {
     CpuCopy16(gContestResources->field_24[0], gContestResources->field_24[0] + 0x500, 0x280);
     CpuCopy16(gContestResources->field_24[2], gContestResources->field_24[2] + 0x500, 0x280);
 }
 
-u16 sub_80DB2EC(u16 a0, u8 a1)
+static u16 sub_80DB2EC(u16 a0, u8 a1)
 {
     u16 var;
 
@@ -2437,7 +2437,7 @@ u16 sub_80DB2EC(u16 a0, u8 a1)
     return var;
 }
 
-void prints_contest_move_description(u16 a)
+static void prints_contest_move_description(u16 a)
 {
     u8 category;
     u16 categoryTile;
@@ -2481,7 +2481,7 @@ void prints_contest_move_description(u16 a)
     Contest_PrintTextToBg0WindowStd(9, gText_Slash);
 }
 
-void sub_80DB4E0(u16 move, u8 b)
+static void sub_80DB4E0(u16 move, u8 b)
 {
     u8 r7 = gUnknown_02039F26[b] * 5 + 2;
 
@@ -2498,7 +2498,7 @@ void sub_80DB4E0(u16 move, u8 b)
     }
 }
 
-void sub_80DB584(void)
+static void sub_80DB584(void)
 {
     s32 i;
 
@@ -2506,12 +2506,12 @@ void sub_80DB584(void)
         sub_80DB4E0(gContestResources->field_4[i].currMove, i);
 }
 
-u16 sub_80DB5B0(void)
+static u16 sub_80DB5B0(void)
 {
     return 0x2034;
 }
 
-bool8 sub_80DB5B8(u8 contestantIdx, bool8 resetMod)
+static bool8 sub_80DB5B8(u8 contestantIdx, bool8 resetMod)
 {
     u8 r6;
     s32 r4;
@@ -2541,7 +2541,7 @@ bool8 sub_80DB5B8(u8 contestantIdx, bool8 resetMod)
     return TRUE;
 }
 
-void sub_80DB69C(void)
+static void sub_80DB69C(void)
 {
     s32 i;
     s32 r6;
@@ -2557,7 +2557,7 @@ void sub_80DB69C(void)
     }
 }
 
-u16 sub_80DB748(u8 status)
+static u16 sub_80DB748(u8 status)
 {
     u16 var = 0;
 
@@ -2583,7 +2583,7 @@ u16 sub_80DB748(u8 status)
     return var;
 }
 
-bool8 sub_80DB798(u8 a)
+static bool8 sub_80DB798(u8 a)
 {
     bool8 r9 = TRUE;
     u16 r8 = 0;
@@ -2609,7 +2609,7 @@ bool8 sub_80DB798(u8 a)
     return r9;
 }
 
-void sub_80DB884(void)
+static void sub_80DB884(void)
 {
     s32 i;
 
@@ -2617,14 +2617,14 @@ void sub_80DB884(void)
         sub_80DB798(i);
 }
 
-void sub_80DB89C(void)
+static void sub_80DB89C(void)
 {
     FillWindowPixelBuffer(4, 0);
     CopyWindowToVram(4, 2);
     Contest_SetBgCopyFlags(0);
 }
 
-u16 GetChosenMove(u8 a)
+static u16 GetChosenMove(u8 a)
 {
     if (Contest_IsMonsTurnDisabled(a))
         return 0;
@@ -2642,7 +2642,7 @@ u16 GetChosenMove(u8 a)
     }
 }
 
-void sub_80DB918(void)
+static void sub_80DB918(void)
 {
     s32 i;
 
@@ -2650,7 +2650,7 @@ void sub_80DB918(void)
         sContestantStatus[i].currMove = GetChosenMove(i);
 }
 
-void sub_80DB944(void)
+static void sub_80DB944(void)
 {
     s32 i;
     s32 j;
@@ -2689,7 +2689,7 @@ void sub_80DB944(void)
     sub_80DD590();
 }
 
-void sub_80DBA18(void)
+static void sub_80DBA18(void)
 {
     s32 i;
 
@@ -2714,7 +2714,7 @@ void sub_80DBA18(void)
     }
 }
 
-bool8 sub_80DBA68(u8 a)
+static bool8 sub_80DBA68(u8 a)
 {
     if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
         return FALSE;
@@ -2722,7 +2722,7 @@ bool8 sub_80DBA68(u8 a)
         return TRUE;
 }
 
-void sub_80DBAA0(void)
+static void sub_80DBAA0(void)
 {
     s32 i;
 
@@ -2777,13 +2777,13 @@ bool8 Contest_IsMonsTurnDisabled(u8 a)
         return FALSE;
 }
 
-void sub_80DBCE0(u8 a)
+static void sub_80DBCE0(u8 a)
 {
     gUnknown_02039F18[a] = sub_80DBD34(a);
     gUnknown_02039F08[a] = gContestMonConditions[a] + gUnknown_02039F18[a];
 }
 
-void sub_80DBD18(void)
+static void sub_80DBD18(void)
 {
     s32 i;
 
@@ -2792,12 +2792,12 @@ void sub_80DBD18(void)
     DetermineFinalStandings();
 }
 
-s16 sub_80DBD34(u8 a)
+static s16 sub_80DBD34(u8 a)
 {
     return gUnknown_02039F10[a] * 2;
 }
 
-void DetermineFinalStandings(void)
+static void DetermineFinalStandings(void)
 {
     u16 sp0[4] = {0};
     struct UnknownContestStruct6 sp8[4];
@@ -2868,7 +2868,7 @@ void sub_80DBED4(void)
     }
 }
 
-bool8 sub_80DBF30(s32 a, s32 b, struct UnknownContestStruct6 *c)
+static bool8 sub_80DBF30(s32 a, s32 b, struct UnknownContestStruct6 *c)
 {
     bool8 retVal;
 
@@ -2887,7 +2887,7 @@ bool8 sub_80DBF30(s32 a, s32 b, struct UnknownContestStruct6 *c)
     return retVal;
 }
 
-void sub_80DBF68(void)
+static void sub_80DBF68(void)
 {
     gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
@@ -2895,7 +2895,7 @@ void sub_80DBF68(void)
     Contest_StartTextPrinter((u8*) &gUnknown_0827E8DA, 0);
 }
 
-void sub_80DBF90(void)
+static void sub_80DBF90(void)
 {
     int i;
 
@@ -2905,7 +2905,7 @@ void sub_80DBF90(void)
     }
 }
 
-u16 sub_80DBFC8(u8 a)
+static u16 sub_80DBFC8(u8 a)
 {
     u16 var;
 
@@ -2920,7 +2920,7 @@ u16 sub_80DBFC8(u8 a)
     return var + 1;
 }
 
-s8 sub_80DBFFC(s16 a)
+static s8 sub_80DBFFC(s16 a)
 {
     s8 retVal = a / 10;
 
@@ -2931,7 +2931,7 @@ s8 sub_80DBFFC(s16 a)
     return retVal;
 }
 
-u8 sub_80DC028(s16 a, s16 b, u8 c)
+static u8 sub_80DC028(s16 a, s16 b, u8 c)
 {
     u8 taskId;
     s8 r4;
@@ -2952,7 +2952,7 @@ u8 sub_80DC028(s16 a, s16 b, u8 c)
     return taskId;
 }
 
-void sub_80DC0F4(u8 taskId)
+static void sub_80DC0F4(u8 taskId)
 {
     u8 r7 = gTasks[taskId].data[3];
     s16 r3 = gTasks[taskId].data[0];
@@ -3044,7 +3044,7 @@ void sub_80DC0F4(u8 taskId)
     }
 }
 
-void sub_80DC2BC(void)
+static void sub_80DC2BC(void)
 {
     s32 i;
 
@@ -3057,7 +3057,7 @@ void sub_80DC2BC(void)
     }
 }
 
-void sub_80DC308(u8 a)
+static void sub_80DC308(u8 a)
 {
     u8 spriteId;
     s16 r5;
@@ -3079,7 +3079,7 @@ void sub_80DC308(u8 a)
     gSprites[spriteId].callback = sub_80DC408;
 }
 
-void sub_80DC3AC(void)
+static void sub_80DC3AC(void)
 {
     s32 i;
 
@@ -3087,7 +3087,7 @@ void sub_80DC3AC(void)
         sub_80DC308(i);
 }
 
-bool8 sub_80DC3C4(void)
+static bool8 sub_80DC3C4(void)
 {
     s32 i;
 
@@ -3102,7 +3102,7 @@ bool8 sub_80DC3C4(void)
         return FALSE;
 }
 
-void sub_80DC408(struct Sprite *sprite)
+static void sub_80DC408(struct Sprite *sprite)
 {
     if (sprite->pos2.x == sprite->data[1])
     {
@@ -3115,7 +3115,7 @@ void sub_80DC408(struct Sprite *sprite)
     }
 }
 
-void sub_80DC44C(void)
+static void sub_80DC44C(void)
 {
     s32 i;
 
@@ -3123,7 +3123,7 @@ void sub_80DC44C(void)
         gSprites[gContestResources->field_14[i].unk0].pos1.y = gUnknown_08587A6C[gUnknown_02039F26[i]];
 }
 
-void sub_80DC490(bool8 a)
+static void sub_80DC490(bool8 a)
 {
     s32 i;
 
@@ -3139,7 +3139,7 @@ void sub_80DC490(bool8 a)
     }
 }
 
-void sub_80DC4F0(void)
+static void sub_80DC4F0(void)
 {
     s32 i;
 
@@ -3156,7 +3156,7 @@ void sub_80DC4F0(void)
     }
 }
 
-void CreateApplauseMeterSprite(void)
+static void CreateApplauseMeterSprite(void)
 {
     u8 spriteId;
 
@@ -3167,7 +3167,7 @@ void CreateApplauseMeterSprite(void)
     sContest.applauseMeterSpriteId = spriteId;
 }
 
-void sub_80DC5E8(void)
+static void sub_80DC5E8(void)
 {
     u8 i;
     u8 taskId = CreateTask(sub_80DC728, 30);
@@ -3177,20 +3177,20 @@ void sub_80DC5E8(void)
         gTasks[taskId].data[i * 4] = 0xFF;
 }
 
-void sub_80DC630(u8 a)
+static void sub_80DC630(u8 a)
 {
     gTasks[sContest.unk19211].data[a * 4 + 0] = 0;
     gTasks[sContest.unk19211].data[a * 4 + 1] = 0;
 }
 
-void sub_80DC674(u8 a)
+static void sub_80DC674(u8 a)
 {
     u8 taskId = CreateTask(sub_80DC6A4, 31);
 
     gTasks[taskId].data[0] = a;
 }
 
-void sub_80DC6A4(u8 taskId)
+static void sub_80DC6A4(u8 taskId)
 {
     u8 r4 = gTasks[taskId].data[0];
 
@@ -3204,7 +3204,7 @@ void sub_80DC6A4(u8 taskId)
     }
 }
 
-void sub_80DC728(u8 taskId)
+static void sub_80DC728(u8 taskId)
 {
     u8 i;
 
@@ -3232,7 +3232,7 @@ void sub_80DC728(u8 taskId)
     }
 }
 
-void sub_80DC7EC(void)
+static void sub_80DC7EC(void)
 {
     s32 i;
 
@@ -3241,13 +3241,13 @@ void sub_80DC7EC(void)
         sub_80DC81C(i);
 }
 
-void sub_80DC81C(u8 a)
+static void sub_80DC81C(u8 a)
 {
     gTasks[sContest.unk19212].data[a * 4 + 0] = 0xFF;
     gTasks[sContest.unk19212].data[a * 4 + 1] = 0;
 }
 
-void sub_80DC864(void)
+static void sub_80DC864(void)
 {
     s32 i;
 
@@ -3255,7 +3255,7 @@ void sub_80DC864(void)
         sub_80DC87C(i);
 }
 
-void sub_80DC87C(u8 a)
+static void sub_80DC87C(u8 a)
 {
     u32 var;
     u32 r0;
@@ -3274,7 +3274,7 @@ void sub_80DC87C(u8 a)
                      2);
 }
 
-void sub_80DC8D0(u8 taskId)
+static void sub_80DC8D0(u8 taskId)
 {
     u8 i;
 
@@ -3304,7 +3304,7 @@ void sub_80DC8D0(u8 taskId)
     }
 }
 
-void sub_80DC9B4(u8 a)
+static void sub_80DC9B4(u8 a)
 {
     if (sContestantStatus[a].hasJudgesAttention)
         sub_80DC630(a);
@@ -3312,11 +3312,7 @@ void sub_80DC9B4(u8 a)
         sub_80DC674(a);
 }
 
-extern const struct CompressedSpriteSheet gUnknown_08589904[];
-extern const struct SpritePalette gUnknown_08589924[];
-extern const struct SpriteTemplate gSpriteTemplate_858998C[];
-
-u8 sub_80DC9EC(u8 a)
+static u8 sub_80DC9EC(u8 a)
 {
     u8 spriteId1, spriteId2;
     u8 x = gUnknown_02039F26[a] * 40 + 32;
@@ -3360,7 +3356,7 @@ u8 sub_80DC9EC(u8 a)
     return spriteId1;
 }
 
-void sub_80DCB78(u8 spriteId)
+static void sub_80DCB78(u8 spriteId)
 {
     u8 spriteId2 = gSprites[spriteId].data[0];
 
@@ -3369,19 +3365,19 @@ void sub_80DCB78(u8 spriteId)
     DestroySpriteAndFreeResources(&gSprites[spriteId]);
 }
 
-void sub_80DCBB4(void)
+static void sub_80DCBB4(void)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 9));
 }
 
-void sub_80DCBD0(void)
+static void sub_80DCBD0(void)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
 }
 
-void sub_80DCBE8(u8 a, bool8 b)
+static void sub_80DCBE8(u8 a, bool8 b)
 {
     u8 r5;
 
@@ -3398,7 +3394,7 @@ void sub_80DCBE8(u8 a, bool8 b)
         PlaySE(SE_PC_LOGIN);
 }
 
-void sub_80DCC84(struct Sprite *sprite)
+static void sub_80DCC84(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -3413,14 +3409,14 @@ void sub_80DCC84(struct Sprite *sprite)
     }
 }
 
-void sub_80DCCD8(struct Sprite *sprite)
+static void sub_80DCCD8(struct Sprite *sprite)
 {
     gContestResources->field_14[sprite->data[1]].unk2_1 = 0;
     sub_80DCB78(sprite->data[0]);
     sub_80DCBD0();
 }
 
-void sub_80DCD08(void)
+static void sub_80DCD08(void)
 {
     if(gHeap[0x1A000] == 1)
         gHeap[0x1A000] = 0;
@@ -3438,7 +3434,7 @@ void sub_80DCD08(void)
     }
 }
 
-void sub_80DCD48(void)
+static void sub_80DCD48(void)
 {
     u8 i;
     s16 value;
@@ -3569,7 +3565,7 @@ void sub_80DCE58(u8 a)
     }
 }
 
-void sub_80DD04C(void)
+static void sub_80DD04C(void)
 {
     s32 i;
 
@@ -3580,7 +3576,7 @@ void sub_80DD04C(void)
     sub_80DAEA4();
 }
 
-void sub_80DD080(u8 contestant)
+static void sub_80DD080(u8 contestant)
 {
     u16 move;
     u8 effect;
@@ -3721,7 +3717,7 @@ void SetStartledString(u8 contestant, u8 jam)
         SetContestantEffectStringID(contestant, CONTEST_STRING_LOOKED_DOWN);
 }
 
-void sub_80DD45C(u8 contestant, u8 stringId)
+static void sub_80DD45C(u8 contestant, u8 stringId)
 {
     StringCopy(gStringVar1, gContestMons[contestant].nickname);
     StringCopy(gStringVar2, gMoveNames[sContestantStatus[contestant].currMove]);
@@ -3746,7 +3742,7 @@ void MakeContestantNervous(u8 p)
     sContestantStatus[p].currMove = MOVE_NONE;
 }
 
-void sub_80DD590(void)
+static void sub_80DD590(void)
 {
     u8 r12 = 0;
     s32 i;
@@ -3802,7 +3798,7 @@ void sub_80DD590(void)
     }
 }
 
-void sub_80DD6DC(struct Sprite *sprite)
+static void sub_80DD6DC(struct Sprite *sprite)
 {
     if (sprite->data[1]++ > 84)
     {
@@ -3813,7 +3809,7 @@ void sub_80DD6DC(struct Sprite *sprite)
     }
 }
 
-void sub_80DD720(u8 a)
+static void sub_80DD720(u8 a)
 {
     u8 spriteId = sContest.unk19216;
 
@@ -3860,7 +3856,7 @@ void sub_80DD720(u8 a)
     sContest.unk1920A_4 = 1;
 }
 
-void sub_80DD940(void)
+static void sub_80DD940(void)
 {
     s32 i;
 
@@ -3885,7 +3881,7 @@ s8 Contest_GetMoveExcitement(u16 move)
     return gContestExcitementTable[gSpecialVar_ContestCategory][gContestMoves[move].contestCategory];
 }
 
-u8 sub_80DDA20(void)
+static u8 sub_80DDA20(void)
 {
     u8 taskId = CreateTask(c3_08130B10, 10);
 
@@ -3894,7 +3890,7 @@ u8 sub_80DDA20(void)
     return taskId;
 }
 
-void c3_08130B10(u8 taskId)
+static void c3_08130B10(u8 taskId)
 {
     if (++gTasks[taskId].data[0] == 1)
     {
@@ -3916,7 +3912,7 @@ void c3_08130B10(u8 taskId)
     }
 }
 
-void sub_80DDB0C(void)
+static void sub_80DDB0C(void)
 {
     CreateTask(sub_80DDB6C, 10);
     gSprites[sContest.applauseMeterSpriteId].pos2.x = -70;
@@ -3924,7 +3920,7 @@ void sub_80DDB0C(void)
     sContest.unk1920A_6 = 1;
 }
 
-void sub_80DDB6C(u8 taskId)
+static void sub_80DDB6C(u8 taskId)
 {
     struct Sprite *sprite = &gSprites[sContest.applauseMeterSpriteId];
 
@@ -3940,7 +3936,7 @@ void sub_80DDB6C(u8 taskId)
     }
 }
 
-void sub_80DDBE8(void)
+static void sub_80DDBE8(void)
 {
     if (gSprites[sContest.applauseMeterSpriteId].invisible == TRUE)
     {
@@ -3954,7 +3950,7 @@ void sub_80DDBE8(void)
     }
 }
 
-void task08_080CD1CC(u8 taskId)
+static void task08_080CD1CC(u8 taskId)
 {
     struct Sprite *sprite = &gSprites[sContest.applauseMeterSpriteId];
 
@@ -3971,7 +3967,7 @@ void task08_080CD1CC(u8 taskId)
     }
 }
 
-void sub_80DDCDC(s8 a)
+static void sub_80DDCDC(s8 a)
 {
     u8 taskId = CreateTask(sub_80DDD20, 5);
 
@@ -3979,7 +3975,7 @@ void sub_80DDCDC(s8 a)
     sContest.unk1920A_5 = 1;
 }
 
-void sub_80DDD20(u8 taskId)
+static void sub_80DDD20(u8 taskId)
 {
     switch (gTasks[taskId].data[10])
     {
@@ -4016,13 +4012,13 @@ void unref_sub_80DDDE4(void)
     gSprites[sContest.applauseMeterSpriteId].invisible = TRUE;
 }
 
-void sub_80DDE0C(void)
+static void sub_80DDE0C(void)
 {
     CreateTask(sub_80DDE30, 15);
     sContest.unk1920A_7 = 1;
 }
 
-void sub_80DDE30(u8 taskId)
+static void sub_80DDE30(u8 taskId)
 {
     if (gTasks[taskId].data[10]++ > 6)
     {
@@ -4050,7 +4046,7 @@ void sub_80DDE30(u8 taskId)
 #define tBlendColor data[0]
 #define tBlendCoeff data[1]
 
-void sub_80DDED0(s8 a, s8 b)
+static void sub_80DDED0(s8 a, s8 b)
 {
     u8 taskId = CreateTask(sub_80DDF80, 10);
     u16 blendColor;
@@ -4092,7 +4088,7 @@ void sub_80DDED0(s8 a, s8 b)
     sContest.unk1920B_0 = 0;
 }
 
-void sub_80DDF80(u8 taskId)
+static void sub_80DDF80(u8 taskId)
 {
     if (gTasks[taskId].data[10]++ >= 0)
     {
@@ -4114,7 +4110,7 @@ void sub_80DDF80(u8 taskId)
 #undef tBlendColor
 #undef tBlendCoeff
 
-void sub_80DE008(bool8 a)
+static void sub_80DE008(bool8 a)
 {
     s32 i;
 
@@ -4133,7 +4129,7 @@ void sub_80DE008(bool8 a)
     }
 }
 
-const u8 *GetTurnOrderNumberGfx(u8 contestant)
+static const u8 *GetTurnOrderNumberGfx(u8 contestant)
 {
     if (sContestantStatus[contestant].turnOrderMod != 1)
         return gContestNextTurnRandomGfx;
@@ -4141,7 +4137,7 @@ const u8 *GetTurnOrderNumberGfx(u8 contestant)
         return gContestNextTurnNumbersGfx + sContestantStatus[contestant].nextTurnOrder * 32;
 }
 
-void sub_80DE12C(void)
+static void sub_80DE12C(void)
 {
     s32 r7 = 0;
     u8 r10 = 2;
@@ -4171,7 +4167,7 @@ bool8 sub_80DE1E8(u8 a)
         return TRUE;
 }
 
-void sub_80DE224(void)
+static void sub_80DE224(void)
 {
     s32 i;
     u16 bg0Cnt, bg1Cnt, bg2Cnt;
@@ -4209,7 +4205,7 @@ void sub_80DE224(void)
     }
 }
 
-void sub_80DE350(void)
+static void sub_80DE350(void)
 {
     s32 i;
     u16 bg1Cnt;
@@ -4235,7 +4231,7 @@ void sub_80DE350(void)
     }
 }
 
-void sub_80DE424(u8 taskId)
+static void sub_80DE424(u8 taskId)
 {
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = DISPLAY_HEIGHT;
@@ -4243,7 +4239,7 @@ void sub_80DE424(u8 taskId)
     gTasks[taskId].func = sub_80DE464;
 }
 
-void sub_80DE464(u8 taskId)
+static void sub_80DE464(u8 taskId)
 {
     if ((s16)(gBattle_BG1_Y -= 7) < 0)
         gBattle_BG1_Y = 0;
@@ -4256,7 +4252,7 @@ void sub_80DE464(u8 taskId)
     }
 }
 
-void sub_80DE4A8(u8 taskId)
+static void sub_80DE4A8(u8 taskId)
 {
     s32 i;
 
@@ -4305,13 +4301,13 @@ void sub_80DE4A8(u8 taskId)
     }
 }
 
-void sub_80DE5C0(u8 taskId)
+static void sub_80DE5C0(u8 taskId)
 {
     if ((s16)(gBattle_BG1_Y += 7) > DISPLAY_HEIGHT)
         gTasks[taskId].func = sub_80DA4F4;
 }
 
-void sub_80DE5F4(u8 taskId)
+static void sub_80DE5F4(u8 taskId)
 {
     if (gTasks[taskId].data[2] < 10)
     {
@@ -4342,7 +4338,7 @@ void sub_80DE5F4(u8 taskId)
     }
 }
 
-void sub_80DE65C(u8 taskId)
+static void sub_80DE65C(u8 taskId)
 {
     if (gTasks[taskId].data[2] < 10)
     {
@@ -4356,7 +4352,7 @@ void sub_80DE65C(u8 taskId)
     }
 }
 
-void sub_80DE69C(u8 a)
+static void sub_80DE69C(u8 a)
 {
     s32 i;
     u8 taskId;
@@ -4377,7 +4373,7 @@ void sub_80DE69C(u8 a)
     sContest.unk1920B_1 = 1;
 }
 
-void sub_80DE794(u8 taskId)
+static void sub_80DE794(u8 taskId)
 {
     s32 i;
 
@@ -4395,21 +4391,21 @@ void sub_80DE794(u8 taskId)
     }
 }
 
-u16 SanitizeMove(u16 move)
+static u16 SanitizeMove(u16 move)
 {
     if (move >= MOVES_COUNT)
         move = MOVE_POUND;
     return move;
 }
 
-u16 SanitizeSpecies(u16 species)
+static u16 SanitizeSpecies(u16 species)
 {
     if (species >= NUM_SPECIES)
         species = SPECIES_NONE;
     return species;
 }
 
-void sub_80DE864(u8 a)
+static void sub_80DE864(u8 a)
 {
     s32 i;
     u16 move = SanitizeMove(sContestantStatus[a].currMove);
@@ -4459,14 +4455,14 @@ void sub_80DE864(u8 a)
     sub_80DEA5C();
 }
 
-void sub_80DE9B0(u8 unused)
+static void sub_80DE9B0(u8 unused)
 {
     memset(&gContestResources->field_18->species, 0, 0x14);
     if (sContest.unk1925E != 0)
         sContest.unk1925E--;
 }
 
-void sub_80DE9DC(u8 a)
+static void sub_80DE9DC(u8 a)
 {
     gContestResources->field_18->unk5 = a;
     gContestResources->field_18->species = SanitizeSpecies(gContestMons[a].species);
@@ -4474,14 +4470,14 @@ void sub_80DE9DC(u8 a)
     gContestResources->field_18->unkC = gContestMons[a].otId;
 }
 
-void sub_80DEA20(void)
+static void sub_80DEA20(void)
 {
     gBattlerSpriteIds[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     InitSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattlerTarget]]);
     sub_80DEA5C();
 }
 
-void sub_80DEA5C(void)
+static void sub_80DEA5C(void)
 {
     struct Sprite *sprite = &gSprites[gBattlerSpriteIds[3]];
 
@@ -4492,7 +4488,7 @@ void sub_80DEA5C(void)
     sprite->invisible = TRUE;
 }
 
-void SelectContestMoveBankTarget(u16 move)
+static void SelectContestMoveBankTarget(u16 move)
 {
     switch (gBattleMoves[move].target)
     {
@@ -4510,7 +4506,7 @@ void SelectContestMoveBankTarget(u16 move)
     }
 }
 
-void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
+static void Contest_PrintTextToBg0WindowStd(u32 a, const u8 *b)
 {
     struct TextPrinterTemplate printerTemplate;
 
@@ -4556,7 +4552,7 @@ void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s3
     Contest_SetBgCopyFlags(0);
 }
 
-void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
+static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
 {
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
@@ -4592,24 +4588,24 @@ void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     Contest_SetBgCopyFlags(0);
 }
 
-void ContestBG_FillBoxWithIncrementingTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g, s16 h)
+static void ContestBG_FillBoxWithIncrementingTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g, s16 h)
 {
     WriteSequenceToBgTilemapBuffer(a, b, c, d, e, f, g, h);
     Contest_SetBgCopyFlags(a);
 }
 
-void ContestBG_FillBoxWithTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g)
+static void ContestBG_FillBoxWithTile(u8 a, u16 b, u8 c, u8 d, u8 e, u8 f, u8 g)
 {
     ContestBG_FillBoxWithIncrementingTile(a, b, c, d, e, f, g, 0);
 }
 
-bool32 Contest_RunTextPrinters(void)
+static bool32 Contest_RunTextPrinters(void)
 {
     RunTextPrinters();
     return IsTextPrinterActive(4);
 }
 
-void Contest_SetBgCopyFlags(u32 var)
+static void Contest_SetBgCopyFlags(u32 var)
 {
     sContestBgCopyFlags |= 1 << var;
 }
@@ -4725,4 +4721,468 @@ void ClearContestWinnerPicsInContestHall(void)
 
     for (i = 0; i < 8; i++)
         gSaveBlock1Ptr->contestWinners[i] = gUnknown_08587FA4[i];
+}
+
+// The functions below are probably related to Contests in TV.
+static void sub_80DF080(u8 contestant)
+{
+    s32 i;
+
+    if (!gContestResources->field_10->excitementFrozen
+        && gContestResources->field_10->bits_0 > 0
+        && !gContestResources->field_4[contestant].disappointedRepeat)
+    {
+        gContestResources->field_1c[contestant].unkC |= 1;
+        gContestResources->field_1c[contestant].unkE_2 = 1;
+    }
+
+    if (gContestResources->field_4[contestant].nervous)
+        gContestResources->field_1c[contestant].unkC |= 2;
+
+    if (!gContestResources->field_10->excitementFrozen
+        && gContestResources->field_10->bits_0 != 0
+        && gContestResources->field_10->unk2 == 60)
+    {
+        gContestResources->field_1c[contestant].unkC |= 4;
+    }
+
+    if (gContestResources->field_4[contestant].unk15_6
+        && gContestResources->field_4[contestant].unk16 != 0)
+    {
+        gContestResources->field_1c[contestant].unkC |= 8;
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (i != contestant && gContestResources->field_4[i].jam != 0)
+        {
+            gContestResources->field_1c[contestant].unkC |= 0x10;
+            gContestResources->field_1c[i].unkC |= 0x40;
+        }
+    }
+
+    if (gContestResources->field_4[contestant].numTurnsSkipped != 0
+        || gContestResources->field_4[contestant].noMoreTurns)
+    {
+        gContestResources->field_1c[contestant].unkC |= 0x20;
+    }
+    else if (!gContestResources->field_4[contestant].nervous)
+    {
+        gContestResources->field_1c[contestant].unkC |= 0x80;
+        gContestResources->field_1c[contestant].unkE_1 = 1;
+        gContestResources->field_1c[contestant].unk0[gContestResources->field_0->turnNumber] = gContestResources->field_4[contestant].currMove;
+    }
+
+    if (gContestResources->field_4[contestant].disappointedRepeat)
+        gContestResources->field_1c[contestant].unkD |= 2;
+
+    if (gContestResources->field_0->applauseLevel == 4
+        && !gContestResources->field_10->excitementFrozen
+        && gContestResources->field_10->bits_0 < 0)
+    {
+        gContestResources->field_1c[contestant].unkD |= 0x20;
+    }
+}
+
+static void sub_80DF250(void)
+{
+    u8 r1;
+    s32 i, j;
+    bool32 r12, r8;
+    u16 sp0[6];
+    u8 spC[6];
+    u16 sp14[5];
+    u8 var_38;
+    u8 r3;
+    u8 count;
+
+    r1 = 0;
+    var_38 = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gContestFinalStandings[i] == 0)
+            var_38 = i;
+        else if (gContestFinalStandings[i] == 3)
+            r1 = i;
+    }
+
+    gContestResources->field_1c[r1].unkD |= 1;
+    for (i = 0; i < 4; i++)
+    {
+        if (i != var_38 && gUnknown_02039F08[var_38] - gUnknown_02039F08[i] <= 50)
+            gContestResources->field_1c[i].unkD |= 4;
+
+        if (!gContestResources->field_1c[i].unkE_2)
+            gContestResources->field_1c[i].unkD |= 8;
+
+        for (j = 0; j < 4; j++)
+        {
+            if (gContestMonConditions[i] < gContestMonConditions[j])
+                break;
+        }
+        if (j == 4 && gContestFinalStandings[i] != 0)
+            gContestResources->field_1c[i].unkD |= 0x10;
+
+        r12 = FALSE;
+        r8 = FALSE;
+        for (j = 0; j < 4; j++)
+        {
+            if (gContestMonConditions[i] > gContestMonConditions[j])
+                r12 = TRUE;
+            if (gUnknown_02039F18[i] > gUnknown_02039F18[j])
+                r8 = TRUE;
+        }
+        if (!r12 && !r8)
+            gContestResources->field_1c[i].unkD |= 0x40;
+
+        if (!gContestResources->field_1c[i].unkE_1)
+            gContestResources->field_1c[i].unkD |= 0x80;
+    }
+
+    for (i = 0; i < 5; i++)
+    {
+        sp0[i] = 0;
+        spC[i] = 0;
+    }
+    sp0[5] = 0xFFFF;
+    spC[5] = 0;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gContestResources->field_1c[var_38].unk0[i] != 0)
+        {
+            for (j = 0; j < 5; j++)
+            {
+                if (gContestResources->field_1c[var_38].unk0[i] != sp0[j])
+                {
+                    if (sp0[j] == 0)
+                    {
+                        sp0[j] = gContestResources->field_1c[var_38].unk0[i];
+                        spC[j]++;
+                    }
+                }
+                else
+                {
+                    spC[j]++;
+                }
+            }
+        }
+    }
+
+    sp14[0] = sp0[0];
+    r3 = spC[0];
+    count = 0;
+    for (i = 1; sp0[i] != 0xFFFF; i++)
+    {
+        if (r3 < spC[i])
+        {
+            sp14[0] = sp0[i];
+            r3 = spC[i];
+            count = 1;
+        }
+        else if (r3 == spC[i])
+        {
+            sp14[count] = sp0[i];
+            count++;
+        }
+    }
+
+    gContestResources->field_1c[var_38].unkA = sp14[Random() % count];
+}
+
+static void sub_80DF4F8(void)
+{
+    s32 i;
+    u32 bits;
+    u8 r7;
+    u8 r9, r10;
+    u8 count;
+    u8 r5;
+    u8 r2;
+    u16 var;
+    u8 r4;
+    u8 r6;
+    u8 sp0[4];
+
+    if (gContestFinalStandings[gContestPlayerMonIndex] != 0)
+        return;
+
+    r7 = 0;
+    for (i = 0; i < 4; i++)
+    {
+        if (gContestFinalStandings[i] == 0)
+            r7 = i;
+    }
+
+    r9 = 0;
+    r10 = 0;
+    for (i = 0; i < 4; i++)
+    {
+        if (gContestMonConditions[r7] < gContestMonConditions[i])
+            r9++;
+        if (gUnknown_02039F18[r7] < gUnknown_02039F18[i])
+            r10++;
+    }
+
+    bits = gContestResources->field_1c[r7].unkC;
+    count = 0;
+    for (i = 0; i < 8; bits >>= 1, i++)
+    {
+        if (bits & 1)
+            count++;
+    }
+
+    r5 = Random() % count;
+    bits = gContestResources->field_1c[r7].unkC;
+    count = 0;
+    r2 = 0;
+    for (i = 0; i < 8; bits >>= 1, r2++, i++)
+    {
+        if (!(bits & 1))
+            continue;
+        if (r5 == count)
+            break;
+        count++;
+    }
+
+    var = 1 << r2;
+    if (r7 == 0)
+    {
+        sp0[0] = 1;
+        r4 = gContestResources->field_1c[1].unkD;
+        i = 2;
+    }
+    else
+    {
+        sp0[0] = 0;
+        r4 = gContestResources->field_1c[0].unkD;
+        i = 1;
+    }
+
+    r5 = 1;
+    for (; i < 4; i++)
+    {
+        if (i != r7)
+        {
+            if (r4 < gContestResources->field_1c[i].unkD)
+            {
+                sp0[0] = i;
+                r4 = gContestResources->field_1c[i].unkD;
+                r5 = 1;
+            }
+            else if (r4 == gContestResources->field_1c[i].unkD)
+            {
+                sp0[r5] = i;
+                r5++;
+            }
+        }
+    }
+
+    r6 = sp0[Random() % r5];
+    r2 = 0x80;
+    for (i = 0; i < 8; r2 >>= 1, i++)
+    {
+        r4 = gContestResources->field_1c[r6].unkD & r2;
+        if (r4)
+            break;
+    }
+
+    ContestLiveUpdates_BeforeInterview_1(r9);
+    ContestLiveUpdates_BeforeInterview_2(r10);
+    ContestLiveUpdates_BeforeInterview_3(var);
+    ContestLiveUpdates_BeforeInterview_4(gContestResources->field_1c[r7].unkA);
+    ContestLiveUpdates_BeforeInterview_5(r4, r6);
+}
+
+// Unused
+void sub_80DF704(u8 arg0)
+{
+    if (gHeap[0x1A000] == 0)
+    {
+        if (arg0 == 0)
+            gHeap[0x1A000] = 2;
+        else
+            gHeap[0x1A000] = 3;
+    }
+    else
+    {
+        gHeap[0x1A000] = 0;
+    }
+
+    if (gHeap[0x1A000] == 0)
+    {
+        sub_80DAEA4();
+        sub_80DB2BC();
+    }
+    else
+    {
+        sub_80DF750();
+    }
+}
+
+static void sub_80DF750(void)
+{
+    u8 i;
+    s8 j;
+    u8 text1[20];
+    u8 text2[20];
+    u8 *txtPtr;
+    u32 bits;
+
+    if (gUnknown_020322D5 == 0)
+        return;
+    if (gHeap[0x1A000] != 2 && gHeap[0x1A000] != 3)
+        return;
+
+    for (i = 0; i < 4; i++)
+        FillWindowPixelBuffer(i, 0);
+
+    if (gHeap[0x1A000] == 2)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            txtPtr = StringCopy(text1, gText_CDot);
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text1, 5, 1, 7);
+            bits = gContestResources->field_1c[i].unkC;
+            for (j = 7; j > -1; j--) // Weird loop.
+            {
+                txtPtr = ConvertIntToDecimalStringN(txtPtr, bits & 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+                bits >>= 1;
+            }
+
+            for (j = 0; j < 5; j++)
+                text2[j] = text1[j];
+
+            text2[j] = EOS;
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text2, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text1 + j, 55, 1, 7);
+        }
+    }
+    else
+    {
+        for (i = 0; i < 4; i++)
+        {
+            StringCopy(text1, gText_BDot);
+            bits = gContestResources->field_1c[i].unkD;
+            txtPtr = &text1[2];
+            for (j = 7; j > -1; j--) // Weird loop.
+            {
+                txtPtr = ConvertIntToDecimalStringN(txtPtr, bits & 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+                bits >>= 1;
+            }
+
+            for (j = 0; j < 5; j++)
+                text2[j] = text1[j];
+
+            text2[j] = EOS;
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text2, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gUnknown_02039F26[i], text1 + j, 55, 1, 7);
+        }
+    }
+    sub_80DB2BC();
+}
+
+static u8 sub_80DF940(u8 *nickname)
+{
+    u8 ret = GAME_LANGUAGE;
+
+    if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
+        return LANGUAGE_ENGLISH;
+
+    if (StringLength(nickname) < 6)
+    {
+        while (*nickname != EOS)
+        {
+            if ((*nickname >= CHAR_A && *nickname <= CHAR_z)
+                || (*nickname >= CHAR_0 && *nickname <= CHAR_9)
+                || *nickname == CHAR_SPACE
+                || *nickname == CHAR_PERIOD
+                || *nickname == CHAR_COMMA
+                || *nickname == CHAR_EXCL_MARK
+                || *nickname == CHAR_QUESTION_MARK
+                || *nickname == CHAR_MALE
+                || *nickname == CHAR_FEMALE
+                || *nickname == CHAR_SLASH
+                || *nickname == CHAR_HYPHEN
+                || *nickname == CHAR_ELLIPSIS
+                || *nickname == CHAR_DOUBLE_QUOTATION_LEFT
+                || *nickname == CHAR_DOUBLE_QUOTATION_RIGHT
+                || *nickname == CHAR_SINGLE_QUOTATION_LEFT
+                || *nickname == CHAR_DOUBLE_QUOTATION_LEFT) // Most likely a typo, CHAR_SINGLE_QUOTATION_RIGHT should be here instead.
+            {
+                nickname++;
+            }
+            else
+            {
+                ret = LANGUAGE_JAPANESE;
+                break;
+            }
+        }
+    }
+
+    return ret;
+}
+
+static void sub_80DF9D4(u8 *playerName)
+{
+    u8 chr = playerName[5];
+
+    playerName[5] = EOS;
+    playerName[PLAYER_NAME_LENGTH] = chr;
+}
+
+static void sub_80DF9E0(u8 *monName, s32 language)
+{
+    u8 chr;
+
+    StripExtCtrlCodes(monName);
+    if (language == LANGUAGE_JAPANESE)
+    {
+        monName[5] = EOS;
+        monName[POKEMON_NAME_LENGTH] = EXT_CTRL_CODE_BEGIN;
+    }
+    else
+    {
+        chr = monName[5];
+        monName[5] = EOS;
+        monName[POKEMON_NAME_LENGTH] = chr;
+    }
+}
+
+void sub_80DFA08(struct ContestPokemon *mon, s32 language)
+{
+    u8 *name = mon->nickname;
+
+    if (language == LANGUAGE_JAPANESE)
+    {
+        ConvertInternationalString(name, sub_80DF940(name));
+    }
+    else if (name[POKEMON_NAME_LENGTH] == EXT_CTRL_CODE_BEGIN)
+    {
+        ConvertInternationalString(name, LANGUAGE_JAPANESE);
+    }
+    else
+    {
+        name[5] = name[POKEMON_NAME_LENGTH];
+        name[POKEMON_NAME_LENGTH] = EOS;
+    }
+
+    name = mon->trainerName;
+    if (language == LANGUAGE_JAPANESE)
+    {
+        name[PLAYER_NAME_LENGTH] = EOS;
+        name[6] = name[4];
+        name[5] = name[3];
+        name[4] = name[2];
+        name[3] = name[1];
+        name[2] = mon->trainerName[0];
+        name[1] = EXT_CTRL_CODE_JPN;
+        name[0] = EXT_CTRL_CODE_BEGIN;
+    }
+    else
+    {
+        name[5] = name[PLAYER_NAME_LENGTH];
+        name[PLAYER_NAME_LENGTH] = EOS;
+    }
 }
