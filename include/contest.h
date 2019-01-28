@@ -385,6 +385,14 @@ struct UnknownContestStruct4
     u8 unk2_2:1;
 };
 
+struct UnknownContestStruct6
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
 struct ContestResourcesField1C
 {
     u8 filler_00[0x40];
@@ -421,8 +429,12 @@ extern struct ContestResources *gContestResources;
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
 
+
+
 #define shared15800 (gHeap + 0x18000)
+#define shared16800 (gHeap + 0x19000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
+
 
 extern u32 gContestRngValue;
 extern u8 gUnknown_02039F26[4];
@@ -437,7 +449,7 @@ bool8 sub_80DE1E8(u8 a);
 void SetStartledString(u8 a, u8 b);
 s8 Contest_GetMoveExcitement(u16);
 u8 sub_80DAE0C(struct Pokemon *);
-void sub_80DEDA8(u8);
+bool8 sub_80DEDA8(u8);
 void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
 void sub_80DB09C(u8 contestCategory);
 void sub_80DCE58(u8);
