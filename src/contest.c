@@ -3218,9 +3218,9 @@ void sub_80DC0F4(u8 taskId)
             m4aMPlayPitchControl(&gMPlayInfo_SE1, 0xFFFF, r10 * 256);
         }
         else
-		{
+        {
             PlaySE(SE_BOO);
-		}
+        }
         
         if (!r11 && !r5 && !r6)
             gTasks[taskId].data[2] = -gTasks[taskId].data[2];
@@ -3330,7 +3330,10 @@ void sub_80DC4F0(void)
     for (i = 0; i < 4; i++)
     {
         LoadCompressedSpriteSheet(&gUnknown_08587AE8[i]);
-        gContestResources->field_14[i].unk1 = CreateSprite(&gSpriteTemplate_8587B18[i], 204, gUnknown_08587A70[gUnknown_02039F26[i]], 0);
+        gContestResources->field_14[i].unk1 = CreateSprite(&gSpriteTemplate_8587B18[i], 
+                                                           204, 
+                                                           gUnknown_08587A70[gUnknown_02039F26[i]], 
+                                                           0);
         SetSubspriteTables(&gSprites[gContestResources->field_14[i].unk1], gSubspriteTables_8587B80);
         gSprites[gContestResources->field_14[i].unk1].invisible = TRUE;
     }
@@ -3443,9 +3446,15 @@ void sub_80DC87C(u8 a)
     sub_80DC81C(a);
 
     r0 = a + 5;
-    DmaCopy16Defvars(3, gPlttBufferUnfaded + r0 * 16 + 10, gPlttBufferFaded   + r0 * 16 + 10, 2);
+    DmaCopy16Defvars(3, 
+                     gPlttBufferUnfaded + r0 * 16 + 10, 
+                     gPlttBufferFaded   + r0 * 16 + 10, 
+                     2);
     var = (a + 5) * 16 + 12 + a;
-    DmaCopy16Defvars(3, gPlttBufferUnfaded + var, gPlttBufferFaded + var, 2);
+    DmaCopy16Defvars(3, 
+                     gPlttBufferUnfaded + var, 
+                     gPlttBufferFaded + var, 
+                     2);
 }
 
 void sub_80DC8D0(u8 taskId)
@@ -3708,7 +3717,7 @@ void sub_80DCB78(u8 spriteId)
 
 void sub_80DCBB4(void)
 {
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDALPHA_BLEND(BLDCNT_EFFECT_BLEND, BLDCNT_TGT1_ALL));
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1| BLDCNT_TGT1_BG2, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG3));
 }
 
@@ -3770,9 +3779,9 @@ void sub_80DCD08(void)
         sub_80DB2BC();
     }
     else
-	{
+    {
         sub_80DCD48();
-	}
+    }
 }
 
 #ifdef NONMATCHING
