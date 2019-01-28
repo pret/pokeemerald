@@ -13,11 +13,15 @@
 #define CHAR_7              0xA8
 #define CHAR_8              0xA9
 #define CHAR_9              0xAA
+#define CHAR_EXCL_MARK      0xAB
 #define CHAR_QUESTION_MARK  0xAC
 #define CHAR_PERIOD         0xAD
 #define CHAR_HYPHEN         0xAE
 #define CHAR_ELLIPSIS       0xB0
-#define CHAR_APOS           0xB4
+#define CHAR_DBL_QUOT_LEFT  0xB1
+#define CHAR_DBL_QUOT_RIGHT 0xB2
+#define CHAR_SGL_QUOT_LEFT  0xB3
+#define CHAR_SGL_QUOT_RIGHT 0xB4
 #define CHAR_MALE           0xB5
 #define CHAR_FEMALE         0xB6
 #define CHAR_CURRENCY       0xB7

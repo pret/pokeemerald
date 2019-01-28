@@ -136,7 +136,6 @@ SECTIONS {
         src/battle_anim_80D51AC.o(.text);
         src/item.o(.text);
         src/contest.o(.text);
-        asm/contest.o(.text);
         src/shop.o(.text);
         src/fldeff_escalator.o(.text);
         src/berry.o(.text);

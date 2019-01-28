@@ -221,22 +221,6 @@ struct ContestPokemon
     /*0x3C*/ u32 otId;  // otId
 }; // wow
 
-extern struct ContestPokemon gContestMons[4];
-extern u8 gContestMonPartyIndex;
-extern u16 gSpecialVar_ContestCategory;
-extern u16 gSpecialVar_ContestRank;
-extern u8 gUnknown_02039F2B;
-extern u8 gNumLinkContestPlayers;
-extern u8 gHighestRibbonRank;
-extern u8 gContestFinalStandings[4];
-extern u8 gContestPlayerMonIndex;
-extern s16 gUnknown_02039F08[4];
-extern s16 gUnknown_02039F10[4];
-extern s16 gUnknown_02039F18[4];
-extern s16 gContestMonConditions[4];
-extern u8 gIsLinkContest;
-extern struct ContestWinner gUnknown_02039F3C;
-
 struct Shared18000
 {
     /*0x18000*/ u8 unk18000;
@@ -260,10 +244,10 @@ struct ContestStruct_field_18
 
 struct Contest
 {
-    /*0x19204*/ u8 playerMoveChoice;
-    /*0x19205*/ u8 turnNumber;
-    /*0x19206*/ u8 unk19206[4];    // seems to only be used by an unref function
-    /*0x1920A*/ u16 unk1920A_0:1;  // Task active flags?
+    /*0x0*/ u8 playerMoveChoice;
+    /*0x1*/ u8 turnNumber;
+    /*0x2*/ u8 unk19206[4];    // seems to only be used by an unref function
+    /*0x6*/ u16 unk1920A_0:1;  // Task active flags?
     u16 unk1920A_1:1;
     u16 unk1920A_2:1;
     u16 unk1920A_3:1;
@@ -271,18 +255,18 @@ struct Contest
     u16 unk1920A_5:1;
     u16 unk1920A_6:1;
     u16 unk1920A_7:1;
-    /*0x1920B*/ u16 unk1920B_0:1;
+    /*0x7*/ u16 unk1920B_0:1;
     u16 unk1920B_1:1;
     u16 unk1920B_2:1;
-    /*0x1920C*/ u8 mainTaskId;
-    /*0x1920D*/ u8 unk1920D[4];
-    /*0x19211*/ u8 unk19211;
-    /*0x19212*/ u8 unk19212;
-    /*0x19213*/ u8 filler19213;
-    /*0x19214*/ u8 unk19214;
-    /*0x19215*/ u8 unk19215;
-    /*0x19216*/ u8 unk19216;    // sprite ID
-    /*0x19217*/ s8 applauseLevel;
+    /*0x8*/ u8 mainTaskId;
+    /*0x9*/ u8 unk1920D[4];
+    /*0xD*/ u8 unk19211;
+    /*0xE*/ u8 unk19212;
+    /*0xF*/ u8 filler19213;
+    /*0x10*/ u8 unk19214;
+    /*0x11*/ u8 unk19215;
+    /*0x12*/ u8 unk19216;    // sprite ID
+    /*0x13*/ s8 applauseLevel;
     /*0x19218*/ u8 unk19218[4];
     /*0x1921C*/ u32 unk1921C;   // saved RNG value?
     u16 unk19220[5][4];  // move history?
@@ -385,9 +369,22 @@ struct UnknownContestStruct4
     u8 unk2_2:1;
 };
 
+struct UnknownContestStruct6
+{
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+};
+
 struct ContestResourcesField1C
 {
-    u8 filler_00[0x40];
+    u16 unk0[5];
+    s16 unkA;
+    u8 unkC;
+    u8 unkD;
+    u8 unkE_1:1;
+    u8 unkE_2:1;
 };
 
 struct ContestResourcesField20
@@ -412,38 +409,62 @@ struct ContestResources
     void * field_3c;
 };
 
-extern struct ContestResources *gContestResources;
-
 #define sContest (*gContestResources->field_0)
 #define sContestantStatus (gContestResources->field_4)
 #define shared192D0 (*gContestResources->field_8)
 #define eContestAI (gContestResources->field_C)
 #define shared19328 (*gContestResources->field_10)
 #define shared19338 (*gContestResources->field_14)
-
 #define shared15800 (gHeap + 0x18000)
+#define shared16800 (gHeap + 0x19000)
 #define shared18000 (*(struct Shared18000 *)(gHeap + 0x1a000))
 
-extern u32 gContestRngValue;
+extern struct ContestPokemon gContestMons[4];
+extern s16 gContestMonConditions[4];
+extern s16 gUnknown_02039F08[4];
+extern s16 gUnknown_02039F10[4];
+extern s16 gUnknown_02039F18[4];
+extern u8 gContestFinalStandings[4];
+extern u8 gContestMonPartyIndex;
+extern u8 gContestPlayerMonIndex;
 extern u8 gUnknown_02039F26[4];
+extern u8 gIsLinkContest;
+extern u8 gUnknown_02039F2B;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
+extern u8 gNumLinkContestPlayers;
+extern u8 gHighestRibbonRank;
+extern struct ContestResources *gContestResources;
+extern u8 sContestBgCopyFlags;
+extern struct ContestWinner gUnknown_02039F3C;
 
-bool8 IsSpeciesNotUnown(u16 species);
+extern u32 gContestRngValue;
+
+// contest.c
+void ResetLinkContestBoolean(void);
 void LoadContestBgAfterMoveAnim(void);
+void sub_80D7B24(void);
+void sub_80DA8C8(u8 partyIndex);
+void sub_80DAB8C(u8 contestType, u8 rank);
+void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
+u8 sub_80DAE0C(struct Pokemon *pkmn);
+void sub_80DB09C(u8 contestCategory);
+bool8 IsSpeciesNotUnown(u16 species);
+bool8 Contest_IsMonsTurnDisabled(u8 a);
+void sub_80DBED4(void);
+void sub_80DCE58(u8 a);
 void SetContestantEffectStringID(u8 a, u8 b);
 void SetContestantEffectStringID2(u8 a, u8 b);
+void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
-bool8 Contest_IsMonsTurnDisabled(u8 a);
+s8 Contest_GetMoveExcitement(u16 move);
 bool8 sub_80DE1E8(u8 a);
-void SetStartledString(u8 a, u8 b);
-s8 Contest_GetMoveExcitement(u16);
-u8 sub_80DAE0C(struct Pokemon *);
-void sub_80DEDA8(u8);
-void sub_80DACBC(u8 contestType, u8 rank, bool32 isPostgame);
-void sub_80DB09C(u8 contestCategory);
-void sub_80DCE58(u8);
-void sub_80DFA08(struct ContestPokemon *mon, int language);
-void sub_80DBED4(void);
-u8 sub_80DEFA8(u8, u8);
+void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
+void ResetContestLinkResults(void);
+bool8 sub_80DEDA8(u8 a);
+u8 sub_80DEFA8(u8 a, u8 b);
+void ClearContestWinnerPicsInContestHall(void);
+void sub_80DFA08(struct ContestPokemon *mon, s32 language);
 
 // contest link
 void sub_81D9DE4(u8 taskId);
@@ -455,6 +476,5 @@ bool32 sub_80FC4F4(void *, u16);
 bool8 sub_80FC55C(void);
 bool8 sub_80FC530(u8);
 u8 sub_80F86E0(u8 *);
-
 
 #endif //GUARD_CONTEST_H

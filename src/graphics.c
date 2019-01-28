@@ -1032,8 +1032,8 @@ const u32 gBattleAnimSpriteSheet_262[] = INCBIN_U32("graphics/battle_anims/sprit
 const u32 gBattleAnimSpritePalette_262[] = INCBIN_U32("graphics/battle_anims/sprites/262.gbapal.lz");
 
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/nextturn.4bpp.lz");
-const u8 gUnknown_08D8E9B4[] = INCBIN_U8("graphics/contest/nextturn_numbers.4bpp");
-const u8 gUnknown_08D8EA34[] = INCBIN_U8("graphics/contest/nextturn_random.4bpp");
+const u8 gContestNextTurnNumbersGfx[] = INCBIN_U8("graphics/contest/nextturn_numbers.4bpp");
+const u8 gContestNextTurnRandomGfx[] = INCBIN_U8("graphics/contest/nextturn_random.4bpp");
 
 const u32 gBattleAnimSpriteSheet_264[] = INCBIN_U32("graphics/battle_anims/sprites/264.4bpp.lz");
 const u32 gBattleAnimSpritePalette_264[] = INCBIN_U32("graphics/battle_anims/sprites/264.gbapal.lz");

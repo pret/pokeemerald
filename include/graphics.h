@@ -4750,9 +4750,13 @@ extern const u32 gBattleStatMask8_Pal[];
 extern const u32 gUnknown_08D9A88C[];
 extern const u32 gContestMiscGfx[];
 extern const u32 gContestAudienceGfx[];
+extern const u8 gContestApplauseMeterGfx[];
+extern const u8 gContestNextTurnNumbersGfx[];
+extern const u8 gContestNextTurnRandomGfx[];
 extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
+extern const u32 gUnknown_08C17980[];
 
 extern const u32 gUnknown_08D95E00[];
 extern const u32 gUnknown_08D960D0[];
