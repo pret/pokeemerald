@@ -16,3 +16,4 @@ LinkContestRoom1_EventObjects: @ 8539EFC
 	object_event 15, EVENT_OBJ_GFX_ARTIST, 0, 12, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, 0x0, 0
 
 LinkContestRoom1_MapEvents:: @ 853A064
+	map_events LinkContestRoom1_EventObjects, 0x0, 0x0, 0x0
