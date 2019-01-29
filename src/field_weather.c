@@ -73,12 +73,12 @@ IWRAM_DATA static const u8 *sPaletteGammaTypes;
 // The drought weather effect uses a precalculated color lookup table. Presumably this
 // is because the underlying color shift calculation is slow.
 const u16 sDroughtWeatherColors[][0x1000] = {
-    INCBIN_U16("graphics/weather/drought/0.gbapal"),
-    INCBIN_U16("graphics/weather/drought/1.gbapal"),
-    INCBIN_U16("graphics/weather/drought/2.gbapal"),
-    INCBIN_U16("graphics/weather/drought/3.gbapal"),
-    INCBIN_U16("graphics/weather/drought/4.gbapal"),
-    INCBIN_U16("graphics/weather/drought/5.gbapal"),
+    INCBIN_U16("graphics/weather/drought/colors_0.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_1.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_2.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_3.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_4.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_5.bin"),
 };
 
 // This is a pointer to gWeather. All code in this file accesses gWeather directly,
