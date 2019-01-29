@@ -61,11 +61,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_RegisteredInMatchCall
 	.4byte Std_9
 	.4byte Std_10
-
 gStdScripts_End:: @ 81DC2CC
-	map_script 3, PetalburgCity_MapScript1_1DC2D7
-	map_script 2, PetalburgCity_MapScript2_1DC31C
-	.byte 0
 
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"
