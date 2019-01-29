@@ -1,5 +1,5 @@
 RustboroCity_House3: @ 8483504
-	.4byte RustboroCity_House_Layouts
+	.4byte RustboroCity_House_Layout
 	.4byte RustboroCity_House3_MapEvents
 	.4byte RustboroCity_House3_MapScripts
 	.4byte 0x0

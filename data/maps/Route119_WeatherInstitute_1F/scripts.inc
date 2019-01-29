@@ -9,7 +9,7 @@ Route119_WeatherInstitute_1F_MapScript1_26FA8C: @ 826FA8C
 
 Route119_WeatherInstitute_1F_EventScript_26FA98:: @ 826FA98
 	setobjectxyperm 5, 0, 5
-	setobjectmovementtype 5, 10
+	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route119_WeatherInstitute_1F_EventScript_26FAA4:: @ 826FAA4

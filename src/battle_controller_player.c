@@ -740,10 +740,10 @@ static void HandleMoveSwitching(void)
             moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]] = moveInfo->maxPp[gMultiUsePlayerCursor];
             moveInfo->maxPp[gMultiUsePlayerCursor] = i;
 
-            if (gDisableStructs[gActiveBattler].unk18_b & gBitTable[gMoveSelectionCursor[gActiveBattler]])
+            if (gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[gMoveSelectionCursor[gActiveBattler]])
             {
-                gDisableStructs[gActiveBattler].unk18_b &= (~gBitTable[gMoveSelectionCursor[gActiveBattler]]);
-                gDisableStructs[gActiveBattler].unk18_b |= gBitTable[gMultiUsePlayerCursor];
+                gDisableStructs[gActiveBattler].mimickedMoves &= (~gBitTable[gMoveSelectionCursor[gActiveBattler]]);
+                gDisableStructs[gActiveBattler].mimickedMoves |= gBitTable[gMultiUsePlayerCursor];
             }
 
             MoveSelectionDisplayMoveNames();

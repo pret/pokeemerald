@@ -463,10 +463,10 @@ static void BattleIntroSlideLink(u8 taskId)
         if (--gTasks[taskId].data[2] == 0)
         {
             gTasks[taskId].data[0]++;
-            gSprites[gBattleStruct->field_7D].oam.objMode = ST_OAM_OBJ_WINDOW;
-            gSprites[gBattleStruct->field_7D].callback = sub_8038B74;
-            gSprites[gBattleStruct->field_7E].oam.objMode = ST_OAM_OBJ_WINDOW;
-            gSprites[gBattleStruct->field_7E].callback = sub_8038B74;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].oam.objMode = ST_OAM_OBJ_WINDOW;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].callback = sub_8038B74;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.objMode = ST_OAM_OBJ_WINDOW;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].callback = sub_8038B74;
             SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2);
         }

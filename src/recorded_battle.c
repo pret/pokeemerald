@@ -782,7 +782,7 @@ void sub_818603C(u8 arg0)
                         movePp.moves[j] = gBattleMons[battlerId].moves[array1[j]];
                         movePp.pp[j] = gBattleMons[battlerId].pp[array1[j]];
                         array3[j] = ppBonuses[array1[j]];
-                        array2[j] = (gDisableStructs[battlerId].unk18_b & gBitTable[j]) >> j;
+                        array2[j] = (gDisableStructs[battlerId].mimickedMoves & gBitTable[j]) >> j;
                     }
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
@@ -790,11 +790,11 @@ void sub_818603C(u8 arg0)
                         gBattleMons[battlerId].pp[j] = movePp.pp[j];
                     }
                     gBattleMons[battlerId].ppBonuses = 0;
-                    gDisableStructs[battlerId].unk18_b = 0;
+                    gDisableStructs[battlerId].mimickedMoves = 0;
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         gBattleMons[battlerId].ppBonuses |= (array3[j]) << (j << 1);
-                        gDisableStructs[battlerId].unk18_b |= (array2[j]) << (j);
+                        gDisableStructs[battlerId].mimickedMoves |= (array2[j]) << (j);
                     }
 
                     if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED))

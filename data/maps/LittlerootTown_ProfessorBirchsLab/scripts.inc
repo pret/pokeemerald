@@ -19,7 +19,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9CCD:: @ 81F9CCD
 	specialvar VAR_RESULT, HasAllHoennMons
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1F9CE9
-	setobjectmovementtype 3, 3
+	setobjectmovementtype 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm 3, 5, 10
 	end
 
@@ -33,7 +33,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF3:: @ 81F9CF3
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7:: @ 81F9CF7
 	setmaplayoutindex 432
-	setobjectmovementtype 3, 3
+	setobjectmovementtype 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm 3, 5, 10
 	end
 

@@ -245,7 +245,7 @@ RustboroCity_EventScript_1E094E:: @ 81E094E
 RustboroCity_EventScript_1E095A:: @ 81E095A
 	lockall
 	setobjectxyperm 9, 14, 21
-	setobjectmovementtype 9, 10
+	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 0
 	goto RustboroCity_EventScript_1E09CD
 	end
@@ -253,7 +253,7 @@ RustboroCity_EventScript_1E095A:: @ 81E095A
 RustboroCity_EventScript_1E0971:: @ 81E0971
 	lockall
 	setobjectxyperm 9, 14, 21
-	setobjectmovementtype 9, 10
+	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 1
 	goto RustboroCity_EventScript_1E09CD
 	end
@@ -261,7 +261,7 @@ RustboroCity_EventScript_1E0971:: @ 81E0971
 RustboroCity_EventScript_1E0988:: @ 81E0988
 	lockall
 	setobjectxyperm 9, 14, 21
-	setobjectmovementtype 9, 10
+	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 2
 	goto RustboroCity_EventScript_1E09CD
 	end
@@ -269,7 +269,7 @@ RustboroCity_EventScript_1E0988:: @ 81E0988
 RustboroCity_EventScript_1E099F:: @ 81E099F
 	lockall
 	setobjectxyperm 9, 14, 21
-	setobjectmovementtype 9, 10
+	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 3
 	goto RustboroCity_EventScript_1E09CD
 	end
@@ -277,7 +277,7 @@ RustboroCity_EventScript_1E099F:: @ 81E099F
 RustboroCity_EventScript_1E09B6:: @ 81E09B6
 	lockall
 	setobjectxyperm 9, 14, 21
-	setobjectmovementtype 9, 10
+	setobjectmovementtype 9, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 4
 	goto RustboroCity_EventScript_1E09CD
 	end

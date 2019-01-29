@@ -1,7 +1,7 @@
 PetalburgCity: @ 84824B8
 	.4byte PetalburgCity_Layout
 	.4byte PetalburgCity_MapEvents
-	.4byte gStdScripts_End
+	.4byte PetalburgCity_MapScripts
 	.4byte PetalburgCity_MapConnections
 	.2byte MUS_MACHI_S2
 	.2byte 1

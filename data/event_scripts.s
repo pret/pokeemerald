@@ -2,6 +2,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -60,11 +61,7 @@ gStdScripts:: @ 81DC2A0
 	.4byte Std_RegisteredInMatchCall
 	.4byte Std_9
 	.4byte Std_10
-
 gStdScripts_End:: @ 81DC2CC
-	map_script 3, PetalburgCity_MapScript1_1DC2D7
-	map_script 2, PetalburgCity_MapScript2_1DC31C
-	.byte 0
 
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"
@@ -638,17 +635,17 @@ SecretBase_RedCave1_Text_23B759: @ 823B759
 	.include "data/maps/RecordCorner/scripts.inc"
 	.include "data/maps/DoubleBattleColosseum/scripts.inc"
 	.include "data/maps/LinkContestRoom1/scripts.inc"
-	.include "data/maps/LinkContestRoom2/scripts.inc"
-	.include "data/maps/LinkContestRoom3/scripts.inc"
-	.include "data/maps/LinkContestRoom4/scripts.inc"
-	.include "data/maps/LinkContestRoom5/scripts.inc"
-	.include "data/maps/LinkContestRoom6/scripts.inc"
 	.include "data/maps/UnknownMap_25_29/scripts.inc"
 	.include "data/maps/UnknownMap_25_30/scripts.inc"
 	.include "data/maps/UnknownMap_25_31/scripts.inc"
 	.include "data/maps/UnknownMap_25_32/scripts.inc"
 	.include "data/maps/UnknownMap_25_33/scripts.inc"
 	.include "data/maps/UnknownMap_25_34/scripts.inc"
+	.include "data/maps/LinkContestRoom2/scripts.inc"
+	.include "data/maps/LinkContestRoom3/scripts.inc"
+	.include "data/maps/LinkContestRoom4/scripts.inc"
+	.include "data/maps/LinkContestRoom5/scripts.inc"
+	.include "data/maps/LinkContestRoom6/scripts.inc"
 	.include "data/maps/InsideOfTruck/scripts.inc"
 	.include "data/maps/SSTidalCorridor/scripts.inc"
 	.include "data/maps/SSTidalLowerDeck/scripts.inc"

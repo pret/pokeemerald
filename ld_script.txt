@@ -440,14 +440,13 @@ SECTIONS {
         src/start_menu.o(.rodata);
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
-        data/fanfares.o(.rodata);
+        src/sound.o(.rodata);
         src/battle_anim.o(.rodata);
         src/battle_anim_80A5C6C.o(.rodata);
         data/map_events.o(.rodata);
         data/battle_anim_80A9C70.o(.rodata);
         src/battle_anim_80A9C70.o(.rodata);
         src/title_screen.o(.rodata);
-        data/field_weather.o(.rodata);
         src/field_weather.o(.rodata);
         src/field_weather_effect.o(.rodata);
         src/field_screen_effect.o(.rodata);

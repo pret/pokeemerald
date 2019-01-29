@@ -1314,7 +1314,7 @@ static void atk03_ppreduce(void)
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = 0;
 
         if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
-            && !((gDisableStructs[gBattlerAttacker].unk18_b) & gBitTable[gCurrMovePos]))
+            && !((gDisableStructs[gBattlerAttacker].mimickedMoves) & gBitTable[gCurrMovePos]))
         {
             gActiveBattler = gBattlerAttacker;
             BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + gCurrMovePos, 0, 1, &gBattleMons[gBattlerAttacker].pp[gCurrMovePos]);
@@ -5166,10 +5166,12 @@ static void atk52_switchineffects(void)
     }
     else
     {
-        if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT && !gDisableStructs[gActiveBattler].truantUnknownBit)
+        // There is a hack here to ensure the truant counter will be 0 when the battler's next turn starts.
+        // The truant counter is not updated in the case where a mon switches in after a lost judgement in the battle arena.
+        if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT && !gDisableStructs[gActiveBattler].truantSwitchInHack)
             gDisableStructs[gActiveBattler].truantCounter = 1;
 
-        gDisableStructs[gActiveBattler].truantUnknownBit = 0;
+        gDisableStructs[gActiveBattler].truantSwitchInHack = 0;
 
         if (!AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0)
             && !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
@@ -5390,7 +5392,7 @@ static void atk5A_yesnoboxlearnmove(void)
 
                     if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId
                         && !(gBattleMons[0].status2 & STATUS2_TRANSFORMED)
-                        && !(gDisableStructs[0].unk18_b & gBitTable[movePosition]))
+                        && !(gDisableStructs[0].mimickedMoves & gBitTable[movePosition]))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
                         SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
@@ -5398,7 +5400,7 @@ static void atk5A_yesnoboxlearnmove(void)
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                         && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
                         && !(gBattleMons[2].status2 & STATUS2_TRANSFORMED)
-                        && !(gDisableStructs[2].unk18_b & gBitTable[movePosition]))
+                        && !(gDisableStructs[2].mimickedMoves & gBitTable[movePosition]))
                     {
                         RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
                         SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
@@ -6429,14 +6431,14 @@ static void atk76_various(void)
         gBattleMons[1].hp = 0;
         gHitMarker |= HITMARKER_FAINTED(1);
         gBattleStruct->arenaLostOpponentMons |= gBitTable[gBattlerPartyIndexes[1]];
-        gDisableStructs[1].truantUnknownBit = 1;
+        gDisableStructs[1].truantSwitchInHack = 1;
         break;
     case VARIOUS_ARENA_PLAYER_MON_LOST:
         gBattleMons[0].hp = 0;
         gHitMarker |= HITMARKER_FAINTED(0);
         gHitMarker |= HITMARKER_x400000;
         gBattleStruct->arenaLostPlayerMons |= gBitTable[gBattlerPartyIndexes[0]];
-        gDisableStructs[0].truantUnknownBit = 1;
+        gDisableStructs[0].truantSwitchInHack = 1;
         break;
     case VARIOUS_ARENA_BOTH_MONS_LOST:
         gBattleMons[0].hp = 0;
@@ -6446,8 +6448,8 @@ static void atk76_various(void)
         gHitMarker |= HITMARKER_x400000;
         gBattleStruct->arenaLostPlayerMons |= gBitTable[gBattlerPartyIndexes[0]];
         gBattleStruct->arenaLostOpponentMons |= gBitTable[gBattlerPartyIndexes[1]];
-        gDisableStructs[0].truantUnknownBit = 1;
-        gDisableStructs[1].truantUnknownBit = 1;
+        gDisableStructs[0].truantSwitchInHack = 1;
+        gDisableStructs[1].truantSwitchInHack = 1;
         break;
     case VARIOUS_EMIT_YESNOBOX:
         BtlController_EmitUnknownYesNoBox(0);
@@ -8524,7 +8526,7 @@ static void atk9B_transformdataexecution(void)
         gDisableStructs[gBattlerAttacker].disabledMove = 0;
         gDisableStructs[gBattlerAttacker].disableTimer = 0;
         gDisableStructs[gBattlerAttacker].transformedMonPersonality = gBattleMons[gBattlerTarget].personality;
-        gDisableStructs[gBattlerAttacker].unk18_b = 0;
+        gDisableStructs[gBattlerAttacker].mimickedMoves = 0;
         gDisableStructs[gBattlerAttacker].usedMoves = 0;
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
@@ -8599,7 +8601,7 @@ static void atk9D_mimicattackcopy(void)
     }
     else
     {
-        s32 i;
+        int i;
 
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -8618,7 +8620,7 @@ static void atk9D_mimicattackcopy(void)
 
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gBattlerTarget])
 
-            gDisableStructs[gBattlerAttacker].unk18_b |= gBitTable[gCurrMovePos];
+            gDisableStructs[gBattlerAttacker].mimickedMoves |= gBitTable[gCurrMovePos];
             gBattlescriptCurrInstr += 5;
         }
         else
@@ -9064,7 +9066,7 @@ static void atkAD_tryspiteppreduce(void)
             gBattleMons[gBattlerTarget].pp[i] -= ppToDeduct;
             gActiveBattler = gBattlerTarget;
 
-            if (!(gDisableStructs[gActiveBattler].unk18_b & gBitTable[i])
+            if (!(gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[i])
                 && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
             {
                 BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + i, 0, 1, &gBattleMons[gActiveBattler].pp[i]);

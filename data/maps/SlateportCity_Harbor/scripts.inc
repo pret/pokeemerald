@@ -17,7 +17,7 @@ SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
 SlateportCity_Harbor_EventScript_20C9A9:: @ 820C9A9
 	savebgm MUS_AQA_0
 	setobjectxyperm 4, 12, 13
-	setobjectmovementtype 4, 9
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_LEFT
 	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	return
 
@@ -78,7 +78,7 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE
 	moveobjectoffscreen 4
-	setobjectmovementtype 4, 10
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_RIGHT
 	releaseall
 	end
 

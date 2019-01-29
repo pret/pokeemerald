@@ -1,7 +1,7 @@
 UnknownMap_25_33: @ 8484E2C
 	.4byte UnknownMap_25_33_Layout
-	.4byte UnknownMap_25_33_MapEvents
-	.4byte UnknownMap_25_33_MapScripts
+	.4byte LinkContestRoom1_MapEvents
+	.4byte LinkContestRoom1_MapScripts
 	.4byte 0x0
 	.2byte MUS_NIBI
 	.2byte 230

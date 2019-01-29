@@ -57,7 +57,7 @@ Route120_EventScript_1F54A3:: @ 81F54A3
 	return
 
 Route120_EventScript_1F54C8:: @ 81F54C8
-	setobjectmovementtype 36, 10
+	setobjectmovementtype 36, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 Route120_MapScript1_1F54CD: @ 81F54CD
