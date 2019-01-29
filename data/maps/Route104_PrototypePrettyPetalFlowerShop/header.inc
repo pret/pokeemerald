@@ -1,10 +1,10 @@
-Route104_PrototypePrettyPetalFlowerShop: @ 8485B14
+Route104_PrototypePrettyPetalFlowerShop:
 	.4byte Route104_PrettyPetalFlowerShop_Layout
 	.4byte Route104_PrototypePrettyPetalFlowerShop_MapEvents
 	.4byte Route104_PrototypePrettyPetalFlowerShop_MapScripts
 	.4byte 0x0
 	.2byte MUS_NEXTROAD
-	.2byte 117
+	.2byte LAYOUT_ROUTE104_PRETTY_PETAL_FLOWER_SHOP
 	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte WEATHER_NONE

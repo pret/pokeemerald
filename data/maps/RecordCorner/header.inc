@@ -1,10 +1,10 @@
-RecordCorner: @ 8484D68
+RecordCorner:
 	.4byte RecordCorner_Layout
 	.4byte RecordCorner_MapEvents
 	.4byte RecordCorner_MapScripts
 	.4byte 0x0
 	.2byte MUS_RAINBOW
-	.2byte 223
+	.2byte LAYOUT_RECORD_CORNER
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

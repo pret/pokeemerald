@@ -1,10 +1,10 @@
-LavaridgeTown: @ 8482608
+LavaridgeTown:
 	.4byte LavaridgeTown_Layout
 	.4byte LavaridgeTown_MapEvents
 	.4byte LavaridgeTown_MapScripts
 	.4byte LavaridgeTown_MapConnections
 	.2byte MUS_MACHI_S4
-	.2byte 13
+	.2byte LAYOUT_LAVARIDGE_TOWN
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte WEATHER_SUNNY

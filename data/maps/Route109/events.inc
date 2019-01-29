@@ -1,4 +1,4 @@
-Route109_EventObjects: @ 8528A34
+Route109_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_MR_BRINEYS_BOAT, 0, 21, 26, 1, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	object_event 2, EVENT_OBJ_GFX_EXPERT_M, 0, 21, 24, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, Route109_EventScript_1EE910, FLAG_HIDE_ROUTE_108_MR_BRINEY
 	object_event 3, EVENT_OBJ_GFX_SWIMMER_M, 0, 12, 36, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 5, Route109_EventScript_1EEA3D, 0
@@ -24,10 +24,10 @@ Route109_EventObjects: @ 8528A34
 	object_event 23, EVENT_OBJ_GFX_ITEM_BALL, 0, 25, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route109_EventScript_290D67, FLAG_ITEM_ROUTE_109_POTION
 	object_event 24, EVENT_OBJ_GFX_MAN_5, 0, 17, 56, 3, MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT, 1, 1, 1, 3, Route109_EventScript_1EEC06, 0
 
-Route109_MapWarps: @ 8528C74
+Route109_MapWarps:
 	warp_def 12, 5, 0, 0, MAP_ROUTE109_SEASHORE_HOUSE
 
-Route109_MapBGEvents: @ 8528C7C
+Route109_MapBGEvents:
 	bg_event 15, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route109_EventScript_1EEA2B
 	bg_event 29, 10, 3, BG_EVENT_PLAYER_FACING_ANY, Route109_EventScript_1EEA34
 	bg_hidden_item_event 16, 23, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_109_REVIVE
@@ -37,5 +37,6 @@ Route109_MapBGEvents: @ 8528C7C
 	bg_hidden_item_event 13, 16, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_2
 	bg_hidden_item_event 8, 42, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_3
 
-Route109_MapEvents:: @ 8528CDC
+Route109_MapEvents::
 	map_events Route109_EventObjects, Route109_MapWarps, 0x0, Route109_MapBGEvents
+

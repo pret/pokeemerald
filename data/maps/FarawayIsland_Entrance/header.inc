@@ -1,10 +1,10 @@
-FarawayIsland_Entrance: @ 848575C
+FarawayIsland_Entrance:
 	.4byte FarawayIsland_Entrance_Layout
 	.4byte FarawayIsland_Entrance_MapEvents
 	.4byte FarawayIsland_Entrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN02
-	.2byte 402
+	.2byte LAYOUT_FARAWAY_ISLAND_ENTRANCE
 	.byte MAPSEC_FARAWAY_ISLAND
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,4 +1,4 @@
-Route131_EventObjects: @ 852CAB4
+Route131_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 41, 32, 1, MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN, 5, 7, 1, 3, Route131_EventScript_1F7429, 0
 	object_event 2, EVENT_OBJ_GFX_SWIMMER_M, 0, 18, 19, 1, MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT, 0, 7, 1, 4, Route131_EventScript_1F7440, 0
 	object_event 3, EVENT_OBJ_GFX_SWIMMER_F, 0, 10, 22, 1, MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT, 6, 0, 1, 4, Route131_EventScript_1F7457, 0
@@ -8,9 +8,9 @@ Route131_EventObjects: @ 852CAB4
 	object_event 7, EVENT_OBJ_GFX_SWIMMER_M, 0, 52, 20, 1, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 1, 3, 1, 5, Route131_EventScript_1F74D2, 0
 	object_event 8, EVENT_OBJ_GFX_SWIMMER_F, 0, 52, 27, 1, MOVEMENT_TYPE_WALK_UP_AND_DOWN, 1, 3, 1, 5, Route131_EventScript_1F74BB, 0
 
-Route131_MapWarps: @ 852CB74
+Route131_MapWarps:
 	warp_def 36, 6, 3, 0, MAP_SKY_PILLAR_ENTRANCE
 
-Route131_MapEvents:: @ 852CB7C
+Route131_MapEvents::
 	map_events Route131_EventObjects, Route131_MapWarps, 0x0, 0x0
 

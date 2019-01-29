@@ -1,4 +1,4 @@
-BattleFrontier_OutsideEast_EventObjects: @ 853BB10
+BattleFrontier_OutsideEast_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_NINJA_BOY, 0, 20, 17, 0, MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT, 3, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242C67, 0
 	object_event 2, EVENT_OBJ_GFX_MAN_3, 0, 42, 15, 0, MOVEMENT_TYPE_WANDER_AROUND, 1, 3, 0, 0, BattleFrontier_OutsideEast_EventScript_242C70, 0
 	object_event 3, EVENT_OBJ_GFX_HIKER, 0, 53, 6, 0, MOVEMENT_TYPE_FACE_DOWN, 2, 0, 0, 0, BattleFrontier_OutsideEast_EventScript_242C79, 0
@@ -26,7 +26,7 @@ BattleFrontier_OutsideEast_EventObjects: @ 853BB10
 	object_event 25, EVENT_OBJ_GFX_GENTLEMAN, 0, 48, 41, 0, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242DE0, 0
 	object_event 26, EVENT_OBJ_GFX_CAMPER, 0, 29, 14, 0, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, BattleFrontier_OutsideEast_EventScript_242E08, 0
 
-BattleFrontier_OutsideEast_MapWarps: @ 853BD80
+BattleFrontier_OutsideEast_MapWarps:
 	warp_def 16, 14, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY
 	warp_def 39, 29, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY
 	warp_def 45, 56, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY
@@ -42,7 +42,7 @@ BattleFrontier_OutsideEast_MapWarps: @ 853BD80
 	warp_def 3, 51, 0, 0, MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F
 	warp_def 28, 7, 0, 0, MAP_ARTISAN_CAVE_1F
 
-BattleFrontier_OutsideEast_MapBGEvents: @ 853BDF0
+BattleFrontier_OutsideEast_MapBGEvents:
 	bg_event 13, 17, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C43
 	bg_event 43, 56, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C4C
 	bg_event 36, 34, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_242C55
@@ -52,6 +52,6 @@ BattleFrontier_OutsideEast_MapBGEvents: @ 853BDF0
 	bg_event 4, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_271E73
 	bg_event 5, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideEast_EventScript_271E73
 
-BattleFrontier_OutsideEast_MapEvents:: @ 853BE50
+BattleFrontier_OutsideEast_MapEvents::
 	map_events BattleFrontier_OutsideEast_EventObjects, BattleFrontier_OutsideEast_MapWarps, 0x0, BattleFrontier_OutsideEast_MapBGEvents
 

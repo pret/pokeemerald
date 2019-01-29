@@ -1,4 +1,4 @@
-SecretBase_YellowCave2_EventObjects: @ 8538688
+SecretBase_YellowCave2_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_VAR_F, 0, 1, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SecretBase_YellowCave2_EventScript_275D64, FLAG_DECORATION_0
 	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 0, 0, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_1
 	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 0, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_2
@@ -15,9 +15,9 @@ SecretBase_YellowCave2_EventObjects: @ 8538688
 	object_event 14, EVENT_OBJ_GFX_VAR_C, 0, 1, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_13
 	object_event 15, EVENT_OBJ_GFX_VAR_D, 0, 1, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_14
 
-SecretBase_YellowCave2_MapWarps: @ 85387F0
+SecretBase_YellowCave2_MapWarps:
 	warp_def 12, 7, 0, 126, MAP_NONE
 
-SecretBase_YellowCave2_MapEvents:: @ 85387F8
+SecretBase_YellowCave2_MapEvents::
 	map_events SecretBase_YellowCave2_EventObjects, SecretBase_YellowCave2_MapWarps, 0x0, 0x0
 

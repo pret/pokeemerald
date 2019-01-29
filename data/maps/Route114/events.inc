@@ -1,4 +1,4 @@
-Route114_EventObjects: @ 8529E68
+Route114_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 31, 43, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 77, BerryTreeScript, 0
 	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 31, 44, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 78, BerryTreeScript, 0
 	object_event 3, EVENT_OBJ_GFX_HIKER, 0, 15, 65, 7, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 6, Route114_EventScript_1F2640, 0
@@ -27,14 +27,14 @@ Route114_EventObjects: @ 8529E68
 	object_event 26, EVENT_OBJ_GFX_ITEM_BALL, 0, 31, 19, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route114_EventScript_290E1D, FLAG_ITEM_ROUTE_114_ENERGY_POWDER
 	object_event 27, EVENT_OBJ_GFX_FISHERMAN, 0, 28, 16, 3, MOVEMENT_TYPE_FACE_DOWN_AND_LEFT, 1, 1, 1, 3, Route114_EventScript_1F27F2, 0
 
-Route114_MapWarps: @ 852A0F0
+Route114_MapWarps:
 	warp_def 8, 63, 0, 0, MAP_METEOR_FALLS_1F_1R
 	warp_def 29, 5, 0, 0, MAP_ROUTE114_FOSSIL_MANIACS_HOUSE
 	warp_def 27, 36, 0, 0, MAP_ROUTE114_LANETTES_HOUSE
 	warp_def 6, 46, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 	warp_def 7, 4, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
-Route114_MapBGEvents: @ 852A118
+Route114_MapBGEvents:
 	bg_event 7, 64, 0, BG_EVENT_PLAYER_FACING_ANY, Route114_EventScript_1F2625
 	bg_event 31, 7, 0, BG_EVENT_PLAYER_FACING_ANY, Route114_EventScript_1F262E
 	bg_secret_base_event 9, 47, 0, SECRET_BASE_BROWN_CAVE1_1
@@ -48,6 +48,6 @@ Route114_MapBGEvents: @ 852A118
 	bg_secret_base_event 32, 57, 0, SECRET_BASE_BROWN_CAVE4_3
 	bg_hidden_item_event 7, 30, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_113_REVIVE
 
-Route114_MapEvents:: @ 852A1A8
+Route114_MapEvents::
 	map_events Route114_EventObjects, Route114_MapWarps, 0x0, Route114_MapBGEvents
 

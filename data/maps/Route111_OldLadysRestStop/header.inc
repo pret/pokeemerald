@@ -1,10 +1,10 @@
-Route111_OldLadysRestStop: @ 8483DC4
+Route111_OldLadysRestStop:
 	.4byte House3_Layout
 	.4byte Route111_OldLadysRestStop_MapEvents
 	.4byte Route111_OldLadysRestStop_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 64
+	.2byte LAYOUT_HOUSE3
 	.byte MAPSEC_ROUTE_111
 	.byte 0
 	.byte WEATHER_NONE

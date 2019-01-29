@@ -1,10 +1,10 @@
-VerdanturfTown_WandasHouse: @ 8482F00
+VerdanturfTown_WandasHouse:
 	.4byte VerdanturfTown_WandasHouse_Layout
 	.4byte VerdanturfTown_WandasHouse_MapEvents
 	.4byte VerdanturfTown_WandasHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOMACHI0
-	.2byte 76
+	.2byte LAYOUT_VERDANTURF_TOWN_WANDAS_HOUSE
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte WEATHER_NONE

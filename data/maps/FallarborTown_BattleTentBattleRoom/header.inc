@@ -1,10 +1,10 @@
-FallarborTown_BattleTentBattleRoom: @ 8482DCC
+FallarborTown_BattleTentBattleRoom:
 	.4byte BattleTentBattleRoom_Layout
 	.4byte FallarborTown_BattleTentBattleRoom_MapEvents
 	.4byte FallarborTown_BattleTentBattleRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_TOWER
-	.2byte 386
+	.2byte LAYOUT_BATTLE_TENT_BATTLE_ROOM
 	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte WEATHER_NONE

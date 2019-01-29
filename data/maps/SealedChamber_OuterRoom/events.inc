@@ -1,7 +1,7 @@
-SealedChamber_OuterRoom_MapWarps: @ 8536D88
+SealedChamber_OuterRoom_MapWarps:
 	warp_def 10, 2, 3, 0, MAP_SEALED_CHAMBER_INNER_ROOM
 
-SealedChamber_OuterRoom_MapBGEvents: @ 8536D90
+SealedChamber_OuterRoom_MapBGEvents:
 	bg_event 5, 6, 0, BG_EVENT_PLAYER_FACING_ANY, SealedChamber_OuterRoom_EventScript_23916C
 	bg_event 5, 9, 0, BG_EVENT_PLAYER_FACING_ANY, SealedChamber_OuterRoom_EventScript_239176
 	bg_event 5, 12, 0, BG_EVENT_PLAYER_FACING_ANY, SealedChamber_OuterRoom_EventScript_239180
@@ -32,6 +32,6 @@ SealedChamber_OuterRoom_MapBGEvents: @ 8536D90
 	bg_event 9, 2, 0, BG_EVENT_PLAYER_FACING_ANY, SealedChamber_OuterRoom_EventScript_2391ED
 	bg_event 11, 2, 0, BG_EVENT_PLAYER_FACING_ANY, SealedChamber_OuterRoom_EventScript_2391ED
 
-SealedChamber_OuterRoom_MapEvents:: @ 8536EEC
+SealedChamber_OuterRoom_MapEvents::
 	map_events 0x0, SealedChamber_OuterRoom_MapWarps, 0x0, SealedChamber_OuterRoom_MapBGEvents
 

@@ -1,4 +1,4 @@
-BattleFrontier_BattleDomeBattleRoom_EventObjects: @ 853C1C4
+BattleFrontier_BattleDomeBattleRoom_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_REPORTER_M, 0, 5, 4, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 2, EVENT_OBJ_GFX_TWIN, 0, 7, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 9, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
@@ -15,6 +15,6 @@ BattleFrontier_BattleDomeBattleRoom_EventObjects: @ 853C1C4
 	object_event 14, EVENT_OBJ_GFX_WOMAN_3, 0, 14, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 15, EVENT_OBJ_GFX_VAR_0, 0, 11, 6, 0, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, 0x0, 0
 
-BattleFrontier_BattleDomeBattleRoom_MapEvents:: @ 853C32C
+BattleFrontier_BattleDomeBattleRoom_MapEvents::
 	map_events BattleFrontier_BattleDomeBattleRoom_EventObjects, 0x0, 0x0, 0x0
 

@@ -1,10 +1,10 @@
-LilycoveCity_ContestHall: @ 84836C4
+LilycoveCity_ContestHall:
 	.4byte LilycoveCity_ContestHall_Layout
 	.4byte LilycoveCity_ContestHall_MapEvents
 	.4byte LilycoveCity_ContestHall_MapScripts
 	.4byte 0x0
 	.2byte MUS_CONLOBBY
-	.2byte 106
+	.2byte LAYOUT_LILYCOVE_CITY_CONTEST_HALL
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

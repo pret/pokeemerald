@@ -1,4 +1,4 @@
-SlateportCity_EventObjects: @ 85261CC
+SlateportCity_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_FAT_MAN, 0, 21, 11, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, SlateportCity_EventScript_1DCED9, 0
 	object_event 2, EVENT_OBJ_GFX_MAN_1, 0, 34, 29, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, SlateportCity_EventScript_1DCEF6, 0
 	object_event 3, EVENT_OBJ_GFX_RICH_BOY, 0, 5, 13, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 2, 0, 0, SlateportCity_EventScript_1DCEB8, 0
@@ -35,7 +35,7 @@ SlateportCity_EventObjects: @ 85261CC
 	object_event 34, EVENT_OBJ_GFX_POKEFAN_F, 0, 11, 37, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 2, 0, 0, SlateportCity_EventScript_1DD36E, 0
 	object_event 35, EVENT_OBJ_GFX_SCOTT, 0, 10, 12, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 2, 0, 0, 0x0, FLAG_HIDE_SLATEPORT_CITY_SCOTT
 
-SlateportCity_MapWarps: @ 8526514
+SlateportCity_MapWarps:
 	warp_def 19, 19, 0, 0, MAP_SLATEPORT_CITY_POKEMON_CENTER_1F
 	warp_def 13, 26, 0, 0, MAP_SLATEPORT_CITY_MART
 	warp_def 26, 38, 0, 0, MAP_SLATEPORT_CITY_STERNS_SHIPYARD_1F
@@ -48,10 +48,10 @@ SlateportCity_MapWarps: @ 8526514
 	warp_def 40, 7, 0, 2, MAP_SLATEPORT_CITY_HARBOR
 	warp_def 21, 44, 0, 0, MAP_SLATEPORT_CITY_HOUSE2
 
-SlateportCity_MapCoordEvents: @ 852656C
+SlateportCity_MapCoordEvents:
 	coord_event 10, 13, 3, VAR_0x40D2, 2, SlateportCity_EventScript_1DD5DC
 
-SlateportCity_MapBGEvents: @ 852657C
+SlateportCity_MapBGEvents:
 	bg_event 8, 19, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCFB2
 	bg_event 20, 19, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_271E73
 	bg_event 21, 19, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_271E73
@@ -66,6 +66,6 @@ SlateportCity_MapBGEvents: @ 852657C
 	bg_event 23, 38, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_1DCF3F
 	bg_event 10, 36, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_1DD643
 
-SlateportCity_MapEvents:: @ 8526618
+SlateportCity_MapEvents::
 	map_events SlateportCity_EventObjects, SlateportCity_MapWarps, SlateportCity_MapCoordEvents, SlateportCity_MapBGEvents
 

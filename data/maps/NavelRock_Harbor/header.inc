@@ -1,10 +1,10 @@
-NavelRock_Harbor: @ 8485890
+NavelRock_Harbor:
 	.4byte IslandHarbor_Layout
 	.4byte NavelRock_Harbor_MapEvents
 	.4byte NavelRock_Harbor_MapScripts
 	.4byte 0x0
 	.2byte MUS_RG_NANASHIMA
-	.2byte 405
+	.2byte LAYOUT_ISLAND_HARBOR
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
 	.byte WEATHER_NONE

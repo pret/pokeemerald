@@ -1,4 +1,4 @@
-MauvilleCity_Gym_EventObjects: @ 852FD5C
+MauvilleCity_Gym_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_WATTSON, 0, 5, 2, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_20DEEB, FLAG_HIDE_MAUVILLE_GYM_WATTSON
 	object_event 2, EVENT_OBJ_GFX_MAN_5, 0, 7, 8, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, MauvilleCity_Gym_EventScript_20E0D0, 0
 	object_event 3, EVENT_OBJ_GFX_GIRL_3, 0, 1, 16, 0, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 2, MauvilleCity_Gym_EventScript_20E0FE, 0
@@ -7,20 +7,20 @@ MauvilleCity_Gym_EventObjects: @ 852FD5C
 	object_event 6, EVENT_OBJ_GFX_MAN_2, 0, 7, 20, 0, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_20E12C, 0
 	object_event 7, EVENT_OBJ_GFX_MANIAC, 0, 7, 10, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 1, MauvilleCity_Gym_EventScript_20E115, 0
 
-MauvilleCity_Gym_MapWarps: @ 852FE04
+MauvilleCity_Gym_MapWarps:
 	warp_def 4, 20, 0, 0, MAP_MAUVILLE_CITY
 	warp_def 5, 20, 0, 0, MAP_MAUVILLE_CITY
 
-MauvilleCity_Gym_MapCoordEvents: @ 852FE14
+MauvilleCity_Gym_MapCoordEvents:
 	coord_event 4, 12, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20E01E
 	coord_event 3, 9, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20E043
 	coord_event 0, 15, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20DFF9
 	coord_event 8, 9, 3, VAR_TEMP_0, 0, MauvilleCity_Gym_EventScript_20E068
 
-MauvilleCity_Gym_MapBGEvents: @ 852FE54
+MauvilleCity_Gym_MapBGEvents:
 	bg_event 3, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_Gym_EventScript_20E14B
 	bg_event 6, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_Gym_EventScript_20E15B
 
-MauvilleCity_Gym_MapEvents:: @ 852FE6C
+MauvilleCity_Gym_MapEvents::
 	map_events MauvilleCity_Gym_EventObjects, MauvilleCity_Gym_MapWarps, MauvilleCity_Gym_MapCoordEvents, MauvilleCity_Gym_MapBGEvents
 

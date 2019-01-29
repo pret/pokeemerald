@@ -1,4 +1,4 @@
-VictoryRoad_B1F_EventObjects: @ 8535F44
+VictoryRoad_B1F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 20, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, FLAG_TEMP_13
 	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 21, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, FLAG_TEMP_14
 	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, VictoryRoad_B1F_EventScript_2908BA, FLAG_TEMP_11
@@ -21,7 +21,7 @@ VictoryRoad_B1F_EventObjects: @ 8535F44
 	object_event 20, EVENT_OBJ_GFX_MAN_3, 0, 14, 16, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 4, VictoryRoad_B1F_EventScript_23652A, 0
 	object_event 21, EVENT_OBJ_GFX_WOMAN_5, 0, 14, 20, 3, MOVEMENT_TYPE_FACE_UP_AND_RIGHT, 1, 1, 1, 3, VictoryRoad_B1F_EventScript_236541, 0
 
-VictoryRoad_B1F_MapWarps: @ 853613C
+VictoryRoad_B1F_MapWarps:
 	warp_def 30, 25, 3, 0, MAP_VICTORY_ROAD_B2F
 	warp_def 17, 16, 3, 2, MAP_VICTORY_ROAD_B2F
 	warp_def 42, 25, 3, 3, MAP_VICTORY_ROAD_1F
@@ -30,6 +30,6 @@ VictoryRoad_B1F_MapWarps: @ 853613C
 	warp_def 20, 21, 3, 2, MAP_VICTORY_ROAD_1F
 	warp_def 5, 26, 3, 3, MAP_VICTORY_ROAD_B2F
 
-VictoryRoad_B1F_MapEvents:: @ 8536174
+VictoryRoad_B1F_MapEvents::
 	map_events VictoryRoad_B1F_EventObjects, VictoryRoad_B1F_MapWarps, 0x0, 0x0
 

@@ -1,10 +1,10 @@
-VerdanturfTown_EventObjects: @ 8527CDC
+VerdanturfTown_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 4, 17, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5A8, 0
 	object_event 2, EVENT_OBJ_GFX_TWIN, 0, 9, 2, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB575, 0
 	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 7, 11, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, VerdanturfTown_EventScript_1EB5BA, 0
 	object_event 4, EVENT_OBJ_GFX_CAMPER, 0, 7, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, VerdanturfTown_EventScript_1EB5B1, 0
 
-VerdanturfTown_MapWarps: @ 8527D3C
+VerdanturfTown_MapWarps:
 	warp_def 3, 7, 0, 0, MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY
 	warp_def 12, 3, 0, 0, MAP_VERDANTURF_TOWN_MART
 	warp_def 16, 3, 0, 0, MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F
@@ -13,7 +13,7 @@ VerdanturfTown_MapWarps: @ 8527D3C
 	warp_def 1, 14, 0, 0, MAP_VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE
 	warp_def 17, 15, 0, 0, MAP_VERDANTURF_TOWN_HOUSE
 
-VerdanturfTown_MapBGEvents: @ 8527D74
+VerdanturfTown_MapBGEvents:
 	bg_event 14, 3, 0, BG_EVENT_PLAYER_FACING_NORTH, VerdanturfTown_EventScript_271E6A
 	bg_event 14, 6, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5D9
 	bg_event 17, 3, 0, BG_EVENT_PLAYER_FACING_NORTH, VerdanturfTown_EventScript_271E73
@@ -23,6 +23,6 @@ VerdanturfTown_MapBGEvents: @ 8527D74
 	bg_event 1, 8, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5EB
 	bg_event 7, 3, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_EventScript_1EB5F4
 
-VerdanturfTown_MapEvents:: @ 8527DD4
+VerdanturfTown_MapEvents::
 	map_events VerdanturfTown_EventObjects, VerdanturfTown_MapWarps, 0x0, VerdanturfTown_MapBGEvents
 

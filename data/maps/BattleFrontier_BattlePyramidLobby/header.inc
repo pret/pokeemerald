@@ -1,10 +1,10 @@
-BattleFrontier_BattlePyramidLobby: @ 84853F8
+BattleFrontier_BattlePyramidLobby:
 	.4byte BattleFrontier_BattlePyramidLobby_Layout
 	.4byte BattleFrontier_BattlePyramidLobby_MapEvents
 	.4byte BattleFrontier_BattlePyramidLobby_MapScripts
 	.4byte 0x0
 	.2byte MUS_PYRAMID
-	.2byte 360
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

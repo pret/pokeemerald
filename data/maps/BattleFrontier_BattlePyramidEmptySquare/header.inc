@@ -1,10 +1,10 @@
-BattleFrontier_BattlePyramidEmptySquare: @ 8485414
+BattleFrontier_BattlePyramidEmptySquare:
 	.4byte BattleFrontier_BattlePyramidEmptySquare_Layout
 	.4byte BattleFrontier_BattlePyramidEmptySquare_MapEvents
 	.4byte BattleFrontier_BattlePyramidEmptySquare_MapScripts
 	.4byte 0x0
 	.2byte 65535
-	.2byte 361
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-LittlerootTown_MaysHouse_1F: @ 8482B2C
+LittlerootTown_MaysHouse_1F:
 	.4byte LittlerootTown_MaysHouse_1F_Layout
 	.4byte LittlerootTown_MaysHouse_1F_MapEvents
 	.4byte LittlerootTown_MaysHouse_1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_MISHIRO
-	.2byte 56
+	.2byte LAYOUT_LITTLEROOT_TOWN_MAYS_HOUSE_1F
 	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
 	.byte WEATHER_NONE

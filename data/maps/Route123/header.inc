@@ -1,10 +1,10 @@
-Route123: @ 84828E0
+Route123:
 	.4byte Route123_Layout
 	.4byte Route123_MapEvents
 	.4byte Route123_MapScripts
 	.4byte Route123_MapConnections
 	.2byte MUS_DOORO_X4
-	.2byte 39
+	.2byte LAYOUT_ROUTE123
 	.byte MAPSEC_ROUTE_123
 	.byte 0
 	.byte WEATHER_SUNNY

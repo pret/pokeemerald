@@ -1,10 +1,10 @@
-VerdanturfTown_FriendshipRatersHouse: @ 8482F1C
+VerdanturfTown_FriendshipRatersHouse:
 	.4byte House2_Layout
 	.4byte VerdanturfTown_FriendshipRatersHouse_MapEvents
 	.4byte VerdanturfTown_FriendshipRatersHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOMACHI0
-	.2byte 60
+	.2byte LAYOUT_HOUSE2
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte WEATHER_NONE

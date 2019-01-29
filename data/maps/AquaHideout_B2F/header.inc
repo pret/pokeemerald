@@ -1,10 +1,10 @@
-AquaHideout_B2F: @ 848417C
+AquaHideout_B2F:
 	.4byte AquaHideout_B2F_Layout
 	.4byte AquaHideout_B2F_MapEvents
 	.4byte AquaHideout_B2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_AJITO
-	.2byte 145
+	.2byte LAYOUT_AQUA_HIDEOUT_B2F
 	.byte MAPSEC_AQUA_HIDEOUT
 	.byte 0
 	.byte WEATHER_NONE

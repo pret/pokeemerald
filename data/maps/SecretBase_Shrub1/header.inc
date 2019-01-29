@@ -1,10 +1,10 @@
-SecretBase_Shrub1: @ 8484B1C
+SecretBase_Shrub1:
 	.4byte SecretBase_Shrub1_Layout
 	.4byte SecretBase_Shrub1_MapEvents
 	.4byte SecretBase_Shrub1_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 202
+	.2byte LAYOUT_SECRET_BASE_SHRUB1
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE

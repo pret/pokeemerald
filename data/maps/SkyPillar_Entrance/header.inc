@@ -1,10 +1,10 @@
-SkyPillar_Entrance: @ 848472C
+SkyPillar_Entrance:
 	.4byte SkyPillar_Entrance_Layout
 	.4byte SkyPillar_Entrance_MapEvents
 	.4byte SkyPillar_Entrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_TOZAN
-	.2byte 320
+	.2byte LAYOUT_SKY_PILLAR_ENTRANCE
 	.byte MAPSEC_SKY_PILLAR
 	.byte 0
 	.byte WEATHER_NONE

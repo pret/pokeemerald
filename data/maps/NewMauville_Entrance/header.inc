@@ -1,10 +1,10 @@
-NewMauville_Entrance: @ 8484470
+NewMauville_Entrance:
 	.4byte NewMauville_Entrance_Layout
 	.4byte NewMauville_Entrance_MapEvents
 	.4byte NewMauville_Entrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
-	.2byte 184
+	.2byte LAYOUT_NEW_MAUVILLE_ENTRANCE
 	.byte MAPSEC_NEW_MAUVILLE
 	.byte 0
 	.byte WEATHER_NONE

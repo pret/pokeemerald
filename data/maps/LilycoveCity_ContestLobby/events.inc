@@ -1,4 +1,4 @@
-LilycoveCity_ContestLobby_EventObjects: @ 8531534
+LilycoveCity_ContestLobby_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 14, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_ContestLobby_EventScript_21A554, 0
 	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 15, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_ContestLobby_EventScript_21A806, 0
 	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 26, 9, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_ContestLobby_EventScript_293FA2, 0
@@ -25,13 +25,13 @@ LilycoveCity_ContestLobby_EventObjects: @ 8531534
 	object_event 24, EVENT_OBJ_GFX_OLD_MAN, 0, 26, 5, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, LilycoveCity_ContestLobby_EventScript_21A798, FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS
 	object_event 25, EVENT_OBJ_GFX_LITTLE_GIRL, 0, 9, 10, 3, MOVEMENT_TYPE_FACE_RIGHT, 2, 2, 0, 0, LilycoveCity_ContestLobby_EventScript_21ACF1, 0
 
-LilycoveCity_ContestLobby_MapWarps: @ 853178C
+LilycoveCity_ContestLobby_MapWarps:
 	warp_def 14, 11, 0, 4, MAP_LILYCOVE_CITY
 	warp_def 15, 11, 0, 4, MAP_LILYCOVE_CITY
 	warp_def 9, 1, 0, 0, MAP_LILYCOVE_CITY_CONTEST_HALL
 	warp_def 21, 1, 0, 1, MAP_LILYCOVE_CITY_CONTEST_HALL
 
-LilycoveCity_ContestLobby_MapBGEvents: @ 85317AC
+LilycoveCity_ContestLobby_MapBGEvents:
 	bg_event 23, 5, 0, BG_EVENT_PLAYER_FACING_ANY, EventScript_PblockLink
 	bg_event 23, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_293E1E
 	bg_event 23, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A753
@@ -45,6 +45,6 @@ LilycoveCity_ContestLobby_MapBGEvents: @ 85317AC
 	bg_event 27, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_293D4D
 	bg_event 18, 3, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_ContestLobby_EventScript_21A784
 
-LilycoveCity_ContestLobby_MapEvents:: @ 853183C
+LilycoveCity_ContestLobby_MapEvents::
 	map_events LilycoveCity_ContestLobby_EventObjects, LilycoveCity_ContestLobby_MapWarps, 0x0, LilycoveCity_ContestLobby_MapBGEvents
 

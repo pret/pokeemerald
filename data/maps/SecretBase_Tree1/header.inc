@@ -1,10 +1,10 @@
-SecretBase_Tree1: @ 8484B00
+SecretBase_Tree1:
 	.4byte SecretBase_Tree1_Layout
 	.4byte SecretBase_Tree1_MapEvents
 	.4byte SecretBase_Tree1_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 201
+	.2byte LAYOUT_SECRET_BASE_TREE1
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE

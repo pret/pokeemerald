@@ -1,10 +1,10 @@
-Underwater_MarineCave: @ 84849CC
+Underwater_MarineCave:
 	.4byte Underwater_MarineCave_Layout
 	.4byte Underwater_MarineCave_MapEvents
 	.4byte Underwater_MarineCave_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN01
-	.2byte 406
+	.2byte LAYOUT_UNDERWATER_MARINE_CAVE
 	.byte MAPSEC_UNDERWATER_MARINE_CAVE
 	.byte 0
 	.byte WEATHER_BUBBLES

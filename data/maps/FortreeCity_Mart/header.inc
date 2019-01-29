@@ -1,10 +1,10 @@
-FortreeCity_Mart: @ 8483590
+FortreeCity_Mart:
 	.4byte Mart_Layout
 	.4byte FortreeCity_Mart_MapEvents
 	.4byte FortreeCity_Mart_MapScripts
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
-	.2byte 63
+	.2byte LAYOUT_MART
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte WEATHER_NONE

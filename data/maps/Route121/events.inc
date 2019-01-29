@@ -1,4 +1,4 @@
-Route121_EventObjects: @ 852BA14
+Route121_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 29, 14, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, Route121_EventScript_1F5DFD, 0
 	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 14, 2, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 47, BerryTreeScript, 0
 	object_event 3, EVENT_OBJ_GFX_BERRY_TREE, 0, 15, 2, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 48, BerryTreeScript, 0
@@ -29,16 +29,16 @@ Route121_EventObjects: @ 852BA14
 	object_event 28, EVENT_OBJ_GFX_ITEM_BALL, 0, 60, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route121_EventScript_290F96, FLAG_ITEM_ROUTE_121_REVIVE
 	object_event 29, EVENT_OBJ_GFX_ITEM_BALL, 0, 38, 13, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route121_EventScript_290FA3, FLAG_ITEM_ROUTE_121_ZINC
 
-Route121_MapWarps: @ 852BCCC
+Route121_MapWarps:
 	warp_def 37, 5, 0, 2, MAP_ROUTE121_SAFARI_ZONE_ENTRANCE
 
-Route121_MapCoordEvents: @ 852BCD4
+Route121_MapCoordEvents:
 	coord_event 25, 5, 3, VAR_0x4074, 0, Route121_EventScript_1F5E18
 	coord_event 25, 6, 3, VAR_0x4074, 0, Route121_EventScript_1F5E18
 	coord_event 25, 7, 3, VAR_0x4074, 0, Route121_EventScript_1F5E18
 	coord_event 25, 8, 3, VAR_0x4074, 0, Route121_EventScript_1F5E18
 
-Route121_MapBGEvents: @ 852BD14
+Route121_MapBGEvents:
 	bg_event 32, 14, 0, BG_EVENT_PLAYER_FACING_ANY, Route121_EventScript_1F5E06
 	bg_secret_base_event 40, 11, 0, SECRET_BASE_RED_CAVE2_2
 	bg_secret_base_event 18, 13, 0, SECRET_BASE_RED_CAVE3_2
@@ -50,6 +50,6 @@ Route121_MapBGEvents: @ 852BD14
 	bg_hidden_item_event 72, 5, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_ROUTE_121_FULL_HEAL
 	bg_hidden_item_event 68, 8, 3, ITEM_MAX_REVIVE, FLAG_HIDDEN_ITEM_ROUTE_121_MAX_REVIVE
 
-Route121_MapEvents:: @ 852BD8C
+Route121_MapEvents::
 	map_events Route121_EventObjects, Route121_MapWarps, Route121_MapCoordEvents, Route121_MapBGEvents
 

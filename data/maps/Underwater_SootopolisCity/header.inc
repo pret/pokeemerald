@@ -1,10 +1,10 @@
-Underwater_SootopolisCity: @ 8483F4C
+Underwater_SootopolisCity:
 	.4byte Underwater_SootopolisCity_Layout
 	.4byte Underwater_SootopolisCity_MapEvents
 	.4byte Underwater_SootopolisCity_MapScripts
 	.4byte 0x0
 	.2byte MUS_DEEPDEEP
-	.2byte 130
+	.2byte LAYOUT_UNDERWATER_SOOTOPOLIS_CITY
 	.byte MAPSEC_UNDERWATER_SOOTOPOLIS
 	.byte 0
 	.byte WEATHER_BUBBLES

@@ -1,10 +1,10 @@
-PetalburgCity_House2: @ 848306C
+PetalburgCity_House2:
 	.4byte HouseWithBed_Layout
 	.4byte PetalburgCity_House2_MapEvents
 	.4byte PetalburgCity_House2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S2
-	.2byte 80
+	.2byte LAYOUT_HOUSE_WITH_BED
 	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
 	.byte WEATHER_NONE

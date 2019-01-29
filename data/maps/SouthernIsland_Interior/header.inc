@@ -1,10 +1,10 @@
-SouthernIsland_Interior: @ 8485254
+SouthernIsland_Interior:
 	.4byte SouthernIsland_Interior_Layout
 	.4byte SouthernIsland_Interior_MapEvents
 	.4byte SouthernIsland_Interior_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN02
-	.2byte 291
+	.2byte LAYOUT_SOUTHERN_ISLAND_INTERIOR
 	.byte MAPSEC_SOUTHERN_ISLAND
 	.byte 0
 	.byte WEATHER_SHADE

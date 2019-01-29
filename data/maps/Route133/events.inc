@@ -1,4 +1,4 @@
-Route133_EventObjects: @ 852CC94
+Route133_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 68, 27, 1, MOVEMENT_TYPE_WALK_UP_AND_DOWN, 0, 2, 1, 3, Route133_EventScript_1F75A3, 0
 	object_event 2, EVENT_OBJ_GFX_SWIMMER_F, 0, 13, 3, 1, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, Route133_EventScript_1F75D1, 0
 	object_event 3, EVENT_OBJ_GFX_SWIMMER_F, 0, 68, 28, 1, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 0, 2, 1, 3, Route133_EventScript_1F75BA, 0
@@ -10,6 +10,6 @@ Route133_EventObjects: @ 852CC94
 	object_event 9, EVENT_OBJ_GFX_EXPERT_M, 0, 56, 15, 3, MOVEMENT_TYPE_FACE_UP_AND_RIGHT, 1, 1, 1, 3, Route133_EventScript_1F762D, 0
 	object_event 10, EVENT_OBJ_GFX_ITEM_BALL, 0, 48, 28, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route133_EventScript_29108D, FLAG_ITEM_ROUTE_133_MAX_REVIVE
 
-Route133_MapEvents:: @ 852CD84
+Route133_MapEvents::
 	map_events Route133_EventObjects, 0x0, 0x0, 0x0
 

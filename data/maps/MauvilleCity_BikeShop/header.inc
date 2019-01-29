@@ -1,10 +1,10 @@
-MauvilleCity_BikeShop: @ 8483280
+MauvilleCity_BikeShop:
 	.4byte MauvilleCity_BikeShop_Layout
 	.4byte MauvilleCity_BikeShop_MapEvents
 	.4byte MauvilleCity_BikeShop_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 90
+	.2byte LAYOUT_MAUVILLE_CITY_BIKE_SHOP
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte WEATHER_NONE

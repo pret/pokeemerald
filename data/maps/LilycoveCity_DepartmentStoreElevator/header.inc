@@ -1,10 +1,10 @@
-LilycoveCity_DepartmentStoreElevator: @ 84838A0
+LilycoveCity_DepartmentStoreElevator:
 	.4byte LilycoveCity_DepartmentStoreElevator_Layout
 	.4byte LilycoveCity_DepartmentStoreElevator_MapEvents
 	.4byte LilycoveCity_DepartmentStoreElevator_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
-	.2byte 273
+	.2byte LAYOUT_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

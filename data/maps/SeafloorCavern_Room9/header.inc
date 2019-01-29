@@ -1,10 +1,10 @@
-SeafloorCavern_Room9: @ 84842B0
+SeafloorCavern_Room9:
 	.4byte SeafloorCavern_Room9_Layout
 	.4byte SeafloorCavern_Room9_MapEvents
 	.4byte SeafloorCavern_Room9_MapScripts
 	.4byte 0x0
 	.2byte MUS_TOZAN
-	.2byte 156
+	.2byte LAYOUT_SEAFLOOR_CAVERN_ROOM9
 	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
 	.byte WEATHER_FOG_1

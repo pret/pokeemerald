@@ -1,10 +1,10 @@
-Route110_SeasideCyclingRoadSouthEntrance: @ 8485C9C
+Route110_SeasideCyclingRoadSouthEntrance:
 	.4byte Route110_SeasideCyclingRoadEntrance_Layout
 	.4byte Route110_SeasideCyclingRoadSouthEntrance_MapEvents
 	.4byte Route110_SeasideCyclingRoadSouthEntrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_FINECITY
-	.2byte 256
+	.2byte LAYOUT_ROUTE110_SEASIDE_CYCLING_ROAD_ENTRANCE
 	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte WEATHER_NONE

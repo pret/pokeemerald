@@ -1,10 +1,10 @@
-RustboroCity_CuttersHouse: @ 8483478
+RustboroCity_CuttersHouse:
 	.4byte RustboroCity_CuttersHouse_Layout
 	.4byte RustboroCity_CuttersHouse_MapEvents
 	.4byte RustboroCity_CuttersHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 98
+	.2byte LAYOUT_RUSTBORO_CITY_CUTTERS_HOUSE
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte WEATHER_NONE

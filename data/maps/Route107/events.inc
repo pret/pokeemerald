@@ -1,4 +1,4 @@
-Route107_EventObjects: @ 85288A8
+Route107_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 41, 10, 1, MOVEMENT_TYPE_ROTATE_CLOCKWISE, 1, 1, 1, 3, Route107_EventScript_1EE595, 0
 	object_event 2, EVENT_OBJ_GFX_SWIMMER_M, 0, 23, 11, 1, MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP, 6, 2, 1, 2, Route107_EventScript_1EE5AC, 0
 	object_event 3, EVENT_OBJ_GFX_SWIMMER_F, 0, 16, 7, 1, MOVEMENT_TYPE_FACE_DOWN_AND_UP, 0, 0, 1, 5, Route107_EventScript_1EE60E, 0
@@ -7,6 +7,6 @@ Route107_EventObjects: @ 85288A8
 	object_event 6, EVENT_OBJ_GFX_TUBER_M_SWIMMING, 0, 32, 4, 1, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 1, Route107_EventScript_1EE657, 0
 	object_event 7, EVENT_OBJ_GFX_SWIMMER_M, 0, 50, 5, 1, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, 1, 1, 1, 5, Route107_EventScript_1EE672, 0
 
-Route107_MapEvents:: @ 8528950
+Route107_MapEvents::
 	map_events Route107_EventObjects, 0x0, 0x0, 0x0
 

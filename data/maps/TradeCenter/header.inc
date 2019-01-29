@@ -1,10 +1,10 @@
-TradeCenter: @ 8484D4C
+TradeCenter:
 	.4byte TradeCenter_Layout
 	.4byte TradeCenter_MapEvents
 	.4byte TradeCenter_MapScripts
 	.4byte 0x0
 	.2byte MUS_RAINBOW
-	.2byte 222
+	.2byte LAYOUT_TRADE_CENTER
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

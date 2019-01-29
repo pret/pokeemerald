@@ -1,3 +1,4 @@
+#include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/weather.h"

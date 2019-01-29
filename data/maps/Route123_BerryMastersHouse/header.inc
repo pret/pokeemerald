@@ -1,10 +1,10 @@
-Route123_BerryMastersHouse: @ 8485CD4
+Route123_BerryMastersHouse:
 	.4byte House2_Layout
 	.4byte Route123_BerryMastersHouse_MapEvents
 	.4byte Route123_BerryMastersHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 60
+	.2byte LAYOUT_HOUSE2
 	.byte MAPSEC_ROUTE_123
 	.byte 0
 	.byte WEATHER_NONE

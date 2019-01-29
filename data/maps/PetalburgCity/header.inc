@@ -1,10 +1,10 @@
-PetalburgCity: @ 84824B8
+PetalburgCity:
 	.4byte PetalburgCity_Layout
 	.4byte PetalburgCity_MapEvents
 	.4byte PetalburgCity_MapScripts
 	.4byte PetalburgCity_MapConnections
 	.2byte MUS_MACHI_S2
-	.2byte 1
+	.2byte LAYOUT_PETALBURG_CITY
 	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

@@ -1,10 +1,10 @@
-BattlePyramidSquare14: @ 84850CC
+BattlePyramidSquare14:
 	.4byte BattlePyramidSquare14_Layout
 	.4byte BattlePyramidSquare14_MapEvents
 	.4byte BattlePyramidSquare14_MapScripts
 	.4byte 0x0
 	.2byte 65535
-	.2byte 375
+	.2byte LAYOUT_BATTLE_PYRAMID_SQUARE14
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

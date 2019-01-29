@@ -1,10 +1,10 @@
-CaveOfOrigin_B1F: @ 8484358
+CaveOfOrigin_B1F:
 	.4byte CaveOfOrigin_B1F_Layout
 	.4byte CaveOfOrigin_B1F_MapEvents
 	.4byte CaveOfOrigin_B1F_MapScripts
 	.4byte 0x0
 	.2byte 65535
-	.2byte 162
+	.2byte LAYOUT_CAVE_OF_ORIGIN_B1F
 	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 0
 	.byte WEATHER_FOG_1

@@ -1,10 +1,10 @@
-SeafloorCavern_Entrance: @ 84841B4
+SeafloorCavern_Entrance:
 	.4byte SeafloorCavern_Entrance_Layout
 	.4byte SeafloorCavern_Entrance_MapEvents
 	.4byte SeafloorCavern_Entrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_TOZAN
-	.2byte 147
+	.2byte LAYOUT_SEAFLOOR_CAVERN_ENTRANCE
 	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
 	.byte WEATHER_NONE

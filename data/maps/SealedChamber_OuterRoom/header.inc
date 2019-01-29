@@ -1,10 +1,10 @@
-SealedChamber_OuterRoom: @ 8484684
+SealedChamber_OuterRoom:
 	.4byte SealedChamber_OuterRoom_Layout
 	.4byte SealedChamber_OuterRoom_MapEvents
 	.4byte SealedChamber_OuterRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_MABOROSI
-	.2byte 284
+	.2byte LAYOUT_SEALED_CHAMBER_OUTER_ROOM
 	.byte MAPSEC_SEALED_CHAMBER
 	.byte 0
 	.byte WEATHER_NONE

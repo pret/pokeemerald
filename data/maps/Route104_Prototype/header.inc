@@ -1,10 +1,10 @@
-Route104_Prototype: @ 8485AF8
+Route104_Prototype:
 	.4byte Route104_Prototype_Layout
 	.4byte Route104_Prototype_MapEvents
 	.4byte Route104_Prototype_MapScripts
 	.4byte 0x0
 	.2byte MUS_NEXTROAD
-	.2byte 287
+	.2byte LAYOUT_ROUTE104_PROTOTYPE
 	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte WEATHER_SUNNY

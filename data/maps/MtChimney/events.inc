@@ -1,4 +1,4 @@
-MtChimney_EventObjects: @ 85347C8
+MtChimney_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_ARCHIE, 0, 24, 19, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MtChimney_EventScript_22EDD5, FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
 	object_event 2, EVENT_OBJ_GFX_MAXIE, 0, 13, 6, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MtChimney_EventScript_22EE0B, FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
 	object_event 3, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 12, 11, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 2, MtChimney_EventScript_22F06E, FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
@@ -30,16 +30,16 @@ MtChimney_EventObjects: @ 85347C8
 	object_event 29, EVENT_OBJ_GFX_MAGMA_MEMBER_F, 0, 13, 16, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 3, MtChimney_EventScript_22F1F1, FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
 	object_event 30, EVENT_OBJ_GFX_HIKER, 0, 7, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 6, MtChimney_EventScript_22F208, FLAG_HIDE_MT_CHIMNEY_TRAINERS
 
-MtChimney_MapWarps: @ 8534A98
+MtChimney_MapWarps:
 	warp_def 17, 36, 0, 0, MAP_MT_CHIMNEY_CABLE_CAR_STATION
 	warp_def 18, 36, 0, 1, MAP_MT_CHIMNEY_CABLE_CAR_STATION
 	warp_def 20, 41, 3, 2, MAP_JAGGED_PASS
 	warp_def 21, 41, 3, 3, MAP_JAGGED_PASS
 
-MtChimney_MapBGEvents: @ 8534AB8
+MtChimney_MapBGEvents:
 	bg_event 14, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MtChimney_EventScript_22F0E4
 	bg_event 24, 37, 3, BG_EVENT_PLAYER_FACING_ANY, MtChimney_EventScript_22F141
 
-MtChimney_MapEvents:: @ 8534AD0
+MtChimney_MapEvents::
 	map_events MtChimney_EventObjects, MtChimney_MapWarps, 0x0, MtChimney_MapBGEvents
 

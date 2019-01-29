@@ -1,10 +1,10 @@
-EverGrandeCity_GlaciasRoom: @ 8483C04
+EverGrandeCity_GlaciasRoom:
 	.4byte EverGrandeCity_GlaciasRoom_Layout
 	.4byte EverGrandeCity_GlaciasRoom_MapEvents
 	.4byte EverGrandeCity_GlaciasRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 113
+	.2byte LAYOUT_EVER_GRANDE_CITY_GLACIAS_ROOM
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

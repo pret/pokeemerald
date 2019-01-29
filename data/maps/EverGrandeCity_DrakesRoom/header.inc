@@ -1,10 +1,10 @@
-EverGrandeCity_DrakesRoom: @ 8483C20
+EverGrandeCity_DrakesRoom:
 	.4byte EverGrandeCity_DrakesRoom_Layout
 	.4byte EverGrandeCity_DrakesRoom_MapEvents
 	.4byte EverGrandeCity_DrakesRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 114
+	.2byte LAYOUT_EVER_GRANDE_CITY_DRAKES_ROOM
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

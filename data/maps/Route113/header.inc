@@ -1,10 +1,10 @@
-Route113: @ 84827C8
+Route113:
 	.4byte Route113_Layout
 	.4byte Route113_MapEvents
 	.4byte Route113_MapScripts
 	.4byte Route113_MapConnections
 	.2byte MUS_KAZANBAI
-	.2byte 29
+	.2byte LAYOUT_ROUTE113
 	.byte MAPSEC_ROUTE_113
 	.byte 0
 	.byte WEATHER_SUNNY

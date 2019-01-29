@@ -1,10 +1,10 @@
-CaveOfOrigin_UnusedRubySapphireMap3: @ 848433C
+CaveOfOrigin_UnusedRubySapphireMap3:
 	.4byte CaveOfOrigin_UnusedRubySapphireMap3_Layout
 	.4byte CaveOfOrigin_UnusedRubySapphireMap3_MapEvents
 	.4byte CaveOfOrigin_UnusedRubySapphireMap3_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN03
-	.2byte 161
+	.2byte LAYOUT_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3
 	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 1
 	.byte WEATHER_FOG_1

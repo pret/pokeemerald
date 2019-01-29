@@ -1,10 +1,10 @@
-SingleBattleColosseum: @ 8484D30
+SingleBattleColosseum:
 	.4byte SingleBattleColosseum_Layout
 	.4byte SingleBattleColosseum_MapEvents
 	.4byte SingleBattleColosseum_MapScripts
 	.4byte 0x0
 	.2byte MUS_RAINBOW
-	.2byte 221
+	.2byte LAYOUT_SINGLE_BATTLE_COLOSSEUM
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

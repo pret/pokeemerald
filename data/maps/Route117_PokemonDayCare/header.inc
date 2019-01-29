@@ -1,10 +1,10 @@
-Route117_PokemonDayCare: @ 8483E88
+Route117_PokemonDayCare:
 	.4byte Route117_PokemonDayCare_Layout
 	.4byte Route117_PokemonDayCare_MapEvents
 	.4byte Route117_PokemonDayCare_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 123
+	.2byte LAYOUT_ROUTE117_POKEMON_DAY_CARE
 	.byte MAPSEC_ROUTE_117
 	.byte 0
 	.byte WEATHER_NONE

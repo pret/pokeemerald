@@ -1,4 +1,4 @@
-AquaHideout_B1F_EventObjects: @ 8535378
+AquaHideout_B1F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 28, 16, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 4, AquaHideout_B1F_EventScript_233A85, FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 6, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 5, AquaHideout_B1F_EventScript_233AB0, FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 29, 12, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, AquaHideout_B1F_EventScript_291372, FLAG_ITEM_AQUA_HIDEOUT_B1F_MAX_ELIXIR
@@ -9,7 +9,7 @@ AquaHideout_B1F_EventObjects: @ 8535378
 	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 16, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, AquaHideout_B1F_EventScript_233A38, FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2
 	object_event 9, EVENT_OBJ_GFX_AQUA_MEMBER_F, 0, 28, 21, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 1, 4, AquaHideout_B1F_EventScript_233AEC, FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 
-AquaHideout_B1F_MapWarps: @ 8535450
+AquaHideout_B1F_MapWarps:
 	warp_def 29, 1, 3, 2, MAP_AQUA_HIDEOUT_1F
 	warp_def 18, 1, 3, 0, MAP_AQUA_HIDEOUT_B2F
 	warp_def 12, 1, 3, 1, MAP_AQUA_HIDEOUT_B2F
@@ -36,6 +36,6 @@ AquaHideout_B1F_MapWarps: @ 8535450
 	warp_def 45, 17, 3, 17, MAP_AQUA_HIDEOUT_B1F
 	warp_def 48, 17, 3, 19, MAP_AQUA_HIDEOUT_B1F
 
-AquaHideout_B1F_MapEvents:: @ 8535518
+AquaHideout_B1F_MapEvents::
 	map_events AquaHideout_B1F_EventObjects, AquaHideout_B1F_MapWarps, 0x0, 0x0
 

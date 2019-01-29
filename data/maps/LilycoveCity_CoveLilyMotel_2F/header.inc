@@ -1,10 +1,10 @@
-LilycoveCity_CoveLilyMotel_2F: @ 8483654
+LilycoveCity_CoveLilyMotel_2F:
 	.4byte LilycoveCity_CoveLilyMotel_2F_Layout
 	.4byte LilycoveCity_CoveLilyMotel_2F_MapEvents
 	.4byte LilycoveCity_CoveLilyMotel_2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
-	.2byte 300
+	.2byte LAYOUT_LILYCOVE_CITY_COVE_LILY_MOTEL_2F
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

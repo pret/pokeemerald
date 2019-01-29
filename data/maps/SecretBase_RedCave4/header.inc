@@ -1,10 +1,10 @@
-SecretBase_RedCave4: @ 8484C88
+SecretBase_RedCave4:
 	.4byte SecretBase_RedCave4_Layout
 	.4byte SecretBase_RedCave4_MapEvents
 	.4byte SecretBase_RedCave4_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 215
+	.2byte LAYOUT_SECRET_BASE_RED_CAVE4
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE

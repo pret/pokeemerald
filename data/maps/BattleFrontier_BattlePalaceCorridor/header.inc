@@ -1,10 +1,10 @@
-BattleFrontier_BattlePalaceCorridor: @ 84853C0
+BattleFrontier_BattlePalaceCorridor:
 	.4byte BattleFrontier_BattlePalaceCorridor_Layout
 	.4byte BattleFrontier_BattlePalaceCorridor_MapEvents
 	.4byte BattleFrontier_BattlePalaceCorridor_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_PALACE
-	.2byte 343
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

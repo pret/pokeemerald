@@ -1,10 +1,10 @@
-EverGrandeCity_Hall4: @ 8483CAC
+EverGrandeCity_Hall4:
 	.4byte EverGrandeCity_Hall4_Layout
 	.4byte EverGrandeCity_Hall4_MapEvents
 	.4byte EverGrandeCity_Hall4_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 315
+	.2byte LAYOUT_EVER_GRANDE_CITY_HALL4
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

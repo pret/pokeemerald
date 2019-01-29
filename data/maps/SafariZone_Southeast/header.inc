@@ -1,10 +1,10 @@
-SafariZone_Southeast: @ 84852A8
+SafariZone_Southeast:
 	.4byte SafariZone_Southeast_Layout
 	.4byte SafariZone_Southeast_MapEvents
 	.4byte SafariZone_Southeast_MapScripts
 	.4byte SafariZone_Southeast_MapConnections
 	.2byte MUS_SAFARI
-	.2byte 395
+	.2byte LAYOUT_SAFARI_ZONE_SOUTHEAST
 	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
 	.byte WEATHER_NONE

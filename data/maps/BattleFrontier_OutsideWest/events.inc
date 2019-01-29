@@ -1,4 +1,4 @@
-BattleFrontier_OutsideWest_EventObjects: @ 853B350
+BattleFrontier_OutsideWest_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BOY_2, 0, 26, 38, 0, MOVEMENT_TYPE_WANDER_AROUND, 2, 2, 0, 0, BattleFrontier_OutsideWest_EventScript_23D50F, 0
 	object_event 2, EVENT_OBJ_GFX_SS_TIDAL, 0, 20, 70, 0, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_BEAUTY, 0, 19, 68, 0, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, BattleFrontier_OutsideWest_EventScript_23D3F0, 0
@@ -24,7 +24,7 @@ BattleFrontier_OutsideWest_EventObjects: @ 853B350
 	object_event 23, EVENT_OBJ_GFX_MAN_4, 0, 8, 5, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, BattleFrontier_OutsideWest_EventScript_23D6D7, 0
 	object_event 24, EVENT_OBJ_GFX_POKEFAN_F, 0, 4, 26, 0, MOVEMENT_TYPE_ROTATE_CLOCKWISE, 1, 1, 0, 0, BattleFrontier_OutsideWest_EventScript_23D6EE, 0
 
-BattleFrontier_OutsideWest_MapWarps: @ 853B590
+BattleFrontier_OutsideWest_MapWarps:
 	warp_def 42, 27, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY
 	warp_def 19, 17, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY
 	warp_def 11, 38, 0, 0, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY
@@ -37,13 +37,13 @@ BattleFrontier_OutsideWest_MapWarps: @ 853B590
 	warp_def 26, 61, 0, 1, MAP_BATTLE_FRONTIER_RECEPTION_GATE
 	warp_def 39, 55, 0, 0, MAP_ARTISAN_CAVE_B1F
 
-BattleFrontier_OutsideWest_MapBGEvents: @ 853B5E8
+BattleFrontier_OutsideWest_MapBGEvents:
 	bg_event 15, 18, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_23D4E2
 	bg_event 45, 30, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_23D4F4
 	bg_event 16, 43, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_23D4EB
 	bg_event 52, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_271E6A
 	bg_event 53, 51, 0, BG_EVENT_PLAYER_FACING_ANY, BattleFrontier_OutsideWest_EventScript_271E6A
 
-BattleFrontier_OutsideWest_MapEvents:: @ 853B624
+BattleFrontier_OutsideWest_MapEvents::
 	map_events BattleFrontier_OutsideWest_EventObjects, BattleFrontier_OutsideWest_MapWarps, 0x0, BattleFrontier_OutsideWest_MapBGEvents
 

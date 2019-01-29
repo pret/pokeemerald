@@ -1,10 +1,10 @@
-UnionRoom: @ 8485120
+UnionRoom:
 	.4byte UnionRoom_Layout
 	.4byte UnionRoom_MapEvents
 	.4byte UnionRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_RAINBOW
-	.2byte 393
+	.2byte LAYOUT_UNION_ROOM
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

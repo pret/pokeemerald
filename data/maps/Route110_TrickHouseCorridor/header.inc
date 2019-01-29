@@ -1,10 +1,10 @@
-Route110_TrickHouseCorridor: @ 8485B84
+Route110_TrickHouseCorridor:
 	.4byte Route110_TrickHouseCorridor_Layout
 	.4byte Route110_TrickHouseCorridor_MapEvents
 	.4byte Route110_TrickHouseCorridor_MapScripts
 	.4byte 0x0
 	.2byte MUS_KARAKURI
-	.2byte 246
+	.2byte LAYOUT_ROUTE110_TRICK_HOUSE_CORRIDOR
 	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte WEATHER_NONE

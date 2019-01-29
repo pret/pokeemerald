@@ -1,10 +1,10 @@
-DesertRuins: @ 8483F68
+DesertRuins:
 	.4byte DesertRuins_Layout
 	.4byte DesertRuins_MapEvents
 	.4byte DesertRuins_MapScripts
 	.4byte 0x0
 	.2byte MUS_MABOROSI
-	.2byte 131
+	.2byte LAYOUT_DESERT_RUINS
 	.byte MAPSEC_DESERT_RUINS
 	.byte 0
 	.byte WEATHER_NONE

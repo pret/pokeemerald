@@ -1,10 +1,10 @@
-AncientTomb: @ 8484630
+AncientTomb:
 	.4byte AncientTomb_Layout
 	.4byte AncientTomb_MapEvents
 	.4byte AncientTomb_MapScripts
 	.4byte 0x0
 	.2byte MUS_MABOROSI
-	.2byte 281
+	.2byte LAYOUT_ANCIENT_TOMB
 	.byte MAPSEC_ANCIENT_TOMB
 	.byte 0
 	.byte WEATHER_NONE

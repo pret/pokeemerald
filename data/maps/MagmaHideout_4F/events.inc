@@ -1,4 +1,4 @@
-MagmaHideout_4F_EventObjects: @ 8537490
+MagmaHideout_4F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_GROUDON_1, 0, 16, 17, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_1
 	object_event 2, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 31, 22, 0, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 3, MagmaHideout_4F_EventScript_23A68C, FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	object_event 3, EVENT_OBJ_GFX_MAGMA_MEMBER_M, 0, 30, 13, 0, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 3, MagmaHideout_4F_EventScript_23A6A3, FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
@@ -8,10 +8,10 @@ MagmaHideout_4F_EventObjects: @ 8537490
 	object_event 7, EVENT_OBJ_GFX_GROUDON_2, 0, 16, 17, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_2
 	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 7, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MagmaHideout_4F_EventScript_29151F, FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE
 
-MagmaHideout_4F_MapWarps: @ 8537550
+MagmaHideout_4F_MapWarps:
 	warp_def 46, 7, 0, 0, MAP_MAGMA_HIDEOUT_3F_1R
 	warp_def 20, 21, 0, 1, MAP_MAGMA_HIDEOUT_3F_3R
 
-MagmaHideout_4F_MapEvents:: @ 8537560
+MagmaHideout_4F_MapEvents::
 	map_events MagmaHideout_4F_EventObjects, MagmaHideout_4F_MapWarps, 0x0, 0x0
 

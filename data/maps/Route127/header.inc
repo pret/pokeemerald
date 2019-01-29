@@ -1,10 +1,10 @@
-Route127: @ 8482950
+Route127:
 	.4byte Route127_Layout
 	.4byte Route127_MapEvents
 	.4byte Route127_MapScripts
 	.4byte Route127_MapConnections
 	.2byte MUS_DOORO_X3
-	.2byte 43
+	.2byte LAYOUT_ROUTE127
 	.byte MAPSEC_ROUTE_127
 	.byte 0
 	.byte WEATHER_SUNNY

@@ -1,10 +1,10 @@
-LinkContestRoom3: @ 8484E80
+LinkContestRoom3:
 	.4byte LinkContestRoom3_Layout
 	.4byte LinkContestRoom1_MapEvents
 	.4byte LinkContestRoom1_MapScripts
 	.4byte 0x0
 	.2byte MUS_CONTEST0
-	.2byte 233
+	.2byte LAYOUT_LINK_CONTEST_ROOM3
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-MossdeepCity: @ 8482560
+MossdeepCity:
 	.4byte MossdeepCity_Layout
 	.4byte MossdeepCity_MapEvents
 	.4byte MossdeepCity_MapScripts
 	.4byte MossdeepCity_MapConnections
 	.2byte MUS_GOTOWN
-	.2byte 7
+	.2byte LAYOUT_MOSSDEEP_CITY
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

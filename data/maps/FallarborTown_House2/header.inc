@@ -1,10 +1,10 @@
-FallarborTown_House2: @ 8482E3C
+FallarborTown_House2:
 	.4byte House2_Layout
 	.4byte FallarborTown_House2_MapEvents
 	.4byte FallarborTown_House2_MapScripts
 	.4byte 0x0
 	.2byte MUS_TONEKUSA
-	.2byte 60
+	.2byte LAYOUT_HOUSE2
 	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte WEATHER_NONE

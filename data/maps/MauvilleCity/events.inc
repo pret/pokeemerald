@@ -1,4 +1,4 @@
-MauvilleCity_EventObjects: @ 852662C
+MauvilleCity_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BOY_3, 0, 29, 16, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 1, 0, 0, MauvilleCity_EventScript_1DF3B3, 0
 	object_event 2, EVENT_OBJ_GFX_RICH_BOY, 0, 24, 10, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, MauvilleCity_EventScript_1DF3CE, 0
 	object_event 3, EVENT_OBJ_GFX_MANIAC, 0, 14, 11, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MauvilleCity_EventScript_1DF3BC, 0
@@ -11,7 +11,7 @@ MauvilleCity_EventObjects: @ 852662C
 	object_event 10, EVENT_OBJ_GFX_FAT_MAN, 0, 13, 7, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, MauvilleCity_EventScript_2C7F7E, 0
 	object_event 11, EVENT_OBJ_GFX_SCOTT, 0, 12, 14, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_MAUVILLE_CITY_SCOTT
 
-MauvilleCity_MapWarps: @ 8526734
+MauvilleCity_MapWarps:
 	warp_def 8, 5, 0, 0, MAP_MAUVILLE_CITY_GYM
 	warp_def 22, 5, 0, 0, MAP_MAUVILLE_CITY_POKEMON_CENTER_1F
 	warp_def 35, 5, 0, 0, MAP_MAUVILLE_CITY_BIKE_SHOP
@@ -20,7 +20,7 @@ MauvilleCity_MapWarps: @ 8526734
 	warp_def 8, 13, 0, 0, MAP_MAUVILLE_CITY_GAME_CORNER
 	warp_def 19, 14, 0, 0, MAP_MAUVILLE_CITY_HOUSE2
 
-MauvilleCity_MapBGEvents: @ 852676C
+MauvilleCity_MapBGEvents:
 	bg_event 23, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_EventScript_271E73
 	bg_event 11, 6, 3, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3E0
 	bg_event 24, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_EventScript_271E6A
@@ -30,6 +30,6 @@ MauvilleCity_MapBGEvents: @ 852676C
 	bg_event 33, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3E9
 	bg_event 11, 15, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_EventScript_1DF3F2
 
-MauvilleCity_MapEvents:: @ 85267CC
+MauvilleCity_MapEvents::
 	map_events MauvilleCity_EventObjects, MauvilleCity_MapWarps, 0x0, MauvilleCity_MapBGEvents
 

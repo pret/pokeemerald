@@ -1,10 +1,10 @@
-SecretBase_BlueCave2: @ 8484B70
+SecretBase_BlueCave2:
 	.4byte SecretBase_BlueCave2_Layout
 	.4byte SecretBase_BlueCave2_MapEvents
 	.4byte SecretBase_BlueCave2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 205
+	.2byte LAYOUT_SECRET_BASE_BLUE_CAVE2
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE

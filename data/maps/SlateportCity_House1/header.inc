@@ -1,10 +1,10 @@
-SlateportCity_House1: @ 8483168
+SlateportCity_House1:
 	.4byte HouseWithBed_Layout
 	.4byte SlateportCity_House1_MapEvents
 	.4byte SlateportCity_House1_MapScripts
 	.4byte 0x0
 	.2byte MUS_FINECITY
-	.2byte 80
+	.2byte LAYOUT_HOUSE_WITH_BED
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte WEATHER_NONE

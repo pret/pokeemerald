@@ -1,10 +1,10 @@
-BattleFrontier_BattleTowerLobby: @ 84851C8
+BattleFrontier_BattleTowerLobby:
 	.4byte BattleFrontier_BattleTowerLobby_Layout
 	.4byte BattleFrontier_BattleTowerLobby_MapEvents
 	.4byte BattleFrontier_BattleTowerLobby_MapScripts
 	.4byte 0x0
 	.2byte MUS_SATTOWER
-	.2byte 264
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-ShoalCave_LowTideStairsRoom: @ 8484400
+ShoalCave_LowTideStairsRoom:
 	.4byte ShoalCave_LowTideStairsRoom_Layout
 	.4byte ShoalCave_LowTideStairsRoom_MapEvents
 	.4byte ShoalCave_LowTideStairsRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
-	.2byte 166
+	.2byte LAYOUT_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM
 	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
 	.byte WEATHER_NONE

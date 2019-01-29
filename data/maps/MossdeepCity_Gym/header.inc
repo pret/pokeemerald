@@ -1,10 +1,10 @@
-MossdeepCity_Gym: @ 84838BC
+MossdeepCity_Gym:
 	.4byte MossdeepCity_Gym_Layout
 	.4byte MossdeepCity_Gym_MapEvents
 	.4byte MossdeepCity_Gym_MapScripts
 	.4byte 0x0
 	.2byte MUS_GIM
-	.2byte 108
+	.2byte LAYOUT_MOSSDEEP_CITY_GYM
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

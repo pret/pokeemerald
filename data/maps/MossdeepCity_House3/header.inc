@@ -1,10 +1,10 @@
-MossdeepCity_House3: @ 8483964
+MossdeepCity_House3:
 	.4byte House2_Layout
 	.4byte MossdeepCity_House3_MapEvents
 	.4byte MossdeepCity_House3_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 60
+	.2byte LAYOUT_HOUSE2
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

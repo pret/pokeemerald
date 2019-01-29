@@ -1,10 +1,10 @@
-MtPyre_4F: @ 84840B8
+MtPyre_4F:
 	.4byte MtPyre_4F_Layout
 	.4byte MtPyre_4F_MapEvents
 	.4byte MtPyre_4F_MapScripts
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
-	.2byte 140
+	.2byte LAYOUT_MT_PYRE_4F
 	.byte MAPSEC_MT_PYRE
 	.byte 0
 	.byte WEATHER_NONE

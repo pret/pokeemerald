@@ -1,10 +1,10 @@
-PetalburgCity_Gym: @ 8483034
+PetalburgCity_Gym:
 	.4byte PetalburgCity_Gym_Layout
 	.4byte PetalburgCity_Gym_MapEvents
 	.4byte PetalburgCity_Gym_MapScripts
 	.4byte 0x0
 	.2byte MUS_GIM
-	.2byte 79
+	.2byte LAYOUT_PETALBURG_CITY_GYM
 	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
 	.byte WEATHER_NONE

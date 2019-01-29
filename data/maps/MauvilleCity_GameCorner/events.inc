@@ -1,4 +1,4 @@
-MauvilleCity_GameCorner_EventObjects: @ 852FF28
+MauvilleCity_GameCorner_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 12, 7, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_210125, 0
 	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 16, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_21012E, 0
 	object_event 3, EVENT_OBJ_GFX_BEAUTY, 0, 11, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MauvilleCity_GameCorner_EventScript_20FBB9, 0
@@ -12,11 +12,11 @@ MauvilleCity_GameCorner_EventObjects: @ 852FF28
 	object_event 11, EVENT_OBJ_GFX_MANIAC, 0, 9, 8, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, MauvilleCity_GameCorner_EventScript_2102B6, 0
 	object_event 12, EVENT_OBJ_GFX_WOMAN_5, 0, 4, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 0, 0, MauvilleCity_GameCorner_EventScript_2102C6, 0
 
-MauvilleCity_GameCorner_MapWarps: @ 8530048
+MauvilleCity_GameCorner_MapWarps:
 	warp_def 11, 10, 3, 5, MAP_MAUVILLE_CITY
 	warp_def 12, 10, 3, 5, MAP_MAUVILLE_CITY
 
-MauvilleCity_GameCorner_MapBGEvents: @ 8530058
+MauvilleCity_GameCorner_MapBGEvents:
 	bg_event 2, 6, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_2102D6
 	bg_event 2, 8, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_2102F6
 	bg_event 2, 9, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_210316
@@ -42,6 +42,6 @@ MauvilleCity_GameCorner_MapBGEvents: @ 8530058
 	bg_event 18, 8, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_2A5ADF
 	bg_event 19, 8, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_2A5ADF
 
-MauvilleCity_GameCorner_MapEvents:: @ 8530178
+MauvilleCity_GameCorner_MapEvents::
 	map_events MauvilleCity_GameCorner_EventObjects, MauvilleCity_GameCorner_MapWarps, 0x0, MauvilleCity_GameCorner_MapBGEvents
 

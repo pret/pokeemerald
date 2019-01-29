@@ -1,10 +1,10 @@
-UnknownMap_25_34: @ 8484E48
+UnknownMap_25_34:
 	.4byte UnknownMap_25_34_Layout
 	.4byte LinkContestRoom1_MapEvents
 	.4byte LinkContestRoom1_MapScripts
 	.4byte 0x0
 	.2byte MUS_NIBI
-	.2byte 231
+	.2byte LAYOUT_UNKNOWN_MAP_25_34
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

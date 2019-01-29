@@ -1,10 +1,10 @@
-EverGrandeCity_SidneysRoom: @ 8483BCC
+EverGrandeCity_SidneysRoom:
 	.4byte EverGrandeCity_SidneysRoom_Layout
 	.4byte EverGrandeCity_SidneysRoom_MapEvents
 	.4byte EverGrandeCity_SidneysRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 111
+	.2byte LAYOUT_EVER_GRANDE_CITY_SIDNEYS_ROOM
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

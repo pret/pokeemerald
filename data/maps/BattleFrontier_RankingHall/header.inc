@@ -1,10 +1,10 @@
-BattleFrontier_RankingHall: @ 848559C
+BattleFrontier_RankingHall:
 	.4byte BattleFrontier_RankingHall_Layout
 	.4byte BattleFrontier_RankingHall_MapEvents
 	.4byte BattleFrontier_RankingHall_MapScripts
 	.4byte 0x0
 	.2byte MUS_BIJYUTU
-	.2byte 396
+	.2byte LAYOUT_BATTLE_FRONTIER_RANKING_HALL
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-EverGrandeCity: @ 8482598
+EverGrandeCity:
 	.4byte EverGrandeCity_Layout
 	.4byte EverGrandeCity_MapEvents
 	.4byte EverGrandeCity_MapScripts
 	.4byte EverGrandeCity_MapConnections
 	.2byte MUS_RAINBOW
-	.2byte 9
+	.2byte LAYOUT_EVER_GRANDE_CITY
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

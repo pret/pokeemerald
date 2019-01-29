@@ -1,10 +1,10 @@
-Route112_CableCarStation: @ 8483DE0
+Route112_CableCarStation:
 	.4byte CableCarStation_Layout
 	.4byte Route112_CableCarStation_MapEvents
 	.4byte Route112_CableCarStation_MapScripts
 	.4byte 0x0
 	.2byte MUS_DOORO_X1
-	.2byte 118
+	.2byte LAYOUT_CABLE_CAR_STATION
 	.byte MAPSEC_ROUTE_112
 	.byte 0
 	.byte WEATHER_NONE

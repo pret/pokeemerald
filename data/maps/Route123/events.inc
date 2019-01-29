@@ -1,4 +1,4 @@
-Route123_EventObjects: @ 852BDBC
+Route123_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 11, 3, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 58, BerryTreeScript, 0
 	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 12, 3, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 59, BerryTreeScript, 0
 	object_event 3, EVENT_OBJ_GFX_BERRY_TREE, 0, 14, 3, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 60, BerryTreeScript, 0
@@ -43,10 +43,10 @@ Route123_EventObjects: @ 852BDBC
 	object_event 42, EVENT_OBJ_GFX_YOUNGSTER, 0, 14, 12, 3, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 1, 3, 1, 3, Route123_EventScript_1F63A5, 0
 	object_event 43, EVENT_OBJ_GFX_ITEM_BALL, 0, 57, 16, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route123_EventScript_290FE4, FLAG_ITEM_ROUTE_123_REVIVAL_HERB
 
-Route123_MapWarps: @ 852C1C4
+Route123_MapWarps:
 	warp_def 22, 6, 0, 0, MAP_ROUTE123_BERRY_MASTERS_HOUSE
 
-Route123_MapCoordEvents: @ 852C1CC
+Route123_MapCoordEvents:
 	coord_weather_event 90, 16, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
 	coord_weather_event 92, 9, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
 	coord_weather_event 93, 12, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
@@ -70,7 +70,7 @@ Route123_MapCoordEvents: @ 852C1CC
 	coord_weather_event 9, 16, 3, COORD_EVENT_WEATHER_SUNNY
 	coord_weather_event 94, 10, 3, COORD_EVENT_WEATHER_ROUTE123_CYCLE
 
-Route123_MapBGEvents: @ 852C32C
+Route123_MapBGEvents:
 	bg_event 117, 10, 0, BG_EVENT_PLAYER_FACING_ANY, Route123_EventScript_1F61B3
 	bg_secret_base_event 47, 3, 0, SECRET_BASE_BLUE_CAVE1_2
 	bg_secret_base_event 49, 3, 0, SECRET_BASE_BLUE_CAVE2_2
@@ -83,6 +83,6 @@ Route123_MapBGEvents: @ 852C32C
 	bg_hidden_item_event 139, 15, 3, ITEM_PP_UP, FLAG_HIDDEN_ITEM_ROUTE_123_PP_UP
 	bg_hidden_item_event 138, 18, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY
 
-Route123_MapEvents:: @ 852C3B0
+Route123_MapEvents::
 	map_events Route123_EventObjects, Route123_MapWarps, Route123_MapCoordEvents, Route123_MapBGEvents
 

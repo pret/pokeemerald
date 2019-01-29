@@ -1,10 +1,10 @@
-TrainerHill_Entrance: @ 84857CC
+TrainerHill_Entrance:
 	.4byte TrainerHill_Entrance_Layout
 	.4byte TrainerHill_Entrance_MapEvents
 	.4byte TrainerHill_Entrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_TOWER
-	.2byte 414
+	.2byte LAYOUT_TRAINER_HILL_ENTRANCE
 	.byte MAPSEC_TRAINER_HILL
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-EverGrandeCity_Hall1: @ 8483C58
+EverGrandeCity_Hall1:
 	.4byte EverGrandeCity_ShortHall_Layout
 	.4byte EverGrandeCity_Hall1_MapEvents
 	.4byte EverGrandeCity_Hall1_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 116
+	.2byte LAYOUT_EVER_GRANDE_CITY_SHORT_HALL
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-MossdeepCity_House4: @ 848399C
+MossdeepCity_House4:
 	.4byte HouseWithBed_Layout
 	.4byte MossdeepCity_House4_MapEvents
 	.4byte MossdeepCity_House4_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 80
+	.2byte LAYOUT_HOUSE_WITH_BED
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

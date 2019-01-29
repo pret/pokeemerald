@@ -1,10 +1,10 @@
-Route109: @ 8482758
+Route109:
 	.4byte Route109_Layout
 	.4byte Route109_MapEvents
 	.4byte Route109_MapScripts
 	.4byte Route109_MapConnections
 	.2byte MUS_NEXTROAD
-	.2byte 25
+	.2byte LAYOUT_ROUTE109
 	.byte MAPSEC_ROUTE_109
 	.byte 0
 	.byte WEATHER_SUNNY

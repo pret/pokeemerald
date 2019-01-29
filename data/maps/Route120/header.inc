@@ -1,10 +1,10 @@
-Route120: @ 848288C
+Route120:
 	.4byte Route120_Layout
 	.4byte Route120_MapEvents
 	.4byte Route120_MapScripts
 	.4byte Route120_MapConnections
 	.2byte MUS_DOORO_X3
-	.2byte 36
+	.2byte LAYOUT_ROUTE120
 	.byte MAPSEC_ROUTE_120
 	.byte 0
 	.byte WEATHER_SUNNY

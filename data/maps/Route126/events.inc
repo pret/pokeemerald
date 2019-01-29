@@ -1,4 +1,4 @@
-Route126_EventObjects: @ 852C648
+Route126_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 51, 65, 1, MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN, 10, 3, 1, 3, Route126_EventScript_1F68D6, 0
 	object_event 2, EVENT_OBJ_GFX_SWIMMER_M, 0, 56, 22, 1, MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT, 9, 0, 1, 3, Route126_EventScript_1F68ED, 0
 	object_event 3, EVENT_OBJ_GFX_SWIMMER_F, 0, 63, 43, 1, MOVEMENT_TYPE_ROTATE_CLOCKWISE, 0, 0, 1, 3, Route126_EventScript_1F6904, 0
@@ -9,6 +9,6 @@ Route126_EventObjects: @ 852C648
 	object_event 8, EVENT_OBJ_GFX_SWIMMER_F, 0, 64, 5, 1, MOVEMENT_TYPE_WALK_IN_PLACE_LEFT, 1, 1, 1, 7, Route126_EventScript_1F6949, 0
 	object_event 9, EVENT_OBJ_GFX_SWIMMER_M, 0, 56, 5, 1, MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT, 1, 1, 1, 7, Route126_EventScript_1F6932, 0
 
-Route126_MapEvents:: @ 852C720
+Route126_MapEvents::
 	map_events Route126_EventObjects, 0x0, 0x0, 0x0
 

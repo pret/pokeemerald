@@ -1,10 +1,10 @@
-RustboroCity_House1: @ 848345C
+RustboroCity_House1:
 	.4byte RustboroCity_House1_Layout
 	.4byte RustboroCity_House1_MapEvents
 	.4byte RustboroCity_House1_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 97
+	.2byte LAYOUT_RUSTBORO_CITY_HOUSE1
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte WEATHER_NONE

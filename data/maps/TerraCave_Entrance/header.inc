@@ -1,10 +1,10 @@
-TerraCave_Entrance: @ 8484A20
+TerraCave_Entrance:
 	.4byte TerraCave_Entrance_Layout
 	.4byte TerraCave_Entrance_MapEvents
 	.4byte TerraCave_Entrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN01
-	.2byte 408
+	.2byte LAYOUT_TERRA_CAVE_ENTRANCE
 	.byte MAPSEC_TERRA_CAVE
 	.byte 0
 	.byte WEATHER_NONE

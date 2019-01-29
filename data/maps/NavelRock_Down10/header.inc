@@ -1,10 +1,10 @@
-NavelRock_Down10: @ 8485A88
+NavelRock_Down10:
 	.4byte NavelRock_LadderRoom2_Layout
 	.4byte NavelRock_Down10_MapEvents
 	.4byte NavelRock_Down10_MapScripts
 	.4byte 0x0
 	.2byte MUS_RG_NANADUNGEON
-	.2byte 426
+	.2byte LAYOUT_NAVEL_ROCK_LADDER_ROOM2
 	.byte MAPSEC_NAVEL_ROCK2
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-FortreeCity_DecorationShop: @ 848361C
+FortreeCity_DecorationShop:
 	.4byte FortreeCity_DecorationShop_Layout
 	.4byte FortreeCity_DecorationShop_MapEvents
 	.4byte FortreeCity_DecorationShop_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 255
+	.2byte LAYOUT_FORTREE_CITY_DECORATION_SHOP
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte WEATHER_NONE

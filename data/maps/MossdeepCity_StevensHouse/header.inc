@@ -1,10 +1,10 @@
-MossdeepCity_StevensHouse: @ 8483980
+MossdeepCity_StevensHouse:
 	.4byte MossdeepCity_StevensHouse_Layout
 	.4byte MossdeepCity_StevensHouse_MapEvents
 	.4byte MossdeepCity_StevensHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 327
+	.2byte LAYOUT_MOSSDEEP_CITY_STEVENS_HOUSE
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

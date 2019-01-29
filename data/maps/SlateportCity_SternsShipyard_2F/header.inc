@@ -1,10 +1,10 @@
-SlateportCity_SternsShipyard_2F: @ 84830F8
+SlateportCity_SternsShipyard_2F:
 	.4byte SlateportCity_SternsShipyard_2F_Layout
 	.4byte SlateportCity_SternsShipyard_2F_MapEvents
 	.4byte SlateportCity_SternsShipyard_2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_FINECITY
-	.2byte 82
+	.2byte LAYOUT_SLATEPORT_CITY_STERNS_SHIPYARD_2F
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte WEATHER_NONE

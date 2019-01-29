@@ -1,10 +1,10 @@
-SlateportCity_OceanicMuseum_2F: @ 84831BC
+SlateportCity_OceanicMuseum_2F:
 	.4byte SlateportCity_OceanicMuseum_2F_Layout
 	.4byte SlateportCity_OceanicMuseum_2F_MapEvents
 	.4byte SlateportCity_OceanicMuseum_2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_FUNE_KAN
-	.2byte 87
+	.2byte LAYOUT_SLATEPORT_CITY_OCEANIC_MUSEUM_2F
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte WEATHER_NONE

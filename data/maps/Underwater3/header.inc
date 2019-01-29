@@ -1,10 +1,10 @@
-Underwater3: @ 8482A68
+Underwater3:
 	.4byte Underwater3_Layout
 	.4byte Underwater3_MapEvents
 	.4byte Underwater3_MapScripts
 	.4byte Underwater3_MapConnections
 	.2byte MUS_DEEPDEEP
-	.2byte 52
+	.2byte LAYOUT_UNDERWATER3
 	.byte MAPSEC_UNDERWATER_126
 	.byte 0
 	.byte WEATHER_BUBBLES

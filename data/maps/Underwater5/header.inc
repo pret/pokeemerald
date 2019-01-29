@@ -1,10 +1,10 @@
-Underwater5: @ 8482AA0
+Underwater5:
 	.4byte Underwater5_Layout
 	.4byte Underwater5_MapEvents
 	.4byte Underwater5_MapScripts
 	.4byte Underwater5_MapConnections
 	.2byte MUS_DEEPDEEP
-	.2byte 412
+	.2byte LAYOUT_UNDERWATER5
 	.byte MAPSEC_UNDERWATER_129
 	.byte 0
 	.byte WEATHER_BUBBLES

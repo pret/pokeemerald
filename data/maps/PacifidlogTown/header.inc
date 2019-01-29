@@ -1,10 +1,10 @@
-PacifidlogTown: @ 848265C
+PacifidlogTown:
 	.4byte PacifidlogTown_Layout
 	.4byte PacifidlogTown_MapEvents
 	.4byte PacifidlogTown_MapScripts
 	.4byte PacifidlogTown_MapConnections
 	.2byte MUS_MINAMO
-	.2byte 16
+	.2byte LAYOUT_PACIFIDLOG_TOWN
 	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
 	.byte WEATHER_SUNNY

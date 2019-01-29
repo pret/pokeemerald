@@ -1,4 +1,4 @@
-Route115_EventObjects: @ 852A1BC
+Route115_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_WOMAN_2, 0, 18, 68, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, Route115_EventScript_1F2973, 0
 	object_event 2, EVENT_OBJ_GFX_EXPERT_M, 0, 5, 15, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 6, Route115_EventScript_1F298E, 0
 	object_event 3, EVENT_OBJ_GFX_BLACK_BELT, 0, 27, 53, 3, MOVEMENT_TYPE_FACE_UP_AND_LEFT, 1, 1, 1, 4, Route115_EventScript_1F2A07, 0
@@ -23,12 +23,12 @@ Route115_EventObjects: @ 852A1BC
 	object_event 22, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 67, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route115_EventScript_290E6B, FLAG_ITEM_ROUTE_115_PP_UP
 	object_event 23, EVENT_OBJ_GFX_ITEM_BALL, 0, 12, 14, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route115_EventScript_290E5E, FLAG_ITEM_ROUTE_115_HEAL_POWDER
 
-Route115_MapWarps: @ 852A3E4
+Route115_MapWarps:
 	warp_def 27, 37, 0, 1, MAP_METEOR_FALLS_1F_1R
 	warp_def 21, 6, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 	warp_def 36, 10, 0, 0, MAP_TERRA_CAVE_ENTRANCE
 
-Route115_MapBGEvents: @ 852A3FC
+Route115_MapBGEvents:
 	bg_secret_base_event 32, 6, 0, SECRET_BASE_BROWN_CAVE4_2
 	bg_secret_base_event 21, 18, 0, SECRET_BASE_BROWN_CAVE3_2
 	bg_event 16, 64, 0, BG_EVENT_PLAYER_FACING_ANY, Route115_EventScript_1F297C
@@ -44,6 +44,6 @@ Route115_MapBGEvents: @ 852A3FC
 	bg_secret_base_event 20, 53, 0, SECRET_BASE_RED_CAVE3_1
 	bg_hidden_item_event 15, 49, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_115_HEART_SCALE
 
-Route115_MapEvents:: @ 852A4A4
+Route115_MapEvents::
 	map_events Route115_EventObjects, Route115_MapWarps, 0x0, Route115_MapBGEvents
 

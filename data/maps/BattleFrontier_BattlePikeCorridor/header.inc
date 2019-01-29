@@ -1,10 +1,10 @@
-BattleFrontier_BattlePikeCorridor: @ 8485510
+BattleFrontier_BattlePikeCorridor:
 	.4byte BattleFrontier_BattlePikeCorridor_Layout
 	.4byte BattleFrontier_BattlePikeCorridor_MapEvents
 	.4byte BattleFrontier_BattlePikeCorridor_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_TUBE
-	.2byte 350
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

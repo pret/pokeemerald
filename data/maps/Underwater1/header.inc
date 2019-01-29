@@ -1,10 +1,10 @@
-Underwater1: @ 8482A30
+Underwater1:
 	.4byte Underwater1_Layout
 	.4byte Underwater1_MapEvents
 	.4byte Underwater1_MapScripts
 	.4byte Underwater1_MapConnections
 	.2byte MUS_DEEPDEEP
-	.2byte 274
+	.2byte LAYOUT_UNDERWATER1
 	.byte MAPSEC_UNDERWATER_124
 	.byte 0
 	.byte WEATHER_BUBBLES

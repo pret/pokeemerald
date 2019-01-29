@@ -1,10 +1,10 @@
-Route119_WeatherInstitute_2F: @ 8485D0C
+Route119_WeatherInstitute_2F:
 	.4byte Route119_WeatherInstitute_2F_Layout
 	.4byte Route119_WeatherInstitute_2F_MapEvents
 	.4byte Route119_WeatherInstitute_2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 272
+	.2byte LAYOUT_ROUTE119_WEATHER_INSTITUTE_2F
 	.byte MAPSEC_ROUTE_119
 	.byte 0
 	.byte WEATHER_NONE

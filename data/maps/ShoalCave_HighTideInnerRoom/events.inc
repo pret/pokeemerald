@@ -1,3 +1,3 @@
-ShoalCave_HighTideInnerRoom_MapEvents:: @ 8536460
+ShoalCave_HighTideInnerRoom_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 

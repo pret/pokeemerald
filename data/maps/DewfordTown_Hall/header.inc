@@ -1,10 +1,10 @@
-DewfordTown_Hall: @ 8482C7C
+DewfordTown_Hall:
 	.4byte DewfordTown_Hall_Layout
 	.4byte DewfordTown_Hall_MapEvents
 	.4byte DewfordTown_Hall_MapScripts
 	.4byte 0x0
 	.2byte MUS_HIGHTOWN
-	.2byte 66
+	.2byte LAYOUT_DEWFORD_TOWN_HALL
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
 	.byte WEATHER_NONE

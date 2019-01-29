@@ -1,10 +1,10 @@
-AbandonedShip_Corridors_1F: @ 84844C4
+AbandonedShip_Corridors_1F:
 	.4byte AbandonedShip_Corridors_1F_Layout
 	.4byte AbandonedShip_Corridors_1F_MapEvents
 	.4byte AbandonedShip_Corridors_1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN02
-	.2byte 187
+	.2byte LAYOUT_ABANDONED_SHIP_CORRIDORS_1F
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte WEATHER_SHADE

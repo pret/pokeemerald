@@ -1,4 +1,4 @@
-Route128_EventObjects: @ 852C88C
+Route128_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 35, 33, 1, MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN, 5, 5, 1, 3, Route128_EventScript_1F6CBE, 0
 	object_event 2, EVENT_OBJ_GFX_SWIMMER_F, 0, 78, 24, 1, MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT, 5, 0, 1, 7, Route128_EventScript_1F6D20, 0
 	object_event 3, EVENT_OBJ_GFX_STEVEN, 0, 40, 22, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_HIDE_ROUTE_128_STEVEN
@@ -10,11 +10,11 @@ Route128_EventObjects: @ 852C88C
 	object_event 9, EVENT_OBJ_GFX_SWIMMER_F, 0, 101, 29, 1, MOVEMENT_TYPE_WALK_UP_AND_DOWN, 1, 3, 1, 4, Route128_EventScript_1F6DDE, 0
 	object_event 10, EVENT_OBJ_GFX_SWIMMER_M, 0, 101, 22, 1, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 1, 3, 1, 4, Route128_EventScript_1F6DC7, 0
 
-Route128_MapBGEvents: @ 852C97C
+Route128_MapBGEvents:
 	bg_hidden_item_event 49, 9, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_1
 	bg_hidden_item_event 57, 21, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_2
 	bg_hidden_item_event 31, 33, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_3
 
-Route128_MapEvents:: @ 852C9A0
+Route128_MapEvents::
 	map_events Route128_EventObjects, 0x0, 0x0, Route128_MapBGEvents
 

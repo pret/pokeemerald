@@ -1,10 +1,10 @@
-Route124: @ 84828FC
+Route124:
 	.4byte Route124_Layout
 	.4byte Route124_MapEvents
 	.4byte Route124_MapScripts
 	.4byte Route124_MapConnections
 	.2byte MUS_DOORO_X3
-	.2byte 40
+	.2byte LAYOUT_ROUTE124
 	.byte MAPSEC_ROUTE_124
 	.byte 0
 	.byte WEATHER_SUNNY

@@ -1,10 +1,10 @@
-MossdeepCity_Mart: @ 8483948
+MossdeepCity_Mart:
 	.4byte Mart_Layout
 	.4byte MossdeepCity_Mart_MapEvents
 	.4byte MossdeepCity_Mart_MapScripts
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
-	.2byte 63
+	.2byte LAYOUT_MART
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

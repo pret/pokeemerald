@@ -1,4 +1,4 @@
-LittlerootTown_MaysHouse_2F_EventObjects: @ 852D480
+LittlerootTown_MaysHouse_2F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL, 0, 1, 1, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_1F94C1, FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 0, 6, 0, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, 0x0, FLAG_DECORATION_1
 	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 1, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, 0x0, FLAG_DECORATION_2
@@ -16,15 +16,15 @@ LittlerootTown_MaysHouse_2F_EventObjects: @ 852D480
 	object_event 15, EVENT_OBJ_GFX_PICHU_DOLL, 0, 3, 4, 4, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
 	object_event 16, EVENT_OBJ_GFX_ITEM_BALL, 0, 5, 4, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_1F9334, FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 
-LittlerootTown_MaysHouse_2F_MapWarps: @ 852D600
+LittlerootTown_MaysHouse_2F_MapWarps:
 	warp_def 1, 1, 0, 2, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F
 
-LittlerootTown_MaysHouse_2F_MapBGEvents: @ 852D608
+LittlerootTown_MaysHouse_2F_MapBGEvents:
 	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_1F865F
 	bg_event 7, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_1F8656
 	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_29278D
 	bg_event 8, 1, 0, BG_EVENT_PLAYER_FACING_ANY, EventScript_PlayerPCFemale
 
-LittlerootTown_MaysHouse_2F_MapEvents:: @ 852D638
+LittlerootTown_MaysHouse_2F_MapEvents::
 	map_events LittlerootTown_MaysHouse_2F_EventObjects, LittlerootTown_MaysHouse_2F_MapWarps, 0x0, LittlerootTown_MaysHouse_2F_MapBGEvents
 

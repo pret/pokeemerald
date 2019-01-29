@@ -1,10 +1,10 @@
-GraniteCave_StevensRoom: @ 8483FD8
+GraniteCave_StevensRoom:
 	.4byte GraniteCave_StevensRoom_Layout
 	.4byte GraniteCave_StevensRoom_MapEvents
 	.4byte GraniteCave_StevensRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN01
-	.2byte 288
+	.2byte LAYOUT_GRANITE_CAVE_STEVENS_ROOM
 	.byte MAPSEC_GRANITE_CAVE
 	.byte 0
 	.byte WEATHER_NONE

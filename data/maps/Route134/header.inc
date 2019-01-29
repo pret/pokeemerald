@@ -1,10 +1,10 @@
-Route134: @ 8482A14
+Route134:
 	.4byte Route134_Layout
 	.4byte Route134_MapEvents
 	.4byte Route134_MapScripts
 	.4byte Route134_MapConnections
 	.2byte MUS_GRANROAD
-	.2byte 50
+	.2byte LAYOUT_ROUTE134
 	.byte MAPSEC_ROUTE_134
 	.byte 0
 	.byte WEATHER_SUNNY

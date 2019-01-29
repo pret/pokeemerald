@@ -1,4 +1,4 @@
-SootopolisCity_EventObjects: @ 8527314
+SootopolisCity_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_EXPERT_M, 0, 31, 18, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SootopolisCity_EventScript_1E5E8D, 0
 	object_event 2, EVENT_OBJ_GFX_WOMAN_4, 0, 47, 33, 0, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, SootopolisCity_EventScript_1E5FE2, FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
 	object_event 3, EVENT_OBJ_GFX_GIRL_2, 0, 9, 43, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, SootopolisCity_EventScript_1E5ED8, 0
@@ -18,7 +18,7 @@ SootopolisCity_EventObjects: @ 8527314
 	object_event 17, EVENT_OBJ_GFX_ARCHIE, 0, 31, 33, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, SootopolisCity_EventScript_1E651F, FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
 	object_event 18, EVENT_OBJ_GFX_WALLACE, 0, 31, 18, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, SootopolisCity_EventScript_1E6446, FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
 
-SootopolisCity_MapWarps: @ 85274C4
+SootopolisCity_MapWarps:
 	warp_def 43, 31, 0, 0, MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F
 	warp_def 17, 29, 0, 0, MAP_SOOTOPOLIS_CITY_MART
 	warp_def 31, 32, 0, 0, MAP_SOOTOPOLIS_CITY_GYM_1F
@@ -33,7 +33,7 @@ SootopolisCity_MapWarps: @ 85274C4
 	warp_def 48, 25, 0, 0, MAP_SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE
 	warp_def 51, 36, 0, 0, MAP_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F
 
-SootopolisCity_MapBGEvents: @ 852752C
+SootopolisCity_MapBGEvents:
 	bg_event 33, 34, 3, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_1E614B
 	bg_event 19, 29, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E6A
 	bg_event 44, 31, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E73
@@ -41,6 +41,6 @@ SootopolisCity_MapBGEvents: @ 852752C
 	bg_event 18, 29, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_271E6A
 	bg_event 41, 37, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_1E6154
 
-SootopolisCity_MapEvents:: @ 8527574
+SootopolisCity_MapEvents::
 	map_events SootopolisCity_EventObjects, SootopolisCity_MapWarps, 0x0, SootopolisCity_MapBGEvents
 

@@ -1,4 +1,4 @@
-SlateportCity_OceanicMuseum_1F_EventObjects: @ 852F670
+SlateportCity_OceanicMuseum_1F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 7, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD96, 0
 	object_event 2, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 18, 5, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE5F, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
 	object_event 3, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 12, 2, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AE68, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
@@ -14,16 +14,16 @@ SlateportCity_OceanicMuseum_1F_EventObjects: @ 852F670
 	object_event 13, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 9, 4, 3, MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AEF8, FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT
 	object_event 14, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_28C883, FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
 
-SlateportCity_OceanicMuseum_1F_MapWarps: @ 852F7C0
+SlateportCity_OceanicMuseum_1F_MapWarps:
 	warp_def 9, 8, 0, 5, MAP_SLATEPORT_CITY
 	warp_def 10, 8, 0, 7, MAP_SLATEPORT_CITY
 	warp_def 6, 1, 0, 0, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F
 
-SlateportCity_OceanicMuseum_1F_MapCoordEvents: @ 852F7D8
+SlateportCity_OceanicMuseum_1F_MapCoordEvents:
 	coord_event 9, 7, 3, VAR_0x40AA, 0, SlateportCity_OceanicMuseum_1F_EventScript_20AD9F
 	coord_event 10, 7, 3, VAR_0x40AA, 0, SlateportCity_OceanicMuseum_1F_EventScript_20ADB0
 
-SlateportCity_OceanicMuseum_1F_MapBGEvents: @ 852F7F8
+SlateportCity_OceanicMuseum_1F_MapBGEvents:
 	bg_event 2, 7, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_20AE83
 	bg_event 2, 4, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_20AE8C
 	bg_event 9, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_20AE95
@@ -38,6 +38,6 @@ SlateportCity_OceanicMuseum_1F_MapBGEvents: @ 852F7F8
 	bg_event 16, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_20AECB
 	bg_event 17, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_20AECB
 
-SlateportCity_OceanicMuseum_1F_MapEvents:: @ 852F894
+SlateportCity_OceanicMuseum_1F_MapEvents::
 	map_events SlateportCity_OceanicMuseum_1F_EventObjects, SlateportCity_OceanicMuseum_1F_MapWarps, SlateportCity_OceanicMuseum_1F_MapCoordEvents, SlateportCity_OceanicMuseum_1F_MapBGEvents
 

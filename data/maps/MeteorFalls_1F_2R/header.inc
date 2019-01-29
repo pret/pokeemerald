@@ -1,10 +1,10 @@
-MeteorFalls_1F_2R: @ 8483EDC
+MeteorFalls_1F_2R:
 	.4byte MeteorFalls_1F_2R_Layout
 	.4byte MeteorFalls_1F_2R_MapEvents
 	.4byte MeteorFalls_1F_2R_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN03
-	.2byte 126
+	.2byte LAYOUT_METEOR_FALLS_1F_2R
 	.byte MAPSEC_METEOR_FALLS
 	.byte 0
 	.byte WEATHER_NONE

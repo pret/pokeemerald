@@ -1,10 +1,10 @@
-MauvilleCity_GameCorner: @ 84832B8
+MauvilleCity_GameCorner:
 	.4byte MauvilleCity_GameCorner_Layout
 	.4byte MauvilleCity_GameCorner_MapEvents
 	.4byte MauvilleCity_GameCorner_MapScripts
 	.4byte 0x0
 	.2byte MUS_CASINO
-	.2byte 91
+	.2byte LAYOUT_MAUVILLE_CITY_GAME_CORNER
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte WEATHER_NONE

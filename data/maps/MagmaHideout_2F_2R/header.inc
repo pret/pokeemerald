@@ -1,10 +1,10 @@
-MagmaHideout_2F_2R: @ 8484860
+MagmaHideout_2F_2R:
 	.4byte MagmaHideout_2F_2R_Layout
 	.4byte MagmaHideout_2F_2R_MapEvents
 	.4byte MagmaHideout_2F_2R_MapScripts
 	.4byte 0x0
 	.2byte MUS_AJITO
-	.2byte 338
+	.2byte LAYOUT_MAGMA_HIDEOUT_2F_2R
 	.byte MAPSEC_MAGMA_HIDEOUT
 	.byte 0
 	.byte WEATHER_NONE

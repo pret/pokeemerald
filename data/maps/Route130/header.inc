@@ -1,10 +1,10 @@
-Route130: @ 84829A4
+Route130:
 	.4byte Route130_Layout
 	.4byte Route130_MapEvents
 	.4byte Route130_MapScripts
 	.4byte Route130_MapConnections
 	.2byte MUS_GRANROAD
-	.2byte 263
+	.2byte LAYOUT_ROUTE130
 	.byte MAPSEC_ROUTE_130
 	.byte 0
 	.byte WEATHER_SUNNY

@@ -1,10 +1,10 @@
-BattleFrontier_BattlePikeLobby: @ 84854F4
+BattleFrontier_BattlePikeLobby:
 	.4byte BattleFrontier_BattlePikeLobby_Layout
 	.4byte BattleFrontier_BattlePikeLobby_MapEvents
 	.4byte BattleFrontier_BattlePikeLobby_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_TUBE
-	.2byte 349
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-Route114_FossilManiacsHouse: @ 8483E18
+Route114_FossilManiacsHouse:
 	.4byte Route114_FossilManiacsHouse_Layout
 	.4byte Route114_FossilManiacsHouse_MapEvents
 	.4byte Route114_FossilManiacsHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_TONEKUSA
-	.2byte 119
+	.2byte LAYOUT_ROUTE114_FOSSIL_MANIACS_HOUSE
 	.byte MAPSEC_ROUTE_114
 	.byte 0
 	.byte WEATHER_NONE

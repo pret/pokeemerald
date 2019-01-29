@@ -1,10 +1,10 @@
-VerdanturfTown_Mart: @ 8482EAC
+VerdanturfTown_Mart:
 	.4byte Mart_Layout
 	.4byte VerdanturfTown_Mart_MapEvents
 	.4byte VerdanturfTown_Mart_MapScripts
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
-	.2byte 63
+	.2byte LAYOUT_MART
 	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte WEATHER_NONE

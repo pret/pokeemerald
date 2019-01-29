@@ -1,10 +1,10 @@
-MossdeepCity_GameCorner_B1F: @ 8483A0C
+MossdeepCity_GameCorner_B1F:
 	.4byte MossdeepCity_GameCorner_B1F_Layout
 	.4byte MossdeepCity_GameCorner_B1F_MapEvents
 	.4byte MossdeepCity_GameCorner_B1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 306
+	.2byte LAYOUT_MOSSDEEP_CITY_GAME_CORNER_B1F
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

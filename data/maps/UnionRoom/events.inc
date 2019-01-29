@@ -1,4 +1,4 @@
-UnionRoom_EventObjects: @ 853B020
+UnionRoom_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_UNION_ROOM_NURSE, 0, 3, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, UnionRoom_EventScript_23D236, 0
 	object_event 2, EVENT_OBJ_GFX_VAR_3, 0, 1, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D204, FLAG_HIDE_UNION_ROOM_PLAYER_4
 	object_event 3, EVENT_OBJ_GFX_VAR_7, 0, 7, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D22C, FLAG_HIDE_UNION_ROOM_PLAYER_8
@@ -9,10 +9,10 @@ UnionRoom_EventObjects: @ 853B020
 	object_event 8, EVENT_OBJ_GFX_VAR_1, 0, 13, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1F0, FLAG_HIDE_UNION_ROOM_PLAYER_2
 	object_event 9, EVENT_OBJ_GFX_VAR_0, 0, 4, 6, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, UnionRoom_EventScript_23D1E6, FLAG_HIDE_UNION_ROOM_PLAYER_1
 
-UnionRoom_MapWarps: @ 853B0F8
+UnionRoom_MapWarps:
 	warp_def 7, 11, 3, 127, MAP_NONE
 	warp_def 8, 11, 3, 127, MAP_NONE
 
-UnionRoom_MapEvents:: @ 853B108
+UnionRoom_MapEvents::
 	map_events UnionRoom_EventObjects, UnionRoom_MapWarps, 0x0, 0x0
 

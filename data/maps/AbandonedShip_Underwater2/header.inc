@@ -1,10 +1,10 @@
-AbandonedShip_Underwater2: @ 84845C0
+AbandonedShip_Underwater2:
 	.4byte AbandonedShip_Underwater2_Layout
 	.4byte AbandonedShip_Underwater2_MapEvents
 	.4byte AbandonedShip_Underwater2_MapScripts
 	.4byte 0x0
 	.2byte MUS_DEEPDEEP
-	.2byte 196
+	.2byte LAYOUT_ABANDONED_SHIP_UNDERWATER2
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte WEATHER_BUBBLES

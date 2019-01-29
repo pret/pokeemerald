@@ -1,10 +1,10 @@
-MirageTower_2F: @ 8484924
+MirageTower_2F:
 	.4byte MirageTower_2F_Layout
 	.4byte MirageTower_2F_MapEvents
 	.4byte MirageTower_2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_TOZAN
-	.2byte 382
+	.2byte LAYOUT_MIRAGE_TOWER_2F
 	.byte MAPSEC_MIRAGE_TOWER
 	.byte 0
 	.byte WEATHER_NONE

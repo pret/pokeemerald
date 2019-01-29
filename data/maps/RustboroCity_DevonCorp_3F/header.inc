@@ -1,10 +1,10 @@
-RustboroCity_DevonCorp_3F: @ 848337C
+RustboroCity_DevonCorp_3F:
 	.4byte RustboroCity_DevonCorp_3F_Layout
 	.4byte RustboroCity_DevonCorp_3F_MapEvents
 	.4byte RustboroCity_DevonCorp_3F_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 269
+	.2byte LAYOUT_RUSTBORO_CITY_DEVON_CORP_3F
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte WEATHER_NONE

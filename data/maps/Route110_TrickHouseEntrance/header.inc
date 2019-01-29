@@ -1,10 +1,10 @@
-Route110_TrickHouseEntrance: @ 8485B4C
+Route110_TrickHouseEntrance:
 	.4byte Route110_TrickHouseEntrance_Layout
 	.4byte Route110_TrickHouseEntrance_MapEvents
 	.4byte Route110_TrickHouseEntrance_MapScripts
 	.4byte 0x0
 	.2byte MUS_KARAKURI
-	.2byte 244
+	.2byte LAYOUT_ROUTE110_TRICK_HOUSE_ENTRANCE
 	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte WEATHER_NONE

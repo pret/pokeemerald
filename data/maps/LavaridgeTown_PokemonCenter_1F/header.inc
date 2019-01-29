@@ -1,10 +1,10 @@
-LavaridgeTown_PokemonCenter_1F: @ 8482D40
+LavaridgeTown_PokemonCenter_1F:
 	.4byte LavaridgeTown_PokemonCenter_1F_Layout
 	.4byte LavaridgeTown_PokemonCenter_1F_MapEvents
 	.4byte LavaridgeTown_PokemonCenter_1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_POKECEN
-	.2byte 71
+	.2byte LAYOUT_LAVARIDGE_TOWN_POKEMON_CENTER_1F
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-TrainerHill_Elevator: @ 8485ADC
+TrainerHill_Elevator:
 	.4byte BattleElevator_Layout
 	.4byte TrainerHill_Elevator_MapEvents
 	.4byte TrainerHill_Elevator_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_TOWER
-	.2byte 266
+	.2byte LAYOUT_BATTLE_ELEVATOR
 	.byte MAPSEC_TRAINER_HILL
 	.byte 0
 	.byte WEATHER_NONE

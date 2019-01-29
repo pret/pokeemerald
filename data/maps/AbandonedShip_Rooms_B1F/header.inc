@@ -1,10 +1,10 @@
-AbandonedShip_Rooms_B1F: @ 8484518
+AbandonedShip_Rooms_B1F:
 	.4byte AbandonedShip_Rooms_B1F_Layout
 	.4byte AbandonedShip_Rooms_B1F_MapEvents
 	.4byte AbandonedShip_Rooms_B1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN02
-	.2byte 190
+	.2byte LAYOUT_ABANDONED_SHIP_ROOMS_B1F
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte WEATHER_SHADE

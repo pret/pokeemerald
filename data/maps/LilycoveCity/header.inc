@@ -1,10 +1,10 @@
-LilycoveCity: @ 8482544
+LilycoveCity:
 	.4byte LilycoveCity_Layout
 	.4byte LilycoveCity_MapEvents
 	.4byte LilycoveCity_MapScripts
 	.4byte LilycoveCity_MapConnections
 	.2byte MUS_MINAMO
-	.2byte 6
+	.2byte LAYOUT_LILYCOVE_CITY
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

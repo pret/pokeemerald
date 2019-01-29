@@ -1,10 +1,10 @@
-Route101: @ 8482678
+Route101:
 	.4byte Route101_Layout
 	.4byte Route101_MapEvents
 	.4byte Route101_MapScripts
 	.4byte Route101_MapConnections
 	.2byte MUS_DOORO1
-	.2byte 17
+	.2byte LAYOUT_ROUTE101
 	.byte MAPSEC_ROUTE_101
 	.byte 0
 	.byte WEATHER_SUNNY

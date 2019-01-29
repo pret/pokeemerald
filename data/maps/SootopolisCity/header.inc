@@ -1,10 +1,10 @@
-SootopolisCity: @ 848257C
+SootopolisCity:
 	.4byte SootopolisCity_Layout
 	.4byte SootopolisCity_MapEvents
 	.4byte SootopolisCity_MapScripts
 	.4byte 0x0
 	.2byte MUS_RUNECITY
-	.2byte 8
+	.2byte LAYOUT_SOOTOPOLIS_CITY
 	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

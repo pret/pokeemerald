@@ -1,10 +1,10 @@
-FieryPath: @ 8484048
+FieryPath:
 	.4byte FieryPath_Layout
 	.4byte FieryPath_MapEvents
 	.4byte FieryPath_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN01
-	.2byte 293
+	.2byte LAYOUT_FIERY_PATH
 	.byte MAPSEC_FIERY_PATH
 	.byte 0
 	.byte WEATHER_NONE

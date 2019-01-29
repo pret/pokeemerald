@@ -1,10 +1,10 @@
-RustboroCity_Flat2_1F: @ 84834B0
+RustboroCity_Flat2_1F:
 	.4byte RustboroCity_Flat2_1F_Layout
 	.4byte RustboroCity_Flat2_1F_MapEvents
 	.4byte RustboroCity_Flat2_1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 294
+	.2byte LAYOUT_RUSTBORO_CITY_FLAT2_1F
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte WEATHER_NONE

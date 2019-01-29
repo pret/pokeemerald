@@ -1,4 +1,4 @@
-LilycoveCity_EventObjects: @ 8526CE8
+LilycoveCity_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 32, 20, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, LilycoveCity_EventScript_1E2C53, 0
 	object_event 2, EVENT_OBJ_GFX_GIRL_1, 0, 15, 18, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_EventScript_1E2C2B, 0
 	object_event 3, EVENT_OBJ_GFX_MAN_1, 0, 28, 28, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, LilycoveCity_EventScript_1E2C22, 0
@@ -22,7 +22,7 @@ LilycoveCity_EventObjects: @ 8526CE8
 	object_event 21, EVENT_OBJ_GFX_SAILOR, 0, 16, 34, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, LilycoveCity_EventScript_1E2CCB, 0
 	object_event 22, EVENT_OBJ_GFX_FAT_MAN, 0, 16, 35, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, LilycoveCity_EventScript_1E2CD4, 0
 
-LilycoveCity_MapWarps: @ 8526EF8
+LilycoveCity_MapWarps:
 	warp_def 27, 6, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F
 	warp_def 37, 24, 0, 0, MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F
 	warp_def 24, 14, 0, 0, MAP_LILYCOVE_CITY_POKEMON_CENTER_1F
@@ -38,7 +38,7 @@ LilycoveCity_MapWarps: @ 8526EF8
 	warp_def 12, 32, 0, 0, MAP_LILYCOVE_CITY_HARBOR
 	warp_def 12, 5, 0, 1, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F
 
-LilycoveCity_MapBGEvents: @ 8526F68
+LilycoveCity_MapBGEvents:
 	bg_event 19, 7, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_1E2D1A
 	bg_event 25, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, LilycoveCity_EventScript_271E73
 	bg_event 29, 7, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_1E2D6B
@@ -53,6 +53,6 @@ LilycoveCity_MapBGEvents: @ 8526F68
 	bg_hidden_item_event 61, 7, 0, ITEM_PP_UP, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP
 	bg_hidden_item_event 64, 31, 0, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_LILYCOVE_CITY_POKE_BALL
 
-LilycoveCity_MapEvents:: @ 8527004
+LilycoveCity_MapEvents::
 	map_events LilycoveCity_EventObjects, LilycoveCity_MapWarps, 0x0, LilycoveCity_MapBGEvents
 

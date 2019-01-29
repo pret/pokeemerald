@@ -1,10 +1,10 @@
-MossdeepCity_SpaceCenter_1F: @ 84839B8
+MossdeepCity_SpaceCenter_1F:
 	.4byte MossdeepCity_SpaceCenter_1F_Layout
 	.4byte MossdeepCity_SpaceCenter_1F_MapEvents
 	.4byte MossdeepCity_SpaceCenter_1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_GOTOWN
-	.2byte 275
+	.2byte LAYOUT_MOSSDEEP_CITY_SPACE_CENTER_1F
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte WEATHER_NONE

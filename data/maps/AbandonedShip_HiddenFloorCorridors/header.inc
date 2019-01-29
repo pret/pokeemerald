@@ -1,10 +1,10 @@
-AbandonedShip_HiddenFloorCorridors: @ 84845DC
+AbandonedShip_HiddenFloorCorridors:
 	.4byte AbandonedShip_HiddenFloorCorridors_Layout
 	.4byte AbandonedShip_HiddenFloorCorridors_MapEvents
 	.4byte AbandonedShip_HiddenFloorCorridors_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN02
-	.2byte 289
+	.2byte LAYOUT_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte WEATHER_SHADE

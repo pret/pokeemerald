@@ -1,7 +1,7 @@
-EverGrandeCity_MapConnectionsList: @ 84867F8
+EverGrandeCity_MapConnectionsList:
 	connection left, 40, MAP_ROUTE128
 
-EverGrandeCity_MapConnections: @ 8486804
-	.4byte 0x1
+EverGrandeCity_MapConnections:
+	.4byte 1
 	.4byte EverGrandeCity_MapConnectionsList
 

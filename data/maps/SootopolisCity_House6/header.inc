@@ -1,10 +1,10 @@
-SootopolisCity_House6: @ 8483B40
+SootopolisCity_House6:
 	.4byte SootopolisCity_House3_Layout
 	.4byte SootopolisCity_House6_MapEvents
 	.4byte SootopolisCity_House6_MapScripts
 	.4byte 0x0
 	.2byte MUS_RUNECITY
-	.2byte 309
+	.2byte LAYOUT_SOOTOPOLIS_CITY_HOUSE3
 	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte WEATHER_NONE

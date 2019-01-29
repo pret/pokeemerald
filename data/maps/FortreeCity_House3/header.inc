@@ -1,10 +1,10 @@
-FortreeCity_House3: @ 84835C8
+FortreeCity_House3:
 	.4byte FortreeCity_House1_Layout
 	.4byte FortreeCity_House3_MapEvents
 	.4byte FortreeCity_House3_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 99
+	.2byte LAYOUT_FORTREE_CITY_HOUSE1
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte WEATHER_NONE

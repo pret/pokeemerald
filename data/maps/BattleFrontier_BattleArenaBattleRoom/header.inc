@@ -1,10 +1,10 @@
-BattleFrontier_BattleArenaBattleRoom: @ 8485484
+BattleFrontier_BattleArenaBattleRoom:
 	.4byte BattleFrontier_BattleArenaBattleRoom_Layout
 	.4byte BattleFrontier_BattleArenaBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleArenaBattleRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_ARENA
-	.2byte 356
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-Route126: @ 8482934
+Route126:
 	.4byte Route126_Layout
 	.4byte Route126_MapEvents
 	.4byte Route126_MapScripts
 	.4byte Route126_MapConnections
 	.2byte MUS_DOORO_X3
-	.2byte 42
+	.2byte LAYOUT_ROUTE126
 	.byte MAPSEC_ROUTE_126
 	.byte 0
 	.byte WEATHER_SUNNY

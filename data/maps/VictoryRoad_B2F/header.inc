@@ -1,10 +1,10 @@
-VictoryRoad_B2F: @ 84843AC
+VictoryRoad_B2F:
 	.4byte VictoryRoad_B2F_Layout
 	.4byte VictoryRoad_B2F_MapEvents
 	.4byte VictoryRoad_B2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 286
+	.2byte LAYOUT_VICTORY_ROAD_B2F
 	.byte MAPSEC_VICTORY_ROAD
 	.byte 1
 	.byte WEATHER_NONE

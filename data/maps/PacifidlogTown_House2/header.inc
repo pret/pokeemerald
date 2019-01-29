@@ -1,10 +1,10 @@
-PacifidlogTown_House2: @ 8482FA8
+PacifidlogTown_House2:
 	.4byte PacifidlogTown_House2_Layout
 	.4byte PacifidlogTown_House2_MapEvents
 	.4byte PacifidlogTown_House2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
-	.2byte 78
+	.2byte LAYOUT_PACIFIDLOG_TOWN_HOUSE2
 	.byte MAPSEC_PACIFIDLOG_TOWN
 	.byte 0
 	.byte WEATHER_NONE

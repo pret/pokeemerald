@@ -1,10 +1,10 @@
-LavaridgeTown_HerbShop: @ 8482CB4
+LavaridgeTown_HerbShop:
 	.4byte LavaridgeTown_HerbShop_Layout
 	.4byte LavaridgeTown_HerbShop_MapEvents
 	.4byte LavaridgeTown_HerbShop_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S4
-	.2byte 68
+	.2byte LAYOUT_LAVARIDGE_TOWN_HERB_SHOP
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,4 +1,4 @@
-Route103_EventObjects: @ 85280DC
+Route103_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 49, 12, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, Route103_EventScript_1EC5E2, 0
 	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 10, 3, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, Route103_EventScript_1EC3C1, FLAG_HIDE_ROUTE_103_RIVAL
 	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 71, 11, 3, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, 0, 0, 1, 3, Route103_EventScript_1EC5F4, 0
@@ -20,12 +20,12 @@ Route103_EventObjects: @ 85280DC
 	object_event 19, EVENT_OBJ_GFX_SWIMMER_M, 0, 36, 13, 1, MOVEMENT_TYPE_WALK_UP_AND_DOWN, 1, 3, 1, 5, Route103_EventScript_1EC778, 0
 	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 64, 7, 0, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route103_EventScript_290CF2, FLAG_ITEM_ROUTE_103_PP_UP
 
-Route103_MapWarps: @ 85282BC
+Route103_MapWarps:
 	warp_def 45, 6, 0, 0, MAP_ALTERING_CAVE
 
-Route103_MapBGEvents: @ 85282C4
+Route103_MapBGEvents:
 	bg_event 11, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route103_EventScript_1EC5EB
 
-Route103_MapEvents:: @ 85282D0
+Route103_MapEvents::
 	map_events Route103_EventObjects, Route103_MapWarps, 0x0, Route103_MapBGEvents
 

@@ -1,10 +1,10 @@
-BattleFrontier_BattleTowerElevator: @ 84851E4
+BattleFrontier_BattleTowerElevator:
 	.4byte BattleElevator_Layout
 	.4byte BattleFrontier_BattleTowerElevator_MapEvents
 	.4byte BattleFrontier_BattleTowerElevator_MapScripts
 	.4byte 0x0
 	.2byte MUS_SATTOWER
-	.2byte 266
+	.2byte LAYOUT_BATTLE_ELEVATOR
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

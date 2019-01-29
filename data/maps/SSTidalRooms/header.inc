@@ -1,10 +1,10 @@
-SSTidalRooms: @ 8484F44
+SSTidalRooms:
 	.4byte SSTidalRooms_Layout
 	.4byte SSTidalRooms_MapEvents
 	.4byte SSTidalRooms_MapScripts
 	.4byte 0x0
 	.2byte MUS_M_BOAT
-	.2byte 279
+	.2byte LAYOUT_SS_TIDAL_ROOMS
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

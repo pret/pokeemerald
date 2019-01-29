@@ -1,4 +1,4 @@
-Route119_EventObjects: @ 852AD6C
+Route119_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 24, 5, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 34, BerryTreeScript, 0
 	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 25, 5, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 35, BerryTreeScript, 0
 	object_event 3, EVENT_OBJ_GFX_BERRY_TREE, 0, 26, 5, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 36, BerryTreeScript, 0
@@ -43,11 +43,11 @@ Route119_EventObjects: @ 852AD6C
 	object_event 42, EVENT_OBJ_GFX_ITEM_BALL, 0, 24, 42, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route119_EventScript_290F3B, FLAG_ITEM_ROUTE_119_ELIXIR_2
 	object_event 43, EVENT_OBJ_GFX_SCOTT, 0, 28, 25, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_HIDE_ROUTE_119_SCOTT
 
-Route119_MapWarps: @ 852B174
+Route119_MapWarps:
 	warp_def 6, 32, 0, 0, MAP_ROUTE119_WEATHER_INSTITUTE_1F
 	warp_def 33, 109, 0, 0, MAP_ROUTE119_HOUSE
 
-Route119_MapCoordEvents: @ 852B184
+Route119_MapCoordEvents:
 	coord_event 25, 31, 0, VAR_0x4072, 0, Route119_EventScript_1F4472
 	coord_event 26, 31, 0, VAR_0x4072, 0, Route119_EventScript_1F447D
 	coord_weather_event 29, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
@@ -72,7 +72,7 @@ Route119_MapCoordEvents: @ 852B184
 	coord_weather_event 20, 137, 3, COORD_EVENT_WEATHER_SUNNY
 	coord_weather_event 34, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
 
-Route119_MapBGEvents: @ 852B2F4
+Route119_MapBGEvents:
 	bg_event 9, 33, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F477D
 	bg_event 27, 19, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F4774
 	bg_secret_base_event 5, 2, 0, SECRET_BASE_SHRUB1_1
@@ -94,6 +94,6 @@ Route119_MapBGEvents: @ 852B2F4
 	bg_hidden_item_event 20, 29, 3, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_ROUTE_119_MAX_ETHER
 	bg_event 28, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_1F49E3
 
-Route119_MapEvents:: @ 852B3E4
+Route119_MapEvents::
 	map_events Route119_EventObjects, Route119_MapWarps, Route119_MapCoordEvents, Route119_MapBGEvents
 

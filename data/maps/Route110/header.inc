@@ -1,10 +1,10 @@
-Route110: @ 8482774
+Route110:
 	.4byte Route110_Layout
 	.4byte Route110_MapEvents
 	.4byte Route110_MapScripts
 	.4byte Route110_MapConnections
 	.2byte MUS_DOORO_X1
-	.2byte 26
+	.2byte LAYOUT_ROUTE110
 	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte WEATHER_SUNNY

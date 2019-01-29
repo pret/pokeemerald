@@ -1,10 +1,10 @@
-BattlePyramidSquare10: @ 848505C
+BattlePyramidSquare10:
 	.4byte BattlePyramidSquare10_Layout
 	.4byte BattlePyramidSquare10_MapEvents
 	.4byte BattlePyramidSquare10_MapScripts
 	.4byte 0x0
 	.2byte 65535
-	.2byte 371
+	.2byte LAYOUT_BATTLE_PYRAMID_SQUARE10
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

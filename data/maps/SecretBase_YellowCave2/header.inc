@@ -1,10 +1,10 @@
-SecretBase_YellowCave2: @ 8484B8C
+SecretBase_YellowCave2:
 	.4byte SecretBase_YellowCave2_Layout
 	.4byte SecretBase_YellowCave2_MapEvents
 	.4byte SecretBase_YellowCave2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 206
+	.2byte LAYOUT_SECRET_BASE_YELLOW_CAVE2
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE

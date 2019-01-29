@@ -1,10 +1,10 @@
-Route117: @ 8482838
+Route117:
 	.4byte Route117_Layout
 	.4byte Route117_MapEvents
 	.4byte Route117_MapScripts
 	.4byte Route117_MapConnections
 	.2byte MUS_DOORO_X1
-	.2byte 33
+	.2byte LAYOUT_ROUTE117
 	.byte MAPSEC_ROUTE_117
 	.byte 0
 	.byte WEATHER_SUNNY

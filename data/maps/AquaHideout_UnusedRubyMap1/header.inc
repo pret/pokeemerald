@@ -1,10 +1,10 @@
-AquaHideout_UnusedRubyMap1: @ 84846D8
+AquaHideout_UnusedRubyMap1:
 	.4byte AquaHideout_UnusedRubyMap1_Layout
 	.4byte AquaHideout_UnusedRubyMap1_MapEvents
 	.4byte AquaHideout_UnusedRubyMap1_MapScripts
 	.4byte 0x0
 	.2byte MUS_AJITO
-	.2byte 316
+	.2byte LAYOUT_AQUA_HIDEOUT_UNUSED_RUBY_MAP1
 	.byte MAPSEC_AQUA_HIDEOUT
 	.byte 0
 	.byte WEATHER_NONE

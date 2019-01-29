@@ -1,10 +1,10 @@
-LilycoveCity_LilycoveMuseum_2F: @ 848368C
+LilycoveCity_LilycoveMuseum_2F:
 	.4byte LilycoveCity_LilycoveMuseum_2F_Layout
 	.4byte LilycoveCity_LilycoveMuseum_2F_MapEvents
 	.4byte LilycoveCity_LilycoveMuseum_2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_BIJYUTU
-	.2byte 104
+	.2byte LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

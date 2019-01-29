@@ -1,10 +1,10 @@
-DoubleBattleColosseum: @ 8484D84
+DoubleBattleColosseum:
 	.4byte DoubleBattleColosseum_Layout
 	.4byte DoubleBattleColosseum_MapEvents
 	.4byte DoubleBattleColosseum_MapScripts
 	.4byte 0x0
 	.2byte MUS_RAINBOW
-	.2byte 224
+	.2byte LAYOUT_DOUBLE_BATTLE_COLOSSEUM
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

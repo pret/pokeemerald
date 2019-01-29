@@ -1,10 +1,10 @@
-AbandonedShip_Deck: @ 84844A8
+AbandonedShip_Deck:
 	.4byte AbandonedShip_Deck_Layout
 	.4byte AbandonedShip_Deck_MapEvents
 	.4byte AbandonedShip_Deck_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN02
-	.2byte 186
+	.2byte LAYOUT_ABANDONED_SHIP_DECK
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte WEATHER_NONE

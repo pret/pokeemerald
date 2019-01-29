@@ -1,10 +1,10 @@
-SeafloorCavern_Room3: @ 8484208
+SeafloorCavern_Room3:
 	.4byte SeafloorCavern_Room3_Layout
 	.4byte SeafloorCavern_Room3_MapEvents
 	.4byte SeafloorCavern_Room3_MapScripts
 	.4byte 0x0
 	.2byte MUS_TOZAN
-	.2byte 150
+	.2byte LAYOUT_SEAFLOOR_CAVERN_ROOM3
 	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
 	.byte WEATHER_NONE

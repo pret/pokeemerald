@@ -1,10 +1,10 @@
-MauvilleCity: @ 84824F0
+MauvilleCity:
 	.4byte MauvilleCity_Layout
 	.4byte MauvilleCity_MapEvents
 	.4byte MauvilleCity_MapScripts
 	.4byte MauvilleCity_MapConnections
 	.2byte MUS_GOTOWN
-	.2byte 3
+	.2byte LAYOUT_MAUVILLE_CITY
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

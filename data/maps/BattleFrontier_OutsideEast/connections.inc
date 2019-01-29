@@ -1,7 +1,7 @@
-BattleFrontier_OutsideEast_MapConnectionsList: @ 8486EE4
+BattleFrontier_OutsideEast_MapConnectionsList:
 	connection left, 0, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
 
-BattleFrontier_OutsideEast_MapConnections: @ 8486EF0
-	.4byte 0x1
+BattleFrontier_OutsideEast_MapConnections:
+	.4byte 1
 	.4byte BattleFrontier_OutsideEast_MapConnectionsList
 

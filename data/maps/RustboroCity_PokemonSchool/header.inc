@@ -1,10 +1,10 @@
-RustboroCity_PokemonSchool: @ 84833B4
+RustboroCity_PokemonSchool:
 	.4byte RustboroCity_PokemonSchool_Layout
 	.4byte RustboroCity_PokemonSchool_MapEvents
 	.4byte RustboroCity_PokemonSchool_MapScripts
 	.4byte 0x0
 	.2byte MUS_P_SCHOOL
-	.2byte 95
+	.2byte LAYOUT_RUSTBORO_CITY_POKEMON_SCHOOL
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
 	.byte WEATHER_NONE

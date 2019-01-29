@@ -1,10 +1,10 @@
-FortreeCity_Gym: @ 848353C
+FortreeCity_Gym:
 	.4byte FortreeCity_Gym_Layout
 	.4byte FortreeCity_Gym_MapEvents
 	.4byte FortreeCity_Gym_MapScripts
 	.4byte 0x0
 	.2byte MUS_GIM
-	.2byte 100
+	.2byte LAYOUT_FORTREE_CITY_GYM
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte WEATHER_NONE

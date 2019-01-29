@@ -1,4 +1,4 @@
-SecretBase_Shrub1_EventObjects: @ 8538078
+SecretBase_Shrub1_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_VAR_F, 0, 5, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, SecretBase_Shrub1_EventScript_275D64, FLAG_DECORATION_0
 	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 0, 0, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_1
 	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 0, 1, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_2
@@ -15,9 +15,9 @@ SecretBase_Shrub1_EventObjects: @ 8538078
 	object_event 14, EVENT_OBJ_GFX_VAR_C, 0, 1, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_13
 	object_event 15, EVENT_OBJ_GFX_VAR_D, 0, 1, 6, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_DECORATION_14
 
-SecretBase_Shrub1_MapWarps: @ 85381E0
+SecretBase_Shrub1_MapWarps:
 	warp_def 5, 7, 0, 126, MAP_NONE
 
-SecretBase_Shrub1_MapEvents:: @ 85381E8
+SecretBase_Shrub1_MapEvents::
 	map_events SecretBase_Shrub1_EventObjects, SecretBase_Shrub1_MapWarps, 0x0, 0x0
 

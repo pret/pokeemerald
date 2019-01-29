@@ -1,7 +1,7 @@
-Underwater7_MapConnectionsList: @ 8486D58
+Underwater7_MapConnectionsList:
 	connection emerge, 0, MAP_ROUTE125
 
-Underwater7_MapConnections: @ 8486D64
-	.4byte 0x1
+Underwater7_MapConnections:
+	.4byte 1
 	.4byte Underwater7_MapConnectionsList
 

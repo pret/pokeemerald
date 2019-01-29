@@ -1,10 +1,10 @@
-Route119: @ 8482870
+Route119:
 	.4byte Route119_Layout
 	.4byte Route119_MapEvents
 	.4byte Route119_MapScripts
 	.4byte Route119_MapConnections
 	.2byte MUS_GRANROAD
-	.2byte 35
+	.2byte LAYOUT_ROUTE119
 	.byte MAPSEC_ROUTE_119
 	.byte 0
 	.byte WEATHER_SUNNY

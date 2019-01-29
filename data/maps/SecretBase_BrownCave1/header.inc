@@ -1,10 +1,10 @@
-SecretBase_BrownCave1: @ 8484AAC
+SecretBase_BrownCave1:
 	.4byte SecretBase_BrownCave1_Layout
 	.4byte SecretBase_BrownCave1_MapEvents
 	.4byte SecretBase_BrownCave1_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S3
-	.2byte 198
+	.2byte LAYOUT_SECRET_BASE_BROWN_CAVE1
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
 	.byte WEATHER_NONE

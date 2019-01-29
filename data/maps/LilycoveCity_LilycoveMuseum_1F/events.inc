@@ -1,4 +1,4 @@
-LilycoveCity_LilycoveMuseum_1F_EventObjects: @ 853124C
+LilycoveCity_LilycoveMuseum_1F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BEAUTY, 0, 5, 12, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CB9, 0
 	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 16, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2, FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
 	object_event 3, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 13, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218DF5, 0
@@ -10,12 +10,12 @@ LilycoveCity_LilycoveMuseum_1F_EventObjects: @ 853124C
 	object_event 9, EVENT_OBJ_GFX_FAT_MAN, 0, 2, 2, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 2, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E42, FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS
 	object_event 10, EVENT_OBJ_GFX_PSYCHIC_M, 0, 6, 2, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_218E22, FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_3
 
-LilycoveCity_LilycoveMuseum_1F_MapWarps: @ 853133C
+LilycoveCity_LilycoveMuseum_1F_MapWarps:
 	warp_def 9, 13, 0, 3, MAP_LILYCOVE_CITY
 	warp_def 10, 13, 0, 13, MAP_LILYCOVE_CITY
 	warp_def 16, 1, 0, 0, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F
 
-LilycoveCity_LilycoveMuseum_1F_MapBGEvents: @ 8531354
+LilycoveCity_LilycoveMuseum_1F_MapBGEvents:
 	bg_event 1, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_218DAD
 	bg_event 2, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_218DAD
 	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_218DD1
@@ -33,6 +33,6 @@ LilycoveCity_LilycoveMuseum_1F_MapBGEvents: @ 8531354
 	bg_event 18, 11, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_218DE3
 	bg_event 16, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_218DEC
 
-LilycoveCity_LilycoveMuseum_1F_MapEvents:: @ 8531414
+LilycoveCity_LilycoveMuseum_1F_MapEvents::
 	map_events LilycoveCity_LilycoveMuseum_1F_EventObjects, LilycoveCity_LilycoveMuseum_1F_MapWarps, 0x0, LilycoveCity_LilycoveMuseum_1F_MapBGEvents
 

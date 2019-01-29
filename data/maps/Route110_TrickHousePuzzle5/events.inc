@@ -1,16 +1,16 @@
-Route110_TrickHousePuzzle5_EventObjects: @ 853E4C0
+Route110_TrickHousePuzzle5_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 6, 17, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB32, 0
 	object_event 2, EVENT_OBJ_GFX_MAN_1, 0, 0, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB53, 0
 	object_event 3, EVENT_OBJ_GFX_MAN_1, 0, 14, 10, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB74, 0
 	object_event 4, EVENT_OBJ_GFX_MAN_1, 0, 14, 19, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CB95, 0
 	object_event 5, EVENT_OBJ_GFX_MAN_1, 0, 10, 4, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, Route110_TrickHousePuzzle5_EventScript_26CBB6, 0
 
-Route110_TrickHousePuzzle5_MapWarps: @ 853E538
+Route110_TrickHousePuzzle5_MapWarps:
 	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	warp_def 1, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
-Route110_TrickHousePuzzle5_MapCoordEvents: @ 853E550
+Route110_TrickHousePuzzle5_MapCoordEvents:
 	coord_event 5, 17, 3, VAR_TEMP_1, 0, Route110_TrickHousePuzzle5_EventScript_26CBD7
 	coord_event 4, 17, 3, VAR_TEMP_1, 0, Route110_TrickHousePuzzle5_EventScript_26CBE3
 	coord_event 3, 17, 3, VAR_TEMP_1, 0, Route110_TrickHousePuzzle5_EventScript_26CBEF
@@ -34,9 +34,9 @@ Route110_TrickHousePuzzle5_MapCoordEvents: @ 853E550
 	coord_event 10, 19, 3, VAR_TEMP_4, 0, Route110_TrickHousePuzzle5_EventScript_26CCBB
 	coord_event 9, 19, 3, VAR_TEMP_4, 0, Route110_TrickHousePuzzle5_EventScript_26CCC7
 
-Route110_TrickHousePuzzle5_MapBGEvents: @ 853E6B0
+Route110_TrickHousePuzzle5_MapBGEvents:
 	bg_event 11, 21, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle5_EventScript_26CB15
 
-Route110_TrickHousePuzzle5_MapEvents:: @ 853E6BC
+Route110_TrickHousePuzzle5_MapEvents::
 	map_events Route110_TrickHousePuzzle5_EventObjects, Route110_TrickHousePuzzle5_MapWarps, Route110_TrickHousePuzzle5_MapCoordEvents, Route110_TrickHousePuzzle5_MapBGEvents
 

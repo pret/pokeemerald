@@ -1,10 +1,10 @@
-BattleFrontier_BattleFactoryPreBattleRoom: @ 84854BC
+BattleFrontier_BattleFactoryPreBattleRoom:
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_Layout
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_FACTORY
-	.2byte 347
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

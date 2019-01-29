@@ -1,10 +1,10 @@
-BattleFrontier_BattleDomePreBattleRoom: @ 848536C
+BattleFrontier_BattleDomePreBattleRoom:
 	.4byte BattleFrontier_BattleDomePreBattleRoom_Layout
 	.4byte BattleFrontier_BattleDomePreBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleDomePreBattleRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_B_DOME
-	.2byte 334
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

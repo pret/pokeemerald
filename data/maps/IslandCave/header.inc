@@ -1,10 +1,10 @@
-IslandCave: @ 8484614
+IslandCave:
 	.4byte IslandCave_Layout
 	.4byte IslandCave_MapEvents
 	.4byte IslandCave_MapScripts
 	.4byte 0x0
 	.2byte MUS_MABOROSI
-	.2byte 280
+	.2byte LAYOUT_ISLAND_CAVE
 	.byte MAPSEC_ISLAND_CAVE
 	.byte 0
 	.byte WEATHER_NONE

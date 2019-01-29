@@ -1,4 +1,4 @@
-Route111_EventObjects: @ 85291F0
+Route111_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_MAN_1, 0, 13, 114, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route111_EventScript_1F0FC5, FLAG_HIDE_ROUTE_111_VICTOR_WINSTRATE
 	object_event 2, EVENT_OBJ_GFX_POKEFAN_F, 0, 13, 113, 0, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
 	object_event 3, EVENT_OBJ_GFX_LASS, 0, 13, 113, 0, MOVEMENT_TYPE_FACE_DOWN, 1, 0, 0, 0, 0x0, FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE
@@ -46,14 +46,14 @@ Route111_EventObjects: @ 85291F0
 	object_event 45, EVENT_OBJ_GFX_VAR_0, 0, 19, 53, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, FLAG_HIDE_ROUTE_111_PLAYER_DESCENT
 	object_event 46, EVENT_OBJ_GFX_FAT_MAN, 0, 19, 101, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, Route111_EventScript_1F11E4, FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
 
-Route111_MapWarps: @ 8529640
+Route111_MapWarps:
 	warp_def 13, 113, 0, 0, MAP_ROUTE111_WINSTRATE_FAMILYS_HOUSE
 	warp_def 29, 87, 0, 0, MAP_DESERT_RUINS
 	warp_def 26, 18, 0, 0, MAP_ROUTE111_OLD_LADYS_REST_STOP
 	warp_def 19, 58, 0, 0, MAP_MIRAGE_TOWER_1F
 	warp_def 31, 113, 0, 0, MAP_TRAINER_HILL_ENTRANCE
 
-Route111_MapCoordEvents: @ 8529668
+Route111_MapCoordEvents:
 	coord_event 12, 62, 3, 0, 0, Route111_EventScript_1F0FBD
 	coord_event 11, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F0A
 	coord_event 12, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_1F0F0A
@@ -89,7 +89,7 @@ Route111_MapCoordEvents: @ 8529668
 	coord_event 12, 43, 3, 0, 0, Route111_EventScript_1F0FBD
 	coord_event 11, 44, 3, 0, 0, Route111_EventScript_1F0FBD
 
-Route111_MapBGEvents: @ 8529888
+Route111_MapBGEvents:
 	bg_event 16, 114, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F115C
 	bg_event 24, 126, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1153
 	bg_event 7, 66, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F1165
@@ -109,6 +109,6 @@ Route111_MapBGEvents: @ 8529888
 	bg_hidden_item_event 35, 66, 0, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_ROUTE_111_RARE_CANDY
 	bg_event 24, 116, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_1F146C
 
-Route111_MapEvents:: @ 8529960
+Route111_MapEvents::
 	map_events Route111_EventObjects, Route111_MapWarps, Route111_MapCoordEvents, Route111_MapBGEvents
 

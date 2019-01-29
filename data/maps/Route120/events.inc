@@ -1,4 +1,4 @@
-Route120_EventObjects: @ 852B3F8
+Route120_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 4, 79, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 46, BerryTreeScript, 0
 	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 5, 79, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 45, BerryTreeScript, 0
 	object_event 3, EVENT_OBJ_GFX_BERRY_TREE, 0, 6, 79, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 44, BerryTreeScript, 0
@@ -44,11 +44,11 @@ Route120_EventObjects: @ 852B3F8
 	object_event 43, EVENT_OBJ_GFX_MAN_3, 0, 14, 34, 3, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 1, 3, Route120_EventScript_1F596A, 0
 	object_event 44, EVENT_OBJ_GFX_ITEM_BALL, 0, 24, 33, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route120_EventScript_290F7C, FLAG_ITEM_ROUTE_120_REVIVE
 
-Route120_MapWarps: @ 852B818
+Route120_MapWarps:
 	warp_def 7, 55, 0, 0, MAP_ANCIENT_TOMB
 	warp_def 19, 23, 1, 0, MAP_SCORCHED_SLAB
 
-Route120_MapCoordEvents: @ 852B828
+Route120_MapCoordEvents:
 	coord_weather_event 7, 15, 0, COORD_EVENT_WEATHER_RAIN_LIGHT
 	coord_weather_event 7, 16, 0, COORD_EVENT_WEATHER_RAIN_LIGHT
 	coord_weather_event 22, 61, 3, COORD_EVENT_WEATHER_RAIN_LIGHT
@@ -69,7 +69,7 @@ Route120_MapCoordEvents: @ 852B828
 	coord_weather_event 12, 75, 3, COORD_EVENT_WEATHER_CLOUDS
 	coord_weather_event 13, 75, 3, COORD_EVENT_WEATHER_CLOUDS
 
-Route120_MapBGEvents: @ 852B958
+Route120_MapBGEvents:
 	bg_event 27, 3, 3, BG_EVENT_PLAYER_FACING_ANY, Route120_EventScript_1F57C5
 	bg_event 38, 88, 3, BG_EVENT_PLAYER_FACING_ANY, Route120_EventScript_1F57CE
 	bg_secret_base_event 28, 62, 0, SECRET_BASE_BLUE_CAVE3_1
@@ -85,6 +85,6 @@ Route120_MapBGEvents: @ 852B958
 	bg_hidden_item_event 24, 42, 3, ITEM_ZINC, FLAG_HIDDEN_ITEM_ROUTE_120_ZINC
 	bg_secret_base_event 5, 76, 0, SECRET_BASE_SHRUB1_4
 
-Route120_MapEvents:: @ 852BA00
+Route120_MapEvents::
 	map_events Route120_EventObjects, Route120_MapWarps, Route120_MapCoordEvents, Route120_MapBGEvents
 

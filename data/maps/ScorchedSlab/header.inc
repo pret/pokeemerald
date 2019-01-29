@@ -1,10 +1,10 @@
-ScorchedSlab: @ 84846BC
+ScorchedSlab:
 	.4byte ScorchedSlab_Layout
 	.4byte ScorchedSlab_MapEvents
 	.4byte ScorchedSlab_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN01
-	.2byte 311
+	.2byte LAYOUT_SCORCHED_SLAB
 	.byte MAPSEC_SCORCHED_SLAB
 	.byte 0
 	.byte WEATHER_NONE

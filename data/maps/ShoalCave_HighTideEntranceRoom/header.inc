@@ -1,10 +1,10 @@
-ShoalCave_HighTideEntranceRoom: @ 8484438
+ShoalCave_HighTideEntranceRoom:
 	.4byte ShoalCave_HighTideEntranceRoom_Layout
 	.4byte ShoalCave_HighTideEntranceRoom_MapEvents
 	.4byte ShoalCave_HighTideEntranceRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
-	.2byte 168
+	.2byte LAYOUT_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM
 	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
 	.byte WEATHER_NONE

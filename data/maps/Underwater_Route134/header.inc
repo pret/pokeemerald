@@ -1,10 +1,10 @@
-Underwater_Route134: @ 848464C
+Underwater_Route134:
 	.4byte Underwater_Route134_Layout
 	.4byte Underwater_Route134_MapEvents
 	.4byte Underwater_Route134_MapScripts
 	.4byte 0x0
 	.2byte MUS_DEEPDEEP
-	.2byte 282
+	.2byte LAYOUT_UNDERWATER_ROUTE134
 	.byte MAPSEC_UNDERWATER_SEALED_CHAMBER
 	.byte 0
 	.byte WEATHER_BUBBLES

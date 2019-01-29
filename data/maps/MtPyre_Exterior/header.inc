@@ -1,10 +1,10 @@
-MtPyre_Exterior: @ 848410C
+MtPyre_Exterior:
 	.4byte MtPyre_Exterior_Layout
 	.4byte MtPyre_Exterior_MapEvents
 	.4byte MtPyre_Exterior_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHUPI
-	.2byte 302
+	.2byte LAYOUT_MT_PYRE_EXTERIOR
 	.byte MAPSEC_MT_PYRE
 	.byte 0
 	.byte WEATHER_NONE

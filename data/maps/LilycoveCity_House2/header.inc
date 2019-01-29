@@ -1,10 +1,10 @@
-LilycoveCity_House2: @ 84837A4
+LilycoveCity_House2:
 	.4byte LilycoveCity_House2_Layout
 	.4byte LilycoveCity_House2_MapEvents
 	.4byte LilycoveCity_House2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
-	.2byte 74
+	.2byte LAYOUT_LILYCOVE_CITY_HOUSE2
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

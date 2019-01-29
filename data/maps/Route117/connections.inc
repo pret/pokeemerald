@@ -1,8 +1,8 @@
-Route117_MapConnectionsList: @ 8486A54
+Route117_MapConnectionsList:
 	connection left, 0, MAP_VERDANTURF_TOWN
 	connection right, 0, MAP_MAUVILLE_CITY
 
-Route117_MapConnections: @ 8486A6C
-	.4byte 0x2
+Route117_MapConnections:
+	.4byte 2
 	.4byte Route117_MapConnectionsList
 

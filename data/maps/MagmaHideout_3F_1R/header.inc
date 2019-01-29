@@ -1,10 +1,10 @@
-MagmaHideout_3F_1R: @ 848487C
+MagmaHideout_3F_1R:
 	.4byte MagmaHideout_3F_1R_Layout
 	.4byte MagmaHideout_3F_1R_MapEvents
 	.4byte MagmaHideout_3F_1R_MapScripts
 	.4byte 0x0
 	.2byte MUS_AJITO
-	.2byte 339
+	.2byte LAYOUT_MAGMA_HIDEOUT_3F_1R
 	.byte MAPSEC_MAGMA_HIDEOUT
 	.byte 0
 	.byte WEATHER_NONE

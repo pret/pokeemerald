@@ -1,10 +1,10 @@
-SSTidalLowerDeck: @ 8484F28
+SSTidalLowerDeck:
 	.4byte SSTidalLowerDeck_Layout
 	.4byte SSTidalLowerDeck_MapEvents
 	.4byte SSTidalLowerDeck_MapScripts
 	.4byte 0x0
 	.2byte MUS_M_BOAT
-	.2byte 278
+	.2byte LAYOUT_SS_TIDAL_LOWER_DECK
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

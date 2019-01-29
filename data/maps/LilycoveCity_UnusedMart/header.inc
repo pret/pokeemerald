@@ -1,10 +1,10 @@
-LilycoveCity_UnusedMart: @ 8483718
+LilycoveCity_UnusedMart:
 	.4byte Mart_Layout
 	.4byte LilycoveCity_UnusedMart_MapEvents
 	.4byte LilycoveCity_UnusedMart_MapScripts
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
-	.2byte 63
+	.2byte LAYOUT_MART
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

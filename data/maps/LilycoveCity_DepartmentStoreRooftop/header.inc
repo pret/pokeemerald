@@ -1,10 +1,10 @@
-LilycoveCity_DepartmentStoreRooftop: @ 8483884
+LilycoveCity_DepartmentStoreRooftop:
 	.4byte LilycoveCity_DepartmentStoreRooftop_Layout
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapEvents
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapScripts
 	.4byte 0x0
 	.2byte MUS_MINAMO
-	.2byte 262
+	.2byte LAYOUT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP
 	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte WEATHER_NONE

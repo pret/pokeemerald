@@ -1,10 +1,10 @@
-OldaleTown_House2: @ 8482B9C
+OldaleTown_House2:
 	.4byte House2_Layout
 	.4byte OldaleTown_House2_MapEvents
 	.4byte OldaleTown_House2_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S4
-	.2byte 60
+	.2byte LAYOUT_HOUSE2
 	.byte MAPSEC_OLDALE_TOWN
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-AquaHideout_B1F: @ 8484160
+AquaHideout_B1F:
 	.4byte AquaHideout_B1F_Layout
 	.4byte AquaHideout_B1F_MapEvents
 	.4byte AquaHideout_B1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_AJITO
-	.2byte 144
+	.2byte LAYOUT_AQUA_HIDEOUT_B1F
 	.byte MAPSEC_AQUA_HIDEOUT
 	.byte 0
 	.byte WEATHER_NONE

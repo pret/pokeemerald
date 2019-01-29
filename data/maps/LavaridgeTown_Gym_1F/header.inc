@@ -1,10 +1,10 @@
-LavaridgeTown_Gym_1F: @ 8482CD0
+LavaridgeTown_Gym_1F:
 	.4byte LavaridgeTown_Gym_1F_Layout
 	.4byte LavaridgeTown_Gym_1F_MapEvents
 	.4byte LavaridgeTown_Gym_1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_GIM
-	.2byte 69
+	.2byte LAYOUT_LAVARIDGE_TOWN_GYM_1F
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
 	.byte WEATHER_FOG_1

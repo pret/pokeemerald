@@ -1,10 +1,10 @@
-BattleFrontier_BattlePyramidTop: @ 8485430
+BattleFrontier_BattlePyramidTop:
 	.4byte BattleFrontier_BattlePyramidTop_Layout
 	.4byte BattleFrontier_BattlePyramidTop_MapEvents
 	.4byte BattleFrontier_BattlePyramidTop_MapScripts
 	.4byte 0x0
 	.2byte 65535
-	.2byte 378
+	.2byte LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP
 	.byte MAPSEC_BATTLE_FRONTIER
 	.byte 0
 	.byte WEATHER_NONE

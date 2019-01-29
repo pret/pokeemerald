@@ -1,10 +1,10 @@
-VictoryRoad_B1F: @ 8484390
+VictoryRoad_B1F:
 	.4byte VictoryRoad_B1F_Layout
 	.4byte VictoryRoad_B1F_MapEvents
 	.4byte VictoryRoad_B1F_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 285
+	.2byte LAYOUT_VICTORY_ROAD_B1F
 	.byte MAPSEC_VICTORY_ROAD
 	.byte 1
 	.byte WEATHER_NONE

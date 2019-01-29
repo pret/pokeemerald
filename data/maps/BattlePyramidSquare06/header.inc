@@ -1,10 +1,10 @@
-BattlePyramidSquare06: @ 8484FEC
+BattlePyramidSquare06:
 	.4byte BattlePyramidSquare06_Layout
 	.4byte BattlePyramidSquare06_MapEvents
 	.4byte BattlePyramidSquare06_MapScripts
 	.4byte 0x0
 	.2byte 65535
-	.2byte 367
+	.2byte LAYOUT_BATTLE_PYRAMID_SQUARE06
 	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte WEATHER_NONE

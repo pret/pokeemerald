@@ -1,10 +1,10 @@
-EverGrandeCity_PhoebesRoom: @ 8483BE8
+EverGrandeCity_PhoebesRoom:
 	.4byte EverGrandeCity_PhoebesRoom_Layout
 	.4byte EverGrandeCity_PhoebesRoom_MapEvents
 	.4byte EverGrandeCity_PhoebesRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 112
+	.2byte LAYOUT_EVER_GRANDE_CITY_PHOEBES_ROOM
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

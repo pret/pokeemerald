@@ -1,10 +1,10 @@
-Route105: @ 84826E8
+Route105:
 	.4byte Route105_Layout
 	.4byte Route105_MapEvents
 	.4byte Route105_MapScripts
 	.4byte Route105_MapConnections
 	.2byte MUS_NEXTROAD
-	.2byte 21
+	.2byte LAYOUT_ROUTE105
 	.byte MAPSEC_ROUTE_105
 	.byte 0
 	.byte WEATHER_SUNNY

@@ -1,10 +1,10 @@
-FortreeCity: @ 8482528
+FortreeCity:
 	.4byte FortreeCity_Layout
 	.4byte FortreeCity_MapEvents
 	.4byte FortreeCity_MapScripts
 	.4byte FortreeCity_MapConnections
 	.2byte MUS_MACHI_S3
-	.2byte 5
+	.2byte LAYOUT_FORTREE_CITY
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
 	.byte WEATHER_SUNNY

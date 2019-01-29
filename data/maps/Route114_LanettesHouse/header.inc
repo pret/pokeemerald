@@ -1,10 +1,10 @@
-Route114_LanettesHouse: @ 8483E50
+Route114_LanettesHouse:
 	.4byte Route114_LanettesHouse_Layout
 	.4byte Route114_LanettesHouse_MapEvents
 	.4byte Route114_LanettesHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_TONEKUSA
-	.2byte 121
+	.2byte LAYOUT_ROUTE114_LANETTES_HOUSE
 	.byte MAPSEC_ROUTE_114
 	.byte 0
 	.byte WEATHER_NONE

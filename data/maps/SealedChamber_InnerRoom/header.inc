@@ -1,10 +1,10 @@
-SealedChamber_InnerRoom: @ 84846A0
+SealedChamber_InnerRoom:
 	.4byte SealedChamber_InnerRoom_Layout
 	.4byte SealedChamber_InnerRoom_MapEvents
 	.4byte SealedChamber_InnerRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_MABOROSI
-	.2byte 304
+	.2byte LAYOUT_SEALED_CHAMBER_INNER_ROOM
 	.byte MAPSEC_SEALED_CHAMBER
 	.byte 0
 	.byte WEATHER_NONE

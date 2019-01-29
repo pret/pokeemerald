@@ -1,10 +1,10 @@
-Route131: @ 84829C0
+Route131:
 	.4byte Route131_Layout
 	.4byte Route131_MapEvents
 	.4byte Route131_MapScripts
 	.4byte Route131_MapConnections
 	.2byte MUS_GRANROAD
-	.2byte 47
+	.2byte LAYOUT_ROUTE131
 	.byte MAPSEC_ROUTE_131
 	.byte 0
 	.byte WEATHER_SUNNY

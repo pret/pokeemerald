@@ -1,10 +1,10 @@
-GraniteCave_B2F: @ 8483FBC
+GraniteCave_B2F:
 	.4byte GraniteCave_B2F_Layout
 	.4byte GraniteCave_B2F_MapEvents
 	.4byte GraniteCave_B2F_MapScripts
 	.4byte 0x0
 	.2byte MUS_DAN01
-	.2byte 134
+	.2byte LAYOUT_GRANITE_CAVE_B2F
 	.byte MAPSEC_GRANITE_CAVE
 	.byte 1
 	.byte WEATHER_NONE

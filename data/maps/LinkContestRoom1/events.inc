@@ -1,4 +1,4 @@
-LinkContestRoom1_EventObjects: @ 8539EFC
+LinkContestRoom1_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 6, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
 	object_event 2, EVENT_OBJ_GFX_CONTEST_JUDGE, 0, 7, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_VAR_0, 0, 4, 7, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 0
@@ -15,5 +15,6 @@ LinkContestRoom1_EventObjects: @ 8539EFC
 	object_event 14, EVENT_OBJ_GFX_VAR_3, 0, 10, 7, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, 0
 	object_event 15, EVENT_OBJ_GFX_ARTIST, 0, 12, 6, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 0, 0, 0x0, 0
 
-LinkContestRoom1_MapEvents:: @ 853A064
+LinkContestRoom1_MapEvents::
 	map_events LinkContestRoom1_EventObjects, 0x0, 0x0, 0x0
+

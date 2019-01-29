@@ -1,10 +1,10 @@
-EverGrandeCity_ChampionsRoom: @ 8483C3C
+EverGrandeCity_ChampionsRoom:
 	.4byte EverGrandeCity_ChampionsRoom_Layout
 	.4byte EverGrandeCity_ChampionsRoom_MapEvents
 	.4byte EverGrandeCity_ChampionsRoom_MapScripts
 	.4byte 0x0
 	.2byte MUS_C_ROAD
-	.2byte 115
+	.2byte LAYOUT_EVER_GRANDE_CITY_CHAMPIONS_ROOM
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte WEATHER_NONE

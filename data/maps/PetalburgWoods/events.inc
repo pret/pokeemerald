@@ -1,4 +1,4 @@
-PetalburgWoods_EventObjects: @ 85345E4
+PetalburgWoods_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 19, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgWoods_EventScript_2906BB, FLAG_TEMP_11
 	object_event 2, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 19, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, PetalburgWoods_EventScript_2906BB, FLAG_TEMP_12
 	object_event 3, EVENT_OBJ_GFX_AQUA_MEMBER_M, 0, 26, 17, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, 0x0, FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT
@@ -13,7 +13,7 @@ PetalburgWoods_EventObjects: @ 85345E4
 	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 26, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, PetalburgWoods_EventScript_291129, FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL
 	object_event 13, EVENT_OBJ_GFX_GIRL_2, 0, 33, 5, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, PetalburgWoods_EventScript_22E222, 0
 
-PetalburgWoods_MapWarps: @ 853471C
+PetalburgWoods_MapWarps:
 	warp_def 14, 5, 0, 2, MAP_ROUTE104
 	warp_def 15, 5, 0, 3, MAP_ROUTE104
 	warp_def 16, 38, 0, 4, MAP_ROUTE104
@@ -21,11 +21,11 @@ PetalburgWoods_MapWarps: @ 853471C
 	warp_def 36, 38, 0, 6, MAP_ROUTE104
 	warp_def 37, 38, 0, 7, MAP_ROUTE104
 
-PetalburgWoods_MapCoordEvents: @ 853474C
+PetalburgWoods_MapCoordEvents:
 	coord_event 26, 23, 3, VAR_0x4098, 0, PetalburgWoods_EventScript_22DFD7
 	coord_event 27, 23, 3, VAR_0x4098, 0, PetalburgWoods_EventScript_22E079
 
-PetalburgWoods_MapBGEvents: @ 853476C
+PetalburgWoods_MapBGEvents:
 	bg_event 14, 32, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgWoods_EventScript_22E25B
 	bg_hidden_item_event 39, 35, 3, ITEM_POTION, FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION
 	bg_hidden_item_event 26, 6, 3, ITEM_TINY_MUSHROOM, FLAG_HIDDEN_ITEM_PETALBURG_WOODS_TINY_MUSHROOM_1
@@ -33,6 +33,6 @@ PetalburgWoods_MapBGEvents: @ 853476C
 	bg_hidden_item_event 4, 19, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL
 	bg_event 11, 8, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgWoods_EventScript_22E264
 
-PetalburgWoods_MapEvents:: @ 85347B4
+PetalburgWoods_MapEvents::
 	map_events PetalburgWoods_EventObjects, PetalburgWoods_MapWarps, PetalburgWoods_MapCoordEvents, PetalburgWoods_MapBGEvents
 

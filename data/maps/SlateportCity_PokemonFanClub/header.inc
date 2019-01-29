@@ -1,10 +1,10 @@
-SlateportCity_PokemonFanClub: @ 8483184
+SlateportCity_PokemonFanClub:
 	.4byte SlateportCity_PokemonFanClub_Layout
 	.4byte SlateportCity_PokemonFanClub_MapEvents
 	.4byte SlateportCity_PokemonFanClub_MapScripts
 	.4byte 0x0
 	.2byte MUS_FINECITY
-	.2byte 85
+	.2byte LAYOUT_SLATEPORT_CITY_POKEMON_FAN_CLUB
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte WEATHER_NONE

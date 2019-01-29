@@ -1,10 +1,10 @@
-SafariZone_RestHouse: @ 8485270
+SafariZone_RestHouse:
 	.4byte SafariZone_RestHouse_Layout
 	.4byte SafariZone_RestHouse_MapEvents
 	.4byte SafariZone_RestHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_SAFARI
-	.2byte 329
+	.2byte LAYOUT_SAFARI_ZONE_REST_HOUSE
 	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
 	.byte WEATHER_NONE

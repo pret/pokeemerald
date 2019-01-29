@@ -1,4 +1,4 @@
-Route110_EventObjects: @ 8528CF0
+Route110_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_CAMPER, 0, 17, 90, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route110_EventScript_1EF338, 0
 	object_event 2, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 29, 79, 4, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route110_EventScript_1EF32F, 0
 	object_event 3, EVENT_OBJ_GFX_EXPERT_F, 0, 14, 69, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, Route110_EventScript_1EF326, 0
@@ -36,7 +36,7 @@ Route110_EventObjects: @ 8528CF0
 	object_event 35, EVENT_OBJ_GFX_ITEM_BALL, 0, 6, 38, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, Route110_EventScript_290D8E, FLAG_ITEM_ROUTE_110_ELIXIR
 	object_event 36, EVENT_OBJ_GFX_PROF_BIRCH, 0, 9, 79, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, 0x0, FLAG_HIDE_ROUTE_110_BIRCH
 
-Route110_MapWarps: @ 8529050
+Route110_MapWarps:
 	warp_def 35, 24, 3, 0, MAP_NEW_MAUVILLE_ENTRANCE
 	warp_def 11, 66, 0, 0, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
 	warp_def 15, 16, 0, 0, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE
@@ -44,7 +44,7 @@ Route110_MapWarps: @ 8529050
 	warp_def 16, 88, 0, 0, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE
 	warp_def 19, 88, 0, 2, MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE
 
-Route110_MapCoordEvents: @ 8529080
+Route110_MapCoordEvents:
 	coord_event 28, 92, 3, VAR_CYCLING_CHALLENGE_STATE, 2, Route110_EventScript_1EF661
 	coord_event 29, 92, 3, VAR_CYCLING_CHALLENGE_STATE, 2, Route110_EventScript_1EF661
 	coord_event 33, 56, 3, VAR_0x4069, 0, Route110_EventScript_1EF74D
@@ -55,7 +55,7 @@ Route110_MapCoordEvents: @ 8529080
 	coord_event 9, 85, 3, VAR_0x40DA, 1, Route110_EventScript_1EF9E1
 	coord_event 10, 85, 3, VAR_0x40DA, 1, Route110_EventScript_1EF9EC
 
-Route110_MapBGEvents: @ 8529110
+Route110_MapBGEvents:
 	bg_event 15, 25, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_1EF353
 	bg_event 9, 51, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_1EF365
 	bg_event 14, 88, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_1EF34A
@@ -74,6 +74,6 @@ Route110_MapBGEvents: @ 8529110
 	bg_hidden_item_event 37, 67, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_ROUTE_110_FULL_HEAL
 	bg_event 13, 16, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_1EF34A
 
-Route110_MapEvents:: @ 85291DC
+Route110_MapEvents::
 	map_events Route110_EventObjects, Route110_MapWarps, Route110_MapCoordEvents, Route110_MapBGEvents
 

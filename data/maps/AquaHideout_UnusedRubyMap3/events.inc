@@ -1,3 +1,3 @@
-AquaHideout_UnusedRubyMap3_MapEvents:: @ 8536FE4
+AquaHideout_UnusedRubyMap3_MapEvents::
 	map_events 0x0, 0x0, 0x0, 0x0
 

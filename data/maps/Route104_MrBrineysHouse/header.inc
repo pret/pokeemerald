@@ -1,10 +1,10 @@
-Route104_MrBrineysHouse: @ 8483D70
+Route104_MrBrineysHouse:
 	.4byte Route104_MrBrineysHouse_Layout
 	.4byte Route104_MrBrineysHouse_MapEvents
 	.4byte Route104_MrBrineysHouse_MapScripts
 	.4byte 0x0
 	.2byte MUS_MACHI_S2
-	.2byte 102
+	.2byte LAYOUT_ROUTE104_MR_BRINEYS_HOUSE
 	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte WEATHER_NONE

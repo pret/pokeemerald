@@ -1,10 +1,10 @@
-Route132: @ 84829DC
+Route132:
 	.4byte Route132_Layout
 	.4byte Route132_MapEvents
 	.4byte Route132_MapScripts
 	.4byte Route132_MapConnections
 	.2byte MUS_GRANROAD
-	.2byte 48
+	.2byte LAYOUT_ROUTE132
 	.byte MAPSEC_ROUTE_132
 	.byte 0
 	.byte WEATHER_SUNNY

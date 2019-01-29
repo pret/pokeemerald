@@ -1,10 +1,10 @@
-SlateportCity_Mart: @ 8483248
+SlateportCity_Mart:
 	.4byte Mart_Layout
 	.4byte SlateportCity_Mart_MapEvents
 	.4byte SlateportCity_Mart_MapScripts
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
-	.2byte 63
+	.2byte LAYOUT_MART
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte WEATHER_NONE

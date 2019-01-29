@@ -1,10 +1,10 @@
-AlteringCave: @ 8484A58
+AlteringCave:
 	.4byte AlteringCave_Layout
 	.4byte AlteringCave_MapEvents
 	.4byte AlteringCave_MapScripts
 	.4byte 0x0
 	.2byte MUS_RG_NANADUNGEON
-	.2byte 420
+	.2byte LAYOUT_ALTERING_CAVE
 	.byte MAPSEC_ALTERING_CAVE_2
 	.byte 0
 	.byte WEATHER_NONE

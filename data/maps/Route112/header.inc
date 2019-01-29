@@ -1,10 +1,10 @@
-Route112: @ 84827AC
+Route112:
 	.4byte Route112_Layout
 	.4byte Route112_MapEvents
 	.4byte Route112_MapScripts
 	.4byte Route112_MapConnections
 	.2byte MUS_DOORO_X1
-	.2byte 28
+	.2byte LAYOUT_ROUTE112
 	.byte MAPSEC_ROUTE_112
 	.byte 0
 	.byte WEATHER_SUNNY

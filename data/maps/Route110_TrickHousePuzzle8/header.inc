@@ -1,10 +1,10 @@
-Route110_TrickHousePuzzle8: @ 8485C64
+Route110_TrickHousePuzzle8:
 	.4byte Route110_TrickHousePuzzle8_Layout
 	.4byte Route110_TrickHousePuzzle8_MapEvents
 	.4byte Route110_TrickHousePuzzle8_MapScripts
 	.4byte 0x0
 	.2byte MUS_KARAKURI
-	.2byte 254
+	.2byte LAYOUT_ROUTE110_TRICK_HOUSE_PUZZLE8
 	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte WEATHER_NONE

@@ -1,10 +1,10 @@
-DewfordTown_Gym: @ 8482C60
+DewfordTown_Gym:
 	.4byte DewfordTown_Gym_Layout
 	.4byte DewfordTown_Gym_MapEvents
 	.4byte DewfordTown_Gym_MapScripts
 	.4byte 0x0
 	.2byte MUS_GIM
-	.2byte 65
+	.2byte LAYOUT_DEWFORD_TOWN_GYM
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
 	.byte WEATHER_NONE

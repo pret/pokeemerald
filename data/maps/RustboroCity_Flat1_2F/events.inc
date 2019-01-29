@@ -1,4 +1,4 @@
-RustboroCity_Flat1_2F_EventObjects: @ 85308EC
+RustboroCity_Flat1_2F_EventObjects:
 	object_event 1, EVENT_OBJ_GFX_POKEFAN_F, 0, 4, 6, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 3, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_21523D, 0
 	object_event 2, EVENT_OBJ_GFX_TWIN, 0, 9, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, 0x0, 0
 	object_event 3, EVENT_OBJ_GFX_SKITTY_DOLL, 0, 9, 4, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0
@@ -8,9 +8,9 @@ RustboroCity_Flat1_2F_EventObjects: @ 85308EC
 	object_event 7, EVENT_OBJ_GFX_MUDKIP_DOLL, 0, 8, 6, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0
 	object_event 8, EVENT_OBJ_GFX_PIKACHU_DOLL, 0, 9, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, RustboroCity_Flat1_2F_EventScript_215246, 0
 
-RustboroCity_Flat1_2F_MapWarps: @ 85309AC
+RustboroCity_Flat1_2F_MapWarps:
 	warp_def 2, 1, 0, 2, MAP_RUSTBORO_CITY_FLAT1_1F
 
-RustboroCity_Flat1_2F_MapEvents:: @ 85309B4
+RustboroCity_Flat1_2F_MapEvents::
 	map_events RustboroCity_Flat1_2F_EventObjects, RustboroCity_Flat1_2F_MapWarps, 0x0, 0x0
 
