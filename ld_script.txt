@@ -320,7 +320,7 @@ SECTIONS {
         asm/libgcnmultiboot.o(.text);
         asm/m4a_1.o(.text);
         src/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
+        src/m4a_3.o(.text);
         src/m4a_4.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
