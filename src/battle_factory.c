@@ -11,6 +11,7 @@
 #include "constants/species.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_frontier.h"
+#include "constants/layouts.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
@@ -662,7 +663,8 @@ static u8 GetStyleForMove(u16 move)
 
 bool8 sub_81A6BF4(void)
 {
-    return (gMapHeader.mapLayoutId == 347 || gMapHeader.mapLayoutId == 348);
+    return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM;
 }
 
 static void sub_81A6C1C(void)

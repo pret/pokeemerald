@@ -1,0 +1,162 @@
+{
+  "id": "MAP_ROUTE133",
+  "name": "Route133",
+  "layout": "LAYOUT_ROUTE133",
+  "music": "MUS_GRANROAD",
+  "region_map_section": "MAPSEC_ROUTE_133",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_6",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "left",
+      "offset": 0,
+      "map": "MAP_ROUTE134"
+    },
+    {
+      "direction": "right",
+      "offset": 0,
+      "map": "MAP_ROUTE132"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "x": 68,
+      "y": 27,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 2,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route133_EventScript_1F75A3",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "x": 13,
+      "y": 3,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route133_EventScript_1F75D1",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "x": 68,
+      "y": 28,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 2,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route133_EventScript_1F75BA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 53,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route133_EventScript_291073",
+      "flag": "FLAG_ITEM_ROUTE_133_BIG_PEARL"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route133_EventScript_291080",
+      "flag": "FLAG_ITEM_ROUTE_133_STAR_PIECE"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_5",
+      "x": 7,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 2,
+      "script": "Route133_EventScript_1F75FF",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAN_3",
+      "x": 37,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "Route133_EventScript_1F75E8",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_EXPERT_F",
+      "x": 56,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route133_EventScript_1F7616",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_EXPERT_M",
+      "x": 56,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route133_EventScript_1F762D",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 48,
+      "y": 28,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route133_EventScript_29108D",
+      "flag": "FLAG_ITEM_ROUTE_133_MAX_REVIVE"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

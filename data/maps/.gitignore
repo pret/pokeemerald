@@ -1,0 +1,7 @@
+connections.in
+events.inc
+groups.inc
+headers.inc
+**/connections.inc
+**/events.inc
+**/header.inc

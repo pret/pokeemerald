@@ -24,6 +24,7 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/maps.h"
 #include "constants/species.h"
@@ -324,7 +325,7 @@ void ResetTrainerHillResults(void)
 
 static u8 GetFloorId(void)
 {
-    return gMapHeader.mapLayoutId - 159;
+    return gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
 }
 
 u8 GetTrainerHillOpponentClass(u16 trainerId)
@@ -385,7 +386,7 @@ static void SetUpDataStruct(void)
     if (sHillData == NULL)
     {
         sHillData = AllocZeroed(sizeof(*sHillData));
-        sHillData->floorId = gMapHeader.mapLayoutId - 159;
+        sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
         CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag));
         nullsub_2();
     }
@@ -803,10 +804,10 @@ bool32 InTrainerHill(void)
 {
     bool32 ret;
 
-    if (gMapHeader.mapLayoutId == 0x19F
-            || gMapHeader.mapLayoutId == 0x1A0
-            || gMapHeader.mapLayoutId == 0x1A1
-            || gMapHeader.mapLayoutId == 0x1A2)
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_1F
+            || gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_2F
+            || gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_3F
+            || gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_4F)
         ret = TRUE;
     else
         ret = FALSE;
@@ -818,17 +819,17 @@ u8 GetCurrentTrainerHillMapId(void)
 {
     u8 ret;
 
-    if (gMapHeader.mapLayoutId == 0x19F)
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_1F)
         ret = 1;
-    else if (gMapHeader.mapLayoutId == 0x1A0)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_2F)
         ret = 2;
-    else if (gMapHeader.mapLayoutId == 0x1A1)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_3F)
         ret = 3;
-    else if (gMapHeader.mapLayoutId == 0x1A2)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_4F)
         ret = 4;
-    else if (gMapHeader.mapLayoutId == 0x1A3)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ROOF)
         ret = 5;
-    else if (gMapHeader.mapLayoutId == 0x19E)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ENTRANCE)
         ret = 6;
     else
         ret = 0;
@@ -840,7 +841,7 @@ static bool32 sub_81D6100(void)
 {
     bool32 ret;
 
-    if (gMapHeader.mapLayoutId == 0x1A3)
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ROOF)
         ret = TRUE;
     else
         ret = FALSE;

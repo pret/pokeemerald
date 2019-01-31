@@ -55,6 +55,7 @@
 #include "wild_encounter.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
+#include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
@@ -886,7 +887,7 @@ static void mli0_load_map(u32 a1)
     LoadCurrentMapData();
     if (!(sUnknown_020322D8 & 1))
     {
-        if (gMapHeader.mapLayoutId == 0x169)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
             sub_81AA1D8();
         else if (InTrainerHill())
             sub_81D5DF8();
@@ -914,7 +915,7 @@ static void mli0_load_map(u32 a1)
     mapheader_run_script_with_tag_x3();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
-    if (gMapHeader.mapLayoutId == 0x169)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         InitBattlePyramidMap(0);
     else if (InTrainerHill())
         InitTrainerHillMap();
@@ -1753,7 +1754,7 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
-    if (gMapHeader.mapLayoutId == 0x169)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         sub_81AA2F8();
     else if (trainerHillMapId != 0 && trainerHillMapId != 6)
         sub_81D5F48();
@@ -1763,7 +1764,7 @@ void CB2_ContinueSavedGame(void)
     UnfreezeEventObjects();
     DoTimeBasedEvents();
     sub_8084788();
-    if (gMapHeader.mapLayoutId == 0x169)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         InitBattlePyramidMap(1);
     else if (trainerHillMapId != 0)
         InitTrainerHillMap();

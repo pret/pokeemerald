@@ -16,6 +16,7 @@
 #include "constants/event_objects.h"
 #include "constants/battle_frontier.h"
 #include "constants/abilities.h"
+#include "constants/layouts.h"
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/species.h"
@@ -1314,8 +1315,10 @@ static void sub_81A8090(void)
 
 bool8 InBattlePike(void)
 {
-    return (gMapHeader.mapLayoutId == 351 || gMapHeader.mapLayoutId == 352
-            || gMapHeader.mapLayoutId == 358 || gMapHeader.mapLayoutId == 359);
+    return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3
+        || gMapHeader.mapLayoutId == LAYOUT_UNKNOWN_MAP_084693AC;
 }
 
 static void sub_81A80DC(void)
