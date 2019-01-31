@@ -104,6 +104,7 @@ void CFile::Preproc()
         {
             TryConvertString();
             TryConvertIncbin();
+            TryConvertBinaryLiteral();
 
             if (m_pos >= m_size)
                 break;
@@ -395,6 +396,59 @@ void CFile::TryConvertIncbin()
     m_pos++;
 
     std::printf("}");
+}
+
+void CFile::TryConvertBinaryLiteral()
+{
+    // Capture only intentional binary literals.
+    // This is tricky because (1) "0b" and "0B" are legitimate hexadecimal values and can also appear in variables,
+    // and (2) there is no way to know whether we are reading a number or not.
+    std::string idents[16] = {" 0b", " 0B", "=0b", "=0B", ",0b", ",0B", "\t0b", "\t0B",
+                              "{0b", "{0B", "(0b", "(0B", "[0b", "[0B", "-0b", "-0B"};
+    bool isBinaryLiteral = false;
+
+    for (int i = 0; i < 16; i++)
+    {
+        if (CheckIdentifier(idents[i]))
+        {
+            isBinaryLiteral = true;
+            break;
+        }
+    }
+
+    if (!isBinaryLiteral)
+        return;
+
+    // Keep the character before "0b".
+    std::printf("%c",m_buffer[m_pos]);
+    m_pos += 3;
+
+    int bitNum = 64;
+    int bits[64] = {};
+
+    long long result = 0;
+
+    while (true)
+    {
+        // Stop reading binary literal.
+        if (m_buffer[m_pos] == ')' || m_buffer[m_pos] == ']' || m_buffer[m_pos] == '}'
+         || m_buffer[m_pos] == ',' || m_buffer[m_pos] == ';' || m_buffer[m_pos] == ':' || std::isspace(m_buffer[m_pos]))
+            break;
+
+        // An invalid / non-binary character was found.
+        if (m_buffer[m_pos] != '0' && m_buffer[m_pos] != '1')
+            RaiseError("Invalid digit in binary literal. Expected either \'0\' or \'1\', but got \'%c\'.", m_buffer[m_pos]);
+
+        else
+            bits[--bitNum] = (int)m_buffer[m_pos] - '0';
+
+        m_pos++;
+    }
+
+    for (int pos = bitNum, count = 0; pos < 64; pos++, count++)
+        result += bits[pos] << count;
+
+    std::printf("%lld", result);
 }
 
 // Reports a diagnostic message.
