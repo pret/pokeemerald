@@ -37,8 +37,6 @@ struct UsePokeblockStruct
     struct UsePokeblockSubStruct info;
 };
 
-extern u16 gKeyRepeatStartDelay;
-
 // this file's functions
 void sub_816636C(void (*func)(void));
 void sub_8166380(void);
@@ -55,9 +53,6 @@ bool8 sub_8167930(void);
 void sub_8167608(u8 arg0);
 void sub_8167BA0(u16 arg0, u8 copyToVramMode);
 
-extern const struct BgTemplate gUnknown_085DFCCC[4];
-extern const struct WindowTemplate gUnknown_085DFCDC[];
-
 // ram variables
 EWRAM_DATA struct UsePokeblockSubStruct *gUnknown_0203BC90 = NULL;
 EWRAM_DATA void (*gUnknown_0203BC94)(void) = NULL;
@@ -70,6 +65,8 @@ EWRAM_DATA void *gUnknown_0203BCA8 = NULL;
 EWRAM_DATA struct UsePokeblockStruct *gUnknown_0203BCAC = NULL;
 
 // const rom data
+extern const struct BgTemplate gUnknown_085DFCCC[4];
+extern const struct WindowTemplate gUnknown_085DFCDC[];
 // todo: make it static once the file is decompiled
 
 // code
@@ -144,87 +141,87 @@ void sub_8166380(void)
 {
     switch (gUnknown_0203BC90->field_50)
     {
-        case 0:
-            gUnknown_0203BCAC->field_0[0x7B10] = 0xFF;
-            sub_81D1ED4(gUnknown_0203BCAC->field_7C58);
+    case 0:
+        gUnknown_0203BCAC->field_0[0x7B10] = 0xFF;
+        sub_81D1ED4(gUnknown_0203BCAC->field_7C58);
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 1:
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 2:
+        SetVBlankCallback(NULL);
+        CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 3:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_085DFCCC, ARRAY_COUNT(gUnknown_085DFCCC));
+        InitWindows(gUnknown_085DFCDC);
+        DeactivateAllTextPrinters();
+        LoadUserWindowBorderGfx(0, 0x97, 0xE0);
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 4:
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 5:
+        if (!sub_8168328())
+        {
             gUnknown_0203BC90->field_50++;
-            break;
-        case 1:
-            ResetSpriteData();
-            FreeAllSpritePalettes();
+        }
+        break;
+    case 6:
+        gKeyRepeatStartDelay = 20;
+        sub_8167420();
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 7:
+        if (!sub_8167930())
+        {
             gUnknown_0203BC90->field_50++;
-            break;
-        case 2:
-            SetVBlankCallback(NULL);
-            CpuFill32(0, (void*)(VRAM), VRAM_SIZE);
+        }
+        break;
+    case 8:
+        sub_8167608(0);
+        sub_8167760();
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 9:
+        if (!sub_81D312C(&gUnknown_0203BCAC->field_0[0x7B0E]))
+        {
             gUnknown_0203BC90->field_50++;
-            break;
-        case 3:
-            ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, gUnknown_085DFCCC, ARRAY_COUNT(gUnknown_085DFCCC));
-            InitWindows(gUnknown_085DFCDC);
-            DeactivateAllTextPrinters();
-            LoadUserWindowBorderGfx(0, 0x97, 0xE0);
+        }
+        break;
+    case 10:
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 11:
+        sub_81D2754(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_0[0x7C6C]);
+        sub_81D20AC(gUnknown_0203BCAC->field_7C58);
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 12:
+        if (!sub_81D20BC(gUnknown_0203BCAC->field_7C58))
+        {
+            sub_81D1F84(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7C58[0x14], &gUnknown_0203BCAC->field_7C58[0x14]);
             gUnknown_0203BC90->field_50++;
-            break;
-        case 4:
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 5:
-            if (!sub_8168328())
-            {
-                gUnknown_0203BC90->field_50++;
-            }
-            break;
-        case 6:
-            gKeyRepeatStartDelay = 20;
-            sub_8167420();
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 7:
-            if (!sub_8167930())
-            {
-                gUnknown_0203BC90->field_50++;
-            }
-            break;
-        case 8:
-            sub_8167608(0);
-            sub_8167760();
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 9:
-            if (!sub_81D312C(&gUnknown_0203BCAC->field_0[0x7B0E]))
-            {
-                gUnknown_0203BC90->field_50++;
-            }
-            break;
-        case 10:
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 11:
-            sub_81D2754(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_0[0x7C6C]);
-            sub_81D20AC(gUnknown_0203BCAC->field_7C58);
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 12:
-            if (!sub_81D20BC(gUnknown_0203BCAC->field_7C58))
-            {
-                sub_81D1F84(gUnknown_0203BCAC->field_7C58, &gUnknown_0203BCAC->field_7C58[0x14], &gUnknown_0203BCAC->field_7C58[0x14]);
-                gUnknown_0203BC90->field_50++;
-            }
-            break;
-        case 13:
-            sub_81D2230(gUnknown_0203BCAC->field_7C58);
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 14:
-            PutWindowTilemap(0);
-            PutWindowTilemap(1);
-            sub_8167BA0(0, 1);
-            gUnknown_0203BC90->field_50++;
-            break;
-        case 15:
-            sub_816636C(sub_8166564);
-            break;
+        }
+        break;
+    case 13:
+        sub_81D2230(gUnknown_0203BCAC->field_7C58);
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 14:
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        sub_8167BA0(0, 1);
+        gUnknown_0203BC90->field_50++;
+        break;
+    case 15:
+        sub_816636C(sub_8166564);
+        break;
     }
 }
