@@ -5230,7 +5230,7 @@ BattleScript_SelectingNotAllowedBelch::
 	endselectionscript
 	
 BattleScript_SelectingNotAllowedBelchInPalace::
-	printstring STRINGID_PKMNCANTUSEMOVETAUNT
+	printstring STRINGID_BELCHCANTSELECT
 	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_MoveUsedGravityPrevents::

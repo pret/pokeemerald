@@ -211,7 +211,8 @@
 #define SIDE_STATUS_TOXIC_SPIKES_DAMAGED    (1 << 16)
 #define SIDE_STATUS_STICKY_WEB_DAMAGED      (1 << 17)
 #define SIDE_STATUS_QUICK_GUARD             (1 << 18)
-#define SIDE_STATUS_WIDE_GUARD              (1 << 18)
+#define SIDE_STATUS_WIDE_GUARD              (1 << 19)
+#define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM         0x1
