@@ -69,38 +69,38 @@ struct ToneData
 
 struct CgbChannel
 {
-    u8 sf;
-    u8 ty;
-    u8 rightVolume;
-    u8 leftVolume;
-    u8 at;
-    u8 de;
-    u8 su;
-    u8 re;
-    u8 ky;
-    u8 ev;
-    u8 eg;
-    u8 ec;
-    u8 echoVolume;
-    u8 echoLength;
-    u8 d1;
-    u8 d2;
-    u8 gt;
-    u8 mk;
-    u8 ve;
-    u8 pr;
-    u8 rp;
-    u8 d3[3];
-    u8 d5;
-    u8 sg;
-    u8 n4;
-    u8 pan;
-    u8 panMask;
-    u8 mo;
-    u8 le;
-    u8 sw;
-    u32 fr;
-    u32 wp;
+    u8 sf; // 0x0
+    u8 ty; // 0x1
+    u8 rightVolume; // 0x2
+    u8 leftVolume; // 0x3
+    u8 at; // 0x4
+    u8 de; // 0x5
+    u8 su; // 0x6
+    u8 re; // 0x7
+    u8 ky; // 0x8
+    u8 ev; // 0x9
+    u8 eg; // 0xA
+    u8 ec; // 0xB
+    u8 echoVolume; // 0xC
+    u8 echoLength; // 0xD
+    u8 d1; // 0xE
+    u8 d2; // 0xF
+    u8 gt; // 0x10
+    u8 mk; // 0x11
+    u8 ve; // 0x12
+    u8 pr; // 0x13
+    u8 rp; // 0x14
+    u8 d3[3]; // 0x15, 0x16, 0x17
+    u8 d5; // 0x18
+    u8 sg; // 0x19
+    u8 n4; // 0x1A
+    u8 pan; // 0x1B
+    u8 panMask; // 0x1C
+    u8 mo; // 0x1D
+    u8 le; // 0x1E
+    u8 sw; // 0x1F
+    u32 fr; // 0x20
+    u32 *wp;
     u32 cp;
     u32 tp;
     u32 pp;
@@ -397,6 +397,7 @@ void m4aSoundMode(u32 mode);
 void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track, u8 a3);
 void CgbSound(void);
 void CgbOscOff(u8);
+void CgbModVol(struct CgbChannel *chan);
 u32 MidiKeyToCgbFreq(u8, u8, u8);
 void DummyFunc(void);
 void MPlayJumpTableCopy(void **mplayJumpTable);
