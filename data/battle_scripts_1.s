@@ -1512,7 +1512,7 @@ BattleScript_EffectEmbargo:
 	setembargo BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	printstring STRINGID_PKMNIDENTIFIED
+	printstring STRINGID_PKMNCANTUSEITEMSANYMORE
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 	
