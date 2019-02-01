@@ -7884,7 +7884,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BELCH] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_BELCH,
         .power = 120,
         .type = TYPE_POISON,
         .accuracy = 90,

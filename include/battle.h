@@ -572,6 +572,7 @@ struct BattleStruct
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
     u8 introState;
+    u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

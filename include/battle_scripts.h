@@ -287,5 +287,7 @@ extern const u8 BattleScript_ProteanActivates[];
 extern const u8 BattleScript_DazzlingProtected[];
 extern const u8 BattleScript_MoveUsedPsychicTerrainPrevents[];
 extern const u8 BattleScript_MoveUsedPowder[];
+extern const u8 BattleScript_SelectingNotAllowedBelch[];
+extern const u8 BattleScript_SelectingNotAllowedBelchInPalace[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

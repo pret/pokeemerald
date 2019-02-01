@@ -579,7 +579,7 @@ static bool32 IsGravityPreventingMove(u32 move)
     }
 }
 
-static bool32 IsHealBlockPreventingMove(u8 battler, u32 move)
+static bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
 {
     if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
         return FALSE;
@@ -599,6 +599,14 @@ static bool32 IsHealBlockPreventingMove(u8 battler, u32 move)
     default:
         return FALSE;
     }
+}
+
+static bool32 IsBelchPreventingMove(u32 battler, u32 move)
+{
+    if (gBattleMoves[move].effect != EFFECT_BELCH)
+        return FALSE;
+
+    return !(gBattleStruct->ateBerry[battler & BIT_SIDE] & gBitTable[gBattlerPartyIndexes[battler]]);
 }
 
 u8 TrySetCantSelectMoveBattleScript(void)
@@ -700,6 +708,21 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
+    if (IsBelchPreventingMove(gActiveBattler, move))
+    {
+        gCurrentMove = move;
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedBelchInPalace;
+            gProtectStructs[gActiveBattler].palaceAbleToUseMove = 1;
+        }
+        else
+        {
+            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedBelch;
+            limitations++;
+        }
+    }
+
     gPotentialItemEffectBattler = gActiveBattler;
     if (HOLD_EFFECT_CHOICE(holdEffect) && *choicedMove != 0 && *choicedMove != 0xFFFF && *choicedMove != move)
     {
@@ -777,6 +800,8 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
         else if (IsGravityPreventingMove(gBattleMons[battlerId].moves[i]))
             unusableMoves |= gBitTable[i];
         else if (IsHealBlockPreventingMove(battlerId, gBattleMons[battlerId].moves[i]))
+            unusableMoves |= gBitTable[i];
+        else if (IsBelchPreventingMove(battlerId, gBattleMons[battlerId].moves[i]))
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
@@ -4222,6 +4247,10 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
         }
         break;
     }
+
+    // Berry was successfully used on a Pokemon.
+    if (effect && (gLastUsedItem >= FIRST_BERRY_INDEX && gLastUsedItem <= LAST_BERRY_INDEX))
+        gBattleStruct->ateBerry[battlerId & BIT_SIDE] |= gBitTable[gBattlerPartyIndexes[battlerId]];
 
     return effect;
 }

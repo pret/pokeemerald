@@ -341,6 +341,7 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectAromaticMist
 	.4byte BattleScript_EffectPowder
 	.4byte BattleScript_EffectSpAtkUpHit
+	.4byte BattleScript_EffectBelch
 	
 BattleScript_EffectSpAtkUpHit:
 	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
@@ -1671,6 +1672,7 @@ BattleScript_EffectTechnoBlast:
 BattleScript_EffectJudgment:
 BattleScript_EffectFusionCombo:
 BattleScript_EffectRevelationDance:
+BattleScript_EffectBelch:
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
 	jumpifnostatus3 BS_TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
@@ -5222,6 +5224,14 @@ BattleScript_SelectingNotAllowedMoveTauntInPalace::
 BattleScript_SelectingNotAllowedMoveGravity::
 	printselectionstring STRINGID_GRAVITYPREVENTSUSAGE
 	endselectionscript
+	
+BattleScript_SelectingNotAllowedBelch::
+	printselectionstring STRINGID_BELCHCANTSELECT
+	endselectionscript
+	
+BattleScript_SelectingNotAllowedBelchInPalace::
+	printstring STRINGID_PKMNCANTUSEMOVETAUNT
+	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_MoveUsedGravityPrevents::
 	printstring STRINGID_GRAVITYPREVENTSUSAGE
