@@ -52,7 +52,7 @@ SCANINC := tools/scaninc/scaninc$(EXE)
 PREPROC := tools/preproc/preproc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 FIX := tools/gbafix/gbafix$(EXE)
-MAPJSON := python tools/mapjson/mapjson.py
+MAPJSON := tools/mapjson/mapjson$(EXE)
 
 # Clear the default suffixes
 .SUFFIXES:
