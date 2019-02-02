@@ -1438,7 +1438,7 @@ static void Blender_SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, 
     {
         opponentBerryId = sOpponentBerrySets[opponentSetId][i];
         var = playerBerryItemId - 163;
-        if (!FlagGet(0x340) && gSpecialVar_0x8004 == 1)
+        if (!FlagGet(FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_ONLOOKERS) && gSpecialVar_0x8004 == 1)
         {
             opponentSetId %= 5;
             opponentBerryId = sSpecialOpponentBerrySets[opponentSetId];

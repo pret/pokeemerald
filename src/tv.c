@@ -972,7 +972,7 @@ void GabbyAndTyBeforeInterview(void)
     TakeTVShowInSearchOfTrainersOffTheAir();
     if (gSaveBlock1Ptr->gabbyAndTyData.lastMove == MOVE_NONE)
     {
-        FlagSet(0x0001);
+        FlagSet(FLAG_TEMP_1);
     }
 }
 
@@ -2564,13 +2564,13 @@ void sub_80EEA70(void)
             show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
             show->secretBaseSecrets.active = FALSE;
             StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
-            show->secretBaseSecrets.stepsInBase = VarGet(0x40ec);
+            show->secretBaseSecrets.stepsInBase = VarGet(VAR_0x40EC);
             sub_80E980C();
             StringCopy(strbuf, gStringVar1);
             StripExtCtrlCodes(strbuf);
             StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);
-            show->secretBaseSecrets.item = VarGet(0x40ed);
-            show->secretBaseSecrets.flags = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
+            show->secretBaseSecrets.item = VarGet(VAR_0x40ED);
+            show->secretBaseSecrets.flags = VarGet(VAR_0x40EE) + (VarGet(VAR_0x40EF) << 16);
             tv_store_id_3x(show);
             show->secretBaseSecrets.language = gGameLanguage;
             if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language == LANGUAGE_JAPANESE)
@@ -3604,7 +3604,7 @@ void sub_80F01B8(void)
 {
     VarSet(VAR_0x40BC, 0);
     RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-    FlagSet(0x396);
+    FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
 
 void ReceiveTvShowsData(void *src, u32 size, u8 masterIdx)
