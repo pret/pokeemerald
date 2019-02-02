@@ -30,8 +30,6 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-extern u8 gDexCryScreenState;
-
 // EWRAM
 static EWRAM_DATA struct PokedexView *sPokedexView = NULL;
 static EWRAM_DATA u16 gUnknown_02039B50 = 0;

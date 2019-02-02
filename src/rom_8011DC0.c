@@ -189,8 +189,6 @@ extern u16 gUnknown_02022C3C;
 extern u8 gUnknown_02022C20[];
 extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_03005DB4;
-extern struct MailStruct gUnknown_020321C0[PARTY_SIZE];
-extern u8 gUnknown_02032298[2];
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;

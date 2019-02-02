@@ -214,6 +214,8 @@ EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
 EWRAM_DATA u8 sContestBgCopyFlags = 0;
 EWRAM_DATA struct ContestWinner gUnknown_02039F3C = {0};
+EWRAM_DATA u8 gUnknown_02039F5C = 0;
+EWRAM_DATA u8 gUnknown_02039F5D = 0;
 
 // IWRAM common vars.
 u32 gContestRngValue;

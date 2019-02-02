@@ -20,10 +20,11 @@
 #include "window.h"
 #include "constants/rgb.h"
 
-extern u16 (*gUnknown_03006190)[][32];
-extern struct ContestWinner *gUnknown_030061C0;
-extern u16 *gContestPaintingMonPalette;
-extern struct Unk030061A0 gUnknown_030061A0;
+// IWRAM common
+u16 (*gUnknown_03006190)[][32];
+struct Unk030061A0 gUnknown_030061A0;
+struct ContestWinner *gUnknown_030061C0;
+u16 *gContestPaintingMonPalette;
 
 // IWRAM bss
 IWRAM_DATA u8 gContestPaintingState;
@@ -103,7 +104,7 @@ const u8 *const gContestRankTextPointers[] =
     gContestLink,
 };
 
-const struct BgTemplate gUnknown_085B07E8[] = 
+const struct BgTemplate gUnknown_085B07E8[] =
 {
     {
         .bg = 1,
@@ -116,7 +117,7 @@ const struct BgTemplate gUnknown_085B07E8[] =
     },
 };
 
-const struct WindowTemplate gUnknown_085B07EC = 
+const struct WindowTemplate gUnknown_085B07EC =
 {
     .bg = 1,
     .tilemapLeft = 2,

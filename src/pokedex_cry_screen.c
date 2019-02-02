@@ -39,7 +39,10 @@ static void sub_8145824(u8, s16, u8);
 static void sub_814596C(struct Sprite *);
 static void sub_8145B24(s8);
 
-extern u8 gDexCryScreenState;
+// IWRAM common
+u8 gDexCryScreenState;
+
+// EWRAM vars
 static EWRAM_DATA struct PokedexCryScreen *sDexCryScreen = NULL;
 static EWRAM_DATA u8 *sCryWaveformWindowTiledata = NULL;
 static EWRAM_DATA struct PokedexCryVolumeMeter *sCryVolumeMeter = NULL;

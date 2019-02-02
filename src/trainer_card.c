@@ -93,6 +93,7 @@ struct TrainerCardData
 extern u8 sub_80D30A0(u16);
 
 // EWRAM
+EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 EWRAM_DATA static struct TrainerCardData *sData = NULL;
 
 //this file's functions
