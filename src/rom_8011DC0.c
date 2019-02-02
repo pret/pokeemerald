@@ -1105,7 +1105,7 @@ void sub_80134E8(u8 taskId)
             RedrawListMenu(data->listTaskId);
             break;
         case 0:
-            id = ListMenuHandleInputGetItemId(data->listTaskId);
+            id = ListMenu_ProcessInput(data->listTaskId);
             if (gMain.newKeys & A_BUTTON && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
@@ -2176,7 +2176,7 @@ void sub_8014F48(u8 taskId)
             RedrawListMenu(data->listTaskId);
             break;
         case 0:
-            id = ListMenuHandleInputGetItemId(data->listTaskId);
+            id = ListMenu_ProcessInput(data->listTaskId);
             if (gMain.newKeys & A_BUTTON && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
@@ -2340,7 +2340,7 @@ void sub_80152F4(u8 taskId)
             break;
         case 0:
             if (data->field_13 != 0)
-                id = ListMenuHandleInputGetItemId(data->listTaskId);
+                id = ListMenu_ProcessInput(data->listTaskId);
             if (data->field_14 > 120)
             {
                 if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)

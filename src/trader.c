@@ -113,9 +113,9 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
 
     switch (input)
     {
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             break;
-        case -1:
+        case MENU_B_PRESSED:
         case 4:
             PlaySE(SE_SELECT);
             sub_8133BE4(taskId, 0);

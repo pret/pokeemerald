@@ -998,7 +998,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
         else
         {
             u16 oldPosition = sSavedPokeblockData.lastItemPos;
-            s32 itemId = ListMenuHandleInputGetItemId(data[0]);
+            s32 itemId = ListMenu_ProcessInput(data[0]);
 
             ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
             if (oldPosition != sSavedPokeblockData.lastItemPos)
@@ -1044,7 +1044,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
     {
         u16 i = sSavedPokeblockData.lastItemPage;
         u16 var = sSavedPokeblockData.lastItemPos;
-        s32 itemId = ListMenuHandleInputGetItemId(data[0]);
+        s32 itemId = ListMenu_ProcessInput(data[0]);
 
         ListMenuGetScrollAndRow(data[0], &sSavedPokeblockData.lastItemPage, &sSavedPokeblockData.lastItemPos);
         if (i != sSavedPokeblockData.lastItemPage || var != sSavedPokeblockData.lastItemPos)

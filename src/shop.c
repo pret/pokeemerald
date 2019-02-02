@@ -328,9 +328,9 @@ static void Task_ShopMenu(u8 taskId)
     s8 inputCode = Menu_ProcessInputNoWrap();
     switch (inputCode)
     {
-    case LIST_B_PRESSED:
+    case MENU_NOTHING_CHOSEN:
         break;
-    case LIST_NOTHING_CHOSEN:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         Task_HandleShopMenuQuit(taskId);
         break;
@@ -911,7 +911,7 @@ static void Task_BuyMenu(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        s32 itemId = ListMenuHandleInputGetItemId(tListTaskId);
+        s32 itemId = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &gShopDataPtr->scrollOffset, &gShopDataPtr->selectedRow);
 
         switch (itemId)
