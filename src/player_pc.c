@@ -1232,9 +1232,9 @@ static void sub_816C4FC(u8 taskId)
             ItemStorage_DoItemSwap(taskId, FALSE);
         }
         else
-		{
-			ItemStorage_DoItemSwap(taskId, TRUE);
-		}
+        {
+            ItemStorage_DoItemSwap(taskId, TRUE);
+        }
         break;
     default:
         ItemStorage_DoItemSwap(taskId, FALSE);
