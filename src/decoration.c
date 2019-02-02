@@ -526,14 +526,14 @@ void sub_8126B80(u8 taskId)
                 PlaySE(SE_SELECT);
                 sSecretBasePCMenuActions[sSecretBasePCMenuCursorPos].func.void_u8(taskId);
                 break;
-            case -2:
+            case MENU_NOTHING_CHOSEN:
                 sSecretBasePCMenuCursorPos = Menu_GetCursorPos();
                 if ((s8)menuPos != sSecretBasePCMenuCursorPos)
                 {
                     sub_8126C08();
                 }
                 break;
-            case -1:
+            case MENU_B_PRESSED:
                 PlaySE(SE_SELECT);
                 SecretBasePC_Cancel(taskId);
                 break;
@@ -713,12 +713,12 @@ void sub_8127088(u8 taskId)
         input = Menu_ProcessInput();
         switch (input)
         {
-            case -1:
+            case MENU_B_PRESSED:
             case 8:
                 PlaySE(SE_SELECT);
                 sub_812719C(taskId);
                 break;
-            case -2:
+            case MENU_NOTHING_CHOSEN:
                 break;
             default:
                 PlaySE(SE_SELECT);
@@ -933,13 +933,13 @@ void sub_812764C(u8 taskId)
     data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        input = ListMenuHandleInputGetItemId(data[13]);
+        input = ListMenu_ProcessInput(data[13]);
         ListMenuGetScrollAndRow(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
         switch (input)
         {
-            case -1:
+            case LIST_NOTHING_CHOSEN:
                 break;
-            case -2:
+            case LIST_B_PRESSED:
                 PlaySE(SE_SELECT);
                 SecretBasePC_SelectedDecorActions[data[11]][1](taskId);
                 break;

@@ -953,13 +953,13 @@ void sub_80E9E90(u8 taskId)
     s32 input;
 
     data = gTasks[taskId].data;
-    input = ListMenuHandleInputGetItemId(data[5]);
+    input = ListMenu_ProcessInput(data[5]);
     ListMenuGetScrollAndRow(data[5], &data[2], &data[1]);
     switch (input)
     {
-        case -1:
+        case LIST_NOTHING_CHOSEN:
             break;
-        case -2:
+        case LIST_B_PRESSED:
             PlaySE(SE_SELECT);
             DestroyListMenuTask(data[5], NULL, NULL);
             RemoveScrollIndicatorArrowPair(data[8]);
@@ -1002,11 +1002,11 @@ void sub_80E9FB0(u8 taskId)
     input = Menu_ProcessInputNoWrap();
     switch (input)
     {
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             sub_80EA18C(taskId);
             break;
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             break;
         default:
             PlaySE(SE_SELECT);

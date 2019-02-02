@@ -853,7 +853,7 @@ static void Task_HandlePyramidBagInput(u8 taskId)
         }
         else
         {
-            s32 listId = ListMenuHandleInputGetItemId(data[0]);
+            s32 listId = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &gPyramidBagCursorData.scrollPosition, &gPyramidBagCursorData.cursorPosition);
             switch (listId)
             {
@@ -945,9 +945,9 @@ static void HandleFewMenuActionsInput(u8 taskId)
         s32 id = Menu_ProcessInputNoWrap();
         switch (id)
         {
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             break;
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
             break;
@@ -1285,7 +1285,7 @@ static void Task_ItemSwapHandleInput(u8 taskId)
         }
         else
         {
-            s32 id = ListMenuHandleInputGetItemId(data[0]);
+            s32 id = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &gPyramidBagCursorData.scrollPosition, &gPyramidBagCursorData.cursorPosition);
             sub_81C7028(FALSE);
             sub_81C704C(gPyramidBagCursorData.cursorPosition);

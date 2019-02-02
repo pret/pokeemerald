@@ -1244,15 +1244,15 @@ static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y)
 
 static void Task_HandleDaycareLevelMenuInput(u8 taskId)
 {
-    u32 var = ListMenuHandleInputGetItemId(gTasks[taskId].tMenuListTaskId);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuListTaskId);
 
     if (gMain.newKeys & A_BUTTON)
     {
-        switch (var)
+        switch (input)
         {
         case 0:
         case 1:
-            gSpecialVar_Result = var;
+            gSpecialVar_Result = input;
             break;
         case 5:
             gSpecialVar_Result = 2;

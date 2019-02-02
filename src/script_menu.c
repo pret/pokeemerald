@@ -1170,9 +1170,9 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 sub_80E2A94(tMultichoiceId);
             }
 
-            if (selection != -2)
+            if (selection != MENU_NOTHING_CHOSEN)
             {
-                if (selection == -1)
+                if (selection == MENU_B_PRESSED)
                 {
                     if (tIgnoreBPress)
                         return;

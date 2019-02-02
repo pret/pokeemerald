@@ -334,7 +334,7 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
         sMysteryGiftLinkMenu.state = 1;
         break;
     case 1:
-        sMysteryGiftLinkMenu.currItemId = ListMenuHandleInputGetItemId(sMysteryGiftLinkMenu.listTaskId);
+        sMysteryGiftLinkMenu.currItemId = ListMenu_ProcessInput(sMysteryGiftLinkMenu.listTaskId);
         if (gMain.newKeys & A_BUTTON)
         {
             sMysteryGiftLinkMenu.state = 2;
@@ -406,7 +406,7 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
     return taskId;
 }
 
-s32 ListMenuHandleInputGetItemId(u8 listTaskId)
+s32 ListMenu_ProcessInput(u8 listTaskId)
 {
     struct ListMenu *list = (void*) gTasks[listTaskId].data;
 

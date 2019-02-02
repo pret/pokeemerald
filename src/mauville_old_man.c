@@ -1182,9 +1182,9 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
             break;
         case 1:
             selection = Menu_ProcessInput();
-            if (selection == -2)
+            if (selection == MENU_NOTHING_CHOSEN)
                 break;
-            if (selection == -1 || selection == GetFreeStorySlot())
+            if (selection == MENU_B_PRESSED || selection == GetFreeStorySlot())
             {
                 gSpecialVar_Result = 0;
             }
