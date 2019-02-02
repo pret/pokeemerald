@@ -441,7 +441,6 @@ SECTIONS {
         src/battle_anim.o(.rodata);
         src/battle_anim_80A5C6C.o(.rodata);
         data/map_events.o(.rodata);
-        data/battle_anim_80A9C70.o(.rodata);
         src/battle_anim_80A9C70.o(.rodata);
         src/title_screen.o(.rodata);
         src/field_weather.o(.rodata);
