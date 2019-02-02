@@ -173,7 +173,7 @@ static void sub_81C20F0(u8 taskId);
 static void sub_81C2194(u16 *a, u16 b, u8 c);
 static void sub_81C2228(struct Pokemon* mon);
 static void DrawExperienceProgressBar(struct Pokemon* mon);
-static void sub_81C240C(u16 a);
+static void DrawContestMoveHearts(u16 move);
 static void sub_81C2524(void);
 static void sub_81C2554(void);
 static void sub_81C25E8(void);
@@ -223,17 +223,17 @@ static void PrintNewMoveDetailsOrCancelText(void);
 static void sub_81C4064(void);
 static void sub_81C40A0(u8 a, u8 b);
 static void PrintHMMovesCantBeForgotten(void);
-static void sub_81C4190(void);
-static void sub_81C4204(u8 a, u8 b);
-static void sub_81C424C(void);
-static void sub_81C4280(void);
-static void sub_81C42C8(void);
-static void sub_81C43A0(void);
-static void sub_81C4420(void);
-static void sub_81C4484(void);
-static void sub_81C44F0(void);
+static void ResetPssSpriteIds(void);
+static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
+static void HidePageSpecificSprites(void);
+static void SetTypeIcons(void);
+static void CreateMoveTypeIcons(void);
+static void SetMonTypeIcons(void);
+static void SetMoveTypeIcons(void);
+static void SetContestMoveTypeIcons(void);
+static void SetNewMoveTypeIcon(void);
 static void sub_81C4568(u8 a, u8 b);
-static u8 sub_81C45F4(struct Pokemon *a, s16 *b);
+static u8 CreatePokemonSprite(struct Pokemon *a, s16 *b);
 static u8 sub_81C47B4(struct Pokemon *unused);
 static void sub_81C4844(struct Sprite *);
 static void sub_81C48F0(void);
@@ -968,13 +968,13 @@ static const union AnimCmd *const sSpriteAnimTable_StatusCondition[] = {
     sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,
 };
-static const struct CompressedSpriteSheet gUnknown_0861D0F8 =
+static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
 {
     .data = gStatusGfx_Icons,
     .size = 0x380,
     .tag = 30001
 };
-static const struct CompressedSpritePalette gUnknown_0861D100 =
+static const struct CompressedSpritePalette sStatusIconsSpritePalette =
 {
     .data = gStatusPal_Icons,
     .tag = 30001
@@ -1141,13 +1141,13 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 16:
-        sub_81C4190();
-        sub_81C42C8();
+        ResetPssSpriteIds();
+        CreateMoveTypeIcons();
         pssData->unk40F0 = 0;
         gMain.state++;
         break;
     case 17:
-        pssData->spriteIds[0] = sub_81C45F4(&pssData->currentMon, &pssData->unk40F0);
+        pssData->spriteIds[0] = CreatePokemonSprite(&pssData->currentMon, &pssData->unk40F0);
         if (pssData->spriteIds[0] != 0xFF)
         {
             pssData->unk40F0 = 0;
@@ -1167,7 +1167,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 21:
-        sub_81C4280();
+        SetTypeIcons();
         gMain.state++;
         break;
     case 22:
@@ -1259,11 +1259,11 @@ static bool8 SummaryScreen_DecompressGraphics(void)
         pssData->unk40F0++;
         break;
     case 9:
-        LoadCompressedSpriteSheet(&gUnknown_0861D0F8);
+        LoadCompressedSpriteSheet(&sStatusIconsSpriteSheet);
         pssData->unk40F0++;
         break;
     case 10:
-        LoadCompressedSpritePalette(&gUnknown_0861D100);
+        LoadCompressedSpritePalette(&sStatusIconsSpritePalette);
         pssData->unk40F0++;
         break;
     case 11:
@@ -1374,7 +1374,7 @@ static void sub_81C0348(void)
     }
     else
     {
-        sub_81C240C(pssData->summary.moves[pssData->firstMoveIndex]);
+        DrawContestMoveHearts(pssData->summary.moves[pssData->firstMoveIndex]);
         sub_81C2194(pssData->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][0], 3, 0);
         sub_81C2194(pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0], 1, 0);
         SetBgTilemapBuffer(1, pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0]);
@@ -1510,7 +1510,7 @@ static void sub_81C0604(u8 taskId, s8 a)
             PlaySE(SE_SELECT);
             if (pssData->summary.unk7 != 0)
             {
-                sub_81C4204(2, 1);
+                SetSpriteInvisibility(2, 1);
                 ClearWindowTilemap(13);
                 schedule_bg_copy_tilemap_to_vram(0);
                 sub_81C2074(0, 2);
@@ -1559,7 +1559,7 @@ static void sub_81C0704(u8 taskId)
         data[1] = 0;
         break;
     case 8:
-        pssData->spriteIds[0] = sub_81C45F4(&pssData->currentMon, &data[1]);
+        pssData->spriteIds[0] = CreatePokemonSprite(&pssData->currentMon, &data[1]);
         if (pssData->spriteIds[0] == 0xFF)
             return;
         gSprites[pssData->spriteIds[0]].data[2] = 1;
@@ -1567,7 +1567,7 @@ static void sub_81C0704(u8 taskId)
         data[1] = 0;
         break;
     case 9:
-        sub_81C4280();
+        SetTypeIcons();
         break;
     case 10:
         sub_81C25E8();
@@ -1677,7 +1677,7 @@ static void sub_81C0A8C(u8 taskId, s8 b)
     else
         SetTaskFuncWithFollowupFunc(taskId, sub_81C0CC4, gTasks[taskId].func);
     sub_81C2DE4(pssData->currPageIndex);
-    sub_81C424C();
+    HidePageSpecificSprites();
 }
 
 static void sub_81C0B8C(u8 taskId)
@@ -1718,7 +1718,7 @@ static void sub_81C0C68(u8 taskId)
     data[0] = 0;
     sub_81C1BA0();
     sub_81C2AFC(pssData->currPageIndex);
-    sub_81C4280();
+    SetTypeIcons();
     sub_81C0E24();
     SwitchTaskToFollowupFunc(taskId);
 }
@@ -1767,7 +1767,7 @@ static void sub_81C0D44(u8 taskId)
     data[0] = 0;
     sub_81C1BA0();
     sub_81C2AFC(pssData->currPageIndex);
-    sub_81C4280();
+    SetTypeIcons();
     sub_81C0E24();
     SwitchTaskToFollowupFunc(taskId);
 }
@@ -1797,7 +1797,7 @@ static void sub_81C0E48(u8 taskId)
     sub_81C2194(pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][0], 1, 0);
     PrintMoveDetails(move);
     PrintNewMoveDetailsOrCancelText();
-    sub_81C44F0();
+    SetNewMoveTypeIcon();
     schedule_bg_copy_tilemap_to_vram(0);
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
@@ -1883,7 +1883,7 @@ static void sub_81C1070(s16 *a, s8 b, u8 *c)
         if (move != 0)
             break;
     }
-    sub_81C240C(move);
+    DrawContestMoveHearts(move);
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     PrintMoveDetails(move);
@@ -2003,7 +2003,7 @@ static void sub_81C13B0(u8 taskId, bool8 b)
 
     move = pssData->summary.moves[pssData->firstMoveIndex];
     PrintMoveDetails(move);
-    sub_81C240C(move);
+    DrawContestMoveHearts(move);
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     gTasks[taskId].func = sub_81C0F44;
@@ -2081,7 +2081,7 @@ static void SwapBoxMonMoves(struct BoxPokemon *mon, u8 moveIndex1, u8 moveIndex2
 
 static void sub_81C171C(u8 taskId)
 {
-    sub_81C44F0();
+    SetNewMoveTypeIcon();
     sub_81C4AF8(8);
     gTasks[taskId].func = sub_81C174C;
 }
@@ -2415,7 +2415,7 @@ static void sub_81C1F80(u8 taskId)
         {
             if (pssData->currPageIndex == 3 && FuncIsActiveTask(sub_81C0B8C) == 0)
                 PutWindowTilemap(15);
-            sub_81C240C(data[2]);
+            DrawContestMoveHearts(data[2]);
         }
         else
         {
@@ -2566,7 +2566,7 @@ static void DrawExperienceProgressBar(struct Pokemon *unused)
         schedule_bg_copy_tilemap_to_vram(2);
 }
 
-static void sub_81C240C(u16 move)
+static void DrawContestMoveHearts(u16 move)
 {
     u16 *tilemap = pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][1];
     u8 i;
@@ -3641,7 +3641,7 @@ static void PrintHMMovesCantBeForgotten(void)
     SummaryScreen_PrintTextOnWindow(windowId, gText_HMMovesCantBeForgotten2, 6, 1, 0, 0);
 }
 
-static void sub_81C4190(void)
+static void ResetPssSpriteIds(void)
 {
     u8 i;
 
@@ -3660,41 +3660,42 @@ static void DestroySpriteInArray(u8 spriteArrayId)
     }
 }
 
-static void sub_81C4204(u8 spriteArrayId, bool8 invisible)
+static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible)
 {
     gSprites[pssData->spriteIds[spriteArrayId]].invisible = invisible;
 }
 
-static void sub_81C424C(void)
+static void HidePageSpecificSprites(void)
 {
+// Keeps Pokémon, caught ball and status sprites visible.
     u8 i;
 
     for (i = 3; i < 28; i++)
     {
         if (pssData->spriteIds[i] != 0xFF)
-            sub_81C4204(i, TRUE);
+            SetSpriteInvisibility(i, TRUE);
     }
 }
 
-static void sub_81C4280(void)
+static void SetTypeIcons(void)
 {
     switch (pssData->currPageIndex)
     {
-    case 0:
-        sub_81C43A0();
+    case PSS_PAGE_INFO:
+        SetMonTypeIcons();
         break;
-    case 2:
-        sub_81C4420();
-        sub_81C44F0();
+    case PSS_PAGE_BATTLE_MOVES:
+        SetMoveTypeIcons();
+        SetNewMoveTypeIcon();
         break;
-    case 3:
-        sub_81C4484();
-        sub_81C44F0();
+    case PSS_PAGE_CONTEST_MOVES:
+        SetContestMoveTypeIcons();
+        SetNewMoveTypeIcon();
         break;
     }
 }
 
-static void sub_81C42C8(void)
+static void CreateMoveTypeIcons(void)
 {
     u8 i;
 
@@ -3703,7 +3704,7 @@ static void sub_81C42C8(void)
         if (pssData->spriteIds[i] == 0xFF)
             pssData->spriteIds[i] = CreateSprite(&sSpriteTemplate_MoveTypes, 0, 0, 2);
 
-        sub_81C4204(i, TRUE);
+        SetSpriteInvisibility(i, TRUE);
     }
 }
 
@@ -3714,16 +3715,16 @@ static void SetMoveTypeSpritePosAndType(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
     sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[typeId];
     sprite->pos1.x = x + 16;
     sprite->pos1.y = y + 8;
-    sub_81C4204(spriteArrayId, FALSE);
+    SetSpriteInvisibility(spriteArrayId, FALSE);
 }
 
-static void sub_81C43A0(void)
+static void SetMonTypeIcons(void)
 {
     struct PokeSummary *summary = &pssData->summary;
     if (summary->isEgg)
     {
         SetMoveTypeSpritePosAndType(TYPE_MYSTERY, 120, 48, 3);
-        sub_81C4204(4, TRUE);
+        SetSpriteInvisibility(4, TRUE);
     }
     else
     {
@@ -3731,16 +3732,16 @@ static void sub_81C43A0(void)
         if (gBaseStats[summary->species].type1 != gBaseStats[summary->species].type2)
         {
             SetMoveTypeSpritePosAndType(gBaseStats[summary->species].type2, 0xA0, 0x30, 4);
-            sub_81C4204(4, FALSE);
+            SetSpriteInvisibility(4, FALSE);
         }
         else
         {
-            sub_81C4204(4, TRUE);
+            SetSpriteInvisibility(4, TRUE);
         }
     }
 }
 
-static void sub_81C4420(void)
+static void SetMoveTypeIcons(void)
 {
     u8 i;
     struct PokeSummary *summary = &pssData->summary;
@@ -3749,11 +3750,11 @@ static void sub_81C4420(void)
         if (summary->moves[i] != MOVE_NONE)
             SetMoveTypeSpritePosAndType(gBattleMoves[summary->moves[i]].type, 0x55, 0x20 + (i * 0x10), i + 3);
         else
-            sub_81C4204(i + 3, TRUE);
+            SetSpriteInvisibility(i + 3, TRUE);
     }
 }
 
-static void sub_81C4484(void)
+static void SetContestMoveTypeIcons(void)
 {
     u8 i;
     struct PokeSummary *summary = &pssData->summary;
@@ -3762,15 +3763,15 @@ static void sub_81C4484(void)
         if (summary->moves[i] != MOVE_NONE)
             SetMoveTypeSpritePosAndType(NUMBER_OF_MON_TYPES + gContestMoves[summary->moves[i]].contestCategory, 0x55, 0x20 + (i * 0x10), i + 3);
         else
-            sub_81C4204(i + 3, TRUE);
+            SetSpriteInvisibility(i + 3, TRUE);
     }
 }
 
-static void sub_81C44F0(void)
+static void SetNewMoveTypeIcon(void)
 {
     if (pssData->newMove == MOVE_NONE)
     {
-        sub_81C4204(7, TRUE);
+        SetSpriteInvisibility(7, TRUE);
     }
     else
     {
@@ -3800,7 +3801,7 @@ static void sub_81C4568(u8 a0, u8 a1)
     sprite2->animEnded = FALSE;
 }
 
-static u8 sub_81C45F4(struct Pokemon *mon, s16 *a1)
+static u8 CreatePokemonSprite(struct Pokemon *mon, s16 *a1)
 {
     const struct CompressedSpritePalette *pal;
     struct PokeSummary *summary = &pssData->summary;
@@ -4000,11 +4001,11 @@ static void CreateSetStatusSprite(void)
     if (anim != 0)
     {
         StartSpriteAnim(&gSprites[*spriteId], anim - 1);
-        sub_81C4204(2, FALSE);
+        SetSpriteInvisibility(2, FALSE);
     }
     else
     {
-        sub_81C4204(2, TRUE);
+        SetSpriteInvisibility(2, TRUE);
     }
 }
 
