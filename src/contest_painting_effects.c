@@ -3,14 +3,17 @@
 #include "contest_painting.h"
 #include "constants/rgb.h"
 
-extern u8 gUnknown_03006164;
-extern u16 (*gUnknown_03006168)[][32];
-extern u8 gUnknown_0300616C;
-extern u8 gUnknown_03006170;
-extern u8 gUnknown_03006174;
-extern u8 gUnknown_03006178;
-extern u8 gUnknown_0300617C;
-extern u8 gUnknown_03006180;
+// IWRAM common
+u8 gUnknown_03006164;
+u16 (*gUnknown_03006168)[][32];
+u8 gUnknown_0300616C;
+u8 gUnknown_03006170;
+u8 gUnknown_03006174;
+u8 gUnknown_03006178;
+u8 gUnknown_0300617C;
+u8 gUnknown_03006180;
+u16 gUnknown_03006184;
+u16 gUnknown_03006188;
 
 // this file's functions
 void sub_8125230(void);

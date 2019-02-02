@@ -119,6 +119,7 @@ struct Struct203CEDC
     u8 unkC;
 };
 
+// EWRAM vars
 static EWRAM_DATA struct Struct203CEC4 *gUnknown_0203CEC4 = NULL;
 EWRAM_DATA struct Struct203CEC8 gUnknown_0203CEC8 = {0};
 static EWRAM_DATA struct Struct203CEDC *gUnknown_0203CEDC = NULL;
@@ -134,7 +135,8 @@ static EWRAM_DATA u16 gUnknown_0203CEFC = 0;
 static EWRAM_DATA u16 gUnknown_0203CEFE = 0; // unused
 EWRAM_DATA u8 gUnknown_0203CF00[3] = {0};
 
-extern void (*gUnknown_03006328)(u8, TaskFunc);
+// IWRAM common
+void (*gUnknown_03006328)(u8, TaskFunc);
 
 static void reset_brm(void);
 static void PartyMenuInitCallback(void);

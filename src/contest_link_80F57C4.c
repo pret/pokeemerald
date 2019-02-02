@@ -3,7 +3,6 @@
 #include "bg.h"
 #include "contest.h"
 #include "contest_link_80F57C4.h"
-#include "contest_painting.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -67,10 +66,9 @@ struct ContestLink80F57C4
     u8 *unkC[4];
 };
 
+EWRAM_DATA struct ContestLink80F57C4 *gUnknown_0203A034 = NULL;
+
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-
-extern struct ContestLink80F57C4 *gUnknown_0203A034;
-
 extern const struct BgTemplate gUnknown_0858D888[4];
 extern const struct WindowTemplate gUnknown_0858D898[];
 extern const struct CompressedSpriteSheet gUnknown_0858D878[];
@@ -138,7 +136,7 @@ void sub_80F57C4(void)
     InitBgsFromTemplates(0, gUnknown_0858D888, ARRAY_COUNT(gUnknown_0858D888));
     for (i = 0; i < 4; i++)
         SetBgTilemapBuffer(i, gUnknown_0203A034->unkC[i]);
-    
+
     InitWindows(gUnknown_0858D898);
     DeactivateAllTextPrinters();
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
@@ -720,7 +718,7 @@ static void sub_80F66B4(u8 taskId)
             {
                 nationalDexNum = SpeciesToNationalPokedexNum(gContestMons[i].species);
                 GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
-            }   
+            }
         }
 
         gTasks[taskId].data[10] = 0;
@@ -761,7 +759,7 @@ static void sub_80F67C4(u8 taskId)
 {
     if (!(gIsLinkContest & 0x1))
         BravoTrainerPokemonProfile_BeforeInterview2(gContestFinalStandings[gContestPlayerMonIndex]);
-    
+
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_80F6820;
 }
@@ -1282,7 +1280,7 @@ static void sub_80F6F68(struct Sprite *sprite)
         struct Sprite *sprite2 = &gSprites[sprite->data[i]];
         sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x + (i + 1) * 64;
     }
-    
+
     if (sprite->pos1.x == sprite->data[4])
         sprite->callback = sub_80F6FDC;
 }
@@ -1348,7 +1346,7 @@ static void sub_80F7144(void)
     sprite->invisible = 1;
     for (i = 0; i < 3; i++)
         gSprites[sprite->data[i]].invisible = 1;
-    
+
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;
     SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
