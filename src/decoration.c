@@ -1244,17 +1244,17 @@ void sub_8127E18(void)
 
     for (i = 0; i < 14; i ++)
     {
-        if (FlagGet(0xAE + i) == TRUE)
+        if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
         {
-            FlagClear(0xAE + i);
+            FlagClear(FLAG_DECORATION_1 + i);
             for (j = 0; j < gMapHeader.events->eventObjectCount; j ++)
             {
-                if (gMapHeader.events->eventObjects[j].flagId == 0xAE + i)
+                if (gMapHeader.events->eventObjects[j].flagId == FLAG_DECORATION_1 + i)
                 {
                     break;
                 }
             }
-            VarSet(0x3F20 + gMapHeader.events->eventObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
+            VarSet(VAR_0x3F20 + gMapHeader.events->eventObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
             gSpecialVar_0x8005 = gMapHeader.events->eventObjects[j].localId;
             gSpecialVar_0x8006 = sCurDecorMapX;
             gSpecialVar_0x8007 = sCurDecorMapY;
