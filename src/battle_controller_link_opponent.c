@@ -1280,7 +1280,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_FIRE_RED
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
-            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
+            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
             else
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
@@ -1288,7 +1288,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
         {
-            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
+            if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_MAY];
             else
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RS_BRENDAN];

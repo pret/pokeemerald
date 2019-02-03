@@ -75,6 +75,10 @@ int GetAnimBgAttribute(u8 bgId, u8 attributeId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6450(struct Sprite *sprite);
+void sub_80A8AEC(struct Sprite *sprite);
+void sub_80A8A6C(struct Sprite *sprite);
+void sub_80A8E30(struct Sprite *sprite);
+void sub_80A8B64(struct Sprite *sprite);
 void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x, s16 *y);
 void DestroySpriteAndMatrix(struct Sprite *sprite);
 void AnimTranslateLinearSimple(struct Sprite *sprite);

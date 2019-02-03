@@ -119,6 +119,7 @@ struct Struct203CEDC
     u8 unkC;
 };
 
+// EWRAM vars
 static EWRAM_DATA struct Struct203CEC4 *gUnknown_0203CEC4 = NULL;
 EWRAM_DATA struct Struct203CEC8 gUnknown_0203CEC8 = {0};
 static EWRAM_DATA struct Struct203CEDC *gUnknown_0203CEDC = NULL;
@@ -134,7 +135,8 @@ static EWRAM_DATA u16 gUnknown_0203CEFC = 0;
 static EWRAM_DATA u16 gUnknown_0203CEFE = 0; // unused
 EWRAM_DATA u8 gUnknown_0203CF00[3] = {0};
 
-extern void (*gUnknown_03006328)(u8, TaskFunc);
+// IWRAM common
+void (*gUnknown_03006328)(u8, TaskFunc);
 
 static void reset_brm(void);
 static void PartyMenuInitCallback(void);
@@ -2087,7 +2089,8 @@ static bool8 RenderPartyMenuBoxes(void)
     RenderPartyMenuBox(gUnknown_0203CEC4->data[0]);
     if (++gUnknown_0203CEC4->data[0] == 6)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static u8* GetPartyMiscGraphicsTile(u16 tileId)
@@ -2130,7 +2133,8 @@ static bool8 party_menu_add_per_mon_objects(void)
     party_menu_add_per_mon_objects_internal(gUnknown_0203CEC4->data[0]);
     if (++gUnknown_0203CEC4->data[0] == 6)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static void sub_81B0F28(void)
@@ -2202,6 +2206,7 @@ void sub_81B0FCC(u8 slot, u8 b)
 static u8 GetPartyBoxPalBitfield(u8 slot, u8 b)
 {
     u8 returnVar = 0;
+
     if (b == 1)
         returnVar |= 1;
     if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
@@ -2321,7 +2326,8 @@ static s8* sub_81B13EC(void)
 {
     if (gUnknown_0203CEC8.unkB == 8 || gUnknown_0203CEC8.unkB == 10)
         return &gUnknown_0203CEC8.unkA;
-    return &gUnknown_0203CEC8.unk9;
+    else
+        return &gUnknown_0203CEC8.unk9;
 }
 
 static void sub_81B140C(u8 taskId, s8 *ptr)
@@ -2836,7 +2842,7 @@ static void sub_81B1DB8(struct Pokemon *mon, u16 item)
     SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
 }
 
-static u8 sub_81B1E00(struct Pokemon* mon)
+static u8 TryTakeMonItem(struct Pokemon* mon)
 {
     u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
 
@@ -4265,7 +4271,7 @@ static void CursorCb_TakeItem(u8 taskId)
     PlaySE(SE_SELECT);
     sub_81B302C(&gUnknown_0203CEC4->unkC[0]);
     sub_81B302C(&gUnknown_0203CEC4->unkC[1]);
-    switch (sub_81B1E00(mon))
+    switch (TryTakeMonItem(mon))
     {
     case 0:
         GetMonNickname(mon, gStringVar1);
@@ -5203,7 +5209,7 @@ void sub_81B617C(void)
     bool8 inBattle;
     u8 i;
     u8 msgIdMaybe;
-    register TaskFunc task asm("r0");
+    TaskFunc task;
 
     if (gMain.inBattle)
     {
@@ -5215,6 +5221,7 @@ void sub_81B617C(void)
         inBattle = FALSE;
         doubleBattleStatus = 0;
     }
+
     if (GetItemEffectType(gSpecialVar_ItemId) == 10)
     {
         gUnknown_0203CEC8.unk9 = 0;
@@ -5231,9 +5238,14 @@ void sub_81B617C(void)
     }
     else
     {
-        msgIdMaybe = (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_TM_HM) ? 4 : 5;
+        if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_TM_HM)
+            msgIdMaybe = 4;
+        else
+            msgIdMaybe = 5;
+
         task = sub_81B1370;
     }
+
     InitPartyMenu(inBattle, doubleBattleStatus, 3, 1, msgIdMaybe, task, callback);
 }
 
@@ -5263,9 +5275,11 @@ static bool8 IsHPRecoveryItem(u16 item)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
         effect = gItemEffectTable[item - ITEM_POTION];
+
     if ((effect[4] & 4) != 0)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static void GetMedicineItemEffectMessage(u16 item)
@@ -5575,6 +5589,7 @@ void dp05_ether(u8 taskId, TaskFunc task)
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
         effect = gItemEffectTable[item - ITEM_POTION];
+
     if ((effect[4] & 0x10) == 0)
     {
         gUnknown_0203CEC8.unkE = 0;
@@ -6196,151 +6211,69 @@ void sub_81B7C74(u8 taskId, TaskFunc task)
 u8 GetItemEffectType(u16 item)
 {
     const u8 *itemEffect;
-#ifndef NONMATCHING
-    register u8 itemEffect0 asm("r1");
-    register u8 itemEffect3 asm("r3");
-    register u32 itemEffect0_r0 asm("r0"); // u32 to prevent shifting when transferring itemEffect0 to this
-    u8 mask;
-#else
-#define itemEffect0 itemEffect[0]
-#define itemEffect3 itemEffect[3]
-#define mask 0x3F
-#endif
+    u32 statusCure;
 
     if (!IS_POKEMON_ITEM(item))
-    {
         return 22;
-    }
+
+    // Read the item's effect properties.
+    if (item == ITEM_ENIGMA_BERRY)
+        itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
     else
+        itemEffect = gItemEffectTable[item - ITEM_POTION];
+
+    if ((itemEffect[0] & 0x3F) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & 0x80))
+        return 0;
+    else if (itemEffect[0] & 0x40)
+        return 10;
+    else if (itemEffect[3] & 0x40)
+        return 1;
+
+    statusCure = itemEffect[3] & 0x3F;
+    if (statusCure || (itemEffect[0] >> 7))
     {
-        // Read the item's effect properties.
-        if (item == ITEM_ENIGMA_BERRY)
-        {
-            itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-        }
+        if (statusCure == 0x20)
+            return 4;
+        else if (statusCure == 0x10)
+            return 3;
+        else if (statusCure == 0x8)
+            return 5;
+        else if (statusCure == 0x4)
+            return 6;
+        else if (statusCure == 0x2)
+            return 7;
+        else if (statusCure == 0x1)
+            return 8;
+        else if (itemEffect[0] >> 7 && !statusCure)
+            return 9;
         else
-        {
-            itemEffect = gItemEffectTable[item - ITEM_POTION];
-        }
-
-#ifndef NONMATCHING
-        itemEffect0 = itemEffect[0];
-        mask = 0x3F;
-#endif
-
-        if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2])
-        {
-            return 0;
-        }
-#ifndef NONMATCHING
-        itemEffect3 = itemEffect[3];
-#endif
-        if (itemEffect3 & 0x80)
-        {
-            return 0;
-        }
-        else if (itemEffect0 & 0x40)
-        {
-            return 10;
-        }
-        else if (itemEffect3 & 0x40)
-        {
-            return 1;
-        }
-        else if ((itemEffect3 & mask) || (itemEffect0 >> 7))
-        {
-            if ((itemEffect3 & mask) == 0x20)
-            {
-                return 4;
-            }
-            else if ((itemEffect3 & mask) == 0x10)
-            {
-                return 3;
-            }
-            else if ((itemEffect3 & mask) == 0x8)
-            {
-                return 5;
-            }
-            else if ((itemEffect3 & mask) == 0x4)
-            {
-                return 6;
-            }
-            else if ((itemEffect3 & mask) == 0x2)
-            {
-                return 7;
-            }
-            else if ((itemEffect3 & mask) == 0x1)
-            {
-                return 8;
-            }
-            // alternate fakematching
-            // itemEffect0_r0 = itemEffect0 >> 7;
-            // asm(""); // increase live length for greg
-            // if ((itemEffect0_r0 != 0) && (itemEffect3 & mask) == 0)
-#ifndef NONMATCHING
-            else if (((itemEffect0_r0 = itemEffect0 >> 7) != 0) && (itemEffect3 & mask) == 0)
-#else
-            else if (((itemEffect[0] >> 7) != 0) && (itemEffect[3] & 0x3F) == 0)
-#endif
-            {
-                return 9;
-            }
-            else
-            {
-                return 11;
-            }
-        }
-        else if (itemEffect[4] & 0x44)
-        {
-            return 2;
-        }
-        else if (itemEffect[4] & 0x2)
-        {
-            return 12;
-        }
-        else if (itemEffect[4] & 0x1)
-        {
-            return 13;
-        }
-        else if (itemEffect[5] & 0x8)
-        {
-            return 14;
-        }
-        else if (itemEffect[5] & 0x4)
-        {
-            return 15;
-        }
-        else if (itemEffect[5] & 0x2)
-        {
-            return 16;
-        }
-        else if (itemEffect[5] & 0x1)
-        {
-            return 17;
-        }
-        else if (itemEffect[4] & 0x80)
-        {
-            return 18;
-        }
-        else if (itemEffect[4] & 0x20)
-        {
-            return 19;
-        }
-        else if (itemEffect[5] & 0x10)
-        {
-            return 20;
-        }
-        else if (itemEffect[4] & 0x18)
-        {
-            return 21;
-        }
-        return 22;
+            return 11;
     }
-#ifdef NONMATCHING
-#undef itemEffect0
-#undef itemEffect3
-#undef mask
-#endif
+
+    if (itemEffect[4] & 0x44)
+        return 2;
+    else if (itemEffect[4] & 0x2)
+        return 12;
+    else if (itemEffect[4] & 0x1)
+        return 13;
+    else if (itemEffect[5] & 0x8)
+        return 14;
+    else if (itemEffect[5] & 0x4)
+        return 15;
+    else if (itemEffect[5] & 0x2)
+        return 16;
+    else if (itemEffect[5] & 0x1)
+        return 17;
+    else if (itemEffect[4] & 0x80)
+        return 18;
+    else if (itemEffect[4] & 0x20)
+        return 19;
+    else if (itemEffect[5] & 0x10)
+        return 20;
+    else if (itemEffect[4] & 0x18)
+        return 21;
+    else
+        return 22;
 }
 
 static void sub_81B7E4C(u8 taskId)

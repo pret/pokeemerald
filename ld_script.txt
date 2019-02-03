@@ -27,7 +27,7 @@ SECTIONS {
         INCLUDE "sym_bss.ld"
 
         /* .bss.code starts at 0x3001AA8 */
-        src/m4a_2.o(.bss.code);
+        src/m4a.o(.bss.code);
 
         /* COMMON starts at 0x30022A8 */
         INCLUDE "sym_common.ld"
@@ -320,9 +320,7 @@ SECTIONS {
     {
         asm/libgcnmultiboot.o(.text);
         asm/m4a_1.o(.text);
-        src/m4a_2.o(.text);
-        asm/m4a_3.o(.text);
-        src/m4a_4.o(.text);
+        src/m4a.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
@@ -444,7 +442,6 @@ SECTIONS {
         src/battle_anim.o(.rodata);
         src/battle_anim_80A5C6C.o(.rodata);
         data/map_events.o(.rodata);
-        data/battle_anim_80A9C70.o(.rodata);
         src/battle_anim_80A9C70.o(.rodata);
         src/title_screen.o(.rodata);
         src/field_weather.o(.rodata);

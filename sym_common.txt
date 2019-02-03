@@ -23,57 +23,14 @@
 	.include "contest.o"
 	.include "tv.o"
 	.include "mauville_old_man.o"
-
-gUnknown_03006164: @ 3006164
+	.include "contest_painting_effects.o"
+	
 	.space 0x4
-
-gUnknown_03006168: @ 3006168
-	.space 0x4
-
-gUnknown_0300616C: @ 300616C
-	.space 0x4
-
-gUnknown_03006170: @ 3006170
-	.space 0x4
-
-gUnknown_03006174: @ 3006174
-	.space 0x4
-
-gUnknown_03006178: @ 3006178
-	.space 0x4
-
-gUnknown_0300617C: @ 300617C
-	.space 0x4
-
-gUnknown_03006180: @ 3006180
-	.space 0x4
-
-gUnknown_03006184: @ 3006184
-	.space 0x4
-
-gUnknown_03006188: @ 3006188
-	.space 0x8
-
-gUnknown_03006190: @ 3006190
-	.space 0x10
-
-gUnknown_030061A0: @ 30061A0
-	.space 0x20
-
-gUnknown_030061C0: @ 30061C0
-	.space 0x4
-
-gContestPaintingMonPalette: @ 30061C4
-	.space 0xC
-
+	
+	.include "contest_painting.o"
 	.include "field_specials.o"
-
-gCB2_AfterEvolution: @ 30061E8
-	.space 0x4
-
-gDexCryScreenState: @ 30061EC
-	.space 0x4
-
+	.include "evolution_scene.o"
+	.include "pokedex_cry_screen.o"
 	.include "save.o"
 	.include "battle_tower.o"
 	.include "intro.o"
@@ -84,14 +41,14 @@ gDexCryScreenState: @ 30061EC
 	.space 0x8
 	
 	.include "list_menu.o"
-
-gUnknown_03006328: @ 3006328
-	.space 0x48
+	.include "party_menu.o"
+	
+	.space 0x44
 
 gUnknown_03006370: @ 3006370
 	.space 0x10
 
-	.include "m4a_2.o"
+	.include "m4a.o"
 	.include "agb_flash.o"
 
 gRfuState: @ 3007868

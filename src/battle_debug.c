@@ -701,7 +701,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     // A main list item is active, handle input.
     if (data->activeWindow == ACTIVE_WIN_MAIN)
     {
-        listItemId = ListMenuHandleInputGetItemId(data->mainListTaskId);
+        listItemId = ListMenu_ProcessInput(data->mainListTaskId);
         if (listItemId != LIST_B_PRESSED && listItemId != LIST_NOTHING_CHOSEN && listItemId < LIST_ITEM_COUNT)
         {
             data->currentMainListItemId = listItemId;
@@ -715,7 +715,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
     // Secondary list is active, handle input.
     else if (data->activeWindow == ACTIVE_WIN_SECONDARY)
     {
-        listItemId = ListMenuHandleInputGetItemId(data->secondaryListTaskId);
+        listItemId = ListMenu_ProcessInput(data->secondaryListTaskId);
         if (listItemId == LIST_B_PRESSED)
         {
             DestroyListMenuTask(data->secondaryListTaskId, NULL, NULL);

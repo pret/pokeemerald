@@ -52,14 +52,14 @@ extern const struct SpriteFrameImage gUnknown_082FF3A8[];
 extern const struct SpriteFrameImage gUnknown_082FF3C8[];
 extern const struct SpriteFrameImage gUnknown_082FF3E8[];
 extern const struct SpriteFrameImage gUnknown_082FF408[];
-extern const struct SpriteFrameImage gUnknown_082FF428[];
-extern const struct SpriteFrameImage gUnknown_082FF448[];
-extern const struct SpriteFrameImage gUnknown_082FF468[];
-extern const struct SpriteFrameImage gUnknown_082FF490[];
-extern const struct SpriteFrameImage gUnknown_082FF4B8[];
-extern const struct SpriteFrameImage gUnknown_082FF4D8[];
-extern const struct SpriteFrameImage gUnknown_082FF4F8[];
-extern const struct SpriteFrameImage gUnknown_082FF518[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_May[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Leaf[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
 extern const union AffineAnimCmd *const gUnknown_082FF618[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *gPlayerMonSpriteAnimsTable[];
@@ -2307,14 +2307,14 @@ const struct SpriteTemplate gUnknown_08329D98[MAX_BATTLERS_COUNT] =
     },
 };
 
-static const struct SpriteTemplate gUnknown_08329DF8[] =
+static const struct SpriteTemplate gSpriteTemplateTable_TrainerBackSprites[] =
 {
     {
         .tileTag = 0xFFFF,
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF428,
+        .images = gTrainerBackPicTable_Brendan,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2323,7 +2323,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF448,
+        .images = gTrainerBackPicTable_May,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2332,7 +2332,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF468,
+        .images = gTrainerBackPicTable_Red,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2341,7 +2341,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF490,
+        .images = gTrainerBackPicTable_Leaf,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2350,7 +2350,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF4B8,
+        .images = gTrainerBackPicTable_RubySapphireBrendan,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2359,7 +2359,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF4D8,
+        .images = gTrainerBackPicTable_RubySapphireMay,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2368,7 +2368,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF4F8,
+        .images = gTrainerBackPicTable_Wally,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -2377,7 +2377,7 @@ static const struct SpriteTemplate gUnknown_08329DF8[] =
         .paletteTag = 0,
         .oam = &gOamData_831ACB0,
         .anims = NULL,
-        .images = gUnknown_082FF518,
+        .images = gTrainerBackPicTable_Steven,
         .affineAnims = gUnknown_082FF618,
         .callback = sub_8039BB4,
     },
@@ -3532,7 +3532,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
-        gMultiuseSpriteTemplate = gUnknown_08329DF8[trainerSpriteId];
+        gMultiuseSpriteTemplate = gSpriteTemplateTable_TrainerBackSprites[trainerSpriteId];
         gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerSpriteId];
     }
     else

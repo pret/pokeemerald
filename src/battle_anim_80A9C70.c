@@ -28,6 +28,182 @@ static void sub_80A9E44(struct Sprite *sprite);
 static void sub_80A9E78(struct Sprite *sprite);
 
 // const rom data
+static const union AnimCmd sSpriteAnim_853EDE4[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(4, 3),
+    ANIMCMD_FRAME(8, 3),
+    ANIMCMD_FRAME(12, 3),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sSpriteAnimTable_853EDF8[] =
+{
+    sSpriteAnim_853EDE4
+};
+
+const struct SpriteTemplate gUnknown_0853EDFC =
+{
+    .tileTag = ANIM_TAG_UNUSED_ORB,
+    .paletteTag = ANIM_TAG_UNUSED_ORB,
+    .oam = &gUnknown_0852490C,
+    .anims = sSpriteAnimTable_853EDF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8AEC,
+};
+
+const struct SpriteTemplate gUnknown_0853EE14 =
+{
+    .tileTag = ANIM_TAG_UNUSED_ORB,
+    .paletteTag = ANIM_TAG_UNUSED_ORB,
+    .oam = &gUnknown_0852490C,
+    .anims = sSpriteAnimTable_853EDF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8A6C,
+};
+
+static const union AnimCmd sSpriteAnim_853EE2C[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sSpriteAnimTable_853EE34[] =
+{
+    sSpriteAnim_853EE2C
+};
+
+const struct SpriteTemplate gUnknown_0853EE38 =
+{
+    .tileTag = ANIM_TAG_WEATHER_BALL,
+    .paletteTag = ANIM_TAG_WEATHER_BALL,
+    .oam = &gUnknown_08524914,
+    .anims = sSpriteAnimTable_853EE34,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8E30,
+};
+
+const struct SpriteTemplate gUnknown_0853EE50 =
+{
+    .tileTag = ANIM_TAG_WEATHER_BALL,
+    .paletteTag = ANIM_TAG_WEATHER_BALL,
+    .oam = &gUnknown_08524914,
+    .anims = sSpriteAnimTable_853EE34,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8EE4,
+};
+
+static const union AnimCmd sSpriteAnim_853EE68[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(16, 3),
+    ANIMCMD_FRAME(32, 3),
+    ANIMCMD_FRAME(48, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_853EE80[] =
+{
+    sSpriteAnim_853EE68
+};
+
+const struct SpriteTemplate gUnknown_0853EE84 =
+{
+    .tileTag = ANIM_TAG_SPARKLE_4,
+    .paletteTag = ANIM_TAG_SPARKLE_4,
+    .oam = &gUnknown_08524914,
+    .anims = sSpriteAnimTable_853EE80,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8B64,
+};
+
+const struct SpriteTemplate gUnknown_0853EE9C =
+{
+    .tileTag = ANIM_TAG_UNUSED_MONSTER_FOOT,
+    .paletteTag = ANIM_TAG_UNUSED_MONSTER_FOOT,
+    .oam = &gUnknown_08524914,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8AEC,
+};
+
+static const union AnimCmd sSpriteAnim_853EEB4[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sSpriteAnim_853EEBC[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sSpriteAnim_853EEC4[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sSpriteAnimTable_853EECC[] =
+{
+    sSpriteAnim_853EEB4,
+    sSpriteAnim_853EEBC,
+    sSpriteAnim_853EEC4
+};
+
+const struct SpriteTemplate gUnknown_0853EED8 =
+{
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
+    .oam = &gUnknown_08524914,
+    .anims = sSpriteAnimTable_853EECC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8AEC,
+};
+
+static const union AnimCmd sSpriteAnim_853EEF0[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sSpriteAnimTable_853EEF8[] =
+{
+    sSpriteAnim_853EEF0
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_853EEFC[] =
+{
+    AFFINEANIMCMD_FRAME(96, 96, 0, 0),
+    AFFINEANIMCMD_FRAME(2, 2, 0, 1),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_853EEF8[] =
+{
+    sSpriteAffineAnim_853EEFC
+};
+
+const struct SpriteTemplate gUnknown_0853EF18 =
+{
+    .tileTag = ANIM_TAG_UNUSED_ORB,
+    .paletteTag = ANIM_TAG_UNUSED_ORB,
+    .oam = &gUnknown_085249CC,
+    .anims = sSpriteAnimTable_853EEF8,
+    .images = NULL,
+    .affineAnims = sSpriteAffineAnimTable_853EEF8,
+    .callback = sub_80A8A6C,
+};
+
 static const struct Subsprite gUnknown_0853EF30[] =
 {
     {.x = -16, .y = -16, .shape = ST_OAM_SQUARE,      .size = 3, .tileOffset =   0, .priority = 2},

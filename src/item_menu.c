@@ -1102,7 +1102,7 @@ void Task_BagMenu(u8 taskId)
         }
         else
         {
-            int listPosition = ListMenuHandleInputGetItemId(data[0]);
+            int listPosition = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], scrollPos, cursorPos);
             switch (listPosition)
             {
@@ -1304,7 +1304,7 @@ void bag_menu_swap_items(u8 taskId)
 void sub_81AC3C0(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    int r7;
+    int input;
 
     if (sub_81221EC() != TRUE)
     {
@@ -1316,15 +1316,15 @@ void sub_81AC3C0(u8 taskId)
         }
         else
         {
-            r7 = ListMenuHandleInputGetItemId(data[0]);
+            input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &gUnknown_0203CE58.scrollPosition[gUnknown_0203CE58.pocket], &gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
             sub_80D4FC8(0);
             sub_80D4FEC(gUnknown_0203CE58.cursorPosition[gUnknown_0203CE58.pocket]);
-            switch (r7)
+            switch (input)
             {
-                case -1:
+                case LIST_NOTHING_CHOSEN:
                     break;
-                case -2:
+                case LIST_B_PRESSED:
                     PlaySE(SE_SELECT);
                     if (gMain.newKeys & A_BUTTON)
                         sub_81AC498(taskId);
@@ -1546,9 +1546,9 @@ void Task_HandleInBattleItemMenuInput(u8 taskId)
         s8 r4 = Menu_ProcessInputNoWrap();
         switch (r4)
         {
-            case -2:
+            case MENU_NOTHING_CHOSEN:
                 break;
-            case -1:
+            case MENU_B_PRESSED:
                 PlaySE(SE_SELECT);
                 gUnknown_08613FB4[4].func.void_u8(taskId);
                 break;

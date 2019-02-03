@@ -38,8 +38,6 @@ struct BattleWindowText
     u8 shadowColor;
 };
 
-extern u8 gUnknown_0203C7B4;
-
 extern const u8 gTrainerClassNames[][13];
 extern const u16 gUnknown_08D85620[];
 

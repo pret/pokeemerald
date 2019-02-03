@@ -29,10 +29,11 @@
 #define B_ACTION_SAFARI_GO_NEAR         7
 #define B_ACTION_SAFARI_RUN             8
 #define B_ACTION_WALLY_THROW            9
-// The exact purposes of these are unclear
-#define B_ACTION_EXEC_SCRIPT            10 // when executing an action
+#define B_ACTION_EXEC_SCRIPT            10
+#define B_ACTION_TRY_FINISH             11
+#define B_ACTION_FINISHED               12
+
 #define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
-#define B_ACTION_FINISHED               12 // when executing an action
 #define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
 #define B_ACTION_DEBUG                  20
 #define B_ACTION_NONE                   0xFF
@@ -182,7 +183,6 @@ struct ProtectStruct
     u32 helpingHand:1;
     u32 bounceMove:1;
     u32 stealMove:1;
-    u32 flag0Unknown:1;
     u32 prlzImmobility:1;
     u32 confusionSelfDmg:1;
     u32 targetNotAffected:1;
@@ -192,10 +192,10 @@ struct ProtectStruct
     u32 loveImmobility:1;
     u32 usedDisabledMove:1;
     u32 usedTauntedMove:1;
-    u32 flag2Unknown:1;
+    u32 flag2Unknown:1; // Only set to 0 once. Checked in 'WasUnableToUseMove' function.
     u32 flinchImmobility:1;
     u32 notFirstStrike:1;
-    u32 palaceAbleToUseMove:1;
+    u32 palaceUnableToUseMove:1;
     u32 usesBouncedMove:1;
     u32 usedHealBlockedMove:1;
     u32 usedGravityPreventedMove:1;

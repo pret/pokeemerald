@@ -48,6 +48,8 @@ extern MainCallback gPostMenuFieldCallback;
 extern u8 gSelectedOrderFromParty[4];
 extern u8 gUnknown_0203CF00[3];
 
+extern void (*gUnknown_03006328)(u8, TaskFunc);
+
 extern const u16 gTutorMoves[];
 
 void sub_81B0FCC(u8 slot, u8 b);
