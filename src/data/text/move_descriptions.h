@@ -3196,6 +3196,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_CLANGING_SCALES - 1] = sCLANGING_SCALESDescription,
     [MOVE_DRAGON_HAMMER - 1] = sDRAGON_HAMMERDescription,
     [MOVE_BRUTAL_SWING - 1] = sBRUTAL_SWINGDescription,
+    [MOVE_AURORA_VEIL - 1] = sAURORA_VEILDescription,
     [MOVE_SHELL_TRAP - 1] = sSHELL_TRAPDescription,
     [MOVE_FLEUR_CANNON - 1] = sFLEUR_CANNONDescription,
     [MOVE_PSYCHIC_FANGS - 1] = sPSYCHIC_FANGSDescription,
