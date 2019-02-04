@@ -829,26 +829,38 @@ u8 Save_LoadGameData(u8 a1)
     return result;
 }
 
-u16 sub_815355C(void)
-{
-    u16 i, v3;
-    struct SaveSection* savSection;
-
-    savSection = gFastSaveSection = &gSaveDataBuffer;
+void ValidateSave(void) {
+    gFastSaveSection = &gSaveDataBuffer;
     if (gFlashMemoryPresent != TRUE)
-        return 0;
+        return;
     UpdateSaveAddresses();
     GetSaveValidStatus(gRamSaveSectionLocations);
-    v3 = SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
+}
+
+// Returns the sum of the trainer number, or 0 if there is no save file.
+u16 GetTrainerNumerSum(void)
+{
+    u16 i, saveSlotOffset;
+    struct SaveSection* savSection;
+
+    if (gFlashMemoryPresent != TRUE)
+        return;
+
+    savSection = gFastSaveSection;
+    saveSlotOffset = SECTOR_SAVE_SLOT_LENGTH * (gSaveCounter % 2);
     for (i = 0; i < SECTOR_SAVE_SLOT_LENGTH; i++)
     {
-        DoReadFlashWholeSection(i + v3, gFastSaveSection);
-        if (gFastSaveSection->id == 0)
-            return savSection->data[10] +
-                   savSection->data[11] +
-                   savSection->data[12] +
-                   savSection->data[13];
+        DoReadFlashWholeSection(i + saveSlotOffset, gFastSaveSection);
+        if (gFastSaveSection->id == 0) {
+            struct SaveBlock2* data = (struct SaveBlock2*)(&savSection->data);
+            return data->playerTrainerId[0] +
+                   data->playerTrainerId[1] +
+                   data->playerTrainerId[2] +
+                   data->playerTrainerId[3];
+        }
     }
+
+    // FIXME: Error: Didn't find SaveBlock2 section in save slots.
     return 0;
 }
 

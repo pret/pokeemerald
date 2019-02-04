@@ -2978,7 +2978,10 @@ static void sub_800F048(void)
     }
 }
 
-bool32 sub_800F0B8(void)
+// This is a guess because it uses gUnknown_03007890->unk_06, which is unknown so far.
+//
+// The usage is some kind of short-circuit: if (<that var> == 0) return FALSE;
+bool32 guess_IsgRecvCmdsEmpty(void)
 {
     s32 i;
     s32 j;
@@ -3199,7 +3202,7 @@ bool32 sub_800F4F0(void)
         for (i = 0; i < CMD_LENGTH - 1; i++)
             gSendCmd[i] = 0;
     }
-    return sub_800F0B8();
+    return guess_IsgRecvCmdsEmpty();
 }
 
 void sub_800F638(u8 unused, u32 flags)
@@ -3272,7 +3275,7 @@ struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void)
     return &gUnknown_02022B14;
 }
 
-bool32 sub_800F7E4(void)
+bool32 IsLinkRfuInitialized(void)
 {
     return gUnknown_03005000.unk_00 == rfu_func_080F97B8;
 }

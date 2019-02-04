@@ -714,11 +714,12 @@ void sub_8009F18(void)
     gLinkCallback = sub_8009F70;
 }
 
-bool32 sub_8009F3C(void)
+// Returns TRUE if either wireless or wired link has been initialized, FALSE otherwise.
+bool32 IsAnyLinkInitialized(void)
 {
     if (gWirelessCommType)
     {
-        return sub_800F7E4();
+        return IsLinkRfuInitialized();
     }
     if (gLinkCallback == sub_8009F70)
     {
@@ -1755,7 +1756,7 @@ static void CB2_PrintErrorMessage(void)
                 PlaySE(SE_PIN);
                 gWirelessCommType = 0;
                 sLinkErrorBuffer.unk_06 = 0;
-                sub_81700F8();
+                ResetSaveHeap();
             }
         }
         else if (gWirelessCommType == 2)
@@ -1829,6 +1830,8 @@ void sub_800B3A4(u32 who)
     }
 }
 
+// Attempts to advance the Link state machine. Returns TRUE if work was done, or FALSE if
+// nothing happened.
 bool8 HandleLinkConnection(void)
 {
     bool32 r4;
@@ -1849,7 +1852,7 @@ bool8 HandleLinkConnection(void)
         r5 = sub_8010F1C();
         if (sub_808766C() == TRUE)
         {
-            if (r4 == TRUE || sub_800F0B8() || r5)
+            if (r4 == TRUE || guess_IsgRecvCmdsEmpty() || r5)
             {
                 return TRUE;
             }

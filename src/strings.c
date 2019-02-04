@@ -97,7 +97,11 @@ const u8 gText_DefaultNameLucy[] = _("LUCY");
 const u8 gText_DefaultNameHalie[] = _("HALIE");
 const u8 gText_ThisIsAPokemon[] = _("This is what we call a “POKéMON.”{PAUSE 96}\p");
 const u8 gText_5MarksPokemon[] = _("????? POKéMON");
-const u8 gText_UnkHeight[] = _("{CLEAR_TO 0x0C}??'??”");
+// Note: The string ??' is a trigraph in C. To escape it, you need to escape the question mark.
+// However, ANSI C doesn't allow the question mark to be escaped. So instead, this string is written
+// as two consecutive string literals, which will be automatically joined after the preprocessor is
+// finished.
+const u8 gText_UnkHeight[] = _("{CLEAR_TO 0x0C}??""'??”");
 const u8 gText_UnkWeight[] = _("????.? lbs.");
 const u8 gUnknown_085E86DC[] = _("                       POKéMON");
 const u8 gUnknown_085E86FB[] = _("{CLEAR_TO 0x0C}    '    ”");

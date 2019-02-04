@@ -44,6 +44,8 @@ u8 CreateTask(TaskFunc func, u8 priority)
         }
     }
 
+    // Error: Too many tasks!
+    // FIXME: This silently fails.
     return 0;
 }
 

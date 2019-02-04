@@ -72,11 +72,12 @@ void ClearSav1(void)
     CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1) + sizeof(gSaveblock1_DMA));
 }
 
-void SetSaveBlocksPointers(u16 offset)
+// Uses the trainerId as part of a pseudo-random number generation.
+void SetSaveBlocksPointers(u16 trainerId)
 {
     struct SaveBlock1** sav1_LocalVar = &gSaveBlock1Ptr;
 
-    offset = (offset + Random()) & (SAVEBLOCK_MOVE_RANGE - 4);
+    u16 offset = (trainerId + Random()) & (SAVEBLOCK_MOVE_RANGE - 4);
 
     gSaveBlock2Ptr = (void*)(&gSaveblock2) + offset;
     *sav1_LocalVar = (void*)(&gSaveblock1) + offset;

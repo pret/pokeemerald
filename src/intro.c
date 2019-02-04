@@ -886,6 +886,7 @@ static void sub_816F9D4(struct Sprite *);
 static void sub_816FAB0(struct Sprite *);
 static u8 sub_816FDB8(s16, s16, s16);
 
+// This does graphics related stuff.
 static void VBlankCB_Intro(void)
 {
     LoadOam();
@@ -924,6 +925,25 @@ static void SerialCB_CopyrightScreen(void)
     GameCubeMultiBoot_HandleSerialInterrupt(&gMultibootProgramStruct);
 }
 
+// This is the credit fade-in state machine.
+//
+// State 0: Initial set up.
+//  - Registers a serial interrupt handler that listens for a GameCube.
+//  - Registers a VBlank interrupt handler that does graphics management.
+//  - Game is unresponsive to key presses.
+//
+// States 1-139: Delay / animation.
+//  - No change from above
+//
+// State 140: Initialize Fade-in
+//  - No change
+//
+// State 141: Wait for Fade-in
+//  - No change, until fade-in complete.
+//  - Advance the intro state-machine to MainCB2_Intro
+//  - Create a task to load intro graphics
+//  - Registers the normal serial interrupt handler (SerialCB)
+//  - Stops all attempts to look for a game cube
 static u8 SetUpCopyrightScreen(void)
 {
     u16 ime;
@@ -932,6 +952,8 @@ static u8 SetUpCopyrightScreen(void)
     {
     case 0:
         SetVBlankCallback(NULL);
+
+        // Zero-out the GPU registers.
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -939,9 +961,15 @@ static u8 SetUpCopyrightScreen(void)
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BG0HOFS, 0);
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+
+        // Zero-out the RAM.
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         CpuFill32(0, (void *)OAM, OAM_SIZE);
+        // Note: This zeros out everything except for the first 2 bytes of the PLTT.
+        // Those two bytes were initialized above.
         CpuFill16(0, (void *)(PLTT + 2), PLTT_SIZE - 2);
+
+        // Display the copyright screen.
         ResetPaletteFade();
         LoadCopyrightGraphics(0, 0x3800, 0);
         ScanlineEffect_Stop();
@@ -959,6 +987,8 @@ static u8 SetUpCopyrightScreen(void)
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
         SetSerialCallback(SerialCB_CopyrightScreen);
         GameCubeMultiBoot_Init(&gMultibootProgramStruct);
+
+        // Note: Intentional Fallthrough
     default:
         UpdatePaletteFade();
         gMain.state++;
@@ -973,8 +1003,11 @@ static u8 SetUpCopyrightScreen(void)
         }
         break;
     case 141:
-        if (UpdatePaletteFade())
+        if (UpdatePaletteFade() != PALETTE_FADE_STATUS_DONE) {
             break;
+        }
+
+        // Advance to the next stage of the intro.
         CreateTask(Task_IntroLoadPart1Graphics, 0);
         SetMainCallback2(MainCB2_Intro);
         if (gMultibootProgramStruct.gcmb_field_2 != 0)
@@ -1003,9 +1036,13 @@ static u8 SetUpCopyrightScreen(void)
 
 void CB2_InitCopyrightScreenAfterBootup(void)
 {
+    // When the SetUpCopyrightScreen is done, load the save file.
+    // This is executed exactly once, when this callback is overwritten with
+    // MainCB2_Intro.
     if (!SetUpCopyrightScreen())
     {
-        SetSaveBlocksPointers(sub_815355C());
+        ValidateSave();
+        SetSaveBlocksPointers(GetTrainerNumerSum());
         sub_808447C();
         Save_ResetSaveCounters();
         Save_LoadGameData(SAVE_NORMAL);

@@ -115,7 +115,7 @@ u8 UpdatePaletteFade(void)
     u8 dummy = 0;
 
     if (sPlttBufferTransferPending)
-        return -1;
+        return PALETTE_FADE_STATUS_LOADING;
 
     if (gPaletteFade.mode == NORMAL_FADE)
         result = UpdateNormalPaletteFade();
@@ -409,11 +409,15 @@ static u8 UpdateNormalPaletteFade(void)
     u16 selectedPalettes;
 
     if (!gPaletteFade.active)
-        return 0;
+        return PALETTE_FADE_STATUS_DONE;
 
     if (IsSoftwarePaletteFadeFinishing())
     {
-        return gPaletteFade.active;
+        if (gPaletteFade.active) {
+            return PALETTE_FADE_STATUS_ACTIVE;
+        } else {
+            return PALETTE_FADE_STATUS_DONE;
+        }
     }
     else
     {
@@ -483,7 +487,7 @@ static u8 UpdateNormalPaletteFade(void)
             }
         }
 
-        return gPaletteFade.active;
+        return PALETTE_FADE_STATUS_ACTIVE;
     }
 }
 
@@ -578,10 +582,15 @@ static u8 UpdateFastPaletteFade(void)
     s8 b;
 
     if (!gPaletteFade.active)
-        return 0;
+        return PALETTE_FADE_STATUS_DONE;
 
-    if (IsSoftwarePaletteFadeFinishing())
-        return gPaletteFade.active;
+    if (IsSoftwarePaletteFadeFinishing()) {
+        if (gPaletteFade.active) {
+            return PALETTE_FADE_STATUS_ACTIVE;
+        } else {
+            return PALETTE_FADE_STATUS_DONE;
+        }
+    }
 
     if (gPaletteFade.objPaletteToggle)
     {
@@ -688,7 +697,7 @@ static u8 UpdateFastPaletteFade(void)
     gPaletteFade.objPaletteToggle ^= 1;
 
     if (gPaletteFade.objPaletteToggle)
-        return gPaletteFade.active;
+        return PALETTE_FADE_STATUS_ACTIVE;
 
     if (gPaletteFade.y - gPaletteFade.deltaY < 0)
         gPaletteFade.y = 0;
@@ -715,7 +724,7 @@ static u8 UpdateFastPaletteFade(void)
         gPaletteFade.softwareFadeFinishing = 1;
     }
 
-    return gPaletteFade.active;
+    return PALETTE_FADE_STATUS_ACTIVE;
 }
 
 void BeginHardwarePaletteFade(u8 blendCnt, u8 delay, u8 y, u8 targetY, u8 shouldResetBlendRegisters)
@@ -736,15 +745,16 @@ void BeginHardwarePaletteFade(u8 blendCnt, u8 delay, u8 y, u8 targetY, u8 should
         gPaletteFade.yDec = 1;
 }
 
+
 static u8 UpdateHardwarePaletteFade(void)
 {
     if (!gPaletteFade.active)
-        return 0;
+        return PALETTE_FADE_STATUS_DONE;
 
     if (gPaletteFade.delayCounter < gPaletteFade_delay)
     {
         gPaletteFade.delayCounter++;
-        return 2;
+        return PALETTE_FADE_STATUS_DELAY;
     }
 
     gPaletteFade.delayCounter = 0;
@@ -778,7 +788,7 @@ static u8 UpdateHardwarePaletteFade(void)
         gPaletteFade.shouldResetBlendRegisters = 0;
     }
 
-    return gPaletteFade.active;
+    return PALETTE_FADE_STATUS_ACTIVE;
 }
 
 static void UpdateBlendRegisters(void)

@@ -39,6 +39,7 @@ const u8 gGameLanguage = GAME_LANGUAGE; // English
 
 const char BuildDateTime[] = "2005 02 21 11:10";
 
+// The starting values for the global interrupt table.
 const IntrFunc gIntrTableTemplate[] =
 {
     VCountIntr, // V-count interrupt
@@ -66,6 +67,8 @@ bool8 gLinkTransferringData;
 struct Main gMain;
 u16 gKeyRepeatContinueDelay;
 bool8 gSoftResetDisabled;
+
+// The hardware interrupt table.
 IntrFunc gIntrTable[INTR_COUNT];
 u8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
@@ -86,6 +89,7 @@ void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
+// This is the entry point.
 void AgbMain()
 {
     RegisterRamReset(RESET_ALL);
@@ -108,8 +112,9 @@ void AgbMain()
 
     gSoftResetDisabled = FALSE;
 
-    if (gFlashMemoryPresent != TRUE)
+    if (gFlashMemoryPresent != TRUE) {
         SetMainCallback2(NULL);
+    }
 
     gLinkTransferringData = FALSE;
     gUnknown_03000000 = 0xFC0;
@@ -118,6 +123,7 @@ void AgbMain()
     {
         ReadKeys();
 
+        // Check if the user is trying to delete the save game.
         if (gSoftResetDisabled == FALSE
          && (gMain.heldKeysRaw & A_BUTTON)
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
@@ -127,7 +133,7 @@ void AgbMain()
             DoSoftReset();
         }
 
-        if (sub_8087634() == 1)
+        if (sub_8087634() == TRUE)
         {
             gLinkTransferringData = TRUE;
             UpdateLinkAndCallCallbacks();
@@ -138,7 +144,7 @@ void AgbMain()
             gLinkTransferringData = FALSE;
             UpdateLinkAndCallCallbacks();
 
-            if (sub_80875C8() == 1)
+            if (sub_80875C8() == TRUE)
             {
                 gMain.newKeys = 0;
                 ClearSpriteCopyRequests();
@@ -156,8 +162,9 @@ void AgbMain()
 
 static void UpdateLinkAndCallCallbacks(void)
 {
-    if (!HandleLinkConnection())
+    if (!HandleLinkConnection()) {
         CallCallbacks();
+    }
 }
 
 static void InitMainCallbacks(void)
@@ -315,6 +322,7 @@ void SetSerialCallback(IntrCallback callback)
 
 extern void CopyBufferedValuesToGpuRegs(void);
 
+// This is called by the hardware every time a VBlank interrupt happens.
 static void VBlankIntr(void)
 {
     if (gWirelessCommType != 0)

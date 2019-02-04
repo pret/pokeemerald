@@ -7,6 +7,6 @@
 
 // Exported ROM declarations
 
-void sub_81700F8(void);
+void ResetSaveHeap(void);
 
 #endif //GUARD_RESET_SAVE_HEAP_H

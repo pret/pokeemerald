@@ -654,6 +654,7 @@ void ResetOamRange(u8 a, u8 b)
     }
 }
 
+// This does something related to sprites.
 void LoadOam(void)
 {
     if (!gMain.oamLoadDisabled)

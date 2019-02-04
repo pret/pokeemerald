@@ -140,8 +140,8 @@ extern void SetUpFieldTasks(void);
 extern void ShowStartMenu(void);
 extern void sub_80AEE84(void);
 extern void mapldr_default(void);
-extern bool32 sub_800F0B8(void);
-extern bool32 sub_8009F3C(void);
+extern bool32 guess_IsgRecvCmdsEmpty(void);
+extern bool32 IsAnyLinkInitialized(void);
 extern void sub_8010198(void);
 extern u32 sub_800B4DC(void);
 extern bool32 sub_80B39D4(u8);
@@ -179,7 +179,6 @@ static void sub_8086A68(void);
 static void sub_8086860(void);
 static void sub_8086AC8(void);
 static void sub_8086B9C(void);
-static void sub_8086C40(void);
 static void sub_8086C90(void);
 static void sub_8086FA0(u16);
 static void sub_8086F38(u16*, s32);
@@ -199,7 +198,7 @@ static void sub_80877DC(u8 linkPlayerId, u8 a2);
 static void sub_808780C(u8 linkPlayerId);
 static u8 sub_8087858(u8 linkPlayerId);
 static void sub_8087584(void);
-static u32 sub_8087690(void);
+static u32 CountLinkEventQueue(void);
 static void ZeroLinkPlayerEventObject(struct LinkPlayerEventObject *linkPlayerEventObj);
 static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
 static u16 sub_8087480(const u8 *script);
@@ -216,7 +215,7 @@ static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1);
 static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
 static u16 sub_808711C(u32);
 static u16 sub_8087140(u32);
-static void sub_808709C(u16 *a1);
+static void guess_ResetKeys(u16 *a1);
 static u16 sub_80870B0(u32 a1);
 static u16 sub_80870F8(u32 a1);
 static u16 sub_8087068(u16 a1);
@@ -2259,7 +2258,7 @@ static void sub_8086B14(void)
         CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
     }
 
-    sub_8086C40();
+    guess_ResetKeys(gLinkPartnersHeldKeys);
 }
 
 static void sub_8086B9C(void)
@@ -2271,12 +2270,12 @@ static void sub_8086B9C(void)
 
 static void c1_link_related(void)
 {
-    if (gWirelessCommType == 0 || !sub_800F0B8() || !sub_8009F3C())
+    if (gWirelessCommType == 0 || !guess_IsgRecvCmdsEmpty() || !IsAnyLinkInitialized())
     {
         u8 var = gUnknown_03005DB4;
         sub_8086F38(gLinkPartnersHeldKeys, var);
         sub_8086FA0(sUnknown_03000E14(var));
-        sub_8086C40();
+        guess_ResetKeys(gLinkPartnersHeldKeys);
     }
 }
 
@@ -2284,11 +2283,6 @@ void sub_8086C2C(void)
 {
     sub_8086C90();
     c1_link_related_func_set(sub_80870B0);
-}
-
-static void sub_8086C40(void)
-{
-    sub_808709C(gLinkPartnersHeldKeys);
 }
 
 static void c1_link_related_func_set(u16 (*func)(u32))
@@ -2441,19 +2435,19 @@ static void sub_8086D18(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
     }
 }
 
-static void sub_8086F38(u16 *a1, s32 a2)
+static void sub_8086F38(u16 *keys, s32 a2)
 {
     struct UnkStruct_8054FF8 st;
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        u8 v5 = a1[i];
+        u8 key_byte = keys[i];
         u16 v8 = 0;
         sub_80872D8(i, a2, &st);
-        sub_8086D18(i, v5, &st, &v8);
+        sub_8086D18(i, key_byte, &st, &v8);
         if (sUnknown_03000E10[i] == 0x80)
-            v8 = sub_8087068(v5);
+            v8 = sub_8087068(key_byte);
         sub_808796C(i, v8);
     }
 }
@@ -2466,9 +2460,9 @@ static void sub_8086FA0(u16 a1)
         gUnknown_03005DA8 = 17;
 
     if (gWirelessCommType != 0
-        && sub_8087690() > 1
+        && CountLinkEventQueue() > 1
         && is_c1_link_related_active() == TRUE
-        && sub_8009F3C() == TRUE)
+        && IsAnyLinkInitialized() == TRUE)
     {
         switch (a1)
         {
@@ -2520,11 +2514,12 @@ static u16 sub_8087068(u16 a1)
     }
 }
 
-static void sub_808709C(u16 *a1)
+// This sets the keys to [17, 17, 17, 17].
+static void guess_ResetKeys(u16 *key)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        a1[i] = 17;
+        key[i] = 17;
 }
 
 static u16 sub_80870B0(u32 a1)
@@ -2533,7 +2528,7 @@ static u16 sub_80870B0(u32 a1)
         return 17;
     if (sub_800B4DC() > 4)
         return 27;
-    if (sub_8087690() <= 4)
+    if (CountLinkEventQueue() <= 4)
         return sub_808700C(a1);
     return 28;
 }
@@ -2578,7 +2573,7 @@ static u16 sub_808711C(u32 a1)
 static u16 sub_8087140(u32 a1)
 {
     u16 retVal;
-    if (sub_8087690() > 2)
+    if (CountLinkEventQueue() > 2)
     {
         retVal = 17;
     }
@@ -2863,7 +2858,7 @@ bool32 sub_80875C8(void)
         return FALSE;
     else if (is_c1_link_related_active() != TRUE)
         return FALSE;
-    else if (sub_8009F3C() != TRUE)
+    else if (IsAnyLinkInitialized() != TRUE)
         return FALSE;
     else if (sUnknown_03000E14 == sub_808711C)
         return TRUE;
@@ -2871,7 +2866,7 @@ bool32 sub_80875C8(void)
         return FALSE;
 
     temp = sUnknown_03000E18;
-    sUnknown_03000E18 = 0;
+    sUnknown_03000E18 = FALSE;
 
     if (temp == TRUE)
         return TRUE;
@@ -2883,11 +2878,11 @@ bool32 sub_80875C8(void)
 
 bool32 sub_8087634(void)
 {
-    if (sub_8087690() < 2)
+    if (CountLinkEventQueue() < 2)
         return FALSE;
     else if (is_c1_link_related_active() != TRUE)
         return FALSE;
-    else if (sub_8009F3C() != TRUE)
+    else if (IsAnyLinkInitialized() != TRUE)
         return FALSE;
     else if (sUnknown_03000E14 == sub_8087140)
         return TRUE;
@@ -2899,18 +2894,21 @@ bool32 sub_808766C(void)
 {
     if (gWirelessCommType != 0)
         return FALSE;
-    else if (!sub_8009F3C())
+    else if (!IsAnyLinkInitialized())
         return FALSE;
     else
         return TRUE;
 }
 
-static u32 sub_8087690(void)
+// This seems to count the number of objects that are being sent through
+// a link, either wirelessly or through a physical cable.
+static u32 CountLinkEventQueue(void)
 {
-    if (gWirelessCommType != 0)
+    if (gWirelessCommType != 0) {
         return gUnknown_03005000.unk_9e8.unk_232;
-    else
+    } else {
         return gLink.sendQueue.count;
+    }
 }
 
 static void ZeroLinkPlayerEventObject(struct LinkPlayerEventObject *linkPlayerEventObj)
@@ -3042,10 +3040,11 @@ static void sub_808796C(u8 linkPlayerId, u8 a2)
 
     if (linkPlayerEventObj->active)
     {
-        if (a2 > 10)
+        if (a2 > 10) {
             eventObj->triggerGroundEffectsOnMove = 1;
-        else
+        } else {
             gUnknown_08339E00[gUnknown_08339DC8[linkPlayerEventObj->mode](linkPlayerEventObj, eventObj, a2)](linkPlayerEventObj, eventObj);
+        }
     }
 }
 

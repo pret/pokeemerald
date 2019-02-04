@@ -347,12 +347,26 @@
 
 // I/O registers
 
+// Display Control Register
+// [link](https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_DISPCNT)
 #define REG_DISPCNT     (*(vu16 *)REG_ADDR_DISPCNT)
+// Display Status Register
+// [link](https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_DISPSTAT)
 #define REG_DISPSTAT    (*(vu16 *)REG_ADDR_DISPSTAT)
+// The current Y location being sent to the LCD hardware. There are are 160
+// lines of display, and then 68 lines of VBlank.
 #define REG_VCOUNT      (*(vu16 *)REG_ADDR_VCOUNT)
+// Background Layer 0
+// [link](https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_BG0)
 #define REG_BG0CNT      (*(vu16 *)REG_ADDR_BG0CNT)
+// Background Layer 1
+// [link](https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_BG1)
 #define REG_BG1CNT      (*(vu16 *)REG_ADDR_BG1CNT)
+// Background Layer 2
+// [link](https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_BG2)
 #define REG_BG2CNT      (*(vu16 *)REG_ADDR_BG2CNT)
+// Background Layer 3
+// [link](https://www.cs.rit.edu/~tjh8300/CowBite/CowBiteSpec.htm#REG_BG3)
 #define REG_BG3CNT      (*(vu16 *)REG_ADDR_BG3CNT)
 #define REG_BG0HOFS     (*(vu16 *)REG_ADDR_BG0HOFS)
 #define REG_BG0VOFS     (*(vu16 *)REG_ADDR_BG0VOFS)

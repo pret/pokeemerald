@@ -6250,11 +6250,11 @@ sub_81D4D50: @ 81D4D50
 	movs r0, 0
 	strh r0, [r4]
 	ldr r1, =gIntrTable
-	ldr r0, =sub_81D3FAC
+	ldr r0, =sub_81D3FAC @ This is being set as the Serial interrupt handler.
 	str r0, [r1, 0x4]
-	ldr r0, =sub_81D3F9C
+	ldr r0, =sub_81D3F9C @ This is being set as the Timer 3 interrupt handler.
 	str r0, [r1, 0x8]
-	bl sub_81D41A0
+	bl sub_81D41A0 @ Note: sub_81D41A0 clobbers r1, so there is no other hidden usage of the interrupt table.
 	bl sub_81D4238
 	ldr r2, =0x04000200
 	ldrh r0, [r2]

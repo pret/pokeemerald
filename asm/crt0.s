@@ -105,6 +105,8 @@ sp_irq: .word IWRAM_END - 0x60
 	.arm
 	.align 2, 0
 	.global IntrMain
+	@ This is the interrupt handler. It determines the type of
+	@ interrupt and then calls that entry in the gIntrTable.
 IntrMain: @ 8000248
 	mov r3, REG_BASE
 	add r3, r3, 0x200

@@ -8,7 +8,7 @@
 #include "overworld.h"
 #include "alloc.h"
 
-void sub_81700F8(void)
+void ResetSaveHeap(void)
 {
     u16 imeBackup;
 
@@ -18,7 +18,8 @@ void sub_81700F8(void)
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_FORCED_BLANK);
     REG_IME = imeBackup;
     gMain.inBattle = FALSE;
-    SetSaveBlocksPointers(sub_815355C());
+    ValidateSave();
+    SetSaveBlocksPointers(GetTrainerNumerSum());
     sub_808447C();
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
