@@ -50,7 +50,7 @@ string read_text_file(string filepath) {
 }
 
 void write_text_file(string filepath, string text) {
-    ofstream out_file(filepath);
+    ofstream out_file(filepath, std::ofstream::binary);
 
     if (!out_file.is_open())
         FATAL_ERROR("Cannot open file %s for writing.\n", filepath.c_str());
@@ -60,7 +60,7 @@ void write_text_file(string filepath, string text) {
     out_file.close();
 }
 
-string generate_map_header_text(Json map_data, Json layouts_data) {
+string generate_map_header_text(Json map_data, Json layouts_data, string version) {
     string map_layout_id = map_data["layout"].string_value();
 
     vector<Json> matched;
@@ -102,13 +102,18 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << map_data["requires_flash"].bool_value() << "\n"
          << "\t.byte "  << map_data["weather"].string_value() << "\n"
          << "\t.byte "  << map_data["map_type"].string_value() << "\n"
-         << "\t.2byte 0\n\t"
-         << "map_header_flags "
-         << "allow_bike=" << map_data["allow_bike"].bool_value() << ", "
-         << "allow_escape_rope=" << map_data["allow_escape_rope"].bool_value() << ", "
-         << "allow_run=" << map_data["allow_running"].bool_value() << ", "
-         << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n"
-         << "\t.byte "  << map_data["battle_scene"].string_value() << "\n\n";
+         << "\t.2byte 0\n";
+
+    if (version == "ruby")
+        text << "\t.byte " << map_data["show_map_name"].bool_value() << "\n";
+    else if (version == "emerald")
+        text << "\tmap_header_flags "
+             << "allow_bike=" << map_data["allow_bike"].bool_value() << ", "
+             << "allow_escape_rope=" << map_data["allow_escape_rope"].bool_value() << ", "
+             << "allow_run=" << map_data["allow_running"].bool_value() << ", "
+             << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
+
+     text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";
 
     return text.str();
 }
@@ -146,7 +151,7 @@ string generate_map_events_text(Json map_data) {
     if (map_data["object_events"].array_items().size() > 0) {
         objects_label = map_data["name"].string_value() + "_EventObjects";
         text << objects_label << ":\n";
-        for (int i = 0; i < map_data["object_events"].array_items().size(); i++) {
+        for (unsigned int i = 0; i < map_data["object_events"].array_items().size(); i++) {
             auto obj_event = map_data["object_events"].array_items()[i];
             text << "\tobject_event " << i + 1 << ", "
                  << obj_event["graphics_id"].string_value() << ", 0, "
@@ -254,7 +259,7 @@ string get_directory_name(string filename) {
     return filename.substr(0, dir_pos + 1);
 }
 
-void process_map(string map_filepath, string layouts_filepath) {
+void process_map(string map_filepath, string layouts_filepath, string version) {
     string mapdata_err, layouts_err;
 
     string mapdata_json_text = read_text_file(map_filepath);
@@ -268,7 +273,7 @@ void process_map(string map_filepath, string layouts_filepath) {
     if (layouts_data == Json())
         FATAL_ERROR("%s\n", layouts_err.c_str());
 
-    string header_text = generate_map_header_text(map_data, layouts_data);
+    string header_text = generate_map_header_text(map_data, layouts_data, version);
     string events_text = generate_map_events_text(map_data);
     string connections_text = generate_map_connections_text(map_data);
 
@@ -490,8 +495,13 @@ void process_layouts(string layouts_filepath) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 2)
-        FATAL_ERROR("USAGE: mapjson <mode> [options]\n");
+    if (argc < 3)
+        FATAL_ERROR("USAGE: mapjson <mode> <game-version> [options]\n");
+
+    char *version_arg = argv[2];
+    string version(version_arg);
+    if (version != "emerald" && version != "ruby")
+        FATAL_ERROR("ERROR: <game-version> must be 'emerald' or 'ruby'.\n");
 
     char *mode_arg = argv[1];
     string mode(mode_arg);
@@ -499,27 +509,27 @@ int main(int argc, char *argv[]) {
         FATAL_ERROR("ERROR: <mode> must be 'layouts', 'map', or 'groups'.\n");
 
     if (mode == "map") {
-        if (argc != 4)
-            FATAL_ERROR("USAGE: mapjson map <map_file> <layouts_file>\n");
+        if (argc != 5)
+            FATAL_ERROR("USAGE: mapjson map <game-version> <map_file> <layouts_file>\n");
 
-        string filepath(argv[2]);
-        string layouts_filepath(argv[3]);
+        string filepath(argv[3]);
+        string layouts_filepath(argv[4]);
 
-        process_map(filepath, layouts_filepath);
+        process_map(filepath, layouts_filepath, version);
     }
     else if (mode == "groups") {
-        if (argc != 3)
-            FATAL_ERROR("USAGE: mapjson groups <groups_file>\n");
+        if (argc != 4)
+            FATAL_ERROR("USAGE: mapjson groups <game-version> <groups_file>\n");
 
-        string filepath(argv[2]);
+        string filepath(argv[3]);
 
         process_groups(filepath);
     }
     else if (mode == "layouts") {
-        if (argc != 3)
-            FATAL_ERROR("USAGE: mapjson layouts <layouts_file>\n");
+        if (argc != 4)
+            FATAL_ERROR("USAGE: mapjson layouts <game-version> <layouts_file>\n");
 
-        string filepath(argv[2]);
+        string filepath(argv[3]);
 
         process_layouts(filepath);
     }
