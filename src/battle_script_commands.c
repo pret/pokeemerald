@@ -10199,6 +10199,8 @@ static void atkDD_setuserstatus3(void)
     else
     {
         gStatuses3[gBattlerAttacker] |= flags;
+        if (flags == STATUS3_MAGNET_RISE)
+            gDisableStructs[gBattlerAttacker].magnetRiseTimer = 5;
         gBattlescriptCurrInstr += 9;
     }
 }
