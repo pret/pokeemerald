@@ -184,10 +184,10 @@ static void PrintPageNamesAndStatsPageToWindows(void);
 static void sub_81C2AFC(u8 a);
 static void sub_81C2C38(u8 a);
 static void SummaryScreen_RemoveWindowByIndex(u8 a);
-static void sub_81C2D9C(u8 a);
-static void sub_81C2DE4(u8 a);
-static void sub_81C2E00(void);
-static void sub_81C2E40(u8 taskId);
+static void PrintPageSpecificText(u8 a);
+static void CreateTextPrinterTask(u8 a);
+static void PrintInfoPageText(void);
+static void sTask_PrintInfoPage(u8 taskId);
 static void PrintMonOTName(void);
 static void PrintMonOTID(void);
 static void PrintMonAbilityName(void);
@@ -203,27 +203,27 @@ static void PrintEggOTName(void);
 static void PrintEggOTID(void);
 static void PrintEggState(void);
 static void PrintEggMemo(void);
-static void sub_81C3554(u8 taskId);
+static void sTask_PrintSkillsPage(u8 taskId);
 static void PrintHeldItemName(void);
-static void sub_81C3530(void);
+static void PrintSkillsPageText(void);
 static void PrintRibbonCount(void);
 static void BufferLeftColumnStats(void);
 static void PrintLeftColumnStats(void);
 static void BufferRightColumnStats(void);
 static void PrintRightColumnStats(void);
 static void PrintExpPointsNextLevel(void);
-static void sub_81C3984(void);
-static void sub_81C39F0(u8 taskId);
+static void PrintBattleMoves(void);
+static void sTask_PrintBattleMoves(u8 taskId);
 static void PrintMoveNameAndPP(u8 a);
-static void sub_81C3D08(void);
-static void sub_81C3D54(u8 taskId);
+static void PrintContestMoves(void);
+static void sTask_PrintContestMoves(u8 taskId);
 static void PrintContestMoveDescription(u8 a);
 static void PrintMoveDetails(u16 a);
 static void PrintNewMoveDetailsOrCancelText(void);
 static void sub_81C4064(void);
 static void sub_81C40A0(u8 a, u8 b);
 static void PrintHMMovesCantBeForgotten(void);
-static void ResetPssSpriteIds(void);
+static void ResetSpriteIds(void);
 static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 static void HidePageSpecificSprites(void);
 static void SetTypeIcons(void);
@@ -626,22 +626,26 @@ static const u8 sTextColors_861CD2C[][3] =
     {0, 5, 6},
     {0, 7, 8}
 };
+
 static const u8 gUnknown_0861CD53[] = INCBIN_U8("graphics/interface/summary_a_button.4bpp");
 static const u8 gUnknown_0861CDD3[] = INCBIN_U8("graphics/interface/summary_b_button.4bpp");
-static void (*const gUnknown_0861CE54[])(void) =
+
+static void (*const sTextPrinterFunctions[])(void) =
 {
-    sub_81C2E00,
-    sub_81C3530,
-    sub_81C3984,
-    sub_81C3D08
+    PrintInfoPageText,
+    PrintSkillsPageText,
+    PrintBattleMoves,
+    PrintContestMoves
 };
-static void (*const gUnknown_0861CE64[])(u8 taskId) =
+
+static void (*const sTextPrinterTasks[])(u8 taskId) =
 {
-    sub_81C2E40,
-    sub_81C3554,
-    sub_81C39F0,
-    sub_81C3D54
+    sTask_PrintInfoPage,
+    sTask_PrintSkillsPage,
+    sTask_PrintBattleMoves,
+    sTask_PrintContestMoves
 };
+
 static const u8 gUnknown_0861CE74[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
 static const u8 gUnknown_0861CE7B[] = _("{COLOR WHITE}{SHADOW DARK_GREY}");
 static const u8 gUnknown_0861CE82[] = _("{SPECIAL_F7 0x00}/{SPECIAL_F7 0x01}\n{SPECIAL_F7 0x02}\n{SPECIAL_F7 0x03}");
@@ -1129,7 +1133,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 13:
-        sub_81C2D9C(pssData->currPageIndex);
+        PrintPageSpecificText(pssData->currPageIndex);
         gMain.state++;
         break;
     case 14:
@@ -1141,7 +1145,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 16:
-        ResetPssSpriteIds();
+        ResetSpriteIds();
         CreateMoveTypeIcons();
         pssData->unk40F0 = 0;
         gMain.state++;
@@ -1573,7 +1577,7 @@ static void sub_81C0704(u8 taskId)
         sub_81C25E8();
         break;
     case 11:
-        sub_81C2D9C(pssData->currPageIndex);
+        PrintPageSpecificText(pssData->currPageIndex);
         sub_81C2524();
         break;
     case 12:
@@ -1676,7 +1680,7 @@ static void sub_81C0A8C(u8 taskId, s8 b)
         SetTaskFuncWithFollowupFunc(taskId, sub_81C0B8C, gTasks[taskId].func);
     else
         SetTaskFuncWithFollowupFunc(taskId, sub_81C0CC4, gTasks[taskId].func);
-    sub_81C2DE4(pssData->currPageIndex);
+    CreateTextPrinterTask(pssData->currPageIndex);
     HidePageSpecificSprites();
 }
 
@@ -2910,7 +2914,7 @@ static void SummaryScreen_RemoveWindowByIndex(u8 windowIndex)
     }
 }
 
-static void sub_81C2D9C(u8 pageIndex)
+static void PrintPageSpecificText(u8 pageIndex)
 {
     u16 i;
     for (i = 0; i < 8; i++)
@@ -2918,15 +2922,15 @@ static void sub_81C2D9C(u8 pageIndex)
         if (pssData->windowIds[i] != 0xFF)
             FillWindowPixelBuffer(pssData->windowIds[i], 0);
     }
-    gUnknown_0861CE54[pageIndex]();
+    sTextPrinterFunctions[pageIndex]();
 }
 
-static void sub_81C2DE4(u8 pageIndex)
+static void CreateTextPrinterTask(u8 pageIndex)
 {
-    CreateTask(gUnknown_0861CE64[pageIndex], 16);
+    CreateTask(sTextPrinterTasks[pageIndex], 16);
 }
 
-static void sub_81C2E00(void)
+static void PrintInfoPageText(void)
 {
     if (pssData->summary.isEgg)
     {
@@ -2946,7 +2950,7 @@ static void sub_81C2E00(void)
     }
 }
 
-static void sub_81C2E40(u8 taskId)
+static void sTask_PrintInfoPage(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -3200,7 +3204,7 @@ static void PrintEggMemo(void)
     SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 3), text, 0, 1, 0, 0);
 }
 
-static void sub_81C3530(void)
+static void PrintSkillsPageText(void)
 {
     PrintHeldItemName();
     PrintRibbonCount();
@@ -3211,7 +3215,7 @@ static void sub_81C3530(void)
     PrintExpPointsNextLevel();
 }
 
-static void sub_81C3554(u8 taskId)
+static void sTask_PrintSkillsPage(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -3357,7 +3361,7 @@ static void PrintExpPointsNextLevel(void)
     SummaryScreen_PrintTextOnWindow(windowId, gStringVar1, offset, 17, 0, 0);
 }
 
-static void sub_81C3984(void)
+static void PrintBattleMoves(void)
 {
     PrintMoveNameAndPP(0);
     PrintMoveNameAndPP(1);
@@ -3379,7 +3383,7 @@ static void sub_81C3984(void)
     }
 }
 
-static void sub_81C39F0(u8 taskId)
+static void sTask_PrintBattleMoves(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -3493,7 +3497,7 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
     }
 }
 
-static void sub_81C3D08(void)
+static void PrintContestMoves(void)
 {
     PrintMoveNameAndPP(0);
     PrintMoveNameAndPP(1);
@@ -3507,7 +3511,7 @@ static void sub_81C3D08(void)
     }
 }
 
-static void sub_81C3D54(u8 taskId)
+static void sTask_PrintContestMoves(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 dataa = data[0] - 1;
@@ -3641,11 +3645,11 @@ static void PrintHMMovesCantBeForgotten(void)
     SummaryScreen_PrintTextOnWindow(windowId, gText_HMMovesCantBeForgotten2, 6, 1, 0, 0);
 }
 
-static void ResetPssSpriteIds(void)
+static void ResetSpriteIds(void)
 {
     u8 i;
 
-    for (i = 0; i < 28; i++)
+    for (i = 0; i < ARRAY_COUNT(pssData->spriteIds); i++)
     {
         pssData->spriteIds[i] = 0xFF;
     }
@@ -3670,7 +3674,7 @@ static void HidePageSpecificSprites(void)
 // Keeps Pokémon, caught ball and status sprites visible.
     u8 i;
 
-    for (i = 3; i < 28; i++)
+    for (i = 3; i < ARRAY_COUNT(pssData->spriteIds); i++)
     {
         if (pssData->spriteIds[i] != 0xFF)
             SetSpriteInvisibility(i, TRUE);
