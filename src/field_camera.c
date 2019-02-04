@@ -248,6 +248,26 @@ static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
 {
     switch (metatileLayerType)
     {
+    case 3: // TRIPLE_LAYER
+        // Draw metatile's bottom layer to the bottom background layer.
+        gBGTilemapBuffers3[offset] = metatiles[0];
+        gBGTilemapBuffers3[offset + 1] = metatiles[1];
+        gBGTilemapBuffers3[offset + 0x20] = metatiles[2];
+        gBGTilemapBuffers3[offset + 0x21] = metatiles[3];
+
+        // Draw metatile's top layer to the middle background layer..
+        gBGTilemapBuffers1[offset] = metatiles[4];
+        ;
+        gBGTilemapBuffers1[offset + 1] = metatiles[5];
+        gBGTilemapBuffers1[offset + 0x20] = metatiles[6];
+        gBGTilemapBuffers1[offset + 0x21] = metatiles[7];
+
+        // Draw metatile's extra layer to the top background layer.
+        gBGTilemapBuffers2[offset] = metatiles[8];
+        gBGTilemapBuffers2[offset + 1] = metatiles[9];
+        gBGTilemapBuffers2[offset + 0x20] = metatiles[10];
+        gBGTilemapBuffers2[offset + 0x21] = metatiles[11];
+        break;
     case 2: // LAYER_TYPE_
         // Draw metatile's bottom layer to the bottom background layer.
         gBGTilemapBuffers3[offset] = metatiles[0];
