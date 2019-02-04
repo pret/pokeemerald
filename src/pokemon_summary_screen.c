@@ -236,7 +236,7 @@ static void SetNewMoveTypeIcon(void);
 static void sub_81C4568(u8 a, u8 b);
 static u8 CreatePokemonSprite(struct Pokemon *a, s16 *b);
 static u8 sub_81C47B4(struct Pokemon *unused);
-static void sub_81C4844(struct Sprite *);
+static void SpriteCB_Pokemon(struct Sprite *);
 static void sub_81C48F0(void);
 static void CreateMonMarkingsSprite(struct Pokemon *mon);
 static void RemoveAndCreateMonMarkingsSprite(struct Pokemon *mon);
@@ -3853,17 +3853,17 @@ static u8 CreatePokemonSprite(struct Pokemon *mon, s16 *a1)
                 }
             }
             (*a1)++;
-            return -1;
+            return 0xFF;
         case 1:
             pal = GetMonSpritePalStructFromOtIdPersonality(summary->species2, summary->OTID, summary->pid);
             LoadCompressedSpritePalette(pal);
             SetMultiuseSpriteTemplateToPokemon(pal->tag, 1);
             (*a1)++;
-            return -1;
+            return 0xFF;
     }
 }
 
-static void sub_81C4778(void)
+static void PlayMonCry(void)
 {
     struct PokeSummary *summary = &pssData->summary;
     if (!summary->isEgg)
@@ -3889,7 +3889,7 @@ static u8 sub_81C47B4(struct Pokemon *unused)
 
     sprite->data[0] = summary->species2;
     sprite->data[2] = 0;
-    gSprites[spriteId].callback = sub_81C4844;
+    gSprites[spriteId].callback = SpriteCB_Pokemon;
     sprite->oam.priority = 0;
 
     if (!IsMonSpriteNotFlipped(summary->species2))
@@ -3904,14 +3904,14 @@ static u8 sub_81C47B4(struct Pokemon *unused)
     return spriteId;
 }
 
-static void sub_81C4844(struct Sprite *sprite)
+static void SpriteCB_Pokemon(struct Sprite *sprite)
 {
     struct PokeSummary *summary = &pssData->summary;
 
     if (!gPaletteFade.active && sprite->data[2] != 1)
     {
         sprite->data[1] = IsMonSpriteNotFlipped(sprite->data[0]);
-        sub_81C4778();
+        PlayMonCry();
         PokemonSummaryDoMonAnimation(sprite, sprite->data[0], summary->isEgg);
     }
 }
