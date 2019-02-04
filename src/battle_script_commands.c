@@ -939,6 +939,7 @@ static void atk00_attackcanceler(void)
     {
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
         SET_BATTLER_TYPE(gBattlerAttacker, moveType);
+        gBattlerAbility = gBattlerAttacker;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_ProteanActivates;
         return;
