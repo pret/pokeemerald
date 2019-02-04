@@ -43,10 +43,11 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
+#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 
-static EWRAM_DATA struct UnkSummaryStruct
+static EWRAM_DATA struct PssData
 {
     /*0x00*/ union {
         struct Pokemon *mons;
@@ -135,21 +136,21 @@ static bool8 SummaryScreen_DecompressGraphics(void);
 static void CopyMonToSummaryStruct(struct Pokemon* a);
 static bool8 ExtractMonDataToSummaryStruct(struct Pokemon* a);
 static void sub_81C0348(void);
-static void sub_81C0484(u8 taskId);
-static void sub_81C0510(u8 taskId);
-static void sub_81C0604(u8 taskId, s8 a);
+static void CloseSummaryScreen(u8 taskId);
+static void HandleInput(u8 taskId);
+static void ChangePokemon(u8 taskId, s8 a);
 static void sub_81C0704(u8 taskId);
 static s8 sub_81C08F8(s8 a);
 static s8 sub_81C09B4(s8 a);
 static bool8 sub_81C0A50(struct Pokemon* mon);
-static void sub_81C0A8C(u8 taskId, s8 a);
+static void ChangePage(u8 taskId, s8 a);
 static void sub_81C0B8C(u8 taskId);
 static void sub_81C0C68(u8 taskId);
 static void sub_81C0CC4(u8 taskId);
 static void sub_81C0D44(u8 taskId);
 static void sub_81C0E24(void);
 static void sub_81C0E48(u8 taskId);
-static void sub_81C0F44(u8 taskId);
+static void HandleInput_MoveSelect(u8 taskId);
 static bool8 sub_81C1040(void);
 static void sub_81C1070(s16* a, s8 b, u8* c);
 static void sub_81C11F4(u8 a);
@@ -175,19 +176,19 @@ static void sub_81C2228(struct Pokemon* mon);
 static void DrawExperienceProgressBar(struct Pokemon* mon);
 static void DrawContestMoveHearts(u16 move);
 static void sub_81C2524(void);
-static void sub_81C2554(void);
+static void ResetWindows(void);
 static void sub_81C25E8(void);
 static void sub_81C2628(void);
 static void sub_81C2794(void);
 static void sub_81C27DC(struct Pokemon *mon, u16 a);
 static void PrintPageNamesAndStatsPageToWindows(void);
-static void sub_81C2AFC(u8 a);
-static void sub_81C2C38(u8 a);
+static void CreatePageWindowTilemaps(u8 a);
+static void ClearPageWindowTilemaps(u8 a);
 static void SummaryScreen_RemoveWindowByIndex(u8 a);
 static void PrintPageSpecificText(u8 a);
 static void CreateTextPrinterTask(u8 a);
 static void PrintInfoPageText(void);
-static void sTask_PrintInfoPage(u8 taskId);
+static void Task_PrintInfoPage(u8 taskId);
 static void PrintMonOTName(void);
 static void PrintMonOTID(void);
 static void PrintMonAbilityName(void);
@@ -203,7 +204,7 @@ static void PrintEggOTName(void);
 static void PrintEggOTID(void);
 static void PrintEggState(void);
 static void PrintEggMemo(void);
-static void sTask_PrintSkillsPage(u8 taskId);
+static void Task_PrintSkillsPage(u8 taskId);
 static void PrintHeldItemName(void);
 static void PrintSkillsPageText(void);
 static void PrintRibbonCount(void);
@@ -213,10 +214,10 @@ static void BufferRightColumnStats(void);
 static void PrintRightColumnStats(void);
 static void PrintExpPointsNextLevel(void);
 static void PrintBattleMoves(void);
-static void sTask_PrintBattleMoves(u8 taskId);
+static void Task_PrintBattleMoves(u8 taskId);
 static void PrintMoveNameAndPP(u8 a);
 static void PrintContestMoves(void);
-static void sTask_PrintContestMoves(u8 taskId);
+static void Task_PrintContestMoves(u8 taskId);
 static void PrintContestMoveDescription(u8 a);
 static void PrintMoveDetails(u16 a);
 static void PrintNewMoveDetailsOrCancelText(void);
@@ -640,10 +641,10 @@ static void (*const sTextPrinterFunctions[])(void) =
 
 static void (*const sTextPrinterTasks[])(u8 taskId) =
 {
-    sTask_PrintInfoPage,
-    sTask_PrintSkillsPage,
-    sTask_PrintBattleMoves,
-    sTask_PrintContestMoves
+    Task_PrintInfoPage,
+    Task_PrintSkillsPage,
+    Task_PrintBattleMoves,
+    Task_PrintContestMoves
 };
 
 static const u8 gUnknown_0861CE74[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
@@ -1108,7 +1109,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
             gMain.state++;
         break;
     case 7:
-        sub_81C2554();
+        ResetWindows();
         gMain.state++;
         break;
     case 8:
@@ -1141,7 +1142,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 15:
-        sub_81C2AFC(pssData->currPageIndex);
+        CreatePageWindowTilemaps(pssData->currPageIndex);
         gMain.state++;
         break;
     case 16:
@@ -1176,7 +1177,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         break;
     case 22:
         if (pssData->mode != PSS_MODE_SELECT_MOVE)
-            CreateTask(sub_81C0510, 0);
+            CreateTask(HandleInput, 0);
         else
             CreateTask(sub_81C171C, 0);
         gMain.state++;
@@ -1186,7 +1187,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 24:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -1406,13 +1407,13 @@ static void sub_81C0434(void)
     Free(pssData);
 }
 
-static void sub_81C044C(u8 taskId)
+static void BeginCloseSummaryScreen(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-    gTasks[taskId].func = sub_81C0484;
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = CloseSummaryScreen;
 }
 
-static void sub_81C0484(u8 taskId)
+static void CloseSummaryScreen(u8 taskId)
 {
     if (sub_81221EC() != TRUE && !gPaletteFade.active)
     {
@@ -1430,25 +1431,25 @@ static void sub_81C0484(u8 taskId)
     }
 }
 
-static void sub_81C0510(u8 taskId)
+static void HandleInput(u8 taskId)
 {
     if (sub_81221EC() != TRUE && !gPaletteFade.active)
     {
         if (gMain.newKeys & DPAD_UP)
         {
-            sub_81C0604(taskId, -1);
+            ChangePokemon(taskId, -1);
         }
         else if (gMain.newKeys & DPAD_DOWN)
         {
-            sub_81C0604(taskId, 1);
+            ChangePokemon(taskId, 1);
         }
         else if ((gMain.newKeys & DPAD_LEFT) || GetLRKeysState() == 1)
         {
-            sub_81C0A8C(taskId, -1);
+            ChangePage(taskId, -1);
         }
         else if ((gMain.newKeys & DPAD_RIGHT) || GetLRKeysState() == 2)
         {
-            sub_81C0A8C(taskId, 1);
+            ChangePage(taskId, 1);
         }
         else if (gMain.newKeys & A_BUTTON)
         {
@@ -1458,7 +1459,7 @@ static void sub_81C0510(u8 taskId)
                 {
                     sub_81C48F0();
                     PlaySE(SE_SELECT);
-                    sub_81C044C(taskId);
+                    BeginCloseSummaryScreen(taskId);
                 }
                 else
                 {
@@ -1471,12 +1472,12 @@ static void sub_81C0510(u8 taskId)
         {
             sub_81C48F0();
             PlaySE(SE_SELECT);
-            sub_81C044C(taskId);
+            BeginCloseSummaryScreen(taskId);
         }
     }
 }
 
-static void sub_81C0604(u8 taskId, s8 a)
+static void ChangePokemon(u8 taskId, s8 a)
 {
     s8 r4_2;
 
@@ -1587,7 +1588,7 @@ static void sub_81C0704(u8 taskId)
         if (sub_81221EC() == 0 && FuncIsActiveTask(sub_81C20F0) == 0)
         {
             data[0] = 0;
-            gTasks[taskId].func = sub_81C0510;
+            gTasks[taskId].func = HandleInput;
         }
         return;
     }
@@ -1660,7 +1661,7 @@ static bool8 sub_81C0A50(struct Pokemon* mon)
         return FALSE;
 }
 
-static void sub_81C0A8C(u8 taskId, s8 b)
+static void ChangePage(u8 taskId, s8 b)
 {
     struct PokeSummary *summary = &pssData->summary;
     s16 *data = gTasks[taskId].data;
@@ -1673,7 +1674,7 @@ static void sub_81C0A8C(u8 taskId, s8 b)
         return;
 
     PlaySE(SE_SELECT);
-    sub_81C2C38(pssData->currPageIndex);
+    ClearPageWindowTilemaps(pssData->currPageIndex);
     pssData->currPageIndex += b;
     data[0] = 0;
     if (b == 1)
@@ -1721,7 +1722,7 @@ static void sub_81C0C68(u8 taskId)
     data[1] = 0;
     data[0] = 0;
     sub_81C1BA0();
-    sub_81C2AFC(pssData->currPageIndex);
+    CreatePageWindowTilemaps(pssData->currPageIndex);
     SetTypeIcons();
     sub_81C0E24();
     SwitchTaskToFollowupFunc(taskId);
@@ -1770,7 +1771,7 @@ static void sub_81C0D44(u8 taskId)
     data[1] = 0;
     data[0] = 0;
     sub_81C1BA0();
-    sub_81C2AFC(pssData->currPageIndex);
+    CreatePageWindowTilemaps(pssData->currPageIndex);
     SetTypeIcons();
     sub_81C0E24();
     SwitchTaskToFollowupFunc(taskId);
@@ -1806,10 +1807,10 @@ static void sub_81C0E48(u8 taskId)
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     sub_81C4AF8(8);
-    gTasks[taskId].func = sub_81C0F44;
+    gTasks[taskId].func = HandleInput_MoveSelect;
 }
 
-static void sub_81C0F44(u8 taskId)
+static void HandleInput_MoveSelect(u8 taskId)
 {
     u8 id = taskId;
     s16 *data = gTasks[taskId].data;
@@ -1934,7 +1935,7 @@ static void sub_81C11F4(u8 taskId)
     schedule_bg_copy_tilemap_to_vram(0);
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
-    gTasks[taskId].func = sub_81C0510;
+    gTasks[taskId].func = HandleInput;
 }
 
 static void sub_81C129C(u8 taskId)
@@ -2010,7 +2011,7 @@ static void sub_81C13B0(u8 taskId, bool8 b)
     DrawContestMoveHearts(move);
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
-    gTasks[taskId].func = sub_81C0F44;
+    gTasks[taskId].func = HandleInput_MoveSelect;
 }
 
 static void SwapMonMoves(struct Pokemon *mon, u8 moveIndex1, u8 moveIndex2)
@@ -2110,11 +2111,11 @@ static void sub_81C174C(u8 taskId)
             }
             else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
             {
-                sub_81C0A8C(taskId, -1);
+                ChangePage(taskId, -1);
             }
             else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
             {
-                sub_81C0A8C(taskId, 1);
+                ChangePage(taskId, 1);
             }
             else if (gMain.newKeys & A_BUTTON)
             {
@@ -2124,7 +2125,7 @@ static void sub_81C174C(u8 taskId)
                     PlaySE(SE_SELECT);
                     gUnknown_0203CF21 = pssData->firstMoveIndex;
                     gSpecialVar_0x8005 = gUnknown_0203CF21;
-                    sub_81C044C(taskId);
+                    BeginCloseSummaryScreen(taskId);
                 }
                 else
                 {
@@ -2139,7 +2140,7 @@ static void sub_81C174C(u8 taskId)
                 PlaySE(SE_SELECT);
                 gUnknown_0203CF21 = 4;
                 gSpecialVar_0x8005 = 4;
-                sub_81C044C(taskId);
+                BeginCloseSummaryScreen(taskId);
             }
         }
     }
@@ -2195,7 +2196,7 @@ static void sub_81C1940(u8 taskId)
                     ClearWindowTilemap(13);
                 move = pssData->summary.moves[pssData->firstMoveIndex];
                 gTasks[taskId].func = sub_81C174C;
-                sub_81C0A8C(taskId, -1);
+                ChangePage(taskId, -1);
                 sub_81C1DA4(9, -2);
                 sub_81C1EFC(9, -2, move);
             }
@@ -2209,7 +2210,7 @@ static void sub_81C1940(u8 taskId)
                     ClearWindowTilemap(13);
                 move = pssData->summary.moves[pssData->firstMoveIndex];
                 gTasks[taskId].func = sub_81C174C;
-                sub_81C0A8C(taskId, 1);
+                ChangePage(taskId, 1);
                 sub_81C1DA4(9, -2);
                 sub_81C1EFC(9, -2, move);
             }
@@ -2622,7 +2623,7 @@ static void sub_81C2524(void)
         ChangeBgX(3, 0, 0);
 }
 
-static void sub_81C2554(void)
+static void ResetWindows(void)
 {
     u8 i;
     InitWindows(gUnknown_0861CC24);
@@ -2632,7 +2633,7 @@ static void sub_81C2554(void)
     {
         FillWindowPixelBuffer(i, 0);
     }
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
         pssData->windowIds[i] = 0xFF;
     }
@@ -2786,7 +2787,7 @@ static void PrintPageNamesAndStatsPageToWindows(void)
     SummaryScreen_PrintTextOnWindow(15, gText_Jam, 0, 17, 0, 1);
 }
 
-static void sub_81C2AFC(u8 a)
+static void CreatePageWindowTilemaps(u8 page)
 {
     u8 i;
 
@@ -2795,22 +2796,22 @@ static void sub_81C2AFC(u8 a)
     ClearWindowTilemap(2);
     ClearWindowTilemap(3);
 
-    switch (a)
+    switch (page)
     {
-        case 0:
+        case PSS_PAGE_INFO:
             PutWindowTilemap(0);
             PutWindowTilemap(4);
             if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE)
                 PutWindowTilemap(8);
             PutWindowTilemap(9);
             break;
-        case 1:
+        case PSS_PAGE_SKILLS:
             PutWindowTilemap(1);
             PutWindowTilemap(10);
             PutWindowTilemap(11);
             PutWindowTilemap(12);
             break;
-        case 2:
+        case PSS_PAGE_BATTLE_MOVES:
             PutWindowTilemap(2);
             if (pssData->mode == PSS_MODE_SELECT_MOVE)
             {
@@ -2822,7 +2823,7 @@ static void sub_81C2AFC(u8 a)
                 PutWindowTilemap(5);
             }
             break;
-        case 3:
+        case PSS_PAGE_CONTEST_MOVES:
             PutWindowTilemap(3);
             if (pssData->mode == PSS_MODE_SELECT_MOVE)
             {
@@ -2836,7 +2837,7 @@ static void sub_81C2AFC(u8 a)
             break;
     }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
         PutWindowTilemap(pssData->windowIds[i]);
     }
@@ -2844,23 +2845,23 @@ static void sub_81C2AFC(u8 a)
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
-static void sub_81C2C38(u8 a)
+static void ClearPageWindowTilemaps(u8 page)
 {
     u8 i;
-    switch (a)
+    switch (page)
     {
-        case 0:
+        case PSS_PAGE_INFO:
             ClearWindowTilemap(4);
             if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE)
                 ClearWindowTilemap(8);
             ClearWindowTilemap(9);
             break;
-        case 1:
+        case PSS_PAGE_SKILLS:
             ClearWindowTilemap(10);
             ClearWindowTilemap(11);
             ClearWindowTilemap(12);
             break;
-        case 2:
+        case PSS_PAGE_BATTLE_MOVES:
             if (pssData->mode == PSS_MODE_SELECT_MOVE)
             {
                 if (pssData->newMove != MOVE_NONE || pssData->firstMoveIndex != MAX_MON_MOVES)
@@ -2871,7 +2872,7 @@ static void sub_81C2C38(u8 a)
                 ClearWindowTilemap(5);
             }
             break;
-        case 3:
+        case PSS_PAGE_CONTEST_MOVES:
             if (pssData->mode == PSS_MODE_SELECT_MOVE)
             {
                 if (pssData->newMove != MOVE_NONE || pssData->firstMoveIndex != MAX_MON_MOVES)
@@ -2884,7 +2885,7 @@ static void sub_81C2C38(u8 a)
             break;
     }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
         SummaryScreen_RemoveWindowByIndex(i);
     }
@@ -2917,7 +2918,7 @@ static void SummaryScreen_RemoveWindowByIndex(u8 windowIndex)
 static void PrintPageSpecificText(u8 pageIndex)
 {
     u16 i;
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
         if (pssData->windowIds[i] != 0xFF)
             FillWindowPixelBuffer(pssData->windowIds[i], 0);
@@ -2950,7 +2951,7 @@ static void PrintInfoPageText(void)
     }
 }
 
-static void sTask_PrintInfoPage(u8 taskId)
+static void Task_PrintInfoPage(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -3078,7 +3079,7 @@ static void PrintMonTrainerMemo(void)
 
 static void BufferNatureString(void)
 {
-    struct UnkSummaryStruct *sumStruct = pssData;
+    struct PssData *sumStruct = pssData;
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNatureNamePointers[sumStruct->summary.nature]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString5);
 }
@@ -3215,7 +3216,7 @@ static void PrintSkillsPageText(void)
     PrintExpPointsNextLevel();
 }
 
-static void sTask_PrintSkillsPage(u8 taskId)
+static void Task_PrintSkillsPage(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -3383,7 +3384,7 @@ static void PrintBattleMoves(void)
     }
 }
 
-static void sTask_PrintBattleMoves(u8 taskId)
+static void Task_PrintBattleMoves(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -3434,7 +3435,7 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     u32 ppState;
     const u8 *text;
     u32 offset;
-    struct UnkSummaryStruct *summaryStruct = pssData;
+    struct PssData *summaryStruct = pssData;
     u8 moveNameWindowId = AddWindowFromTemplateList(gUnknown_0861CD14, 0);
     u8 ppValueWindowId = AddWindowFromTemplateList(gUnknown_0861CD14, 1);
     u16 move = summaryStruct->summary.moves[moveIndex];
@@ -3511,7 +3512,7 @@ static void PrintContestMoves(void)
     }
 }
 
-static void sTask_PrintContestMoves(u8 taskId)
+static void Task_PrintContestMoves(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 dataa = data[0] - 1;
