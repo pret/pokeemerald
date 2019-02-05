@@ -2378,6 +2378,21 @@ Move_DISARMING_VOICE:
 	end
 	
 Move_PARTING_SHOT:
+	loadspritegfx ANIM_TAG_NOISE_LINE
+	fadetobg BG_DARK
+	waitbgfadein
+	delay 0
+	createvisualtask sub_8158E9C, 2, 0, 255
+	call RoarEffect
+	delay 10
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 9, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 9, 1
+	waitforvisualfinish
+	createvisualtask sub_8159078, 5
+	waitforvisualfinish
+	delay 1
+	restorebg
+	waitbgfadein
 	end
 	
 Move_TOPSY_TURVY:

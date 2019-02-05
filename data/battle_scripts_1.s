@@ -342,6 +342,47 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectPowder
 	.4byte BattleScript_EffectSpAtkUpHit
 	.4byte BattleScript_EffectBelch
+	.4byte BattleScript_EffectPartingShot
+	
+BattleScript_EffectPartingShot::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_ATK, 0x0, BattleScript_EffectPartingShotTryAtk
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPATK, 0x0, BattleScript_CantLowerMultipleStats
+BattleScript_EffectPartingShotTryAtk:
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE	
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_ATK | BIT_SPATK, ATK48_STAT_NEGATIVE | ATK48_ONLY_MULTIPLE
+	playstatchangeanimation BS_TARGET, BIT_ATK, ATK48_STAT_NEGATIVE
+	setstatchanger STAT_ATK, 1, TRUE
+	statbuffchange 0x1, BattleScript_EffectPartingShotTrySpAtk
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+BattleScript_EffectPartingShotTrySpAtk:
+	playstatchangeanimation BS_TARGET, BIT_SPATK, ATK48_STAT_NEGATIVE
+	setstatchanger STAT_SPATK, 1, TRUE
+	statbuffchange 0x1, BattleScript_MoveEnd
+	printfromtable gStatDownStringIds
+	waitmessage 0x40
+	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_MoveEnd
+	openpartyscreen BS_ATTACKER, BattleScript_ButItFailed
+	printstring STRINGID_PKMNWENTBACK
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 0x2
+	returnatktoball
+	waitstate
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+	goto BattleScript_MoveEnd
 	
 BattleScript_EffectSpAtkUpHit:
 	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
