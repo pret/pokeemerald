@@ -37,6 +37,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -6848,7 +6849,7 @@ void SetWildMonHeldItem(void)
             var1 = 20;
             var2 = 80;
         }
-        if (gMapHeader.mapLayoutId == 0x1A4)
+        if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
         {
             s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
             if (alteringCaveId != 0)

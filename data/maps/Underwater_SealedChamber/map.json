@@ -1,0 +1,37 @@
+{
+  "id": "MAP_UNDERWATER_SEALED_CHAMBER",
+  "name": "Underwater_SealedChamber",
+  "layout": "LAYOUT_UNDERWATER_SEALED_CHAMBER",
+  "music": "MUS_DEEPDEEP",
+  "region_map_section": "MAPSEC_UNDERWATER_SEALED_CHAMBER",
+  "requires_flash": false,
+  "weather": "WEATHER_BUBBLES",
+  "map_type": "MAP_TYPE_UNDERWATER",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_UNDERWATER_ROUTE134",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Underwater_SealedChamber_EventScript_2390FC"
+    }
+  ]
+}

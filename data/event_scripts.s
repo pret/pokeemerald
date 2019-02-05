@@ -7,6 +7,7 @@
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
+#include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"

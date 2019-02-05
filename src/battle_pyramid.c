@@ -30,6 +30,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/species.h"
@@ -1380,9 +1381,9 @@ u8 GetPyramidRunMultiplier(void)
 
 u8 InBattlePyramid(void)
 {
-    if (gMapHeader.mapLayoutId == 361)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         return 1;
-    else if (gMapHeader.mapLayoutId == 378)
+    else if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
         return 2;
     else
         return FALSE;
@@ -1390,7 +1391,8 @@ u8 InBattlePyramid(void)
 
 bool8 InBattlePyramid_(void)
 {
-    return (gMapHeader.mapLayoutId == 361 || gMapHeader.mapLayoutId == 378);
+    return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP;
 }
 
 void sub_81A9E90(void)

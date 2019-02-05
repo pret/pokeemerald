@@ -28,11 +28,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9CE9:: @ 81F9CE9
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF3
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF3:: @ 81F9CF3
-	setmaplayoutindex 432
+	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08480DAC
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7:: @ 81F9CF7
-	setmaplayoutindex 432
+	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08480DAC
 	setobjectmovementtype 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm 3, 5, 10
 	end
