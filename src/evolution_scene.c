@@ -9,6 +9,7 @@
 #include "evolution_graphics.h"
 #include "gpu_regs.h"
 #include "link.h"
+#include "link_rfu.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -16,10 +17,12 @@
 #include "palette.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_summary_screen.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
+#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
@@ -39,21 +42,17 @@ struct EvoInfo
     u16 savedPalette[48];
 };
 
+// EWRAM vars
 static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
 static EWRAM_DATA u16 *sEvoMovingBgPtr = NULL;
+
+// IWRAM common
+void (*gCB2_AfterEvolution)(void);
 
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskID      gBattleCommunication[2]
 
-extern const struct WindowTemplate gUnknown_0833900C;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-
-// strings
-extern const u8 gText_CommunicationStandby5[];
-
-extern void ShowSelectMovePokemonSummaryScreen(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
-extern u8 sub_81C1B94(void);
-extern void sub_800E084(void);
 
 // this file's functions
 static void Task_EvolutionScene(u8 taskID);

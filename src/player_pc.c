@@ -355,11 +355,11 @@ static void PlayerPCProcessMenuInput(u8 taskId)
     else
         inputOptionId = Menu_ProcessInputNoWrap();
 
-    switch(inputOptionId)
+    switch (inputOptionId)
     {
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             break;
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             sub_8198070(data[4], FALSE);
             ClearWindowTilemap(data[4]);
@@ -464,13 +464,13 @@ static void ItemStorageMenuProcessInput(u8 taskId)
     r5 = Menu_GetCursorPos();
     inputOptionId = Menu_ProcessInput();
     r2 = Menu_GetCursorPos();
-    switch(inputOptionId)
+    switch (inputOptionId)
     {
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             if (r5 != r2)
                 ItemStorageMenuPrint(gPCText_OptionDescList[r2]);
             break;
-        case -1:
+        case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             ItemStorage_Exit(taskId);
             break;
@@ -638,14 +638,14 @@ static void Mailbox_ProcessInput(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        inputOptionId = ListMenuHandleInputGetItemId(data[5]);
+        inputOptionId = ListMenu_ProcessInput(data[5]);
         ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
 
-        switch(inputOptionId)
+        switch (inputOptionId)
         {
-            case -1:
+            case LIST_NOTHING_CHOSEN:
                 break;
-            case -2:
+            case LIST_B_PRESSED:
                 PlaySE(SE_SELECT);
                 RemoveScrollIndicatorArrowPair(playerPCItemPageInfo.scrollIndicatorId);
                 Mailbox_ReturnToPlayerPC(taskId);
@@ -1145,13 +1145,13 @@ static void ItemStorage_ProcessInput(u8 taskId)
     }
     else
     {
-        id = ListMenuHandleInputGetItemId(data[5]);
+        id = ListMenu_ProcessInput(data[5]);
         ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
         switch(id)
         {
-        case -1:
+        case LIST_NOTHING_CHOSEN:
             break;
-        case -2:
+        case LIST_B_PRESSED:
             PlaySE(SE_SELECT);
             ItemStorage_GoBackToPlayerPCMenu(taskId);
             break;
@@ -1218,21 +1218,23 @@ static void sub_816C4FC(u8 taskId)
         ItemStorage_DoItemSwap(taskId, FALSE);
         return;
     }
-    id = ListMenuHandleInputGetItemId(data[5]);
+    id = ListMenu_ProcessInput(data[5]);
     ListMenuGetScrollAndRow(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
     sub_81223FC(gUnknown_0203BCC4->spriteIds, 7, 0);
     sub_816C690(playerPCItemPageInfo.cursorPos);
     switch(id)
     {
-    case -1:
+    case LIST_NOTHING_CHOSEN:
         break;
-    case -2:
+    case LIST_B_PRESSED:
         if (gMain.newKeys & A_BUTTON)
         {
             ItemStorage_DoItemSwap(taskId, FALSE);
         }
         else
+        {
             ItemStorage_DoItemSwap(taskId, TRUE);
+        }
         break;
     default:
         ItemStorage_DoItemSwap(taskId, FALSE);

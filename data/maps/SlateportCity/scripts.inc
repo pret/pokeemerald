@@ -26,13 +26,13 @@ SlateportCity_EventScript_1DCC99:: @ 81DCC99
 	setobjectxyperm 8, 28, 16
 	setobjectxyperm 1, 29, 16
 	setobjectxyperm 2, 31, 14
-	setobjectmovementtype 11, 8
-	setobjectmovementtype 7, 18
-	setobjectmovementtype 3, 16
-	setobjectmovementtype 6, 7
-	setobjectmovementtype 8, 7
-	setobjectmovementtype 1, 7
-	setobjectmovementtype 2, 9
+	setobjectmovementtype 11, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype 7, MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT
+	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_UP_AND_RIGHT
+	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_UP
+	setobjectmovementtype 8, MOVEMENT_TYPE_FACE_UP
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SlateportCity_EventScript_1DCCE7:: @ 81DCCE7
@@ -41,12 +41,12 @@ SlateportCity_EventScript_1DCCE7:: @ 81DCCE7
 	compare VAR_0x8004, 30
 	goto_if_eq SlateportCity_EventScript_1DCD06
 	setobjectxyperm 35, 23, 27
-	setobjectmovementtype 35, 10
+	setobjectmovementtype 35, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SlateportCity_EventScript_1DCD06:: @ 81DCD06
 	setobjectxyperm 35, 22, 27
-	setobjectmovementtype 35, 10
+	setobjectmovementtype 35, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SlateportCity_MapScript2_1DCD12: @ 81DCD12
@@ -82,7 +82,7 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	waitmovement 0
 	removeobject 35
 	setobjectxyperm 35, 10, 12
-	setobjectmovementtype 35, 8
+	setobjectmovementtype 35, MOVEMENT_TYPE_FACE_DOWN
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	setvar VAR_0x40D2, 2
 	addvar VAR_0x40D1, 1

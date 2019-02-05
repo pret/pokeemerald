@@ -406,7 +406,7 @@ gSpriteTemplate_858998C:: @ 858998C
 	spr_template 0x80eb, 0x80eb, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
 
 	.align 2
-gUnknown_085899EC:: @ 85899EC
+gContestExcitementTable:: @ 85899EC
 	.2byte 0x0001, 0xffff, 0x0000, 0x0001, 0xffff, 0x00ff, 0x0001, 0xffff, 0x00ff, 0x0001, 0xff00, 0x00ff, 0x0001, 0x0000
 
 

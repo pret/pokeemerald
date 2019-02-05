@@ -38,22 +38,22 @@ LavaridgeTown_Gym_1F_EventScript_1FE756:: @ 81FE756
 LavaridgeTown_Gym_1F_EventScript_1FE757:: @ 81FE757
 	checktrainerflag TRAINER_COLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1FE764
-	setobjectmovementtype 2, 63
+	setobjectmovementtype 2, MOVEMENT_TYPE_HIDDEN
 
 LavaridgeTown_Gym_1F_EventScript_1FE764:: @ 81FE764
 	checktrainerflag TRAINER_GERALD
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1FE771
-	setobjectmovementtype 3, 63
+	setobjectmovementtype 3, MOVEMENT_TYPE_HIDDEN
 
 LavaridgeTown_Gym_1F_EventScript_1FE771:: @ 81FE771
 	checktrainerflag TRAINER_AXLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1FE77E
-	setobjectmovementtype 4, 63
+	setobjectmovementtype 4, MOVEMENT_TYPE_HIDDEN
 
 LavaridgeTown_Gym_1F_EventScript_1FE77E:: @ 81FE77E
 	checktrainerflag TRAINER_DANIELLE
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1FE78B
-	setobjectmovementtype 5, 63
+	setobjectmovementtype 5, MOVEMENT_TYPE_HIDDEN
 
 LavaridgeTown_Gym_1F_EventScript_1FE78B:: @ 81FE78B
 	return

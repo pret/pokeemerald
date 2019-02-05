@@ -665,19 +665,19 @@ gText_0827E817:: @ 827E817
 	.string "{STR_VAR_1}'s\n"
 	.string "{STR_VAR_2} is ignored.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
-gText_0827E837:: @ 827E837
+gText_Contest_Shyness:: @ 827E837
 	.string "shyness$"
 
-gText_0827E83F:: @ 827E83F
+gText_Contest_Anxiety:: @ 827E83F
 	.string "anxiety$"
 
-gText_0827E847:: @ 827E847
+gText_Contest_Laziness:: @ 827E847
 	.string "laziness$"
 
-gText_0827E850:: @ 827E850
+gText_Contest_Hesitancy:: @ 827E850
 	.string "hesitancy$"
 
-gText_0827E85A:: @ 827E85A
+gText_Contest_Fear:: @ 827E85A
 	.string "fear$"
 
 gText_0827E85F:: @ 827E85F

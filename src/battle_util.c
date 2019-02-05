@@ -78,38 +78,38 @@ u8 GetBattlerForBattleScript(u8 caseId)
     return ret;
 }
 
-void PressurePPLose(u8 defender, u8 attacker, u16 move)
+void PressurePPLose(u8 target, u8 attacker, u16 move)
 {
-    s32 i;
+    int moveIndex;
 
-    if (gBattleMons[defender].ability != ABILITY_PRESSURE)
+    if (gBattleMons[target].ability != ABILITY_PRESSURE)
         return;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        if (gBattleMons[attacker].moves[i] == move)
+        if (gBattleMons[attacker].moves[moveIndex] == move)
             break;
     }
 
-    if (i == MAX_MON_MOVES) // mons don't share any moves
+    if (moveIndex == MAX_MON_MOVES)
         return;
 
-    if (gBattleMons[attacker].pp[i] != 0)
-        gBattleMons[attacker].pp[i]--;
+    if (gBattleMons[attacker].pp[moveIndex] != 0)
+        gBattleMons[attacker].pp[moveIndex]--;
 
     if (!(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].unk18_b & gBitTable[i]))
+        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[moveIndex]))
     {
         gActiveBattler = attacker;
-        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + i, 0, 1, &gBattleMons[gActiveBattler].pp[i]);
+        BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + moveIndex, 0, 1, &gBattleMons[gActiveBattler].pp[moveIndex]);
         MarkBattlerForControllerExec(gActiveBattler);
     }
 }
 
 void PressurePPLoseOnUsingImprision(u8 attacker)
 {
-    s32 i, j;
-    s32 imprisionPos = 4;
+    int i, j;
+    int imprisionPos = 4;
     u8 atkSide = GetBattlerSide(attacker);
 
     for (i = 0; i < gBattlersCount; i++)
@@ -132,7 +132,7 @@ void PressurePPLoseOnUsingImprision(u8 attacker)
 
     if (imprisionPos != 4
         && !(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].unk18_b & gBitTable[imprisionPos]))
+        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[imprisionPos]))
     {
         gActiveBattler = attacker;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + imprisionPos, 0, 1, &gBattleMons[gActiveBattler].pp[imprisionPos]);
@@ -142,8 +142,8 @@ void PressurePPLoseOnUsingImprision(u8 attacker)
 
 void PressurePPLoseOnUsingPerishSong(u8 attacker)
 {
-    s32 i, j;
-    s32 perishSongPos = 4;
+    int i, j;
+    int perishSongPos = 4;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -165,7 +165,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
 
     if (perishSongPos != MAX_MON_MOVES
         && !(gBattleMons[attacker].status2 & STATUS2_TRANSFORMED)
-        && !(gDisableStructs[attacker].unk18_b & gBitTable[perishSongPos]))
+        && !(gDisableStructs[attacker].mimickedMoves & gBitTable[perishSongPos]))
     {
         gActiveBattler = attacker;
         BtlController_EmitSetMonData(0, REQUEST_PPMOVE1_BATTLE + perishSongPos, 0, 1, &gBattleMons[gActiveBattler].pp[perishSongPos]);
@@ -175,7 +175,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
 
 void MarkAllBattlersForControllerExec(void) // unused
 {
-    s32 i;
+    int i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
@@ -314,14 +314,14 @@ u8 TrySetCantSelectMoveBattleScript(void)
     u8 holdEffect;
     u16* choicedMove = &gBattleStruct->choicedMove[gActiveBattler];
 
-    if (gDisableStructs[gActiveBattler].disabledMove == move && move != 0)
+    if (gDisableStructs[gActiveBattler].disabledMove == move && move != MOVE_NONE)
     {
         gBattleScripting.battler = gActiveBattler;
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
             gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingDisabledMoveInPalace;
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
@@ -336,7 +336,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
             gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingTormentedMoveInPalace;
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
@@ -351,7 +351,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
             gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedMoveTauntInPalace;
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
@@ -366,7 +366,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
             gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingImprisionedMoveInPalace;
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
@@ -388,7 +388,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gLastUsedItem = gBattleMons[gActiveBattler].item;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
@@ -401,7 +401,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gProtectStructs[gActiveBattler].flag_x10 = 1;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = 1;
         }
         else
         {
@@ -3035,7 +3035,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     MarkBattlerForControllerExec(gActiveBattler);
                     break;
                 case ITEM_PP_CHANGE:
-                    if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[battlerId].unk18_b & gBitTable[i]))
+                    if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED) && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[i]))
                         gBattleMons[battlerId].pp[i] = changedPP;
                     break;
                 }

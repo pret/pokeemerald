@@ -1238,7 +1238,6 @@ const u16* GetValidMonIconPalettePtr(u16 species)
     return gMonIconPaletteTable[gMonIconPaletteIndices[species]].data;
 }
 
-// TODO: try to find a way to avoid using asm statement
 u8 UpdateMonIconFrame(struct Sprite *sprite)
 {
     u8 result = 0;
@@ -1262,10 +1261,7 @@ u8 UpdateMonIconFrame(struct Sprite *sprite)
                 (u8 *)sprite->images + (sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame),
                 (u8 *)(OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP),
                 sSpriteImageSizes[sprite->oam.shape][sprite->oam.size]);
-            {
-                register u8 duration asm("r0") = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;
-                sprite->animDelayCounter = duration;
-            }
+            sprite->animDelayCounter = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration & 0xFF;
             sprite->animCmdIndex++;
             result = sprite->animCmdIndex;
             break;

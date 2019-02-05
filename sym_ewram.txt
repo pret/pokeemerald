@@ -140,19 +140,6 @@ gUnknown_02022D00: @ 2022D00
 	.include "src/scanline_effect.o"
 	.include "src/option_menu.o"
 	.include "src/pokedex.o"
-
-gTrainerCards: @ 2039B58
-	.space 0x14
-
-gUnknown_02039B6C: @ 2039B6C
-	.space 0x2
-
-gUnknown_02039B6E: @ 2039B6E
-	.space 0x1A
-
-gUnknown_02039B88: @ 2039B88
-	.space 0x160
-
 	.include "src/trainer_card.o"
 	.include "src/frontier_pass.o"
 	.include "src/pokemon_storage_system.o"
@@ -161,14 +148,6 @@ gUnknown_02039B88: @ 2039B88
 	.include "src/map_name_popup.o"
 	.include "src/item.o"
 	.include "src/contest.o"
-
-	.align 2
-gUnknown_02039F5C: @ 2039F5C
-	.space 0x1
-
-gUnknown_02039F5D: @ 2039F5D
-	.space 0x3
-
 	.include "src/shop.o"
 	.include "src/fldeff_escalator.o"
 	.include "src/script_menu.o"
@@ -177,21 +156,12 @@ gUnknown_02039F5D: @ 2039F5D
 	.include "src/record_mixing.o"
 	.include "src/secret_base.o"
 	.include "src/tv.o"
-
-gUnknown_0203A034: @ 203A034
-	.space 0x4
-
+	.include "src/contest_link_80F57C4.o"
 	.include "src/rotating_gate.o"
 	.include "src/safari_zone.o"
-
-gUnknown_0203A0F4: @ 203A0F4
-	.space 0x4
-
+	.include "src/item_use.o"
 	.include "src/battle_anim_effects_1.o"
-
-gUnknown_0203A100: @ 203A100
-	.space 0x10
-
+	.include "src/dragon.o"
 	.include "src/battle_anim_utility_funcs.o"
 	.include "src/battle_intro.o"
 	.include "src/easy_chat.o"

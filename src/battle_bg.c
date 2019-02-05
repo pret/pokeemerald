@@ -1037,10 +1037,10 @@ void sub_8035D74(u8 taskId)
     case 1:
         palId = AllocSpritePalette(0x2710);
         gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = 0x7FFF;
-        gBattleStruct->field_7D = CreateSprite(&gUnknown_0831A9D0, 111, 80, 0);
-        gBattleStruct->field_7E = CreateSprite(&gUnknown_0831A9E8, 129, 80, 0);
-        gSprites[gBattleStruct->field_7D].invisible = TRUE;
-        gSprites[gBattleStruct->field_7E].invisible = TRUE;
+        gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&gUnknown_0831A9D0, 111, 80, 0);
+        gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&gUnknown_0831A9E8, 129, 80, 0);
+        gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;
+        gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
     case 2:
@@ -1071,15 +1071,15 @@ void sub_8035D74(u8 taskId)
 
             PlaySE(SE_W231);
             DestroyTask(taskId);
-            gSprites[gBattleStruct->field_7D].invisible = FALSE;
-            gSprites[gBattleStruct->field_7E].invisible = FALSE;
-            gSprites[gBattleStruct->field_7E].oam.tileNum += 0x40;
-            gSprites[gBattleStruct->field_7D].data[0] = 0;
-            gSprites[gBattleStruct->field_7E].data[0] = 1;
-            gSprites[gBattleStruct->field_7D].data[1] = gSprites[gBattleStruct->field_7D].pos1.x;
-            gSprites[gBattleStruct->field_7E].data[1] = gSprites[gBattleStruct->field_7E].pos1.x;
-            gSprites[gBattleStruct->field_7D].data[2] = 0;
-            gSprites[gBattleStruct->field_7E].data[2] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = FALSE;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = FALSE;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.tileNum += 0x40;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[0] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[0] = 1;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_V].pos1.x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_S].pos1.x;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[2] = 0;
+            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[2] = 0;
         }
         break;
     }

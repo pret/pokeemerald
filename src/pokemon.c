@@ -37,6 +37,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -5242,14 +5243,14 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[battlerId];
                                     CopyPlayerPartyMonToBattleData(battlerId, pokemon_order_func(gBattlerPartyIndexes[battlerId]));
-                                    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
+                                    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
+                                        gBattleResults.numRevivesUsed++;
                                 }
                                 else
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[gActiveBattler ^ 2];
-                                    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleResults.unk4 < 255)
-                                        gBattleResults.unk4++;
+                                    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
+                                        gBattleResults.numRevivesUsed++;
                                 }
                             }
                         }
@@ -5289,8 +5290,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                     gBattleMons[battlerId].hp = dataUnsigned;
                                     if (!(r10 & 0x10) && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
                                     {
-                                        if (gBattleResults.unk3 < 255)
-                                            gBattleResults.unk3++;
+                                        if (gBattleResults.numHealingItemsUsed < 255)
+                                            gBattleResults.numHealingItemsUsed++;
                                         // I have to re-use this variable to match.
                                         r5 = gActiveBattler;
                                         gActiveBattler = battlerId;
@@ -5329,7 +5330,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                     SetMonData(mon, MON_DATA_PP1 + r5, &dataUnsigned);
                                     if (gMain.inBattle
                                      && battlerId != 4 && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                     && !(gDisableStructs[battlerId].unk18_b & gBitTable[r5]))
+                                     && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[r5]))
                                         gBattleMons[battlerId].pp[r5] = dataUnsigned;
                                     retVal = FALSE;
                                 }
@@ -5354,7 +5355,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
                                 if (gMain.inBattle
                                  && battlerId != 4 && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
-                                 && !(gDisableStructs[battlerId].unk18_b & gBitTable[moveIndex]))
+                                 && !(gDisableStructs[battlerId].mimickedMoves & gBitTable[moveIndex]))
                                     gBattleMons[battlerId].pp[moveIndex] = dataUnsigned;
                                 retVal = FALSE;
                             }
@@ -6848,7 +6849,7 @@ void SetWildMonHeldItem(void)
             var1 = 20;
             var2 = 80;
         }
-        if (gMapHeader.mapLayoutId == 0x1A4)
+        if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
         {
             s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
             if (alteringCaveId != 0)

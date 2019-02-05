@@ -28,7 +28,7 @@ LavaridgeTown_EventScript_1EA518:: @ 81EA518
 LavaridgeTown_EventScript_1EA529:: @ 81EA529
 	setobjectxyperm 8, 11, 9
 	setobjectxyperm 7, 9, 8
-	setobjectmovementtype 7, 7
+	setobjectmovementtype 7, MOVEMENT_TYPE_FACE_UP
 	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_1
 	return
 

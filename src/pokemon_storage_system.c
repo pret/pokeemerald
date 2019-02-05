@@ -1753,7 +1753,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         task->data[2] = Menu_ProcessInput();
         switch(task->data[2])
         {
-        case -2:
+        case MENU_NOTHING_CHOSEN:
             task->data[3] = task->data[1];
             if (gMain.newKeys & DPAD_UP && --task->data[3] < 0)
                 task->data[3] = 4;
@@ -1767,7 +1767,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
                 AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             }
             break;
-        case -1:
+        case MENU_B_PRESSED:
         case  4:
             sub_819746C(task->data[15], TRUE);
             ScriptContext2_Disable();

@@ -13,7 +13,4 @@ enum
 void sub_812FDA8(int);
 void CB2_ContestPainting(void);
 
-extern u8 gUnknown_02039F5C;
-extern u8 gUnknown_02039F5D;
-
 #endif

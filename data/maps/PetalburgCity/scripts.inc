@@ -1,3 +1,8 @@
+PetalburgCity_MapScripts::
+	map_script 3, PetalburgCity_MapScript1_1DC2D7
+	map_script 2, PetalburgCity_MapScript2_1DC31C
+	.byte 0
+
 PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7
 	setflag FLAG_VISITED_PETALBURG_CITY
 	compare VAR_0x4057, 0

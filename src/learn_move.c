@@ -638,7 +638,7 @@ static void HideSpritesAndPrintTeachText(bool8 a)
 
 static void HandleInput(bool8 showContest)
 {
-    s32 itemId = ListMenuHandleInputGetItemId(sLearnMoveStruct->listMenuTask);
+    s32 itemId = ListMenu_ProcessInput(sLearnMoveStruct->listMenuTask);
     ListMenuGetScrollAndRow(sLearnMoveStruct->listMenuTask, &sLearnMoveStruct2.listOffset, &sLearnMoveStruct2.listRow);
 
     switch (itemId)

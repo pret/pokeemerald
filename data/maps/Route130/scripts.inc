@@ -23,11 +23,11 @@ Route130_MapScript1_1F7365: @ 81F7365
 	setflag FLAG_TEMP_1D
 	setflag FLAG_TEMP_1E
 	setflag FLAG_TEMP_1F
-	setmaplayoutindex 263
+	setmaplayoutindex LAYOUT_ROUTE130
 	end
 
 Route130_EventScript_1F73B1:: @ 81F73B1
-	setmaplayoutindex 46
+	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08417FC4
 	end
 
 Route130_EventScript_1F73B5:: @ 81F73B5
