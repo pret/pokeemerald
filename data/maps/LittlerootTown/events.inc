@@ -25,11 +25,11 @@ LittlerootTown_MapCoordEvents::
 	coord_event 13, 2, 3, VAR_0x4050, 3, LittlerootTown_EventScript_1E81CE
 
 LittlerootTown_MapBGEvents::
-	bg_event 38, 25, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8151
+	bg_event 37, 25, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8151
 	bg_event 8, 17, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E815A
 	bg_event 9, 8, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8163
 	bg_event 14, 18, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E818F
-	bg_event 37, 25, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8151
+	bg_event 38, 25, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8151
 
 LittlerootTown_MapEvents::
 	map_events LittlerootTown_EventObjects, LittlerootTown_MapWarps, LittlerootTown_MapCoordEvents, LittlerootTown_MapBGEvents
