@@ -1034,3 +1034,11 @@ LittlerootTown_Text_1E8DA2: @ 81E8DA2
 	.string "I have something to show you.\n"
 	.string "Let's go to my LAB.$"
 
+LittlerootTown_HealingShrine::
+	msgbox LittlerootTown_HealingShrine_Text, MSGBOX_DEFAULT
+	end
+
+LittlerootTown_HealingShrine_Text:
+	.string "The sound of the waves fills you\n"
+	.string "with determination.\p"
+	.string "Your Pokémon were fully healed!$"

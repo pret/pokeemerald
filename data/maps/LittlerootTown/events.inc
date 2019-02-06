@@ -30,6 +30,7 @@ LittlerootTown_MapBGEvents::
 	bg_event 9, 8, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8163
 	bg_event 14, 18, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E818F
 	bg_event 38, 25, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_EventScript_1E8151
+	bg_event 24, 13, 3, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_HealingShrine
 
 LittlerootTown_MapEvents::
 	map_events LittlerootTown_EventObjects, LittlerootTown_MapWarps, LittlerootTown_MapCoordEvents, LittlerootTown_MapBGEvents
