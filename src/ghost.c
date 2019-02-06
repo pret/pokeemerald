@@ -275,7 +275,7 @@ static void sub_81116E8(struct Sprite *sprite)
     if (sprite->data[6] == 0)
     {
         sprite->invisible = TRUE; 
-        sprite->callback = sub_80A67F4;
+        sprite->callback = DestroyAnimSpriteAndDisableBlend;
     }
     else
         sub_8111764(sprite);
@@ -536,7 +536,7 @@ void sub_8111C50(u8 taskId)
     gSprites[task->data[0]].data[3] = 0;
     gSprites[task->data[0]].data[4] = 0;
     StoreSpriteCallbackInData6(&gSprites[task->data[0]], SpriteCallbackDummy);
-    gSprites[task->data[0]].callback = AnimTranslateLinearSimple;
+    gSprites[task->data[0]].callback = TranslateSpriteLinearFixedPoint;
     task->func = sub_8111D78;
 }
 

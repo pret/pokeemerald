@@ -1924,7 +1924,7 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
 
 void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
 
     if (!toBG_2)
@@ -1942,9 +1942,9 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
             RequestDma3Fill(0xFF, (void*)(VRAM + 0xe000), 0x1000, 0);
         }
 
-        sub_80A6B30(&unknownStruct);
-        CpuFill16(0, unknownStruct.bgTiles, 0x1000);
-        CpuFill16(0xFF, unknownStruct.unk4, 0x800);
+        sub_80A6B30(&animBg);
+        CpuFill16(0, animBg.bgTiles, 0x1000);
+        CpuFill16(0xFF, animBg.bgTilemap, 0x800);
 
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 2);
         SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
@@ -1963,15 +1963,15 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
         SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
 
-        LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], unknownStruct.unk8 * 16, 0x20);
-        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + unknownStruct.unk8 * 32), 0x20);
+        LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], animBg.paletteId * 16, 0x20);
+        CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + animBg.paletteId * 32), 0x20);
 
         if (IsContest())
             battlerPosition = 0;
         else
             battlerPosition = GetBattlerPosition(battlerId);
 
-        sub_8118FBC(1, 0, 0, battlerPosition, unknownStruct.unk8, unknownStruct.bgTiles, unknownStruct.unk4, unknownStruct.tilesOffset);
+        sub_8118FBC(1, 0, 0, battlerPosition, animBg.paletteId, animBg.bgTiles, animBg.bgTilemap, animBg.tilesOffset);
 
         if (IsContest())
             sub_80A46A0();
@@ -1980,9 +1980,9 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
     {
         RequestDma3Fill(0, (void*)(VRAM + 0x6000), 0x2000, 1);
         RequestDma3Fill(0, (void*)(VRAM + 0xF000), 0x1000, 1);
-        sub_80A6B90(&unknownStruct, 2);
-        CpuFill16(0, unknownStruct.bgTiles + 0x1000, 0x1000);
-        CpuFill16(0, unknownStruct.unk4 + 0x400, 0x800);
+        sub_80A6B90(&animBg, 2);
+        CpuFill16(0, animBg.bgTiles + 0x1000, 0x1000);
+        CpuFill16(0, animBg.bgTilemap + 0x400, 0x800);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
         SetAnimBgAttribute(2, BG_ANIM_SCREEN_SIZE, 1);
         SetAnimBgAttribute(2, BG_ANIM_AREA_OVERFLOW_MODE, 0);
@@ -2001,20 +2001,20 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         LoadPalette(&gPlttBufferUnfaded[0x100 + battlerId * 16], 0x90, 0x20);
         CpuCopy32(&gPlttBufferUnfaded[0x100 + battlerId * 16], (void*)(BG_PLTT + 0x120), 0x20);
 
-        sub_8118FBC(2, 0, 0, GetBattlerPosition(battlerId), unknownStruct.unk8, unknownStruct.bgTiles + 0x1000, unknownStruct.unk4 + 0x400, unknownStruct.tilesOffset);
+        sub_8118FBC(2, 0, 0, GetBattlerPosition(battlerId), animBg.paletteId, animBg.bgTiles + 0x1000, animBg.bgTilemap + 0x400, animBg.tilesOffset);
     }
 }
 
 static void sub_80A46A0(void)
 {
     s32 i, j;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
     u16 *ptr;
 
     if (IsSpeciesNotUnown(gContestResources->field_18->species))
     {
-        sub_80A6B30(&unknownStruct);
-        ptr = unknownStruct.unk4;
+        sub_80A6B30(&animBg);
+        ptr = animBg.bgTilemap;
         for (i = 0; i < 8; i++)
         {
             for (j = 0; j < 4; j++)
@@ -2052,8 +2052,8 @@ void sub_80A4720(u16 a, u16 *b, u32 c, u8 d)
 
 void sub_80A477C(bool8 to_BG2)
 {
-    struct UnknownAnimStruct2 unknownStruct;
-    sub_80A6B30(&unknownStruct);
+    struct BattleAnimBgData animBg;
+    sub_80A6B30(&animBg);
 
     if (!to_BG2 || IsContest())
     {
@@ -2073,11 +2073,11 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 {
     u8 spriteId, palIndex;
     s16 x, y;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     spriteId = gTasks[taskId].data[0];
     palIndex = gTasks[taskId].data[6];
-    sub_80A6B30(&unknownStruct);
+    sub_80A6B30(&animBg);
     x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
     y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
 
@@ -2089,7 +2089,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
         gBattle_BG1_X = x + gTasks[taskId].data[3];
         gBattle_BG1_Y = y + gTasks[taskId].data[4];
         src = gPlttBufferFaded + 0x100 + palIndex * 16;
-        dst = gPlttBufferFaded + 0x100 + unknownStruct.unk8 * 16 - 256;
+        dst = gPlttBufferFaded + 0x100 + animBg.paletteId * 16 - 256;
         CpuCopy32(src, dst, 0x20);
     }
     else

@@ -1453,7 +1453,7 @@ void sub_815A6C4(struct Sprite *sprite)
 
 static void sub_815A73C(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         sprite->data[0] = 30;
         sprite->data[1] = 0;
@@ -2257,10 +2257,10 @@ void sub_815B7D0(u8 taskId)
 {
     int i, j;
     u8 position;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
     u8 *dest;
     u8 *src;
-    u16 *unk4;
+    u16 *bgTilemap;
     u16 stretch;
 
     switch (gTasks[taskId].data[0])
@@ -2288,7 +2288,7 @@ void sub_815B7D0(u8 taskId)
         break;
     case 2:
         HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
-        sub_80A6BFC(&unknownStruct, gBattleAnimAttacker);
+        sub_80A6BFC(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
             position = 0;
@@ -2296,21 +2296,21 @@ void sub_815B7D0(u8 taskId)
             position = GetBattlerPosition(gBattleAnimAttacker);
 
         src = gMonSpritesGfxPtr->sprites[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
-        dest = unknownStruct.bgTiles;
+        dest = animBg.bgTiles;
         CpuCopy32(src, dest, 0x800);
-        LoadBgTiles(1, unknownStruct.bgTiles, 0x800, unknownStruct.tilesOffset);
+        LoadBgTiles(1, animBg.bgTiles, 0x800, animBg.tilesOffset);
         if (IsContest())
         {
             if (IsSpeciesNotUnown(gContestResources->field_18->species) != IsSpeciesNotUnown(gContestResources->field_18->unk2))
             {
-                unk4 = (u16 *)unknownStruct.unk4;
+                bgTilemap = (u16 *)animBg.bgTilemap;
                 for (i = 0; i < 8; i++)
                 {
                     for (j = 0; j < 4; j++)
                     {
-                        u16 temp = unk4[j + i * 0x20];
-                        unk4[j + i * 0x20] = unk4[(7 - j) + i * 0x20];
-                        unk4[(7 - j) + i * 0x20] = temp;
+                        u16 temp = bgTilemap[j + i * 0x20];
+                        bgTilemap[j + i * 0x20] = bgTilemap[(7 - j) + i * 0x20];
+                        bgTilemap[(7 - j) + i * 0x20] = temp;
                     }
                 }
 
@@ -2318,7 +2318,7 @@ void sub_815B7D0(u8 taskId)
                 {
                     for (j = 0; j < 8; j++)
                     {
-                       unk4[j + i * 0x20] ^= 0x400;
+                       bgTilemap[j + i * 0x20] ^= 0x400;
                     }
                 }
             }
@@ -2380,7 +2380,7 @@ void sub_815BB58(u8 taskId)
 
 void sub_815BB84(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     switch (gTasks[taskId].data[0])
     {
@@ -2392,8 +2392,8 @@ void sub_815BB84(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-        sub_80A6B30(&unknownStruct);
-        sub_80A6D60(&unknownStruct, &gUnknown_08C2A6EC, 0);
+        sub_80A6B30(&animBg);
+        sub_80A6D60(&animBg, &gUnknown_08C2A6EC, 0);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -2409,8 +2409,8 @@ void sub_815BB84(u8 taskId)
             gBattle_BG1_Y = 0;
         }
 
-        sub_80A6CC0(unknownStruct.bgId, gUnknown_08C2A634, unknownStruct.tilesOffset);
-        LoadCompressedPalette(gUnknown_08C2A6D4, unknownStruct.unk8 << 4, 32);
+        AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C2A634, animBg.tilesOffset);
+        LoadCompressedPalette(gUnknown_08C2A6D4, animBg.paletteId * 16, 32);
 
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
@@ -2455,8 +2455,8 @@ void sub_815BB84(u8 taskId)
         }
         break;
     case 4:
-        sub_80A6B30(&unknownStruct);
-        sub_80A6C68(unknownStruct.bgId);
+        sub_80A6B30(&animBg);
+        sub_80A6C68(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
@@ -2571,7 +2571,7 @@ static void sub_815C050(struct Sprite *sprite)
 
 void sub_815C0A4(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     switch (gTasks[taskId].data[0])
     {
@@ -2583,8 +2583,8 @@ void sub_815C0A4(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-        sub_80A6B30(&unknownStruct);
-        sub_80A6D60(&unknownStruct, &gUnknown_08C2A6EC, 0);
+        sub_80A6B30(&animBg);
+        sub_80A6D60(&animBg, &gUnknown_08C2A6EC, 0);
         if (IsContest())
         {
             gBattle_BG1_X = -56;
@@ -2615,8 +2615,8 @@ void sub_815C0A4(u8 taskId)
             gBattle_BG1_Y = 0;
         }
 
-        sub_80A6CC0(unknownStruct.bgId, gUnknown_08C2A634, unknownStruct.tilesOffset);
-        LoadCompressedPalette(gUnknown_08C2A6D4, unknownStruct.unk8 << 4, 32);
+        AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C2A634, animBg.tilesOffset);
+        LoadCompressedPalette(gUnknown_08C2A6D4, animBg.paletteId * 16, 32);
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
         gTasks[taskId].data[0]++;
@@ -2654,8 +2654,8 @@ void sub_815C0A4(u8 taskId)
             gTasks[taskId].data[0] = 1;
         break;
     case 5:
-        sub_80A6B30(&unknownStruct);
-        sub_80A6C68(unknownStruct.bgId);
+        sub_80A6B30(&animBg);
+        sub_80A6C68(animBg.bgId);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
@@ -4130,13 +4130,13 @@ static void AnimTask_BarrageBallStep(u8 taskId)
         if (++task->data[1] > 1)
         {
             task->data[1] = 0;
-            TranslateAnimArc(&gSprites[task->data[15]]);
+            TranslateAnimHorizontalArc(&gSprites[task->data[15]]);
             if (++task->data[2] > 7)
                 task->data[0]++;
         }
         break;
     case 1:
-        if (TranslateAnimArc(&gSprites[task->data[15]]))
+        if (TranslateAnimHorizontalArc(&gSprites[task->data[15]]))
         {
             task->data[1] = 0;
             task->data[2] = 0;

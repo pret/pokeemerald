@@ -411,7 +411,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
 static void SpriteCB_TestBallThrow(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         u16 ballId;
         u8 taskId = sprite->oam.affineParam;
@@ -940,7 +940,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
     }
     else
     {
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;

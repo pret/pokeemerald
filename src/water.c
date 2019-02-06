@@ -876,31 +876,31 @@ void sub_810790C(struct Sprite *sprite)
 #ifdef NONMATCHING
 void AnimTask_CreateSurfWave(u8 taskId)
 {
-    struct UnknownAnimStruct2 unk;
+    struct BattleAnimBgData animBg;
     u8 taskId2;
     
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
     SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
-    sub_80A6B30(&unk);
+    sub_80A6B30(&animBg);
     if (!IsContest())
     {
         SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
-            sub_80A6D48(unk.bgId, gUnknown_08D95E00);
+            AnimLoadCompressedBgTilemap(animBg.bgId, gUnknown_08D95E00);
         else
-            sub_80A6D48(unk.bgId, gUnknown_08D960D0);
+            AnimLoadCompressedBgTilemap(animBg.bgId, gUnknown_08D960D0);
     }
     else
     {
-        sub_80A6D60(&unk, gUnknown_08D963A4, 1);
+        sub_80A6D60(&animBg, gUnknown_08D963A4, 1);
     }
-    sub_80A6CC0(unk.bgId, gBattleAnimBackgroundImage_Surf, unk.tilesOffset);
+    AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBackgroundImage_Surf, animBg.tilesOffset);
     if (gBattleAnimArgs[0] == 0)
-        LoadCompressedPalette(gBattleAnimBackgroundPalette_Surf, unk.unk8 * 16, 32);
+        LoadCompressedPalette(gBattleAnimBackgroundPalette_Surf, animBg.paletteId * 16, 32);
     else
-        LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, unk.unk8 * 16, 32);
+        LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, animBg.paletteId * 16, 32);
     taskId2 = CreateTask(sub_8107D58, gTasks[taskId].priority + 1);
     gTasks[taskId].data[15] = taskId2;
     gTasks[taskId2].data[0] = 0;
@@ -993,14 +993,14 @@ void AnimTask_CreateSurfWave(u8 taskId)
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
 	ldr r1, =gUnknown_08D95E00\n\
-	bl sub_80A6D48\n\
+	bl AnimLoadCompressedBgTilemap\n\
 	b _081079EA\n\
 	.pool\n\
 _081079D0:\n\
 	mov r0, sp\n\
 	ldrb r0, [r0, 0x9]\n\
 	ldr r1, =gUnknown_08D960D0\n\
-	bl sub_80A6D48\n\
+	bl AnimLoadCompressedBgTilemap\n\
 	b _081079EA\n\
 	.pool\n\
 _081079E0:\n\
@@ -1014,7 +1014,7 @@ _081079EA:\n\
 	ldr r1, =gBattleAnimBackgroundImage_Surf\n\
 	mov r2, sp\n\
 	ldrh r2, [r2, 0xA]\n\
-	bl sub_80A6CC0\n\
+	bl AnimLoadCompressedBgGfx\n\
 	ldr r0, =gBattleAnimArgs\n\
 	movs r1, 0\n\
 	ldrsh r0, [r0, r1]\n\
@@ -1176,7 +1176,7 @@ _08107B58:\n\
 #ifdef NONMATCHING
 void sub_8107B84(u8 taskId)
 {
-    struct UnknownAnimStruct2 unk;
+    struct BattleAnimBgData animBg;
     u8 i;
     u16 rgbBuffer;
     u16 *BGptrX = &gBattle_BG1_X;
@@ -1187,18 +1187,18 @@ void sub_8107B84(u8 taskId)
     
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
-    sub_80A6B30(&unk);
+    sub_80A6B30(&animBg);
     gTasks[taskId].data[2] += gTasks[taskId].data[1];
     if (++gTasks[taskId].data[5] == 4)
     {
-        rgbBuffer = gPlttBufferFaded[unk.unk8 * 16 + 7];
+        rgbBuffer = gPlttBufferFaded[animBg.paletteId * 16 + 7];
         for (i = 6; i != 0; i--)
         {
-            palNum = unk.unk8 * 16;
+            palNum = animBg.paletteId * 16;
             palOffset = 1 + i;
             gPlttBufferFaded[palNum + palOffset] = gPlttBufferFaded[palNum + palOffset - 1];
         }
-        gPlttBufferFaded[unk.unk8 * 16 + 1] = rgbBuffer;
+        gPlttBufferFaded[animBg.paletteId * 16 + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
     }
     if (++gTasks[taskId].data[6] > 1)
@@ -2320,7 +2320,7 @@ void sub_8108AC0(struct Task *task)
 
 void sub_8108B2C(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
@@ -2337,7 +2337,7 @@ void sub_8108B94(struct Sprite *sprite)
 {
     u16 i;
     
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         for (i = 0; i < NUM_TASKS; i++)
         {

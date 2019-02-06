@@ -479,7 +479,7 @@ static void sub_8108F08(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[2] = gBattleAnimArgs[3];
 
-    sprite->callback = AnimTranslateLinearSimple;
+    sprite->callback = TranslateSpriteLinearFixedPoint;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
@@ -726,7 +726,7 @@ static void AnimFireCross(struct Sprite *sprite)
 
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 
-    sprite->callback = TranslateSpriteOverDuration;
+    sprite->callback = TranslateSpriteLinear;
 }
 
 static void sub_81093A4(struct Sprite *sprite)
@@ -1280,9 +1280,9 @@ static void sub_8109E2C(u8 taskId)
 // arg 1: color code
 void AnimTask_BlendBackground(u8 taskId)
 {
-    struct UnknownAnimStruct2 unk;
-    sub_80A6B30(&unk);
-    BlendPalette(unk.unk8 << 4, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]); // u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor
+    struct BattleAnimBgData animBg;
+    sub_80A6B30(&animBg);
+    BlendPalette(animBg.paletteId * 16, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]); // u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor
     DestroyAnimVisualTask(taskId);
 }
 
