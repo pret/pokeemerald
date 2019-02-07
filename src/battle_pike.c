@@ -1393,7 +1393,7 @@ static void PrepareOneTrainer(bool8 difficult)
         trainerId = sub_8162548(challengeNum, battleNum);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
@@ -1402,7 +1402,7 @@ static void PrepareOneTrainer(bool8 difficult)
     gFacilityTrainers = gBattleFrontierTrainers;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 }
 
 static void PrepareTwoTrainers(void)
@@ -1418,7 +1418,7 @@ static void PrepareTwoTrainers(void)
         trainerId = sub_8162548(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
@@ -1426,14 +1426,14 @@ static void PrepareTwoTrainers(void)
     gTrainerBattleOpponent_A = trainerId;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 14)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
 
     do
     {
         trainerId = sub_8162548(challengeNum, 1);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
@@ -1441,7 +1441,7 @@ static void PrepareTwoTrainers(void)
     gTrainerBattleOpponent_B = trainerId;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 14)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
 }
 
 static void sub_81A84B4(void)
@@ -1449,7 +1449,7 @@ static void sub_81A84B4(void)
     u8 i;
 
     for (i = 0; i < 14; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 
 static void sub_81A84EC(void)

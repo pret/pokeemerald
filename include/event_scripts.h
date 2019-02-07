@@ -576,8 +576,8 @@ extern const u8 gUnknown_082A8350[];
 
 // Battle Pyramid.
 extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88[];
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F[];
-extern const u8 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A[];
+extern const u8 BattlePyramid_TrainerBattle[];
+extern const u8 BattlePyramid_FindItemBall[];
 
 // fldeff misc
 extern const u8 EventScript_275A86[];

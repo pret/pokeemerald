@@ -6081,7 +6081,7 @@ s32 GetBattlerMultiplayerId(u16 a1)
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
     if (InBattlePyramid())
-        return GetTrainerEncounterMusicIdInBattlePyramind(trainerOpponentId);
+        return GetBattlePyramindTrainerEncounterMusicId(trainerOpponentId);
     else if (sub_81D5C18())
         return GetTrainerEncounterMusicIdInTrainerHill(trainerOpponentId);
     else

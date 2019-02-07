@@ -124,7 +124,6 @@ extern void sub_80AF3C8(void);
 extern void ExecuteTruckSequence(void);
 extern void sub_80A0A38(void);
 extern void WriteFlashScanlineEffectBuffer(u8);
-extern void sub_81AA2F8(void);
 extern void InitMatchCallCounters(void);
 extern void sub_80EDB44(void);
 extern void InitFieldMessageBox(void);
@@ -886,7 +885,7 @@ static void mli0_load_map(u32 a1)
     if (!(sUnknown_020322D8 & 1))
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-            sub_81AA1D8();
+            LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
             sub_81D5DF8();
         else
@@ -1753,7 +1752,7 @@ void CB2_ContinueSavedGame(void)
     ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-        sub_81AA2F8();
+        LoadBattlePyramidFloorEventObjectScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != 6)
         sub_81D5F48();
     else

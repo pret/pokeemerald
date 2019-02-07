@@ -152,8 +152,8 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
 	waitstate
 	end
 
-BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
-	trainerbattle TRAINER_BATTLE_PYRAMID, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
+BattlePyramid_TrainerBattle:: @ 8252C4F
+	trainerbattle TRAINER_BATTLE_PYRAMID, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
 	setvar VAR_0x8004, 10
 	special CallBattlePyramidFunction
 	waitmessage
@@ -162,22 +162,22 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
 	releaseall
 	end
 
-BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A:: @ 8252C6A
+BattlePyramid_FindItemBall:: @ 8252C6A
 	setvar VAR_0x8004, 7
 	special CallBattlePyramidFunction
 	callstd STD_FIND_ITEM
 	compare VAR_0x8007, 0
-	goto_if_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
+	goto_if_eq BattlePyramid_FindItemBall_End
 	setvar VAR_0x8004, 8
 	special CallBattlePyramidFunction
 
-BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87:: @ 8252C87
+BattlePyramid_FindItemBall_End:: @ 8252C87
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88:: @ 8252C88
 	goto BattleFrontier_BattlePyramidTop_EventScript_252B42
 
-BattleFrontier_BattlePyramidEmptySquare_Text_252C8D: @ 8252C8D
+BattleFacility_TrainerBattle_PlaceholderText: @ 8252C8D
 	.string "This is a sample message.$"
 
 gText_BattlePyramidConfirmRest:: @ 8252CA7

@@ -7498,7 +7498,7 @@ TrainerHill_1F_Movement_2C83EE:: @ 82C83EE
 	step_end
 
 EventScript_2C83F0:: @ 82C83F0
-	trainerbattle TRAINER_BATTLE_12, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
+	trainerbattle TRAINER_BATTLE_12, TRAINER_PHILLIP, 0, BattleFacility_TrainerBattle_PlaceholderText, BattleFacility_TrainerBattle_PlaceholderText
 	setvar VAR_0x8004, 11
 	special CallTrainerHillFunction
 	waitmessage

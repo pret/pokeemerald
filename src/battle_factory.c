@@ -304,14 +304,14 @@ static void sub_81A61B0(void)
         trainerId = sub_8162548(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
         for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == trainerId)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == trainerId)
                 break;
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
     gTrainerBattleOpponent_A = trainerId;
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 6)
-        gSaveBlock2Ptr->frontier.field_CB4[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = trainerId;
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = trainerId;
 
     i = 0;
     while (i != 3)

@@ -316,7 +316,7 @@ struct BattleFrontier
     /*0xCAA*/ u16 selectedPartyMons[3];
     /*0xCB0*/ u16 field_CB0;
     /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
-    /*0xCB4*/ u16 field_CB4[20];
+    /*0xCB4*/ u16 trainerIds[20];
     /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 towerWinStreaks[4][2];
     /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
