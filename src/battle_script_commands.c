@@ -7055,7 +7055,7 @@ static void atk76_various(void)
 
         if (i == TRUE)
         {
-            gBattleMons[gBattlerTarget].status1 = gBattleMons[gBattlerAttacker].status1;
+            gBattleMons[gBattlerTarget].status1 = gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY;
             gActiveBattler = gBattlerTarget;
             BtlController_EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBattler].status1);
             MarkBattlerForControllerExec(gActiveBattler);
