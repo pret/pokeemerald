@@ -15,10 +15,10 @@ void CopyPyramidTrainerSpeechBefore(u16 trainerId);
 void CopyPyramidTrainerWinSpeech(u16 trainerId);
 void CopyPyramidTrainerLoseSpeech(u16 trainerId);
 u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerId);
-void sub_81AA078(u16 *mapArg, u8 arg1);
+void GenerateBattlePyramidFloorLayout(u16 *mapArg, bool8 setPlayerPosition);
 void sub_81AA1D8(void);
 void sub_81AA2F8(void);
-u8 sub_81AAA40(void);
+u8 GetNumBattlePyramidEventObjects(void);
 u16 GetBattlePyramidPickupItemId(void);
 
 #endif // GUARD_BATTLE_PYRAMID_H

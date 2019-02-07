@@ -751,7 +751,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
     return FALSE;
 }
 
-void sub_809FDD4(void) // Called from battle_frontier_2.s
+void sub_809FDD4(void)
 {
     sub_8197DF8(0, FALSE);
     ScriptUnfreezeEventObjects();

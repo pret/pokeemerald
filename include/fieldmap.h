@@ -32,7 +32,7 @@ void sub_8088B3C(u16 x, u16 y);
 void InitMap(void);
 void InitMapFromSavedGame(void);
 void InitTrainerHillMap(void);
-void InitBattlePyramidMap(u8 a0);
+void InitBattlePyramidMap(bool8 setPlayerPosition);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
