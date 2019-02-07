@@ -356,10 +356,10 @@ struct BattleFrontier
     /*0xE04*/ u16 pikeWinStreaks[2];
     /*0xE08*/ u16 pikeRecordStreaks[2];
     /*0xE0C*/ u16 pikeTotalStreaks[2];
-    /*0xE10*/ u8 field_E10_1:3;
-    /*0xE10*/ u8 field_E10_2:4;
-    /*0xE10*/ u8 field_E10_3:1;
-    /*0xE12*/ u16 field_E12[3];
+    /*0xE10*/ u8 pikeHintedRoomIndex:3;
+    /*0xE10*/ u8 pikeHintedRoomType:4;
+    /*0xE10*/ u8 pikeHealingRoomsDisabled:1;
+    /*0xE12*/ u16 pikeHeldItemsBackup[3];
     /*0xE18*/ u16 pyramidRewardItem;
     /*0xE1A*/ u16 pyramidWinStreaks[2];
     /*0xE1E*/ u16 pyramidRecordStreaks[2];
