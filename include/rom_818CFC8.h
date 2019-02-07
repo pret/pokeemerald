@@ -6,6 +6,6 @@
 #define GUARD_ROM_818CFC8_H
 
 bool8 InBattlePyramid(void);
-u8 sub_81AAA40(void);
+u8 GetNumBattlePyramidEventObjects(void);
 
 #endif //GUARD_ROM_818CFC8_H

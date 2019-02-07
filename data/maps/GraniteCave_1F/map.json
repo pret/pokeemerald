@@ -1,0 +1,76 @@
+{
+  "id": "MAP_GRANITE_CAVE_1F",
+  "name": "GraniteCave_1F",
+  "layout": "LAYOUT_GRANITE_CAVE_1F",
+  "music": "MUS_DAN01",
+  "region_map_section": "MAPSEC_GRANITE_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_HIKER",
+      "x": 36,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "GraniteCave_1F_EventScript_22DA5E",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 17,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "GraniteCave_1F_EventScript_291150",
+      "flag": "FLAG_ITEM_GRANITE_CAVE_1F_ESCAPE_ROPE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 37,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE106",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 35,
+      "y": 3,
+      "elevation": 3,
+      "dest_map": "MAP_GRANITE_CAVE_B1F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 17,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_GRANITE_CAVE_B1F",
+      "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 10,
+      "elevation": 3,
+      "dest_map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

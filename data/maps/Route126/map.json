@@ -1,0 +1,154 @@
+{
+  "id": "MAP_ROUTE126",
+  "name": "Route126",
+  "layout": "LAYOUT_ROUTE126",
+  "music": "MUS_DOORO_X3",
+  "region_map_section": "MAPSEC_ROUTE_126",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_6",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "up",
+      "offset": 0,
+      "map": "MAP_ROUTE124"
+    },
+    {
+      "direction": "right",
+      "offset": 0,
+      "map": "MAP_ROUTE127"
+    },
+    {
+      "direction": "dive",
+      "offset": 0,
+      "map": "MAP_UNDERWATER2"
+    }
+  ],
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "x": 51,
+      "y": 65,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN",
+      "movement_range_x": 10,
+      "movement_range_y": 3,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route126_EventScript_1F68D6",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "x": 56,
+      "y": 22,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
+      "movement_range_x": 9,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route126_EventScript_1F68ED",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "x": 63,
+      "y": 43,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route126_EventScript_1F6904",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "x": 9,
+      "y": 48,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "Route126_EventScript_1F691B",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 14,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "Route126_EventScript_291025",
+      "flag": "FLAG_ITEM_ROUTE_126_GREEN_SHARD"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "x": 15,
+      "y": 66,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 7,
+      "script": "Route126_EventScript_1F6960",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "x": 7,
+      "y": 66,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 7,
+      "script": "Route126_EventScript_1F6977",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_F",
+      "x": 64,
+      "y": 5,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 7,
+      "script": "Route126_EventScript_1F6949",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_SWIMMER_M",
+      "x": 56,
+      "y": 5,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 7,
+      "script": "Route126_EventScript_1F6932",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

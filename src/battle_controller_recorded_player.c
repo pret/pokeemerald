@@ -1268,7 +1268,7 @@ static void RecordedPlayerHandleTrainerSlide(void)
 
 static void RecordedPlayerHandleTrainerSlideBack(void)
 {
-    oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
@@ -1662,7 +1662,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     u8 taskId;
     u32 trainerPicId;
 
-    oamt_add_pos2_onto_pos1(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;

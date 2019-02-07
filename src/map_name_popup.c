@@ -1,6 +1,4 @@
 #include "global.h"
-#include "constants/region_map_sections.h"
-#include "constants/weather.h"
 #include "bg.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -14,6 +12,9 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "constants/layouts.h"
+#include "constants/region_map_sections.h"
+#include "constants/weather.h"
 
 // enums
 enum MapPopUp_Themes
@@ -305,7 +306,7 @@ static void ShowMapNamePopUpWindow(void)
 
     if (InBattlePyramid())
     {
-        if (gMapHeader.mapLayoutId == 0x17A)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
         {
             withoutPrefixPtr = &(mapDisplayHeader[3]);
             mapDisplayHeaderSource = gBattlePyramid_MapHeaderStrings[7];

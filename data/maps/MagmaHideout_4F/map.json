@@ -1,0 +1,140 @@
+{
+  "id": "MAP_MAGMA_HIDEOUT_4F",
+  "name": "MagmaHideout_4F",
+  "layout": "LAYOUT_MAGMA_HIDEOUT_4F",
+  "music": "MUS_AJITO",
+  "region_map_section": "MAPSEC_MAGMA_HIDEOUT",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_GROUDON_1",
+      "x": 16,
+      "y": 17,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_1"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 31,
+      "y": 22,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "MagmaHideout_4F_EventScript_23A68C",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 30,
+      "y": 13,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "MagmaHideout_4F_EventScript_23A6A3",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 26,
+      "y": 13,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 3,
+      "script": "MagmaHideout_4F_EventScript_23A6BA",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAGMA_MEMBER_M",
+      "x": 22,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 1,
+      "trainer_sight_or_berry_tree_id": 4,
+      "script": "MagmaHideout_4F_EventScript_23A6D1",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_MAXIE",
+      "x": 16,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MagmaHideout_4F_EventScript_23A560",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_GROUDON_2",
+      "x": 16,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "0x0",
+      "flag": "FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_2"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_ITEM_BALL",
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MagmaHideout_4F_EventScript_29151F",
+      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 46,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_MAGMA_HIDEOUT_3F_1R",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 20,
+      "y": 21,
+      "elevation": 0,
+      "dest_map": "MAP_MAGMA_HIDEOUT_3F_3R",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

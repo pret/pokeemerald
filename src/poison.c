@@ -230,7 +230,7 @@ void sub_810DBAC(struct Sprite *sprite)
 
 static void sub_810DC10(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -258,7 +258,7 @@ void sub_810DC2C(struct Sprite *sprite)
 
 static void sub_810DCB4(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -280,7 +280,7 @@ void sub_810DCD0(struct Sprite *sprite)
 
 static void sub_810DD24(struct Sprite *sprite)
 {
-    AnimTranslateLinearSimple(sprite);
+    TranslateSpriteLinearFixedPoint(sprite);
 
     sprite->data[1] -= sprite->data[5];
     sprite->data[2] -= sprite->data[6];

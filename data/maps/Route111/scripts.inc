@@ -97,7 +97,7 @@ Route111_EventScript_1F0E26:: @ 81F0E26
 	end
 
 Route111_EventScript_1F0E3C:: @ 81F0E3C
-	setmaplayoutindex 392
+	setmaplayoutindex LAYOUT_ROUTE111_NO_MIRAGE_TOWER
 	return
 
 Route111_EventScript_1F0E40:: @ 81F0E40

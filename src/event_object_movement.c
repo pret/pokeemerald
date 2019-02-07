@@ -1420,7 +1420,7 @@ u8 Unref_TryInitLocalEventObject(u8 localId)
     {
         if (InBattlePyramid())
         {
-            eventObjectCount = sub_81AAA40();
+            eventObjectCount = GetNumBattlePyramidEventObjects();
         }
         else if (InTrainerHill())
         {
@@ -1746,7 +1746,7 @@ void TrySpawnEventObjects(s16 cameraX, s16 cameraY)
 
         if (InBattlePyramid())
         {
-            objectCount = sub_81AAA40();
+            objectCount = GetNumBattlePyramidEventObjects();
         }
         else if (InTrainerHill())
         {

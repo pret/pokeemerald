@@ -1,3 +1,4 @@
+#include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/weather.h"
@@ -9,8 +10,8 @@
 
 	.section .rodata
 
-	.include "data/layouts.inc"
-	.include "data/layouts_table.inc"
+	.include "data/layouts/layouts.inc"
+	.include "data/layouts/layouts_table.inc"
 	.include "data/maps/headers.inc"
 	.include "data/maps/groups.inc"
 	.include "data/maps/connections.inc"

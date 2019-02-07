@@ -55,6 +55,7 @@
 #include "wild_encounter.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
+#include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
@@ -109,7 +110,6 @@ extern void ShowMapNamePopup(void);
 extern bool32 sub_808651C(void);
 extern bool8 sub_80AF6A4(void);
 extern bool8 sub_80E909C(void);
-extern void sub_81AA1D8(void);
 extern void c2_change_map(void);
 extern void sub_81D5DF8(void);
 extern void sub_80EB218(void);
@@ -118,14 +118,12 @@ extern void sub_808B578(void);
 extern void sub_80AF314(void);
 extern void sub_80AF214(void);
 extern void sub_80AF188(void);
-extern void door_upload_tiles(void);
 extern void RotatingGate_InitPuzzleAndGraphics(void);
 extern void sub_80AF168(void);
 extern void sub_80AF3C8(void);
 extern void ExecuteTruckSequence(void);
 extern void sub_80A0A38(void);
 extern void WriteFlashScanlineEffectBuffer(u8);
-extern void sub_81AA2F8(void);
 extern void InitMatchCallCounters(void);
 extern void sub_80EDB44(void);
 extern void InitFieldMessageBox(void);
@@ -886,8 +884,8 @@ static void mli0_load_map(u32 a1)
     LoadCurrentMapData();
     if (!(sUnknown_020322D8 & 1))
     {
-        if (gMapHeader.mapLayoutId == 0x169)
-            sub_81AA1D8();
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+            LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
             sub_81D5DF8();
         else
@@ -914,8 +912,8 @@ static void mli0_load_map(u32 a1)
     mapheader_run_script_with_tag_x3();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
-    if (gMapHeader.mapLayoutId == 0x169)
-        InitBattlePyramidMap(0);
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
         InitTrainerHillMap();
     else
@@ -1753,8 +1751,8 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
-    if (gMapHeader.mapLayoutId == 0x169)
-        sub_81AA2F8();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        LoadBattlePyramidFloorEventObjectScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != 6)
         sub_81D5F48();
     else
@@ -1763,8 +1761,8 @@ void CB2_ContinueSavedGame(void)
     UnfreezeEventObjects();
     DoTimeBasedEvents();
     sub_8084788();
-    if (gMapHeader.mapLayoutId == 0x169)
-        InitBattlePyramidMap(1);
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
+        InitBattlePyramidMap(TRUE);
     else if (trainerHillMapId != 0)
         InitTrainerHillMap();
     else
@@ -1835,7 +1833,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 
     if (InBattlePyramid_())
     {
-        door_upload_tiles();
+        WriteBattlePyramidViewScanlineEffectBuffer();
         ScanlineEffect_SetParams(sFlashEffectParams);
     }
     else if ((flashLevel = Overworld_GetFlashLevel()))

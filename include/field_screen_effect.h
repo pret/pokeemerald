@@ -34,7 +34,7 @@ void sub_80AF948(void);
 void sub_80AF9F8(void);
 void sub_80AFC60(void);
 void sub_80B009C(u8 flashLevel);
-void door_upload_tiles(void);
+void WriteBattlePyramidViewScanlineEffectBuffer(void);
 void sub_80B0244(void);
 void sub_80B0268(void);
 void sub_80B0534(void);

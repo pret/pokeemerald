@@ -24,6 +24,7 @@
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/maps.h"
 #include "constants/species.h"
@@ -324,7 +325,7 @@ void ResetTrainerHillResults(void)
 
 static u8 GetFloorId(void)
 {
-    return gMapHeader.mapLayoutId - 159;
+    return gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
 }
 
 u8 GetTrainerHillOpponentClass(u16 trainerId)
@@ -385,7 +386,7 @@ static void SetUpDataStruct(void)
     if (sHillData == NULL)
     {
         sHillData = AllocZeroed(sizeof(*sHillData));
-        sHillData->floorId = gMapHeader.mapLayoutId - 159;
+        sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
         CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag));
         nullsub_2();
     }
@@ -659,7 +660,7 @@ void sub_81D5DF8(void)
 
     SetUpDataStruct();
     for (i = 0; i < 2; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
     CpuFill32(0, gSaveBlock1Ptr->eventObjectTemplates, sizeof(gSaveBlock1Ptr->eventObjectTemplates));
 
     floorId = GetFloorId();
@@ -676,7 +677,7 @@ void sub_81D5DF8(void)
         eventTemplates[i].movementType = ((sHillData->tag.floors[floorId].direction >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
         eventTemplates[i].trainerRange_berryTreeId = (sHillData->tag.floors[floorId].range >> bits) & 0xF;
         eventTemplates[i].script = EventScript_2C83F0;
-        gSaveBlock2Ptr->frontier.field_CB4[i] = i + 1;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = i + 1;
     }
 
     FreeDataStruct();
@@ -803,10 +804,10 @@ bool32 InTrainerHill(void)
 {
     bool32 ret;
 
-    if (gMapHeader.mapLayoutId == 0x19F
-            || gMapHeader.mapLayoutId == 0x1A0
-            || gMapHeader.mapLayoutId == 0x1A1
-            || gMapHeader.mapLayoutId == 0x1A2)
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_1F
+            || gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_2F
+            || gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_3F
+            || gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_4F)
         ret = TRUE;
     else
         ret = FALSE;
@@ -818,17 +819,17 @@ u8 GetCurrentTrainerHillMapId(void)
 {
     u8 ret;
 
-    if (gMapHeader.mapLayoutId == 0x19F)
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_1F)
         ret = 1;
-    else if (gMapHeader.mapLayoutId == 0x1A0)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_2F)
         ret = 2;
-    else if (gMapHeader.mapLayoutId == 0x1A1)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_3F)
         ret = 3;
-    else if (gMapHeader.mapLayoutId == 0x1A2)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_4F)
         ret = 4;
-    else if (gMapHeader.mapLayoutId == 0x1A3)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ROOF)
         ret = 5;
-    else if (gMapHeader.mapLayoutId == 0x19E)
+    else if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ENTRANCE)
         ret = 6;
     else
         ret = 0;
@@ -840,7 +841,7 @@ static bool32 sub_81D6100(void)
 {
     bool32 ret;
 
-    if (gMapHeader.mapLayoutId == 0x1A3)
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_HILL_ROOF)
         ret = TRUE;
     else
         ret = FALSE;
@@ -873,7 +874,7 @@ const struct WarpEvent* sub_81D6134(u8 warpEventId)
 
 u16 LocalIdToHillTrainerId(u8 localId)
 {
-    return gSaveBlock2Ptr->frontier.field_CB4[localId - 1];
+    return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
 }
 
 bool8 GetHillTrainerFlag(u8 eventObjectId)
@@ -891,7 +892,7 @@ void SetHillTrainerFlag(void)
 
     for (i = 0; i < 2; i++)
     {
-        if (gSaveBlock2Ptr->frontier.field_CB4[i] == gTrainerBattleOpponent_A)
+        if (gSaveBlock2Ptr->frontier.trainerIds[i] == gTrainerBattleOpponent_A)
         {
             gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[floorId + i];
             break;
@@ -902,7 +903,7 @@ void SetHillTrainerFlag(void)
     {
         for (i = 0; i < 2; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == gTrainerBattleOpponent_B)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == gTrainerBattleOpponent_B)
             {
                 gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[floorId + i];
                 break;

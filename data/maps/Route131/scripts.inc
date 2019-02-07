@@ -9,7 +9,7 @@ Route131_MapScript1_1F740A: @ 81F740A
 	end
 
 Route131_EventScript_1F741B:: @ 81F741B
-	setmaplayoutindex 319
+	setmaplayoutindex LAYOUT_UNKNOWN_MAP_0845D470
 	return
 
 Route131_EventScript_1F741F:: @ 81F741F

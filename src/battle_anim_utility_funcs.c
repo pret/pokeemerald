@@ -276,7 +276,7 @@ void sub_8116B14(u8 taskId)
     int spriteId, newSpriteId;
     u16 var0;
     u16 bg1Cnt;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData unknownStruct;
 
     var0 = 0;
     gBattle_WIN0H = 0;
@@ -330,8 +330,8 @@ void sub_8116B14(u8 taskId)
     newSpriteId = sub_80A89C8(gBattleAnimAttacker, spriteId, species);
     sub_80A6B30(&unknownStruct);
     sub_80A6D60(&unknownStruct, gUnknown_08C20684, 0);
-    sub_80A6CC0(unknownStruct.bgId, gUnknown_08C20668, unknownStruct.tilesOffset);
-    LoadPalette(&gUnknown_08597418, unknownStruct.unk8 * 16 + 1, 2);
+    AnimLoadCompressedBgGfx(unknownStruct.bgId, gUnknown_08C20668, unknownStruct.tilesOffset);
+    LoadPalette(&gUnknown_08597418, unknownStruct.paletteId * 16 + 1, 2);
 
     gBattle_BG1_X = -gSprites[spriteId].pos1.x + 32;
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
@@ -342,7 +342,7 @@ void sub_8116B14(u8 taskId)
 
 static void sub_8116D64(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData unknownStruct;
     struct Sprite *sprite;
     u16 bg1Cnt;
 
@@ -453,7 +453,7 @@ static void sub_8116F04(u8 taskId)
 
 static void sub_81170EC(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData unknownStruct;
     u8 spriteId, spriteId2;
     u8 battlerSpriteId;
 
@@ -472,32 +472,32 @@ static void sub_81170EC(u8 taskId)
     else
         sub_80A6D60(&unknownStruct, gBattleStatMask2_Tilemap, 0);
 
-    sub_80A6CC0(unknownStruct.bgId, gBattleStatMask_Gfx, unknownStruct.tilesOffset);
+    AnimLoadCompressedBgGfx(unknownStruct.bgId, gBattleStatMask_Gfx, unknownStruct.tilesOffset);
     switch (sAnimStatsChangeData->data[1])
     {
     case 0:
-        LoadCompressedPalette(gBattleStatMask2_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask2_Pal, unknownStruct.paletteId * 16, 32);
         break;
     case 1:
-        LoadCompressedPalette(gBattleStatMask1_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask1_Pal, unknownStruct.paletteId * 16, 32);
         break;
     case 2:
-        LoadCompressedPalette(gBattleStatMask3_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask3_Pal, unknownStruct.paletteId * 16, 32);
         break;
     case 3:
-        LoadCompressedPalette(gBattleStatMask4_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask4_Pal, unknownStruct.paletteId * 16, 32);
         break;
     case 4:
-        LoadCompressedPalette(gBattleStatMask6_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask6_Pal, unknownStruct.paletteId * 16, 32);
         break;
     case 5:
-        LoadCompressedPalette(gBattleStatMask7_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask7_Pal, unknownStruct.paletteId * 16, 32);
         break;
     case 6:
-        LoadCompressedPalette(gBattleStatMask8_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask8_Pal, unknownStruct.paletteId * 16, 32);
         break;
     default:
-        LoadCompressedPalette(gBattleStatMask5_Pal, unknownStruct.unk8 << 4, 32);
+        LoadCompressedPalette(gBattleStatMask5_Pal, unknownStruct.paletteId * 16, 32);
         break;
     }
 
@@ -773,7 +773,7 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
     u16 species;
     u8 spriteId, spriteId2;
     u16 bg1Cnt;
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData unknownStruct;
     u8 battler2;
 
     spriteId2 = 0;
@@ -820,8 +820,8 @@ void sub_8117854(u8 taskId, int unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5,
 
     sub_80A6B30(&unknownStruct);
     sub_80A6D60(&unknownStruct, tilemap, 0);
-    sub_80A6CC0(unknownStruct.bgId, gfx, unknownStruct.tilesOffset);
-    LoadCompressedPalette(palette, unknownStruct.unk8 << 4, 32);
+    AnimLoadCompressedBgGfx(unknownStruct.bgId, gfx, unknownStruct.tilesOffset);
+    LoadCompressedPalette(palette, unknownStruct.paletteId * 16, 32);
 
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;

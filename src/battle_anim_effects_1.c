@@ -2585,7 +2585,7 @@ void AnimAbsorptionOrb(struct Sprite* sprite)
 
 static void AnimAbsorptionOrbStep(struct Sprite* sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -2660,7 +2660,7 @@ void AnimLeechSeed(struct Sprite* sprite)
 
 static void AnimLeechSeedStep(struct Sprite* sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         sprite->invisible = 1;
         sprite->data[0] = 10;
@@ -2921,7 +2921,7 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
     s16 r0;
 
     sprite->data[0] = 1;
-    TranslateAnimArc(sprite);
+    TranslateAnimHorizontalArc(sprite);
     r0 = sprite->data[7];
     sprite->data[0] = a;
     if (b > 200 && r0 < 56 && sprite->oam.affineParam == 0)
@@ -3584,7 +3584,7 @@ static void sub_8100128(u8 taskId)
     {
     case 4:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             task->data[15] = 5;
             task->data[0] = 0xFF;
@@ -3592,7 +3592,7 @@ static void sub_8100128(u8 taskId)
         break;
     case 8:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             task->data[15] = 9;
             task->data[0] = 0xFF;
@@ -3600,7 +3600,7 @@ static void sub_8100128(u8 taskId)
         break;
     case 0:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             task->data[15] = 1;
             task->data[0] = 0xFF;
@@ -3626,7 +3626,7 @@ static void sub_8100128(u8 taskId)
         break;
     case 2:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             task->data[15] = 3;
             task->data[0] = 0xFF;
@@ -3669,7 +3669,7 @@ static void sub_8100128(u8 taskId)
         break;
     case 6:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             task->data[15] = 7;
             task->data[0] = 0xFF;
@@ -3712,7 +3712,7 @@ static void sub_8100128(u8 taskId)
         break;
     case 10:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             task->data[15] = 11;
             task->data[0] = 0xFF;
@@ -3740,7 +3740,7 @@ static void sub_8100128(u8 taskId)
     }
     case 12:
         sub_8100524(task, taskId);
-        if (TranslateAnimArc(sprite))
+        if (TranslateAnimHorizontalArc(sprite))
         {
             DestroySprite(sprite);
             task->data[0]++;
@@ -4025,7 +4025,7 @@ void sub_8100A94(struct Sprite* sprite)
     sprite->data[5] = gBattleAnimArgs[5];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[6]);
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = sub_80A66DC;
+    sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
 // Moves the sprite in a diagonally slashing motion across the target mon.
@@ -4254,7 +4254,7 @@ static void sub_8100FD4(struct Sprite *sprite)
         if (sprite->data[7] == 16)
         {
             sprite->invisible = 1;
-            sprite->callback = sub_80A67F4;
+            sprite->callback = DestroyAnimSpriteAndDisableBlend;
         }
     }
 }
@@ -4380,7 +4380,7 @@ void sub_810130C(struct Sprite* sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = AnimTranslateLinearSimple;
+    sprite->callback = TranslateSpriteLinearFixedPoint;
 }
 
 void sub_810135C(struct Sprite* sprite)
@@ -4417,7 +4417,7 @@ void sub_810135C(struct Sprite* sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[4];
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = AnimTranslateLinearSimple;
+    sprite->callback = TranslateSpriteLinearFixedPoint;
 }
 
 void sub_8101440(struct Sprite* sprite)
@@ -4687,7 +4687,7 @@ static void sub_8101998(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     StoreSpriteCallbackInData6(sprite, sub_81019E8);
-    sprite->callback = TranslateMonBGUntil;
+    sprite->callback = TranslateMonSpriteLinear;
 }
 
 static void sub_81019E8(struct Sprite* sprite)
@@ -4717,7 +4717,7 @@ static void sub_8101A74(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = gBattlerSpriteIds[gBattleAnimAttacker];
     StoreSpriteCallbackInData6(sprite, sub_8101B84);
-    sprite->callback = TranslateMonBGUntil;
+    sprite->callback = TranslateMonSpriteLinear;
 }
 
 static void sub_8101AC4(struct Sprite* sprite)
@@ -4996,7 +4996,7 @@ static void sub_8102044(struct Sprite* sprite)
         sprite->data[1] = 8;
         sprite->data[2] = 0;
         StoreSpriteCallbackInData6(sprite, sub_810207C);
-        sprite->callback = TranslateSpriteOverDuration;
+        sprite->callback = TranslateSpriteLinear;
     }
 }
 
