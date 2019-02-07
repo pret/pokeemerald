@@ -62,7 +62,7 @@ IWRAM_DATA s8 sTVShowMixingCurSlot;
 EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
 EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
-EWRAM_DATA bool8 sFindThatGamerWhichGame = FALSE;
+EWRAM_DATA bool8 sFindThatGamerWhichGame = SLOT_MACHINE;
 EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
@@ -2019,7 +2019,7 @@ void sub_80EDCE8(void)
     }
 }
 
-void sub_80EDD78(u16 nCoinsPaidOut)
+void reportNewCoinTotal(u16 nCoinsPaidOut)
 {
     TVShow *show;
     bool8 flag;
@@ -2031,7 +2031,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
         flag = FALSE;
         switch (sFindThatGamerWhichGame)
         {
-            case FALSE:
+            case SLOT_MACHINE:
                 if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 200)
                 {
                     flag = TRUE;
@@ -2044,7 +2044,7 @@ void sub_80EDD78(u16 nCoinsPaidOut)
                     break;
                 }
                 return;
-            case TRUE:
+            case ROULETTE:
                 if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 50)
                 {
                     flag = TRUE;
@@ -2072,15 +2072,15 @@ void sub_80EDD78(u16 nCoinsPaidOut)
     }
 }
 
-void sub_80EDE70(u16 nCoinsSpent)
+void reportPlayedSlotMachine(u16 nCoinsSpent)
 {
-    sFindThatGamerWhichGame = FALSE;
+    sFindThatGamerWhichGame = SLOT_MACHINE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void sub_80EDE84(u16 nCoinsSpent)
+void reportPlayedRoulette(u16 nCoinsSpent)
 {
-    sFindThatGamerWhichGame = TRUE;
+    sFindThatGamerWhichGame = ROULETTE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
