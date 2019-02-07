@@ -68,8 +68,8 @@ enum
     OBJ_POSITIONS_UNIFORM,
     OBJ_POSITIONS_IN_AND_NEAR_ENTRANCE,
     OBJ_POSITIONS_IN_AND_NEAR_EXIT,
-    OBJ_POSITIONS_NEAR_NEAR_ENTRANCE,
-    OBJ_POSITIONS_NEAR_NEAR_EXIT,
+    OBJ_POSITIONS_NEAR_ENTRANCE,
+    OBJ_POSITIONS_NEAR_EXIT,
 };
 
 struct PyramidWildMon
@@ -210,7 +210,7 @@ static const struct PyramidFloorTemplate sPyramidFloorTemplates[] =
         .numItems = 3,
         .numTrainers = 6,
         .itemPositions = OBJ_POSITIONS_UNIFORM,
-        .trainerPositions = OBJ_POSITIONS_NEAR_NEAR_EXIT,
+        .trainerPositions = OBJ_POSITIONS_NEAR_EXIT,
         .runMultiplier = 96,
         .layoutOffsets = {8, 9, 10, 11, 12, 13, 14, 15},
     },
@@ -1628,11 +1628,11 @@ void LoadBattlePyramidEventObjectTemplates(void)
             if (SetPyramidObjectPositionsInAndNearSquare(i, exitSquareId))
                 SetPyramidObjectPositionsUniformly(i);
             break;
-        case OBJ_POSITIONS_NEAR_NEAR_ENTRANCE:
+        case OBJ_POSITIONS_NEAR_ENTRANCE:
             if (SetPyramidObjectPositionsNearSquare(i, entranceSquareId))
                 SetPyramidObjectPositionsUniformly(i);
             break;
-        case OBJ_POSITIONS_NEAR_NEAR_EXIT:
+        case OBJ_POSITIONS_NEAR_EXIT:
             if (SetPyramidObjectPositionsNearSquare(i, exitSquareId))
                 SetPyramidObjectPositionsUniformly(i);
             break;
