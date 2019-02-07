@@ -1,6 +1,9 @@
 #ifndef GUARD_TV_H
 #define GUARD_TV_H
 
+#define SLOT_MACHINE 0
+#define ROULETTE 1
+
 extern u8 *const gTVStringVarPtrs[3];
 
 void ClearTVShowData(void);
@@ -23,9 +26,9 @@ bool8 GetPriceReduction(u8 newsKind);
 void sub_80F14F8(TVShow *shows);
 size_t CountDigits(int value);
 u8 GetRibbonCount(struct Pokemon *pokemon);
-void sub_80EDE70(u16 nCoinsSpent);
-void sub_80EDE84(u16 nCoinsSpent);
-void sub_80EDD78(u16 nCoinsPaidOut);
+void reportPlayedSlotMachine(u16 nCoinsSpent);
+void reportPlayedRoulette(u16 nCoinsSpent);
+void reportNewCoinTotal(u16 nCoinsPaidOut);
 void sub_80EEA70(void);
 void sub_80EDB44(void);
 void sub_80EDC60(const u16 *words);
