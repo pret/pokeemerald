@@ -17,7 +17,7 @@
 #include "trig.h"
 #include "gpu_regs.h"
 
-#define MACRO1(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
+#define DROUGHT_COLOR_INDEX(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
 enum
 {
@@ -65,15 +65,21 @@ static void None_Init(void);
 static void None_Main(void);
 static u8 None_Finish(void);
 
-// EWRAM
 EWRAM_DATA struct Weather gWeather = {0};
 EWRAM_DATA static u8 sFieldEffectPaletteGammaTypes[32] = {0};
 
-// IWRAM bss
 IWRAM_DATA static const u8 *sPaletteGammaTypes;
 
-// CONST
-extern const u16 gUnknown_0854014C[][4096];
+// The drought weather effect uses a precalculated color lookup table. Presumably this
+// is because the underlying color shift calculation is slow.
+const u16 sDroughtWeatherColors[][0x1000] = {
+    INCBIN_U16("graphics/weather/drought/colors_0.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_1.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_2.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_3.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_4.bin"),
+    INCBIN_U16("graphics/weather/drought/colors_5.bin"),
+};
 
 // This is a pointer to gWeather. All code in this file accesses gWeather directly,
 // while code in other field weather files accesses gWeather through this pointer.
@@ -513,7 +519,7 @@ static void ApplyGammaShift(u8 startPalIndex, u8 numPalettes, s8 gammaIndex)
             {
                 for (i = 0; i < 16; i++)
                 {
-                    gPlttBufferFaded[palOffset] = gUnknown_0854014C[gammaIndex][MACRO1(gPlttBufferUnfaded[palOffset])];
+                    gPlttBufferFaded[palOffset] = sDroughtWeatherColors[gammaIndex][DROUGHT_COLOR_INDEX(gPlttBufferUnfaded[palOffset])];
                     palOffset++;
                 }
             }
@@ -619,7 +625,7 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
                 b1 = color1.b;
 
                 offset = ((b1 & 0x1E) << 7) | ((g1 & 0x1E) << 3) | ((r1 & 0x1E) >> 1);
-                color2 = *(struct RGBColor *)&gUnknown_0854014C[gammaIndex][offset];
+                color2 = *(struct RGBColor *)&sDroughtWeatherColors[gammaIndex][offset];
                 r2 = color2.r;
                 g2 = color2.g;
                 b2 = color2.b;

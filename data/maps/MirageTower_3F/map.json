@@ -1,0 +1,62 @@
+{
+  "id": "MAP_MIRAGE_TOWER_3F",
+  "name": "MirageTower_3F",
+  "layout": "LAYOUT_MIRAGE_TOWER_3F",
+  "music": "MUS_TOZAN",
+  "region_map_section": "MAPSEC_MIRAGE_TOWER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "x": 3,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MirageTower_3F_EventScript_2907A6",
+      "flag": "FLAG_TEMP_11"
+    },
+    {
+      "graphics_id": "EVENT_OBJ_GFX_BREAKABLE_ROCK",
+      "x": 4,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": 0,
+      "trainer_sight_or_berry_tree_id": 0,
+      "script": "MirageTower_3F_EventScript_2907A6",
+      "flag": "FLAG_TEMP_12"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 18,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_MIRAGE_TOWER_2F",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_MIRAGE_TOWER_4F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

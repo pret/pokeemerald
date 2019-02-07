@@ -11,7 +11,7 @@ RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D
 
 RustboroCity_DevonCorp_3F_EventScript_212449:: @ 8212449
 	setobjectxyperm 2, 3, 2
-	setobjectmovementtype 2, 9
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 RustboroCity_DevonCorp_3F_MapScript2_212455: @ 8212455

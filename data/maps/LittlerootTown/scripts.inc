@@ -56,17 +56,17 @@ LittlerootTown_EventScript_1E7E6F:: @ 81E7E6F
 	compare VAR_0x4050, 0
 	goto_if_eq LittlerootTown_EventScript_1E7E86
 	setobjectxyperm 1, 10, 1
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_EventScript_1E7E86:: @ 81E7E86
 	setobjectxyperm 1, 7, 2
-	setobjectmovementtype 1, 8
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 LittlerootTown_EventScript_1E7E92:: @ 81E7E92
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setobjectmovementtype 4, 8
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_DOWN
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_EventScript_1E7EB1

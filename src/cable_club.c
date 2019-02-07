@@ -27,11 +27,9 @@
 #include "task.h"
 #include "trade.h"
 #include "trainer_card.h"
+#include "party_menu.h"
 #include "window.h"
 #include "constants/songs.h"
-
-extern u8 gUnknown_02032298[2];
-extern u8 gSelectedOrderFromParty[];
 
 static const struct WindowTemplate gUnknown_08550594 = {
     .bg = 0,

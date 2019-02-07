@@ -36,17 +36,17 @@ LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8916:: @ 81F8916
 	setobjectxyperm 1, 2, 4
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1F8922:: @ 81F8922
 	setobjectxyperm 1, 6, 5
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1F892E:: @ 81F892E
 	setobjectxyperm 1, 1, 8
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A

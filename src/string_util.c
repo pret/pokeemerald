@@ -587,7 +587,7 @@ u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
     return dest;
 }
 
-u32 StringLength_Multibyte(u8 *str)
+u32 StringLength_Multibyte(const u8 *str)
 {
     u32 length = 0;
 

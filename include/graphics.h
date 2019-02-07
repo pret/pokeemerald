@@ -4745,9 +4745,13 @@ extern const u32 gBattleStatMask8_Pal[];
 extern const u32 gUnknown_08D9A88C[];
 extern const u32 gContestMiscGfx[];
 extern const u32 gContestAudienceGfx[];
+extern const u8 gContestApplauseMeterGfx[];
+extern const u8 gContestNextTurnNumbersGfx[];
+extern const u8 gContestNextTurnRandomGfx[];
 extern const u32 gUnknown_08C16FA8[];
 extern const u32 gUnknown_08C16E90[];
 extern const u32 gUnknown_08C17170[];
+extern const u32 gUnknown_08C17980[];
 
 extern const u32 gUnknown_08D95E00[];
 extern const u32 gUnknown_08D960D0[];
@@ -4859,5 +4863,19 @@ extern const u32 gUnknown_08DD2B78[];
 extern const u32 gUnknown_08DD228C[];
 extern const u32 gUnknown_08DD2E5C[];
 extern const u32 gUnknown_08DD1F78[];
+
+// Frontier Pass
+extern const u32 gUnknown_08DE08C8[];
+extern const u32 gUnknown_08DE2084[];
+extern const u32 gUnknown_08DE3350[];
+extern const u32 gUnknown_08DE3374[];
+extern const u32 gUnknown_08DE3060[];
+extern const u32 gFrontierPassMedals_Gfx[];
+extern const u16 gUnknown_08DE07C8[][16];
+extern const u16 gFrontierPassCursor_Pal[];
+extern const u16 gFrontierPassMedalsGold_Pal[];
+extern const u16 gFrontierPassMedalsSilver_Pal[];
+extern const u16 gFrontierPassMapCursor_Pal[];
+
 
 #endif //GUARD_GRAPHICS_H

@@ -526,14 +526,14 @@ void sub_8126B80(u8 taskId)
                 PlaySE(SE_SELECT);
                 sSecretBasePCMenuActions[sSecretBasePCMenuCursorPos].func.void_u8(taskId);
                 break;
-            case -2:
+            case MENU_NOTHING_CHOSEN:
                 sSecretBasePCMenuCursorPos = Menu_GetCursorPos();
                 if ((s8)menuPos != sSecretBasePCMenuCursorPos)
                 {
                     sub_8126C08();
                 }
                 break;
-            case -1:
+            case MENU_B_PRESSED:
                 PlaySE(SE_SELECT);
                 SecretBasePC_Cancel(taskId);
                 break;
@@ -713,12 +713,12 @@ void sub_8127088(u8 taskId)
         input = Menu_ProcessInput();
         switch (input)
         {
-            case -1:
+            case MENU_B_PRESSED:
             case 8:
                 PlaySE(SE_SELECT);
                 sub_812719C(taskId);
                 break;
-            case -2:
+            case MENU_NOTHING_CHOSEN:
                 break;
             default:
                 PlaySE(SE_SELECT);
@@ -933,13 +933,13 @@ void sub_812764C(u8 taskId)
     data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        input = ListMenuHandleInputGetItemId(data[13]);
+        input = ListMenu_ProcessInput(data[13]);
         ListMenuGetScrollAndRow(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
         switch (input)
         {
-            case -1:
+            case LIST_NOTHING_CHOSEN:
                 break;
-            case -2:
+            case LIST_B_PRESSED:
                 PlaySE(SE_SELECT);
                 SecretBasePC_SelectedDecorActions[data[11]][1](taskId);
                 break;
@@ -1244,17 +1244,17 @@ void sub_8127E18(void)
 
     for (i = 0; i < 14; i ++)
     {
-        if (FlagGet(0xAE + i) == TRUE)
+        if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
         {
-            FlagClear(0xAE + i);
+            FlagClear(FLAG_DECORATION_1 + i);
             for (j = 0; j < gMapHeader.events->eventObjectCount; j ++)
             {
-                if (gMapHeader.events->eventObjects[j].flagId == 0xAE + i)
+                if (gMapHeader.events->eventObjects[j].flagId == FLAG_DECORATION_1 + i)
                 {
                     break;
                 }
             }
-            VarSet(0x3F20 + gMapHeader.events->eventObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
+            VarSet(VAR_0x3F20 + gMapHeader.events->eventObjects[j].graphicsId, sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
             gSpecialVar_0x8005 = gMapHeader.events->eventObjects[j].localId;
             gSpecialVar_0x8006 = sCurDecorMapX;
             gSpecialVar_0x8007 = sCurDecorMapY;

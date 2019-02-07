@@ -2603,9 +2603,9 @@ static void sub_813A46C(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 static void sub_813A4EC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s32 itemId = ListMenuHandleInputGetItemId(task->data[14]);
+    s32 input = ListMenu_ProcessInput(task->data[14]);
 
-    switch (itemId)
+    switch (input)
     {
     case LIST_NOTHING_CHOSEN:
         break;
@@ -2615,13 +2615,13 @@ static void sub_813A4EC(u8 taskId)
         sub_813A570(taskId);
         break;
     default:
-        gSpecialVar_Result = itemId;
+        gSpecialVar_Result = input;
         PlaySE(SE_SELECT);
         if (!task->data[6])
         {
             sub_813A570(taskId);
         }
-        else if (itemId == task->data[1] - 1)
+        else if (input == task->data[1] - 1)
         {
             sub_813A570(taskId);
         }

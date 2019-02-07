@@ -1,27 +1,27 @@
 #include "global.h"
 #include "wild_encounter.h"
 #include "pokemon.h"
-#include "constants/species.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
 #include "random.h"
-#include "constants/maps.h"
 #include "field_player_avatar.h"
-#include "constants/abilities.h"
 #include "event_data.h"
 #include "safari_zone.h"
 #include "overworld.h"
 #include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
-#include "constants/game_stat.h"
 #include "tv.h"
 #include "link.h"
 #include "script.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "constants/abilities.h"
+#include "constants/game_stat.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/maps.h"
+#include "constants/species.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -413,7 +413,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
     level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
-    if (gMapHeader.mapLayoutId != 0x166 && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
+    if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3 && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
     CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
@@ -474,7 +474,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
     {
         u32 ability = GetMonAbility(&gPlayerParty[0]);
 
-        if (ability == ABILITY_STENCH && gMapHeader.mapLayoutId == 0x169)
+        if (ability == ABILITY_STENCH && gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
             encounterRate = encounterRate * 3 / 4;
         else if (ability == ABILITY_STENCH)
             encounterRate /= 2;
@@ -522,7 +522,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF)
     {
-        if (gMapHeader.mapLayoutId == 0x166)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3)
         {
             headerId = GetBattlePikeWildMonHeaderId();
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
@@ -537,7 +537,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             BattleSetup_StartBattlePikeWildBattle();
             return TRUE;
         }
-        if (gMapHeader.mapLayoutId == 0x169)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         {
             headerId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
@@ -665,7 +665,7 @@ bool8 SweetScentWildEncounter(void)
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF)
     {
-        if (gMapHeader.mapLayoutId == 0x166)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3)
         {
             headerId = GetBattlePikeWildMonHeaderId();
             if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
@@ -675,7 +675,7 @@ bool8 SweetScentWildEncounter(void)
             BattleSetup_StartBattlePikeWildBattle();
             return TRUE;
         }
-        if (gMapHeader.mapLayoutId == 0x169)
+        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
         {
             headerId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
             if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)

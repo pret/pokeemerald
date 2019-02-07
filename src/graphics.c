@@ -1023,8 +1023,8 @@ const u32 gBattleAnimSpriteSheet_262[] = INCBIN_U32("graphics/battle_anims/sprit
 const u32 gBattleAnimSpritePalette_262[] = INCBIN_U32("graphics/battle_anims/sprites/262.gbapal.lz");
 
 const u32 gContestNextTurnGfx[] = INCBIN_U32("graphics/contest/nextturn.4bpp.lz");
-const u8 gUnknown_08D8E9B4[] = INCBIN_U8("graphics/contest/nextturn_numbers.4bpp");
-const u8 gUnknown_08D8EA34[] = INCBIN_U8("graphics/contest/nextturn_random.4bpp");
+const u8 gContestNextTurnNumbersGfx[] = INCBIN_U8("graphics/contest/nextturn_numbers.4bpp");
+const u8 gContestNextTurnRandomGfx[] = INCBIN_U8("graphics/contest/nextturn_random.4bpp");
 
 const u32 gBattleAnimSpriteSheet_264[] = INCBIN_U32("graphics/battle_anims/sprites/264.4bpp.lz");
 const u32 gBattleAnimSpritePalette_264[] = INCBIN_U32("graphics/battle_anims/sprites/264.gbapal.lz");
@@ -1590,7 +1590,7 @@ const u32 gUnknown_08DE0644[] = INCBIN_U32("graphics/title_screen/title_screen2.
 
 // more trainer card stuff
 
-const u16 gUnknown_08DE07C8[] = INCBIN_U16("graphics/frontier_pass/tiles.gbapal");// size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
+const u16 gUnknown_08DE07C8[][16] = INCBIN_U16("graphics/frontier_pass/tiles.gbapal");// size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 const u32 gUnknown_08DE08C8[] = INCBIN_U32("graphics/frontier_pass/tiles.4bpp.lz");
 const u32 gUnknown_08DE2084[] = INCBIN_U32("graphics/frontier_pass/tiles2.8bpp.lz");
 const u32 gUnknown_08DE3060[] = INCBIN_U32("graphics/frontier_pass/tiles.bin.lz");

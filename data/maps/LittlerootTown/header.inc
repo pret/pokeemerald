@@ -1,10 +1,10 @@
-LittlerootTown::
+LittlerootTown:
 	.4byte LittlerootTown_Layout
 	.4byte LittlerootTown_MapEvents
 	.4byte LittlerootTown_MapScripts
 	.4byte 0x0
 	.2byte MUS_MISHIRO
-	.2byte 10
+	.2byte LAYOUT_LITTLEROOT_TOWN
 	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
 	.byte WEATHER_SUNNY
@@ -12,3 +12,4 @@ LittlerootTown::
 	.2byte 0
 	map_header_flags allow_bike=1, allow_escape_rope=0, allow_run=1, show_map_name=1
 	.byte MAP_BATTLE_SCENE_NORMAL
+

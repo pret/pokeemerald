@@ -447,25 +447,25 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
 
                 if (i < 16)
                 {
-                    u16 val = VarGet(0x403B);
+                    u16 val = VarGet(VAR_0x403B);
                     val |= 1 << i;
-                    VarSet(0x403B, val);
+                    VarSet(VAR_0x403B, val);
                 }
                 else if (i < 32)
                 {
-                    u16 val = VarGet(0x403C);
+                    u16 val = VarGet(VAR_0x403C);
                     val |= 1 << (i - 16);
-                    VarSet(0x403C, val);
+                    VarSet(VAR_0x403C, val);
                 }
                 else
                 {
-                    u16 val = VarGet(0x403D);
+                    u16 val = VarGet(VAR_0x403D);
                     val |= 1 << (i - 32);
-                    VarSet(0x403D, val);
+                    VarSet(VAR_0x403D, val);
                 }
 
-                varValue = VarGet(0x403B);
-                if (varValue != 0xFFFF || VarGet(0x403C) != varValue || VarGet(0x403D) != 0xF)
+                varValue = VarGet(VAR_0x403B);
+                if (varValue != 0xFFFF || VarGet(VAR_0x403C) != varValue || VarGet(VAR_0x403D) != 0xF)
                     return FALSE;
 
                 if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)

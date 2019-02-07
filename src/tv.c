@@ -38,6 +38,7 @@
 #include "secret_base.h"
 #include "tv.h"
 #include "data2.h"
+#include "constants/layouts.h"
 
 // Static type declarations
 
@@ -913,13 +914,13 @@ void ResetGabbyAndTy(void)
     gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_5 = 0;
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon2 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem2 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem2 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall2 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valB_4 = 0;
     gSaveBlock1Ptr->gabbyAndTyData.mapnum = 0;
@@ -946,13 +947,13 @@ void GabbyAndTyBeforeInterview(void)
     {
         gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = FALSE;
     }
-    if (gBattleResults.unk3 != 0)
+    if (gBattleResults.numHealingItemsUsed != 0)
     {
-        gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem = TRUE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem = TRUE;
     }
     else
     {
-        gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem = FALSE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem = FALSE;
     }
     if (!gBattleResults.usedMasterBall)
     {
@@ -972,7 +973,7 @@ void GabbyAndTyBeforeInterview(void)
     TakeTVShowInSearchOfTrainersOffTheAir();
     if (gSaveBlock1Ptr->gabbyAndTyData.lastMove == MOVE_NONE)
     {
-        FlagSet(0x0001);
+        FlagSet(FLAG_TEMP_1);
     }
 }
 
@@ -980,7 +981,7 @@ void GabbyAndTyAfterInterview(void)
 {
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2 = gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn;
     gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon2 = gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon;
-    gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem2 = gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem;
+    gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem2 = gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem;
     gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall2 = gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall;
     gSaveBlock1Ptr->gabbyAndTyData.onAir = TRUE;
     gSaveBlock1Ptr->gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
@@ -1027,7 +1028,7 @@ u8 GabbyAndTyGetLastBattleTrivia(void)
     {
         return 2;
     }
-    if (gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem2)
+    if (gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem2)
     {
         return 3;
     }
@@ -2564,13 +2565,13 @@ void sub_80EEA70(void)
             show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
             show->secretBaseSecrets.active = FALSE;
             StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
-            show->secretBaseSecrets.stepsInBase = VarGet(0x40ec);
+            show->secretBaseSecrets.stepsInBase = VarGet(VAR_0x40EC);
             sub_80E980C();
             StringCopy(strbuf, gStringVar1);
             StripExtCtrlCodes(strbuf);
             StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);
-            show->secretBaseSecrets.item = VarGet(0x40ed);
-            show->secretBaseSecrets.flags = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
+            show->secretBaseSecrets.item = VarGet(VAR_0x40ED);
+            show->secretBaseSecrets.flags = VarGet(VAR_0x40EE) + (VarGet(VAR_0x40EF) << 16);
             tv_store_id_3x(show);
             show->secretBaseSecrets.language = gGameLanguage;
             if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].language == LANGUAGE_JAPANESE)
@@ -3604,7 +3605,7 @@ void sub_80F01B8(void)
 {
     VarSet(VAR_0x40BC, 0);
     RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-    FlagSet(0x396);
+    FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
 
 void ReceiveTvShowsData(void *src, u32 size, u8 masterIdx)
@@ -6141,7 +6142,7 @@ void DoTVShowInSearchOfTrainers(void)
             {
                 sTVShowState = 5;
             }
-            else if (gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem)
+            else if (gSaveBlock1Ptr->gabbyAndTyData.playerUsedHealingItem)
             {
                 sTVShowState = 6;
             }
@@ -6264,7 +6265,9 @@ static void DoTVShowTodaysRivalTrainer(void)
                 case MAPSEC_DYNAMIC:
                     switch (show->rivalTrainer.mapLayoutId)
                     {
-                        case 0x115 ... 0x117:
+                        case LAYOUT_SS_TIDAL_CORRIDOR:
+                        case LAYOUT_SS_TIDAL_LOWER_DECK:
+                        case LAYOUT_SS_TIDAL_ROOMS:
                             sTVShowState = 10;
                             break;
                         default:
@@ -6463,7 +6466,9 @@ static void DoTVShowHoennTreasureInvestigators(void)
             {
                 switch (show->treasureInvestigators.mapLayoutId)
                 {
-                    case 0x115 ... 0x117:
+                    case LAYOUT_SS_TIDAL_CORRIDOR:
+                    case LAYOUT_SS_TIDAL_LOWER_DECK:
+                    case LAYOUT_SS_TIDAL_ROOMS:
                         sTVShowState = 2;
                         break;
                     default:

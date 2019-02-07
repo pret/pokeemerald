@@ -42,9 +42,9 @@
 #define WEATHER_HAS_EFFECT2 ((!ABILITY_ON_FIELD2(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD2(ABILITY_AIR_LOCK)))
 
 u8 GetBattlerForBattleScript(u8 caseId);
-void PressurePPLose(u8 bankDef, u8 bankAtk, u16 move);
-void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
-void PressurePPLoseOnUsingImprision(u8 bankAtk);
+void PressurePPLose(u8 target, u8 attacker, u16 move);
+void PressurePPLoseOnUsingPerishSong(u8 attacker);
+void PressurePPLoseOnUsingImprision(u8 attacker);
 void MarkAllBattlersForControllerExec(void); // unused
 void MarkBattlerForControllerExec(u8 battlerId);
 void sub_803F850(u8 arg0);

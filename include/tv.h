@@ -56,5 +56,10 @@ void SaveRecordedItemPurchasesForTVShow(void);
 bool8 sub_80EE818(void);
 void sub_80EE8C8(u16 winStreak, u8 facilityAndMode);
 void BravoTrainerPokemonProfile_BeforeInterview2(u8 contestStandingPlace);
+void ContestLiveUpdates_BeforeInterview_1(u8 a0);
+void ContestLiveUpdates_BeforeInterview_2(u8 a0);
+void ContestLiveUpdates_BeforeInterview_3(u8 a0);
+void ContestLiveUpdates_BeforeInterview_4(u16 a0);
+void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1);
 
 #endif //GUARD_TV_H

@@ -731,7 +731,7 @@ _080171DC:
 _08017228:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl ListMenuHandleInputGetItemId
+	bl ListMenu_ProcessInput
 	mov r8, r0
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -847,7 +847,7 @@ _08017314:
 _0801731C:
 	mov r3, r10
 	ldrb r0, [r3]
-	bl ListMenuHandleInputGetItemId
+	bl ListMenu_ProcessInput
 	adds r1, r0, 0
 	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]

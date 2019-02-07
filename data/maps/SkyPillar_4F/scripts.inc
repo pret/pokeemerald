@@ -11,7 +11,7 @@ SkyPillar_4F_MapScript1_239681: @ 8239681
 	end
 
 SkyPillar_4F_EventScript_239692:: @ 8239692
-	setmaplayoutindex 436
+	setmaplayoutindex LAYOUT_UNKNOWN_MAP_0848144C
 	return
 
 SkyPillar_4F_MapScript1_239696: @ 8239696

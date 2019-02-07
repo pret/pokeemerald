@@ -572,9 +572,6 @@ static void Task_BardSong(u8 taskId)
             struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
             u8 *str = gStringVar4 + task->tCharIndex;
             u16 wordLen = 0;
-            // Can't get it to match without hacking
-            u32 temp;
-            register s16 zero asm("r1");
 
             while (*str != CHAR_SPACE
                    && *str != CHAR_NEWLINE
@@ -588,17 +585,22 @@ static void Task_BardSong(u8 taskId)
                 sUnknownBardRelated = MACRO2(bard->songLyrics[task->tCurrWord]);
             else
                 sUnknownBardRelated = MACRO2(bard->temporaryLyrics[task->tCurrWord]);
-            temp = gBardSong.length / wordLen;
-            zero = 0;
-            gBardSong.length = temp;
+
+            gBardSong.length /= wordLen;
             if (gBardSong.length <= 0)
                 gBardSong.length = 1;
             task->tCurrWord++;
+
             if (task->data[2] == 0)
+            {
                 task->tState = 3;
+                task->data[1] = 0;
+            }
             else
+            {
                 task->tState = 5;
-            task->data[1] = zero;
+                task->data[1] = 0;
+            }
         }
             break;
         case 5:
@@ -1180,9 +1182,9 @@ static void Task_StoryListMenu(u8 taskId) // Task_StoryListMenu
             break;
         case 1:
             selection = Menu_ProcessInput();
-            if (selection == -2)
+            if (selection == MENU_NOTHING_CHOSEN)
                 break;
-            if (selection == -1 || selection == GetFreeStorySlot())
+            if (selection == MENU_B_PRESSED || selection == GetFreeStorySlot())
             {
                 gSpecialVar_Result = 0;
             }

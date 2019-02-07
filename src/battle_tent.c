@@ -12,6 +12,7 @@
 #include "frontier_util.h"
 #include "string_util.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/species.h"
 
@@ -270,8 +271,8 @@ static void sub_81B9E88(void)
 
 bool8 sub_81B9E94(void)
 {
-    return (gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
-            && ((gMapHeader.mapLayoutId == 385) | (gMapHeader.mapLayoutId == 386)));
+    return gMapHeader.regionMapSectionId == MAPSEC_SLATEPORT_CITY
+           && (gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_CORRIDOR || gMapHeader.mapLayoutId == LAYOUT_BATTLE_TENT_BATTLE_ROOM);
 }
 
 static void sub_81B9EC0(void)

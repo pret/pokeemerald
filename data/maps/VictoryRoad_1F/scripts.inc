@@ -11,12 +11,12 @@ VictoryRoad_1F_MapScript1_235D80: @ 8235D80
 
 VictoryRoad_1F_EventScript_235D97:: @ 8235D97
 	setobjectxyperm 4, 2, 24
-	setobjectmovementtype 4, 8
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 VictoryRoad_1F_EventScript_235DA3:: @ 8235DA3
 	setobjectxyperm 4, 3, 24
-	setobjectmovementtype 4, 8
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 VictoryRoad_1F_EventScript_235DAF:: @ 8235DAF

@@ -139,7 +139,7 @@ static void HandleAction_ThrowPokeblock(void);
 static void HandleAction_GoNear(void);
 static void HandleAction_SafariZoneRun(void);
 static void HandleAction_WallyBallThrow(void);
-static void HandleAction_Action11(void);
+static void HandleAction_TryFinish(void);
 static void HandleAction_NothingIsFainted(void);
 static void HandleAction_ActionFinished(void);
 
@@ -553,7 +553,7 @@ static void (* const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
     [B_ACTION_WALLY_THROW] = HandleAction_WallyBallThrow,
     [B_ACTION_EXEC_SCRIPT] = HandleAction_RunBattleScript,
-    [11] = HandleAction_Action11, // not sure about this one
+    [B_ACTION_TRY_FINISH] = HandleAction_TryFinish,
     [B_ACTION_FINISHED] = HandleAction_ActionFinished,
     [B_ACTION_NOTHING_FAINTED] = HandleAction_NothingIsFainted,
 };
@@ -3196,7 +3196,7 @@ void SwitchInClearSetData(void)
 
     gMoveResultFlags = 0;
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
-    gDisableStructs[gActiveBattler].truantUnknownBit = disableStructCopy.truantUnknownBit;
+    gDisableStructs[gActiveBattler].truantSwitchInHack = disableStructCopy.truantSwitchInHack;
     gLastMoves[gActiveBattler] = 0;
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
@@ -5492,7 +5492,7 @@ static void HandleAction_UseMove(void)
 
     // choose battlescript
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
-        && gProtectStructs[gBattlerAttacker].flag_x10)
+        && gProtectStructs[gBattlerAttacker].palaceUnableToUseMove)
     {
         if (gBattleMons[gBattlerAttacker].hp == 0)
         {
@@ -5845,7 +5845,7 @@ static void HandleAction_WallyBallThrow(void)
     gActionsByTurnOrder[1] = B_ACTION_FINISHED;
 }
 
-static void HandleAction_Action11(void)
+static void HandleAction_TryFinish(void)
 {
     if (!HandleFaintedMonActions())
     {
