@@ -338,7 +338,7 @@ static const struct SpriteTemplate gUnknown_0861F3D4 =
 };
 
 // code
-void sub_81C4EEC(void)
+void InitBattlePyramidBagCursorPosition(void)
 {
     gPyramidBagCursorData.cursorPosition = 0;
     gPyramidBagCursorData.scrollPosition = 0;

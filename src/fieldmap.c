@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_pyramid.h"
 #include "bg.h"
 #include "fieldmap.h"
 #include "fldeff.h"
@@ -14,8 +15,6 @@
 #include "trainer_hill.h"
 #include "tv.h"
 #include "constants/rgb.h"
-
-extern void sub_81AA078(u16*, u8);
 
 struct ConnectionFlags
 {
@@ -67,10 +66,10 @@ void InitMapFromSavedGame(void)
     UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
 }
 
-void InitBattlePyramidMap(u8 a0)
+void InitBattlePyramidMap(bool8 setPlayerPosition)
 {
     CpuFastFill(0x03ff03ff, gBackupMapData, sizeof(gBackupMapData));
-    sub_81AA078(gBackupMapData, a0);
+    GenerateBattlePyramidFloorLayout(gBackupMapData, setPlayerPosition);
 }
 
 void InitTrainerHillMap(void)

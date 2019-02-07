@@ -110,7 +110,6 @@ extern void ShowMapNamePopup(void);
 extern bool32 sub_808651C(void);
 extern bool8 sub_80AF6A4(void);
 extern bool8 sub_80E909C(void);
-extern void sub_81AA1D8(void);
 extern void c2_change_map(void);
 extern void sub_81D5DF8(void);
 extern void sub_80EB218(void);
@@ -119,7 +118,6 @@ extern void sub_808B578(void);
 extern void sub_80AF314(void);
 extern void sub_80AF214(void);
 extern void sub_80AF188(void);
-extern void door_upload_tiles(void);
 extern void RotatingGate_InitPuzzleAndGraphics(void);
 extern void sub_80AF168(void);
 extern void sub_80AF3C8(void);
@@ -916,7 +914,7 @@ static void mli0_load_map(u32 a1)
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-        InitBattlePyramidMap(0);
+        InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
         InitTrainerHillMap();
     else
@@ -1765,7 +1763,7 @@ void CB2_ContinueSavedGame(void)
     DoTimeBasedEvents();
     sub_8084788();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-        InitBattlePyramidMap(1);
+        InitBattlePyramidMap(TRUE);
     else if (trainerHillMapId != 0)
         InitTrainerHillMap();
     else
@@ -1836,7 +1834,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 
     if (InBattlePyramid_())
     {
-        door_upload_tiles();
+        WriteBattlePyramidViewScanlineEffectBuffer();
         ScanlineEffect_SetParams(sFlashEffectParams);
     }
     else if ((flashLevel = Overworld_GetFlashLevel()))

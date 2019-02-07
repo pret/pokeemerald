@@ -360,13 +360,13 @@ struct BattleFrontier
     /*0xE10*/ u8 field_E10_2:4;
     /*0xE10*/ u8 field_E10_3:1;
     /*0xE12*/ u16 field_E12[3];
-    /*0xE18*/ u16 field_E18;
+    /*0xE18*/ u16 pyramidRewardItem;
     /*0xE1A*/ u16 pyramidWinStreaks[2];
     /*0xE1E*/ u16 pyramidRecordStreaks[2];
-    /*0xE22*/ u16 field_E22[4];
-    /*0xE2A*/ u8 field_E2A;
+    /*0xE22*/ u16 pyramidRandoms[4];
+    /*0xE2A*/ u8 pyramidTrainerFlags;
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0xE68*/ u8 field_E68;
+    /*0xE68*/ u8 pyramidLightRadius;
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
