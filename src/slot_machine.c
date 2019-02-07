@@ -65,7 +65,7 @@ struct SlotMachineEwramStruct
     /*0x03*/ u8 luckyGame;
     /*0x04*/ u8 luckyFlags;
     /*0x05*/ u8 reelTimeDraw;
-    /*0x06*/ u8 isBiasTagMatchPossible;  // tentative
+    /*0x06*/ u8 luckySpinsLeft;  // tentative
     /*0x07*/ u8 biasTag;
     /*0x08*/ u16 matchedSymbols;
     /*0x0A*/ u8 fairRollsLeft;
@@ -77,15 +77,15 @@ struct SlotMachineEwramStruct
     /*0x14*/ s16 reelTimePixelOffset;
     /*0x16*/ s16 reelTimePosition;
     /*0x18*/ s16 currReel;
-    /*0x1A*/ s16 reelIncrement;
+    /*0x1A*/ s16 reelIncrement; // speed of reel
     /*0x1C*/ s16 reelPixelOffsets[3];
     /*0x22*/ u16 stopReelPixelOffset[3];
     /*0x28*/ s16 reelPositions[3];
     /*0x2E*/ s16 reelExtraTurns[3];
-    /*0x34*/ s16 biasTagFinalPositions[3];  
+    /*0x34*/ s16 biasTagFinalPositions[3];
     /*0x3A*/ u8 reelTasks[3];
     /*0x3D*/ u8 unkTaskPointer3D;
-    /*0x3E*/ u8 unkTaskPointer;
+    /*0x3E*/ u8 unkTaskPointer3E;
     /*0x3F*/ u8 reelTimeSprite3F;
     /*0x40*/ u8 unk40;
     /*0x41*/ u8 unk41;
@@ -134,7 +134,7 @@ struct UnkStruct1
 /*static */void SlotMachineSetup_9_0(void);
 /*static */void SlotMachineSetup_10_0(void);
 /*static */void SlotMachineSetupGameplayTasks(void);
-/*static */void GameplayTasks_Slot(void);
+/*static */void GameplayTasks_Slots(void);
 /*static */void sub_8104DA4(void);
 /*static */void RunSlotActions(u8 taskId);
 /*static */bool8 SlotAction_UnfadeScreen(struct Task *task);
@@ -144,34 +144,34 @@ struct UnkStruct1
 /*static */bool8 SlotAction4(struct Task *task);
 /*static */bool8 SlotAction_AwaitPlayerInput(struct Task *task);
 /*static */bool8 SlotAction_PrintYouDontHaveThreeCoins(struct Task *task);
-/*static */bool8 SlotAction_PlayerAcceptsNotHavingThreeCoins(struct Task *task);
+/*static */bool8 SlotAction_ExitYouDontHaveThreeCoinsDialogue(struct Task *task);
 /*static */bool8 SlotAction_GivingInformation(struct Task *task);
 /*static */bool8 SlotAction9(struct Task *task);
 /*static */bool8 SlotAction10(struct Task *task);
-/*static */bool8 SlotAction11(struct Task *task);
+/*static */bool8 SlotAction_SetLuckySpins(struct Task *task);
 /*static */bool8 SlotAction_AwaitReelStop(struct Task *task);
 /*static */bool8 SlotAction_WaitForAllReelsToStop(struct Task *task);
 /*static */bool8 SlotAction_CheckMatches(struct Task *task);
 /*static */bool8 SlotAction_WaitForPayoutToBeAwarded(struct Task *task);
 /*static */bool8 SlotAction_EndOfRoll(struct Task *task);
-/*static */bool8 SlotAction17(struct Task *task);
+/*static */bool8 SlotAction_MatchedPower(struct Task *task);
 /*static */bool8 SlotAction18(struct Task *task);
 /*static */bool8 SlotAction_Loop(struct Task *task);
 /*static */bool8 SlotAction_NoMatches(struct Task *task);
 /*static */bool8 SlotAction_PrintQuitTheGame(struct Task *task);
 /*static */bool8 SlotAction_SeeIfPlayerQuits(struct Task *task);
 /*static */bool8 SlotAction_Print9999CoinMessage(struct Task *task);
-/*static */bool8 SlotAction_Escape9999CoinMessage(struct Task *task);
+/*static */bool8 SlotAction_Exit9999CoinMessage(struct Task *task);
 /*static */bool8 SlotAction_PrintNoMoreCoins(struct Task *task);
-/*static */bool8 SlotAction_EscapeNoMoreCoins(struct Task *task);
+/*static */bool8 SlotAction_ExitNoMoreCoinsMessage(struct Task *task);
 /*static */bool8 SlotAction_EndGame(struct Task *task);
 /*static */bool8 SlotAction_FreeDataStructures(struct Task *task);
-/*static */void DrawForLuckyFlags(void);
-/*static */void AnyLuckyFlagsSet(void);
-/*static */bool8 IsLuckyRound(void);
-/*static */u8 AttemptsAtLuckiness1(void);
+/*static */void DrawLuckyFlags(void);
+/*static */void SetLuckySpins(void);
+/*static */bool8 IsThisRoundLucky(void);
+/*static */u8 AttemptsAtLuckyflags_Top3(void);
 /*static */u16 DrawNewReelIncrement(void);
-/*static */u8 AttemptsAtLuckiness2(void);
+/*static */u8 AttemptsAtLuckyflags_NotTop3(void);
 /*static */void CheckMatch(void);
 /*static */void CheckMatch_CenterRow(void);
 /*static */void CheckMatch_TopAndBottom(void);
@@ -185,7 +185,7 @@ struct UnkStruct1
 /*static */bool8 AwardPayoutAction_FreeTask(struct Task *task);
 /*static */u8 GetNearbyTag(u8 x, s16 y);
 /*static */void GameplayTask_StopReel(void);
-/*static */void ReelTasks_8102DEC(u8 a0);
+/*static */void ReelTasks_SetUnkTaskData(u8 a0);
 /*static */void sub_8102E1C(u8 a0);
 /*static */bool8 IsReelMoving(u8 a0);
 /*static */void RunReelActions(u8 taskId);
@@ -228,7 +228,7 @@ struct UnkStruct1
 /*static */void sub_8103F70(void);
 /*static */bool8 sub_8103FA0(void);
 /*static */void sub_8103FE8_(u8 taskId);
-/*static */void sub_8104048(void);
+/*static */void GameplayTasks_PikaPower(void);
 /*static */void DisplayPikaPower(u8 pikaPower);
 /*static */bool8 sub_81040C8(void);
 /*static */void sub_81040E8(u8 taskId);
@@ -262,7 +262,7 @@ struct UnkStruct1
 /*static */void sub_8104A40(s16 a0, s16 a1);
 /*static */void sub_8104A88(s16 a0);
 /*static */void OpenInfoBox(u8 a0);
-/*static */bool8 ClosedInfoBox(void);
+/*static */bool8 IsInfoBoxClosed(void);
 /*static */void RunInfoBoxActions(u8 taskId);
 /*static */void InfoBox_FadeIn(struct Task *task);
 /*static */void InfoBox_WaitForFade(struct Task *task);
@@ -355,10 +355,10 @@ static IWRAM_DATA struct SpriteFrameImage *gUnknown_03001188[26];
 // Const rom data.
 extern const struct UnkStruct1 *const gUnknown_083ED048[];
 extern const u16 gPalette_83EDE24[];
-extern const u8 sSlotLuckinessTable1[][3];
-extern const u8 LuckyFlagTagOutput[];
-extern const u16 FlagsAttemptAtLuckiness1[];
-extern const u16 FlagsAttemptAtLuckiness2[];
+extern const u8 LuckyRoundTable[][3];
+extern const u8 LuckyTags[];
+extern const u16 LuckyFlagSettings_Top3[];
+extern const u16 LuckyFlagSettings_NotTop3[];
 extern const s16 gUnknown_083ECE7E[][2];
 extern const SpriteCallback gUnknown_083ECF0C[];
 extern const struct SpriteTemplate *const gUnknown_083EDB5C[];
@@ -384,10 +384,10 @@ extern const u16 *const gUnknown_083EDE20;
 extern const s16 sInitialReelPositions[][2];
 extern const struct BgTemplate gUnknown_085A7424[4];
 extern const struct WindowTemplate gUnknown_085A7434[];
-extern const u8 sSlotLuckinessTable2[][6];
-extern const u8 sSlotLuckinessTable3[][6];
-extern const u8 ReelTimeProbabilityTable0[][17];
-extern const u8 ReelTimeProbabilityTable1[][17];
+extern const u8 LuckyFlagsTable_Top3[][6];
+extern const u8 LuckyFlagsTable_NotTop3[][6];
+extern const u8 ReelTimeProbabilityTable_UnluckyGame[][17];
+extern const u8 ReelTimeProbabilityTable_LuckyGame[][17];
 extern const u8 sSym2Match[];
 extern const u8 gUnknown_083ECCF1[];
 extern const u8 sReelSymbols[][REEL_NUM_TAGS];
@@ -464,26 +464,26 @@ bool8 (*const SlotActions[])(struct Task *task) =
     SlotAction4,
     SlotAction_AwaitPlayerInput,
     SlotAction_PrintYouDontHaveThreeCoins,
-    SlotAction_PlayerAcceptsNotHavingThreeCoins,
+    SlotAction_ExitYouDontHaveThreeCoinsDialogue,
     SlotAction_GivingInformation,
     SlotAction9,
     SlotAction10,
-    SlotAction11,
+    SlotAction_SetLuckySpins,
     SlotAction_AwaitReelStop,
     SlotAction_WaitForAllReelsToStop,
     SlotAction_CheckMatches,
     SlotAction_WaitForPayoutToBeAwarded,
     SlotAction_EndOfRoll,
-    SlotAction17,
+    SlotAction_MatchedPower,
     SlotAction18,
     SlotAction_Loop,
     SlotAction_NoMatches,
     SlotAction_PrintQuitTheGame,
     SlotAction_SeeIfPlayerQuits,
     SlotAction_Print9999CoinMessage,
-    SlotAction_Escape9999CoinMessage,
+    SlotAction_Exit9999CoinMessage,
     SlotAction_PrintNoMoreCoins,
-    SlotAction_EscapeNoMoreCoins,
+    SlotAction_ExitNoMoreCoinsMessage,
     SlotAction_EndGame,
     SlotAction_FreeDataStructures,
 };
@@ -863,7 +863,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         sSlotMachine->reelPixelOffsets[i] = 0x1f8 - sSlotMachine->reelPositions[i] * 24;
         sSlotMachine->reelPixelOffsets[i] %= 0x1f8;  // 0x1f8 is 540
     }
-    reportPlayedSlotMachine(GetCoins());
+    AlertTVThatYouPlayedSlotMachine(GetCoins());
 }
 
 /*static */void SlotMachineSetup_3_0(void)
@@ -891,7 +891,6 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     gUnknown_0203AAD0[6] = 0x20BF;
 }
 
-// machine wheel stuff
 /*static */void SlotMachineSetup_5_0(void)
 {
     sub_8106448();
@@ -910,16 +909,16 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     sub_81050C4();
 }
 
-// create next gameplay task
+// create gameplay tasks
 /*static */void SlotMachineSetupGameplayTasks(void)
 {
-    sub_8104048();
+    GameplayTasks_PikaPower();
     GameplayTask_StopReel();
     sub_8104C5C();
-    GameplayTasks_Slot();
+    GameplayTasks_Slots();
 }
 
-/*static */void GameplayTasks_Slot(void)
+/*static */void GameplayTasks_Slots(void)
 {
     RunSlotActions(CreateTask(RunSlotActions, 0));
 }
@@ -1015,10 +1014,10 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
             sSlotMachine->coins--;
             sSlotMachine->bet++;
         }
-        // if player maxed out or finished betting
+        // player maxed out or finished betting
         if (sSlotMachine->bet >= 3 || (sSlotMachine->bet != 0 && gMain.newKeys & A_BUTTON))
             sSlotMachine->slotActionPtr = 9;
-        // if player wants to quit
+        // player wants to quit
         if (gMain.newKeys & B_BUTTON)
             sSlotMachine->slotActionPtr = 21;
     }
@@ -1034,7 +1033,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */bool8 SlotAction_PlayerAcceptsNotHavingThreeCoins(struct Task *task)
+/*static */bool8 SlotAction_ExitYouDontHaveThreeCoinsDialogue(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1046,7 +1045,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 
 /*static */bool8 SlotAction_GivingInformation(struct Task *task)
 {
-    if (ClosedInfoBox())
+    if (IsInfoBoxClosed())
         sSlotMachine->slotActionPtr = 5;
     return FALSE;
 }
@@ -1054,14 +1053,16 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 // probably make all the slots roll
 /*static */bool8 SlotAction9(struct Task *task)
 {
-    DrawForLuckyFlags();
+    DrawLuckyFlags();
     sub_8104DA4();
+
     // for each reel...
-      //...do a reel task
-    ReelTasks_8102DEC(0);
-    ReelTasks_8102DEC(1);
-    ReelTasks_8102DEC(2);
+    ReelTasks_SetUnkTaskData(0);
+    ReelTasks_SetUnkTaskData(1);
+    ReelTasks_SetUnkTaskData(2);
+
     sub_80EEC80();  // something with daily slot variable
+
     task->data[0] = 0;
     if (sSlotMachine->luckyFlags & 0x20)  // bit 5 of luckyFlag set
     {
@@ -1093,11 +1094,11 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */bool8 SlotAction11(struct Task *task)
+/*static */bool8 SlotAction_SetLuckySpins(struct Task *task)
 {
     if (++task->data[0] >= 30)
     {
-        AnyLuckyFlagsSet();
+        SetLuckySpins();
         sSlotMachine->slotActionPtr = 12;
     }
     return FALSE;
@@ -1166,6 +1167,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
             PlayFanfare(MUS_ME_B_SMALL);
             sub_8104CAC(2);
         }
+        // if you matched 777...
         if (sSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_MIXED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
             // clear top bits 6 and 7
@@ -1226,7 +1228,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */bool8 SlotAction17(struct Task *task)
+/*static */bool8 SlotAction_MatchedPower(struct Task *task)
 {
     if (!sub_81040C8())
     {
@@ -1315,7 +1317,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */bool8 SlotAction_Escape9999CoinMessage(struct Task *task)
+/*static */bool8 SlotAction_Exit9999CoinMessage(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1334,7 +1336,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */bool8 SlotAction_EscapeNoMoreCoins(struct Task *task)
+/*static */bool8 SlotAction_ExitNoMoreCoinsMessage(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1344,7 +1346,6 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-// possibly end game
 /*static */bool8 SlotAction_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
@@ -1396,96 +1397,96 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */void DrawForLuckyFlags(void)
+/*static */void DrawLuckyFlags(void)
 {
-    u8 luckyAttempts;
+    u8 attempts;
 
     if (sSlotMachine->fairRollsLeft == 0)
     {
         if (!(sSlotMachine->luckyFlags & 0xc0)) // top 2 flags set to 0
         {
-            if (IsLuckyRound())
+            if (IsThisRoundLucky())
             {
-                luckyAttempts = AttemptsAtLuckiness1();
-                if (luckyAttempts != 3) // if you found a lucky number
+                attempts = AttemptsAtLuckyflags_Top3();
+                if (attempts != 3) // if you found a lucky number
                 {
-                    // luckyAttempts == 1:  reelTime flag set
-                    sSlotMachine->luckyFlags |= FlagsAttemptAtLuckiness1[luckyAttempts];
-                    if (luckyAttempts != 1)
+                    // attempts == 1:  reelTime flag set
+                    sSlotMachine->luckyFlags |= LuckyFlagSettings_Top3[attempts];
+                    if (attempts != 1)
                     {
                         return;
                     }
                 }
             }
             // if you got it your first try, you get to try again for the lower lucky flags
-            luckyAttempts = AttemptsAtLuckiness2();
-            if (luckyAttempts != 5)  // if you found a lucky number
+            attempts = AttemptsAtLuckyflags_NotTop3();
+            if (attempts != 5)  // if you found a lucky number
             {
-                sSlotMachine->luckyFlags |= FlagsAttemptAtLuckiness2[luckyAttempts];
+                sSlotMachine->luckyFlags |= LuckyFlagSettings_NotTop3[attempts];
             }
         }
     }
 }
 
-/*static */void AnyLuckyFlagsSet(void)
+/*static */void SetLuckySpins(void)
 {
-    sSlotMachine->isBiasTagMatchPossible = 0;
+    sSlotMachine->luckySpinsLeft = 0;
     if (sSlotMachine->luckyFlags)
-        sSlotMachine->isBiasTagMatchPossible = 1;
+        sSlotMachine->luckySpinsLeft = 1;
 }
 
-/*static */u8 GetLuckyFlagTagOutput(u8 luckyFlags)
+/*static */u8 GetLuckyTag(u8 luckyFlags)
 {
     u8 i;
 
     for (i = 0; i < 8; i++)
     {
         if (luckyFlags & 1)
-            return LuckyFlagTagOutput[i];
+            return LuckyTags[i];
         luckyFlags >>= 1;
     }
     return 0;
 }
 
-/*static */bool8 IsLuckyRound(void)
+/*static */bool8 IsThisRoundLucky(void)
 {
     u8 rval = Random();
-    if (sSlotLuckinessTable1[sSlotMachine->machineId][sSlotMachine->bet - 1] > rval)
+    if (LuckyRoundTable[sSlotMachine->machineId][sSlotMachine->bet - 1] > rval)
         return TRUE;
     return FALSE;
 }
 
-/*static */u8 AttemptsAtLuckiness1(void)
+/*static */u8 AttemptsAtLuckyflags_Top3(void)
 {
-    s16 countAttempts;
+    s16 count;
 
-    for (countAttempts = 0; countAttempts < 3; countAttempts++)
+    for (count = 0; count < 3; count++)
     {
         s16 rval = Random() & 0xff;
-        s16 value = sSlotLuckinessTable2[countAttempts][sSlotMachine->machineId];
+        s16 value = LuckyFlagsTable_Top3[count][sSlotMachine->machineId];
         if (value > rval)
             break;
     }
-    return countAttempts;
+    return count;
 }
 
-/*static */u8 AttemptsAtLuckiness2(void)
+/*static */u8 AttemptsAtLuckyflags_NotTop3(void)
 {
-    s16 countAttempts;
+    s16 count;
 
-    for (countAttempts = 0; countAttempts < 5; countAttempts++)
+    for (count = 0; count < 5; count++)
     {
         s16 rval = Random() & 0xff; // random byte
-        s16 value = sSlotLuckinessTable3[countAttempts][sSlotMachine->machineId];
+        s16 value = LuckyFlagsTable_NotTop3[count][sSlotMachine->machineId];
         // make first attempt easier if it's a lucky game
-        if (countAttempts == 0 && sSlotMachine->luckyGame == 1)
+        if (count == 0 && sSlotMachine->luckyGame == 1)
         {
             value += 10;
             if (value > 0x100)
                 value = 0x100;
         }
         // make last attempt harder if it's a lucky game
-        else if (countAttempts == 4 && sSlotMachine->luckyGame == 1)
+        else if (count == 4 && sSlotMachine->luckyGame == 1)
         {
             value -= 10;
             if (value < 0)
@@ -1494,15 +1495,15 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         if (value > rval)
             break;
     }
-    return countAttempts;
+    return count;
 }
 
 /*static */u8 GetReelTimeProbability(u8 reelTimeDraw)
 {
     if (sSlotMachine->luckyGame == 0)
-        return ReelTimeProbabilityTable0[reelTimeDraw][sSlotMachine->pikaPower];
+        return ReelTimeProbabilityTable_UnluckyGame[reelTimeDraw][sSlotMachine->pikaPower];
     else
-        return ReelTimeProbabilityTable1[reelTimeDraw][sSlotMachine->pikaPower];
+        return ReelTimeProbabilityTable_LuckyGame[reelTimeDraw][sSlotMachine->pikaPower];
 }
 
 /*static */void DrawReelTimeOutcome(void)
@@ -1806,7 +1807,7 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
     }
 }
 
-/*static */void ReelTasks_8102DEC(u8 reelIndex)
+/*static */void ReelTasks_SetUnkTaskData(u8 reelIndex)
 {
     gTasks[sSlotMachine->reelTasks[reelIndex]].data[0] = 1;
     gTasks[sSlotMachine->reelTasks[reelIndex]].data[14] = 1;
@@ -1845,13 +1846,13 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 /*static */bool8 ReelAction_DecideWhereToStop(struct Task *task)
 {
     task->data[0]++;
-    // initialize data for that reel --> these will be manipulated if biasTags can be lined up
+    // initialize data for that reel --> these will be changed if biasTags can be lined up
     sSlotMachine->biasTagFinalPositions[task->data[15]] = 0;
     sSlotMachine->reelExtraTurns[task->data[15]] = 0;
 
-    if (sSlotMachine->fairRollsLeft == 0 && (sSlotMachine->luckyFlags == 0 || sSlotMachine->isBiasTagMatchPossible == 0 || !DecideReelTurns_BiasTag[task->data[15]]()))
+    if (sSlotMachine->fairRollsLeft == 0 && (sSlotMachine->luckyFlags == 0 || sSlotMachine->luckySpinsLeft == 0 || !DecideReelTurns_BiasTag[task->data[15]]()))
     {
-        sSlotMachine->isBiasTagMatchPossible = 0;
+        sSlotMachine->luckySpinsLeft = 0;
         DecideReelTurns_NoBiasTag[task->data[15]]();
     }
     task->data[1] = sSlotMachine->reelExtraTurns[task->data[15]];
@@ -1902,7 +1903,7 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 
 /*static */bool8 DecideReelTurns_BiasTag_Reel1(void)
 {
-    u8 tag2 = GetLuckyFlagTagOutput(sSlotMachine->luckyFlags);
+    u8 tag2 = GetLuckyTag(sSlotMachine->luckyFlags);
     u8 tag1 = tag2;
     if (sSlotMachine->luckyFlags & 0xc0)  // if either of top 2 bits are set
     {
@@ -2489,7 +2490,7 @@ Advance until there are no cherries on screen in reel 1
     LoadPalette(gUnknown_083EDD1C[a0], gUnknown_083EDD30[a0], 2);
 }
 
-// probably light the bet number
+// light up the value bet by the player
 /*static */void LoadBetTiles(u8 betVal)
 {
     u8 i;
@@ -2621,15 +2622,14 @@ Advance until there are no cherries on screen in reel 1
     LoadPalette(gUnknown_083EDDA0[task->data[2]], 0x10, 0x20);
 }
 
-/*static */void sub_8104048(void)
+/*static */void GameplayTasks_PikaPower(void)
 {
-    sSlotMachine->unkTaskPointer = CreateTask(sub_81040E8, 8);
+    sSlotMachine->unkTaskPointer3E = CreateTask(sub_81040E8, 8);
 }
 
-// possibly clear pikaPower
 /*static */void DisplayPikaPower(u8 pikaPower)
 {
-    struct Task *task = gTasks + sSlotMachine->unkTaskPointer;
+    struct Task *task = gTasks + sSlotMachine->unkTaskPointer3E;
     ClearTaskDataFields_2orHigher(task);
     task->data[0] = 1;
     task->data[1]++;
@@ -2638,7 +2638,7 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void sub_8104098(void)
 {
-    struct Task *task = gTasks + sSlotMachine->unkTaskPointer;
+    struct Task *task = gTasks + sSlotMachine->unkTaskPointer3E;
     ClearTaskDataFields_2orHigher(task);
     task->data[0] = 3;
     task->data[15] = 1; // points to a reelIndex
@@ -2646,10 +2646,10 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */bool8 sub_81040C8(void)
 {
-    return gTasks[sSlotMachine->unkTaskPointer].data[15];
+    return gTasks[sSlotMachine->unkTaskPointer3E].data[15];
 }
 
-/*static */void sub_81040E8(u8 taskId) // debug to see if taskId is machineId
+/*static */void sub_81040E8(u8 taskId)
 {
     gUnknown_083ECBB4[gTasks[taskId].data[0]](gTasks + taskId);
 }
@@ -2741,7 +2741,7 @@ Advance until there are no cherries on screen in reel 1
         selectedPikaPowerTile[r1] = pikaPowerTileTable[r3][1];
         LoadBgTilemap(2, &selectedPikaPowerTile[r1], 2, r4 + 0x40);
     }
-    gTasks[sSlotMachine->unkTaskPointer].data[1] = pikaPower;
+    gTasks[sSlotMachine->unkTaskPointer3E].data[1] = pikaPower;
 }
 
 /*static */void BeginReelTime(void)
@@ -3094,7 +3094,7 @@ Advance until there are no cherries on screen in reel 1
     RunInfoBoxActions(taskId);
 }
 
-/*static */bool8 ClosedInfoBox(void)
+/*static */bool8 IsInfoBoxClosed(void)
 {
     if (FindTaskIdByFunc(RunInfoBoxActions) == 0xFF)
         return TRUE;
@@ -4447,7 +4447,7 @@ const s16 sInitialReelPositions[][2] = {
     {0,  2}
 };
 
-const u8 sSlotLuckinessTable1[][3] = {
+const u8 LuckyRoundTable[][3] = {
     {1, 1, 12},
     {1, 1, 14},
     {2, 2, 14},
@@ -4456,13 +4456,13 @@ const u8 sSlotLuckinessTable1[][3] = {
     {3, 3, 16}
 };
 
-const u8 sSlotLuckinessTable2[][6] = {
+const u8 LuckyFlagsTable_Top3[][6] = {
     {25, 25, 30, 40, 40, 50},
     {25, 25, 30, 30, 35, 35},
     {25, 25, 30, 25, 25, 30}
 };
 
-const u8 sSlotLuckinessTable3[][6] = {
+const u8 LuckyFlagsTable_NotTop3[][6] = {
     {20, 25, 25, 20, 25, 25},
     {12, 15, 15, 18, 19, 22},
     {25, 25, 25, 30, 30, 40},
@@ -4470,7 +4470,7 @@ const u8 sSlotLuckinessTable3[][6] = {
     {40, 40, 35, 35, 40, 40}
 };
 
-const u8 ReelTimeProbabilityTable0[][17] = {
+const u8 ReelTimeProbabilityTable_UnluckyGame[][17] = {
     {243, 243, 243,  80,  80,  80,  80,  40,  40,  40,  40,  40,  40,   5,   5,   5,   5},
     {  5,   5,   5, 150, 150, 150, 150, 130, 130, 130, 130, 130, 130, 100, 100, 100,   5},
     {  4,   4,   4,  20,  20,  20,  20,  80,  80,  80,  80,  80,  80, 100, 100, 100,  40},
@@ -4479,7 +4479,7 @@ const u8 ReelTimeProbabilityTable0[][17] = {
     {  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   6}
 };
 
-const u8 ReelTimeProbabilityTable1[][17] = {
+const u8 ReelTimeProbabilityTable_LuckyGame[][17] = {
     { 243, 243, 243, 200, 200, 200, 200, 160, 160, 160, 160, 160, 160,  70,  70,  70,   5},
     {   5,   5,   5,  25,  25,  25,  25,   5,   5,   5,   5,   5,   5,   2,   2,   2,   6},
     {   4,   4,   4,  25,  25,  25,  25,  30,  30,  30,  30,  30,  30,  40,  40,  40,  35},
@@ -4505,7 +4505,7 @@ const u16 ReelTimeBonusIncrementTable[] = {
 };
 
 // tentative name
-const u8 LuckyFlagTagOutput[] = {
+const u8 LuckyTags[] = {
   SLOT_MACHINE_TAG_REPLAY, SLOT_MACHINE_TAG_CHERRY, SLOT_MACHINE_TAG_LOTAD, SLOT_MACHINE_TAG_AZURILL, SLOT_MACHINE_TAG_POWER, SLOT_MACHINE_TAG_7_RED, SLOT_MACHINE_TAG_7_RED, SLOT_MACHINE_TAG_7_RED
 };
 
@@ -4515,11 +4515,11 @@ If you got Lucky2 in 1 attempt, flag 7 gets set.
 If you got Lucky2 in 2 attempts, flag 5 gets set.
 If you got Lucky2 in 3 attempts, flag 6 gets set.
 */
-const u16 FlagsAttemptAtLuckiness1[] = {  // order seems buggy
+const u16 LuckyFlagSettings_Top3[] = {  // order seems buggy
     0x80, 0x20, 0x40
 };
 
-const u16 FlagsAttemptAtLuckiness2[] = {
+const u16 LuckyFlagSettings_NotTop3[] = {
     0x10, 0x08, 0x04, 0x02, 0x01
 };
 
