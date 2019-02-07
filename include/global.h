@@ -277,7 +277,7 @@ struct FrontierMonData
     u8 nature;
 };
 
-struct Struct_field_E70
+struct RentalMon
 {
     u16 monId;
     u32 personality;
@@ -370,7 +370,7 @@ struct BattleFrontier
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
-    /*0xE70*/ struct Struct_field_E70 field_E70[6];
+    /*0xE70*/ struct RentalMon rentalMons[6];
     /*0xEB8*/ u16 battlePoints;
     /*0xEBA*/ u16 field_EBA;
     /*0xEBC*/ u32 battlesCount;

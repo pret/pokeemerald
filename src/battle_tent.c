@@ -329,7 +329,7 @@ static void sub_81B9EC0(void)
         if (j != i + firstMonId)
             continue;
 
-        gSaveBlock2Ptr->frontier.field_E70[i].monId = monSetId;
+        gSaveBlock2Ptr->frontier.rentalMons[i].monId = monSetId;
         species[i] = gFacilityTrainerMons[monSetId].species;
         heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
         monIds[i] = monSetId;
@@ -379,7 +379,7 @@ static void sub_81BA040(void)
         sRandMonSetId = monSets[Random() % setsCount];
         for (j = 0; j < 6; j++)
         {
-            if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.field_E70[j].monId].species)
+            if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
                 break;
         }
         if (j != 6)
