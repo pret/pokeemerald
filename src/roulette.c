@@ -996,7 +996,7 @@ static void sub_81405CC(void)
         taskId = gUnknown_0203AB88->varA4 = CreateTask(sub_81408A8, 0);
         gTasks[taskId].data[6] = 6;
         gTasks[taskId].data[13] = GetCoins();
-        reportPlayedRoulette(GetCoins());
+        AlertTVThatYouPlayedRoulette(GetCoins());
         gUnknown_0203AB88->varA5 = CreateTask(sub_8140814, 1);
         SetMainCallback2(sub_8140238);
         return;

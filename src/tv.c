@@ -2072,13 +2072,13 @@ void reportNewCoinTotal(u16 nCoinsPaidOut)
     }
 }
 
-void reportPlayedSlotMachine(u16 nCoinsSpent)
+void AlertTVThatYouPlayedSlotMachine(u16 nCoinsSpent)
 {
     sFindThatGamerWhichGame = SLOT_MACHINE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void reportPlayedRoulette(u16 nCoinsSpent)
+void AlertTVThatYouPlayedRoulette(u16 nCoinsSpent)
 {
     sFindThatGamerWhichGame = ROULETTE;
     sFindThatGamerCoinsSpent = nCoinsSpent;
