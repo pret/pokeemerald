@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_pyramid.h"
 #include "bg.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -7,7 +8,6 @@
 #include "map_name_popup.h"
 #include "palette.h"
 #include "region_map.h"
-#include "rom_818CFC8.h"
 #include "start_menu.h"
 #include "string_util.h"
 #include "task.h"
