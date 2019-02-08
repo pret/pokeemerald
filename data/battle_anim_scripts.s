@@ -134,7 +134,7 @@ gBattleAnims_Moves::
 	.4byte Move_FOCUS_ENERGY
 	.4byte Move_BIDE
 	.4byte Move_METRONOME
-	.4byte Move_MIRROR_MOVE @ doesn't have an actual animation
+	.4byte Move_MIRROR_MOVE @ doesn´t have an actual animation
 	.4byte Move_SELF_DESTRUCT
 	.4byte Move_EGG_BOMB
 	.4byte Move_LICK
@@ -1885,11 +1885,80 @@ Move_FIRE_FANG:
 	end
 	
 Move_SHADOW_SNEAK:
+	loadspritegfx ANIM_TAG_LICK
+	setalpha 0, 16
+	delay 1
+	createvisualtask sub_81143C0, 2
+	delay 1
+	createvisualtask sub_8113BAC, 5
+	playsewithpan SE_W060, SOUND_PAN_ATTACKER
+	delay 48
+	playsewithpan SE_W060B, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	createvisualtask sub_8114470, 2
+	setalpha 0, 16
+	delay 1
+	playsewithpan SE_W122, SOUND_PAN_TARGET
+	createsprite gUnknown_08596D8C, ANIM_TARGET, 2, 0, 0
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 16, 1
+	waitforvisualfinish
+	clearmonbg_23 ANIM_TARGET
+	delay 1
+	blendoff
+	delay 1
 	end
 	
 Move_MUD_BOMB:
+	loadspritegfx ANIM_TAG_MUD_SAND
+	playsewithpan SE_W145C, SOUND_PAN_ATTACKER
+	createsprite gMudBombToss, ANIM_TARGET, 2, 20, 0, 0, 0, 35, -25
+	delay 5
+	playsewithpan SE_W145C, SOUND_PAN_ATTACKER
+	createsprite gMudBombToss, ANIM_TARGET, 2, 20, 0, 0, 0, 35, -25
+	delay 5
+	playsewithpan SE_W145C, SOUND_PAN_ATTACKER
+	createsprite gMudBombToss, ANIM_TARGET, 2, 20, 0, 0, 0, 35, -25
+	delay 5
+	playsewithpan SE_W145C, SOUND_PAN_ATTACKER
+	createsprite gMudBombToss, ANIM_TARGET, 2, 20, 0, 0, 0, 35, -25
+	delay 11
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 5, 1
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 42, 27, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 42, 27, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -27, 44, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 39, -28, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -42, -42, 20
+	playsewithpan SE_W233B, SOUND_PAN_TARGET
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 5, 1
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 0, 40, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -8, -44, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -46, -28, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 46, 9, 20
+	playsewithpan SE_W088, SOUND_PAN_TARGET
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 5, 1
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 42, 0, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -43, -12, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 16, -46, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -16, 44, 20
+	playsewithpan SE_W088, SOUND_PAN_TARGET
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 5, 1
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 0, 40, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -8, -44, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -46, -28, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 46, 9, 20
+	playsewithpan SE_W088, SOUND_PAN_TARGET
+	delay 5
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 5, 1
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 42, 0, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -43, -12, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, 16, -46, 20
+	createsprite gMudBombSplash, ANIM_TARGET, 2, -16, 44, 20
+	waitforvisualfinish
 	end
-	
+
 Move_PSYCHO_CUT:
 	end
 	
