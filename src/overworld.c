@@ -19,6 +19,7 @@
 #include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "fldeff.h"
 #include "gpu_regs.h"
 #include "heal_location.h"
 #include "link.h"
@@ -28,6 +29,7 @@
 #include "alloc.h"
 #include "m4a.h"
 #include "map_name_popup.h"
+#include "match_call.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "mirage_tower.h"
@@ -42,14 +44,15 @@
 #include "save.h"
 #include "save_location.h"
 #include "script.h"
-// #include "script_pokemon_80C4.h"
+#include "script_pokemon_util_80F87D8.h"
 #include "secret_base.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
-// #include "tileset_anim.h"
+#include "tileset_anims.h"
 #include "time_events.h"
 #include "trainer_hill.h"
+#include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
@@ -85,71 +88,11 @@ extern const u8 gUnknown_082773F5[];
 extern const u8 gUnknown_082774EF[];
 extern const u8 gUnknown_08277509[];
 
-// vars
 extern const struct MapLayout *const gMapLayouts[];
 extern const struct MapHeader *const *const gMapGroups[];
-extern const s32 gMaxFlashLevel;
+extern const int gMaxFlashLevel;
 extern const u16 gUnknown_82EC7C4[];
 
-// functions
-extern void HealPlayerParty(void);
-extern void move_tilemap_camera_to_upper_left_corner(void);
-extern void cur_mapheader_run_tileset_funcs_after_some_cpuset(void);
-extern void DrawWholeMapView(void);
-extern void copy_map_tileset1_tileset2_to_vram(const struct MapLayout *);
-extern void apply_map_tileset1_tileset2_palette(const struct MapLayout *);
-extern void ResetCyclingRoadChallengeData(void);
-extern void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
-extern void mapheader_run_script_with_tag_x5(void);
-extern void ResetFieldTasksArgs(void);
-extern void sub_80A0A2C(void);
-extern void apply_map_tileset2_palette(const struct MapLayout *);
-extern void copy_map_tileset2_to_vram_2(const struct MapLayout *);
-extern void RestartWildEncounterImmunitySteps(void);
-extern void ShowMapNamePopup(void);
-extern bool32 sub_808651C(void);
-extern bool8 sub_80AF6A4(void);
-extern bool8 sub_80E909C(void);
-extern void c2_change_map(void);
-extern void sub_81D5DF8(void);
-extern void sub_80EB218(void);
-extern void sub_80AF3C8(void);
-extern void sub_808B578(void);
-extern void sub_80AF314(void);
-extern void sub_80AF214(void);
-extern void sub_80AF188(void);
-extern void RotatingGate_InitPuzzleAndGraphics(void);
-extern void sub_80AF168(void);
-extern void sub_80AF3C8(void);
-extern void ExecuteTruckSequence(void);
-extern void sub_80A0A38(void);
-extern void WriteFlashScanlineEffectBuffer(u8);
-extern void InitMatchCallCounters(void);
-extern void sub_80EDB44(void);
-extern void InitFieldMessageBox(void);
-extern void copy_map_tileset1_to_vram(const struct MapLayout *);
-extern void copy_map_tileset2_to_vram(const struct MapLayout *);
-extern void FieldUpdateBgTilemapScroll(void);
-extern void TransferTilesetAnimsBuffer(void);
-extern bool8 warp0_in_pokecenter(void);
-extern void ResetAllPicSprites(void);
-extern void FieldEffectActiveListClear(void);
-extern void SetUpFieldTasks(void);
-extern void ShowStartMenu(void);
-extern void sub_80AEE84(void);
-extern void mapldr_default(void);
-extern bool32 sub_800F0B8(void);
-extern bool32 sub_8009F3C(void);
-extern void sub_8010198(void);
-extern u32 sub_800B4DC(void);
-extern bool32 sub_80B39D4(u8);
-extern const u8* GetInteractedLinkPlayerScript(struct MapPosition *a1, u8, u8);
-extern u8 *GetCoordEventScriptAtMapPosition(void*);
-extern u8 GetFRLGAvatarGraphicsIdByGender(u8);
-extern u8 GetRSAvatarGraphicsIdByGender(u8);
-extern void UpdateEventObjectSpriteVisibility(struct Sprite*, u8);
-
-// this file's functions
 static void Overworld_ResetStateAfterWhiteOut(void);
 static void c2_80567AC(void);
 static void CB2_LoadMap2(void);

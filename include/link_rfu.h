@@ -282,5 +282,6 @@ void sub_800EF7C(void);
 bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx);
 s32 sub_800E87C(u8 idx);
 void sub_8011BA4(void);
+void sub_8010198(void);
 
 #endif //GUARD_LINK_RFU_H
