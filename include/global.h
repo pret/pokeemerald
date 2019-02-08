@@ -345,7 +345,7 @@ struct BattleFrontier
     /*0xDC6*/ u16 field_DC6;
     /*0xDC8*/ u16 palaceWinStreaks[2][2];
     /*0xDD0*/ u16 palaceRecordWinStreaks[2][2];
-    /*0xDD8*/ u16 field_DD8;
+    /*0xDD8*/ u16 arenaRewardItem;
     /*0xDDA*/ u16 arenaWinStreaks[2];
     /*0xDDE*/ u16 arenaRecordStreaks[2];
     /*0xDE2*/ u16 factoryWinStreaks[2][2];
