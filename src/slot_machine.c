@@ -79,11 +79,11 @@ struct SlotMachineEwramStruct
     /*0x18*/ s16 currReel;
     /*0x1A*/ s16 reelIncrement; // speed of reel
     /*0x1C*/ s16 reelPixelOffsets[3];
-    /*0x22*/ u16 stopReelPixelOffset[3];
-    /*0x28*/ s16 reelPositions[3];
+    /*0x22*/ u16 reelPixelOffsetsWhileStopping[3];
+    /*0x28*/ s16 reelTagOffsets[3];
     /*0x2E*/ s16 reelExtraTurns[3];
-    /*0x34*/ s16 biasTagFinalPositions[3];
-    /*0x3A*/ u8 reelTasks[3];
+    /*0x34*/ s16 biasTagLocation[3];
+    /*0x3A*/ u8 slotReelTasks[3];
     /*0x3D*/ u8 unkTaskPointer3D;
     /*0x3E*/ u8 unkTaskPointer3E;
     /*0x3F*/ u8 reelTimeSprite3F;
@@ -180,20 +180,20 @@ struct UnkStruct1
 /*static */void AwardPayout(void);
 /*static */void RunAwardPayoutActions(u8 taskId);
 /*static */bool8 IsFinalTask_RunAwardPayoutActions(void);
-/*static */bool8 AwardPayoutAction1(struct Task *task);
+/*static */bool8 AwardPayoutAction0(struct Task *task);
 /*static */bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *task);
 /*static */bool8 AwardPayoutAction_FreeTask(struct Task *task);
-/*static */u8 GetNearbyTag(u8 x, s16 y);
-/*static */void GameplayTask_StopReel(void);
+/*static */u8 GetNearbyTag_Quantized(u8 x, s16 y);
+/*static */void GameplayTask_StopSlotReel(void);
 /*static */void ReelTasks_SetUnkTaskData(u8 a0);
 /*static */void sub_8102E1C(u8 a0);
-/*static */bool8 IsReelMoving(u8 a0);
-/*static */void RunReelActions(u8 taskId);
-/*static */bool8 ReelAction_StayStill(struct Task *task);
-/*static */bool8 ReelAction_Spin(struct Task *task);
-/*static */bool8 ReelAction_DecideWhereToStop(struct Task *task);
-/*static */bool8 ReelAction_TurnToSelectedTag(struct Task *task);
-/*static */bool8 ReelAction_OscillatingStop(struct Task *task);
+/*static */bool8 IsSlotReelMoving(u8 a0);
+/*static */void RunSlotReelActions(u8 taskId);
+/*static */bool8 SlotReelAction_StayStill(struct Task *task);
+/*static */bool8 SlotReelAction_Spin(struct Task *task);
+/*static */bool8 SlotReelAction_DecideWhereToStop(struct Task *task);
+/*static */bool8 SlotReelAction_MoveToStop(struct Task *task);
+/*static */bool8 SlotReelAction_OscillatingStop(struct Task *task);
 /*static */bool8 DecideReelTurns_BiasTag_Reel1(void);
 /*static */bool8 DecideReelTurns_BiasTag_Reel1_Bet1(u8 a0, u8 a1);
 /*static */bool8 DecideReelTurns_BiasTag_Reel1_Bet2or3(u8 a0, u8 a1);
@@ -389,7 +389,7 @@ extern const u8 LuckyFlagsTable_NotTop3[][6];
 extern const u8 ReelTimeProbabilityTable_UnluckyGame[][17];
 extern const u8 ReelTimeProbabilityTable_LuckyGame[][17];
 extern const u8 sSym2Match[];
-extern const u8 gUnknown_083ECCF1[];
+extern const u8 ReelTimeTags[];
 extern const u8 sReelSymbols[][REEL_NUM_TAGS];
 extern const u16 *const gUnknown_083EDD08[];
 extern const u16 *const gUnknown_083EDD1C[];
@@ -490,18 +490,18 @@ bool8 (*const SlotActions[])(struct Task *task) =
 
 bool8 (*const AwardPayoutActions[])(struct Task *task) =
 {
-    AwardPayoutAction1,
+    AwardPayoutAction0,
     AwardPayoutAction_GivePayoutToPlayer,
     AwardPayoutAction_FreeTask
 };
 
-bool8 (*const ReelActions[])(struct Task *task) =
+bool8 (*const SlotReelActions[])(struct Task *task) =
 {
-    ReelAction_StayStill,
-    ReelAction_Spin,
-    ReelAction_DecideWhereToStop,
-    ReelAction_TurnToSelectedTag,
-    ReelAction_OscillatingStop
+    SlotReelAction_StayStill,
+    SlotReelAction_Spin,
+    SlotReelAction_DecideWhereToStop,
+    SlotReelAction_MoveToStop,
+    SlotReelAction_OscillatingStop
 };
 
 // returns True if a match with the biasTag is possible in that reel
@@ -858,9 +858,9 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     // for each reel...
     for (i = 0; i < 3; i++)
     {
-        sSlotMachine->stopReelPixelOffset[i] = 0;
-        sSlotMachine->reelPositions[i] = sInitialReelPositions[i][sSlotMachine->luckyGame] % REEL_NUM_TAGS;
-        sSlotMachine->reelPixelOffsets[i] = 0x1f8 - sSlotMachine->reelPositions[i] * 24;
+        sSlotMachine->reelPixelOffsetsWhileStopping[i] = 0;
+        sSlotMachine->reelTagOffsets[i] = sInitialReelPositions[i][sSlotMachine->luckyGame] % REEL_NUM_TAGS;
+        sSlotMachine->reelPixelOffsets[i] = 0x1f8 - sSlotMachine->reelTagOffsets[i] * 24;
         sSlotMachine->reelPixelOffsets[i] %= 0x1f8;  // 0x1f8 is 540
     }
     AlertTVThatYouPlayedSlotMachine(GetCoins());
@@ -913,7 +913,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 /*static */void SlotMachineSetupGameplayTasks(void)
 {
     GameplayTasks_PikaPower();
-    GameplayTask_StopReel();
+    GameplayTask_StopSlotReel();
     sub_8104C5C();
     GameplayTasks_Slots();
 }
@@ -1118,7 +1118,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 
 /*static */bool8 SlotAction_WaitForAllReelsToStop(struct Task *task)
 {
-    if (!IsReelMoving(sSlotMachine->currReel))
+    if (!IsSlotReelMoving(sSlotMachine->currReel))
     {
         sSlotMachine->currReel++;
         sSlotMachine->slotActionPtr = 12;
@@ -1571,9 +1571,9 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 {
     u8 c1, c2, c3, match;
 
-    c1 = GetNearbyTag(0, 2);
-    c2 = GetNearbyTag(1, 2);
-    c3 = GetNearbyTag(2, 2);
+    c1 = GetNearbyTag_Quantized(0, 2);
+    c2 = GetNearbyTag_Quantized(1, 2);
+    c3 = GetNearbyTag_Quantized(2, 2);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1587,9 +1587,9 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 {
     u8 c1, c2, c3, match;
 
-    c1 = GetNearbyTag(0, 1);
-    c2 = GetNearbyTag(1, 1);
-    c3 = GetNearbyTag(2, 1);
+    c1 = GetNearbyTag_Quantized(0, 1);
+    c2 = GetNearbyTag_Quantized(1, 1);
+    c3 = GetNearbyTag_Quantized(2, 1);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1599,9 +1599,9 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         sSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
         sub_8103E04(1);
     }
-    c1 = GetNearbyTag(0, 3);
-    c2 = GetNearbyTag(1, 3);
-    c3 = GetNearbyTag(2, 3);
+    c1 = GetNearbyTag_Quantized(0, 3);
+    c2 = GetNearbyTag_Quantized(1, 3);
+    c3 = GetNearbyTag_Quantized(2, 3);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1617,9 +1617,9 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 {
     u8 c1, c2, c3, match;
 
-    c1 = GetNearbyTag(0, 1);
-    c2 = GetNearbyTag(1, 2);
-    c3 = GetNearbyTag(2, 3);
+    c1 = GetNearbyTag_Quantized(0, 1);
+    c2 = GetNearbyTag_Quantized(1, 2);
+    c3 = GetNearbyTag_Quantized(2, 3);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1630,9 +1630,9 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         }
         sub_8103E04(3);
     }
-    c1 = GetNearbyTag(0, 3);
-    c2 = GetNearbyTag(1, 2);
-    c3 = GetNearbyTag(2, 1);
+    c1 = GetNearbyTag_Quantized(0, 3);
+    c2 = GetNearbyTag_Quantized(1, 2);
+    c3 = GetNearbyTag_Quantized(2, 1);
     match = GetMatchFromSymbolsInRow(c1, c2, c3);
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
@@ -1677,7 +1677,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         ;
 }
 
-/*static */bool8 AwardPayoutAction1(struct Task *task)
+/*static */bool8 AwardPayoutAction0(struct Task *task)
 {
     if (sub_8103E38())
     {
@@ -1724,130 +1724,130 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */u8 GetNearbyTag(u8 reelIndex, s16 posOffset)
+/*
+Returns the tag that is posOffset below the tag at the top of reelIndex's tape
+*/
+/*static */u8 GetNearbyTag_Quantized(u8 reelIndex, s16 posOffset)
 {
-  /*
-  Returns the tag that is posOffset below the tag at the top of reelIndex's tape
-  */
-    s16 tagIndex = (sSlotMachine->reelPositions[reelIndex] + posOffset) % REEL_NUM_TAGS;
+    s16 tagIndex = (sSlotMachine->reelTagOffsets[reelIndex] + posOffset) % REEL_NUM_TAGS;
     if (tagIndex < 0)
         tagIndex += REEL_NUM_TAGS;
     return sReelSymbols[reelIndex][tagIndex];
 }
 
-// TODO: find out how rounding works
-/*static */u8 GetNearbyTag_PixelOffset(u8 reelIndex, s16 posOffset)
+/*
+Calculates GetNearbyTag_Quantized as if the reel was snapped downwards into place
+/*
+/*static */u8 GetNearbyTag(u8 reelIndex, s16 posOffset)
 {
     s16 tagOffset = 0;
     s16 result = sSlotMachine->reelPixelOffsets[reelIndex] % 24;
     if (result != 0)
-        tagOffset = -1;  // tag will be posOffset - 1
-    return GetNearbyTag(reelIndex, posOffset + tagOffset);
+        tagOffset = -1;
+    return GetNearbyTag_Quantized(reelIndex, posOffset + tagOffset);
 }
 
-// TODO: make sure this is actually what's happening
-/*static */u8 GetNthNextReelTimePosition(s16 n)
+/*static */u8 GetNearbyReelTimeTag(s16 n)
 {
     s16 newPosition = (sSlotMachine->reelTimePosition + n) % 6;
     if (newPosition < 0)
         newPosition += 6;
-    return gUnknown_083ECCF1[newPosition];
+    return ReelTimeTags[newPosition];
 }
 
-/*static */void IncrementReelPixelOffset(u8 reelIndex, s16 value)
+/*static */void AdvanceSlotReel(u8 reelIndex, s16 value)
 {
     sSlotMachine->reelPixelOffsets[reelIndex] += value;
     sSlotMachine->reelPixelOffsets[reelIndex] %= 504;
-    sSlotMachine->reelPositions[reelIndex] = REEL_NUM_TAGS - sSlotMachine->reelPixelOffsets[reelIndex] / 24;
+    sSlotMachine->reelTagOffsets[reelIndex] = REEL_NUM_TAGS - sSlotMachine->reelPixelOffsets[reelIndex] / 24;
 }
 
-// TODO: make sure that's actually what's happening
-s16 AdvanceReelNextTag(u8 reelIndex, s16 reelIncrement)
+s16 AdvanceSlotReelToNextTag(u8 reelIndex, s16 value)
 {
-    s16 value = sSlotMachine->reelPixelOffsets[reelIndex] % 24;
-    if (value != 0)
+    s16 offset = sSlotMachine->reelPixelOffsets[reelIndex] % 24;
+    if (offset != 0)
     {
-        if (value < reelIncrement)
-            reelIncrement = value;
-        IncrementReelPixelOffset(reelIndex, reelIncrement);
-        value = sSlotMachine->reelPixelOffsets[reelIndex] % 24;
+        if (offset < value)
+            value = offset;
+        AdvanceSlotReel(reelIndex, value);
+        offset = sSlotMachine->reelPixelOffsets[reelIndex] % 24;
     }
-    return value;
+    return offset;
 }
 
-/*static */void IncrementReelTimePixelOffset(s16 value)
+/*static */void AdvanceReeltimeReel(s16 value)
 {
     sSlotMachine->reelTimePixelOffset += value;
     sSlotMachine->reelTimePixelOffset %= 120;
     sSlotMachine->reelTimePosition = 6 - sSlotMachine->reelTimePixelOffset / 20;
 }
 
-s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
+s16 AdvanceReeltimeReelToNextTag(s16 value)
 {
-    s16 value = sSlotMachine->reelTimePixelOffset % 20;
-    if (value != 0)
+    s16 offset = sSlotMachine->reelTimePixelOffset % 20;
+    if (offset != 0)
     {
-        if (value < reelIncrement)
-            reelIncrement = value;
-        IncrementReelTimePixelOffset(reelIncrement);
-        value = sSlotMachine->reelTimePixelOffset % 20;
+        if (offset < value)
+            value = offset;
+        AdvanceReeltimeReel(value);
+        offset = sSlotMachine->reelTimePixelOffset % 20;
     }
-    return value;
+    return offset;
 }
 
-/*static */void GameplayTask_StopReel(void)
+/*static */void GameplayTask_StopSlotReel(void)
 {
     u8 i;
     for (i = 0; i < 3; i++)
     {
-        u8 taskId = CreateTask(RunReelActions, 2);
+        u8 taskId = CreateTask(RunSlotReelActions, 2);
         gTasks[taskId].data[15] = i;
-        sSlotMachine->reelTasks[i] = taskId;
-        RunReelActions(taskId);
+        sSlotMachine->slotReelTasks[i] = taskId;
+        RunSlotReelActions(taskId);
     }
 }
 
 /*static */void ReelTasks_SetUnkTaskData(u8 reelIndex)
 {
-    gTasks[sSlotMachine->reelTasks[reelIndex]].data[0] = 1;
-    gTasks[sSlotMachine->reelTasks[reelIndex]].data[14] = 1;
+    gTasks[sSlotMachine->slotReelTasks[reelIndex]].data[0] = 1;
+    gTasks[sSlotMachine->slotReelTasks[reelIndex]].data[14] = 1;
 }
 
 /*static */void sub_8102E1C(u8 reelIndex)
 {
-    gTasks[sSlotMachine->reelTasks[reelIndex]].data[0] = 2;
+    gTasks[sSlotMachine->slotReelTasks[reelIndex]].data[0] = 2;
 }
 
-/*static */bool8 IsReelMoving(u8 reelIndex)
+/*static */bool8 IsSlotReelMoving(u8 reelIndex)
 {
-    return gTasks[sSlotMachine->reelTasks[reelIndex]].data[14];
+    return gTasks[sSlotMachine->slotReelTasks[reelIndex]].data[14];
 }
 
-/*static */void RunReelActions(u8 taskId)
+/*static */void RunSlotReelActions(u8 taskId)
 {
-    while (ReelActions[gTasks[taskId].data[0]](gTasks + taskId))
+    while (SlotReelActions[gTasks[taskId].data[0]](gTasks + taskId))
         ;
 }
 
 // task->data[1]  reel turns
 // task->data[15]  reelIndex
-/*static */bool8 ReelAction_StayStill(struct Task *task)
+/*static */bool8 SlotReelAction_StayStill(struct Task *task)
 {
     return FALSE;
 }
 
-/*static */bool8 ReelAction_Spin(struct Task *task)
+/*static */bool8 SlotReelAction_Spin(struct Task *task)
 {
-    IncrementReelPixelOffset(task->data[15], sSlotMachine->reelIncrement);
+    AdvanceSlotReel(task->data[15], sSlotMachine->reelIncrement);
     return FALSE;
 }
 
-
-/*static */bool8 ReelAction_DecideWhereToStop(struct Task *task)
+// As in previous generations, the slot machine often doesn't stop exactly when you press stop
+/*static */bool8 SlotReelAction_DecideWhereToStop(struct Task *task)
 {
     task->data[0]++;
     // initialize data for that reel --> these will be changed if biasTags can be lined up
-    sSlotMachine->biasTagFinalPositions[task->data[15]] = 0;
+    sSlotMachine->biasTagLocation[task->data[15]] = 0;
     sSlotMachine->reelExtraTurns[task->data[15]] = 0;
 
     if (sSlotMachine->fairRollsLeft == 0 && (sSlotMachine->luckyFlags == 0 || sSlotMachine->luckySpinsLeft == 0 || !DecideReelTurns_BiasTag[task->data[15]]()))
@@ -1860,7 +1860,7 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 }
 
 // go to next tag and then do any additional turns
-/*static */bool8 ReelAction_TurnToSelectedTag(struct Task *task)
+/*static */bool8 SlotReelAction_MoveToStop(struct Task *task)
 {
     u16 reelStopShocks[ARRAY_COUNT(ReelStopShocks)];
     s16 reelPixelPos;
@@ -1868,11 +1868,11 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
     memcpy(reelStopShocks, ReelStopShocks, sizeof(ReelStopShocks));
     reelPixelPos = sSlotMachine->reelPixelOffsets[task->data[15]] % 24;
     if (reelPixelPos != 0)
-        reelPixelPos = AdvanceReelNextTag(task->data[15], sSlotMachine->reelIncrement);
+        reelPixelPos = AdvanceSlotReelToNextTag(task->data[15], sSlotMachine->reelIncrement);
     else if (sSlotMachine->reelExtraTurns[task->data[15]])
     {
         sSlotMachine->reelExtraTurns[task->data[15]]--;
-        IncrementReelPixelOffset(task->data[15], sSlotMachine->reelIncrement);
+        AdvanceSlotReel(task->data[15], sSlotMachine->reelIncrement);
         reelPixelPos = sSlotMachine->reelPixelOffsets[task->data[15]] % 24;
     }
     if (reelPixelPos == 0 && sSlotMachine->reelExtraTurns[task->data[15]] == 0)
@@ -1885,9 +1885,9 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 }
 
 // make selected tag oscillate before it becomes still
-/*static */bool8 ReelAction_OscillatingStop(struct Task *task)
+/*static */bool8 SlotReelAction_OscillatingStop(struct Task *task)
 {
-    sSlotMachine->stopReelPixelOffset[task->data[15]] = task->data[1];
+    sSlotMachine->reelPixelOffsetsWhileStopping[task->data[15]] = task->data[1];
     task->data[1] = -task->data[1];
     task->data[2]++;
     if ((task->data[2] & 0x3) == 0)
@@ -1896,7 +1896,7 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
     {
         task->data[0] = 0;
         task->data[14] = 0;
-        sSlotMachine->stopReelPixelOffset[task->data[15]] = 0;
+        sSlotMachine->reelPixelOffsetsWhileStopping[task->data[15]] = 0;
     }
     return FALSE;
 }
@@ -1913,9 +1913,9 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
     return DecideReelTurns_BiasTag_Reel1_Bets[sSlotMachine->bet - 1](tag1, tag2);
 }
 
-/*static */bool8 IsTag1orTag2AtPosInReel1(s16 pos, u8 tag1, u8 tag2)
+/*static */bool8 AreTagsAtPosition_Reel1(s16 pos, u8 tag1, u8 tag2)
 {
-    u8 tag = GetNearbyTag_PixelOffset(0, pos);
+    u8 tag = GetNearbyTag(0, pos);
     if (tag == tag1 || tag == tag2)
     {
         sSlotMachine->biasTag = tag;
@@ -1926,13 +1926,13 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 
 /*static */bool8 AreCherriesOnScreen_Reel1(s16 offsetFromCenter)
 {
-    if (GetNearbyTag_PixelOffset(0, 1 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetNearbyTag_PixelOffset(0, 2 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetNearbyTag_PixelOffset(0, 3 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY)
+    if (GetNearbyTag(0, 1 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetNearbyTag(0, 2 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY || GetNearbyTag(0, 3 - offsetFromCenter) == SLOT_MACHINE_TAG_CHERRY)
         return TRUE;
     else
         return FALSE;
 }
 
-/*static */bool8 LuckyFlags_BiasCherryOr7s(void)
+/*static */bool8 IsBiasTowardsCherryOr7s(void)
 {
     if (sSlotMachine->luckyFlags & 0xc2)  // if any of bits 6, 7, or 1 are set
         return TRUE;
@@ -1946,10 +1946,10 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 
     for (i = 0; i < 5; i++)
     {
-        // if a lucky tag appears in the center row within the next 5 turns
-        if (IsTag1orTag2AtPosInReel1(2 - i, tag1, tag2))
+        // if a lucky tag appears in the center row within 4 turns
+        if (AreTagsAtPosition_Reel1(2 - i, tag1, tag2))
         {
-            sSlotMachine->biasTagFinalPositions[0] = 2;
+            sSlotMachine->biasTagLocation[0] = 2;
             sSlotMachine->reelExtraTurns[0] = i;
             return TRUE;
         }
@@ -1960,16 +1960,15 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 /*static */bool8 DecideReelTurns_BiasTag_Reel1_Bet2or3(u8 tag1, u8 tag2)
 {
     s16 i;
-    bool8 areLuckyBitsSet = LuckyFlags_BiasCherryOr7s();
-    // if lucky numbers or no cherries are currently on screen in reel 1...
-    if (areLuckyBitsSet || !AreCherriesOnScreen_Reel1(0))
+    bool8 biased = IsBiasTowardsCherryOr7s();
+    if (biased || !AreCherriesOnScreen_Reel1(0))
     {
         for (i = 1; i < 4; i++)
         {
-            //...and if a bias tag is currently on the screen
-            if (IsTag1orTag2AtPosInReel1(i, tag1, tag2))
+            // if a bias tag is currently on the screen
+            if (AreTagsAtPosition_Reel1(i, tag1, tag2))
             {
-                sSlotMachine->biasTagFinalPositions[0] = i;
+                sSlotMachine->biasTagLocation[0] = i;
                 sSlotMachine->reelExtraTurns[0] = 0;
                 return TRUE;
             }
@@ -1977,29 +1976,29 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
     }
     for (i = 1; i < 5; i++)
     {
-        bool8 areLuckyBitsSetCopy = areLuckyBitsSet;  // redundant
-        // if lucky numbers or if in the next 4 turns there is a screen with no cherries...
-        if (areLuckyBitsSetCopy || !AreCherriesOnScreen_Reel1(i))
+        bool8 biasedCopy = biased;  // redundant
+        // if biased or if in the next 4 turns there is a screen with no cherries...
+        if (biasedCopy || !AreCherriesOnScreen_Reel1(i))
         {
             //...and if a bias tag is in top row of that screen
-            if (IsTag1orTag2AtPosInReel1(1 - i, tag1, tag2))
+            if (AreTagsAtPosition_Reel1(1 - i, tag1, tag2))
             {
                 //...and if it only took 1 turn and the lucky tag could also be the bottom row of a screen with no cherries...
-                if (i == 1 && (areLuckyBitsSetCopy || !AreCherriesOnScreen_Reel1(3)))
+                if (i == 1 && (biasedCopy || !AreCherriesOnScreen_Reel1(3)))
                 {
-                    sSlotMachine->biasTagFinalPositions[0] = 3; // maybe how many paths to check
-                    sSlotMachine->reelExtraTurns[0] = 3; // maybe upper limit of turns to advance
+                    sSlotMachine->biasTagLocation[0] = 3;
+                    sSlotMachine->reelExtraTurns[0] = 3;
                     return TRUE;
                 }
                 //...or if it isn't the last turn and the lucky tag could be in the center row of a screen with no cherries...
-                if (i < 4 && (areLuckyBitsSetCopy || !AreCherriesOnScreen_Reel1(i + 1)))
+                if (i < 4 && (biasedCopy || !AreCherriesOnScreen_Reel1(i + 1)))
                 {
-                    sSlotMachine->biasTagFinalPositions[0] = 2;
+                    sSlotMachine->biasTagLocation[0] = 2;
                     sSlotMachine->reelExtraTurns[0] = i + 1;
                     return TRUE;
                 }
                 //...else
-                sSlotMachine->biasTagFinalPositions[0] = 1;
+                sSlotMachine->biasTagLocation[0] = 1;
                 sSlotMachine->reelExtraTurns[0] = i;
                 return TRUE;
             }
@@ -2016,14 +2015,14 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 /*static */bool8 DecideReelTurns_BiasTag_Reel2_Bet1or2(void)
 {
     s16 i;
-    s16 reel1BiasTagFinalPos = sSlotMachine->biasTagFinalPositions[0];
+    s16 biasTagLocation_Reel1 = sSlotMachine->biasTagLocation[0];
 
     for (i = 0; i < 5; i++)
     {
-        // if biasTag appears in the same row within 5 turns
-        if (GetNearbyTag_PixelOffset(1, reel1BiasTagFinalPos - i) == sSlotMachine->biasTag)
+        // if biasTag appears in the same row within 4 turns
+        if (GetNearbyTag(1, biasTagLocation_Reel1 - i) == sSlotMachine->biasTag)
         {
-            sSlotMachine->biasTagFinalPositions[1] = reel1BiasTagFinalPos;
+            sSlotMachine->biasTagLocation[1] = biasTagLocation_Reel1;
             sSlotMachine->reelExtraTurns[1] = i;
             return TRUE;
         }
@@ -2034,18 +2033,18 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 /*static */bool8 DecideReelTurns_BiasTag_Reel2_Bet3(void)
 {
     s16 i;
-    // if biasTag appears in the same row within 5 turns...
+    // if biasTag appears in the same row within 4 turns...
     if (DecideReelTurns_BiasTag_Reel2_Bet1or2())
     {
-        //...and if the biasTag is not in row 2 of reel 1 and if it requires between either 2 or 3 turns to line up the biasTag in row 2...
-        if (sSlotMachine->biasTagFinalPositions[0] != 2 && sSlotMachine->reelExtraTurns[1] > 1 && sSlotMachine->reelExtraTurns[1] != 4)
+        //...and if the biasTag is not in middle row of reel 1 and if biasTag appears in middle row of reel 2 in 2 or 3 turns...
+        if (sSlotMachine->biasTagLocation[0] != 2 && sSlotMachine->reelExtraTurns[1] > 1 && sSlotMachine->reelExtraTurns[1] != 4)
         {
             for (i = 0; i < 5; i++)
             {
-                //...and if the bias tag will appear in the center row within 5 turns
-                if (GetNearbyTag_PixelOffset(1, 2 - i) == sSlotMachine->biasTag)
+                //...and if the bias tag will appear in the middle row within 4 turns
+                if (GetNearbyTag(1, 2 - i) == sSlotMachine->biasTag)
                 {
-                    sSlotMachine->biasTagFinalPositions[1] = 2;
+                    sSlotMachine->biasTagLocation[1] = 2;
                     sSlotMachine->reelExtraTurns[1] = i;
                     break;
                 }
@@ -2053,15 +2052,15 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
         }
         return TRUE;
     }
-    // else if the biasTag is not in row 2 of reel 1...
-    if (sSlotMachine->biasTagFinalPositions[0] != 2)
+    // else if the biasTag is not in middle row of reel 1...
+    if (sSlotMachine->biasTagLocation[0] != 2)
     {
         for (i = 0; i < 5; i++)
         {
-            //...and if the biasTag will appear in the center row of reel 2 within 5 turns
-            if (GetNearbyTag_PixelOffset(1, 2 - i) == sSlotMachine->biasTag)
+            //...and if the biasTag will appear in the center row of reel 2 within 4 turns
+            if (GetNearbyTag(1, 2 - i) == sSlotMachine->biasTag)
             {
-                sSlotMachine->biasTagFinalPositions[1] = 2;
+                sSlotMachine->biasTagLocation[1] = 2;
                 sSlotMachine->reelExtraTurns[1] = i;
                 return TRUE;
             }
@@ -2089,14 +2088,14 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
 /*static */bool8 DecideReelTurns_BiasTag_Reel3_Bet1or2(u8 biasTag)
 {
     s16 i;
-    s16 reel2BiasTagPos = sSlotMachine->biasTagFinalPositions[1];
+    s16 biasTagLocation_Reel2 = sSlotMachine->biasTagLocation[1];
 
     for (i = 0; i < 5; i++)
     {
-        // if the biasTag appears in the same row as in reel 2 within 5 turns
-        if (GetNearbyTag_PixelOffset(2, reel2BiasTagPos - i) == biasTag)
+        // if the biasTag appears in the same row as in reel 2 within 4 turns
+        if (GetNearbyTag(2, biasTagLocation_Reel2 - i) == biasTag)
         {
-            sSlotMachine->biasTagFinalPositions[2] = reel2BiasTagPos;
+            sSlotMachine->biasTagLocation[2] = biasTagLocation_Reel2;
             sSlotMachine->reelExtraTurns[2] = i;
             return TRUE;
         }
@@ -2109,21 +2108,21 @@ s16 AdvanceReelTimeNextNumber(s16 reelIncrement)
     s16 i;
     s16 biasTagFinalPos;
     // if the final position of the biasTag matches in reel 1 and reel 2...
-    if (sSlotMachine->biasTagFinalPositions[0] == sSlotMachine->biasTagFinalPositions[1])
+    if (sSlotMachine->biasTagLocation[0] == sSlotMachine->biasTagLocation[1])
         //...then try to line it up in reel 3
         return DecideReelTurns_BiasTag_Reel3_Bet1or2(biasTag);
     // else place it in the row opposite reel 1's
-    if (sSlotMachine->biasTagFinalPositions[0] == 1)
+    if (sSlotMachine->biasTagLocation[0] == 1)
         biasTagFinalPos = 3;
     else
         biasTagFinalPos = 1;
     for (i = 0; i < 5; i++)
     {
-        // if in the biasTag lands in that position within the next 5 turns
-        if (GetNearbyTag_PixelOffset(2, biasTagFinalPos - i) == biasTag)
+        // if the biasTag lands in that position within 4 turns
+        if (GetNearbyTag(2, biasTagFinalPos - i) == biasTag)
         {
             sSlotMachine->reelExtraTurns[2] = i;
-            sSlotMachine->biasTagFinalPositions[2] = biasTagFinalPos;
+            sSlotMachine->biasTagLocation[2] = biasTagFinalPos;
             return TRUE;
         }
     }
@@ -2142,7 +2141,7 @@ Advance until there are no cherries on screen in reel 1
     sSlotMachine->reelExtraTurns[0] = i;
 }
 
-/*static */bool8 IsBiasTag7AndIfSoChangeColor(u8 *biasTagPtr)
+/*static */bool8 IsBiasTag7AndIfSoSColor(u8 *biasTagPtr)
 {
     if (*biasTagPtr == SLOT_MACHINE_TAG_7_RED)
     {
@@ -2165,21 +2164,21 @@ Advance until there are no cherries on screen in reel 1
 // only does stuff if the biasTag is one of the 7's, plus other conditions
 /*static */void DecideReelTurns_NoBiasTag_Reel2_Bet1(void)
 {
-    // if reel 1 has a biasTag and bit 7 is set in luckyFlags...
-    if (sSlotMachine->biasTagFinalPositions[0] != 0 && sSlotMachine->luckyFlags & 0x80)
+    // if biasTag is in reel 1 and bit 7 is set in luckyFlags...
+    if (sSlotMachine->biasTagLocation[0] != 0 && sSlotMachine->luckyFlags & 0x80)
     {
-        u8 biasTag = GetNearbyTag_PixelOffset(0, 2 - sSlotMachine->reelExtraTurns[0]);
+        u8 biasTag = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
         //...and if biasTag is one of the 7's...
-        if (IsBiasTag7AndIfSoChangeColor(&biasTag))
-        //...swap the color of the 7...
+        if (IsBiasTag7AndIfSoSColor(&biasTag))
+        //...swap color of biasTag...
         {
             s16 i;
             for (i = 0; i < 5; i++)
             {
-                //...and if the biasTag appears in the next 5 turns
-                if (biasTag == GetNearbyTag_PixelOffset(1, 2 - i))
+                //...and if the biasTag appears within 4 turns
+                if (biasTag == GetNearbyTag(1, 2 - i))
                 {
-                    sSlotMachine->biasTagFinalPositions[1] = 2;
+                    sSlotMachine->biasTagLocation[1] = 2;
                     sSlotMachine->reelExtraTurns[1] = i;
                     break;
                 }
@@ -2191,20 +2190,20 @@ Advance until there are no cherries on screen in reel 1
 /*static */void DecideReelTurns_NoBiasTag_Reel2_Bet2(void)
 {
     // if reel 1 has a biasTag and bit 7 is set in luckyFlags...
-    if (sSlotMachine->biasTagFinalPositions[0] != 0 && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->biasTagLocation[0] != 0 && sSlotMachine->luckyFlags & 0x80)
     {
-        u8 biasTag = GetNearbyTag_PixelOffset(0, sSlotMachine->biasTagFinalPositions[0] - sSlotMachine->reelExtraTurns[0]);
+        u8 biasTag = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
         //...and if biasTag is one of the 7's...
-        if (IsBiasTag7AndIfSoChangeColor(&biasTag))
-        //...swap the color of the 7...
+        if (IsBiasTag7AndIfSoSColor(&biasTag))
+        //...swap color of biasTag...
         {
             s16 i;
             for (i = 0; i < 5; i++)
             {
-                //...and if in the next 5 turns the biasTag appears in reel 2
-                if (biasTag == GetNearbyTag_PixelOffset(1, sSlotMachine->biasTagFinalPositions[0] - i))
+                //...and if the biasTag appears in same row in reel 2 within 4 turns
+                if (biasTag == GetNearbyTag(1, sSlotMachine->biasTagLocation[0] - i))
                 {
-                    sSlotMachine->biasTagFinalPositions[1] = sSlotMachine->biasTagFinalPositions[0];
+                    sSlotMachine->biasTagLocation[1] = sSlotMachine->biasTagLocation[0];
                     sSlotMachine->reelExtraTurns[1] = i;
                     break;
                 }
@@ -2218,46 +2217,46 @@ Advance until there are no cherries on screen in reel 1
     s16 i;
     s16 j;
     // if reel 1 has a biasTag and bit 7 is set in luckyFlags...
-    if (sSlotMachine->biasTagFinalPositions[0] != 0 && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->biasTagLocation[0] != 0 && sSlotMachine->luckyFlags & 0x80)
     {
         //...and if biasTag appeared in the center row of reel 1
-        if (sSlotMachine->biasTagFinalPositions[0] == 2)
+        if (sSlotMachine->biasTagLocation[0] == 2)
         {
             DecideReelTurns_NoBiasTag_Reel2_Bet2();
         }
         else
         {
-            u8 biasTag = GetNearbyTag_PixelOffset(0, sSlotMachine->biasTagFinalPositions[0] - sSlotMachine->reelExtraTurns[0]);
+            u8 biasTag = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
             //...and if biasTag is one of the 7's...
-            if (IsBiasTag7AndIfSoChangeColor(&biasTag))
+            if (IsBiasTag7AndIfSoSColor(&biasTag))
             //...swap the color of the 7...
             {
                 j = 2;
-                if (sSlotMachine->biasTagFinalPositions[0] == 3)
+                if (sSlotMachine->biasTagLocation[0] == 3)
                     j = 3;
                 for (i = 0; i < 2; i++, j--)
                 {
-                    if (biasTag == GetNearbyTag_PixelOffset(1, j))
+                    if (biasTag == GetNearbyTag(1, j))
                     {
-                        sSlotMachine->biasTagFinalPositions[1] = j;
+                        sSlotMachine->biasTagLocation[1] = j;
                         sSlotMachine->reelExtraTurns[1] = 0;
                         return;
                     }
                 }
                 for (j = 1; j < 5; j++)
                 {
-                    if (biasTag == GetNearbyTag_PixelOffset(1, sSlotMachine->biasTagFinalPositions[0] - j))
+                    if (biasTag == GetNearbyTag(1, sSlotMachine->biasTagLocation[0] - j))
                     {
-                        if (sSlotMachine->biasTagFinalPositions[0] == 1)
+                        if (sSlotMachine->biasTagLocation[0] == 1)
                         {
                             if (j < 3)
                             {
-                                sSlotMachine->biasTagFinalPositions[1] = 2;
+                                sSlotMachine->biasTagLocation[1] = 2;
                                 sSlotMachine->reelExtraTurns[1] = j + 1;
                             }
                             else
                             {
-                                sSlotMachine->biasTagFinalPositions[1] = 1;
+                                sSlotMachine->biasTagLocation[1] = 1;
                                 sSlotMachine->reelExtraTurns[1] = j;
                             }
                         }
@@ -2265,12 +2264,12 @@ Advance until there are no cherries on screen in reel 1
                         {
                             if (j < 3)
                             {
-                                sSlotMachine->biasTagFinalPositions[1] = 3;
+                                sSlotMachine->biasTagLocation[1] = 3;
                                 sSlotMachine->reelExtraTurns[1] = j;
                             }
                             else
                             {
-                                sSlotMachine->biasTagFinalPositions[1] = 2;
+                                sSlotMachine->biasTagLocation[1] = 2;
                                 sSlotMachine->reelExtraTurns[1] = j - 1;
                             }
                         }
@@ -2319,14 +2318,14 @@ Advance until there are no cherries on screen in reel 1
 /*static */void sub_8103830(void)
 {
     s16 i = 0;
-    u8 r5 = GetNearbyTag_PixelOffset(0, 2 - sSlotMachine->reelExtraTurns[0]);
-    u8 r1 = GetNearbyTag_PixelOffset(1, 2 - sSlotMachine->reelExtraTurns[1]);
+    u8 r5 = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
+    u8 r1 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
     if (r5 == r1)
     {
         while (1)
         {
             u8 r0;
-            if (!(r5 == (r0 = GetNearbyTag_PixelOffset(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
+            if (!(r5 == (r0 = GetNearbyTag(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
                 break;
             i++;
         }
@@ -2337,7 +2336,7 @@ Advance until there are no cherries on screen in reel 1
         {
             for (i = 0; i < 5; i++)
             {
-                if (r5 == GetNearbyTag_PixelOffset(2, 2 - i))
+                if (r5 == GetNearbyTag(2, 2 - i))
                 {
                     sSlotMachine->reelExtraTurns[2] = i;
                     return;
@@ -2347,7 +2346,7 @@ Advance until there are no cherries on screen in reel 1
         i = 0;
         while (1)
         {
-            if (r5 != GetNearbyTag_PixelOffset(2, 2 - i))
+            if (r5 != GetNearbyTag(2, 2 - i))
                 break;
             i++;
         }
@@ -2363,15 +2362,15 @@ Advance until there are no cherries on screen in reel 1
     u8 r6;
     u8 r4;
 
-    if (sSlotMachine->biasTagFinalPositions[1] != 0 && sSlotMachine->biasTagFinalPositions[0] == sSlotMachine->biasTagFinalPositions[1] && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->biasTagLocation[1] != 0 && sSlotMachine->biasTagLocation[0] == sSlotMachine->biasTagLocation[1] && sSlotMachine->luckyFlags & 0x80)
     {
-        r7 = GetNearbyTag_PixelOffset(0, sSlotMachine->biasTagFinalPositions[0] - sSlotMachine->reelExtraTurns[0]);
-        r6 = GetNearbyTag_PixelOffset(1, sSlotMachine->biasTagFinalPositions[1] - sSlotMachine->reelExtraTurns[1]);
+        r7 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
+        r6 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
         if (sub_8103764(r7, r6))
         {
             for (i = 0; i < 5; i++)
             {
-                r4 = GetNearbyTag_PixelOffset(2, sSlotMachine->biasTagFinalPositions[1] - i);
+                r4 = GetNearbyTag(2, sSlotMachine->biasTagLocation[1] - i);
                 if (r7 == r4)
                 {
                     sp0 = i;
@@ -2385,9 +2384,9 @@ Advance until there are no cherries on screen in reel 1
         s16 r8;
         for (i = 1, r8 = 0; i < 4; i++)
         {
-            r7 = GetNearbyTag_PixelOffset(0, i - sSlotMachine->reelExtraTurns[0]);
-            r6 = GetNearbyTag_PixelOffset(1, i - sSlotMachine->reelExtraTurns[1]);
-            r4 = GetNearbyTag_PixelOffset(2, i - sp0);
+            r7 = GetNearbyTag(0, i - sSlotMachine->reelExtraTurns[0]);
+            r6 = GetNearbyTag(1, i - sSlotMachine->reelExtraTurns[1]);
+            r4 = GetNearbyTag(2, i - sp0);
             if (!sub_81037BC(r7, r6, r4) && (!sub_810378C(r7, r6, r4) || !(sSlotMachine->luckyFlags & 0x80)))
             {
                 r8++;
@@ -2410,18 +2409,18 @@ Advance until there are no cherries on screen in reel 1
     s16 i;
 
     sub_8103910();
-    if (sSlotMachine->biasTagFinalPositions[1] != 0 && sSlotMachine->biasTagFinalPositions[0] != sSlotMachine->biasTagFinalPositions[1] && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->biasTagLocation[1] != 0 && sSlotMachine->biasTagLocation[0] != sSlotMachine->biasTagLocation[1] && sSlotMachine->luckyFlags & 0x80)
     {
-        r6 = GetNearbyTag_PixelOffset(0, sSlotMachine->biasTagFinalPositions[0] - sSlotMachine->reelExtraTurns[0]);
-        r5 = GetNearbyTag_PixelOffset(1, sSlotMachine->biasTagFinalPositions[1] - sSlotMachine->reelExtraTurns[1]);
+        r6 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
+        r5 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
         if (sub_8103764(r6, r5))
         {
             r8 = 1;
-            if (sSlotMachine->biasTagFinalPositions[0] == 1)
+            if (sSlotMachine->biasTagLocation[0] == 1)
                 r8 = 3;
             for (i = 0; i < 5; i++)
             {
-                r4 = GetNearbyTag_PixelOffset(2, r8 - (sSlotMachine->reelExtraTurns[2] + i));
+                r4 = GetNearbyTag(2, r8 - (sSlotMachine->reelExtraTurns[2] + i));
                 if (r6 == r4)
                 {
                     sSlotMachine->reelExtraTurns[2] += i;
@@ -2432,18 +2431,18 @@ Advance until there are no cherries on screen in reel 1
     }
     while (1)
     {
-        r6 = GetNearbyTag_PixelOffset(0, 1 - sSlotMachine->reelExtraTurns[0]);
-        r5 = GetNearbyTag_PixelOffset(1, 2 - sSlotMachine->reelExtraTurns[1]);
-        r4 = GetNearbyTag_PixelOffset(2, 3 - sSlotMachine->reelExtraTurns[2]);
+        r6 = GetNearbyTag(0, 1 - sSlotMachine->reelExtraTurns[0]);
+        r5 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
+        r4 = GetNearbyTag(2, 3 - sSlotMachine->reelExtraTurns[2]);
         if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && sSlotMachine->luckyFlags & 0x80))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
     while (1)
     {
-        r6 = GetNearbyTag_PixelOffset(0, 3 - sSlotMachine->reelExtraTurns[0]);
-        r5 = GetNearbyTag_PixelOffset(1, 2 - sSlotMachine->reelExtraTurns[1]);
-        r4 = GetNearbyTag_PixelOffset(2, 1 - sSlotMachine->reelExtraTurns[2]);
+        r6 = GetNearbyTag(0, 3 - sSlotMachine->reelExtraTurns[0]);
+        r5 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
+        r4 = GetNearbyTag(2, 1 - sSlotMachine->reelExtraTurns[2]);
         if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && sSlotMachine->luckyFlags & 0x80))
             break;
         sSlotMachine->reelExtraTurns[2]++;
@@ -2811,12 +2810,12 @@ Advance until there are no cherries on screen in reel 1
         task->data[3] = 0;
     }
     // move ReelTime reel by the value in the upper 8 bits of task->data[4]
-    IncrementReelTimePixelOffset(task->data[4] >> 8);
+    AdvanceReeltimeReel(task->data[4] >> 8);
 }
 
 /*static */void ReelTimeAction3(struct Task *task)
 {
-    IncrementReelTimePixelOffset(task->data[4] >> 8);
+    AdvanceReeltimeReel(task->data[4] >> 8);
     if (++task->data[5] >= 60)
     {
         task->data[0]++;
@@ -2836,7 +2835,7 @@ Advance until there are no cherries on screen in reel 1
     memcpy(sp4, gUnknown_085A75C4, sizeof(gUnknown_085A75C4));
     memcpy(spC, gUnknown_085A75CC, sizeof(gUnknown_085A75CC));
 
-    IncrementReelTimePixelOffset(task->data[4] >> 8);
+    AdvanceReeltimeReel(task->data[4] >> 8);
     // gradually slow down the reel
     task->data[4] -= 4;
     r5 = 4 - (task->data[4] >> 8);
@@ -2854,7 +2853,7 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void ReelTimeAction5(struct Task *task)
 {
-    IncrementReelTimePixelOffset(task->data[4] >> 8);
+    AdvanceReeltimeReel(task->data[4] >> 8);
     if (++task->data[5] >= 80)
     {
         task->data[0]++;
@@ -2866,7 +2865,7 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void ReelTimeAction6(struct Task *task)
 {
-    IncrementReelTimePixelOffset(task->data[4] >> 8);
+    AdvanceReeltimeReel(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x80;
     if (++task->data[5] >= 80)
     {
@@ -2877,7 +2876,7 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void ReelTimeAction7(struct Task *task)
 {
-    IncrementReelTimePixelOffset(task->data[4] >> 8);
+    AdvanceReeltimeReel(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x40;
     if (++task->data[5] >= 40)
     {
@@ -2904,16 +2903,16 @@ Advance until there are no cherries on screen in reel 1
     s16 reelTimePixelOffset = sSlotMachine->reelTimePixelOffset % 20;
     if (reelTimePixelOffset)
     {
-        reelTimePixelOffset = AdvanceReelTimeNextNumber(task->data[4] >> 8);
+        reelTimePixelOffset = AdvanceReeltimeReelToNextTag(task->data[4] >> 8);
         task->data[4] = (u8)task->data[4] + 0x40;
     }
-    else if (GetNthNextReelTimePosition(1) != sSlotMachine->reelTimeDraw)
+    else if (GetNearbyReelTimeTag(1) != sSlotMachine->reelTimeDraw)
     {
-        IncrementReelTimePixelOffset(task->data[4] >> 8);
+        AdvanceReeltimeReel(task->data[4] >> 8);
         reelTimePixelOffset = sSlotMachine->reelTimePixelOffset % 20;
         task->data[4] = (u8)task->data[4] + 0x40;
     }
-    if (reelTimePixelOffset == 0 && GetNthNextReelTimePosition(1) == sSlotMachine->reelTimeDraw)
+    if (reelTimePixelOffset == 0 && GetNearbyReelTimeTag(1) == sSlotMachine->reelTimeDraw)
     {
         task->data[4] = 0;  // stop moving
         task->data[0]++;
@@ -3282,14 +3281,12 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-// debug this to find out what sprite->data[0] and sprite->data[2] are holding
-// I would guess this updates the sprite location in the reel
 /*static */void sub_8104F18(struct Sprite *sprite)
 {
     sprite->data[2] = sSlotMachine->reelPixelOffsets[sprite->data[0]] + sprite->data[1];
     sprite->data[2] %= 120;
-    sprite->pos1.y = sSlotMachine->stopReelPixelOffset[sprite->data[0]] + 28 + sprite->data[2];
-    sprite->sheetTileStart = GetSpriteTileStartByTag(GetNearbyTag(sprite->data[0], sprite->data[2] / 24));
+    sprite->pos1.y = sSlotMachine->reelPixelOffsetsWhileStopping[sprite->data[0]] + 28 + sprite->data[2];
+    sprite->sheetTileStart = GetSpriteTileStartByTag(GetNearbyTag_Quantized(sprite->data[0], sprite->data[2] / 24));
     SetSpriteSheetFrameTileNum(sprite);
 }
 
@@ -3457,7 +3454,7 @@ Advance until there are no cherries on screen in reel 1
     s16 r0 = (u16)(sSlotMachine->reelTimePixelOffset + sprite->data[7]);
     r0 %= 40;
     sprite->pos1.y = r0 + 59;
-    StartSpriteAnimIfDifferent(sprite, GetNthNextReelTimePosition(r0 / 20));
+    StartSpriteAnimIfDifferent(sprite, GetNearbyReelTimeTag(r0 / 20));
 }
 
 /*static */void sub_81053A0(void)
@@ -4437,7 +4434,7 @@ const u8 sReelSymbols[][REEL_NUM_TAGS] =
     },
 };
 
-const u8 gUnknown_083ECCF1[] = {
+const u8 ReelTimeTags[] = {
     1, 0, 5, 4, 3, 2
 };
 
