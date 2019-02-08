@@ -939,7 +939,7 @@ static void sub_810FD3C(u8 taskId)
 
 void sub_810FDF0(struct Sprite *sprite)
 {
-    if (TranslateAnimArc(sprite))
+    if (TranslateAnimHorizontalArc(sprite))
     {
         FreeOamMatrix(sprite->oam.matrixNum);
         DestroySprite(sprite);

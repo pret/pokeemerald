@@ -1,4 +1,6 @@
 #include "global.h"
+#include "alloc.h"
+#include "battle_pyramid.h"
 #include "berry.h"
 #include "decoration.h"
 #include "event_data.h"
@@ -9,14 +11,12 @@
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "alloc.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
 #include "pokenav.h"
 #include "random.h"
-#include "rom_818CFC8.h"
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
@@ -1420,7 +1420,7 @@ u8 Unref_TryInitLocalEventObject(u8 localId)
     {
         if (InBattlePyramid())
         {
-            eventObjectCount = sub_81AAA40();
+            eventObjectCount = GetNumBattlePyramidEventObjects();
         }
         else if (InTrainerHill())
         {
@@ -1746,7 +1746,7 @@ void TrySpawnEventObjects(s16 cameraX, s16 cameraY)
 
         if (InBattlePyramid())
         {
-            objectCount = sub_81AAA40();
+            objectCount = GetNumBattlePyramidEventObjects();
         }
         else if (InTrainerHill())
         {

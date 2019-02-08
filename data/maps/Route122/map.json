@@ -1,0 +1,39 @@
+{
+  "id": "MAP_ROUTE122",
+  "name": "Route122",
+  "layout": "LAYOUT_ROUTE122",
+  "music": "MUS_DOORO_X4",
+  "region_map_section": "MAPSEC_ROUTE_122",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_bike": true,
+  "allow_escape_rope": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "direction": "up",
+      "offset": -20,
+      "map": "MAP_ROUTE121"
+    },
+    {
+      "direction": "down",
+      "offset": -100,
+      "map": "MAP_ROUTE123"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 22,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_MT_PYRE_1F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

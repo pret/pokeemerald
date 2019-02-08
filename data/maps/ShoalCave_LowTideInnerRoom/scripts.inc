@@ -8,11 +8,11 @@ ShoalCave_LowTideInnerRoom_MapScript1_236F00: @ 8236F00
 	goto ShoalCave_LowTideInnerRoom_EventScript_236F12
 
 ShoalCave_LowTideInnerRoom_EventScript_236F0E:: @ 8236F0E
-	setmaplayoutindex 169
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_236F12:: @ 8236F12
-	setmaplayoutindex 165
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_INNER_ROOM
 	end
 
 ShoalCave_LowTideInnerRoom_MapScript1_236F16: @ 8236F16

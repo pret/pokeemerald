@@ -209,7 +209,7 @@ void sub_8113064(struct Sprite *sprite)
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->invisible = 1;
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = sub_80A66DC;
+    sprite->callback = TranslateSpriteLinearAndFlicker;
 }
 
 static void sub_8113100(struct Sprite *sprite)

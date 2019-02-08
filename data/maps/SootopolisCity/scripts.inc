@@ -97,7 +97,7 @@ SootopolisCity_EventScript_1E5800:: @ 81E5800
 	return
 
 SootopolisCity_EventScript_1E5801:: @ 81E5801
-	setmaplayoutindex 357
+	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08469200
 	return
 
 SootopolisCity_EventScript_1E5805:: @ 81E5805

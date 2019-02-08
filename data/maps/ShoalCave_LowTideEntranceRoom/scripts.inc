@@ -8,11 +8,11 @@ ShoalCave_LowTideEntranceRoom_MapScript1_236DC0: @ 8236DC0
 	goto ShoalCave_LowTideEntranceRoom_EventScript_236DD5
 
 ShoalCave_LowTideEntranceRoom_EventScript_236DD1:: @ 8236DD1
-	setmaplayoutindex 168
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236DD5:: @ 8236DD5
-	setmaplayoutindex 164
+	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM
 	end
 
 ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9

@@ -15,7 +15,6 @@
 #include "overworld.h"
 #include "link.h"
 #include "frontier_util.h"
-#include "rom_818CFC8.h"
 #include "field_specials.h"
 #include "event_object_movement.h"
 #include "script.h"
@@ -36,6 +35,7 @@
 #include "international_string_util.h"
 #include "constants/songs.h"
 #include "field_player_avatar.h"
+#include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "battle_pike.h"
 #include "new_game.h"
@@ -94,9 +94,7 @@ extern void CB2_Pokedex(void);
 extern void PlayRainSoundEffect(void);
 extern void CB2_PokeNav(void);
 extern void ScriptUnfreezeEventObjects(void);
-extern void sub_81A9EC8(void);
 extern void save_serialize_map(void);
-extern void sub_81A9E90(void);
 
 // Menu action callbacks
 static bool8 StartMenuPokedexCallback(void);
@@ -751,7 +749,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void)
     return FALSE;
 }
 
-void sub_809FDD4(void) // Called from battle_frontier_2.s
+void sub_809FDD4(void)
 {
     sub_8197DF8(0, FALSE);
     ScriptUnfreezeEventObjects();
@@ -798,7 +796,7 @@ static bool8 SaveCallback(void)
         sub_8197DF8(0, TRUE);
         ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
-        sub_81A9EC8();
+        SoftResetInBattlePyramid();
         return TRUE;
     }
 

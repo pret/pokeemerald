@@ -38,6 +38,7 @@
 #include "secret_base.h"
 #include "tv.h"
 #include "data2.h"
+#include "constants/layouts.h"
 
 // Static type declarations
 
@@ -6264,7 +6265,9 @@ static void DoTVShowTodaysRivalTrainer(void)
                 case MAPSEC_DYNAMIC:
                     switch (show->rivalTrainer.mapLayoutId)
                     {
-                        case 0x115 ... 0x117:
+                        case LAYOUT_SS_TIDAL_CORRIDOR:
+                        case LAYOUT_SS_TIDAL_LOWER_DECK:
+                        case LAYOUT_SS_TIDAL_ROOMS:
                             sTVShowState = 10;
                             break;
                         default:
@@ -6463,7 +6466,9 @@ static void DoTVShowHoennTreasureInvestigators(void)
             {
                 switch (show->treasureInvestigators.mapLayoutId)
                 {
-                    case 0x115 ... 0x117:
+                    case LAYOUT_SS_TIDAL_CORRIDOR:
+                    case LAYOUT_SS_TIDAL_LOWER_DECK:
+                    case LAYOUT_SS_TIDAL_ROOMS:
                         sTVShowState = 2;
                         break;
                     default:

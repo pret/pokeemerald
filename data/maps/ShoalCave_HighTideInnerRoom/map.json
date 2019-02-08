@@ -1,0 +1,20 @@
+{
+  "id": "MAP_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM",
+  "name": "ShoalCave_HighTideInnerRoom",
+  "layout": "LAYOUT_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM",
+  "music": "MUS_M_DUNGON",
+  "region_map_section": "MAPSEC_SHOAL_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_bike": true,
+  "allow_escape_rope": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}
