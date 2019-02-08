@@ -269,7 +269,7 @@ const struct CompressedSpriteSheet gIntro2FlygonSpriteSheet[] = {
     { NULL }
 };
 
-const struct SpritePalette gUnknown_085F530C[] = {
+const struct SpritePalette gIntroBikeAndFlygonPalette[] = {
     { gIntro2BrendanNoTurnPal, 1002 },
     { gIntro2BrendanNoTurnPal, 1003 },
     { gIntro2FlygonPal,        1004 },
@@ -320,14 +320,14 @@ const struct CompressedSpriteSheet gUnknown_085F53BC[] = {
     { NULL }
 };
 
-EWRAM_DATA u16 gUnknown_0203BD24 = 0;
-EWRAM_DATA s16 gUnknown_0203BD26 = 0;
+EWRAM_DATA u16 gGuess_IntroGraphicsBikeRotation_0 = 0;
+EWRAM_DATA s16 gGuess_IntroGraphicsBikeRotation_1 = 0;
 EWRAM_DATA s16 gUnknown_0203BD28 = 0;
 
 static void sub_817B76C(void);
 static void sub_817B788(void);
 static void sub_817B7A4(void);
-static void sub_817B458(u8);
+static void Task_AdvanceBicycleAnimation(u8);
 
 void load_intro_part2_graphics(u8 a)
 {
@@ -509,9 +509,9 @@ void sub_817B3A8(u8 a)
                                 | DISPCNT_OBJ_ON);
 }
 
-u8 sub_817B3DC(u8 a, u16 b, u16 c, u16 d)
+u8 CreateBicycleAnimationTask(u8 a, u16 b, u16 c, u16 d)
 {
-    u8 taskId = CreateTask(&sub_817B458, 0);
+    u8 taskId = CreateTask(&Task_AdvanceBicycleAnimation, 0);
 
     gTasks[taskId].data[0] = a;
     gTasks[taskId].data[1] = b;
@@ -523,11 +523,11 @@ u8 sub_817B3DC(u8 a, u16 b, u16 c, u16 d)
     gTasks[taskId].data[7] = d;
     gTasks[taskId].data[8] = 8;
     gTasks[taskId].data[9] = 0;
-    sub_817B458(taskId);
+    Task_AdvanceBicycleAnimation(taskId);
     return taskId;
 }
 
-static void sub_817B458(u8 taskId)
+static void Task_AdvanceBicycleAnimation(u8 taskId)
 {
     s16 data1;
     s16 data4;
@@ -542,7 +542,7 @@ static void sub_817B458(u8 taskId)
         gTasks[taskId].data[2] = r2 >> 16;
         gTasks[taskId].data[3] = r2;
         SetGpuReg(REG_OFFSET_BG1HOFS, gTasks[taskId].data[2]);
-        SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_0203BD24 + gUnknown_0203BD26);
+        SetGpuReg(REG_OFFSET_BG1VOFS, gGuess_IntroGraphicsBikeRotation_0 + gGuess_IntroGraphicsBikeRotation_1);
     }
 
     data4 = gTasks[taskId].data[4];
@@ -554,9 +554,9 @@ static void sub_817B458(u8 taskId)
         gTasks[taskId].data[6] = r2;
         SetGpuReg(REG_OFFSET_BG2HOFS, gTasks[taskId].data[5]);
         if (gTasks[taskId].data[0] != 0)
-            SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_0203BD24 + gUnknown_0203BD26);
+            SetGpuReg(REG_OFFSET_BG2VOFS, gGuess_IntroGraphicsBikeRotation_0 + gGuess_IntroGraphicsBikeRotation_1);
         else
-            SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_0203BD24);
+            SetGpuReg(REG_OFFSET_BG2VOFS, gGuess_IntroGraphicsBikeRotation_0);
     }
 
     data7 = gTasks[taskId].data[7];
@@ -567,7 +567,7 @@ static void sub_817B458(u8 taskId)
         gTasks[taskId].data[8] = r2 >> 16;
         gTasks[taskId].data[9] = r2;
         SetGpuReg(REG_OFFSET_BG3HOFS, gTasks[taskId].data[8]);
-        SetGpuReg(REG_OFFSET_BG3VOFS, gUnknown_0203BD24);
+        SetGpuReg(REG_OFFSET_BG3VOFS, gGuess_IntroGraphicsBikeRotation_0);
     }
 }
 
@@ -635,9 +635,9 @@ static void sub_817B62C(struct Sprite *sprite)
             if (sprite->pos1.x > 0xFF)
                 sprite->pos1.x = -0x20;
             if (sprite->data[0])
-                sprite->pos2.y = -(gUnknown_0203BD24 + gUnknown_0203BD26);
+                sprite->pos2.y = -(gGuess_IntroGraphicsBikeRotation_0 + gGuess_IntroGraphicsBikeRotation_1);
             else
-                sprite->pos2.y = -gUnknown_0203BD24;
+                sprite->pos2.y = -gGuess_IntroGraphicsBikeRotation_0;
             break;
         }
     }

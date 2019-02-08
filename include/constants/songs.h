@@ -104,7 +104,7 @@
 #define SE_C_SYU 100
 #define SE_C_PIKON 101          // Pokémon Appears in Contest
 #define SE_REAPOKE 102          // Shiny Pokémon
-#define SE_OP_BASYU 103         // Opening Movie -> Title Screen whoosh
+#define SE_OP_BASYU 103         // Opening Movie -> Title Screen whoosh / Raquaza
 #define SE_BT_START 104         // Battle Mugshot whoosh
 #define SE_DENDOU 105           // Audience Cheering
 #define SE_JIHANKI 106          // Vending Machine

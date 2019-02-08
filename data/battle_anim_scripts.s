@@ -6866,20 +6866,20 @@ Move_ANCIENT_POWER:
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
 	createsprite gBattleAnimSpriteTemplate_85972D8, ANIM_ATTACKER, 2, 4, 1, 10, 1
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 20, 32, -48, 50, 2
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 0, 32, -38, 25, 5
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 32, 32, -28, 40, 3
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, -20, 32, -48, 50, 2
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 20, 32, -28, 60, 1
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 0, 32, -28, 30, 4
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 20, 32, -48, 50, 2
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 0, 32, -38, 25, 5
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 32, 32, -28, 40, 3
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, -20, 32, -48, 50, 2
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 20, 32, -28, 60, 1
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 0, 32, -28, 30, 4
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 30, 1
 	playsewithpan SE_W082, SOUND_PAN_ATTACKER
 	delay 10
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 15, 32, -48, 25, 5
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, -10, 32, -42, 30, 4
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 15, 32, -48, 25, 5
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, -10, 32, -42, 30, 4
 	delay 10
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, 0, 32, -42, 25, 5
-	createsprite gUnknown_08596C10, ANIM_ATTACKER, 2, -25, 32, -48, 30, 4
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, 0, 32, -42, 25, 5
+	createsprite gIntroGroudonRockSprite, ANIM_ATTACKER, 2, -25, 32, -48, 30, 4
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 16, 0, 0, 4
 	delay 3

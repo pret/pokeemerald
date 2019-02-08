@@ -20,7 +20,7 @@ void ResetSaveHeap(void)
     gMain.inBattle = FALSE;
     ValidateSave();
     SetSaveBlocksPointers(GetTrainerNumerSum());
-    sub_808447C();
+    ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
     Save_LoadGameData(0);
     if (gSaveFileStatus == 0 || gSaveFileStatus == 2)

@@ -32,8 +32,12 @@
 
 // EWRAM
 static EWRAM_DATA struct PokedexView *sPokedexView = NULL;
-static EWRAM_DATA u16 gUnknown_02039B50 = 0;
-static EWRAM_DATA u8 gUnknown_02039B52 = 0;
+// The pokedex saves its cursor location between opening/closing the
+// menu.
+static EWRAM_DATA u16 gPersistentSelectedPokemon = 0;
+// The pokedex saves field sPokedexView->unk62C between opening/closing
+// the menu.
+static EWRAM_DATA u8 gPersistentUnk62C = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 
 // IWRAM common
@@ -1223,8 +1227,8 @@ void ResetPokedex(void)
 {
     u16 i;
 
-    gUnknown_02039B50 = 0;
-    gUnknown_02039B52 = 64;
+    gPersistentSelectedPokemon = 0;
+    gPersistentUnk62C = 64;
     gUnknown_030060B0 = 0;
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
     gSaveBlock2Ptr->pokedex.order = 0;
@@ -1243,10 +1247,10 @@ void ResetPokedex(void)
     }
 }
 
-void sub_80BB358(void)
+void ResetPokedexScrollPosition(void)
 {
-    gUnknown_02039B50 = 0;
-    gUnknown_02039B52 = 64;
+    gPersistentSelectedPokemon = 0;
+    gPersistentUnk62C = 64;
 }
 
 void sub_80BB370(void)
@@ -1341,8 +1345,8 @@ void CB2_Pokedex(void)
             if (!IsNationalPokedexEnabled())
                 sPokedexView->dexMode = DEX_MODE_HOENN;
             sPokedexView->dexOrder = gSaveBlock2Ptr->pokedex.order;
-            sPokedexView->selectedPokemon = gUnknown_02039B50;
-            sPokedexView->unk62C = gUnknown_02039B52;
+            sPokedexView->selectedPokemon = gPersistentSelectedPokemon;
+            sPokedexView->unk62C = gPersistentUnk62C;
             sPokedexView->selectedScreen = 0;
             if (!IsNationalPokedexEnabled())
             {
@@ -1526,8 +1530,8 @@ void sub_80BBC74(u8 taskId)
     }
     else
     {
-        gUnknown_02039B50 = sPokedexView->selectedPokemon;
-        gUnknown_02039B52 = sPokedexView->unk62C;
+        gPersistentSelectedPokemon = sPokedexView->selectedPokemon;
+        gPersistentUnk62C = sPokedexView->unk62C;
         gTasks[taskId].func = sub_80BB78C;
     }
 }
@@ -4968,9 +4972,9 @@ void sub_80C170C(u8 taskId)
         {
             if (gTasks[taskId].data[0] != 0)
             {
-                gUnknown_02039B52 = 0x40;
+                gPersistentUnk62C = 0x40;
                 sPokedexView->unk62A = 0x40;
-                gUnknown_02039B50 = 0;
+                gPersistentSelectedPokemon = 0;
                 sPokedexView->unk610 = 0;
                 gSaveBlock2Ptr->pokedex.mode = sub_80C2318(taskId, 5);
                 if (!IsNationalPokedexEnabled())

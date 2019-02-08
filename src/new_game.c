@@ -36,7 +36,7 @@ extern u8 gUnknown_030060B0;
 // TODO: replace those declarations with file headers
 extern u16 GetGeneratedTrainerIdLower(void);
 extern void ClearContestWinnerPicsInContestHall(void);
-extern void sub_80BB358(void);
+extern void ResetPokedexScrollPosition(void);
 extern void ResetBagScrollPositions(void);
 extern void ResetGabbyAndTy(void);
 extern void ResetSecretBases(void);
@@ -146,10 +146,10 @@ void Sav2_ClearSetDefault(void)
     SetDefaultOptions();
 }
 
-void sub_808447C(void)
+void ResetMenuAndMonGlobals(void)
 {
     gDifferentSaveFile = 0;
-    sub_80BB358();
+    ResetPokedexScrollPosition();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();
