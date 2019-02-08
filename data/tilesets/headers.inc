@@ -7,7 +7,7 @@ gTileset_General:: @ 83DF704
 	.4byte gTilesetPalettes_General
 	.4byte gMetatiles_General
 	.4byte gMetatileAttributes_General
-	.4byte TilesetCb_General
+	.4byte InitTilesetAnim_General
 
 	.align 2
 gTileset_Petalburg:: @ 83DF71C
@@ -18,7 +18,7 @@ gTileset_Petalburg:: @ 83DF71C
 	.4byte gTilesetPalettes_Petalburg
 	.4byte gMetatiles_Petalburg
 	.4byte gMetatileAttributes_Petalburg
-	.4byte TilesetCb_Petalburg
+	.4byte InitTilesetAnim_Petalburg
 
 	.align 2
 gTileset_Rustboro:: @ 83DF734
@@ -29,7 +29,7 @@ gTileset_Rustboro:: @ 83DF734
 	.4byte gTilesetPalettes_Rustboro
 	.4byte gMetatiles_Rustboro
 	.4byte gMetatileAttributes_Rustboro
-	.4byte TilesetCb_Rustboro
+	.4byte InitTilesetAnim_Rustboro
 
 	.align 2
 gTileset_Dewford:: @ 83DF74C
@@ -40,7 +40,7 @@ gTileset_Dewford:: @ 83DF74C
 	.4byte gTilesetPalettes_Dewford
 	.4byte gMetatiles_Dewford
 	.4byte gMetatileAttributes_Dewford
-	.4byte TilesetCb_Dewford
+	.4byte InitTilesetAnim_Dewford
 
 	.align 2
 gTileset_Slateport:: @ 83DF764
@@ -51,7 +51,7 @@ gTileset_Slateport:: @ 83DF764
 	.4byte gTilesetPalettes_Slateport
 	.4byte gMetatiles_Slateport
 	.4byte gMetatileAttributes_Slateport
-	.4byte TilesetCb_Slateport
+	.4byte InitTilesetAnim_Slateport
 
 	.align 2
 gTileset_Mauville:: @ 83DF77C
@@ -62,7 +62,7 @@ gTileset_Mauville:: @ 83DF77C
 	.4byte gTilesetPalettes_Mauville
 	.4byte gMetatiles_Mauville
 	.4byte gMetatileAttributes_Mauville
-	.4byte TilesetCb_Mauville
+	.4byte InitTilesetAnim_Mauville
 
 	.align 2
 gTileset_Lavaridge:: @ 83DF794
@@ -73,7 +73,7 @@ gTileset_Lavaridge:: @ 83DF794
 	.4byte gTilesetPalettes_Lavaridge
 	.4byte gMetatiles_Lavaridge
 	.4byte gMetatileAttributes_Lavaridge
-	.4byte TilesetCb_Lavaridge
+	.4byte InitTilesetAnim_Lavaridge
 
 	.align 2
 gTileset_Fallarbor:: @ 83DF7AC
@@ -84,7 +84,7 @@ gTileset_Fallarbor:: @ 83DF7AC
 	.4byte gTilesetPalettes_Fallarbor
 	.4byte gMetatiles_Fallarbor
 	.4byte gMetatileAttributes_Fallarbor
-	.4byte TilesetCb_Fallarbor
+	.4byte InitTilesetAnim_Fallarbor
 
 	.align 2
 gTileset_Fortree:: @ 83DF7C4
@@ -95,7 +95,7 @@ gTileset_Fortree:: @ 83DF7C4
 	.4byte gTilesetPalettes_Fortree
 	.4byte gMetatiles_Fortree
 	.4byte gMetatileAttributes_Fortree
-	.4byte TilesetCb_Fortree
+	.4byte InitTilesetAnim_Fortree
 
 	.align 2
 gTileset_Lilycove:: @ 83DF7DC
@@ -106,7 +106,7 @@ gTileset_Lilycove:: @ 83DF7DC
 	.4byte gTilesetPalettes_Lilycove
 	.4byte gMetatiles_Lilycove
 	.4byte gMetatileAttributes_Lilycove
-	.4byte TilesetCb_Lilycove
+	.4byte InitTilesetAnim_Lilycove
 
 	.align 2
 gTileset_Mossdeep:: @ 83DF7F4
@@ -117,7 +117,7 @@ gTileset_Mossdeep:: @ 83DF7F4
 	.4byte gTilesetPalettes_Mossdeep
 	.4byte gMetatiles_Mossdeep
 	.4byte gMetatileAttributes_Mossdeep
-	.4byte TilesetCb_Mossdeep
+	.4byte InitTilesetAnim_Mossdeep
 
 	.align 2
 gTileset_EverGrande:: @ 83DF80C
@@ -128,7 +128,7 @@ gTileset_EverGrande:: @ 83DF80C
 	.4byte gTilesetPalettes_EverGrande
 	.4byte gMetatiles_EverGrande
 	.4byte gMetatileAttributes_EverGrande
-	.4byte TilesetCb_EverGrande
+	.4byte InitTilesetAnim_EverGrande
 
 	.align 2
 gTileset_Pacifidlog:: @ 83DF824
@@ -139,7 +139,7 @@ gTileset_Pacifidlog:: @ 83DF824
 	.4byte gTilesetPalettes_Pacifidlog
 	.4byte gMetatiles_Pacifidlog
 	.4byte gMetatileAttributes_Pacifidlog
-	.4byte TilesetCb_Pacifidlog
+	.4byte InitTilesetAnim_Pacifidlog
 
 	.align 2
 gTileset_Sootopolis:: @ 83DF83C
@@ -150,7 +150,7 @@ gTileset_Sootopolis:: @ 83DF83C
 	.4byte gTilesetPalettes_Sootopolis
 	.4byte gMetatiles_Sootopolis
 	.4byte gMetatileAttributes_Sootopolis
-	.4byte TilesetCb_Sootopolis
+	.4byte InitTilesetAnim_Sootopolis
 
 	.align 2
 gTileset_BattleFrontierOutsideWest:: @ 83DF854
@@ -161,7 +161,7 @@ gTileset_BattleFrontierOutsideWest:: @ 83DF854
 	.4byte gTilesetPalettes_BattleFrontierOutsideWest
 	.4byte gMetatiles_BattleFrontierOutsideWest
 	.4byte gMetatileAttributes_BattleFrontierOutsideWest
-	.4byte TilesetCb_BattleFrontierOutsideWest
+	.4byte InitTilesetAnim_BattleFrontierOutsideWest
 
 	.align 2
 gTileset_BattleFrontierOutsideEast:: @ 83DF86C
@@ -172,7 +172,7 @@ gTileset_BattleFrontierOutsideEast:: @ 83DF86C
 	.4byte gTilesetPalettes_BattleFrontierOutsideEast
 	.4byte gMetatiles_BattleFrontierOutsideEast
 	.4byte gMetatileAttributes_BattleFrontierOutsideEast
-	.4byte TilesetCb_BattleFrontierOutsideEast
+	.4byte InitTilesetAnim_BattleFrontierOutsideEast
 
 	.align 2
 gTileset_Building:: @ 83DF884
@@ -183,7 +183,7 @@ gTileset_Building:: @ 83DF884
 	.4byte gTilesetPalettes_InsideBuilding
 	.4byte gMetatiles_InsideBuilding
 	.4byte gMetatileAttributes_InsideBuilding
-	.4byte TilesetCb_InsideBuilding
+	.4byte InitTilesetAnim_Building
 
 	.align 2
 gTileset_Shop:: @ 83DF89C
@@ -216,7 +216,7 @@ gTileset_Cave:: @ 83DF8CC
 	.4byte gTilesetPalettes_Cave
 	.4byte gMetatiles_Cave
 	.4byte gMetatileAttributes_Cave
-	.4byte TilesetCb_Cave
+	.4byte InitTilesetAnim_Cave
 
 	.align 2
 gTileset_PokemonSchool:: @ 83DF8E4
@@ -337,7 +337,7 @@ gTileset_BikeShop:: @ 83DF9D4
 	.4byte gTilesetPalettes_BikeShop
 	.4byte gMetatiles_BikeShop
 	.4byte gMetatileAttributes_BikeShop
-	.4byte TilesetCb_BikeShop
+	.4byte InitTilesetAnim_BikeShop
 
 	.align 2
 gTileset_RusturfTunnel:: @ 83DF9EC
@@ -491,7 +491,7 @@ gTileset_Underwater:: @ 83DFB24
 	.4byte gTilesetPalettes_Underwater
 	.4byte gMetatiles_Underwater
 	.4byte gMetatileAttributes_Underwater
-	.4byte TilesetCb_Underwater
+	.4byte InitTilesetAnim_Underwater
 
 	.align 2
 gTileset_PetalburgGym:: @ 83DFB3C
@@ -513,7 +513,7 @@ gTileset_SootopolisGym:: @ 83DFB54
 	.4byte gTilesetPalettes_SootopolisGym
 	.4byte gMetatiles_SootopolisGym
 	.4byte gMetatileAttributes_SootopolisGym
-	.4byte TilesetCb_SootopolisGym
+	.4byte InitTilesetAnim_SootopolisGym
 
 	.align 2
 gTileset_GenericBuilding:: @ 83DFB6C
@@ -568,7 +568,7 @@ gTileset_MauvilleGym:: @ 83DFBCC
 	.4byte gTilesetPalettes_MauvilleGym
 	.4byte gMetatiles_MauvilleGym
 	.4byte gMetatileAttributes_MauvilleGym
-	.4byte TilesetCb_MauvilleGym
+	.4byte InitTilesetAnim_MauvilleGym
 
 	.align 2
 gTileset_LavaridgeGym:: @ 83DFBE4
@@ -653,7 +653,7 @@ gTileset_EliteFour:: @ 83DFC7C
 	.4byte gTilesetPalettes_EliteFour
 	.4byte gMetatiles_EliteFour
 	.4byte gMetatileAttributes_EliteFour
-	.4byte TilesetCb_EliteFour
+	.4byte InitTilesetAnim_EliteFour
 
 	.align 2
 gTileset_BattleFrontier:: @ 83DFC94
@@ -686,7 +686,7 @@ gTileset_BattleDome:: @ 83DFCC4
 	.4byte gTilesetPalettes_BattleDome
 	.4byte gMetatiles_BattleDome
 	.4byte gMetatileAttributes_BattleDome
-	.4byte TilesetCb_BattleDome
+	.4byte InitTilesetAnim_BattleDome
 
 	.align 2
 gTileset_BattleFactory:: @ 83DFCDC
@@ -730,7 +730,7 @@ gTileset_BattlePyramid:: @ 83DFD24
 	.4byte gTilesetPalettes_BattlePyramid
 	.4byte gMetatiles_BattlePyramid
 	.4byte gMetatileAttributes_BattlePyramid
-	.4byte TilesetCb_BattlePyramid
+	.4byte InitTilesetAnim_BattlePyramid
 
 	.align 2
 gTileset_MirageTower:: @ 83DFD3C

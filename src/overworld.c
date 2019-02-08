@@ -528,7 +528,7 @@ static void mapdata_load_assets_to_gpu_and_full_redraw(void)
     copy_map_tileset1_tileset2_to_vram(gMapHeader.mapLayout);
     apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
     DrawWholeMapView();
-    cur_mapheader_run_tileset_funcs_after_some_cpuset();
+    InitTilesetAnimations();
 }
 
 const struct MapLayout *GetMapLayout(void)
@@ -808,7 +808,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     for (paletteIndex = 6; paletteIndex < 13; paletteIndex++)
         ApplyWeatherGammaShiftToPal(paletteIndex);
 
-    sub_80A0A2C();
+    InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();
     RoamerMove();
     DoCurrentWeather();
@@ -1451,7 +1451,7 @@ static void OverworldBasic(void)
     UpdateCameraPanning();
     BuildOamBuffer();
     UpdatePaletteFade();
-    sub_80A0A38();
+    UpdateTilesetAnimations();
     do_scheduled_bg_tilemap_copies_to_vram();
 }
 
@@ -1843,7 +1843,7 @@ static bool32 map_loading_iteration_3(u8 *state)
         (*state)++;
         break;
     case 10:
-        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        InitTilesetAnimations();
         (*state)++;
         break;
     case 11:
@@ -1918,7 +1918,7 @@ static bool32 load_map_stuff(u8 *state, u32 a2)
         (*state)++;
         break;
     case 10:
-        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        InitTilesetAnimations();
         (*state)++;
         break;
     case 11:
@@ -2015,7 +2015,7 @@ static bool32 map_loading_iteration_2_link(u8 *state)
         (*state)++;
         break;
     case 9:
-        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        InitTilesetAnimations();
         (*state)++;
         break;
     case 11:

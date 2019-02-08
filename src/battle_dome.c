@@ -126,7 +126,7 @@ static EWRAM_DATA struct BattleDomeStruct *sBattleDomeStruct = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
 // Const rom data.
-static const u8 sMovePointsForDomeTrainers[][DOME_TOURNAMENT_TRAINERS_COUNT] =
+static const u8 sMovePointsForDomeTrainers[MOVES_COUNT][DOME_TOURNAMENT_TRAINERS_COUNT] =
 {
     [MOVE_NONE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     [MOVE_POUND] = {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
