@@ -158,6 +158,8 @@ static void BattleAICmd_get_hazards_count(void);
 static void BattleAICmd_if_doesnt_hold_berry(void);
 static void BattleAICmd_if_share_type(void);
 static void BattleAICmd_if_cant_use_last_resort(void);
+static void BattleAICmd_if_has_move_with_split(void);
+static void BattleAICmd_if_has_no_move_with_split(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -273,6 +275,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_doesnt_hold_berry,                       // 0x66
     BattleAICmd_if_share_type,                              // 0x67
     BattleAICmd_if_cant_use_last_resort,                    // 0x68
+    BattleAICmd_if_has_move_with_split,                     // 0x69
+    BattleAICmd_if_has_no_move_with_split,                  // 0x6A
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -635,7 +639,7 @@ static void RecordLastUsedMoveByTarget(void)
     }
 }
 
-static bool8 IsBattlerAIControlled(u8 battlerId)
+static bool32 IsBattlerAIControlled(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))
     {
@@ -2541,4 +2545,39 @@ static void BattleAICmd_if_cant_use_last_resort(void)
         gAIScriptPtr += 6;
     else
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+}
+
+static bool32 HasMoveWithSplit(u32 battler, u32 split)
+{
+    s32 i;
+    u16 *moves;
+
+    if (IsBattlerAIControlled(battler) || IsBattlerAIControlled(BATTLE_PARTNER(battler)))
+        moves = gBattleMons[battler].moves;
+    else
+        moves = gBattleResources->battleHistory->usedMoves[battler].moves;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && gBattleMoves[moves[i]].split == split)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void BattleAICmd_if_has_move_with_split(void)
+{
+    if (HasMoveWithSplit(BattleAI_GetWantedBattler(gAIScriptPtr[1]), gAIScriptPtr[2]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+static void BattleAICmd_if_has_no_move_with_split(void)
+{
+    if (!HasMoveWithSplit(BattleAI_GetWantedBattler(gAIScriptPtr[1]), gAIScriptPtr[2]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
 }

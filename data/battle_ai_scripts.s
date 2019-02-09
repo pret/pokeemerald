@@ -474,6 +474,9 @@ AI_CBM_BellyDrum: @ 82DC341
 
 AI_CBM_AttackUp: @ 82DC348
 	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	@ Do not raise attack if has no physical moves
+	if_has_move_with_effect AI_USER, EFFECT_BATON_PASS, AI_Ret
+	if_has_no_physical_move AI_USER, Score_Minus10
 	end
 
 AI_CBM_DefenseUp: @ 82DC351
@@ -486,6 +489,9 @@ AI_CBM_SpeedUp: @ 82DC35A
 
 AI_CBM_SpAtkUp: @ 82DC363
 	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
+	@ Do not raise sp. attack if has no special moves
+	if_has_move_with_effect AI_USER, EFFECT_BATON_PASS, AI_Ret
+	if_has_no_special_move AI_USER, Score_Minus10
 	end
 
 AI_CBM_SpDefUp: @ 82DC36C
@@ -3365,6 +3371,7 @@ AI_TryHelpingHandOnAlly:
 	goto Score_Plus2
 
 AI_TrySwaggerOnAlly:
+	if_has_no_physical_move AI_USER_PARTNER, Score_Minus30
 	if_holds_item AI_TARGET, ITEM_PERSIM_BERRY, AI_TrySwaggerOnAlly2
 	if_ability AI_USER_PARTNER, ABILITY_OWN_TEMPO, AI_TrySwaggerOnAlly2
 	goto Score_Minus30

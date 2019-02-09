@@ -594,7 +594,37 @@
 	.4byte \ptr
 	.endm
 	
+	.macro if_has_move_with_split battler:req, split:req, ptr:req
+	.byte 0x69
+	.byte \battler
+	.byte \split
+	.4byte \ptr
+	.endm
+	
+	.macro if_has_no_move_with_split battler:req, split:req, ptr:req
+	.byte 0x6A
+	.byte \battler
+	.byte \split
+	.4byte \ptr
+	.endm
+	
 @ useful script macros
+	.macro if_has_physical_move battler:req, ptr:req
+	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr
+	.endm
+	
+	.macro if_has_no_physical_move battler:req, ptr:req
+	if_has_no_move_with_split \battler, SPLIT_PHYSICAL, \ptr
+	.endm
+	
+	.macro if_has_special_move battler:req, ptr:req
+	if_has_move_with_split \battler, SPLIT_SPECIAL, \ptr
+	.endm
+	
+	.macro if_has_no_special_move battler:req, ptr:req
+	if_has_no_move_with_split \battler, SPLIT_SPECIAL, \ptr
+	.endm
+
 	.macro if_holds_no_item battler, ptr:req
 	if_holds_item \battler, 0, \ptr
 	.endm

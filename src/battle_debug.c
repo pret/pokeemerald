@@ -35,7 +35,7 @@ struct BattleDebugModifyArrows
     u8 arrowSpriteId[2];
     u16 minValue;
     u16 maxValue;
-    u16 currValue;
+    int currValue;
     u8 currentDigit;
     u8 maxDigits;
     u8 charDigits[MAX_MODIFY_DIGITS];
@@ -86,6 +86,7 @@ enum
     LIST_ITEM_STATUS3,
     LIST_ITEM_SIDE_STATUS,
     LIST_ITEM_AI,
+    LIST_ITEM_AI_MOVES_PTS,
     LIST_ITEM_VARIOUS,
     LIST_ITEM_COUNT
 };
@@ -110,6 +111,7 @@ enum
     VAR_SUBSTITUTE,
     VAR_IN_LOVE,
     VAR_U16_4_ENTRIES,
+    VAL_S8,
 };
 
 enum
@@ -206,6 +208,7 @@ static const u8 sText_InDoubles[] = _("In Doubles");
 static const u8 sText_HpAware[] = _("HP aware");
 static const u8 sText_Unknown[] = _("Unknown");
 static const u8 sText_InLove[] = _("In Love");
+static const u8 sText_AIMovePts[] = _("AI Move Pts");
 
 static const u8 sText_EmptyString[] = _("");
 
@@ -301,6 +304,7 @@ static const struct ListMenuItem sMainListItems[] =
     {sText_Status3, LIST_ITEM_STATUS3},
     {sText_SideStatus, LIST_ITEM_SIDE_STATUS},
     {sText_AI, LIST_ITEM_AI},
+    {sText_AIMovePts, LIST_ITEM_AI_MOVES_PTS},
     {sText_Various, LIST_ITEM_VARIOUS},
 };
 
@@ -539,6 +543,7 @@ static const u8 sBitsToMaxDigit[] =
 static const bool8 sHasChangeableEntries[LIST_ITEM_COUNT] =
 {
     [LIST_ITEM_MOVES] = TRUE,
+    [LIST_ITEM_AI_MOVES_PTS] = TRUE,
     [LIST_ITEM_PP] = TRUE,
     [LIST_ITEM_ABILITY] = TRUE,
     [LIST_ITEM_TYPES] = TRUE,
@@ -897,6 +902,9 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
         listTemplate.items = sSideStatusListItems;
         itemsCount = ARRAY_COUNT(sSideStatusListItems);
         break;
+    case LIST_ITEM_AI_MOVES_PTS:
+        itemsCount = 4;
+        break;
     }
 
     data->secondaryListItemCount = itemsCount;
@@ -955,6 +963,7 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
     {
     case LIST_ITEM_MOVES:
     case LIST_ITEM_PP:
+    case LIST_ITEM_AI_MOVES_PTS:
         for (i = 0; i < 4; i++)
         {
             PadString(gMoveNames[gBattleMons[data->battlerId].moves[i]], text);
@@ -1060,6 +1069,9 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
     {
     case VAL_U8:
         *(u8*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        break;
+    case VAL_S8:
+        *(s8*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     case VAL_U16:
         *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
@@ -1311,6 +1323,14 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
         data->modifyArrows.typeOfVal = VAL_U8;
         data->modifyArrows.currValue = gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
+        break;
+    case LIST_ITEM_AI_MOVES_PTS:
+        data->modifyArrows.minValue = 0;
+        data->modifyArrows.maxValue = 255;
+        data->modifyArrows.maxDigits = 3;
+        data->modifyArrows.modifiedValPtr = &gBattleResources->ai->score;
+        data->modifyArrows.typeOfVal = VAL_S8;
+        data->modifyArrows.currValue = gBattleResources->ai->score[data->currentSecondaryListItemId];
         break;
     case LIST_ITEM_HELD_ITEM:
         data->modifyArrows.minValue = 0;
