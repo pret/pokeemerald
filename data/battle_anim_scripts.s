@@ -678,6 +678,10 @@ gBattleAnims_General::
 	.4byte General_IngrainHeal
 	.4byte General_WishHeal
 	.4byte General_MegaEvolution
+	.4byte General_TerrainMisty
+	.4byte General_TerrainGrassy
+	.4byte General_TerrainElectric
+	.4byte General_TerrainPsychic
 
 	.align 2
 gBattleAnims_Special::
@@ -12790,6 +12794,18 @@ General_MegaEvolution:
     blendoff
     clearmonbg ANIM_ATTACKER
     end
+	
+General_TerrainMisty:
+	end
+	
+General_TerrainGrassy:
+	end
+	
+General_TerrainElectric:
+	end
+	
+General_TerrainPsychic:
+	end
 
 AnimScript_82D85A3:
 	createvisualtask sub_8172E9C, 2

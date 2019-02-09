@@ -2568,10 +2568,27 @@ bool32 TryChangeBattleWeather(u8 battler, u32 weatherEnumId, bool32 viaAbility)
 
         return TRUE;
     }
-    else
+
+    return FALSE;
+}
+
+static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u8 *timer)
+{
+    if (!(gFieldStatuses & statusFlag))
     {
-        return FALSE;
+        gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | EFFECT_ELECTRIC_TERRAIN | EFFECT_PSYCHIC_TERRAIN);
+        gFieldStatuses |= statusFlag;
+
+        if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
+            *timer = 8;
+        else
+            *timer = 5;
+
+        gBattlerAttacker = gBattleScripting.battler = battler;
+        return TRUE;
     }
+
+    return FALSE;
 }
 
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg)
@@ -2777,6 +2794,34 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             {
                 BattleScriptPushCursorAndCallback(BattleScript_SnowWarningActivates);
                 gBattleScripting.battler = battler;
+                effect++;
+            }
+            break;
+        case ABILITY_ELECTRIC_SURGE:
+            if (TryChangeBattleTerrain(battler, STATUS_FIELD_ELECTRIC_TERRAIN, &gFieldTimers.electricTerrainTimer))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_ElectricSurgeActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_GRASSY_SURGE:
+            if (TryChangeBattleTerrain(battler, STATUS_FIELD_GRASSY_TERRAIN, &gFieldTimers.grassyTerrainTimer))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_GrassySurgeActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_MISTY_SURGE:
+            if (TryChangeBattleTerrain(battler, STATUS_FIELD_MISTY_TERRAIN, &gFieldTimers.mistyTerrainTimer))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_MistySurgeActivates);
+                effect++;
+            }
+            break;
+        case ABILITY_PSYCHIC_SURGE:
+            if (TryChangeBattleTerrain(battler, STATUS_FIELD_PSYCHIC_TERRAIN, &gFieldTimers.psychicTerrainTimer))
+            {
+                BattleScriptPushCursorAndCallback(BattleScript_PsychicSurgeActivates);
                 effect++;
             }
             break;
@@ -3454,7 +3499,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_TraceActivates);
                     gStatuses3[i] &= ~(STATUS3_TRACE);
-                    gBattleScripting.battler = i;
+                    gBattlerAbility = gBattleScripting.battler = i;
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)

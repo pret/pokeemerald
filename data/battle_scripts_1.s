@@ -1602,7 +1602,7 @@ BattleScript_EffectHitEscape:
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
 	jumpifbattleend BattleScript_HitEscapeEnd
-	jumpifbyte CMP_NOT_EQUAL gBattleOutcome 0 BattleScript_HitEscapeEnd
+	jumpifbyte CMP_NOT_EQUAL gBattleOutcome 0, BattleScript_HitEscapeEnd
 	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_HitEscapeEnd
 	openpartyscreen 0x1, BattleScript_HitEscapeEnd
 	switchoutabilities BS_ATTACKER
@@ -5878,6 +5878,38 @@ BattleScript_SnowWarningActivates::
 	waitstate
 	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES, NULL
 	call BattleScript_WeatherFormChanges
+	end3
+	
+BattleScript_ElectricSurgeActivates::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESELECTRIC
+	waitstate
+	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_ELECTRIC, NULL
+	end3
+	
+BattleScript_MistySurgeActivates::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESMISTY
+	waitstate
+	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_MISTY, NULL
+	end3
+	
+BattleScript_GrassySurgeActivates::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESGRASSY
+	waitstate
+	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_GRASSY, NULL
+	end3
+	
+BattleScript_PsychicSurgeActivates::
+	pause 0x20
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESPSYCHIC
+	waitstate
+	playanimation BS_SCRIPTING, B_ANIM_TERRAIN_PSYCHIC, NULL
 	end3
 	
 BattleScript_BadDreamsActivates::

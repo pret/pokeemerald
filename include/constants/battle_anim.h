@@ -316,7 +316,7 @@
 //      .        .
 //         .  .
 //          127
-//  
+//
 #define SOUND_PAN_ATTACKER -64
 #define SOUND_PAN_TARGET    63
 
@@ -374,6 +374,10 @@
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
 #define B_ANIM_MEGA_EVOLUTION           0x17
+#define B_ANIM_TERRAIN_MISTY            0x18
+#define B_ANIM_TERRAIN_GRASSY           0x19
+#define B_ANIM_TERRAIN_ELECTRIC         0x1A
+#define B_ANIM_TERRAIN_PSYCHIC          0x1B
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0
@@ -415,32 +419,32 @@
 #define ANIM_WEATHER_HAIL 4
 
 // Battle mon back animations.
-#define BACK_ANIM_NONE                         0x00 
-#define BACK_ANIM_H_SLIDE_QUICK                0x01 
-#define BACK_ANIM_H_SLIDE                      0x02 
-#define BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_1    0x03 
-#define BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_2    0x04 
-#define BACK_ANIM_SHRINK_GROW_1                0x05 
-#define BACK_ANIM_GROW_1                       0x06 
-#define BACK_ANIM_CIRCLE_MOVE_COUNTERCLOCKWISE 0x07 
-#define BACK_ANIM_HORIZONTAL_SHAKE             0x08 
-#define BACK_ANIM_VERTICAL_SHAKE               0x09 
-#define BACK_ANIM_V_SHAKE_WITH_H_SLIDE         0x0a 
-#define BACK_ANIM_VERTICAL_STRETCH             0x0b 
-#define BACK_ANIM_HORIZONTAL_STRETCH           0x0c 
-#define BACK_ANIM_GROW_2                       0x0d 
-#define BACK_ANIM_V_SHAKE_WITH_PAUSE           0x0e 
-#define BACK_ANIM_CIRCLE_MOVE_CLOCKWISE        0x0f 
-#define BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL  0x10 
-#define BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE  0x11 
-#define BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE    0x12 
-#define BACK_ANIM_DIP_RIGHT_SIDE               0x13 
-#define BACK_ANIM_SHRINK_GROW_2                0x14 
-#define BACK_ANIM_JOLT_RIGHT                   0x15 
-#define BACK_ANIM_FLASH_YELLOW_WITH_SHAKE      0x16 
-#define BACK_ANIM_FADE_RED_WITH_SHAKE          0x17 
-#define BACK_ANIM_FADE_GREEN_WITH_SHAKE        0x18 
-#define BACK_ANIM_FADE_BLUE_WITH_SHAKE         0x19 
+#define BACK_ANIM_NONE                         0x00
+#define BACK_ANIM_H_SLIDE_QUICK                0x01
+#define BACK_ANIM_H_SLIDE                      0x02
+#define BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_1    0x03
+#define BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_2    0x04
+#define BACK_ANIM_SHRINK_GROW_1                0x05
+#define BACK_ANIM_GROW_1                       0x06
+#define BACK_ANIM_CIRCLE_MOVE_COUNTERCLOCKWISE 0x07
+#define BACK_ANIM_HORIZONTAL_SHAKE             0x08
+#define BACK_ANIM_VERTICAL_SHAKE               0x09
+#define BACK_ANIM_V_SHAKE_WITH_H_SLIDE         0x0a
+#define BACK_ANIM_VERTICAL_STRETCH             0x0b
+#define BACK_ANIM_HORIZONTAL_STRETCH           0x0c
+#define BACK_ANIM_GROW_2                       0x0d
+#define BACK_ANIM_V_SHAKE_WITH_PAUSE           0x0e
+#define BACK_ANIM_CIRCLE_MOVE_CLOCKWISE        0x0f
+#define BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL  0x10
+#define BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE  0x11
+#define BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE    0x12
+#define BACK_ANIM_DIP_RIGHT_SIDE               0x13
+#define BACK_ANIM_SHRINK_GROW_2                0x14
+#define BACK_ANIM_JOLT_RIGHT                   0x15
+#define BACK_ANIM_FLASH_YELLOW_WITH_SHAKE      0x16
+#define BACK_ANIM_FADE_RED_WITH_SHAKE          0x17
+#define BACK_ANIM_FADE_GREEN_WITH_SHAKE        0x18
+#define BACK_ANIM_FADE_BLUE_WITH_SHAKE         0x19
 
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H
