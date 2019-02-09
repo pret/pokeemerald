@@ -1337,7 +1337,7 @@ bool8 InBattlePike(void)
     return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM
         || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM1
         || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM3
-        || gMapHeader.mapLayoutId == LAYOUT_UNKNOWN_MAP_084693AC;
+        || gMapHeader.mapLayoutId == LAYOUT_UNKNOWN_084693AC;
 }
 
 static void SetHintedRoom(void)
