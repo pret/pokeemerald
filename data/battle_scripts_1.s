@@ -364,9 +364,10 @@ BattleScript_EffectPartingShotTryAtk:
 BattleScript_EffectPartingShotTrySpAtk:
 	playstatchangeanimation BS_TARGET, BIT_SPATK, ATK48_STAT_NEGATIVE
 	setstatchanger STAT_SPATK, 1, TRUE
-	statbuffchange 0x1, BattleScript_MoveEnd
+	statbuffchange 0x1, BattleScript_EffectPartingShotSwitch
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
+BattleScript_EffectPartingShotSwitch:	
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
 	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | BS_ATTACKER, BattleScript_PartingShotEnd
