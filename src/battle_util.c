@@ -2714,30 +2714,27 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         case ABILITY_DOWNLOAD:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                u8 statId;
-                u32 opposingBattler = BATTLE_OPPOSITE(battler);
-                u32 opposingDef = gBattleMons[opposingBattler].defense
-                                * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][0]
-                                / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][1];
-                u32 opposingSpDef = gBattleMons[opposingBattler].spDefense
-                                  * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][0]
-                                  / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][1];
+                u32 statId, opposingBattler;
+                u32 opposingDef = 0, opposingSpDef = 0;
 
-                opposingBattler = BATTLE_PARTNER(opposingBattler);
-                if (IsBattlerAlive(opposingBattler))
+                opposingBattler = BATTLE_OPPOSITE(battler);
+                for (i = 0; i < 2; opposingBattler ^= BIT_SIDE, i++)
                 {
-                    opposingDef += gBattleMons[opposingBattler].defense
-                                * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][0]
-                                / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][1];
-                    opposingSpDef += gBattleMons[opposingBattler].spDefense
-                                  * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][0]
-                                  / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][1];
+                    if (IsBattlerAlive(opposingBattler))
+                    {
+                        opposingDef += gBattleMons[opposingBattler].defense
+                                    * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][0]
+                                    / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][1];
+                        opposingSpDef += gBattleMons[opposingBattler].spDefense
+                                      * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][0]
+                                      / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][1];
+                    }
                 }
 
-                if (opposingSpDef > opposingDef)
-                    statId = STAT_SPATK;
-                else
+                if (opposingDef < opposingSpDef)
                     statId = STAT_ATK;
+                else
+                    statId = STAT_SPATK;
 
                 gSpecialStatuses[battler].switchInAbilityDone = 1;
 
