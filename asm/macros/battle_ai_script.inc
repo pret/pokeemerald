@@ -608,6 +608,13 @@
 	.4byte \ptr
 	.endm
 	
+	.macro if_physical_moves_unusable attacker:req, target:req, ptr:req
+	.byte 0x6B
+	.byte \attacker
+	.byte \target
+	.4byte \ptr
+	.endm
+	
 @ useful script macros
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr

@@ -1140,6 +1140,7 @@ AI_CV_MirrorMove_EncouragedMovesToMirror: @ 82DCB6C
     .2byte -1
 
 AI_CV_AttackUp: @ 82DCBBC
+	if_physical_moves_unusable AI_USER, AI_TARGET, Score_Minus8
 	if_stat_level_less_than AI_USER, STAT_ATK, 9, AI_CV_AttackUp2
 	if_random_less_than 100, AI_CV_AttackUp3
 	score -1

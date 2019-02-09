@@ -160,6 +160,7 @@ static void BattleAICmd_if_share_type(void);
 static void BattleAICmd_if_cant_use_last_resort(void);
 static void BattleAICmd_if_has_move_with_split(void);
 static void BattleAICmd_if_has_no_move_with_split(void);
+static void BattleAICmd_if_physical_moves_unusable(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -277,6 +278,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_cant_use_last_resort,                    // 0x68
     BattleAICmd_if_has_move_with_split,                     // 0x69
     BattleAICmd_if_has_no_move_with_split,                  // 0x6A
+    BattleAICmd_if_physical_moves_unusable,                 // 0x6B
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -2577,6 +2579,45 @@ static void BattleAICmd_if_has_move_with_split(void)
 static void BattleAICmd_if_has_no_move_with_split(void)
 {
     if (!HasMoveWithSplit(BattleAI_GetWantedBattler(gAIScriptPtr[1]), gAIScriptPtr[2]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+// This function checks if all physical/special moves are either unusable or unreasonable to use.
+// Consider a pokemon boosting their attack against a ghost pokemon having only normal-type physical attacks.
+static bool32 MovesWithSplitUnusable(u32 attacker, u32 target, u32 split)
+{
+    s32 i, moveType;
+    u16 *moves;
+    u32 usable = 0;
+    u32 unusable = CheckMoveLimitations(attacker, 0, 0xFF);
+
+    if (IsBattlerAIControlled(attacker))
+        moves = gBattleMons[attacker].moves;
+    else
+        moves = gBattleResources->battleHistory->usedMoves[attacker].moves;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE
+             && moves[i] != 0xFFFF
+             && gBattleMoves[moves[i]].split == split
+             && !(unusable & gBitTable[i]))
+        {
+            SetTypeBeforeUsingMove(moves[i], attacker);
+            GET_MOVE_TYPE(moves[i], moveType);
+            if (CalcTypeEffectivenessMultiplier(moves[i], moveType, attacker, target, FALSE) != 0)
+                usable |= gBitTable[i];
+        }
+    }
+
+    return (usable == 0);
+}
+
+static void BattleAICmd_if_physical_moves_unusable(void)
+{
+    if (MovesWithSplitUnusable(BattleAI_GetWantedBattler(gAIScriptPtr[1]), BattleAI_GetWantedBattler(gAIScriptPtr[2]), SPLIT_PHYSICAL))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
