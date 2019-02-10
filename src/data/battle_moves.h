@@ -8069,7 +8069,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PARTING_SHOT] =
     {
-        .effect = EFFECT_PLACEHOLDER, // Needs a custom move effect
+        .effect = EFFECT_PARTING_SHOT,
         .power = 0,
         .type = TYPE_DARK,
         .accuracy = 100,
