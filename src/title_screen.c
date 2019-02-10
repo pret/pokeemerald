@@ -64,7 +64,7 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCBIN_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCBIN_U32("graphics/title_screen/logo_shine.4bpp.lz");
 static const u32 sTitleScreenCloudsGfx[] = INCBIN_U32("graphics/title_screen/clouds.4bpp.lz");
 
-const u16 gUnknown_0853FF70[] =
+const u16 gIntroWaterDropData[] =
 {
     0x0010, 0x0110, 0x0210, 0x0310, 0x0410, 0x0510, 0x0610, 0x0710,
     0x0810, 0x0910, 0x0a10, 0x0b10, 0x0c10, 0x0d10, 0x0e10, 0x0f10,
@@ -324,7 +324,7 @@ static void SpriteCB_VersionBannerLeft(struct Sprite *sprite)
             sprite->pos1.y++;
         if (sprite->data[0] != 0)
             sprite->data[0]--;
-        SetGpuReg(REG_OFFSET_BLDALPHA, gUnknown_0853FF70[sprite->data[0]]);
+        SetGpuReg(REG_OFFSET_BLDALPHA, gIntroWaterDropData[sprite->data[0]]);
     }
 }
 
@@ -542,7 +542,7 @@ void CB2_InitTitleScreen(void)
         gMain.state = 4;
         break;
     case 4:
-        sub_816F2A8(0x78, 0x50, 0x100, 0);
+        PanFadeAndZoomScreen(0x78, 0x50, 0x100, 0);
         SetGpuReg(REG_OFFSET_BG2X_L, -29 * 256);
         SetGpuReg(REG_OFFSET_BG2X_H, -1);
         SetGpuReg(REG_OFFSET_BG2Y_L, -32 * 256);
