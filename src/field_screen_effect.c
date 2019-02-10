@@ -255,7 +255,7 @@ void sub_80AF2B4(u8 taskId)
         break;
     case 2:
         sub_8009F18();
-        sub_8086C2C();
+        ResetAllMultiplayerState();
         ScriptContext2_Disable();
         DestroyTask(taskId);
         break;

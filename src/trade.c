@@ -2762,7 +2762,7 @@ static void sub_80794CC(void)
             Free(gUnknown_0203229C);
             FreeAllWindowBuffers();
             sub_800E084();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
     else
@@ -2772,7 +2772,7 @@ static void sub_80794CC(void)
             Free(gUnknown_02032184);
             Free(gUnknown_0203229C);
             FreeAllWindowBuffers();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
 }

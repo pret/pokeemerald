@@ -28,7 +28,7 @@
 #include "link.h"
 #include "link_rfu.h"
 
-extern u16 gUnknown_03005DA8;
+extern u16 gHeldKeyCodeToSend;
 
 // Static type declarations
 
@@ -695,12 +695,12 @@ static void BuildSendCmd(u16 command)
             gSendCmd[0] = LINKCMD_0x5566;
             break;
         case LINKCMD_SEND_HELD_KEYS_2:
-            if (gUnknown_03005DA8 == 0 || gLinkTransferringData)
+            if (gHeldKeyCodeToSend == 0 || gLinkTransferringData)
             {
                 break;
             }
             gSendCmd[0] = LINKCMD_SEND_HELD_KEYS_2;
-            gSendCmd[1] = gUnknown_03005DA8;
+            gSendCmd[1] = gHeldKeyCodeToSend;
             break;
     }
 }
@@ -714,11 +714,11 @@ void sub_8009F18(void)
     gLinkCallback = sub_8009F70;
 }
 
-bool32 sub_8009F3C(void)
+bool32 IsSendingKeysToLink(void)
 {
     if (gWirelessCommType)
     {
-        return sub_800F7E4();
+        return IsSendingKeysToRfu();
     }
     if (gLinkCallback == sub_8009F70)
     {
@@ -1849,7 +1849,7 @@ bool8 HandleLinkConnection(void)
         r5 = sub_8010F1C();
         if (sub_808766C() == TRUE)
         {
-            if (r4 == TRUE || sub_800F0B8() || r5)
+            if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)
             {
                 return TRUE;
             }
@@ -1882,18 +1882,18 @@ void sub_800B4C0(void)
     }
 }
 
-u32 sub_800B4DC(void)
+u32 GetLinkRecvQueueLength(void)
 {
     if (gWirelessCommType != 0)
     {
-        return sub_80124D4();
+        return GetRfuRecvQueueLength();
     }
     return gLink.recvQueue.count;
 }
 
 bool8 sub_800B504(void)
 {
-    if (sub_800B4DC() > 2)
+    if (GetLinkRecvQueueLength() > 2)
     {
         return TRUE;
     }

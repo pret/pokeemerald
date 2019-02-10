@@ -188,7 +188,7 @@ extern u8 gUnknown_02022C3E;
 extern u16 gUnknown_02022C3C;
 extern u8 gUnknown_02022C20[];
 extern u8 gFieldLinkPlayerCount;
-extern u8 gLinkGuestPlayerId;
+extern u8 gLinkSelfPlayerId;
 
 // IWRAM vars
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_03000DA0;
@@ -1641,7 +1641,7 @@ void sub_8014304(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 arg4)
     gSpecialVar_0x8004 = arg4;
     VarSet(VAR_0x4087, arg4);
     gFieldLinkPlayerCount = GetLinkPlayerCount();
-    gLinkGuestPlayerId = GetMultiplayerId();
+    gLinkSelfPlayerId = GetMultiplayerId();
     SetCableClubWarp();
     SetWarpDestination(mapGroup, mapNum, -1, x, y);
     WarpIntoMap();

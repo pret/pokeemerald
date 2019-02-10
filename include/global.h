@@ -907,13 +907,13 @@ struct MapPosition
     s8 height;
 };
 
-struct TradeRoomTrainer
+struct TradeRoomPlayer
 {
-    u8 a;
-    u8 b;
+    u8 playerId;
+    u8 isSelf;
     u8 c;
     u8 facing;
-    struct MapPosition sub;
+    struct MapPosition pos;
     u16 field_C;
 };
 

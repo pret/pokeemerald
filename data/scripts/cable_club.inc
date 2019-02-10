@@ -967,7 +967,7 @@ RecordCorner_EventScript_2774E0:: @ 82774E0
 	closemessage
 	end
 
-gUnknown_082774EF:: @ 82774EF
+gEventScript_ConfirmLeaveTradeRoom:: @ 82774EF
 	msgbox Text_2783A8, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq gUnknown_08277509

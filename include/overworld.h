@@ -1,6 +1,18 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
+#define LINK_KEY_CODE_NULL 0x00
+#define LINK_KEY_CODE_EMPTY 0x11
+#define LINK_KEY_CODE_DPAD_DOWN 0x12
+#define LINK_KEY_CODE_DPAD_UP 0x13
+#define LINK_KEY_CODE_DPAD_LEFT 0x14
+#define LINK_KEY_CODE_DPAD_RIGHT 0x15
+#define LINK_KEY_CODE_UNK_2 0x16
+#define LINK_KEY_CODE_UNK_3 0x17
+#define LINK_KEY_CODE_START_BUTTON 0x18
+#define LINK_KEY_CODE_A_BUTTON 0x19
+#define LINK_KEY_CODE_UNK_4 0x1A // I'd guess this is the B button?
+
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
@@ -22,10 +34,10 @@ extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;
 extern u16 *gBGTilemapBuffers3;
-extern u16 gUnknown_03005DA8;
+extern u16 gHeldKeyCodeToSend;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
-extern u8 gLinkGuestPlayerId;
+extern u8 gLinkSelfPlayerId;
 extern u8 gFieldLinkPlayerCount;
 
 // Exported ROM declarations
@@ -103,7 +115,7 @@ u8 GetSavedWarpRegionMapSectionId(void);
 u8 GetCurrentRegionMapSectionId(void);
 u8 GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
-bool32 is_c1_link_related_active(void);
+bool32 IsUpdateLinkStateCBActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_Overworld(void);
@@ -117,13 +129,13 @@ void sub_8086074(void);
 void CB2_ReturnToField(void);
 void CB2_ReturnToFieldLocal(void);
 void CB2_ReturnToFieldLink(void);
-void c2_8056854(void);
+void CB2_ReturnToFieldFromMultiplayer(void);
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_ReturnToFieldContinueScript(void);
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void sub_80861E8(void);
 void CB2_ContinueSavedGame(void);
-void sub_8086C2C(void);
+void ResetAllMultiplayerState(void);
 u32 sub_8087214(void);
 bool32 sub_808727C(void);
 u16 sub_8087288(void);

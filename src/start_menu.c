@@ -84,7 +84,7 @@ EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
 // Extern variables.
-extern u8 gLinkGuestPlayerId;
+extern u8 gLinkSelfPlayerId;
 
 // Extern functions in not decompiled files.
 extern void sub_80AF688(void);
@@ -244,7 +244,7 @@ static void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
 
-    if (is_c1_link_related_active() == TRUE)
+    if (IsUpdateLinkStateCBActive() == TRUE)
     {
         BuildLinkModeStartMenu();
     }
@@ -547,7 +547,7 @@ void sub_809FA34(u8 taskId) // Referenced in field_screen.s and rom_8011DC0.s
 
 void ShowStartMenu(void) // Called from overworld.c and field_control_avatar.s
 {
-    if (!is_c1_link_related_active())
+    if (!IsUpdateLinkStateCBActive())
     {
         FreezeEventObjects();
         sub_808B864();
@@ -672,7 +672,7 @@ static bool8 StartMenuPlayerNameCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
 
-        if (is_c1_link_related_active() || InUnionRoom())
+        if (IsUpdateLinkStateCBActive() || InUnionRoom())
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
             ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
@@ -734,7 +734,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     {
         PlayRainSoundEffect();
         CleanupOverworldWindowsAndTilemaps();
-        ShowTrainerCardInLink(gLinkGuestPlayerId, CB2_ReturnToFieldWithOpenMenu);
+        ShowTrainerCardInLink(gLinkSelfPlayerId, CB2_ReturnToFieldWithOpenMenu);
 
         return TRUE;
     }

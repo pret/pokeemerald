@@ -12,7 +12,7 @@ sub_81C7078: @ 81C7078
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl is_c1_link_related_active
+	bl IsUpdateLinkStateCBActive
 	cmp r0, 0
 	bne _081C7090
 	ldr r0, =sub_81C7170
