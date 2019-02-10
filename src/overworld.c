@@ -66,13 +66,33 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
+#define LINK_CONSTANT_UNK_1 0x11
+#define LINK_CONSTANT_DPAD_DOWN 0x12
+#define LINK_CONSTANT_DPAD_UP 0x13
+#define LINK_CONSTANT_DPAD_LEFT 0x14
+#define LINK_CONSTANT_DPAD_RIGHT 0x15
+#define LINK_CONSTANT_UNK_2 0x16
+#define LINK_CONSTANT_UNK_3 0x17
+#define LINK_CONSTANT_START_BUTTON 0x18
+#define LINK_CONSTANT_A_BUTTON 0x19
+#define LINK_CONSTANT_UNK_4 0x1A // I'd guess this is the B button?
+#define LINK_CONSTANT_UNK_5 0x1B
+#define LINK_CONSTANT_UNK_6 0x1C
+#define LINK_CONSTANT_UNK_7 0x1D
+#define LINK_CONSTANT_UNK_8 0x1E
+
+#define TRAINER_TRADING_STATE_IDLE 0x80
+#define TRAINER_TRADING_STATE_UNK_1 0x81
+#define TRAINER_TRADING_STATE_UNK_2 0x82
+#define TRAINER_TRADING_STATE_UNK_3 0x83
+
 // event scripts
 extern const u8 EventScript_WhiteOut[];
 extern const u8 EventScript_271862[];
 extern const u8 EventScript_277513[];
 extern const u8 EventScript_TradeRoom_TooBusyToNotice[];
-extern const u8 EventScript_TradeRoom_ReadTrainerCard1[];
-extern const u8 EventScript_TradeRoom_ReadTrainerCard2[];
+extern const u8 EventScript_TradeRoom_ReadTrainerCard_NoColor[];
+extern const u8 EventScript_TradeRoom_ReadTrainerCard_Normal[];
 extern const u8 gUnknown_08277388[];
 extern const u8 gUnknown_082773A3[];
 extern const u8 gUnknown_082773BE[];
@@ -106,21 +126,21 @@ static bool32 load_map_stuff(u8 *state, u32);
 static bool32 map_loading_iteration_2_link(u8 *state);
 static void mli4_mapscripts_and_other(void);
 static void InitOverworldGraphicsRegisters(void);
-static u8 sub_8087858(u8);
+static u8 GetSpriteForLinkedPlayer(u8);
 static u16 sub_80871C0(u32 a1);
 static void sub_80867C8(void);
 static void sub_80867D8(void);
 static void sub_8086AE4(void);
 static void sub_80869DC(void);
 static void sub_8086B14(void);
-static void sub_8086AAC(void);
+static void SetCameraToTrackGuestPlayer(void);
 static void sub_8086988(bool32 arg0);
 static void sub_8086A80(void);
 static void sub_8086A68(void);
 static void sub_8086860(void);
-static void sub_8086AC8(void);
+static void SetCameraToTrackGuestPlayer_2(void);
 static void sub_8086B9C(void);
-static void sub_8086C40(void);
+static void guess_ResetHeldKeys(void);
 static void sub_8086C90(void);
 static void sub_8086FA0(u16);
 static void sub_8086F38(u16*, s32);
@@ -138,26 +158,26 @@ static void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4);
 static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y);
 static void sub_80877DC(u8 linkPlayerId, u8 a2);
 static void sub_808780C(u8 linkPlayerId);
-static u8 sub_8087858(u8 linkPlayerId);
+static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId);
 static void sub_8087584(void);
-static u32 sub_8087690(void);
+static u32 GetLinkEventQueueLength(void);
 static void ZeroLinkPlayerEventObject(struct LinkPlayerEventObject *linkPlayerEventObj);
-static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
+static const u8 *sub_80873B4(struct TradeRoomTrainer *a1);
 static u16 sub_8087480(const u8 *script);
 static void sub_8087510(void);
 static void sub_808751C(void);
 static void sub_8087530(const u8 *script);
 static void sub_808754C(void);
 static void sub_8087568(const u8 *script);
-static void sub_80872D8(s32 linkPlayerId, s32 a2, struct UnkStruct_8054FF8 *a3);
-static bool32 sub_8087340(struct UnkStruct_8054FF8 *a1);
-static bool32 sub_8087358(struct UnkStruct_8054FF8 *a1);
-static u8 *sub_8087370(struct UnkStruct_8054FF8 *a1);
-static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1);
-static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1);
+static void sub_80872D8(s32 linkPlayerId, s32 a2, struct TradeRoomTrainer *a3);
+static bool32 sub_8087340(struct TradeRoomTrainer *a1);
+static bool32 sub_8087358(struct TradeRoomTrainer *a1);
+static u8 *sub_8087370(struct TradeRoomTrainer *a1);
+static bool32 sub_8087388(struct TradeRoomTrainer *a1);
+static const u8 *sub_80873B4(struct TradeRoomTrainer *a1);
 static u16 sub_808711C(u32);
 static u16 sub_8087140(u32);
-static void sub_808709C(u16 *a1);
+static void guess_ResetLinkKeys(u16 *a1);
 static u16 sub_80870B0(u32 a1);
 static u16 sub_80870F8(u32 a1);
 static u16 sub_8087068(u16 a1);
@@ -172,8 +192,8 @@ static u16 GetCenterScreenMetatileBehavior(void);
 
 // IWRAM bss vars
 IWRAM_DATA static void *sUnknown_03000E0C;
-IWRAM_DATA static u8 sUnknown_03000E10[4];
-IWRAM_DATA static u16 (*sUnknown_03000E14)(u32);
+IWRAM_DATA static u8 sTrainerTradingStates[4];
+IWRAM_DATA static u16 (*sguess_PlayerKeyCallback)(u32);
 IWRAM_DATA static u8 sUnknown_03000E18;
 IWRAM_DATA static u8 sUnknown_03000E19;
 IWRAM_DATA static u32 sUnusedVar;
@@ -185,7 +205,7 @@ u16 *gBGTilemapBuffers3;
 u16 gUnknown_03005DA8;
 void (*gFieldCallback)(void);
 bool8 (*gFieldCallback2)(void);
-u8 gUnknown_03005DB4;
+u8 gLinkGuestPlayerId;
 u8 gFieldLinkPlayerCount;
 
 // EWRAM vars
@@ -323,7 +343,7 @@ static u8 sub_80879D8(struct LinkPlayerEventObject *, struct EventObject *, u8);
 static u8 sub_80879F8(struct LinkPlayerEventObject *, struct EventObject *, u8);
 static u8 sub_80879FC(struct LinkPlayerEventObject *, struct EventObject *, u8);
 
-static u8 (*const gUnknown_08339DC8[])(struct LinkPlayerEventObject *, struct EventObject *, u8) =
+static u8 (*const gLinkPlayerEventModes[])(struct LinkPlayerEventObject *, struct EventObject *, u8) =
 {
     sub_80879D8,
     sub_80879F8,
@@ -1100,7 +1120,7 @@ u16 GetCurrLocationDefaultMusic(void)
     }
     else
     {
-        if (gSaveBlock1Ptr->pos.x < 24)
+        if (gSaveBlock1Ptr->pos.x < LINK_CONSTANT_START_BUTTON)
             return MUS_DOORO_X1;
         else
             return MUS_GRANROAD;
@@ -1243,7 +1263,7 @@ static void PlayAmbientCry(void)
      && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
         return;
     pan = (Random() % 88) + 212;
-    volume = (Random() % 30) + 50;
+    volume = (Random() % LINK_CONSTANT_UNK_8) + 50;
     PlayCry2(sAmbientCrySpecies, pan, volume, 1);
 }
 
@@ -1810,7 +1830,7 @@ static bool32 map_loading_iteration_3(u8 *state)
         sub_8086AE4();
         sub_80869DC();
         sub_8086B14();
-        sub_8086AAC();
+        SetCameraToTrackGuestPlayer();
         (*state)++;
         break;
     case 4:
@@ -1982,7 +2002,7 @@ static bool32 map_loading_iteration_2_link(u8 *state)
     case 2:
         sub_8086B9C();
         sub_8086A68();
-        sub_8086AC8();
+        SetCameraToTrackGuestPlayer_2();
         (*state)++;
         break;
     case 3:
@@ -2169,21 +2189,25 @@ static void sub_8086A80(void)
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
 }
 
-static void sub_8086AAC(void)
+static void SetCameraToTrackGuestPlayer(void)
 {
-    InitCameraUpdateCallback(sub_8087858(gUnknown_03005DB4));
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLinkGuestPlayerId));
 }
 
-static void sub_8086AC8(void)
+// Duplicate function.
+static void SetCameraToTrackGuestPlayer_2(void)
 {
-    InitCameraUpdateCallback(sub_8087858(gUnknown_03005DB4));
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLinkGuestPlayerId));
 }
 
 static void sub_8086AE4(void)
 {
     u16 x, y;
     GetCameraFocusCoords(&x, &y);
-    sub_8088B3C(x + gUnknown_03005DB4, y);
+
+    // This is a hack of some kind; it's undone in sub_8086B14, which is called
+    // soon after this function.
+    sub_8088B3C(x + gLinkGuestPlayerId, y);
 }
 
 static void sub_8086B14(void)
@@ -2192,7 +2216,7 @@ static void sub_8086B14(void)
     u16 x, y;
 
     GetCameraFocusCoords(&x, &y);
-    x -= gUnknown_03005DB4;
+    x -= gLinkGuestPlayerId;
 
     for (i = 0; i < gFieldLinkPlayerCount; i++)
     {
@@ -2200,7 +2224,7 @@ static void sub_8086B14(void)
         CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
     }
 
-    sub_8086C40();
+    guess_ResetHeldKeys();
 }
 
 static void sub_8086B9C(void)
@@ -2214,10 +2238,10 @@ static void c1_link_related(void)
 {
     if (gWirelessCommType == 0 || !sub_800F0B8() || !sub_8009F3C())
     {
-        u8 var = gUnknown_03005DB4;
-        sub_8086F38(gLinkPartnersHeldKeys, var);
-        sub_8086FA0(sUnknown_03000E14(var));
-        sub_8086C40();
+        u8 guestId = gLinkGuestPlayerId;
+        sub_8086F38(gLinkPartnersHeldKeys, guestId);
+        sub_8086FA0(sguess_PlayerKeyCallback(guestId));
+        guess_ResetHeldKeys();
     }
 }
 
@@ -2227,15 +2251,15 @@ void sub_8086C2C(void)
     c1_link_related_func_set(sub_80870B0);
 }
 
-static void sub_8086C40(void)
+static void guess_ResetHeldKeys(void)
 {
-    sub_808709C(gLinkPartnersHeldKeys);
+    guess_ResetLinkKeys(gLinkPartnersHeldKeys);
 }
 
 static void c1_link_related_func_set(u16 (*func)(u32))
 {
     sUnknown_03000E19 = 0;
-    sUnknown_03000E14 = func;
+    sguess_PlayerKeyCallback = func;
 }
 
 static void sub_8086C64(void)
@@ -2248,7 +2272,7 @@ static void sub_8086C90(void)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        sUnknown_03000E10[i] = 0x80;
+        sTrainerTradingStates[i] = TRAINER_TRADING_STATE_IDLE;
 }
 
 static bool32 sub_8086CA8(u16 a1)
@@ -2257,7 +2281,7 @@ static bool32 sub_8086CA8(u16 a1)
     s32 count = gFieldLinkPlayerCount;
 
     for (i = 0; i < count; i++)
-        if (sUnknown_03000E10[i] != a1)
+        if (sTrainerTradingStates[i] != a1)
             return FALSE;
     return TRUE;
 }
@@ -2268,23 +2292,23 @@ static bool32 sub_8086CE0(u16 a1)
     s32 count = gFieldLinkPlayerCount;
 
     for (i = 0; i < count; i++)
-        if (sUnknown_03000E10[i] == a1)
+        if (sTrainerTradingStates[i] == a1)
             return TRUE;
     return FALSE;
 }
 
-static void sub_8086D18(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
+static void sub_8086D18(u32 playerId, u16 key, struct TradeRoomTrainer *trainer, u16 *a4)
 {
     const u8 *script;
 
-    if (sUnknown_03000E10[a1] == 0x80)
+    if (sTrainerTradingStates[playerId] == TRAINER_TRADING_STATE_IDLE)
     {
-        script = sub_8087370(a3);
+        script = sub_8087370(trainer);
         if (script)
         {
             *a4 = sub_8087480(script);
-            sUnknown_03000E10[a1] = 0x81;
-            if (a3->b)
+            sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+            if (trainer->b)
             {
                 c1_link_related_func_set(sub_80870F8);
                 sub_8087530(script);
@@ -2293,66 +2317,67 @@ static void sub_8086D18(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
         }
         if (sub_8086CE0(0x83) == 1)
         {
-            sUnknown_03000E10[a1] = 0x81;
-            if (a3->b)
+            sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+            if (trainer->b)
             {
                 c1_link_related_func_set(sub_80870F8);
                 sub_8087584();
             }
             return;
         }
-        switch (a2)
+
+        switch (key)
         {
-        case 24:
-            if (sub_8087358(a3))
+        case LINK_CONSTANT_START_BUTTON:
+            if (sub_8087358(trainer))
             {
-                sUnknown_03000E10[a1] = 0x81;
-                if (a3->b)
+                sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+                if (trainer->b)
                 {
                     c1_link_related_func_set(sub_80870F8);
                     sub_808751C();
                 }
             }
             break;
-        case 18:
-            if (sub_8087388(a3) == TRUE)
+        case LINK_CONSTANT_DPAD_DOWN:
+            if (sub_8087388(trainer) == TRUE)
             {
-                sUnknown_03000E10[a1] = 0x81;
-                if (a3->b)
+                sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+                if (trainer->b)
                 {
                     c1_link_related_func_set(sub_80870F8);
                     sub_808754C();
                 }
             }
             break;
-        case 25:
-            script = sub_80873B4(a3);
+        case LINK_CONSTANT_A_BUTTON:
+            script = sub_80873B4(trainer);
             if (script)
             {
-                sUnknown_03000E10[a1] = 0x81;
-                if (a3->b)
+                sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+                if (trainer->b)
                 {
                     c1_link_related_func_set(sub_80870F8);
                     sub_8087568(script);
                 }
             }
             break;
-        case 27:
-            if (sub_8087340(a3))
+        case LINK_CONSTANT_UNK_5:
+            if (sub_8087340(trainer))
             {
-                sUnknown_03000E10[a1] = 0x81;
-                if (a3->b)
+                sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+                if (trainer->b)
                 {
                     c1_link_related_func_set(sub_808711C);
                     sub_8087510();
                 }
             }
             break;
-        case 28:
-            if (sub_8087340(a3))
+        case LINK_CONSTANT_UNK_6:
+            if (sub_8087340(trainer))
             {
-                sUnknown_03000E10[a1] = 0x81;
-                if (a3->b)
+                sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
+                if (trainer->b)
                 {
                     c1_link_related_func_set(sub_8087140);
                     sub_8087510();
@@ -2362,64 +2387,64 @@ static void sub_8086D18(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
         }
     }
 
-    switch (a2)
+    switch (key)
     {
-    case 23:
-        sUnknown_03000E10[a1] = 0x83;
+    case LINK_CONSTANT_UNK_3:
+        sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_3;
         break;
-    case 22:
-        sUnknown_03000E10[a1] = 0x82;
+    case LINK_CONSTANT_UNK_2:
+        sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_2;
         break;
-    case 26:
-        sUnknown_03000E10[a1] = 0x80;
-        if (a3->b)
+    case LINK_CONSTANT_UNK_4:
+        sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_IDLE;
+        if (trainer->b)
             c1_link_related_func_set(sub_80870B0);
         break;
-    case 29:
-        if (sUnknown_03000E10[a1] == 0x82)
-            sUnknown_03000E10[a1] = 0x81;
+    case LINK_CONSTANT_UNK_7:
+        if (sTrainerTradingStates[playerId] == TRAINER_TRADING_STATE_UNK_2)
+            sTrainerTradingStates[playerId] = TRAINER_TRADING_STATE_UNK_1;
         break;
     }
 }
 
-static void sub_8086F38(u16 *a1, s32 a2)
+static void sub_8086F38(u16 *keys, s32 guestId)
 {
-    struct UnkStruct_8054FF8 st;
+    struct TradeRoomTrainer trainer;
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        u8 v5 = a1[i];
+        u8 key = keys[i];
         u16 v8 = 0;
-        sub_80872D8(i, a2, &st);
-        sub_8086D18(i, v5, &st, &v8);
-        if (sUnknown_03000E10[i] == 0x80)
-            v8 = sub_8087068(v5);
+        sub_80872D8(i, guestId, &trainer);
+        sub_8086D18(i, key, &trainer, &v8);
+        if (sTrainerTradingStates[i] == TRAINER_TRADING_STATE_IDLE)
+            v8 = sub_8087068(key);
         sub_808796C(i, v8);
     }
 }
 
 static void sub_8086FA0(u16 a1)
 {
-    if (a1 >= 17 && a1 < 30)
+    if (a1 >= LINK_CONSTANT_UNK_1 && a1 < LINK_CONSTANT_UNK_8)
         gUnknown_03005DA8 = a1;
     else
-        gUnknown_03005DA8 = 17;
+        gUnknown_03005DA8 = LINK_CONSTANT_UNK_1;
 
     if (gWirelessCommType != 0
-        && sub_8087690() > 1
+        && GetLinkEventQueueLength() > 1
         && is_c1_link_related_active() == TRUE
         && sub_8009F3C() == TRUE)
     {
         switch (a1)
         {
-        case 17:
-        case 18:
-        case 19:
-        case 20:
-        case 21:
-        case 24:
-        case 25:
+        case LINK_CONSTANT_UNK_1:
+        case LINK_CONSTANT_DPAD_DOWN:
+        case LINK_CONSTANT_DPAD_UP:
+        case LINK_CONSTANT_DPAD_LEFT:
+        case LINK_CONSTANT_DPAD_RIGHT:
+        case LINK_CONSTANT_START_BUTTON:
+        case LINK_CONSTANT_A_BUTTON:
             gUnknown_03005DA8 = 0;
             break;
         }
@@ -2429,52 +2454,53 @@ static void sub_8086FA0(u16 a1)
 static u16 sub_808700C(u32 a1)
 {
     if (gMain.heldKeys & DPAD_UP)
-        return 19;
+        return LINK_CONSTANT_DPAD_UP;
     else if (gMain.heldKeys & DPAD_DOWN)
-        return 18;
+        return LINK_CONSTANT_DPAD_DOWN;
     else if (gMain.heldKeys & DPAD_LEFT)
-        return 20;
+        return LINK_CONSTANT_DPAD_LEFT;
     else if (gMain.heldKeys & DPAD_RIGHT)
-        return 21;
+        return LINK_CONSTANT_DPAD_RIGHT;
     else if (gMain.newKeys & START_BUTTON)
-        return 24;
+        return LINK_CONSTANT_START_BUTTON;
     else if (gMain.newKeys & A_BUTTON)
-        return 25;
+        return LINK_CONSTANT_A_BUTTON;
     else
-        return 17;
+        return LINK_CONSTANT_UNK_1;
 }
 
 static u16 sub_8087068(u16 a1)
 {
     switch (a1)
     {
-    case 21:
+    case LINK_CONSTANT_DPAD_RIGHT:
         return 4;
-    case 20:
+    case LINK_CONSTANT_DPAD_LEFT:
         return 3;
-    case 19:
+    case LINK_CONSTANT_DPAD_UP:
         return 1;
-    case 18:
+    case LINK_CONSTANT_DPAD_DOWN:
         return 2;
     default:
         return 0;
     }
 }
 
-static void sub_808709C(u16 *a1)
+// Overwrites the keys with 0x11
+static void guess_ResetLinkKeys(u16 *keys)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        a1[i] = 17;
+        keys[i] = LINK_CONSTANT_UNK_1;
 }
 
 static u16 sub_80870B0(u32 a1)
 {
     if (ScriptContext2_IsEnabled() == 1)
-        return 17;
+        return LINK_CONSTANT_UNK_1;
     if (sub_800B4DC() > 4)
         return 27;
-    if (sub_8087690() <= 4)
+    if (GetLinkEventQueueLength() <= 4)
         return sub_808700C(a1);
     return 28;
 }
@@ -2482,7 +2508,7 @@ static u16 sub_80870B0(u32 a1)
 static u16 sub_80870EC(u32 a1)
 {
     sub_8086C64();
-    return 17;
+    return LINK_CONSTANT_UNK_1;
 }
 
 static u16 sub_80870F8(u32 a1)
@@ -2490,7 +2516,7 @@ static u16 sub_80870F8(u32 a1)
     u16 retVal;
     if (ScriptContext2_IsEnabled() == TRUE)
     {
-        retVal = 17;
+        retVal = LINK_CONSTANT_UNK_1;
     }
     else
     {
@@ -2505,7 +2531,7 @@ static u16 sub_808711C(u32 a1)
     u16 retVal;
     if (sub_800B4DC() > 2)
     {
-        retVal = 17;
+        retVal = LINK_CONSTANT_UNK_1;
     }
     else
     {
@@ -2519,9 +2545,9 @@ static u16 sub_808711C(u32 a1)
 static u16 sub_8087140(u32 a1)
 {
     u16 retVal;
-    if (sub_8087690() > 2)
+    if (GetLinkEventQueueLength() > 2)
     {
-        retVal = 17;
+        retVal = LINK_CONSTANT_UNK_1;
     }
     else
     {
@@ -2535,12 +2561,12 @@ static u16 sub_8087140(u32 a1)
 static u16 sub_8087164(u32 a1)
 {
     sub_8086C64();
-    return 17;
+    return LINK_CONSTANT_UNK_1;
 }
 
 static u16 sub_8087170(u32 linkPlayerId)
 {
-    if (sUnknown_03000E10[linkPlayerId] == 0x82)
+    if (sTrainerTradingStates[linkPlayerId] == TRAINER_TRADING_STATE_UNK_2)
     {
         if (gMain.newKeys & B_BUTTON)
         {
@@ -2549,13 +2575,13 @@ static u16 sub_8087170(u32 linkPlayerId)
         }
         else
         {
-            return 17;
+            return LINK_CONSTANT_UNK_1;
         }
     }
     else
     {
         sub_8086C64();
-        return 17;
+        return LINK_CONSTANT_UNK_1;
     }
 }
 
@@ -2567,19 +2593,19 @@ static u16 sub_80871AC(u32 a1)
 
 static u16 sub_80871C0(u32 a1)
 {
-    return 17;
+    return LINK_CONSTANT_UNK_1;
 }
 
 static u16 sub_80871C4(u32 a1)
 {
-    if (sUnknown_03000E10[a1] != 0x83)
+    if (sTrainerTradingStates[a1] != TRAINER_TRADING_STATE_UNK_3)
         sub_8086C64();
-    if (sub_8086CA8(0x83) == TRUE)
+    if (sub_8086CA8(TRAINER_TRADING_STATE_UNK_3) == TRUE)
     {
         ScriptContext1_SetupScript(EventScript_277513);
         c1_link_related_func_set(sub_80871C0);
     }
-    return 17;
+    return LINK_CONSTANT_UNK_1;
 }
 
 static u16 sub_80871FC(u32 a1)
@@ -2590,16 +2616,16 @@ static u16 sub_80871FC(u32 a1)
 
 static u16 sub_8087210(u32 a1)
 {
-    return 17;
+    return LINK_CONSTANT_UNK_1;
 }
 
 u32 sub_8087214(void)
 {
     if (sub_8086CE0(0x83) == TRUE)
         return 2;
-    if (sUnknown_03000E14 == sub_8087170 && sUnknown_03000E10[gUnknown_03005DB4] != 0x82)
+    if (sguess_PlayerKeyCallback == sub_8087170 && sTrainerTradingStates[gLinkGuestPlayerId] != TRAINER_TRADING_STATE_UNK_2)
         return 0;
-    if (sUnknown_03000E14 == sub_8087164 && sUnknown_03000E10[gUnknown_03005DB4] == 0x81)
+    if (sguess_PlayerKeyCallback == sub_8087164 && sTrainerTradingStates[gLinkGuestPlayerId] == TRAINER_TRADING_STATE_UNK_1)
         return 2;
     if (sub_8086CA8(0x82) != 0)
         return 1;
@@ -2635,14 +2661,14 @@ u16 sub_80872C4(void)
     return 0;
 }
 
-static void sub_80872D8(s32 linkPlayerId, s32 a2, struct UnkStruct_8054FF8 *a3)
+static void sub_80872D8(s32 linkPlayerId, s32 a2, struct TradeRoomTrainer *a3)
 {
     s16 x, y;
 
     a3->a = linkPlayerId;
     a3->b = (linkPlayerId == a2) ? 1 : 0;
     a3->c = gLinkPlayerEventObjects[linkPlayerId].mode;
-    a3->d = sub_80878A0(linkPlayerId);
+    a3->facing = sub_80878A0(linkPlayerId);
     sub_8087878(linkPlayerId, &x, &y);
     a3->sub.x = x;
     a3->sub.y = y;
@@ -2650,7 +2676,7 @@ static void sub_80872D8(s32 linkPlayerId, s32 a2, struct UnkStruct_8054FF8 *a3)
     a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
 }
 
-static bool32 sub_8087340(struct UnkStruct_8054FF8 *a1)
+static bool32 sub_8087340(struct TradeRoomTrainer *a1)
 {
     u8 v1 = a1->c;
     if (v1 == 2 || v1 == 0)
@@ -2659,7 +2685,7 @@ static bool32 sub_8087340(struct UnkStruct_8054FF8 *a1)
         return FALSE;
 }
 
-static bool32 sub_8087358(struct UnkStruct_8054FF8 *a1)
+static bool32 sub_8087358(struct TradeRoomTrainer *a1)
 {
     u8 v1 = a1->c;
     if (v1 == 2 || v1 == 0)
@@ -2668,26 +2694,26 @@ static bool32 sub_8087358(struct UnkStruct_8054FF8 *a1)
         return FALSE;
 }
 
-static u8 *sub_8087370(struct UnkStruct_8054FF8 *a1)
+static u8 *sub_8087370(struct TradeRoomTrainer *a1)
 {
     if (a1->c != 2)
         return 0;
     return GetCoordEventScriptAtMapPosition(&a1->sub);
 }
 
-static bool32 sub_8087388(struct UnkStruct_8054FF8 *a1)
+static bool32 sub_8087388(struct TradeRoomTrainer *a1)
 {
     if (a1->c != 2 && a1->c != 0)
         return FALSE;
     else if (!MetatileBehavior_IsSouthArrowWarp(a1->field_C))
         return FALSE;
-    else if (a1->d != 1)
+    else if (a1->facing != 1)
         return FALSE;
     else
         return TRUE;
 }
 
-static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
+static const u8 *sub_80873B4(struct TradeRoomTrainer *a1)
 {
     struct MapPosition unkStruct;
     u8 linkPlayerId;
@@ -2696,8 +2722,8 @@ static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
         return 0;
 
     unkStruct = a1->sub;
-    unkStruct.x += gDirectionToVectors[a1->d].x;
-    unkStruct.y += gDirectionToVectors[a1->d].y;
+    unkStruct.x += gDirectionToVectors[a1->facing].x;
+    unkStruct.y += gDirectionToVectors[a1->facing].y;
     unkStruct.height = 0;
     linkPlayerId = GetLinkPlayerIdAt(unkStruct.x, unkStruct.y);
 
@@ -2705,15 +2731,15 @@ static const u8 *sub_80873B4(struct UnkStruct_8054FF8 *a1)
     {
         if (!a1->b)
             return EventScript_TradeRoom_TooBusyToNotice;
-        else if (sUnknown_03000E10[linkPlayerId] != 0x80)
+        else if (sTrainerTradingStates[linkPlayerId] != TRAINER_TRADING_STATE_IDLE)
             return EventScript_TradeRoom_TooBusyToNotice;
-        else if (!sub_80B39D4(linkPlayerId))
-            return EventScript_TradeRoom_ReadTrainerCard1;
+        else if (!GetLinkTrainerCardColor(linkPlayerId))
+            return EventScript_TradeRoom_ReadTrainerCard_NoColor;
         else
-            return EventScript_TradeRoom_ReadTrainerCard2;
+            return EventScript_TradeRoom_ReadTrainerCard_Normal;
     }
 
-    return GetInteractedLinkPlayerScript(&unkStruct, a1->field_C, a1->d);
+    return GetInteractedLinkPlayerScript(&unkStruct, a1->field_C, a1->facing);
 }
 
 static u16 sub_8087480(const u8 *script)
@@ -2806,9 +2832,9 @@ bool32 sub_80875C8(void)
         return FALSE;
     else if (sub_8009F3C() != TRUE)
         return FALSE;
-    else if (sUnknown_03000E14 == sub_808711C)
+    else if (sguess_PlayerKeyCallback == sub_808711C)
         return TRUE;
-    else if (sUnknown_03000E14 != sub_80870F8)
+    else if (sguess_PlayerKeyCallback != sub_80870F8)
         return FALSE;
 
     temp = sUnknown_03000E18;
@@ -2824,13 +2850,13 @@ bool32 sub_80875C8(void)
 
 bool32 sub_8087634(void)
 {
-    if (sub_8087690() < 2)
+    if (GetLinkEventQueueLength() < 2)
         return FALSE;
     else if (is_c1_link_related_active() != TRUE)
         return FALSE;
     else if (sub_8009F3C() != TRUE)
         return FALSE;
-    else if (sUnknown_03000E14 == sub_8087140)
+    else if (sguess_PlayerKeyCallback == sub_8087140)
         return TRUE;
     else
         return FALSE;
@@ -2846,7 +2872,7 @@ bool32 sub_808766C(void)
         return TRUE;
 }
 
-static u32 sub_8087690(void)
+static u32 GetLinkEventQueueLength(void)
 {
     if (gWirelessCommType != 0)
         return gUnknown_03005000.unk_9e8.unk_232;
@@ -2923,7 +2949,8 @@ static void sub_808780C(u8 linkPlayerId)
     eventObj->active = 0;
 }
 
-static u8 sub_8087858(u8 linkPlayerId)
+// Returns the spriteId corresponding to this player.
+static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId)
 {
     u8 eventObjId = gLinkPlayerEventObjects[linkPlayerId].eventObjId;
     struct EventObject *eventObj = &gEventObjects[eventObjId];
@@ -2986,7 +3013,7 @@ static void sub_808796C(u8 linkPlayerId, u8 a2)
         if (a2 > 10)
             eventObj->triggerGroundEffectsOnMove = 1;
         else
-            gUnknown_08339E00[gUnknown_08339DC8[linkPlayerEventObj->mode](linkPlayerEventObj, eventObj, a2)](linkPlayerEventObj, eventObj);
+            gUnknown_08339E00[gLinkPlayerEventModes[linkPlayerEventObj->mode](linkPlayerEventObj, eventObj, a2)](linkPlayerEventObj, eventObj);
     }
 }
 

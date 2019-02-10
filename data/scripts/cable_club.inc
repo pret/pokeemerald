@@ -914,14 +914,14 @@ RecordCorner_EventScript_277471:: @ 8277471
 	releaseall
 	end
 
-EventScript_TradeRoom_ReadTrainerCard1:: @ 827747E
+EventScript_TradeRoom_ReadTrainerCard_NoColor:: @ 827747E
 	msgbox Text_278452, MSGBOX_DEFAULT
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
-EventScript_TradeRoom_ReadTrainerCard2:: @ 827748D
+EventScript_TradeRoom_ReadTrainerCard_Normal:: @ 827748D
 	msgbox Text_27847B, MSGBOX_DEFAULT
 	fadescreen 1
 	special sp02A_crash_sound

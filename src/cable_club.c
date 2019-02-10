@@ -352,7 +352,7 @@ static void sub_80B2918(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        gUnknown_03005DB4 = GetMultiplayerId();
+        gLinkGuestPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -399,7 +399,7 @@ static void sub_80B2A08(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        gUnknown_03005DB4 = GetMultiplayerId();
+        gLinkGuestPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -972,7 +972,7 @@ void sub_80B360C(void)
 
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2)
     {
-        UpdatePlayerLinkBattleRecords(gUnknown_03005DB4 ^ 1);
+        UpdatePlayerLinkBattleRecords(gLinkGuestPlayerId ^ 1);
         if (gWirelessCommType)
         {
             switch (gBattleOutcome)
@@ -1177,14 +1177,16 @@ void sp02A_crash_sound(void)
     ShowTrainerCardInLink(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-bool32 sub_80B39D4(u8 linkPlayerIndex)
+// Returns FALSE if the player has no stars. Returns TRUE otherwise, and puts the name of the
+// color into gStringVar2.
+bool32 GetLinkTrainerCardColor(u8 linkPlayerIndex)
 {
     u32 trainerCardColorIndex;
 
     gSpecialVar_0x8006 = linkPlayerIndex;
     StringCopy(gStringVar1, gLinkPlayers[linkPlayerIndex].name);
 
-    trainerCardColorIndex = sub_80C4904(linkPlayerIndex);
+    trainerCardColorIndex = GetTrainerCardStars(linkPlayerIndex);
     if (trainerCardColorIndex == 0)
         return FALSE;
 

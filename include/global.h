@@ -907,12 +907,12 @@ struct MapPosition
     s8 height;
 };
 
-struct UnkStruct_8054FF8
+struct TradeRoomTrainer
 {
     u8 a;
     u8 b;
     u8 c;
-    u8 d;
+    u8 facing;
     struct MapPosition sub;
     u16 field_C;
 };

@@ -25,7 +25,7 @@ extern u16 *gBGTilemapBuffers3;
 extern u16 gUnknown_03005DA8;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
-extern u8 gUnknown_03005DB4;
+extern u8 gLinkGuestPlayerId;
 extern u8 gFieldLinkPlayerCount;
 
 // Exported ROM declarations
