@@ -333,7 +333,6 @@ static void GenerateOpponentMons(void)
 
         for (k = firstMonId; k < firstMonId + i; k++)
         {
-            // BUG: Small undefined behavior bug, since species array values were not initialized.
             if (species[k] == gFacilityTrainerMons[monSetId].species)
                 break;
         }
@@ -342,7 +341,6 @@ static void GenerateOpponentMons(void)
 
         for (k = firstMonId; k < firstMonId + i; k++)
         {
-            // BUG: Small undefined behavior bug, since heldItems array values were not initialized.
             if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
                 break;
         }

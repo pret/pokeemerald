@@ -23,7 +23,7 @@ SkyPillar_Top_MapScript1_2396E6: @ 82396E6
 	end
 
 SkyPillar_Top_EventScript_2396FD:: @ 82396FD
-	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08481B24
+	setmaplayoutindex LAYOUT_SKY_PILLAR_TOP_CLEAN
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
 

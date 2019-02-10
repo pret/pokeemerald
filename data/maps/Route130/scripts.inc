@@ -27,7 +27,7 @@ Route130_MapScript1_1F7365: @ 81F7365
 	end
 
 Route130_EventScript_1F73B1:: @ 81F73B1
-	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08417FC4
+	setmaplayoutindex LAYOUT_ROUTE130_MIRAGE_ISLAND
 	end
 
 Route130_EventScript_1F73B5:: @ 81F73B5

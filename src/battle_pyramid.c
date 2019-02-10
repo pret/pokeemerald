@@ -97,7 +97,7 @@ struct PyramidTrainerEncounterMusic
 };
 
 // This file's functions.
-static void InitPyramidBag(void);
+static void InitPyramidChallenge(void);
 static void GetBattlePyramidData(void);
 static void SetBattlePyramidData(void);
 static void sub_81A9134(void);
@@ -814,7 +814,7 @@ static const u8 sHintTextTypes[] =
 
 static void (* const sBattlePyramidFunctions[])(void) =
 {
-    InitPyramidBag,
+    InitPyramidChallenge,
     GetBattlePyramidData,
     SetBattlePyramidData,
     sub_81A9134,
@@ -865,7 +865,7 @@ void CallBattlePyramidFunction(void)
     sBattlePyramidFunctions[gSpecialVar_0x8004]();
 }
 
-static void InitPyramidBag(void)
+static void InitPyramidChallenge(void)
 {
     bool32 isCurrent;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;

@@ -6465,10 +6465,10 @@ static void atk76_various(void)
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     case 14:
-        sub_81A5BF8();
+        DrawArenaRefereeTextBox();
         break;
     case 15:
-        sub_81A5D44();
+        RemoveArenaRefereeTextBox();
         break;
     case VARIOUS_ARENA_JUDGMENT_STRING:
         BattleStringExpandPlaceholdersToDisplayedString(gRefereeStringsTable[gBattlescriptCurrInstr[1]]);

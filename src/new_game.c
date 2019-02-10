@@ -8,6 +8,7 @@
 #include "lottery_corner.h"
 #include "play_time.h"
 #include "mauville_old_man.h"
+#include "match_call.h"
 #include "lilycove_lady.h"
 #include "load_save.h"
 #include "pokeblock.h"
@@ -47,7 +48,6 @@ extern void NewGameInitPCItems(void);
 extern void ClearDecorationInventories(void);
 extern void ResetFanClub(void);
 extern void copy_strings_to_sav1(void);
-extern void InitMatchCallCounters(void);
 extern void sub_801AFD8(void);
 extern void sub_800E5AC(void);
 extern void ResetContestLinkResults(void);

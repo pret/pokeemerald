@@ -40,5 +40,6 @@ void sub_80B0268(void);
 void sub_80B0534(void);
 void sub_80B058C(void);
 void sub_80B05B4(void);
+void WriteFlashScanlineEffectBuffer(u8 flashLevel);
 
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

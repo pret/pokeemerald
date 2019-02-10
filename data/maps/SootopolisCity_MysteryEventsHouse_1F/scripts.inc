@@ -16,7 +16,7 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D:: @ 822797D
 	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 3, 2
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
-	setmaplayoutindex LAYOUT_UNKNOWN_MAP_08481DBC
+	setmaplayoutindex LAYOUT_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F_STAIRS_UNBLOCKED
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_227991:: @ 8227991

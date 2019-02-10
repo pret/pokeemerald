@@ -33,6 +33,12 @@ void InitMap(void);
 void InitMapFromSavedGame(void);
 void InitTrainerHillMap(void);
 void InitBattlePyramidMap(bool8 setPlayerPosition);
+void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout);
+void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout);
+void apply_map_tileset2_palette(struct MapLayout const *mapLayout);
+void copy_map_tileset2_to_vram_2(struct MapLayout const *mapLayout);
+extern void copy_map_tileset1_to_vram(const struct MapLayout *);
+extern void copy_map_tileset2_to_vram(const struct MapLayout *);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);

@@ -993,8 +993,8 @@ const u32 gUnknown_08D85358[] = INCBIN_U32("graphics/battle_frontier/options_pal
 const u32 gUnknown_08D85444[] = INCBIN_U32("graphics/battle_frontier/options_pal2.gbapal.lz"); // pokeball pal
 const u32 gUnknown_08D854C8[] = INCBIN_U32("graphics/battle_frontier/options_pal3.gbapal.lz"); // arrow pal
 
-const u32 gUnknown_08D854E8[] = INCBIN_U32("graphics/battle_frontier/symbols.4bpp.lz");
-const u32 gUnknown_08D855E8[] = INCBIN_U32("graphics/battle_frontier/symbols.gbapal.lz");
+const u32 gBattleArenaJudgementSymbolsGfx[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.4bpp.lz");
+const u32 gBattleArenaJudgementSymbolsPalette[] = INCBIN_U32("graphics/battle_frontier/arena_judgement_symbols.gbapal.lz");
 
 const u32 gUnknown_08D85600[] = INCBIN_U32("graphics/battle_frontier/text.gbapal.lz");
 const u16 gUnknown_08D85620[] = INCBIN_U16("graphics/battle_frontier/text_pp.gbapal");

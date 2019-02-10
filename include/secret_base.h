@@ -22,6 +22,8 @@ void sub_80EB56C(void);
 void sub_80EB9E0(void);
 void sub_80EBB28(void);
 void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEvents *events);
+bool8 sub_80E909C(void);
+void sub_80EB218(void);
 
 // SetCurrentSecretBaseFromPosition
 void sub_80E9608(const struct MapPosition *position, const struct MapEvents *events);

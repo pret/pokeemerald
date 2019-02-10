@@ -15,7 +15,6 @@
 #include "overworld.h"
 #include "link.h"
 #include "frontier_util.h"
-#include "rom_818CFC8.h"
 #include "field_specials.h"
 #include "event_object_movement.h"
 #include "script.h"
