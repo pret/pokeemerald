@@ -791,116 +791,118 @@ EventScript_CableBoxResults:: @ 8277365
 	releaseall
 	end
 
-gUnknown_08277374:: @ 8277374
+gEventScript_SingleBattleColosseum_PlayerSpot0:: @ 8277374
 	setvar VAR_0x8005, 0
-	special sub_80B3968
+	special EventScript_ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gUnknown_0827737E:: @ 827737E
+gEventScript_SingleBattleColosseum_PlayerSpot1:: @ 827737E
 	setvar VAR_0x8005, 1
-	special sub_80B3968
+	special EventScript_ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gUnknown_08277388:: @ 8277388
+gEventScript_DoubleBattleColosseum_PlayerSpot0:: @ 8277388
 	fadescreen 1
-	special sub_80F9438
+	special EventScript_ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 0
-	special sub_80B3968
+	special EventScript_ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gUnknown_082773A3:: @ 82773A3
+gEventScript_DoubleBattleColosseum_PlayerSpot1:: @ 82773A3
 	fadescreen 1
-	special sub_80F9438
+	special EventScript_ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 1
-	special sub_80B3968
+	special EventScript_ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gUnknown_082773BE:: @ 82773BE
+gEventScript_DoubleBattleColosseum_PlayerSpot2:: @ 82773BE
 	fadescreen 1
-	special sub_80F9438
+	special EventScript_ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 2
-	special sub_80B3968
+	special EventScript_ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gUnknown_082773D9:: @ 82773D9
+gEventScript_DoubleBattleColosseum_PlayerSpot3:: @ 82773D9
 	fadescreen 1
-	special sub_80F9438
+	special EventScript_ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq DoubleBattleColosseum_EventScript_2773F4
+	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 3
-	special sub_80B3968
+	special EventScript_ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-DoubleBattleColosseum_EventScript_2773F4:: @ 82773F4
+gEventScript_DoubleBattleColosseum_CancelSpotTrigger:: @ 82773F4
 	end
 
-gUnknown_082773F5:: @ 82773F5
+gEventScript_TradeCenter_Chair0:: @ 82773F5
 	setvar VAR_0x8005, 0
-	special sub_80B3924
+	special EventScript_PlayerEnteredTradeSeat
 	waitstate
 	end
 
-gUnknown_082773FF:: @ 82773FF
+gEventScript_TradeCenter_Chair1:: @ 82773FF
 	setvar VAR_0x8005, 1
-	special sub_80B3924
+	special EventScript_PlayerEnteredTradeSeat
 	waitstate
 	end
 
-gUnknown_08277409:: @ 8277409
+/* Never used */
+gEventScript_TradeCenter_Chair2:: @ 8277409
 	setvar VAR_0x8005, 2
-	special sub_80B3924
+	special EventScript_PlayerEnteredTradeSeat
 	waitstate
 	end
 
-gUnknown_08277413:: @ 8277413
+/* Never used */
+gEventScript_TradeCenter_Chair3:: @ 8277413
 	setvar VAR_0x8005, 3
-	special sub_80B3924
+	special EventScript_PlayerEnteredTradeSeat
 	waitstate
 	end
 
-gUnknown_0827741D:: @ 827741D
+gEventScript_RecordCenter_Spot0:: @ 827741D
 	setvar VAR_0x8005, 0
-	special sub_80E6BE8
+	special EventScript_RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
 	end
 
-gUnknown_08277432:: @ 8277432
+gEventScript_RecordCenter_Spot1:: @ 8277432
 	setvar VAR_0x8005, 1
-	special sub_80E6BE8
+	special EventScript_RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
 	end
 
-gUnknown_08277447:: @ 8277447
+gEventScript_RecordCenter_Spot2:: @ 8277447
 	setvar VAR_0x8005, 2
-	special sub_80E6BE8
+	special EventScript_RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
 	end
 
-gUnknown_0827745C:: @ 827745C
+gEventScript_RecordCenter_Spot3:: @ 827745C
 	setvar VAR_0x8005, 3
-	special sub_80E6BE8
+	special EventScript_RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
@@ -914,21 +916,21 @@ RecordCorner_EventScript_277471:: @ 8277471
 	releaseall
 	end
 
-EventScript_TradeRoom_ReadTrainerCard_NoColor:: @ 827747E
+gEventScript_TradeRoom_ReadTrainerCard_NoColor:: @ 827747E
 	msgbox Text_278452, MSGBOX_DEFAULT
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
-EventScript_TradeRoom_ReadTrainerCard_Normal:: @ 827748D
+gEventScript_TradeRoom_ReadTrainerCard_Normal:: @ 827748D
 	msgbox Text_27847B, MSGBOX_DEFAULT
 	fadescreen 1
 	special sp02A_crash_sound
 	waitstate
 	end
 
-EventScript_TradeRoom_TooBusyToNotice:: @ 827749C
+gEventScript_TradeRoom_TooBusyToNotice:: @ 827749C
 	msgbox Text_27842E, MSGBOX_DEFAULT
 	closemessage
 	end
@@ -968,21 +970,21 @@ RecordCorner_EventScript_2774E0:: @ 82774E0
 	end
 
 gEventScript_ConfirmLeaveTradeRoom:: @ 82774EF
-	msgbox Text_2783A8, MSGBOX_YESNO
+	msgbox Text_TerminateLinkConfirmation, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if_eq gUnknown_08277509
+	goto_if_eq gEventScript_TerminateLink
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
-gUnknown_08277509:: @ 8277509
-	messageautoscroll Text_2783E9
+gEventScript_TerminateLink:: @ 8277509
+	messageautoscroll Text_TerminateLinkPleaseWait
 	waitmessage
-	special sub_80B371C
+	special EventScript_ExitLinkRoom
 	end
 
-EventScript_277513:: @ 8277513
-	special sub_80B36EC
+gEventScript_DoLinkRoomExit:: @ 8277513
+	special EventScript_CleanupLinkRoomState
 	special sub_80AF9F8
 	waitstate
 	end
@@ -1736,11 +1738,11 @@ OldaleTown_PokemonCenter_2F_Text_278372: @ 8278372
 	.string "Please confirm the number of\n"
 	.string "players and start again.$"
 
-Text_2783A8: @ 82783A8
+Text_TerminateLinkConfirmation: @ 82783A8
 	.string "The link will be terminated if you\n"
 	.string "leave the room. Is that okay?$"
 
-Text_2783E9: @ 82783E9
+Text_TerminateLinkPleaseWait: @ 82783E9
 	.string "Terminating link…\n"
 	.string "You will be escorted out of\l"
 	.string "the room. Please wait.$"

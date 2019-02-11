@@ -282,7 +282,7 @@ static void sub_80B2804(u8 taskId)
 
     if (GetFieldMessageBoxMode() == FIELD_MESSAGE_BOX_HIDDEN)
     {
-        if (sub_800AA48() != GetLinkPlayerCount_2())
+        if (GetSavedPlayerCount() != GetLinkPlayerCount_2())
         {
             ShowFieldAutoScrollMessage(gText_ConfirmLinkWhenPlayersReady);
             gTasks[taskId].func = sub_80B270C;
@@ -295,7 +295,7 @@ static void sub_80B2804(u8 taskId)
         else if (gMain.heldKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_800A620();
+            CheckShouldAdvanceLinkState();
             gTasks[taskId].func = sub_80B28A8;
         }
     }
@@ -310,7 +310,7 @@ static void sub_80B28A8(u8 taskId)
      || sub_80B2D6C(taskId) == TRUE)
         return;
 
-    if (GetLinkPlayerCount_2() != sub_800AA48())
+    if (GetLinkPlayerCount_2() != GetSavedPlayerCount())
     {
         gTasks[taskId].func = sub_80B2D2C;
     }
@@ -764,9 +764,9 @@ static void sub_80B3194(u8 taskId)
 
 static void sub_80B31E8(u8 taskId)
 {
-    if (sub_800AA48() == GetLinkPlayerCount_2())
+    if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
     {
-        sub_800A620();
+        CheckShouldAdvanceLinkState();
         gTasks[taskId].func = sub_80B3220;
     }
 }
@@ -999,7 +999,7 @@ void sub_80B360C(void)
     SetMainCallback2(sub_80A0514);
 }
 
-void sub_80B36EC(void)
+void EventScript_CleanupLinkRoomState(void)
 {
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2 || gSpecialVar_0x8004 == 5 || gSpecialVar_0x8004 == 9)
     {
@@ -1009,11 +1009,13 @@ void sub_80B36EC(void)
     SetWarpDestinationToDynamicWarp(0x7F);
 }
 
-void sub_80B371C(void)
+void EventScript_ExitLinkRoom(void)
 {
-    sub_80872B0();
+    QueueExitLinkRoomKey();
 }
 
+// I can't find anything that would set data[0] to a value before this
+// stask starts. Is it a bug?
 static void sub_80B3728(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
@@ -1028,7 +1030,7 @@ static void sub_80B3728(u8 taskId)
         if (IsFieldMessageBoxHidden())
         {
             sub_8087288();
-            sub_8009628(gSpecialVar_0x8005);
+            SetLocalLinkPlayerId(gSpecialVar_0x8005);
             task->data[0] = 2;
         }
         break;
@@ -1130,7 +1132,8 @@ static void sub_80B3894(u8 taskId)
     }
 }
 
-void sub_80B3924(void)
+// Note: VAR_0x8005 is set to the ID of the trade seat.
+void EventScript_PlayerEnteredTradeSeat(void)
 {
     if (gWirelessCommType != 0)
     {
@@ -1152,7 +1155,8 @@ void nullsub_37(void)
 
 }
 
-void sub_80B3968(void)
+// Note: VAR_0x8005 is set to the ID of the player spot.
+void EventScript_ColosseumPlayerSpotTriggered(void)
 {
     gLinkType = 0x2211;
 
@@ -1166,6 +1170,7 @@ void sub_80B3968(void)
     }
 }
 
+// This function is never called.
 static void sub_80B39A4(void)
 {
     u8 taskId = CreateTask(sub_80B3728, 80);
@@ -1265,13 +1270,13 @@ void sub_80B3AF8(u8 taskId)
             }
             break;
         case 2:
-            if (GetLinkPlayerCount_2() >= sub_800AA48())
+            if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
             {
                 if (IsLinkMaster())
                 {
                     if (++data[1] > 30)
                     {
-                        sub_800A620();
+                        CheckShouldAdvanceLinkState();
                         data[0]++;
                     }
                 }

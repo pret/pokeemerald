@@ -302,9 +302,9 @@ void LinkTestScreen(void)
     SetMainCallback2(CB2_LinkTest);
 }
 
-void sub_8009628(u8 a0)
+void SetLocalLinkPlayerId(u8 playerId)
 {
-    gLocalLinkPlayer.id = a0;
+    gLocalLinkPlayer.id = playerId;
 }
 
 static void InitLocalLinkPlayer(void)
@@ -1142,7 +1142,7 @@ void ResetBlockReceivedFlag(u8 who)
     }
 }
 
-void sub_800A620(void)
+void CheckShouldAdvanceLinkState(void)
 {
     if ((gLinkStatus & LINK_STAT_MASTER) && EXTRACT_PLAYER_COUNT(gLinkStatus) > 1)
     {
@@ -1327,7 +1327,9 @@ void sub_800AA04(u8 a0)
     }
 }
 
-u8 sub_800AA48(void)
+// The number of players when trading began. This is frequently compared against the
+// current number of connected players to check if anyone dropped out.
+u8 GetSavedPlayerCount(void)
 {
     return gSavedLinkPlayerCount;
 }

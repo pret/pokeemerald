@@ -621,7 +621,7 @@ void sub_80AF948(void)
     CreateTask(sub_80AF8E0, 10);
 }
 
-static void sub_80AF96C(u8 taskId)
+static void Task_ReturnToWorldFromLinkRoom(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -654,7 +654,7 @@ static void sub_80AF96C(u8 taskId)
 
 void sub_80AF9F8(void)
 {
-    CreateTask(sub_80AF96C, 10);
+    CreateTask(Task_ReturnToWorldFromLinkRoom, 10);
 }
 
 static void sub_80AFA0C(u8 taskId)

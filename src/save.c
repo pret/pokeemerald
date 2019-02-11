@@ -768,7 +768,7 @@ u8 sub_8153408(void) // trade.s save
     return 0;
 }
 
-u8 sub_8153430(void)
+u8 FullSaveGame(void)
 {
     if (gFlashMemoryPresent != TRUE)
         return 1;
@@ -780,7 +780,7 @@ u8 sub_8153430(void)
     return 0;
 }
 
-bool8 sub_8153474(void)
+bool8 CheckSaveFile(void)
 {
     u8 retVal = FALSE;
     u16 val = ++gUnknown_03006208;

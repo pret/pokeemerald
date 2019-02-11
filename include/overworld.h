@@ -8,10 +8,21 @@
 #define LINK_KEY_CODE_DPAD_LEFT 0x14
 #define LINK_KEY_CODE_DPAD_RIGHT 0x15
 #define LINK_KEY_CODE_UNK_2 0x16
-#define LINK_KEY_CODE_UNK_3 0x17
+#define LINK_KEY_CODE_EXIT_ROOM 0x17
 #define LINK_KEY_CODE_START_BUTTON 0x18
 #define LINK_KEY_CODE_A_BUTTON 0x19
 #define LINK_KEY_CODE_UNK_4 0x1A // I'd guess this is the B button?
+
+// These two are a hack to stop user input until link stuff can be
+// resolved.
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B 
+#define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
+#define LINK_KEY_CODE_UNK_7 0x1D
+#define LINK_KEY_CODE_UNK_8 0x1E
+
+#define MOVEMENT_MODE_FREE 0
+#define MOVEMENT_MODE_FROZEN 1
+#define MOVEMENT_MODE_SCRIPTED 2
 
 struct InitialPlayerAvatarState
 {
@@ -24,7 +35,7 @@ struct LinkPlayerEventObject
     u8 active;
     u8 linkPlayerId;
     u8 eventObjId;
-    u8 mode;
+    u8 movementMode;
 };
 
 // Exported RAM declarations
@@ -120,7 +131,7 @@ void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_Overworld(void);
 void SetMainCallback1(void (*cb)(void));
-void sub_8085E94(void *a0);
+void SetUnusedCallback(void *a0);
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
@@ -140,7 +151,7 @@ u32 sub_8087214(void);
 bool32 sub_808727C(void);
 u16 sub_8087288(void);
 u16 sub_808729C(void);
-u16 sub_80872B0(void);
+u16 QueueExitLinkRoomKey(void);
 u16 sub_80872C4(void);
 bool32 sub_8087598(void);
 bool32 sub_80875C8(void);

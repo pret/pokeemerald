@@ -146,8 +146,8 @@ extern void sub_81AABF0(void (*callback)(void));
 extern void sub_800B4C0(void);
 extern void ClearLinkCallback(void);
 extern void sub_8009F8C(void);
-extern void sub_8153430(void);
-extern bool8 sub_8153474(void);
+extern void FullSaveGame(void);
+extern bool8 CheckSaveFile(void);
 extern void sub_80EECEC(void);
 
 // this file's functions
@@ -2600,7 +2600,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
         }
         break;
     case 2:
-        sub_8153430();
+        FullSaveGame();
         sBerryBlenderData->field_1A0++;
         sBerryBlenderData->framesToWait = 0;
         break;
@@ -2614,7 +2614,7 @@ static bool8 LinkPlayAgainHandleSaving(void)
     case 4:
         if (IsLinkTaskFinished())
         {
-            if (sub_8153474())
+            if (CheckSaveFile())
             {
                 sBerryBlenderData->field_1A0 = 5;
             }

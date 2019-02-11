@@ -1507,13 +1507,13 @@ static void sub_80773D0(void)
         }
         break;
     case 3:
-        if (GetLinkPlayerCount_2() >= sub_800AA48())
+        if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
         {
             if (IsLinkMaster())
             {
                 if (++gUnknown_0203229C->unk_A8 > 30)
                 {
-                    sub_800A620();
+                    CheckShouldAdvanceLinkState();
                     gMain.state++;
                 }
             }
@@ -4099,11 +4099,11 @@ void sub_807AE50(void)
         case 3:
             if (IsLinkMaster())
             {
-                if (GetLinkPlayerCount_2() >= sub_800AA48())
+                if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
                 {
                     if (++gUnknown_020322A0->timer > 30)
                     {
-                        sub_800A620();
+                        CheckShouldAdvanceLinkState();
                         gMain.state++;
                     }
                 }

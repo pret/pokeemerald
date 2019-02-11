@@ -85,7 +85,7 @@ u8 GetItemEffectType(u16 item);
 void CB2_PartyMenuFromStartMenu(void);
 void sub_81B7F60(void);
 void sub_81B8448(void);
-void sub_81B8518(u8 unused);
+void InitChooseHalfPartyForBattle(u8 unused);
 void sub_81B8558(void);
 void sub_81B8904(u8 initArg, MainCallback callback);
 void sub_81B892C(void);

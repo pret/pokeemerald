@@ -1265,11 +1265,11 @@ static void sub_80A0550(u8 taskId)
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();
-            sub_8153430();
+            FullSaveGame();
             *step = 2;
             break;
         case 2:
-            if (sub_8153474())
+            if (CheckSaveFile())
             {
                 ClearContinueGameWarpStatus2();
                 *step = 3;

@@ -6513,7 +6513,7 @@ static void sub_81B8474(u8 taskId)
     gTasks[taskId].func = sub_81B8104;
 }
 
-void sub_81B8518(u8 unused)
+void InitChooseHalfPartyForBattle(u8 unused)
 {
     sub_81B8558();
     InitPartyMenu(4, 0, 0, 0, 0, sub_81B1370, gMain.savedCallback);

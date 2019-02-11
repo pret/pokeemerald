@@ -3788,10 +3788,10 @@ bool32 sub_8010454(u32 a0)
 
 u8 sub_801048C(bool32 a0)
 {
-    if (a0 == 0)
+    if (a0 == FALSE)
         return sub_800D550(0, 0);
     sub_800D550(1, 0x258);
-    return FALSE;
+    return 0;
 }
 
 void sub_80104B0(void)

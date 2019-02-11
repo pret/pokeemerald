@@ -1697,7 +1697,7 @@ void sub_801440C(u8 taskId)
     case 81:
         CleanupOverworldWindowsAndTilemaps();
         gMain.savedCallback = sub_801AC54;
-        sub_81B8518(3);
+        InitChooseHalfPartyForBattle(3);
         break;
     case 1:
         CleanupOverworldWindowsAndTilemaps();

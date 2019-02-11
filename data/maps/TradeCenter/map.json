@@ -46,22 +46,24 @@
   ],
   "coord_events": [
     {
+      "comment": "This is trade seat #1.",
       "type": "trigger",
       "x": 4,
       "y": 5,
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "gUnknown_082773F5"
+      "script": "gEventScript_TradeCenter_Chair0"
     },
     {
+      "comment": "This is trade seat #2.",
       "type": "trigger",
       "x": 7,
       "y": 5,
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "gUnknown_082773FF"
+      "script": "gEventScript_TradeCenter_Chair1"
     }
   ],
   "bg_events": []
