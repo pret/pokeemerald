@@ -4,49 +4,6 @@
 	.syntax unified
 
 	.text
-	
-
-
-	
-
-	thumb_func_start sub_81C7124
-sub_81C7124: @ 81C7124
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	ldr r4, =gTasks
-_081C712C:
-	ldrb r0, [r4, 0x4]
-	cmp r0, 0
-	beq _081C7160
-	ldr r1, [r4]
-	ldr r0, =sub_81C7170
-	cmp r1, r0
-	beq _081C7140
-	ldr r0, =sub_81C71E4
-	cmp r1, r0
-	bne _081C7160
-_081C7140:
-	lsls r0, r5, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	bl GetWordTaskArg
-	cmp r0, r6
-	bne _081C7160
-	movs r0, 0x1
-	b _081C716A
-	.pool
-_081C7160:
-	adds r4, 0x28
-	adds r5, 0x1
-	cmp r5, 0xF
-	ble _081C712C
-	movs r0, 0
-_081C716A:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7124
 
 	thumb_func_start sub_81C7170
 sub_81C7170: @ 81C7170

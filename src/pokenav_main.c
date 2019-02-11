@@ -81,16 +81,35 @@ u32 sub_81C7078(s32 a0, u32 a1)
     return ((gUnknown_0203CF3C++) << 16) | taskId;
 }
 
-bool32 sub_81C70D8(u32 a0, u32 unused) {
+bool32 sub_81C70D8(u32 a0, u32 unused)
+{
 	u32 v1 = a0 & 0xFFFF;
 	u32 v2 = a0 >> 16;
 	if (gTasks[v1].isActive
 		&& (gTasks[v1].func == sub_81C7170 || gTasks[v1].func == sub_81C71E4)
-		&& gTasks[v1].data[3] == v2) {
+		&& gTasks[v1].data[3] == v2)
+	{
 	
 		return TRUE;
-	} else {
+	}
+	else
+	{
 		return FALSE;
 	}
 }
 
+bool32 sub_81C7124(u32 a0)
+{
+	s32 i;
+	for (i = 0; i < 16; i++) {
+		if (gTasks[i].isActive
+			&& (gTasks[i].func == sub_81C7170 || gTasks[i].func == sub_81C71E4))
+		{
+			u32 arg = GetWordTaskArg((u8)i, 1);
+			if (arg == a0) {
+				return TRUE;
+			}
+		}
+	}
+	return FALSE;
+}
