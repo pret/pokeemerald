@@ -3135,16 +3135,16 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
     {
     case (FACING_UP - 1):
     case (FACING_FORCED_UP - 1):
-        return FACING_DOWN;
+        return DIR_NORTH;
     case (FACING_DOWN - 1):
     case (FACING_FORCED_DOWN - 1):
-        return FACING_UP;
+        return DIR_SOUTH;
     case (FACING_LEFT - 1):
     case (FACING_FORCED_LEFT - 1):
-        return FACING_LEFT;
+        return DIR_WEST;
     case (FACING_RIGHT - 1):
     case (FACING_FORCED_RIGHT - 1):
-        return FACING_RIGHT;
+        return DIR_EAST;
     }
     return oldFacing;
 }
