@@ -144,24 +144,24 @@ const struct SpriteTemplate gUnknown_08597214 =
 
 const struct SpriteTemplate gMudBombSplash =
 {
-	.tileTag = ANIM_TAG_MUD_SAND,
-	.paletteTag = ANIM_TAG_MUD_SAND,
-	.oam = &gUnknown_08524904,
-	.anims = gDummySpriteAnimTable,
-	.images = NULL,
-	.affineAnims = gDummySpriteAffineAnimTable,
-	.callback = MudBombParticles,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gUnknown_08524904,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = MudBombParticles,
 };
 
 const struct SpriteTemplate gMudBombToss =
 {
-	.tileTag = ANIM_TAG_MUD_SAND ,
-	.paletteTag = ANIM_TAG_MUD_SAND,
-	.oam = &gUnknown_0852490C,
-	.anims = gUnknown_085971C8,
-	.images = NULL,
-	.affineAnims = gDummySpriteAffineAnimTable,
-	.callback = MudBombBall,
+    .tileTag = ANIM_TAG_MUD_SAND ,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gUnknown_0852490C,
+    .anims = gUnknown_085971C8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = MudBombBall,
 };
 
 // Moves a bone projectile towards the target mon, which moves like
@@ -587,49 +587,49 @@ void AnimDigDirtMound(struct Sprite *sprite)
 //Lifted from sludge bomb
 void MudBombParticles(struct Sprite *sprite)
 {
-	sprite->data[0] = gBattleAnimArgs[2];
-	sprite->data[1] = sprite->pos1.x;
-	sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[0];
-	sprite->data[3] = sprite->pos1.y;
-	sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[1];
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[0];
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[1];
 
-	InitSpriteDataForLinearTranslation(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
 
-	sprite->data[5] = sprite->data[1] / gBattleAnimArgs[2];
-	sprite->data[6] = sprite->data[2] / gBattleAnimArgs[2];
+    sprite->data[5] = sprite->data[1] / gBattleAnimArgs[2];
+    sprite->data[6] = sprite->data[2] / gBattleAnimArgs[2];
 
-	sprite->callback = MudBombParticles_Callback;
+    sprite->callback = MudBombParticles_Callback;
 }
 //also lifted from sludge bomb
 static void MudBombParticles_Callback(struct Sprite *sprite)
 {
-	TranslateSpriteLinearFixedPoint(sprite);
+    TranslateSpriteLinearFixedPoint(sprite);
 
-	sprite->data[1] -= sprite->data[5];
-	sprite->data[2] -= sprite->data[6];
+    sprite->data[1] -= sprite->data[5];
+    sprite->data[2] -= sprite->data[6];
 
-	if (!sprite->data[0])
-		DestroyAnimSprite(sprite);
+    if (!sprite->data[0])
+        DestroyAnimSprite(sprite);
 }
 //lifted from smokescreen
 void MudBombBall(struct Sprite *sprite)
 {
-	InitSpritePosToAnimAttacker(sprite, 1);
-	if (GetBattlerSide(gBattleAnimAttacker))
-		gBattleAnimArgs[2] = -gBattleAnimArgs[2];
-	sprite->data[0] = gBattleAnimArgs[4];
-	sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
-	sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
-	sprite->data[5] = gBattleAnimArgs[5];
-	InitAnimArcTranslation(sprite);
+    InitSpritePosToAnimAttacker(sprite, 1);
+    if (GetBattlerSide(gBattleAnimAttacker))
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
+    sprite->data[5] = gBattleAnimArgs[5];
+    InitAnimArcTranslation(sprite);
 
-	sprite->callback = MudBombBall_Callback;
+    sprite->callback = MudBombBall_Callback;
 }
 //Also lifted form smokescreen
 static void MudBombBall_Callback(struct Sprite *sprite)
 {
-	if (TranslateAnimHorizontalArc(sprite))
-		DestroyAnimSprite(sprite);
+    if (TranslateAnimHorizontalArc(sprite))
+        DestroyAnimSprite(sprite);
 }
 void sub_81152DC(u8 taskId)
 {
