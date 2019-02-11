@@ -289,6 +289,7 @@ SECTIONS {
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
         src/battle_pyramid_bag.o(.text);
+        src/pokenav_main.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
         asm/rom_81D1C44.o(.text);

@@ -7,48 +7,7 @@
 	
 
 
-	thumb_func_start sub_81C7078
-sub_81C7078: @ 81C7078
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl is_c1_link_related_active
-	cmp r0, 0
-	bne _081C7090
-	ldr r0, =sub_81C7170
-	b _081C7092
-	.pool
-_081C7090:
-	ldr r0, =sub_81C71E4
-_081C7092:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	bl CreateTask
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	movs r1, 0x1
-	adds r2, r5, 0
-	bl SetWordTaskArg
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r2, =gUnknown_0203CF3C
-	ldrb r1, [r2]
-	strh r1, [r0, 0xE]
-	ldrb r0, [r2]
-	adds r1, r0, 0x1
-	strb r1, [r2]
-	lsls r0, 24
-	lsrs r0, 8
-	orrs r0, r4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7078
+	
 
 	thumb_func_start sub_81C70D8
 sub_81C70D8: @ 81C70D8
