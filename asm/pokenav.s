@@ -9,42 +9,6 @@
 
 	
 
-	thumb_func_start sub_81C70D8
-sub_81C70D8: @ 81C70D8
-	push {lr}
-	ldr r1, =0x0000ffff
-	ands r1, r0
-	lsrs r3, r0, 16
-	ldr r2, =gTasks
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r1, r0, r2
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0
-	beq _081C711C
-	ldr r2, [r1]
-	ldr r0, =sub_81C7170
-	cmp r2, r0
-	beq _081C70FE
-	ldr r0, =sub_81C71E4
-	cmp r2, r0
-	bne _081C711C
-_081C70FE:
-	movs r2, 0xE
-	ldrsh r0, [r1, r2]
-	cmp r0, r3
-	bne _081C711C
-	movs r0, 0x1
-	b _081C711E
-	.pool
-_081C711C:
-	movs r0, 0
-_081C711E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C70D8
-
 	thumb_func_start sub_81C7124
 sub_81C7124: @ 81C7124
 	push {r4-r6,lr}

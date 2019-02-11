@@ -62,51 +62,6 @@ void CB2_PokeNav(void)
     }
 }*/
 
-/*
-thumb_func_start sub_81C7078
-sub_81C7078: @ 81C7078
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl is_c1_link_related_active
-	cmp r0, 0
-	bne _081C7090
-	ldr r0, =sub_81C7170
-	b _081C7092
-	.pool
-_081C7090:
-	ldr r0, =sub_81C71E4
-_081C7092:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	bl CreateTask
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	movs r1, 0x1
-	adds r2, r5, 0
-	bl SetWordTaskArg
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r2, =gUnknown_0203CF3C
-	ldrb r1, [r2]
-	strh r1, [r0, 0xE]
-	ldrb r0, [r2]
-	adds r1, r0, 0x1
-	strb r1, [r2]
-	lsls r0, 24
-	lsrs r0, 8
-	orrs r0, r4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7078
-    */
-
 extern u8 gUnknown_0203CF3C;
 extern void sub_81C7170(u8 a0);
 extern void sub_81C71E4(u8 a0);
@@ -114,21 +69,28 @@ extern void sub_81C71E4(u8 a0);
 u32 sub_81C7078(s32 a0, u32 a1)
 {
     u16 taskId;
-    u32 old;
 
-    if (is_c1_link_related_active() == FALSE)
+    if (!is_c1_link_related_active())
         taskId = CreateTask(sub_81C7170, a1);
 	else
         taskId = CreateTask(sub_81C71E4, a1);
 
-    //taskId = CreateTask(temp, a1);
-
     SetWordTaskArg(taskId, 1, a0);
 
     gTasks[taskId].data[3] = gUnknown_0203CF3C;
-    //old = gUnknown_0203CF3C;
-    //gUnknown_0203CF3C = old + 1;
     return ((gUnknown_0203CF3C++) << 16) | taskId;
 }
 
-// nonce
+bool32 sub_81C70D8(u32 a0, u32 unused) {
+	u32 v1 = a0 & 0xFFFF;
+	u32 v2 = a0 >> 16;
+	if (gTasks[v1].isActive
+		&& (gTasks[v1].func == sub_81C7170 || gTasks[v1].func == sub_81C71E4)
+		&& gTasks[v1].data[3] == v2) {
+	
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
