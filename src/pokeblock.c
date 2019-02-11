@@ -665,7 +665,7 @@ static void HandleInitWindows(void)
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplatesForPokeblockMenu) - 1; i++)
     {
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
     }
 
     schedule_bg_copy_tilemap_to_vram(0);
@@ -749,7 +749,7 @@ static void sub_8135FCC(s32 pkblId)
     struct Pokeblock *pokeblock;
     u16 rectTilemapSrc[2];
 
-    FillWindowPixelBuffer(7, 0);
+    FillWindowPixelBuffer(7, PIXEL_BUFFER_TRANSPARENT);
 
     if (pkblId != LIST_B_PRESSED)
     {

@@ -92,7 +92,9 @@ static void sub_80B23B0(u16 windowId, u32 value)
 
 static void sub_80B241C(u16 windowId)
 {
-    sub_819746C(windowId, FALSE);
+    // Following this call with a copy-to-vram with mode 3 is identical to
+    // calling ClearWindowAndBorder(windowId, TRUE).
+    ClearWindowAndBorder(windowId, FALSE);
     CopyWindowToVram(windowId, 3);
 }
 

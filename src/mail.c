@@ -477,8 +477,8 @@ static void sub_8121B1C(void)
     y = 0;
     PutWindowTilemap(0);
     PutWindowTilemap(1);
-    FillWindowPixelBuffer(0, 0);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     for (i = 0; i < sMailRead->layout->numSubStructs; i ++)
     {
         if (sMailRead->strbuf[i][0] == EOS || sMailRead->strbuf[i][0] == CHAR_SPACE)

@@ -606,7 +606,7 @@ static void CB2_EggHatch_1(void)
     case 1:
         if (!gPaletteFade.active)
         {
-            FillWindowPixelBuffer(sEggHatchData->windowId, 0);
+            FillWindowPixelBuffer(sEggHatchData->windowId, PIXEL_BUFFER_TRANSPARENT);
             sEggHatchData->CB2_PalCounter = 0;
             sEggHatchData->CB2_state++;
         }
@@ -857,7 +857,7 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
 
 static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
 {
-    FillWindowPixelBuffer(windowId, 0xFF);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_UNKNOWN);
     sEggHatchData->textColor[0] = 0;
     sEggHatchData->textColor[1] = 5;
     sEggHatchData->textColor[2] = 6;

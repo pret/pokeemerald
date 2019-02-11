@@ -355,11 +355,11 @@ s32 DoMysteryGiftListMenu(struct WindowTemplate *windowTemplate, struct ListMenu
                 switch (arg2)
                 {
                 case 0: // can never be reached, because of the if statement above
-                    sub_819746C(sMysteryGiftLinkMenu.windowId, FALSE);
+                    ClearWindowAndBorder(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
                 case 2:
                 case 1:
-                    sub_819746C(sMysteryGiftLinkMenu.windowId, FALSE);
+                    ClearWindowAndBorder(sMysteryGiftLinkMenu.windowId, FALSE);
                     break;
                 }
             }

@@ -226,8 +226,8 @@ static void berry_fix_gpu_set(void)
 
     DmaCopy32(3, sUnknown_08618138, BG_PLTT + 0x1E0, 0x20);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
-    FillWindowPixelBuffer(2, 0);
-    FillWindowPixelBuffer(3, 0);
+    FillWindowPixelBuffer(2, PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(3, PIXEL_BUFFER_TRANSPARENT);
     FillWindowPixelBuffer(0, 0xAA);
 
     width = GetStringWidth(0, sUnknown_08617E9B, 0);

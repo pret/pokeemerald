@@ -197,7 +197,7 @@ static void InitDiplomaWindow(void)
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
     PutWindowTilemap(0);
 }
 

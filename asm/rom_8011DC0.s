@@ -745,7 +745,7 @@ _08017228:
 	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_819746C
+	bl ClearWindowAndBorder
 	ldrb r0, [r5]
 	bl RemoveWindow
 	movs r0, 0
@@ -765,7 +765,7 @@ _08017264:
 	bl DestroyListMenuTask
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_819746C
+	bl ClearWindowAndBorder
 	ldrb r0, [r5]
 	bl RemoveWindow
 	strb r4, [r7]
@@ -23941,7 +23941,7 @@ _08022DE8:
 	beq _08022DFA
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearWindowAndWideBorder
 _08022DFA:
 	ldrb r0, [r7, 0xE]
 	movs r1, 0x1
@@ -24245,7 +24245,7 @@ _0802301E:
 _08023044:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearWindowAndWideBorder
 	movs r0, 0xA
 	movs r1, 0x1
 	movs r2, 0
@@ -26578,7 +26578,7 @@ _080242A4:
 _080242A6:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearWindowAndWideBorder
 	movs r4, 0
 	str r4, [sp]
 	adds r0, r6, 0
@@ -26756,7 +26756,7 @@ _080243EA:
 _080243F6:
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8197434
+	bl ClearWindowAndWideBorder
 	adds r0, r5, 0
 	bl sub_8021488
 	movs r0, 0x1

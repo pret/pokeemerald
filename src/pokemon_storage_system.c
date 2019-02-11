@@ -1218,7 +1218,7 @@ static const u16 gWallpaperPalettes_Plain[][16] =
 static const u32 gWallpaperTiles_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.4bpp.lz");
 static const u32 gWallpaperTilemap_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.bin.lz");
 
-// 12×18 tilemap
+// 12ï¿½18 tilemap
 static const u32 gUnknown_085773C4[] = INCBIN_U32("graphics/unused/tilemap_5773C4.bin");
 
 static const u16 gUnknown_08577574[][2] =
@@ -1737,7 +1737,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         CreatePCMenu(task->data[1], &task->data[15]);
         sub_81973A4();
         NewMenuHelpers_DrawDialogueFrame(0, 0);
-        FillWindowPixelBuffer(0, 0x11);
+        FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
         AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
         CopyWindowToVram(task->data[15], 3);
@@ -1763,13 +1763,13 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             if (task->data[1] != task->data[3])
             {
                 task->data[1] = task->data[3];
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
                 AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             }
             break;
         case MENU_B_PRESSED:
         case  4:
-            sub_819746C(task->data[15], TRUE);
+            ClearWindowAndBorder(task->data[15], TRUE);
             ScriptContext2_Disable();
             EnableBothScriptContexts();
             RemoveWindow(task->data[15]);
@@ -1778,13 +1778,13 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         default:
             if (task->data[2] == 0 && CountPartyMons() == PARTY_SIZE)
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
                 AddTextPrinterParameterized2(0, 1, gText_PartyFull, 0, NULL, 2, 1, 3);
                 task->data[0] = 3;
             }
             else if (task->data[2] == 1 && CountPartyMons() == 1)
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
                 AddTextPrinterParameterized2(0, 1, gText_JustOnePkmn, 0, NULL, 2, 1, 3);
                 task->data[0] = 3;
             }
@@ -1799,7 +1799,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 3:
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
@@ -1809,7 +1809,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
                 task->data[1] = 4;
             Menu_MoveCursor(-1);
             task->data[1] = Menu_GetCursorPos();
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
@@ -1819,7 +1819,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
                 task->data[1] = 0;
             Menu_MoveCursor(1);
             task->data[1] = Menu_GetCursorPos();
-            FillWindowPixelBuffer(0, 0x11);
+            FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
             AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, 0, NULL, 2, 1, 3);
             task->data[0] = 2;
         }
@@ -4107,7 +4107,7 @@ static void LoadCursorMonGfx(u16 species, u32 pid)
 
 static void PrintCursorMonInfo(void)
 {
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
     if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
         AddTextPrinterParameterized(0, 1, sPSSData->cursorMonNickText, 6, 0, TEXT_SPEED_FF, NULL);
@@ -4416,7 +4416,7 @@ static void PrintStorageActionText(u8 id)
     }
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sPSSData->field_2190, gPCStorageActionTexts[id].text);
-    FillWindowPixelBuffer(1, 0x11);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized(1, 1, sPSSData->field_2190, 0, 1, TEXT_SPEED_FF, NULL);
     sub_8098858(1, 2, 14);
     PutWindowTilemap(1);
@@ -8835,7 +8835,7 @@ static bool8 sub_80D0164(void)
         sPSSData->field_2200 = AddWindow8Bit(&gUnknown_0857BB1C);
         if (sPSSData->field_2200 != 0xFF)
         {
-            FillWindowPixelBuffer(sPSSData->field_2200, 0);
+            FillWindowPixelBuffer(sPSSData->field_2200, PIXEL_BUFFER_TRANSPARENT);
             return TRUE;
         }
     }
@@ -9911,7 +9911,7 @@ static void PrintItemDescription(void)
     else
         description = ItemId_GetDescription(sPSSData->cursorMonItem);
 
-    FillWindowPixelBuffer(2, 0x11);
+    FillWindowPixelBuffer(2, PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized5(2, 1, description, 4, 0, 0, NULL, 0, 1);
 }
 

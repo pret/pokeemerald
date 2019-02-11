@@ -543,7 +543,7 @@ void sub_8126B80(u8 taskId)
 
 void sub_8126C08(void)
 {
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized2(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
 }
 
@@ -572,7 +572,7 @@ void SecretBasePC_PutAway(u8 taskId)
     else
     {
         sub_8126A58(0);
-        sub_8197434(0, 0);
+        ClearWindowAndWideBorder(0, 0);
         FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
@@ -617,7 +617,7 @@ void sub_8126DA4(u8 taskId)
 void SecretBasePC_PrepMenuForSelectingStoredDecors(u8 taskId)
 {
     LoadPalette(gUnknown_085A6BB0, 0xd0, 0x20);
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     sub_8126A58(0);
     sub_8126DFC(taskId);
 }
@@ -634,7 +634,7 @@ void sub_8126DFC(u8 taskId)
 
 void sub_8126E44(u8 taskId)
 {
-    FillWindowPixelBuffer(sDecorMenuWindowIndices[1], 0x11);
+    FillWindowPixelBuffer(sDecorMenuWindowIndices[1], PIXEL_BUFFER_WHITE);
     sub_8126E8C(taskId);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sDecorMenuWindowIndices[1], 9, sCurDecorationCategory);
     gTasks[taskId].func = sub_8127088;
@@ -751,7 +751,7 @@ void sub_81270E8(u8 taskId)
 
 void sub_8127180(u8 taskId)
 {
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     sub_8126DFC(taskId);
 }
 
@@ -779,7 +779,7 @@ void sub_81271CC(u8 taskId)
 void sub_8127208(u8 taskId)
 {
     LoadPalette(gUnknown_085A6BB0, 0xd0, 0x20);
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     gTasks[taskId].data[11] = 2;
     sCurDecorationCategory = DECORCAT_DESK;
     sub_8126DFC(taskId);
@@ -968,7 +968,7 @@ void sub_8127744(u32 a0)
     const u8 *txt;
 
     winidx = sDecorMenuWindowIndices[3];
-    FillWindowPixelBuffer(winidx, 0x11);
+    FillWindowPixelBuffer(winidx, PIXEL_BUFFER_WHITE);
     if (a0 >= sCurDecorCatCount)
     {
         txt = gText_GoBackPrevMenu;
@@ -1095,7 +1095,7 @@ void sub_8127A14(u8 taskId)
 
 void sub_8127A30(u8 taskId)
 {
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     gTasks[taskId].func = sub_8127A14;
 }
 
@@ -1103,7 +1103,7 @@ void sub_8127A5C(u8 taskId)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, 0);
+        ClearWindowAndWideBorder(0, 0);
         sub_81269D4(1);
         sub_8127620(taskId);
     }
@@ -1634,7 +1634,7 @@ void sub_81289D0(u8 taskId)
 
 void sub_81289F0(u8 taskId)
 {
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     sub_8128AAC(taskId);
     if (gDecorations[gCurDecorInventoryItems[gCurDecorationIndex]].permission != DECORPERM_SOLID_MAT)
     {
@@ -1699,7 +1699,7 @@ void sub_8128B80(u8 taskId)
 
 void sub_8128BA0(u8 taskId)
 {
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     sub_8128BBC(taskId);
 }
 
@@ -1887,7 +1887,7 @@ void sub_8128E18(u8 taskId)
 
 void sub_8128FD8(u8 taskId)
 {
-    sub_8197434(0, 1);
+    ClearWindowAndWideBorder(0, 1);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8128E18;
@@ -2251,7 +2251,7 @@ void sub_81298EC(u8 taskId)
             if (!gPaletteFade.active) {
                 DrawWholeMapView();
                 ScriptContext1_SetupScript(EventScript_275D2E);
-                sub_8197434(0, 1);
+                ClearWindowAndWideBorder(0, 1);
                 gTasks[taskId].data[2] = 2;
             }
             break;
@@ -2343,7 +2343,7 @@ void sub_8129ABC(u8 taskId)
 
 void sub_8129B34(u8 taskId)
 {
-    sub_8197434(0, 1);
+    ClearWindowAndWideBorder(0, 1);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = sub_812A36C;
@@ -2607,7 +2607,7 @@ void sub_812A1F0(u8 taskId)
 
 void sub_812A210(u8 taskId)
 {
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     sub_812A22C(taskId);
 }
 

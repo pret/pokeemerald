@@ -403,7 +403,7 @@ static void PlayerPC_Mailbox(u8 taskId)
         ItemStorage_SetItemAndMailCount(taskId);
         if (sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         {
-            sub_8197434(0, 0);
+            ClearWindowAndWideBorder(0, 0);
             Mailbox_DrawMailboxMenu(taskId);
             gTasks[taskId].func = Mailbox_ProcessInput;
         }
@@ -560,7 +560,7 @@ static void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
     FreeAndReserveObjectSpritePalettes();
     LoadListMenuArrowsGfx();
     sub_8122344(gUnknown_0203BCC4->spriteIds, 7);
-    sub_8197434(0,0);
+    ClearWindowAndWideBorder(0,0);
     gTasks[taskId].func = ItemStorage_ProcessWithdrawTossInput;
 }
 
@@ -863,7 +863,7 @@ static void Mailbox_NoPokemonForMail(u8 taskId)
 static void Mailbox_Cancel(u8 taskId)
 {
     sub_81D1D04(2);
-    sub_8197434(0, 0);
+    ClearWindowAndWideBorder(0, 0);
     Mailbox_DrawMailboxMenu(taskId);
     schedule_bg_copy_tilemap_to_vram(0);
     gTasks[taskId].func = Mailbox_ProcessInput;
@@ -977,7 +977,7 @@ static void sub_816BEF0(s32 id)
         description = (u8 *)ItemId_GetDescription(gSaveBlock1Ptr->pcItems[id].itemId);
     else
         description = ItemStorage_GetItemPcResponse(ITEMPC_GO_BACK_TO_PREV);
-    FillWindowPixelBuffer(windowId, 17);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized(windowId, 1, description, 0, 1, 0, NULL);
 }
 
@@ -1123,7 +1123,7 @@ static const u8* ItemStorage_GetItemPcResponse(u16 itemId)
 static void ItemStorage_PrintItemPcResponse(const u8 *string)
 {
     u8 windowId = gUnknown_0203BCC4->windowIds[1];
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     StringExpandPlaceholders(gStringVar4, string);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, 0, NULL);
 }

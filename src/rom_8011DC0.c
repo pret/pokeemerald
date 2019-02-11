@@ -387,7 +387,7 @@ void nullsub_89(void)
 
 void sub_80124EC(u8 windowId, u8 arg1, u8 stringId)
 {
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     switch (arg1 << 8)
     {
     case 0x200:
@@ -786,10 +786,10 @@ void sub_8012780(u8 taskId)
 void sub_8012F64(struct UnkStruct_Leader *data)
 {
     ClearWindowTilemap(data->field_11);
-    sub_819746C(data->field_11, FALSE);
+    ClearWindowAndBorder(data->field_11, FALSE);
     DestroyListMenuTask(data->listTaskId, 0, 0);
     ClearWindowTilemap(data->field_10);
-    sub_819746C(data->listWindowId, FALSE);
+    ClearWindowAndBorder(data->listWindowId, FALSE);
     CopyBgTilemapBufferToVram(0);
     RemoveWindow(data->field_11);
     RemoveWindow(data->listWindowId);
@@ -1254,10 +1254,10 @@ void sub_80134E8(u8 taskId)
     case 18:
     case 20:
         ClearWindowTilemap(data->field_D);
-        sub_819746C(data->field_D, FALSE);
+        ClearWindowAndBorder(data->field_D, FALSE);
         DestroyListMenuTask(data->listTaskId, 0, 0);
         ClearWindowTilemap(data->field_C);
-        sub_819746C(data->listWindowId, FALSE);
+        ClearWindowAndBorder(data->listWindowId, FALSE);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->field_D);
         RemoveWindow(data->listWindowId);
@@ -2155,7 +2155,7 @@ void sub_8014F48(u8 taskId)
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
         sub_8018784(data->field_D);
-        FillWindowPixelBuffer(data->field_D, 0x11);
+        FillWindowPixelBuffer(data->field_D, PIXEL_BUFFER_WHITE);
         PutWindowTilemap(data->field_D);
         sub_80125BC(data->field_D);
         CopyWindowToVram(data->field_D, 2);

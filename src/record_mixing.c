@@ -370,7 +370,7 @@ static void Task_RecordMixing_Main(u8 taskId)
             {
                 CreateTask(sub_80AF2B4, 10);
             }
-            sub_8197434(0, 1);
+            ClearWindowAndWideBorder(0, 1);
             DestroyTask(taskId);
             EnableBothScriptContexts();
         }

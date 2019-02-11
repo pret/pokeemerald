@@ -350,7 +350,7 @@ static void sub_80C2760(u8 taskId)
     case 0:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
             sData->var_0++;
         }
         break;
@@ -363,7 +363,7 @@ static void sub_80C2760(u8 taskId)
         sData->var_0++;
         break;
     case 3:
-        FillWindowPixelBuffer(2, 0);
+        FillWindowPixelBuffer(2, PIXEL_BUFFER_TRANSPARENT);
         sub_80C4FF0();
         sub_80C438C(2);
         sData->var_0++;
@@ -1634,7 +1634,7 @@ static bool8 sub_80C4B08(struct Task* task)
         switch (sData->var_4)
         {
         case 0:
-            FillWindowPixelBuffer(1, 0);
+            FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
             FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 0x20, 0x20);
             break;
         case 1:
@@ -1659,7 +1659,7 @@ static bool8 sub_80C4B08(struct Task* task)
             if (!sData->var_8)
                 sub_80C474C();
             else
-                FillWindowPixelBuffer(2, 0);
+                FillWindowPixelBuffer(2, PIXEL_BUFFER_TRANSPARENT);
             break;
         case 4:
             if (sData->var_8)

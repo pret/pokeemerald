@@ -620,7 +620,7 @@ static void ButtonMode_DrawChoices(u8 selection)
 
 static void DrawTextOption(void)
 {
-    FillWindowPixelBuffer(WIN_TEXT_OPTION, 0x11);
+    FillWindowPixelBuffer(WIN_TEXT_OPTION, PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized(WIN_TEXT_OPTION, 1, gText_Option, 8, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(WIN_TEXT_OPTION, 3);
 }
@@ -629,7 +629,7 @@ static void DrawOptionMenuTexts(void)
 {
     u8 i;
 
-    FillWindowPixelBuffer(WIN_OPTIONS, 0x11);
+    FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_BUFFER_WHITE);
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
         AddTextPrinterParameterized(WIN_OPTIONS, 1, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);

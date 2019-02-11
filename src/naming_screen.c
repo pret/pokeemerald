@@ -1474,7 +1474,7 @@ static void HandleDpadMovement(struct Task *task)
 
 static void sub_80E4894(void)
 {
-    FillWindowPixelBuffer(gNamingScreenData->windows[3], 0x11);
+    FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, gNamingScreenData->template->title, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
@@ -1485,7 +1485,7 @@ static void sub_80E48E8(void)
 
     StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
     StringAppendN(buffer, gNamingScreenData->template->title, 15);
-    FillWindowPixelBuffer(gNamingScreenData->windows[3], 0x11);
+    FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);
 }
@@ -1672,7 +1672,7 @@ static void sub_80E4D10(void)
     u8 maxChars = gNamingScreenData->template->maxChars;
     u16 unk = gNamingScreenData->inputCharBaseXPos - 0x40;
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[2], 0x11);
+    FillWindowPixelBuffer(gNamingScreenData->windows[2], PIXEL_BUFFER_WHITE);
 
     for (i = 0; i < maxChars; i++)
     {
@@ -1766,7 +1766,7 @@ static void sub_80E4EF0(void)
 {
     const u8 color[3] = { 15, 1, 2 };
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[4], 0xFF);
+    FillWindowPixelBuffer(gNamingScreenData->windows[4], PIXEL_BUFFER_UNKNOWN);
     AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(gNamingScreenData->windows[4]);
     CopyWindowToVram(gNamingScreenData->windows[4], 3);

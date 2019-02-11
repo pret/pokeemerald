@@ -3108,7 +3108,7 @@ static void sub_81B239C(u8 a)
     }
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
     LoadUserWindowBorderGfx(0, 0x4F, 0xD0);
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
@@ -3126,7 +3126,7 @@ static void sub_81B2428(bool8 a)
         if (a == TRUE)
         {
             firstWindowId = AddWindow(&gUnknown_08615918);
-            FillWindowPixelBuffer(firstWindowId, 0);
+            FillWindowPixelBuffer(firstWindowId, PIXEL_BUFFER_TRANSPARENT);
             mainOffset = GetStringCenterAlignXOffset(0, gMenuText_Confirm, 48);
             AddTextPrinterParameterized4(firstWindowId, 0, mainOffset, 1, 0, 0, gUnknown_086157FC[0], -1, gMenuText_Confirm);
             PutWindowTilemap(firstWindowId);
@@ -3139,7 +3139,7 @@ static void sub_81B2428(bool8 a)
             windowId = AddWindow(&gUnknown_08615908);
             offset = 3;
         }
-        FillWindowPixelBuffer(windowId, 0);
+        FillWindowPixelBuffer(windowId, PIXEL_BUFFER_TRANSPARENT);
         if (gUnknown_0203CEC8.unk8_0 != 10)
         {
             mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel, 48);

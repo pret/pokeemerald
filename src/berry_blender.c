@@ -945,7 +945,7 @@ static void InitBerryBlenderWindows(void)
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 5; i++)
-            FillWindowPixelBuffer(i, 0);
+            FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         sub_81978B0(0xE0);
@@ -3538,7 +3538,7 @@ void ShowBerryBlenderRecordWindow(void)
     winTemplate = sBlenderRecordWindowTemplate;
     gRecordsWindowId = AddWindow(&winTemplate);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, 0);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);

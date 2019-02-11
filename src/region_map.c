@@ -1707,7 +1707,7 @@ static void sub_8124904(void)
             }
             else
             {
-                FillWindowPixelBuffer(0, 0x11);
+                FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
             }
             AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -1721,7 +1721,7 @@ static void sub_8124904(void)
             sub_8198070(1, FALSE);
             SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
         }
-        FillWindowPixelBuffer(0, 0x11);
+        FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
         CopyWindowToVram(0, 2);
         schedule_bg_copy_tilemap_to_vram(0);
         gUnknown_03001180 = FALSE;

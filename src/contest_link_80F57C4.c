@@ -904,7 +904,7 @@ static void sub_80F6AE8(void)
 //     windowTemplate.width = 30;
 //     windowTemplate.height = 2;
 //     windowId = AddWindow(&windowTemplate);
-//     FillWindowPixelBuffer(windowId, 0x11);
+//     FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
 //     origWidth = GetStringWidth(1, text, 0) + 9;
 //     strWidth = origWidth;
 //     if (strWidth < 0)

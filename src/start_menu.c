@@ -897,7 +897,7 @@ static void SaveGameTask(u8 taskId)
 
 static void sub_80A0014(void)
 {
-    sub_8197434(0, TRUE);
+    ClearWindowAndWideBorder(0, TRUE);
 }
 
 static void HideSaveInfoWindow(void)
@@ -943,7 +943,7 @@ static bool8 SaveErrorTimer(void)
 
 static u8 SaveConfirmSaveCallback(void)
 {
-    sub_819746C(GetStartMenuWindowId(), FALSE);
+    ClearWindowAndBorder(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveInfoWindow();
 
@@ -1135,7 +1135,7 @@ static void InitBattlePyramidRetire(void)
 
 static u8 BattlePyramidConfirmRetireCallback(void)
 {
-    sub_819746C(GetStartMenuWindowId(), FALSE);
+    ClearWindowAndBorder(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveMessage(gText_BattlePyramidConfirmRetire, BattlePyramidRetireYesNoCallback);
 
@@ -1232,7 +1232,7 @@ static void sub_80A0550(u8 taskId)
         switch (*step)
         {
         case 0:
-            FillWindowPixelBuffer(0, 17);
+            FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
             AddTextPrinterParameterized2(0,
                                         1,
                                         gText_SavingDontTurnOffPower,
@@ -1364,7 +1364,7 @@ static void ShowSaveInfoWindow(void)
 
 static void RemoveSaveInfoWindow(void)
 {
-    sub_819746C(sSaveInfoWindowId, FALSE);
+    ClearWindowAndBorder(sSaveInfoWindowId, FALSE);
     RemoveWindow(sSaveInfoWindowId);
 }
 
@@ -1386,7 +1386,7 @@ void sub_80A08CC(void) // Referenced in data/specials.inc and data/scripts/maps/
 
 static void HideStartMenuWindow(void)
 {
-    sub_819746C(GetStartMenuWindowId(), TRUE);
+    ClearWindowAndBorder(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();

@@ -127,7 +127,7 @@ static void textbox_auto_and_task_add(void)
 void HideFieldMessageBox(void)
 {
     task_del_textbox();
-    sub_8197434(0, 1);
+    ClearWindowAndWideBorder(0, 1);
     sFieldMessageBoxMode = 0;
 }
 

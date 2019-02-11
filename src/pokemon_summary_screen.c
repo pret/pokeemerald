@@ -2631,7 +2631,7 @@ static void ResetWindows(void)
 
     for (i = 0; i < 20; i++)
     {
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
     }
     for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
@@ -2646,9 +2646,9 @@ static void SummaryScreen_PrintTextOnWindow(u8 windowId, const u8 *string, u8 x,
 
 static void sub_81C25E8(void)
 {
-    FillWindowPixelBuffer(17, 0);
-    FillWindowPixelBuffer(18, 0);
-    FillWindowPixelBuffer(19, 0);
+    FillWindowPixelBuffer(17, PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(18, PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(19, PIXEL_BUFFER_TRANSPARENT);
     if (!pssData->summary.isEgg)
         sub_81C2628();
     else
@@ -2899,7 +2899,7 @@ static u8 AddWindowFromTemplateList(const struct WindowTemplate *template, u8 te
     if (*windowIdPtr == 0xFF)
     {
         *windowIdPtr = AddWindow(&template[templateId]);
-        FillWindowPixelBuffer(*windowIdPtr, 0);
+        FillWindowPixelBuffer(*windowIdPtr, PIXEL_BUFFER_TRANSPARENT);
     }
     return *windowIdPtr;
 }
@@ -2921,7 +2921,7 @@ static void PrintPageSpecificText(u8 pageIndex)
     for (i = 0; i < ARRAY_COUNT(pssData->windowIds); i++)
     {
         if (pssData->windowIds[i] != 0xFF)
-            FillWindowPixelBuffer(pssData->windowIds[i], 0);
+            FillWindowPixelBuffer(pssData->windowIds[i], PIXEL_BUFFER_TRANSPARENT);
     }
     sTextPrinterFunctions[pageIndex]();
 }
@@ -3568,7 +3568,7 @@ static void PrintContestMoveDescription(u8 moveSlot)
 static void PrintMoveDetails(u16 move)
 {
     u8 windowId = AddWindowFromTemplateList(gUnknown_0861CD14, 2);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_TRANSPARENT);
     if (move != MOVE_NONE)
     {
         if (pssData->currPageIndex == 2)
@@ -3642,7 +3642,7 @@ static void sub_81C40A0(u8 moveIndex1, u8 moveIndex2)
 static void PrintHMMovesCantBeForgotten(void)
 {
     u8 windowId = AddWindowFromTemplateList(gUnknown_0861CD14, 2);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_TRANSPARENT);
     SummaryScreen_PrintTextOnWindow(windowId, gText_HMMovesCantBeForgotten2, 6, 1, 0, 0);
 }
 

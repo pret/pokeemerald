@@ -523,7 +523,7 @@ static void Task_StarterChoose3(u8 taskId)
 static void Task_StarterChoose4(u8 taskId)
 {
     PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
-    FillWindowPixelBuffer(0, 0x11);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
     AddTextPrinterParameterized(0, 1, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
     CreateYesNoMenu(&gUnknown_085B1DDC, 0x2A8, 0xD, 0);
@@ -579,7 +579,7 @@ static void CreateStarterPokemonLabel(u8 selection)
     winTemplate.tilemapTop = gStarterChoose_LabelCoords[selection][1];
 
     sStarterChooseWindowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(sStarterChooseWindowId, 0);
+    FillWindowPixelBuffer(sStarterChooseWindowId, PIXEL_BUFFER_TRANSPARENT);
 
     width = GetStringCenterAlignXOffset(7, text, 0x68);
     AddTextPrinterParameterized3(sStarterChooseWindowId, 7, width, 1, gUnknown_085B1E0C, 0, text);
@@ -600,7 +600,7 @@ static void CreateStarterPokemonLabel(u8 selection)
 
 static void sub_8134604(void)
 {
-    FillWindowPixelBuffer(sStarterChooseWindowId, 0);
+    FillWindowPixelBuffer(sStarterChooseWindowId, PIXEL_BUFFER_TRANSPARENT);
     ClearWindowTilemap(sStarterChooseWindowId);
     RemoveWindow(sStarterChooseWindowId);
     sStarterChooseWindowId = 0xFF;

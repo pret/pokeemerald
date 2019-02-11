@@ -321,7 +321,7 @@ void ShowLinkBattleRecords(void)
 
     gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, 0x11);
+    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
     StringExpandPlaceholders(gStringVar4, gText_PlayersBattleResults);
 
     x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
@@ -342,7 +342,7 @@ void ShowLinkBattleRecords(void)
 
 void RemoveRecordsWindow(void)
 {
-    sub_819746C(gRecordsWindowId, FALSE);
+    ClearWindowAndBorder(gRecordsWindowId, FALSE);
     RemoveWindow(gRecordsWindowId);
 }
 
@@ -383,7 +383,7 @@ static void Task_ExitTrainerHillRecords(u8 taskId)
 
 static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_TRANSPARENT);
     ClearWindowTilemap(windowId);
     CopyWindowToVram(windowId, 2);
     RemoveWindow(windowId);

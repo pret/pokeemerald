@@ -1026,7 +1026,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, TRUE);
+        ClearWindowAndWideBorder(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1269,7 +1269,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
     s8 input = Menu_ProcessInputNoWrapClearOnChoose();
     if (input == 0)
     {
-        sub_8197434(0, TRUE);
+        ClearWindowAndWideBorder(0, TRUE);
         sub_8103D8C(0);
         sub_8103D8C(1);
         sub_8103D8C(2);
@@ -1278,7 +1278,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
     }
     else if (input == 1 || input == -1)
     {
-        sub_8197434(0, TRUE);
+        ClearWindowAndWideBorder(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1297,7 +1297,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, TRUE);
+        ClearWindowAndWideBorder(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1316,7 +1316,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        sub_8197434(0, TRUE);
+        ClearWindowAndWideBorder(0, TRUE);
         sSlotMachine->state = 27;
     }
     return FALSE;
@@ -3036,7 +3036,7 @@ s16 sub_8102D5C(s16 a0)
     sub_81065DC();
     AddWindow(&gUnknown_085A7444);
     PutWindowTilemap(1);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     task->data[0]++;
 }
 
@@ -3052,7 +3052,7 @@ s16 sub_8102D5C(s16 a0)
 {
     if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
     {
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
         ClearWindowTilemap(1);
         CopyWindowToVram(1, 1);
         RemoveWindow(1);

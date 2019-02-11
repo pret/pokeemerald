@@ -90,7 +90,7 @@ void CB2_InitMysteryEventMenu(void)
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 2; i++)
-            FillWindowPixelBuffer(i, 0);
+            FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         LoadUserWindowBorderGfx(0, 1u, 0xD0u);

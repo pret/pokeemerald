@@ -51,7 +51,7 @@ static void AwardBattleTowerRibbons(void);
 static void SaveBattleTowerProgress(void);
 static void sub_8163914(void);
 static void nullsub_61(void);
-static void nullsub_116(void);
+static void SpriteCB_Null6(void);
 static void sub_81642A0(void);
 static void sub_8164828(void);
 static void sub_8164B74(void);
@@ -1061,7 +1061,7 @@ static void (* const gUnknown_085DF96C[])(void) =
     SaveBattleTowerProgress,
     sub_8163914,
     nullsub_61,
-    nullsub_116,
+    SpriteCB_Null6,
     sub_81642A0,
     sub_8164828,
     sub_8164B74,
@@ -2437,7 +2437,7 @@ static void nullsub_61(void)
 
 }
 
-static void nullsub_116(void)
+static void SpriteCB_Null6(void)
 {
 
 }

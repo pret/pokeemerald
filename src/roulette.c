@@ -1052,7 +1052,7 @@ static void sub_8140914(u8 taskId)
 
 static void sub_8140968(u8 taskId)
 {
-    sub_819746C(0, TRUE);
+    ClearWindowAndBorder(0, TRUE);
     gTasks[taskId].func = sub_8140BD0;
 }
 
@@ -3272,7 +3272,7 @@ static void sub_81428E4(u8 taskId)
 
 static void sub_8142918(u8 taskId)
 {
-    sub_819746C(0, TRUE);
+    ClearWindowAndBorder(0, TRUE);
     HideCoinsWindow();
     FreeAllWindowBuffers();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -3283,7 +3283,7 @@ static void sub_8142918(u8 taskId)
 
 static void sub_814297C(u8 taskId)
 {
-    sub_819746C(0, FALSE);
+    ClearWindowAndBorder(0, FALSE);
     HideCoinsWindow();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -3296,7 +3296,7 @@ static void sub_81429A0(u8 taskId)
     {
         gSpecialVar_0x8004 = 1;
         HideCoinsWindow();
-        sub_819746C(0, TRUE);
+        ClearWindowAndBorder(0, TRUE);
         ScriptContext2_Disable();
         DestroyTask(taskId);
     }

@@ -609,7 +609,7 @@ void PrintOnTrainerHillRecordsWindow(void)
     u32 total, minutes, secondsWhole, secondsFraction;
 
     SetUpDataStruct();
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
     x = GetStringCenterAlignXOffset(1, gText_TimeBoard, 0xD0);
     AddTextPrinterParameterized3(0, 1, x, 2, sRecordWinColors, TEXT_SPEED_FF, gText_TimeBoard);
 

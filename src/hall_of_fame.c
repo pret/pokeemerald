@@ -570,7 +570,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     gSprites[spriteId].tSpecies = currMon->species;
     gSprites[spriteId].callback = SpriteCB_GetOnScreenAndAnimate;
     gTasks[taskId].tMonSpriteId(currMonId) = spriteId;
-    sub_8197434(0, TRUE);
+    ClearWindowAndWideBorder(0, TRUE);
     gTasks[taskId].func = Task_Hof_PrintMonInfoAfterAnimating;
 }
 
@@ -649,7 +649,7 @@ static void sub_8173DC0(u8 taskId)
                 gSprites[gTasks[taskId].tMonSpriteId(i)].oam.priority = 1;
         }
         BeginNormalPaletteFade(sUnknown_0203BCD4, 0, 12, 12, RGB(16, 29, 24));
-        FillWindowPixelBuffer(0, 0);
+        FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
         CopyWindowToVram(0, 3);
         gTasks[taskId].tFrameCount = 7;
         gTasks[taskId].func = sub_8173EA4;
@@ -1086,7 +1086,7 @@ static void Task_HofPC_ExitOnButtonPress(u8 taskId)
 
 static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
     PutWindowTilemap(0);
     AddTextPrinterParameterized3(0, 1, GetStringCenterAlignXOffset(1, gText_WelcomeToHOF, 0xD0), 1, sUnknown_085E5388, 0, gText_WelcomeToHOF);
     CopyWindowToVram(0, 3);
@@ -1099,7 +1099,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     s32 dexNumber;
     s32 width;
 
-    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
     PutWindowTilemap(0);
 
     // dex number
@@ -1180,7 +1180,7 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     u32 width;
     u16 trainerId;
 
-    FillWindowPixelBuffer(1, 0x11);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(1);
     SetWindowBorderStyle(1, FALSE, 0x21D, 0xD);
     AddTextPrinterParameterized3(1, 1, 0, 1, sUnknown_085E538C, -1, gText_Name);

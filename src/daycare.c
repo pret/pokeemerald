@@ -1259,7 +1259,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
             break;
         }
         DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
-        sub_819746C(gTasks[taskId].tWindowId, TRUE);
+        ClearWindowAndBorder(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
         EnableBothScriptContexts();
@@ -1268,7 +1268,7 @@ static void Task_HandleDaycareLevelMenuInput(u8 taskId)
     {
         gSpecialVar_Result = 2;
         DestroyListMenuTask(gTasks[taskId].tMenuListTaskId, NULL, NULL);
-        sub_819746C(gTasks[taskId].tWindowId, TRUE);
+        ClearWindowAndBorder(gTasks[taskId].tWindowId, TRUE);
         RemoveWindow(gTasks[taskId].tWindowId);
         DestroyTask(taskId);
         EnableBothScriptContexts();

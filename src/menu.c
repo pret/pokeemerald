@@ -126,8 +126,8 @@ const struct MoveMenuInfoIcon gMoveMenuInfoIcons[] =
 extern void sub_81973A4(void);
 extern void DrawStandardFrame(u8, u8, u8, u8, u8, u8);
 extern void DrawDialogueFrame(u8, u8, u8, u8, u8, u8);
-extern void sub_81977BC(u8, u8, u8, u8, u8, u8);
-extern void sub_8197804(u8, u8, u8, u8, u8, u8);
+extern void ClearWindowAndBorderTilemap(u8, u8, u8, u8, u8, u8);
+extern void ClearWindowAndWideBorderTilemap(u8, u8, u8, u8, u8, u8);
 extern void sub_8197BB4(u8, u8, u8, u8, u8, u8);
 extern void sub_8197E30(u8, u8, u8, u8, u8, u8);
 extern void DrawWindowBorder(u8, u8, u8, u8, u8, u8);
@@ -213,7 +213,7 @@ void sub_81973A4(void)
 void NewMenuHelpers_DrawDialogueFrame(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, DrawDialogueFrame);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -222,25 +222,25 @@ void NewMenuHelpers_DrawDialogueFrame(u8 windowId, bool8 copyToVram)
 void NewMenuHelpers_DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, DrawStandardFrame);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
 }
 
-void sub_8197434(u8 windowId, bool8 copyToVram)
+void ClearWindowAndWideBorder(u8 windowId, bool8 copyToVram)
 {
-    CallWindowFunction(windowId, sub_8197804);
-    FillWindowPixelBuffer(windowId, 0x11);
+    CallWindowFunction(windowId, ClearWindowAndWideBorderTilemap);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
 }
 
-void sub_819746C(u8 windowId, bool8 copyToVram)
+void ClearWindowAndBorder(u8 windowId, bool8 copyToVram)
 {
-    CallWindowFunction(windowId, sub_81977BC);
-    FillWindowPixelBuffer(windowId, 0x11);
+    CallWindowFunction(windowId, ClearWindowAndBorderTilemap);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -408,14 +408,17 @@ void DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height
                             DLG_WINDOW_PALETTE_NUM);
 }
 
-void sub_81977BC(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+// Clears the given window, and a 1-tile border around the window, to transparent tiles.
+void ClearWindowAndBorderTilemap(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    FillBgTilemapBufferRect(bg, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, STD_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, TRANSPARENT_TILE_NUMBER, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, STD_WINDOW_PALETTE_NUM);
 }
 
-void sub_8197804(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
+// Clears the given window, and a 1-tile border the top and bottom, plus a 3-tile border on the left and right.
+// Tiles are set to a transparent tile.
+void ClearWindowAndWideBorderTilemap(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    FillBgTilemapBufferRect(bg, 0, tilemapLeft - 3, tilemapTop - 1, width + 6, height + 2, STD_WINDOW_PALETTE_NUM);
+    FillBgTilemapBufferRect(bg, TRANSPARENT_TILE_NUMBER, tilemapLeft - 3, tilemapTop - 1, width + 6, height + 2, STD_WINDOW_PALETTE_NUM);
 }
 
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram)
@@ -554,7 +557,7 @@ void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum)
     sTileNum = tileNum;
     sPaletteNum = paletteNum;
     CallWindowFunction(windowId, sub_8197BB4);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -565,7 +568,7 @@ void sub_8197B64(u8 windowId, bool8 copyToVram, u16 tileNum)
     sTileNum = tileNum;
     sPaletteNum = GetWindowAttribute(windowId, WINDOW_PALETTE_NUM);
     CallWindowFunction(windowId, sub_8197BB4);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -669,7 +672,7 @@ void sub_8197BB4(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 p
 void sub_8197DF8(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, sub_8197E30);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_TRANSPARENT);
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -685,7 +688,7 @@ void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, u16 baseTileNum, u8 pal
     sTileNum = baseTileNum;
     sPaletteNum = paletteNum;
     CallWindowFunction(windowId, DrawWindowBorder);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -696,7 +699,7 @@ void sub_8197EC8(u8 windowId, bool8 copyToVram, u16 baseTileNum)
     sTileNum = baseTileNum;
     sPaletteNum = GetWindowAttribute(windowId, WINDOW_PALETTE_NUM);
     CallWindowFunction(windowId, DrawWindowBorder);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -765,7 +768,7 @@ void DrawWindowBorder(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height,
 void sub_8198070(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, sub_81980A8);
-    FillWindowPixelBuffer(windowId, 0);
+    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_TRANSPARENT);
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -811,7 +814,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
     if (sWindowId != 0xFF)
     {
         PutWindowTilemap(sWindowId);
-        FillWindowPixelBuffer(sWindowId, 0xFF);
+        FillWindowPixelBuffer(sWindowId, PIXEL_BUFFER_UNKNOWN);
         width = GetStringWidth(0, string, 0);
         AddTextPrinterParameterized3(sWindowId,
                   0,
@@ -845,7 +848,7 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
             color[2] = 2;
         }
         PutWindowTilemap(sWindowId);
-        FillWindowPixelBuffer(sWindowId, 0xFF);
+        FillWindowPixelBuffer(sWindowId, PIXEL_BUFFER_UNKNOWN);
         if (string2 != NULL)
         {
             width = GetStringWidth(0, string2, 0);
@@ -873,7 +876,7 @@ void sub_81982F0(void)
 {
     if (sWindowId != 0xFF)
     {
-        FillWindowPixelBuffer(sWindowId, 0xFF);
+        FillWindowPixelBuffer(sWindowId, PIXEL_BUFFER_UNKNOWN);
         CopyWindowToVram(sWindowId, 3);
     }
 }
@@ -882,7 +885,7 @@ void sub_8198314(void)
 {
     if (sWindowId != 0xFF)
     {
-        FillWindowPixelBuffer(sWindowId, 0);
+        FillWindowPixelBuffer(sWindowId, PIXEL_BUFFER_TRANSPARENT);
         ClearWindowTilemap(sWindowId);
         CopyWindowToVram(sWindowId, 3);
         RemoveWindow(sWindowId);

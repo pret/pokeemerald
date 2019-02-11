@@ -498,7 +498,7 @@ static void LearnMoveMain(void)
     case 27:
         if (!sub_81D2C3C())
         {
-            FillWindowPixelBuffer(3, 0x11);
+            FillWindowPixelBuffer(3, PIXEL_BUFFER_WHITE);
             if (sLearnMoveStruct2.showContestInfo == FALSE)
             {
                 sLearnMoveStruct->state = 3;
@@ -631,7 +631,7 @@ static void HideSpritesAndPrintTeachText(bool8 a)
     if (!a)
     {
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
-        FillWindowPixelBuffer(3, 0x11);
+        FillWindowPixelBuffer(3, PIXEL_BUFFER_WHITE);
         AddTextPrinterParameterized(3, 1, gStringVar4, 0, 1, 0, NULL);
     }
 }
@@ -695,7 +695,7 @@ static void ShowTeachMoveText(bool8 showContest)
     if (showContest == FALSE)
     {
         StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
-        FillWindowPixelBuffer(3, 0x11);
+        FillWindowPixelBuffer(3, PIXEL_BUFFER_WHITE);
         AddTextPrinterParameterized(3, 1, gStringVar4, 0, 1, 0, NULL);
     }
 }

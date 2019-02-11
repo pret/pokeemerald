@@ -651,7 +651,7 @@ static void PrintItemDescription(s32 listMenuId)
         StringExpandPlaceholders(gStringVar4, gText_ReturnToVar1);
         desc = gStringVar4;
     }
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     PrintOnWindow_Font1(1, desc, 3, 0, 0, 1, 0, 0);
 }
 
@@ -911,7 +911,7 @@ static void sub_81C5D20(u8 taskId)
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
     if (gPyramidBagResources->menuActionsCount == 1)
         sub_81C5EAC(sub_81C6D24(0));
@@ -1048,7 +1048,7 @@ static void BagAction_UseOnField(u8 taskId)
     else if (ItemId_GetFieldFunc(gSpecialVar_ItemId) != NULL)
     {
         sub_81C61A8();
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
         schedule_bg_copy_tilemap_to_vram(0);
         ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
     }
@@ -1086,7 +1086,7 @@ static void BagAction_Toss(u8 taskId)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_TossHowManyVar1s);
-        FillWindowPixelBuffer(1, 0);
+        FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
         PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
         sub_81C6404();
         gTasks[taskId].func = sub_81C64B4;
@@ -1100,7 +1100,7 @@ static void sub_81C6350(u8 taskId)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
     sub_81C6DAC(taskId, &sYesNoTossFuncions);
 }
@@ -1168,7 +1168,7 @@ static void TossItem(u8 taskId)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
     gTasks[taskId].func = sub_81C65CC;
 }
@@ -1265,7 +1265,7 @@ static void Task_BeginItemSwap(u8 taskId)
     ListMenuSetUnkIndicatorsStructField(data[0], 0x10, 1);
     CopyItemName(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][data[1]], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(1, PIXEL_BUFFER_TRANSPARENT);
     PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
     sub_81C5A98(data[0], 1);
     sub_81C704C(data[1]);
@@ -1395,7 +1395,7 @@ static void sub_81C6BD8(void)
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
 
     for (i = 0; i < 5; i++)
-        FillWindowPixelBuffer(i, 0);
+        FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
 
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -1456,7 +1456,7 @@ static void sub_81C6DAC(u8 taskId, const struct YesNoFuncTable *yesNoTable)
 
 void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback)(u8 taskId))
 {
-    FillWindowPixelBuffer(2, 0x11);
+    FillWindowPixelBuffer(2, PIXEL_BUFFER_WHITE);
     DisplayMessageAndContinueTask(taskId, 2, 0xA, 0xD, 1, GetPlayerTextSpeedDelay(), str, callback);
     schedule_bg_copy_tilemap_to_vram(1);
 }
