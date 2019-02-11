@@ -9,8 +9,8 @@
             "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
             "script": "LittlerootTown_EventScript_1E8151",
             "type": "sign",
-            "x": 37,
-            "y": 25
+            "x": 15,
+            "y": 13
         },
         {
             "elevation": 0,
@@ -35,14 +35,6 @@
             "type": "sign",
             "x": 12,
             "y": 8
-        },
-        {
-            "elevation": 0,
-            "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-            "script": "LittlerootTown_EventScript_1E8151",
-            "type": "sign",
-            "x": 38,
-            "y": 25
         }
     ],
     "connections": null,
@@ -70,7 +62,7 @@
             "script": "LittlerootTown_EventScript_1E811F",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "1",
+            "var_value": "0",
             "x": 11,
             "y": 1
         },
@@ -79,7 +71,7 @@
             "script": "LittlerootTown_EventScript_1E81F9",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "3",
+            "var_value": "0",
             "x": 8,
             "y": 9
         },
@@ -88,7 +80,7 @@
             "script": "LittlerootTown_EventScript_1E8205",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "3",
+            "var_value": "0",
             "x": 9,
             "y": 9
         },
@@ -97,7 +89,7 @@
             "script": "LittlerootTown_EventScript_1E81E1",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "3",
+            "var_value": "0",
             "x": 10,
             "y": 9
         },
@@ -106,7 +98,7 @@
             "script": "LittlerootTown_EventScript_1E81ED",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "3",
+            "var_value": "0",
             "x": 11,
             "y": 9
         },
@@ -115,7 +107,7 @@
             "script": "LittlerootTown_EventScript_1E81BB",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "3",
+            "var_value": "0",
             "x": 10,
             "y": 2
         },
@@ -124,7 +116,7 @@
             "script": "LittlerootTown_EventScript_1E81CE",
             "type": "trigger",
             "var": "VAR_0x4050",
-            "var_value": "3",
+            "var_value": "0",
             "x": 11,
             "y": 2
         }
@@ -158,8 +150,8 @@
             "script": "LittlerootTown_EventScript_1E8022",
             "trainer_sight_or_berry_tree_id": "0",
             "trainer_type": "0",
-            "x": 12,
-            "y": 13
+            "x": 26,
+            "y": 18
         },
         {
             "elevation": 3,

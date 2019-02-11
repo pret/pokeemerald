@@ -224,7 +224,9 @@ LittlerootTown_EventScript_1E8013:: @ 81E8013
 	end
 
 LittlerootTown_EventScript_1E8022:: @ 81E8022
+	drawmonpic SPECIES_CYNDAQUIL, 10, 3
 	msgbox LittlerootTown_Text_1E8ACF, MSGBOX_NPC
+	erasemonpic
 	end
 
 LittlerootTown_EventScript_1E802B:: @ 81E802B
