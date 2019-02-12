@@ -5,51 +5,6 @@
 
 	.text
 
-
-	thumb_func_start sub_81C72BC
-sub_81C72BC: @ 81C72BC
-	push {r4,lr}
-	bl UpdatePaletteFade
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _081C7320
-	ldr r4, =gUnknown_0203CF40
-	movs r0, 0x5C
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _081C72F0
-	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl SetMainCallback2
-	b _081C7320
-	.pool
-_081C72F0:
-	bl sub_81C7360
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x8]
-	bl ResetTasks
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, =sub_81C742C
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81C7400
-	bl SetMainCallback2
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-_081C7320:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72BC
-
 	thumb_func_start sub_81C7334
 sub_81C7334: @ 81C7334
 	push {r4,lr}

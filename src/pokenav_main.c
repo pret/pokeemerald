@@ -4,54 +4,27 @@
 #include "main.h"
 #include "overworld.h"
 #include "field_weather.h"
+#include "palette.h"
 
-/*
+// Can confirm the size is correct on line 287 of the generated pokenav_main.s
+// file. The expected size is 0x5C.
+struct UnknownStruct_0203CF40 {
+	u8 data1[8];
+	u16 field_0;
+	u8 data[0x52];
+};
 
-	thumb_func_start CB2_PokeNav
-CB2_PokeNav: @ 81C7250
-	push {r4,lr}
-	ldr r4, =gUnknown_0203CF40
-	movs r0, 0x5C
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _081C7270
-	ldr r0, =CB2_ReturnToFieldWithOpenMenu
-	bl SetMainCallback2
-	b _081C7292
-	.pool
-_081C7270:
-	bl sub_81C7360
-	bl ResetTasks
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, =sub_81C742C
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81C7400
-	bl SetMainCallback2
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-_081C7292:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CB2_PokeNav
+extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
+extern u8 gUnknown_0203CF3C;
 
-*/
-
-extern u8* gUnknown_0203CF40;
 extern void sub_81C7360(void);
 extern void sub_81C742C(u8 taskId);
 extern void sub_81C7400(void);
 extern void sub_81C7418(void);
-
-
-
-extern u8 gUnknown_0203CF3C;
 extern void sub_81C7170(u8 a0);
 extern void sub_81C71E4(u8 a0);
+
+void sub_81C72BC(void);
 
 u32 sub_81C7078(u32 (*a0)(u32), u32 a1)
 {
@@ -162,7 +135,7 @@ void sub_81C71E4(u8 taskId) {
 
 void CB2_PokeNav(void)
 {
-    gUnknown_0203CF40 = Alloc(0x5C);
+    gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
     if (gUnknown_0203CF40 == NULL) {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
     } else {
@@ -175,24 +148,27 @@ void CB2_PokeNav(void)
     }
 }
 
-/*
-	thumb_func_start sub_81C72A4
-sub_81C72A4: @ 81C72A4
-	push {lr}
-	ldr r0, =sub_81C72BC
-	bl SetMainCallback2
-	movs r0, 0x1
-	movs r1, 0
-	bl FadeScreen
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72A4
-*/
-
-extern void sub_81C72BC(void);
-
 void sub_81C72A4() {
 	SetMainCallback2(sub_81C72BC);
 	FadeScreen(1, 0);
+}
+
+void sub_81C72BC() {
+	UpdatePaletteFade();
+	if (!gPaletteFade.active) {
+		gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
+		if (gUnknown_0203CF40 == NULL) {
+			SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+		} else {
+			sub_81C7360();
+			gUnknown_0203CF40->field_0 = 1;
+			ResetTasks();
+			ResetSpriteData();
+			FreeAllSpritePalettes();
+			SetVBlankCallback(NULL);
+			CreateTask(sub_81C742C, 0);
+			SetMainCallback2(sub_81C7400);
+			SetVBlankCallback(sub_81C7418);
+		}
+	}
 }
