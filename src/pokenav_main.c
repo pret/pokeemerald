@@ -239,3 +239,9 @@ void sub_81C7400() {
 	BuildOamBuffer();
 	UpdatePaletteFade();
 }
+
+void sub_81C7418() {
+	TransferPlttBuffer();
+	LoadOam();
+	ProcessSpriteCopyRequests();
+}

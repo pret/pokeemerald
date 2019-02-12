@@ -5,16 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C7418
-sub_81C7418: @ 81C7418
-	push {lr}
-	bl TransferPlttBuffer
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7418
-
 	thumb_func_start sub_81C742C
 sub_81C742C: @ 81C742C
 	push {r4-r7,lr}
