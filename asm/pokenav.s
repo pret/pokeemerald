@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C7170
-sub_81C7170: @ 81C7170
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetWordTaskArg
-	adds r6, r0, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r7, 0
-_081C718C:
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	bl _call_via_r6
-	cmp r0, 0x4
-	bhi _081C71D6
-	lsls r0, 2
-	ldr r1, =_081C71AC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C71AC:
-	.4byte _081C71C6
-	.4byte _081C71C0
-	.4byte _081C71DE
-	.4byte _081C71DA
-	.4byte _081C71CE
-_081C71C0:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _081C71D8
-_081C71C6:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _081C71DE
-_081C71CE:
-	adds r0, r5, 0
-	bl DestroyTask
-	b _081C71DE
-_081C71D6:
-	subs r0, 0x5
-_081C71D8:
-	strh r0, [r4]
-_081C71DA:
-	cmp r7, 0
-	beq _081C718C
-_081C71DE:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7170
-
 	thumb_func_start sub_81C71E4
 sub_81C71E4: @ 81C71E4
 	push {r4,r5,lr}

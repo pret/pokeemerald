@@ -66,7 +66,7 @@ extern u8 gUnknown_0203CF3C;
 extern void sub_81C7170(u8 a0);
 extern void sub_81C71E4(u8 a0);
 
-u32 sub_81C7078(s32 a0, u32 a1)
+u32 sub_81C7078(u32 (*a0)(u32), u32 a1)
 {
     u16 taskId;
 
@@ -75,7 +75,7 @@ u32 sub_81C7078(s32 a0, u32 a1)
 	else
         taskId = CreateTask(sub_81C71E4, a1);
 
-    SetWordTaskArg(taskId, 1, a0);
+    SetWordTaskArg(taskId, 1, (u32)a0);
 
     gTasks[taskId].data[3] = gUnknown_0203CF3C;
     return ((gUnknown_0203CF3C++) << 16) | taskId;
@@ -112,4 +112,36 @@ bool32 sub_81C7124(u32 a0)
 		}
 	}
 	return FALSE;
+}
+
+void sub_81C7170(u8 taskId)
+{
+	s16 *dataPtr;
+	u32 (*func)(u32);
+	bool32 exitLoop;
+
+	func = (u32 (*)(u32))GetWordTaskArg(taskId, 1);
+	dataPtr = gTasks[taskId].data;
+	exitLoop = FALSE;
+	while (!exitLoop) {
+		u32 v1 =((u32 (*)(u32))func)(dataPtr[0]); 
+		switch (v1) {
+		case 1:
+			dataPtr[0] = dataPtr[0] + 1;
+			break;
+		case 0:
+			dataPtr[0]++;
+			return;
+		case 4:
+			DestroyTask(taskId);
+			return;
+		default:
+			dataPtr[0] = v1 - 5;
+			break;
+		case 3:
+			break;
+		case 2:
+			return;
+		}
+	}
 }
