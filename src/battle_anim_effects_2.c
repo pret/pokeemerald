@@ -1264,7 +1264,7 @@ void sub_8103448(struct Sprite *sprite)
     sprite->data[3] = gBattleAnimArgs[5];
     sprite->data[4] = gBattleAnimArgs[3];
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
-    sprite->callback = sub_80A6450;
+    sprite->callback = TranslateSpriteInEllipseOverDuration;
     sprite->callback(sprite);
 }
 
@@ -2318,7 +2318,7 @@ void Anim_BreathPuff(struct Sprite *sprite)
     sprite->data[3] = 0;
     sprite->data[4] = 0;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
-    sprite->callback = AnimTranslateLinearSimple;
+    sprite->callback = TranslateSpriteLinearFixedPoint;
 }
 
 // Animates an "angry" mark above a mon's head.
@@ -3291,7 +3291,7 @@ static void sub_810627C(struct Sprite *sprite)
 
 void sub_81062E8(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -3304,16 +3304,16 @@ void sub_81062E8(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80A6B30(&unknownStruct);
-    sub_80A6CC0(unknownStruct.bgId, &gUnknown_08C232E0, unknownStruct.tilesOffset);
-    sub_80A6D60(&unknownStruct, &gUnknown_08C23D78, 0);
-    LoadCompressedPalette(&gUnknown_08C23D50, unknownStruct.unk8 << 4, 32);
+    sub_80A6B30(&animBg);
+    AnimLoadCompressedBgGfx(animBg.bgId, &gUnknown_08C232E0, animBg.tilesOffset);
+    sub_80A6D60(&animBg, &gUnknown_08C23D78, 0);
+    LoadCompressedPalette(&gUnknown_08C23D50, animBg.paletteId * 16, 32);
     gTasks[taskId].func = sub_81063A8;
 }
 
 static void sub_81063A8(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     switch (gTasks[taskId].data[12])
     {
@@ -3351,8 +3351,8 @@ static void sub_81063A8(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&unknownStruct);
-        sub_80A6C68(unknownStruct.bgId);
+        sub_80A6B30(&animBg);
+        sub_80A6C68(animBg.bgId);
         gTasks[taskId].data[12]++;
         break;
     case 4:
@@ -3369,7 +3369,7 @@ static void sub_81063A8(u8 taskId)
 
 void sub_81064F8(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
@@ -3382,22 +3382,22 @@ void sub_81064F8(u8 taskId)
     gBattle_BG1_Y = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    sub_80A6B30(&unknownStruct);
+    sub_80A6B30(&animBg);
     if (IsContest())
-        sub_80A6D60(&unknownStruct, &gBattleAnimBackgroundTilemap_ScaryFaceContest, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFaceContest, 0);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        sub_80A6D60(&unknownStruct, &gBattleAnimBackgroundTilemap_ScaryFacePlayer, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFacePlayer, 0);
     else
-        sub_80A6D60(&unknownStruct, &gBattleAnimBackgroundTilemap_ScaryFaceOpponent, 0);
+        sub_80A6D60(&animBg, &gBattleAnimBackgroundTilemap_ScaryFaceOpponent, 0);
 
-    sub_80A6CC0(unknownStruct.bgId, gUnknown_08C249F8, unknownStruct.tilesOffset);
-    LoadCompressedPalette(gUnknown_08C249D0, unknownStruct.unk8 << 4, 32);
+    AnimLoadCompressedBgGfx(animBg.bgId, gUnknown_08C249F8, animBg.tilesOffset);
+    LoadCompressedPalette(gUnknown_08C249D0, animBg.paletteId * 16, 32);
     gTasks[taskId].func = sub_81065EC;
 }
 
 static void sub_81065EC(u8 taskId)
 {
-    struct UnknownAnimStruct2 unknownStruct;
+    struct BattleAnimBgData animBg;
 
     switch (gTasks[taskId].data[12])
     {
@@ -3435,7 +3435,7 @@ static void sub_81065EC(u8 taskId)
         }
         break;
     case 3:
-        sub_80A6B30(&unknownStruct);
+        sub_80A6B30(&animBg);
         sub_80A6C68(1);
         sub_80A6C68(2);
         gTasks[taskId].data[12]++;
@@ -3804,7 +3804,7 @@ void sub_8106F60(struct Sprite *sprite)
         sprite->callback = sub_8107018;
 
         sprite->data[0] = 0;
-        oamt_add_pos2_onto_pos1(sprite);
+        SetSpritePrimaryCoordsFromSecondaryCoords(sprite);
         sprite->data[2] = 5;
         sprite->data[4] = 0;
         sprite->data[3] = 0;

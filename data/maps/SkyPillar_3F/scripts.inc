@@ -8,6 +8,6 @@ SkyPillar_3F_MapScript1_239661: @ 8239661
 	end
 
 SkyPillar_3F_EventScript_23966D:: @ 823966D
-	setmaplayoutindex LAYOUT_UNKNOWN_MAP_084812A4
+	setmaplayoutindex LAYOUT_SKY_PILLAR_3F_CLEAN
 	return
 

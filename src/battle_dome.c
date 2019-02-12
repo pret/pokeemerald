@@ -17,6 +17,7 @@
 #include "text.h"
 #include "bg.h"
 #include "window.h"
+#include "strings.h"
 #include "palette.h"
 #include "decompress.h"
 #include "party_menu.h"
@@ -59,177 +60,62 @@ struct UnkStruct_860DD10
 };
 
 // text
-extern const u8 gTrainerClassNames[][0xD];
-
-extern const u8 gBattleDomeOpponentPotential1[];
-extern const u8 gBattleDomeOpponentPotential2[];
-extern const u8 gBattleDomeOpponentPotential3[];
-extern const u8 gBattleDomeOpponentPotential4[];
-extern const u8 gBattleDomeOpponentPotential5[];
-extern const u8 gBattleDomeOpponentPotential6[];
-extern const u8 gBattleDomeOpponentPotential7[];
-extern const u8 gBattleDomeOpponentPotential8[];
-extern const u8 gBattleDomeOpponentPotential9[];
-extern const u8 gBattleDomeOpponentPotential10[];
-extern const u8 gBattleDomeOpponentPotential11[];
-extern const u8 gBattleDomeOpponentPotential12[];
-extern const u8 gBattleDomeOpponentPotential13[];
-extern const u8 gBattleDomeOpponentPotential14[];
-extern const u8 gBattleDomeOpponentPotential15[];
-extern const u8 gBattleDomeOpponentPotential16[];
-extern const u8 gBattleDomeOpponentPotential17[];
-extern const u8 gBattleDomeOpponentStyle1[];
-extern const u8 gBattleDomeOpponentStyle2[];
-extern const u8 gBattleDomeOpponentStyle3[];
-extern const u8 gBattleDomeOpponentStyle4[];
-extern const u8 gBattleDomeOpponentStyle5[];
-extern const u8 gBattleDomeOpponentStyle6[];
-extern const u8 gBattleDomeOpponentStyle7[];
-extern const u8 gBattleDomeOpponentStyle8[];
-extern const u8 gBattleDomeOpponentStyle9[];
-extern const u8 gBattleDomeOpponentStyle10[];
-extern const u8 gBattleDomeOpponentStyle11[];
-extern const u8 gBattleDomeOpponentStyle12[];
-extern const u8 gBattleDomeOpponentStyle13[];
-extern const u8 gBattleDomeOpponentStyle14[];
-extern const u8 gBattleDomeOpponentStyle15[];
-extern const u8 gBattleDomeOpponentStyle16[];
-extern const u8 gBattleDomeOpponentStyle17[];
-extern const u8 gBattleDomeOpponentStyle18[];
-extern const u8 gBattleDomeOpponentStyle19[];
-extern const u8 gBattleDomeOpponentStyle20[];
-extern const u8 gBattleDomeOpponentStyle21[];
-extern const u8 gBattleDomeOpponentStyle22[];
-extern const u8 gBattleDomeOpponentStyle23[];
-extern const u8 gBattleDomeOpponentStyle24[];
-extern const u8 gBattleDomeOpponentStyle25[];
-extern const u8 gBattleDomeOpponentStyle26[];
-extern const u8 gBattleDomeOpponentStyle27[];
-extern const u8 gBattleDomeOpponentStyle28[];
-extern const u8 gBattleDomeOpponentStyleUnused1[];
-extern const u8 gBattleDomeOpponentStyleUnused2[];
-extern const u8 gBattleDomeOpponentStyleUnused3[];
-extern const u8 gBattleDomeOpponentStyleUnused4[];
-extern const u8 gBattleDomeOpponentStats1[];
-extern const u8 gBattleDomeOpponentStats2[];
-extern const u8 gBattleDomeOpponentStats3[];
-extern const u8 gBattleDomeOpponentStats4[];
-extern const u8 gBattleDomeOpponentStats5[];
-extern const u8 gBattleDomeOpponentStats6[];
-extern const u8 gBattleDomeOpponentStats7[];
-extern const u8 gBattleDomeOpponentStats8[];
-extern const u8 gBattleDomeOpponentStats9[];
-extern const u8 gBattleDomeOpponentStats10[];
-extern const u8 gBattleDomeOpponentStats11[];
-extern const u8 gBattleDomeOpponentStats12[];
-extern const u8 gBattleDomeOpponentStats13[];
-extern const u8 gBattleDomeOpponentStats14[];
-extern const u8 gBattleDomeOpponentStats15[];
-extern const u8 gBattleDomeOpponentStats16[];
-extern const u8 gBattleDomeOpponentStats17[];
-extern const u8 gBattleDomeOpponentStats18[];
-extern const u8 gBattleDomeOpponentStats19[];
-extern const u8 gBattleDomeOpponentStats20[];
-extern const u8 gBattleDomeOpponentStats21[];
-extern const u8 gBattleDomeOpponentStats22[];
-extern const u8 gBattleDomeOpponentStats23[];
-extern const u8 gBattleDomeOpponentStats24[];
-extern const u8 gBattleDomeOpponentStats25[];
-extern const u8 gBattleDomeOpponentStats26[];
-extern const u8 gBattleDomeOpponentStats27[];
-extern const u8 gBattleDomeOpponentStats28[];
-extern const u8 gBattleDomeOpponentStats29[];
-extern const u8 gBattleDomeOpponentStats30[];
-extern const u8 gBattleDomeOpponentStats31[];
-extern const u8 gBattleDomeOpponentStats32[];
-extern const u8 gBattleDomeOpponentStats33[];
-extern const u8 gBattleDomeOpponentStats34[];
-extern const u8 gBattleDomeOpponentStats35[];
-extern const u8 gBattleDomeOpponentStats36[];
-extern const u8 gBattleDomeOpponentStats37[];
-extern const u8 gBattleDomeOpponentStats38[];
-extern const u8 gBattleDomeOpponentStats39[];
-extern const u8 gBattleDomeOpponentStats40[];
-extern const u8 gBattleDomeOpponentStats41[];
-extern const u8 gBattleDomeOpponentStats42[];
-extern const u8 gBattleDomeOpponentStats43[];
-extern const u8 gBattleDomeMatchNumber1[];
-extern const u8 gBattleDomeMatchNumber2[];
-extern const u8 gBattleDomeMatchNumber3[];
-extern const u8 gBattleDomeMatchNumber4[];
-extern const u8 gBattleDomeMatchNumber5[];
-extern const u8 gBattleDomeMatchNumber6[];
-extern const u8 gBattleDomeMatchNumber7[];
-extern const u8 gBattleDomeMatchNumber8[];
-extern const u8 gBattleDomeMatchNumber9[];
-extern const u8 gBattleDomeMatchNumber10[];
-extern const u8 gBattleDomeMatchNumber11[];
-extern const u8 gBattleDomeMatchNumber12[];
-extern const u8 gBattleDomeMatchNumber13[];
-extern const u8 gBattleDomeMatchNumber14[];
-extern const u8 gBattleDomeMatchNumber15[];
-extern const u8 gBattleDomeWinStrings1[];
-extern const u8 gBattleDomeWinStrings2[];
-extern const u8 gBattleDomeWinStrings3[];
-extern const u8 gBattleDomeWinStrings4[];
-extern const u8 gBattleDomeWinStrings5[];
-extern const u8 gBattleDomeWinStrings6[];
-extern const u8 gBattleDomeWinStrings7[];
+extern const u8 gTrainerClassNames[][13];
 
 // This file's functions.
 static u8 GetDomeTrainerMonIvs(u16 trainerId);
-static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray);
-static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats);
-static void CreateDomeTrainerMons(u16 tournamentTrainerId);
-static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
-static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
-static s32 GetTypeEffectivenessPoints(s32 move, s32 species, s32 arg2);
-static s32 sub_818FEB4(s32 *arr, bool8 arg1);
-static void sub_8190400(u8 taskId);
+static void SwapDomeTrainers(int id1, int id2, u16 *statsArray);
+static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats);
+static void CreateDomeOpponentMons(u16 tournamentTrainerId);
+static int sub_818FCBC(u16 tournamentTrainerId, bool8 arg1);
+static int sub_818FDB8(u16 tournamentTrainerId, bool8 arg1);
+static int GetTypeEffectivenessPoints(int move, int species, int arg2);
+static int sub_818FEB4(int *arr, bool8 arg1);
+static void Task_ShowOpponentInfo(u8 taskId);
 static void sub_8190CD4(u8 taskId);
 static u8 sub_819221C(u8 taskId);
-static void sub_8194D48(void);
-static s32 TrainerIdToTournamentId(u16 trainerId);
+static void InitDomeFacilityTrainersAndMons(void);
+static int TrainerIdToTournamentId(u16 trainerId);
 static u16 TrainerIdOfPlayerOpponent(void);
-static void sub_8194220(u8 taskId);
+static void Task_ShowTourneyTree(u8 taskId);
 static void sub_8194950(u8 taskId);
 static void CB2_BattleDome(void);
 static void VblankCb0_BattleDome(void);
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId);
-static s32 sub_8192F08(u8, u8*);
+static int sub_8192F08(u8, u8*);
 static u8 GetDomeBrainTrainerPicId(void);
 static u8 GetDomeBrainTrainerClass(void);
-static void CopyDomeBrainTrainerName(u8 *dst);
-static void CopyDomeTrainerName(u8 *dst, u16 trainerId);
+static void CopyDomeBrainTrainerName(u8 *str);
+static void CopyDomeTrainerName(u8 *str, u16 trainerId);
 static void HblankCb_BattleDome(void);
 static void VblankCb1_BattleDome(void);
-static u8 sub_8193BDC(u8 taskId);
+static u8 UpdateTourneyTreeCursor(u8 taskId);
 static void DecideRoundWinners(u8 roundId);
 static u8 sub_81953E8(u8 tournamentId, u8);
 static void sub_81948EC(u8, u8);
 static void sub_8190B40(struct Sprite *sprite);
 static void sub_8190C6C(struct Sprite *sprite);
-static void sub_818E9CC(void);
-static void sub_818EA84(void);
-static void sub_818ED28(void);
-static void sub_818F9B0(void);
-static void sub_818F9E0(void);
-static void sub_818FA20(void);
+static void InitDomeChallenge(void);
+static void GetDomeData(void);
+static void SetDomeData(void);
+static void BufferDomeRoundText(void);
+static void BufferDomeOpponentName(void);
+static void InitDomeOpponentParty(void);
 static void ShowDomeOpponentInfo(void);
-static void sub_81938A4(void);
-static void sub_81938E0(void);
-static void sub_8190298(void);
-static void sub_81902E4(void);
-static void sub_8193D40(void);
-static void sub_8193D7C(void);
+static void ShowDomeTourneyTree(void);
+static void ShowPreviousDomeResultsTourneyTree(void);
+static void SetDomeOpponentId(void);
+static void SetDomeOpponentGraphicsId(void);
+static void ShowNonInteractiveDomeTourneyTree(void);
+static void ResolveDomeRoundWinners(void);
 static void sub_81902F8(void);
-static void sub_819033C(void);
-static void sub_8194D68(void);
-static void sub_8194E44(void);
-static void sub_8194EB4(void);
-static void sub_8194EC0(void);
-static void sub_8194EF8(void);
+static void UpdateDomeStreaks(void);
+static void RestoreDomePlayerParty(void);
+static void RestoreDomePlayerPartyHeldItems(void);
+static void ReduceDomePlayerPartyTo3Mons(void);
+static void GetPlayerSeededBeforeOpponent(void);
+static void BufferLastDomeWinnerName(void);
 static void sub_8194F58(void);
 static void InitDomeTrainers(void);
 
@@ -645,7 +531,7 @@ static const u8 sUnusedArray[] =
     0, 0, 0, 254, 0, 0, 0, 0, 0,
 };
 
-static const u8 gUnknown_0860CBF1[][5][4]=
+static const u8 sTourneyTreeCursorMovementMap[][5][4]=
 {
     {{0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}, {0x07, 0x01, 0x08, 0x10}},
     {{0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}, {0x00, 0x02, 0x09, 0x10}},
@@ -960,14 +846,14 @@ static const struct WindowTemplate gUnknown_0860CEB4[] =
     // UB: No DUMMY_WIN_TEMPLATE at the array's end.
 };
 
-static const struct ScanlineEffectParams gUnknown_0860CF44 =
+static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 {
     .dmaDest = (void *)REG_ADDR_BG3CNT,
-    .dmaControl = 0xa2600001,
+    .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
     .initState = 1,
 };
 
-static const struct CompressedSpriteSheet gUnknown_0860CF50[] =
+static const struct CompressedSpriteSheet sDomeOptionsSpriteSheet[] =
 {
     {gBattleFrontierGfx_DomeOptions, 0x0600, 0x0000},
     {},
@@ -1191,34 +1077,31 @@ static const struct SpriteTemplate gUnknown_0860D068 =
     .callback = sub_8190C6C
 };
 
-static const u8 gUnknown_0860D080[DOME_TOURNAMENT_TRAINERS_COUNT] =
-{
-    0x00, 0x08, 0x0c, 0x04, 0x07, 0x0f, 0x0b, 0x03, 0x02, 0x0a, 0x0e, 0x06, 0x05, 0x0d, 0x09, 0x01
-};
+static const u8 sTourneyTreeTrainerIds[] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
 
-static void (* const gUnknown_0860D090[])(void) =
+static void (* const sBattleDomeFunctions[])(void) =
 {
-    sub_818E9CC,
-    sub_818EA84,
-    sub_818ED28,
-    sub_818F9B0,
-    sub_818F9E0,
-    sub_818FA20,
+    InitDomeChallenge,
+    GetDomeData,
+    SetDomeData,
+    BufferDomeRoundText,
+    BufferDomeOpponentName,
+    InitDomeOpponentParty,
     ShowDomeOpponentInfo,
-    sub_81938A4,
-    sub_81938E0,
-    sub_8190298,
-    sub_81902E4,
-    sub_8193D40,
-    sub_8193D7C,
+    ShowDomeTourneyTree,
+    ShowPreviousDomeResultsTourneyTree,
+    SetDomeOpponentId,
+    SetDomeOpponentGraphicsId,
+    ShowNonInteractiveDomeTourneyTree,
+    ResolveDomeRoundWinners,
     sub_81902F8,
-    sub_819033C,
-    sub_8194D48,
-    sub_8194D68,
-    sub_8194E44,
-    sub_8194EB4,
-    sub_8194EC0,
-    sub_8194EF8,
+    UpdateDomeStreaks,
+    InitDomeFacilityTrainersAndMons,
+    RestoreDomePlayerParty,
+    RestoreDomePlayerPartyHeldItems,
+    ReduceDomePlayerPartyTo3Mons,
+    GetPlayerSeededBeforeOpponent,
+    BufferLastDomeWinnerName,
     sub_8194F58,
     InitDomeTrainers,
 };
@@ -1293,108 +1176,108 @@ static const u8 gUnknown_0860D1A0[][4] =
 
 static const u8 gUnknown_0860D1C0[] = {0x00, 0x0f, 0x08, 0x07, 0x03, 0x0c, 0x0b, 0x04, 0x01, 0x0e, 0x09, 0x06, 0x02, 0x0d, 0x0a, 0x05};
 
-static const u8 *const gBattleDomePotentialPointers[] =
+static const u8 *const sBattleDomePotentialTexts[] =
 {
-    gBattleDomeOpponentPotential1,
-    gBattleDomeOpponentPotential2,
-    gBattleDomeOpponentPotential3,
-    gBattleDomeOpponentPotential4,
-    gBattleDomeOpponentPotential5,
-    gBattleDomeOpponentPotential6,
-    gBattleDomeOpponentPotential7,
-    gBattleDomeOpponentPotential8,
-    gBattleDomeOpponentPotential9,
-    gBattleDomeOpponentPotential10,
-    gBattleDomeOpponentPotential11,
-    gBattleDomeOpponentPotential12,
-    gBattleDomeOpponentPotential13,
-    gBattleDomeOpponentPotential14,
-    gBattleDomeOpponentPotential15,
-    gBattleDomeOpponentPotential16,
-    gBattleDomeOpponentPotential17,
+    gBattleDomeOpponentPotentialText1,
+    gBattleDomeOpponentPotentialText2,
+    gBattleDomeOpponentPotentialText3,
+    gBattleDomeOpponentPotentialText4,
+    gBattleDomeOpponentPotentialText5,
+    gBattleDomeOpponentPotentialText6,
+    gBattleDomeOpponentPotentialText7,
+    gBattleDomeOpponentPotentialText8,
+    gBattleDomeOpponentPotentialText9,
+    gBattleDomeOpponentPotentialText10,
+    gBattleDomeOpponentPotentialText11,
+    gBattleDomeOpponentPotentialText12,
+    gBattleDomeOpponentPotentialText13,
+    gBattleDomeOpponentPotentialText14,
+    gBattleDomeOpponentPotentialText15,
+    gBattleDomeOpponentPotentialText16,
+    gBattleDomeOpponentPotentialText17,
 };
 
-static const u8 *const gBattleDomeOpponentStylePointers[] =
+static const u8 *const sBattleDomeOpponentStyleTexts[] =
 {
-    gBattleDomeOpponentStyle1,
-    gBattleDomeOpponentStyle2,
-    gBattleDomeOpponentStyle3,
-    gBattleDomeOpponentStyle4,
-    gBattleDomeOpponentStyle5,
-    gBattleDomeOpponentStyle6,
-    gBattleDomeOpponentStyle7,
-    gBattleDomeOpponentStyle8,
-    gBattleDomeOpponentStyle9,
-    gBattleDomeOpponentStyle10,
-    gBattleDomeOpponentStyle11,
-    gBattleDomeOpponentStyle12,
-    gBattleDomeOpponentStyle13,
-    gBattleDomeOpponentStyle14,
-    gBattleDomeOpponentStyle15,
-    gBattleDomeOpponentStyle16,
-    gBattleDomeOpponentStyle17,
-    gBattleDomeOpponentStyle18,
-    gBattleDomeOpponentStyle19,
-    gBattleDomeOpponentStyle20,
-    gBattleDomeOpponentStyle21,
-    gBattleDomeOpponentStyle22,
-    gBattleDomeOpponentStyle23,
-    gBattleDomeOpponentStyle24,
-    gBattleDomeOpponentStyle25,
-    gBattleDomeOpponentStyle26,
-    gBattleDomeOpponentStyle27,
-    gBattleDomeOpponentStyle28,
-    gBattleDomeOpponentStyleUnused1,
-    gBattleDomeOpponentStyleUnused2,
-    gBattleDomeOpponentStyleUnused3,
-    gBattleDomeOpponentStyleUnused4,
+    gBattleDomeOpponentStyleText1,
+    gBattleDomeOpponentStyleText2,
+    gBattleDomeOpponentStyleText3,
+    gBattleDomeOpponentStyleText4,
+    gBattleDomeOpponentStyleText5,
+    gBattleDomeOpponentStyleText6,
+    gBattleDomeOpponentStyleText7,
+    gBattleDomeOpponentStyleText8,
+    gBattleDomeOpponentStyleText9,
+    gBattleDomeOpponentStyleText10,
+    gBattleDomeOpponentStyleText11,
+    gBattleDomeOpponentStyleText12,
+    gBattleDomeOpponentStyleText13,
+    gBattleDomeOpponentStyleText14,
+    gBattleDomeOpponentStyleText15,
+    gBattleDomeOpponentStyleText16,
+    gBattleDomeOpponentStyleText17,
+    gBattleDomeOpponentStyleText18,
+    gBattleDomeOpponentStyleText19,
+    gBattleDomeOpponentStyleText20,
+    gBattleDomeOpponentStyleText21,
+    gBattleDomeOpponentStyleText22,
+    gBattleDomeOpponentStyleText23,
+    gBattleDomeOpponentStyleText24,
+    gBattleDomeOpponentStyleText25,
+    gBattleDomeOpponentStyleText26,
+    gBattleDomeOpponentStyleText27,
+    gBattleDomeOpponentStyleText28,
+    gBattleDomeOpponentStyleTextUnused1,
+    gBattleDomeOpponentStyleTextUnused2,
+    gBattleDomeOpponentStyleTextUnused3,
+    gBattleDomeOpponentStyleTextUnused4,
 };
 
-static const u8 *const gBattleDomeOpponentStatsPointers[] =
+static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
-    gBattleDomeOpponentStats1,
-    gBattleDomeOpponentStats2,
-    gBattleDomeOpponentStats3,
-    gBattleDomeOpponentStats4,
-    gBattleDomeOpponentStats5,
-    gBattleDomeOpponentStats6,
-    gBattleDomeOpponentStats7,
-    gBattleDomeOpponentStats8,
-    gBattleDomeOpponentStats9,
-    gBattleDomeOpponentStats10,
-    gBattleDomeOpponentStats11,
-    gBattleDomeOpponentStats12,
-    gBattleDomeOpponentStats13,
-    gBattleDomeOpponentStats14,
-    gBattleDomeOpponentStats15,
-    gBattleDomeOpponentStats16,
-    gBattleDomeOpponentStats17,
-    gBattleDomeOpponentStats18,
-    gBattleDomeOpponentStats19,
-    gBattleDomeOpponentStats20,
-    gBattleDomeOpponentStats21,
-    gBattleDomeOpponentStats22,
-    gBattleDomeOpponentStats23,
-    gBattleDomeOpponentStats24,
-    gBattleDomeOpponentStats25,
-    gBattleDomeOpponentStats26,
-    gBattleDomeOpponentStats27,
-    gBattleDomeOpponentStats28,
-    gBattleDomeOpponentStats29,
-    gBattleDomeOpponentStats30,
-    gBattleDomeOpponentStats31,
-    gBattleDomeOpponentStats32,
-    gBattleDomeOpponentStats33,
-    gBattleDomeOpponentStats34,
-    gBattleDomeOpponentStats35,
-    gBattleDomeOpponentStats36,
-    gBattleDomeOpponentStats37,
-    gBattleDomeOpponentStats38,
-    gBattleDomeOpponentStats39,
-    gBattleDomeOpponentStats40,
-    gBattleDomeOpponentStats41,
-    gBattleDomeOpponentStats42,
-    gBattleDomeOpponentStats43,
+    gBattleDomeOpponentStatsText1,
+    gBattleDomeOpponentStatsText2,
+    gBattleDomeOpponentStatsText3,
+    gBattleDomeOpponentStatsText4,
+    gBattleDomeOpponentStatsText5,
+    gBattleDomeOpponentStatsText6,
+    gBattleDomeOpponentStatsText7,
+    gBattleDomeOpponentStatsText8,
+    gBattleDomeOpponentStatsText9,
+    gBattleDomeOpponentStatsText10,
+    gBattleDomeOpponentStatsText11,
+    gBattleDomeOpponentStatsText12,
+    gBattleDomeOpponentStatsText13,
+    gBattleDomeOpponentStatsText14,
+    gBattleDomeOpponentStatsText15,
+    gBattleDomeOpponentStatsText16,
+    gBattleDomeOpponentStatsText17,
+    gBattleDomeOpponentStatsText18,
+    gBattleDomeOpponentStatsText19,
+    gBattleDomeOpponentStatsText20,
+    gBattleDomeOpponentStatsText21,
+    gBattleDomeOpponentStatsText22,
+    gBattleDomeOpponentStatsText23,
+    gBattleDomeOpponentStatsText24,
+    gBattleDomeOpponentStatsText25,
+    gBattleDomeOpponentStatsText26,
+    gBattleDomeOpponentStatsText27,
+    gBattleDomeOpponentStatsText28,
+    gBattleDomeOpponentStatsText29,
+    gBattleDomeOpponentStatsText30,
+    gBattleDomeOpponentStatsText31,
+    gBattleDomeOpponentStatsText32,
+    gBattleDomeOpponentStatsText33,
+    gBattleDomeOpponentStatsText34,
+    gBattleDomeOpponentStatsText35,
+    gBattleDomeOpponentStatsText36,
+    gBattleDomeOpponentStatsText37,
+    gBattleDomeOpponentStatsText38,
+    gBattleDomeOpponentStatsText39,
+    gBattleDomeOpponentStatsText40,
+    gBattleDomeOpponentStatsText41,
+    gBattleDomeOpponentStatsText42,
+    gBattleDomeOpponentStatsText43,
 };
 
 static const u8 sInfoTrainerMonX[] = {0x68, 0x88, 0x68};
@@ -1403,34 +1286,34 @@ static const u8 gUnknown_0860D346[] = {0x00, 0x04, 0x00};
 
 static const u8 gUnknown_0860D349[] = {0x00, 0x05, 0x09, 0x0c, 0x0e, 0x00, 0x00};
 
-static const u8 *const gBattleDomeMatchNumberPointers[] =
+static const u8 *const sBattleDomeMatchNumberTexts[] =
 {
-    gBattleDomeMatchNumber1,
-    gBattleDomeMatchNumber2,
-    gBattleDomeMatchNumber3,
-    gBattleDomeMatchNumber4,
-    gBattleDomeMatchNumber5,
-    gBattleDomeMatchNumber6,
-    gBattleDomeMatchNumber7,
-    gBattleDomeMatchNumber8,
-    gBattleDomeMatchNumber9,
-    gBattleDomeMatchNumber10,
-    gBattleDomeMatchNumber11,
-    gBattleDomeMatchNumber12,
-    gBattleDomeMatchNumber13,
-    gBattleDomeMatchNumber14,
-    gBattleDomeMatchNumber15,
+    gBattleDomeMatchNumberText1,
+    gBattleDomeMatchNumberText2,
+    gBattleDomeMatchNumberText3,
+    gBattleDomeMatchNumberText4,
+    gBattleDomeMatchNumberText5,
+    gBattleDomeMatchNumberText6,
+    gBattleDomeMatchNumberText7,
+    gBattleDomeMatchNumberText8,
+    gBattleDomeMatchNumberText9,
+    gBattleDomeMatchNumberText10,
+    gBattleDomeMatchNumberText11,
+    gBattleDomeMatchNumberText12,
+    gBattleDomeMatchNumberText13,
+    gBattleDomeMatchNumberText14,
+    gBattleDomeMatchNumberText15,
 };
 
-static const u8 *const gBattleDomeWinStringsPointers[] =
+static const u8 *const sBattleDomeWinTexts[] =
 {
-    gBattleDomeWinStrings1,
-    gBattleDomeWinStrings2,
-    gBattleDomeWinStrings3,
-    gBattleDomeWinStrings4,
-    gBattleDomeWinStrings5,
-    gBattleDomeWinStrings6,
-    gBattleDomeWinStrings7,
+    gBattleDomeWinText1,
+    gBattleDomeWinText2,
+    gBattleDomeWinText3,
+    gBattleDomeWinText4,
+    gBattleDomeWinText5,
+    gBattleDomeWinText6,
+    gBattleDomeWinText7,
 };
 
 static const u8 sFirstTrainerMonX[] = {0x60, 0x60, 0x60};
@@ -2373,10 +2256,10 @@ static const u8 gUnknown_0860DE10[DOME_TOURNAMENT_TRAINERS_COUNT][4] =
 // code
 void CallBattleDomeFunction(void)
 {
-    gUnknown_0860D090[gSpecialVar_0x8004]();
+    sBattleDomeFunctions[gSpecialVar_0x8004]();
 }
 
-static void sub_818E9CC(void)
+static void InitDomeChallenge(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2392,7 +2275,7 @@ static void sub_818E9CC(void)
     gTrainerBattleOpponent_A = 0;
 }
 
-static void sub_818EA84(void)
+static void GetDomeData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2460,7 +2343,7 @@ static void sub_818EA84(void)
     }
 }
 
-static void sub_818ED28(void)
+static void SetDomeData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -2528,21 +2411,21 @@ static void sub_818ED28(void)
 
 static void InitDomeTrainers(void)
 {
-    s32 i, j, k;
-    s32 monLevel;
-    s32 species[3];
-    s32 monTypesBits, monTypesCount;
-    s32 trainerId;
-    s32 monSetId;
+    int i, j, k;
+    int monLevel;
+    int species[3];
+    int monTypesBits, monTypesCount;
+    int trainerId;
+    int monSetId;
     u16 *statSums;
-    s32 *statValues;
+    int *statValues;
     u8 ivs = 0;
 
     species[0] = 0;
     species[1] = 0;
     species[2] = 0;
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(s32) * 6);
+    statValues = AllocZeroed(sizeof(int) * 6);
 
     gSaveBlock2Ptr->frontier.field_D0A = gSaveBlock2Ptr->frontier.lvlMode + 1;
     gSaveBlock2Ptr->frontier.field_D0B = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
@@ -2599,7 +2482,7 @@ static void InitDomeTrainers(void)
                 monSetId = RandomizeFacilityTrainerMonSet(trainerId);
                 for (k = 0; k < j; k++)
                 {
-                    s32 checkingMonSetId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
+                    int checkingMonSetId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
                     if (checkingMonSetId == monSetId
                         || species[0] == gFacilityTrainerMons[monSetId].species
                         || species[1] == gFacilityTrainerMons[monSetId].species
@@ -2729,12 +2612,12 @@ static void InitDomeTrainers(void)
     stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
 }
 
-static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 nature, s32 *stats)
+static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats)
 {
-    s32 i, count;
+    int i, count;
     u8 bits;
     u16 resultingEvs;
-    s32 evs[NUM_STATS];
+    int evs[NUM_STATS];
 
     count = 0, bits = evBits;
     for (i = 0; i < NUM_STATS; bits >>= 1, i++)
@@ -2757,7 +2640,7 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
     }
     else
     {
-        s32 n = 2 * gBaseStats[species].baseHP;
+        int n = 2 * gBaseStats[species].baseHP;
         stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
     }
 
@@ -2768,9 +2651,9 @@ static void CalcDomeMonStats(u16 species, s32 level, s32 ivs, u8 evBits, u8 natu
     CALC_STAT(baseSpDefense, STAT_SPDEF);
 }
 
-static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
+static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
 {
-    s32 i;
+    int i;
     u16 temp;
 
     SWAP(statsArray[id1], statsArray[id2], temp);
@@ -2780,29 +2663,29 @@ static void SwapDomeTrainers(s32 id1, s32 id2, u16 *statsArray)
         SWAP(gSaveBlock2Ptr->frontier.domeMonIds[id1][i], gSaveBlock2Ptr->frontier.domeMonIds[id2][i], temp);
 }
 
-static void sub_818F9B0(void)
+static void BufferDomeRoundText(void)
 {
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
 }
 
-static void sub_818F9E0(void)
+static void BufferDomeOpponentName(void)
 {
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
     CopyDomeTrainerName(gStringVar2, gTrainerBattleOpponent_A);
 }
 
-static void sub_818FA20(void)
+static void InitDomeOpponentParty(void)
 {
     gUnknown_0203CD70 = 0;
     gUnknown_0203CD74 =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
     gUnknown_0203CD74 += GetMonData(&gPlayerParty[1], MON_DATA_MAX_HP, NULL);
     CalculatePlayerPartyCount();
-    CreateDomeTrainerMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
+    CreateDomeOpponentMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
 }
 
-static void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
+static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
-    s32 i;
+    int i;
     u8 happiness = 0xFF;
     u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Should be using trainerId instead of tournamentTrainerId. As a result, all Pokemon have ivs of 3.
     u8 level = SetFacilityPtrsGetLevel();
@@ -2827,11 +2710,11 @@ static void CreateDomeMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentM
                &gBattleFrontierHeldItems[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[tournamentTrainerId][tournamentMonId]].itemTableId]);
 }
 
-static void CreateDomeTrainerMons(u16 tournamentTrainerId)
+static void CreateDomeOpponentMons(u16 tournamentTrainerId)
 {
     u8 monsCount = 0;
     u32 otId = 0;
-    s32 i, bits;
+    int i, bits;
 
     ZeroEnemyPartyMons();
     bits = GetDomeTrainerMonCountInBits(tournamentTrainerId);
@@ -2842,7 +2725,7 @@ static void CreateDomeTrainerMons(u16 tournamentTrainerId)
         {
             if (bits & 1)
             {
-                CreateDomeMon(monsCount, tournamentTrainerId, i, otId);
+                CreateDomeOpponentMon(monsCount, tournamentTrainerId, i, otId);
                 monsCount++;
             }
             bits >>= 1;
@@ -2854,7 +2737,7 @@ static void CreateDomeTrainerMons(u16 tournamentTrainerId)
         {
             if (bits & 4)
             {
-                CreateDomeMon(monsCount, tournamentTrainerId, i, otId);
+                CreateDomeOpponentMon(monsCount, tournamentTrainerId, i, otId);
                 monsCount++;
             }
             bits <<= 1;
@@ -2862,9 +2745,9 @@ static void CreateDomeTrainerMons(u16 tournamentTrainerId)
     }
 }
 
-s32 GetDomeTrainerMonCountInBits(u16 tournamentTrainerId)
+int GetDomeTrainerMonCountInBits(u16 tournamentTrainerId)
 {
-    s32 bits;
+    int bits;
     if (Random() & 1)
     {
         bits = sub_818FCBC(tournamentTrainerId, FALSE);
@@ -2881,10 +2764,10 @@ s32 GetDomeTrainerMonCountInBits(u16 tournamentTrainerId)
     return bits;
 }
 
-static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
+static int sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
 {
-    s32 i, moveId, playerMonId;
-    s32 array[3];
+    int i, moveId, playerMonId;
+    int array[3];
 
     for (i = 0; i < 3; i++)
     {
@@ -2909,10 +2792,10 @@ static s32 sub_818FCBC(u16 tournamentTrainerId, bool8 arg1)
     return sub_818FEB4(array, arg1);
 }
 
-static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
+static int sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
 {
-    s32 i, moveId, playerMonId;
-    s32 array[3];
+    int i, moveId, playerMonId;
+    int array[3];
 
     for (i = 0; i < 3; i++)
     {
@@ -2937,11 +2820,11 @@ static s32 sub_818FDB8(u16 tournamentTrainerId, bool8 arg1)
     return sub_818FEB4(array, arg1);
 }
 
-static s32 sub_818FEB4(s32 *arr, bool8 arg1)
+static int sub_818FEB4(int *arr, bool8 arg1)
 {
-    s32 i, j;
-    s32 bits = 0;
-    s32 array[3];
+    int i, j;
+    int bits = 0;
+    int array[3];
 
     for (i = 0; i < 3; i++)
         array[i] = i;
@@ -2968,7 +2851,7 @@ static s32 sub_818FEB4(s32 *arr, bool8 arg1)
         {
             for (j = i + 1; j < 3; j++)
             {
-                s32 temp;
+                int temp;
 
                 if (arr[i] < arr[j])
                 {
@@ -3012,11 +2895,11 @@ static s32 sub_818FEB4(s32 *arr, bool8 arg1)
 
 // Functionally equivalent, while loop is impossible to match.
 #ifdef NONMATCHING
-static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
+static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 {
-    s32 defType1, defType2, defAbility, moveType;
-    s32 i = 0;
-    s32 typePower = TYPE_x1;
+    int defType1, defType2, defAbility, moveType;
+    int i = 0;
+    int typePower = TYPE_x1;
 
     if (move == MOVE_NONE || move == 0xFFFF || gBattleMoves[move].power == 0)
         return 0;
@@ -3131,7 +3014,7 @@ static s32 GetTypeEffectivenessPoints(s32 move, s32 targetSpecies, s32 arg2)
 }
 #else
 NAKED
-static s32 GetTypeEffectivenessPoints(s32 move, s32 species, s32 arg2)
+static int GetTypeEffectivenessPoints(int move, int species, int arg2)
 {
     asm_unified("\n\
     push {r4-r7,lr}\n\
@@ -3394,9 +3277,9 @@ static u8 GetDomeTrainerMonIvs(u16 trainerId)
     return fixedIv;
 }
 
-static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
+static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
-    s32 i, j, val;
+    int i, j, val;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
@@ -3431,7 +3314,7 @@ static s32 TournamentIdOfOpponent(s32 roundId, s32 trainerId)
     }
 }
 
-static void sub_8190298(void)
+static void SetDomeOpponentId(void)
 {
     gTrainerBattleOpponent_A = TrainerIdOfPlayerOpponent();
 }
@@ -3441,7 +3324,7 @@ static u16 TrainerIdOfPlayerOpponent(void)
     return gSaveBlock2Ptr->frontier.domeTrainers[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER)].trainerId;
 }
 
-static void sub_81902E4(void)
+static void SetDomeOpponentGraphicsId(void)
 {
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
 }
@@ -3454,7 +3337,7 @@ static void sub_81902F8(void)
     sub_81A4C30();
 }
 
-static void sub_819033C(void)
+static void UpdateDomeStreaks(void)
 {
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -3470,7 +3353,7 @@ static void sub_819033C(void)
 
 static void ShowDomeOpponentInfo(void)
 {
-    u8 taskId = CreateTask(sub_8190400, 0);
+    u8 taskId = CreateTask(Task_ShowOpponentInfo, 0);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = TrainerIdToTournamentId(TrainerIdOfPlayerOpponent());
     gTasks[taskId].data[2] = 0;
@@ -3479,12 +3362,12 @@ static void ShowDomeOpponentInfo(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-static void sub_8190400(u8 taskId)
+static void Task_ShowOpponentInfo(u8 taskId)
 {
-    s32 i;
-    s32 r5 = gTasks[taskId].data[1];
-    s32 r9 = gTasks[taskId].data[2];
-    s32 r7 = gTasks[taskId].data[3];
+    int i;
+    int r5 = gTasks[taskId].data[1];
+    int r9 = gTasks[taskId].data[2];
+    int r7 = gTasks[taskId].data[3];
 
     switch (gTasks[taskId].data[0])
     {
@@ -3531,7 +3414,7 @@ static void sub_8190400(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D83D50, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gUnknown_08D84970, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gUnknown_08D84F00, 0x800, 0, 1);
-        LoadCompressedSpriteSheet(gUnknown_0860CF50);
+        LoadCompressedSpriteSheet(sDomeOptionsSpriteSheet);
         LoadCompressedPalette(gUnknown_08D85358, 0, 0x200);
         LoadCompressedPalette(gUnknown_08D85444, 0x100, 0x200);
         LoadCompressedPalette(gUnknown_08D85600, 0xF0, 0x20);
@@ -3774,10 +3657,10 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
 
 static void sub_8190B40(struct Sprite *sprite)
 {
-    s32 taskId1 = sprite->data[0];
-    s32 arrId = gTasks[gTasks[taskId1].data[4]].data[1];
-    s32 tournmanetTrainerId = gUnknown_0860D080[arrId];
-    s32 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+    int taskId1 = sprite->data[0];
+    int arrId = gTasks[gTasks[taskId1].data[4]].data[1];
+    int tournmanetTrainerId = sTourneyTreeTrainerIds[arrId];
+    int roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
     if (gTasks[taskId1].data[3] == 1)
     {
@@ -3843,7 +3726,7 @@ static void sub_8190B40(struct Sprite *sprite)
 
 static void sub_8190C6C(struct Sprite *sprite)
 {
-    s32 taskId1 = sprite->data[0];
+    int taskId1 = sprite->data[0];
 
     if (gTasks[taskId1].data[3] == 1)
     {
@@ -3873,12 +3756,12 @@ static void sub_8190C6C(struct Sprite *sprite)
 
 static void sub_8190CD4(u8 taskId)
 {
-    s32 i;
-    s32 windowId = 0;
-    s32 r9 = gTasks[taskId].data[3];
-    s32 taskId2 = gTasks[taskId].data[4];
-    s32 trainerTournamentId = 0;
-    s32 matchNo = 0;
+    int i;
+    int windowId = 0;
+    int r9 = gTasks[taskId].data[3];
+    int taskId2 = gTasks[taskId].data[4];
+    int trainerTournamentId = 0;
+    int matchNo = 0;
 
     switch (gTasks[taskId].data[0])
     {
@@ -3946,14 +3829,14 @@ static void sub_8190CD4(u8 taskId)
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 320;
-                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    trainerTournamentId = sTourneyTreeTrainerIds[gTasks[taskId2].data[1]];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                 }
                 else
                 {
                     gBattle_BG2_X = 256;
                     gBattle_BG2_Y = 0;
-                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    trainerTournamentId = sTourneyTreeTrainerIds[gTasks[taskId2].data[1]];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 0x10, trainerTournamentId);
                     sBattleDomeStruct->unk_10 = 0;
                 }
@@ -4062,14 +3945,14 @@ static void sub_8190CD4(u8 taskId)
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 160;
-                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    trainerTournamentId = sTourneyTreeTrainerIds[gTasks[taskId2].data[1]];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                 }
                 else
                 {
                     gBattle_BG2_X = 0;
                     gBattle_BG2_Y = 0;
-                    trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                    trainerTournamentId = sTourneyTreeTrainerIds[gTasks[taskId2].data[1]];
                     DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 4, trainerTournamentId);
                     sBattleDomeStruct->unk_10 = 0;
                 }
@@ -4175,7 +4058,7 @@ static void sub_8190CD4(u8 taskId)
             {
                 gBattle_BG2_X = 256;
                 gBattle_BG2_Y = 160;
-                trainerTournamentId = gUnknown_0860D080[gTasks[taskId2].data[1]];
+                trainerTournamentId = sTourneyTreeTrainerIds[gTasks[taskId2].data[1]];
                 DisplayTrainerInfoOnCard(gTasks[taskId].data[2] | 8, trainerTournamentId);
             }
             else
@@ -4574,7 +4457,7 @@ static void sub_8190CD4(u8 taskId)
             }
             else
             {
-                i = CreateTask(sub_8194220, 0);
+                i = CreateTask(Task_ShowTourneyTree, 0);
                 gTasks[i].data[0] = 0;
                 gTasks[i].data[1] = 0;
                 gTasks[i].data[2] = 3;
@@ -4590,9 +4473,9 @@ static void sub_8190CD4(u8 taskId)
 static u8 sub_819221C(u8 taskId)
 {
     u8 retVal = 0;
-    s32 taskId2 = gTasks[taskId].data[4];
-    s32 r5 = gTasks[taskId2].data[1];
-    u8 r10 = gUnknown_0860D080[r5];
+    int taskId2 = gTasks[taskId].data[4];
+    int r5 = gTasks[taskId2].data[1];
+    u8 r10 = sTourneyTreeTrainerIds[r5];
     u16 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
@@ -4699,12 +4582,12 @@ static u8 sub_819221C(u8 taskId)
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
 {
     struct TextPrinterTemplate textPrinter;
-    s32 i, j, k;
-    s32 trainerId = 0;
+    int i, j, k;
+    int trainerId = 0;
     u8 nature = 0;
-    s32 arrId = 0;
-    s32 windowId = 0;
-    s32 x = 0, y = 0;
+    int arrId = 0;
+    int windowId = 0;
+    int x = 0, y = 0;
     u8 palSlot = 0;
     s16 *allocatedArray = AllocZeroed(sizeof(s16) * 18);
     trainerId = gSaveBlock2Ptr->frontier.domeTrainers[trainerTournamentId].trainerId;
@@ -4835,9 +4718,9 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     PutWindowTilemap(windowId + 4);
     CopyWindowToVram(windowId + 4, 3);
     if (trainerId == TRAINER_FRONTIER_BRAIN)
-        textPrinter.currentChar = gBattleDomePotentialPointers[16];
+        textPrinter.currentChar = sBattleDomePotentialTexts[16];
     else
-        textPrinter.currentChar = gBattleDomePotentialPointers[trainerTournamentId];
+        textPrinter.currentChar = sBattleDomePotentialTexts[trainerTournamentId];
 
     textPrinter.fontId = 1;
     textPrinter.windowId = windowId + 4;
@@ -4864,7 +4747,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_0860C988); i++)
     {
-        s32 r4 = 0;
+        int r4 = 0;
 
         for (k = 0, j = 0; j < DOME_TOURNAMENT_TRAINERS_COUNT; j++)
         {
@@ -4879,7 +4762,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
             break;
     }
 
-    textPrinter.currentChar = gBattleDomeOpponentStylePointers[i];
+    textPrinter.currentChar = sBattleDomeOpponentStyleTexts[i];
     textPrinter.y = 20;
     textPrinter.currentY = 20;
     AddTextPrinter(&textPrinter, 0, NULL);
@@ -4930,7 +4813,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     {
         for (i = 0; i < 3; i++)
         {
-            s32 evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].evSpread;
+            int evBits = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.domeMonIds[trainerTournamentId][i]].evSpread;
             for (k = 0, j = 0; j < NUM_STATS; j++)
             {
                 allocatedArray[j] = 0;
@@ -5051,19 +4934,19 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTournamentId)
     else
         i = 42;
 
-    textPrinter.currentChar = gBattleDomeOpponentStatsPointers[i];
+    textPrinter.currentChar = sBattleDomeOpponentStatsTexts[i];
     textPrinter.y = 36;
     textPrinter.currentY = 36;
     AddTextPrinter(&textPrinter, 0, NULL);
     Free(allocatedArray);
 }
 
-static s32 sub_8192F08(u8 arg0, u8 *arg1)
+static int sub_8192F08(u8 arg0, u8 *arg1)
 {
-    s32 i;
+    int i;
     u8 tournamentId;
-    s32 retVal = 0;
-    s32 count = 0;
+    int retVal = 0;
+    int count = 0;
 
     for (i = gUnknown_0860D3C4[arg0][0]; i < gUnknown_0860D3C4[arg0][0] + gUnknown_0860D3C4[arg0][1]; i++)
     {
@@ -5123,14 +5006,14 @@ static s32 sub_8192F08(u8 arg0, u8 *arg1)
 static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 {
     struct TextPrinterTemplate textPrinter;
-    s32 tournamentIds[2];
-    s32 trainerIds[2];
+    int tournamentIds[2];
+    int trainerIds[2];
     bool32 lost[2];
-    s32 i;
-    s32 winStringId = 0;
-    s32 arrId = 0;
-    s32 windowId = 0;
-    s32 x = 0, y = 0;
+    int i;
+    int winStringId = 0;
+    int arrId = 0;
+    int windowId = 0;
+    int x = 0, y = 0;
     u8 palSlot = 0;
 
     if (flags & 1)
@@ -5274,7 +5157,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.fgColor = 14;
     textPrinter.bgColor = 0;
     textPrinter.shadowColor = 13;
-    StringExpandPlaceholders(gStringVar4, gBattleDomeWinStringsPointers[winStringId]);
+    StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
     textPrinter.currentChar = gStringVar4;
     textPrinter.windowId = windowId + 8;
     textPrinter.fontId = 1;
@@ -5320,7 +5203,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Print match number.
     textPrinter.letterSpacing = 0;
-    textPrinter.currentChar = gBattleDomeMatchNumberPointers[matchNo];
+    textPrinter.currentChar = sBattleDomeMatchNumberTexts[matchNo];
     textPrinter.windowId = windowId + 5;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0xA0, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
@@ -5329,9 +5212,9 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     AddTextPrinter(&textPrinter, 0, NULL);
 }
 
-static void sub_81938A4(void)
+static void ShowDomeTourneyTree(void)
 {
-    u8 taskId = CreateTask(sub_8194220, 0);
+    u8 taskId = CreateTask(Task_ShowTourneyTree, 0);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 2;
@@ -5339,14 +5222,14 @@ static void sub_81938A4(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-static void sub_81938E0(void)
+static void ShowPreviousDomeResultsTourneyTree(void)
 {
     u8 taskId;
 
-    sub_8194D48();
+    InitDomeFacilityTrainersAndMons();
     gSaveBlock2Ptr->frontier.lvlMode = gSaveBlock2Ptr->frontier.field_D0A - 1;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 3;
-    taskId = CreateTask(sub_8194220, 0);
+    taskId = CreateTask(Task_ShowTourneyTree, 0);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 2;
@@ -5357,7 +5240,7 @@ static void sub_81938E0(void)
 static void sub_819395C(u8 taskId)
 {
     u8 newTaskId = 0;
-    s32 spriteId = gTasks[taskId].data[1];
+    int spriteId = gTasks[taskId].data[1];
 
     switch (gTasks[taskId].data[0])
     {
@@ -5374,7 +5257,7 @@ static void sub_819395C(u8 taskId)
             gTasks[taskId].data[0] = 2;
         break;
     case 2:
-        switch (sub_8193BDC(taskId))
+        switch (UpdateTourneyTreeCursor(taskId))
         {
         case 0:
         default:
@@ -5399,9 +5282,9 @@ static void sub_819395C(u8 taskId)
             FreeAllWindowBuffers();
             ScanlineEffect_Stop();
             FREE_AND_SET_NULL(sTilemapBuffer);
-            newTaskId = CreateTask(sub_8190400, 0);
+            newTaskId = CreateTask(Task_ShowOpponentInfo, 0);
             gTasks[newTaskId].data[0] = 0;
-            gTasks[newTaskId].data[1] = gUnknown_0860D080[spriteId];
+            gTasks[newTaskId].data[1] = sTourneyTreeTrainerIds[spriteId];
             gTasks[newTaskId].data[2] = 1;
             gTasks[newTaskId].data[3] = taskId;
 
@@ -5417,7 +5300,7 @@ static void sub_819395C(u8 taskId)
             FreeAllWindowBuffers();
             ScanlineEffect_Stop();
             FREE_AND_SET_NULL(sTilemapBuffer);
-            newTaskId = CreateTask(sub_8190400, 0);
+            newTaskId = CreateTask(Task_ShowOpponentInfo, 0);
             gTasks[newTaskId].data[0] = 0;
             gTasks[newTaskId].data[1] = spriteId - 16;
             gTasks[newTaskId].data[2] = 2;
@@ -5442,21 +5325,21 @@ static void sub_819395C(u8 taskId)
     }
 }
 
-static u8 sub_8193BDC(u8 taskId)
+static u8 UpdateTourneyTreeCursor(u8 taskId)
 {
     u8 retVal = 1;
-    s32 arrId = 4;
-    s32 spriteId = gTasks[taskId].data[1];
-    s32 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+    int direction = 4;
+    int tourneyTreeCursorSpriteId = gTasks[taskId].data[1];
+    int roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 
-    if (gMain.newKeys == B_BUTTON || (gMain.newKeys & A_BUTTON && spriteId == 31))
+    if (gMain.newKeys == B_BUTTON || (gMain.newKeys & A_BUTTON && tourneyTreeCursorSpriteId == 31))
     {
         PlaySE(SE_SELECT);
         retVal = 0;
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        if (spriteId < 16)
+        if (tourneyTreeCursorSpriteId < 16)
         {
             PlaySE(SE_SELECT);
             retVal = 2;
@@ -5469,31 +5352,31 @@ static u8 sub_8193BDC(u8 taskId)
     }
     else
     {
-        if (gMain.newKeys == DPAD_UP && gUnknown_0860CBF1[spriteId][roundId][0] != 0xFF)
-            arrId = 0;
-        else if (gMain.newKeys == DPAD_DOWN && gUnknown_0860CBF1[spriteId][roundId][1] != 0xFF)
-            arrId = 1;
-        else if (gMain.newKeys == DPAD_LEFT && gUnknown_0860CBF1[spriteId][roundId][2] != 0xFF)
-            arrId = 2;
-        else if (gMain.newKeys == DPAD_RIGHT && gUnknown_0860CBF1[spriteId][roundId][3] != 0xFF)
-            arrId = 3;
+        if (gMain.newKeys == DPAD_UP && sTourneyTreeCursorMovementMap[tourneyTreeCursorSpriteId][roundId][0] != 0xFF)
+            direction = 0;
+        else if (gMain.newKeys == DPAD_DOWN && sTourneyTreeCursorMovementMap[tourneyTreeCursorSpriteId][roundId][1] != 0xFF)
+            direction = 1;
+        else if (gMain.newKeys == DPAD_LEFT && sTourneyTreeCursorMovementMap[tourneyTreeCursorSpriteId][roundId][2] != 0xFF)
+            direction = 2;
+        else if (gMain.newKeys == DPAD_RIGHT && sTourneyTreeCursorMovementMap[tourneyTreeCursorSpriteId][roundId][3] != 0xFF)
+            direction = 3;
     }
 
-    if (arrId != 4)
+    if (direction != 4)
     {
         PlaySE(SE_SELECT);
-        StartSpriteAnim(&gSprites[spriteId], 0);
-        spriteId = gUnknown_0860CBF1[spriteId][roundId][arrId];
-        StartSpriteAnim(&gSprites[spriteId], 1);
-        gTasks[taskId].data[1] = spriteId;
+        StartSpriteAnim(&gSprites[tourneyTreeCursorSpriteId], 0);
+        tourneyTreeCursorSpriteId = sTourneyTreeCursorMovementMap[tourneyTreeCursorSpriteId][roundId][direction];
+        StartSpriteAnim(&gSprites[tourneyTreeCursorSpriteId], 1);
+        gTasks[taskId].data[1] = tourneyTreeCursorSpriteId;
     }
 
     return retVal;
 }
 
-static void sub_8193D40(void)
+static void ShowNonInteractiveDomeTourneyTree(void)
 {
-    u8 taskId = CreateTask(sub_8194220, 0);
+    u8 taskId = CreateTask(Task_ShowTourneyTree, 0);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 1;
     gTasks[taskId].data[2] = 2;
@@ -5501,9 +5384,9 @@ static void sub_8193D40(void)
     SetMainCallback2(CB2_BattleDome);
 }
 
-static void sub_8193D7C(void)
+static void ResolveDomeRoundWinners(void)
 {
-    s32 i;
+    int i;
 
     if (gSpecialVar_0x8005 == 1)
     {
@@ -5525,14 +5408,14 @@ static void sub_8193D7C(void)
     }
 }
 
-static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roundId)
+static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roundId)
 {
-    s32 i, j, k;
-    s32 moveScores[4 * 3];
+    int i, j, k;
+    int moveScores[4 * 3];
     u16 moveIds[4 * 3];
     u16 bestScore = 0;
     u16 bestId = 0;
-    s32 movePower = 0;
+    int movePower = 0;
     SetFacilityPtrsGetLevel();
 
     // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
@@ -5639,12 +5522,12 @@ static u16 GetWinningMove(s32 winnerTournamentId, s32 loserTournamentId, u8 roun
     return moveIds[j];
 }
 
-static void sub_8194220(u8 taskId)
+static void Task_ShowTourneyTree(u8 taskId)
 {
-    s32 i;
+    int i;
     struct TextPrinterTemplate textPrinter;
-    s32 r10 = gTasks[taskId].data[1];
-    s32 r4 = gTasks[taskId].data[2];
+    int r10 = gTasks[taskId].data[1];
+    int r4 = gTasks[taskId].data[2];
 
     switch (gTasks[taskId].data[0])
     {
@@ -5703,7 +5586,7 @@ static void sub_8194220(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 3:
-        LoadCompressedSpriteSheet(gUnknown_0860CF50);
+        LoadCompressedSpriteSheet(sDomeOptionsSpriteSheet);
         if (r10 == 0)
         {
             for (i = 0; i < (unsigned) 31; i++)
@@ -5734,7 +5617,7 @@ static void sub_8194220(u8 taskId)
         AddTextPrinter(&textPrinter, 0, NULL);
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
         {
-            s32 roundId, var2;
+            int roundId, var2;
 
             CopyDomeTrainerName(gDisplayedStringBattle, gSaveBlock2Ptr->frontier.domeTrainers[i].trainerId);
             if (r10 == 1)
@@ -5851,19 +5734,19 @@ static void sub_8194220(u8 taskId)
         i = 0;
         while (i < 91)
         {
-            gScanlineEffectRegBuffers[0][i] = 0x1F0A;
-            gScanlineEffectRegBuffers[1][i] = 0x1F0A;
+            gScanlineEffectRegBuffers[0][i] = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_CHARBASE(2) | BGCNT_TXT256x256;
+            gScanlineEffectRegBuffers[1][i] = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_CHARBASE(2) | BGCNT_TXT256x256;
             i++;
         }
 
         while (i < 160)
         {
-            gScanlineEffectRegBuffers[0][i] = 0x1F09;
-            gScanlineEffectRegBuffers[1][i] = 0x1F09;
+            gScanlineEffectRegBuffers[0][i] =  BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_CHARBASE(2) | BGCNT_TXT256x256;
+            gScanlineEffectRegBuffers[1][i] =  BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_CHARBASE(2) | BGCNT_TXT256x256;
             i++;
         }
         
-        ScanlineEffect_SetParams(gUnknown_0860CF44);
+        ScanlineEffect_SetParams(sTourneyTreeScanlineEffectParams);
         DestroyTask(taskId);
         break;
     }
@@ -5871,7 +5754,7 @@ static void sub_8194220(u8 taskId)
 
 static void sub_81948EC(u8 tournamentId, u8 arg1)
 {
-    s32 i;
+    int i;
     const struct UnkStruct_860DD10 *structPtr = gUnknown_0860DD10[tournamentId][arg1];
 
     for (i = 0; i < gUnknown_0860DE10[tournamentId][arg1]; i++)
@@ -5882,7 +5765,7 @@ static void sub_81948EC(u8 tournamentId, u8 arg1)
 
 static void sub_8194950(u8 taskId)
 {
-    s32 i;
+    int i;
     struct TextPrinterTemplate textPrinter;
 
     switch (gTasks[taskId].data[0])
@@ -5923,7 +5806,7 @@ static void sub_8194950(u8 taskId)
                 }
                 if (!gSaveBlock2Ptr->frontier.domeTrainers[i].isEliminated)
                 {
-                    s32 roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1;
+                    int roundId = gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1;
                     sub_81948EC(i, roundId);
                 }
             }
@@ -6050,20 +5933,20 @@ static void VblankCb1_BattleDome(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void sub_8194D48(void)
+static void InitDomeFacilityTrainersAndMons(void)
 {
     gFacilityTrainerMons = gBattleFrontierMons;
     gFacilityTrainers = gBattleFrontierTrainers;
 }
 
-static void sub_8194D68(void)
+static void RestoreDomePlayerParty(void)
 {
-    s32 i, moveSlot;
+    int i, moveSlot;
 
     for (i = 0; i < 2; i++)
     {
-        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
-        s32 count;
+        int playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
+        int count;
 
         for (moveSlot = 0; moveSlot < MAX_MON_MOVES; moveSlot++)
         {
@@ -6082,24 +5965,24 @@ static void sub_8194D68(void)
     }
 }
 
-static void sub_8194E44(void)
+static void RestoreDomePlayerPartyHeldItems(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < 2; i++)
     {
-        s32 playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
+        int playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
         u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
     }
 }
 
-static void sub_8194EB4(void)
+static void ReduceDomePlayerPartyTo3Mons(void)
 {
     ReducePlayerPartyToSelectedMons();
 }
 
-static void sub_8194EC0(void)
+static void GetPlayerSeededBeforeOpponent(void)
 {
     if (TrainerIdToTournamentId(gTrainerBattleOpponent_A) > TrainerIdToTournamentId(TRAINER_PLAYER))
         gSpecialVar_Result = 1;
@@ -6107,11 +5990,11 @@ static void sub_8194EC0(void)
         gSpecialVar_Result = 2;
 }
 
-static void sub_8194EF8(void)
+static void BufferLastDomeWinnerName(void)
 {
-    s32 i;
+    int i;
 
-    sub_8194D48();
+    InitDomeFacilityTrainersAndMons();
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         if (!gSaveBlock2Ptr->frontier.domeTrainers[i].isEliminated)
@@ -6122,15 +6005,15 @@ static void sub_8194EF8(void)
 
 static void sub_8194F58(void)
 {
-    s32 i, j, k;
-    s32 monLevel;
-    s32 species[3];
-    s32 monTypesBits;
-    s32 trainerId;
-    s32 monSetId;
+    int i, j, k;
+    int monLevel;
+    int species[3];
+    int monTypesBits;
+    int trainerId;
+    int monSetId;
     u8 lvlMode;
     u16 *statSums;
-    s32 *statValues;
+    int *statValues;
     u8 ivs = 0;
 
     species[0] = 0;
@@ -6140,7 +6023,7 @@ static void sub_8194F58(void)
         return;
 
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(s32) * 6);
+    statValues = AllocZeroed(sizeof(int) * 6);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = 0;
     // This one, I'd like to call a 'C fakematching'.
@@ -6177,7 +6060,7 @@ static void sub_8194F58(void)
                 monSetId = RandomizeFacilityTrainerMonSet(trainerId);
                 for (k = 0; k < j; k++)
                 {
-                    s32 checkingMonId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
+                    int checkingMonId = gSaveBlock2Ptr->frontier.domeMonIds[i][k];
                     if (checkingMonId == monSetId
                         || species[0] == gFacilityTrainerMons[monSetId].species
                         || species[1] == gFacilityTrainerMons[monSetId].species
@@ -6253,9 +6136,9 @@ static void sub_8194F58(void)
     gSaveBlock2Ptr->frontier.lvlMode = lvlMode;
 }
 
-static s32 TrainerIdToTournamentId(u16 trainerId)
+static int TrainerIdToTournamentId(u16 trainerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
@@ -6267,9 +6150,9 @@ static s32 TrainerIdToTournamentId(u16 trainerId)
 }
 
 // The same as the above one, but has global scope.
-s32 TrainerIdToDomeTournamentId(u16 trainerId)
+int TrainerIdToDomeTournamentId(u16 trainerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
@@ -6280,10 +6163,10 @@ s32 TrainerIdToDomeTournamentId(u16 trainerId)
     return i;
 }
 
-static u8 sub_81953E8(u8 tournamentId, u8 arg1)
+static u8 sub_81953E8(u8 tournamentId, u8 round)
 {
     u8 arr[2];
-    sub_8192F08(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][arg1] - 16, arr);
+    sub_8192F08(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][round] - 16, arr);
     if (tournamentId == arr[0])
         return arr[1];
     else
@@ -6292,11 +6175,11 @@ static u8 sub_81953E8(u8 tournamentId, u8 arg1)
 
 static void DecideRoundWinners(u8 roundId)
 {
-    s32 i;
-    s32 moveSlot, monId1, monId2;
-    s32 tournamentId1, tournamentId2;
-    s32 species;
-    s32 points1 = 0, points2 = 0;
+    int i;
+    int moveSlot, monId1, monId2;
+    int tournamentId1, tournamentId2;
+    int species;
+    int points1 = 0, points2 = 0;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
@@ -6400,28 +6283,28 @@ static void DecideRoundWinners(u8 roundId)
     }
 }
 
-static void CopyDomeTrainerName(u8 *dst, u16 trainerId)
+static void CopyDomeTrainerName(u8 *str, u16 trainerId)
 {
-    s32 i = 0;
+    int i = 0;
     SetFacilityPtrsGetLevel();
 
     if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        CopyDomeBrainTrainerName(dst);
+        CopyDomeBrainTrainerName(str);
     }
     else
     {
         if (trainerId == TRAINER_PLAYER)
         {
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-                dst[i] = gSaveBlock2Ptr->playerName[i];
+                str[i] = gSaveBlock2Ptr->playerName[i];
         }
         else if (trainerId < 300)
         {
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-                dst[i] = gFacilityTrainers[trainerId].trainerName[i];
+                str[i] = gFacilityTrainers[trainerId].trainerName[i];
         }
-        dst[i] = EOS;
+        str[i] = EOS;
     }
 }
 
@@ -6435,11 +6318,11 @@ static u8 GetDomeBrainTrainerClass(void)
     return gTrainers[TRAINER_TUCKER].trainerClass;
 }
 
-static void CopyDomeBrainTrainerName(u8 *dst)
+static void CopyDomeBrainTrainerName(u8 *str)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        dst[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
-    dst[i] = EOS;
+        str[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
+    str[i] = EOS;
 }

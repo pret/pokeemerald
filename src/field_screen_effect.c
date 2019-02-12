@@ -1004,9 +1004,9 @@ void WriteFlashScanlineEffectBuffer(u8 flashLevel)
     }
 }
 
-void door_upload_tiles(void)
+void WriteBattlePyramidViewScanlineEffectBuffer(void)
 {
-    SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], 120, 80, gSaveBlock2Ptr->frontier.field_E68);
+    SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], 120, 80, gSaveBlock2Ptr->frontier.pyramidLightRadius);
     CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
 }
 

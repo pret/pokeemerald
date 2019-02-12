@@ -2801,7 +2801,7 @@ static void CreatePageWindowTilemaps(u8 page)
         case PSS_PAGE_INFO:
             PutWindowTilemap(0);
             PutWindowTilemap(4);
-            if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE)
+            if (InBattleFactory() == TRUE || sub_81B9E94() == TRUE)
                 PutWindowTilemap(8);
             PutWindowTilemap(9);
             break;
@@ -2852,7 +2852,7 @@ static void ClearPageWindowTilemaps(u8 page)
     {
         case PSS_PAGE_INFO:
             ClearWindowTilemap(4);
-            if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE)
+            if (InBattleFactory() == TRUE || sub_81B9E94() == TRUE)
                 ClearWindowTilemap(8);
             ClearWindowTilemap(9);
             break;
@@ -2985,7 +2985,7 @@ static void PrintMonOTName(void)
 {
     u8 windowId;
     int x;
-    if (sub_81A6BF4() != TRUE && sub_81B9E94() != TRUE)
+    if (InBattleFactory() != TRUE && sub_81B9E94() != TRUE)
     {
         windowId = AddWindowFromTemplateList(gUnknown_0861CCCC, 0);
         SummaryScreen_PrintTextOnWindow(windowId, gText_OTSlash, 0, 1, 0, 1);
@@ -3000,7 +3000,7 @@ static void PrintMonOTName(void)
 static void PrintMonOTID(void)
 {
     int xPos;
-    if (sub_81A6BF4() != TRUE && sub_81B9E94() != TRUE)
+    if (InBattleFactory() != TRUE && sub_81B9E94() != TRUE)
     {
         ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_UnkCtrlF907F908), (u16)pssData->summary.OTID, 2, 5);
         xPos = GetStringRightAlignXOffset(1, gStringVar1, 56);
@@ -3030,7 +3030,7 @@ static void BufferMonTrainerMemo(void)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_0861CE7B);
     BufferNatureString();
 
-    if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE || IsInGamePartnerMon() == TRUE)
+    if (InBattleFactory() == TRUE || sub_81B9E94() == TRUE || IsInGamePartnerMon() == TRUE)
     {
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_XNature);
     }

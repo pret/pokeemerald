@@ -277,7 +277,7 @@ struct FrontierMonData
     u8 nature;
 };
 
-struct Struct_field_E70
+struct RentalMon
 {
     u16 monId;
     u32 personality;
@@ -316,7 +316,7 @@ struct BattleFrontier
     /*0xCAA*/ u16 selectedPartyMons[3];
     /*0xCB0*/ u16 field_CB0;
     /*0xCB2*/ u16 curChallengeBattleNum; // In case of battle pyramid, the floor.
-    /*0xCB4*/ u16 field_CB4[20];
+    /*0xCB4*/ u16 trainerIds[20];
     /*0xCDC*/ u32 field_CDC;
     /*0xCE0*/ u16 towerWinStreaks[4][2];
     /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
@@ -345,7 +345,7 @@ struct BattleFrontier
     /*0xDC6*/ u16 field_DC6;
     /*0xDC8*/ u16 palaceWinStreaks[2][2];
     /*0xDD0*/ u16 palaceRecordWinStreaks[2][2];
-    /*0xDD8*/ u16 field_DD8;
+    /*0xDD8*/ u16 arenaRewardItem;
     /*0xDDA*/ u16 arenaWinStreaks[2];
     /*0xDDE*/ u16 arenaRecordStreaks[2];
     /*0xDE2*/ u16 factoryWinStreaks[2][2];
@@ -356,21 +356,21 @@ struct BattleFrontier
     /*0xE04*/ u16 pikeWinStreaks[2];
     /*0xE08*/ u16 pikeRecordStreaks[2];
     /*0xE0C*/ u16 pikeTotalStreaks[2];
-    /*0xE10*/ u8 field_E10_1:3;
-    /*0xE10*/ u8 field_E10_2:4;
-    /*0xE10*/ u8 field_E10_3:1;
-    /*0xE12*/ u16 field_E12[3];
-    /*0xE18*/ u16 field_E18;
+    /*0xE10*/ u8 pikeHintedRoomIndex:3;
+    /*0xE10*/ u8 pikeHintedRoomType:4;
+    /*0xE10*/ u8 pikeHealingRoomsDisabled:1;
+    /*0xE12*/ u16 pikeHeldItemsBackup[3];
+    /*0xE18*/ u16 pyramidRewardItem;
     /*0xE1A*/ u16 pyramidWinStreaks[2];
     /*0xE1E*/ u16 pyramidRecordStreaks[2];
-    /*0xE22*/ u16 field_E22[4];
-    /*0xE2A*/ u8 field_E2A;
+    /*0xE22*/ u16 pyramidRandoms[4];
+    /*0xE2A*/ u8 pyramidTrainerFlags;
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0xE68*/ u8 field_E68;
+    /*0xE68*/ u8 pyramidLightRadius;
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
     /*0xE6E*/ u16 field_E6E;
-    /*0xE70*/ struct Struct_field_E70 field_E70[6];
+    /*0xE70*/ struct RentalMon rentalMons[6];
     /*0xEB8*/ u16 battlePoints;
     /*0xEBA*/ u16 field_EBA;
     /*0xEBC*/ u32 battlesCount;

@@ -660,7 +660,7 @@ void sub_81D5DF8(void)
 
     SetUpDataStruct();
     for (i = 0; i < 2; i++)
-        gSaveBlock2Ptr->frontier.field_CB4[i] = 0xFFFF;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
     CpuFill32(0, gSaveBlock1Ptr->eventObjectTemplates, sizeof(gSaveBlock1Ptr->eventObjectTemplates));
 
     floorId = GetFloorId();
@@ -677,7 +677,7 @@ void sub_81D5DF8(void)
         eventTemplates[i].movementType = ((sHillData->tag.floors[floorId].direction >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
         eventTemplates[i].trainerRange_berryTreeId = (sHillData->tag.floors[floorId].range >> bits) & 0xF;
         eventTemplates[i].script = EventScript_2C83F0;
-        gSaveBlock2Ptr->frontier.field_CB4[i] = i + 1;
+        gSaveBlock2Ptr->frontier.trainerIds[i] = i + 1;
     }
 
     FreeDataStruct();
@@ -874,7 +874,7 @@ const struct WarpEvent* sub_81D6134(u8 warpEventId)
 
 u16 LocalIdToHillTrainerId(u8 localId)
 {
-    return gSaveBlock2Ptr->frontier.field_CB4[localId - 1];
+    return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
 }
 
 bool8 GetHillTrainerFlag(u8 eventObjectId)
@@ -892,7 +892,7 @@ void SetHillTrainerFlag(void)
 
     for (i = 0; i < 2; i++)
     {
-        if (gSaveBlock2Ptr->frontier.field_CB4[i] == gTrainerBattleOpponent_A)
+        if (gSaveBlock2Ptr->frontier.trainerIds[i] == gTrainerBattleOpponent_A)
         {
             gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[floorId + i];
             break;
@@ -903,7 +903,7 @@ void SetHillTrainerFlag(void)
     {
         for (i = 0; i < 2; i++)
         {
-            if (gSaveBlock2Ptr->frontier.field_CB4[i] == gTrainerBattleOpponent_B)
+            if (gSaveBlock2Ptr->frontier.trainerIds[i] == gTrainerBattleOpponent_B)
             {
                 gSaveBlock2Ptr->frontier.field_EE0 |= gBitTable[floorId + i];
                 break;

@@ -23,5 +23,7 @@ bool8 sub_813B9C0(void);
 void SetShoalItemFlag(u16 v0);
 void UpdateFrontierManiac(u16 a0);
 void UpdateFrontierGambler(u16 a0);
+void ResetCyclingRoadChallengeData(void);
+bool8 warp0_in_pokecenter(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

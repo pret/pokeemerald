@@ -19,6 +19,7 @@
 #include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "fldeff.h"
 #include "gpu_regs.h"
 #include "heal_location.h"
 #include "link.h"
@@ -28,6 +29,7 @@
 #include "alloc.h"
 #include "m4a.h"
 #include "map_name_popup.h"
+#include "match_call.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "mirage_tower.h"
@@ -42,14 +44,15 @@
 #include "save.h"
 #include "save_location.h"
 #include "script.h"
-// #include "script_pokemon_80C4.h"
+#include "script_pokemon_util_80F87D8.h"
 #include "secret_base.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
-// #include "tileset_anim.h"
+#include "tileset_anims.h"
 #include "time_events.h"
 #include "trainer_hill.h"
+#include "trainer_pokemon_sprites.h"
 #include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
@@ -85,74 +88,11 @@ extern const u8 gUnknown_082773F5[];
 extern const u8 gUnknown_082774EF[];
 extern const u8 gUnknown_08277509[];
 
-// vars
 extern const struct MapLayout *const gMapLayouts[];
 extern const struct MapHeader *const *const gMapGroups[];
-extern const s32 gMaxFlashLevel;
+extern const int gMaxFlashLevel;
 extern const u16 gUnknown_82EC7C4[];
 
-// functions
-extern void HealPlayerParty(void);
-extern void move_tilemap_camera_to_upper_left_corner(void);
-extern void cur_mapheader_run_tileset_funcs_after_some_cpuset(void);
-extern void DrawWholeMapView(void);
-extern void copy_map_tileset1_tileset2_to_vram(const struct MapLayout *);
-extern void apply_map_tileset1_tileset2_palette(const struct MapLayout *);
-extern void ResetCyclingRoadChallengeData(void);
-extern void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey);
-extern void mapheader_run_script_with_tag_x5(void);
-extern void ResetFieldTasksArgs(void);
-extern void sub_80A0A2C(void);
-extern void apply_map_tileset2_palette(const struct MapLayout *);
-extern void copy_map_tileset2_to_vram_2(const struct MapLayout *);
-extern void RestartWildEncounterImmunitySteps(void);
-extern void ShowMapNamePopup(void);
-extern bool32 sub_808651C(void);
-extern bool8 sub_80AF6A4(void);
-extern bool8 sub_80E909C(void);
-extern void sub_81AA1D8(void);
-extern void c2_change_map(void);
-extern void sub_81D5DF8(void);
-extern void sub_80EB218(void);
-extern void sub_80AF3C8(void);
-extern void sub_808B578(void);
-extern void sub_80AF314(void);
-extern void sub_80AF214(void);
-extern void sub_80AF188(void);
-extern void door_upload_tiles(void);
-extern void RotatingGate_InitPuzzleAndGraphics(void);
-extern void sub_80AF168(void);
-extern void sub_80AF3C8(void);
-extern void ExecuteTruckSequence(void);
-extern void sub_80A0A38(void);
-extern void WriteFlashScanlineEffectBuffer(u8);
-extern void sub_81AA2F8(void);
-extern void InitMatchCallCounters(void);
-extern void sub_80EDB44(void);
-extern void InitFieldMessageBox(void);
-extern void copy_map_tileset1_to_vram(const struct MapLayout *);
-extern void copy_map_tileset2_to_vram(const struct MapLayout *);
-extern void FieldUpdateBgTilemapScroll(void);
-extern void TransferTilesetAnimsBuffer(void);
-extern bool8 warp0_in_pokecenter(void);
-extern void ResetAllPicSprites(void);
-extern void FieldEffectActiveListClear(void);
-extern void SetUpFieldTasks(void);
-extern void ShowStartMenu(void);
-extern void sub_80AEE84(void);
-extern void mapldr_default(void);
-extern bool32 sub_800F0B8(void);
-extern bool32 sub_8009F3C(void);
-extern void sub_8010198(void);
-extern u32 sub_800B4DC(void);
-extern bool32 sub_80B39D4(u8);
-extern const u8* GetInteractedLinkPlayerScript(struct MapPosition *a1, u8, u8);
-extern u8 *GetCoordEventScriptAtMapPosition(void*);
-extern u8 GetFRLGAvatarGraphicsIdByGender(u8);
-extern u8 GetRSAvatarGraphicsIdByGender(u8);
-extern void UpdateEventObjectSpriteVisibility(struct Sprite*, u8);
-
-// this file's functions
 static void Overworld_ResetStateAfterWhiteOut(void);
 static void c2_80567AC(void);
 static void CB2_LoadMap2(void);
@@ -588,7 +528,7 @@ static void mapdata_load_assets_to_gpu_and_full_redraw(void)
     copy_map_tileset1_tileset2_to_vram(gMapHeader.mapLayout);
     apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
     DrawWholeMapView();
-    cur_mapheader_run_tileset_funcs_after_some_cpuset();
+    InitTilesetAnimations();
 }
 
 const struct MapLayout *GetMapLayout(void)
@@ -868,7 +808,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     for (paletteIndex = 6; paletteIndex < 13; paletteIndex++)
         ApplyWeatherGammaShiftToPal(paletteIndex);
 
-    sub_80A0A2C();
+    InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();
     RoamerMove();
     DoCurrentWeather();
@@ -888,7 +828,7 @@ static void mli0_load_map(u32 a1)
     if (!(sUnknown_020322D8 & 1))
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-            sub_81AA1D8();
+            LoadBattlePyramidEventObjectTemplates();
         else if (InTrainerHill())
             sub_81D5DF8();
         else
@@ -916,7 +856,7 @@ static void mli0_load_map(u32 a1)
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-        InitBattlePyramidMap(0);
+        InitBattlePyramidMap(FALSE);
     else if (InTrainerHill())
         InitTrainerHillMap();
     else
@@ -1511,7 +1451,7 @@ static void OverworldBasic(void)
     UpdateCameraPanning();
     BuildOamBuffer();
     UpdatePaletteFade();
-    sub_80A0A38();
+    UpdateTilesetAnimations();
     do_scheduled_bg_tilemap_copies_to_vram();
 }
 
@@ -1755,7 +1695,7 @@ void CB2_ContinueSavedGame(void)
     ClearDiveAndHoleWarps();
     trainerHillMapId = GetCurrentTrainerHillMapId();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-        sub_81AA2F8();
+        LoadBattlePyramidFloorEventObjectScripts();
     else if (trainerHillMapId != 0 && trainerHillMapId != 6)
         sub_81D5F48();
     else
@@ -1765,7 +1705,7 @@ void CB2_ContinueSavedGame(void)
     DoTimeBasedEvents();
     sub_8084788();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
-        InitBattlePyramidMap(1);
+        InitBattlePyramidMap(TRUE);
     else if (trainerHillMapId != 0)
         InitTrainerHillMap();
     else
@@ -1836,7 +1776,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 
     if (InBattlePyramid_())
     {
-        door_upload_tiles();
+        WriteBattlePyramidViewScanlineEffectBuffer();
         ScanlineEffect_SetParams(sFlashEffectParams);
     }
     else if ((flashLevel = Overworld_GetFlashLevel()))
@@ -1903,7 +1843,7 @@ static bool32 map_loading_iteration_3(u8 *state)
         (*state)++;
         break;
     case 10:
-        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        InitTilesetAnimations();
         (*state)++;
         break;
     case 11:
@@ -1978,7 +1918,7 @@ static bool32 load_map_stuff(u8 *state, u32 a2)
         (*state)++;
         break;
     case 10:
-        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        InitTilesetAnimations();
         (*state)++;
         break;
     case 11:
@@ -2075,7 +2015,7 @@ static bool32 map_loading_iteration_2_link(u8 *state)
         (*state)++;
         break;
     case 9:
-        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        InitTilesetAnimations();
         (*state)++;
         break;
     case 11:

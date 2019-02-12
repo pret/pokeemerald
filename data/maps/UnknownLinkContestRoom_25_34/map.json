@@ -1,7 +1,7 @@
 {
   "id": "MAP_UNKNOWN_MAP_25_34",
-  "name": "UnknownMap_25_34",
-  "layout": "LAYOUT_UNKNOWN_MAP_25_34",
+  "name": "UnknownLinkContestRoom_25_34",
+  "layout": "LAYOUT_UNKNOWN_LINK_CONTEST_ROOM_25_34",
   "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,

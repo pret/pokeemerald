@@ -4104,9 +4104,13 @@ extern const u32 gUnknown_08D83B2C[];
 extern const u32 gUnknown_08D83C3C[];
 extern const u32 gUnknown_08D83900[];
 extern const u32 gBattleFrontierGfx_DomeOptions[];
+extern const u16 gTilesetAnims_BattleDomePals0_0[];
+extern const u16 gTilesetAnims_BattleDomePals0_1[];
+extern const u16 gTilesetAnims_BattleDomePals0_2[];
+extern const u16 gTilesetAnims_BattleDomePals0_3[];
 
-extern const u32 gUnknown_08D854E8[];
-extern const u32 gUnknown_08D855E8[];
+extern const u32 gBattleArenaJudgementSymbolsGfx[];
+extern const u32 gBattleArenaJudgementSymbolsPalette[];
 extern const u32 gContest2Pal[];
 
 extern const u32 gBattleAnimSpriteSheet_000[];
@@ -4724,9 +4728,9 @@ extern const u32 gBattleAnimBackgroundTilemap_17[];
 extern const u32 gBattleAnimBackgroundTilemap_20[];
 extern const u32 gBattleAnimBackgroundTilemap_21[];
 
-extern const u32 gUnknown_08C1D0AC[];
-extern const u32 gUnknown_08C1D1E8[];
-extern const u32 gUnknown_08C1D210[];
+extern const u32 gMetalShineGfx[];
+extern const u32 gMetalShinePalette[];
+extern const u32 gMetalShineTilemap[];
 
 extern const u32 gUnknown_08C20668[];
 extern const u32 gUnknown_08C20684[];
