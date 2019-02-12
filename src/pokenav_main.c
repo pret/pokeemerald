@@ -232,3 +232,10 @@ bool32 AnyMonHasRibbon() {
 
 	return FALSE;
 }
+
+void sub_81C7400() {
+	RunTasks();
+	AnimateSprites();
+	BuildOamBuffer();
+	UpdatePaletteFade();
+}

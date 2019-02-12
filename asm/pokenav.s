@@ -5,19 +5,6 @@
 
 	.text
 
-
-
-	thumb_func_start sub_81C7400
-sub_81C7400: @ 81C7400
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7400
-
 	thumb_func_start sub_81C7418
 sub_81C7418: @ 81C7418
 	push {lr}
