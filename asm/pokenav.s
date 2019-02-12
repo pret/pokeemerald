@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C7334
-sub_81C7334: @ 81C7334
-	push {r4,lr}
-	movs r4, 0
-_081C7338:
-	adds r0, r4, 0
-	bl sub_81C7650
-	adds r4, 0x1
-	cmp r4, 0x12
-	ble _081C7338
-	ldr r4, =gUnknown_0203CF40
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	bl InitKeys
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7334
-
 	thumb_func_start sub_81C7360
 sub_81C7360: @ 81C7360
 	push {r4,r5,lr}

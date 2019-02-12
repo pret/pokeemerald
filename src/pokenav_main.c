@@ -23,6 +23,7 @@ extern void sub_81C7400(void);
 extern void sub_81C7418(void);
 extern void sub_81C7170(u8 a0);
 extern void sub_81C71E4(u8 a0);
+extern void sub_81C7650(s32 a0);
 
 void sub_81C72BC(void);
 
@@ -171,4 +172,15 @@ void sub_81C72BC() {
 			SetVBlankCallback(sub_81C7418);
 		}
 	}
+}
+
+void sub_81C7334() {
+	s32 i;
+	for (i = 0; i < 19; i++) {
+		sub_81C7650(i);
+	}
+
+	Free(gUnknown_0203CF40);
+	gUnknown_0203CF40 = NULL;
+	InitKeys();
 }
