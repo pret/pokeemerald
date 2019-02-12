@@ -3,6 +3,7 @@
 #include "task.h"
 #include "main.h"
 #include "overworld.h"
+#include "field_weather.h"
 
 /*
 
@@ -172,4 +173,26 @@ void CB2_PokeNav(void)
         SetMainCallback2(sub_81C7400);
         SetVBlankCallback(sub_81C7418);
     }
+}
+
+/*
+	thumb_func_start sub_81C72A4
+sub_81C72A4: @ 81C72A4
+	push {lr}
+	ldr r0, =sub_81C72BC
+	bl SetMainCallback2
+	movs r0, 0x1
+	movs r1, 0
+	bl FadeScreen
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_81C72A4
+*/
+
+extern void sub_81C72BC(void);
+
+void sub_81C72A4() {
+	SetMainCallback2(sub_81C72BC);
+	FadeScreen(1, 0);
 }

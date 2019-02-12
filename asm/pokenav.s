@@ -5,18 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C72A4
-sub_81C72A4: @ 81C72A4
-	push {lr}
-	ldr r0, =sub_81C72BC
-	bl SetMainCallback2
-	movs r0, 0x1
-	movs r1, 0
-	bl FadeScreen
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72A4
 
 	thumb_func_start sub_81C72BC
 sub_81C72BC: @ 81C72BC
