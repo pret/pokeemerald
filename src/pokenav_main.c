@@ -46,21 +46,7 @@ extern void sub_81C742C(u8 taskId);
 extern void sub_81C7400(void);
 extern void sub_81C7418(void);
 
-/*
-void CB2_PokeNav(void)
-{
-    gUnknown_0203CF40 = Alloc(0x5C);
-    if (gUnknown_0203CF40 == NULL) {
-        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-    } else {
-        sub_81C7360();
-        ResetTasks();
-        SetVBlankCallback(NULL);
-        CreateTask(sub_81C742C, 0);
-        SetMainCallback2(sub_81C7400);
-        SetVBlankCallback(sub_81C7418);
-    }
-}*/
+
 
 extern u8 gUnknown_0203CF3C;
 extern void sub_81C7170(u8 a0);
@@ -171,4 +157,19 @@ void sub_81C71E4(u8 taskId) {
 		case 2:
 		case 3:
 	}
+}
+
+void CB2_PokeNav(void)
+{
+    gUnknown_0203CF40 = Alloc(0x5C);
+    if (gUnknown_0203CF40 == NULL) {
+        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+    } else {
+        sub_81C7360();
+        ResetTasks();
+        SetVBlankCallback(NULL);
+        CreateTask(sub_81C742C, 0);
+        SetMainCallback2(sub_81C7400);
+        SetVBlankCallback(sub_81C7418);
+    }
 }
