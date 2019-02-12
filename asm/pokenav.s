@@ -5,69 +5,7 @@
 
 	.text
 
-	thumb_func_start sub_81C7388
-sub_81C7388: @ 81C7388
-	push {r4-r6,lr}
-	movs r5, 0
-_081C738C:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0x5
-	bl GetMonData
-	cmp r0, 0
-	beq _081C73BA
-	adds r0, r4, 0
-	movs r1, 0x6
-	bl GetMonData
-	cmp r0, 0
-	bne _081C73BA
-	adds r0, r4, 0
-	movs r1, 0x52
-	bl GetMonData
-	cmp r0, 0
-	bne _081C73E2
-_081C73BA:
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _081C738C
-	movs r4, 0
-_081C73C2:
-	movs r5, 0
-	lsls r6, r4, 24
-_081C73C6:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl CheckBoxMonSanityAt
-	cmp r0, 0
-	beq _081C73EC
-	lsls r1, r5, 24
-	lsrs r1, 24
-	lsrs r0, r6, 24
-	movs r2, 0x52
-	bl GetBoxMonDataAt
-	cmp r0, 0
-	beq _081C73EC
-_081C73E2:
-	movs r0, 0x1
-	b _081C73FA
-	.pool
-_081C73EC:
-	adds r5, 0x1
-	cmp r5, 0x1D
-	ble _081C73C6
-	adds r4, 0x1
-	cmp r4, 0xD
-	ble _081C73C2
-	movs r0, 0
-_081C73FA:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7388
+
 
 	thumb_func_start sub_81C7400
 sub_81C7400: @ 81C7400

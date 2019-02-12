@@ -5,6 +5,7 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "palette.h"
+#include "pokemon_storage_system.h"
 
 struct UnknownStruct_0203CF40 {
 	u32 field_0;
@@ -24,7 +25,7 @@ extern void sub_81C7418(void);
 extern void sub_81C7170(u8 a0);
 extern void sub_81C71E4(u8 a0);
 extern void sub_81C7650(s32 a0);
-extern u32 sub_81C7388(void);
+extern u32 AnyMonHasRibbon(void);
 
 void sub_81C72BC(void);
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
@@ -202,6 +203,32 @@ void sub_81C7360(struct UnknownStruct_0203CF40 *a0) {
 	}
 	a0->field_2 = 0;
 	a0->field_1 = 0;
-	a0->field_3 = sub_81C7388();
+	a0->field_3 = AnyMonHasRibbon();
 	a0->field_0 = 0;
+}
+
+bool32 AnyMonHasRibbon() {
+	s32 i;
+	s32 j;
+
+	for (i = 0; i < 6; i++) {
+		if (GetMonData(&gPlayerParty[i],  MON_DATA_SANITY_HAS_SPECIES)
+			&& !GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
+			&& GetMonData(&gPlayerParty[i], MON_DATA_RIBBON_COUNT) != 0)
+		{
+			return TRUE;
+		}
+	}
+
+	for (j = 0; j < 14; j++) {
+		for (i = 0; i < 30; i++) {
+			if (CheckBoxMonSanityAt(j, i)
+				&& GetBoxMonDataAt(j, i, MON_DATA_RIBBON_COUNT) != 0)
+			{
+				return TRUE;
+			}
+		}
+	}
+
+	return FALSE;
 }
