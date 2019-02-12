@@ -6,7 +6,7 @@
 
 void InitEventData(void);
 void ClearTempFieldEventData(void);
-void ClearUpperFlags(void);
+void ClearDailyFlags(void);
 void DisableNationalPokedex(void);
 void EnableNationalPokedex(void);
 bool32 IsNationalPokedexEnabled(void);

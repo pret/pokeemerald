@@ -98,7 +98,7 @@ Route120_EventScript_1F5523:: @ 81F5523
 Route120_EventScript_1F5527:: @ 81F5527
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_120_RECEIVED_BERRY, Route120_EventScript_1F5625
 	msgbox Route120_Text_2A70C7, MSGBOX_YESNO
 	compare VAR_RESULT, 1

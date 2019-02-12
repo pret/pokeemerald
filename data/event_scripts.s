@@ -1748,7 +1748,7 @@ RustboroCity_Gym_EventScript_271E84:: @ 8271E84
 
 DewfordTown_EventScript_271E8B:: @ 8271E8B
 DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
-	dodailyevents
+	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return

@@ -9,7 +9,7 @@ Route123_BerryMastersHouse_MapScript1_26F841: @ 826F841
 Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_26F8B6
 	msgbox Route123_BerryMastersHouse_Text_2A7386, MSGBOX_DEFAULT
 	random 10
@@ -38,7 +38,7 @@ Route123_BerryMastersHouse_EventScript_26F8B6:: @ 826F8B6
 Route123_BerryMastersHouse_EventScript_26F8C0:: @ 826F8C0
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_BERRY_MASTERS_WIFE, Route123_BerryMastersHouse_EventScript_26FA6F
 	msgbox Route123_BerryMastersHouse_Text_2A74E6, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 13
