@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C71E4
-sub_81C71E4: @ 81C71E4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl sub_8087598
-	cmp r0, 0
-	bne _081C724A
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetWordTaskArg
-	adds r2, r0, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	bl _call_via_r2
-	cmp r0, 0x4
-	bhi _081C7246
-	lsls r0, 2
-	ldr r1, =_081C7224
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C7224:
-	.4byte _081C7238
-	.4byte _081C7238
-	.4byte _081C724A
-	.4byte _081C724A
-	.4byte _081C723E
-_081C7238:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _081C7248
-_081C723E:
-	adds r0, r5, 0
-	bl DestroyTask
-	b _081C724A
-_081C7246:
-	subs r0, 0x5
-_081C7248:
-	strh r0, [r4]
-_081C724A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C71E4
-
 	thumb_func_start CB2_PokeNav
 CB2_PokeNav: @ 81C7250
 	push {r4,lr}

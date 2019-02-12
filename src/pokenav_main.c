@@ -145,3 +145,30 @@ void sub_81C7170(u8 taskId)
 		}
 	}
 }
+
+void sub_81C71E4(u8 taskId) {
+	u32 (*func)(u32);
+	s16 *data;
+	u32 v1;
+
+	if (sub_8087598()) {
+		return;
+	}
+	func = (u32 (*)(u32))GetWordTaskArg(taskId, 1);
+	data = gTasks[taskId].data;
+	v1 = func(data[0]);
+	switch (v1) {
+		case 0:
+		case 1:
+			data[0]++;
+			break;
+		case 4:
+			DestroyTask(taskId);
+			break;
+		default:
+			data[0] = v1 - 5;
+			break;
+		case 2:
+		case 3:
+	}
+}
