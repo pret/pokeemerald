@@ -6,26 +6,28 @@
 #include "field_weather.h"
 #include "palette.h"
 
-// Can confirm the size is correct on line 287 of the generated pokenav_main.s
-// file. The expected size is 0x5C.
 struct UnknownStruct_0203CF40 {
-	u8 data1[8];
-	u16 field_0;
-	u8 data[0x52];
+	u32 field_0;
+	u32 field_1;
+	u16 field_2;
+	u32 field_3;
+	u32 field_4;
+	u32 field_5[18];
 };
 
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
 
-extern void sub_81C7360(void);
 extern void sub_81C742C(u8 taskId);
 extern void sub_81C7400(void);
 extern void sub_81C7418(void);
 extern void sub_81C7170(u8 a0);
 extern void sub_81C71E4(u8 a0);
 extern void sub_81C7650(s32 a0);
+extern u32 sub_81C7388(void);
 
 void sub_81C72BC(void);
+void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 
 u32 sub_81C7078(u32 (*a0)(u32), u32 a1)
 {
@@ -140,7 +142,7 @@ void CB2_PokeNav(void)
     if (gUnknown_0203CF40 == NULL) {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
     } else {
-        sub_81C7360();
+        sub_81C7360(gUnknown_0203CF40);
         ResetTasks();
         SetVBlankCallback(NULL);
         CreateTask(sub_81C742C, 0);
@@ -161,8 +163,8 @@ void sub_81C72BC() {
 		if (gUnknown_0203CF40 == NULL) {
 			SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 		} else {
-			sub_81C7360();
-			gUnknown_0203CF40->field_0 = 1;
+			sub_81C7360(gUnknown_0203CF40);
+			gUnknown_0203CF40->field_2 = 1;
 			ResetTasks();
 			ResetSpriteData();
 			FreeAllSpritePalettes();
@@ -183,4 +185,23 @@ void sub_81C7334() {
 	Free(gUnknown_0203CF40);
 	gUnknown_0203CF40 = NULL;
 	InitKeys();
+}
+
+// Clears UnknownStruct_0203CF40
+void sub_81C7360(struct UnknownStruct_0203CF40 *a0) {
+	s32 i;
+	u32 *arrayPtr;
+	s32 fill;
+
+	fill = 0;
+	i = 18;
+	arrayPtr = &(a0->field_5[17]);
+	for (i; i >= 0; i--) {
+		*arrayPtr = fill;
+		arrayPtr -= 1;
+	}
+	a0->field_2 = 0;
+	a0->field_1 = 0;
+	a0->field_3 = sub_81C7388();
+	a0->field_0 = 0;
 }

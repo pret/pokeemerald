@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C7360
-sub_81C7360: @ 81C7360
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r2, 0
-	movs r1, 0x12
-	adds r0, 0x58
-_081C736A:
-	str r2, [r0]
-	subs r0, 0x4
-	subs r1, 0x1
-	cmp r1, 0
-	bge _081C736A
-	movs r4, 0
-	strh r4, [r5, 0x8]
-	str r4, [r5, 0x4]
-	bl sub_81C7388
-	str r0, [r5, 0xC]
-	str r4, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7360
-
 	thumb_func_start sub_81C7388
 sub_81C7388: @ 81C7388
 	push {r4-r6,lr}
