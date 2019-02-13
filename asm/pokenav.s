@@ -5,55 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C756C
-sub_81C756C: @ 81C756C
-	push {r4-r6,lr}
-	ldr r1, =0xfffe7960
-	adds r6, r0, r1
-	bl sub_81C75F4
-	ldr r5, =gUnknown_0861F3EC
-	lsls r0, r6, 3
-	subs r0, r6
-	lsls r4, r0, 2
-	adds r0, r4, r5
-	ldr r0, [r0]
-	bl _call_via_r0
-	cmp r0, 0
-	beq _081C75CC
-	adds r0, r5, 0
-	adds r0, 0x8
-	adds r0, r4, r0
-	ldr r0, [r0]
-	bl _call_via_r0
-	cmp r0, 0
-	beq _081C75CC
-	adds r0, r5, 0
-	adds r0, 0xC
-	adds r0, r4, r0
-	ldr r0, [r0]
-	adds r1, r5, 0
-	adds r1, 0x10
-	adds r1, r4, r1
-	ldr r1, [r1]
-	bl sub_81C7834
-	ldr r0, =gUnknown_0203CF40
-	ldr r1, [r0]
-	adds r0, r5, 0x4
-	adds r0, r4, r0
-	ldr r0, [r0]
-	str r0, [r1]
-	str r6, [r1, 0x4]
-	movs r0, 0x1
-	b _081C75CE
-	.pool
-_081C75CC:
-	movs r0, 0
-_081C75CE:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C756C
-
 	thumb_func_start sub_81C75D4
 sub_81C75D4: @ 81C75D4
 	push {lr}
@@ -9441,7 +9392,7 @@ sub_81CBE50: @ 81CBE50
 	movs r0, 0x9
 	bl GetGameStat
 	adds r1, r0, 0
-	ldr r0, =0x0001869f
+	ldr r0, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
 	cmp r1, r0
 	ble _081CBE68
 	adds r1, r0, 0

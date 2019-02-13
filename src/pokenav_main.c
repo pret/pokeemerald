@@ -7,8 +7,10 @@
 #include "palette.h"
 #include "pokemon_storage_system.h"
 
+#define UNKNOWN_OFFSET 100000
+
 struct UnknownStruct_0203CF40 {
-	u32 field0;
+	u32 (*field0)(void);
 	u32 field4;
 	u16 field8;
 	u32 fieldC;
@@ -17,7 +19,7 @@ struct UnknownStruct_0203CF40 {
 };
 
 struct UnknownStruct_0861F3EC {
-	void (*data[7])(void);
+	u32 (*data[7])(void);
 };
 
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
@@ -29,13 +31,15 @@ extern void sub_81C76C4(void);
 extern void sub_81C7710(void);
 extern void sub_81C7850(u32 a0);
 extern void sub_81C9430(void);
-extern u32 sub_81C756C(u32 a0);
+extern void sub_81C75F4(void);
+extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 extern u32 sub_81C76FC(void);
 extern u32 sub_81C786C(void);
 extern u32 sub_81C75E0(void);
 extern u32 sub_81C75D4(void);
 extern u32 sub_81C7738(void);
 
+bool32 sub_81C756C(u32 a0);
 u32 AnyMonHasRibbon(void);
 void sub_81C7334(void);
 void sub_81C71E4(u8 a0);
@@ -220,7 +224,7 @@ void sub_81C7360(struct UnknownStruct_0203CF40 *a0) {
 	a0->field8 = 0;
 	a0->field4 = 0;
 	a0->fieldC = AnyMonHasRibbon();
-	a0->field0 = 0;
+	a0->field0 = NULL;
 }
 
 bool32 AnyMonHasRibbon() {
@@ -278,7 +282,7 @@ void sub_81C742C(u8 taskId) {
 		if (sub_81C76FC()) {
 			break;
 		}
-		sub_81C756C(0x186a0);
+		sub_81C756C(UNKNOWN_OFFSET);
 		dataPtr[0] = 4;
 		break;
 	case 2:
@@ -291,7 +295,7 @@ void sub_81C742C(u8 taskId) {
 		if (v1 == -1) {
 			sub_81C7710();
 			dataPtr[0] = 5;
-		} else if (v1 > 0x1869F) {
+		} else if (v1 >= UNKNOWN_OFFSET) {
 			gUnknown_0861F3EC[gUnknown_0203CF40->field4].data[6]();
 			gUnknown_0861F3EC[gUnknown_0203CF40->field4].data[5]();
 			if (sub_81C756C(v1)) {
@@ -324,4 +328,21 @@ void sub_81C742C(u8 taskId) {
 			}
 		}
 	}
+}
+
+bool32 sub_81C756C(u32 a0) {
+	u32 index;
+
+	index = a0 - UNKNOWN_OFFSET;
+	sub_81C75F4();
+	if (!gUnknown_0861F3EC[index].data[0]()) {
+		return FALSE;
+	}
+	if (!gUnknown_0861F3EC[index].data[2]()) {
+		return FALSE;
+	}
+	sub_81C7834(gUnknown_0861F3EC[index].data[3], gUnknown_0861F3EC[index].data[4]);
+	gUnknown_0203CF40->field0 = gUnknown_0861F3EC[index].data[1];
+	gUnknown_0203CF40->field4 = index;
+	return TRUE;
 }

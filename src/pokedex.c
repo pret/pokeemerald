@@ -4036,7 +4036,7 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
     lsls r2, 24\n\
     lsrs r2, 24\n\
     str r2, [sp, 0x10]\n\
-    ldr r5, =0x000186a0\n\
+    ldr r5, =0x000186a0 @ Note to decompiler: See UNKNOWN_OFFSET\n\
     muls r0, r5\n\
     ldr r1, =0x000011b8\n\
     bl __divsi3\n\
@@ -4070,7 +4070,7 @@ _080C04C0:\n\
     mov r8, r1\n\
     movs r6, 0x1\n\
 _080C04C6:\n\
-    ldr r1, =0x000186a0\n\
+    ldr r1, =0x000186a0 @ Note to decompiler: See UNKNOWN_OFFSET\n\
     adds r0, r7, 0\n\
     bl __umodsi3\n\
     adds r7, r0, 0\n\

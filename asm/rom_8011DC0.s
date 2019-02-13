@@ -27181,7 +27181,7 @@ sub_8024700: @ 8024700
 	adds r0, r5, 0
 	bl sub_8024668
 	adds r1, r0, r4
-	ldr r2, =0x0001869f
+	ldr r2, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
 	cmp r1, r2
 	bhi _08024730
 	adds r0, r5, 0
