@@ -5,70 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C75D4
-sub_81C75D4: @ 81C75D4
-	push {lr}
-	bl sub_81C786C
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C75D4
-
-	thumb_func_start sub_81C75E0
-sub_81C75E0: @ 81C75E0
-	push {lr}
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0]
-	bl _call_via_r0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C75E0
-
-	thumb_func_start sub_81C75F4
-sub_81C75F4: @ 81C75F4
-	push {lr}
-	bl InitKeys
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C75F4
-
-	thumb_func_start c3args_set_0toR1_1to0
-c3args_set_0toR1_1to0: @ 81C7600
-	push {lr}
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	thumb_func_end c3args_set_0toR1_1to0
-
-	thumb_func_start sub_81C760C
-sub_81C760C: @ 81C760C
-	push {lr}
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C760C
-
-	thumb_func_start sub_81C761C
-sub_81C761C: @ 81C761C
-	push {r4,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	bl Alloc
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	lsls r4, 2
-	adds r1, 0x10
-	adds r1, r4
-	str r0, [r1]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C761C
-
 	thumb_func_start sub_81C763C
 sub_81C763C: @ 81C763C
 	ldr r1, =gUnknown_0203CF40
@@ -6694,7 +6630,7 @@ titlescreen_0: @ 81CA92C
 	ldr r2, [r2, 0x8]
 	bl ScanlineEffect_SetParams
 	ldr r0, =sub_81CA914
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	ldr r0, =sub_81CA9EC
 	movs r1, 0x3
 	bl CreateTask
@@ -10543,7 +10479,7 @@ _081CC714:
 	.4byte _081CC82A
 _081CC734:
 	movs r0, 0
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	movs r0, 0x1
 	bl HideBg
 	movs r0, 0x2
@@ -10623,7 +10559,7 @@ _081CC7E2:
 	movs r0, 0x2
 	bl ShowBg
 	ldr r0, =sub_81CC6A4
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	b _081CC77C
 	.pool
 _081CC804:
@@ -13809,7 +13745,7 @@ _081CE218:
 	bne _081CE2C0
 _081CE230:
 	ldr r0, =sub_81CEE44
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	b _081CDFB0
 	.pool
 _081CE23C:
