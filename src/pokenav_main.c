@@ -29,6 +29,11 @@ struct UnknownStruct_0861F3EC {
 	u32 (*data[7])(void);
 };
 
+struct UnknownStruct_sub_81C7850 {
+	// Unknown size; at least 3.
+	void (*data[3])(u32);
+};
+
 struct UnknownStruct_sub_81C76C4 {
 	u32 data[523];
 };
@@ -39,10 +44,7 @@ extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
 extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
 
-extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
-extern void sub_81C7850(u32 a0);
 extern void sub_81C9430(void);
-extern u32 sub_81C786C(void);
 extern void sub_81CAADC(void);
 extern void sub_81C99D4(void);
 extern void sub_81C7C94(void);
@@ -51,6 +53,8 @@ extern void sub_81C7944(void* palette, u32 a1, u32 a2);
 extern void sub_81C7B74(void);
 extern void sub_81C7C28(void);
 extern void sub_81C7D28(void);
+extern u32 atk47_cmd47(s32 a0);
+extern u32 sub_81C791C(s32 a0);
 
 
 bool32 sub_81C756C(u32 a0);
@@ -59,10 +63,13 @@ u32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
 u32 sub_81C76FC(void);
+u32 sub_81C786C(void);
 u32 sub_81C7764(s32 a0);
 bool32 sub_81C7738(void);
+void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 void sub_81C7650(u32 index);
+void sub_81C7850(u32 a0);
 void sub_81C71E4(u8 a0);
 void sub_81C7170(u8 a0);
 void sub_81C742C(u8 taskId);
@@ -508,4 +515,55 @@ u32 sub_81C7764(s32 a0) {
 	default:
 		return 4;
 	}
+}
+
+void sub_81C7834(u32 (*a0)(void), u32(*a1)(void)) {
+	// This is a guess.
+	struct UnknownStruct_0861F3EC *v1;
+
+	v1 = sub_81C763C(0);
+	v1->data[0] = a0;
+	v1->data[1] = a1;
+	v1->data[2] = NULL;
+}
+
+void sub_81C7850(u32 a0) {
+	// This is a guess.
+	struct UnknownStruct_sub_81C7850 *v1;
+
+	v1 = sub_81C763C(0);
+	v1->data[2] = NULL;
+	v1->data[0](a0);
+}
+
+u32 sub_81C786C(void) {
+	// This is a guess.
+	struct UnknownStruct_0861F3EC *v1;
+
+	v1 = sub_81C763C(0);
+	return v1->data[1]();
+}
+
+void sub_81C7880(void) {
+	// This is a guess.
+	struct UnknownStruct_0203CF40* v1;
+	
+	v1 = sub_81C763C(0);
+	v1->fieldC = sub_81C7078(atk47_cmd47, 4);
+}
+
+void sub_81C78A0(void) {
+	// This is a guess.
+	struct UnknownStruct_0203CF40* v1;
+
+	v1 = sub_81C763C(0);
+	v1->fieldC = sub_81C7078(sub_81C791C, 4);
+}
+
+bool32 sub_81C78C0(void) {
+	// This is a guess.
+	struct UnknownStruct_0203CF40* v1;
+
+	v1 = sub_81C763C(0);
+	return sub_81C70D8(v1->fieldC);
 }
