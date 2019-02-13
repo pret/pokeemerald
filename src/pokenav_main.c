@@ -9,6 +9,10 @@
 #include "sound.h"
 #include "constants/songs.h"
 #include "window.h"
+#include "gpu_regs.h"
+#include "bg.h"
+#include "menu.h"
+#include "graphics.h"
 
 #define UNKNOWN_OFFSET 100000
 
@@ -29,6 +33,8 @@ struct UnknownStruct_sub_81C76C4 {
 	u32 data[523];
 };
 
+extern struct BgTemplate gUnknown_0861FA04;
+
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
 extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
@@ -36,11 +42,15 @@ extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at l
 extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 extern void sub_81C7850(u32 a0);
 extern void sub_81C9430(void);
-extern u32 sub_81C7764(u32 a0);
 extern u32 sub_81C786C(void);
 extern void sub_81CAADC(void);
 extern void sub_81C99D4(void);
 extern void sub_81C7C94(void);
+extern void sub_8199D98(void);
+extern void sub_81C7944(void* palette, u32 a1, u32 a2);
+extern void sub_81C7B74(void);
+extern void sub_81C7C28(void);
+extern void sub_81C7D28(void);
 
 
 bool32 sub_81C756C(u32 a0);
@@ -49,6 +59,7 @@ u32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
 u32 sub_81C76FC(void);
+u32 sub_81C7764(s32 a0);
 bool32 sub_81C7738(void);
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 void sub_81C7650(u32 index);
@@ -62,7 +73,7 @@ void sub_81C7418(void);
 void sub_81C7400(void);
 void sub_81C72BC(void);
 
-u32 sub_81C7078(u32 (*a0)(u32), u32 a1)
+u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
 {
     u16 taskId;
 
@@ -454,5 +465,47 @@ bool32 sub_81C7738(void) {
 		return FALSE;
 	} else {
 		return TRUE;
+	}
+}
+
+u32 sub_81C7764(s32 a0) {
+	// This is a guess.
+	struct UnknownStruct_sub_81C76C4 *v1;
+
+	switch (a0) {
+	case 0:
+		SetGpuReg(0, 0x82 << 5);
+		FreeAllWindowBuffers();
+		ResetBgsAndClearDma3BusyFlags(0);
+		InitBgsFromTemplates(0, &gUnknown_0861FA04, 1);
+		sub_8199D98();
+		reset_temp_tile_data_buffers();
+		return 1;
+	case 1:
+		v1 = sub_81C763C(0);
+		decompress_and_copy_tile_data_to_vram(0, &gPokenavHeader_Gfx, 0, 0, 0);
+		SetBgTilemapBuffer(0, &v1->data[11]);
+		CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
+		sub_81C7944(&gPokenavHeader_Pal, 0, 0x20);
+		CopyBgTilemapBufferToVram(0);
+		return 0;
+	case 2:
+		if (free_temp_tile_data_buffers_if_possible()) {
+			return 2;
+		} else {
+			sub_81C7B74();
+			return 0;
+		}
+	case 3:
+		if (IsDma3ManagerBusyWithBgCopy()) {
+			return 2;
+		} else {
+			sub_81C7C28();
+			sub_81C7D28();
+			ShowBg(0);
+			return 4;
+		}
+	default:
+		return 4;
 	}
 }
