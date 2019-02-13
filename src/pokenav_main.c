@@ -6,6 +6,9 @@
 #include "field_weather.h"
 #include "palette.h"
 #include "pokemon_storage_system.h"
+#include "sound.h"
+#include "constants/songs.h"
+#include "window.h"
 
 #define UNKNOWN_OFFSET 100000
 
@@ -32,12 +35,12 @@ extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at l
 
 extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 extern void sub_81C7850(u32 a0);
-extern void sub_81C7710(void);
 extern void sub_81C9430(void);
 extern u32 sub_81C7764(u32 a0);
-extern u32 sub_81C76FC(void);
 extern u32 sub_81C786C(void);
-extern u32 sub_81C7738(void);
+extern void sub_81CAADC(void);
+extern void sub_81C99D4(void);
+extern void sub_81C7C94(void);
 
 
 bool32 sub_81C756C(u32 a0);
@@ -45,11 +48,14 @@ bool32 sub_81C76C4(void);
 u32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
+u32 sub_81C76FC(void);
+bool32 sub_81C7738(void);
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 void sub_81C7650(u32 index);
 void sub_81C71E4(u8 a0);
 void sub_81C7170(u8 a0);
 void sub_81C742C(u8 taskId);
+void sub_81C7710(void);
 void sub_81C75F4(void);
 void sub_81C7334(void);
 void sub_81C7418(void);
@@ -71,7 +77,7 @@ u32 sub_81C7078(u32 (*a0)(u32), u32 a1)
     return ((gUnknown_0203CF3C++) << 16) | taskId;
 }
 
-bool32 sub_81C70D8(u32 a0, u32 unused)
+bool32 sub_81C70D8(u32 a0)
 {
 	u32 v1 = a0 & 0xFFFF;
 	u32 v2 = a0 >> 16;
@@ -423,6 +429,30 @@ bool32 sub_81C76C4(void) {
 		ResetSpriteData();
 		FreeAllSpritePalettes();
 		v1->data[3] = sub_81C7078(sub_81C7764, 1);
+		return TRUE;
+	}
+}
+
+u32 sub_81C76FC(void) {
+	// This is a guess.
+	struct UnknownStruct_sub_81C76C4 *v1;
+	v1 = sub_81C763C(0);
+	return sub_81C70D8(v1->data[3]);
+}
+
+void sub_81C7710(void) {
+	PlaySE(SE_PN_OFF);
+	sub_81CAADC();
+	BeginNormalPaletteFade(-1, -1, 0, 16, 0);
+}
+
+bool32 sub_81C7738(void) {
+	if (!gPaletteFade.active) {
+		sub_81C99D4();
+		sub_81C7C94();
+		FreeAllWindowBuffers();
+		return FALSE;
+	} else {
 		return TRUE;
 	}
 }
