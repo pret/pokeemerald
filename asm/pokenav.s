@@ -5,32 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C76C4
-sub_81C76C4: @ 81C76C4
-	push {r4,lr}
-	ldr r1, =0x0000082c
-	movs r0, 0
-	bl sub_81C761C
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081C76F4
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r0, =sub_81C7764
-	movs r1, 0x1
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	movs r0, 0x1
-	b _081C76F6
-	.pool
-_081C76F4:
-	movs r0, 0
-_081C76F6:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C76C4
-
 	thumb_func_start sub_81C76FC
 sub_81C76FC: @ 81C76FC
 	push {lr}

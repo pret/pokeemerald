@@ -15,12 +15,15 @@ struct UnknownStruct_0203CF40 {
 	u16 field8;
 	u16 fieldA;
 	u32 fieldC;
-	u32* field10[19];
-	//u32* field14[18];
+	void* field10[19];
 };
 
 struct UnknownStruct_0861F3EC {
 	u32 (*data[7])(void);
+};
+
+struct UnknownStruct_sub_81C76C4 {
+	u32 data[523];
 };
 
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
@@ -29,14 +32,16 @@ extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at l
 
 extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 extern void sub_81C7850(u32 a0);
-extern void sub_81C76C4(void);
 extern void sub_81C7710(void);
 extern void sub_81C9430(void);
+extern u32 sub_81C7764(u32 a0);
 extern u32 sub_81C76FC(void);
 extern u32 sub_81C786C(void);
 extern u32 sub_81C7738(void);
 
+
 bool32 sub_81C756C(u32 a0);
+bool32 sub_81C76C4(void);
 u32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
@@ -212,8 +217,8 @@ void sub_81C7334() {
 // Clears UnknownStruct_0203CF40
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0) {
 	s32 i;
-	u32 **arrayPtr;
-	s32 *fill;
+	void **arrayPtr;
+	void *fill;
 
 	fill = NULL;
 	i = 18;
@@ -368,12 +373,12 @@ void sub_81C760C(void) {
 	SetVBlankCallback(sub_81C7418);
 }
 
-u32* sub_81C761C(u32 a0, u32 a1) {
-	return gUnknown_0203CF40->field10[a0] = (u32*)Alloc(a1);
+void* sub_81C761C(u32 index, u32 size) {
+	return gUnknown_0203CF40->field10[index] = (void*)Alloc(size);
 }
 
-u32* sub_81C763C(u32 a0) {
-	return gUnknown_0203CF40->field10[a0];
+void* sub_81C763C(u32 index) {
+	return gUnknown_0203CF40->field10[index];
 }
 
 void sub_81C7650(u32 index) {
@@ -408,4 +413,16 @@ u32 sub_81C76B8(void) {
 	return gUnknown_0203CF40->fieldC;
 }
 
+bool32 sub_81C76C4(void) {
+	struct UnknownStruct_sub_81C76C4 *v1;
 
+	v1 = (struct UnknownStruct_sub_81C76C4*)sub_81C761C(0, sizeof(struct UnknownStruct_sub_81C76C4));
+	if (v1 == NULL) {
+		return FALSE;
+	} else {
+		ResetSpriteData();
+		FreeAllSpritePalettes();
+		v1->data[3] = sub_81C7078(sub_81C7764, 1);
+		return TRUE;
+	}
+}
