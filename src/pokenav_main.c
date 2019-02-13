@@ -8,25 +8,41 @@
 #include "pokemon_storage_system.h"
 
 struct UnknownStruct_0203CF40 {
-	u32 field_0;
-	u32 field_1;
-	u16 field_2;
-	u32 field_3;
-	u32 field_4;
-	u32 field_5[18];
+	u32 field0;
+	u32 field4;
+	u16 field8;
+	u32 fieldC;
+	u32 field10;
+	u32 field14[18];
+};
+
+struct UnknownStruct_0861F3EC {
+	void (*data[7])(void);
 };
 
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
+extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
 
-extern void sub_81C742C(u8 taskId);
-extern void sub_81C7400(void);
-extern void sub_81C7418(void);
-extern void sub_81C7170(u8 a0);
-extern void sub_81C71E4(u8 a0);
 extern void sub_81C7650(s32 a0);
-extern u32 AnyMonHasRibbon(void);
+extern void sub_81C76C4(void);
+extern void sub_81C7710(void);
+extern void sub_81C7850(u32 a0);
+extern void sub_81C9430(void);
+extern u32 sub_81C756C(u32 a0);
+extern u32 sub_81C76FC(void);
+extern u32 sub_81C786C(void);
+extern u32 sub_81C75E0(void);
+extern u32 sub_81C75D4(void);
+extern u32 sub_81C7738(void);
 
+u32 AnyMonHasRibbon(void);
+void sub_81C7334(void);
+void sub_81C71E4(u8 a0);
+void sub_81C7170(u8 a0);
+void sub_81C7418(void);
+void sub_81C7400(void);
+void sub_81C742C(u8 taskId);
 void sub_81C72BC(void);
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 
@@ -165,7 +181,7 @@ void sub_81C72BC() {
 			SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 		} else {
 			sub_81C7360(gUnknown_0203CF40);
-			gUnknown_0203CF40->field_2 = 1;
+			gUnknown_0203CF40->field8 = 1;
 			ResetTasks();
 			ResetSpriteData();
 			FreeAllSpritePalettes();
@@ -196,15 +212,15 @@ void sub_81C7360(struct UnknownStruct_0203CF40 *a0) {
 
 	fill = 0;
 	i = 18;
-	arrayPtr = &(a0->field_5[17]);
+	arrayPtr = &(a0->field14[17]);
 	for (i; i >= 0; i--) {
 		*arrayPtr = fill;
 		arrayPtr -= 1;
 	}
-	a0->field_2 = 0;
-	a0->field_1 = 0;
-	a0->field_3 = AnyMonHasRibbon();
-	a0->field_0 = 0;
+	a0->field8 = 0;
+	a0->field4 = 0;
+	a0->fieldC = AnyMonHasRibbon();
+	a0->field0 = 0;
 }
 
 bool32 AnyMonHasRibbon() {
@@ -244,4 +260,68 @@ void sub_81C7418() {
 	TransferPlttBuffer();
 	LoadOam();
 	ProcessSpriteCopyRequests();
+}
+
+void sub_81C742C(u8 taskId) {
+	s16* dataPtr;
+	u32 v1;
+	bool32 v2;
+
+	dataPtr = gTasks[taskId].data;
+
+	switch (dataPtr[0]) {
+	case 0:
+		sub_81C76C4();
+		dataPtr[0] = 1;
+		break;
+	case 1:
+		if (sub_81C76FC()) {
+			break;
+		}
+		sub_81C756C(0x186a0);
+		dataPtr[0] = 4;
+		break;
+	case 2:
+		if (sub_81C786C()) {
+			break;
+		}
+		dataPtr[0] = 3;
+	case 3:
+		v1 = sub_81C75E0();
+		if (v1 == -1) {
+			sub_81C7710();
+			dataPtr[0] = 5;
+		} else if (v1 > 0x1869F) {
+			gUnknown_0861F3EC[gUnknown_0203CF40->field4].data[6]();
+			gUnknown_0861F3EC[gUnknown_0203CF40->field4].data[5]();
+			if (sub_81C756C(v1)) {
+				dataPtr[0] = 4;
+			} else {
+				sub_81C7710();
+				dataPtr[0] = 5;
+			}
+		} else if (v1 != 0) {
+			sub_81C7850(v1);
+			if (sub_81C786C()) {
+				dataPtr[0] = 2;
+			}
+		}
+		break;
+	case 4:
+		if (!sub_81C75D4()) {
+			dataPtr[0] = 3;
+		}
+		break;
+	case 5:
+		if (!sub_81C7738()) {
+			v2 = gUnknown_0203CF40->field8 != 0;
+			sub_81C9430();
+			sub_81C7334();
+			if (v2) {
+				SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+			} else {
+				SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+			}
+		}
+	}
 }
