@@ -13,6 +13,7 @@ struct UnknownStruct_0203CF40 {
 	u32 (*field0)(void);
 	u32 field4;
 	u16 field8;
+	u16 fieldA;
 	u32 fieldC;
 	u32* field10[19];
 	//u32* field14[18];
@@ -26,12 +27,11 @@ extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
 extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
 
-extern void sub_81C7650(s32 a0);
+extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
+extern void sub_81C7850(u32 a0);
 extern void sub_81C76C4(void);
 extern void sub_81C7710(void);
-extern void sub_81C7850(u32 a0);
 extern void sub_81C9430(void);
-extern void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 extern u32 sub_81C76FC(void);
 extern u32 sub_81C786C(void);
 extern u32 sub_81C7738(void);
@@ -40,15 +40,16 @@ bool32 sub_81C756C(u32 a0);
 u32 AnyMonHasRibbon(void);
 u32 sub_81C75E0(void);
 u32 sub_81C75D4(void);
-void sub_81C75F4(void);
-void sub_81C7334(void);
+void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
+void sub_81C7650(u32 index);
 void sub_81C71E4(u8 a0);
 void sub_81C7170(u8 a0);
+void sub_81C742C(u8 taskId);
+void sub_81C75F4(void);
+void sub_81C7334(void);
 void sub_81C7418(void);
 void sub_81C7400(void);
-void sub_81C742C(u8 taskId);
 void sub_81C72BC(void);
-void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 
 u32 sub_81C7078(u32 (*a0)(u32), u32 a1)
 {
@@ -370,3 +371,41 @@ void sub_81C760C(void) {
 u32* sub_81C761C(u32 a0, u32 a1) {
 	return gUnknown_0203CF40->field10[a0] = (u32*)Alloc(a1);
 }
+
+u32* sub_81C763C(u32 a0) {
+	return gUnknown_0203CF40->field10[a0];
+}
+
+void sub_81C7650(u32 index) {
+	if (gUnknown_0203CF40->field10[index] != NULL) {
+		Free(gUnknown_0203CF40->field10[index]);
+		gUnknown_0203CF40->field10[index] = NULL;
+	}
+}
+
+u16 sub_81C767C(void) {
+	return gUnknown_0203CF40->field8;
+}
+
+void sub_81C7688(u16 a0) {
+	gUnknown_0203CF40->field8 = a0;
+}
+
+void sub_81C7694(u32 a0) {
+	u32 value;
+	value = a0;
+	if (a0 > 4) {
+		value = 0;
+	}
+	gUnknown_0203CF40->fieldA = value;
+}
+
+u16 sub_81C76AC(void) {
+	return gUnknown_0203CF40->fieldA;
+}
+
+u32 sub_81C76B8(void) {
+	return gUnknown_0203CF40->fieldC;
+}
+
+
