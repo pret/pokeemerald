@@ -12,7 +12,7 @@
 #define sTRIPLE_KICK_POWER gBattleScripting + 0x12
 #define sMOVEEND_STATE gBattleScripting + 0x14
 #define sBATTLER_WITH_ABILITY gBattleScripting + 0x15
-#define sMULTIHIT_EFFECT gBattleScripting + 0x16
+#define sUNUSED_16 gBattleScripting + 0x16
 #define sBATTLER gBattleScripting + 0x17
 #define sB_ANIM_TURN gBattleScripting + 0x18
 #define sB_ANIM_TARGETS_HIT gBattleScripting + 0x19
@@ -32,8 +32,9 @@
 #define sMON_CAUGHT gBattleScripting + 0x27
 #define sSAVED_DMG gBattleScripting + 0x28
 #define sSAVED_MOVE_EFFECT gBattleScripting + 0x2C
+#define sMOVE_EFFECT gBattleScripting + 0x2E
+#define sMULTIHIT_EFFECT gBattleScripting + 0x30
 
-#define cEFFECT_CHOOSER gBattleCommunication + 3
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 
 // Battle Script defines for getting the wanted battler

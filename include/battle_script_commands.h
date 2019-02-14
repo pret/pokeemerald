@@ -6,7 +6,7 @@
 
 s32 CalcCritChanceStage(u8 battlerAtk, u8 battlerDef, u32 move, bool32 recordAbility);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
-void SetMoveEffect(bool8 primary, u8 certain);
+void SetMoveEffect(bool32 primary, u32 certain);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);
 void BattleCreateYesNoCursorAt(u8 cursorPosition);
 void BufferMoveToLearnIntoBattleTextBuff2(void);

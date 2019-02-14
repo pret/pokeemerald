@@ -47,7 +47,6 @@
 #define TASK_ID                 0x1 // task Id and cursor position share the same field
 #define SPRITES_INIT_STATE1     0x1 // shares the Id as well
 #define SPRITES_INIT_STATE2     0x2
-#define MOVE_EFFECT_BYTE        0x3
 #define ACTIONS_CONFIRMED_COUNT 0x4
 #define MULTISTRING_CHOOSER     0x5
 #define MSG_DISPLAY             0x7
@@ -619,7 +618,7 @@ struct BattleScripting
     u16 tripleKickPower;
     u8 atk49_state;
     u8 battlerWithAbility;
-    u8 multihitMoveEffect;
+    u8 unused_16;
     u8 battler;
     u8 animTurn;
     u8 animTargetsHit;
@@ -638,7 +637,9 @@ struct BattleScripting
     u8 specialTrainerBattleType;
     bool8 monCaught;
     s32 savedDmg;
-    u8 savedMoveEffect; // For moves hitting multiple targets.
+    u16 savedMoveEffect; // For moves hitting multiple targets.
+    u16 moveEffect;
+    u16 multihitMoveEffect;
 };
 
 // rom_80A5C6C

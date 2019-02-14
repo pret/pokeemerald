@@ -708,7 +708,7 @@
 
 	.macro statbuffchange param0:req, param1:req
 	.byte 0x89
-	.byte \param0
+	.2byte \param0
 	.4byte \param1
 	.endm
 
@@ -1595,8 +1595,8 @@
 	.endm
 	
 	.macro setmoveeffect effect:req
-	setbyte cEFFECT_CHOOSER \effect
-	setbyte sSAVED_MOVE_EFFECT \effect
+	sethword sMOVE_EFFECT \effect
+	sethword sSAVED_MOVE_EFFECT \effect
 	.endm
 	
 	.macro chosenstatus1animation battler:req, status:req
@@ -1608,15 +1608,15 @@
 	.endm
 	
 	.macro sethword dst:req, value:req
-	setbyte \dst, \value & 0xFF
-	setbyte \dst + 1, (\value >> 8) & 0xFF
+	setbyte \dst, (\value) & 0xFF
+	setbyte \dst + 1, ((\value) >> 8) & 0xFF
 	.endm
 	
 	.macro setword dst:req, value:req
-	setbyte \dst, \value & 0xFF
-	setbyte \dst + 1, (\value >> 8) & 0xFF
-	setbyte \dst + 2, (\value >> 16) & 0xFF
-	setbyte \dst + 3, (\value >> 24) & 0xFF
+	setbyte \dst, (\value) & 0xFF
+	setbyte \dst + 1, ((\value) >> 8) & 0xFF
+	setbyte \dst + 2, ((\value) >> 16) & 0xFF
+	setbyte \dst + 3, ((\value) >> 24) & 0xFF
 	.endm
 	
 	.macro copybyte dst:req, src:req
