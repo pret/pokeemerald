@@ -84,7 +84,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A421:: @ 822A421
 Route104_PrettyPetalFlowerShop_EventScript_22A442:: @ 822A442
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY, Route104_PrettyPetalFlowerShop_EventScript_22A482
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7A98, MSGBOX_DEFAULT
 	random 8

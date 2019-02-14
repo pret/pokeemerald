@@ -264,7 +264,7 @@ EventScript_Pblock1_No: @ 8293C70
 
 EventScript_Pblock1_NoBerries: @ 8293C7A
 	msgbox Text_Pblock1_NoBerries, MSGBOX_DEFAULT
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, LilycoveCity_ContestLobby_EventScript_293C92
 	goto LilycoveCity_ContestLobby_EventScript_293C9C
 	end
@@ -551,7 +551,7 @@ LilycoveCity_ContestLobby_EventScript_293FF8: @ 8293FF8
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare VAR_RESULT, 65535
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_294028
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, LilycoveCity_ContestLobby_EventScript_294028
 	goto LilycoveCity_ContestLobby_EventScript_294032
 	end

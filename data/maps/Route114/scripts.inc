@@ -27,7 +27,7 @@ Route114_MapScript2_1F2578: @ 81F2578
 Route114_EventScript_1F2582:: @ 81F2582
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_114_RECEIVED_BERRY, Route114_EventScript_1F25C7
 	msgbox Route114_Text_2A6FCB, MSGBOX_DEFAULT
 	random 5

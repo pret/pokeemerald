@@ -1869,7 +1869,7 @@ static void sub_817664C(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_817B3DC(0, 0x2000, 0x20, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleAnimationTask(0, 0x2000, 0x20, 8);
         break;
     case 1:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1880,7 +1880,7 @@ static void sub_817664C(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_817B3DC(0, 0x2000, 0x20, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleAnimationTask(0, 0x2000, 0x20, 8);
         break;
     case 2:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1891,7 +1891,7 @@ static void sub_817664C(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_817B3DC(1, 0x2000, 0x200, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleAnimationTask(1, 0x2000, 0x200, 8);
         break;
     case 3:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1902,7 +1902,7 @@ static void sub_817664C(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_817B3DC(1, 0x2000, 0x200, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleAnimationTask(1, 0x2000, 0x200, 8);
         break;
     case 4:
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].invisible = FALSE;
@@ -1913,7 +1913,7 @@ static void sub_817664C(u8 data, u8 taskIdA)
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].pos1.y = 46;
         gSprites[gTasks[taskIdA].data[TDA_PLAYER_CYCLIST]].data[0] = 0;
         gSprites[gTasks[taskIdA].data[TDA_RIVAL_CYCLIST]].data[0] = 0;
-        gTasks[taskIdA].data[TDA_0] = sub_817B3DC(2, 0x2000, 0x200, 8);
+        gTasks[taskIdA].data[TDA_0] = CreateBicycleAnimationTask(2, 0x2000, 0x200, 8);
         break;
     }
 

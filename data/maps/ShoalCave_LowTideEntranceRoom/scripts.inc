@@ -18,7 +18,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD5:: @ 8236DD5
 ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_236ED9
 	checkitem ITEM_SHOAL_SALT, 4
 	compare VAR_RESULT, 0
