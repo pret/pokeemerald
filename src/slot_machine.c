@@ -68,7 +68,7 @@ struct SlotMachineEwramStruct
     /*0x06*/ u8 luckySpinsLeft;  // tentative
     /*0x07*/ u8 biasTag;
     /*0x08*/ u16 matchedSymbols;
-    /*0x0A*/ u8 fairRollsLeft;
+    /*0x0A*/ u8 fairRollsLeft;  // only happens if you win reeltime
     /*0x0B*/ u8 fairRollsUsed;
     /*0x0C*/ s16 coins;
     /*0x0E*/ s16 payout;
@@ -144,7 +144,7 @@ struct UnkStruct1
 /*static */bool8 SlotAction4(struct Task *task);
 /*static */bool8 SlotAction_AwaitPlayerInput(struct Task *task);
 /*static */bool8 SlotAction_PrintYouDontHaveThreeCoins(struct Task *task);
-/*static */bool8 SlotAction_ExitYouDontHaveThreeCoinsDialogue(struct Task *task);
+/*static */bool8 SlotAction_ExitYouDontHaveThreeCoinsMessage(struct Task *task);
 /*static */bool8 SlotAction_GivingInformation(struct Task *task);
 /*static */bool8 SlotAction9(struct Task *task);
 /*static */bool8 SlotAction10(struct Task *task);
@@ -209,9 +209,9 @@ struct UnkStruct1
 /*static */void DecideReelTurns_NoBiasTag_Reel2_Bet2(void);
 /*static */void DecideReelTurns_NoBiasTag_Reel2_Bet3(void);
 /*static */void DecideReelTurns_NoBiasTag_Reel3(void);
-/*static */void sub_8103830(void);
-/*static */void sub_8103910(void);
-/*static */void sub_8103A78(void);
+/*static */void DecideReelTurns_NoBiasTag_Reel3_Bet1(void);
+/*static */void DecideReelTurns_NoBiasTag_Reel3_Bet2(void);
+/*static */void DecideReelTurns_NoBiasTag_Reel3_Bet3(void);
 /*static */void sub_8103C14(u8 a0);
 /*static */void sub_8103C48(u8 taskId);
 /*static */void LoadBetTiles(u8 a0);
@@ -464,7 +464,7 @@ bool8 (*const SlotActions[])(struct Task *task) =
     SlotAction4,
     SlotAction_AwaitPlayerInput,
     SlotAction_PrintYouDontHaveThreeCoins,
-    SlotAction_ExitYouDontHaveThreeCoinsDialogue,
+    SlotAction_ExitYouDontHaveThreeCoinsMessage,
     SlotAction_GivingInformation,
     SlotAction9,
     SlotAction10,
@@ -550,11 +550,11 @@ void (*const DecideReelTurns_NoBiasTag_Reel2_Bets[])(void) =
     DecideReelTurns_NoBiasTag_Reel2_Bet3
 };
 
-void (*const gUnknown_083ECB94[])(void) =
+void (*const DecideReelTurns_NoBiasTag_Reel3_Bets[])(void) =
 {
-    sub_8103830,
-    sub_8103910,
-    sub_8103A78
+    DecideReelTurns_NoBiasTag_Reel3_Bet1,
+    DecideReelTurns_NoBiasTag_Reel3_Bet2,
+    DecideReelTurns_NoBiasTag_Reel3_Bet3
 };
 
 void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId) =
@@ -1033,7 +1033,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     return FALSE;
 }
 
-/*static */bool8 SlotAction_ExitYouDontHaveThreeCoinsDialogue(struct Task *task)
+/*static */bool8 SlotAction_ExitYouDontHaveThreeCoinsMessage(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
@@ -1961,6 +1961,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 {
     s16 i;
     bool8 biased = IsBiasTowardsCherryOr7s();
+    // if lucky numbers or no cherries are currently on screen in reel 1...
     if (biased || !AreCherriesOnScreen_Reel1(0))
     {
         for (i = 1; i < 4; i++)
@@ -2281,29 +2282,30 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */bool8 sub_8103764(u8 a0, u8 a1)
+/*static */bool8 AreTagsMixed7s_2Tags(u8 tag1, u8 tag2)
 {
-    if ((a0 == 0 && a1 == 1) || (a0 == 1 && a1 == 0))
+    if ((tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_BLUE) || (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_RED))
         return TRUE;
     else
         return FALSE;
 }
 
-/*static */bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
+/*static */bool8 AreTagsMixed7s_3Tags(u8 tag1, u8 tag2, u8 tag3)
 {
-    if ((a0 == 0 && a1 == 1 && a2 == 0) || (a0 == 1 && a1 == 0 && a2 == 1))
+    if ((tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED) ||
+        (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE))
         return TRUE;
     else
         return FALSE;
 }
 
-/*static */bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
+/*static */bool8 DoTagsNotMatchOrHaveAny7s(u8 tag1, u8 tag2, u8 tag3)
 {
-    if ((a0 == 0 && a1 == 1 && a2 == 0) ||
-        (a0 == 1 && a1 == 0 && a2 == 1) ||
-        (a0 == 0 && a1 == 0 && a2 == 1) ||
-        (a0 == 1 && a1 == 1 && a2 == 0) ||
-        (a0 == a1 && a0 == a2))
+    if ((tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED) ||
+        (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE) ||
+        (tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE) ||
+        (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED) ||
+        (tag1 == tag2 && tag1 == tag3))
     {
         return FALSE;
     }
@@ -2312,41 +2314,46 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void DecideReelTurns_NoBiasTag_Reel3(void)
 {
-    gUnknown_083ECB94[sSlotMachine->bet - 1]();
+    DecideReelTurns_NoBiasTag_Reel3_Bets[sSlotMachine->bet - 1]();
 }
 
-/*static */void sub_8103830(void)
+/*static */void DecideReelTurns_NoBiasTag_Reel3_Bet1(void)
 {
     s16 i = 0;
-    u8 r5 = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
-    u8 r1 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
-    if (r5 == r1)
+    u8 tag1 = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
+    u8 tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
+    // if tags match in first 2 reels...
+    if (tag1 == tag2)
     {
+        //...spin until you get non-matching tag
         while (1)
         {
-            u8 r0;
-            if (!(r5 == (r0 = GetNearbyTag(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
+            u8 tag3;
+            if (!(tag1 == (tag3 = GetNearbyTag(2, 2 - i)) || (tag1 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE) || (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED)))
                 break;
             i++;
         }
     }
-    else if (sub_8103764(r5, r1))
+    else if (AreTagsMixed7s_2Tags(tag1, tag2))
     {
+        // if bit 7 of luckyFlags is set...
         if (sSlotMachine->luckyFlags & 0x80)
         {
+            //...see if you can match with reel 1 within 4 turns
             for (i = 0; i < 5; i++)
             {
-                if (r5 == GetNearbyTag(2, 2 - i))
+                if (tag1 == GetNearbyTag(2, 2 - i))
                 {
                     sSlotMachine->reelExtraTurns[2] = i;
                     return;
                 }
             }
         }
+        // turn until you aren't matching with reel 1
         i = 0;
         while (1)
         {
-            if (r5 != GetNearbyTag(2, 2 - i))
+            if (tag1 != GetNearbyTag(2, 2 - i))
                 break;
             i++;
         }
@@ -2354,74 +2361,81 @@ Advance until there are no cherries on screen in reel 1
     sSlotMachine->reelExtraTurns[2] = i;
 }
 
-/*static */void sub_8103910(void)
+/*static */void DecideReelTurns_NoBiasTag_Reel3_Bet2(void)
 {
-    s16 sp0 = 0;
+    s16 extraTurns = 0;
     s16 i;
-    u8 r7;
-    u8 r6;
-    u8 r4;
-
+    u8 tag1;
+    u8 tag2;
+    u8 tag3;
+    // if tags match in first 2 reels and bit 7 of luckyFlags is set...
     if (sSlotMachine->biasTagLocation[1] != 0 && sSlotMachine->biasTagLocation[0] == sSlotMachine->biasTagLocation[1] && sSlotMachine->luckyFlags & 0x80)
     {
-        r7 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
-        r6 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
-        if (sub_8103764(r7, r6))
+        tag1 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
+        //...and if tags are mixed 7s...
+        if (AreTagsMixed7s_2Tags(tag1, tag2))
         {
+            //...try to match with reel 1 within 4 turns
             for (i = 0; i < 5; i++)
             {
-                r4 = GetNearbyTag(2, sSlotMachine->biasTagLocation[1] - i);
-                if (r7 == r4)
+                tag3 = GetNearbyTag(2, sSlotMachine->biasTagLocation[1] - i);
+                if (tag1 == tag3)
                 {
-                    sp0 = i;
+                    extraTurns = i;
                     break;
                 }
             }
         }
     }
+    // GUESS: spin until there's no possible match within 4 turns of you stopping
     while (1)
     {
-        s16 r8;
-        for (i = 1, r8 = 0; i < 4; i++)
+        s16 loopExit;
+        for (i = 1, loopExit = 0; i < 4; i++)
         {
-            r7 = GetNearbyTag(0, i - sSlotMachine->reelExtraTurns[0]);
-            r6 = GetNearbyTag(1, i - sSlotMachine->reelExtraTurns[1]);
-            r4 = GetNearbyTag(2, i - sp0);
-            if (!sub_81037BC(r7, r6, r4) && (!sub_810378C(r7, r6, r4) || !(sSlotMachine->luckyFlags & 0x80)))
+            tag1 = GetNearbyTag(0, i - sSlotMachine->reelExtraTurns[0]);  // why does this update with i
+            tag2 = GetNearbyTag(1, i - sSlotMachine->reelExtraTurns[1]);
+            tag3 = GetNearbyTag(2, i - extraTurns);
+            // if bit 7 of luckyFlags is unset...
+            //...and if all 3 tags match and they're not mixed 7s
+            if (!DoTagsNotMatchOrHaveAny7s(tag1, tag2, tag3) && (!AreTagsMixed7s_3Tags(tag1, tag2, tag3) || !(sSlotMachine->luckyFlags & 0x80)))
             {
-                r8++;
+                loopExit++;
                 break;
             }
         }
-        if (r8 == 0)
+        if (loopExit == 0)
             break;
-        sp0++;
+        extraTurns++;
     }
-    sSlotMachine->reelExtraTurns[2] = sp0;
+    sSlotMachine->reelExtraTurns[2] = extraTurns;
 }
 
-/*static */void sub_8103A78(void)
+/*static */void DecideReelTurns_NoBiasTag_Reel3_Bet3(void)
 {
-    u8 r6;
-    u8 r5;
-    u8 r4;
-    s16 r8;
+    u8 tag1;
+    u8 tag2;
+    u8 tag3;
+    s16 j;
     s16 i;
 
-    sub_8103910();
+    DecideReelTurns_NoBiasTag_Reel3_Bet2();
+    // if tags don't match in first 2 reels and bit 7 of luckyFlags is set...
     if (sSlotMachine->biasTagLocation[1] != 0 && sSlotMachine->biasTagLocation[0] != sSlotMachine->biasTagLocation[1] && sSlotMachine->luckyFlags & 0x80)
     {
-        r6 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
-        r5 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
-        if (sub_8103764(r6, r5))
+        tag1 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
+        //..and if tags are mixed 7s...
+        if (AreTagsMixed7s_2Tags(tag1, tag2))
         {
-            r8 = 1;
+            j = 1;
             if (sSlotMachine->biasTagLocation[0] == 1)
-                r8 = 3;
+                j = 3;
             for (i = 0; i < 5; i++)
             {
-                r4 = GetNearbyTag(2, r8 - (sSlotMachine->reelExtraTurns[2] + i));
-                if (r6 == r4)
+                tag3 = GetNearbyTag(2, j - (sSlotMachine->reelExtraTurns[2] + i));
+                if (tag1 == tag3)
                 {
                     sSlotMachine->reelExtraTurns[2] += i;
                     break;
@@ -2431,19 +2445,19 @@ Advance until there are no cherries on screen in reel 1
     }
     while (1)
     {
-        r6 = GetNearbyTag(0, 1 - sSlotMachine->reelExtraTurns[0]);
-        r5 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
-        r4 = GetNearbyTag(2, 3 - sSlotMachine->reelExtraTurns[2]);
-        if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && sSlotMachine->luckyFlags & 0x80))
+        tag1 = GetNearbyTag(0, 1 - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
+        tag3 = GetNearbyTag(2, 3 - sSlotMachine->reelExtraTurns[2]);
+        if (DoTagsNotMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed7s_3Tags(tag1, tag2, tag3) && sSlotMachine->luckyFlags & 0x80))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
     while (1)
     {
-        r6 = GetNearbyTag(0, 3 - sSlotMachine->reelExtraTurns[0]);
-        r5 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
-        r4 = GetNearbyTag(2, 1 - sSlotMachine->reelExtraTurns[2]);
-        if (sub_81037BC(r6, r5, r4) || (sub_810378C(r6, r5, r4) && sSlotMachine->luckyFlags & 0x80))
+        tag1 = GetNearbyTag(0, 3 - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
+        tag3 = GetNearbyTag(2, 1 - sSlotMachine->reelExtraTurns[2]);
+        if (DoTagsNotMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed7s_3Tags(tag1, tag2, tag3) && sSlotMachine->luckyFlags & 0x80))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
