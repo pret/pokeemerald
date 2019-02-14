@@ -5,267 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C79BC
-sub_81C79BC: @ 81C79BC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	mov r10, r2
-	str r3, [sp, 0x8]
-	ldr r0, [sp, 0x2C]
-	cmp r0, 0
-	bne _081C79E4
-	ldr r2, =0x001fffff
-	mov r1, r10
-	ands r2, r1
-	ldr r0, [sp]
-	b _081C79F4
-	.pool
-_081C79E4:
-	ldr r2, [sp, 0x2C]
-	ldr r0, [sp, 0x8]
-	cmp r2, r0
-	blt _081C7A00
-	ldr r2, =0x001fffff
-	mov r1, r10
-	ands r2, r1
-	ldr r0, [sp, 0x4]
-_081C79F4:
-	ldr r1, [sp, 0x30]
-	bl CpuSet
-	b _081C7AAE
-	.pool
-_081C7A00:
-	movs r2, 0x1
-	negs r2, r2
-	add r10, r2
-	b _081C7AA6
-_081C7A08:
-	ldr r1, [sp]
-	ldrh r0, [r1]
-	movs r2, 0x1F
-	mov r9, r2
-	mov r1, r9
-	ands r1, r0
-	mov r9, r1
-	lsls r0, 16
-	lsrs r2, r0, 21
-	movs r1, 0x1F
-	ands r1, r2
-	mov r8, r1
-	lsrs r7, r0, 26
-	movs r2, 0x1F
-	ands r7, r2
-	ldr r0, [sp, 0x4]
-	ldrh r4, [r0]
-	movs r0, 0x1F
-	ands r0, r4
-	mov r1, r9
-	subs r0, r1
-	lsls r0, 8
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r2, [sp, 0x2C]
-	adds r6, r0, 0
-	muls r6, r2
-	asrs r6, 8
-	lsls r4, 16
-	lsrs r0, r4, 21
-	movs r1, 0x1F
-	ands r0, r1
-	mov r2, r8
-	subs r0, r2
-	lsls r0, 8
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r1, [sp, 0x2C]
-	adds r5, r0, 0
-	muls r5, r1
-	asrs r5, 8
-	lsrs r4, 26
-	movs r2, 0x1F
-	ands r4, r2
-	subs r4, r7
-	lsls r4, 8
-	adds r0, r4, 0
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r1, [sp, 0x2C]
-	muls r0, r1
-	asrs r0, 8
-	add r6, r9
-	movs r2, 0x1F
-	ands r6, r2
-	add r5, r8
-	ands r5, r2
-	adds r0, r7, r0
-	ands r0, r2
-	lsls r0, 10
-	lsls r5, 5
-	orrs r0, r5
-	orrs r0, r6
-	ldr r1, [sp, 0x30]
-	strh r0, [r1]
-	ldr r2, [sp]
-	adds r2, 0x2
-	str r2, [sp]
-	ldr r0, [sp, 0x4]
-	adds r0, 0x2
-	str r0, [sp, 0x4]
-	adds r1, 0x2
-	str r1, [sp, 0x30]
-	movs r1, 0x1
-	negs r1, r1
-	add r10, r1
-_081C7AA6:
-	movs r0, 0x1
-	negs r0, r0
-	cmp r10, r0
-	bne _081C7A08
-_081C7AAE:
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C79BC
-
-	thumb_func_start sub_81C7AC0
-sub_81C7AC0: @ 81C7AC0
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0x1
-	beq _081C7AF0
-	cmp r4, 0x1
-	bgt _081C7ADA
-	cmp r4, 0
-	beq _081C7AE4
-	b _081C7B2C
-_081C7ADA:
-	cmp r4, 0x2
-	beq _081C7B04
-	cmp r4, 0x3
-	beq _081C7B18
-	b _081C7B2C
-_081C7AE4:
-	ldr r0, [r0, 0x14]
-	movs r1, 0x2
-	negs r1, r1
-	str r4, [sp]
-	movs r2, 0
-	b _081C7B10
-_081C7AF0:
-	ldr r0, [r0, 0x14]
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	b _081C7B2C
-_081C7B04:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-_081C7B10:
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	b _081C7B2C
-_081C7B18:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-_081C7B2C:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7AC0
-
-	thumb_func_start sub_81C7B34
-sub_81C7B34: @ 81C7B34
-	ldr r0, =gPaletteFade
-	ldrb r0, [r0, 0x7]
-	lsrs r0, 7
-	bx lr
-	.pool
-	thumb_func_end sub_81C7B34
-
-	thumb_func_start sub_81C7B40
-sub_81C7B40: @ 81C7B40
-	push {lr}
-	ldr r0, =0xfffefffe
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7B40
-
-	thumb_func_start sub_81C7B54
-sub_81C7B54: @ 81C7B54
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	cmp r1, 0
-	ble _081C7B6C
-	adds r4, r1, 0
-_081C7B5E:
-	adds r0, r5, 0
-	adds r5, 0x4
-	bl InitBgFromTemplate
-	subs r4, 0x1
-	cmp r4, 0
-	bne _081C7B5E
-_081C7B6C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7B54
-
-	thumb_func_start sub_81C7B74
-sub_81C7B74: @ 81C7B74
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =gUnknown_0861FA08
-	bl InitWindows
-	movs r0, 0
-	str r0, [r4, 0x10]
-	bl sub_81C7BF8
-	ldrb r0, [r4, 0x10]
-	bl PutWindowTilemap
-	ldrb r0, [r4, 0x10]
-	movs r1, 0x3
-	bl CopyWindowToVram
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7B74
-
 	thumb_func_start sub_81C7BA4
 sub_81C7BA4: @ 81C7BA4
 	push {r4,r5,lr}
@@ -4420,7 +4159,7 @@ _081C9C06:
 	bl sub_81C7DFC
 	b _081C9AD6
 _081C9C0E:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081C9C5C
 	bl sub_81C9894
@@ -4884,7 +4623,7 @@ _081C9F96:
 	movs r0, 0
 	b _081C9FBE
 _081C9FB0:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081C9FBC
 _081C9FB8:
@@ -7624,7 +7363,7 @@ _081CB4A6:
 	movs r0, 0
 	b _081CB506
 _081CB4EA:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CB4FA
 	bl sub_81C8010
@@ -8517,7 +8256,7 @@ _081CBB80:
 	movs r0, 0
 	b _081CBBB4
 _081CBB9A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CBBAA
 	bl sub_81C78C0
@@ -10104,7 +9843,7 @@ _081CC812:
 	bl sub_81C7AC0
 	b _081CC77C
 _081CC82A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CC83A
 	bl sub_81C8010
@@ -10290,7 +10029,7 @@ _081CC972:
 	movs r0, 0
 	b _081CC9BA
 _081CC982:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CC99E
 	bl sub_81C7FDC
@@ -13258,7 +12997,7 @@ _081CE1FC:
 	bl sub_81C7FA0
 	b _081CDFB0
 _081CE218:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE2C0
 	bl sub_81CDD5C
@@ -13387,7 +13126,7 @@ _081CE33A:
 	movs r0, 0
 	b _081CE376
 _081CE33E:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE34E
 	bl sub_81C78C0
@@ -15607,7 +15346,7 @@ _081CF552:
 	bl sub_81C7AC0
 	b _081CF498
 _081CF55A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF56A
 	bl sub_81C8010
@@ -15914,7 +15653,7 @@ _081CF764:
 	movs r0, 0
 	b _081CF792
 _081CF778:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF788
 	bl sub_81C78C0
@@ -15948,7 +15687,7 @@ _081CF7A4:
 	movs r0, 0
 	b _081CF7C2
 _081CF7B4:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081CF7C0
 	movs r0, 0x2
@@ -16981,7 +16720,7 @@ _081CFFA4:
 	bl sub_81C7FA0
 	b _081CFF32
 _081CFFDE:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CFFEE
 	bl sub_81C8010
@@ -17288,7 +17027,7 @@ _081D01E8:
 	movs r0, 0
 	b _081D0216
 _081D01FC:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081D020C
 	bl sub_81C78C0
@@ -17322,7 +17061,7 @@ _081D0228:
 	movs r0, 0
 	b _081D0246
 _081D0238:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0244
 	movs r0, 0x2
@@ -18583,7 +18322,7 @@ _081D0BE8:
 	movs r0, 0
 	b _081D0C4A
 _081D0C3C:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0C48
 _081D0C44:
@@ -18614,7 +18353,7 @@ _081D0C60:
 	movs r0, 0
 	b _081D0C7E
 _081D0C70:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0C7C
 	movs r0, 0x2

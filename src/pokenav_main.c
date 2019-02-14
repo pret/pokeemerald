@@ -45,6 +45,7 @@ struct UnknownStruct_sub_81C76C4 {
 };
 
 extern struct BgTemplate gUnknown_0861FA04;
+extern struct WindowTemplate gUnknown_0861FA08;
 
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
@@ -55,9 +56,9 @@ extern void sub_81CAADC(void);
 extern void sub_81C99D4(void);
 extern void sub_81C7C94(void);
 extern void sub_8199D98(void);
-extern void sub_81C7B74(void);
 extern void sub_81C7C28(void);
 extern void sub_81C7D28(void);
+extern void sub_81C7BF8(void);
 
 
 u32 sub_81C791C(s32 a0);
@@ -85,6 +86,7 @@ void sub_81C7334(void);
 void sub_81C7418(void);
 void sub_81C7400(void);
 void sub_81C72BC(void);
+void sub_81C7B74(void);
 
 u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
 {
@@ -626,4 +628,187 @@ void sub_81C795C(struct PaletteDescriptor *palettes) {
 
 void sub_81C7990(u32 a0, u16 a1) {
 	CpuFill16(a1, gPlttBufferFaded + 0x100 + (a0 * 16), 16 * sizeof(u16));
+}
+
+__attribute__((naked))
+void sub_81C79BC(u16* a0, u16* a1, u32 a2, u32 a3, u32 unused, u32 a5, u32 a6) {
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0xC\n\
+	str r0, [sp]\n\
+	str r1, [sp, 0x4]\n\
+	mov r10, r2\n\
+	str r3, [sp, 0x8]\n\
+	ldr r0, [sp, 0x2C]\n\
+	cmp r0, 0\n\
+	bne _081C79E4\n\
+	ldr r2, =0x001fffff\n\
+	mov r1, r10\n\
+	ands r2, r1\n\
+	ldr r0, [sp]\n\
+	b _081C79F4\n\
+	.pool\n\
+_081C79E4:\n\
+	ldr r2, [sp, 0x2C]\n\
+	ldr r0, [sp, 0x8]\n\
+	cmp r2, r0\n\
+	blt _081C7A00\n\
+	ldr r2, =0x001fffff\n\
+	mov r1, r10\n\
+	ands r2, r1\n\
+	ldr r0, [sp, 0x4]\n\
+_081C79F4:\n\
+	ldr r1, [sp, 0x30]\n\
+	bl CpuSet\n\
+	b _081C7AAE\n\
+	.pool\n\
+_081C7A00:\n\
+	movs r2, 0x1\n\
+	negs r2, r2\n\
+	add r10, r2\n\
+	b _081C7AA6\n\
+_081C7A08:\n\
+	ldr r1, [sp]\n\
+	ldrh r0, [r1]\n\
+	movs r2, 0x1F\n\
+	mov r9, r2\n\
+	mov r1, r9\n\
+	ands r1, r0\n\
+	mov r9, r1\n\
+	lsls r0, 16\n\
+	lsrs r2, r0, 21\n\
+	movs r1, 0x1F\n\
+	ands r1, r2\n\
+	mov r8, r1\n\
+	lsrs r7, r0, 26\n\
+	movs r2, 0x1F\n\
+	ands r7, r2\n\
+	ldr r0, [sp, 0x4]\n\
+	ldrh r4, [r0]\n\
+	movs r0, 0x1F\n\
+	ands r0, r4\n\
+	mov r1, r9\n\
+	subs r0, r1\n\
+	lsls r0, 8\n\
+	ldr r1, [sp, 0x8]\n\
+	bl __divsi3\n\
+	ldr r2, [sp, 0x2C]\n\
+	adds r6, r0, 0\n\
+	muls r6, r2\n\
+	asrs r6, 8\n\
+	lsls r4, 16\n\
+	lsrs r0, r4, 21\n\
+	movs r1, 0x1F\n\
+	ands r0, r1\n\
+	mov r2, r8\n\
+	subs r0, r2\n\
+	lsls r0, 8\n\
+	ldr r1, [sp, 0x8]\n\
+	bl __divsi3\n\
+	ldr r1, [sp, 0x2C]\n\
+	adds r5, r0, 0\n\
+	muls r5, r1\n\
+	asrs r5, 8\n\
+	lsrs r4, 26\n\
+	movs r2, 0x1F\n\
+	ands r4, r2\n\
+	subs r4, r7\n\
+	lsls r4, 8\n\
+	adds r0, r4, 0\n\
+	ldr r1, [sp, 0x8]\n\
+	bl __divsi3\n\
+	ldr r1, [sp, 0x2C]\n\
+	muls r0, r1\n\
+	asrs r0, 8\n\
+	add r6, r9\n\
+	movs r2, 0x1F\n\
+	ands r6, r2\n\
+	add r5, r8\n\
+	ands r5, r2\n\
+	adds r0, r7, r0\n\
+	ands r0, r2\n\
+	lsls r0, 10\n\
+	lsls r5, 5\n\
+	orrs r0, r5\n\
+	orrs r0, r6\n\
+	ldr r1, [sp, 0x30]\n\
+	strh r0, [r1]\n\
+	ldr r2, [sp]\n\
+	adds r2, 0x2\n\
+	str r2, [sp]\n\
+	ldr r0, [sp, 0x4]\n\
+	adds r0, 0x2\n\
+	str r0, [sp, 0x4]\n\
+	adds r1, 0x2\n\
+	str r1, [sp, 0x30]\n\
+	movs r1, 0x1\n\
+	negs r1, r1\n\
+	add r10, r1\n\
+_081C7AA6:\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	cmp r10, r0\n\
+	bne _081C7A08\n\
+_081C7AAE:\n\
+	add sp, 0xC\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.syntax divided");
+}
+
+void sub_81C7AC0(s32 a0) {
+	u32 *v1;
+	v1 = sub_81C763C(0);
+	switch (a0) {
+		case 0:
+			BeginNormalPaletteFade(v1[5], -2, 0, 16, a0);
+			break;
+		case 1:
+			BeginNormalPaletteFade(v1[5], -2, 16, 0, 0);
+			break;
+		case 2:
+			BeginNormalPaletteFade(-1, -2, 0, 16, 0);
+			break;
+		case 3:
+			BeginNormalPaletteFade(-1, -2, 16, 0, 0);
+			break;
+	}
+}
+
+bool32 IsPaletteFadeActive(void) {
+	return gPaletteFade.active;
+}
+
+void sub_81C7B40(void) {
+	BlendPalettes(0xFFFEFFFE, 16, 0);
+}
+
+void sub_81C7B54(const struct BgTemplate *a0, s32 a1) {
+	s32 i;
+	if (a1 <= 0) {
+		return;
+	}
+	for (i = a1; i != 0; i--) {
+		InitBgFromTemplate(a0++);
+	}
+}
+
+void sub_81C7B74(void) {
+	u32 *v1;
+
+	v1 = sub_81C763C(0);
+	InitWindows(&gUnknown_0861FA08);
+	v1[4] = 0;
+	sub_81C7BF8();
+	PutWindowTilemap(v1[4]);
+	CopyWindowToVram(v1[4], 3); // TODO: Use a defined constant here.
 }
