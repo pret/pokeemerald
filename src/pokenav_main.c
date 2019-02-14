@@ -14,6 +14,7 @@
 #include "menu.h"
 #include "graphics.h"
 #include "gba/macro.h"
+#include "decompress.h"
 
 #define UNKNOWN_OFFSET 100000
 
@@ -44,21 +45,28 @@ struct UnknownStruct_sub_81C76C4 {
 	u32 data[523];
 };
 
+struct UnknownStruct_sub_81C7C28 {
+	struct CompressedSpriteSheet sheet;
+	u32 field4;
+};
+
 extern struct BgTemplate gUnknown_0861FA04;
 extern struct WindowTemplate gUnknown_0861FA08;
-
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
+extern u8 gUnknown_0861FA48;
 extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
+extern const u8 *(gUnknown_0861FA18[]);
+extern const struct CompressedSpriteSheet gUnknown_0861FA4C[];
+extern const struct PaletteDescriptor gUnknown_0861FA54;
+extern const struct SpriteTemplate gUnknown_0861FB04;
 
 extern void sub_81C9430(void);
 extern void sub_81CAADC(void);
 extern void sub_81C99D4(void);
 extern void sub_81C7C94(void);
 extern void sub_8199D98(void);
-extern void sub_81C7C28(void);
 extern void sub_81C7D28(void);
-extern void sub_81C7BF8(void);
 
 
 u32 sub_81C791C(s32 a0);
@@ -77,6 +85,7 @@ void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 void sub_81C7650(u32 index);
 void sub_81C7850(u32 a0);
+void sub_81C7BF8(u32 a0);
 void sub_81C71E4(u8 a0);
 void sub_81C7170(u8 a0);
 void sub_81C742C(u8 taskId);
@@ -85,6 +94,7 @@ void sub_81C75F4(void);
 void sub_81C7334(void);
 void sub_81C7418(void);
 void sub_81C7400(void);
+void sub_81C7C28(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
 
@@ -607,8 +617,8 @@ void CopyPaletteIntoBufferUnfaded(void *palette, u32 bufferOffset, u32 size) {
 	CpuCopy16(palette, gPlttBufferUnfaded + bufferOffset, size);
 }
 
-void sub_81C795C(struct PaletteDescriptor *palettes) {
-	struct PaletteDescriptor *current;
+void sub_81C795C(const struct PaletteDescriptor *palettes) {
+	const struct PaletteDescriptor *current;
     u32 index;
 
     for (current = palettes; current->palette != NULL; current++) 
@@ -808,7 +818,45 @@ void sub_81C7B74(void) {
 	v1 = sub_81C763C(0);
 	InitWindows(&gUnknown_0861FA08);
 	v1[4] = 0;
-	sub_81C7BF8();
+	sub_81C7BF8(0);
 	PutWindowTilemap(v1[4]);
 	CopyWindowToVram(v1[4], 3); // TODO: Use a defined constant here.
+}
+
+void sub_81C7BA4(u32 a0) {
+	u32* v1;
+
+	v1 = sub_81C763C(0);
+	sub_81C7BF8(v1[4]);
+	AddTextPrinterParameterized3(v1[4], 1, 0, 1, &gUnknown_0861FA48, 0, gUnknown_0861FA18[a0]);
+}
+
+bool8 sub_81C7BE8(void) {
+	return IsDma3ManagerBusyWithBgCopy();
+}
+
+void sub_81C7BF8(u32 a0) {
+	FillWindowPixelBuffer(a0, 0x44);
+	FillWindowPixelRect(a0, 0x55, 0, 0, 0x80, 1);
+}
+
+void sub_81C7C28(void) {
+	u32* v1;
+	u32 i;
+	u8 v2;
+	u32 v3;
+	u32 v4;
+	u8 spriteId;
+
+	v1 = sub_81C763C(0);
+	for (i = 0; i == 0; i++) {
+		LoadCompressedSpriteSheet(&gUnknown_0861FA4C[i]);
+	}
+
+	sub_81C795C(&gUnknown_0861FA54);
+	v2 = IndexOfSpritePaletteTag(0);
+	v3 = 0x80 << 9 << v2;
+	v1[5] = -2 & ~v3;
+	spriteId = CreateSprite(&gUnknown_0861FB04, 0xDC, 0xC, 0);
+	v1[6] = (u32)(&gSprites[spriteId]);
 }
