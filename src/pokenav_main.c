@@ -605,56 +605,21 @@ void CopyPaletteIntoBufferUnfaded(void *palette, u32 bufferOffset, u32 size) {
 	CpuCopy16(palette, gPlttBufferUnfaded + bufferOffset, size);
 }
 
-__attribute__((naked))
 void sub_81C795C(struct PaletteDescriptor *palettes) {
-	// This code matches the assembly almost exactly; however, gcc chooses
-	// to store `index` in r0 instead of r1.
-#ifdef NONMATCHING
 	struct PaletteDescriptor *current;
-	u32 offset;
-	u32 index;
-	
-	current = palettes;
-	for (;;) {
-		if (current->palette == NULL) {
-			break;
-		}
-		index = AllocSpritePalette(current->tag);
-		if (index == 0xFF) {
-			break;
-		}
-		offset = (index * 16) + 0x100;
-		CopyPaletteIntoBufferUnfaded(current->palette, offset, 0x20);
-		current++;
-	}
-#else // NONMATCHING
-	asm(".syntax unified\n\
-		push {r4,lr}\n\
-		adds r4, r0, 0\n\
-		b _081C7974\n\
-	_081C7962:\n\
-		lsls r0, r1, 4\n\
-		movs r2, 0x80\n\
-		lsls r2, 1\n\
-		adds r1, r0, r2\n\
-		ldr r0, [r4]\n\
-		movs r2, 0x20\n\
-		bl CopyPaletteIntoBufferUnfaded\n\
-		adds r4, 0x8\n\
-	_081C7974:\n\
-		ldr r0, [r4]\n\
-		cmp r0, 0\n\
-		beq _081C7988\n\
-		ldrh r0, [r4, 0x4]\n\
-		bl AllocSpritePalette\n\
-		lsls r0, 24\n\
-		lsrs r1, r0, 24\n\
-		cmp r1, 0xFF\n\
-		bne _081C7962\n\
-	_081C7988:\n\
-		pop {r4}\n\
-		pop {r0}\n\
-		bx r0\n\
-		.syntax divided");
-#endif // NONMATCHING
+    u32 index;
+
+    for (current = palettes; current->palette != NULL; current++) 
+    {
+        index = AllocSpritePalette(current->tag);
+        if (index == 0xFF) 
+        {
+            break;
+        }
+        else
+        {
+            index = (index * 16) + 0x100;
+            CopyPaletteIntoBufferUnfaded(current->palette, index, 0x20);
+        }
+    }
 }
