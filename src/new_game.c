@@ -146,7 +146,7 @@ void Sav2_ClearSetDefault(void)
     SetDefaultOptions();
 }
 
-void sub_808447C(void)
+void ResetMenuAndMonGlobals(void)
 {
     gDifferentSaveFile = 0;
     sub_80BB358();
