@@ -74,8 +74,8 @@ struct SlotMachineEwramStruct
     /*0x0E*/ s16 payout;
     /*0x10*/ s16 netCoinLoss; // coins lost to machine (but never goes below 0)
     /*0x12*/ s16 bet;
-    /*0x14*/ s16 reelTimePixelOffset;
-    /*0x16*/ s16 reelTimePosition;
+    /*0x14*/ s16 reeltimePixelOffset;
+    /*0x16*/ s16 reeltimePosition;
     /*0x18*/ s16 currReel;
     /*0x1A*/ s16 reelIncrement; // speed of reel
     /*0x1C*/ s16 reelPixelOffsets[3];
@@ -238,27 +238,27 @@ struct UnkStruct1
 /*static */void sub_81041AC(struct Task *task);
 /*static */void ClearTaskDataFields_2orHigher(struct Task *task);
 /*static */void sub_810423C(u8 pikaPower);
-/*static */void BeginReelTime(void);
+/*static */void BeginReeltime(void);
 /*static */bool8 IsFinalTask_RunReelTimeActions(void);
-/*static */void RunReelTimeActions(u8 taskId);
-/*static */void ReelTimeAction1(struct Task *task);
-/*static */void ReelTimeAction2(struct Task *task);
-/*static */void ReelTimeAction3(struct Task *task);
-/*static */void ReelTimeAction4(struct Task *task);
-/*static */void ReelTimeAction5(struct Task *task);
-/*static */void ReelTimeAction6(struct Task *task);
-/*static */void ReelTimeAction7(struct Task *task);
+/*static */void RunReeltimeActions(u8 taskId);
+/*static */void ReeltimeAction0(struct Task *task);
+/*static */void ReeltimeAction1(struct Task *task);
+/*static */void ReeltimeAction2(struct Task *task);
+/*static */void ReeltimeAction3(struct Task *task);
+/*static */void ReeltimeAction4(struct Task *task);
+/*static */void ReeltimeAction5(struct Task *task);
+/*static */void ReeltimeAction6(struct Task *task);
 /*static */void ReelTimeAction_LandOnOutcome(struct Task *task);
-/*static */void ReelTimeAction9(struct Task *task);
-/*static */void ReelTimeAction10(struct Task *task);
-/*static */void ReelTimeAction11(struct Task *task);
-/*static */void ReelTimeAction12(struct Task *task);
-/*static */void ReelTimeAction13(struct Task *task);
-/*static */void ReelTimeAction14(struct Task *task);
-/*static */void ReelTimeAction15(struct Task *task);
-/*static */void ReelTimeAction16(struct Task *task);
-/*static */void ReelTimeAction17(struct Task *task);
-/*static */void ReelTimeAction18(struct Task *task);
+/*static */void ReeltimeAction8(struct Task *task);
+/*static */void ReeltimeAction9(struct Task *task);
+/*static */void ReeltimeAction10(struct Task *task);
+/*static */void ReeltimeAction11(struct Task *task);
+/*static */void ReeltimeAction12(struct Task *task);
+/*static */void ReeltimeAction13(struct Task *task);
+/*static */void ReeltimeAction14(struct Task *task);
+/*static */void ReeltimeAction15(struct Task *task);
+/*static */void ReeltimeAction16(struct Task *task);
+/*static */void ReeltimeAction17(struct Task *task);
 /*static */void sub_8104A40(s16 a0, s16 a1);
 /*static */void sub_8104A88(s16 a0);
 /*static */void OpenInfoBox(u8 a0);
@@ -369,7 +369,7 @@ extern const struct SpriteTemplate gSpriteTemplate_83ED54C;
 extern const struct SpriteTemplate gSpriteTemplate_83ED534;
 extern const u8 gUnknown_083ECC58[2];
 extern const struct SpriteTemplate gSpriteTemplate_83ED51C;
-extern const u16 ProbabilityTable_SkipToReelTimeAction14[];
+extern const u16 ProbabilityTable_SkipToReeltimeAction14[];
 extern const u16 *const gUnknown_083EDE10[];
 extern const u16 ReelIncrementTable[][2];
 extern const u16 ReelTimeBonusIncrementTable[];
@@ -581,27 +581,27 @@ const u16 pikaPowerTileTable[][2] =
     {0xaf, 0x7f}, // {0b10101111, 0b1111111}
 };
 
-void (*const ReelTimeActions[])(struct Task *task) =
+void (*const ReeltimeActions[])(struct Task *task) =
 {
-    ReelTimeAction1,
-    ReelTimeAction2,
-    ReelTimeAction3,
-    ReelTimeAction4,
-    ReelTimeAction5,
-    ReelTimeAction6,
-    ReelTimeAction7,  // does stuff with reel time data
+    ReeltimeAction0,
+    ReeltimeAction1,
+    ReeltimeAction2,
+    ReeltimeAction3,
+    ReeltimeAction4,
+    ReeltimeAction5,
+    ReeltimeAction6,  // does stuff with reel time data
     ReelTimeAction_LandOnOutcome,
-    ReelTimeAction9,
-    ReelTimeAction10,
-    ReelTimeAction11,
-    ReelTimeAction12,
-    ReelTimeAction13,
-    ReelTimeAction14,
-    ReelTimeAction15,
-    ReelTimeAction16,
-    ReelTimeAction17,
-    ReelTimeAction11,
-    ReelTimeAction18
+    ReeltimeAction8,
+    ReeltimeAction9,
+    ReeltimeAction10,
+    ReeltimeAction11,
+    ReeltimeAction12,
+    ReeltimeAction13,
+    ReeltimeAction14,
+    ReeltimeAction15,
+    ReeltimeAction16,
+    ReeltimeAction10,
+    ReeltimeAction17
 };
 
 const u8 gUnknown_085A75C0[] = {1, 1, 2, 2};
@@ -1067,7 +1067,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     if (sSlotMachine->luckyFlags & 0x20)  // bit 5 of luckyFlag set
     {
         // enter into reel time
-        BeginReelTime();
+        BeginReeltime();
         sSlotMachine->slotActionPtr = 10;
     }
     else
@@ -1506,7 +1506,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         return ReelTimeProbabilityTable_LuckyGame[reelTimeDraw][sSlotMachine->pikaPower];
 }
 
-/*static */void DrawReelTimeOutcome(void)
+/*static */void GetReeltimeDraw(void)
 {
     u8 rval;
     s16 reelTimeDraw;
@@ -1524,10 +1524,10 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     sSlotMachine->reelTimeDraw = reelTimeDraw;
 }
 
-/*static */bool8 SkipToReelTimeAction14(u16 i)
+/*static */bool8 SkipToReeltimeAction14(u16 i)
 {
     u16 rval = Random() & 0xff;
-    if (rval < ProbabilityTable_SkipToReelTimeAction14[i])
+    if (rval < ProbabilityTable_SkipToReeltimeAction14[i])
         return TRUE;
     else
         return FALSE;
@@ -1749,7 +1749,7 @@ Calculates GetNearbyTag_Quantized as if the reel was snapped downwards into plac
 
 /*static */u8 GetNearbyReelTimeTag(s16 n)
 {
-    s16 newPosition = (sSlotMachine->reelTimePosition + n) % 6;
+    s16 newPosition = (sSlotMachine->reeltimePosition + n) % 6;
     if (newPosition < 0)
         newPosition += 6;
     return ReelTimeTags[newPosition];
@@ -1777,20 +1777,20 @@ s16 AdvanceSlotReelToNextTag(u8 reelIndex, s16 value)
 
 /*static */void AdvanceReeltimeReel(s16 value)
 {
-    sSlotMachine->reelTimePixelOffset += value;
-    sSlotMachine->reelTimePixelOffset %= 120;
-    sSlotMachine->reelTimePosition = 6 - sSlotMachine->reelTimePixelOffset / 20;
+    sSlotMachine->reeltimePixelOffset += value;
+    sSlotMachine->reeltimePixelOffset %= 120;
+    sSlotMachine->reeltimePosition = 6 - sSlotMachine->reeltimePixelOffset / 20;
 }
 
 s16 AdvanceReeltimeReelToNextTag(s16 value)
 {
-    s16 offset = sSlotMachine->reelTimePixelOffset % 20;
+    s16 offset = sSlotMachine->reeltimePixelOffset % 20;
     if (offset != 0)
     {
         if (offset < value)
             value = offset;
         AdvanceReeltimeReel(value);
-        offset = sSlotMachine->reelTimePixelOffset % 20;
+        offset = sSlotMachine->reeltimePixelOffset % 20;
     }
     return offset;
 }
@@ -2757,37 +2757,37 @@ Advance until there are no cherries on screen in reel 1
     gTasks[sSlotMachine->unkTaskPointer3E].data[1] = pikaPower;
 }
 
-/*static */void BeginReelTime(void)
+/*static */void BeginReeltime(void)
 {
-    u8 taskId = CreateTask(RunReelTimeActions, 7);
-    RunReelTimeActions(taskId);
+    u8 taskId = CreateTask(RunReeltimeActions, 7);
+    RunReeltimeActions(taskId);
 }
 
 /*static */bool8 IsFinalTask_RunReelTimeActions(void)
 {
-    if (FindTaskIdByFunc(RunReelTimeActions) == TAIL_SENTINEL)
+    if (FindTaskIdByFunc(RunReeltimeActions) == TAIL_SENTINEL)
         return TRUE;
     return FALSE;
 }
 
-/*static */void RunReelTimeActions(u8 taskId)
+/*static */void RunReeltimeActions(u8 taskId)
 {
     // task.data[0] points to which ReelTimeAction to do, and starts at 0
     // task.data[1] has something to do with the threshold
     // task.data[4] says how many pixels to advance the reel
     // task.data[5] is a timer
-    ReelTimeActions[gTasks[taskId].data[0]](gTasks + taskId);
+    ReeltimeActions[gTasks[taskId].data[0]](gTasks + taskId);
 }
 
-/*static */void ReelTimeAction1(struct Task *task)
+/*static */void ReeltimeAction0(struct Task *task)
 {
     sSlotMachine->fairRollsLeft = 0;
-    sSlotMachine->reelTimePixelOffset = 0;
-    sSlotMachine->reelTimePosition = 0;
+    sSlotMachine->reeltimePixelOffset = 0;
+    sSlotMachine->reeltimePosition = 0;
     task->data[0]++;
     task->data[1] = 0;
     task->data[2] = 30;
-    task->data[4] = 1280;
+    task->data[4] = 1280; // reel speed
     gSpriteCoordOffsetX = 0;
     gSpriteCoordOffsetY = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, 0);
@@ -2798,18 +2798,16 @@ Advance until there are no cherries on screen in reel 1
     sub_81052EC();
     sub_81053A0();
     sub_810545C();
-    DrawReelTimeOutcome();
+    GetReeltimeDraw();
     StopMapMusic();
     PlayNewMapMusic(MUS_BD_TIME);
 }
 
-/*static */void ReelTimeAction2(struct Task *task)
+/*static */void ReeltimeAction1(struct Task *task)
 {
     s16 r3;
     gSpriteCoordOffsetX -= 8;
-    // boost threshold by 8
     task->data[1] += 8;
-    // only consider lower 8 bits, and then shift them right 3
     r3 = ((task->data[1] + 240) & 0xff) >> 3;
     SetGpuReg(REG_OFFSET_BG1HOFS, task->data[1] & 0x1ff);
     if (r3 != task->data[2] && task->data[3] <= 18)
@@ -2823,11 +2821,10 @@ Advance until there are no cherries on screen in reel 1
         task->data[0]++;
         task->data[3] = 0;
     }
-    // move ReelTime reel by the value in the upper 8 bits of task->data[4]
     AdvanceReeltimeReel(task->data[4] >> 8);
 }
 
-/*static */void ReelTimeAction3(struct Task *task)
+/*static */void ReeltimeAction2(struct Task *task)
 {
     AdvanceReeltimeReel(task->data[4] >> 8);
     if (++task->data[5] >= 60)
@@ -2838,7 +2835,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction4(struct Task *task)
+/*static */void ReeltimeAction3(struct Task *task)
 {
     int r5;
     u8 sp0[ARRAY_COUNT(gUnknown_085A75C0)];
@@ -2865,7 +2862,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction5(struct Task *task)
+/*static */void ReeltimeAction4(struct Task *task)
 {
     AdvanceReeltimeReel(task->data[4] >> 8);
     if (++task->data[5] >= 80)
@@ -2877,7 +2874,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction6(struct Task *task)
+/*static */void ReeltimeAction5(struct Task *task)
 {
     AdvanceReeltimeReel(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x80;
@@ -2888,7 +2885,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction7(struct Task *task)
+/*static */void ReeltimeAction6(struct Task *task)
 {
     AdvanceReeltimeReel(task->data[4] >> 8);
     task->data[4] = (u8)task->data[4] + 0x40;
@@ -2896,7 +2893,7 @@ Advance until there are no cherries on screen in reel 1
     {
         task->data[5] = 0;
         if (sSlotMachine->reelTimeDraw)
-        {   // TODO: check if fairRollsLeft differs from reelTimeDraw
+        {
             if (sSlotMachine->fairRollsLeft <= task->data[6])
                 task->data[0]++;
         }
@@ -2904,7 +2901,7 @@ Advance until there are no cherries on screen in reel 1
         {
             task->data[0]++;
         }
-        else if (SkipToReelTimeAction14(task->data[6]))
+        else if (SkipToReeltimeAction14(task->data[6]))
         {
             task->data[0] = 14;
         }
@@ -2914,26 +2911,26 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void ReelTimeAction_LandOnOutcome(struct Task *task)
 {
-    s16 reelTimePixelOffset = sSlotMachine->reelTimePixelOffset % 20;
-    if (reelTimePixelOffset)
+    s16 reeltimePixelOffset = sSlotMachine->reeltimePixelOffset % 20;
+    if (reeltimePixelOffset)
     {
-        reelTimePixelOffset = AdvanceReeltimeReelToNextTag(task->data[4] >> 8);
+        reeltimePixelOffset = AdvanceReeltimeReelToNextTag(task->data[4] >> 8);
         task->data[4] = (u8)task->data[4] + 0x40;
     }
     else if (GetNearbyReelTimeTag(1) != sSlotMachine->reelTimeDraw)
     {
         AdvanceReeltimeReel(task->data[4] >> 8);
-        reelTimePixelOffset = sSlotMachine->reelTimePixelOffset % 20;
+        reeltimePixelOffset = sSlotMachine->reeltimePixelOffset % 20;
         task->data[4] = (u8)task->data[4] + 0x40;
     }
-    if (reelTimePixelOffset == 0 && GetNearbyReelTimeTag(1) == sSlotMachine->reelTimeDraw)
+    if (reeltimePixelOffset == 0 && GetNearbyReelTimeTag(1) == sSlotMachine->reelTimeDraw)
     {
         task->data[4] = 0;  // stop moving
         task->data[0]++;
     }
 }
 
-/*static */void ReelTimeAction9(struct Task *task)
+/*static */void ReeltimeAction8(struct Task *task)
 {
     if (++task->data[4] >= 60)
     {
@@ -2962,13 +2959,13 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction10(struct Task *task)
+/*static */void ReeltimeAction9(struct Task *task)
 {
     if ((task->data[4] == 0 || --task->data[4] == 0) && !sub_81040C8())
         task->data[0]++;
 }
 
-/*static */void ReelTimeAction11(struct Task *task)
+/*static */void ReeltimeAction10(struct Task *task)
 {
     s16 r4;
     gSpriteCoordOffsetX -= 8;
@@ -2982,7 +2979,7 @@ Advance until there are no cherries on screen in reel 1
         task->data[0]++;
 }
 
-/*static */void ReelTimeAction12(struct Task *task)
+/*static */void ReeltimeAction11(struct Task *task)
 {
     sSlotMachine->fairRollsUsed = 0;
     sSlotMachine->fairRollsLeft = sSlotMachine->reelTimeDraw;
@@ -2995,7 +2992,7 @@ Advance until there are no cherries on screen in reel 1
     PlayNewMapMusic(sSlotMachine->backupMapMusic);
     if (sSlotMachine->fairRollsLeft == 0)
     {
-        DestroyTask(FindTaskIdByFunc(RunReelTimeActions));
+        DestroyTask(FindTaskIdByFunc(RunReeltimeActions));
     }
     else
     {
@@ -3007,7 +3004,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction13(struct Task *task)
+/*static */void ReeltimeAction12(struct Task *task)
 {
     if (sSlotMachine->reelIncrement == task->data[1])
         task->data[0]++;
@@ -3015,13 +3012,13 @@ Advance until there are no cherries on screen in reel 1
         sSlotMachine->reelIncrement >>= 1;
 }
 
-/*static */void ReelTimeAction14(struct Task *task)
+/*static */void ReeltimeAction13(struct Task *task)
 {
     if (sub_8104E18())
-        DestroyTask(FindTaskIdByFunc(RunReelTimeActions));
+        DestroyTask(FindTaskIdByFunc(RunReeltimeActions));
 }
 
-/*static */void ReelTimeAction15(struct Task *task)
+/*static */void ReeltimeAction14(struct Task *task)
 {
     sub_81054B8();
     sub_81056C0();
@@ -3037,7 +3034,7 @@ Advance until there are no cherries on screen in reel 1
     PlaySE(SE_W153);
 }
 
-/*static */void ReelTimeAction16(struct Task *task)
+/*static */void ReeltimeAction15(struct Task *task)
 {
     gSpriteCoordOffsetY = task->data[4];
     SetGpuReg(REG_OFFSET_BG1VOFS, task->data[4]);
@@ -3057,7 +3054,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction17(struct Task *task)
+/*static */void ReeltimeAction16(struct Task *task)
 {
     gSpriteCoordOffsetY = 0;
     SetGpuReg(REG_OFFSET_BG1VOFS, 0);
@@ -3068,7 +3065,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */void ReelTimeAction18(struct Task *task)
+/*static */void ReeltimeAction17(struct Task *task)
 {
     gSpriteCoordOffsetX = 0;
     SetGpuReg(REG_OFFSET_BG1HOFS, 0);
@@ -3077,7 +3074,7 @@ Advance until there are no cherries on screen in reel 1
     sub_8105554();
     sub_8105524();
     sub_81059B8();
-    DestroyTask(FindTaskIdByFunc(RunReelTimeActions));
+    DestroyTask(FindTaskIdByFunc(RunReeltimeActions));
 }
 
 /*static */void sub_8104A40(s16 a0, s16 a1)
@@ -3465,7 +3462,7 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void sub_810535C(struct Sprite *sprite)
 {
-    s16 r0 = (u16)(sSlotMachine->reelTimePixelOffset + sprite->data[7]);
+    s16 r0 = (u16)(sSlotMachine->reeltimePixelOffset + sprite->data[7]);
     r0 %= 40;
     sprite->pos1.y = r0 + 59;
     StartSpriteAnimIfDifferent(sprite, GetNearbyReelTimeTag(r0 / 20));
@@ -4499,7 +4496,7 @@ const u8 ReelTimeProbabilityTable_LuckyGame[][17] = {
     {   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   4,   4,   4,  60}
 };
 
-const u16 ProbabilityTable_SkipToReelTimeAction14[] = {
+const u16 ProbabilityTable_SkipToReeltimeAction14[] = {
     128, 175, 200, 225, 256
 };
 
