@@ -343,6 +343,19 @@ gBattleScriptsForMoveEffects:: @ 82D86A8
 	.4byte BattleScript_EffectSpAtkUpHit
 	.4byte BattleScript_EffectBelch
 	.4byte BattleScript_EffectPartingShot
+	.4byte BattleScript_EffectSpectralThief
+	
+BattleScript_SpectralThiefSteal::
+	printstring STRINGID_SPECTRALTHIEFSTEAL
+	waitmessage 0x40
+	setbyte sB_ANIM_ARG2, 0
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	spectralthiefprintstats
+	return
+	
+BattleScript_EffectSpectralThief:
+	setmoveeffect MOVE_EFFECT_SPECTRAL_THIEF
+	goto BattleScript_EffectHit
 	
 BattleScript_EffectPartingShot::
 	attackcanceler
@@ -2002,6 +2015,7 @@ BattleScript_StatUpEnd::
 
 BattleScript_StatUp::
 	playanimation BS_EFFECT_BATTLER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_StatUpMsg::
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 	return

@@ -293,5 +293,7 @@ extern const u8 BattleScript_PsychicSurgeActivates[];
 extern const u8 BattleScript_GrassySurgeActivates[];
 extern const u8 BattleScript_MistySurgeActivates[];
 extern const u8 BattleScript_ElectricSurgeActivates[];
+extern const u8 BattleScript_SpectralThiefSteal[];
+extern const u8 BattleScript_StatUpMsg[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

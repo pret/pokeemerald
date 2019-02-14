@@ -1584,6 +1584,10 @@
 	.macro setpowder battler:req
 	various \battler, VARIOUS_SET_POWDER
 	.endm
+	
+	.macro spectralthiefprintstats
+	various BS_ATTACKER, VARIOUS_SPECTRAL_THIEF
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
