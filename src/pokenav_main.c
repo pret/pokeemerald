@@ -13,8 +13,14 @@
 #include "bg.h"
 #include "menu.h"
 #include "graphics.h"
+#include "gba/macro.h"
 
 #define UNKNOWN_OFFSET 100000
+
+struct PaletteDescriptor {
+	void *palette;
+	u16 tag;
+};
 
 struct UnknownStruct_0203CF40 {
 	u32 (*field0)(void);
@@ -49,14 +55,12 @@ extern void sub_81CAADC(void);
 extern void sub_81C99D4(void);
 extern void sub_81C7C94(void);
 extern void sub_8199D98(void);
-extern void sub_81C7944(void* palette, u32 a1, u32 a2);
 extern void sub_81C7B74(void);
 extern void sub_81C7C28(void);
 extern void sub_81C7D28(void);
-extern u32 atk47_cmd47(s32 a0);
-extern u32 sub_81C791C(s32 a0);
 
 
+u32 sub_81C791C(s32 a0);
 bool32 sub_81C756C(u32 a0);
 bool32 sub_81C76C4(void);
 u32 AnyMonHasRibbon(void);
@@ -65,7 +69,9 @@ u32 sub_81C75D4(void);
 u32 sub_81C76FC(void);
 u32 sub_81C786C(void);
 u32 sub_81C7764(s32 a0);
+u32 atk47_cmd47(s32 a0);
 bool32 sub_81C7738(void);
+void CopyPaletteIntoBufferUnfaded(void *palette, u32 a1, u32 a2);
 void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 void sub_81C7650(u32 index);
@@ -493,7 +499,7 @@ u32 sub_81C7764(s32 a0) {
 		decompress_and_copy_tile_data_to_vram(0, &gPokenavHeader_Gfx, 0, 0, 0);
 		SetBgTilemapBuffer(0, &v1->data[11]);
 		CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
-		sub_81C7944(&gPokenavHeader_Pal, 0, 0x20);
+		CopyPaletteIntoBufferUnfaded(&gPokenavHeader_Pal, 0, 0x20);
 		CopyBgTilemapBufferToVram(0);
 		return 0;
 	case 2:
@@ -566,4 +572,89 @@ bool32 sub_81C78C0(void) {
 
 	v1 = sub_81C763C(0);
 	return sub_81C70D8(v1->fieldC);
+}
+
+u32 atk47_cmd47(s32 a0) {
+	switch (a0) {
+	default:
+		return 4;
+	case 1:
+		return 0;
+	case 0:
+		return 0;
+	case 2:
+		if ((u32)ChangeBgY(0, 384, 1) >= 0x2000) {
+			ChangeBgY(0, 0x2000, 0);
+			return 4;
+		} else {
+			return 2;
+		}
+	}
+}
+
+u32 sub_81C791C(s32 a0) {
+	if (ChangeBgY(0, 384, 2) <= 0) {
+		ChangeBgY(0, 0, 0);
+		return 4;
+	} else {
+		return 2;
+	}
+}
+
+void CopyPaletteIntoBufferUnfaded(void *palette, u32 bufferOffset, u32 size) {
+	CpuCopy16(palette, gPlttBufferUnfaded + bufferOffset, size);
+}
+
+__attribute__((naked))
+void sub_81C795C(struct PaletteDescriptor *palettes) {
+	// This code matches the assembly almost exactly; however, gcc chooses
+	// to store `index` in r0 instead of r1.
+#ifdef NONMATCHING
+	struct PaletteDescriptor *current;
+	u32 offset;
+	u32 index;
+	
+	current = palettes;
+	for (;;) {
+		if (current->palette == NULL) {
+			break;
+		}
+		index = AllocSpritePalette(current->tag);
+		if (index == 0xFF) {
+			break;
+		}
+		offset = (index * 16) + 0x100;
+		CopyPaletteIntoBufferUnfaded(current->palette, offset, 0x20);
+		current++;
+	}
+#else // NONMATCHING
+	asm(".syntax unified\n\
+		push {r4,lr}\n\
+		adds r4, r0, 0\n\
+		b _081C7974\n\
+	_081C7962:\n\
+		lsls r0, r1, 4\n\
+		movs r2, 0x80\n\
+		lsls r2, 1\n\
+		adds r1, r0, r2\n\
+		ldr r0, [r4]\n\
+		movs r2, 0x20\n\
+		bl CopyPaletteIntoBufferUnfaded\n\
+		adds r4, 0x8\n\
+	_081C7974:\n\
+		ldr r0, [r4]\n\
+		cmp r0, 0\n\
+		beq _081C7988\n\
+		ldrh r0, [r4, 0x4]\n\
+		bl AllocSpritePalette\n\
+		lsls r0, 24\n\
+		lsrs r1, r0, 24\n\
+		cmp r1, 0xFF\n\
+		bne _081C7962\n\
+	_081C7988:\n\
+		pop {r4}\n\
+		pop {r0}\n\
+		bx r0\n\
+		.syntax divided");
+#endif // NONMATCHING
 }

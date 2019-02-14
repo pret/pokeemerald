@@ -5,115 +5,6 @@
 
 	.text
 
-	thumb_func_start atk47_cmd47
-atk47_cmd47: @ 81C78D4
-	push {lr}
-	cmp r0, 0x1
-	beq _081C78EA
-	cmp r0, 0x1
-	bgt _081C78E4
-	cmp r0, 0
-	beq _081C78EA
-	b _081C7914
-_081C78E4:
-	cmp r0, 0x2
-	beq _081C78EE
-	b _081C7914
-_081C78EA:
-	movs r0, 0
-	b _081C7916
-_081C78EE:
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x1
-	bl ChangeBgY
-	ldr r1, =0x00001fff
-	cmp r0, r1
-	bhi _081C7908
-	movs r0, 0x2
-	b _081C7916
-	.pool
-_081C7908:
-	movs r1, 0x80
-	lsls r1, 6
-	movs r0, 0
-	movs r2, 0
-	bl ChangeBgY
-_081C7914:
-	movs r0, 0x4
-_081C7916:
-	pop {r1}
-	bx r1
-	thumb_func_end atk47_cmd47
-
-	thumb_func_start sub_81C791C
-sub_81C791C: @ 81C791C
-	push {lr}
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x2
-	bl ChangeBgY
-	cmp r0, 0
-	ble _081C7932
-	movs r0, 0x2
-	b _081C793E
-_081C7932:
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0x4
-_081C793E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C791C
-
-	thumb_func_start sub_81C7944
-sub_81C7944: @ 81C7944
-	push {lr}
-	lsls r1, 1
-	ldr r3, =gPlttBufferUnfaded
-	adds r1, r3
-	lsls r2, 10
-	lsrs r2, 11
-	bl CpuSet
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7944
-
-	thumb_func_start sub_81C795C
-sub_81C795C: @ 81C795C
-	push {r4,lr}
-	adds r4, r0, 0
-	b _081C7974
-_081C7962:
-	lsls r0, r1, 4
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r0, r2
-	ldr r0, [r4]
-	movs r2, 0x20
-	bl sub_81C7944
-	adds r4, 0x8
-_081C7974:
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _081C7988
-	ldrh r0, [r4, 0x4]
-	bl AllocSpritePalette
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xFF
-	bne _081C7962
-_081C7988:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C795C
-
 	thumb_func_start sub_81C7990
 sub_81C7990: @ 81C7990
 	push {lr}
@@ -4401,7 +4292,7 @@ _081C9A5C:
 	ldr r0, =gPokenavMessageBox_Pal
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
@@ -4454,7 +4345,7 @@ _081C9AFA:
 	ldr r0, =gUnknown_0861FD4C
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	b _081C9AD6
 	.pool
 _081C9B30:
@@ -4481,7 +4372,7 @@ _081C9B3E:
 	ldr r0, =gUnknown_0861FC78
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81C9894
 	cmp r0, 0x3
 	beq _081C9B76
@@ -6152,7 +6043,7 @@ sub_81CA850: @ 81CA850
 	ldr r0, =gUnknown_0861FC78 + 0xE
 	movs r1, 0x31
 	movs r2, 0x4
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	pop {r0}
 	bx r0
 	.pool
@@ -7636,7 +7527,7 @@ _081CB368:
 	ldr r0, =gUnknown_08622510
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x2
 	b _081CB418
 	.pool
@@ -7669,7 +7560,7 @@ _081CB3E0:
 	ldr r0, =gUnknown_086226E0
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 _081CB418:
 	bl CopyBgTilemapBufferToVram
@@ -7693,11 +7584,11 @@ _081CB424:
 	ldr r0, =gUnknown_08622700
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08622720
 	movs r1, 0x50
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0
 	b _081CB506
 	.pool
@@ -10555,11 +10446,11 @@ sub_81CCA1C: @ 81CCA1C
 	ldr r0, =gUnknown_08622868
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gHoennMapZoomIcons_Pal
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_8124658
 	lsls r0, 24
 	cmp r0, 0
@@ -13180,11 +13071,11 @@ _081CDFF2:
 	ldr r0, =gPokenavCondition_Pal
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08623208
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =0x00001814
 	adds r1, r5, r0
 	ldr r0, =0x0000ffb0
@@ -13211,7 +13102,7 @@ _081CE03C:
 	ldr r0, =gUnknown_086231E8
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x2
 	bl sub_81D21DC
 	b _081CDFB0
@@ -15659,7 +15550,7 @@ _081CF454:
 	ldr r0, =gUnknown_086233C4
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081CF498:
@@ -15683,7 +15574,7 @@ _081CF4C0:
 	ldr r0, =gUnknown_08623570
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81CF88C
 	b _081CF498
 	.pool
@@ -17043,7 +16934,7 @@ _081CFEF4:
 	ldr r0, =gUnknown_086235E4
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081CFF32:
@@ -17077,7 +16968,7 @@ _081CFF76:
 	ldr r0, =gUnknown_08623790
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81D0304
 	b _081CFF32
 	.pool
@@ -18580,7 +18471,7 @@ _081D0AB8:
 	ldr r0, =gUnknown_08DDE010
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	b _081D0BBA
 	.pool
 _081D0B04:
@@ -18618,11 +18509,11 @@ _081D0B12:
 	ldr r0, =gUnknown_08623FF8
 	movs r1, 0x20
 	movs r2, 0xA0
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08624098
 	movs r1, 0xA0
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	b _081D0BBC
 	.pool
