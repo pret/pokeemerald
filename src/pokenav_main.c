@@ -623,3 +623,7 @@ void sub_81C795C(struct PaletteDescriptor *palettes) {
         }
     }
 }
+
+void sub_81C7990(u32 a0, u16 a1) {
+	CpuFill16(a1, gPlttBufferFaded + 0x100 + (a0 * 16), 16 * sizeof(u16));
+}
