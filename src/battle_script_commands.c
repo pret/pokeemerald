@@ -4011,7 +4011,7 @@ static void atk46_playanimation2(void) // animation Id is stored in the first po
 static void atk47_setgraphicalstatchangevalues(void)
 {
     u8 value = 0;
-    switch (GET_STAT_BUFF_VALUE2(gBattleScripting.statChanger))
+    switch (GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger))
     {
     case SET_STAT_BUFF_VALUE(1): // +1
         value = STAT_ANIM_PLUS1;
@@ -6379,7 +6379,7 @@ static void atk76_various(void)
             {
                 gBattleStruct->stolenStats[0] &= ~(gBitTable[i]);
                 SET_STATCHANGER(i, gBattleStruct->stolenStats[i], FALSE);
-                if (ChangeStatBuffs(gBattleScripting.statChanger & 0xF0, i, MOVE_EFFECT_CERTAIN | MOVE_EFFECT_AFFECTS_USER, NULL) == STAT_CHANGE_WORKED)
+                if (ChangeStatBuffs(GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger), i, MOVE_EFFECT_CERTAIN | MOVE_EFFECT_AFFECTS_USER, NULL) == STAT_CHANGE_WORKED)
                 {
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_StatUpMsg;
@@ -7772,6 +7772,10 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
         statValue ^= STAT_BUFF_NEGATIVE;
         gBattleScripting.statChanger ^= STAT_BUFF_NEGATIVE;
     }
+    else if (GetBattlerAbility(gActiveBattler) == ABILITY_SIMPLE)
+    {
+        statValue = (SET_STAT_BUFF_VALUE(GET_STAT_BUFF_VALUE(statValue) * 2)) | ((statValue <= -1) ? STAT_BUFF_NEGATIVE : 0);
+    }
 
     PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
 
@@ -7939,7 +7943,7 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
 static void atk89_statbuffchange(void)
 {
     const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-    if (ChangeStatBuffs(gBattleScripting.statChanger & 0xF0, GET_STAT_BUFF_ID(gBattleScripting.statChanger), T1_READ_16(gBattlescriptCurrInstr + 1), jumpPtr) == STAT_CHANGE_WORKED)
+    if (ChangeStatBuffs(GET_STAT_BUFF_VALUE_WITH_SIGN(gBattleScripting.statChanger), GET_STAT_BUFF_ID(gBattleScripting.statChanger), T1_READ_16(gBattlescriptCurrInstr + 1), jumpPtr) == STAT_CHANGE_WORKED)
         gBattlescriptCurrInstr += 7;
 }
 

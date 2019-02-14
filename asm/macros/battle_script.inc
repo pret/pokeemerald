@@ -1591,7 +1591,7 @@
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
-	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
+	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
 	.endm
 	
 	.macro setmoveeffect effect:req
