@@ -1078,7 +1078,7 @@
 	.4byte \param0
 	.endm
 
-	.macro tryimprision param0:req
+	.macro tryimprison param0:req
 	.byte 0xdb
 	.4byte \param0
 	.endm
