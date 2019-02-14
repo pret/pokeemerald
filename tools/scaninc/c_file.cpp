@@ -134,7 +134,7 @@ bool CFile::ConsumeComment()
     if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '*')
     {
         m_pos += 2;
-        while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
+        while (m_buffer[m_pos] != '*' || m_buffer[m_pos + 1] != '/')
         {
             if (m_buffer[m_pos] == 0)
                 return false;
