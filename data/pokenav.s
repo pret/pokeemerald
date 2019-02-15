@@ -3,13 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0861FA54:: @ 861FA54
-	obj_pal gUnknown_0861F590, 0
-	null_obj_pal
-
-gUnknown_0861FA64:: @ 861FA64
-	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0xC00, 2
-
 gUnknown_0861FA6C:: @ 861FA6C
 	obj_tiles gPokenavLeftHeaderMainMenu_Gfx, 0x20, 3
 	obj_tiles gPokenavLeftHeaderCondition_Gfx, 0x20, 1

@@ -19,12 +19,6 @@
 
 #define UNKNOWN_OFFSET 100000
 
-
-struct PaletteDescriptor {
-	void *palette;
-	u16 tag;
-};
-
 struct UnknownStruct_0203CF40 {
 	u32 (*field0)(void);
 	u32 field4;
@@ -123,7 +117,7 @@ u32 sub_81C786C(void);
 u32 sub_81C7764(s32 a0);
 u32 atk47_cmd47(s32 a0);
 bool32 sub_81C7738(void);
-void CopyPaletteIntoBufferUnfaded(void *palette, u32 a1, u32 a2);
+void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 a1, u32 a2);
 void sub_81C7834(u32 (*a0)(void), u32(*a1)(void));
 void sub_81C7360(struct UnknownStruct_0203CF40 *a0);
 void sub_81C7650(u32 index);
@@ -344,10 +338,25 @@ const struct CompressedSpriteSheet gUnknown_0861FA4C[1] = {
 	}
 };
 
+const struct SpritePalette gUnknown_0861FA54[2] = {
+	{
+		.data = gUnknown_0861F590,
+		.tag = 0,
+	},
+	{
+		.data = NULL,
+		.tag = 0,
+	}
+};
+
+const struct CompressedSpriteSheet gUnknown_0861FA64 = {
+	.data = gPokenavLeftHeaderHoennMap_Gfx,
+	.size = 0xC00,
+	.tag = 2
+};
+
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
-extern const struct CompressedSpriteSheet gUnknown_0861FA4C[];
-extern const struct PaletteDescriptor gUnknown_0861FA54;
 extern const struct SpriteTemplate gUnknown_0861FB04;
 
 u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
@@ -763,7 +772,7 @@ u32 sub_81C7764(s32 a0) {
 		decompress_and_copy_tile_data_to_vram(0, &gPokenavHeader_Gfx, 0, 0, 0);
 		SetBgTilemapBuffer(0, &v1->data[11]);
 		CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
-		CopyPaletteIntoBufferUnfaded(&gPokenavHeader_Pal, 0, 0x20);
+		CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, 0, 0x20);
 		CopyBgTilemapBufferToVram(0);
 		return 0;
 	case 2:
@@ -865,15 +874,15 @@ u32 sub_81C791C(s32 a0) {
 	}
 }
 
-void CopyPaletteIntoBufferUnfaded(void *palette, u32 bufferOffset, u32 size) {
+void CopyPaletteIntoBufferUnfaded(const u16 *palette, u32 bufferOffset, u32 size) {
 	CpuCopy16(palette, gPlttBufferUnfaded + bufferOffset, size);
 }
 
-void sub_81C795C(const struct PaletteDescriptor *palettes) {
-	const struct PaletteDescriptor *current;
+void sub_81C795C(const struct SpritePalette *palettes) {
+	const struct SpritePalette *current;
     u32 index;
 
-    for (current = palettes; current->palette != NULL; current++) 
+    for (current = palettes; current->data != NULL; current++) 
     {
         index = AllocSpritePalette(current->tag);
         if (index == 0xFF) 
@@ -883,7 +892,7 @@ void sub_81C795C(const struct PaletteDescriptor *palettes) {
         else
         {
             index = (index * 16) + 0x100;
-            CopyPaletteIntoBufferUnfaded(current->palette, index, 0x20);
+            CopyPaletteIntoBufferUnfaded(current->data, index, 0x20);
         }
     }
 }
@@ -1105,7 +1114,7 @@ void sub_81C7C28(void) {
 		LoadCompressedSpriteSheet(&gUnknown_0861FA4C[i]);
 	}
 
-	sub_81C795C(&gUnknown_0861FA54);
+	sub_81C795C(gUnknown_0861FA54);
 	v2 = IndexOfSpritePaletteTag(0);
 	v3 = 0x80 << 9 << v2;
 	v1[5] = -2 & ~v3;
