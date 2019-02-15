@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C7C94
-sub_81C7C94: @ 81C7C94
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x18]
-	bl DestroySprite
-	movs r0, 0
-	bl FreeSpriteTilesByTag
-	movs r0, 0
-	bl FreeSpritePaletteByTag
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7C94
-
-	thumb_func_start sub_81C7CB4
-sub_81C7CB4: @ 81C7CB4
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl GetBgY
-	lsrs r0, 8
-	negs r0, r0
-	strh r0, [r4, 0x26]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7CB4
-
-	thumb_func_start sub_81C7CCC
-sub_81C7CCC: @ 81C7CCC
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x18]
-	ldr r1, =SpriteCallbackDummy
-	str r1, [r0, 0x1C]
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7CCC
-
 	thumb_func_start sub_81C7CE4
 sub_81C7CE4: @ 81C7CE4
 	push {r4,lr}

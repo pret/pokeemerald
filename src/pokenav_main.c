@@ -64,7 +64,6 @@ extern const struct SpriteTemplate gUnknown_0861FB04;
 extern void sub_81C9430(void);
 extern void sub_81CAADC(void);
 extern void sub_81C99D4(void);
-extern void sub_81C7C94(void);
 extern void sub_8199D98(void);
 extern void sub_81C7D28(void);
 
@@ -97,6 +96,7 @@ void sub_81C7400(void);
 void sub_81C7C28(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
+void sub_81C7C94(void);
 
 u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
 {
@@ -859,4 +859,27 @@ void sub_81C7C28(void) {
 	v1[5] = -2 & ~v3;
 	spriteId = CreateSprite(&gUnknown_0861FB04, 0xDC, 0xC, 0);
 	v1[6] = (u32)(&gSprites[spriteId]);
+}
+
+void sub_81C7C94(void) {
+	void **v1;
+	v1 = sub_81C763C(0);
+	DestroySprite(v1[6]);
+	FreeSpriteTilesByTag(0);
+	FreeSpritePaletteByTag(0);
+}
+
+void sub_81C7CB4(u16 *a0) {
+	u32 v1;
+	v1 = GetBgY(0);
+	a0[19] = (v1 >> 8) * -1;
+}
+
+struct Sprite* sub_81C7CCC(void) {
+	struct Sprite **v1;
+	struct Sprite *v2;
+	v1 = sub_81C763C(0);
+	v2 = v1[6];
+	v2->callback = SpriteCallbackDummy;
+	return v2;
 }
