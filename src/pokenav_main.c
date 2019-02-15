@@ -15,6 +15,7 @@
 #include "graphics.h"
 #include "gba/macro.h"
 #include "decompress.h"
+#include "strings.h"
 
 #define UNKNOWN_OFFSET 100000
 
@@ -31,10 +32,6 @@ struct UnknownStruct_0203CF40 {
 	u16 fieldA;
 	u32 fieldC;
 	void* field10[19];
-};
-
-struct UnknownStruct_0861F3EC {
-	u32 (*data[7])(void);
 };
 
 struct UnknownStruct_sub_81C7850 {
@@ -146,7 +143,7 @@ void sub_81C7B74(void);
 void sub_81C7C94(void);
 
 
-static u32 (*const gUnknown_0861F3EC[15][7])(void) =
+u32 (*const gUnknown_0861F3EC[15][7])(void) =
 {
 	{
 		(u32 (*)(void))sub_81C9298,
@@ -285,13 +282,70 @@ static u32 (*const gUnknown_0861F3EC[15][7])(void) =
 	},
 };
 
-extern struct BgTemplate gUnknown_0861FA04;
-extern struct WindowTemplate gUnknown_0861FA08;
+const u16 gUnknown_0861F590[] = INCBIN_U16("graphics/pokenav/icon2.gbapal");
+const u32 gUnknown_0861F5B0[] = INCBIN_U32("graphics/pokenav/icon2.4bpp.lz");
+const u32 gUnknown_0861F994[] = INCBIN_U32("graphics/pokenav/icon2_unused.4bpp.lz");
+
+const struct BgTemplate gUnknown_0861FA04 = {
+	.bg = 0,
+	.charBaseIndex = 0,
+	.mapBaseIndex = 5,
+	.screenSize = 0,
+	.paletteMode = 0,
+	.priority = 0,
+	.baseTile = 0,
+};
+
+const struct WindowTemplate gUnknown_0861FA08[2] = {
+	{
+		.bg = 0,
+		.tilemapLeft = 1,
+		.tilemapTop = 0x16,
+		.width = 0x10,
+		.height = 0x2,
+		.paletteNum = 0,
+		.baseBlock = 0x36,
+	},
+	{
+		.bg = 0xFF,
+		.tilemapLeft = 0,
+		.tilemapTop = 0,
+		.width = 0,
+		.height = 0,
+		.paletteNum = 0,
+		.baseBlock = 0,
+	},
+};
+
+const u8 *const (MenuButtonReminders[12]) = {
+	gText_Navgear_ClearButtonList,
+	gText_NavgearMap_ZoomedOutButtons,
+	gText_NavgearMap_ZoomedInButtons,
+	gText_NavgearCondition_MonListButtons,
+	gText_NavgearCondition_MonStatusButtons,
+	gText_NavgearCondition_MarkingButtons,
+	gText_NavgearMatchCall_TrainerListButtons,
+	gText_NavgearMatchCall_CallMenuButtons,
+	gText_NavgearMatchCall_CheckTrainerButtons,
+	gText_NavgearRibbons_MonListButtons,
+	gText_NavgearRibbons_RibbonListButtons,
+	gText_NavgearRibbons_RibbonCheckButtons,
+};
+
+const u8 gMenuButtonReminderColor[4] = {
+	4, 1, 2, 0
+};
+
+const struct CompressedSpriteSheet gUnknown_0861FA4C[1] = {
+	{
+		.data = gUnknown_0861F5B0,
+		.size = 0x1000,
+		.tag = 0,
+	}
+};
+
 extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
 extern u8 gUnknown_0203CF3C;
-extern u8 gUnknown_0861FA48;
-//extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
-extern const u8 *(gUnknown_0861FA18[]);
 extern const struct CompressedSpriteSheet gUnknown_0861FA4C[];
 extern const struct PaletteDescriptor gUnknown_0861FA54;
 extern const struct SpriteTemplate gUnknown_0861FB04;
@@ -735,29 +789,29 @@ u32 sub_81C7764(s32 a0) {
 
 void sub_81C7834(u32 (*a0)(void), u32(*a1)(void)) {
 	// This is a guess.
-	struct UnknownStruct_0861F3EC *v1;
+	u32 (**v1)(void);
 
 	v1 = sub_81C763C(0);
-	v1->data[0] = a0;
-	v1->data[1] = a1;
-	v1->data[2] = NULL;
+	v1[0] = a0;
+	v1[1] = a1;
+	v1[2] = NULL;
 }
 
 void sub_81C7850(u32 a0) {
 	// This is a guess.
-	struct UnknownStruct_sub_81C7850 *v1;
+	void (**v1)(u32);
 
 	v1 = sub_81C763C(0);
-	v1->data[2] = NULL;
-	v1->data[0](a0);
+	v1[2] = NULL;
+	v1[0](a0);
 }
 
 u32 sub_81C786C(void) {
 	// This is a guess.
-	struct UnknownStruct_0861F3EC *v1;
+	u32 (**v1)(void);
 
 	v1 = sub_81C763C(0);
-	return v1->data[1]();
+	return v1[1]();
 }
 
 void sub_81C7880(void) {
@@ -1014,7 +1068,7 @@ void sub_81C7B74(void) {
 	u32 *v1;
 
 	v1 = sub_81C763C(0);
-	InitWindows(&gUnknown_0861FA08);
+	InitWindows(&gUnknown_0861FA08[0]);
 	v1[4] = 0;
 	sub_81C7BF8(0);
 	PutWindowTilemap(v1[4]);
@@ -1026,7 +1080,7 @@ void sub_81C7BA4(u32 a0) {
 
 	v1 = sub_81C763C(0);
 	sub_81C7BF8(v1[4]);
-	AddTextPrinterParameterized3(v1[4], 1, 0, 1, &gUnknown_0861FA48, 0, gUnknown_0861FA18[a0]);
+	AddTextPrinterParameterized3(v1[4], 1, 0, 1, gMenuButtonReminderColor, 0, MenuButtonReminders[a0]);
 }
 
 bool8 sub_81C7BE8(void) {

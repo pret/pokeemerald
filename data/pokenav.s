@@ -3,55 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0861F590:: @ 861F590
-	.incbin "graphics/pokenav/icon2.gbapal"
-
-gUnknown_0861F5B0:: @ 861F5B0
-	.incbin "graphics/pokenav/icon2.4bpp.lz"
-
-gUnknown_0861F994:: @ 861F994
-	.incbin "graphics/pokenav/icon2_unused.4bpp.lz"
-
-@ struct BgTemplate gUnknown_0861FA04 {
-@	.bg: 0,
-@	.charBaseIndex: 0
-@	.mapBaseIndex: 5
-@	.screenSize: 2,
-@ 
-@ }
-gUnknown_0861FA04:: @ 861FA04
-	.byte 0x50
-	.byte 0x0
-	.byte 0x0
-	.byte 0x0
-
-gUnknown_0861FA08:: @ 861FA08
-	window_template 0, 1, 0x16, 0x10, 0x2, 0x0, 0x36
-	null_window_template
-
-gUnknown_0861FA18:: @ 861FA18
-	.4byte gUnknown_085EBED5
-	.4byte gUnknown_085EBED9
-	.4byte gUnknown_085EBEE9
-	.4byte gUnknown_085EBEF9
-	.4byte gUnknown_085EBF0E
-	.4byte gUnknown_085EBF22
-	.4byte gUnknown_085EBF39
-	.4byte gUnknown_085EBF49
-	.4byte gUnknown_085EBF57
-	.4byte gUnknown_085EBF60
-	.4byte gUnknown_085EBF73
-	.4byte gUnknown_085EBF84
-
-gUnknown_0861FA48:: @ 861FA48
-	.byte 0x4
-	.byte 0x1
-	.byte 0x2
-	.byte 0x0
-
-gUnknown_0861FA4C:: @ 861FA4C
-	obj_tiles gUnknown_0861F5B0, 0x1000, 0
-
 gUnknown_0861FA54:: @ 861FA54
 	obj_pal gUnknown_0861F590, 0
 	null_obj_pal
