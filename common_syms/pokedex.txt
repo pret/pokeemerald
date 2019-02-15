@@ -1,2 +1,2 @@
-gUnknown_030060B0
+gUnusedU8
 gUnknown_030060B4

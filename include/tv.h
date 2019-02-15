@@ -61,5 +61,6 @@ void ContestLiveUpdates_BeforeInterview_2(u8 a0);
 void ContestLiveUpdates_BeforeInterview_3(u8 a0);
 void ContestLiveUpdates_BeforeInterview_4(u16 a0);
 void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1);
+void ResetGabbyAndTy(void);
 
 #endif //GUARD_TV_H

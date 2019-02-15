@@ -940,7 +940,7 @@ EventScript_27149D:: @ 827149D
 	setberrytree 82, 36, 5
 	return
 
-EventScript_2715DE:: @ 82715DE
+EventScript_ResetAllMapFlags:: @ 82715DE
 	setflag FLAG_LINK_CONTEST_POKE_BALL
 	setflag FLAG_HIDE_ROUTE_111_VICTORIA_WINSTRATE
 	setflag FLAG_HIDE_ROUTE_111_VIVI_WINSTRATE

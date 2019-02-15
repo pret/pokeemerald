@@ -16,6 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "constants/species.h"
+#include "save.h"
 
 extern u16 gUnknown_03005DA8;
 extern void nullsub_89(u8 taskId);
@@ -2347,17 +2348,17 @@ void sub_800E174(void)
     }
 }
 
-void sub_800E378(struct UnkSaveSubstruct_3b98 *dest, u32 trainerId, const u8 *name)
+void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
 {
     dest->trainerId = trainerId;
     StringCopy(dest->trainerName, name);
 }
 
-bool32 sub_800E388(const u8 *name)
+bool32 NameIsNotEmpty(const u8 *name)
 {
     s32 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
     {
         if (name[i] != 0)
         {
@@ -2367,52 +2368,64 @@ bool32 sub_800E388(const u8 *name)
     return FALSE;
 }
 
-void sub_800E3A8(void)
+// Save the currently connected players into the trainer records, shifting all previous records down.
+void RecordMixTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
         s32 i;
         s32 j;
-        s32 cnt;
-        s32 sp0[5];
-        struct UnkSaveSubstruct_3b98 *sp14 = calloc(20, sizeof(struct UnkSaveSubstruct_3b98));
+        s32 nextSpace;
+        s32 connectedTrainerRecordIndecies[5];
+        struct TrainerNameRecord *newRecords = calloc(20, sizeof(struct TrainerNameRecord));
+
+        // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
-            sp0[i] = -1;
+            connectedTrainerRecordIndecies[i] = -1;
             for (j = 0; j < 20; j++)
             {
-                if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->unk_3B98[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->unk_3B98[j].trainerName) == 0)
+                if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
                 {
-                    sp0[i] = j;
+                    connectedTrainerRecordIndecies[i] = j;
                 }
             }
         }
-        cnt = 0;
+        
+        // Save the connected trainers first, at the top of the list.
+        nextSpace = 0;
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             if (i != GetMultiplayerId() && gLinkPlayers[i].language != LANGUAGE_JAPANESE)
             {
-                sub_800E378(&sp14[cnt], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
-                if (sp0[i] >= 0)
+                CopyTrainerRecord(&newRecords[nextSpace], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
+
+                // If we already had a record for this trainer, wipe it so that the next step doesn't duplicate it.
+                if (connectedTrainerRecordIndecies[i] >= 0)
                 {
-                    memset(gSaveBlock1Ptr->unk_3B98[sp0[i]].trainerName, 0, 8);
+                    memset(gSaveBlock1Ptr->trainerNameRecords[connectedTrainerRecordIndecies[i]].trainerName, 0, 8);
                 }
-                cnt++;
+                nextSpace++;
             }
         }
+
+        // Copy all non-empty records to the new list, in the order they appear on the old list. If the list is full,
+        // the last (oldest) records will be dropped.
         for (i = 0; i < 20; i++)
         {
-            if (sub_800E388(gSaveBlock1Ptr->unk_3B98[i].trainerName))
+            if (NameIsNotEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
             {
-                sub_800E378(&sp14[cnt], gSaveBlock1Ptr->unk_3B98[i].trainerId, gSaveBlock1Ptr->unk_3B98[i].trainerName);
-                if (++cnt >= 20)
+                CopyTrainerRecord(&newRecords[nextSpace], gSaveBlock1Ptr->trainerNameRecords[i].trainerId, gSaveBlock1Ptr->trainerNameRecords[i].trainerName);
+                if (++nextSpace >= 20)
                 {
                     break;
                 }
             }
         }
-        memcpy(gSaveBlock1Ptr->unk_3B98, sp14, 20 * sizeof(struct UnkSaveSubstruct_3b98));
-        free(sp14);
+        
+        // Finalize the new list, and clean up.
+        memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, 20 * sizeof(struct TrainerNameRecord));
+        free(newRecords);
     }
 }
 
@@ -2422,11 +2435,11 @@ bool32 sub_800E540(u16 id, u8 *name)
 
     for (i = 0; i < 20; i++)
     {
-        if (StringCompare(gSaveBlock1Ptr->unk_3B98[i].trainerName, name) == 0 && gSaveBlock1Ptr->unk_3B98[i].trainerId == id)
+        if (StringCompare(gSaveBlock1Ptr->trainerNameRecords[i].trainerName, name) == 0 && gSaveBlock1Ptr->trainerNameRecords[i].trainerId == id)
         {
             return TRUE;
         }
-        if (!sub_800E388(gSaveBlock1Ptr->unk_3B98[i].trainerName))
+        if (!NameIsNotEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
         {
             return FALSE;
         }
@@ -2434,14 +2447,14 @@ bool32 sub_800E540(u16 id, u8 *name)
     return FALSE;
 }
 
-void sub_800E5AC(void)
+void WipeTrainerNameRecords(void)
 {
     s32 i;
 
     for (i = 0; i < 20; i++)
     {
-        gSaveBlock1Ptr->unk_3B98[i].trainerId = 0;
-        CpuFill16(0, gSaveBlock1Ptr->unk_3B98[i].trainerName, 8);
+        gSaveBlock1Ptr->trainerNameRecords[i].trainerId = 0;
+        CpuFill16(0, gSaveBlock1Ptr->trainerNameRecords[i].trainerName, 8);
     }
 }
 
