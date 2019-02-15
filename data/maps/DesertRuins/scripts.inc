@@ -16,7 +16,7 @@ DesertRuins_EventScript_22D975:: @ 822D975
 	return
 
 DesertRuins_MapScript1_22D989: @ 822D989
-	call_if_unset FLAG_SYS_BRAILLE_STRENGTH, DesertRuins_EventScript_22D993
+	call_if_unset FLAG_SYS_BRAILLE_REGIROCK_HM, DesertRuins_EventScript_22D993
 	end
 
 DesertRuins_EventScript_22D993:: @ 822D993
@@ -39,7 +39,7 @@ DesertRuins_EventScript_22D9D7:: @ 822D9D7
 
 DesertRuins_EventScript_22D9DB:: @ 822D9DB
 	lockall
-	goto_if_set FLAG_SYS_BRAILLE_STRENGTH, DesertRuins_EventScript_22D9EE
+	goto_if_set FLAG_SYS_BRAILLE_REGIROCK_HM, DesertRuins_EventScript_22D9EE
 	braillemessage DesertRuins_Braille_2A6CA0
 	waitbuttonpress
 	hidebox2

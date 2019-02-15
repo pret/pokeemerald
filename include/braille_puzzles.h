@@ -1,11 +1,11 @@
 #ifndef GUARD_BRAILLE_PUZZLES_H
 #define GUARD_BRAILLE_PUZZLES_H
 
-bool8 ShouldDoBrailleFlyEffect(void);
-bool8 ShouldDoBrailleStrengthEffect(void);
+bool8 ShouldDoBrailleRegisteelEffect(void);
+bool8 ShouldDoBrailleRegirockEffect(void);
 bool8 ShouldDoBrailleDigEffect(void);
 void DoBrailleDigEffect(void);
-void sub_8179918(void);
-void sub_8179834(void);
+void SetUpPuzzleEffectRegisteel(void);
+void SetUpPuzzleEffectRegirock(void);
 
 #endif // GUARD_BRAILLE_PUZZLES_H

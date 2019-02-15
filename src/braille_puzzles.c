@@ -10,21 +10,20 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-
-extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId); // fieldmap
-extern u8 GetCursorSelectionMonId(void);
-extern u8 oei_task_add(void);
+#include "fieldmap.h"
+#include "party_menu.h"
+#include "fldeff.h"
 
 // why do this, GF?
 enum
 {
-    STRENGTH_PUZZLE,
-    FLY_PUZZLE
+    REGIROCK_PUZZLE,
+    REGISTEEL_PUZZLE
 };
 
 EWRAM_DATA static u8 sBraillePuzzleCallbackFlag = 0;
 
-static const u8 gUnknown_085EFE74[][2] =
+static const u8 gRegicePathCoords[][2] =
 {
     {0x04, 0x15},
     {0x05, 0x15},
@@ -65,8 +64,8 @@ static const u8 gUnknown_085EFE74[][2] =
 };
 
 void SealedChamberShakingEffect(u8);
-void sub_8179860(void);
-void sub_8179944(void);
+void DoBrailleRegirockEffect(void);
+void DoBrailleRegisteelEffect(void);
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
@@ -115,10 +114,10 @@ bool8 CheckRelicanthWailord(void)
 
 // THEORY: this was caused by block commenting out all of the older R/S braille functions but leaving the call to it itself, which creates the nullsub.
 // the code is shown below to show what this might look like.
-void ShouldDoBrailleStrengthEffectOld(void)
+void ShouldDoBrailleRegirockEffectOld(void)
 {
     /*
-        if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
+        if (!FlagGet(FLAG_SYS_BRAILLE_REGIROCK_HM) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -131,7 +130,7 @@ void ShouldDoBrailleStrengthEffectOld(void)
     return FALSE;
 }
 
-void DoBrailleStrengthEffect(void)
+void DoBrailleRegirockEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
     MapGridSetMetatileIdAt(14, 26, 554);
@@ -142,13 +141,13 @@ void DoBrailleStrengthEffect(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
+    FlagSet(FLAG_SYS_BRAILLE_REGIROCK_HM);
     ScriptContext2_Disable();
 }
 
-bool8 ShouldDoBrailleFlyEffect(void)
+bool8 ShouldDoBrailleRegisteelEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
+    if (!FlagGet(FLAG_SYS_BRAILLE_REGISTEEL_HM) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
@@ -157,24 +156,24 @@ bool8 ShouldDoBrailleFlyEffect(void)
     return FALSE;
 }
 
-void DoBrailleFlyEffect(void)
+void DoBrailleRegisteelEffect(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
+    FieldEffectStart(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
 }
 
 bool8 FldEff_UseFlyAncientTomb(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)UseFlyAncientTomb_Callback >> 16;
-    gTasks[taskId].data[9] = (u32)UseFlyAncientTomb_Callback;
+    gTasks[taskId].data[8] = (u32)UseRegisteelHm_Callback >> 16;
+    gTasks[taskId].data[9] = (u32)UseRegisteelHm_Callback;
     return FALSE;
 }
 
-void UseFlyAncientTomb_Callback(void)
+void UseRegisteelHm_Callback(void)
 {
-    FieldEffectActiveListRemove(FLDEFF_USE_FLY_ANCIENT_TOMB);
+    FieldEffectActiveListRemove(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
     UseFlyAncientTomb_Finish();
 }
 
@@ -188,7 +187,7 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_FLY);
+    FlagSet(FLAG_SYS_BRAILLE_REGISTEEL_HM);
     ScriptContext2_Disable();
 }
     */
@@ -240,25 +239,25 @@ void SealedChamberShakingEffect(u8 taskId)
 }
 
 // moved later in the function because it was rewritten.
-bool8 ShouldDoBrailleStrengthEffect(void)
+bool8 ShouldDoBrailleRegirockEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_STRENGTH)
+    if (!FlagGet(FLAG_SYS_BRAILLE_REGIROCK_HM)
         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(DESERT_RUINS))
     {
         if (gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 23)
         {
-            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            sBraillePuzzleCallbackFlag = REGIROCK_PUZZLE;
             return TRUE;
         }
         else if (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 23)
         {
-            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            sBraillePuzzleCallbackFlag = REGIROCK_PUZZLE;
             return TRUE;
         }
         else if (gSaveBlock1Ptr->pos.x == 7 && gSaveBlock1Ptr->pos.y == 23)
         {
-            sBraillePuzzleCallbackFlag = STRENGTH_PUZZLE;
+            sBraillePuzzleCallbackFlag = REGIROCK_PUZZLE;
             return TRUE;
         }
     }
@@ -266,19 +265,19 @@ bool8 ShouldDoBrailleStrengthEffect(void)
     return FALSE;
 }
 
-void sub_8179834(void)
+void SetUpPuzzleEffectRegirock(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
+    FieldEffectStart(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
 }
 
-void UseStrengthDesertRuins_Callback(void)
+void UseRegirockHm_Callback(void)
 {
-    FieldEffectActiveListRemove(FLDEFF_USE_FLY_ANCIENT_TOMB);
-    sub_8179860();
+    FieldEffectActiveListRemove(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
+    DoBrailleRegirockEffect();
 }
 
-void sub_8179860(void)
+void DoBrailleRegirockEffect(void)
 {
     MapGridSetMetatileIdAt(14, 26, 554);
     MapGridSetMetatileIdAt(15, 26, 555);
@@ -288,33 +287,36 @@ void sub_8179860(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_STRENGTH);
+    FlagSet(FLAG_SYS_BRAILLE_REGIROCK_HM);
     ScriptContext2_Disable();
 }
 
-bool8 ShouldDoBrailleFlyEffect(void)
+bool8 ShouldDoBrailleRegisteelEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_FLY) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
+    if (!FlagGet(FLAG_SYS_BRAILLE_REGISTEEL_HM) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
     {
         if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
-            { sBraillePuzzleCallbackFlag = FLY_PUZZLE; return TRUE; }
+        {
+            sBraillePuzzleCallbackFlag = REGISTEEL_PUZZLE;
+            return TRUE;
+        }
     }
     return FALSE;
 }
 
-void sub_8179918(void)
+void SetUpPuzzleEffectRegisteel(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
+    FieldEffectStart(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
 }
 
-void UseFlyAncientTomb_Callback(void)
+void UseRegisteelHm_Callback(void)
 {
-    FieldEffectActiveListRemove(FLDEFF_USE_FLY_ANCIENT_TOMB);
-    sub_8179944();
+    FieldEffectActiveListRemove(FLDEFF_USE_TOMB_PUZZLE_EFFECT);
+    DoBrailleRegisteelEffect();
 }
 
-void sub_8179944(void)
+void DoBrailleRegisteelEffect(void)
 {
     MapGridSetMetatileIdAt(14, 26, 554);
     MapGridSetMetatileIdAt(15, 26, 555);
@@ -324,7 +326,7 @@ void sub_8179944(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_FLY);
+    FlagSet(FLAG_SYS_BRAILLE_REGISTEEL_HM);
     ScriptContext2_Disable();
 }
 
@@ -332,7 +334,7 @@ void sub_8179944(void)
 void DoBrailleWait(void)
 {
     /*
-    if (!FlagGet(FLAG_SYS_BRAILLE_WAIT))
+    if (!FlagGet(FLAG_SYS_BRAILLE_REGICE_PUZZLE))
         CreateTask(Task_BrailleWait, 0x50);
 }
 
@@ -410,15 +412,15 @@ bool8 FldEff_UsePuzzleEffect(void)
 {
     u8 taskId = oei_task_add();
 
-    if (sBraillePuzzleCallbackFlag == FLY_PUZZLE)
+    if (sBraillePuzzleCallbackFlag == REGISTEEL_PUZZLE)
     {
-        gTasks[taskId].data[8] = (u32)UseFlyAncientTomb_Callback >> 16;
-        gTasks[taskId].data[9] = (u32)UseFlyAncientTomb_Callback;
+        gTasks[taskId].data[8] = (u32)UseRegisteelHm_Callback >> 16;
+        gTasks[taskId].data[9] = (u32)UseRegisteelHm_Callback;
     }
     else
     {
-        gTasks[taskId].data[8] = (u32)UseStrengthDesertRuins_Callback >> 16;
-        gTasks[taskId].data[9] = (u32)UseStrengthDesertRuins_Callback;
+        gTasks[taskId].data[8] = (u32)UseRegirockHm_Callback >> 16;
+        gTasks[taskId].data[9] = (u32)UseRegirockHm_Callback;
     }
     return FALSE;
 }
@@ -430,7 +432,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     if (gSaveBlock1Ptr->location.mapGroup == 0x18
         && gSaveBlock1Ptr->location.mapNum == 0x43)
     {
-        if (FlagGet(FLAG_SYS_BRAILLE_WAIT) != FALSE)
+        if (FlagGet(FLAG_SYS_BRAILLE_REGICE_PUZZLE))
             return FALSE;
         if (FlagGet(FLAG_TEMP_2) == FALSE)
             return FALSE;
@@ -439,35 +441,36 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
 
         for (i = 0; i < 36; i++)
         {
-            u8 xPos = gUnknown_085EFE74[i][0];
-            u8 yPos = gUnknown_085EFE74[i][1];
+            u8 xPos = gRegicePathCoords[i][0];
+            u8 yPos = gRegicePathCoords[i][1];
             if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
             {
                 u16 varValue;
 
                 if (i < 16)
                 {
-                    u16 val = VarGet(VAR_0x403B);
+                    u16 val = VarGet(VAR_REGICE_STEPS_1);
                     val |= 1 << i;
-                    VarSet(VAR_0x403B, val);
+                    VarSet(VAR_REGICE_STEPS_1, val);
                 }
                 else if (i < 32)
                 {
-                    u16 val = VarGet(VAR_0x403C);
+                    u16 val = VarGet(VAR_REGICE_STEPS_2);
                     val |= 1 << (i - 16);
-                    VarSet(VAR_0x403C, val);
+                    VarSet(VAR_REGICE_STEPS_2, val);
                 }
                 else
                 {
-                    u16 val = VarGet(VAR_0x403D);
+                    u16 val = VarGet(VAR_REGICE_STEPS_3);
                     val |= 1 << (i - 32);
-                    VarSet(VAR_0x403D, val);
+                    VarSet(VAR_REGICE_STEPS_3, val);
                 }
 
-                varValue = VarGet(VAR_0x403B);
-                if (varValue != 0xFFFF || VarGet(VAR_0x403C) != varValue || VarGet(VAR_0x403D) != 0xF)
+                varValue = VarGet(VAR_REGICE_STEPS_1);
+                if (varValue != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != varValue || VarGet(VAR_REGICE_STEPS_3) != 0xF)
                     return FALSE;
 
+                // This final check is redundant.
                 if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
                     return TRUE;
                 else
