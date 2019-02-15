@@ -82,7 +82,7 @@ struct SlotMachineEwramStruct
     /*0x22*/ u16 reelPixelOffsetsWhileStopping[3];
     /*0x28*/ s16 reelTagOffsets[3];
     /*0x2E*/ s16 reelExtraTurns[3];
-    /*0x34*/ s16 biasTagLocation[3];
+    /*0x34*/ s16 winnerRows[3];
     /*0x3A*/ u8 slotReelTasks[3];
     /*0x3D*/ u8 unkTaskPointer3D;
     /*0x3E*/ u8 unkTaskPointer3E;
@@ -950,7 +950,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     sSlotMachine->payout = 0;
     sSlotMachine->bet = 0;
     sSlotMachine->currReel = 0;
-    sSlotMachine->luckyFlags &= 0xc0; // discard all but top 2 flags
+    sSlotMachine->luckyFlags &= (LUCKY_BIAS_777 | LUCKY_BIAS_MIXED_777);
     sSlotMachine->slotActionPtr = 4;
     if (sSlotMachine->coins <= 0)
     {
@@ -1064,7 +1064,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     sub_80EEC80();  // something with daily slot variable
 
     task->data[0] = 0;
-    if (sSlotMachine->luckyFlags & 0x20)  // bit 5 of luckyFlag set
+    if (sSlotMachine->luckyFlags & LUCKY_BIAS_REELTIME)
     {
         // enter into reel time
         BeginReeltime();
@@ -1087,8 +1087,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
     if (IsFinalTask_RunReelTimeActions())
     {
         sub_8104CAC(1);
-        // unset enter reel time flag
-        sSlotMachine->luckyFlags &= 0xDF;
+        sSlotMachine->luckyFlags &= ~LUCKY_BIAS_REELTIME;
         sSlotMachine->slotActionPtr = 11;
     }
     return FALSE;
@@ -1134,8 +1133,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 // once all reels have stopped
 /*static */bool8 SlotAction_CheckMatches(struct Task *task)
 {
-    // keep top 2 bits of luckyFlags
-    sSlotMachine->luckyFlags &= 0xc0;
+    sSlotMachine->luckyFlags &= (LUCKY_BIAS_777 | LUCKY_BIAS_MIXED_777);
     CheckMatch();
     if (sSlotMachine->fairRollsLeft)
     {
@@ -1170,8 +1168,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
         // if you matched 777...
         if (sSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_MIXED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
-            // clear top bits 6 and 7
-            sSlotMachine->luckyFlags &= 0x3f;
+            sSlotMachine->luckyFlags &= ~(LUCKY_BIAS_777 | LUCKY_BIAS_MIXED_777);
             if (sSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
             {
                 sSlotMachine->fairRollsLeft = 0;
@@ -1403,7 +1400,7 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback CB2_ReturnToFieldContinue
 
     if (sSlotMachine->fairRollsLeft == 0)
     {
-        if (!(sSlotMachine->luckyFlags & 0xc0)) // top 2 flags set to 0
+        if (!(sSlotMachine->luckyFlags & (LUCKY_BIAS_777 | LUCKY_BIAS_MIXED_777)))
         {
             if (IsThisRoundLucky())
             {
@@ -1847,7 +1844,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 {
     task->data[0]++;
     // initialize data for that reel --> these will be changed if biasTags can be lined up
-    sSlotMachine->biasTagLocation[task->data[15]] = 0;
+    sSlotMachine->winnerRows[task->data[15]] = 0;
     sSlotMachine->reelExtraTurns[task->data[15]] = 0;
 
     if (sSlotMachine->fairRollsLeft == 0 && (sSlotMachine->luckyFlags == 0 || sSlotMachine->luckySpinsLeft == 0 || !DecideReelTurns_BiasTag[task->data[15]]()))
@@ -1905,7 +1902,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 {
     u8 tag2 = GetLuckyTag(sSlotMachine->luckyFlags);
     u8 tag1 = tag2;
-    if (sSlotMachine->luckyFlags & 0xc0)  // if either of top 2 bits are set
+    if (sSlotMachine->luckyFlags & (LUCKY_BIAS_777 | LUCKY_BIAS_MIXED_777))
     {
         tag1 = SLOT_MACHINE_TAG_7_RED;
         tag2 = SLOT_MACHINE_TAG_7_BLUE;
@@ -1934,7 +1931,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 
 /*static */bool8 IsBiasTowardsCherryOr7s(void)
 {
-    if (sSlotMachine->luckyFlags & 0xc2)  // if any of bits 6, 7, or 1 are set
+    if (sSlotMachine->luckyFlags & (LUCKY_BIAS_777 | LUCKY_BIAS_MIXED_777 | LUCKY_BIAS_CHERRY))
         return TRUE;
     else
         return FALSE;
@@ -1949,7 +1946,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
         // if a lucky tag appears in the center row within 4 turns
         if (AreTagsAtPosition_Reel1(2 - i, tag1, tag2))
         {
-            sSlotMachine->biasTagLocation[0] = 2;
+            sSlotMachine->winnerRows[0] = 2;
             sSlotMachine->reelExtraTurns[0] = i;
             return TRUE;
         }
@@ -1969,7 +1966,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
             // if a bias tag is currently on the screen
             if (AreTagsAtPosition_Reel1(i, tag1, tag2))
             {
-                sSlotMachine->biasTagLocation[0] = i;
+                sSlotMachine->winnerRows[0] = i;
                 sSlotMachine->reelExtraTurns[0] = 0;
                 return TRUE;
             }
@@ -1987,19 +1984,19 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
                 //...and if it only took 1 turn and the lucky tag could also be the bottom row of a screen with no cherries...
                 if (i == 1 && (biasedCopy || !AreCherriesOnScreen_Reel1(3)))
                 {
-                    sSlotMachine->biasTagLocation[0] = 3;
+                    sSlotMachine->winnerRows[0] = 3;
                     sSlotMachine->reelExtraTurns[0] = 3;
                     return TRUE;
                 }
                 //...or if it isn't the last turn and the lucky tag could be in the center row of a screen with no cherries...
                 if (i < 4 && (biasedCopy || !AreCherriesOnScreen_Reel1(i + 1)))
                 {
-                    sSlotMachine->biasTagLocation[0] = 2;
+                    sSlotMachine->winnerRows[0] = 2;
                     sSlotMachine->reelExtraTurns[0] = i + 1;
                     return TRUE;
                 }
                 //...else
-                sSlotMachine->biasTagLocation[0] = 1;
+                sSlotMachine->winnerRows[0] = 1;
                 sSlotMachine->reelExtraTurns[0] = i;
                 return TRUE;
             }
@@ -2016,14 +2013,14 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 /*static */bool8 DecideReelTurns_BiasTag_Reel2_Bet1or2(void)
 {
     s16 i;
-    s16 biasTagLocation_Reel1 = sSlotMachine->biasTagLocation[0];
+    s16 biasTagLocation_Reel1 = sSlotMachine->winnerRows[0];
 
     for (i = 0; i < 5; i++)
     {
         // if biasTag appears in the same row within 4 turns
         if (GetNearbyTag(1, biasTagLocation_Reel1 - i) == sSlotMachine->biasTag)
         {
-            sSlotMachine->biasTagLocation[1] = biasTagLocation_Reel1;
+            sSlotMachine->winnerRows[1] = biasTagLocation_Reel1;
             sSlotMachine->reelExtraTurns[1] = i;
             return TRUE;
         }
@@ -2038,14 +2035,14 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
     if (DecideReelTurns_BiasTag_Reel2_Bet1or2())
     {
         //...and if the biasTag is not in middle row of reel 1 and if biasTag appears in middle row of reel 2 in 2 or 3 turns...
-        if (sSlotMachine->biasTagLocation[0] != 2 && sSlotMachine->reelExtraTurns[1] > 1 && sSlotMachine->reelExtraTurns[1] != 4)
+        if (sSlotMachine->winnerRows[0] != 2 && sSlotMachine->reelExtraTurns[1] > 1 && sSlotMachine->reelExtraTurns[1] != 4)
         {
             for (i = 0; i < 5; i++)
             {
                 //...and if the bias tag will appear in the middle row within 4 turns
                 if (GetNearbyTag(1, 2 - i) == sSlotMachine->biasTag)
                 {
-                    sSlotMachine->biasTagLocation[1] = 2;
+                    sSlotMachine->winnerRows[1] = 2;
                     sSlotMachine->reelExtraTurns[1] = i;
                     break;
                 }
@@ -2054,14 +2051,14 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
         return TRUE;
     }
     // else if the biasTag is not in middle row of reel 1...
-    if (sSlotMachine->biasTagLocation[0] != 2)
+    if (sSlotMachine->winnerRows[0] != 2)
     {
         for (i = 0; i < 5; i++)
         {
             //...and if the biasTag will appear in the center row of reel 2 within 4 turns
             if (GetNearbyTag(1, 2 - i) == sSlotMachine->biasTag)
             {
-                sSlotMachine->biasTagLocation[1] = 2;
+                sSlotMachine->winnerRows[1] = 2;
                 sSlotMachine->reelExtraTurns[1] = i;
                 return TRUE;
             }
@@ -2073,14 +2070,12 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 /*static */bool8 DecideReelTurns_BiasTag_Reel3(void)
 {
     u8 biasTag = sSlotMachine->biasTag;
-    // if bit 6 of luckyFlags is set...
-    if (sSlotMachine->luckyFlags & 0x40)
+    if (sSlotMachine->luckyFlags & LUCKY_BIAS_MIXED_777)
     {
-        // make biasTag the opposite color of the 7 in sSlotMachine->biasTag
-        biasTag = 0;
-        if (sSlotMachine->biasTag == 0)
+        biasTag = SLOT_MACHINE_TAG_7_RED;
+        if (sSlotMachine->biasTag == SLOT_MACHINE_TAG_7_RED)
         {
-            biasTag = 1;
+            biasTag = SLOT_MACHINE_TAG_7_BLUE;
         }
     }
     return DecideReelTurns_BiasTag_Reel3_Bets[sSlotMachine->bet - 1](biasTag);
@@ -2089,14 +2084,14 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 /*static */bool8 DecideReelTurns_BiasTag_Reel3_Bet1or2(u8 biasTag)
 {
     s16 i;
-    s16 biasTagLocation_Reel2 = sSlotMachine->biasTagLocation[1];
+    s16 biasTagLocation_Reel2 = sSlotMachine->winnerRows[1];
 
     for (i = 0; i < 5; i++)
     {
         // if the biasTag appears in the same row as in reel 2 within 4 turns
         if (GetNearbyTag(2, biasTagLocation_Reel2 - i) == biasTag)
         {
-            sSlotMachine->biasTagLocation[2] = biasTagLocation_Reel2;
+            sSlotMachine->winnerRows[2] = biasTagLocation_Reel2;
             sSlotMachine->reelExtraTurns[2] = i;
             return TRUE;
         }
@@ -2109,11 +2104,11 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
     s16 i;
     s16 biasTagFinalPos;
     // if the final position of the biasTag matches in reel 1 and reel 2...
-    if (sSlotMachine->biasTagLocation[0] == sSlotMachine->biasTagLocation[1])
+    if (sSlotMachine->winnerRows[0] == sSlotMachine->winnerRows[1])
         //...then try to line it up in reel 3
         return DecideReelTurns_BiasTag_Reel3_Bet1or2(biasTag);
     // else place it in the row opposite reel 1's
-    if (sSlotMachine->biasTagLocation[0] == 1)
+    if (sSlotMachine->winnerRows[0] == 1)
         biasTagFinalPos = 3;
     else
         biasTagFinalPos = 1;
@@ -2123,7 +2118,7 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
         if (GetNearbyTag(2, biasTagFinalPos - i) == biasTag)
         {
             sSlotMachine->reelExtraTurns[2] = i;
-            sSlotMachine->biasTagLocation[2] = biasTagFinalPos;
+            sSlotMachine->winnerRows[2] = biasTagFinalPos;
             return TRUE;
         }
     }
@@ -2142,7 +2137,7 @@ Advance until there are no cherries on screen in reel 1
     sSlotMachine->reelExtraTurns[0] = i;
 }
 
-/*static */bool8 IsBiasTag7AndIfSoSColor(u8 *biasTagPtr)
+/*static */bool8 IsBiasTag777_SwitchColor(u8 *biasTagPtr)
 {
     if (*biasTagPtr == SLOT_MACHINE_TAG_7_RED)
     {
@@ -2165,12 +2160,11 @@ Advance until there are no cherries on screen in reel 1
 // only does stuff if the biasTag is one of the 7's, plus other conditions
 /*static */void DecideReelTurns_NoBiasTag_Reel2_Bet1(void)
 {
-    // if biasTag is in reel 1 and bit 7 is set in luckyFlags...
-    if (sSlotMachine->biasTagLocation[0] != 0 && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->winnerRows[0] != 0 && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
         u8 biasTag = GetNearbyTag(0, 2 - sSlotMachine->reelExtraTurns[0]);
         //...and if biasTag is one of the 7's...
-        if (IsBiasTag7AndIfSoSColor(&biasTag))
+        if (IsBiasTag777_SwitchColor(&biasTag))
         //...swap color of biasTag...
         {
             s16 i;
@@ -2179,7 +2173,7 @@ Advance until there are no cherries on screen in reel 1
                 //...and if the biasTag appears within 4 turns
                 if (biasTag == GetNearbyTag(1, 2 - i))
                 {
-                    sSlotMachine->biasTagLocation[1] = 2;
+                    sSlotMachine->winnerRows[1] = 2;
                     sSlotMachine->reelExtraTurns[1] = i;
                     break;
                 }
@@ -2190,21 +2184,20 @@ Advance until there are no cherries on screen in reel 1
 
 /*static */void DecideReelTurns_NoBiasTag_Reel2_Bet2(void)
 {
-    // if reel 1 has a biasTag and bit 7 is set in luckyFlags...
-    if (sSlotMachine->biasTagLocation[0] != 0 && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->winnerRows[0] != 0 && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        u8 biasTag = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
+        u8 biasTag = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
         //...and if biasTag is one of the 7's...
-        if (IsBiasTag7AndIfSoSColor(&biasTag))
+        if (IsBiasTag777_SwitchColor(&biasTag))
         //...swap color of biasTag...
         {
             s16 i;
             for (i = 0; i < 5; i++)
             {
                 //...and if the biasTag appears in same row in reel 2 within 4 turns
-                if (biasTag == GetNearbyTag(1, sSlotMachine->biasTagLocation[0] - i))
+                if (biasTag == GetNearbyTag(1, sSlotMachine->winnerRows[0] - i))
                 {
-                    sSlotMachine->biasTagLocation[1] = sSlotMachine->biasTagLocation[0];
+                    sSlotMachine->winnerRows[1] = sSlotMachine->winnerRows[0];
                     sSlotMachine->reelExtraTurns[1] = i;
                     break;
                 }
@@ -2218,46 +2211,46 @@ Advance until there are no cherries on screen in reel 1
     s16 i;
     s16 j;
     // if reel 1 has a biasTag and bit 7 is set in luckyFlags...
-    if (sSlotMachine->biasTagLocation[0] != 0 && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->winnerRows[0] != 0 && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
         //...and if biasTag appeared in the center row of reel 1
-        if (sSlotMachine->biasTagLocation[0] == 2)
+        if (sSlotMachine->winnerRows[0] == 2)
         {
             DecideReelTurns_NoBiasTag_Reel2_Bet2();
         }
         else
         {
-            u8 biasTag = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
+            u8 biasTag = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
             //...and if biasTag is one of the 7's...
-            if (IsBiasTag7AndIfSoSColor(&biasTag))
+            if (IsBiasTag777_SwitchColor(&biasTag))
             //...swap the color of the 7...
             {
                 j = 2;
-                if (sSlotMachine->biasTagLocation[0] == 3)
+                if (sSlotMachine->winnerRows[0] == 3)
                     j = 3;
                 for (i = 0; i < 2; i++, j--)
                 {
                     if (biasTag == GetNearbyTag(1, j))
                     {
-                        sSlotMachine->biasTagLocation[1] = j;
+                        sSlotMachine->winnerRows[1] = j;
                         sSlotMachine->reelExtraTurns[1] = 0;
                         return;
                     }
                 }
                 for (j = 1; j < 5; j++)
                 {
-                    if (biasTag == GetNearbyTag(1, sSlotMachine->biasTagLocation[0] - j))
+                    if (biasTag == GetNearbyTag(1, sSlotMachine->winnerRows[0] - j))
                     {
-                        if (sSlotMachine->biasTagLocation[0] == 1)
+                        if (sSlotMachine->winnerRows[0] == 1)
                         {
                             if (j < 3)
                             {
-                                sSlotMachine->biasTagLocation[1] = 2;
+                                sSlotMachine->winnerRows[1] = 2;
                                 sSlotMachine->reelExtraTurns[1] = j + 1;
                             }
                             else
                             {
-                                sSlotMachine->biasTagLocation[1] = 1;
+                                sSlotMachine->winnerRows[1] = 1;
                                 sSlotMachine->reelExtraTurns[1] = j;
                             }
                         }
@@ -2265,12 +2258,12 @@ Advance until there are no cherries on screen in reel 1
                         {
                             if (j < 3)
                             {
-                                sSlotMachine->biasTagLocation[1] = 3;
+                                sSlotMachine->winnerRows[1] = 3;
                                 sSlotMachine->reelExtraTurns[1] = j;
                             }
                             else
                             {
-                                sSlotMachine->biasTagLocation[1] = 2;
+                                sSlotMachine->winnerRows[1] = 2;
                                 sSlotMachine->reelExtraTurns[1] = j - 1;
                             }
                         }
@@ -2282,7 +2275,7 @@ Advance until there are no cherries on screen in reel 1
     }
 }
 
-/*static */bool8 AreTagsMixed7s_2Tags(u8 tag1, u8 tag2)
+/*static */bool8 AreTagsMixed77(u8 tag1, u8 tag2)
 {
     if ((tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_BLUE) || (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_RED))
         return TRUE;
@@ -2290,7 +2283,7 @@ Advance until there are no cherries on screen in reel 1
         return FALSE;
 }
 
-/*static */bool8 AreTagsMixed7s_3Tags(u8 tag1, u8 tag2, u8 tag3)
+/*static */bool8 AreTagsMixed777(u8 tag1, u8 tag2, u8 tag3)
 {
     if ((tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED) ||
         (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE))
@@ -2299,7 +2292,7 @@ Advance until there are no cherries on screen in reel 1
         return FALSE;
 }
 
-/*static */bool8 DoTagsNotMatchOrHaveAny7s(u8 tag1, u8 tag2, u8 tag3)
+/*static */bool8 TagsDontMatchOrHaveAny7s(u8 tag1, u8 tag2, u8 tag3)
 {
     if ((tag1 == SLOT_MACHINE_TAG_7_RED && tag2 == SLOT_MACHINE_TAG_7_BLUE && tag3 == SLOT_MACHINE_TAG_7_RED) ||
         (tag1 == SLOT_MACHINE_TAG_7_BLUE && tag2 == SLOT_MACHINE_TAG_7_RED && tag3 == SLOT_MACHINE_TAG_7_BLUE) ||
@@ -2334,10 +2327,9 @@ Advance until there are no cherries on screen in reel 1
             i++;
         }
     }
-    else if (AreTagsMixed7s_2Tags(tag1, tag2))
+    else if (AreTagsMixed77(tag1, tag2))
     {
-        // if bit 7 of luckyFlags is set...
-        if (sSlotMachine->luckyFlags & 0x80)
+        if (sSlotMachine->luckyFlags & LUCKY_BIAS_777)
         {
             //...see if you can match with reel 1 within 4 turns
             for (i = 0; i < 5; i++)
@@ -2368,18 +2360,17 @@ Advance until there are no cherries on screen in reel 1
     u8 tag1;
     u8 tag2;
     u8 tag3;
-    // if tags match in first 2 reels and bit 7 of luckyFlags is set...
-    if (sSlotMachine->biasTagLocation[1] != 0 && sSlotMachine->biasTagLocation[0] == sSlotMachine->biasTagLocation[1] && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->winnerRows[1] != 0 && sSlotMachine->winnerRows[0] == sSlotMachine->winnerRows[1] && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        tag1 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
-        tag2 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
+        tag1 = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetNearbyTag(1, sSlotMachine->winnerRows[1] - sSlotMachine->reelExtraTurns[1]);
         //...and if tags are mixed 7s...
-        if (AreTagsMixed7s_2Tags(tag1, tag2))
+        if (AreTagsMixed77(tag1, tag2))
         {
             //...try to match with reel 1 within 4 turns
             for (i = 0; i < 5; i++)
             {
-                tag3 = GetNearbyTag(2, sSlotMachine->biasTagLocation[1] - i);
+                tag3 = GetNearbyTag(2, sSlotMachine->winnerRows[1] - i);
                 if (tag1 == tag3)
                 {
                     extraTurns = i;
@@ -2399,7 +2390,7 @@ Advance until there are no cherries on screen in reel 1
             tag3 = GetNearbyTag(2, i - extraTurns);
             // if bit 7 of luckyFlags is unset...
             //...and if all 3 tags match and they're not mixed 7s
-            if (!DoTagsNotMatchOrHaveAny7s(tag1, tag2, tag3) && (!AreTagsMixed7s_3Tags(tag1, tag2, tag3) || !(sSlotMachine->luckyFlags & 0x80)))
+            if (!TagsDontMatchOrHaveAny7s(tag1, tag2, tag3) && (!AreTagsMixed777(tag1, tag2, tag3) || !(sSlotMachine->luckyFlags & LUCKY_BIAS_777)))
             {
                 loopExit++;
                 break;
@@ -2421,16 +2412,15 @@ Advance until there are no cherries on screen in reel 1
     s16 i;
 
     DecideReelTurns_NoBiasTag_Reel3_Bet2();
-    // if tags don't match in first 2 reels and bit 7 of luckyFlags is set...
-    if (sSlotMachine->biasTagLocation[1] != 0 && sSlotMachine->biasTagLocation[0] != sSlotMachine->biasTagLocation[1] && sSlotMachine->luckyFlags & 0x80)
+    if (sSlotMachine->winnerRows[1] != 0 && sSlotMachine->winnerRows[0] != sSlotMachine->winnerRows[1] && sSlotMachine->luckyFlags & LUCKY_BIAS_777)
     {
-        tag1 = GetNearbyTag(0, sSlotMachine->biasTagLocation[0] - sSlotMachine->reelExtraTurns[0]);
-        tag2 = GetNearbyTag(1, sSlotMachine->biasTagLocation[1] - sSlotMachine->reelExtraTurns[1]);
+        tag1 = GetNearbyTag(0, sSlotMachine->winnerRows[0] - sSlotMachine->reelExtraTurns[0]);
+        tag2 = GetNearbyTag(1, sSlotMachine->winnerRows[1] - sSlotMachine->reelExtraTurns[1]);
         //..and if tags are mixed 7s...
-        if (AreTagsMixed7s_2Tags(tag1, tag2))
+        if (AreTagsMixed77(tag1, tag2))
         {
             j = 1;
-            if (sSlotMachine->biasTagLocation[0] == 1)
+            if (sSlotMachine->winnerRows[0] == 1)
                 j = 3;
             for (i = 0; i < 5; i++)
             {
@@ -2448,7 +2438,7 @@ Advance until there are no cherries on screen in reel 1
         tag1 = GetNearbyTag(0, 1 - sSlotMachine->reelExtraTurns[0]);
         tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
         tag3 = GetNearbyTag(2, 3 - sSlotMachine->reelExtraTurns[2]);
-        if (DoTagsNotMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed7s_3Tags(tag1, tag2, tag3) && sSlotMachine->luckyFlags & 0x80))
+        if (TagsDontMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed777(tag1, tag2, tag3) && sSlotMachine->luckyFlags & LUCKY_BIAS_777))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
@@ -2457,7 +2447,7 @@ Advance until there are no cherries on screen in reel 1
         tag1 = GetNearbyTag(0, 3 - sSlotMachine->reelExtraTurns[0]);
         tag2 = GetNearbyTag(1, 2 - sSlotMachine->reelExtraTurns[1]);
         tag3 = GetNearbyTag(2, 1 - sSlotMachine->reelExtraTurns[2]);
-        if (DoTagsNotMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed7s_3Tags(tag1, tag2, tag3) && sSlotMachine->luckyFlags & 0x80))
+        if (TagsDontMatchOrHaveAny7s(tag1, tag2, tag3) || (AreTagsMixed777(tag1, tag2, tag3) && sSlotMachine->luckyFlags & LUCKY_BIAS_777))
             break;
         sSlotMachine->reelExtraTurns[2]++;
     }
@@ -4517,18 +4507,12 @@ const u8 LuckyTags[] = {
   SLOT_MACHINE_TAG_REPLAY, SLOT_MACHINE_TAG_CHERRY, SLOT_MACHINE_TAG_LOTAD, SLOT_MACHINE_TAG_AZURILL, SLOT_MACHINE_TAG_POWER, SLOT_MACHINE_TAG_7_RED, SLOT_MACHINE_TAG_7_RED, SLOT_MACHINE_TAG_7_RED
 };
 
-/*
-sSlotMachine->luckyFlags: 7, 6, 5, 4, 3, 2, 1, 0
-If you got Lucky2 in 1 attempt, flag 7 gets set.
-If you got Lucky2 in 2 attempts, flag 5 gets set.
-If you got Lucky2 in 3 attempts, flag 6 gets set.
-*/
-const u16 LuckyFlagSettings_Top3[] = {  // order seems buggy
-    0x80, 0x20, 0x40
+const u16 LuckyFlagSettings_Top3[] = {
+    LUCKY_BIAS_777, LUCKY_BIAS_REELTIME, LUCKY_BIAS_MIXED_777
 };
 
 const u16 LuckyFlagSettings_NotTop3[] = {
-    0x10, 0x08, 0x04, 0x02, 0x01
+    LUCKY_BIAS_POWER, LUCKY_BIAS_AZURRILL, LUCKY_BIAS_LOTAD, LUCKY_BIAS_CHERRY, LUCKY_BIAS_REPLAY
 };
 
 const u8 sSym2Match[] = {
