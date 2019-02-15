@@ -3,113 +3,6 @@
 
 	.section .rodata
 
-gUnknown_0861F3EC:: @ 861F3EC
-	.4byte sub_81C9298
-	.4byte sub_81C941C
-	.4byte sub_81C9924
-	.4byte sub_81C9990
-	.4byte sub_81C99C0
-	.4byte sub_81C9430
-	.4byte sub_81C99D4
-	.4byte sub_81C9298
-	.4byte sub_81C941C
-	.4byte sub_81C9940
-	.4byte sub_81C9990
-	.4byte sub_81C99C0
-	.4byte sub_81C9430
-	.4byte sub_81C99D4
-	.4byte sub_81C9338
-	.4byte sub_81C941C
-	.4byte sub_81C9940
-	.4byte sub_81C9990
-	.4byte sub_81C99C0
-	.4byte sub_81C9430
-	.4byte sub_81C99D4
-	.4byte sub_81C9368
-	.4byte sub_81C941C
-	.4byte sub_81C9940
-	.4byte sub_81C9990
-	.4byte sub_81C99C0
-	.4byte sub_81C9430
-	.4byte sub_81C99D4
-	.4byte sub_81C92CC
-	.4byte sub_81C941C
-	.4byte sub_81C9940
-	.4byte sub_81C9990
-	.4byte sub_81C99C0
-	.4byte sub_81C9430
-	.4byte sub_81C99D4
-	.4byte sub_81C9304
-	.4byte sub_81C941C
-	.4byte sub_81C9940
-	.4byte sub_81C9990
-	.4byte sub_81C99C0
-	.4byte sub_81C9430
-	.4byte sub_81C99D4
-	.4byte sub_81CC4D4
-	.4byte sub_81CC554
-	.4byte sub_81CC5F4
-	.4byte sub_81CC62C
-	.4byte sub_81CC65C
-	.4byte sub_81CC524
-	.4byte sub_81CC670
-	.4byte sub_81CCFD8
-	.4byte sub_81CD070
-	.4byte sub_81CDDD4
-	.4byte sub_81CDE2C
-	.4byte sub_81CDE64
-	.4byte sub_81CD1C0
-	.4byte sub_81CECA0
-	.4byte sub_81CEF3C
-	.4byte sub_81CEFDC
-	.4byte sub_81CF330
-	.4byte sub_81CF3A0
-	.4byte sub_81CF3D0
-	.4byte sub_81CEFF0
-	.4byte sub_81CF3F8
-	.4byte sub_81CD024
-	.4byte sub_81CD070
-	.4byte sub_81CDDD4
-	.4byte sub_81CDE2C
-	.4byte sub_81CDE64
-	.4byte sub_81CD1C0
-	.4byte sub_81CECA0
-	.4byte sub_81CEF98
-	.4byte sub_81CEFDC
-	.4byte sub_81CF368
-	.4byte sub_81CF3A0
-	.4byte sub_81CF3D0
-	.4byte sub_81CEFF0
-	.4byte sub_81CF3F8
-	.4byte sub_81CAAE8
-	.4byte sub_81CAB24
-	.4byte sub_81CB260
-	.4byte sub_81CB29C
-	.4byte sub_81CB2CC
-	.4byte sub_81CAB38
-	.4byte sub_81CB2E0
-	.4byte sub_81CF9BC
-	.4byte sub_81CFA34
-	.4byte sub_81CFDD0
-	.4byte sub_81CFE40
-	.4byte sub_81CFE70
-	.4byte sub_81CFA48
-	.4byte sub_81CFE98
-	.4byte sub_81D0450
-	.4byte sub_81D04A0
-	.4byte sub_81D0978
-	.4byte sub_81D09B0
-	.4byte sub_81D09E0
-	.4byte sub_81D04B8
-	.4byte sub_81D09F4
-	.4byte sub_81CFA04
-	.4byte sub_81CFA34
-	.4byte sub_81CFE08
-	.4byte sub_81CFE40
-	.4byte sub_81CFE70
-	.4byte sub_81CFA48
-	.4byte sub_81CFE98
-
 gUnknown_0861F590:: @ 861F590
 	.incbin "graphics/pokenav/icon2.gbapal"
 
@@ -119,6 +12,13 @@ gUnknown_0861F5B0:: @ 861F5B0
 gUnknown_0861F994:: @ 861F994
 	.incbin "graphics/pokenav/icon2_unused.4bpp.lz"
 
+@ struct BgTemplate gUnknown_0861FA04 {
+@	.bg: 0,
+@	.charBaseIndex: 0
+@	.mapBaseIndex: 5
+@	.screenSize: 2,
+@ 
+@ }
 gUnknown_0861FA04:: @ 861FA04
 	.byte 0x50
 	.byte 0x0

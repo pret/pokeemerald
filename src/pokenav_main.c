@@ -18,6 +18,7 @@
 
 #define UNKNOWN_OFFSET 100000
 
+
 struct PaletteDescriptor {
 	void *palette;
 	u16 tag;
@@ -50,23 +51,69 @@ struct UnknownStruct_sub_81C7C28 {
 	u32 field4;
 };
 
-extern struct BgTemplate gUnknown_0861FA04;
-extern struct WindowTemplate gUnknown_0861FA08;
-extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
-extern u8 gUnknown_0203CF3C;
-extern u8 gUnknown_0861FA48;
-extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
-extern const u8 *(gUnknown_0861FA18[]);
-extern const struct CompressedSpriteSheet gUnknown_0861FA4C[];
-extern const struct PaletteDescriptor gUnknown_0861FA54;
-extern const struct SpriteTemplate gUnknown_0861FB04;
 
-extern void sub_81C9430(void);
+extern u32 sub_81C9430(void);
 extern void sub_81CAADC(void);
-extern void sub_81C99D4(void);
+extern u32 sub_81C99D4(void);
 extern void sub_8199D98(void);
 extern void sub_81C7D28(void);
-
+extern u32 sub_81C9298(void);
+extern u32 sub_81C941C(void);
+extern u32 sub_81C9924(void);
+extern u32 sub_81C99C0(void);
+extern u32 sub_81C9990(void);
+extern u32 sub_81C9940(void);
+extern u32 sub_81C9338(void);
+extern u32 sub_81C9368(void);
+extern u32 sub_81C92CC(void);
+extern u32 sub_81C9304(void);
+extern u32 sub_81CC4D4(void);
+extern u32 sub_81CC554(void);
+extern u32 sub_81CC5F4(void);
+extern u32 sub_81CC62C(void);
+extern u32 sub_81CC65C(void);
+extern u32 sub_81CC524(void);
+extern u32 sub_81CC670(void);
+extern u32 sub_81CCFD8(void);
+extern u32 sub_81CD070(void);
+extern u32 sub_81CDDD4(void);
+extern u32 sub_81CDE2C(void);
+extern u32 sub_81CDE64(void);
+extern u32 sub_81CD1C0(void);
+extern u32 sub_81CECA0(void);
+extern u32 sub_81CEF3C(void);
+extern u32 sub_81CEFDC(void);
+extern u32 sub_81CF330(void);
+extern u32 sub_81CF3A0(void);
+extern u32 sub_81CF3D0(void);
+extern u32 sub_81CEFF0(void);
+extern u32 sub_81CF3F8(void);
+extern u32 sub_81CD024(void);
+extern u32 sub_81CEF98(void);
+extern u32 sub_81CF368(void);
+extern u32 sub_81CAAE8(void);
+extern u32 sub_81CAB24(void);
+extern u32 sub_81CB260(void);
+extern u32 sub_81CB29C(void);
+extern u32 sub_81CB2CC(void);
+extern u32 sub_81CAB38(void);
+extern u32 sub_81CB2E0(void);
+extern u32 sub_81CF9BC(void);
+extern u32 sub_81CFA34(void);
+extern u32 sub_81CFDD0(void);
+extern u32 sub_81CFE40(void);
+extern u32 sub_81CFE70(void);
+extern u32 sub_81CFA48(void);
+extern u32 sub_81CFE98(void);
+extern u32 sub_81D0450(void);
+extern u32 sub_81D04A0(void);
+extern u32 sub_81D0978(void);
+extern u32 sub_81D09B0(void);
+extern u32 sub_81D09E0(void);
+extern u32 sub_81D04B8(void);
+extern u32 sub_81D09F4(void);
+extern u32 sub_81CFA04(void);
+extern u32 sub_81CFE08(void);
 
 u32 sub_81C791C(s32 a0);
 bool32 sub_81C756C(u32 a0);
@@ -97,6 +144,157 @@ void sub_81C7C28(void);
 void sub_81C72BC(void);
 void sub_81C7B74(void);
 void sub_81C7C94(void);
+
+
+static u32 (*const gUnknown_0861F3EC[15][7])(void) =
+{
+	{
+		(u32 (*)(void))sub_81C9298,
+		sub_81C941C,
+		sub_81C9924,
+		sub_81C9990,
+		sub_81C99C0,
+		sub_81C9430,
+		sub_81C99D4,
+	},
+	{
+		sub_81C9298,
+		sub_81C941C,
+		sub_81C9940,
+		sub_81C9990,
+		sub_81C99C0,
+		sub_81C9430,
+		sub_81C99D4,
+	},
+	{
+		sub_81C9338,
+		sub_81C941C,
+		sub_81C9940,
+		sub_81C9990,
+		sub_81C99C0,
+		sub_81C9430,
+		sub_81C99D4,
+	},
+	{
+		sub_81C9368,
+		sub_81C941C,
+		sub_81C9940,
+		sub_81C9990,
+		sub_81C99C0,
+		sub_81C9430,
+		sub_81C99D4,
+	},
+	{
+		sub_81C92CC,
+		sub_81C941C,
+		sub_81C9940,
+		sub_81C9990,
+		sub_81C99C0,
+		sub_81C9430,
+		sub_81C99D4,
+	},
+	{
+		sub_81C9304,
+		sub_81C941C,
+		sub_81C9940,
+		sub_81C9990,
+		sub_81C99C0,
+		sub_81C9430,
+		sub_81C99D4,
+	},
+	{
+		sub_81CC4D4,
+		sub_81CC554,
+		sub_81CC5F4,
+		sub_81CC62C,
+		sub_81CC65C,
+		sub_81CC524,
+		sub_81CC670,
+	},
+	{
+		sub_81CCFD8,
+		sub_81CD070,
+		sub_81CDDD4,
+		sub_81CDE2C,
+		sub_81CDE64,
+		sub_81CD1C0,
+		sub_81CECA0,
+	},
+	{
+		sub_81CEF3C,
+		sub_81CEFDC,
+		sub_81CF330,
+		sub_81CF3A0,
+		sub_81CF3D0,
+		sub_81CEFF0,
+		sub_81CF3F8,
+	},
+	{
+		sub_81CD024,
+		sub_81CD070,
+		sub_81CDDD4,
+		sub_81CDE2C,
+		sub_81CDE64,
+		sub_81CD1C0,
+		sub_81CECA0,
+	},
+	{
+		sub_81CEF98,
+		sub_81CEFDC,
+		sub_81CF368,
+		sub_81CF3A0,
+		sub_81CF3D0,
+		sub_81CEFF0,
+		sub_81CF3F8,
+	},
+	{
+		sub_81CAAE8,
+		sub_81CAB24,
+		sub_81CB260,
+		sub_81CB29C,
+		sub_81CB2CC,
+		sub_81CAB38,
+		sub_81CB2E0,
+	},
+	{
+		sub_81CF9BC,
+		sub_81CFA34,
+		sub_81CFDD0,
+		sub_81CFE40,
+		sub_81CFE70,
+		sub_81CFA48,
+		sub_81CFE98,
+	},
+	{
+		sub_81D0450,
+		sub_81D04A0,
+		sub_81D0978,
+		sub_81D09B0,
+		sub_81D09E0,
+		sub_81D04B8,
+		sub_81D09F4,
+	},
+	{
+		sub_81CFA04,
+		sub_81CFA34,
+		sub_81CFE08,
+		sub_81CFE40,
+		sub_81CFE70,
+		sub_81CFA48,
+		sub_81CFE98,
+	},
+};
+
+extern struct BgTemplate gUnknown_0861FA04;
+extern struct WindowTemplate gUnknown_0861FA08;
+extern struct UnknownStruct_0203CF40 *gUnknown_0203CF40;
+extern u8 gUnknown_0203CF3C;
+extern u8 gUnknown_0861FA48;
+//extern struct UnknownStruct_0861F3EC gUnknown_0861F3EC[7]; // Unknown size; at least 7.
+extern const u8 *(gUnknown_0861FA18[]);
+extern const struct CompressedSpriteSheet gUnknown_0861FA4C[];
+extern const struct PaletteDescriptor gUnknown_0861FA54;
+extern const struct SpriteTemplate gUnknown_0861FB04;
 
 u32 sub_81C7078(u32 (*a0)(s32), u32 a1)
 {
@@ -344,8 +542,8 @@ void sub_81C742C(u8 taskId) {
 			sub_81C7710();
 			dataPtr[0] = 5;
 		} else if (v1 >= UNKNOWN_OFFSET) {
-			gUnknown_0861F3EC[gUnknown_0203CF40->field4].data[6]();
-			gUnknown_0861F3EC[gUnknown_0203CF40->field4].data[5]();
+			gUnknown_0861F3EC[gUnknown_0203CF40->field4][6]();
+			gUnknown_0861F3EC[gUnknown_0203CF40->field4][5]();
 			if (sub_81C756C(v1)) {
 				dataPtr[0] = 4;
 			} else {
@@ -383,14 +581,14 @@ bool32 sub_81C756C(u32 a0) {
 
 	index = a0 - UNKNOWN_OFFSET;
 	sub_81C75F4();
-	if (!gUnknown_0861F3EC[index].data[0]()) {
+	if (!gUnknown_0861F3EC[index][0]()) {
 		return FALSE;
 	}
-	if (!gUnknown_0861F3EC[index].data[2]()) {
+	if (!gUnknown_0861F3EC[index][2]()) {
 		return FALSE;
 	}
-	sub_81C7834(gUnknown_0861F3EC[index].data[3], gUnknown_0861F3EC[index].data[4]);
-	gUnknown_0203CF40->field0 = gUnknown_0861F3EC[index].data[1];
+	sub_81C7834(gUnknown_0861F3EC[index][3], gUnknown_0861F3EC[index][4]);
+	gUnknown_0203CF40->field0 = gUnknown_0861F3EC[index][1];
 	gUnknown_0203CF40->field4 = index;
 	return TRUE;
 }
