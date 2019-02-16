@@ -245,10 +245,10 @@
 	.4byte \param1
 	.endm
 
-	.macro if_user_doesnt_go param0:req, param1:req
+	.macro if_cant_use_belch battler:req, ptr:req
 	.byte 0x29
-	.byte \param0
-	.4byte \param1
+	.byte \battler
+	.4byte \ptr
 	.endm
 
 	.macro nullsub_2A

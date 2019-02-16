@@ -248,6 +248,11 @@ AI_CheckBadMove_CheckEffect: @ 82DC045
 	if_effect EFFECT_NOBLE_ROAR, AI_CBM_NobleRoar
 	if_effect EFFECT_SHELL_SMASH, AI_CBM_ShellSmash
 	if_effect EFFECT_LAST_RESORT, AI_CBM_LastResort
+	if_effect EFFECT_BELCH, AI_CBM_Belch
+	end
+	
+AI_CBM_Belch:
+	if_cant_use_belch AI_USER, Score_Minus10
 	end
 	
 AI_CBM_LastResort:

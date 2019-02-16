@@ -93,8 +93,8 @@ static void BattleAICmd_get_how_powerful_move_is(void);
 static void BattleAICmd_get_last_used_battler_move(void);
 static void BattleAICmd_if_equal_(void);
 static void BattleAICmd_if_not_equal_(void);
-void BattleAICmd_if_user_goes(void);
-static void BattleAICmd_if_user_doesnt_go(void);
+static void BattleAICmd_if_user_goes(void);
+static void BattleAICmd_if_cant_use_belch(void);
 static void BattleAICmd_nullsub_2A(void);
 static void BattleAICmd_nullsub_2B(void);
 static void BattleAICmd_count_usable_party_mons(void);
@@ -213,7 +213,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_equal_,                                  // 0x26
     BattleAICmd_if_not_equal_,                              // 0x27
     BattleAICmd_if_user_goes,                               // 0x28
-    BattleAICmd_if_user_doesnt_go,                          // 0x29
+    BattleAICmd_if_cant_use_belch,                          // 0x29
     BattleAICmd_nullsub_2A,                                 // 0x2A
     BattleAICmd_nullsub_2B,                                 // 0x2B
     BattleAICmd_count_usable_party_mons,                    // 0x2C
@@ -1436,7 +1436,7 @@ static void BattleAICmd_if_not_equal_(void) // Same as if_not_equal.
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_user_goes(void)
+static void BattleAICmd_if_user_goes(void)
 {
     u32 fasterAI = 0, fasterPlayer = 0, i;
     s8 prioAI, prioPlayer;
@@ -1480,12 +1480,6 @@ void BattleAICmd_if_user_goes(void)
         else
             gAIScriptPtr += 6;
     }
-}
-
-static void BattleAICmd_if_user_doesnt_go(void)
-{
-    // To be changed. Not needed since the above does the same.
-    gAIScriptPtr += 6;
 }
 
 static void BattleAICmd_nullsub_2A(void)
@@ -2679,4 +2673,14 @@ static void BattleAICmd_if_ai_can_go_down(void)
     }
 
     gAIScriptPtr += 5;
+}
+
+static void BattleAICmd_if_cant_use_belch(void)
+{
+    u32 battler = BattleAI_GetWantedBattler(gAIScriptPtr[1]);
+
+    if (gBattleStruct->ateBerry[battler & BIT_SIDE] & gBitTable[gBattlerPartyIndexes[battler]])
+        gAIScriptPtr += 6;
+    else
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
 }
