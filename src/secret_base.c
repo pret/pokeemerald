@@ -1204,35 +1204,47 @@ void SecretBasePerStepCallback(u8 taskId)
                 VarSet(VAR_0x40EC, VarGet(VAR_0x40EC) + 1);
                 behavior = MapGridGetMetatileBehaviorAt(x, y);
                 tileId = MapGridGetMetatileIdAt(x, y);
-                if (tileId == 0x234 || tileId == 0x23C)
+                if (tileId == METATILE_ID_UNK_234 || tileId == METATILE_ID_UNK_23C)
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
                         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x20);
                     }
                 }
-                else if (tileId == 0x2b8 || tileId == 0x2b9 || tileId == 0x2ba || tileId == 0x2c0 || tileId == 0x2c1 || tileId == 0x2c2 || tileId == 0x2c8 || tileId == 0x2c9 || tileId == 0x2ca)
+                else if (tileId == METATILE_ID_UNK_2B8
+                        || tileId == METATILE_ID_UNK_2B9
+                        || tileId == METATILE_ID_UNK_2BA
+                        || tileId == METATILE_ID_UNK_2C0
+                        || tileId == METATILE_ID_UNK_2C1
+                        || tileId == METATILE_ID_UNK_2C2
+                        || tileId == METATILE_ID_UNK_2C8
+                        || tileId == METATILE_ID_UNK_2C9
+                        || tileId == METATILE_ID_UNK_2CA)
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
                         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x01);
                     }
                 }
-                else if (tileId == 0x239 || tileId == 0x241 || tileId == 0x251 || tileId == 0x259)
+                else if (tileId == METATILE_ID_UNK_239
+                    || tileId == METATILE_ID_UNK_241
+                    || tileId == METATILE_ID_UNK_251
+                    || tileId == METATILE_ID_UNK_259)
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
                         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x04);
                     }
                 }
-                else if ((behavior == 0x34 && tileId == 0x26d) || (behavior == 0x35 && MapGridGetMetatileIdAt(x, y) == 0x26a))
+                else if ((behavior == 0x34 && tileId == METATILE_ID_UNK_26D)
+                    || (behavior == 0x35 && MapGridGetMetatileIdAt(x, y) == METATILE_ID_UNK_26A))
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
                         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x200);
                     }
                 }
-                else if (behavior == 0xc1 && tileId == 0x23d)
+                else if (behavior == 0xc1 && tileId == METATILE_ID_UNK_23D)
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
@@ -1240,7 +1252,7 @@ void SecretBasePerStepCallback(u8 taskId)
                         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x2000);
                     }
                 }
-                else if (behavior == 0x47 && tileId == 0x23e)
+                else if (behavior == 0x47 && tileId == METATILE_ID_UNK_23E)
                 {
                     if (gUnknown_0203A01D == TRUE)
                     {
@@ -1874,21 +1886,21 @@ void sub_80EB498(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     switch (MapGridGetMetatileIdAt(x, y))
     {
-        case 0x31C:
-        case 0x31D:
-        case 0x31E:
-        case 0x31F:
-        case 0x324:
-        case 0x325:
-        case 0x326:
-        case 0x327:
-        case 0x32C:
-        case 0x32D:
-        case 0x330:
-        case 0x331:
-        case 0x332:
-        case 0x333:
-        case 0x334:
+        case METATILE_ID_UNK_31C:
+        case METATILE_ID_UNK_31D:
+        case METATILE_ID_UNK_31E:
+        case METATILE_ID_UNK_31F:
+        case METATILE_ID_UNK_324:
+        case METATILE_ID_UNK_325:
+        case METATILE_ID_UNK_326:
+        case METATILE_ID_UNK_327:
+        case METATILE_ID_UNK_32C:
+        case METATILE_ID_UNK_32D:
+        case METATILE_ID_UNK_330:
+        case METATILE_ID_UNK_331:
+        case METATILE_ID_UNK_332:
+        case METATILE_ID_UNK_333:
+        case METATILE_ID_UNK_334:
             if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
             {
                 VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x4000);

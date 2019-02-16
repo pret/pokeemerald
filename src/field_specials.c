@@ -55,6 +55,31 @@
 #include "constants/vars.h"
 #include "constants/battle_frontier.h"
 
+// Mauville Gym stuff.
+// Note: On/Off might be backwards.
+#define METATILE_ID_MAUVILLE_BASE 0x200
+#define ON (0x20 | METATILE_ID_MAUVILLE_BASE)
+#define OFF (0x30 | METATILE_ID_MAUVILLE_BASE)
+#define IMPASS 0xC00
+#define OBJ_0 0x0
+#define OBJ_1 0x1
+#define OBJ_2 0x2
+#define OBJ_3 0x3
+#define OBJ_8 0x8
+#define OBJ_9 0x9
+#define OBJ_A 0xA
+#define OBJ_B 0xB
+
+#define OBJ_40_ON 0x240
+#define OBJ_40_OFF 0x242
+#define OBJ_43_ON 0x243
+#define OBJ_43_OFF 0x241
+#define OBJ_48 0x248
+#define OBJ_UNK 0x21A
+#define OBJ_49 0x249
+#define OBJ_50_ON 0x250
+#define OBJ_50_OFF 0x251
+
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 EWRAM_DATA u32 gBikeCyclingTimer = 0;
@@ -654,87 +679,87 @@ void MauvilleGymSpecial2(void)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
-                case 0x220:
-                    MapGridSetMetatileIdAt(x, y, 0x230);
+                case (OBJ_0 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_0 | OFF));
                     break;
-                case 0x221:
-                    MapGridSetMetatileIdAt(x, y, 0x231);
+                case (OBJ_1 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_1 | OFF));
                     break;
-                case 0x228:
-                    MapGridSetMetatileIdAt(x, y, 0x238);
+                case (OBJ_8 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_8 | OFF));
                     break;
-                case 0x229:
-                    MapGridSetMetatileIdAt(x, y, 0x239);
+                case (OBJ_9 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_9 | OFF));
                     break;
-                case 0x230:
-                    MapGridSetMetatileIdAt(x, y, 0x220);
+                case (OBJ_0 | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_0 | ON));
                     break;
-                case 0x231:
-                    MapGridSetMetatileIdAt(x, y, 0x221);
+                case (OBJ_1 | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_1 | ON));
                     break;
-                case 0x238:
-                    MapGridSetMetatileIdAt(x, y, 0xe28);
+                case (OBJ_8 | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_8 | ON | IMPASS));
                     break;
-                case 0x239:
-                    MapGridSetMetatileIdAt(x, y, 0xe29);
+                case (OBJ_9 | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_9 | ON | IMPASS));
                     break;
-                case 0x222:
-                    MapGridSetMetatileIdAt(x, y, 0x232);
+                case (OBJ_2 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_2 | OFF));
                     break;
-                case 0x223:
-                    MapGridSetMetatileIdAt(x, y, 0x233);
+                case (OBJ_3 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_3 | OFF));
                     break;
-                case 0x22a:
-                    MapGridSetMetatileIdAt(x, y, 0x23a);
+                case (OBJ_A | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_A | OFF));
                     break;
-                case 0x22b:
-                    MapGridSetMetatileIdAt(x, y, 0x23b);
+                case (OBJ_B | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_B | OFF));
                     break;
-                case 0x232:
-                    MapGridSetMetatileIdAt(x, y, 0x222);
+                case (OBJ_2 | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_2 | ON));
                     break;
-                case 0x233:
-                    MapGridSetMetatileIdAt(x, y, 0x223);
+                case (OBJ_3 | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_3 | ON));
                     break;
-                case 0x23a:
-                    MapGridSetMetatileIdAt(x, y, 0xe2a);
+                case (OBJ_A | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_A | ON | IMPASS));
                     break;
-                case 0x23b:
-                    MapGridSetMetatileIdAt(x, y, 0xe2b);
+                case (OBJ_B | OFF):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_B | ON | IMPASS));
                     break;
-                case 0x240:
-                    MapGridSetMetatileIdAt(x, y, 0xe42);
+                case OBJ_40_ON:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_40_OFF | IMPASS));
                     break;
-                case 0x248:
-                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                case OBJ_48:
+                    MapGridSetMetatileIdAt(x, y, OBJ_UNK);
                     break;
-                case 0x241:
-                    MapGridSetMetatileIdAt(x, y, 0xe43);
+                case OBJ_43_OFF:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_43_ON | IMPASS));
                     break;
-                case 0x249:
-                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                case OBJ_49:
+                    MapGridSetMetatileIdAt(x, y, OBJ_UNK);
                     break;
-                case 0x242:
-                    MapGridSetMetatileIdAt(x, y, 0xe40);
+                case OBJ_40_OFF:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_40_ON | IMPASS));
                     break;
-                case 0x21a:
-                    if (MapGridGetMetatileIdAt(x, y - 1) == 0x240)
+                case OBJ_UNK:
+                    if (MapGridGetMetatileIdAt(x, y - 1) == OBJ_40_ON)
                     {
-                        MapGridSetMetatileIdAt(x, y, 0xe48);
+                        MapGridSetMetatileIdAt(x, y, (OBJ_48 | IMPASS));
                     }
                     else
                     {
-                        MapGridSetMetatileIdAt(x, y, 0xe49);
+                        MapGridSetMetatileIdAt(x, y, (OBJ_49 | IMPASS));
                     }
                     break;
-                case 0x243:
-                    MapGridSetMetatileIdAt(x, y, 0xe41);
+                case OBJ_43_ON:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_43_OFF | IMPASS));
                     break;
-                case 0x251:
-                    MapGridSetMetatileIdAt(x, y, 0xe50);
+                case OBJ_50_OFF:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_50_ON | IMPASS));
                     break;
-                case 0x250:
-                    MapGridSetMetatileIdAt(x, y, 0x251);
+                case OBJ_50_ON:
+                    MapGridSetMetatileIdAt(x, y, OBJ_50_OFF);
                     break;
             }
         }
@@ -756,42 +781,42 @@ void MauvilleGymSpecial3(void)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
-                case 0x220:
-                    MapGridSetMetatileIdAt(x, y, 0x230);
+                case (OBJ_0 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_0 | OFF));
                     break;
-                case 0x221:
-                    MapGridSetMetatileIdAt(x, y, 0x231);
+                case (OBJ_1 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_1 | OFF));
                     break;
-                case 0x228:
-                    MapGridSetMetatileIdAt(x, y, 0x238);
+                case (OBJ_8 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_8 | OFF));
                     break;
-                case 0x229:
-                    MapGridSetMetatileIdAt(x, y, 0x239);
+                case (OBJ_9 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_9 | OFF));
                     break;
-                case 0x222:
-                    MapGridSetMetatileIdAt(x, y, 0x232);
+                case (OBJ_2 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_2 | OFF));
                     break;
-                case 0x223:
-                    MapGridSetMetatileIdAt(x, y, 0x233);
+                case (OBJ_3 | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_3 | OFF));
                     break;
-                case 0x22a:
-                    MapGridSetMetatileIdAt(x, y, 0x23a);
+                case (OBJ_A | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_A | OFF));
                     break;
-                case 0x22b:
-                    MapGridSetMetatileIdAt(x, y, 0x23b);
+                case (OBJ_B | ON):
+                    MapGridSetMetatileIdAt(x, y, (OBJ_B | OFF));
                     break;
-                case 0x240:
-                    MapGridSetMetatileIdAt(x, y, 0xe42);
+                case OBJ_40_ON:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_40_OFF | IMPASS));
                     break;
-                case 0x241:
-                    MapGridSetMetatileIdAt(x, y, 0xe43);
+                case OBJ_43_OFF:
+                    MapGridSetMetatileIdAt(x, y, (OBJ_43_ON | IMPASS));
                     break;
-                case 0x248:
-                case 0x249:
-                    MapGridSetMetatileIdAt(x, y, 0x21a);
+                case OBJ_48:
+                case OBJ_49:
+                    MapGridSetMetatileIdAt(x, y, OBJ_UNK);
                     break;
-                case 0x250:
-                    MapGridSetMetatileIdAt(x, y, 0x251);
+                case OBJ_50_ON:
+                    MapGridSetMetatileIdAt(x, y, OBJ_50_OFF);
                     break;
             }
         }

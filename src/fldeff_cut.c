@@ -19,6 +19,7 @@
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
+#include "constants/metatile_behaviors.h"
 
 extern void ScriptUnfreezeEventObjects(void);
 extern bool8 IsMewPlayingHideAndSeek(void);
@@ -31,41 +32,6 @@ extern const u8 FarawayIsland_Interior_EventScript_267EDB[];
 extern const u8 gFieldEffectPic_CutGrass[];
 extern const u16 gFieldEffectObjectPalette6[];
 
-// tileset 0 as first
-#define METATILE_ID_GRASS 0x1
-#define METATILE_ID_POKE_GRASS 0xD
-
-#define METATILE_ID_POKE_GRASS_TREE_UP 0x25
-#define METATILE_ID_GRASS_TREE_UP 0xE
-
-#define METATILE_ID_POKE_GRASS_TREE_LEFT 0x1C6
-#define METATILE_ID_POKE_GRASS_TREE_RIGHT 0x1C7
-
-#define METATILE_ID_GRASS_TREE_LEFT 0x1CE
-#define METATILE_ID_GRASS_TREE_RIGHT 0x1CF
-
-#define METATILE_ID_POKE_LONG_GRASS 0x15
-
-// tileset 6 as second
-#define METATILE_ID_POKE_STEP_LAVA_GRASS 0x206
-#define METATILE_ID_POKE_LAVA_GRASS 0x207
-#define METATILE_ID_LAVA_FIELD 0x271
-
-// tileset 7 as second
-#define METATILE_ID_POKE_ASH_GRASS 0x20A
-#define METATILE_ID_POKE_STEP_ASH_GRASS 0x212
-#define METATILE_ID_ASH 0x218
-
-// tileset 8 as second
-#define METATILE_ID_POKE_LONG_GRASS_START 0x208
-
-#define METATILE_ID_SECRET_BASE_LEFT_LONG_GRASS 0x279
-#define METATILE_ID_SECRET_BASE_CENTER_LONG_GRASS 0x27A
-#define METATILE_ID_SECRET_BASE_RIGHT_LONG_GRASS 0x27B
-
-#define METATILE_ID_SECRET_BASE_LEFT_POKE_LONG_GRASS 0x281
-#define METATILE_ID_SECRET_BASE_CENTER_POKE_LONG_GRASS 0x282
-#define METATILE_ID_SECRET_BASE_RIGHT_POKE_LONG_GRASS 0x283
 
 // cut 'square' defines
 #define CUT_NORMAL_SIDE 3

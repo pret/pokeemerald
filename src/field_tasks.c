@@ -19,6 +19,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+#include "constants/metatile_behaviors.h"
 
 struct PacifidlogMetatileOffsets
 {
@@ -374,11 +375,11 @@ static void SetLoweredForetreeBridgeMetatile(s16 x, s16 y)
     {
         switch (MapGridGetMetatileIdAt(x, y))
         {
-            case 0x24e:
-                MapGridSetMetatileIdAt(x, y, 0x24f);
+            case METATILE_ID_UNK_24E:
+                MapGridSetMetatileIdAt(x, y, METATILE_ID_UNK_24F);
                 break;
-            case 0x256:
-                MapGridSetMetatileIdAt(x, y, 0x257);
+            case METATILE_ID_UNK_256:
+                MapGridSetMetatileIdAt(x, y, METATILE_ID_UNK_257);
                 break;
         }
     }
@@ -391,11 +392,11 @@ static void SetNormalFortreeBridgeMetatile(s16 x, s16 y)
     {
         switch (MapGridGetMetatileIdAt(x, y))
         {
-            case 0x24f:
-                MapGridSetMetatileIdAt(x, y, 0x24e);
+            case METATILE_ID_UNK_24F:
+                MapGridSetMetatileIdAt(x, y, METATILE_ID_UNK_24E);
                 break;
-            case 0x257:
-                MapGridSetMetatileIdAt(x, y, 0x256);
+            case METATILE_ID_UNK_257:
+                MapGridSetMetatileIdAt(x, y, METATILE_ID_UNK_256);
                 break;
         }
     }
@@ -614,7 +615,7 @@ static void AshGrassPerStepCallback(u8 taskId)
         data[2] = y;
         if (MetatileBehavior_IsAshGrass(MapGridGetMetatileBehaviorAt(x, y)))
         {
-            if (MapGridGetMetatileIdAt(x, y) == 0x20a)
+            if (MapGridGetMetatileIdAt(x, y) == METATILE_ID_UNK_20A)
                 StartAshFieldEffect(x, y, 0x212, 4);
             else
                 StartAshFieldEffect(x, y, 0x206, 4);
@@ -631,7 +632,7 @@ static void AshGrassPerStepCallback(u8 taskId)
 
 static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
 {
-    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == 0x22f ? 0x206 : 0x237);
+    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == METATILE_ID_UNK_22F ? METATILE_ID_UNK_206 : METATILE_ID_UNK_237);
     CurrentMapDrawMetatileAt(x, y);
 }
 

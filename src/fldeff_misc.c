@@ -947,28 +947,28 @@ static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
     {
         switch (gTasks[taskId].tMetatileID)
         {
-        case 632:
+        case METATILE_ID_NOTE_TOY_C:
             PlaySE(SE_TOY_C);
             break;
-        case 633:
+        case METATILE_ID_NOTE_TOY_D:
             PlaySE(SE_TOY_D);
             break;
-        case 634:
+        case METATILE_ID_NOTE_TOY_E:
             PlaySE(SE_TOY_E);
             break;
-        case 635:
+        case METATILE_ID_NOTE_TOY_F:
             PlaySE(SE_TOY_F);
             break;
-        case 636:
+        case METATILE_ID_NOTE_TOY_G:
             PlaySE(SE_TOY_G);
             break;
-        case 637:
+        case METATILE_ID_NOTE_TOY_A:
             PlaySE(SE_TOY_A);
             break;
-        case 638:
+        case METATILE_ID_NOTE_TOY_B:
             PlaySE(SE_TOY_B);
             break;
-        case 691:
+        case METATILE_ID_NOTE_TOY_C1:
             PlaySE(SE_TOY_C1);
             break;
         }
@@ -1117,7 +1117,7 @@ void GetShieldToyTVDecorationInfo(void)
 
     switch (metatileId)
     {
-    case 822:
+    case METATILE_ID_BASE_TV_336:
         ConvertIntToDecimalStringN(gStringVar1, 100, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringCopy(gStringVar2, gText_Gold);
 
@@ -1128,7 +1128,7 @@ void GetShieldToyTVDecorationInfo(void)
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x10);
         break;
-    case 734:
+    case METATILE_ID_BASE_TV_2DE:
         ConvertIntToDecimalStringN(gStringVar1, 50, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringCopy(gStringVar2, gText_Silver);
 
@@ -1139,7 +1139,7 @@ void GetShieldToyTVDecorationInfo(void)
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x20);
         break;
-    case 756:
+    case METATILE_ID_BASE_TV_2F4:
         gSpecialVar_Result = 1;
 
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
@@ -1147,7 +1147,7 @@ void GetShieldToyTVDecorationInfo(void)
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
         break;
-    case 757:
+    case METATILE_ID_BASE_TV_2F5:
         gSpecialVar_Result = 2;
 
         if (!VarGet(VAR_CURRENT_SECRET_BASE))
@@ -1155,7 +1155,7 @@ void GetShieldToyTVDecorationInfo(void)
 
         VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x80);
         break;
-    case 758:
+    case METATILE_ID_BASE_TV_2F6:
         gSpecialVar_Result = 3;
 
         if (!VarGet(VAR_CURRENT_SECRET_BASE))

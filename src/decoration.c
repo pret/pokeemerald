@@ -36,6 +36,7 @@
 #include "decoration_inventory.h"
 #include "decoration.h"
 #include "graphics.h"
+#include "constants/metatile_behaviors.h"
 
 // Static type declarations
 
@@ -1574,7 +1575,7 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
                     {
                         return FALSE;
                     }
-                    if (MapGridGetMetatileIdAt(curX, curY + 1) == 0x28c)
+                    if (MapGridGetMetatileIdAt(curX, curY + 1) == METATILE_ID_UNK_28C)
                     {
                         return FALSE;
                     }
@@ -2474,7 +2475,7 @@ bool8 sub_8129E74(u8 taskId, u8 idx, struct DecorRearrangementDataBuffer *data)
     xOff = gUnknown_0203A17C.pos[idx] >> 4;
     yOff = gUnknown_0203A17C.pos[idx] & 0x0F;
     ht = data->height;
-    if (gUnknown_0203A17C.items[idx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28C)
+    if (gUnknown_0203A17C.items[idx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == METATILE_ID_UNK_28C)
     {
         ht --;
     }

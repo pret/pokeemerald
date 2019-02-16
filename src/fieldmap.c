@@ -441,13 +441,14 @@ u32 MapGridGetMetatileIdAt(int x, int y)
         i += ((y + 1) & 1) * 2;
         block = mapLayout->border[i] | MAP_IMPASSABLE_MASK;
     }
-    if (block == 0x3ff)
+    if (block == MAP_UNDEFINED_METATILE_ID)
     {
         border = gMapHeader.mapLayout->border;
         j = (x + 1) & 1;
         j += ((y + 1) & 1) * 2;
         block2 = gMapHeader.mapLayout->border[j];
         block2 |= MAP_IMPASSABLE_MASK;
+        // Note that "block" is equivalent to MAP_METATILE_ID_MASK here.
         return block2 & block;
     }
     return block & MAP_METATILE_ID_MASK;
