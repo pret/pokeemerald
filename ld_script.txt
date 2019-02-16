@@ -289,7 +289,7 @@ SECTIONS {
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
         src/battle_pyramid_bag.o(.text);
-        src/pokenav_main.o(.text);
+        src/pokenav.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
         asm/rom_81D1C44.o(.text);
@@ -592,7 +592,7 @@ SECTIONS {
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
-        src/pokenav_main.o(.rodata);
+        src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
         data/rom_81D1C44.o(.rodata);
