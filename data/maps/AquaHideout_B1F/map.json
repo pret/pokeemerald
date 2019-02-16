@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "AquaHideout_B1F_EventScript_233A85",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 5,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "5",
       "script": "AquaHideout_B1F_EventScript_233AB0",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_291372",
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_MAX_ELIXIR"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
       "movement_range_x": 4,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "AquaHideout_B1F_EventScript_233AD5",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     },
@@ -74,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_291358",
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL"
     },
@@ -87,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_2339EB",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_291365",
       "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET"
     },
@@ -113,8 +113,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "AquaHideout_B1F_EventScript_233A38",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2"
     },
@@ -126,8 +126,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "AquaHideout_B1F_EventScript_233AEC",
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS"
     }
