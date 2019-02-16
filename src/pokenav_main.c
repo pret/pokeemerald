@@ -415,7 +415,8 @@ void sub_81C7170(u8 taskId)
     while (!exitLoop)
     {
         u32 v1 =((u32 (*)(u32))func)(dataPtr[0]); 
-        switch (v1) {
+        switch (v1)
+        {
         case 1:
             dataPtr[0] = dataPtr[0] + 1;
             break;
@@ -449,27 +450,28 @@ void sub_81C71E4(u8 taskId)
     v1 = func(data[0]);
     switch (v1)
     {
-        case 0:
-        case 1:
-            data[0]++;
-            break;
-        case 4:
-            DestroyTask(taskId);
-            break;
-        default:
-            data[0] = v1 - 5;
-            break;
-        case 2:
-        case 3:
+    case 0:
+    case 1:
+        data[0]++;
+        break;
+    case 4:
+        DestroyTask(taskId);
+        break;
+    default:
+        data[0] = v1 - 5;
+        break;
+    case 2:
+    case 3:
     }
 }
 
 void CB2_PokeNav(void)
 {
     gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
-    if (gUnknown_0203CF40 == NULL) {
+    if (gUnknown_0203CF40 == NULL)
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-    } else {
+    else
+    {
         sub_81C7360(gUnknown_0203CF40);
         ResetTasks();
         SetVBlankCallback(NULL);
@@ -899,8 +901,10 @@ u32 atk47_cmd47(s32 a0)
     }
 }
 
-u32 sub_81C791C(s32 a0) {
-    if (ChangeBgY(0, 384, 2) <= 0) {
+u32 sub_81C791C(s32 a0)
+{
+    if (ChangeBgY(0, 384, 2) <= 0)
+    {
         ChangeBgY(0, 0, 0);
         return 4;
     }
@@ -920,9 +924,7 @@ void sub_81C795C(const struct SpritePalette *palettes)
     {
         index = AllocSpritePalette(current->tag);
         if (index == 0xFF) 
-        {
             break;
-        }
         else
         {
             index = (index * 16) + 0x100;
@@ -1078,18 +1080,18 @@ void sub_81C7AC0(s32 a0)
     v1 = sub_81C763C(0);
     switch (a0)
     {
-        case 0:
-            BeginNormalPaletteFade(v1[5], -2, 0, 16, a0);
-            break;
-        case 1:
-            BeginNormalPaletteFade(v1[5], -2, 16, 0, 0);
-            break;
-        case 2:
-            BeginNormalPaletteFade(-1, -2, 0, 16, 0);
-            break;
-        case 3:
-            BeginNormalPaletteFade(-1, -2, 16, 0, 0);
-            break;
+    case 0:
+        BeginNormalPaletteFade(v1[5], -2, 0, 16, a0);
+        break;
+    case 1:
+        BeginNormalPaletteFade(v1[5], -2, 16, 0, 0);
+        break;
+    case 2:
+        BeginNormalPaletteFade(-1, -2, 0, 16, 0);
+        break;
+    case 3:
+        BeginNormalPaletteFade(-1, -2, 16, 0, 0);
+        break;
     }
 }
 
