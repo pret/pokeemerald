@@ -295,5 +295,6 @@ extern const u8 BattleScript_MistySurgeActivates[];
 extern const u8 BattleScript_ElectricSurgeActivates[];
 extern const u8 BattleScript_SpectralThiefSteal[];
 extern const u8 BattleScript_StatUpMsg[];
+extern const u8 BattleScript_DefiantActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H
