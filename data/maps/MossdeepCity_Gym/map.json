@@ -590,7 +590,7 @@
       "y": 21,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220C67"
     },
     {
@@ -599,7 +599,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220C7D"
     },
     {
@@ -608,7 +608,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220C7D"
     },
     {
@@ -617,7 +617,7 @@
       "y": 34,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220C93"
     },
     {
@@ -626,7 +626,7 @@
       "y": 24,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220CA9"
     },
     {
@@ -635,7 +635,7 @@
       "y": 21,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220CA9"
     },
     {
@@ -644,7 +644,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220CBF"
     },
     {
@@ -653,7 +653,7 @@
       "y": 6,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220AF1"
     },
     {
@@ -662,7 +662,7 @@
       "y": 30,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_Gym_EventScript_220C67"
     }
   ],

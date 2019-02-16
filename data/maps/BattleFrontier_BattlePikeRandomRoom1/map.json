@@ -49,7 +49,7 @@
       "y": 3,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2"
     },
     {
@@ -58,7 +58,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4082"
     },
     {
@@ -67,7 +67,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 1,
+      "var_value": "1",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C408D"
     },
     {
@@ -76,7 +76,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4082"
     },
     {
@@ -85,7 +85,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4082"
     },
     {
@@ -94,7 +94,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 1,
+      "var_value": "1",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C408D"
     },
     {
@@ -103,7 +103,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 1,
+      "var_value": "1",
       "script": "BattleFrontier_BattlePikeRandomRoom1_EventScript_2C408D"
     }
   ],

@@ -172,7 +172,7 @@
       "y": 17,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "AquaHideout_B2F_EventScript_233DE5"
     },
     {
@@ -181,7 +181,7 @@
       "y": 16,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "AquaHideout_B2F_EventScript_233DE5"
     }
   ],

@@ -175,7 +175,7 @@
       "y": 4,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "RusturfTunnel_EventScript_22D071"
     },
     {
@@ -184,7 +184,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RusturfTunnel_EventScript_22D083"
     },
     {
@@ -193,7 +193,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RusturfTunnel_EventScript_22D083"
     },
     {
@@ -202,7 +202,7 @@
       "y": 4,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "RusturfTunnel_EventScript_22D077"
     },
     {
@@ -211,7 +211,7 @@
       "y": 5,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "RusturfTunnel_EventScript_22D07D"
     }
   ],

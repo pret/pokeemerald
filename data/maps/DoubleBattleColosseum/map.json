@@ -51,7 +51,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "gUnknown_08277388"
     },
     {
@@ -60,7 +60,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "gUnknown_082773BE"
     },
     {
@@ -69,7 +69,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "gUnknown_082773A3"
     },
     {
@@ -78,7 +78,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "gUnknown_082773D9"
     }
   ],

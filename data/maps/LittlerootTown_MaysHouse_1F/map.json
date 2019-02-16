@@ -136,7 +136,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_0x4092",
-      "var_value": 4,
+      "var_value": "4",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A4C"
     },
     {
@@ -145,7 +145,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_0x408D",
-      "var_value": 2,
+      "var_value": "2",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A67"
     },
     {
@@ -154,7 +154,7 @@
       "y": 4,
       "elevation": 0,
       "var": "VAR_0x408D",
-      "var_value": 2,
+      "var_value": "2",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A73"
     },
     {
@@ -163,7 +163,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_0x408D",
-      "var_value": 2,
+      "var_value": "2",
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A7F"
     }
   ],

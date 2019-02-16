@@ -331,7 +331,7 @@
       "y": 25,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_1E4B38"
     },
     {
@@ -340,7 +340,7 @@
       "y": 25,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_1E4B38"
     },
     {
@@ -349,7 +349,7 @@
       "y": 27,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_1E4B38"
     },
     {
@@ -358,7 +358,7 @@
       "y": 27,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MossdeepCity_EventScript_1E4B38"
     },
     {
@@ -367,7 +367,7 @@
       "y": 21,
       "elevation": 5,
       "var": "VAR_0x405D",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MossdeepCity_EventScript_1E4B41"
     },
     {
@@ -376,7 +376,7 @@
       "y": 22,
       "elevation": 5,
       "var": "VAR_0x405D",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MossdeepCity_EventScript_1E4B41"
     },
     {
@@ -385,7 +385,7 @@
       "y": 23,
       "elevation": 5,
       "var": "VAR_0x405D",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MossdeepCity_EventScript_1E4B41"
     },
     {
@@ -394,7 +394,7 @@
       "y": 24,
       "elevation": 5,
       "var": "VAR_0x405D",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MossdeepCity_EventScript_1E4B41"
     },
     {
@@ -403,7 +403,7 @@
       "y": 25,
       "elevation": 5,
       "var": "VAR_0x405D",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MossdeepCity_EventScript_1E4B41"
     },
     {
@@ -412,7 +412,7 @@
       "y": 26,
       "elevation": 5,
       "var": "VAR_0x405D",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MossdeepCity_EventScript_1E4B41"
     }
   ],

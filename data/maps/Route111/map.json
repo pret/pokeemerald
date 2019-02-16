@@ -673,7 +673,7 @@
       "y": 62,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -682,7 +682,7 @@
       "y": 61,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F0A"
     },
     {
@@ -691,7 +691,7 @@
       "y": 61,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F0A"
     },
     {
@@ -700,7 +700,7 @@
       "y": 61,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F0A"
     },
     {
@@ -709,7 +709,7 @@
       "y": 63,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -718,7 +718,7 @@
       "y": 44,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F16"
     },
     {
@@ -727,7 +727,7 @@
       "y": 43,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F16"
     },
     {
@@ -736,7 +736,7 @@
       "y": 42,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F16"
     },
     {
@@ -745,7 +745,7 @@
       "y": 40,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F16"
     },
     {
@@ -754,7 +754,7 @@
       "y": 61,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F0A"
     },
     {
@@ -763,7 +763,7 @@
       "y": 32,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -772,7 +772,7 @@
       "y": 31,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -781,7 +781,7 @@
       "y": 37,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -790,7 +790,7 @@
       "y": 36,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -799,7 +799,7 @@
       "y": 39,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F16"
     },
     {
@@ -808,7 +808,7 @@
       "y": 38,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0F16"
     },
     {
@@ -817,7 +817,7 @@
       "y": 64,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -826,7 +826,7 @@
       "y": 65,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -835,7 +835,7 @@
       "y": 65,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -844,7 +844,7 @@
       "y": 66,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -853,7 +853,7 @@
       "y": 67,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -862,7 +862,7 @@
       "y": 68,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -871,7 +871,7 @@
       "y": 69,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FB0"
     },
     {
@@ -880,7 +880,7 @@
       "y": 61,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -889,7 +889,7 @@
       "y": 62,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -898,7 +898,7 @@
       "y": 62,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -907,7 +907,7 @@
       "y": 62,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -916,7 +916,7 @@
       "y": 38,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -925,7 +925,7 @@
       "y": 39,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -934,7 +934,7 @@
       "y": 40,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -943,7 +943,7 @@
       "y": 41,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -952,7 +952,7 @@
       "y": 42,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -961,7 +961,7 @@
       "y": 43,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     },
     {
@@ -970,7 +970,7 @@
       "y": 44,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route111_EventScript_1F0FBD"
     }
   ],

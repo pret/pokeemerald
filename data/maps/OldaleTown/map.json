@@ -120,7 +120,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_0x4051",
-      "var_value": 0,
+      "var_value": "0",
       "script": "OldaleTown_EventScript_1E903F"
     },
     {
@@ -129,7 +129,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_0x40C7",
-      "var_value": 1,
+      "var_value": "1",
       "script": "OldaleTown_EventScript_1E9086"
     },
     {
@@ -138,7 +138,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_0x40C7",
-      "var_value": 1,
+      "var_value": "1",
       "script": "OldaleTown_EventScript_1E90A6"
     },
     {
@@ -147,7 +147,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_0x40C7",
-      "var_value": 1,
+      "var_value": "1",
       "script": "OldaleTown_EventScript_1E90C6"
     }
   ],

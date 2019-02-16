@@ -58,7 +58,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_0x40CC",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
     },
     {
@@ -67,7 +67,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_0x40CC",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route114_FossilManiacsTunnel_EventScript_22AF66"
     }
   ],

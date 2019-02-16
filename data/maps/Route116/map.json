@@ -434,7 +434,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x406F",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route116_EventScript_1F2D95"
     }
   ],

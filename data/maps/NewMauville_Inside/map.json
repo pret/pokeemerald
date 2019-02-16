@@ -135,7 +135,7 @@
       "y": 38,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237459"
     },
     {
@@ -144,7 +144,7 @@
       "y": 36,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237471"
     },
     {
@@ -153,7 +153,7 @@
       "y": 26,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237459"
     },
     {
@@ -162,7 +162,7 @@
       "y": 22,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237459"
     },
     {
@@ -171,7 +171,7 @@
       "y": 18,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237471"
     },
     {
@@ -180,7 +180,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237471"
     },
     {
@@ -189,7 +189,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237459"
     },
     {
@@ -198,7 +198,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237459"
     },
     {
@@ -207,7 +207,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 0,
+      "var_value": "0",
       "script": "NewMauville_Inside_EventScript_237471"
     },
     {
@@ -216,7 +216,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_0x40BA",
-      "var_value": 1,
+      "var_value": "1",
       "script": "NewMauville_Inside_EventScript_237725"
     }
   ],

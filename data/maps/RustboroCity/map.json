@@ -332,7 +332,7 @@
       "y": 20,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 1,
+      "var_value": "1",
       "script": "RustboroCity_EventScript_1E095A"
     },
     {
@@ -341,7 +341,7 @@
       "y": 21,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 1,
+      "var_value": "1",
       "script": "RustboroCity_EventScript_1E0971"
     },
     {
@@ -350,7 +350,7 @@
       "y": 22,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 1,
+      "var_value": "1",
       "script": "RustboroCity_EventScript_1E0988"
     },
     {
@@ -359,7 +359,7 @@
       "y": 23,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 1,
+      "var_value": "1",
       "script": "RustboroCity_EventScript_1E099F"
     },
     {
@@ -368,7 +368,7 @@
       "y": 24,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 1,
+      "var_value": "1",
       "script": "RustboroCity_EventScript_1E09B6"
     },
     {
@@ -377,7 +377,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RustboroCity_EventScript_1E0AFE"
     },
     {
@@ -386,7 +386,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RustboroCity_EventScript_1E0B0A"
     },
     {
@@ -395,7 +395,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RustboroCity_EventScript_1E0B16"
     },
     {
@@ -404,7 +404,7 @@
       "y": 12,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RustboroCity_EventScript_1E0B22"
     },
     {
@@ -413,7 +413,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 4,
+      "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C2B"
     },
     {
@@ -422,7 +422,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 4,
+      "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C37"
     },
     {
@@ -431,7 +431,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 4,
+      "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C43"
     },
     {
@@ -440,7 +440,7 @@
       "y": 12,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 4,
+      "var_value": "4",
       "script": "RustboroCity_EventScript_1E0C4F"
     },
     {
@@ -449,7 +449,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0DF3"
     },
     {
@@ -458,7 +458,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0E33"
     },
     {
@@ -467,7 +467,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0E73"
     },
     {
@@ -476,7 +476,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0EB3"
     },
     {
@@ -485,7 +485,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0EF3"
     },
     {
@@ -494,7 +494,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0F33"
     },
     {
@@ -503,7 +503,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0F73"
     },
     {
@@ -512,7 +512,7 @@
       "y": 53,
       "elevation": 3,
       "var": "VAR_0x405A",
-      "var_value": 7,
+      "var_value": "7",
       "script": "RustboroCity_EventScript_1E0FB3"
     }
   ],
