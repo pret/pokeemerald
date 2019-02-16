@@ -9,6 +9,15 @@
 #define NUM_PALS_TOTAL 13
 #define MAX_MAP_DATA_SIZE 0x2800
 
+#define MAP_TILE_ELEVATION_MASK 0xF000  // The byte containing the elevation for a given tile.
+#define MAP_TILE_ELEVATION_SHIFT 12     // Alternate way of getting the same data.
+
+#define MAP_IMPASSABLE_MASK 0x0C00      // When this is set, the tile cannot be walked on.
+#define MAP_METATILE_ID_MASK 0x03FF     // This is the mask for extracting a metatile id.
+
+#define MAP_UNDEFINED_METATILE_ID 0x03FF // Default value for metatiles.
+#define MAP_UNDEFINED_METATILE_ID_32 0x03FF03FF
+
 extern struct BackupMapLayout gBackupMapLayout;
 
 u32 MapGridGetMetatileIdAt(int, int);

@@ -19,8 +19,8 @@ struct Tileset
     /*0x01*/ bool8 isSecondary;
     /*0x04*/ void *tiles;
     /*0x08*/ void *palettes;
-    /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
+    /*0x0c*/ u16 *metatiles;
+    /*0x10*/ u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 

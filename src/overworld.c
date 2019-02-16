@@ -800,7 +800,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    mapheader_run_script_with_tag_x3();
+    RunMapHeaderLoadScript();
     InitMap();
     copy_map_tileset2_to_vram_2(gMapHeader.mapLayout);
     apply_map_tileset2_palette(gMapHeader.mapLayout);
@@ -813,7 +813,7 @@ void mliX_load_map(u8 mapGroup, u8 mapNum)
     RoamerMove();
     DoCurrentWeather();
     ResetFieldTasksArgs();
-    mapheader_run_script_with_tag_x5();
+    RunMapHeaderSecondaryLoadScript();
 
     if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
@@ -852,7 +852,7 @@ static void mli0_load_map(u32 a1)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    mapheader_run_script_with_tag_x3();
+    RunMapHeaderLoadScript();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE)
@@ -2126,7 +2126,7 @@ static void sub_8086988(u32 a1)
     sub_80AEE84();
     if (!a1)
         SetUpFieldTasks();
-    mapheader_run_script_with_tag_x5();
+    RunMapHeaderSecondaryLoadScript();
     TryStartMirageTowerPulseBlendEffect();
 }
 

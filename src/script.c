@@ -291,26 +291,34 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
     }
 }
 
-void mapheader_run_script_with_tag_x1(void)
+// This is run whenever a map is first initialized.
+void RunMapHeaderInitScript(void)
 {
     mapheader_run_script_by_tag(1);
 }
 
-void mapheader_run_script_with_tag_x3(void)
+// This is run whenever a map has just been warped to.
+// It runs before RunMapHeaderInitScript.
+void RunMapHeaderLoadScript(void)
 {
     mapheader_run_script_by_tag(3);
 }
 
-void mapheader_run_script_with_tag_x5(void)
+// This is also usually run when a map has just been warped
+// to. It runs after the Init script. Its exact purpose is
+// not clear, since methods calling it haven't been documented.
+void RunMapHeaderSecondaryLoadScript(void)
 {
     mapheader_run_script_by_tag(5);
 }
 
+// This is also related to map initialization, somehow.
 void mapheader_run_script_with_tag_x7(void)
 {
     mapheader_run_script_by_tag(7);
 }
 
+// This has something to do with dive warps.
 void mapheader_run_script_with_tag_x6(void)
 {
     mapheader_run_script_by_tag(6);

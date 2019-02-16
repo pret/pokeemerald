@@ -53,7 +53,7 @@ void InitMap(void)
 {
     InitMapLayoutData(&gMapHeader);
     sub_80E8EE0(gMapHeader.events);
-    mapheader_run_script_with_tag_x1();
+    RunMapHeaderInitScript();
 }
 
 void InitMapFromSavedGame(void)
@@ -62,19 +62,19 @@ void InitMapFromSavedGame(void)
     sub_80E9238(0);
     sub_80E8EE0(gMapHeader.events);
     LoadSavedMapView();
-    mapheader_run_script_with_tag_x1();
+    RunMapHeaderInitScript();
     UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
 }
 
 void InitBattlePyramidMap(bool8 setPlayerPosition)
 {
-    CpuFastFill(0x03ff03ff, gBackupMapData, sizeof(gBackupMapData));
+    CpuFastFill(MAP_UNDEFINED_METATILE_ID_32, gBackupMapData, sizeof(gBackupMapData));
     GenerateBattlePyramidFloorLayout(gBackupMapData, setPlayerPosition);
 }
 
 void InitTrainerHillMap(void)
 {
-    CpuFastFill(0x03ff03ff, gBackupMapData, sizeof(gBackupMapData));
+    CpuFastFill(MAP_UNDEFINED_METATILE_ID_32, gBackupMapData, sizeof(gBackupMapData));
     sub_81D5FB4(gBackupMapData);
 }
 
@@ -84,7 +84,7 @@ static void InitMapLayoutData(struct MapHeader *mapHeader)
     int width;
     int height;
     mapLayout = mapHeader->mapLayout;
-    CpuFastFill16(0x03ff, gBackupMapData, sizeof(gBackupMapData));
+    CpuFastFill16(MAP_UNDEFINED_METATILE_ID, gBackupMapData, sizeof(gBackupMapData));
     gBackupMapLayout.map = gBackupMapData;
     width = mapLayout->width + 15;
     gBackupMapLayout.width = width;
@@ -383,15 +383,15 @@ u8 MapGridGetZCoordAt(int x, int y)
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
         block = gMapHeader.mapLayout->border[i];
-        block |= 0xc00;
+        block |= MAP_IMPASSABLE_MASK;
     }
 
-    if (block == 0x3ff)
+    if (block == MAP_UNDEFINED_METATILE_ID)
     {
         return 0;
     }
 
-    return block >> 12;
+    return block >> MAP_TILE_ELEVATION_SHIFT;
 }
 
 u8 MapGridIsImpassableAt(int x, int y)
@@ -411,13 +411,13 @@ u8 MapGridIsImpassableAt(int x, int y)
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
         block = gMapHeader.mapLayout->border[i];
-        block |= 0xc00;
+        block |= MAP_IMPASSABLE_MASK;
     }
-    if (block == 0x3ff)
+    if (block == MAP_UNDEFINED_METATILE_ID)
     {
         return 1;
     }
-    return (block & 0xc00) >> 10;
+    return (block & MAP_IMPASSABLE_MASK) >> 10;
 }
 
 u32 MapGridGetMetatileIdAt(int x, int y)
@@ -439,7 +439,7 @@ u32 MapGridGetMetatileIdAt(int x, int y)
         mapLayout = gMapHeader.mapLayout;
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
-        block = mapLayout->border[i] | 0xc00;
+        block = mapLayout->border[i] | MAP_IMPASSABLE_MASK;
     }
     if (block == 0x3ff)
     {
@@ -447,10 +447,10 @@ u32 MapGridGetMetatileIdAt(int x, int y)
         j = (x + 1) & 1;
         j += ((y + 1) & 1) * 2;
         block2 = gMapHeader.mapLayout->border[j];
-        block2 |= 0xc00;
+        block2 |= MAP_IMPASSABLE_MASK;
         return block2 & block;
     }
-    return block & 0x3ff;
+    return block & MAP_METATILE_ID_MASK;
 }
 
 u32 MapGridGetMetatileBehaviorAt(int x, int y)
@@ -474,7 +474,7 @@ void MapGridSetMetatileIdAt(int x, int y, u16 metatile)
      && y >= 0 && y < gBackupMapLayout.height)
     {
         i = x + y * gBackupMapLayout.width;
-        gBackupMapLayout.map[i] = (gBackupMapLayout.map[i] & 0xf000) | (metatile & 0xfff);
+        gBackupMapLayout.map[i] = (gBackupMapLayout.map[i] & MAP_TILE_ELEVATION_MASK) | (metatile & (MAP_METATILE_ID_MASK | MAP_IMPASSABLE_MASK));
     }
 }
 
@@ -921,9 +921,9 @@ void sub_8088B94(int x, int y, int a2)
     if (x >= 0 && x < gBackupMapLayout.width && y >= 0 && y < gBackupMapLayout.height)
     {
         if (a2 != 0)
-            gBackupMapLayout.map[x + gBackupMapLayout.width * y] |= 0xC00;
+            gBackupMapLayout.map[x + gBackupMapLayout.width * y] |= MAP_IMPASSABLE_MASK;
         else
-            gBackupMapLayout.map[x + gBackupMapLayout.width * y] &= 0xF3FF;
+            gBackupMapLayout.map[x + gBackupMapLayout.width * y] &= ~MAP_IMPASSABLE_MASK;
     }
 }
 

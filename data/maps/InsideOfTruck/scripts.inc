@@ -1,9 +1,9 @@
 InsideOfTruck_MapScripts:: @ 823BEDA
-	map_script 1, InsideOfTruck_MapScript1_23BEE5
+	map_script 1, InsideOfTruck_MapScript_InitScript
 	map_script 5, InsideOfTruck_MapScript1_23BF01
 	.byte 0
 
-InsideOfTruck_MapScript1_23BEE5: @ 823BEE5
+InsideOfTruck_MapScript_InitScript: @ 823BEE5
 	setmetatile 4, 1, 520, 0
 	setmetatile 4, 2, 528, 0
 	setmetatile 4, 3, 536, 0
@@ -13,17 +13,17 @@ InsideOfTruck_MapScript1_23BF01: @ 823BF01
 	setstepcallback 5
 	end
 
-InsideOfTruck_EventScript_23BF04:: @ 823BF04
+InsideOfTruck_EventScript_SetupGenderHideFlags:: @ 823BF04
 	lockall
 	setflag FLAG_SPECIAL_FLAG_0x4000
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq InsideOfTruck_EventScript_23BF20
+	goto_if_eq InsideOfTruck_EventScript_SetupBrendanHideFlags
 	compare VAR_RESULT, FEMALE
-	goto_if_eq InsideOfTruck_EventScript_23BF46
+	goto_if_eq InsideOfTruck_EventScript_SetupMayHideFlags
 	end
 
-InsideOfTruck_EventScript_23BF20:: @ 823BF20
+InsideOfTruck_EventScript_SetupBrendanHideFlags:: @ 823BF20
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	setvar VAR_0x4092, 1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM
@@ -36,7 +36,7 @@ InsideOfTruck_EventScript_23BF20:: @ 823BF20
 	releaseall
 	end
 
-InsideOfTruck_EventScript_23BF46:: @ 823BF46
+InsideOfTruck_EventScript_SetupMayHideFlags:: @ 823BF46
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	setvar VAR_0x4092, 2
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM
@@ -49,11 +49,11 @@ InsideOfTruck_EventScript_23BF46:: @ 823BF46
 	releaseall
 	end
 
-InsideOfTruck_EventScript_23BF6C:: @ 823BF6C
-	msgbox InsideOfTruck_Text_23BF75, MSGBOX_SIGN
+InsideOfTruck_EventScript_MovingBoxLogo:: @ 823BF6C
+	msgbox InsideOfTruck_Text_BoxLogo, MSGBOX_SIGN
 	end
 
-InsideOfTruck_Text_23BF75: @ 823BF75
+InsideOfTruck_Text_BoxLogo: @ 823BF75
 	.string "The box is printed with a POKéMON logo.\p"
 	.string "It's a POKéMON brand moving and\n"
 	.string "delivery service.$"
