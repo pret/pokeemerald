@@ -110,7 +110,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_0x40D6",
-      "var_value": 0,
+      "var_value": "0",
       "script": "TrainerHill_Entrance_EventScript_268229"
     }
   ],

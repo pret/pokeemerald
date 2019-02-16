@@ -129,7 +129,7 @@
       "y": 12,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MauvilleCity_Gym_EventScript_20E01E"
     },
     {
@@ -138,7 +138,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MauvilleCity_Gym_EventScript_20E043"
     },
     {
@@ -147,7 +147,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MauvilleCity_Gym_EventScript_20DFF9"
     },
     {
@@ -156,7 +156,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MauvilleCity_Gym_EventScript_20E068"
     }
   ],

@@ -112,7 +112,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route101_EventScript_1EBCDE"
     },
     {
@@ -121,7 +121,7 @@
       "y": 19,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route101_EventScript_1EBCDE"
     },
     {
@@ -130,7 +130,7 @@
       "y": 18,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD4E"
     },
     {
@@ -139,7 +139,7 @@
       "y": 18,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD4E"
     },
     {
@@ -148,7 +148,7 @@
       "y": 16,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD64"
     },
     {
@@ -157,7 +157,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD64"
     },
     {
@@ -166,7 +166,7 @@
       "y": 17,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD64"
     },
     {
@@ -175,7 +175,7 @@
       "y": 18,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD64"
     },
     {
@@ -184,7 +184,7 @@
       "y": 13,
       "elevation": 3,
       "var": "VAR_0x4060",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route101_EventScript_1EBD7A"
     }
   ],

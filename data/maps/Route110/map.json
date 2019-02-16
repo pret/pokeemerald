@@ -550,7 +550,7 @@
       "y": 92,
       "elevation": 3,
       "var": "VAR_CYCLING_CHALLENGE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route110_EventScript_1EF661"
     },
     {
@@ -559,7 +559,7 @@
       "y": 92,
       "elevation": 3,
       "var": "VAR_CYCLING_CHALLENGE_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "Route110_EventScript_1EF661"
     },
     {
@@ -568,7 +568,7 @@
       "y": 56,
       "elevation": 3,
       "var": "VAR_0x4069",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_EventScript_1EF74D"
     },
     {
@@ -577,7 +577,7 @@
       "y": 56,
       "elevation": 3,
       "var": "VAR_0x4069",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_EventScript_1EF758"
     },
     {
@@ -586,7 +586,7 @@
       "y": 56,
       "elevation": 3,
       "var": "VAR_0x4069",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route110_EventScript_1EF763"
     },
     {
@@ -595,7 +595,7 @@
       "y": 85,
       "elevation": 3,
       "var": "VAR_0x40DA",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route110_EventScript_1EF9CB"
     },
     {
@@ -604,7 +604,7 @@
       "y": 85,
       "elevation": 3,
       "var": "VAR_0x40DA",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route110_EventScript_1EF9D6"
     },
     {
@@ -613,7 +613,7 @@
       "y": 85,
       "elevation": 3,
       "var": "VAR_0x40DA",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route110_EventScript_1EF9E1"
     },
     {
@@ -622,7 +622,7 @@
       "y": 85,
       "elevation": 3,
       "var": "VAR_0x40DA",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route110_EventScript_1EF9EC"
     }
   ],

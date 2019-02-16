@@ -44,7 +44,7 @@
       "y": 26,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "TerraCave_End_EventScript_23B0EC"
     }
   ],

@@ -136,7 +136,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_0x4092",
-      "var_value": 4,
+      "var_value": "4",
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78A3"
     },
     {
@@ -145,7 +145,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_0x408D",
-      "var_value": 2,
+      "var_value": "2",
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78BE"
     },
     {
@@ -154,7 +154,7 @@
       "y": 4,
       "elevation": 0,
       "var": "VAR_0x408D",
-      "var_value": 2,
+      "var_value": "2",
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78CA"
     },
     {
@@ -163,7 +163,7 @@
       "y": 3,
       "elevation": 0,
       "var": "VAR_0x408D",
-      "var_value": 2,
+      "var_value": "2",
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78D6"
     }
   ],

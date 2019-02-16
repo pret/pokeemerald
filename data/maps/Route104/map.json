@@ -538,7 +538,7 @@
       "y": 51,
       "elevation": 3,
       "var": "VAR_0x4063",
-      "var_value": 1,
+      "var_value": "1",
       "script": "Route104_EventScript_1ECCB3"
     }
   ],

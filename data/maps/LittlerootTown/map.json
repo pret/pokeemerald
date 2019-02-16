@@ -155,7 +155,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 0,
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_1E8091"
     },
     {
@@ -164,7 +164,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 0,
+      "var_value": "0",
       "script": "LittlerootTown_EventScript_1E80EF"
     },
     {
@@ -173,7 +173,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 1,
+      "var_value": "1",
       "script": "LittlerootTown_EventScript_1E811F"
     },
     {
@@ -182,7 +182,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 3,
+      "var_value": "3",
       "script": "LittlerootTown_EventScript_1E81F9"
     },
     {
@@ -191,7 +191,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 3,
+      "var_value": "3",
       "script": "LittlerootTown_EventScript_1E8205"
     },
     {
@@ -200,7 +200,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 3,
+      "var_value": "3",
       "script": "LittlerootTown_EventScript_1E81E1"
     },
     {
@@ -209,7 +209,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 3,
+      "var_value": "3",
       "script": "LittlerootTown_EventScript_1E81ED"
     },
     {
@@ -218,7 +218,7 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 3,
+      "var_value": "3",
       "script": "LittlerootTown_EventScript_1E81BB"
     },
     {
@@ -227,7 +227,7 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_0x4050",
-      "var_value": 3,
+      "var_value": "3",
       "script": "LittlerootTown_EventScript_1E81CE"
     }
   ],
