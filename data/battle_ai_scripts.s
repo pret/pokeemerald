@@ -886,11 +886,25 @@ Score_Plus5:
 Score_Plus10:
 	score +10
 	end
+	
+@ omae wa mou shindeiru
+@ Basically a scenario where the players mon is faster, able to hit and able to OHKO
+@ In which, it would be best to use a priority move to deal any damage
+AI_CheckIfAlreadyDead:
+	if_status2 AI_TARGET, STATUS2_RECHARGE | STATUS2_BIDE, AI_Ret
+	if_ai_can_go_down AI_CheckIfAlreadyDeadPriorities
+	end
+AI_CheckIfAlreadyDeadPriorities:
+	if_target_faster Score_Minus1
+	if_random_less_than 126, AI_Ret
+	score +1
+	end
 
 AI_CheckViability:
 	if_target_is_ally AI_Ret
 	call_if_always_hit AI_CV_AlwaysHit
 	call_if_move_flag FLAG_HIGH_CRIT, AI_CV_HighCrit
+	call AI_CheckIfAlreadyDead
 	if_effect EFFECT_HIT, AI_CV_Hit
 	if_effect EFFECT_SLEEP, AI_CV_Sleep
 	if_effect EFFECT_ABSORB, AI_CV_Absorb

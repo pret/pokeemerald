@@ -93,7 +93,7 @@ static void BattleAICmd_get_how_powerful_move_is(void);
 static void BattleAICmd_get_last_used_battler_move(void);
 static void BattleAICmd_if_equal_(void);
 static void BattleAICmd_if_not_equal_(void);
-static void BattleAICmd_if_user_goes(void);
+void BattleAICmd_if_user_goes(void);
 static void BattleAICmd_if_user_doesnt_go(void);
 static void BattleAICmd_nullsub_2A(void);
 static void BattleAICmd_nullsub_2B(void);
@@ -161,6 +161,7 @@ static void BattleAICmd_if_cant_use_last_resort(void);
 static void BattleAICmd_if_has_move_with_split(void);
 static void BattleAICmd_if_has_no_move_with_split(void);
 static void BattleAICmd_if_physical_moves_unusable(void);
+static void BattleAICmd_if_ai_can_go_down(void);
 
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;
@@ -279,6 +280,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_has_move_with_split,                     // 0x69
     BattleAICmd_if_has_no_move_with_split,                  // 0x6A
     BattleAICmd_if_physical_moves_unusable,                 // 0x6B
+    BattleAICmd_if_ai_can_go_down,                          // 0x6C
 };
 
 static const u16 sDiscouragedPowerfulMoveEffects[] =
@@ -1434,20 +1436,56 @@ static void BattleAICmd_if_not_equal_(void) // Same as if_not_equal.
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_user_goes(void)
+void BattleAICmd_if_user_goes(void)
 {
-    if (GetWhoStrikesFirst(sBattler_AI, gBattlerTarget, TRUE) == gAIScriptPtr[1])
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    u32 fasterAI = 0, fasterPlayer = 0, i;
+    s8 prioAI, prioPlayer;
+
+    // Check move priorities first.
+    prioAI = GetMovePriority(sBattler_AI, AI_THINKING_STRUCT->moveConsidered);
+    SaveBattlerData(gBattlerTarget);
+    SetBattlerData(gBattlerTarget);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (gBattleMons[gBattlerTarget].moves[i] == 0 || gBattleMons[gBattlerTarget].moves[i] == 0xFFFF)
+            continue;
+
+        prioPlayer = GetMovePriority(gBattlerTarget, gBattleMons[gBattlerTarget].moves[i]);
+        if (prioAI > prioPlayer)
+            fasterAI++;
+        else if (prioPlayer > prioAI)
+            fasterPlayer++;
+    }
+    RestoreBattlerData(gBattlerTarget);
+
+    if (fasterAI > fasterPlayer)
+    {
+        if (gAIScriptPtr[1] == 0)
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+        else
+            gAIScriptPtr += 6;
+    }
+    else if (fasterAI < fasterPlayer)
+    {
+        if (gAIScriptPtr[1] == 1)
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+        else
+            gAIScriptPtr += 6;
+    }
     else
-        gAIScriptPtr += 6;
+    {
+        // Priorities are the same(at least comparing to moves the AI is aware of), decide by speed.
+        if (GetWhoStrikesFirst(sBattler_AI, gBattlerTarget, TRUE) == gAIScriptPtr[1])
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+        else
+            gAIScriptPtr += 6;
+    }
 }
 
 static void BattleAICmd_if_user_doesnt_go(void)
 {
-    if (GetWhoStrikesFirst(sBattler_AI, gBattlerTarget, TRUE) != gAIScriptPtr[1])
-        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
-    else
-        gAIScriptPtr += 6;
+    // To be changed. Not needed since the above does the same.
+    gAIScriptPtr += 6;
 }
 
 static void BattleAICmd_nullsub_2A(void)
@@ -2621,4 +2659,24 @@ static void BattleAICmd_if_physical_moves_unusable(void)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
+}
+
+// Check if target has means to faint ai mon.
+static void BattleAICmd_if_ai_can_go_down(void)
+{
+    s32 i, dmg;
+    u32 unusable = CheckMoveLimitations(gBattlerTarget, 0, 0xFF & ~MOVE_LIMITATION_PP);
+    u16 *moves = gBattleResources->battleHistory->usedMoves[gBattlerTarget].moves;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i])
+            && AI_CalcDamage(moves[i], gBattlerTarget, sBattler_AI) >= gBattleMons[sBattler_AI].hp)
+        {
+            gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+            return;
+        }
+    }
+
+    gAIScriptPtr += 5;
 }

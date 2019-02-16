@@ -4328,15 +4328,21 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     return speed;
 }
 
-s8 GetMovePriority(u8 battlerId)
+s8 GetChosenMovePriority(u32 battlerId)
 {
-    s8 priority;
     u16 move;
 
     if (gProtectStructs[battlerId].noValidMoves)
         move = MOVE_STRUGGLE;
     else
         move = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
+
+    return GetMovePriority(battlerId, move);
+}
+
+s8 GetMovePriority(u32 battlerId, u16 move)
+{
+    s8 priority;
 
     priority = gBattleMoves[move].priority;
     if (GetBattlerAbility(battlerId) == ABILITY_GALE_WINGS
@@ -4397,9 +4403,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     if (!ignoreChosenMoves)
     {
         if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
-            priority1 = GetMovePriority(battler1);
+            priority1 = GetChosenMovePriority(battler1);
         if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
-            priority2 = GetMovePriority(battler2);
+            priority2 = GetChosenMovePriority(battler2);
     }
 
     if (priority1 == priority2)
