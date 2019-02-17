@@ -1933,12 +1933,12 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
         if (IsContest() == TRUE)
         {
-            RequestDma3Fill(0, (void*)(VRAM + 0x8000), 0x2000, 1);
+            RequestDma3Fill(0, (void*)(BG_CHAR_ADDR(2)), 0x2000, 1);
             RequestDma3Fill(0xFF, (void*)(VRAM + 0xF000), 0x1000, 0);
         }
         else
         {
-            RequestDma3Fill(0, (void*)(VRAM + 0x4000), 0x2000, 1);
+            RequestDma3Fill(0, (void*)(BG_CHAR_ADDR(1)), 0x2000, 1);
             RequestDma3Fill(0xFF, (void*)(VRAM + 0xe000), 0x1000, 0);
         }
 
@@ -2460,7 +2460,7 @@ static void LoadMoveBg(u16 bgId)
     else
     {
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(VRAM + 0xD000));
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x8000));
+        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_CHAR_ADDR(2)));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, 32, 32);
     }
 }

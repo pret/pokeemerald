@@ -589,8 +589,8 @@ static u8 sub_80D7E44(u8 *a)
     case 0:
         gPaletteFade.bufferTransferDisabled = TRUE;
         RequestDma3Fill(0, (void *)VRAM, 0x8000, 1);
-        RequestDma3Fill(0, (void *)VRAM + 0x8000, 0x8000, 1);
-        RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
+        RequestDma3Fill(0, (void *)BG_CHAR_ADDR(2), 0x8000, 1);
+        RequestDma3Fill(0, (void *)BG_SCREEN_ADDR(2)0, 0x8000, 1);
         break;
     case 1:
         LZDecompressVram(gContestMiscGfx, (void *)VRAM);
@@ -3340,12 +3340,12 @@ static u8 sub_80DC9EC(u8 a)
     CpuFill32(0, gContestResources->field_38 + 0x500, 0x300);
 
     RequestDma3Copy(gContestResources->field_34,
-                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId1].oam.tileNum * 32),
+                    (u8 *)(BG_SCREEN_ADDR(2)0 + gSprites[spriteId1].oam.tileNum * 32),
                     0x800,
                     1);
 
     RequestDma3Copy(gContestResources->field_38,
-                    (u8 *)(VRAM + 0x10000 + gSprites[spriteId2].oam.tileNum * 32),
+                    (u8 *)(BG_SCREEN_ADDR(2)0 + gSprites[spriteId2].oam.tileNum * 32),
                     0x800,
                     1);
 
@@ -3870,8 +3870,8 @@ static void sub_80DD940(void)
             src = gContestApplauseMeterGfx + 64;
         else
             src = gContestApplauseMeterGfx;
-        CpuCopy32(src, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
-        CpuCopy32(src + 32, (void *)(VRAM + 0x10000 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
+        CpuCopy32(src, (void *)(BG_SCREEN_ADDR(2)0 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 17 + i) * 32), 32);
+        CpuCopy32(src + 32, (void *)(BG_SCREEN_ADDR(2)0 + (gSprites[sContest.applauseMeterSpriteId].oam.tileNum + 25 + i) * 32), 32);
 
         if (sContest.applauseLevel > 4)
             sub_80DDA20();
@@ -4120,7 +4120,7 @@ static void sub_80DE008(bool8 a)
     {
         if (sContestantStatus[i].turnOrderMod != 0 && a)
         {
-            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(VRAM + 0x10000 + (gSprites[gContestResources->field_14[i].unk1].oam.tileNum + 6) * 32), 32);
+            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(BG_SCREEN_ADDR(2)0 + (gSprites[gContestResources->field_14[i].unk1].oam.tileNum + 6) * 32), 32);
             gSprites[gContestResources->field_14[i].unk1].pos1.y = gUnknown_08587A70[gUnknown_02039F26[i]];
             gSprites[gContestResources->field_14[i].unk1].invisible = FALSE;
         }
@@ -4212,7 +4212,7 @@ static void sub_80DE350(void)
     s32 i;
     u16 bg1Cnt;
 
-    RequestDma3Fill(0,(void *)(VRAM + 0x8000), 0x2000, 0x1);
+    RequestDma3Fill(0,(void *)(BG_CHAR_ADDR(2)), 0x2000, 0x1);
     CpuFill32(0, gContestResources->field_24[1], 0x1000);
     Contest_SetBgCopyFlags(1);
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
