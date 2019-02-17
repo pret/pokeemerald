@@ -331,15 +331,15 @@ static void sub_817B458(u8);
 
 void load_intro_part2_graphics(u8 a)
 {
-    LZ77UnCompVram(gUnknown_085F0740, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
+    LZ77UnCompVram(gUnknown_085F0740, (void *)(BG_CHAR_ADDR(1)));
+    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(BG_SCREEN_ADDR(15)));
     LoadPalette(&gUnknown_085F06E0, 240, 32);
     switch (a)
     {
     case 0:
     default:
         LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F0CFC, 0, 96);
         LoadCompressedSpriteSheet(gUnknown_085F5064);
         LoadPalette(&gUnknown_085F1668, 256, 32);
@@ -347,7 +347,7 @@ void load_intro_part2_graphics(u8 a)
         break;
     case 1:
         LZ77UnCompVram(gUnknown_085F1824, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F17E4, 0, 32);
         LoadCompressedSpriteSheet(gUnknown_085F50EC);
         LoadPalette(&gUnknown_085F21B0, 256, 32);
@@ -438,15 +438,15 @@ void sub_817B150(u8 a)
 
 void sub_817B1C8(u8 a)
 {
-    LZ77UnCompVram(gUnknown_085F0740, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(VRAM + 0x7800));
+    LZ77UnCompVram(gUnknown_085F0740, (void *)(BG_CHAR_ADDR(1)));
+    LZ77UnCompVram(gUnknown_085F0BC0, (void *)(BG_SCREEN_ADDR(15)));
     switch (a)
     {
     case 0:
     default:
         LoadPalette(&gUnknown_085F06E0, 240, 32);
         LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F0CFC, 0, 96);
         LoadCompressedSpriteSheet(gUnknown_085F5064);
         LZ77UnCompVram(gUnknown_085F16A8, (void *)(VRAM + 0x10000));
@@ -456,7 +456,7 @@ void sub_817B1C8(u8 a)
     case 1:
         LoadPalette(&gUnknown_085F0700, 240, 32);
         LZ77UnCompVram(gUnknown_085F0DBC, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1398, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1398, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F0D5C, 0, 96);
         LoadCompressedSpriteSheet(gUnknown_085F5064);
         LZ77UnCompVram(gUnknown_085F16A8, (void *)(VRAM + 0x10000));
@@ -467,7 +467,7 @@ void sub_817B1C8(u8 a)
     case 3:
         LoadPalette(&gUnknown_085F0700, 240, 32);
         LZ77UnCompVram(gUnknown_085F1824, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F1EAC, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F1804, 0, 32);
         LoadCompressedSpriteSheet(gUnknown_085F50EC);
         LoadPalette(&gUnknown_085F1804, 256, 32);
@@ -476,7 +476,7 @@ void sub_817B1C8(u8 a)
     case 4:
         LoadPalette(&gUnknown_085F0720, 240, 32);
         LZ77UnCompVram(gUnknown_085F235C, (void *)(VRAM));
-        LZ77UnCompVram(gUnknown_085F2568, (void *)(VRAM + 0x3000));
+        LZ77UnCompVram(gUnknown_085F2568, (void *)(BG_SCREEN_ADDR(6)));
         LoadPalette(&gUnknown_085F231C, 0, 64);
         LoadCompressedSpriteSheet(gUnknown_085F5180);
         LoadPalette(&gUnknown_085F2548, 256, 32);
