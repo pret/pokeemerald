@@ -1,5 +1,5 @@
 MarineCave_Entrance_MapScripts:: @ 823AFD0
-	map_script 5, MarineCave_Entrance_MapScript1_23AFD6
+	map_script EVENT_TAG_ON_MAP_RESUME, MarineCave_Entrance_MapScript1_23AFD6
 	.byte 0
 
 MarineCave_Entrance_MapScript1_23AFD6: @ 823AFD6

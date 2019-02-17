@@ -1,7 +1,7 @@
 Route105_MapScripts:: @ 81EE1DB
-	map_script 1, Route105_MapScript1_1EE1EB
-	map_script 3, Route105_MapScript1_1EE21E
-	map_script 2, Route105_MapScript2_1EE240
+	map_script EVENT_TAG_ON_MAP_LOAD, Route105_MapScript1_1EE1EB
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route105_MapScript1_1EE21E
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route105_MapScript2_1EE240
 	.byte 0
 
 Route105_MapScript1_1EE1EB: @ 81EE1EB

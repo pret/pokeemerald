@@ -1,5 +1,5 @@
 LilycoveCity_House3_MapScripts:: @ 821EE3C
-	map_script 3, LilycoveCity_House3_MapScript1_21EE42
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LilycoveCity_House3_MapScript1_21EE42
 	.byte 0
 
 LilycoveCity_House3_MapScript1_21EE42: @ 821EE42

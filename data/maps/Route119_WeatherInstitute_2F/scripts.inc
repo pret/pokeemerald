@@ -1,5 +1,5 @@
 Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
-	map_script 3, Route119_WeatherInstitute_2F_MapScript1_26FF24
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route119_WeatherInstitute_2F_MapScript1_26FF24
 	.byte 0
 
 Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24

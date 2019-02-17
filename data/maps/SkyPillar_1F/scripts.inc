@@ -1,5 +1,5 @@
 SkyPillar_1F_MapScripts:: @ 8239615
-	map_script 3, SkyPillar_1F_MapScript1_23961B
+	map_script EVENT_TAG_ON_MAP_TRANSITION, SkyPillar_1F_MapScript1_23961B
 	.byte 0
 
 SkyPillar_1F_MapScript1_23961B: @ 823961B

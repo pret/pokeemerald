@@ -1,8 +1,8 @@
 RustboroCity_PokemonCenter_2F_MapScripts:: @ 8214EDE
-	map_script 2, RustboroCity_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, RustboroCity_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, RustboroCity_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, RustboroCity_PokemonCenter_2F_MapScript1_276ACF
+	map_script EVENT_TAG_ON_INPUT_TABLE, RustboroCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, RustboroCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script EVENT_TAG_ON_MAP_LOAD, RustboroCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script EVENT_TAG_ON_MAP_TRANSITION, RustboroCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 RustboroCity_PokemonCenter_2F_EventScript_214EF3:: @ 8214EF3

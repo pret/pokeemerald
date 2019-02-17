@@ -1,6 +1,6 @@
 RusturfTunnel_MapScripts:: @ 822CE27
-	map_script 3, RusturfTunnel_MapScript1_22CE44
-	map_script 2, RusturfTunnel_MapScript2_22CE32
+	map_script EVENT_TAG_ON_MAP_TRANSITION, RusturfTunnel_MapScript1_22CE44
+	map_script EVENT_TAG_ON_INPUT_TABLE, RusturfTunnel_MapScript2_22CE32
 	.byte 0
 
 RusturfTunnel_MapScript2_22CE32: @ 822CE32

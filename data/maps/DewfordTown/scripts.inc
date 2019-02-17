@@ -1,5 +1,5 @@
 DewfordTown_MapScripts:: @ 81E9507
-	map_script 3, DewfordTown_MapScript1_1E950D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, DewfordTown_MapScript1_1E950D
 	.byte 0
 
 DewfordTown_MapScript1_1E950D: @ 81E950D

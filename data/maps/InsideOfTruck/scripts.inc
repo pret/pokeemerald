@@ -1,15 +1,15 @@
 InsideOfTruck_MapScripts:: @ 823BEDA
-	map_script 1, InsideOfTruck_MapScript_InitScript
-	map_script 5, InsideOfTruck_MapScript1_23BF01
+	map_script EVENT_TAG_ON_MAP_LOAD, InsideOfTruck_MapScript_OnLoad
+	map_script EVENT_TAG_ON_MAP_RESUME, InsideOfTruck_MapScript_OnResume
 	.byte 0
 
-InsideOfTruck_MapScript_InitScript: @ 823BEE5
+InsideOfTruck_MapScript_OnLoad: @ 823BEE5
 	setmetatile 4, 1, 520, 0
 	setmetatile 4, 2, 528, 0
 	setmetatile 4, 3, 536, 0
 	end
 
-InsideOfTruck_MapScript1_23BF01: @ 823BF01
+InsideOfTruck_MapScript_OnResume: @ 823BF01
 	setstepcallback 5
 	end
 

@@ -1,6 +1,6 @@
 AquaHideout_B1F_MapScripts:: @ 82339A7
-	map_script 5, AquaHideout_B1F_MapScript1_2339B2
-	map_script 3, AquaHideout_B1F_MapScript1_2339D0
+	map_script EVENT_TAG_ON_MAP_RESUME, AquaHideout_B1F_MapScript1_2339B2
+	map_script EVENT_TAG_ON_MAP_TRANSITION, AquaHideout_B1F_MapScript1_2339D0
 	.byte 0
 
 AquaHideout_B1F_MapScript1_2339B2: @ 82339B2

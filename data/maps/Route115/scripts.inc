@@ -1,7 +1,7 @@
 Route115_MapScripts:: @ 81F2920
-	map_script 1, Route115_MapScript1_1F2930
-	map_script 3, Route115_MapScript1_1F2947
-	map_script 2, Route115_MapScript2_1F2969
+	map_script EVENT_TAG_ON_MAP_LOAD, Route115_MapScript1_1F2930
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route115_MapScript1_1F2947
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route115_MapScript2_1F2969
 	.byte 0
 
 Route115_MapScript1_1F2930: @ 81F2930

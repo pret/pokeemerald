@@ -1,6 +1,6 @@
 MarineCave_End_MapScripts:: @ 823AFDF
-	map_script 5, MarineCave_End_MapScript1_23AFEA
-	map_script 3, MarineCave_End_MapScript1_23B008
+	map_script EVENT_TAG_ON_MAP_RESUME, MarineCave_End_MapScript1_23AFEA
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MarineCave_End_MapScript1_23B008
 	.byte 0
 
 MarineCave_End_MapScript1_23AFEA: @ 823AFEA

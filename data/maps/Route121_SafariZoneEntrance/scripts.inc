@@ -1,5 +1,5 @@
 Route121_SafariZoneEntrance_MapScripts:: @ 822BBBB
-	map_script 2, Route121_SafariZoneEntrance_MapScript2_22BBC1
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route121_SafariZoneEntrance_MapScript2_22BBC1
 	.byte 0
 
 Route121_SafariZoneEntrance_MapScript2_22BBC1: @ 822BBC1

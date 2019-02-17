@@ -1,6 +1,6 @@
 SootopolisCity_PokemonCenter_1F_MapScripts:: @ 82264F1
-	map_script 3, SootopolisCity_PokemonCenter_1F_MapScript1_2264FC
-	map_script 5, SootopolisCity_PokemonCenter_1F_MapScript1_277C30
+	map_script EVENT_TAG_ON_MAP_TRANSITION, SootopolisCity_PokemonCenter_1F_MapScript1_2264FC
+	map_script EVENT_TAG_ON_MAP_RESUME, SootopolisCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 SootopolisCity_PokemonCenter_1F_MapScript1_2264FC: @ 82264FC

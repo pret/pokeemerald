@@ -1,6 +1,6 @@
 SouthernIsland_Interior_MapScripts:: @ 8242A45
-	map_script 5, SouthernIsland_Interior_MapScript1_242A50
-	map_script 3, SouthernIsland_Interior_MapScript1_242A6E
+	map_script EVENT_TAG_ON_MAP_RESUME, SouthernIsland_Interior_MapScript1_242A50
+	map_script EVENT_TAG_ON_MAP_TRANSITION, SouthernIsland_Interior_MapScript1_242A6E
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_242A50: @ 8242A50

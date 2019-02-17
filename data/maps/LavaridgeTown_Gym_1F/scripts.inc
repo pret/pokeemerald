@@ -1,5 +1,5 @@
 LavaridgeTown_Gym_1F_MapScripts:: @ 81FE6F4
-	map_script 3, LavaridgeTown_Gym_1F_MapScript1_1FE6FA
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LavaridgeTown_Gym_1F_MapScript1_1FE6FA
 	.byte 0
 
 LavaridgeTown_Gym_1F_MapScript1_1FE6FA: @ 81FE6FA

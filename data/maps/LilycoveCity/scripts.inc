@@ -1,6 +1,6 @@
 LilycoveCity_MapScripts:: @ 81E2B3C
-	map_script 3, LilycoveCity_MapScript1_1E2B47
-	map_script 1, LilycoveCity_MapScript1_1E2B61
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LilycoveCity_MapScript1_1E2B47
+	map_script EVENT_TAG_ON_MAP_LOAD, LilycoveCity_MapScript1_1E2B61
 	.byte 0
 
 LilycoveCity_MapScript1_1E2B47: @ 81E2B47

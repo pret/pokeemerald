@@ -1,5 +1,5 @@
 MauvilleCity_MapScripts:: @ 81DF385
-	map_script 3, MauvilleCity_MapScript1_1DF38B
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MauvilleCity_MapScript1_1DF38B
 	.byte 0
 
 MauvilleCity_MapScript1_1DF38B: @ 81DF38B

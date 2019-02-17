@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 8220207
-	map_script 3, LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D
 	.byte 0
 
 LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D: @ 822020D

@@ -1,6 +1,6 @@
 EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 8229A34
-	map_script 3, EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F
-	map_script 5, EverGrandeCity_PokemonCenter_1F_MapScript1_277C30
+	map_script EVENT_TAG_ON_MAP_TRANSITION, EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F
+	map_script EVENT_TAG_ON_MAP_RESUME, EverGrandeCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_229A3F: @ 8229A3F

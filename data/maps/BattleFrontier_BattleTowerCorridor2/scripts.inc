@@ -1,7 +1,7 @@
 BattleFrontier_BattleTowerCorridor2_MapScripts:: @ 8248D4A
-	map_script 3, BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A
-	map_script 4, BattleFrontier_BattleTowerCorridor2_MapScript2_248D95
-	map_script 2, BattleFrontier_BattleTowerCorridor2_MapScript2_248DB2
+	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerCorridor2_MapScript2_248D95
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleTowerCorridor2_MapScript2_248DB2
 	.byte 0
 
 BattleFrontier_BattleTowerCorridor2_MapScript1_248D5A: @ 8248D5A

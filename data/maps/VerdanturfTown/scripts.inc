@@ -1,5 +1,5 @@
 VerdanturfTown_MapScripts:: @ 81EB566
-	map_script 3, VerdanturfTown_MapScript1_1EB56C
+	map_script EVENT_TAG_ON_MAP_TRANSITION, VerdanturfTown_MapScript1_1EB56C
 	.byte 0
 
 VerdanturfTown_MapScript1_1EB56C: @ 81EB56C

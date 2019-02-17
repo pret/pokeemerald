@@ -1,6 +1,6 @@
 LavaridgeTown_MapScripts:: @ 81EA4D3
-	map_script 3, LavaridgeTown_MapScript1_1EA4DE
-	map_script 2, LavaridgeTown_MapScript2_1EA547
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LavaridgeTown_MapScript1_1EA4DE
+	map_script EVENT_TAG_ON_INPUT_TABLE, LavaridgeTown_MapScript2_1EA547
 	.byte 0
 
 LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE

@@ -1,5 +1,5 @@
 Route117_MapScripts:: @ 81F397D
-	map_script 3, Route117_MapScript1_1F3983
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route117_MapScript1_1F3983
 	.byte 0
 
 Route117_MapScript1_1F3983: @ 81F3983

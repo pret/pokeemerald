@@ -1,6 +1,6 @@
 SootopolisCity_MysteryEventsHouse_1F_MapScripts:: @ 8227953
-	map_script 3, SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E
-	map_script 2, SootopolisCity_MysteryEventsHouse_1F_MapScript2_22799D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E
+	map_script EVENT_TAG_ON_INPUT_TABLE, SootopolisCity_MysteryEventsHouse_1F_MapScript2_22799D
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E

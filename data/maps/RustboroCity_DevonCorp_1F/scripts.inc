@@ -1,5 +1,5 @@
 RustboroCity_DevonCorp_1F_MapScripts:: @ 8211245
-	map_script 3, RustboroCity_DevonCorp_1F_MapScript1_21124B
+	map_script EVENT_TAG_ON_MAP_TRANSITION, RustboroCity_DevonCorp_1F_MapScript1_21124B
 	.byte 0
 
 RustboroCity_DevonCorp_1F_MapScript1_21124B: @ 821124B

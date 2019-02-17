@@ -1,5 +1,5 @@
 MossdeepCity_MapScripts:: @ 81E4A96
-	map_script 3, MossdeepCity_MapScript1_1E4A9C
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MossdeepCity_MapScript1_1E4A9C
 	.byte 0
 
 MossdeepCity_MapScript1_1E4A9C: @ 81E4A9C

@@ -1,6 +1,6 @@
 MauvilleCity_PokemonCenter_1F_MapScripts:: @ 8210E5B
-	map_script 3, MauvilleCity_PokemonCenter_1F_MapScript1_210E66
-	map_script 5, MauvilleCity_PokemonCenter_1F_MapScript1_277C30
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MauvilleCity_PokemonCenter_1F_MapScript1_210E66
+	map_script EVENT_TAG_ON_MAP_RESUME, MauvilleCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 MauvilleCity_PokemonCenter_1F_MapScript1_210E66: @ 8210E66

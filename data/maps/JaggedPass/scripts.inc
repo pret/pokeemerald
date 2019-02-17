@@ -1,7 +1,7 @@
 JaggedPass_MapScripts:: @ 8230656
-	map_script 5, JaggedPass_MapScript1_230666
-	map_script 3, JaggedPass_MapScript1_23068B
-	map_script 1, JaggedPass_MapScript1_23069C
+	map_script EVENT_TAG_ON_MAP_RESUME, JaggedPass_MapScript1_230666
+	map_script EVENT_TAG_ON_MAP_TRANSITION, JaggedPass_MapScript1_23068B
+	map_script EVENT_TAG_ON_MAP_LOAD, JaggedPass_MapScript1_23069C
 	.byte 0
 
 JaggedPass_MapScript1_230666: @ 8230666

@@ -1,5 +1,5 @@
 DewfordTown_Gym_MapScripts:: @ 81FC63C
-	map_script 3, DewfordTown_Gym_MapScript1_1FC642
+	map_script EVENT_TAG_ON_MAP_TRANSITION, DewfordTown_Gym_MapScript1_1FC642
 	.byte 0
 
 DewfordTown_Gym_MapScript1_1FC642: @ 81FC642

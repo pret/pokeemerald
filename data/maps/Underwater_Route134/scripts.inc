@@ -1,5 +1,5 @@
 Underwater_Route134_MapScripts:: @ 82390B5
-	map_script 5, Underwater_Route134_MapScript1_2390BB
+	map_script EVENT_TAG_ON_MAP_RESUME, Underwater_Route134_MapScript1_2390BB
 	.byte 0
 
 Underwater_Route134_MapScript1_2390BB: @ 82390BB

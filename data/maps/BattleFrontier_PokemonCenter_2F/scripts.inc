@@ -1,8 +1,8 @@
 BattleFrontier_PokemonCenter_2F_MapScripts:: @ 8267AA4
-	map_script 2, BattleFrontier_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, BattleFrontier_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, BattleFrontier_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, BattleFrontier_PokemonCenter_2F_MapScript1_276ACF
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_PokemonCenter_2F_MapScript2_276C3B
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_PokemonCenter_2F_MapScript2_276B6C
+	map_script EVENT_TAG_ON_MAP_LOAD, BattleFrontier_PokemonCenter_2F_MapScript1_276BBE
+	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 BattleFrontier_PokemonCenter_2F_EventScript_267AB9:: @ 8267AB9

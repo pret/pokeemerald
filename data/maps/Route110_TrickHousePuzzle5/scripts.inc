@@ -1,5 +1,5 @@
 Route110_TrickHousePuzzle5_MapScripts:: @ 826CAF0
-	map_script 3, Route110_TrickHousePuzzle5_MapScript1_26CAF6
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route110_TrickHousePuzzle5_MapScript1_26CAF6
 	.byte 0
 
 Route110_TrickHousePuzzle5_MapScript1_26CAF6: @ 826CAF6

@@ -1,5 +1,5 @@
 Route104_MrBrineysHouse_MapScripts:: @ 8229D2E
-	map_script 3, Route104_MrBrineysHouse_MapScript1_229D34
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route104_MrBrineysHouse_MapScript1_229D34
 	.byte 0
 
 Route104_MrBrineysHouse_MapScript1_229D34: @ 8229D34

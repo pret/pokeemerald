@@ -1,6 +1,6 @@
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 81FFAFA
-	map_script 3, LavaridgeTown_PokemonCenter_1F_MapScript1_1FFB05
-	map_script 5, LavaridgeTown_PokemonCenter_1F_MapScript1_277C30
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LavaridgeTown_PokemonCenter_1F_MapScript1_1FFB05
+	map_script EVENT_TAG_ON_MAP_RESUME, LavaridgeTown_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 LavaridgeTown_PokemonCenter_1F_MapScript1_1FFB05: @ 81FFB05

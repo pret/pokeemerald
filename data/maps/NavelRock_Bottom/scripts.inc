@@ -1,6 +1,6 @@
 NavelRock_Bottom_MapScripts:: @ 8269255
-	map_script 3, NavelRock_Bottom_MapScript1_269260
-	map_script 5, NavelRock_Bottom_MapScript1_269284
+	map_script EVENT_TAG_ON_MAP_TRANSITION, NavelRock_Bottom_MapScript1_269260
+	map_script EVENT_TAG_ON_MAP_RESUME, NavelRock_Bottom_MapScript1_269284
 	.byte 0
 
 NavelRock_Bottom_MapScript1_269260: @ 8269260

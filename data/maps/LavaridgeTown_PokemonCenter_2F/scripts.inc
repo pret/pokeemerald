@@ -1,8 +1,8 @@
 LavaridgeTown_PokemonCenter_2F_MapScripts:: @ 81FFC97
-	map_script 2, LavaridgeTown_PokemonCenter_2F_MapScript2_276C3B
-	map_script 4, LavaridgeTown_PokemonCenter_2F_MapScript2_276B6C
-	map_script 1, LavaridgeTown_PokemonCenter_2F_MapScript1_276BBE
-	map_script 3, LavaridgeTown_PokemonCenter_2F_MapScript1_276ACF
+	map_script EVENT_TAG_ON_INPUT_TABLE, LavaridgeTown_PokemonCenter_2F_MapScript2_276C3B
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, LavaridgeTown_PokemonCenter_2F_MapScript2_276B6C
+	map_script EVENT_TAG_ON_MAP_LOAD, LavaridgeTown_PokemonCenter_2F_MapScript1_276BBE
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LavaridgeTown_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
 LavaridgeTown_PokemonCenter_2F_EventScript_1FFCAC:: @ 81FFCAC

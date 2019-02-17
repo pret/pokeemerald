@@ -1,6 +1,6 @@
 PacifidlogTown_MapScripts:: @ 81EBAB1
-	map_script 3, PacifidlogTown_MapScript1_1EBABC
-	map_script 5, PacifidlogTown_MapScript1_1EBAC0
+	map_script EVENT_TAG_ON_MAP_TRANSITION, PacifidlogTown_MapScript1_1EBABC
+	map_script EVENT_TAG_ON_MAP_RESUME, PacifidlogTown_MapScript1_1EBAC0
 	.byte 0
 
 PacifidlogTown_MapScript1_1EBABC: @ 81EBABC

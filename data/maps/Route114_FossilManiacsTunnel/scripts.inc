@@ -1,6 +1,6 @@
 Route114_FossilManiacsTunnel_MapScripts:: @ 822AF28
-	map_script 3, Route114_FossilManiacsTunnel_MapScript1_22AF33
-	map_script 1, Route114_FossilManiacsTunnel_MapScript1_22AF49
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route114_FossilManiacsTunnel_MapScript1_22AF33
+	map_script EVENT_TAG_ON_MAP_LOAD, Route114_FossilManiacsTunnel_MapScript1_22AF49
 	.byte 0
 
 Route114_FossilManiacsTunnel_MapScript1_22AF33: @ 822AF33

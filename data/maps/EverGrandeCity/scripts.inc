@@ -1,5 +1,5 @@
 EverGrandeCity_MapScripts:: @ 81E7D1B
-	map_script 3, EverGrandeCity_MapScript1_1E7D21
+	map_script EVENT_TAG_ON_MAP_TRANSITION, EverGrandeCity_MapScript1_1E7D21
 	.byte 0
 
 EverGrandeCity_MapScript1_1E7D21: @ 81E7D21

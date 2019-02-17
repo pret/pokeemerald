@@ -1,5 +1,5 @@
 CaveOfOrigin_Entrance_MapScripts:: @ 8235759
-	map_script 5, CaveOfOrigin_Entrance_MapScript1_23575F
+	map_script EVENT_TAG_ON_MAP_RESUME, CaveOfOrigin_Entrance_MapScript1_23575F
 	.byte 0
 
 CaveOfOrigin_Entrance_MapScript1_23575F: @ 823575F

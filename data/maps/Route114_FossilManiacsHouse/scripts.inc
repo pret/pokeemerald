@@ -1,5 +1,5 @@
 Route114_FossilManiacsHouse_MapScripts:: @ 822AD30
-	map_script 3, Route114_FossilManiacsHouse_MapScript1_22AD36
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route114_FossilManiacsHouse_MapScript1_22AD36
 	.byte 0
 
 Route114_FossilManiacsHouse_MapScript1_22AD36: @ 822AD36

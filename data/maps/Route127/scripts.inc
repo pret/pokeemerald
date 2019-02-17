@@ -1,7 +1,7 @@
 Route127_MapScripts:: @ 81F69D9
-	map_script 3, Route127_MapScript1_1F69E9
-	map_script 1, Route127_MapScript1_1F6A14
-	map_script 2, Route127_MapScript2_1F6A2B
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route127_MapScript1_1F69E9
+	map_script EVENT_TAG_ON_MAP_LOAD, Route127_MapScript1_1F6A14
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route127_MapScript2_1F6A2B
 	.byte 0
 
 Route127_MapScript1_1F69E9: @ 81F69E9

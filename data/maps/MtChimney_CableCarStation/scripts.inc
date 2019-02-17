@@ -1,6 +1,6 @@
 MtChimney_CableCarStation_MapScripts:: @ 822ABFA
-	map_script 3, MtChimney_CableCarStation_MapScript1_22AC05
-	map_script 2, MtChimney_CableCarStation_MapScript2_22AC1D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MtChimney_CableCarStation_MapScript1_22AC05
+	map_script EVENT_TAG_ON_INPUT_TABLE, MtChimney_CableCarStation_MapScript2_22AC1D
 	.byte 0
 
 MtChimney_CableCarStation_MapScript1_22AC05: @ 822AC05

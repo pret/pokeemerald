@@ -1,5 +1,5 @@
 SeafloorCavern_Entrance_MapScripts:: @ 823446E
-	map_script 5, SeafloorCavern_Entrance_MapScript1_234474
+	map_script EVENT_TAG_ON_MAP_RESUME, SeafloorCavern_Entrance_MapScript1_234474
 	.byte 0
 
 SeafloorCavern_Entrance_MapScript1_234474: @ 8234474

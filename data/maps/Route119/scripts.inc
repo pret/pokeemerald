@@ -1,6 +1,6 @@
 Route119_MapScripts:: @ 81F4424
-	map_script 5, Route119_MapScript1_1F442F
-	map_script 3, Route119_MapScript1_1F444D
+	map_script EVENT_TAG_ON_MAP_RESUME, Route119_MapScript1_1F442F
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route119_MapScript1_1F444D
 	.byte 0
 
 Route119_MapScript1_1F442F: @ 81F442F

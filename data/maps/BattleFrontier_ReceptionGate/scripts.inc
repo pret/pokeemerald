@@ -1,6 +1,6 @@
 BattleFrontier_ReceptionGate_MapScripts:: @ 82661DA
-	map_script 2, BattleFrontier_ReceptionGate_MapScript2_2661E9
-	map_script 3, BattleFrontier_ReceptionGate_MapScript1_2661E5
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_ReceptionGate_MapScript2_2661E9
+	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_ReceptionGate_MapScript1_2661E5
 	.byte 0
 
 BattleFrontier_ReceptionGate_MapScript1_2661E5: @ 82661E5

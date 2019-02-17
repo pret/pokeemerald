@@ -1,5 +1,5 @@
 BattleFrontier_BattleArenaCorridor_MapScripts:: @ 82573B9
-	map_script 2, BattleFrontier_BattleArenaCorridor_MapScript2_2573BF
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleArenaCorridor_MapScript2_2573BF
 	.byte 0
 
 BattleFrontier_BattleArenaCorridor_MapScript2_2573BF: @ 82573BF

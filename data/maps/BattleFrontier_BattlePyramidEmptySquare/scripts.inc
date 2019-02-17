@@ -1,7 +1,7 @@
 BattleFrontier_BattlePyramidEmptySquare_MapScripts:: @ 8252A33
-	map_script 5, BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2
-	map_script 2, BattleFrontier_BattlePyramidEmptySquare_MapScript2_252A43
-	map_script 3, BattleFrontier_BattlePyramidEmptySquare_MapScript1_252BCA
+	map_script EVENT_TAG_ON_MAP_RESUME, BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattlePyramidEmptySquare_MapScript2_252A43
+	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_BattlePyramidEmptySquare_MapScript1_252BCA
 	.byte 0
 
 BattleFrontier_BattlePyramidEmptySquare_MapScript2_252A43: @ 8252A43

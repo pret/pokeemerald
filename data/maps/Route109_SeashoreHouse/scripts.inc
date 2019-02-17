@@ -1,5 +1,5 @@
 Route109_SeashoreHouse_MapScripts:: @ 82693F4
-	map_script 3, Route109_SeashoreHouse_MapScript1_2693FA
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route109_SeashoreHouse_MapScript1_2693FA
 	.byte 0
 
 Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA

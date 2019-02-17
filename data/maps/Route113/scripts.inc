@@ -1,6 +1,6 @@
 Route113_MapScripts:: @ 81F2153
-	map_script 5, Route113_MapScript1_1F215E
-	map_script 3, Route113_MapScript1_1F2161
+	map_script EVENT_TAG_ON_MAP_RESUME, Route113_MapScript1_1F215E
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route113_MapScript1_1F2161
 	.byte 0
 
 Route113_MapScript1_1F215E: @ 81F215E

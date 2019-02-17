@@ -1,6 +1,6 @@
 Underwater_MarineCave_MapScripts:: @ 823AFB8
-	map_script 5, Underwater_MarineCave_MapScript1_23AFC7
-	map_script 3, Underwater_MarineCave_MapScript1_23AFC3
+	map_script EVENT_TAG_ON_MAP_RESUME, Underwater_MarineCave_MapScript1_23AFC7
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Underwater_MarineCave_MapScript1_23AFC3
 	.byte 0
 
 Underwater_MarineCave_MapScript1_23AFC3: @ 823AFC3

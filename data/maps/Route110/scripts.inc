@@ -1,7 +1,7 @@
 Route110_MapScripts:: @ 81EF269
-	map_script 5, Route110_MapScript1_1EF279
-	map_script 3, Route110_MapScript1_1EF27D
-	map_script 2, Route110_MapScript2_1EF297
+	map_script EVENT_TAG_ON_MAP_RESUME, Route110_MapScript1_1EF279
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route110_MapScript1_1EF27D
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route110_MapScript2_1EF297
 	.byte 0
 
 Route110_MapScript1_1EF279: @ 81EF279

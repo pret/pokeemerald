@@ -1,7 +1,7 @@
 Route129_MapScripts:: @ 81F7284
-	map_script 3, Route129_MapScript1_1F72AB
-	map_script 1, Route129_MapScript1_1F7294
-	map_script 2, Route129_MapScript2_1F72E2
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route129_MapScript1_1F72AB
+	map_script EVENT_TAG_ON_MAP_LOAD, Route129_MapScript1_1F7294
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route129_MapScript2_1F72E2
 	.byte 0
 
 Route129_MapScript1_1F7294: @ 81F7294

@@ -1,5 +1,5 @@
 CaveOfOrigin_UnusedRubySapphireMap2_MapScripts:: @ 8235788
-	map_script 3, CaveOfOrigin_UnusedRubySapphireMap2_MapScript1_23578E
+	map_script EVENT_TAG_ON_MAP_TRANSITION, CaveOfOrigin_UnusedRubySapphireMap2_MapScript1_23578E
 	.byte 0
 
 CaveOfOrigin_UnusedRubySapphireMap2_MapScript1_23578E: @ 823578E

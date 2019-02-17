@@ -1,6 +1,6 @@
 Route110_TrickHousePuzzle3_MapScripts:: @ 826BED8
-	map_script 5, Route110_TrickHousePuzzle3_MapScript1_26BEE3
-	map_script 3, Route110_TrickHousePuzzle3_MapScript1_26BEFF
+	map_script EVENT_TAG_ON_MAP_RESUME, Route110_TrickHousePuzzle3_MapScript1_26BEE3
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route110_TrickHousePuzzle3_MapScript1_26BEFF
 	.byte 0
 
 Route110_TrickHousePuzzle3_MapScript1_26BEE3: @ 826BEE3

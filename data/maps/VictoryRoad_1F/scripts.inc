@@ -1,5 +1,5 @@
 VictoryRoad_1F_MapScripts:: @ 8235D7A
-	map_script 3, VictoryRoad_1F_MapScript1_235D80
+	map_script EVENT_TAG_ON_MAP_TRANSITION, VictoryRoad_1F_MapScript1_235D80
 	.byte 0
 
 VictoryRoad_1F_MapScript1_235D80: @ 8235D80

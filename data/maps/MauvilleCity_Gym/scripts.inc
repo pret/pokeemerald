@@ -1,5 +1,5 @@
 MauvilleCity_Gym_MapScripts:: @ 820DD6E
-	map_script 1, MauvilleCity_Gym_MapScript1_20DD74
+	map_script EVENT_TAG_ON_MAP_LOAD, MauvilleCity_Gym_MapScript1_20DD74
 	.byte 0
 
 MauvilleCity_Gym_MapScript1_20DD74: @ 820DD74

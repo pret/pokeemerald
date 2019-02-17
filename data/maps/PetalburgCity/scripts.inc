@@ -1,6 +1,6 @@
 PetalburgCity_MapScripts::
-	map_script 3, PetalburgCity_MapScript1_1DC2D7
-	map_script 2, PetalburgCity_MapScript2_1DC31C
+	map_script EVENT_TAG_ON_MAP_TRANSITION, PetalburgCity_MapScript1_1DC2D7
+	map_script EVENT_TAG_ON_INPUT_TABLE, PetalburgCity_MapScript2_1DC31C
 	.byte 0
 
 PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7

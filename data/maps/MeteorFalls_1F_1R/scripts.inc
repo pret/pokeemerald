@@ -1,5 +1,5 @@
 MeteorFalls_1F_1R_MapScripts:: @ 822BD2A
-	map_script 1, MeteorFalls_1F_1R_MapScript1_22BD30
+	map_script EVENT_TAG_ON_MAP_LOAD, MeteorFalls_1F_1R_MapScript1_22BD30
 	.byte 0
 
 MeteorFalls_1F_1R_MapScript1_22BD30: @ 822BD30

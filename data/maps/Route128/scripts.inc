@@ -1,6 +1,6 @@
 Route128_MapScripts:: @ 81F6B38
-	map_script 3, Route128_MapScript1_1F6B43
-	map_script 2, Route128_MapScript2_1F6B4D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route128_MapScript1_1F6B43
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route128_MapScript2_1F6B4D
 	.byte 0
 
 Route128_MapScript1_1F6B43: @ 81F6B43

@@ -1,6 +1,6 @@
 MossdeepCity_PokemonCenter_1F_MapScripts:: @ 822223F
-	map_script 3, MossdeepCity_PokemonCenter_1F_MapScript1_22224A
-	map_script 5, MossdeepCity_PokemonCenter_1F_MapScript1_277C30
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MossdeepCity_PokemonCenter_1F_MapScript1_22224A
+	map_script EVENT_TAG_ON_MAP_RESUME, MossdeepCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 MossdeepCity_PokemonCenter_1F_MapScript1_22224A: @ 822224A

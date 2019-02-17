@@ -1,7 +1,7 @@
 BattleFrontier_BattleFactoryBattleRoom_MapScripts:: @ 825ADAB
-	map_script 3, BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB
-	map_script 4, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00
-	map_script 2, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31
+	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE00
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleFactoryBattleRoom_MapScript2_25AE31
 	.byte 0
 
 BattleFrontier_BattleFactoryBattleRoom_MapScript1_25ADBB: @ 825ADBB

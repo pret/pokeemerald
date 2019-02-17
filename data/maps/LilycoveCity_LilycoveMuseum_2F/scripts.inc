@@ -1,6 +1,6 @@
 LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 821973A
-	map_script 1, LilycoveCity_LilycoveMuseum_2F_MapScript1_219745
-	map_script 2, LilycoveCity_LilycoveMuseum_2F_MapScript2_2197FE
+	map_script EVENT_TAG_ON_MAP_LOAD, LilycoveCity_LilycoveMuseum_2F_MapScript1_219745
+	map_script EVENT_TAG_ON_INPUT_TABLE, LilycoveCity_LilycoveMuseum_2F_MapScript2_2197FE
 	.byte 0
 
 LilycoveCity_LilycoveMuseum_2F_MapScript1_219745: @ 8219745

@@ -1,5 +1,5 @@
 Route123_MapScripts:: @ 81F6147
-	map_script 3, Route123_MapScript1_1F614D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route123_MapScript1_1F614D
 	.byte 0
 
 Route123_MapScript1_1F614D: @ 81F614D

@@ -1,7 +1,7 @@
 BattleFrontier_BattlePikeThreePathRoom_MapScripts:: @ 825C843
-	map_script 5, BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E
-	map_script 2, BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C853
-	map_script 4, BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C87D
+	map_script EVENT_TAG_ON_MAP_RESUME, BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E
+	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C853
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C87D
 	.byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_MapScript2_25C853: @ 825C853

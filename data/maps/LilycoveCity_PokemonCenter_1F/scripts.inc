@@ -1,6 +1,6 @@
 LilycoveCity_PokemonCenter_1F_MapScripts:: @ 821C5B2
-	map_script 3, LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD
-	map_script 5, LilycoveCity_PokemonCenter_1F_MapScript1_277C30
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD
+	map_script EVENT_TAG_ON_MAP_RESUME, LilycoveCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD: @ 821C5BD

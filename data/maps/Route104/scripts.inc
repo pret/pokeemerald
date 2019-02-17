@@ -1,6 +1,6 @@
 Route104_MapScripts:: @ 81ECC32
-	map_script 2, Route104_MapScript2_1ECC3D
-	map_script 3, Route104_MapScript1_1ECC4E
+	map_script EVENT_TAG_ON_INPUT_TABLE, Route104_MapScript2_1ECC3D
+	map_script EVENT_TAG_ON_MAP_TRANSITION, Route104_MapScript1_1ECC4E
 	.byte 0
 
 Route104_MapScript2_1ECC3D: @ 81ECC3D

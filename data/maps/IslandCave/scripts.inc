@@ -1,7 +1,7 @@
 IslandCave_MapScripts:: @ 8238E2A
-	map_script 5, IslandCave_MapScript1_238E3A
-	map_script 1, IslandCave_MapScript1_238E58
-	map_script 3, IslandCave_MapScript1_238E99
+	map_script EVENT_TAG_ON_MAP_RESUME, IslandCave_MapScript1_238E3A
+	map_script EVENT_TAG_ON_MAP_LOAD, IslandCave_MapScript1_238E58
+	map_script EVENT_TAG_ON_MAP_TRANSITION, IslandCave_MapScript1_238E99
 	.byte 0
 
 IslandCave_MapScript1_238E3A: @ 8238E3A

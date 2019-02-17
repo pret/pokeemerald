@@ -1,5 +1,5 @@
 MtPyre_Exterior_MapScripts:: @ 8231FCC
-	map_script 3, MtPyre_Exterior_MapScript1_231FD2
+	map_script EVENT_TAG_ON_MAP_TRANSITION, MtPyre_Exterior_MapScript1_231FD2
 	.byte 0
 
 MtPyre_Exterior_MapScript1_231FD2: @ 8231FD2

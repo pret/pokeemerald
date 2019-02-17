@@ -1,7 +1,7 @@
 SkyPillar_Top_MapScripts:: @ 82396B8
-	map_script 5, SkyPillar_Top_MapScript1_2396C8
-	map_script 3, SkyPillar_Top_MapScript1_2396E6
-	map_script 4, SkyPillar_Top_MapScript2_239713
+	map_script EVENT_TAG_ON_MAP_RESUME, SkyPillar_Top_MapScript1_2396C8
+	map_script EVENT_TAG_ON_MAP_TRANSITION, SkyPillar_Top_MapScript1_2396E6
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, SkyPillar_Top_MapScript2_239713
 	.byte 0
 
 SkyPillar_Top_MapScript1_2396C8: @ 82396C8
