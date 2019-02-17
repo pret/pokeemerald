@@ -923,7 +923,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
         }
 
         src = gMonSpritesGfxPtr->sprites[position];
-        dst = (void *)(BG_SCREEN_ADDR(2)0 + gSprites[gBattlerSpriteIds[battlerAtk]].oam.tileNum * 32);
+        dst = (void *)(VRAM + 0x10000 + gSprites[gBattlerSpriteIds[battlerAtk]].oam.tileNum * 32);
         DmaCopy32(3, src, dst, 0x800);
         paletteOffset = 0x100 + battlerAtk * 16;
         lzPaletteData = GetFrontSpritePalFromSpeciesAndPersonality(targetSpecies, otId, personalityValue);

@@ -507,12 +507,12 @@ void CB2_InitTitleScreen(void)
         break;
     case 1:
         LZ77UnCompVram(gTitleScreenPokemonLogoGfx, (void *)VRAM);
-        LZ77UnCompVram(gUnknown_08DE0644, (void *)(VRAM + 0x4800));
+        LZ77UnCompVram(gUnknown_08DE0644, (void *)(BG_SCREEN_ADDR(9)));
         LoadPalette(gTitleScreenBgPalettes, 0, 0x1E0);
         LZ77UnCompVram(sTitleScreenRayquazaGfx, (void *)(BG_CHAR_ADDR(2)));
-        LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(VRAM + 0xD000));
+        LZ77UnCompVram(sTitleScreenRayquazaTilemap, (void *)(BG_SCREEN_ADDR(26)));
         LZ77UnCompVram(sTitleScreenCloudsGfx, (void *)(BG_CHAR_ADDR(3)));
-        LZ77UnCompVram(gUnknown_08DDE458, (void *)(VRAM + 0xD800));
+        LZ77UnCompVram(gUnknown_08DDE458, (void *)(BG_SCREEN_ADDR(27)));
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
