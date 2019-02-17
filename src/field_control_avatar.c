@@ -147,7 +147,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;
 
-    if (mapheader_run_first_tag2_script_list_match() == 1)
+    if (TryRunMapHeaderOnInputScript() == 1)
         return TRUE;
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)

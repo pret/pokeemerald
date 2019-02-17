@@ -796,7 +796,7 @@ void sub_81D5FB4(u16 *mapArg)
         dst += 31;
     }
 
-    RunMapHeaderInitScript();
+    RunOnMapLoadScript();
     FreeDataStruct();
 }
 

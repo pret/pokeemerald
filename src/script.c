@@ -241,7 +241,7 @@ void ScriptContext2_RunNewScript(const u8 *ptr)
     while (RunScriptCommand(&sScriptContext2) == TRUE);
 }
 
-u8 *mapheader_get_tagged_pointer(u8 tag)
+u8 *MapHeaderGetEventTable(u8 tag)
 {
     const u8 *mapScripts = gMapHeader.mapScripts;
 
@@ -261,21 +261,21 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
     }
 }
 
-void mapheader_run_script_by_tag(u8 tag)
+void MapHeaderRunScriptByTag(u8 tag)
 {
-    u8 *ptr = mapheader_get_tagged_pointer(tag);
+    u8 *ptr = MapHeaderGetEventTable(tag);
     if (ptr)
         ScriptContext2_RunNewScript(ptr);
 }
 
-u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
+u8 *MapHeaderCheckEventTable(u8 tag)
 {
-    u8 *ptr = mapheader_get_tagged_pointer(tag);
+    u8 *ptr = MapHeaderGetEventTable(tag);
 
     if (!ptr)
         return NULL;
 
-    while (1)
+    while (TRUE)
     {
         u16 varIndex1;
         u16 varIndex2;
@@ -291,53 +291,45 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
     }
 }
 
-// This is run whenever a map is first initialized.
-void RunMapHeaderInitScript(void)
+void RunOnMapLoadScript(void)
 {
-    mapheader_run_script_by_tag(1);
+    MapHeaderRunScriptByTag(EVENT_TAG_ON_MAP_LOAD);
 }
 
-// This is run whenever a map has just been warped to.
-// It runs before RunMapHeaderInitScript.
-void RunMapHeaderLoadScript(void)
+void RunOnMapTransitionScript(void)
 {
-    mapheader_run_script_by_tag(3);
+    MapHeaderRunScriptByTag(EVENT_TAG_ON_MAP_TRANSITION);
 }
 
-// This is also usually run when a map has just been warped
-// to. It runs after the Init script. Its exact purpose is
-// not clear, since methods calling it haven't been documented.
-void RunMapHeaderSecondaryLoadScript(void)
+void RunOnMapResumeScript(void)
 {
-    mapheader_run_script_by_tag(5);
+    MapHeaderRunScriptByTag(EVENT_TAG_ON_MAP_RESUME);
 }
 
-// This is also related to map initialization, somehow.
-void mapheader_run_script_with_tag_x7(void)
+void RunOnReturnToFieldScript(void)
 {
-    mapheader_run_script_by_tag(7);
+    MapHeaderRunScriptByTag(EVENT_TAG_ON_RETURN_TO_FIELD);
 }
 
-// This has something to do with dive warps.
-void mapheader_run_script_with_tag_x6(void)
+void RunOnMapDiveWarpScript(void)
 {
-    mapheader_run_script_by_tag(6);
+    MapHeaderRunScriptByTag(EVENT_TAG_ON_DIVE_WARP);
 }
 
-bool8 mapheader_run_first_tag2_script_list_match(void)
+bool8 TryRunMapHeaderOnInputScript(void)
 {
-    u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(2);
+    u8 *ptr = MapHeaderCheckEventTable(EVENT_TAG_ON_INPUT_TABLE);
 
     if (!ptr)
-        return 0;
+        return FALSE;
 
     ScriptContext1_SetupScript(ptr);
-    return 1;
+    return TRUE;
 }
 
-void mapheader_run_first_tag4_script_list_match(void)
+void TryRunMapHeaderOnWarpIntoMapScript(void)
 {
-    u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(4);
+    u8 *ptr = MapHeaderCheckEventTable(EVENT_TAG_ON_WARP_INTO_MAP_TABLE);
     if (ptr)
         ScriptContext2_RunNewScript(ptr);
 }

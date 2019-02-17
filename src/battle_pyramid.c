@@ -1590,7 +1590,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
             layoutMap += mapLayout->width;
         }
     }
-    RunMapHeaderInitScript();
+    RunOnMapLoadScript();
     free(floorLayoutOffsets);
 }
 
