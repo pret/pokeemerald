@@ -3539,8 +3539,9 @@ void sub_80BFCF4(u16 a)
 {
     CopyToBgTilemapBuffer(1, gPokedexTilemap_ScreenSelectBar2, 0, 0);
 }
-
 #ifdef NONMATCHING
+// This doesn't match because gcc flips the naming of the r3 and r4
+// registers.
 void sub_80BFD0C(u8 a, u16 unused)
 {
     u8 i;
@@ -3629,6 +3630,8 @@ _080BFD3E:\n\
 #endif
 
 #ifdef NONMATCHING
+// This doesn't match because gcc flips the naming of the r3 and r4
+// registers.
 void sub_80BFD7C(u8 a, u16 b)
 {
     u8 i;
@@ -3959,6 +3962,8 @@ void sub_80C0354(u16 height, u8 left, u8 top)
 }
 
 #ifdef NONMATCHING
+// This doesn't match because gcc manages to avoid using the stack
+// to store local variables.
 void sub_80C0460(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
@@ -5205,18 +5210,24 @@ void sub_80C1D70(u8 taskId)
 }
 
 #ifdef NONMATCHING
+// This doesn't match because gcc flips the naming of the r7 and r6
+// registers. It also does one of the additions backwards.
 void sub_80C1D98(u8 a, u8 b, u8 c, u8 d)
 {
     u16 i;
     u16* ptr = GetBgTilemapBuffer(3);
 
+    u16* temp;
     for (i = 0; i < d; i++)
     {
-        ptr[b + i + (c << 6)] %= 0x1000;
-        ptr[b + i + (c << 6)] |= a * 4096;
+        // This addition is supposed to be done in this order; however,
+        // gcc will always do it in ptr + (c << 5) order.
+        temp = (c << 5) + ptr;
+        temp[b + i] %= 0x1000;
+        temp[b + i] |= a * 4096;
 
-        ptr[b + i + (c << 6) + 32] %= 0x1000;
-        ptr[b + i + (c << 6) + 32] |= a * 4096;
+        temp[b + i + 32] %= 0x1000;
+        temp[b + i + 32] |= a * 4096;
     }
 }
 #else
