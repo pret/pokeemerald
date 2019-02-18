@@ -145,6 +145,13 @@ int main(int argc, char **argv)
 
             while ((incDirectiveType = file.ReadUntilIncDirective(path)) != IncDirectiveType::None)
             {
+                if (path.back() == 'h') {
+                    std::string newPath("include/" + path);
+                    if (!CanOpenFile(newPath)) {
+                        newPath = "include/constants/" + path;
+                    }
+                    path = newPath;
+                }
                 bool inserted = dependencies.insert(path).second;
                 if (inserted
                     && incDirectiveType == IncDirectiveType::Include
