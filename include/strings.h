@@ -986,6 +986,19 @@ extern const u8 gText_SomeonesPC[];
 extern const u8 gText_PlayersPC[];
 extern const u8 gText_WhichPCShouldBeAccessed[];
 
+extern const u8 gText_Navgear_ClearButtonList[];
+extern const u8 gText_NavgearMap_ZoomedOutButtons[];
+extern const u8 gText_NavgearMap_ZoomedInButtons[];
+extern const u8 gText_NavgearCondition_MonListButtons[];
+extern const u8 gText_NavgearCondition_MonStatusButtons[];
+extern const u8 gText_NavgearCondition_MarkingButtons[];
+extern const u8 gText_NavgearMatchCall_TrainerListButtons[];
+extern const u8 gText_NavgearMatchCall_CallMenuButtons[];
+extern const u8 gText_NavgearMatchCall_CheckTrainerButtons[];
+extern const u8 gText_NavgearRibbons_MonListButtons[];
+extern const u8 gText_NavgearRibbons_RibbonListButtons[];
+extern const u8 gText_NavgearRibbons_RibbonCheckButtons[];
+
 extern const u8 gUnknown_085EAD37[];
 extern const u8 gUnknown_085EAD41[];
 extern const u8 gUnknown_085EAD67[];
