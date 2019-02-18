@@ -1,7 +1,7 @@
 LittlerootTown_MapScripts:: @ 81E7DCB
 	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_MapScript1_1E7DDB
-	map_script EVENT_TAG_ON_INPUT_TABLE, LittlerootTown_MapScript2_1E7EC1
-	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MapScript2_1E7FE2
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_MapScript_OnInputTable
+	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MapScript_OnWarpTable
 	.byte 0
 
 LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
@@ -82,7 +82,7 @@ LittlerootTown_EventScript_1E7EB9:: @ 81E7EB9
 	setobjectxyperm 4, 14, 9
 	return
 
-LittlerootTown_MapScript2_1E7EC1: @ 81E7EC1
+LittlerootTown_MapScript_OnInputTable: @ 81E7EC1
 	map_script_2 VAR_0x4092, 1, LittlerootTown_EventScript_1E7EDB
 	map_script_2 VAR_0x4092, 2, LittlerootTown_EventScript_1E7EF9
 	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FB1
@@ -200,7 +200,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	releaseall
 	end
 
-LittlerootTown_MapScript2_1E7FE2: @ 81E7FE2
+LittlerootTown_MapScript_OnWarpTable: @ 81E7FE2
 	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FEC
 	.2byte 0
 

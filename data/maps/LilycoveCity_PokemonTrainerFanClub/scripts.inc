@@ -1,5 +1,5 @@
 LilycoveCity_PokemonTrainerFanClub_MapScripts:: @ 821C785
-	map_script EVENT_TAG_ON_INPUT_TABLE, LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790
 	map_script EVENT_TAG_ON_MAP_TRANSITION, LilycoveCity_PokemonTrainerFanClub_MapScript1_21C80D
 	.byte 0
 

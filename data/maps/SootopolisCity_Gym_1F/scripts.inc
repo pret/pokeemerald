@@ -1,5 +1,5 @@
 SootopolisCity_Gym_1F_MapScripts:: @ 8224E4C
-	map_script EVENT_TAG_ON_INPUT_TABLE, SootopolisCity_Gym_1F_MapScript2_224ECB
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SootopolisCity_Gym_1F_MapScript2_224ECB
 	map_script EVENT_TAG_ON_MAP_RESUME, SootopolisCity_Gym_1F_MapScript1_224E67
 	map_script EVENT_TAG_ON_MAP_LOAD, SootopolisCity_Gym_1F_MapScript1_224E6A
 	map_script EVENT_TAG_ON_MAP_TRANSITION, SootopolisCity_Gym_1F_MapScript1_224E61

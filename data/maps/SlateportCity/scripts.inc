@@ -1,6 +1,6 @@
 SlateportCity_MapScripts:: @ 81DCC61
 	map_script EVENT_TAG_ON_MAP_TRANSITION, SlateportCity_MapScript1_1DCC6C
-	map_script EVENT_TAG_ON_INPUT_TABLE, SlateportCity_MapScript2_1DCD12
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SlateportCity_MapScript2_1DCD12
 	.byte 0
 
 SlateportCity_MapScript1_1DCC6C: @ 81DCC6C

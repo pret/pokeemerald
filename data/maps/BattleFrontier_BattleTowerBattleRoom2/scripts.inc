@@ -1,7 +1,7 @@
 BattleFrontier_BattleTowerBattleRoom2_MapScripts:: @ 8248EE8
 	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_BattleTowerBattleRoom2_MapScript1_248EF8
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F33
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F43
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattleTowerBattleRoom2_MapScript2_248F43
 	.byte 0
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript1_248EF8: @ 8248EF8

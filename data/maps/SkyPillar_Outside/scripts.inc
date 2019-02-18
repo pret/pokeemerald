@@ -1,7 +1,7 @@
 SkyPillar_Outside_MapScripts:: @ 82392A8
 	map_script EVENT_TAG_ON_MAP_TRANSITION, SkyPillar_Outside_MapScript1_2392B8
 	map_script EVENT_TAG_ON_MAP_LOAD, SkyPillar_Outside_MapScript1_2392DD
-	map_script EVENT_TAG_ON_INPUT_TABLE, SkyPillar_Outside_MapScript2_2392FA
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SkyPillar_Outside_MapScript2_2392FA
 	.byte 0
 
 SkyPillar_Outside_MapScript1_2392B8: @ 82392B8

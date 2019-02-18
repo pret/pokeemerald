@@ -1,5 +1,5 @@
 BattleFrontier_BattlePalaceCorridor_MapScripts:: @ 824F4A3
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattlePalaceCorridor_MapScript2_24F4A9
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattlePalaceCorridor_MapScript2_24F4A9
 	.byte 0
 
 BattleFrontier_BattlePalaceCorridor_MapScript2_24F4A9: @ 824F4A9

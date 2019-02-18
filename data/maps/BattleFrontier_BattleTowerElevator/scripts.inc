@@ -1,5 +1,5 @@
 BattleFrontier_BattleTowerElevator_MapScripts:: @ 82419DB
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleTowerElevator_MapScript2_2419E6
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattleTowerElevator_MapScript2_2419E6
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerElevator_MapScript2_241A96
 	.byte 0
 

@@ -2,7 +2,7 @@ PetalburgCity_Gym_MapScripts:: @ 8204889
 	map_script EVENT_TAG_ON_MAP_LOAD, PetalburgCity_Gym_MapScript1_20489E
 	map_script EVENT_TAG_ON_MAP_TRANSITION, PetalburgCity_Gym_MapScript1_20492D
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, PetalburgCity_Gym_MapScript2_20498B
-	map_script EVENT_TAG_ON_INPUT_TABLE, PetalburgCity_Gym_MapScript2_20499A
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, PetalburgCity_Gym_MapScript2_20499A
 	.byte 0
 
 PetalburgCity_Gym_MapScript1_20489E: @ 820489E

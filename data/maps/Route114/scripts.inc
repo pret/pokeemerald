@@ -1,7 +1,7 @@
 Route114_MapScripts:: @ 81F252F
 	map_script EVENT_TAG_ON_MAP_TRANSITION, Route114_MapScript1_1F253F
 	map_script EVENT_TAG_ON_MAP_LOAD, Route114_MapScript1_1F2561
-	map_script EVENT_TAG_ON_INPUT_TABLE, Route114_MapScript2_1F2578
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, Route114_MapScript2_1F2578
 	.byte 0
 
 Route114_MapScript1_1F253F: @ 81F253F

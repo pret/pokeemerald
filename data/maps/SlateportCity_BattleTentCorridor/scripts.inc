@@ -1,5 +1,5 @@
 SlateportCity_BattleTentCorridor_MapScripts:: @ 8208E26
-	map_script EVENT_TAG_ON_INPUT_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E5B
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E5B
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E31
 	.byte 0
 

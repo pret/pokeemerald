@@ -1,5 +1,5 @@
 MtPyre_2F_MapScripts:: @ 82310FB
-	map_script EVENT_TAG_ON_INPUT_TABLE, MtPyre_2F_MapScript2_2A8327
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, MtPyre_2F_MapScript2_2A8327
 	map_script EVENT_TAG_ON_MAP_TRANSITION, MtPyre_2F_MapScript1_2A8331
 	map_script EVENT_TAG_ON_MAP_RESUME, MtPyre_2F_MapScript1_23110B
 	.byte 0

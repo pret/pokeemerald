@@ -1,7 +1,7 @@
 LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06
-	map_script EVENT_TAG_ON_INPUT_TABLE, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9DB9
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_ProfessorBirchsLab_MapScript2_1F9DB9
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1

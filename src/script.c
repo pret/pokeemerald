@@ -318,7 +318,7 @@ void RunOnMapDiveWarpScript(void)
 
 bool8 TryRunMapHeaderOnInputScript(void)
 {
-    u8 *ptr = MapHeaderCheckEventTable(EVENT_TAG_ON_INPUT_TABLE);
+    u8 *ptr = MapHeaderCheckEventTable(EVENT_TAG_ON_MAP_FRAME_TABLE);
 
     if (!ptr)
         return FALSE;

@@ -1,5 +1,5 @@
 BattleFrontier_BattleDomePreBattleRoom_MapScripts:: @ 824B1F9
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B204
 	.byte 0
 

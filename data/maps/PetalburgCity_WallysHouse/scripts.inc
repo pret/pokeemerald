@@ -1,5 +1,5 @@
 PetalburgCity_WallysHouse_MapScripts:: @ 8204229
-	map_script EVENT_TAG_ON_INPUT_TABLE, PetalburgCity_WallysHouse_MapScript2_204247
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, PetalburgCity_WallysHouse_MapScript2_204247
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, PetalburgCity_WallysHouse_MapScript2_204234
 	.byte 0
 

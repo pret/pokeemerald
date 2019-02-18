@@ -1,5 +1,5 @@
 BattleFrontier_BattlePikeCorridor_MapScripts:: @ 825C771
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattlePikeCorridor_MapScript2_25C77C
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattlePikeCorridor_MapScript2_25C77C
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeCorridor_MapScript2_25C7F7
 	.byte 0
 

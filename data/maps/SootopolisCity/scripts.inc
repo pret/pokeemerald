@@ -2,7 +2,7 @@ SootopolisCity_MapScripts:: @ 81E565C
 	map_script EVENT_TAG_ON_MAP_LOAD, SootopolisCity_MapScript1_1E5676
 	map_script EVENT_TAG_ON_MAP_TRANSITION, SootopolisCity_MapScript1_1E56EF
 	map_script EVENT_TAG_ON_MAP_RESUME, SootopolisCity_MapScript1_1E590B
-	map_script EVENT_TAG_ON_INPUT_TABLE, SootopolisCity_MapScript2_1E5914
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SootopolisCity_MapScript2_1E5914
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, SootopolisCity_MapScript2_1E58DB
 	.byte 0
 

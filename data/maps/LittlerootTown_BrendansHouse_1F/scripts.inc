@@ -1,7 +1,7 @@
 LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 	map_script EVENT_TAG_ON_MAP_LOAD, LittlerootTown_BrendansHouse_1F_MapScript1_1F7765
 	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4
-	map_script EVENT_TAG_ON_INPUT_TABLE, LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765

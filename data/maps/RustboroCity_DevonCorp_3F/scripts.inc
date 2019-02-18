@@ -1,7 +1,7 @@
 RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
 	map_script EVENT_TAG_ON_MAP_TRANSITION, RustboroCity_DevonCorp_3F_MapScript1_21243D
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, RustboroCity_DevonCorp_3F_MapScript2_212455
-	map_script EVENT_TAG_ON_INPUT_TABLE, RustboroCity_DevonCorp_3F_MapScript2_212464
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, RustboroCity_DevonCorp_3F_MapScript2_212464
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D

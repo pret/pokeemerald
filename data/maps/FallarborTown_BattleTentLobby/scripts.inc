@@ -1,5 +1,5 @@
 FallarborTown_BattleTentLobby_MapScripts:: @ 81FFE66
-	map_script EVENT_TAG_ON_INPUT_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE85
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE85
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE71
 	.byte 0
 

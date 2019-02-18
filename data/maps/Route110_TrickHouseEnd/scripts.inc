@@ -1,7 +1,7 @@
 Route110_TrickHouseEnd_MapScripts:: @ 826ACAF
 	map_script EVENT_TAG_ON_MAP_RESUME, Route110_TrickHouseEnd_MapScript1_26ACC4
 	map_script EVENT_TAG_ON_MAP_TRANSITION, Route110_TrickHouseEnd_MapScript1_26ACD0
-	map_script EVENT_TAG_ON_INPUT_TABLE, Route110_TrickHouseEnd_MapScript2_26ACF5
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, Route110_TrickHouseEnd_MapScript2_26ACF5
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, Route110_TrickHouseEnd_MapScript2_26ACDE
 	.byte 0
 

@@ -1,5 +1,5 @@
 BattleFrontier_BattlePalaceLobby_MapScripts:: @ 824D77E
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattlePalaceLobby_MapScript2_24D79D
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattlePalaceLobby_MapScript2_24D79D
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePalaceLobby_MapScript2_24D789
 	.byte 0
 

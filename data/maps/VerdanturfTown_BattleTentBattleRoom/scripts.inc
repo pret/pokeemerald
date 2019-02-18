@@ -1,6 +1,6 @@
 VerdanturfTown_BattleTentBattleRoom_MapScripts:: @ 82022FA
 	map_script EVENT_TAG_ON_MAP_TRANSITION, VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A
-	map_script EVENT_TAG_ON_INPUT_TABLE, VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, VerdanturfTown_BattleTentBattleRoom_MapScript2_20233E
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentBattleRoom_MapScript2_202541
 	.byte 0
 

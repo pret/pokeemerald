@@ -1,7 +1,7 @@
 EverGrandeCity_PhoebesRoom_MapScripts:: @ 8228174
 	map_script EVENT_TAG_ON_MAP_LOAD, EverGrandeCity_PhoebesRoom_MapScript1_2281AA
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228184
-	map_script EVENT_TAG_ON_INPUT_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228193
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228193
 	.byte 0
 
 EverGrandeCity_PhoebesRoom_MapScript2_228184: @ 8228184

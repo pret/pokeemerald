@@ -1,7 +1,7 @@
 FarawayIsland_Interior_MapScripts:: @ 8267CFA
 	map_script EVENT_TAG_ON_MAP_RESUME, FarawayIsland_Interior_MapScript1_267D54
 	map_script EVENT_TAG_ON_MAP_TRANSITION, FarawayIsland_Interior_MapScript1_267D72
-	map_script EVENT_TAG_ON_INPUT_TABLE, FarawayIsland_Interior_MapScript2_267D98
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, FarawayIsland_Interior_MapScript2_267D98
 	map_script EVENT_TAG_ON_RETURN_TO_FIELD, FarawayIsland_Interior_MapScript1_267D0F
 	.byte 0
 

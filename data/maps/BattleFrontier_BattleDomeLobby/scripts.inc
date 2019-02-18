@@ -1,6 +1,6 @@
 BattleFrontier_BattleDomeLobby_MapScripts:: @ 82497E2
 	map_script EVENT_TAG_ON_MAP_RESUME, BattleFrontier_BattleDomeLobby_MapScript1_2497F2
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleDomeLobby_MapScript2_24980F
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattleDomeLobby_MapScript2_24980F
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomeLobby_MapScript2_2497FB
 	.byte 0
 

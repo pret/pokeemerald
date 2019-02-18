@@ -1,5 +1,5 @@
 TrainerHill_Elevator_MapScripts:: @ 826934F
-	map_script EVENT_TAG_ON_INPUT_TABLE, TrainerHill_Elevator_MapScript2_269355
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, TrainerHill_Elevator_MapScript2_269355
 	.byte 0
 
 TrainerHill_Elevator_MapScript2_269355: @ 8269355

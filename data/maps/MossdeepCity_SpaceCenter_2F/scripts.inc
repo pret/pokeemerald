@@ -1,6 +1,6 @@
 MossdeepCity_SpaceCenter_2F_MapScripts:: @ 8223D58
 	map_script EVENT_TAG_ON_MAP_TRANSITION, MossdeepCity_SpaceCenter_2F_MapScript1_223D63
-	map_script EVENT_TAG_ON_INPUT_TABLE, MossdeepCity_SpaceCenter_2F_MapScript2_223DB5
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, MossdeepCity_SpaceCenter_2F_MapScript2_223DB5
 	.byte 0
 
 MossdeepCity_SpaceCenter_2F_MapScript1_223D63: @ 8223D63

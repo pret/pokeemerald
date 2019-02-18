@@ -1,6 +1,6 @@
 LinkContestRoom1_MapScripts:: @ 823B781
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, LinkContestRoom1_MapScript2_23B81F
-	map_script EVENT_TAG_ON_INPUT_TABLE, LinkContestRoom1_MapScript2_23B815
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LinkContestRoom1_MapScript2_23B815
 	map_script EVENT_TAG_ON_MAP_TRANSITION, LinkContestRoom1_MapScript1_23B79F
 	map_script EVENT_TAG_ON_MAP_RESUME, LinkContestRoom1_MapScript1_23B803
 	map_script EVENT_TAG_ON_RETURN_TO_FIELD, LinkContestRoom1_MapScript1_23B79B

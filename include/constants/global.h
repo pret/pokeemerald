@@ -76,7 +76,7 @@
 
 // Constants for map header tags.
 #define EVENT_TAG_ON_MAP_LOAD 1
-#define EVENT_TAG_ON_INPUT_TABLE 2
+#define EVENT_TAG_ON_MAP_FRAME_TABLE 2
 #define EVENT_TAG_ON_MAP_TRANSITION 3
 #define EVENT_TAG_ON_WARP_INTO_MAP_TABLE 4
 #define EVENT_TAG_ON_MAP_RESUME 5

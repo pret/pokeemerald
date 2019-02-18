@@ -1,5 +1,5 @@
 VerdanturfTown_BattleTentLobby_MapScripts:: @ 82016D0
-	map_script EVENT_TAG_ON_INPUT_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016EF
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016EF
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016DB
 	.byte 0
 

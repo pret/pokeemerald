@@ -1,7 +1,7 @@
 Route125_MapScripts:: @ 81F6748
 	map_script EVENT_TAG_ON_MAP_TRANSITION, Route125_MapScript1_1F6758
 	map_script EVENT_TAG_ON_MAP_LOAD, Route125_MapScript1_1F6783
-	map_script EVENT_TAG_ON_INPUT_TABLE, Route125_MapScript2_1F679A
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, Route125_MapScript2_1F679A
 	.byte 0
 
 Route125_MapScript1_1F6758: @ 81F6758

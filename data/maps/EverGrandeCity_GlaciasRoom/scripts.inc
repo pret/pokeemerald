@@ -1,5 +1,5 @@
 EverGrandeCity_GlaciasRoom_MapScripts:: @ 8228412
-	map_script EVENT_TAG_ON_INPUT_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_228431
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_228431
 	map_script EVENT_TAG_ON_MAP_LOAD, EverGrandeCity_GlaciasRoom_MapScript1_228448
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_GlaciasRoom_MapScript2_228422
 	.byte 0

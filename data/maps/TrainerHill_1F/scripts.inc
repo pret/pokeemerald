@@ -1,6 +1,6 @@
 TrainerHill_1F_MapScripts:: @ 8268F71
 	map_script EVENT_TAG_ON_MAP_RESUME, TrainerHill_1F_MapScript1_2C8336
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, TrainerHill_1F_MapScript2_2C8372
-	map_script EVENT_TAG_ON_INPUT_TABLE, TrainerHill_1F_MapScript2_2C8381
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, TrainerHill_1F_MapScript2_2C8381
 	.byte 0
 

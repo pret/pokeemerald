@@ -2,7 +2,7 @@ Route111_MapScripts:: @ 81F0CA7
 	map_script EVENT_TAG_ON_MAP_LOAD, Route111_MapScript1_1F0CBC
 	map_script EVENT_TAG_ON_MAP_TRANSITION, Route111_MapScript1_1F0D87
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, Route111_MapScript2_1F0E46
-	map_script EVENT_TAG_ON_INPUT_TABLE, Route111_MapScript2_1F0E56
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, Route111_MapScript2_1F0E56
 	.byte 0
 
 Route111_MapScript1_1F0CBC: @ 81F0CBC

@@ -1,5 +1,5 @@
 MossdeepCity_GameCorner_1F_MapScripts:: @ 8224B27
-	map_script EVENT_TAG_ON_INPUT_TABLE, MossdeepCity_GameCorner_1F_MapScript2_224B41
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, MossdeepCity_GameCorner_1F_MapScript2_224B41
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, MossdeepCity_GameCorner_1F_MapScript2_224B37
 	map_script EVENT_TAG_ON_MAP_LOAD, MossdeepCity_GameCorner_1F_MapScript1_276BBE
 	.byte 0

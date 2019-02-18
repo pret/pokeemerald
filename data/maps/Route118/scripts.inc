@@ -1,7 +1,7 @@
 Route118_MapScripts:: @ 81F3DBC
 	map_script EVENT_TAG_ON_MAP_TRANSITION, Route118_MapScript1_1F3DCC
 	map_script EVENT_TAG_ON_MAP_LOAD, Route118_MapScript1_1F3DF3
-	map_script EVENT_TAG_ON_INPUT_TABLE, Route118_MapScript2_1F3E0A
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, Route118_MapScript2_1F3E0A
 	.byte 0
 
 Route118_MapScript1_1F3DCC: @ 81F3DCC

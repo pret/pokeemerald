@@ -1,5 +1,5 @@
 AbandonedShip_HiddenFloorRooms_MapScripts:: @ 8238C49
-	map_script EVENT_TAG_ON_INPUT_TABLE, AbandonedShip_HiddenFloorRooms_MapScript2_238C4F
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, AbandonedShip_HiddenFloorRooms_MapScript2_238C4F
 	.byte 0
 
 AbandonedShip_HiddenFloorRooms_MapScript2_238C4F: @ 8238C4F

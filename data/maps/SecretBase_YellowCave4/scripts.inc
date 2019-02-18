@@ -1,7 +1,7 @@
 SecretBase_YellowCave4_MapScripts:: @ 823B483
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, SecretBase_RedCave1_MapScript2_23B498
 	map_script EVENT_TAG_ON_MAP_TRANSITION, SecretBase_RedCave1_MapScript1_23B4A2
-	map_script EVENT_TAG_ON_INPUT_TABLE, SecretBase_RedCave1_MapScript2_23B4AE
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SecretBase_RedCave1_MapScript2_23B4AE
 	map_script EVENT_TAG_ON_MAP_RESUME, SecretBase_RedCave1_MapScript1_23B4B8
 	.byte 0
 

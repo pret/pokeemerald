@@ -1,6 +1,6 @@
 BattleFrontier_BattlePikeRandomRoom3_MapScripts:: @ 825E41A
 	map_script EVENT_TAG_ON_MAP_RESUME, BattleFrontier_BattlePikeRandomRoom3_MapScript1_25E47A
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E42A
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E42A
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRandomRoom3_MapScript2_25E466
 	.byte 0
 

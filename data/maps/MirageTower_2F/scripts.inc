@@ -1,5 +1,5 @@
 MirageTower_2F_MapScripts:: @ 823AD11
-	map_script EVENT_TAG_ON_INPUT_TABLE, MirageTower_2F_MapScript2_2A8327
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, MirageTower_2F_MapScript2_2A8327
 	map_script EVENT_TAG_ON_MAP_TRANSITION, MirageTower_2F_MapScript1_2A8331
 	map_script EVENT_TAG_ON_MAP_RESUME, MirageTower_2F_MapScript1_23AD21
 	.byte 0

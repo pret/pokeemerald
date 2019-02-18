@@ -1,5 +1,5 @@
 SkyPillar_4F_MapScripts:: @ 8239671
-	map_script EVENT_TAG_ON_INPUT_TABLE, SkyPillar_4F_MapScript2_2A8327
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, SkyPillar_4F_MapScript2_2A8327
 	map_script EVENT_TAG_ON_MAP_TRANSITION, SkyPillar_4F_MapScript1_239681
 	map_script EVENT_TAG_ON_MAP_RESUME, SkyPillar_4F_MapScript1_239696
 	.byte 0

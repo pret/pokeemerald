@@ -1,7 +1,7 @@
 BattleFrontier_BattleTowerLobby_MapScripts:: @ 823E67B
 	map_script EVENT_TAG_ON_MAP_RESUME, BattleFrontier_BattleTowerLobby_MapScript1_23E690
 	map_script EVENT_TAG_ON_MAP_TRANSITION, BattleFrontier_BattleTowerLobby_MapScript1_23E694
-	map_script EVENT_TAG_ON_INPUT_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6C9
 	.byte 0
 
