@@ -2376,18 +2376,18 @@ void RecordMixTrainerNames(void)
         s32 i;
         s32 j;
         s32 nextSpace;
-        s32 connectedTrainerRecordIndecies[5];
+        s32 connectedTrainerRecordIndicies[5];
         struct TrainerNameRecord *newRecords = calloc(20, sizeof(struct TrainerNameRecord));
 
         // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
-            connectedTrainerRecordIndecies[i] = -1;
+            connectedTrainerRecordIndicies[i] = -1;
             for (j = 0; j < 20; j++)
             {
                 if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
                 {
-                    connectedTrainerRecordIndecies[i] = j;
+                    connectedTrainerRecordIndicies[i] = j;
                 }
             }
         }
@@ -2401,9 +2401,9 @@ void RecordMixTrainerNames(void)
                 CopyTrainerRecord(&newRecords[nextSpace], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
 
                 // If we already had a record for this trainer, wipe it so that the next step doesn't duplicate it.
-                if (connectedTrainerRecordIndecies[i] >= 0)
+                if (connectedTrainerRecordIndicies[i] >= 0)
                 {
-                    memset(gSaveBlock1Ptr->trainerNameRecords[connectedTrainerRecordIndecies[i]].trainerName, 0, 8);
+                    memset(gSaveBlock1Ptr->trainerNameRecords[connectedTrainerRecordIndicies[i]].trainerName, 0, 8);
                 }
                 nextSpace++;
             }

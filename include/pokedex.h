@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
-extern u8 gUnusedU8;
+extern u8 gUnusedPokedexU8;
 extern void (*gUnknown_030060B4)(void);
 
 #define HOENN_DEX_COUNT 202

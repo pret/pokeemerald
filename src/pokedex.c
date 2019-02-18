@@ -38,7 +38,7 @@ static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 
 // IWRAM common
 // This is written to, but never read.
-u8 gUnusedU8;
+u8 gUnusedPokedexU8;
 void (*gUnknown_030060B4)(void);
 
 struct PokedexOption
@@ -1226,7 +1226,7 @@ void ResetPokedex(void)
 
     gUnknown_02039B50 = 0;
     gUnknown_02039B52 = 64;
-    gUnusedU8 = 0;
+    gUnusedPokedexU8 = 0;
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
     gSaveBlock2Ptr->pokedex.order = 0;
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
