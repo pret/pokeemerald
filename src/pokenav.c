@@ -16,6 +16,7 @@
 #include "gba/macro.h"
 #include "decompress.h"
 #include "strings.h"
+#include "constants/rgb.h"
 
 #define UNKNOWN_OFFSET 100000
 
@@ -131,7 +132,7 @@ void sub_81C7C94(void);
 u32 (*const gUnknown_0861F3EC[15][7])(void) =
 {
     {
-        (u32 (*)(void))sub_81C9298,
+        sub_81C9298,
         sub_81C941C,
         sub_81C9924,
         sub_81C9990,
@@ -287,9 +288,9 @@ const struct WindowTemplate gUnknown_0861FA08[2] =
     {
         .bg = 0,
         .tilemapLeft = 1,
-        .tilemapTop = 0x16,
-        .width = 0x10,
-        .height = 0x2,
+        .tilemapTop = 22,
+        .width = 16,
+        .height = 2,
         .paletteNum = 0,
         .baseBlock = 0x36,
     },
@@ -384,7 +385,9 @@ bool32 sub_81C70D8(u32 a0)
         return TRUE;
     }
     else
+    {
         return FALSE;
+    }
 }
 
 bool32 sub_81C7124(u32 a0)
@@ -462,6 +465,7 @@ void sub_81C71E4(u8 taskId)
         break;
     case 2:
     case 3:
+        break;
     }
 }
 
@@ -469,7 +473,9 @@ void CB2_PokeNav(void)
 {
     gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
     if (gUnknown_0203CF40 == NULL)
+    {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+    }
     else
     {
         sub_81C7360(gUnknown_0203CF40);
@@ -494,7 +500,9 @@ void sub_81C72BC()
     {
         gUnknown_0203CF40 = Alloc(sizeof(struct UnknownStruct_0203CF40));
         if (gUnknown_0203CF40 == NULL)
+        {
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        }
         else
         {
             sub_81C7360(gUnknown_0203CF40);
@@ -549,7 +557,7 @@ bool32 AnyMonHasRibbon()
     s32 i;
     s32 j;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i],  MON_DATA_SANITY_HAS_SPECIES)
             && !GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG)
@@ -559,9 +567,9 @@ bool32 AnyMonHasRibbon()
         }
     }
 
-    for (j = 0; j < 14; j++)
+    for (j = 0; j < TOTAL_BOXES_COUNT; j++)
     {
-        for (i = 0; i < 30; i++) 
+        for (i = 0; i < IN_BOX_COUNT; i++) 
         {
             if (CheckBoxMonSanityAt(j, i)
                 && GetBoxMonDataAt(j, i, MON_DATA_RIBBON_COUNT) != 0)
@@ -625,7 +633,9 @@ void sub_81C742C(u8 taskId)
             gUnknown_0861F3EC[gUnknown_0203CF40->field4][6]();
             gUnknown_0861F3EC[gUnknown_0203CF40->field4][5]();
             if (sub_81C756C(v1))
+            {
                 dataPtr[0] = 4;
+            }
             else
             {
                 sub_81C7710();
@@ -654,6 +664,7 @@ void sub_81C742C(u8 taskId)
             else
                 SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         }
+        break;
     }
 }
 
@@ -711,10 +722,7 @@ void *sub_81C763C(u32 index)
 void sub_81C7650(u32 index)
 {
     if (gUnknown_0203CF40->field10[index] != NULL)
-    {
-        Free(gUnknown_0203CF40->field10[index]);
-        gUnknown_0203CF40->field10[index] = NULL;
-    }
+        FREE_AND_SET_NULL(gUnknown_0203CF40->field10[index]);
 }
 
 u16 sub_81C767C(void)
@@ -752,7 +760,9 @@ bool32 sub_81C76C4(void)
 
     v1 = (struct UnknownStruct_sub_81C76C4*)sub_81C761C(0, sizeof(struct UnknownStruct_sub_81C76C4));
     if (v1 == NULL)
+    {
         return FALSE;
+    }
     else
     {
         ResetSpriteData();
@@ -773,7 +783,7 @@ void sub_81C7710(void)
 {
     PlaySE(SE_PN_OFF);
     sub_81CAADC();
-    BeginNormalPaletteFade(-1, -1, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
 }
 
 bool32 sub_81C7738(void)
@@ -785,7 +795,9 @@ bool32 sub_81C7738(void)
         FreeAllWindowBuffers();
         return FALSE;
     } else
+    {
         return TRUE;
+    }
 }
 
 u32 sub_81C7764(s32 a0)
@@ -795,7 +807,7 @@ u32 sub_81C7764(s32 a0)
     switch (a0)
     {
     case 0:
-        SetGpuReg(0, 0x82 << 5);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         FreeAllWindowBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, &gUnknown_0861FA04, 1);
@@ -923,8 +935,10 @@ void sub_81C795C(const struct SpritePalette *palettes)
     for (current = palettes; current->data != NULL; current++) 
     {
         index = AllocSpritePalette(current->tag);
-        if (index == 0xFF) 
+        if (index == 0xFF)
+        {
             break;
+        }
         else
         {
             index = (index * 16) + 0x100;
@@ -1084,13 +1098,13 @@ void sub_81C7AC0(s32 a0)
         BeginNormalPaletteFade(v1[5], -2, 0, 16, a0);
         break;
     case 1:
-        BeginNormalPaletteFade(v1[5], -2, 16, 0, 0);
+        BeginNormalPaletteFade(v1[5], -2, 16, 0, RGB_BLACK);
         break;
     case 2:
-        BeginNormalPaletteFade(-1, -2, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
         break;
     case 3:
-        BeginNormalPaletteFade(-1, -2, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 16, 0, RGB_BLACK);
         break;
     }
 }
@@ -1102,7 +1116,7 @@ bool32 IsPaletteFadeActive(void)
 
 void sub_81C7B40(void)
 {
-    BlendPalettes(0xFFFEFFFE, 16, 0);
+    BlendPalettes(0xFFFEFFFE, 16, RGB_BLACK);
 }
 
 void sub_81C7B54(const struct BgTemplate *a0, s32 a1)
@@ -1165,9 +1179,8 @@ void sub_81C7C28(void)
 
     sub_81C795C(gUnknown_0861FA54);
     v2 = IndexOfSpritePaletteTag(0);
-    v3 = 0x80 << 9 << v2;
-    v1[5] = -2 & ~v3;
-    spriteId = CreateSprite(&gUnknown_0861FB04, 0xDC, 0xC, 0);
+    v1[5] = ~1 & ~(0x10000 << v2);
+    spriteId = CreateSprite(&gUnknown_0861FB04, 220, 12, 0);
     v1[6] = (u32)(&gSprites[spriteId]);
 }
 
