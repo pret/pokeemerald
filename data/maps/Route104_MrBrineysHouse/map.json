@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT",
       "movement_range_x": 3,
       "movement_range_y": 3,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route104_MrBrineysHouse_EventScript_229D67",
       "flag": "FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 3,
       "movement_range_y": 3,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route104_MrBrineysHouse_EventScript_229E5D",
       "flag": "FLAG_HIDE_BRINEYS_HOUSE_PEEKO"
     }

@@ -3104,7 +3104,7 @@ static void sub_8083170(u16 a0, u16 a1)
     s32 var1, var2, var3, var4;
     u16 *vram;
 
-    vram = (u16*)(VRAM + 0x6000);
+    vram = (u16*)(BG_SCREEN_ADDR(12));
     var1 = (a0 * 64) / a1;
     var2 = var1 / 8;
     for (var4 = 0; var4 < var2; var4++)

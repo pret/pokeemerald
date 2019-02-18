@@ -161,8 +161,8 @@ string generate_map_events_text(Json map_data) {
                  << obj_event["movement_type"].string_value() << ", "
                  << obj_event["movement_range_x"].int_value() << ", "
                  << obj_event["movement_range_y"].int_value() << ", "
-                 << obj_event["trainer_type"].int_value() << ", "
-                 << obj_event["trainer_sight_or_berry_tree_id"].int_value() << ", "
+                 << obj_event["trainer_type"].string_value() << ", "
+                 << obj_event["trainer_sight_or_berry_tree_id"].string_value() << ", "
                  << obj_event["script"].string_value() << ", "
                  << obj_event["flag"].string_value() << "\n";
         }
@@ -197,7 +197,7 @@ string generate_map_events_text(Json map_data) {
                      << coord_event["y"].int_value() << ", "
                      << coord_event["elevation"].int_value() << ", "
                      << coord_event["var"].string_value() << ", "
-                     << coord_event["var_value"].int_value() << ", "
+                     << coord_event["var_value"].string_value() << ", "
                      << coord_event["script"].string_value() << "\n";
             }
             else if (coord_event["type"] == "weather") {

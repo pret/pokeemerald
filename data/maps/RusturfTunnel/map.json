@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_22CE76",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_LOVER_MAN"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_2907A6",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_291136",
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_POKE_BALL"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_291143",
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER"
     },
@@ -74,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_OLD_MAN"
     },
@@ -87,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_22D0C2",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_22D0AF",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_PEEKO"
     },
@@ -113,8 +113,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_2907A6",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2"
     },
@@ -126,8 +126,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "RusturfTunnel_EventScript_22D1B1",
       "flag": "0"
     },
@@ -139,8 +139,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "RusturfTunnel_EventScript_22CE5F",
       "flag": "FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN"
     }
@@ -175,7 +175,7 @@
       "y": 4,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "RusturfTunnel_EventScript_22D071"
     },
     {
@@ -184,7 +184,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RusturfTunnel_EventScript_22D083"
     },
     {
@@ -193,7 +193,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_RUSTURF_TUNNEL_STATE",
-      "var_value": 2,
+      "var_value": "2",
       "script": "RusturfTunnel_EventScript_22D083"
     },
     {
@@ -202,7 +202,7 @@
       "y": 4,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "RusturfTunnel_EventScript_22D077"
     },
     {
@@ -211,7 +211,7 @@
       "y": 5,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "RusturfTunnel_EventScript_22D07D"
     }
   ],

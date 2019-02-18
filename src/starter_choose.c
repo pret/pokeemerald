@@ -393,8 +393,8 @@ void CB2_ChooseStarter(void)
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
 
     LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
-    LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x3000));
-    LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x3800));
+    LZ77UnCompVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(6)));
+    LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(7)));
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_085B1E00, ARRAY_COUNT(gUnknown_085B1E00));

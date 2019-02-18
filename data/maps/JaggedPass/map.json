@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "JaggedPass_EventScript_230785",
       "flag": "0"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 4,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "JaggedPass_EventScript_2307FB",
       "flag": "0"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "JaggedPass_EventScript_291184",
       "flag": "FLAG_ITEM_JAGGED_PASS_BURN_HEAL"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "JaggedPass_EventScript_23079C",
       "flag": "0"
     },
@@ -74,8 +74,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "JaggedPass_EventScript_230718",
       "flag": "FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD"
     },
@@ -87,8 +87,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "JaggedPass_EventScript_230871",
       "flag": "0"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "JaggedPass_EventScript_23085A",
       "flag": "0"
     }
@@ -185,7 +185,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_0x40C8",
-      "var_value": 1,
+      "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
     {
@@ -194,7 +194,7 @@
       "y": 20,
       "elevation": 3,
       "var": "VAR_0x40C8",
-      "var_value": 1,
+      "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
     {
@@ -203,7 +203,7 @@
       "y": 20,
       "elevation": 3,
       "var": "VAR_0x40C8",
-      "var_value": 1,
+      "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
     {
@@ -212,7 +212,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_0x40C8",
-      "var_value": 1,
+      "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     },
     {
@@ -221,7 +221,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_0x40C8",
-      "var_value": 1,
+      "var_value": "1",
       "script": "JaggedPass_EventScript_2306BB"
     }
   ],

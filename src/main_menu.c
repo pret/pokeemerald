@@ -1147,7 +1147,7 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
     LZ77UnCompVram(sBirchSpeechShadowGfx, (void*)VRAM);
-    LZ77UnCompVram(sBirchSpeechBgMap, (void*)(VRAM + 0x3800));
+    LZ77UnCompVram(sBirchSpeechBgMap, (void*)(BG_SCREEN_ADDR(7)));
     LoadPalette(sBirchSpeechBgPals, 0, 64);
     LoadPalette(sBirchSpeechPlatformBlackPal, 1, 16);
     ScanlineEffect_Stop();
@@ -1687,7 +1687,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     ResetPaletteFade();
     LZ77UnCompVram(sBirchSpeechShadowGfx, (u8*)VRAM);
-    LZ77UnCompVram(sBirchSpeechBgMap, (u8*)(VRAM + 0x3800));
+    LZ77UnCompVram(sBirchSpeechBgMap, (u8*)(BG_SCREEN_ADDR(7)));
     LoadPalette(sBirchSpeechBgPals, 0, 64);
     LoadPalette(&sBirchSpeechBgGradientPal[1], 1, 16);
     ResetTasks();
