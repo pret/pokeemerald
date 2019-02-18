@@ -4,7 +4,7 @@ PacifidlogTown_House2_MapScripts:: @ 8203791
 PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	call PacifidlogTown_House2_EventScript_2037DE
 	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_20387E
 	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_2037F8

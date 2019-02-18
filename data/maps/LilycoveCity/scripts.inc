@@ -33,7 +33,7 @@ LilycoveCity_EventScript_1E2B6B:: @ 81E2B6B
 LilycoveCity_EventScript_1E2BD8:: @ 81E2BD8
 	lock
 	faceplayer
-	dodailyevents
+	dotimebasedevents
 	goto_if_set FLAG_DAILY_LILYCOVE_RECEIVED_BERRY, LilycoveCity_EventScript_1E2C18
 	msgbox LilycoveCity_Text_2A7244, MSGBOX_DEFAULT
 	random 10

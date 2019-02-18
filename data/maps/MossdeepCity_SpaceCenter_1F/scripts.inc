@@ -52,7 +52,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	faceplayer
 	compare VAR_0x405D, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_223024
-	dodailyevents
+	dotimebasedevents
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
@@ -74,7 +74,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22301B:: @ 822301B
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
-	dodailyevents
+	dotimebasedevents
 	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
