@@ -145,9 +145,11 @@ int main(int argc, char **argv)
 
             while ((incDirectiveType = file.ReadUntilIncDirective(path)) != IncDirectiveType::None)
             {
-                if (path.back() == 'h') {
+                if (path.back() == 'h')
+                {
                     std::string newPath("include/" + path);
-                    if (!CanOpenFile(newPath)) {
+                    if (!CanOpenFile(newPath))
+                    {
                         newPath = "include/constants/" + path;
                     }
                     path = newPath;
