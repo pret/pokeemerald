@@ -82,26 +82,26 @@
 #define FACING_FORCED_RIGHT 10
 
 // event scripts
-extern const u8 gEventScript_WhiteOut[];
-extern const u8 gEventScript_ResetMrBriney[];
-extern const u8 gEventScript_DoLinkRoomExit[];
+extern const u8 EventScript_WhiteOut[];
+extern const u8 EventScript_ResetMrBriney[];
+extern const u8 EventScript_DoLinkRoomExit[];
 extern const u8 gEventScript_TradeRoom_TooBusyToNotice[];
 extern const u8 gEventScript_TradeRoom_ReadTrainerCard_NoColor[];
 extern const u8 gEventScript_TradeRoom_ReadTrainerCard_Normal[];
-extern const u8 gEventScript_DoubleBattleColosseum_PlayerSpot0[];
-extern const u8 gEventScript_DoubleBattleColosseum_PlayerSpot1[];
-extern const u8 gEventScript_DoubleBattleColosseum_PlayerSpot2[];
-extern const u8 gEventScript_DoubleBattleColosseum_PlayerSpot3[];
-extern const u8 gEventScript_RecordCenter_Spot0[];
-extern const u8 gEventScript_RecordCenter_Spot1[];
-extern const u8 gEventScript_RecordCenter_Spot2[];
-extern const u8 gEventScript_RecordCenter_Spot3[];
-extern const u8 gEventScript_SingleBattleColosseum_PlayerSpot0[];
-extern const u8 gEventScript_SingleBattleColosseum_PlayerSpot1[];
-extern const u8 gEventScript_TradeCenter_Chair1[];
-extern const u8 gEventScript_TradeCenter_Chair0[];
-extern const u8 gEventScript_ConfirmLeaveTradeRoom[];
-extern const u8 gEventScript_TerminateLink[];
+extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot0[];
+extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot1[];
+extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot2[];
+extern const u8 EventScript_DoubleBattleColosseum_PlayerSpot3[];
+extern const u8 EventScript_RecordCenter_Spot0[];
+extern const u8 EventScript_RecordCenter_Spot1[];
+extern const u8 EventScript_RecordCenter_Spot2[];
+extern const u8 EventScript_RecordCenter_Spot3[];
+extern const u8 EventScript_SingleBattleColosseum_PlayerSpot0[];
+extern const u8 EventScript_SingleBattleColosseum_PlayerSpot1[];
+extern const u8 EventScript_TradeCenter_Chair1[];
+extern const u8 EventScript_TradeCenter_Chair0[];
+extern const u8 EventScript_ConfirmLeaveTradeRoom[];
+extern const u8 EventScript_TerminateLink[];
 
 extern const struct MapLayout *const gMapLayouts[];
 extern const struct MapHeader *const *const gMapGroups[];
@@ -186,7 +186,7 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
 static u16 GetCenterScreenMetatileBehavior(void);
 
 // IWRAM bss vars
-IWRAM_DATA static void *sUnusedCallback;
+IWRAM_DATA static void *sUnusedOverworldCallback;
 IWRAM_DATA static u8 sPlayerTradingStates[4];
 // This callback is called with a player's key code. It then returns an
 // adjusted key code, effectively intercepting the input before anything
@@ -203,7 +203,7 @@ u16 *gBGTilemapBuffers3;
 u16 gHeldKeyCodeToSend;
 void (*gFieldCallback)(void);
 bool8 (*gFieldCallback2)(void);
-u8 gLinkSelfPlayerId; // This is our player id in a multiplayer mode.
+u8 LocalLinkPlayerId; // This is our player id in a multiplayer mode.
 u8 gFieldLinkPlayerCount;
 
 // EWRAM vars
@@ -383,7 +383,7 @@ static void (*const gMovementStatusHandler[])(struct LinkPlayerEventObject *, st
 // code
 void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(gEventScript_WhiteOut);
+    ScriptContext2_RunNewScript(EventScript_WhiteOut);
     SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
@@ -409,7 +409,7 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    ScriptContext2_RunNewScript(gEventScript_ResetMrBriney);
+    ScriptContext2_RunNewScript(EventScript_ResetMrBriney);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -1122,7 +1122,7 @@ u16 GetCurrLocationDefaultMusic(void)
     }
     else
     {
-        if (gSaveBlock1Ptr->pos.x < LINK_KEY_CODE_START_BUTTON)
+        if (gSaveBlock1Ptr->pos.x < 24)
             return MUS_DOORO_X1;
         else
             return MUS_GRANROAD;
@@ -1265,7 +1265,7 @@ static void PlayAmbientCry(void)
      && !MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
         return;
     pan = (Random() % 88) + 212;
-    volume = (Random() % LINK_KEY_CODE_UNK_8) + 50;
+    volume = (Random() % 30) + 50;
     PlayCry2(sAmbientCrySpecies, pan, volume, 1);
 }
 
@@ -1501,7 +1501,7 @@ void SetMainCallback1(MainCallback cb)
 // This function is never called.
 void SetUnusedCallback(void *func)
 {
-    sUnusedCallback = func;
+    sUnusedOverworldCallback = func;
 }
 
 static bool8 map_post_load_hook_exec(void)
@@ -2194,13 +2194,13 @@ static void sub_8086A80(void)
 
 static void SetCameraToTrackGuestPlayer(void)
 {
-    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLinkSelfPlayerId));
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(LocalLinkPlayerId));
 }
 
 // Duplicate function.
 static void SetCameraToTrackGuestPlayer_2(void)
 {
-    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLinkSelfPlayerId));
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(LocalLinkPlayerId));
 }
 
 static void sub_8086AE4(void)
@@ -2210,7 +2210,7 @@ static void sub_8086AE4(void)
 
     // This is a hack of some kind; it's undone in sub_8086B14, which is called
     // soon after this function.
-    sub_8088B3C(x + gLinkSelfPlayerId, y);
+    sub_8088B3C(x + LocalLinkPlayerId, y);
 }
 
 static void sub_8086B14(void)
@@ -2219,7 +2219,7 @@ static void sub_8086B14(void)
     u16 x, y;
 
     GetCameraFocusCoords(&x, &y);
-    x -= gLinkSelfPlayerId;
+    x -= LocalLinkPlayerId;
 
     for (i = 0; i < gFieldLinkPlayerCount; i++)
     {
@@ -2242,7 +2242,7 @@ static void CB1_UpdateLinkState(void)
 {
     if (gWirelessCommType == 0 || !IsRfuRecvQueueEmpty() || !IsSendingKeysToLink())
     {
-        u8 selfId = gLinkSelfPlayerId;
+        u8 selfId = LocalLinkPlayerId;
         UpdateAllLinkPlayers(gLinkPartnersHeldKeys, selfId);
 
         // Note: Because guestId is between 0 and 4, while the smallest key code is
@@ -2307,7 +2307,7 @@ static bool32 AreAllPlayersInState(u16 tradingState)
     return TRUE;
 }
 
-static bool32 AreAnyPlayersInState(u16 tradingState)
+static bool32 AreAnyPlayersInTradingState(u16 tradingState)
 {
     s32 i;
     s32 count = gFieldLinkPlayerCount;
@@ -2329,17 +2329,17 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
         {
             *forceFacing = GetDirectionForEventScript(script);
             sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-            if (trainer->isSelf)
+            if (trainer->isLocalPlayer)
             {
                 SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
                 sub_8087530(script);
             }
             return;
         }
-        if (AreAnyPlayersInState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
+        if (AreAnyPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
         {
             sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-            if (trainer->isSelf)
+            if (trainer->isLocalPlayer)
             {
                 SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
                 sub_8087584();
@@ -2353,7 +2353,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
             if (sub_8087340_2(trainer))
             {
                 sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-                if (trainer->isSelf)
+                if (trainer->isLocalPlayer)
                 {
                     SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
                     InitLinkRoomStartMenuScript();
@@ -2364,7 +2364,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
             if (PlayerIsAtSouthExit(trainer) == TRUE)
             {
                 sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-                if (trainer->isSelf)
+                if (trainer->isLocalPlayer)
                 {
                     SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
                     CreateConfirmLeaveTradeRoomPrompt();
@@ -2376,7 +2376,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
             if (script)
             {
                 sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-                if (trainer->isSelf)
+                if (trainer->isLocalPlayer)
                 {
                     SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
                     InitMenuBasedScript(script);
@@ -2387,7 +2387,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
             if (sub_8087340(trainer))
             {
                 sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-                if (trainer->isSelf)
+                if (trainer->isLocalPlayer)
                 {
                     SetKeyInterceptCallback(KeyInterCB_DeferToRecvQueue);
                     sub_8087510();
@@ -2398,7 +2398,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
             if (sub_8087340(trainer))
             {
                 sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_BUSY;
-                if (trainer->isSelf)
+                if (trainer->isLocalPlayer)
                 {
                     SetKeyInterceptCallback(KeyInterCB_DeferToSendQueue);
                     sub_8087510();
@@ -2418,7 +2418,7 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct TradeRoomPlay
         break;
     case LINK_KEY_CODE_UNK_4:
         sPlayerTradingStates[playerId] = PLAYER_TRADING_STATE_IDLE;
-        if (trainer->isSelf)
+        if (trainer->isLocalPlayer)
             SetKeyInterceptCallback(KeyInterCB_SelfIdle);
         break;
     case LINK_KEY_CODE_UNK_7:
@@ -2631,7 +2631,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
         CheckRfuKeepAliveTimer();
     if (AreAllPlayersInState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
     {
-        ScriptContext1_SetupScript(gEventScript_DoLinkRoomExit);
+        ScriptContext1_SetupScript(EventScript_DoLinkRoomExit);
         SetKeyInterceptCallback(KeyInterCB_SendNothing);
     }
     return LINK_KEY_CODE_EMPTY;
@@ -2651,11 +2651,11 @@ static u16 KeyInterCB_SendNothing_2(u32 key)
 
 u32 sub_8087214(void)
 {
-    if (AreAnyPlayersInState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
+    if (AreAnyPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM) == TRUE)
         return 2;
-    if (sPlayerKeyInterceptCallback == sub_8087170 && sPlayerTradingStates[gLinkSelfPlayerId] != PLAYER_TRADING_STATE_UNK_2)
+    if (sPlayerKeyInterceptCallback == sub_8087170 && sPlayerTradingStates[LocalLinkPlayerId] != PLAYER_TRADING_STATE_UNK_2)
         return 0;
-    if (sPlayerKeyInterceptCallback == KeyInterCB_DoNothingAndKeepAlive && sPlayerTradingStates[gLinkSelfPlayerId] == PLAYER_TRADING_STATE_BUSY)
+    if (sPlayerKeyInterceptCallback == KeyInterCB_DoNothingAndKeepAlive && sPlayerTradingStates[LocalLinkPlayerId] == PLAYER_TRADING_STATE_BUSY)
         return 2;
     if (AreAllPlayersInState(PLAYER_TRADING_STATE_UNK_2) != FALSE)
         return 1;
@@ -2664,7 +2664,7 @@ u32 sub_8087214(void)
 
 bool32 sub_808727C(void)
 {
-    return AreAnyPlayersInState(PLAYER_TRADING_STATE_EXITING_ROOM);
+    return AreAnyPlayersInTradingState(PLAYER_TRADING_STATE_EXITING_ROOM);
 }
 
 u16 sub_8087288(void)
@@ -2698,7 +2698,7 @@ static void LoadTradeRoomPlayer(s32 linkPlayerId, s32 myPlayerId, struct TradeRo
     s16 x, y;
 
     trainer->playerId = linkPlayerId;
-    trainer->isSelf = (linkPlayerId == myPlayerId) ? 1 : 0;
+    trainer->isLocalPlayer = (linkPlayerId == myPlayerId) ? 1 : 0;
     trainer->c = gLinkPlayerEventObjects[linkPlayerId].movementMode;
     trainer->facing = GetLinkPlayerFacingDirection(linkPlayerId);
     GetLinkPlayerCoords(linkPlayerId, &x, &y);
@@ -2762,7 +2762,7 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
 
     if (linkPlayerId != 4)
     {
-        if (!player->isSelf)
+        if (!player->isLocalPlayer)
             return gEventScript_TradeRoom_TooBusyToNotice;
         else if (sPlayerTradingStates[linkPlayerId] != PLAYER_TRADING_STATE_IDLE)
             return gEventScript_TradeRoom_TooBusyToNotice;
@@ -2779,29 +2779,29 @@ static const u8 *TryInteractWithPlayer(struct TradeRoomPlayer *player)
 // these event scripts runs.
 static u16 GetDirectionForEventScript(const u8 *script)
 {
-    if (script == gEventScript_DoubleBattleColosseum_PlayerSpot0)
+    if (script == EventScript_DoubleBattleColosseum_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == gEventScript_DoubleBattleColosseum_PlayerSpot1)
+    else if (script == EventScript_DoubleBattleColosseum_PlayerSpot1)
         return FACING_FORCED_LEFT;
-    else if (script == gEventScript_DoubleBattleColosseum_PlayerSpot2)
+    else if (script == EventScript_DoubleBattleColosseum_PlayerSpot2)
         return FACING_FORCED_RIGHT;
-    else if (script == gEventScript_DoubleBattleColosseum_PlayerSpot3)
+    else if (script == EventScript_DoubleBattleColosseum_PlayerSpot3)
         return FACING_FORCED_LEFT;
-    else if (script == gEventScript_RecordCenter_Spot0)
+    else if (script == EventScript_RecordCenter_Spot0)
         return FACING_FORCED_RIGHT;
-    else if (script == gEventScript_RecordCenter_Spot1)
+    else if (script == EventScript_RecordCenter_Spot1)
         return FACING_FORCED_LEFT;
-    else if (script == gEventScript_RecordCenter_Spot2)
+    else if (script == EventScript_RecordCenter_Spot2)
         return FACING_FORCED_RIGHT;
-    else if (script == gEventScript_RecordCenter_Spot3)
+    else if (script == EventScript_RecordCenter_Spot3)
         return FACING_FORCED_LEFT;
-    else if (script == gEventScript_SingleBattleColosseum_PlayerSpot0)
+    else if (script == EventScript_SingleBattleColosseum_PlayerSpot0)
         return FACING_FORCED_RIGHT;
-    else if (script == gEventScript_SingleBattleColosseum_PlayerSpot1)
+    else if (script == EventScript_SingleBattleColosseum_PlayerSpot1)
         return FACING_FORCED_LEFT;
-    else if (script == gEventScript_TradeCenter_Chair0)
+    else if (script == EventScript_TradeCenter_Chair0)
         return FACING_FORCED_RIGHT;
-    else if (script == gEventScript_TradeCenter_Chair1)
+    else if (script == EventScript_TradeCenter_Chair1)
         return FACING_FORCED_LEFT;
     else
         return FACING_NONE;
@@ -2829,7 +2829,7 @@ static void sub_8087530(const u8 *script)
 static void CreateConfirmLeaveTradeRoomPrompt(void)
 {
     PlaySE(SE_WIN_OPEN);
-    ScriptContext1_SetupScript(gEventScript_ConfirmLeaveTradeRoom);
+    ScriptContext1_SetupScript(EventScript_ConfirmLeaveTradeRoom);
     ScriptContext2_Enable();
 }
 
@@ -2842,7 +2842,7 @@ static void InitMenuBasedScript(const u8 *script)
 
 static void sub_8087584(void)
 {
-    ScriptContext1_SetupScript(gEventScript_TerminateLink);
+    ScriptContext1_SetupScript(EventScript_TerminateLink);
     ScriptContext2_Enable();
 }
 
@@ -3046,8 +3046,11 @@ static void SetPlayerFacingDirection(u8 linkPlayerId, u8 facing)
     if (linkPlayerEventObj->active)
     {
         if (facing > FACING_FORCED_RIGHT)
+        {
             eventObj->triggerGroundEffectsOnMove = 1;
-        else {
+        }
+        else
+        {
             // This is a hack to split this code onto two separate lines, without declaring a local variable.
             // C++ style inline variables would be nice here.
             #define TEMP gLinkPlayerMovementModes[linkPlayerEventObj->movementMode](linkPlayerEventObj, eventObj, facing)
@@ -3131,19 +3134,19 @@ static void MovementStatusHandler_TryAdvanceScript(struct LinkPlayerEventObject 
 // even for Left/Right codes.
 static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
 {
-    switch (newFacing - 1)
+    switch (newFacing)
     {
-    case (FACING_UP - 1):
-    case (FACING_FORCED_UP - 1):
+    case FACING_UP:
+    case FACING_FORCED_UP:
         return DIR_NORTH;
-    case (FACING_DOWN - 1):
-    case (FACING_FORCED_DOWN - 1):
+    case FACING_DOWN:
+    case FACING_FORCED_DOWN:
         return DIR_SOUTH;
-    case (FACING_LEFT - 1):
-    case (FACING_FORCED_LEFT - 1):
+    case FACING_LEFT:
+    case FACING_FORCED_LEFT:
         return DIR_WEST;
-    case (FACING_RIGHT - 1):
-    case (FACING_FORCED_RIGHT - 1):
+    case FACING_RIGHT:
+    case FACING_FORCED_RIGHT:
         return DIR_EAST;
     }
     return oldFacing;

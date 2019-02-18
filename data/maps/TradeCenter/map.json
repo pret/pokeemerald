@@ -53,7 +53,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "gEventScript_TradeCenter_Chair0"
+      "script": "EventScript_TradeCenter_Chair0"
     },
     {
       "comment": "This is trade seat #2.",
@@ -63,7 +63,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "gEventScript_TradeCenter_Chair1"
+      "script": "EventScript_TradeCenter_Chair1"
     }
   ],
   "bg_events": []

@@ -171,7 +171,7 @@ static const u8 gUnknown_0858CFBE[3][4] =
 #define BUFFER_CHUNK_SIZE 200
 
 // Note: VAR_0x8005 contains the spotId.
-void EventScript_RecordMixingPlayerSpotTriggered(void)
+void RecordMixingPlayerSpotTriggered(void)
 {
     sub_80B37D4(Task_RecordMixing_Main);
 }
@@ -984,7 +984,7 @@ static void Task_DoRecordMixing(u8 taskId)
             DestroyTask(taskId);
         break;
 
-    // Mixing Emerald/FireRed/LeafGreen records.
+    // Mixing Emerald records.
     case 6:
         if (!sub_801048C(FALSE))
         {

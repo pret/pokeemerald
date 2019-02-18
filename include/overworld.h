@@ -48,7 +48,7 @@ extern u16 *gBGTilemapBuffers3;
 extern u16 gHeldKeyCodeToSend;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
-extern u8 gLinkSelfPlayerId;
+extern u8 LocalLinkPlayerId;
 extern u8 gFieldLinkPlayerCount;
 
 // Exported ROM declarations

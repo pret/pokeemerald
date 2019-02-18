@@ -791,118 +791,118 @@ EventScript_CableBoxResults:: @ 8277365
 	releaseall
 	end
 
-gEventScript_SingleBattleColosseum_PlayerSpot0:: @ 8277374
+EventScript_SingleBattleColosseum_PlayerSpot0:: @ 8277374
 	setvar VAR_0x8005, 0
-	special EventScript_ColosseumPlayerSpotTriggered
+	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gEventScript_SingleBattleColosseum_PlayerSpot1:: @ 827737E
+EventScript_SingleBattleColosseum_PlayerSpot1:: @ 827737E
 	setvar VAR_0x8005, 1
-	special EventScript_ColosseumPlayerSpotTriggered
+	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gEventScript_DoubleBattleColosseum_PlayerSpot0:: @ 8277388
+EventScript_DoubleBattleColosseum_PlayerSpot0:: @ 8277388
 	fadescreen 1
-	special EventScript_ChooseHalfPartyForBattle
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 0
-	special EventScript_ColosseumPlayerSpotTriggered
+	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gEventScript_DoubleBattleColosseum_PlayerSpot1:: @ 82773A3
+EventScript_DoubleBattleColosseum_PlayerSpot1:: @ 82773A3
 	fadescreen 1
-	special EventScript_ChooseHalfPartyForBattle
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 1
-	special EventScript_ColosseumPlayerSpotTriggered
+	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gEventScript_DoubleBattleColosseum_PlayerSpot2:: @ 82773BE
+EventScript_DoubleBattleColosseum_PlayerSpot2:: @ 82773BE
 	fadescreen 1
-	special EventScript_ChooseHalfPartyForBattle
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 2
-	special EventScript_ColosseumPlayerSpotTriggered
+	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gEventScript_DoubleBattleColosseum_PlayerSpot3:: @ 82773D9
+EventScript_DoubleBattleColosseum_PlayerSpot3:: @ 82773D9
 	fadescreen 1
-	special EventScript_ChooseHalfPartyForBattle
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq gEventScript_DoubleBattleColosseum_CancelSpotTrigger
+	goto_if_eq EventScript_DoubleBattleColosseum_CancelSpotTrigger
 	setvar VAR_0x8005, 3
-	special EventScript_ColosseumPlayerSpotTriggered
+	special ColosseumPlayerSpotTriggered
 	waitstate
 	end
 
-gEventScript_DoubleBattleColosseum_CancelSpotTrigger:: @ 82773F4
+EventScript_DoubleBattleColosseum_CancelSpotTrigger:: @ 82773F4
 	end
 
-gEventScript_TradeCenter_Chair0:: @ 82773F5
+EventScript_TradeCenter_Chair0:: @ 82773F5
 	setvar VAR_0x8005, 0
-	special EventScript_PlayerEnteredTradeSeat
+	special PlayerEnteredTradeSeat
 	waitstate
 	end
 
-gEventScript_TradeCenter_Chair1:: @ 82773FF
+EventScript_TradeCenter_Chair1:: @ 82773FF
 	setvar VAR_0x8005, 1
-	special EventScript_PlayerEnteredTradeSeat
+	special PlayerEnteredTradeSeat
 	waitstate
 	end
 
 /* Never used */
-gEventScript_TradeCenter_Chair2:: @ 8277409
+EventScript_TradeCenter_Chair2:: @ 8277409
 	setvar VAR_0x8005, 2
-	special EventScript_PlayerEnteredTradeSeat
+	special PlayerEnteredTradeSeat
 	waitstate
 	end
 
 /* Never used */
-gEventScript_TradeCenter_Chair3:: @ 8277413
+EventScript_TradeCenter_Chair3:: @ 8277413
 	setvar VAR_0x8005, 3
-	special EventScript_PlayerEnteredTradeSeat
+	special PlayerEnteredTradeSeat
 	waitstate
 	end
 
-gEventScript_RecordCenter_Spot0:: @ 827741D
+EventScript_RecordCenter_Spot0:: @ 827741D
 	setvar VAR_0x8005, 0
-	special EventScript_RecordMixingPlayerSpotTriggered
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
 	end
 
-gEventScript_RecordCenter_Spot1:: @ 8277432
+EventScript_RecordCenter_Spot1:: @ 8277432
 	setvar VAR_0x8005, 1
-	special EventScript_RecordMixingPlayerSpotTriggered
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
 	end
 
-gEventScript_RecordCenter_Spot2:: @ 8277447
+EventScript_RecordCenter_Spot2:: @ 8277447
 	setvar VAR_0x8005, 2
-	special EventScript_RecordMixingPlayerSpotTriggered
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
 	end
 
-gEventScript_RecordCenter_Spot3:: @ 827745C
+EventScript_RecordCenter_Spot3:: @ 827745C
 	setvar VAR_0x8005, 3
-	special EventScript_RecordMixingPlayerSpotTriggered
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	compare VAR_TEMP_1, 0
 	goto_if_ne RecordCorner_EventScript_277471
@@ -969,22 +969,22 @@ RecordCorner_EventScript_2774E0:: @ 82774E0
 	closemessage
 	end
 
-gEventScript_ConfirmLeaveTradeRoom:: @ 82774EF
+EventScript_ConfirmLeaveTradeRoom:: @ 82774EF
 	msgbox Text_TerminateLinkConfirmation, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if_eq gEventScript_TerminateLink
+	goto_if_eq EventScript_TerminateLink
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
-gEventScript_TerminateLink:: @ 8277509
+EventScript_TerminateLink:: @ 8277509
 	messageautoscroll Text_TerminateLinkPleaseWait
 	waitmessage
-	special EventScript_ExitLinkRoom
+	special ExitLinkRoom
 	end
 
-gEventScript_DoLinkRoomExit:: @ 8277513
-	special EventScript_CleanupLinkRoomState
+EventScript_DoLinkRoomExit:: @ 8277513
+	special CleanupLinkRoomState
 	special sub_80AF9F8
 	waitstate
 	end

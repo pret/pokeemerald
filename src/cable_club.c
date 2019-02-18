@@ -352,7 +352,7 @@ static void sub_80B2918(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        gLinkSelfPlayerId = GetMultiplayerId();
+        LocalLinkPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -399,7 +399,7 @@ static void sub_80B2A08(u8 taskId)
     else
     {
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
-        gLinkSelfPlayerId = GetMultiplayerId();
+        LocalLinkPlayerId = GetMultiplayerId();
         sub_800AA04(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForPlayer(card);
@@ -972,7 +972,7 @@ void sub_80B360C(void)
 
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2)
     {
-        UpdatePlayerLinkBattleRecords(gLinkSelfPlayerId ^ 1);
+        UpdatePlayerLinkBattleRecords(LocalLinkPlayerId ^ 1);
         if (gWirelessCommType)
         {
             switch (gBattleOutcome)
@@ -999,7 +999,7 @@ void sub_80B360C(void)
     SetMainCallback2(sub_80A0514);
 }
 
-void EventScript_CleanupLinkRoomState(void)
+void CleanupLinkRoomState(void)
 {
     if (gSpecialVar_0x8004 == 1 || gSpecialVar_0x8004 == 2 || gSpecialVar_0x8004 == 5 || gSpecialVar_0x8004 == 9)
     {
@@ -1009,13 +1009,11 @@ void EventScript_CleanupLinkRoomState(void)
     SetWarpDestinationToDynamicWarp(0x7F);
 }
 
-void EventScript_ExitLinkRoom(void)
+void ExitLinkRoom(void)
 {
     QueueExitLinkRoomKey();
 }
 
-// I can't find anything that would set data[0] to a value before this
-// stask starts. Is it a bug?
 static void sub_80B3728(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
@@ -1133,7 +1131,7 @@ static void sub_80B3894(u8 taskId)
 }
 
 // Note: VAR_0x8005 is set to the ID of the trade seat.
-void EventScript_PlayerEnteredTradeSeat(void)
+void PlayerEnteredTradeSeat(void)
 {
     if (gWirelessCommType != 0)
     {
@@ -1156,7 +1154,7 @@ void nullsub_37(void)
 }
 
 // Note: VAR_0x8005 is set to the ID of the player spot.
-void EventScript_ColosseumPlayerSpotTriggered(void)
+void ColosseumPlayerSpotTriggered(void)
 {
     gLinkType = 0x2211;
 

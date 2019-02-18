@@ -7,7 +7,7 @@ struct PlayerHallRecords
     struct RankingHall2P twoPlayers[2];
 };
 
-void EventScript_RecordMixingPlayerSpotTriggered(void);
+void RecordMixingPlayerSpotTriggered(void);
 void GetPlayerHallRecords(struct PlayerHallRecords *dst);
 
 #endif //GUARD_RECORD_MIXING_H

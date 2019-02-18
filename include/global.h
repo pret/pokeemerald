@@ -910,7 +910,7 @@ struct MapPosition
 struct TradeRoomPlayer
 {
     u8 playerId;
-    u8 isSelf;
+    u8 isLocalPlayer;
     u8 c;
     u8 facing;
     struct MapPosition pos;

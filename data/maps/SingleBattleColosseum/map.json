@@ -52,7 +52,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "gEventScript_SingleBattleColosseum_PlayerSpot0"
+      "script": "EventScript_SingleBattleColosseum_PlayerSpot0"
     },
     {
       "type": "trigger",
@@ -61,7 +61,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "gEventScript_SingleBattleColosseum_PlayerSpot1"
+      "script": "EventScript_SingleBattleColosseum_PlayerSpot1"
     }
   ],
   "bg_events": []

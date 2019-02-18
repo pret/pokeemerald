@@ -248,7 +248,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_22400C:: @ 822400C
 	waitmovement 0
 	special SavePlayerParty
 	fadescreen 1
-	special EventScript_ChooseHalfPartyForBattle
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
 	goto_if_ne MossdeepCity_SpaceCenter_2F_EventScript_224032

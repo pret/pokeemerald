@@ -1157,12 +1157,12 @@ EverGrandeCity_HallOfFame_EventScript_271851:: @ 8271851
 	setvar VAR_0x40D3, 1
 	return
 
-gEventScript_WhiteOut:: @ 8271857
+EventScript_WhiteOut:: @ 8271857
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
-	goto gEventScript_ResetMrBriney
+	goto EventScript_ResetMrBriney
 	end
 
-gEventScript_ResetMrBriney:: @ 8271862
+EventScript_ResetMrBriney:: @ 8271862
 	compare VAR_0x4096, 1
 	goto_if_eq EventScript_MoveMrBrineyToHouse
 	compare VAR_0x4096, 2
@@ -1610,7 +1610,7 @@ EventScript_271D5E:: @ 8271D5E
 	goto EventScript_271D89
 
 EventScript_271D83:: @ 8271D83
-	special EventScript_RecordMixingPlayerSpotTriggered
+	special RecordMixingPlayerSpotTriggered
 	waitstate
 	lock
 	faceplayer

@@ -641,9 +641,9 @@ void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
     SetMonMoveSlot(&gPlayerParty[monIndex], move, slot);
 }
 
-// Note: When control returns to the event script, gSpecialVar_Result be
+// Note: When control returns to the event script, gSpecialVar_Result will be
 // TRUE if the party selection was successful.
-void EventScript_ChooseHalfPartyForBattle(void)
+void ChooseHalfPartyForBattle(void)
 {
     gMain.savedCallback = CB2_ReturnFromChooseHalfParty;
     VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOUBLE_COLOSSEUM);
