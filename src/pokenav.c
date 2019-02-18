@@ -326,7 +326,7 @@ const u8 gMenuButtonReminderColor[4] =
     4, 1, 2, 0
 };
 
-const struct CompressedSpriteSheet gUnknown_0861FA4C[1] =
+const struct CompressedSpriteSheet gUnknown_0861FA4C[] =
 {
     {
         .data = gUnknown_0861F5B0,
@@ -1095,7 +1095,7 @@ void sub_81C7AC0(s32 a0)
     switch (a0)
     {
     case 0:
-        BeginNormalPaletteFade(v1[5], -2, 0, 16, a0);
+        BeginNormalPaletteFade(v1[5], -2, 0, 16, RGB_BLACK);
         break;
     case 1:
         BeginNormalPaletteFade(v1[5], -2, 16, 0, RGB_BLACK);
@@ -1172,7 +1172,7 @@ void sub_81C7C28(void)
     u8 spriteId;
 
     v1 = sub_81C763C(0);
-    for (i = 0; i == 0; i++)
+    for (i = 0; i < ARRAY_COUNT(gUnknown_0861FA4C); i++)
     {
         LoadCompressedSpriteSheet(&gUnknown_0861FA4C[i]);
     }
