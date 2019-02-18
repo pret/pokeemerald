@@ -10,79 +10,66 @@ gFieldEffectScriptPointers:: @ 82DB9D4
 	.4byte gFieldEffectScript_UseCutOnTree
 	.4byte gFieldEffectScript_Shadow
 	.4byte gFieldEffectScript_TallGrass
-
 	.4byte gFieldEffectScript_Ripple
 	.4byte gFieldEffectScript_FieldMoveShowMon
 	.4byte gFieldEffectScript_Ash
 	.4byte gFieldEffectScript_SurfBlob
 	.4byte gFieldEffectScript_UseSurf
-	
 	.4byte gFieldEffectScript_GroundImpactDust
 	.4byte gFieldEffectScript_Unknown11
 	.4byte gFieldEffectScript_BikeHopTallGrass
 	.4byte gFieldEffectScript_SandFootprints
 	.4byte gFieldEffectScript_BikeHopBigSplash
-	
 	.4byte gFieldEffectScript_Splash
 	.4byte gFieldEffectScript_BikeHopSmallSplash
 	.4byte gFieldEffectScript_LongGrass
 	.4byte gFieldEffectScript_Unknown18
 	.4byte gFieldEffectScript_Unknown19
-	
 	.4byte gFieldEffectScript_Unknown20
 	.4byte gFieldEffectScript_Unknown21
 	.4byte gFieldEffectScript_Unknown22
 	.4byte gFieldEffectScript_BerryTreeGrowthSparkle
 	.4byte gFieldEffectScript_DeepSandFootprints
-	
 	.4byte gFieldEffectScript_Unknown25
 	.4byte gFieldEffectScript_Unknown26
 	.4byte gFieldEffectScript_Unknown27
 	.4byte gFieldEffectScript_TreeDisguise
 	.4byte gFieldEffectScript_MountainDisguise
-	
 	.4byte gFieldEffectScript_Unknown30
 	.4byte gFieldEffectScript_UseFly
 	.4byte gFieldEffectScript_FlyIn
 	.4byte gFieldEffectScript_QuestionMarkIcon
 	.4byte gFieldEffectScript_FeetInFlowingWater
-	
 	.4byte gFieldEffectScript_BikeTireTracks
 	.4byte gFieldEffectScript_SandDisguisePlaceholder
 	.4byte gFieldEffectScript_UseRockSmash
 	.4byte gFieldEffectScript_Unknown38
 	.4byte gFieldEffectScript_Unknown39
-	
 	.4byte gFieldEffectScript_Unknown40
 	.4byte gFieldEffectScript_ShortGrass
 	.4byte gFieldEffectScript_HotSpringsWater
 	.4byte gFieldEffectScript_Unknown43
 	.4byte gFieldEffectScript_Unknown44
-	
 	.4byte gFieldEffectScript_Unknown45
 	.4byte gFieldEffectScript_HeartIcon
 	.4byte gFieldEffectScript_Unknown47
 	.4byte gFieldEffectScript_Unknown48
 	.4byte gFieldEffectScript_JumpOutOfAsh
-	
 	.4byte gFieldEffectScript_Unknown50
 	.4byte gFieldEffectScript_Unknown51
 	.4byte gFieldEffectScript_Unknown52
 	.4byte gFieldEffectScript_Bubbles
 	.4byte gFieldEffectScript_Unknown54
-	
 	.4byte gFieldEffectScript_Unknown55
 	.4byte gFieldEffectScript_Unknown56
 	.4byte gFieldEffectScript_Unknown57
 	.4byte gFieldEffectScript_Unknown58
 	.4byte gFieldEffectScript_FieldMoveShowMonInit
-	
 	.4byte gFieldEffectScript_UsePuzzleEffect
 	.4byte gFieldEffectScript_Unknown61
 	.4byte gFieldEffectScript_Unknown62
 	.4byte gFieldEffectScript_Unknown63
 	.4byte gFieldEffectScript_Rayquaza
-	
 	.4byte gFieldEffectScript_Unknown65
 	.4byte gFieldEffectScript_Unknown66
 

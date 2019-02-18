@@ -70,8 +70,8 @@ void DoBrailleRegisteelEffect(void);
 bool8 ShouldDoBrailleDigEffect(void)
 {
     if (!FlagGet(FLAG_SYS_BRAILLE_DIG)
-     && (gSaveBlock1Ptr->location.mapGroup == 0x18
-     && gSaveBlock1Ptr->location.mapNum == 0x47))
+     && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEALED_CHAMBER_OUTER_ROOM)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEALED_CHAMBER_OUTER_ROOM)))
     {
         if (gSaveBlock1Ptr->pos.x == 10 && gSaveBlock1Ptr->pos.y == 3)
             return TRUE;
@@ -86,12 +86,12 @@ bool8 ShouldDoBrailleDigEffect(void)
 
 void DoBrailleDigEffect(void)
 {
-    MapGridSetMetatileIdAt(16, 8, 554);
-    MapGridSetMetatileIdAt(17, 8, 555);
-    MapGridSetMetatileIdAt(18, 8, 556);
-    MapGridSetMetatileIdAt(16, 9, 3634);
-    MapGridSetMetatileIdAt(17, 9, 563);
-    MapGridSetMetatileIdAt(18, 9, 3636);
+    MapGridSetMetatileIdAt(16, 8, 0x22A);
+    MapGridSetMetatileIdAt(17, 8, 0x22B);
+    MapGridSetMetatileIdAt(18, 8, 0x22C);
+    MapGridSetMetatileIdAt(16, 9, 0xE32);
+    MapGridSetMetatileIdAt(17, 9, 0x233);
+    MapGridSetMetatileIdAt(18, 9, 0xE34);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_SYS_BRAILLE_DIG);
@@ -117,7 +117,7 @@ bool8 CheckRelicanthWailord(void)
 void ShouldDoBrailleRegirockEffectOld(void)
 {
     /*
-        if (!FlagGet(FLAG_SYS_BRAILLE_REGIROCK_HM) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
+        if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -141,13 +141,13 @@ void DoBrailleRegirockEffect(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_REGIROCK_HM);
+    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE);
     ScriptContext2_Disable();
 }
 
 bool8 ShouldDoBrailleRegisteelEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_REGISTEEL_HM) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
+    if (!FlagGet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED) && (gSaveBlock1.location.mapGroup == MAP_GROUP_ANCIENT_TOMB && gSaveBlock1.location.mapNum == MAP_ID_ANCIENT_TOMB))
     {
         if (gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
@@ -187,7 +187,7 @@ void UseFlyAncientTomb_Finish(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_REGISTEEL_HM);
+    FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
     */
@@ -241,7 +241,7 @@ void SealedChamberShakingEffect(u8 taskId)
 // moved later in the function because it was rewritten.
 bool8 ShouldDoBrailleRegirockEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_REGIROCK_HM)
+    if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE)
         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(DESERT_RUINS))
     {
@@ -279,21 +279,21 @@ void UseRegirockHm_Callback(void)
 
 void DoBrailleRegirockEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
+    MapGridSetMetatileIdAt(14, 26, 0x22A);
+    MapGridSetMetatileIdAt(15, 26, 0x22B);
+    MapGridSetMetatileIdAt(16, 26, 0x22C);
+    MapGridSetMetatileIdAt(14, 27, 0xE32);
+    MapGridSetMetatileIdAt(15, 27, 0x233);
+    MapGridSetMetatileIdAt(16, 27, 0xE34);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_REGIROCK_HM);
+    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE);
     ScriptContext2_Disable();
 }
 
 bool8 ShouldDoBrailleRegisteelEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_BRAILLE_REGISTEEL_HM) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
+    if (!FlagGet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED) && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ANCIENT_TOMB) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ANCIENT_TOMB)))
     {
         if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
         {
@@ -318,15 +318,15 @@ void UseRegisteelHm_Callback(void)
 
 void DoBrailleRegisteelEffect(void)
 {
-    MapGridSetMetatileIdAt(14, 26, 554);
-    MapGridSetMetatileIdAt(15, 26, 555);
-    MapGridSetMetatileIdAt(16, 26, 556);
-    MapGridSetMetatileIdAt(14, 27, 3634);
-    MapGridSetMetatileIdAt(15, 27, 563);
-    MapGridSetMetatileIdAt(16, 27, 3636);
+    MapGridSetMetatileIdAt(14, 26, 0x22A);
+    MapGridSetMetatileIdAt(15, 26, 0x22B);
+    MapGridSetMetatileIdAt(16, 26, 0x22C);
+    MapGridSetMetatileIdAt(14, 27, 0xE32);
+    MapGridSetMetatileIdAt(15, 27, 0x233);
+    MapGridSetMetatileIdAt(16, 27, 0xE34);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_BRAILLE_REGISTEEL_HM);
+    FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
 
@@ -429,8 +429,8 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
 {
     u8 i;
 
-    if (gSaveBlock1Ptr->location.mapGroup == 0x18
-        && gSaveBlock1Ptr->location.mapNum == 0x43)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ISLAND_CAVE)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ISLAND_CAVE))
     {
         if (FlagGet(FLAG_SYS_BRAILLE_REGICE_PUZZLE))
             return FALSE;
@@ -467,7 +467,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
                 }
 
                 varValue = VarGet(VAR_REGICE_STEPS_1);
-                if (varValue != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != varValue || VarGet(VAR_REGICE_STEPS_3) != 0xF)
+                if (varValue != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != 0xFFFF || VarGet(VAR_REGICE_STEPS_3) != 0xF)
                     return FALSE;
 
                 // This final check is redundant.

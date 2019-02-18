@@ -25,7 +25,7 @@ AncientTomb_EventScript_238FEE:: @ 8238FEE
 	return
 
 AncientTomb_MapScript1_238FF2: @ 8238FF2
-	call_if_unset FLAG_SYS_BRAILLE_REGISTEEL_HM, AncientTomb_EventScript_238FFC
+	call_if_unset FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_238FFC
 	end
 
 AncientTomb_EventScript_238FFC:: @ 8238FFC
@@ -39,7 +39,7 @@ AncientTomb_EventScript_238FFC:: @ 8238FFC
 
 AncientTomb_EventScript_239033:: @ 8239033
 	lockall
-	goto_if_set FLAG_SYS_BRAILLE_REGISTEEL_HM, AncientTomb_EventScript_239046
+	goto_if_set FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED, AncientTomb_EventScript_239046
 	braillemessage AncientTomb_Braille_2A6D06
 	waitbuttonpress
 	hidebox2
