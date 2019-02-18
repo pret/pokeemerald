@@ -1352,9 +1352,9 @@
 #define FLAG_SYS_ENC_UP_ITEM                        (SYSTEM_FLAGS + 0x4D)
 #define FLAG_SYS_ENC_DOWN_ITEM                      (SYSTEM_FLAGS + 0x4E)
 #define FLAG_SYS_BRAILLE_DIG                        (SYSTEM_FLAGS + 0x4F)
-#define FLAG_SYS_BRAILLE_STRENGTH                   (SYSTEM_FLAGS + 0x50)
-#define FLAG_SYS_BRAILLE_WAIT                       (SYSTEM_FLAGS + 0x51)
-#define FLAG_SYS_BRAILLE_FLY                        (SYSTEM_FLAGS + 0x52)
+#define FLAG_SYS_REGIROCK_PUZZLE_COMPLETED          (SYSTEM_FLAGS + 0x50)
+#define FLAG_SYS_BRAILLE_REGICE_COMPLETED           (SYSTEM_FLAGS + 0x51)
+#define FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED         (SYSTEM_FLAGS + 0x52)
 #define FLAG_SYS_HAS_EON_TICKET                     (SYSTEM_FLAGS + 0x53)
 
 #define FLAG_LANDMARK_POKEMON_LEAGUE                (SYSTEM_FLAGS + 0x54)
