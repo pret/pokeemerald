@@ -30,31 +30,25 @@
 #include "apprentice.h"
 #include "frontier_util.h"
 #include "constants/maps.h"
+#include "pokedex.h"
+#include "save.h"
+#include "link_rfu.h"
+#include "main.h"
+#include "contest.h"
+#include "item_menu.h"
+#include "pokemon_storage_system.h"
+#include "decoration_inventory.h"
+#include "secret_base.h"
+#include "player_pc.h"
+#include "field_specials.h"
 
-extern u16 gSaveFileStatus;
-extern u8 gUnknown_030060B0;
 
-// TODO: replace those declarations with file headers
-extern u16 GetGeneratedTrainerIdLower(void);
-extern void ClearContestWinnerPicsInContestHall(void);
-extern void sub_80BB358(void);
-extern void ResetBagScrollPositions(void);
-extern void ResetGabbyAndTy(void);
-extern void ResetSecretBases(void);
-extern void ResetLinkContestBoolean(void);
-extern void sub_8052DA8(void);
-extern void ResetPokemonStorageSystem(void);
-extern void NewGameInitPCItems(void);
-extern void ClearDecorationInventories(void);
-extern void ResetFanClub(void);
 extern void copy_strings_to_sav1(void);
 extern void sub_801AFD8(void);
-extern void sub_800E5AC(void);
-extern void ResetContestLinkResults(void);
 extern void ResetPokeJumpResults(void);
 extern void SetBerryPowder(u32* powder, u32 newValue);
 
-extern const u8 EventScript_2715DE[];
+extern const u8 EventScript_ResetAllMapFlags[];
 
 // this file's functions
 static void ClearFrontierRecord(void);
@@ -112,7 +106,7 @@ static void SetDefaultOptions(void)
 
 static void ClearPokedexFlags(void)
 {
-    gUnknown_030060B0 = 0;
+    gUnusedPokedexU8 = 0;
     memset(&gSaveBlock2Ptr->pokedex.owned, 0, sizeof(gSaveBlock2Ptr->pokedex.owned));
     memset(&gSaveBlock2Ptr->pokedex.seen, 0, sizeof(gSaveBlock2Ptr->pokedex.seen));
 }
@@ -130,8 +124,8 @@ static void ClearFrontierRecord(void)
 {
     CpuFill32(0, &gSaveBlock2Ptr->frontier, sizeof(gSaveBlock2Ptr->frontier));
 
-    gSaveBlock2Ptr->frontier.field_EE1[0][0] = EOS;
-    gSaveBlock2Ptr->frontier.field_EE1[1][0] = EOS;
+    gSaveBlock2Ptr->frontier.opponentName[0][0] = EOS;
+    gSaveBlock2Ptr->frontier.opponentName[1][0] = EOS;
 }
 
 static void WarpToTruck(void)
@@ -149,7 +143,7 @@ void Sav2_ClearSetDefault(void)
 void ResetMenuAndMonGlobals(void)
 {
     gDifferentSaveFile = 0;
-    sub_80BB358();
+    ResetPokedexScrollPositions();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();
@@ -203,7 +197,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
-    ScriptContext2_RunNewScript(EventScript_2715DE);
+    ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
     ResetMiniGamesResults();
     copy_strings_to_sav1();
     SetLilycoveLady();
@@ -211,7 +205,7 @@ void NewGameInitData(void)
     ClearRankingHallRecords();
     InitMatchCallCounters();
     sub_801AFD8();
-    sub_800E5AC();
+    WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
 }

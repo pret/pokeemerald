@@ -79,5 +79,7 @@ bool8 UseRegisteredKeyItemOnField(void);
 void CB2_GoToSellMenu(void);
 void GoToBagMenu(u8 bagMenuType, u8 pocketId, void ( *postExitMenuMainCallback2)());
 void DoWallyTutorialBagMenu(void);
+void ResetBagScrollPositions(void);
+
 
 #endif //GUARD_item_menu_H

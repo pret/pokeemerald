@@ -9869,10 +9869,18 @@ _0811F8AE:
 	.pool
 	thumb_func_end InitializeEasyChatWordArray
 
+@void sub_811F8BC() {
+@	s16* v;
+@	s16* ptr;
+@	v = GetSaveBlock1Field3564();
+@	for (ptr = v + 3; ptr >= v; ptr--) {
+@		*ptr = -1;
+@	}
+@}
 	thumb_func_start sub_811F8BC
 sub_811F8BC: @ 811F8BC
 	push {lr}
-	bl sub_801B058
+	bl GetSaveBlock1Field3564
 	ldr r1, =0x0000ffff
 	adds r2, r1, 0
 	adds r1, r0, 0x6
