@@ -117,7 +117,7 @@ bool8 CheckRelicanthWailord(void)
 void ShouldDoBrailleRegirockEffectOld(void)
 {
     /*
-        if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
+        if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED) && (gSaveBlock1.location.mapGroup == MAP_GROUP_DESERT_RUINS && gSaveBlock1.location.mapNum == MAP_ID_DESERT_RUINS))
     {
         if (gSaveBlock1.pos.x == 10 && gSaveBlock1.pos.y == 23)
             return TRUE;
@@ -141,7 +141,7 @@ void DoBrailleRegirockEffect(void)
     MapGridSetMetatileIdAt(16, 27, 3636);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE);
+    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
 
@@ -241,7 +241,7 @@ void SealedChamberShakingEffect(u8 taskId)
 // moved later in the function because it was rewritten.
 bool8 ShouldDoBrailleRegirockEffect(void)
 {
-    if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE)
+    if (!FlagGet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED)
         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(DESERT_RUINS))
     {
@@ -287,7 +287,7 @@ void DoBrailleRegirockEffect(void)
     MapGridSetMetatileIdAt(16, 27, 0xE34);
     DrawWholeMapView();
     PlaySE(SE_BAN);
-    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETE);
+    FlagSet(FLAG_SYS_REGIROCK_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
 }
 
@@ -334,7 +334,7 @@ void DoBrailleRegisteelEffect(void)
 void DoBrailleWait(void)
 {
     /*
-    if (!FlagGet(FLAG_SYS_BRAILLE_REGICE_PUZZLE))
+    if (!FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
         CreateTask(Task_BrailleWait, 0x50);
 }
 
@@ -432,7 +432,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ISLAND_CAVE)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ISLAND_CAVE))
     {
-        if (FlagGet(FLAG_SYS_BRAILLE_REGICE_PUZZLE))
+        if (FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
             return FALSE;
         if (FlagGet(FLAG_TEMP_2) == FALSE)
             return FALSE;
