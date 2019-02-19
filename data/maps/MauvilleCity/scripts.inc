@@ -86,12 +86,12 @@ MauvilleCity_EventScript_1DF43D:: @ 81DF43D
 MauvilleCity_EventScript_1DF452:: @ 81DF452
 	lockall
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_1DF690
-	applymovement 6, MauvilleCity_Movement_2725A8
+	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DF845, MSGBOX_DEFAULT
 	msgbox MauvilleCity_Text_1DF8B9, MSGBOX_DEFAULT
 	msgbox MauvilleCity_Text_1DF963, MSGBOX_DEFAULT
-	applymovement 6, MauvilleCity_Movement_27259E
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
 	applymovement 6, MauvilleCity_Movement_272598
@@ -118,7 +118,7 @@ MauvilleCity_EventScript_1DF4E0:: @ 81DF4E0
 	applymovement 6, MauvilleCity_Movement_1DF6A8
 	applymovement 7, MauvilleCity_Movement_1DF6E2
 	waitmovement 0
-	applymovement 6, MauvilleCity_Movement_2725A8
+	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 30
 	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_1DF6EE
@@ -138,7 +138,7 @@ MauvilleCity_EventScript_1DF53D:: @ 81DF53D
 	applymovement 6, MauvilleCity_Movement_1DF6AE
 	applymovement 7, MauvilleCity_Movement_1DF6E8
 	waitmovement 0
-	applymovement 6, MauvilleCity_Movement_2725A8
+	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 30
 	applymovement 7, MauvilleCity_Movement_1DF6F7
@@ -205,13 +205,13 @@ MauvilleCity_EventScript_1DF628:: @ 81DF628
 MauvilleCity_EventScript_1DF63A:: @ 81DF63A
 	msgbox MauvilleCity_Text_1DFB6D, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_2, MauvilleCity_Text_1DFB96
-	applymovement 6, MauvilleCity_Movement_2725A8
+	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFBC3, MSGBOX_DEFAULT
-	applymovement 6, MauvilleCity_Movement_27259E
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFBED, MSGBOX_DEFAULT
-	applymovement 6, MauvilleCity_Movement_2725A8
+	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFC8A, MSGBOX_DEFAULT
 	return
@@ -223,7 +223,7 @@ MauvilleCity_EventScript_1DF683:: @ 81DF683
 	end
 
 MauvilleCity_EventScript_1DF690:: @ 81DF690
-	applymovement 6, MauvilleCity_Movement_27259E
+	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFB42, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_1DF4AD

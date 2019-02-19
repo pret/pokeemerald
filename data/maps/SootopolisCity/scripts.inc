@@ -220,7 +220,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	special sub_813B7D8
 	waitstate
 	applymovement 10, SootopolisCity_Movement_2725A4
-	applymovement 9, SootopolisCity_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 60
 	waitse
@@ -320,7 +320,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	special sub_813B7D8
 	waitstate
 	applymovement 10, SootopolisCity_Movement_2725A4
-	applymovement 9, SootopolisCity_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 60
 	waitse
@@ -792,7 +792,7 @@ SootopolisCity_EventScript_1E5FD8:: @ 81E5FD8
 
 SootopolisCity_EventScript_1E5FE2:: @ 81E5FE2
 	lockall
-	applymovement 2, SootopolisCity_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_if_eq SootopolisCity_EventScript_1E600D
@@ -855,7 +855,7 @@ SootopolisCity_EventScript_1E6084:: @ 81E6084
 
 SootopolisCity_EventScript_1E608E:: @ 81E608E
 	lockall
-	applymovement 4, SootopolisCity_Movement_27259E
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_if_eq SootopolisCity_EventScript_1E60D9
@@ -882,7 +882,7 @@ SootopolisCity_EventScript_1E60D9:: @ 81E60D9
 
 SootopolisCity_EventScript_1E60E3:: @ 81E60E3
 	lockall
-	applymovement 5, SootopolisCity_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_if_eq SootopolisCity_EventScript_1E612D
@@ -927,7 +927,7 @@ EventScript_ClosedSootopolisDoor:: @ 81E615D
 
 SootopolisCity_EventScript_1E6166:: @ 81E6166
 	lockall
-	applymovement 7, SootopolisCity_Movement_27259E
+	applymovement 7, Common_Movement_FacePlayer
 	waitmovement 0
 	call_if_unset FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN, SootopolisCity_EventScript_1E61CC
 	compare VAR_0x405E, 2
@@ -1261,7 +1261,7 @@ SootopolisCity_Movement_1E635A: @ 81E635A
 
 SootopolisCity_EventScript_1E635D:: @ 81E635D
 	lockall
-	applymovement 15, SootopolisCity_Movement_27259E
+	applymovement 15, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_if_eq SootopolisCity_EventScript_1E6388
@@ -1284,7 +1284,7 @@ SootopolisCity_EventScript_1E6393:: @ 81E6393
 	goto_if_eq SootopolisCity_EventScript_1E63C7
 	msgbox SootopolisCity_Text_1E6936, MSGBOX_DEFAULT
 	closemessage
-	applymovement 14, SootopolisCity_Movement_27259E
+	applymovement 14, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SootopolisCity_Text_1E696C, MSGBOX_DEFAULT
 	closemessage
@@ -1294,7 +1294,7 @@ SootopolisCity_EventScript_1E6393:: @ 81E6393
 	end
 
 SootopolisCity_EventScript_1E63C7:: @ 81E63C7
-	applymovement 14, SootopolisCity_Movement_27259E
+	applymovement 14, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SootopolisCity_Text_1E69B8, MSGBOX_DEFAULT
 	releaseall
@@ -1302,7 +1302,7 @@ SootopolisCity_EventScript_1E63C7:: @ 81E63C7
 
 SootopolisCity_EventScript_1E63DB:: @ 81E63DB
 	lockall
-	applymovement 13, SootopolisCity_Movement_27259E
+	applymovement 13, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_if_eq SootopolisCity_EventScript_1E6406
@@ -1321,7 +1321,7 @@ SootopolisCity_EventScript_1E6406:: @ 81E6406
 
 SootopolisCity_EventScript_1E6411:: @ 81E6411
 	lockall
-	applymovement 12, SootopolisCity_Movement_27259E
+	applymovement 12, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_0x405E, 5
 	goto_if_eq SootopolisCity_EventScript_1E643C

@@ -10,7 +10,7 @@ Route112_MapScript1_1F1DAE: @ 81F1DAE
 Route112_EventScript_1F1DB7:: @ 81F1DB7
 	lockall
 	delay 40
-	applymovement 1, Route112_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F1F3F, MSGBOX_DEFAULT
@@ -26,7 +26,7 @@ Route112_EventScript_1F1DB7:: @ 81F1DB7
 	applymovement 6, Route112_Movement_2725A2
 	waitmovement 0
 	delay 40
-	applymovement 1, Route112_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F1FBA, MSGBOX_DEFAULT

@@ -126,7 +126,7 @@ BattleFrontier_OutsideWest_EventScript_23D53D:: @ 823D53D
 	end
 
 BattleFrontier_OutsideWest_EventScript_23D544:: @ 823D544
-	applymovement 9, BattleFrontier_OutsideWest_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox BattleFrontier_OutsideWest_Text_23DB7D, MSGBOX_DEFAULT
 	applymovement 10, BattleFrontier_OutsideWest_Movement_2725A4

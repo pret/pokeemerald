@@ -437,7 +437,7 @@ Route111_EventScript_1F11DA:: @ 81F11DA
 
 Route111_EventScript_1F11E4:: @ 81F11E4
 	lockall
-	applymovement 46, Route111_Movement_27259E
+	applymovement 46, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route111_Text_1F1CCA, MSGBOX_DEFAULT
 	closemessage

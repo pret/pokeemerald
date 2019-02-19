@@ -10,7 +10,7 @@ MeteorFalls_StevensCave_EventScript_23B182:: @ 823B182
 	waitmovement 0
 	applymovement 1, MeteorFalls_StevensCave_Movement_27259A
 	waitmovement 0
-	applymovement 1, MeteorFalls_StevensCave_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MeteorFalls_StevensCave_Text_23B1E1, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_STEVEN, MeteorFalls_StevensCave_Text_23B32D
@@ -20,7 +20,7 @@ MeteorFalls_StevensCave_EventScript_23B182:: @ 823B182
 	end
 
 MeteorFalls_StevensCave_EventScript_23B1CD:: @ 823B1CD
-	applymovement 1, MeteorFalls_StevensCave_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MeteorFalls_StevensCave_Text_23B358, MSGBOX_DEFAULT
 	release

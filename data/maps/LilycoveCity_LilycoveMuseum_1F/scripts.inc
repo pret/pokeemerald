@@ -7,7 +7,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CB9:: @ 8218CB9
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2:: @ 8218CC2
 	lockall
-	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	message LilycoveCity_LilycoveMuseum_1F_Text_218EBC
 	waitmessage
 	multichoice 20, 8, 16, 1

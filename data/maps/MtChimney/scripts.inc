@@ -35,7 +35,7 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	lockall
 	playbgm MUS_MGM0, 0
 	msgbox MtChimney_Text_22F26A, MSGBOX_DEFAULT
-	applymovement 2, MtChimney_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
 	applymovement 2, MtChimney_Movement_272598

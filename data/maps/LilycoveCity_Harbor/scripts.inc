@@ -349,7 +349,7 @@ LilycoveCity_Harbor_EventScript_21E4EE:: @ 821E4EE
 	delay 60
 	addobject 4
 	delay 30
-	applymovement 4, LilycoveCity_Harbor_Movement_27259E
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	return
 

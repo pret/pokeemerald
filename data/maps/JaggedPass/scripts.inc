@@ -75,7 +75,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 	waitmovement 0
 	applymovement 5, JaggedPass_Movement_27259A
 	waitmovement 0
-	applymovement 5, JaggedPass_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox JaggedPass_Text_230CCB, MSGBOX_DEFAULT
 	closemessage
@@ -87,7 +87,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 	end
 
 JaggedPass_EventScript_230766:: @ 8230766
-	applymovement 5, JaggedPass_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox JaggedPass_Text_230D65, MSGBOX_DEFAULT
 	closemessage

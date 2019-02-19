@@ -30,7 +30,7 @@ Route101_EventScript_1EBCDE:: @ 81EBCDE
 	applymovement 4, Route101_Movement_1EBD96
 	applymovement 2, Route101_Movement_1EBDC8
 	waitmovement 0
-	applymovement 2, Route101_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, Route101_Movement_1EBDBD
 	applymovement 2, Route101_Movement_1EBDEF

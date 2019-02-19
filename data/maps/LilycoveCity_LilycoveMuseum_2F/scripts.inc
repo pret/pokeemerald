@@ -62,7 +62,7 @@ LilycoveCity_LilycoveMuseum_2F_MapScript2_2197FE: @ 82197FE
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_219808:: @ 8219808
 	lockall
-	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_2199EB, MSGBOX_SIGN
@@ -71,7 +71,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_219808:: @ 8219808
 	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219863
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219A0D, MSGBOX_SIGN
-	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_219861
 	waitmovement 0
@@ -107,7 +107,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198BA:: @ 82198BA
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2198C3:: @ 82198C3
-	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219DD4, MSGBOX_DEFAULT
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_219863
@@ -116,7 +116,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198C3:: @ 82198C3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
-	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EC5, MSGBOX_DEFAULT
 	givedecoration_std 44
 	compare VAR_RESULT, 0

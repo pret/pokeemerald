@@ -304,9 +304,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25B1AA:: @ 825B1AA
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4:: @ 825B1B4
-	applymovement 1, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8
-	applymovement 3, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8
-	applymovement 4, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement 4, Common_Movement_WalkInPlaceRight
 	applymovement 5, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
 	applymovement 6, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
 	applymovement 7, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4

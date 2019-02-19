@@ -6,51 +6,51 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 
 LittlerootTown_BrendansHouse_1F_MapScript_OnMapLoad: @ 81F7765
 	compare VAR_INTRO_SEQUENCE_STATE, 6
-	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_1F777A
-	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
+	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_PlaceMovingBoxes
+	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_TryPlaceShoesInstructions
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
-	setmetatile 5, 4, 624, 1
-	setmetatile 5, 2, 616, 1
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMovingBoxes:: @ 81F777A
+	setmetatile 5, 4, 0x270, 1
+	setmetatile 5, 2, 0x268, 1
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
+LittlerootTown_BrendansHouse_1F_EventScript_TryPlaceShoesInstructions:: @ 81F778D
 	checkplayergender
-	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F779A
+	compare VAR_RESULT, MALE
+	goto_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceShoesInstructions
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
-	setmetatile 3, 7, 659, 1
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceShoesInstructions:: @ 81F779A
+	setmetatile 3, 7, 0x293, 1
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript_OnMapTransition: @ 81F77A4
-	compare VAR_INTRO_SEQUENCE_STATE, 3
-	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
+	compare VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_ENTERING_HOUSE
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomEnteringHouse
 	compare VAR_INTRO_SEQUENCE_STATE, 5
-	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingStairs
 	compare VAR_INTRO_SEQUENCE_STATE, 6
-	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
+	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingTV
 	end
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F77C6:: @ 81F77C6
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingStairs:: @ 81F77C6
 	setobjectxyperm 1, 8, 4
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F77D2:: @ 81F77D2
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomFacingTV:: @ 81F77D2
 	setobjectxyperm 1, 4, 5
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_1F_EventScript_1F77DE:: @ 81F77DE
+LittlerootTown_BrendansHouse_1F_EventScript_PlaceMomEnteringHouse:: @ 81F77DE
 	setobjectxyperm 1, 9, 8
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript_OnMapFrameTable: @ 81F77EA
-	map_script_2 VAR_INTRO_SEQUENCE_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_ENTERING_HOUSE, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
 	map_script_2 VAR_INTRO_SEQUENCE_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
 	map_script_2 VAR_INTRO_SEQUENCE_STATE, 6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
 	map_script_2 VAR_0x4082, 1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
@@ -293,7 +293,7 @@ LittlerootTown_BrendansHouse_1F_Movement_1F7A16: @ 81F7A16
 	walk_up
 	step_end
 
-LittlerootTown_BrendansHouse_1F_Text_1F7A1C: @ 81F7A1C
+LittlerootTown_BrendansHouse_1F_Text_MomEnterHouse: @ 81F7A1C
 	.string "MOM: See, {PLAYER}?\n"
 	.string "Isn't it nice in here, too?$"
 

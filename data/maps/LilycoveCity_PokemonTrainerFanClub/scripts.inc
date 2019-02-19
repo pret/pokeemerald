@@ -15,7 +15,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A:: @ 821C79A
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C7FD
 	applymovement 2, LilycoveCity_PokemonTrainerFanClub_Movement_21C7F5
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_PokemonTrainerFanClub_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF12, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C804

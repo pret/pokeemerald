@@ -328,7 +328,7 @@ RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	applymovement 5, RusturfTunnel_Movement_22D1A4
 	waitmovement 0
 	msgbox RusturfTunnel_Text_22D395, MSGBOX_DEFAULT
-	applymovement 5, RusturfTunnel_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	message RusturfTunnel_Text_22D3BA
 	waitmessage

@@ -260,7 +260,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250ACC:: @ 8250ACC
 
 BattleFrontier_BattlePyramidLobby_EventScript_250ACE:: @ 8250ACE
 	lockall
-	applymovement 2, BattleFrontier_BattlePyramidLobby_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_BattlePyramidLobby_Text_251C3B, MSGBOX_DEFAULT
 	call BattleFrontier_BattlePyramidLobby_EventScript_250AF0

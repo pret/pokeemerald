@@ -197,7 +197,7 @@ LilycoveCity_EventScript_1E2D7D:: @ 81E2D7D
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_1E2DB0
 	msgbox LilycoveCity_Text_1E3D1F, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_Text_1E3D4A, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, LilycoveCity_Movement_2725A2

@@ -25,7 +25,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB27:: @ 826CB27
 
 Route110_TrickHousePuzzle5_EventScript_26CB32:: @ 826CB32
 	lockall
-	applymovement 1, Route110_TrickHousePuzzle5_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_TEMP_1, 1
 	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
@@ -35,7 +35,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB32:: @ 826CB32
 
 Route110_TrickHousePuzzle5_EventScript_26CB53:: @ 826CB53
 	lockall
-	applymovement 2, Route110_TrickHousePuzzle5_Movement_27259E
+	applymovement 2, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_TEMP_2, 1
 	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
@@ -45,7 +45,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB53:: @ 826CB53
 
 Route110_TrickHousePuzzle5_EventScript_26CB74:: @ 826CB74
 	lockall
-	applymovement 3, Route110_TrickHousePuzzle5_Movement_27259E
+	applymovement 3, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_TEMP_3, 1
 	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
@@ -55,7 +55,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB74:: @ 826CB74
 
 Route110_TrickHousePuzzle5_EventScript_26CB95:: @ 826CB95
 	lockall
-	applymovement 4, Route110_TrickHousePuzzle5_Movement_27259E
+	applymovement 4, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_TEMP_4, 1
 	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
@@ -65,7 +65,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB95:: @ 826CB95
 
 Route110_TrickHousePuzzle5_EventScript_26CBB6:: @ 826CBB6
 	lockall
-	applymovement 5, Route110_TrickHousePuzzle5_Movement_27259E
+	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
 	compare VAR_TEMP_5, 1
 	goto_if_eq Route110_TrickHousePuzzle5_EventScript_26D1AA

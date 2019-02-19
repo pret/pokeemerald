@@ -86,7 +86,7 @@ MtPyre_Summit_EventScript_2320EC:: @ 82320EC
 MtPyre_Summit_EventScript_2320F7:: @ 82320F7
 	applymovement 3, MtPyre_Summit_Movement_23212C
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -292,7 +292,7 @@ MtPyre_Summit_EventScript_23235A:: @ 823235A
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2323EA
 	applymovement 8, MtPyre_Summit_Movement_2323ED
 	waitmovement 0
-	applymovement 2, MtPyre_Summit_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -300,7 +300,7 @@ MtPyre_Summit_EventScript_232376:: @ 8232376
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2323EA
 	applymovement 8, MtPyre_Summit_Movement_2323F3
 	waitmovement 0
-	applymovement 2, MtPyre_Summit_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -308,7 +308,7 @@ MtPyre_Summit_EventScript_232392:: @ 8232392
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2323EA
 	applymovement 8, MtPyre_Summit_Movement_2323F8
 	waitmovement 0
-	applymovement 2, MtPyre_Summit_Movement_2725A8
+	applymovement 2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

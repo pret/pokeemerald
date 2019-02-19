@@ -140,7 +140,7 @@ LittlerootTown_EventScript_ExitMovingTruck:: @ 81E7F17
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PlayerWalkIntoHouse1
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setvar VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_IN_HOUSE
+	setvar VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_ENTERING_HOUSE
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
@@ -361,7 +361,7 @@ LittlerootTown_Movement_1E8118: @ 81E8118
 
 LittlerootTown_EventScript_1E811F:: @ 81E811F
 	lockall
-	applymovement 1, LittlerootTown_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A4
 	waitmovement 0
@@ -494,7 +494,7 @@ LittlerootTown_EventScript_1E828C:: @ 81E828C
 	return
 
 LittlerootTown_EventScript_1E8297:: @ 81E8297
-	applymovement 4, LittlerootTown_Movement_2725A8
+	applymovement 4, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
@@ -576,28 +576,28 @@ LittlerootTown_EventScript_1E839C:: @ 81E839C
 	return
 
 LittlerootTown_EventScript_1E83B1:: @ 81E83B1
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F1
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83C6:: @ 81E83C6
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F5
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83DB:: @ 81E83DB
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85F8
 	waitmovement 0
 	return
 
 LittlerootTown_EventScript_1E83F0:: @ 81E83F0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 4, LittlerootTown_Movement_1E85FE
 	waitmovement 0

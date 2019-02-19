@@ -161,7 +161,7 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEnd_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B485, MSGBOX_DEFAULT
@@ -227,7 +227,7 @@ Route110_TrickHouseEnd_EventScript_26B02B:: @ 826B02B
 	return
 
 Route110_TrickHouseEnd_EventScript_26B036:: @ 826B036
-	applymovement 1, Route110_TrickHouseEnd_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

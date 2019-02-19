@@ -23,7 +23,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A6
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_2350A6, MSGBOX_DEFAULT
-	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_27259E
+	applymovement VAR_0x8004, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_23512C, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_ARCHIE, SeafloorCavern_Room9_Text_2351BC

@@ -94,7 +94,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	waitmovement 0
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_27259A
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -154,7 +154,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A4C:: @ 81F8A4C
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
-	applymovement VAR_0x8004, LittlerootTown_MaysHouse_1F_Movement_2725A8
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_292765
 	end

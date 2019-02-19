@@ -6,7 +6,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA
 	goto_if_set FLAG_BADGE07_GET, LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218264, MSGBOX_DEFAULT
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21831E, MSGBOX_DEFAULT
 	closemessage
@@ -17,7 +17,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3:: @ 82181C3
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2183C3, MSGBOX_DEFAULT
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218470, MSGBOX_DEFAULT
 	closemessage
@@ -28,7 +28,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3:: @ 82181C3
 
 LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA:: @ 82181EA
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218544, MSGBOX_DEFAULT
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2185F4, MSGBOX_DEFAULT
 	closemessage

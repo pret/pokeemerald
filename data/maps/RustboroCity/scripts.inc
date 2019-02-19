@@ -620,7 +620,7 @@ RustboroCity_EventScript_1E0CDC:: @ 81E0CDC
 	return
 
 RustboroCity_EventScript_1E0D08:: @ 81E0D08
-	applymovement 9, RustboroCity_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	playse SE_PIN
 	applymovement 9, RustboroCity_Movement_272598
@@ -670,7 +670,7 @@ RustboroCity_EventScript_1E0D96:: @ 81E0D96
 RustboroCity_EventScript_1E0DB8:: @ 81E0DB8
 	lockall
 	call_if_unset FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_1E0DD1
-	applymovement 14, RustboroCity_Movement_27259E
+	applymovement 14, Common_Movement_FacePlayer
 	waitmovement 0
 	goto RustboroCity_EventScript_1E0FF3
 

@@ -121,8 +121,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2024B8:: @ 82024B8
 	case 127, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_2024EA:: @ 82024EA
-	applymovement 3, VerdanturfTown_BattleTentBattleRoom_Movement_2725A8
-	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_2725A8
+	applymovement 3, Common_Movement_WalkInPlaceRight
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	closemessage
 	goto VerdanturfTown_BattleTentBattleRoom_EventScript_20236F

@@ -65,7 +65,7 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	waitmovement 0
 	delay 60
 	msgbox SlateportCity_Text_1DF0FE, MSGBOX_DEFAULT
-	applymovement 35, SlateportCity_Movement_2725A8
+	applymovement 35, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox SlateportCity_Text_1DF12B, MSGBOX_DEFAULT
 	closemessage
@@ -448,7 +448,7 @@ SlateportCity_EventScript_1DD0C1:: @ 81DD0C1
 	waitmovement 0
 	applymovement 31, SlateportCity_Movement_1DD147
 	waitmovement 0
-	applymovement 31, SlateportCity_Movement_27259E
+	applymovement 31, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SlateportCity_Text_1DDE86, MSGBOX_DEFAULT
 	closemessage
@@ -458,7 +458,7 @@ SlateportCity_EventScript_1DD0C1:: @ 81DD0C1
 	waitmovement 0
 	msgbox SlateportCity_Text_1DDEB8, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, SlateportCity_Movement_27259E
+	applymovement 31, Common_Movement_FacePlayer
 	waitmovement 0
 	applymovement 31, SlateportCity_Movement_1DD147
 	waitmovement 0
@@ -563,7 +563,7 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	msgbox SlateportCity_Text_1DE502, MSGBOX_DEFAULT
 	msgbox SlateportCity_Text_1DE54A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 10, SlateportCity_Movement_2725A8
+	applymovement 10, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 10
 	applymovement 9, SlateportCity_Movement_2725AA

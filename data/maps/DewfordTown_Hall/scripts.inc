@@ -200,7 +200,7 @@ DewfordTown_Hall_EventScript_1FD73A:: @ 81FD73A
 DewfordTown_Hall_EventScript_1FD75B:: @ 81FD75B
 	compare VAR_FACING, 4
 	goto_if_eq DewfordTown_Hall_EventScript_1FD739
-	applymovement EVENT_OBJ_ID_PLAYER, DewfordTown_Hall_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

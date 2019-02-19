@@ -268,7 +268,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F94ED:: @ 81F94ED
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F94F7:: @ 81F94F7
-	applymovement VAR_LAST_TALKED, LittlerootTown_BrendansHouse_2F_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE

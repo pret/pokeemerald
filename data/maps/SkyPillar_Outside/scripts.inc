@@ -63,7 +63,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	applymovement 1, SkyPillar_Outside_Movement_2725A4
 	waitmovement 0
 	delay 10
-	applymovement 1, SkyPillar_Outside_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	applymovement 1, SkyPillar_Outside_Movement_2725AA

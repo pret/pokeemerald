@@ -134,7 +134,7 @@ LavaridgeTown_EventScript_1EA65C:: @ 81EA65C
 	waitmovement 0
 	applymovement 8, LavaridgeTown_Movement_27259A
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LavaridgeTown_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

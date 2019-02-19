@@ -326,7 +326,7 @@ Route110_TrickHouseEntrance_EventScript_269E48:: @ 8269E48
 Route110_TrickHouseEntrance_EventScript_269E51:: @ 8269E51
 	msgbox Route110_TrickHouseEntrance_Text_26A921, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
 	applymovement 1, Route110_TrickHouseEntrance_Movement_272598
@@ -340,7 +340,7 @@ Route110_TrickHouseEntrance_EventScript_269E51:: @ 8269E51
 	end
 
 Route110_TrickHouseEntrance_EventScript_269E8F:: @ 8269E8F
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26AA82, MSGBOX_DEFAULT
 	compare VAR_0x4044, 1
@@ -438,7 +438,7 @@ Route110_TrickHouseEntrance_EventScript_26A023:: @ 826A023
 	end
 
 Route110_TrickHouseEntrance_EventScript_26A039:: @ 826A039
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26AB2C, MSGBOX_DEFAULT
 	call Route110_TrickHouseEntrance_EventScript_26A070

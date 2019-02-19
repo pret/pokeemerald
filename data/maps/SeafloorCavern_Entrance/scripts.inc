@@ -54,7 +54,7 @@ SeafloorCavern_Entrance_EventScript_234523:: @ 8234523
 	return
 
 SeafloorCavern_Entrance_EventScript_23452E:: @ 823452E
-	applymovement 1, SeafloorCavern_Entrance_Movement_2725A8
+	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

@@ -307,7 +307,7 @@ Route110_EventScript_1EF64A:: @ 81EF64A
 
 Route110_EventScript_1EF661:: @ 81EF661
 	lockall
-	applymovement 21, Route110_Movement_2725A8
+	applymovement 21, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	call Route110_EventScript_1EF673
 	releaseall
@@ -634,7 +634,7 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	applymovement 36, Route110_Movement_2725A4
 	waitmovement 0
 	delay 10
-	applymovement 36, Route110_Movement_2725A8
+	applymovement 36, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	applymovement 36, Route110_Movement_2725AA

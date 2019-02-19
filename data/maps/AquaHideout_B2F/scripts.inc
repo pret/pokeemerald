@@ -16,7 +16,7 @@ AquaHideout_B2F_EventScript_233DE5:: @ 8233DE5
 	playse SE_PIN
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_272598
 	waitmovement 0
-	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
+	applymovement VAR_0x8008, Common_Movement_FacePlayer
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
 	releaseall
@@ -34,7 +34,7 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	applymovement VAR_0x8008, AquaHideout_B2F_Movement_2725A4
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
+	applymovement VAR_0x8008, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_233FA6, MSGBOX_DEFAULT
 	closemessage
@@ -43,7 +43,7 @@ AquaHideout_B2F_EventScript_233E25:: @ 8233E25
 	waitmovement 0
 	removeobject VAR_0x8009
 	delay 20
-	applymovement VAR_0x8008, AquaHideout_B2F_Movement_27259E
+	applymovement VAR_0x8008, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_233FF2, MSGBOX_DEFAULT
 	setflag FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE

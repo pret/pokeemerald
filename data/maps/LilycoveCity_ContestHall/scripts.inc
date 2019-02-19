@@ -263,7 +263,7 @@ LilycoveCity_ContestHall_EventScript_21B6C3:: @ 821B6C3
 
 LilycoveCity_ContestHall_EventScript_21B6DA:: @ 821B6DA
 	lockall
-	applymovement 29, LilycoveCity_ContestHall_Movement_27259E
+	applymovement 29, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_ContestHall_Text_21C3F4, MSGBOX_DEFAULT
 	closemessage

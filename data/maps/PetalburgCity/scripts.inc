@@ -263,7 +263,7 @@ PetalburgCity_EventScript_1DC4BE:: @ 81DC4BE
 	end
 
 PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
-	applymovement 8, PetalburgCity_Movement_27259E
+	applymovement 8, Common_Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_TSURETEK, 0
 	playse SE_PIN
@@ -290,8 +290,8 @@ PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 	compare VAR_0x8008, 3
 	call_if_eq PetalburgCity_EventScript_1DC5FF
 	msgbox PetalburgCity_Text_1DC91B, MSGBOX_DEFAULT
-	applymovement 8, PetalburgCity_Movement_2725A8
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A8
+	applymovement 8, Common_Movement_WalkInPlaceRight
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox PetalburgCity_Text_1DC93E, MSGBOX_DEFAULT
 	closemessage
@@ -549,12 +549,12 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1DC7DB
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, PetalburgCity_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	setvar VAR_0x40D1, 1
 	msgbox PetalburgCity_Text_1DCB31, MSGBOX_DEFAULT
 	closemessage
-	applymovement 9, PetalburgCity_Movement_2725A8
+	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 30
 	msgbox PetalburgCity_Text_1DCB82, MSGBOX_DEFAULT

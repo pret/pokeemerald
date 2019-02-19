@@ -63,7 +63,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	trainerbattle_no_intro TRAINER_GRUNT_35, MossdeepCity_SpaceCenter_2F_Text_224499
 	applymovement 5, MossdeepCity_SpaceCenter_2F_Movement_223E81
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2244AB, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_36, MossdeepCity_SpaceCenter_2F_Text_2244F1
@@ -231,7 +231,7 @@ MossdeepCity_SpaceCenter_2F_Movement_223FCF: @ 8223FCF
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_27259E
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2247FF, MSGBOX_YESNO
 	compare VAR_RESULT, 1
@@ -282,7 +282,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	waitmovement 0
 	delay 60
 	applymovement 9, MossdeepCity_SpaceCenter_2F_Movement_2725A6
-	applymovement 8, MossdeepCity_SpaceCenter_2F_Movement_2725A8
+	applymovement 8, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2249DC, MSGBOX_DEFAULT

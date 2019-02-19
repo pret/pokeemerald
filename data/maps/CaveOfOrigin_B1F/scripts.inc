@@ -15,7 +15,7 @@ CaveOfOrigin_B1F_EventScript_2357A9:: @ 82357A9
 	applymovement 1, CaveOfOrigin_B1F_Movement_27259A
 	waitmovement 0
 	delay 30
-	applymovement 1, CaveOfOrigin_B1F_Movement_27259E
+	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	message CaveOfOrigin_B1F_Text_235ACE
 	waitmessage

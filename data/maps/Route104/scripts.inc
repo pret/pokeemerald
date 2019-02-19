@@ -42,7 +42,7 @@ Route104_EventScript_1ECC9D:: @ 81ECC9D
 Route104_EventScript_1ECC9E:: @ 81ECC9E
 	lockall
 	setvar VAR_0x8008, 1
-	applymovement 34, Route104_Movement_27259E
+	applymovement 34, Common_Movement_FacePlayer
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 

@@ -92,14 +92,14 @@ SlateportCity_Harbor_EventScript_20CA89:: @ 820CA89
 SlateportCity_Harbor_EventScript_20CA9E:: @ 820CA9E
 	applymovement 4, SlateportCity_Harbor_Movement_20CAE6
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 
 SlateportCity_Harbor_EventScript_20CAB3:: @ 820CAB3
 	applymovement 4, SlateportCity_Harbor_Movement_20CAEB
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_Harbor_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	return
 

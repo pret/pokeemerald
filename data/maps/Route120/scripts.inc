@@ -201,7 +201,7 @@ Route120_EventScript_1F568B:: @ 81F568B
 	delay 20
 	msgbox Route120_Text_1F5B43, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, Route120_Movement_2725A8
+	applymovement 30, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	applymovement 30, Route120_Movement_2723C7
 	waitmovement 0

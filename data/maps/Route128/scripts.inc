@@ -53,7 +53,7 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	addobject 3
 	applymovement 3, Route128_Movement_1F6C87
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Route128_Movement_2725A8
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox Route128_Text_1F70C9, MSGBOX_DEFAULT
 	closemessage
