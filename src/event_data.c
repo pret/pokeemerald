@@ -28,8 +28,6 @@ EWRAM_DATA static u8 gUnknown_020375FC[16] = {0};
 
 extern u16 *const gSpecialVars[];
 
-extern void sub_80BB358(void);
-
 void InitEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
@@ -69,7 +67,7 @@ void EnableNationalPokedex(void)
     FlagSet(FLAG_SYS_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
     gSaveBlock2Ptr->pokedex.order = 0;
-    sub_80BB358();
+    ResetPokedexScrollPositions();
 }
 
 bool32 IsNationalPokedexEnabled(void)

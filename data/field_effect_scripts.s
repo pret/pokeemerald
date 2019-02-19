@@ -65,7 +65,7 @@ gFieldEffectScriptPointers:: @ 82DB9D4
 	.4byte gFieldEffectScript_Unknown57
 	.4byte gFieldEffectScript_Unknown58
 	.4byte gFieldEffectScript_FieldMoveShowMonInit
-	.4byte gFieldEffectScript_Unknown60
+	.4byte gFieldEffectScript_UsePuzzleEffect
 	.4byte gFieldEffectScript_Unknown61
 	.4byte gFieldEffectScript_Unknown62
 	.4byte gFieldEffectScript_Unknown63
@@ -315,7 +315,7 @@ gFieldEffectScript_FieldMoveShowMonInit:: @ 82DBCCC
 	field_eff_callnative FldEff_FieldMoveShowMonInit
 	field_eff_end
 
-gFieldEffectScript_Unknown60:: @ 82DBCD2
+gFieldEffectScript_UsePuzzleEffect:: @ 82DBCD2
 	field_eff_callnative FldEff_UsePuzzleEffect
 	field_eff_end
 

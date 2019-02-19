@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MtPyre_Exterior_EventScript_29133E",
       "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_MAX_POTION"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "MtPyre_Exterior_EventScript_29134B",
       "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_TM_48"
     }
@@ -71,7 +71,7 @@
       "y": 21,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_231FED"
     },
     {
@@ -80,7 +80,7 @@
       "y": 21,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_231FED"
     },
     {
@@ -89,7 +89,7 @@
       "y": 27,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_231FF2"
     },
     {
@@ -98,7 +98,7 @@
       "y": 28,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_231FF2"
     },
     {
@@ -107,7 +107,7 @@
       "y": 21,
       "elevation": 3,
       "var": "0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_231FED"
     }
   ],

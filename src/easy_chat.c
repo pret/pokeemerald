@@ -359,7 +359,7 @@ void easy_chat_input_maybe(void)
         words = gSaveBlock2Ptr->apprentices[0].easyChatWords;
         break;
     case 20:
-        words = sub_801B058();
+        words = GetSaveBlock1Field3564();
         break;
     default:
         return;
