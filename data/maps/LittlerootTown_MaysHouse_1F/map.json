@@ -135,7 +135,7 @@
       "x": 2,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_0x4092",
+      "var": "VAR_INTRO_SEQUENCE_STATE",
       "var_value": 4,
       "script": "LittlerootTown_MaysHouse_1F_EventScript_1F8A4C"
     },

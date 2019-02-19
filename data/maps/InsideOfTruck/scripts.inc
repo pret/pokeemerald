@@ -15,7 +15,7 @@ InsideOfTruck_MapScript_OnResume: @ 823BF01
 
 InsideOfTruck_EventScript_SetupGenderHideFlags:: @ 823BF04
 	lockall
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq InsideOfTruck_EventScript_SetupBrendanHideFlags
@@ -25,7 +25,7 @@ InsideOfTruck_EventScript_SetupGenderHideFlags:: @ 823BF04
 
 InsideOfTruck_EventScript_SetupBrendanHideFlags:: @ 823BF20
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
-	setvar VAR_0x4092, 1
+	setvar VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_MALE
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM
@@ -38,7 +38,7 @@ InsideOfTruck_EventScript_SetupBrendanHideFlags:: @ 823BF20
 
 InsideOfTruck_EventScript_SetupMayHideFlags:: @ 823BF46
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
-	setvar VAR_0x4092, 2
+	setvar VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_FEMALE
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM

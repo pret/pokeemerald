@@ -1,16 +1,16 @@
 LittlerootTown_MapScripts:: @ 81E7DCB
-	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_MapScript1_1E7DDB
-	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_MapScript_OnInputTable
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_MapScript_OnMapTransition
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_MapScript_OnMapFrameTable
 	map_script EVENT_TAG_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MapScript_OnWarpTable
 	.byte 0
 
-LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
+LittlerootTown_MapScript_OnMapTransition: @ 81E7DDB
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
-	call LittlerootTown_EventScript_271ED7
-	compare VAR_0x4092, 2
-	call_if_eq LittlerootTown_EventScript_1E7E67
-	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E7E6F
-	compare VAR_0x4050, 3
+	call EventScript_SetGfxId0ToRival
+	compare VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_FEMALE
+	call_if_eq LittlerootTown_EventScript_MoveMomToMaysHouse
+	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_SetTwinPosition
+	compare VAR_BIRCH_ATTACK, 3
 	call_if_eq LittlerootTown_EventScript_1E7E92
 	compare VAR_0x4082, 4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
@@ -31,7 +31,7 @@ LittlerootTown_EventScript_1E7E45:: @ 81E7E45
 	return
 
 LittlerootTown_EventScript_1E7E4B:: @ 81E7E4B
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	return
 
 LittlerootTown_EventScript_1E7E4F:: @ 81E7E4F
@@ -48,18 +48,22 @@ LittlerootTown_EventScript_1E7E5C:: @ 81E7E5C
 	setvar VAR_0x408C, 5
 	return
 
-LittlerootTown_EventScript_1E7E67:: @ 81E7E67
+@ Mom's default coords (in map.json) are at brendan's house.
+@ This will permamently move her to may's house.
+LittlerootTown_EventScript_MoveMomToMaysHouse:: @ 81E7E67
 	setobjectxyperm 4, 14, 8
 	return
 
-LittlerootTown_EventScript_1E7E6F:: @ 81E7E6F
-	compare VAR_0x4050, 0
-	goto_if_eq LittlerootTown_EventScript_1E7E86
+LittlerootTown_EventScript_SetTwinPosition:: @ 81E7E6F
+	compare VAR_BIRCH_ATTACK, BIRCH_ATTACK_INACTIVE
+	goto_if_eq LittlerootTown_EventScript_MoveTwinToNormal
+    @ Set the twin to look towards the route where birch is
+    @ being attacked.
 	setobjectxyperm 1, 10, 1
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_EventScript_1E7E86:: @ 81E7E86
+LittlerootTown_EventScript_MoveTwinToNormal:: @ 81E7E86
 	setobjectxyperm 1, 7, 2
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_DOWN
 	return
@@ -82,101 +86,101 @@ LittlerootTown_EventScript_1E7EB9:: @ 81E7EB9
 	setobjectxyperm 4, 14, 9
 	return
 
-LittlerootTown_MapScript_OnInputTable: @ 81E7EC1
-	map_script_2 VAR_0x4092, 1, LittlerootTown_EventScript_1E7EDB
-	map_script_2 VAR_0x4092, 2, LittlerootTown_EventScript_1E7EF9
+LittlerootTown_MapScript_OnMapFrameTable: @ 81E7EC1
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_MALE, LittlerootTown_EventScript_BrendanExitMovingTruck
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_FEMALE, LittlerootTown_EventScript_MayExitMovingTruck
 	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FB1
 	.2byte 0
 
-LittlerootTown_EventScript_1E7EDB:: @ 81E7EDB
+LittlerootTown_EventScript_BrendanExitMovingTruck:: @ 81E7EDB
 	lockall
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 8
-	call LittlerootTown_EventScript_1E7F17
+	call LittlerootTown_EventScript_ExitMovingTruck
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
 	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
 	end
 
-LittlerootTown_EventScript_1E7EF9:: @ 81E7EF9
+LittlerootTown_EventScript_MayExitMovingTruck:: @ 81E7EF9
 	lockall
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
-	call LittlerootTown_EventScript_1E7F17
+	call LittlerootTown_EventScript_ExitMovingTruck
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
 	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
 	end
 
-LittlerootTown_EventScript_1E7F17:: @ 81E7F17
+LittlerootTown_EventScript_ExitMovingTruck:: @ 81E7F17
 	delay 15
 	playse SE_DANSA
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FAC
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_ExitTruck
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	addobject 4
-	applymovement 4, LittlerootTown_Movement_1E7F98
+	applymovement 4, LittlerootTown_Movement_MomLeaveDoorway
 	waitmovement 0
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	delay 10
-	applymovement 4, LittlerootTown_Movement_1E7F9A
+	applymovement 4, LittlerootTown_Movement_MomTurnToPlayer
 	waitmovement 0
-	msgbox LittlerootTown_Text_1E86BC, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_MomMovingTruckSpeech, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, LittlerootTown_Movement_1E7F9D
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FA4
+	applymovement 4, LittlerootTown_Movement_MomWalkIntoHouse0
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PlayerWalkIntoHouse0
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
-	applymovement 4, LittlerootTown_Movement_1E7FA1
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FA9
+	applymovement 4, LittlerootTown_Movement_MomWalkIntoHouse1
+	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_PlayerWalkIntoHouse1
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setvar VAR_0x4092, 3
+	setvar VAR_INTRO_SEQUENCE_STATE, INTRO_SEQUENCE_STATE_IN_HOUSE
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	return
 
-LittlerootTown_Movement_1E7F98: @ 81E7F98
+LittlerootTown_Movement_MomLeaveDoorway: @ 81E7F98
 	walk_down
 	step_end
 
-LittlerootTown_Movement_1E7F9A: @ 81E7F9A
+LittlerootTown_Movement_MomTurnToPlayer: @ 81E7F9A
 	walk_down
 	walk_in_place_fastest_left
 	step_end
 
-LittlerootTown_Movement_1E7F9D: @ 81E7F9D
+LittlerootTown_Movement_MomWalkIntoHouse0: @ 81E7F9D
 	delay_16
 	delay_8
 	walk_up
 	step_end
 
-LittlerootTown_Movement_1E7FA1: @ 81E7FA1
+LittlerootTown_Movement_MomWalkIntoHouse1: @ 81E7FA1
 	walk_up
 	set_invisible
 	step_end
 
-LittlerootTown_Movement_1E7FA4: @ 81E7FA4
+LittlerootTown_Movement_PlayerWalkIntoHouse0: @ 81E7FA4
 	delay_16
 	delay_8
 	walk_right
 	walk_in_place_fastest_up
 	step_end
 
-LittlerootTown_Movement_1E7FA9: @ 81E7FA9
+LittlerootTown_Movement_PlayerWalkIntoHouse1: @ 81E7FA9
 	walk_up
 	walk_up
 	step_end
 
-LittlerootTown_Movement_1E7FAC: @ 81E7FAC
+LittlerootTown_Movement_ExitTruck: @ 81E7FAC
 	jump_right
 	delay_16
 	delay_16
@@ -194,7 +198,7 @@ LittlerootTown_EventScript_1E7FB1:: @ 81E7FB1
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	delay 20
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
 	waitstate
 	releaseall
@@ -236,7 +240,7 @@ LittlerootTown_EventScript_1E8034:: @ 81E8034
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_1E8087
 	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E807A
-	compare VAR_0x4050, 0
+	compare VAR_BIRCH_ATTACK, 0
 	goto_if_ne LittlerootTown_EventScript_1E805D
 	msgbox LittlerootTown_Text_1E8BB8, MSGBOX_DEFAULT
 	release
@@ -248,7 +252,7 @@ LittlerootTown_EventScript_1E805D:: @ 81E805D
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
 	waitmovement 0
-	setvar VAR_0x4050, 2
+	setvar VAR_BIRCH_ATTACK, 2
 	release
 	end
 
@@ -366,7 +370,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
 	waitmovement 0
-	setvar VAR_0x4050, 2
+	setvar VAR_BIRCH_ATTACK, 2
 	releaseall
 	end
 
@@ -909,7 +913,7 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 LittlerootTown_EventScript_1E8686:: @ 81E8686
 	removeobject 4
 	setflag FLAG_SYS_B_DASH
-	setvar VAR_0x4050, 4
+	setvar VAR_BIRCH_ATTACK, 4
 	release
 	end
 
@@ -925,7 +929,7 @@ LittlerootTown_EventScript_1E8693:: @ 81E8693
 	delay 30
 	return
 
-LittlerootTown_Text_1E86BC: @ 81E86BC
+LittlerootTown_Text_MomMovingTruckSpeech: @ 81E86BC
 	.string "MOM: {PLAYER}, we're here, honey!\p"
 	.string "It must be tiring riding with our things\n"
 	.string "in the moving truck.\p"

@@ -36,7 +36,7 @@ SlateportCity_EventScript_1DCC99:: @ 81DCC99
 	return
 
 SlateportCity_EventScript_1DCCE7:: @ 81DCCE7
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 30
 	goto_if_eq SlateportCity_EventScript_1DCD06
@@ -83,7 +83,7 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	removeobject 35
 	setobjectxyperm 35, 10, 12
 	setobjectmovementtype 35, MOVEMENT_TYPE_FACE_DOWN
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	setvar VAR_0x40D2, 2
 	addvar VAR_0x40D1, 1
 	releaseall

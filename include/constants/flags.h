@@ -1548,7 +1548,7 @@
 
 // Special Flags (Unknown)
 #define SPECIAL_FLAGS_START                                        0x4000
-#define FLAG_SPECIAL_FLAG_0x4000                                   0x4000
+#define FLAG_HIDE_MAP_NAME                                   0x4000
 #define FLAG_SPECIAL_FLAG_0x4001                                   0x4001
 #define FLAG_SPECIAL_FLAG_0x4002                                   0x4002
 #define FLAG_SPECIAL_FLAG_0x4003                                   0x4003

@@ -96,7 +96,7 @@
 #define VAR_0x404D                 0x404D
 #define VAR_0x404E                 0x404E
 #define VAR_LOTAD_SIZE_RECORD      0x404F
-#define VAR_0x4050                 0x4050
+#define VAR_BIRCH_ATTACK                 0x4050
 #define VAR_0x4051                 0x4051
 #define VAR_0x4052                 0x4052
 #define VAR_0x4053                 0x4053
@@ -162,7 +162,7 @@
 #define VAR_0x408F                 0x408F
 #define VAR_0x4090                 0x4090
 #define VAR_0x4091                 0x4091
-#define VAR_0x4092                 0x4092
+#define VAR_INTRO_SEQUENCE_STATE                 0x4092
 #define VAR_0x4093                 0x4093
 #define VAR_0x4094                 0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE                 0x4095

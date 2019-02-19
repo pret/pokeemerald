@@ -15,6 +15,7 @@
 #include "constants/trainers.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
+#include "constants/event_object_var_values.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1779,29 +1780,20 @@ EventScript_271ED5:: @ 8271ED5
 EventScript_271ED6:: @ 8271ED6
 	end
 
-EverGrandeCity_ChampionsRoom_EventScript_271ED7:: @ 8271ED7
-LavaridgeTown_EventScript_271ED7:: @ 8271ED7
-LilycoveCity_EventScript_271ED7:: @ 8271ED7
-LittlerootTown_EventScript_271ED7:: @ 8271ED7
-LittlerootTown_ProfessorBirchsLab_EventScript_271ED7:: @ 8271ED7
-OldaleTown_EventScript_271ED7:: @ 8271ED7
-Route103_EventScript_271ED7:: @ 8271ED7
-Route104_EventScript_271ED7:: @ 8271ED7
-Route110_EventScript_271ED7:: @ 8271ED7
-Route119_EventScript_271ED7:: @ 8271ED7
-RustboroCity_EventScript_271ED7:: @ 8271ED7
+@ Sets VAR_OBJ_GFX_ID_0 to the correct Rival sprite.
+EventScript_SetGfxId0ToRival:: @ 8271ED7
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq RustboroCity_EventScript_271EEF
+	goto_if_eq EventScript_SetRivalGfxMay
 	compare VAR_RESULT, FEMALE
-	goto_if_eq RustboroCity_EventScript_271EF5
+	goto_if_eq EventScript_SetRivalGfxBrendan
 	end
 
-RustboroCity_EventScript_271EEF:: @ 8271EEF
+EventScript_SetRivalGfxMay:: @ 8271EEF
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
-RustboroCity_EventScript_271EF5:: @ 8271EF5
+EventScript_SetRivalGfxBrendan:: @ 8271EF5
 	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
@@ -3648,7 +3640,7 @@ Route118_EventScript_273D13:: @ 8273D13
 Route125_EventScript_273D13:: @ 8273D13
 Route127_EventScript_273D13:: @ 8273D13
 Route129_EventScript_273D13:: @ 8273D13
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	return
 
 Route105_EventScript_273D17:: @ 8273D17
@@ -3683,7 +3675,7 @@ Route105_EventScript_273D31:: @ 8273D31
 	special DrawWholeMapView
 	setvar VAR_0x4037, 0
 	setvar VAR_0x4039, 0
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	fadescreenswapbuffers 0
 	releaseall
 	end

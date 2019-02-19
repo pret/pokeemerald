@@ -15,7 +15,7 @@ Route119_EventScript_1F4439:: @ 81F4439
 	return
 
 Route119_MapScript1_1F444D: @ 81F444D
-	call Route119_EventScript_271ED7
+	call EventScript_SetGfxId0ToRival
 	call Route119_EventScript_271EFB
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
 	call_if_eq Route119_EventScript_1F4466

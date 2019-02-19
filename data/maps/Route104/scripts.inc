@@ -13,7 +13,7 @@ Route104_EventScript_1ECC47:: @ 81ECC47
 	end
 
 Route104_MapScript1_1ECC4E: @ 81ECC4E
-	call Route104_EventScript_271ED7
+	call EventScript_SetGfxId0ToRival
 	call Route104_EventScript_1ECC78
 	call Route104_EventScript_1ECC5E
 	end

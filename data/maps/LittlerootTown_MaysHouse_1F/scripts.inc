@@ -5,7 +5,7 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5
-	compare VAR_0x4092, 6
+	compare VAR_INTRO_SEQUENCE_STATE, 6
 	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_1F88CA
 	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
 	end
@@ -26,11 +26,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
-	compare VAR_0x4092, 3
+	compare VAR_INTRO_SEQUENCE_STATE, 3
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F892E
-	compare VAR_0x4092, 5
+	compare VAR_INTRO_SEQUENCE_STATE, 5
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8916
-	compare VAR_0x4092, 6
+	compare VAR_INTRO_SEQUENCE_STATE, 6
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_1F8922
 	end
 
@@ -50,9 +50,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1F892E:: @ 81F892E
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript2_1F893A: @ 81F893A
-	map_script_2 VAR_0x4092, 3, LittlerootTown_MaysHouse_1F_EventScript_1F898C
-	map_script_2 VAR_0x4092, 5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
-	map_script_2 VAR_0x4092, 6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_1F898C
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_1F8964
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_1F899D
 	map_script_2 VAR_0x408C, 1, LittlerootTown_MaysHouse_1F_EventScript_1F89AE
 	map_script_2 VAR_0x4082, 3, LittlerootTown_MaysHouse_1F_EventScript_292AF2
 	.2byte 0
@@ -211,7 +211,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_0x408D, 3
-	setvar VAR_0x4050, 1
+	setvar VAR_BIRCH_ATTACK, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

@@ -12,7 +12,7 @@ SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
 	end
 
 SkyPillar_Outside_EventScript_2392CF:: @ 82392CF
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	return
 
 SkyPillar_Outside_EventScript_2392D3:: @ 82392D3
@@ -81,7 +81,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	closemessage
 	playse SE_KAIDAN
 	fadescreenswapbuffers 1
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	setvar VAR_0x405E, 4
 	removeobject 1
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE

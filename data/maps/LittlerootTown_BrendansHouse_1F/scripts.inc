@@ -1,11 +1,11 @@
 LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
-	map_script EVENT_TAG_ON_MAP_LOAD, LittlerootTown_BrendansHouse_1F_MapScript1_1F7765
-	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4
-	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA
+	map_script EVENT_TAG_ON_MAP_LOAD, LittlerootTown_BrendansHouse_1F_MapScript_OnMapLoad
+	map_script EVENT_TAG_ON_MAP_TRANSITION, LittlerootTown_BrendansHouse_1F_MapScript_OnMapTransition
+	map_script EVENT_TAG_ON_MAP_FRAME_TABLE, LittlerootTown_BrendansHouse_1F_MapScript_OnMapFrameTable
 	.byte 0
 
-LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
-	compare VAR_0x4092, 6
+LittlerootTown_BrendansHouse_1F_MapScript_OnMapLoad: @ 81F7765
+	compare VAR_INTRO_SEQUENCE_STATE, 6
 	call_if_lt LittlerootTown_BrendansHouse_1F_EventScript_1F777A
 	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
 	end
@@ -25,12 +25,12 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
 	setmetatile 3, 7, 659, 1
 	return
 
-LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4
-	compare VAR_0x4092, 3
+LittlerootTown_BrendansHouse_1F_MapScript_OnMapTransition: @ 81F77A4
+	compare VAR_INTRO_SEQUENCE_STATE, 3
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
-	compare VAR_0x4092, 5
+	compare VAR_INTRO_SEQUENCE_STATE, 5
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
-	compare VAR_0x4092, 6
+	compare VAR_INTRO_SEQUENCE_STATE, 6
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
 	end
 
@@ -49,10 +49,10 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F77DE:: @ 81F77DE
 	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
-LittlerootTown_BrendansHouse_1F_MapScript2_1F77EA: @ 81F77EA
-	map_script_2 VAR_0x4092, 3, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
-	map_script_2 VAR_0x4092, 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
-	map_script_2 VAR_0x4092, 6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
+LittlerootTown_BrendansHouse_1F_MapScript_OnMapFrameTable: @ 81F77EA
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, 3, LittlerootTown_BrendansHouse_1F_EventScript_1F783C
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7814
+	map_script_2 VAR_INTRO_SEQUENCE_STATE, 6, LittlerootTown_BrendansHouse_1F_EventScript_1F784D
 	map_script_2 VAR_0x4082, 1, LittlerootTown_BrendansHouse_1F_EventScript_1F785E
 	map_script_2 VAR_0x4082, 3, LittlerootTown_BrendansHouse_1F_EventScript_292AF2
 	.2byte 0
@@ -174,7 +174,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	delay 30
 	setvar VAR_0x408D, 3
-	setvar VAR_0x4050, 1
+	setvar VAR_BIRCH_ATTACK, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

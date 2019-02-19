@@ -135,7 +135,7 @@
       "x": 8,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_0x4092",
+      "var": "VAR_INTRO_SEQUENCE_STATE",
       "var_value": 4,
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_1F78A3"
     },

@@ -5,7 +5,7 @@ RustboroCity_MapScripts:: @ 81E06BD
 
 RustboroCity_MapScript1_1E06C8: @ 81E06C8
 	setflag FLAG_VISITED_RUSTBORO_CITY
-	call RustboroCity_EventScript_271ED7
+	call EventScript_SetGfxId0ToRival
 	compare VAR_0x405A, 6
 	call_if_eq RustboroCity_EventScript_1E0707
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
@@ -24,7 +24,7 @@ RustboroCity_EventScript_1E06FF:: @ 81E06FF
 	end
 
 RustboroCity_EventScript_1E0707:: @ 81E0707
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	return
 
 RustboroCity_MapScript2_1E070B: @ 81E070B
@@ -100,7 +100,7 @@ RustboroCity_EventScript_1E07BD:: @ 81E07BD
 	removeobject 15
 	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	setvar VAR_0x405A, 7
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	releaseall
 	end
 

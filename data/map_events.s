@@ -7,6 +7,7 @@
 #include "constants/secret_bases.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
+#include "constants/event_object_var_values.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

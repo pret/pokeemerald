@@ -8,7 +8,7 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
 	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_1F8457
 	compare VAR_0x408D, 3
 	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_1F841A
-	compare VAR_0x4092, 4
+	compare VAR_INTRO_SEQUENCE_STATE, 4
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_2926FE
 	call LittlerootTown_BrendansHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
@@ -84,7 +84,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	setvar VAR_0x408D, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setvar VAR_0x4050, 1
+	setvar VAR_BIRCH_ATTACK, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

@@ -126,7 +126,7 @@ A map can only have one event of each kind at any time, except for OnInput and O
 
 Event tables are a list of events along with a condition for when they should be run. Whenever a table is checked, the event system will start at the top of the table, and check each condition in order. The conditions are a pair of values before the script name. If the two values are equal, the event script is run. Note that once an event is found, the rest of the table is ignored.
 
-The "values" in these condition pairs can be a fixed constant, or the name of a variable. For example, if an event has the form: `map_script_2 VAR_0x4092, 1, LittlerootTown_EventScript_1E7EDB`, then this script will only intercept the event if `VAR_0x4092` is set to 1.
+The "values" in these condition pairs can be a fixed constant, or the name of a variable. For example, if an event has the form: `map_script_2 VAR_INTRO_SEQUENCE_STATE, 1, LittlerootTown_EventScript_BrendanExitMovingTruck`, then this script will only intercept the event if `VAR_INTRO_SEQUENCE_STATE` is set to 1.
 
 ### OnMapLoad Script
 

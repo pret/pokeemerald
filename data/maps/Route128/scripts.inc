@@ -73,7 +73,7 @@ Route128_EventScript_1F6B57:: @ 81F6B57
 	delay 15
 	removeobject 3
 	waitfieldeffect 30
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	setvar VAR_0x407B, 2
 	releaseall
 	end

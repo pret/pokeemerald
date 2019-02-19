@@ -8,7 +8,7 @@ LilycoveCity_MapScript1_1E2B47: @ 81E2B47
 	setvar VAR_0x4086, 0
 	setflag FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER
 	call_if_set FLAG_SYS_WEATHER_CTRL, LilycoveCity_EventScript_27207A
-	call LilycoveCity_EventScript_271ED7
+	call EventScript_SetGfxId0ToRival
 	end
 
 LilycoveCity_MapScript1_1E2B61: @ 81E2B61

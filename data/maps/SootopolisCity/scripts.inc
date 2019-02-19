@@ -62,7 +62,7 @@ SootopolisCity_MapScript1_1E56EF: @ 81E56EF
 	end
 
 SootopolisCity_EventScript_1E5781:: @ 81E5781
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	return
 
 SootopolisCity_EventScript_1E5785:: @ 81E5785
@@ -272,7 +272,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_0x405E, 2
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	releaseall
 	end
 
@@ -372,7 +372,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_0x405E, 2
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	releaseall
 	end
 
@@ -544,7 +544,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_RUNECITY
 	delay 120
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	warp8 MAP_SOOTOPOLIS_CITY, 255, 43, 32
 	waitstate
 	end
@@ -597,7 +597,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_NAMINORI
 	delay 120
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	warp8 MAP_SOOTOPOLIS_CITY, 255, 29, 53
 	waitstate
 	end

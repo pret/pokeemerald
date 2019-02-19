@@ -5,7 +5,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	.byte 0
 
 LittlerootTown_ProfessorBirchsLab_MapScript1_1F9CA1: @ 81F9CA1
-	call LittlerootTown_ProfessorBirchsLab_EventScript_271ED7
+	call EventScript_SetGfxId0ToRival
 	call LittlerootTown_ProfessorBirchsLab_EventScript_2720AD
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7
@@ -541,7 +541,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	setflag FLAG_ADVENTURE_STARTED
 	setvar VAR_0x4051, 1
 	setvar VAR_0x408D, 4
-	setvar VAR_0x4050, 3
+	setvar VAR_BIRCH_ATTACK, 3
 	releaseall
 	end
 

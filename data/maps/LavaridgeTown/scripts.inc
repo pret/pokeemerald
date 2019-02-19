@@ -7,7 +7,7 @@ LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_set FLAG_FLANNERY_GIVES_BADGE_INFO, LavaridgeTown_EventScript_1EA514
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F
-	call LavaridgeTown_EventScript_271ED7
+	call EventScript_SetGfxId0ToRival
 	call LavaridgeTown_EventScript_271EFB
 	compare VAR_0x4053, 1
 	call_if_eq LavaridgeTown_EventScript_1EA518
@@ -37,7 +37,7 @@ LavaridgeTown_EventScript_1EA53F:: @ 81EA53F
 	return
 
 LavaridgeTown_EventScript_1EA543:: @ 81EA543
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	return
 
 LavaridgeTown_MapScript2_1EA547: @ 81EA547
@@ -95,7 +95,7 @@ LavaridgeTown_EventScript_1EA5FF:: @ 81EA5FF
 	call_if_ne LavaridgeTown_EventScript_1EA6C9
 	removeobject 7
 	setvar VAR_0x4053, 2
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

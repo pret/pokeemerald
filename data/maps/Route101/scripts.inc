@@ -12,7 +12,7 @@ Route101_MapScript2_1EBCCB: @ 81EBCCB
 	.2byte 0
 
 Route101_EventScript_1EBCD5:: @ 81EBCD5
-	setflag FLAG_SPECIAL_FLAG_0x4000
+	setflag FLAG_HIDE_MAP_NAME
 	setvar VAR_0x4060, 1
 	end
 
@@ -236,7 +236,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_0x4084, 2
 	setvar VAR_0x4060, 3
-	clearflag FLAG_SPECIAL_FLAG_0x4000
+	clearflag FLAG_HIDE_MAP_NAME
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq Route101_EventScript_1EBE85

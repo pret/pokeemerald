@@ -8,7 +8,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_1F930A
 	compare VAR_0x408D, 3
 	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
-	compare VAR_0x4092, 4
+	compare VAR_INTRO_SEQUENCE_STATE, 4
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
@@ -85,7 +85,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	setvar VAR_0x408D, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	setvar VAR_0x4050, 1
+	setvar VAR_BIRCH_ATTACK, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
