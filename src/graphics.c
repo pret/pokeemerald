@@ -1157,7 +1157,7 @@ const u32 gUnknown_08D97CF4[] = INCBIN_U32("graphics/interface/summary_frames.gb
 
 const u32 gStatusScreenBitmap[] = INCBIN_U32("graphics/interface/status_screen.4bpp.lz");
 const u32 gStatusScreenPalette[] = INCBIN_U32("graphics/interface/status_screen.gbapal.lz");
-const u32 gUnknown_08D9862C[] = INCBIN_U32("graphics/interface/status_screen.bin.lz");
+const u32 gPageInfoTilemap[] = INCBIN_U32("graphics/interface/status_screen.bin.lz");
 
 const u32 gPageSkillsTilemap[] = INCBIN_U32("graphics/interface/status_tilemap1.bin.lz");
 const u32 gPageBattleMovesTilemap[] = INCBIN_U32("graphics/interface/status_tilemap2.bin.lz");

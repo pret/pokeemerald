@@ -4019,7 +4019,7 @@ extern const u32 gPokenavLeftHeaderCondition_Gfx[];
 extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
 extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
 
-extern const u32 gUnknown_08D9862C[];
+extern const u32 gPageInfoTilemap[];
 extern const u32 gUnknown_08D98CC8[];
 extern const u32 gPageSkillsTilemap[];
 extern const u32 gPageBattleMovesTilemap[];

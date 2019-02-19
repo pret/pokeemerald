@@ -1230,7 +1230,7 @@ static bool8 SummaryScreen_DecompressGraphics(void)
     case 1:
         if (free_temp_tile_data_buffers_if_possible() != 1)
         {
-            LZDecompressWram(gUnknown_08D9862C, pssData->bgTilemapBuffers[PSS_PAGE_INFO][0]);
+            LZDecompressWram(gPageInfoTilemap, pssData->bgTilemapBuffers[PSS_PAGE_INFO][0]);
             pssData->switchCounter++;
         }
         break;
