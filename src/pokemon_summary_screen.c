@@ -97,17 +97,17 @@ static EWRAM_DATA struct PssData
     u8 currPageIndex;
     u8 minPageIndex;
     u8 maxPageIndex;
-    bool8 unk40C3;
+    bool8 lockMonFlag; // This is used to prevent the player from changing pokemon in the move deleter select, etc, but it is not needed because the input is handled differently there
     u16 newMove;
     u8 firstMoveIndex;
     u8 secondMoveIndex;
     bool8 unk40C8;
-    u8 unk40C9;
+    u8 bgDisplayOrder; // Determines the order page backgrounds are loaded while scrolling between them
     u8 filler40CA;
     u8 windowIds[8];
     u8 spriteIds[28];
     bool8 unk40EF;
-    s16 unk40F0;
+    s16 switchCounter; // Used for various switch statement cases that decompress/load graphics or pokemon data
     u8 unk_filler4[6];
 } *pssData = NULL;
 EWRAM_DATA u8 gUnknown_0203CF20 = 0;
@@ -144,11 +144,11 @@ static s8 sub_81C08F8(s8 a);
 static s8 sub_81C09B4(s8 a);
 static bool8 sub_81C0A50(struct Pokemon* mon);
 static void ChangePage(u8 taskId, s8 a);
-static void sub_81C0B8C(u8 taskId);
-static void sub_81C0C68(u8 taskId);
-static void sub_81C0CC4(u8 taskId);
-static void sub_81C0D44(u8 taskId);
-static void sub_81C0E24(void);
+static void PssScrollRight(u8 taskId);
+static void PssScrollRightEnd(u8 taskId);
+static void PssScrollLeft(u8 taskId);
+static void PssScrollLeftEnd(u8 taskId);
+static void CheckExperienceProgressBar(void);
 static void sub_81C0E48(u8 taskId);
 static void HandleInput_MoveSelect(u8 taskId);
 static bool8 sub_81C1040(void);
@@ -164,7 +164,7 @@ static void sub_81C174C(u8 taskId);
 static bool8 sub_81C18A8(void);
 static void sub_81C18F4(u8 a);
 static void sub_81C1940(u8 taskId);
-static void sub_81C1BA0(void);
+static void AllocPagePalette(void);
 static void sub_81C1DA4(u16 a, s16 b);
 static void sub_81C1E20(u8 taskId);
 static void sub_81C1EFC(u16 a, s16 b, u16 c);
@@ -494,7 +494,7 @@ static const struct WindowTemplate gUnknown_0861CC24[] =
     },
     DUMMY_WIN_TEMPLATE
 };
-static const struct WindowTemplate gUnknown_0861CCCC[] =
+static const struct WindowTemplate gPageInfoTemplate[] =
 {
     {//Original Trainer
         .bg = 0,
@@ -533,7 +533,7 @@ static const struct WindowTemplate gUnknown_0861CCCC[] =
         .baseBlock = 557,
     },
 };
-static const struct WindowTemplate gUnknown_0861CCEC[] =
+static const struct WindowTemplate gPageSkillsTemplate[] =
 {
     {//Held Item string
         .bg = 0,
@@ -581,7 +581,7 @@ static const struct WindowTemplate gUnknown_0861CCEC[] =
         .baseBlock = 543,
     },
 };
-static const struct WindowTemplate gUnknown_0861CD14[] =
+static const struct WindowTemplate gPageMovesTemplate[] = // This is used for both battle and contest moves
 {
     {//Move names?
         .bg = 0,
@@ -1026,7 +1026,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     case PSS_MODE_SELECT_MOVE:
         pssData->minPageIndex = 2;
         pssData->maxPageIndex = 3;
-        pssData->unk40C3 = TRUE;
+        pssData->lockMonFlag = TRUE;
         break;
     }
 
@@ -1101,7 +1101,7 @@ static bool8 SummaryScreen_LoadGraphics(void)
         break;
     case 5:
         InitBGs();
-        pssData->unk40F0 = 0;
+        pssData->switchCounter = 0;
         gMain.state++;
         break;
     case 6:
@@ -1113,12 +1113,12 @@ static bool8 SummaryScreen_LoadGraphics(void)
         gMain.state++;
         break;
     case 8:
-        sub_81C1BA0();
+        AllocPagePalette();
         gMain.state++;
         break;
     case 9:
         CopyMonToSummaryStruct(&pssData->currentMon);
-        pssData->unk40F0 = 0;
+        pssData->switchCounter = 0;
         gMain.state++;
         break;
     case 10:
@@ -1148,14 +1148,14 @@ static bool8 SummaryScreen_LoadGraphics(void)
     case 16:
         ResetSpriteIds();
         CreateMoveTypeIcons();
-        pssData->unk40F0 = 0;
+        pssData->switchCounter = 0;
         gMain.state++;
         break;
     case 17:
-        pssData->spriteIds[0] = CreatePokemonSprite(&pssData->currentMon, &pssData->unk40F0);
+        pssData->spriteIds[0] = CreatePokemonSprite(&pssData->currentMon, &pssData->switchCounter);
         if (pssData->spriteIds[0] != 0xFF)
         {
-            pssData->unk40F0 = 0;
+            pssData->switchCounter = 0;
             gMain.state++;
         }
         break;
@@ -1220,64 +1220,64 @@ static void InitBGs(void)
 
 static bool8 SummaryScreen_DecompressGraphics(void)
 {
-    switch (pssData->unk40F0)
+    switch (pssData->switchCounter)
     {
     case 0:
         reset_temp_tile_data_buffers();
         decompress_and_copy_tile_data_to_vram(1, &gUnknown_08D97D0C, 0, 0, 0);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 1:
         if (free_temp_tile_data_buffers_if_possible() != 1)
         {
             LZDecompressWram(gUnknown_08D9862C, pssData->bgTilemapBuffers[PSS_PAGE_INFO][0]);
-            pssData->unk40F0++;
+            pssData->switchCounter++;
         }
         break;
     case 2:
         LZDecompressWram(gUnknown_08D98CC8, pssData->bgTilemapBuffers[PSS_PAGE_INFO][1]);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 3:
         LZDecompressWram(gUnknown_08D987FC, pssData->bgTilemapBuffers[PSS_PAGE_SKILLS][1]);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 4:
         LZDecompressWram(gUnknown_08D9898C, pssData->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][1]);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 5:
         LZDecompressWram(gUnknown_08D98B28, pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][1]);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 6:
         LoadCompressedPalette(gUnknown_08D9853C, 0, 0x100);
         LoadPalette(&gUnknown_08D85620, 0x81, 0x1E);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 7:
         LoadCompressedSpriteSheet(&sSpriteSheet_MoveTypes);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 8:
         LoadCompressedSpriteSheet(&gUnknown_0861D074);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 9:
         LoadCompressedSpriteSheet(&sStatusIconsSpriteSheet);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 10:
         LoadCompressedSpritePalette(&sStatusIconsSpritePalette);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 11:
         LoadCompressedSpritePalette(&gUnknown_0861D07C);
-        pssData->unk40F0++;
+        pssData->switchCounter++;
         break;
     case 12:
         LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60);
-        pssData->unk40F0 = 0;
+        pssData->switchCounter = 0;
         return TRUE;
     }
     return FALSE;
@@ -1301,7 +1301,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
 {
     u32 i;
     struct PokeSummary *sum = &pssData->summary;
-    switch (pssData->unk40F0)
+    switch (pssData->switchCounter)
     {
     case 0:
         sum->species = GetMonData(a, MON_DATA_SPECIES);
@@ -1366,7 +1366,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *a)
         sum->ribbonCount = GetMonData(a, MON_DATA_RIBBON_COUNT);
         return TRUE;
     }
-    pssData->unk40F0++;
+    pssData->switchCounter++;
     return FALSE;
 }
 
@@ -1481,7 +1481,7 @@ static void ChangePokemon(u8 taskId, s8 a)
 {
     s8 r4_2;
 
-    if (!pssData->unk40C3)
+    if (!pssData->lockMonFlag)
     {
         if (pssData->isBoxMon == TRUE)
         {
@@ -1545,7 +1545,7 @@ static void sub_81C0704(u8 taskId)
         break;
     case 3:
         CopyMonToSummaryStruct(&pssData->currentMon);
-        pssData->unk40F0 = 0;
+        pssData->switchCounter = 0;
         break;
     case 4:
         if (ExtractMonDataToSummaryStruct(&pssData->currentMon) == FALSE)
@@ -1568,7 +1568,7 @@ static void sub_81C0704(u8 taskId)
         if (pssData->spriteIds[0] == 0xFF)
             return;
         gSprites[pssData->spriteIds[0]].data[2] = 1;
-        sub_81C0E24();
+        CheckExperienceProgressBar();
         data[1] = 0;
         break;
     case 9:
@@ -1678,19 +1678,19 @@ static void ChangePage(u8 taskId, s8 b)
     pssData->currPageIndex += b;
     data[0] = 0;
     if (b == 1)
-        SetTaskFuncWithFollowupFunc(taskId, sub_81C0B8C, gTasks[taskId].func);
+        SetTaskFuncWithFollowupFunc(taskId, PssScrollRight, gTasks[taskId].func);
     else
-        SetTaskFuncWithFollowupFunc(taskId, sub_81C0CC4, gTasks[taskId].func);
+        SetTaskFuncWithFollowupFunc(taskId, PssScrollLeft, gTasks[taskId].func);
     CreateTextPrinterTask(pssData->currPageIndex);
     HidePageSpecificSprites();
 }
 
-static void sub_81C0B8C(u8 taskId)
+static void PssScrollRight(u8 taskId) // Scroll right
 {
     s16 *data = gTasks[taskId].data;
     if (data[0] == 0)
     {
-        if (pssData->unk40C9 == 0)
+        if (pssData->bgDisplayOrder == 0)
         {
             data[1] = 1;
             SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
@@ -1712,28 +1712,28 @@ static void sub_81C0B8C(u8 taskId)
     ChangeBgX(data[1], 0x2000, 1);
     data[0] += 32;
     if (data[0] > 0xFF)
-        gTasks[taskId].func = sub_81C0C68;
+        gTasks[taskId].func = PssScrollRightEnd;
 }
 
-static void sub_81C0C68(u8 taskId)
+static void PssScrollRightEnd(u8 taskId) // display right
 {
     s16 *data = gTasks[taskId].data;
-    pssData->unk40C9 ^= 1;
+    pssData->bgDisplayOrder ^= 1;
     data[1] = 0;
     data[0] = 0;
-    sub_81C1BA0();
+    AllocPagePalette();
     CreatePageWindowTilemaps(pssData->currPageIndex);
     SetTypeIcons();
-    sub_81C0E24();
+    CheckExperienceProgressBar();
     SwitchTaskToFollowupFunc(taskId);
 }
 
-static void sub_81C0CC4(u8 taskId)
+static void PssScrollLeft(u8 taskId) // Scroll left
 {
     s16 *data = gTasks[taskId].data;
     if (data[0] == 0)
     {
-        if (pssData->unk40C9 == 0)
+        if (pssData->bgDisplayOrder == 0)
             data[1] = 2;
         else
             data[1] = 1;
@@ -1742,13 +1742,13 @@ static void sub_81C0CC4(u8 taskId)
     ChangeBgX(data[1], 0x2000, 2);
     data[0] += 32;
     if (data[0] > 0xFF)
-        gTasks[taskId].func = sub_81C0D44;
+        gTasks[taskId].func = PssScrollLeftEnd;
 }
 
-static void sub_81C0D44(u8 taskId)
+static void PssScrollLeftEnd(u8 taskId) // display left
 {
     s16 *data = gTasks[taskId].data;
-    if (pssData->unk40C9 == 0)
+    if (pssData->bgDisplayOrder == 0)
     {
         SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
         SetBgAttribute(2, BG_ATTR_PRIORITY, 2);
@@ -1767,17 +1767,17 @@ static void sub_81C0D44(u8 taskId)
     }
     ShowBg(1);
     ShowBg(2);
-    pssData->unk40C9 ^= 1;
+    pssData->bgDisplayOrder ^= 1;
     data[1] = 0;
     data[0] = 0;
-    sub_81C1BA0();
+    AllocPagePalette();
     CreatePageWindowTilemaps(pssData->currPageIndex);
     SetTypeIcons();
-    sub_81C0E24();
+    CheckExperienceProgressBar();
     SwitchTaskToFollowupFunc(taskId);
 }
 
-static void sub_81C0E24(void)
+static void CheckExperienceProgressBar(void)
 {
     if (pssData->currPageIndex == 1)
         DrawExperienceProgressBar(&pssData->currentMon);
@@ -2235,7 +2235,7 @@ u8 sub_81C1B94(void)
     return gUnknown_0203CF21;
 }
 
-static void sub_81C1BA0(void)
+static void AllocPagePalette(void) // Allocates and copies page palette
 {
     u16 *alloced = Alloc(32);
     u8 i;
@@ -2418,7 +2418,7 @@ static void sub_81C1F80(u8 taskId)
     {
         if (data[0] < 0)
         {
-            if (pssData->currPageIndex == 3 && FuncIsActiveTask(sub_81C0B8C) == 0)
+            if (pssData->currPageIndex == 3 && FuncIsActiveTask(PssScrollRight) == 0)
                 PutWindowTilemap(15);
             DrawContestMoveHearts(data[2]);
         }
@@ -2987,7 +2987,7 @@ static void PrintMonOTName(void)
     int x;
     if (InBattleFactory() != TRUE && sub_81B9E94() != TRUE)
     {
-        windowId = AddWindowFromTemplateList(gUnknown_0861CCCC, 0);
+        windowId = AddWindowFromTemplateList(gPageInfoTemplate, 0);
         SummaryScreen_PrintTextOnWindow(windowId, gText_OTSlash, 0, 1, 0, 1);
         x = GetStringWidth(1, gText_OTSlash, 0);
         if (pssData->summary.OTGender == 0)
@@ -3004,20 +3004,20 @@ static void PrintMonOTID(void)
     {
         ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_UnkCtrlF907F908), (u16)pssData->summary.OTID, 2, 5);
         xPos = GetStringRightAlignXOffset(1, gStringVar1, 56);
-        SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 1), gStringVar1, xPos, 1, 0, 1);
+        SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 1), gStringVar1, xPos, 1, 0, 1);
     }
 }
 
 static void PrintMonAbilityName(void)
 {
     u8 ability = GetAbilityBySpecies(pssData->summary.species, pssData->summary.altAbility);
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 2), gAbilityNames[ability], 0, 1, 0, 1);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 2), gAbilityNames[ability], 0, 1, 0, 1);
 }
 
 static void PrintMonAbilityDescription(void)
 {
     u8 ability = GetAbilityBySpecies(pssData->summary.species, pssData->summary.altAbility);
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 2), gAbilityDescriptionPointers[ability], 0, 17, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 2), gAbilityDescriptionPointers[ability], 0, 17, 0, 0);
 }
 
 static void BufferMonTrainerMemo(void)
@@ -3074,7 +3074,7 @@ static void BufferMonTrainerMemo(void)
 
 static void PrintMonTrainerMemo(void)
 {
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 3), gStringVar4, 0, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 3), gStringVar4, 0, 1, 0, 0);
 }
 
 static void BufferNatureString(void)
@@ -3147,7 +3147,7 @@ static bool8 IsInGamePartnerMon(void)
 
 static void PrintEggOTName(void)
 {
-    u32 windowId = AddWindowFromTemplateList(gUnknown_0861CCCC, 0);
+    u32 windowId = AddWindowFromTemplateList(gPageInfoTemplate, 0);
     u32 width = GetStringWidth(1, gText_OTSlash, 0);
     SummaryScreen_PrintTextOnWindow(windowId, gText_OTSlash, 0, 1, 0, 1);
     SummaryScreen_PrintTextOnWindow(windowId, gText_FiveMarks, width, 1, 0, 1);
@@ -3159,7 +3159,7 @@ static void PrintEggOTID(void)
     StringCopy(gStringVar1, gText_UnkCtrlF907F908);
     StringAppend(gStringVar1, gText_FiveMarks);
     x = GetStringRightAlignXOffset(1, gStringVar1, 56);
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 1), gStringVar1, x, 1, 0, 1);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 1), gStringVar1, x, 1, 0, 1);
 }
 
 static void PrintEggState(void)
@@ -3178,7 +3178,7 @@ static void PrintEggState(void)
     else
         text = gText_EggWillTakeALongTime;
 
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 2), text, 0, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 2), text, 0, 1, 0, 0);
 }
 
 static void PrintEggMemo(void)
@@ -3202,7 +3202,7 @@ static void PrintEggMemo(void)
         text = gText_OddEggFoundByCouple;
     }
 
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCCC, 3), text, 0, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageInfoTemplate, 3), text, 0, 1, 0, 0);
 }
 
 static void PrintSkillsPageText(void)
@@ -3270,7 +3270,7 @@ static void PrintHeldItemName(void)
     }
 
     offset = GetStringCenterAlignXOffset(1, text, 72) + 6;
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCEC, 0), text, offset, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageSkillsTemplate, 0), text, offset, 1, 0, 0);
 }
 
 static void PrintRibbonCount(void)
@@ -3290,7 +3290,7 @@ static void PrintRibbonCount(void)
     }
 
     offset = GetStringCenterAlignXOffset(1, text, 70) + 6;
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCEC, 1), text, offset, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageSkillsTemplate, 1), text, offset, 1, 0, 0);
 }
 
 static void BufferLeftColumnStats(void)
@@ -3320,7 +3320,7 @@ static void BufferLeftColumnStats(void)
 
 static void PrintLeftColumnStats(void)
 {
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCEC, 2), gStringVar4, 4, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageSkillsTemplate, 2), gStringVar4, 4, 1, 0, 0);
 }
 
 static void BufferRightColumnStats(void)
@@ -3338,13 +3338,13 @@ static void BufferRightColumnStats(void)
 
 static void PrintRightColumnStats(void)
 {
-    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gUnknown_0861CCEC, 3), gStringVar4, 2, 1, 0, 0);
+    SummaryScreen_PrintTextOnWindow(AddWindowFromTemplateList(gPageSkillsTemplate, 3), gStringVar4, 2, 1, 0, 0);
 }
 
 static void PrintExpPointsNextLevel(void)
 {
     struct PokeSummary *sum = &pssData->summary;
-    u8 windowId = AddWindowFromTemplateList(gUnknown_0861CCEC, 4);
+    u8 windowId = AddWindowFromTemplateList(gPageSkillsTemplate, 4);
     int offset;
     u32 expToNextLevel;
 
@@ -3436,8 +3436,8 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     const u8 *text;
     u32 offset;
     struct PssData *summaryStruct = pssData;
-    u8 moveNameWindowId = AddWindowFromTemplateList(gUnknown_0861CD14, 0);
-    u8 ppValueWindowId = AddWindowFromTemplateList(gUnknown_0861CD14, 1);
+    u8 moveNameWindowId = AddWindowFromTemplateList(gPageMovesTemplate, 0);
+    u8 ppValueWindowId = AddWindowFromTemplateList(gPageMovesTemplate, 1);
     u16 move = summaryStruct->summary.moves[moveIndex];
 
     if (move != 0)
@@ -3560,14 +3560,14 @@ static void PrintContestMoveDescription(u8 moveSlot)
 
     if (move != MOVE_NONE)
     {
-        u8 windowId = AddWindowFromTemplateList(gUnknown_0861CD14, 2);
+        u8 windowId = AddWindowFromTemplateList(gPageMovesTemplate, 2);
         SummaryScreen_PrintTextOnWindow(windowId, gContestEffectDescriptionPointers[gContestMoves[move].effect], 6, 1, 0, 0);
     }
 }
 
 static void PrintMoveDetails(u16 move)
 {
-    u8 windowId = AddWindowFromTemplateList(gUnknown_0861CD14, 2);
+    u8 windowId = AddWindowFromTemplateList(gPageMovesTemplate, 2);
     FillWindowPixelBuffer(windowId, 0);
     if (move != MOVE_NONE)
     {
@@ -3592,8 +3592,8 @@ static void PrintMoveDetails(u16 move)
 
 static void PrintNewMoveDetailsOrCancelText(void)
 {
-    u8 windowId1 = AddWindowFromTemplateList(gUnknown_0861CD14, 0);
-    u8 windowId2 = AddWindowFromTemplateList(gUnknown_0861CD14, 1);
+    u8 windowId1 = AddWindowFromTemplateList(gPageMovesTemplate, 0);
+    u8 windowId2 = AddWindowFromTemplateList(gPageMovesTemplate, 1);
 
     if (pssData->newMove == MOVE_NONE)
     {
@@ -3619,15 +3619,15 @@ static void PrintNewMoveDetailsOrCancelText(void)
 
 static void sub_81C4064(void)
 {
-    u8 windowId = AddWindowFromTemplateList(gUnknown_0861CD14, 0);
+    u8 windowId = AddWindowFromTemplateList(gPageMovesTemplate, 0);
     FillWindowPixelRect(windowId, 0, 0, 66, 72, 16);
     CopyWindowToVram(windowId, 2);
 }
 
 static void sub_81C40A0(u8 moveIndex1, u8 moveIndex2)
 {
-    u8 windowId1 = AddWindowFromTemplateList(gUnknown_0861CD14, 0);
-    u8 windowId2 = AddWindowFromTemplateList(gUnknown_0861CD14, 1);
+    u8 windowId1 = AddWindowFromTemplateList(gPageMovesTemplate, 0);
+    u8 windowId2 = AddWindowFromTemplateList(gPageMovesTemplate, 1);
 
     FillWindowPixelRect(windowId1, 0, 0, moveIndex1 * 16, 0x48, 0x10);
     FillWindowPixelRect(windowId1, 0, 0, moveIndex2 * 16, 0x48, 0x10);
@@ -3641,7 +3641,7 @@ static void sub_81C40A0(u8 moveIndex1, u8 moveIndex2)
 
 static void PrintHMMovesCantBeForgotten(void)
 {
-    u8 windowId = AddWindowFromTemplateList(gUnknown_0861CD14, 2);
+    u8 windowId = AddWindowFromTemplateList(gPageMovesTemplate, 2);
     FillWindowPixelBuffer(windowId, 0);
     SummaryScreen_PrintTextOnWindow(windowId, gText_HMMovesCantBeForgotten2, 6, 1, 0, 0);
 }
