@@ -60,7 +60,7 @@ FortreeCity_Gym_EventScript_216646:: @ 8216646
 FortreeCity_Gym_EventScript_21666A:: @ 821666A
 	giveitem_std ITEM_TM40
 	compare VAR_RESULT, 0
-	goto_if_eq FortreeCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_216FEC, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM40
 	return

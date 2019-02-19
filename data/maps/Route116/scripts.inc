@@ -152,7 +152,7 @@ Route116_EventScript_1F2D84:: @ 81F2D84
 Route116_EventScript_1F2D95:: @ 81F2D95
 	lockall
 	applymovement 11, Common_Movement_WalkInPlaceRight
-	applymovement EVENT_OBJ_ID_PLAYER, Route116_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox Route116_Text_1F309D, MSGBOX_DEFAULT
 	setvar VAR_0x406F, 2

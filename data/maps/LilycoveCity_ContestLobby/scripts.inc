@@ -86,7 +86,7 @@ LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41A
 	waitmovement 0
 	playse SE_PIN
-	applymovement 4, LilycoveCity_ContestLobby_Movement_272598
+	applymovement 4, Common_Movement_EmoteExclamationMark
 	waitmovement 0
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41E
 	waitmovement 0
@@ -259,7 +259,7 @@ LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A547
 	waitmovement 0
 	playse SE_PIN
-	applymovement 11, LilycoveCity_ContestLobby_Movement_272598
+	applymovement 11, Common_Movement_EmoteExclamationMark
 	waitmovement 0
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A54B
 	waitmovement 0
@@ -614,7 +614,7 @@ LilycoveCity_ContestLobby_EventScript_21A7E9:: @ 821A7E9
 
 LilycoveCity_ContestLobby_EventScript_21A7F9:: @ 821A7F9
 	closemessage
-	applymovement VAR_LAST_TALKED, LilycoveCity_ContestLobby_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

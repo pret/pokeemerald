@@ -15,15 +15,15 @@ Route112_EventScript_1F1DB7:: @ 81F1DB7
 	delay 20
 	msgbox Route112_Text_1F1F3F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route112_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement 6, Route112_Movement_2725A4
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F1F7A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 6, Route112_Movement_2725A2
+	applymovement 6, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
 	applymovement 1, Common_Movement_WalkInPlaceRight
@@ -31,15 +31,15 @@ Route112_EventScript_1F1DB7:: @ 81F1DB7
 	delay 20
 	msgbox Route112_Text_1F1FBA, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Route112_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	delay 40
-	applymovement 6, Route112_Movement_2725A4
+	applymovement 6, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 20
 	msgbox Route112_Text_1F2003, MSGBOX_DEFAULT
 	closemessage
-	applymovement 6, Route112_Movement_2725A2
+	applymovement 6, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

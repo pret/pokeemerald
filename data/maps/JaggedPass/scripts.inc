@@ -71,9 +71,9 @@ JaggedPass_EventScript_230718:: @ 8230718
 	goto_if_set FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS, JaggedPass_EventScript_230766
 	waitse
 	playse SE_PIN
-	applymovement 5, JaggedPass_Movement_272598
+	applymovement 5, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 5, JaggedPass_Movement_27259A
+	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 5, Common_Movement_FacePlayer
 	waitmovement 0
@@ -81,7 +81,7 @@ JaggedPass_EventScript_230718:: @ 8230718
 	closemessage
 	trainerbattle_no_intro TRAINER_GRUNT_30, JaggedPass_Text_230D2D
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
-	applymovement 5, JaggedPass_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -91,7 +91,7 @@ JaggedPass_EventScript_230766:: @ 8230766
 	waitmovement 0
 	msgbox JaggedPass_Text_230D65, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, JaggedPass_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

@@ -193,7 +193,7 @@ OldaleTown_EventScript_1E901F:: @ 81E901F
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_1E9066
 	msgbox OldaleTown_Text_1E939A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, OldaleTown_Movement_2725A2
+	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -34,7 +34,7 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	playbgm MUS_AQA_0, 0
 	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2725B2
 	waitmovement 0
-	applymovement 2, MtPyre_Summit_Movement_2725AA
+	applymovement 2, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 50
 	compare VAR_0x8008, 0
@@ -98,7 +98,7 @@ MtPyre_Summit_EventScript_23210C:: @ 823210C
 MtPyre_Summit_EventScript_232117:: @ 8232117
 	applymovement 3, MtPyre_Summit_Movement_232132
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
@@ -207,7 +207,7 @@ MtPyre_Summit_EventScript_232204:: @ 8232204
 	end
 
 MtPyre_Summit_EventScript_232210:: @ 8232210
-	applymovement EVENT_OBJ_ID_PLAYER, MtPyre_Summit_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 60
 	compare VAR_0x8008, 0
@@ -217,9 +217,9 @@ MtPyre_Summit_EventScript_232210:: @ 8232210
 	compare VAR_0x8008, 2
 	call_if_eq MtPyre_Summit_EventScript_2322F6
 	playse SE_PIN
-	applymovement 8, MtPyre_Summit_Movement_272598
+	applymovement 8, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 8, MtPyre_Summit_Movement_27259A
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
 	compare VAR_0x8008, 0

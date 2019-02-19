@@ -23,7 +23,7 @@ RusturfTunnel_EventScript_22CE5F:: @ 822CE5F
 	faceplayer
 	msgbox RusturfTunnel_Text_22D7A3, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -35,7 +35,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_22D510, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -43,7 +43,7 @@ RusturfTunnel_EventScript_22CE76:: @ 822CE76
 RusturfTunnel_EventScript_22CE99:: @ 822CE99
 	msgbox RusturfTunnel_Text_22D5F3, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, RusturfTunnel_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -94,7 +94,7 @@ RusturfTunnel_EventScript_22CF6F:: @ 822CF6F
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
-	applymovement 10, RusturfTunnel_Movement_2725AA
+	applymovement 10, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -102,14 +102,14 @@ RusturfTunnel_EventScript_22CF8B:: @ 822CF8B
 	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_22D045
 	applymovement 1, RusturfTunnel_Movement_22D06C
 	waitmovement 0
-	applymovement 10, RusturfTunnel_Movement_2725AA
+	applymovement 10, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
 RusturfTunnel_EventScript_22CFA7:: @ 822CFA7
-	applymovement 1, RusturfTunnel_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, RusturfTunnel_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -142,9 +142,9 @@ RusturfTunnel_EventScript_22CFE6:: @ 822CFE6
 
 RusturfTunnel_EventScript_22CFFF:: @ 822CFFF
 	playse SE_PIN
-	applymovement 1, RusturfTunnel_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, RusturfTunnel_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	return
 

@@ -98,7 +98,7 @@ MossdeepCity_Gym_EventScript_220937:: @ 8220937
 MossdeepCity_Gym_EventScript_22095B:: @ 822095B
 	giveitem_std ITEM_TM04
 	compare VAR_RESULT, 0
-	goto_if_eq MossdeepCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_221A40, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	return

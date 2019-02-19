@@ -10,7 +10,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_218189:: @ 8218189
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21831E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -21,7 +21,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_2181C3:: @ 82181C3
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_218470, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -32,7 +32,7 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA:: @ 82181EA
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_2185F4, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -40,11 +40,11 @@ LilycoveCity_CoveLilyMotel_1F_EventScript_2181EA:: @ 82181EA
 LilycoveCity_CoveLilyMotel_1F_EventScript_218211:: @ 8218211
 	lockall
 	playse SE_PIN
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, LilycoveCity_CoveLilyMotel_1F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_CoveLilyMotel_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_21839B, MSGBOX_DEFAULT
 	closemessage

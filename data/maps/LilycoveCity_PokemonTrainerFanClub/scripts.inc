@@ -9,7 +9,7 @@ LilycoveCity_PokemonTrainerFanClub_MapScript2_21C790: @ 821C790
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A:: @ 821C79A
 	lockall
-	applymovement 1, LilycoveCity_PokemonTrainerFanClub_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF00, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C7FD
@@ -20,7 +20,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C79A:: @ 821C79A
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21CF12, MSGBOX_DEFAULT
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C804
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LilycoveCity_PokemonTrainerFanClub_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	applymovement 4, LilycoveCity_PokemonTrainerFanClub_Movement_21C807
 	waitmovement 0

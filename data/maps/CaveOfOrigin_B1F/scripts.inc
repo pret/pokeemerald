@@ -6,13 +6,13 @@ CaveOfOrigin_B1F_EventScript_2357A9:: @ 82357A9
 	faceplayer
 	msgbox CaveOfOrigin_B1F_Text_23586E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, CaveOfOrigin_B1F_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 60
 	playse SE_PIN
-	applymovement 1, CaveOfOrigin_B1F_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, CaveOfOrigin_B1F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
 	applymovement 1, Common_Movement_FacePlayer

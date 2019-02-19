@@ -18,7 +18,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80B0534
-	applymovement EVENT_OBJ_ID_PLAYER, MagmaHideout_4F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	delay 150
 	removeobject 7

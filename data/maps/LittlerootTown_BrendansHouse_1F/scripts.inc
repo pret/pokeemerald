@@ -90,11 +90,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F784D:: @ 81F784D
 LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	lockall
 	playse SE_PIN
-	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_272598
+	applymovement 4, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_27259A
+	applymovement 4, Common_Movement_Delay48
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1F789C
 	waitmovement 0
 	special GetRivalSonDaughterString
@@ -117,7 +117,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78A3:: @ 81F78A3
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
-	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_2725A4
+	applymovement VAR_0x8004, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	goto LittlerootTown_BrendansHouse_1F_EventScript_292765
 	end
@@ -146,9 +146,9 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	addobject 7
 	delay 30
 	playse SE_PIN
-	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_272598
+	applymovement 7, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_27259A
+	applymovement 7, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if_ne LittlerootTown_BrendansHouse_1F_EventScript_1F7981
@@ -181,7 +181,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F7981:: @ 81F7981
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 

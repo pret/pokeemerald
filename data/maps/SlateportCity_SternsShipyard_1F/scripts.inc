@@ -12,7 +12,7 @@ SlateportCity_SternsShipyard_1F_EventScript_207F40:: @ 8207F40
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_2080A5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
@@ -38,7 +38,7 @@ SlateportCity_SternsShipyard_1F_EventScript_207FBA:: @ 8207FBA
 	waitmovement 0
 	msgbox SlateportCity_SternsShipyard_1F_Text_2081A5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SlateportCity_SternsShipyard_1F_Movement_2725A2
+	applymovement 1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

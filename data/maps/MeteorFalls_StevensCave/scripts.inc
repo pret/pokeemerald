@@ -6,9 +6,9 @@ MeteorFalls_StevensCave_EventScript_23B182:: @ 823B182
 	goto_if_set FLAG_DEFEATED_METEOR_FALLS_STEVEN, MeteorFalls_StevensCave_EventScript_23B1CD
 	waitse
 	playse SE_PIN
-	applymovement 1, MeteorFalls_StevensCave_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, MeteorFalls_StevensCave_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0

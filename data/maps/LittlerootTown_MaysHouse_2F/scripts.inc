@@ -68,9 +68,9 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F946F
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
 	playbgm MUS_GIRL_SUP, 1
@@ -94,7 +94,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F9473
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -106,7 +106,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93BA:: @ 81F93BA
 LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F948B
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -118,7 +118,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F93E9:: @ 81F93E9
 LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F949D
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A6
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage
@@ -129,7 +129,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9418:: @ 81F9418
 LittlerootTown_MaysHouse_2F_EventScript_1F9440:: @ 81F9440
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_1F94AD
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F959C, MSGBOX_DEFAULT
 	closemessage

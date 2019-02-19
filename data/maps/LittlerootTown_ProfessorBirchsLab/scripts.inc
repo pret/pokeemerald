@@ -168,7 +168,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	playse SE_TK_KASYA
 	delay 20
 	applymovement 3, Common_Movement_WalkInPlaceRight
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE
@@ -180,8 +180,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	delay 20
 	applymovement 2, LittlerootTown_ProfessorBirchsLab_Movement_1F9F58
 	waitmovement 0
-	applymovement 3, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
-	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB419, MSGBOX_DEFAULT
 	playfanfare MUS_FANFA4

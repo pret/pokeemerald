@@ -15,9 +15,9 @@ BattleFrontier_ReceptionGate_EventScript_2661F3:: @ 82661F3
 	lockall
 	setvar VAR_0x40D0, 1
 	playse SE_PIN
-	applymovement 1, BattleFrontier_ReceptionGate_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, BattleFrontier_ReceptionGate_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_266580, MSGBOX_DEFAULT
 	closemessage
@@ -38,14 +38,14 @@ BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
 	msgbox BattleFrontier_ReceptionGate_Text_2666C6, MSGBOX_DEFAULT
 	msgbox BattleFrontier_ReceptionGate_Text_266703, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, BattleFrontier_ReceptionGate_Movement_2725A6
-	applymovement 2, BattleFrontier_ReceptionGate_Movement_2725A6
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
+	applymovement 2, Common_Movement_WalkInPlaceUp
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, BattleFrontier_ReceptionGate_Movement_272598
-	applymovement 2, BattleFrontier_ReceptionGate_Movement_272598
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_ReceptionGate_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
+	applymovement 2, Common_Movement_EmoteExclamationMark
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_EmoteExclamationMark
 	waitmovement 0
 	msgbox BattleFrontier_ReceptionGate_Text_266733, MSGBOX_DEFAULT
 	closemessage

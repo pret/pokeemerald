@@ -32,9 +32,9 @@ MossdeepCity_SpaceCenter_2F_MapScript2_223DB5: @ 8223DB5
 
 MossdeepCity_SpaceCenter_2F_EventScript_223DBF:: @ 8223DBF
 	playse SE_PIN
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_272598
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_27259A
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2243A4, MSGBOX_YESNO
 	compare VAR_RESULT, 1
@@ -57,7 +57,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223E09:: @ 8223E09
 	trainerbattle_no_intro TRAINER_GRUNT_34, MossdeepCity_SpaceCenter_2F_Text_224461
 	applymovement 6, MossdeepCity_SpaceCenter_2F_Movement_223E85
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_22446E, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_35, MossdeepCity_SpaceCenter_2F_Text_224499
@@ -173,7 +173,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_223F59:: @ 8223F59
 	lock
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2245D9, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725A2
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -238,13 +238,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_223FDA:: @ 8223FDA
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_22400C
 	msgbox MossdeepCity_SpaceCenter_2F_Text_224854, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_22400C:: @ 822400C
-	applymovement VAR_LAST_TALKED, MossdeepCity_SpaceCenter_2F_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	special SavePlayerParty
 	fadescreen 1
@@ -277,11 +277,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	msgbox MossdeepCity_SpaceCenter_2F_Text_2248C2, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	applymovement 9, MossdeepCity_SpaceCenter_2F_Movement_2725A4
-	applymovement 8, MossdeepCity_SpaceCenter_2F_Movement_2725AA
+	applymovement 9, Common_Movement_WalkInPlaceLeft
+	applymovement 8, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 60
-	applymovement 9, MossdeepCity_SpaceCenter_2F_Movement_2725A6
+	applymovement 9, Common_Movement_WalkInPlaceUp
 	applymovement 8, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20

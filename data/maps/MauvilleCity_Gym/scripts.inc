@@ -126,7 +126,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	giveitem_std ITEM_TM34
 	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_20E844, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM34
 	return

@@ -236,9 +236,9 @@ Route110_TrickHouseEntrance_EventScript_269D3B:: @ 8269D3B
 
 Route110_TrickHouseEntrance_EventScript_269D6E:: @ 8269D6E
 	playse SE_PIN
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_272598
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, Route110_TrickHouseEntrance_Movement_27259A
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	compare VAR_0x4044, 0
 	call_if_eq Route110_TrickHouseEntrance_EventScript_269DEE
@@ -329,12 +329,12 @@ Route110_TrickHouseEntrance_EventScript_269E51:: @ 8269E51
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Route110_TrickHouseEntrance_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, Route110_TrickHouseEntrance_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_26A9AF, MSGBOX_DEFAULT
-	applymovement 1, Route110_TrickHouseEntrance_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end
@@ -364,7 +364,7 @@ Route110_TrickHouseEntrance_EventScript_269EEF:: @ 8269EEF
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -374,7 +374,7 @@ Route110_TrickHouseEntrance_EventScript_269F1B:: @ 8269F1B
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -384,7 +384,7 @@ Route110_TrickHouseEntrance_EventScript_269F47:: @ 8269F47
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -394,7 +394,7 @@ Route110_TrickHouseEntrance_EventScript_269F73:: @ 8269F73
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -404,7 +404,7 @@ Route110_TrickHouseEntrance_EventScript_269F9F:: @ 8269F9F
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -414,7 +414,7 @@ Route110_TrickHouseEntrance_EventScript_269FCB:: @ 8269FCB
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -424,7 +424,7 @@ Route110_TrickHouseEntrance_EventScript_269FF7:: @ 8269FF7
 	compare VAR_RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_26A023
 	compare VAR_RESULT, 0
-	call_if_eq Route110_TrickHouseEntrance_EventScript_27205E
+	call_if_eq Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_26AB00, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -432,7 +432,7 @@ Route110_TrickHouseEntrance_EventScript_269FF7:: @ 8269FF7
 Route110_TrickHouseEntrance_EventScript_26A023:: @ 826A023
 	setvar VAR_0x40C1, 0
 	setvar VAR_0x40A7, 3
-	applymovement 1, Route110_TrickHouseEntrance_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end

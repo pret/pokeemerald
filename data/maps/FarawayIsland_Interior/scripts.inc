@@ -56,9 +56,9 @@ FarawayIsland_Interior_MapScript2_267D98: @ 8267D98
 FarawayIsland_Interior_EventScript_267DA2:: @ 8267DA2
 	lockall
 	playse SE_PIN
-	applymovement 1, FarawayIsland_Interior_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, FarawayIsland_Interior_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	applymovement 1, FarawayIsland_Interior_Movement_267DCE
 	waitmovement 0

@@ -195,7 +195,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 	giveitem_std ITEM_TM08
 	compare VAR_RESULT, 0
-	goto_if_eq DewfordTown_Gym_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_1FD181, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
 	return

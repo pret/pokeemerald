@@ -36,7 +36,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	lockall
 	applymovement 1, SkyPillar_Outside_Movement_2393D3
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, SkyPillar_Outside_Movement_2725A4
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	msgbox SkyPillar_Outside_Text_239416, MSGBOX_DEFAULT
 	closemessage
@@ -60,13 +60,13 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	special sub_8139560
 	waitstate
 	delay 20
-	applymovement 1, SkyPillar_Outside_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 10
 	applymovement 1, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 20
-	applymovement 1, SkyPillar_Outside_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	msgbox SkyPillar_Outside_Text_23950C, MSGBOX_DEFAULT

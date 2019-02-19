@@ -13,9 +13,9 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	goto_if_eq SeafloorCavern_Entrance_EventScript_2344ED
 	waitse
 	playse SE_PIN
-	applymovement 1, SeafloorCavern_Entrance_Movement_272598
+	applymovement 1, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 1, SeafloorCavern_Entrance_Movement_27259A
+	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	delay 20
 	compare VAR_FACING, 3
@@ -29,7 +29,7 @@ SeafloorCavern_Entrance_EventScript_234485:: @ 8234485
 	moveobjectoffscreen 1
 	msgbox SeafloorCavern_Entrance_Text_234544, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SeafloorCavern_Entrance_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end
@@ -43,13 +43,13 @@ SeafloorCavern_Entrance_EventScript_2344ED:: @ 82344ED
 	call_if_eq SeafloorCavern_Entrance_EventScript_234539
 	msgbox SeafloorCavern_Entrance_Text_2346C8, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, SeafloorCavern_Entrance_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	releaseall
 	end
 
 SeafloorCavern_Entrance_EventScript_234523:: @ 8234523
-	applymovement 1, SeafloorCavern_Entrance_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 
@@ -59,7 +59,7 @@ SeafloorCavern_Entrance_EventScript_23452E:: @ 823452E
 	return
 
 SeafloorCavern_Entrance_EventScript_234539:: @ 8234539
-	applymovement 1, SeafloorCavern_Entrance_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 

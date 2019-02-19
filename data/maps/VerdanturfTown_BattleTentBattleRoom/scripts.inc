@@ -77,8 +77,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	applymovement 2, VerdanturfTown_BattleTentBattleRoom_Movement_202581
 	waitmovement 0
 	removeobject 2
-	applymovement 3, VerdanturfTown_BattleTentBattleRoom_Movement_2725AA
-	applymovement 1, VerdanturfTown_BattleTentBattleRoom_Movement_2725A6
+	applymovement 3, Common_Movement_WalkInPlaceDown
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox VerdanturfTown_BattleTentBattleRoom_Text_24FF00, MSGBOX_DEFAULT
 	special LoadPlayerParty

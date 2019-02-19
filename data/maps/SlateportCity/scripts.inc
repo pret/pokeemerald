@@ -61,7 +61,7 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	waitmovement 0
 	msgbox SlateportCity_Text_1DF032, MSGBOX_DEFAULT
 	closemessage
-	applymovement 35, SlateportCity_Movement_2725A4
+	applymovement 35, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	delay 60
 	msgbox SlateportCity_Text_1DF0FE, MSGBOX_DEFAULT
@@ -359,7 +359,7 @@ SlateportCity_EventScript_1DD009:: @ 81DD009
 	faceplayer
 	msgbox SlateportCity_Text_1DDC4F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, SlateportCity_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -369,7 +369,7 @@ SlateportCity_EventScript_1DD020:: @ 81DD020
 	faceplayer
 	msgbox SlateportCity_Text_1DDC8A, MSGBOX_DEFAULT
 	closemessage
-	applymovement 18, SlateportCity_Movement_2725A2
+	applymovement 18, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -379,7 +379,7 @@ SlateportCity_EventScript_1DD037:: @ 81DD037
 	faceplayer
 	msgbox SlateportCity_Text_1DDCD5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 19, SlateportCity_Movement_2725A2
+	applymovement 19, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -389,7 +389,7 @@ SlateportCity_EventScript_1DD04E:: @ 81DD04E
 	faceplayer
 	msgbox SlateportCity_Text_1DDD18, MSGBOX_DEFAULT
 	closemessage
-	applymovement 26, SlateportCity_Movement_2725A2
+	applymovement 26, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -399,7 +399,7 @@ SlateportCity_EventScript_1DD065:: @ 81DD065
 	faceplayer
 	msgbox SlateportCity_Text_1DDD7D, MSGBOX_DEFAULT
 	closemessage
-	applymovement 27, SlateportCity_Movement_2725A2
+	applymovement 27, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -409,7 +409,7 @@ SlateportCity_EventScript_1DD07C:: @ 81DD07C
 	faceplayer
 	msgbox SlateportCity_Text_1DDDC0, MSGBOX_DEFAULT
 	closemessage
-	applymovement 28, SlateportCity_Movement_2725A2
+	applymovement 28, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -419,7 +419,7 @@ SlateportCity_EventScript_1DD093:: @ 81DD093
 	faceplayer
 	msgbox SlateportCity_Text_1DDDDF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 29, SlateportCity_Movement_2725A2
+	applymovement 29, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -429,7 +429,7 @@ SlateportCity_EventScript_1DD0AA:: @ 81DD0AA
 	faceplayer
 	msgbox SlateportCity_Text_1DDE2F, MSGBOX_DEFAULT
 	closemessage
-	applymovement 30, SlateportCity_Movement_2725A2
+	applymovement 30, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -438,13 +438,13 @@ SlateportCity_EventScript_1DD0C1:: @ 81DD0C1
 	lock
 	faceplayer
 	playse SE_PIN
-	applymovement 31, SlateportCity_Movement_272598
+	applymovement 31, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 31, SlateportCity_Movement_27259A
+	applymovement 31, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_Text_1DDE6E, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, SlateportCity_Movement_2725A2
+	applymovement 31, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	applymovement 31, SlateportCity_Movement_1DD147
 	waitmovement 0
@@ -452,7 +452,7 @@ SlateportCity_EventScript_1DD0C1:: @ 81DD0C1
 	waitmovement 0
 	msgbox SlateportCity_Text_1DDE86, MSGBOX_DEFAULT
 	closemessage
-	applymovement 31, SlateportCity_Movement_2725A2
+	applymovement 31, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	applymovement 31, SlateportCity_Movement_1DD147
 	waitmovement 0
@@ -462,7 +462,7 @@ SlateportCity_EventScript_1DD0C1:: @ 81DD0C1
 	waitmovement 0
 	applymovement 31, SlateportCity_Movement_1DD147
 	waitmovement 0
-	applymovement 31, SlateportCity_Movement_2725A2
+	applymovement 31, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -481,7 +481,7 @@ SlateportCity_EventScript_1DD153:: @ 81DD153
 	faceplayer
 	msgbox SlateportCity_Text_1DDF8D, MSGBOX_DEFAULT
 	closemessage
-	applymovement 33, SlateportCity_Movement_2725A2
+	applymovement 33, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -566,7 +566,7 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	applymovement 10, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 10
-	applymovement 9, SlateportCity_Movement_2725AA
+	applymovement 9, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 25
 	applymovement 11, SlateportCity_Movement_1DD33C
@@ -577,26 +577,26 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	removeobject 10
 	removeobject 9
 	msgbox SlateportCity_Text_1DE5F7, MSGBOX_DEFAULT
-	applymovement 11, SlateportCity_Movement_2725A6
+	applymovement 11, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE64F, MSGBOX_DEFAULT
 	playbgm MUS_AQA_0, 0
 	msgbox SlateportCity_Text_1DE724, MSGBOX_DEFAULT
-	applymovement 6, SlateportCity_Movement_2725A4
-	applymovement 1, SlateportCity_Movement_2725A4
+	applymovement 6, Common_Movement_WalkInPlaceLeft
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	applymovement 7, SlateportCity_Movement_1DD309
 	applymovement 3, SlateportCity_Movement_272596
 	applymovement 2, SlateportCity_Movement_1DD311
 	waitmovement 0
-	applymovement 11, SlateportCity_Movement_2725AA
+	applymovement 11, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE7F7, MSGBOX_DEFAULT
 	playse SE_PIN
-	applymovement 11, SlateportCity_Movement_272598
+	applymovement 11, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 11, SlateportCity_Movement_27259A
+	applymovement 11, Common_Movement_Delay48
 	waitmovement 0
-	applymovement 11, SlateportCity_Movement_2725A6
+	applymovement 11, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE860, MSGBOX_DEFAULT
 	msgbox SlateportCity_Text_1DE8A0, MSGBOX_DEFAULT

@@ -219,7 +219,7 @@ SootopolisCity_EventScript_1E5946:: @ 81E5946
 	setvar VAR_0x8004, 0
 	special sub_813B7D8
 	waitstate
-	applymovement 10, SootopolisCity_Movement_2725A4
+	applymovement 10, Common_Movement_WalkInPlaceLeft
 	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 60
@@ -319,7 +319,7 @@ SootopolisCity_EventScript_1E5A82:: @ 81E5A82
 	setvar VAR_0x8004, 0
 	special sub_813B7D8
 	waitstate
-	applymovement 10, SootopolisCity_Movement_2725A4
+	applymovement 10, Common_Movement_WalkInPlaceLeft
 	applymovement 9, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	delay 60
@@ -730,7 +730,7 @@ SootopolisCity_EventScript_1E5ED8:: @ 81E5ED8
 	goto_if_eq SootopolisCity_EventScript_1E5F10
 	msgbox SootopolisCity_Text_1E6BFF, MSGBOX_DEFAULT
 	closemessage
-	applymovement 3, SootopolisCity_Movement_2725A2
+	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -798,7 +798,7 @@ SootopolisCity_EventScript_1E5FE2:: @ 81E5FE2
 	goto_if_eq SootopolisCity_EventScript_1E600D
 	msgbox SootopolisCity_Text_1E71A1, MSGBOX_DEFAULT
 	closemessage
-	applymovement 2, SootopolisCity_Movement_2725A2
+	applymovement 2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -838,7 +838,7 @@ SootopolisCity_EventScript_1E6038:: @ 81E6038
 SootopolisCity_EventScript_1E6065:: @ 81E6065
 	msgbox SootopolisCity_Text_1E7078, MSGBOX_DEFAULT
 	closemessage
-	applymovement 8, SootopolisCity_Movement_2725A2
+	applymovement 8, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -865,7 +865,7 @@ SootopolisCity_EventScript_1E608E:: @ 81E608E
 	goto_if_le SootopolisCity_EventScript_1E60CF
 	msgbox SootopolisCity_Text_1E690B, MSGBOX_DEFAULT
 	closemessage
-	applymovement 4, SootopolisCity_Movement_2725A2
+	applymovement 4, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -893,7 +893,7 @@ SootopolisCity_EventScript_1E60E3:: @ 81E60E3
 	goto_if_le SootopolisCity_EventScript_1E6141
 	msgbox SootopolisCity_Text_1E6692, MSGBOX_DEFAULT
 	closemessage
-	applymovement 5, SootopolisCity_Movement_2725A2
+	applymovement 5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -1267,7 +1267,7 @@ SootopolisCity_EventScript_1E635D:: @ 81E635D
 	goto_if_eq SootopolisCity_EventScript_1E6388
 	msgbox SootopolisCity_Text_1E67DC, MSGBOX_DEFAULT
 	closemessage
-	applymovement 15, SootopolisCity_Movement_2725A2
+	applymovement 15, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -1288,7 +1288,7 @@ SootopolisCity_EventScript_1E6393:: @ 81E6393
 	waitmovement 0
 	msgbox SootopolisCity_Text_1E696C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 14, SootopolisCity_Movement_2725A2
+	applymovement 14, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -1308,7 +1308,7 @@ SootopolisCity_EventScript_1E63DB:: @ 81E63DB
 	goto_if_eq SootopolisCity_EventScript_1E6406
 	msgbox SootopolisCity_Text_1E6C7C, MSGBOX_DEFAULT
 	closemessage
-	applymovement 13, SootopolisCity_Movement_2725A2
+	applymovement 13, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
@@ -1327,7 +1327,7 @@ SootopolisCity_EventScript_1E6411:: @ 81E6411
 	goto_if_eq SootopolisCity_EventScript_1E643C
 	msgbox SootopolisCity_Text_1E6A50, MSGBOX_DEFAULT
 	closemessage
-	applymovement 12, SootopolisCity_Movement_2725A2
+	applymovement 12, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

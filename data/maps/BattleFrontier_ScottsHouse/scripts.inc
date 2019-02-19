@@ -227,12 +227,12 @@ BattleFrontier_ScottsHouse_EventScript_2639F8:: @ 82639F8
 	end
 
 BattleFrontier_ScottsHouse_EventScript_263A13:: @ 8263A13
-	applymovement 1, BattleFrontier_ScottsHouse_Movement_2725A6
+	applymovement 1, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_263A1E:: @ 8263A1E
-	applymovement 1, BattleFrontier_ScottsHouse_Movement_2725AA
+	applymovement 1, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	return
 
@@ -242,7 +242,7 @@ BattleFrontier_ScottsHouse_EventScript_263A29:: @ 8263A29
 	return
 
 BattleFrontier_ScottsHouse_EventScript_263A34:: @ 8263A34
-	applymovement 1, BattleFrontier_ScottsHouse_Movement_2725A4
+	applymovement 1, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 

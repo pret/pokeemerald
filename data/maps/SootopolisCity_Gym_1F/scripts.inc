@@ -125,7 +125,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 	giveitem_std ITEM_TM03
 	compare VAR_RESULT, 0
-	goto_if_eq SootopolisCity_Gym_1F_EventScript_27205E
+	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM03
 	return

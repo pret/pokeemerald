@@ -24,7 +24,7 @@ FarawayIsland_Entrance_EventScript_267CA2:: @ 8267CA2
 	goto_if_eq FarawayIsland_Entrance_EventScript_267CE7
 	msgbox FarawayIsland_Entrance_Text_2A6A5D, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, FarawayIsland_Entrance_Movement_2725AA
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	delay 30
 	hideobjectat 1, MAP_FARAWAY_ISLAND_ENTRANCE

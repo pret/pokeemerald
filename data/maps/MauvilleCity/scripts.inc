@@ -70,7 +70,7 @@ MauvilleCity_EventScript_1DF41D:: @ 81DF41D
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_1DF43D
 	msgbox MauvilleCity_Text_1DF7DC, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, MauvilleCity_Movement_2725A2
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -78,7 +78,7 @@ MauvilleCity_EventScript_1DF41D:: @ 81DF41D
 MauvilleCity_EventScript_1DF43D:: @ 81DF43D
 	msgbox MauvilleCity_Text_1DFAA5, MSGBOX_DEFAULT
 	closemessage
-	applymovement 7, MauvilleCity_Movement_2725A2
+	applymovement 7, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -94,9 +94,9 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 6, MauvilleCity_Movement_272598
+	applymovement 6, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 6, MauvilleCity_Movement_27259A
+	applymovement 6, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DF9B2, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_1DF4AD
@@ -164,7 +164,7 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	call_if_eq MauvilleCity_EventScript_1DF5F3
 	compare VAR_FACING, 4
 	call_if_eq MauvilleCity_EventScript_1DF601
-	applymovement EVENT_OBJ_ID_PLAYER, MauvilleCity_Movement_2725AA
+	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, MSGBOX_DEFAULT
 	closemessage

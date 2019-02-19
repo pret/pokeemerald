@@ -307,9 +307,9 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B1B4:: @ 825B1B4
 	applymovement 1, Common_Movement_WalkInPlaceRight
 	applymovement 3, Common_Movement_WalkInPlaceRight
 	applymovement 4, Common_Movement_WalkInPlaceRight
-	applymovement 5, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
-	applymovement 6, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
-	applymovement 7, BattleFrontier_BattleFactoryBattleRoom_Movement_2725A4
+	applymovement 5, Common_Movement_WalkInPlaceLeft
+	applymovement 6, Common_Movement_WalkInPlaceLeft
+	applymovement 7, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	return
 

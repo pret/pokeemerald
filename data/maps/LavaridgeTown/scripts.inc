@@ -110,12 +110,12 @@ LavaridgeTown_EventScript_1EA635:: @ 81EA635
 	return
 
 LavaridgeTown_EventScript_1EA63A:: @ 81EA63A
-	applymovement 8, LavaridgeTown_Movement_2725A6
+	applymovement 8, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement 8, LavaridgeTown_Movement_272598
+	applymovement 8, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 8, LavaridgeTown_Movement_27259A
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
 	return
 
@@ -127,12 +127,12 @@ LavaridgeTown_EventScript_1EA65C:: @ 81EA65C
 	waitmovement 0
 	closedoor 12, 15
 	waitdooranim
-	applymovement 8, LavaridgeTown_Movement_2725A4
+	applymovement 8, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement 8, LavaridgeTown_Movement_272598
+	applymovement 8, Common_Movement_EmoteExclamationMark
 	waitmovement 0
-	applymovement 8, LavaridgeTown_Movement_27259A
+	applymovement 8, Common_Movement_Delay48
 	waitmovement 0
 	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceRight
 	waitmovement 0
