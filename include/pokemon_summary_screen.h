@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEMON_SUMMARY_SCREEN_H
 #define GUARD_POKEMON_SUMMARY_SCREEN_H
 
-extern u8 gUnknown_0203CF20;
+extern u8 gLastViewedMonIndex;
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void sub_81C4F98(u8, void(*)(void));

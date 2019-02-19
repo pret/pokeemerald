@@ -3833,7 +3833,7 @@ static void sub_81B3828(void)
 static void sub_81B3894(void)
 {
     gPaletteFade.bufferTransferDisabled = TRUE;
-    gUnknown_0203CEC8.unk9 = gUnknown_0203CF20;
+    gUnknown_0203CEC8.unk9 = gLastViewedMonIndex;
     InitPartyMenu(gUnknown_0203CEC8.unk8_0, 0xFF, gUnknown_0203CEC8.unkB, 1, 21, sub_81B36FC, gUnknown_0203CEC8.exitCallback);
 }
 

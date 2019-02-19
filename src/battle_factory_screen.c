@@ -1183,7 +1183,7 @@ static void CB2_InitSelectScreen(void)
         break;
     case 5:
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
-            sFactorySelectScreen->cursorPos = gUnknown_0203CF20;
+            sFactorySelectScreen->cursorPos = gLastViewedMonIndex;
         Select_InitMonsData();
         Select_InitAllSprites();
         if (sFactorySelectScreen->fromSummaryScreen == TRUE)
@@ -3172,7 +3172,7 @@ static void CB2_InitSwapScreen(void)
         break;
     case 5:
         if (sFactorySwapScreen->fromSummaryScreen == TRUE)
-            sFactorySwapScreen->cursorPos = gUnknown_0203CF20;
+            sFactorySwapScreen->cursorPos = gLastViewedMonIndex;
         gMain.state++;
         break;
     case 6:

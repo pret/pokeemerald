@@ -110,7 +110,7 @@ static EWRAM_DATA struct PssData
     s16 switchCounter; // Used for various switch statement cases that decompress/load graphics or pokemon data
     u8 unk_filler4[6];
 } *pssData = NULL;
-EWRAM_DATA u8 gUnknown_0203CF20 = 0;
+EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 gUnknown_0203CF21 = 0;
 static EWRAM_DATA u8 gFiller_0203CF22[2] = {0};
 static EWRAM_DATA u8 sUnknownTaskId = 0;
@@ -899,9 +899,9 @@ static const union AnimCmd *const gSpriteAnimTable_861D04C[] = {
     gSpriteAnim_861D03C,
     gSpriteAnim_861D044,
 };
-static const struct CompressedSpriteSheet gUnknown_0861D074 =
+static const struct CompressedSpriteSheet gMoveSelectorSpriteSheet =
 {
-    .data = gUnknown_08D97BEC,
+    .data = gMoveSelectorBitmap,
     .size = 0x400,
     .tag = 30000
 };
@@ -1224,7 +1224,7 @@ static bool8 SummaryScreen_DecompressGraphics(void)
     {
     case 0:
         reset_temp_tile_data_buffers();
-        decompress_and_copy_tile_data_to_vram(1, &gUnknown_08D97D0C, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(1, &gStatusScreenBitmap, 0, 0, 0);
         pssData->switchCounter++;
         break;
     case 1:
@@ -1239,19 +1239,19 @@ static bool8 SummaryScreen_DecompressGraphics(void)
         pssData->switchCounter++;
         break;
     case 3:
-        LZDecompressWram(gUnknown_08D987FC, pssData->bgTilemapBuffers[PSS_PAGE_SKILLS][1]);
+        LZDecompressWram(gPageSkillsTilemap, pssData->bgTilemapBuffers[PSS_PAGE_SKILLS][1]);
         pssData->switchCounter++;
         break;
     case 4:
-        LZDecompressWram(gUnknown_08D9898C, pssData->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][1]);
+        LZDecompressWram(gPageBattleMovesTilemap, pssData->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][1]);
         pssData->switchCounter++;
         break;
     case 5:
-        LZDecompressWram(gUnknown_08D98B28, pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][1]);
+        LZDecompressWram(gPageContestMovesTilemap, pssData->bgTilemapBuffers[PSS_PAGE_CONTEST_MOVES][1]);
         pssData->switchCounter++;
         break;
     case 6:
-        LoadCompressedPalette(gUnknown_08D9853C, 0, 0x100);
+        LoadCompressedPalette(gStatusScreenPalette, 0, 0x100);
         LoadPalette(&gUnknown_08D85620, 0x81, 0x1E);
         pssData->switchCounter++;
         break;
@@ -1260,7 +1260,7 @@ static bool8 SummaryScreen_DecompressGraphics(void)
         pssData->switchCounter++;
         break;
     case 8:
-        LoadCompressedSpriteSheet(&gUnknown_0861D074);
+        LoadCompressedSpriteSheet(&gMoveSelectorSpriteSheet);
         pssData->switchCounter++;
         break;
     case 9:
@@ -1418,7 +1418,7 @@ static void CloseSummaryScreen(u8 taskId)
     if (sub_81221EC() != TRUE && !gPaletteFade.active)
     {
         SetMainCallback2(pssData->callback);
-        gUnknown_0203CF20 = pssData->curMonIndex;
+        gLastViewedMonIndex = pssData->curMonIndex;
         SummaryScreen_DestroyUnknownTask();
         ResetSpriteData();
         FreeAllSpritePalettes();
