@@ -110,13 +110,14 @@ static void sub_80F6EF4(u16);
 static void sub_80F60F0(u8);
 static void sub_80F616C(u8);
 static void sub_80F6204(u8);
-void sub_80F73DC(u8);
-void sub_80F74BC(u8);
+static void sub_80F73DC(u8);
+static void sub_80F74BC(u8);
+static void sub_80F753C(u8);
 void sub_80F77E0(u8, u8);
 static void sub_80F6404(u8);
-void sub_80F75A8(struct Sprite *);
+static void sub_80F75A8(struct Sprite *);
 void sub_80F7670(u8);
-void sub_80F7620(struct Sprite *);
+static void sub_80F7620(struct Sprite *);
 static void sub_80F66B4(u8);
 static void sub_80F671C(u8);
 static void sub_80F677C(u8);
@@ -1438,4 +1439,131 @@ u8 sub_80F7310(u8 monIndex, u8 arg1)
         var1 = 10;
 
     return var1;
+}
+
+s8 sub_80F7364(u8 arg0, u8 arg1)
+{
+    u32 r4;
+    u32 r2;
+    s16 val;
+    s8 ret;
+
+    val = gUnknown_02039F18[arg0];
+    if (val < 0)
+        r4 = -val << 16;
+    else
+        r4 = val << 16;
+
+    r2 = r4 / 80;
+    if (r2 & 0xFFFF)
+        r2 += 0x10000;
+
+    r2 >>= 16;
+    if (r2 == 0 && r4 != 0)
+        r2 = 1;
+
+    if (arg1 != 0 && r2 > 10)
+        r2 = 10;
+
+    if (gUnknown_02039F18[arg0] < 0)
+        ret = -r2;
+    else
+        ret = r2;
+
+    return ret;
+}
+
+static void sub_80F73DC(u8 taskId)
+{
+    u16 firstTileNum;
+
+    if (gTasks[taskId].data[10] == 0)
+    {
+        gTasks[taskId].data[11] = (3 - gTasks[taskId].data[0]) * 40;
+        gTasks[taskId].data[10]++;
+    }
+    else if (gTasks[taskId].data[10] == 1)
+    {
+        if (--gTasks[taskId].data[11] == -1)
+        {
+            firstTileNum = gTasks[taskId].data[0] * 2 + 0x5043;
+            WriteSequenceToBgTilemapBuffer(2, firstTileNum, 1, gTasks[taskId].data[1] * 3 + 5, 2, 1, 17, 1);
+            WriteSequenceToBgTilemapBuffer(2, firstTileNum + 0x10, 1, gTasks[taskId].data[1] * 3 + 6, 2, 1, 17, 1);
+            gUnknown_0203A034->unk0->unk5++;
+            DestroyTask(taskId);
+            PlaySE(SE_JYUNI);
+        }
+    }
+}
+
+static void sub_80F74BC(u8 taskId)
+{
+    int i;
+    for (i = 0; i < 4 && gContestFinalStandings[i] != 0; i++)
+        ;
+
+    CopyToBgTilemapBufferRect_ChangePalette(2, i * 0xC0 + 0x100 + gUnknown_0203A034->unkC[2], 0, i * 3 + 4, 32, 3, 9);
+    gTasks[taskId].data[10] = i;
+    gTasks[taskId].data[12] = 1;
+    gTasks[taskId].func = sub_80F753C;
+    gUnknown_0203A034->unk0->unk3 = taskId;
+}
+
+static void sub_80F753C(u8 taskId)
+{
+    if (++gTasks[taskId].data[11] == 1)
+    {
+        gTasks[taskId].data[11] = 0;
+        BlendPalette(0x91, 1, gTasks[taskId].data[12], RGB(13, 28, 27));
+        if (gTasks[taskId].data[13] == 0)
+        {
+            if (++gTasks[taskId].data[12] == 16)
+                gTasks[taskId].data[13] = 1;
+        }
+        else
+        {
+            if (--gTasks[taskId].data[12] == 0)
+                gTasks[taskId].data[13] = 0;
+        }
+    }
+}
+
+static void sub_80F75A8(struct Sprite *sprite)
+{
+    if (sprite->data[0] < 10)
+    {
+        if (++sprite->data[0] == 10)
+        {
+            PlayCry1(sprite->data[1], 0);
+            sprite->data[1] = 0;
+        }
+    }
+    else
+    {
+        s16 delta = (u16)sprite->data[1] + 0x600;
+        sprite->pos1.x -= delta >> 8;
+        sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+        if (sprite->pos1.x < 120)
+            sprite->pos1.x = 120;
+
+        if (sprite->pos1.x == 120)
+        {
+            sprite->callback = SpriteCallbackDummy;
+            sprite->data[1] = 0;
+            gUnknown_0203A034->unk0->unk6 = 1;
+        }
+    }
+}
+
+static void sub_80F7620(struct Sprite *sprite)
+{
+    s16 delta = (u16)sprite->data[1] + 0x600;
+    sprite->pos1.x -= delta >> 8;
+    sprite->data[1] = (sprite->data[1] + 0x600) & 0xFF;
+    if (sprite->pos1.x < -32)
+    {
+        sprite->callback = SpriteCallbackDummy;
+        sprite->invisible = 1;
+        gUnknown_0203A034->unk0->unk6 = 2;
+    }
 }
