@@ -2413,5 +2413,14 @@ extern const u8 gUnknown_085EDC45[];
 extern const u8 gUnknown_085EDB00[];
 extern const u8 gUnknown_085EDC84[];
 
+// Easy Chat Entry
+extern const u8 gText_StopGivingPkmnMail[];
+extern const u8 gText_LikeToQuitQuiz[];
+extern const u8 gText_ChallengeQuestionMark[];
+extern const u8 gText_QuitEditing[];
+extern const u8 gText_AllTextBeingEditedWill[];
+extern const u8 gText_BeDeletedThatOkay[];
+extern const u8 gText_Lady[];
+extern const u8 gText_F700sQuiz[];
 
 #endif // GUARD_STRINGS_H
