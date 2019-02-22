@@ -783,8 +783,8 @@ static void Task_DisplayMainMenu(u8 taskId)
         {
             case HAS_NO_SAVED_GAME:
             default:
-                FillWindowPixelBuffer(0, 0xAA);
-                FillWindowPixelBuffer(1, 0xAA);
+                FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(0xA));
                 AddTextPrinterParameterized3(0, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
                 AddTextPrinterParameterized3(1, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuOption);
                 PutWindowTilemap(0);
@@ -795,9 +795,9 @@ static void Task_DisplayMainMenu(u8 taskId)
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[1], MAIN_MENU_BORDER_TILE);
                 break;
             case HAS_SAVED_GAME:
-                FillWindowPixelBuffer(2, 0xAA);
-                FillWindowPixelBuffer(3, 0xAA);
-                FillWindowPixelBuffer(4, 0xAA);
+                FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(3, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(4, PALETTE_NUM_TO_FILL_VALUE(0xA));
                 AddTextPrinterParameterized3(2, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
                 AddTextPrinterParameterized3(4, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuOption);
@@ -813,10 +813,10 @@ static void Task_DisplayMainMenu(u8 taskId)
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
                 break;
             case HAS_MYSTERY_GIFT:
-                FillWindowPixelBuffer(2, 0xAA);
-                FillWindowPixelBuffer(3, 0xAA);
-                FillWindowPixelBuffer(4, 0xAA);
-                FillWindowPixelBuffer(5, 0xAA);
+                FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(3, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(4, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(5, PALETTE_NUM_TO_FILL_VALUE(0xA));
                 AddTextPrinterParameterized3(2, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
                 AddTextPrinterParameterized3(4, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuMysteryGift);
@@ -836,11 +836,11 @@ static void Task_DisplayMainMenu(u8 taskId)
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[5], MAIN_MENU_BORDER_TILE);
                 break;
             case HAS_MYSTERY_EVENTS:
-                FillWindowPixelBuffer(2, 0xAA);
-                FillWindowPixelBuffer(3, 0xAA);
-                FillWindowPixelBuffer(4, 0xAA);
-                FillWindowPixelBuffer(5, 0xAA);
-                FillWindowPixelBuffer(6, 0xAA);
+                FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(3, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(4, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(5, PALETTE_NUM_TO_FILL_VALUE(0xA));
+                FillWindowPixelBuffer(6, PALETTE_NUM_TO_FILL_VALUE(0xA));
                 AddTextPrinterParameterized3(2, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuNewGame);
                 AddTextPrinterParameterized3(4, 1, 0, 1, sTextColor_Headers, -1, gText_MainMenuMysteryGift2);
@@ -2098,7 +2098,7 @@ static void NewGameBirchSpeech_StartFadePlatformOut(u8 taskId, u8 delay)
 static void NewGameBirchSpeech_ShowGenderMenu(void)
 {
     DrawMainMenuWindowBorder(&gNewGameBirchSpeechTextWindows[1], 0xF3);
-    FillWindowPixelBuffer(1, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintMenuTable(1, 2, sMenuActions_Gender);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(1, 2, 0);
     PutWindowTilemap(1);
@@ -2126,7 +2126,7 @@ static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
 
 static void CreateMainMenuErrorWindow(const u8* str)
 {
-    FillWindowPixelBuffer(7, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(7, PALETTE_NUM_TO_FILL_VALUE(1));
     AddTextPrinterParameterized(7, 1, str, 0, 1, 2, 0);
     PutWindowTilemap(7);
     CopyWindowToVram(7, 2);
@@ -2239,7 +2239,7 @@ static void NewGameBirchSpeech_ClearGenderWindowTilemap(u8 a, u8 b, u8 c, u8 d, 
 static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)
 {
     CallWindowFunction(windowId, NewGameBirchSpeech_ClearGenderWindowTilemap);
-    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
@@ -2277,7 +2277,7 @@ void CreateYesNoMenuParameterized(u8 a, u8 b, u16 c, u16 d, u8 e, u8 f)
 static void NewGameBirchSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)
 {
     CallWindowFunction(windowId, NewGameBirchSpeech_CreateDialogueWindowBorder);
-    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);

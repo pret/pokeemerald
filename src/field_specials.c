@@ -2645,7 +2645,7 @@ static void sub_813A570(u8 taskId)
     DestroyListMenuTask(task->data[14], NULL, NULL);
     Free(gUnknown_0203AB64);
     sub_8198070(task->data[13], 1);
-    FillWindowPixelBuffer(task->data[13], PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(task->data[13], PALETTE_NUM_TO_FILL_VALUE(0));
     CopyWindowToVram(task->data[13], 2);
     RemoveWindow(task->data[13]);
     DestroyTask(taskId);
@@ -3226,7 +3226,7 @@ void sub_813AF48(void)
         DestroyListMenuTask(task->data[14], NULL, NULL);
         Free(gUnknown_0203AB64);
         sub_8198070(task->data[13], TRUE);
-        FillWindowPixelBuffer(task->data[13], PIXEL_BUFFER_TRANSPARENT);
+        FillWindowPixelBuffer(task->data[13], PALETTE_NUM_TO_FILL_VALUE(0));
         ClearWindowTilemap(task->data[13]);
         CopyWindowToVram(task->data[13], 2);
         RemoveWindow(task->data[13]);

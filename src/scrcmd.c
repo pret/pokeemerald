@@ -1519,7 +1519,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     LoadUserWindowBorderGfx(gUnknown_03000F30, 0x214, 0xE0);
     NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
-    FillWindowPixelBuffer(gUnknown_03000F30, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gUnknown_03000F30, PALETTE_NUM_TO_FILL_VALUE(1));
     AddTextPrinterParameterized(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;

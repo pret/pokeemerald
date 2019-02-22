@@ -27,7 +27,7 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     struct WindowTemplate template;
     SetWindowTemplateFields(&template, 0, x, y, 8, 2, 0xF, 0x141);
     sCoinsWindowId = AddWindow(&template);
-    FillWindowPixelBuffer(sCoinsWindowId, PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(sCoinsWindowId, PALETTE_NUM_TO_FILL_VALUE(0));
     PutWindowTilemap(sCoinsWindowId);
     SetWindowBorderStyle(sCoinsWindowId, FALSE, 0x214, 0xE);
     PrintCoinsString(coinAmount);

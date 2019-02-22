@@ -90,7 +90,7 @@ void CB2_InitMysteryEventMenu(void)
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 2; i++)
-            FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(i, PALETTE_NUM_TO_FILL_VALUE(0));
 
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x1E, 0x14);
         LoadUserWindowBorderGfx(0, 1u, 0xD0u);
@@ -313,6 +313,6 @@ static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 sp
     textColor[1] = 2;
     textColor[2] = 3;
 
-    FillWindowPixelBuffer(windowId, (textColor[0]) | (textColor[0] << 4));
+    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(textColor[0]));
     AddTextPrinterParameterized4(windowId, 1, x, y, letterSpacing, lineSpacing, textColor, speed, text);
 }

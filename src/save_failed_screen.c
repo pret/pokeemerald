@@ -231,8 +231,8 @@ static void CB2_SaveFailedScreen(void)
         LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
         SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
         SetWindowBorderStyle(gSaveFailedWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
-        FillWindowPixelBuffer(gSaveFailedWindowIds[CLOCK_WIN_ID], PIXEL_BUFFER_WHITE); // backwards?
-        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[CLOCK_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1)); // backwards?
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
         CopyWindowToVram(gSaveFailedWindowIds[CLOCK_WIN_ID], 2); // again?
         CopyWindowToVram(gSaveFailedWindowIds[TEXT_WIN_ID], 1);
         SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
@@ -265,19 +265,19 @@ static void CB2_WipeSave(void)
     {
         if (WipeSectors(gDamagedSaveSectors) != FALSE)
         {
-            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
             SaveFailedScreenTextPrint(gText_BackupMemoryDamaged, 1, 0);
             SetMainCallback2(CB2_GameplayCannotBeContinued);
             return;
         }
 
-        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
         SaveFailedScreenTextPrint(gText_CheckCompleted, 1, 0);
         HandleSavingData(gSaveFailedType);
 
         if (gDamagedSaveSectors != 0)
         {
-            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
             SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
         }
 
@@ -286,12 +286,12 @@ static void CB2_WipeSave(void)
 
     if (wipeTries == 3)
     {
-        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
         SaveFailedScreenTextPrint(gText_BackupMemoryDamaged, 1, 0);
     }
     else
     {
-        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
 
         if (gGameContinueCallback == NULL)
             SaveFailedScreenTextPrint(gText_SaveCompleteGameCannotContinue, 1, 0);
@@ -308,7 +308,7 @@ static void CB2_GameplayCannotBeContinued(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PIXEL_BUFFER_WHITE);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], PALETTE_NUM_TO_FILL_VALUE(1));
         SaveFailedScreenTextPrint(gText_GamePlayCannotBeContinued, 1, 0);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_FadeAndReturnToTitleScreen);

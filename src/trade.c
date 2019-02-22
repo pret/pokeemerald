@@ -1418,7 +1418,7 @@ static void sub_80772A4(void)
         for (i = 0; i < 18; i++)
         {
             ClearWindowTilemap(i);
-            FillWindowPixelBuffer(i, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(i, PALETTE_NUM_TO_FILL_VALUE(0));
         }
 
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
@@ -2461,7 +2461,7 @@ static void sub_8078DBC(void)
         if (gUnknown_0203229C->tradeMenuCursorPosition < 6)
         {
             sub_8098858(1, 1, 14);
-            FillWindowPixelBuffer(1, PIXEL_BUFFER_WHITE);
+            FillWindowPixelBuffer(1, PALETTE_NUM_TO_FILL_VALUE(1));
             PrintMenuTable(1, 2, gUnknown_0832DEAC);
             InitMenuInUpperLeftCornerPlaySoundWhenAPressed(1, 2, 0);
             PutWindowTilemap(1);
@@ -2724,7 +2724,7 @@ static void sub_8079408(void)
 
         for (i = 0; i < 4; i++)
         {
-            FillWindowPixelBuffer(i + 14, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(i + 14, PALETTE_NUM_TO_FILL_VALUE(0));
             rbox_fill_rectangle(i + 14);
         }
 
@@ -3256,7 +3256,7 @@ static void sub_807A0C4(void)
 
 static void sub_807A19C(u8 a0)
 {
-    FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
     AddTextPrinterParameterized(0, 1, gUnknown_0832DEBC[a0], 0, 1, TEXT_SPEED_FF, NULL);
     sub_8098858(0, 20, 12);
     PutWindowTilemap(0);
@@ -4185,7 +4185,7 @@ void sub_807B140(void)
 
 void sub_807B154(void)
 {
-    FillWindowPixelBuffer(0, PIXEL_BUFFER_UNKNOWN);
+    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(15));
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
@@ -4263,7 +4263,7 @@ static void sub_807B270(void)
             break;
         case 8:
             sub_807ACFC(1, 1);
-            FillWindowPixelBuffer(0, PIXEL_BUFFER_UNKNOWN);
+            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(15));
             PutWindowTilemap(0);
             CopyWindowToVram(0, 3);
             gMain.state++;
@@ -4654,7 +4654,7 @@ static bool8 sub_807BBEC(void)
             if (!gPaletteFade.active)
             {
                 sub_807B62C(4);
-                FillWindowPixelBuffer(0, PIXEL_BUFFER_UNKNOWN);
+                FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(15));
                 CopyWindowToVram(0, 3);
                 gUnknown_020322A0->state++;
             }
@@ -5146,7 +5146,7 @@ static bool8 sub_807CFC8(void)
             if (!gPaletteFade.active)
             {
                 sub_807B62C(4);
-                FillWindowPixelBuffer(0, PIXEL_BUFFER_UNKNOWN);
+                FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(15));
                 CopyWindowToVram(0, 3);
                 gUnknown_020322A0->state++;
             }
@@ -6085,7 +6085,7 @@ void sub_807F19C(void)
 
 void sub_807F1A8(u8 windowId, const u8 *str, u8 speed)
 {
-    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_UNKNOWN);
+    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(15));
     gUnknown_020322A0->unk_F6[0] = 15;
     gUnknown_020322A0->unk_F6[1] = 1;
     gUnknown_020322A0->unk_F6[2] = 6;

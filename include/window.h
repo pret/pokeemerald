@@ -1,12 +1,7 @@
 #ifndef GUARD_WINDOW_H
 #define GUARD_WINDOW_H
 
-// The tile ID for a transparent tile in the window tilesheet
-#define TRANSPARENT_TILE_NUMBER 0
-
-#define PIXEL_BUFFER_TRANSPARENT 0x00
-#define PIXEL_BUFFER_WHITE 0x11
-#define PIXEL_BUFFER_UNKNOWN 0xFF
+#define PALETTE_NUM_TO_FILL_VALUE(num) ((num) | ((num) << 4))
 
 enum
 {
@@ -80,7 +75,7 @@ extern u32 filler_03002F58;
 extern u32 filler_03002F5C;
 extern u32 filler_03002F64;
 
-// This global is set to TRANSPARENT_TILE_NUMBER and never changed.
+// This global is set to 0 and never changed.
 extern u8 gTransparentTileNumber;
 
 #endif // GUARD_WINDOW_H

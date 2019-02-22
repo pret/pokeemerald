@@ -543,7 +543,7 @@ void sub_8126B80(u8 taskId)
 
 void sub_8126C08(void)
 {
-    FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
     AddTextPrinterParameterized2(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
 }
 
@@ -634,7 +634,7 @@ void sub_8126DFC(u8 taskId)
 
 void sub_8126E44(u8 taskId)
 {
-    FillWindowPixelBuffer(sDecorMenuWindowIndices[1], PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(sDecorMenuWindowIndices[1], PALETTE_NUM_TO_FILL_VALUE(1));
     sub_8126E8C(taskId);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sDecorMenuWindowIndices[1], 9, sCurDecorationCategory);
     gTasks[taskId].func = sub_8127088;
@@ -968,7 +968,7 @@ void sub_8127744(u32 a0)
     const u8 *txt;
 
     winidx = sDecorMenuWindowIndices[3];
-    FillWindowPixelBuffer(winidx, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(winidx, PALETTE_NUM_TO_FILL_VALUE(1));
     if (a0 >= sCurDecorCatCount)
     {
         txt = gText_GoBackPrevMenu;

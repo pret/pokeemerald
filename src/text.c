@@ -1581,7 +1581,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 return 2;
             case 15:
-                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | textPrinter->printerTemplate.bgColor << 4);
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 return 2;
@@ -1702,7 +1702,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
     case 2:
         if (TextPrinterWaitWithDownArrow(textPrinter))
         {
-            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, (textPrinter->printerTemplate.bgColor << 4) | textPrinter->printerTemplate.bgColor);
+            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
             textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
             textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
             textPrinter->state = 0;

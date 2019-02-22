@@ -1045,7 +1045,7 @@ static void ShowTowerResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleRoomResults);
     else if (battleMode == FRONTIER_MODE_DOUBLES)
@@ -1116,7 +1116,7 @@ static void ShowDomeResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleTourneyResults);
     else
@@ -1192,7 +1192,7 @@ static void ShowPalaceResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleHallResults);
     else
@@ -1248,7 +1248,7 @@ static void ShowPikeResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
     PrintAligned(gStringVar4, 0);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 33, TEXT_SPEED_FF, NULL);
@@ -1310,7 +1310,7 @@ static void ShowArenaResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintHyphens(10);
     StringExpandPlaceholders(gStringVar4, gText_SetKOTourneyResults);
     PrintAligned(gStringVar4, 2);
@@ -1396,7 +1396,7 @@ static void ShowFactoryResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_BattleSwapSingleResults);
     else
@@ -1461,7 +1461,7 @@ static void ShowPyramidResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
     PrintAligned(gStringVar4, 2);
     AddTextPrinterParameterized(gRecordsWindowId, 1, gText_Lv502, 8, 49, TEXT_SPEED_FF, NULL);
@@ -1484,7 +1484,7 @@ static void ShowLinkContestResultsWindow(void)
 
     gRecordsWindowId = AddWindow(&gUnknown_08611C7C);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
 
     StringExpandPlaceholders(gStringVar4, gText_LinkContestResults);
     x = GetStringCenterAlignXOffset(1, gStringVar4, 208);
@@ -2354,7 +2354,7 @@ void ShowRankingHallRecordsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C84);
     NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_50);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, 3);
@@ -2362,7 +2362,7 @@ void ShowRankingHallRecordsWindow(void)
 
 void ScrollRankingHallRecordsWindow(void)
 {
-    FillWindowPixelBuffer(gRecordsWindowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_OPEN);
     CopyWindowToVram(gRecordsWindowId, 2);
 }

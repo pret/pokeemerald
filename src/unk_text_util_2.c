@@ -114,7 +114,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
                             textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar++;
                             return 2;
                         case 15:
-                            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                             return 2;
                     }
                     break;
@@ -146,7 +146,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
         case 2:
             if (TextPrinterWaitWithDownArrow(textPrinter))
             {
-                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                 textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
                 textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
                 textPrinter->state = 0;

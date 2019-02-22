@@ -1158,7 +1158,7 @@ bool8 sub_81C7BE8(void)
 
 void sub_81C7BF8(u32 a0)
 {
-    FillWindowPixelBuffer(a0, 0x44);
+    FillWindowPixelBuffer(a0, PALETTE_NUM_TO_FILL_VALUE(4));
     FillWindowPixelRect(a0, 0x55, 0, 0, 0x80, 1);
 }
 

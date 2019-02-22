@@ -2927,7 +2927,7 @@ void sub_80BEA24(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_DescriptionScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             sub_80C0D30(1, sPokedexListItem->dexNum);
@@ -3222,7 +3222,7 @@ void sub_80BF250(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, &gPokedexTilemap_CryScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
             PutWindowTilemap(0);
             PutWindowTilemap(3);
             PutWindowTilemap(2);
@@ -3416,7 +3416,7 @@ void sub_80BF82C(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_SizeScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
             PutWindowTilemap(0);
             gMain.state++;
             break;
@@ -3766,7 +3766,7 @@ void sub_80BFE38(u8 taskId)
         case 1:
             DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
             CopyToBgTilemapBuffer(3, gPokedexTilemap_DescriptionScreen, 0, 0);
-            FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             sub_80C0D30(1, gTasks[taskId].data[1]);

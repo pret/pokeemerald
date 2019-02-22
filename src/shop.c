@@ -545,7 +545,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(int item, bool8 onInit, s
         description = gText_QuitShopping;
     }
 
-    FillWindowPixelBuffer(2, PIXEL_BUFFER_TRANSPARENT);
+    FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0));
     BuyMenuPrint(2, description, 3, 1, 0, 0);
 }
 
@@ -1144,7 +1144,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    FillWindowPixelBuffer(4, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(4, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintMoneyAmount(4, 38, 1, gShopDataPtr->totalCost, TEXT_SPEED_FF);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, 2, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);

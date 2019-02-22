@@ -1622,7 +1622,7 @@ void MCB2_FlyMap(void)
         case 7:
             LoadPalette(sRegionMapFramePal, 0x10, 0x20);
             PutWindowTilemap(2);
-            FillWindowPixelBuffer(2, 0x00);
+            FillWindowPixelBuffer(2, PALETTE_NUM_TO_FILL_VALUE(0));
             AddTextPrinterParameterized(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             gMain.state++;
@@ -1707,7 +1707,7 @@ static void sub_8124904(void)
             }
             else
             {
-                FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
+                FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
             }
             AddTextPrinterParameterized(0, 1, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -1721,7 +1721,7 @@ static void sub_8124904(void)
             sub_8198070(1, FALSE);
             SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
         }
-        FillWindowPixelBuffer(0, PIXEL_BUFFER_WHITE);
+        FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
         CopyWindowToVram(0, 2);
         schedule_bg_copy_tilemap_to_vram(0);
         gUnknown_03001180 = FALSE;

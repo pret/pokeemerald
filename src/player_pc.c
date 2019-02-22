@@ -977,7 +977,7 @@ static void sub_816BEF0(s32 id)
         description = (u8 *)ItemId_GetDescription(gSaveBlock1Ptr->pcItems[id].itemId);
     else
         description = ItemStorage_GetItemPcResponse(ITEMPC_GO_BACK_TO_PREV);
-    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
     AddTextPrinterParameterized(windowId, 1, description, 0, 1, 0, NULL);
 }
 
@@ -1123,7 +1123,7 @@ static const u8* ItemStorage_GetItemPcResponse(u16 itemId)
 static void ItemStorage_PrintItemPcResponse(const u8 *string)
 {
     u8 windowId = gUnknown_0203BCC4->windowIds[1];
-    FillWindowPixelBuffer(windowId, PIXEL_BUFFER_WHITE);
+    FillWindowPixelBuffer(windowId, PALETTE_NUM_TO_FILL_VALUE(1));
     StringExpandPlaceholders(gStringVar4, string);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, 0, NULL);
 }

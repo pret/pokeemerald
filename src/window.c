@@ -106,7 +106,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
         }
     }
 
-    gTransparentTileNumber = TRANSPARENT_TILE_NUMBER;
+    gTransparentTileNumber = 0;
     return TRUE;
 }
 

@@ -1592,7 +1592,7 @@ static void sub_8175DA0(u8 taskIdB)
     case 5:
         if (!gPaletteFade.active)
         {
-            FillWindowPixelBuffer(0, PIXEL_BUFFER_TRANSPARENT);
+            FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(0));
             CopyWindowToVram(0, 2);
             gTasks[taskIdB].data[TDB_0] = 2;
         }
