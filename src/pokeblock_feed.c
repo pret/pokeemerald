@@ -581,7 +581,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 10:
-        SetWindowBorderStyle(0, 1, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(0, 1, 1, 14);
         gMain.state++;
         break;
     case 11:

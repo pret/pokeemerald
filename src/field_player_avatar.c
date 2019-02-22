@@ -1944,7 +1944,7 @@ static bool8 Fishing11(struct Task *task)
                 sub_8155604(gEventObjects[gPlayerAvatar.eventObjectId].fieldEffectSpriteId, 0, 0);
             gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
             gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
-            ClearWindowAndWideBorder(0, TRUE);
+            ClearDialogWindowAndFrame(0, TRUE);
             task->tFrameCounter++;
             return FALSE;
         }
@@ -2017,7 +2017,7 @@ static bool8 Fishing16(struct Task *task)
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         UnfreezeEventObjects();
-        ClearWindowAndWideBorder(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sub_80ED950(0);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));
     }

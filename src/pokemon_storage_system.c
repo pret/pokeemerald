@@ -1218,7 +1218,7 @@ static const u16 gWallpaperPalettes_Plain[][16] =
 static const u32 gWallpaperTiles_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.4bpp.lz");
 static const u32 gWallpaperTilemap_Plain[] = INCBIN_U32("graphics/pokemon_storage/plain.bin.lz");
 
-// 12�18 tilemap
+// 12x18 tilemap
 static const u32 gUnknown_085773C4[] = INCBIN_U32("graphics/unused/tilemap_5773C4.bin");
 
 static const u16 gUnknown_08577574[][2] =
@@ -1736,7 +1736,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
     case 0:
         CreatePCMenu(task->data[1], &task->data[15]);
         sub_81973A4();
-        NewMenuHelpers_DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PALETTE_NUM_TO_FILL_VALUE(1));
         AddTextPrinterParameterized2(0, 1, gUnknown_085716C0[task->data[1]].desc, TEXT_SPEED_FF, NULL, 2, 1, 3);
         CopyWindowToVram(0, 3);
@@ -1769,7 +1769,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
             break;
         case MENU_B_PRESSED:
         case  4:
-            ClearWindowAndBorder(task->data[15], TRUE);
+            ClearStdWindowAndFrame(task->data[15], TRUE);
             ScriptContext2_Disable();
             EnableBothScriptContexts();
             RemoveWindow(task->data[15]);
@@ -1865,7 +1865,7 @@ static void CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
     winTemplate.width = GetMaxWidthInMenuTable((void *)gUnknown_085716C0, ARRAY_COUNT(gUnknown_085716C0));
     windowId = AddWindow(&winTemplate);
 
-    NewMenuHelpers_DrawStdWindowFrame(windowId, FALSE);
+    DrawStdWindowFrame(windowId, FALSE);
     PrintMenuTable(windowId, ARRAY_COUNT(gUnknown_085716C0), (void *)gUnknown_085716C0);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(windowId, ARRAY_COUNT(gUnknown_085716C0), whichMenu);
     *windowIdPtr = windowId;
@@ -4432,7 +4432,7 @@ static void ShowYesNoWindow(s8 cursorPos)
 
 static void ClearBottomWindow(void)
 {
-    sub_8198070(1, FALSE);
+    ClearStdWindowAndFrameToTransparent(1, FALSE);
     schedule_bg_copy_tilemap_to_vram(0);
 }
 
@@ -8733,7 +8733,7 @@ static void AddMenu(void)
     sPSSData->menuWindow.tilemapTop = 15 - sPSSData->menuWindow.height;
     sPSSData->field_CB0 = AddWindow(&sPSSData->menuWindow);
     ClearWindowTilemap(sPSSData->field_CB0);
-    SetWindowBorderStyle(sPSSData->field_CB0, FALSE, 11, 14);
+    DrawStdFrameWithCustomTileAndPalette(sPSSData->field_CB0, FALSE, 11, 14);
     PrintMenuTable(sPSSData->field_CB0, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sPSSData->field_CB0, sPSSData->menuItemsCount, 0);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -8787,7 +8787,7 @@ static s16 sub_80D00AC(void)
 
 static void sub_80D013C(void)
 {
-    sub_8198070(sPSSData->field_CB0, TRUE);
+    ClearStdWindowAndFrameToTransparent(sPSSData->field_CB0, TRUE);
     RemoveWindow(sPSSData->field_CB0);
 }
 

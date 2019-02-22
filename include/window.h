@@ -75,7 +75,4 @@ extern u32 filler_03002F58;
 extern u32 filler_03002F5C;
 extern u32 filler_03002F64;
 
-// This global is set to 0 and never changed.
-extern u8 gTransparentTileNumber;
-
 #endif // GUARD_WINDOW_H

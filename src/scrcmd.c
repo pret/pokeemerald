@@ -1302,7 +1302,7 @@ bool8 ScrCmd_cmdDB(struct ScriptContext *ctx)
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
     sub_81973A4();
-    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, 1);
     AddTextPrinterParameterized(0, 1, msg, 0, 1, 0, 0);
     return FALSE;
 }
@@ -1517,7 +1517,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     winTemplate = CreateWindowTemplate(0, xWindow, yWindow + 1, width, height, 0xF, 0x1);
     gUnknown_03000F30 = AddWindow(&winTemplate);
     LoadUserWindowBorderGfx(gUnknown_03000F30, 0x214, 0xE0);
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_03000F30, 0);
+    DrawStdWindowFrame(gUnknown_03000F30, 0);
     PutWindowTilemap(gUnknown_03000F30);
     FillWindowPixelBuffer(gUnknown_03000F30, PALETTE_NUM_TO_FILL_VALUE(1));
     AddTextPrinterParameterized(gUnknown_03000F30, 6, gStringVar4, xText, yText, 0xFF, 0x0);
@@ -2254,7 +2254,7 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
 
 void sub_809BDB4(void)
 {
-    ClearWindowAndBorder(gUnknown_03000F30, 1);
+    ClearStdWindowAndFrame(gUnknown_03000F30, 1);
     RemoveWindow(gUnknown_03000F30);
 }
 

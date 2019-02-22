@@ -366,7 +366,7 @@ void CB2_ExitSellMenu(void)
 
 static void Task_HandleShopMenuQuit(u8 taskId)
 {
-    sub_8198070(gMartInfo.windowId, 2);
+    ClearStdWindowAndFrameToTransparent(gMartInfo.windowId, 2);
     RemoveWindow(gMartInfo.windowId);
     SaveRecordedItemPurchasesForTVShow();
     ScriptContext2_Disable();
@@ -981,12 +981,12 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     u16 quantityInBag = CountTotalItemQuantityInBag(tItemId);
     u16 maxQuantity;
 
-    SetWindowBorderStyle(3, FALSE, 1, 13);
+    DrawStdFrameWithCustomTileAndPalette(3, FALSE, 1, 13);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_InBagVar1);
     BuyMenuPrint(3, gStringVar4, 0, 1, 0, 0);
     tItemCount = 1;
-    SetWindowBorderStyle(4, FALSE, 1, 13);
+    DrawStdFrameWithCustomTileAndPalette(4, FALSE, 1, 13);
     BuyMenuPrintItemQuantityAndPrice(taskId);
     schedule_bg_copy_tilemap_to_vram(0);
 
@@ -1018,8 +1018,8 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
         if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_8198070(4, 0);
-            sub_8198070(3, 0);
+            ClearStdWindowAndFrameToTransparent(4, 0);
+            ClearStdWindowAndFrameToTransparent(3, 0);
             ClearWindowTilemap(4);
             ClearWindowTilemap(3);
             PutWindowTilemap(1);
@@ -1031,8 +1031,8 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_8198070(4, 0);
-            sub_8198070(3, 0);
+            ClearStdWindowAndFrameToTransparent(4, 0);
+            ClearStdWindowAndFrameToTransparent(3, 0);
             ClearWindowTilemap(4);
             ClearWindowTilemap(3);
             BuyMenuReturnToItemList(taskId);
@@ -1131,7 +1131,7 @@ static void BuyMenuReturnToItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    sub_8197DF8(5, 0);
+    ClearDialogWindowAndFrameToTransparent(5, 0);
     BuyMenuPrintCursor(tListTaskId, 1);
     PutWindowTilemap(1);
     PutWindowTilemap(2);

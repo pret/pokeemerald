@@ -1120,7 +1120,7 @@ static void PutPokeblockOptionsWindow(u8 taskId)
         data[1] = 9;
 
     sub_8136418();
-    SetWindowBorderStyle(data[1], 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(data[1], 0, 1, 0xE);
     sub_81995E4(data[1], sPokeblockMenu->optionsNo, sPokeblockMenuActions, sPokeblockMenu->pokeblockOptionsIds);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[1], sPokeblockMenu->optionsNo, 0);
     PutWindowTilemap(data[1]);
@@ -1173,7 +1173,7 @@ static void PokeblockAction_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    sub_8198070(data[1], FALSE);
+    ClearStdWindowAndFrameToTransparent(data[1], FALSE);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayVar1);
     DisplayMessageAndContinueTask(taskId, 10, 10, 13, 1, GetPlayerTextSpeedDelay(), gStringVar4, CreateTossPokeblockYesNoMenu);
@@ -1219,7 +1219,7 @@ static void HandleErasePokeblock(u8 taskId)
 
 static void TossPokeblockChoice_No(u8 taskId)
 {
-    sub_8197DF8(10, FALSE);
+    ClearDialogWindowAndFrameToTransparent(10, FALSE);
     schedule_bg_copy_tilemap_to_vram(1);
     sub_81363BC();
     gTasks[taskId].func = Task_HandlePokeblockMenuInput;
@@ -1266,7 +1266,7 @@ static void PokeblockAction_Cancel(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    sub_8198070(data[1], FALSE);
+    ClearStdWindowAndFrameToTransparent(data[1], FALSE);
     schedule_bg_copy_tilemap_to_vram(1);
     sub_81363BC();
     gTasks[taskId].func = Task_HandlePokeblockMenuInput;

@@ -29,13 +29,13 @@ void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)
     sCoinsWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sCoinsWindowId, PALETTE_NUM_TO_FILL_VALUE(0));
     PutWindowTilemap(sCoinsWindowId);
-    SetWindowBorderStyle(sCoinsWindowId, FALSE, 0x214, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(sCoinsWindowId, FALSE, 0x214, 0xE);
     PrintCoinsString(coinAmount);
 }
 
 void HideCoinsWindow(void)
 {
-    ClearWindowAndBorder(sCoinsWindowId, TRUE);
+    ClearStdWindowAndFrame(sCoinsWindowId, TRUE);
     RemoveWindow(sCoinsWindowId);
 }
 

@@ -290,7 +290,7 @@ static void FreeCursorPalette(void)
 
 static void HideChooseTimeWindow(u8 windowId)
 {
-    sub_8198070(windowId, FALSE);
+    ClearStdWindowAndFrameToTransparent(windowId, FALSE);
     RemoveWindow(windowId);
     schedule_bg_copy_tilemap_to_vram(0);
 }
@@ -319,7 +319,7 @@ static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u
 
 static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8 seconds)
 {
-    SetWindowBorderStyle(windowId, FALSE, 0x214, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
     AddTextPrinterParameterized(windowId, 1, gText_Confirm2, 126, 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -495,7 +495,7 @@ static void VBlankCB(void)
 
 static void ShowMessage(const u8 *str)
 {
-    sub_8197B1C(1, FALSE, 0x200, 0xF);
+    DrawDialogFrameWithCustomTileAndPalette(1, FALSE, 0x200, 0xF);
     AddTextPrinterParameterized(1, 1, str, 0, 1, 0, NULL);
     schedule_bg_copy_tilemap_to_vram(0);
 }
@@ -507,7 +507,7 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
     switch (data[0])
     {
     case 0:
-        SetWindowBorderStyle(0, FALSE, 0x214, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x214, 0xE);
         AddTextPrinterParameterized(0, 1, gText_PresentTime, 0, 1, TEXT_SPEED_FF, 0);
         PrintTime(
             0,
@@ -574,7 +574,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     case 2:
         if (gTasks[data[1]].isActive != TRUE)
         {
-            sub_8198070(0, FALSE);
+            ClearStdWindowAndFrameToTransparent(0, FALSE);
             ShowMessage(gText_PleaseResetTime);
             gLocalTime = gSaveBlock2Ptr->lastBerryTreeUpdate;
             data[1] = CreateTask(Task_ResetRtc_0, 80);

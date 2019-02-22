@@ -139,11 +139,11 @@ static void FieldUpdateRegionMap(void)
             sFieldRegionMapHandler->state++;
             break;
         case 1:
-            SetWindowBorderStyle(1, 0, 0x27, 0xd);
+            DrawStdFrameWithCustomTileAndPalette(1, 0, 0x27, 0xd);
             offset = GetStringCenterAlignXOffset(1, gText_Hoenn, 0x38);
             AddTextPrinterParameterized(1, 1, gText_Hoenn, offset, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
-            SetWindowBorderStyle(0, 0, 0x27, 0xd);
+            DrawStdFrameWithCustomTileAndPalette(0, 0, 0x27, 0xd);
             PrintRegionMapSecName();
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             sFieldRegionMapHandler->state++;

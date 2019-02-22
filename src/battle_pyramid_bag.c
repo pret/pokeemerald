@@ -1146,7 +1146,7 @@ static void sub_81C64B4(u8 taskId)
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_8198070(3, 0);
+        ClearStdWindowAndFrameToTransparent(3, 0);
         ClearWindowTilemap(3);
         schedule_bg_copy_tilemap_to_vram(1);
         sub_81C6350(taskId);
@@ -1154,7 +1154,7 @@ static void sub_81C64B4(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_8198070(3, 0);
+        ClearStdWindowAndFrameToTransparent(3, 0);
         ClearWindowTilemap(3);
         schedule_bg_copy_tilemap_to_vram(1);
         DontTossItem(taskId);
@@ -1415,7 +1415,7 @@ static void PrintOnWindow_Font7(u8 windowId, const u8 *src, u8 x, u8 y, u8 lette
 
 static void sub_81C6CEC(u8 windowId)
 {
-    SetWindowBorderStyle(windowId, 0, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(windowId, 0, 1, 0xE);
     schedule_bg_copy_tilemap_to_vram(1);
 }
 
@@ -1430,7 +1430,7 @@ static u8 sub_81C6D24(u8 windowArrayId)
     if (*windowId == 0xFF)
     {
         *windowId = AddWindow(&gUnknown_0861F350[windowArrayId]);
-        SetWindowBorderStyle(*windowId, FALSE, 1, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(*windowId, FALSE, 1, 0xE);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     return *windowId;
@@ -1441,7 +1441,7 @@ static void sub_81C6D6C(u8 windowArrayId)
     u8 *windowId = &gPyramidBagResources->windowIds[windowArrayId];
     if (*windowId != 0xFF)
     {
-        sub_8198070(*windowId, FALSE);
+        ClearStdWindowAndFrameToTransparent(*windowId, FALSE);
         ClearWindowTilemap(*windowId);
         RemoveWindow(*windowId);
         schedule_bg_copy_tilemap_to_vram(1);
@@ -1463,7 +1463,8 @@ void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, void (*callback
 
 static void sub_81C6E1C(void)
 {
-    sub_8197DF8(2, FALSE);
+    ClearDialogWindowAndFrameToTransparent(2, FALSE);
+    // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.
     ClearWindowTilemap(2);
     schedule_bg_copy_tilemap_to_vram(1);
 }

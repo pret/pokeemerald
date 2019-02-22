@@ -320,7 +320,7 @@ void ShowLinkBattleRecords(void)
     s32 i, x;
 
     gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     StringExpandPlaceholders(gStringVar4, gText_PlayersBattleResults);
 
@@ -342,7 +342,7 @@ void ShowLinkBattleRecords(void)
 
 void RemoveRecordsWindow(void)
 {
-    ClearWindowAndBorder(gRecordsWindowId, FALSE);
+    ClearStdWindowAndFrame(gRecordsWindowId, FALSE);
     RemoveWindow(gRecordsWindowId);
 }
 

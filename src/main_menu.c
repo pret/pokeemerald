@@ -944,14 +944,14 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
     {
         if (gTasks[taskId].tMenuType == HAS_MYSTERY_EVENTS)
             RemoveScrollIndicatorArrowPair(gTasks[taskId].tScrollArrowTaskId);
-        ClearWindowAndBorder(0, TRUE);
-        ClearWindowAndBorder(1, TRUE);
-        ClearWindowAndBorder(2, TRUE);
-        ClearWindowAndBorder(3, TRUE);
-        ClearWindowAndBorder(4, TRUE);
-        ClearWindowAndBorder(5, TRUE);
-        ClearWindowAndBorder(6, TRUE);
-        ClearWindowAndBorder(7, TRUE);
+        ClearStdWindowAndFrame(0, TRUE);
+        ClearStdWindowAndFrame(1, TRUE);
+        ClearStdWindowAndFrame(2, TRUE);
+        ClearStdWindowAndFrame(3, TRUE);
+        ClearStdWindowAndFrame(4, TRUE);
+        ClearStdWindowAndFrame(5, TRUE);
+        ClearStdWindowAndFrame(6, TRUE);
+        ClearStdWindowAndFrame(7, TRUE);
         wirelessAdapterConnected = IsWirelessAdapterConnected();
         switch (gTasks[taskId].tMenuType)
         {

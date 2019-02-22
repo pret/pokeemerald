@@ -6,6 +6,7 @@
 
 u32 filler_03002F58;
 u32 filler_03002F5C;
+// This global is set to 0 and never changed.
 u8 gTransparentTileNumber;
 u32 filler_03002F64;
 void *gUnknown_03002F70[4];

@@ -511,12 +511,12 @@ void sub_8012780(u8 taskId)
         PutWindowTilemap(data->field_10);
         CopyWindowToVram(data->field_10, 2);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->listWindowId, FALSE);
+        DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F015C;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->field_11, FALSE);
+        DrawStdWindowFrame(data->field_11, FALSE);
         PutWindowTilemap(data->field_11);
         CopyWindowToVram(data->field_11, 2);
 
@@ -786,10 +786,10 @@ void sub_8012780(u8 taskId)
 void sub_8012F64(struct UnkStruct_Leader *data)
 {
     ClearWindowTilemap(data->field_11);
-    ClearWindowAndBorder(data->field_11, FALSE);
+    ClearStdWindowAndFrame(data->field_11, FALSE);
     DestroyListMenuTask(data->listTaskId, 0, 0);
     ClearWindowTilemap(data->field_10);
-    ClearWindowAndBorder(data->listWindowId, FALSE);
+    ClearStdWindowAndFrame(data->listWindowId, FALSE);
     CopyBgTilemapBufferToVram(0);
     RemoveWindow(data->field_11);
     RemoveWindow(data->listWindowId);
@@ -1080,12 +1080,12 @@ void sub_80134E8(u8 taskId)
         PutWindowTilemap(data->field_C);
         CopyWindowToVram(data->field_C, 2);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->listWindowId, FALSE);
+        DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_082F0204;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
-        NewMenuHelpers_DrawStdWindowFrame(data->field_D, FALSE);
+        DrawStdWindowFrame(data->field_D, FALSE);
         PutWindowTilemap(data->field_D);
         sub_80125BC(data->field_D);
         CopyWindowToVram(data->field_D, 2);
@@ -1254,10 +1254,10 @@ void sub_80134E8(u8 taskId)
     case 18:
     case 20:
         ClearWindowTilemap(data->field_D);
-        ClearWindowAndBorder(data->field_D, FALSE);
+        ClearStdWindowAndFrame(data->field_D, FALSE);
         DestroyListMenuTask(data->listTaskId, 0, 0);
         ClearWindowTilemap(data->field_C);
-        ClearWindowAndBorder(data->listWindowId, FALSE);
+        ClearStdWindowAndFrame(data->listWindowId, FALSE);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->field_D);
         RemoveWindow(data->listWindowId);

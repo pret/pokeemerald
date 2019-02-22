@@ -2306,7 +2306,7 @@ u8 bag_menu_add_window(u8 a)
     if (*ptr == 0xFF)
     {
         *ptr = AddWindow(&gUnknown_086141AC[a]);
-        SetWindowBorderStyle(*ptr, 0, 1, 14);
+        DrawStdFrameWithCustomTileAndPalette(*ptr, 0, 1, 14);
         schedule_bg_copy_tilemap_to_vram(1);
     }
     return *ptr;
@@ -2317,7 +2317,7 @@ void bag_menu_remove_window(u8 a)
     u8 *ptr = &gUnknown_0203CE54->windowPointers[a];
     if (*ptr != 0xFF)
     {
-        sub_8198070(*ptr, 0);
+        ClearStdWindowAndFrameToTransparent(*ptr, 0);
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         schedule_bg_copy_tilemap_to_vram(1);
@@ -2338,7 +2338,8 @@ void bag_menu_RemoveBagItem_message_window(u8 a)
     u8 *ptr = &gUnknown_0203CE54->windowPointers[a];
     if (*ptr != 0xFF)
     {
-        sub_8197DF8(*ptr, 0);
+        ClearDialogWindowAndFrameToTransparent(*ptr, FALSE);
+        // This ClearWindowTilemap call is redundant, since ClearDialogWindowAndFrameToTransparent already calls it.
         ClearWindowTilemap(*ptr);
         RemoveWindow(*ptr);
         schedule_bg_copy_tilemap_to_vram(1);

@@ -469,7 +469,7 @@ static void sub_80C2760(u8 taskId)
         break;
     case 15:
         sub_800AC34();
-        NewMenuHelpers_DrawDialogueFrame(0, 1);
+        DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 1, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
         CopyWindowToVram(0, 3);
         sData->var_0 = 16;

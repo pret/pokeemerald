@@ -188,7 +188,7 @@ void DisplayCannotDismountBikeMessage(u8 taskId, bool8 isUsingRegisteredKeyItemO
 
 void CleanUpAfterFailingToUseRegisteredKeyItemOnField(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     DestroyTask(taskId);
     ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
@@ -350,7 +350,7 @@ void sub_80FD504(u8 taskId)
 
 void sub_80FD5CC(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);

@@ -463,14 +463,14 @@ u8 sub_81269D4(u8 idx)
     {
         *winidx = AddWindow(&gUnknown_085A6B90[idx]);
     }
-    SetWindowBorderStyle(*winidx, 0, 0x214, 0xe);
+    DrawStdFrameWithCustomTileAndPalette(*winidx, 0, 0x214, 0xe);
     schedule_bg_copy_tilemap_to_vram(0);
     return *winidx;
 }
 
 void sub_8126A58(u8 idx)
 {
-    sub_8198070(sDecorMenuWindowIndices[idx], FALSE);
+    ClearStdWindowAndFrameToTransparent(sDecorMenuWindowIndices[idx], FALSE);
     ClearWindowTilemap(sDecorMenuWindowIndices[idx]);
     RemoveWindow(sDecorMenuWindowIndices[idx]);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -572,7 +572,7 @@ void SecretBasePC_PutAway(u8 taskId)
     else
     {
         sub_8126A58(0);
-        ClearWindowAndWideBorder(0, 0);
+        ClearDialogWindowAndFrame(0, 0);
         FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8129ABC;
@@ -617,7 +617,7 @@ void sub_8126DA4(u8 taskId)
 void SecretBasePC_PrepMenuForSelectingStoredDecors(u8 taskId)
 {
     LoadPalette(gUnknown_085A6BB0, 0xd0, 0x20);
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     sub_8126A58(0);
     sub_8126DFC(taskId);
 }
@@ -751,7 +751,7 @@ void sub_81270E8(u8 taskId)
 
 void sub_8127180(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     sub_8126DFC(taskId);
 }
 
@@ -771,7 +771,7 @@ void sub_81271CC(u8 taskId)
 {
     sub_8126A58(1);
     sub_8126A88();
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     sub_8126C08();
     gTasks[taskId].func = sub_8126B80;
 }
@@ -779,7 +779,7 @@ void sub_81271CC(u8 taskId)
 void sub_8127208(u8 taskId)
 {
     LoadPalette(gUnknown_085A6BB0, 0xd0, 0x20);
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     gTasks[taskId].data[11] = 2;
     sCurDecorationCategory = DECORCAT_DESK;
     sub_8126DFC(taskId);
@@ -1095,7 +1095,7 @@ void sub_8127A14(u8 taskId)
 
 void sub_8127A30(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     gTasks[taskId].func = sub_8127A14;
 }
 
@@ -1103,7 +1103,7 @@ void sub_8127A5C(u8 taskId)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        ClearWindowAndWideBorder(0, 0);
+        ClearDialogWindowAndFrame(0, 0);
         sub_81269D4(1);
         sub_8127620(taskId);
     }
@@ -1628,13 +1628,13 @@ void sub_8128950(u8 taskId)
 
 void sub_81289D0(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     DoYesNoFuncWithChoice(taskId, &gUnknown_085A72C4);
 }
 
 void sub_81289F0(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     sub_8128AAC(taskId);
     if (gDecorations[gCurDecorInventoryItems[gCurDecorationIndex]].permission != DECORPERM_SOLID_MAT)
     {
@@ -1693,13 +1693,13 @@ void sub_8128AAC(u8 taskId)
 
 void sub_8128B80(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     DoYesNoFuncWithChoice(taskId, &gUnknown_085A72CC);
 }
 
 void sub_8128BA0(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     sub_8128BBC(taskId);
 }
 
@@ -1887,7 +1887,7 @@ void sub_8128E18(u8 taskId)
 
 void sub_8128FD8(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8128E18;
@@ -2251,7 +2251,7 @@ void sub_81298EC(u8 taskId)
             if (!gPaletteFade.active) {
                 DrawWholeMapView();
                 ScriptContext1_SetupScript(EventScript_275D2E);
-                ClearWindowAndWideBorder(0, 1);
+                ClearDialogWindowAndFrame(0, 1);
                 gTasks[taskId].data[2] = 2;
             }
             break;
@@ -2343,7 +2343,7 @@ void sub_8129ABC(u8 taskId)
 
 void sub_8129B34(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 1);
+    ClearDialogWindowAndFrame(0, 1);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = sub_812A36C;
@@ -2588,7 +2588,7 @@ void sub_812A0E8(u8 taskId)
 
 void sub_812A1A0(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     DoYesNoFuncWithChoice(taskId, &gUnknown_085A7348);
 }
 
@@ -2601,13 +2601,13 @@ void sub_812A1C0(u8 taskId)
 
 void sub_812A1F0(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     DoYesNoFuncWithChoice(taskId, &gUnknown_085A7350);
 }
 
 void sub_812A210(u8 taskId)
 {
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     sub_812A22C(taskId);
 }
 
@@ -2671,7 +2671,7 @@ void sub_812A334(void)
     u8 taskId;
 
     pal_fill_black();
-    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, 1);
     sub_8126ABC();
     taskId = CreateTask(sub_812A2C4, 8);
     gTasks[taskId].data[2] = 0;
@@ -2725,7 +2725,7 @@ void sub_812A3D4(u8 taskId)
 
 void sub_812A458(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     DoYesNoFuncWithChoice(taskId, &gUnknown_085A741C);
 }
 

@@ -1044,7 +1044,7 @@ static void TowerPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x
 static void ShowTowerResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleRoomResults);
@@ -1115,7 +1115,7 @@ static void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2
 static void ShowDomeResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleTourneyResults);
@@ -1191,7 +1191,7 @@ static void PalacePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 
 static void ShowPalaceResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_SingleBattleHallResults);
@@ -1247,7 +1247,7 @@ static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static void ShowPikeResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
     PrintAligned(gStringVar4, 0);
@@ -1309,7 +1309,7 @@ static void ArenaPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static void ShowArenaResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintHyphens(10);
     StringExpandPlaceholders(gStringVar4, gText_SetKOTourneyResults);
@@ -1395,7 +1395,7 @@ static void FactoryPrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8
 static void ShowFactoryResultsWindow(u8 battleMode)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     if (battleMode == FRONTIER_MODE_SINGLES)
         StringExpandPlaceholders(gStringVar4, gText_BattleSwapSingleResults);
@@ -1460,7 +1460,7 @@ static void PyramidPrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 static void ShowPyramidResultsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C74);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
     PrintAligned(gStringVar4, 2);
@@ -1483,7 +1483,7 @@ static void ShowLinkContestResultsWindow(void)
     s32 x;
 
     gRecordsWindowId = AddWindow(&gUnknown_08611C7C);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
 
     StringExpandPlaceholders(gStringVar4, gText_LinkContestResults);
@@ -2353,7 +2353,7 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 void ShowRankingHallRecordsWindow(void)
 {
     gRecordsWindowId = AddWindow(&gUnknown_08611C84);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, FALSE);
+    DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
     PrintHallRecords(gSpecialVar_0x8005, FRONTIER_LVL_50);
     PutWindowTilemap(gRecordsWindowId);

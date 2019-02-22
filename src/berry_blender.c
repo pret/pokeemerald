@@ -1251,7 +1251,7 @@ static void sub_8080018(void)
     case 10:
         if (++sBerryBlenderData->framesToWait > 20)
         {
-            sub_8197DF8(4, TRUE);
+            ClearDialogWindowAndFrameToTransparent(4, TRUE);
             if (GetBlockReceivedStatus() == sub_800A9D8())
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -3325,7 +3325,7 @@ static bool8 Blender_PrintBlendingResults(void)
             sBerryBlenderData->mainState++;
         break;
     case 5:
-        sub_8198070(5, 1);
+        ClearStdWindowAndFrameToTransparent(5, 1);
 
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
@@ -3466,7 +3466,7 @@ static bool8 Blender_PrintBlendingRanking(void)
         }
         break;
     case 3:
-        SetWindowBorderStyle(5, 0, 1, 0xD);
+        DrawStdFrameWithCustomTileAndPalette(5, 0, 1, 0xD);
         xPos = GetStringCenterAlignXOffset(1, sText_Ranking, 0xA8);
         Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SPEED_FF, 0);
 
@@ -3537,7 +3537,7 @@ void ShowBerryBlenderRecordWindow(void)
 
     winTemplate = sBlenderRecordWindowTemplate;
     gRecordsWindowId = AddWindow(&winTemplate);
-    NewMenuHelpers_DrawStdWindowFrame(gRecordsWindowId, 0);
+    DrawStdWindowFrame(gRecordsWindowId, 0);
     FillWindowPixelBuffer(gRecordsWindowId, PALETTE_NUM_TO_FILL_VALUE(1));
 
     xPos = GetStringCenterAlignXOffset(1, gText_BlenderMaxSpeedRecord, 0x90);
@@ -3658,7 +3658,7 @@ static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)
     switch (*textState)
     {
     case 0:
-        sub_8197B1C(4, FALSE, 0x14, 0xF);
+        DrawDialogFrameWithCustomTileAndPalette(4, FALSE, 0x14, 0xF);
         Blender_AddTextPrinter(4, string, 0, 1, textSpeed, 0);
         PutWindowTilemap(4);
         CopyWindowToVram(4, 3);

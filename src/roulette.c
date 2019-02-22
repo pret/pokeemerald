@@ -973,7 +973,7 @@ static void sub_81405CC(void)
         sub_814372C(6);
         sub_81436D0(0);
         sub_81424FC(0);
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5B89, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         gSpriteCoordOffsetX = -60;
@@ -1043,8 +1043,8 @@ static void sub_81408A8(u8 taskId)
 
 static void sub_8140914(u8 taskId)
 {
-    DisplayYesNoMenu();
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, 0);
+    DisplayYesNoMenuWithDefault();
+    DrawStdWindowFrame(gUnknown_0203AB8C, 0);
     AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C13, 0, 1, TEXT_SPEED_FF, 0);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
     DoYesNoFuncWithChoice(taskId, &gUnknown_085B6410);
@@ -1052,7 +1052,7 @@ static void sub_8140914(u8 taskId)
 
 static void sub_8140968(u8 taskId)
 {
-    ClearWindowAndBorder(0, TRUE);
+    ClearStdWindowAndFrame(0, TRUE);
     gTasks[taskId].func = sub_8140BD0;
 }
 
@@ -1808,14 +1808,14 @@ static void sub_814189C(u8 taskId)
         if (gTasks[taskId].data[2] == 12)
         {
             PlayFanfare(MUS_ME_B_BIG);
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BD7, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
         }
         else
         {
             PlayFanfare(MUS_ME_B_SMALL);
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BCB, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
         }
@@ -1823,7 +1823,7 @@ static void sub_814189C(u8 taskId)
     case 0:
     default:
         m4aSongNumStart(SE_HAZURE);
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5BE0, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         break;
@@ -1867,7 +1867,7 @@ static void sub_8141A18(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]), STR_CONV_MODE_LEFT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gUnknown_082A5BEF);
-    NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+    DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
     AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
     CopyWindowToVram(gUnknown_0203AB8C, 3);
     gTasks[taskId].data[1] = (gUnknown_0203AB88->var19 * gTasks[taskId].data[2]);
@@ -1900,14 +1900,14 @@ static void sub_8141B58(u8 taskId)
     {
         if (gTasks[taskId].data[6] == 6)
         {
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C21, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
             sub_8141F7C(taskId, dp01t_12_3_battle_menu, 0xFFFF, 3);
         }
         else if (gTasks[taskId].data[13] == 9999)
         {
-            NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+            DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
             AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(gUnknown_0203AB8C, 3);
             sub_8141F7C(taskId, sub_8140914, 0xFFFF, 0x3);
@@ -1919,7 +1919,7 @@ static void sub_8141B58(u8 taskId)
     }
     else
     {
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C04, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         sub_8141F7C(taskId, sub_8140994, 0x3C, 0x3);
@@ -1944,7 +1944,7 @@ static void dp01t_12_3_battle_menu(u8 taskId)
 
     if (gTasks[taskId].data[13] == 9999)
     {
-        NewMenuHelpers_DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
+        DrawStdWindowFrame(gUnknown_0203AB8C, FALSE);
         AddTextPrinterParameterized(gUnknown_0203AB8C, 1, gUnknown_082A5C61, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(gUnknown_0203AB8C, 3);
         sub_8141F7C(taskId, sub_8140914, 0xFFFF, 3);
@@ -3256,7 +3256,7 @@ static const struct SpriteTemplate gUnknown_085B7AEC =
 
 static void sub_81428C4(u8 r0)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     DoYesNoFuncWithChoice(r0, &gUnknown_085B6408);
 }
 
@@ -3272,7 +3272,7 @@ static void sub_81428E4(u8 taskId)
 
 static void sub_8142918(u8 taskId)
 {
-    ClearWindowAndBorder(0, TRUE);
+    ClearStdWindowAndFrame(0, TRUE);
     HideCoinsWindow();
     FreeAllWindowBuffers();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -3283,7 +3283,7 @@ static void sub_8142918(u8 taskId)
 
 static void sub_814297C(u8 taskId)
 {
-    ClearWindowAndBorder(0, FALSE);
+    ClearStdWindowAndFrame(0, FALSE);
     HideCoinsWindow();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -3296,7 +3296,7 @@ static void sub_81429A0(u8 taskId)
     {
         gSpecialVar_0x8004 = 1;
         HideCoinsWindow();
-        ClearWindowAndBorder(0, TRUE);
+        ClearStdWindowAndFrame(0, TRUE);
         ScriptContext2_Disable();
         DestroyTask(taskId);
     }
@@ -3309,7 +3309,7 @@ static void sub_81429F0(u8 taskId)
         u32 temp = gUnknown_085B6344[(gSpecialVar_0x8004 & 1) + (gSpecialVar_0x8004 >> 7 << 1)];
         ConvertIntToDecimalStringN(gStringVar1, temp, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
-        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        DrawStdWindowFrame(0, FALSE);
         AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = sub_81428C4;
@@ -3326,7 +3326,7 @@ static void Task_Roulette_0(u8 taskId)
     {
         if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 1))
         {
-            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            DrawStdWindowFrame(0, FALSE);
             AddTextPrinterParameterized(0, 1, gUnknown_082A5B6B, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(0, 3);
             gTasks[taskId].func = sub_81429F0;
@@ -3334,7 +3334,7 @@ static void Task_Roulette_0(u8 taskId)
         else
         {
             StringExpandPlaceholders(gStringVar4, gUnknown_082A5B12);
-            NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+            DrawStdWindowFrame(0, FALSE);
             AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
             CopyWindowToVram(0, 3);
             gTasks[taskId].func = sub_81428C4;
@@ -3343,7 +3343,7 @@ static void Task_Roulette_0(u8 taskId)
     else
     {
         StringExpandPlaceholders(gStringVar4, gUnknown_082A5B4E);
-        NewMenuHelpers_DrawStdWindowFrame(0, FALSE);
+        DrawStdWindowFrame(0, FALSE);
         AddTextPrinterParameterized(0, 1, gStringVar4, 0, 1, TEXT_SPEED_FF, NULL);
         CopyWindowToVram(0, 3);
         gTasks[taskId].func = sub_81429A0;

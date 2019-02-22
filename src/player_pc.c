@@ -361,14 +361,14 @@ static void PlayerPCProcessMenuInput(u8 taskId)
             break;
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
-            sub_8198070(data[4], FALSE);
+            ClearStdWindowAndFrameToTransparent(data[4], FALSE);
             ClearWindowTilemap(data[4]);
             RemoveWindow(data[4]);
             schedule_bg_copy_tilemap_to_vram(0);
             gTasks[taskId].func = PlayerPC_TurnOff;
             break;
         default:
-            sub_8198070(data[4], FALSE);
+            ClearStdWindowAndFrameToTransparent(data[4], FALSE);
             ClearWindowTilemap(data[4]);
             RemoveWindow(data[4]);
             schedule_bg_copy_tilemap_to_vram(0);
@@ -403,7 +403,7 @@ static void PlayerPC_Mailbox(u8 taskId)
         ItemStorage_SetItemAndMailCount(taskId);
         if (sub_81D1C44(playerPCItemPageInfo.count) == TRUE)
         {
-            ClearWindowAndWideBorder(0, 0);
+            ClearDialogWindowAndFrame(0, 0);
             Mailbox_DrawMailboxMenu(taskId);
             gTasks[taskId].func = Mailbox_ProcessInput;
         }
@@ -451,7 +451,7 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
 
 static void ItemStorageMenuPrint(const u8 *textPtr)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, textPtr, 0, 1, 0, 0);
 }
 
@@ -506,7 +506,7 @@ void sub_816B31C(void)
 void Mailbox_DoRedrawMailboxMenuAfterReturn(void)
 {
     sub_81973A4();
-    NewMenuHelpers_DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, 1);
     InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
     pal_fill_black();
 }
@@ -560,7 +560,7 @@ static void ItemStorage_WithdrawToss_Helper(u8 taskId, bool8 toss)
     FreeAndReserveObjectSpritePalettes();
     LoadListMenuArrowsGfx();
     sub_8122344(gUnknown_0203BCC4->spriteIds, 7);
-    ClearWindowAndWideBorder(0,0);
+    ClearDialogWindowAndFrame(0,0);
     gTasks[taskId].func = ItemStorage_ProcessWithdrawTossInput;
 }
 
@@ -583,7 +583,7 @@ static void sub_816B4DC(u8 taskId)
 {
     u16 *data = gTasks[taskId].data;
 
-    sub_8198070(data[4], FALSE);
+    ClearStdWindowAndFrameToTransparent(data[4], FALSE);
     ClearWindowTilemap(data[4]);
     RemoveWindow(data[4]);
     schedule_bg_copy_tilemap_to_vram(0);
@@ -761,7 +761,7 @@ static void Mailbox_MoveToBag(u8 taskId)
 
 static void Mailbox_DrawYesNoBeforeMove(u8 taskId)
 {
-    DisplayYesNoMenu();
+    DisplayYesNoMenuWithDefault();
     gTasks[taskId].func = Mailbox_MoveToBagYesNoPrompt;
 }
 
@@ -863,7 +863,7 @@ static void Mailbox_NoPokemonForMail(u8 taskId)
 static void Mailbox_Cancel(u8 taskId)
 {
     sub_81D1D04(2);
-    ClearWindowAndWideBorder(0, 0);
+    ClearDialogWindowAndFrame(0, 0);
     Mailbox_DrawMailboxMenu(taskId);
     schedule_bg_copy_tilemap_to_vram(0);
     gTasks[taskId].func = Mailbox_ProcessInput;
@@ -892,7 +892,7 @@ static u8 sub_816BC7C(u8 a)
     if (*windowIdLoc == 0xFF)
     {
         *windowIdLoc = AddWindow(&gUnknown_085DFF5C[a]);
-        SetWindowBorderStyle(*windowIdLoc, FALSE, 0x214, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(*windowIdLoc, FALSE, 0x214, 0xE);
         schedule_bg_copy_tilemap_to_vram(0);
     }
     return *windowIdLoc;
@@ -903,7 +903,7 @@ static void sub_816BCC4(u8 a)
     u8 *windowIdLoc = &(gUnknown_0203BCC4->windowIds[a]);
     if (*windowIdLoc != 0xFF)
     {
-        sub_8198070(*windowIdLoc, FALSE);
+        ClearStdWindowAndFrameToTransparent(*windowIdLoc, FALSE);
         ClearWindowTilemap(*windowIdLoc);
         schedule_bg_copy_tilemap_to_vram(0);
         RemoveWindow(*windowIdLoc);
@@ -1170,7 +1170,7 @@ static void ItemStorage_GoBackToPlayerPCMenu_InitStorage(u8 taskId)
     data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        NewMenuHelpers_DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, 0);
         if (!data[3])
             InitItemStorageMenu(taskId, ITEMPC_MENU_WITHDRAW);
         else

@@ -1015,7 +1015,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_8101F44(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 7;
@@ -1026,7 +1026,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        ClearWindowAndWideBorder(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1256,7 +1256,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_8102318(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_QuitTheGame, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
@@ -1269,7 +1269,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
     s8 input = Menu_ProcessInputNoWrapClearOnChoose();
     if (input == 0)
     {
-        ClearWindowAndWideBorder(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sub_8103D8C(0);
         sub_8103D8C(1);
         sub_8103D8C(2);
@@ -1278,7 +1278,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
     }
     else if (input == 1 || input == -1)
     {
-        ClearWindowAndWideBorder(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1286,7 +1286,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_810239C(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouveGot9999Coins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 24;
@@ -1297,7 +1297,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        ClearWindowAndWideBorder(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 5;
     }
     return FALSE;
@@ -1305,7 +1305,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 
 /*static */bool8 sub_81023E0_(struct Task *task)
 {
-    NewMenuHelpers_DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized(0, 1, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
     CopyWindowToVram(0, 3);
     sSlotMachine->state = 26;
@@ -1316,7 +1316,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        ClearWindowAndWideBorder(0, TRUE);
+        ClearDialogWindowAndFrame(0, TRUE);
         sSlotMachine->state = 27;
     }
     return FALSE;

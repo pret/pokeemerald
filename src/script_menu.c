@@ -1202,7 +1202,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
     else
     {
         gSpecialVar_Result = 0xFF;
-        DisplayYesNoMenu();
+        DisplayYesNoMenuWithDefault();
         taskId = CreateTask(Task_HandleYesNoInput, 0x50);
         return TRUE;
     }
@@ -1630,7 +1630,7 @@ u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height)
 
 void sub_80E2A78(u8 windowId)
 {
-    sub_8198070(windowId, TRUE);
+    ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
