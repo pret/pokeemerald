@@ -1964,7 +1964,7 @@ static void sub_8141DE4(u8 taskId)
         gSpecialVar_0x8004 = TRUE;
     else
         gSpecialVar_0x8004 = FALSE;
-    AlertTVOfNewCointTotal(GetCoins());
+    AlertTVOfNewCoinTotal(GetCoins());
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = sub_8141E7C;
 }

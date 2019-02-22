@@ -2019,7 +2019,7 @@ void sub_80EDCE8(void)
     }
 }
 
-void AlertTVOfNewCointTotal(u16 nCoinsPaidOut)
+void AlertTVOfNewCoinTotal(u16 nCoinsPaidOut)
 {
     TVShow *show;
     bool8 flag;

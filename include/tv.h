@@ -28,7 +28,7 @@ size_t CountDigits(int value);
 u8 GetRibbonCount(struct Pokemon *pokemon);
 void AlertTVThatPlayerPlayedSlotMachine(u16 nCoinsSpent);
 void AlertTVThatPlayerPlayedRoulette(u16 nCoinsSpent);
-void AlertTVOfNewCointTotal(u16 nCoinsPaidOut);
+void AlertTVOfNewCoinTotal(u16 nCoinsPaidOut);
 void sub_80EEA70(void);
 void sub_80EDB44(void);
 void sub_80EDC60(const u16 *words);
