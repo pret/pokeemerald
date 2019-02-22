@@ -1092,14 +1092,14 @@ static void Task_IntroLoadPart1Graphics(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, 0x18);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0x28);
     LZ77UnCompVram(gIntro1BGLeavesGfx, (void *)VRAM);
-    LZ77UnCompVram(gIntro1BG0_Tilemap, (void *)(VRAM + 0x8000));
-    DmaClear16(3, VRAM + 0x8800, 0x800);
-    LZ77UnCompVram(gIntro1BG1_Tilemap, (void *)(VRAM + 0x9000));
-    DmaClear16(3, VRAM + 0x9800, 0x800);
-    LZ77UnCompVram(gIntro1BG2_Tilemap, (void *)(VRAM + 0xA000));
-    DmaClear16(3, VRAM + 0xA800, 0x800);
-    LZ77UnCompVram(gIntro1BG3_Tilemap, (void *)(VRAM + 0xB000));
-    DmaClear16(3, VRAM + 0xB800, 0x800);
+    LZ77UnCompVram(gIntro1BG0_Tilemap, (void *)(BG_CHAR_ADDR(2)));
+    DmaClear16(3, BG_SCREEN_ADDR(17), 0x800);
+    LZ77UnCompVram(gIntro1BG1_Tilemap, (void *)(BG_SCREEN_ADDR(18)));
+    DmaClear16(3, BG_SCREEN_ADDR(19), 0x800);
+    LZ77UnCompVram(gIntro1BG2_Tilemap, (void *)(BG_SCREEN_ADDR(20)));
+    DmaClear16(3, BG_SCREEN_ADDR(21), 0x800);
+    LZ77UnCompVram(gIntro1BG3_Tilemap, (void *)(BG_SCREEN_ADDR(22)));
+    DmaClear16(3, BG_SCREEN_ADDR(23), 0x800);
     LoadPalette(gIntro1BGPals, 0, sizeof(gIntro1BGPals));
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(22) | BGCNT_16COLOR | BGCNT_TXT256x512);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(20) | BGCNT_16COLOR | BGCNT_TXT256x512);
@@ -1549,7 +1549,7 @@ static void Task_IntroLoadPart3Graphics(u8 taskId)
 {
     intro_reset_and_hide_bgs();
     LZ77UnCompVram(gIntro3Pokeball_Gfx, (void *)VRAM);
-    LZ77UnCompVram(gIntro3Pokeball_Tilemap, (void *)(VRAM + 0x4000));
+    LZ77UnCompVram(gIntro3Pokeball_Tilemap, (void *)(BG_CHAR_ADDR(1)));
     LoadPalette(gIntro3PokeballPal, 0, 0x200);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
@@ -1601,9 +1601,9 @@ static void Task_IntroLoadGroudonScene(u8 taskId)
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
         LZDecompressVram(gIntro3GroudonGfx, (void *)VRAM);
-        LZDecompressVram(gIntro3GroudonTilemap, (void *)(VRAM + 0xC000));
-        LZDecompressVram(gIntro3LegendBgGfx, (void *)(VRAM + 0x4000));
-        LZDecompressVram(gIntro3GroudonBgTilemap, (void *)(VRAM + 0xE000));
+        LZDecompressVram(gIntro3GroudonTilemap, (void *)(BG_CHAR_ADDR(3)));
+        LZDecompressVram(gIntro3LegendBgGfx, (void *)(BG_CHAR_ADDR(1)));
+        LZDecompressVram(gIntro3GroudonBgTilemap, (void *)(BG_SCREEN_ADDR(28)));
         LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
         LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_ROCKS)]);
         CpuCopy16(gIntro3BgPal, gPlttBufferUnfaded, sizeof(gIntro3BgPal));
@@ -1824,8 +1824,8 @@ static void Task_IntroLoadKyogreScene(u8 taskId)
 {
     ResetSpriteData();
     LZDecompressVram(gIntro3KyogreGfx, (void *)VRAM);
-    LZDecompressVram(gIntro3KyogreTilemap, (void *)(VRAM + 0xC000));
-    LZDecompressVram(gIntro3KyogreBgTilemap, (void *)(VRAM + 0xE000));
+    LZDecompressVram(gIntro3KyogreTilemap, (void *)(BG_CHAR_ADDR(3)));
+    LZDecompressVram(gIntro3KyogreBgTilemap, (void *)(BG_SCREEN_ADDR(28)));
     LoadCompressedSpriteSheet(gUnknown_085E4C88);
     LoadSpritePalette(gUnknown_085E4C98);
     BeginNormalPaletteFade(0xFFFFFFFE, 0, 0x10, 0, RGB_WHITEALPHA);
@@ -2087,15 +2087,15 @@ static void Task_IntroLoadClouds1(u8 taskId)
     SetGpuReg(REG_OFFSET_BG2HOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 0);
     LZDecompressVram(gIntro3CloudsGfx, (void *)VRAM);
-    LZDecompressVram(gIntro3CloudsGfx, (void *)(VRAM + 0x4000));
-    LZDecompressVram(gIntro3Clouds3Tilemap, (void *)(VRAM + 0xE000));
+    LZDecompressVram(gIntro3CloudsGfx, (void *)(BG_CHAR_ADDR(1)));
+    LZDecompressVram(gIntro3Clouds3Tilemap, (void *)(BG_SCREEN_ADDR(28)));
     gTasks[taskId].func = Task_IntroLoadClouds2;
 }
 
 static void Task_IntroLoadClouds2(u8 taskId)
 {
-    LZDecompressVram(gIntro3Clouds1Tilemap, (void *)(VRAM + 0xC000));
-    LZDecompressVram(gIntro3Clouds2Tilemap, (void *)(VRAM + 0xD000));
+    LZDecompressVram(gIntro3Clouds1Tilemap, (void *)(BG_CHAR_ADDR(3)));
+    LZDecompressVram(gIntro3Clouds2Tilemap, (void *)(BG_SCREEN_ADDR(26)));
     gTasks[taskId].func = Task_IntroLoadClouds3;
 }
 
@@ -2140,9 +2140,9 @@ static void Task_IntroCloudScene(u8 taskId)
 
 static void Task_IntroLoadRayquazaLightningScene(u8 taskId)
 {
-    LZDecompressVram(gIntro3RayquazaTilemap, (void *)(VRAM + 0xE000));
-    LZDecompressVram(gIntro3Clouds4Tilemap, (void *)(VRAM + 0xC000));
-    LZDecompressVram(gIntro3RayquazaGfx, (void *)(VRAM + 0x4000));
+    LZDecompressVram(gIntro3RayquazaTilemap, (void *)(BG_SCREEN_ADDR(28)));
+    LZDecompressVram(gIntro3Clouds4Tilemap, (void *)(BG_CHAR_ADDR(3)));
+    LZDecompressVram(gIntro3RayquazaGfx, (void *)(BG_CHAR_ADDR(1)));
     LZDecompressVram(gIntro3Clouds2Gfx, (void *)VRAM);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
                                 | DISPCNT_OBJ_1D_MAP

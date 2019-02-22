@@ -22,8 +22,8 @@
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Underwater_SeafloorCavern_EventScript_2343DC",
       "flag": "FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE"
     },
@@ -35,8 +35,8 @@
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Underwater_SeafloorCavern_EventScript_2343DC",
       "flag": "FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE"
     },
@@ -48,8 +48,8 @@
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Underwater_SeafloorCavern_EventScript_2343DC",
       "flag": "FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE"
     },
@@ -61,8 +61,8 @@
       "movement_type": "MOVEMENT_TYPE_INVISIBLE",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Underwater_SeafloorCavern_EventScript_2343DC",
       "flag": "FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE"
     }

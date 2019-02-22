@@ -37,7 +37,8 @@ static EWRAM_DATA u8 gUnknown_02039B52 = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 
 // IWRAM common
-u8 gUnknown_030060B0;
+// This is written to, but never read.
+u8 gUnusedPokedexU8;
 void (*gUnknown_030060B4)(void);
 
 struct PokedexOption
@@ -1225,7 +1226,7 @@ void ResetPokedex(void)
 
     gUnknown_02039B50 = 0;
     gUnknown_02039B52 = 64;
-    gUnknown_030060B0 = 0;
+    gUnusedPokedexU8 = 0;
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
     gSaveBlock2Ptr->pokedex.order = 0;
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
@@ -1243,7 +1244,7 @@ void ResetPokedex(void)
     }
 }
 
-void sub_80BB358(void)
+void ResetPokedexScrollPositions(void)
 {
     gUnknown_02039B50 = 0;
     gUnknown_02039B52 = 64;
@@ -3539,8 +3540,9 @@ void sub_80BFCF4(u16 a)
 {
     CopyToBgTilemapBuffer(1, gPokedexTilemap_ScreenSelectBar2, 0, 0);
 }
-
 #ifdef NONMATCHING
+// This doesn't match because gcc flips the naming of the r3 and r4
+// registers.
 void sub_80BFD0C(u8 a, u16 unused)
 {
     u8 i;
@@ -3629,6 +3631,8 @@ _080BFD3E:\n\
 #endif
 
 #ifdef NONMATCHING
+// This doesn't match because gcc flips the naming of the r3 and r4
+// registers.
 void sub_80BFD7C(u8 a, u16 b)
 {
     u8 i;
@@ -3959,6 +3963,8 @@ void sub_80C0354(u16 height, u8 left, u8 top)
 }
 
 #ifdef NONMATCHING
+// This doesn't match because gcc manages to avoid using the stack
+// to store local variables.
 void sub_80C0460(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
@@ -4036,7 +4042,7 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
     lsls r2, 24\n\
     lsrs r2, 24\n\
     str r2, [sp, 0x10]\n\
-    ldr r5, =0x000186a0\n\
+    ldr r5, =0x000186a0 @ Note to decompiler: See UNKNOWN_OFFSET\n\
     muls r0, r5\n\
     ldr r1, =0x000011b8\n\
     bl __divsi3\n\
@@ -4070,7 +4076,7 @@ _080C04C0:\n\
     mov r8, r1\n\
     movs r6, 0x1\n\
 _080C04C6:\n\
-    ldr r1, =0x000186a0\n\
+    ldr r1, =0x000186a0 @ Note to decompiler: See UNKNOWN_OFFSET\n\
     adds r0, r7, 0\n\
     bl __umodsi3\n\
     adds r7, r0, 0\n\
@@ -5205,18 +5211,24 @@ void sub_80C1D70(u8 taskId)
 }
 
 #ifdef NONMATCHING
+// This doesn't match because gcc flips the naming of the r7 and r6
+// registers. It also does one of the additions backwards.
 void sub_80C1D98(u8 a, u8 b, u8 c, u8 d)
 {
     u16 i;
     u16* ptr = GetBgTilemapBuffer(3);
 
+    u16* temp;
     for (i = 0; i < d; i++)
     {
-        ptr[b + i + (c << 6)] %= 0x1000;
-        ptr[b + i + (c << 6)] |= a * 4096;
+        // This addition is supposed to be done in this order; however,
+        // gcc will always do it in ptr + (c << 5) order.
+        temp = (c << 5) + ptr;
+        temp[b + i] %= 0x1000;
+        temp[b + i] |= a * 4096;
 
-        ptr[b + i + (c << 6) + 32] %= 0x1000;
-        ptr[b + i + (c << 6) + 32] |= a * 4096;
+        temp[b + i + 32] %= 0x1000;
+        temp[b + i + 32] |= a * 4096;
     }
 }
 #else

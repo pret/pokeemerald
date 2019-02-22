@@ -1528,7 +1528,7 @@ static void ShowLinkContestResultsWindow(void)
 
 static void sub_81A31FC(void)
 {
-    u8 text[32];
+    u8 name[32];
     s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -1541,9 +1541,9 @@ static void sub_81A31FC(void)
             gSaveBlock2Ptr->frontier.towerRecordWinStreaks[battleMode][lvlMode] = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode];
             if (battleMode == FRONTIER_MODE_LINK_MULTIS)
             {
-                StringCopy(text, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
-                StripExtCtrlCodes(text);
-                StringCopy(gSaveBlock2Ptr->frontier.field_EE1[lvlMode], text);
+                StringCopy(name, gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name);
+                StripExtCtrlCodes(name);
+                StringCopy(gSaveBlock2Ptr->frontier.opponentName[lvlMode], name);
                 SetTrainerId(gLinkPlayers[gBattleScripting.multiplayerId ^ 1].trainerId, gSaveBlock2Ptr->frontier.field_EF1[lvlMode]);
             }
             if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] > 1
@@ -2336,8 +2336,8 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
     AddTextPrinterParameterized(gRecordsWindowId, 1, gLevelModeText[lvlMode], x, 1, TEXT_SPEED_FF, NULL);
     if (hallFacilityId == HALL_FACILITIES_COUNT)
     {
-        gSaveBlock2Ptr->frontier.field_EE1[0][PLAYER_NAME_LENGTH] = EOS;
-        gSaveBlock2Ptr->frontier.field_EE1[1][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.opponentName[0][PLAYER_NAME_LENGTH] = EOS;
+        gSaveBlock2Ptr->frontier.opponentName[1][PLAYER_NAME_LENGTH] = EOS;
         Fill2PRecords(records2P, lvlMode);
         for (i = 0; i < 3; i++)
             Print2PRecord(i, 1, 4, &records2P[i]);

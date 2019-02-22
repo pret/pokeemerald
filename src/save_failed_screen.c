@@ -208,8 +208,8 @@ static void CB2_SaveFailedScreen(void)
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
         LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
-        LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x7000));
-        LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x7800));
+        LZ77UnCompVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(14)));
+        LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(15)));
         LZ77UnCompVram(sSaveFailedClockGfx, (void *)(VRAM + 0x10020));
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
