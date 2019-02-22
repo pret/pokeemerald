@@ -2620,7 +2620,7 @@ static void sub_80B8874(u16 offs)
     dest = (u16 *)(VRAM + 0x140 + offs);
     for (i = 0; i < 0x140; i++, dest++)
     {
-        *dest = gFieldMoveStreaksTilemap[i] | 0xf000;
+        *dest = gFieldMoveStreaksTilemap[i] | MAP_TILE_ELEVATION_MASK;
     }
 }
 
