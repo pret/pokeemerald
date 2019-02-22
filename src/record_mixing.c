@@ -1167,7 +1167,7 @@ static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, 
 
     k = 0;
     i = 0;
-    while (1)
+    while (TRUE)
     {
         if (i >= linkPlayerCount)
             break;

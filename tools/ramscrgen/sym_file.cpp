@@ -476,7 +476,7 @@ do                                        \
     va_start(args, format);               \
     ReportDiagnostic(type, format, args); \
     va_end(args);                         \
-} while (0)
+} while (FALSE)
 
 // Reports an error diagnostic and terminates the program.
 void SymFile::RaiseError(const char* format, ...)

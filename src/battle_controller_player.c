@@ -2779,7 +2779,7 @@ static void PlayerHandleDMA3Transfer(void)
     u8 *dst = (u8*)(dstArg);
     u32 size = sizeArg;
 
-    while (1)
+    while (TRUE)
     {
         if (size <= 0x1000)
         {

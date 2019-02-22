@@ -981,7 +981,7 @@ void sub_80A2D34(void)
 {
     u8 taskId;
 
-    while (1)
+    while (TRUE)
     {
         taskId = FindTaskIdByFunc(sub_80A2D54);
         if (taskId == 0xFF)

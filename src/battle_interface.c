@@ -573,7 +573,7 @@ static void sub_8072308(s16 arg0, u16 *arg1, u8 arg2)
     i = 3;
     r9 = -1;
     arrayPtr = array;
-    while (1)
+    while (TRUE)
     {
         if (arg0 > 0)
         {

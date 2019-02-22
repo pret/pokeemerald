@@ -30,7 +30,7 @@ do                                        \
 {                                         \
     fprintf(stderr, format, __VA_ARGS__); \
     exit(1);                              \
-} while (0)
+} while (FALSE)
 
 #else
 
@@ -39,7 +39,7 @@ do                                          \
 {                                           \
     fprintf(stderr, format, ##__VA_ARGS__); \
     exit(1);                                \
-} while (0)
+} while (FALSE)
 
 #endif // _MSC_VER
 

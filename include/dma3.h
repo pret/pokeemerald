@@ -9,7 +9,7 @@
     const void *_src = src;                                \
     void *_dest = dest;                                    \
     u32 _size = size;                                      \
-    while (1)                                              \
+    while (TRUE)                                              \
     {                                                      \
         if (_size <= MAX_DMA_BLOCK_SIZE)                   \
         {                                                  \
@@ -30,7 +30,7 @@
 {                                                          \
     void *_dest = dest;                                    \
     u32 _size = size;                                      \
-    while (1)                                              \
+    while (TRUE)                                              \
     {                                                      \
         if (_size <= MAX_DMA_BLOCK_SIZE)                   \
         {                                                  \

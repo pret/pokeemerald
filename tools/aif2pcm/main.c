@@ -36,7 +36,7 @@ do                                         \
 {                                          \
     fprintf(stderr, format, __VA_ARGS__);  \
     exit(1);                               \
-} while (0)
+} while (FALSE)
 
 #else
 
@@ -45,7 +45,7 @@ do                                          \
 {                                           \
     fprintf(stderr, format, ##__VA_ARGS__); \
     exit(1);                                \
-} while (0)
+} while (FALSE)
 
 #endif // _MSC_VER
 
@@ -455,7 +455,7 @@ do { \
 	*((dest) + 1) = ((value) >> 8) & 0xff; \
 	*((dest) + 2) = ((value) >> 16) & 0xff; \
 	*((dest) + 3) = ((value) >> 24) & 0xff; \
-} while (0)
+} while (FALSE)
 
 #define LOAD_U32_LE(var, src) \
 do { \
@@ -463,7 +463,7 @@ do { \
 	(var) |= (*((src) + 1) << 8); \
 	(var) |= (*((src) + 2) << 16); \
 	(var) |= (*((src) + 3) << 24); \
-} while (0)
+} while (FALSE)
 
 // Reads an .aif file and produces a .pcm file containing an array of 8-bit samples.
 void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)

@@ -1549,7 +1549,7 @@ u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
         party = gEnemyParty;
 
     i = 0;
-    while (1)
+    while (TRUE)
     {
         if (i >= MAX_MON_MOVES)
             break;

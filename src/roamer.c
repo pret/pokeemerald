@@ -112,7 +112,7 @@ void RoamerMoveToOtherLocationSet(void)
 
     sRoamerLocation[MAP_GRP] = 0;
 
-    while (1)
+    while (TRUE)
     {
         mapNum = sRoamerLocations[Random() % (ARRAY_COUNT(sRoamerLocations) - 1)][0];
         if (sRoamerLocation[MAP_NUM] != mapNum)
@@ -143,7 +143,7 @@ void RoamerMove(void)
             if (sRoamerLocation[MAP_NUM] == sRoamerLocations[locSet][0])
             {
                 u8 mapNum;
-                while (1)
+                while (TRUE)
                 {
                     mapNum = sRoamerLocations[locSet][(Random() % 5) + 1];
                     if (!(sLocationHistory[2][MAP_GRP] == 0 && sLocationHistory[2][MAP_NUM] == mapNum) && mapNum != 0xFF)

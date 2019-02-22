@@ -473,7 +473,7 @@ bool32 MoveRecordedBattleToSaveData(void)
         }
     }
 
-    while (1)
+    while (TRUE)
     {
         ret = RecordedBattleToSave(battleSave, savSection);
         if (ret == TRUE)

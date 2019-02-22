@@ -32,7 +32,7 @@ do                                             \
 {                                              \
     std::fprintf(stderr, format, __VA_ARGS__); \
     std::exit(1);                              \
-} while (0)
+} while (FALSE)
 
 #else
 
@@ -41,7 +41,7 @@ do                                               \
 {                                                \
     std::fprintf(stderr, format, ##__VA_ARGS__); \
     std::exit(1);                                \
-} while (0)
+} while (FALSE)
 
 #endif // _MSC_VER
 

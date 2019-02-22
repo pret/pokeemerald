@@ -607,7 +607,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
 
 void CB2_PreparePokeblockFeedScene(void)
 {
-    while (1)
+    while (TRUE)
     {
         if (sub_81221EC() == TRUE)
             break;
@@ -1066,7 +1066,7 @@ static void sub_817AB68(void)
     s16 r8 = pokeblockFeed->field_1060[13] - pokeblockFeed->field_1060[10];
     s16 r7 = pokeblockFeed->field_1060[14] - pokeblockFeed->field_1060[11];
 
-    while (1)
+    while (TRUE)
     {
         u16 r5;
         u16 r4;

@@ -1254,7 +1254,7 @@ static void sub_819FD64(void)
 
 #define APPRENTICE_SPECIES_ID(speciesArrId, monId) speciesArrId = (PLAYER_APPRENTICE.monIds[monId] >> \
                                                                   (((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1) << 2)) & 0xF; \
-                                                   do {} while (0)
+                                                   do {} while (FALSE)
 
 // Why the need to have two macros do the exact thing differently?
 #define APPRENTICE_SPECIES_ID_2(speciesArrId, monId) {  u8 a0 = ((PLAYER_APPRENTICE.field_B2_0 >> monId) & 1);\

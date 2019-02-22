@@ -3057,7 +3057,7 @@ static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
             move = ItemIdToBattleMoveId(item);
         else
             return CANNOT_LEARN_MOVE;
-        do {} while (0); // :morphon:
+        do {} while (FALSE); // :morphon:
     }
     else if (CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), tutor) == FALSE)
     {

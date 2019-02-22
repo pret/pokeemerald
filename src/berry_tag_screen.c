@@ -197,7 +197,7 @@ static void VblankCB(void)
 
 static void CB2_InitBerryTagScreen(void)
 {
-    while (1)
+    while (TRUE)
     {
         if (sub_81221EC() == TRUE)
             break;

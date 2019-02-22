@@ -349,7 +349,7 @@ static void sub_81BA040(void)
     gFacilityTrainers = gSlateportBattleTentTrainers;
     gFacilityTrainerMons = gSlateportBattleTentMons;
 
-    while (1)
+    while (TRUE)
     {
         do
         {

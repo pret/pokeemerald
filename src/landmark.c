@@ -396,7 +396,7 @@ const u8 *GetLandmarkName(u8 mapSection, u8 id, u8 count)
     if (!landmarks)
         return NULL;
 
-    while (1)
+    while (TRUE)
     {
         const struct Landmark *landmark = *landmarks;
 

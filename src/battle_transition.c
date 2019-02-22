@@ -1782,7 +1782,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, 240, sTransitionStructPtr->data[5], 1, 1);
 
-    while (1)
+    while (TRUE)
     {
         r1 = 120, r3 = sTransitionStructPtr->data[2] + 1;
         if (sTransitionStructPtr->data[5] >= 80)
@@ -1841,7 +1841,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, 0, sTransitionStructPtr->data[5], 1, 1);
 
-    while (1)
+    while (TRUE)
     {
         r1 = (gScanlineEffectRegBuffers[0][sTransitionStructPtr->data[3]]) & 0xFF;
         r2 = sTransitionStructPtr->data[2];

@@ -1324,7 +1324,7 @@ static void ChooseNextBattleTowerTrainer(void)
         else
         {
             s32 i;
-            while (1)
+            while (TRUE)
             {
                 id = sub_8162548(challengeNum, gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
@@ -2541,7 +2541,7 @@ static void sub_81642A0(void)
         eventObjTemplates[i + 1].graphicsId = GetBattleFacilityTrainerGfxId(trainerId);
         for (j = 0; j < 2; j++)
         {
-            while (1)
+            while (TRUE)
             {
                 monSetId = RandomizeFacilityTrainerMonSet(trainerId);
                 if (j % 2 != 0 && gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[r10 - 1]].itemTableId == gFacilityTrainerMons[monSetId].itemTableId)
@@ -2743,7 +2743,7 @@ static void sub_8164828(void)
         }
         for (k = 0; k < 14; k++)
         {
-            while (1)
+            while (TRUE)
             {
                 i = sub_8162548(challengeNum, k / 2);
                 if (gPartnerTrainerId == i)

@@ -3537,7 +3537,7 @@ void sub_80DCE58(u8 a)
         {
             u8 r2 = sContestantStatus[i].unkB_0;
 
-            while (1)
+            while (TRUE)
             {
                 u8 *ptr = &sp0[r2];
                 if (*ptr == 0xFF)

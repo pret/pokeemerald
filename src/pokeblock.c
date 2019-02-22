@@ -487,7 +487,7 @@ static void VBlankCB_PokeblockMenu(void)
 
 static void CB2_InitPokeblockMenu(void)
 {
-    while (1)
+    while (TRUE)
     {
         if (sub_81221EC() == TRUE)
             break;

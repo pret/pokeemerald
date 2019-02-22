@@ -3670,7 +3670,7 @@ static void sub_80F0358(TVShow player1[25], TVShow player2[25], TVShow player3[2
     argslist[2] = &player3;
     argslist[3] = &player4;
     sTVShowMixingNumPlayers = GetLinkPlayerCount();
-    while (1)
+    while (TRUE)
     {
         for (i = 0; i < sTVShowMixingNumPlayers; i ++)
         {

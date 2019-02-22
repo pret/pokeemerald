@@ -319,7 +319,7 @@ u8 ContestAI_GetActionToUse(void)
         eContestAI->unk4 = 0;
     }
 
-    while (1)
+    while (TRUE)
     {
         u8 rval = Random() & 3;
         u8 r2 = eContestAI->unk5[rval];

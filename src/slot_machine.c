@@ -2246,7 +2246,7 @@ s16 sub_8102D5C(s16 a0)
     u8 r1 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - sSlotMachine->unk2E[1]);
     if (r5 == r1)
     {
-        while (1)
+        while (TRUE)
         {
             u8 r0;
             if (!(r5 == (r0 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
@@ -2268,7 +2268,7 @@ s16 sub_8102D5C(s16 a0)
             }
         }
         i = 0;
-        while (1)
+        while (TRUE)
         {
             if (r5 != GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i))
                 break;
@@ -2303,7 +2303,7 @@ s16 sub_8102D5C(s16 a0)
             }
         }
     }
-    while (1)
+    while (TRUE)
     {
         s16 r8;
         for (i = 1, r8 = 0; i < 4; i++)
@@ -2353,7 +2353,7 @@ s16 sub_8102D5C(s16 a0)
             }
         }
     }
-    while (1)
+    while (TRUE)
     {
         r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 1 - sSlotMachine->unk2E[0]);
         r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - sSlotMachine->unk2E[1]);
@@ -2362,7 +2362,7 @@ s16 sub_8102D5C(s16 a0)
             break;
         sSlotMachine->unk2E[2]++;
     }
-    while (1)
+    while (TRUE)
     {
         r6 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 3 - sSlotMachine->unk2E[0]);
         r5 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(1, 2 - sSlotMachine->unk2E[1]);

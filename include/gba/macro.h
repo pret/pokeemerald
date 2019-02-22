@@ -83,7 +83,7 @@
     const void *_src = src;                               \
     void *_dest = dest;                                   \
     u32 _size = size;                                     \
-    while (1)                                             \
+    while (TRUE)                                             \
     {                                                     \
         DmaCopy##bit(dmaNum, _src, _dest, (block));       \
         _src += (block);                                  \
@@ -105,7 +105,7 @@
 {                                                           \
     void *_dest = dest;                                     \
     u32 _size = size;                                       \
-    while (1)                                               \
+    while (TRUE)                                               \
     {                                                       \
         DmaFill##bit(dmaNum, value, _dest, (block));       \
         _dest += (block);                                   \
@@ -126,7 +126,7 @@
 {                                                           \
     void *_dest = dest;                                     \
     u32 _size = size;                                       \
-    while (1)                                               \
+    while (TRUE)                                               \
     {                                                       \
         DmaFill##bit(dmaNum, 0, _dest, (block));       \
         _dest += (block);                                   \

@@ -5374,7 +5374,7 @@ static void atk50_openpartyscreen(void)
         hitmarkerFaintBits = gHitMarker >> 0x1C;
 
         gBattlerFainted = 0;
-        while (1)
+        while (TRUE)
         {
             if (gBitTable[gBattlerFainted] & hitmarkerFaintBits)
                 break;
@@ -5579,7 +5579,7 @@ static void atk52_switchineffects(void)
                 u32 hitmarkerFaintBits = gHitMarker >> 0x1C;
 
                 gBattlerFainted++;
-                while (1)
+                while (TRUE)
                 {
                     if (hitmarkerFaintBits & gBitTable[gBattlerFainted] && !(gAbsentBattlerFlags & gBitTable[gBattlerFainted]))
                         break;
@@ -8128,7 +8128,7 @@ static void atk9D_mimicattackcopy(void)
 
 static void atk9E_metronome(void)
 {
-    while (1)
+    while (TRUE)
     {
         s32 i;
 
@@ -8139,7 +8139,7 @@ static void atk9E_metronome(void)
         for (i = 0; i < MAX_MON_MOVES; i++); // ?
 
         i = -1;
-        while (1)
+        while (TRUE)
         {
             i++;
             if (sMovesForbiddenToCopy[i] == gCurrentMove)

@@ -1222,7 +1222,7 @@ static void RegionMap_GetPositionOfCursorWithinMapSection(void)
         y = gRegionMap->zoomedCursorPosY;
     }
     posWithinMapSec = 0;
-    while (1)
+    while (TRUE)
     {
         if (x <= MAPCURSOR_X_MIN)
         {

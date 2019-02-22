@@ -1030,7 +1030,7 @@ static inline void SetPtr(const void *ptr, const void* value)
 
 static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, const u8 *data)
 {
-    while (1)
+    while (TRUE)
     {
         switch (specs->ptrType)
         {

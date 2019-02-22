@@ -76,7 +76,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
         }
         ctx->mode = 1;
     case 1:
-        while (1)
+        while (TRUE)
         {
             u8 cmdCode;
             ScrCmdFunc *func;
@@ -89,7 +89,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
 
             if (ctx->scriptPtr == gNullScriptPtr)
             {
-                while (1)
+                while (TRUE)
                     asm("svc 2"); // HALT
             }
 
@@ -248,7 +248,7 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
     if (!mapScripts)
         return NULL;
 
-    while (1)
+    while (TRUE)
     {
         if (!*mapScripts)
             return NULL;
@@ -275,7 +275,7 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
     if (!ptr)
         return NULL;
 
-    while (1)
+    while (TRUE)
     {
         u16 varIndex1;
         u16 varIndex2;
