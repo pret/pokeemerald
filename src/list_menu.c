@@ -698,7 +698,7 @@ static void ListMenuErasePrintedCursor(struct ListMenu *list, u16 selectedRow)
         u8 width  = GetMenuCursorDimensionByFont(list->template.fontId, 0);
         u8 height = GetMenuCursorDimensionByFont(list->template.fontId, 1);
         FillWindowPixelRect(list->template.windowId,
-                            (list->template.fillValue << 4) | (list->template.fillValue),
+                            PALETTE_NUM_TO_FILL_VALUE(list->template.fillValue),
                             list->template.cursor_X,
                             selectedRow * yMultiplier + list->template.upText_Y,
                             width,
@@ -806,26 +806,26 @@ static void ListMenuScroll(struct ListMenu *list, u8 count, bool8 movingDown)
         {
             u16 y, width, height;
 
-            ScrollWindow(list->template.windowId, 1, count * yMultiplier, (list->template.fillValue << 4) | (list->template.fillValue));
+            ScrollWindow(list->template.windowId, 1, count * yMultiplier, PALETTE_NUM_TO_FILL_VALUE(list->template.fillValue));
             ListMenuPrintEntries(list, list->scrollOffset, 0, count);
 
             y = (list->template.maxShowed * yMultiplier) + list->template.upText_Y;
             width = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8;
             height = (GetWindowAttribute(list->template.windowId, WINDOW_HEIGHT) * 8) - y;
             FillWindowPixelRect(list->template.windowId,
-                                (list->template.fillValue << 4) | (list->template.fillValue),
+                                PALETTE_NUM_TO_FILL_VALUE(list->template.fillValue),
                                 0, y, width, height);
         }
         else
         {
             u16 width;
 
-            ScrollWindow(list->template.windowId, 0, count * yMultiplier, (list->template.fillValue << 4) | (list->template.fillValue));
+            ScrollWindow(list->template.windowId, 0, count * yMultiplier, PALETTE_NUM_TO_FILL_VALUE(list->template.fillValue));
             ListMenuPrintEntries(list, list->scrollOffset + (list->template.maxShowed - count), list->template.maxShowed - count, count);
 
             width = GetWindowAttribute(list->template.windowId, WINDOW_WIDTH) * 8;
             FillWindowPixelRect(list->template.windowId,
-                                (list->template.fillValue << 4) | (list->template.fillValue),
+                                PALETTE_NUM_TO_FILL_VALUE(list->template.fillValue),
                                 0, 0, width, list->template.upText_Y);
         }
     }

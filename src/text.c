@@ -1724,12 +1724,12 @@ u16 RenderText(struct TextPrinter *textPrinter)
             int speed = gWindowVerticalScrollSpeeds[scrollSpeed];
             if (textPrinter->scrollDistance < speed)
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor);
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance = 0;
             }
             else
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor);
+                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance -= speed;
             }
             CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);

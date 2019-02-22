@@ -9194,7 +9194,7 @@ static void sub_80D0834(u8 arg0, u8 arg1)
     if (species != SPECIES_NONE)
     {
         FillWindowPixelRect8Bit(sPSSData->field_2200,
-                                0,
+                                PALETTE_NUM_TO_FILL_VALUE(0),
                                 24 * arg0,
                                 24 * arg1,
                                 32,

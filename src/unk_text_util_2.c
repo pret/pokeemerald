@@ -166,12 +166,12 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             {
                 if (textPrinter->scrollDistance < sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed])
                 {
-                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance = 0;
                 }
                 else
                 {
-                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], textPrinter->printerTemplate.bgColor | (textPrinter->printerTemplate.bgColor << 4));
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], PALETTE_NUM_TO_FILL_VALUE(textPrinter->printerTemplate.bgColor));
                     textPrinter->scrollDistance -= sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed];
                 }
                 CopyWindowToVram(textPrinter->printerTemplate.windowId, 2);

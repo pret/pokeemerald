@@ -1704,7 +1704,9 @@ static const struct TextColorThing sUnkColorStruct =
 
 static const u8 sFillValues[3] =
 {
-    0xEE, 0xDD, 0xFF
+    PALETTE_NUM_TO_FILL_VALUE(0xE),
+    PALETTE_NUM_TO_FILL_VALUE(0xD),
+    PALETTE_NUM_TO_FILL_VALUE(0xF)
 };
 
 static const u8 *const sUnkColors[3] =
