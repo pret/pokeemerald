@@ -39,6 +39,7 @@
 #include "tv.h"
 #include "data2.h"
 #include "constants/layouts.h"
+#include "constants/metatile_behaviors.h"
 
 // Static type declarations
 
@@ -853,9 +854,9 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
     {
         for (x = 0; x < width; x ++)
         {
-            if (MapGridGetMetatileBehaviorAt(x, y) == 0x86) // is this tile a TV?
+            if (MapGridGetMetatileBehaviorAt(x, y) == MB_TELEVISION)
             {
-                MapGridSetMetatileIdAt(x, y, tileId | 0xc00);
+                MapGridSetMetatileIdAt(x, y, tileId | MAP_IMPASSABLE_MASK);
             }
         }
     }

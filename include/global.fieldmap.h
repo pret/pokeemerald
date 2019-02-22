@@ -1,6 +1,13 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
+#define MAP_IMPASSABLE_MASK 0x0C00
+#define MAP_METATILE_ID_MASK 0x03FF
+#define MAP_UNDEFINED_METATILE_ID 0x03FF
+#define MAP_TILE_ELEVATION_SHIFT 12
+#define MAP_IMPASSABLE_SHIFT 10
+#define MAP_TILE_ELEVATION_MASK 0xF000
+
 enum
 {
     CONNECTION_SOUTH = 1,
@@ -19,8 +26,8 @@ struct Tileset
     /*0x01*/ bool8 isSecondary;
     /*0x04*/ void *tiles;
     /*0x08*/ void *palettes;
-    /*0x0c*/ void *metatiles;
-    /*0x10*/ void *metatileAttributes;
+    /*0x0c*/ u16 *metatiles;
+    /*0x10*/ u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 

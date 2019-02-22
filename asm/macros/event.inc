@@ -1163,12 +1163,12 @@
 	.endm
 
 	@ Changes the metatile at (x, y) on the current map.
-	.macro setmetatile x:req, y:req, metatile_number:req, tile_attrib:req
+	.macro setmetatile x:req, y:req, metatile_number:req, is_impassable:req
 	.byte 0xa2
 	.2byte \x
 	.2byte \y
 	.2byte \metatile_number
-	.2byte \tile_attrib
+	.2byte \is_impassable
 	.endm
 
 	@ Queues a weather change to the default weather for the map.
