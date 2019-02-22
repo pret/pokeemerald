@@ -1,6 +1,6 @@
 RustboroCity_PokemonCenter_1F_MapScripts:: @ 8214D62
-	map_script 3, RustboroCity_PokemonCenter_1F_MapScript1_214D6D
-	map_script 5, RustboroCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_PokemonCenter_1F_MapScript1_214D6D
+	map_script MAP_SCRIPT_ON_RESUME, RustboroCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 RustboroCity_PokemonCenter_1F_MapScript1_214D6D: @ 8214D6D

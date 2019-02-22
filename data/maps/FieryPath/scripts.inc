@@ -1,5 +1,5 @@
 FieryPath_MapScripts:: @ 8230F24
-	map_script 3, FieryPath_MapScript1_230F2A
+	map_script MAP_SCRIPT_ON_TRANSITION, FieryPath_MapScript1_230F2A
 	.byte 0
 
 FieryPath_MapScript1_230F2A: @ 8230F2A

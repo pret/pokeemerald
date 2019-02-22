@@ -1,5 +1,5 @@
 Route104_PrettyPetalFlowerShop_MapScripts:: @ 822A34C
-	map_script 3, Route104_PrettyPetalFlowerShop_MapScript1_22A352
+	map_script MAP_SCRIPT_ON_TRANSITION, Route104_PrettyPetalFlowerShop_MapScript1_22A352
 	.byte 0
 
 Route104_PrettyPetalFlowerShop_MapScript1_22A352: @ 822A352

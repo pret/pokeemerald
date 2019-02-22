@@ -1,6 +1,6 @@
 PetalburgCity_PokemonCenter_1F_MapScripts:: @ 82079E8
-	map_script 3, PetalburgCity_PokemonCenter_1F_MapScript1_2079F3
-	map_script 5, PetalburgCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_TRANSITION, PetalburgCity_PokemonCenter_1F_MapScript1_2079F3
+	map_script MAP_SCRIPT_ON_RESUME, PetalburgCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_MapScript1_2079F3: @ 82079F3

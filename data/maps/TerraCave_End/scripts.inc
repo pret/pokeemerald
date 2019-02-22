@@ -1,6 +1,6 @@
 TerraCave_End_MapScripts:: @ 823B0B0
-	map_script 5, TerraCave_End_MapScript1_23B0BB
-	map_script 3, TerraCave_End_MapScript1_23B0D9
+	map_script MAP_SCRIPT_ON_RESUME, TerraCave_End_MapScript1_23B0BB
+	map_script MAP_SCRIPT_ON_TRANSITION, TerraCave_End_MapScript1_23B0D9
 	.byte 0
 
 TerraCave_End_MapScript1_23B0BB: @ 823B0BB

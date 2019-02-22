@@ -1,6 +1,6 @@
 FortreeCity_Gym_MapScripts:: @ 82165AB
-	map_script 3, FortreeCity_Gym_MapScript1_2165B6
-	map_script 4, FortreeCity_Gym_MapScript2_2165BA
+	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_Gym_MapScript1_2165B6
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FortreeCity_Gym_MapScript2_2165BA
 	.byte 0
 
 FortreeCity_Gym_MapScript1_2165B6: @ 82165B6

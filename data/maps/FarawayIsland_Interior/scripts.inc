@@ -1,8 +1,8 @@
 FarawayIsland_Interior_MapScripts:: @ 8267CFA
-	map_script 5, FarawayIsland_Interior_MapScript1_267D54
-	map_script 3, FarawayIsland_Interior_MapScript1_267D72
-	map_script 2, FarawayIsland_Interior_MapScript2_267D98
-	map_script 7, FarawayIsland_Interior_MapScript1_267D0F
+	map_script MAP_SCRIPT_ON_RESUME, FarawayIsland_Interior_MapScript1_267D54
+	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Interior_MapScript1_267D72
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FarawayIsland_Interior_MapScript2_267D98
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, FarawayIsland_Interior_MapScript1_267D0F
 	.byte 0
 
 FarawayIsland_Interior_MapScript1_267D0F: @ 8267D0F

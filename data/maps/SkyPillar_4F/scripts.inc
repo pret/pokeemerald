@@ -1,7 +1,7 @@
 SkyPillar_4F_MapScripts:: @ 8239671
-	map_script 2, SkyPillar_4F_MapScript2_2A8327
-	map_script 3, SkyPillar_4F_MapScript1_239681
-	map_script 5, SkyPillar_4F_MapScript1_239696
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_4F_MapScript2_2A8327
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_4F_MapScript1_239681
+	map_script MAP_SCRIPT_ON_RESUME, SkyPillar_4F_MapScript1_239696
 	.byte 0
 
 SkyPillar_4F_MapScript1_239681: @ 8239681

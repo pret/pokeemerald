@@ -1,7 +1,7 @@
 EverGrandeCity_PhoebesRoom_MapScripts:: @ 8228174
-	map_script 1, EverGrandeCity_PhoebesRoom_MapScript1_2281AA
-	map_script 4, EverGrandeCity_PhoebesRoom_MapScript2_228184
-	map_script 2, EverGrandeCity_PhoebesRoom_MapScript2_228193
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_PhoebesRoom_MapScript1_2281AA
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228184
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_PhoebesRoom_MapScript2_228193
 	.byte 0
 
 EverGrandeCity_PhoebesRoom_MapScript2_228184: @ 8228184

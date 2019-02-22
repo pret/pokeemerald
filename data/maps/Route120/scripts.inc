@@ -1,7 +1,7 @@
 Route120_MapScripts:: @ 81F53EC
-	map_script 5, Route120_MapScript1_1F53FC
-	map_script 3, Route120_MapScript1_1F54CD
-	map_script 1, Route120_MapScript1_1F5474
+	map_script MAP_SCRIPT_ON_RESUME, Route120_MapScript1_1F53FC
+	map_script MAP_SCRIPT_ON_TRANSITION, Route120_MapScript1_1F54CD
+	map_script MAP_SCRIPT_ON_LOAD, Route120_MapScript1_1F5474
 	.byte 0
 
 Route120_MapScript1_1F53FC: @ 81F53FC

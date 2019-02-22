@@ -1,6 +1,6 @@
 BattleFrontier_OutsideEast_MapScripts:: @ 8242C04
-	map_script 5, BattleFrontier_OutsideEast_MapScript1_242C0F
-	map_script 3, BattleFrontier_OutsideEast_MapScript1_242C2D
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_OutsideEast_MapScript1_242C0F
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideEast_MapScript1_242C2D
 	.byte 0
 
 BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F

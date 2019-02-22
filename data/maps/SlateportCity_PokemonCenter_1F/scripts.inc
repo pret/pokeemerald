@@ -1,6 +1,6 @@
 SlateportCity_PokemonCenter_1F_MapScripts:: @ 820DABF
-	map_script 3, SlateportCity_PokemonCenter_1F_MapScript1_20DACA
-	map_script 5, SlateportCity_PokemonCenter_1F_MapScript1_277C30
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_PokemonCenter_1F_MapScript1_20DACA
+	map_script MAP_SCRIPT_ON_RESUME, SlateportCity_PokemonCenter_1F_MapScript1_277C30
 	.byte 0
 
 SlateportCity_PokemonCenter_1F_MapScript1_20DACA: @ 820DACA

@@ -1,6 +1,6 @@
 BattleFrontier_BattleTowerElevator_MapScripts:: @ 82419DB
-	map_script 2, BattleFrontier_BattleTowerElevator_MapScript2_2419E6
-	map_script 4, BattleFrontier_BattleTowerElevator_MapScript2_241A96
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerElevator_MapScript2_2419E6
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerElevator_MapScript2_241A96
 	.byte 0
 
 BattleFrontier_BattleTowerElevator_MapScript2_2419E6: @ 82419E6

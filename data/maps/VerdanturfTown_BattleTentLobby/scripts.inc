@@ -1,6 +1,6 @@
 VerdanturfTown_BattleTentLobby_MapScripts:: @ 82016D0
-	map_script 2, VerdanturfTown_BattleTentLobby_MapScript2_2016EF
-	map_script 4, VerdanturfTown_BattleTentLobby_MapScript2_2016DB
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016EF
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_MapScript2_2016DB
 	.byte 0
 
 VerdanturfTown_BattleTentLobby_MapScript2_2016DB: @ 82016DB

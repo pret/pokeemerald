@@ -1,7 +1,7 @@
 SkyPillar_Outside_MapScripts:: @ 82392A8
-	map_script 3, SkyPillar_Outside_MapScript1_2392B8
-	map_script 1, SkyPillar_Outside_MapScript1_2392DD
-	map_script 2, SkyPillar_Outside_MapScript2_2392FA
+	map_script MAP_SCRIPT_ON_TRANSITION, SkyPillar_Outside_MapScript1_2392B8
+	map_script MAP_SCRIPT_ON_LOAD, SkyPillar_Outside_MapScript1_2392DD
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SkyPillar_Outside_MapScript2_2392FA
 	.byte 0
 
 SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
