@@ -1343,7 +1343,7 @@ static bool8 SlotAction_ExitMessage_NoMoreCoins(struct Task *task)
 static bool8 SlotAction_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
-    AlertTVOfNewCointTotal(GetCoins());
+    AlertTVOfNewCoinTotal(GetCoins());
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     sSlotMachine->state++;
     return FALSE;
