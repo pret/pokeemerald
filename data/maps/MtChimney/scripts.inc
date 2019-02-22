@@ -4,7 +4,7 @@ MtChimney_MapScripts:: @ 822EDC1
 	.byte 0
 
 MtChimney_MapScript1_22EDCC: @ 822EDCC
-	setvar VAR_0x40BD, 1
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
 	end
 
 MtChimney_MapScript1_22EDD2: @ 822EDD2

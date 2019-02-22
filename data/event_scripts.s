@@ -1114,7 +1114,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_HIDE_SS_TIDAL_CORRIDOR_MR_BRINEY
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY
-	setvar VAR_0x40C6, 2
+	setvar VAR_STEVENS_HOUSE_STATE, 2
 	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	clearflag FLAG_HIDE_VICTORY_ROAD_EXIT_WALLY
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
@@ -4560,7 +4560,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC7A:: @ 828CC7A
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC84:: @ 828CC84
-	compare VAR_0x40BC, 0
+	compare VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
 	setvar VAR_0x8005, 7
 	special InterviewBefore

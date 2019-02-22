@@ -64,7 +64,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
 	setvar VAR_SLATEPORT_STATE, 1
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
-	setvar VAR_0x40A0, 1
+	setvar VAR_SLATEPORT_HARBOR_STATE, 1
 	fadescreen 1
 	removeobject 6
 	removeobject 2

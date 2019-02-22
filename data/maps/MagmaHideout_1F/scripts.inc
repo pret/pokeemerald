@@ -3,7 +3,7 @@ MagmaHideout_1F_MapScripts:: @ 8239880
 	.byte 0
 
 MagmaHideout_1F_MapScript1_239886: @ 8239886
-	setvar VAR_0x40BD, 0
+	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
 	end
 
 MagmaHideout_1F_EventScript_23988C:: @ 823988C

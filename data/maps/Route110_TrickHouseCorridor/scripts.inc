@@ -3,6 +3,6 @@ Route110_TrickHouseCorridor_MapScripts:: @ 826B903
 	.byte 0
 
 Route110_TrickHouseCorridor_MapScript1_26B909: @ 826B909
-	setvar VAR_0x40B5, 1
+	setvar VAR_TRICK_HOUSE_STATE, 1
 	end
 

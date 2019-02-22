@@ -42,7 +42,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	updatemoneybox 0, 0
 	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B026, MSGBOX_DEFAULT
-	setvar VAR_0x40AA, 1
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox
 	nop
 	nop
@@ -63,7 +63,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AE18:: @ 820AE18
 
 SlateportCity_OceanicMuseum_1F_EventScript_20AE39:: @ 820AE39
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B075, MSGBOX_DEFAULT
-	setvar VAR_0x40AA, 1
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
 	hidemoneybox
 	nop
 	nop

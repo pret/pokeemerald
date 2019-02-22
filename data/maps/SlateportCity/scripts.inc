@@ -4,7 +4,7 @@ SlateportCity_MapScripts:: @ 81DCC61
 	.byte 0
 
 SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
-	setvar VAR_0x40AA, 0
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_1DCC8D
 	compare VAR_SLATEPORT_STATE, 1
 	call_if_eq SlateportCity_EventScript_1DCC99

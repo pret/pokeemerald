@@ -421,7 +421,7 @@ MauvilleCity_EventScript_1DF73A:: @ 81DF73A
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_1DF7B0
-	compare VAR_0x40BA, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_EventScript_1DF784
 	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_1DF77A
 	msgbox MauvilleCity_Text_1DFFE4, MSGBOX_DEFAULT

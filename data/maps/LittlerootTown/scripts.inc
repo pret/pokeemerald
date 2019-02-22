@@ -16,7 +16,7 @@ LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	call_if_eq LittlerootTown_EventScript_1E7E5C
 	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
-	compare VAR_0x40C7, 1
+	compare VAR_OLDALE_STATE, 1
 	call_if_eq LittlerootTown_EventScript_1E7E53
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_eq LittlerootTown_EventScript_1E7E4F
@@ -39,7 +39,7 @@ LittlerootTown_EventScript_1E7E4F:: @ 81E7E4F
 	return
 
 LittlerootTown_EventScript_1E7E53:: @ 81E7E53
-	setvar VAR_0x40C7, 2
+	setvar VAR_OLDALE_STATE, 2
 	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
 	return
 

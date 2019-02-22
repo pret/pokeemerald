@@ -79,7 +79,7 @@ MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_Gym_EventScript_20DFDE
 	goto_if_unset FLAG_RECEIVED_TM34, MauvilleCity_Gym_EventScript_20DF8D
-	compare VAR_0x40BA, 2
+	compare VAR_NEW_MAUVILLE_STATE, 2
 	goto_if_eq MauvilleCity_Gym_EventScript_20DFD4
 	msgbox MauvilleCity_Gym_Text_20E8E3, MSGBOX_DEFAULT
 	release

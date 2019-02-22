@@ -121,7 +121,7 @@
       "x": 17,
       "y": 42,
       "elevation": 3,
-      "var": "VAR_0x40A2",
+      "var": "VAR_SEAFLOOR_CAVERN_STATE",
       "var_value": "0",
       "script": "SeafloorCavern_Room9_EventScript_234DC9"
     }

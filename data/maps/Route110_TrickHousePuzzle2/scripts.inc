@@ -23,13 +23,13 @@ Route110_TrickHousePuzzle2_MapScript1_26BBAB: @ 826BBAB
 
 Route110_TrickHousePuzzle2_EventScript_26BBC0:: @ 826BBC0
 	lockall
-	compare VAR_0x40AC, 0
+	compare VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0
 	goto_if_eq Route110_TrickHousePuzzle2_EventScript_26BBD2
 	goto Route110_TrickHousePuzzle2_EventScript_26A3DB
 	end
 
 Route110_TrickHousePuzzle2_EventScript_26BBD2:: @ 826BBD2
-	setvar VAR_0x40AC, 1
+	setvar VAR_TRICK_HOUSE_PUZZLE_2_STATE, 1
 	goto Route110_TrickHousePuzzle2_EventScript_26A3E5
 	end
 

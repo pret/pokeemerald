@@ -4,26 +4,26 @@ Route113_GlassWorkshop_MapScripts:: @ 826ED03
 
 Route113_GlassWorkshop_MapScript1_26ED09: @ 826ED09
 	setflag FLAG_LANDMARK_GLASS_WORKSHOP
-	compare VAR_0x40BE, 1
+	compare VAR_GLASS_WORKSHOP_STATE, 1
 	call_if_eq Route113_GlassWorkshop_EventScript_26ED18
 	end
 
 Route113_GlassWorkshop_EventScript_26ED18:: @ 826ED18
-	setvar VAR_0x40BE, 2
+	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	return
 
 Route113_GlassWorkshop_EventScript_26ED1E:: @ 826ED1E
 	lock
 	faceplayer
-	compare VAR_0x40BE, 10
+	compare VAR_GLASS_WORKSHOP_STATE, 10
 	goto_if_ge Route113_GlassWorkshop_EventScript_26F090
-	compare VAR_0x40BE, 2
+	compare VAR_GLASS_WORKSHOP_STATE, 2
 	goto_if_eq Route113_GlassWorkshop_EventScript_26ED6E
-	compare VAR_0x40BE, 1
+	compare VAR_GLASS_WORKSHOP_STATE, 1
 	goto_if_eq Route113_GlassWorkshop_EventScript_26ED64
 	msgbox Route113_GlassWorkshop_Text_26F19D, MSGBOX_DEFAULT
 	giveitem_std ITEM_SOOT_SACK
-	setvar VAR_0x40BE, 1
+	setvar VAR_GLASS_WORKSHOP_STATE, 1
 	msgbox Route113_GlassWorkshop_Text_26F252, MSGBOX_DEFAULT
 	release
 	end
@@ -76,7 +76,7 @@ Route113_GlassWorkshop_EventScript_26EE1E:: @ 826EE1E
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 10
+	setvar VAR_GLASS_WORKSHOP_STATE, 10
 	subvar VAR_ASH_GATHER_COUNT, 250
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -90,7 +90,7 @@ Route113_GlassWorkshop_EventScript_26EE5A:: @ 826EE5A
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 11
+	setvar VAR_GLASS_WORKSHOP_STATE, 11
 	subvar VAR_ASH_GATHER_COUNT, 500
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -104,7 +104,7 @@ Route113_GlassWorkshop_EventScript_26EE96:: @ 826EE96
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 12
+	setvar VAR_GLASS_WORKSHOP_STATE, 12
 	subvar VAR_ASH_GATHER_COUNT, 500
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -118,7 +118,7 @@ Route113_GlassWorkshop_EventScript_26EED2:: @ 826EED2
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 13
+	setvar VAR_GLASS_WORKSHOP_STATE, 13
 	subvar VAR_ASH_GATHER_COUNT, 1000
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -132,7 +132,7 @@ Route113_GlassWorkshop_EventScript_26EF0E:: @ 826EF0E
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 14
+	setvar VAR_GLASS_WORKSHOP_STATE, 14
 	subvar VAR_ASH_GATHER_COUNT, 1000
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -147,7 +147,7 @@ Route113_GlassWorkshop_EventScript_26EF4A:: @ 826EF4A
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 15
+	setvar VAR_GLASS_WORKSHOP_STATE, 15
 	subvar VAR_ASH_GATHER_COUNT, 6000
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -162,7 +162,7 @@ Route113_GlassWorkshop_EventScript_26EF8B:: @ 826EF8B
 	msgbox Route113_GlassWorkshop_Text_26F480, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq Route113_GlassWorkshop_EventScript_26F003
-	setvar VAR_0x40BE, 16
+	setvar VAR_GLASS_WORKSHOP_STATE, 16
 	subvar VAR_ASH_GATHER_COUNT, 8000
 	goto Route113_GlassWorkshop_EventScript_26F00F
 	end
@@ -206,7 +206,7 @@ Route113_GlassWorkshop_EventScript_26F00F:: @ 826F00F
 	call_if_eq Route113_GlassWorkshop_EventScript_26F047
 	compare VAR_0x8009, 1
 	call_if_eq Route113_GlassWorkshop_EventScript_26F05F
-	setvar VAR_0x40BE, 2
+	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	release
 	end
 
@@ -235,7 +235,7 @@ Route113_GlassWorkshop_EventScript_26F081:: @ 826F081
 	end
 
 Route113_GlassWorkshop_EventScript_26F090:: @ 826F090
-	switch VAR_0x40BE
+	switch VAR_GLASS_WORKSHOP_STATE
 	case 10, Route113_GlassWorkshop_EventScript_26F0E3
 	case 11, Route113_GlassWorkshop_EventScript_26F0F7
 	case 12, Route113_GlassWorkshop_EventScript_26F10B
@@ -300,7 +300,7 @@ Route113_GlassWorkshop_EventScript_26F16F:: @ 826F16F
 	call_if_eq Route113_GlassWorkshop_EventScript_26F047
 	compare VAR_0x8009, 1
 	call_if_eq Route113_GlassWorkshop_EventScript_26F05F
-	setvar VAR_0x40BE, 2
+	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	release
 	end
 

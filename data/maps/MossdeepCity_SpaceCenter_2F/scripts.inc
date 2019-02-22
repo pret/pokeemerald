@@ -315,7 +315,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_224071:: @ 8224071
 	removeobject 4
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_INVISIBLE_NINJA_BOY
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
-	setvar VAR_0x40C6, 1
+	setvar VAR_STEVENS_HOUSE_STATE, 1
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SCOTT
 	removeobject 3
 	setobjectxyperm 3, 5, 6

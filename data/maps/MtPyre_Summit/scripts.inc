@@ -3,7 +3,7 @@ MtPyre_Summit_MapScripts:: @ 8231FF7
 	.byte 0
 
 MtPyre_Summit_MapScript1_231FFD: @ 8231FFD
-	compare VAR_0x40B9, 2
+	compare VAR_MT_PYRE_STATE, 2
 	call_if_eq MtPyre_Summit_EventScript_232009
 	end
 
@@ -56,7 +56,7 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	fadedefaultbgm
 	fadescreen 0
 	delay 20
-	setvar VAR_0x40B9, 1
+	setvar VAR_MT_PYRE_STATE, 1
 	compare VAR_0x8008, 0
 	call_if_eq MtPyre_Summit_EventScript_2320F7
 	compare VAR_0x8008, 1
@@ -165,7 +165,7 @@ MtPyre_Summit_EventScript_2321A2:: @ 82321A2
 	lock
 	faceplayer
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_2321E2
-	compare VAR_0x40B9, 3
+	compare VAR_MT_PYRE_STATE, 3
 	call_if_ge MtPyre_Summit_EventScript_2321CB
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_2321D8
 	msgbox MtPyre_Summit_Text_232AD8, MSGBOX_DEFAULT
@@ -242,7 +242,7 @@ MtPyre_Summit_EventScript_232210:: @ 8232210
 	waitmovement 0
 	removeobject 2
 	removeobject 8
-	setvar VAR_0x40B9, 3
+	setvar VAR_MT_PYRE_STATE, 3
 	releaseall
 	end
 
