@@ -2,11 +2,14 @@
 // Includes
 #include "global.h"
 #include "alloc.h"
+#include "bg.h"
 #include "dewford_trend.h"
 #include "dynamic_placeholder_text_util.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "gpu_regs.h"
+#include "graphics.h"
 #include "international_string_util.h"
 #include "link.h"
 #include "main.h"
@@ -70,8 +73,27 @@ struct EasyChatScreen
     /*0x3C*/ u16 ecWordBuffer[9];
 };
 
+struct Unk203A11C
+{
+    u16 unk0;
+    u8 filler2[0x2];
+    u16 unk4;
+    u8 filler6[0x2FA];
+    u8 unk300[BG_SCREEN_SIZE];
+    u8 unkB00[BG_SCREEN_SIZE];
+};
+
+struct Unk08597C30
+{
+    u8 unk0_0:5;
+    u8 unk0_5:3;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+};
+
 EWRAM_DATA struct EasyChatScreen *gEasyChatScreen = NULL;
-EWRAM_DATA void *gUnknown_0203A11C = 0;
+EWRAM_DATA struct Unk203A11C *gUnknown_0203A11C = 0;
 EWRAM_DATA void *gUnknown_0203A120 = 0;
 
 static void sub_811A2C0(u8);
@@ -103,10 +125,10 @@ static u8 sub_811BCC8(u8);
 static void sub_811BDF0(u8 *);
 void sub_811BF78(void);
 static bool8 sub_811BF8C(void);
-bool8 sub_811BFA4(void);
-void sub_811C13C(void);
-/*static*/ void sub_811C158(u16);
-/*static*/ bool8 sub_811C170(void);
+static bool8 sub_811BFA4(void);
+static void sub_811C13C(void);
+static void sub_811C158(u16);
+static bool8 sub_811C170(void);
 bool8 sub_811F28C(void);
 void sub_811F2B8(void);
 u8 sub_811F3AC(void);
@@ -153,6 +175,87 @@ static u8 sub_811BA1C(void);
 static int sub_811BF20(void);
 static u16 sub_811BF40(void);
 u8 sub_811CE94(void);
+void sub_811CF64(void);
+void sub_811CF04(void);
+void sub_811D60C(void);
+void sub_811D424(u8 *);
+void sub_811D230(void);
+void sub_811E948(void);
+void sub_811CFCC(void);
+void sub_811D0BC(void);
+void sub_811D2C8(void);
+void sub_811D684(void);
+void sub_811DE90(void);
+void sub_811DEC4(void);
+void sub_811DE5C(u8, u8, u8, u8);
+void sub_811E5D4(void);
+void sub_811E720(void);
+void sub_811E828(void);
+static bool8 sub_811C2D4(void);
+static bool8 sub_811C30C(void);
+static bool8 sub_811C3E4(void);
+static bool8 sub_811C48C(void);
+static bool8 sub_811C404(void);
+static bool8 sub_811C448(void);
+static bool8 sub_811C4D0(void);
+static bool8 sub_811C518(void);
+static bool8 sub_811C554(void);
+static bool8 sub_811C620(void);
+static bool8 sub_811C830(void);
+static bool8 sub_811C8F0(void);
+static bool8 sub_811C99C(void);
+static bool8 sub_811CA5C(void);
+static bool8 sub_811C780(void);
+static bool8 sub_811C78C(void);
+static bool8 sub_811C7D4(void);
+static bool8 sub_811CB18(void);
+static bool8 sub_811CB98(void);
+static bool8 sub_811CB24(void);
+static bool8 sub_811CC90(void);
+static bool8 sub_811CC08(void);
+static bool8 sub_811C6C0(void);
+static bool8 sub_811CD14(void);
+static bool8 sub_811CD54(void);
+static bool8 sub_811CD94(void);
+static bool8 sub_811CDD4(void);
+static bool8 sub_811CE14(void);
+static bool8 sub_811CE54(void);
+void sub_811DF60(u8, u8);
+int sub_811E920(int);
+void sub_811DF90(void);
+void sub_811D104(u8);
+void sub_811D214(u8);
+void sub_811DFB0(void);
+void sub_811D6D4(void);
+void sub_811D9CC(int);
+void sub_811E3AC(void);
+bool8 sub_811E418(void);
+void sub_811DFC8(void);
+void sub_811E6E0(int);
+bool8 sub_811DAA4(void);
+void sub_811E64C(void);
+void sub_811E050(void);
+void sub_811E4AC(void);
+void sub_811E6B0(void);
+void sub_811E55C(void);
+bool8 sub_811E4D0(void);
+bool8 sub_811E5B8(void);
+void sub_811E578(void);
+void sub_811E088(void);
+void sub_811DDAC(s16, u8);
+bool8 sub_811DE10(void);
+void sub_811D9B4(void);
+void sub_811D698(int);
+void sub_811E288(void);
+void sub_811E794(void);
+void sub_811E380(void);
+void sub_811E7F8(void);
+void sub_811E30C(void);
+void sub_811D7A4(void);
+void sub_811D7C8(void);
+int sub_811DE48(void);
+void sub_811D7EC(void);
+void sub_811D830(void);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 
 extern const struct {
@@ -164,6 +267,10 @@ extern const struct EasyChatScreenTemplate gEasyChatScreenTemplates[21];
 extern const u8 gUnknown_08597748[][7];
 extern const u16 gUnknown_08597764[];
 extern const u16 gUnknown_0859776C[][2];
+extern const struct BgTemplate gUnknown_08597C54[4];
+extern const struct WindowTemplate gUnknown_08597C64[];
+extern const u32 gUnknown_08597B54[];
+extern const struct Unk08597C30 gUnknown_08597C30[];
 
 void sub_811A20C(u8 kind, u16 *words, MainCallback callback, u8 sizeParam)
 {
@@ -2212,4 +2319,871 @@ static bool8 sub_811BF8C(void)
         return 0; 
     else
         return 1;
+}
+
+static bool8 sub_811BFA4(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        ResetBgsAndClearDma3BusyFlags(0);
+        InitBgsFromTemplates(0, gUnknown_08597C54, ARRAY_COUNT(gUnknown_08597C54));
+        SetBgTilemapBuffer(3, gUnknown_0203A11C->unkB00);
+        SetBgTilemapBuffer(1, gUnknown_0203A11C->unk300);
+        InitWindows(gUnknown_08597C64);
+        DeactivateAllTextPrinters();
+        sub_811CF64();
+        sub_811CF04();
+        CpuFastFill(0, (void *)VRAM + 0x1000000, 0x400);
+        break;
+    case 1:
+        DecompressAndLoadBgGfxUsingHeap(3, gEasyChatWindow_Gfx, 0, 0, 0);
+        CopyToBgTilemapBuffer(3, gEasyChatWindow_Tilemap, 0, 0);
+        sub_811D60C();
+        sub_811D424(gUnknown_0203A11C->unk300);
+        sub_811D230();
+        sub_811E948();
+        CopyBgTilemapBufferToVram(3);
+        break;
+    case 2:
+        DecompressAndLoadBgGfxUsingHeap(1, gUnknown_08597B54, 0, 0, 0);
+        CopyBgTilemapBufferToVram(1);
+        break;
+    case 3:
+        sub_811CFCC();
+        sub_811D0BC();
+        sub_811D2C8();
+        sub_811D684();
+        break;
+    case 4:
+        sub_811DE90();
+        if (sub_811BA5C() != 16)
+            sub_811DEC4();
+        break;
+    case 5:
+        if (IsDma3ManagerBusyWithBgCopy())
+        {
+            return TRUE;
+        }
+        else
+        {
+            sub_811DE5C(0, 0, 0, 0);
+            SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(0, 63));
+            SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0, 59));
+            ShowBg(3);
+            ShowBg(1);
+            ShowBg(2);
+            ShowBg(0);
+            sub_811E5D4();
+            sub_811E720();
+            sub_811E828();
+        }
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_0203A11C->unk0++;
+    return TRUE;
+}
+
+static void sub_811C13C(void)
+{
+    if (gUnknown_0203A11C)
+        FREE_AND_SET_NULL(gUnknown_0203A11C);
+}
+
+static void sub_811C158(u16 arg0)
+{
+    gUnknown_0203A11C->unk4 = arg0;
+    gUnknown_0203A11C->unk0 = 0;
+    sub_811C170();
+}
+
+static bool8 sub_811C170(void)
+{
+    switch (gUnknown_0203A11C->unk4)
+    {
+    case 0:  return FALSE;
+    case 1:  return sub_811C2D4();
+    case 2:  return sub_811C30C();
+    case 3:  return sub_811C3E4();
+    case 4:  return sub_811C48C();
+    case 5:  return sub_811C404();
+    case 6:  return sub_811C448();
+    case 7:  return sub_811C4D0();
+    case 8:  return sub_811C518();
+    case 9:  return sub_811C554();
+    case 10: return sub_811C620();
+    case 11: return sub_811C830();
+    case 12: return sub_811C8F0();
+    case 13: return sub_811C99C();
+    case 14: return sub_811CA5C();
+    case 15: return sub_811C780();
+    case 16: return sub_811C78C();
+    case 17: return sub_811C7D4();
+    case 18: return sub_811CB18();
+    case 19: return sub_811CB98();
+    case 20: return sub_811CB24();
+    case 21: return sub_811CC90();
+    case 22: return sub_811CC08();
+    case 23: return sub_811C6C0();
+    case 24: return FALSE;
+    case 25: return FALSE;
+    case 26: return FALSE;
+    case 27: return FALSE;
+    case 28: return FALSE;
+    case 29: return sub_811CD14();
+    case 30: return sub_811CD54();
+    case 31: return sub_811CD94();
+    case 32: return sub_811CDD4();
+    case 33: return sub_811CE14();
+    case 34: return sub_811CE54();
+    default: return FALSE;
+    }
+}
+
+static bool8 sub_811C2D4(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D2C8();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C30C(void)
+{
+    u8 i;
+    u16 *ecWordBuffer;
+    u16 *ecWord;
+    u8 var0;
+    u8 cursorColumn, cursorRow, numColumns;
+    s16 var1;
+    int stringWidth;
+    int trueStringWidth;
+    u8 var2;
+    u8 sp0[64];
+    
+    ecWordBuffer = sub_811BA94();
+    var0 = sub_811BA68();
+    cursorColumn = sub_811BAB8();
+    cursorRow = sub_811BAC4();
+    numColumns = sub_811BAAC();
+    ecWord = &ecWordBuffer[cursorRow * numColumns];
+    var1 = 8 * gUnknown_08597C30[var0].unk0_0 + 13;
+    for (i = 0; i < cursorColumn; i++)
+    {
+        if (*ecWord == 0xFFFF)
+        {
+            stringWidth = 72;
+        }
+        else
+        {
+            CopyEasyChatWord(sp0, *ecWord);
+            stringWidth = GetStringWidth(1, sp0, 0);
+        }
+
+        trueStringWidth = stringWidth + 17;
+        var1 += trueStringWidth;
+        ecWord++;
+    }
+
+    var2 = 8 * (gUnknown_08597C30[var0].unk0_5 + cursorRow * 2);
+    sub_811DF60(var1, var2 + 8);
+    return FALSE;
+}
+
+static bool8 sub_811C3E4(void)
+{
+    u8 var0 = sub_811E920(sub_811BAB8());
+    sub_811DF60(var0, 96);
+    return FALSE;
+}
+
+static bool8 sub_811C404(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(2);
+        sub_811D214(1);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C448(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(3);
+        sub_811D214(0);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C48C(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(1);
+        sub_811D214(1);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C4D0(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DFB0();
+        sub_811D104(0);
+        sub_811D2C8();
+        ShowBg(0);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C518(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DFB0();
+        sub_811D104(0);
+        sub_811D2C8();
+        gUnknown_0203A11C->unk0++;
+        // Fall through
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C554(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        HideBg(0);
+        sub_811DE5C(0, 0, 0, 0);
+        sub_811D6D4();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811D9CC(0);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy() && !sub_811DAA4())
+            gUnknown_0203A11C->unk0++;
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811E3AC();
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 4:
+        if (!sub_811E418())
+        {
+            sub_811DFC8();
+            sub_811E6E0(0);
+            sub_811E64C();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    default:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C620(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811E050();
+        sub_811E4AC();
+        sub_811E6B0();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (sub_811E4D0() == TRUE)
+            break;
+
+        sub_811D9CC(1);
+        gUnknown_0203A11C->unk0++;
+        // Fall through
+    case 2:
+        if (!sub_811DAA4())
+            gUnknown_0203A11C->unk0++;
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811DFB0();
+            ShowBg(0);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 4:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C6C0(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811E050();
+        sub_811E6B0();
+        sub_811E55C();
+        sub_811D9CC(5);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!sub_811DAA4() && !sub_811E5B8())
+        {
+            sub_811D6D4();
+            gUnknown_0203A11C->unk0++;   
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811D9CC(6);
+            sub_811E578();
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 3:
+        if (!sub_811DAA4() && !sub_811E5B8())
+        {
+            sub_811E64C();
+            sub_811DFC8();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 4:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C780(void)
+{
+    sub_811E088();
+    return FALSE;
+}
+
+static bool8 sub_811C78C(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DDAC(1, 4);
+        gUnknown_0203A11C->unk0++;
+        // Fall through
+    case 1:
+        if (!sub_811DE10())
+        {
+            sub_811E088();
+            sub_811E64C();
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C7D4(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DDAC(-1, 4);
+        gUnknown_0203A11C->unk0++;
+        // Fall through
+    case 1:
+        if (!sub_811DE10())
+        {
+            sub_811E64C();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C830(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811E050();
+        sub_811E4AC();
+        sub_811E6B0();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!sub_811E4D0())
+        {
+            sub_811D9B4();
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811D9CC(2);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 3:
+        if (!sub_811DAA4())
+        {
+            sub_811D698(2);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 4:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811E288();
+            sub_811E6E0(1);
+            sub_811E64C();
+            sub_811E794();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 5:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C8F0(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D2C8();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        sub_811E380();
+        sub_811E6B0();
+        sub_811E7F8();
+        sub_811D9B4();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811D9CC(3);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 3:
+        if (!sub_811DAA4())
+        {
+            ShowBg(0);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 4:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811DFB0();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 5:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811C99C(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D2C8();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        sub_811E380();
+        sub_811E6B0();
+        sub_811E7F8();
+        sub_811D9B4();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811D9CC(3);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 3:
+        if (!sub_811DAA4())
+        {
+            sub_811D104(3);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 4:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            ShowBg(0);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 5:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811DFB0();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 6:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CA5C(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811E380();
+        sub_811E6B0();
+        sub_811E7F8();
+        sub_811D9B4();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811D9CC(4);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!sub_811DAA4())
+        {
+            sub_811D6D4();
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811E3AC();
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 4:
+        if (!sub_811E418())
+        {
+            sub_811DFC8();
+            sub_811E6E0(0);
+            sub_811E64C();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CB18(void)
+{
+    sub_811E30C();
+    return FALSE;
+}
+
+static bool8 sub_811CB24(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D7A4();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811DDAC(1, 4);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!sub_811DE10())
+        {
+            sub_811E30C();
+            sub_811E64C();
+            sub_811E794();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CB98(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D7C8();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_811DDAC(-1, 4);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!sub_811DE10())
+        {
+            sub_811E64C();
+            sub_811E794();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CC08(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D7EC();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            s16 var0 = sub_811BBDC() - sub_811DE48();
+            sub_811DDAC(var0, 8);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!sub_811DE10())
+        {
+            sub_811E30C();
+            sub_811E64C();
+            sub_811E794();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CC90(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811D830();
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            s16 var0 = sub_811BBDC() - sub_811DE48();
+            sub_811DDAC(var0, 8);
+            gUnknown_0203A11C->unk0++;
+        }
+        break;
+    case 2:
+        if (!sub_811DE10())
+        {
+            sub_811E64C();
+            sub_811E794();
+            gUnknown_0203A11C->unk0++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CD14(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(4);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CD54(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(5);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CD94(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(6);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CDD4(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(7);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CE14(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(8);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_811CE54(void)
+{
+    switch (gUnknown_0203A11C->unk0)
+    {
+    case 0:
+        sub_811DF90();
+        sub_811D104(9);
+        gUnknown_0203A11C->unk0++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
 }
