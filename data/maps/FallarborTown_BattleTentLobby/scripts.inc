@@ -1,6 +1,6 @@
 FallarborTown_BattleTentLobby_MapScripts:: @ 81FFE66
-	map_script 2, FallarborTown_BattleTentLobby_MapScript2_1FFE85
-	map_script 4, FallarborTown_BattleTentLobby_MapScript2_1FFE71
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE85
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentLobby_MapScript2_1FFE71
 	.byte 0
 
 FallarborTown_BattleTentLobby_MapScript2_1FFE71: @ 81FFE71

@@ -1,5 +1,5 @@
 MagmaHideout_1F_MapScripts:: @ 8239880
-	map_script 3, MagmaHideout_1F_MapScript1_239886
+	map_script MAP_SCRIPT_ON_TRANSITION, MagmaHideout_1F_MapScript1_239886
 	.byte 0
 
 MagmaHideout_1F_MapScript1_239886: @ 8239886

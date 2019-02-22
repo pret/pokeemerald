@@ -1,9 +1,9 @@
 SootopolisCity_MapScripts:: @ 81E565C
-	map_script 1, SootopolisCity_MapScript1_1E5676
-	map_script 3, SootopolisCity_MapScript1_1E56EF
-	map_script 5, SootopolisCity_MapScript1_1E590B
-	map_script 2, SootopolisCity_MapScript2_1E5914
-	map_script 4, SootopolisCity_MapScript2_1E58DB
+	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_MapScript1_1E5676
+	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MapScript1_1E56EF
+	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_MapScript1_1E590B
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MapScript2_1E5914
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SootopolisCity_MapScript2_1E58DB
 	.byte 0
 
 SootopolisCity_MapScript1_1E5676: @ 81E5676

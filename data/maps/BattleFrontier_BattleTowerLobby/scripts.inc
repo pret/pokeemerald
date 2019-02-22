@@ -1,8 +1,8 @@
 BattleFrontier_BattleTowerLobby_MapScripts:: @ 823E67B
-	map_script 5, BattleFrontier_BattleTowerLobby_MapScript1_23E690
-	map_script 3, BattleFrontier_BattleTowerLobby_MapScript1_23E694
-	map_script 2, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
-	map_script 4, BattleFrontier_BattleTowerLobby_MapScript2_23E6C9
+	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerLobby_MapScript1_23E690
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerLobby_MapScript1_23E694
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6DD
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerLobby_MapScript2_23E6C9
 	.byte 0
 
 BattleFrontier_BattleTowerLobby_MapScript1_23E690: @ 823E690

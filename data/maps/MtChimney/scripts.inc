@@ -1,6 +1,6 @@
 MtChimney_MapScripts:: @ 822EDC1
-	map_script 5, MtChimney_MapScript1_22EDD2
-	map_script 3, MtChimney_MapScript1_22EDCC
+	map_script MAP_SCRIPT_ON_RESUME, MtChimney_MapScript1_22EDD2
+	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_MapScript1_22EDCC
 	.byte 0
 
 MtChimney_MapScript1_22EDCC: @ 822EDCC

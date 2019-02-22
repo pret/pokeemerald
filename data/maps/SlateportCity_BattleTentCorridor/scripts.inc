@@ -1,6 +1,6 @@
 SlateportCity_BattleTentCorridor_MapScripts:: @ 8208E26
-	map_script 2, SlateportCity_BattleTentCorridor_MapScript2_208E5B
-	map_script 4, SlateportCity_BattleTentCorridor_MapScript2_208E31
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E5B
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentCorridor_MapScript2_208E31
 	.byte 0
 
 SlateportCity_BattleTentCorridor_MapScript2_208E31: @ 8208E31

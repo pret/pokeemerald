@@ -1,7 +1,7 @@
 LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
-	map_script 1, LittlerootTown_MaysHouse_1F_MapScript1_1F88B5
-	map_script 3, LittlerootTown_MaysHouse_1F_MapScript1_1F88F4
-	map_script 2, LittlerootTown_MaysHouse_1F_MapScript2_1F893A
+	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_MaysHouse_1F_MapScript1_1F88B5
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_1F_MapScript1_1F88F4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_MaysHouse_1F_MapScript2_1F893A
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5

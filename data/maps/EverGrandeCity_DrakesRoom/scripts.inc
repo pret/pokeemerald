@@ -1,7 +1,7 @@
 EverGrandeCity_DrakesRoom_MapScripts:: @ 822869C
-	map_script 2, EverGrandeCity_DrakesRoom_MapScript2_2286BB
-	map_script 1, EverGrandeCity_DrakesRoom_MapScript1_2286D2
-	map_script 4, EverGrandeCity_DrakesRoom_MapScript2_227F3E
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_DrakesRoom_MapScript2_2286BB
+	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_DrakesRoom_MapScript1_2286D2
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_DrakesRoom_MapScript2_227F3E
 	.byte 0
 
 EverGrandeCity_DrakesRoom_MapScript2_2286AC: @ 82286AC

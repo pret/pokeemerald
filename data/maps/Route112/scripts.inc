@@ -1,5 +1,5 @@
 Route112_MapScripts:: @ 81F1DA8
-	map_script 3, Route112_MapScript1_1F1DAE
+	map_script MAP_SCRIPT_ON_TRANSITION, Route112_MapScript1_1F1DAE
 	.byte 0
 
 Route112_MapScript1_1F1DAE: @ 81F1DAE

@@ -5493,8 +5493,8 @@ gBattleDomeMatchNumberText15::
 	.string "Final Match$"
 
 BattleFrontier_BattlePikeRandomRoom1_MapScripts_2C3E1B: @ 82C3E1B
-	map_script 3, BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25
-	map_script 4, BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRandomRoom1_MapScript2_2C3EDE
 
 BattleFrontier_BattlePikeRandomRoom1_MapScript1_2C3E25: @ 82C3E25
 	setvar VAR_0x8004, 4

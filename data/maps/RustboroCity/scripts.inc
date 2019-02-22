@@ -1,6 +1,6 @@
 RustboroCity_MapScripts:: @ 81E06BD
-	map_script 3, RustboroCity_MapScript1_1E06C8
-	map_script 2, RustboroCity_MapScript2_1E070B
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_MapScript1_1E06C8
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_MapScript2_1E070B
 	.byte 0
 
 RustboroCity_MapScript1_1E06C8: @ 81E06C8

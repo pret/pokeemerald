@@ -1,6 +1,6 @@
 Route103_MapScripts:: @ 81EC38E
-	map_script 3, Route103_MapScript1_1EC399
-	map_script 1, Route103_MapScript1_1EC3A4
+	map_script MAP_SCRIPT_ON_TRANSITION, Route103_MapScript1_1EC399
+	map_script MAP_SCRIPT_ON_LOAD, Route103_MapScript1_1EC3A4
 	.byte 0
 
 Route103_MapScript1_1EC399: @ 81EC399

@@ -1,8 +1,8 @@
 Route110_TrickHousePuzzle7_MapScripts:: @ 826E091
-	map_script 5, Route110_TrickHousePuzzle7_MapScript1_26E0A6
-	map_script 3, Route110_TrickHousePuzzle7_MapScript1_26E198
-	map_script 1, Route110_TrickHousePuzzle7_MapScript1_26E1B4
-	map_script 2, Route110_TrickHousePuzzle7_MapScript2_26E1C0
+	map_script MAP_SCRIPT_ON_RESUME, Route110_TrickHousePuzzle7_MapScript1_26E0A6
+	map_script MAP_SCRIPT_ON_TRANSITION, Route110_TrickHousePuzzle7_MapScript1_26E198
+	map_script MAP_SCRIPT_ON_LOAD, Route110_TrickHousePuzzle7_MapScript1_26E1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route110_TrickHousePuzzle7_MapScript2_26E1C0
 	.byte 0
 
 Route110_TrickHousePuzzle7_MapScript1_26E0A6: @ 826E0A6

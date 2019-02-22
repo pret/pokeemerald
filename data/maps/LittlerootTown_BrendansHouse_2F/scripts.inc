@@ -1,6 +1,6 @@
 LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
-	map_script 3, LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE
-	map_script 4, LittlerootTown_BrendansHouse_2F_MapScript2_1F846A
+	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_MapScript2_1F846A
 	.byte 0
 
 LittlerootTown_BrendansHouse_2F_MapScript1_1F83EE: @ 81F83EE
