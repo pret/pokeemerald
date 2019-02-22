@@ -1148,8 +1148,8 @@ EverGrandeCity_HallOfFame_EventScript_27183F:: @ 827183F
 	return
 
 EverGrandeCity_HallOfFame_EventScript_271843:: @ 8271843
-	setvar VAR_0x4082, 3
-	setvar VAR_0x408C, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 3
 	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
 	return
 
@@ -1163,11 +1163,11 @@ EventScript_WhiteOut:: @ 8271857
 	end
 
 EventScript_271862:: @ 8271862
-	compare VAR_0x4096, 1
+	compare VAR_BRINEY_LOCATION, 1
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_271884
-	compare VAR_0x4096, 2
+	compare VAR_BRINEY_LOCATION, 2
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_27189A
-	compare VAR_0x4096, 3
+	compare VAR_BRINEY_LOCATION, 3
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_2718B3
 	end
 
@@ -1208,7 +1208,7 @@ EverGrandeCity_HallOfFame_EventScript_2718CC:: @ 82718CC
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
 	clearflag FLAG_DEFEATED_ELITE_4_DRAKE
-	setvar VAR_0x409C, 0
+	setvar VAR_ELITE_4_STATE, 0
 	return
 
 DewfordTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
@@ -1228,15 +1228,15 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2718DE:: @ 82718DE
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_27190C:: @ 827190C
-	setvar VAR_0x4096, 1
+	setvar VAR_BRINEY_LOCATION, 1
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271912:: @ 8271912
-	setvar VAR_0x4096, 2
+	setvar VAR_BRINEY_LOCATION, 2
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271918:: @ 8271918
-	setvar VAR_0x4096, 3
+	setvar VAR_BRINEY_LOCATION, 3
 	return
 
 BattleFrontier_PokemonCenter_1F_EventScript_27191E:: @ 827191E
@@ -1756,8 +1756,8 @@ DewfordTown_Hall_EventScript_271E8B:: @ 8271E8B
 DewfordTown_EventScript_271E95:: @ 8271E95
 Route104_MrBrineysHouse_EventScript_271E95:: @ 8271E95
 Route109_EventScript_271E95:: @ 8271E95
-	copyvar VAR_0x8008, VAR_0x4096
-	setvar VAR_0x4096, 0
+	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
+	setvar VAR_BRINEY_LOCATION, 0
 	return
 
 EventScript_UseSurf:: @ 8271EA0
@@ -2085,7 +2085,7 @@ Route109_EventScript_2720A8:: @ 82720A8
 LittlerootTown_ProfessorBirchsLab_EventScript_2720AD:: @ 82720AD
 Route101_EventScript_2720AD:: @ 82720AD
 Route103_EventScript_2720AD:: @ 82720AD
-	compare VAR_0x4085, 0
+	compare VAR_PETALBURG_GYM_STATE, 0
 	goto_if_eq Route101_EventScript_27374E
 	goto_if_set FLAG_SYS_GAME_CLEAR, Route101_EventScript_27211A
 	compare VAR_BIRCH_STATE, 0
@@ -2204,7 +2204,7 @@ PetalburgCity_Gym_EventScript_2721F8:: @ 82721F8
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	setflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	setvar VAR_0x4096, 0
+	setvar VAR_BRINEY_LOCATION, 0
 	return
 
 RusturfTunnel_EventScript_272216:: @ 8272216
@@ -4467,13 +4467,13 @@ LilycoveCity_ContestLobby_EventScript_28CB21:: @ 828CB21
 	end
 
 LilycoveCity_ContestLobby_EventScript_28CB2B:: @ 828CB2B
-	compare VAR_0x4086, 2
+	compare VAR_LINK_CONTEST_ROOM_STATE, 2
 	goto_if_ne LilycoveCity_ContestLobby_EventScript_28CB95
 	setvar VAR_0x8005, 6
 	special InterviewBefore
 	compare VAR_RESULT, 1
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_28CB95
-	switch VAR_0x4088
+	switch VAR_CONTEST_LOCATION
 	case 0, LilycoveCity_ContestLobby_EventScript_28CB95
 	case 2, LilycoveCity_ContestLobby_EventScript_28CB91
 	case 1, LilycoveCity_ContestLobby_EventScript_28CB91

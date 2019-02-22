@@ -13,19 +13,19 @@ EverGrandeCity_GlaciasRoom_EventScript_22842C:: @ 822842C
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript2_228431: @ 8228431
-	map_script_2 VAR_0x409C, 2, EverGrandeCity_GlaciasRoom_EventScript_22843B
+	map_script_2 VAR_ELITE_4_STATE, 2, EverGrandeCity_GlaciasRoom_EventScript_22843B
 	.2byte 0
 
 EverGrandeCity_GlaciasRoom_EventScript_22843B:: @ 822843B
 	lockall
 	call EverGrandeCity_GlaciasRoom_EventScript_272475
-	setvar VAR_0x409C, 3
+	setvar VAR_ELITE_4_STATE, 3
 	releaseall
 	end
 
 EverGrandeCity_GlaciasRoom_MapScript1_228448: @ 8228448
 	call_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_22845D
-	compare VAR_0x409C, 3
+	compare VAR_ELITE_4_STATE, 3
 	call_if_eq EverGrandeCity_GlaciasRoom_EventScript_228463
 	end
 

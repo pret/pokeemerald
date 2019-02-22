@@ -38,7 +38,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9CF7:: @ 81F9CF7
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_1F9D06: @ 81F9D06
-	map_script_2 VAR_0x4084, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D40
+	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D40
 	map_script_2 VAR_0x40D3, 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45
 	map_script_2 VAR_0x40D3, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D45
 	map_script_2 VAR_0x40D3, 3, LittlerootTown_ProfessorBirchsLab_EventScript_1F9D71
@@ -85,8 +85,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9D75:: @ 81F9D75
 	end
 
 LittlerootTown_ProfessorBirchsLab_MapScript2_1F9DB9: @ 81F9DB9
-	map_script_2 VAR_0x4084, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB
-	map_script_2 VAR_0x4084, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9E67
+	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB
+	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9E67
 	map_script_2 VAR_0x40D3, 1, LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80
 	map_script_2 VAR_0x40D3, 4, LittlerootTown_ProfessorBirchsLab_EventScript_1F9F62
 	.2byte 0
@@ -122,7 +122,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E17:: @ 81F9E17
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9E36:: @ 81F9E36
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA9D5, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_ROUTE_101_BOY
-	setvar VAR_0x4084, 3
+	setvar VAR_BIRCH_LAB_STATE, 3
 	releaseall
 	end
 
@@ -264,7 +264,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_1F9F7C: @ 81F9F7C
 LittlerootTown_ProfessorBirchsLab_EventScript_1F9F84:: @ 81F9F84
 	lock
 	faceplayer
-	compare VAR_0x4084, 3
+	compare VAR_BIRCH_LAB_STATE, 3
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_1F9FB1
 	goto_if_set FLAG_BIRCH_AIDE_MET, LittlerootTown_ProfessorBirchsLab_EventScript_1F9FA7
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA4E2, MSGBOX_DEFAULT
@@ -502,7 +502,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E:: @ 81FA29E
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_272141
 	compare VAR_0x40D3, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_272141
-	compare VAR_0x4084, 5
+	compare VAR_BIRCH_LAB_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA3C4
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FAA74, MSGBOX_DEFAULT
 	release
@@ -537,10 +537,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA2F8:: @ 81FA2F8
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA352
 	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F
-	setvar VAR_0x4084, 5
+	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
-	setvar VAR_0x4051, 1
-	setvar VAR_0x408D, 4
+	setvar VAR_ROUTE102_ACCESSIBLE, 1
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
 	setvar VAR_0x4050, 3
 	releaseall
 	end

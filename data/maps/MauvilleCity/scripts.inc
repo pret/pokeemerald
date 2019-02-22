@@ -8,7 +8,7 @@ MauvilleCity_MapScript1_1DF38B: @ 81DF38B
 	clearflag FLAG_HIDE_SLATEPORT_MUSEUM_POPULATION
 	setflag FLAG_SYS_TV_START
 	clearflag FLAG_MAUVILLE_GYM_BARRIERS_STATE
-	setvar VAR_0x4093, 0
+	setvar VAR_MAUVILLE_GYM_STATE, 0
 	call_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_1DF3A9
 	end
 

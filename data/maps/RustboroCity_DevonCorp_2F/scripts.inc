@@ -281,7 +281,7 @@ RustboroCity_DevonCorp_2F_EventScript_211BCF:: @ 8211BCF
 	faceplayer
 	compare VAR_0x40C4, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_211869
-	compare VAR_0x405A, 6
+	compare VAR_RUSTBORO_STATE, 6
 	goto_if_ge RustboroCity_DevonCorp_2F_EventScript_211BF1
 	msgbox RustboroCity_DevonCorp_2F_Text_212338, MSGBOX_DEFAULT
 	release

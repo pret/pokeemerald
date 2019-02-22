@@ -107,7 +107,7 @@ Route118_EventScript_1F3EE4:: @ 81F3EE4
 	call_if_eq Route118_EventScript_1F3F3A
 	compare VAR_0x8008, 2
 	call_if_eq Route118_EventScript_1F3F4C
-	setvar VAR_0x4071, 1
+	setvar VAR_ROUTE118_STATE, 1
 	removeobject 19
 	releaseall
 	end

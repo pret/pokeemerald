@@ -11,7 +11,7 @@ OldaleTown_MapScript1_1E8EA8: @ 81E8EA8
 	end
 
 OldaleTown_EventScript_1E8ECC:: @ 81E8ECC
-	setvar VAR_0x4051, 1
+	setvar VAR_ROUTE102_ACCESSIBLE, 1
 	return
 
 OldaleTown_EventScript_1E8ED2:: @ 81E8ED2

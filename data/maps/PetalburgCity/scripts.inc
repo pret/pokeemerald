@@ -5,13 +5,13 @@ PetalburgCity_MapScripts::
 
 PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7
 	setflag FLAG_VISITED_PETALBURG_CITY
-	compare VAR_0x4057, 0
+	compare VAR_PETALBURG_STATE, 0
 	call_if_eq PetalburgCity_EventScript_1DC307
-	compare VAR_0x4057, 2
+	compare VAR_PETALBURG_STATE, 2
 	call_if_eq PetalburgCity_EventScript_1DC30F
-	compare VAR_0x4057, 4
+	compare VAR_PETALBURG_STATE, 4
 	call_if_eq PetalburgCity_EventScript_1DC30F
-	compare VAR_0x4085, 8
+	compare VAR_PETALBURG_GYM_STATE, 8
 	call_if_eq PetalburgCity_EventScript_1DC316
 	end
 
@@ -25,12 +25,12 @@ PetalburgCity_EventScript_1DC30F:: @ 81DC30F
 	return
 
 PetalburgCity_EventScript_1DC316:: @ 81DC316
-	setvar VAR_0x4085, 7
+	setvar VAR_PETALBURG_GYM_STATE, 7
 	return
 
 PetalburgCity_MapScript2_1DC31C: @ 81DC31C
-	map_script_2 VAR_0x4057, 2, PetalburgCity_EventScript_1DC32E
-	map_script_2 VAR_0x4057, 4, PetalburgCity_EventScript_1DC390
+	map_script_2 VAR_PETALBURG_STATE, 2, PetalburgCity_EventScript_1DC32E
+	map_script_2 VAR_PETALBURG_STATE, 4, PetalburgCity_EventScript_1DC390
 	.2byte 0
 
 PetalburgCity_EventScript_1DC32E:: @ 81DC32E
@@ -49,11 +49,11 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	msgbox PetalburgCity_Text_1EC297, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	setvar VAR_0x4057, 3
+	setvar VAR_PETALBURG_STATE, 3
 	fadedefaultbgm
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	special LoadPlayerParty
-	setvar VAR_0x4085, 1
+	setvar VAR_PETALBURG_GYM_STATE, 1
 	warp MAP_PETALBURG_CITY_GYM, 255, 4, 108
 	waitstate
 	releaseall

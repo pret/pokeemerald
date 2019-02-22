@@ -7,18 +7,18 @@ LittlerootTown_MapScripts:: @ 81E7DCB
 LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	call LittlerootTown_EventScript_271ED7
-	compare VAR_0x4092, 2
+	compare VAR_LITTLEROOT_INTRO_STATE, 2
 	call_if_eq LittlerootTown_EventScript_1E7E67
 	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_1E7E6F
 	compare VAR_0x4050, 3
 	call_if_eq LittlerootTown_EventScript_1E7E92
-	compare VAR_0x4082, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE, 4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
-	compare VAR_0x408C, 4
+	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
 	call_if_eq LittlerootTown_EventScript_1E7E5C
 	compare VAR_0x40C7, 1
 	call_if_eq LittlerootTown_EventScript_1E7E53
-	compare VAR_0x408D, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_eq LittlerootTown_EventScript_1E7E4F
 	compare VAR_0x40D3, 1
 	call_if_eq LittlerootTown_EventScript_1E7E4B
@@ -44,8 +44,8 @@ LittlerootTown_EventScript_1E7E53:: @ 81E7E53
 	return
 
 LittlerootTown_EventScript_1E7E5C:: @ 81E7E5C
-	setvar VAR_0x4082, 5
-	setvar VAR_0x408C, 5
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 5
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 5
 	return
 
 LittlerootTown_EventScript_1E7E67:: @ 81E7E67
@@ -83,8 +83,8 @@ LittlerootTown_EventScript_1E7EB9:: @ 81E7EB9
 	return
 
 LittlerootTown_MapScript2_1E7EC1: @ 81E7EC1
-	map_script_2 VAR_0x4092, 1, LittlerootTown_EventScript_1E7EDB
-	map_script_2 VAR_0x4092, 2, LittlerootTown_EventScript_1E7EF9
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_1E7EDB
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_1E7EF9
 	map_script_2 VAR_0x40D3, 1, LittlerootTown_EventScript_1E7FB1
 	.2byte 0
 
@@ -136,7 +136,7 @@ LittlerootTown_EventScript_1E7F17:: @ 81E7F17
 	applymovement EVENT_OBJ_ID_PLAYER, LittlerootTown_Movement_1E7FA9
 	waitmovement 0
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setvar VAR_0x4092, 3
+	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	hideobjectat EVENT_OBJ_ID_PLAYER, MAP_PETALBURG_CITY
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim

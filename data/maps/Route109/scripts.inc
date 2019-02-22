@@ -55,7 +55,7 @@ Route109_EventScript_1EE7D5:: @ 81EE7D5
 	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_1E9C1D, MSGBOX_DEFAULT
 	closemessage
-	copyvar VAR_0x4096, VAR_0x8008
+	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
 	resetobjectpriority EVENT_OBJ_ID_PLAYER, MAP_ROUTE109
 	resetobjectpriority 2, MAP_DEWFORD_TOWN
 	moveobjectoffscreen 2

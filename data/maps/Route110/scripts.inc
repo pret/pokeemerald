@@ -496,7 +496,7 @@ Route110_EventScript_1EF8EC:: @ 81EF8EC
 	compare VAR_0x8008, 3
 	call_if_eq Route110_EventScript_1EF985
 	removeobject 29
-	setvar VAR_0x4069, 1
+	setvar VAR_ROUTE110_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

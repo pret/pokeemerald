@@ -118,7 +118,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_23503A
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_235723, MSGBOX_DEFAULT
-	setvar VAR_0x407B, 1
+	setvar VAR_ROUTE128_STATE, 1
 	setvar VAR_0x405E, 1
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE

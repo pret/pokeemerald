@@ -9,9 +9,9 @@ LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_1EA53F
 	call LavaridgeTown_EventScript_271ED7
 	call LavaridgeTown_EventScript_271EFB
-	compare VAR_0x4053, 1
+	compare VAR_LAVARIDGE_RIVAL_STATE, 1
 	call_if_eq LavaridgeTown_EventScript_1EA518
-	compare VAR_0x4053, 1
+	compare VAR_LAVARIDGE_RIVAL_STATE, 1
 	call_if_eq LavaridgeTown_EventScript_1EA543
 	end
 
@@ -41,7 +41,7 @@ LavaridgeTown_EventScript_1EA543:: @ 81EA543
 	return
 
 LavaridgeTown_MapScript2_1EA547: @ 81EA547
-	map_script_2 VAR_0x4053, 1, LavaridgeTown_EventScript_1EA551
+	map_script_2 VAR_LAVARIDGE_RIVAL_STATE, 1, LavaridgeTown_EventScript_1EA551
 	.2byte 0
 
 LavaridgeTown_EventScript_1EA551:: @ 81EA551
@@ -94,7 +94,7 @@ LavaridgeTown_EventScript_1EA5FF:: @ 81EA5FF
 	compare VAR_0x8008, 9
 	call_if_ne LavaridgeTown_EventScript_1EA6C9
 	removeobject 7
-	setvar VAR_0x4053, 2
+	setvar VAR_LAVARIDGE_RIVAL_STATE, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	savebgm MUS_DUMMY
 	fadedefaultbgm

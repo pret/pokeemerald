@@ -423,7 +423,7 @@
       "x": 25,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4074",
+      "var": "VAR_ROUTE121_STATE",
       "var_value": "0",
       "script": "Route121_EventScript_1F5E18"
     },
@@ -432,7 +432,7 @@
       "x": 25,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x4074",
+      "var": "VAR_ROUTE121_STATE",
       "var_value": "0",
       "script": "Route121_EventScript_1F5E18"
     },
@@ -441,7 +441,7 @@
       "x": 25,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_0x4074",
+      "var": "VAR_ROUTE121_STATE",
       "var_value": "0",
       "script": "Route121_EventScript_1F5E18"
     },
@@ -450,7 +450,7 @@
       "x": 25,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4074",
+      "var": "VAR_ROUTE121_STATE",
       "var_value": "0",
       "script": "Route121_EventScript_1F5E18"
     }

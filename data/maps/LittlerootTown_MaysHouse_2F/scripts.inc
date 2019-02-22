@@ -4,11 +4,11 @@ LittlerootTown_MaysHouse_2F_MapScripts:: @ 81F9296
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
-	compare VAR_0x408D, 2
+	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	call_if_lt LittlerootTown_MaysHouse_2F_EventScript_1F930A
-	compare VAR_0x408D, 3
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F92CD
-	compare VAR_0x4092, 4
+	compare VAR_LITTLEROOT_INTRO_STATE, 4
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_2926FE
 	call LittlerootTown_MaysHouse_2F_EventScript_275CE1
 	setvar VAR_0x4089, 0
@@ -16,7 +16,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_1F92A1: @ 81F92A1
 
 LittlerootTown_MaysHouse_2F_EventScript_1F92CD:: @ 81F92CD
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_MaysHouse_2F_EventScript_1F92E6
-	compare VAR_0x4084, 2
+	compare VAR_BIRCH_LAB_STATE, 2
 	goto_if_ge LittlerootTown_MaysHouse_2F_EventScript_1F9309
 	goto LittlerootTown_MaysHouse_2F_EventScript_1F92E6
 
@@ -41,7 +41,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F930A:: @ 81F930A
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9317:: @ 81F9317
-	setvar VAR_0x408D, 2
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
 	return
 
 LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
@@ -56,7 +56,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334
 	lockall
-	compare VAR_0x408D, 2
+	compare VAR_LITTLEROOT_RIVAL_STATE, 2
 	goto_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F934A
 	msgbox LittlerootTown_MaysHouse_2F_Text_1F9991, MSGBOX_DEFAULT
 	releaseall
@@ -82,7 +82,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9418
 	compare VAR_FACING, 4
 	call_if_eq LittlerootTown_MaysHouse_2F_EventScript_1F9440
-	setvar VAR_0x408D, 3
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	setvar VAR_0x4050, 1

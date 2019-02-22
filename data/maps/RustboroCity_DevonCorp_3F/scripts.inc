@@ -5,7 +5,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D
-	compare VAR_0x408F, 0
+	compare VAR_DEVON_CORP_3F_STATE, 0
 	call_if_eq RustboroCity_DevonCorp_3F_EventScript_212449
 	end
 
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_3F_EventScript_212449:: @ 8212449
 	return
 
 RustboroCity_DevonCorp_3F_MapScript2_212455: @ 8212455
-	map_script_2 VAR_0x408F, 0, RustboroCity_DevonCorp_3F_EventScript_21245F
+	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_21245F
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_21245F:: @ 821245F
@@ -23,7 +23,7 @@ RustboroCity_DevonCorp_3F_EventScript_21245F:: @ 821245F
 	end
 
 RustboroCity_DevonCorp_3F_MapScript2_212464: @ 8212464
-	map_script_2 VAR_0x408F, 0, RustboroCity_DevonCorp_3F_EventScript_21246E
+	map_script_2 VAR_DEVON_CORP_3F_STATE, 0, RustboroCity_DevonCorp_3F_EventScript_21246E
 	.2byte 0
 
 RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
@@ -65,10 +65,10 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	clearflag FLAG_HIDE_RUSTURF_TUNNEL_LOVER_WOMAN
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
-	setvar VAR_0x4096, 1
+	setvar VAR_BRINEY_LOCATION, 1
 	clearflag FLAG_HIDE_RUSBORO_CITY_RIVAL
-	setvar VAR_0x408F, 1
-	setvar VAR_0x405A, 6
+	setvar VAR_DEVON_CORP_3F_STATE, 1
+	setvar VAR_RUSTBORO_STATE, 6
 	releaseall
 	end
 
