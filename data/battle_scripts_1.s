@@ -1601,7 +1601,20 @@ BattleScript_EffectGravity:
 	waitanimation
 	printstring STRINGID_GRAVITYINTENSIFIED 
 	waitmessage 0x40
-	goto BattleScript_MoveEnd
+	selectfirstvalidtarget
+BattleScript_GravityLoop:
+	movevaluescleanup
+	jumpifstatus3 BS_TARGET, STATUS3_ON_AIR | STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS, BattleScript_GravityLoopDrop
+	goto BattleScript_GravityLoopEnd
+BattleScript_GravityLoopDrop:
+	bringdownairbornebattler BS_TARGET
+	printstring STRINGID_GRAVITYGROUNDING 
+	waitmessage 0x40
+BattleScript_GravityLoopEnd:	
+	setbyte sMOVEEND_STATE, 0x0
+	moveend 0x2, 0x10
+	jumpifnexttargetvalid BattleScript_GravityLoop
+	end   
 
 BattleScript_EffectRoost:
 	attackcanceler
