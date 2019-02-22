@@ -15,7 +15,7 @@ do                                        \
 {                                         \
     fprintf(stderr, format, __VA_ARGS__); \
     exit(1);                              \
-} while (FALSE)
+} while (false)
 
 #else
 
@@ -24,7 +24,7 @@ do                                          \
 {                                           \
     fprintf(stderr, format, ##__VA_ARGS__); \
     exit(1);                                \
-} while (FALSE)
+} while (false)
 
 #endif // _MSC_VER
 

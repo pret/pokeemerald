@@ -192,7 +192,7 @@ void CFile::TryConvertString()
 
     std::printf("{ ");
 
-    while (TRUE)
+    while (true)
     {
         SkipWhitespace();
 
@@ -413,7 +413,7 @@ do                                        \
     va_start(args, format);               \
     ReportDiagnostic(type, format, args); \
     va_end(args);                         \
-} while (FALSE)
+} while (false)
 
 // Reports an error diagnostic and terminates the program.
 void CFile::RaiseError(const char* format, ...)

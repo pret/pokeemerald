@@ -30,13 +30,13 @@
 do {                                                                          \
     fprintf(stderr, "%s:%d " format, m_path.c_str(), m_lineNum, __VA_ARGS__); \
     exit(1);                                                                  \
-} while (FALSE)
+} while (false)
 
 #define FATAL_ERROR(format, ...)          \
 do {                                      \
     fprintf(stderr, format, __VA_ARGS__); \
     exit(1);                              \
-} while (FALSE)
+} while (false)
 
 #else
 
@@ -44,13 +44,13 @@ do {                                      \
 do {                                                                            \
     fprintf(stderr, "%s:%d " format, m_path.c_str(), m_lineNum, ##__VA_ARGS__); \
     exit(1);                                                                    \
-} while (FALSE)
+} while (false)
 
 #define FATAL_ERROR(format, ...)            \
 do {                                        \
     fprintf(stderr, format, ##__VA_ARGS__); \
     exit(1);                                \
-} while (FALSE)
+} while (false)
 
 #endif // _MSC_VER
 
