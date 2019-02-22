@@ -147,7 +147,6 @@ SECTIONS {
         src/secret_base.o(.text);
         src/tv.o(.text);
         src/contest_link_80F57C4.o(.text);
-        asm/contest_link_80F57C4.o(.text);
         src/script_pokemon_util_80F87D8.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
@@ -165,6 +164,7 @@ SECTIONS {
         src/ice.o(.text);
         src/fight.o(.text);
         src/poison.o(.text);
+        src/flying.o(.text);
         asm/flying.o(.text);
         src/psychic.o(.text);
         src/bug.o(.text);
@@ -289,6 +289,7 @@ SECTIONS {
         src/pokemon_summary_screen.o(.text);
         src/unk_pokedex_area_screen_helper.o(.text);
         src/battle_pyramid_bag.o(.text);
+        src/pokenav.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_match_call.o(.text);
         asm/rom_81D1C44.o(.text);
@@ -591,6 +592,7 @@ SECTIONS {
         src/pokemon_summary_screen.o(.rodata);
         src/unk_pokedex_area_screen_helper.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
+        src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
         src/pokenav_match_call.o(.rodata);
         data/rom_81D1C44.o(.rodata);

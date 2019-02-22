@@ -305,7 +305,7 @@ void sub_8009FAC(void);
 bool8 sub_800A4D8(u8 a0);
 u8 sub_800A9D8(void);
 u8 sub_800A0C8(s32, s32);
-u16 *sub_801B058(void);
+u16 *GetSaveBlock1Field3564(void);
 u8 sub_800A9A8(void);
 void sub_800AD10(void);
 void sub_800AB18(void);

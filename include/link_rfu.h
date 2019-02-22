@@ -213,6 +213,7 @@ extern struct UnkRfuStruct_2 gUnknown_03005000;
 extern u8 gWirelessStatusIndicatorSpriteId;
 
 // Exported ROM declarations
+void WipeTrainerNameRecords(void);
 u32 sub_800BEC0(void);
 void sub_800E700(void);
 void sub_800EDD4(void);
@@ -263,7 +264,7 @@ void sub_800E084(void);
 void sub_801103C(void);
 void sub_8011C5C(void);
 void sub_80106D4(void);
-void sub_800E3A8(void);
+void RecordMixTrainerNames(void);
 void sub_800ED10(void);
 void sub_800ED28(void);
 void sub_8011090(u8 a0, u32 a1, u32 a2);

@@ -85,5 +85,7 @@ extern const struct MenuAction gMailboxMailOptions[];
 void ReshowPlayerPC(u8 taskId);
 void sub_816B31C(void);
 void Mailbox_ReturnToMailListAfterDeposit(void);
+void NewGameInitPCItems(void);
+
 
 #endif //GUARD_PLAYER_PC_H

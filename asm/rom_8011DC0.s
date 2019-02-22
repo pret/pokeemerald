@@ -8315,6 +8315,11 @@ _0801AFC2:
 	.pool
 	thumb_func_end sub_801AC54
 
+@void sub_801AFD8() {
+@	CpuFill32(0, &gSaveBlock1Ptr->field_322C, 219);
+@	sub_801B180();
+@	sub_811F8BC();
+@}
 	thumb_func_start sub_801AFD8
 sub_801AFD8: @ 801AFD8
 	push {lr}
@@ -8367,25 +8372,25 @@ sav1_get_mevent_buffer_2: @ 801B034
 	.pool
 	thumb_func_end sav1_get_mevent_buffer_2
 
-	thumb_func_start sub_801B044
-sub_801B044: @ 801B044
+	thumb_func_start GetSaveBlock1Field356C
+GetSaveBlock1Field356C: @ 801B044
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000356c
 	adds r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_801B044
+	thumb_func_end GetSaveBlock1Field356C
 
-	thumb_func_start sub_801B058
-sub_801B058: @ 801B058
+	thumb_func_start GetSaveBlock1Field3564
+GetSaveBlock1Field3564: @ 801B058
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003564
 	adds r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_801B058
+	thumb_func_end GetSaveBlock1Field3564
 
 	thumb_func_start sub_801B06C
 sub_801B06C: @ 801B06C
@@ -8531,7 +8536,7 @@ sub_801B180: @ 801B180
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r1, r0, 0
 	ldr r2, =0x05000001
 	mov r0, sp
@@ -13795,7 +13800,7 @@ _0801DB60:
 sub_801DB68: @ 801DB68
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r5, r0, 0
 	movs r0, 0x3
 	adds r1, r4, 0
@@ -13841,7 +13846,7 @@ _0801DBB8:
 	thumb_func_start sub_801DBC0
 sub_801DBC0: @ 801DBC0
 	push {lr}
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	movs r1, 0
 	strb r1, [r0]
 	strb r1, [r0, 0x1]
@@ -13858,7 +13863,7 @@ sub_801DBDC: @ 801DBDC
 	ldr r0, =0x0000402e
 	bl GetVarPointer
 	adds r4, r0, 0
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r2, r0, 0
 	ldr r0, [r2]
 	lsls r0, 24
@@ -13889,7 +13894,7 @@ _0801DC10:
 sub_801DC20: @ 801DC20
 	push {r4-r6,lr}
 	ldr r6, =gSpecialVar_Result
-	bl sub_801B044
+	bl GetSaveBlock1Field356C
 	adds r4, r0, 0
 	bl IsMysteryEventEnabled
 	cmp r0, 0
@@ -27181,7 +27186,7 @@ sub_8024700: @ 8024700
 	adds r0, r5, 0
 	bl sub_8024668
 	adds r1, r0, r4
-	ldr r2, =0x0001869f
+	ldr r2, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
 	cmp r1, r2
 	bhi _08024730
 	adds r0, r5, 0

@@ -16,7 +16,7 @@ IslandCave_EventScript_238E44:: @ 8238E44
 	return
 
 IslandCave_MapScript1_238E58: @ 8238E58
-	call_if_unset FLAG_SYS_BRAILLE_WAIT, IslandCave_EventScript_238E62
+	call_if_unset FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_238E62
 	end
 
 IslandCave_EventScript_238E62:: @ 8238E62
@@ -47,13 +47,13 @@ IslandCave_EventScript_238EAF:: @ 8238EAF
 	setmetatile 9, 20, 564, 1
 	special DrawWholeMapView
 	playse SE_BAN
-	setflag FLAG_SYS_BRAILLE_WAIT
+	setflag FLAG_SYS_BRAILLE_REGICE_COMPLETED
 	end
 
 IslandCave_EventScript_238EEF:: @ 8238EEF
 	lockall
 	call_if_set FLAG_TEMP_3, IslandCave_EventScript_238F45
-	goto_if_set FLAG_SYS_BRAILLE_WAIT, IslandCave_EventScript_238F13
+	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_238F13
 	braillemessage IslandCave_Braille_2A6CD4
 	setflag FLAG_TEMP_2
 	special ShouldDoBrailleRegicePuzzle
@@ -69,7 +69,7 @@ IslandCave_EventScript_238F1D:: @ 8238F1D
 	lockall
 	call_if_set FLAG_TEMP_3, IslandCave_EventScript_238F45
 	braillemessage IslandCave_Braille_2A6CD4
-	goto_if_set FLAG_SYS_BRAILLE_WAIT, IslandCave_EventScript_238F41
+	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_238F41
 	setflag FLAG_TEMP_2
 	special ShouldDoBrailleRegicePuzzle
 	goto IslandCave_EventScript_238F41
@@ -82,9 +82,9 @@ IslandCave_EventScript_238F41:: @ 8238F41
 	end
 
 IslandCave_EventScript_238F45:: @ 8238F45
-	setvar VAR_0x403B, 0
-	setvar VAR_0x403C, 0
-	setvar VAR_0x403D, 0
+	setvar VAR_REGICE_STEPS_1, 0
+	setvar VAR_REGICE_STEPS_2, 0
+	setvar VAR_REGICE_STEPS_3, 0
 	clearflag FLAG_TEMP_3
 	return
 

@@ -4,1604 +4,6 @@
 	.syntax unified
 
 	.text
-	
-
-
-	thumb_func_start sub_81C7078
-sub_81C7078: @ 81C7078
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl IsUpdateLinkStateCBActive
-	cmp r0, 0
-	bne _081C7090
-	ldr r0, =sub_81C7170
-	b _081C7092
-	.pool
-_081C7090:
-	ldr r0, =sub_81C71E4
-_081C7092:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	bl CreateTask
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	movs r1, 0x1
-	adds r2, r5, 0
-	bl SetWordTaskArg
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r2, =gUnknown_0203CF3C
-	ldrb r1, [r2]
-	strh r1, [r0, 0xE]
-	ldrb r0, [r2]
-	adds r1, r0, 0x1
-	strb r1, [r2]
-	lsls r0, 24
-	lsrs r0, 8
-	orrs r0, r4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7078
-
-	thumb_func_start sub_81C70D8
-sub_81C70D8: @ 81C70D8
-	push {lr}
-	ldr r1, =0x0000ffff
-	ands r1, r0
-	lsrs r3, r0, 16
-	ldr r2, =gTasks
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r1, r0, r2
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0
-	beq _081C711C
-	ldr r2, [r1]
-	ldr r0, =sub_81C7170
-	cmp r2, r0
-	beq _081C70FE
-	ldr r0, =sub_81C71E4
-	cmp r2, r0
-	bne _081C711C
-_081C70FE:
-	movs r2, 0xE
-	ldrsh r0, [r1, r2]
-	cmp r0, r3
-	bne _081C711C
-	movs r0, 0x1
-	b _081C711E
-	.pool
-_081C711C:
-	movs r0, 0
-_081C711E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C70D8
-
-	thumb_func_start sub_81C7124
-sub_81C7124: @ 81C7124
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	ldr r4, =gTasks
-_081C712C:
-	ldrb r0, [r4, 0x4]
-	cmp r0, 0
-	beq _081C7160
-	ldr r1, [r4]
-	ldr r0, =sub_81C7170
-	cmp r1, r0
-	beq _081C7140
-	ldr r0, =sub_81C71E4
-	cmp r1, r0
-	bne _081C7160
-_081C7140:
-	lsls r0, r5, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	bl GetWordTaskArg
-	cmp r0, r6
-	bne _081C7160
-	movs r0, 0x1
-	b _081C716A
-	.pool
-_081C7160:
-	adds r4, 0x28
-	adds r5, 0x1
-	cmp r5, 0xF
-	ble _081C712C
-	movs r0, 0
-_081C716A:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7124
-
-	thumb_func_start sub_81C7170
-sub_81C7170: @ 81C7170
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetWordTaskArg
-	adds r6, r0, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r7, 0
-_081C718C:
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	bl _call_via_r6
-	cmp r0, 0x4
-	bhi _081C71D6
-	lsls r0, 2
-	ldr r1, =_081C71AC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C71AC:
-	.4byte _081C71C6
-	.4byte _081C71C0
-	.4byte _081C71DE
-	.4byte _081C71DA
-	.4byte _081C71CE
-_081C71C0:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _081C71D8
-_081C71C6:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	strh r0, [r4]
-	b _081C71DE
-_081C71CE:
-	adds r0, r5, 0
-	bl DestroyTask
-	b _081C71DE
-_081C71D6:
-	subs r0, 0x5
-_081C71D8:
-	strh r0, [r4]
-_081C71DA:
-	cmp r7, 0
-	beq _081C718C
-_081C71DE:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7170
-
-	thumb_func_start sub_81C71E4
-sub_81C71E4: @ 81C71E4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl sub_8087598
-	cmp r0, 0
-	bne _081C724A
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl GetWordTaskArg
-	adds r2, r0, 0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	bl _call_via_r2
-	cmp r0, 0x4
-	bhi _081C7246
-	lsls r0, 2
-	ldr r1, =_081C7224
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C7224:
-	.4byte _081C7238
-	.4byte _081C7238
-	.4byte _081C724A
-	.4byte _081C724A
-	.4byte _081C723E
-_081C7238:
-	ldrh r0, [r4]
-	adds r0, 0x1
-	b _081C7248
-_081C723E:
-	adds r0, r5, 0
-	bl DestroyTask
-	b _081C724A
-_081C7246:
-	subs r0, 0x5
-_081C7248:
-	strh r0, [r4]
-_081C724A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C71E4
-
-	thumb_func_start CB2_PokeNav
-CB2_PokeNav: @ 81C7250
-	push {r4,lr}
-	ldr r4, =gUnknown_0203CF40
-	movs r0, 0x5C
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _081C7270
-	ldr r0, =CB2_ReturnToFieldWithOpenMenu
-	bl SetMainCallback2
-	b _081C7292
-	.pool
-_081C7270:
-	bl sub_81C7360
-	bl ResetTasks
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, =sub_81C742C
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81C7400
-	bl SetMainCallback2
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-_081C7292:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CB2_PokeNav
-
-	thumb_func_start sub_81C72A4
-sub_81C72A4: @ 81C72A4
-	push {lr}
-	ldr r0, =sub_81C72BC
-	bl SetMainCallback2
-	movs r0, 0x1
-	movs r1, 0
-	bl FadeScreen
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72A4
-
-	thumb_func_start sub_81C72BC
-sub_81C72BC: @ 81C72BC
-	push {r4,lr}
-	bl UpdatePaletteFade
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _081C7320
-	ldr r4, =gUnknown_0203CF40
-	movs r0, 0x5C
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _081C72F0
-	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl SetMainCallback2
-	b _081C7320
-	.pool
-_081C72F0:
-	bl sub_81C7360
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x8]
-	bl ResetTasks
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	movs r0, 0
-	bl SetVBlankCallback
-	ldr r0, =sub_81C742C
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =sub_81C7400
-	bl SetMainCallback2
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-_081C7320:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C72BC
-
-	thumb_func_start sub_81C7334
-sub_81C7334: @ 81C7334
-	push {r4,lr}
-	movs r4, 0
-_081C7338:
-	adds r0, r4, 0
-	bl sub_81C7650
-	adds r4, 0x1
-	cmp r4, 0x12
-	ble _081C7338
-	ldr r4, =gUnknown_0203CF40
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	bl InitKeys
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7334
-
-	thumb_func_start sub_81C7360
-sub_81C7360: @ 81C7360
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r2, 0
-	movs r1, 0x12
-	adds r0, 0x58
-_081C736A:
-	str r2, [r0]
-	subs r0, 0x4
-	subs r1, 0x1
-	cmp r1, 0
-	bge _081C736A
-	movs r4, 0
-	strh r4, [r5, 0x8]
-	str r4, [r5, 0x4]
-	bl sub_81C7388
-	str r0, [r5, 0xC]
-	str r4, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7360
-
-	thumb_func_start sub_81C7388
-sub_81C7388: @ 81C7388
-	push {r4-r6,lr}
-	movs r5, 0
-_081C738C:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0x5
-	bl GetMonData
-	cmp r0, 0
-	beq _081C73BA
-	adds r0, r4, 0
-	movs r1, 0x6
-	bl GetMonData
-	cmp r0, 0
-	bne _081C73BA
-	adds r0, r4, 0
-	movs r1, 0x52
-	bl GetMonData
-	cmp r0, 0
-	bne _081C73E2
-_081C73BA:
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _081C738C
-	movs r4, 0
-_081C73C2:
-	movs r5, 0
-	lsls r6, r4, 24
-_081C73C6:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl CheckBoxMonSanityAt
-	cmp r0, 0
-	beq _081C73EC
-	lsls r1, r5, 24
-	lsrs r1, 24
-	lsrs r0, r6, 24
-	movs r2, 0x52
-	bl GetBoxMonDataAt
-	cmp r0, 0
-	beq _081C73EC
-_081C73E2:
-	movs r0, 0x1
-	b _081C73FA
-	.pool
-_081C73EC:
-	adds r5, 0x1
-	cmp r5, 0x1D
-	ble _081C73C6
-	adds r4, 0x1
-	cmp r4, 0xD
-	ble _081C73C2
-	movs r0, 0
-_081C73FA:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7388
-
-	thumb_func_start sub_81C7400
-sub_81C7400: @ 81C7400
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7400
-
-	thumb_func_start sub_81C7418
-sub_81C7418: @ 81C7418
-	push {lr}
-	bl TransferPlttBuffer
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7418
-
-	thumb_func_start sub_81C742C
-sub_81C742C: @ 81C742C
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, =gTasks + 0x8
-	adds r7, r1, r0
-	movs r1, 0
-	ldrsh r0, [r7, r1]
-	cmp r0, 0x5
-	bls _081C7446
-	b _081C7562
-_081C7446:
-	lsls r0, 2
-	ldr r1, =_081C7458
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081C7458:
-	.4byte _081C7470
-	.4byte _081C747A
-	.4byte _081C7490
-	.4byte _081C749C
-	.4byte _081C751E
-	.4byte _081C752C
-_081C7470:
-	bl sub_81C76C4
-	movs r0, 0x1
-	strh r0, [r7]
-	b _081C7562
-_081C747A:
-	bl sub_81C76FC
-	cmp r0, 0
-	bne _081C7562
-	ldr r0, =0x000186a0
-	bl sub_81C756C
-	b _081C74E8
-	.pool
-_081C7490:
-	bl sub_81C786C
-	cmp r0, 0
-	bne _081C7562
-	movs r0, 0x3
-	strh r0, [r7]
-_081C749C:
-	bl sub_81C75E0
-	adds r6, r0, 0
-	movs r0, 0x1
-	negs r0, r0
-	cmp r6, r0
-	beq _081C74FC
-	ldr r0, =0x0001869f
-	cmp r6, r0
-	bls _081C7506
-	ldr r4, =gUnknown_0861F3EC
-	ldr r5, =gUnknown_0203CF40
-	ldr r0, [r5]
-	ldr r1, [r0, 0x4]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r4, 0
-	adds r1, 0x18
-	adds r0, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	ldr r0, [r5]
-	ldr r1, [r0, 0x4]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r4, 0x14
-	adds r0, r4
-	ldr r0, [r0]
-	bl _call_via_r0
-	adds r0, r6, 0
-	bl sub_81C756C
-	cmp r0, 0
-	beq _081C74FC
-_081C74E8:
-	movs r0, 0x4
-	strh r0, [r7]
-	b _081C7562
-	.pool
-_081C74FC:
-	bl sub_81C7710
-	movs r0, 0x5
-	strh r0, [r7]
-	b _081C7562
-_081C7506:
-	cmp r6, 0
-	beq _081C7562
-	adds r0, r6, 0
-	bl sub_81C7850
-	bl sub_81C786C
-	cmp r0, 0
-	beq _081C7562
-	movs r0, 0x2
-	strh r0, [r7]
-	b _081C7562
-_081C751E:
-	bl sub_81C75D4
-	cmp r0, 0
-	bne _081C7562
-	movs r0, 0x3
-	strh r0, [r7]
-	b _081C7562
-_081C752C:
-	bl sub_81C7738
-	cmp r0, 0
-	bne _081C7562
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0x8]
-	negs r4, r0
-	orrs r4, r0
-	lsrs r4, 31
-	bl sub_81C9430
-	bl sub_81C7334
-	cmp r4, 0
-	beq _081C755C
-	ldr r0, =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl SetMainCallback2
-	b _081C7562
-	.pool
-_081C755C:
-	ldr r0, =CB2_ReturnToFieldWithOpenMenu
-	bl SetMainCallback2
-_081C7562:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C742C
-
-	thumb_func_start sub_81C756C
-sub_81C756C: @ 81C756C
-	push {r4-r6,lr}
-	ldr r1, =0xfffe7960
-	adds r6, r0, r1
-	bl sub_81C75F4
-	ldr r5, =gUnknown_0861F3EC
-	lsls r0, r6, 3
-	subs r0, r6
-	lsls r4, r0, 2
-	adds r0, r4, r5
-	ldr r0, [r0]
-	bl _call_via_r0
-	cmp r0, 0
-	beq _081C75CC
-	adds r0, r5, 0
-	adds r0, 0x8
-	adds r0, r4, r0
-	ldr r0, [r0]
-	bl _call_via_r0
-	cmp r0, 0
-	beq _081C75CC
-	adds r0, r5, 0
-	adds r0, 0xC
-	adds r0, r4, r0
-	ldr r0, [r0]
-	adds r1, r5, 0
-	adds r1, 0x10
-	adds r1, r4, r1
-	ldr r1, [r1]
-	bl sub_81C7834
-	ldr r0, =gUnknown_0203CF40
-	ldr r1, [r0]
-	adds r0, r5, 0x4
-	adds r0, r4, r0
-	ldr r0, [r0]
-	str r0, [r1]
-	str r6, [r1, 0x4]
-	movs r0, 0x1
-	b _081C75CE
-	.pool
-_081C75CC:
-	movs r0, 0
-_081C75CE:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C756C
-
-	thumb_func_start sub_81C75D4
-sub_81C75D4: @ 81C75D4
-	push {lr}
-	bl sub_81C786C
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C75D4
-
-	thumb_func_start sub_81C75E0
-sub_81C75E0: @ 81C75E0
-	push {lr}
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0]
-	bl _call_via_r0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C75E0
-
-	thumb_func_start sub_81C75F4
-sub_81C75F4: @ 81C75F4
-	push {lr}
-	bl InitKeys
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C75F4
-
-	thumb_func_start c3args_set_0toR1_1to0
-c3args_set_0toR1_1to0: @ 81C7600
-	push {lr}
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	thumb_func_end c3args_set_0toR1_1to0
-
-	thumb_func_start sub_81C760C
-sub_81C760C: @ 81C760C
-	push {lr}
-	ldr r0, =sub_81C7418
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C760C
-
-	thumb_func_start sub_81C761C
-sub_81C761C: @ 81C761C
-	push {r4,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	bl Alloc
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	lsls r4, 2
-	adds r1, 0x10
-	adds r1, r4
-	str r0, [r1]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C761C
-
-	thumb_func_start sub_81C763C
-sub_81C763C: @ 81C763C
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	lsls r0, 2
-	adds r1, 0x10
-	adds r1, r0
-	ldr r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_81C763C
-
-	thumb_func_start sub_81C7650
-sub_81C7650: @ 81C7650
-	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203CF40
-	ldr r1, [r5]
-	lsls r4, r0, 2
-	adds r1, 0x10
-	adds r1, r4
-	ldr r0, [r1]
-	cmp r0, 0
-	beq _081C7670
-	bl Free
-	ldr r0, [r5]
-	adds r0, 0x10
-	adds r0, r4
-	movs r1, 0
-	str r1, [r0]
-_081C7670:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7650
-
-	thumb_func_start sub_81C767C
-sub_81C767C: @ 81C767C
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0x8]
-	bx lr
-	.pool
-	thumb_func_end sub_81C767C
-
-	thumb_func_start sub_81C7688
-sub_81C7688: @ 81C7688
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	strh r0, [r1, 0x8]
-	bx lr
-	.pool
-	thumb_func_end sub_81C7688
-
-	thumb_func_start sub_81C7694
-sub_81C7694: @ 81C7694
-	push {lr}
-	adds r1, r0, 0
-	cmp r1, 0x4
-	bls _081C769E
-	movs r1, 0
-_081C769E:
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	strh r1, [r0, 0xA]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7694
-
-	thumb_func_start sub_81C76AC
-sub_81C76AC: @ 81C76AC
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0xA]
-	bx lr
-	.pool
-	thumb_func_end sub_81C76AC
-
-	thumb_func_start sub_81C76B8
-sub_81C76B8: @ 81C76B8
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0, 0xC]
-	bx lr
-	.pool
-	thumb_func_end sub_81C76B8
-
-	thumb_func_start sub_81C76C4
-sub_81C76C4: @ 81C76C4
-	push {r4,lr}
-	ldr r1, =0x0000082c
-	movs r0, 0
-	bl sub_81C761C
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081C76F4
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r0, =sub_81C7764
-	movs r1, 0x1
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	movs r0, 0x1
-	b _081C76F6
-	.pool
-_081C76F4:
-	movs r0, 0
-_081C76F6:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C76C4
-
-	thumb_func_start sub_81C76FC
-sub_81C76FC: @ 81C76FC
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0xC]
-	bl sub_81C70D8
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C76FC
-
-	thumb_func_start sub_81C7710
-sub_81C7710: @ 81C7710
-	push {lr}
-	sub sp, 0x4
-	movs r0, 0x6F
-	bl PlaySE
-	bl sub_81CAADC
-	movs r1, 0x1
-	negs r1, r1
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7710
-
-	thumb_func_start sub_81C7738
-sub_81C7738: @ 81C7738
-	push {lr}
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _081C7750
-	movs r0, 0x1
-	b _081C775E
-	.pool
-_081C7750:
-	bl sub_81C99D4
-	bl sub_81C7C94
-	bl FreeAllWindowBuffers
-	movs r0, 0
-_081C775E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7738
-
-	thumb_func_start sub_81C7764
-sub_81C7764: @ 81C7764
-	push {r4,lr}
-	sub sp, 0x4
-	cmp r0, 0x1
-	beq _081C77B0
-	cmp r0, 0x1
-	bgt _081C7776
-	cmp r0, 0
-	beq _081C7780
-	b _081C782A
-_081C7776:
-	cmp r0, 0x2
-	beq _081C77FC
-	cmp r0, 0x3
-	beq _081C780E
-	b _081C782A
-_081C7780:
-	movs r1, 0x82
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	bl FreeAllWindowBuffers
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_0861FA04
-	movs r0, 0
-	movs r2, 0x1
-	bl InitBgsFromTemplates
-	bl sub_8199D98
-	bl reset_temp_tile_data_buffers
-	movs r0, 0x1
-	b _081C782C
-	.pool
-_081C77B0:
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r1, =gPokenavHeader_Gfx
-	movs r0, 0
-	str r0, [sp]
-	movs r2, 0
-	movs r3, 0
-	bl decompress_and_copy_tile_data_to_vram
-	adds r4, 0x2C
-	movs r0, 0
-	adds r1, r4, 0
-	bl SetBgTilemapBuffer
-	ldr r1, =gPokenavHeader_Tilemap
-	movs r0, 0
-	movs r2, 0
-	movs r3, 0
-	bl CopyToBgTilemapBuffer
-	ldr r0, =gPokenavHeader_Pal
-	movs r1, 0
-	movs r2, 0x20
-	bl sub_81C7944
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	movs r0, 0
-	b _081C782C
-	.pool
-_081C77FC:
-	bl free_temp_tile_data_buffers_if_possible
-	lsls r0, 24
-	cmp r0, 0
-	bne _081C7818
-	bl sub_81C7B74
-	movs r0, 0
-	b _081C782C
-_081C780E:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	beq _081C781C
-_081C7818:
-	movs r0, 0x2
-	b _081C782C
-_081C781C:
-	bl sub_81C7C28
-	bl sub_81C7D28
-	movs r0, 0
-	bl ShowBg
-_081C782A:
-	movs r0, 0x4
-_081C782C:
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7764
-
-	thumb_func_start sub_81C7834
-sub_81C7834: @ 81C7834
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	movs r0, 0
-	bl sub_81C763C
-	str r4, [r0]
-	str r5, [r0, 0x4]
-	movs r1, 0
-	str r1, [r0, 0x8]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7834
-
-	thumb_func_start sub_81C7850
-sub_81C7850: @ 81C7850
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	movs r1, 0
-	str r1, [r0, 0x8]
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7850
-
-	thumb_func_start sub_81C786C
-sub_81C786C: @ 81C786C
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x4]
-	bl _call_via_r0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C786C
-
-	thumb_func_start sub_81C7880
-sub_81C7880: @ 81C7880
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =atk47_cmd47
-	movs r1, 0x4
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7880
-
-	thumb_func_start sub_81C78A0
-sub_81C78A0: @ 81C78A0
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =sub_81C791C
-	movs r1, 0x4
-	bl sub_81C7078
-	str r0, [r4, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C78A0
-
-	thumb_func_start sub_81C78C0
-sub_81C78C0: @ 81C78C0
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0xC]
-	bl sub_81C70D8
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C78C0
-
-	thumb_func_start atk47_cmd47
-atk47_cmd47: @ 81C78D4
-	push {lr}
-	cmp r0, 0x1
-	beq _081C78EA
-	cmp r0, 0x1
-	bgt _081C78E4
-	cmp r0, 0
-	beq _081C78EA
-	b _081C7914
-_081C78E4:
-	cmp r0, 0x2
-	beq _081C78EE
-	b _081C7914
-_081C78EA:
-	movs r0, 0
-	b _081C7916
-_081C78EE:
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x1
-	bl ChangeBgY
-	ldr r1, =0x00001fff
-	cmp r0, r1
-	bhi _081C7908
-	movs r0, 0x2
-	b _081C7916
-	.pool
-_081C7908:
-	movs r1, 0x80
-	lsls r1, 6
-	movs r0, 0
-	movs r2, 0
-	bl ChangeBgY
-_081C7914:
-	movs r0, 0x4
-_081C7916:
-	pop {r1}
-	bx r1
-	thumb_func_end atk47_cmd47
-
-	thumb_func_start sub_81C791C
-sub_81C791C: @ 81C791C
-	push {lr}
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x2
-	bl ChangeBgY
-	cmp r0, 0
-	ble _081C7932
-	movs r0, 0x2
-	b _081C793E
-_081C7932:
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0x4
-_081C793E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C791C
-
-	thumb_func_start sub_81C7944
-sub_81C7944: @ 81C7944
-	push {lr}
-	lsls r1, 1
-	ldr r3, =gPlttBufferUnfaded
-	adds r1, r3
-	lsls r2, 10
-	lsrs r2, 11
-	bl CpuSet
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7944
-
-	thumb_func_start sub_81C795C
-sub_81C795C: @ 81C795C
-	push {r4,lr}
-	adds r4, r0, 0
-	b _081C7974
-_081C7962:
-	lsls r0, r1, 4
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r0, r2
-	ldr r0, [r4]
-	movs r2, 0x20
-	bl sub_81C7944
-	adds r4, 0x8
-_081C7974:
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _081C7988
-	ldrh r0, [r4, 0x4]
-	bl AllocSpritePalette
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xFF
-	bne _081C7962
-_081C7988:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C795C
-
-	thumb_func_start sub_81C7990
-sub_81C7990: @ 81C7990
-	push {lr}
-	sub sp, 0x4
-	adds r3, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r0, sp
-	strh r1, [r0]
-	lsls r3, 5
-	ldr r0, =gPlttBufferFaded + 0x200
-	adds r3, r0
-	ldr r2, =0x01000010
-	mov r0, sp
-	adds r1, r3, 0
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7990
-
-	thumb_func_start sub_81C79BC
-sub_81C79BC: @ 81C79BC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	mov r10, r2
-	str r3, [sp, 0x8]
-	ldr r0, [sp, 0x2C]
-	cmp r0, 0
-	bne _081C79E4
-	ldr r2, =0x001fffff
-	mov r1, r10
-	ands r2, r1
-	ldr r0, [sp]
-	b _081C79F4
-	.pool
-_081C79E4:
-	ldr r2, [sp, 0x2C]
-	ldr r0, [sp, 0x8]
-	cmp r2, r0
-	blt _081C7A00
-	ldr r2, =0x001fffff
-	mov r1, r10
-	ands r2, r1
-	ldr r0, [sp, 0x4]
-_081C79F4:
-	ldr r1, [sp, 0x30]
-	bl CpuSet
-	b _081C7AAE
-	.pool
-_081C7A00:
-	movs r2, 0x1
-	negs r2, r2
-	add r10, r2
-	b _081C7AA6
-_081C7A08:
-	ldr r1, [sp]
-	ldrh r0, [r1]
-	movs r2, 0x1F
-	mov r9, r2
-	mov r1, r9
-	ands r1, r0
-	mov r9, r1
-	lsls r0, 16
-	lsrs r2, r0, 21
-	movs r1, 0x1F
-	ands r1, r2
-	mov r8, r1
-	lsrs r7, r0, 26
-	movs r2, 0x1F
-	ands r7, r2
-	ldr r0, [sp, 0x4]
-	ldrh r4, [r0]
-	movs r0, 0x1F
-	ands r0, r4
-	mov r1, r9
-	subs r0, r1
-	lsls r0, 8
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r2, [sp, 0x2C]
-	adds r6, r0, 0
-	muls r6, r2
-	asrs r6, 8
-	lsls r4, 16
-	lsrs r0, r4, 21
-	movs r1, 0x1F
-	ands r0, r1
-	mov r2, r8
-	subs r0, r2
-	lsls r0, 8
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r1, [sp, 0x2C]
-	adds r5, r0, 0
-	muls r5, r1
-	asrs r5, 8
-	lsrs r4, 26
-	movs r2, 0x1F
-	ands r4, r2
-	subs r4, r7
-	lsls r4, 8
-	adds r0, r4, 0
-	ldr r1, [sp, 0x8]
-	bl __divsi3
-	ldr r1, [sp, 0x2C]
-	muls r0, r1
-	asrs r0, 8
-	add r6, r9
-	movs r2, 0x1F
-	ands r6, r2
-	add r5, r8
-	ands r5, r2
-	adds r0, r7, r0
-	ands r0, r2
-	lsls r0, 10
-	lsls r5, 5
-	orrs r0, r5
-	orrs r0, r6
-	ldr r1, [sp, 0x30]
-	strh r0, [r1]
-	ldr r2, [sp]
-	adds r2, 0x2
-	str r2, [sp]
-	ldr r0, [sp, 0x4]
-	adds r0, 0x2
-	str r0, [sp, 0x4]
-	adds r1, 0x2
-	str r1, [sp, 0x30]
-	movs r1, 0x1
-	negs r1, r1
-	add r10, r1
-_081C7AA6:
-	movs r0, 0x1
-	negs r0, r0
-	cmp r10, r0
-	bne _081C7A08
-_081C7AAE:
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C79BC
-
-	thumb_func_start sub_81C7AC0
-sub_81C7AC0: @ 81C7AC0
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	cmp r4, 0x1
-	beq _081C7AF0
-	cmp r4, 0x1
-	bgt _081C7ADA
-	cmp r4, 0
-	beq _081C7AE4
-	b _081C7B2C
-_081C7ADA:
-	cmp r4, 0x2
-	beq _081C7B04
-	cmp r4, 0x3
-	beq _081C7B18
-	b _081C7B2C
-_081C7AE4:
-	ldr r0, [r0, 0x14]
-	movs r1, 0x2
-	negs r1, r1
-	str r4, [sp]
-	movs r2, 0
-	b _081C7B10
-_081C7AF0:
-	ldr r0, [r0, 0x14]
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	b _081C7B2C
-_081C7B04:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-_081C7B10:
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	b _081C7B2C
-_081C7B18:
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0x2
-	negs r1, r1
-	movs r2, 0
-	str r2, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-_081C7B2C:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7AC0
-
-	thumb_func_start sub_81C7B34
-sub_81C7B34: @ 81C7B34
-	ldr r0, =gPaletteFade
-	ldrb r0, [r0, 0x7]
-	lsrs r0, 7
-	bx lr
-	.pool
-	thumb_func_end sub_81C7B34
-
-	thumb_func_start sub_81C7B40
-sub_81C7B40: @ 81C7B40
-	push {lr}
-	ldr r0, =0xfffefffe
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7B40
-
-	thumb_func_start sub_81C7B54
-sub_81C7B54: @ 81C7B54
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	cmp r1, 0
-	ble _081C7B6C
-	adds r4, r1, 0
-_081C7B5E:
-	adds r0, r5, 0
-	adds r5, 0x4
-	bl InitBgFromTemplate
-	subs r4, 0x1
-	cmp r4, 0
-	bne _081C7B5E
-_081C7B6C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7B54
-
-	thumb_func_start sub_81C7B74
-sub_81C7B74: @ 81C7B74
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r4, r0, 0
-	ldr r0, =gUnknown_0861FA08
-	bl InitWindows
-	movs r0, 0
-	str r0, [r4, 0x10]
-	bl sub_81C7BF8
-	ldrb r0, [r4, 0x10]
-	bl PutWindowTilemap
-	ldrb r0, [r4, 0x10]
-	movs r1, 0x3
-	bl CopyWindowToVram
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7B74
-
-	thumb_func_start sub_81C7BA4
-sub_81C7BA4: @ 81C7BA4
-	push {r4,r5,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	movs r0, 0
-	bl sub_81C763C
-	adds r5, r0, 0
-	ldr r0, [r5, 0x10]
-	bl sub_81C7BF8
-	ldrb r0, [r5, 0x10]
-	ldr r1, =gUnknown_0861FA48
-	str r1, [sp]
-	movs r1, 0
-	str r1, [sp, 0x4]
-	ldr r1, =gUnknown_0861FA18
-	lsls r4, 2
-	adds r4, r1
-	ldr r1, [r4]
-	str r1, [sp, 0x8]
-	movs r1, 0x1
-	movs r2, 0
-	movs r3, 0x1
-	bl AddTextPrinterParameterized3
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7BA4
-
-	thumb_func_start sub_81C7BE8
-sub_81C7BE8: @ 81C7BE8
-	push {lr}
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C7BE8
-
-	thumb_func_start sub_81C7BF8
-sub_81C7BF8: @ 81C7BF8
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	movs r1, 0x44
-	bl FillWindowPixelBuffer
-	movs r0, 0x80
-	str r0, [sp]
-	movs r0, 0x1
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	movs r1, 0x55
-	movs r2, 0
-	movs r3, 0
-	bl FillWindowPixelRect
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7BF8
-
-	thumb_func_start sub_81C7C28
-sub_81C7C28: @ 81C7C28
-	push {r4-r6,lr}
-	movs r0, 0
-	bl sub_81C763C
-	adds r6, r0, 0
-	movs r5, 0
-	ldr r4, =gUnknown_0861FA4C
-_081C7C36:
-	adds r0, r4, 0
-	bl LoadCompressedSpriteSheet
-	adds r4, 0x8
-	adds r5, 0x1
-	cmp r5, 0
-	beq _081C7C36
-	ldr r0, =gUnknown_0861FA54
-	bl sub_81C795C
-	movs r0, 0
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x80
-	lsls r1, 9
-	lsls r1, r0
-	movs r0, 0x2
-	negs r0, r0
-	bics r0, r1
-	str r0, [r6, 0x14]
-	ldr r0, =gUnknown_0861FB04
-	movs r1, 0xDC
-	movs r2, 0xC
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, =gSprites
-	adds r1, r0
-	str r1, [r6, 0x18]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7C28
-
-	thumb_func_start sub_81C7C94
-sub_81C7C94: @ 81C7C94
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x18]
-	bl DestroySprite
-	movs r0, 0
-	bl FreeSpriteTilesByTag
-	movs r0, 0
-	bl FreeSpritePaletteByTag
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7C94
-
-	thumb_func_start sub_81C7CB4
-sub_81C7CB4: @ 81C7CB4
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	bl GetBgY
-	lsrs r0, 8
-	negs r0, r0
-	strh r0, [r4, 0x26]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C7CB4
-
-	thumb_func_start sub_81C7CCC
-sub_81C7CCC: @ 81C7CCC
-	push {lr}
-	movs r0, 0
-	bl sub_81C763C
-	ldr r0, [r0, 0x18]
-	ldr r1, =SpriteCallbackDummy
-	str r1, [r0, 0x1C]
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C7CCC
 
 	thumb_func_start sub_81C7CE4
 sub_81C7CE4: @ 81C7CE4
@@ -5452,7 +3854,7 @@ _081C9A5C:
 	ldr r0, =gPokenavMessageBox_Pal
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
@@ -5505,7 +3907,7 @@ _081C9AFA:
 	ldr r0, =gUnknown_0861FD4C
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	b _081C9AD6
 	.pool
 _081C9B30:
@@ -5532,7 +3934,7 @@ _081C9B3E:
 	ldr r0, =gUnknown_0861FC78
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81C9894
 	cmp r0, 0x3
 	beq _081C9B76
@@ -5602,7 +4004,7 @@ _081C9C06:
 	bl sub_81C7DFC
 	b _081C9AD6
 _081C9C0E:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081C9C5C
 	bl sub_81C9894
@@ -6066,7 +4468,7 @@ _081C9F96:
 	movs r0, 0
 	b _081C9FBE
 _081C9FB0:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081C9FBC
 _081C9FB8:
@@ -7203,7 +5605,7 @@ sub_81CA850: @ 81CA850
 	ldr r0, =gUnknown_0861FC78 + 0xE
 	movs r1, 0x31
 	movs r2, 0x4
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	pop {r0}
 	bx r0
 	.pool
@@ -7336,7 +5738,7 @@ titlescreen_0: @ 81CA92C
 	ldr r2, [r2, 0x8]
 	bl ScanlineEffect_SetParams
 	ldr r0, =sub_81CA914
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	ldr r0, =sub_81CA9EC
 	movs r1, 0x3
 	bl CreateTask
@@ -8687,7 +7089,7 @@ _081CB368:
 	ldr r0, =gUnknown_08622510
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x2
 	b _081CB418
 	.pool
@@ -8720,7 +7122,7 @@ _081CB3E0:
 	ldr r0, =gUnknown_086226E0
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 _081CB418:
 	bl CopyBgTilemapBufferToVram
@@ -8744,11 +7146,11 @@ _081CB424:
 	ldr r0, =gUnknown_08622700
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08622720
 	movs r1, 0x50
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0
 	b _081CB506
 	.pool
@@ -8806,7 +7208,7 @@ _081CB4A6:
 	movs r0, 0
 	b _081CB506
 _081CB4EA:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CB4FA
 	bl sub_81C8010
@@ -9699,7 +8101,7 @@ _081CBB80:
 	movs r0, 0
 	b _081CBBB4
 _081CBB9A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CBBAA
 	bl sub_81C78C0
@@ -10034,7 +8436,7 @@ sub_81CBE50: @ 81CBE50
 	movs r0, 0x9
 	bl GetGameStat
 	adds r1, r0, 0
-	ldr r0, =0x0001869f
+	ldr r0, =0x0001869f @ Note to decompiler: See UNKNOWN_OFFSET
 	cmp r1, r0
 	ble _081CBE68
 	adds r1, r0, 0
@@ -11185,7 +9587,7 @@ _081CC714:
 	.4byte _081CC82A
 _081CC734:
 	movs r0, 0
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	movs r0, 0x1
 	bl HideBg
 	movs r0, 0x2
@@ -11265,7 +9667,7 @@ _081CC7E2:
 	movs r0, 0x2
 	bl ShowBg
 	ldr r0, =sub_81CC6A4
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	b _081CC77C
 	.pool
 _081CC804:
@@ -11286,7 +9688,7 @@ _081CC812:
 	bl sub_81C7AC0
 	b _081CC77C
 _081CC82A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CC83A
 	bl sub_81C8010
@@ -11472,7 +9874,7 @@ _081CC972:
 	movs r0, 0
 	b _081CC9BA
 _081CC982:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CC99E
 	bl sub_81C7FDC
@@ -11606,11 +10008,11 @@ sub_81CCA1C: @ 81CCA1C
 	ldr r0, =gUnknown_08622868
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gHoennMapZoomIcons_Pal
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_8124658
 	lsls r0, 24
 	cmp r0, 0
@@ -14231,11 +12633,11 @@ _081CDFF2:
 	ldr r0, =gPokenavCondition_Pal
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08623208
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =0x00001814
 	adds r1, r5, r0
 	ldr r0, =0x0000ffb0
@@ -14262,7 +12664,7 @@ _081CE03C:
 	ldr r0, =gUnknown_086231E8
 	movs r1, 0x30
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x2
 	bl sub_81D21DC
 	b _081CDFB0
@@ -14440,7 +12842,7 @@ _081CE1FC:
 	bl sub_81C7FA0
 	b _081CDFB0
 _081CE218:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE2C0
 	bl sub_81CDD5C
@@ -14451,7 +12853,7 @@ _081CE218:
 	bne _081CE2C0
 _081CE230:
 	ldr r0, =sub_81CEE44
-	bl c3args_set_0toR1_1to0
+	bl IndirectSetVBlankCallback
 	b _081CDFB0
 	.pool
 _081CE23C:
@@ -14569,7 +12971,7 @@ _081CE33A:
 	movs r0, 0
 	b _081CE376
 _081CE33E:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CE34E
 	bl sub_81C78C0
@@ -16710,7 +15112,7 @@ _081CF454:
 	ldr r0, =gUnknown_086233C4
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081CF498:
@@ -16734,7 +15136,7 @@ _081CF4C0:
 	ldr r0, =gUnknown_08623570
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81CF88C
 	b _081CF498
 	.pool
@@ -16789,7 +15191,7 @@ _081CF552:
 	bl sub_81C7AC0
 	b _081CF498
 _081CF55A:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF56A
 	bl sub_81C8010
@@ -17096,7 +15498,7 @@ _081CF764:
 	movs r0, 0
 	b _081CF792
 _081CF778:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CF788
 	bl sub_81C78C0
@@ -17130,7 +15532,7 @@ _081CF7A4:
 	movs r0, 0
 	b _081CF7C2
 _081CF7B4:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081CF7C0
 	movs r0, 0x2
@@ -18094,7 +16496,7 @@ _081CFEF4:
 	ldr r0, =gUnknown_086235E4
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _081CFF32:
@@ -18128,7 +16530,7 @@ _081CFF76:
 	ldr r0, =gUnknown_08623790
 	movs r1, 0x20
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	bl sub_81D0304
 	b _081CFF32
 	.pool
@@ -18163,7 +16565,7 @@ _081CFFA4:
 	bl sub_81C7FA0
 	b _081CFF32
 _081CFFDE:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081CFFEE
 	bl sub_81C8010
@@ -18470,7 +16872,7 @@ _081D01E8:
 	movs r0, 0
 	b _081D0216
 _081D01FC:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	bne _081D020C
 	bl sub_81C78C0
@@ -18504,7 +16906,7 @@ _081D0228:
 	movs r0, 0
 	b _081D0246
 _081D0238:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0244
 	movs r0, 0x2
@@ -19631,7 +18033,7 @@ _081D0AB8:
 	ldr r0, =gUnknown_08DDE010
 	movs r1, 0x10
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	b _081D0BBA
 	.pool
 _081D0B04:
@@ -19669,11 +18071,11 @@ _081D0B12:
 	ldr r0, =gUnknown_08623FF8
 	movs r1, 0x20
 	movs r2, 0xA0
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	ldr r0, =gUnknown_08624098
 	movs r1, 0xA0
 	movs r2, 0x20
-	bl sub_81C7944
+	bl CopyPaletteIntoBufferUnfaded
 	movs r0, 0x1
 	b _081D0BBC
 	.pool
@@ -19765,7 +18167,7 @@ _081D0BE8:
 	movs r0, 0
 	b _081D0C4A
 _081D0C3C:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0C48
 _081D0C44:
@@ -19796,7 +18198,7 @@ _081D0C60:
 	movs r0, 0
 	b _081D0C7E
 _081D0C70:
-	bl sub_81C7B34
+	bl IsPaletteFadeActive
 	cmp r0, 0
 	beq _081D0C7C
 	movs r0, 0x2

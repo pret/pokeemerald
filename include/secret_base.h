@@ -24,6 +24,7 @@ void sub_80EBB28(void);
 void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEvents *events);
 bool8 sub_80E909C(void);
 void sub_80EB218(void);
+void ResetSecretBases(void);
 
 // SetCurrentSecretBaseFromPosition
 void sub_80E9608(const struct MapPosition *position, const struct MapEvents *events);
@@ -32,5 +33,6 @@ void sub_80E8B6C(void);
 void sub_80E8BC8(void);
 void sub_80E8D4C(void);
 void EnableBothScriptContexts(void);
+
 
 #endif //GUARD_SECRET_BASE_H

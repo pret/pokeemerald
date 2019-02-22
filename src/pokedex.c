@@ -37,7 +37,8 @@ static EWRAM_DATA u8 gUnknown_02039B52 = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 
 // IWRAM common
-u8 gUnknown_030060B0;
+// This is written to, but never read.
+u8 gUnusedPokedexU8;
 void (*gUnknown_030060B4)(void);
 
 struct PokedexOption
@@ -1225,7 +1226,7 @@ void ResetPokedex(void)
 
     gUnknown_02039B50 = 0;
     gUnknown_02039B52 = 64;
-    gUnknown_030060B0 = 0;
+    gUnusedPokedexU8 = 0;
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
     gSaveBlock2Ptr->pokedex.order = 0;
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
@@ -1243,7 +1244,7 @@ void ResetPokedex(void)
     }
 }
 
-void sub_80BB358(void)
+void ResetPokedexScrollPositions(void)
 {
     gUnknown_02039B50 = 0;
     gUnknown_02039B52 = 64;
@@ -4041,7 +4042,7 @@ void sub_80C0460(u16 weight, u8 left, u8 top)
     lsls r2, 24\n\
     lsrs r2, 24\n\
     str r2, [sp, 0x10]\n\
-    ldr r5, =0x000186a0\n\
+    ldr r5, =0x000186a0 @ Note to decompiler: See UNKNOWN_OFFSET\n\
     muls r0, r5\n\
     ldr r1, =0x000011b8\n\
     bl __divsi3\n\
@@ -4075,7 +4076,7 @@ _080C04C0:\n\
     mov r8, r1\n\
     movs r6, 0x1\n\
 _080C04C6:\n\
-    ldr r1, =0x000186a0\n\
+    ldr r1, =0x000186a0 @ Note to decompiler: See UNKNOWN_OFFSET\n\
     adds r0, r7, 0\n\
     bl __umodsi3\n\
     adds r7, r0, 0\n\
