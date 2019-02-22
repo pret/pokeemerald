@@ -6,14 +6,14 @@
 #define REEL_TAG_HEIGHT   24
 
 // Lucky Flags
-#define LUCKY_BIAS_REPLAY     0x0001
-#define LUCKY_BIAS_CHERRY     0x0002
-#define LUCKY_BIAS_LOTAD      0x0004
-#define LUCKY_BIAS_AZURILL    0x0008
-#define LUCKY_BIAS_POWER      0x0010
-#define LUCKY_BIAS_REELTIME   0x0020
-#define LUCKY_BIAS_MIXED_777  0x0040
-#define LUCKY_BIAS_777        0x0080
+#define LUCKY_BIAS_REPLAY     (1 << 0)
+#define LUCKY_BIAS_CHERRY     (1 << 1)
+#define LUCKY_BIAS_LOTAD      (1 << 2)
+#define LUCKY_BIAS_AZURILL    (1 << 3)
+#define LUCKY_BIAS_POWER      (1 << 4)
+#define LUCKY_BIAS_REELTIME   (1 << 5)
+#define LUCKY_BIAS_MIXED_777  (1 << 6)
+#define LUCKY_BIAS_777        (1 << 7)
 
 // Rows
 #define SLOT_TOP_ROW          0x0001
